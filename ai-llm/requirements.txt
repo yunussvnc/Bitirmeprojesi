@@ -1,0 +1,27 @@
+# FastAPI ve Web Framework
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+pydantic==2.5.0
+pydantic-settings==2.1.0
+
+# Machine Learning ve NLP
+torch==2.1.1
+sentence-transformers==2.2.2
+transformers==4.35.2
+
+# LangChain
+langchain==0.1.0
+langchain-openai==0.0.2
+openai==1.3.7
+
+# Vector Database
+qdrant-client==1.7.0
+
+# HTTP Client
+httpx==0.25.2
+
+# Utilities
+python-dotenv==1.0.0
+numpy==1.26.2
+pandas==2.1.4
+
