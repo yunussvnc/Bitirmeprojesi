@@ -126,6 +126,12 @@ Detaylı kullanım için [USAGE.md](USAGE.md) dosyasına bakın.
 
 Local (yerel) LLM kullanmak için [LOCAL_LLM_SETUP.md](LOCAL_LLM_SETUP.md) kılavuzuna bakın.
 
+### Fine-Tuning (Model Eğitimi)
+
+**Önemli**: OpenAI modelleri kapalı kaynak olduğu için indirilemez. Bunun yerine açık kaynak modelleri (Qwen2, TinyLlama) lokal olarak fine-tune edebilirsiniz.
+
+Fine-tuning için [FINE_TUNING_GUIDE.md](FINE_TUNING_GUIDE.md) kılavuzuna bakın.
+
 ### Temel Adımlar
 
 1. Bağımlılıkları yükle: `pip install -r requirements.txt`

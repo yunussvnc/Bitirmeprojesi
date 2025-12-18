@@ -33,6 +33,8 @@ class Settings(BaseSettings):
     
     # HuggingFace Local Model Ayarları
     HUGGINGFACE_MODEL: str = "Qwen/Qwen2-1.5B-Instruct"  # Küçük, çok dilli model
+    # Fine-tuned model kullanmak için:
+    # HUGGINGFACE_MODEL=./models/fine_tuned
     # Alternatif modeller:
     # "TinyLlama/TinyLlama-1.1B-Chat-v1.0" - Daha küçük ama İngilizce ağırlıklı
     # "microsoft/Phi-3-mini-4k-instruct" - Küçük, iyi performans
