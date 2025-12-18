@@ -3,9 +3,12 @@ Qdrant Vektör Veritabanı İstemcisi
 """
 
 from qdrant_client import QdrantClient
-from qdrant_client.models import Distance, VectorParams, PointStruct
+from qdrant_client.models import Distance, VectorParams, PointStruct, Filter, FieldCondition, MatchValue
 from typing import List, Optional, Dict, Any
+import logging
 from src.config import settings
+
+logger = logging.getLogger(__name__)
 
 
 class QdrantVectorDB:
@@ -13,11 +16,28 @@ class QdrantVectorDB:
     
     def __init__(self):
         """Qdrant client'ı başlat"""
-        self.client = QdrantClient(
-            url=settings.QDRANT_URL,
-            api_key=settings.QDRANT_API_KEY,
-        )
-        self.collection_name = settings.QDRANT_COLLECTION_NAME
+        try:
+            client_kwargs = {"url": settings.QDRANT_URL}
+            if settings.QDRANT_API_KEY:
+                client_kwargs["api_key"] = settings.QDRANT_API_KEY
+            
+            self.client = QdrantClient(**client_kwargs)
+            self.collection_name = settings.QDRANT_COLLECTION_NAME
+            
+            # Bağlantıyı test et
+            self._test_connection()
+            logger.info(f"Qdrant bağlantısı başarılı: {settings.QDRANT_URL}")
+        except Exception as e:
+            logger.error(f"Qdrant bağlantısı kurulamadı: {e}")
+            raise
+    
+    def _test_connection(self):
+        """Qdrant bağlantısını test et"""
+        try:
+            self.client.get_collections()
+        except Exception as e:
+            logger.warning(f"Qdrant bağlantı testi başarısız: {e}")
+            raise ConnectionError(f"Qdrant'a bağlanılamıyor: {e}")
     
     def create_collection_if_not_exists(self, vector_size: int = 384):
         """Koleksiyonu oluştur (yoksa)"""
@@ -26,6 +46,7 @@ class QdrantVectorDB:
             collection_names = [col.name for col in collections.collections]
             
             if self.collection_name not in collection_names:
+                logger.info(f"Koleksiyon oluşturuluyor: {self.collection_name}")
                 self.client.create_collection(
                     collection_name=self.collection_name,
                     vectors_config=VectorParams(
@@ -33,8 +54,12 @@ class QdrantVectorDB:
                         distance=Distance.COSINE
                     )
                 )
+                logger.info(f"Koleksiyon başarıyla oluşturuldu: {self.collection_name}")
+            else:
+                logger.info(f"Koleksiyon zaten mevcut: {self.collection_name}")
         except Exception as e:
-            print(f"Koleksiyon oluşturulurken hata: {e}")
+            logger.error(f"Koleksiyon oluşturulurken hata: {e}")
+            raise
     
     def add_vectors(
         self,
@@ -55,28 +80,56 @@ class QdrantVectorDB:
         self,
         query_vector: List[float],
         top_k: int = 5,
-        filter: Optional[Dict[str, Any]] = None
+        filter: Optional[Dict[str, Any]] = None,
+        score_threshold: Optional[float] = None
     ) -> List[Dict[str, Any]]:
-        """Vektör araması yap"""
+        """
+        Vektör araması yap
+        
+        Args:
+            query_vector: Arama vektörü
+            top_k: Döndürülecek sonuç sayısı
+            filter: Filtre (kategori, konum vb.)
+            score_threshold: Minimum benzerlik skoru
+        
+        Returns:
+            Arama sonuçları
+        """
         try:
+            score_threshold = score_threshold or settings.SIMILARITY_THRESHOLD
+            
+            # Qdrant filter oluştur
+            qdrant_filter = None
+            if filter:
+                # Basit kategori filtresi örneği
+                if "kategori" in filter:
+                    qdrant_filter = Filter(
+                        must=[
+                            FieldCondition(
+                                key="kategori",
+                                match=MatchValue(value=filter["kategori"])
+                            )
+                        ]
+                    )
+            
             results = self.client.search(
                 collection_name=self.collection_name,
                 query_vector=query_vector,
                 limit=top_k,
-                query_filter=filter,
-                score_threshold=settings.SIMILARITY_THRESHOLD
+                query_filter=qdrant_filter,
+                score_threshold=score_threshold
             )
             
             return [
                 {
                     "id": result.id,
-                    "score": result.score,
-                    "payload": result.payload
+                    "score": float(result.score),
+                    "payload": result.payload or {}
                 }
                 for result in results
             ]
         except Exception as e:
-            print(f"Vektör aramasında hata: {e}")
+            logger.error(f"Vektör aramasında hata: {e}")
             return []
     
     def delete_vectors(self, point_ids: List[int]) -> bool:

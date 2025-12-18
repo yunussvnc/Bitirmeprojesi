@@ -9,7 +9,8 @@ Yapay Zeka Destekli Konum Bazlı Kişiselleştirilmiş Mekan Öneri Platformu'nu
 - **LangChain** - LLM entegrasyonu
 - **Qdrant** - Vektör veritabanı
 - **Sentence Transformers** - Embedding modelleri
-- **OpenAI API** - LLM sağlayıcısı (alternatif: açık kaynak modeller)
+- **OpenAI API** - LLM sağlayıcısı
+- **HuggingFace Transformers** - Local LLM desteği (Qwen2, TinyLlama, vb.)
 
 ## Mimari
 
@@ -99,6 +100,22 @@ ai-llm/
 ├── tests/                # Test dosyaları
 └── requirements.txt      # Python bağımlılıkları
 ```
+
+## Hızlı Başlangıç
+
+Detaylı kullanım için [USAGE.md](USAGE.md) dosyasına bakın.
+
+### Local LLM Kullanımı
+
+Local (yerel) LLM kullanmak için [LOCAL_LLM_SETUP.md](LOCAL_LLM_SETUP.md) kılavuzuna bakın.
+
+### Temel Adımlar
+
+1. Bağımlılıkları yükle: `pip install -r requirements.txt`
+2. `.env` dosyasını oluştur ve OpenAI API key ekle
+3. Qdrant'ı başlat: `docker-compose up -d`
+4. Vektör DB'yi hazırla: `python scripts/prepare_vector_db.py`
+5. Servisi başlat: `uvicorn src.main:app --reload --port 8001`
 
 ## Kullanım
 

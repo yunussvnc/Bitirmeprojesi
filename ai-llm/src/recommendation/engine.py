@@ -2,18 +2,30 @@
 Öneri Motoru - Ana öneri sistemi
 """
 
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Optional
 from src.rag.pipeline import RAGPipeline
 import httpx
+import logging
 from src.config import settings
+
+logger = logging.getLogger(__name__)
 
 
 class RecommendationEngine:
-    """Kişiselleştirilmiş öneri motoru"""
+    """Kişiselleştirilmiş öneri motoru - Lazy loading ile"""
     
     def __init__(self):
-        """Öneri motorunu başlat"""
-        self.rag_pipeline = RAGPipeline()
+        """Öneri motorunu başlat - Lazy loading ile"""
+        self._rag_pipeline = None
+    
+    @property
+    def rag_pipeline(self) -> RAGPipeline:
+        """RAG pipeline'ı lazy load et"""
+        if self._rag_pipeline is None:
+            logger.info("RAG Pipeline oluşturuluyor...")
+            self._rag_pipeline = RAGPipeline()
+            logger.info("RAG Pipeline hazır")
+        return self._rag_pipeline
     
     def get_recommendations(
         self,

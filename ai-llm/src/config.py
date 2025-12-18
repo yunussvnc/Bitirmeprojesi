@@ -27,9 +27,16 @@ class Settings(BaseSettings):
     QDRANT_COLLECTION_NAME: str = "mekan_embeddings"
     
     # LLM Ayarları
-    LLM_PROVIDER: str = "openai"  # openai, huggingface, local
+    LLM_PROVIDER: str = "openai"  # openai, huggingface
     OPENAI_API_KEY: Optional[str] = None
     OPENAI_MODEL: str = "gpt-3.5-turbo"
+    
+    # HuggingFace Local Model Ayarları
+    HUGGINGFACE_MODEL: str = "Qwen/Qwen2-1.5B-Instruct"  # Küçük, çok dilli model
+    # Alternatif modeller:
+    # "TinyLlama/TinyLlama-1.1B-Chat-v1.0" - Daha küçük ama İngilizce ağırlıklı
+    # "microsoft/Phi-3-mini-4k-instruct" - Küçük, iyi performans
+    # "Qwen/Qwen2-1.5B-Instruct" - Türkçe desteği iyi, küçük boyut
     
     # Embedding Model Ayarları
     EMBEDDING_MODEL: str = "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2"
