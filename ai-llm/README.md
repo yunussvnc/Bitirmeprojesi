@@ -63,8 +63,25 @@ cp .env.example .env
 ```
 
 5. Qdrant'ı başlatın (Docker kullanarak):
+
+**Docker Compose ile (Önerilen):**
 ```bash
 docker-compose up -d
+```
+
+**Veya direkt Docker Run ile:**
+```bash
+docker run -d -p 6333:6333 -p 6334:6334 -v $(pwd)/qdrant_storage:/qdrant/storage qdrant/qdrant
+```
+
+**Windows PowerShell:**
+```powershell
+docker run -d -p 6333:6333 -p 6334:6334 -v ${PWD}\qdrant_storage:/qdrant/storage qdrant/qdrant
+```
+
+**Test için (basit, veri kalıcı değil):**
+```bash
+docker run -p 6333:6333 qdrant/qdrant
 ```
 
 6. Vektör veritabanını hazırlayın:

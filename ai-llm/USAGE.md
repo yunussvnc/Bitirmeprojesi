@@ -34,8 +34,32 @@ EMBEDDING_MODEL=sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2
 
 ### 3. Qdrant'ı Başlat
 
+**Seçenek 1: Docker Compose (Önerilen - Volume ile kalıcı veri)**
+
 ```bash
 docker-compose up -d
+```
+
+**Seçenek 2: Direkt Docker Run (Basit, ama veri kalıcı değil)**
+
+```bash
+docker run -d -p 6333:6333 -p 6334:6334 -v $(pwd)/qdrant_storage:/qdrant/storage qdrant/qdrant
+```
+
+**Windows için:**
+```powershell
+docker run -d -p 6333:6333 -p 6334:6334 -v ${PWD}\qdrant_storage:/qdrant/storage qdrant/qdrant
+```
+
+**En Basit (Test için, veri kalıcı değil):**
+```bash
+docker run -p 6333:6333 qdrant/qdrant
+```
+
+**Qdrant'ın çalıştığını kontrol et:**
+```bash
+curl http://localhost:6333/health
+# veya tarayıcıda: http://localhost:6333/dashboard
 ```
 
 ### 4. Vektör Veritabanını Hazırla
