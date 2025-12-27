@@ -9,7 +9,8 @@ Yapay Zeka Destekli Konum Bazlı Kişiselleştirilmiş Mekan Öneri Platformu'nu
 - **LangChain** - LLM entegrasyonu
 - **Qdrant** - Vektör veritabanı
 - **Sentence Transformers** - Embedding modelleri
-- **OpenAI API** - LLM sağlayıcısı (alternatif: açık kaynak modeller)
+- **OpenAI API** - LLM sağlayıcısı
+- **HuggingFace Transformers** - Local LLM desteği (Qwen2, TinyLlama, vb.)
 
 ## Mimari
 
@@ -62,8 +63,25 @@ cp .env.example .env
 ```
 
 5. Qdrant'ı başlatın (Docker kullanarak):
+
+**Docker Compose ile (Önerilen):**
 ```bash
 docker-compose up -d
+```
+
+**Veya direkt Docker Run ile:**
+```bash
+docker run -d -p 6333:6333 -p 6334:6334 -v $(pwd)/qdrant_storage:/qdrant/storage qdrant/qdrant
+```
+
+**Windows PowerShell:**
+```powershell
+docker run -d -p 6333:6333 -p 6334:6334 -v ${PWD}\qdrant_storage:/qdrant/storage qdrant/qdrant
+```
+
+**Test için (basit, veri kalıcı değil):**
+```bash
+docker run -p 6333:6333 qdrant/qdrant
 ```
 
 6. Vektör veritabanını hazırlayın:
@@ -99,6 +117,28 @@ ai-llm/
 ├── tests/                # Test dosyaları
 └── requirements.txt      # Python bağımlılıkları
 ```
+
+## Hızlı Başlangıç
+
+Detaylı kullanım için [USAGE.md](USAGE.md) dosyasına bakın.
+
+### Local LLM Kullanımı
+
+Local (yerel) LLM kullanmak için [LOCAL_LLM_SETUP.md](LOCAL_LLM_SETUP.md) kılavuzuna bakın.
+
+### Fine-Tuning (Model Eğitimi)
+
+**Önemli**: OpenAI modelleri kapalı kaynak olduğu için indirilemez. Bunun yerine açık kaynak modelleri (Qwen2, TinyLlama) lokal olarak fine-tune edebilirsiniz.
+
+Fine-tuning için [FINE_TUNING_GUIDE.md](FINE_TUNING_GUIDE.md) kılavuzuna bakın.
+
+### Temel Adımlar
+
+1. Bağımlılıkları yükle: `pip install -r requirements.txt`
+2. `.env` dosyasını oluştur ve OpenAI API key ekle
+3. Qdrant'ı başlat: `docker-compose up -d`
+4. Vektör DB'yi hazırla: `python scripts/prepare_vector_db.py`
+5. Servisi başlat: `uvicorn src.main:app --reload --port 8001`
 
 ## Kullanım
 
