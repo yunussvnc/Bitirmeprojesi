@@ -1,5 +1,5 @@
 // apps/mobile/src/services/mekanService.ts
-import { API_V1 } from "@/constants/api";
+import { API_V1 } from "../constants/api";
 
 export type Mekan = {
   id: number;
