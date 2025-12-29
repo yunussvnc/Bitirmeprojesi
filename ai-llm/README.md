@@ -227,7 +227,7 @@ python tests/test_konum_rapor.py
 python tests/test_qdrant_debug.py
 ```
 
-**Test Sonuçları:** [TEST_RESULTS.md](TEST_RESULTS.md) dosyasında detaylı test sonuçları bulabilirsiniz.
+**Test Sonuçları:** [docs/TEST_RESULTS.md](docs/TEST_RESULTS.md) dosyasında detaylı test sonuçları bulabilirsiniz.
 
 #### Başarılı Test Örnekleri
 
@@ -242,6 +242,18 @@ python tests/test_qdrant_debug.py
 3. 🍳 Kadıköy - "guzel kahvalti" → Meyhane Sofrası (0.468)
 4. 🍽️ Nişantaşı - "sik restoran romantic" → Şato Restaurant (0.723)
 5. 🌊 Beşiktaş - "deniz manzarali cafe" → Deniz Yıldızı Cafe (0.826)
+
+## 📚 Dokümantasyon
+
+Detaylı dokümantasyon için `docs/` klasörüne bakın:
+
+- **[CHATBOT_KULLANIM.md](docs/CHATBOT_KULLANIM.md)** - İnteraktif chatbot kullanım kılavuzu
+- **[TEST_RESULTS.md](docs/TEST_RESULTS.md)** - Detaylı test sonuçları
+- **[USAGE.md](docs/USAGE.md)** - Kullanım örnekleri
+- **[DOCKER_QDRANT.md](docs/DOCKER_QDRANT.md)** - Qdrant Docker kurulumu
+- **[FINE_TUNING_GUIDE.md](docs/FINE_TUNING_GUIDE.md)** - Model fine-tuning kılavuzu
+- **[LOCAL_LLM_SETUP.md](docs/LOCAL_LLM_SETUP.md)** - Yerel LLM kurulumu
+- **[CHANGELOG.md](docs/CHANGELOG.md)** - Değişiklik geçmişi
 
 ## Ortam Değişkenleri
 
