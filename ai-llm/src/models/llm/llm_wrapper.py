@@ -22,115 +22,6 @@ class LLMWrapper(ABC):
         pass
 
 
-class OpenAIWrapper(LLMWrapper):
-    """OpenAI LLM wrapper - Hem OpenAI SDK hem de LangChain destekler"""
-    
-    def __init__(self):
-        """OpenAI modelini başlat"""
-        try:
-            # Önce LangChain ile dene
-            from langchain_openai import ChatOpenAI
-            self.llm = ChatOpenAI(
-                model=settings.OPENAI_MODEL,
-                temperature=0.7,
-                openai_api_key=settings.OPENAI_API_KEY
-            )
-            self.use_langchain = True
-        except ImportError:
-            # LangChain yoksa direkt OpenAI SDK kullan
-            try:
-                from openai import OpenAI
-                self.client = OpenAI(api_key=settings.OPENAI_API_KEY)
-                self.model = settings.OPENAI_MODEL
-                self.use_langchain = False
-            except ImportError:
-                raise ImportError(
-                    "OpenAI veya LangChain kurulu değil. "
-                    "Lütfen 'pip install openai langchain-openai' çalıştırın."
-                )
-    
-    def generate(self, prompt: str, context: Optional[List[str]] = None) -> str:
-        """Öneri metni üret (sync)"""
-        if self.use_langchain:
-            return self._generate_with_langchain(prompt)
-        else:
-            return self._generate_with_openai_sdk(prompt)
-    
-    def _generate_with_langchain(self, prompt: str) -> str:
-        """LangChain ile üret"""
-        from langchain_core.messages import SystemMessage, HumanMessage
-        
-        messages = [
-            SystemMessage(
-                content="Sen bir mekan öneri asistanısın. Kullanıcıların isteklerine göre "
-                "en uygun mekanları öneriyorsun. Türkçe yanıt veriyorsun. "
-                "Kısa, öz ve samimi bir dil kullan."
-            ),
-            HumanMessage(content=prompt)
-        ]
-        
-        response = self.llm.invoke(messages)
-        return response.content if hasattr(response, 'content') else str(response)
-    
-    def _generate_with_openai_sdk(self, prompt: str) -> str:
-        """OpenAI SDK ile üret"""
-        response = self.client.chat.completions.create(
-            model=self.model,
-            messages=[
-                {
-                    "role": "system",
-                    "content": "Sen bir mekan öneri asistanısın. Kullanıcıların isteklerine göre "
-                    "en uygun mekanları öneriyorsun. Türkçe yanıt veriyorsun. "
-                    "Kısa, öz ve samimi bir dil kullan."
-                },
-                {
-                    "role": "user",
-                    "content": prompt
-                }
-            ],
-            temperature=0.7
-        )
-        return response.choices[0].message.content
-    
-    async def generate_async(self, prompt: str, context: Optional[List[str]] = None) -> str:
-        """Async öneri metni üret"""
-        if self.use_langchain:
-            return await self._generate_async_with_langchain(prompt)
-        else:
-            # OpenAI SDK async desteği
-            response = await self.client.chat.completions.create(
-                model=self.model,
-                messages=[
-                    {
-                        "role": "system",
-                        "content": "Sen bir mekan öneri asistanısın. Kullanıcıların isteklerine göre "
-                        "en uygun mekanları öneriyorsun. Türkçe yanıt veriyorsun."
-                    },
-                    {
-                        "role": "user",
-                        "content": prompt
-                    }
-                ],
-                temperature=0.7
-            )
-            return response.choices[0].message.content
-    
-    async def _generate_async_with_langchain(self, prompt: str) -> str:
-        """LangChain async ile üret"""
-        from langchain_core.messages import SystemMessage, HumanMessage
-        
-        messages = [
-            SystemMessage(
-                content="Sen bir mekan öneri asistanısın. Kullanıcıların isteklerine göre "
-                "en uygun mekanları öneriyorsun. Türkçe yanıt veriyorsun."
-            ),
-            HumanMessage(content=prompt)
-        ]
-        
-        response = await self.llm.ainvoke(messages)
-        return response.content if hasattr(response, 'content') else str(response)
-
-
 class HuggingFaceWrapper(LLMWrapper):
     """HuggingFace yerel model wrapper - Local LLM desteği"""
     
@@ -255,34 +146,27 @@ class HuggingFaceWrapper(LLMWrapper):
 
 
 class LLMFactory:
-    """LLM factory - Farklı sağlayıcılar için"""
+    """LLM factory - HuggingFace/Gemma 2 modelleri için"""
     
     @staticmethod
     def create_llm(provider: Optional[str] = None) -> LLMWrapper:
         """LLM instance oluştur"""
         provider = provider or settings.LLM_PROVIDER
         
-        if provider == "openai":
-            if not settings.OPENAI_API_KEY:
-                raise ValueError(
-                    "OpenAI API key bulunamadı. Lütfen .env dosyasında OPENAI_API_KEY ayarlayın "
-                    "veya LLM_PROVIDER=huggingface olarak değiştirin."
-                )
-            return OpenAIWrapper()
-        elif provider == "huggingface" or provider == "local":
+        if provider == "huggingface" or provider == "local" or provider == "gemma":
             try:
                 return HuggingFaceWrapper()
             except Exception as e:
                 import logging
                 logger = logging.getLogger(__name__)
-                logger.error(f"Local model yüklenemedi: {e}")
+                logger.error(f"Model yüklenemedi: {e}")
                 raise ValueError(
-                    f"Local model yüklenemedi: {e}. "
+                    f"Model yüklenemedi: {e}. "
                     "Lütfen 'pip install transformers accelerate' çalıştırın."
                 )
         else:
             raise ValueError(
                 f"Desteklenmeyen LLM sağlayıcısı: {provider}. "
-                "Desteklenen: 'openai', 'huggingface', 'local'"
+                "Desteklenen: 'huggingface', 'local', 'gemma'"
             )
 

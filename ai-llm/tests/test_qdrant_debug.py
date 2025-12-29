@@ -8,7 +8,7 @@ import os
 # Python path ayarla - bir üst klasörü ekle
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-os.environ['LLM_PROVIDER'] = 'openai'
+os.environ['LLM_PROVIDER'] = 'huggingface'
 os.environ['QDRANT_URL'] = 'http://localhost:6333'
 os.environ['SIMILARITY_THRESHOLD'] = '0.0'  # Dusuk threshold ile test
 

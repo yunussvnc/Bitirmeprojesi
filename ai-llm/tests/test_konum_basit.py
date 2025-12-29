@@ -10,7 +10,7 @@ import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
 # Basit ayarlamalar
-os.environ['LLM_PROVIDER'] = 'openai'
+os.environ['LLM_PROVIDER'] = 'huggingface'
 os.environ['QDRANT_URL'] = 'http://localhost:6333'
 
 def test_mekan_varmi():
