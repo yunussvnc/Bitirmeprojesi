@@ -46,7 +46,7 @@ class Settings(BaseSettings):
     
     # RAG Ayarları
     TOP_K_RESULTS: int = 5  # Vektör aramada döndürülecek sonuç sayısı
-    SIMILARITY_THRESHOLD: float = 0.7  # Minimum benzerlik skoru
+    SIMILARITY_THRESHOLD: float = 0.4  # Minimum benzerlik skoru (0.0-1.0)
     
     # Backend API URL (Mekan verilerini almak için)
     BACKEND_API_URL: str = "http://localhost:8000"
@@ -54,6 +54,7 @@ class Settings(BaseSettings):
     class Config:
         env_file = ".env"
         case_sensitive = True
+        extra = "ignore"  # Fazladan .env alanlarını yoksay
 
 
 settings = Settings()

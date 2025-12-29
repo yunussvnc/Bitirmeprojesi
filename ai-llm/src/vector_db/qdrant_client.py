@@ -112,9 +112,9 @@ class QdrantVectorDB:
                         ]
                     )
             
-            results = self.client.search(
+            results = self.client.query_points(
                 collection_name=self.collection_name,
-                query_vector=query_vector,
+                query=query_vector,
                 limit=top_k,
                 query_filter=qdrant_filter,
                 score_threshold=score_threshold
@@ -126,7 +126,7 @@ class QdrantVectorDB:
                     "score": float(result.score),
                     "payload": result.payload or {}
                 }
-                for result in results
+                for result in results.points
             ]
         except Exception as e:
             logger.error(f"Vektör aramasında hata: {e}")

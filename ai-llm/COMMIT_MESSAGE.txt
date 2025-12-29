@@ -1,0 +1,53 @@
+feat: Konum bazlı semantik arama + test suite + interaktif chatbot
+
+🔧 Konfigürasyon
+- Similarity threshold: 0.7 → 0.4 (daha fazla sonuç)
+- Pydantic extra fields: ignore (validation hataları giderildi)
+
+🔄 Qdrant API Güncellemesi
+- search() → query_points() (Qdrant v1.7+ uyumlu)
+- results → results.points (response yapısı güncellendi)
+
+📦 Bağımlılıklar
+- huggingface_hub: 0.16.4 → 0.36.0
+- sentence-transformers: 2.2.2 → 5.2.0
+
+✅ Test Sistemleri (YENİ)
+1. test_konum_basit.py - Hızlı test (3 senaryo)
+2. test_konum_rapor.py - Detaylı rapor (5 senaryo, istatistik)
+3. test_qdrant_debug.py - Debug aracı
+4. test_duygu.py - Duygusal/sentiment arama testi
+5. test_kapsamli.py - Kapsamlı test (12 senaryo, %83.3 başarı)
+
+🤖 İnteraktif Chatbot (YENİ)
+- Terminal tabanlı UI
+- 5 hazır konum + manuel giriş
+- Mesafe hesaplama
+- 16 örnek sorgu
+- LLM analizi (opsiyonel)
+
+📚 Dokümantasyon
+- TEST_RESULTS.md - Detaylı test sonuçları
+- CHATBOT_KULLANIM.md - Kullanım kılavuzu
+- README.md - Test bölümü eklendi
+- COMMIT_OZETI.md - Bu commit özeti
+
+✨ Kanıtlanan Yetenekler
+✅ Semantik arama (max: 0.826 skor)
+✅ Fiziksel özellikler (deniz, wifi, bahçe, park)
+✅ Duygular (romantik: 0.723, huzurlu: 0.685)
+✅ Ruh hali ("yorgunum" → sakin mekanlar)
+✅ Sosyal durum (ailecek, sevgilimle)
+✅ Çoklu özellik (deniz+romantik+yemek: 0.642)
+
+📊 Test Sonuçları
+- Başarı Oranı: 10/12 (%83.3)
+- Avg Yanıt Süresi: 2.1s (ilk: 10s, sonraki: 50-100ms)
+- Avg Benzerlik: 0.548
+- Avg Mesafe: 6.51 km
+- Toplam Mekan: 25
+
+🗑️ Temizlik
+- Kullanılmayan test dosyaları silindi
+- Test scripti tests/ klasörüne taşındı
+

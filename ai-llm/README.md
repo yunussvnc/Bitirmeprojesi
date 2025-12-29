@@ -210,6 +210,39 @@ flake8 .
 mypy .
 ```
 
+## Test
+
+### Konum Bazlı Arama Testleri
+
+Sistemin konum bazlı arama özelliğini test etmek için:
+
+```bash
+# Hızlı test
+python tests/test_konum_basit.py
+
+# Detaylı rapor
+python tests/test_konum_rapor.py
+
+# Debug testi
+python tests/test_qdrant_debug.py
+```
+
+**Test Sonuçları:** [TEST_RESULTS.md](TEST_RESULTS.md) dosyasında detaylı test sonuçları bulabilirsiniz.
+
+#### Başarılı Test Örnekleri
+
+✅ **5/5 test başarılı**
+- Toplam 22 mekan bulundu
+- Ortalama benzerlik skoru: 0.548
+- En yüksek skor: 0.826 (Deniz manzaralı cafe)
+
+**Test Senaryoları:**
+1. ☕ Sultanahmet - "kahve icmek istiyorum" → Kahve Durağı (0.681)
+2. 💻 Taksim - "sessiz calisma mekani" → Sakin Köşe Kafe (0.494)  
+3. 🍳 Kadıköy - "guzel kahvalti" → Meyhane Sofrası (0.468)
+4. 🍽️ Nişantaşı - "sik restoran romantic" → Şato Restaurant (0.723)
+5. 🌊 Beşiktaş - "deniz manzarali cafe" → Deniz Yıldızı Cafe (0.826)
+
 ## Ortam Değişkenleri
 
 `.env` dosyasında şu değişkenler bulunmalı:
