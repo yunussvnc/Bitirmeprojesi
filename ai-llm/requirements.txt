@@ -11,11 +11,9 @@ transformers>=4.35.2
 accelerate>=0.24.0  # HuggingFace model optimizasyonu için
 bitsandbytes>=0.41.0  # Quantization desteği (opsiyonel, GPU için)
 
-# LangChain ve OpenAI
+# LangChain (opsiyonel - temel özellikler için)
 langchain>=0.1.0
-langchain-openai>=0.0.5
 langchain-community>=0.0.10
-openai>=1.0.0
 langchain-core>=0.1.0
 
 # Vector Database
