@@ -6,10 +6,11 @@ Yapay Zeka Destekli Konum Bazlı Kişiselleştirilmiş Mekan Öneri Platformu'nu
 
 - **FastAPI** - API servisi
 - **PyTorch** - Deep learning framework
+- **LangChain** - LLM entegrasyonu
 - **Qdrant** - Vektör veritabanı
 - **Sentence Transformers** - Embedding modelleri
-- **Gemma 2** - Google'ın açık kaynak LLM'i (2B/9B modeller)
-- **HuggingFace Transformers** - Model inference
+- **OpenAI API** - LLM sağlayıcısı
+- **HuggingFace Transformers** - Local LLM desteği (Qwen2, TinyLlama, vb.)
 
 ## Mimari
 
@@ -25,7 +26,7 @@ Sistem, şu adımları izleyerek öneriler üretir:
 
 - **Embedding Model**: Türkçe metinleri vektörlere dönüştürür
 - **Vector Database (Qdrant)**: Mekan açıklamalarının embedding'lerini saklar
-- **LLM (Gemma 2)**: Öneri metinleri üretir
+- **LLM (OpenAI/Local)**: Öneri metinleri üretir
 - **RAG Pipeline**: Retrieval ve generation'ı birleştirir
 
 ## Kurulum
@@ -260,8 +261,8 @@ Detaylı dokümantasyon için `docs/` klasörüne bakın:
 
 - `QDRANT_URL` - Qdrant server URL'i
 - `QDRANT_API_KEY` - Qdrant API key (opsiyonel)
-- `LLM_PROVIDER` - LLM sağlayıcısı (huggingface)
-- `HUGGINGFACE_MODEL` - Model adı (google/gemma-2-2b-it veya google/gemma-2-9b-it)
+- `OPENAI_API_KEY` - OpenAI API key
+- `OPENAI_MODEL` - Kullanılacak OpenAI modeli
 - `EMBEDDING_MODEL` - Embedding model adı
 - `BACKEND_API_URL` - Backend API URL'i
 

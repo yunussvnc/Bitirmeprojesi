@@ -7,7 +7,7 @@ import os
 # Python path ayarla - bir üst klasörü ekle
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-os.environ['LLM_PROVIDER'] = 'huggingface'
+os.environ['LLM_PROVIDER'] = 'openai'
 os.environ['QDRANT_URL'] = 'http://localhost:6333'
 
 from src.rag.retriever import RAGRetriever

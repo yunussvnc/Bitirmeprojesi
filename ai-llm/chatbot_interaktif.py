@@ -6,7 +6,7 @@ import sys
 import os
 sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..'))
 
-os.environ['LLM_PROVIDER'] = 'huggingface'
+os.environ['LLM_PROVIDER'] = 'openai'
 os.environ['QDRANT_URL'] = 'http://localhost:6333'
 
 from src.rag.retriever import RAGRetriever
@@ -28,11 +28,11 @@ class MekanChatbot:
         try:
             self.generator = RAGGenerator()
             self.has_llm = True
-            print("[+] LLM analizi etkin (Gemma 2)")
+            print("[+] LLM analizi etkin")
         except Exception as e:
             self.generator = None
             self.has_llm = False
-            print("[!] LLM analizi devre disi (Model yuklenemedi)")
+            print("[!] LLM analizi devre disi (OpenAI API key bulunamadi)")
         
         print("[+] Chatbot hazir!\n")
         
