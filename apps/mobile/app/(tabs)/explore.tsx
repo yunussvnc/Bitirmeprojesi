@@ -1,4 +1,6 @@
-import { Link } from "expo-router";
+// apps/mobile/app/(tabs)/explore.tsx
+
+import { router } from "expo-router";
 import { useEffect, useMemo, useState } from "react";
 import {
   ActivityIndicator,
@@ -17,11 +19,7 @@ import { Fonts } from "@/constants/theme";
 
 import { recommendPlaces } from "../../src/services/api";
 import { usePreferences } from "../../src/state/preferences";
-import type {
-  PlaceCard,
-  Preferences,
-  RecommendResponse,
-} from "../../src/types/recommend";
+import type { PlaceCard, Preferences, RecommendResponse } from "../../src/types/recommend";
 
 import { useSavedPlaces } from "@/src/state/savedPlaces";
 import { getPlaceImageSource } from "@/src/utils/placeImages";
@@ -59,17 +57,9 @@ function Badge({ text }: { text: string }) {
 function prefsToBadges(p: Preferences) {
   const vibe = p.vibe === "quiet" ? "Sessiz" : "Canlı";
   const purpose =
-    p.purpose === "work"
-      ? "Çalışma"
-      : p.purpose === "friends"
-      ? "Arkadaş"
-      : "Date";
+    p.purpose === "work" ? "Çalışma" : p.purpose === "friends" ? "Arkadaş" : "Date";
   const budget =
-    p.budget === "low"
-      ? "₺ Düşük"
-      : p.budget === "mid"
-      ? "₺₺ Orta"
-      : "₺₺₺ Yüksek";
+    p.budget === "low" ? "₺ Düşük" : p.budget === "mid" ? "₺₺ Orta" : "₺₺₺ Yüksek";
   return [vibe, purpose, budget];
 }
 
@@ -83,7 +73,6 @@ export default function ExploreScreen() {
   const [error, setError] = useState<string>("");
 
   // ✅ ÖNEMLİ: Kaydet/Kaydedildi anında değişsin diye ids'e subscribe oluyoruz.
-  // Sadece isSaved fonksiyonunu almak re-render tetiklemeyebiliyor.
   const savedIds = useSavedPlaces((s) => s.ids);
   const toggle = useSavedPlaces((s) => s.toggle);
 
@@ -137,9 +126,7 @@ export default function ExploreScreen() {
           <ThemedText type="title" style={styles.title}>
             Explore
           </ThemedText>
-          <ThemedText style={styles.subtitle}>
-            Tercihlerine göre öneri listesi.
-          </ThemedText>
+          <ThemedText style={styles.subtitle}>Tercihlerine göre öneri listesi.</ThemedText>
         </View>
 
         <View style={styles.pill}>
@@ -148,6 +135,15 @@ export default function ExploreScreen() {
           </ThemedText>
         </View>
       </ThemedView>
+
+      {/* ✅ API Debug ekranına geçiş (typed-routes tip hatası yok) */}
+      <TouchableOpacity
+        activeOpacity={0.85}
+        onPress={() => router.push("/debug-api" as any)}
+        style={styles.debugLink}
+      >
+        <ThemedText style={styles.debugLinkText}>API Debug ekranına git →</ThemedText>
+      </TouchableOpacity>
 
       {/* Prompt input */}
       <View style={{ marginTop: 14 }}>
@@ -289,9 +285,7 @@ export default function ExploreScreen() {
         )}
 
         {!!error && (
-          <ThemedText style={{ marginTop: 10, opacity: 0.85 }}>
-            Hata: {error}
-          </ThemedText>
+          <ThemedText style={{ marginTop: 10, opacity: 0.85 }}>Hata: {error}</ThemedText>
         )}
       </View>
 
@@ -341,58 +335,58 @@ export default function ExploreScreen() {
 
         {items.map((place, idx) => {
           const id = String((place as any).id);
-          const saved = savedIds.includes(id); // ✅ artık anında UI güncellenir
+          const saved = savedIds.includes(id);
 
           return (
             <View key={id} style={styles.cardWrap}>
-              <Link href={{ pathname: "/place/[id]", params: { id } }} asChild>
-                <TouchableOpacity activeOpacity={0.92} style={styles.card}>
-                  <Image
-                    source={getPlaceImageSource(id)}
-                    style={styles.cardImage}
-                    resizeMode="cover"
-                  />
-                  <View style={styles.cardImageOverlay} />
+              {/* Kart tıklanınca detay sayfasına git */}
+              <TouchableOpacity
+                activeOpacity={0.92}
+                style={styles.card}
+                onPress={() =>
+                  router.push({ pathname: "/place/[id]", params: { id } } as any)
+                }
+              >
+                <Image
+                  source={getPlaceImageSource(id)}
+                  style={styles.cardImage}
+                  resizeMode="cover"
+                />
+                <View style={styles.cardImageOverlay} />
 
-                  {/* üst mini row */}
-                  <View style={styles.cardTopRow}>
-                    <View style={styles.rankPill}>
-                      <ThemedText type="defaultSemiBold" style={styles.rankText}>
-                        #{idx + 1}
-                      </ThemedText>
-                    </View>
-
-                    {/* ✅ Yüzdelik pill'i kaldırdım: Kaydet’in arkasında “çift yazı” gibi görünmesin */}
-                  </View>
-
-                  <View style={styles.cardContent}>
-                    <ThemedText type="defaultSemiBold" style={styles.cardTitle}>
-                      {place.name}
+                <View style={styles.cardTopRow}>
+                  <View style={styles.rankPill}>
+                    <ThemedText type="defaultSemiBold" style={styles.rankText}>
+                      #{idx + 1}
                     </ThemedText>
-
-                    <ThemedText style={styles.cardSubtitle}>
-                      {place.subtitle}
-                    </ThemedText>
-
-                    {!!place.tags?.length && (
-                      <View style={styles.badgeRow}>
-                        {place.tags.slice(0, 3).map((t) => (
-                          <View key={t} style={styles.tinyTag}>
-                            <ThemedText style={styles.tinyTagText}>{t}</ThemedText>
-                          </View>
-                        ))}
-                      </View>
-                    )}
-
-                    <View style={styles.cardHintRow}>
-                      <ThemedText style={styles.cardHint}>Detayı gör</ThemedText>
-                      <ThemedText style={styles.cardHint}>›</ThemedText>
-                    </View>
                   </View>
-                </TouchableOpacity>
-              </Link>
+                </View>
 
-              {/* ✅ Save butonu: kesin tıklanır + kesin re-render */}
+                <View style={styles.cardContent}>
+                  <ThemedText type="defaultSemiBold" style={styles.cardTitle}>
+                    {place.name}
+                  </ThemedText>
+
+                  <ThemedText style={styles.cardSubtitle}>{place.subtitle}</ThemedText>
+
+                  {!!place.tags?.length && (
+                    <View style={styles.badgeRow}>
+                      {place.tags.slice(0, 3).map((t) => (
+                        <View key={t} style={styles.tinyTag}>
+                          <ThemedText style={styles.tinyTagText}>{t}</ThemedText>
+                        </View>
+                      ))}
+                    </View>
+                  )}
+
+                  <View style={styles.cardHintRow}>
+                    <ThemedText style={styles.cardHint}>Detayı gör</ThemedText>
+                    <ThemedText style={styles.cardHint}>›</ThemedText>
+                  </View>
+                </View>
+              </TouchableOpacity>
+
+              {/* Save butonu */}
               <TouchableOpacity
                 activeOpacity={0.85}
                 onPress={() =>
@@ -402,10 +396,7 @@ export default function ExploreScreen() {
                     subtitle: place.subtitle,
                   })
                 }
-                style={[
-                  styles.saveBtn,
-                  saved ? styles.saveBtnActive : styles.saveBtnInactive,
-                ]}
+                style={[styles.saveBtn, saved ? styles.saveBtnActive : styles.saveBtnInactive]}
               >
                 <ThemedText type="defaultSemiBold" style={{ fontSize: 12 }}>
                   {saved ? "Kaydedildi" : "Kaydet"}
@@ -455,6 +446,18 @@ const styles = StyleSheet.create({
     backgroundColor: "rgba(255,255,255,0.05)",
   },
   pillText: { fontSize: 12 },
+
+  debugLink: {
+    marginTop: 10,
+    alignSelf: "flex-start",
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: "rgba(255,255,255,0.12)",
+    backgroundColor: "rgba(255,255,255,0.03)",
+  },
+  debugLinkText: { opacity: 0.75, fontSize: 13 },
 
   helper: { opacity: 0.5, marginTop: 8, fontSize: 13 },
 
@@ -641,7 +644,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderRadius: 999,
     borderWidth: 1,
-
     zIndex: 50,
     elevation: 50,
   },

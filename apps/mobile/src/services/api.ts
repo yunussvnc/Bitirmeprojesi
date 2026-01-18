@@ -1,17 +1,38 @@
 import type { RecommendRequest, RecommendResponse } from "../types/recommend";
+import { API_BASE_URL } from "../constants/api";
 
-const MOCK_MODE = true;
+const MOCK_MODE = false;
 
-// Utku backend’i hazır olunca burayı değiştir:
-// örn: http://192.168.1.50:8000
-const BASE_URL = "http://localhost:8000";
+// ✅ Expo Go (telefon) için localhost kullanma!
+// ✅ Mac’te çalışan backend’e vuracağız (API_BASE_URL zaten 192.168.x.x:8000)
+const BASE_URL = API_BASE_URL;
 
 const MOCK_PLACES = [
-  { id: 1, name: "Cafe Luna", subtitle: "Sessiz, çalışmalık", tags: ["quiet", "work", "mid"] },
-  { id: 2, name: "Bar 212", subtitle: "Akşam canlı, arkadaşlarla", tags: ["lively", "friends", "high"] },
+  {
+    id: 1,
+    name: "Cafe Luna",
+    subtitle: "Sessiz, çalışmalık",
+    tags: ["quiet", "work", "mid"],
+  },
+  {
+    id: 2,
+    name: "Bar 212",
+    subtitle: "Akşam canlı, arkadaşlarla",
+    tags: ["lively", "friends", "high"],
+  },
   { id: 3, name: "Kahve Durağı", subtitle: "Uygun fiyatlı", tags: ["cheap", "low"] },
-  { id: 4, name: "Study Hub", subtitle: "Laptop dostu, sakin", tags: ["quiet", "work", "mid"] },
-  { id: 5, name: "Date Corner", subtitle: "Romantik, sakin", tags: ["quiet", "date", "high"] },
+  {
+    id: 4,
+    name: "Study Hub",
+    subtitle: "Laptop dostu, sakin",
+    tags: ["quiet", "work", "mid"],
+  },
+  {
+    id: 5,
+    name: "Date Corner",
+    subtitle: "Romantik, sakin",
+    tags: ["quiet", "date", "high"],
+  },
 ];
 
 function sleep(ms: number) {
@@ -60,7 +81,9 @@ function mockRecommend(req: RecommendRequest): RecommendResponse {
   return { items, explanation };
 }
 
-export async function recommendPlaces(req: RecommendRequest): Promise<RecommendResponse> {
+export async function recommendPlaces(
+  req: RecommendRequest
+): Promise<RecommendResponse> {
   if (MOCK_MODE) {
     await sleep(450); // demo “yükleniyor” hissi
     return mockRecommend(req);

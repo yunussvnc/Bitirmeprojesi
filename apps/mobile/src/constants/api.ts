@@ -1,5 +1,8 @@
 // apps/mobile/src/constants/api.ts
 
-export const API_BASE_URL = "http://192.168.1.8:8000";
+// Expo Go telefondan erişim için: Mac'in LAN IP'si
+export const API_BASE_URL = "http://192.168.1.103:8000";
 
-export const API_V1 = `${API_BASE_URL}/api/v1`;
+// Bazı eski servisler API_V1 kullanıyor olabilir.
+// Backend'te /api/v1 yoksa kırılmaması için güvenli tutuyoruz.
+export const API_V1 = API_BASE_URL;

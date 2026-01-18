@@ -76,3 +76,24 @@ class UserLogin(BaseModel):
 class Token(BaseModel):
     access_token: str
     token_type: str = "bearer"
+from pydantic import BaseModel
+from typing import List, Optional, Literal
+
+class Preferences(BaseModel):
+    vibe: Literal["quiet", "lively"] = "quiet"
+    purpose: Literal["work", "friends", "date"] = "work"
+    budget: Literal["low", "mid", "high"] = "mid"
+
+class RecommendItem(BaseModel):
+    id: int
+    name: str
+    subtitle: str = ""
+    tags: List[str] = []
+
+class RecommendRequest(BaseModel):
+    queryText: str = ""
+    preferences: Preferences
+
+class RecommendResponse(BaseModel):
+    items: List[RecommendItem]
+    explanation: str
