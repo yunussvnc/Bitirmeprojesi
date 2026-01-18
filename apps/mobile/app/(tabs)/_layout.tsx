@@ -18,8 +18,8 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="explore"
         options={{
-          title: "Explore",
-          headerTitle: "Explore",
+          title: "Chatbot",
+          headerTitle: "Chatbot",
         }}
       />
 

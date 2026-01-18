@@ -1,6 +1,8 @@
 import { Link } from "expo-router";
 import { useMemo } from "react";
 import { Alert, Image, StyleSheet, TouchableOpacity, View } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
+import { BlurView } from "expo-blur";
 
 import ParallaxScrollView from "@/components/parallax-scroll-view";
 import { ThemedText } from "@/components/themed-text";
@@ -34,16 +36,21 @@ export default function SavedScreen() {
 
   return (
     <ParallaxScrollView
-      headerBackgroundColor={{ light: "#D0D0D0", dark: "#353636" }}
+      headerBackgroundColor={{ light: "#FFFFFF", dark: "#1A1A1A" }}
       headerImage={
         <View style={styles.headerWrap}>
+          <LinearGradient
+            colors={["#FFF5F7", "#F8F9FA", "#FFFFFF"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+            style={styles.headerGradient}
+          />
           <IconSymbol
             size={310}
-            color="#808080"
+            color="rgba(255, 107, 157, 0.2)"
             name="bookmark.fill"
             style={styles.headerIcon}
           />
-          <View style={styles.headerOverlay} />
         </View>
       }
     >
@@ -70,19 +77,34 @@ export default function SavedScreen() {
               ]);
             }}
             style={[styles.clearBtn, !items.length && { opacity: 0.45 }]}
+            disabled={!items.length}
           >
-            <ThemedText type="defaultSemiBold" style={{ fontSize: 13 }}>
-              Temizle
-            </ThemedText>
+            <LinearGradient
+              colors={!items.length ? ["#D1D5DB", "#9CA3AF"] : ["#FF6B9D", "#C44569"]}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 1, y: 0 }}
+              style={styles.clearBtnGradient}
+            >
+              <ThemedText type="defaultSemiBold" style={styles.clearBtnText}>
+                Temizle
+              </ThemedText>
+            </LinearGradient>
           </TouchableOpacity>
         </View>
       </ThemedView>
 
       {!items.length ? (
         <View style={styles.emptyWrap}>
-          <View style={styles.emptyCard}>
+          <BlurView intensity={20} style={styles.emptyCard}>
             <View style={styles.emptyIconWrap}>
-              <IconSymbol size={26} color="#DADADA" name="bookmark" />
+              <LinearGradient
+                colors={["#FF6B9D", "#C44569"]}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 1 }}
+                style={styles.emptyIconGradient}
+              >
+                <IconSymbol size={32} color="#fff" name="bookmark" />
+              </LinearGradient>
             </View>
 
             <ThemedText type="defaultSemiBold" style={styles.emptyTitle}>
@@ -90,15 +112,24 @@ export default function SavedScreen() {
             </ThemedText>
 
             <ThemedText style={styles.emptyText}>
-              Explore’dan beğendiğin mekanları “Kaydet” diyerek buraya ekleyebilirsin.
+              Explore'dan beğendiğin mekanları "Kaydet" diyerek buraya ekleyebilirsin.
             </ThemedText>
 
             <Link href="/(tabs)/explore" asChild>
               <TouchableOpacity activeOpacity={0.85} style={styles.primaryBtn}>
-                <ThemedText type="defaultSemiBold">Explore’a git</ThemedText>
+                <LinearGradient
+                  colors={["#667eea", "#764ba2"]}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 0 }}
+                  style={styles.primaryBtnGradient}
+                >
+                  <ThemedText type="defaultSemiBold" style={styles.primaryBtnText}>
+                    Explore'a git
+                  </ThemedText>
+                </LinearGradient>
               </TouchableOpacity>
             </Link>
-          </View>
+          </BlurView>
 
           <ThemedText style={styles.emptyHint}>
             İpucu: Kaydettiğin mekanlar uygulama kapanınca da kalır (persist).
@@ -177,16 +208,13 @@ export default function SavedScreen() {
 }
 
 const styles = StyleSheet.create({
-  headerWrap: { flex: 1, justifyContent: "flex-end" },
-  headerIcon: { bottom: -90, left: -35, position: "absolute", opacity: 0.9 },
-  headerOverlay: {
+  headerWrap: { flex: 1, justifyContent: "flex-end", position: "relative" },
+  headerGradient: {
     position: "absolute",
-    left: 0,
-    right: 0,
-    bottom: 0,
-    height: 140,
-    backgroundColor: "rgba(0,0,0,0.35)",
+    width: "100%",
+    height: "100%",
   },
+  headerIcon: { bottom: -90, left: -35, position: "absolute", opacity: 0.9 },
 
   titleContainer: {
     flexDirection: "row",
@@ -208,47 +236,80 @@ const styles = StyleSheet.create({
   pillText: { fontSize: 12 },
 
   clearBtn: {
+    borderRadius: 14,
+    overflow: "hidden",
+    shadowColor: "#f093fb",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 5,
+  },
+  clearBtnGradient: {
     paddingVertical: 10,
     paddingHorizontal: 12,
-    borderRadius: 14,
-    borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.18)",
-    backgroundColor: "rgba(255,255,255,0.05)",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  clearBtnText: {
+    fontSize: 13,
+    color: "#fff",
   },
 
   emptyWrap: { marginTop: 14, gap: 12 },
   emptyCard: {
-    padding: 16,
-    borderRadius: 18,
-    borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.12)",
-    backgroundColor: "rgba(255,255,255,0.03)",
+    padding: 24,
+    borderRadius: 24,
+    backgroundColor: "rgba(255, 255, 255, 0.95)",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.2,
+    shadowRadius: 20,
+    elevation: 10,
   },
   emptyIconWrap: {
-    width: 44,
-    height: 44,
-    borderRadius: 14,
-    borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.12)",
-    backgroundColor: "rgba(255,255,255,0.04)",
+    width: 64,
+    height: 64,
+    borderRadius: 20,
+    overflow: "hidden",
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 10,
+    marginBottom: 16,
+    shadowColor: "#FF6B9D",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.15,
+    shadowRadius: 4,
+    elevation: 2,
   },
-  emptyTitle: { fontSize: 16 },
-  emptyText: { opacity: 0.75, marginTop: 8, lineHeight: 18, fontSize: 13 },
-  emptyHint: { opacity: 0.55, fontSize: 12, lineHeight: 16 },
+  emptyIconGradient: {
+    width: "100%",
+    height: "100%",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  emptyTitle: { fontSize: 20, color: "#1A1A1A", fontWeight: "700", marginBottom: 8 },
+  emptyText: { color: "#666", marginTop: 8, lineHeight: 20, fontSize: 14 },
+  emptyHint: { color: "#888", fontSize: 12, lineHeight: 16 },
 
   primaryBtn: {
-    marginTop: 14,
-    paddingVertical: 12,
-    paddingHorizontal: 14,
+    marginTop: 20,
     borderRadius: 16,
-    borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.18)",
-    backgroundColor: "rgba(255,255,255,0.05)",
-    alignItems: "center",
+    overflow: "hidden",
     alignSelf: "flex-start",
+    shadowColor: "#FF6B9D",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.15,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  primaryBtnGradient: {
+    paddingVertical: 14,
+    paddingHorizontal: 24,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  primaryBtnText: {
+    color: "#fff",
+    fontSize: 16,
   },
 
   resultsHeader: {

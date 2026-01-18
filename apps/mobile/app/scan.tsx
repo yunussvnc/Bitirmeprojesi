@@ -2,6 +2,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { router, useLocalSearchParams } from "expo-router";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { StyleSheet, TextInput, TouchableOpacity, View } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
+import { BlurView } from "expo-blur";
 
 import ParallaxScrollView from "@/components/parallax-scroll-view";
 import { ThemedText } from "@/components/themed-text";
@@ -89,19 +91,26 @@ export default function ScanScreen() {
       return;
     }
     activateAndGo(placeIdParam);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [placeIdParam]);
 
   return (
     <ParallaxScrollView
-      headerBackgroundColor={{ light: "#D0D0D0", dark: "#353636" }}
+      headerBackgroundColor={{ light: "#FFFFFF", dark: "#1A1A1A" }}
       headerImage={
-        <IconSymbol
-          size={310}
-          color="#808080"
-          name="qrcode.viewfinder"
-          style={styles.headerImage}
-        />
+        <View style={styles.headerContainer}>
+          <LinearGradient
+            colors={["#FFF5F7", "#F8F9FA", "#FFFFFF"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+            style={styles.headerGradient}
+          />
+          <IconSymbol
+            size={310}
+            color="rgba(255,255,255,0.3)"
+            name="qrcode.viewfinder"
+            style={styles.headerImage}
+          />
+        </View>
       }
     >
       <ThemedView style={styles.titleContainer}>
@@ -111,8 +120,8 @@ export default function ScanScreen() {
       </ThemedView>
 
       {/* Minimal durum kartı */}
-      <View style={styles.card}>
-        <ThemedText type="defaultSemiBold" style={{ fontSize: 16 }}>
+      <BlurView intensity={20} style={styles.card}>
+        <ThemedText type="defaultSemiBold" style={styles.cardTitle}>
           QR Durumu
         </ThemedText>
         <ThemedText style={styles.desc}>{status}</ThemedText>
@@ -120,21 +129,23 @@ export default function ScanScreen() {
         <ThemedText style={styles.hint}>
           QR formatı: <ThemedText type="defaultSemiBold">mobile://scan?placeId=1</ThemedText>
         </ThemedText>
-      </View>
+      </BlurView>
 
       {/* Manuel test (küçük) */}
-      <View style={styles.card}>
-        <ThemedText type="defaultSemiBold" style={{ fontSize: 16 }}>
+      <BlurView intensity={20} style={styles.card}>
+        <ThemedText type="defaultSemiBold" style={styles.cardTitle}>
           Manuel Test (Demo)
         </ThemedText>
 
-        <TextInput
-          value={manualInput}
-          onChangeText={setManualInput}
-          placeholder="örn: 1"
-          placeholderTextColor="rgba(255,255,255,0.35)"
-          style={styles.input}
-        />
+        <BlurView intensity={20} style={styles.inputContainer}>
+          <TextInput
+            value={manualInput}
+            onChangeText={setManualInput}
+            placeholder="örn: 1"
+            placeholderTextColor="#999"
+            style={styles.input}
+          />
+        </BlurView>
 
         <TouchableOpacity
           activeOpacity={0.85}
@@ -145,7 +156,16 @@ export default function ScanScreen() {
           }}
           style={styles.primaryBtn}
         >
-          <ThemedText type="defaultSemiBold">Aktif Et → Detaya Git</ThemedText>
+          <LinearGradient
+            colors={["#667eea", "#764ba2"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+            style={styles.primaryBtnGradient}
+          >
+            <ThemedText type="defaultSemiBold" style={styles.primaryBtnText}>
+              Aktif Et → Detaya Git
+            </ThemedText>
+          </LinearGradient>
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -153,62 +173,127 @@ export default function ScanScreen() {
           onPress={() => router.push("/(tabs)/explore")}
           style={styles.secondaryBtn}
         >
-          <ThemedText type="defaultSemiBold">Keşfet’e dön</ThemedText>
+          <LinearGradient
+            colors={["#FF6B9D", "#C44569"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+            style={styles.secondaryBtnGradient}
+          >
+            <ThemedText type="defaultSemiBold" style={styles.secondaryBtnText}>
+              Keşfet&apos;e dön
+            </ThemedText>
+          </LinearGradient>
         </TouchableOpacity>
-      </View>
+      </BlurView>
     </ParallaxScrollView>
   );
 }
 
 const styles = StyleSheet.create({
+  headerContainer: {
+    width: "100%",
+    height: "100%",
+    position: "relative",
+  },
+  headerGradient: {
+    position: "absolute",
+    width: "100%",
+    height: "100%",
+  },
   headerImage: { bottom: -90, left: -35, position: "absolute" },
   titleContainer: { flexDirection: "row", gap: 8 },
   title: { fontFamily: Fonts.rounded },
 
   card: {
     marginTop: 12,
-    padding: 14,
-    borderRadius: 18,
-    borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.12)",
-    backgroundColor: "rgba(255,255,255,0.03)",
+    padding: 20,
+    borderRadius: 24,
+    backgroundColor: "rgba(255, 255, 255, 0.95)",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.2,
+    shadowRadius: 20,
+    elevation: 10,
   },
-  desc: { opacity: 0.8, marginTop: 8, lineHeight: 18 },
-  hint: { opacity: 0.55, marginTop: 10, fontSize: 12, lineHeight: 16 },
-
-  input: {
-    marginTop: 12,
-    borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.18)",
-    paddingVertical: 12,
-    paddingHorizontal: 14,
-    borderRadius: 16,
-    color: "white",
+  cardTitle: {
+    fontSize: 18,
+    fontWeight: "700",
+    color: "#1A1A1A",
+    marginBottom: 12,
+  },
+  desc: {
+    color: "#666",
+    marginTop: 8,
+    lineHeight: 20,
     fontSize: 15,
-    backgroundColor: "rgba(255,255,255,0.03)",
+  },
+  hint: {
+    color: "#888",
+    marginTop: 12,
+    fontSize: 13,
+    lineHeight: 18,
+  },
+
+  inputContainer: {
+    marginTop: 12,
+    borderRadius: 16,
+    overflow: "hidden",
+    backgroundColor: "#F8F9FA",
+    borderWidth: 1,
+    borderColor: "#E5E7EB",
+  },
+  input: {
+    paddingVertical: 14,
+    paddingHorizontal: 18,
+    borderRadius: 16,
+    color: "#1A1A1A",
+    fontSize: 15,
+    backgroundColor: "transparent",
   },
 
   primaryBtn: {
-    marginTop: 12,
-    paddingVertical: 12,
-    paddingHorizontal: 14,
+    marginTop: 16,
     borderRadius: 16,
-    borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.18)",
-    backgroundColor: "rgba(255,255,255,0.05)",
-    alignItems: "center",
+    overflow: "hidden",
     alignSelf: "flex-start",
+    shadowColor: "#FF6B9D",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.15,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  primaryBtnGradient: {
+    paddingVertical: 14,
+    paddingHorizontal: 20,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  primaryBtnText: {
+    color: "#fff",
+    fontSize: 15,
+    fontWeight: "700",
   },
 
   secondaryBtn: {
-    marginTop: 10,
-    paddingVertical: 12,
-    paddingHorizontal: 14,
+    marginTop: 12,
     borderRadius: 16,
-    borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.18)",
-    backgroundColor: "rgba(255,255,255,0.05)",
-    alignItems: "center",
+    overflow: "hidden",
     alignSelf: "flex-start",
+    shadowColor: "#FF6B9D",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.15,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  secondaryBtnGradient: {
+    paddingVertical: 14,
+    paddingHorizontal: 20,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  secondaryBtnText: {
+    color: "#fff",
+    fontSize: 15,
+    fontWeight: "700",
   },
 });

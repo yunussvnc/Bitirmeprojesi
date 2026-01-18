@@ -10,11 +10,19 @@ import {
   TouchableOpacity,
   View,
 } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
+import { BlurView } from "expo-blur";
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withRepeat,
+  withTiming,
+  withSpring,
+} from "react-native-reanimated";
 
 import ParallaxScrollView from "@/components/parallax-scroll-view";
 import { ThemedText } from "@/components/themed-text";
 import { ThemedView } from "@/components/themed-view";
-import { IconSymbol } from "@/components/ui/icon-symbol";
 import { Fonts } from "@/constants/theme";
 
 import { recommendPlaces } from "../../src/services/api";
@@ -37,9 +45,20 @@ function Chip({
     <TouchableOpacity
       onPress={onPress}
       activeOpacity={0.85}
-      style={[styles.chip, active ? styles.chipActive : styles.chipInactive]}
+      style={[styles.chip, active && styles.chipActive]}
     >
-      <ThemedText style={styles.chipText}>{label}</ThemedText>
+      {active ? (
+        <LinearGradient
+          colors={["#FF6B9D", "#C44569"]}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 0 }}
+          style={styles.chipGradient}
+        >
+          <ThemedText style={styles.chipTextActive}>{label}</ThemedText>
+        </LinearGradient>
+      ) : (
+        <ThemedText style={styles.chipText}>{label}</ThemedText>
+      )}
     </TouchableOpacity>
   );
 }
@@ -105,18 +124,77 @@ export default function ExploreScreen() {
 
   const topBadges = useMemo(() => prefsToBadges(prefs), [prefs]);
 
+  // 3D Animation values
+  const rotateY = useSharedValue(0);
+  const rotateX = useSharedValue(0);
+  const translateY = useSharedValue(0);
+  const scale = useSharedValue(1);
+
+  useEffect(() => {
+    rotateY.value = withRepeat(
+      withTiming(360, { duration: 20000 }),
+      -1,
+      false
+    );
+    rotateX.value = withRepeat(
+      withSpring(15, { damping: 10 }),
+      -1,
+      true
+    );
+    translateY.value = withRepeat(
+      withSpring(10, { damping: 8 }),
+      -1,
+      true
+    );
+    scale.value = withRepeat(
+      withSpring(1.1, { damping: 6 }),
+      -1,
+      true
+    );
+  }, [rotateY, rotateX, translateY, scale]);
+
+  const animated3DStyle = useAnimatedStyle(() => {
+    return {
+      transform: [
+        { perspective: 1000 },
+        { rotateY: `${rotateY.value}deg` },
+        { rotateX: `${rotateX.value}deg` },
+        { translateY: translateY.value },
+        { scale: scale.value },
+      ],
+    };
+  });
+
   return (
     <ParallaxScrollView
-      headerBackgroundColor={{ light: "#D0D0D0", dark: "#353636" }}
+      headerBackgroundColor={{ light: "#FFFFFF", dark: "#1A1A1A" }}
       headerImage={
         <View style={styles.headerWrap}>
-          <IconSymbol
-            size={310}
-            color="#808080"
-            name="sparkles"
-            style={styles.headerIcon}
+          <LinearGradient
+            colors={["#FFF5F7", "#F8F9FA", "#FFFFFF"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 1 }}
+            style={styles.headerGradient}
           />
-          <View style={styles.headerOverlay} />
+          {/* 3D Chatbot Icon */}
+          <Animated.View style={[styles.chatbot3DContainer, animated3DStyle]}>
+            <View style={styles.chatbot3D}>
+              <LinearGradient
+                colors={["#FF6B9D", "#C44569", "#FF6B9D"]}
+                start={{ x: 0, y: 0 }}
+                end={{ x: 1, y: 1 }}
+                style={styles.chatbot3DGradient}
+              >
+                <View style={styles.chatbot3DFace}>
+                  <View style={styles.chatbot3DEye} />
+                  <View style={styles.chatbot3DEye} />
+                  <View style={styles.chatbot3DMouth} />
+                </View>
+                {/* 3D Depth Effect */}
+                <View style={styles.chatbot3DShadow} />
+              </LinearGradient>
+            </View>
+          </Animated.View>
         </View>
       }
     >
@@ -124,9 +202,9 @@ export default function ExploreScreen() {
       <ThemedView style={styles.titleContainer}>
         <View style={{ flex: 1 }}>
           <ThemedText type="title" style={styles.title}>
-            Explore
+            Chatbot
           </ThemedText>
-          <ThemedText style={styles.subtitle}>Tercihlerine göre öneri listesi.</ThemedText>
+          <ThemedText style={styles.subtitle}>AI destekli mekan önerisi chatbot.</ThemedText>
         </View>
 
         <View style={styles.pill}>
@@ -147,13 +225,15 @@ export default function ExploreScreen() {
 
       {/* Prompt input */}
       <View style={{ marginTop: 14 }}>
-        <TextInput
-          value={query}
-          onChangeText={setQuery}
-          placeholder="Ne arıyorsun? (örn: sessiz çalışmalık kafe)"
-          placeholderTextColor="rgba(255,255,255,0.35)"
-          style={styles.input}
-        />
+        <BlurView intensity={20} style={styles.inputContainer}>
+          <TextInput
+            value={query}
+            onChangeText={setQuery}
+            placeholder="Ne arıyorsun? (örn: sessiz çalışmalık kafe)"
+            placeholderTextColor="#999"
+            style={styles.input}
+          />
+        </BlurView>
         <ThemedText style={styles.helper}>
           Yaz veya chip’lerle filtrele. Sonra “Öneri getir”e bas.
         </ThemedText>
@@ -166,7 +246,7 @@ export default function ExploreScreen() {
       </View>
 
       {/* Filtre kartı */}
-      <View style={styles.filterCard}>
+      <BlurView intensity={20} style={styles.filterCard}>
         <View style={styles.filterHeader}>
           <ThemedText type="defaultSemiBold" style={{ fontSize: 16 }}>
             Filtreler
@@ -266,63 +346,72 @@ export default function ExploreScreen() {
             </View>
           </View>
         </View>
+      </BlurView>
 
-        <TouchableOpacity
-          onPress={runRecommend}
-          activeOpacity={0.85}
-          style={styles.recommendBtn}
-          disabled={loading}
+      <TouchableOpacity
+        onPress={runRecommend}
+        activeOpacity={0.85}
+        style={styles.recommendBtn}
+        disabled={loading}
+      >
+        <LinearGradient
+          colors={loading ? ["#D1D5DB", "#9CA3AF"] : ["#FF6B9D", "#C44569"]}
+          start={{ x: 0, y: 0 }}
+          end={{ x: 1, y: 0 }}
+          style={styles.recommendBtnGradient}
         >
-          <ThemedText type="defaultSemiBold">
+          <ThemedText type="defaultSemiBold" style={styles.recommendBtnText}>
             {loading ? "Öneriler hazırlanıyor..." : "Öneri getir"}
           </ThemedText>
-        </TouchableOpacity>
+        </LinearGradient>
+      </TouchableOpacity>
 
-        {loading && (
-          <View style={{ marginTop: 10, alignItems: "flex-start" }}>
-            <ActivityIndicator />
-          </View>
-        )}
-
-        {!!error && (
-          <ThemedText style={{ marginTop: 10, opacity: 0.85 }}>Hata: {error}</ThemedText>
-        )}
-      </View>
-
-      {/* LLM açıklaması */}
-      {!!explanation && (
-        <View style={styles.explainCard}>
-          <View style={styles.explainHeaderRow}>
-            <ThemedText type="defaultSemiBold" style={{ fontSize: 16 }}>
-              Neden bu öneriler?
-            </ThemedText>
-            <View style={styles.miniPill}>
-              <ThemedText type="defaultSemiBold" style={styles.miniPillText}>
-                Demo AI
-              </ThemedText>
-            </View>
-          </View>
-
-          <ThemedText style={{ opacity: 0.85, marginTop: 8, lineHeight: 22 }}>
-            {explanation}
-          </ThemedText>
-
-          <View style={styles.aiMetaRow}>
-            <View style={styles.aiMetaBox}>
-              <ThemedText style={styles.aiMetaLabel}>Confidence</ThemedText>
-              <ThemedText type="defaultSemiBold" style={styles.aiMetaValue}>
-                Orta
-              </ThemedText>
-            </View>
-            <View style={styles.aiMetaBox}>
-              <ThemedText style={styles.aiMetaLabel}>Trade-off</ThemedText>
-              <ThemedText type="defaultSemiBold" style={styles.aiMetaValue}>
-                Ambiyans ↔ fiyat
-              </ThemedText>
-            </View>
-          </View>
+      {loading && (
+        <View style={{ marginTop: 10, alignItems: "flex-start" }}>
+          <ActivityIndicator />
         </View>
       )}
+
+      {!!error && (
+        <ThemedText style={{ marginTop: 10, opacity: 0.85 }}>Hata: {error}</ThemedText>
+      )}
+
+      {/* LLM açıklaması */}
+      {
+        !!explanation && (
+          <View style={styles.explainCard}>
+            <View style={styles.explainHeaderRow}>
+              <ThemedText type="defaultSemiBold" style={{ fontSize: 16 }}>
+                Neden bu öneriler?
+              </ThemedText>
+              <View style={styles.miniPill}>
+                <ThemedText type="defaultSemiBold" style={styles.miniPillText}>
+                  Demo AI
+                </ThemedText>
+              </View>
+            </View>
+
+            <ThemedText style={{ opacity: 0.85, marginTop: 8, lineHeight: 22 }}>
+              {explanation}
+            </ThemedText>
+
+            <View style={styles.aiMetaRow}>
+              <View style={styles.aiMetaBox}>
+                <ThemedText style={styles.aiMetaLabel}>Confidence</ThemedText>
+                <ThemedText type="defaultSemiBold" style={styles.aiMetaValue}>
+                  Orta
+                </ThemedText>
+              </View>
+              <View style={styles.aiMetaBox}>
+                <ThemedText style={styles.aiMetaLabel}>Trade-off</ThemedText>
+                <ThemedText type="defaultSemiBold" style={styles.aiMetaValue}>
+                  Ambiyans ↔ fiyat
+                </ThemedText>
+              </View>
+            </View>
+          </View>
+        )
+      }
 
       {/* Sonuçlar */}
       <View style={{ marginTop: 18, gap: 12 }}>
@@ -412,20 +501,94 @@ export default function ExploreScreen() {
           </ThemedText>
         )}
       </View>
-    </ParallaxScrollView>
+    </ParallaxScrollView >
   );
 }
 
 const styles = StyleSheet.create({
-  headerWrap: { flex: 1, justifyContent: "flex-end" },
-  headerIcon: { bottom: -90, left: -35, position: "absolute", opacity: 0.9 },
-  headerOverlay: {
+  headerWrap: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    position: "relative",
+    overflow: "hidden",
+  },
+  headerGradient: {
     position: "absolute",
-    left: 0,
-    right: 0,
-    bottom: 0,
-    height: 140,
-    backgroundColor: "rgba(0,0,0,0.35)",
+    width: "100%",
+    height: "100%",
+  },
+  chatbot3DContainer: {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    width: 120,
+    height: 120,
+    marginLeft: -60,
+    marginTop: -60,
+    zIndex: 10,
+  },
+  chatbot3D: {
+    width: "100%",
+    height: "100%",
+    borderRadius: 30,
+    overflow: "hidden",
+    shadowColor: "#FF6B9D",
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.4,
+    shadowRadius: 16,
+    elevation: 10,
+  },
+  chatbot3DGradient: {
+    width: "100%",
+    height: "100%",
+    borderRadius: 30,
+    alignItems: "center",
+    justifyContent: "center",
+    borderWidth: 3,
+    borderColor: "rgba(255, 255, 255, 0.3)",
+  },
+  chatbot3DFace: {
+    width: 80,
+    height: 80,
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
+    gap: 12,
+    marginBottom: 8,
+  },
+  chatbot3DEye: {
+    width: 16,
+    height: 16,
+    borderRadius: 8,
+    backgroundColor: "#FFFFFF",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  chatbot3DMouth: {
+    width: 24,
+    height: 12,
+    borderRadius: 12,
+    backgroundColor: "#FFFFFF",
+    marginTop: 8,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.3,
+    shadowRadius: 4,
+    elevation: 3,
+  },
+  chatbot3DShadow: {
+    position: "absolute",
+    bottom: -10,
+    left: "20%",
+    right: "20%",
+    height: 20,
+    borderRadius: 50,
+    backgroundColor: "rgba(255, 107, 157, 0.2)",
+    transform: [{ scaleY: 0.5 }],
   },
 
   titleContainer: {
@@ -434,62 +597,62 @@ const styles = StyleSheet.create({
     alignItems: "flex-start",
     justifyContent: "space-between",
   },
-  title: { fontFamily: Fonts.rounded },
-  subtitle: { opacity: 0.7, marginTop: 6 },
+  title: { fontFamily: Fonts.rounded, color: "#1A1A1A" },
+  subtitle: { color: "#888", marginTop: 6 },
 
   pill: {
-    paddingVertical: 8,
-    paddingHorizontal: 10,
-    borderRadius: 999,
-    borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.18)",
-    backgroundColor: "rgba(255,255,255,0.05)",
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    borderRadius: 20,
+    backgroundColor: "#F5F5F5",
   },
-  pillText: { fontSize: 12 },
+  pillText: { fontSize: 12, color: "#666" },
 
   debugLink: {
     marginTop: 10,
     alignSelf: "flex-start",
-    paddingVertical: 10,
+    paddingVertical: 8,
     paddingHorizontal: 12,
-    borderRadius: 14,
-    borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.12)",
-    backgroundColor: "rgba(255,255,255,0.03)",
+    borderRadius: 12,
+    backgroundColor: "#F8F9FA",
   },
-  debugLinkText: { opacity: 0.75, fontSize: 13 },
+  debugLinkText: { color: "#888", fontSize: 13 },
 
   helper: { opacity: 0.5, marginTop: 8, fontSize: 13 },
 
-  input: {
-    borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.18)",
-    paddingVertical: 12,
-    paddingHorizontal: 14,
+  inputContainer: {
     borderRadius: 16,
-    color: "white",
+    overflow: "hidden",
+    backgroundColor: "#F8F9FA",
+    borderWidth: 1,
+    borderColor: "#E5E7EB",
+  },
+  input: {
+    paddingVertical: 14,
+    paddingHorizontal: 16,
+    borderRadius: 16,
+    color: "#1A1A1A",
     fontSize: 15,
-    backgroundColor: "rgba(255,255,255,0.03)",
+    backgroundColor: "transparent",
   },
 
   badgeRowTop: { marginTop: 10, flexDirection: "row", flexWrap: "wrap", gap: 8 },
   badge: {
-    paddingVertical: 7,
-    paddingHorizontal: 10,
-    borderRadius: 999,
-    borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.14)",
-    backgroundColor: "rgba(255,255,255,0.04)",
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    borderRadius: 16,
+    backgroundColor: "#F0F0F0",
   },
-  badgeText: { fontSize: 12 },
+  badgeText: { fontSize: 12, color: "#666" },
 
   filterCard: {
     marginTop: 16,
-    padding: 14,
-    borderRadius: 18,
+    padding: 18,
+    borderRadius: 16,
+    overflow: "hidden",
+    backgroundColor: "#FFFFFF",
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.12)",
-    backgroundColor: "rgba(255,255,255,0.03)",
+    borderColor: "#E5E7EB",
   },
   filterHeader: {
     flexDirection: "row",
@@ -500,32 +663,51 @@ const styles = StyleSheet.create({
 
   rowWrap: { flexDirection: "row", flexWrap: "wrap", gap: 10 },
   chip: {
-    paddingVertical: 9,
-    paddingHorizontal: 14,
-    borderRadius: 999,
-    borderWidth: 1,
+    borderRadius: 20,
+    overflow: "hidden",
   },
   chipActive: {
-    borderColor: "rgba(255,255,255,0.85)",
-    backgroundColor: "rgba(255,255,255,0.08)",
-    opacity: 1,
+    borderWidth: 0,
   },
-  chipInactive: {
-    borderColor: "rgba(255,255,255,0.18)",
-    backgroundColor: "rgba(255,255,255,0.02)",
-    opacity: 0.8,
+  chipGradient: {
+    paddingVertical: 8,
+    paddingHorizontal: 16,
   },
-  chipText: { fontFamily: Fonts.rounded, fontSize: 13 },
+  chipText: {
+    fontFamily: Fonts.rounded,
+    fontSize: 13,
+    paddingVertical: 8,
+    paddingHorizontal: 16,
+    borderRadius: 20,
+    backgroundColor: "#F5F5F5",
+    color: "#666",
+  },
+  chipTextActive: {
+    fontFamily: Fonts.rounded,
+    fontSize: 13,
+    color: "#fff",
+  },
 
   recommendBtn: {
     marginTop: 14,
-    paddingVertical: 12,
-    paddingHorizontal: 14,
     borderRadius: 16,
-    borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.18)",
-    backgroundColor: "rgba(255,255,255,0.05)",
+    overflow: "hidden",
+    shadowColor: "#FF6B9D",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.15,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  recommendBtnGradient: {
+    paddingVertical: 16,
+    paddingHorizontal: 20,
     alignItems: "center",
+    justifyContent: "center",
+  },
+  recommendBtnText: {
+    color: "#fff",
+    fontSize: 16,
+    fontWeight: "700",
   },
 
   explainCard: {
@@ -544,26 +726,24 @@ const styles = StyleSheet.create({
   },
   miniPill: {
     paddingVertical: 6,
-    paddingHorizontal: 10,
-    borderRadius: 999,
-    borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.18)",
-    backgroundColor: "rgba(255,255,255,0.05)",
+    paddingHorizontal: 12,
+    borderRadius: 16,
+    backgroundColor: "#F5F5F5",
   },
-  miniPillText: { fontSize: 12, opacity: 0.85 },
+  miniPillText: { fontSize: 12, color: "#666" },
 
   aiMetaRow: { marginTop: 12, flexDirection: "row", gap: 10, flexWrap: "wrap" },
   aiMetaBox: {
     paddingVertical: 10,
     paddingHorizontal: 12,
-    borderRadius: 14,
+    borderRadius: 12,
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.10)",
-    backgroundColor: "rgba(255,255,255,0.03)",
+    borderColor: "#E5E7EB",
+    backgroundColor: "#F8F9FA",
     minWidth: 150,
   },
-  aiMetaLabel: { opacity: 0.55, fontSize: 12 },
-  aiMetaValue: { marginTop: 4, fontSize: 13 },
+  aiMetaLabel: { color: "#888", fontSize: 12 },
+  aiMetaValue: { marginTop: 4, fontSize: 13, color: "#1A1A1A" },
 
   resultsHeader: {
     flexDirection: "row",

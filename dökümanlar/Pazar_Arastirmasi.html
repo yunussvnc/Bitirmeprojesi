@@ -1,0 +1,1350 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pazar Araştırması ve Rekabet Analizi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            color: white;
+            padding: 60px 20px;
+            margin-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .header p {
+            font-size: 1.3em;
+            opacity: 0.95;
+        }
+
+        .section {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .section-title {
+            font-size: 2.5em;
+            color: #667eea;
+            margin-bottom: 30px;
+            border-bottom: 4px solid #764ba2;
+            padding-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 8px;
+            height: 50px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 5px;
+        }
+
+        .platform-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin: 40px 0;
+        }
+
+        .platform-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+        }
+
+        .platform-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.2);
+            border-color: #667eea;
+        }
+
+        .platform-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 25px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #dee2e6;
+        }
+
+        .platform-logo {
+            width: 100px;
+            height: 100px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+            font-family: 'Segoe UI', Arial, sans-serif;
+        }
+
+        .trendyol-logo {
+            background: #ff6000;
+            color: white;
+        }
+
+        .trendyol-logo::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 0;
+            right: 0;
+            height: 32px;
+            background: #000;
+            transform: translateY(-50%);
+            z-index: 1;
+        }
+
+        .trendyol-logo::after {
+            content: 'trendyol';
+            position: relative;
+            z-index: 2;
+            color: white;
+            font-weight: 600;
+            font-size: 0.8em;
+            letter-spacing: 0.5px;
+            text-transform: lowercase;
+        }
+
+        .yemeksepeti-logo {
+            background: #e31e24;
+            color: white;
+        }
+
+        .yemeksepeti-logo::after {
+            content: 'Yemeksepeti';
+            position: relative;
+            z-index: 1;
+            color: white;
+            font-weight: 600;
+            font-style: italic;
+            font-size: 0.7em;
+            line-height: 1.15;
+            text-align: center;
+            padding: 8px 5px;
+        }
+
+        .googlemaps-logo {
+            background: linear-gradient(135deg, #4285f4 0%, #34a853 50%, #fbbc04 75%, #ea4335 100%);
+            color: white;
+            position: relative;
+        }
+
+        .googlemaps-logo::after {
+            content: 'G';
+            position: relative;
+            z-index: 1;
+            color: white;
+            font-weight: bold;
+            font-size: 3em;
+            font-family: 'Roboto', Arial, sans-serif;
+        }
+
+        .platform-name {
+            flex: 1;
+        }
+
+        .platform-name h3 {
+            font-size: 1.8em;
+            color: #333;
+            margin-bottom: 5px;
+        }
+
+        .platform-name p {
+            color: #666;
+            font-size: 0.95em;
+        }
+
+        .features-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .features-list li {
+            padding: 15px;
+            margin: 10px 0;
+            background: white;
+            border-radius: 10px;
+            border-left: 5px solid #667eea;
+            transition: all 0.3s ease;
+        }
+
+        .features-list li:hover {
+            background: #f8f9fa;
+            transform: translateX(10px);
+            border-left-color: #764ba2;
+        }
+
+        .features-list li::before {
+            content: "✓ ";
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.3em;
+            margin-right: 10px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .comparison-table thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 20px;
+            text-align: left;
+            border-bottom: 1px solid #dee2e6;
+        }
+
+        .comparison-table th {
+            font-weight: 600;
+            font-size: 1.1em;
+        }
+
+        .comparison-table tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        .comparison-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            font-weight: bold;
+        }
+
+        .badge-yes {
+            background: #28a745;
+            color: white;
+        }
+
+        .badge-no {
+            background: #dc3545;
+            color: white;
+        }
+
+        .badge-partial {
+            background: #ffc107;
+            color: #333;
+        }
+
+        .badge-planned {
+            background: #17a2b8;
+            color: white;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 25px 0;
+            border-left: 6px solid #667eea;
+        }
+
+        .highlight-box h4 {
+            color: #333;
+            margin-bottom: 15px;
+            font-size: 1.4em;
+        }
+
+        .highlight-box ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .highlight-box li {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .highlight-box li:last-child {
+            border-bottom: none;
+        }
+
+        .highlight-box li::before {
+            content: "🎯 ";
+            margin-right: 10px;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+
+        .stat-card {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(245, 87, 108, 0.3);
+        }
+
+        .stat-number {
+            font-size: 3em;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .stat-label {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+
+        .timeline {
+            position: relative;
+            padding-left: 40px;
+            margin: 30px 0;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 15px;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 40px;
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -32px;
+            top: 25px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #667eea;
+            border: 4px solid white;
+            box-shadow: 0 0 0 3px #667eea;
+        }
+
+        .timeline-item h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.5em;
+        }
+
+        .timeline-item ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .timeline-item li {
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .timeline-item li:last-child {
+            border-bottom: none;
+        }
+
+        .timeline-item li::before {
+            content: "→ ";
+            color: #667eea;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .footer {
+            text-align: center;
+            color: white;
+            padding: 40px;
+            margin-top: 50px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2em;
+            }
+
+            .section {
+                padding: 25px;
+            }
+
+            .platform-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .comparison-table {
+                font-size: 0.85em;
+            }
+
+            .comparison-table th,
+            .comparison-table td {
+                padding: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📊 Pazar Araştırması ve Rekabet Analizi</h1>
+            <p>Yapay Zeka Destekli Konum Bazlı Kişiselleştirilmiş Mekan Öneri Platformu</p>
+            <p style="margin-top: 15px; font-size: 1em; opacity: 0.9;">Trendyol • Yemeksepeti • Google Maps • Foursquare
+                • Yelp • Getir • TripAdvisor</p>
+        </div>
+
+        <!-- Özet -->
+        <div class="section">
+            <h2 class="section-title">📋 Özet</h2>
+            <p style="font-size: 1.2em; line-height: 1.8; color: #555;">
+                Bu pazar araştırması, mekan öneri platformu pazarındaki önemli oyuncuları analiz ederek,
+                projemizin rekabet avantajlarını ve geliştirilmesi gereken alanları belirlemeyi amaçlamaktadır.
+                Analiz, Trendyol'un öne çıkarma sistemi, Yemeksepeti'nin restoran yorum sistemi ve Google Maps'in
+                yakın konum ve kullanıcı yorumları özelliklerini incelemektedir.
+            </p>
+        </div>
+
+        <!-- Platform Analizleri -->
+        <div class="section">
+            <h2 class="section-title">🏢 Platform Analizleri</h2>
+
+            <div class="platform-grid">
+                <!-- Trendyol -->
+                <div class="platform-card">
+                    <div class="platform-header">
+                        <div class="platform-logo trendyol-logo"></div>
+                        <div class="platform-name">
+                            <h3>Trendyol</h3>
+                            <p>E-ticaret Platformu</p>
+                        </div>
+                    </div>
+                    <div class="highlight-box">
+                        <h4>Ana Özellikler</h4>
+                        <ul>
+                            <li>Premium öne çıkarma sistemi</li>
+                            <li>Featured listings</li>
+                            <li>Arama sonuçlarında öncelik</li>
+                            <li>ROI odaklı fiyatlandırma</li>
+                        </ul>
+                    </div>
+                    <h4 style="margin-top: 25px; color: #667eea;">Bizim Platforma Uygulanabilir</h4>
+                    <ul class="features-list">
+                        <li>Öne çıkarma sistemi (Premium üyelik)</li>
+                        <li>"Öne Çıkan" badge'i ile görsel farklılaştırma</li>
+                        <li>Arama sonuçlarında öncelikli gösterim</li>
+                        <li>İşletme istatistikleri ve analitik</li>
+                    </ul>
+                </div>
+
+                <!-- Yemeksepeti -->
+                <div class="platform-card">
+                    <div class="platform-header">
+                        <div class="platform-logo yemeksepeti-logo"></div>
+                        <div class="platform-name">
+                            <h3>Yemeksepeti</h3>
+                            <p>Online Yemek Sipariş Platformu</p>
+                        </div>
+                    </div>
+                    <div class="highlight-box">
+                        <h4>Ana Özellikler</h4>
+                        <ul>
+                            <li>Detaylı yorum sistemi</li>
+                            <li>Doğrulanmış siparişler</li>
+                            <li>Rating sistemi (1-5 yıldız)</li>
+                            <li>Yorum filtreleme seçenekleri</li>
+                        </ul>
+                    </div>
+                    <h4 style="margin-top: 25px; color: #667eea;">Bizim Platforma Uygulanabilir</h4>
+                    <ul class="features-list">
+                        <li>QR kod doğrulama (sipariş → mekan ziyareti)</li>
+                        <li>Doğrulanmış yorumlar öncelikli gösterim</li>
+                        <li>Fotoğraf ekleme özelliği</li>
+                        <li>Yorum kategorileri (ambiyans, hizmet, fiyat)</li>
+                    </ul>
+                </div>
+
+                <!-- Google Maps -->
+                <div class="platform-card">
+                    <div class="platform-header">
+                        <div class="platform-logo googlemaps-logo"></div>
+                        <div class="platform-name">
+                            <h3>Google Maps</h3>
+                            <p>Harita ve Navigasyon Servisi</p>
+                        </div>
+                    </div>
+                    <div class="highlight-box">
+                        <h4>Ana Özellikler</h4>
+                        <ul>
+                            <li>Yakın konum bulma</li>
+                            <li>Gerçek kullanıcı yorumları</li>
+                            <li>İnteraktif harita görünümü</li>
+                            <li>Navigasyon entegrasyonu</li>
+                        </ul>
+                    </div>
+                    <h4 style="margin-top: 25px; color: #667eea;">Bizim Platforma Uygulanabilir</h4>
+                    <ul class="features-list">
+                        <li>GPS konumuna göre yakın mekan bulma</li>
+                        <li>QR kod doğrulanmış yorumlar (yerel rehber gibi)</li>
+                        <li>Google Maps API entegrasyonu</li>
+                        <li>Marker'lar ile mekan gösterimi</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Rekabet Analizi -->
+        <div class="section">
+            <h2 class="section-title">⚔️ Rekabet Analizi</h2>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Özellik</th>
+                        <th>Bizim Platform</th>
+                        <th>Trendyol</th>
+                        <th>Yemeksepeti</th>
+                        <th>Google Maps</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>AI Öneri Sistemi</strong></td>
+                        <td><span class="badge badge-yes">✅ RAG + LLM</span></td>
+                        <td><span class="badge badge-no">❌</span></td>
+                        <td><span class="badge badge-no">❌</span></td>
+                        <td><span class="badge badge-no">❌</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Doğal Dil Sorgusu</strong></td>
+                        <td><span class="badge badge-yes">✅</span></td>
+                        <td><span class="badge badge-no">❌</span></td>
+                        <td><span class="badge badge-no">❌</span></td>
+                        <td><span class="badge badge-partial">⚠️ Kısmi</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Semantik Arama</strong></td>
+                        <td><span class="badge badge-yes">✅</span></td>
+                        <td><span class="badge badge-no">❌</span></td>
+                        <td><span class="badge badge-no">❌</span></td>
+                        <td><span class="badge badge-partial">⚠️ Kısmi</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>QR Kod Doğrulama</strong></td>
+                        <td><span class="badge badge-planned">🔄 Planlandı</span></td>
+                        <td><span class="badge badge-no">❌</span></td>
+                        <td><span class="badge badge-partial">⚠️ Sipariş</span></td>
+                        <td><span class="badge badge-no">❌</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Öne Çıkarma</strong></td>
+                        <td><span class="badge badge-planned">🔄 Planlandı</span></td>
+                        <td><span class="badge badge-yes">✅</span></td>
+                        <td><span class="badge badge-partial">⚠️ Kısmi</span></td>
+                        <td><span class="badge badge-no">❌</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Yorum Sistemi</strong></td>
+                        <td><span class="badge badge-yes">✅</span></td>
+                        <td><span class="badge badge-no">❌</span></td>
+                        <td><span class="badge badge-yes">✅</span></td>
+                        <td><span class="badge badge-yes">✅</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Beğeni Sistemi</strong></td>
+                        <td><span class="badge badge-planned">🔄 Planlandı</span></td>
+                        <td><span class="badge badge-yes">✅</span></td>
+                        <td><span class="badge badge-no">❌</span></td>
+                        <td><span class="badge badge-no">❌</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Harita Görünümü</strong></td>
+                        <td><span class="badge badge-planned">🔄 Planlandı</span></td>
+                        <td><span class="badge badge-no">❌</span></td>
+                        <td><span class="badge badge-partial">⚠️ Kısmi</span></td>
+                        <td><span class="badge badge-yes">✅</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Yakın Konum</strong></td>
+                        <td><span class="badge badge-yes">✅</span></td>
+                        <td><span class="badge badge-no">❌</span></td>
+                        <td><span class="badge badge-partial">⚠️ Kısmi</span></td>
+                        <td><span class="badge badge-yes">✅</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Öğrenci İndirimi</strong></td>
+                        <td><span class="badge badge-planned">🔄 Planlandı</span></td>
+                        <td><span class="badge badge-no">❌</span></td>
+                        <td><span class="badge badge-no">❌</span></td>
+                        <td><span class="badge badge-no">❌</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Türkçe NLP</strong></td>
+                        <td><span class="badge badge-yes">✅</span></td>
+                        <td><span class="badge badge-no">❌</span></td>
+                        <td><span class="badge badge-partial">⚠️ Kısmi</span></td>
+                        <td><span class="badge badge-partial">⚠️ Kısmi</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Rekabet Avantajlarımız -->
+        <div class="section">
+            <h2 class="section-title">🎯 Rekabet Avantajlarımız</h2>
+
+            <div class="platform-grid">
+                <div class="platform-card">
+                    <h3 style="color: #667eea; margin-bottom: 20px; font-size: 1.5em;">🤖 AI Destekli Öneri Sistemi</h3>
+                    <ul class="features-list">
+                        <li>RAG mimarisi ile akıllı öneriler</li>
+                        <li>Doğal dil işleme</li>
+                        <li>Kişiselleştirilmiş öneriler</li>
+                        <li><strong>Rekabet:</strong> Diğer platformlarda yok</li>
+                    </ul>
+                </div>
+
+                <div class="platform-card">
+                    <h3 style="color: #667eea; margin-bottom: 20px; font-size: 1.5em;">📱 QR Kod Doğrulama</h3>
+                    <ul class="features-list">
+                        <li>Mekan ziyareti doğrulama</li>
+                        <li>Öğrenci indirimleri</li>
+                        <li>Güvenilir yorumlar</li>
+                        <li><strong>Rekabet:</strong> Yemeksepeti'nde sipariş doğrulama var, ama mekan ziyareti yok</li>
+                    </ul>
+                </div>
+
+                <div class="platform-card">
+                    <h3 style="color: #667eea; margin-bottom: 20px; font-size: 1.5em;">🎓 Öğrenci Odaklı</h3>
+                    <ul class="features-list">
+                        <li>Öğrenci indirimleri</li>
+                        <li>Öğrenci dostu mekanlar</li>
+                        <li>QR kod ile bedava/indirimli erişim</li>
+                        <li><strong>Rekabet:</strong> Diğer platformlarda yok</li>
+                    </ul>
+                </div>
+
+                <div class="platform-card">
+                    <h3 style="color: #667eea; margin-bottom: 20px; font-size: 1.5em;">🇹🇷 Türkçe NLP</h3>
+                    <ul class="features-list">
+                        <li>Türkçe sorgu anlama</li>
+                        <li>Türkçe öneri metinleri</li>
+                        <li>Kültürel uyum</li>
+                        <li><strong>Rekabet:</strong> Google Maps'te kısmi, diğerlerinde yok</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Öğrenci Pazarı Analizi -->
+        <div class="section">
+            <h2 class="section-title">🎓 Öğrenci Pazarı Detaylı Analizi</h2>
+
+            <div class="highlight-box" style="background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);">
+                <h4 style="color: #333; margin-bottom: 20px; font-size: 1.6em;">📊 Türkiye'de Öğrenci Pazarı</h4>
+                <div class="stats-grid" style="margin-top: 20px;">
+                    <div class="stat-card" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        <div class="stat-number">8.5M+</div>
+                        <div class="stat-label">Toplam Öğrenci Sayısı</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                        <div class="stat-number">207</div>
+                        <div class="stat-label">Üniversite Sayısı</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                        <div class="stat-number">%68</div>
+                        <div class="stat-label">Mobil Uygulama Kullanımı</div>
+                    </div>
+                    <div class="stat-card" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
+                        <div class="stat-number">₺2.5K</div>
+                        <div class="stat-label">Aylık Ortalama Harcama</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="color: #667eea; margin: 40px 0 20px 0; font-size: 1.8em;">Öğrenci İhtiyaçları ve Davranışları
+            </h3>
+
+            <div class="platform-grid">
+                <div class="platform-card">
+                    <h4 style="color: #667eea; margin-bottom: 15px;">💰 Bütçe Odaklılık</h4>
+                    <ul class="features-list">
+                        <li>Öğrenciler fiyat hassasiyeti yüksek</li>
+                        <li>İndirim ve kampanyalar önemli</li>
+                        <li>Öğrenci kartı ile indirim beklentisi</li>
+                        <li>Uygun fiyatlı mekan arayışı</li>
+                    </ul>
+                </div>
+
+                <div class="platform-card">
+                    <h4 style="color: #667eea; margin-bottom: 15px;">📍 Konum Önceliği</h4>
+                    <ul class="features-list">
+                        <li>Kampüs yakını mekanlar tercih edilir</li>
+                        <li>Yürüme mesafesi önemli</li>
+                        <li>Toplu taşıma erişilebilirliği</li>
+                        <li>Yakın çevre keşfi</li>
+                    </ul>
+                </div>
+
+                <div class="platform-card">
+                    <h4 style="color: #667eea; margin-bottom: 15px;">👥 Sosyal Aktivite</h4>
+                    <ul class="features-list">
+                        <li>Arkadaş grupları ile mekan ziyareti</li>
+                        <li>Sosyal medya paylaşımı</li>
+                        <li>Yeni yerler keşfetme isteği</li>
+                        <li>Etkinlik ve organizasyonlar</li>
+                    </ul>
+                </div>
+
+                <div class="platform-card">
+                    <h4 style="color: #667eea; margin-bottom: 15px;">📱 Teknoloji Kullanımı</h4>
+                    <ul class="features-list">
+                        <li>Yüksek mobil uygulama kullanımı</li>
+                        <li>QR kod okuma alışkanlığı</li>
+                        <li>Sosyal medya entegrasyonu</li>
+                        <li>Anlık bildirim tercihi</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 style="color: #667eea; margin: 40px 0 20px 0; font-size: 1.8em;">Öğrenci Odaklı Özelliklerimiz</h3>
+
+            <div class="platform-grid">
+                <div class="platform-card" style="background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);">
+                    <h4 style="color: #333; margin-bottom: 15px; font-size: 1.5em;">🎫 QR Kod ile Öğrenci Doğrulama</h4>
+                    <ul class="features-list" style="background: rgba(255,255,255,0.8);">
+                        <li>Öğrenci kartı QR kod ile doğrulama</li>
+                        <li>Otomatik indirim uygulama</li>
+                        <li>Öğrenci dostu mekan filtreleme</li>
+                        <li>Öğrenci özel kampanyalar</li>
+                    </ul>
+                </div>
+
+                <div class="platform-card" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                    <h4 style="color: #333; margin-bottom: 15px; font-size: 1.5em;">💸 Öğrenci İndirim Sistemi</h4>
+                    <ul class="features-list" style="background: rgba(255,255,255,0.8);">
+                        <li>%10-50 arası öğrenci indirimleri</li>
+                        <li>Öğrenci özel fiyatlandırma</li>
+                        <li>Kampüs yakını özel fırsatlar</li>
+                        <li>Dönem başı kampanyalar</li>
+                    </ul>
+                </div>
+
+                <div class="platform-card" style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);">
+                    <h4 style="color: #333; margin-bottom: 15px; font-size: 1.5em;">🏫 Kampüs Bazlı Öneriler</h4>
+                    <ul class="features-list" style="background: rgba(255,255,255,0.8);">
+                        <li>Üniversite bazlı mekan önerileri</li>
+                        <li>Kampüs yakını mekan haritası</li>
+                        <li>Öğrenci toplulukları ile işbirliği</li>
+                        <li>Kampüs etkinlikleri entegrasyonu</li>
+                    </ul>
+                </div>
+
+                <div class="platform-card" style="background: linear-gradient(135deg, #d299c2 0%, #fef9d7 100%);">
+                    <h4 style="color: #333; margin-bottom: 15px; font-size: 1.5em;">📚 Öğrenci Dostu Mekanlar</h4>
+                    <ul class="features-list" style="background: rgba(255,255,255,0.8);">
+                        <li>Çalışma ortamı uygun mekanlar</li>
+                        <li>WiFi ve priz erişimi</li>
+                        <li>Uygun fiyatlı menüler</li>
+                        <li>Öğrenci gruplarına uygun alan</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h3 style="color: #667eea; margin: 40px 0 20px 0; font-size: 1.8em;">Rekabet Analizi: Öğrenci Pazarı</h3>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Özellik</th>
+                        <th>Bizim Platform</th>
+                        <th>Google Maps</th>
+                        <th>Yemeksepeti</th>
+                        <th>Getir</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Öğrenci Doğrulama</strong></td>
+                        <td><span class="badge badge-yes">✅ QR Kod</span></td>
+                        <td><span class="badge badge-no">❌</span></td>
+                        <td><span class="badge badge-no">❌</span></td>
+                        <td><span class="badge badge-no">❌</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Öğrenci İndirimi</strong></td>
+                        <td><span class="badge badge-yes">✅ Otomatik</span></td>
+                        <td><span class="badge badge-no">❌</span></td>
+                        <td><span class="badge badge-partial">⚠️ Kısmi</span></td>
+                        <td><span class="badge badge-no">❌</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Kampüs Bazlı Öneriler</strong></td>
+                        <td><span class="badge badge-yes">✅</span></td>
+                        <td><span class="badge badge-partial">⚠️ Genel</span></td>
+                        <td><span class="badge badge-no">❌</span></td>
+                        <td><span class="badge badge-no">❌</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Öğrenci Topluluk Entegrasyonu</strong></td>
+                        <td><span class="badge badge-yes">✅ Planlandı</span></td>
+                        <td><span class="badge badge-no">❌</span></td>
+                        <td><span class="badge badge-no">❌</span></td>
+                        <td><span class="badge badge-no">❌</span></td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bütçe Odaklı Filtreleme</strong></td>
+                        <td><span class="badge badge-yes">✅</span></td>
+                        <td><span class="badge badge-partial">⚠️ Kısmi</span></td>
+                        <td><span class="badge badge-partial">⚠️ Kısmi</span></td>
+                        <td><span class="badge badge-partial">⚠️ Kısmi</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Ek Platform Analizleri -->
+        <div class="section">
+            <h2 class="section-title">🌐 Ek Platform Analizleri</h2>
+
+            <div class="platform-grid">
+                <!-- Foursquare -->
+                <div class="platform-card">
+                    <div class="platform-header">
+                        <div class="platform-logo"
+                            style="background: linear-gradient(135deg, #0072ff 0%, #00c6ff 100%);">F</div>
+                        <div class="platform-name">
+                            <h3>Foursquare</h3>
+                            <p>Konum Bazlı Sosyal Ağ</p>
+                        </div>
+                    </div>
+                    <div class="highlight-box">
+                        <h4>Özellikler</h4>
+                        <ul>
+                            <li>Check-in sistemi</li>
+                            <li>Yer bazlı öneriler</li>
+                            <li>Kullanıcı yorumları</li>
+                            <li>Kategori bazlı arama</li>
+                        </ul>
+                    </div>
+                    <h4 style="margin-top: 25px; color: #667eea;">Öğrenilecek Noktalar</h4>
+                    <ul class="features-list">
+                        <li>Check-in mekanizması → QR kod doğrulama</li>
+                        <li>Kategori bazlı filtreleme</li>
+                        <li>Sosyal özellikler</li>
+                    </ul>
+                </div>
+
+                <!-- Yelp -->
+                <div class="platform-card">
+                    <div class="platform-header">
+                        <div class="platform-logo"
+                            style="background: linear-gradient(135deg, #d32323 0%, #ff1a1a 100%);">Y</div>
+                        <div class="platform-name">
+                            <h3>Yelp</h3>
+                            <p>Yerel İşletme Rehberi</p>
+                        </div>
+                    </div>
+                    <div class="highlight-box">
+                        <h4>Özellikler</h4>
+                        <ul>
+                            <li>Detaylı yorum sistemi</li>
+                            <li>Fotoğraf paylaşımı</li>
+                            <li>Filtreleme seçenekleri</li>
+                            <li>İşletme sahibi yanıtları</li>
+                        </ul>
+                    </div>
+                    <h4 style="margin-top: 25px; color: #667eea;">Öğrenilecek Noktalar</h4>
+                    <ul class="features-list">
+                        <li>Yorum kalitesi kontrolü</li>
+                        <li>Fotoğraf moderasyonu</li>
+                        <li>İşletme sahibi etkileşimi</li>
+                    </ul>
+                </div>
+
+                <!-- Getir -->
+                <div class="platform-card">
+                    <div class="platform-header">
+                        <div class="platform-logo"
+                            style="background: linear-gradient(135deg, #5c3d90 0%, #8b5fbf 100%);">G</div>
+                        <div class="platform-name">
+                            <h3>Getir</h3>
+                            <p>Hızlı Teslimat Platformu</p>
+                        </div>
+                    </div>
+                    <div class="highlight-box">
+                        <h4>Özellikler</h4>
+                        <ul>
+                            <li>Hızlı teslimat</li>
+                            <li>Kampüs bazlı hizmet</li>
+                            <li>Öğrenci indirimleri</li>
+                            <li>Mobil odaklı</li>
+                        </ul>
+                    </div>
+                    <h4 style="margin-top: 25px; color: #667eea;">Öğrenilecek Noktalar</h4>
+                    <ul class="features-list">
+                        <li>Kampüs bazlı segmentasyon</li>
+                        <li>Öğrenci hedefleme</li>
+                        <li>Hızlı kullanıcı kazanımı</li>
+                    </ul>
+                </div>
+
+                <!-- TripAdvisor -->
+                <div class="platform-card">
+                    <div class="platform-header">
+                        <div class="platform-logo"
+                            style="background: linear-gradient(135deg, #00af87 0%, #00d4aa 100%);">T</div>
+                        <div class="platform-name">
+                            <h3>TripAdvisor</h3>
+                            <p>Seyahat ve Mekan Rehberi</p>
+                        </div>
+                    </div>
+                    <div class="highlight-box">
+                        <h4>Özellikler</h4>
+                        <ul>
+                            <li>Kapsamlı yorum sistemi</li>
+                            <li>Rating sistemi</li>
+                            <li>Fotoğraf galerisi</li>
+                            <li>Kullanıcı sıralaması</li>
+                        </ul>
+                    </div>
+                    <h4 style="margin-top: 25px; color: #667eea;">Öğrenilecek Noktalar</h4>
+                    <ul class="features-list">
+                        <li>Yorum sıralama algoritması</li>
+                        <li>Kullanıcı güvenilirlik sistemi</li>
+                        <li>Fotoğraf yönetimi</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pazar Büyüklüğü ve Trendler -->
+        <div class="section">
+            <h2 class="section-title">📈 Pazar Büyüklüğü ve Trendler</h2>
+
+            <div class="highlight-box"
+                style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                <h4 style="color: white; margin-bottom: 20px; font-size: 1.6em;">Türkiye Lokasyon Bazlı Servisler Pazarı
+                </h4>
+                <div class="stats-grid" style="margin-top: 20px;">
+                    <div class="stat-card" style="background: rgba(255,255,255,0.2);">
+                        <div class="stat-number">$2.1B</div>
+                        <div class="stat-label">Pazar Büyüklüğü (2024)</div>
+                    </div>
+                    <div class="stat-card" style="background: rgba(255,255,255,0.2);">
+                        <div class="stat-number">%18</div>
+                        <div class="stat-label">Yıllık Büyüme Oranı</div>
+                    </div>
+                    <div class="stat-card" style="background: rgba(255,255,255,0.2);">
+                        <div class="stat-number">45M+</div>
+                        <div class="stat-label">Aktif Mobil Kullanıcı</div>
+                    </div>
+                    <div class="stat-card" style="background: rgba(255,255,255,0.2);">
+                        <div class="stat-number">%72</div>
+                        <div class="stat-label">Mobil Uygulama Tercihi</div>
+                    </div>
+                </div>
+            </div>
+
+            <h3 style="color: #667eea; margin: 40px 0 20px 0; font-size: 1.8em;">Pazar Trendleri</h3>
+
+            <div class="platform-grid">
+                <div class="platform-card">
+                    <h4 style="color: #667eea; margin-bottom: 15px;">🤖 AI ve Kişiselleştirme</h4>
+                    <ul class="features-list">
+                        <li>AI destekli öneriler artıyor</li>
+                        <li>Kişiselleştirilmiş deneyim talebi</li>
+                        <li>Doğal dil işleme kullanımı</li>
+                        <li>Makine öğrenmesi entegrasyonu</li>
+                    </ul>
+                </div>
+
+                <div class="platform-card">
+                    <h4 style="color: #667eea; margin-bottom: 15px;">📱 Mobil Öncelik</h4>
+                    <ul class="features-list">
+                        <li>Mobil uygulama kullanımı artıyor</li>
+                        <li>QR kod kullanımı yaygınlaşıyor</li>
+                        <li>Konum bazlı servisler büyüyor</li>
+                        <li>Anlık bildirimler önemli</li>
+                    </ul>
+                </div>
+
+                <div class="platform-card">
+                    <h4 style="color: #667eea; margin-bottom: 15px;">🎯 Segmentasyon</h4>
+                    <ul class="features-list">
+                        <li>Öğrenci odaklı platformlar</li>
+                        <li>Niche pazar fırsatları</li>
+                        <li>Yerel işletme desteği</li>
+                        <li>Topluluk bazlı özellikler</li>
+                    </ul>
+                </div>
+
+                <div class="platform-card">
+                    <h4 style="color: #667eea; margin-bottom: 15px;">💬 Sosyal Etkileşim</h4>
+                    <ul class="features-list">
+                        <li>Yorum ve beğeni sistemleri</li>
+                        <li>Sosyal medya entegrasyonu</li>
+                        <li>Kullanıcı içerik üretimi</li>
+                        <li>Topluluk oluşturma</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Kullanıcı Segmentasyonu -->
+        <div class="section">
+            <h2 class="section-title">👥 Kullanıcı Segmentasyonu</h2>
+
+            <div class="platform-grid">
+                <div class="platform-card" style="background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);">
+                    <h3 style="color: #333; margin-bottom: 20px; font-size: 1.8em;">🎓 Öğrenciler (Hedef Kitle #1)</h3>
+                    <ul class="features-list" style="background: rgba(255,255,255,0.8);">
+                        <li><strong>Yaş:</strong> 18-25</li>
+                        <li><strong>Özellikler:</strong> Bütçe odaklı, sosyal, teknoloji kullanıcısı</li>
+                        <li><strong>İhtiyaçlar:</strong> Uygun fiyat, kampüs yakını, indirim</li>
+                        <li><strong>Davranış:</strong> Mobil uygulama, QR kod, sosyal paylaşım</li>
+                        <li><strong>Pazar Payı:</strong> %40 (Hedef)</li>
+                    </ul>
+                </div>
+
+                <div class="platform-card" style="background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);">
+                    <h3 style="color: #333; margin-bottom: 20px; font-size: 1.8em;">👨‍💼 Genç Profesyoneller</h3>
+                    <ul class="features-list" style="background: rgba(255,255,255,0.8);">
+                        <li><strong>Yaş:</strong> 25-35</li>
+                        <li><strong>Özellikler:</strong> Kalite odaklı, zaman kısıtlı</li>
+                        <li><strong>İhtiyaçlar:</strong> Hızlı öneri, kaliteli mekan, konum</li>
+                        <li><strong>Davranış:</strong> AI öneriler, filtreleme, değerlendirme</li>
+                        <li><strong>Pazar Payı:</strong> %30 (Hedef)</li>
+                    </ul>
+                </div>
+
+                <div class="platform-card" style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);">
+                    <h3 style="color: #333; margin-bottom: 20px; font-size: 1.8em;">👨‍👩‍👧‍👦 Aileler</h3>
+                    <ul class="features-list" style="background: rgba(255,255,255,0.8);">
+                        <li><strong>Yaş:</strong> 30-45</li>
+                        <li><strong>Özellikler:</strong> Güvenlik odaklı, çocuk dostu</li>
+                        <li><strong>İhtiyaçlar:</strong> Aile dostu, güvenli, geniş alan</li>
+                        <li><strong>Davranış:</strong> Yorum okuma, fotoğraf inceleme</li>
+                        <li><strong>Pazar Payı:</strong> %20 (Hedef)</li>
+                    </ul>
+                </div>
+
+                <div class="platform-card" style="background: linear-gradient(135deg, #d4fc79 0%, #96e6a1 100%);">
+                    <h3 style="color: #333; margin-bottom: 20px; font-size: 1.8em;">🌍 Turistler</h3>
+                    <ul class="features-list" style="background: rgba(255,255,255,0.8);">
+                        <li><strong>Yaş:</strong> 25-60</li>
+                        <li><strong>Özellikler:</strong> Yerel deneyim arayışı</li>
+                        <li><strong>İhtiyaçlar:</strong> Yerel mekanlar, kültürel deneyim</li>
+                        <li><strong>Davranış:</strong> Konum bazlı arama, yorum okuma</li>
+                        <li><strong>Pazar Payı:</strong> %10 (Hedef)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- SWOT Analizi -->
+        <div class="section">
+            <h2 class="section-title">🔍 SWOT Analizi</h2>
+
+            <div class="platform-grid">
+                <div class="platform-card" style="background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);">
+                    <h3 style="color: #333; margin-bottom: 20px; font-size: 1.8em;">💪 Güçlü Yönler (Strengths)</h3>
+                    <ul class="features-list" style="background: rgba(255,255,255,0.8);">
+                        <li>AI destekli RAG mimarisi</li>
+                        <li>Öğrenci odaklı özellikler</li>
+                        <li>QR kod doğrulama sistemi</li>
+                        <li>Türkçe NLP desteği</li>
+                        <li>Kişiselleştirilmiş öneriler</li>
+                        <li>Yerel pazar odaklı</li>
+                    </ul>
+                </div>
+
+                <div class="platform-card" style="background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%);">
+                    <h3 style="color: #333; margin-bottom: 20px; font-size: 1.8em;">⚠️ Zayıf Yönler (Weaknesses)</h3>
+                    <ul class="features-list" style="background: rgba(255,255,255,0.8);">
+                        <li>Yeni platform, kullanıcı tabanı küçük</li>
+                        <li>Sınırlı mekan verisi (25 mekan)</li>
+                        <li>Düşük marka bilinirliği</li>
+                        <li>Finansal kaynaklar sınırlı</li>
+                        <li>Network effect eksikliği</li>
+                        <li>Pazarlama bütçesi yetersiz</li>
+                    </ul>
+                </div>
+
+                <div class="platform-card" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                    <h3 style="color: #333; margin-bottom: 20px; font-size: 1.8em;">🚀 Fırsatlar (Opportunities)</h3>
+                    <ul class="features-list" style="background: rgba(255,255,255,0.8);">
+                        <li>Büyüyen öğrenci pazarı (8.5M+)</li>
+                        <li>AI teknolojisi trendi</li>
+                        <li>Mobil uygulama kullanım artışı</li>
+                        <li>Yerel işletme desteği ihtiyacı</li>
+                        <li>Niche pazar fırsatları</li>
+                        <li>Üniversite işbirlikleri</li>
+                    </ul>
+                </div>
+
+                <div class="platform-card" style="background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);">
+                    <h3 style="color: #333; margin-bottom: 20px; font-size: 1.8em;">⚠️ Tehditler (Threats)</h3>
+                    <ul class="features-list" style="background: rgba(255,255,255,0.8);">
+                        <li>Google Maps'in güçlü konumu</li>
+                        <li>Büyük platformların AI entegrasyonu</li>
+                        <li>Yeni rakiplerin girişi</li>
+                        <li>Teknoloji hızla değişiyor</li>
+                        <li>Veri toplama zorluğu</li>
+                        <li>Finansal rekabet</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Fırsatlar ve Tehditler -->
+        <div class="section">
+            <h2 class="section-title">💡 Fırsatlar ve Tehditler</h2>
+
+            <div class="platform-grid">
+                <div class="platform-card" style="background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);">
+                    <h3 style="color: #333; margin-bottom: 20px; font-size: 1.8em;">✨ Fırsatlar</h3>
+                    <ul class="features-list" style="background: rgba(255,255,255,0.7);">
+                        <li><strong>AI Teknolojisi:</strong> RAG mimarisi ile farklılaşma</li>
+                        <li><strong>Öğrenci Pazarı:</strong> Büyük öğrenci nüfusu</li>
+                        <li><strong>Yerel İşletmeler:</strong> Küçük işletmeler için görünürlük</li>
+                        <li><strong>Türkçe NLP:</strong> Yerel pazar avantajı</li>
+                    </ul>
+                </div>
+
+                <div class="platform-card" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                    <h3 style="color: #333; margin-bottom: 20px; font-size: 1.8em;">⚠️ Tehditler</h3>
+                    <ul class="features-list" style="background: rgba(255,255,255,0.7);">
+                        <li><strong>Büyük Platformlar:</strong> Google Maps'in güçlü konumu</li>
+                        <li><strong>Teknoloji Gelişimi:</strong> Büyük platformların AI entegrasyonu</li>
+                        <li><strong>Veri Toplama:</strong> Mekan verisi toplama zorluğu</li>
+                        <li><strong>Finansman:</strong> Pazarlama bütçesi gereksinimi</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Öneriler -->
+        <div class="section">
+            <h2 class="section-title">🚀 Öneriler ve Planlar</h2>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <h4>📅 Kısa Vadeli (1-3 Ay)</h4>
+                    <ul>
+                        <li>QR kod doğrulama implementasyonu</li>
+                        <li>Öğrenci indirim sistemi</li>
+                        <li>Google Maps entegrasyonu</li>
+                        <li>Yorum sistemi iyileştirmeleri</li>
+                        <li>Öne çıkarma sistemi</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <h4>📅 Orta Vadeli (3-6 Ay)</h4>
+                    <ul>
+                        <li>Kullanıcı kazanımı (sosyal medya, influencer)</li>
+                        <li>Mekan verisi artırma</li>
+                        <li>Beğeni sistemi</li>
+                        <li>Push notification</li>
+                        <li>Performans iyileştirme</li>
+                    </ul>
+                </div>
+
+                <div class="timeline-item">
+                    <h4>📅 Uzun Vadeli (6-12 Ay)</h4>
+                    <ul>
+                        <li>Production deployment</li>
+                        <li>Monetizasyon modelleri</li>
+                        <li>Yeni şehirler ve kategoriler</li>
+                        <li>İş ortaklıkları (üniversiteler, dernekler)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- İstatistikler -->
+        <div class="section">
+            <h2 class="section-title">📊 Analiz Özeti</h2>
+
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">7</div>
+                    <div class="stat-label">Analiz Edilen Platform</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">Karşılaştırılan Özellik</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">6</div>
+                    <div class="stat-label">Rekabet Avantajı</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">4</div>
+                    <div class="stat-label">Kullanıcı Segmenti</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">8.5M+</div>
+                    <div class="stat-label">Hedef Öğrenci Sayısı</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">$2.1B</div>
+                    <div class="stat-label">Pazar Büyüklüğü</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sonuç -->
+        <div class="section">
+            <h2 class="section-title">🎯 Sonuç ve Stratejik Öneriler</h2>
+            <div class="highlight-box">
+                <p style="font-size: 1.2em; line-height: 1.8;">
+                    Kapsamlı pazar araştırması, projemizin güçlü yönlerini ve geliştirilmesi gereken alanları ortaya
+                    koymaktadır.
+                    <strong>AI destekli öneri sistemi (RAG + LLM)</strong>, <strong>QR kod doğrulama</strong> ve
+                    <strong>öğrenci odaklı özellikler</strong> rekabet avantajlarımızdır.
+                    <strong>8.5 milyon+ öğrenci</strong> hedef kitlemiz için büyük bir fırsat sunmaktadır.
+                </p>
+
+                <h4 style="margin-top: 30px; color: #333; font-size: 1.4em;">🎯 Stratejik Öncelikler</h4>
+
+                <div class="platform-grid" style="margin-top: 20px;">
+                    <div class="platform-card" style="background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%);">
+                        <h4 style="color: #333; margin-bottom: 15px;">1️⃣ Öğrenci Pazarı Odaklılık</h4>
+                        <ul class="features-list" style="background: rgba(255,255,255,0.8);">
+                            <li>QR kod ile öğrenci doğrulama</li>
+                            <li>Öğrenci indirim sistemi</li>
+                            <li>Kampüs bazlı öneriler</li>
+                            <li>Üniversite işbirlikleri</li>
+                        </ul>
+                    </div>
+
+                    <div class="platform-card" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                        <h4 style="color: #333; margin-bottom: 15px;">2️⃣ AI Teknolojisi Farklılaşması</h4>
+                        <ul class="features-list" style="background: rgba(255,255,255,0.8);">
+                            <li>RAG mimarisi geliştirme</li>
+                            <li>Türkçe NLP iyileştirme</li>
+                            <li>Kişiselleştirme algoritmaları</li>
+                            <li>Doğal dil sorgu geliştirme</li>
+                        </ul>
+                    </div>
+
+                    <div class="platform-card" style="background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);">
+                        <h4 style="color: #333; margin-bottom: 15px;">3️⃣ Kullanıcı Kazanımı</h4>
+                        <ul class="features-list" style="background: rgba(255,255,255,0.8);">
+                            <li>Öğrenci toplulukları ile işbirliği</li>
+                            <li>Sosyal medya pazarlama</li>
+                            <li>Influencer işbirlikleri</li>
+                            <li>Referans programı</li>
+                        </ul>
+                    </div>
+
+                    <div class="platform-card" style="background: linear-gradient(135deg, #d299c2 0%, #fef9d7 100%);">
+                        <h4 style="color: #333; margin-bottom: 15px;">4️⃣ Mekan Verisi Artırma</h4>
+                        <ul class="features-list" style="background: rgba(255,255,255,0.8);">
+                            <li>İşletme kayıt kampanyası</li>
+                            <li>Veri toplama otomasyonu</li>
+                            <li>Yerel işletme ortaklıkları</li>
+                            <li>Kullanıcı içerik üretimi</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <p style="margin-top: 30px; font-size: 1.1em; line-height: 1.8;">
+                    <strong>Kısa vadede (1-3 ay):</strong> QR kod sistemi, öğrenci doğrulama, Google Maps entegrasyonu
+                    ve yorum sistemi iyileştirmelerine odaklanılmalıdır.
+                </p>
+                <p style="margin-top: 15px; font-size: 1.1em; line-height: 1.8;">
+                    <strong>Orta vadede (3-6 ay):</strong> Öğrenci pazarı kazanımı, üniversite işbirlikleri, mekan
+                    verisi artırma ve beğeni sistemi geliştirilmelidir.
+                </p>
+                <p style="margin-top: 15px; font-size: 1.1em; line-height: 1.8;">
+                    <strong>Uzun vadede (6-12 ay):</strong> Production deployment, monetizasyon modelleri, yeni şehirler
+                    ve ölçeklenebilirlik sağlanmalıdır.
+                </p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p><strong>Yapay Zeka Destekli Konum Bazlı Kişiselleştirilmiş Mekan Öneri Platformu</strong></p>
+            <p style="margin-top: 15px; opacity: 0.9;">Pazar Araştırması ve Rekabet Analizi Raporu</p>
+            <p style="margin-top: 10px; opacity: 0.8; font-size: 0.9em;">Tarih: Ocak 2025</p>
+        </div>
+    </div>
+</body>
+
+</html>
+
+</html>

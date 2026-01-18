@@ -2,6 +2,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Link, router, useLocalSearchParams } from "expo-router";
 import { useEffect, useMemo, useState } from "react";
 import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
+import { LinearGradient } from "expo-linear-gradient";
+import { BlurView } from "expo-blur";
 
 import ParallaxScrollView from "@/components/parallax-scroll-view";
 import { ThemedText } from "@/components/themed-text";
@@ -90,11 +92,20 @@ export default function PlaceDetailScreen() {
 
   return (
     <ParallaxScrollView
-      headerBackgroundColor={{ light: "#D0D0D0", dark: "#353636" }}
+      headerBackgroundColor={{ light: "#FFFFFF", dark: "#1A1A1A" }}
       headerImage={
         <View style={styles.heroWrap}>
           <Image source={heroSource} style={styles.heroImage} resizeMode="cover" />
-          <View style={styles.heroOverlay} />
+          <LinearGradient
+            colors={[
+              "transparent",
+              "rgba(255, 107, 157, 0.2)",
+              "rgba(196, 69, 105, 0.4)",
+            ]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 0, y: 1 }}
+            style={styles.heroOverlay}
+          />
           <View style={styles.heroTopRow}>
             <View style={styles.heroLeftPill}>
               <IconSymbol size={14} color="#fff" name="mappin.and.ellipse" />
@@ -112,14 +123,26 @@ export default function PlaceDetailScreen() {
                   subtitle: "Detay ekranı (demo) — backend gelince zenginleşecek.",
                 })
               }
-              style={[
-                styles.saveBtn,
-                saved ? styles.saveBtnActive : styles.saveBtnInactive,
-              ]}
+              style={styles.saveBtn}
             >
-              <ThemedText type="defaultSemiBold" style={{ fontSize: 12 }}>
-                {saved ? "Kaydedildi" : "Kaydet"}
-              </ThemedText>
+              <BlurView intensity={20} style={styles.saveBtnBlur}>
+                {saved ? (
+                  <LinearGradient
+                    colors={["#667eea", "#764ba2"]}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 0 }}
+                    style={styles.saveBtnGradient}
+                  >
+                    <ThemedText type="defaultSemiBold" style={styles.saveBtnText}>
+                      Kaydedildi
+                    </ThemedText>
+                  </LinearGradient>
+                ) : (
+                  <ThemedText type="defaultSemiBold" style={styles.saveBtnTextInactive}>
+                    Kaydet
+                  </ThemedText>
+                )}
+              </BlurView>
             </TouchableOpacity>
           </View>
         </View>
@@ -144,7 +167,16 @@ export default function PlaceDetailScreen() {
           onPress={() => router.push("/(tabs)/explore")}
           style={styles.actionBtn}
         >
-          <ThemedText type="defaultSemiBold">Keşfet’e dön</ThemedText>
+          <LinearGradient
+            colors={["#667eea", "#764ba2"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+            style={styles.actionBtnGradient}
+          >
+            <ThemedText type="defaultSemiBold" style={styles.actionBtnText}>
+              Keşfet&apos;e dön
+            </ThemedText>
+          </LinearGradient>
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -152,7 +184,16 @@ export default function PlaceDetailScreen() {
           onPress={() => router.push("/(tabs)/saved")}
           style={styles.actionBtn}
         >
-          <ThemedText type="defaultSemiBold">Saved’e git</ThemedText>
+          <LinearGradient
+            colors={["#FF6B9D", "#C44569"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+            style={styles.actionBtnGradient}
+          >
+            <ThemedText type="defaultSemiBold" style={styles.actionBtnText}>
+              Saved&apos;e git
+            </ThemedText>
+          </LinearGradient>
         </TouchableOpacity>
 
         <TouchableOpacity
@@ -160,7 +201,16 @@ export default function PlaceDetailScreen() {
           onPress={() => router.push("/scan")}
           style={styles.actionBtn}
         >
-          <ThemedText type="defaultSemiBold">Scan’e git</ThemedText>
+          <LinearGradient
+            colors={["#FF6B9D", "#C44569"]}
+            start={{ x: 0, y: 0 }}
+            end={{ x: 1, y: 0 }}
+            style={styles.actionBtnGradient}
+          >
+            <ThemedText type="defaultSemiBold" style={styles.actionBtnText}>
+              Scan&apos;e git
+            </ThemedText>
+          </LinearGradient>
         </TouchableOpacity>
       </View>
 
@@ -310,22 +360,34 @@ const styles = StyleSheet.create({
   heroLeftText: { fontSize: 12, opacity: 0.92 },
 
   saveBtn: {
-    paddingVertical: 8,
-    paddingHorizontal: 10,
     borderRadius: 999,
-    borderWidth: 1,
+    overflow: "hidden",
     zIndex: 50,
     elevation: 50,
+    shadowColor: "#667eea",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
   },
-  saveBtnActive: {
-    borderColor: "rgba(255,255,255,0.85)",
-    backgroundColor: "rgba(255,255,255,0.12)",
-    opacity: 1,
+  saveBtnBlur: {
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    backgroundColor: "rgba(255, 255, 255, 0.2)",
   },
-  saveBtnInactive: {
-    borderColor: "rgba(255,255,255,0.18)",
-    backgroundColor: "rgba(0,0,0,0.26)",
-    opacity: 0.95,
+  saveBtnGradient: {
+    paddingVertical: 8,
+    paddingHorizontal: 12,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  saveBtnText: {
+    fontSize: 12,
+    color: "#fff",
+  },
+  saveBtnTextInactive: {
+    fontSize: 12,
+    color: "#fff",
+    opacity: 0.9,
   },
 
   titleContainer: { flexDirection: "row", gap: 8 },
@@ -334,13 +396,24 @@ const styles = StyleSheet.create({
 
   actionRow: { marginTop: 12, flexDirection: "row", flexWrap: "wrap", gap: 10 },
   actionBtn: {
-    paddingVertical: 12,
-    paddingHorizontal: 14,
     borderRadius: 16,
-    borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.18)",
-    backgroundColor: "rgba(255,255,255,0.05)",
+    overflow: "hidden",
+    shadowColor: "#FF6B9D",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.15,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  actionBtnGradient: {
+    paddingVertical: 12,
+    paddingHorizontal: 16,
     alignItems: "center",
+    justifyContent: "center",
+  },
+  actionBtnText: {
+    color: "#fff",
+    fontSize: 14,
+    fontWeight: "700",
   },
 
   sectionCard: {
@@ -361,14 +434,25 @@ const styles = StyleSheet.create({
 
   primaryBtn: {
     marginTop: 12,
-    paddingVertical: 12,
-    paddingHorizontal: 14,
     borderRadius: 16,
-    borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.18)",
-    backgroundColor: "rgba(255,255,255,0.05)",
-    alignItems: "center",
+    overflow: "hidden",
     alignSelf: "flex-start",
+    shadowColor: "#FF6B9D",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.15,
+    shadowRadius: 4,
+    elevation: 2,
+  },
+  primaryBtnGradient: {
+    paddingVertical: 14,
+    paddingHorizontal: 20,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  primaryBtnText: {
+    color: "#fff",
+    fontSize: 15,
+    fontWeight: "700",
   },
 
   tinyHint: { opacity: 0.55, marginTop: 10, fontSize: 12, lineHeight: 16 },
