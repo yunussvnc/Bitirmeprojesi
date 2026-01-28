@@ -37,7 +37,8 @@ def authenticate_user(db: Session, email: str, password: str):
 # --- MEKAN (PLACE) İŞLEMLERİ ---
 
 def get_places(db: Session, skip: int = 0, limit: int = 100):
-    return db.query(models.Place).offset(skip).limit(limit).all()
+    # Yeni eklenen mekanlar önce gelsin (ID'ye göre ters sıralama)
+    return db.query(models.Place).order_by(models.Place.id.desc()).offset(skip).limit(limit).all()
 
 def create_place(db: Session, place: schemas.PlaceCreate):
     db_place = models.Place(

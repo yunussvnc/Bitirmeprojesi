@@ -7,6 +7,7 @@ except Exception:
     llm_rerank_and_explain = None
 
 from fastapi import FastAPI, Depends, HTTPException, status
+from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from typing import List
 
@@ -17,6 +18,22 @@ from database import engine, Base, SessionLocal
 Base.metadata.create_all(bind=engine)
 
 app = FastAPI(title="Mekan Öneri Sistemi API")
+
+# CORS Middleware - Mobile app için gerekli
+# Production'da environment variable'dan alınmalı
+import os
+ALLOWED_ORIGINS = os.getenv(
+    "ALLOWED_ORIGINS",
+    "http://localhost:8081,exp://192.168.1.14:8081"
+).split(",")
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=ALLOWED_ORIGINS,
+    allow_credentials=True,
+    allow_methods=["GET", "POST", "PUT", "DELETE"],
+    allow_headers=["Content-Type", "Authorization", "Accept"],
+)
 
 # -------------------------
 # DB Dependency
@@ -71,7 +88,10 @@ def read_places(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
 # -------------------------
 @app.post("/reviews/", response_model=schemas.Review)
 def post_review(review: schemas.ReviewCreate, db: Session = Depends(get_db)):
-    return crud.create_review(db=db, review=review, user_id=1, is_verified=True)
+    # TODO: Get user_id from JWT token when authentication is implemented
+    # For now, use a default user_id (should be replaced with proper auth)
+    default_user_id = 1
+    return crud.create_review(db=db, review=review, user_id=default_user_id, is_verified=True)
 
 @app.get("/places/{place_id}/reviews", response_model=List[schemas.Review])
 def get_place_reviews(place_id: int, db: Session = Depends(get_db)):

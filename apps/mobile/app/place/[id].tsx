@@ -1,80 +1,134 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Link, router, useLocalSearchParams } from "expo-router";
-import { useEffect, useMemo, useState } from "react";
-import { Image, StyleSheet, TouchableOpacity, View } from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
-import { BlurView } from "expo-blur";
+/**
+ * Place Detail Screen
+ * 
+ * Comprehensive place information screen with location-based reviews and ratings.
+ * Spotify-inspired dark theme design.
+ * 
+ * @module app/place/[id]
+ */
 
-import ParallaxScrollView from "@/components/parallax-scroll-view";
-import { ThemedText } from "@/components/themed-text";
-import { ThemedView } from "@/components/themed-view";
-import { IconSymbol } from "@/components/ui/icon-symbol";
-import { Fonts } from "@/constants/theme";
-
-import { useSavedPlaces } from "@/src/state/savedPlaces";
-import { getPlaceImageSource } from "@/src/utils/placeImages";
-
-type ActiveSession = {
-  placeId: string;
-  activeUntil: number; // epoch ms
-};
-
-const ACTIVE_SESSION_KEY = "active-session-v1"; // sadece okumaya çalışıyoruz (yoksa sıkıntı değil)
-
-function Pill({ text }: { text: string }) {
-  return (
-    <View style={styles.pill}>
-      <ThemedText type="defaultSemiBold" style={styles.pillText}>
-        {text}
-      </ThemedText>
-    </View>
-  );
-}
+import { router, useLocalSearchParams } from 'expo-router';
+import { useEffect, useMemo, useState } from 'react';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, Alert } from 'react-native';
+import { LinearGradient } from 'expo-linear-gradient';
+import { BlurView } from 'expo-blur';
+import { useTheme } from '@/hooks/useTheme';
+import { Screen, Section } from '@/components/layout';
+import { PlaceCard } from '@/components/place/PlaceCard';
+import { Button, Chip, Card, ReviewForm } from '@/components/ui';
+import { useSavedPlaces } from '@/src/state/savedPlaces';
+import { getPlaceImageSource } from '@/src/utils/placeImages';
+import { createTextStyle } from '@/constants/design';
+import { IconSymbol } from '@/components/ui/icon-symbol';
+import { getCurrentLocation, isWithinPlaceRadius, type PlaceLocation } from '@/src/utils/location';
+import { getPlaces } from '@/src/services/mekanService';
+import { lightImpact, success, warning } from '@/src/utils/haptics';
+import { apiPost } from '@/src/utils/apiClient';
 
 export default function PlaceDetailScreen() {
+  const { colors, spacing } = useTheme();
   const params = useLocalSearchParams();
-  const id = String(params?.id ?? "");
+  const id = String(params?.id ?? '');
 
-  // ✅ Save toggle anında güncellensin diye ids'e subscribe
   const savedIds = useSavedPlaces((s) => s.ids);
   const toggleSaved = useSavedPlaces((s) => s.toggle);
   const saved = savedIds.includes(id);
 
-  // ✅ QR aktiflik: varsa storage’dan oku, yoksa “aktif değil”
-  const [active, setActive] = useState(false);
-  const [activeUntil, setActiveUntil] = useState<number | null>(null);
+  const [place, setPlace] = useState<any>(null);
+  const [userLocation, setUserLocation] = useState<PlaceLocation | null>(null);
+  const [isNearby, setIsNearby] = useState(false);
+  const [checkingLocation, setCheckingLocation] = useState(false);
+  const [showReviewForm, setShowReviewForm] = useState(false);
+  const [submittingReview, setSubmittingReview] = useState(false);
 
+  // Load place data
   useEffect(() => {
-    let mounted = true;
-
-    (async () => {
-      try {
-        const raw = await AsyncStorage.getItem(ACTIVE_SESSION_KEY);
-        if (!raw) return;
-
-        const parsed = JSON.parse(raw) as Partial<ActiveSession>;
-        const placeId = String(parsed.placeId ?? "");
-        const until = Number(parsed.activeUntil ?? 0);
-
-        const isActive = placeId === id && until > Date.now();
-
-        if (mounted) {
-          setActive(isActive);
-          setActiveUntil(until > 0 ? until : null);
-        }
-      } catch {
-        // sessiz geç
-      }
-    })();
-
-    return () => {
-      mounted = false;
-    };
+    loadPlaceData();
   }, [id]);
 
-  const heroSource = useMemo(() => getPlaceImageSource(id), [id]);
+  // Check location when place data is loaded
+  useEffect(() => {
+    if (place?.latitude && place?.longitude) {
+      checkUserLocation();
+    }
+  }, [place]);
 
-  // Demo alternatifler: 1..6 arasından mevcut id hariç
+  const loadPlaceData = async () => {
+    try {
+      const places = await getPlaces();
+      const foundPlace = places.find((p) => String(p.id) === id);
+      if (foundPlace) {
+        setPlace(foundPlace);
+      }
+    } catch (error) {
+      console.error('Error loading place:', error);
+    }
+  };
+
+  const checkUserLocation = async () => {
+    if (!place?.latitude || !place?.longitude) return;
+
+    setCheckingLocation(true);
+    try {
+      const location = await getCurrentLocation();
+      if (location) {
+        setUserLocation(location);
+        const nearby = isWithinPlaceRadius(
+          location,
+          { latitude: place.latitude, longitude: place.longitude },
+          200 // 200 meter radius
+        );
+        setIsNearby(nearby);
+        if (nearby) {
+          success();
+        } else {
+          warning();
+        }
+      } else {
+        Alert.alert(
+          'Konum İzni Gerekli',
+          'Yorum yapabilmek için konum izni vermeniz gerekiyor.',
+          [{ text: 'Tamam' }]
+        );
+      }
+    } catch (error) {
+      console.error('Error checking location:', error);
+    } finally {
+      setCheckingLocation(false);
+    }
+  };
+
+  const handleSubmitReview = async (rating: number, comment: string) => {
+    if (!isNearby) {
+      Alert.alert('Uyarı', 'Bu mekanda yorum yapabilmek için mekanın yakınında olmalısınız.');
+      return;
+    }
+
+    setSubmittingReview(true);
+    try {
+      // TODO: Replace with actual API call
+      await apiPost('/reviews/', {
+        place_id: Number(id),
+        comment_text: comment || 'Yorum yapılmadı',
+        rating: rating,
+      });
+
+      Alert.alert('Başarılı', 'Yorumunuz gönderildi!', [
+        { text: 'Tamam', onPress: () => setShowReviewForm(false) },
+      ]);
+      
+      // Reload place data to show new review
+      await loadPlaceData();
+    } catch (error) {
+      Alert.alert('Hata', 'Yorum gönderilirken bir hata oluştu.');
+      console.error('Error submitting review:', error);
+    } finally {
+      setSubmittingReview(false);
+    }
+  };
+
+  const heroSource = useMemo(() => getPlaceImageSource(place || id), [place, id]);
+
   const alternatives = useMemo(() => {
     const current = Number(id);
     const candidates = [1, 2, 3, 4, 5, 6].filter(
@@ -83,449 +137,337 @@ export default function PlaceDetailScreen() {
     return candidates.slice(0, 3).map(String);
   }, [id]);
 
-  const activeText = useMemo(() => {
-    if (!active) return "Aktif değil";
-    if (!activeUntil) return "Aktif";
-    const mins = Math.max(0, Math.floor((activeUntil - Date.now()) / 60000));
-    return mins >= 1 ? `Aktif • ${mins} dk` : "Aktif";
-  }, [active, activeUntil]);
+  const titleStyle = createTextStyle('title', colors.text.primary);
+  const subtitleStyle = createTextStyle('bodySmall', colors.text.secondary);
 
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: "#FFFFFF", dark: "#1A1A1A" }}
-      headerImage={
-        <View style={styles.heroWrap}>
+    <Screen>
+      <ScrollView showsVerticalScrollIndicator={false}>
+        {/* Hero Image */}
+        <View style={styles.heroContainer}>
           <Image source={heroSource} style={styles.heroImage} resizeMode="cover" />
           <LinearGradient
-            colors={[
-              "transparent",
-              "rgba(255, 107, 157, 0.2)",
-              "rgba(196, 69, 105, 0.4)",
-            ]}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 0, y: 1 }}
-            style={styles.heroOverlay}
+            colors={['transparent', 'rgba(0,0,0,0.6)']}
+            style={styles.heroGradient}
           />
-          <View style={styles.heroTopRow}>
-            <View style={styles.heroLeftPill}>
-              <IconSymbol size={14} color="#fff" name="mappin.and.ellipse" />
-              <ThemedText type="defaultSemiBold" style={styles.heroLeftText}>
-                Mekan #{id}
-              </ThemedText>
-            </View>
-
+          <View style={styles.heroHeader}>
             <TouchableOpacity
-              activeOpacity={0.85}
-              onPress={() =>
-                toggleSaved({
-                  id,
-                  name: `Mekan #${id}`,
-                  subtitle: "Detay ekranı (demo) — backend gelince zenginleşecek.",
-                })
-              }
-              style={styles.saveBtn}
+              onPress={() => router.back()}
+              style={[
+                styles.iconButton,
+                {
+                  backgroundColor: colors.surface.default + 'CC',
+                  borderColor: colors.surface.border,
+                },
+              ]}
             >
-              <BlurView intensity={20} style={styles.saveBtnBlur}>
-                {saved ? (
-                  <LinearGradient
-                    colors={["#667eea", "#764ba2"]}
-                    start={{ x: 0, y: 0 }}
-                    end={{ x: 1, y: 0 }}
-                    style={styles.saveBtnGradient}
-                  >
-                    <ThemedText type="defaultSemiBold" style={styles.saveBtnText}>
-                      Kaydedildi
-                    </ThemedText>
-                  </LinearGradient>
-                ) : (
-                  <ThemedText type="defaultSemiBold" style={styles.saveBtnTextInactive}>
-                    Kaydet
-                  </ThemedText>
-                )}
-              </BlurView>
+              <IconSymbol name="chevron.left" size={20} color={colors.text.primary} />
             </TouchableOpacity>
-          </View>
-        </View>
-      }
-    >
-      {/* Başlık */}
-      <ThemedView style={styles.titleContainer}>
-        <View style={{ flex: 1 }}>
-          <ThemedText type="title" style={styles.title}>
-            Mekan #{id}
-          </ThemedText>
-          <ThemedText style={styles.subtitle}>
-            Detay ekranı (demo) — backend gelince zenginleşecek.
-          </ThemedText>
-        </View>
-      </ThemedView>
-
-      {/* Hızlı aksiyonlar */}
-      <View style={styles.actionRow}>
-        <TouchableOpacity
-          activeOpacity={0.85}
-          onPress={() => router.push("/(tabs)/explore")}
-          style={styles.actionBtn}
-        >
-          <LinearGradient
-            colors={["#667eea", "#764ba2"]}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 0 }}
-            style={styles.actionBtnGradient}
-          >
-            <ThemedText type="defaultSemiBold" style={styles.actionBtnText}>
-              Keşfet&apos;e dön
-            </ThemedText>
-          </LinearGradient>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          activeOpacity={0.85}
-          onPress={() => router.push("/(tabs)/saved")}
-          style={styles.actionBtn}
-        >
-          <LinearGradient
-            colors={["#FF6B9D", "#C44569"]}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 0 }}
-            style={styles.actionBtnGradient}
-          >
-            <ThemedText type="defaultSemiBold" style={styles.actionBtnText}>
-              Saved&apos;e git
-            </ThemedText>
-          </LinearGradient>
-        </TouchableOpacity>
-
-        <TouchableOpacity
-          activeOpacity={0.85}
-          onPress={() => router.push("/scan")}
-          style={styles.actionBtn}
-        >
-          <LinearGradient
-            colors={["#FF6B9D", "#C44569"]}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 0 }}
-            style={styles.actionBtnGradient}
-          >
-            <ThemedText type="defaultSemiBold" style={styles.actionBtnText}>
-              Scan&apos;e git
-            </ThemedText>
-          </LinearGradient>
-        </TouchableOpacity>
-      </View>
-
-      {/* Mekânda Aktiflik */}
-      <View style={styles.sectionCard}>
-        <View style={styles.sectionHeaderRow}>
-          <ThemedText type="defaultSemiBold" style={{ fontSize: 16 }}>
-            Mekânda Aktiflik
-          </ThemedText>
-
-          <View style={[styles.statusPill, active ? styles.statusOn : styles.statusOff]}>
-            <ThemedText type="defaultSemiBold" style={styles.statusText}>
-              {activeText}
-            </ThemedText>
+            <View style={styles.saveButtonContainer}>
+              <BlurView intensity={80} style={styles.saveButtonBlur}>
+                <TouchableOpacity
+                  onPress={() => {
+                    lightImpact();
+                    toggleSaved({
+                      id,
+                      name: place?.name || `Mekan #${id}`,
+                      subtitle: place?.subtitle || place?.description || 'Detay ekranı',
+                    });
+                  }}
+                  style={[
+                    styles.saveButton,
+                    {
+                      backgroundColor: saved
+                        ? colors.accent.primary
+                        : 'rgba(255, 255, 255, 0.15)',
+                    },
+                  ]}
+                >
+                  <IconSymbol
+                    name={saved ? 'heart.fill' : 'heart'}
+                    size={18}
+                    color={saved ? colors.text.inverse : colors.text.primary}
+                  />
+                </TouchableOpacity>
+              </BlurView>
+            </View>
           </View>
         </View>
 
-        <ThemedText style={styles.sectionDesc}>
-          Yorum/puan/feedback vermek için masadaki QR’ı okutman gerekiyor (2 saat aktif).
-        </ThemedText>
+        {/* Content */}
+        <View style={[styles.content, { paddingHorizontal: spacing.screenPadding }]}>
+          {/* Place Info */}
+          <View style={[styles.placeInfo, { marginTop: spacing.xl, marginBottom: spacing.base }]}>
+            <Text style={[titleStyle, styles.placeName]}>
+              {place?.name || `Mekan #${id}`}
+            </Text>
+            <Text style={[subtitleStyle, styles.placeSubtitle]}>
+              {place?.subtitle || place?.description || 'Mekan detayları'}
+            </Text>
+            {place?.address && (
+              <View style={styles.addressContainer}>
+                <IconSymbol name="location.fill" size={16} color={colors.text.secondary} />
+                <Text style={[subtitleStyle, { marginLeft: 8 }]}>{place.address}</Text>
+              </View>
+            )}
+            <View style={styles.tagsContainer}>
+              {place?.category && <Chip label={place.category} />}
+              {place?.tags?.slice(0, 3).map((tag: string, idx: number) => (
+                <Chip key={idx} label={tag} />
+              ))}
+            </View>
+          </View>
 
-        <TouchableOpacity
-          activeOpacity={0.85}
-          onPress={() => router.push("/scan")}
-          style={styles.primaryBtn}
-        >
-          <ThemedText type="defaultSemiBold">QR Okut (Scan’e git)</ThemedText>
-        </TouchableOpacity>
+          {/* Actions */}
+          <View style={[styles.actions, { marginBottom: spacing.xl }]}>
+            <Button
+              variant="primary"
+              onPress={() => {
+                // TODO: Implement maps integration
+                if (place?.latitude && place?.longitude) {
+                  // Linking.openURL(`maps://maps.apple.com/?daddr=${place.latitude},${place.longitude}`);
+                }
+              }}
+              style={styles.actionButton}
+            >
+              Yol Tarifi Al
+            </Button>
+            <Button
+              variant="secondary"
+              onPress={() => {
+                // TODO: Implement phone call
+              }}
+              style={styles.actionButton}
+            >
+              Ara
+            </Button>
+          </View>
 
-        <ThemedText style={styles.tinyHint}>
-          Not: Gerçekte telefon kamerasından okutunca uygulama otomatik açılacak (deep link).
-        </ThemedText>
-      </View>
+          {/* Location Status */}
+          <Card style={[styles.sectionCard, { marginBottom: spacing.base }]}>
+            <View style={styles.sectionHeader}>
+              <Text style={[styles.sectionTitle, { color: colors.text.primary }]}>
+                Konum Durumu
+              </Text>
+              <View
+                style={[
+                  styles.statusBadge,
+                  {
+                    backgroundColor: isNearby
+                      ? colors.accent.primary + '20'
+                      : colors.surface.default,
+                    borderColor: isNearby ? colors.accent.primary : colors.surface.border,
+                  },
+                ]}
+              >
+                <Text
+                  style={[
+                    styles.statusText,
+                    {
+                      color: isNearby ? colors.accent.primary : colors.text.secondary,
+                    },
+                  ]}
+                >
+                  {checkingLocation
+                    ? 'Kontrol ediliyor...'
+                    : isNearby
+                    ? '✓ Yakındasınız'
+                    : 'Mekan yakınında değilsiniz'}
+                </Text>
+              </View>
+            </View>
+            <Text style={[styles.sectionDescription, { color: colors.text.secondary }]}>
+              {isNearby
+                ? 'Bu mekanın yakınındasınız. Yorum ve puan verebilirsiniz.'
+                : 'Yorum ve puan verebilmek için mekanın 200 metre yakınında olmalısınız.'}
+            </Text>
+            <Button
+              variant="secondary"
+              onPress={checkUserLocation}
+              loading={checkingLocation}
+              style={styles.checkLocationButton}
+            >
+              Konumu Kontrol Et
+            </Button>
+          </Card>
 
-      {/* Feedback */}
-      <View style={styles.sectionCard}>
-        <View style={styles.sectionHeaderRow}>
-          <ThemedText type="defaultSemiBold" style={{ fontSize: 16 }}>
-            Feedback
-          </ThemedText>
-          {!active && <Pill text="Kilitli" />}
-        </View>
-
-        <ThemedText style={styles.sectionDesc}>
-          {active
-            ? "Aktifsin. Geri bildirim verebilirsin."
-            : "Bu mekânda aktif değilsin. Feedback vermek için QR okutmalısın."}
-        </ThemedText>
-
-        <View style={styles.feedbackRow}>
-          <TouchableOpacity
-            activeOpacity={0.85}
-            disabled={!active}
-            style={[styles.fbBtn, !active && styles.disabled]}
-          >
-            <ThemedText type="defaultSemiBold">👍 Beğendim</ThemedText>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            activeOpacity={0.85}
-            disabled={!active}
-            style={[styles.fbBtn, !active && styles.disabled]}
-          >
-            <ThemedText type="defaultSemiBold">👎 Beğenmedim</ThemedText>
-          </TouchableOpacity>
-        </View>
-
-        <ThemedText style={styles.tinyHint}>
-          (Demo) Bu aksiyonlar backend gelince gerçek puan/yorum olarak yazılacak.
-        </ThemedText>
-      </View>
-
-      {/* Alternatif öneriler */}
-      <View style={{ marginTop: 14, gap: 12 }}>
-        <View style={styles.resultsHeader}>
-          <ThemedText type="defaultSemiBold" style={{ fontSize: 16 }}>
-            Alternatif öneriler
-          </ThemedText>
-          <ThemedText style={{ opacity: 0.6 }}>{alternatives.length}</ThemedText>
-        </View>
-
-        {alternatives.map((altId) => (
-          <View key={altId} style={styles.altCardWrap}>
-            <Link href={{ pathname: "/place/[id]", params: { id: altId } }} asChild>
-              <TouchableOpacity activeOpacity={0.92} style={styles.altCard}>
-                <Image
-                  source={getPlaceImageSource(altId)}
-                  style={styles.altImage}
-                  resizeMode="cover"
+          {/* Review Section */}
+          {isNearby && (
+            <Card style={[styles.sectionCard, { marginBottom: spacing.base }]}>
+              <View style={styles.sectionHeader}>
+                <Text style={[styles.sectionTitle, { color: colors.text.primary }]}>
+                  Yorum Yap
+                </Text>
+              </View>
+              {!showReviewForm ? (
+                <>
+                  <Text style={[styles.sectionDescription, { color: colors.text.secondary }]}>
+                    Bu mekan hakkında düşüncelerinizi paylaşın. 1-5 yıldız arası puan verebilirsiniz.
+                  </Text>
+                  <Button
+                    variant="primary"
+                    onPress={() => {
+                      lightImpact();
+                      setShowReviewForm(true);
+                    }}
+                    style={styles.reviewButton}
+                  >
+                    Yorum Yap
+                  </Button>
+                </>
+              ) : (
+                <ReviewForm
+                  onSubmit={handleSubmitReview}
+                  onCancel={() => {
+                    lightImpact();
+                    setShowReviewForm(false);
+                  }}
+                  loading={submittingReview}
                 />
-                <View style={styles.altOverlay} />
+              )}
+            </Card>
+          )}
 
-                <View style={styles.altContent}>
-                  <ThemedText type="defaultSemiBold" style={{ fontSize: 16 }}>
-                    Mekan #{altId}
-                  </ThemedText>
-                  <ThemedText style={{ opacity: 0.75, marginTop: 6 }}>
-                    Benzer vibe/purpose/budget (demo).
-                  </ThemedText>
-
-                  <View style={styles.altHintRow}>
-                    <ThemedText style={styles.altHint}>İncele</ThemedText>
-                    <ThemedText style={styles.altHint}>›</ThemedText>
-                  </View>
-                </View>
-              </TouchableOpacity>
-            </Link>
-          </View>
-        ))}
-      </View>
-    </ParallaxScrollView>
+          {/* Similar Places */}
+          {alternatives.length > 0 && (
+            <Section title="Benzer Mekanlar" style={styles.similarSection}>
+              {alternatives.map((altId) => (
+                <PlaceCard
+                  key={altId}
+                  image={getPlaceImageSource(altId)}
+                  title={`Mekan #${altId}`}
+                  subtitle="Benzer vibe/purpose/budget"
+                  onPress={() => router.push({ pathname: '/place/[id]', params: { id: altId } })}
+                />
+              ))}
+            </Section>
+          )}
+        </View>
+      </ScrollView>
+    </Screen>
   );
 }
 
 const styles = StyleSheet.create({
-  heroWrap: { flex: 1, justifyContent: "flex-end" },
-  heroImage: { position: "absolute", left: 0, right: 0, top: 0, bottom: 0 },
-  heroOverlay: {
-    position: "absolute",
+  heroContainer: {
+    width: '100%',
+    height: 300,
+    position: 'relative',
+  },
+  heroImage: {
+    width: '100%',
+    height: '100%',
+  },
+  heroGradient: {
+    position: 'absolute',
+    bottom: 0,
     left: 0,
     right: 0,
+    height: '50%',
+  },
+  heroHeader: {
+    position: 'absolute',
     top: 0,
-    bottom: 0,
-    backgroundColor: "rgba(0,0,0,0.45)",
+    left: 0,
+    right: 0,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    padding: 16,
+    paddingTop: 60,
   },
-  heroTopRow: {
-    position: "absolute",
-    left: 14,
-    right: 14,
-    top: 52,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    gap: 10,
-  },
-  heroLeftPill: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-    paddingVertical: 8,
-    paddingHorizontal: 10,
-    borderRadius: 999,
-    borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.18)",
-    backgroundColor: "rgba(0,0,0,0.28)",
-  },
-  heroLeftText: { fontSize: 12, opacity: 0.92 },
-
-  saveBtn: {
-    borderRadius: 999,
-    overflow: "hidden",
-    zIndex: 50,
-    elevation: 50,
-    shadowColor: "#667eea",
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-  },
-  saveBtnBlur: {
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-    backgroundColor: "rgba(255, 255, 255, 0.2)",
-  },
-  saveBtnGradient: {
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  saveBtnText: {
-    fontSize: 12,
-    color: "#fff",
-  },
-  saveBtnTextInactive: {
-    fontSize: 12,
-    color: "#fff",
-    opacity: 0.9,
-  },
-
-  titleContainer: { flexDirection: "row", gap: 8 },
-  title: { fontFamily: Fonts.rounded },
-  subtitle: { opacity: 0.75, marginTop: 8, lineHeight: 18 },
-
-  actionRow: { marginTop: 12, flexDirection: "row", flexWrap: "wrap", gap: 10 },
-  actionBtn: {
-    borderRadius: 16,
-    overflow: "hidden",
-    shadowColor: "#FF6B9D",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.15,
-    shadowRadius: 4,
-    elevation: 2,
-  },
-  actionBtnGradient: {
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  actionBtnText: {
-    color: "#fff",
-    fontSize: 14,
-    fontWeight: "700",
-  },
-
-  sectionCard: {
-    marginTop: 16,
-    padding: 14,
-    borderRadius: 18,
-    borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.12)",
-    backgroundColor: "rgba(255,255,255,0.03)",
-  },
-  sectionHeaderRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    gap: 10,
-  },
-  sectionDesc: { opacity: 0.75, marginTop: 10, lineHeight: 18 },
-
-  primaryBtn: {
-    marginTop: 12,
-    borderRadius: 16,
-    overflow: "hidden",
-    alignSelf: "flex-start",
-    shadowColor: "#FF6B9D",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.15,
-    shadowRadius: 4,
-    elevation: 2,
-  },
-  primaryBtnGradient: {
-    paddingVertical: 14,
-    paddingHorizontal: 20,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  primaryBtnText: {
-    color: "#fff",
-    fontSize: 15,
-    fontWeight: "700",
-  },
-
-  tinyHint: { opacity: 0.55, marginTop: 10, fontSize: 12, lineHeight: 16 },
-
-  pill: {
-    paddingVertical: 7,
-    paddingHorizontal: 10,
-    borderRadius: 999,
-    borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.14)",
-    backgroundColor: "rgba(255,255,255,0.04)",
-  },
-  pillText: { fontSize: 12 },
-
-  statusPill: {
-    paddingVertical: 7,
-    paddingHorizontal: 10,
-    borderRadius: 999,
-    borderWidth: 1,
-  },
-  statusOn: {
-    borderColor: "rgba(255,255,255,0.30)",
-    backgroundColor: "rgba(255,255,255,0.08)",
-  },
-  statusOff: {
-    borderColor: "rgba(255,255,255,0.16)",
-    backgroundColor: "rgba(0,0,0,0.18)",
-  },
-  statusText: { fontSize: 12, opacity: 0.9 },
-
-  feedbackRow: { marginTop: 12, flexDirection: "row", gap: 10, flexWrap: "wrap" },
-  fbBtn: {
-    paddingVertical: 12,
-    paddingHorizontal: 14,
-    borderRadius: 16,
-    borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.18)",
-    backgroundColor: "rgba(255,255,255,0.05)",
-    alignItems: "center",
-  },
-  disabled: { opacity: 0.45 },
-
-  resultsHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-
-  altCardWrap: { position: "relative" },
-  altCard: {
+  iconButton: {
+    width: 40,
+    height: 40,
     borderRadius: 20,
-    backgroundColor: "rgba(255,255,255,0.04)",
+    alignItems: 'center',
+    justifyContent: 'center',
     borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.12)",
-    overflow: "hidden",
-    minHeight: 136,
   },
-  altImage: { position: "absolute", left: 0, right: 0, top: 0, bottom: 0 },
-  altOverlay: {
-    position: "absolute",
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    backgroundColor: "rgba(0,0,0,0.42)",
+  saveButtonContainer: {
+    borderRadius: 20,
+    overflow: 'hidden',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.4,
+    shadowRadius: 6,
+    elevation: 8,
   },
-  altContent: { padding: 16, minHeight: 136, justifyContent: "flex-end" },
-  altHintRow: {
-    marginTop: 10,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    opacity: 0.75,
+  saveButtonBlur: {
+    borderRadius: 20,
+    overflow: 'hidden',
   },
-  altHint: { fontSize: 13 },
+  saveButton: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  content: {
+    paddingTop: 0,
+  },
+  placeInfo: {
+    // Spacing handled by marginTop/marginBottom
+  },
+  placeName: {
+    marginBottom: 8,
+  },
+  placeSubtitle: {
+    marginBottom: 12,
+  },
+  addressContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  tagsContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 8,
+  },
+  actions: {
+    flexDirection: 'row',
+    gap: 12,
+  },
+  actionButton: {
+    flex: 1,
+  },
+  sectionCard: {
+    // Card styling
+  },
+  sectionHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  sectionTitle: {
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  statusBadge: {
+    paddingVertical: 6,
+    paddingHorizontal: 10,
+    borderRadius: 12,
+    borderWidth: 1,
+  },
+  statusText: {
+    fontSize: 12,
+    fontWeight: '600',
+  },
+  sectionDescription: {
+    fontSize: 14,
+    lineHeight: 20,
+    marginBottom: 16,
+  },
+  checkLocationButton: {
+    // Button styling
+  },
+  reviewButton: {
+    // Button styling
+  },
+  similarSection: {
+    marginTop: 24,
+  },
 });

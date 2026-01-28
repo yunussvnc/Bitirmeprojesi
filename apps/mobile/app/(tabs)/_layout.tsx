@@ -10,24 +10,32 @@ export default function TabsLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "Home",
-          headerTitle: "Home",
+          title: "Ana Sayfa",
+          headerTitle: "Ana Sayfa",
         }}
       />
 
       <Tabs.Screen
         name="explore"
         options={{
-          title: "Chatbot",
-          headerTitle: "Chatbot",
+          title: "Keşfet",
+          headerTitle: "Keşfet",
         }}
       />
 
       <Tabs.Screen
         name="saved"
         options={{
-          title: "Saved",
-          headerTitle: "Saved",
+          title: "Kaydedilenler",
+          headerTitle: "Kaydedilenler",
+        }}
+      />
+
+      <Tabs.Screen
+        name="profile"
+        options={{
+          title: "Profil",
+          headerTitle: "Profil",
         }}
       />
     </Tabs>

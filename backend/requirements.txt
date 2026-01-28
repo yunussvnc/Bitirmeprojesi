@@ -1,0 +1,22 @@
+# FastAPI and server
+fastapi==0.104.1
+uvicorn[standard]==0.24.0
+python-multipart==0.0.6
+requests==2.31.0
+
+# Database
+sqlalchemy==2.0.23
+
+# Password hashing
+passlib[bcrypt]==1.7.4
+
+# Data validation (FastAPI dependency, but explicit)
+pydantic==2.5.0
+pydantic-settings==2.1.0
+
+# Optional: JWT (for future implementation)
+# python-jose[cryptography]==3.3.0
+
+# Optional: LLM integration (if needed)
+# openai==1.3.0
+# langchain==0.0.350

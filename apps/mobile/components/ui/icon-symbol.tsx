@@ -6,7 +6,7 @@ import { ComponentProps } from 'react';
 import { OpaqueColorValue, type StyleProp, type TextStyle } from 'react-native';
 
 type IconMapping = Record<SymbolViewProps['name'], ComponentProps<typeof MaterialIcons>['name']>;
-type IconSymbolName = keyof typeof MAPPING;
+export type IconSymbolName = keyof typeof MAPPING;
 
 /**
  * Add your SF Symbols to Material Icons mappings here.
@@ -18,6 +18,38 @@ const MAPPING = {
   'paperplane.fill': 'send',
   'chevron.left.forwardslash.chevron.right': 'code',
   'chevron.right': 'chevron-right',
+  'chevron.left': 'chevron-left',
+  'magnifyingglass': 'search',
+  'bookmark': 'bookmark-border',
+  'bookmark.fill': 'bookmark',
+  'heart': 'favorite-border',
+  'heart.fill': 'favorite',
+  'trash': 'delete',
+  'xmark': 'close',
+  'mappin.and.ellipse': 'place',
+  'person.fill': 'person',
+  'person.circle.fill': 'account-circle',
+  'bell.fill': 'notifications',
+  'location.fill': 'location-on',
+  'globe': 'language',
+  'questionmark.circle.fill': 'help',
+  'doc.text.fill': 'description',
+  'lock.fill': 'lock',
+  'info.circle.fill': 'info',
+  'gear': 'settings',
+  'checkmark': 'check',
+  'slider.horizontal.3': 'tune',
+  'arrow.up.arrow.down': 'swap-vert',
+  'chevron.up': 'keyboard-arrow-up',
+  'chevron.down': 'keyboard-arrow-down',
+  'star': 'star-border',
+  'star.fill': 'star',
+  'trophy.fill': 'emoji-events',
+  'map.fill': 'map',
+  'calendar': 'calendar-today',
+  'chart.bar.fill': 'bar-chart',
+  'crown.fill': 'workspace-premium',
+  'play.fill': 'play-arrow',
 } as IconMapping;
 
 /**

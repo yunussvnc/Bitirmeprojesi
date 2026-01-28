@@ -1,97 +1,47 @@
-// apps/mobile/app/(tabs)/explore.tsx
+/**
+ * Explore Screen
+ * 
+ * AI-powered recommendations screen with filters and search.
+ * Spotify-inspired dark theme design.
+ * 
+ * @module app/(tabs)/explore
+ */
 
-import { router } from "expo-router";
-import { useEffect, useMemo, useState } from "react";
-import {
-  ActivityIndicator,
-  Image,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-  View,
-} from "react-native";
-import { LinearGradient } from "expo-linear-gradient";
-import { BlurView } from "expo-blur";
-import Animated, {
-  useSharedValue,
-  useAnimatedStyle,
-  withRepeat,
-  withTiming,
-  withSpring,
-} from "react-native-reanimated";
+import { router } from 'expo-router';
+import { useEffect, useMemo, useState } from 'react';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { useTheme } from '@/hooks/useTheme';
+import { Screen, Section } from '@/components/layout';
+import { PlaceCard } from '@/components/place/PlaceCard';
+import { Button, Chip, SearchInput, Card, EmptyState, AnimatedPlaceCard } from '@/components/ui';
+import { recommendPlaces } from '@/src/services/api';
+import { usePreferences } from '@/src/state/preferences';
+import type { PlaceCard as PlaceCardType, RecommendResponse } from '@/src/types/recommend';
+import { useSavedPlaces } from '@/src/state/savedPlaces';
+import { getPlaceImageSource } from '@/src/utils/placeImages';
+import { createTextStyle } from '@/constants/design';
+import { lightImpact } from '@/src/utils/haptics';
+import { BlurView } from 'expo-blur';
+import { IconSymbol } from '@/components/ui/icon-symbol';
 
-import ParallaxScrollView from "@/components/parallax-scroll-view";
-import { ThemedText } from "@/components/themed-text";
-import { ThemedView } from "@/components/themed-view";
-import { Fonts } from "@/constants/theme";
-
-import { recommendPlaces } from "../../src/services/api";
-import { usePreferences } from "../../src/state/preferences";
-import type { PlaceCard, Preferences, RecommendResponse } from "../../src/types/recommend";
-
-import { useSavedPlaces } from "@/src/state/savedPlaces";
-import { getPlaceImageSource } from "@/src/utils/placeImages";
-
-function Chip({
-  label,
-  active,
-  onPress,
-}: {
-  label: string;
-  active: boolean;
-  onPress: () => void;
-}) {
-  return (
-    <TouchableOpacity
-      onPress={onPress}
-      activeOpacity={0.85}
-      style={[styles.chip, active && styles.chipActive]}
-    >
-      {active ? (
-        <LinearGradient
-          colors={["#FF6B9D", "#C44569"]}
-          start={{ x: 0, y: 0 }}
-          end={{ x: 1, y: 0 }}
-          style={styles.chipGradient}
-        >
-          <ThemedText style={styles.chipTextActive}>{label}</ThemedText>
-        </LinearGradient>
-      ) : (
-        <ThemedText style={styles.chipText}>{label}</ThemedText>
-      )}
-    </TouchableOpacity>
-  );
-}
-
-function Badge({ text }: { text: string }) {
-  return (
-    <View style={styles.badge}>
-      <ThemedText type="defaultSemiBold" style={styles.badgeText}>
-        {text}
-      </ThemedText>
-    </View>
-  );
-}
-
-function prefsToBadges(p: Preferences) {
-  const vibe = p.vibe === "quiet" ? "Sessiz" : "Canlı";
+function prefsToBadges(p: typeof usePreferences extends (selector: infer S) => any ? ReturnType<S>['prefs'] : never) {
+  const vibe = p.vibe === 'quiet' ? 'Sessiz' : 'Canlı';
   const purpose =
-    p.purpose === "work" ? "Çalışma" : p.purpose === "friends" ? "Arkadaş" : "Date";
-  const budget =
-    p.budget === "low" ? "₺ Düşük" : p.budget === "mid" ? "₺₺ Orta" : "₺₺₺ Yüksek";
+    p.purpose === 'work' ? 'Çalışma' : p.purpose === 'friends' ? 'Arkadaş' : 'Date';
+  const budget = p.budget === 'low' ? '₺ Düşük' : p.budget === 'mid' ? '₺₺ Orta' : '₺₺₺ Yüksek';
   return [vibe, purpose, budget];
 }
 
 export default function ExploreScreen() {
-  const [query, setQuery] = useState("");
+  const { colors, spacing, typography } = useTheme();
+  const [query, setQuery] = useState('');
   const { prefs, patchPrefs, resetPrefs } = usePreferences();
-
   const [loading, setLoading] = useState(false);
-  const [explanation, setExplanation] = useState<string>("");
-  const [items, setItems] = useState<PlaceCard[]>([]);
-  const [error, setError] = useState<string>("");
+  const [explanation, setExplanation] = useState<string>('');
+  const [items, setItems] = useState<PlaceCardType[]>([]);
+  const [error, setError] = useState<string>('');
+  const [refreshing, setRefreshing] = useState(false);
 
-  // ✅ ÖNEMLİ: Kaydet/Kaydedildi anında değişsin diye ids'e subscribe oluyoruz.
   const savedIds = useSavedPlaces((s) => s.ids);
   const toggle = useSavedPlaces((s) => s.toggle);
 
@@ -105,13 +55,16 @@ export default function ExploreScreen() {
 
   async function runRecommend() {
     try {
-      setError("");
+      setError('');
       setLoading(true);
       const res: RecommendResponse = await recommendPlaces(requestBody);
       setItems(res.items);
       setExplanation(res.explanation);
-    } catch (e: any) {
-      setError(e?.message ?? "Bir hata oluştu");
+    } catch (e: unknown) {
+      const errorMessage = e instanceof Error 
+        ? (e as any).userMessage || e.message 
+        : 'Bir hata oluştu';
+      setError(errorMessage);
     } finally {
       setLoading(false);
     }
@@ -122,136 +75,76 @@ export default function ExploreScreen() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const handleRefresh = async () => {
+    setRefreshing(true);
+    lightImpact();
+    await runRecommend();
+    setRefreshing(false);
+  };
+
   const topBadges = useMemo(() => prefsToBadges(prefs), [prefs]);
-
-  // 3D Animation values
-  const rotateY = useSharedValue(0);
-  const rotateX = useSharedValue(0);
-  const translateY = useSharedValue(0);
-  const scale = useSharedValue(1);
-
-  useEffect(() => {
-    rotateY.value = withRepeat(
-      withTiming(360, { duration: 20000 }),
-      -1,
-      false
-    );
-    rotateX.value = withRepeat(
-      withSpring(15, { damping: 10 }),
-      -1,
-      true
-    );
-    translateY.value = withRepeat(
-      withSpring(10, { damping: 8 }),
-      -1,
-      true
-    );
-    scale.value = withRepeat(
-      withSpring(1.1, { damping: 6 }),
-      -1,
-      true
-    );
-  }, [rotateY, rotateX, translateY, scale]);
-
-  const animated3DStyle = useAnimatedStyle(() => {
-    return {
-      transform: [
-        { perspective: 1000 },
-        { rotateY: `${rotateY.value}deg` },
-        { rotateX: `${rotateX.value}deg` },
-        { translateY: translateY.value },
-        { scale: scale.value },
-      ],
-    };
-  });
+  const titleStyle = createTextStyle('title', colors.text.primary);
+  const subtitleStyle = createTextStyle('bodySmall', colors.text.secondary);
 
   return (
-    <ParallaxScrollView
-      headerBackgroundColor={{ light: "#FFFFFF", dark: "#1A1A1A" }}
-      headerImage={
-        <View style={styles.headerWrap}>
-          <LinearGradient
-            colors={["#FFF5F7", "#F8F9FA", "#FFFFFF"]}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 1 }}
-            style={styles.headerGradient}
-          />
-          {/* 3D Chatbot Icon */}
-          <Animated.View style={[styles.chatbot3DContainer, animated3DStyle]}>
-            <View style={styles.chatbot3D}>
-              <LinearGradient
-                colors={["#FF6B9D", "#C44569", "#FF6B9D"]}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 1 }}
-                style={styles.chatbot3DGradient}
-              >
-                <View style={styles.chatbot3DFace}>
-                  <View style={styles.chatbot3DEye} />
-                  <View style={styles.chatbot3DEye} />
-                  <View style={styles.chatbot3DMouth} />
-                </View>
-                {/* 3D Depth Effect */}
-                <View style={styles.chatbot3DShadow} />
-              </LinearGradient>
-            </View>
-          </Animated.View>
-        </View>
-      }
-    >
-      {/* Başlık */}
-      <ThemedView style={styles.titleContainer}>
+    <Screen onRefresh={handleRefresh} refreshing={refreshing}>
+      {/* Header */}
+      <View style={[styles.header, { marginTop: spacing.base, marginBottom: spacing.xl }]}>
         <View style={{ flex: 1 }}>
-          <ThemedText type="title" style={styles.title}>
-            Chatbot
-          </ThemedText>
-          <ThemedText style={styles.subtitle}>AI destekli mekan önerisi chatbot.</ThemedText>
+          <Text style={[titleStyle, styles.title]}>AsEmOs AI</Text>
+          <Text style={[subtitleStyle, styles.subtitle]}>
+            Size özel mekan önerileri
+          </Text>
         </View>
-
-        <View style={styles.pill}>
-          <ThemedText type="defaultSemiBold" style={styles.pillText}>
-            {items.length} sonuç
-          </ThemedText>
-        </View>
-      </ThemedView>
-
-      {/* ✅ API Debug ekranına geçiş (typed-routes tip hatası yok) */}
-      <TouchableOpacity
-        activeOpacity={0.85}
-        onPress={() => router.push("/debug-api" as any)}
-        style={styles.debugLink}
-      >
-        <ThemedText style={styles.debugLinkText}>API Debug ekranına git →</ThemedText>
-      </TouchableOpacity>
-
-      {/* Prompt input */}
-      <View style={{ marginTop: 14 }}>
-        <BlurView intensity={20} style={styles.inputContainer}>
-          <TextInput
-            value={query}
-            onChangeText={setQuery}
-            placeholder="Ne arıyorsun? (örn: sessiz çalışmalık kafe)"
-            placeholderTextColor="#999"
-            style={styles.input}
-          />
-        </BlurView>
-        <ThemedText style={styles.helper}>
-          Yaz veya chip’lerle filtrele. Sonra “Öneri getir”e bas.
-        </ThemedText>
-
-        <View style={styles.badgeRowTop}>
-          {topBadges.map((b) => (
-            <Badge key={b} text={b} />
-          ))}
-        </View>
+        {items.length > 0 && (
+          <View
+            style={[
+              styles.badge,
+              {
+                backgroundColor: colors.accent.primary,
+                borderColor: colors.accent.primary,
+              },
+            ]}
+          >
+            <Text style={[styles.badgeText, { color: colors.text.inverse }]}>
+              {items.length} öneri
+            </Text>
+          </View>
+        )}
       </View>
 
-      {/* Filtre kartı */}
-      <BlurView intensity={20} style={styles.filterCard}>
-        <View style={styles.filterHeader}>
-          <ThemedText type="defaultSemiBold" style={{ fontSize: 16 }}>
-            Filtreler
-          </ThemedText>
+      {/* Search Input */}
+      <View style={styles.searchContainer}>
+        <SearchInput
+          placeholder="Ne arıyorsun? (örn: sessiz çalışmalık kafe)"
+          value={query}
+          onChangeText={setQuery}
+          onSubmitEditing={runRecommend}
+          containerStyle={styles.searchInput}
+        />
+        <Text style={[styles.helper, { color: colors.text.tertiary }]}>
+          Yaz veya filtrelerle özelleştir
+        </Text>
+      </View>
 
+      {/* Active Filters */}
+      {topBadges.length > 0 && (
+        <View style={styles.activeFilters}>
+          <Text style={[styles.sectionLabel, { color: colors.text.secondary }]}>
+            Aktif Filtreler
+          </Text>
+          <View style={styles.chipsContainer}>
+            {topBadges.map((badge) => (
+              <Chip key={badge} label={badge} />
+            ))}
+          </View>
+        </View>
+      )}
+
+      {/* Filter Card */}
+      <Card style={[styles.filterCard, { marginTop: spacing.base }]}>
+        <View style={styles.filterHeader}>
+          <Text style={[styles.filterTitle, { color: colors.text.primary }]}>Filtreler</Text>
           <TouchableOpacity
             onPress={() => {
               resetPrefs();
@@ -259,591 +152,343 @@ export default function ExploreScreen() {
             }}
             activeOpacity={0.8}
           >
-            <ThemedText style={styles.resetText}>Temizle</ThemedText>
+            <Text style={[styles.resetText, { color: colors.accent.primary }]}>Temizle</Text>
           </TouchableOpacity>
         </View>
 
-        <View style={{ marginTop: 12, gap: 14 }}>
-          <View style={{ gap: 10 }}>
-            <ThemedText type="defaultSemiBold">Vibe</ThemedText>
-            <View style={styles.rowWrap}>
+        <View style={[styles.filterContent, { marginTop: spacing.base }]}>
+          {/* Vibe */}
+          <View style={styles.filterSection}>
+            <Text style={[styles.filterLabel, { color: colors.text.secondary }]}>Vibe</Text>
+            <View style={styles.chipsContainer}>
               <Chip
                 label="Sessiz"
-                active={prefs.vibe === "quiet"}
+                active={prefs.vibe === 'quiet'}
                 onPress={() => {
-                  patchPrefs({ vibe: "quiet" });
+                  patchPrefs({ vibe: 'quiet' });
                   setTimeout(() => runRecommend(), 0);
                 }}
               />
               <Chip
                 label="Canlı"
-                active={prefs.vibe === "lively"}
+                active={prefs.vibe === 'lively'}
                 onPress={() => {
-                  patchPrefs({ vibe: "lively" });
+                  patchPrefs({ vibe: 'lively' });
                   setTimeout(() => runRecommend(), 0);
                 }}
               />
             </View>
           </View>
 
-          <View style={{ gap: 10 }}>
-            <ThemedText type="defaultSemiBold">Amaç</ThemedText>
-            <View style={styles.rowWrap}>
+          {/* Purpose */}
+          <View style={styles.filterSection}>
+            <Text style={[styles.filterLabel, { color: colors.text.secondary }]}>Amaç</Text>
+            <View style={styles.chipsContainer}>
               <Chip
                 label="Çalışma"
-                active={prefs.purpose === "work"}
+                active={prefs.purpose === 'work'}
                 onPress={() => {
-                  patchPrefs({ purpose: "work" });
+                  patchPrefs({ purpose: 'work' });
                   setTimeout(() => runRecommend(), 0);
                 }}
               />
               <Chip
                 label="Arkadaş"
-                active={prefs.purpose === "friends"}
+                active={prefs.purpose === 'friends'}
                 onPress={() => {
-                  patchPrefs({ purpose: "friends" });
+                  patchPrefs({ purpose: 'friends' });
                   setTimeout(() => runRecommend(), 0);
                 }}
               />
               <Chip
                 label="Date"
-                active={prefs.purpose === "date"}
+                active={prefs.purpose === 'date'}
                 onPress={() => {
-                  patchPrefs({ purpose: "date" });
+                  patchPrefs({ purpose: 'date' });
                   setTimeout(() => runRecommend(), 0);
                 }}
               />
             </View>
           </View>
 
-          <View style={{ gap: 10 }}>
-            <ThemedText type="defaultSemiBold">Bütçe</ThemedText>
-            <View style={styles.rowWrap}>
+          {/* Budget */}
+          <View style={styles.filterSection}>
+            <Text style={[styles.filterLabel, { color: colors.text.secondary }]}>Bütçe</Text>
+            <View style={styles.chipsContainer}>
               <Chip
                 label="Düşük"
-                active={prefs.budget === "low"}
+                active={prefs.budget === 'low'}
                 onPress={() => {
-                  patchPrefs({ budget: "low" });
+                  patchPrefs({ budget: 'low' });
                   setTimeout(() => runRecommend(), 0);
                 }}
               />
               <Chip
                 label="Orta"
-                active={prefs.budget === "mid"}
+                active={prefs.budget === 'mid'}
                 onPress={() => {
-                  patchPrefs({ budget: "mid" });
+                  patchPrefs({ budget: 'mid' });
                   setTimeout(() => runRecommend(), 0);
                 }}
               />
               <Chip
                 label="Yüksek"
-                active={prefs.budget === "high"}
+                active={prefs.budget === 'high'}
                 onPress={() => {
-                  patchPrefs({ budget: "high" });
+                  patchPrefs({ budget: 'high' });
                   setTimeout(() => runRecommend(), 0);
                 }}
               />
             </View>
           </View>
         </View>
-      </BlurView>
+      </Card>
 
-      <TouchableOpacity
+      {/* Get Recommendations Button */}
+      <Button
+        variant="primary"
+        size="large"
         onPress={runRecommend}
-        activeOpacity={0.85}
-        style={styles.recommendBtn}
+        loading={loading}
         disabled={loading}
+        style={styles.recommendButton}
       >
-        <LinearGradient
-          colors={loading ? ["#D1D5DB", "#9CA3AF"] : ["#FF6B9D", "#C44569"]}
-          start={{ x: 0, y: 0 }}
-          end={{ x: 1, y: 0 }}
-          style={styles.recommendBtnGradient}
+        Öneri Getir
+      </Button>
+
+      {/* Error */}
+      {error && (
+        <View
+          style={[
+            styles.errorContainer,
+            {
+              backgroundColor: colors.semantic.error + '20',
+              borderColor: colors.semantic.error,
+            },
+          ]}
         >
-          <ThemedText type="defaultSemiBold" style={styles.recommendBtnText}>
-            {loading ? "Öneriler hazırlanıyor..." : "Öneri getir"}
-          </ThemedText>
-        </LinearGradient>
-      </TouchableOpacity>
-
-      {loading && (
-        <View style={{ marginTop: 10, alignItems: "flex-start" }}>
-          <ActivityIndicator />
+          <Text style={[styles.errorText, { color: colors.semantic.error }]}>Hata: {error}</Text>
         </View>
       )}
 
-      {!!error && (
-        <ThemedText style={{ marginTop: 10, opacity: 0.85 }}>Hata: {error}</ThemedText>
-      )}
-
-      {/* LLM açıklaması */}
-      {
-        !!explanation && (
-          <View style={styles.explainCard}>
-            <View style={styles.explainHeaderRow}>
-              <ThemedText type="defaultSemiBold" style={{ fontSize: 16 }}>
-                Neden bu öneriler?
-              </ThemedText>
-              <View style={styles.miniPill}>
-                <ThemedText type="defaultSemiBold" style={styles.miniPillText}>
-                  Demo AI
-                </ThemedText>
-              </View>
-            </View>
-
-            <ThemedText style={{ opacity: 0.85, marginTop: 8, lineHeight: 22 }}>
-              {explanation}
-            </ThemedText>
-
-            <View style={styles.aiMetaRow}>
-              <View style={styles.aiMetaBox}>
-                <ThemedText style={styles.aiMetaLabel}>Confidence</ThemedText>
-                <ThemedText type="defaultSemiBold" style={styles.aiMetaValue}>
-                  Orta
-                </ThemedText>
-              </View>
-              <View style={styles.aiMetaBox}>
-                <ThemedText style={styles.aiMetaLabel}>Trade-off</ThemedText>
-                <ThemedText type="defaultSemiBold" style={styles.aiMetaValue}>
-                  Ambiyans ↔ fiyat
-                </ThemedText>
-              </View>
-            </View>
+      {/* AI Explanation */}
+      {explanation && (
+        <Card style={[styles.explanationCard, { marginTop: spacing.base }]}>
+          <View style={styles.explanationHeader}>
+            <Text style={[styles.explanationTitle, { color: colors.text.primary }]}>
+              Neden bu öneriler?
+            </Text>
+            <Chip label="AI" />
           </View>
-        )
-      }
+          <Text style={[styles.explanationText, { color: colors.text.secondary }]}>
+            {explanation}
+          </Text>
+        </Card>
+      )}
 
-      {/* Sonuçlar */}
-      <View style={{ marginTop: 18, gap: 12 }}>
-        <View style={styles.resultsHeader}>
-          <ThemedText type="defaultSemiBold" style={{ fontSize: 16 }}>
-            Sonuçlar
-          </ThemedText>
-          <ThemedText style={{ opacity: 0.6 }}>{items.length}</ThemedText>
-        </View>
+      {/* Results */}
+      {items.length > 0 && (
+        <Section title={`Sonuçlar (${items.length})`} style={styles.resultsSection}>
+          {items.map((place, idx) => {
+            const id = String((place as any).id);
+            const saved = savedIds.includes(id);
 
-        {items.map((place, idx) => {
-          const id = String((place as any).id);
-          const saved = savedIds.includes(id);
-
-          return (
-            <View key={id} style={styles.cardWrap}>
-              {/* Kart tıklanınca detay sayfasına git */}
-              <TouchableOpacity
-                activeOpacity={0.92}
-                style={styles.card}
-                onPress={() =>
-                  router.push({ pathname: "/place/[id]", params: { id } } as any)
-                }
-              >
-                <Image
-                  source={getPlaceImageSource(id)}
-                  style={styles.cardImage}
-                  resizeMode="cover"
+            return (
+              <View key={id} style={styles.cardWrapper}>
+                <AnimatedPlaceCard
+                  index={idx}
+                  image={getPlaceImageSource({ id, name: place.name, category: (place as any).category } as any)}
+                  title={place.name}
+                  subtitle={place.subtitle}
+                  tags={place.tags}
+                  rank={idx + 1}
+                  onPress={() =>
+                    router.push({ pathname: '/place/[id]', params: { id } } as any)
+                  }
                 />
-                <View style={styles.cardImageOverlay} />
-
-                <View style={styles.cardTopRow}>
-                  <View style={styles.rankPill}>
-                    <ThemedText type="defaultSemiBold" style={styles.rankText}>
-                      #{idx + 1}
-                    </ThemedText>
-                  </View>
+                <View style={styles.saveButtonContainer}>
+                  <BlurView intensity={60} style={styles.saveButtonBlur}>
+                    <TouchableOpacity
+                      activeOpacity={0.85}
+                      onPress={() => {
+                        lightImpact();
+                        toggle({
+                          id,
+                          name: place.name,
+                          subtitle: place.subtitle,
+                        });
+                      }}
+                      style={[
+                        styles.saveButton,
+                        {
+                          backgroundColor: saved
+                            ? colors.accent.primary
+                            : 'rgba(255, 255, 255, 0.15)',
+                        },
+                      ]}
+                    >
+                      <IconSymbol
+                        name={saved ? 'heart.fill' : 'heart'}
+                        size={18}
+                        color={saved ? colors.text.inverse : colors.text.primary}
+                      />
+                    </TouchableOpacity>
+                  </BlurView>
                 </View>
+              </View>
+            );
+          })}
+        </Section>
+      )}
 
-                <View style={styles.cardContent}>
-                  <ThemedText type="defaultSemiBold" style={styles.cardTitle}>
-                    {place.name}
-                  </ThemedText>
-
-                  <ThemedText style={styles.cardSubtitle}>{place.subtitle}</ThemedText>
-
-                  {!!place.tags?.length && (
-                    <View style={styles.badgeRow}>
-                      {place.tags.slice(0, 3).map((t) => (
-                        <View key={t} style={styles.tinyTag}>
-                          <ThemedText style={styles.tinyTagText}>{t}</ThemedText>
-                        </View>
-                      ))}
-                    </View>
-                  )}
-
-                  <View style={styles.cardHintRow}>
-                    <ThemedText style={styles.cardHint}>Detayı gör</ThemedText>
-                    <ThemedText style={styles.cardHint}>›</ThemedText>
-                  </View>
-                </View>
-              </TouchableOpacity>
-
-              {/* Save butonu */}
-              <TouchableOpacity
-                activeOpacity={0.85}
-                onPress={() =>
-                  toggle({
-                    id,
-                    name: place.name,
-                    subtitle: place.subtitle,
-                  })
-                }
-                style={[styles.saveBtn, saved ? styles.saveBtnActive : styles.saveBtnInactive]}
-              >
-                <ThemedText type="defaultSemiBold" style={{ fontSize: 12 }}>
-                  {saved ? "Kaydedildi" : "Kaydet"}
-                </ThemedText>
-              </TouchableOpacity>
-            </View>
-          );
-        })}
-
-        {!loading && items.length === 0 && (
-          <ThemedText style={{ opacity: 0.7 }}>
-            Uygun sonuç yok. Chip’leri değiştirip tekrar dene.
-          </ThemedText>
-        )}
-      </View>
-    </ParallaxScrollView >
+      {/* Empty State */}
+      {!loading && items.length === 0 && !error && (
+        <EmptyState
+          icon="magnifyingglass"
+          title="Henüz sonuç yok"
+          description="Filtreleri değiştirip tekrar dene veya arama yap"
+          actionLabel="Filtreleri Temizle"
+          onAction={() => {
+            resetPrefs();
+            runRecommend();
+          }}
+        />
+      )}
+    </Screen>
   );
 }
 
 const styles = StyleSheet.create({
-  headerWrap: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-    position: "relative",
-    overflow: "hidden",
+  header: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    justifyContent: 'space-between',
   },
-  headerGradient: {
-    position: "absolute",
-    width: "100%",
-    height: "100%",
+  title: {
+    marginBottom: 4,
   },
-  chatbot3DContainer: {
-    position: "absolute",
-    top: "50%",
-    left: "50%",
-    width: 120,
-    height: 120,
-    marginLeft: -60,
-    marginTop: -60,
-    zIndex: 10,
+  subtitle: {
+    marginTop: 4,
   },
-  chatbot3D: {
-    width: "100%",
-    height: "100%",
-    borderRadius: 30,
-    overflow: "hidden",
-    shadowColor: "#FF6B9D",
-    shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.4,
-    shadowRadius: 16,
-    elevation: 10,
-  },
-  chatbot3DGradient: {
-    width: "100%",
-    height: "100%",
-    borderRadius: 30,
-    alignItems: "center",
-    justifyContent: "center",
-    borderWidth: 3,
-    borderColor: "rgba(255, 255, 255, 0.3)",
-  },
-  chatbot3DFace: {
-    width: 80,
-    height: 80,
-    alignItems: "center",
-    justifyContent: "center",
-    flexDirection: "row",
-    gap: 12,
-    marginBottom: 8,
-  },
-  chatbot3DEye: {
-    width: 16,
-    height: 16,
-    borderRadius: 8,
-    backgroundColor: "#FFFFFF",
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
-    elevation: 3,
-  },
-  chatbot3DMouth: {
-    width: 24,
-    height: 12,
-    borderRadius: 12,
-    backgroundColor: "#FFFFFF",
-    marginTop: 8,
-    shadowColor: "#000",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.3,
-    shadowRadius: 4,
-    elevation: 3,
-  },
-  chatbot3DShadow: {
-    position: "absolute",
-    bottom: -10,
-    left: "20%",
-    right: "20%",
-    height: 20,
-    borderRadius: 50,
-    backgroundColor: "rgba(255, 107, 157, 0.2)",
-    transform: [{ scaleY: 0.5 }],
-  },
-
-  titleContainer: {
-    flexDirection: "row",
-    gap: 12,
-    alignItems: "flex-start",
-    justifyContent: "space-between",
-  },
-  title: { fontFamily: Fonts.rounded, color: "#1A1A1A" },
-  subtitle: { color: "#888", marginTop: 6 },
-
-  pill: {
-    paddingVertical: 6,
-    paddingHorizontal: 12,
-    borderRadius: 20,
-    backgroundColor: "#F5F5F5",
-  },
-  pillText: { fontSize: 12, color: "#666" },
-
-  debugLink: {
-    marginTop: 10,
-    alignSelf: "flex-start",
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-    borderRadius: 12,
-    backgroundColor: "#F8F9FA",
-  },
-  debugLinkText: { color: "#888", fontSize: 13 },
-
-  helper: { opacity: 0.5, marginTop: 8, fontSize: 13 },
-
-  inputContainer: {
-    borderRadius: 16,
-    overflow: "hidden",
-    backgroundColor: "#F8F9FA",
-    borderWidth: 1,
-    borderColor: "#E5E7EB",
-  },
-  input: {
-    paddingVertical: 14,
-    paddingHorizontal: 16,
-    borderRadius: 16,
-    color: "#1A1A1A",
-    fontSize: 15,
-    backgroundColor: "transparent",
-  },
-
-  badgeRowTop: { marginTop: 10, flexDirection: "row", flexWrap: "wrap", gap: 8 },
   badge: {
     paddingVertical: 6,
     paddingHorizontal: 12,
     borderRadius: 16,
-    backgroundColor: "#F0F0F0",
-  },
-  badgeText: { fontSize: 12, color: "#666" },
-
-  filterCard: {
-    marginTop: 16,
-    padding: 18,
-    borderRadius: 16,
-    overflow: "hidden",
-    backgroundColor: "#FFFFFF",
     borderWidth: 1,
-    borderColor: "#E5E7EB",
+  },
+  badgeText: {
+    fontSize: 12,
+    fontWeight: '600',
+  },
+  searchContainer: {
+    marginBottom: 20,
+  },
+  searchInput: {
+    marginBottom: 8,
+  },
+  helper: {
+    fontSize: 12,
+    marginTop: 4,
+  },
+  activeFilters: {
+    marginBottom: 16,
+  },
+  sectionLabel: {
+    fontSize: 12,
+    fontWeight: '600',
+    marginBottom: 8,
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
+  },
+  chipsContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 8,
+  },
+  filterCard: {
+    marginBottom: 16,
   },
   filterHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
-  resetText: { opacity: 0.65, fontSize: 13 },
-
-  rowWrap: { flexDirection: "row", flexWrap: "wrap", gap: 10 },
-  chip: {
-    borderRadius: 20,
-    overflow: "hidden",
-  },
-  chipActive: {
-    borderWidth: 0,
-  },
-  chipGradient: {
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-  },
-  chipText: {
-    fontFamily: Fonts.rounded,
-    fontSize: 13,
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    borderRadius: 20,
-    backgroundColor: "#F5F5F5",
-    color: "#666",
-  },
-  chipTextActive: {
-    fontFamily: Fonts.rounded,
-    fontSize: 13,
-    color: "#fff",
-  },
-
-  recommendBtn: {
-    marginTop: 14,
-    borderRadius: 16,
-    overflow: "hidden",
-    shadowColor: "#FF6B9D",
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.15,
-    shadowRadius: 4,
-    elevation: 2,
-  },
-  recommendBtnGradient: {
-    paddingVertical: 16,
-    paddingHorizontal: 20,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  recommendBtnText: {
-    color: "#fff",
+  filterTitle: {
     fontSize: 16,
-    fontWeight: "700",
+    fontWeight: '600',
   },
-
-  explainCard: {
-    marginTop: 16,
-    padding: 14,
-    borderRadius: 18,
-    borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.12)",
-    backgroundColor: "rgba(255,255,255,0.03)",
+  resetText: {
+    fontSize: 14,
+    fontWeight: '600',
   },
-  explainHeaderRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+  filterContent: {
+    gap: 16,
+  },
+  filterSection: {
     gap: 10,
   },
-  miniPill: {
-    paddingVertical: 6,
-    paddingHorizontal: 12,
-    borderRadius: 16,
-    backgroundColor: "#F5F5F5",
+  filterLabel: {
+    fontSize: 14,
+    fontWeight: '600',
   },
-  miniPillText: { fontSize: 12, color: "#666" },
-
-  aiMetaRow: { marginTop: 12, flexDirection: "row", gap: 10, flexWrap: "wrap" },
-  aiMetaBox: {
-    paddingVertical: 10,
-    paddingHorizontal: 12,
-    borderRadius: 12,
+  recommendButton: {
+    marginTop: 8,
+  },
+  errorContainer: {
+    marginTop: 16,
+    padding: 12,
+    borderRadius: 8,
     borderWidth: 1,
-    borderColor: "#E5E7EB",
-    backgroundColor: "#F8F9FA",
-    minWidth: 150,
   },
-  aiMetaLabel: { color: "#888", fontSize: 12 },
-  aiMetaValue: { marginTop: 4, fontSize: 13, color: "#1A1A1A" },
-
-  resultsHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
+  errorText: {
+    fontSize: 14,
   },
-
-  cardWrap: { position: "relative" },
-
-  card: {
+  explanationCard: {
+    marginBottom: 16,
+  },
+  explanationHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: 12,
+  },
+  explanationTitle: {
+    fontSize: 16,
+    fontWeight: '600',
+  },
+  explanationText: {
+    fontSize: 14,
+    lineHeight: 20,
+  },
+  resultsSection: {
+    marginTop: 24,
+  },
+  cardWrapper: {
+    position: 'relative',
+    marginBottom: 12,
+  },
+  saveButtonContainer: {
+    position: 'absolute',
+    top: 12,
+    right: 12,
     borderRadius: 20,
-    backgroundColor: "rgba(255,255,255,0.04)",
-    borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.12)",
-    overflow: "hidden",
-    minHeight: 172,
+    overflow: 'hidden',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.4,
+    shadowRadius: 6,
+    elevation: 8,
+    zIndex: 10,
   },
-
-  cardImage: {
-    position: "absolute",
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    opacity: 0.98,
+  saveButtonBlur: {
+    borderRadius: 20,
+    overflow: 'hidden',
   },
-  cardImageOverlay: {
-    position: "absolute",
-    left: 0,
-    right: 0,
-    top: 0,
-    bottom: 0,
-    backgroundColor: "rgba(0,0,0,0.42)",
+  saveButton: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-
-  cardTopRow: {
-    padding: 14,
-    paddingBottom: 0,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  rankPill: {
-    paddingVertical: 6,
-    paddingHorizontal: 10,
-    borderRadius: 999,
-    borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.16)",
-    backgroundColor: "rgba(0,0,0,0.28)",
-  },
-  rankText: { fontSize: 12, opacity: 0.9 },
-
-  cardContent: {
-    padding: 16,
-    paddingTop: 12,
-    justifyContent: "flex-end",
-    minHeight: 172,
-  },
-  cardTitle: { fontSize: 18 },
-  cardSubtitle: { opacity: 0.84, marginTop: 6, lineHeight: 18 },
-
-  badgeRow: { marginTop: 10, flexDirection: "row", flexWrap: "wrap", gap: 8 },
-  tinyTag: {
-    paddingVertical: 6,
-    paddingHorizontal: 10,
-    borderRadius: 999,
-    borderWidth: 1,
-    borderColor: "rgba(255,255,255,0.14)",
-    backgroundColor: "rgba(0,0,0,0.22)",
-  },
-  tinyTagText: { fontSize: 12, opacity: 0.85 },
-
-  saveBtn: {
-    position: "absolute",
-    top: 10,
-    right: 10,
-    paddingVertical: 8,
-    paddingHorizontal: 10,
-    borderRadius: 999,
-    borderWidth: 1,
-    zIndex: 50,
-    elevation: 50,
-  },
-  saveBtnActive: {
-    borderColor: "rgba(255,255,255,0.85)",
-    backgroundColor: "rgba(255,255,255,0.12)",
-    opacity: 1,
-  },
-  saveBtnInactive: {
-    borderColor: "rgba(255,255,255,0.18)",
-    backgroundColor: "rgba(0,0,0,0.26)",
-    opacity: 0.95,
-  },
-
-  cardHintRow: {
-    marginTop: 12,
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    opacity: 0.75,
-  },
-  cardHint: { fontSize: 13 },
 });
