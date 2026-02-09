@@ -144,42 +144,44 @@ FINE_DINING = [
     ("Bebek Balıkçı", "Restoran", "Deniz ürünleri restoranı. Taze balık, boğaz manzarası. Akşam yemekleri için.", 4, "Deniz Ürünleri, Taze Balık, Boğaz Manzarası, Akşam"),
 ]
 
-# Tüm mekanları oluştur
+# Sadece 5+ şubeli zincirler (keep_chains_5plus ile uyumlu)
+MIN_BRANCHES = 5
+CAFE_LOCATIONS = ["Taksim", "Kadıköy", "Nişantaşı", "Levent", "Bebek", "Beşiktaş", "Üsküdar", "Bostancı", "Şişli", "Mecidiyeköy", "Zorlu Center", "İstiklal", "Moda", "Bağdat Caddesi", "Etiler", "Ortaköy"]
+FAST_FOOD_LOCATIONS = ["Taksim", "Kadıköy", "Nişantaşı", "Levent", "Beşiktaş", "Üsküdar", "Bostancı", "Şişli", "Mecidiyeköy", "Zorlu Center", "İstiklal", "Bağdat Caddesi", "Etiler", "Ortaköy", "Beyoğlu", "Karaköy"]
+RESTAURANT_LOCATIONS = ["Taksim", "Kadıköy", "Nişantaşı", "Levent", "Beşiktaş", "Üsküdar", "Bostancı", "Şişli", "Etiler", "Ortaköy", "Beyoğlu", "Sultanahmet"]
+BAR_LOCATIONS = ["Taksim", "Beşiktaş", "Ortaköy", "Beyoğlu", "Karaköy", "Galata", "Etiler"]
+
+# 5+ şube alacak kafe zincirleri
+CAFE_CHAINS_5PLUS = ["Espresso Lab", "Starbucks", "Kahve Dünyası", "Gloria Jeans", "Mado", "Simit Sarayı", "The House Café", "BigChefs"]
+# 5+ şube alacak fast food zincirleri
+FAST_FOOD_5PLUS = ["McDonald's", "Burger King", "KFC", "Köfteci Yusuf", "Subway", "Domino's Pizza", "Pizza Hut"]
+# 5+ şube alacak restoran zincirleri
+RESTAURANT_5PLUS = ["Nusr-Et", "Günaydın"]
+
 PLACES_DATA = []
 
-# Kafeler - Her zincir için 3-5 şube
-CAFE_LOCATIONS = ["Taksim", "Kadıköy", "Nişantaşı", "Levent", "Bebek", "Beşiktaş", "Üsküdar", "Bostancı", "Şişli", "Mecidiyeköy", "Zorlu Center", "İstiklal", "Moda", "Bağdat Caddesi", "Etiler", "Ortaköy"]
 for chain, category, desc, price, features in CAFE_CHAINS:
-    locations = CAFE_LOCATIONS[:5] if chain in ["Espresso Lab", "Starbucks"] else CAFE_LOCATIONS[:3]
-    for loc in locations:
+    if chain not in CAFE_CHAINS_5PLUS:
+        continue
+    n = max(MIN_BRANCHES, 8 if chain in ["Starbucks", "Kahve Dünyası"] else 6)
+    for loc in CAFE_LOCATIONS[:n]:
         PLACES_DATA.append(create_place(chain, chain, loc, category, desc, price, features))
 
-# Fast Food - Her zincir için 4-6 şube
-FAST_FOOD_LOCATIONS = ["Taksim", "Kadıköy", "Nişantaşı", "Levent", "Beşiktaş", "Üsküdar", "Bostancı", "Şişli", "Mecidiyeköy", "Zorlu Center", "İstiklal", "Bağdat Caddesi", "Etiler", "Ortaköy", "Beyoğlu", "Karaköy"]
 for chain, category, desc, price, features in FAST_FOOD_CHAINS:
-    locations = FAST_FOOD_LOCATIONS[:6] if chain in ["McDonald's", "Burger King"] else FAST_FOOD_LOCATIONS[:4]
-    for loc in locations:
+    if chain not in FAST_FOOD_5PLUS:
+        continue
+    n = max(MIN_BRANCHES, 10 if chain in ["McDonald's", "Burger King"] else 6)
+    for loc in FAST_FOOD_LOCATIONS[:n]:
         PLACES_DATA.append(create_place(chain, chain, loc, category, desc, price, features))
 
-# Restoranlar - Her zincir için 2-4 şube
-RESTAURANT_LOCATIONS = ["Taksim", "Kadıköy", "Nişantaşı", "Levent", "Beşiktaş", "Üsküdar", "Bostancı", "Şişli", "Etiler", "Ortaköy", "Beyoğlu", "Sultanahmet"]
 for chain, category, desc, price, features in RESTAURANT_CHAINS:
-    locations = RESTAURANT_LOCATIONS[:4] if chain in ["Nusr-Et", "Günaydın"] else RESTAURANT_LOCATIONS[:2]
-    for loc in locations:
+    if chain not in RESTAURANT_5PLUS:
+        continue
+    n = max(MIN_BRANCHES, 6)
+    for loc in RESTAURANT_LOCATIONS[:n]:
         PLACES_DATA.append(create_place(chain, chain, loc, category, desc, price, features))
 
-# Barlar - Her zincir için 1-2 şube (daha az şube)
-BAR_LOCATIONS = ["Taksim", "Beşiktaş", "Ortaköy", "Beyoğlu", "Karaköy", "Galata", "Etiler"]
-for chain, category, desc, price, features in BAR_CHAINS:
-    locations = BAR_LOCATIONS[:2] if chain in ["360 Bar", "5. Kat", "Leb-i Derya"] else BAR_LOCATIONS[:1]
-    for loc in locations:
-        PLACES_DATA.append(create_place(chain, chain, loc, category, desc, price, features))
-
-# Fine Dining - Her zincir için 1 şube (özel mekanlar)
-FINE_DINING_LOCATIONS = ["Beşiktaş", "Ortaköy", "Etiler", "Beyoğlu", "Üsküdar"]
-for idx, (chain, category, desc, price, features) in enumerate(FINE_DINING):
-    loc = FINE_DINING_LOCATIONS[idx % len(FINE_DINING_LOCATIONS)]
-    PLACES_DATA.append(create_place(chain, chain, loc, category, desc, price, features))
+# Barlar ve fine dining tek şube; 5+ olmadığı için eklemiyoruz (istersen sonra 5+ bar zinciri eklenebilir)
 
 def add_place(place_data: Dict) -> bool:
     """Tek bir mekanı backend'e ekle"""

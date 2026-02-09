@@ -33,6 +33,7 @@ export const darkColors: ColorTheme = {
     hover: 'rgba(255, 255, 255, 0.08)',      // Interactive states
     pressed: 'rgba(255, 255, 255, 0.12)',   // Pressed states
     border: 'rgba(255, 255, 255, 0.1)',     // Subtle borders
+    elevated: '#242424',                     // Cards, filter bars, raised UI
   },
   accent: {
     primary: '#1DB954',       // Spotify green equivalent - primary action color
@@ -60,21 +61,21 @@ export const darkColors: ColorTheme = {
 
 /**
  * Light theme color palette (Optional, Secondary)
- * 
- * For future light mode support.
+ * Yumuşak tonlar – parlak beyaz yerine göz yormayan arka planlar.
  */
 export const lightColors: ColorTheme = {
   background: {
-    primary: '#FFFFFF',
-    secondary: '#F8F8F8',
-    tertiary: '#F0F0F0',
-    elevated: '#FFFFFF',
+    primary: '#F5F5F7',
+    secondary: '#EBEBED',
+    tertiary: '#E5E5E7',
+    elevated: '#FAFAFA',
   },
   surface: {
-    default: 'rgba(0, 0, 0, 0.05)',
-    hover: 'rgba(0, 0, 0, 0.08)',
-    pressed: 'rgba(0, 0, 0, 0.12)',
-    border: 'rgba(0, 0, 0, 0.1)',
+    default: 'rgba(0, 0, 0, 0.04)',
+    hover: 'rgba(0, 0, 0, 0.06)',
+    pressed: 'rgba(0, 0, 0, 0.1)',
+    border: 'rgba(0, 0, 0, 0.08)',
+    elevated: '#EBEBED',
   },
   accent: {
     primary: '#1DB954',
@@ -82,14 +83,14 @@ export const lightColors: ColorTheme = {
     primaryPressed: '#1AA34A',
   },
   text: {
-    primary: '#121212',
-    secondary: '#4A4A4A',
-    tertiary: '#727272',
+    primary: '#1C1C1E',
+    secondary: '#48484A',
+    tertiary: '#636366',
     inverse: '#FFFFFF',
   },
   semantic: {
     success: '#1DB954',
-    warning: '#FFA500',
+    warning: '#FF9F0A',
     error: '#E22134',
     info: '#1DB954',
   },

@@ -7,24 +7,26 @@
  * @module app/(tabs)/index
  */
 
-import { router } from 'expo-router';
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { router, useNavigation } from 'expo-router';
+import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, FlatList, useWindowDimensions } from 'react-native';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import { useTheme } from '@/hooks/useTheme';
-import { Screen, Section } from '@/components/layout';
-import { PlaceCard } from '@/components/place/PlaceCard';
-import { SearchInput, Chip, FilterCard, Card, Button, PlaceCardSkeleton, AnimatedPlaceCard } from '@/components/ui';
+import { Screen, type ScreenRef } from '@/components/layout';
+import { SearchInput, Chip, FilterCard, Button, AnimatedPlaceCard, LoadingState, ErrorState, EmptyState } from '@/components/ui';
 import { useSavedPlaces } from '@/src/state/savedPlaces';
 import { getPlaceImageSource } from '@/src/utils/placeImages';
-import { createTextStyle, spacing } from '@/constants/design';
+import { createTextStyle, spacing, s } from '@/constants/design';
 import { getPlaces } from '@/src/services/mekanService';
 import type { Place } from '@/src/services/mekanService';
 import { handleApiError } from '@/src/utils/errorHandler';
 import { lightImpact } from '@/src/utils/haptics';
 
 export default function HomeScreen() {
+  const { height } = useWindowDimensions();
   const { colors, spacing, typography } = useTheme();
+  const navigation = useNavigation();
+  const screenRef = useRef<ScreenRef>(null);
   const savedCount = useSavedPlaces((s) => s.ids.length);
   const [places, setPlaces] = useState<Place[]>([]);
   const [allPlaces, setAllPlaces] = useState<Place[]>([]);
@@ -35,7 +37,16 @@ export default function HomeScreen() {
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [sortBy, setSortBy] = useState<'default' | 'name' | 'rating'>('default');
   const [showFilters, setShowFilters] = useState(false);
+  const [expandedFilterSection, setExpandedFilterSection] = useState<'location' | 'category' | 'sort' | null>(null);
   const [refreshing, setRefreshing] = useState(false);
+
+  // Listen for tab press to scroll to top
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('tabPress' as any, (e: any) => {
+      screenRef.current?.scrollToTop();
+    });
+    return unsubscribe;
+  }, [navigation]);
 
   useEffect(() => {
     loadPlaces();
@@ -202,285 +213,164 @@ export default function HomeScreen() {
 
   const hasActiveFilters = selectedCategory || selectedLocation || searchQuery.trim() || sortBy !== 'default';
 
-  // Marka adı
-  const brandName = 'AsEmOs';
-
-  const getDateText = () => {
-    const date = new Date();
-    const days = ['Pazar', 'Pazartesi', 'Salı', 'Çarşamba', 'Perşembe', 'Cuma', 'Cumartesi'];
-    const months = [
-      'Ocak',
-      'Şubat',
-      'Mart',
-      'Nisan',
-      'Mayıs',
-      'Haziran',
-      'Temmuz',
-      'Ağustos',
-      'Eylül',
-      'Ekim',
-      'Kasım',
-      'Aralık',
-    ];
-    return `${days[date.getDay()]}, ${date.getDate()} ${months[date.getMonth()]}`;
+  const getLocationFromName = (name: string) => {
+    if (!name || !name.includes(' - ')) return undefined;
+    return name.split(' - ')[1]?.trim();
   };
 
-  const greetingStyle = createTextStyle('title', colors.text.primary);
-  const dateStyle = createTextStyle('bodySmall', colors.text.secondary);
+  const renderPlaceItem = useCallback(
+    ({ item, index }: { item: Place; index: number }) => (
+      <AnimatedPlaceCard
+        index={index}
+        image={getPlaceImageSource(item)}
+        imagePlaceholder={!item.photo_url}
+        title={item.name}
+        subtitle={item.subtitle}
+        tags={item.tags}
+        location={getLocationFromName(item.name)}
+        onPress={() => router.push({ pathname: '/place/[id]', params: { id: String(item.id) } })}
+      />
+    ),
+    []
+  );
 
   return (
-    <Screen onRefresh={handleRefresh} refreshing={refreshing}>
+    <Screen ref={screenRef} onRefresh={handleRefresh} refreshing={refreshing} withTabBar>
       {/* Header */}
-      <View style={[styles.header, { marginTop: spacing.base, marginBottom: spacing.xl }]}>
-        <View>
-          <Text style={[greetingStyle, styles.greeting]}>{brandName}</Text>
-          <Text style={[dateStyle, styles.date]}>{getDateText()}</Text>
-        </View>
-        <View
-          style={[
-            styles.statsContainer,
-            {
-              backgroundColor: colors.surface.default,
-              borderColor: colors.surface.border,
-            },
-          ]}
+      <View style={styles.header}>
+        <Text style={[createTextStyle('title', colors.text.primary), styles.headerTitle]}>
+          Ana Sayfa
+        </Text>
+        <TouchableOpacity
+          onPress={() => {
+            lightImpact();
+            router.push('/(tabs)/profile');
+          }}
+          style={[styles.profileButton, { backgroundColor: colors.surface.elevated }]}
+          activeOpacity={0.7}
         >
-          <View style={styles.statItem}>
-            <Text style={[styles.statNumber, { color: colors.accent.primary }]}>
-              {loading ? '...' : '121+'}
-            </Text>
-            <Text style={[styles.statLabel, { color: colors.text.secondary }]}>Mekan</Text>
-          </View>
-          <View style={[styles.statDivider, { backgroundColor: colors.surface.border }]} />
-          <View style={styles.statItem}>
-            <Text style={[styles.statNumber, { color: colors.accent.primary }]}>
-              {savedCount}
-            </Text>
-            <Text style={[styles.statLabel, { color: colors.text.secondary }]}>Kayıtlı</Text>
-          </View>
-        </View>
+          <IconSymbol name="person.fill" size={18} color={colors.text.secondary} />
+        </TouchableOpacity>
       </View>
 
       {/* Search */}
       <View style={styles.searchContainer}>
         <SearchInput
           placeholder="Mekan ara..."
+          placeholderTextColor={colors.text.secondary}
           value={searchQuery}
           onChangeText={setSearchQuery}
           containerStyle={styles.searchInput}
         />
       </View>
 
-      {/* Active Filters & Results Count */}
-      {hasActiveFilters && (
-        <View style={[styles.activeFiltersBar, { backgroundColor: colors.surface.elevated, borderColor: colors.surface.border }]}>
-          <View style={styles.activeFiltersContent}>
-            <Text style={[styles.resultsCount, { color: colors.text.primary }]}>
-              {places.length} mekan bulundu
-            </Text>
-            <TouchableOpacity
-              onPress={clearAllFilters}
-              style={[styles.clearButton, { backgroundColor: colors.surface.default }]}
-            >
-              <Text style={[styles.clearButtonText, { color: colors.accent.primary }]}>
-                Filtreleri Temizle
-              </Text>
-            </TouchableOpacity>
-          </View>
-          <View style={styles.activeFiltersChips}>
-            {selectedLocation && (
-              <Chip
-                label={`Konum: ${selectedLocation}`}
-                active
-                onPress={() => setSelectedLocation(null)}
-              />
-            )}
-            {selectedCategory && (
-              <Chip
-                label={`Kategori: ${selectedCategory}`}
-                active
-                onPress={() => setSelectedCategory(null)}
-              />
-            )}
-            {searchQuery.trim() && (
-              <Chip
-                label={`Arama: ${searchQuery}`}
-                active
-                onPress={() => setSearchQuery('')}
-              />
-            )}
-          </View>
-        </View>
-      )}
-
-      {/* Filter Toggle Button */}
-      <TouchableOpacity
-        onPress={() => setShowFilters(!showFilters)}
-        style={[styles.filterToggle, { backgroundColor: colors.surface.elevated, borderColor: colors.surface.border }]}
-      >
-        <Text style={[styles.filterToggleText, { color: colors.text.primary }]}>
-          {showFilters ? 'Filtreleri Gizle' : 'Filtreleri Göster'}
-        </Text>
-        <IconSymbol
-          name={showFilters ? 'chevron.up' : 'chevron.down'}
-          size={24}
-          color={colors.text.secondary}
-        />
-      </TouchableOpacity>
-
-      {/* Filters Section - Trendyol Style */}
-      {showFilters && (
-        <Card style={[styles.filtersCard, { marginBottom: spacing.base }]}>
-          {/* Location Filters */}
-          <View style={styles.filterSection}>
-            <Text style={[styles.filterSectionTitle, { color: colors.text.primary }]}>
-              Konum Seç
-            </Text>
-            <View style={styles.filterCardsContainer}>
-              {['Beşiktaş', 'Nişantaşı', 'Taksim', 'Kadıköy', 'Levent', 'Bebek', 'Üsküdar', 'Ortaköy'].map((loc) => {
-                const count = allPlaces.filter(p => {
-                  const name = p.name?.toLowerCase() || '';
-                  return name.includes(` - ${loc.toLowerCase()}`) || name.includes(` ${loc.toLowerCase()}`);
-                }).length;
-                return (
-                  <FilterCard
-                    key={loc}
-                    label={loc}
-                    value={count > 0 ? `${count} mekan` : undefined}
-                    active={selectedLocation === loc}
-                    icon="location.fill"
-                    onPress={() => handleLocationSelect(loc)}
-                  />
-                );
-              })}
-            </View>
-          </View>
-
-          {/* Category Filters */}
-          <View style={styles.filterSection}>
-            <Text style={[styles.filterSectionTitle, { color: colors.text.primary }]}>
-              Kategori Seç
-            </Text>
-            <View style={styles.filterCardsContainer}>
-              {['Café', 'Restoran', 'Bar', 'Gece Kulübü'].map((cat) => {
-                const count = allPlaces.filter(p => {
-                  const name = p.name?.toLowerCase() || '';
-                  const category = p.category?.toLowerCase() || '';
-                  if (cat === 'Gece Kulübü') {
-                    return name.includes('sortie') || name.includes('reina') || 
-                           name.includes('anjelique') || name.includes('ruby') || name.includes('29');
-                  }
-                  if (cat === 'Café') {
-                    return name.includes('espresso') || name.includes('starbucks') || 
-                           name.includes('kahve') || name.includes('café') || name.includes('cafe') ||
-                           name.includes('nero') || name.includes('mado') || name.includes('simit') ||
-                           category === 'kafe';
-                  }
-                  if (cat === 'Restoran') {
-                    return name.includes('nusr') || name.includes('günaydın') || 
-                           name.includes('muhallebi') || name.includes('sütiş') ||
-                           name.includes('çiya') || name.includes('ocakbaşı') ||
-                           name.includes('mikla') || name.includes('sunset') ||
-                           category === 'restoran';
-                  }
-                  if (cat === 'Bar') {
-                    return name.includes('bar') || name.includes('360') || category === 'bar';
-                  }
-                  return false;
-                }).length;
-                return (
-                  <FilterCard
-                    key={cat}
-                    label={cat}
-                    value={count > 0 ? `${count} mekan` : undefined}
-                    active={selectedCategory === cat}
-                    onPress={() => handleCategorySelect(cat)}
-                  />
-                );
-              })}
-            </View>
-          </View>
-
-          {/* Sort Options */}
-          <View style={styles.filterSection}>
-            <Text style={[styles.filterSectionTitle, { color: colors.text.primary }]}>
-              Sıralama
-            </Text>
-            <View style={styles.filterCardsContainer}>
-              <FilterCard
-                label="Varsayılan"
-                active={sortBy === 'default'}
-                icon="slider.horizontal.3"
-                onPress={() => handleSortSelect('default')}
-              />
-              <FilterCard
-                label="İsme Göre (A-Z)"
-                active={sortBy === 'name'}
-                icon="arrow.up.arrow.down"
-                onPress={() => handleSortSelect('name')}
-              />
-            </View>
-          </View>
-        </Card>
-      )}
-
-      {/* Results Header */}
-      {!loading && !error && places.length > 0 && (
-        <View style={[styles.resultsHeader, { marginBottom: spacing.base }]}>
-          <Text style={[styles.resultsHeaderText, { color: colors.text.primary }]}>
-            {places.length} mekan bulundu
+      {/* Quick Filters */}
+      <View style={styles.quickFilters}>
+        <TouchableOpacity
+          onPress={() => { lightImpact(); setShowFilters(!showFilters); }}
+          activeOpacity={0.7}
+          style={[styles.filterButton, { 
+            backgroundColor: colors.surface.elevated, 
+            borderColor: hasActiveFilters ? colors.accent.primary : colors.surface.border 
+          }]}
+        >
+          <IconSymbol name="slider.horizontal.3" size={16} color={colors.text.secondary} />
+          <Text style={[styles.filterButtonText, { color: colors.text.primary }]}>
+            Filtreler
           </Text>
           {hasActiveFilters && (
-            <TouchableOpacity
-              onPress={clearAllFilters}
-              style={styles.clearFiltersButton}
-            >
-              <Text style={[styles.clearFiltersText, { color: colors.accent.primary }]}>
-                Temizle
-              </Text>
-            </TouchableOpacity>
+            <View style={[styles.filterDot, { backgroundColor: colors.accent.primary }]} />
           )}
+        </TouchableOpacity>
+        
+        {hasActiveFilters && (
+          <TouchableOpacity
+            onPress={clearAllFilters}
+            activeOpacity={0.7}
+            style={[styles.clearFiltersBtn, { backgroundColor: colors.surface.elevated, borderColor: colors.surface.border }]}
+          >
+            <Text style={[styles.clearFiltersBtnText, { color: colors.text.tertiary }]}>Temizle</Text>
+          </TouchableOpacity>
+        )}
+      </View>
+
+      {/* Compact Filters Panel */}
+      {showFilters && (
+        <View style={[styles.filterPanel, { backgroundColor: colors.surface.elevated, borderColor: colors.surface.border }]}>
+          <View style={styles.filterRow}>
+            <Text style={[styles.filterLabel, { color: colors.text.secondary }]}>Konum</Text>
+            <View style={styles.filterChips}>
+              {['Beşiktaş', 'Kadıköy', 'Taksim', 'Nişantaşı'].map((loc) => (
+                <Chip
+                  key={loc}
+                  label={loc}
+                  size="small"
+                  active={selectedLocation === loc}
+                  onPress={() => handleLocationSelect(loc)}
+                  style={{ marginRight: 10, marginBottom: 12 }}
+                />
+              ))}
+            </View>
+          </View>
+          
+          <View style={styles.filterRow}>
+            <Text style={[styles.filterLabel, { color: colors.text.secondary }]}>Kategori</Text>
+            <View style={styles.filterChips}>
+              {['Café', 'Restoran', 'Bar'].map((cat) => (
+                <Chip
+                  key={cat}
+                  label={cat}
+                  size="small"
+                  active={selectedCategory === cat}
+                  onPress={() => handleCategorySelect(cat)}
+                  style={{ marginRight: 10, marginBottom: 8 }}
+                />
+              ))}
+            </View>
+          </View>
         </View>
       )}
 
-      {/* Featured Places */}
-      <Section title={hasActiveFilters ? "Sonuçlar" : "Öne Çıkan Mekanlar"}>
-        {loading ? (
-          <PlaceCardSkeleton count={6} />
-        ) : error ? (
-          <View style={styles.errorContainer}>
-            <Text style={[styles.errorText, { color: colors.semantic.error }]}>
-              {error}
-            </Text>
-            <TouchableOpacity
-              onPress={loadPlaces}
-              style={[styles.retryButton, { backgroundColor: colors.accent.primary }]}
-            >
-              <Text style={[styles.retryText, { color: colors.text.inverse }]}>
-                Tekrar Dene
-              </Text>
-            </TouchableOpacity>
-          </View>
-        ) : places.length === 0 ? (
-          <View style={styles.emptyContainer}>
-            <Text style={[styles.emptyText, { color: colors.text.secondary }]}>
-              Henüz mekan bulunmuyor
-            </Text>
-          </View>
-        ) : (
-          places.map((place, index) => (
-            <AnimatedPlaceCard
-              key={place.id}
-              index={index}
-              image={getPlaceImageSource(place)}
-              title={place.name}
-              subtitle={place.subtitle}
-              tags={place.tags}
-              onPress={() => router.push({ pathname: '/place/[id]', params: { id: String(place.id) } })}
-            />
-          ))
-        )}
-      </Section>
+      {loading ? (
+        <View style={styles.centerContainer}>
+          <LoadingState message="Mekanlar yükleniyor..." />
+        </View>
+      ) : error ? (
+        <View style={styles.centerContainer}>
+          <ErrorState
+            title="Mekanlar Yüklenemedi"
+            description={error}
+            onRetry={loadPlaces}
+          />
+        </View>
+      ) : places.length === 0 ? (
+        <View style={styles.centerContainer}>
+          <EmptyState
+            icon={hasActiveFilters ? "magnifyingglass" : "mappin.slash"}
+            title={hasActiveFilters ? "Sonuç Bulunamadı" : "Henüz Mekan Yok"}
+            description={hasActiveFilters ? "Filtrelerinizi değiştirip tekrar deneyin" : "Yakında yeni mekanlar eklenecek"}
+            actionLabel={hasActiveFilters ? "Filtreleri Temizle" : undefined}
+            onAction={hasActiveFilters ? () => {
+              setSelectedCategory(null);
+              setSelectedLocation(null);
+              setSearchQuery('');
+              setSortBy('default');
+            } : undefined}
+          />
+        </View>
+      ) : (
+        <FlatList
+          data={places}
+          keyExtractor={(item) => String(item.id)}
+          scrollEnabled={false}
+          initialNumToRender={6}
+          windowSize={7}
+          removeClippedSubviews={true}
+          renderItem={renderPlaceItem}
+          listKey="home-place-list"
+          contentContainerStyle={styles.listContent}
+        />
+      )}
     </Screen>
   );
 }
@@ -488,152 +378,87 @@ export default function HomeScreen() {
 const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
+    alignItems: 'center',
     justifyContent: 'space-between',
-    alignItems: 'flex-start',
+    marginBottom: s(5),
   },
-  greeting: {
-    marginBottom: 4,
-  },
-  date: {
-    // Styling applied dynamically
-  },
-  statsContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    borderRadius: 12,
-    padding: 12,
-    borderWidth: 1,
-  },
-  statItem: {
-    alignItems: 'center',
-    paddingHorizontal: 12,
-  },
-  statNumber: {
-    fontSize: 20,
+  headerTitle: {
+    fontSize: 28,
     fontWeight: '700',
-    marginBottom: 2,
   },
-  statLabel: {
-    fontSize: 11,
-    fontWeight: '500',
-  },
-  statDivider: {
-    width: 1,
-    height: 24,
+  profileButton: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   searchContainer: {
-    marginBottom: 24,
+    marginBottom: s(5),
     width: '100%',
   },
   searchInput: {
     marginBottom: 0,
   },
-  chipsContainer: {
+  quickFilters: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 8,
+    gap: s(2),
+    marginBottom: s(5),
   },
-  errorContainer: {
+  filterButton: {
+    flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 40,
+    gap: 6,
+    paddingHorizontal: s(4),
+    paddingVertical: 10,
+    borderRadius: 20,
+    borderWidth: 1,
   },
-  errorText: {
-    marginBottom: 16,
-    fontSize: 14,
-    textAlign: 'center',
-  },
-  retryButton: {
-    paddingHorizontal: 24,
-    paddingVertical: 12,
-    borderRadius: 8,
-  },
-  retryText: {
+  filterButtonText: {
     fontSize: 14,
     fontWeight: '600',
   },
-  emptyContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 40,
+  filterDot: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
   },
-  emptyText: {
+  clearFiltersBtn: {
+    paddingHorizontal: s(4),
+    paddingVertical: 10,
+    borderRadius: 20,
+    borderWidth: 1,
+  },
+  clearFiltersBtnText: {
     fontSize: 14,
-    textAlign: 'center',
+    fontWeight: '500',
   },
-  activeFiltersBar: {
+  filterPanel: {
     borderRadius: 12,
     borderWidth: 1,
-    padding: 16,
-    marginBottom: 16,
+    padding: s(4),
+    marginBottom: s(5),
+    gap: s(4),
   },
-  activeFiltersContent: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 12,
-  },
-  resultsCount: {
-    fontSize: 16,
+  filterLabel: {
+    fontSize: 12,
     fontWeight: '600',
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
+    marginBottom: 8,
   },
-  clearButton: {
-    paddingHorizontal: 16,
-    paddingVertical: 8,
-    borderRadius: 8,
-  },
-  clearButtonText: {
-    fontSize: 14,
-    fontWeight: '600',
-  },
-  activeFiltersChips: {
+  filterChips: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 8,
   },
-  filterToggle: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+  centerContainer: {
+    flex: 1,
     alignItems: 'center',
-    padding: 16,
-    borderRadius: 12,
-    borderWidth: 1,
-    marginBottom: 16,
+    justifyContent: 'center',
+    minHeight: 400,
   },
-  filterToggleText: {
-    fontSize: 16,
-    fontWeight: '600',
-  },
-  filtersCard: {
-    padding: 20,
-  },
-  filterSection: {
-    marginBottom: 24,
-  },
-  filterSectionTitle: {
-    fontSize: 18,
-    fontWeight: '700',
-    marginBottom: 16,
-  },
-  filterCardsContainer: {
-    gap: 12,
-  },
-  resultsHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingVertical: spacing.sm,
-  },
-  resultsHeaderText: {
-    fontSize: 16,
-    fontWeight: '600',
-  },
-  clearFiltersButton: {
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-  },
-  clearFiltersText: {
-    fontSize: 14,
-    fontWeight: '600',
+  listContent: {
+    gap: s(5),
+    paddingBottom: s(4),
   },
 });

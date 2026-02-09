@@ -19,6 +19,7 @@ import { TouchableOpacity, View, Text, StyleSheet, ViewStyle, TextStyle } from '
 import { IconSymbol, type IconSymbolName } from './icon-symbol';
 import { useTheme } from '@/hooks/useTheme';
 import { spacing } from '@/constants/design';
+import { lightImpact } from '@/src/utils/haptics';
 
 export interface SettingsRowProps {
   /**
@@ -51,6 +52,12 @@ export interface SettingsRowProps {
    * Icon name (left side)
    */
   icon?: IconSymbolName;
+  
+  /**
+   * Show bottom divider
+   * @default false
+   */
+  showDivider?: boolean;
 }
 
 /**
@@ -63,47 +70,60 @@ export function SettingsRow({
   showArrow = false,
   style,
   icon,
+  showDivider = false,
 }: SettingsRowProps) {
   const { colors, typography } = useTheme();
 
   const content = (
-    <View style={[styles.row, style]}>
-      {icon && (
-        <View style={styles.iconContainer}>
-          <IconSymbol name={icon} size={24} color={colors.text.secondary} />
+    <>
+      <View style={[styles.row, style]}>
+        {icon && (
+          <View style={styles.iconContainer}>
+            <IconSymbol name={icon} size={22} color={colors.text.secondary} />
+          </View>
+        )}
+        <Text style={[styles.label, { color: colors.text.primary }]} numberOfLines={1}>
+          {label}
+        </Text>
+        <View style={styles.right}>
+          {value && (
+            <Text
+              style={[
+                styles.value,
+                { color: colors.text.secondary },
+              ]}
+              numberOfLines={1}
+            >
+              {value}
+            </Text>
+          )}
+          {showArrow && (
+            <IconSymbol
+              name="chevron.right"
+              size={18}
+              color={colors.text.tertiary}
+              style={styles.arrow}
+            />
+          )}
         </View>
-      )}
-      <Text style={[styles.label, { color: colors.text.primary }, typography.body]}>
-        {label}
-      </Text>
-      <View style={styles.right}>
-        {value && (
-          <Text
-            style={[
-              styles.value,
-              { color: colors.text.secondary },
-              typography.bodySmall,
-            ]}
-          >
-            {value}
-          </Text>
-        )}
-        {showArrow && (
-          <IconSymbol
-            name="chevron.right"
-            size={20}
-            color={colors.text.tertiary}
-            style={styles.arrow}
-          />
-        )}
       </View>
-    </View>
+      {showDivider && (
+        <View style={[styles.divider, { backgroundColor: colors.surface.border }]} />
+      )}
+    </>
   );
+
+  const handlePress = () => {
+    if (onPress) {
+      lightImpact();
+      onPress();
+    }
+  };
 
   if (onPress) {
     return (
       <TouchableOpacity
-        onPress={onPress}
+        onPress={handlePress}
         activeOpacity={0.7}
         style={[
           styles.container,
@@ -138,36 +158,44 @@ export function SettingsRow({
 const styles = StyleSheet.create({
   container: {
     borderRadius: 12,
-    marginBottom: spacing.xs,
+    marginBottom: spacing.sm,
     overflow: 'hidden',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.1,
-    shadowRadius: 2,
-    elevation: 2,
   },
   row: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: spacing.lg,
+    paddingHorizontal: spacing.base,
     paddingVertical: spacing.md,
-    minHeight: 56,
+    minHeight: 52, // >= 44pt touch target
   },
   iconContainer: {
     marginRight: spacing.md,
+    width: 28,
+    alignItems: 'center',
   },
   label: {
     flex: 1,
+    minWidth: 0,
+    fontSize: 15,
+    fontWeight: '500',
+    letterSpacing: 0.1,
   },
   right: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: spacing.xs,
+    gap: 6,
+    flexShrink: 0,
+    maxWidth: '50%',
   },
   value: {
-    marginRight: spacing.xs,
+    fontSize: 14,
+    fontWeight: '500',
   },
   arrow: {
-    marginLeft: spacing.xs,
+    marginLeft: 2,
+  },
+  divider: {
+    height: StyleSheet.hairlineWidth,
+    marginLeft: spacing.base + 28 + spacing.md, // Align with label
   },
 });

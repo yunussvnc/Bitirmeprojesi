@@ -7,14 +7,29 @@
  */
 
 export class AppError extends Error {
+  public code: string;
+  public userMessage: string;
+  public retryable: boolean;
+
   constructor(
     message: string,
-    public code: string,
-    public userMessage: string,
-    public retryable: boolean = false
+    code: string,
+    userMessage: string,
+    retryable: boolean = false
   ) {
     super(message);
     this.name = 'AppError';
+    this.code = code;
+    this.userMessage = userMessage;
+    this.retryable = retryable;
+    
+    // Maintains proper stack trace for where our error was thrown (only available on V8)
+    if (Error.captureStackTrace) {
+      Error.captureStackTrace(this, AppError);
+    }
+    
+    // Set the prototype explicitly (required for TypeScript/Babel)
+    Object.setPrototypeOf(this, AppError.prototype);
   }
 }
 

@@ -1,39 +1,44 @@
 /**
- * Explore Screen
- * 
- * AI-powered recommendations screen with filters and search.
- * Spotify-inspired dark theme design.
- * 
+ * Keşfet (Explore) Ekranı
+ *
+ * AI destekli mekan önerileri: arama, filtreler, açıklama ve sonuç kartları.
+ * Üst düzey görsel düzen ve okunabilirlik.
+ *
  * @module app/(tabs)/explore
  */
 
-import { router } from 'expo-router';
-import { useEffect, useMemo, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { router, useNavigation } from 'expo-router';
+import { useEffect, useMemo, useState, useRef } from 'react';
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ScrollView,
+} from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
-import { Screen, Section } from '@/components/layout';
-import { PlaceCard } from '@/components/place/PlaceCard';
-import { Button, Chip, SearchInput, Card, EmptyState, AnimatedPlaceCard } from '@/components/ui';
+import { Screen, type ScreenRef } from '@/components/layout';
+import { Button, Chip, SearchInput, EmptyState, AnimatedPlaceCard, LoadingState, ErrorState } from '@/components/ui';
 import { recommendPlaces } from '@/src/services/api';
 import { usePreferences } from '@/src/state/preferences';
 import type { PlaceCard as PlaceCardType, RecommendResponse } from '@/src/types/recommend';
 import { useSavedPlaces } from '@/src/state/savedPlaces';
 import { getPlaceImageSource } from '@/src/utils/placeImages';
+import { getPlaces } from '@/src/services/mekanService';
+import type { Place } from '@/src/services/mekanService';
 import { createTextStyle } from '@/constants/design';
+import { spacing } from '@/constants/design';
 import { lightImpact } from '@/src/utils/haptics';
-import { BlurView } from 'expo-blur';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 
-function prefsToBadges(p: typeof usePreferences extends (selector: infer S) => any ? ReturnType<S>['prefs'] : never) {
-  const vibe = p.vibe === 'quiet' ? 'Sessiz' : 'Canlı';
-  const purpose =
-    p.purpose === 'work' ? 'Çalışma' : p.purpose === 'friends' ? 'Arkadaş' : 'Date';
-  const budget = p.budget === 'low' ? '₺ Düşük' : p.budget === 'mid' ? '₺₺ Orta' : '₺₺₺ Yüksek';
-  return [vibe, purpose, budget];
+function hasActivePrefs(p: { vibe?: string; purpose?: string; budget?: string }) {
+  return !!(p.vibe || p.purpose || p.budget);
 }
 
 export default function ExploreScreen() {
-  const { colors, spacing, typography } = useTheme();
+  const { colors, spacing: themeSpacing } = useTheme();
+  const navigation = useNavigation();
+  const screenRef = useRef<ScreenRef>(null);
   const [query, setQuery] = useState('');
   const { prefs, patchPrefs, resetPrefs } = usePreferences();
   const [loading, setLoading] = useState(false);
@@ -41,15 +46,32 @@ export default function ExploreScreen() {
   const [items, setItems] = useState<PlaceCardType[]>([]);
   const [error, setError] = useState<string>('');
   const [refreshing, setRefreshing] = useState(false);
+  const [showFilters, setShowFilters] = useState(false);
+  const [placesById, setPlacesById] = useState<Record<string, Place>>({});
+
+  // Listen for tab press to scroll to top
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('tabPress' as any, (e: any) => {
+      screenRef.current?.scrollToTop();
+    });
+    return unsubscribe;
+  }, [navigation]);
 
   const savedIds = useSavedPlaces((s) => s.ids);
   const toggle = useSavedPlaces((s) => s.toggle);
 
+  useEffect(() => {
+    getPlaces()
+      .then((list) => {
+        const map: Record<string, Place> = {};
+        list.forEach((p) => { map[String(p.id)] = p; });
+        setPlacesById(map);
+      })
+      .catch(() => {});
+  }, []);
+
   const requestBody = useMemo(
-    () => ({
-      queryText: query,
-      preferences: prefs,
-    }),
+    () => ({ queryText: query, preferences: prefs }),
     [query, prefs]
   );
 
@@ -59,12 +81,10 @@ export default function ExploreScreen() {
       setLoading(true);
       const res: RecommendResponse = await recommendPlaces(requestBody);
       setItems(res.items);
-      setExplanation(res.explanation);
+      setExplanation(res.explanation ?? '');
     } catch (e: unknown) {
-      const errorMessage = e instanceof Error 
-        ? (e as any).userMessage || e.message 
-        : 'Bir hata oluştu';
-      setError(errorMessage);
+      const err = e instanceof Error ? (e as any).userMessage || e.message : 'Bir hata oluştu';
+      setError(err);
     } finally {
       setLoading(false);
     }
@@ -72,7 +92,6 @@ export default function ExploreScreen() {
 
   useEffect(() => {
     runRecommend();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleRefresh = async () => {
@@ -82,413 +101,298 @@ export default function ExploreScreen() {
     setRefreshing(false);
   };
 
-  const topBadges = useMemo(() => prefsToBadges(prefs), [prefs]);
+  const hasFilters = useMemo(() => hasActivePrefs(prefs), [prefs]);
   const titleStyle = createTextStyle('title', colors.text.primary);
   const subtitleStyle = createTextStyle('bodySmall', colors.text.secondary);
 
   return (
-    <Screen onRefresh={handleRefresh} refreshing={refreshing}>
+    <Screen ref={screenRef} onRefresh={handleRefresh} refreshing={refreshing} withTabBar>
       {/* Header */}
-      <View style={[styles.header, { marginTop: spacing.base, marginBottom: spacing.xl }]}>
-        <View style={{ flex: 1 }}>
-          <Text style={[titleStyle, styles.title]}>AsEmOs AI</Text>
-          <Text style={[subtitleStyle, styles.subtitle]}>
-            Size özel mekan önerileri
-          </Text>
-        </View>
-        {items.length > 0 && (
-          <View
-            style={[
-              styles.badge,
-              {
-                backgroundColor: colors.accent.primary,
-                borderColor: colors.accent.primary,
-              },
-            ]}
-          >
-            <Text style={[styles.badgeText, { color: colors.text.inverse }]}>
-              {items.length} öneri
-            </Text>
-          </View>
-        )}
+      <View style={styles.header}>
+        <Text style={[titleStyle as any, styles.headerTitle]}>Keşfet</Text>
       </View>
 
-      {/* Search Input */}
-      <View style={styles.searchContainer}>
+      {/* Search */}
+      <View style={styles.searchWrap}>
         <SearchInput
-          placeholder="Ne arıyorsun? (örn: sessiz çalışmalık kafe)"
+          placeholder="Ne arıyorsun?"
           value={query}
           onChangeText={setQuery}
           onSubmitEditing={runRecommend}
           containerStyle={styles.searchInput}
         />
-        <Text style={[styles.helper, { color: colors.text.tertiary }]}>
-          Yaz veya filtrelerle özelleştir
-        </Text>
       </View>
 
-      {/* Active Filters */}
-      {topBadges.length > 0 && (
-        <View style={styles.activeFilters}>
-          <Text style={[styles.sectionLabel, { color: colors.text.secondary }]}>
-            Aktif Filtreler
+      {/* Quick Filters */}
+      <View style={styles.quickFilters}>
+        <TouchableOpacity
+          onPress={() => { lightImpact(); setShowFilters(!showFilters); }}
+          style={[styles.filterButton, { 
+            backgroundColor: colors.surface.elevated, 
+            borderColor: hasFilters ? colors.accent.primary : colors.surface.border 
+          }]}
+          activeOpacity={0.75}
+        >
+          <IconSymbol name="slider.horizontal.3" size={16} color={colors.text.secondary} />
+          <Text style={[styles.filterButtonText, { color: colors.text.primary }]}>
+            Tercihler
           </Text>
-          <View style={styles.chipsContainer}>
-            {topBadges.map((badge) => (
-              <Chip key={badge} label={badge} />
-            ))}
+          {hasFilters && (
+            <View style={[styles.filterDot, { backgroundColor: colors.accent.primary }]} />
+          )}
+        </TouchableOpacity>
+        
+        {hasFilters && (
+          <TouchableOpacity
+            onPress={() => {
+              lightImpact();
+              resetPrefs();
+            }}
+            activeOpacity={0.7}
+            style={[styles.clearFiltersBtn, { backgroundColor: colors.surface.elevated, borderColor: colors.surface.border }]}
+          >
+            <Text style={[styles.clearFiltersBtnText, { color: colors.text.tertiary }]}>Temizle</Text>
+          </TouchableOpacity>
+        )}
+      </View>
+
+      {/* Compact Filters Panel */}
+      {showFilters && (
+        <View style={[styles.filterPanel, { backgroundColor: colors.surface.elevated, borderColor: colors.surface.border }]}>
+          <View style={styles.filterRow}>
+            <Text style={[styles.filterLabel, { color: colors.text.secondary }]}>Ortam</Text>
+            <View style={styles.chipRow}>
+              <Chip 
+                label="Sessiz" 
+                size="small" 
+                active={prefs.vibe === 'quiet'} 
+                onPress={() => { 
+                  lightImpact(); 
+                  patchPrefs({ vibe: prefs.vibe === 'quiet' ? undefined : 'quiet' }); 
+                }} 
+                style={{ marginRight: 10, marginBottom: 6 }} 
+              />
+              <Chip 
+                label="Canlı" 
+                size="small" 
+                active={prefs.vibe === 'lively'} 
+                onPress={() => { 
+                  lightImpact(); 
+                  patchPrefs({ vibe: prefs.vibe === 'lively' ? undefined : 'lively' }); 
+                }} 
+                style={{ marginRight: 10, marginBottom: 6 }} 
+              />
+            </View>
+          </View>
+
+          <View style={styles.filterRow}>
+            <Text style={[styles.filterLabel, { color: colors.text.secondary }]}>Amaç</Text>
+            <View style={styles.chipRow}>
+              <Chip 
+                label="Çalışma" 
+                size="small" 
+                active={prefs.purpose === 'work'} 
+                onPress={() => { 
+                  lightImpact(); 
+                  patchPrefs({ purpose: prefs.purpose === 'work' ? undefined : 'work' }); 
+                }} 
+                style={{ marginRight: 10, marginBottom: 6 }} 
+              />
+              <Chip 
+                label="Arkadaş" 
+                size="small" 
+                active={prefs.purpose === 'friends'} 
+                onPress={() => { 
+                  lightImpact(); 
+                  patchPrefs({ purpose: prefs.purpose === 'friends' ? undefined : 'friends' }); 
+                }} 
+                style={{ marginRight: 10, marginBottom: 6 }} 
+              />
+              <Chip 
+                label="Date" 
+                size="small" 
+                active={prefs.purpose === 'date'} 
+                onPress={() => { 
+                  lightImpact(); 
+                  patchPrefs({ purpose: prefs.purpose === 'date' ? undefined : 'date' }); 
+                }} 
+                style={{ marginRight: 10, marginBottom: 6 }} 
+              />
+            </View>
+          </View>
+
+          <View style={styles.filterRow}>
+            <Text style={[styles.filterLabel, { color: colors.text.secondary }]}>Bütçe</Text>
+            <View style={styles.chipRow}>
+              <Chip 
+                label="₺" 
+                size="small" 
+                active={prefs.budget === 'low'} 
+                onPress={() => { 
+                  lightImpact(); 
+                  patchPrefs({ budget: prefs.budget === 'low' ? undefined : 'low' }); 
+                }} 
+                style={{ marginRight: 10, marginBottom: 6 }} 
+              />
+              <Chip 
+                label="₺₺" 
+                size="small" 
+                active={prefs.budget === 'mid'} 
+                onPress={() => { 
+                  lightImpact(); 
+                  patchPrefs({ budget: prefs.budget === 'mid' ? undefined : 'mid' }); 
+                }} 
+                style={{ marginRight: 10, marginBottom: 6 }} 
+              />
+              <Chip 
+                label="₺₺₺" 
+                size="small" 
+                active={prefs.budget === 'high'} 
+                onPress={() => { 
+                  lightImpact(); 
+                  patchPrefs({ budget: prefs.budget === 'high' ? undefined : 'high' }); 
+                }} 
+                style={{ marginRight: 10, marginBottom: 6 }} 
+              />
+            </View>
           </View>
         </View>
       )}
 
-      {/* Filter Card */}
-      <Card style={[styles.filterCard, { marginTop: spacing.base }]}>
-        <View style={styles.filterHeader}>
-          <Text style={[styles.filterTitle, { color: colors.text.primary }]}>Filtreler</Text>
-          <TouchableOpacity
-            onPress={() => {
-              resetPrefs();
-              setTimeout(() => runRecommend(), 0);
-            }}
-            activeOpacity={0.8}
-          >
-            <Text style={[styles.resetText, { color: colors.accent.primary }]}>Temizle</Text>
-          </TouchableOpacity>
-        </View>
-
-        <View style={[styles.filterContent, { marginTop: spacing.base }]}>
-          {/* Vibe */}
-          <View style={styles.filterSection}>
-            <Text style={[styles.filterLabel, { color: colors.text.secondary }]}>Vibe</Text>
-            <View style={styles.chipsContainer}>
-              <Chip
-                label="Sessiz"
-                active={prefs.vibe === 'quiet'}
-                onPress={() => {
-                  patchPrefs({ vibe: 'quiet' });
-                  setTimeout(() => runRecommend(), 0);
-                }}
-              />
-              <Chip
-                label="Canlı"
-                active={prefs.vibe === 'lively'}
-                onPress={() => {
-                  patchPrefs({ vibe: 'lively' });
-                  setTimeout(() => runRecommend(), 0);
-                }}
-              />
-            </View>
-          </View>
-
-          {/* Purpose */}
-          <View style={styles.filterSection}>
-            <Text style={[styles.filterLabel, { color: colors.text.secondary }]}>Amaç</Text>
-            <View style={styles.chipsContainer}>
-              <Chip
-                label="Çalışma"
-                active={prefs.purpose === 'work'}
-                onPress={() => {
-                  patchPrefs({ purpose: 'work' });
-                  setTimeout(() => runRecommend(), 0);
-                }}
-              />
-              <Chip
-                label="Arkadaş"
-                active={prefs.purpose === 'friends'}
-                onPress={() => {
-                  patchPrefs({ purpose: 'friends' });
-                  setTimeout(() => runRecommend(), 0);
-                }}
-              />
-              <Chip
-                label="Date"
-                active={prefs.purpose === 'date'}
-                onPress={() => {
-                  patchPrefs({ purpose: 'date' });
-                  setTimeout(() => runRecommend(), 0);
-                }}
-              />
-            </View>
-          </View>
-
-          {/* Budget */}
-          <View style={styles.filterSection}>
-            <Text style={[styles.filterLabel, { color: colors.text.secondary }]}>Bütçe</Text>
-            <View style={styles.chipsContainer}>
-              <Chip
-                label="Düşük"
-                active={prefs.budget === 'low'}
-                onPress={() => {
-                  patchPrefs({ budget: 'low' });
-                  setTimeout(() => runRecommend(), 0);
-                }}
-              />
-              <Chip
-                label="Orta"
-                active={prefs.budget === 'mid'}
-                onPress={() => {
-                  patchPrefs({ budget: 'mid' });
-                  setTimeout(() => runRecommend(), 0);
-                }}
-              />
-              <Chip
-                label="Yüksek"
-                active={prefs.budget === 'high'}
-                onPress={() => {
-                  patchPrefs({ budget: 'high' });
-                  setTimeout(() => runRecommend(), 0);
-                }}
-              />
-            </View>
-          </View>
-        </View>
-      </Card>
-
-      {/* Get Recommendations Button */}
+      {/* Öneri Getir Button */}
       <Button
         variant="primary"
-        size="large"
+        size="medium"
         onPress={runRecommend}
         loading={loading}
         disabled={loading}
-        style={styles.recommendButton}
+        style={styles.recommendBtn}
       >
         Öneri Getir
       </Button>
 
-      {/* Error */}
-      {error && (
-        <View
-          style={[
-            styles.errorContainer,
-            {
-              backgroundColor: colors.semantic.error + '20',
-              borderColor: colors.semantic.error,
-            },
-          ]}
-        >
-          <Text style={[styles.errorText, { color: colors.semantic.error }]}>Hata: {error}</Text>
-        </View>
-      )}
+      {/* Hata */}
+      {error ? (
+        <ErrorState
+          title="Öneriler Alınamadı"
+          description={error}
+          onRetry={runRecommend}
+          compact
+        />
+      ) : null}
 
-      {/* AI Explanation */}
-      {explanation && (
-        <Card style={[styles.explanationCard, { marginTop: spacing.base }]}>
-          <View style={styles.explanationHeader}>
-            <Text style={[styles.explanationTitle, { color: colors.text.primary }]}>
-              Neden bu öneriler?
-            </Text>
-            <Chip label="AI" />
-          </View>
-          <Text style={[styles.explanationText, { color: colors.text.secondary }]}>
-            {explanation}
-          </Text>
-        </Card>
-      )}
-
-      {/* Results */}
-      {items.length > 0 && (
-        <Section title={`Sonuçlar (${items.length})`} style={styles.resultsSection}>
+      {/* Sonuçlar */}
+      {loading && items.length === 0 ? (
+        <LoadingState message="Öneriler hazırlanıyor..." compact />
+      ) : items.length > 0 ? (
+        <View style={styles.resultsSection}>
           {items.map((place, idx) => {
             const id = String((place as any).id);
             const saved = savedIds.includes(id);
-
+            const fullPlace = placesById[id];
+            const hasPhoto = !!(fullPlace?.photo_url ?? (place as any).photo_url);
+            const imageSource = getPlaceImageSource(fullPlace || { id, name: place.name, category: (place as any).category, photo_url: (place as any).photo_url });
+            const locationName = place.name && place.name.includes(' - ') ? place.name.split(' - ')[1]?.trim() : undefined;
             return (
-              <View key={id} style={styles.cardWrapper}>
-                <AnimatedPlaceCard
-                  index={idx}
-                  image={getPlaceImageSource({ id, name: place.name, category: (place as any).category } as any)}
-                  title={place.name}
-                  subtitle={place.subtitle}
-                  tags={place.tags}
-                  rank={idx + 1}
-                  onPress={() =>
-                    router.push({ pathname: '/place/[id]', params: { id } } as any)
-                  }
-                />
-                <View style={styles.saveButtonContainer}>
-                  <BlurView intensity={60} style={styles.saveButtonBlur}>
-                    <TouchableOpacity
-                      activeOpacity={0.85}
-                      onPress={() => {
-                        lightImpact();
-                        toggle({
-                          id,
-                          name: place.name,
-                          subtitle: place.subtitle,
-                        });
-                      }}
-                      style={[
-                        styles.saveButton,
-                        {
-                          backgroundColor: saved
-                            ? colors.accent.primary
-                            : 'rgba(255, 255, 255, 0.15)',
-                        },
-                      ]}
-                    >
-                      <IconSymbol
-                        name={saved ? 'heart.fill' : 'heart'}
-                        size={18}
-                        color={saved ? colors.text.inverse : colors.text.primary}
-                      />
-                    </TouchableOpacity>
-                  </BlurView>
-                </View>
-              </View>
+              <AnimatedPlaceCard
+                key={id}
+                index={idx}
+                image={imageSource}
+                imagePlaceholder={!hasPhoto}
+                title={place.name}
+                subtitle={place.subtitle}
+                tags={place.tags}
+                location={locationName}
+                onPress={() => router.push({ pathname: '/place/[id]', params: { id } } as any)}
+              />
             );
           })}
-        </Section>
-      )}
-
-      {/* Empty State */}
-      {!loading && items.length === 0 && !error && (
-        <EmptyState
-          icon="magnifyingglass"
-          title="Henüz sonuç yok"
-          description="Filtreleri değiştirip tekrar dene veya arama yap"
-          actionLabel="Filtreleri Temizle"
-          onAction={() => {
-            resetPrefs();
-            runRecommend();
-          }}
-        />
-      )}
+        </View>
+      ) : !loading && !error ? (
+        <View style={styles.centerContainer}>
+          <EmptyState
+            icon="magnifyingglass"
+            title="Henüz sonuç yok"
+            description="Tercihlerini ayarla ve Öneri Getir'e bas"
+          />
+        </View>
+      ) : null}
     </Screen>
   );
 }
 
 const styles = StyleSheet.create({
   header: {
+    marginBottom: spacing.xl,
+  },
+  headerTitle: {
+    fontSize: 28,
+    fontWeight: '700',
+  },
+  searchWrap: {
+    marginBottom: spacing.xl,
+  },
+  searchInput: { 
+    marginBottom: 0,
+  },
+  quickFilters: {
     flexDirection: 'row',
-    alignItems: 'flex-start',
-    justifyContent: 'space-between',
+    alignItems: 'center',
+    gap: spacing.sm,
+    marginBottom: spacing.xl,
   },
-  title: {
-    marginBottom: 4,
-  },
-  subtitle: {
-    marginTop: 4,
-  },
-  badge: {
-    paddingVertical: 6,
-    paddingHorizontal: 12,
-    borderRadius: 16,
+  filterButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    paddingHorizontal: spacing.base,
+    paddingVertical: 10,
+    borderRadius: 20,
     borderWidth: 1,
   },
-  badgeText: {
-    fontSize: 12,
-    fontWeight: '600',
-  },
-  searchContainer: {
-    marginBottom: 20,
-  },
-  searchInput: {
-    marginBottom: 8,
-  },
-  helper: {
-    fontSize: 12,
-    marginTop: 4,
-  },
-  activeFilters: {
-    marginBottom: 16,
-  },
-  sectionLabel: {
-    fontSize: 12,
-    fontWeight: '600',
-    marginBottom: 8,
-    textTransform: 'uppercase',
-    letterSpacing: 0.5,
-  },
-  chipsContainer: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 8,
-  },
-  filterCard: {
-    marginBottom: 16,
-  },
-  filterHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  filterTitle: {
-    fontSize: 16,
-    fontWeight: '600',
-  },
-  resetText: {
+  filterButtonText: {
     fontSize: 14,
     fontWeight: '600',
   },
-  filterContent: {
-    gap: 16,
+  filterDot: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
   },
-  filterSection: {
-    gap: 10,
+  clearFiltersBtn: {
+    paddingHorizontal: spacing.base,
+    paddingVertical: 10,
+    borderRadius: 20,
+    borderWidth: 1,
+  },
+  clearFiltersBtnText: {
+    fontSize: 14,
+    fontWeight: '500',
+  },
+  filterPanel: {
+    borderRadius: 12,
+    borderWidth: 1,
+    padding: spacing.base,
+    marginBottom: spacing.xl,
+    gap: spacing.base,
   },
   filterLabel: {
-    fontSize: 14,
+    fontSize: 12,
     fontWeight: '600',
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
+    marginBottom: 8,
   },
-  recommendButton: {
-    marginTop: 8,
-  },
-  errorContainer: {
-    marginTop: 16,
-    padding: 12,
-    borderRadius: 8,
-    borderWidth: 1,
-  },
-  errorText: {
-    fontSize: 14,
-  },
-  explanationCard: {
-    marginBottom: 16,
-  },
-  explanationHeader: {
+  chipRow: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    marginBottom: 12,
+    flexWrap: 'wrap',
   },
-  explanationTitle: {
-    fontSize: 16,
-    fontWeight: '600',
+  recommendBtn: { 
+    marginBottom: spacing.xl,
+    borderRadius: 12,
   },
-  explanationText: {
-    fontSize: 14,
-    lineHeight: 20,
-  },
-  resultsSection: {
-    marginTop: 24,
-  },
-  cardWrapper: {
-    position: 'relative',
-    marginBottom: 12,
-  },
-  saveButtonContainer: {
-    position: 'absolute',
-    top: 12,
-    right: 12,
-    borderRadius: 20,
-    overflow: 'hidden',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.4,
-    shadowRadius: 6,
-    elevation: 8,
-    zIndex: 10,
-  },
-  saveButtonBlur: {
-    borderRadius: 20,
-    overflow: 'hidden',
-  },
-  saveButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
+  resultsSection: { 
+    marginTop: spacing.sm,
+    gap: spacing.xl,
   },
 });

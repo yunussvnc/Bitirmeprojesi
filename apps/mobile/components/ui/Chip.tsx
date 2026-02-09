@@ -9,7 +9,6 @@
 
 import React from 'react';
 import { TouchableOpacity, Text, View, StyleSheet, ViewStyle, TextStyle } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
 import { useTheme } from '@/hooks/useTheme';
 import { lightImpact } from '@/src/utils/haptics';
 
@@ -32,6 +31,12 @@ export interface ChipProps {
    * Press handler (makes chip interactive)
    */
   onPress?: () => void;
+  
+  /**
+   * Chip size
+   * @default "medium"
+   */
+  size?: 'small' | 'medium';
   
   /**
    * Custom style
@@ -78,12 +83,17 @@ export function Chip({
   label,
   active = false,
   onPress,
+  size = 'medium',
   style,
   textStyle,
   accessibilityLabel,
   testID,
 }: ChipProps) {
   const { colors, spacing, typography } = useTheme();
+
+  const isSmall = size === 'small';
+  const chipStyle = isSmall ? styles.chipSmall : styles.chip;
+  const textSizeStyle = isSmall ? styles.chipTextSmall : styles.chipText;
 
   // Interactive chip (filter)
   if (onPress) {
@@ -95,45 +105,32 @@ export function Chip({
     return (
       <TouchableOpacity
         onPress={handlePress}
-        activeOpacity={0.8}
-        style={[styles.chip, style]}
+        activeOpacity={0.75}
+        style={[
+          chipStyle,
+          styles.chipInteractive,
+          {
+            backgroundColor: active ? colors.accent.primary + '18' : colors.surface.default,
+            borderWidth: 1,
+            borderColor: active ? colors.accent.primary : colors.surface.border,
+          },
+          style,
+        ]}
         accessibilityLabel={accessibilityLabel || label}
         accessibilityRole="button"
         accessibilityState={{ selected: active }}
         testID={testID}
       >
-        {active ? (
-          <LinearGradient
-            colors={[colors.accent.primary, colors.accent.primaryHover]}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 0 }}
-            style={styles.chipGradient}
-          >
-            <Text
-              style={[
-                styles.chipText,
-                styles.chipTextActive,
-                { color: colors.text.inverse },
-                textStyle,
-              ]}
-            >
-              {label}
-            </Text>
-          </LinearGradient>
-        ) : (
-          <Text
-            style={[
-              styles.chipText,
-              {
-                color: colors.text.secondary,
-                backgroundColor: colors.surface.default,
-              },
-              textStyle,
-            ]}
-          >
-            {label}
-          </Text>
-        )}
+        <Text
+          style={[
+            textSizeStyle,
+            { color: active ? colors.accent.primary : colors.text.primary },
+            active && { fontWeight: '700' },
+            textStyle,
+          ]}
+        >
+          {label}
+        </Text>
       </TouchableOpacity>
     );
   }
@@ -142,7 +139,7 @@ export function Chip({
   return (
     <View
       style={[
-        styles.chip,
+        chipStyle,
         styles.chipTag,
         {
           backgroundColor: colors.surface.hover,
@@ -155,7 +152,7 @@ export function Chip({
     >
       <Text
         style={[
-          styles.chipText,
+          textSizeStyle,
           styles.chipTextTag,
           { color: colors.text.secondary },
           textStyle,
@@ -169,30 +166,34 @@ export function Chip({
 
 const styles = StyleSheet.create({
   chip: {
-    borderRadius: 20,
-    overflow: 'hidden',
+    borderRadius: 22,
     paddingVertical: 8,
     paddingHorizontal: 16,
+  },
+  chipSmall: {
+    borderRadius: 18,
+    paddingVertical: 6,
+    paddingHorizontal: 14,
+  },
+  chipInteractive: {
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   chipTag: {
     // Non-interactive tag styling
   },
-  chipGradient: {
-    paddingVertical: 8,
-    paddingHorizontal: 16,
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
   chipText: {
     fontSize: 14,
     fontWeight: '600',
-    letterSpacing: 0.1,
+    letterSpacing: 0.2,
   },
-  chipTextActive: {
-    // Color applied dynamically
+  chipTextSmall: {
+    fontSize: 13,
+    fontWeight: '600',
+    letterSpacing: 0.2,
   },
   chipTextTag: {
-    fontSize: 12,
-    fontWeight: '400',
+    fontSize: 13,
+    fontWeight: '500',
   },
 });

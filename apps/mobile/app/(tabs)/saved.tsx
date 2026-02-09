@@ -7,29 +7,75 @@
  * @module app/(tabs)/saved
  */
 
-import { router } from 'expo-router';
-import { useMemo, useState } from 'react';
-import { Alert, View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { router, useNavigation } from 'expo-router';
+import { useMemo, useState, useEffect, useRef } from 'react';
+import { Alert, View, Text, StyleSheet, TouchableOpacity, Animated } from 'react-native';
+import { Swipeable } from 'react-native-gesture-handler';
 import { useTheme } from '@/hooks/useTheme';
-import { Screen, Section } from '@/components/layout';
-import { PlaceCard } from '@/components/place/PlaceCard';
-import { Button, EmptyState, AnimatedPlaceCard } from '@/components/ui';
+import { Screen, type ScreenRef } from '@/components/layout';
+import { EmptyState, AnimatedPlaceCard } from '@/components/ui';
 import { useSavedPlaces } from '@/src/state/savedPlaces';
 import { getPlaceImageSource } from '@/src/utils/placeImages';
-import { createTextStyle } from '@/constants/design';
+import { createTextStyle, spacing as designSpacing } from '@/constants/design';
 import { IconSymbol } from '@/components/ui/icon-symbol';
-import { lightImpact, success } from '@/src/utils/haptics';
+import { lightImpact } from '@/src/utils/haptics';
 import { getPlaces } from '@/src/services/mekanService';
+import type { Place } from '@/src/services/mekanService';
 
 export default function SavedScreen() {
   const { colors, spacing } = useTheme();
+  const navigation = useNavigation();
+  const screenRef = useRef<ScreenRef>(null);
   const ids = useSavedPlaces((s) => s.ids);
   const byId = useSavedPlaces((s) => s.byId);
   const clear = useSavedPlaces((s) => s.clear);
   const remove = useSavedPlaces((s) => s.remove);
   const [refreshing, setRefreshing] = useState(false);
+  const [placesData, setPlacesData] = useState<Record<string, Place>>({});
 
-  const items = useMemo(() => ids.map((id) => byId[id]).filter(Boolean), [ids, byId]);
+  // Listen for tab press to scroll to top
+  useEffect(() => {
+    const unsubscribe = navigation.addListener('tabPress' as any, (e: any) => {
+      screenRef.current?.scrollToTop();
+    });
+    return unsubscribe;
+  }, [navigation]);
+
+  // API'den tüm mekanları çek ve cache'le
+  useEffect(() => {
+    const loadPlaces = async () => {
+      try {
+        const places = await getPlaces();
+        const placesMap: Record<string, Place> = {};
+        places.forEach((place) => {
+          placesMap[String(place.id)] = place;
+        });
+        setPlacesData(placesMap);
+      } catch (error) {
+        console.error('Error loading places:', error);
+      }
+    };
+    loadPlaces();
+  }, []);
+
+  const items = useMemo(() => {
+    return ids.map((id) => {
+      const savedPlace = byId[id];
+      const fullPlace = placesData[id];
+      
+      // API'den gelen tam bilgiyi kullan, yoksa kayıtlı bilgiyi kullan
+      if (fullPlace) {
+        return {
+          ...savedPlace,
+          photo_url: fullPlace.photo_url,
+          category: fullPlace.category,
+          tags: fullPlace.tags,
+        };
+      }
+      
+      return savedPlace;
+    }).filter(Boolean);
+  }, [ids, byId, placesData]);
 
   const titleStyle = createTextStyle('title', colors.text.primary);
   const subtitleStyle = createTextStyle('bodySmall', colors.text.secondary);
@@ -63,42 +109,23 @@ export default function SavedScreen() {
   };
 
   return (
-    <Screen onRefresh={handleRefresh} refreshing={refreshing}>
+    <Screen ref={screenRef} onRefresh={handleRefresh} refreshing={refreshing} withTabBar>
       {/* Header */}
-      <View style={[styles.header, { marginTop: spacing.base, marginBottom: spacing.xl }]}>
-        <View style={{ flex: 1 }}>
-          <Text style={[titleStyle, styles.title]}>Kaydedilenler</Text>
-          <Text style={[subtitleStyle, styles.subtitle]}>
-            Kaydettiğin mekanlar burada
-          </Text>
-        </View>
+      <View style={styles.header}>
+        <Text style={[titleStyle, styles.title]}>Kaydedilenler</Text>
         {items.length > 0 && (
-          <View style={styles.headerActions}>
-            <View
-              style={[
-                styles.badge,
-                {
-                  backgroundColor: colors.surface.default,
-                  borderColor: colors.surface.border,
-                },
-              ]}
-            >
-              <Text style={[styles.badgeText, { color: colors.text.secondary }]}>
-                {items.length} kayıt
+          <View style={styles.headerRight}>
+            <View style={[styles.countBadge, { backgroundColor: colors.surface.elevated }]}>
+              <Text style={[styles.countText, { color: colors.text.secondary }]}>
+                {items.length}
               </Text>
             </View>
             <TouchableOpacity
               onPress={handleClear}
               activeOpacity={0.8}
-              style={[
-                styles.clearButton,
-                {
-                  backgroundColor: colors.semantic.error + '20',
-                  borderColor: colors.semantic.error,
-                },
-              ]}
+              style={[styles.clearButton, { backgroundColor: colors.surface.elevated }]}
             >
-              <IconSymbol name="trash" size={16} color={colors.semantic.error} />
+              <IconSymbol name="trash" size={18} color={colors.text.tertiary} />
             </TouchableOpacity>
           </View>
         )}
@@ -106,43 +133,64 @@ export default function SavedScreen() {
 
       {/* Content */}
       {items.length === 0 ? (
-        <EmptyState
-          icon="bookmark"
-          title="Henüz kayıt yok"
-          description="Explore'dan beğendiğin mekanları 'Kaydet' diyerek buraya ekleyebilirsin."
-          actionLabel="Keşfet'e Git"
-          onAction={() => router.push('/(tabs)/explore')}
-        />
+        <View style={styles.emptyContainer}>
+          <EmptyState
+            icon="bookmark"
+            title="Henüz kayıt yok"
+            description="Beğendiğin mekanları kaydet"
+            actionLabel="Keşfet"
+            onAction={() => router.push('/(tabs)/explore')}
+          />
+        </View>
       ) : (
-        <Section title={`Kaydedilenler (${items.length})`}>
-          {items.map((place, idx) => (
-            <View key={place.id} style={styles.cardWrapper}>
-              <AnimatedPlaceCard
-                index={idx}
-                image={getPlaceImageSource(place)}
-                title={place.name}
-                subtitle={place.subtitle}
-                rank={idx + 1}
-                onPress={() =>
-                  router.push({ pathname: '/place/[id]', params: { id: String(place.id) } })
-                }
-              />
-              <TouchableOpacity
-                activeOpacity={0.85}
-                onPress={() => handleRemove(place.id)}
-                style={[
-                  styles.removeButton,
-                  {
-                    backgroundColor: colors.semantic.error + '20',
-                    borderColor: colors.semantic.error,
-                  },
-                ]}
+        <View style={styles.listContainer}>
+          {items.map((place, idx) => {
+            const renderRightActions = (
+              progress: Animated.AnimatedInterpolation<number>,
+              dragX: Animated.AnimatedInterpolation<number>
+            ) => {
+              const scale = dragX.interpolate({
+                inputRange: [-80, 0],
+                outputRange: [1, 0],
+                extrapolate: 'clamp',
+              });
+
+              return (
+                <TouchableOpacity
+                  onPress={() => handleRemove(place.id)}
+                  style={[styles.deleteAction, { backgroundColor: colors.semantic.error }]}
+                  activeOpacity={0.8}
+                >
+                  <Animated.View style={{ transform: [{ scale }] }}>
+                    <IconSymbol name="trash.fill" size={24} color="#FFFFFF" />
+                  </Animated.View>
+                </TouchableOpacity>
+              );
+            };
+
+            return (
+              <Swipeable
+                key={place.id}
+                renderRightActions={renderRightActions}
+                overshootRight={false}
+                friction={2}
+                rightThreshold={40}
               >
-                <IconSymbol name="xmark" size={14} color={colors.semantic.error} />
-              </TouchableOpacity>
-            </View>
-          ))}
-        </Section>
+                <AnimatedPlaceCard
+                  index={idx}
+                  image={getPlaceImageSource(place)}
+                  imagePlaceholder={!place.photo_url}
+                  title={place.name}
+                  subtitle={place.subtitle}
+                  tags={place.tags}
+                  onPress={() =>
+                    router.push({ pathname: '/place/[id]', params: { id: String(place.id) } })
+                  }
+                />
+              </Swipeable>
+            );
+          })}
+        </View>
       )}
     </Screen>
   );
@@ -151,52 +199,53 @@ export default function SavedScreen() {
 const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     justifyContent: 'space-between',
+    marginBottom: designSpacing.lg,
   },
   title: {
-    marginBottom: 4,
+    fontSize: 28,
+    fontWeight: '700',
   },
-  subtitle: {
-    marginTop: 4,
-  },
-  headerActions: {
+  headerRight: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 8,
+    gap: designSpacing.sm,
   },
-  badge: {
-    paddingVertical: 6,
-    paddingHorizontal: 12,
-    borderRadius: 16,
-    borderWidth: 1,
-  },
-  badgeText: {
-    fontSize: 12,
-    fontWeight: '600',
-  },
-  clearButton: {
-    width: 36,
-    height: 36,
-    borderRadius: 18,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderWidth: 1,
-  },
-  cardWrapper: {
-    position: 'relative',
-    marginBottom: 12,
-  },
-  removeButton: {
-    position: 'absolute',
-    top: 12,
-    right: 12,
-    width: 32,
+  countBadge: {
+    minWidth: 32,
     height: 32,
     borderRadius: 16,
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: 1,
-    zIndex: 10,
+    paddingHorizontal: 10,
+  },
+  countText: {
+    fontSize: 14,
+    fontWeight: '600',
+  },
+  clearButton: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  emptyContainer: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: 400,
+  },
+  listContainer: {
+    gap: designSpacing.sm,
+  },
+  deleteAction: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 80,
+    height: '100%',
+    borderRadius: 12,
+    marginLeft: designSpacing.sm,
   },
 });

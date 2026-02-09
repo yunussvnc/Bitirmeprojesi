@@ -20,6 +20,7 @@ export type ColorTheme = {
     hover: string;
     pressed: string;
     border: string;
+    elevated: string;
   };
   accent: {
     primary: string;

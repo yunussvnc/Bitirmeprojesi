@@ -1,274 +1,449 @@
 /**
- * Login Screen
- * 
- * Spotify-inspired dark theme login screen.
- * Clean, minimal, professional design.
- * 
+ * Premium Login Screen
+ *
+ * Arka planda mekan görselleri carousel, profesyonel tipografi,
+ * koyu overlay ile okunabilir form. Üst düzey giriş deneyimi.
+ *
  * @module screens/LoginScreen
  */
 
 import { router } from 'expo-router';
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   StyleSheet,
   View,
   KeyboardAvoidingView,
   Platform,
-  ScrollView,
   Text,
   TouchableOpacity,
+  Animated,
+  Dimensions,
+  Image,
+  Alert,
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
+import { LinearGradient } from 'expo-linear-gradient';
+import { BlurView } from 'expo-blur';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme } from '@/hooks/useTheme';
-import { Button, Input, TextButton } from '@/components/ui';
-import { createTextStyle } from '@/constants/design';
+import { Button, Input } from '@/components/ui';
+import { IconSymbol } from '@/components/ui/icon-symbol';
+import { lightImpact, success } from '@/src/utils/haptics';
+import { getPlaces } from '@/src/services/mekanService';
+import { API_BASE_URL } from '@/src/constants/api';
+
+const { width, height } = Dimensions.get('window');
+
+// API yoksa veya fotoğraf yoksa kullanılacak kaliteli mekan görselleri
+const FALLBACK_PLACE_IMAGES = [
+  'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200',
+  'https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=1200',
+  'https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=1200',
+  'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200',
+  'https://images.unsplash.com/photo-1552566626-52f8b828add9?w=1200',
+  'https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1200',
+];
+
+const CAROUSEL_INTERVAL_MS = 4500;
 
 export default function LoginScreen() {
-  const { colors, spacing, typography } = useTheme();
+  const { colors } = useTheme();
+  const insets = useSafeAreaInsets();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
+  const [backgroundImages, setBackgroundImages] = useState<string[]>(FALLBACK_PLACE_IMAGES);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const fadeAnim = useRef(new Animated.Value(1)).current;
+
+  // Mekan fotoğraflarını API'den al
+  useEffect(() => {
+    let cancelled = false;
+    getPlaces()
+      .then((places) => {
+        if (cancelled) return;
+        const urls = places
+          .map((p) => p.photo_url)
+          .filter((url): url is string => !!url)
+          .map((url) => (url.startsWith('http') ? url : `${API_BASE_URL.replace(/\/$/, '')}${url.startsWith('/') ? '' : '/'}${url}`));
+        if (urls.length >= 5) {
+          setBackgroundImages(urls.slice(0, 12));
+        }
+      })
+      .catch(() => {});
+    return () => {
+      cancelled = true;
+    };
+  }, []);
+
+  // Arka plan carousel: her CAROUSEL_INTERVAL_MS'de bir sonraki görsel
+  useEffect(() => {
+    const next = () => {
+      Animated.timing(fadeAnim, {
+        toValue: 0.3,
+        duration: 400,
+        useNativeDriver: true,
+      }).start(() => {
+        setCurrentImageIndex((i) => (i + 1) % backgroundImages.length);
+        Animated.timing(fadeAnim, {
+          toValue: 1,
+          duration: 600,
+          useNativeDriver: true,
+        }).start();
+      });
+    };
+    const interval = setInterval(next, CAROUSEL_INTERVAL_MS);
+    return () => clearInterval(interval);
+  }, [backgroundImages.length, fadeAnim]);
 
   const validateForm = (): boolean => {
     const newErrors: { email?: string; password?: string } = {};
-
-    if (!email.trim()) {
-      newErrors.email = 'E-posta gereklidir';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      newErrors.email = 'Geçerli bir e-posta adresi girin';
-    }
-
-    if (!password.trim()) {
-      newErrors.password = 'Şifre gereklidir';
-    } else if (password.length < 6) {
-      newErrors.password = 'Şifre en az 6 karakter olmalıdır';
-    }
-
+    if (!email.trim()) newErrors.email = 'E-posta gereklidir';
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) newErrors.email = 'Geçerli bir e-posta adresi girin';
+    if (!password.trim()) newErrors.password = 'Şifre gereklidir';
+    else if (password.length < 6) newErrors.password = 'Şifre en az 6 karakter olmalıdır';
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleLogin = async () => {
     if (!validateForm()) return;
-
+    lightImpact();
     setLoading(true);
     try {
-      // TODO: Implement actual API call
-      // const response = await loginAPI({ email, password });
-      // For now, simulate successful login
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
+      await new Promise((r) => setTimeout(r, 1500));
+      success();
       router.replace('/(tabs)');
-    } catch (error) {
+    } catch {
       setErrors({ email: 'Giriş başarısız. Lütfen tekrar deneyin.' });
     } finally {
       setLoading(false);
     }
   };
 
-  const titleStyle = createTextStyle('title', colors.text.primary);
-  const subtitleStyle = createTextStyle('body', colors.text.secondary);
+  const handleSocialLogin = (provider: string) => {
+    lightImpact();
+    Alert.alert('Bilgi', `${provider} ile giriş yakında eklenecek.`, [{ text: 'Tamam' }]);
+  };
+
+  const currentImage = backgroundImages[currentImageIndex];
 
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: colors.background.primary }]}>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={styles.keyboardView}
-      >
-        <ScrollView
-          contentContainerStyle={styles.scrollContent}
-          showsVerticalScrollIndicator={false}
-          keyboardShouldPersistTaps="handled"
+    <View style={styles.container}>
+      {/* Arka plan: mekan görselleri carousel */}
+      <View style={StyleSheet.absoluteFill}>
+        <Image
+          source={{ uri: currentImage }}
+          style={styles.backgroundImage}
+          resizeMode="cover"
+        />
+        <Animated.View style={[StyleSheet.absoluteFill, { opacity: fadeAnim }]}>
+          <Image
+            source={{ uri: currentImage }}
+            style={styles.backgroundImage}
+            resizeMode="cover"
+          />
+        </Animated.View>
+      </View>
+
+      {/* Koyu gradient overlay – metin ve form okunabilir olsun */}
+      <LinearGradient
+        colors={['rgba(0,0,0,0.2)', 'rgba(0,0,0,0.5)', 'rgba(0,0,0,0.88)']}
+        locations={[0, 0.4, 0.85]}
+        style={StyleSheet.absoluteFill}
+      />
+
+      <SafeAreaView style={styles.safeArea} edges={['top']}>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          style={styles.keyboardView}
+          keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}
         >
-          <View style={styles.content}>
-            {/* Header */}
-            <View style={styles.header}>
-              <Text style={[styles.logo, { color: colors.text.primary }]}>📍</Text>
-              <Text style={[titleStyle, styles.title]}>Hoş Geldin</Text>
-              <Text style={[subtitleStyle, styles.subtitle]}>
-                Devam etmek için giriş yap
-              </Text>
-            </View>
-
-            {/* Form */}
-            <View style={styles.form}>
-              <Input
-                label="E-posta"
-                placeholder="ornek@email.com"
-                value={email}
-                onChangeText={(text) => {
-                  setEmail(text);
-                  if (errors.email) {
-                    setErrors({ ...errors, email: undefined });
-                  }
-                }}
-                keyboardType="email-address"
-                autoCapitalize="none"
-                autoComplete="email"
-                error={errors.email}
-                containerStyle={styles.inputContainer}
-              />
-
-              <Input
-                label="Şifre"
-                placeholder="••••••••"
-                value={password}
-                onChangeText={(text) => {
-                  setPassword(text);
-                  if (errors.password) {
-                    setErrors({ ...errors, password: undefined });
-                  }
-                }}
-                secureTextEntry
-                autoComplete="password"
-                error={errors.password}
-                containerStyle={styles.inputContainer}
-              />
-
-              <TouchableOpacity
-                onPress={() => {
-                  // TODO: Navigate to forgot password screen
-                  // router.push('/forgot-password');
-                }}
-                style={styles.forgotPassword}
-              >
-                <Text style={[styles.forgotPasswordText, { color: colors.accent.primary }]}>
-                  Şifreni mi unuttun?
+          <View style={styles.content} pointerEvents="box-none">
+            <View style={styles.topBlock}>
+              {/* Marka & slogan – profesyonel tipografi */}
+              <View style={styles.header}>
+                <View style={styles.logoWrap}>
+                  <Text style={styles.logoEmoji}>📍</Text>
+                </View>
+                <Text style={styles.brandTitle}>ASEMOS</Text>
+                <Text style={styles.tagline}>
+                  Seni dinleyen, öneren, yönlendiren rehberin
                 </Text>
-              </TouchableOpacity>
+              </View>
 
-              <Button
-                variant="primary"
-                size="large"
-                onPress={handleLogin}
-                loading={loading}
-                disabled={loading}
-                style={styles.loginButton}
-              >
-                Giriş Yap
-              </Button>
-            </View>
-
-            {/* Divider */}
-            <View style={styles.divider}>
-              <View style={[styles.dividerLine, { backgroundColor: colors.surface.border }]} />
-              <Text style={[styles.dividerText, { color: colors.text.tertiary }]}>veya</Text>
-              <View style={[styles.dividerLine, { backgroundColor: colors.surface.border }]} />
-            </View>
-
-            {/* Social Login (Optional - can be removed for minimal design) */}
-            <View style={styles.socialContainer}>
-              <Button
-                variant="secondary"
-                onPress={() => {
-                  // TODO: Implement Google OAuth
-                  // await signInWithGoogle();
-                }}
-                style={styles.socialButton}
-              >
-                Google ile devam et
-              </Button>
-            </View>
-
-            {/* Footer */}
-            <View style={styles.footer}>
-              <Text style={[styles.footerText, { color: colors.text.secondary }]}>
-                Hesabın yok mu?{' '}
-                <Text
-                  style={[styles.footerLink, { color: colors.accent.primary }]}
-                  onPress={() => router.push('/register')}
+              {/* Form kartı – koyu cam efekti */}
+              <BlurView intensity={90} tint="dark" style={styles.card}>
+              <View style={styles.cardInner}>
+                <Input
+                  variant="onDark"
+                  label="E-posta"
+                  placeholder="ornek@email.com"
+                  value={email}
+                  onChangeText={(t) => {
+                    setEmail(t);
+                    if (errors.email) setErrors({ ...errors, email: undefined });
+                  }}
+                  keyboardType="email-address"
+                  autoCapitalize="none"
+                  autoComplete="email"
+                  error={errors.email}
+                  containerStyle={styles.inputContainer}
+                />
+                <Input
+                  variant="onDark"
+                  label="Şifre"
+                  placeholder="••••••••"
+                  value={password}
+                  onChangeText={(t) => {
+                    setPassword(t);
+                    if (errors.password) setErrors({ ...errors, password: undefined });
+                  }}
+                  secureTextEntry
+                  autoComplete="password"
+                  error={errors.password}
+                  containerStyle={styles.inputContainer}
+                />
+                <TouchableOpacity
+                  onPress={() => lightImpact()}
+                  style={styles.forgotWrap}
                 >
-                  Kayıt Ol
-                </Text>
-              </Text>
+                  <Text style={styles.forgotText}>Şifreni mi unuttun?</Text>
+                </TouchableOpacity>
+                <Button
+                  variant="primary"
+                  size="large"
+                  onPress={handleLogin}
+                  loading={loading}
+                  disabled={loading}
+                  style={styles.loginButton}
+                >
+                  Giriş Yap
+                </Button>
+
+                <View style={styles.divider}>
+                  <View style={styles.dividerLine} />
+                  <Text style={styles.dividerLabel}>veya</Text>
+                  <View style={styles.dividerLine} />
+                </View>
+
+                <View style={styles.socialRow}>
+                  <TouchableOpacity
+                    onPress={() => handleSocialLogin('Google')}
+                    style={styles.socialBtnGoogle}
+                  >
+                    <Text style={styles.socialIconG}>G</Text>
+                    <Text style={styles.socialBtnTextGoogle}>Google</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    onPress={() => handleSocialLogin('Apple')}
+                    style={styles.socialBtnApple}
+                  >
+                    <IconSymbol name="apple.logo" size={20} color="#fff" />
+                    <Text style={styles.socialBtnTextWhite}>Apple</Text>
+                  </TouchableOpacity>
+                </View>
+              </View>
+            </BlurView>
             </View>
           </View>
-        </ScrollView>
-      </KeyboardAvoidingView>
-    </SafeAreaView>
+        </KeyboardAvoidingView>
+
+        {/* Footer ekranın en altında sabit – klavye açıldığında formun üstüne taşınmaz */}
+        <TouchableOpacity
+          style={[styles.footerFixed, { paddingBottom: 16 + insets.bottom }]}
+          onPress={() => {
+            lightImpact();
+            router.push('/register');
+          }}
+          activeOpacity={0.8}
+        >
+          <Text style={styles.footerLabel}>Hesabın yok mu? </Text>
+          <Text style={styles.footerLink}>Kayıt Ol</Text>
+        </TouchableOpacity>
+      </SafeAreaView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: '#0a0a0a',
+  },
+  safeArea: {
+    flex: 1,
   },
   keyboardView: {
     flex: 1,
   },
-  scrollContent: {
-    flexGrow: 1,
-  },
   content: {
-    paddingVertical: 40,
-    paddingHorizontal: 20,
+    flex: 1,
+    paddingHorizontal: 24,
+    paddingTop: 32,
+    paddingBottom: 56,
+  },
+  topBlock: {
+    flex: 1,
+  },
+  backgroundImage: {
+    width,
+    height,
   },
   header: {
     alignItems: 'center',
-    marginBottom: 40,
+    marginBottom: 36,
   },
-  logo: {
-    fontSize: 64,
-    marginBottom: 24,
+  logoWrap: {
+    width: 88,
+    height: 88,
+    borderRadius: 44,
+    backgroundColor: 'rgba(255,255,255,0.18)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 20,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.35,
+    shadowRadius: 16,
+    elevation: 12,
   },
-  title: {
-    marginBottom: 8,
+  logoEmoji: {
+    fontSize: 44,
+  },
+  brandTitle: {
+    fontSize: 40,
+    fontWeight: '800',
+    color: '#ffffff',
+    letterSpacing: 3,
+    marginBottom: 10,
+    textShadowColor: 'rgba(0,0,0,0.4)',
+    textShadowOffset: { width: 0, height: 2 },
+    textShadowRadius: 8,
+  },
+  tagline: {
+    fontSize: 17,
+    fontWeight: '500',
+    color: 'rgba(255,255,255,0.95)',
+    letterSpacing: 0.4,
+    lineHeight: 26,
     textAlign: 'center',
+    paddingHorizontal: 28,
   },
-  subtitle: {
-    textAlign: 'center',
-    lineHeight: 22,
-  },
-  form: {
-    marginBottom: 24,
+  card: {
     width: '100%',
-    maxWidth: '100%',
-    alignItems: 'stretch',
+    borderRadius: 28,
+    overflow: 'hidden',
+    marginTop: 20,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.15)',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 12 },
+    shadowOpacity: 0.4,
+    shadowRadius: 24,
+    elevation: 16,
+  },
+  cardInner: {
+    padding: 26,
+    backgroundColor: 'rgba(0,0,0,0.35)',
   },
   inputContainer: {
-    marginBottom: 20,
+    marginBottom: 18,
   },
-  forgotPassword: {
+  forgotWrap: {
     alignSelf: 'flex-end',
-    marginBottom: 24,
-    marginTop: -8,
+    marginBottom: 22,
+    marginTop: -4,
   },
-  forgotPasswordText: {
-    fontSize: 14,
+  forgotText: {
+    fontSize: 15,
     fontWeight: '600',
+    color: 'rgba(255,255,255,0.9)',
   },
   loginButton: {
-    marginTop: 8,
+    marginTop: 4,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.35,
+    shadowRadius: 12,
+    elevation: 8,
   },
   divider: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: 24,
+    marginVertical: 22,
   },
   dividerLine: {
     flex: 1,
     height: 1,
+    backgroundColor: 'rgba(255,255,255,0.25)',
   },
-  dividerText: {
-    marginHorizontal: 16,
-    fontSize: 12,
-    fontWeight: '500',
+  dividerLabel: {
+    marginHorizontal: 18,
+    fontSize: 13,
+    fontWeight: '600',
+    color: 'rgba(255,255,255,0.7)',
+    letterSpacing: 0.8,
   },
-  socialContainer: {
-    marginBottom: 24,
+  socialRow: {
+    flexDirection: 'row',
+    gap: 14,
   },
-  socialButton: {
-    // Social button styling
-  },
-  footer: {
+  socialBtnGoogle: {
+    flex: 1,
+    flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 16,
+    borderRadius: 14,
+    backgroundColor: 'rgba(255,255,255,0.95)',
+    gap: 10,
   },
-  footerText: {
-    fontSize: 14,
-    textAlign: 'center',
+  socialBtnApple: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 16,
+    borderRadius: 14,
+    backgroundColor: 'rgba(0,0,0,0.82)',
+    gap: 10,
+  },
+  socialIconG: {
+    fontSize: 18,
+    fontWeight: '700',
+    color: '#4285F4',
+  },
+  socialBtnTextGoogle: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#1a1a1a',
+  },
+  socialBtnTextWhite: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#fff',
+  },
+  footerFixed: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: 16,
+  },
+  footerLabel: {
+    fontSize: 16,
+    color: 'rgba(255,255,255,0.9)',
   },
   footerLink: {
+    fontSize: 16,
     fontWeight: '700',
+    color: '#ffffff',
+    textDecorationLine: 'underline',
+    letterSpacing: 0.3,
   },
 });

@@ -11,7 +11,9 @@
     "ios": {
       "supportsTablet": true,
       "infoPlist": {
-        "NSLocationWhenInUseUsageDescription": "Bu uygulama mekanların yakınında olup olmadığınızı kontrol etmek için konum bilgisine ihtiyaç duyar."
+        "NSLocationWhenInUseUsageDescription": "Bu uygulama mekanların yakınında olup olmadığınızı kontrol etmek için konum bilgisine ihtiyaç duyar.",
+        "NSPhotoLibraryUsageDescription": "Bu uygulama yorumlarınıza fotoğraf eklemeniz için galeri erişimine ihtiyaç duyar.",
+        "NSCameraUsageDescription": "Bu uygulama yorumlarınıza fotoğraf çekmeniz için kamera erişimine ihtiyaç duyar."
       }
     },
     "android": {
@@ -23,7 +25,10 @@
       },
       "permissions": [
         "ACCESS_FINE_LOCATION",
-        "ACCESS_COARSE_LOCATION"
+        "ACCESS_COARSE_LOCATION",
+        "READ_EXTERNAL_STORAGE",
+        "WRITE_EXTERNAL_STORAGE",
+        "CAMERA"
       ],
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
@@ -41,6 +46,13 @@
     },
     "plugins": [
       "expo-router",
+      [
+        "expo-image-picker",
+        {
+          "photosPermission": "Bu uygulama yorumlarınıza fotoğraf eklemeniz için galeri erişimine ihtiyaç duyar.",
+          "cameraPermission": "Bu uygulama yorumlarınıza fotoğraf çekmeniz için kamera erişimine ihtiyaç duyar."
+        }
+      ],
       [
         "expo-splash-screen",
         {

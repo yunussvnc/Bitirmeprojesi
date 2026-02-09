@@ -2,19 +2,19 @@
  * useTheme Hook
  * 
  * Provides access to the design system with theme support.
- * Automatically detects system theme preference.
+ * Now integrated with ThemeContext for manual theme switching.
  * 
  * Usage:
  * ```tsx
- * const { colors, isDark } = useTheme();
+ * const { colors, isDark, toggleTheme } = useTheme();
  * 
  * <View style={{ backgroundColor: colors.background.primary }} />
  * ```
  */
 
-import { useColorScheme } from 'react-native';
 import { colors, typography, spacing, shadows, animations } from '@/constants/design';
 import type { ColorTheme } from '@/constants/design';
+import { useThemeContext } from '@/context/ThemeContext';
 
 export interface UseThemeReturn {
   /**
@@ -26,6 +26,21 @@ export interface UseThemeReturn {
    * Whether dark theme is active
    */
   isDark: boolean;
+  
+  /**
+   * Current theme mode ('light' | 'dark' | 'system')
+   */
+  themeMode: 'light' | 'dark' | 'system';
+  
+  /**
+   * Toggle between light and dark themes
+   */
+  toggleTheme: () => void;
+  
+  /**
+   * Set specific theme mode
+   */
+  setThemeMode: (mode: 'light' | 'dark' | 'system') => void;
   
   /**
    * Typography system
@@ -51,26 +66,26 @@ export interface UseThemeReturn {
 /**
  * Hook to access design system with theme support
  * 
- * @param forcedTheme - Optional theme override ('dark' | 'light')
  * @returns Design system tokens for current theme
  * 
  * @example
  * ```tsx
- * // Auto-detect theme
- * const { colors } = useTheme();
+ * const { colors, isDark, toggleTheme } = useTheme();
  * 
- * // Force dark theme
- * const { colors } = useTheme('dark');
+ * <TouchableOpacity onPress={toggleTheme}>
+ *   <Text>{isDark ? '🌙 Dark' : '☀️ Light'}</Text>
+ * </TouchableOpacity>
  * ```
  */
-export function useTheme(forcedTheme?: 'dark' | 'light'): UseThemeReturn {
-  const systemTheme = useColorScheme();
-  const theme = forcedTheme || systemTheme || 'dark';
-  const isDark = theme === 'dark';
+export function useTheme(): UseThemeReturn {
+  const { theme, themeMode, setThemeMode, toggleTheme, isDark } = useThemeContext();
 
   return {
-    colors: isDark ? colors.dark : colors.light,
+    colors: theme === 'dark' ? colors.dark : colors.light,
     isDark,
+    themeMode,
+    toggleTheme,
+    setThemeMode,
     typography,
     spacing,
     shadows,

@@ -50,6 +50,7 @@ const MAPPING = {
   'chart.bar.fill': 'bar-chart',
   'crown.fill': 'workspace-premium',
   'play.fill': 'play-arrow',
+  'checkmark.seal.fill': 'verified',
 } as IconMapping;
 
 /**

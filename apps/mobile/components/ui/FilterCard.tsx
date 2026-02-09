@@ -1,7 +1,8 @@
 /**
  * Filter Card Component
  * 
- * Trendyol-style large filter card for better UX.
+ * Compact list item style filter card.
+ * Premium, space-efficient design.
  * 
  * @module components/ui/FilterCard
  */
@@ -11,7 +12,8 @@ import { TouchableOpacity, View, Text, StyleSheet, ViewStyle } from 'react-nativ
 import { LinearGradient } from 'expo-linear-gradient';
 import { useTheme } from '@/hooks/useTheme';
 import { IconSymbol, type IconSymbolName } from './icon-symbol';
-import { createTextStyle } from '@/constants/design';
+import { createTextStyle, spacing } from '@/constants/design';
+import { lightImpact } from '@/src/utils/haptics';
 
 export interface FilterCardProps {
   /**
@@ -48,8 +50,9 @@ export interface FilterCardProps {
 /**
  * Filter Card Component
  * 
- * Large, pressable filter card inspired by Trendyol.
- * Better UX than small chips.
+ * Compact list item style filter card.
+ * Layout: [Icon] [Title + Subtitle] [Chevron]
+ * Height: 60px, premium feel, space-efficient.
  */
 export function FilterCard({
   label,
@@ -59,124 +62,102 @@ export function FilterCard({
   onPress,
   style,
 }: FilterCardProps) {
-  const { colors, spacing } = useTheme();
-  const labelStyle = createTextStyle('body', colors.text.primary);
-  const valueStyle = createTextStyle('bodySmall', colors.text.secondary);
+  const { colors } = useTheme();
+
+  const handlePress = () => {
+    lightImpact();
+    onPress();
+  };
 
   return (
     <TouchableOpacity
-      onPress={onPress}
-      activeOpacity={0.8}
-      style={[styles.container, style]}
+      onPress={handlePress}
+      activeOpacity={0.7}
+      style={[
+        styles.listItem,
+        {
+          backgroundColor: active ? colors.accent.primary + '10' : colors.surface.elevated,
+          borderColor: active ? colors.accent.primary : colors.surface.border,
+        },
+        style,
+      ]}
     >
-      {active ? (
-        <LinearGradient
-          colors={[colors.accent.primary, colors.accent.primaryHover]}
-          start={{ x: 0, y: 0 }}
-          end={{ x: 1, y: 0 }}
-          style={styles.gradient}
-        >
-          <View style={styles.content}>
-            {icon && (
-              <IconSymbol
-                name={icon}
-                size={20}
-                color={colors.text.inverse}
-                style={styles.icon}
-              />
-            )}
-            <View style={styles.textContainer}>
-              <Text style={[labelStyle, styles.label, { color: colors.text.inverse }]} numberOfLines={1}>
-                {label}
-              </Text>
-              {value !== undefined && (
-                <Text style={[valueStyle, styles.value, { color: colors.text.inverse + 'CC' }]} numberOfLines={1}>
-                  {value}
-                </Text>
-              )}
-            </View>
-            <View style={[styles.checkmark, { backgroundColor: colors.text.inverse + '20' }]}>
-              <IconSymbol
-                name="checkmark"
-                size={16}
-                color={colors.text.inverse}
-              />
-            </View>
-          </View>
-        </LinearGradient>
-      ) : (
-        <View
-          style={[
-            styles.content,
-            styles.inactiveContent,
-            {
-              backgroundColor: colors.surface.elevated,
-              borderColor: colors.surface.border,
-            },
-          ]}
-        >
-          {icon && (
-            <IconSymbol
-              name={icon}
-              size={20}
-              color={colors.text.secondary}
-              style={styles.icon}
-            />
-          )}
-          <View style={styles.textContainer}>
-            <Text style={[labelStyle, styles.label, { color: colors.text.primary }]} numberOfLines={1}>
-              {label}
-            </Text>
-            {value !== undefined && (
-              <Text style={[valueStyle, styles.value, { color: colors.text.secondary }]} numberOfLines={1}>
-                {value}
-              </Text>
-            )}
-          </View>
+      {/* Left: Icon */}
+      {icon && (
+        <View style={[styles.iconContainer, { backgroundColor: active ? colors.accent.primary + '15' : colors.surface.default }]}>
+          <IconSymbol
+            name={icon}
+            size={22}
+            color={active ? colors.accent.primary : colors.text.secondary}
+          />
         </View>
       )}
+
+      {/* Center: Title + Subtitle */}
+      <View style={styles.textContainer}>
+        <Text 
+          style={[
+            styles.title, 
+            { color: active ? colors.accent.primary : colors.text.primary }
+          ]} 
+          numberOfLines={1}
+        >
+          {label}
+        </Text>
+        {value !== undefined && (
+          <Text 
+            style={[
+              styles.subtitle, 
+              { color: active ? colors.accent.primary + 'CC' : colors.text.tertiary }
+            ]} 
+            numberOfLines={1}
+          >
+            {value}
+          </Text>
+        )}
+      </View>
+
+      {/* Right: Chevron */}
+      <IconSymbol
+        name="chevron.right"
+        size={18}
+        color={active ? colors.accent.primary : colors.text.tertiary}
+      />
     </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    borderRadius: 12,
-    overflow: 'hidden',
-    marginBottom: 12,
-  },
-  gradient: {
-    padding: 16,
-  },
-  content: {
+  listItem: {
     flexDirection: 'row',
     alignItems: 'center',
-    minHeight: 56,
-  },
-  inactiveContent: {
-    padding: 16,
-    borderWidth: 1,
+    height: 60,
+    paddingHorizontal: spacing.md,
+    paddingVertical: spacing.sm,
     borderRadius: 12,
+    borderWidth: 1.5,
+    marginBottom: spacing.sm,
+    gap: spacing.md,
   },
-  icon: {
-    marginRight: 12,
+  iconContainer: {
+    width: 40,
+    height: 40,
+    borderRadius: 10,
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   textContainer: {
     flex: 1,
-  },
-  label: {
-    fontWeight: '600',
-    marginBottom: 2,
-  },
-  value: {
-    opacity: 0.8,
-  },
-  checkmark: {
-    width: 24,
-    height: 24,
-    borderRadius: 12,
     justifyContent: 'center',
-    alignItems: 'center',
-    marginLeft: 8,
+    gap: 2,
+  },
+  title: {
+    fontSize: 15,
+    fontWeight: '600',
+    letterSpacing: 0.1,
+  },
+  subtitle: {
+    fontSize: 12,
+    fontWeight: '500',
   },
 });

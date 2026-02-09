@@ -7,7 +7,7 @@
  */
 
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, ViewStyle } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { createTextStyle } from '@/constants/design';
 
@@ -25,7 +25,7 @@ export interface SectionProps {
   /**
    * Custom style
    */
-  style?: any;
+  style?: ViewStyle;
 }
 
 /**
@@ -58,7 +58,8 @@ export function Section({ title, children, style }: SectionProps) {
 
 const styles = StyleSheet.create({
   section: {
-    // Spacing handled by marginBottom
+    width: '100%',
+    alignSelf: 'stretch',
   },
   title: {
     // Styling applied dynamically

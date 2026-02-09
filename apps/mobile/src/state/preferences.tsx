@@ -1,15 +1,15 @@
 import React, { createContext, useContext, useMemo, useState } from "react";
 
 export type Preferences = {
-  budget: "low" | "mid" | "high";
-  vibe: "quiet" | "lively";
-  purpose: "work" | "friends" | "date";
+  budget?: "low" | "mid" | "high";
+  vibe?: "quiet" | "lively";
+  purpose?: "work" | "friends" | "date";
 };
 
 const defaultPrefs: Preferences = {
-  budget: "mid",
-  vibe: "quiet",
-  purpose: "work",
+  budget: undefined,
+  vibe: undefined,
+  purpose: undefined,
 };
 
 type PreferencesContextValue = {

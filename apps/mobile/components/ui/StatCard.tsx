@@ -82,10 +82,10 @@ export function StatCard({
               </View>
             )}
             <View style={styles.textContainer}>
-              <Text style={[valueStyle, styles.value, { color: colors.text.inverse }]}>
+              <Text style={[valueStyle, styles.value, { color: colors.text.inverse }]} numberOfLines={1}>
                 {value}
               </Text>
-              <Text style={[labelStyle, styles.label, { color: colors.text.inverse + 'CC' }]}>
+              <Text style={[labelStyle, styles.label, { color: colors.text.inverse + 'CC' }]} numberOfLines={2}>
                 {label}
               </Text>
             </View>
@@ -112,10 +112,10 @@ export function StatCard({
             </View>
           )}
           <View style={styles.textContainer}>
-            <Text style={[valueStyle, styles.value, { color: colors.text.primary }]}>
+            <Text style={[valueStyle, styles.value, { color: colors.text.primary }]} numberOfLines={1}>
               {value}
             </Text>
-            <Text style={[labelStyle, styles.label, { color: colors.text.secondary }]}>
+            <Text style={[labelStyle, styles.label, { color: colors.text.secondary }]} numberOfLines={2}>
               {label}
             </Text>
           </View>
@@ -163,15 +163,18 @@ const styles = StyleSheet.create({
   },
   textContainer: {
     flex: 1,
+    minWidth: 0,
+    justifyContent: 'center',
   },
   value: {
-    fontSize: 28,
+    fontSize: 22,
     fontWeight: '700',
-    marginBottom: 4,
+    marginBottom: 2,
   },
   label: {
-    fontSize: 13,
+    fontSize: 12,
     fontWeight: '500',
-    opacity: 0.8,
+    opacity: 0.9,
+    flexWrap: 'wrap',
   },
 });

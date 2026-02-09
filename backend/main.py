@@ -9,7 +9,7 @@ except Exception:
 from fastapi import FastAPI, Depends, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
-from typing import List
+from typing import List, Optional
 
 import models, schemas, crud
 from database import engine, Base, SessionLocal
@@ -86,12 +86,86 @@ def read_places(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
 # -------------------------
 # REVIEW CRUD
 # -------------------------
+def _haversine_distance_meters(
+    lat1: float,
+    lon1: float,
+    lat2: float,
+    lon2: float,
+) -> float:
+    """
+    İki koordinasyon arasındaki yaklaşık mesafeyi (metre) hesaplar.
+    Frontend ile aynı Haversine yaklaşımını kullanır.
+    """
+    from math import radians, sin, cos, atan2, sqrt
+
+    R = 6371000.0  # metre
+    φ1, φ2 = radians(lat1), radians(lat2)
+    dφ = radians(lat2 - lat1)
+    dλ = radians(lon2 - lon1)
+
+    a = (
+        sin(dφ / 2) * sin(dφ / 2)
+        + cos(φ1) * cos(φ2) * sin(dλ / 2) * sin(dλ / 2)
+    )
+    c = 2 * atan2(sqrt(a), sqrt(1 - a))
+    return R * c
+
+
 @app.post("/reviews/", response_model=schemas.Review)
 def post_review(review: schemas.ReviewCreate, db: Session = Depends(get_db)):
+    """
+    Yeni yorum oluşturur.
+
+    Notlar:
+    - İstemci sadece anlık konum bilgisini (user_lat/user_lng) gönderir.
+    - Gerçek doğrulama sunucu tarafında place koordinatları ile yapılır.
+    - is_verified, verify_method ve distance_meters bu fonksiyonda hesaplanır.
+    """
     # TODO: Get user_id from JWT token when authentication is implemented
     # For now, use a default user_id (should be replaced with proper auth)
     default_user_id = 1
-    return crud.create_review(db=db, review=review, user_id=default_user_id, is_verified=True)
+
+    place: Optional[models.Place] = (
+        db.query(models.Place)
+        .filter(models.Place.id == review.place_id)
+        .first()
+    )
+    if not place:
+        raise HTTPException(status_code=404, detail="Mekan bulunamadı.")
+
+    # Varsayılanlar
+    is_verified = False
+    verify_method: Optional[str] = None
+    distance_meters: Optional[int] = None
+
+    if (
+        place.latitude is not None
+        and place.longitude is not None
+        and review.user_lat is not None
+        and review.user_lng is not None
+    ):
+        # Mesafeyi hesapla
+        distance = _haversine_distance_meters(
+            review.user_lat,
+            review.user_lng,
+            place.latitude,
+            place.longitude,
+        )
+        distance_meters = int(distance)
+
+        # Backend doğrulama yarıçapı (UI: 100m, Backend: 150m tampon)
+        is_verified = distance_meters <= 150
+        verify_method = "geofence"
+
+    created = crud.create_review(
+        db=db,
+        review=review,
+        user_id=default_user_id,
+        is_verified=is_verified,
+        verify_method=verify_method,
+        distance_meters=distance_meters,
+    )
+    return created
 
 @app.get("/places/{place_id}/reviews", response_model=List[schemas.Review])
 def get_place_reviews(place_id: int, db: Session = Depends(get_db)):
@@ -221,7 +295,7 @@ def recommend_places(req: schemas.RecommendRequest, db: Session = Depends(get_db
     req.preferences.purpose = _norm_purpose(getattr(req.preferences, "purpose", None))
     req.preferences.budget = _norm_budget(getattr(req.preferences, "budget", None))
 
-    places = crud.get_places(db, skip=0, limit=200)
+    places = crud.get_places(db, skip=0, limit=300)
 
     scored: list[tuple[int, any, list[str]]] = []
     for p in places:
@@ -230,12 +304,9 @@ def recommend_places(req: schemas.RecommendRequest, db: Session = Depends(get_db
 
     scored.sort(key=lambda x: x[0], reverse=True)
 
-    # çok katı filtre yüzünden boş dönmesin:
-    picked = [(p, tags) for (s, p, tags) in scored if s >= 2]
+    # En yüksek puanlı 12 mekanı al (tercih + arama eşleşmesine göre sıralı)
+    picked = [(p, tags) for (_, p, tags) in scored[:12]]
     used_fallback = False
-    if not picked:
-        used_fallback = True
-        picked = [(p, tags) for (_, p, tags) in scored[:10]]
 
     items: list[schemas.RecommendItem] = []
     for p, tags in picked[:12]:

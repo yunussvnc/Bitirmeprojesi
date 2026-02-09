@@ -8,17 +8,16 @@
 
 import React, { useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, Animated } from 'react-native';
-import { IconSymbol } from './icon-symbol';
+import { IconSymbol, type IconSymbolName } from './icon-symbol';
 import { useTheme } from '@/hooks/useTheme';
 import { Button } from './Button';
-import { createTextStyle } from '@/constants/design';
-import { animationTiming, easing } from '@/constants/design';
+import { createTextStyle, spacing, radius, animationTiming, easing } from '@/constants/design';
 
 export interface EmptyStateProps {
   /**
-   * Icon name
+   * Icon name (SF Symbol / Material icon key)
    */
-  icon: string;
+  icon: IconSymbolName;
   
   /**
    * Title text
@@ -115,7 +114,7 @@ export function EmptyState({
           },
         ]}
       >
-        <IconSymbol name={icon} size={48} color={colors.text.tertiary} />
+        <IconSymbol name={icon} size={40} color={colors.text.tertiary} />
       </Animated.View>
       <Text style={[titleStyle, styles.title, { marginBottom: spacing.sm }]}>
         {title}
@@ -136,13 +135,13 @@ const styles = StyleSheet.create({
   container: {
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: 48,
-    paddingHorizontal: 24,
+    paddingVertical: spacing.xxxl,
+    paddingHorizontal: spacing.xl,
   },
   iconContainer: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
+    width: 72,
+    height: 72,
+    borderRadius: radius.xxl,
     alignItems: 'center',
     justifyContent: 'center',
   },

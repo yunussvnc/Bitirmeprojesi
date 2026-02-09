@@ -24,7 +24,7 @@ import { useTheme } from '@/hooks/useTheme';
 /**
  * Input variant types
  */
-export type InputVariant = 'default' | 'search';
+export type InputVariant = 'default' | 'search' | 'onDark';
 
 /**
  * Input component props
@@ -118,6 +118,14 @@ export function Input({
   const { colors, spacing, typography } = useTheme();
 
   const isSearch = variant === 'search';
+  const isOnDark = variant === 'onDark';
+
+  const labelColor = isOnDark ? 'rgba(255,255,255,0.92)' : colors.text.secondary;
+  const inputBg = isOnDark ? 'rgba(255,255,255,0.12)' : colors.surface.default;
+  const inputBorder = error ? colors.semantic.error : (isOnDark ? 'rgba(255,255,255,0.22)' : colors.surface.border);
+  const inputColor = isOnDark ? '#ffffff' : colors.text.primary;
+  const placeholderColor = isOnDark ? 'rgba(255,255,255,0.6)' : colors.text.secondary;
+  const iconColor = isOnDark ? 'rgba(255,255,255,0.7)' : colors.text.secondary;
 
   return (
     <View style={[styles.container, containerStyle]} testID={testID}>
@@ -127,7 +135,7 @@ export function Input({
             style={[
               styles.label,
               {
-                color: colors.text.secondary,
+                color: labelColor,
                 fontSize: typography.scale.caption.fontSize,
               },
             ]}
@@ -141,10 +149,10 @@ export function Input({
         style={[
           styles.inputContainer,
           {
-            backgroundColor: colors.surface.default,
-            borderColor: error ? colors.semantic.error : colors.surface.border,
+            backgroundColor: inputBg,
+            borderColor: inputBorder,
             paddingHorizontal: spacing.base,
-            paddingVertical: isSearch ? spacing.md : spacing.base,
+            paddingVertical: isSearch ? spacing.sm : spacing.base,
           },
           isSearch && styles.searchContainer,
         ]}
@@ -153,7 +161,7 @@ export function Input({
           <IconSymbol
             name={leftIcon}
             size={20}
-            color={colors.text.tertiary}
+            color={iconColor}
             style={styles.leftIcon}
           />
         )}
@@ -162,13 +170,13 @@ export function Input({
           style={[
             styles.input,
             {
-              color: colors.text.primary,
+              color: inputColor,
               fontSize: typography.scale.body.fontSize,
               flex: 1,
             },
             inputStyle,
           ]}
-          placeholderTextColor={colors.text.tertiary}
+          placeholderTextColor={placeholderColor}
           {...textInputProps}
         />
 
@@ -181,7 +189,7 @@ export function Input({
             <IconSymbol
               name={rightIcon}
               size={20}
-              color={colors.text.tertiary}
+              color={iconColor}
             />
           </TouchableOpacity>
         )}
@@ -192,7 +200,7 @@ export function Input({
           style={[
             styles.error,
             {
-              color: colors.semantic.error,
+              color: isOnDark ? '#ff8a80' : colors.semantic.error,
               fontSize: typography.scale.caption.fontSize,
             },
           ]}
@@ -221,18 +229,22 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     borderWidth: 1,
     minHeight: 48,
+    maxHeight: 52,
   },
   searchContainer: {
-    // Search-specific styling
+    minHeight: 48,
+    maxHeight: 52,
+    height: 50,
   },
   input: {
-    // Styling applied dynamically
+    flex: 1,
+    paddingVertical: 0, // Remove default padding for exact 48px
   },
   leftIcon: {
-    marginRight: 12,
+    marginRight: 10, // Tighter spacing
   },
   rightIcon: {
-    marginLeft: 12,
+    marginLeft: 10, // Tighter spacing
     padding: 4,
   },
   error: {

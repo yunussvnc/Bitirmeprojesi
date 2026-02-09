@@ -16,12 +16,13 @@ import {
   Image,
   ImageSourcePropType,
   Animated,
+  type TextStyle,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useTheme } from '@/hooks/useTheme';
 import { Chip } from '@/components/ui';
-import { createTextStyle } from '@/constants/design';
-import { shadows } from '@/constants/design';
+import { IconSymbol } from '@/components/ui/icon-symbol';
+import { createTextStyle, shadows, spacing as designSpacing, radius, PLACE_CARD_ASPECT, PLACE_CARD_IMAGE_MAX_HEIGHT } from '@/constants/design';
 import { mediumImpact } from '@/src/utils/haptics';
 
 export interface PlaceCardProps {
@@ -49,6 +50,16 @@ export interface PlaceCardProps {
    * Rank number (for recommendations)
    */
   rank?: number;
+  
+  /**
+   * true ise görsel yerine "Görsel eklenmedi" placeholder gösterilir (API'de photo_url yok).
+   */
+  imagePlaceholder?: boolean;
+  
+  /**
+   * Konum adı (görsel üzerinde badge olarak gösterilir, örn. "Beşiktaş").
+   */
+  location?: string;
   
   /**
    * Press handler
@@ -79,12 +90,14 @@ export interface PlaceCardProps {
  * />
  * ```
  */
-export function PlaceCard({
+const PlaceCardComponent = function PlaceCard({
   image,
   title,
   subtitle,
   tags,
   rank,
+  imagePlaceholder = false,
+  location,
   onPress,
   testID,
 }: PlaceCardProps) {
@@ -92,6 +105,8 @@ export function PlaceCard({
   const titleStyle = createTextStyle('heading', colors.text.primary);
   const subtitleStyle = createTextStyle('bodySmall', colors.text.secondary);
   const scaleAnim = useRef(new Animated.Value(1)).current;
+  const lastPressTime = useRef(0);
+  const PRESS_THROTTLE_MS = 600;
 
   const handlePressIn = () => {
     Animated.spring(scaleAnim, {
@@ -112,6 +127,9 @@ export function PlaceCard({
   };
 
   const handlePress = () => {
+    const now = Date.now();
+    if (now - lastPressTime.current < PRESS_THROTTLE_MS) return;
+    lastPressTime.current = now;
     mediumImpact();
     onPress();
   };
@@ -127,40 +145,52 @@ export function PlaceCard({
         testID={testID}
       >
       <View style={styles.imageContainer}>
-        <Image source={image} style={styles.image} resizeMode="cover" />
-        <LinearGradient
-          colors={['transparent', 'rgba(0,0,0,0.6)']}
-          style={styles.gradient}
-        />
-        {rank !== undefined && (
+        {imagePlaceholder ? (
+          <View style={[styles.imagePlaceholder, { backgroundColor: colors.surface.elevated }]}>
+            <IconSymbol name="mappin.and.ellipse" size={32} color={colors.text.tertiary} />
+            <Text style={[styles.placeholderLabel, { color: colors.text.tertiary }]} numberOfLines={1}>
+              Görsel eklenmedi
+            </Text>
+          </View>
+        ) : (
+          <>
+            <Image source={image} style={styles.image} resizeMode="cover" />
+            <LinearGradient
+              colors={['rgba(0,0,0,0.15)', 'rgba(0,0,0,0.5)', 'rgba(0,0,0,0.82)']}
+              locations={[0.2, 0.55, 1]}
+              style={styles.gradient}
+            />
+          </>
+        )}
+        {location ? (
           <View
             style={[
-              styles.rankBadge,
+              styles.locationBadge,
               {
-                backgroundColor: colors.surface.default,
-                borderColor: colors.surface.border,
+                backgroundColor: 'rgba(0,0,0,0.4)',
               },
             ]}
           >
-            <Text style={[styles.rankText, { color: colors.text.primary }]}>
-              #{rank}
-            </Text>
+            <IconSymbol name="mappin.circle.fill" size={11} color="rgba(255,255,255,0.95)" />
+            <Text style={styles.locationBadgeText} numberOfLines={1}>{location}</Text>
           </View>
-        )}
+        ) : null}
       </View>
-      <View style={[styles.content, { padding: spacing.cardPadding }]}>
-        <Text style={[titleStyle, styles.title]} numberOfLines={1}>
+      <View style={[styles.content, { 
+        backgroundColor: colors.background.secondary,
+      }]}>
+        <Text style={[titleStyle as TextStyle, styles.title]} numberOfLines={2}>
           {title}
         </Text>
         {subtitle && (
-          <Text style={[subtitleStyle, styles.subtitle]} numberOfLines={2}>
+          <Text style={[subtitleStyle as TextStyle, styles.subtitle]} numberOfLines={2}>
             {subtitle}
           </Text>
         )}
         {tags && tags.length > 0 && (
           <View style={styles.tags}>
             {tags.slice(0, 3).map((tag, index) => (
-              <Chip key={index} label={tag} />
+              <Chip key={index} label={tag} size="small" />
             ))}
           </View>
         )}
@@ -168,58 +198,79 @@ export function PlaceCard({
     </TouchableOpacity>
     </Animated.View>
   );
-}
+};
+
+export const PlaceCard = React.memo(PlaceCardComponent);
 
 const styles = StyleSheet.create({
   card: {
-    borderRadius: 12,
+    width: '100%',
+    borderRadius: radius.lg,
     overflow: 'hidden',
-    marginBottom: 12,
-    backgroundColor: 'transparent',
   },
   imageContainer: {
     width: '100%',
-    height: 200,
-    position: 'relative',
+    aspectRatio: PLACE_CARD_ASPECT,
+    maxHeight: PLACE_CARD_IMAGE_MAX_HEIGHT,
   },
   image: {
+    ...StyleSheet.absoluteFillObject,
     width: '100%',
     height: '100%',
+  },
+  imagePlaceholder: {
+    ...StyleSheet.absoluteFillObject,
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: designSpacing.sm,
+  },
+  placeholderLabel: {
+    fontSize: 13,
+    fontWeight: '500',
   },
   gradient: {
     position: 'absolute',
     bottom: 0,
     left: 0,
     right: 0,
-    height: '50%',
+    height: '70%',
   },
-  rankBadge: {
+  locationBadge: {
     position: 'absolute',
-    top: 12,
-    left: 12,
-    paddingVertical: 6,
-    paddingHorizontal: 10,
-    borderRadius: 12,
-    borderWidth: 1,
+    bottom: designSpacing.sm,
+    left: designSpacing.sm,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+    paddingVertical: 4,
+    paddingHorizontal: 8,
+    borderRadius: 8,
   },
-  rankText: {
+  locationBadgeText: {
     fontSize: 12,
     fontWeight: '600',
+    color: 'rgba(255,255,255,0.95)',
+    maxWidth: 120,
   },
   content: {
-    backgroundColor: 'transparent',
+    paddingVertical: designSpacing.base,
+    paddingHorizontal: designSpacing.md,
   },
   title: {
-    marginBottom: 4,
+    fontSize: 16,
+    fontWeight: '700',
+    letterSpacing: 0.1,
+    marginBottom: 6,
   },
   subtitle: {
-    marginTop: 4,
+    fontSize: 14,
+    lineHeight: 20,
     marginBottom: 8,
   },
   tags: {
     flexDirection: 'row',
     flexWrap: 'wrap',
-    gap: 8,
-    marginTop: 8,
+    gap: 6,
+    marginTop: 2,
   },
 });

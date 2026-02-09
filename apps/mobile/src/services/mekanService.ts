@@ -13,6 +13,8 @@ export type Place = {
   city?: string;
   latitude?: number;
   longitude?: number;
+  photo_url?: string;  // Mekan fotoğrafı URL
+  video_url?: string;  // Mekan videosu URL
 };
 
 function normalizePlace(p: any): Place {
@@ -23,14 +25,16 @@ function normalizePlace(p: any): Place {
     p?.subtitle ??
     (description ? String(description).slice(0, 80) : undefined);
 
-  const tags = Array.isArray(p?.tags) ? p.tags : undefined;
+  const tags = Array.isArray(p?.tags) ? p.tags : (p?.category ? [p.category] : undefined);
   const category = p?.category || undefined;
   const address = p?.address || undefined;
   const city = p?.city || undefined;
   const latitude = typeof p?.latitude === 'number' ? p.latitude : undefined;
   const longitude = typeof p?.longitude === 'number' ? p.longitude : undefined;
+  const photo_url = p?.photo_url || undefined;
+  const video_url = p?.video_url || undefined;
 
-  return { id, name, subtitle, description, tags, category, address, city, latitude, longitude };
+  return { id, name, subtitle, description, tags, category, address, city, latitude, longitude, photo_url, video_url };
 }
 
 export async function getPlaces(): Promise<Place[]> {

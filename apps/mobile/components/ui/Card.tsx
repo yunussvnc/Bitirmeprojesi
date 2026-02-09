@@ -16,7 +16,7 @@ import {
   TouchableOpacityProps,
 } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
-import { shadows } from '@/constants/design';
+import { shadows, radius } from '@/constants/design';
 
 /**
  * Card component props
@@ -119,7 +119,7 @@ export function Card({
 
 const styles = StyleSheet.create({
   card: {
-    borderRadius: 12,
+    borderRadius: radius.lg,
     borderWidth: 1,
   },
 });

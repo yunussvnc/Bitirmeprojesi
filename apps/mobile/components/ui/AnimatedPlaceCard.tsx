@@ -32,7 +32,7 @@ export interface AnimatedPlaceCardProps extends PlaceCardProps {
  * Wraps PlaceCard with fade-in and slide-up animation.
  * Perfect for lists where items appear one by one.
  */
-export function AnimatedPlaceCard({
+function AnimatedPlaceCardInner({
   delay = 0,
   index = 0,
   ...cardProps
@@ -64,6 +64,8 @@ export function AnimatedPlaceCard({
   return (
     <Animated.View
       style={{
+        width: '100%',
+        alignSelf: 'stretch',
         opacity,
         transform: [{ translateY }],
       }}
@@ -72,3 +74,5 @@ export function AnimatedPlaceCard({
     </Animated.View>
   );
 }
+
+export const AnimatedPlaceCard = React.memo(AnimatedPlaceCardInner);

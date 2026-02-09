@@ -6,6 +6,9 @@ export type SavedPlace = {
   id: string;
   name: string;
   subtitle?: string;
+  photo_url?: string;
+  category?: string;
+  tags?: string[];
 };
 
 type SavedPlacesState = {

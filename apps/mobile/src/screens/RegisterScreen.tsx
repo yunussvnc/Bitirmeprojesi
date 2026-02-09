@@ -1,30 +1,49 @@
 /**
- * Register Screen
- * 
- * Spotify-inspired dark theme registration screen.
- * Clean, minimal, professional design.
- * 
+ * Kayıt ekranı – Giriş ekranı ile aynı tasarım
+ * Arka planda mekan carousel, koyu overlay, cam kart, onDark inputlar.
+ * Kaydırma yok.
+ *
  * @module screens/RegisterScreen
  */
 
 import { router } from 'expo-router';
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   StyleSheet,
   View,
   KeyboardAvoidingView,
   Platform,
-  ScrollView,
   Text,
   TouchableOpacity,
+  Animated,
+  Dimensions,
+  Image,
+  Alert,
 } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { useTheme } from '@/hooks/useTheme';
-import { Button, Input, TextButton } from '@/components/ui';
-import { createTextStyle } from '@/constants/design';
+import { LinearGradient } from 'expo-linear-gradient';
+import { BlurView } from 'expo-blur';
+import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { Button, Input } from '@/components/ui';
+import { IconSymbol } from '@/components/ui/icon-symbol';
+import { lightImpact, success } from '@/src/utils/haptics';
+import { getPlaces } from '@/src/services/mekanService';
+import { API_BASE_URL } from '@/src/constants/api';
+
+const { width, height } = Dimensions.get('window');
+
+const FALLBACK_PLACE_IMAGES = [
+  'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200',
+  'https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=1200',
+  'https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=1200',
+  'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200',
+  'https://images.unsplash.com/photo-1552566626-52f8b828add9?w=1200',
+  'https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1200',
+];
+
+const CAROUSEL_INTERVAL_MS = 4500;
 
 export default function RegisterScreen() {
-  const { colors, spacing, typography } = useTheme();
+  const insets = useSafeAreaInsets();
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -36,273 +55,288 @@ export default function RegisterScreen() {
     password?: string;
     confirmPassword?: string;
   }>({});
+  const [backgroundImages, setBackgroundImages] = useState<string[]>(FALLBACK_PLACE_IMAGES);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const fadeAnim = useRef(new Animated.Value(1)).current;
+
+  useEffect(() => {
+    let cancelled = false;
+    getPlaces()
+      .then((places) => {
+        if (cancelled) return;
+        const urls = places
+          .map((p) => p.photo_url)
+          .filter((url): url is string => !!url)
+          .map((url) => (url.startsWith('http') ? url : `${API_BASE_URL.replace(/\/$/, '')}${url.startsWith('/') ? '' : '/'}${url}`));
+        if (urls.length >= 5) setBackgroundImages(urls.slice(0, 12));
+      })
+      .catch(() => {});
+    return () => { cancelled = true; };
+  }, []);
+
+  useEffect(() => {
+    const next = () => {
+      Animated.timing(fadeAnim, { toValue: 0.3, duration: 400, useNativeDriver: true }).start(() => {
+        setCurrentImageIndex((i) => (i + 1) % backgroundImages.length);
+        Animated.timing(fadeAnim, { toValue: 1, duration: 600, useNativeDriver: true }).start();
+      });
+    };
+    const t = setInterval(next, CAROUSEL_INTERVAL_MS);
+    return () => clearInterval(t);
+  }, [backgroundImages.length, fadeAnim]);
 
   const validateForm = (): boolean => {
-    const newErrors: {
-      fullName?: string;
-      email?: string;
-      password?: string;
-      confirmPassword?: string;
-    } = {};
-
-    if (!fullName.trim()) {
-      newErrors.fullName = 'Ad soyad gereklidir';
-    } else if (fullName.trim().split(' ').length < 2) {
-      newErrors.fullName = 'Ad ve soyad girin';
-    }
-
-    if (!email.trim()) {
-      newErrors.email = 'E-posta gereklidir';
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      newErrors.email = 'Geçerli bir e-posta adresi girin';
-    }
-
-    if (!password.trim()) {
-      newErrors.password = 'Şifre gereklidir';
-    } else if (password.length < 8) {
-      newErrors.password = 'Şifre en az 8 karakter olmalıdır';
-    }
-
-    if (!confirmPassword.trim()) {
-      newErrors.confirmPassword = 'Şifre tekrarı gereklidir';
-    } else if (password !== confirmPassword) {
-      newErrors.confirmPassword = 'Şifreler eşleşmiyor';
-    }
-
+    const newErrors: typeof errors = {};
+    if (!fullName.trim()) newErrors.fullName = 'Ad soyad gereklidir';
+    else if (fullName.trim().split(' ').length < 2) newErrors.fullName = 'Ad ve soyad girin';
+    if (!email.trim()) newErrors.email = 'E-posta gereklidir';
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) newErrors.email = 'Geçerli bir e-posta adresi girin';
+    if (!password.trim()) newErrors.password = 'Şifre gereklidir';
+    else if (password.length < 8) newErrors.password = 'Şifre en az 8 karakter olmalıdır';
+    if (!confirmPassword.trim()) newErrors.confirmPassword = 'Şifre tekrarı gereklidir';
+    else if (password !== confirmPassword) newErrors.confirmPassword = 'Şifreler eşleşmiyor';
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleRegister = async () => {
     if (!validateForm()) return;
-
+    lightImpact();
     setLoading(true);
     try {
-      // TODO: Implement actual API call
-      // const response = await registerAPI({ fullName, email, password });
-      // For now, simulate successful registration
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      
+      await new Promise((r) => setTimeout(r, 1500));
+      success();
       router.replace('/(tabs)');
-    } catch (error) {
+    } catch {
       setErrors({ email: 'Kayıt başarısız. Lütfen tekrar deneyin.' });
     } finally {
       setLoading(false);
     }
   };
 
-  const titleStyle = createTextStyle('title', colors.text.primary);
-  const subtitleStyle = createTextStyle('body', colors.text.secondary);
+  const handleSocialRegister = (provider: string) => {
+    lightImpact();
+    Alert.alert('Bilgi', `${provider} ile kayıt yakında eklenecek.`, [{ text: 'Tamam' }]);
+  };
+
+  const currentImage = backgroundImages[currentImageIndex];
 
   return (
-    <SafeAreaView style={[styles.container, { backgroundColor: colors.background.primary }]}>
-      <KeyboardAvoidingView
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        style={styles.keyboardView}
-      >
-        <ScrollView
-          contentContainerStyle={styles.scrollContent}
-          showsVerticalScrollIndicator={false}
-          keyboardShouldPersistTaps="handled"
+    <View style={styles.container}>
+      <View style={StyleSheet.absoluteFill}>
+        <Image source={{ uri: currentImage }} style={styles.backgroundImage} resizeMode="cover" />
+        <Animated.View style={[StyleSheet.absoluteFill, { opacity: fadeAnim }]}>
+          <Image source={{ uri: currentImage }} style={styles.backgroundImage} resizeMode="cover" />
+        </Animated.View>
+      </View>
+      <LinearGradient
+        colors={['rgba(0,0,0,0.2)', 'rgba(0,0,0,0.5)', 'rgba(0,0,0,0.88)']}
+        locations={[0, 0.4, 0.85]}
+        style={StyleSheet.absoluteFill}
+      />
+
+      <SafeAreaView style={styles.safeArea} edges={['top']}>
+        <KeyboardAvoidingView
+          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+          style={styles.keyboardView}
+          keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}
         >
-          <View style={[styles.content, { paddingHorizontal: spacing.screenPadding }]}>
-            {/* Header */}
-            <View style={styles.header}>
-              <Text style={[styles.logo, { color: colors.text.primary }]}>📍</Text>
-              <Text style={[titleStyle, styles.title]}>Hesap Oluştur</Text>
-              <Text style={[subtitleStyle, styles.subtitle]}>
-                Hemen kayıt ol ve en iyi mekanları keşfet
-              </Text>
-            </View>
+          <View style={styles.content} pointerEvents="box-none">
+            <View style={styles.topBlock}>
+              <View style={styles.header}>
+                <View style={styles.logoWrap}>
+                  <Text style={styles.logoEmoji}>📍</Text>
+                </View>
+                <Text style={styles.brandTitle}>ASEMOS</Text>
+                <Text style={styles.tagline}>Hesap oluştur, mekanları keşfet</Text>
+              </View>
 
-            {/* Form */}
-            <View style={styles.form}>
-              <Input
-                label="Ad Soyad"
-                placeholder="Adınız Soyadınız"
-                value={fullName}
-                onChangeText={(text) => {
-                  setFullName(text);
-                  if (errors.fullName) {
-                    setErrors({ ...errors, fullName: undefined });
-                  }
-                }}
-                autoCapitalize="words"
-                error={errors.fullName}
-                containerStyle={styles.inputContainer}
-              />
+              <BlurView intensity={90} tint="dark" style={styles.card}>
+                <View style={styles.cardInner}>
+                  <Input
+                    variant="onDark"
+                    label="Ad Soyad"
+                    placeholder="Adınız Soyadınız"
+                    value={fullName}
+                    onChangeText={(t) => { setFullName(t); if (errors.fullName) setErrors({ ...errors, fullName: undefined }); }}
+                    autoCapitalize="words"
+                    error={errors.fullName}
+                    containerStyle={styles.inputContainer}
+                  />
+                  <Input
+                    variant="onDark"
+                    label="E-posta"
+                    placeholder="ornek@email.com"
+                    value={email}
+                    onChangeText={(t) => { setEmail(t); if (errors.email) setErrors({ ...errors, email: undefined }); }}
+                    keyboardType="email-address"
+                    autoCapitalize="none"
+                    autoComplete="email"
+                    error={errors.email}
+                    containerStyle={styles.inputContainer}
+                  />
+                  <Input
+                    variant="onDark"
+                    label="Şifre"
+                    placeholder="En az 8 karakter"
+                    value={password}
+                    onChangeText={(t) => { setPassword(t); if (errors.password) setErrors({ ...errors, password: undefined }); }}
+                    secureTextEntry
+                    autoComplete="password-new"
+                    error={errors.password}
+                    containerStyle={styles.inputContainer}
+                  />
+                  <Input
+                    variant="onDark"
+                    label="Şifre Tekrar"
+                    placeholder="Şifreni tekrar gir"
+                    value={confirmPassword}
+                    onChangeText={(t) => { setConfirmPassword(t); if (errors.confirmPassword) setErrors({ ...errors, confirmPassword: undefined }); }}
+                    secureTextEntry
+                    autoComplete="password-new"
+                    error={errors.confirmPassword}
+                    containerStyle={styles.inputContainer}
+                  />
+                  <Button
+                    variant="primary"
+                    size="large"
+                    onPress={handleRegister}
+                    loading={loading}
+                    disabled={loading}
+                    style={styles.registerButton}
+                  >
+                    Kayıt Ol
+                  </Button>
 
-              <Input
-                label="E-posta"
-                placeholder="ornek@email.com"
-                value={email}
-                onChangeText={(text) => {
-                  setEmail(text);
-                  if (errors.email) {
-                    setErrors({ ...errors, email: undefined });
-                  }
-                }}
-                keyboardType="email-address"
-                autoCapitalize="none"
-                autoComplete="email"
-                error={errors.email}
-                containerStyle={styles.inputContainer}
-              />
-
-              <Input
-                label="Şifre"
-                placeholder="En az 8 karakter"
-                value={password}
-                onChangeText={(text) => {
-                  setPassword(text);
-                  if (errors.password) {
-                    setErrors({ ...errors, password: undefined });
-                  }
-                }}
-                secureTextEntry
-                autoComplete="password-new"
-                error={errors.password}
-                containerStyle={styles.inputContainer}
-              />
-
-              <Input
-                label="Şifre Tekrar"
-                placeholder="Şifreni tekrar gir"
-                value={confirmPassword}
-                onChangeText={(text) => {
-                  setConfirmPassword(text);
-                  if (errors.confirmPassword) {
-                    setErrors({ ...errors, confirmPassword: undefined });
-                  }
-                }}
-                secureTextEntry
-                autoComplete="password-new"
-                error={errors.confirmPassword}
-                containerStyle={styles.inputContainer}
-              />
-
-              <Button
-                variant="primary"
-                size="large"
-                onPress={handleRegister}
-                loading={loading}
-                disabled={loading}
-                style={styles.registerButton}
-              >
-                Kayıt Ol
-              </Button>
-            </View>
-
-            {/* Divider */}
-            <View style={styles.divider}>
-              <View style={[styles.dividerLine, { backgroundColor: colors.surface.border }]} />
-              <Text style={[styles.dividerText, { color: colors.text.tertiary }]}>veya</Text>
-              <View style={[styles.dividerLine, { backgroundColor: colors.surface.border }]} />
-            </View>
-
-            {/* Social Login (Optional) */}
-            <View style={styles.socialContainer}>
-              <Button
-                variant="secondary"
-                onPress={() => {
-                  // TODO: Implement Google OAuth
-                  // await signInWithGoogle();
-                }}
-                style={styles.socialButton}
-              >
-                Google ile kayıt ol
-              </Button>
-            </View>
-
-            {/* Footer */}
-            <View style={styles.footer}>
-              <Text style={[styles.footerText, { color: colors.text.secondary }]}>
-                Zaten hesabın var mı?{' '}
-                <Text
-                  style={[styles.footerLink, { color: colors.accent.primary }]}
-                  onPress={() => router.back()}
-                >
-                  Giriş Yap
-                </Text>
-              </Text>
+                  <View style={styles.divider}>
+                    <View style={styles.dividerLine} />
+                    <Text style={styles.dividerLabel}>veya</Text>
+                    <View style={styles.dividerLine} />
+                  </View>
+                  <View style={styles.socialRow}>
+                    <TouchableOpacity onPress={() => handleSocialRegister('Google')} style={styles.socialBtnGoogle}>
+                      <Text style={styles.socialIconG}>G</Text>
+                      <Text style={styles.socialBtnTextGoogle}>Google</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity onPress={() => handleSocialRegister('Apple')} style={styles.socialBtnApple}>
+                      <IconSymbol name="apple.logo" size={20} color="#fff" />
+                      <Text style={styles.socialBtnTextWhite}>Apple</Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
+              </BlurView>
             </View>
           </View>
-        </ScrollView>
-      </KeyboardAvoidingView>
-    </SafeAreaView>
+        </KeyboardAvoidingView>
+
+        <TouchableOpacity
+          style={[styles.footerFixed, { paddingBottom: 16 + insets.bottom }]}
+          onPress={() => { lightImpact(); router.back(); }}
+          activeOpacity={0.8}
+        >
+          <Text style={styles.footerLabel}>Zaten hesabın var mı? </Text>
+          <Text style={styles.footerLink}>Giriş Yap</Text>
+        </TouchableOpacity>
+      </SafeAreaView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-  keyboardView: {
-    flex: 1,
-  },
-  scrollContent: {
-    flexGrow: 1,
-    justifyContent: 'center',
-    minHeight: '100%',
-  },
+  container: { flex: 1, backgroundColor: '#0a0a0a' },
+  safeArea: { flex: 1 },
+  keyboardView: { flex: 1 },
   content: {
     flex: 1,
-    justifyContent: 'center',
-    paddingVertical: 40,
+    paddingHorizontal: 24,
+    paddingTop: 28,
+    paddingBottom: 56,
   },
-  header: {
+  topBlock: { flex: 1 },
+  backgroundImage: { width, height },
+  header: { alignItems: 'center', marginBottom: 20 },
+  logoWrap: {
+    width: 72,
+    height: 72,
+    borderRadius: 36,
+    backgroundColor: 'rgba(255,255,255,0.18)',
     alignItems: 'center',
-    marginBottom: 32,
+    justifyContent: 'center',
+    marginBottom: 14,
   },
-  logo: {
-    fontSize: 64,
-    marginBottom: 24,
+  logoEmoji: { fontSize: 36 },
+  brandTitle: {
+    fontSize: 34,
+    fontWeight: '800',
+    color: '#ffffff',
+    letterSpacing: 3,
+    marginBottom: 6,
+    textShadowColor: 'rgba(0,0,0,0.4)',
+    textShadowOffset: { width: 0, height: 2 },
+    textShadowRadius: 8,
   },
-  title: {
-    marginBottom: 8,
+  tagline: {
+    fontSize: 15,
+    fontWeight: '500',
+    color: 'rgba(255,255,255,0.95)',
+    letterSpacing: 0.4,
     textAlign: 'center',
+    paddingHorizontal: 24,
   },
-  subtitle: {
-    textAlign: 'center',
-    lineHeight: 22,
+  card: {
+    width: '100%',
+    borderRadius: 28,
+    overflow: 'hidden',
+    marginTop: 12,
+    marginBottom: 12,
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.15)',
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 12 },
+    shadowOpacity: 0.4,
+    shadowRadius: 24,
+    elevation: 16,
   },
-  form: {
-    marginBottom: 24,
-  },
-  inputContainer: {
-    marginBottom: 20,
-  },
-  registerButton: {
-    marginTop: 8,
-  },
-  divider: {
+  cardInner: { padding: 20, backgroundColor: 'rgba(0,0,0,0.35)' },
+  inputContainer: { marginBottom: 12 },
+  registerButton: { marginTop: 4 },
+  divider: { flexDirection: 'row', alignItems: 'center', marginVertical: 18 },
+  dividerLine: { flex: 1, height: 1, backgroundColor: 'rgba(255,255,255,0.25)' },
+  dividerLabel: { marginHorizontal: 18, fontSize: 13, fontWeight: '600', color: 'rgba(255,255,255,0.7)', letterSpacing: 0.8 },
+  socialRow: { flexDirection: 'row', gap: 14 },
+  socialBtnGoogle: {
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    marginVertical: 24,
+    justifyContent: 'center',
+    paddingVertical: 14,
+    borderRadius: 14,
+    backgroundColor: 'rgba(255,255,255,0.95)',
+    gap: 10,
   },
-  dividerLine: {
+  socialBtnApple: {
     flex: 1,
-    height: 1,
-  },
-  dividerText: {
-    marginHorizontal: 16,
-    fontSize: 12,
-    fontWeight: '500',
-  },
-  socialContainer: {
-    marginBottom: 24,
-  },
-  socialButton: {
-    // Social button styling
-  },
-  footer: {
+    flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center',
+    paddingVertical: 14,
+    borderRadius: 14,
+    backgroundColor: 'rgba(0,0,0,0.82)',
+    gap: 10,
   },
-  footerText: {
-    fontSize: 14,
-    textAlign: 'center',
+  socialIconG: { fontSize: 18, fontWeight: '700', color: '#4285F4' },
+  socialBtnTextGoogle: { fontSize: 16, fontWeight: '600', color: '#1a1a1a' },
+  socialBtnTextWhite: { fontSize: 16, fontWeight: '600', color: '#fff' },
+  footerFixed: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    bottom: 0,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: 16,
   },
-  footerLink: {
-    fontWeight: '700',
-  },
+  footerLabel: { fontSize: 16, color: 'rgba(255,255,255,0.9)' },
+  footerLink: { fontSize: 16, fontWeight: '700', color: '#ffffff', textDecorationLine: 'underline', letterSpacing: 0.3 },
 });

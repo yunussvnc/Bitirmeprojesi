@@ -19,7 +19,7 @@ import {
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useTheme } from '@/hooks/useTheme';
-import { shadows } from '@/constants/design';
+import { shadows, radius } from '@/constants/design';
 import { lightImpact } from '@/src/utils/haptics';
 
 /**
@@ -259,14 +259,14 @@ export function Button({
 
 const styles = StyleSheet.create({
   button: {
-    borderRadius: 8,
+    borderRadius: radius.sm,
     overflow: 'hidden',
     justifyContent: 'center',
     alignItems: 'center',
     alignSelf: 'stretch',
   },
   small: {
-    minHeight: 36,
+    minHeight: 44,
   },
   medium: {
     minHeight: 48,
