@@ -6,6 +6,7 @@ from typing import Optional, List
 
 class UserBase(BaseModel):
     email: EmailStr
+    username: Optional[str] = None
     first_name: Optional[str] = None
     last_name: Optional[str] = None
     phone_number: Optional[str] = None
@@ -13,10 +14,19 @@ class UserBase(BaseModel):
 class UserCreate(UserBase):
     password: str
 
+class UserUpdate(BaseModel):
+    username: Optional[str] = None
+    first_name: Optional[str] = None
+    last_name: Optional[str] = None
+    bio: Optional[str] = None
+    avatar_url: Optional[str] = None
+
 class User(UserBase):
     id: int
     role: str
     is_active: bool
+    avatar_url: Optional[str] = None
+    bio: Optional[str] = None
     created_at: datetime
 
     class Config:
@@ -136,25 +146,52 @@ class UserLogin(BaseModel):
 
 class Token(BaseModel):
     access_token: str
+    refresh_token: str
     token_type: str = "bearer"
-from pydantic import BaseModel
-from typing import List, Optional, Literal
+    user: User
+
+class RefreshRequest(BaseModel):
+    refresh_token: str
+
+
+# --- ÖNERİ (RECOMMEND) ŞEMALARI ---
 
 class Preferences(BaseModel):
-    vibe: Literal["quiet", "lively"] = "quiet"
-    purpose: Literal["work", "friends", "date"] = "work"
-    budget: Literal["low", "mid", "high"] = "mid"
+    vibe: Optional[str] = "quiet"
+    purpose: Optional[str] = "work"
+    budget: Optional[str] = "mid"
+
+class Location(BaseModel):
+    lat: float
+    lng: float
+
+class RecommendRequest(BaseModel):
+    queryText: str = ""
+    preferences: Preferences = Preferences()
+    location: Optional[Location] = None
+    radius_m: int = 3000
+    category: Optional[str] = None
 
 class RecommendItem(BaseModel):
     id: int
     name: str
-    subtitle: str = ""
+    category: Optional[str] = None
+    distance_m: Optional[int] = None
+    score: float = 0
+    photo_url: Optional[str] = None
+    explanation: Optional[str] = None
     tags: List[str] = []
-
-class RecommendRequest(BaseModel):
-    queryText: str = ""
-    preferences: Preferences
 
 class RecommendResponse(BaseModel):
     items: List[RecommendItem]
-    explanation: str
+    summary: str = ""
+    cached: bool = False
+
+
+# --- PAGİNATED RESPONSE ---
+
+class PaginatedPlaces(BaseModel):
+    items: List[Place]
+    total: int
+    page: int
+    page_size: int

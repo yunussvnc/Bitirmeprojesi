@@ -134,8 +134,16 @@ export const Screen = forwardRef<ScreenRef, ScreenProps>(({
               paddingTop: topPadding,
               paddingBottom: bottomPadding,
             },
+            contentContainerStyle,
           ]}
           showsVerticalScrollIndicator={false}
+          scrollEventThrottle={16}
+          decelerationRate="normal"
+          overScrollMode="never"
+          bounces={true}
+          bouncesZoom={false}
+          alwaysBounceVertical={false}
+          directionalLockEnabled={true}
           refreshControl={
             onRefresh ? (
               <RefreshControl
@@ -143,6 +151,7 @@ export const Screen = forwardRef<ScreenRef, ScreenProps>(({
                 onRefresh={onRefresh}
                 tintColor={colors.accent.primary}
                 colors={[colors.accent.primary]}
+                progressViewOffset={0}
               />
             ) : undefined
           }

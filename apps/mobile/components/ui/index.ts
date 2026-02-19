@@ -21,6 +21,9 @@ export type { CardProps } from './Card';
 export { Input, SearchInput } from './Input';
 export type { InputProps, InputVariant } from './Input';
 
+export { ChatInput } from './ChatInput';
+export type { ChatInputProps } from './ChatInput';
+
 export { EmptyState } from './EmptyState';
 export type { EmptyStateProps } from './EmptyState';
 
@@ -48,6 +51,9 @@ export type { PlaceCardSkeletonProps } from './PlaceCardSkeleton';
 export { AnimatedPlaceCard } from './AnimatedPlaceCard';
 export type { AnimatedPlaceCardProps } from './AnimatedPlaceCard';
 
+export { SelectField } from './SelectField';
+export type { SelectFieldProps, SelectFieldOption } from './SelectField';
+
 export { RatingStars } from './RatingStars';
 export type { RatingStarsProps } from './RatingStars';
 
@@ -59,3 +65,6 @@ export type { EnhancedReviewFormProps, EnhancedReviewData } from './EnhancedRevi
 
 export { EnhancedReviewItem } from './EnhancedReviewItem';
 export type { EnhancedReviewItemProps } from './EnhancedReviewItem';
+
+export { FilterBottomSheet, getFilterSummaryChips, countActiveFilters } from './FilterBottomSheet';
+export type { FilterBottomSheetProps, FilterValues } from './FilterBottomSheet';

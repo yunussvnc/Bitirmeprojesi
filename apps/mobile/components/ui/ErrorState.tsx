@@ -84,22 +84,18 @@ export function ErrorState({
     Animated.parallel([
       Animated.timing(opacity, {
         toValue: 1,
-        duration: animationTiming.normal,
-        easing: easing.easeOut,
+        duration: 200,
         useNativeDriver: true,
       }),
       Animated.timing(translateY, {
         toValue: 0,
-        duration: animationTiming.normal,
-        easing: easing.easeOut,
+        duration: 200,
         useNativeDriver: true,
       }),
-      Animated.spring(scale, {
+      Animated.timing(scale, {
         toValue: 1,
-        delay: 100,
+        duration: 200,
         useNativeDriver: true,
-        tension: 50,
-        friction: 7,
       }),
     ]).start();
   }, [opacity, translateY, scale]);

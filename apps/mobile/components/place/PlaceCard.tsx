@@ -7,7 +7,7 @@
  * @module components/place/PlaceCard
  */
 
-import React, { useRef } from 'react';
+import React from 'react';
 import {
   TouchableOpacity,
   View,
@@ -15,60 +15,26 @@ import {
   StyleSheet,
   Image,
   ImageSourcePropType,
-  Animated,
   type TextStyle,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useTheme } from '@/hooks/useTheme';
-import { Chip } from '@/components/ui';
+import { Chip } from '@/components/ui/Chip';
 import { IconSymbol } from '@/components/ui/icon-symbol';
-import { createTextStyle, shadows, spacing as designSpacing, radius, PLACE_CARD_ASPECT, PLACE_CARD_IMAGE_MAX_HEIGHT } from '@/constants/design';
+import { createTextStyle, spacing as designSpacing, radius, PLACE_CARD_ASPECT, PLACE_CARD_IMAGE_MAX_HEIGHT } from '@/constants/design';
 import { mediumImpact } from '@/src/utils/haptics';
 
 export interface PlaceCardProps {
-  /**
-   * Place image source
-   */
   image: ImageSourcePropType;
-  
-  /**
-   * Place name
-   */
   title: string;
-  
-  /**
-   * Place subtitle/description
-   */
   subtitle?: string;
-  
-  /**
-   * Place tags/categories
-   */
   tags?: string[];
-  
-  /**
-   * Rank number (for recommendations)
-   */
-  rank?: number;
-  
-  /**
-   * true ise görsel yerine "Görsel eklenmedi" placeholder gösterilir (API'de photo_url yok).
-   */
   imagePlaceholder?: boolean;
-  
-  /**
-   * Konum adı (görsel üzerinde badge olarak gösterilir, örn. "Beşiktaş").
-   */
   location?: string;
-  
-  /**
-   * Press handler
-   */
+  explanation?: string;
+  distance_m?: number;
+  isRecommended?: boolean;
   onPress: () => void;
-  
-  /**
-   * Test ID for testing
-   */
   testID?: string;
 }
 
@@ -95,55 +61,42 @@ const PlaceCardComponent = function PlaceCard({
   title,
   subtitle,
   tags,
-  rank,
   imagePlaceholder = false,
   location,
+  explanation,
+  distance_m,
+  isRecommended = false,
   onPress,
   testID,
 }: PlaceCardProps) {
   const { colors, spacing } = useTheme();
   const titleStyle = createTextStyle('heading', colors.text.primary);
-  const subtitleStyle = createTextStyle('bodySmall', colors.text.secondary);
-  const scaleAnim = useRef(new Animated.Value(1)).current;
-  const lastPressTime = useRef(0);
-  const PRESS_THROTTLE_MS = 600;
-
-  const handlePressIn = () => {
-    Animated.spring(scaleAnim, {
-      toValue: 0.97,
-      useNativeDriver: true,
-      tension: 300,
-      friction: 10,
-    }).start();
-  };
-
-  const handlePressOut = () => {
-    Animated.spring(scaleAnim, {
-      toValue: 1,
-      useNativeDriver: true,
-      tension: 300,
-      friction: 10,
-    }).start();
-  };
-
+  const subtitleColor = colors.text.primary + 'CC'; // %80 opacity
   const handlePress = () => {
-    const now = Date.now();
-    if (now - lastPressTime.current < PRESS_THROTTLE_MS) return;
-    lastPressTime.current = now;
     mediumImpact();
     onPress();
   };
 
+  // 3D depth colors derived from theme
+  const depthEdgeColor = colors.background.primary === '#121212'
+    ? 'rgba(0,0,0,0.7)'
+    : 'rgba(0,0,0,0.12)';
+  const depthHighlightColor = colors.background.primary === '#121212'
+    ? 'rgba(255,255,255,0.06)'
+    : 'rgba(255,255,255,0.8)';
+
   return (
-    <Animated.View style={{ transform: [{ scale: scaleAnim }] }}>
+    <View style={styles.animatedWrapper}>
+      {/* 3D depth layer — sits behind the card to simulate thickness */}
+      <View style={[styles.depthLayer, { backgroundColor: depthEdgeColor }]} />
       <TouchableOpacity
         onPress={handlePress}
-        onPressIn={handlePressIn}
-        onPressOut={handlePressOut}
-        activeOpacity={1}
-        style={[styles.card, shadows.small]}
+        activeOpacity={0.95}
+        style={[styles.card]}
         testID={testID}
       >
+      {/* Top highlight edge for 3D feel */}
+      <View style={[styles.topHighlight, { backgroundColor: depthHighlightColor }]} />
       <View style={styles.imageContainer}>
         {imagePlaceholder ? (
           <View style={[styles.imagePlaceholder, { backgroundColor: colors.surface.elevated }]}>
@@ -179,11 +132,29 @@ const PlaceCardComponent = function PlaceCard({
       <View style={[styles.content, { 
         backgroundColor: colors.background.secondary,
       }]}>
-        <Text style={[titleStyle as TextStyle, styles.title]} numberOfLines={2}>
-          {title}
-        </Text>
-        {subtitle && (
-          <Text style={[subtitleStyle as TextStyle, styles.subtitle]} numberOfLines={2}>
+        {isRecommended && (
+          <View style={[styles.recommendedBadge, { backgroundColor: colors.accent.primary + '18' }]}>
+            <IconSymbol name="sparkles" size={11} color={colors.accent.primary} />
+            <Text style={[styles.recommendedText, { color: colors.accent.primary }]}>Senin için önerildi</Text>
+          </View>
+        )}
+        <View style={styles.titleRow}>
+          <Text style={[titleStyle as TextStyle, styles.title]} numberOfLines={2}>
+            {title}
+          </Text>
+          {distance_m != null && (
+            <Text style={[styles.distanceText, { color: colors.text.tertiary }]}>
+              {distance_m < 1000 ? `${distance_m}m` : `${(distance_m / 1000).toFixed(1)}km`}
+            </Text>
+          )}
+        </View>
+        {explanation && (
+          <Text style={[styles.explanation, { color: colors.text.secondary }]} numberOfLines={3}>
+            {explanation}
+          </Text>
+        )}
+        {!explanation && subtitle && (
+          <Text style={[styles.subtitle, { color: subtitleColor }]} numberOfLines={2}>
             {subtitle}
           </Text>
         )}
@@ -195,18 +166,57 @@ const PlaceCardComponent = function PlaceCard({
           </View>
         )}
       </View>
+      {/* Bottom edge accent for 3D depth */}
+      <View style={[styles.bottomEdge, { backgroundColor: depthEdgeColor }]} />
     </TouchableOpacity>
-    </Animated.View>
+    </View>
   );
 };
 
 export const PlaceCard = React.memo(PlaceCardComponent);
 
 const styles = StyleSheet.create({
+  animatedWrapper: {
+    // 3D multi-layer shadow for depth
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 6 },
+    shadowOpacity: 0.25,
+    shadowRadius: 12,
+    elevation: 8,
+  },
+  depthLayer: {
+    // Fake 3D thickness layer behind the card
+    position: 'absolute',
+    left: 2,
+    right: 2,
+    bottom: -4,
+    height: 8,
+    borderBottomLeftRadius: radius.lg,
+    borderBottomRightRadius: radius.lg,
+  },
   card: {
     width: '100%',
     borderRadius: radius.lg,
     overflow: 'hidden',
+    // Subtle border for 3D edge
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: 'rgba(255,255,255,0.08)',
+  },
+  topHighlight: {
+    // Top edge light reflection for 3D feel
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    height: 1.5,
+    zIndex: 10,
+    borderTopLeftRadius: radius.lg,
+    borderTopRightRadius: radius.lg,
+  },
+  bottomEdge: {
+    // Bottom dark edge for 3D thickness illusion
+    height: 3,
+    marginTop: -1,
   },
   imageContainer: {
     width: '100%',
@@ -256,11 +266,43 @@ const styles = StyleSheet.create({
     paddingVertical: designSpacing.base,
     paddingHorizontal: designSpacing.md,
   },
+  recommendedBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    alignSelf: 'flex-start',
+    gap: 4,
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+    borderRadius: 8,
+    marginBottom: 6,
+  },
+  recommendedText: {
+    fontSize: 11,
+    fontWeight: '700',
+    letterSpacing: 0.3,
+  },
+  titleRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: 6,
+  },
   title: {
     fontSize: 16,
     fontWeight: '700',
     letterSpacing: 0.1,
-    marginBottom: 6,
+    flex: 1,
+  },
+  distanceText: {
+    fontSize: 12,
+    fontWeight: '600',
+    marginLeft: 8,
+  },
+  explanation: {
+    fontSize: 13,
+    lineHeight: 19,
+    marginBottom: 8,
+    fontStyle: 'italic',
   },
   subtitle: {
     fontSize: 14,
@@ -272,5 +314,6 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     gap: 6,
     marginTop: 2,
+    justifyContent: 'flex-end',
   },
 });

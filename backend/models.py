@@ -8,19 +8,19 @@ class User(Base):
     id = Column(Integer, primary_key=True, index=True)
     email = Column(String, unique=True, index=True, nullable=False)
     password_hash = Column(String, nullable=False)
-    
-    # Kişisel bilgiler
-    first_name = Column(String, nullable=True) # Ad
-    last_name = Column(String, nullable=True)  # Soyad
-    phone_number = Column(String, unique=True, index=True, nullable=True) # Telefon
-    
-    # Sistem yönetimi için eklenenler
-    role = Column(String, default="standard") # admin, standard vb.
-    is_active = Column(Boolean, default=True) # Kullanıcı hesabı aktif mi?
+
+    username = Column(String, unique=True, index=True, nullable=True)
+    first_name = Column(String, nullable=True)
+    last_name = Column(String, nullable=True)
+    phone_number = Column(String, unique=True, index=True, nullable=True)
+    avatar_url = Column(String, nullable=True)
+    bio = Column(String, nullable=True)
+
+    role = Column(String, default="standard")
+    is_active = Column(Boolean, default=True)
 
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
-    # İlişkiler: Bir kullanıcının birçok yorumu olabilir
     reviews = relationship("Review", back_populates="user")
 
 class Place(Base):

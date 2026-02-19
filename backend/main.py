@@ -1,43 +1,37 @@
 # main.py
 
-# LLM opsiyonel: dosya yoksa backend patlamasın
-try:
-    from llm_recommend import llm_rerank_and_explain
-except Exception:
-    llm_rerank_and_explain = None
+from llm_recommend import recommend_pipeline
 
-from fastapi import FastAPI, Depends, HTTPException, status
+from datetime import datetime
+
+from fastapi import FastAPI, Depends, HTTPException, UploadFile, File, status
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from typing import List, Optional
 
 import models, schemas, crud
 from database import engine, Base, SessionLocal
+from config import get_settings
+from auth import create_access_token, create_refresh_token, decode_token, oauth2_scheme
+import cloud_storage
 
-# Veritabanı tablolarını oluştur
+settings = get_settings()
+
 Base.metadata.create_all(bind=engine)
 
-app = FastAPI(title="Mekan Öneri Sistemi API")
+app = FastAPI(title="AsEmOs - Mekan Öneri Sistemi API")
 
-# CORS Middleware - Mobile app için gerekli
-# Production'da environment variable'dan alınmalı
-import os
-ALLOWED_ORIGINS = os.getenv(
-    "ALLOWED_ORIGINS",
-    "http://localhost:8081,exp://192.168.1.14:8081"
-).split(",")
+origins = settings.ALLOWED_ORIGINS.split(",") if settings.ALLOWED_ORIGINS != "*" else ["*"]
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=ALLOWED_ORIGINS,
+    allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["GET", "POST", "PUT", "DELETE"],
-    allow_headers=["Content-Type", "Authorization", "Accept"],
+    allow_methods=["GET", "POST", "PUT", "DELETE", "PATCH"],
+    allow_headers=["*"],
 )
 
-# -------------------------
-# DB Dependency
-# -------------------------
+
 def get_db():
     db = SessionLocal()
     try:
@@ -45,32 +39,116 @@ def get_db():
     finally:
         db.close()
 
+
+def get_current_user(
+    token: Optional[str] = Depends(oauth2_scheme),
+    db: Session = Depends(get_db),
+) -> models.User:
+    if not token:
+        raise HTTPException(status_code=401, detail="Giriş yapmanız gerekiyor.")
+    payload = decode_token(token)
+    user_id = payload.get("sub")
+    if not user_id or payload.get("type") != "access":
+        raise HTTPException(status_code=401, detail="Geçersiz veya süresi dolmuş token.")
+    user = db.query(models.User).filter(models.User.id == int(user_id)).first()
+    if not user or not user.is_active:
+        raise HTTPException(status_code=401, detail="Kullanıcı bulunamadı.")
+    return user
+
+
+def get_optional_user(
+    token: Optional[str] = Depends(oauth2_scheme),
+    db: Session = Depends(get_db),
+) -> Optional[models.User]:
+    if not token:
+        return None
+    payload = decode_token(token)
+    user_id = payload.get("sub")
+    if not user_id or payload.get("type") != "access":
+        return None
+    return db.query(models.User).filter(models.User.id == int(user_id)).first()
+
+
 # -------------------------
-# ANA SAYFA
+# HEALTH & ROOT
 # -------------------------
 @app.get("/")
 def home():
-    return {"mesaj": "Mekan Öneri Sistemi Backend API Aktif 🚀"}
+    return {"mesaj": "AsEmOs Backend API Aktif"}
+
+@app.get("/health")
+def health_check(db: Session = Depends(get_db)):
+    db_ok = False
+    try:
+        db.execute(models.Place.__table__.select().limit(1))
+        db_ok = True
+    except Exception:
+        pass
+    return {
+        "status": "ok" if db_ok else "degraded",
+        "db": db_ok,
+        "timestamp": datetime.utcnow().isoformat(),
+    }
 
 # -------------------------
 # AUTH
 # -------------------------
-@app.post("/auth/register", response_model=schemas.User)
+@app.post("/auth/register", response_model=schemas.Token)
 def register_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
-    db_user = crud.get_user_by_email(db, email=user.email)
-    if db_user:
+    if crud.get_user_by_email(db, email=user.email):
         raise HTTPException(status_code=400, detail="Bu e-posta zaten kayıtlı.")
-    return crud.create_user(db=db, user=user)
+    if user.username and crud.get_user_by_username(db, username=user.username):
+        raise HTTPException(status_code=400, detail="Bu kullanıcı adı zaten alınmış.")
+    db_user = crud.create_user(db=db, user=user)
+    return schemas.Token(
+        access_token=create_access_token(db_user.id),
+        refresh_token=create_refresh_token(db_user.id),
+        user=schemas.User.model_validate(db_user),
+    )
 
 @app.post("/auth/login", response_model=schemas.Token)
 def login(user_data: schemas.UserLogin, db: Session = Depends(get_db)):
-    user = crud.authenticate_user(db, user_data.email, user_data.password)
-    if not user:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Hatalı e-posta veya şifre"
-        )
-    return {"access_token": "MOCK_TOKEN_LOGIN_BASARILI", "token_type": "bearer"}
+    # Auth bypass: herhangi email/şifreyle giriş, yoksa otomatik kayıt
+    user = crud.get_or_create_user_for_login(
+        db, user_data.email, user_data.password
+    )
+    return schemas.Token(
+        access_token=create_access_token(user.id),
+        refresh_token=create_refresh_token(user.id),
+        user=schemas.User.model_validate(user),
+    )
+
+@app.post("/auth/refresh", response_model=schemas.Token)
+def refresh_token(body: schemas.RefreshRequest, db: Session = Depends(get_db)):
+    payload = decode_token(body.refresh_token)
+    user_id = payload.get("sub")
+    if not user_id or payload.get("type") != "refresh":
+        raise HTTPException(status_code=401, detail="Geçersiz refresh token.")
+    user = crud.get_user_by_id(db, int(user_id))
+    if not user or not user.is_active:
+        raise HTTPException(status_code=401, detail="Kullanıcı bulunamadı.")
+    return schemas.Token(
+        access_token=create_access_token(user.id),
+        refresh_token=create_refresh_token(user.id),
+        user=schemas.User.model_validate(user),
+    )
+
+@app.get("/auth/me", response_model=schemas.User)
+def get_me(current_user: models.User = Depends(get_current_user)):
+    return current_user
+
+@app.put("/auth/me", response_model=schemas.User)
+def update_me(
+    data: schemas.UserUpdate,
+    current_user: models.User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    if data.username and data.username != current_user.username:
+        existing = crud.get_user_by_username(db, data.username)
+        if existing:
+            raise HTTPException(status_code=400, detail="Bu kullanıcı adı zaten alınmış.")
+    updated = crud.update_user(db, current_user.id, data)
+    return updated
 
 # -------------------------
 # PLACE CRUD
@@ -79,9 +157,30 @@ def login(user_data: schemas.UserLogin, db: Session = Depends(get_db)):
 def create_new_place(place: schemas.PlaceCreate, db: Session = Depends(get_db)):
     return crud.create_place(db=db, place=place)
 
-@app.get("/places/", response_model=List[schemas.Place])
-def read_places(skip: int = 0, limit: int = 100, db: Session = Depends(get_db)):
-    return crud.get_places(db, skip=skip, limit=limit)
+@app.get("/places/", response_model=schemas.PaginatedPlaces)
+def read_places(
+    page: int = 1,
+    page_size: int = 20,
+    skip: Optional[int] = None,
+    limit: Optional[int] = None,
+    db: Session = Depends(get_db),
+):
+    if skip is not None or limit is not None:
+        items = crud.get_places(db, skip=skip or 0, limit=limit or 500)
+        return schemas.PaginatedPlaces(
+            items=items, total=len(items), page=1, page_size=len(items)
+        )
+    items, total = crud.get_places_paginated(db, page=page, page_size=page_size)
+    return schemas.PaginatedPlaces(
+        items=items, total=total, page=page, page_size=page_size
+    )
+
+@app.get("/places/{place_id}", response_model=schemas.Place)
+def read_place(place_id: int, db: Session = Depends(get_db)):
+    place = crud.get_place_by_id(db, place_id=place_id)
+    if not place:
+        raise HTTPException(status_code=404, detail="Mekan bulunamadı.")
+    return place
 
 # -------------------------
 # REVIEW CRUD
@@ -112,18 +211,12 @@ def _haversine_distance_meters(
 
 
 @app.post("/reviews/", response_model=schemas.Review)
-def post_review(review: schemas.ReviewCreate, db: Session = Depends(get_db)):
-    """
-    Yeni yorum oluşturur.
-
-    Notlar:
-    - İstemci sadece anlık konum bilgisini (user_lat/user_lng) gönderir.
-    - Gerçek doğrulama sunucu tarafında place koordinatları ile yapılır.
-    - is_verified, verify_method ve distance_meters bu fonksiyonda hesaplanır.
-    """
-    # TODO: Get user_id from JWT token when authentication is implemented
-    # For now, use a default user_id (should be replaced with proper auth)
-    default_user_id = 1
+def post_review(
+    review: schemas.ReviewCreate,
+    db: Session = Depends(get_db),
+    current_user: Optional[models.User] = Depends(get_optional_user),
+):
+    user_id = current_user.id if current_user else 1
 
     place: Optional[models.Place] = (
         db.query(models.Place)
@@ -160,7 +253,7 @@ def post_review(review: schemas.ReviewCreate, db: Session = Depends(get_db)):
     created = crud.create_review(
         db=db,
         review=review,
-        user_id=default_user_id,
+        user_id=user_id,
         is_verified=is_verified,
         verify_method=verify_method,
         distance_meters=distance_meters,
@@ -174,175 +267,65 @@ def get_place_reviews(place_id: int, db: Session = Depends(get_db)):
 # -------------------------
 # ✅ TR -> EN normalize (chip'ler Türkçe geldiğinde backend patlamasın)
 # -------------------------
-def _norm_vibe(v: str | None) -> str:
-    v = (v or "").strip().lower()
-    if v in {"sessiz", "quiet"}:
-        return "quiet"
-    if v in {"canlı", "canli", "lively"}:
-        return "lively"
-    return v or "quiet"
-
-def _norm_purpose(p: str | None) -> str:
-    p = (p or "").strip().lower()
-    if p in {"çalışma", "calisma", "work"}:
-        return "work"
-    if p in {"arkadaş", "arkadas", "friends"}:
-        return "friends"
-    if p in {"date"}:
-        return "date"
-    return p or "work"
-
-def _norm_budget(b: str | None) -> str:
-    b = (b or "").strip().lower()
-    if b in {"düşük", "dusuk", "low"}:
-        return "low"
-    if b in {"orta", "mid"}:
-        return "mid"
-    if b in {"yüksek", "yuksek", "high"}:
-        return "high"
-    return b or "mid"
-
 # -------------------------
-# 🔥 RECOMMEND + (opsiyonel) LLM
+# RECOMMEND (LLM Pipeline)
 # -------------------------
-def _split_features(s: str | None) -> set[str]:
-    if not s:
-        return set()
-    return {x.strip().lower() for x in s.split(",") if x.strip()}
-
-def _budget_tag(price_range: int | None) -> str:
-    # DB: 1=low, 2=mid, 3=high
-    if price_range is None:
-        return "mid"
-    if price_range <= 1:
-        return "low"
-    if price_range == 2:
-        return "mid"
-    return "high"
-
-def _vibe_tag(features: set[str], category: str | None) -> str:
-    cat = (category or "").lower()
-    if "quiet" in features:
-        return "quiet"
-    if "lively" in features:
-        return "lively"
-    if cat in {"bar", "music", "club"}:
-        return "lively"
-    return "quiet"
-
-def _purpose_tag(features: set[str], category: str | None) -> str:
-    cat = (category or "").lower()
-    if "work" in features or "laptop_friendly" in features or "wifi" in features:
-        return "work"
-    if "friends" in features or "music" in features or cat in {"bar", "music"}:
-        return "friends"
-    if "date" in features or "romantic" in features or cat in {"restaurant"}:
-        return "date"
-    if cat == "cafe":
-        return "work"
-    if cat == "bar":
-        return "friends"
-    return "work"
-
-def _score_place(req: schemas.RecommendRequest, place) -> tuple[int, list[str]]:
-    q = (req.queryText or "").strip().lower()
-    features = _split_features(getattr(place, "features", None))
-    category = getattr(place, "category", None)
-
-    budget = _budget_tag(getattr(place, "price_range", None))
-    vibe = _vibe_tag(features, category)
-    purpose = _purpose_tag(features, category)
-
-    tags: list[str] = [vibe, purpose, budget]
-    if category:
-        tags.append(str(category).lower())
-
-    score = 0
-
-    # Query match (varsa)
-    if q:
-        hay = " ".join([
-            str(getattr(place, "name", "") or ""),
-            str(getattr(place, "description", "") or ""),
-            str(getattr(place, "city", "") or ""),
-            str(getattr(place, "address", "") or ""),
-            str(category or ""),
-            ",".join(sorted(features)),
-        ]).lower()
-
-        if q in hay:
-            score += 3
-        else:
-            score -= 1
-
-    # vibe/purpose/budget
-    score += 2 if vibe == req.preferences.vibe else -1
-    score += 2 if purpose == req.preferences.purpose else -1
-    score += 2 if budget == req.preferences.budget else -1
-
-    return score, tags
-
 @app.post("/recommend", response_model=schemas.RecommendResponse)
 def recommend_places(req: schemas.RecommendRequest, db: Session = Depends(get_db)):
-    """
-    1) DB'den mekanları al
-    2) Tercihlere göre puanla/sırala + tags üret
-    3) (Varsa) LLM ile rerank + explanation
-    """
+    places = crud.get_places(db, skip=0, limit=500)
 
-    # ✅ 2. kısım BURAYA: request içindeki TR değerleri EN'e çevriliyor
-    req.preferences.vibe = _norm_vibe(getattr(req.preferences, "vibe", None))
-    req.preferences.purpose = _norm_purpose(getattr(req.preferences, "purpose", None))
-    req.preferences.budget = _norm_budget(getattr(req.preferences, "budget", None))
+    user_lat = req.location.lat if req.location else None
+    user_lng = req.location.lng if req.location else None
 
-    places = crud.get_places(db, skip=0, limit=300)
-
-    scored: list[tuple[int, any, list[str]]] = []
-    for p in places:
-        s, tags = _score_place(req, p)
-        scored.append((s, p, tags))
-
-    scored.sort(key=lambda x: x[0], reverse=True)
-
-    # En yüksek puanlı 12 mekanı al (tercih + arama eşleşmesine göre sıralı)
-    picked = [(p, tags) for (_, p, tags) in scored[:12]]
-    used_fallback = False
-
-    items: list[schemas.RecommendItem] = []
-    for p, tags in picked[:12]:
-        items.append(
-            schemas.RecommendItem(
-                id=p.id,
-                name=p.name,
-                subtitle=(p.description or "")[:120],
-                tags=tags,
-            )
-        )
-
-    explanation = (
-        "Tercihlerine (vibe/amaç/bütçe) ve arama metnine göre mekanları puanlayıp sıraladım."
-        + (" (Uygun eşleşme az olduğu için en yakın sonuçları gösterdim.)" if used_fallback else "")
+    result = recommend_pipeline(
+        places=places,
+        query=req.queryText,
+        vibe=req.preferences.vibe or "quiet",
+        purpose=req.preferences.purpose or "work",
+        budget=req.preferences.budget or "mid",
+        user_lat=user_lat,
+        user_lng=user_lng,
+        radius_m=req.radius_m,
+        category=req.category,
     )
 
-    # LLM varsa: rerank + daha iyi açıklama
-    if llm_rerank_and_explain:
-        try:
-            candidates = [
-                {"id": it.id, "name": it.name, "subtitle": it.subtitle, "tags": it.tags}
-                for it in items
-            ]
-            reranked, llm_expl = llm_rerank_and_explain(
-                query=req.queryText,
-                preferences=req.preferences.dict() if hasattr(req.preferences, "dict") else req.preferences,
-                candidates=candidates,
-            )
+    items = [schemas.RecommendItem(**it) for it in result["items"]]
+    return schemas.RecommendResponse(
+        items=items,
+        summary=result.get("summary", ""),
+        cached=result.get("cached", False),
+    )
 
-            if reranked:
-                items = [schemas.RecommendItem(**x) for x in reranked]
 
-            if llm_expl:
-                explanation = llm_expl
-        except Exception:
-            pass
+# -------------------------
+# UPLOAD (Cloudinary)
+# -------------------------
+@app.get("/upload/status")
+def upload_status():
+    return {"configured": cloud_storage.is_configured()}
 
-    return schemas.RecommendResponse(items=items, explanation=explanation)
+@app.post("/upload/image")
+async def upload_image(file: UploadFile = File(...)):
+    if not cloud_storage.is_configured():
+        raise HTTPException(status_code=503, detail="Cloud storage yapılandırılmamış.")
+    contents = await file.read()
+    if len(contents) > 10 * 1024 * 1024:
+        raise HTTPException(status_code=413, detail="Dosya 10MB'dan büyük olamaz.")
+    try:
+        result = cloud_storage.upload_image(contents)
+        return result
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Yükleme hatası: {str(e)}")
+
+@app.post("/upload/video")
+async def upload_video(file: UploadFile = File(...)):
+    if not cloud_storage.is_configured():
+        raise HTTPException(status_code=503, detail="Cloud storage yapılandırılmamış.")
+    contents = await file.read()
+    if len(contents) > 100 * 1024 * 1024:
+        raise HTTPException(status_code=413, detail="Video 100MB'dan büyük olamaz.")
+    try:
+        result = cloud_storage.upload_video(contents)
+        return result
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Yükleme hatası: {str(e)}")

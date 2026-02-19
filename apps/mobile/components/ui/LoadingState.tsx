@@ -55,14 +55,12 @@ export function LoadingState({
     Animated.parallel([
       Animated.timing(opacity, {
         toValue: 1,
-        duration: animationTiming.fast,
-        easing: easing.easeOut,
+        duration: 150,
         useNativeDriver: true,
       }),
       Animated.timing(translateY, {
         toValue: 0,
-        duration: animationTiming.fast,
-        easing: easing.easeOut,
+        duration: 150,
         useNativeDriver: true,
       }),
     ]).start();

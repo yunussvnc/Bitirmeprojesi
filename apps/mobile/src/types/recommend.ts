@@ -1,23 +1,38 @@
 export type Preferences = {
-  budget: "low" | "mid" | "high";
-  vibe: "quiet" | "lively";
-  purpose: "work" | "friends" | "date";
+  vibe?: string;
+  purpose?: string;
+  budget?: string;
+};
+
+export type Location = {
+  lat: number;
+  lng: number;
 };
 
 export type RecommendRequest = {
-  queryText: string;
-  preferences: Preferences;
-  // location?: { lat: number; lng: number };
+  queryText?: string;
+  preferences?: Preferences;
+  location?: Location;
+  radius_m?: number;
+  category?: string;
 };
 
-export type PlaceCard = {
+export type RecommendItem = {
   id: number;
   name: string;
-  subtitle: string;
-  tags: string[];
+  category?: string;
+  distance_m?: number;
+  score?: number;
+  photo_url?: string;
+  explanation?: string;
+  tags?: string[];
 };
 
 export type RecommendResponse = {
-  items: PlaceCard[];
-  explanation: string; // LLM açıklaması gibi
+  items: RecommendItem[];
+  summary: string;
+  cached: boolean;
 };
+
+/** Backward compatibility */
+export type PlaceCard = RecommendItem;

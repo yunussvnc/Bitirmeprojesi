@@ -2,34 +2,30 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
-export type Place = {
+export type SavedPlace = {
   id: string;
   name: string;
-  area?: string;
-  distanceKm?: number;
-  priceLevel?: 1 | 2 | 3 | 4;
-  rating?: number;
+  subtitle?: string;
+  photo_url?: string;
+  category?: string;
   tags?: string[];
-  whyRecommended?: string;
-  imageUrl?: string;
 };
 
 type AppState = {
-  // Saved
-  savedPlaceIds: string[];
-  savedPlacesById: Record<string, Place>;
-
-  // Demo gücü: prompt geçmişi
+  savedIds: string[];
+  savedById: Record<string, SavedPlace>;
   recentPrompts: string[];
+  apiHealthy: boolean | null;
 
-  // Actions
-  isSaved: (placeId: string) => boolean;
-  toggleSave: (place: Place) => void;
-  removeSaved: (placeId: string) => void;
+  isSaved: (id: string) => boolean;
+  toggleSave: (place: SavedPlace) => void;
+  removeSaved: (id: string | number) => void;
   clearSaved: () => void;
 
   addRecentPrompt: (prompt: string) => void;
   clearRecentPrompts: () => void;
+
+  setApiHealthy: (healthy: boolean) => void;
 };
 
 const uniq = (arr: string[]) => Array.from(new Set(arr));
@@ -37,52 +33,60 @@ const uniq = (arr: string[]) => Array.from(new Set(arr));
 export const useAppStore = create<AppState>()(
   persist(
     (set, get) => ({
-      savedPlaceIds: [],
-      savedPlacesById: {},
+      savedIds: [],
+      savedById: {},
       recentPrompts: [],
+      apiHealthy: null,
 
-      isSaved: (placeId) => get().savedPlaceIds.includes(placeId),
+      isSaved: (id) => get().savedIds.includes(id),
 
       toggleSave: (place) => {
-        const { savedPlaceIds, savedPlacesById } = get();
-        const exists = savedPlaceIds.includes(place.id);
+        const { savedIds, savedById } = get();
+        const exists = savedIds.includes(place.id);
 
         if (exists) {
-          const nextIds = savedPlaceIds.filter((id) => id !== place.id);
-          const { [place.id]: _removed, ...rest } = savedPlacesById;
-          set({ savedPlaceIds: nextIds, savedPlacesById: rest });
+          const nextIds = savedIds.filter((x) => x !== place.id);
+          const { [place.id]: _removed, ...rest } = savedById;
+          set({ savedIds: nextIds, savedById: rest });
           return;
         }
 
         set({
-          savedPlaceIds: uniq([place.id, ...savedPlaceIds]),
-          savedPlacesById: { ...savedPlacesById, [place.id]: place },
+          savedIds: uniq([place.id, ...savedIds]),
+          savedById: { ...savedById, [place.id]: place },
         });
       },
 
-      removeSaved: (placeId) => {
-        const { savedPlaceIds, savedPlacesById } = get();
-        const nextIds = savedPlaceIds.filter((id) => id !== placeId);
-        const { [placeId]: _removed, ...rest } = savedPlacesById;
-        set({ savedPlaceIds: nextIds, savedPlacesById: rest });
+      removeSaved: (id) => {
+        const key = String(id);
+        const { savedIds, savedById } = get();
+        const nextIds = savedIds.filter((x) => x !== key);
+        const { [key]: _removed, ...rest } = savedById;
+        set({ savedIds: nextIds, savedById: rest });
       },
 
-      clearSaved: () => set({ savedPlaceIds: [], savedPlacesById: {} }),
+      clearSaved: () => set({ savedIds: [], savedById: {} }),
 
       addRecentPrompt: (prompt) => {
         const p = prompt.trim();
         if (!p) return;
-
         const { recentPrompts } = get();
         const next = [p, ...recentPrompts.filter((x) => x !== p)].slice(0, 12);
         set({ recentPrompts: next });
       },
 
       clearRecentPrompts: () => set({ recentPrompts: [] }),
+
+      setApiHealthy: (healthy) => set({ apiHealthy: healthy }),
     }),
     {
-      name: "app-store-v1",
+      name: "app-store-v2",
       storage: createJSONStorage(() => AsyncStorage),
+      partialize: (state) => ({
+        savedIds: state.savedIds,
+        savedById: state.savedById,
+        recentPrompts: state.recentPrompts,
+      }),
     }
   )
 );

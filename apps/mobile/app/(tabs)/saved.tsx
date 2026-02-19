@@ -8,35 +8,36 @@
  */
 
 import { router, useNavigation } from 'expo-router';
-import { useMemo, useState, useEffect, useRef } from 'react';
-import { Alert, View, Text, StyleSheet, TouchableOpacity, Animated } from 'react-native';
+import { useMemo, useState, useEffect, useRef, useCallback } from 'react';
+import { Alert, View, Text, StyleSheet, TouchableOpacity, Animated, FlatList, ListRenderItem, ViewToken, RefreshControl } from 'react-native';
 import { Swipeable } from 'react-native-gesture-handler';
 import { useTheme } from '@/hooks/useTheme';
-import { Screen, type ScreenRef } from '@/components/layout';
+import { Screen } from '@/components/layout';
 import { EmptyState, AnimatedPlaceCard } from '@/components/ui';
-import { useSavedPlaces } from '@/src/state/savedPlaces';
-import { getPlaceImageSource } from '@/src/utils/placeImages';
+import { useAppStore, type SavedPlace } from '@/src/store/useAppStore';
+import { getPlaceImageSource, hasPlaceImage } from '@/src/utils/placeImages';
 import { createTextStyle, spacing as designSpacing } from '@/constants/design';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import { lightImpact } from '@/src/utils/haptics';
-import { getPlaces } from '@/src/services/mekanService';
+import { getAllPlaces } from '@/src/services/mekanService';
 import type { Place } from '@/src/services/mekanService';
 
 export default function SavedScreen() {
   const { colors, spacing } = useTheme();
   const navigation = useNavigation();
-  const screenRef = useRef<ScreenRef>(null);
-  const ids = useSavedPlaces((s) => s.ids);
-  const byId = useSavedPlaces((s) => s.byId);
-  const clear = useSavedPlaces((s) => s.clear);
-  const remove = useSavedPlaces((s) => s.remove);
+  const flatListRef = useRef<FlatList>(null);
+  const ids = useAppStore((s) => s.savedIds);
+  const byId = useAppStore((s) => s.savedById);
+  const clear = useAppStore((s) => s.clearSaved);
+  const remove = useAppStore((s) => s.removeSaved);
   const [refreshing, setRefreshing] = useState(false);
   const [placesData, setPlacesData] = useState<Record<string, Place>>({});
+  const [viewableItems, setViewableItems] = useState(new Set<string>()); // Added viewableItems state
 
   // Listen for tab press to scroll to top
   useEffect(() => {
-    const unsubscribe = navigation.addListener('tabPress' as any, (e: any) => {
-      screenRef.current?.scrollToTop();
+    const unsubscribe = navigation.addListener('tabPress' as any, () => {
+      flatListRef.current?.scrollToOffset({ offset: 0, animated: true });
     });
     return unsubscribe;
   }, [navigation]);
@@ -45,7 +46,7 @@ export default function SavedScreen() {
   useEffect(() => {
     const loadPlaces = async () => {
       try {
-        const places = await getPlaces();
+        const places = await getAllPlaces();
         const placesMap: Record<string, Place> = {};
         places.forEach((place) => {
           placesMap[String(place.id)] = place;
@@ -58,7 +59,7 @@ export default function SavedScreen() {
     loadPlaces();
   }, []);
 
-  const items = useMemo(() => {
+  const items: SavedPlace[] = useMemo(() => { // Explicitly define type as SavedPlace[]
     return ids.map((id) => {
       const savedPlace = byId[id];
       const fullPlace = placesData[id];
@@ -74,7 +75,7 @@ export default function SavedScreen() {
       }
       
       return savedPlace;
-    }).filter(Boolean);
+    }).filter(Boolean) as SavedPlace[]; // Cast to SavedPlace[]
   }, [ids, byId, placesData]);
 
   const titleStyle = createTextStyle('title', colors.text.primary);
@@ -108,9 +109,68 @@ export default function SavedScreen() {
     setRefreshing(false);
   };
 
-  return (
-    <Screen ref={screenRef} onRefresh={handleRefresh} refreshing={refreshing} withTabBar>
-      {/* Header */}
+  const renderRightActions = useCallback(
+    (
+      progress: Animated.AnimatedInterpolation<number>,
+      dragX: Animated.AnimatedInterpolation<number>,
+      id: string | number
+    ) => {
+      const scale = dragX.interpolate({
+        inputRange: [-80, 0],
+        outputRange: [1, 0],
+        extrapolate: 'clamp',
+      });
+
+      return (
+        <TouchableOpacity
+          onPress={() => handleRemove(id)}
+          style={[styles.deleteAction, { backgroundColor: colors.semantic.error }]}
+          activeOpacity={0.8}
+        >
+          <Animated.View style={{ transform: [{ scale }] }}>
+            <IconSymbol name="trash.fill" size={24} color="#FFFFFF" />
+          </Animated.View>
+        </TouchableOpacity>
+      );
+    },
+    [handleRemove, colors.semantic.error]
+  );
+
+  const renderPlaceItem: ListRenderItem<SavedPlace> = useCallback(
+    ({ item, index }) => (
+      <Swipeable
+        key={item.id}
+        renderRightActions={(progress, dragX) => renderRightActions(progress, dragX, item.id)}
+        overshootRight={false}
+        friction={2}
+        rightThreshold={40}
+      >
+        <AnimatedPlaceCard
+          index={index}
+          image={getPlaceImageSource(item)}
+          imagePlaceholder={!hasPlaceImage(item)}
+          title={item.name}
+          subtitle={item.subtitle}
+          tags={item.tags}
+          onPress={() =>
+            router.push({ pathname: '/place/[id]', params: { id: String(item.id) } })
+          }
+        />
+      </Swipeable>
+    ),
+    [viewableItems, renderRightActions]
+  );
+
+  const onViewableItemsChanged = useRef(({ viewableItems: vItems }: { viewableItems: ViewToken[] }) => {
+    setViewableItems(new Set(vItems.map((item) => String(item.item.id))));
+  }).current;
+
+  const viewabilityConfig = useRef({
+    itemVisiblePercentThreshold: 50,
+  }).current;
+
+  const listHeader = useCallback(
+    () => (
       <View style={styles.header}>
         <Text style={[titleStyle, styles.title]}>Kaydedilenler</Text>
         {items.length > 0 && (
@@ -130,9 +190,16 @@ export default function SavedScreen() {
           </View>
         )}
       </View>
+    ),
+    [items.length, titleStyle, colors.surface.elevated, colors.text.secondary]
+  );
 
-      {/* Content */}
-      {items.length === 0 ? (
+  if (items.length === 0) {
+    return (
+      <Screen onRefresh={handleRefresh} refreshing={refreshing} withTabBar>
+        <View style={styles.header}>
+          <Text style={[titleStyle, styles.title]}>Kaydedilenler</Text>
+        </View>
         <View style={styles.emptyContainer}>
           <EmptyState
             icon="bookmark"
@@ -142,56 +209,31 @@ export default function SavedScreen() {
             onAction={() => router.push('/(tabs)/explore')}
           />
         </View>
-      ) : (
-        <View style={styles.listContainer}>
-          {items.map((place, idx) => {
-            const renderRightActions = (
-              progress: Animated.AnimatedInterpolation<number>,
-              dragX: Animated.AnimatedInterpolation<number>
-            ) => {
-              const scale = dragX.interpolate({
-                inputRange: [-80, 0],
-                outputRange: [1, 0],
-                extrapolate: 'clamp',
-              });
+      </Screen>
+    );
+  }
 
-              return (
-                <TouchableOpacity
-                  onPress={() => handleRemove(place.id)}
-                  style={[styles.deleteAction, { backgroundColor: colors.semantic.error }]}
-                  activeOpacity={0.8}
-                >
-                  <Animated.View style={{ transform: [{ scale }] }}>
-                    <IconSymbol name="trash.fill" size={24} color="#FFFFFF" />
-                  </Animated.View>
-                </TouchableOpacity>
-              );
-            };
-
-            return (
-              <Swipeable
-                key={place.id}
-                renderRightActions={renderRightActions}
-                overshootRight={false}
-                friction={2}
-                rightThreshold={40}
-              >
-                <AnimatedPlaceCard
-                  index={idx}
-                  image={getPlaceImageSource(place)}
-                  imagePlaceholder={!place.photo_url}
-                  title={place.name}
-                  subtitle={place.subtitle}
-                  tags={place.tags}
-                  onPress={() =>
-                    router.push({ pathname: '/place/[id]', params: { id: String(place.id) } })
-                  }
-                />
-              </Swipeable>
-            );
-          })}
-        </View>
-      )}
+  return (
+    <Screen scrollable={false} withTabBar>
+      <FlatList
+        ref={flatListRef}
+        data={items}
+        keyExtractor={(item) => String(item.id)}
+        renderItem={renderPlaceItem}
+        ListHeaderComponent={listHeader}
+        contentContainerStyle={styles.listContainer}
+        onViewableItemsChanged={onViewableItemsChanged}
+        viewabilityConfig={viewabilityConfig}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={handleRefresh}
+            tintColor={colors.accent.primary}
+            colors={[colors.accent.primary]}
+          />
+        }
+        style={styles.flatList}
+      />
     </Screen>
   );
 }
@@ -237,8 +279,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     minHeight: 400,
   },
+  flatList: {
+    flex: 1,
+  },
   listContainer: {
     gap: designSpacing.sm,
+    paddingBottom: designSpacing.xl,
   },
   deleteAction: {
     justifyContent: 'center',

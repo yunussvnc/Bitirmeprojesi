@@ -1,14 +1,17 @@
-// apps/mobile/src/constants/api.ts
+import Constants from "expo-constants";
+import { Platform } from "react-native";
 
-// ⚠️ ÖNEMLİ: Expo Go simulator kullanıyorsanız localhost, gerçek telefon için Mac'inizin IP'sini kullanın
-// Mac IP'nizi bulmak için: System Preferences > Network veya terminal'de: ifconfig | grep "inet "
+const expoHost = Constants.expoConfig?.hostUri?.split(":")[0];
 
-// Simulator/Emulator için (Expo Go iOS/Android simulator):
-// export const API_BASE_URL = "http://localhost:8000";
+function resolveBaseUrl(): string {
+  if (__DEV__) {
+    if (Platform.OS === "web") return "http://localhost:8000";
+    if (expoHost) return `http://${expoHost}:8000`;
+    return "http://192.168.1.9:8000";
+  }
+  return "https://api.asemos.com";
+}
 
-// Gerçek telefon için (Mac'inizin IP'sini buraya yazın):
-export const API_BASE_URL = "http://192.168.1.9:8000";
+export const API_BASE_URL = resolveBaseUrl();
 
-// Bazı eski servisler API_V1 kullanıyor olabilir.
-// Backend'te /api/v1 yoksa kırılmaması için güvenli tutuyoruz.
 export const API_V1 = API_BASE_URL;

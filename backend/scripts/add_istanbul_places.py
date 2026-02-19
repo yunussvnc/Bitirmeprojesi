@@ -49,6 +49,36 @@ ISTANBUL_LOCATIONS = {
     "Karaköy": {"lat": 41.0225, "lon": 28.9744},
     "Galata": {"lat": 41.0256, "lon": 28.9744},
     "Sultanahmet": {"lat": 41.0054, "lon": 28.9772},
+    "Bomonti": {"lat": 41.0680, "lon": 28.9820},
+    "Galataport": {"lat": 41.0260, "lon": 28.9745},
+    "Ataşehir": {"lat": 40.9923, "lon": 29.1244},
+    "Bakırköy": {"lat": 40.9819, "lon": 28.8774},
+    "Ümraniye": {"lat": 41.0164, "lon": 29.1178},
+    "Maltepe": {"lat": 40.9356, "lon": 29.1286},
+    "Kalamış": {"lat": 40.9750, "lon": 29.0380},
+    "Fenerbahçe": {"lat": 40.9850, "lon": 29.0350},
+    "Caferağa": {"lat": 40.9880, "lon": 29.0280},
+    "Kuruçeşme": {"lat": 41.0580, "lon": 29.0280},
+    "Arnavutköy": {"lat": 41.0620, "lon": 29.0380},
+    "Maslak": {"lat": 41.1060, "lon": 29.0200},
+    "Sarıyer": {"lat": 41.1670, "lon": 29.0500},
+    "Caddebostan": {"lat": 40.9680, "lon": 29.0680},
+    "Tuzla": {"lat": 40.8230, "lon": 29.3000},
+    "Fatih": {"lat": 41.0186, "lon": 28.9497},
+    "Göztepe": {"lat": 40.9750, "lon": 29.0780},
+    "Ayazağa": {"lat": 41.1080, "lon": 29.0180},
+    "Göktürk": {"lat": 41.1750, "lon": 28.8780},
+    "Kartal": {"lat": 40.9080, "lon": 29.1720},
+    "Şirinevler": {"lat": 41.0020, "lon": 28.8520},
+    "Gayrettepe": {"lat": 41.0720, "lon": 28.9950},
+    "Osmanbey": {"lat": 41.0580, "lon": 28.9900},
+    "Teşvikiye": {"lat": 41.0480, "lon": 28.9980},
+    "Başakşehir": {"lat": 41.0800, "lon": 28.8020},
+    "Yeşilköy": {"lat": 40.9620, "lon": 28.8240},
+    "Beylikdüzü": {"lat": 41.0020, "lon": 28.6470},
+    "Büyükçekmece": {"lat": 41.0320, "lon": 28.5780},
+    "Esenyurt": {"lat": 41.0350, "lon": 28.6770},
+    "Kozyatağı": {"lat": 40.9680, "lon": 29.0780},
 }
 
 def create_place(name: str, chain: str, location: str, category: str, 
@@ -96,6 +126,38 @@ CAFE_CHAINS = [
     ("Happy Moon's", "Kafe", "Canlı ve renkli atmosfer. Genç kitle, sosyal ortam. Arkadaşlarla buluşmak için ideal.", 2, "Ücretsiz Wi-Fi, Priz, Canlı Atmosfer, Genç Kitle"),
 ]
 
+# Kafe zincirleri – çok yaygın (Google ile doğrulanmış İstanbul şubeleri)
+CAFE_CHAINS_ZINCIR = [
+    ("Starbucks", "Kafe", "Dünya çapında kahve zinciri. Canlı atmosfer, geniş menü, rahat oturma. Ücretsiz Wi-Fi.", 3, "Ücretsiz Wi-Fi, Priz, Canlı Atmosfer, Merkezi Konum"),
+    ("Espresso Lab", "Kafe", "Nitelikli kahve, roastery. Modern ve şık mekânlar. AKM, Karaköy, Galataport, Levent.", 3, "Ücretsiz Wi-Fi, Priz, Çalışma Ortamı, Kaliteli Kahve"),
+    ("Kahve Dünyası", "Kafe", "Türk kahvesi ve modern kahve. Geleneksel ve modern karışımı, uygun fiyatlar.", 2, "Ücretsiz Wi-Fi, Priz, Türk Kahvesi, Uygun Fiyat"),
+    ("Gloria Jean's", "Kafe", "Gloria Jean's Coffees. Canlı atmosfer, geniş menü. Aqua Florya, Yeşilköy, Marmara Park.", 2, "Ücretsiz Wi-Fi, Priz, Canlı Atmosfer, Uygun Fiyat"),
+    ("Coffee Lab", "Kafe", "Üçüncü dalga kahve. 2012 Ankara kökenli, kaliteli kahve. Şubeler çoğunlukla Ankara/İzmir.", 3, "Ücretsiz Wi-Fi, Priz, Kaliteli Kahve, Sade"),
+    ("Arabica Coffee House", "Kafe", "100% yerli marka, üçüncü dalga. Kendi kavurma, butik hizmet. Fark Yarat Öncü Ol.", 3, "Ücretsiz Wi-Fi, Priz, Arabica Çekirdek, Butik"),
+    ("Coffy", "Kafe", "Tek fiyatlı kahve noktası. Hızlı ve uygun. Kadıköy, Beşiktaş, Maslak, Mecidiyeköy.", 1, "Tek Fiyat, Hızlı Servis, Uygun Fiyat, Kahve"),
+    ("MOC Coffee", "Kafe", "MOC Coffee Roastery. Nişantaşı, Bomonti, Zorlu Center. Kavurma ve kaliteli kahve.", 3, "Ücretsiz Wi-Fi, Priz, Roastery, Kaliteli Kahve"),
+    ("Caribou Coffee", "Kafe", "Amerikan kahve zinciri. Karaköy, Caddebostan, Moda, Kalamış. Ücretsiz WiFi, toplantı odaları.", 3, "Ücretsiz Wi-Fi, Toplantı Odası, Geniş Menü"),
+    ("Mado", "Kafe", "Türk dondurması ve kahve. Geleneksel lezzetler, aile dostu ortam.", 2, "Dondurma, Türk Kahvesi, Aile Dostu, Geleneksel"),
+    ("Simit Sarayı", "Kafe", "Türk kahvaltı kültürü. Simit, poğaça ve çay. Hızlı servis, uygun fiyatlar.", 1, "Simit, Poğaça, Çay, Hızlı Servis, Uygun Fiyat"),
+    ("The House Café", "Kafe", "Modern brunch ve kahve. Şık dekorasyon, geniş menü. Sosyal buluşmalar için ideal.", 3, "Ücretsiz Wi-Fi, Priz, Brunch, Şık Ortam"),
+    ("BigChefs", "Kafe", "Kahvaltı ve brunch uzmanı. Geniş menü, aile dostu ortam. Hafta sonu için mükemmel.", 3, "Ücretsiz Wi-Fi, Priz, Kahvaltı, Brunch, Aile Dostu"),
+]
+CAFE_ZINCIR_LOCATIONS = {
+    "Starbucks": ["Şişli", "Beyoğlu", "Ataşehir", "Kadıköy", "Beşiktaş", "Bakırköy", "Maltepe", "Levent", "Nişantaşı", "Fatih", "Üsküdar", "Kartal", "Mecidiyeköy", "Etiler"],
+    "Espresso Lab": ["Taksim", "Karaköy", "Galataport", "Beşiktaş", "Kadıköy", "Levent", "Maslak", "Sarıyer", "Bebek", "Cihangir", "Ataşehir", "Maltepe", "Kartal", "Ayazağa"],
+    "Kahve Dünyası": ["Beşiktaş", "Kadıköy", "Şişli", "Kadıköy", "Ataşehir", "Bakırköy", "Levent", "Nişantaşı"],
+    "Gloria Jean's": ["Bakırköy", "Yeşilköy", "Başakşehir", "Küçükçekmece", "Esenyurt", "Beylikdüzü", "Büyükçekmece"],
+    "Coffee Lab": [],  # İstanbul şubesi yok (Ankara, İzmir, Konya, Antalya vb.)
+    "Arabica Coffee House": ["Bakırköy", "Kadıköy", "Beşiktaş", "Şişli", "Ataşehir", "Maltepe", "Levent"],
+    "Coffy": ["Kadıköy", "Caddebostan", "Beşiktaş", "Maslak", "Mecidiyeköy", "Küçükçekmece", "Şirinevler", "Ümraniye"],
+    "MOC Coffee": ["Teşvikiye", "Bomonti", "Osmanbey", "Beşiktaş", "Etiler", "Gayrettepe", "Bakırköy", "Yeşilköy"],
+    "Caribou Coffee": ["Karaköy", "Caddebostan", "Moda", "Kalamış", "Fenerbahçe", "Maltepe", "Tuzla", "Kozyatağı", "Beşiktaş", "Ataşehir"],
+    "Mado": ["Taksim", "Kadıköy", "Nişantaşı", "Levent", "Beşiktaş", "Üsküdar", "Bakırköy", "Şişli", "Mecidiyeköy", "Etiler"],
+    "Simit Sarayı": ["Taksim", "Kadıköy", "Nişantaşı", "Levent", "Beşiktaş", "Üsküdar", "Şişli", "Mecidiyeköy", "Bakırköy", "Ataşehir"],
+    "The House Café": ["Taksim", "Nişantaşı", "Levent", "Beşiktaş", "Kadıköy", "Bebek", "Etiler", "Zorlu Center"],
+    "BigChefs": ["Taksim", "Nişantaşı", "Levent", "Beşiktaş", "Kadıköy", "Üsküdar", "Bakırköy", "Etiler", "Bebek"],
+}
+
 # FAST FOOD ZİNCİRLERİ
 FAST_FOOD_CHAINS = [
     ("McDonald's", "Fast Food", "Dünya çapında hamburger zinciri. Hızlı servis, uygun fiyatlar, çocuk dostu.", 2, "Hamburger, Patates, Hızlı Servis, Çocuk Menüsü"),
@@ -135,6 +197,55 @@ BAR_CHAINS = [
     ("Mikla Bar", "Bar", "Premium bar. Şık atmosfer, özel kokteyller. İş çıkışı için ideal.", 4, "Premium, Şık, Özel Kokteyl, İş Çıkışı"),
 ]
 
+# BAR ZİNCİR / ÇOK ŞUBELİ (İstanbul lokasyonlarıyla)
+BAR_CHAINS_ZINCIR = [
+    ("North Shield Pub", "Bar", "İngiliz pub atmosferi. Geniş bira seçenekleri, canlı maç yayınları. Sosyal ortam.", 3, "Bira, Maç Yayını, Sosyal"),
+    ("The Populist", "Bar", "Modern endüstriyel bar. Yüksek tavan, yeşil duvar, canlı müzik. Bomonti ve Galataport şubeleri.", 3, "Modern, Canlı Müzik, Geniş Mekan, Teras"),
+    ("Varuna Gezgin Cafe & Pub", "Bar", "Rustik bar ve kafe. Geniş şişe koleksiyonu, sıcak atmosfer. Bayraklar ve vintage dekor.", 2, "Kafe, Rustik, Canlı Yayın"),
+    ("Corner Irish Pub", "Bar", "İrlanda bar atmosferi. Yeşil ışıklar, açık teras, maç yayınları. Dublin Corner.", 3, "İrlanda Bar, Açık Hava, Maç Yayını, Canlı"),
+    ("Jolly Joker", "Bar", "Bar ve canlı müzik zinciri. DJ performansları, genç kitle. Smile, Eat, Drink, Dance.", 3, "Canlı Müzik, DJ, Bar, Eğlence"),
+    ("James Joyce Irish Pub", "Bar", "The Original Irish Pub. James Joyce atmosferi, raflarda kitaplar, sıcak ortam. İrlanda biraları.", 3, "İrlanda Bar, Bira, Kitaplık, Sıcak Ortam"),
+    ("The Irish Pub", "Bar", "Kırmızı cepheli İrlanda barı. Açık hava oturma, canlı atmosfer. Dr. Mustafa Enver Bey Caddesi.", 3, "İrlanda Bar, Açık Hava, Canlı"),
+    ("Beer Hall", "Bar", "Beşiktaş Akaretler'de bira salonu. Uzun masalar, Efes ve çeşitli biralar. House of Beer, endüstriyel dekor.", 3, "Bira, Beşiktaş, Komünal Masalar, Canlı"),
+]
+# Her zincir için İstanbul şube lokasyonları (Google ile doğrulanmış)
+BAR_ZINCIR_LOCATIONS = {
+    "North Shield Pub": ["Caddebostan", "Tuzla", "Fatih", "Ataşehir", "Göztepe", "Ayazağa", "Sultanahmet", "Göktürk"],
+    "The Populist": ["Bomonti", "Galataport"],
+    "Varuna Gezgin Cafe & Pub": ["Beyoğlu", "İstiklal"],
+    "Corner Irish Pub": ["Beyoğlu"],
+    "Jolly Joker": ["Sarıyer", "Ataşehir", "Kartal", "Levent"],
+    "James Joyce Irish Pub": ["Beyoğlu"],
+    "The Irish Pub": ["Kadıköy"],
+    "Beer Hall": ["Beşiktaş"],
+}
+
+# Meyhane zincirleri (çok şubeli)
+MEYHANE_CHAINS_ZINCIR = [
+    ("Kalamış Paysage Meyhane", "Meyhane", "Deniz ve marina manzaralı meyhane. Paysage Balık konsepti, beyaz örtülü masalar, balık ve meze. Kalamış'ta keyifli akşamlar.", 3, "Deniz Manzarası, Marina, Balık, Meze, Şık Ortam"),
+    ("Ala Meyhane", "Meyhane", "Kadıköy'de sanat ve lezzet buluşması. Nâzım Hikmet duvar resmi, modern meyhane atmosferi. Meze ve rakı.", 3, "Kadıköy, Sanat, Meze, Rakı, Canlı Ortam"),
+    ("Maksat Ocakbaşı & Meyhane", "Meyhane", "Ocakbaşı ve meyhane. Gece aydınlatmalı dış mekân, sıcak ortam. Geleneksel meze ve ızgara.", 2, "Ocakbaşı, Açık Hava, Meze, Canlı"),
+]
+MEYHANE_ZINCIR_LOCATIONS = {
+    "Kalamış Paysage Meyhane": ["Kalamış"],
+    "Ala Meyhane": ["Kadıköy"],
+    "Maksat Ocakbaşı & Meyhane": ["Beyoğlu"],
+}
+
+# Gece kulübü (birden fazla şube)
+NIGHTCLUB_CHAINS_ZINCIR = [
+    ("Kastel", "Gece Kulübü", "Kırmızı ve mavi lazerler, disco topları, yüksek tavan. Canlı DJ, dans alanı. İstanbul gece hayatının önemli adreslerinden.", 4, "DJ, Dans, Lazer Gösteri, VIP"),
+    ("Sortie", "Gece Kulübü", "Boğaz Köprüsü manzaralı gece kulübü. Beyaz örtülü masalar, spot ışıklar, Sugar Vintage bölümü. Premium akşamlar.", 4, "Boğaz Manzarası, Köprü Manzarası, DJ, Açık Hava"),
+    ("Oligark", "Gece Kulübü", "Geniş açık hava ve çok katlı mekân. Mor-mavi LED aydınlatma, havuzlu alan, sıcak sarı ışıklar. Oligark binası.", 4, "Açık Hava, Havuz, Çok Katlı, LED"),
+    ("Fakülte Teras", "Gece Kulübü", "Rooftop teras gece kulübü. Yeşil çatılı barlar, yüksek masalar, kırmızı vurgular. Canlı müzik ve DJ.", 3, "Teras, Rooftop, DJ, Açık Hava"),
+]
+NIGHTCLUB_ZINCIR_LOCATIONS = {
+    "Kastel": ["Beyoğlu"],
+    "Sortie": ["Kuruçeşme"],
+    "Oligark": ["Kuruçeşme"],
+    "Fakülte Teras": ["Taksim", "Beyoğlu"],
+}
+
 # FINE DINING
 FINE_DINING = [
     ("Mikla", "Restoran", "Michelin yıldızlı restoran. Modern Türk mutfağı, şık atmosfer. Özel geceler için.", 4, "Michelin, Modern Türk Mutfağı, Şık, Özel Geceler"),
@@ -160,11 +271,10 @@ RESTAURANT_5PLUS = ["Nusr-Et", "Günaydın"]
 
 PLACES_DATA = []
 
-for chain, category, desc, price, features in CAFE_CHAINS:
-    if chain not in CAFE_CHAINS_5PLUS:
-        continue
-    n = max(MIN_BRANCHES, 8 if chain in ["Starbucks", "Kahve Dünyası"] else 6)
-    for loc in CAFE_LOCATIONS[:n]:
+# Kafe zincirleri (çok yaygın – Google ile doğrulanmış İstanbul şubeleri)
+for chain, category, desc, price, features in CAFE_CHAINS_ZINCIR:
+    locs = CAFE_ZINCIR_LOCATIONS.get(chain, [])
+    for loc in locs:
         PLACES_DATA.append(create_place(chain, chain, loc, category, desc, price, features))
 
 for chain, category, desc, price, features in FAST_FOOD_CHAINS:
@@ -181,7 +291,25 @@ for chain, category, desc, price, features in RESTAURANT_CHAINS:
     for loc in RESTAURANT_LOCATIONS[:n]:
         PLACES_DATA.append(create_place(chain, chain, loc, category, desc, price, features))
 
-# Barlar ve fine dining tek şube; 5+ olmadığı için eklemiyoruz (istersen sonra 5+ bar zinciri eklenebilir)
+# Bar zincirleri (çok şubeli)
+for chain, category, desc, price, features in BAR_CHAINS_ZINCIR:
+    locs = BAR_ZINCIR_LOCATIONS.get(chain, BAR_LOCATIONS)
+    for loc in locs:
+        PLACES_DATA.append(create_place(chain, chain, loc, category, desc, price, features))
+
+# Meyhane zincirleri (çok şubeli)
+MEYHANE_LOCATIONS = ["Kadıköy", "Taksim", "Beyoğlu", "Beşiktaş", "Ortaköy"]
+for chain, category, desc, price, features in MEYHANE_CHAINS_ZINCIR:
+    locs = MEYHANE_ZINCIR_LOCATIONS.get(chain, MEYHANE_LOCATIONS)
+    for loc in locs:
+        PLACES_DATA.append(create_place(chain, chain, loc, category, desc, price, features))
+
+# Gece kulübü (birden fazla şube)
+NIGHTCLUB_LOCATIONS = ["Taksim", "Beyoğlu", "Beşiktaş", "Ortaköy"]
+for chain, category, desc, price, features in NIGHTCLUB_CHAINS_ZINCIR:
+    locs = NIGHTCLUB_ZINCIR_LOCATIONS.get(chain, NIGHTCLUB_LOCATIONS)
+    for loc in locs:
+        PLACES_DATA.append(create_place(chain, chain, loc, category, desc, price, features))
 
 def add_place(place_data: Dict) -> bool:
     """Tek bir mekanı backend'e ekle"""

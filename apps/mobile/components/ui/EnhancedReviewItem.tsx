@@ -24,7 +24,7 @@ import {
 } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { IconSymbol } from '@/components/ui/icon-symbol';
-import { RatingStars } from '@/components/ui';
+import { RatingStars } from '@/components/ui/RatingStars';
 import { createTextStyle, spacing } from '@/constants/design';
 import { lightImpact } from '@/src/utils/haptics';
 

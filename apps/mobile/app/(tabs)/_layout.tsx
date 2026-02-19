@@ -36,7 +36,7 @@ export default function TabsLayout() {
           backgroundColor: colors.background.secondary,
           borderTopWidth: StyleSheet.hairlineWidth,
           borderTopColor: colors.surface.border,
-          height: Platform.OS === "ios" ? 88 : 60,
+          height: Platform.OS === "ios" ? 100 : 60,
           paddingTop: 8,
           paddingBottom: Platform.OS === "ios" ? 28 : 8,
           elevation: 0,
@@ -65,7 +65,7 @@ export default function TabsLayout() {
         name="explore"
         options={{
           title: "Keşfet",
-          tabBarIcon: ({ color, focused }) => <TabIcon name="magnifyingglass" focused={focused} color={color} />,
+          tabBarIcon: ({ color, focused }) => <TabIcon name="map.fill" focused={focused} color={color} />,
         }}
       />
       <Tabs.Screen

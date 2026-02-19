@@ -10,14 +10,14 @@ sys.path.insert(0, os.path.dirname(os.path.dirname(__file__)))
 from database import SessionLocal
 from models import Place
 
-# Zincir markalara ait gerçek görsel URL'leri
+# Zincir markalara ait gerçek görsel URL'leri (Wikimedia / marka uyumlu)
 CHAIN_MEDIA = {
-    "Espresso Lab": {
-        "photo": "https://images.unsplash.com/photo-1559496417-e7f25c5fbbf5?w=800",  # Modern cafe interior
-        "video": "https://player.vimeo.com/video/example1"  # Placeholder
-    },
     "Starbucks": {
-        "photo": "https://images.unsplash.com/photo-1621447504864-d8686e12698c?w=800",  # Starbucks coffee
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ed/Starbucks_Reserve_Roastery_interior_19.jpg/960px-Starbucks_Reserve_Roastery_interior_19.jpg",
+        "video": None
+    },
+    "Espresso Lab": {
+        "photo": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Espressolab_Roastery.jpg/960px-Espressolab_Roastery.jpg",
         "video": None
     },
     "Kahve Dünyası": {
@@ -26,6 +26,30 @@ CHAIN_MEDIA = {
     },
     "Gloria Jeans": {
         "photo": "https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=800",  # Cafe atmosphere
+        "video": None
+    },
+    "Gloria Jean's": {
+        "photo": "https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=800",
+        "video": None
+    },
+    "Coffee Lab": {
+        "photo": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800",  # Third wave coffee
+        "video": None
+    },
+    "Arabica Coffee House": {
+        "photo": "https://images.unsplash.com/photo-1442512595331-e89e73853f31?w=800",  # Specialty coffee
+        "video": None
+    },
+    "Coffy": {
+        "photo": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800",  # Coffee shop
+        "video": None
+    },
+    "MOC Coffee": {
+        "photo": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800",  # Roastery style
+        "video": None
+    },
+    "Caribou Coffee": {
+        "photo": "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800",  # American coffee chain
         "video": None
     },
     "Nero": {
@@ -186,6 +210,65 @@ CHAIN_MEDIA = {
     },
     "Bebek Balıkçı": {
         "photo": "https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800",  # Seafood restaurant
+        "video": None
+    },
+    # Bar zincirleri (add_istanbul_places ile eklenen)
+    "North Shield Pub": {
+        "photo": "https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800",
+        "video": None
+    },
+    "The Populist": {
+        "photo": "https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800",
+        "video": None
+    },
+    "Varuna Gezgin Cafe & Pub": {
+        "photo": "https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800",
+        "video": None
+    },
+    "Corner Irish Pub": {
+        "photo": "https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800",
+        "video": None
+    },
+    "Jolly Joker": {
+        "photo": "https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800",
+        "video": None
+    },
+    "James Joyce Irish Pub": {
+        "photo": "https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800",
+        "video": None
+    },
+    "The Irish Pub": {
+        "photo": "https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800",
+        "video": None
+    },
+    "Beer Hall": {
+        "photo": "https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=800",
+        "video": None
+    },
+    # Meyhane zincirleri
+    "Kalamış Paysage Meyhane": {
+        "photo": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800",
+        "video": None
+    },
+    "Ala Meyhane": {
+        "photo": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800",
+        "video": None
+    },
+    "Maksat Ocakbaşı & Meyhane": {
+        "photo": "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800",
+        "video": None
+    },
+    # Gece kulübü
+    "Kastel": {
+        "photo": "https://images.unsplash.com/photo-1566737236500-c8ac43014a67?w=800",
+        "video": None
+    },
+    "Oligark": {
+        "photo": "https://images.unsplash.com/photo-1566737236500-c8ac43014a67?w=800",
+        "video": None
+    },
+    "Fakülte Teras": {
+        "photo": "https://images.unsplash.com/photo-1566737236500-c8ac43014a67?w=800",
         "video": None
     },
 }

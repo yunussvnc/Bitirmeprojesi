@@ -16,12 +16,13 @@ import { useTheme } from '@/hooks/useTheme';
 import { Screen, Section } from '@/components/layout';
 import { PlaceCard } from '@/components/place/PlaceCard';
 import { Button, Chip, Card, ReviewForm, RatingStars } from '@/components/ui';
-import { useSavedPlaces } from '@/src/state/savedPlaces';
-import { getPlaceImageSource } from '@/src/utils/placeImages';
+import { useAppStore } from '@/src/store/useAppStore';
+import { getPlaceImageSource, hasPlaceImage } from '@/src/utils/placeImages';
 import { createTextStyle, spacing, imageOverlay } from '@/constants/design';
 import { IconSymbol } from '@/components/ui/icon-symbol';
+import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import { calculateDistance, getCurrentLocation, type PlaceLocation } from '@/src/utils/location';
-import { getPlaces } from '@/src/services/mekanService';
+import { getPlaceById, getAllPlaces } from '@/src/services/mekanService';
 import { lightImpact, success, warning } from '@/src/utils/haptics';
 import { apiGet, apiPost } from '@/src/utils/apiClient';
 
@@ -40,8 +41,8 @@ export default function PlaceDetailScreen() {
   const params = useLocalSearchParams();
   const id = String(params?.id ?? '');
 
-  const savedIds = useSavedPlaces((s) => s.ids);
-  const toggleSaved = useSavedPlaces((s) => s.toggle);
+  const savedIds = useAppStore((s) => s.savedIds);
+  const toggleSaved = useAppStore((s) => s.toggleSave);
   const saved = savedIds.includes(id);
 
   const [place, setPlace] = useState<any>(null);
@@ -66,8 +67,7 @@ export default function PlaceDetailScreen() {
 
   const loadPlaceData = async () => {
     try {
-      const places = await getPlaces();
-      const foundPlace = places.find((p) => String(p.id) === id);
+      const foundPlace = await getPlaceById(id);
       if (foundPlace) {
         setPlace(foundPlace);
       }
@@ -93,8 +93,7 @@ export default function PlaceDetailScreen() {
 
   const loadSimilarPlaces = async () => {
     try {
-      const places = await getPlaces();
-      const current = Number(id);
+      const places = await getAllPlaces();
       const filtered = places
         .filter((p) => String(p.id) !== id && p.category === place?.category)
         .slice(0, 5);
@@ -303,7 +302,7 @@ export default function PlaceDetailScreen() {
 
         {/* Image */}
         <View style={styles.imageContainer}>
-          {place?.photo_url ? (
+          {hasPlaceImage(place) ? (
             <Image source={heroSource} style={styles.placeImage} resizeMode="cover" />
           ) : (
             <View style={[styles.imagePlaceholder, { backgroundColor: colors.surface.elevated }]}>
@@ -365,17 +364,17 @@ export default function PlaceDetailScreen() {
             </View>
           </View>
 
-          {/* Quick Actions Row */}
+          {/* Quick Actions Row — outline butonlar, Kaydet basınca dolup yeşil */}
           <View style={styles.quickActionsRow}>
             <TouchableOpacity
               onPress={() => {
                 lightImpact();
                 handleNavigate();
               }}
-              style={[styles.quickActionButton, { backgroundColor: colors.surface.elevated }]}
+              style={[styles.quickActionButton, styles.quickActionButtonOutline, { borderColor: colors.surface.border }]}
             >
-              <IconSymbol name="location.fill" size={24} color={colors.accent.primary} />
-              <Text style={[bodySmallStyle, { marginTop: 4, textAlign: 'center' }]}>
+              <FontAwesome5 name="route" size={22} color={colors.accent.primary} solid={false} />
+              <Text style={[bodySmallStyle, { marginTop: 4, textAlign: 'center', color: colors.text.primary }]}>
                 Yol Tarifi
               </Text>
             </TouchableOpacity>
@@ -384,10 +383,10 @@ export default function PlaceDetailScreen() {
                 lightImpact();
                 handleCall();
               }}
-              style={[styles.quickActionButton, { backgroundColor: colors.surface.elevated }]}
+              style={[styles.quickActionButton, styles.quickActionButtonOutline, { borderColor: colors.surface.border }]}
             >
-              <IconSymbol name="mappin.and.ellipse" size={24} color={colors.text.secondary} />
-              <Text style={[bodySmallStyle, { marginTop: 4, textAlign: 'center' }]}>
+              <FontAwesome5 name="phone" size={22} color={colors.text.secondary} solid={false} />
+              <Text style={[bodySmallStyle, { marginTop: 4, textAlign: 'center', color: colors.text.secondary }]}>
                 Ara
               </Text>
             </TouchableOpacity>
@@ -396,10 +395,10 @@ export default function PlaceDetailScreen() {
                 lightImpact();
                 handleShare();
               }}
-              style={[styles.quickActionButton, { backgroundColor: colors.surface.elevated }]}
+              style={[styles.quickActionButton, styles.quickActionButtonOutline, { borderColor: colors.surface.border }]}
             >
-              <IconSymbol name="paperplane.fill" size={24} color={colors.text.secondary} />
-              <Text style={[bodySmallStyle, { marginTop: 4, textAlign: 'center' }]}>
+              <FontAwesome5 name="share-alt" size={22} color={colors.text.secondary} solid={false} />
+              <Text style={[bodySmallStyle, { marginTop: 4, textAlign: 'center', color: colors.text.secondary }]}>
                 Paylaş
               </Text>
             </TouchableOpacity>
@@ -414,19 +413,17 @@ export default function PlaceDetailScreen() {
               }}
               style={[
                 styles.quickActionButton,
-                {
-                  backgroundColor: saved
-                    ? colors.accent.primary + '20'
-                    : colors.surface.elevated,
-                },
+                saved
+                  ? { backgroundColor: colors.accent.primary, borderWidth: 1, borderColor: colors.accent.primary }
+                  : [styles.quickActionButtonOutline, { borderColor: colors.surface.border }],
               ]}
             >
               <IconSymbol
                 name={saved ? 'heart.fill' : 'heart'}
                 size={24}
-                color={saved ? colors.accent.primary : colors.text.secondary}
+                color={saved ? '#FFFFFF' : colors.text.secondary}
               />
-              <Text style={[bodySmallStyle, { marginTop: 4, textAlign: 'center' }]}>
+              <Text style={[bodySmallStyle, { marginTop: 4, textAlign: 'center', color: saved ? '#FFFFFF' : colors.text.secondary }]}>
                 Kaydet
               </Text>
             </TouchableOpacity>
@@ -443,7 +440,7 @@ export default function PlaceDetailScreen() {
               </Text>
               <View style={styles.atmosphereTags}>
                 <View style={styles.atmosphereTag}>
-                  <IconSymbol name="slider.horizontal.3" size={16} color={colors.text.secondary} />
+                  <FontAwesome5 name="volume-mute" size={14} color={colors.text.secondary} solid={false} />
                   <Text style={[bodySmallStyle, { marginLeft: 6 }]}>
                     {place.tags?.includes('quiet') ? 'Sessiz' : 'Canlı'} ortam
                   </Text>
@@ -465,43 +462,48 @@ export default function PlaceDetailScreen() {
             </Text>
             <View style={styles.highlightsGrid}>
               {[
-                { icon: 'mappin.and.ellipse', label: 'Wi-Fi', available: true },
-                { icon: 'location.fill', label: 'Priz', available: true },
-                { icon: 'slider.horizontal.3', label: 'Sessiz', available: place?.tags?.includes('quiet') },
-                { icon: 'mappin.and.ellipse', label: 'Terasta oturma', available: false },
-              ].map((item, idx) => (
-                <View
-                  key={idx}
-                  style={[
-                    styles.highlightItem,
-                    {
-                      backgroundColor: item.available
-                        ? colors.accent.primary + '15'
-                        : colors.surface.default,
-                      borderColor: item.available
-                        ? colors.accent.primary + '30'
-                        : colors.surface.border,
-                    },
-                  ]}
-                >
-                  <IconSymbol
-                    name={item.icon as any}
-                    size={20}
-                    color={item.available ? colors.accent.primary : colors.text.tertiary}
-                  />
-                  <Text
+                { fa5: 'wifi' as const, fa5Unavailable: 'wifi-slash' as const, label: 'Wi-Fi', available: true },
+                { fa5: 'plug' as const, fa5Unavailable: 'plug' as const, label: 'Priz', available: true },
+                { fa5: 'volume-mute' as const, fa5Unavailable: 'volume-mute' as const, label: 'Sessiz', available: place?.tags?.includes('quiet') },
+                { fa5: 'umbrella' as const, fa5Unavailable: 'umbrella' as const, label: 'Terasta oturma', available: false },
+              ].map((item, idx) => {
+                const iconName = item.available ? item.fa5 : item.fa5Unavailable;
+                const iconColor = item.available ? colors.accent.primary : colors.text.tertiary;
+                return (
+                  <View
+                    key={idx}
                     style={[
-                      bodySmallStyle,
+                      styles.highlightItem,
                       {
-                        marginTop: 4,
-                        color: item.available ? colors.text.primary : colors.text.tertiary,
+                        backgroundColor: item.available
+                          ? colors.accent.primary + '15'
+                          : colors.surface.default,
+                        borderColor: item.available
+                          ? colors.accent.primary + '30'
+                          : colors.surface.border,
                       },
                     ]}
                   >
-                    {item.label}
-                  </Text>
-                </View>
-              ))}
+                    <FontAwesome5
+                      name={iconName}
+                      size={20}
+                      color={iconColor}
+                      solid={false}
+                    />
+                    <Text
+                      style={[
+                        bodySmallStyle,
+                        {
+                          marginTop: 4,
+                          color: item.available ? colors.text.primary : colors.text.tertiary,
+                        },
+                      ]}
+                    >
+                      {item.label}
+                    </Text>
+                  </View>
+                );
+              })}
             </View>
           </Card>
 
@@ -700,7 +702,7 @@ export default function PlaceDetailScreen() {
                   <View key={similarPlace.id} style={styles.similarCardWrapper}>
                     <PlaceCard
                       image={getPlaceImageSource(similarPlace)}
-                      imagePlaceholder={!similarPlace.photo_url}
+                      imagePlaceholder={!hasPlaceImage(similarPlace)}
                       title={similarPlace.name}
                       subtitle={similarPlace.subtitle || similarPlace.description}
                       tags={similarPlace.tags}
@@ -790,8 +792,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     paddingVertical: spacing.base,
     borderRadius: 16,
+  },
+  quickActionButtonOutline: {
+    backgroundColor: 'transparent',
     borderWidth: 1,
-    borderColor: 'transparent',
   },
   sectionCard: {
     marginBottom: spacing.xl,

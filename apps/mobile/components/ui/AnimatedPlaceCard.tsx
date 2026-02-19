@@ -29,50 +29,16 @@ export interface AnimatedPlaceCardProps extends PlaceCardProps {
 /**
  * Animated Place Card Component
  * 
- * Wraps PlaceCard with fade-in and slide-up animation.
- * Perfect for lists where items appear one by one.
+ * Optimized wrapper for PlaceCard - animations removed for better scroll performance.
+ * Memoized to prevent unnecessary re-renders.
  */
 function AnimatedPlaceCardInner({
   delay = 0,
   index = 0,
   ...cardProps
 }: AnimatedPlaceCardProps) {
-  const opacity = useRef(new Animated.Value(0)).current;
-  const translateY = useRef(new Animated.Value(20)).current;
-
-  useEffect(() => {
-    const animationDelay = delay + (index * 50); // Stagger by 50ms per item
-
-    Animated.parallel([
-      Animated.timing(opacity, {
-        toValue: 1,
-        duration: animationTiming.normal,
-        delay: animationDelay,
-        easing: easing.easeOut,
-        useNativeDriver: true,
-      }),
-      Animated.timing(translateY, {
-        toValue: 0,
-        duration: animationTiming.normal,
-        delay: animationDelay,
-        easing: easing.easeOut,
-        useNativeDriver: true,
-      }),
-    ]).start();
-  }, [opacity, translateY, delay, index]);
-
-  return (
-    <Animated.View
-      style={{
-        width: '100%',
-        alignSelf: 'stretch',
-        opacity,
-        transform: [{ translateY }],
-      }}
-    >
-      <PlaceCard {...cardProps} />
-    </Animated.View>
-  );
+  // No animations - direct render for smooth scrolling
+  return <PlaceCard {...cardProps} />;
 }
 
 export const AnimatedPlaceCard = React.memo(AnimatedPlaceCardInner);

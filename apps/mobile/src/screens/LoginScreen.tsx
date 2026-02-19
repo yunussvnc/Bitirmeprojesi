@@ -28,7 +28,9 @@ import { useTheme } from '@/hooks/useTheme';
 import { Button, Input } from '@/components/ui';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import { lightImpact, success } from '@/src/utils/haptics';
-import { getPlaces } from '@/src/services/mekanService';
+import { getAllPlaces } from '@/src/services/mekanService';
+import { loginUser } from '@/src/services/authService';
+import { useAuthStore } from '@/src/store/useAuthStore';
 import { API_BASE_URL } from '@/src/constants/api';
 
 const { width, height } = Dimensions.get('window');
@@ -59,7 +61,7 @@ export default function LoginScreen() {
   // Mekan fotoğraflarını API'den al
   useEffect(() => {
     let cancelled = false;
-    getPlaces()
+    getAllPlaces()
       .then((places) => {
         if (cancelled) return;
         const urls = places
@@ -111,11 +113,14 @@ export default function LoginScreen() {
     lightImpact();
     setLoading(true);
     try {
-      await new Promise((r) => setTimeout(r, 1500));
+      const data = await loginUser({ email: email.trim(), password });
+      useAuthStore.getState().setTokens(data.access_token, data.refresh_token);
+      useAuthStore.getState().setUser(data.user);
       success();
       router.replace('/(tabs)');
-    } catch {
-      setErrors({ email: 'Giriş başarısız. Lütfen tekrar deneyin.' });
+    } catch (err: any) {
+      const msg = err?.message || 'Giriş başarısız. Lütfen tekrar deneyin.';
+      setErrors({ email: msg });
     } finally {
       setLoading(false);
     }

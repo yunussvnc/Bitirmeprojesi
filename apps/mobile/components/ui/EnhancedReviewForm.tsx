@@ -18,7 +18,8 @@ import {
   Alert,
 } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
-import { Button, RatingStars } from '@/components/ui';
+import { Button } from '@/components/ui/Button';
+import { RatingStars } from '@/components/ui/RatingStars';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import { createTextStyle, spacing } from '@/constants/design';
 import { lightImpact, success } from '@/src/utils/haptics';

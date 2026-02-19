@@ -12,7 +12,7 @@
  * ```
  */
 
-import { Platform } from 'react-native';
+import { Platform, type TextStyle } from 'react-native';
 import type { TypographySystem } from './types';
 
 /**
@@ -132,21 +132,15 @@ export function getFontFamily(): string {
 export function createTextStyle(
   scale: keyof typeof typography.scale,
   color?: string
-): {
-  fontFamily: string;
-  fontSize: number;
-  lineHeight: number;
-  fontWeight: string;
-  letterSpacing: number;
-  color?: string;
-} {
+): TextStyle {
   const scaleConfig = typography.scale[scale];
-  return {
+  const style: TextStyle = {
     fontFamily: getFontFamily(),
     fontSize: scaleConfig.fontSize,
     lineHeight: scaleConfig.lineHeight,
     fontWeight: scaleConfig.fontWeight,
     letterSpacing: scaleConfig.letterSpacing,
-    ...(color && { color }),
   };
+  if (color) style.color = color;
+  return style;
 }

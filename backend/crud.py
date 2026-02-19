@@ -1,44 +1,94 @@
 from sqlalchemy.orm import Session
+import bcrypt
 import models, schemas
-from passlib.context import CryptContext
 
-# Şifreleme ayarları
-pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
+# bcrypt 72 byte sınırı – uzun şifreleri kırp
+def _to_bcrypt_password(pw: str) -> bytes:
+    enc = pw.encode("utf-8")
+    return enc[:72] if len(enc) > 72 else enc
+
+def _hash_password(pw: str) -> str:
+    return bcrypt.hashpw(_to_bcrypt_password(pw), bcrypt.gensalt()).decode("ascii")
+
+def _verify_password(plain: str, hashed: str) -> bool:
+    return bcrypt.checkpw(_to_bcrypt_password(plain), hashed.encode("ascii"))
 
 # --- KULLANICI İŞLEMLERİ ---
 
 def get_user_by_email(db: Session, email: str):
     return db.query(models.User).filter(models.User.email == email).first()
 
+def get_user_by_username(db: Session, username: str):
+    return db.query(models.User).filter(models.User.username == username).first()
+
+def get_user_by_id(db: Session, user_id: int):
+    return db.query(models.User).filter(models.User.id == user_id).first()
+
 def create_user(db: Session, user: schemas.UserCreate):
-    hashed_password = pwd_context.hash(user.password)
+    hashed_password = _hash_password(user.password)
     db_user = models.User(
         email=user.email,
+        username=user.username,
         password_hash=hashed_password,
         first_name=user.first_name,
         last_name=user.last_name,
-        phone_number=user.phone_number
+        phone_number=user.phone_number,
     )
     db.add(db_user)
     db.commit()
     db.refresh(db_user)
     return db_user
 
+def update_user(db: Session, user_id: int, data: schemas.UserUpdate):
+    user = db.query(models.User).filter(models.User.id == user_id).first()
+    if not user:
+        return None
+    update_data = data.model_dump(exclude_unset=True)
+    for field, value in update_data.items():
+        setattr(user, field, value)
+    db.commit()
+    db.refresh(user)
+    return user
+
 def authenticate_user(db: Session, email: str, password: str):
     user = get_user_by_email(db, email)
     if not user:
         return False
-    
-    if not pwd_context.verify(password, user.password_hash):
+    if not _verify_password(password, user.password_hash):
         return False
-        
     return user
+
+
+def get_or_create_user_for_login(db: Session, email: str, password: str):
+    """Auth bypass: kullanıcı varsa döndür, yoksa oluştur. Şifre kontrolü yapılmaz."""
+    user = get_user_by_email(db, email)
+    if user:
+        return user
+    username_base = email.split("@")[0].replace(".", "_")[:30]
+    username = username_base
+    idx = 0
+    while get_user_by_username(db, username):
+        idx += 1
+        username = f"{username_base}_{idx}"
+    user_data = schemas.UserCreate(email=email, password=password, username=username)
+    return create_user(db, user_data)
 
 # --- MEKAN (PLACE) İŞLEMLERİ ---
 
 def get_places(db: Session, skip: int = 0, limit: int = 100):
-    # Yeni eklenen mekanlar önce gelsin (ID'ye göre ters sıralama)
     return db.query(models.Place).order_by(models.Place.id.desc()).offset(skip).limit(limit).all()
+
+def get_places_paginated(db: Session, page: int = 1, page_size: int = 20):
+    total = db.query(models.Place).count()
+    offset = (page - 1) * page_size
+    items = (
+        db.query(models.Place)
+        .order_by(models.Place.id.desc())
+        .offset(offset)
+        .limit(page_size)
+        .all()
+    )
+    return items, total
 
 def create_place(db: Session, place: schemas.PlaceCreate):
     db_place = models.Place(
