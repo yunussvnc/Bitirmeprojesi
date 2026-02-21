@@ -208,16 +208,6 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
 
       <View style={[styles.controls, selectedPlace && styles.controlsWithPanel]}>
         <TouchableOpacity
-          onPress={() => {
-            lightImpact();
-            onLoadPlaces();
-          }}
-          style={[styles.controlBtn, { backgroundColor: colors.surface.elevated }]}
-          activeOpacity={0.7}
-        >
-          <IconSymbol name="arrow.clockwise" size={22} color={colors.text.primary} />
-        </TouchableOpacity>
-        <TouchableOpacity
           onPress={goToUserLocation}
           style={[styles.controlBtn, { backgroundColor: colors.surface.elevated }]}
           activeOpacity={0.7}

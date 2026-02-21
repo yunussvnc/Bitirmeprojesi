@@ -10,6 +10,8 @@ import {
   StyleSheet,
   RefreshControl,
   ScrollView,
+  TouchableOpacity,
+  Platform,
 } from "react-native";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { Screen } from "@/components/layout";
@@ -19,6 +21,7 @@ import { useTheme } from "@/hooks/useTheme";
 import { createTextStyle, spacing } from "@/constants/design";
 import { ProfileGrid } from "@/components/profile/ProfileGrid";
 import { Section } from "@/components/layout/Section";
+import { IconSymbol } from "@/components/ui/icon-symbol";
 import { getUserProfile, getUserPosts, getUserStats, toggleFollow, type UserProfile } from "@/src/services/userService";
 import { useAuthStore } from "@/src/store/useAuthStore";
 import { handleApiError } from "@/src/utils/errorHandler";
@@ -128,6 +131,23 @@ export default function UserProfileScreen() {
           />
         }
       >
+        <View style={styles.header}>
+          <TouchableOpacity
+            onPress={() => {
+              lightImpact();
+              router.back();
+            }}
+            style={[styles.backBtn, { backgroundColor: colors.surface.elevated }]}
+            activeOpacity={0.7}
+          >
+            <IconSymbol name="chevron.left" size={20} color={colors.text.primary} />
+          </TouchableOpacity>
+          <Text style={[styles.headerTitle, { color: colors.text.primary }]} numberOfLines={1}>
+            {displayName}
+          </Text>
+          <View style={styles.backBtn} />
+        </View>
+
         <View style={[styles.card, { backgroundColor: colors.surface.elevated, borderColor: colors.surface.border }]}>
           <Avatar
             source={profile.avatar_url ? { uri: profile.avatar_url } : undefined}
@@ -186,6 +206,28 @@ export default function UserProfileScreen() {
 
 const styles = StyleSheet.create({
   scroll: { paddingBottom: spacing.xl * 2 },
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: spacing.md,
+    paddingTop: Platform.OS === "ios" ? 8 : 12,
+    paddingBottom: spacing.sm,
+  },
+  backBtn: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  headerTitle: {
+    flex: 1,
+    fontSize: 17,
+    fontWeight: "600",
+    textAlign: "center",
+    marginHorizontal: spacing.sm,
+  },
   card: {
     alignItems: "center",
     padding: spacing.lg,

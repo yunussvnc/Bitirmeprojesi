@@ -122,11 +122,6 @@ function HomeListHeader({
           activeOpacity={0.7}
         >
           <IconSymbol name="bookmark.fill" size={22} color={colors.text.secondary} />
-          {savedCount > 0 && (
-            <View style={[styles.savedBadge, { backgroundColor: colors.accent.primary }]}>
-              <Text style={[styles.savedBadgeText, { color: colors.accent.onPrimary }]}>{savedCount > 99 ? '99+' : savedCount}</Text>
-            </View>
-          )}
         </TouchableOpacity>
       </View>
 
@@ -421,9 +416,13 @@ export default function HomeScreen() {
   const getLocationFromName = (name: string) =>
     name?.includes(' - ') ? name.split(' - ')[1]?.trim() : undefined;
 
+  const navigatingRef = useRef(false);
   const handlePlacePress = useCallback((id: string) => {
+    if (navigatingRef.current) return;
+    navigatingRef.current = true;
     lightImpact();
     router.push({ pathname: '/place/[id]', params: { id } } as any);
+    setTimeout(() => { navigatingRef.current = false; }, 1000);
   }, []);
 
   const renderPlaceItem = useCallback(

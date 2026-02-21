@@ -84,15 +84,13 @@ const PlaceCardComponent = function PlaceCard({
   return (
     <View style={styles.animatedWrapper}>
       {/* 3D depth layer — sits behind the card to simulate thickness */}
-      <View style={[styles.depthLayer, { backgroundColor: depthEdgeColor }]} />
+      <View style={[styles.depthLayer]} />
       <TouchableOpacity
         onPress={handlePress}
         activeOpacity={0.95}
         style={[styles.card]}
         testID={testID}
       >
-      {/* Top highlight edge for 3D feel */}
-      <View style={[styles.topHighlight, { backgroundColor: depthHighlightColor }]} />
       <View style={styles.imageContainer}>
         {imagePlaceholder ? (
           <View style={[styles.imagePlaceholder, { backgroundColor: colors.surface.elevated }]}>
@@ -162,8 +160,6 @@ const PlaceCardComponent = function PlaceCard({
           </View>
         )}
       </View>
-      {/* Bottom edge accent for 3D depth */}
-      <View style={[styles.bottomEdge, { backgroundColor: depthEdgeColor }]} />
     </TouchableOpacity>
     </View>
   );

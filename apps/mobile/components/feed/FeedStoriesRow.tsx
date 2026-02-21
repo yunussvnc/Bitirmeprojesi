@@ -1,9 +1,10 @@
 /**
  * FeedStoriesRow – Akış ekranında hikaye halkaları
  * İlk halka "Hikaye Ekle", sonrakiler mekan bazlı hikayeler.
+ * Görüntülenen hikayeler sona gider, yeşil ring kaybolur.
  */
 
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState, useCallback, useMemo, useRef } from "react";
 import {
   View,
   Text,
@@ -14,13 +15,11 @@ import {
 } from "react-native";
 import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
-import { router } from "expo-router";
+import { router, useFocusEffect, useNavigation } from "expo-router";
 import { useTheme } from "@/hooks/useTheme";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { StoryViewerModal } from "@/components/explore/StoryViewerModal";
 import {
-  getFeedStories,
-  getPlaceStories,
   type Story,
   type FeedStoriesFilter,
 } from "@/src/services/storyService";
@@ -35,6 +34,7 @@ type PlaceStoryGroup = {
   placeName?: string;
   thumbnailUrl: string;
   isVideo: boolean;
+  storyIds: number[];
 };
 
 export interface FeedStoriesRowProps {
@@ -45,84 +45,115 @@ export function FeedStoriesRow({ filter }: FeedStoriesRowProps) {
   const { colors } = useTheme();
   const [stories, setStories] = useState<Story[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selectedPlaceId, setSelectedPlaceId] = useState<number | null>(null);
-  const [placeStories, setPlaceStories] = useState<Story[]>([]);
-  const [loadingViewer, setLoadingViewer] = useState(false);
+  const [viewedGroupIds, setViewedGroupIds] = useState<Set<number>>(new Set());
+  const [storyViewerIndex, setStoryViewerIndex] = useState<number | null>(null);
+  const viewerStoriesRef = useRef<Story[]>([]);
+  const storyPausedRef = useRef(false);
+  const [storyVisible, setStoryVisible] = useState(true);
+  const hideTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const navigation = useNavigation();
+
+  const handleStoryNavigateRequest = useCallback((route: string, _currentIndex: number) => {
+    storyPausedRef.current = true;
+    router.push(route as any);
+    if (hideTimeoutRef.current) clearTimeout(hideTimeoutRef.current);
+    hideTimeoutRef.current = setTimeout(() => setStoryVisible(false), 400);
+  }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      if (storyPausedRef.current) {
+        storyPausedRef.current = false;
+        if (hideTimeoutRef.current) {
+          clearTimeout(hideTimeoutRef.current);
+          hideTimeoutRef.current = null;
+        }
+        setStoryVisible(true);
+      }
+    }, [])
+  );
+
+  useEffect(() => {
+    const unsubscribe = (navigation as any).addListener("transitionStart", (e: { data?: { closing?: boolean } }) => {
+      if (e?.data?.closing && storyPausedRef.current) {
+        storyPausedRef.current = false;
+        if (hideTimeoutRef.current) {
+          clearTimeout(hideTimeoutRef.current);
+          hideTimeoutRef.current = null;
+        }
+        setStoryVisible(true);
+      }
+    });
+    return unsubscribe;
+  }, [navigation]);
+
 
   const loadStories = useCallback(async () => {
     setLoading(true);
-    // Geçici olarak mock data kullan
     const now = new Date();
     const expiresAt = new Date(now.getTime() + 24 * 60 * 60 * 1000).toISOString();
     setStories([
       {
-        id: 1,
-        user_id: 1,
-        place_id: 101,
+        id: 1, user_id: 1, place_id: 101,
         place: { id: 101, name: "Cafe Luna", category: "Cafe" },
+        author: { id: 1, username: "ahmet_k", first_name: "Ahmet", avatar_url: "https://i.pravatar.cc/100?img=11" },
         media_url: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=400",
         media_type: "image",
-        created_at: now.toISOString(),
+        created_at: new Date(now.getTime() - 2 * 3600000).toISOString(),
         expires_at: expiresAt,
       },
       {
-        id: 2,
-        user_id: 2,
-        place_id: 102,
+        id: 2, user_id: 2, place_id: 102,
         place: { id: 102, name: "Sunset Beach", category: "Beach" },
+        author: { id: 2, username: "elif_d", first_name: "Elif", avatar_url: "https://i.pravatar.cc/100?img=5" },
         media_url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400",
         media_type: "image",
-        created_at: now.toISOString(),
+        created_at: new Date(now.getTime() - 5 * 3600000).toISOString(),
         expires_at: expiresAt,
       },
       {
-        id: 3,
-        user_id: 3,
-        place_id: 103,
+        id: 3, user_id: 3, place_id: 103,
         place: { id: 103, name: "Mountain View", category: "Nature" },
+        author: { id: 3, username: "can_y", first_name: "Can", avatar_url: "https://i.pravatar.cc/100?img=12" },
         media_url: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400",
         media_type: "image",
-        created_at: now.toISOString(),
+        created_at: new Date(now.getTime() - 1 * 3600000).toISOString(),
         expires_at: expiresAt,
       },
       {
-        id: 4,
-        user_id: 4,
-        place_id: 104,
+        id: 4, user_id: 4, place_id: 104,
         place: { id: 104, name: "City Lights", category: "Restaurant" },
+        author: { id: 4, username: "zeynep_a", first_name: "Zeynep", avatar_url: "https://i.pravatar.cc/100?img=9" },
         media_url: "https://images.unsplash.com/photo-1514565131-fce0801e5785?w=400",
         media_type: "image",
-        created_at: now.toISOString(),
+        created_at: new Date(now.getTime() - 8 * 3600000).toISOString(),
         expires_at: expiresAt,
       },
       {
-        id: 5,
-        user_id: 5,
-        place_id: 105,
+        id: 5, user_id: 5, place_id: 105,
         place: { id: 105, name: "Art Gallery", category: "Culture" },
+        author: { id: 5, username: "mehmet_b", first_name: "Mehmet", avatar_url: "https://i.pravatar.cc/100?img=33" },
         media_url: "https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=400",
         media_type: "image",
-        created_at: now.toISOString(),
+        created_at: new Date(now.getTime() - 12 * 3600000).toISOString(),
         expires_at: expiresAt,
       },
       {
-        id: 6,
-        user_id: 6,
-        place_id: 106,
+        id: 6, user_id: 6, place_id: 106,
         place: { id: 106, name: "Park Central", category: "Park" },
+        author: { id: 6, username: "selin_k", first_name: "Selin", avatar_url: "https://i.pravatar.cc/100?img=23" },
         media_url: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400",
         media_type: "image",
-        created_at: now.toISOString(),
+        created_at: new Date(now.getTime() - 3 * 3600000).toISOString(),
         expires_at: expiresAt,
       },
       {
-        id: 7,
-        user_id: 7,
-        place_id: 107,
+        id: 7, user_id: 7, place_id: 107,
         place: { id: 107, name: "Rooftop Bar", category: "Bar" },
+        author: { id: 7, username: "burak_t", first_name: "Burak", avatar_url: "https://i.pravatar.cc/100?img=15" },
         media_url: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400",
         media_type: "image",
-        created_at: now.toISOString(),
+        created_at: new Date(now.getTime() - 6 * 3600000).toISOString(),
         expires_at: expiresAt,
       },
     ]);
@@ -133,47 +164,57 @@ export function FeedStoriesRow({ filter }: FeedStoriesRowProps) {
     loadStories();
   }, [loadStories]);
 
-  // Mekan bazlı grupla – her mekan için en son hikayenin önizlemesi
-  const placeGroups = React.useMemo(() => {
+  const placeGroups = useMemo(() => {
     const seen = new Set<number>();
     const groups: PlaceStoryGroup[] = [];
     for (const s of stories) {
       const pid = s.place_id ?? s.place?.id;
       if (pid && !seen.has(pid)) {
         seen.add(pid);
+        const groupStoryIds = stories
+          .filter((st) => (st.place_id ?? st.place?.id) === pid)
+          .map((st) => st.id);
         groups.push({
           placeId: pid,
           placeName: s.place?.name,
           thumbnailUrl: s.media_type === "video" ? (s.thumbnail_url || s.media_url) : s.media_url,
           isVideo: s.media_type === "video",
+          storyIds: groupStoryIds,
         });
       }
     }
     return groups;
   }, [stories]);
 
-  /** Tıklanan mekan + sonraki 4 mekanın hikayelerini yükle, sırayla birleştir */
-  const handlePlaceTap = useCallback(async (placeId: number, tapIndex: number) => {
+  const sortedGroups = useMemo(() => {
+    const unseen = placeGroups.filter((g) => !viewedGroupIds.has(g.placeId));
+    const seen = placeGroups.filter((g) => viewedGroupIds.has(g.placeId));
+    return [...unseen, ...seen];
+  }, [placeGroups, viewedGroupIds]);
+
+  const handlePlaceTap = useCallback((placeId: number, tapIndex: number) => {
     lightImpact();
-    setLoadingViewer(true);
-    try {
-      const toFetch = placeGroups
-        .slice(tapIndex, tapIndex + 5)
-        .map((g) => g.placeId);
-      const results = await Promise.all(
-        toFetch.map((id) => getPlaceStories(id, 1, 50))
-      );
-      const combined = results.flatMap((r) => r.items);
-      if (combined.length > 0) {
-        setPlaceStories(combined);
-        setSelectedPlaceId(placeId);
-      }
-    } catch {
-      // ignore
-    } finally {
-      setLoadingViewer(false);
+    const groupsFromTap = sortedGroups.slice(tapIndex);
+    const placeIdsFromTap = new Set(groupsFromTap.map((g) => g.placeId));
+    const filtered = stories.filter((s) => {
+      const pid = s.place_id ?? s.place?.id;
+      return pid != null && placeIdsFromTap.has(pid);
+    });
+    if (filtered.length > 0) {
+      viewerStoriesRef.current = filtered;
+      setStoryViewerIndex(0);
     }
-  }, [placeGroups]);
+  }, [sortedGroups, stories]);
+
+  const handleStoryViewed = useCallback((storyId: number) => {
+    const story = stories.find((s) => s.id === storyId);
+    if (story) {
+      const pid = story.place_id ?? story.place?.id;
+      if (pid) {
+        setViewedGroupIds((prev) => new Set(prev).add(pid));
+      }
+    }
+  }, [stories]);
 
   if (loading && stories.length === 0) {
     return (
@@ -192,55 +233,74 @@ export function FeedStoriesRow({ filter }: FeedStoriesRowProps) {
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.row}
         >
-          {/* Mekan hikayeleri */}
-          {placeGroups.map((g, idx) => (
-            <TouchableOpacity
-              key={g.placeId}
-              style={styles.ringWrap}
-              onPress={() => handlePlaceTap(g.placeId, idx)}
-              activeOpacity={0.8}
-            >
-              <LinearGradient
-                colors={STORY_GRADIENT}
-                start={{ x: 0, y: 0 }}
-                end={{ x: 1, y: 1 }}
-                style={styles.gradientRing}
+          {sortedGroups.map((g, idx) => {
+            const seen = viewedGroupIds.has(g.placeId);
+            return (
+              <TouchableOpacity
+                key={g.placeId}
+                style={styles.ringWrap}
+                onPress={() => handlePlaceTap(g.placeId, idx)}
+                activeOpacity={0.8}
               >
-                <View style={[styles.ringGap, { backgroundColor: colors.background.primary }]}>
-                  <View style={styles.ringInner}>
-                    <Image
-                      source={{ uri: g.thumbnailUrl }}
-                      style={StyleSheet.absoluteFill}
-                      contentFit="cover"
-                    />
-                    {g.isVideo && (
-                      <View style={styles.videoIcon}>
-                        <IconSymbol name="play.fill" size={10} color="#fff" />
-                      </View>
-                    )}
+                {seen ? (
+                  <View style={[styles.ringSeen, { borderColor: colors.surface.border }]}>
+                    <View style={styles.ringInner}>
+                      <Image
+                        source={{ uri: g.thumbnailUrl }}
+                        style={StyleSheet.absoluteFill}
+                        contentFit="cover"
+                      />
+                      {g.isVideo && (
+                        <View style={styles.videoIcon}>
+                          <IconSymbol name="play.fill" size={10} color="#fff" />
+                        </View>
+                      )}
+                    </View>
                   </View>
-                </View>
-              </LinearGradient>
-              <Text style={[styles.placeLabel, { color: colors.text.secondary }]} numberOfLines={1}>
-                {g.placeName ?? "Mekan"}
-              </Text>
-            </TouchableOpacity>
-          ))}
+                ) : (
+                  <LinearGradient
+                    colors={STORY_GRADIENT}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 1 }}
+                    style={styles.gradientRing}
+                  >
+                    <View style={[styles.ringGap, { backgroundColor: colors.background.primary }]}>
+                      <View style={styles.ringInner}>
+                        <Image
+                          source={{ uri: g.thumbnailUrl }}
+                          style={StyleSheet.absoluteFill}
+                          contentFit="cover"
+                        />
+                        {g.isVideo && (
+                          <View style={styles.videoIcon}>
+                            <IconSymbol name="play.fill" size={10} color="#fff" />
+                          </View>
+                        )}
+                      </View>
+                    </View>
+                  </LinearGradient>
+                )}
+                <Text
+                  style={[styles.placeLabel, { color: seen ? colors.text.tertiary : colors.text.secondary }]}
+                  numberOfLines={1}
+                >
+                  {g.placeName ?? "Mekan"}
+                </Text>
+              </TouchableOpacity>
+            );
+          })}
         </ScrollView>
       </View>
 
-      {loadingViewer && (
-        <View style={[StyleSheet.absoluteFill, styles.loadingOverlay]}>
-          <ActivityIndicator size="large" color={colors.accent.primary} />
-        </View>
-      )}
-      {selectedPlaceId !== null && placeStories.length > 0 && (
+      {storyViewerIndex !== null && (
         <StoryViewerModal
-          stories={placeStories}
-          onClose={() => {
-            setSelectedPlaceId(null);
-            setPlaceStories([]);
-          }}
+          stories={viewerStoriesRef.current}
+          initialIndex={storyViewerIndex}
+          visible={storyVisible}
+          onClose={() => { setStoryViewerIndex(null); setStoryVisible(true); }}
+          onStoryViewed={handleStoryViewed}
+          onAuthorNavigate={handleStoryNavigateRequest}
+          onPlaceNavigate={handleStoryNavigateRequest}
         />
       )}
     </>
@@ -275,6 +335,14 @@ const styles = StyleSheet.create({
     height: STORY_RING_SIZE + 3,
     borderRadius: (STORY_RING_SIZE + 3) / 2,
     padding: 1.5,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  ringSeen: {
+    width: STORY_RING_SIZE + 3,
+    height: STORY_RING_SIZE + 3,
+    borderRadius: (STORY_RING_SIZE + 3) / 2,
+    borderWidth: 1.5,
     alignItems: "center",
     justifyContent: "center",
   },

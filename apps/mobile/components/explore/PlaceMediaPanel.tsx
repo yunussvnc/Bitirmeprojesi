@@ -3,7 +3,7 @@
  * Instagram tarzı: Hero cover, gradient story ring'ler, featured strip, zengin grid.
  */
 
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo, useRef, useCallback } from 'react';
 import {
   View,
   Text,
@@ -17,12 +17,14 @@ import {
   Alert,
   Modal,
   Pressable,
+  Animated,
+  PanResponder,
   type ImageSourcePropType,
 } from 'react-native';
 import { Image } from 'expo-image';
 import { Video, ResizeMode } from 'expo-av';
 import { LinearGradient } from 'expo-linear-gradient';
-import { router } from 'expo-router';
+import { router, useFocusEffect, useNavigation } from 'expo-router';
 import { useTheme } from '@/hooks/useTheme';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import { getPlacePosts, type Post } from '@/src/services/feedService';
@@ -41,13 +43,54 @@ const GRID_COLS = 3;
 const GAP = 2;
 const PADDING = 16;
 const CELL_SIZE = (PANEL_CONTENT_WIDTH - PADDING * 2 - (GRID_COLS - 1) * GAP) / GRID_COLS;
-const PANEL_MAX_HEIGHT = Math.min(SCREEN_HEIGHT * 0.62, 520);
+const PANEL_COLLAPSED = Math.min(SCREEN_HEIGHT * 0.62, 520);
+const PANEL_EXPANDED = SCREEN_HEIGHT * 0.72;
 const HERO_HEIGHT = 140;
 const STRIP_ITEM_SIZE = 88;
 const STORY_RING_SIZE = 64;
+const PLACE_STORY_SIZE = 82;
 
 // Instagram story ring gradient
 const STORY_GRADIENT: [string, string, ...string[]] = ['#4ade80', '#22c55e', '#16a34a', '#15803d'];
+
+const MOCK_PLACE_STORIES: Story[] = [
+  {
+    id: 9001, user_id: 1, media_type: 'image',
+    media_url: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=400&h=400&fit=crop',
+    created_at: new Date(Date.now() - 1 * 3600000).toISOString(),
+    expires_at: new Date(Date.now() + 86400000).toISOString(),
+    author: { id: 1, username: 'ahmet_k', first_name: 'Ahmet', avatar_url: 'https://i.pravatar.cc/100?img=11' },
+  },
+  {
+    id: 9002, user_id: 2, media_type: 'image',
+    media_url: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400&h=400&fit=crop',
+    created_at: new Date(Date.now() - 4 * 3600000).toISOString(),
+    expires_at: new Date(Date.now() + 86400000).toISOString(),
+    author: { id: 2, username: 'elif_d', first_name: 'Elif', avatar_url: 'https://i.pravatar.cc/100?img=5' },
+  },
+  {
+    id: 9003, user_id: 3, media_type: 'image',
+    media_url: 'https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=400&h=400&fit=crop',
+    created_at: new Date(Date.now() - 7 * 3600000).toISOString(),
+    expires_at: new Date(Date.now() + 86400000).toISOString(),
+    author: { id: 3, username: 'can_yilmaz', first_name: 'Can', avatar_url: 'https://i.pravatar.cc/100?img=12' },
+  },
+  {
+    id: 9004, user_id: 4, media_type: 'video',
+    media_url: 'https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=400&h=400&fit=crop',
+    thumbnail_url: 'https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=400&h=400&fit=crop',
+    created_at: new Date(Date.now() - 10 * 3600000).toISOString(),
+    expires_at: new Date(Date.now() + 86400000).toISOString(),
+    author: { id: 4, username: 'zeynep_a', first_name: 'Zeynep', avatar_url: 'https://i.pravatar.cc/100?img=9' },
+  },
+  {
+    id: 9005, user_id: 5, media_type: 'image',
+    media_url: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400&h=400&fit=crop',
+    created_at: new Date(Date.now() - 3 * 3600000).toISOString(),
+    expires_at: new Date(Date.now() + 86400000).toISOString(),
+    author: { id: 5, username: 'mehmet_b', first_name: 'Mehmet', avatar_url: 'https://i.pravatar.cc/100?img=33' },
+  },
+];
 
 /** Tüm post'lardan media URL'lerini topla */
 function collectMediaItems(posts: Post[]): { url: string; isVideo: boolean; postId: number }[] {
@@ -81,10 +124,51 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
   const [stories, setStories] = useState<Story[]>([]);
   const [loading, setLoading] = useState(true);
   const [total, setTotal] = useState(0);
-  const [showStoryViewer, setShowStoryViewer] = useState(false);
+  const [storyViewerIndex, setStoryViewerIndex] = useState<number | null>(null);
+  const [viewedStoryIds, setViewedStoryIds] = useState<Set<number>>(new Set());
+  const viewerStoriesRef = useRef<Story[]>([]);
+  const storyPausedRef = useRef(false);
+  const [storyVisible, setStoryVisible] = useState(true);
   const [showHeroImage, setShowHeroImage] = useState(false);
   const [selectedMedia, setSelectedMedia] = useState<{ url: string; isVideo: boolean } | null>(null);
-  const [activeTab, setActiveTab] = useState<'posts' | 'reels'>('posts');
+  const hideTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const navigation = useNavigation();
+
+  const handleStoryNavigateRequest = useCallback((route: string, _currentIndex: number) => {
+    storyPausedRef.current = true;
+    router.push(route as any);
+    if (hideTimeoutRef.current) clearTimeout(hideTimeoutRef.current);
+    hideTimeoutRef.current = setTimeout(() => setStoryVisible(false), 400);
+  }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      if (storyPausedRef.current) {
+        storyPausedRef.current = false;
+        if (hideTimeoutRef.current) {
+          clearTimeout(hideTimeoutRef.current);
+          hideTimeoutRef.current = null;
+        }
+        setStoryVisible(true);
+      }
+    }, [])
+  );
+
+  useEffect(() => {
+    const unsubscribe = (navigation as any).addListener('transitionStart', (e: { data?: { closing?: boolean } }) => {
+      if (e?.data?.closing && storyPausedRef.current) {
+        storyPausedRef.current = false;
+        if (hideTimeoutRef.current) {
+          clearTimeout(hideTimeoutRef.current);
+          hideTimeoutRef.current = null;
+        }
+        setStoryVisible(true);
+      }
+    });
+    return unsubscribe;
+  }, [navigation]);
+
+  
 
   useEffect(() => {
     let cancelled = false;
@@ -117,21 +201,44 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
 
   const mediaItems = collectMediaItems(posts);
   const photoPosts = posts.filter((p) => p.post_type !== 'reel');
-  const reelPosts = posts.filter((p) => p.post_type === 'reel');
-  const featuredItems = mediaItems.slice(0, 8);
-  const gridItems = activeTab === 'posts' ? collectMediaItems(photoPosts) : collectMediaItems(reelPosts);
+  const gridItems = collectMediaItems(photoPosts);
+
+  const rawStories = useMemo(() => {
+    if (stories.length > 0) return stories;
+    const realAuthors = posts
+      .filter((p) => p.author && p.user_id)
+      .map((p) => ({ user_id: p.user_id, author: p.author! }));
+    return MOCK_PLACE_STORIES.map((s, i) => {
+      const real = realAuthors[i % realAuthors.length];
+      return {
+        ...s,
+        place_id: Number(place.id),
+        place: { id: Number(place.id), name: place.name || '', category: place.category || '' },
+        ...(real ? { user_id: real.user_id, author: real.author } : {}),
+      };
+    });
+  }, [stories, posts, place.id, place.name, place.category]);
+  const sortedStories = useMemo(() => {
+    const unseen = rawStories.filter((s) => !viewedStoryIds.has(s.id));
+    const seen = rawStories.filter((s) => viewedStoryIds.has(s.id));
+    return [...unseen, ...seen];
+  }, [rawStories, viewedStoryIds]);
   const heroImage: ImageSourcePropType =
     place.photo_url
       ? { uri: place.photo_url }
-      : featuredItems[0]?.url
-        ? { uri: featuredItems[0].url }
+      : mediaItems[0]?.url
+        ? { uri: mediaItems[0].url }
         : stories[0]?.media_url
           ? { uri: stories[0].media_type === 'video' ? (stories[0].thumbnail_url || stories[0].media_url) : stories[0].media_url }
           : getPlaceImageSource(place);
 
+  const navigatingRef = useRef(false);
   const goToPlaceDetail = () => {
+    if (navigatingRef.current) return;
+    navigatingRef.current = true;
     lightImpact();
     router.push({ pathname: '/place/[id]', params: { id: String(place.id) } } as any);
+    setTimeout(() => { navigatingRef.current = false; }, 1000);
   };
 
   const handleDirections = () => {
@@ -165,17 +272,57 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
   const isEmpty = !loading && !hasContent;
   const showPreferencesHint = !mapShowStories && !mapShowPosts;
 
+  const panelHeight = useRef(new Animated.Value(PANEL_COLLAPSED)).current;
+  const expandedRef = useRef(false);
+  const startHeightRef = useRef(PANEL_COLLAPSED);
+
+  const panResponder = useMemo(() =>
+    PanResponder.create({
+      onStartShouldSetPanResponder: () => false,
+      onMoveShouldSetPanResponder: (_, g) => Math.abs(g.dy) > 10 && Math.abs(g.dy) > Math.abs(g.dx) * 1.5,
+      onPanResponderTerminationRequest: () => false,
+      onPanResponderGrant: () => {
+        // startHeightRef.current zaten son release'de güncellendi
+      },
+      onPanResponderMove: (_, g) => {
+        const newH = startHeightRef.current - g.dy;
+        const clamped = Math.max(PANEL_COLLAPSED, Math.min(PANEL_EXPANDED, newH));
+        panelHeight.setValue(clamped);
+      },
+      onPanResponderRelease: (_, g) => {
+        if (g.dy > 30 || g.vy > 0.3) {
+          expandedRef.current = false;
+          startHeightRef.current = PANEL_COLLAPSED;
+          Animated.spring(panelHeight, {
+            toValue: PANEL_COLLAPSED,
+            useNativeDriver: false,
+            friction: 9,
+            tension: 60,
+          }).start();
+        } else {
+          const currentH = Math.max(PANEL_COLLAPSED, Math.min(PANEL_EXPANDED, startHeightRef.current - g.dy));
+          expandedRef.current = currentH > PANEL_COLLAPSED + 20;
+          startHeightRef.current = currentH;
+        }
+      },
+    }),
+  [panelHeight]);
+
   return (
-    <View style={[styles.panel, { backgroundColor: colors.background.primary }]}>
-      {/* Hero Cover */}
-      <TouchableOpacity
-        style={styles.heroWrap}
-        onPress={() => {
-          lightImpact();
-          setShowHeroImage(true);
-        }}
-        activeOpacity={1}
-      >
+    <Animated.View
+      style={[styles.panel, { backgroundColor: colors.background.primary, height: panelHeight }]}
+    >
+      {/* Drag Handle + Hero — swipe area */}
+      <View {...panResponder.panHandlers}>
+        <View style={styles.dragHandleWrap}>
+          <View style={[styles.dragHandle, { backgroundColor: colors.text.tertiary }]} />
+        </View>
+        {/* Hero Cover */}
+        <TouchableOpacity
+          style={styles.heroWrap}
+          onPress={goToPlaceDetail}
+          activeOpacity={0.9}
+        >
         <Image
           source={heroImage}
           style={styles.heroImage}
@@ -201,147 +348,111 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
                 .join(' · ') || (place.category ?? '')}
             </Text>
           </View>
-          {onClose && (
+          <View style={styles.heroActions}>
             <TouchableOpacity
-              onPress={onClose}
+              onPress={handleSave}
               hitSlop={12}
-              style={styles.closeBtn}
+              style={styles.heroSaveBtn}
               activeOpacity={0.8}
             >
-              <View style={[styles.closeBtnBg, { backgroundColor: 'rgba(0,0,0,0.4)' }]}>
-                <IconSymbol name="xmark" size={18} color="#fff" />
+              <View style={[styles.closeBtnBg, { backgroundColor: saved ? colors.accent.primary : 'rgba(0,0,0,0.4)' }]}>
+                <IconSymbol name={saved ? 'heart.fill' : 'heart'} size={18} color="#fff" />
               </View>
             </TouchableOpacity>
-          )}
+            {onClose && (
+              <TouchableOpacity
+                onPress={onClose}
+                hitSlop={12}
+                style={styles.closeBtn}
+                activeOpacity={0.8}
+              >
+                <View style={[styles.closeBtnBg, { backgroundColor: 'rgba(0,0,0,0.4)' }]}>
+                  <IconSymbol name="xmark" size={18} color="#fff" />
+                </View>
+              </TouchableOpacity>
+            )}
+          </View>
         </View>
       </TouchableOpacity>
+      </View>
 
-      {/* Story Rings - Instagram gradient */}
-      {mapShowStories && !loading && stories.length > 0 && (
-        <View style={styles.storiesSection}>
+      {/* Mekan Hikayeleri */}
+      {!loading && (
+        <View style={styles.placeStoriesSection}>
+          <View style={[styles.sectionHeader, { borderBottomColor: colors.surface.border }]}>
+            <IconSymbol name="camera.fill" size={18} color={colors.text.secondary} />
+            <Text style={[styles.sectionHeaderLabel, { color: colors.text.secondary }]}>Hikayeler</Text>
+          </View>
           <ScrollView
             horizontal
             showsHorizontalScrollIndicator={false}
-            contentContainerStyle={styles.storiesRow}
+            contentContainerStyle={styles.placeStoriesRow}
           >
-            {stories.map((s) => (
+            {sortedStories.map((story, idx) => {
+              const seen = viewedStoryIds.has(story.id);
+              return (
               <TouchableOpacity
-                key={s.id}
-                style={styles.storyRingWrap}
+                key={story.id}
+                style={styles.placeStoryItem}
                 onPress={() => {
                   lightImpact();
-                  setShowStoryViewer(true);
+                  viewerStoriesRef.current = sortedStories.slice(idx);
+                  setStoryViewerIndex(0);
                 }}
-                activeOpacity={0.8}
+                activeOpacity={0.85}
               >
-                <LinearGradient
-                  colors={STORY_GRADIENT}
-                  start={{ x: 0, y: 0 }}
-                  end={{ x: 1, y: 1 }}
-                  style={styles.storyGradientRing}
-                >
-                  <View style={[styles.storyRingInner, { backgroundColor: colors.background.primary }]}>
-                    <Image
-                      source={{ uri: s.media_type === 'video' ? (s.thumbnail_url || s.media_url) : s.media_url }}
-                      style={StyleSheet.absoluteFill}
-                      contentFit="cover"
-                    />
-                    {s.media_type === 'video' && (
-                      <View style={styles.storyVideoIcon}>
-                        <IconSymbol name="play.fill" size={10} color="#fff" />
-                      </View>
-                    )}
+                {seen ? (
+                  <View style={[styles.placeStoryRingSeen, { borderColor: colors.surface.border }]}>
+                    <View style={styles.placeStoryInner}>
+                      <Image
+                        source={{ uri: story.media_type === 'video' ? (story.thumbnail_url || story.media_url) : story.media_url }}
+                        style={StyleSheet.absoluteFill}
+                        contentFit="cover"
+                      />
+                      {story.media_type === 'video' && (
+                        <View style={styles.storyVideoIcon}>
+                          <IconSymbol name="play.fill" size={10} color="#fff" />
+                        </View>
+                      )}
+                    </View>
                   </View>
-                </LinearGradient>
+                ) : (
+                  <LinearGradient
+                    colors={STORY_GRADIENT}
+                    start={{ x: 0, y: 0 }}
+                    end={{ x: 1, y: 1 }}
+                    style={styles.placeStoryRing}
+                  >
+                    <View style={[styles.placeStoryGap, { backgroundColor: colors.background.primary }]}>
+                      <View style={styles.placeStoryInner}>
+                        <Image
+                          source={{ uri: story.media_type === 'video' ? (story.thumbnail_url || story.media_url) : story.media_url }}
+                          style={StyleSheet.absoluteFill}
+                          contentFit="cover"
+                        />
+                        {story.media_type === 'video' && (
+                          <View style={styles.storyVideoIcon}>
+                            <IconSymbol name="play.fill" size={10} color="#fff" />
+                          </View>
+                        )}
+                      </View>
+                    </View>
+                  </LinearGradient>
+                )}
+                <Text style={[styles.placeStoryName, { color: seen ? colors.text.tertiary : colors.text.secondary }]} numberOfLines={1}>
+                  {story.author?.first_name || 'Kullanıcı'}
+                </Text>
               </TouchableOpacity>
-            ))}
+              );
+            })}
           </ScrollView>
         </View>
       )}
 
-      {/* Featured Strip - Yatay post önizlemeleri */}
-      {mapShowPosts && !loading && featuredItems.length > 0 && (
-        <ScrollView
-          horizontal
-          showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.featuredStrip}
-        >
-          {featuredItems.slice(0, 6).map((item, idx) => (
-            <TouchableOpacity
-              key={`${item.postId}-${idx}`}
-              style={[styles.featuredItem, { width: STRIP_ITEM_SIZE, height: STRIP_ITEM_SIZE }]}
-              onPress={() => {
-                lightImpact();
-                setSelectedMedia({ url: item.url, isVideo: item.isVideo });
-              }}
-              activeOpacity={0.9}
-            >
-              <Image
-                source={{ uri: item.url }}
-                style={StyleSheet.absoluteFill}
-                contentFit="cover"
-                cachePolicy="memory-disk"
-              />
-              {item.isVideo && (
-                <View style={styles.videoBadgeSmall}>
-                  <IconSymbol name="play.fill" size={12} color="#fff" />
-                </View>
-              )}
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
-      )}
-
-      {/* Tabs */}
-      <View style={[styles.tabRow, { borderBottomColor: colors.surface.border }]}>
-        <TouchableOpacity
-          style={[
-            styles.tab,
-            activeTab === 'posts' && { borderBottomColor: colors.text.primary, borderBottomWidth: 2 },
-          ]}
-          onPress={() => {
-            lightImpact();
-            setActiveTab('posts');
-          }}
-        >
-          <IconSymbol
-            name="square.grid.2x2.fill"
-            size={18}
-            color={activeTab === 'posts' ? colors.accent.primary : colors.text.tertiary}
-          />
-          <Text
-            style={[
-              styles.tabLabel,
-              { color: activeTab === 'posts' ? colors.accent.primary : colors.text.secondary },
-            ]}
-          >
-            Gönderiler
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[
-            styles.tab,
-            activeTab === 'reels' && { borderBottomColor: colors.text.primary, borderBottomWidth: 2 },
-          ]}
-          onPress={() => {
-            lightImpact();
-            setActiveTab('reels');
-          }}
-        >
-          <IconSymbol
-            name="play.circle.fill"
-            size={18}
-            color={activeTab === 'reels' ? colors.accent.primary : colors.text.tertiary}
-          />
-          <Text
-            style={[
-              styles.tabLabel,
-              { color: activeTab === 'reels' ? colors.accent.primary : colors.text.secondary },
-            ]}
-          >
-            Reels
-          </Text>
-        </TouchableOpacity>
+      {/* Gönderiler başlığı */}
+      <View style={[styles.sectionHeader, { borderBottomColor: colors.surface.border }]}>
+        <IconSymbol name="square.grid.2x2.fill" size={18} color={colors.text.secondary} />
+        <Text style={[styles.sectionHeaderLabel, { color: colors.text.secondary }]}>Gönderiler</Text>
       </View>
 
       {/* Grid */}
@@ -349,6 +460,7 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
         style={styles.gridScroll}
         contentContainerStyle={styles.gridContent}
         showsVerticalScrollIndicator={false}
+        nestedScrollEnabled
       >
         {loading ? (
           <View style={styles.loadingWrap}>
@@ -367,25 +479,8 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
             <Text style={[styles.emptyText, { color: colors.text.tertiary }]}>
               Bu mekanda henüz paylaşım yok
             </Text>
-            <View style={styles.emptyButtons}>
-              <TouchableOpacity
-                onPress={handleDirections}
-                style={[styles.emptyBtn, { backgroundColor: colors.accent.primary }]}
-                activeOpacity={0.8}
-              >
-                <IconSymbol name="map.fill" size={18} color={colors.accent.onPrimary} />
-                <Text style={[styles.emptyBtnText, { color: colors.accent.onPrimary }]}>Yol tarifi al</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                onPress={goToPlaceDetail}
-                style={[styles.emptyBtn, { backgroundColor: colors.surface.hover }]}
-                activeOpacity={0.8}
-              >
-                <Text style={[styles.emptyBtnText, { color: colors.text.primary }]}>Detayları gör</Text>
-              </TouchableOpacity>
-            </View>
           </View>
-        ) : (activeTab === 'posts' ? photoPosts : reelPosts).length > 0 ? (
+        ) : photoPosts.length > 0 ? (
           <View style={styles.grid}>
             {gridItems.slice(0, 12).map((item, idx) => (
               <TouchableOpacity
@@ -414,46 +509,22 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
         ) : (
           <View style={styles.emptyWrap}>
             <Text style={[styles.emptyText, { color: colors.text.tertiary }]}>
-              {activeTab === 'reels' ? 'Bu mekanda henüz Reels yok' : 'Henüz gönderi yok'}
+              Henüz gönderi yok
             </Text>
           </View>
         )}
       </ScrollView>
 
-      {/* Footer - Instagram tarzı aksiyonlar */}
-      <View style={[styles.footer, { borderTopColor: colors.surface.border }]}>
-        <TouchableOpacity
-          style={styles.footerAction}
-          onPress={handleSave}
-          activeOpacity={0.7}
-        >
-          <IconSymbol
-            name={saved ? 'bookmark.fill' : 'bookmark'}
-            size={22}
-            color={saved ? colors.accent.primary : colors.text.secondary}
-          />
-          <Text style={[styles.footerActionLabel, { color: colors.text.secondary }]}>Kaydet</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.footerBtnPrimary, { backgroundColor: colors.surface.hover }]}
-          onPress={handleDirections}
-          activeOpacity={0.8}
-        >
-          <IconSymbol name="map.fill" size={20} color={colors.accent.primary} />
-          <Text style={[styles.footerBtnText, { color: colors.accent.primary }]}>Yol tarifi al</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.footerDetailBtn, { flex: 1 }]}
-          onPress={goToPlaceDetail}
-          activeOpacity={0.8}
-        >
-          <Text style={[styles.detailBtnText, { color: colors.accent.primary }]}>Detayları gör</Text>
-          <IconSymbol name="chevron.right" size={18} color={colors.accent.primary} />
-        </TouchableOpacity>
-      </View>
-
-      {showStoryViewer && stories.length > 0 && (
-        <StoryViewerModal stories={stories} onClose={() => setShowStoryViewer(false)} />
+      {storyViewerIndex !== null && (
+        <StoryViewerModal
+          stories={viewerStoriesRef.current}
+          initialIndex={storyViewerIndex}
+          visible={storyVisible}
+          onClose={() => { setStoryViewerIndex(null); setStoryVisible(true); }}
+          onStoryViewed={(id) => setViewedStoryIds((prev) => new Set(prev).add(id))}
+          onPlaceNavigate={handleStoryNavigateRequest}
+          onAuthorNavigate={posts.length > 0 ? handleStoryNavigateRequest : undefined}
+        />
       )}
 
       {showHeroImage && (() => {
@@ -531,7 +602,7 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
           </Pressable>
         </Modal>
       )}
-    </View>
+    </Animated.View>
   );
 }
 
@@ -542,13 +613,25 @@ const styles = StyleSheet.create({
     right: 12,
     bottom: Platform.OS === 'ios' ? 96 : 80,
     borderRadius: 20,
-    maxHeight: PANEL_MAX_HEIGHT,
     overflow: 'hidden',
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 8 },
     shadowOpacity: 0.35,
     shadowRadius: 16,
     elevation: 12,
+  },
+  dragHandleWrap: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingTop: 14,
+    paddingBottom: 12,
+    zIndex: 30,
+  },
+  dragHandle: {
+    width: 44,
+    height: 5,
+    borderRadius: 3,
+    opacity: 0.45,
   },
   heroWrap: {
     height: HERO_HEIGHT,
@@ -583,6 +666,14 @@ const styles = StyleSheet.create({
     fontSize: 13,
     marginTop: 4,
     fontWeight: '500',
+  },
+  heroActions: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    gap: 8,
+  },
+  heroSaveBtn: {
+    padding: 4,
   },
   closeBtn: {
     padding: 4,
@@ -630,47 +721,67 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  featuredStrip: {
+  placeStoriesSection: {
+    marginTop: 8,
+    paddingBottom: 8,
+  },
+  
+  placeStoriesRow: {
+    marginTop: 15,
     paddingHorizontal: PADDING,
-    paddingBottom: 12,
-    gap: 10,
+    gap: 14,
   },
-  featuredItem: {
-    borderRadius: 12,
-    overflow: 'hidden',
-    marginRight: 8,
+  placeStoryItem: {
+    alignItems: 'center',
+    width: PLACE_STORY_SIZE,
   },
-  videoBadgeSmall: {
-    position: 'absolute',
-    top: 6,
-    right: 6,
-    width: 20,
-    height: 20,
-    borderRadius: 4,
-    backgroundColor: 'rgba(0,0,0,0.6)',
+  placeStoryRing: {
+    width: PLACE_STORY_SIZE + 3,
+    height: PLACE_STORY_SIZE + 3,
+    borderRadius: (PLACE_STORY_SIZE + 3) / 2,
+    padding: 1.5,
     alignItems: 'center',
     justifyContent: 'center',
   },
-  tabRow: {
-    flexDirection: 'row',
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    paddingHorizontal: PADDING,
+  placeStoryRingSeen: {
+    width: PLACE_STORY_SIZE + 3,
+    height: PLACE_STORY_SIZE + 3,
+    borderRadius: (PLACE_STORY_SIZE + 3) / 2,
+    borderWidth: 1.5,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
-  tab: {
+  placeStoryGap: {
+    padding: 3,
+    borderRadius: PLACE_STORY_SIZE / 2,
+  },
+  placeStoryInner: {
+    width: PLACE_STORY_SIZE - 6,
+    height: PLACE_STORY_SIZE - 6,
+    borderRadius: (PLACE_STORY_SIZE - 6) / 2,
+    overflow: 'hidden',
+  },
+  placeStoryName: {
+    fontSize: 11,
+    fontWeight: '500',
+    marginTop: 6,
+    textAlign: 'center',
+    maxWidth: PLACE_STORY_SIZE + 20,
+  },
+  sectionHeader: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 8,
-    paddingVertical: 14,
-    marginRight: 24,
-    borderBottomWidth: 2,
-    borderBottomColor: 'transparent',
+    paddingHorizontal: PADDING,
+    paddingVertical: 12,
+    borderBottomWidth: StyleSheet.hairlineWidth,
   },
-  tabLabel: {
+  sectionHeaderLabel: {
     fontSize: 14,
     fontWeight: '600',
   },
   gridScroll: {
-    maxHeight: 200,
+    flex: 1,
   },
   gridContent: {
     padding: PADDING,
