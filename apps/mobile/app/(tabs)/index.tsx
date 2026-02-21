@@ -14,7 +14,6 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  FlatList,
   Platform,
   RefreshControl,
   ViewToken,
@@ -22,6 +21,7 @@ import {
   Easing,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { FlatList } from 'react-native-gesture-handler';
 import * as Location from 'expo-location';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import { useTheme } from '@/hooks/useTheme';

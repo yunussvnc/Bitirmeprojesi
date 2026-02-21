@@ -27,7 +27,7 @@ import {
 import { lightImpact } from "@/src/utils/haptics";
 import { spacing } from "@/constants/design";
 
-const STORY_RING_SIZE = 56;
+const STORY_RING_SIZE = 82;
 const STORY_GRADIENT: [string, string, ...string[]] = ["#4ade80", "#22c55e", "#16a34a", "#15803d"];
 
 type PlaceStoryGroup = {
@@ -51,19 +51,106 @@ export function FeedStoriesRow({ filter }: FeedStoriesRowProps) {
 
   const loadStories = useCallback(async () => {
     setLoading(true);
-    try {
-      const res = await getFeedStories(1, 50, filter);
-      setStories(res.items);
-    } catch {
-      setStories([]);
-    } finally {
-      setLoading(false);
-    }
+    // Geçici olarak mock data kullan
+    const now = new Date();
+    const expiresAt = new Date(now.getTime() + 24 * 60 * 60 * 1000).toISOString();
+    setStories([
+      {
+        id: 1,
+        user_id: 1,
+        place_id: 101,
+        place: { id: 101, name: "Cafe Luna", category: "Cafe" },
+        media_url: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=400",
+        media_type: "image",
+        created_at: now.toISOString(),
+        expires_at: expiresAt,
+      },
+      {
+        id: 2,
+        user_id: 2,
+        place_id: 102,
+        place: { id: 102, name: "Sunset Beach", category: "Beach" },
+        media_url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400",
+        media_type: "image",
+        created_at: now.toISOString(),
+        expires_at: expiresAt,
+      },
+      {
+        id: 3,
+        user_id: 3,
+        place_id: 103,
+        place: { id: 103, name: "Mountain View", category: "Nature" },
+        media_url: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400",
+        media_type: "image",
+        created_at: now.toISOString(),
+        expires_at: expiresAt,
+      },
+      {
+        id: 4,
+        user_id: 4,
+        place_id: 104,
+        place: { id: 104, name: "City Lights", category: "Restaurant" },
+        media_url: "https://images.unsplash.com/photo-1514565131-fce0801e5785?w=400",
+        media_type: "image",
+        created_at: now.toISOString(),
+        expires_at: expiresAt,
+      },
+      {
+        id: 5,
+        user_id: 5,
+        place_id: 105,
+        place: { id: 105, name: "Art Gallery", category: "Culture" },
+        media_url: "https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=400",
+        media_type: "image",
+        created_at: now.toISOString(),
+        expires_at: expiresAt,
+      },
+      {
+        id: 6,
+        user_id: 6,
+        place_id: 106,
+        place: { id: 106, name: "Park Central", category: "Park" },
+        media_url: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400",
+        media_type: "image",
+        created_at: now.toISOString(),
+        expires_at: expiresAt,
+      },
+      {
+        id: 7,
+        user_id: 7,
+        place_id: 107,
+        place: { id: 107, name: "Rooftop Bar", category: "Bar" },
+        media_url: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400",
+        media_type: "image",
+        created_at: now.toISOString(),
+        expires_at: expiresAt,
+      },
+    ]);
+    setLoading(false);
   }, [filter]);
 
   useEffect(() => {
     loadStories();
   }, [loadStories]);
+
+  // Mekan bazlı grupla – her mekan için en son hikayenin önizlemesi
+  const placeGroups = React.useMemo(() => {
+    const seen = new Set<number>();
+    const groups: PlaceStoryGroup[] = [];
+    for (const s of stories) {
+      const pid = s.place_id ?? s.place?.id;
+      if (pid && !seen.has(pid)) {
+        seen.add(pid);
+        groups.push({
+          placeId: pid,
+          placeName: s.place?.name,
+          thumbnailUrl: s.media_type === "video" ? (s.thumbnail_url || s.media_url) : s.media_url,
+          isVideo: s.media_type === "video",
+        });
+      }
+    }
+    return groups;
+  }, [stories]);
 
   /** Tıklanan mekan + sonraki 4 mekanın hikayelerini yükle, sırayla birleştir */
   const handlePlaceTap = useCallback(async (placeId: number, tapIndex: number) => {
@@ -88,30 +175,6 @@ export function FeedStoriesRow({ filter }: FeedStoriesRowProps) {
     }
   }, [placeGroups]);
 
-  const handleCreateStory = useCallback(() => {
-    lightImpact();
-    router.push("/create-story" as any);
-  }, []);
-
-  // Mekan bazlı grupla – her mekan için en son hikayenin önizlemesi
-  const placeGroups = React.useMemo(() => {
-    const seen = new Set<number>();
-    const groups: PlaceStoryGroup[] = [];
-    for (const s of stories) {
-      const pid = s.place_id ?? s.place?.id;
-      if (pid && !seen.has(pid)) {
-        seen.add(pid);
-        groups.push({
-          placeId: pid,
-          placeName: s.place?.name,
-          thumbnailUrl: s.media_type === "video" ? (s.thumbnail_url || s.media_url) : s.media_url,
-          isVideo: s.media_type === "video",
-        });
-      }
-    }
-    return groups;
-  }, [stories]);
-
   if (loading && stories.length === 0) {
     return (
       <View style={[styles.wrap, styles.loadingWrap]}>
@@ -129,28 +192,6 @@ export function FeedStoriesRow({ filter }: FeedStoriesRowProps) {
           showsHorizontalScrollIndicator={false}
           contentContainerStyle={styles.row}
         >
-          {/* Hikaye Ekle */}
-          <TouchableOpacity
-            style={styles.ringWrap}
-            onPress={handleCreateStory}
-            activeOpacity={0.8}
-          >
-            <View
-              style={[
-                styles.addRing,
-                {
-                  borderColor: colors.surface.border,
-                  backgroundColor: colors.surface.elevated,
-                },
-              ]}
-            >
-              <IconSymbol name="plus" size={24} color={colors.accent.primary} />
-            </View>
-            <Text style={[styles.addLabel, { color: colors.text.secondary }]} numberOfLines={1}>
-              Hikaye Ekle
-            </Text>
-          </TouchableOpacity>
-
           {/* Mekan hikayeleri */}
           {placeGroups.map((g, idx) => (
             <TouchableOpacity
@@ -165,17 +206,19 @@ export function FeedStoriesRow({ filter }: FeedStoriesRowProps) {
                 end={{ x: 1, y: 1 }}
                 style={styles.gradientRing}
               >
-                <View style={[styles.ringInner, { backgroundColor: colors.background.primary }]}>
-                  <Image
-                    source={{ uri: g.thumbnailUrl }}
-                    style={StyleSheet.absoluteFill}
-                    contentFit="cover"
-                  />
-                  {g.isVideo && (
-                    <View style={styles.videoIcon}>
-                      <IconSymbol name="play.fill" size={10} color="#fff" />
-                    </View>
-                  )}
+                <View style={[styles.ringGap, { backgroundColor: colors.background.primary }]}>
+                  <View style={styles.ringInner}>
+                    <Image
+                      source={{ uri: g.thumbnailUrl }}
+                      style={StyleSheet.absoluteFill}
+                      contentFit="cover"
+                    />
+                    {g.isVideo && (
+                      <View style={styles.videoIcon}>
+                        <IconSymbol name="play.fill" size={10} color="#fff" />
+                      </View>
+                    )}
+                  </View>
                 </View>
               </LinearGradient>
               <Text style={[styles.placeLabel, { color: colors.text.secondary }]} numberOfLines={1}>
@@ -206,8 +249,7 @@ export function FeedStoriesRow({ filter }: FeedStoriesRowProps) {
 
 const styles = StyleSheet.create({
   wrap: {
-    paddingTop: spacing.lg,
-    paddingBottom: spacing.xl,
+    paddingVertical: spacing.md,
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
   loadingWrap: {
@@ -220,41 +262,30 @@ const styles = StyleSheet.create({
     fontSize: 14,
   },
   row: {
-    paddingHorizontal: spacing.lg,
-    gap: 16,
+    gap: 12,
     alignItems: "center",
+    paddingHorizontal: spacing.sm,
   },
   ringWrap: {
     alignItems: "center",
     marginRight: 4,
   },
-  addRing: {
-    width: STORY_RING_SIZE + 4,
-    height: STORY_RING_SIZE + 4,
-    borderRadius: (STORY_RING_SIZE + 4) / 2,
-    borderWidth: 2,
-    borderStyle: "dashed",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  addLabel: {
-    marginTop: 6,
-    fontSize: 11,
-    maxWidth: STORY_RING_SIZE + 20,
-    textAlign: "center",
-  },
   gradientRing: {
-    width: STORY_RING_SIZE + 4,
-    height: STORY_RING_SIZE + 4,
-    borderRadius: (STORY_RING_SIZE + 4) / 2,
-    padding: 2,
+    width: STORY_RING_SIZE + 3,
+    height: STORY_RING_SIZE + 3,
+    borderRadius: (STORY_RING_SIZE + 3) / 2,
+    padding: 1.5,
     alignItems: "center",
     justifyContent: "center",
+  },
+  ringGap: {
+    padding: 3,
+    borderRadius: STORY_RING_SIZE / 2,
   },
   ringInner: {
-    width: STORY_RING_SIZE - 4,
-    height: STORY_RING_SIZE - 4,
-    borderRadius: (STORY_RING_SIZE - 4) / 2,
+    width: STORY_RING_SIZE - 6,
+    height: STORY_RING_SIZE - 6,
+    borderRadius: (STORY_RING_SIZE - 6) / 2,
     overflow: "hidden",
   },
   videoIcon: {

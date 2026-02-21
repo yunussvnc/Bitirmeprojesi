@@ -11,8 +11,14 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
+  useWindowDimensions,
 } from "react-native";
-import Animated, { useSharedValue, useAnimatedStyle, withSpring } from "react-native-reanimated";
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withSpring,
+} from "react-native-reanimated";
+import { SnapbackZoom } from "react-native-zoom-toolkit";
 import { Image } from "expo-image";
 import { useTheme } from "@/hooks/useTheme";
 import { Avatar } from "@/components/ui";
@@ -29,6 +35,7 @@ export interface FeedCardProps {
   onPlacePress?: () => void;
   onLike?: () => void;
   onComment?: () => void;
+  onZoomChange?: (zooming: boolean) => void;
 }
 
 export function FeedCard({
@@ -38,10 +45,16 @@ export function FeedCard({
   onPlacePress,
   onLike,
   onComment,
+  onZoomChange,
 }: FeedCardProps) {
   const { colors, isDark } = useTheme();
+  const { width: screenWidth } = useWindowDimensions();
   const [expanded, setExpanded] = useState(false);
   const likeScale = useSharedValue(1);
+  const zoomScale = useSharedValue(1);
+
+  const imageWidth = screenWidth;
+  const imageHeight = imageWidth * (3 / 4);
 
   const handleLike = useCallback(() => {
     mediumImpact();
@@ -55,18 +68,26 @@ export function FeedCard({
     transform: [{ scale: likeScale.value }],
   }));
 
+  const wrapperAnimStyle = useAnimatedStyle(() => ({
+    zIndex: zoomScale.value > 1.01 ? 999 : 0,
+    elevation: zoomScale.value > 1.01 ? 999 : 8,
+  }));
+
+  const notifyZoom = useCallback((val: boolean) => {
+    onZoomChange?.(val);
+  }, [onZoomChange]);
+
   const firstMedia = post.media[0];
   const displayUrl = firstMedia?.media_url;
   const isVideo = firstMedia?.media_type === "video";
   const username = post.author?.username || post.author?.first_name || `user_${post.user_id}`;
 
-  const depthEdgeColor = isDark ? "rgba(0,0,0,0.65)" : "rgba(0,0,0,0.10)";
   const depthHighlightColor = isDark ? "rgba(255,255,255,0.06)" : "rgba(255,255,255,0.8)";
 
   return (
-    <View style={styles.wrapper}>
+    <Animated.View style={[styles.wrapper, wrapperAnimStyle]}>
       <View style={[styles.card, { backgroundColor: colors.background.secondary, borderColor: isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.06)" }]}>
-        {/* Yazar satırı — fotoğrafın üstünde */}
+        {/* Yazar satırı */}
         <TouchableOpacity
           style={[styles.authorRow, { backgroundColor: colors.background.secondary }]}
           onPress={onAuthorPress}
@@ -82,7 +103,7 @@ export function FeedCard({
             {post.place ? (
               <TouchableOpacity onPress={onPlacePress} activeOpacity={0.7}>
                 <Text style={[styles.placeLine, { color: colors.text.tertiary }]} numberOfLines={1}>
-                {post.place.name}
+                  {post.place.name}
                 </Text>
               </TouchableOpacity>
             ) : (
@@ -92,35 +113,39 @@ export function FeedCard({
           <Text style={[styles.time, { color: colors.text.tertiary }]}>{timeAgo(post.created_at)}</Text>
         </TouchableOpacity>
 
-        {/* Görsel */}
-        <TouchableOpacity
-          style={styles.imageContainer}
-          onPress={onPress}
-          onLongPress={handleLike}
-          activeOpacity={0.96}
-        >
-          {displayUrl ? (
-            <Image
-              source={{ uri: displayUrl }}
-              style={StyleSheet.absoluteFill}
-              contentFit="cover"
-              cachePolicy="memory-disk"
-            />
-          ) : (
-            <View style={[StyleSheet.absoluteFill, styles.imagePlaceholder, { backgroundColor: colors.surface.elevated }]}>
-              <IconSymbol name="photo" size={40} color={colors.text.tertiary} />
-            </View>
-          )}
+        {/* Görsel — pinch zoom via SnapbackZoom */}
+        <View style={styles.imageContainer}>
+          <SnapbackZoom
+            timingConfig={{ duration: 200 }}
+            onPinchStart={() => notifyZoom(true)}
+            onGestureEnd={() => notifyZoom(false)}
+            onUpdate={(e) => {
+              "worklet";
+              zoomScale.value = e.scale;
+            }}
+          >
+            {displayUrl ? (
+              <Image
+                source={{ uri: displayUrl }}
+                style={{ width: imageWidth, height: imageHeight }}
+                contentFit="cover"
+                cachePolicy="memory-disk"
+              />
+            ) : (
+              <View style={[{ width: imageWidth, height: imageHeight }, styles.imagePlaceholder, { backgroundColor: colors.surface.elevated }]}>
+                <IconSymbol name="photo" size={40} color={colors.text.tertiary} />
+              </View>
+            )}
+          </SnapbackZoom>
           {isVideo && (
             <View style={styles.videoBadge}>
               <IconSymbol name="play.circle.fill" size={30} color="rgba(255,255,255,0.9)" />
             </View>
           )}
-        </TouchableOpacity>
+        </View>
 
         {/* İçerik alanı */}
         <View style={[styles.content, { backgroundColor: colors.background.secondary }]}>
-          {/* Aksiyon satırı */}
           <View style={styles.actions}>
             <TouchableOpacity style={styles.actionBtn} onPress={handleLike} activeOpacity={0.7}>
               <Animated.View style={[styles.actionInner, likeAnimatedStyle]}>
@@ -146,8 +171,6 @@ export function FeedCard({
             </TouchableOpacity>
           </View>
 
-
-          {/* Caption */}
           {post.caption ? (
             <TouchableOpacity
               onPress={() => { lightImpact(); setExpanded((e) => !e); }}
@@ -166,17 +189,15 @@ export function FeedCard({
             </TouchableOpacity>
           ) : null}
         </View>
+
       </View>
-    </View>
+    </Animated.View>
   );
 }
 
 const styles = StyleSheet.create({
   wrapper: {
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 0.22,
-    shadowRadius: 12,
     elevation: 8,
   },
   depthLayer: {
@@ -190,7 +211,7 @@ const styles = StyleSheet.create({
   },
   card: {
     borderRadius: radius.lg,
-    overflow: "hidden",
+    overflow: "visible",
     borderWidth: StyleSheet.hairlineWidth,
   },
   topHighlight: {
@@ -205,7 +226,8 @@ const styles = StyleSheet.create({
   },
   imageContainer: {
     width: "100%",
-    aspectRatio: 4 / 3,
+    overflow: "visible",
+    zIndex: 2,
   },
   imagePlaceholder: {
     alignItems: "center",
@@ -218,6 +240,9 @@ const styles = StyleSheet.create({
     paddingTop: spacing.md,
     paddingBottom: spacing.md,
     gap: spacing.md,
+    borderTopLeftRadius: radius.lg,
+    borderTopRightRadius: radius.lg,
+    overflow: "hidden",
   },
   authorText: { flex: 1 },
   username: {
@@ -225,6 +250,10 @@ const styles = StyleSheet.create({
     fontWeight: "700",
   },
   time: {
+    fontSize: 12,
+    marginTop: 3,
+  },
+  placeLine: {
     fontSize: 12,
     marginTop: 3,
   },
@@ -237,6 +266,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.lg,
     paddingTop: spacing.md,
     paddingBottom: spacing.lg,
+    borderBottomLeftRadius: radius.lg,
+    borderBottomRightRadius: radius.lg,
+    overflow: "hidden",
   },
   actions: {
     flexDirection: "row",
@@ -258,10 +290,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: "600",
   },
-  placeLine: {
-    fontSize: 12,
-    marginTop: 3,
-  },
   captionWrap: {
     marginTop: 0,
   },
@@ -269,15 +297,8 @@ const styles = StyleSheet.create({
     fontSize: 14,
     lineHeight: 22,
   },
-  captionUser: {
-    fontWeight: "700",
-  },
   more: {
     fontSize: 13,
     marginTop: 4,
-  },
-  bottomEdge: {
-    height: 3,
-    marginTop: -1,
   },
 });

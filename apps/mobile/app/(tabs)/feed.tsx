@@ -9,14 +9,14 @@ import {
   View,
   Text,
   StyleSheet,
-  FlatList,
   RefreshControl,
   TouchableOpacity,
   Animated,
   Easing,
 } from "react-native";
+import { FlatList } from "react-native-gesture-handler";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { router, useFocusEffect } from "expo-router";
+import { router, useFocusEffect, useNavigation } from "expo-router";
 import { useTheme } from "@/hooks/useTheme";
 import { Screen } from "@/components/layout";
 import { FeedCard } from "@/components/feed/FeedCard";
@@ -45,6 +45,7 @@ export default function FeedScreen() {
   const [unreadCount, setUnreadCount] = useState(0);
   const [createSheetOpen, setCreateSheetOpen] = useState(false);
   const [filterDropdownOpen, setFilterDropdownOpen] = useState(false);
+  const [isCardZooming, setIsCardZooming] = useState(false);
   const [headerHeight, setHeaderHeight] = useState(0);
   const [storyHeight, setStoryHeight] = useState(0);
   const [chromeHidden, setChromeHidden] = useState(false);
@@ -59,7 +60,9 @@ export default function FeedScreen() {
   const chromeHiddenRef = useRef(false);
   const storyHiddenRef = useRef(false);
   const miniBarVisibleRef = useRef(false);
+  const flatListRef = useRef<FlatList>(null);
   const { hide: hideTabBar, show: showTabBar } = useTabBarVisibility();
+  const navigation = useNavigation();
   const insets = useSafeAreaInsets();
   const pageSize = 15;
 
@@ -97,6 +100,14 @@ export default function FeedScreen() {
 
   useEffect(() => {
     loadFeed(true);
+    // Scroll'u başa döndür ve animasyonları sıfırla
+    flatListRef.current?.scrollToOffset({ offset: 0, animated: false });
+    lastScrollY.current = 0;
+    lastToggleY.current = 0;
+    lastDirection.current = null;
+    animateHeader(false);
+    animateStory(false);
+    animateMiniBar(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps -- load on filter change only
   }, [filter]);
 
@@ -173,6 +184,7 @@ export default function FeedScreen() {
         onPlacePress={() => item.place_id && router.push(`/place/${item.place_id}` as any)}
         onLike={() => handleLike(item)}
         onComment={() => setCommentPostId(item.id)}
+        onZoomChange={setIsCardZooming}
       />
     ),
     [handleLike]
@@ -246,6 +258,21 @@ export default function FeedScreen() {
     },
     [miniBarAnim]
   );
+
+  useEffect(() => {
+    const unsubscribe = (navigation as any).addListener("tabPress", () => {
+      if (navigation.isFocused()) {
+        flatListRef.current?.scrollToOffset({ offset: 0, animated: true });
+        lastScrollY.current = 0;
+        lastToggleY.current = 0;
+        lastDirection.current = null;
+        animateHeader(false);
+        animateStory(false);
+        animateMiniBar(false);
+      }
+    });
+    return unsubscribe;
+  }, [navigation, animateHeader, animateStory, animateMiniBar]);
 
   const handleScroll = useCallback(
     (rawY: number) => {
@@ -439,8 +466,11 @@ export default function FeedScreen() {
   );
 
   return (
-    <Screen scrollable={false} withTabBar>
-      <FlatList
+    <Screen scrollable={false} withTabBar contentContainerStyle={{ paddingHorizontal: 0 }}>
+      <View style={styles.container}>
+        <FlatList
+        ref={flatListRef}
+        style={styles.list}
         data={posts}
         keyExtractor={(item) => String(item.id)}
         renderItem={renderItem}
@@ -451,6 +481,7 @@ export default function FeedScreen() {
         maxToRenderPerBatch={6}
         windowSize={5}
         removeClippedSubviews={true}
+        scrollEnabled={!isCardZooming}
         refreshControl={
           <RefreshControl
             refreshing={refreshing}
@@ -470,7 +501,7 @@ export default function FeedScreen() {
           {
             backgroundColor: colors.background.primary,
             borderBottomColor: colors.surface.border,
-            top: insets.top,
+            top: 0,
             opacity: miniBarOpacity,
             transform: [{ translateY: miniBarTranslateY }],
           },
@@ -521,11 +552,20 @@ export default function FeedScreen() {
         onClose={() => setCreateSheetOpen(false)}
         onSelect={handleCreateSelect}
       />
+      </View>
     </Screen>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    width: "100%",
+  },
+  list: {
+    flex: 1,
+    width: "100%",
+  },
   header: {
     flexDirection: "row",
     alignItems: "center",
@@ -533,6 +573,7 @@ const styles = StyleSheet.create({
     marginBottom: spacing.base,
     overflow: "visible",
     position: "relative",
+    paddingHorizontal: spacing.md,
   },
   title: { fontSize: 26, fontWeight: "700" },
   headerRight: { flexDirection: "row", alignItems: "center", gap: 10 },
@@ -556,7 +597,6 @@ const styles = StyleSheet.create({
     borderRadius: 9,
     alignItems: "center",
     justifyContent: "center",
-    paddingHorizontal: 4,
   },
   badgeText: {
     fontSize: 10,
@@ -573,10 +613,12 @@ const styles = StyleSheet.create({
   dropdownTrigger: {
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "center",
     gap: 6,
     paddingHorizontal: 16,
     paddingVertical: 8,
     borderRadius: 20,
+    minWidth: 140,
   },
   dropdownLabel: {
     fontSize: 16,
@@ -618,7 +660,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     borderRadius: 22,
   },
-  listContent: { paddingBottom: spacing.xl * 2, gap: spacing.xl },
+  listContent: { 
+    gap: spacing.xl 
+  },
   listEmpty: { flexGrow: 1 },
   center: { flex: 1, justifyContent: "center", minHeight: 300 },
   miniBar: {

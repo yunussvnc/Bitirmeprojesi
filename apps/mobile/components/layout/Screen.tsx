@@ -171,7 +171,8 @@ export const Screen = forwardRef<ScreenRef, ScreenProps>(({
             paddingHorizontal: horizontalPadding,
             paddingTop: topPadding,
             paddingBottom: bottomPadding,
-          }, 
+          },
+          contentContainerStyle,
         ]}
       >
         {children}
