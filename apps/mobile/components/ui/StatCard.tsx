@@ -58,7 +58,7 @@ export function StatCard({
   onPress,
   style,
 }: StatCardProps) {
-  const { colors, spacing } = useTheme();
+  const { colors } = useTheme();
   const valueStyle = createTextStyle('heading', colors.text.primary);
   const labelStyle = createTextStyle('bodySmall', colors.text.secondary);
 
@@ -66,7 +66,7 @@ export function StatCard({
     <View style={[styles.container, style]}>
       {gradientColors ? (
         <LinearGradient
-          colors={gradientColors}
+          colors={gradientColors as [string, string, ...string[]]}
           start={{ x: 0, y: 0 }}
           end={{ x: 1, y: 1 }}
           style={styles.gradient}

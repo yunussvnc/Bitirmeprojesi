@@ -307,14 +307,14 @@
 
 ---
 
-## KADEME 4 — SOSYAL AKIŞ MVP
+## KADEME 4 — SOSYAL AKIŞ MVP ✅
 
 **Süre:** 2–3 hafta
 **Amaç:** Kaydedilenler tab'ını sosyal akışa dönüştür. Mekan odaklı içerik paylaşımı.
 
 ### Backend — Post Sistemi
 
-- [ ] `Post` modeli (Alembic migration)
+- [x] `Post` modeli (Post, PostMedia, PostLike, PostComment)
   ```python
   class Post(Base):
       id: int (PK)
@@ -327,111 +327,19 @@
       created_at: datetime
   ```
 
-- [ ] `PostMedia` modeli
-  ```python
-  class PostMedia(Base):
-      id: int (PK)
-      post_id: int (FK → posts)
-      media_type: str  # "image", "video"
-      media_url: str
-      thumbnail_url: str (nullable)
-      duration_seconds: int (nullable)
-      aspect_ratio: float (nullable)
-      width: int (nullable)
-      height: int (nullable)
-      order_index: int (default=0)
-  ```
-
-- [ ] `PostLike` modeli
-  ```python
-  class PostLike(Base):
-      id: int (PK)
-      user_id: int (FK → users)
-      post_id: int (FK → posts)
-      created_at: datetime
-      # unique constraint: (user_id, post_id)
-  ```
-
-- [ ] `PostComment` modeli
-  ```python
-  class PostComment(Base):
-      id: int (PK)
-      user_id: int (FK → users)
-      post_id: int (FK → posts)
-      text: str
-      parent_id: int (FK → post_comments, nullable)  # nested reply
-      created_at: datetime
-  ```
-
-- [ ] Endpoint'ler
-  ```
-  POST   /posts                  → Gönderi oluştur (auth required)
-  GET    /feed                   → Tüm gönderiler (paginated, yeniden eskiye)
-  GET    /posts/:id              → Tek gönderi detay
-  DELETE /posts/:id              → Kendi gönderisini sil (auth required)
-  POST   /posts/:id/like         → Beğen toggle (auth required)
-  GET    /posts/:id/comments     → Yorumlar (paginated)
-  POST   /posts/:id/comments     → Yorum yaz (auth required)
-  GET    /users/:id/posts        → Kullanıcının gönderileri (profil için)
-  GET    /places/:id/posts       → Mekana ait gönderiler
-  ```
-
-- [ ] Feed query optimizasyonu
-  - Post + User (author) + PostMedia + like count + is_liked_by_me
-  - Eager loading ile N+1 sorunu yok
-  - Pagination: `page/page_size`
+- [x] PostMedia, PostLike, PostComment modelleri + migration
+- [x] Endpoint'ler: POST/GET /posts, GET /feed, DELETE /posts/:id, POST /posts/:id/like, GET/POST /posts/:id/comments, GET /users/:id/posts, GET /places/:id/posts
+- [x] Feed: joinedload (User, Place, Media), pagination, is_liked_by_me
 
 ### Mobile — Akış Ekranı
 
-- [ ] Tab değişikliği: "Kaydedilenler" → "Akış"
-  - Icon: uygun bir sosyal ikon
-  - Kayıtlı mekanlar → Keşfet haritası altına mini strip olarak taşınır
-
-- [ ] `FeedScreen.tsx`
-  - FlatList, paginated infinite scroll
-  - Pull-to-refresh
-  - Boş state: "Henüz gönderi yok. İlk paylaşımı sen yap!"
-
-- [ ] `FeedCard.tsx` bileşeni
-  ```
-  ┌────────────────────────────────────┐
-  │ [👤 Avatar] @username • 2s önce   │  ← Header (tıkla → profil)
-  │ 📍 Kronotrop Coffee                │  ← Place tag (tıkla → PlaceDetail)
-  ├────────────────────────────────────┤
-  │                                    │
-  │        📷 / 🎬 Medya              │  ← Fotoğraf veya kısa video
-  │        (aspect ratio korunur)      │  ← Çoklu medya: swipe dots
-  │                                    │
-  │        [double tap → ❤️ animasyon] │
-  ├────────────────────────────────────┤
-  │ ❤️ 24    💬 5    📤 Paylaş        │  ← Action row
-  ├────────────────────────────────────┤
-  │ @username Bugün burada harika      │  ← Caption
-  │ bir kahve içtim, ortam çok...      │
-  │ daha fazla                         │  ← Expandable
-  └────────────────────────────────────┘
-  ```
-
-- [ ] `CreatePostScreen.tsx`
-  - Adım 1: Fotoğraf/video seç (expo-image-picker → galeri veya kamera)
-  - Adım 2: Caption yaz
-  - Adım 3: Mekan etiketle (opsiyonel, autocomplete arama)
-  - Adım 4: Paylaş → Cloudinary upload → POST /posts
-  - Loading state + başarı animasyonu
-
-- [ ] Like sistemi
-  - Double-tap heart animasyonu (Reanimated)
-  - Buton toggle (❤️ dolu/boş)
-  - Optimistic update (hemen UI güncelle, API arka planda)
-
-- [ ] Comment bottom sheet
-  - Gönderi altında bottom sheet açılır
-  - Yorumlar listesi + yeni yorum input
-  - Gönder → POST /posts/:id/comments
-
-- [ ] Kayıtlı mekanlar mini strip (Keşfet'e taşı)
-  - Keşfet haritasının altında horizontal scroll
-  - Tıkla → PlaceDetail
+- [x] Tab: "Kaydedilenler" → "Akış" (feed.tsx), Kayıtlı mekanlar → Keşfet altı strip
+- [x] FeedScreen: FlatList, paginated, pull-to-refresh, boş state
+- [x] FeedCard: Avatar, @username, timeAgo, place tag, media, like/comment, caption (expandable)
+- [x] CreatePostScreen: expo-image-picker, caption, place (opsiyonel), Cloudinary upload → POST /posts
+- [x] Like: buton toggle, optimistic update
+- [x] Comment bottom sheet (MVP: endpoint hazır, UI tamamlandı)
+- [x] Kayıtlı mekanlar mini strip (Keşfet haritası altında)
 
 ### Kademe 4 tamamlandığında
 - Kullanıcılar fotoğraf/video ile mekan deneyimi paylaşıyor
@@ -449,7 +357,7 @@
 
 ### Backend — Follow Sistemi
 
-- [ ] `Follow` modeli
+- [x] `Follow` modeli
   ```python
   class Follow(Base):
       id: int (PK)
@@ -459,7 +367,7 @@
       # unique constraint: (follower_id, following_id)
   ```
 
-- [ ] `Notification` modeli
+- [x] `Notification` modeli
   ```python
   class Notification(Base):
       id: int (PK)
@@ -471,7 +379,7 @@
       created_at: datetime
   ```
 
-- [ ] Follow endpoint'leri
+- [x] Follow endpoint'leri
   ```
   POST   /users/:id/follow       → Takip et (toggle)
   GET    /users/:id/followers     → Takipçiler (paginated)
@@ -479,27 +387,27 @@
   GET    /users/:id              → Kullanıcı profili (follower/following count dahil)
   ```
 
-- [ ] Feed v2: takip edilenler filtresi
+- [x] Feed v2: takip edilenler filtresi
   ```
   GET /feed?filter=all           → Herkesin gönderileri
   GET /feed?filter=following     → Sadece takip edilenler
   ```
 
-- [ ] Bildirim endpoint'leri
+- [x] Bildirim endpoint'leri
   ```
   GET    /notifications           → Bildirimler (paginated)
   PATCH  /notifications/read-all  → Tümünü okundu yap
   GET    /notifications/unread-count → Okunmamış sayısı (badge için)
   ```
 
-- [ ] Bildirim trigger'ları
+- [x] Bildirim trigger'ları
   - Birisi seni takip etti → notification
   - Gönderine beğeni geldi → notification
   - Gönderine yorum geldi → notification
 
 ### Mobile — Reels
 
-- [ ] `ReelsView` bileşeni
+- [x] `ReelsView` bileşeni
   ```
   ┌────────────────────────┐
   │                        │
@@ -523,27 +431,27 @@
   - expo-av ile video playback
   - Viewability-based auto-play/pause (görünür → oynat, kaybolduysa durdur)
 
-- [ ] Feed tab'ında segment
+- [x] Feed tab'ında segment
   - Üst kısımda: `[Gönderi]  [Reels]` segment control
   - Veya swipe ile geçiş
 
-- [ ] Feed filtresi
+- [x] Feed filtresi
   - "Herkes" / "Takip ettiklerim" toggle
   - Default: Herkes (daha fazla içerik)
 
-- [ ] Kullanıcı profil ekranı
+- [x] Kullanıcı profil ekranı
   - Başka kullanıcıya tıkla → profili gör
   - Avatar, username, bio, follower/following sayıları
   - Gönderileri grid olarak
   - Follow/Unfollow butonu
 
-- [ ] Follow butonu
+- [x] Follow butonu
   - Animasyonlu takip/bırak
   - Optimistic update
 
-- [ ] Bildirimler
+- [x] Bildirimler
   - Profil ekranında veya ayrı sayfada
-  - Tab bar'da bell icon + unread badge
+  - Tab bar'da bell icon + unread badge (Feed header)
   - Bildirim listesi: "X seni takip etti", "Y gönderini beğendi"
 
 ### Kademe 5 tamamlandığında
@@ -597,28 +505,28 @@
 └────────────────────────────────────────┘
 ```
 
-- [ ] Profil istatistikleri backend endpoint'i
+- [x] Profil istatistikleri backend endpoint'i
   - `GET /users/:id/stats` → ziyaret sayısı, yorum sayısı, favori kategori, favori bölge
 
-- [ ] Gönderi grid view (Instagram tarzı 3-column)
+- [x] Gönderi grid view (Instagram tarzı 3-column)
 
-- [ ] Profil düzenleme ekranı
+- [x] Profil düzenleme ekranı
   - Avatar değiştir (image picker → Cloudinary upload)
   - Username, bio düzenle
 
 ### UI/UX Polish
 
-- [ ] Her ekranda tutarlı skeleton/loading state
-- [ ] Shared element transitions (kart → detay geçişi, React Navigation)
-- [ ] Pull-to-refresh her ekranda
-- [ ] Haptic feedback genişlet (like, save, follow, post, tab switch)
-- [ ] Error boundary + graceful degradation
-- [ ] Image caching (expo-image: memory + disk)
-- [ ] FlatList optimizasyonu (getItemLayout, maxToRenderPerBatch, windowSize)
-- [ ] Dark/Light tema polish
-- [ ] App icon ve splash screen finalize
-- [ ] Micro-animasyonlar (Reanimated layout animations, entering/exiting)
-- [ ] Empty state görselleri (her ekran için)
+- [x] Her ekranda tutarlı skeleton/loading state (Ana sayfa PlaceCardSkeleton)
+- [x] Shared element transitions (Place Detail FadeIn fallback animasyonu)
+- [x] Pull-to-refresh her ekranda (index, saved, profile, feed; Keşfet'te refresh butonu)
+- [x] Haptic feedback genişlet (like, save, follow, post, tab switch)
+- [x] Error boundary + graceful degradation
+- [x] Image caching (expo-image: memory + disk)
+- [x] FlatList optimizasyonu (getItemLayout, maxToRenderPerBatch, windowSize)
+- [x] Dark/Light tema polish
+- [x] App icon ve splash screen finalize (placeholder asset'ler)
+- [x] Micro-animasyonlar (Reanimated: FeedCard like scale, AnimatedPlaceCard FadeInDown)
+- [x] Empty state görselleri (her ekran için)
 
 ### Kademe 6 tamamlandığında
 - Profil zengin ve görsel
@@ -628,27 +536,27 @@
 
 ---
 
-## KADEME 7 — SUNUM + DEMO READY
+## KADEME 7 — SUNUM + DEMO READY ✅ TAMAMLANDI
 
 **Süre:** 1 hafta
 **Amaç:** Bitirme tezi için demo hazır ürün.
 
-- [ ] 60–80 gerçek İstanbul mekanı (doğru koordinat + Cloudinary görsel)
-- [ ] 5–10 demo kullanıcı hesabı
-- [ ] Her kullanıcıdan 3–5 örnek gönderi (fotoğraf + caption + mekan tag)
-- [ ] Örnek yorumlar ve puanlar
-- [ ] Takip ilişkileri (demo kullanıcılar arası)
+- [x] 60–80 gerçek İstanbul mekanı (doğru koordinat + Cloudinary görsel)
+- [x] 5–10 demo kullanıcı hesabı
+- [x] Her kullanıcıdan 3–5 örnek gönderi (fotoğraf + caption + mekan tag)
+- [x] Örnek yorumlar ve puanlar
+- [x] Takip ilişkileri (demo kullanıcılar arası)
 
-- [ ] 3 demo senaryo hazırla:
+- [x] 3 demo senaryo hazırla:
   1. "Kadıköy'de sessiz çalışma yeri" → LLM önerisi → PlaceDetail → Yorum
   2. "Arkadaşlarla bar" → LLM önerisi → Kaydet → Sosyal akışta paylaş
   3. "Keşfet haritasından mekan bul → git → geofence review bırak"
 
-- [ ] LLM her senaryoda tutarlı, anlamlı explanation üretiyor
-- [ ] Geofence review demo (gerçek konum ile)
-- [ ] Sosyal akış demo (gönderi paylaş → beğeni → yorum → takip)
+- [x] LLM her senaryoda tutarlı, anlamlı explanation üretiyor
+- [x] Geofence review demo (gerçek konum ile)
+- [x] Sosyal akış demo (gönderi paylaş → beğeni → yorum → takip)
 
-- [ ] Sunum materyalleri
+- [x] Sunum materyalleri
   - Mimari diyagram
   - Ekran görüntüleri (her ekran, her state)
   - Kısa demo videosu (screen recording)

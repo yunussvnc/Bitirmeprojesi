@@ -4,7 +4,7 @@
  */
 
 import { router } from 'expo-router';
-import { View, Text, StyleSheet, FlatList, RefreshControl } from 'react-native';
+import { View, Text, StyleSheet, FlatList, RefreshControl, Platform } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
 import { Screen } from '@/components/layout';
 import { IconSymbol } from '@/components/ui/icon-symbol';
@@ -53,6 +53,9 @@ export function ExploreListFallback({ places, loading, onRefresh }: ExploreListF
           data={places}
           keyExtractor={(item) => String(item.id)}
           renderItem={renderItem}
+          initialNumToRender={10}
+          windowSize={5}
+          removeClippedSubviews={Platform.OS === 'android'}
           contentContainerStyle={styles.listContent}
           ListEmptyComponent={
             !loading ? (

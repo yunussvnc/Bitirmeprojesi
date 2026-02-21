@@ -9,21 +9,21 @@
 
 import { router, useLocalSearchParams } from 'expo-router';
 import { useEffect, useMemo, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, Alert, Linking, Share } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
-import { BlurView } from 'expo-blur';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, Alert, Linking, Share, Platform } from 'react-native';
+import Animated, { FadeIn } from 'react-native-reanimated';
 import { useTheme } from '@/hooks/useTheme';
 import { Screen, Section } from '@/components/layout';
 import { PlaceCard } from '@/components/place/PlaceCard';
-import { Button, Chip, Card, ReviewForm, RatingStars } from '@/components/ui';
+import { Button, Card, ReviewForm, RatingStars } from '@/components/ui';
 import { useAppStore } from '@/src/store/useAppStore';
 import { getPlaceImageSource, hasPlaceImage } from '@/src/utils/placeImages';
-import { createTextStyle, spacing, imageOverlay } from '@/constants/design';
+import { spacing } from '@/constants/design';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import FontAwesome5 from '@expo/vector-icons/FontAwesome5';
 import { calculateDistance, getCurrentLocation, type PlaceLocation } from '@/src/utils/location';
 import { getPlaceById, getAllPlaces } from '@/src/services/mekanService';
 import { lightImpact, success, warning } from '@/src/utils/haptics';
+import { logger } from '@/src/utils/logger';
 import { apiGet, apiPost } from '@/src/utils/apiClient';
 
 type Review = {
@@ -37,7 +37,7 @@ type Review = {
 };
 
 export default function PlaceDetailScreen() {
-  const { colors, spacing: spacingTokens } = useTheme();
+  const { colors } = useTheme();
   const params = useLocalSearchParams();
   const id = String(params?.id ?? '');
 
@@ -60,54 +60,57 @@ export default function PlaceDetailScreen() {
 
   // Load place data
   useEffect(() => {
-    loadPlaceData();
-    loadReviews();
-    loadSimilarPlaces();
-  }, [id]);
+    const cancelled = { current: false };
+    loadPlaceData(cancelled);
+    loadReviews(cancelled);
+    return () => { cancelled.current = true; };
+  }, [id]); // eslint-disable-line react-hooks/exhaustive-deps -- loadPlaceData/loadReviews stable by design
 
-  const loadPlaceData = async () => {
+  const loadPlaceData = async (cancelled: { current: boolean } = { current: false }) => {
     try {
       const foundPlace = await getPlaceById(id);
-      if (foundPlace) {
-        setPlace(foundPlace);
-      }
+      if (!cancelled.current && foundPlace) setPlace(foundPlace);
     } catch (error) {
-      console.error('Error loading place:', error);
+      if (!cancelled.current) logger.error('Error loading place:', error);
     }
   };
 
-  const loadReviews = async () => {
+  const loadReviews = async (cancelled: { current: boolean } = { current: false }) => {
     if (!id) return;
     setReviewsLoading(true);
     setReviewsError(null);
     try {
       const data = await apiGet<Review[]>(`/places/${id}/reviews`);
-      setReviews(data || []);
+      if (!cancelled.current) setReviews(data || []);
     } catch (error) {
-      console.error('Error loading reviews:', error);
-      setReviewsError('Yorumlar yüklenirken bir hata oluştu.');
+      if (!cancelled.current) {
+        logger.error('Error loading reviews:', error);
+        setReviewsError('Yorumlar yüklenirken bir hata oluştu.');
+      }
     } finally {
-      setReviewsLoading(false);
+      if (!cancelled.current) setReviewsLoading(false);
     }
   };
 
-  const loadSimilarPlaces = async () => {
+  const loadSimilarPlaces = async (cancelled: { current: boolean } = { current: false }) => {
     try {
       const places = await getAllPlaces();
+      if (cancelled.current) return;
       const filtered = places
         .filter((p) => String(p.id) !== id && p.category === place?.category)
         .slice(0, 5);
       setSimilarPlaces(filtered);
     } catch (error) {
-      console.error('Error loading similar places:', error);
+      if (!cancelled.current) logger.error('Error loading similar places:', error);
     }
   };
 
   useEffect(() => {
-    if (place) {
-      loadSimilarPlaces();
-    }
-  }, [place]);
+    if (!place) return;
+    const cancelled = { current: false };
+    loadSimilarPlaces(cancelled);
+    return () => { cancelled.current = true; };
+  }, [place?.id, place?.category]); // eslint-disable-line react-hooks/exhaustive-deps -- loadSimilarPlaces uses place in closure
 
   const checkUserLocation = async () => {
     if (!place?.latitude || !place?.longitude) return;
@@ -151,7 +154,7 @@ export default function PlaceDetailScreen() {
         warning();
       }
     } catch (error) {
-      console.error('Error checking location:', error);
+      logger.error('Error checking location:', error);
       Alert.alert('Hata', 'Konumun kontrol edilirken bir sorun oluştu. Lütfen tekrar deneyin.');
     } finally {
       setCheckingLocation(false);
@@ -181,15 +184,20 @@ export default function PlaceDetailScreen() {
       await loadReviews();
     } catch (error) {
       Alert.alert('Hata', 'Yorum gönderilirken bir hata oluştu.');
-      console.error('Error submitting review:', error);
+      logger.error('Error submitting review:', error);
     } finally {
       setSubmittingReview(false);
     }
   };
 
   const handleNavigate = () => {
-    if (place?.latitude && place?.longitude) {
-      const url = `maps://maps.apple.com/?daddr=${place.latitude},${place.longitude}`;
+    if (place?.latitude != null && place?.longitude != null) {
+      const lat = place.latitude;
+      const lng = place.longitude;
+      const url =
+        Platform.OS === 'ios'
+          ? `maps://maps.apple.com/?daddr=${lat},${lng}`
+          : `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
       Linking.openURL(url).catch(() => {
         Alert.alert('Hata', 'Harita uygulaması açılamadı.');
       });
@@ -208,7 +216,7 @@ export default function PlaceDetailScreen() {
         url: `asemos://place/${id}`,
       });
     } catch (error) {
-      console.error('Error sharing:', error);
+      logger.error('Error sharing:', error);
     }
   };
 
@@ -254,12 +262,12 @@ export default function PlaceDetailScreen() {
   // Typography styles - inline to avoid type issues
   const h1Style = { fontSize: 24, fontWeight: '700' as const, color: colors.text.primary };
   const h2Style = { fontSize: 20, fontWeight: '700' as const, color: colors.text.primary };
-  const h3Style = { fontSize: 18, fontWeight: '700' as const, color: colors.text.primary };
   const bodyStyle = { fontSize: 15, fontWeight: '400' as const, color: colors.text.primary };
   const bodySmallStyle = { fontSize: 14, fontWeight: '400' as const, color: colors.text.secondary };
   const captionStyle = { fontSize: 12, fontWeight: '400' as const, color: colors.text.tertiary };
 
   return (
+    <Animated.View entering={FadeIn.duration(280)} style={{ flex: 1 }}>
     <Screen scrollable>
         {/* Header with Back and Save */}
         <View style={styles.header}>
@@ -275,7 +283,7 @@ export default function PlaceDetailScreen() {
           
           <TouchableOpacity
             onPress={() => {
-              lightImpact();
+              if (saved) lightImpact(); else success();
               toggleSaved({
                 id,
                 name: place?.name || `Mekan #${id}`,
@@ -393,6 +401,36 @@ export default function PlaceDetailScreen() {
             <TouchableOpacity
               onPress={() => {
                 lightImpact();
+                router.push({
+                  pathname: '/create-story',
+                  params: { placeId: id, placeName: place?.name || `Mekan #${id}` },
+                } as any);
+              }}
+              style={[styles.quickActionButton, { backgroundColor: colors.accent.primary + '20', borderColor: colors.accent.primary }]}
+            >
+              <IconSymbol name="camera.fill" size={22} color={colors.accent.primary} />
+              <Text style={[bodySmallStyle, { marginTop: 4, textAlign: 'center', color: colors.accent.primary }]}>
+                Hikaye
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                lightImpact();
+                router.push({
+                  pathname: '/create-post',
+                  params: { placeId: id, placeName: place?.name || `Mekan #${id}` },
+                } as any);
+              }}
+              style={[styles.quickActionButton, styles.quickActionButtonOutline, { borderColor: colors.surface.border }]}
+            >
+              <IconSymbol name="photo" size={22} color={colors.text.secondary} />
+              <Text style={[bodySmallStyle, { marginTop: 4, textAlign: 'center', color: colors.text.secondary }]}>
+                Gönderi
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => {
+                lightImpact();
                 handleShare();
               }}
               style={[styles.quickActionButton, styles.quickActionButtonOutline, { borderColor: colors.surface.border }]}
@@ -404,7 +442,7 @@ export default function PlaceDetailScreen() {
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() => {
-                lightImpact();
+                if (saved) lightImpact(); else success();
                 toggleSaved({
                   id,
                   name: place?.name || `Mekan #${id}`,
@@ -439,13 +477,13 @@ export default function PlaceDetailScreen() {
                 {place.description}
               </Text>
               <View style={styles.atmosphereTags}>
-                <View style={styles.atmosphereTag}>
+                <View style={[styles.atmosphereTag, { backgroundColor: colors.surface.default }]}>
                   <FontAwesome5 name="volume-mute" size={14} color={colors.text.secondary} solid={false} />
                   <Text style={[bodySmallStyle, { marginLeft: 6 }]}>
                     {place.tags?.includes('quiet') ? 'Sessiz' : 'Canlı'} ortam
                   </Text>
                 </View>
-                <View style={styles.atmosphereTag}>
+                <View style={[styles.atmosphereTag, { backgroundColor: colors.surface.default }]}>
                   <IconSymbol name="person.fill" size={16} color={colors.text.secondary} />
                   <Text style={[bodySmallStyle, { marginLeft: 6 }]}>
                     {place.tags?.includes('work') ? 'Çalışma' : 'Sosyal'} için ideal
@@ -567,7 +605,7 @@ export default function PlaceDetailScreen() {
                       return (
                         <View key={star} style={styles.distributionRow}>
                           <Text style={[bodySmallStyle, { width: 20 }]}>{star}★</Text>
-                          <View style={styles.distributionBarBackground}>
+                          <View style={[styles.distributionBarBackground, { backgroundColor: colors.surface.hover }]}>
                             <View
                               style={[
                                 styles.distributionBarFill,
@@ -589,7 +627,7 @@ export default function PlaceDetailScreen() {
 
                 <View style={{ marginTop: spacing.lg }}>
                   {reviews.slice(0, 5).map((review) => (
-                    <View key={review.id} style={styles.reviewItem}>
+                    <View key={review.id} style={[styles.reviewItem, { borderBottomColor: colors.surface.border }]}>
                       <View style={styles.reviewHeader}>
                         <View style={styles.reviewHeaderLeft}>
                           <Text style={[bodyStyle, { fontWeight: '600' }]}>
@@ -667,7 +705,7 @@ export default function PlaceDetailScreen() {
             ) : (
               <>
                 <Text style={[bodySmallStyle, { marginBottom: spacing.sm }]}>
-                  AsEmOs'ta yorumlar, gerçekten mekandayken bırakılabilir. Bu mekanı
+                  {`AsEmOs'ta yorumlar, gerçekten mekandayken bırakılabilir. Bu mekanı`}
                   değerlendirmek için şu anda burada olmalısın.
                 </Text>
                 {lastDistance != null && (
@@ -715,6 +753,7 @@ export default function PlaceDetailScreen() {
           )}
         </View>
     </Screen>
+    </Animated.View>
   );
 }
 
@@ -748,6 +787,9 @@ const styles = StyleSheet.create({
     height: '100%',
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  titleSection: {
+    marginBottom: spacing.base,
   },
   metaRow: {
     flexDirection: 'row',
@@ -811,7 +853,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.sm,
     paddingVertical: spacing.xs,
     borderRadius: 12,
-    backgroundColor: 'rgba(255,255,255,0.05)',
   },
   highlightsGrid: {
     flexDirection: 'row',
@@ -856,7 +897,6 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 8,
     borderRadius: 4,
-    backgroundColor: 'rgba(255,255,255,0.08)',
     marginHorizontal: spacing.xs,
     overflow: 'hidden',
   },
@@ -868,7 +908,6 @@ const styles = StyleSheet.create({
     marginBottom: spacing.lg,
     paddingBottom: spacing.lg,
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(255,255,255,0.08)',
   },
   reviewHeader: {
     flexDirection: 'row',

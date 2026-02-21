@@ -5,25 +5,58 @@
  * Professional design with comprehensive settings.
  */
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Alert } from 'react-native';
 import { useRouter, useNavigation } from 'expo-router';
 import { Screen, type ScreenRef } from '@/components/layout/Screen';
 import { Section } from '@/components/layout/Section';
 import { Avatar, SettingsRow } from '@/components/ui';
 import { Button } from '@/components/ui/Button';
+import { ProfileGrid } from '@/components/profile/ProfileGrid';
 import { useTheme } from '@/hooks/useTheme';
-import { createTextStyle } from '@/constants/design';
 import { spacing } from '@/constants/design';
-import { lightImpact, success } from '@/src/utils/haptics';
+import { lightImpact } from '@/src/utils/haptics';
+import { useAuthStore } from '@/src/store/useAuthStore';
+import { useAppStore } from '@/src/store/useAppStore';
+import { getUserProfile, getUserStats, getUserPosts, type UserProfile, type UserStats } from '@/src/services/userService';
+import { handleApiError } from '@/src/utils/errorHandler';
 
 export default function ProfileScreen() {
-  const { colors, isDark, toggleTheme, themeMode } = useTheme();
+  const { colors } = useTheme();
   const router = useRouter();
   const navigation = useNavigation();
   const screenRef = useRef<ScreenRef>(null);
+  const authUser = useAuthStore((s) => s.user);
+  const savedIds = useAppStore((s) => s.savedIds);
   
-  const [notificationsEnabled, setNotificationsEnabled] = useState(true);
+  const [profile, setProfile] = useState<UserProfile | null>(null);
+  const [stats, setStats] = useState<UserStats | null>(null);
+  const [posts, setPosts] = useState<{ id: number; place_id?: number; thumbnail?: string; media_type?: string }[]>([]);
+  const [refreshing, setRefreshing] = useState(false);
+
+  const loadProfile = useCallback(async () => {
+    if (!authUser) return;
+    try {
+      const [p, s, postsRes] = await Promise.all([
+        getUserProfile(authUser.id),
+        getUserStats(authUser.id),
+        getUserPosts(authUser.id, 1, 30),
+      ]);
+      setProfile(p);
+      setStats(s);
+      setPosts(
+        postsRes.items.map((post) => ({
+          id: post.id,
+          place_id: post.place_id,
+          thumbnail: post.media?.[0]?.thumbnail_url || post.media?.[0]?.media_url,
+          media_type: post.media?.[0]?.media_type,
+        }))
+      );
+    } catch (e) {
+      handleApiError(e);
+    }
+    // authUser?.id is intentional; full authUser would cause unnecessary reloads
+  }, [authUser?.id]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Listen for tab press to scroll to top
   useEffect(() => {
@@ -33,36 +66,29 @@ export default function ProfileScreen() {
     return unsubscribe;
   }, [navigation]);
 
-  // Mock user data - replace with actual user data from store/context
-  const user = {
-    name: 'John Doe',
-    email: 'john.doe@example.com',
-    avatar: undefined,
-    memberSince: '2024',
-    role: 'Öğrenci',
-  };
+  useEffect(() => {
+    loadProfile();
+  }, [loadProfile]);
 
-  // Mock stats - replace with actual data
-  const stats = {
-    savedPlaces: 12,
-    reviews: 8,
-    verifiedVisits: 5,
-    totalPlaces: 121,
-    favoriteCategory: 'Café',
-    memberLevel: 'Bronz',
-    points: 245,
-  };
-
-  const titleStyle = createTextStyle('heading', colors.text.primary);
-
-  const handleNotifications = () => {
+  const handleRefresh = useCallback(() => {
     lightImpact();
-    setNotificationsEnabled(!notificationsEnabled);
-  };
+    setRefreshing(true);
+    loadProfile().finally(() => setRefreshing(false));
+  }, [loadProfile]);
 
-  const handleHelp = () => {
-    lightImpact();
-    Alert.alert('Yardım & Destek', 'Yardım merkezi yakında eklenecek', [{ text: 'Tamam' }]);
+  const user = authUser
+    ? {
+        name: authUser.first_name || authUser.username || authUser.email,
+        email: authUser.email,
+        avatar: authUser.avatar_url,
+      }
+    : null;
+
+  const displayStats = {
+    savedPlaces: savedIds.length,
+    followers: profile?.followers_count ?? 0,
+    following: profile?.following_count ?? 0,
+    posts: stats?.post_count ?? 0,
   };
 
   const handleSignOut = () => {
@@ -76,7 +102,7 @@ export default function ProfileScreen() {
           text: 'Çıkış Yap',
           style: 'destructive',
           onPress: async () => {
-            // TODO: Clear auth tokens and user data
+            useAuthStore.getState().logout();
             router.replace('/login');
           },
         },
@@ -84,19 +110,26 @@ export default function ProfileScreen() {
     );
   };
 
-  const handleTheme = () => {
-    lightImpact();
-    toggleTheme();
-    success();
-  };
-  
-  const getThemeLabel = () => {
-    if (themeMode === 'system') return 'Sistem';
-    return isDark ? 'Koyu' : 'Açık';
-  };
+  if (!authUser) {
+    return (
+      <Screen ref={screenRef} withTabBar>
+        <View style={styles.header}>
+          <Text style={[styles.headerTitle, { color: colors.text.primary }]}>Profil</Text>
+        </View>
+        <View style={[styles.profileCard, { backgroundColor: colors.surface.elevated, borderColor: colors.surface.border }]}>
+          <Text style={[styles.profileEmail, { color: colors.text.secondary, marginBottom: spacing.lg }]}>
+            Görüntülemek için giriş yapın
+          </Text>
+          <Button variant="primary" onPress={() => router.push('/login' as any)}>
+            Giriş Yap
+          </Button>
+        </View>
+      </Screen>
+    );
+  }
 
   return (
-    <Screen ref={screenRef} withTabBar>
+    <Screen ref={screenRef} withTabBar onRefresh={handleRefresh} refreshing={refreshing}>
         {/* Header */}
         <View style={styles.header}>
           <Text style={[styles.headerTitle, { color: colors.text.primary }]}>Profil</Text>
@@ -105,55 +138,93 @@ export default function ProfileScreen() {
         {/* Profile Card */}
         <View style={[styles.profileCard, { backgroundColor: colors.surface.elevated, borderColor: colors.surface.border }]}>
           <Avatar
-            source={user.avatar}
-            name={user.name}
+            source={user?.avatar ? { uri: user.avatar } : undefined}
+            name={user?.name ?? 'Kullanıcı'}
             size={72}
           />
-          <Text style={[styles.profileName, { color: colors.text.primary }]}>{user.name}</Text>
+          <Text style={[styles.profileName, { color: colors.text.primary }]}>{user?.name}</Text>
           <Text style={[styles.profileEmail, { color: colors.text.secondary }]}>
-            {user.email}
+            {user?.email}
           </Text>
           
-          <View style={styles.statsRow}>
+          <View style={[styles.statsRow, { borderTopColor: colors.surface.border }]}>
             <TouchableOpacity style={styles.statItem} onPress={() => router.push('/(tabs)/saved')} activeOpacity={0.7}>
-              <Text style={[styles.statNumber, { color: colors.text.primary }]}>{stats.savedPlaces}</Text>
+              <Text style={[styles.statNumber, { color: colors.text.primary }]}>{displayStats.savedPlaces}</Text>
               <Text style={[styles.statLabel, { color: colors.text.secondary }]}>Kayıtlı</Text>
             </TouchableOpacity>
             <View style={[styles.statDivider, { backgroundColor: colors.surface.border }]} />
             <View style={styles.statItem}>
-              <Text style={[styles.statNumber, { color: colors.text.primary }]}>{stats.reviews}</Text>
-              <Text style={[styles.statLabel, { color: colors.text.secondary }]}>Yorum</Text>
+              <Text style={[styles.statNumber, { color: colors.text.primary }]}>{displayStats.posts}</Text>
+              <Text style={[styles.statLabel, { color: colors.text.secondary }]}>Post</Text>
+            </View>
+            <View style={[styles.statDivider, { backgroundColor: colors.surface.border }]} />
+            <View style={styles.statItem}>
+              <Text style={[styles.statNumber, { color: colors.text.primary }]}>{displayStats.followers}</Text>
+              <Text style={[styles.statLabel, { color: colors.text.secondary }]}>Takipçi</Text>
+            </View>
+            <View style={[styles.statDivider, { backgroundColor: colors.surface.border }]} />
+            <View style={styles.statItem}>
+              <Text style={[styles.statNumber, { color: colors.text.primary }]}>{displayStats.following}</Text>
+              <Text style={[styles.statLabel, { color: colors.text.secondary }]}>Takip</Text>
             </View>
           </View>
+
+          <Button
+            variant="secondary"
+            size="medium"
+            onPress={() => {
+              lightImpact();
+              router.push('/edit-profile' as any);
+            }}
+            style={styles.editBtn}
+          >
+            Profili Düzenle
+          </Button>
         </View>
 
-        {/* Settings Section */}
+        {stats && (stats.favorite_category || stats.favorite_region || stats.visits_this_month > 0) && (
+          <Section title="İstatistikler" style={styles.section}>
+            <View style={[styles.statsBox, { backgroundColor: colors.surface.elevated }]}>
+              {stats.favorite_category && (
+                <Text style={[styles.statText, { color: colors.text.secondary }]}>
+                  En çok: {stats.favorite_category}
+                </Text>
+              )}
+              {stats.favorite_region && (
+                <Text style={[styles.statText, { color: colors.text.secondary }]}>
+                  Favori bölge: {stats.favorite_region}
+                </Text>
+              )}
+              {stats.visits_this_month > 0 && (
+                <Text style={[styles.statText, { color: colors.text.secondary }]}>
+                  Bu ay: {stats.visits_this_month} ziyaret
+                </Text>
+              )}
+            </View>
+          </Section>
+        )}
+
+        {posts.length > 0 && (
+          <Section title="Gönderilerim" style={styles.section}>
+            <ProfileGrid
+              items={posts}
+              onItemPress={(item) => {
+                if (item.place_id) router.push(`/place/${item.place_id}` as any);
+              }}
+            />
+          </Section>
+        )}
+
+        {/* Ayarlar */}
         <Section title="Ayarlar" style={styles.section}>
           <SettingsRow
-            label="Bildirimler"
-            value={notificationsEnabled ? 'Açık' : 'Kapalı'}
-            onPress={handleNotifications}
+            label="Ayarlar ve hareketler"
+            onPress={() => {
+              lightImpact();
+              router.push('/settings' as any);
+            }}
             showArrow
-            icon="bell.fill"
-          />
-          <SettingsRow
-            label="Tema"
-            value={getThemeLabel()}
-            onPress={handleTheme}
-            showArrow
-            icon={isDark ? "moon.fill" : "sun.max.fill"}
-          />
-          <SettingsRow
-            label="Yardım & Destek"
-            onPress={handleHelp}
-            showArrow
-            icon="questionmark.circle.fill"
-          />
-          <SettingsRow
-            label="Uygulama Versiyonu"
-            value="1.0.0"
-            showArrow={false}
-            icon="info.circle.fill"
+            icon="gear"
           />
         </Section>
 
@@ -204,7 +275,6 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingTop: spacing.md,
     borderTopWidth: StyleSheet.hairlineWidth,
-    borderTopColor: 'rgba(255,255,255,0.1)',
   },
   statItem: {
     flex: 1,
@@ -222,6 +292,17 @@ const styles = StyleSheet.create({
   statLabel: {
     fontSize: 12,
     fontWeight: '500',
+  },
+  editBtn: {
+    marginTop: spacing.lg,
+  },
+  statsBox: {
+    padding: spacing.md,
+    borderRadius: 12,
+    gap: 4,
+  },
+  statText: {
+    fontSize: 14,
   },
   section: {
     marginBottom: spacing.base,

@@ -7,17 +7,29 @@
  */
 
 import React, { useEffect, useRef } from 'react';
-import { View, Text, StyleSheet, Animated } from 'react-native';
+import { Text, StyleSheet, Animated } from 'react-native';
 import { IconSymbol, type IconSymbolName } from './icon-symbol';
 import { useTheme } from '@/hooks/useTheme';
 import { Button } from './Button';
-import { createTextStyle, spacing, radius, animationTiming, easing } from '@/constants/design';
+import { createTextStyle, spacing, radius } from '@/constants/design';
+
+/** Preset variants for common empty states */
+export type EmptyStateVariant = 'feed' | 'saved' | 'reels' | 'notifications' | 'search' | 'places' | 'custom';
+
+const VARIANT_PRESETS: Record<Exclude<EmptyStateVariant, 'custom'>, { icon: IconSymbolName; accentIcon: boolean }> = {
+  feed: { icon: 'photo.on.rectangle.angled', accentIcon: true },
+  saved: { icon: 'bookmark', accentIcon: true },
+  reels: { icon: 'video.fill', accentIcon: true },
+  notifications: { icon: 'bell.slash', accentIcon: false },
+  search: { icon: 'magnifyingglass', accentIcon: true },
+  places: { icon: 'mappin.slash', accentIcon: false },
+};
 
 export interface EmptyStateProps {
   /**
-   * Icon name (SF Symbol / Material icon key)
+   * Icon name (SF Symbol / Material icon key). Ignored if variant is set.
    */
-  icon: IconSymbolName;
+  icon?: IconSymbolName;
   
   /**
    * Title text
@@ -38,6 +50,17 @@ export interface EmptyStateProps {
    * Action button handler (optional)
    */
   onAction?: () => void;
+  
+  /**
+   * Use accent color for icon (default: false). Ignored if variant is set.
+   */
+  accentIcon?: boolean;
+  
+  /**
+   * Preset variant for screen-specific styling (optional).
+   * When set, overrides icon and accentIcon from preset.
+   */
+  variant?: EmptyStateVariant;
 }
 
 /**
@@ -57,36 +80,45 @@ export interface EmptyStateProps {
  * ```
  */
 export function EmptyState({
-  icon,
+  icon: iconProp,
   title,
   description,
   actionLabel,
   onAction,
+  accentIcon: accentIconProp = false,
+  variant = 'custom',
 }: EmptyStateProps) {
-  const { colors, spacing, typography } = useTheme();
+  const { colors, spacing } = useTheme();
   const titleStyle = createTextStyle('heading', colors.text.primary);
   const descriptionStyle = createTextStyle('body', colors.text.secondary);
+  const preset = variant !== 'custom' ? VARIANT_PRESETS[variant] : null;
+  const icon = preset?.icon ?? iconProp ?? 'doc.text';
+  const accentIcon = preset ? preset.accentIcon : accentIconProp;
+  const iconColor = accentIcon ? colors.accent.primary : colors.text.tertiary;
+  const iconBgColor = accentIcon ? `${colors.accent.primary}18` : colors.surface.default;
   
   const opacity = useRef(new Animated.Value(0)).current;
-  const translateY = useRef(new Animated.Value(20)).current;
-  const scale = useRef(new Animated.Value(0.9)).current;
+  const translateY = useRef(new Animated.Value(24)).current;
+  const scale = useRef(new Animated.Value(0.92)).current;
 
   useEffect(() => {
     Animated.parallel([
       Animated.timing(opacity, {
         toValue: 1,
-        duration: 200,
+        duration: 350,
         useNativeDriver: true,
       }),
-      Animated.timing(translateY, {
+      Animated.spring(translateY, {
         toValue: 0,
-        duration: 200,
         useNativeDriver: true,
+        tension: 65,
+        friction: 11,
       }),
-      Animated.timing(scale, {
+      Animated.spring(scale, {
         toValue: 1,
-        duration: 200,
         useNativeDriver: true,
+        tension: 65,
+        friction: 11,
       }),
     ]).start();
   }, [opacity, translateY, scale]);
@@ -105,12 +137,12 @@ export function EmptyState({
         style={[
           styles.iconContainer,
           {
-            backgroundColor: colors.surface.default,
+            backgroundColor: iconBgColor,
             marginBottom: spacing.base,
           },
         ]}
       >
-        <IconSymbol name={icon} size={40} color={colors.text.tertiary} />
+        <IconSymbol name={icon} size={48} color={iconColor} />
       </Animated.View>
       <Text style={[titleStyle, styles.title, { marginBottom: spacing.sm }]}>
         {title}

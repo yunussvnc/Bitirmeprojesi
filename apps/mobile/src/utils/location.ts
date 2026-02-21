@@ -8,6 +8,7 @@
  */
 
 import * as Location from 'expo-location';
+import { logger } from './logger';
 
 export interface PlaceLocation {
   latitude: number;
@@ -79,7 +80,7 @@ export async function getCurrentLocation(): Promise<PlaceLocation | null> {
       longitude: location.coords.longitude,
     };
   } catch (error) {
-    console.error('Error getting location:', error);
+    logger.error('Error getting location:', error);
     return null;
   }
 }

@@ -1,16 +1,15 @@
 /**
  * Animated Place Card Component
  * 
- * PlaceCard with fade-in and slide-up animation.
+ * PlaceCard with Reanimated entering animation.
  * Used in lists for smooth appearance.
  * 
  * @module components/ui/AnimatedPlaceCard
  */
 
-import React, { useEffect, useRef } from 'react';
-import { Animated } from 'react-native';
+import React from 'react';
+import Animated, { FadeInDown } from 'react-native-reanimated';
 import { PlaceCard, PlaceCardProps } from '@/components/place/PlaceCard';
-import { animationTiming, easing } from '@/constants/design';
 
 export interface AnimatedPlaceCardProps extends PlaceCardProps {
   /**
@@ -29,7 +28,7 @@ export interface AnimatedPlaceCardProps extends PlaceCardProps {
 /**
  * Animated Place Card Component
  * 
- * Optimized wrapper for PlaceCard - animations removed for better scroll performance.
+ * Wrapper for PlaceCard with subtle entering animation.
  * Memoized to prevent unnecessary re-renders.
  */
 function AnimatedPlaceCardInner({
@@ -37,8 +36,12 @@ function AnimatedPlaceCardInner({
   index = 0,
   ...cardProps
 }: AnimatedPlaceCardProps) {
-  // No animations - direct render for smooth scrolling
-  return <PlaceCard {...cardProps} />;
+  const entering = FadeInDown.duration(280).delay(Math.min(index * 35, 150));
+  return (
+    <Animated.View entering={entering}>
+      <PlaceCard {...cardProps} />
+    </Animated.View>
+  );
 }
 
 export const AnimatedPlaceCard = React.memo(AnimatedPlaceCardInner);

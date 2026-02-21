@@ -13,10 +13,10 @@ import {
   View,
   Text,
   StyleSheet,
-  Image,
   ImageSourcePropType,
   type TextStyle,
 } from 'react-native';
+import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useTheme } from '@/hooks/useTheme';
 import { Chip } from '@/components/ui/Chip';
@@ -69,7 +69,7 @@ const PlaceCardComponent = function PlaceCard({
   onPress,
   testID,
 }: PlaceCardProps) {
-  const { colors, spacing } = useTheme();
+  const { colors, isDark } = useTheme();
   const titleStyle = createTextStyle('heading', colors.text.primary);
   const subtitleColor = colors.text.primary + 'CC'; // %80 opacity
   const handlePress = () => {
@@ -78,12 +78,8 @@ const PlaceCardComponent = function PlaceCard({
   };
 
   // 3D depth colors derived from theme
-  const depthEdgeColor = colors.background.primary === '#121212'
-    ? 'rgba(0,0,0,0.7)'
-    : 'rgba(0,0,0,0.12)';
-  const depthHighlightColor = colors.background.primary === '#121212'
-    ? 'rgba(255,255,255,0.06)'
-    : 'rgba(255,255,255,0.8)';
+  const depthEdgeColor = isDark ? 'rgba(0,0,0,0.7)' : 'rgba(0,0,0,0.12)';
+  const depthHighlightColor = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(255,255,255,0.8)';
 
   return (
     <View style={styles.animatedWrapper}>
@@ -107,7 +103,7 @@ const PlaceCardComponent = function PlaceCard({
           </View>
         ) : (
           <>
-            <Image source={image} style={styles.image} resizeMode="cover" />
+            <Image source={image as any} style={styles.image} contentFit="cover" cachePolicy="memory-disk" />
             <LinearGradient
               colors={['rgba(0,0,0,0.15)', 'rgba(0,0,0,0.5)', 'rgba(0,0,0,0.82)']}
               locations={[0.2, 0.55, 1]}

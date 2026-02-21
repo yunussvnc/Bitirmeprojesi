@@ -1,6 +1,6 @@
 import React from "react";
 import { FlatList, Text, View } from "react-native";
-import { dummyPlaces } from "../data/dummyPlaces";
+import { DUMMY_PLACES } from "../data/dummyPlaces";
 
 export default function PlacesListScreen() {
   return (
@@ -10,8 +10,8 @@ export default function PlacesListScreen() {
       </Text>
 
       <FlatList
-        data={dummyPlaces}
-        keyExtractor={(item) => item.id}
+        data={DUMMY_PLACES}
+        keyExtractor={(item) => String(item.id)}
         renderItem={({ item }) => (
           <View
             style={{
@@ -23,7 +23,7 @@ export default function PlacesListScreen() {
           >
             <Text style={{ fontWeight: "700" }}>{item.name}</Text>
             <Text>
-              {item.category} • ⭐ {item.rating}
+              {item.category ?? item.subtitle} • ⭐ {item.rating ?? "—"}
             </Text>
           </View>
         )}

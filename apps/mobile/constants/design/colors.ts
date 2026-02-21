@@ -39,6 +39,7 @@ export const darkColors: ColorTheme = {
     primary: '#1DB954',       // Spotify green equivalent - primary action color
     primaryHover: '#1ED760',  // Lighter on hover
     primaryPressed: '#1AA34A', // Darker on press
+    onPrimary: '#FFFFFF',     // Text/icon on accent background
   },
   text: {
     primary: '#FFFFFF',        // Main text
@@ -51,6 +52,7 @@ export const darkColors: ColorTheme = {
     warning: '#FFA500',
     error: '#E22134',
     info: '#1DB954',
+    onDarkBackground: '#FFFFFF',
   },
   overlay: {
     light: 'rgba(0, 0, 0, 0.3)',    // Image overlays
@@ -81,6 +83,7 @@ export const lightColors: ColorTheme = {
     primary: '#1DB954',
     primaryHover: '#1ED760',
     primaryPressed: '#1AA34A',
+    onPrimary: '#FFFFFF',
   },
   text: {
     primary: '#1C1C1E',
@@ -93,6 +96,7 @@ export const lightColors: ColorTheme = {
     warning: '#FF9F0A',
     error: '#E22134',
     info: '#1DB954',
+    onDarkBackground: '#FFFFFF',
   },
   overlay: {
     light: 'rgba(255, 255, 255, 0.3)',

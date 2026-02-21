@@ -44,8 +44,13 @@ export interface ErrorResponse {
  * Convert various error types to user-friendly AppError
  */
 export function handleApiError(error: unknown): AppError {
-  // Network errors
-  if (error instanceof TypeError && error.message.includes('Network request failed')) {
+  const msg = error instanceof Error ? error.message : String(error);
+  // Network errors (fetch throws TypeError or "Failed to fetch")
+  if (
+    (error instanceof TypeError && msg.includes('Network request failed')) ||
+    msg.includes('Failed to fetch') ||
+    msg.includes('Network request failed')
+  ) {
     return new AppError(
       'Network request failed',
       'NETWORK_ERROR',
@@ -64,9 +69,19 @@ export function handleApiError(error: unknown): AppError {
     );
   }
 
+  // Invalid JSON / parse errors
+  if (msg.includes('Invalid JSON response')) {
+    return new AppError(
+      'Invalid response',
+      'PARSE_ERROR',
+      'Sunucudan geçersiz yanıt alındı. Lütfen tekrar deneyin.',
+      true
+    );
+  }
+
   // HTTP errors
-  if (error instanceof Error && error.message.includes('API error:')) {
-    const match = error.message.match(/API error: (\d+)/);
+  if (msg.includes('API error:')) {
+    const match = msg.match(/API error: (\d+)/);
     const status = match ? parseInt(match[1]) : 500;
     
     if (status === 401) {
@@ -97,7 +112,7 @@ export function handleApiError(error: unknown): AppError {
     }
     
     return new AppError(
-      error.message,
+      msg,
       'API_ERROR',
       'Bir hata oluştu. Lütfen tekrar deneyin.',
       true

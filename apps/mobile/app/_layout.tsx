@@ -3,6 +3,7 @@ import { Stack, useRouter, useSegments, useRootNavigationState } from "expo-rout
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { PreferencesProvider } from "../src/state/preferences";
 import { ThemeProvider } from "../context/ThemeContext";
+import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
 import { checkHealth } from "@/src/services/mekanService";
 import { useAppStore } from "@/src/store/useAppStore";
 import { useAuthStore } from "@/src/store/useAuthStore";
@@ -34,12 +35,11 @@ function useProtectedRoute() {
     // Defer navigation to next tick so Stack has time to mount
     const id = setTimeout(navigate, 0);
     return () => clearTimeout(id);
-  }, [accessToken, segments, hydrated, rootNavigationState?.key]);
+  }, [accessToken, segments, hydrated, rootNavigationState?.key, router]);
 }
 
 export default function RootLayout() {
   const setApiHealthy = useAppStore((s) => s.setApiHealthy);
-  const logout = useAuthStore((s) => s.logout);
 
   useEffect(() => {
     setAuthInterceptors(
@@ -52,21 +52,38 @@ export default function RootLayout() {
 
   useEffect(() => {
     checkHealth().then(setApiHealthy);
-  }, []);
+  }, [setApiHealthy]);
 
   useProtectedRoute();
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <ThemeProvider>
-        <PreferencesProvider>
-          <Stack
+        <ErrorBoundary>
+          <PreferencesProvider>
+            <Stack
             screenOptions={{
               headerShown: false,
               autoHideHomeIndicator: true,
             }}
-          />
-        </PreferencesProvider>
+          >
+            <Stack.Screen
+              name="create-post"
+              options={{
+                presentation: "modal",
+                gestureEnabled: true,
+              }}
+            />
+            <Stack.Screen
+              name="create-story"
+              options={{
+                presentation: "modal",
+                gestureEnabled: true,
+              }}
+            />
+          </Stack>
+          </PreferencesProvider>
+        </ErrorBoundary>
       </ThemeProvider>
     </GestureHandlerRootView>
   );

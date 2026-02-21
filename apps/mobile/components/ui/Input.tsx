@@ -18,7 +18,7 @@ import {
   ViewStyle,
   TextStyle,
 } from 'react-native';
-import { IconSymbol } from './icon-symbol';
+import { IconSymbol, type IconSymbolName } from './icon-symbol';
 import { useTheme } from '@/hooks/useTheme';
 
 /**
@@ -49,12 +49,12 @@ export interface InputProps extends Omit<TextInputProps, 'style'> {
   /**
    * Left icon name (for search variant)
    */
-  leftIcon?: string;
+  leftIcon?: IconSymbolName;
   
   /**
    * Right icon name
    */
-  rightIcon?: string;
+  rightIcon?: IconSymbolName;
   
   /**
    * Right icon press handler

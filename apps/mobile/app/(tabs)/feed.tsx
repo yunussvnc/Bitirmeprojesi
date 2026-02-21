@@ -1,0 +1,660 @@
+/**
+ * Akış (Feed) Screen
+ *
+ * Sosyal akış - mekan deneyimi paylaşımları.
+ */
+
+import React, { useState, useEffect, useCallback, useRef } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  RefreshControl,
+  TouchableOpacity,
+  Animated,
+  Easing,
+} from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { router, useFocusEffect } from "expo-router";
+import { useTheme } from "@/hooks/useTheme";
+import { Screen } from "@/components/layout";
+import { FeedCard } from "@/components/feed/FeedCard";
+import { CommentBottomSheet } from "@/components/feed/CommentBottomSheet";
+import { EmptyState, LoadingState } from "@/components/ui";
+import { IconSymbol } from "@/components/ui/icon-symbol";
+import { CreateTypeSheet, type CreateType } from "@/components/feed/CreateTypeSheet";
+import { FeedStoriesRow } from "@/components/feed/FeedStoriesRow";
+import { createTextStyle, spacing } from "@/constants/design";
+import { getFeed, toggleLike, type Post, type FeedFilter } from "@/src/services/feedService";
+import { getUnreadCount } from "@/src/services/notificationService";
+import { handleApiError } from "@/src/utils/errorHandler";
+import { lightImpact } from "@/src/utils/haptics";
+import { useTabBarVisibility } from "@/components/layout/TabBarVisibilityContext";
+
+export default function FeedScreen() {
+  const { colors } = useTheme();
+  const [posts, setPosts] = useState<Post[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
+  const [page, setPage] = useState(1);
+  const [total, setTotal] = useState(0);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [filter, setFilter] = useState<FeedFilter>("all");
+  const [commentPostId, setCommentPostId] = useState<number | null>(null);
+  const [unreadCount, setUnreadCount] = useState(0);
+  const [createSheetOpen, setCreateSheetOpen] = useState(false);
+  const [filterDropdownOpen, setFilterDropdownOpen] = useState(false);
+  const [headerHeight, setHeaderHeight] = useState(0);
+  const [storyHeight, setStoryHeight] = useState(0);
+  const [chromeHidden, setChromeHidden] = useState(false);
+  const [storyHidden, setStoryHidden] = useState(false);
+  const [miniBarVisible, setMiniBarVisible] = useState(false);
+  const headerAnim = useRef(new Animated.Value(1)).current;
+  const storyAnim = useRef(new Animated.Value(1)).current;
+  const miniBarAnim = useRef(new Animated.Value(0)).current;
+  const lastScrollY = useRef(0);
+  const lastToggleY = useRef(0);
+  const lastDirection = useRef<"up" | "down" | null>(null);
+  const chromeHiddenRef = useRef(false);
+  const storyHiddenRef = useRef(false);
+  const miniBarVisibleRef = useRef(false);
+  const { hide: hideTabBar, show: showTabBar } = useTabBarVisibility();
+  const insets = useSafeAreaInsets();
+  const pageSize = 15;
+
+  const handleCreateSelect = useCallback((type: CreateType) => {
+    if (type === "post") {
+      router.push("/create-post" as any);
+    } else if (type === "reels") {
+      router.push({ pathname: "/create-post", params: { preSelect: "reels" } } as any);
+    } else if (type === "story") {
+      router.push("/create-story" as any);
+    }
+  }, []);
+
+  const loadFeed = useCallback(async (refresh = false) => {
+    const p = refresh ? 1 : page;
+    try {
+      if (p === 1) setLoading(true);
+      else setLoadingMore(true);
+      const res = await getFeed(p, pageSize, filter);
+      if (refresh) {
+        setPosts(res.items);
+        setPage(1);
+      } else {
+        setPosts((prev) => (p === 1 ? res.items : [...prev, ...res.items]));
+      }
+      setTotal(res.total);
+    } catch (e) {
+      handleApiError(e);
+    } finally {
+      setLoading(false);
+      setRefreshing(false);
+      setLoadingMore(false);
+    }
+  }, [page, filter]);
+
+  useEffect(() => {
+    loadFeed(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- load on filter change only
+  }, [filter]);
+
+  const refreshUnread = useCallback(async () => {
+    try {
+      const res = await getUnreadCount();
+      setUnreadCount(res.count);
+    } catch {
+      // ignore
+    }
+  }, []);
+
+  useFocusEffect(
+    useCallback(() => {
+      refreshUnread();
+    }, [refreshUnread])
+  );
+
+  const handleRefresh = useCallback(() => {
+    lightImpact();
+    setRefreshing(true);
+    loadFeed(true);
+  }, [loadFeed]);
+
+  const handleLoadMore = useCallback(() => {
+    if (loadingMore || posts.length >= total) return;
+    setPage((p) => p + 1);
+  }, [loadingMore, posts.length, total]);
+
+  useEffect(() => {
+    if (page > 1) loadFeed(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- load on page change only
+  }, [page]);
+
+
+  const handleLike = useCallback(async (post: Post) => {
+    setPosts((prev) =>
+      prev.map((p) =>
+        p.id === post.id
+          ? {
+              ...p,
+              is_liked: !p.is_liked,
+              like_count: p.like_count + (p.is_liked ? -1 : 1),
+            }
+          : p
+      )
+    );
+    try {
+      const res = await toggleLike(post.id);
+      setPosts((prev) =>
+        prev.map((p) =>
+          p.id === post.id ? { ...p, is_liked: res.liked, like_count: res.like_count } : p
+        )
+      );
+    } catch {
+      setPosts((prev) =>
+        prev.map((p) => (p.id === post.id ? { ...p, is_liked: post.is_liked, like_count: post.like_count } : p))
+      );
+    }
+  }, []);
+
+  const handleCommentAdded = useCallback((postId: number) => {
+    setPosts((prev) =>
+      prev.map((p) => (p.id === postId ? { ...p, comment_count: p.comment_count + 1 } : p))
+    );
+  }, []);
+
+  const renderItem = useCallback(
+    ({ item }: { item: Post }) => (
+      <FeedCard
+        post={item}
+        onPress={() => item.place_id && router.push(`/place/${item.place_id}` as any)}
+        onAuthorPress={() => router.push(`/user/${item.user_id}` as any)}
+        onPlacePress={() => item.place_id && router.push(`/place/${item.place_id}` as any)}
+        onLike={() => handleLike(item)}
+        onComment={() => setCommentPostId(item.id)}
+      />
+    ),
+    [handleLike]
+  );
+
+  const listEmpty = () => {
+    if (loading) {
+      return (
+        <View style={styles.center}>
+          <LoadingState message="Gönderiler yükleniyor..." />
+        </View>
+      );
+    }
+    return (
+      <View style={styles.center}>
+        <EmptyState
+          variant="feed"
+          title="Henüz gönderi yok"
+          description="İlk paylaşımı sen yap!"
+          actionLabel="Paylaş"
+          onAction={() => setCreateSheetOpen(true)}
+        />
+      </View>
+    );
+  };
+
+
+  const animateHeader = useCallback(
+    (hidden: boolean) => {
+      if (chromeHiddenRef.current === hidden) return;
+      chromeHiddenRef.current = hidden;
+      setChromeHidden(hidden);
+      Animated.timing(headerAnim, {
+        toValue: hidden ? 0 : 1,
+        duration: 240,
+        easing: Easing.out(Easing.cubic),
+        useNativeDriver: true,
+      }).start();
+      if (hidden) hideTabBar();
+      else showTabBar();
+    },
+    [headerAnim, hideTabBar, showTabBar]
+  );
+
+  const animateStory = useCallback(
+    (hidden: boolean) => {
+      if (storyHiddenRef.current === hidden) return;
+      storyHiddenRef.current = hidden;
+      setStoryHidden(hidden);
+      Animated.timing(storyAnim, {
+        toValue: hidden ? 0 : 1,
+        duration: 240,
+        easing: Easing.out(Easing.cubic),
+        useNativeDriver: true,
+      }).start();
+    },
+    [storyAnim]
+  );
+
+  const animateMiniBar = useCallback(
+    (visible: boolean) => {
+      if (miniBarVisibleRef.current === visible) return;
+      miniBarVisibleRef.current = visible;
+      setMiniBarVisible(visible);
+      Animated.timing(miniBarAnim, {
+        toValue: visible ? 1 : 0,
+        duration: 180,
+        easing: Easing.out(Easing.cubic),
+        useNativeDriver: true,
+      }).start();
+    },
+    [miniBarAnim]
+  );
+
+  const handleScroll = useCallback(
+    (rawY: number) => {
+      const y = Math.max(rawY, 0);
+      const dy = y - lastScrollY.current;
+      lastScrollY.current = y;
+
+      if (y <= 0) {
+        animateHeader(false);
+        animateStory(false);
+        animateMiniBar(false);
+        lastToggleY.current = 0;
+        lastDirection.current = null;
+        return;
+      }
+
+      if (dy === 0) {
+        return;
+      }
+
+      const direction: "up" | "down" = dy > 0 ? "down" : "up";
+      if (direction !== lastDirection.current) {
+        lastDirection.current = direction;
+        lastToggleY.current = y;
+      }
+
+      const headerThreshold = Math.max(12, headerHeight * 0.3);
+      const miniThreshold = Math.max(8, headerHeight * 0.2);
+      const storyRevealY = Math.max(1, headerHeight + storyHeight);
+
+      if (y <= storyRevealY) {
+        animateMiniBar(false);
+        animateHeader(false);
+        animateStory(false);
+        return;
+      }
+
+      if (direction === "down") {
+        if (miniBarVisibleRef.current) {
+          animateMiniBar(false);
+        }
+        if (
+          !chromeHiddenRef.current &&
+          y - lastToggleY.current >= headerThreshold &&
+          y > headerHeight * 0.6
+        ) {
+          animateHeader(true);
+          animateStory(true);
+          animateMiniBar(false);
+          lastToggleY.current = y;
+        }
+      } else {
+        if (chromeHiddenRef.current && lastToggleY.current - y >= miniThreshold) {
+          animateMiniBar(true);
+          lastToggleY.current = y;
+        }
+      }
+    },
+    [animateHeader, animateMiniBar, animateStory, headerHeight, storyHeight]
+  );
+
+  const titleStyle = createTextStyle("title", colors.text.primary);
+  const headerOpacity = headerAnim.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, 1],
+  });
+  const storyOpacity = storyAnim.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, 1],
+  });
+  const miniBarOpacity = miniBarAnim.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, 1],
+  });
+  const miniBarTranslateY = miniBarAnim.interpolate({
+    inputRange: [0, 1],
+    outputRange: [-48, 0],
+  });
+
+  const listHeader = (
+    <View style={{ zIndex: 20 }}>
+      <Animated.View
+        style={[
+          styles.headerWrap,
+          {
+            opacity: headerOpacity,
+          },
+        ]}
+        pointerEvents={chromeHidden ? "none" : "auto"}
+      >
+        <View
+          style={styles.header}
+          onLayout={(e) => {
+            const h = e.nativeEvent.layout.height;
+            if (h !== headerHeight) setHeaderHeight(h);
+          }}
+        >
+          <Text style={[titleStyle, styles.title]}>Akış</Text>
+
+          {/* Dropdown filter — header ortası */}
+          <View style={styles.dropdownWrap}>
+            <TouchableOpacity
+              style={[styles.dropdownTrigger]}
+              onPress={() => { lightImpact(); setFilterDropdownOpen((o) => !o); }}
+              activeOpacity={0.8}
+            >
+              <Text style={[styles.dropdownLabel, { color: colors.text.primary }]}>
+                {filter === "all" ? "Herkes" : "Takip Ettiklerim"}
+              </Text>
+              <IconSymbol
+                name={filterDropdownOpen ? "chevron.up" : "chevron.down"}
+                size={12}
+                color={colors.text.secondary}
+              />
+            </TouchableOpacity>
+            {filterDropdownOpen && (
+              <View style={[styles.dropdownMenu, { backgroundColor: colors.surface.elevated, borderColor: colors.surface.border }]}>
+                {(["all", "following"] as const).map((opt) => (
+                  <TouchableOpacity
+                    key={opt}
+                    style={[styles.dropdownItem, filter === opt && { backgroundColor: colors.accent.primary + "18" }]}
+                    onPress={() => {
+                      lightImpact();
+                      setFilter(opt);
+                      setFilterDropdownOpen(false);
+                    }}
+                    activeOpacity={0.7}
+                  >
+                    {filter === opt && (
+                      <IconSymbol name="checkmark" size={13} color={colors.accent.primary} />
+                    )}
+                    <Text style={[styles.dropdownItemText, { color: filter === opt ? colors.accent.primary : colors.text.primary }]}>
+                      {opt === "all" ? "Herkes" : "Takip Ettiklerim"}
+                    </Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
+            )}
+          </View>
+
+          <View style={styles.headerRight}>
+            <TouchableOpacity
+              style={[styles.iconBtn, { backgroundColor: colors.surface.elevated }]}
+              onPress={() => {
+                lightImpact();
+                router.push("/notifications" as any);
+                refreshUnread();
+              }}
+            >
+              <IconSymbol name="bell.fill" size={20} color={colors.text.primary} />
+              {unreadCount > 0 && (
+                <View style={[styles.badge, { backgroundColor: colors.semantic.error }]}>
+                  <Text style={[styles.badgeText, { color: colors.accent.onPrimary }]}>
+                    {unreadCount > 99 ? "99+" : unreadCount}
+                  </Text>
+                </View>
+              )}
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[styles.createBtn, { backgroundColor: colors.accent.primary }]}
+              onPress={() => {
+                lightImpact();
+                setCreateSheetOpen(true);
+              }}
+            >
+              <IconSymbol name="plus" size={20} color={colors.accent.onPrimary} />
+            </TouchableOpacity>
+          </View>
+        </View>
+      </Animated.View>
+
+      <Animated.View
+        style={[
+          styles.topWrap,
+          {
+            opacity: storyOpacity,
+          },
+        ]}
+        pointerEvents={storyHidden ? "none" : "auto"}
+      >
+        <View
+          onLayout={(e) => {
+            const h = e.nativeEvent.layout.height;
+            if (h !== storyHeight) setStoryHeight(h);
+          }}
+        >
+          <FeedStoriesRow filter={filter} />
+        </View>
+      </Animated.View>
+    </View>
+  );
+
+  return (
+    <Screen scrollable={false} withTabBar>
+      <FlatList
+        data={posts}
+        keyExtractor={(item) => String(item.id)}
+        renderItem={renderItem}
+        ListEmptyComponent={listEmpty}
+        ListHeaderComponent={listHeader}
+        contentContainerStyle={posts.length === 0 ? styles.listEmpty : styles.listContent}
+        initialNumToRender={6}
+        maxToRenderPerBatch={6}
+        windowSize={5}
+        removeClippedSubviews={true}
+        refreshControl={
+          <RefreshControl
+            refreshing={refreshing}
+            onRefresh={handleRefresh}
+            tintColor={colors.accent.primary}
+          />
+        }
+        onScroll={(e) => handleScroll(e.nativeEvent.contentOffset.y)}
+        scrollEventThrottle={16}
+        showsVerticalScrollIndicator={false}
+        onEndReached={handleLoadMore}
+        onEndReachedThreshold={0.3}
+      />
+      <Animated.View
+        style={[
+          styles.miniBar,
+          {
+            backgroundColor: colors.background.primary,
+            borderBottomColor: colors.surface.border,
+            top: insets.top,
+            opacity: miniBarOpacity,
+            transform: [{ translateY: miniBarTranslateY }],
+          },
+        ]}
+        pointerEvents={miniBarVisible ? "auto" : "none"}
+      >
+
+        <TouchableOpacity
+          style={[styles.miniIconBtn, { backgroundColor: colors.surface.default }]}
+          onPress={() => {
+            lightImpact();
+            setCreateSheetOpen(true);
+          }}
+        >
+          <IconSymbol name="plus" size={18} color={colors.text.primary}/>
+        </TouchableOpacity>
+        <Text style={[styles.miniTitle, { color: colors.text.primary }]}>Akış</Text>
+        <TouchableOpacity
+          style={[styles.miniIconBtn, { backgroundColor: colors.surface.default }]}
+          onPress={() => {
+            lightImpact();
+            router.push("/notifications" as any);
+            refreshUnread();
+          }}
+        >
+          <IconSymbol name="bell.fill" size={18} color={colors.text.primary} />
+          {unreadCount > 0 && (
+            <View style={[styles.miniBadge, { backgroundColor: colors.semantic.error }]}>
+              <Text style={[styles.miniBadgeText, { color: colors.accent.onPrimary }]}>
+                {unreadCount > 99 ? "99+" : unreadCount}
+              </Text>
+            </View>
+          )}
+        </TouchableOpacity>
+      </Animated.View>
+
+      {commentPostId && (
+        <CommentBottomSheet
+          visible={!!commentPostId}
+          onClose={() => setCommentPostId(null)}
+          postId={commentPostId}
+          onCommentAdded={() => handleCommentAdded(commentPostId)}
+        />
+      )}
+
+      <CreateTypeSheet
+        visible={createSheetOpen}
+        onClose={() => setCreateSheetOpen(false)}
+        onSelect={handleCreateSelect}
+      />
+    </Screen>
+  );
+}
+
+const styles = StyleSheet.create({
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: spacing.base,
+    overflow: "visible",
+    position: "relative",
+  },
+  title: { fontSize: 26, fontWeight: "700" },
+  headerRight: { flexDirection: "row", alignItems: "center", gap: 10 },
+  headerWrap: {
+    overflow: "visible",
+    zIndex: 20,
+  },
+  iconBtn: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  badge: {
+    position: "absolute",
+    top: 4,
+    right: 4,
+    minWidth: 18,
+    height: 18,
+    borderRadius: 9,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 4,
+  },
+  badgeText: {
+    fontSize: 10,
+    fontWeight: "700",
+  },
+  dropdownWrap: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    zIndex: 20,
+    alignItems: "center",
+    pointerEvents: "box-none",
+  },
+  dropdownTrigger: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 20,
+  },
+  dropdownLabel: {
+    fontSize: 16,
+    fontWeight: "700",
+  },
+  dropdownMenu: {
+    position: "absolute",
+    top: 44,
+    left: "50%",
+    transform: [{ translateX: -90 }],
+    width: 180,
+    borderRadius: 14,
+    borderWidth: StyleSheet.hairlineWidth,
+    overflow: "hidden",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.15,
+    shadowRadius: 8,
+    elevation: 8,
+  },
+  dropdownItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+    paddingHorizontal: 16,
+    paddingVertical: 13,
+  },
+  dropdownItemText: {
+    fontSize: 14,
+    fontWeight: "600",
+  },
+  topWrap: {
+    overflow: "hidden",
+  },
+  createBtn: {
+    width: 44,
+    height: 44,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 22,
+  },
+  listContent: { paddingBottom: spacing.xl * 2, gap: spacing.xl },
+  listEmpty: { flexGrow: 1 },
+  center: { flex: 1, justifyContent: "center", minHeight: 300 },
+  miniBar: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    zIndex: 10,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: spacing.lg,
+    paddingVertical: 8,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+  miniTitle: { flex: 1, fontSize: 16, fontWeight: "700", textAlign: "center" },
+  miniIconBtn: {
+    width: 34,
+    height: 34,
+    borderRadius: 55,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  miniBadge: {
+    position: "absolute",
+    top: 2,
+    right: 2,
+    minWidth: 14,
+    height: 14,
+    borderRadius: 7,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 2,
+  },
+  miniBadgeText: {
+    fontSize: 9,
+    fontWeight: "700",
+  },
+});

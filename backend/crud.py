@@ -1,4 +1,6 @@
-from sqlalchemy.orm import Session
+from datetime import datetime, timedelta, timezone
+from sqlalchemy import func
+from sqlalchemy.orm import Session, joinedload
 import bcrypt
 import models, schemas
 
@@ -236,3 +238,366 @@ def add_owner_response(db: Session, review_id: int, response_text: str):
         db.commit()
         db.refresh(review)
     return review
+
+
+# --- POST (SOSYAL AKIŞ) İŞLEMLERİ ---
+
+def create_post(db: Session, user_id: int, data: schemas.PostCreate):
+    db_post = models.Post(
+        user_id=user_id,
+        place_id=data.place_id,
+        caption=data.caption,
+        post_type=data.post_type or "photo",
+    )
+    db.add(db_post)
+    db.commit()
+    db.refresh(db_post)
+    for idx, m in enumerate(data.media):
+        db_media = models.PostMedia(
+            post_id=db_post.id,
+            media_type=m.media_type,
+            media_url=m.media_url,
+            thumbnail_url=m.thumbnail_url,
+            order_index=idx,
+        )
+        db.add(db_media)
+    db.commit()
+    db.refresh(db_post)
+    return db_post
+
+
+def get_feed_paginated(
+    db: Session,
+    page: int = 1,
+    page_size: int = 20,
+    current_user_id: int | None = None,
+    filter_mode: str = "all",
+    post_type: str | None = None,
+):
+    base = db.query(models.Post)
+    if filter_mode == "following" and current_user_id:
+        following_ids = (
+            db.query(models.Follow.following_id)
+            .filter(models.Follow.follower_id == current_user_id)
+            .subquery()
+        )
+        base = base.filter(models.Post.user_id.in_(following_ids))
+    if post_type:
+        base = base.filter(models.Post.post_type == post_type)
+    total = base.count()
+    offset = (page - 1) * page_size
+    posts = (
+        base.options(
+            joinedload(models.Post.user),
+            joinedload(models.Post.place),
+            joinedload(models.Post.media),
+        )
+        .order_by(models.Post.created_at.desc())
+        .offset(offset)
+        .limit(page_size)
+        .all()
+    )
+    return posts, total
+
+
+def get_post_by_id(db: Session, post_id: int):
+    return (
+        db.query(models.Post)
+        .options(
+            joinedload(models.Post.user),
+            joinedload(models.Post.place),
+            joinedload(models.Post.media),
+        )
+        .filter(models.Post.id == post_id)
+        .first()
+    )
+
+
+def delete_post(db: Session, post_id: int, user_id: int):
+    post = db.query(models.Post).filter(models.Post.id == post_id, models.Post.user_id == user_id).first()
+    if post:
+        db.delete(post)
+        db.commit()
+        return True
+    return False
+
+
+def toggle_post_like(db: Session, post_id: int, user_id: int):
+    like = db.query(models.PostLike).filter(
+        models.PostLike.post_id == post_id, models.PostLike.user_id == user_id
+    ).first()
+    post = db.query(models.Post).filter(models.Post.id == post_id).first()
+    if not post:
+        return None, False
+    if like:
+        db.delete(like)
+        post.like_count = max(0, post.like_count - 1)
+        db.commit()
+        return post, False
+    db.add(models.PostLike(post_id=post_id, user_id=user_id))
+    post.like_count += 1
+    db.commit()
+    db.refresh(post)
+    return post, True
+
+
+def is_post_liked_by_user(db: Session, post_id: int, user_id: int | None) -> bool:
+    if not user_id:
+        return False
+    return db.query(models.PostLike).filter(
+        models.PostLike.post_id == post_id, models.PostLike.user_id == user_id
+    ).first() is not None
+
+
+def get_comments_paginated(db: Session, post_id: int, page: int = 1, page_size: int = 20):
+    base = db.query(models.PostComment).filter(models.PostComment.post_id == post_id)
+    total = base.count()
+    offset = (page - 1) * page_size
+    comments = (
+        base.options(joinedload(models.PostComment.user))
+        .order_by(models.PostComment.created_at.asc())
+        .offset(offset)
+        .limit(page_size)
+        .all()
+    )
+    return comments, total
+
+
+def add_post_comment(db: Session, post_id: int, user_id: int, text: str):
+    comment = models.PostComment(post_id=post_id, user_id=user_id, text=text)
+    db.add(comment)
+    post = db.query(models.Post).filter(models.Post.id == post_id).first()
+    if post:
+        post.comment_count += 1
+    db.commit()
+    db.refresh(comment)
+    return comment
+
+
+def get_posts_by_user(db: Session, user_id: int, page: int = 1, page_size: int = 20):
+    base = db.query(models.Post).filter(models.Post.user_id == user_id)
+    total = base.count()
+    offset = (page - 1) * page_size
+    posts = (
+        base.options(
+            joinedload(models.Post.user),
+            joinedload(models.Post.place),
+            joinedload(models.Post.media),
+        )
+        .order_by(models.Post.created_at.desc())
+        .offset(offset)
+        .limit(page_size)
+        .all()
+    )
+    return posts, total
+
+
+def get_posts_by_place(db: Session, place_id: int, page: int = 1, page_size: int = 20):
+    base = db.query(models.Post).filter(models.Post.place_id == place_id)
+    total = base.count()
+    offset = (page - 1) * page_size
+    posts = (
+        base.options(
+            joinedload(models.Post.user),
+            joinedload(models.Post.place),
+            joinedload(models.Post.media),
+        )
+        .order_by(models.Post.created_at.desc())
+        .offset(offset)
+        .limit(page_size)
+        .all()
+    )
+    return posts, total
+
+
+# --- STORY (Hikaye) ---
+
+def create_story(db: Session, user_id: int, data: schemas.StoryCreate):
+    expires_at = datetime.now(timezone.utc) + timedelta(hours=24)
+    story = models.Story(
+        user_id=user_id,
+        place_id=data.place_id,
+        media_type=data.media_type,
+        media_url=data.media_url,
+        thumbnail_url=data.thumbnail_url,
+        expires_at=expires_at,
+    )
+    db.add(story)
+    db.commit()
+    db.refresh(story)
+    return story
+
+
+def get_stories_by_place(db: Session, place_id: int, page: int = 1, page_size: int = 50):
+    now = datetime.now(timezone.utc)
+    base = (
+        db.query(models.Story)
+        .filter(models.Story.place_id == place_id, models.Story.expires_at > now)
+    )
+    total = base.count()
+    offset = (page - 1) * page_size
+    stories = (
+        base.options(
+            joinedload(models.Story.user),
+            joinedload(models.Story.place),
+        )
+        .order_by(models.Story.created_at.desc())
+        .offset(offset)
+        .limit(page_size)
+        .all()
+    )
+    return stories, total
+
+
+def get_feed_stories(
+    db: Session,
+    page: int = 1,
+    page_size: int = 50,
+    current_user_id: int | None = None,
+    filter_mode: str = "all",
+):
+    """Akış için hikayeler – süresi dolmamış, takip edilenler veya herkes."""
+    now = datetime.now(timezone.utc)
+    base = db.query(models.Story).filter(models.Story.expires_at > now)
+    if filter_mode == "following" and current_user_id:
+        following_ids = (
+            db.query(models.Follow.following_id)
+            .filter(models.Follow.follower_id == current_user_id)
+            .subquery()
+        )
+        base = base.filter(models.Story.user_id.in_(following_ids))
+    total = base.count()
+    offset = (page - 1) * page_size
+    stories = (
+        base.options(
+            joinedload(models.Story.user),
+            joinedload(models.Story.place),
+        )
+        .order_by(models.Story.created_at.desc())
+        .offset(offset)
+        .limit(page_size)
+        .all()
+    )
+    return stories, total
+
+
+# --- FOLLOW (Kademe 5) ---
+
+def toggle_follow(db: Session, follower_id: int, following_id: int) -> tuple[bool, bool]:
+    """Takip et / takipten çık. Returns (is_now_following, was_created)."""
+    if follower_id == following_id:
+        return False, False
+    existing = db.query(models.Follow).filter(
+        models.Follow.follower_id == follower_id,
+        models.Follow.following_id == following_id,
+    ).first()
+    if existing:
+        db.delete(existing)
+        db.commit()
+        return False, False
+    db.add(models.Follow(follower_id=follower_id, following_id=following_id))
+    db.commit()
+    return True, True
+
+
+def is_following(db: Session, follower_id: int, following_id: int) -> bool:
+    if not follower_id or follower_id == following_id:
+        return False
+    return db.query(models.Follow).filter(
+        models.Follow.follower_id == follower_id,
+        models.Follow.following_id == following_id,
+    ).first() is not None
+
+
+def get_follower_ids(db: Session, user_id: int) -> list[int]:
+    return [r[0] for r in db.query(models.Follow.follower_id).filter(models.Follow.following_id == user_id).all()]
+
+
+def get_following_ids(db: Session, user_id: int) -> list[int]:
+    return [r[0] for r in db.query(models.Follow.following_id).filter(models.Follow.follower_id == user_id).all()]
+
+
+# --- NOTIFICATION (Kademe 5) ---
+
+def create_notification(db: Session, user_id: int, type: str, actor_id: int, post_id: int | None = None):
+    if user_id == actor_id:
+        return None
+    n = models.Notification(user_id=user_id, type=type, actor_id=actor_id, post_id=post_id)
+    db.add(n)
+    db.commit()
+    db.refresh(n)
+    return n
+
+
+def get_notifications_paginated(db: Session, user_id: int, page: int = 1, page_size: int = 20):
+    base = db.query(models.Notification).filter(models.Notification.user_id == user_id)
+    total = base.count()
+    offset = (page - 1) * page_size
+    items = (
+        base.order_by(models.Notification.created_at.desc())
+        .offset(offset)
+        .limit(page_size)
+        .all()
+    )
+    return items, total
+
+
+def mark_notifications_read(db: Session, user_id: int):
+    db.query(models.Notification).filter(
+        models.Notification.user_id == user_id,
+        models.Notification.is_read == False,
+    ).update({models.Notification.is_read: True})
+    db.commit()
+
+
+def get_unread_notification_count(db: Session, user_id: int) -> int:
+    return db.query(models.Notification).filter(
+        models.Notification.user_id == user_id,
+        models.Notification.is_read == False,
+    ).count()
+
+
+# --- PROFİL İSTATİSTİKLERİ (Kademe 6) ---
+
+def get_user_stats(db: Session, user_id: int) -> dict:
+    post_count = db.query(models.Post).filter(models.Post.user_id == user_id).count()
+    review_count = db.query(models.Review).filter(models.Review.user_id == user_id).count()
+    visit_count = review_count
+    now = datetime.utcnow()
+    start_of_month = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
+    visits_this_month = (
+        db.query(models.Review)
+        .filter(models.Review.user_id == user_id, models.Review.created_at >= start_of_month)
+        .count()
+    )
+    favorite_category = None
+    favorite_region = None
+    if review_count > 0:
+        cat_row = (
+            db.query(models.Place.category, func.count(models.Review.id))
+            .join(models.Review, models.Review.place_id == models.Place.id)
+            .filter(models.Review.user_id == user_id, models.Place.category.isnot(None))
+            .group_by(models.Place.category)
+            .order_by(func.count(models.Review.id).desc())
+            .first()
+        )
+        if cat_row and cat_row[0]:
+            favorite_category = cat_row[0]
+        region_row = (
+            db.query(models.Place.city, func.count(models.Review.id))
+            .join(models.Review, models.Review.place_id == models.Place.id)
+            .filter(models.Review.user_id == user_id, models.Place.city.isnot(None))
+            .group_by(models.Place.city)
+            .order_by(func.count(models.Review.id).desc())
+            .first()
+        )
+        if region_row and region_row[0]:
+            favorite_region = region_row[0]
+    return {
+        "post_count": post_count,
+        "review_count": review_count,
+        "visit_count": visit_count,
+        "visits_this_month": visits_this_month,
+        "favorite_category": favorite_category,
+        "favorite_region": favorite_region,
+    }

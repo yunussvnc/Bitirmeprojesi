@@ -18,7 +18,10 @@ import {
   Platform,
   RefreshControl,
   ViewToken,
+  Animated,
+  Easing,
 } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import * as Location from 'expo-location';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import { useTheme } from '@/hooks/useTheme';
@@ -26,9 +29,9 @@ import { Screen, type ScreenRef } from '@/components/layout';
 import {
   ChatInput,
   AnimatedPlaceCard,
-  LoadingState,
   ErrorState,
   EmptyState,
+  PlaceCardSkeleton,
 } from '@/components/ui';
 import {
   FilterBottomSheet,
@@ -45,6 +48,8 @@ import type { Place } from '@/src/services/mekanService';
 import type { RecommendItem, RecommendResponse } from '@/src/types/recommend';
 import { handleApiError } from '@/src/utils/errorHandler';
 import { lightImpact } from '@/src/utils/haptics';
+import { useAppStore } from '@/src/store/useAppStore';
+import { useTabBarVisibility } from '@/components/layout/TabBarVisibilityContext';
 
 /** İstanbul ilçeleri */
 const DISTRICTS = [
@@ -63,6 +68,9 @@ const PLACE_TYPES = [
 
 type DisplayMode = 'browse' | 'ai';
 
+/** Common shape for list items (RecommendItem | Place) */
+type PlaceLike = { id: number | string; name?: string; category?: string; photo_url?: string; description?: string; subtitle?: string; tags?: string[] };
+
 /** Ayrı component – FlatList her query değişiminde header'ı remount etmez, klavye kapanmaz */
 function HomeListHeader({
   query,
@@ -79,6 +87,8 @@ function HomeListHeader({
   setAiSummary,
   setFilterSheetOpen,
   clearAll,
+  savedCount,
+  onSavedPress,
 }: {
   query: string;
   setQuery: (q: string) => void;
@@ -94,6 +104,8 @@ function HomeListHeader({
   setAiSummary: (s: string) => void;
   setFilterSheetOpen: (v: boolean) => void;
   clearAll: () => void;
+  savedCount: number;
+  onSavedPress: () => void;
 }) {
   const { colors } = useTheme();
   return (
@@ -105,11 +117,16 @@ function HomeListHeader({
           </View>
         </View>
         <TouchableOpacity
-          onPress={() => { lightImpact(); router.push('/(tabs)/profile'); }}
-          style={[styles.profileBtn, { backgroundColor: colors.surface.elevated }]}
+          onPress={onSavedPress}
+          style={[styles.savedBtn, { backgroundColor: colors.surface.elevated }]}
           activeOpacity={0.7}
         >
-          <IconSymbol name="person.fill" size={18} color={colors.text.secondary} />
+          <IconSymbol name="bookmark.fill" size={22} color={colors.text.secondary} />
+          {savedCount > 0 && (
+            <View style={[styles.savedBadge, { backgroundColor: colors.accent.primary }]}>
+              <Text style={[styles.savedBadgeText, { color: colors.accent.onPrimary }]}>{savedCount > 99 ? '99+' : savedCount}</Text>
+            </View>
+          )}
         </TouchableOpacity>
       </View>
 
@@ -189,6 +206,7 @@ export default function HomeScreen() {
   const screenRef = useRef<ScreenRef>(null);
   const flatListRef = useRef<FlatList>(null);
   const { prefs, patchPrefs, resetPrefs } = usePreferences();
+  const savedIds = useAppStore((s) => s.savedIds);
 
   const [query, setQuery] = useState('');
   const [allPlaces, setAllPlaces] = useState<Place[]>([]);
@@ -202,6 +220,14 @@ export default function HomeScreen() {
   const [placesById, setPlacesById] = useState<Record<string, Place>>({});
   const [filterSheetOpen, setFilterSheetOpen] = useState(false);
   const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
+  const [miniBarVisible, setMiniBarVisible] = useState(false);
+  const miniBarAnim = useRef(new Animated.Value(0)).current;
+  const lastScrollY = useRef(0);
+  const lastToggleY = useRef(0);
+  const lastDirection = useRef<'up' | 'down' | null>(null);
+  const miniBarVisibleRef = useRef(false);
+  const { hide: hideTabBar, show: showTabBar } = useTabBarVisibility();
+  const insets = useSafeAreaInsets();
   const [filters, setFilters] = useState<FilterValues>({
     location: null,
     category: null,
@@ -277,12 +303,64 @@ export default function HomeScreen() {
       setAiSummary(res.summary || '');
       setDisplayMode('ai');
     } catch (e: unknown) {
-      const err = e instanceof Error ? (e as any).userMessage || e.message : 'Öneriler alınamadı';
+      const err = handleApiError(e).userMessage;
       setError(err);
     } finally {
       setAiLoading(false);
     }
   }, [query, prefs, filters, userLocation]);
+
+  const animateMiniBar = useCallback(
+    (visible: boolean) => {
+      if (miniBarVisibleRef.current === visible) return;
+      miniBarVisibleRef.current = visible;
+      setMiniBarVisible(visible);
+      if (visible) hideTabBar(); else showTabBar();
+      Animated.timing(miniBarAnim, {
+        toValue: visible ? 1 : 0,
+        duration: 180,
+        easing: Easing.out(Easing.cubic),
+        useNativeDriver: true,
+      }).start();
+    },
+    [miniBarAnim, hideTabBar, showTabBar]
+  );
+
+  const handleScroll = useCallback(
+    (rawY: number) => {
+      const y = Math.max(rawY, 0);
+      const dy = y - lastScrollY.current;
+      lastScrollY.current = y;
+
+      if (y <= 0) {
+        animateMiniBar(false);
+        lastToggleY.current = 0;
+        lastDirection.current = null;
+        return;
+      }
+
+      if (dy === 0) return;
+
+      const direction: 'up' | 'down' = dy > 0 ? 'down' : 'up';
+      if (direction !== lastDirection.current) {
+        lastDirection.current = direction;
+        lastToggleY.current = y;
+      }
+
+      if (direction === 'down') {
+        if (miniBarVisibleRef.current) animateMiniBar(false);
+      } else {
+        if (!miniBarVisibleRef.current && y > 120 && lastToggleY.current - y >= 20) {
+          animateMiniBar(true);
+          lastToggleY.current = y;
+        }
+      }
+    },
+    [animateMiniBar]
+  );
+
+  const miniBarOpacity = miniBarAnim.interpolate({ inputRange: [0, 1], outputRange: [0, 1] });
+  const miniBarTranslateY = miniBarAnim.interpolate({ inputRange: [0, 1], outputRange: [-48, 0] });
 
   const handleRefresh = async () => {
     setRefreshing(true);
@@ -350,17 +428,18 @@ export default function HomeScreen() {
 
   const renderPlaceItem = useCallback(
     ({ item, index }: { item: RecommendItem | Place; index: number }) => {
-      const id = String((item as any).id);
+      const it = item as PlaceLike;
+      const id = String(it.id);
       const place = placesById[id] || (item as Place);
       const merged = {
         id,
-        name: (item as any).name,
-        category: (item as any).category ?? place?.category,
-        photo_url: (item as any).photo_url ?? place?.photo_url,
-        description: (item as any).description ?? place?.description,
-        subtitle: (item as any).subtitle ?? place?.subtitle,
+        name: it.name,
+        category: it.category ?? place?.category,
+        photo_url: it.photo_url ?? place?.photo_url,
+        description: it.description ?? place?.description,
+        subtitle: it.subtitle ?? place?.subtitle,
       };
-      const loc = getLocationFromName((item as any).name ?? '');
+      const loc = getLocationFromName(it.name ?? '');
       const isAi = displayMode === 'ai';
 
       return (
@@ -369,9 +448,9 @@ export default function HomeScreen() {
           index={index}
           image={getPlaceImageSource(merged)}
           imagePlaceholder={!hasPlaceImage(merged)}
-          title={(item as any).name ?? 'Mekan'}
-          subtitle={(item as any).subtitle ?? place?.subtitle}
-          tags={(item as any).tags ?? place?.tags}
+          title={it.name ?? 'Mekan'}
+          subtitle={it.subtitle ?? place?.subtitle}
+          tags={it.tags ?? place?.tags}
           location={loc}
           explanation={isAi ? (item as RecommendItem).explanation : undefined}
           distance_m={isAi ? (item as RecommendItem).distance_m : undefined}
@@ -389,8 +468,8 @@ export default function HomeScreen() {
   const listEmpty = useCallback(() => {
     if (loading && allPlaces.length === 0) {
       return (
-        <View style={styles.centerWrap}>
-          <LoadingState message="Mekanlar yükleniyor..." />
+        <View style={styles.skeletonWrap}>
+          <PlaceCardSkeleton count={4} />
         </View>
       );
     }
@@ -405,7 +484,7 @@ export default function HomeScreen() {
       return (
         <View style={styles.centerWrap}>
           <EmptyState
-            icon="magnifyingglass"
+            variant="search"
             title="Sonuç bulunamadı"
             description="Tercihlerinizi veya aramayı değiştirip tekrar deneyin"
             actionLabel="Temizle"
@@ -418,7 +497,7 @@ export default function HomeScreen() {
       return (
         <View style={styles.centerWrap}>
           <EmptyState
-            icon={hasActiveFilters ? 'magnifyingglass' : 'mappin.slash'}
+            variant={hasActiveFilters ? 'search' : 'places'}
             title={hasActiveFilters ? 'Sonuç bulunamadı' : 'Henüz mekan yok'}
             description={hasActiveFilters ? 'Filtreleri değiştirin' : 'Yakında eklenecek'}
             actionLabel={hasActiveFilters ? 'Temizle' : undefined}
@@ -448,7 +527,7 @@ export default function HomeScreen() {
         <FlatList
           ref={flatListRef}
           data={displayList}
-          keyExtractor={(item) => String((item as any).id)}
+          keyExtractor={(item) => String((item as PlaceLike).id)}
           renderItem={renderPlaceItem}
           ListHeaderComponent={
             <HomeListHeader
@@ -466,6 +545,11 @@ export default function HomeScreen() {
               setAiSummary={setAiSummary}
               setFilterSheetOpen={setFilterSheetOpen}
               clearAll={clearAll}
+              savedCount={savedIds.length}
+              onSavedPress={() => {
+                lightImpact();
+                router.push('/(tabs)/saved');
+              }}
             />
           }
           ListEmptyComponent={listEmpty}
@@ -478,8 +562,36 @@ export default function HomeScreen() {
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} tintColor={colors.accent.primary} />
           }
+          showsVerticalScrollIndicator={false}
           keyboardShouldPersistTaps="handled"
+          onScroll={(e) => handleScroll(e.nativeEvent.contentOffset.y)}
+          scrollEventThrottle={16}
         />
+        <Animated.View
+          style={[
+            styles.miniBar,
+            {
+              backgroundColor: colors.background.primary,
+              borderBottomColor: colors.surface.border,
+              top: 0,
+              opacity: miniBarOpacity,
+              transform: [{ translateY: miniBarTranslateY }],
+            },
+          ]}
+          pointerEvents={miniBarVisible ? 'auto' : 'none'}
+        >
+          <View style={styles.miniBarPlaceholder} />
+          <Text style={[styles.miniTitle, { color: colors.text.primary }]}>Ana Sayfa</Text>
+          <TouchableOpacity
+            style={[styles.miniIconBtn, { backgroundColor: colors.surface.default }]}
+            onPress={() => {
+              lightImpact();
+              router.push('/(tabs)/saved');
+            }}
+          >
+            <IconSymbol name="bookmark.fill" size={18} color={colors.text.primary} />
+          </TouchableOpacity>
+        </Animated.View>
       </View>
     </Screen>
   );
@@ -489,16 +601,40 @@ const styles = StyleSheet.create({
   screen: { flex: 1 },
   header: {
     flexDirection: 'row',
-    alignItems: 'flex-start',
+    alignItems: 'center',
     justifyContent: 'space-between',
     marginBottom: s(4),
+    overflow: 'visible',
   },
   headerLeft: { flex: 1 },
   titleRow: { flexDirection: 'row', alignItems: 'center', gap: 8 },
   dot: { width: 8, height: 8, borderRadius: 4 },
-  title: { fontSize: 26, fontWeight: '700' },
+  title: { fontSize: 26, fontWeight: '700', marginBottom: 0 },
   subtitle: { fontSize: 13, marginTop: 4, marginLeft: 16 },
-  profileBtn: { width: 40, height: 40, borderRadius: 20, alignItems: 'center', justifyContent: 'center' },
+  savedBtn: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    alignItems: 'center',
+    justifyContent: 'center',
+    position: 'relative',
+    overflow: 'visible',
+  },
+  savedBadge: {
+    position: 'absolute',
+    top: 2,
+    right: 2,
+    minWidth: 20,
+    height: 18,
+    borderRadius: 9,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 5,
+  },
+  savedBadgeText: {
+    fontSize: 11,
+    fontWeight: '700',
+  },
   searchWrap: { marginBottom: s(3), minHeight: 72 },
   chatInput: { alignSelf: 'stretch', minHeight: 64 },
   filterSummaryRow: {
@@ -555,4 +691,26 @@ const styles = StyleSheet.create({
   listContent: { gap: s(5), paddingBottom: s(8) },
   listContentEmpty: { flexGrow: 1 },
   centerWrap: { minHeight: 320, justifyContent: 'center' },
+  skeletonWrap: { paddingHorizontal: 20, paddingBottom: 24, gap: 12 },
+  miniBar: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    zIndex: 10,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
+    paddingVertical: 8,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+  miniTitle: { flex: 1, fontSize: 16, fontWeight: '700', textAlign: 'center' },
+  miniBarPlaceholder: { width: 34, height: 34 },
+  miniIconBtn: {
+    width: 34,
+    height: 34,
+    borderRadius: 17,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });

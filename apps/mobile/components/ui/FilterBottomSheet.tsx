@@ -74,7 +74,7 @@ function Segment<T extends string>({
             <Text
               style={[
                 segStyles.label,
-                { color: active ? '#fff' : colors.text.secondary },
+                { color: active ? colors.accent.onPrimary : colors.text.secondary },
               ]}
             >
               {o.label}
@@ -208,7 +208,7 @@ export function FilterBottomSheet({
 
   useEffect(() => {
     if (visible) setDraft(values);
-  }, [visible]);
+  }, [visible, values]);
 
   const patch = <K extends keyof FilterValues>(k: K, v: FilterValues[K]) =>
     setDraft((d) => ({ ...d, [k]: v }));
@@ -312,13 +312,13 @@ export function FilterBottomSheet({
           </ScrollView>
 
           {/* Footer */}
-          <View style={styles.footer}>
+          <View style={[styles.footer, { borderTopColor: colors.surface.border }]}>
             <TouchableOpacity
               onPress={handleApply}
               activeOpacity={0.8}
               style={[styles.applyBtn, { backgroundColor: colors.accent.primary }]}
             >
-              <Text style={styles.applyText}>
+              <Text style={[styles.applyText, { color: colors.accent.onPrimary }]}>
                 {activeCount > 0 ? `Uygula (${activeCount})` : 'Uygula'}
               </Text>
             </TouchableOpacity>
@@ -406,7 +406,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingTop: 12,
     borderTopWidth: StyleSheet.hairlineWidth,
-    borderTopColor: 'rgba(128,128,128,0.15)',
   },
   applyBtn: {
     height: 48,
@@ -415,7 +414,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   applyText: {
-    color: '#fff',
     fontSize: 16,
     fontWeight: '700',
   },

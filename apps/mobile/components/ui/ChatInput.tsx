@@ -14,7 +14,6 @@ import {
   TouchableOpacity,
   StyleSheet,
   ViewStyle,
-  TextInputProps,
   Keyboard,
 } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
@@ -126,7 +125,7 @@ export function ChatInput({
           <IconSymbol
             name="paperplane.fill"
             size={18}
-            color={canSubmit ? '#FFFFFF' : colors.text.tertiary}
+            color={canSubmit ? colors.accent.onPrimary : colors.text.tertiary}
           />
         </TouchableOpacity>
       )}
@@ -157,12 +156,11 @@ const styles = StyleSheet.create({
   submitBtn: {
     width: 40,
     height: 40,
-    borderRadius: 18,
+    borderRadius: 20,
     borderWidth: 1,
     alignItems: 'center',
     justifyContent: 'center',
     marginLeft: 8,
-    borderRadius: 20,
   },
   stopIcon: {
     width: 12,

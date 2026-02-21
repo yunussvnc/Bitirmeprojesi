@@ -9,10 +9,9 @@
 
 import React from 'react';
 import { TouchableOpacity, View, Text, StyleSheet, ViewStyle } from 'react-native';
-import { LinearGradient } from 'expo-linear-gradient';
 import { useTheme } from '@/hooks/useTheme';
 import { IconSymbol, type IconSymbolName } from './icon-symbol';
-import { createTextStyle, spacing } from '@/constants/design';
+import { spacing } from '@/constants/design';
 import { lightImpact } from '@/src/utils/haptics';
 
 export interface FilterCardProps {

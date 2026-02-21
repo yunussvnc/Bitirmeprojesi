@@ -6,4 +6,5 @@ export type Place = {
   tags?: string[];        // ["quiet","work","cheap"]
   imageUrl?: string;
   rating?: number;
+  category?: string;
 };

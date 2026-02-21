@@ -150,6 +150,146 @@ def update_me(
     updated = crud.update_user(db, current_user.id, data)
     return updated
 
+
+# -------------------------
+# USER PROFİL + TAKİP (Kademe 5)
+# -------------------------
+@app.get("/users/{user_id}", response_model=schemas.UserProfile)
+def get_user_profile(
+    user_id: int,
+    db: Session = Depends(get_db),
+    current_user: Optional[models.User] = Depends(get_optional_user),
+):
+    user = crud.get_user_by_id(db, user_id)
+    if not user:
+        raise HTTPException(status_code=404, detail="Kullanıcı bulunamadı.")
+    followers_count = len(crud.get_follower_ids(db, user_id))
+    following_count = len(crud.get_following_ids(db, user_id))
+    is_following = crud.is_following(db, current_user.id if current_user else 0, user_id)
+    return schemas.UserProfile(
+        **schemas.User.model_validate(user).model_dump(),
+        followers_count=followers_count,
+        following_count=following_count,
+        is_following=is_following,
+    )
+
+
+@app.get("/users/{user_id}/stats", response_model=schemas.UserStats)
+def get_user_stats_endpoint(
+    user_id: int,
+    db: Session = Depends(get_db),
+):
+    user = crud.get_user_by_id(db, user_id)
+    if not user:
+        raise HTTPException(status_code=404, detail="Kullanıcı bulunamadı.")
+    return crud.get_user_stats(db, user_id)
+
+
+@app.post("/users/{user_id}/follow")
+def toggle_follow_user(
+    user_id: int,
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(get_current_user),
+):
+    target = crud.get_user_by_id(db, user_id)
+    if not target:
+        raise HTTPException(status_code=404, detail="Kullanıcı bulunamadı.")
+    is_following_now, was_created = crud.toggle_follow(db, current_user.id, user_id)
+    if was_created and is_following_now:
+        crud.create_notification(db, user_id, "follow", current_user.id)
+    return {"following": is_following_now}
+
+
+@app.get("/users/{user_id}/followers")
+def get_followers(
+    user_id: int,
+    page: int = 1,
+    page_size: int = 20,
+    db: Session = Depends(get_db),
+):
+    ids = crud.get_follower_ids(db, user_id)
+    total = len(ids)
+    offset = (page - 1) * page_size
+    paginated_ids = ids[offset : offset + page_size]
+    users = [crud.get_user_by_id(db, uid) for uid in paginated_ids]
+    users = [u for u in users if u]
+    items = [schemas.UserSummary.model_validate(u) for u in users]
+    return {"items": items, "total": total, "page": page, "page_size": page_size}
+
+
+@app.get("/users/{user_id}/following")
+def get_following(
+    user_id: int,
+    page: int = 1,
+    page_size: int = 20,
+    db: Session = Depends(get_db),
+):
+    ids = crud.get_following_ids(db, user_id)
+    total = len(ids)
+    offset = (page - 1) * page_size
+    paginated_ids = ids[offset : offset + page_size]
+    users = [crud.get_user_by_id(db, uid) for uid in paginated_ids]
+    users = [u for u in users if u]
+    items = [schemas.UserSummary.model_validate(u) for u in users]
+    return {"items": items, "total": total, "page": page, "page_size": page_size}
+
+
+# -------------------------
+# BİLDİRİMLER (Kademe 5)
+# -------------------------
+@app.get("/notifications", response_model=schemas.PaginatedNotifications)
+def get_notifications(
+    page: int = 1,
+    page_size: int = 20,
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(get_current_user),
+):
+    items, total = crud.get_notifications_paginated(db, current_user.id, page, page_size)
+    out = []
+    for n in items:
+        actor_username = None
+        if n.actor_id:
+            actor = crud.get_user_by_id(db, n.actor_id)
+            actor_username = actor.username if actor else None
+        place_id = None
+        if n.post_id:
+            post = crud.get_post_by_id(db, n.post_id)
+            place_id = post.place_id if post else None
+        out.append(
+            schemas.Notification(
+                id=n.id,
+                user_id=n.user_id,
+                type=n.type,
+                actor_id=n.actor_id,
+                post_id=n.post_id,
+                place_id=place_id,
+                is_read=n.is_read,
+                created_at=n.created_at,
+                actor_username=actor_username,
+            )
+        )
+    return schemas.PaginatedNotifications(
+        items=out, total=total, page=page, page_size=page_size
+    )
+
+
+@app.get("/notifications/unread-count")
+def get_unread_count(
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(get_current_user),
+):
+    return {"count": crud.get_unread_notification_count(db, current_user.id)}
+
+
+@app.post("/notifications/read")
+def mark_notifications_read(
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(get_current_user),
+):
+    crud.mark_notifications_read(db, current_user.id)
+    return {"ok": True}
+
+
 # -------------------------
 # PLACE CRUD
 # -------------------------
@@ -295,6 +435,282 @@ def recommend_places(req: schemas.RecommendRequest, db: Session = Depends(get_db
         summary=result.get("summary", ""),
         cached=result.get("cached", False),
     )
+
+
+# -------------------------
+# POST / FEED (Sosyal Akış)
+# -------------------------
+def _post_to_schema(post: models.Post, db: Session, current_user_id: int | None) -> schemas.Post:
+    author = schemas.UserSummary(
+        id=post.user.id,
+        username=post.user.username,
+        first_name=post.user.first_name,
+        avatar_url=post.user.avatar_url,
+    ) if post.user else None
+    place = schemas.PlaceSummary(
+        id=post.place.id,
+        name=post.place.name,
+        category=post.place.category,
+    ) if post.place else None
+    media = [
+        schemas.PostMedia(
+            id=m.id,
+            post_id=m.post_id,
+            media_type=m.media_type,
+            media_url=m.media_url,
+            thumbnail_url=m.thumbnail_url,
+            order_index=m.order_index,
+        )
+        for m in (post.media or [])
+    ]
+    is_liked = crud.is_post_liked_by_user(db, post.id, current_user_id) if current_user_id else False
+    return schemas.Post(
+        id=post.id,
+        user_id=post.user_id,
+        place_id=post.place_id,
+        caption=post.caption,
+        post_type=post.post_type,
+        like_count=post.like_count,
+        comment_count=post.comment_count,
+        created_at=post.created_at,
+        is_liked=is_liked,
+        author=author,
+        place=place,
+        media=media,
+    )
+
+
+@app.get("/feed", response_model=schemas.PaginatedPosts)
+def get_feed(
+    page: int = 1,
+    page_size: int = 20,
+    filter: str = "all",
+    db: Session = Depends(get_db),
+    current_user: Optional[models.User] = Depends(get_optional_user),
+):
+    filter_mode = "following" if filter == "following" else "all"
+    posts, total = crud.get_feed_paginated(
+        db,
+        page=page,
+        page_size=page_size,
+        current_user_id=current_user.id if current_user else None,
+        filter_mode=filter_mode,
+    )
+    items = [_post_to_schema(p, db, current_user.id if current_user else None) for p in posts]
+    return schemas.PaginatedPosts(items=items, total=total, page=page, page_size=page_size)
+
+
+@app.get("/feed/reels", response_model=schemas.PaginatedPosts)
+def get_reels(
+    page: int = 1,
+    page_size: int = 20,
+    filter: str = "all",
+    db: Session = Depends(get_db),
+    current_user: Optional[models.User] = Depends(get_optional_user),
+):
+    filter_mode = "following" if filter == "following" else "all"
+    posts, total = crud.get_feed_paginated(
+        db,
+        page=page,
+        page_size=page_size,
+        current_user_id=current_user.id if current_user else None,
+        filter_mode=filter_mode,
+        post_type="reel",
+    )
+    items = [_post_to_schema(p, db, current_user.id if current_user else None) for p in posts]
+    return schemas.PaginatedPosts(items=items, total=total, page=page, page_size=page_size)
+
+
+@app.post("/posts", response_model=schemas.Post)
+def create_post(
+    data: schemas.PostCreate,
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(get_current_user),
+):
+    if data.place_id and not crud.get_place_by_id(db, data.place_id):
+        raise HTTPException(status_code=404, detail="Mekan bulunamadı.")
+    post = crud.create_post(db, current_user.id, data)
+    db.refresh(post)
+    post = crud.get_post_by_id(db, post.id)
+    return _post_to_schema(post, db, current_user.id)
+
+
+@app.get("/posts/{post_id}", response_model=schemas.Post)
+def get_post(
+    post_id: int,
+    db: Session = Depends(get_db),
+    current_user: Optional[models.User] = Depends(get_optional_user),
+):
+    post = crud.get_post_by_id(db, post_id)
+    if not post:
+        raise HTTPException(status_code=404, detail="Gönderi bulunamadı.")
+    return _post_to_schema(post, db, current_user.id if current_user else None)
+
+
+@app.delete("/posts/{post_id}")
+def delete_post_endpoint(
+    post_id: int,
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(get_current_user),
+):
+    if not crud.delete_post(db, post_id, current_user.id):
+        raise HTTPException(status_code=404, detail="Gönderi bulunamadı veya yetkiniz yok.")
+    return {"ok": True}
+
+
+@app.post("/posts/{post_id}/like")
+def toggle_like(
+    post_id: int,
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(get_current_user),
+):
+    post = crud.get_post_by_id(db, post_id)
+    if not post:
+        raise HTTPException(status_code=404, detail="Gönderi bulunamadı.")
+    post, liked = crud.toggle_post_like(db, post_id, current_user.id)
+    post = crud.get_post_by_id(db, post_id)
+    if liked and post.user_id != current_user.id:
+        crud.create_notification(db, post.user_id, "like", current_user.id, post_id=post_id)
+    return {"liked": liked, "like_count": post.like_count}
+
+
+@app.get("/posts/{post_id}/comments")
+def get_post_comments(
+    post_id: int,
+    page: int = 1,
+    page_size: int = 20,
+    db: Session = Depends(get_db),
+):
+    comments, total = crud.get_comments_paginated(db, post_id, page, page_size)
+    out = []
+    for c in comments:
+        d = {"id": c.id, "user_id": c.user_id, "post_id": c.post_id, "text": c.text, "created_at": c.created_at}
+        d["author_username"] = c.user.username if c.user else None
+        out.append(d)
+    return {"items": out, "total": total, "page": page, "page_size": page_size}
+
+
+@app.post("/posts/{post_id}/comments", response_model=schemas.PostComment)
+def add_comment(
+    post_id: int,
+    data: schemas.PostCommentCreate,
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(get_current_user),
+):
+    post = crud.get_post_by_id(db, post_id)
+    if not post:
+        raise HTTPException(status_code=404, detail="Gönderi bulunamadı.")
+    comment = crud.add_post_comment(db, post_id, current_user.id, data.text)
+    if post.user_id != current_user.id:
+        crud.create_notification(db, post.user_id, "comment", current_user.id, post_id=post_id)
+    return schemas.PostComment(
+        id=comment.id,
+        user_id=comment.user_id,
+        post_id=comment.post_id,
+        text=comment.text,
+        created_at=comment.created_at,
+        author_username=current_user.username,
+    )
+
+
+@app.get("/users/{user_id}/posts", response_model=schemas.PaginatedPosts)
+def get_user_posts(
+    user_id: int,
+    page: int = 1,
+    page_size: int = 20,
+    db: Session = Depends(get_db),
+    current_user: Optional[models.User] = Depends(get_optional_user),
+):
+    posts, total = crud.get_posts_by_user(db, user_id, page, page_size)
+    items = [_post_to_schema(p, db, current_user.id if current_user else None) for p in posts]
+    return schemas.PaginatedPosts(items=items, total=total, page=page, page_size=page_size)
+
+
+@app.get("/places/{place_id}/posts", response_model=schemas.PaginatedPosts)
+def get_place_posts(
+    place_id: int,
+    page: int = 1,
+    page_size: int = 20,
+    db: Session = Depends(get_db),
+    current_user: Optional[models.User] = Depends(get_optional_user),
+):
+    posts, total = crud.get_posts_by_place(db, place_id, page, page_size)
+    items = [_post_to_schema(p, db, current_user.id if current_user else None) for p in posts]
+    return schemas.PaginatedPosts(items=items, total=total, page=page, page_size=page_size)
+
+
+# -------------------------
+# STORY (Hikaye)
+# -------------------------
+def _story_to_schema(s):
+    author = None
+    if s.user:
+        author = schemas.UserSummary(
+            id=s.user.id,
+            username=s.user.username,
+            first_name=s.user.first_name,
+            avatar_url=s.user.avatar_url,
+        )
+    place = None
+    if s.place:
+        place = schemas.PlaceSummary(id=s.place.id, name=s.place.name, category=s.place.category)
+    return schemas.Story(
+        id=s.id,
+        user_id=s.user_id,
+        place_id=s.place_id,
+        media_type=s.media_type,
+        media_url=s.media_url,
+        thumbnail_url=s.thumbnail_url,
+        created_at=s.created_at,
+        expires_at=s.expires_at,
+        author=author,
+        place=place,
+    )
+
+
+@app.post("/stories", response_model=schemas.Story)
+def create_story(
+    data: schemas.StoryCreate,
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(get_current_user),
+):
+    if data.place_id is not None and not crud.get_place_by_id(db, data.place_id):
+        raise HTTPException(status_code=404, detail="Mekan bulunamadı.")
+    story = crud.create_story(db, current_user.id, data)
+    return _story_to_schema(story)
+
+
+@app.get("/places/{place_id}/stories", response_model=schemas.PaginatedStories)
+def get_place_stories(
+    place_id: int,
+    page: int = 1,
+    page_size: int = 50,
+    db: Session = Depends(get_db),
+):
+    stories, total = crud.get_stories_by_place(db, place_id, page, page_size)
+    items = [_story_to_schema(s) for s in stories]
+    return schemas.PaginatedStories(items=items, total=total, page=page, page_size=page_size)
+
+
+@app.get("/feed/stories", response_model=schemas.PaginatedStories)
+def get_feed_stories(
+    page: int = 1,
+    page_size: int = 50,
+    filter: str = "all",
+    db: Session = Depends(get_db),
+    current_user: Optional[models.User] = Depends(get_optional_user),
+):
+    """Akış (feed) için hikayeler – Herkes veya Takip Ettiklerim."""
+    filter_mode = "following" if filter == "following" else "all"
+    stories, total = crud.get_feed_stories(
+        db,
+        page=page,
+        page_size=page_size,
+        current_user_id=current_user.id if current_user else None,
+        filter_mode=filter_mode,
+    )
+    items = [_story_to_schema(s) for s in stories]
+    return schemas.PaginatedStories(items=items, total=total, page=page, page_size=page_size)
 
 
 # -------------------------

@@ -70,11 +70,13 @@ async function fetchWithRetry(
   } catch (error) {
     clearTimeout(timeoutId);
 
-    if (
-      (error instanceof TypeError || error instanceof Error) &&
-      (error.message.includes('Network request failed') || error.name === 'AbortError') &&
-      retries > 0
-    ) {
+    const isNetworkError =
+      error instanceof TypeError ||
+      (error instanceof Error &&
+        (error.message.includes('Network request failed') ||
+          error.message.includes('Failed to fetch') ||
+          error.name === 'AbortError'));
+    if (isNetworkError && retries > 0) {
       logger.warn(`Retrying request to ${url}, attempts left: ${retries}`);
       await new Promise(resolve => setTimeout(resolve, retryDelay));
       return fetchWithRetry(url, options, retries - 1, retryDelay * 2);
@@ -92,11 +94,15 @@ export async function apiClient<T>(
 
   try {
     const response = await fetchWithRetry(url, options);
-    const data = await response.json();
-    return data as T;
+    const text = await response.text();
+    if (!text.trim()) return {} as T;
+    try {
+      return JSON.parse(text) as T;
+    } catch {
+      throw new Error(`Invalid JSON response from ${endpoint}`);
+    }
   } catch (error) {
-    const appError = handleApiError(error);
-    throw appError;
+    throw handleApiError(error);
   }
 }
 
@@ -126,4 +132,55 @@ export async function apiPut<T>(
     method: 'PUT',
     body: body ? JSON.stringify(body) : undefined,
   });
+}
+
+export async function apiDelete<T = void>(endpoint: string, options?: RequestOptions): Promise<T> {
+  return apiClient<T>(endpoint, { ...options, method: 'DELETE' });
+}
+
+export async function apiUploadFile<T = { url: string }>(
+  endpoint: string,
+  file: { uri: string; type?: string; name?: string },
+  fieldName = "file"
+): Promise<T> {
+  const url = endpoint.startsWith("http") ? endpoint : `${API_BASE_URL}${endpoint}`;
+  const token = _getAccessToken?.();
+  const formData = new FormData();
+  formData.append(fieldName, {
+    uri: file.uri,
+    type: file.type || "image/jpeg",
+    name: file.name || "image.jpg",
+  } as any);
+  const headers: Record<string, string> = token ? { Authorization: `Bearer ${token}` } : {};
+
+  try {
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 60000);
+    const response = await fetch(url, {
+      method: "POST",
+      headers,
+      body: formData,
+      signal: controller.signal,
+    });
+    clearTimeout(timeoutId);
+
+    if (!response.ok) {
+      const text = await response.text();
+      let detail = `Upload failed: ${response.status}`;
+      try {
+        const json = JSON.parse(text);
+        if (json.detail) detail = json.detail;
+      } catch {}
+      throw new Error(detail);
+    }
+    const text = await response.text();
+    if (!text.trim()) return {} as T;
+    try {
+      return JSON.parse(text) as T;
+    } catch {
+      throw new Error("Invalid JSON response from upload");
+    }
+  } catch (error) {
+    throw handleApiError(error);
+  }
 }

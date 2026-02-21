@@ -1,9 +1,6 @@
 /**
  * Keşfet – Harita (WebView + Leaflet/OpenStreetMap)
  *
- * Expo Go, Simulator ve gerçek cihazda çalışır.
- * WebView tabanlı olduğu için native modül uyumsuzluğu yoktur.
- *
  * @module app/(tabs)/explore
  */
 

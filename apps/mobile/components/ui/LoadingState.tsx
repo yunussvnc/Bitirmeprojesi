@@ -7,9 +7,9 @@
  */
 
 import React, { useEffect, useRef } from 'react';
-import { View, Text, StyleSheet, Animated, ActivityIndicator } from 'react-native';
+import { Text, StyleSheet, Animated, ActivityIndicator } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
-import { createTextStyle, spacing, animationTiming, easing } from '@/constants/design';
+import { createTextStyle, spacing } from '@/constants/design';
 
 export interface LoadingStateProps {
   /**

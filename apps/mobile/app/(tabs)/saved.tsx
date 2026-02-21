@@ -9,7 +9,7 @@
 
 import { router, useNavigation } from 'expo-router';
 import { useMemo, useState, useEffect, useRef, useCallback } from 'react';
-import { Alert, View, Text, StyleSheet, TouchableOpacity, Animated, FlatList, ListRenderItem, ViewToken, RefreshControl } from 'react-native';
+import { Alert, View, Text, StyleSheet, TouchableOpacity, Animated, FlatList, ListRenderItem, RefreshControl, Platform } from 'react-native';
 import { Swipeable } from 'react-native-gesture-handler';
 import { useTheme } from '@/hooks/useTheme';
 import { Screen } from '@/components/layout';
@@ -18,12 +18,13 @@ import { useAppStore, type SavedPlace } from '@/src/store/useAppStore';
 import { getPlaceImageSource, hasPlaceImage } from '@/src/utils/placeImages';
 import { createTextStyle, spacing as designSpacing } from '@/constants/design';
 import { IconSymbol } from '@/components/ui/icon-symbol';
+import { logger } from '@/src/utils/logger';
 import { lightImpact } from '@/src/utils/haptics';
 import { getAllPlaces } from '@/src/services/mekanService';
 import type { Place } from '@/src/services/mekanService';
 
 export default function SavedScreen() {
-  const { colors, spacing } = useTheme();
+  const { colors } = useTheme();
   const navigation = useNavigation();
   const flatListRef = useRef<FlatList>(null);
   const ids = useAppStore((s) => s.savedIds);
@@ -32,7 +33,6 @@ export default function SavedScreen() {
   const remove = useAppStore((s) => s.removeSaved);
   const [refreshing, setRefreshing] = useState(false);
   const [placesData, setPlacesData] = useState<Record<string, Place>>({});
-  const [viewableItems, setViewableItems] = useState(new Set<string>()); // Added viewableItems state
 
   // Listen for tab press to scroll to top
   useEffect(() => {
@@ -44,19 +44,22 @@ export default function SavedScreen() {
 
   // API'den tüm mekanları çek ve cache'le
   useEffect(() => {
+    let cancelled = false;
     const loadPlaces = async () => {
       try {
         const places = await getAllPlaces();
+        if (cancelled) return;
         const placesMap: Record<string, Place> = {};
         places.forEach((place) => {
           placesMap[String(place.id)] = place;
         });
         setPlacesData(placesMap);
       } catch (error) {
-        console.error('Error loading places:', error);
+        if (!cancelled) logger.error('Error loading places:', error);
       }
     };
     loadPlaces();
+    return () => { cancelled = true; };
   }, []);
 
   const items: SavedPlace[] = useMemo(() => { // Explicitly define type as SavedPlace[]
@@ -79,9 +82,8 @@ export default function SavedScreen() {
   }, [ids, byId, placesData]);
 
   const titleStyle = createTextStyle('title', colors.text.primary);
-  const subtitleStyle = createTextStyle('bodySmall', colors.text.secondary);
 
-  const handleClear = () => {
+  const handleClear = useCallback(() => {
     if (!items.length) return;
     Alert.alert('Temizle?', 'Tüm kaydedilen mekanlar silinsin mi?', [
       { text: 'Vazgeç', style: 'cancel' },
@@ -94,12 +96,12 @@ export default function SavedScreen() {
         },
       },
     ]);
-  };
+  }, [items.length, clear]);
 
-  const handleRemove = (id: string | number) => {
+  const handleRemove = useCallback((id: string | number) => {
     lightImpact();
     remove(id);
-  };
+  }, [remove]);
 
   const handleRefresh = async () => {
     setRefreshing(true);
@@ -158,20 +160,23 @@ export default function SavedScreen() {
         />
       </Swipeable>
     ),
-    [viewableItems, renderRightActions]
+    [renderRightActions]
   );
 
-  const onViewableItemsChanged = useRef(({ viewableItems: vItems }: { viewableItems: ViewToken[] }) => {
-    setViewableItems(new Set(vItems.map((item) => String(item.item.id))));
-  }).current;
-
-  const viewabilityConfig = useRef({
-    itemVisiblePercentThreshold: 50,
-  }).current;
 
   const listHeader = useCallback(
     () => (
       <View style={styles.header}>
+        <TouchableOpacity
+          onPress={() => {
+            lightImpact();
+            router.back();
+          }}
+          style={styles.backBtn}
+          hitSlop={12}
+        >
+          <IconSymbol name="chevron.left" size={24} color={colors.accent.primary} />
+        </TouchableOpacity>
         <Text style={[titleStyle, styles.title]}>Kaydedilenler</Text>
         {items.length > 0 && (
           <View style={styles.headerRight}>
@@ -191,18 +196,28 @@ export default function SavedScreen() {
         )}
       </View>
     ),
-    [items.length, titleStyle, colors.surface.elevated, colors.text.secondary]
+    [items.length, titleStyle, colors.surface.elevated, colors.text.secondary, colors.accent.primary, handleClear, colors.text.tertiary]
   );
 
   if (items.length === 0) {
     return (
       <Screen onRefresh={handleRefresh} refreshing={refreshing} withTabBar>
         <View style={styles.header}>
+          <TouchableOpacity
+            onPress={() => {
+              lightImpact();
+              router.back();
+            }}
+            style={styles.backBtn}
+            hitSlop={12}
+          >
+            <IconSymbol name="chevron.left" size={24} color={colors.accent.primary} />
+          </TouchableOpacity>
           <Text style={[titleStyle, styles.title]}>Kaydedilenler</Text>
         </View>
         <View style={styles.emptyContainer}>
           <EmptyState
-            icon="bookmark"
+            variant="saved"
             title="Henüz kayıt yok"
             description="Beğendiğin mekanları kaydet"
             actionLabel="Keşfet"
@@ -219,11 +234,14 @@ export default function SavedScreen() {
         ref={flatListRef}
         data={items}
         keyExtractor={(item) => String(item.id)}
+        showsVerticalScrollIndicator={false}
         renderItem={renderPlaceItem}
         ListHeaderComponent={listHeader}
         contentContainerStyle={styles.listContainer}
-        onViewableItemsChanged={onViewableItemsChanged}
-        viewabilityConfig={viewabilityConfig}
+        initialNumToRender={10}
+        maxToRenderPerBatch={10}
+        windowSize={5}
+        removeClippedSubviews={Platform.OS === 'android'}
         refreshControl={
           <RefreshControl
             refreshing={refreshing}
@@ -242,10 +260,14 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
     marginBottom: designSpacing.lg,
   },
+  backBtn: {
+    marginRight: designSpacing.sm,
+    padding: 4,
+  },
   title: {
+    flex: 1,
     fontSize: 28,
     fontWeight: '700',
   },

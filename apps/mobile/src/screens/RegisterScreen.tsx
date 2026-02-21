@@ -7,10 +7,11 @@
  */
 
 import { router } from 'expo-router';
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import {
   StyleSheet,
   View,
+  ScrollView,
   KeyboardAvoidingView,
   Platform,
   Text,
@@ -19,6 +20,7 @@ import {
   Dimensions,
   Image,
   Alert,
+  Keyboard,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { BlurView } from 'expo-blur';
@@ -60,6 +62,7 @@ export default function RegisterScreen() {
   const [backgroundImages, setBackgroundImages] = useState<string[]>(FALLBACK_PLACE_IMAGES);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const fadeAnim = useRef(new Animated.Value(1)).current;
+  const isSubmittingRef = useRef(false);
 
   useEffect(() => {
     let cancelled = false;
@@ -76,33 +79,36 @@ export default function RegisterScreen() {
     return () => { cancelled = true; };
   }, []);
 
+  const imageCount = Math.max(1, backgroundImages.length);
   useEffect(() => {
     const next = () => {
       Animated.timing(fadeAnim, { toValue: 0.3, duration: 400, useNativeDriver: true }).start(() => {
-        setCurrentImageIndex((i) => (i + 1) % backgroundImages.length);
+        setCurrentImageIndex((i) => (i + 1) % imageCount);
         Animated.timing(fadeAnim, { toValue: 1, duration: 600, useNativeDriver: true }).start();
       });
     };
     const t = setInterval(next, CAROUSEL_INTERVAL_MS);
     return () => clearInterval(t);
-  }, [backgroundImages.length, fadeAnim]);
+  }, [imageCount, fadeAnim]);
 
-  const validateForm = (): boolean => {
+  const validateForm = useCallback((): boolean => {
     const newErrors: typeof errors = {};
     if (!fullName.trim()) newErrors.fullName = 'Ad soyad gereklidir';
-    else if (fullName.trim().split(' ').length < 2) newErrors.fullName = 'Ad ve soyad girin';
+    else if (fullName.trim().split(/\s+/).filter(Boolean).length < 2) newErrors.fullName = 'Ad ve soyad girin';
     if (!email.trim()) newErrors.email = 'E-posta gereklidir';
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) newErrors.email = 'Geçerli bir e-posta adresi girin';
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) newErrors.email = 'Geçerli bir e-posta adresi girin';
     if (!password.trim()) newErrors.password = 'Şifre gereklidir';
     else if (password.length < 8) newErrors.password = 'Şifre en az 8 karakter olmalıdır';
     if (!confirmPassword.trim()) newErrors.confirmPassword = 'Şifre tekrarı gereklidir';
     else if (password !== confirmPassword) newErrors.confirmPassword = 'Şifreler eşleşmiyor';
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
-  };
+  }, [fullName, email, password, confirmPassword]);
 
-  const handleRegister = async () => {
+  const handleRegister = useCallback(async () => {
+    if (isSubmittingRef.current) return;
     if (!validateForm()) return;
+    isSubmittingRef.current = true;
     lightImpact();
     setLoading(true);
     try {
@@ -119,20 +125,25 @@ export default function RegisterScreen() {
       useAuthStore.getState().setUser(data.user);
       success();
       router.replace('/(tabs)');
-    } catch (err: any) {
-      const msg = err?.message || 'Kayıt başarısız. Lütfen tekrar deneyin.';
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : 'Kayıt başarısız. Lütfen tekrar deneyin.';
       setErrors({ email: msg });
     } finally {
+      isSubmittingRef.current = false;
       setLoading(false);
     }
-  };
+  }, [validateForm, fullName, email, password]);
 
-  const handleSocialRegister = (provider: string) => {
+  const handleSocialRegister = useCallback((provider: string) => {
     lightImpact();
     Alert.alert('Bilgi', `${provider} ile kayıt yakında eklenecek.`, [{ text: 'Tamam' }]);
-  };
+  }, []);
 
-  const currentImage = backgroundImages[currentImageIndex];
+  const clearFieldError = useCallback((field: keyof typeof errors) => {
+    setErrors((prev) => (prev[field] ? { ...prev, [field]: undefined } : prev));
+  }, []);
+
+  const currentImage = backgroundImages[Math.min(currentImageIndex, imageCount - 1)] ?? FALLBACK_PLACE_IMAGES[0];
 
   return (
     <View style={styles.container}>
@@ -154,57 +165,64 @@ export default function RegisterScreen() {
           style={styles.keyboardView}
           keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}
         >
-          <View style={styles.content} pointerEvents="box-none">
-            <View style={styles.topBlock}>
-              <View style={styles.header}>
-                <View style={styles.logoWrap}>
-                  <Text style={styles.logoEmoji}>📍</Text>
+          <ScrollView
+            style={styles.scrollView}
+            contentContainerStyle={styles.scrollContent}
+            keyboardShouldPersistTaps="handled"
+            showsVerticalScrollIndicator={false}
+          >
+            <View style={styles.content} pointerEvents="box-none">
+              <View style={styles.topBlock}>
+                <View style={styles.header}>
+                  <Text style={styles.brandTitle}>ASEMOS</Text>
+                  <Text style={styles.tagline}>Hesap oluştur, mekanları keşfet</Text>
                 </View>
-                <Text style={styles.brandTitle}>ASEMOS</Text>
-                <Text style={styles.tagline}>Hesap oluştur, mekanları keşfet</Text>
-              </View>
 
-              <BlurView intensity={90} tint="dark" style={styles.card}>
-                <View style={styles.cardInner}>
-                  <Input
-                    variant="onDark"
-                    label="Ad Soyad"
-                    placeholder="Adınız Soyadınız"
-                    value={fullName}
-                    onChangeText={(t) => { setFullName(t); if (errors.fullName) setErrors({ ...errors, fullName: undefined }); }}
-                    autoCapitalize="words"
-                    error={errors.fullName}
-                    containerStyle={styles.inputContainer}
-                  />
-                  <Input
-                    variant="onDark"
-                    label="E-posta"
-                    placeholder="ornek@email.com"
-                    value={email}
-                    onChangeText={(t) => { setEmail(t); if (errors.email) setErrors({ ...errors, email: undefined }); }}
-                    keyboardType="email-address"
-                    autoCapitalize="none"
-                    autoComplete="email"
-                    error={errors.email}
-                    containerStyle={styles.inputContainer}
-                  />
-                  <Input
-                    variant="onDark"
-                    label="Şifre"
-                    placeholder="En az 8 karakter"
-                    value={password}
-                    onChangeText={(t) => { setPassword(t); if (errors.password) setErrors({ ...errors, password: undefined }); }}
-                    secureTextEntry
-                    autoComplete="password-new"
-                    error={errors.password}
-                    containerStyle={styles.inputContainer}
-                  />
-                  <Input
-                    variant="onDark"
-                    label="Şifre Tekrar"
-                    placeholder="Şifreni tekrar gir"
-                    value={confirmPassword}
-                    onChangeText={(t) => { setConfirmPassword(t); if (errors.confirmPassword) setErrors({ ...errors, confirmPassword: undefined }); }}
+                <BlurView intensity={90} tint="dark" style={styles.card}>
+                  <View style={styles.cardInner}>
+                    <Input
+                      variant="onDark"
+                      label="Ad Soyad"
+                      placeholder="Adınız Soyadınız"
+                      value={fullName}
+                      onChangeText={(t) => { setFullName(t); clearFieldError('fullName'); }}
+                      autoCapitalize="words"
+                      error={errors.fullName}
+                      containerStyle={styles.inputContainer}
+                    />
+                    <Input
+                      variant="onDark"
+                      label="E-posta"
+                      placeholder="ornek@email.com"
+                      value={email}
+                      onChangeText={(t) => { setEmail(t); clearFieldError('email'); }}
+                      keyboardType="email-address"
+                      autoCapitalize="none"
+                      autoComplete="email"
+                      error={errors.email}
+                      containerStyle={styles.inputContainer}
+                    />
+                    <Input
+                      variant="onDark"
+                      label="Şifre"
+                      placeholder="En az 8 karakter"
+                      value={password}
+                      onChangeText={(t) => {
+                        setPassword(t);
+                        clearFieldError('password');
+                        if (confirmPassword && t === confirmPassword) clearFieldError('confirmPassword');
+                      }}
+                      secureTextEntry
+                      autoComplete="password-new"
+                      error={errors.password}
+                      containerStyle={styles.inputContainer}
+                    />
+                    <Input
+                      variant="onDark"
+                      label="Şifre Tekrar"
+                      placeholder="Şifreni tekrar gir"
+                      value={confirmPassword}
+                      onChangeText={(t) => { setConfirmPassword(t); clearFieldError('confirmPassword'); }}
                     secureTextEntry
                     autoComplete="password-new"
                     error={errors.confirmPassword}
@@ -240,11 +258,12 @@ export default function RegisterScreen() {
               </BlurView>
             </View>
           </View>
+          </ScrollView>
         </KeyboardAvoidingView>
 
         <TouchableOpacity
           style={[styles.footerFixed, { paddingBottom: 16 + insets.bottom }]}
-          onPress={() => { lightImpact(); router.back(); }}
+          onPress={() => { Keyboard.dismiss(); lightImpact(); router.back(); }}
           activeOpacity={0.8}
         >
           <Text style={styles.footerLabel}>Zaten hesabın var mı? </Text>
@@ -259,6 +278,8 @@ const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: '#0a0a0a' },
   safeArea: { flex: 1 },
   keyboardView: { flex: 1 },
+  scrollView: { flex: 1 },
+  scrollContent: { flexGrow: 1, paddingBottom: 24 },
   content: {
     flex: 1,
     paddingHorizontal: 24,

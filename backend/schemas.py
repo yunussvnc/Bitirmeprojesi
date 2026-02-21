@@ -32,6 +32,13 @@ class User(UserBase):
     class Config:
         from_attributes = True
 
+
+class UserProfile(User):
+    """Profil sayfası için: followers/following sayıları + is_following"""
+    followers_count: int = 0
+    following_count: int = 0
+    is_following: bool = False
+
 # --- MEKAN (PLACE) ŞEMALARI ---
 
 class PlaceBase(BaseModel):
@@ -188,6 +195,117 @@ class RecommendResponse(BaseModel):
     cached: bool = False
 
 
+# --- POST (SOSYAL AKIŞ) ŞEMALARI ---
+
+class PostMediaBase(BaseModel):
+    media_type: str
+    media_url: str
+    thumbnail_url: Optional[str] = None
+    order_index: int = 0
+
+class PostMediaCreate(PostMediaBase):
+    pass
+
+class PostMedia(PostMediaBase):
+    id: int
+    post_id: int
+
+    class Config:
+        from_attributes = True
+
+class PostCreate(BaseModel):
+    caption: Optional[str] = None
+    place_id: Optional[int] = None
+    post_type: str = "photo"
+    media: List[PostMediaCreate]
+
+class PostCommentCreate(BaseModel):
+    text: str
+
+class PostComment(BaseModel):
+    id: int
+    user_id: int
+    post_id: int
+    text: str
+    created_at: datetime
+    author_username: Optional[str] = None
+
+    class Config:
+        from_attributes = True
+
+class UserSummary(BaseModel):
+    id: int
+    username: Optional[str] = None
+    first_name: Optional[str] = None
+    avatar_url: Optional[str] = None
+
+    class Config:
+        from_attributes = True
+
+class PlaceSummary(BaseModel):
+    id: int
+    name: str
+    category: Optional[str] = None
+
+    class Config:
+        from_attributes = True
+
+class Post(BaseModel):
+    id: int
+    user_id: int
+    place_id: Optional[int] = None
+    caption: Optional[str] = None
+    post_type: str
+    like_count: int = 0
+    comment_count: int = 0
+    created_at: datetime
+    is_liked: bool = False
+    author: Optional[UserSummary] = None
+    place: Optional[PlaceSummary] = None
+    media: List[PostMedia] = []
+
+    class Config:
+        from_attributes = True
+
+class PaginatedPosts(BaseModel):
+    items: List[Post]
+    total: int
+    page: int
+    page_size: int
+
+
+# --- HİKAYE (STORY) ---
+
+class StoryCreate(BaseModel):
+    place_id: Optional[int] = None
+    media_type: str  # "image", "video"
+    media_url: str
+    thumbnail_url: Optional[str] = None
+
+
+class Story(BaseModel):
+    id: int
+    user_id: int
+    place_id: Optional[int] = None
+    media_type: str
+    media_url: str
+    thumbnail_url: Optional[str] = None
+    created_at: datetime
+    expires_at: datetime
+    author: Optional[UserSummary] = None
+    place: Optional[PlaceSummary] = None
+
+    class Config:
+        from_attributes = True
+
+
+class PaginatedStories(BaseModel):
+    items: List[Story]
+    total: int
+    page: int
+    page_size: int
+
+
 # --- PAGİNATED RESPONSE ---
 
 class PaginatedPlaces(BaseModel):
@@ -195,3 +313,38 @@ class PaginatedPlaces(BaseModel):
     total: int
     page: int
     page_size: int
+
+
+# --- BİLDİRİM (Kademe 5) ---
+
+class Notification(BaseModel):
+    id: int
+    user_id: int
+    type: str
+    actor_id: int
+    post_id: Optional[int] = None
+    place_id: Optional[int] = None
+    is_read: bool = False
+    created_at: datetime
+    actor_username: Optional[str] = None
+
+    class Config:
+        from_attributes = True
+
+
+class PaginatedNotifications(BaseModel):
+    items: List[Notification]
+    total: int
+    page: int
+    page_size: int
+
+
+# --- PROFİL İSTATİSTİKLERİ (Kademe 6) ---
+
+class UserStats(BaseModel):
+    post_count: int = 0
+    review_count: int = 0
+    visit_count: int = 0  # verified reviews or all reviews
+    visits_this_month: int = 0
+    favorite_category: Optional[str] = None
+    favorite_region: Optional[str] = None

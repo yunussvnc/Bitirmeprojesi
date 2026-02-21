@@ -3,7 +3,6 @@
  * Expo Go, Simulator ve gerçek cihazda çalışır (native modül gerektirmez).
  */
 
-import { router } from 'expo-router';
 import { useEffect, useState, useCallback, useRef, useMemo } from 'react';
 import {
   View,
@@ -21,6 +20,7 @@ import { useTheme } from '@/hooks/useTheme';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import type { Place } from '@/src/services/mekanService';
 import { lightImpact } from '@/src/utils/haptics';
+import { PlaceMediaPanel } from './PlaceMediaPanel';
 
 const ISTANBUL_CENTER = { latitude: 41.0082, longitude: 28.9784 };
 
@@ -206,7 +206,17 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
         androidLayerType="hardware"
       />
 
-      <View style={styles.controls}>
+      <View style={[styles.controls, selectedPlace && styles.controlsWithPanel]}>
+        <TouchableOpacity
+          onPress={() => {
+            lightImpact();
+            onLoadPlaces();
+          }}
+          style={[styles.controlBtn, { backgroundColor: colors.surface.elevated }]}
+          activeOpacity={0.7}
+        >
+          <IconSymbol name="arrow.clockwise" size={22} color={colors.text.primary} />
+        </TouchableOpacity>
         <TouchableOpacity
           onPress={goToUserLocation}
           style={[styles.controlBtn, { backgroundColor: colors.surface.elevated }]}
@@ -233,24 +243,10 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
       )}
 
       {selectedPlace && (
-        <TouchableOpacity
-          style={[styles.bottomCard, { backgroundColor: colors.surface.elevated }]}
-          onPress={() => {
-            lightImpact();
-            router.push({ pathname: '/place/[id]', params: { id: String(selectedPlace.id) } } as any);
-          }}
-          activeOpacity={0.9}
-        >
-          <Text style={[styles.cardTitle, { color: colors.text.primary }]} numberOfLines={2}>
-            {selectedPlace.name}
-          </Text>
-          {selectedPlace.category && (
-            <Text style={[styles.cardCategory, { color: colors.text.tertiary }]}>
-              {selectedPlace.category}
-            </Text>
-          )}
-          <Text style={[styles.cardAction, { color: colors.accent.primary }]}>Detayları gör →</Text>
-        </TouchableOpacity>
+        <PlaceMediaPanel
+          place={selectedPlace}
+          onClose={() => setSelectedPlace(null)}
+        />
       )}
     </View>
   );
@@ -270,7 +266,8 @@ const styles = StyleSheet.create({
   },
   title: { fontSize: 22, fontWeight: '700' },
   subtitle: { fontSize: 13, marginTop: 2 },
-  controls: { position: 'absolute', right: 16, bottom: 240, gapa: 10 },
+  controls: { position: 'absolute', right: 16, bottom: 240, gap: 10 },
+  controlsWithPanel: { position: 'absolute', right: 16, bottom: 640, gap: 10 },
   controlBtn: {
     width: 48,
     height: 48,
@@ -290,22 +287,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   loadingText: { marginTop: 12, fontSize: 14 },
-  bottomCard: {
-    position: 'absolute',
-    bottom: Platform.OS === 'ios' ? 120 : 100,
-    left: 16,
-    right: 16,
-    padding: 16,
-    borderRadius: 16,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.25,
-    shadowRadius: 8,
-    elevation: 8,
-  },
-  cardTitle: { fontSize: 17, fontWeight: '700' },
-  cardCategory: { fontSize: 13, marginTop: 4 },
-  cardAction: { fontSize: 14, fontWeight: '600', marginTop: 8 },
   badge: {
     position: 'absolute',
     bottom: Platform.OS === 'ios' ? 100 : 84,

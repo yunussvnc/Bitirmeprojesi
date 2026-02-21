@@ -7,11 +7,11 @@
  */
 
 import React, { useEffect, useRef } from 'react';
-import { View, Text, StyleSheet, Animated } from 'react-native';
+import { Text, StyleSheet, Animated } from 'react-native';
 import { IconSymbol, type IconSymbolName } from './icon-symbol';
 import { useTheme } from '@/hooks/useTheme';
 import { Button } from './Button';
-import { createTextStyle, spacing, radius, animationTiming, easing } from '@/constants/design';
+import { createTextStyle, spacing, radius } from '@/constants/design';
 
 export interface ErrorStateProps {
   /**

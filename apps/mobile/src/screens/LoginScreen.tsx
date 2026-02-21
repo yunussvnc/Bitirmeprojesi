@@ -8,10 +8,11 @@
  */
 
 import { router } from 'expo-router';
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import {
   StyleSheet,
   View,
+  ScrollView,
   KeyboardAvoidingView,
   Platform,
   Text,
@@ -20,11 +21,11 @@ import {
   Dimensions,
   Image,
   Alert,
+  Keyboard,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { BlurView } from 'expo-blur';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useTheme } from '@/hooks/useTheme';
 import { Button, Input } from '@/components/ui';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import { lightImpact, success } from '@/src/utils/haptics';
@@ -48,7 +49,6 @@ const FALLBACK_PLACE_IMAGES = [
 const CAROUSEL_INTERVAL_MS = 4500;
 
 export default function LoginScreen() {
-  const { colors } = useTheme();
   const insets = useSafeAreaInsets();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -57,6 +57,7 @@ export default function LoginScreen() {
   const [backgroundImages, setBackgroundImages] = useState<string[]>(FALLBACK_PLACE_IMAGES);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const fadeAnim = useRef(new Animated.Value(1)).current;
+  const isSubmittingRef = useRef(false);
 
   // Mekan fotoğraflarını API'den al
   useEffect(() => {
@@ -79,6 +80,7 @@ export default function LoginScreen() {
   }, []);
 
   // Arka plan carousel: her CAROUSEL_INTERVAL_MS'de bir sonraki görsel
+  const imageCount = Math.max(1, backgroundImages.length);
   useEffect(() => {
     const next = () => {
       Animated.timing(fadeAnim, {
@@ -86,7 +88,7 @@ export default function LoginScreen() {
         duration: 400,
         useNativeDriver: true,
       }).start(() => {
-        setCurrentImageIndex((i) => (i + 1) % backgroundImages.length);
+        setCurrentImageIndex((i) => (i + 1) % imageCount);
         Animated.timing(fadeAnim, {
           toValue: 1,
           duration: 600,
@@ -96,20 +98,22 @@ export default function LoginScreen() {
     };
     const interval = setInterval(next, CAROUSEL_INTERVAL_MS);
     return () => clearInterval(interval);
-  }, [backgroundImages.length, fadeAnim]);
+  }, [imageCount, fadeAnim]);
 
-  const validateForm = (): boolean => {
+  const validateForm = useCallback((): boolean => {
     const newErrors: { email?: string; password?: string } = {};
     if (!email.trim()) newErrors.email = 'E-posta gereklidir';
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) newErrors.email = 'Geçerli bir e-posta adresi girin';
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) newErrors.email = 'Geçerli bir e-posta adresi girin';
     if (!password.trim()) newErrors.password = 'Şifre gereklidir';
     else if (password.length < 6) newErrors.password = 'Şifre en az 6 karakter olmalıdır';
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
-  };
+  }, [email, password]);
 
-  const handleLogin = async () => {
+  const handleLogin = useCallback(async () => {
+    if (isSubmittingRef.current) return;
     if (!validateForm()) return;
+    isSubmittingRef.current = true;
     lightImpact();
     setLoading(true);
     try {
@@ -118,20 +122,28 @@ export default function LoginScreen() {
       useAuthStore.getState().setUser(data.user);
       success();
       router.replace('/(tabs)');
-    } catch (err: any) {
-      const msg = err?.message || 'Giriş başarısız. Lütfen tekrar deneyin.';
+    } catch (err: unknown) {
+      const msg = err instanceof Error ? err.message : 'Giriş başarısız. Lütfen tekrar deneyin.';
       setErrors({ email: msg });
     } finally {
+      isSubmittingRef.current = false;
       setLoading(false);
     }
-  };
+  }, [validateForm, email, password]);
 
-  const handleSocialLogin = (provider: string) => {
+  const handleSocialLogin = useCallback((provider: string) => {
     lightImpact();
     Alert.alert('Bilgi', `${provider} ile giriş yakında eklenecek.`, [{ text: 'Tamam' }]);
-  };
+  }, []);
 
-  const currentImage = backgroundImages[currentImageIndex];
+  const clearEmailError = useCallback(() => {
+    setErrors((prev) => (prev.email ? { ...prev, email: undefined } : prev));
+  }, []);
+  const clearPasswordError = useCallback(() => {
+    setErrors((prev) => (prev.password ? { ...prev, password: undefined } : prev));
+  }, []);
+
+  const currentImage = backgroundImages[Math.min(currentImageIndex, imageCount - 1)] ?? FALLBACK_PLACE_IMAGES[0];
 
   return (
     <View style={styles.container}>
@@ -164,46 +176,49 @@ export default function LoginScreen() {
           style={styles.keyboardView}
           keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}
         >
-          <View style={styles.content} pointerEvents="box-none">
-            <View style={styles.topBlock}>
-              {/* Marka & slogan – profesyonel tipografi */}
-              <View style={styles.header}>
-                <View style={styles.logoWrap}>
-                  <Text style={styles.logoEmoji}>📍</Text>
+          <ScrollView
+            style={styles.scrollView}
+            contentContainerStyle={styles.scrollContent}
+            keyboardShouldPersistTaps="handled"
+            showsVerticalScrollIndicator={false}
+          >
+            <View style={styles.content} pointerEvents="box-none">
+              <View style={styles.topBlock}>
+                {/* Marka & slogan – profesyonel tipografi */}
+                <View style={styles.header}>
+                  <Text style={styles.brandTitle}>ASEMOS</Text>
+                  <Text style={styles.tagline}>
+                    Seni dinleyen, öneren, yönlendiren rehberin
+                  </Text>
                 </View>
-                <Text style={styles.brandTitle}>ASEMOS</Text>
-                <Text style={styles.tagline}>
-                  Seni dinleyen, öneren, yönlendiren rehberin
-                </Text>
-              </View>
 
-              {/* Form kartı – koyu cam efekti */}
-              <BlurView intensity={90} tint="dark" style={styles.card}>
-              <View style={styles.cardInner}>
-                <Input
-                  variant="onDark"
-                  label="E-posta"
-                  placeholder="ornek@email.com"
-                  value={email}
-                  onChangeText={(t) => {
-                    setEmail(t);
-                    if (errors.email) setErrors({ ...errors, email: undefined });
-                  }}
-                  keyboardType="email-address"
-                  autoCapitalize="none"
-                  autoComplete="email"
-                  error={errors.email}
-                  containerStyle={styles.inputContainer}
-                />
-                <Input
-                  variant="onDark"
-                  label="Şifre"
-                  placeholder="••••••••"
-                  value={password}
-                  onChangeText={(t) => {
-                    setPassword(t);
-                    if (errors.password) setErrors({ ...errors, password: undefined });
-                  }}
+                {/* Form kartı – koyu cam efekti */}
+                <BlurView intensity={90} tint="dark" style={styles.card}>
+                <View style={styles.cardInner}>
+                  <Input
+                    variant="onDark"
+                    label="E-posta"
+                    placeholder="ornek@email.com"
+                    value={email}
+                    onChangeText={(t) => {
+                      setEmail(t);
+                      clearEmailError();
+                    }}
+                    keyboardType="email-address"
+                    autoCapitalize="none"
+                    autoComplete="email"
+                    error={errors.email}
+                    containerStyle={styles.inputContainer}
+                  />
+                  <Input
+                    variant="onDark"
+                    label="Şifre"
+                    placeholder="••••••••"
+                    value={password}
+                    onChangeText={(t) => {
+                      setPassword(t);
+                      clearPasswordError();
+                    }}
                   secureTextEntry
                   autoComplete="password"
                   error={errors.password}
@@ -252,12 +267,14 @@ export default function LoginScreen() {
             </BlurView>
             </View>
           </View>
+          </ScrollView>
         </KeyboardAvoidingView>
 
         {/* Footer ekranın en altında sabit – klavye açıldığında formun üstüne taşınmaz */}
         <TouchableOpacity
           style={[styles.footerFixed, { paddingBottom: 16 + insets.bottom }]}
           onPress={() => {
+            Keyboard.dismiss();
             lightImpact();
             router.push('/register');
           }}
@@ -281,6 +298,13 @@ const styles = StyleSheet.create({
   },
   keyboardView: {
     flex: 1,
+  },
+  scrollView: {
+    flex: 1,
+  },
+  scrollContent: {
+    flexGrow: 1,
+    paddingBottom: 24,
   },
   content: {
     flex: 1,

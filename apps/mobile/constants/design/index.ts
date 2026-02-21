@@ -10,6 +10,18 @@
  */
 
 // Core systems
+/**
+ * Complete design system object
+ * 
+ * Use this for type-safe access to all design tokens
+ */
+import { colors } from './colors';
+import { typography } from './typography';
+import { spacing } from './spacing';
+import { shadows } from './shadows';
+import { animationTiming, animationEasing } from './animations';
+import type { DesignSystem } from './types';
+
 export { colors, getColors, darkColors, lightColors } from './colors';
 export { typography, getFontFamily, createTextStyle } from './typography';
 export { spacing, getSpacing, createSpacing } from './spacing';
@@ -30,18 +42,6 @@ export type {
   AnimationEasing,
   DesignSystem,
 } from './types';
-
-/**
- * Complete design system object
- * 
- * Use this for type-safe access to all design tokens
- */
-import { colors } from './colors';
-import { typography } from './typography';
-import { spacing } from './spacing';
-import { shadows } from './shadows';
-import { animationTiming, animationEasing } from './animations';
-import type { DesignSystem } from './types';
 
 export const designSystem: DesignSystem = {
   colors,

@@ -26,6 +26,7 @@ export type ColorTheme = {
     primary: string;
     primaryHover: string;
     primaryPressed: string;
+    onPrimary: string; // Text/icon on accent.primary background (e.g. white on green)
   };
   text: {
     primary: string;
@@ -38,6 +39,7 @@ export type ColorTheme = {
     warning: string;
     error: string;
     info: string;
+    onDarkBackground: string; // Icon/text on dark overlays (e.g. video, dark gradients)
   };
   overlay: {
     light: string;

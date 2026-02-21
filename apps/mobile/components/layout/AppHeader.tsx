@@ -6,8 +6,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, ViewStyle } from 'react-native';
 import { useTheme } from '@/hooks/useTheme';
-import { createTextStyle } from '@/constants/design';
-import { spacing } from '@/constants/design';
+import { createTextStyle , spacing } from '@/constants/design';
 
 export interface AppHeaderProps {
   title: string;

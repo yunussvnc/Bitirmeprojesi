@@ -25,13 +25,15 @@ export { ChatInput } from './ChatInput';
 export type { ChatInputProps } from './ChatInput';
 
 export { EmptyState } from './EmptyState';
-export type { EmptyStateProps } from './EmptyState';
+export type { EmptyStateProps, EmptyStateVariant } from './EmptyState';
 
 export { LoadingState } from './LoadingState';
 export type { LoadingStateProps } from './LoadingState';
 
 export { ErrorState } from './ErrorState';
 export type { ErrorStateProps } from './ErrorState';
+
+export { ErrorBoundary } from './ErrorBoundary';
 
 export { Avatar } from './Avatar';
 export type { AvatarProps } from './Avatar';

@@ -11,7 +11,8 @@
  */
 
 import React from 'react';
-import { View, Image, Text, StyleSheet, ViewStyle, ImageStyle, TextStyle } from 'react-native';
+import { View, Text, StyleSheet, ViewStyle } from 'react-native';
+import { Image } from 'expo-image';
 import { useTheme } from '@/hooks/useTheme';
 
 export interface AvatarProps {
@@ -73,7 +74,7 @@ export function Avatar({ source, name, size = 48, style }: AvatarProps) {
     <View style={avatarStyle}>
       {source ? (
         <Image
-          source={source}
+          source={typeof source === 'number' ? source : source}
           style={[
             styles.image,
             {
@@ -82,7 +83,8 @@ export function Avatar({ source, name, size = 48, style }: AvatarProps) {
               borderRadius: size / 2,
             },
           ]}
-          resizeMode="cover"
+          contentFit="cover"
+          cachePolicy="memory-disk"
         />
       ) : (
         <Text style={textStyle}>{getInitials(name)}</Text>

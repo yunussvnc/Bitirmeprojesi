@@ -179,6 +179,7 @@ export const Screen = forwardRef<ScreenRef, ScreenProps>(({
     </View>
   );
 });
+Screen.displayName = 'Screen';
 
 const styles = StyleSheet.create({
   container: {

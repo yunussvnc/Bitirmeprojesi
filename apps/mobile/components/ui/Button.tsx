@@ -15,11 +15,10 @@ import {
   ActivityIndicator,
   ViewStyle,
   TextStyle,
-  View,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useTheme } from '@/hooks/useTheme';
-import { shadows, radius } from '@/constants/design';
+import { radius } from '@/constants/design';
 import { lightImpact } from '@/src/utils/haptics';
 
 /**
@@ -126,7 +125,7 @@ export function Button({
   accessibilityLabel,
   testID,
 }: ButtonProps) {
-  const { colors, spacing, typography } = useTheme();
+  const { colors } = useTheme();
   const isDisabled = disabled || loading;
 
   const handlePress = () => {

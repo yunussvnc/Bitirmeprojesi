@@ -89,7 +89,7 @@ export function Chip({
   accessibilityLabel,
   testID,
 }: ChipProps) {
-  const { colors, spacing, typography } = useTheme();
+  const { colors } = useTheme();
 
   const isSmall = size === 'small';
   const chipStyle = isSmall ? styles.chipSmall : styles.chip;

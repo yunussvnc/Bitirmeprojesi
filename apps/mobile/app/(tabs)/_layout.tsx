@@ -9,6 +9,9 @@ import { Tabs } from "expo-router";
 import { useTheme } from "@/hooks/useTheme";
 import { IconSymbol, type IconSymbolName } from "@/components/ui/icon-symbol";
 import { StyleSheet, Platform } from "react-native";
+import { selection } from "@/src/utils/haptics";
+import { AnimatedTabBar } from "@/components/layout/AnimatedTabBar";
+import { TabBarVisibilityProvider } from "@/components/layout/TabBarVisibilityContext";
 
 function TabIcon({ name, color }: { name: IconSymbolName; focused: boolean; color: string }) {
   return (
@@ -24,65 +27,82 @@ export default function TabsLayout() {
   const { colors } = useTheme();
 
   return (
-    <Tabs
-      screenOptions={{
-        headerShown: false,
-        tabBarPosition: "bottom",
-        tabBarStyle: {
-          position: "absolute",
-          bottom: 0,
-          left: 0,
-          right: 0,
-          backgroundColor: colors.background.secondary,
-          borderTopWidth: StyleSheet.hairlineWidth,
-          borderTopColor: colors.surface.border,
-          height: Platform.OS === "ios" ? 100 : 60,
-          paddingTop: 8,
-          paddingBottom: Platform.OS === "ios" ? 28 : 8,
-          elevation: 0,
-          shadowOpacity: 0,
-        },
-        tabBarActiveTintColor: colors.accent.primary,
-        tabBarInactiveTintColor: colors.text.tertiary,
-        tabBarLabelStyle: {
-          fontSize: 10,
-          fontWeight: "500",
-          marginTop: 4,
-        },
-        tabBarItemStyle: {
-          paddingVertical: 4,
-        },
-      }}
-    >
-      <Tabs.Screen
-        name="index"
-        options={{
-          title: "Ana Sayfa",
-          tabBarIcon: ({ color, focused }) => <TabIcon name="house.fill" focused={focused} color={color} />,
+    <TabBarVisibilityProvider>
+      <Tabs
+        tabBar={(props) => <AnimatedTabBar {...props} />}
+        screenOptions={{
+          headerShown: false,
+          tabBarPosition: "bottom",
+          tabBarStyle: {
+            position: "absolute",
+            bottom: 0,
+            left: 0,
+            right: 0,
+            backgroundColor: colors.background.secondary,
+            borderTopWidth: StyleSheet.hairlineWidth,
+            borderTopColor: colors.surface.border,
+            height: Platform.OS === "ios" ? 100 : 60,
+            paddingTop: 8,
+            paddingBottom: Platform.OS === "ios" ? 28 : 8,
+            elevation: 0,
+            shadowOpacity: 0,
+          },
+          tabBarActiveTintColor: colors.accent.primary,
+          tabBarInactiveTintColor: colors.text.tertiary,
+          tabBarLabelStyle: {
+            fontSize: 10,
+            fontWeight: "500",
+            marginTop: 4,
+          },
+          tabBarItemStyle: {
+            paddingVertical: 4,
+          },
         }}
-      />
-      <Tabs.Screen
-        name="explore"
-        options={{
-          title: "Keşfet",
-          tabBarIcon: ({ color, focused }) => <TabIcon name="map.fill" focused={focused} color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="saved"
-        options={{
-          title: "Kaydedilenler",
-          tabBarIcon: ({ color, focused }) => <TabIcon name="bookmark.fill" focused={focused} color={color} />,
-        }}
-      />
-      <Tabs.Screen
-        name="profile"
-        options={{
-          title: "Profil",
-          tabBarIcon: ({ color, focused }) => <TabIcon name="person.fill" focused={focused} color={color} />,
-        }}
-      />
-    </Tabs>
+      >
+        <Tabs.Screen
+          name="index"
+          options={{
+            title: "Ana Sayfa",
+            tabBarIcon: ({ color, focused }) => <TabIcon name="house.fill" focused={focused} color={color} />,
+            // @ts-expect-error - listeners works at runtime, expo-router types are incomplete
+            listeners: () => ({ tabPress: () => selection() }),
+          }}
+        />
+        <Tabs.Screen
+          name="explore"
+          options={{
+            title: "Keşfet",
+            tabBarIcon: ({ color, focused }) => <TabIcon name="map.fill" focused={focused} color={color} />,
+            // @ts-expect-error - listeners works at runtime, expo-router types are incomplete
+            listeners: () => ({ tabPress: () => selection() }),
+          }}
+        />
+        <Tabs.Screen
+          name="feed"
+          options={{
+            title: "Akış",
+            tabBarIcon: ({ color, focused }) => <TabIcon name="square.grid.2x2.fill" focused={focused} color={color} />,
+            // @ts-expect-error - listeners works at runtime, expo-router types are incomplete
+            listeners: () => ({ tabPress: () => selection() }),
+          }}
+        />
+        <Tabs.Screen
+          name="saved"
+          options={{
+            href: null,
+          }}
+        />
+        <Tabs.Screen
+          name="profile"
+          options={{
+            title: "Profil",
+            tabBarIcon: ({ color, focused }) => <TabIcon name="person.fill" focused={focused} color={color} />,
+            // @ts-expect-error - listeners works at runtime, expo-router types are incomplete
+            listeners: () => ({ tabPress: () => selection() }),
+          }}
+        />
+      </Tabs>
+    </TabBarVisibilityProvider>
   );
 }
 
