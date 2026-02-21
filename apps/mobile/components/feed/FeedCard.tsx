@@ -78,7 +78,7 @@ export function FeedCard({
             size={36}
           />
           <View style={styles.authorText}>
-            <Text style={[styles.username, { color: colors.text.primary }]}>@{username}</Text>
+            <Text style={[styles.username, { color: colors.text.primary }]}>{username}</Text>
             {post.place ? (
               <TouchableOpacity onPress={onPlacePress} activeOpacity={0.7}>
                 <Text style={[styles.placeLine, { color: colors.text.tertiary }]} numberOfLines={1}>
