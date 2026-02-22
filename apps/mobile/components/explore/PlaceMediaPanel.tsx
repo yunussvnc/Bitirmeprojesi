@@ -22,19 +22,21 @@ import {
   type ImageSourcePropType,
 } from 'react-native';
 import { Image } from 'expo-image';
-import { Video, ResizeMode } from 'expo-av';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router, useFocusEffect, useNavigation } from 'expo-router';
 import { useTheme } from '@/hooks/useTheme';
 import { IconSymbol } from '@/components/ui/icon-symbol';
-import { getPlacePosts, type Post } from '@/src/services/feedService';
+import { getPlacePosts, toggleLike, type Post } from '@/src/services/feedService';
 import { getPlaceStories, type Story } from '@/src/services/storyService';
 import { lightImpact } from '@/src/utils/haptics';
+import { handleApiError } from '@/src/utils/errorHandler';
 import type { Place } from '@/src/services/mekanService';
 import { getPlaceImageSource } from '@/src/utils/placeImages';
 import { StoryViewerModal } from './StoryViewerModal';
 import { useSettingsStore } from '@/src/store/useSettingsStore';
 import { useAppStore } from '@/src/store/useAppStore';
+import { FeedCard } from '@/components/feed/FeedCard';
+import { CommentBottomSheet } from '@/components/feed/CommentBottomSheet';
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 const PANEL_HORIZ_MARGIN = 12;
@@ -130,7 +132,8 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
   const storyPausedRef = useRef(false);
   const [storyVisible, setStoryVisible] = useState(true);
   const [showHeroImage, setShowHeroImage] = useState(false);
-  const [selectedMedia, setSelectedMedia] = useState<{ url: string; isVideo: boolean } | null>(null);
+  const [selectedPostId, setSelectedPostId] = useState<number | null>(null);
+  const [commentPostId, setCommentPostId] = useState<number | null>(null);
   const hideTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const navigation = useNavigation();
 
@@ -218,6 +221,10 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
       };
     });
   }, [stories, posts, place.id, place.name, place.category]);
+  const selectedPost = useMemo(
+    () => (selectedPostId ? posts.find((p) => p.id === selectedPostId) || null : null),
+    [posts, selectedPostId]
+  );
   const sortedStories = useMemo(() => {
     const unseen = rawStories.filter((s) => !viewedStoryIds.has(s.id));
     const seen = rawStories.filter((s) => viewedStoryIds.has(s.id));
@@ -267,6 +274,44 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
       tags: place.tags,
     });
   };
+
+  const handleLike = useCallback(async (post: Post) => {
+    setPosts((prev) =>
+      prev.map((p) =>
+        p.id === post.id
+          ? {
+              ...p,
+              is_liked: !p.is_liked,
+              like_count: p.like_count + (p.is_liked ? -1 : 1),
+            }
+          : p
+      )
+    );
+    try {
+      const res = await toggleLike(post.id);
+      setPosts((prev) =>
+        prev.map((p) =>
+          p.id === post.id ? { ...p, is_liked: res.liked, like_count: res.like_count } : p
+        )
+      );
+    } catch (e) {
+      setPosts((prev) =>
+        prev.map((p) => (p.id === post.id ? { ...p, is_liked: post.is_liked, like_count: post.like_count } : p))
+      );
+      handleApiError(e);
+    }
+  }, []);
+
+  const handleCommentAdded = useCallback((postId: number) => {
+    setPosts((prev) =>
+      prev.map((p) => (p.id === postId ? { ...p, comment_count: p.comment_count + 1 } : p))
+    );
+  }, []);
+
+  const closePostModal = useCallback(() => {
+    setSelectedPostId(null);
+    setCommentPostId(null);
+  }, []);
 
   const hasContent = (mapShowStories && stories.length > 0) || (mapShowPosts && mediaItems.length > 0);
   const isEmpty = !loading && !hasContent;
@@ -488,7 +533,8 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
                 style={[styles.cell, { width: CELL_SIZE, height: CELL_SIZE }]}
                 onPress={() => {
                   lightImpact();
-                  setSelectedMedia({ url: item.url, isVideo: item.isVideo });
+                  const post = posts.find((p) => p.id === item.postId);
+                  if (post) setSelectedPostId(post.id);
                 }}
                 activeOpacity={0.9}
               >
@@ -563,40 +609,49 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
         );
       })()}
 
-      {selectedMedia && (
+      {selectedPost && (
         <Modal
           visible
           transparent
           animationType="fade"
-          onRequestClose={() => setSelectedMedia(null)}
+          onRequestClose={closePostModal}
           statusBarTranslucent
         >
           <Pressable
-            style={styles.heroImageModalOverlay}
-            onPress={() => setSelectedMedia(null)}
+            style={[styles.postModalOverlay, { backgroundColor: colors.overlay.dark }]}
+            onPress={closePostModal}
           >
             <Pressable
-              style={styles.heroImageModalClose}
-              onPress={() => {
-                lightImpact();
-                setSelectedMedia(null);
-              }}
+              style={[styles.postModalContent, { backgroundColor: colors.background.primary }]}
+              onPress={(e) => e.stopPropagation()}
             >
-              <IconSymbol name="xmark" size={22} color="#fff" />
-            </Pressable>
-            {selectedMedia.isVideo ? (
-              <Video
-                source={{ uri: selectedMedia.url }}
-                style={styles.heroImageModalImage}
-                resizeMode={ResizeMode.CONTAIN}
-                shouldPlay
-                useNativeControls
+              <TouchableOpacity
+                style={styles.postModalClose}
+                onPress={() => {
+                  lightImpact();
+                  closePostModal();
+                }}
+                activeOpacity={0.8}
+                hitSlop={8}
+              >
+                <View style={[styles.postModalCloseBg, { backgroundColor: colors.background.secondary }]}>
+                  <IconSymbol name="xmark" size={16} color={colors.text.primary} />
+                </View>
+              </TouchableOpacity>
+              <FeedCard
+                post={selectedPost}
+                onAuthorPress={() => router.push(`/user/${selectedPost.user_id}` as any)}
+                onPlacePress={() => selectedPost.place_id && router.push(`/place/${selectedPost.place_id}` as any)}
+                onLike={() => handleLike(selectedPost)}
+                onComment={() => setCommentPostId(selectedPost.id)}
               />
-            ) : (
-              <Image
-                source={{ uri: selectedMedia.url }}
-                style={styles.heroImageModalImage}
-                contentFit="contain"
+            </Pressable>
+            {commentPostId != null && (
+              <CommentBottomSheet
+                visible
+                postId={commentPostId}
+                onClose={() => setCommentPostId(null)}
+                onCommentAdded={() => handleCommentAdded(commentPostId)}
               />
             )}
           </Pressable>
@@ -767,6 +822,28 @@ const styles = StyleSheet.create({
     marginTop: 6,
     textAlign: 'center',
     maxWidth: PLACE_STORY_SIZE + 20,
+  },
+  postModalOverlay: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 16,
+  },
+  postModalContent: {
+    borderRadius: 18,
+    overflow: 'hidden',
+  },
+  postModalClose: {
+    position: 'absolute',
+    top: 10,
+    right: 10,
+    zIndex: 20,
+  },
+  postModalCloseBg: {
+    width: 28,
+    height: 28,
+    borderRadius: 14,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   sectionHeader: {
     flexDirection: 'row',

@@ -110,7 +110,6 @@ export function FeedCard({
               <Text style={[styles.placeLine, { color: colors.text.tertiary }]}>{timeAgo(post.created_at)}</Text>
             )}
           </View>
-          <Text style={[styles.time, { color: colors.text.tertiary }]}>{timeAgo(post.created_at)}</Text>
         </TouchableOpacity>
 
         {/* Görsel — pinch zoom via SnapbackZoom */}
@@ -186,8 +185,15 @@ export function FeedCard({
               {post.caption.length > 80 && !expanded && (
                 <Text style={[styles.more, { color: colors.text.tertiary }]}>daha fazla</Text>
               )}
+              <Text style={[styles.captionTime, { color: colors.text.tertiary }]}>
+                {timeAgo(post.created_at)}
+              </Text>
             </TouchableOpacity>
-          ) : null}
+          ) : (
+            <Text style={[styles.captionTime, { color: colors.text.tertiary }]}>
+              {timeAgo(post.created_at)}
+            </Text>
+          )}
         </View>
 
       </View>
@@ -249,10 +255,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: "700",
   },
-  time: {
-    fontSize: 12,
-    marginTop: 3,
-  },
   placeLine: {
     fontSize: 12,
     marginTop: 3,
@@ -296,6 +298,11 @@ const styles = StyleSheet.create({
   caption: {
     fontSize: 14,
     lineHeight: 22,
+  },
+  captionTime: {
+    marginTop: 6,
+    fontSize: 12,
+    fontWeight: "500",
   },
   more: {
     fontSize: 13,

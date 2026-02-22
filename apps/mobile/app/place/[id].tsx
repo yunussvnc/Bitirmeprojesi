@@ -8,9 +8,10 @@
  */
 
 import { router, useLocalSearchParams } from 'expo-router';
-import { useEffect, useMemo, useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, Alert, Linking, Share, Platform } from 'react-native';
+import { useEffect, useMemo, useRef, useState } from 'react';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, Alert, Linking, Modal, Pressable, Platform, Dimensions, PanResponder, Animated as RNAnimated, Share } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme } from '@/hooks/useTheme';
 import { Screen, Section } from '@/components/layout';
 import { PlaceCard } from '@/components/place/PlaceCard';
@@ -34,10 +35,17 @@ type Review = {
   rating: number;
   is_verified: boolean;
   created_at: string;
+  media_url?: string;
+  media_urls?: string[];
 };
+
+const { height: SCREEN_HEIGHT } = Dimensions.get('window');
+const REVIEW_SHEET_COLLAPSED = Math.min(SCREEN_HEIGHT * 0.55, 520);
+const REVIEW_SHEET_EXPANDED = SCREEN_HEIGHT * 0.72;
 
 export default function PlaceDetailScreen() {
   const { colors } = useTheme();
+  const insets = useSafeAreaInsets();
   const params = useLocalSearchParams();
   const id = String(params?.id ?? '');
 
@@ -57,6 +65,72 @@ export default function PlaceDetailScreen() {
   const [reviewsError, setReviewsError] = useState<string | null>(null);
   const [lastDistance, setLastDistance] = useState<number | null>(null);
   const [similarPlaces, setSimilarPlaces] = useState<any[]>([]);
+  const [showReviews, setShowReviews] = useState(false);
+  const [reviewGalleryData, setReviewGalleryData] = useState<{ reviews: Review[]; reviewIndex: number; imageIndex: number } | null>(null);
+
+  const reviewSheetHeight = useRef(new RNAnimated.Value(REVIEW_SHEET_COLLAPSED)).current;
+  const reviewStartHeightRef = useRef(REVIEW_SHEET_COLLAPSED);
+  const reviewScrollOffsetRef = useRef(0);
+
+  const handleAreaPanResponder = useMemo(
+    () =>
+      PanResponder.create({
+        onStartShouldSetPanResponder: () => true,
+        onMoveShouldSetPanResponder: () => true,
+        onPanResponderTerminationRequest: () => false,
+        onPanResponderMove: (_, g) => {
+          const nextH = reviewStartHeightRef.current - g.dy;
+          const clamped = Math.max(0, Math.min(REVIEW_SHEET_EXPANDED, nextH));
+          reviewSheetHeight.setValue(clamped);
+        },
+        onPanResponderRelease: (_, g) => {
+          const currentH = reviewStartHeightRef.current - g.dy;
+          
+          // Eğer çok aşağı çekildiyse veya hızlı aşağı çekildiyse, kapat
+          if (currentH < REVIEW_SHEET_COLLAPSED * 0.3 || (g.dy > 50 && g.vy > 0.5)) {
+            setShowReviews(false);
+            setTimeout(() => {
+              reviewSheetHeight.setValue(REVIEW_SHEET_COLLAPSED);
+              reviewStartHeightRef.current = REVIEW_SHEET_COLLAPSED;
+            }, 50);
+            return;
+          }
+          
+          // Yukarı çekme: eğer genişletilmiş sınıra yakınsa, tam genişlet
+          if (g.dy < -30 && currentH > REVIEW_SHEET_COLLAPSED + 50) {
+            reviewStartHeightRef.current = REVIEW_SHEET_EXPANDED;
+            RNAnimated.spring(reviewSheetHeight, {
+              toValue: REVIEW_SHEET_EXPANDED,
+              useNativeDriver: false,
+              friction: 10,
+              tension: 60,
+            }).start();
+            return;
+          }
+          
+          // Diğer durumlarda, mevcut konumda kal
+          const clampedH = Math.max(REVIEW_SHEET_COLLAPSED, Math.min(REVIEW_SHEET_EXPANDED, currentH));
+          reviewStartHeightRef.current = clampedH;
+          RNAnimated.spring(reviewSheetHeight, {
+            toValue: clampedH,
+            useNativeDriver: false,
+            friction: 10,
+            tension: 60,
+          }).start();
+        },
+      }),
+    [reviewSheetHeight]
+  );
+
+  useEffect(() => {
+    if (showReviews) {
+      reviewSheetHeight.setValue(REVIEW_SHEET_COLLAPSED);
+      reviewStartHeightRef.current = REVIEW_SHEET_COLLAPSED;
+    } else {
+      reviewSheetHeight.setValue(REVIEW_SHEET_COLLAPSED);
+      reviewStartHeightRef.current = REVIEW_SHEET_COLLAPSED;
+    }
+  }, [showReviews, reviewSheetHeight]);
 
   // Load place data
   useEffect(() => {
@@ -81,7 +155,65 @@ export default function PlaceDetailScreen() {
     setReviewsError(null);
     try {
       const data = await apiGet<Review[]>(`/places/${id}/reviews`);
-      if (!cancelled.current) setReviews(data || []);
+      
+      const mockReviewsWithImages: Review[] = [
+        {
+          id: 9001,
+          user_id: 101,
+          place_id: Number(id),
+          comment_text: 'Harika bir mekan! Kahveleri çok lezzetli, ortam harika.',
+          rating: 5,
+          is_verified: true,
+          created_at: new Date(Date.now() - 2 * 24 * 3600000).toISOString(),
+          media_url: 'https://images.unsplash.com/photo-1511920170033-f8396924c348?w=800&h=600&fit=crop',
+          media_urls: [
+            'https://images.unsplash.com/photo-1511920170033-f8396924c348?w=800&h=600&fit=crop',
+            'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&h=600&fit=crop',
+          ],
+        },
+        {
+          id: 9002,
+          user_id: 102,
+          place_id: Number(id),
+          comment_text: 'Atmosfer mükemmel, kesinlikle tavsiye ederim. Servis de çok hızlıydı.',
+          rating: 4,
+          is_verified: true,
+          created_at: new Date(Date.now() - 5 * 24 * 3600000).toISOString(),
+          media_url: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=800&h=600&fit=crop',
+          media_urls: [
+            'https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=800&h=600&fit=crop',
+          ],
+        },
+        {
+          id: 9003,
+          user_id: 103,
+          place_id: Number(id),
+          comment_text: 'Çalışmak için ideal bir yer. Sessiz ve huzurlu.',
+          rating: 5,
+          is_verified: false,
+          created_at: new Date(Date.now() - 7 * 24 * 3600000).toISOString(),
+        },
+        {
+          id: 9004,
+          user_id: 104,
+          place_id: Number(id),
+          comment_text: 'İç mekan çok güzel tasarlanmış, yemekleri de lezzetli.',
+          rating: 5,
+          is_verified: true,
+          created_at: new Date(Date.now() - 10 * 24 * 3600000).toISOString(),
+          media_url: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=600&fit=crop',
+          media_urls: [
+            'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=600&fit=crop',
+            'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&h=600&fit=crop',
+            'https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=800&h=600&fit=crop',
+          ],
+        },
+      ];
+      
+      if (!cancelled.current) {
+        const combinedReviews = [...mockReviewsWithImages, ...(data || [])];
+        setReviews(combinedReviews);
+      }
     } catch (error) {
       if (!cancelled.current) {
         logger.error('Error loading reviews:', error);
@@ -204,11 +336,6 @@ export default function PlaceDetailScreen() {
     }
   };
 
-  const handleCall = () => {
-    // TODO: Add phone number to Place model
-    Alert.alert('Bilgi', 'Telefon numarası henüz eklenmedi.');
-  };
-
   const handleShare = async () => {
     try {
       await Share.share({
@@ -218,6 +345,11 @@ export default function PlaceDetailScreen() {
     } catch (error) {
       logger.error('Error sharing:', error);
     }
+  };
+
+  const handleCall = () => {
+    // TODO: Mekan telefon numarası eklenmeli
+    Alert.alert('Bilgi', 'Bu mekanın telefon numarası henüz eklenmedi.');
   };
 
   const heroSource = useMemo(() => {
@@ -233,16 +365,6 @@ export default function PlaceDetailScreen() {
     if (!reviews.length) return null;
     const sum = reviews.reduce((acc, r) => acc + (r.rating || 0), 0);
     return (sum / reviews.length).toFixed(1);
-  }, [reviews]);
-
-  const ratingDistribution = useMemo(() => {
-    const dist: Record<number, number> = { 1: 0, 2: 0, 3: 0, 4: 0, 5: 0 };
-    reviews.forEach((r) => {
-      if (r.rating >= 1 && r.rating <= 5) {
-        dist[r.rating] += 1;
-      }
-    });
-    return dist;
   }, [reviews]);
 
   const distanceText = useMemo(() => {
@@ -281,31 +403,43 @@ export default function PlaceDetailScreen() {
             <IconSymbol name="chevron.left" size={20} color={colors.text.primary} />
           </TouchableOpacity>
           
-          <TouchableOpacity
-            onPress={() => {
-              if (saved) lightImpact(); else success();
-              toggleSaved({
-                id,
-                name: place?.name || `Mekan #${id}`,
-                subtitle: place?.subtitle || place?.description || 'Detay ekranı',
-                photo_url: place?.photo_url,
-                category: place?.category,
-                tags: place?.tags,
-              });
-            }}
-            style={[
-              styles.headerButton,
-              {
-                backgroundColor: saved ? colors.accent.primary : colors.surface.elevated,
-              },
-            ]}
-          >
-            <IconSymbol
-              name={saved ? 'heart.fill' : 'heart'}
-              size={20}
-              color={saved ? colors.text.inverse : colors.text.primary}
-            />
-          </TouchableOpacity>
+          <View style={styles.headerRightButtons}>
+            <TouchableOpacity
+              onPress={() => {
+                lightImpact();
+                handleShare();
+              }}
+              style={[styles.headerButton, { backgroundColor: colors.surface.elevated, marginRight: spacing.sm }]}
+            >
+              <IconSymbol name="square.and.arrow.up" size={20} color={colors.text.primary} />
+            </TouchableOpacity>
+            
+            <TouchableOpacity
+              onPress={() => {
+                if (saved) lightImpact(); else success();
+                toggleSaved({
+                  id,
+                  name: place?.name || `Mekan #${id}`,
+                  subtitle: place?.subtitle || place?.description || 'Detay ekranı',
+                  photo_url: place?.photo_url,
+                  category: place?.category,
+                  tags: place?.tags,
+                });
+              }}
+              style={[
+                styles.headerButton,
+                {
+                  backgroundColor: saved ? colors.accent.primary : colors.surface.elevated,
+                },
+              ]}
+            >
+              <IconSymbol
+                name={saved ? 'heart.fill' : 'heart'}
+                size={20}
+                color={saved ? colors.text.inverse : colors.text.primary}
+              />
+            </TouchableOpacity>
+          </View>
         </View>
 
         {/* Image */}
@@ -324,9 +458,22 @@ export default function PlaceDetailScreen() {
 
         {/* Title and Meta */}
         <View style={styles.titleSection}>
-          <Text style={[h1Style, { fontSize: 24, marginBottom: spacing.sm }]}>
-            {place?.name || `Mekan #${id}`}
-          </Text>
+          <View style={styles.titleRow}>
+            <Text style={[h1Style, { fontSize: 24, marginBottom: spacing.sm, flex: 1 }]}>
+              {place?.name || `Mekan #${id}`}
+            </Text>
+            <TouchableOpacity
+              onPress={() => {
+                lightImpact();
+                setShowReviews(true);
+              }}
+              style={[styles.reviewButton, { borderColor: colors.surface.border }]}
+            >
+              <Text style={[bodySmallStyle, { color: colors.text.secondary }]}>
+                Yorumlar
+              </Text>
+            </TouchableOpacity>
+          </View>
           
           <View style={styles.metaRow}>
             {place?.category && (
@@ -352,17 +499,6 @@ export default function PlaceDetailScreen() {
           {/* Place Meta Section */}
           <View style={styles.placeMetaSection}>
             <View style={styles.placeMetaRow}>
-              {averageRating && (
-                <View style={styles.ratingContainer}>
-                  <Text style={[{ fontSize: 32, fontWeight: '700', color: colors.text.primary }]}>
-                    {averageRating}
-                  </Text>
-                  <RatingStars value={Number(averageRating)} onChange={() => {}} />
-                  <Text style={[captionStyle, { marginTop: 4 }]}>
-                    {reviews.length} yorum
-                  </Text>
-                </View>
-              )}
               {distanceText && (
                 <View style={styles.distanceContainer}>
                   <IconSymbol name="location.fill" size={18} color={colors.text.secondary} />
@@ -370,101 +506,6 @@ export default function PlaceDetailScreen() {
                 </View>
               )}
             </View>
-          </View>
-
-          {/* Quick Actions Row — outline butonlar, Kaydet basınca dolup yeşil */}
-          <View style={styles.quickActionsRow}>
-            <TouchableOpacity
-              onPress={() => {
-                lightImpact();
-                handleNavigate();
-              }}
-              style={[styles.quickActionButton, styles.quickActionButtonOutline, { borderColor: colors.surface.border }]}
-            >
-              <FontAwesome5 name="route" size={22} color={colors.accent.primary} solid={false} />
-              <Text style={[bodySmallStyle, { marginTop: 4, textAlign: 'center', color: colors.text.primary }]}>
-                Yol Tarifi
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => {
-                lightImpact();
-                handleCall();
-              }}
-              style={[styles.quickActionButton, styles.quickActionButtonOutline, { borderColor: colors.surface.border }]}
-            >
-              <FontAwesome5 name="phone" size={22} color={colors.text.secondary} solid={false} />
-              <Text style={[bodySmallStyle, { marginTop: 4, textAlign: 'center', color: colors.text.secondary }]}>
-                Ara
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => {
-                lightImpact();
-                router.push({
-                  pathname: '/create-story',
-                  params: { placeId: id, placeName: place?.name || `Mekan #${id}` },
-                } as any);
-              }}
-              style={[styles.quickActionButton, { backgroundColor: colors.accent.primary + '20', borderColor: colors.accent.primary }]}
-            >
-              <IconSymbol name="camera.fill" size={22} color={colors.accent.primary} />
-              <Text style={[bodySmallStyle, { marginTop: 4, textAlign: 'center', color: colors.accent.primary }]}>
-                Hikaye
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => {
-                lightImpact();
-                router.push({
-                  pathname: '/create-post',
-                  params: { placeId: id, placeName: place?.name || `Mekan #${id}` },
-                } as any);
-              }}
-              style={[styles.quickActionButton, styles.quickActionButtonOutline, { borderColor: colors.surface.border }]}
-            >
-              <IconSymbol name="photo" size={22} color={colors.text.secondary} />
-              <Text style={[bodySmallStyle, { marginTop: 4, textAlign: 'center', color: colors.text.secondary }]}>
-                Gönderi
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => {
-                lightImpact();
-                handleShare();
-              }}
-              style={[styles.quickActionButton, styles.quickActionButtonOutline, { borderColor: colors.surface.border }]}
-            >
-              <FontAwesome5 name="share-alt" size={22} color={colors.text.secondary} solid={false} />
-              <Text style={[bodySmallStyle, { marginTop: 4, textAlign: 'center', color: colors.text.secondary }]}>
-                Paylaş
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => {
-                if (saved) lightImpact(); else success();
-                toggleSaved({
-                  id,
-                  name: place?.name || `Mekan #${id}`,
-                  subtitle: place?.subtitle || place?.description || 'Detay ekranı',
-                });
-              }}
-              style={[
-                styles.quickActionButton,
-                saved
-                  ? { backgroundColor: colors.accent.primary, borderWidth: 1, borderColor: colors.accent.primary }
-                  : [styles.quickActionButtonOutline, { borderColor: colors.surface.border }],
-              ]}
-            >
-              <IconSymbol
-                name={saved ? 'heart.fill' : 'heart'}
-                size={24}
-                color={saved ? '#FFFFFF' : colors.text.secondary}
-              />
-              <Text style={[bodySmallStyle, { marginTop: 4, textAlign: 'center', color: saved ? '#FFFFFF' : colors.text.secondary }]}>
-                Kaydet
-              </Text>
-            </TouchableOpacity>
           </View>
 
           {/* Atmosphere Section */}
@@ -484,66 +525,57 @@ export default function PlaceDetailScreen() {
                   </Text>
                 </View>
                 <View style={[styles.atmosphereTag, { backgroundColor: colors.surface.default }]}>
-                  <IconSymbol name="person.fill" size={16} color={colors.text.secondary} />
+                  <IconSymbol name="person.fill" size={20} color={colors.text.secondary} />
                   <Text style={[bodySmallStyle, { marginLeft: 6 }]}>
                     {place.tags?.includes('work') ? 'Çalışma' : 'Sosyal'} için ideal
                   </Text>
                 </View>
               </View>
-            </Card>
-          )}
-
-          {/* Highlights Grid */}
-          <Card style={styles.sectionCard}>
-            <Text style={[h2Style, { fontSize: 20, marginBottom: spacing.base }]}>
-              Özellikler
-            </Text>
-            <View style={styles.highlightsGrid}>
-              {[
-                { fa5: 'wifi' as const, fa5Unavailable: 'wifi-slash' as const, label: 'Wi-Fi', available: true },
-                { fa5: 'plug' as const, fa5Unavailable: 'plug' as const, label: 'Priz', available: true },
-                { fa5: 'volume-mute' as const, fa5Unavailable: 'volume-mute' as const, label: 'Sessiz', available: place?.tags?.includes('quiet') },
-                { fa5: 'umbrella' as const, fa5Unavailable: 'umbrella' as const, label: 'Terasta oturma', available: false },
-              ].map((item, idx) => {
-                const iconName = item.available ? item.fa5 : item.fa5Unavailable;
-                const iconColor = item.available ? colors.accent.primary : colors.text.tertiary;
-                return (
-                  <View
-                    key={idx}
-                    style={[
-                      styles.highlightItem,
-                      {
-                        backgroundColor: item.available
-                          ? colors.accent.primary + '15'
-                          : colors.surface.default,
-                        borderColor: item.available
-                          ? colors.accent.primary + '30'
-                          : colors.surface.border,
-                      },
-                    ]}
-                  >
-                    <FontAwesome5
-                      name={iconName}
-                      size={20}
-                      color={iconColor}
-                      solid={false}
-                    />
-                    <Text
+              <Text style={[h2Style, { fontSize: 18, marginTop: spacing.lg, marginBottom: spacing.base }]}>
+                Özellikler
+              </Text>
+              <View style={styles.highlightsGrid}>
+                {[
+                  { fa5: 'wifi' as const, fa5Unavailable: 'wifi-slash' as const, label: 'Wi-Fi', available: true },
+                  { fa5: 'plug' as const, fa5Unavailable: 'plug' as const, label: 'Priz', available: true },
+                  { fa5: 'volume-mute' as const, fa5Unavailable: 'volume-mute' as const, label: 'Sessiz', available: place?.tags?.includes('quiet') },
+                  { fa5: 'umbrella' as const, fa5Unavailable: 'umbrella' as const, label: 'Terasta\nOturma', available: false },
+                ].map((item, idx) => {
+                  const iconName = item.available ? item.fa5 : item.fa5Unavailable;
+                  const iconColor = item.available ? colors.text.primary : colors.text.tertiary;
+                  return (
+                    <TouchableOpacity
+                      key={idx}
+                      activeOpacity={0.8}
                       style={[
-                        bodySmallStyle,
-                        {
-                          marginTop: 4,
-                          color: item.available ? colors.text.primary : colors.text.tertiary,
-                        },
+                        styles.highlightItem,
+                        item.label === 'Terasta\nOturma' && styles.highlightItemLowered,
                       ]}
                     >
-                      {item.label}
-                    </Text>
-                  </View>
-                );
-              })}
-            </View>
-          </Card>
+                      <FontAwesome5
+                        name={iconName}
+                        size={20}
+                        color={iconColor}
+                        solid={false}
+                      />
+                      <Text
+                        style={[
+                          bodySmallStyle,
+                          {
+                            marginTop: 6,
+                          textAlign: 'center',
+                            color: item.available ? colors.text.primary : colors.text.tertiary,
+                          },
+                        ]}
+                      >
+                        {item.label}
+                      </Text>
+                    </TouchableOpacity>
+                  );
+                })}
+              </View>
+            </Card>
+          )}
 
           {/* Location Preview */}
           {place?.address && (
@@ -561,23 +593,107 @@ export default function PlaceDetailScreen() {
                     {place.city}
                   </Text>
                 )}
-                <Button
-                  variant="secondary"
-                  onPress={handleNavigate}
-                  style={{ marginTop: spacing.base }}
-                >
-                  Yol Tarifi Al
-                </Button>
+                <View style={styles.locationButtons}>
+                  <Button
+                    variant="secondary"
+                    onPress={handleNavigate}
+                    style={{ flex: 1, marginRight: spacing.xs }}
+                  >
+                    Yol Tarifi Al
+                  </Button>
+                  <TouchableOpacity
+                    onPress={() => {
+                      lightImpact();
+                      handleCall();
+                    }}
+                    style={[styles.callButton, { backgroundColor: colors.surface.elevated, borderColor: colors.surface.border }]}
+                    activeOpacity={0.7}
+                  >
+                    <IconSymbol name="phone.fill" size={20} color={colors.text.primary} />
+                  </TouchableOpacity>
+                </View>
               </View>
             </Card>
           )}
 
-          {/* Reviews Summary & List */}
-          <Card style={styles.sectionCard}>
-            <Text style={[h2Style, { fontSize: 20, marginBottom: spacing.base }]}>
-              Yorumlar & Puanlar
-            </Text>
+          {/* Similar Places */}
+          {similarPlaces.length > 0 && (
+            <Section title="Benzer Mekanlar" style={{ marginTop: spacing.xl }}>
+              <ScrollView
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={styles.similarScrollContent}
+              >
+                {similarPlaces.map((similarPlace) => (
+                  <View key={similarPlace.id} style={styles.similarCardWrapper}>
+                    <PlaceCard
+                      image={getPlaceImageSource(similarPlace)}
+                      imagePlaceholder={!hasPlaceImage(similarPlace)}
+                      title={similarPlace.name}
+                      subtitle={similarPlace.subtitle || similarPlace.description}
+                      tags={similarPlace.tags}
+                      onPress={() => router.push({ pathname: '/place/[id]', params: { id: String(similarPlace.id) } })}
+                    />
+                  </View>
+                ))}
+              </ScrollView>
+            </Section>
+          )}
+        </View>
+    </Screen>
+    <Modal
+      visible={showReviews}
+      transparent
+      animationType="none"
+      onRequestClose={() => setShowReviews(false)}
+      statusBarTranslucent
+    >
+      {showReviews && (
+      <>
+      <View style={styles.reviewBackdrop}>
+        <Pressable
+          style={[styles.reviewBackdropPressable, { backgroundColor: colors.overlay.medium }]}
+          onPress={() => setShowReviews(false)}
+        />
+        <View style={{ width: '100%' }}>
+          <RNAnimated.View
+            style={[
+              styles.reviewSheet,
+              {
+                backgroundColor: colors.background.primary,
+                paddingBottom: insets.bottom || spacing.base,
+                height: reviewSheetHeight,
+              },
+            ]}
+          >
+          <View>
+            <View style={styles.reviewDragArea} {...handleAreaPanResponder.panHandlers}>
+              <View style={styles.reviewHandleRow}>
+                <View style={[styles.reviewHandle, { backgroundColor: colors.surface.border }]} />
+              </View>
+              <View style={styles.reviewHeaderRow}>
+                <Text style={[h2Style, { fontSize: 20 }]}>Yorumlar</Text>
+                <TouchableOpacity
+                  onPress={() => {
+                    lightImpact();
+                    setShowReviews(false);
+                  }}
+                  activeOpacity={0.7}
+                >
+                  <IconSymbol name="xmark.circle.fill" size={28} color={colors.text.tertiary} />
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
 
+          <ScrollView
+            contentContainerStyle={styles.reviewScrollContent}
+            showsVerticalScrollIndicator={false}
+            onScroll={(e) => {
+              reviewScrollOffsetRef.current = e.nativeEvent.contentOffset.y;
+            }}
+            scrollEventThrottle={16}
+          >
             {reviewsLoading ? (
               <Text style={[bodySmallStyle]}>Yorumlar yükleniyor...</Text>
             ) : reviewsError ? (
@@ -588,45 +704,49 @@ export default function PlaceDetailScreen() {
               </Text>
             ) : (
               <>
-                <View style={styles.reviewsSummaryRow}>
-                  <View style={styles.reviewsAverage}>
-                    <Text style={[h2Style, { fontSize: 36, color: colors.text.primary }]}>
+                <View style={[styles.reviewsSummaryCard, { borderColor: colors.surface.border }]}>
+                  <View style={[styles.ratingBadge, { backgroundColor: colors.accent.primary }]}>
+                    <IconSymbol name="star.fill" size={18} color={colors.accent.onPrimary} />
+                    <Text style={[styles.ratingBadgeText, { color: colors.accent.onPrimary }]}>
                       {averageRating}
                     </Text>
-                    <RatingStars value={Number(averageRating)} onChange={() => {}} />
-                    <Text style={[bodySmallStyle, { marginTop: 4 }]}>
-                      {reviews.length} yorum
-                    </Text>
                   </View>
-                  <View style={styles.reviewsDistribution}>
-                    {[5, 4, 3, 2, 1].map((star) => {
-                      const count = ratingDistribution[star] || 0;
-                      const ratio = reviews.length ? count / reviews.length : 0;
-                      return (
-                        <View key={star} style={styles.distributionRow}>
-                          <Text style={[bodySmallStyle, { width: 20 }]}>{star}★</Text>
-                          <View style={[styles.distributionBarBackground, { backgroundColor: colors.surface.hover }]}>
-                            <View
-                              style={[
-                                styles.distributionBarFill,
-                                {
-                                  width: `${(ratio * 100).toFixed(0)}%` as any,
-                                  backgroundColor: colors.accent.primary,
-                                },
-                              ]}
-                            />
-                          </View>
-                          <Text style={[bodySmallStyle, { marginLeft: 8, minWidth: 20 }]}>
-                            {count}
-                          </Text>
-                        </View>
-                      );
-                    })}
+                  <View style={styles.ratingDetails}>
+                    {[
+                      { label: 'Servis' },
+                      { label: 'Lezzet' },
+                      { label: 'Ambiyans' },
+                    ].map((item) => (
+                      <View key={item.label} style={styles.ratingRow}>
+                        <Text style={[bodySmallStyle, { width: 70 }]}>
+                          {item.label}:
+                        </Text>
+                        <RatingStars value={Number(averageRating)} disabled size={14} />
+                        <Text style={[bodySmallStyle, { marginLeft: spacing.xs }]}>
+                          {averageRating}
+                        </Text>
+                      </View>
+                    ))}
                   </View>
                 </View>
 
                 <View style={{ marginTop: spacing.lg }}>
-                  {reviews.slice(0, 5).map((review) => (
+                  <View style={styles.reviewsMetaRow}>
+                    <View style={styles.reviewsMetaItem}>
+                      <IconSymbol name="star.fill" size={16} color={colors.text.tertiary} />
+                      <Text style={[bodySmallStyle, { marginLeft: 6 }]}>
+                        {reviews.length} değerlendirme
+                      </Text>
+                    </View>
+                    <View style={styles.reviewsMetaDivider} />
+                    <View style={styles.reviewsMetaItem}>
+                      <IconSymbol name="text.bubble.fill" size={16} color={colors.text.tertiary} />
+                      <Text style={[bodySmallStyle, { marginLeft: 6 }]}>
+                        {reviews.length} yorum
+                      </Text>
+                    </View>
+                  </View>
+                  {reviews.map((review) => (
                     <View key={review.id} style={[styles.reviewItem, { borderBottomColor: colors.surface.border }]}>
                       <View style={styles.reviewHeader}>
                         <View style={styles.reviewHeaderLeft}>
@@ -659,100 +779,188 @@ export default function PlaceDetailScreen() {
                             </View>
                           )}
                         </View>
-                        <RatingStars value={review.rating} onChange={() => {}} />
+                        <RatingStars value={review.rating} disabled size={16} />
                       </View>
                       <Text style={[bodySmallStyle, { marginTop: 8, lineHeight: 20 }]}>
                         {review.comment_text}
                       </Text>
+                      {review.media_url && (
+                        <Pressable
+                          onPress={() => {
+                            lightImpact();
+                            const mediaReviews = reviews.filter(r => r.media_url);
+                            const rIdx = mediaReviews.findIndex(r => r.id === review.id);
+                            setReviewGalleryData({ reviews: mediaReviews, reviewIndex: rIdx, imageIndex: 0 });
+                          }}
+                          hitSlop={8}
+                          style={({ pressed }) => [
+                            styles.reviewImageContainer,
+                            pressed && { opacity: 0.8 },
+                          ]}
+                        >
+                          <Image
+                            source={{ uri: review.media_url }}
+                            style={styles.reviewImage}
+                            resizeMode="cover"
+                          />
+                          {(review.media_urls?.length ?? 0) > 1 && (
+                            <View style={styles.reviewImageBadge}>
+                              <Text style={styles.reviewImageBadgeText}>
+                                {review.media_urls!.length}
+                              </Text>
+                            </View>
+                          )}
+                        </Pressable>
+                      )}
                     </View>
                   ))}
                 </View>
               </>
             )}
-          </Card>
-
-          {/* Review Composer */}
-          <Card style={styles.sectionCard}>
-            <Text style={[h2Style, { fontSize: 20, marginBottom: spacing.base }]}>
-              Deneyimini paylaş
-            </Text>
-            {isNearby ? (
-              !showReviewForm ? (
-                <>
-                  <Text style={[bodySmallStyle, { marginBottom: spacing.base }]}>
-                    Şu anda bu mekandasın. Deneyimini paylaş, yorumun doğrulanmış olarak işaretlensin.
-                  </Text>
-                  <Button
-                    variant="primary"
-                    onPress={() => {
-                      lightImpact();
-                      setShowReviewForm(true);
-                    }}
-                  >
-                    Yorum Yap
-                  </Button>
-                </>
-              ) : (
-                <ReviewForm
-                  onSubmit={handleSubmitReview}
-                  onCancel={() => {
-                    lightImpact();
-                    setShowReviewForm(false);
-                  }}
-                  loading={submittingReview}
-                />
-              )
-            ) : (
-              <>
-                <Text style={[bodySmallStyle, { marginBottom: spacing.sm }]}>
-                  {`AsEmOs'ta yorumlar, gerçekten mekandayken bırakılabilir. Bu mekanı`}
-                  değerlendirmek için şu anda burada olmalısın.
-                </Text>
-                {lastDistance != null && (
-                  <Text style={[captionStyle, { marginBottom: spacing.base }]}>
-                    Tahmini mesafen: ~{Math.round(lastDistance)} m
-                  </Text>
-                )}
-                <Button
-                  variant="secondary"
-                  onPress={checkUserLocation}
-                  loading={checkingLocation}
-                  style={{ marginBottom: spacing.sm }}
-                >
-                  Konumumu Kontrol Et
-                </Button>
-                <Button variant="secondary" onPress={handleNavigate}>
-                  Yol tarifi al
-                </Button>
-              </>
-            )}
-          </Card>
-
-          {/* Similar Places */}
-          {similarPlaces.length > 0 && (
-            <Section title="Benzer Mekanlar" style={{ marginTop: spacing.xl }}>
-              <ScrollView
-                horizontal
-                showsHorizontalScrollIndicator={false}
-                contentContainerStyle={styles.similarScrollContent}
-              >
-                {similarPlaces.map((similarPlace) => (
-                  <View key={similarPlace.id} style={styles.similarCardWrapper}>
-                    <PlaceCard
-                      image={getPlaceImageSource(similarPlace)}
-                      imagePlaceholder={!hasPlaceImage(similarPlace)}
-                      title={similarPlace.name}
-                      subtitle={similarPlace.subtitle || similarPlace.description}
-                      tags={similarPlace.tags}
-                      onPress={() => router.push({ pathname: '/place/[id]', params: { id: String(similarPlace.id) } })}
-                    />
-                  </View>
-                ))}
-              </ScrollView>
-            </Section>
-          )}
+          </ScrollView>
+          </RNAnimated.View>
         </View>
-    </Screen>
+      </View>
+      {/* Review Image Gallery Overlay */}
+      {reviewGalleryData && (() => {
+        const currentReview = reviewGalleryData.reviews[reviewGalleryData.reviewIndex];
+        const currentImages = currentReview.media_urls?.length ? currentReview.media_urls : [currentReview.media_url!];
+        const currentImageUrl = currentImages[reviewGalleryData.imageIndex];
+        const hasNextImage = reviewGalleryData.imageIndex < currentImages.length - 1;
+        const hasPrevImage = reviewGalleryData.imageIndex > 0;
+        const hasNextReview = reviewGalleryData.reviewIndex < reviewGalleryData.reviews.length - 1;
+        const hasPrevReview = reviewGalleryData.reviewIndex > 0;
+
+        return (
+          <View style={styles.imageModalOverlay}>
+            <Pressable
+              style={styles.imageModalBackdrop}
+              onPress={() => setReviewGalleryData(null)}
+            />
+            {/* Top bar: close + counter */}
+            <View style={styles.galleryTopBar}>
+              <TouchableOpacity
+                onPress={() => {
+                  lightImpact();
+                  setReviewGalleryData(null);
+                }}
+                activeOpacity={0.8}
+                hitSlop={12}
+              >
+                <IconSymbol name="xmark.circle.fill" size={32} color="#fff" />
+              </TouchableOpacity>
+              <Text style={styles.imageCounterText}>
+                {reviewGalleryData.reviewIndex + 1} / {reviewGalleryData.reviews.length}
+              </Text>
+            </View>
+
+            {/* Image area */}
+            <View style={styles.galleryImageArea}>
+              <Image
+                source={{ uri: currentImageUrl }}
+                style={styles.galleryImage}
+                resizeMode="contain"
+              />
+
+              {/* Image left arrow */}
+              {hasPrevImage && (
+                <TouchableOpacity
+                  style={[styles.galleryArrow, styles.galleryArrowLeft]}
+                  onPress={() => {
+                    lightImpact();
+                    setReviewGalleryData(prev => prev ? { ...prev, imageIndex: prev.imageIndex - 1 } : null);
+                  }}
+                  activeOpacity={0.7}
+                >
+                  <IconSymbol name="chevron.left" size={28} color="#fff" />
+                </TouchableOpacity>
+              )}
+
+              {/* Image right arrow */}
+              {hasNextImage && (
+                <TouchableOpacity
+                  style={[styles.galleryArrow, styles.galleryArrowRight]}
+                  onPress={() => {
+                    lightImpact();
+                    setReviewGalleryData(prev => prev ? { ...prev, imageIndex: prev.imageIndex + 1 } : null);
+                  }}
+                  activeOpacity={0.7}
+                >
+                  <IconSymbol name="chevron.right" size={28} color="#fff" />
+                </TouchableOpacity>
+              )}
+
+              {/* Image dots */}
+              {currentImages.length > 1 && (
+                <View style={styles.imageDotsRow}>
+                  {currentImages.map((_, dIdx) => (
+                    <View
+                      key={dIdx}
+                      style={[
+                        styles.imageDot,
+                        dIdx === reviewGalleryData.imageIndex && styles.imageDotActive,
+                      ]}
+                    />
+                  ))}
+                </View>
+              )}
+            </View>
+
+            {/* Review info overlay */}
+            <View style={styles.galleryReviewOverlay}>
+              <View style={styles.galleryReviewHeader}>
+                <Text style={styles.galleryReviewAuthor}>
+                  Kullanıcı #{currentReview.user_id}
+                </Text>
+                {currentReview.is_verified && (
+                  <View style={styles.galleryVerifiedBadge}>
+                    <IconSymbol name="checkmark.seal.fill" size={12} color="#4ade80" />
+                    <Text style={styles.galleryVerifiedText}>Verified</Text>
+                  </View>
+                )}
+                <View style={{ flex: 1 }} />
+                <RatingStars value={currentReview.rating} disabled size={14} />
+              </View>
+              <Text style={styles.galleryReviewText} numberOfLines={3}>
+                {currentReview.comment_text}
+              </Text>
+
+              {/* Review navigation */}
+              <View style={styles.galleryReviewNav}>
+                <TouchableOpacity
+                  onPress={() => {
+                    lightImpact();
+                    setReviewGalleryData(prev => prev ? { ...prev, reviewIndex: prev.reviewIndex - 1, imageIndex: 0 } : null);
+                  }}
+                  disabled={!hasPrevReview}
+                  style={[styles.galleryNavButton, !hasPrevReview && { opacity: 0.3 }]}
+                  activeOpacity={0.7}
+                >
+                  <IconSymbol name="chevron.left" size={18} color="#fff" />
+                  <Text style={styles.galleryNavText}>Önceki Yorum</Text>
+                </TouchableOpacity>
+
+                <TouchableOpacity
+                  onPress={() => {
+                    lightImpact();
+                    setReviewGalleryData(prev => prev ? { ...prev, reviewIndex: prev.reviewIndex + 1, imageIndex: 0 } : null);
+                  }}
+                  disabled={!hasNextReview}
+                  style={[styles.galleryNavButton, !hasNextReview && { opacity: 0.3 }]}
+                  activeOpacity={0.7}
+                >
+                  <Text style={styles.galleryNavText}>Sonraki Yorum</Text>
+                  <IconSymbol name="chevron.right" size={18} color="#fff" />
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        );
+      })()}
+      </>
+      )}
+    </Modal>
+    
     </Animated.View>
   );
 }
@@ -763,6 +971,10 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: spacing.base,
+  },
+  headerRightButtons: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   headerButton: {
     width: 40,
@@ -790,6 +1002,73 @@ const styles = StyleSheet.create({
   },
   titleSection: {
     marginBottom: spacing.base,
+  },
+  titleRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.sm,
+  },
+  reviewButton: {
+    paddingHorizontal: spacing.sm,
+    paddingVertical: spacing.xs,
+    borderRadius: 999,
+    borderWidth: 1,
+    alignSelf: 'flex-start',
+  },
+  reviewBackdrop: {
+    flex: 1,
+    justifyContent: 'flex-end',
+  },
+  reviewBackdropPressable: {
+    ...StyleSheet.absoluteFillObject,
+  },
+  reviewSheet: {
+    width: '100%',
+    alignSelf: 'stretch',
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    paddingTop: spacing.sm,
+    paddingHorizontal: spacing.base,
+    overflow: 'hidden',
+  },
+  reviewHandleRow: {
+    alignItems: 'center',
+    paddingVertical: spacing.xs,
+  },
+  reviewDragArea: {
+    paddingVertical: spacing.sm,
+    paddingHorizontal: spacing.base,
+  },
+  reviewHandle: {
+    width: 44,
+    height: 4,
+    borderRadius: 999,
+  },
+  reviewHeaderRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: spacing.xs,
+    marginBottom: spacing.base,
+  },
+  reviewsMetaRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginBottom: spacing.base,
+  },
+  reviewsMetaItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  reviewsMetaDivider: {
+    width: 1,
+    height: 16,
+    backgroundColor: '#00000022',
+    marginHorizontal: spacing.base,
+  },
+  reviewScrollContent: {
+    paddingBottom: spacing.lg,
   },
   metaRow: {
     flexDirection: 'row',
@@ -822,23 +1101,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
   },
-  quickActionsRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    marginBottom: spacing.xl,
-    gap: spacing.sm,
-  },
-  quickActionButton: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: spacing.base,
-    borderRadius: 16,
-  },
-  quickActionButtonOutline: {
-    backgroundColor: 'transparent',
-    borderWidth: 1,
-  },
   sectionCard: {
     marginBottom: spacing.xl,
   },
@@ -856,17 +1118,22 @@ const styles = StyleSheet.create({
   },
   highlightsGrid: {
     flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: spacing.sm,
+    flexWrap: 'nowrap',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    gap: 0,
   },
   highlightItem: {
-    width: '48%',
+    flex: 1,
+    minWidth: 0,
+    maxWidth: '25%',
     alignItems: 'center',
     justifyContent: 'center',
-    paddingVertical: spacing.base,
-    paddingHorizontal: spacing.sm,
-    borderRadius: 12,
-    borderWidth: 1,
+    paddingVertical: spacing.xs,
+    paddingHorizontal: spacing.xs,
+  },
+  highlightItemLowered: {
+    marginTop: spacing.lg,
   },
   locationPreview: {
     // Spacing handled by children
@@ -875,34 +1142,49 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'flex-start',
   },
-  reviewsSummaryRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    marginBottom: spacing.lg,
-  },
-  reviewsAverage: {
-    flex: 1,
-  },
-  reviewsDistribution: {
-    flex: 1,
-    marginLeft: spacing.lg,
-  },
-  distributionRow: {
+  locationButtons: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: spacing.xs,
+    marginTop: spacing.base,
   },
-  distributionBarBackground: {
+  callButton: {
+    width: 48,
+    height: 48,
+    borderRadius: 12,
+    borderWidth: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  reviewsSummaryCard: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: spacing.base,
+    borderRadius: 16,
+    borderWidth: 1,
+    marginBottom: spacing.lg,
+    gap: spacing.base,
+  },
+  ratingBadge: {
+    minWidth: 84,
+    paddingVertical: spacing.sm,
+    paddingHorizontal: spacing.base,
+    borderRadius: 14,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: spacing.xs,
+  },
+  ratingBadgeText: {
+    fontSize: 20,
+    fontWeight: '700',
+  },
+  ratingDetails: {
     flex: 1,
-    height: 8,
-    borderRadius: 4,
-    marginHorizontal: spacing.xs,
-    overflow: 'hidden',
+    gap: spacing.xs,
   },
-  distributionBarFill: {
-    height: '100%',
-    borderRadius: 4,
+  ratingRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
   },
   reviewItem: {
     marginBottom: spacing.lg,
@@ -931,6 +1213,156 @@ const styles = StyleSheet.create({
   },
   verifiedBadgeText: {
     fontSize: 10,
+    fontWeight: '600',
+  },
+  reviewImageContainer: {
+    marginTop: spacing.sm,
+    borderRadius: 12,
+    overflow: 'hidden',
+    width: 200,
+    height: 150,
+  },
+  reviewImage: {
+    width: '100%',
+    height: '100%',
+    borderRadius: 12,
+  },
+  reviewImageBadge: {
+    position: 'absolute',
+    top: 6,
+    right: 6,
+    backgroundColor: 'rgba(0,0,0,0.6)',
+    borderRadius: 10,
+    width: 20,
+    height: 20,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  reviewImageBadgeText: {
+    color: '#fff',
+    fontSize: 10,
+    fontWeight: '700',
+  },
+  imageModalOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    zIndex: 50,
+    elevation: 50,
+    backgroundColor: '#000',
+  },
+  imageModalBackdrop: {
+    ...StyleSheet.absoluteFillObject,
+  },
+  galleryTopBar: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingTop: 60,
+    paddingHorizontal: 20,
+    paddingBottom: spacing.sm,
+    zIndex: 10,
+  },
+  galleryImageArea: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  galleryImage: {
+    width: '100%',
+    height: '100%',
+  },
+  galleryArrow: {
+    position: 'absolute',
+    top: '50%',
+    marginTop: -24,
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    zIndex: 10,
+  },
+  galleryArrowLeft: {
+    left: 12,
+  },
+  galleryArrowRight: {
+    right: 12,
+  },
+  imageDotsRow: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: 6,
+    position: 'absolute',
+    bottom: 12,
+    alignSelf: 'center',
+  },
+  imageDot: {
+    width: 6,
+    height: 6,
+    borderRadius: 3,
+    backgroundColor: 'rgba(255,255,255,0.4)',
+  },
+  imageDotActive: {
+    backgroundColor: '#fff',
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+  },
+  galleryReviewOverlay: {
+    paddingHorizontal: spacing.lg,
+    paddingTop: spacing.base,
+    paddingBottom: spacing.xl,
+    backgroundColor: 'rgba(0,0,0,0.6)',
+  },
+  galleryReviewHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: spacing.xs,
+    gap: spacing.xs,
+  },
+  galleryReviewAuthor: {
+    color: '#fff',
+    fontSize: 15,
+    fontWeight: '700',
+  },
+  galleryVerifiedBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 3,
+  },
+  galleryVerifiedText: {
+    color: '#4ade80',
+    fontSize: 11,
+    fontWeight: '600',
+  },
+  galleryReviewText: {
+    color: 'rgba(255,255,255,0.9)',
+    fontSize: 14,
+    lineHeight: 20,
+  },
+  galleryReviewNav: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginTop: spacing.base,
+  },
+  galleryNavButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 4,
+    paddingVertical: spacing.xs,
+    paddingHorizontal: spacing.sm,
+    borderRadius: 999,
+    backgroundColor: 'rgba(255,255,255,0.15)',
+  },
+  galleryNavText: {
+    color: '#fff',
+    fontSize: 13,
+    fontWeight: '600',
+  },
+  imageCounterText: {
+    color: '#fff',
+    fontSize: 14,
     fontWeight: '600',
   },
   similarScrollContent: {

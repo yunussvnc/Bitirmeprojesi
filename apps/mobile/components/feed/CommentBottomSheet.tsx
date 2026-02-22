@@ -1,9 +1,10 @@
 /**
  * CommentBottomSheet – Gönderi yorumları bottom sheet
- * Yorumları listele, yeni yorum ekle.
+ * Yükseklik animasyonu: kısmi (2 yorum) ↔ tam açık
+ * Input her zaman altta görünür.
  */
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import {
   View,
   Text,
@@ -16,6 +17,9 @@ import {
   ActivityIndicator,
   KeyboardAvoidingView,
   Platform,
+  Animated,
+  PanResponder,
+  Dimensions,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTheme } from "@/hooks/useTheme";
@@ -26,12 +30,19 @@ import { handleApiError } from "@/src/utils/errorHandler";
 import { lightImpact } from "@/src/utils/haptics";
 import { timeAgo } from "@/src/utils/timeAgo";
 
+const SCREEN_HEIGHT = Dimensions.get("window").height;
+// Kısmi açık yükseklik: handle + başlık + input + ~2 yorum satırı
+const COLLAPSED_HEIGHT = 320;
+// Tam açık yükseklik
+const EXPANDED_HEIGHT = Math.round(SCREEN_HEIGHT * 0.75);
+
 export interface CommentBottomSheetProps {
   visible: boolean;
   onClose: () => void;
   postId: number;
   postCaption?: string;
   onCommentAdded?: () => void;
+  embedded?: boolean;
 }
 
 export function CommentBottomSheet({
@@ -46,6 +57,93 @@ export function CommentBottomSheet({
   const [loading, setLoading] = useState(false);
   const [sending, setSending] = useState(false);
   const [text, setText] = useState("");
+
+  // Height animasyonu (native driver kapalı — height animate edilemez native'de)
+  const animHeight = useRef(new Animated.Value(0)).current;
+  const snapRef = useRef<"collapsed" | "expanded">("collapsed");
+  const onCloseRef = useRef(onClose);
+  onCloseRef.current = onClose;
+
+  const snapTo = useCallback(
+    (target: "collapsed" | "expanded" | "closed") => {
+      const toValue =
+        target === "closed" ? 0 : target === "collapsed" ? COLLAPSED_HEIGHT : EXPANDED_HEIGHT;
+
+      if (target !== "closed") snapRef.current = target;
+
+      Animated.spring(animHeight, {
+        toValue,
+        useNativeDriver: false,
+        damping: 24,
+        stiffness: 220,
+        mass: 0.8,
+      }).start(({ finished }) => {
+        if (finished && target === "closed") onCloseRef.current();
+      });
+    },
+    [animHeight],
+  );
+
+  // Açılış: height 0 → COLLAPSED_HEIGHT
+  useEffect(() => {
+    if (visible) {
+      animHeight.setValue(0);
+      snapRef.current = "collapsed";
+      snapTo("collapsed");
+    }
+  }, [visible, animHeight, snapTo]);
+
+  // PanResponder: handle çubuğuna bağlı, liste scroll'una dokunmaz
+  const startHeightRef = useRef(COLLAPSED_HEIGHT);
+
+  const panResponder = useRef(
+    PanResponder.create({
+      onStartShouldSetPanResponder: () => true,
+      onStartShouldSetPanResponderCapture: () => false,
+      onMoveShouldSetPanResponder: (_, g) => Math.abs(g.dy) > 6,
+      onMoveShouldSetPanResponderCapture: () => false,
+      onPanResponderTerminationRequest: () => false,
+      onPanResponderGrant: () => {
+        startHeightRef.current =
+          snapRef.current === "expanded" ? EXPANDED_HEIGHT : COLLAPSED_HEIGHT;
+      },
+      onPanResponderMove: (_, g) => {
+        // yukarı çekme: dy negatif → yükseklik artar
+        const next = startHeightRef.current - g.dy;
+        const clamped = Math.max(
+          COLLAPSED_HEIGHT * 0.5,
+          Math.min(EXPANDED_HEIGHT + 30, next),
+        );
+        animHeight.setValue(clamped);
+      },
+      onPanResponderRelease: (_, g) => {
+        const isExpanded = snapRef.current === "expanded";
+
+        if (isExpanded) {
+          if (g.dy > 80 || g.vy > 0.5) {
+            if (g.dy > 220 || g.vy > 1.2) {
+              snapToRef.current("closed");
+            } else {
+              snapToRef.current("collapsed");
+            }
+          } else {
+            snapToRef.current("expanded");
+          }
+        } else {
+          if (g.dy < -60 || g.vy < -0.4) {
+            snapToRef.current("expanded");
+          } else if (g.dy > 60 || g.vy > 0.4) {
+            snapToRef.current("closed");
+          } else {
+            snapToRef.current("collapsed");
+          }
+        }
+      },
+    }),
+  ).current;
+
+  const snapToRef = useRef(snapTo);
+  snapToRef.current = snapTo;
 
   const loadComments = useCallback(async () => {
     if (!visible || !postId) return;
@@ -99,132 +197,166 @@ export function CommentBottomSheet({
   );
 
   return (
-    <Modal visible={visible} transparent animationType="slide" onRequestClose={onClose}>
-      <Pressable style={[styles.backdrop, { backgroundColor: colors.overlay.medium }]} onPress={onClose}>
-        <Pressable
-          style={[
-            styles.sheet,
-            {
-              backgroundColor: colors.background.primary,
-              paddingBottom: insets.bottom,
-            },
-          ]}
-          onPress={(e) => e.stopPropagation()}
+    <Modal
+      visible={visible}
+      transparent
+      animationType="none"
+      onRequestClose={onClose}
+      statusBarTranslucent
+    >
+      {/* Backdrop */}
+      <Pressable
+        style={[styles.backdrop, { backgroundColor: "rgba(0,0,0,0.45)" }]}
+        onPress={onClose}
+      />
+
+      {/* Sheet — her zaman ekranın altına sabitli, height ile büyür/küçülür */}
+      <Animated.View
+        style={[
+          styles.sheet,
+          {
+            height: animHeight,
+            backgroundColor: colors.background.primary,
+          },
+        ]}
+      >
+        <KeyboardAvoidingView
+          behavior={Platform.OS === "ios" ? "padding" : undefined}
+          style={{ flex: 1 }}
+          keyboardVerticalOffset={0}
         >
-          <KeyboardAvoidingView
-            behavior={Platform.OS === "ios" ? "padding" : undefined}
-            style={styles.keyboardView}
-            keyboardVerticalOffset={0}
-          >
-            <View style={styles.handleRow}>
-              <View style={[styles.handle, { backgroundColor: colors.surface.border }]} />
-            </View>
+          {/* Handle — sürükleme alanı */}
+          <View style={styles.handleRow} {...panResponder.panHandlers}>
+            <View style={[styles.handle, { backgroundColor: colors.surface.border }]} />
+          </View>
 
-            <View style={styles.header}>
-              <Text style={[titleStyle, styles.title]}>Yorumlar</Text>
-              <TouchableOpacity
-                onPress={() => {
-                  lightImpact();
-                  onClose();
-                }}
-                style={styles.closeBtn}
-                activeOpacity={0.7}
-              >
-                <IconSymbol name="xmark.circle.fill" size={28} color={colors.text.tertiary} />
-              </TouchableOpacity>
-            </View>
+          {/* Başlık */}
+          <View style={styles.header}>
+            <Text style={[titleStyle, styles.title]}>Yorumlar</Text>
+            <TouchableOpacity
+              onPress={() => { lightImpact(); onClose(); }}
+              style={styles.closeBtn}
+              activeOpacity={0.7}
+            >
+              <IconSymbol name="xmark.circle.fill" size={28} color={colors.text.tertiary} />
+            </TouchableOpacity>
+          </View>
 
-            {loading ? (
-              <View style={styles.loadingWrap}>
-                <ActivityIndicator size="small" color={colors.accent.primary} />
-                <Text style={[styles.loadingText, { color: colors.text.tertiary }]}>
-                  Yorumlar yükleniyor...
+          {/* Yorumlar listesi — ortada, flex ile büyür */}
+          {loading ? (
+            <View style={styles.loadingWrap}>
+              <ActivityIndicator size="small" color={colors.accent.primary} />
+              <Text style={[styles.loadingText, { color: colors.text.tertiary }]}>
+                Yorumlar yükleniyor...
+              </Text>
+            </View>
+          ) : (
+            <FlatList
+              data={comments}
+              keyExtractor={(item) => String(item.id)}
+              initialNumToRender={10}
+              windowSize={5}
+              removeClippedSubviews={Platform.OS === "android"}
+              renderItem={renderItem}
+              style={{ flex: 1 }}
+              contentContainerStyle={styles.listContent}
+              ListEmptyComponent={
+                <Text style={[styles.emptyText, { color: colors.text.tertiary }]}>
+                  Henüz yorum yok. İlk yorumu sen yap!
                 </Text>
-              </View>
-            ) : (
-              <FlatList
-                data={comments}
-                keyExtractor={(item) => String(item.id)}
-                initialNumToRender={10}
-                windowSize={5}
-                removeClippedSubviews={Platform.OS === "android"}
-                renderItem={renderItem}
-                contentContainerStyle={[
-                  styles.listContent,
-                  comments.length === 0 && styles.listEmpty,
-                ]}
-                ListEmptyComponent={
-                  <Text style={[styles.emptyText, { color: colors.text.tertiary }]}>
-                    Henüz yorum yok. İlk yorumu sen yap!
-                  </Text>
-                }
-              />
-            )}
+              }
+            />
+          )}
 
-            <View style={[styles.inputRow, { backgroundColor: colors.background.secondary }]}>
-              <TextInput
-                style={[
-                  styles.input,
-                  {
-                    color: colors.text.primary,
-                    backgroundColor: colors.surface.elevated,
-                    borderColor: colors.surface.border,
-                  },
-                ]}
-                placeholder="Yorum yaz..."
-                placeholderTextColor={colors.text.tertiary}
-                value={text}
-                onChangeText={setText}
-                multiline
-                maxLength={500}
-                editable={!sending}
-              />
-              <TouchableOpacity
-                onPress={handleSend}
-                disabled={!text.trim() || sending}
-                style={[
-                  styles.sendBtn,
-                  {
-                    backgroundColor: text.trim() && !sending ? colors.accent.primary : colors.surface.border,
-                  },
-                ]}
-                activeOpacity={0.8}
-              >
-                {sending ? (
-                  <ActivityIndicator size="small" color={text.trim() && !sending ? colors.accent.onPrimary : colors.text.tertiary} />
-                ) : (
-                  <IconSymbol name="paperplane.fill" size={20} color={text.trim() && !sending ? colors.accent.onPrimary : colors.text.tertiary} />
-                )}
-              </TouchableOpacity>
-            </View>
-          </KeyboardAvoidingView>
-        </Pressable>
-      </Pressable>
+          {/* Input — her zaman altta */}
+          <View
+            style={[
+              styles.inputRow,
+              {
+                backgroundColor: colors.background.secondary,
+                paddingBottom: Math.max(insets.bottom, spacing.md),
+              },
+            ]}
+          >
+            <TextInput
+              style={[
+                styles.input,
+                {
+                  color: colors.text.primary,
+                  backgroundColor: colors.surface.elevated,
+                  borderColor: colors.surface.border,
+                },
+              ]}
+              placeholder="Yorum yaz..."
+              placeholderTextColor={colors.text.tertiary}
+              value={text}
+              onChangeText={setText}
+              multiline
+              maxLength={500}
+              editable={!sending}
+            />
+            <TouchableOpacity
+              onPress={handleSend}
+              disabled={!text.trim() || sending}
+              style={[
+                styles.sendBtn,
+                {
+                  backgroundColor:
+                    text.trim() && !sending
+                      ? colors.accent.primary
+                      : colors.surface.border,
+                },
+              ]}
+              activeOpacity={0.8}
+            >
+              {sending ? (
+                <ActivityIndicator
+                  size="small"
+                  color={
+                    text.trim() && !sending
+                      ? colors.accent.onPrimary
+                      : colors.text.tertiary
+                  }
+                />
+              ) : (
+                <IconSymbol
+                  name="paperplane.fill"
+                  size={20}
+                  color={
+                    text.trim() && !sending
+                      ? colors.accent.onPrimary
+                      : colors.text.tertiary
+                  }
+                />
+              )}
+            </TouchableOpacity>
+          </View>
+        </KeyboardAvoidingView>
+      </Animated.View>
     </Modal>
   );
 }
 
 const styles = StyleSheet.create({
   backdrop: {
-    flex: 1,
-    justifyContent: "flex-end",
+    ...StyleSheet.absoluteFillObject,
   },
   sheet: {
-    maxHeight: "75%",
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     overflow: "hidden",
   },
-  keyboardView: {
-    maxHeight: "100%",
-  },
   handleRow: {
     alignItems: "center",
-    paddingTop: 12,
-    paddingBottom: 8,
+    paddingTop: 16,
+    paddingBottom: 12,
   },
   handle: {
-    width: 36,
+    width: 40,
     height: 4,
     borderRadius: 2,
   },
@@ -243,8 +375,9 @@ const styles = StyleSheet.create({
     padding: 4,
   },
   loadingWrap: {
-    padding: spacing.xl,
+    flex: 1,
     alignItems: "center",
+    justifyContent: "center",
     gap: spacing.sm,
   },
   loadingText: {
@@ -252,16 +385,13 @@ const styles = StyleSheet.create({
   },
   listContent: {
     paddingHorizontal: spacing.lg,
-    paddingBottom: spacing.lg,
-    maxHeight: 280,
-  },
-  listEmpty: {
+    paddingBottom: spacing.md,
     flexGrow: 1,
-    paddingVertical: spacing.xl,
   },
   emptyText: {
     fontSize: 14,
     textAlign: "center",
+    paddingVertical: spacing.xl,
   },
   commentRow: {
     paddingVertical: spacing.md,
@@ -283,7 +413,8 @@ const styles = StyleSheet.create({
   inputRow: {
     flexDirection: "row",
     alignItems: "flex-end",
-    padding: spacing.md,
+    paddingHorizontal: spacing.md,
+    paddingTop: spacing.md,
     gap: spacing.sm,
   },
   input: {
