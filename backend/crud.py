@@ -98,6 +98,7 @@ def create_place(db: Session, place: schemas.PlaceCreate):
         address=place.address,
         city=place.city,
         description=place.description,
+        campaign_text=getattr(place, "campaign_text", None),
         price_range=place.price_range,
         category=place.category,
         features=place.features,

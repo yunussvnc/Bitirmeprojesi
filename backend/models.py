@@ -52,6 +52,7 @@ class Place(Base):
     # Medya içeriği
     photo_url = Column(String, nullable=True)  # Mekan fotoğrafı URL'si
     video_url = Column(String, nullable=True)  # Mekan videosu URL'si
+    campaign_text = Column(String, nullable=True)  # Mekan kampanyası (ör. 2 al 1 bedava)
 
     # İlişkiler
     reviews = relationship("Review", back_populates="place")

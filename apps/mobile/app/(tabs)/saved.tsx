@@ -14,6 +14,7 @@ import { Swipeable } from 'react-native-gesture-handler';
 import { useTheme } from '@/hooks/useTheme';
 import { Screen } from '@/components/layout';
 import { EmptyState, AnimatedPlaceCard } from '@/components/ui';
+import { FeedCard } from '@/components/feed/FeedCard';
 import { useAppStore, type SavedPlace } from '@/src/store/useAppStore';
 import { getPlaceImageSource, hasPlaceImage } from '@/src/utils/placeImages';
 import { createTextStyle, spacing as designSpacing } from '@/constants/design';
@@ -22,15 +23,20 @@ import { logger } from '@/src/utils/logger';
 import { lightImpact } from '@/src/utils/haptics';
 import { getAllPlaces } from '@/src/services/mekanService';
 import type { Place } from '@/src/services/mekanService';
+import type { Post } from '@/src/services/feedService';
 
 export default function SavedScreen() {
   const { colors } = useTheme();
   const navigation = useNavigation();
   const flatListRef = useRef<FlatList>(null);
+  const [tab, setTab] = useState<'places' | 'posts'>('places');
   const ids = useAppStore((s) => s.savedIds);
   const byId = useAppStore((s) => s.savedById);
   const clear = useAppStore((s) => s.clearSaved);
   const remove = useAppStore((s) => s.removeSaved);
+  const postIds = useAppStore((s) => s.savedPostIds);
+  const postsById = useAppStore((s) => s.savedPostsById);
+  const clearSavedPosts = useAppStore((s) => s.clearSavedPosts);
   const [refreshing, setRefreshing] = useState(false);
   const [placesData, setPlacesData] = useState<Record<string, Place>>({});
 
@@ -81,22 +87,32 @@ export default function SavedScreen() {
     }).filter(Boolean) as SavedPlace[]; // Cast to SavedPlace[]
   }, [ids, byId, placesData]);
 
+  const postItems: Post[] = useMemo(() => {
+    return postIds.map((id) => postsById[id]).filter(Boolean) as Post[];
+  }, [postIds, postsById]);
+
   const titleStyle = createTextStyle('title', colors.text.primary);
 
   const handleClear = useCallback(() => {
-    if (!items.length) return;
-    Alert.alert('Temizle?', 'Tüm kaydedilen mekanlar silinsin mi?', [
+    if (tab === 'places' && !items.length) return;
+    if (tab === 'posts' && !postItems.length) return;
+    Alert.alert(
+      'Temizle?',
+      tab === 'posts' ? 'Tüm kaydedilen gönderiler silinsin mi?' : 'Tüm kaydedilen mekanlar silinsin mi?',
+      [
       { text: 'Vazgeç', style: 'cancel' },
       {
         text: 'Sil',
         style: 'destructive',
         onPress: () => {
           lightImpact();
-          clear();
+          if (tab === 'posts') clearSavedPosts();
+          else clear();
         },
       },
-    ]);
-  }, [items.length, clear]);
+    ]
+    );
+  }, [items.length, postItems.length, clear, clearSavedPosts, tab]);
 
   const handleRemove = useCallback((id: string | number) => {
     lightImpact();
@@ -167,42 +183,7 @@ export default function SavedScreen() {
   const listHeader = useCallback(
     () => (
       <View style={styles.header}>
-        <TouchableOpacity
-          onPress={() => {
-            lightImpact();
-            router.back();
-          }}
-          style={styles.backBtn}
-          hitSlop={12}
-        >
-          <IconSymbol name="chevron.left" size={24} color={colors.accent.primary} />
-        </TouchableOpacity>
-        <Text style={[titleStyle, styles.title]}>Kaydedilenler</Text>
-        {items.length > 0 && (
-          <View style={styles.headerRight}>
-            <View style={[styles.countBadge, { backgroundColor: colors.surface.elevated }]}>
-              <Text style={[styles.countText, { color: colors.text.secondary }]}>
-                {items.length}
-              </Text>
-            </View>
-            <TouchableOpacity
-              onPress={handleClear}
-              activeOpacity={0.8}
-              style={[styles.clearButton, { backgroundColor: colors.surface.elevated }]}
-            >
-              <IconSymbol name="trash" size={18} color={colors.text.tertiary} />
-            </TouchableOpacity>
-          </View>
-        )}
-      </View>
-    ),
-    [items.length, titleStyle, colors.surface.elevated, colors.text.secondary, colors.accent.primary, handleClear, colors.text.tertiary]
-  );
-
-  if (items.length === 0) {
-    return (
-      <Screen onRefresh={handleRefresh} refreshing={refreshing} withTabBar>
-        <View style={styles.header}>
+        <View style={styles.headerRow}>
           <TouchableOpacity
             onPress={() => {
               lightImpact();
@@ -214,6 +195,97 @@ export default function SavedScreen() {
             <IconSymbol name="chevron.left" size={24} color={colors.accent.primary} />
           </TouchableOpacity>
           <Text style={[titleStyle, styles.title]}>Kaydedilenler</Text>
+          {((tab === 'places' && items.length > 0) || (tab === 'posts' && postItems.length > 0)) && (
+            <View style={styles.headerRight}>
+              <View style={[styles.countBadge, { backgroundColor: colors.surface.elevated }]}>
+                <Text style={[styles.countText, { color: colors.text.secondary }]}>
+                  {tab === 'posts' ? postItems.length : items.length}
+                </Text>
+              </View>
+              <TouchableOpacity
+                onPress={handleClear}
+                activeOpacity={0.8}
+                style={[styles.clearButton, { backgroundColor: colors.surface.elevated }]}
+              >
+                <IconSymbol name="trash" size={18} color={colors.text.tertiary} />
+              </TouchableOpacity>
+            </View>
+          )}
+        </View>
+        <View style={styles.tabRow}>
+          <TouchableOpacity
+            style={[
+              styles.tabPill,
+              { backgroundColor: tab === 'places' ? colors.accent.primary : colors.surface.elevated },
+            ]}
+            onPress={() => setTab('places')}
+            activeOpacity={0.7}
+          >
+            <Text style={[styles.tabText, { color: tab === 'places' ? colors.accent.onPrimary : colors.text.secondary }]}>
+              Mekanlar
+            </Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[
+              styles.tabPill,
+              { backgroundColor: tab === 'posts' ? colors.accent.primary : colors.surface.elevated },
+            ]}
+            onPress={() => setTab('posts')}
+            activeOpacity={0.7}
+          >
+            <Text style={[styles.tabText, { color: tab === 'posts' ? colors.accent.onPrimary : colors.text.secondary }]}>
+              Gönderiler
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
+    ),
+    [items.length, postItems.length, titleStyle, colors.surface.elevated, colors.text.secondary, colors.accent.primary, colors.accent.onPrimary, handleClear, colors.text.tertiary, tab]
+  );
+
+  if (tab === 'places' && items.length === 0) {
+    return (
+      <Screen onRefresh={handleRefresh} refreshing={refreshing} withTabBar>
+        <View style={styles.header}>
+          <View style={styles.headerRow}>
+            <TouchableOpacity
+              onPress={() => {
+                lightImpact();
+                router.back();
+              }}
+              style={styles.backBtn}
+              hitSlop={12}
+            >
+              <IconSymbol name="chevron.left" size={24} color={colors.accent.primary} />
+            </TouchableOpacity>
+            <Text style={[titleStyle, styles.title]}>Kaydedilenler</Text>
+          </View>
+          <View style={styles.tabRow}>
+            <TouchableOpacity
+              style={[
+                styles.tabPill,
+                { backgroundColor: colors.accent.primary },
+              ]}
+              onPress={() => setTab('places')}
+              activeOpacity={0.7}
+            >
+              <Text style={[styles.tabText, { color: colors.accent.onPrimary }]}>
+                Mekanlar
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[
+                styles.tabPill,
+                { backgroundColor: colors.surface.elevated },
+              ]}
+              onPress={() => setTab('posts')}
+              activeOpacity={0.7}
+            >
+              <Text style={[styles.tabText, { color: colors.text.secondary }]}>
+                Gönderiler
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
         <View style={styles.emptyContainer}>
           <EmptyState
@@ -228,39 +300,130 @@ export default function SavedScreen() {
     );
   }
 
+  if (tab === 'posts' && postItems.length === 0) {
+    return (
+      <Screen onRefresh={handleRefresh} refreshing={refreshing} withTabBar>
+        <View style={styles.header}>
+          <View style={styles.headerRow}>
+            <TouchableOpacity
+              onPress={() => {
+                lightImpact();
+                router.back();
+              }}
+              style={styles.backBtn}
+              hitSlop={12}
+            >
+              <IconSymbol name="chevron.left" size={24} color={colors.accent.primary} />
+            </TouchableOpacity>
+            <Text style={[titleStyle, styles.title]}>Kaydedilenler</Text>
+          </View>
+          <View style={styles.tabRow}>
+            <TouchableOpacity
+              style={[
+                styles.tabPill,
+                { backgroundColor: colors.surface.elevated },
+              ]}
+              onPress={() => setTab('places')}
+              activeOpacity={0.7}
+            >
+              <Text style={[styles.tabText, { color: colors.text.secondary }]}>
+                Mekanlar
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[
+                styles.tabPill,
+                { backgroundColor: colors.accent.primary },
+              ]}
+              onPress={() => setTab('posts')}
+              activeOpacity={0.7}
+            >
+              <Text style={[styles.tabText, { color: colors.accent.onPrimary }]}>
+                Gönderiler
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </View>
+        <View style={styles.emptyContainer}>
+          <EmptyState
+            variant="saved"
+            title="Henüz kayıt yok"
+            description="Beğendiğin gönderileri arşive al"
+            actionLabel="Akışa dön"
+            onAction={() => router.push('/(tabs)/feed')}
+          />
+        </View>
+      </Screen>
+    );
+  }
+
   return (
     <Screen scrollable={false} withTabBar>
-      <FlatList
-        ref={flatListRef}
-        data={items}
-        keyExtractor={(item) => String(item.id)}
-        showsVerticalScrollIndicator={false}
-        renderItem={renderPlaceItem}
-        ListHeaderComponent={listHeader}
-        contentContainerStyle={styles.listContainer}
-        initialNumToRender={10}
-        maxToRenderPerBatch={10}
-        windowSize={5}
-        removeClippedSubviews={Platform.OS === 'android'}
-        refreshControl={
-          <RefreshControl
-            refreshing={refreshing}
-            onRefresh={handleRefresh}
-            tintColor={colors.accent.primary}
-            colors={[colors.accent.primary]}
-          />
-        }
-        style={styles.flatList}
-      />
+      {tab === 'places' ? (
+        <FlatList
+          ref={flatListRef}
+          data={items}
+          keyExtractor={(item) => String(item.id)}
+          showsVerticalScrollIndicator={false}
+          renderItem={renderPlaceItem}
+          ListHeaderComponent={listHeader}
+          contentContainerStyle={styles.listContainer}
+          initialNumToRender={10}
+          maxToRenderPerBatch={10}
+          windowSize={5}
+          removeClippedSubviews={Platform.OS === 'android'}
+          refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={handleRefresh}
+              tintColor={colors.accent.primary}
+              colors={[colors.accent.primary]}
+            />
+          }
+          style={styles.flatList}
+        />
+      ) : (
+        <FlatList
+          ref={flatListRef}
+          data={postItems}
+          keyExtractor={(item) => String(item.id)}
+          showsVerticalScrollIndicator={false}
+          renderItem={({ item }) => (
+            <FeedCard
+              post={item}
+              onPress={() => item.place_id && router.push(`/place/${item.place_id}` as any)}
+              onAuthorPress={() => router.push(`/user/${item.user_id}` as any)}
+              onPlacePress={() => item.place_id && router.push(`/place/${item.place_id}` as any)}
+            />
+          )}
+          ListHeaderComponent={listHeader}
+          contentContainerStyle={styles.listContainer}
+          initialNumToRender={6}
+          maxToRenderPerBatch={6}
+          windowSize={5}
+          removeClippedSubviews={Platform.OS === 'android'}
+          refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={handleRefresh}
+              tintColor={colors.accent.primary}
+              colors={[colors.accent.primary]}
+            />
+          }
+          style={styles.flatList}
+        />
+      )}
     </Screen>
   );
 }
 
 const styles = StyleSheet.create({
   header: {
+    marginBottom: designSpacing.lg,
+  },
+  headerRow: {
     flexDirection: 'row',
     alignItems: 'center',
-    marginBottom: designSpacing.lg,
   },
   backBtn: {
     marginRight: designSpacing.sm,
@@ -269,6 +432,20 @@ const styles = StyleSheet.create({
   title: {
     flex: 1,
     fontSize: 28,
+    fontWeight: '700',
+  },
+  tabRow: {
+    flexDirection: 'row',
+    gap: designSpacing.sm,
+    marginTop: designSpacing.base,
+  },
+  tabPill: {
+    paddingHorizontal: 14,
+    paddingVertical: 8,
+    borderRadius: 18,
+  },
+  tabText: {
+    fontSize: 13,
     fontWeight: '700',
   },
   headerRight: {

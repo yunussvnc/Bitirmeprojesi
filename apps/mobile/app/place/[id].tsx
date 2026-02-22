@@ -452,6 +452,18 @@ export default function PlaceDetailScreen() {
             </View>
           </View>
 
+          {place?.campaign_text && (
+            <Card style={styles.campaignCard}>
+              <View style={styles.campaignHeader}>
+                <IconSymbol name="sparkles" size={18} color={colors.accent.primary} />
+                <Text style={[h2Style, { fontSize: 18, marginLeft: 8 }]}>Kampanya</Text>
+              </View>
+              <Text style={[bodyStyle, { lineHeight: 22, color: colors.text.secondary }]}>
+                {place.campaign_text}
+              </Text>
+            </Card>
+          )}
+
           {/* Atmosphere Section */}
           {place?.description && (
             <Card style={styles.sectionCard}>
@@ -1047,6 +1059,14 @@ const styles = StyleSheet.create({
   },
   sectionCard: {
     marginBottom: spacing.xl,
+  },
+  campaignCard: {
+    marginBottom: spacing.lg,
+  },
+  campaignHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginBottom: spacing.sm,
   },
   atmosphereTags: {
     flexDirection: 'row',

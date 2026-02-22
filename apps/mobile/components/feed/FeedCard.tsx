@@ -35,6 +35,7 @@ export interface FeedCardProps {
   onPlacePress?: () => void;
   onLike?: () => void;
   onComment?: () => void;
+  onOptionsPress?: () => void;
   onZoomChange?: (zooming: boolean) => void;
 }
 
@@ -45,6 +46,7 @@ export function FeedCard({
   onPlacePress,
   onLike,
   onComment,
+  onOptionsPress,
   onZoomChange,
 }: FeedCardProps) {
   const { colors, isDark } = useTheme();
@@ -110,6 +112,19 @@ export function FeedCard({
               <Text style={[styles.placeLine, { color: colors.text.tertiary }]}>{timeAgo(post.created_at)}</Text>
             )}
           </View>
+          {onOptionsPress && (
+            <TouchableOpacity
+              style={styles.moreBtn}
+              onPress={(e) => {
+                e.stopPropagation?.();
+                lightImpact();
+                onOptionsPress();
+              }}
+              activeOpacity={0.7}
+            >
+              <IconSymbol name="ellipsis" size={20} color={colors.text.secondary} />
+            </TouchableOpacity>
+          )}
         </TouchableOpacity>
 
         {/* Görsel — pinch zoom via SnapbackZoom */}
@@ -251,6 +266,13 @@ const styles = StyleSheet.create({
     overflow: "hidden",
   },
   authorText: { flex: 1 },
+  moreBtn: {
+    width: 36,
+    height: 36,
+    alignItems: "center",
+    justifyContent: "center",
+    borderRadius: 18,
+  },
   username: {
     fontSize: 14,
     fontWeight: "700",

@@ -81,17 +81,43 @@ ISTANBUL_LOCATIONS = {
     "Kozyatağı": {"lat": 40.9680, "lon": 29.0780},
 }
 
+CAMPAIGN_BY_CHAIN = {
+    "Starbucks": "2. kahvede %50 indirim (16:00-18:00)",
+    "Espresso Lab": "İkinci filtre kahve hediye",
+    "Kahve Dünyası": "2 Türk kahvesi alana 1 lokum seti",
+    "Mado": "2 dondurma alana 1 top hediye",
+    "Burger King": "Menü 2 al 1 bedava (seçili ürünler)",
+    "Nusr-Et": "Öğle menüsünde %20 indirim",
+    "Sortie": "Happy hour: 19:00-20:00 kokteyl %30",
+}
+
+CAMPAIGN_LOCATIONS = {
+    "Starbucks": {"Nişantaşı", "Kadıköy"},
+    "Espresso Lab": {"Karaköy"},
+    "Kahve Dünyası": {"Beşiktaş"},
+    "Mado": {"Taksim"},
+    "Burger King": {"Mecidiyeköy"},
+    "Nusr-Et": {"Etiler"},
+    "Sortie": {"Kuruçeşme"},
+}
+
 def create_place(name: str, chain: str, location: str, category: str, 
                  description: str, price_range: int, features: str, 
-                 vibe: str = "quiet", purpose: str = "work") -> Dict:
+                 vibe: str = "quiet", purpose: str = "work",
+                 campaign_text: str | None = None) -> Dict:
     """Mekan oluşturma helper fonksiyonu"""
     loc = ISTANBUL_LOCATIONS.get(location, ISTANBUL_LOCATIONS["Taksim"])
+    if not campaign_text:
+        allowed_locations = CAMPAIGN_LOCATIONS.get(chain, set())
+        if location in allowed_locations:
+            campaign_text = CAMPAIGN_BY_CHAIN.get(chain)
     return {
         "name": f"{chain} - {location}",
         "address": f"{location}, İstanbul",
         "city": "İstanbul",
         "category": category,
         "description": description,
+        "campaign_text": campaign_text,
         "price_range": price_range,
         "features": features,
         "latitude": loc["lat"],

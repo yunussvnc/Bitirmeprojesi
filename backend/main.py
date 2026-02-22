@@ -441,11 +441,15 @@ def recommend_places(req: schemas.RecommendRequest, db: Session = Depends(get_db
 # POST / FEED (Sosyal Akış)
 # -------------------------
 def _post_to_schema(post: models.Post, db: Session, current_user_id: int | None) -> schemas.Post:
+    is_following = False
+    if current_user_id and post.user_id:
+        is_following = crud.is_following(db, current_user_id, post.user_id)
     author = schemas.UserSummary(
         id=post.user.id,
         username=post.user.username,
         first_name=post.user.first_name,
         avatar_url=post.user.avatar_url,
+        is_following=is_following,
     ) if post.user else None
     place = schemas.PlaceSummary(
         id=post.place.id,

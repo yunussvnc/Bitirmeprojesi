@@ -29,9 +29,9 @@ import { spacing } from "@/constants/design";
 const STORY_RING_SIZE = 82;
 const STORY_GRADIENT: [string, string, ...string[]] = ["#4ade80", "#22c55e", "#16a34a", "#15803d"];
 
-type PlaceStoryGroup = {
-  placeId: number;
-  placeName?: string;
+type StoryGroup = {
+  groupKey: string;
+  label?: string;
   thumbnailUrl: string;
   isVideo: boolean;
   storyIds: number[];
@@ -45,7 +45,7 @@ export function FeedStoriesRow({ filter }: FeedStoriesRowProps) {
   const { colors } = useTheme();
   const [stories, setStories] = useState<Story[]>([]);
   const [loading, setLoading] = useState(true);
-  const [viewedGroupIds, setViewedGroupIds] = useState<Set<number>>(new Set());
+  const [viewedGroupIds, setViewedGroupIds] = useState<Set<string>>(new Set());
   const [storyViewerIndex, setStoryViewerIndex] = useState<number | null>(null);
   const viewerStoriesRef = useRef<Story[]>([]);
   const storyPausedRef = useRef(false);
@@ -164,19 +164,27 @@ export function FeedStoriesRow({ filter }: FeedStoriesRowProps) {
     loadStories();
   }, [loadStories]);
 
-  const placeGroups = useMemo(() => {
-    const seen = new Set<number>();
-    const groups: PlaceStoryGroup[] = [];
+  const getGroupKey = useCallback((s: Story) => {
+    const pid = s.place_id ?? s.place?.id;
+    if (pid) return `place:${pid}`;
+    const authorId = s.author?.id ?? s.user_id;
+    if (authorId) return `user:${authorId}`;
+    return `story:${s.id}`;
+  }, []);
+
+  const storyGroups = useMemo(() => {
+    const seen = new Set<string>();
+    const groups: StoryGroup[] = [];
     for (const s of stories) {
-      const pid = s.place_id ?? s.place?.id;
-      if (pid && !seen.has(pid)) {
-        seen.add(pid);
+      const key = getGroupKey(s);
+      if (!seen.has(key)) {
+        seen.add(key);
         const groupStoryIds = stories
-          .filter((st) => (st.place_id ?? st.place?.id) === pid)
+          .filter((st) => getGroupKey(st) === key)
           .map((st) => st.id);
         groups.push({
-          placeId: pid,
-          placeName: s.place?.name,
+          groupKey: key,
+          label: s.place?.name || s.author?.first_name || s.author?.username,
           thumbnailUrl: s.media_type === "video" ? (s.thumbnail_url || s.media_url) : s.media_url,
           isVideo: s.media_type === "video",
           storyIds: groupStoryIds,
@@ -184,37 +192,32 @@ export function FeedStoriesRow({ filter }: FeedStoriesRowProps) {
       }
     }
     return groups;
-  }, [stories]);
+  }, [stories, getGroupKey]);
 
   const sortedGroups = useMemo(() => {
-    const unseen = placeGroups.filter((g) => !viewedGroupIds.has(g.placeId));
-    const seen = placeGroups.filter((g) => viewedGroupIds.has(g.placeId));
+    const unseen = storyGroups.filter((g) => !viewedGroupIds.has(g.groupKey));
+    const seen = storyGroups.filter((g) => viewedGroupIds.has(g.groupKey));
     return [...unseen, ...seen];
-  }, [placeGroups, viewedGroupIds]);
+  }, [storyGroups, viewedGroupIds]);
 
-  const handlePlaceTap = useCallback((placeId: number, tapIndex: number) => {
+  const handleGroupTap = useCallback((groupKey: string, tapIndex: number) => {
     lightImpact();
     const groupsFromTap = sortedGroups.slice(tapIndex);
-    const placeIdsFromTap = new Set(groupsFromTap.map((g) => g.placeId));
-    const filtered = stories.filter((s) => {
-      const pid = s.place_id ?? s.place?.id;
-      return pid != null && placeIdsFromTap.has(pid);
-    });
+    const groupKeysFromTap = new Set(groupsFromTap.map((g) => g.groupKey));
+    const filtered = stories.filter((s) => groupKeysFromTap.has(getGroupKey(s)));
     if (filtered.length > 0) {
       viewerStoriesRef.current = filtered;
       setStoryViewerIndex(0);
     }
-  }, [sortedGroups, stories]);
+  }, [sortedGroups, stories, getGroupKey]);
 
   const handleStoryViewed = useCallback((storyId: number) => {
     const story = stories.find((s) => s.id === storyId);
     if (story) {
-      const pid = story.place_id ?? story.place?.id;
-      if (pid) {
-        setViewedGroupIds((prev) => new Set(prev).add(pid));
-      }
+      const key = getGroupKey(story);
+      setViewedGroupIds((prev) => new Set(prev).add(key));
     }
-  }, [stories]);
+  }, [stories, getGroupKey]);
 
   if (loading && stories.length === 0) {
     return (
@@ -234,12 +237,12 @@ export function FeedStoriesRow({ filter }: FeedStoriesRowProps) {
           contentContainerStyle={styles.row}
         >
           {sortedGroups.map((g, idx) => {
-            const seen = viewedGroupIds.has(g.placeId);
+            const seen = viewedGroupIds.has(g.groupKey);
             return (
               <TouchableOpacity
-                key={g.placeId}
+                key={g.groupKey}
                 style={styles.ringWrap}
-                onPress={() => handlePlaceTap(g.placeId, idx)}
+                onPress={() => handleGroupTap(g.groupKey, idx)}
                 activeOpacity={0.8}
               >
                 {seen ? (
@@ -284,7 +287,7 @@ export function FeedStoriesRow({ filter }: FeedStoriesRowProps) {
                   style={[styles.placeLabel, { color: seen ? colors.text.tertiary : colors.text.secondary }]}
                   numberOfLines={1}
                 >
-                  {g.placeName ?? "Mekan"}
+                  {g.label ?? "Kullanıcı"}
                 </Text>
               </TouchableOpacity>
             );

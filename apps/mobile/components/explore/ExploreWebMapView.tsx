@@ -12,12 +12,15 @@ import {
   Platform,
   ActivityIndicator,
   Alert,
+  Keyboard,
+  ScrollView,
 } from 'react-native';
 import { WebView } from 'react-native-webview';
 import type { WebViewMessageEvent } from 'react-native-webview';
 import * as Location from 'expo-location';
 import { useTheme } from '@/hooks/useTheme';
 import { IconSymbol } from '@/components/ui/icon-symbol';
+import { SearchInput } from '@/components/ui/Input';
 import type { Place } from '@/src/services/mekanService';
 import { lightImpact } from '@/src/utils/haptics';
 import { PlaceMediaPanel } from './PlaceMediaPanel';
@@ -114,6 +117,9 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
   const [userLocation, setUserLocation] = useState<{ latitude: number; longitude: number } | null>(null);
   const [selectedPlace, setSelectedPlace] = useState<Place | null>(null);
   const [mapReady, setMapReady] = useState(false);
+  const [query, setQuery] = useState('');
+  const [showResults, setShowResults] = useState(false);
+  const [didAutoCenter, setDidAutoCenter] = useState(false);
   const webViewRef = useRef<WebView>(null);
 
   useEffect(() => {
@@ -133,16 +139,40 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
     setMapReady(false);
   }, [isDark]);
 
+  const filteredPlaces = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return places;
+    return places.filter((p) => {
+      const haystack = [
+        p.name,
+        p.category,
+        p.address,
+        p.city,
+        p.subtitle,
+      ]
+        .filter(Boolean)
+        .join(' ')
+        .toLowerCase();
+      return haystack.includes(q);
+    });
+  }, [places, query]);
+
+  const visiblePlaces = useMemo(
+    () => filteredPlaces.filter((p) => p.latitude != null && p.longitude != null),
+    [filteredPlaces],
+  );
+
   useEffect(() => {
     if (!mapReady || !webViewRef.current) return;
     const script: string[] = [];
-    if (userLocation) {
+    if (userLocation && !didAutoCenter) {
       script.push(`flyToInitial(${userLocation.latitude},${userLocation.longitude},15)`);
       script.push(`setUserMarker(${userLocation.latitude},${userLocation.longitude})`);
+      setDidAutoCenter(true);
     }
-    script.push(`updateMarkers(${JSON.stringify(places.filter((p) => p.latitude != null && p.longitude != null))})`);
+    script.push(`updateMarkers(${JSON.stringify(visiblePlaces)})`);
     webViewRef.current.injectJavaScript(script.join(';') + ';true;');
-  }, [mapReady, userLocation, places]);
+  }, [mapReady, userLocation, visiblePlaces, didAutoCenter]);
 
   const handleMessage = useCallback(
     (event: WebViewMessageEvent) => {
@@ -182,6 +212,27 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
     );
   }, []);
 
+  const handleSelectPlace = useCallback((place: Place) => {
+    lightImpact();
+    setSelectedPlace(place);
+    setQuery(place.name ?? '');
+    setShowResults(false);
+    Keyboard.dismiss();
+    if (place.latitude != null && place.longitude != null) {
+      webViewRef.current?.injectJavaScript(
+        `flyTo(${place.latitude},${place.longitude},15);true;`,
+      );
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!selectedPlace) return;
+    if (query.trim().length === 0) return;
+    if (!filteredPlaces.find((p) => p.id === selectedPlace.id)) {
+      setSelectedPlace(null);
+    }
+  }, [filteredPlaces, query, selectedPlace]);
+
   // HTML sabit – WebView tek sefer yüklenir, reload olmaz (kaydırınca loading ekranı gelmez)
   const html = useMemo(
     () => buildMapHTML(colors.accent.primary, isDark),
@@ -199,6 +250,10 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
         overScrollMode="never"
         onLoad={() => setMapReady(true)}
         onMessage={handleMessage}
+        onTouchStart={() => {
+          setShowResults(false);
+          Keyboard.dismiss();
+        }}
         javaScriptEnabled
         originWhitelist={['*']}
         cacheEnabled
@@ -206,7 +261,75 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
         androidLayerType="hardware"
       />
 
-      <View style={[styles.controls, selectedPlace && styles.controlsWithPanel]}>
+      <View
+        style={[
+          styles.searchWrap,
+          { backgroundColor: colors.background.secondary + 'CC' },
+        ]}
+      >
+        <SearchInput
+          placeholder="Mekan ara..."
+          value={query}
+          onChangeText={(text) => {
+            setQuery(text);
+            setShowResults(true);
+            setSelectedPlace(null);
+          }}
+          onFocus={() => {
+            setShowResults(true);
+            setSelectedPlace(null);
+          }}
+          onBlur={() => setShowResults(false)}
+          autoCorrect={false}
+          autoCapitalize="none"
+          returnKeyType="search"
+          rightIcon={query ? 'xmark' : undefined}
+          onRightIconPress={() => {
+            setQuery('');
+            setShowResults(false);
+          }}
+          containerStyle={styles.searchContainer}
+        />
+        {showResults && query.trim().length > 0 && (
+          <View style={[styles.resultsCard, { backgroundColor: colors.surface.elevated }]}>
+            {filteredPlaces.length === 0 ? (
+              <Text style={[styles.emptyText, { color: colors.text.tertiary }]}>
+                Sonuç bulunamadı
+              </Text>
+            ) : (
+              <ScrollView
+                style={styles.resultsScroll}
+                contentContainerStyle={styles.resultsScrollContent}
+                showsVerticalScrollIndicator={false}
+                keyboardShouldPersistTaps="handled"
+              >
+                {filteredPlaces.map((place) => (
+                  <TouchableOpacity
+                    key={String(place.id)}
+                    style={styles.resultRow}
+                    onPress={() => handleSelectPlace(place)}
+                    activeOpacity={0.8}
+                  >
+                    <View style={styles.resultText}>
+                      <Text style={[styles.resultTitle, { color: colors.text.primary }]} numberOfLines={1}>
+                        {place.name}
+                      </Text>
+                      {!!(place.category || place.city) && (
+                        <Text style={[styles.resultMeta, { color: colors.text.tertiary }]} numberOfLines={1}>
+                          {[place.category, place.city].filter(Boolean).join(' • ')}
+                        </Text>
+                      )}
+                    </View>
+                    <IconSymbol name="chevron.right" size={18} color={colors.text.tertiary} />
+                  </TouchableOpacity>
+                ))}
+              </ScrollView>
+            )}
+          </View>
+        )}
+      </View>
+
+      <View style={styles.controls}>
         <TouchableOpacity
           onPress={goToUserLocation}
           style={[styles.controlBtn, { backgroundColor: colors.surface.elevated }]}
@@ -245,6 +368,41 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
 const styles = StyleSheet.create({
   container: { flex: 1 },
   map: { ...StyleSheet.absoluteFillObject },
+  searchWrap: {
+    position: 'absolute',
+    top: Platform.OS === 'ios' ? 54 : 16,
+    left: 16,
+    right: 16,
+    padding: 12,
+    borderRadius: 16,
+    shadowColor: 'transparent',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0,
+    shadowRadius: 0,
+    elevation: 0,
+  },
+  searchContainer: {
+    marginBottom: 0,
+  },
+  resultsCard: {
+    marginTop: 8,
+    borderRadius: 12,
+    paddingVertical: 6,
+    overflow: 'hidden',
+  },
+  resultsScroll: { maxHeight: 220 },
+  resultsScrollContent: { paddingVertical: 2 },
+  resultRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    gap: 8,
+  },
+  resultText: { flex: 1 },
+  resultTitle: { fontSize: 14, fontWeight: '600' },
+  resultMeta: { fontSize: 12, marginTop: 2 },
+  emptyText: { paddingHorizontal: 12, paddingVertical: 10, fontSize: 13 },
   header: {
     position: 'absolute',
     top: Platform.OS === 'ios' ? 54 : 16,
@@ -256,8 +414,7 @@ const styles = StyleSheet.create({
   },
   title: { fontSize: 22, fontWeight: '700' },
   subtitle: { fontSize: 13, marginTop: 2 },
-  controls: { position: 'absolute', right: 16, top: Platform.OS === 'ios' ? 110 : 72, gap: 10 },
-  controlsWithPanel: { position: 'absolute', right: 16, top: Platform.OS === 'ios' ? 110 : 72, gap: 10 },
+  controls: { position: 'absolute', right: 16, bottom: Platform.OS === 'ios' ? 120 : 104, gap: 10 },
   controlBtn: {
     width: 48,
     height: 48,

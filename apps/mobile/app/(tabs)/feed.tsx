@@ -13,6 +13,8 @@ import {
   TouchableOpacity,
   Animated,
   Easing,
+  Alert,
+  Share,
 } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -25,12 +27,15 @@ import { EmptyState, LoadingState } from "@/components/ui";
 import { IconSymbol } from "@/components/ui/icon-symbol";
 import { CreateTypeSheet, type CreateType } from "@/components/feed/CreateTypeSheet";
 import { FeedStoriesRow } from "@/components/feed/FeedStoriesRow";
+import { PostOptionsSheet } from "@/components/feed/PostOptionsSheet";
 import { createTextStyle, spacing } from "@/constants/design";
 import { getFeed, toggleLike, type Post, type FeedFilter } from "@/src/services/feedService";
 import { getUnreadCount } from "@/src/services/notificationService";
 import { handleApiError } from "@/src/utils/errorHandler";
 import { lightImpact } from "@/src/utils/haptics";
 import { useTabBarVisibility } from "@/components/layout/TabBarVisibilityContext";
+import { toggleFollow } from "@/src/services/userService";
+import { useAppStore } from "@/src/store/useAppStore";
 
 export default function FeedScreen() {
   const { colors } = useTheme();
@@ -42,6 +47,7 @@ export default function FeedScreen() {
   const [loadingMore, setLoadingMore] = useState(false);
   const [filter, setFilter] = useState<FeedFilter>("all");
   const [commentPostId, setCommentPostId] = useState<number | null>(null);
+  const [optionsPost, setOptionsPost] = useState<Post | null>(null);
   const [unreadCount, setUnreadCount] = useState(0);
   const [createSheetOpen, setCreateSheetOpen] = useState(false);
   const [filterDropdownOpen, setFilterDropdownOpen] = useState(false);
@@ -65,6 +71,8 @@ export default function FeedScreen() {
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
   const pageSize = 15;
+  const toggleSavePost = useAppStore((s) => s.toggleSavePost);
+  const isPostSaved = useAppStore((s) => s.isPostSaved);
 
   const handleCreateSelect = useCallback((type: CreateType) => {
     if (type === "post") {
@@ -175,6 +183,64 @@ export default function FeedScreen() {
     );
   }, []);
 
+  const handleHidePost = useCallback((postId: number) => {
+    setPosts((prev) => prev.filter((p) => p.id !== postId));
+  }, []);
+
+  const handleSharePost = useCallback(async (post: Post) => {
+    try {
+      const label = post.place?.name || post.author?.username || post.author?.first_name || "gönderi";
+      await Share.share({ message: `${label} paylaşımına göz at!` });
+    } catch {
+      // ignore
+    }
+  }, []);
+
+  const handleReportPost = useCallback(() => {
+    Alert.alert("Raporlandı", "Geri bildirimin için teşekkürler.");
+  }, []);
+
+  const handleMuteAuthor = useCallback(() => {
+    Alert.alert("Sessize alındı", "Bu hesaptan gelen içerikler gizlenecek.");
+  }, []);
+
+  const handleSavePost = useCallback((post: Post) => {
+    const wasSaved = isPostSaved(post.id);
+    toggleSavePost(post);
+    Alert.alert(
+      wasSaved ? "Arşivden çıkarıldı" : "Arşive eklendi",
+      wasSaved ? "Gönderi arşivden kaldırıldı." : "Gönderi arşive alındı."
+    );
+  }, [isPostSaved, toggleSavePost]);
+
+  const handleToggleFollow = useCallback(async (post: Post) => {
+    if (!post.author?.id) return;
+    try {
+      const res = await toggleFollow(post.author.id);
+      setPosts((prev) =>
+        prev.map((p) =>
+          p.user_id === post.user_id
+            ? (p.author
+                ? { ...p, author: { ...p.author, is_following: res.following } }
+                : p)
+            : p
+        )
+      );
+    } catch {
+      // ignore
+    }
+  }, []);
+
+  const handleOptionSelect = useCallback((key: "save" | "share" | "hide" | "report" | "unfollow" | "mute") => {
+    if (!optionsPost) return;
+    if (key === "save") handleSavePost(optionsPost);
+    if (key === "share") handleSharePost(optionsPost);
+    if (key === "hide") handleHidePost(optionsPost.id);
+    if (key === "report") handleReportPost();
+    if (key === "unfollow") handleToggleFollow(optionsPost);
+    if (key === "mute") handleMuteAuthor();
+  }, [optionsPost, handleSavePost, handleSharePost, handleHidePost, handleReportPost, handleToggleFollow, handleMuteAuthor]);
+
   const renderItem = useCallback(
     ({ item }: { item: Post }) => (
       <FeedCard
@@ -184,6 +250,7 @@ export default function FeedScreen() {
         onPlacePress={() => item.place_id && router.push(`/place/${item.place_id}` as any)}
         onLike={() => handleLike(item)}
         onComment={() => setCommentPostId(item.id)}
+        onOptionsPress={() => setOptionsPost(item)}
         onZoomChange={setIsCardZooming}
       />
     ),
@@ -546,6 +613,13 @@ export default function FeedScreen() {
           onCommentAdded={() => handleCommentAdded(commentPostId)}
         />
       )}
+
+      <PostOptionsSheet
+        visible={!!optionsPost}
+        onClose={() => setOptionsPost(null)}
+        showFollowActions={!!optionsPost?.author?.is_following}
+        onSelect={handleOptionSelect}
+      />
 
       <CreateTypeSheet
         visible={createSheetOpen}

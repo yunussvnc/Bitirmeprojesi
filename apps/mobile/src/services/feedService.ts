@@ -14,6 +14,7 @@ export type UserSummary = {
   username?: string;
   first_name?: string;
   avatar_url?: string;
+  is_following?: boolean;
 };
 
 export type PlaceSummary = {

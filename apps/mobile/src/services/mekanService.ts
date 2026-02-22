@@ -6,6 +6,7 @@ export type Place = {
   name: string;
   subtitle?: string;
   description?: string;
+  campaign_text?: string;
   tags?: string[];
   category?: string;
   address?: string;
@@ -30,6 +31,7 @@ function normalizePlace(p: any): Place {
   const id = p?.id ?? p?._id ?? p?.place_id ?? String(Math.random());
   const name = String(p?.name ?? p?.title ?? p?.mekan_adi ?? "Mekan");
   const description = p?.description ?? p?.aciklama ?? "";
+  const campaign_text = p?.campaign_text ?? p?.campaign ?? p?.kampanya ?? undefined;
   const subtitle =
     p?.subtitle ??
     (description ? String(description).slice(0, 80) : undefined);
@@ -46,7 +48,7 @@ function normalizePlace(p: any): Place {
   const price_range = typeof p?.price_range === 'number' ? p.price_range : undefined;
   const features = p?.features || undefined;
 
-  return { id, name, subtitle, description, tags, category, address, city, latitude, longitude, photo_url, video_url, average_rating, price_range, features };
+  return { id, name, subtitle, description, campaign_text, tags, category, address, city, latitude, longitude, photo_url, video_url, average_rating, price_range, features };
 }
 
 export async function getPlaces(page = 1, pageSize = 20): Promise<PaginatedPlaces> {

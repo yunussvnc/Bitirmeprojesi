@@ -46,6 +46,7 @@ class PlaceBase(BaseModel):
     address: str
     city: str
     description: Optional[str] = None
+    campaign_text: Optional[str] = None
     price_range: Optional[int] = None # 1 ile 4 arası
     category: Optional[str] = None
     features: Optional[str] = None
@@ -238,6 +239,7 @@ class UserSummary(BaseModel):
     username: Optional[str] = None
     first_name: Optional[str] = None
     avatar_url: Optional[str] = None
+    is_following: bool = False
 
     class Config:
         from_attributes = True

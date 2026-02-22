@@ -1,6 +1,7 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
+import type { Post } from "@/src/services/feedService";
 
 export type SavedPlace = {
   id: string;
@@ -11,9 +12,13 @@ export type SavedPlace = {
   tags?: string[];
 };
 
+export type SavedPost = Post;
+
 type AppState = {
   savedIds: string[];
   savedById: Record<string, SavedPlace>;
+  savedPostIds: string[];
+  savedPostsById: Record<string, SavedPost>;
   recentPrompts: string[];
   apiHealthy: boolean | null;
 
@@ -21,6 +26,11 @@ type AppState = {
   toggleSave: (place: SavedPlace) => void;
   removeSaved: (id: string | number) => void;
   clearSaved: () => void;
+
+  isPostSaved: (id: string | number) => boolean;
+  toggleSavePost: (post: SavedPost) => void;
+  removeSavedPost: (id: string | number) => void;
+  clearSavedPosts: () => void;
 
   addRecentPrompt: (prompt: string) => void;
   clearRecentPrompts: () => void;
@@ -35,6 +45,8 @@ export const useAppStore = create<AppState>()(
     (set, get) => ({
       savedIds: [],
       savedById: {},
+      savedPostIds: [],
+      savedPostsById: {},
       recentPrompts: [],
       apiHealthy: null,
 
@@ -67,6 +79,36 @@ export const useAppStore = create<AppState>()(
 
       clearSaved: () => set({ savedIds: [], savedById: {} }),
 
+      isPostSaved: (id) => get().savedPostIds.includes(String(id)),
+
+      toggleSavePost: (post) => {
+        const key = String(post.id);
+        const { savedPostIds, savedPostsById } = get();
+        const exists = savedPostIds.includes(key);
+
+        if (exists) {
+          const nextIds = savedPostIds.filter((x) => x !== key);
+          const { [key]: _removed, ...rest } = savedPostsById;
+          set({ savedPostIds: nextIds, savedPostsById: rest });
+          return;
+        }
+
+        set({
+          savedPostIds: uniq([key, ...savedPostIds]),
+          savedPostsById: { ...savedPostsById, [key]: post },
+        });
+      },
+
+      removeSavedPost: (id) => {
+        const key = String(id);
+        const { savedPostIds, savedPostsById } = get();
+        const nextIds = savedPostIds.filter((x) => x !== key);
+        const { [key]: _removed, ...rest } = savedPostsById;
+        set({ savedPostIds: nextIds, savedPostsById: rest });
+      },
+
+      clearSavedPosts: () => set({ savedPostIds: [], savedPostsById: {} }),
+
       addRecentPrompt: (prompt) => {
         const p = prompt.trim();
         if (!p) return;
@@ -85,6 +127,8 @@ export const useAppStore = create<AppState>()(
       partialize: (state) => ({
         savedIds: state.savedIds,
         savedById: state.savedById,
+        savedPostIds: state.savedPostIds,
+        savedPostsById: state.savedPostsById,
         recentPrompts: state.recentPrompts,
       }),
     }
