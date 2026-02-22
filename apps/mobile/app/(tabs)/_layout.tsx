@@ -6,12 +6,12 @@
  */
 
 import { Tabs } from "expo-router";
-import { useTheme } from "@/hooks/useTheme";
-import { IconSymbol, type IconSymbolName } from "@/components/ui/icon-symbol";
+import { useTheme } from "@/src/hooks/useTheme";
+import { IconSymbol, type IconSymbolName } from "@/src/components/ui/icon-symbol";
 import { StyleSheet, Platform } from "react-native";
 import { selection } from "@/src/utils/haptics";
-import { AnimatedTabBar } from "@/components/layout/AnimatedTabBar";
-import { TabBarVisibilityProvider } from "@/components/layout/TabBarVisibilityContext";
+import { AnimatedTabBar } from "@/src/components/layout/AnimatedTabBar";
+import { TabBarVisibilityProvider } from "@/src/components/layout/TabBarVisibilityContext";
 
 function TabIcon({ name, color }: { name: IconSymbolName; focused: boolean; color: string }) {
   return (

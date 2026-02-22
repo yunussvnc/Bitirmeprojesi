@@ -1,9 +1,9 @@
 import { useEffect } from "react";
 import { Stack, useRouter, useSegments, useRootNavigationState } from "expo-router";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { PreferencesProvider } from "../src/state/preferences";
-import { ThemeProvider } from "../context/ThemeContext";
-import { ErrorBoundary } from "@/components/ui/ErrorBoundary";
+import { PreferencesProvider } from "../src/store/preferences";
+import { ThemeProvider } from "../src/context/ThemeContext";
+import { ErrorBoundary } from "@/src/components/ui/ErrorBoundary";
 import { checkHealth } from "@/src/services/mekanService";
 import { useAppStore } from "@/src/store/useAppStore";
 import { useAuthStore } from "@/src/store/useAuthStore";
@@ -62,26 +62,26 @@ export default function RootLayout() {
         <ErrorBoundary>
           <PreferencesProvider>
             <Stack
-            screenOptions={{
-              headerShown: false,
-              autoHideHomeIndicator: true,
-            }}
-          >
-            <Stack.Screen
-              name="create-post"
-              options={{
-                presentation: "modal",
-                gestureEnabled: true,
+              screenOptions={{
+                headerShown: false,
+                autoHideHomeIndicator: true,
               }}
-            />
-            <Stack.Screen
-              name="create-story"
-              options={{
-                presentation: "modal",
-                gestureEnabled: true,
-              }}
-            />
-          </Stack>
+            >
+              <Stack.Screen
+                name="create-post"
+                options={{
+                  presentation: "modal",
+                  gestureEnabled: true,
+                }}
+              />
+              <Stack.Screen
+                name="create-story"
+                options={{
+                  presentation: "modal",
+                  gestureEnabled: true,
+                }}
+              />
+            </Stack>
           </PreferencesProvider>
         </ErrorBoundary>
       </ThemeProvider>

@@ -1,3 +1,6 @@
-import PlacesListScreen from "../src/screens/PlacesListScreen";
+import React from "react";
+import PlacesListScreen from "@/src/components/domain/place/PlacesListScreen";
 
-export default PlacesListScreen;
+export default function PlacesRoute() {
+  return <PlacesListScreen />;
+}
