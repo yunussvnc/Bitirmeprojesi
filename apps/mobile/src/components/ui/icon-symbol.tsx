@@ -74,6 +74,7 @@ const MAPPING = {
   'square.grid.2x2': 'dashboard',
   'plus.circle.fill': 'add-circle',
   'arrow.clockwise': 'refresh',
+  'person.crop.square': 'portrait',
 } as IconMapping;
 
 /**

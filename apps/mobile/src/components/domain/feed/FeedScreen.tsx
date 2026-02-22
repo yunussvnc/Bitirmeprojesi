@@ -159,10 +159,10 @@ export default function FeedScreen() {
       prev.map((p) =>
         p.id === post.id
           ? {
-              ...p,
-              is_liked: !p.is_liked,
-              like_count: p.like_count + (p.is_liked ? -1 : 1),
-            }
+            ...p,
+            is_liked: !p.is_liked,
+            like_count: p.like_count + (p.is_liked ? -1 : 1),
+          }
           : p
       )
     );
@@ -563,14 +563,12 @@ export default function FeedScreen() {
           }}
         />
 
-        {commentPostId && (
-          <CommentBottomSheet
-            visible={!!commentPostId}
-            onClose={() => setCommentPostId(null)}
-            postId={commentPostId}
-            onCommentAdded={() => handleCommentAdded(commentPostId)}
-          />
-        )}
+        <CommentBottomSheet
+          visible={!!commentPostId}
+          onClose={() => setCommentPostId(null)}
+          postId={commentPostId ?? 0}
+          onCommentAdded={() => commentPostId && handleCommentAdded(commentPostId)}
+        />
 
         <PostOptionsSheet
           visible={!!optionsPost}
@@ -697,5 +695,5 @@ const styles = StyleSheet.create({
   },
   listEmpty: { flexGrow: 1 },
   center: { flex: 1, justifyContent: "center", minHeight: 300 },
-  
+
 });

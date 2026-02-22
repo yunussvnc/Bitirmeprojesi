@@ -6,7 +6,7 @@ export default function SettingsLayout() {
   return (
     <Stack
       screenOptions={{
-        headerShown: true,
+        headerShown: false,
         headerBackTitle: "Geri",
         headerBackVisible: true,
         headerTintColor: colors.accent.primary,
@@ -16,11 +16,6 @@ export default function SettingsLayout() {
         gestureEnabled: true,
       }}
       initialRouteName="index"
-    >
-      <Stack.Screen name="index" options={{ headerShown: false }} />
-      <Stack.Screen name="story" options={{ headerShown: false }} />
-      <Stack.Screen name="content" options={{ headerShown: false }} />
-      <Stack.Screen name="camera" options={{ headerShown: false }} />
-    </Stack>
+    />
   );
 }

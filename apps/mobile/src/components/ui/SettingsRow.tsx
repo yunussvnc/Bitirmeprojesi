@@ -26,33 +26,38 @@ export interface SettingsRowProps {
    * Row label
    */
   label: string;
-  
+
+  /**
+   * Optional subtitle shown below the label
+   */
+  subtitle?: string;
+
   /**
    * Optional value text (shown on the right), or boolean for switch state
    */
   value?: string | boolean;
-  
+
   /**
    * Press handler
    */
   onPress?: () => void;
-  
+
   /**
    * Show chevron arrow
    * @default false
    */
   showArrow?: boolean;
-  
+
   /**
    * Custom style
    */
   style?: ViewStyle;
-  
+
   /**
    * Icon name (left side)
    */
   icon?: IconSymbolName;
-  
+
   /**
    * Show bottom divider
    * @default false
@@ -72,6 +77,7 @@ export interface SettingsRowProps {
  */
 export function SettingsRow({
   label,
+  subtitle,
   value,
   onPress,
   showArrow = false,
@@ -92,9 +98,16 @@ export function SettingsRow({
             <IconSymbol name={icon} size={22} color={colors.text.secondary} />
           </View>
         )}
-        <Text style={[styles.label, { color: colors.text.primary }]} numberOfLines={1}>
-          {label}
-        </Text>
+        <View style={styles.textContainer}>
+          <Text style={[styles.label, { color: colors.text.primary }]} numberOfLines={1}>
+            {label}
+          </Text>
+          {subtitle && (
+            <Text style={[styles.subtitle, { color: colors.text.tertiary }]} numberOfLines={1}>
+              {subtitle}
+            </Text>
+          )}
+        </View>
         <View style={styles.right}>
           {isSwitch && onValueChange ? (
             <Switch
@@ -182,12 +195,19 @@ const styles = StyleSheet.create({
     width: 28,
     alignItems: 'center',
   },
-  label: {
+  textContainer: {
     flex: 1,
-    minWidth: 0,
+    justifyContent: "center",
+  },
+  label: {
     fontSize: 15,
     fontWeight: '500',
     letterSpacing: 0.1,
+  },
+  subtitle: {
+    fontSize: 12,
+    fontWeight: '400',
+    marginTop: 2,
   },
   right: {
     flexDirection: 'row',

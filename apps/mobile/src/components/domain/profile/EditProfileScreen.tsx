@@ -4,11 +4,10 @@
  */
 
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Alert } from "react-native";
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Alert, ScrollView } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 import * as ImagePicker from "expo-image-picker";
-import { Screen } from "@/src/components/layout";
 import { Avatar } from "@/src/components/ui";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { Button } from "@/src/components/ui/Button";
@@ -94,57 +93,95 @@ export default function EditProfileScreen() {
   const titleStyle = createTextStyle("heading", colors.text.primary);
 
   return (
-    <Screen withTabBar>
-      <View style={[styles.header, { paddingTop: insets.top + spacing.md }]}>
+    <View style={[{ flex: 1, backgroundColor: colors.background.primary }]}>
+      <View style={[styles.header, { backgroundColor: colors.background.primary, borderBottomColor: colors.surface.border, paddingTop: insets.top + spacing.sm }]}>
         <TouchableOpacity
           onPress={() => {
             lightImpact();
             router.back();
           }}
+          hitSlop={12}
           style={styles.backBtn}
         >
-          <IconSymbol name="chevron.left" size={24} color={colors.text.primary} />
+          <Text style={[styles.headerActionText, { color: colors.text.primary }]}>İptal</Text>
         </TouchableOpacity>
-        <Text style={[titleStyle, styles.headerTitle]}>Profili Düzenle</Text>
-        <View style={styles.backBtn} />
+
+        <Text style={[createTextStyle("title", colors.text.primary), styles.headerTitle]} numberOfLines={1}>
+          Profili Düzenle
+        </Text>
+
+        <TouchableOpacity
+          onPress={handleSave}
+          hitSlop={12}
+          style={styles.backBtn}
+          disabled={loading}
+        >
+          <Text style={[styles.headerActionText, { color: colors.accent.primary, fontWeight: '700', opacity: loading ? 0.5 : 1 }]}>
+            {loading ? "..." : "Bitti"}
+          </Text>
+        </TouchableOpacity>
       </View>
-      <View style={styles.container}>
+
+      <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
         <TouchableOpacity onPress={pickAvatar} style={styles.avatarWrap} activeOpacity={0.8}>
-          <Avatar source={avatarUri ? { uri: avatarUri } : undefined} name={authUser.first_name || authUser.username || authUser.email} size={100} />
-          <Text style={[styles.changePhoto, { color: colors.accent.primary }]}>Fotoğrafı değiştir</Text>
+          <View style={styles.avatarContainer}>
+            <Avatar source={avatarUri ? { uri: avatarUri } : undefined} name={authUser.first_name || authUser.username || authUser.email} size={90} />
+            <View style={[styles.cameraBadge, { backgroundColor: colors.surface.elevated, borderColor: colors.surface.border }]}>
+              <IconSymbol name="camera.fill" size={14} color={colors.text.primary} />
+            </View>
+          </View>
+          <Text style={[styles.changePhoto, { color: colors.accent.primary }]}>Daha Fazla Seçenek</Text>
         </TouchableOpacity>
 
-        <View style={styles.field}>
-          <Text style={[styles.label, { color: colors.text.secondary }]}>Kullanıcı adı</Text>
-          <TextInput
-            style={[styles.input, { color: colors.text.primary, borderColor: colors.surface.border }]}
-            placeholder="username"
-            placeholderTextColor={colors.text.tertiary}
-            value={username}
-            onChangeText={setUsername}
-            autoCapitalize="none"
-            autoCorrect={false}
-          />
+        <View style={[styles.section, { backgroundColor: colors.surface.elevated }]}>
+          <View style={[styles.fieldRow, { borderBottomColor: colors.surface.border, borderBottomWidth: StyleSheet.hairlineWidth }]}>
+            <Text style={[styles.fieldLabel, { color: colors.text.primary }]}>Ad</Text>
+            <TextInput
+              style={[styles.input, { color: colors.text.primary }]}
+              placeholder="Adın"
+              placeholderTextColor={colors.text.tertiary}
+              value={authUser.first_name || ""}
+              editable={false}
+            />
+          </View>
+
+          <View style={[styles.fieldRow, { borderBottomColor: colors.surface.border, borderBottomWidth: StyleSheet.hairlineWidth }]}>
+            <Text style={[styles.fieldLabel, { color: colors.text.primary }]}>Kullanıcı Adı</Text>
+            <TextInput
+              style={[styles.input, { color: colors.text.primary }]}
+              placeholder="Kullanıcı Adı"
+              placeholderTextColor={colors.text.tertiary}
+              value={username}
+              onChangeText={setUsername}
+              autoCapitalize="none"
+              autoCorrect={false}
+            />
+          </View>
+
+          <View style={[styles.fieldRow, { alignItems: 'flex-start', paddingVertical: spacing.md }]}>
+            <Text style={[styles.fieldLabel, { color: colors.text.primary }]}>Biyografi</Text>
+            <TextInput
+              style={[styles.input, styles.bioInput, { color: colors.text.primary }]}
+              placeholder="Kendinle ilgili bir şeyler yaz..."
+              placeholderTextColor={colors.text.tertiary}
+              value={bio}
+              onChangeText={setBio}
+              multiline
+              maxLength={150}
+            />
+          </View>
         </View>
 
-        <View style={styles.field}>
-          <Text style={[styles.label, { color: colors.text.secondary }]}>Bio</Text>
-          <TextInput
-            style={[styles.input, styles.bioInput, { color: colors.text.primary, borderColor: colors.surface.border }]}
-            placeholder="Kendini tanıt..."
-            placeholderTextColor={colors.text.tertiary}
-            value={bio}
-            onChangeText={setBio}
-            multiline
-            numberOfLines={3}
-          />
+        <View style={[styles.section, { backgroundColor: colors.surface.elevated, marginTop: spacing.xl }]}>
+          <TouchableOpacity style={styles.fieldRow} activeOpacity={0.7} onPress={() => {
+            lightImpact();
+            router.push("/settings/personal" as any);
+          }}>
+            <Text style={[styles.fieldLabel, { color: colors.text.primary, width: '100%' }]}>Kişisel bilgi ayarları</Text>
+          </TouchableOpacity>
         </View>
-
-        <Button variant="primary" size="large" onPress={handleSave} loading={loading} style={styles.saveBtn}>
-          Kaydet
-        </Button>
-      </View>
-    </Screen>
+      </ScrollView>
+    </View>
   );
 }
 
@@ -153,50 +190,76 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingHorizontal: spacing.lg,
-    paddingBottom: spacing.md,
+    paddingHorizontal: spacing.base,
+    paddingBottom: spacing.sm,
+    borderBottomWidth: StyleSheet.hairlineWidth,
   },
   backBtn: {
-    width: 44,
+    minWidth: 60,
     height: 44,
-    alignItems: "center",
     justifyContent: "center",
   },
+  headerActionText: {
+    fontSize: 16,
+    fontWeight: "400",
+  },
   headerTitle: {
-    fontSize: 18,
-    fontWeight: "700",
+    fontSize: 17,
+    fontWeight: "600",
+    flex: 1,
+    textAlign: 'center',
   },
   container: {
-    padding: spacing.lg,
+    flex: 1,
+    paddingTop: spacing.xl,
   },
   avatarWrap: {
     alignItems: "center",
-    marginBottom: spacing.xl,
+    marginBottom: spacing.xxl,
   },
-  changePhoto: {
-    fontSize: 14,
-    fontWeight: "600",
-    marginTop: spacing.sm,
-  },
-  field: {
-    marginBottom: spacing.lg,
-  },
-  label: {
-    fontSize: 14,
-    fontWeight: "600",
+  avatarContainer: {
+    position: 'relative',
     marginBottom: spacing.sm,
   },
+  cameraBadge: {
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 2,
+  },
+  changePhoto: {
+    fontSize: 15,
+    fontWeight: "600",
+  },
+  section: {
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderColor: 'rgba(150,150,150,0.2)',
+  },
+  fieldRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: spacing.lg,
+    minHeight: 50,
+  },
+  fieldLabel: {
+    fontSize: 15,
+    width: 110,
+    fontWeight: "400",
+  },
   input: {
-    borderWidth: 1,
-    borderRadius: radius.md,
-    padding: spacing.md,
-    fontSize: 16,
+    flex: 1,
+    fontSize: 15,
+    paddingVertical: spacing.sm,
   },
   bioInput: {
-    minHeight: 80,
+    minHeight: 60,
     textAlignVertical: "top",
-  },
-  saveBtn: {
-    marginTop: spacing.lg,
+    paddingTop: 0,
   },
 });

@@ -57,6 +57,11 @@ export function StoryViewerModal({
 }: StoryViewerModalProps) {
   const [index, setIndex] = useState(initialIndex);
   const progressAnim = useRef(new Animated.Value(0)).current;
+
+  // initialIndex veya stories değiştiğinde index'i sıfırla
+  useEffect(() => {
+    setIndex(initialIndex);
+  }, [initialIndex, stories]);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const dragY = useRef(new Animated.Value(0)).current;
 

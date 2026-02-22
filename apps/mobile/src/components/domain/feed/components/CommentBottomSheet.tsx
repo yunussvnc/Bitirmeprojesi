@@ -52,10 +52,12 @@ export function CommentBottomSheet({ visible, onClose, postId, onCommentAdded }:
   const [loading, setLoading] = useState(false);
   const [sending, setSending] = useState(false);
   const [text, setText] = useState("");
+  const [modalVisible, setModalVisible] = useState(false);
 
   // Height animasyonu (native driver kapalı — height animate edilemez native'de)
   const animHeight = useRef(new Animated.Value(0)).current;
   const snapRef = useRef<"collapsed" | "expanded">("collapsed");
+  const closingRef = useRef(false);
   const onCloseRef = useRef(onClose);
   onCloseRef.current = onClose;
 
@@ -63,7 +65,11 @@ export function CommentBottomSheet({ visible, onClose, postId, onCommentAdded }:
     (target: "collapsed" | "expanded" | "closed") => {
       const toValue = target === "closed" ? 0 : target === "collapsed" ? COLLAPSED_HEIGHT : EXPANDED_HEIGHT;
 
-      if (target !== "closed") snapRef.current = target;
+      if (target === "closed") {
+        closingRef.current = true;
+      } else {
+        snapRef.current = target;
+      }
 
       Animated.spring(animHeight, {
         toValue,
@@ -71,21 +77,40 @@ export function CommentBottomSheet({ visible, onClose, postId, onCommentAdded }:
         damping: 24,
         stiffness: 220,
         mass: 0.8,
+        overshootClamping: true, // Animasyonun 0'ın altına inip zıplamasını (flash) engeller
       }).start(({ finished }) => {
-        if (finished && target === "closed") onCloseRef.current();
+        if (finished && target === "closed") {
+          // Modal'ı gizle ve parent'a bildir
+          // closingRef.current burada SIFIRLANMAZ — visible false olana kadar true kalır
+          setModalVisible(false);
+          onCloseRef.current();
+        }
       });
     },
     [animHeight]
   );
 
-  // Açılış: height 0 → COLLAPSED_HEIGHT
+  const snapToRef = useRef(snapTo);
+  snapToRef.current = snapTo;
+
+  // visible false olunca closingRef'i sıfırla
   useEffect(() => {
-    if (visible) {
+    if (!visible) {
+      closingRef.current = false;
+    }
+  }, [visible]);
+
+  // Açılış: visible true olunca Modal'ı göster ve animasyonu başlat
+  // snapTo bağımlılığı kasıtlı olarak kaldırıldı — sadece visible değiştiğinde çalışmalı
+  useEffect(() => {
+    if (visible && !closingRef.current) {
+      setModalVisible(true);
       animHeight.setValue(0);
       snapRef.current = "collapsed";
-      snapTo("collapsed");
+      snapToRef.current("collapsed");
     }
-  }, [visible, animHeight, snapTo]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [visible]);
 
   // PanResponder: handle çubuğuna bağlı, liste scroll'una dokunmaz
   const startHeightRef = useRef(COLLAPSED_HEIGHT);
@@ -132,8 +157,6 @@ export function CommentBottomSheet({ visible, onClose, postId, onCommentAdded }:
     })
   ).current;
 
-  const snapToRef = useRef(snapTo);
-  snapToRef.current = snapTo;
 
   const loadComments = useCallback(async () => {
     if (!visible || !postId) return;
@@ -183,9 +206,9 @@ export function CommentBottomSheet({ visible, onClose, postId, onCommentAdded }:
   );
 
   return (
-    <Modal visible={visible} transparent animationType="none" onRequestClose={onClose} statusBarTranslucent>
+    <Modal visible={modalVisible} transparent animationType="none" onRequestClose={() => snapTo("closed")} statusBarTranslucent>
       {/* Backdrop */}
-      <Pressable style={[styles.backdrop, { backgroundColor: "rgba(0,0,0,0.45)" }]} onPress={onClose} />
+      <Pressable style={[styles.backdrop, { backgroundColor: "rgba(0,0,0,0.45)" }]} onPress={() => snapTo("closed")} />
 
       {/* Sheet — her zaman ekranın altına sabitli, height ile büyür/küçülür */}
       <Animated.View style={[styles.sheet, { height: animHeight, backgroundColor: colors.background.primary }]}>
@@ -201,7 +224,7 @@ export function CommentBottomSheet({ visible, onClose, postId, onCommentAdded }:
             <TouchableOpacity
               onPress={() => {
                 lightImpact();
-                onClose();
+                snapTo("closed");
               }}
               style={styles.closeBtn}
               activeOpacity={0.7}

@@ -170,7 +170,7 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
     return unsubscribe;
   }, [navigation]);
 
-  
+
 
   useEffect(() => {
     let cancelled = false;
@@ -279,10 +279,10 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
       prev.map((p) =>
         p.id === post.id
           ? {
-              ...p,
-              is_liked: !p.is_liked,
-              like_count: p.like_count + (p.is_liked ? -1 : 1),
-            }
+            ...p,
+            is_liked: !p.is_liked,
+            like_count: p.like_count + (p.is_liked ? -1 : 1),
+          }
           : p
       )
     );
@@ -328,7 +328,7 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
       onStartShouldSetPanResponder: () => false,
       onMoveShouldSetPanResponder: (_, g) => Math.abs(g.dy) > 10 && Math.abs(g.dy) > Math.abs(g.dx) * 1.5,
       onPanResponderTerminationRequest: () => false,
-      onPanResponderGrant: () => {},
+      onPanResponderGrant: () => { },
       onPanResponderMove: (_, g) => {
         if (!expandedRef.current && g.dy > 0) {
           dismissTranslateY.setValue(g.dy);
@@ -366,7 +366,7 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
         }
       },
     }),
-  [panelHeight, dismissTranslateY]);
+    [panelHeight, dismissTranslateY]);
 
   return (
     <Animated.View
@@ -375,304 +375,302 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
       <Animated.View style={{ height: panelHeight, backgroundColor: colors.background.primary }}>
         {/* Drag Handle + Hero — swipe area */}
         <View {...panResponder.panHandlers}>
-        <View style={styles.dragHandleWrap}>
-          <View style={[styles.dragHandle, { backgroundColor: colors.text.tertiary }]} />
-        </View>
-        {/* Hero Cover */}
-        <TouchableOpacity
-          style={styles.heroWrap}
-          onPress={goToPlaceDetail}
-          activeOpacity={0.9}
-        >
-        <Image
-          source={heroImage}
-          style={styles.heroImage}
-          contentFit="cover"
-          cachePolicy="memory-disk"
-        />
-        <LinearGradient
-          colors={['transparent', 'rgba(0,0,0,0.7)']}
-          style={StyleSheet.absoluteFill}
-          locations={[0.3, 1]}
-        />
-        <View style={styles.heroContent}>
-          <View style={styles.heroText}>
-            <Text style={styles.heroPlaceName} numberOfLines={2}>
-              {place.name}
-            </Text>
-            <Text style={[styles.heroMeta, { color: 'rgba(255,255,255,0.85)' }]}>
-              {[
-                mapShowPosts && `${total} gönderi`,
-                mapShowStories && stories.length > 0 && `${stories.length} hikaye`,
-              ]
-                .filter(Boolean)
-                .join(' · ') || (place.category ?? '')}
-            </Text>
+          <View style={styles.dragHandleWrap}>
+            <View style={[styles.dragHandle, { backgroundColor: colors.text.tertiary }]} />
           </View>
-          <View style={styles.heroActions}>
-            <TouchableOpacity
-              onPress={handleSave}
-              hitSlop={12}
-              style={styles.heroSaveBtn}
-              activeOpacity={0.8}
-            >
-              <View style={[styles.closeBtnBg, { backgroundColor: saved ? colors.accent.primary : 'rgba(0,0,0,0.4)' }]}>
-                <IconSymbol name={saved ? 'heart.fill' : 'heart'} size={18} color="#fff" />
-              </View>
-            </TouchableOpacity>
-            {onClose && (
-              <TouchableOpacity
-                onPress={onClose}
-                hitSlop={12}
-                style={styles.closeBtn}
-                activeOpacity={0.8}
-              >
-                <View style={[styles.closeBtnBg, { backgroundColor: 'rgba(0,0,0,0.4)' }]}>
-                  <IconSymbol name="xmark" size={18} color="#fff" />
-                </View>
-              </TouchableOpacity>
-            )}
-          </View>
-        </View>
-      </TouchableOpacity>
-        </View>
-
-      {/* Mekan Hikayeleri */}
-      {!loading && (
-        <View style={styles.placeStoriesSection}>
-          <View style={[styles.sectionHeader, { borderBottomColor: colors.surface.border }]}>
-            <IconSymbol name="camera.fill" size={18} color={colors.text.secondary} />
-            <Text style={[styles.sectionHeaderLabel, { color: colors.text.secondary }]}>Hikayeler</Text>
-          </View>
-          <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            contentContainerStyle={styles.placeStoriesRow}
+          {/* Hero Cover */}
+          <TouchableOpacity
+            style={styles.heroWrap}
+            onPress={goToPlaceDetail}
+            activeOpacity={0.9}
           >
-            {sortedStories.map((story, idx) => {
-              const seen = viewedStoryIds.has(story.id);
-              return (
-              <TouchableOpacity
-                key={story.id}
-                style={styles.placeStoryItem}
-                onPress={() => {
-                  lightImpact();
-                  viewerStoriesRef.current = sortedStories.slice(idx);
-                  setStoryViewerIndex(0);
-                }}
-                activeOpacity={0.85}
-              >
-                {seen ? (
-                  <View style={[styles.placeStoryRingSeen, { borderColor: colors.surface.border }]}>
-                    <View style={styles.placeStoryInner}>
-                      <Image
-                        source={{ uri: story.media_type === 'video' ? (story.thumbnail_url || story.media_url) : story.media_url }}
-                        style={StyleSheet.absoluteFill}
-                        contentFit="cover"
-                      />
-                      {story.media_type === 'video' && (
-                        <View style={styles.storyVideoIcon}>
-                          <IconSymbol name="play.fill" size={10} color="#fff" />
-                        </View>
-                      )}
-                    </View>
-                  </View>
-                ) : (
-                  <LinearGradient
-                    colors={STORY_GRADIENT}
-                    start={{ x: 0, y: 0 }}
-                    end={{ x: 1, y: 1 }}
-                    style={styles.placeStoryRing}
-                  >
-                    <View style={[styles.placeStoryGap, { backgroundColor: colors.background.primary }]}>
-                      <View style={styles.placeStoryInner}>
-                        <Image
-                          source={{ uri: story.media_type === 'video' ? (story.thumbnail_url || story.media_url) : story.media_url }}
-                          style={StyleSheet.absoluteFill}
-                          contentFit="cover"
-                        />
-                        {story.media_type === 'video' && (
-                          <View style={styles.storyVideoIcon}>
-                            <IconSymbol name="play.fill" size={10} color="#fff" />
-                          </View>
-                        )}
-                      </View>
-                    </View>
-                  </LinearGradient>
-                )}
-                <Text style={[styles.placeStoryName, { color: seen ? colors.text.tertiary : colors.text.secondary }]} numberOfLines={1}>
-                  {story.author?.first_name || 'Kullanıcı'}
+            <Image
+              source={heroImage}
+              style={styles.heroImage}
+              contentFit="cover"
+              cachePolicy="memory-disk"
+            />
+            <LinearGradient
+              colors={['transparent', 'rgba(0,0,0,0.7)']}
+              style={StyleSheet.absoluteFill}
+              locations={[0.3, 1]}
+            />
+            <View style={styles.heroContent}>
+              <View style={styles.heroText}>
+                <Text style={styles.heroPlaceName} numberOfLines={2}>
+                  {place.name}
                 </Text>
-              </TouchableOpacity>
-              );
-            })}
-          </ScrollView>
-        </View>
-      )}
-
-      {/* Gönderiler başlığı */}
-      <View style={[styles.sectionHeader, { borderBottomColor: colors.surface.border }]}>
-        <IconSymbol name="square.grid.2x2.fill" size={18} color={colors.text.secondary} />
-        <Text style={[styles.sectionHeaderLabel, { color: colors.text.secondary }]}>Gönderiler</Text>
-      </View>
-
-      {/* Grid */}
-      <ScrollView
-        style={styles.gridScroll}
-        contentContainerStyle={styles.gridContent}
-        showsVerticalScrollIndicator={false}
-        nestedScrollEnabled
-      >
-        {loading ? (
-          <View style={styles.loadingWrap}>
-            <ActivityIndicator size="small" color={colors.accent.primary} />
-          </View>
-        ) : showPreferencesHint ? (
-          <View style={styles.emptyWrap}>
-            <IconSymbol name="photo.on.rectangle.angled" size={48} color={colors.text.tertiary} />
-            <Text style={[styles.emptyText, { color: colors.text.tertiary }]}>
-              İçerik tercihlerinden gönderi veya hikaye gösterimini aç
-            </Text>
-          </View>
-        ) : isEmpty ? (
-          <View style={styles.emptyWrap}>
-            <IconSymbol name="photo.on.rectangle.angled" size={48} color={colors.text.tertiary} />
-            <Text style={[styles.emptyText, { color: colors.text.tertiary }]}>
-              Bu mekanda henüz paylaşım yok
-            </Text>
-          </View>
-        ) : photoPosts.length > 0 ? (
-          <View style={styles.grid}>
-            {gridItems.slice(0, 12).map((item, idx) => (
-              <TouchableOpacity
-                key={`${item.postId}-${idx}`}
-                style={[styles.cell, { width: CELL_SIZE, height: CELL_SIZE }]}
-                onPress={() => {
-                  lightImpact();
-                  const post = posts.find((p) => p.id === item.postId);
-                  if (post) setSelectedPostId(post.id);
-                }}
-                activeOpacity={0.9}
-              >
-                <Image
-                  source={{ uri: item.url }}
-                  style={StyleSheet.absoluteFill}
-                  contentFit="cover"
-                  cachePolicy="memory-disk"
-                />
-                {item.isVideo && (
-                  <View style={styles.videoBadge}>
-                    <IconSymbol name="play.fill" size={14} color="#fff" />
+                <Text style={[styles.heroMeta, { color: 'rgba(255,255,255,0.85)' }]}>
+                  {[
+                    mapShowPosts && `${total} gönderi`,
+                    mapShowStories && stories.length > 0 && `${stories.length} hikaye`,
+                  ]
+                    .filter(Boolean)
+                    .join(' · ') || (place.category ?? '')}
+                </Text>
+              </View>
+              <View style={styles.heroActions}>
+                <TouchableOpacity
+                  onPress={handleSave}
+                  hitSlop={12}
+                  style={styles.heroSaveBtn}
+                  activeOpacity={0.8}
+                >
+                  <View style={[styles.closeBtnBg, { backgroundColor: saved ? colors.accent.primary : 'rgba(0,0,0,0.4)' }]}>
+                    <IconSymbol name={saved ? 'heart.fill' : 'heart'} size={18} color="#fff" />
                   </View>
+                </TouchableOpacity>
+                {onClose && (
+                  <TouchableOpacity
+                    onPress={onClose}
+                    hitSlop={12}
+                    style={styles.closeBtn}
+                    activeOpacity={0.8}
+                  >
+                    <View style={[styles.closeBtnBg, { backgroundColor: 'rgba(0,0,0,0.4)' }]}>
+                      <IconSymbol name="xmark" size={18} color="#fff" />
+                    </View>
+                  </TouchableOpacity>
                 )}
-              </TouchableOpacity>
-            ))}
-          </View>
-        ) : (
-          <View style={styles.emptyWrap}>
-            <Text style={[styles.emptyText, { color: colors.text.tertiary }]}>
-              Henüz gönderi yok
-            </Text>
+              </View>
+            </View>
+          </TouchableOpacity>
+        </View>
+
+        {/* Mekan Hikayeleri */}
+        {!loading && (
+          <View style={styles.placeStoriesSection}>
+            <View style={[styles.sectionHeader, { borderBottomColor: colors.surface.border }]}>
+              <IconSymbol name="camera.fill" size={18} color={colors.text.secondary} />
+              <Text style={[styles.sectionHeaderLabel, { color: colors.text.secondary }]}>Hikayeler</Text>
+            </View>
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              contentContainerStyle={styles.placeStoriesRow}
+            >
+              {sortedStories.map((story, idx) => {
+                const seen = viewedStoryIds.has(story.id);
+                return (
+                  <TouchableOpacity
+                    key={story.id}
+                    style={styles.placeStoryItem}
+                    onPress={() => {
+                      lightImpact();
+                      viewerStoriesRef.current = sortedStories.slice(idx);
+                      setStoryViewerIndex(0);
+                    }}
+                    activeOpacity={0.85}
+                  >
+                    {seen ? (
+                      <View style={[styles.placeStoryRingSeen, { borderColor: colors.surface.border }]}>
+                        <View style={styles.placeStoryInner}>
+                          <Image
+                            source={{ uri: story.media_type === 'video' ? (story.thumbnail_url || story.media_url) : story.media_url }}
+                            style={StyleSheet.absoluteFill}
+                            contentFit="cover"
+                          />
+                          {story.media_type === 'video' && (
+                            <View style={styles.storyVideoIcon}>
+                              <IconSymbol name="play.fill" size={10} color="#fff" />
+                            </View>
+                          )}
+                        </View>
+                      </View>
+                    ) : (
+                      <LinearGradient
+                        colors={STORY_GRADIENT}
+                        start={{ x: 0, y: 0 }}
+                        end={{ x: 1, y: 1 }}
+                        style={styles.placeStoryRing}
+                      >
+                        <View style={[styles.placeStoryGap, { backgroundColor: colors.background.primary }]}>
+                          <View style={styles.placeStoryInner}>
+                            <Image
+                              source={{ uri: story.media_type === 'video' ? (story.thumbnail_url || story.media_url) : story.media_url }}
+                              style={StyleSheet.absoluteFill}
+                              contentFit="cover"
+                            />
+                            {story.media_type === 'video' && (
+                              <View style={styles.storyVideoIcon}>
+                                <IconSymbol name="play.fill" size={10} color="#fff" />
+                              </View>
+                            )}
+                          </View>
+                        </View>
+                      </LinearGradient>
+                    )}
+                    <Text style={[styles.placeStoryName, { color: seen ? colors.text.tertiary : colors.text.secondary }]} numberOfLines={1}>
+                      {story.author?.first_name || 'Kullanıcı'}
+                    </Text>
+                  </TouchableOpacity>
+                );
+              })}
+            </ScrollView>
           </View>
         )}
-      </ScrollView>
 
-      {storyViewerIndex !== null && (
-        <StoryViewerModal
-          stories={viewerStoriesRef.current}
-          initialIndex={storyViewerIndex}
-          visible={storyVisible}
-          onClose={() => { setStoryViewerIndex(null); setStoryVisible(true); }}
-          onStoryViewed={(id) => setViewedStoryIds((prev) => new Set(prev).add(id))}
-          onPlaceNavigate={handleStoryNavigateRequest}
-          onAuthorNavigate={posts.length > 0 ? handleStoryNavigateRequest : undefined}
-        />
-      )}
+        {/* Gönderiler başlığı */}
+        <View style={[styles.sectionHeader, { borderBottomColor: colors.surface.border }]}>
+          <IconSymbol name="square.grid.2x2.fill" size={18} color={colors.text.secondary} />
+          <Text style={[styles.sectionHeaderLabel, { color: colors.text.secondary }]}>Gönderiler</Text>
+        </View>
 
-      {showHeroImage && (() => {
-        const uri = typeof heroImage === 'object' && heroImage !== null && 'uri' in heroImage
-          ? (heroImage as { uri: string }).uri
-          : null;
-        if (!uri) return null;
-        return (
+        {/* Grid */}
+        <ScrollView
+          style={styles.gridScroll}
+          contentContainerStyle={styles.gridContent}
+          showsVerticalScrollIndicator={false}
+          nestedScrollEnabled
+        >
+          {loading ? (
+            <View style={styles.loadingWrap}>
+              <ActivityIndicator size="small" color={colors.accent.primary} />
+            </View>
+          ) : showPreferencesHint ? (
+            <View style={styles.emptyWrap}>
+              <IconSymbol name="photo.on.rectangle.angled" size={48} color={colors.text.tertiary} />
+              <Text style={[styles.emptyText, { color: colors.text.tertiary }]}>
+                İçerik tercihlerinden gönderi veya hikaye gösterimini aç
+              </Text>
+            </View>
+          ) : isEmpty ? (
+            <View style={styles.emptyWrap}>
+              <IconSymbol name="photo.on.rectangle.angled" size={48} color={colors.text.tertiary} />
+              <Text style={[styles.emptyText, { color: colors.text.tertiary }]}>
+                Bu mekanda henüz paylaşım yok
+              </Text>
+            </View>
+          ) : photoPosts.length > 0 ? (
+            <View style={styles.grid}>
+              {gridItems.slice(0, 12).map((item, idx) => (
+                <TouchableOpacity
+                  key={`${item.postId}-${idx}`}
+                  style={[styles.cell, { width: CELL_SIZE, height: CELL_SIZE }]}
+                  onPress={() => {
+                    lightImpact();
+                    const post = posts.find((p) => p.id === item.postId);
+                    if (post) setSelectedPostId(post.id);
+                  }}
+                  activeOpacity={0.9}
+                >
+                  <Image
+                    source={{ uri: item.url }}
+                    style={StyleSheet.absoluteFill}
+                    contentFit="cover"
+                    cachePolicy="memory-disk"
+                  />
+                  {item.isVideo && (
+                    <View style={styles.videoBadge}>
+                      <IconSymbol name="play.fill" size={14} color="#fff" />
+                    </View>
+                  )}
+                </TouchableOpacity>
+              ))}
+            </View>
+          ) : (
+            <View style={styles.emptyWrap}>
+              <Text style={[styles.emptyText, { color: colors.text.tertiary }]}>
+                Henüz gönderi yok
+              </Text>
+            </View>
+          )}
+        </ScrollView>
+
+        {storyViewerIndex !== null && (
+          <StoryViewerModal
+            stories={viewerStoriesRef.current}
+            initialIndex={storyViewerIndex}
+            visible={storyVisible}
+            onClose={() => { setStoryViewerIndex(null); setStoryVisible(true); }}
+            onStoryViewed={(id) => setViewedStoryIds((prev) => new Set(prev).add(id))}
+            onPlaceNavigate={handleStoryNavigateRequest}
+            onAuthorNavigate={posts.length > 0 ? handleStoryNavigateRequest : undefined}
+          />
+        )}
+
+        {showHeroImage && (() => {
+          const uri = typeof heroImage === 'object' && heroImage !== null && 'uri' in heroImage
+            ? (heroImage as { uri: string }).uri
+            : null;
+          if (!uri) return null;
+          return (
+            <Modal
+              visible
+              transparent
+              animationType="fade"
+              onRequestClose={() => setShowHeroImage(false)}
+              statusBarTranslucent
+            >
+              <Pressable
+                style={styles.heroImageModalOverlay}
+                onPress={() => setShowHeroImage(false)}
+              >
+                <Pressable
+                  style={styles.heroImageModalClose}
+                  onPress={() => {
+                    lightImpact();
+                    setShowHeroImage(false);
+                  }}
+                >
+                  <IconSymbol name="xmark" size={22} color="#fff" />
+                </Pressable>
+                <Image
+                  source={{ uri }}
+                  style={styles.heroImageModalImage}
+                  contentFit="contain"
+                />
+              </Pressable>
+            </Modal>
+          );
+        })()}
+
+        {selectedPost && (
           <Modal
             visible
             transparent
             animationType="fade"
-            onRequestClose={() => setShowHeroImage(false)}
+            onRequestClose={closePostModal}
             statusBarTranslucent
           >
             <Pressable
-              style={styles.heroImageModalOverlay}
-              onPress={() => setShowHeroImage(false)}
+              style={[styles.postModalOverlay, { backgroundColor: colors.overlay.dark }]}
+              onPress={closePostModal}
             >
               <Pressable
-                style={styles.heroImageModalClose}
-                onPress={() => {
-                  lightImpact();
-                  setShowHeroImage(false);
-                }}
+                style={[styles.postModalContent, { backgroundColor: colors.background.primary }]}
+                onPress={(e) => e.stopPropagation()}
               >
-                <IconSymbol name="xmark" size={22} color="#fff" />
+                <TouchableOpacity
+                  style={styles.postModalClose}
+                  onPress={() => {
+                    lightImpact();
+                    closePostModal();
+                  }}
+                  activeOpacity={0.8}
+                  hitSlop={8}
+                >
+                  <View style={[styles.postModalCloseBg, { backgroundColor: colors.background.secondary }]}>
+                    <IconSymbol name="xmark" size={16} color={colors.text.primary} />
+                  </View>
+                </TouchableOpacity>
+                <FeedCard
+                  post={selectedPost}
+                  onAuthorPress={() => router.push(`/user/${selectedPost.user_id}` as any)}
+                  onPlacePress={() => selectedPost.place_id && router.push(`/place/${selectedPost.place_id}` as any)}
+                  onLike={() => handleLike(selectedPost)}
+                  onComment={() => setCommentPostId(selectedPost.id)}
+                />
               </Pressable>
-              <Image
-                source={{ uri }}
-                style={styles.heroImageModalImage}
-                contentFit="contain"
+              <CommentBottomSheet
+                visible={commentPostId != null}
+                postId={commentPostId ?? 0}
+                onClose={() => setCommentPostId(null)}
+                onCommentAdded={() => commentPostId != null ? handleCommentAdded(commentPostId) : undefined}
               />
             </Pressable>
           </Modal>
-        );
-      })()}
-
-      {selectedPost && (
-        <Modal
-          visible
-          transparent
-          animationType="fade"
-          onRequestClose={closePostModal}
-          statusBarTranslucent
-        >
-          <Pressable
-            style={[styles.postModalOverlay, { backgroundColor: colors.overlay.dark }]}
-            onPress={closePostModal}
-          >
-            <Pressable
-              style={[styles.postModalContent, { backgroundColor: colors.background.primary }]}
-              onPress={(e) => e.stopPropagation()}
-            >
-              <TouchableOpacity
-                style={styles.postModalClose}
-                onPress={() => {
-                  lightImpact();
-                  closePostModal();
-                }}
-                activeOpacity={0.8}
-                hitSlop={8}
-              >
-                <View style={[styles.postModalCloseBg, { backgroundColor: colors.background.secondary }]}>
-                  <IconSymbol name="xmark" size={16} color={colors.text.primary} />
-                </View>
-              </TouchableOpacity>
-              <FeedCard
-                post={selectedPost}
-                onAuthorPress={() => router.push(`/user/${selectedPost.user_id}` as any)}
-                onPlacePress={() => selectedPost.place_id && router.push(`/place/${selectedPost.place_id}` as any)}
-                onLike={() => handleLike(selectedPost)}
-                onComment={() => setCommentPostId(selectedPost.id)}
-              />
-            </Pressable>
-            {commentPostId != null && (
-              <CommentBottomSheet
-                visible
-                postId={commentPostId}
-                onClose={() => setCommentPostId(null)}
-                onCommentAdded={() => handleCommentAdded(commentPostId)}
-              />
-            )}
-          </Pressable>
-        </Modal>
-      )}
+        )}
       </Animated.View>
     </Animated.View>
   );
@@ -797,7 +795,7 @@ const styles = StyleSheet.create({
     marginTop: 8,
     paddingBottom: 8,
   },
-  
+
   placeStoriesRow: {
     marginTop: 15,
     paddingHorizontal: PADDING,
