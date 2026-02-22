@@ -155,64 +155,8 @@ export default function PlaceDetailScreen() {
     setReviewsError(null);
     try {
       const data = await apiGet<Review[]>(`/places/${id}/reviews`);
-      
-      const mockReviewsWithImages: Review[] = [
-        {
-          id: 9001,
-          user_id: 101,
-          place_id: Number(id),
-          comment_text: 'Harika bir mekan! Kahveleri çok lezzetli, ortam harika.',
-          rating: 5,
-          is_verified: true,
-          created_at: new Date(Date.now() - 2 * 24 * 3600000).toISOString(),
-          media_url: 'https://images.unsplash.com/photo-1511920170033-f8396924c348?w=800&h=600&fit=crop',
-          media_urls: [
-            'https://images.unsplash.com/photo-1511920170033-f8396924c348?w=800&h=600&fit=crop',
-            'https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=800&h=600&fit=crop',
-          ],
-        },
-        {
-          id: 9002,
-          user_id: 102,
-          place_id: Number(id),
-          comment_text: 'Atmosfer mükemmel, kesinlikle tavsiye ederim. Servis de çok hızlıydı.',
-          rating: 4,
-          is_verified: true,
-          created_at: new Date(Date.now() - 5 * 24 * 3600000).toISOString(),
-          media_url: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=800&h=600&fit=crop',
-          media_urls: [
-            'https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=800&h=600&fit=crop',
-          ],
-        },
-        {
-          id: 9003,
-          user_id: 103,
-          place_id: Number(id),
-          comment_text: 'Çalışmak için ideal bir yer. Sessiz ve huzurlu.',
-          rating: 5,
-          is_verified: false,
-          created_at: new Date(Date.now() - 7 * 24 * 3600000).toISOString(),
-        },
-        {
-          id: 9004,
-          user_id: 104,
-          place_id: Number(id),
-          comment_text: 'İç mekan çok güzel tasarlanmış, yemekleri de lezzetli.',
-          rating: 5,
-          is_verified: true,
-          created_at: new Date(Date.now() - 10 * 24 * 3600000).toISOString(),
-          media_url: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=600&fit=crop',
-          media_urls: [
-            'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&h=600&fit=crop',
-            'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&h=600&fit=crop',
-            'https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=800&h=600&fit=crop',
-          ],
-        },
-      ];
-      
       if (!cancelled.current) {
-        const combinedReviews = [...mockReviewsWithImages, ...(data || [])];
-        setReviews(combinedReviews);
+        setReviews(data || []);
       }
     } catch (error) {
       if (!cancelled.current) {

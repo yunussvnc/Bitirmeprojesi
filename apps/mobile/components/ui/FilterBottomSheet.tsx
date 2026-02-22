@@ -3,7 +3,7 @@
  * Segmented kontroller, choice chip'ler ve SelectField'ler.
  */
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   View,
   Text,
@@ -12,6 +12,8 @@ import {
   Modal,
   Pressable,
   ScrollView,
+  Animated,
+  PanResponder,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme } from '@/hooks/useTheme';
@@ -205,10 +207,46 @@ export function FilterBottomSheet({
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
   const [draft, setDraft] = useState<FilterValues>(values);
+  const [internalVisible, setInternalVisible] = useState(false);
+  const translateY = useRef(new Animated.Value(800)).current;
+  const scrollY = useRef(0);
 
   useEffect(() => {
-    if (visible) setDraft(values);
-  }, [visible, values]);
+    if (visible) {
+      setDraft(values);
+      scrollY.current = 0;
+      setInternalVisible(true);
+      translateY.setValue(800);
+      Animated.spring(translateY, { toValue: 0, useNativeDriver: true, bounciness: 5, speed: 14 }).start();
+    }
+  }, [visible, values, translateY]);
+
+  const closeWithAnimation = () => {
+    Animated.timing(translateY, { toValue: 800, duration: 220, useNativeDriver: true }).start(() => {
+      setInternalVisible(false);
+      onClose();
+    });
+  };
+
+  const panResponder = useRef(
+    PanResponder.create({
+      onMoveShouldSetPanResponder: (_, gs) =>
+        scrollY.current <= 0 && gs.dy > 5 && Math.abs(gs.dy) > Math.abs(gs.dx),
+      onPanResponderMove: (_, gs) => {
+        if (scrollY.current <= 0 && gs.dy > 0) translateY.setValue(gs.dy);
+      },
+      onPanResponderRelease: (_, gs) => {
+        if (gs.dy > 120 || gs.vy > 0.5) {
+          Animated.timing(translateY, { toValue: 800, duration: 220, useNativeDriver: true }).start(() => {
+            setInternalVisible(false);
+            onClose();
+          });
+        } else {
+          Animated.spring(translateY, { toValue: 0, useNativeDriver: true, bounciness: 4 }).start();
+        }
+      },
+    })
+  ).current;
 
   const patch = <K extends keyof FilterValues>(k: K, v: FilterValues[K]) =>
     setDraft((d) => ({ ...d, [k]: v }));
@@ -218,7 +256,7 @@ export function FilterBottomSheet({
   const handleApply = () => {
     lightImpact();
     onApply(draft);
-    onClose();
+    closeWithAnimation();
   };
 
   const handleClear = () => {
@@ -226,24 +264,26 @@ export function FilterBottomSheet({
     const empty: FilterValues = { location: null, category: null, vibe: null, purpose: null, budget: null };
     setDraft(empty);
     onApply(empty);
-    onClose();
+    closeWithAnimation();
   };
 
   return (
-    <Modal visible={visible} transparent animationType="slide" onRequestClose={onClose}>
-      <Pressable style={styles.backdrop} onPress={onClose}>
-        <Pressable
+    <Modal visible={internalVisible} transparent animationType="none" onRequestClose={closeWithAnimation}>
+      <Pressable style={styles.backdrop} onPress={closeWithAnimation}>
+        <Animated.View
           style={[
             styles.sheet,
             {
               backgroundColor: colors.background.primary,
               paddingBottom: insets.bottom + 16,
+              transform: [{ translateY }],
             },
           ]}
-          onPress={() => {}}
+          {...panResponder.panHandlers}
         >
+          <Pressable onPress={() => {}}>
           {/* Handle */}
-          <View style={styles.handleRow}>
+          <View style={styles.handleRow} {...panResponder.panHandlers}>
             <View style={[styles.handle, { backgroundColor: colors.surface.border }]} />
           </View>
 
@@ -257,7 +297,12 @@ export function FilterBottomSheet({
             )}
           </View>
 
-          <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.body}>
+          <ScrollView
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={styles.body}
+            onScroll={(e) => { scrollY.current = e.nativeEvent.contentOffset.y; }}
+            scrollEventThrottle={16}
+          >
             {/* Konum & Tür */}
             <Text style={[styles.sectionLabel, { color: colors.text.tertiary }]}>Konum & Tür</Text>
             <View style={styles.pickerRow}>
@@ -323,7 +368,8 @@ export function FilterBottomSheet({
               </Text>
             </TouchableOpacity>
           </View>
-        </Pressable>
+          </Pressable>
+        </Animated.View>
       </Pressable>
     </Modal>
   );
@@ -371,8 +417,8 @@ const styles = StyleSheet.create({
   },
   handleRow: {
     alignItems: 'center',
-    paddingTop: 10,
-    paddingBottom: 4,
+    paddingTop: 12,
+    paddingBottom: 12,
   },
   handle: {
     width: 36,

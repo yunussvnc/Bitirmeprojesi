@@ -256,8 +256,8 @@ const styles = StyleSheet.create({
   },
   title: { fontSize: 22, fontWeight: '700' },
   subtitle: { fontSize: 13, marginTop: 2 },
-  controls: { position: 'absolute', right: 16, bottom: 240, gap: 10 },
-  controlsWithPanel: { position: 'absolute', right: 16, bottom: 640, gap: 10 },
+  controls: { position: 'absolute', right: 16, top: Platform.OS === 'ios' ? 110 : 72, gap: 10 },
+  controlsWithPanel: { position: 'absolute', right: 16, top: Platform.OS === 'ios' ? 110 : 72, gap: 10 },
   controlBtn: {
     width: 48,
     height: 48,

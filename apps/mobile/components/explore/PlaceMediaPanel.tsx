@@ -318,24 +318,39 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
   const showPreferencesHint = !mapShowStories && !mapShowPosts;
 
   const panelHeight = useRef(new Animated.Value(PANEL_COLLAPSED)).current;
+  const dismissTranslateY = useRef(new Animated.Value(0)).current;
   const expandedRef = useRef(false);
   const startHeightRef = useRef(PANEL_COLLAPSED);
+  const onCloseRef = useRef(onClose);
+  useEffect(() => { onCloseRef.current = onClose; }, [onClose]);
 
   const panResponder = useMemo(() =>
     PanResponder.create({
       onStartShouldSetPanResponder: () => false,
       onMoveShouldSetPanResponder: (_, g) => Math.abs(g.dy) > 10 && Math.abs(g.dy) > Math.abs(g.dx) * 1.5,
       onPanResponderTerminationRequest: () => false,
-      onPanResponderGrant: () => {
-        // startHeightRef.current zaten son release'de güncellendi
-      },
+      onPanResponderGrant: () => {},
       onPanResponderMove: (_, g) => {
-        const newH = startHeightRef.current - g.dy;
-        const clamped = Math.max(PANEL_COLLAPSED, Math.min(PANEL_EXPANDED, newH));
-        panelHeight.setValue(clamped);
+        if (!expandedRef.current && g.dy > 0) {
+          dismissTranslateY.setValue(g.dy);
+        } else {
+          dismissTranslateY.setValue(0);
+          const newH = startHeightRef.current - g.dy;
+          const clamped = Math.max(PANEL_COLLAPSED, Math.min(PANEL_EXPANDED, newH));
+          panelHeight.setValue(clamped);
+        }
       },
       onPanResponderRelease: (_, g) => {
-        if (g.dy > 30 || g.vy > 0.3) {
+        if (!expandedRef.current && (g.dy > 100 || g.vy > 0.5)) {
+          Animated.timing(dismissTranslateY, {
+            toValue: SCREEN_HEIGHT,
+            duration: 220,
+            useNativeDriver: true,
+          }).start(() => {
+            onCloseRef.current?.();
+          });
+        } else if (g.dy > 30 || g.vy > 0.3) {
+          Animated.spring(dismissTranslateY, { toValue: 0, useNativeDriver: true, bounciness: 4 }).start();
           expandedRef.current = false;
           startHeightRef.current = PANEL_COLLAPSED;
           Animated.spring(panelHeight, {
@@ -345,20 +360,22 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
             tension: 60,
           }).start();
         } else {
+          Animated.spring(dismissTranslateY, { toValue: 0, useNativeDriver: true, bounciness: 4 }).start();
           const currentH = Math.max(PANEL_COLLAPSED, Math.min(PANEL_EXPANDED, startHeightRef.current - g.dy));
           expandedRef.current = currentH > PANEL_COLLAPSED + 20;
           startHeightRef.current = currentH;
         }
       },
     }),
-  [panelHeight]);
+  [panelHeight, dismissTranslateY]);
 
   return (
     <Animated.View
-      style={[styles.panel, { backgroundColor: colors.background.primary, height: panelHeight }]}
+      style={[styles.panel, { transform: [{ translateY: dismissTranslateY }] }]}
     >
-      {/* Drag Handle + Hero — swipe area */}
-      <View {...panResponder.panHandlers}>
+      <Animated.View style={{ height: panelHeight, backgroundColor: colors.background.primary }}>
+        {/* Drag Handle + Hero — swipe area */}
+        <View {...panResponder.panHandlers}>
         <View style={styles.dragHandleWrap}>
           <View style={[styles.dragHandle, { backgroundColor: colors.text.tertiary }]} />
         </View>
@@ -419,7 +436,7 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
           </View>
         </View>
       </TouchableOpacity>
-      </View>
+        </View>
 
       {/* Mekan Hikayeleri */}
       {!loading && (
@@ -657,6 +674,7 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
           </Pressable>
         </Modal>
       )}
+      </Animated.View>
     </Animated.View>
   );
 }
