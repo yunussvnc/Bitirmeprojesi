@@ -24,6 +24,7 @@ import { SearchInput } from '@/src/components/ui/Input';
 import type { Place } from '@/src/services/mekanService';
 import { lightImpact } from '@/src/utils/haptics';
 import { PlaceMediaPanel } from './PlaceMediaPanel';
+import { useAppStore } from '@/src/store/useAppStore';
 
 const ISTANBUL_CENTER = { latitude: 41.0082, longitude: 28.9784 };
 
@@ -130,7 +131,7 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
           const loc = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Balanced });
           setUserLocation({ latitude: loc.coords.latitude, longitude: loc.coords.longitude });
         }
-      } catch {}
+      } catch { }
     })();
   }, []);
 
@@ -185,7 +186,7 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
         } else if (data.type === 'deselect') {
           setSelectedPlace(null);
         }
-      } catch {}
+      } catch { }
     },
     [places],
   );
@@ -232,6 +233,36 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
       setSelectedPlace(null);
     }
   }, [filteredPlaces, query, selectedPlace]);
+
+  // Mesajlardan gelen mekan açma isteğini dinle
+  useEffect(() => {
+    const pendingName = useAppStore.getState().pendingPlaceName;
+    if (!pendingName || !mapReady || places.length === 0) return;
+
+    // İsim ile eşleşen mekanı bul
+    const matchedPlace = places.find(
+      (p) => p.name?.toLowerCase() === pendingName.toLowerCase()
+    );
+
+    if (matchedPlace) {
+      setQuery(matchedPlace.name ?? '');
+      setShowResults(false);
+
+      // Önce haritada konuma uç
+      if (matchedPlace.latitude != null && matchedPlace.longitude != null) {
+        webViewRef.current?.injectJavaScript(
+          `flyTo(${matchedPlace.latitude},${matchedPlace.longitude},16);true;`
+        );
+      }
+
+      // Harita animasyonu bittikten sonra kartı aç
+      setTimeout(() => {
+        setSelectedPlace(matchedPlace);
+      }, 1200);
+    }
+
+    useAppStore.getState().clearPendingPlace();
+  }, [mapReady, places]);
 
   // HTML sabit – WebView tek sefer yüklenir, reload olmaz (kaydırınca loading ekranı gelmez)
   const html = useMemo(

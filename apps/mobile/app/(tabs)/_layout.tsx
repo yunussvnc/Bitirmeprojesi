@@ -78,6 +78,15 @@ export default function TabsLayout() {
           }}
         />
         <Tabs.Screen
+          name="messages"
+          options={{
+            title: "Mesajlar",
+            tabBarIcon: ({ color, focused }) => <TabIcon name="paperplane" focused={focused} color={color} />,
+            // @ts-expect-error - listeners works at runtime, expo-router types are incomplete
+            listeners: () => ({ tabPress: () => selection() }),
+          }}
+        />
+        <Tabs.Screen
           name="feed"
           options={{
             title: "Akış",

@@ -75,6 +75,9 @@ const MAPPING = {
   'plus.circle.fill': 'add-circle',
   'arrow.clockwise': 'refresh',
   'person.crop.square': 'portrait',
+  'paperplane': 'send',
+  'square.and.pencil': 'edit',
+  'phone.fill': 'phone',
 } as IconMapping;
 
 /**

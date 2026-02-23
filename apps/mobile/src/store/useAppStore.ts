@@ -36,6 +36,10 @@ type AppState = {
   clearRecentPrompts: () => void;
 
   setApiHealthy: (healthy: boolean) => void;
+
+  pendingPlaceName: string | null;
+  setPendingPlaceName: (name: string) => void;
+  clearPendingPlace: () => void;
 };
 
 const uniq = (arr: string[]) => Array.from(new Set(arr));
@@ -49,6 +53,7 @@ export const useAppStore = create<AppState>()(
       savedPostsById: {},
       recentPrompts: [],
       apiHealthy: null,
+      pendingPlaceName: null,
 
       isSaved: (id) => get().savedIds.includes(id),
 
@@ -120,6 +125,9 @@ export const useAppStore = create<AppState>()(
       clearRecentPrompts: () => set({ recentPrompts: [] }),
 
       setApiHealthy: (healthy) => set({ apiHealthy: healthy }),
+
+      setPendingPlaceName: (name) => set({ pendingPlaceName: name }),
+      clearPendingPlace: () => set({ pendingPlaceName: null }),
     }),
     {
       name: "app-store-v2",
