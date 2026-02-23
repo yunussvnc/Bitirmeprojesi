@@ -4,12 +4,17 @@ import { createJSONStorage, persist } from "zustand/middleware";
 
 type PresenceState = {
   activePlaceId: string | null;
+  activePlaceName: string | null;
   activeUntil: number | null; // epoch ms
+  qrVerified: boolean;
 
   startSession: (placeId: string, durationMs?: number) => void;
   endSession: () => void;
+  setQrVerified: (verified: boolean) => void;
+  setActivePlaceName: (name: string) => void;
 
   isActive: (placeId: string) => boolean;
+  isSessionActive: () => boolean;
   remainingMs: () => number;
   remainingText: () => string;
 
@@ -26,7 +31,9 @@ export const usePresence = create<PresenceState>()(
   persist(
     (set, get) => ({
       activePlaceId: null,
+      activePlaceName: null,
       activeUntil: null,
+      qrVerified: false,
 
       startSession: (placeId, durationMs = TWO_HOURS_MS) => {
         const now = Date.now();
@@ -37,14 +44,32 @@ export const usePresence = create<PresenceState>()(
       },
 
       endSession: () => {
-        set({ activePlaceId: null, activeUntil: null });
+        set({
+          activePlaceId: null,
+          activePlaceName: null,
+          activeUntil: null,
+          qrVerified: false,
+        });
+      },
+
+      setQrVerified: (verified) => {
+        set({ qrVerified: verified });
+      },
+
+      setActivePlaceName: (name) => {
+        set({ activePlaceName: name });
       },
 
       cleanupIfExpired: () => {
         const { activeUntil } = get();
         if (!activeUntil) return;
         if (Date.now() >= activeUntil) {
-          set({ activePlaceId: null, activeUntil: null });
+          set({
+            activePlaceId: null,
+            activePlaceName: null,
+            activeUntil: null,
+            qrVerified: false,
+          });
         }
       },
 
@@ -53,6 +78,12 @@ export const usePresence = create<PresenceState>()(
         if (!activePlaceId || !activeUntil) return false;
         if (Date.now() >= activeUntil) return false;
         return String(placeId) === activePlaceId;
+      },
+
+      isSessionActive: () => {
+        const { activePlaceId, activeUntil } = get();
+        if (!activePlaceId || !activeUntil) return false;
+        return Date.now() < activeUntil;
       },
 
       remainingMs: () => {
@@ -78,7 +109,7 @@ export const usePresence = create<PresenceState>()(
       },
     }),
     {
-      name: "presence-v1",
+      name: "presence-v2",
       storage: createJSONStorage(() => AsyncStorage),
     }
   )

@@ -10,6 +10,8 @@ import { ThemedText } from "@/src/components/themed-text";
 import { ThemedView } from "@/src/components/themed-view";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { Fonts } from "@/src/constants/theme";
+import { usePresence } from "@/src/store/presence";
+import { verifyQR } from "@/src/services/matchService";
 
 type ActiveSession = {
   placeId: string;
@@ -75,6 +77,21 @@ export default function ScanScreen() {
     try {
       setStatus("Aktif ediliyor...");
       await setActiveSession(placeId, 2);
+
+      // Presence store + QR doğrulama
+      const presence = usePresence.getState();
+      presence.startSession(placeId);
+      try {
+        const verifyResult = await verifyQR(parseInt(placeId));
+        if (verifyResult.verified) {
+          presence.setQrVerified(true);
+          presence.setActivePlaceName(verifyResult.place_name);
+        }
+      } catch {
+        // QR doğrulama başarısız olsa bile oturumu başlat
+        presence.setQrVerified(false);
+      }
+
       // ✅ soru yok: direkt detaya
       router.replace({ pathname: "/place/[id]", params: { id: String(placeId) } });
     } finally {

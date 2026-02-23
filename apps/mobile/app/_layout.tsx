@@ -81,6 +81,13 @@ export default function RootLayout() {
                   gestureEnabled: true,
                 }}
               />
+              <Stack.Screen
+                name="match-profile-setup"
+                options={{
+                  presentation: "modal",
+                  gestureEnabled: true,
+                }}
+              />
             </Stack>
           </PreferencesProvider>
         </ErrorBoundary>

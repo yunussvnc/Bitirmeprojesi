@@ -51,6 +51,7 @@ export default function SettingsIndexScreen() {
           showArrow: true,
           keywords: ["kaydedildi", "kaydedilenler", "koleksiyon", "koleksiyonlar", "yer imleri"],
         },
+        { label: "Son Silinen Mesajlar", onPress: nav("/settings/recently-deleted"), icon: "trash", showArrow: true, keywords: ["son silinenler", "çöp kutusu", "silinen", "çöp", "silinmiş mesajlar", "silinen mesajlar"] },
         { label: "Ziyaret Geçmişi", onPress: nav("/settings/activity"), icon: "clock.arrow.circlepath", showArrow: true, keywords: ["ziyaret geçmişi", "geçmiş", "ziyaretler", "activity", "hareketler", "hareketlerin"] },
         { label: "Bildirimler", onPress: nav("/notifications"), icon: "bell", showArrow: true, keywords: ["bildirimler", "sesler", "mesaj sesleri", "uyarılar"] },
         { label: "İçerik Tercihleri", onPress: nav("/settings/content"), icon: "slider.horizontal.3", showArrow: true, keywords: ["içerik tercihleri", "içerikler", "algoritma", "gösterim"] },

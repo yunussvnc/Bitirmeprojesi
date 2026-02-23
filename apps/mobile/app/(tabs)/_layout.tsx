@@ -8,7 +8,7 @@
 import { Tabs } from "expo-router";
 import { useTheme } from "@/src/hooks/useTheme";
 import { IconSymbol, type IconSymbolName } from "@/src/components/ui/icon-symbol";
-import { StyleSheet, Platform } from "react-native";
+import { StyleSheet, Platform, Text as RNText } from "react-native";
 import { selection } from "@/src/utils/haptics";
 import { AnimatedTabBar } from "@/src/components/layout/AnimatedTabBar";
 import { TabBarVisibilityProvider } from "@/src/components/layout/TabBarVisibilityContext";
@@ -96,7 +96,7 @@ export default function TabsLayout() {
           }}
         />
         <Tabs.Screen
-          name="saved"
+          name="matching"
           options={{
             href: null,
           }}
@@ -108,6 +108,18 @@ export default function TabsLayout() {
             tabBarIcon: ({ color, focused }) => <TabIcon name="person.fill" focused={focused} color={color} />,
             // @ts-expect-error - listeners works at runtime, expo-router types are incomplete
             listeners: () => ({ tabPress: () => selection() }),
+          }}
+        />
+        <Tabs.Screen
+          name="saved"
+          options={{
+            href: null,
+          }}
+        />
+        <Tabs.Screen
+          name="messages/archive"
+          options={{
+            href: null,
           }}
         />
       </Tabs>
