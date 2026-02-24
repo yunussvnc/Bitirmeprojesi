@@ -64,8 +64,11 @@ async function fetchWithRetry(
     let detail = `API error: ${response.status}`;
     try {
       const json = JSON.parse(body);
-      if (json.detail) detail = json.detail;
-    } catch {}
+      if (json.detail) {
+        let detailMsg = typeof json.detail === 'string' ? json.detail : JSON.stringify(json.detail);
+        detail = `API error: ${response.status} - ${detailMsg}`;
+      }
+    } catch { }
     throw new Error(detail);
   } catch (error) {
     clearTimeout(timeoutId);
@@ -170,7 +173,7 @@ export async function apiUploadFile<T = { url: string }>(
       try {
         const json = JSON.parse(text);
         if (json.detail) detail = json.detail;
-      } catch {}
+      } catch { }
       throw new Error(detail);
     }
     const text = await response.text();

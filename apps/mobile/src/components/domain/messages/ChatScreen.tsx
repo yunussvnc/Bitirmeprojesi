@@ -14,15 +14,20 @@ import {
     TextInput,
     KeyboardAvoidingView,
     Platform,
+    Modal,
+    TouchableWithoutFeedback,
+    Alert,
+    Keyboard,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useRouter, useLocalSearchParams } from "expo-router";
 import { Image } from "expo-image";
 import { useTheme } from "@/src/hooks/useTheme";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
-import { lightImpact } from "@/src/utils/haptics";
+import { lightImpact, success } from "@/src/utils/haptics";
 import { useAppStore } from "@/src/store/useAppStore";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
+import * as ImagePicker from 'expo-image-picker';
 
 /* ── Types ── */
 interface Message {
@@ -35,7 +40,9 @@ interface Message {
         address: string;
         image: string;
     };
-    seen?: boolean; // Mesajın görülüp görülmediği
+    imageUri?: string; // eklenecek
+    seen?: boolean; // Mesajın görülüp görülmediği (legacy)
+    status?: "sent" | "delivered" | "read";
 }
 
 /* ── Dummy Contact Data ── */
@@ -53,7 +60,7 @@ const CONTACTS: Record<string, { name: string; avatar: string; isOnline: boolean
 /* ── Dummy Messages ── */
 const DUMMY_MESSAGES: Message[] = [
     { id: "1", text: "Selam! Nasılsın?", isMine: false, timestamp: "14:20" },
-    { id: "2", text: "İyiyim, sen nasılsın?", isMine: true, timestamp: "14:21" },
+    { id: "2", text: "İyiyim, sen nasılsın?", isMine: true, timestamp: "14:21", status: "read" },
     {
         id: "3",
         text: "Dün harika bir mekan keşfettim, sana da önermek istedim!",
@@ -71,20 +78,21 @@ const DUMMY_MESSAGES: Message[] = [
             image: "https://picsum.photos/400/200?random=42",
         },
     },
-    { id: "5", text: "Vay be çok güzel görünüyor! Boğaz manzarası varmış 😍", isMine: true, timestamp: "14:25" },
+    { id: "5", text: "Vay be çok güzel görünüyor! Boğaz manzarası varmış 😍", isMine: true, timestamp: "14:25", status: "read" },
     { id: "6", text: "Evet, köprü manzaralı. Bu akşam gidelim mi?", isMine: false, timestamp: "14:26" },
     {
         id: "7",
         text: "",
         isMine: true,
         timestamp: "14:28",
+        status: "read",
         placeCard: {
             name: "Fakülte Teras - Beyoğlu",
             address: "Beyoğlu, İstanbul",
             image: "https://picsum.photos/400/200?random=88",
         },
     },
-    { id: "8", text: "Ben de burası güzel olur dedim, ne dersin? 🎵", isMine: true, timestamp: "14:28" },
+    { id: "8", text: "Ben de burası güzel olur dedim, ne dersin? 🎵", isMine: true, timestamp: "14:28", status: "delivered" },
     { id: "9", text: "Olur ikisine de bakalım! Haritada kaydediyorum 📌", isMine: false, timestamp: "14:30" },
 ];
 
@@ -96,6 +104,9 @@ export default function ChatScreen() {
     const [inputText, setInputText] = useState("");
     const [messages, setMessages] = useState(DUMMY_MESSAGES);
     const [lastSeenId, setLastSeenId] = useState<string | null>(null);
+    const [isOptionsVisible, setIsOptionsVisible] = useState(false);
+    const [isReportVisible, setIsReportVisible] = useState(false);
+    const [reportText, setReportText] = useState("");
     const flatListRef = useRef<FlatList>(null);
 
     const contact = CONTACTS[chatId || "1"] || CONTACTS["1"];
@@ -106,7 +117,44 @@ export default function ChatScreen() {
             setLastSeenId(messages[messages.length - 1].id);
             // TODO: Backend'e seen bilgisi gönder
         }
-    }, []);
+    }, [messages]);
+
+    const handleBlock = () => {
+        setIsOptionsVisible(false);
+        // Backend TODO: Engelleme isteği gönder
+        success();
+        Alert.alert("Başarılı", `${contact.name} engellendi.`, [
+            { text: "Tamam", onPress: () => router.replace("/settings/blocked-users" as any) }
+        ]);
+    };
+
+    const handleReport = () => {
+        const charCount = reportText.trim().length;
+        if (charCount === 0) {
+            Alert.alert("Hata", "Lütfen şikayet nedeninizi yazın.");
+            return;
+        }
+        if (charCount > 500) {
+            Alert.alert("Hata", "Şikayet nedeni en fazla 500 harf olabilir.");
+            return;
+        }
+
+        setIsReportVisible(false);
+        // Backend TODO: Şikayet ve kısıtlama isteği gönder
+        success();
+        Alert.alert("Başarılı", `Şikayetiniz alındı ve ${contact.name} engellendi.`, [
+            { text: "Tamam", onPress: () => router.replace("/settings/blocked-users" as any) }
+        ]);
+    };
+
+    const handleReportTextChange = (text: string) => {
+        if (text.length <= 500) {
+            setReportText(text);
+        } else {
+            // Eğer 500 harfi geçtiyse, sadece ilk 500 harfi al
+            setReportText(text.slice(0, 500));
+        }
+    };
 
     const sendMessage = () => {
         if (!inputText.trim()) return;
@@ -116,6 +164,78 @@ export default function ChatScreen() {
             text: inputText.trim(),
             isMine: true,
             timestamp: new Date().toLocaleTimeString("tr-TR", { hour: "2-digit", minute: "2-digit" }),
+            status: "sent",
+        };
+        setMessages((prev) => [...prev, newMsg]);
+        setInputText("");
+        setTimeout(() => {
+            flatListRef.current?.scrollToEnd({ animated: true });
+        }, 100);
+    };
+
+    const handleCameraPress = () => {
+        Alert.alert(
+            "Fotoğraf Gönder",
+            "Lütfen bir seçenek belirleyin:",
+            [
+                {
+                    text: "Kamera",
+                    onPress: async () => {
+                        try {
+                            const { status } = await ImagePicker.requestCameraPermissionsAsync();
+                            if (status !== 'granted') {
+                                Alert.alert("Hata", "Kamera izni gerekiyor.");
+                                return;
+                            }
+                            const result = await ImagePicker.launchCameraAsync({
+                                mediaTypes: ['images'],
+                                quality: 0.8,
+                            });
+                            if (!result.canceled && result.assets && result.assets.length > 0) {
+                                sendImageMessage(result.assets[0].uri);
+                            }
+                        } catch (error) {
+                            Alert.alert("Hata", "Kamera başlatılamadı (Simülatör kullanıyor olabilirsiniz).");
+                        }
+                    }
+                },
+                {
+                    text: "Galeri",
+                    onPress: async () => {
+                        try {
+                            const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+                            if (status !== 'granted') {
+                                Alert.alert("Hata", "Galeri izni gerekiyor.");
+                                return;
+                            }
+                            const result = await ImagePicker.launchImageLibraryAsync({
+                                mediaTypes: ['images', 'videos'],
+                                quality: 0.8,
+                            });
+                            if (!result.canceled && result.assets && result.assets.length > 0) {
+                                sendImageMessage(result.assets[0].uri);
+                            }
+                        } catch (error) {
+                            Alert.alert("Hata", "Galeri başlatılamadı.");
+                        }
+                    }
+                },
+                {
+                    text: "İptal",
+                    style: "cancel"
+                }
+            ]
+        );
+    };
+
+    const sendImageMessage = (uri: string) => {
+        const newMsg: Message = {
+            id: String(Date.now()),
+            text: inputText.trim(),
+            imageUri: uri,
+            isMine: true,
+            timestamp: new Date().toLocaleTimeString("tr-TR", { hour: "2-digit", minute: "2-digit" }),
+            status: "sent",
         };
         setMessages((prev) => [...prev, newMsg]);
         setInputText("");
@@ -125,118 +245,159 @@ export default function ChatScreen() {
     };
 
     const renderMessage = ({ item }: { item: Message }) => {
-        // Mekan kartı mesajı
-        if (item.placeCard) {
-            return (
-                <View style={[styles.messageBubbleRow, item.isMine ? styles.myRow : styles.theirRow]}>
-                    <TouchableOpacity
-                        activeOpacity={0.8}
-                        onPress={() => {
-                            lightImpact();
-                            if (item.placeCard) {
-                                useAppStore.getState().setPendingPlaceName(item.placeCard.name);
-                            }
-                            router.replace("/(tabs)/explore" as any);
-                        }}
-                        style={[
-                            styles.placeCardBubble,
-                            {
-                                backgroundColor: item.isMine ? colors.accent.primary : colors.surface.elevated,
-                                borderColor: item.isMine ? "transparent" : colors.surface.border,
-                            },
-                        ]}
-                    >
-                        <Image
-                            source={{ uri: item.placeCard.image }}
-                            style={styles.placeCardImage}
-                            contentFit="cover"
-                        />
-                        <View style={styles.placeCardInfo}>
-                            <View style={styles.placeCardNameRow}>
-                                <IconSymbol
-                                    name="mappin.and.ellipse"
-                                    size={14}
-                                    color={item.isMine ? "#fff" : colors.accent.primary}
-                                />
-                                <Text
-                                    style={[
-                                        styles.placeCardName,
-                                        { color: item.isMine ? "#fff" : colors.text.primary },
-                                    ]}
-                                    numberOfLines={1}
-                                >
-                                    {item.placeCard.name}
-                                </Text>
-                            </View>
-                            <Text
-                                style={[
-                                    styles.placeCardAddr,
-                                    { color: item.isMine ? "rgba(255,255,255,0.7)" : colors.text.tertiary },
-                                ]}
-                                numberOfLines={1}
-                            >
-                                {item.placeCard.address}
-                            </Text>
-                            <Text style={[styles.placeCardHint, { color: item.isMine ? "rgba(255,255,255,0.5)" : colors.accent.primary }]}>
-                                Keşfet'te aç →
-                            </Text>
-                        </View>
-                        <Text
-                            style={[
-                                styles.msgTime,
-                                { color: item.isMine ? "rgba(255,255,255,0.6)" : colors.text.tertiary, paddingHorizontal: 12, paddingBottom: 8 },
-                            ]}
-                        >
-                            {item.timestamp}
-                        </Text>
-                    </TouchableOpacity>
-                </View>
-            );
-        }
-
-        // Son mesaj ise ve benim değilse altında "Görüldü" göstergesi
         const isLast = messages[messages.length - 1]?.id === item.id;
 
         // Tik durumu: sadece kendi mesajlarında
         let tickIcon = null;
         if (item.isMine) {
-            if (isLast && lastSeenId === item.id) {
+            const isRead = item.status === 'read' || item.seen || (isLast && lastSeenId === item.id);
+            const isDelivered = item.status === 'delivered';
+            const tickColor = "#2ecc71"; // yeşil renk talep edildi
+
+            if (isRead) {
                 // Çift tik (görüldü)
-                tickIcon = <MaterialCommunityIcons name="check-all" size={18} color={colors.accent.primary} style={{ marginLeft: 4 }} />;
+                tickIcon = <MaterialCommunityIcons name="check-all" size={16} color={tickColor} style={{ marginLeft: 4 }} />;
+            } else if (isDelivered) {
+                // Çift tik (iletildi)
+                tickIcon = <MaterialCommunityIcons name="check-all" size={16} color={tickColor} style={{ marginLeft: 4 }} />;
             } else {
-                // Tek tik (gönderildi)
-                tickIcon = <MaterialCommunityIcons name="check" size={18} color={colors.text.tertiary} style={{ marginLeft: 4 }} />;
+                // Tek tik (iletilmedi/gönderildi)
+                tickIcon = <MaterialCommunityIcons name="check" size={16} color={tickColor} style={{ marginLeft: 4 }} />;
             }
+        }
+
+        // Mekan kartı mesajı
+        if (item.placeCard) {
+            return (
+                <View style={[styles.messageBubbleRow, item.isMine ? styles.myRow : styles.theirRow]}>
+                    <View style={[styles.messageContentWrapper, item.isMine ? { alignItems: 'flex-end' } : { alignItems: 'flex-start' }]}>
+                        <TouchableOpacity
+                            activeOpacity={0.8}
+                            onPress={() => {
+                                lightImpact();
+                                if (item.placeCard) {
+                                    useAppStore.getState().setPendingPlaceName(item.placeCard.name);
+                                }
+                                router.replace("/(tabs)/explore" as any);
+                            }}
+                            style={[
+                                styles.newPlaceCardBubble,
+                                {
+                                    backgroundColor: item.isMine ? "#ffffff" : colors.surface.elevated,
+                                    borderColor: colors.surface.border,
+                                },
+                            ]}
+                        >
+                            <Image
+                                source={{ uri: item.placeCard.image }}
+                                style={styles.placeCardImage}
+                                contentFit="cover"
+                            />
+                            <View style={styles.placeCardInfo}>
+                                <View style={styles.placeCardNameRow}>
+                                    <IconSymbol
+                                        name="mappin.and.ellipse"
+                                        size={14}
+                                        color={item.isMine ? "#2ecc71" : colors.accent.primary}
+                                    />
+                                    <Text
+                                        style={[
+                                            styles.placeCardName,
+                                            { color: item.isMine ? "#000000" : colors.text.primary },
+                                        ]}
+                                        numberOfLines={1}
+                                    >
+                                        {item.placeCard.name}
+                                    </Text>
+                                </View>
+                                <Text
+                                    style={[
+                                        styles.placeCardAddr,
+                                        { color: item.isMine ? "rgba(0,0,0,0.6)" : colors.text.tertiary },
+                                    ]}
+                                    numberOfLines={1}
+                                >
+                                    {item.placeCard.address}
+                                </Text>
+                                <Text style={[styles.placeCardHint, { color: item.isMine ? "#2ecc71" : colors.accent.primary }]}>
+                                    Keşfet'te aç →
+                                </Text>
+                            </View>
+                        </TouchableOpacity>
+                        <View style={[styles.newTimeRow, item.isMine ? { justifyContent: 'flex-end' } : { justifyContent: 'flex-start' }]}>
+                            <Text
+                                style={[
+                                    styles.newMsgTime,
+                                    { color: colors.text.tertiary },
+                                ]}
+                            >
+                                {item.timestamp}
+                            </Text>
+                            {item.isMine && tickIcon}
+                        </View>
+                    </View>
+                </View>
+            );
+        }
+
+        // Fotoğraflı mesaj
+        if (item.imageUri) {
+            return (
+                <View style={[styles.messageBubbleRow, item.isMine ? styles.myRow : styles.theirRow]}>
+                    <View style={[styles.messageContentWrapper, item.isMine ? { alignItems: 'flex-end' } : { alignItems: 'flex-start' }]}>
+                        <View style={[styles.imageBubble, item.isMine ? { backgroundColor: "#ffffff" } : { backgroundColor: colors.surface.elevated, borderColor: colors.surface.border, borderWidth: 1 }]}>
+                            <Image
+                                source={{ uri: item.imageUri }}
+                                style={styles.messageImage}
+                                contentFit="cover"
+                            />
+                            {item.text ? (
+                                <Text style={[styles.newMsgText, { color: item.isMine ? "#000000" : colors.text.primary, marginTop: 8 }]}>
+                                    {item.text}
+                                </Text>
+                            ) : null}
+                        </View>
+                        <View style={[styles.newTimeRow, item.isMine ? { justifyContent: 'flex-end' } : { justifyContent: 'flex-start' }]}>
+                            <Text style={[styles.newMsgTime, { color: colors.text.tertiary }]}>
+                                {item.timestamp}
+                            </Text>
+                            {item.isMine && tickIcon}
+                        </View>
+                    </View>
+                </View>
+            );
         }
 
         return (
             <View style={[styles.messageBubbleRow, item.isMine ? styles.myRow : styles.theirRow]}>
-                <View
-                    style={[
-                        styles.bubble,
-                        item.isMine
-                            ? [styles.myBubble, { backgroundColor: colors.accent.primary }]
-                            : [styles.theirBubble, { backgroundColor: colors.surface.elevated, borderColor: colors.surface.border }],
-                    ]}
-                >
-                    <Text
+                <View style={[styles.messageContentWrapper, item.isMine ? { alignItems: 'flex-end' } : { alignItems: 'flex-start' }]}>
+                    <View
                         style={[
-                            styles.msgText,
-                            { color: item.isMine ? "#fff" : colors.text.primary },
+                            styles.newBubble,
+                            item.isMine
+                                ? { backgroundColor: "#ffffff" }
+                                : { backgroundColor: colors.surface.elevated, borderColor: colors.surface.border, borderWidth: 1 },
                         ]}
                     >
-                        {item.text}
-                    </Text>
-                    <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end' }}>
                         <Text
                             style={[
-                                styles.msgTime,
-                                { color: item.isMine ? "rgba(255,255,255,0.6)" : colors.text.tertiary },
+                                styles.newMsgText,
+                                { color: item.isMine ? "#000000" : colors.text.primary },
+                            ]}
+                        >
+                            {item.text}
+                        </Text>
+                    </View>
+                    <View style={[styles.newTimeRow, item.isMine ? { justifyContent: 'flex-end' } : { justifyContent: 'flex-start' }]}>
+                        <Text
+                            style={[
+                                styles.newMsgTime,
+                                { color: colors.text.tertiary },
                             ]}
                         >
                             {item.timestamp}
                         </Text>
-                        {tickIcon}
+                        {item.isMine && tickIcon}
                     </View>
                 </View>
             </View>
@@ -244,103 +405,208 @@ export default function ChatScreen() {
     };
 
     return (
-        <KeyboardAvoidingView
-            style={[styles.container, { backgroundColor: colors.background.primary }]}
-            behavior={Platform.OS === "ios" ? "padding" : undefined}
-            keyboardVerticalOffset={0}
-        >
-            {/* ── Header ── */}
-            <View
-                style={[
-                    styles.header,
-                    {
-                        paddingTop: insets.top + 4,
-                        borderBottomColor: colors.surface.border,
-                        backgroundColor: colors.background.primary,
-                    },
-                ]}
+        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()} accessible={false}>
+            <KeyboardAvoidingView
+                style={[styles.container, { backgroundColor: colors.background.primary }]}
+                behavior={Platform.OS === "ios" ? "padding" : undefined}
+                keyboardVerticalOffset={0}
             >
-                <TouchableOpacity
-                    style={styles.backBtn}
-                    hitSlop={12}
-                    activeOpacity={0.7}
-                    onPress={() => {
-                        lightImpact();
-                        router.back();
+                {/* ── Header ── */}
+                <View
+                    style={[
+                        styles.header,
+                        {
+                            paddingTop: insets.top + 4,
+                            borderBottomColor: colors.surface.border,
+                            backgroundColor: colors.background.primary,
+                        },
+                    ]}
+                >
+                    <TouchableOpacity
+                        style={styles.backBtn}
+                        hitSlop={12}
+                        activeOpacity={0.7}
+                        onPress={() => {
+                            lightImpact();
+                            router.back();
+                        }}
+                    >
+                        <IconSymbol name="chevron.left" size={26} color={colors.text.primary} />
+                    </TouchableOpacity>
+
+                    <TouchableOpacity style={styles.headerProfile} activeOpacity={0.8}>
+                        <Image source={{ uri: contact.avatar }} style={styles.headerAvatar} contentFit="cover" />
+                        <View>
+                            <Text style={[styles.headerName, { color: colors.text.primary }]} numberOfLines={1}>
+                                {contact.name}
+                            </Text>
+                            <Text style={[styles.headerStatus, { color: contact.isOnline ? "#2ecc71" : colors.text.tertiary }]}>
+                                {contact.isOnline ? "Çevrimiçi" : "Son görülme: bugün"}
+                            </Text>
+                        </View>
+                    </TouchableOpacity>
+
+                    <View style={styles.headerActions}>
+                        <TouchableOpacity
+                            hitSlop={8}
+                            activeOpacity={0.7}
+                            onPress={() => {
+                                lightImpact();
+                                setIsOptionsVisible(true);
+                            }}
+                        >
+                            <IconSymbol name="ellipsis" size={24} color={colors.text.primary} />
+                        </TouchableOpacity>
+                    </View>
+                </View>
+
+                {/* ── Messages ── */}
+                <FlatList
+                    ref={flatListRef}
+                    style={{ flex: 1 }}
+                    data={messages}
+                    keyExtractor={(item) => item.id}
+                    renderItem={renderMessage}
+                    contentContainerStyle={styles.messageList}
+                    showsVerticalScrollIndicator={false}
+                    keyboardShouldPersistTaps="handled"
+                    keyboardDismissMode="on-drag"
+                    onContentSizeChange={() => flatListRef.current?.scrollToEnd({ animated: false })}
+                />
+
+                {/* ── Input Bar ── */}
+                <View
+                    style={[
+                        styles.inputBar,
+                        {
+                            paddingBottom: insets.bottom || 12,
+                            backgroundColor: colors.background.primary,
+                            borderTopColor: colors.surface.border,
+                        },
+                    ]}
+                >
+                    <View style={[styles.inputContainer, { backgroundColor: colors.surface.elevated, borderColor: colors.surface.border }]}>
+                        <TouchableOpacity style={styles.cameraBtn} activeOpacity={0.7} onPress={handleCameraPress}>
+                            <IconSymbol name="camera.fill" size={20} color={colors.accent.primary} />
+                        </TouchableOpacity>
+
+                        <TextInput
+                            style={[styles.textInput, { color: colors.text.primary }]}
+                            placeholder="Mesaj yaz..."
+                            placeholderTextColor={colors.text.tertiary}
+                            value={inputText}
+                            onChangeText={setInputText}
+                            multiline
+                            maxLength={1000}
+                            cursorColor={colors.accent.primary}
+                        />
+                    </View>
+
+                    {inputText.trim() ? (
+                        <TouchableOpacity
+                            style={styles.sendButton}
+                            activeOpacity={0.7}
+                            onPress={sendMessage}
+                        >
+                            <IconSymbol name="paperplane" size={20} color={colors.accent.primary} />
+                        </TouchableOpacity>
+                    ) : null}
+                </View>
+
+                {/* ── Options Modal ── */}
+                <Modal
+                    visible={isOptionsVisible}
+                    transparent
+                    animationType="fade"
+                    onRequestClose={() => setIsOptionsVisible(false)}
+                >
+                    <TouchableWithoutFeedback onPress={() => setIsOptionsVisible(false)}>
+                        <View style={styles.modalOverlay}>
+                            <TouchableWithoutFeedback>
+                                <View style={[styles.optionsModal, { backgroundColor: colors.surface.elevated }]}>
+                                    <TouchableOpacity style={styles.optionBtn} onPress={handleBlock}>
+                                        <Text style={[styles.optionText, { color: "#e74c3c" }]}>Engelle</Text>
+                                    </TouchableOpacity>
+                                    <View style={[styles.separator, { backgroundColor: colors.surface.border }]} />
+                                    <TouchableOpacity
+                                        style={styles.optionBtn}
+                                        onPress={() => {
+                                            setIsOptionsVisible(false);
+                                            setTimeout(() => setIsReportVisible(true), 300); // Wait for modal fade out
+                                        }}
+                                    >
+                                        <Text style={[styles.optionText, { color: "#e74c3c" }]}>Şikayet Et ve Kısıtla</Text>
+                                    </TouchableOpacity>
+                                    <View style={[styles.separator, { backgroundColor: colors.surface.border }]} />
+                                    <TouchableOpacity style={styles.optionBtn} onPress={() => setIsOptionsVisible(false)}>
+                                        <Text style={[styles.optionText, { color: colors.text.primary, fontWeight: "500" }]}>İptal</Text>
+                                    </TouchableOpacity>
+                                </View>
+                            </TouchableWithoutFeedback>
+                        </View>
+                    </TouchableWithoutFeedback>
+                </Modal>
+
+                {/* ── Report Modal ── */}
+                <Modal
+                    visible={isReportVisible}
+                    transparent
+                    animationType="slide"
+                    onRequestClose={() => {
+                        setIsReportVisible(false);
+                        setReportText("");
                     }}
                 >
-                    <IconSymbol name="chevron.left" size={26} color={colors.text.primary} />
-                </TouchableOpacity>
-
-                <TouchableOpacity style={styles.headerProfile} activeOpacity={0.8}>
-                    <Image source={{ uri: contact.avatar }} style={styles.headerAvatar} contentFit="cover" />
-                    <View>
-                        <Text style={[styles.headerName, { color: colors.text.primary }]} numberOfLines={1}>
-                            {contact.name}
-                        </Text>
-                        <Text style={[styles.headerStatus, { color: contact.isOnline ? "#2ecc71" : colors.text.tertiary }]}>
-                            {contact.isOnline ? "Çevrimiçi" : "Son görülme: bugün"}
-                        </Text>
-                    </View>
-                </TouchableOpacity>
-
-                <View style={styles.headerActions}>
-                    <TouchableOpacity hitSlop={8} activeOpacity={0.7}>
-                        <IconSymbol name="info.circle" size={22} color={colors.text.primary} />
-                    </TouchableOpacity>
-                </View>
-            </View>
-
-            {/* ── Messages ── */}
-            <FlatList
-                ref={flatListRef}
-                data={messages}
-                keyExtractor={(item) => item.id}
-                renderItem={renderMessage}
-                contentContainerStyle={styles.messageList}
-                showsVerticalScrollIndicator={false}
-                onContentSizeChange={() => flatListRef.current?.scrollToEnd({ animated: false })}
-            />
-
-            {/* ── Input Bar ── */}
-            <View
-                style={[
-                    styles.inputBar,
-                    {
-                        paddingBottom: insets.bottom || 12,
-                        backgroundColor: colors.background.primary,
-                        borderTopColor: colors.surface.border,
-                    },
-                ]}
-            >
-                <View style={[styles.inputContainer, { backgroundColor: colors.surface.elevated, borderColor: colors.surface.border }]}>
-                    <TouchableOpacity style={styles.cameraBtn} activeOpacity={0.7}>
-                        <IconSymbol name="camera.fill" size={20} color={colors.accent.primary} />
-                    </TouchableOpacity>
-
-                    <TextInput
-                        style={[styles.textInput, { color: colors.text.primary }]}
-                        placeholder="Mesaj yaz..."
-                        placeholderTextColor={colors.text.tertiary}
-                        value={inputText}
-                        onChangeText={setInputText}
-                        multiline
-                        maxLength={1000}
-                        cursorColor={colors.accent.primary}
-                    />
-                </View>
-
-                {inputText.trim() ? (
-                    <TouchableOpacity
-                        style={styles.sendButton}
-                        activeOpacity={0.7}
-                        onPress={sendMessage}
+                    <KeyboardAvoidingView
+                        style={{ flex: 1 }}
+                        behavior={Platform.OS === "ios" ? "padding" : undefined}
                     >
-                        <IconSymbol name="paperplane" size={20} color={colors.accent.primary} />
-                    </TouchableOpacity>
-                ) : null}
-            </View>
-        </KeyboardAvoidingView>
+                        <View style={styles.reportModalContainer}>
+                            <View style={[styles.reportModalContent, { backgroundColor: colors.surface.elevated }]}>
+                                <View style={styles.reportHeader}>
+                                    <Text style={[styles.reportTitle, { color: colors.text.primary }]}>Şikayet Nedeni</Text>
+                                    <TouchableOpacity onPress={() => {
+                                        setIsReportVisible(false);
+                                        setReportText("");
+                                    }}>
+                                        <IconSymbol name="xmark" size={24} color={colors.text.tertiary} />
+                                    </TouchableOpacity>
+                                </View>
+                                <Text style={[styles.reportDesc, { color: colors.text.secondary }]}>
+                                    {contact.name} adlı kullanıcıyı neden şikayet etmek istiyorsunuz? (Maksimum 500 harf)
+                                </Text>
+                                <View style={[styles.reportInputWrapper, { borderColor: colors.surface.border, backgroundColor: colors.background.primary }]}>
+                                    <TextInput
+                                        style={[styles.reportInput, { color: colors.text.primary }]}
+                                        placeholder="Lütfen detaylıca açıklayın..."
+                                        placeholderTextColor={colors.text.tertiary}
+                                        multiline
+                                        value={reportText}
+                                        onChangeText={handleReportTextChange}
+                                        textAlignVertical="top"
+                                        cursorColor={colors.accent.primary}
+                                    />
+                                </View>
+                                <Text style={[
+                                    styles.wordCount,
+                                    { color: reportText.length >= 500 ? "#e74c3c" : colors.text.secondary }
+                                ]}>
+                                    {reportText.length} / 500 harf
+                                </Text>
+
+                                <TouchableOpacity
+                                    style={[styles.submitReportBtn, { backgroundColor: colors.accent.primary }]}
+                                    activeOpacity={0.8}
+                                    onPress={handleReport}
+                                >
+                                    <Text style={styles.submitReportText}>Gönder ve Engelle</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    </KeyboardAvoidingView>
+                </Modal>
+            </KeyboardAvoidingView>
+        </TouchableWithoutFeedback>
     );
 }
 
@@ -392,7 +658,7 @@ const styles = StyleSheet.create({
         paddingBottom: 8,
     },
     messageBubbleRow: {
-        marginBottom: 6,
+        marginBottom: 16,
     },
     myRow: {
         alignItems: "flex-end",
@@ -400,34 +666,43 @@ const styles = StyleSheet.create({
     theirRow: {
         alignItems: "flex-start",
     },
-    bubble: {
-        maxWidth: "78%",
-        borderRadius: 18,
-        paddingHorizontal: 14,
-        paddingTop: 10,
-        paddingBottom: 6,
+    messageContentWrapper: {
+        maxWidth: "80%",
     },
-    myBubble: {
-        borderBottomRightRadius: 4,
+    newBubble: {
+        borderRadius: 8,
+        paddingHorizontal: 12,
+        paddingVertical: 8,
     },
-    theirBubble: {
-        borderBottomLeftRadius: 4,
-        borderWidth: 1,
-    },
-    msgText: {
+    newMsgText: {
         fontSize: 15,
         lineHeight: 21,
     },
-    msgTime: {
-        fontSize: 11,
+    newTimeRow: {
+        flexDirection: "row",
+        alignItems: "center",
         marginTop: 4,
-        alignSelf: "flex-end",
+    },
+    newMsgTime: {
+        fontSize: 12,
+    },
+
+    /* Image Message */
+    imageBubble: {
+        borderRadius: 12,
+        padding: 4,
+        overflow: 'hidden',
+    },
+    messageImage: {
+        width: 220,
+        height: 220,
+        borderRadius: 8,
     },
 
     /* Place Card */
-    placeCardBubble: {
-        maxWidth: "78%",
-        borderRadius: 16,
+    newPlaceCardBubble: {
+        width: 260,
+        borderRadius: 12,
         overflow: "hidden",
         borderWidth: 1,
     },
@@ -496,5 +771,86 @@ const styles = StyleSheet.create({
     sendButton: {
         padding: 10,
         marginBottom: 1,
+    },
+
+    /* Modals */
+    modalOverlay: {
+        flex: 1,
+        backgroundColor: "rgba(0,0,0,0.5)",
+        justifyContent: "flex-end",
+        paddingHorizontal: 16,
+        paddingBottom: 40,
+    },
+    optionsModal: {
+        borderRadius: 16,
+        overflow: "hidden",
+    },
+    optionBtn: {
+        paddingVertical: 18,
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    optionText: {
+        fontSize: 17,
+        fontWeight: "400",
+    },
+    separator: {
+        height: StyleSheet.hairlineWidth,
+        width: "100%",
+    },
+
+    /* Report Modal */
+    reportModalContainer: {
+        flex: 1,
+        backgroundColor: "rgba(0,0,0,0.5)",
+        justifyContent: "center",
+        padding: 20,
+    },
+    reportModalContent: {
+        borderRadius: 16,
+        padding: 20,
+        width: "100%",
+    },
+    reportHeader: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
+        marginBottom: 12,
+    },
+    reportTitle: {
+        fontSize: 18,
+        fontWeight: "700",
+    },
+    reportDesc: {
+        fontSize: 14,
+        marginBottom: 16,
+        lineHeight: 20,
+    },
+    reportInputWrapper: {
+        borderWidth: 1,
+        borderRadius: 12,
+        height: 150,
+        marginBottom: 8,
+        padding: 12,
+    },
+    reportInput: {
+        flex: 1,
+        fontSize: 15,
+        lineHeight: 22,
+    },
+    wordCount: {
+        fontSize: 12,
+        alignSelf: "flex-end",
+        marginBottom: 20,
+    },
+    submitReportBtn: {
+        borderRadius: 12,
+        paddingVertical: 14,
+        alignItems: "center",
+    },
+    submitReportText: {
+        color: "#fff",
+        fontSize: 16,
+        fontWeight: "600",
     },
 });

@@ -173,11 +173,11 @@ export default function MatchScreen() {
   }, [hasProfile, activePlaceId]);
 
   useEffect(() => {
-    if (hasProfile && activeTab === "swipe") {
+    if (hasProfile && activeTab === "swipe" && !profileLoading) {
       const placeId = activePlaceId ? parseInt(activePlaceId) : undefined;
       fetchCandidates(placeId);
     }
-  }, [hasProfile, activePlaceId, activeTab]);
+  }, [hasProfile, activePlaceId, activeTab, profileLoading]);
 
   const currentCandidate = candidates[currentIndex];
 
@@ -340,94 +340,94 @@ export default function MatchScreen() {
           profile.smoking ||
           profile.star_sign ||
           profile.about) && (
-          <View style={[cardStyle, styles.hingePadding]}>
-            {profile.height && (
-              <View style={styles.hingeTraitRow}>
-                <IconSymbol
-                  name="ruler.fill"
-                  size={16}
-                  color={colors.text.primary}
-                />
-                <ThemedText
-                  style={[
-                    styles.hingeTraitText,
-                    { color: colors.text.primary },
-                  ]}
-                >
-                  {profile.height} cm
-                </ThemedText>
-              </View>
-            )}
-            {profile.education && (
-              <View style={styles.hingeTraitRow}>
-                <IconSymbol
-                  name="graduationcap.fill"
-                  size={16}
-                  color={colors.text.primary}
-                />
-                <ThemedText
-                  style={[
-                    styles.hingeTraitText,
-                    { color: colors.text.primary },
-                  ]}
-                >
-                  {profile.education}
-                </ThemedText>
-              </View>
-            )}
-            {profile.smoking && (
-              <View style={styles.hingeTraitRow}>
-                <IconSymbol
-                  name="smoke.fill"
-                  size={16}
-                  color={colors.text.primary}
-                />
-                <ThemedText
-                  style={[
-                    styles.hingeTraitText,
-                    { color: colors.text.primary },
-                  ]}
-                >
-                  {profile.smoking}
-                </ThemedText>
-              </View>
-            )}
-            {profile.star_sign && (
-              <View style={styles.hingeTraitRow}>
-                <IconSymbol
-                  name="star.fill"
-                  size={16}
-                  color={colors.text.primary}
-                />
-                <ThemedText
-                  style={[
-                    styles.hingeTraitText,
-                    { color: colors.text.primary },
-                  ]}
-                >
-                  {profile.star_sign}
-                </ThemedText>
-              </View>
-            )}
-            {profile.about?.map((item: any, idx: number) => (
-              <View key={`about-${idx}`} style={styles.hingeTraitRow}>
-                <IconSymbol
-                  name={(item.icon || "person.fill") as any}
-                  size={16}
-                  color={colors.text.primary}
-                />
-                <ThemedText
-                  style={[
-                    styles.hingeTraitText,
-                    { color: colors.text.primary },
-                  ]}
-                >
-                  {item.text}
-                </ThemedText>
-              </View>
-            ))}
-          </View>
-        )}
+            <View style={[cardStyle, styles.hingePadding]}>
+              {profile.height && (
+                <View style={styles.hingeTraitRow}>
+                  <IconSymbol
+                    name="ruler.fill"
+                    size={16}
+                    color={colors.text.primary}
+                  />
+                  <ThemedText
+                    style={[
+                      styles.hingeTraitText,
+                      { color: colors.text.primary },
+                    ]}
+                  >
+                    {profile.height} cm
+                  </ThemedText>
+                </View>
+              )}
+              {profile.education && (
+                <View style={styles.hingeTraitRow}>
+                  <IconSymbol
+                    name="graduationcap.fill"
+                    size={16}
+                    color={colors.text.primary}
+                  />
+                  <ThemedText
+                    style={[
+                      styles.hingeTraitText,
+                      { color: colors.text.primary },
+                    ]}
+                  >
+                    {profile.education}
+                  </ThemedText>
+                </View>
+              )}
+              {profile.smoking && (
+                <View style={styles.hingeTraitRow}>
+                  <IconSymbol
+                    name="smoke.fill"
+                    size={16}
+                    color={colors.text.primary}
+                  />
+                  <ThemedText
+                    style={[
+                      styles.hingeTraitText,
+                      { color: colors.text.primary },
+                    ]}
+                  >
+                    {profile.smoking}
+                  </ThemedText>
+                </View>
+              )}
+              {profile.star_sign && (
+                <View style={styles.hingeTraitRow}>
+                  <IconSymbol
+                    name="star.fill"
+                    size={16}
+                    color={colors.text.primary}
+                  />
+                  <ThemedText
+                    style={[
+                      styles.hingeTraitText,
+                      { color: colors.text.primary },
+                    ]}
+                  >
+                    {profile.star_sign}
+                  </ThemedText>
+                </View>
+              )}
+              {profile.about?.map((item: any, idx: number) => (
+                <View key={`about-${idx}`} style={styles.hingeTraitRow}>
+                  <IconSymbol
+                    name={(item.icon || "person.fill") as any}
+                    size={16}
+                    color={colors.text.primary}
+                  />
+                  <ThemedText
+                    style={[
+                      styles.hingeTraitText,
+                      { color: colors.text.primary },
+                    ]}
+                  >
+                    {item.text}
+                  </ThemedText>
+                </View>
+              ))}
+            </View>
+          )}
 
         {/* Prompt 1 */}
         {profile.prompts?.length > 0 && (

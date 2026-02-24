@@ -57,6 +57,13 @@ const { height: SCREEN_HEIGHT } = Dimensions.get("window");
 const REVIEW_SHEET_COLLAPSED = Math.min(SCREEN_HEIGHT * 0.55, 520);
 const REVIEW_SHEET_EXPANDED = SCREEN_HEIGHT * 0.72;
 
+const MOCK_NIGHTCLUB_MENU = [
+  { id: 1, category: "Şişeler", items: [{ name: "Absolut Vodka 70cl", price: "2500 ₺" }, { name: "Chivas Regal 12 Yo 70cl", price: "3500 ₺" }, { name: "Moët & Chandon Ice", price: "5000 ₺" }] },
+  { id: 2, category: "Kokteyller", items: [{ name: "Margarita", price: "350 ₺" }, { name: "Long Island Iced Tea", price: "450 ₺" }, { name: "Negroni", price: "400 ₺" }] },
+  { id: 3, category: "Bira", items: [{ name: "Efes Pilsen", price: "200 ₺" }, { name: "Corona", price: "250 ₺" }] },
+  { id: 4, category: "Atıştırmalık", items: [{ name: "Karışık Çerez", price: "200 ₺" }, { name: "Meyve Tabağı", price: "350 ₺" }, { name: "Peynir Tabağı", price: "450 ₺" }] },
+];
+
 export default function PlaceDetailScreen() {
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
@@ -85,6 +92,10 @@ export default function PlaceDetailScreen() {
   const reviewSheetHeight = useRef(new RNAnimated.Value(REVIEW_SHEET_COLLAPSED)).current;
   const reviewStartHeightRef = useRef(REVIEW_SHEET_COLLAPSED);
   const reviewScrollOffsetRef = useRef(0);
+
+  const [showMenu, setShowMenu] = useState(false);
+  const menuSheetHeight = useRef(new RNAnimated.Value(REVIEW_SHEET_COLLAPSED)).current;
+  const menuStartHeightRef = useRef(REVIEW_SHEET_COLLAPSED);
 
   const handleAreaPanResponder = useMemo(
     () =>
@@ -136,6 +147,50 @@ export default function PlaceDetailScreen() {
     [reviewSheetHeight]
   );
 
+  const handleMenuPanResponder = useMemo(
+    () =>
+      PanResponder.create({
+        onStartShouldSetPanResponder: () => true,
+        onMoveShouldSetPanResponder: () => true,
+        onPanResponderTerminationRequest: () => false,
+        onPanResponderMove: (_, g) => {
+          const nextH = menuStartHeightRef.current - g.dy;
+          const clamped = Math.max(0, Math.min(REVIEW_SHEET_EXPANDED, nextH));
+          menuSheetHeight.setValue(clamped);
+        },
+        onPanResponderRelease: (_, g) => {
+          const currentH = menuStartHeightRef.current - g.dy;
+          if (currentH < REVIEW_SHEET_COLLAPSED * 0.3 || (g.dy > 50 && g.vy > 0.5)) {
+            setShowMenu(false);
+            setTimeout(() => {
+              menuSheetHeight.setValue(REVIEW_SHEET_COLLAPSED);
+              menuStartHeightRef.current = REVIEW_SHEET_COLLAPSED;
+            }, 50);
+            return;
+          }
+          if (g.dy < -30 && currentH > REVIEW_SHEET_COLLAPSED + 50) {
+            menuStartHeightRef.current = REVIEW_SHEET_EXPANDED;
+            RNAnimated.spring(menuSheetHeight, {
+              toValue: REVIEW_SHEET_EXPANDED,
+              useNativeDriver: false,
+              friction: 10,
+              tension: 60,
+            }).start();
+            return;
+          }
+          const clampedH = Math.max(REVIEW_SHEET_COLLAPSED, Math.min(REVIEW_SHEET_EXPANDED, currentH));
+          menuStartHeightRef.current = clampedH;
+          RNAnimated.spring(menuSheetHeight, {
+            toValue: clampedH,
+            useNativeDriver: false,
+            friction: 10,
+            tension: 60,
+          }).start();
+        },
+      }),
+    [menuSheetHeight]
+  );
+
   useEffect(() => {
     if (showReviews) {
       reviewSheetHeight.setValue(REVIEW_SHEET_COLLAPSED);
@@ -145,6 +200,16 @@ export default function PlaceDetailScreen() {
       reviewStartHeightRef.current = REVIEW_SHEET_COLLAPSED;
     }
   }, [showReviews, reviewSheetHeight]);
+
+  useEffect(() => {
+    if (showMenu) {
+      menuSheetHeight.setValue(REVIEW_SHEET_COLLAPSED);
+      menuStartHeightRef.current = REVIEW_SHEET_COLLAPSED;
+    } else {
+      menuSheetHeight.setValue(REVIEW_SHEET_COLLAPSED);
+      menuStartHeightRef.current = REVIEW_SHEET_COLLAPSED;
+    }
+  }, [showMenu, menuSheetHeight]);
 
   // Load place data
   useEffect(() => {
@@ -403,15 +468,29 @@ export default function PlaceDetailScreen() {
         <View style={styles.titleSection}>
           <View style={styles.titleRow}>
             <Text style={[h1Style, { fontSize: 24, marginBottom: spacing.sm, flex: 1 }]}>{place?.name || `Mekan #${id}`}</Text>
-            <TouchableOpacity
-              onPress={() => {
-                lightImpact();
-                setShowReviews(true);
-              }}
-              style={[styles.reviewButton, { borderColor: colors.surface.border }]}
-            >
-              <Text style={[bodySmallStyle, { color: colors.text.secondary }]}>Yorumlar</Text>
-            </TouchableOpacity>
+            <View style={{ alignItems: "flex-end", gap: 8, marginTop: 12 }}>
+              <TouchableOpacity
+                onPress={() => {
+                  lightImpact();
+                  setShowReviews(true);
+                }}
+                style={[styles.reviewButton, { borderColor: "#22c55e", backgroundColor: "rgba(34, 197, 94, 0.1)" }]}
+              >
+                <Text style={{ fontSize: 14, color: "#22c55e", fontWeight: "600" }}>Yorumlar</Text>
+              </TouchableOpacity>
+
+              {(place?.category?.toLowerCase().includes("gece") || place?.category?.toLowerCase().includes("club") || place?.category?.toLowerCase().includes("kulüb") || place?.category?.toLowerCase().includes("pub")) && (
+                <TouchableOpacity
+                  onPress={() => {
+                    lightImpact();
+                    setShowMenu(true);
+                  }}
+                  style={[styles.reviewButton, { borderColor: "#22c55e", backgroundColor: "rgba(34, 197, 94, 0.1)" }]}
+                >
+                  <Text style={{ fontSize: 14, color: "#22c55e", fontWeight: "600" }}>Menü</Text>
+                </TouchableOpacity>
+              )}
+            </View>
           </View>
 
           <View style={styles.metaRow}>
@@ -825,6 +904,75 @@ export default function PlaceDetailScreen() {
           </>
         )}
       </Modal>
+
+      {/* Menu Modal */}
+      <Modal
+        visible={showMenu}
+        transparent
+        animationType="none"
+        onRequestClose={() => setShowMenu(false)}
+        statusBarTranslucent
+      >
+        {showMenu && (
+          <View style={styles.reviewBackdrop}>
+            <Pressable
+              style={[styles.reviewBackdropPressable, { backgroundColor: colors.overlay.medium }]}
+              onPress={() => setShowMenu(false)}
+            />
+            <View style={{ width: "100%" }}>
+              <RNAnimated.View
+                style={[
+                  styles.reviewSheet,
+                  {
+                    backgroundColor: colors.background.primary,
+                    paddingBottom: insets.bottom || spacing.base,
+                    height: menuSheetHeight,
+                  },
+                ]}
+              >
+                <View>
+                  <View style={styles.reviewDragArea} {...handleMenuPanResponder.panHandlers}>
+                    <View style={styles.reviewHandleRow}>
+                      <View style={[styles.reviewHandle, { backgroundColor: colors.surface.border }]} />
+                    </View>
+                    <View style={styles.reviewHeaderRow}>
+                      <Text style={[h2Style, { fontSize: 20 }]}>Menü</Text>
+                      <TouchableOpacity
+                        onPress={() => {
+                          lightImpact();
+                          setShowMenu(false);
+                        }}
+                        activeOpacity={0.7}
+                      >
+                        <IconSymbol name="xmark.circle.fill" size={28} color={colors.text.tertiary} />
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                </View>
+
+                <ScrollView
+                  contentContainerStyle={styles.reviewScrollContent}
+                  showsVerticalScrollIndicator={false}
+                >
+                  {MOCK_NIGHTCLUB_MENU.map((category) => (
+                    <View key={category.id} style={{ marginBottom: spacing.lg }}>
+                      <Text style={[h2Style, { fontSize: 18, marginBottom: spacing.sm, color: colors.accent.primary }]}>
+                        {category.category}
+                      </Text>
+                      {category.items.map((item, idx) => (
+                        <View key={idx} style={[styles.menuItemRow, { borderBottomColor: colors.surface.border }]}>
+                          <Text style={[bodyStyle, { flex: 1, color: colors.text.secondary }]}>{item.name}</Text>
+                          <Text style={[bodyStyle, { fontWeight: "600", color: colors.text.primary }]}>{item.price}</Text>
+                        </View>
+                      ))}
+                    </View>
+                  ))}
+                </ScrollView>
+              </RNAnimated.View>
+            </View>
+          </View>
+        )}
+      </Modal>
     </Animated.View>
   );
 }
@@ -877,7 +1025,7 @@ const styles = StyleSheet.create({
     paddingVertical: spacing.xs,
     borderRadius: 999,
     borderWidth: 1,
-    alignSelf: "flex-start",
+    alignSelf: "flex-end",
   },
   reviewBackdrop: {
     flex: 1,
@@ -1243,5 +1391,12 @@ const styles = StyleSheet.create({
   similarCardWrapper: {
     width: 280,
     marginRight: spacing.base,
+  },
+  menuItemRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingVertical: 12,
+    borderBottomWidth: 1,
   },
 });

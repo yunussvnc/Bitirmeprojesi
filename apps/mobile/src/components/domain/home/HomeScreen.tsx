@@ -17,6 +17,8 @@ import {
   ViewToken,
   Animated,
   Easing,
+  Keyboard,
+  TouchableWithoutFeedback,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { FlatList } from "react-native-gesture-handler";
@@ -105,101 +107,103 @@ function HomeListHeader({
 }) {
   const { colors } = useTheme();
   return (
-    <>
-      <View style={styles.header}>
-        <View style={styles.headerLeft}>
-          <View style={styles.titleRow}>
-            <Text style={[createTextStyle("title", colors.text.primary), styles.title]}>Ana Sayfa</Text>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+      <View>
+        <View style={styles.header}>
+          <View style={styles.headerLeft}>
+            <View style={styles.titleRow}>
+              <Text style={[createTextStyle("title", colors.text.primary), styles.title]}>Ana Sayfa</Text>
+            </View>
           </View>
+          <TouchableOpacity
+            onPress={onSavedPress}
+            style={[styles.savedBtn, { backgroundColor: colors.surface.elevated }]}
+            activeOpacity={0.7}
+          >
+            <IconSymbol name="bookmark.fill" size={22} color={colors.text.secondary} />
+          </TouchableOpacity>
         </View>
-        <TouchableOpacity
-          onPress={onSavedPress}
-          style={[styles.savedBtn, { backgroundColor: colors.surface.elevated }]}
-          activeOpacity={0.7}
-        >
-          <IconSymbol name="bookmark.fill" size={22} color={colors.text.secondary} />
-        </TouchableOpacity>
-      </View>
 
-      <View style={styles.searchWrap}>
-        <ChatInput
-          value={query}
-          onChangeText={setQuery}
-          onSubmit={runRecommend}
-          placeholder="Bugün nasıl bir yere gidelim?"
-          loading={aiLoading}
-          containerStyle={styles.chatInput}
-        />
-      </View>
-
-      <View style={styles.filterSummaryRow}>
-        <TouchableOpacity
-          onPress={() => {
-            lightImpact();
-            setFilterSheetOpen(true);
-          }}
-          activeOpacity={0.7}
-          style={[
-            styles.filterTrigger,
-            {
-              backgroundColor: hasActiveFilters ? colors.accent.primary + "12" : colors.background.tertiary,
-              borderColor: hasActiveFilters ? colors.accent.primary + "30" : colors.surface.border,
-            },
-          ]}
-        >
-          <IconSymbol
-            name="slider.horizontal.3"
-            size={15}
-            color={hasActiveFilters ? colors.accent.primary : colors.text.tertiary}
+        <View style={styles.searchWrap}>
+          <ChatInput
+            value={query}
+            onChangeText={setQuery}
+            onSubmit={runRecommend}
+            placeholder="Bugün nasıl bir yere gidelim?"
+            loading={aiLoading}
+            containerStyle={styles.chatInput}
           />
-          <Text style={[styles.filterTriggerText, { color: hasActiveFilters ? colors.accent.primary : colors.text.secondary }]}>
-            {activeFilterCount > 0 ? `Filtreler (${activeFilterCount})` : "Filtreler"}
-          </Text>
-        </TouchableOpacity>
+        </View>
 
-        {summaryChips.map((chip) => (
-          <View key={chip} style={[styles.summaryTag, { backgroundColor: colors.background.tertiary }]}>
-            <Text style={[styles.summaryTagText, { color: colors.text.secondary }]}>{chip}</Text>
-          </View>
-        ))}
-        {summaryExtra > 0 && (
-          <View style={[styles.summaryTag, { backgroundColor: colors.background.tertiary }]}>
-            <Text style={[styles.summaryTagText, { color: colors.text.tertiary }]}>+{summaryExtra}</Text>
-          </View>
-        )}
-        {hasAnyFilter && (
-          <TouchableOpacity onPress={clearAll} hitSlop={8} activeOpacity={0.7}>
-            <IconSymbol name="xmark.circle.fill" size={18} color={colors.text.tertiary} />
+        <View style={styles.filterSummaryRow}>
+          <TouchableOpacity
+            onPress={() => {
+              lightImpact();
+              setFilterSheetOpen(true);
+            }}
+            activeOpacity={0.7}
+            style={[
+              styles.filterTrigger,
+              {
+                backgroundColor: hasActiveFilters ? colors.accent.primary + "12" : colors.background.tertiary,
+                borderColor: hasActiveFilters ? colors.accent.primary + "30" : colors.surface.border,
+              },
+            ]}
+          >
+            <IconSymbol
+              name="slider.horizontal.3"
+              size={15}
+              color={hasActiveFilters ? colors.accent.primary : colors.text.tertiary}
+            />
+            <Text style={[styles.filterTriggerText, { color: hasActiveFilters ? colors.accent.primary : colors.text.secondary }]}>
+              {activeFilterCount > 0 ? `Filtreler (${activeFilterCount})` : "Filtreler"}
+            </Text>
           </TouchableOpacity>
+
+          {summaryChips.map((chip) => (
+            <View key={chip} style={[styles.summaryTag, { backgroundColor: colors.background.tertiary }]}>
+              <Text style={[styles.summaryTagText, { color: colors.text.secondary }]}>{chip}</Text>
+            </View>
+          ))}
+          {summaryExtra > 0 && (
+            <View style={[styles.summaryTag, { backgroundColor: colors.background.tertiary }]}>
+              <Text style={[styles.summaryTagText, { color: colors.text.tertiary }]}>+{summaryExtra}</Text>
+            </View>
+          )}
+          {hasAnyFilter && (
+            <TouchableOpacity onPress={clearAll} hitSlop={8} activeOpacity={0.7}>
+              <IconSymbol name="xmark.circle.fill" size={18} color={colors.text.tertiary} />
+            </TouchableOpacity>
+          )}
+        </View>
+
+        {isAiMode && aiSummary ? (
+          <View
+            style={[
+              styles.summaryBanner,
+              { backgroundColor: colors.accent.primary + "10", borderColor: colors.accent.primary + "25" },
+            ]}
+          >
+            <View style={styles.summaryBannerIcon}>
+              <IconSymbol name="sparkles" size={14} color={colors.accent.primary} />
+            </View>
+            <Text style={[styles.summaryBannerText, { color: colors.text.secondary }]} numberOfLines={3}>
+              {aiSummary}
+            </Text>
+            <TouchableOpacity onPress={() => setAiSummary("")} hitSlop={8}>
+              <IconSymbol name="xmark" size={14} color={colors.text.tertiary} />
+            </TouchableOpacity>
+          </View>
+        ) : null}
+
+        {aiLoading && (
+          <View style={[styles.aiLoadingWrap, { backgroundColor: colors.surface.elevated }]}>
+            <IconSymbol name="sparkles" size={16} color={colors.accent.primary} />
+            <Text style={[styles.aiLoadingText, { color: colors.text.secondary }]}>AI düşünüyor...</Text>
+          </View>
         )}
       </View>
-
-      {isAiMode && aiSummary ? (
-        <View
-          style={[
-            styles.summaryBanner,
-            { backgroundColor: colors.accent.primary + "10", borderColor: colors.accent.primary + "25" },
-          ]}
-        >
-          <View style={styles.summaryBannerIcon}>
-            <IconSymbol name="sparkles" size={14} color={colors.accent.primary} />
-          </View>
-          <Text style={[styles.summaryBannerText, { color: colors.text.secondary }]} numberOfLines={3}>
-            {aiSummary}
-          </Text>
-          <TouchableOpacity onPress={() => setAiSummary("")} hitSlop={8}>
-            <IconSymbol name="xmark" size={14} color={colors.text.tertiary} />
-          </TouchableOpacity>
-        </View>
-      ) : null}
-
-      {aiLoading && (
-        <View style={[styles.aiLoadingWrap, { backgroundColor: colors.surface.elevated }]}>
-          <IconSymbol name="sparkles" size={16} color={colors.accent.primary} />
-          <Text style={[styles.aiLoadingText, { color: colors.text.secondary }]}>AI düşünüyor...</Text>
-        </View>
-      )}
-    </>
+    </TouchableWithoutFeedback>
   );
 }
 
@@ -594,6 +598,7 @@ export default function HomeScreen() {
             <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} tintColor={colors.accent.primary} />
           }
           showsVerticalScrollIndicator={false}
+          keyboardDismissMode="on-drag"
           keyboardShouldPersistTaps="handled"
           onScroll={(e) => handleScroll(e.nativeEvent.contentOffset.y)}
           scrollEventThrottle={16}

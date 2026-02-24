@@ -22,12 +22,12 @@ export class AppError extends Error {
     this.code = code;
     this.userMessage = userMessage;
     this.retryable = retryable;
-    
+
     // Maintains proper stack trace for where our error was thrown (only available on V8)
     if (Error.captureStackTrace) {
       Error.captureStackTrace(this, AppError);
     }
-    
+
     // Set the prototype explicitly (required for TypeScript/Babel)
     Object.setPrototypeOf(this, AppError.prototype);
   }
@@ -83,7 +83,7 @@ export function handleApiError(error: unknown): AppError {
   if (msg.includes('API error:')) {
     const match = msg.match(/API error: (\d+)/);
     const status = match ? parseInt(match[1]) : 500;
-    
+
     if (status === 401) {
       return new AppError(
         'Unauthorized',
@@ -92,7 +92,7 @@ export function handleApiError(error: unknown): AppError {
         false
       );
     }
-    
+
     if (status === 404) {
       return new AppError(
         'Not found',
@@ -101,7 +101,7 @@ export function handleApiError(error: unknown): AppError {
         false
       );
     }
-    
+
     if (status >= 500) {
       return new AppError(
         'Server error',
@@ -110,11 +110,14 @@ export function handleApiError(error: unknown): AppError {
         true
       );
     }
-    
+
+    // Extract actual message from backend if present
+    const userMessage = msg.includes(' - ') ? msg.split(' - ')[1] : 'Bir hata oluştu. Lütfen tekrar deneyin.';
+
     return new AppError(
       msg,
       'API_ERROR',
-      'Bir hata oluştu. Lütfen tekrar deneyin.',
+      userMessage,
       true
     );
   }
