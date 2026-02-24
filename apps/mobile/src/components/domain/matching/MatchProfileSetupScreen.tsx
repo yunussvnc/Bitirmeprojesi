@@ -12,6 +12,7 @@ import {
     ActivityIndicator,
     Pressable,
     Keyboard,
+    Modal,
 } from "react-native";
 import { router } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -52,6 +53,53 @@ const INTEREST_OPTIONS = [
     "Doğa", "Dans", "Fotoğrafçılık", "Yoga", "Kahve", "Oyun",
     "Teknoloji", "Sanat", "Moda", "Şarap",
 ];
+const PROMPT_OPTIONS = [
+    "Mükemmel pazar günüm...",
+    "Benimle ilgili bilmediğin bir şey...",
+    "Hayatımdaki en büyük başarım...",
+    "Gizli yeteneğim...",
+    "Bu yılki en büyük hedefim...",
+    "Bana mesaj atman için harika bir sebep:",
+    "Birlikte yaparsak çok eğleneceğimiz şey:",
+];
+
+const UNIVERSITIES = [
+    "Acıbadem Üniversitesi", "Altınbaş Üniversitesi", "Bahçeşehir Üniversitesi", "Beykent Üniversitesi",
+    "Bezmiâlem Vakıf Üniversitesi", "Biruni Üniversitesi", "Boğaziçi Üniversitesi", "Doğuş Üniversitesi",
+    "Fatih Sultan Mehmet Vakıf Üniversitesi", "Fenerbahçe Üniversitesi", "Galatasaray Üniversitesi",
+    "Haliç Üniversitesi", "Işık Üniversitesi", "İbn Haldun Üniversitesi", "İstanbul Atlas Üniversitesi",
+    "İstanbul Arel Üniversitesi", "İstanbul Aydın Üniversitesi", "İstanbul Bilgi Üniversitesi",
+    "İstanbul Galata Üniversitesi", "İstanbul Gedik Üniversitesi", "İstanbul Gelişim Üniversitesi",
+    "İstanbul Health and Technology University (İSTÜN)", "İstanbul Kent Üniversitesi", "İstanbul Kültür Üniversitesi",
+    "İstanbul Medeniyet Üniversitesi", "İstanbul Medipol Üniversitesi", "İstanbul Okan Üniversitesi",
+    "İstanbul Rumeli Üniversitesi", "İstanbul Sabahattin Zaim Üniversitesi", "İstanbul Teknik Üniversitesi (İTÜ)",
+    "İstanbul Ticaret Üniversitesi", "İstanbul Topkapı Üniversitesi", "İstanbul Üniversitesi",
+    "İstanbul Üniversitesi-Cerrahpaşa", "İstanbul Yeni Yüzyıl Üniversitesi", "İstinye Üniversitesi",
+    "Kadir Has Üniversitesi", "Koç Üniversitesi", "Maltepe Üniversitesi", "Marmara Üniversitesi", "MEF Üniversitesi",
+    "Mimar Sinan Güzel Sanatlar Üniversitesi", "Milli Savunma Üniversitesi", "Nişantaşı Üniversitesi",
+    "Özyeğin Üniversitesi", "Piri Reis Üniversitesi", "Sabancı Üniversitesi", "Sağlık Bilimleri Üniversitesi",
+    "Türk-Alman Üniversitesi", "Türk-Japon Bilim ve Teknoloji Üniversitesi", "Üsküdar Üniversitesi",
+    "Yeditepe Üniversitesi", "Yıldız Teknik Üniversitesi"
+];
+
+const JOBS = [
+    "Yazılım Mühendisi", "Veri Bilimci", "Siber Güvenlik Uzmanı", "Mobil Geliştirici", "Yapay Zeka Uzmanı",
+    "Sistem Analisti", "Bulut Bilişim Uzmanı", "Bilgisayar Mühendisi", "Web Tasarımcısı", "UX/UI Tasarımcısı",
+    "Oyun Geliştirici", "IT Yöneticisi", "Doktor", "Diş Hekimi", "Eczacı", "Hemşire", "Fizyoterapist", "Psikolog",
+    "Diyetisyen", "Veteriner", "Optisyen", "Biyolog", "Genetik Uzmanı", "Avukat", "Hakim", "Savcı", "Noter",
+    "Arabulucu", "Hukuk Danışmanı", "İnşaat Mühendisi", "Makine Mühendisi", "Elektrik-Elektronik Mühendisi",
+    "Mimarlık", "İç Mimar", "Endüstri Mühendisi", "Kimya Mühendisi", "Havacılık Mühendisi", "Gemi İnşa Mühendisi",
+    "Mekatronik Mühendisi", "Pilot", "Kabin Memuru", "Hava Trafik Kontrolörü", "Lojistik Uzmanı", "Gümrük Müşaviri",
+    "Kaptan", "Akademisyen", "Öğretmen", "Okul Öncesi Eğitmeni", "Özel Eğitim Öğretmeni", "Antrenör", "Sporcu",
+    "Menajer", "Ekonomist", "Muhasebeci", "Mali Müşavir", "Bankacı", "Borsa Analisti", "Yatırım Danışmanı",
+    "İnsan Kaynakları Uzmanı", "Pazarlama Uzmanı", "Satış Temsilcisi", "Halkla İlişkiler (PR) Uzmanı", "Reklam Yazarı",
+    "Sosyal Medya Yöneticisi", "İçerik Üreticisi", "Gazeteci", "Editör", "Grafik Tasarımcı", "Ressam", "Heykeltıraş",
+    "Fotoğrafçı", "Müzisyen", "Oyuncu", "Yönetmen", "Ses Sanatçısı", "Moda Tasarımcısı", "Stilist", "Model", "Aşçı",
+    "Gastronomi Uzmanı", "Barista", "Garson", "Sommelier", "Otel İşletmecisi", "Turist Rehberi", "Polis", "Asker",
+    "İtfaiyeci", "Güvenlik Görevlisi", "Emlak Danışmanı", "Sigortacı", "Müteahhit", "Çiftçi", "Ziraat Mühendisi",
+    "Peyzaj Mimarı", "Marangoz", "Terzi", "Kuyumcu", "Kuaför", "Makyaj Sanatçısı", "Estetisyen", "Kurye", "Şoför",
+    "Teknisyen", "İşçi", "Memur", "Girişimci", "Freelancer", "Öğrenci"
+];
 
 const MAX_PHOTOS = 6;
 
@@ -73,6 +121,17 @@ export default function MatchProfileSetupScreen() {
     const [saving, setSaving] = useState(false);
     const [focusedInput, setFocusedInput] = useState<string | null>(null);
 
+    // Prompt Modal State
+    const [isPromptModalVisible, setIsPromptModalVisible] = useState(false);
+    const [selectedPromptOption, setSelectedPromptOption] = useState("");
+    const [tempPromptAnswer, setTempPromptAnswer] = useState("");
+    const [editingPromptIndex, setEditingPromptIndex] = useState<number | null>(null);
+
+    // Selection Modal State
+    type SelectionField = "starSign" | "interests" | "education" | "job" | null;
+    const [activeSelectionField, setActiveSelectionField] = useState<SelectionField>(null);
+    const [searchQuery, setSearchQuery] = useState("");
+
     const [displayName, setDisplayName] = useState(myProfile?.display_name || "");
     const [age, setAge] = useState(myProfile?.age?.toString() || "");
     const [bio, setBio] = useState(myProfile?.bio || "");
@@ -86,6 +145,7 @@ export default function MatchProfileSetupScreen() {
     const [interests, setInterests] = useState<string[]>(myProfile?.interests || []);
     const [starSign, setStarSign] = useState(myProfile?.star_sign || "");
     const [exercise, setExercise] = useState(myProfile?.exercise || "");
+    const [prompts, setPrompts] = useState<{ question: string; answer: string }[]>(myProfile?.prompts || []);
 
     const inputBg = isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)";
     const inputBorder = isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)";
@@ -97,6 +157,42 @@ export default function MatchProfileSetupScreen() {
         } else {
             setInterests([...interests, interest]);
         }
+    };
+
+    const handleOpenPromptModal = (index: number | null = null) => {
+        setEditingPromptIndex(index);
+        if (index !== null) {
+            setSelectedPromptOption(prompts[index].question);
+            setTempPromptAnswer(prompts[index].answer);
+        } else {
+            setSelectedPromptOption(PROMPT_OPTIONS[0]);
+            setTempPromptAnswer("");
+        }
+        setIsPromptModalVisible(true);
+    };
+
+    const handleSavePrompt = () => {
+        if (!tempPromptAnswer.trim()) {
+            Alert.alert("Eksik Bilgi", "Lütfen soruya bir cevap yazın.");
+            return;
+        }
+
+        const newPrompts = [...prompts];
+        if (editingPromptIndex !== null) {
+            newPrompts[editingPromptIndex] = { question: selectedPromptOption, answer: tempPromptAnswer.trim() };
+        } else {
+            if (newPrompts.length >= 3) {
+                Alert.alert("Sınır Aşıldı", "En fazla 3 soru ekleyebilirsin.");
+                return;
+            }
+            newPrompts.push({ question: selectedPromptOption, answer: tempPromptAnswer.trim() });
+        }
+        setPrompts(newPrompts);
+        setIsPromptModalVisible(false);
+    };
+
+    const handleRemovePrompt = (index: number) => {
+        setPrompts(prompts.filter((_, i) => i !== index));
     };
 
     const isLocalUri = (uri: string) => uri.startsWith("file://") || uri.startsWith("ph://") || uri.startsWith("content://");
@@ -168,8 +264,32 @@ export default function MatchProfileSetupScreen() {
             Alert.alert("Eksik Bilgi", "Lütfen ismini gir.");
             return;
         }
-        if (!age.trim() || isNaN(Number(age)) || Number(age) < 18 || Number(age) > 99) {
-            Alert.alert("Geçersiz Yaş", "Lütfen geçerli bir yaş gir (18-99).");
+        if (/\d/.test(displayName)) {
+            Alert.alert("Geçersiz İsim", "İsimde rakam kullanılamaz.");
+            return;
+        }
+
+        const numAge = Number(age);
+        if (!age.trim() || isNaN(numAge) || numAge < 18 || numAge > 70) {
+            Alert.alert("Geçersiz Yaş", "Yaş 18 ile 70 arasında olmalıdır.");
+            return;
+        }
+
+        const numHeight = Number(height);
+        if (height.trim() && (isNaN(numHeight) || numHeight < 100 || numHeight > 230)) {
+            Alert.alert("Geçersiz Boy", "Boy 100 ile 230 cm arasında olmalıdır.");
+            return;
+        }
+
+        const trimmedEdu = education.trim();
+        if (trimmedEdu && !UNIVERSITIES.includes(trimmedEdu)) {
+            Alert.alert("Geçersiz Eğitim", "Lütfen listedeki üniversitelerden birini girin veya listeden seçin.");
+            return;
+        }
+
+        const trimmedJob = locationText.trim();
+        if (trimmedJob && !JOBS.includes(trimmedJob)) {
+            Alert.alert("Geçersiz Meslek", "Lütfen listedeki mesleklerden birini girin veya listeden seçin.");
             return;
         }
 
@@ -197,6 +317,7 @@ export default function MatchProfileSetupScreen() {
                 interests: interests.length > 0 ? interests : undefined,
                 star_sign: starSign || undefined,
                 exercise: exercise || undefined,
+                prompts: prompts.length > 0 ? prompts : undefined,
             };
 
             await createProfile(data);
@@ -260,6 +381,73 @@ export default function MatchProfileSetupScreen() {
         );
     };
 
+    const renderSelectionRow = (
+        icon: any,
+        label: string,
+        value: string | string[] | undefined,
+        field: SelectionField
+    ) => {
+        let displayValue = "";
+        if (Array.isArray(value)) {
+            displayValue = value.length > 0 ? value.join(", ") : "Ekle";
+        } else {
+            displayValue = value || "Ekle";
+        }
+        const hasValue = Array.isArray(value) ? value.length > 0 : !!value;
+
+        return (
+            <TouchableOpacity
+                style={[styles.selectionRow, { backgroundColor: inputBg, borderColor: inputBorder }]}
+                onPress={() => {
+                    setSearchQuery("");
+                    setActiveSelectionField(field);
+                }}
+            >
+                <View style={styles.selectionRowLeft}>
+                    <IconSymbol name={icon} size={18} color={colors.text.secondary} />
+                    <ThemedText style={[styles.selectionRowLabel, { color: textColor }]}>{label}</ThemedText>
+                </View>
+                <View style={styles.selectionRowRight}>
+                    <ThemedText style={[styles.selectionRowValue, { color: hasValue ? textColor : colors.text.tertiary }]} numberOfLines={1}>
+                        {displayValue}
+                    </ThemedText>
+                    <IconSymbol name="chevron.right" size={16} color={colors.text.tertiary} />
+                </View>
+            </TouchableOpacity>
+        );
+    };
+
+    const renderInlineSelection = (icon: any, label: string, options: string[], value: string, setValue: (v: string) => void) => {
+        return (
+            <View style={{ marginBottom: 16 }}>
+                <View style={{ flexDirection: "row", alignItems: "center", marginBottom: 8, paddingHorizontal: 4 }}>
+                    <IconSymbol name={icon} size={16} color={colors.text.secondary} />
+                    <ThemedText style={{ color: colors.text.secondary, fontSize: 13, fontWeight: "600", marginLeft: 6, textTransform: "uppercase", letterSpacing: 0.5 }}>
+                        {label}
+                    </ThemedText>
+                </View>
+                <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={[styles.chipRow, { flexWrap: "nowrap" }]} style={{ paddingHorizontal: 4 }}>
+                    {options.map((opt) => {
+                        const isSelected = value === opt;
+                        return (
+                            <TouchableOpacity
+                                key={opt}
+                                style={[
+                                    styles.pillChip,
+                                    { backgroundColor: isSelected ? ACCENT : inputBg },
+                                    isSelected && styles.pillChipActiveGlow
+                                ]}
+                                onPress={() => setValue(isSelected ? "" : opt)}
+                            >
+                                <ThemedText style={[styles.pillChipText, { color: isSelected ? "#000" : textColor }]}>{opt}</ThemedText>
+                            </TouchableOpacity>
+                        );
+                    })}
+                </ScrollView>
+            </View>
+        );
+    };
+
     const isFormBusy = profileLoading || saving;
 
     return (
@@ -297,7 +485,16 @@ export default function MatchProfileSetupScreen() {
                         </ThemedText>
                     </View>
                     <View style={styles.photoGrid}>
-                        {Array.from({ length: MAX_PHOTOS }).map((_, i) => renderPhotoBox(i))}
+                        <View style={styles.photoRow}>
+                            {renderPhotoBox(0)}
+                            {renderPhotoBox(1)}
+                            {renderPhotoBox(2)}
+                        </View>
+                        <View style={styles.photoRow}>
+                            {renderPhotoBox(3)}
+                            {renderPhotoBox(4)}
+                            {renderPhotoBox(5)}
+                        </View>
                     </View>
 
                     {/* Required Fields */}
@@ -354,7 +551,7 @@ export default function MatchProfileSetupScreen() {
                     </Pressable>
 
                     {/* Bio */}
-                    <View style={[styles.sectionHeader, { marginTop: 24 }]}>
+                    <View style={styles.sectionHeader}>
                         <ThemedText style={[styles.sectionLabel, { color: textColor }]}>
                             Kendinden Bahset
                         </ThemedText>
@@ -384,34 +581,67 @@ export default function MatchProfileSetupScreen() {
                         />
                     </Pressable>
 
+                    {/* Prompts Section */}
+                    <View style={[styles.sectionHeader, { marginTop: 24, marginBottom: 12, flexDirection: "row", justifyContent: "space-between", alignItems: "center" }]}>
+                        <View>
+                            <ThemedText style={[styles.sectionLabel, { color: textColor }]}>
+                                Sorular
+                            </ThemedText>
+                            <ThemedText style={[styles.sectionHint, { color: colors.text.tertiary }]}>
+                                Profiline kişilik kat
+                            </ThemedText>
+                        </View>
+                        {prompts.length < 3 && (
+                            <TouchableOpacity onPress={() => handleOpenPromptModal(null)} style={styles.addPromptBtn}>
+                                <IconSymbol name="plus" size={20} color={ACCENT} />
+                            </TouchableOpacity>
+                        )}
+                    </View>
+
+                    {prompts.map((item, index) => (
+                        <View key={index} style={[styles.promptCard, { backgroundColor: inputBg, borderColor: inputBorder }]}>
+                            <View style={{ flex: 1 }}>
+                                <ThemedText style={[styles.promptQuestion, { color: ACCENT }]}>{item.question}</ThemedText>
+                                <ThemedText style={[styles.promptAnswer, { color: textColor }]}>{item.answer}</ThemedText>
+                            </View>
+                            <View style={styles.promptActions}>
+                                <TouchableOpacity onPress={() => handleOpenPromptModal(index)} style={styles.promptActionBtn}>
+                                    <IconSymbol name="pencil" size={18} color={colors.text.secondary} />
+                                </TouchableOpacity>
+                                <TouchableOpacity onPress={() => handleRemovePrompt(index)} style={styles.promptActionBtn}>
+                                    <IconSymbol name="trash" size={18} color="#FF3B30" />
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    ))}
+
                     {/* About You */}
-                    <View style={[styles.sectionHeader, { marginTop: 32 }]}>
+                    <View style={[styles.sectionHeader, { marginTop: 32, marginBottom: 12 }]}>
                         <ThemedText style={[styles.sectionLabel, { color: textColor }]}>
-                            Hakkında (İsteğe Bağlı)
+                            Hayat Tarzı & Hakkında
                         </ThemedText>
                     </View>
 
-                    {/* Gender */}
-                    <ThemedText style={[styles.chipGroupLabel, { color: colors.text.secondary }]}>Cinsiyet</ThemedText>
-                    <View style={styles.chipRow}>
-                        {GENDER_OPTIONS.map((opt) => {
-                            const isSelected = gender === opt;
-                            return (
-                                <TouchableOpacity
-                                    key={opt}
-                                    style={[
-                                        styles.pillChip,
-                                        { backgroundColor: isSelected ? ACCENT : (isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.04)") },
-                                        isSelected && styles.pillChipActiveGlow
-                                    ]}
-                                    onPress={() => setGender(isSelected ? "" : opt)}
-                                >
-                                    <ThemedText style={[styles.pillChipText, { color: isSelected ? "#000" : textColor }]}>
-                                        {opt}
-                                    </ThemedText>
-                                </TouchableOpacity>
-                            );
-                        })}
+                    {renderInlineSelection("person.fill", "Cinsiyet", GENDER_OPTIONS, gender, setGender)}
+                    {renderInlineSelection("heart.fill", "Ne Arıyorum", LOOKING_FOR_OPTIONS, lookingFor, setLookingFor)}
+                    {renderSelectionRow("star.fill", "Burç", starSign, "starSign")}
+                    {renderSelectionRow("sparkles", "İlgi Alanları", interests, "interests")}
+
+                    <View style={[styles.sectionHeader, { marginTop: 24, marginBottom: 12 }]}>
+                        <ThemedText style={[styles.sectionLabel, { color: textColor }]}>
+                            Alışkanlıklar
+                        </ThemedText>
+                    </View>
+
+                    {renderInlineSelection("flame.fill", "Sigara", SMOKING_OPTIONS, smoking, setSmoking)}
+                    {renderInlineSelection("drop.fill", "İçki", DRINKING_OPTIONS, drinking, setDrinking)}
+                    {renderInlineSelection("figure.run", "Egzersiz", EXERCISE_OPTIONS, exercise, setExercise)}
+
+                    {/* Basic Info */}
+                    <View style={[styles.sectionHeader, { marginTop: 24, marginBottom: 12 }]}>
+                        <ThemedText style={[styles.sectionLabel, { color: textColor }]}>
+                            Diğer Detaylar
+                        </ThemedText>
                     </View>
 
                     {/* Height */}
@@ -419,7 +649,7 @@ export default function MatchProfileSetupScreen() {
                         onPress={() => heightRef.current?.focus()}
                         style={[
                             styles.floatingInputContainer,
-                            { backgroundColor: inputBg, borderColor: focusedInput === "height" ? ACCENT : inputBorder, marginTop: 16 },
+                            { backgroundColor: inputBg, borderColor: focusedInput === "height" ? ACCENT : inputBorder },
                             focusedInput === "height" && styles.inputGlow
                         ]}
                     >
@@ -438,180 +668,10 @@ export default function MatchProfileSetupScreen() {
                     </Pressable>
 
                     {/* Education */}
-                    <Pressable
-                        onPress={() => eduRef.current?.focus()}
-                        style={[
-                            styles.floatingInputContainer,
-                            { backgroundColor: inputBg, borderColor: focusedInput === "education" ? ACCENT : inputBorder },
-                            focusedInput === "education" && styles.inputGlow
-                        ]}
-                    >
-                        <ThemedText style={[styles.floatingLabel, { color: focusedInput === "education" ? ACCENT : colors.text.secondary }]}>EĞİTİM</ThemedText>
-                        <TextInput
-                            ref={eduRef}
-                            value={education}
-                            onChangeText={setEducation}
-                            placeholder="Üniversite, lise vb."
-                            placeholderTextColor={colors.text.tertiary}
-                            style={[styles.floatingInput, { color: textColor }]}
-                            onFocus={() => setFocusedInput("education")}
-                            onBlur={() => setFocusedInput(null)}
-                        />
-                    </Pressable>
+                    {renderSelectionRow("book.fill", "Eğitim (İsteğe Bağlı)", education, "education")}
 
                     {/* Working Location/Job */}
-                    <Pressable
-                        onPress={() => jobRef.current?.focus()}
-                        style={[
-                            styles.floatingInputContainer,
-                            { backgroundColor: inputBg, borderColor: focusedInput === "job" ? ACCENT : inputBorder },
-                            focusedInput === "job" && styles.inputGlow
-                        ]}
-                    >
-                        <ThemedText style={[styles.floatingLabel, { color: focusedInput === "job" ? ACCENT : colors.text.secondary }]}>MESLEK / ÇALIŞMA YERİ</ThemedText>
-                        <TextInput
-                            ref={jobRef}
-                            value={locationText}
-                            onChangeText={setLocationText}
-                            placeholder="Örn: Yazılım Mühendisi"
-                            placeholderTextColor={colors.text.tertiary}
-                            style={[styles.floatingInput, { color: textColor }]}
-                            onFocus={() => setFocusedInput("job")}
-                            onBlur={() => setFocusedInput(null)}
-                        />
-                    </Pressable>
-
-                    {/* Looking For */}
-                    <ThemedText style={[styles.chipGroupLabel, { color: colors.text.secondary }]}>Ne Arıyorum</ThemedText>
-                    <View style={styles.chipRow}>
-                        {LOOKING_FOR_OPTIONS.map((opt) => {
-                            const isSelected = lookingFor === opt;
-                            return (
-                                <TouchableOpacity
-                                    key={opt}
-                                    style={[
-                                        styles.pillChip,
-                                        { backgroundColor: isSelected ? ACCENT : (isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.04)") },
-                                        isSelected && styles.pillChipActiveGlow
-                                    ]}
-                                    onPress={() => setLookingFor(isSelected ? "" : opt)}
-                                >
-                                    <ThemedText style={[styles.pillChipText, { color: isSelected ? "#000" : textColor }]}>
-                                        {opt}
-                                    </ThemedText>
-                                </TouchableOpacity>
-                            );
-                        })}
-                    </View>
-
-                    {/* Lifestyle */}
-                    <ThemedText style={[styles.chipGroupLabel, { color: colors.text.secondary }]}>Sigara</ThemedText>
-                    <View style={styles.chipRow}>
-                        {SMOKING_OPTIONS.map((opt) => {
-                            const isSelected = smoking === opt;
-                            return (
-                                <TouchableOpacity
-                                    key={opt}
-                                    style={[
-                                        styles.pillChip,
-                                        { backgroundColor: isSelected ? ACCENT : (isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.04)") },
-                                        isSelected && styles.pillChipActiveGlow
-                                    ]}
-                                    onPress={() => setSmoking(isSelected ? "" : opt)}
-                                >
-                                    <ThemedText style={[styles.pillChipText, { color: isSelected ? "#000" : textColor }]}>{opt}</ThemedText>
-                                </TouchableOpacity>
-                            );
-                        })}
-                    </View>
-
-                    <ThemedText style={[styles.chipGroupLabel, { color: colors.text.secondary }]}>İçki</ThemedText>
-                    <View style={styles.chipRow}>
-                        {DRINKING_OPTIONS.map((opt) => {
-                            const isSelected = drinking === opt;
-                            return (
-                                <TouchableOpacity
-                                    key={opt}
-                                    style={[
-                                        styles.pillChip,
-                                        { backgroundColor: isSelected ? ACCENT : (isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.04)") },
-                                        isSelected && styles.pillChipActiveGlow
-                                    ]}
-                                    onPress={() => setDrinking(isSelected ? "" : opt)}
-                                >
-                                    <ThemedText style={[styles.pillChipText, { color: isSelected ? "#000" : textColor }]}>{opt}</ThemedText>
-                                </TouchableOpacity>
-                            );
-                        })}
-                    </View>
-
-                    <ThemedText style={[styles.chipGroupLabel, { color: colors.text.secondary }]}>Egzersiz</ThemedText>
-                    <View style={styles.chipRow}>
-                        {EXERCISE_OPTIONS.map((opt) => {
-                            const isSelected = exercise === opt;
-                            return (
-                                <TouchableOpacity
-                                    key={opt}
-                                    style={[
-                                        styles.pillChip,
-                                        { backgroundColor: isSelected ? ACCENT : (isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.04)") },
-                                        isSelected && styles.pillChipActiveGlow
-                                    ]}
-                                    onPress={() => setExercise(isSelected ? "" : opt)}
-                                >
-                                    <ThemedText style={[styles.pillChipText, { color: isSelected ? "#000" : textColor }]}>{opt}</ThemedText>
-                                </TouchableOpacity>
-                            );
-                        })}
-                    </View>
-
-                    <ThemedText style={[styles.chipGroupLabel, { color: colors.text.secondary }]}>Burç</ThemedText>
-                    <View style={styles.chipRow}>
-                        {STAR_SIGN_OPTIONS.map((opt) => {
-                            const isSelected = starSign === opt;
-                            return (
-                                <TouchableOpacity
-                                    key={opt}
-                                    style={[
-                                        styles.pillChip,
-                                        { backgroundColor: isSelected ? ACCENT : (isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.04)") },
-                                        isSelected && styles.pillChipActiveGlow
-                                    ]}
-                                    onPress={() => setStarSign(isSelected ? "" : opt)}
-                                >
-                                    <ThemedText style={[styles.pillChipText, { color: isSelected ? "#000" : textColor }]}>{opt}</ThemedText>
-                                </TouchableOpacity>
-                            );
-                        })}
-                    </View>
-
-                    {/* Interests */}
-                    <View style={styles.sectionHeader}>
-                        <ThemedText style={[styles.sectionLabel, { color: textColor }]}>
-                            İlgi Alanları
-                        </ThemedText>
-                        <ThemedText style={[styles.sectionHint, { color: colors.text.tertiary }]}>
-                            Seni en iyi yansıtanları seç
-                        </ThemedText>
-                    </View>
-                    <View style={styles.chipRow}>
-                        {INTEREST_OPTIONS.map((opt) => {
-                            const isSelected = interests.includes(opt);
-                            return (
-                                <TouchableOpacity
-                                    key={opt}
-                                    style={[
-                                        styles.pillChip,
-                                        { backgroundColor: isSelected ? ACCENT : (isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.04)") },
-                                        isSelected && styles.pillChipActiveGlow
-                                    ]}
-                                    onPress={() => toggleInterest(opt)}
-                                >
-                                    <ThemedText style={[styles.pillChipText, { color: isSelected ? "#000" : textColor }]}>{opt}</ThemedText>
-                                </TouchableOpacity>
-                            );
-                        })}
-                    </View>
+                    {renderSelectionRow("briefcase.fill", "Meslek (İsteğe Bağlı)", locationText, "job")}
 
                     {/* Save Button inside ScrollView to ensure no occlusion */}
                     <View style={{ marginTop: 32, paddingBottom: 40 }}>
@@ -639,6 +699,164 @@ export default function MatchProfileSetupScreen() {
                     </View>
                 </Pressable>
             </ScrollView>
+
+            {/* Prompt Selection & Edit Modal */}
+            <Modal
+                visible={isPromptModalVisible}
+                animationType="slide"
+                transparent={true}
+                onRequestClose={() => setIsPromptModalVisible(false)}
+            >
+                <KeyboardAvoidingView
+                    style={styles.modalOverlay}
+                    behavior={Platform.OS === "ios" ? "padding" : "height"}
+                >
+                    <View style={[styles.modalContent, { backgroundColor: isDark ? "#1C1C1E" : "#FFF" }]}>
+                        <View style={styles.modalHeader}>
+                            <TouchableOpacity onPress={() => setIsPromptModalVisible(false)}>
+                                <ThemedText style={{ color: colors.text.secondary, fontSize: 16 }}>İptal</ThemedText>
+                            </TouchableOpacity>
+                            <ThemedText style={styles.modalTitle}>Soru Ekle</ThemedText>
+                            <TouchableOpacity onPress={handleSavePrompt}>
+                                <ThemedText style={{ color: ACCENT, fontSize: 16, fontWeight: "700" }}>Kaydet</ThemedText>
+                            </TouchableOpacity>
+                        </View>
+
+                        <ScrollView style={styles.modalScroll} showsVerticalScrollIndicator={false}>
+                            <ThemedText style={[styles.chipGroupLabel, { color: colors.text.secondary, marginTop: 0 }]}>Sorunu Seç</ThemedText>
+                            <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={[styles.chipRow, { flexWrap: "nowrap" }]} style={{ marginBottom: 20 }}>
+                                {PROMPT_OPTIONS.map((opt) => {
+                                    const isSelected = selectedPromptOption === opt;
+                                    return (
+                                        <TouchableOpacity
+                                            key={opt}
+                                            style={[
+                                                styles.pillChip,
+                                                { backgroundColor: isSelected ? ACCENT : (isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.04)") },
+                                                isSelected && styles.pillChipActiveGlow
+                                            ]}
+                                            onPress={() => setSelectedPromptOption(opt)}
+                                        >
+                                            <ThemedText style={[styles.pillChipText, { color: isSelected ? "#000" : textColor }]}>{opt}</ThemedText>
+                                        </TouchableOpacity>
+                                    );
+                                })}
+                            </ScrollView>
+
+                            <ThemedText style={[styles.promptQuestion, { color: ACCENT, marginBottom: 12, fontSize: 18 }]}>{selectedPromptOption}</ThemedText>
+                            <TextInput
+                                style={[styles.promptAnswerInput, { color: textColor, backgroundColor: inputBg, borderColor: inputBorder }]}
+                                placeholder="Cevabını yaz..."
+                                placeholderTextColor={colors.text.tertiary}
+                                value={tempPromptAnswer}
+                                onChangeText={setTempPromptAnswer}
+                                multiline
+                                autoFocus
+                                maxLength={150}
+                            />
+                            <ThemedText style={{ color: colors.text.tertiary, fontSize: 12, textAlign: "right", marginTop: 8 }}>
+                                {tempPromptAnswer.length}/150
+                            </ThemedText>
+                        </ScrollView>
+                    </View>
+                </KeyboardAvoidingView>
+            </Modal>
+
+            {/* General Selection Modal */}
+            <Modal
+                visible={activeSelectionField !== null}
+                animationType="slide"
+                transparent={true}
+                onRequestClose={() => setActiveSelectionField(null)}
+            >
+                <View style={styles.modalOverlay}>
+                    <View style={[styles.modalContent, { backgroundColor: isDark ? "#1C1C1E" : "#FFF", height: "60%" }]}>
+                        <View style={styles.modalHeader}>
+                            <TouchableOpacity onPress={() => setActiveSelectionField(null)}>
+                                <ThemedText style={{ color: colors.text.secondary, fontSize: 16 }}>İptal</ThemedText>
+                            </TouchableOpacity>
+                            <ThemedText style={styles.modalTitle}>
+                                {activeSelectionField === "starSign" && "Burç"}
+                                {activeSelectionField === "interests" && "İlgi Alanları"}
+                                {activeSelectionField === "education" && "Eğitim"}
+                                {activeSelectionField === "job" && "Meslek"}
+                            </ThemedText>
+                            <TouchableOpacity onPress={() => setActiveSelectionField(null)}>
+                                <ThemedText style={{ color: ACCENT, fontSize: 16, fontWeight: "700" }}>Bitti</ThemedText>
+                            </TouchableOpacity>
+                        </View>
+
+                        {(activeSelectionField === "education" || activeSelectionField === "job") && (
+                            <View style={{ paddingHorizontal: 16, marginBottom: 12 }}>
+                                <View style={{ flexDirection: "row", alignItems: "center", backgroundColor: inputBg, borderRadius: 10, paddingHorizontal: 12 }}>
+                                    <IconSymbol name="magnifyingglass" size={16} color={colors.text.tertiary} />
+                                    <TextInput
+                                        style={{ flex: 1, paddingVertical: 10, paddingHorizontal: 8, color: textColor }}
+                                        placeholder="Ara..."
+                                        placeholderTextColor={colors.text.tertiary}
+                                        value={searchQuery}
+                                        onChangeText={setSearchQuery}
+                                        autoCorrect={false}
+                                    />
+                                </View>
+                            </View>
+                        )}
+
+                        <ScrollView style={styles.modalScroll} showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 40 }}>
+                            <View style={styles.chipRow}>
+                                {activeSelectionField === "education" && UNIVERSITIES.filter(u => u.toLowerCase().includes(searchQuery.toLowerCase())).map((opt) => {
+                                    const isSelected = education === opt;
+                                    return (
+                                        <TouchableOpacity
+                                            key={opt}
+                                            style={[styles.pillChip, { backgroundColor: isSelected ? ACCENT : inputBg }, isSelected && styles.pillChipActiveGlow]}
+                                            onPress={() => { setEducation(isSelected ? "" : opt); setActiveSelectionField(null); }}
+                                        >
+                                            <ThemedText style={[styles.pillChipText, { color: isSelected ? "#000" : textColor }]}>{opt}</ThemedText>
+                                        </TouchableOpacity>
+                                    );
+                                })}
+                                {activeSelectionField === "job" && JOBS.filter(j => j.toLowerCase().includes(searchQuery.toLowerCase())).map((opt) => {
+                                    const isSelected = locationText === opt;
+                                    return (
+                                        <TouchableOpacity
+                                            key={opt}
+                                            style={[styles.pillChip, { backgroundColor: isSelected ? ACCENT : inputBg }, isSelected && styles.pillChipActiveGlow]}
+                                            onPress={() => { setLocationText(isSelected ? "" : opt); setActiveSelectionField(null); }}
+                                        >
+                                            <ThemedText style={[styles.pillChipText, { color: isSelected ? "#000" : textColor }]}>{opt}</ThemedText>
+                                        </TouchableOpacity>
+                                    );
+                                })}
+                                {activeSelectionField === "starSign" && STAR_SIGN_OPTIONS.map((opt) => {
+                                    const isSelected = starSign === opt;
+                                    return (
+                                        <TouchableOpacity
+                                            key={opt}
+                                            style={[styles.pillChip, { backgroundColor: isSelected ? ACCENT : inputBg }, isSelected && styles.pillChipActiveGlow]}
+                                            onPress={() => setStarSign(isSelected ? "" : opt)}
+                                        >
+                                            <ThemedText style={[styles.pillChipText, { color: isSelected ? "#000" : textColor }]}>{opt}</ThemedText>
+                                        </TouchableOpacity>
+                                    );
+                                })}
+                                {activeSelectionField === "interests" && INTEREST_OPTIONS.map((opt) => {
+                                    const isSelected = interests.includes(opt);
+                                    return (
+                                        <TouchableOpacity
+                                            key={opt}
+                                            style={[styles.pillChip, { backgroundColor: isSelected ? ACCENT : inputBg }, isSelected && styles.pillChipActiveGlow]}
+                                            onPress={() => toggleInterest(opt)}
+                                        >
+                                            <ThemedText style={[styles.pillChipText, { color: isSelected ? "#000" : textColor }]}>{opt}</ThemedText>
+                                        </TouchableOpacity>
+                                    );
+                                })}
+                            </View>
+                        </ScrollView>
+                    </View>
+                </View>
+            </Modal>
         </KeyboardAvoidingView>
     );
 }
@@ -669,12 +887,14 @@ const styles = StyleSheet.create({
 
     // Premium Photo Grid
     photoGrid: {
+        gap: 12,
+    },
+    photoRow: {
         flexDirection: "row",
-        flexWrap: "wrap",
-        gap: 8,
+        justifyContent: "space-between",
     },
     photoBox: {
-        width: "31.8%",
+        width: "31%",
         aspectRatio: 3 / 4,
         borderRadius: 12, // Slightly sharper for tighter grid
         borderWidth: 1.5,
@@ -716,8 +936,8 @@ const styles = StyleSheet.create({
 
     // Premium Section Headers
     sectionHeader: {
-        marginTop: 4,
-        marginBottom: 16,
+        marginTop: 24,
+        marginBottom: 12,
         paddingHorizontal: 4,
     },
     sectionLabel: {
@@ -765,8 +985,8 @@ const styles = StyleSheet.create({
     chipGroupLabel: {
         fontSize: 14,
         fontWeight: "700",
-        marginTop: 4,
-        marginBottom: 12,
+        marginTop: 16,
+        marginBottom: 8,
         paddingHorizontal: 4,
     },
     chipRow: {
@@ -822,5 +1042,117 @@ const styles = StyleSheet.create({
         fontSize: 18,
         fontWeight: "800",
         letterSpacing: 0.5,
+    },
+
+    // Prompts
+    addPromptBtn: {
+        width: 36,
+        height: 36,
+        borderRadius: 18,
+        backgroundColor: "rgba(29, 185, 84, 0.15)",
+        alignItems: "center",
+        justifyContent: "center",
+    },
+    promptCard: {
+        borderWidth: 1,
+        borderRadius: 16,
+        padding: 16,
+        marginBottom: 16,
+        flexDirection: "row",
+        alignItems: "center",
+    },
+    promptQuestion: {
+        fontSize: 13,
+        fontWeight: "800",
+        marginBottom: 6,
+        textTransform: "uppercase",
+        letterSpacing: 0.5,
+    },
+    promptAnswer: {
+        fontSize: 16,
+        fontWeight: "500",
+        lineHeight: 22,
+    },
+    promptActions: {
+        flexDirection: "row",
+        alignItems: "center",
+        gap: 12,
+        marginLeft: 12,
+    },
+    promptActionBtn: {
+        padding: 8,
+    },
+
+    // Modal
+    modalOverlay: {
+        flex: 1,
+        backgroundColor: "rgba(0,0,0,0.5)",
+        justifyContent: "flex-end",
+    },
+    modalContent: {
+        height: "80%",
+        borderTopLeftRadius: 24,
+        borderTopRightRadius: 24,
+        paddingTop: 16,
+        paddingHorizontal: 16,
+    },
+    modalHeader: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        marginBottom: 20,
+        paddingHorizontal: 8,
+    },
+    modalTitle: {
+        fontSize: 18,
+        fontWeight: "700",
+    },
+    modalScroll: {
+        flex: 1,
+    },
+    promptAnswerInput: {
+        borderWidth: 1,
+        borderRadius: 16,
+        minHeight: 120,
+        padding: 16,
+        fontSize: 18,
+        lineHeight: 26,
+        fontWeight: "500",
+        textAlignVertical: "top",
+    },
+
+    // UI Refresh: Selection Rows
+    selectionRow: {
+        flexDirection: "row",
+        alignItems: "center",
+        justifyContent: "space-between",
+        paddingVertical: 16,
+        paddingHorizontal: 16,
+        borderWidth: 1,
+        borderRadius: 16,
+        marginBottom: 8,
+    },
+    selectionRowLeft: {
+        flexDirection: "row",
+        alignItems: "center",
+        gap: 12,
+    },
+    selectionRowLabel: {
+        fontSize: 16,
+        fontWeight: "600",
+    },
+    selectionRowRight: {
+        flexDirection: "row",
+        alignItems: "center",
+        gap: 8,
+        flex: 1,
+        justifyContent: "flex-end",
+    },
+    selectionRowValue: {
+        fontSize: 15,
+        fontWeight: "500",
+        textAlign: "right",
+        flexShrink: 1, // Ensure long values like interests truncate properly
+        maxWidth: "80%",
     },
 });

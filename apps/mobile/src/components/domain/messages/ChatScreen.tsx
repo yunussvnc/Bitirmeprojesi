@@ -35,7 +35,7 @@ interface Message {
         address: string;
         image: string;
     };
-    status?: 'sent' | 'delivered' | 'read'; // Mesajın iletim durumu
+    seen?: boolean; // Mesajın görülüp görülmediği
 }
 
 /* ── Dummy Contact Data ── */
@@ -53,7 +53,7 @@ const CONTACTS: Record<string, { name: string; avatar: string; isOnline: boolean
 /* ── Dummy Messages ── */
 const DUMMY_MESSAGES: Message[] = [
     { id: "1", text: "Selam! Nasılsın?", isMine: false, timestamp: "14:20" },
-    { id: "2", text: "İyiyim, sen nasılsın?", isMine: true, timestamp: "14:21", status: "read" },
+    { id: "2", text: "İyiyim, sen nasılsın?", isMine: true, timestamp: "14:21" },
     {
         id: "3",
         text: "Dün harika bir mekan keşfettim, sana da önermek istedim!",
@@ -71,21 +71,20 @@ const DUMMY_MESSAGES: Message[] = [
             image: "https://picsum.photos/400/200?random=42",
         },
     },
-    { id: "5", text: "Vay be çok güzel görünüyor! Boğaz manzarası varmış 😍", isMine: true, timestamp: "14:25", status: "read" },
+    { id: "5", text: "Vay be çok güzel görünüyor! Boğaz manzarası varmış 😍", isMine: true, timestamp: "14:25" },
     { id: "6", text: "Evet, köprü manzaralı. Bu akşam gidelim mi?", isMine: false, timestamp: "14:26" },
     {
         id: "7",
         text: "",
         isMine: true,
         timestamp: "14:28",
-        status: "read",
         placeCard: {
             name: "Fakülte Teras - Beyoğlu",
             address: "Beyoğlu, İstanbul",
             image: "https://picsum.photos/400/200?random=88",
         },
     },
-    { id: "8", text: "Ben de burası güzel olur dedim, ne dersin? 🎵", isMine: true, timestamp: "14:28", status: "delivered" },
+    { id: "8", text: "Ben de burası güzel olur dedim, ne dersin? 🎵", isMine: true, timestamp: "14:28" },
     { id: "9", text: "Olur ikisine de bakalım! Haritada kaydediyorum 📌", isMine: false, timestamp: "14:30" },
 ];
 
@@ -117,7 +116,6 @@ export default function ChatScreen() {
             text: inputText.trim(),
             isMine: true,
             timestamp: new Date().toLocaleTimeString("tr-TR", { hour: "2-digit", minute: "2-digit" }),
-            status: contact.isOnline ? "delivered" : "sent", // Simulate status based on contact's online state
         };
         setMessages((prev) => [...prev, newMsg]);
         setInputText("");
@@ -183,41 +181,31 @@ export default function ChatScreen() {
                                 Keşfet'te aç →
                             </Text>
                         </View>
-                        <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'flex-end', marginTop: 8 }}>
-                            <Text
-                                style={[
-                                    styles.msgTime,
-                                    { color: item.isMine ? "rgba(255,255,255,0.6)" : colors.text.tertiary, paddingBottom: 8, marginTop: 0 },
-                                ]}
-                            >
-                                {item.timestamp}
-                            </Text>
-                            {item.isMine && (
-                                <View style={{ paddingBottom: 8, marginLeft: 4 }}>
-                                    {item.status === 'read' ? (
-                                        <MaterialCommunityIcons name="check-all" size={16} color="#4ade80" />
-                                    ) : item.status === 'delivered' ? (
-                                        <MaterialCommunityIcons name="check-all" size={16} color="rgba(255,255,255,0.6)" />
-                                    ) : (
-                                        <MaterialCommunityIcons name="check" size={16} color="rgba(255,255,255,0.6)" />
-                                    )}
-                                </View>
-                            )}
-                        </View>
+                        <Text
+                            style={[
+                                styles.msgTime,
+                                { color: item.isMine ? "rgba(255,255,255,0.6)" : colors.text.tertiary, paddingHorizontal: 12, paddingBottom: 8 },
+                            ]}
+                        >
+                            {item.timestamp}
+                        </Text>
                     </TouchableOpacity>
                 </View>
             );
         }
 
-        // Status icon logic (for my messages)
+        // Son mesaj ise ve benim değilse altında "Görüldü" göstergesi
+        const isLast = messages[messages.length - 1]?.id === item.id;
+
+        // Tik durumu: sadece kendi mesajlarında
         let tickIcon = null;
         if (item.isMine) {
-            if (item.status === 'read') {
-                tickIcon = <MaterialCommunityIcons name="check-all" size={16} color={contact.isOnline ? colors.semantic.success : "#4ade80"} style={{ marginLeft: 4 }} />;
-            } else if (item.status === 'delivered') {
-                tickIcon = <MaterialCommunityIcons name="check-all" size={16} color={colors.text.tertiary} style={{ marginLeft: 4 }} />;
+            if (isLast && lastSeenId === item.id) {
+                // Çift tik (görüldü)
+                tickIcon = <MaterialCommunityIcons name="check-all" size={18} color={colors.accent.primary} style={{ marginLeft: 4 }} />;
             } else {
-                tickIcon = <MaterialCommunityIcons name="check" size={16} color={colors.text.tertiary} style={{ marginLeft: 4 }} />;
+                // Tek tik (gönderildi)
+                tickIcon = <MaterialCommunityIcons name="check" size={18} color={colors.text.tertiary} style={{ marginLeft: 4 }} />;
             }
         }
 

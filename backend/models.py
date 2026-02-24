@@ -281,6 +281,7 @@ class MatchProfile(Base):
     star_sign = Column(String, nullable=True)
     family_plans = Column(String, nullable=True)
     exercise = Column(String, nullable=True)
+    prompts = Column(Text, nullable=True)  # JSON array string of {"question": "...", "answer": "..."}
 
     is_active = Column(Boolean, default=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())

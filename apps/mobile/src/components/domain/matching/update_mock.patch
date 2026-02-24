@@ -1,0 +1,51 @@
+--- MatchScreen.tsx
++++ MatchScreen.tsx
+@@ -32,32 +32,32 @@
+ // Mock data — seni beğenen kişiler (Bumble style rich profiles)
+-const richProfile = {
+-    location: "Kağıthane",
++const richProfile = {
++    active_place_name: "Kağıthane",
+     bio: "ig hottiebutacryinone",
+-    about: [
+-        { icon: "ruler.fill", text: "171 cm" },
+-        { icon: "graduationcap.fill", text: "Üniversite" },
+-        { icon: "wineglass.fill", text: "Nadiren" },
+-        { icon: "smoke.fill", text: "Evet" },
+-        { icon: "person.fill", text: "Kadın" },
+-        { icon: "figure.child", text: "Çocuk istemiyor" },
+-        { icon: "star.fill", text: "Yay" }
+-    ],
++    height: 171,
++    education: "Üniversite",
++    drinking: "Nadiren",
++    smoking: "Evet",
++    gender: "Kadın",
++    star_sign: "Yay",
+     looking_for: "Uzun süreli ilişki",
+-    interests: [
+-        { icon: "paintpalette.fill", text: "Sanat" },
+-        { icon: "figure.dance", text: "Dans" },
+-        { icon: "leaf.fill", text: "Bahçe" },
+-        { icon: "cup.and.saucer.fill", text: "Kahve" }
+-    ],
+-    prompt: { q: "Hiçbir şey yapmamayı en çok sevdiğim yol", a: "rastgele telefon oyunları oynamak" }
++    interests: ["Sanat", "Dans", "Bahçe", "Kahve"],
++    prompts: [{ question: "Hiçbir şey yapmamayı en çok sevdiğim yol", answer: "rastgele telefon oyunları oynamak" }]
+ };
+ 
+-const MOCK_LIKES = [
+-    { id: 1, name: "Ceren", age: 22, photo: "https://i.pravatar.cc/600?img=1", photos: ["https://i.pravatar.cc/600?img=1", "https://i.pravatar.cc/600?img=2", "https://i.pravatar.cc/600?img=3"], ...richProfile },
+-    { id: 2, name: "Zeynep", age: 25, photo: "https://i.pravatar.cc/600?img=5", photos: ["https://i.pravatar.cc/600?img=5", "https://i.pravatar.cc/600?img=6"], ...richProfile },
+-    { id: 3, name: "Ayşe", age: 22, photo: "https://i.pravatar.cc/600?img=9", photos: ["https://i.pravatar.cc/600?img=9"], ...richProfile },
+-    { id: 4, name: "Selin", age: 24, photo: "https://i.pravatar.cc/600?img=16", photos: ["https://i.pravatar.cc/600?img=16", "https://i.pravatar.cc/600?img=17"], ...richProfile },
+-    { id: 5, name: "Deniz", age: 26, photo: "https://i.pravatar.cc/600?img=20", photos: ["https://i.pravatar.cc/600?img=20"], ...richProfile },
+-    { id: 6, name: "Merve", age: 21, photo: "https://i.pravatar.cc/600?img=25", photos: ["https://i.pravatar.cc/600?img=25"], ...richProfile },
++const MOCK_LIKES: any[] = [
++    { user_id: 1, display_name: "Ceren", age: 22, photo_urls: ["https://i.pravatar.cc/600?img=1", "https://i.pravatar.cc/600?img=2", "https://i.pravatar.cc/600?img=3"], ...richProfile },
++    { user_id: 2, display_name: "Zeynep", age: 25, photo_urls: ["https://i.pravatar.cc/600?img=5", "https://i.pravatar.cc/600?img=6"], ...richProfile },
++    { user_id: 3, display_name: "Ayşe", age: 22, photo_urls: ["https://i.pravatar.cc/600?img=9"], ...richProfile },
++    { user_id: 4, display_name: "Selin", age: 24, photo_urls: ["https://i.pravatar.cc/600?img=16", "https://i.pravatar.cc/600?img=17"], ...richProfile },
++    { user_id: 5, display_name: "Deniz", age: 26, photo_urls: ["https://i.pravatar.cc/600?img=20"], ...richProfile },
++    { user_id: 6, display_name: "Merve", age: 21, photo_urls: ["https://i.pravatar.cc/600?img=25"], ...richProfile },
+ ];

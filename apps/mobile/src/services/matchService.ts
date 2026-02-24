@@ -21,6 +21,7 @@ export interface MatchProfile {
     star_sign?: string;
     family_plans?: string;
     exercise?: string;
+    prompts?: { question: string; answer: string }[];
     is_active: boolean;
     created_at: string;
 }
@@ -41,6 +42,7 @@ export interface MatchProfileCreate {
     star_sign?: string;
     family_plans?: string;
     exercise?: string;
+    prompts?: { question: string; answer: string }[];
 }
 
 export interface MatchCandidate {
@@ -58,6 +60,7 @@ export interface MatchCandidate {
     interests: string[];
     star_sign?: string;
     exercise?: string;
+    prompts?: { question: string; answer: string }[];
     active_place_name?: string;
     is_qr_verified: boolean;
     distance_priority: number;

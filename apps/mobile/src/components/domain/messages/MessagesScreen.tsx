@@ -264,7 +264,7 @@ export default function MessagesScreen() {
                                 router.push("/matching" as any);
                             }}
                         >
-                            <Text style={{ fontSize: 20 }}>💘</Text>
+                            <IconSymbol name="flame.fill" size={26} color={colors.accent.primary} />
                         </TouchableOpacity>
                     )}
 
@@ -399,18 +399,21 @@ const styles = StyleSheet.create({
         letterSpacing: -0.2,
         textAlign: "center",
         marginBottom: 2, // Slight adjustment for baseline
+        flex: 1,
     },
     headerBtn: {
         position: "absolute",
         right: 16,
         bottom: 11, // Match the paddingBottom of header
         padding: 4,
+        zIndex: 10,
     },
     headerLeftBtn: {
         position: "absolute",
         left: 16,
-        bottom: 8, // Match the paddingBottom of header, slightly adjusted for emoji size
+        bottom: 7, // Adjust to cleanly align flame horizontally with text
         padding: 4,
+        zIndex: 10,
     },
 
     /* Search */

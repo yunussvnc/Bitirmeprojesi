@@ -370,6 +370,7 @@ class MatchProfileCreate(BaseModel):
     star_sign: Optional[str] = None
     family_plans: Optional[str] = None
     exercise: Optional[str] = None
+    prompts: Optional[List[dict]] = None
 
 class MatchProfileUpdate(BaseModel):
     display_name: Optional[str] = None
@@ -387,6 +388,7 @@ class MatchProfileUpdate(BaseModel):
     star_sign: Optional[str] = None
     family_plans: Optional[str] = None
     exercise: Optional[str] = None
+    prompts: Optional[List[dict]] = None
     is_active: Optional[bool] = None
 
 class MatchProfileResponse(BaseModel):
@@ -402,11 +404,11 @@ class MatchProfileResponse(BaseModel):
     location_text: Optional[str] = None
     smoking: Optional[str] = None
     drinking: Optional[str] = None
-    looking_for: Optional[str] = None
     interests: List[str] = []
     star_sign: Optional[str] = None
     family_plans: Optional[str] = None
     exercise: Optional[str] = None
+    prompts: List[dict] = []
     is_active: bool = True
     created_at: datetime
 
@@ -430,10 +432,10 @@ class MatchCandidateResponse(BaseModel):
     education: Optional[str] = None
     smoking: Optional[str] = None
     drinking: Optional[str] = None
-    looking_for: Optional[str] = None
     interests: List[str] = []
     star_sign: Optional[str] = None
     exercise: Optional[str] = None
+    prompts: List[dict] = []
     active_place_name: Optional[str] = None
     is_qr_verified: bool = False
     distance_priority: int = 0  # 0=aynı mekan, 1=yakın, 2=uzak

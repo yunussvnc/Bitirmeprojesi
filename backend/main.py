@@ -787,6 +787,7 @@ def create_or_update_match_profile(
 
     photo_urls_json = json.dumps(data.photo_urls) if data.photo_urls else "[]"
     interests_json = json.dumps(data.interests) if data.interests else "[]"
+    prompts_json = json.dumps(data.prompts) if data.prompts else "[]"
 
     if existing:
         existing.display_name = data.display_name
@@ -804,6 +805,7 @@ def create_or_update_match_profile(
         existing.star_sign = data.star_sign
         existing.family_plans = data.family_plans
         existing.exercise = data.exercise
+        existing.prompts = prompts_json
         existing.is_active = True
         db.commit()
         db.refresh(existing)
@@ -826,6 +828,7 @@ def create_or_update_match_profile(
             star_sign=data.star_sign,
             family_plans=data.family_plans,
             exercise=data.exercise,
+            prompts=prompts_json,
         )
         db.add(profile)
         db.commit()
@@ -848,6 +851,13 @@ def _match_profile_to_response(profile: models.MatchProfile) -> schemas.MatchPro
             interests = json.loads(profile.interests)
         except (json.JSONDecodeError, TypeError):
             interests = []
+    
+    prompts = []
+    if profile.prompts:
+        try:
+            prompts = json.loads(profile.prompts)
+        except (json.JSONDecodeError, TypeError):
+            prompts = []
     return schemas.MatchProfileResponse(
         id=profile.id,
         user_id=profile.user_id,
