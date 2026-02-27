@@ -18,6 +18,8 @@ export type Place = {
   average_rating?: number;
   price_range?: number;
   features?: string;
+  opening_time?: string;
+  closing_time?: string;
 };
 
 export type PaginatedPlaces = {
@@ -47,8 +49,10 @@ function normalizePlace(p: any): Place {
   const average_rating = typeof p?.average_rating === 'number' ? p.average_rating : undefined;
   const price_range = typeof p?.price_range === 'number' ? p.price_range : undefined;
   const features = p?.features || undefined;
+  const opening_time = p?.opening_time || undefined;
+  const closing_time = p?.closing_time || undefined;
 
-  return { id, name, subtitle, description, campaign_text, tags, category, address, city, latitude, longitude, photo_url, video_url, average_rating, price_range, features };
+  return { id, name, subtitle, description, campaign_text, tags, category, address, city, latitude, longitude, photo_url, video_url, average_rating, price_range, features, opening_time, closing_time };
 }
 
 export async function getPlaces(page = 1, pageSize = 20): Promise<PaginatedPlaces> {

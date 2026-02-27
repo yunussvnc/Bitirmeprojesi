@@ -36,6 +36,7 @@ import { StoryViewerModal } from './StoryViewerModal';
 import { useSettingsStore } from '@/src/store/useSettingsStore';
 import { useAppStore } from '@/src/store/useAppStore';
 import { FeedCard, CommentBottomSheet } from '@/src/components/domain/feed';
+import { getPlaceStatus } from '@/src/utils/placeStatus';
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 const PANEL_HORIZ_MARGIN = 12;
@@ -400,6 +401,19 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
                 <Text style={styles.heroPlaceName} numberOfLines={2}>
                   {place.name}
                 </Text>
+                {(() => {
+                  const status = getPlaceStatus(place.opening_time, place.closing_time);
+                  return status.hoursText ? (
+                    <View style={styles.statusRow}>
+                      <View style={[styles.statusBadge, { backgroundColor: status.color }]}>
+                        <Text style={styles.statusBadgeText}>{status.label}</Text>
+                      </View>
+                      <Text style={[styles.heroMeta, { color: 'rgba(255,255,255,0.85)' }]}>
+                        {status.hoursText}
+                      </Text>
+                    </View>
+                  ) : null;
+                })()}
                 <Text style={[styles.heroMeta, { color: 'rgba(255,255,255,0.85)' }]}>
                   {[
                     mapShowPosts && `${total} gönderi`,
@@ -736,6 +750,22 @@ const styles = StyleSheet.create({
     fontSize: 13,
     marginTop: 4,
     fontWeight: '500',
+  },
+  statusRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    marginTop: 4,
+  },
+  statusBadge: {
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+    borderRadius: 8,
+  },
+  statusBadgeText: {
+    color: '#fff',
+    fontSize: 11,
+    fontWeight: '700',
   },
   heroActions: {
     flexDirection: 'row',

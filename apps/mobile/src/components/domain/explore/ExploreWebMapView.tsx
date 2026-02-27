@@ -25,6 +25,15 @@ import type { Place } from '@/src/services/mekanService';
 import { lightImpact } from '@/src/utils/haptics';
 import { PlaceMediaPanel } from './PlaceMediaPanel';
 import { useAppStore } from '@/src/store/useAppStore';
+import { getPlaceStatus, type PlaceStatusType } from '@/src/utils/placeStatus';
+
+/** Keşfet haritasında filtrelenebilecek kategoriler */
+const ALL_CATEGORIES = ['Kafe', 'Restoran', 'Bar', 'Meyhane', 'Gece Kulübü', 'Fast Food', 'Nargile Cafe'] as const;
+const ALL_STATUSES: { key: PlaceStatusType; label: string; color: string }[] = [
+  { key: 'open', label: 'Açık', color: '#4CAF50' },
+  { key: 'closing_soon', label: 'Kapanıyor', color: '#FF9800' },
+  { key: 'closed', label: 'Kapalı', color: '#F44336' },
+];
 
 const ISTANBUL_CENTER = { latitude: 41.0082, longitude: 28.9784 };
 
@@ -57,15 +66,14 @@ function buildMapHTML(accentColor: string, isDark: boolean) {
   .leaflet-control-attribution{display:none!important}
   .custom-pin{
     width:28px;height:28px;border-radius:50%;
-    background:${accentColor};border:3px solid #fff;
+    border:3px solid #fff;
     box-shadow:0 2px 6px rgba(0,0,0,0.35);
     transition:transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .25s ease;
   }
   .custom-pin.active{
     transform:scale(1.45);
-    box-shadow:0 0 0 8px ${accentColor}33,0 4px 12px rgba(0,0,0,0.4);
-    border-color:${accentColor};
-    background:#fff;
+    box-shadow:0 0 0 8px rgba(255,255,255,0.25),0 4px 12px rgba(0,0,0,0.4);
+    border-color:#fff;
   }
 </style>
 </head><body>
@@ -74,9 +82,12 @@ function buildMapHTML(accentColor: string, isDark: boolean) {
 var map=L.map('map',{zoomControl:false,touchZoom:true,doubleClickZoom:true,scrollWheelZoom:true,boxZoom:true}).setView([${ISTANBUL_CENTER.latitude},${ISTANBUL_CENTER.longitude}],13);
 L.tileLayer('${tileUrl}',{maxZoom:19,attribution:'${tileAttr}',keepBuffer:14,subdomains:'abc',crossOrigin:true,updateWhenIdle:false}).addTo(map);
 
-var pin=L.divIcon({className:'',html:'<div class="custom-pin"></div>',iconSize:[28,28],iconAnchor:[14,14]});
 var activePinEl=null;
 var markerLayer=L.layerGroup().addTo(map);
+
+function makeIcon(color){
+  return L.divIcon({className:'',html:'<div class="custom-pin" style="background:'+color+'"></div>',iconSize:[28,28],iconAnchor:[14,14]});
+}
 
 function selectPin(el){
   if(activePinEl) activePinEl.classList.remove('active');
@@ -89,7 +100,9 @@ function updateMarkers(places){
   if(!places||!places.length)return;
   places.forEach(function(p){
     if(p.latitude==null||p.longitude==null)return;
-    var m=L.marker([p.latitude,p.longitude],{icon:pin})
+    var color=p.statusColor||'${accentColor}';
+    var icon=makeIcon(color);
+    var m=L.marker([p.latitude,p.longitude],{icon:icon})
       .on('click',function(e){selectPin(e.target.getElement().querySelector('.custom-pin'));window.ReactNativeWebView.postMessage(JSON.stringify({type:'marker',id:p.id}))});
     markerLayer.addLayer(m);
   });
@@ -121,7 +134,29 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
   const [query, setQuery] = useState('');
   const [showResults, setShowResults] = useState(false);
   const [didAutoCenter, setDidAutoCenter] = useState(false);
+  const [showFilter, setShowFilter] = useState(false);
+  const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+  const [selectedStatuses, setSelectedStatuses] = useState<PlaceStatusType[]>([]);
   const webViewRef = useRef<WebView>(null);
+
+  const activeFilterCount = selectedCategories.length + selectedStatuses.length;
+
+  const toggleCategory = useCallback((cat: string) => {
+    setSelectedCategories((prev) =>
+      prev.includes(cat) ? prev.filter((c) => c !== cat) : [...prev, cat],
+    );
+  }, []);
+
+  const toggleStatus = useCallback((s: PlaceStatusType) => {
+    setSelectedStatuses((prev) =>
+      prev.includes(s) ? prev.filter((v) => v !== s) : [...prev, s],
+    );
+  }, []);
+
+  const clearFilters = useCallback(() => {
+    setSelectedCategories([]);
+    setSelectedStatuses([]);
+  }, []);
 
   useEffect(() => {
     (async () => {
@@ -142,26 +177,47 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
 
   const filteredPlaces = useMemo(() => {
     const q = query.trim().toLowerCase();
-    if (!q) return places;
     return places.filter((p) => {
-      const haystack = [
-        p.name,
-        p.category,
-        p.address,
-        p.city,
-        p.subtitle,
-      ]
-        .filter(Boolean)
-        .join(' ')
-        .toLowerCase();
-      return haystack.includes(q);
+      // Metin arama
+      if (q) {
+        const haystack = [
+          p.name,
+          p.category,
+          p.address,
+          p.city,
+          p.subtitle,
+        ]
+          .filter(Boolean)
+          .join(' ')
+          .toLowerCase();
+        if (!haystack.includes(q)) return false;
+      }
+      // Kategori filtresi
+      if (selectedCategories.length > 0) {
+        if (!p.category || !selectedCategories.includes(p.category)) return false;
+      }
+      // Durum filtresi
+      if (selectedStatuses.length > 0) {
+        const status = getPlaceStatus(p.opening_time, p.closing_time);
+        if (!selectedStatuses.includes(status.status)) return false;
+      }
+      return true;
     });
-  }, [places, query]);
+  }, [places, query, selectedCategories, selectedStatuses]);
 
   const visiblePlaces = useMemo(
     () => filteredPlaces.filter((p) => p.latitude != null && p.longitude != null),
     [filteredPlaces],
   );
+
+  // Haritaya gönderilecek mekanları statusColor ile zenginleştir
+  const visiblePlacesWithStatus = useMemo(() => {
+    const now = new Date();
+    return visiblePlaces.map((p) => {
+      const status = getPlaceStatus(p.opening_time, p.closing_time, now);
+      return { ...p, statusColor: status.color };
+    });
+  }, [visiblePlaces]);
 
   useEffect(() => {
     if (!mapReady || !webViewRef.current) return;
@@ -171,9 +227,9 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
       script.push(`setUserMarker(${userLocation.latitude},${userLocation.longitude})`);
       setDidAutoCenter(true);
     }
-    script.push(`updateMarkers(${JSON.stringify(visiblePlaces)})`);
+    script.push(`updateMarkers(${JSON.stringify(visiblePlacesWithStatus)})`);
     webViewRef.current.injectJavaScript(script.join(';') + ';true;');
-  }, [mapReady, userLocation, visiblePlaces, didAutoCenter]);
+  }, [mapReady, userLocation, visiblePlacesWithStatus, didAutoCenter]);
 
   const handleMessage = useCallback(
     (event: WebViewMessageEvent) => {
@@ -283,6 +339,7 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
         onMessage={handleMessage}
         onTouchStart={() => {
           setShowResults(false);
+          setShowFilter(false);
           Keyboard.dismiss();
         }}
         javaScriptEnabled
@@ -298,29 +355,141 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
           { backgroundColor: colors.background.secondary + 'CC' },
         ]}
       >
-        <SearchInput
-          placeholder="Mekan ara..."
-          value={query}
-          onChangeText={(text) => {
-            setQuery(text);
-            setShowResults(true);
-            setSelectedPlace(null);
-          }}
-          onFocus={() => {
-            setShowResults(true);
-            setSelectedPlace(null);
-          }}
-          onBlur={() => setShowResults(false)}
-          autoCorrect={false}
-          autoCapitalize="none"
-          returnKeyType="search"
-          rightIcon={query ? 'xmark' : undefined}
-          onRightIconPress={() => {
-            setQuery('');
-            setShowResults(false);
-          }}
-          containerStyle={styles.searchContainer}
-        />
+        <View style={styles.searchRow}>
+          <View style={styles.searchInputFlex}>
+            <SearchInput
+              placeholder="Mekan ara..."
+              value={query}
+              onChangeText={(text) => {
+                setQuery(text);
+                setShowResults(true);
+                setSelectedPlace(null);
+              }}
+              onFocus={() => {
+                setShowResults(true);
+                setSelectedPlace(null);
+              }}
+              onBlur={() => setShowResults(false)}
+              autoCorrect={false}
+              autoCapitalize="none"
+              returnKeyType="search"
+              rightIcon={query ? 'xmark' : undefined}
+              onRightIconPress={() => {
+                setQuery('');
+                setShowResults(false);
+              }}
+              containerStyle={styles.searchContainer}
+            />
+          </View>
+          <TouchableOpacity
+            onPress={() => {
+              lightImpact();
+              setShowFilter((v) => !v);
+              Keyboard.dismiss();
+            }}
+            style={[
+              styles.filterBtn,
+              {
+                backgroundColor: activeFilterCount > 0 ? colors.accent.primary : colors.surface.elevated,
+              },
+            ]}
+            activeOpacity={0.7}
+          >
+            <IconSymbol
+              name="line.3.horizontal.decrease.circle"
+              size={20}
+              color={activeFilterCount > 0 ? '#fff' : colors.text.secondary}
+            />
+            {activeFilterCount > 0 && (
+              <View style={styles.filterBadge}>
+                <Text style={styles.filterBadgeText}>{activeFilterCount}</Text>
+              </View>
+            )}
+          </TouchableOpacity>
+        </View>
+
+        {/* Filtre Paneli */}
+        {showFilter && (
+          <View style={[styles.filterPanel, { backgroundColor: colors.surface.elevated }]}>
+            {/* Kategori */}
+            <View style={styles.filterSection}>
+              <Text style={[styles.filterSectionTitle, { color: colors.text.secondary }]}>Kategori</Text>
+              <View style={styles.chipRow}>
+                {ALL_CATEGORIES.map((cat) => {
+                  const active = selectedCategories.includes(cat);
+                  return (
+                    <TouchableOpacity
+                      key={cat}
+                      style={[
+                        styles.chip,
+                        {
+                          backgroundColor: active ? colors.accent.primary : colors.background.secondary,
+                          borderColor: active ? colors.accent.primary : colors.surface.border,
+                        },
+                      ]}
+                      onPress={() => toggleCategory(cat)}
+                      activeOpacity={0.7}
+                    >
+                      <Text
+                        style={[
+                          styles.chipText,
+                          { color: active ? '#fff' : colors.text.primary },
+                        ]}
+                      >
+                        {cat}
+                      </Text>
+                    </TouchableOpacity>
+                  );
+                })}
+              </View>
+            </View>
+
+            {/* Durum */}
+            <View style={styles.filterSection}>
+              <Text style={[styles.filterSectionTitle, { color: colors.text.secondary }]}>Durum</Text>
+              <View style={styles.chipRow}>
+                {ALL_STATUSES.map((s) => {
+                  const active = selectedStatuses.includes(s.key);
+                  return (
+                    <TouchableOpacity
+                      key={s.key}
+                      style={[
+                        styles.chip,
+                        {
+                          backgroundColor: active ? s.color : colors.background.secondary,
+                          borderColor: active ? s.color : colors.surface.border,
+                        },
+                      ]}
+                      onPress={() => toggleStatus(s.key)}
+                      activeOpacity={0.7}
+                    >
+                      <View style={[styles.chipDot, { backgroundColor: active ? '#fff' : s.color }]} />
+                      <Text
+                        style={[
+                          styles.chipText,
+                          { color: active ? '#fff' : colors.text.primary },
+                        ]}
+                      >
+                        {s.label}
+                      </Text>
+                    </TouchableOpacity>
+                  );
+                })}
+              </View>
+            </View>
+
+            {/* Temizle */}
+            {activeFilterCount > 0 && (
+              <TouchableOpacity
+                onPress={clearFilters}
+                style={styles.clearBtn}
+                activeOpacity={0.7}
+              >
+                <Text style={[styles.clearBtnText, { color: colors.accent.primary }]}>Filtreleri Temizle</Text>
+              </TouchableOpacity>
+            )}
+          </View>
+        )}
         {showResults && query.trim().length > 0 && (
           <View style={[styles.resultsCard, { backgroundColor: colors.surface.elevated }]}>
             {filteredPlaces.length === 0 ? (
@@ -334,26 +503,31 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
                 showsVerticalScrollIndicator={false}
                 keyboardShouldPersistTaps="handled"
               >
-                {filteredPlaces.map((place) => (
-                  <TouchableOpacity
-                    key={String(place.id)}
-                    style={styles.resultRow}
-                    onPress={() => handleSelectPlace(place)}
-                    activeOpacity={0.8}
-                  >
-                    <View style={styles.resultText}>
-                      <Text style={[styles.resultTitle, { color: colors.text.primary }]} numberOfLines={1}>
-                        {place.name}
-                      </Text>
-                      {!!(place.category || place.city) && (
-                        <Text style={[styles.resultMeta, { color: colors.text.tertiary }]} numberOfLines={1}>
-                          {[place.category, place.city].filter(Boolean).join(' • ')}
+                {filteredPlaces.map((place) => {
+                  const placeStatus = getPlaceStatus(place.opening_time, place.closing_time);
+                  return (
+                    <TouchableOpacity
+                      key={String(place.id)}
+                      style={styles.resultRow}
+                      onPress={() => handleSelectPlace(place)}
+                      activeOpacity={0.8}
+                    >
+                      <View style={[styles.statusDot, { backgroundColor: placeStatus.color }]} />
+                      <View style={styles.resultText}>
+                        <Text style={[styles.resultTitle, { color: colors.text.primary }]} numberOfLines={1}>
+                          {place.name}
                         </Text>
-                      )}
-                    </View>
-                    <IconSymbol name="chevron.right" size={18} color={colors.text.tertiary} />
-                  </TouchableOpacity>
-                ))}
+                        {!!(place.category || place.city) && (
+                          <Text style={[styles.resultMeta, { color: colors.text.tertiary }]} numberOfLines={1}>
+                            {[place.category, place.city].filter(Boolean).join(' • ')}
+                            {placeStatus.hoursText ? ` · ${placeStatus.label}` : ''}
+                          </Text>
+                        )}
+                      </View>
+                      <IconSymbol name="chevron.right" size={18} color={colors.text.tertiary} />
+                    </TouchableOpacity>
+                  );
+                })}
               </ScrollView>
             )}
           </View>
@@ -389,7 +563,10 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
       {selectedPlace && (
         <PlaceMediaPanel
           place={selectedPlace}
-          onClose={() => setSelectedPlace(null)}
+          onClose={() => {
+            setSelectedPlace(null);
+            webViewRef.current?.injectJavaScript('selectPin(null);true;');
+          }}
         />
       )}
     </View>
@@ -412,8 +589,86 @@ const styles = StyleSheet.create({
     shadowRadius: 0,
     elevation: 0,
   },
+  searchRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  searchInputFlex: {
+    flex: 1,
+  },
   searchContainer: {
     marginBottom: 0,
+  },
+  filterBtn: {
+    width: 40,
+    height: 40,
+    borderRadius: 12,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  filterBadge: {
+    position: 'absolute',
+    top: -4,
+    right: -4,
+    minWidth: 18,
+    height: 18,
+    borderRadius: 9,
+    backgroundColor: '#F44336',
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 4,
+  },
+  filterBadgeText: {
+    color: '#fff',
+    fontSize: 10,
+    fontWeight: '800',
+  },
+  filterPanel: {
+    marginTop: 10,
+    borderRadius: 14,
+    padding: 14,
+  },
+  filterSection: {
+    marginBottom: 12,
+  },
+  filterSectionTitle: {
+    fontSize: 12,
+    fontWeight: '700',
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
+    marginBottom: 8,
+  },
+  chipRow: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    gap: 8,
+  },
+  chip: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 12,
+    paddingVertical: 7,
+    borderRadius: 20,
+    borderWidth: 1,
+    gap: 5,
+  },
+  chipText: {
+    fontSize: 13,
+    fontWeight: '600',
+  },
+  chipDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+  },
+  clearBtn: {
+    alignItems: 'center',
+    paddingVertical: 8,
+  },
+  clearBtnText: {
+    fontSize: 13,
+    fontWeight: '600',
   },
   resultsCard: {
     marginTop: 8,
@@ -433,6 +688,7 @@ const styles = StyleSheet.create({
   resultText: { flex: 1 },
   resultTitle: { fontSize: 14, fontWeight: '600' },
   resultMeta: { fontSize: 12, marginTop: 2 },
+  statusDot: { width: 10, height: 10, borderRadius: 5 },
   emptyText: { paddingHorizontal: 12, paddingVertical: 10, fontSize: 13 },
   header: {
     position: 'absolute',

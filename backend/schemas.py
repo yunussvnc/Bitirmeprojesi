@@ -54,6 +54,8 @@ class PlaceBase(BaseModel):
     longitude: Optional[float] = None
     photo_url: Optional[str] = None  # Mekan fotoğrafı
     video_url: Optional[str] = None  # Mekan videosu
+    opening_time: Optional[str] = None  # Açılış saati (HH:MM)
+    closing_time: Optional[str] = None  # Kapanış saati (HH:MM)
 
 class PlaceCreate(PlaceBase):
     pass # Mekan eklerken tüm base alanları kullanıyoruz

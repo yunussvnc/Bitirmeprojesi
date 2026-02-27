@@ -106,6 +106,8 @@ def create_place(db: Session, place: schemas.PlaceCreate):
         longitude=place.longitude,
         photo_url=getattr(place, "photo_url", None),
         video_url=getattr(place, "video_url", None),
+        opening_time=getattr(place, "opening_time", None),
+        closing_time=getattr(place, "closing_time", None),
     )
     db.add(db_place)
     db.commit()

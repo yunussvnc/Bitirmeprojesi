@@ -55,6 +55,10 @@ class Place(Base):
     video_url = Column(String, nullable=True)  # Mekan videosu URL'si
     campaign_text = Column(String, nullable=True)  # Mekan kampanyası (ör. 2 al 1 bedava)
 
+    # Çalışma saatleri (HH:MM formatında, ör. "09:00", "23:00")
+    opening_time = Column(String, nullable=True)  # Açılış saati
+    closing_time = Column(String, nullable=True)  # Kapanış saati
+
     # İlişkiler
     reviews = relationship("Review", back_populates="place")
     posts = relationship("Post", back_populates="place")
