@@ -68,8 +68,10 @@ export default function ArchivedMessagesScreen() {
                         lightImpact();
                         unarchiveConversation(id);
                     }}
+                    activeOpacity={0.8}
                 >
-                    <IconSymbol name="tray.and.arrow.up" size={24} color="#FFF" />
+                    <IconSymbol name="tray.and.arrow.up" size={20} color="#FFF" />
+                    <Text style={styles.swipeActionLabel}>Geri Al</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={[styles.swipeActionBtn, { backgroundColor: colors.semantic.error }]}
@@ -77,19 +79,27 @@ export default function ArchivedMessagesScreen() {
                         lightImpact();
                         deleteConversation(id);
                     }}
+                    activeOpacity={0.8}
                 >
-                    <IconSymbol name="trash" size={24} color="#FFF" />
+                    <IconSymbol name="trash" size={20} color="#FFF" />
+                    <Text style={styles.swipeActionLabel}>Sil</Text>
                 </TouchableOpacity>
             </View>
         );
     };
+
+    const renderSeparator = React.useCallback(() => (
+        <View style={styles.separator}>
+            <View style={[styles.separatorLine, { backgroundColor: 'rgba(255,255,255,0.08)' }]} />
+        </View>
+    ), []);
 
     const renderConversation = React.useCallback(({ item }: { item: Conversation }) => {
         const isSelected = selectedIds.includes(item.id);
 
         const content = (
             <TouchableOpacity
-                style={[styles.conversationCard, { backgroundColor: colors.background.primary }]}
+                style={[styles.conversationCard, { backgroundColor: colors.surface.elevated }]}
                 activeOpacity={0.7}
                 onPress={() => {
                     lightImpact();
@@ -208,7 +218,7 @@ export default function ArchivedMessagesScreen() {
                         activeOpacity={0.7}
                         onPress={toggleEditMode}
                     >
-                        <Text style={{ color: colors.accent.primary, fontSize: 16, fontWeight: "600", marginTop: 2 }}>
+                        <Text style={{ color: colors.accent.primary, fontSize: 14, fontWeight: "600" }}>
                             Düzenle
                         </Text>
                     </TouchableOpacity>
@@ -251,6 +261,7 @@ export default function ArchivedMessagesScreen() {
                 data={conversations}
                 keyExtractor={(item) => item.id}
                 renderItem={renderConversation}
+                ItemSeparatorComponent={renderSeparator}
                 ListEmptyComponent={listEmpty}
                 contentContainerStyle={{
                     paddingBottom: insets.bottom + (Platform.OS === "ios" ? 100 : 72),
@@ -303,7 +314,7 @@ const styles = StyleSheet.create({
         padding: 4,
     },
     headerTitle: {
-        fontSize: 20,
+        fontSize: 17,
         fontWeight: "700",
         letterSpacing: -0.3,
         textAlign: "center",
@@ -315,13 +326,25 @@ const styles = StyleSheet.create({
 
     /* Conversation Card */
     conversationCard: {
-        paddingHorizontal: 16,
-        paddingVertical: 6,
+        marginHorizontal: 12,
+        marginVertical: 4,
+        paddingHorizontal: 14,
+        paddingVertical: 10,
+        borderRadius: 16,
+        // 3D shadow
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.18,
+        shadowRadius: 10,
+        elevation: 6,
+        // Subtle border for glass / depth effect
+        borderWidth: 0.5,
+        borderColor: "rgba(255,255,255,0.06)",
     },
     cardInner: {
         flexDirection: "row",
         alignItems: "center",
-        paddingVertical: 8,
+        paddingVertical: 4,
     },
     avatarContainer: {
         position: "relative",
@@ -397,15 +420,42 @@ const styles = StyleSheet.create({
         marginBottom: 28,
     },
 
+    /* Separator */
+    separator: {
+        paddingHorizontal: 28,
+        height: 1,
+        justifyContent: "center",
+    },
+    separatorLine: {
+        height: StyleSheet.hairlineWidth,
+    },
+
     /* Swipe Actions */
     swipeActionsContainer: {
         flexDirection: "row",
-        width: 130, // 2 buttons * 65 width
+        alignItems: "center",
+        gap: 8,
+        paddingLeft: 8,
+        paddingRight: 12,
+        marginVertical: 4,
     },
     swipeActionBtn: {
-        flex: 1,
+        width: 56,
+        height: '100%' as any,
+        borderRadius: 14,
         justifyContent: "center",
         alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 3 },
+        shadowOpacity: 0.15,
+        shadowRadius: 6,
+        elevation: 4,
+        gap: 4,
+    },
+    swipeActionLabel: {
+        color: "#FFF",
+        fontSize: 11,
+        fontWeight: "600",
     },
 
     /* Edit Mode Toolbar */

@@ -404,6 +404,7 @@ class MatchProfileResponse(BaseModel):
     location_text: Optional[str] = None
     smoking: Optional[str] = None
     drinking: Optional[str] = None
+    looking_for: Optional[str] = None
     interests: List[str] = []
     star_sign: Optional[str] = None
     family_plans: Optional[str] = None
@@ -432,6 +433,7 @@ class MatchCandidateResponse(BaseModel):
     education: Optional[str] = None
     smoking: Optional[str] = None
     drinking: Optional[str] = None
+    looking_for: Optional[str] = None
     interests: List[str] = []
     star_sign: Optional[str] = None
     exercise: Optional[str] = None

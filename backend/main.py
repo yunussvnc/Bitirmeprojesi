@@ -4,7 +4,7 @@ from llm_recommend import recommend_pipeline
 import os
 from datetime import datetime
 
-from fastapi import FastAPI, Depends, HTTPException, UploadFile, File, status
+from fastapi import FastAPI, Depends, HTTPException, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from typing import List, Optional
@@ -876,6 +876,7 @@ def _match_profile_to_response(profile: models.MatchProfile) -> schemas.MatchPro
         star_sign=profile.star_sign,
         family_plans=profile.family_plans,
         exercise=profile.exercise,
+        prompts=prompts,
         is_active=profile.is_active,
         created_at=profile.created_at,
     )
@@ -980,6 +981,12 @@ def get_match_candidates(
                 interests = json.loads(profile.interests)
             except (json.JSONDecodeError, TypeError):
                 interests = []
+        prompts = []
+        if profile.prompts:
+            try:
+                prompts = json.loads(profile.prompts)
+            except (json.JSONDecodeError, TypeError):
+                prompts = []
 
         candidates.append(schemas.MatchCandidateResponse(
             user_id=profile.user_id,
@@ -996,6 +1003,7 @@ def get_match_candidates(
             interests=interests,
             star_sign=profile.star_sign,
             exercise=profile.exercise,
+            prompts=prompts,
             active_place_name=None,
             is_qr_verified=False,
             distance_priority=2,

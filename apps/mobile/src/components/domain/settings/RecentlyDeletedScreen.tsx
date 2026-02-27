@@ -2,6 +2,7 @@
  * Recently Deleted Messages Screen
  *
  * Provides a UI to view and restore softly deleted messages before their 2-day expiration.
+ * Tasarım olarak normal mesajlar ekranıyla aynı kart stilini kullanır.
  */
 
 import React, { useState, useEffect } from "react";
@@ -65,31 +66,6 @@ export default function RecentlyDeletedScreen() {
         setSelectedIds([]);
     };
 
-    const renderRightActions = (id: string) => {
-        return (
-            <View style={styles.swipeActionsContainer}>
-                <TouchableOpacity
-                    style={[styles.swipeActionBtn, { backgroundColor: colors.semantic.info }]}
-                    onPress={() => {
-                        lightImpact();
-                        restoreDeleted(id);
-                    }}
-                >
-                    <IconSymbol name="arrow.uturn.backward" size={24} color="#FFF" />
-                </TouchableOpacity>
-                <TouchableOpacity
-                    style={[styles.swipeActionBtn, { backgroundColor: colors.semantic.error }]}
-                    onPress={() => {
-                        lightImpact();
-                        permanentlyDelete(id);
-                    }}
-                >
-                    <IconSymbol name="trash" size={24} color="#FFF" />
-                </TouchableOpacity>
-            </View>
-        );
-    };
-
     const getDaysRemaining = (deletedAt?: number) => {
         if (!deletedAt) return 0;
         const now = Date.now();
@@ -99,13 +75,48 @@ export default function RecentlyDeletedScreen() {
         return Math.max(0, days);
     };
 
+    const renderRightActions = (id: string) => {
+        return (
+            <View style={styles.swipeActionsContainer}>
+                <TouchableOpacity
+                    style={[styles.swipeActionBtn, { backgroundColor: colors.semantic.info }]}
+                    onPress={() => {
+                        lightImpact();
+                        restoreDeleted(id);
+                    }}
+                    activeOpacity={0.8}
+                >
+                    <IconSymbol name="arrow.uturn.backward" size={20} color="#FFF" />
+                    <Text style={styles.swipeActionLabel}>Geri Al</Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={[styles.swipeActionBtn, { backgroundColor: colors.semantic.error }]}
+                    onPress={() => {
+                        lightImpact();
+                        permanentlyDelete(id);
+                    }}
+                    activeOpacity={0.8}
+                >
+                    <IconSymbol name="trash" size={20} color="#FFF" />
+                    <Text style={styles.swipeActionLabel}>Sil</Text>
+                </TouchableOpacity>
+            </View>
+        );
+    };
+
+    const renderSeparator = React.useCallback(() => (
+        <View style={styles.separator}>
+            <View style={[styles.separatorLine, { backgroundColor: 'rgba(255,255,255,0.08)' }]} />
+        </View>
+    ), []);
+
     const renderConversation = React.useCallback(({ item }: { item: Conversation }) => {
         const isSelected = selectedIds.includes(item.id);
         const daysLeft = getDaysRemaining(item.deletedAt);
 
         const content = (
             <TouchableOpacity
-                style={[styles.conversationCard, { backgroundColor: colors.background.primary }]}
+                style={[styles.conversationCard, { backgroundColor: colors.surface.elevated }]}
                 activeOpacity={0.7}
                 onPress={() => {
                     if (isEditMode) {
@@ -136,7 +147,7 @@ export default function RecentlyDeletedScreen() {
                     <View style={styles.cardContent}>
                         <View style={styles.cardTopRow}>
                             <Text
-                                style={[styles.name, { color: colors.text.primary }, item.unread && styles.boldText]}
+                                style={[styles.name, { color: colors.text.primary }]}
                                 numberOfLines={1}
                             >
                                 {item.name}
@@ -153,6 +164,16 @@ export default function RecentlyDeletedScreen() {
                         >
                             {item.lastMessage}
                         </Text>
+
+                        {/* Paylaşılan mekan etiketi */}
+                        {item.sharedPlace && (
+                            <View style={[styles.placeTag, { backgroundColor: colors.accent.primary + "18" }]}>
+                                <IconSymbol name="mappin.and.ellipse" size={12} color={colors.accent.primary} />
+                                <Text style={[styles.placeTagText, { color: colors.accent.primary }]} numberOfLines={1}>
+                                    {item.sharedPlace}
+                                </Text>
+                            </View>
+                        )}
                     </View>
                 </View>
             </TouchableOpacity>
@@ -221,7 +242,7 @@ export default function RecentlyDeletedScreen() {
                         activeOpacity={0.7}
                         onPress={toggleEditMode}
                     >
-                        <Text style={{ color: colors.accent.primary, fontSize: 16, fontWeight: "600", marginTop: 2 }}>
+                        <Text style={{ color: colors.accent.primary, fontSize: 14, fontWeight: "600" }}>
                             Düzenle
                         </Text>
                     </TouchableOpacity>
@@ -265,6 +286,7 @@ export default function RecentlyDeletedScreen() {
                 data={conversations}
                 keyExtractor={(item) => item.id}
                 renderItem={renderConversation}
+                ItemSeparatorComponent={renderSeparator}
                 ListEmptyComponent={listEmpty}
                 contentContainerStyle={{
                     paddingBottom: insets.bottom + (Platform.OS === "ios" ? 100 : 72),
@@ -317,7 +339,7 @@ const styles = StyleSheet.create({
         padding: 4,
     },
     headerTitle: {
-        fontSize: 20,
+        fontSize: 17,
         fontWeight: "700",
         letterSpacing: -0.3,
         textAlign: "center",
@@ -327,16 +349,39 @@ const styles = StyleSheet.create({
         padding: 4,
     },
 
-    /* Conversation Card */
+    /* Conversation Card – 3D elevated style (MessagesScreen ile aynı) */
     conversationCard: {
-        paddingHorizontal: 16,
-        paddingVertical: 6,
+        marginHorizontal: 12,
+        marginVertical: 4,
+        paddingHorizontal: 14,
+        paddingVertical: 10,
+        borderRadius: 16,
+        // 3D shadow
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 4 },
+        shadowOpacity: 0.18,
+        shadowRadius: 10,
+        elevation: 6,
+        // Subtle border for glass / depth effect
+        borderWidth: 0.5,
+        borderColor: "rgba(255,255,255,0.06)",
     },
     cardInner: {
         flexDirection: "row",
         alignItems: "center",
-        paddingVertical: 8,
+        paddingVertical: 4,
     },
+
+    /* Separator */
+    separator: {
+        paddingHorizontal: 28,
+        height: 1,
+        justifyContent: "center",
+    },
+    separatorLine: {
+        height: StyleSheet.hairlineWidth,
+    },
+
     avatarContainer: {
         position: "relative",
         marginRight: 14,
@@ -373,7 +418,7 @@ const styles = StyleSheet.create({
     },
     time: {
         fontSize: 13,
-        fontWeight: "500",
+        fontWeight: "400",
     },
     message: {
         fontSize: 14,
@@ -382,6 +427,22 @@ const styles = StyleSheet.create({
     },
     boldText: {
         fontWeight: "700",
+    },
+
+    /* Place Tag */
+    placeTag: {
+        flexDirection: "row",
+        alignItems: "center",
+        alignSelf: "flex-start",
+        marginTop: 6,
+        paddingHorizontal: 8,
+        paddingVertical: 3,
+        borderRadius: 6,
+        gap: 4,
+    },
+    placeTagText: {
+        fontSize: 12,
+        fontWeight: "600",
     },
 
     /* Empty State */
@@ -411,15 +472,32 @@ const styles = StyleSheet.create({
         marginBottom: 28,
     },
 
-    /* Swipe Actions */
+    /* Swipe Actions – rounded buttons with labels (MessagesScreen ile aynı) */
     swipeActionsContainer: {
         flexDirection: "row",
-        width: 130, // 2 buttons * 65 width
+        alignItems: "center",
+        gap: 8,
+        paddingLeft: 8,
+        paddingRight: 12,
+        marginVertical: 4,
     },
     swipeActionBtn: {
-        flex: 1,
+        width: 56,
+        height: '100%' as any,
+        borderRadius: 14,
         justifyContent: "center",
         alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 3 },
+        shadowOpacity: 0.15,
+        shadowRadius: 6,
+        elevation: 4,
+        gap: 4,
+    },
+    swipeActionLabel: {
+        color: "#FFF",
+        fontSize: 11,
+        fontWeight: "600",
     },
 
     /* Edit Mode Toolbar */
@@ -465,18 +543,19 @@ const styles = StyleSheet.create({
     floatingActions: {
         position: 'absolute',
         right: 20,
+        alignItems: 'center',
         zIndex: 10,
     },
     fab: {
-        width: 56,
-        height: 56,
-        borderRadius: 28,
-        alignItems: 'center',
+        width: 50,
+        height: 50,
+        borderRadius: 25,
         justifyContent: 'center',
+        alignItems: 'center',
         shadowColor: "#000",
         shadowOffset: { width: 0, height: 4 },
         shadowOpacity: 0.15,
-        shadowRadius: 10,
-        elevation: 6,
+        shadowRadius: 12,
+        elevation: 5,
     },
 });

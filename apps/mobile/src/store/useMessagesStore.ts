@@ -8,6 +8,7 @@ export interface Conversation {
     username: string;
     avatar: string;
     lastMessage: string;
+    lastMessageSender?: "me" | string; // "me" = kullanıcının kendisi, string = karşı tarafın adı
     timestamp: string;
     unread: boolean;
     isOnline: boolean;
@@ -15,7 +16,13 @@ export interface Conversation {
     isArchived?: boolean;
     isDeleted?: boolean;
     deletedAt?: number;
+    lastMessageAt: number; // Son mesajın gerçek timestamp'i (sıralama için)
 }
+
+const now = Date.now();
+const MINUTE = 60 * 1000;
+const HOUR = 60 * MINUTE;
+const DAY = 24 * HOUR;
 
 const INITIAL_CONVERSATIONS: Conversation[] = [
     {
@@ -23,84 +30,100 @@ const INITIAL_CONVERSATIONS: Conversation[] = [
         name: "Ahmet Yılmaz",
         username: "ahmetyilmaz",
         avatar: "https://i.pravatar.cc/150?img=1",
-        lastMessage: "Sortie harika bir yermiş, Boğaz manzaralı! 🌉",
+        lastMessage: "Olur ikisine de bakalım! Haritada kaydediyorum 📌",
+        lastMessageSender: "Ahmet Yılmaz",
         timestamp: "2dk",
         unread: true,
         isOnline: true,
         sharedPlace: "Sortie - Kuruçeşme",
+        lastMessageAt: now - 2 * MINUTE,
     },
     {
         id: "2",
         name: "Elif Kaya",
         username: "elifkaya",
         avatar: "https://i.pravatar.cc/150?img=5",
-        lastMessage: "Bir mekan paylaştı 📍",
+        lastMessage: "Çok güzel görünüyor! Cumartesi akşamı olur mu?",
+        lastMessageSender: "me",
         timestamp: "15dk",
         unread: true,
         isOnline: false,
         sharedPlace: "Kastel - Beyoğlu",
+        lastMessageAt: now - 15 * MINUTE,
     },
     {
         id: "3",
         name: "Burak Demir",
         username: "burakdemir",
         avatar: "https://i.pravatar.cc/150?img=3",
-        lastMessage: "Oraya bu hafta sonu gidelim mi?",
+        lastMessage: "Olur, Cuma akşamı uyar bana",
+        lastMessageSender: "me",
         timestamp: "1sa",
         unread: false,
         isOnline: true,
+        lastMessageAt: now - 1 * HOUR,
     },
     {
         id: "4",
         name: "Zeynep Toprak",
         username: "zeyneptoprak",
         avatar: "https://i.pravatar.cc/150?img=9",
-        lastMessage: "Teşekkürler, harika bir yermiş 🤩",
+        lastMessage: "Ne güzel! Bir sonraki sefere ben de geleyim",
+        lastMessageSender: "Zeynep Toprak",
         timestamp: "3sa",
         unread: false,
         isOnline: false,
+        lastMessageAt: now - 3 * HOUR,
     },
     {
         id: "5",
         name: "Can Aydın",
         username: "canaydin",
         avatar: "https://i.pravatar.cc/150?img=8",
-        lastMessage: "Sen de kaydettin mi orayı?",
+        lastMessage: "Evet kaydettim, çok iyi görünüyor!",
+        lastMessageSender: "me",
         timestamp: "5sa",
         unread: false,
         isOnline: false,
+        lastMessageAt: now - 5 * HOUR,
     },
     {
         id: "6",
         name: "Selin Arslan",
         username: "selinarslan",
         avatar: "https://i.pravatar.cc/150?img=10",
-        lastMessage: "Mekan önerisini yolladım 📍",
+        lastMessage: "Süpermiş! Teşekkürler 🙏",
+        lastMessageSender: "me",
         timestamp: "Dün",
         unread: false,
         isOnline: true,
         sharedPlace: "Oligark - Kuruçeşme",
+        lastMessageAt: now - 1 * DAY,
     },
     {
         id: "7",
         name: "Mert Özkan",
         username: "mertozkan",
         avatar: "https://i.pravatar.cc/150?img=11",
-        lastMessage: "Pop-up restorandan geldim, anlatacaklarım var",
+        lastMessage: "Vay be, detay ver! 🍽️",
+        lastMessageSender: "me",
         timestamp: "Dün",
         unread: false,
         isOnline: false,
+        lastMessageAt: now - 1.5 * DAY,
     },
     {
         id: "8",
         name: "Deniz Güneş",
         username: "denizgunes",
         avatar: "https://i.pravatar.cc/150?img=12",
-        lastMessage: "Haritada işaretledim sana 📌",
+        lastMessage: "Teşekkürler! Hemen kaydediyorum",
+        lastMessageSender: "me",
         timestamp: "2g",
         unread: false,
         isOnline: false,
         sharedPlace: "Fakülte Teras - Beyoğlu",
+        lastMessageAt: now - 2 * DAY,
     },
 ];
 
@@ -111,6 +134,7 @@ type MessagesState = {
     unarchiveConversation: (id: string) => void;
     deleteConversation: (id: string) => void;
     markAsRead: (id: string) => void;
+    updateLastMessageAt: (id: string, message: string, timestamp: string, sender?: "me" | string) => void;
 
     archiveMultiple: (ids: string[]) => void;
     unarchiveMultiple: (ids: string[]) => void;
@@ -149,6 +173,12 @@ export const useMessagesStore = create<MessagesState>()(
             markAsRead: (id) => set((state) => ({
                 conversations: state.conversations.map(c =>
                     c.id === id ? { ...c, unread: false } : c
+                )
+            })),
+
+            updateLastMessageAt: (id, message, timestamp, sender) => set((state) => ({
+                conversations: state.conversations.map(c =>
+                    c.id === id ? { ...c, lastMessage: message, timestamp, lastMessageAt: Date.now(), ...(sender !== undefined ? { lastMessageSender: sender } : {}) } : c
                 )
             })),
 
@@ -204,7 +234,7 @@ export const useMessagesStore = create<MessagesState>()(
             })
         }),
         {
-            name: "messages-store",
+            name: "messages-store-v2",
             storage: createJSONStorage(() => AsyncStorage),
         }
     )
