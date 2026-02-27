@@ -519,24 +519,26 @@ export default function FeedScreen() {
         </View>
       </Animated.View>
 
-      <Animated.View
-        style={[
-          styles.topWrap,
-          {
-            opacity: storyOpacity,
-          },
-        ]}
-        pointerEvents={storyHidden ? "none" : "auto"}
-      >
-        <View
-          onLayout={(e) => {
-            const h = e.nativeEvent.layout.height;
-            if (h !== storyHeight) setStoryHeight(h);
-          }}
+      {filter === "all" && (
+        <Animated.View
+          style={[
+            styles.topWrap,
+            {
+              opacity: storyOpacity,
+            },
+          ]}
+          pointerEvents={storyHidden ? "none" : "auto"}
         >
-          <FeedStoriesRow filter={filter} />
-        </View>
-      </Animated.View>
+          <View
+            onLayout={(e) => {
+              const h = e.nativeEvent.layout.height;
+              if (h !== storyHeight) setStoryHeight(h);
+            }}
+          >
+            <FeedStoriesRow filter={filter} />
+          </View>
+        </Animated.View>
+      )}
     </View>
   );
 
