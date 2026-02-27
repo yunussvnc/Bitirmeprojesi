@@ -23,6 +23,7 @@ import { useTheme } from "@/src/hooks/useTheme";
 import { Screen } from "@/src/components/layout";
 import { FeedCard } from "./components/FeedCard";
 import { CommentBottomSheet } from "./components/CommentBottomSheet";
+import { SharePostSheet } from "./components/SharePostSheet";
 import { EmptyState, LoadingState } from "@/src/components/ui";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { CreateTypeSheet, type CreateType } from "./components/CreateTypeSheet";
@@ -30,7 +31,7 @@ import { FeedStoriesRow } from "./components/FeedStoriesRow";
 import { PostOptionsSheet } from "./components/PostOptionsSheet";
 import { FeedMiniBar } from "./components/FeedMiniBar";
 import { createTextStyle, spacing } from "@/src/constants/design";
-import { getFeed, toggleLike, type Post, type FeedFilter } from "@/src/services/feedService";
+import { getFeed, getPost, toggleLike, type Post, type FeedFilter } from "@/src/services/feedService";
 import { getUnreadCount } from "@/src/services/notificationService";
 import { handleApiError } from "@/src/utils/errorHandler";
 import { lightImpact } from "@/src/utils/haptics";
@@ -53,6 +54,7 @@ export default function FeedScreen() {
   const [createSheetOpen, setCreateSheetOpen] = useState(false);
   const [filterDropdownOpen, setFilterDropdownOpen] = useState(false);
   const [isCardZooming, setIsCardZooming] = useState(false);
+  const [sharePost, setSharePost] = useState<Post | null>(null);
   const [headerHeight, setHeaderHeight] = useState(0);
   const [storyHeight, setStoryHeight] = useState(0);
   const [chromeHidden, setChromeHidden] = useState(false);
@@ -92,6 +94,18 @@ export default function FeedScreen() {
         if (p === 1) setLoading(true);
         else setLoadingMore(true);
         const res = await getFeed(p, pageSize, filter);
+        const pendingSharedPostId = useAppStore.getState().pendingSharedPostId;
+
+        if (refresh && pendingSharedPostId) {
+          try {
+            const sharedPost = await getPost(pendingSharedPostId);
+            useAppStore.getState().clearPendingSharedPostId();
+            res.items = [sharedPost, ...res.items.filter(post => post.id !== pendingSharedPostId)];
+          } catch (e) {
+            console.log("Paylaşılan gönderi bulunamadı veya hata:", e);
+          }
+        }
+
         if (refresh) {
           setPosts(res.items);
           setPage(1);
@@ -251,6 +265,7 @@ export default function FeedScreen() {
         onPlacePress={() => item.place_id && router.push(`/place/${item.place_id}` as any)}
         onLike={() => handleLike(item)}
         onComment={() => setCommentPostId(item.id)}
+        onShare={() => setSharePost(item)}
         onOptionsPress={() => setOptionsPost(item)}
         onZoomChange={setIsCardZooming}
       />
@@ -581,6 +596,12 @@ export default function FeedScreen() {
           visible={createSheetOpen}
           onClose={() => setCreateSheetOpen(false)}
           onSelect={handleCreateSelect}
+        />
+
+        <SharePostSheet
+          visible={!!sharePost}
+          onClose={() => setSharePost(null)}
+          post={sharePost}
         />
       </View>
     </Screen>

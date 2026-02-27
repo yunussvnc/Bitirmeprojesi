@@ -10,6 +10,7 @@ export interface Message {
     timestamp: string;
     imageUri?: string;
     status?: "sent" | "delivered" | "read";
+    sharedPostId?: number;
 }
 
 type ChatMessagesState = {

@@ -25,6 +25,7 @@ export interface FeedCardProps {
   onPlacePress?: () => void;
   onLike?: () => void;
   onComment?: () => void;
+  onShare?: () => void;
   onOptionsPress?: () => void;
   onZoomChange?: (zooming: boolean) => void;
 }
@@ -36,6 +37,7 @@ export function FeedCard({
   onPlacePress,
   onLike,
   onComment,
+  onShare,
   onOptionsPress,
   onZoomChange,
 }: FeedCardProps) {
@@ -162,6 +164,16 @@ export function FeedCard({
             >
               <IconSymbol name="bubble.right" size={20} color={colors.text.secondary} />
               <Text style={[styles.actionCount, { color: colors.text.secondary }]}>{post.comment_count}</Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.actionBtn}
+              onPress={() => {
+                lightImpact();
+                onShare?.();
+              }}
+              activeOpacity={0.7}
+            >
+              <IconSymbol name="paperplane" size={20} color={colors.text.secondary} />
             </TouchableOpacity>
           </View>
 

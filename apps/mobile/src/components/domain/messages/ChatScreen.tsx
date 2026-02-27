@@ -27,6 +27,7 @@ import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { lightImpact, success } from "@/src/utils/haptics";
 import { useAppStore } from "@/src/store/useAppStore";
 import { useMessagesStore } from "@/src/store/useMessagesStore";
+import { useChatMessagesStore } from "@/src/store/useChatMessagesStore";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 
@@ -41,9 +42,10 @@ interface Message {
         address: string;
         image: string;
     };
-    imageUri?: string; // eklenecek
-    seen?: boolean; // Mesajın görülüp görülmediği (legacy)
+    imageUri?: string;
+    seen?: boolean;
     status?: "sent" | "delivered" | "read";
+    sharedPostId?: number;
 }
 
 /* ── Dummy Contact Data ── */
@@ -187,22 +189,52 @@ export default function ChatScreen() {
     const router = useRouter();
     const { chatId } = useLocalSearchParams<{ chatId: string }>();
     const [inputText, setInputText] = useState("");
-    const [messages, setMessages] = useState(() => getInitialMessages(chatId || "1"));
     const [lastSeenId, setLastSeenId] = useState<string | null>(null);
     const [isOptionsVisible, setIsOptionsVisible] = useState(false);
     const [isReportVisible, setIsReportVisible] = useState(false);
     const [reportText, setReportText] = useState("");
     const flatListRef = useRef<FlatList>(null);
+    const didInitialScrollRef = useRef(false);
+    const resolvedChatId = chatId || "1";
 
-    const contact = CONTACTS[chatId || "1"] || CONTACTS["1"];
+    // Store'dan mesajları mount anında bir kere oku (subscribe etme — hydration loop'u önler)
+    const [messages, setMessages] = useState<Message[]>(() => {
+        const initial = getInitialMessages(resolvedChatId);
+        // Store'da paylaşılmış gönderi mesajları varsa ekle
+        try {
+            const storeData = useChatMessagesStore.getState().messagesByChat[resolvedChatId];
+            if (storeData && storeData.length > 0) {
+                const seenIds = new Set(initial.map((m) => m.id));
+                const newFromStore: Message[] = storeData
+                    .filter((m) => !seenIds.has(m.id))
+                    .map((m) => ({
+                        id: m.id,
+                        text: m.text,
+                        isMine: m.isMine,
+                        timestamp: (() => {
+                            try {
+                                const d = new Date(m.timestamp);
+                                return d.toLocaleTimeString("tr-TR", { hour: "2-digit", minute: "2-digit" });
+                            } catch (_e) { return m.timestamp; }
+                        })(),
+                        imageUri: m.imageUri,
+                        status: m.status,
+                        sharedPostId: m.sharedPostId,
+                    }));
+                return [...initial, ...newFromStore];
+            }
+        } catch (_e) { /* ignore */ }
+        return initial;
+    });
+
+    const contact = CONTACTS[resolvedChatId] || CONTACTS["1"];
 
     useEffect(() => {
-        // Mesaj ekranı açıldığında en son mesajı seen olarak işaretle
         if (messages.length > 0) {
             setLastSeenId(messages[messages.length - 1].id);
-            // TODO: Backend'e seen bilgisi gönder
         }
-    }, [messages]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     const handleBlock = () => {
         setIsOptionsVisible(false);
@@ -252,9 +284,16 @@ export default function ChatScreen() {
             status: "sent",
         };
         setMessages((prev) => [...prev, newMsg]);
-        // Update conversation's last message and timestamp in the global store
+        // Store'a ve conversations'a yaz
         if (chatId) {
-            useMessagesStore.getState().updateLastMessageAt(chatId as string, newMsg.text, newMsg.timestamp, "me");
+            useChatMessagesStore.getState().addMessage(chatId, {
+                id: newMsg.id,
+                text: newMsg.text,
+                isMine: true,
+                timestamp: new Date().toISOString(),
+                status: "sent",
+            });
+            useMessagesStore.getState().updateLastMessageAt(chatId, newMsg.text, newMsg.timestamp, "me");
         }
         setInputText("");
         setTimeout(() => {
@@ -327,14 +366,52 @@ export default function ChatScreen() {
             status: "sent",
         };
         setMessages((prev) => [...prev, newMsg]);
-        // Update conversation's last message and timestamp in the global store
+        // Store'a ve conversations'a yaz
         if (chatId) {
-            useMessagesStore.getState().updateLastMessageAt(chatId as string, newMsg.text || "Fotoğraf 📷", newMsg.timestamp, "me");
+            useChatMessagesStore.getState().addMessage(chatId, {
+                id: newMsg.id,
+                text: newMsg.text || "Fotoğraf 📷",
+                isMine: true,
+                timestamp: new Date().toISOString(),
+                imageUri: uri,
+                status: "sent",
+            });
+            useMessagesStore.getState().updateLastMessageAt(chatId, newMsg.text || "Fotoğraf 📷", newMsg.timestamp, "me");
         }
         setInputText("");
         setTimeout(() => {
             flatListRef.current?.scrollToEnd({ animated: true });
         }, 100);
+    };
+
+    const handleDeleteMessage = (msgId: string) => {
+        lightImpact();
+        Alert.alert(
+            "Mesajı Sil",
+            "Bu mesajı silmek istediğinize emin misiniz?",
+            [
+                { text: "İptal", style: "cancel" },
+                {
+                    text: "Sil",
+                    style: "destructive",
+                    onPress: () => {
+                        setMessages((prev) => prev.filter((m) => m.id !== msgId));
+                        // Store'dan da sil
+                        if (chatId) {
+                            const store = useChatMessagesStore.getState();
+                            const existing = store.messagesByChat[chatId] ?? [];
+                            const filtered = existing.filter((m) => m.id !== msgId);
+                            useChatMessagesStore.setState({
+                                messagesByChat: {
+                                    ...store.messagesByChat,
+                                    [chatId]: filtered,
+                                },
+                            });
+                        }
+                    },
+                },
+            ]
+        );
     };
 
     const renderMessage = ({ item }: { item: Message }) => {
@@ -345,24 +422,23 @@ export default function ChatScreen() {
         if (item.isMine) {
             const isRead = item.status === 'read' || item.seen || (isLast && lastSeenId === item.id);
             const isDelivered = item.status === 'delivered';
-            const tickColor = "#2ecc71"; // yeşil renk talep edildi
+            const tickColor = "#2ecc71";
 
             if (isRead) {
-                // Çift tik (görüldü)
                 tickIcon = <MaterialCommunityIcons name="check-all" size={16} color={tickColor} style={{ marginLeft: 4 }} />;
             } else if (isDelivered) {
-                // Çift tik (iletildi)
                 tickIcon = <MaterialCommunityIcons name="check-all" size={16} color={tickColor} style={{ marginLeft: 4 }} />;
             } else {
-                // Tek tik (iletilmedi/gönderildi)
                 tickIcon = <MaterialCommunityIcons name="check" size={16} color={tickColor} style={{ marginLeft: 4 }} />;
             }
         }
 
+        const longPressHandler = () => handleDeleteMessage(item.id);
+
         // Mekan kartı mesajı
         if (item.placeCard) {
             return (
-                <View style={[styles.messageBubbleRow, item.isMine ? styles.myRow : styles.theirRow]}>
+                <TouchableOpacity style={[styles.messageBubbleRow, item.isMine ? styles.myRow : styles.theirRow]} onLongPress={longPressHandler} activeOpacity={0.9}>
                     <View style={[styles.messageContentWrapper, item.isMine ? { alignItems: 'flex-end' } : { alignItems: 'flex-start' }]}>
                         <TouchableOpacity
                             activeOpacity={0.8}
@@ -429,14 +505,72 @@ export default function ChatScreen() {
                             {item.isMine && tickIcon}
                         </View>
                     </View>
-                </View>
+                </TouchableOpacity>
+            );
+        }
+
+        // Paylaşılan gönderi mesajı
+        if (item.sharedPostId && item.imageUri) {
+            return (
+                <TouchableOpacity style={[styles.messageBubbleRow, item.isMine ? styles.myRow : styles.theirRow]} onLongPress={longPressHandler} activeOpacity={0.9}>
+                    <View style={[styles.messageContentWrapper, item.isMine ? { alignItems: 'flex-end' } : { alignItems: 'flex-start' }]}>
+                        <TouchableOpacity
+                            activeOpacity={0.8}
+                            onPress={() => {
+                                lightImpact();
+                                useAppStore.getState().setPendingSharedPostId(item.sharedPostId!);
+                                router.push(`/(tabs)/feed` as any);
+                            }}
+                            style={[
+                                styles.newPlaceCardBubble,
+                                {
+                                    backgroundColor: item.isMine ? "#ffffff" : colors.surface.elevated,
+                                    borderColor: colors.surface.border,
+                                },
+                            ]}
+                        >
+                            <Image
+                                source={{ uri: item.imageUri }}
+                                style={styles.placeCardImage}
+                                contentFit="cover"
+                            />
+                            <View style={styles.placeCardInfo}>
+                                <View style={styles.placeCardNameRow}>
+                                    <IconSymbol
+                                        name="photo.on.rectangle"
+                                        size={14}
+                                        color={item.isMine ? "#2ecc71" : colors.accent.primary}
+                                    />
+                                    <Text
+                                        style={[
+                                            styles.placeCardName,
+                                            { color: item.isMine ? "#000000" : colors.text.primary },
+                                        ]}
+                                        numberOfLines={2}
+                                    >
+                                        {item.text}
+                                    </Text>
+                                </View>
+                                <Text style={[styles.placeCardHint, { color: item.isMine ? "#2ecc71" : colors.accent.primary }]}>
+                                    Gönderiyi aç →
+                                </Text>
+                            </View>
+                        </TouchableOpacity>
+                        <View style={[styles.newTimeRow, item.isMine ? { justifyContent: 'flex-end' } : { justifyContent: 'flex-start' }]}>
+                            <Text style={[styles.newMsgTime, { color: colors.text.tertiary }]}>
+                                {item.timestamp}
+                            </Text>
+                            {item.isMine && tickIcon}
+                        </View>
+                    </View>
+                </TouchableOpacity>
             );
         }
 
         // Fotoğraflı mesaj
         if (item.imageUri) {
             return (
-                <View style={[styles.messageBubbleRow, item.isMine ? styles.myRow : styles.theirRow]}>
+                <TouchableOpacity style={[styles.messageBubbleRow, item.isMine ? styles.myRow : styles.theirRow]} onLongPress={longPressHandler} activeOpacity={0.9}>
                     <View style={[styles.messageContentWrapper, item.isMine ? { alignItems: 'flex-end' } : { alignItems: 'flex-start' }]}>
                         <View style={[styles.imageBubble, item.isMine ? { backgroundColor: "#ffffff" } : { backgroundColor: colors.surface.elevated, borderColor: colors.surface.border, borderWidth: 1 }]}>
                             <Image
@@ -457,12 +591,12 @@ export default function ChatScreen() {
                             {item.isMine && tickIcon}
                         </View>
                     </View>
-                </View>
+                </TouchableOpacity>
             );
         }
 
         return (
-            <View style={[styles.messageBubbleRow, item.isMine ? styles.myRow : styles.theirRow]}>
+            <TouchableOpacity style={[styles.messageBubbleRow, item.isMine ? styles.myRow : styles.theirRow]} onLongPress={longPressHandler} activeOpacity={0.9}>
                 <View style={[styles.messageContentWrapper, item.isMine ? { alignItems: 'flex-end' } : { alignItems: 'flex-start' }]}>
                     <View
                         style={[
@@ -493,213 +627,217 @@ export default function ChatScreen() {
                         {item.isMine && tickIcon}
                     </View>
                 </View>
-            </View>
+            </TouchableOpacity>
         );
     };
 
     return (
-        <TouchableWithoutFeedback onPress={() => Keyboard.dismiss()} accessible={false}>
-            <KeyboardAvoidingView
-                style={[styles.container, { backgroundColor: colors.background.primary }]}
-                behavior={Platform.OS === "ios" ? "padding" : undefined}
-                keyboardVerticalOffset={0}
+        <KeyboardAvoidingView
+            style={[styles.container, { backgroundColor: colors.background.primary }]}
+            behavior={Platform.OS === "ios" ? "padding" : undefined}
+            keyboardVerticalOffset={0}
+        >
+            {/* ── Header ── */}
+            <View
+                style={[
+                    styles.header,
+                    {
+                        paddingTop: insets.top + 4,
+                        borderBottomColor: colors.surface.border,
+                        backgroundColor: colors.background.primary,
+                    },
+                ]}
             >
-                {/* ── Header ── */}
-                <View
-                    style={[
-                        styles.header,
-                        {
-                            paddingTop: insets.top + 4,
-                            borderBottomColor: colors.surface.border,
-                            backgroundColor: colors.background.primary,
-                        },
-                    ]}
+                <TouchableOpacity
+                    style={styles.backBtn}
+                    hitSlop={12}
+                    activeOpacity={0.7}
+                    onPress={() => {
+                        lightImpact();
+                        router.back();
+                    }}
                 >
+                    <IconSymbol name="chevron.left" size={26} color={colors.text.primary} />
+                </TouchableOpacity>
+
+                <TouchableOpacity style={styles.headerProfile} activeOpacity={0.8}>
+                    <Image source={{ uri: contact.avatar }} style={styles.headerAvatar} contentFit="cover" />
+                    <View>
+                        <Text style={[styles.headerName, { color: colors.text.primary }]} numberOfLines={1}>
+                            {contact.name}
+                        </Text>
+                        <Text style={[styles.headerStatus, { color: contact.isOnline ? "#2ecc71" : colors.text.tertiary }]}>
+                            {contact.isOnline ? "Çevrimiçi" : "Son görülme: bugün"}
+                        </Text>
+                    </View>
+                </TouchableOpacity>
+
+                <View style={styles.headerActions}>
                     <TouchableOpacity
-                        style={styles.backBtn}
-                        hitSlop={12}
+                        hitSlop={8}
                         activeOpacity={0.7}
                         onPress={() => {
                             lightImpact();
-                            router.back();
+                            setIsOptionsVisible(true);
                         }}
                     >
-                        <IconSymbol name="chevron.left" size={26} color={colors.text.primary} />
+                        <IconSymbol name="ellipsis" size={24} color={colors.text.primary} />
+                    </TouchableOpacity>
+                </View>
+            </View>
+
+            {/* ── Messages ── */}
+            <FlatList
+                ref={flatListRef}
+                style={{ flex: 1 }}
+                data={messages}
+                keyExtractor={(item) => item.id}
+                renderItem={renderMessage}
+                contentContainerStyle={styles.messageList}
+                showsVerticalScrollIndicator={false}
+                keyboardShouldPersistTaps="handled"
+                keyboardDismissMode="on-drag"
+                onScrollBeginDrag={() => Keyboard.dismiss()}
+                onContentSizeChange={() => {
+                    if (!didInitialScrollRef.current) {
+                        didInitialScrollRef.current = true;
+                        setTimeout(() => flatListRef.current?.scrollToEnd({ animated: false }), 50);
+                    }
+                }}
+            />
+
+            {/* ── Input Bar ── */}
+            <View
+                style={[
+                    styles.inputBar,
+                    {
+                        paddingBottom: insets.bottom || 12,
+                        backgroundColor: colors.background.primary,
+                        borderTopColor: colors.surface.border,
+                    },
+                ]}
+            >
+                <View style={[styles.inputContainer, { backgroundColor: colors.surface.elevated, borderColor: colors.surface.border }]}>
+                    <TouchableOpacity style={styles.cameraBtn} activeOpacity={0.7} onPress={handleCameraPress}>
+                        <IconSymbol name="camera.fill" size={20} color={colors.accent.primary} />
                     </TouchableOpacity>
 
-                    <TouchableOpacity style={styles.headerProfile} activeOpacity={0.8}>
-                        <Image source={{ uri: contact.avatar }} style={styles.headerAvatar} contentFit="cover" />
-                        <View>
-                            <Text style={[styles.headerName, { color: colors.text.primary }]} numberOfLines={1}>
-                                {contact.name}
-                            </Text>
-                            <Text style={[styles.headerStatus, { color: contact.isOnline ? "#2ecc71" : colors.text.tertiary }]}>
-                                {contact.isOnline ? "Çevrimiçi" : "Son görülme: bugün"}
-                            </Text>
-                        </View>
-                    </TouchableOpacity>
-
-                    <View style={styles.headerActions}>
-                        <TouchableOpacity
-                            hitSlop={8}
-                            activeOpacity={0.7}
-                            onPress={() => {
-                                lightImpact();
-                                setIsOptionsVisible(true);
-                            }}
-                        >
-                            <IconSymbol name="ellipsis" size={24} color={colors.text.primary} />
-                        </TouchableOpacity>
-                    </View>
+                    <TextInput
+                        style={[styles.textInput, { color: colors.text.primary }]}
+                        placeholder="Mesaj yaz..."
+                        placeholderTextColor={colors.text.tertiary}
+                        value={inputText}
+                        onChangeText={setInputText}
+                        multiline
+                        maxLength={1000}
+                        cursorColor={colors.accent.primary}
+                    />
                 </View>
 
-                {/* ── Messages ── */}
-                <FlatList
-                    ref={flatListRef}
-                    style={{ flex: 1 }}
-                    data={messages}
-                    keyExtractor={(item) => item.id}
-                    renderItem={renderMessage}
-                    contentContainerStyle={styles.messageList}
-                    showsVerticalScrollIndicator={false}
-                    keyboardShouldPersistTaps="handled"
-                    keyboardDismissMode="on-drag"
-                    onContentSizeChange={() => flatListRef.current?.scrollToEnd({ animated: false })}
-                />
-
-                {/* ── Input Bar ── */}
-                <View
-                    style={[
-                        styles.inputBar,
-                        {
-                            paddingBottom: insets.bottom || 12,
-                            backgroundColor: colors.background.primary,
-                            borderTopColor: colors.surface.border,
-                        },
-                    ]}
-                >
-                    <View style={[styles.inputContainer, { backgroundColor: colors.surface.elevated, borderColor: colors.surface.border }]}>
-                        <TouchableOpacity style={styles.cameraBtn} activeOpacity={0.7} onPress={handleCameraPress}>
-                            <IconSymbol name="camera.fill" size={20} color={colors.accent.primary} />
-                        </TouchableOpacity>
-
-                        <TextInput
-                            style={[styles.textInput, { color: colors.text.primary }]}
-                            placeholder="Mesaj yaz..."
-                            placeholderTextColor={colors.text.tertiary}
-                            value={inputText}
-                            onChangeText={setInputText}
-                            multiline
-                            maxLength={1000}
-                            cursorColor={colors.accent.primary}
-                        />
-                    </View>
-
-                    {inputText.trim() ? (
-                        <TouchableOpacity
-                            style={styles.sendButton}
-                            activeOpacity={0.7}
-                            onPress={sendMessage}
-                        >
-                            <IconSymbol name="paperplane" size={20} color={colors.accent.primary} />
-                        </TouchableOpacity>
-                    ) : null}
-                </View>
-
-                {/* ── Options Modal ── */}
-                <Modal
-                    visible={isOptionsVisible}
-                    transparent
-                    animationType="fade"
-                    onRequestClose={() => setIsOptionsVisible(false)}
-                >
-                    <TouchableWithoutFeedback onPress={() => setIsOptionsVisible(false)}>
-                        <View style={styles.modalOverlay}>
-                            <TouchableWithoutFeedback>
-                                <View style={[styles.optionsModal, { backgroundColor: colors.surface.elevated }]}>
-                                    <TouchableOpacity style={styles.optionBtn} onPress={handleBlock}>
-                                        <Text style={[styles.optionText, { color: "#e74c3c" }]}>Engelle</Text>
-                                    </TouchableOpacity>
-                                    <View style={[styles.separator, { backgroundColor: colors.surface.border }]} />
-                                    <TouchableOpacity
-                                        style={styles.optionBtn}
-                                        onPress={() => {
-                                            setIsOptionsVisible(false);
-                                            setTimeout(() => setIsReportVisible(true), 300); // Wait for modal fade out
-                                        }}
-                                    >
-                                        <Text style={[styles.optionText, { color: "#e74c3c" }]}>Şikayet Et ve Kısıtla</Text>
-                                    </TouchableOpacity>
-                                    <View style={[styles.separator, { backgroundColor: colors.surface.border }]} />
-                                    <TouchableOpacity style={styles.optionBtn} onPress={() => setIsOptionsVisible(false)}>
-                                        <Text style={[styles.optionText, { color: colors.text.primary, fontWeight: "500" }]}>İptal</Text>
-                                    </TouchableOpacity>
-                                </View>
-                            </TouchableWithoutFeedback>
-                        </View>
-                    </TouchableWithoutFeedback>
-                </Modal>
-
-                {/* ── Report Modal ── */}
-                <Modal
-                    visible={isReportVisible}
-                    transparent
-                    animationType="slide"
-                    onRequestClose={() => {
-                        setIsReportVisible(false);
-                        setReportText("");
-                    }}
-                >
-                    <KeyboardAvoidingView
-                        style={{ flex: 1 }}
-                        behavior={Platform.OS === "ios" ? "padding" : undefined}
+                {inputText.trim() ? (
+                    <TouchableOpacity
+                        style={styles.sendButton}
+                        activeOpacity={0.7}
+                        onPress={sendMessage}
                     >
-                        <View style={styles.reportModalContainer}>
-                            <View style={[styles.reportModalContent, { backgroundColor: colors.surface.elevated }]}>
-                                <View style={styles.reportHeader}>
-                                    <Text style={[styles.reportTitle, { color: colors.text.primary }]}>Şikayet Nedeni</Text>
-                                    <TouchableOpacity onPress={() => {
-                                        setIsReportVisible(false);
-                                        setReportText("");
-                                    }}>
-                                        <IconSymbol name="xmark" size={24} color={colors.text.tertiary} />
-                                    </TouchableOpacity>
-                                </View>
-                                <Text style={[styles.reportDesc, { color: colors.text.secondary }]}>
-                                    {contact.name} adlı kullanıcıyı neden şikayet etmek istiyorsunuz? (Maksimum 500 harf)
-                                </Text>
-                                <View style={[styles.reportInputWrapper, { borderColor: colors.surface.border, backgroundColor: colors.background.primary }]}>
-                                    <TextInput
-                                        style={[styles.reportInput, { color: colors.text.primary }]}
-                                        placeholder="Lütfen detaylıca açıklayın..."
-                                        placeholderTextColor={colors.text.tertiary}
-                                        multiline
-                                        value={reportText}
-                                        onChangeText={handleReportTextChange}
-                                        textAlignVertical="top"
-                                        cursorColor={colors.accent.primary}
-                                    />
-                                </View>
-                                <Text style={[
-                                    styles.wordCount,
-                                    { color: reportText.length >= 500 ? "#e74c3c" : colors.text.secondary }
-                                ]}>
-                                    {reportText.length} / 500 harf
-                                </Text>
+                        <IconSymbol name="paperplane" size={20} color={colors.accent.primary} />
+                    </TouchableOpacity>
+                ) : null}
+            </View>
 
+            {/* ── Options Modal ── */}
+            <Modal
+                visible={isOptionsVisible}
+                transparent
+                animationType="fade"
+                onRequestClose={() => setIsOptionsVisible(false)}
+            >
+                <TouchableWithoutFeedback onPress={() => setIsOptionsVisible(false)}>
+                    <View style={styles.modalOverlay}>
+                        <TouchableWithoutFeedback>
+                            <View style={[styles.optionsModal, { backgroundColor: colors.surface.elevated }]}>
+                                <TouchableOpacity style={styles.optionBtn} onPress={handleBlock}>
+                                    <Text style={[styles.optionText, { color: "#e74c3c" }]}>Engelle</Text>
+                                </TouchableOpacity>
+                                <View style={[styles.separator, { backgroundColor: colors.surface.border }]} />
                                 <TouchableOpacity
-                                    style={[styles.submitReportBtn, { backgroundColor: colors.accent.primary }]}
-                                    activeOpacity={0.8}
-                                    onPress={handleReport}
+                                    style={styles.optionBtn}
+                                    onPress={() => {
+                                        setIsOptionsVisible(false);
+                                        setTimeout(() => setIsReportVisible(true), 300); // Wait for modal fade out
+                                    }}
                                 >
-                                    <Text style={styles.submitReportText}>Gönder ve Engelle</Text>
+                                    <Text style={[styles.optionText, { color: "#e74c3c" }]}>Şikayet Et ve Kısıtla</Text>
+                                </TouchableOpacity>
+                                <View style={[styles.separator, { backgroundColor: colors.surface.border }]} />
+                                <TouchableOpacity style={styles.optionBtn} onPress={() => setIsOptionsVisible(false)}>
+                                    <Text style={[styles.optionText, { color: colors.text.primary, fontWeight: "500" }]}>İptal</Text>
                                 </TouchableOpacity>
                             </View>
+                        </TouchableWithoutFeedback>
+                    </View>
+                </TouchableWithoutFeedback>
+            </Modal>
+
+            {/* ── Report Modal ── */}
+            <Modal
+                visible={isReportVisible}
+                transparent
+                animationType="slide"
+                onRequestClose={() => {
+                    setIsReportVisible(false);
+                    setReportText("");
+                }}
+            >
+                <KeyboardAvoidingView
+                    style={{ flex: 1 }}
+                    behavior={Platform.OS === "ios" ? "padding" : undefined}
+                >
+                    <View style={styles.reportModalContainer}>
+                        <View style={[styles.reportModalContent, { backgroundColor: colors.surface.elevated }]}>
+                            <View style={styles.reportHeader}>
+                                <Text style={[styles.reportTitle, { color: colors.text.primary }]}>Şikayet Nedeni</Text>
+                                <TouchableOpacity onPress={() => {
+                                    setIsReportVisible(false);
+                                    setReportText("");
+                                }}>
+                                    <IconSymbol name="xmark" size={24} color={colors.text.tertiary} />
+                                </TouchableOpacity>
+                            </View>
+                            <Text style={[styles.reportDesc, { color: colors.text.secondary }]}>
+                                {contact.name} adlı kullanıcıyı neden şikayet etmek istiyorsunuz? (Maksimum 500 harf)
+                            </Text>
+                            <View style={[styles.reportInputWrapper, { borderColor: colors.surface.border, backgroundColor: colors.background.primary }]}>
+                                <TextInput
+                                    style={[styles.reportInput, { color: colors.text.primary }]}
+                                    placeholder="Lütfen detaylıca açıklayın..."
+                                    placeholderTextColor={colors.text.tertiary}
+                                    multiline
+                                    value={reportText}
+                                    onChangeText={handleReportTextChange}
+                                    textAlignVertical="top"
+                                    cursorColor={colors.accent.primary}
+                                />
+                            </View>
+                            <Text style={[
+                                styles.wordCount,
+                                { color: reportText.length >= 500 ? "#e74c3c" : colors.text.secondary }
+                            ]}>
+                                {reportText.length} / 500 harf
+                            </Text>
+
+                            <TouchableOpacity
+                                style={[styles.submitReportBtn, { backgroundColor: colors.accent.primary }]}
+                                activeOpacity={0.8}
+                                onPress={handleReport}
+                            >
+                                <Text style={styles.submitReportText}>Gönder ve Engelle</Text>
+                            </TouchableOpacity>
                         </View>
-                    </KeyboardAvoidingView>
-                </Modal>
-            </KeyboardAvoidingView>
-        </TouchableWithoutFeedback>
+                    </View>
+                </KeyboardAvoidingView>
+            </Modal>
+        </KeyboardAvoidingView>
     );
 }
 

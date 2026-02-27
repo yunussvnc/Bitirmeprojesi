@@ -35,7 +35,7 @@ import { getPlaceImageSource } from '@/src/utils/placeImages';
 import { StoryViewerModal } from './StoryViewerModal';
 import { useSettingsStore } from '@/src/store/useSettingsStore';
 import { useAppStore } from '@/src/store/useAppStore';
-import { FeedCard, CommentBottomSheet } from '@/src/components/domain/feed';
+import { FeedCard, CommentBottomSheet, SharePostSheet } from '@/src/components/domain/feed';
 import { getPlaceStatus } from '@/src/utils/placeStatus';
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
@@ -134,6 +134,7 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
   const [showHeroImage, setShowHeroImage] = useState(false);
   const [selectedPostId, setSelectedPostId] = useState<number | null>(null);
   const [commentPostId, setCommentPostId] = useState<number | null>(null);
+  const [sharePost, setSharePost] = useState<Post | null>(null);
   const hideTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const navigation = useNavigation();
 
@@ -674,6 +675,7 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
                   onPlacePress={() => selectedPost.place_id && router.push(`/place/${selectedPost.place_id}` as any)}
                   onLike={() => handleLike(selectedPost)}
                   onComment={() => setCommentPostId(selectedPost.id)}
+                  onShare={() => setSharePost(selectedPost)}
                 />
               </Pressable>
               <CommentBottomSheet
@@ -685,6 +687,12 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
             </Pressable>
           </Modal>
         )}
+
+        <SharePostSheet
+          visible={!!sharePost}
+          onClose={() => setSharePost(null)}
+          post={sharePost}
+        />
       </Animated.View>
     </Animated.View>
   );

@@ -23,7 +23,7 @@ import { Swipeable } from "react-native-gesture-handler";
 import { useTheme } from "@/src/hooks/useTheme";
 import { Screen } from "@/src/components/layout";
 import { EmptyState, AnimatedPlaceCard } from "@/src/components/ui";
-import { FeedCard } from "@/src/components/domain/feed";
+import { FeedCard, SharePostSheet } from "@/src/components/domain/feed";
 import { useAppStore, type SavedPlace } from "@/src/store/useAppStore";
 import { getPlaceImageSource, hasPlaceImage } from "@/src/utils/placeImages";
 import { createTextStyle, spacing as designSpacing } from "@/src/constants/design";
@@ -47,6 +47,7 @@ export default function SavedScreen() {
   const postsById = useAppStore((s) => s.savedPostsById);
   const clearSavedPosts = useAppStore((s) => s.clearSavedPosts);
   const [refreshing, setRefreshing] = useState(false);
+  const [sharePost, setSharePost] = useState<Post | null>(null);
   const [placesData, setPlacesData] = useState<Record<string, Place>>({});
 
   // Listen for tab press to scroll to top
@@ -371,6 +372,7 @@ export default function SavedScreen() {
               onPress={() => item.place_id && router.push(`/place/${item.place_id}` as any)}
               onAuthorPress={() => router.push(`/user/${item.user_id}` as any)}
               onPlacePress={() => item.place_id && router.push(`/place/${item.place_id}` as any)}
+              onShare={() => setSharePost(item)}
             />
           )}
           ListHeaderComponent={listHeader}
@@ -385,6 +387,12 @@ export default function SavedScreen() {
           style={styles.flatList}
         />
       )}
+
+      <SharePostSheet
+        visible={!!sharePost}
+        onClose={() => setSharePost(null)}
+        post={sharePost}
+      />
     </Screen>
   );
 }

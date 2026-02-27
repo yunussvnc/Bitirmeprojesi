@@ -25,7 +25,7 @@ import { Avatar, LoadingState, ErrorState } from "@/src/components/ui";
 import { useTheme } from "@/src/hooks/useTheme";
 import { spacing } from "@/src/constants/design";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
-import { FeedCard, CommentBottomSheet } from "@/src/components/domain/feed";
+import { FeedCard, CommentBottomSheet, SharePostSheet } from "@/src/components/domain/feed";
 import { getPost, toggleLike, type Post } from "@/src/services/feedService";
 import {
   getUserProfile,
@@ -59,6 +59,7 @@ export default function UserProfileScreen() {
   const [followLoading, setFollowLoading] = useState(false);
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
   const [commentPostId, setCommentPostId] = useState<number | null>(null);
+  const [sharePostForSheet, setSharePostForSheet] = useState<Post | null>(null);
   const [postLoading, setPostLoading] = useState(false);
 
   const userId = id ? parseInt(id, 10) : NaN;
@@ -513,6 +514,7 @@ export default function UserProfileScreen() {
                 }}
                 onLike={handleLike}
                 onComment={() => setCommentPostId(selectedPost.id)}
+                onShare={() => setSharePostForSheet(selectedPost)}
               />
             </Pressable>
             <CommentBottomSheet
@@ -524,6 +526,12 @@ export default function UserProfileScreen() {
           </Pressable>
         </Modal>
       )}
+
+      <SharePostSheet
+        visible={!!sharePostForSheet}
+        onClose={() => setSharePostForSheet(null)}
+        post={sharePostForSheet}
+      />
     </View>
   );
 }

@@ -12,3 +12,4 @@ export type { PostOptionsSheetProps } from "./components/PostOptionsSheet";
 export { ReelsView } from "./components/ReelsView";
 export type { ReelsViewProps } from "./components/ReelsView";
 export { FeedMiniBar } from "./components/FeedMiniBar";
+export { SharePostSheet } from "./components/SharePostSheet";
