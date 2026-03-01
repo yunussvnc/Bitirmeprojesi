@@ -52,3 +52,18 @@ export async function getUserPosts(
 ): Promise<UserPostsResponse> {
   return apiGet<UserPostsResponse>(`/users/${userId}/posts?page=${page}&page_size=${pageSize}`);
 }
+
+export type NetworkResponse = {
+  items: UserProfile[];
+  total: number;
+  page: number;
+  page_size: number;
+};
+
+export async function getFollowers(userId: number, page = 1, pageSize = 20): Promise<NetworkResponse> {
+  return apiGet<NetworkResponse>(`/users/${userId}/followers?page=${page}&page_size=${pageSize}`);
+}
+
+export async function getFollowing(userId: number, page = 1, pageSize = 20): Promise<NetworkResponse> {
+  return apiGet<NetworkResponse>(`/users/${userId}/following?page=${page}&page_size=${pageSize}`);
+}

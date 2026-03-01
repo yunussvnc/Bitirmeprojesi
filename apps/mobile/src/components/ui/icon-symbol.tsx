@@ -78,6 +78,7 @@ const MAPPING = {
   'paperplane': 'send',
   'square.and.pencil': 'edit',
   'phone.fill': 'phone',
+  'flame.fill': 'local-fire-department',
 } as IconMapping;
 
 /**

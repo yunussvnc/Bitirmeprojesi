@@ -21,15 +21,18 @@ import { ThemedText } from "@/src/components/themed-text";
 import { useTheme } from "@/src/hooks/useTheme";
 import { useMatchStore } from "@/src/store/useMatchStore";
 import { usePresence } from "@/src/store/presence";
+import { useAppStore } from "@/src/store/useAppStore";
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get("window");
-const SWIPE_THRESHOLD = SCREEN_WIDTH * 0.25;
+const SWIPE_THRESHOLD = SCREEN_WIDTH * 0.2;
 
 const ACCENT = "#1DB954";
 
 // Mock data — seni beğenen kişiler (Bumble style rich profiles)
 const richProfile = {
-  location: "Kağıthane",
+  active_place_id: 27,
+  active_place_name: "Lucca - Bebek",
+  location: "İstanbul",
   bio: "ig hottiebutacryinone",
   about: [
     { icon: "ruler.fill", text: "171 cm" },
@@ -144,6 +147,7 @@ export default function MatchScreen() {
   // Pan animation for swipe
   const pan = useRef(new Animated.ValueXY()).current;
   const cardOpacity = useRef(new Animated.Value(1)).current;
+  const scrollViewRef = useRef<ScrollView>(null);
 
   useEffect(() => {
     fetchMyProfile();
@@ -160,15 +164,17 @@ export default function MatchScreen() {
         age: 25,
         bio: "Test profili",
         photo_urls: ["https://i.pravatar.cc/600?img=1"],
-        location_text: "Mekan 1",
+        location_text: "Etiler Starbucks",
         interests: ["Kahve", "Sanat"],
         looking_for: "Arkadaşlık",
+      }).catch((err) => {
+        console.log("Auto-create profile failed:", err);
       });
     }
     // Mekan 1 için otomatik aktif et
     if (!activePlaceId || activePlaceId !== "1") {
       usePresence.getState().startSession("1");
-      usePresence.getState().setActivePlaceName("Mekan 1");
+      usePresence.getState().setActivePlaceName("Etiler Starbucks");
     }
   }, [hasProfile, activePlaceId]);
 
@@ -188,61 +194,76 @@ export default function MatchScreen() {
       const toValue =
         direction === "right" ? SCREEN_WIDTH + 100 : -SCREEN_WIDTH - 100;
 
-      Animated.parallel([
-        Animated.timing(pan.x, {
-          toValue,
-          duration: 300,
-          useNativeDriver: true,
-        }),
-        Animated.timing(cardOpacity, {
-          toValue: 0,
-          duration: 300,
-          useNativeDriver: true,
-        }),
-      ]).start(async () => {
+      Animated.timing(pan, {
+        toValue: { x: toValue, y: 0 },
+        duration: 250,
+        useNativeDriver: false,
+      }).start(() => {
         const placeId = activePlaceId ? parseInt(activePlaceId) : undefined;
 
         if (direction === "right") {
-          const result = await likeCandidate(currentCandidate.user_id, placeId);
-          if (result.matched) {
-            setMatchPopup({ name: currentCandidate.display_name });
-            setTimeout(() => setMatchPopup(null), 3000);
-          }
+          likeCandidate(currentCandidate.user_id, placeId)
+            .then((result) => {
+              if (result.matched) {
+                setMatchPopup({ name: currentCandidate.display_name });
+                setTimeout(() => setMatchPopup(null), 3000);
+              }
+            })
+            .catch((err) => console.error("Like failed:", err));
         } else {
-          await passCandidate(currentCandidate.user_id, placeId);
+          passCandidate(currentCandidate.user_id, placeId)
+            .catch((err) => console.error("Pass failed:", err));
         }
 
         pan.setValue({ x: 0, y: 0 });
-        cardOpacity.setValue(1);
         nextCandidate();
+        scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: false });
       });
     },
     [currentCandidate, activePlaceId],
   );
 
+  const scrollModeRef = useRef(scrollMode);
+  scrollModeRef.current = scrollMode;
+
+  const handleSwipeRef = useRef(handleSwipe);
+  handleSwipeRef.current = handleSwipe;
+
   const panResponder = useRef(
     PanResponder.create({
-      onStartShouldSetPanResponder: () => !scrollMode,
+      onStartShouldSetPanResponder: () => false,
+      onStartShouldSetPanResponderCapture: () => false,
       onMoveShouldSetPanResponder: (_, gs) => {
-        if (scrollMode) return false;
-        return Math.abs(gs.dx) > Math.abs(gs.dy) && Math.abs(gs.dx) > 10;
+        if (scrollModeRef.current) return false;
+        // Only take over if horizontal swipe is clearly dominant
+        return Math.abs(gs.dx) > Math.abs(gs.dy) * 2 && Math.abs(gs.dx) > 15;
+      },
+      onMoveShouldSetPanResponderCapture: (_, gs) => {
+        if (scrollModeRef.current) return false;
+        return Math.abs(gs.dx) > Math.abs(gs.dy) * 2 && Math.abs(gs.dx) > 15;
       },
       onPanResponderGrant: () => {
         pan.setOffset({ x: (pan.x as any)._value, y: 0 });
+        pan.setValue({ x: 0, y: 0 });
       },
       onPanResponderMove: Animated.event([null, { dx: pan.x }], {
         useNativeDriver: false,
       }),
       onPanResponderRelease: (_, gs) => {
         pan.flattenOffset();
-        if (gs.dx > SWIPE_THRESHOLD) {
-          handleSwipe("right");
-        } else if (gs.dx < -SWIPE_THRESHOLD) {
-          handleSwipe("left");
+        const dragX = (pan.x as any)._value;
+        const isSwipeRight = dragX > SWIPE_THRESHOLD || gs.vx > 0.5;
+        const isSwipeLeft = dragX < -SWIPE_THRESHOLD || gs.vx < -0.5;
+
+        if (isSwipeRight) {
+          handleSwipeRef.current("right");
+        } else if (isSwipeLeft) {
+          handleSwipeRef.current("left");
         } else {
           Animated.spring(pan, {
             toValue: { x: 0, y: 0 },
-            useNativeDriver: true,
+            friction: 5,
+            useNativeDriver: false,
           }).start();
         }
       },
@@ -315,233 +336,152 @@ export default function MatchScreen() {
     const photos = profile.photo_urls || profile.photos || [profile.photo];
     const display_name = profile.display_name || profile.name;
 
-    const cardStyle = [
-      styles.hingeCard,
+    const unifiedCardStyle = [
+      styles.unifiedCard,
       {
-        backgroundColor: isDark ? "#1C1C1E" : "#FFFFFF",
-        borderColor: isDark
-          ? "rgba(29, 185, 84, 0.25)"
-          : "rgba(29, 185, 84, 0.35)",
+        backgroundColor: colors.background.secondary,
+        borderColor: isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)",
       },
     ];
 
     return (
       <View style={styles.hingeContainer}>
-        {/* Photo 1 */}
-        {photos.length > 0 && photos[0] && (
-          <View style={cardStyle}>
-            <Image source={{ uri: photos[0] }} style={styles.hingeImage} />
-          </View>
-        )}
+        <View style={unifiedCardStyle}>
+          {/* Cover Photo */}
+          {photos.length > 0 && photos[0] && (
+            <Image source={{ uri: photos[0] }} style={styles.unifiedImageTop} />
+          )}
 
-        {/* Badges / Traits (education, height, smoking, star_sign) */}
-        {(profile.height ||
-          profile.education ||
-          profile.smoking ||
-          profile.star_sign ||
-          profile.about) && (
-            <View style={[cardStyle, styles.hingePadding]}>
-              {profile.height && (
-                <View style={styles.hingeTraitRow}>
-                  <IconSymbol
-                    name="ruler.fill"
-                    size={16}
-                    color={colors.text.primary}
-                  />
-                  <ThemedText
-                    style={[
-                      styles.hingeTraitText,
-                      { color: colors.text.primary },
-                    ]}
-                  >
-                    {profile.height} cm
-                  </ThemedText>
+          <View style={styles.unifiedContentGroup}>
+            {/* Name & Age */}
+            <ThemedText style={[styles.unifiedName, { color: colors.text.primary }]}>
+              {display_name}{profile.age ? `, ${profile.age}` : ""}
+            </ThemedText>
+
+            {/* Badges / Traits */}
+            {(profile.height || profile.education || profile.smoking || profile.star_sign || profile.about) && (
+              <View style={styles.unifiedTraitsColumn}>
+                {profile.height && (
+                  <View style={styles.unifiedTraitBadge}>
+                    <IconSymbol name="ruler.fill" size={14} color={colors.text.primary} />
+                    <ThemedText style={[styles.unifiedTraitText, { color: colors.text.primary }]}>{profile.height} cm</ThemedText>
+                  </View>
+                )}
+                {profile.education && (
+                  <View style={styles.unifiedTraitBadge}>
+                    <IconSymbol name="graduationcap.fill" size={14} color={colors.text.primary} />
+                    <ThemedText style={[styles.unifiedTraitText, { color: colors.text.primary }]}>{profile.education}</ThemedText>
+                  </View>
+                )}
+                {profile.smoking && (
+                  <View style={styles.unifiedTraitBadge}>
+                    <IconSymbol name="smoke.fill" size={14} color={colors.text.primary} />
+                    <ThemedText style={[styles.unifiedTraitText, { color: colors.text.primary }]}>{profile.smoking}</ThemedText>
+                  </View>
+                )}
+                {profile.star_sign && (
+                  <View style={styles.unifiedTraitBadge}>
+                    <IconSymbol name="star.fill" size={14} color={colors.text.primary} />
+                    <ThemedText style={[styles.unifiedTraitText, { color: colors.text.primary }]}>{profile.star_sign}</ThemedText>
+                  </View>
+                )}
+              </View>
+            )}
+
+            {/* Prompt 1 */}
+            {profile.prompts?.length > 0 && (
+              <View style={styles.unifiedSection}>
+                <ThemedText style={[styles.unifiedPromptQ, { color: colors.text.primary }]}>
+                  {profile.prompts[0].question}
+                </ThemedText>
+                <ThemedText style={[styles.unifiedPromptA, { color: colors.text.primary }]}>
+                  {profile.prompts[0].answer}
+                </ThemedText>
+              </View>
+            )}
+
+            {/* Bio */}
+            {profile.bio && (
+              <View style={styles.unifiedSection}>
+                <ThemedText style={[styles.unifiedPromptQ, { color: colors.text.primary }]}>
+                  Hakkımda
+                </ThemedText>
+                <ThemedText style={[styles.unifiedBio, { color: colors.text.primary }]}>
+                  {profile.bio}
+                </ThemedText>
+              </View>
+            )}
+          </View>
+
+          {/* Photo 2 */}
+          {photos.length > 1 && photos[1] && (
+            <Image source={{ uri: photos[1] }} style={styles.unifiedImageMiddle} />
+          )}
+
+          <View style={styles.unifiedContentGroup}>
+            {/* Prompt 2 */}
+            {profile.prompts?.length > 1 && (
+              <View style={styles.unifiedSection}>
+                <ThemedText style={[styles.unifiedPromptQ, { color: colors.text.primary }]}>
+                  {profile.prompts[1].question}
+                </ThemedText>
+                <ThemedText style={[styles.unifiedPromptA, { color: colors.text.primary }]}>
+                  {profile.prompts[1].answer}
+                </ThemedText>
+              </View>
+            )}
+
+            {/* Interests */}
+            {profile.interests?.length > 0 && (
+              <View style={styles.unifiedSection}>
+                <ThemedText style={[styles.unifiedPromptQ, { color: colors.text.primary, marginBottom: 12 }]}>
+                  İlgi Alanları
+                </ThemedText>
+                <View style={styles.unifiedInterestsWrap}>
+                  {profile.interests.map((interest: any, idx: number) => {
+                    const text = typeof interest === "string" ? interest : interest.text;
+                    const icon = typeof interest === "string" ? "star.fill" : interest.icon;
+                    return (
+                      <View key={`int-${idx}`} style={styles.unifiedTraitBadge}>
+                        <IconSymbol name={icon as any} size={14} color={colors.text.primary} />
+                        <ThemedText style={[styles.unifiedTraitText, { color: colors.text.primary }]}>{text}</ThemedText>
+                      </View>
+                    );
+                  })}
                 </View>
-              )}
-              {profile.education && (
-                <View style={styles.hingeTraitRow}>
-                  <IconSymbol
-                    name="graduationcap.fill"
-                    size={16}
-                    color={colors.text.primary}
-                  />
-                  <ThemedText
-                    style={[
-                      styles.hingeTraitText,
-                      { color: colors.text.primary },
-                    ]}
-                  >
-                    {profile.education}
-                  </ThemedText>
-                </View>
-              )}
-              {profile.smoking && (
-                <View style={styles.hingeTraitRow}>
-                  <IconSymbol
-                    name="smoke.fill"
-                    size={16}
-                    color={colors.text.primary}
-                  />
-                  <ThemedText
-                    style={[
-                      styles.hingeTraitText,
-                      { color: colors.text.primary },
-                    ]}
-                  >
-                    {profile.smoking}
-                  </ThemedText>
-                </View>
-              )}
-              {profile.star_sign && (
-                <View style={styles.hingeTraitRow}>
-                  <IconSymbol
-                    name="star.fill"
-                    size={16}
-                    color={colors.text.primary}
-                  />
-                  <ThemedText
-                    style={[
-                      styles.hingeTraitText,
-                      { color: colors.text.primary },
-                    ]}
-                  >
-                    {profile.star_sign}
-                  </ThemedText>
-                </View>
-              )}
-              {profile.about?.map((item: any, idx: number) => (
-                <View key={`about-${idx}`} style={styles.hingeTraitRow}>
-                  <IconSymbol
-                    name={(item.icon || "person.fill") as any}
-                    size={16}
-                    color={colors.text.primary}
-                  />
-                  <ThemedText
-                    style={[
-                      styles.hingeTraitText,
-                      { color: colors.text.primary },
-                    ]}
-                  >
-                    {item.text}
-                  </ThemedText>
-                </View>
-              ))}
+              </View>
+            )}
+          </View>
+
+          {/* Photo 3 */}
+          {photos.length > 2 && photos[2] && (
+            <Image source={{ uri: photos[2] }} style={[styles.unifiedImageMiddle, { marginTop: 0 }]} />
+          )}
+
+          {/* Active Place Tag at the Bottom */}
+          {profile.active_place_name && (
+            <View style={[styles.unifiedContentGroup, { paddingTop: 24, paddingBottom: 120 }]}>
+              <TouchableOpacity
+                style={styles.unifiedActivePlace}
+                activeOpacity={0.8}
+                onPress={() => {
+                  console.log("Redirecting to explore map for place:", profile.active_place_name);
+                  if (profile.active_place_name) {
+                    setSelectedLike(null); // Beğeniler modalındayken kapatmayı sağlamak için
+                    useAppStore.getState().setPendingPlaceName(profile.active_place_name);
+                    router.push("/(tabs)/explore" as any);
+                  }
+                }}
+              >
+                <IconSymbol name="mappin.and.ellipse" size={18} color={ACCENT} />
+                <ThemedText style={[styles.unifiedActivePlaceText, { color: ACCENT }]}>
+                  Şuan {profile.active_place_name}'da aktif
+                </ThemedText>
+              </TouchableOpacity>
             </View>
           )}
 
-        {/* Prompt 1 */}
-        {profile.prompts?.length > 0 && (
-          <View style={[cardStyle, styles.hingePadding]}>
-            <ThemedText
-              style={[styles.hingePromptQ, { color: colors.text.primary }]}
-            >
-              {profile.prompts[0].question}
-            </ThemedText>
-            <ThemedText
-              style={[styles.hingePromptA, { color: colors.text.primary }]}
-            >
-              {profile.prompts[0].answer}
-            </ThemedText>
-          </View>
-        )}
-
-        {/* Legacy Prompt alternative if empty array */}
-        {!profile.prompts?.length && profile.prompt && (
-          <View style={[cardStyle, styles.hingePadding]}>
-            <ThemedText
-              style={[styles.hingePromptQ, { color: colors.text.primary }]}
-            >
-              {profile.prompt.q}
-            </ThemedText>
-            <ThemedText
-              style={[styles.hingePromptA, { color: colors.text.primary }]}
-            >
-              {profile.prompt.a}
-            </ThemedText>
-          </View>
-        )}
-
-        {/* Bio / About section */}
-        {profile.bio && (
-          <View style={[cardStyle, styles.hingePadding]}>
-            <ThemedText
-              style={[styles.hingePromptQ, { color: colors.text.primary }]}
-            >
-              Hakkımda:
-            </ThemedText>
-            <ThemedText
-              style={[
-                styles.hingePromptA,
-                {
-                  color: colors.text.primary,
-                  fontWeight: "500",
-                  fontStyle: "normal",
-                },
-              ]}
-            >
-              {profile.bio}
-            </ThemedText>
-          </View>
-        )}
-
-        {/* Photo 2 */}
-        {photos.length > 1 && photos[1] && (
-          <View style={cardStyle}>
-            <Image source={{ uri: photos[1] }} style={styles.hingeImage} />
-          </View>
-        )}
-
-        {/* Interests */}
-        {profile.interests?.length > 0 && (
-          <View style={[cardStyle, styles.hingePadding]}>
-            {profile.interests.map((interest: any, idx: number) => {
-              const text =
-                typeof interest === "string" ? interest : interest.text;
-              const icon =
-                typeof interest === "string" ? "star.fill" : interest.icon;
-              return (
-                <View key={`int-${idx}`} style={styles.hingeTraitRow}>
-                  <IconSymbol
-                    name={icon as any}
-                    size={16}
-                    color={colors.text.primary}
-                  />
-                  <ThemedText
-                    style={[
-                      styles.hingeTraitText,
-                      { color: colors.text.primary },
-                    ]}
-                  >
-                    {text}
-                  </ThemedText>
-                </View>
-              );
-            })}
-          </View>
-        )}
-
-        {/* Photo 3 */}
-        {photos.length > 2 && photos[2] && (
-          <View style={cardStyle}>
-            <Image source={{ uri: photos[2] }} style={styles.hingeImage} />
-          </View>
-        )}
-
-        {/* Prompt 2 */}
-        {profile.prompts?.length > 1 && (
-          <View style={[cardStyle, styles.hingePadding]}>
-            <ThemedText
-              style={[styles.hingePromptQ, { color: colors.text.primary }]}
-            >
-              {profile.prompts[1].question}
-            </ThemedText>
-            <ThemedText
-              style={[styles.hingePromptA, { color: colors.text.primary }]}
-            >
-              {profile.prompts[1].answer}
-            </ThemedText>
-          </View>
-        )}
+        </View>
       </View>
     );
   };
@@ -581,16 +521,28 @@ export default function MatchScreen() {
                 <ThemedText style={styles.likeCardName}>
                   {person.name}, {person.age}
                 </ThemedText>
-                <View style={styles.likeCardLocationRow}>
+                <TouchableOpacity
+                  style={styles.likeCardLocationRow}
+                  activeOpacity={0.8}
+                  onPress={(e) => {
+                    // Prevent the parent Pressable from triggering
+                    e.stopPropagation();
+                    console.log("Redirecting to explore map for place:", person.active_place_name);
+                    if (person.active_place_name) {
+                      useAppStore.getState().setPendingPlaceName(person.active_place_name);
+                      router.push("/(tabs)/explore" as any);
+                    }
+                  }}
+                >
                   <IconSymbol
                     name="mappin.and.ellipse"
                     size={12}
                     color="rgba(255,255,255,0.7)"
                   />
                   <ThemedText style={styles.likeCardLocationText}>
-                    {person.location}
+                    {person.active_place_name || person.location}
                   </ThemedText>
-                </View>
+                </TouchableOpacity>
               </LinearGradient>
             </Pressable>
           ))}
@@ -688,14 +640,29 @@ export default function MatchScreen() {
       );
     }
 
+    const nextCandidateProfile = candidates[currentIndex + 1];
+
     return (
       <View style={styles.cardContainer}>
+        {/* Draw Next Candidate card behind */}
+        {nextCandidateProfile && (
+          <View style={[styles.card, { position: "absolute", zIndex: -1 }]}>
+            <ScrollView
+              style={styles.cardScroll}
+              showsVerticalScrollIndicator={false}
+              scrollEnabled={false}
+              keyboardShouldPersistTaps="handled"
+            >
+              {renderProfileContent(nextCandidateProfile)}
+            </ScrollView>
+          </View>
+        )}
+
         <Animated.View
           style={[
             styles.card,
             {
               transform: [{ translateX: pan.x }, { rotate }],
-              opacity: cardOpacity,
             },
           ]}
           {...panResponder.panHandlers}
@@ -731,10 +698,22 @@ export default function MatchScreen() {
           </Animated.View>
 
           <ScrollView
+            ref={scrollViewRef}
             style={styles.cardScroll}
             showsVerticalScrollIndicator={false}
-            onScrollBeginDrag={() => setScrollMode(true)}
-            onScrollEndDrag={() => setScrollMode(false)}
+            keyboardShouldPersistTaps="handled"
+            onScrollBeginDrag={() => {
+              setScrollMode(true);
+              scrollModeRef.current = true;
+            }}
+            onScrollEndDrag={() => {
+              setScrollMode(false);
+              scrollModeRef.current = false;
+            }}
+            onMomentumScrollEnd={() => {
+              setScrollMode(false);
+              scrollModeRef.current = false;
+            }}
             scrollEventThrottle={16}
           >
             {/* Dynamic Photos View - Bumble style */}
@@ -767,7 +746,7 @@ export default function MatchScreen() {
               activeOpacity={0.8}
               onPress={() => handleSwipe("right")}
             >
-              <IconSymbol name="heart.fill" size={32} color="#FFF" />
+              <IconSymbol name="flame.fill" size={32} color="#FFF" />
             </TouchableOpacity>
           </View>
         </Animated.View>
@@ -783,7 +762,7 @@ export default function MatchScreen() {
       ]}
     >
       {/* Dynamic Sticky Header matching the Mockup */}
-      <View style={[styles.topHeader, { paddingTop: insets.top + 8 }]}>
+      <View style={[styles.topHeader, { paddingTop: insets.top + 16 }]}>
         {/* Left: Page Title & Back Button */}
         <View
           style={{
@@ -818,11 +797,11 @@ export default function MatchScreen() {
 
         {/* Center: Dynamic Name from Candidate */}
         <View style={{ flex: 1, alignItems: "center" }}>
-          {activeTab === "swipe" && currentCandidate && (
-            <ThemedText style={styles.headerNameText}>
-              {currentCandidate.display_name}, {currentCandidate.age}
-            </ThemedText>
-          )}
+          <ThemedText style={styles.headerNameText}>
+            {activeTab === "swipe" && currentCandidate
+              ? `${currentCandidate.display_name}, ${currentCandidate.age}`
+              : " "}
+          </ThemedText>
         </View>
 
         {/* Right: Flag & Profile */}
@@ -960,8 +939,8 @@ export default function MatchScreen() {
               { backgroundColor: colors.background.secondary },
             ]}
           >
-            {/* Header matching the Mockup */}
-            <View style={[styles.topHeader, { paddingTop: insets.top + 8 }]}>
+            {/* Header matching the swipe tab */}
+            <View style={[styles.topHeader, { paddingTop: insets.top + 16 }]}>
               <View
                 style={{
                   flexDirection: "row",
@@ -974,25 +953,14 @@ export default function MatchScreen() {
                 <TouchableOpacity
                   onPress={() => setSelectedLike(null)}
                   hitSlop={12}
-                  style={{ marginRight: 12 }}
+                  style={{ paddingVertical: 4, paddingRight: 16 }}
                 >
                   <IconSymbol
                     name="chevron.left"
-                    size={24}
+                    size={28}
                     color={colors.text.primary}
                   />
                 </TouchableOpacity>
-                <IconSymbol name="key.fill" size={20} color={ACCENT} />
-                <ThemedText
-                  style={{
-                    fontSize: 16,
-                    fontWeight: "700",
-                    marginLeft: 6,
-                    color: colors.text.primary,
-                  }}
-                >
-                  0
-                </ThemedText>
               </View>
 
               <View style={{ flex: 1, alignItems: "center" }}>
@@ -1006,32 +974,55 @@ export default function MatchScreen() {
                 style={{ position: "absolute", right: 16, bottom: 8 }}
                 hitSlop={12}
               >
-                <IconSymbol name="flag.fill" size={20} color={ACCENT} />
+                <IconSymbol name="flag.fill" size={24} color={ACCENT} />
               </TouchableOpacity>
             </View>
 
-            <ScrollView
-              showsVerticalScrollIndicator={false}
-              contentContainerStyle={{ paddingBottom: 120 }}
-            >
-              <View style={{ flex: 1, position: "relative" }}>
-                {renderProfileContent(selectedLike)}
-              </View>
-            </ScrollView>
+            <View style={[styles.cardContainer, { paddingTop: 16 }]}>
+              <View style={styles.card}>
+                <ScrollView
+                  style={styles.cardScroll}
+                  showsVerticalScrollIndicator={false}
+                >
+                  {renderProfileContent(selectedLike)}
+                </ScrollView>
 
-            {/* Floating Action Button - Yellow/Green Heart */}
-            <TouchableOpacity
-              style={[styles.floatingLikeBtn, { elevation: 8 }]}
-              onPress={() => {
-                const matchedPerson = selectedLike.name;
-                setSelectedLike(null);
-                setMatchPopup({ name: matchedPerson });
-              }}
-            >
-              <View style={styles.floatingLikeInner}>
-                <IconSymbol name="heart.fill" size={32} color="#000" />
+                {/* Match Action Buttons exactly like Kişiler tab */}
+                <View style={styles.actionBarOverlay}>
+                  <TouchableOpacity
+                    style={[
+                      styles.actionBtn,
+                      styles.passBtn,
+                      { backgroundColor: isDark ? "#2A2A2A" : "#FFF" },
+                    ]}
+                    activeOpacity={0.8}
+                    onPress={() => setSelectedLike(null)}
+                  >
+                    <IconSymbol
+                      name="xmark"
+                      size={32}
+                      color={colors.text.secondary}
+                    />
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={[
+                      styles.actionBtn,
+                      styles.likeBtn,
+                      { backgroundColor: ACCENT },
+                    ]}
+                    activeOpacity={0.8}
+                    onPress={() => {
+                      const matchedPerson =
+                        selectedLike.name || (selectedLike as any).display_name;
+                      setSelectedLike(null);
+                      setMatchPopup({ name: matchedPerson });
+                    }}
+                  >
+                    <IconSymbol name="flame.fill" size={32} color="#FFF" />
+                  </TouchableOpacity>
+                </View>
               </View>
-            </TouchableOpacity>
+            </View>
           </View>
         )}
       </Modal>
@@ -1158,7 +1149,7 @@ const styles = StyleSheet.create({
     gap: 12,
   },
   likeCard: {
-    width: (SCREEN_WIDTH - 16 - 12) / 2, // 16 padding, 12 gap
+    width: (SCREEN_WIDTH - 32 - 12) / 2, // 32 total padding (16 left/right), 12 inner gap
     aspectRatio: 0.75,
     borderRadius: 24,
     overflow: "hidden",
@@ -1449,7 +1440,7 @@ const styles = StyleSheet.create({
     position: "absolute",
     left: 0,
     right: 0,
-    bottom: 24,
+    bottom: 12,
     flexDirection: "row",
     justifyContent: "space-evenly",
     alignItems: "center",
@@ -1548,7 +1539,7 @@ const styles = StyleSheet.create({
   hingeCard: {
     width: "100%",
     borderRadius: 24,
-    borderWidth: 1.5,
+    borderWidth: 3,
     marginBottom: 16,
     overflow: "hidden",
     shadowColor: "#000",
@@ -1619,5 +1610,104 @@ const styles = StyleSheet.create({
   profileBtn: {
     position: "absolute",
     right: 16,
+  },
+
+  // Unified Feed-like Card Styles
+  unifiedCard: {
+    width: "100%",
+    borderRadius: 24,
+    borderWidth: StyleSheet.hairlineWidth,
+    overflow: "hidden",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
+    elevation: 4,
+    marginBottom: 24,
+  },
+  unifiedImageTop: {
+    width: "100%",
+    aspectRatio: 3 / 4,
+    resizeMode: "cover",
+  },
+  unifiedImageMiddle: {
+    width: "100%",
+    aspectRatio: 1, // square for inner photos
+    resizeMode: "cover",
+  },
+  unifiedContentGroup: {
+    padding: 24,
+    paddingTop: 16,
+    gap: 16,
+  },
+  unifiedName: {
+    fontSize: 28,
+    fontWeight: "900",
+    letterSpacing: -0.5,
+    lineHeight: 36,
+    paddingTop: 4,
+  },
+  unifiedTraitsColumn: {
+    flexDirection: "column",
+    alignItems: "flex-start",
+    gap: 12,
+  },
+  unifiedInterestsWrap: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 12,
+  },
+  unifiedActivePlace: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "rgba(29, 185, 84, 0.15)",
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    borderRadius: 16,
+    alignSelf: "flex-start",
+    marginTop: -4,
+  },
+  unifiedActivePlaceText: {
+    marginLeft: 6,
+    fontSize: 14,
+    fontWeight: "800",
+  },
+  unifiedSection: {
+    marginTop: 8,
+  },
+  unifiedPromptQ: {
+    fontSize: 14,
+    fontWeight: "700",
+    opacity: 0.6,
+    marginBottom: 6,
+    textTransform: "uppercase",
+    letterSpacing: 0.5,
+  },
+  unifiedPromptA: {
+    fontSize: 22,
+    fontWeight: "700",
+    lineHeight: 30,
+  },
+  unifiedBio: {
+    fontSize: 16,
+    fontWeight: "500",
+    lineHeight: 24,
+    opacity: 0.9,
+  },
+  unifiedTraitBadge: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "rgba(150, 150, 150, 0.15)",
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    borderRadius: 20,
+    borderWidth: StyleSheet.hairlineWidth,
+    borderColor: "rgba(150, 150, 150, 0.2)",
+    marginRight: 8,
+  },
+  unifiedTraitText: {
+    fontSize: 13,
+    fontWeight: "700",
+    marginLeft: 6,
   },
 });

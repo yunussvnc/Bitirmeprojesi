@@ -14,24 +14,25 @@ import React from 'react';
 import { View, Text, StyleSheet, ViewStyle } from 'react-native';
 import { Image } from 'expo-image';
 import { useTheme } from '@/src/hooks/useTheme';
+import { API_BASE_URL } from '@/src/constants/api';
 
 export interface AvatarProps {
   /**
    * Image source (URI or require)
    */
   source?: { uri: string } | number;
-  
+
   /**
    * User's full name (for initials fallback)
    */
   name?: string;
-  
+
   /**
    * Avatar size in pixels
    * @default 48
    */
   size?: number;
-  
+
   /**
    * Custom style
    */
@@ -43,7 +44,7 @@ export interface AvatarProps {
  */
 export function Avatar({ source, name, size = 48, style }: AvatarProps) {
   const { colors } = useTheme();
-  
+
   const getInitials = (fullName?: string): string => {
     if (!fullName) return '?';
     const parts = fullName.trim().split(' ');
@@ -74,7 +75,11 @@ export function Avatar({ source, name, size = 48, style }: AvatarProps) {
     <View style={avatarStyle}>
       {source ? (
         <Image
-          source={typeof source === 'number' ? source : source}
+          source={
+            typeof source === 'number'
+              ? source
+              : { uri: source.uri && source.uri.startsWith('/') ? `${API_BASE_URL}${source.uri}` : source.uri }
+          }
           style={[
             styles.image,
             {

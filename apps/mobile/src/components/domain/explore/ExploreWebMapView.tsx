@@ -290,14 +290,16 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
     }
   }, [filteredPlaces, query, selectedPlace]);
 
+  const pendingPlaceName = useAppStore(state => state.pendingPlaceName);
+  const clearPendingPlace = useAppStore(state => state.clearPendingPlace);
+
   // Mesajlardan gelen mekan açma isteğini dinle
   useEffect(() => {
-    const pendingName = useAppStore.getState().pendingPlaceName;
-    if (!pendingName || !mapReady || places.length === 0) return;
+    if (!pendingPlaceName || !mapReady || places.length === 0) return;
 
     // İsim ile eşleşen mekanı bul
     const matchedPlace = places.find(
-      (p) => p.name?.toLowerCase() === pendingName.toLowerCase()
+      (p) => p.name?.toLowerCase() === pendingPlaceName.toLowerCase()
     );
 
     if (matchedPlace) {
@@ -317,8 +319,8 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
       }, 1200);
     }
 
-    useAppStore.getState().clearPendingPlace();
-  }, [mapReady, places]);
+    clearPendingPlace();
+  }, [mapReady, places, pendingPlaceName, clearPendingPlace]);
 
   // HTML sabit – WebView tek sefer yüklenir, reload olmaz (kaydırınca loading ekranı gelmez)
   const html = useMemo(

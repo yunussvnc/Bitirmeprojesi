@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Alert, Platform, useWindowDimensions, ScrollView, RefreshControl } from "react-native";
-import { useRouter, useNavigation } from "expo-router";
+import { View, Text, StyleSheet, TouchableOpacity, Alert, Platform, useWindowDimensions, ScrollView, RefreshControl, Share } from "react-native";
+import { useRouter, useNavigation, useFocusEffect } from "expo-router";
+import { API_BASE_URL } from "@/src/constants/api";
 import { Screen } from "@/src/components/layout/Screen";
 import { Avatar, LoadingState } from "@/src/components/ui";
 import { useTheme } from "@/src/hooks/useTheme";
@@ -63,9 +64,11 @@ export default function ProfileScreen() {
     return unsubscribe;
   }, [navigation]);
 
-  useEffect(() => {
-    loadProfile();
-  }, [loadProfile]);
+  useFocusEffect(
+    useCallback(() => {
+      loadProfile();
+    }, [loadProfile])
+  );
 
   const handleRefresh = useCallback(() => {
     lightImpact();
@@ -156,7 +159,16 @@ export default function ProfileScreen() {
 
           <TouchableOpacity
             style={[styles.secondaryBtn, { backgroundColor: colors.surface.elevated, borderColor: colors.surface.border }]}
-            onPress={() => { lightImpact(); /* Share action */ }}
+            onPress={async () => {
+              lightImpact();
+              try {
+                await Share.share({
+                  message: `Kastel'deki profilime göz at! @${username}`,
+                });
+              } catch (e) {
+                console.error(e);
+              }
+            }}
             activeOpacity={0.8}
           >
             <IconSymbol name="square.and.arrow.up" size={18} color={colors.text.primary} />
@@ -170,15 +182,29 @@ export default function ProfileScreen() {
             <Text style={[styles.statLabel, { color: colors.text.tertiary }]}>Gönderi</Text>
           </View>
           <View style={[styles.statDivider, { backgroundColor: colors.surface.border }]} />
-          <View style={styles.statItem}>
+          <TouchableOpacity
+            style={styles.statItem}
+            activeOpacity={0.7}
+            onPress={() => {
+              lightImpact();
+              router.push(`/network?id=${authUser.id}&type=followers` as any);
+            }}
+          >
             <Text style={[styles.statNumber, { color: colors.text.primary }]}>{displayStats.followers}</Text>
             <Text style={[styles.statLabel, { color: colors.text.tertiary }]}>Takipçi</Text>
-          </View>
+          </TouchableOpacity>
           <View style={[styles.statDivider, { backgroundColor: colors.surface.border }]} />
-          <View style={styles.statItem}>
+          <TouchableOpacity
+            style={styles.statItem}
+            activeOpacity={0.7}
+            onPress={() => {
+              lightImpact();
+              router.push(`/network?id=${authUser.id}&type=following` as any);
+            }}
+          >
             <Text style={[styles.statNumber, { color: colors.text.primary }]}>{displayStats.following}</Text>
             <Text style={[styles.statLabel, { color: colors.text.tertiary }]}>Arkadaş</Text>
-          </View>
+          </TouchableOpacity>
         </View>
 
         {/* ── Modern Tabs ── */}
@@ -238,7 +264,7 @@ export default function ProfileScreen() {
                 >
                   {item.thumbnail ? (
                     <Image
-                      source={{ uri: item.thumbnail }}
+                      source={{ uri: item.thumbnail.startsWith('/') ? `${API_BASE_URL}${item.thumbnail}` : item.thumbnail }}
                       style={StyleSheet.absoluteFill}
                       contentFit="cover"
                       cachePolicy="memory-disk"

@@ -440,6 +440,7 @@ class MatchCandidateResponse(BaseModel):
     star_sign: Optional[str] = None
     exercise: Optional[str] = None
     prompts: List[dict] = []
+    active_place_id: Optional[int] = None
     active_place_name: Optional[str] = None
     is_qr_verified: bool = False
     distance_priority: int = 0  # 0=aynı mekan, 1=yakın, 2=uzak

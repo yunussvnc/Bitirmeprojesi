@@ -84,7 +84,13 @@ export const useMatchStore = create<MatchState>()(
                 try {
                     const candidates = await matchService.getMatchCandidates(placeId);
                     set({ candidates, candidatesLoading: false, currentIndex: 0 });
-                } catch {
+                } catch (error: any) {
+                    // Cache senkronizasyon problemi: Backend'de profilimiz silinmiş ama telefonda cachelenmiş olabilir.
+                    const msg = error?.message || "";
+                    const userMsg = error?.userMessage || "";
+                    if (msg.includes("400") || userMsg.includes("profil")) {
+                        set({ hasProfile: false, myProfile: null });
+                    }
                     set({ candidates: [], candidatesLoading: false });
                 }
             },
@@ -103,7 +109,7 @@ export const useMatchStore = create<MatchState>()(
 
             nextCandidate: () => {
                 const { currentIndex, candidates } = get();
-                if (currentIndex < candidates.length - 1) {
+                if (currentIndex < candidates.length) {
                     set({ currentIndex: currentIndex + 1 });
                 }
             },

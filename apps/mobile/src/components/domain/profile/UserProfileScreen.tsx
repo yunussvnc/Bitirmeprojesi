@@ -1,8 +1,3 @@
-/**
- * Kullanıcı profil ekranı (başka kullanıcı)
- * Instagram tarzı profil sayfası tasarımı.
- */
-
 import React, { useState, useEffect, useCallback } from "react";
 import {
   View,
@@ -12,7 +7,6 @@ import {
   ScrollView,
   TouchableOpacity,
   Platform,
-  Dimensions,
   useWindowDimensions,
   Modal,
   Pressable,
@@ -20,10 +14,10 @@ import {
 } from "react-native";
 import { Image } from "expo-image";
 import { useLocalSearchParams, useRouter } from "expo-router";
+import { API_BASE_URL } from "@/src/constants/api";
 import { Screen } from "@/src/components/layout";
 import { Avatar, LoadingState, ErrorState } from "@/src/components/ui";
 import { useTheme } from "@/src/hooks/useTheme";
-import { spacing } from "@/src/constants/design";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { FeedCard, CommentBottomSheet, SharePostSheet } from "@/src/components/domain/feed";
 import { getPost, toggleLike, type Post } from "@/src/services/feedService";
@@ -39,8 +33,8 @@ import { useAuthStore } from "@/src/store/useAuthStore";
 import { handleApiError } from "@/src/utils/errorHandler";
 import { lightImpact } from "@/src/utils/haptics";
 
-const GRID_GAP = 2;
-const GRID_COLS = 3;
+const GRID_GAP = 14;
+const GRID_COLS = 2;
 
 export default function UserProfileScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -61,11 +55,12 @@ export default function UserProfileScreen() {
   const [commentPostId, setCommentPostId] = useState<number | null>(null);
   const [sharePostForSheet, setSharePostForSheet] = useState<Post | null>(null);
   const [postLoading, setPostLoading] = useState(false);
+  const [activeTab, setActiveTab] = useState<"posts" | "tagged">("posts");
 
   const userId = id ? parseInt(id, 10) : NaN;
   const isOwnProfile = currentUser && currentUser.id === userId;
 
-  const cellSize = (screenWidth - GRID_GAP * (GRID_COLS - 1)) / GRID_COLS;
+  const cellSize = (screenWidth - 32 - GRID_GAP * (GRID_COLS - 1)) / GRID_COLS;
 
   const load = useCallback(
     async (refresh = false) => {
@@ -135,6 +130,9 @@ export default function UserProfileScreen() {
 
   const handlePostTap = useCallback(async (postId: number) => {
     lightImpact();
+    if (isOwnProfile) {
+      // If it's self, can just go to single post view or similar if available, but modal is fine
+    }
     setPostLoading(true);
     try {
       const fullPost = await getPost(postId);
@@ -144,7 +142,7 @@ export default function UserProfileScreen() {
     } finally {
       setPostLoading(false);
     }
-  }, []);
+  }, [isOwnProfile]);
 
   const handleLike = useCallback(async () => {
     if (!selectedPost) return;
@@ -197,52 +195,33 @@ export default function UserProfileScreen() {
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background.primary }]}>
-      {/* ── Header ── */}
-      <View
-        style={[
-          styles.header,
-          { borderBottomColor: colors.surface.border },
-        ]}
-      >
+      {/* ── Modern Header ── */}
+      <View style={styles.header}>
         <TouchableOpacity
           onPress={() => {
             lightImpact();
             router.back();
           }}
-          style={styles.headerBtn}
+          style={[styles.headerBtn, { backgroundColor: colors.surface.elevated }]}
           hitSlop={12}
           activeOpacity={0.7}
         >
-          <IconSymbol name="chevron.left" size={24} color={colors.text.primary} />
+          <IconSymbol name="chevron.left" size={20} color={colors.text.primary} />
         </TouchableOpacity>
 
-        <Text
-          style={[styles.headerUsername, { color: colors.text.primary }]}
-          numberOfLines={1}
-        >
-          {username}
-        </Text>
-
         <View style={styles.headerRight}>
-          <TouchableOpacity style={styles.headerBtn} hitSlop={8} activeOpacity={0.7}>
-            <IconSymbol
-              name="bell"
-              size={22}
-              color={colors.text.primary}
-            />
+          <TouchableOpacity style={[styles.headerBtn, { backgroundColor: colors.surface.elevated }]} activeOpacity={0.7}>
+            <IconSymbol name="bell.fill" size={18} color={colors.text.primary} />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.headerBtn} hitSlop={8} activeOpacity={0.7}>
-            <IconSymbol
-              name="ellipsis"
-              size={22}
-              color={colors.text.primary}
-            />
+          <TouchableOpacity style={[styles.headerBtn, { backgroundColor: colors.surface.elevated }]} activeOpacity={0.7}>
+            <IconSymbol name="ellipsis" size={20} color={colors.text.primary} />
           </TouchableOpacity>
         </View>
       </View>
 
       <ScrollView
         showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.contentScroll}
         refreshControl={
           <RefreshControl
             refreshing={refreshing}
@@ -251,52 +230,26 @@ export default function UserProfileScreen() {
           />
         }
       >
-        {/* ── Profile Info Row (Avatar + Stats) ── */}
-        <View style={styles.profileRow}>
-          <Avatar
-            source={profile.avatar_url ? { uri: profile.avatar_url } : undefined}
-            name={displayName}
-            size={86}
-          />
-
-          <View style={styles.statsRow}>
-            <View style={styles.statItem}>
-              <Text style={[styles.statNumber, { color: colors.text.primary }]}>
-                {postCount}
-              </Text>
-              <Text style={[styles.statLabel, { color: colors.text.primary }]}>
-                gönderi
-              </Text>
-            </View>
-            <View style={styles.statItem}>
-              <Text style={[styles.statNumber, { color: colors.text.primary }]}>
-                {profile.followers_count}
-              </Text>
-              <Text style={[styles.statLabel, { color: colors.text.primary }]}>
-                takipçi
-              </Text>
-            </View>
-            <View style={styles.statItem}>
-              <Text style={[styles.statNumber, { color: colors.text.primary }]}>
-                {profile.following_count}
-              </Text>
-              <Text style={[styles.statLabel, { color: colors.text.primary }]}>
-                arkadaş
-              </Text>
-            </View>
+        {/* ── Hero Section (Avatar, Name, Bio) ── */}
+        <View style={styles.heroSection}>
+          <View style={[styles.avatarRing, { borderColor: colors.surface.border }]}>
+            <Avatar
+              source={profile.avatar_url ? { uri: profile.avatar_url } : undefined}
+              name={displayName}
+              size={86}
+            />
           </View>
-        </View>
 
-        {/* ── Name & Bio ── */}
-        <View style={styles.bioSection}>
-          <Text style={[styles.displayName, { color: colors.text.primary }]}>
-            {displayName}
-          </Text>
-          {profile.bio ? (
-            <Text style={[styles.bioText, { color: colors.text.primary }]}>
-              {profile.bio}
-            </Text>
-          ) : null}
+          <View style={styles.heroInfo}>
+            <Text style={[styles.heroName, { color: colors.text.primary }]} numberOfLines={1}>{displayName}</Text>
+            <View style={[styles.usernamePill, { backgroundColor: colors.surface.elevated }]}>
+              <Text style={[styles.heroUsername, { color: colors.text.secondary }]}>@{username}</Text>
+            </View>
+
+            {profile?.bio ? (
+              <Text style={[styles.bioText, { color: colors.text.secondary }]}>{profile.bio}</Text>
+            ) : null}
+          </View>
         </View>
 
         {/* ── Action Buttons ── */}
@@ -304,14 +257,10 @@ export default function UserProfileScreen() {
           <View style={styles.actionRow}>
             <TouchableOpacity
               style={[
-                styles.actionBtn,
+                styles.primaryBtn,
                 profile.is_following
-                  ? {
-                    borderColor: colors.accent.primary,
-                    borderWidth: 1.5,
-                    backgroundColor: "transparent",
-                  }
-                  : { backgroundColor: colors.accent.primary },
+                  ? { backgroundColor: colors.surface.elevated, borderWidth: 1, borderColor: colors.surface.border }
+                  : { backgroundColor: colors.accent.primary, borderWidth: 1, borderColor: colors.accent.primary },
               ]}
               onPress={handleFollow}
               activeOpacity={0.8}
@@ -319,152 +268,165 @@ export default function UserProfileScreen() {
             >
               <Text
                 style={[
-                  styles.actionBtnText,
+                  styles.primaryBtnText,
                   {
-                    color: profile.is_following
-                      ? colors.accent.primary
-                      : "#fff",
+                    color: profile.is_following ? colors.text.primary : "#fff",
                   },
                 ]}
               >
-                {profile.is_following ? "Takip" : "Takip Et"}
-              </Text>
-              {profile.is_following && (
-                <IconSymbol
-                  name="chevron.down"
-                  size={12}
-                  color={colors.accent.primary}
-                />
-              )}
-            </TouchableOpacity>
-
-            <TouchableOpacity
-              style={[
-                styles.actionBtn,
-                {
-                  backgroundColor: colors.surface.elevated,
-                  borderColor: colors.surface.border,
-                  borderWidth: 1,
-                },
-              ]}
-              activeOpacity={0.8}
-            >
-              <Text
-                style={[styles.actionBtnText, { color: colors.text.primary }]}
-              >
-                Mesaj
+                {profile.is_following ? "Takip Ediliyor" : "Takip Et"}
               </Text>
             </TouchableOpacity>
 
             <TouchableOpacity
               style={[
-                styles.actionIconBtn,
-                {
-                  backgroundColor: colors.surface.elevated,
-                  borderColor: colors.surface.border,
-                  borderWidth: 1,
-                },
+                styles.primaryBtn,
+                { backgroundColor: colors.surface.elevated, borderWidth: 1, borderColor: colors.surface.border }
               ]}
+              onPress={() => {
+                lightImpact();
+              }}
               activeOpacity={0.8}
             >
-              <IconSymbol
-                name="person.badge.plus"
-                size={18}
-                color={colors.text.primary}
-              />
+              <Text style={[styles.primaryBtnText, { color: colors.text.primary }]}>Mesaj</Text>
             </TouchableOpacity>
           </View>
         )}
 
-        {/* ── Grid Tab Bar ── */}
-        <View
-          style={[
-            styles.gridTabBar,
-            { borderBottomColor: colors.surface.border },
-          ]}
-        >
+        {/* ── Stats Card ── */}
+        <View style={[styles.statsContainer, { backgroundColor: colors.surface.elevated, shadowColor: colors.text.primary }]}>
+          <View style={styles.statItem}>
+            <Text style={[styles.statNumber, { color: colors.text.primary }]}>{postCount}</Text>
+            <Text style={[styles.statLabel, { color: colors.text.tertiary }]}>Gönderi</Text>
+          </View>
+          <View style={[styles.statDivider, { backgroundColor: colors.surface.border }]} />
+          <TouchableOpacity
+            style={styles.statItem}
+            activeOpacity={0.7}
+            onPress={() => {
+              lightImpact();
+              router.push(`/network?id=${profile.id}&type=followers` as any);
+            }}
+          >
+            <Text style={[styles.statNumber, { color: colors.text.primary }]}>{profile.followers_count}</Text>
+            <Text style={[styles.statLabel, { color: colors.text.tertiary }]}>Takipçi</Text>
+          </TouchableOpacity>
+          <View style={[styles.statDivider, { backgroundColor: colors.surface.border }]} />
+          <TouchableOpacity
+            style={styles.statItem}
+            activeOpacity={0.7}
+            onPress={() => {
+              lightImpact();
+              router.push(`/network?id=${profile.id}&type=following` as any);
+            }}
+          >
+            <Text style={[styles.statNumber, { color: colors.text.primary }]}>{profile.following_count}</Text>
+            <Text style={[styles.statLabel, { color: colors.text.tertiary }]}>Arkadaş</Text>
+          </TouchableOpacity>
+        </View>
+
+        {/* ── Modern Tabs ── */}
+        <View style={styles.tabContainer}>
           <TouchableOpacity
             style={[
-              styles.gridTab,
-              styles.gridTabActive,
-              { borderBottomColor: colors.text.primary },
+              styles.tabItem,
+              activeTab === "posts"
+                ? { backgroundColor: colors.text.primary, borderColor: colors.text.primary }
+                : { backgroundColor: "transparent", borderColor: colors.surface.border }
             ]}
+            onPress={() => setActiveTab("posts")}
             activeOpacity={0.7}
           >
-            <IconSymbol name="square.grid.3x3" size={22} color={colors.text.primary} />
+            <Text style={[styles.tabText, { color: activeTab === "posts" ? colors.background.primary : colors.text.secondary }]}>
+              Gönderiler
+            </Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.gridTab} activeOpacity={0.7}>
-            <IconSymbol
-              name="person.crop.rectangle"
-              size={22}
-              color={colors.text.tertiary}
-            />
+          <TouchableOpacity
+            style={[
+              styles.tabItem,
+              activeTab === "tagged"
+                ? { backgroundColor: colors.text.primary, borderColor: colors.text.primary }
+                : { backgroundColor: "transparent", borderColor: colors.surface.border }
+            ]}
+            onPress={() => setActiveTab("tagged")}
+            activeOpacity={0.7}
+          >
+            <Text style={[styles.tabText, { color: activeTab === "tagged" ? colors.background.primary : colors.text.secondary }]}>
+              Etiketler
+            </Text>
           </TouchableOpacity>
         </View>
 
         {/* ── Post Grid ── */}
-        {posts.length > 0 ? (
-          <View style={styles.grid}>
-            {posts.map((item, idx) => (
-              <TouchableOpacity
-                key={item.id}
-                style={[
-                  styles.gridCell,
-                  {
-                    width: cellSize,
-                    height: cellSize,
-                    marginRight: (idx + 1) % GRID_COLS !== 0 ? GRID_GAP : 0,
-                    marginBottom: GRID_GAP,
-                  },
-                ]}
-                onPress={() => handlePostTap(item.id)}
-                activeOpacity={0.9}
-              >
-                {item.thumbnail ? (
-                  <Image
-                    source={{ uri: item.thumbnail }}
-                    style={StyleSheet.absoluteFill}
-                    contentFit="cover"
-                    cachePolicy="memory-disk"
-                  />
-                ) : (
-                  <View
-                    style={[
-                      styles.gridPlaceholder,
-                      { backgroundColor: colors.surface.elevated },
-                    ]}
-                  >
-                    <IconSymbol
-                      name={
-                        item.media_type === "video" ? "play.fill" : "photo"
-                      }
-                      size={24}
-                      color={colors.text.tertiary}
+        {activeTab === "posts" && (
+          posts.length > 0 ? (
+            <View style={styles.grid}>
+              {posts.map((item, idx) => (
+                <TouchableOpacity
+                  key={item.id}
+                  style={[
+                    styles.gridCell,
+                    {
+                      width: cellSize,
+                      height: cellSize * 1.25,
+                      marginRight: (idx + 1) % GRID_COLS !== 0 ? GRID_GAP : 0,
+                      marginBottom: GRID_GAP,
+                      backgroundColor: colors.surface.elevated
+                    },
+                  ]}
+                  onPress={() => handlePostTap(item.id)}
+                  activeOpacity={0.9}
+                >
+                  {item.thumbnail ? (
+                    <Image
+                      source={{ uri: item.thumbnail.startsWith('/') ? `${API_BASE_URL}${item.thumbnail}` : item.thumbnail }}
+                      style={StyleSheet.absoluteFill}
+                      contentFit="cover"
+                      cachePolicy="memory-disk"
                     />
-                  </View>
-                )}
-                {item.media_type === "video" && item.thumbnail && (
-                  <View style={styles.videoBadge}>
-                    <IconSymbol name="play.fill" size={12} color="#fff" />
-                  </View>
-                )}
-              </TouchableOpacity>
-            ))}
-          </View>
-        ) : !loading ? (
-          <View style={styles.emptyGrid}>
-            <IconSymbol
-              name="camera"
-              size={44}
-              color={colors.text.tertiary}
-            />
-            <Text style={[styles.emptyText, { color: colors.text.tertiary }]}>
-              Henüz gönderi yok
-            </Text>
-          </View>
-        ) : null}
+                  ) : (
+                    <View style={styles.gridPlaceholder}>
+                      <IconSymbol
+                        name={item.media_type === "video" ? "play.fill" : "photo.fill"}
+                        size={28}
+                        color={colors.text.tertiary}
+                      />
+                    </View>
+                  )}
+                  {item.media_type === "video" && item.thumbnail && (
+                    <View style={styles.videoBadge}>
+                      <IconSymbol name="play.fill" size={12} color="#fff" />
+                    </View>
+                  )}
+                </TouchableOpacity>
+              ))}
+            </View>
+          ) : !loading && (
+            <View style={styles.emptyState}>
+              <View style={[styles.emptyIconBox, { backgroundColor: colors.surface.elevated }]}>
+                <IconSymbol name="camera.fill" size={32} color={colors.text.tertiary} />
+              </View>
+              <View style={{ alignItems: "center", gap: 6 }}>
+                <Text style={[styles.emptyTitle, { color: colors.text.primary }]}>Henüz Gönderi Yok</Text>
+                <Text style={[styles.emptyDesc, { color: colors.text.tertiary }]}>
+                  Bu kullanıcı henüz bir gönderi paylaşmadı.
+                </Text>
+              </View>
+            </View>
+          )
+        )}
 
-        <View style={{ height: 100 }} />
+        {activeTab === "tagged" && (
+          <View style={styles.emptyState}>
+            <View style={[styles.emptyIconBox, { backgroundColor: colors.surface.elevated }]}>
+              <IconSymbol name="person.crop.square.fill" size={32} color={colors.text.tertiary} />
+            </View>
+            <View style={{ alignItems: "center", gap: 6 }}>
+              <Text style={[styles.emptyTitle, { color: colors.text.primary }]}>Etiket Yok</Text>
+            </View>
+          </View>
+        )}
+
       </ScrollView>
 
       {/* ── Post Loading Overlay ── */}
@@ -540,129 +502,143 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-
-  /* Header */
   header: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
-    paddingHorizontal: 16,
-    paddingTop: Platform.OS === "ios" ? 56 : 40,
-    paddingBottom: 10,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-  },
-  headerBtn: {
-    width: 36,
-    height: 36,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  headerUsername: {
-    flex: 1,
-    fontSize: 20,
-    fontWeight: "700",
-    marginLeft: 4,
+    paddingHorizontal: 20,
+    paddingTop: Platform.OS === "ios" ? 60 : 40,
+    paddingBottom: 16,
   },
   headerRight: {
     flexDirection: "row",
-    alignItems: "center",
-    gap: 4,
+    gap: 12,
   },
-
-  /* Profile Info Row */
-  profileRow: {
+  headerBtn: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  contentScroll: {
+    paddingBottom: 100,
+  },
+  heroSection: {
     flexDirection: "row",
     alignItems: "center",
     paddingHorizontal: 20,
-    paddingTop: 16,
-    paddingBottom: 8,
+    paddingTop: 10,
+    paddingBottom: 20,
   },
-  statsRow: {
+  heroInfo: {
     flex: 1,
-    flexDirection: "row",
-    justifyContent: "space-around",
-    marginLeft: 20,
+    alignItems: "flex-start",
+    paddingLeft: 18,
   },
-  statItem: {
-    alignItems: "center",
+  avatarRing: {
+    padding: 3,
+    borderRadius: 50,
+    borderWidth: 2,
   },
-  statNumber: {
-    fontSize: 18,
-    fontWeight: "700",
+  heroName: {
+    fontSize: 24,
+    fontWeight: "800",
+    letterSpacing: -0.5,
+    marginBottom: 6,
   },
-  statLabel: {
+  usernamePill: {
+    paddingHorizontal: 12,
+    paddingVertical: 4,
+    borderRadius: 16,
+    marginBottom: 8,
+  },
+  heroUsername: {
     fontSize: 13,
-    fontWeight: "400",
-    marginTop: 2,
-  },
-
-  /* Bio */
-  bioSection: {
-    paddingHorizontal: 20,
-    paddingTop: 6,
-    paddingBottom: 12,
-  },
-  displayName: {
-    fontSize: 14,
     fontWeight: "600",
+    letterSpacing: 0.2,
   },
   bioText: {
     fontSize: 14,
     fontWeight: "400",
-    marginTop: 2,
-    lineHeight: 19,
+    textAlign: "left",
+    lineHeight: 20,
   },
-
-  /* Action Buttons */
   actionRow: {
     flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: 16,
-    paddingBottom: 14,
-    gap: 6,
+    paddingHorizontal: 20,
+    gap: 12,
+    marginBottom: 28,
   },
-  actionBtn: {
+  primaryBtn: {
     flex: 1,
-    flexDirection: "row",
+    height: 40,
+    borderRadius: 12,
     alignItems: "center",
     justifyContent: "center",
-    height: 36,
-    borderRadius: 8,
-    gap: 4,
+    flexDirection: "row",
   },
-  actionBtnText: {
+  primaryBtnText: {
     fontSize: 14,
     fontWeight: "600",
   },
-  actionIconBtn: {
-    width: 36,
-    height: 36,
-    borderRadius: 8,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  /* Grid Tab Bar */
-  gridTabBar: {
+  statsContainer: {
     flexDirection: "row",
-    borderBottomWidth: StyleSheet.hairlineWidth,
+    marginHorizontal: 20,
+    borderRadius: 24,
+    paddingVertical: 18,
+    marginBottom: 26,
+    shadowOffset: { width: 0, height: 8 },
+    shadowOpacity: 0.06,
+    shadowRadius: 16,
+    elevation: 4,
   },
-  gridTab: {
+  statDivider: {
+    width: 1,
+    height: "100%",
+    opacity: 0.5,
+  },
+  statItem: {
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    gap: 6,
+  },
+  statNumber: {
+    fontSize: 20,
+    fontWeight: "800",
+  },
+  statLabel: {
+    fontSize: 12,
+    fontWeight: "600",
+    textTransform: "uppercase",
+    letterSpacing: 0.8,
+  },
+  tabContainer: {
+    flexDirection: "row",
+    paddingHorizontal: 20,
+    marginBottom: 20,
+    gap: 10,
+  },
+  tabItem: {
     paddingVertical: 10,
+    paddingHorizontal: 20,
+    borderRadius: 24,
+    borderWidth: 1,
+    flex: 1,
+    alignItems: "center",
   },
-  gridTabActive: {
-    borderBottomWidth: 1.5,
+  tabText: {
+    fontSize: 14,
+    fontWeight: "700",
   },
-
-  /* Grid */
   grid: {
     flexDirection: "row",
     flexWrap: "wrap",
+    paddingHorizontal: 16,
   },
   gridCell: {
+    borderRadius: 20,
     overflow: "hidden",
   },
   gridPlaceholder: {
@@ -672,29 +648,36 @@ const styles = StyleSheet.create({
   },
   videoBadge: {
     position: "absolute",
-    top: 8,
-    right: 8,
-    width: 24,
-    height: 24,
-    borderRadius: 6,
+    top: 12,
+    right: 12,
+    padding: 6,
+    borderRadius: 12,
     backgroundColor: "rgba(0,0,0,0.5)",
-    alignItems: "center",
-    justifyContent: "center",
   },
-
-  /* Empty Grid */
-  emptyGrid: {
+  emptyState: {
     alignItems: "center",
     justifyContent: "center",
     paddingVertical: 60,
-    gap: 12,
+    paddingHorizontal: 40,
   },
-  emptyText: {
-    fontSize: 15,
-    fontWeight: "500",
+  emptyIconBox: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 20,
   },
-
-  /* Post Modal */
+  emptyTitle: {
+    fontSize: 18,
+    fontWeight: "700",
+  },
+  emptyDesc: {
+    fontSize: 14,
+    fontWeight: "400",
+    textAlign: "center",
+    lineHeight: 20,
+  },
   loadingOverlay: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: "rgba(0,0,0,0.4)",

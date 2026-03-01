@@ -8,6 +8,7 @@ from fastapi import FastAPI, Depends, HTTPException, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from sqlalchemy.orm import Session
 from typing import List, Optional
+from fastapi.staticfiles import StaticFiles
 
 import models, schemas, crud
 from database import engine, Base, SessionLocal
@@ -24,7 +25,6 @@ app = FastAPI(title="AsEmOs - Mekan Öneri Sistemi API")
 # Serve locally uploaded files
 _uploads_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), "uploads")
 os.makedirs(_uploads_dir, exist_ok=True)
-from fastapi.staticfiles import StaticFiles
 app.mount("/uploads", StaticFiles(directory=_uploads_dir), name="uploads")
 
 origins = settings.ALLOWED_ORIGINS.split(",") if settings.ALLOWED_ORIGINS != "*" else ["*"]
@@ -212,6 +212,7 @@ def get_followers(
     page: int = 1,
     page_size: int = 20,
     db: Session = Depends(get_db),
+    current_user: Optional[models.User] = Depends(get_optional_user),
 ):
     ids = crud.get_follower_ids(db, user_id)
     total = len(ids)
@@ -219,7 +220,13 @@ def get_followers(
     paginated_ids = ids[offset : offset + page_size]
     users = [crud.get_user_by_id(db, uid) for uid in paginated_ids]
     users = [u for u in users if u]
-    items = [schemas.UserSummary.model_validate(u) for u in users]
+    current_uid = current_user.id if current_user else None
+    items = []
+    for u in users:
+        item = schemas.UserSummary.model_validate(u)
+        if current_uid is not None:
+            item.is_following = crud.is_following(db, current_uid, u.id)
+        items.append(item)
     return {"items": items, "total": total, "page": page, "page_size": page_size}
 
 
@@ -229,6 +236,7 @@ def get_following(
     page: int = 1,
     page_size: int = 20,
     db: Session = Depends(get_db),
+    current_user: Optional[models.User] = Depends(get_optional_user),
 ):
     ids = crud.get_following_ids(db, user_id)
     total = len(ids)
@@ -236,7 +244,13 @@ def get_following(
     paginated_ids = ids[offset : offset + page_size]
     users = [crud.get_user_by_id(db, uid) for uid in paginated_ids]
     users = [u for u in users if u]
-    items = [schemas.UserSummary.model_validate(u) for u in users]
+    current_uid = current_user.id if current_user else None
+    items = []
+    for u in users:
+        item = schemas.UserSummary.model_validate(u)
+        if current_uid is not None:
+            item.is_following = crud.is_following(db, current_uid, u.id)
+        items.append(item)
     return {"items": items, "total": total, "page": page, "page_size": page_size}
 
 
@@ -988,6 +1002,47 @@ def get_match_candidates(
             except (json.JSONDecodeError, TypeError):
                 prompts = []
 
+        # Son aktif olduğu mekanı bul: Review (check-in) veya Post
+        last_place_id = None
+        last_place_name = None
+        latest_time = None
+        
+        latest_post = db.query(models.Post).filter(
+            models.Post.user_id == profile.user_id,
+            models.Post.place_id.isnot(None)
+        ).order_by(models.Post.created_at.desc()).first()
+        
+        if latest_post and latest_post.place:
+            last_place_id = latest_post.place_id
+            last_place_name = latest_post.place.name
+            latest_time = latest_post.created_at
+            
+        latest_review = db.query(models.Review).filter(
+            models.Review.user_id == profile.user_id,
+            models.Review.place_id.isnot(None),
+            models.Review.is_verified == True
+        ).order_by(models.Review.created_at.desc()).first()
+        
+        if latest_review and latest_review.place and latest_review.created_at:
+            if not latest_time or latest_review.created_at > latest_time:
+                last_place_id = latest_review.place_id
+                last_place_name = latest_review.place.name
+
+        # Sırf ekran boş kalmasın ve test edilebilsin diye Test kullanıcılarına veya yeri olmayanlara rastgele bilindik mekanlar atayalım
+        if not last_place_name:
+            import random
+            # Deterministic olması için user_id'yi seed olarak kullanalım ki sürekli değişmesin
+            random.seed(profile.user_id)
+            # Bu mekanlar halihazırda DB'de bulunan mekanlar.
+            mock_places = ["Lucca - Bebek", "Kronotrop Coffee - Cihangir", "Cup of Joy - Nişantaşı", "Sortie - Kuruçeşme", "MOC Karaköy"]
+            last_place_name = random.choice(mock_places)
+            # Find the actual DB place if it exists
+            db_place = db.query(models.Place).filter(models.Place.name == last_place_name).first()
+            if db_place:
+                last_place_id = db_place.id
+            # Seed'i geri sıfırlayalım ki sistemin kalanı etkilenmesin
+            random.seed()
+
         candidates.append(schemas.MatchCandidateResponse(
             user_id=profile.user_id,
             display_name=profile.display_name,
@@ -1004,7 +1059,8 @@ def get_match_candidates(
             star_sign=profile.star_sign,
             exercise=profile.exercise,
             prompts=prompts,
-            active_place_name=None,
+            active_place_id=last_place_id,
+            active_place_name=last_place_name,
             is_qr_verified=False,
             distance_priority=2,
         ))

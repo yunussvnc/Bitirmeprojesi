@@ -61,6 +61,7 @@ export interface MatchCandidate {
     star_sign?: string;
     exercise?: string;
     prompts?: { question: string; answer: string }[];
+    active_place_id?: number;
     active_place_name?: string;
     is_qr_verified: boolean;
     distance_priority: number;
@@ -99,8 +100,12 @@ export async function createOrUpdateMatchProfile(
 ): Promise<MatchProfile> {
     try {
         return await apiPost<MatchProfile>("/match-profile", data);
-    } catch (error) {
-        logger.error("[matchService] createOrUpdateMatchProfile error:", error);
+    } catch (error: any) {
+        if (error?.message?.includes('Unauthorized')) {
+            logger.warn("[matchService] Unauthorized when creating profile. Token might be missing/expired.");
+        } else {
+            logger.error("[matchService] createOrUpdateMatchProfile error:", error);
+        }
         throw error;
     }
 }
@@ -146,8 +151,15 @@ export async function getMatchCandidates(
     try {
         const query = placeId ? `?place_id=${placeId}` : "";
         return await apiGet<MatchCandidate[]>(`/match/candidates${query}`);
-    } catch (error) {
-        logger.error("[matchService] getMatchCandidates error:", error);
+    } catch (error: any) {
+        // Backend'de profilimiz yoksa bu hatayı dönmesi normaldir, loglamaya gerek yok
+        const msg = error?.message || "";
+        const userMsg = error?.userMessage || "";
+        if (msg.includes("400") || userMsg.includes("profil")) {
+            logger.warn("[matchService] Profil henüz aktif değil, adaylar backend'den alınamadı.");
+        } else {
+            logger.error("[matchService] getMatchCandidates error:", error);
+        }
         throw error;
     }
 }
