@@ -13,6 +13,10 @@ export interface Conversation {
     unread: boolean;
     isOnline: boolean;
     sharedPlace?: string;
+    isMatch?: boolean;
+    isRevealed?: boolean;
+    revealRequestedByMe?: boolean;
+    revealRequestedByThem?: boolean;
     isArchived?: boolean;
     isDeleted?: boolean;
     deletedAt?: number;
@@ -135,10 +139,14 @@ type MessagesState = {
     deleteConversation: (id: string) => void;
     markAsRead: (id: string) => void;
     updateLastMessageAt: (id: string, message: string, timestamp: string, sender?: "me" | string) => void;
+    toggleRevealRequest: (id: string) => void;
+    mockOtherPersonReveal: (id: string) => void;
 
     archiveMultiple: (ids: string[]) => void;
     unarchiveMultiple: (ids: string[]) => void;
     deleteMultiple: (ids: string[]) => void;
+
+    addConversation: (conversation: Conversation) => void;
 
     restoreDeleted: (id: string) => void;
     restoreDeletedMultiple: (ids: string[]) => void;
@@ -182,6 +190,37 @@ export const useMessagesStore = create<MessagesState>()(
                 )
             })),
 
+            toggleRevealRequest: (id) => set((state) => ({
+                conversations: state.conversations.map(c => {
+                    if (c.id === id) {
+                        const newReqMe = !c.revealRequestedByMe;
+                        const fullyRevealed = newReqMe && c.revealRequestedByThem;
+                        return {
+                            ...c,
+                            revealRequestedByMe: newReqMe,
+                            isRevealed: fullyRevealed || c.isRevealed,
+                            isMatch: fullyRevealed ? false : c.isMatch // Remove match status when fully revealed
+                        };
+                    }
+                    return c;
+                })
+            })),
+
+            mockOtherPersonReveal: (id) => set((state) => ({
+                conversations: state.conversations.map(c => {
+                    if (c.id === id) {
+                        const fullyRevealed = c.revealRequestedByMe && true;
+                        return {
+                            ...c,
+                            revealRequestedByThem: true,
+                            isRevealed: fullyRevealed || c.isRevealed,
+                            isMatch: fullyRevealed ? false : c.isMatch,
+                        };
+                    }
+                    return c;
+                })
+            })),
+
             archiveMultiple: (ids) => set((state) => ({
                 conversations: state.conversations.map(c =>
                     ids.includes(c.id) ? { ...c, isArchived: true } : c
@@ -198,6 +237,10 @@ export const useMessagesStore = create<MessagesState>()(
                 conversations: state.conversations.map(c =>
                     ids.includes(c.id) ? { ...c, isDeleted: true, deletedAt: Date.now() } : c
                 )
+            })),
+
+            addConversation: (conv) => set((state) => ({
+                conversations: [conv, ...state.conversations]
             })),
 
             restoreDeleted: (id) => set((state) => ({

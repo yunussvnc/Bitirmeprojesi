@@ -35,6 +35,7 @@ def create_user(db: Session, user: schemas.UserCreate):
         first_name=user.first_name,
         last_name=user.last_name,
         phone_number=user.phone_number,
+        birth_date=user.birth_date,
     )
     db.add(db_user)
     db.commit()
@@ -522,13 +523,50 @@ def get_following_ids(db: Session, user_id: int) -> list[int]:
 
 # --- NOTIFICATION (Kademe 5) ---
 
-def create_notification(db: Session, user_id: int, type: str, actor_id: int, post_id: int | None = None):
+def create_notification(
+    db: Session,
+    user_id: int,
+    type: str,
+    actor_id: int,
+    post_id: int | None = None,
+    push_extra: dict | None = None,
+):
+    """
+    Bildirim oluştur + push notification gönder.
+    push_extra: Push mesajına eklenecek ek veri (örn. mesaj preview)
+    """
     if user_id == actor_id:
         return None
     n = models.Notification(user_id=user_id, type=type, actor_id=actor_id, post_id=post_id)
     db.add(n)
     db.commit()
     db.refresh(n)
+
+    # Push notification gönder (async — fire and forget)
+    target_user = get_user_by_id(db, user_id)
+    if target_user and target_user.push_token:
+        actor = get_user_by_id(db, actor_id)
+        actor_name = "Birisi"
+        if actor:
+            actor_name = actor.first_name or actor.username or "Birisi"
+
+        import asyncio
+        from app.services.push import send_push, notification_push_content
+
+        content = notification_push_content(type, actor_name, push_extra)
+        try:
+            loop = asyncio.get_event_loop()
+            if loop.is_running():
+                asyncio.ensure_future(
+                    send_push(target_user.push_token, content["title"], content["body"], content["data"])
+                )
+            else:
+                loop.run_until_complete(
+                    send_push(target_user.push_token, content["title"], content["body"], content["data"])
+                )
+        except Exception:
+            pass  # Push hatası bildirim oluşturmayı engellememeli
+
     return n
 
 

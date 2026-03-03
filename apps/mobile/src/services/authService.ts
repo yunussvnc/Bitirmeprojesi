@@ -11,6 +11,7 @@ export type AuthUser = {
   role: string;
   is_active: boolean;
   created_at: string;
+  birth_date: string | null;
 };
 
 export type AuthTokens = {
@@ -26,6 +27,7 @@ export type RegisterPayload = {
   username?: string;
   first_name?: string;
   last_name?: string;
+  birth_date?: string;
 };
 
 export type LoginPayload = {

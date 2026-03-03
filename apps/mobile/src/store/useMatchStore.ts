@@ -23,6 +23,9 @@ type MatchState = {
     // Konuşmalar
     conversations: MatchConversation[];
 
+    // Ayarlar
+    isGhostMode: boolean;
+
     // Aksiyonlar
     fetchMyProfile: () => Promise<void>;
     createProfile: (data: MatchProfileCreate) => Promise<void>;
@@ -33,6 +36,7 @@ type MatchState = {
     passCandidate: (userId: number, placeId?: number) => Promise<void>;
     nextCandidate: () => void;
     resetCandidateIndex: () => void;
+    toggleGhostMode: () => void;
 
     fetchConversations: () => Promise<void>;
     revealProfile: (conversationId: number) => Promise<void>;
@@ -48,6 +52,7 @@ export const useMatchStore = create<MatchState>()(
             candidatesLoading: false,
             currentIndex: 0,
             conversations: [],
+            isGhostMode: false,
 
             fetchMyProfile: async () => {
                 set({ profileLoading: true });
@@ -118,6 +123,10 @@ export const useMatchStore = create<MatchState>()(
                 set({ currentIndex: 0 });
             },
 
+            toggleGhostMode: () => {
+                set({ isGhostMode: !get().isGhostMode });
+            },
+
             fetchConversations: async () => {
                 try {
                     const conversations = await matchService.getMatchConversations();
@@ -139,6 +148,7 @@ export const useMatchStore = create<MatchState>()(
                 myProfile: state.myProfile,
                 hasProfile: state.hasProfile,
                 conversations: state.conversations,
+                isGhostMode: state.isGhostMode,
             }),
         }
     )

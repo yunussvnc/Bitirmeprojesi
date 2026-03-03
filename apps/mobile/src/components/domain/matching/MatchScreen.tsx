@@ -12,6 +12,8 @@ import {
   Platform,
   Modal,
   Pressable,
+  Alert,
+  TextInput,
 } from "react-native";
 import { router } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -22,11 +24,73 @@ import { useTheme } from "@/src/hooks/useTheme";
 import { useMatchStore } from "@/src/store/useMatchStore";
 import { usePresence } from "@/src/store/presence";
 import { useAppStore } from "@/src/store/useAppStore";
+import { useMessagesStore } from "@/src/store/useMessagesStore";
+import {
+  Cigarette,
+  Wine
+} from "lucide-react-native";
+import {
+  IconZodiacAquarius,
+  IconZodiacAries,
+  IconZodiacCancer,
+  IconZodiacCapricorn,
+  IconZodiacGemini,
+  IconZodiacLeo,
+  IconZodiacLibra,
+  IconZodiacPisces,
+  IconZodiacSagittarius,
+  IconZodiacScorpio,
+  IconZodiacTaurus,
+  IconZodiacVirgo
+} from "tabler-icons-react-native";
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get("window");
 const SWIPE_THRESHOLD = SCREEN_WIDTH * 0.2;
 
 const ACCENT = "#1DB954";
+
+const STAR_SIGN_OPTIONS = [
+  "Koç", "Boğa", "İkizler", "Yengeç", "Aslan", "Başak",
+  "Terazi", "Akrep", "Yay", "Oğlak", "Kova", "Balık",
+];
+const GENDER_FILTER_OPTIONS = ["Hepsi", "Kadın", "Erkek", "Diğer"];
+
+interface MatchFilters {
+  gender: string;
+  ageMin: number;
+  ageMax: number;
+  distanceKm: number;
+  heightMin: number;
+  heightMax: number;
+  starSign: string;
+}
+
+const DEFAULT_FILTERS: MatchFilters = {
+  gender: "Hepsi",
+  ageMin: 18,
+  ageMax: 70,
+  distanceKm: 100,
+  heightMin: 100,
+  heightMax: 230,
+  starSign: "",
+};
+
+function renderZodiacIcon(signName: string, color: string) {
+  const s = signName.toLowerCase();
+  if (s.includes("kova")) return <IconZodiacAquarius size={14} color={color} />;
+  if (s.includes("koç")) return <IconZodiacAries size={14} color={color} />;
+  if (s.includes("yengeç")) return <IconZodiacCancer size={14} color={color} />;
+  if (s.includes("oğlak")) return <IconZodiacCapricorn size={14} color={color} />;
+  if (s.includes("ikizler")) return <IconZodiacGemini size={14} color={color} />;
+  if (s.includes("aslan")) return <IconZodiacLeo size={14} color={color} />;
+  if (s.includes("terazi")) return <IconZodiacLibra size={14} color={color} />;
+  if (s.includes("balık")) return <IconZodiacPisces size={14} color={color} />;
+  if (s.includes("yay")) return <IconZodiacSagittarius size={14} color={color} />;
+  if (s.includes("akrep")) return <IconZodiacScorpio size={14} color={color} />;
+  if (s.includes("boğa")) return <IconZodiacTaurus size={14} color={color} />;
+  if (s.includes("başak")) return <IconZodiacVirgo size={14} color={color} />;
+  return <IconSymbol name="star.fill" size={14} color={color} />;
+}
 
 // Mock data — seni beğenen kişiler (Bumble style rich profiles)
 const richProfile = {
@@ -133,7 +197,11 @@ export default function MatchScreen() {
     nextCandidate,
     profileLoading,
     myProfile,
+    isGhostMode,
+    toggleGhostMode,
+    deleteProfile,
   } = useMatchStore();
+  const { addConversation } = useMessagesStore();
 
   const { activePlaceId, activePlaceName, qrVerified, isSessionActive } =
     usePresence();
@@ -143,15 +211,83 @@ export default function MatchScreen() {
   const [selectedLike, setSelectedLike] = useState<
     (typeof MOCK_LIKES)[number] | null
   >(null);
+  const [blockedUsers, setBlockedUsers] = useState<number[]>([]);
+  const [actedLikes, setActedLikes] = useState<number[]>([]);
+  const [showFilterModal, setShowFilterModal] = useState(false);
+  const [filters, setFilters] = useState<MatchFilters>({ ...DEFAULT_FILTERS });
+  const [tempFilters, setTempFilters] = useState<MatchFilters>({ ...DEFAULT_FILTERS });
+
+  // Raw text states for filter inputs (allows free typing)
+  const [txtAgeMin, setTxtAgeMin] = useState(String(DEFAULT_FILTERS.ageMin));
+  const [txtAgeMax, setTxtAgeMax] = useState(String(DEFAULT_FILTERS.ageMax));
+  const [txtDistance, setTxtDistance] = useState(String(DEFAULT_FILTERS.distanceKm));
+  const [txtHeightMin, setTxtHeightMin] = useState(String(DEFAULT_FILTERS.heightMin));
+  const [txtHeightMax, setTxtHeightMax] = useState(String(DEFAULT_FILTERS.heightMax));
 
   // Pan animation for swipe
   const pan = useRef(new Animated.ValueXY()).current;
   const cardOpacity = useRef(new Animated.Value(1)).current;
   const scrollViewRef = useRef<ScrollView>(null);
 
+  // Pan animation for modal swipe
+  const [scrollModeModal, setScrollModeModal] = useState(false);
+  const scrollModeModalRef = useRef(scrollModeModal);
+  scrollModeModalRef.current = scrollModeModal;
+  const panModal = useRef(new Animated.ValueXY()).current;
+  const scrollModalRef = useRef<ScrollView>(null);
+
   useEffect(() => {
     fetchMyProfile();
   }, []);
+
+  const handleContextMenu = () => {
+    Alert.alert(
+      "Seçenekler",
+      "Ne yapmak istersiniz?",
+      [
+        {
+          text: "Kullanıcı Filtreleme",
+          onPress: () => {
+            setTempFilters({ ...filters });
+            setTxtAgeMin(String(filters.ageMin));
+            setTxtAgeMax(String(filters.ageMax));
+            setTxtDistance(String(filters.distanceKm));
+            setTxtHeightMin(String(filters.heightMin));
+            setTxtHeightMax(String(filters.heightMax));
+            setShowFilterModal(true);
+          },
+        },
+        {
+          text: isGhostMode ? "Hayalet Mod'dan Çık" : "Hayalet Mod'a Geç",
+          onPress: () => toggleGhostMode(),
+        },
+        {
+          text: "Match Ekranını Sil",
+          style: "destructive",
+          onPress: () => {
+            Alert.alert(
+              "Match Ekranını Sil",
+              "Match ekranını silmeye emin misin? Eşleşmelerin ve beğenilerin kaybolacak ve seni kimse göremeyecek. Tekrar katılmak için tıpkı ilk seferde olduğu gibi bir mekanda oluşturman gerekecek.",
+              [
+                { text: "İptal", style: "cancel" },
+                {
+                  text: "Evet, Sil",
+                  style: "destructive",
+                  onPress: () => {
+                    deleteProfile();
+                  },
+                },
+              ]
+            );
+          },
+        },
+        {
+          text: "İptal",
+          style: "cancel",
+        },
+      ]
+    );
+  };
 
   const [attemptedCreate, setAttemptedCreate] = useState(false);
 
@@ -185,7 +321,26 @@ export default function MatchScreen() {
     }
   }, [hasProfile, activePlaceId, activeTab, profileLoading]);
 
-  const currentCandidate = candidates[currentIndex];
+  const currentCandidateRaw = candidates[currentIndex];
+
+  // Apply filters to current candidate
+  const passesFilter = (c: typeof candidates[0]) => {
+    if (!c) return false;
+    if (filters.gender !== "Hepsi" && c.gender && c.gender !== filters.gender) return false;
+    if (c.age < filters.ageMin || c.age > filters.ageMax) return false;
+    if (c.height && (c.height < filters.heightMin || c.height > filters.heightMax)) return false;
+    if (filters.starSign && c.star_sign && c.star_sign !== filters.starSign) return false;
+    return true;
+  };
+
+  const currentCandidate = currentCandidateRaw && passesFilter(currentCandidateRaw) ? currentCandidateRaw : undefined;
+
+  // Auto-skip candidates that don't pass filters
+  useEffect(() => {
+    if (currentCandidateRaw && !passesFilter(currentCandidateRaw) && currentIndex < candidates.length) {
+      nextCandidate();
+    }
+  }, [currentIndex, candidates, filters]);
 
   const handleSwipe = useCallback(
     async (direction: "left" | "right") => {
@@ -206,6 +361,21 @@ export default function MatchScreen() {
             .then((result) => {
               if (result.matched) {
                 setMatchPopup({ name: currentCandidate.display_name });
+
+                // Mesajlara düşmesi için ekle
+                addConversation({
+                  id: String((result as any).conversation_id || `match_${Date.now()}_${currentCandidate.user_id}`),
+                  name: currentCandidate.display_name,
+                  username: (currentCandidate.display_name || "").toLowerCase().replace(/\s/g, ""),
+                  avatar: currentCandidate.photo_urls?.[0] || "https://i.pravatar.cc/150",
+                  lastMessage: "Eşleştiniz! Hemen yazışmaya başla...",
+                  timestamp: "Şimdi",
+                  unread: true,
+                  isOnline: true,
+                  isMatch: true,
+                  lastMessageAt: Date.now()
+                });
+
                 setTimeout(() => setMatchPopup(null), 3000);
               }
             })
@@ -288,6 +458,115 @@ export default function MatchScreen() {
     extrapolate: "clamp",
   });
 
+  // Modal swipe handlers and interpolations
+  const handleModalSwipe = useCallback(
+    async (direction: "left" | "right") => {
+      if (!selectedLike) return;
+
+      const toValue =
+        direction === "right" ? SCREEN_WIDTH + 100 : -SCREEN_WIDTH - 100;
+
+      Animated.timing(panModal, {
+        toValue: { x: toValue, y: 0 },
+        duration: 250,
+        useNativeDriver: false,
+      }).start(() => {
+        const swipedPersonId = selectedLike.id;
+        setActedLikes((prev) => [...prev, swipedPersonId]);
+
+        if (direction === "right") {
+          const matchedPerson = selectedLike.name || (selectedLike as any).display_name;
+
+          const placeId = activePlaceId ? parseInt(activePlaceId) : undefined;
+          const targetId = (selectedLike as any).user_id || selectedLike.id;
+          likeCandidate(targetId, placeId).catch(err => console.log("Mock like fallback"));
+
+          addConversation({
+            id: `match_${Date.now()}_${selectedLike.id}`,
+            name: matchedPerson,
+            username: (matchedPerson || "").toLowerCase().replace(/\s/g, ""),
+            avatar: selectedLike.photo || selectedLike.photos?.[0] || "https://i.pravatar.cc/150",
+            lastMessage: "Eşleştiniz! Hemen yazışmaya başla...",
+            timestamp: "Şimdi",
+            unread: true,
+            isOnline: true,
+            isMatch: true,
+            lastMessageAt: Date.now()
+          });
+
+          setSelectedLike(null);
+          setMatchPopup({ name: matchedPerson });
+        } else {
+          setSelectedLike(null);
+        }
+        panModal.setValue({ x: 0, y: 0 });
+        scrollModalRef.current?.scrollTo({ x: 0, y: 0, animated: false });
+      });
+    },
+    [selectedLike]
+  );
+
+  const handleModalSwipeRef = useRef(handleModalSwipe);
+  handleModalSwipeRef.current = handleModalSwipe;
+
+  const panResponderModal = useRef(
+    PanResponder.create({
+      onStartShouldSetPanResponder: () => false,
+      onStartShouldSetPanResponderCapture: () => false,
+      onMoveShouldSetPanResponder: (_, gs) => {
+        if (scrollModeModalRef.current) return false;
+        return Math.abs(gs.dx) > Math.abs(gs.dy) * 2 && Math.abs(gs.dx) > 15;
+      },
+      onMoveShouldSetPanResponderCapture: (_, gs) => {
+        if (scrollModeModalRef.current) return false;
+        return Math.abs(gs.dx) > Math.abs(gs.dy) * 2 && Math.abs(gs.dx) > 15;
+      },
+      onPanResponderGrant: () => {
+        panModal.setOffset({ x: (panModal.x as any)._value, y: 0 });
+        panModal.setValue({ x: 0, y: 0 });
+      },
+      onPanResponderMove: Animated.event([null, { dx: panModal.x }], {
+        useNativeDriver: false,
+      }),
+      onPanResponderRelease: (_, gs) => {
+        panModal.flattenOffset();
+        const dragX = (panModal.x as any)._value;
+        const isSwipeRight = dragX > SWIPE_THRESHOLD || gs.vx > 0.5;
+        const isSwipeLeft = dragX < -SWIPE_THRESHOLD || gs.vx < -0.5;
+
+        if (isSwipeRight) {
+          handleModalSwipeRef.current("right");
+        } else if (isSwipeLeft) {
+          handleModalSwipeRef.current("left");
+        } else {
+          Animated.spring(panModal, {
+            toValue: { x: 0, y: 0 },
+            friction: 5,
+            useNativeDriver: false,
+          }).start();
+        }
+      },
+    })
+  ).current;
+
+  const rotateModal = panModal.x.interpolate({
+    inputRange: [-SCREEN_WIDTH / 2, 0, SCREEN_WIDTH / 2],
+    outputRange: ["-10deg", "0deg", "10deg"],
+    extrapolate: "clamp",
+  });
+
+  const likeOpacityModal = panModal.x.interpolate({
+    inputRange: [0, SCREEN_WIDTH / 4],
+    outputRange: [0, 1],
+    extrapolate: "clamp",
+  });
+
+  const passOpacityModal = panModal.x.interpolate({
+    inputRange: [-SCREEN_WIDTH / 4, 0],
+    outputRange: [1, 0],
+    extrapolate: "clamp",
+  });
+
   // --- RENDER HELPERS ---
 
   const renderEmptyStateProfile = () => (
@@ -330,6 +609,33 @@ export default function MatchScreen() {
       </TouchableOpacity>
     </View>
   );
+  const handleBlockUser = (profile: any) => {
+    Alert.alert(
+      "Kullanıcıyı Engelle",
+      "Bu kullanıcıyı engellemek istediğine emin misin? Bir daha bu profile denk gelmeyeceksin.",
+      [
+        { text: "İptal", style: "cancel" },
+        {
+          text: "Evet, Engelle",
+          style: "destructive",
+          onPress: () => {
+            const userId = profile.user_id || profile.id;
+            setBlockedUsers(prev => [...prev, userId]);
+
+            if (activeTab === "swipe" && currentCandidate?.user_id === userId) {
+              handleSwipe("left"); // "pass" the candidate
+            } else {
+              if (selectedLike && (selectedLike.id === userId || (selectedLike as any).user_id === userId)) {
+                setSelectedLike(null);
+              }
+              // Try to pass candidate behind the scenes if we have user_id
+              if (profile.user_id) passCandidate(profile.user_id, profile.active_place_id);
+            }
+          }
+        }
+      ]
+    );
+  };
 
   const renderProfileContent = (profile: any) => {
     if (!profile) return null;
@@ -359,7 +665,7 @@ export default function MatchScreen() {
             </ThemedText>
 
             {/* Badges / Traits */}
-            {(profile.height || profile.education || profile.smoking || profile.star_sign || profile.about) && (
+            {(profile.height || profile.education || profile.smoking || profile.star_sign || profile.about || profile.drinking) && (
               <View style={styles.unifiedTraitsColumn}>
                 {profile.height && (
                   <View style={styles.unifiedTraitBadge}>
@@ -375,14 +681,20 @@ export default function MatchScreen() {
                 )}
                 {profile.smoking && (
                   <View style={styles.unifiedTraitBadge}>
-                    <IconSymbol name="smoke.fill" size={14} color={colors.text.primary} />
-                    <ThemedText style={[styles.unifiedTraitText, { color: colors.text.primary }]}>{profile.smoking}</ThemedText>
+                    <Cigarette size={14} color={colors.text.primary} />
+                    <ThemedText style={[styles.unifiedTraitText, { color: colors.text.primary, marginLeft: 6 }]}>{profile.smoking}</ThemedText>
+                  </View>
+                )}
+                {profile.drinking && (
+                  <View style={styles.unifiedTraitBadge}>
+                    <Wine size={14} color={colors.text.primary} />
+                    <ThemedText style={[styles.unifiedTraitText, { color: colors.text.primary, marginLeft: 6 }]}>{profile.drinking}</ThemedText>
                   </View>
                 )}
                 {profile.star_sign && (
                   <View style={styles.unifiedTraitBadge}>
-                    <IconSymbol name="star.fill" size={14} color={colors.text.primary} />
-                    <ThemedText style={[styles.unifiedTraitText, { color: colors.text.primary }]}>{profile.star_sign}</ThemedText>
+                    {renderZodiacIcon(profile.star_sign, colors.text.primary)}
+                    <ThemedText style={[styles.unifiedTraitText, { color: colors.text.primary, marginLeft: 6 }]}>{profile.star_sign}</ThemedText>
                   </View>
                 )}
               </View>
@@ -460,7 +772,7 @@ export default function MatchScreen() {
 
           {/* Active Place Tag at the Bottom */}
           {profile.active_place_name && (
-            <View style={[styles.unifiedContentGroup, { paddingTop: 24, paddingBottom: 120 }]}>
+            <View style={[styles.unifiedContentGroup, { paddingTop: 24 }]}>
               <TouchableOpacity
                 style={styles.unifiedActivePlace}
                 activeOpacity={0.8}
@@ -475,11 +787,25 @@ export default function MatchScreen() {
               >
                 <IconSymbol name="mappin.and.ellipse" size={18} color={ACCENT} />
                 <ThemedText style={[styles.unifiedActivePlaceText, { color: ACCENT }]}>
-                  Şuan {profile.active_place_name}'da aktif
+                  {profile.active_place_name}'da aktif
                 </ThemedText>
               </TouchableOpacity>
             </View>
           )}
+
+          {/* Block User Button */}
+          <View style={[styles.unifiedContentGroup, { paddingTop: profile.active_place_name ? 16 : 24, paddingBottom: 120, alignItems: 'center' }]}>
+            <TouchableOpacity
+              style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: 'rgba(255, 59, 48, 0.1)', paddingVertical: 10, paddingHorizontal: 20, borderRadius: 20 }}
+              onPress={() => handleBlockUser(profile)}
+              activeOpacity={0.8}
+            >
+              <IconSymbol name="nosign" size={16} color="#FF3B30" />
+              <ThemedText style={{ color: '#FF3B30', fontSize: 13, fontWeight: '600', marginLeft: 6 }}>
+                Kullanıcıyı Engelle
+              </ThemedText>
+            </TouchableOpacity>
+          </View>
 
         </View>
       </View>
@@ -501,7 +827,7 @@ export default function MatchScreen() {
         }}
       >
         <View style={styles.likesGrid}>
-          {MOCK_LIKES.map((person) => (
+          {MOCK_LIKES.filter(p => !blockedUsers.includes(p.id) && !actedLikes.includes(p.id)).map((person) => (
             <Pressable
               key={person.id}
               style={({ pressed }) => [
@@ -814,8 +1140,12 @@ export default function MatchScreen() {
             bottom: 4,
           }}
         >
-          <TouchableOpacity style={{ marginRight: 16 }} hitSlop={12}>
-            <IconSymbol name="flag.fill" size={24} color={ACCENT} />
+          <TouchableOpacity
+            style={{ marginRight: 16 }}
+            hitSlop={12}
+            onPress={handleContextMenu}
+          >
+            <IconSymbol name="ellipsis" size={24} color={ACCENT} />
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => router.push("/match-profile-setup")}
@@ -830,201 +1160,470 @@ export default function MatchScreen() {
         </View>
       </View>
 
-      {/* Segmented Control for Tabs */}
-      <View style={styles.segmentedControlContainer}>
-        <TouchableOpacity
-          style={[
-            styles.segmentBtn,
-            {
-              backgroundColor: isDark
-                ? "rgba(255,255,255,0.1)"
-                : "rgba(0,0,0,0.05)",
-            },
-            activeTab === "swipe" && styles.segmentBtnActive,
-          ]}
-          onPress={() => setActiveTab("swipe")}
-        >
-          <ThemedText
-            style={[
-              styles.segmentText,
-              { color: isDark ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.6)" },
-              activeTab === "swipe" && styles.segmentTextActive,
-            ]}
-          >
-            Kişiler
+      {isGhostMode ? (
+        <View style={styles.emptyState}>
+          <View style={[styles.emptyIcon, { backgroundColor: "rgba(29, 185, 84, 0.15)" }]}>
+            <IconSymbol name="eye.slash" size={48} color={ACCENT} />
+          </View>
+          <ThemedText style={styles.emptyTitle}>Hayalet Mod Açık</ThemedText>
+          <ThemedText style={[styles.emptySubtitle, { color: colors.text.secondary }]}>
+            Şu an kimseyi göremiyorsunuz ve kimse sizi göremiyor. Sağ üstteki menüden Hayalet Mod'dan çıkabilirsiniz.
           </ThemedText>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[
-            styles.segmentBtn,
-            {
-              backgroundColor: isDark
-                ? "rgba(255,255,255,0.1)"
-                : "rgba(0,0,0,0.05)",
-            },
-            activeTab === "likes" && styles.segmentBtnActive,
-          ]}
-          onPress={() => setActiveTab("likes")}
-        >
-          <ThemedText
-            style={[
-              styles.segmentText,
-              { color: isDark ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.6)" },
-              activeTab === "likes" && styles.segmentTextActive,
-            ]}
-          >
-            Beğeniler
-          </ThemedText>
-        </TouchableOpacity>
-      </View>
-
-      {activeTab === "swipe" ? renderSwipeTab() : renderLikesTab()}
-
-      {/* Match Popup */}
-      {matchPopup && (
-        <View
-          style={[
-            styles.matchPopup,
-            {
-              backgroundColor: isDark
-                ? "rgba(0,0,0,0.8)"
-                : "rgba(255,255,255,0.9)",
-            },
-          ]}
-        >
-          <View style={styles.matchPopupContent}>
-            <IconSymbol
-              name="heart.text.square.fill"
-              size={80}
-              color={ACCENT}
-            />
-            <ThemedText
-              style={[
-                styles.matchPopupTitle,
-                { color: colors.text.primary, marginTop: 20 },
-              ]}
-            >
-              ITS A MATCH!
-            </ThemedText>
-            <ThemedText
-              style={[styles.matchPopupText, { color: colors.text.secondary }]}
-            >
-              {matchPopup.name} de seni beğendi. Hemen yazışmaya başla!
-            </ThemedText>
+        </View>
+      ) : (
+        <>
+          {/* Segmented Control for Tabs */}
+          <View style={styles.segmentedControlContainer}>
             <TouchableOpacity
-              style={[styles.bumbleBtn, { marginTop: 30 }]}
-              onPress={() => {
-                setMatchPopup(null);
-                router.push("/(tabs)/messages");
-              }}
+              style={[
+                styles.segmentBtn,
+                {
+                  backgroundColor: isDark
+                    ? "rgba(255,255,255,0.1)"
+                    : "rgba(0,0,0,0.05)",
+                },
+                activeTab === "swipe" && styles.segmentBtnActive,
+              ]}
+              onPress={() => setActiveTab("swipe")}
             >
-              <ThemedText style={styles.bumbleBtnText}>Mesaj Gönder</ThemedText>
+              <ThemedText
+                style={[
+                  styles.segmentText,
+                  { color: isDark ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.6)" },
+                  activeTab === "swipe" && styles.segmentTextActive,
+                ]}
+              >
+                Kişiler
+              </ThemedText>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={[
+                styles.segmentBtn,
+                {
+                  backgroundColor: isDark
+                    ? "rgba(255,255,255,0.1)"
+                    : "rgba(0,0,0,0.05)",
+                },
+                activeTab === "likes" && styles.segmentBtnActive,
+              ]}
+              onPress={() => setActiveTab("likes")}
+            >
+              <ThemedText
+                style={[
+                  styles.segmentText,
+                  { color: isDark ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.6)" },
+                  activeTab === "likes" && styles.segmentTextActive,
+                ]}
+              >
+                Beğeniler
+              </ThemedText>
             </TouchableOpacity>
           </View>
-        </View>
-      )}
 
-      {/* Liked Person Detail Modal */}
-      {/* Liked Person Detail Modal - Bumble Style */}
-      <Modal
-        visible={!!selectedLike}
-        animationType="slide"
-        presentationStyle="fullScreen"
-        onRequestClose={() => setSelectedLike(null)}
-      >
-        {selectedLike && (
-          <View
-            style={[
-              styles.container,
-              { backgroundColor: colors.background.secondary },
-            ]}
-          >
-            {/* Header matching the swipe tab */}
-            <View style={[styles.topHeader, { paddingTop: insets.top + 16 }]}>
-              <View
-                style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                  position: "absolute",
-                  left: 16,
-                  bottom: 8,
-                }}
-              >
-                <TouchableOpacity
-                  onPress={() => setSelectedLike(null)}
-                  hitSlop={12}
-                  style={{ paddingVertical: 4, paddingRight: 16 }}
+          {activeTab === "swipe" ? renderSwipeTab() : renderLikesTab()}
+
+          {/* Match Popup */}
+          {matchPopup && (
+            <View
+              style={[
+                styles.matchPopup,
+                {
+                  backgroundColor: isDark
+                    ? "rgba(0,0,0,0.8)"
+                    : "rgba(255,255,255,0.9)",
+                },
+              ]}
+            >
+              <View style={styles.matchPopupContent}>
+                <IconSymbol
+                  name="heart.text.square.fill"
+                  size={80}
+                  color={ACCENT}
+                />
+                <ThemedText
+                  style={[
+                    styles.matchPopupTitle,
+                    { color: colors.text.primary, marginTop: 20 },
+                  ]}
                 >
-                  <IconSymbol
-                    name="chevron.left"
-                    size={28}
-                    color={colors.text.primary}
-                  />
+                  ITS A MATCH!
+                </ThemedText>
+                <ThemedText
+                  style={[styles.matchPopupText, { color: colors.text.secondary }]}
+                >
+                  {matchPopup.name} de seni beğendi. Hemen yazışmaya başla!
+                </ThemedText>
+                <TouchableOpacity
+                  style={[styles.bumbleBtn, { marginTop: 30 }]}
+                  onPress={() => {
+                    setMatchPopup(null);
+                    router.push("/(tabs)/messages");
+                  }}
+                >
+                  <ThemedText style={styles.bumbleBtnText}>Mesaj Gönder</ThemedText>
+                </TouchableOpacity>
+              </View>
+            </View>
+          )}
+
+          {/* Liked Person Detail Overlay */}
+          {selectedLike && (
+            <View
+              style={[
+                StyleSheet.absoluteFillObject,
+                styles.container,
+                { backgroundColor: colors.background.secondary, zIndex: 1000, elevation: 100 },
+              ]}
+            >
+              {/* Header matching the swipe tab */}
+              <View style={[styles.topHeader, { paddingTop: insets.top + 16 }]}>
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    position: "absolute",
+                    left: 16,
+                    bottom: 8,
+                  }}
+                >
+                  <TouchableOpacity
+                    onPress={() => setSelectedLike(null)}
+                    hitSlop={12}
+                    style={{ paddingVertical: 4, paddingRight: 16 }}
+                  >
+                    <IconSymbol
+                      name="chevron.left"
+                      size={28}
+                      color={colors.text.primary}
+                    />
+                  </TouchableOpacity>
+                </View>
+
+                <View style={{ flex: 1, alignItems: "center" }}>
+                  <ThemedText style={styles.headerNameText}>
+                    {selectedLike.name || (selectedLike as any).display_name},{" "}
+                    {selectedLike.age}
+                  </ThemedText>
+                </View>
+
+                <TouchableOpacity
+                  style={{ position: "absolute", right: 16, bottom: 8 }}
+                  hitSlop={12}
+                  onPress={handleContextMenu}
+                >
+                  <IconSymbol name="ellipsis" size={24} color={ACCENT} />
                 </TouchableOpacity>
               </View>
 
-              <View style={{ flex: 1, alignItems: "center" }}>
-                <ThemedText style={styles.headerNameText}>
-                  {selectedLike.name || (selectedLike as any).display_name},{" "}
-                  {selectedLike.age}
-                </ThemedText>
-              </View>
+              <View style={[styles.cardContainer, { paddingTop: 16 }]}>
+                <Animated.View
+                  style={[
+                    styles.card,
+                    {
+                      transform: [
+                        { translateX: panModal.x },
+                        { translateY: panModal.y },
+                        { rotate: rotateModal },
+                      ],
+                    }
+                  ]}
+                  {...panResponderModal.panHandlers}
+                >
+                  {/* Overlays */}
+                  <Animated.View
+                    style={[
+                      styles.swipeOverlay,
+                      styles.likeOverlay,
+                      { opacity: likeOpacityModal },
+                    ]}
+                  >
+                    <View style={[styles.swipeLabelContainer, { borderColor: ACCENT }]}>
+                      <ThemedText style={[styles.swipeLabel, { color: ACCENT }]}>
+                        BEĞENDİM
+                      </ThemedText>
+                    </View>
+                  </Animated.View>
+                  <Animated.View
+                    style={[
+                      styles.swipeOverlay,
+                      styles.passOverlay,
+                      { opacity: passOpacityModal },
+                    ]}
+                  >
+                    <View style={[styles.swipeLabelContainer, { borderColor: "#E22134" }]}>
+                      <ThemedText style={[styles.swipeLabel, { color: "#E22134" }]}>
+                        GEÇ
+                      </ThemedText>
+                    </View>
+                  </Animated.View>
 
-              <TouchableOpacity
-                style={{ position: "absolute", right: 16, bottom: 8 }}
-                hitSlop={12}
-              >
-                <IconSymbol name="flag.fill" size={24} color={ACCENT} />
+                  <ScrollView
+                    ref={scrollModalRef}
+                    style={styles.cardScroll}
+                    showsVerticalScrollIndicator={false}
+                    keyboardShouldPersistTaps="handled"
+                    onScrollBeginDrag={() => {
+                      setScrollModeModal(true);
+                      scrollModeModalRef.current = true;
+                    }}
+                    onScrollEndDrag={() => {
+                      setScrollModeModal(false);
+                      scrollModeModalRef.current = false;
+                    }}
+                    onMomentumScrollEnd={() => {
+                      setScrollModeModal(false);
+                      scrollModeModalRef.current = false;
+                    }}
+                    scrollEventThrottle={16}
+                  >
+                    {renderProfileContent(selectedLike)}
+                  </ScrollView>
+
+                  {/* Match Action Buttons exactly like Kişiler tab */}
+                  <View style={styles.actionBarOverlay}>
+                    <TouchableOpacity
+                      style={[
+                        styles.actionBtn,
+                        styles.passBtn,
+                        { backgroundColor: isDark ? "#2A2A2A" : "#FFF" },
+                      ]}
+                      activeOpacity={0.8}
+                      onPress={() => handleModalSwipeRef.current("left")}
+                    >
+                      <IconSymbol
+                        name="xmark"
+                        size={32}
+                        color={colors.text.secondary}
+                      />
+                    </TouchableOpacity>
+                    <TouchableOpacity
+                      style={[
+                        styles.actionBtn,
+                        styles.likeBtn,
+                        { backgroundColor: ACCENT },
+                      ]}
+                      activeOpacity={0.8}
+                      onPress={() => handleModalSwipeRef.current("right")}
+                    >
+                      <IconSymbol name="flame.fill" size={32} color="#FFF" />
+                    </TouchableOpacity>
+                  </View>
+                </Animated.View>
+              </View>
+            </View>
+          )}
+        </>
+      )}
+
+      {/* Filter Modal */}
+      <Modal
+        visible={showFilterModal}
+        animationType="slide"
+        transparent={true}
+        onRequestClose={() => setShowFilterModal(false)}
+      >
+        <View style={{ flex: 1, justifyContent: "flex-end", backgroundColor: "rgba(0,0,0,0.5)" }}>
+          <View style={{
+            backgroundColor: isDark ? "#1C1C1E" : "#FFF",
+            borderTopLeftRadius: 24,
+            borderTopRightRadius: 24,
+            paddingBottom: insets.bottom + 16,
+            maxHeight: SCREEN_HEIGHT * 0.85,
+          }}>
+            {/* Handle */}
+            <View style={{ alignItems: "center", paddingTop: 12, paddingBottom: 8 }}>
+              <View style={{ width: 40, height: 4, borderRadius: 2, backgroundColor: isDark ? "rgba(255,255,255,0.2)" : "rgba(0,0,0,0.15)" }} />
+            </View>
+
+            {/* Header */}
+            <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingHorizontal: 20, marginBottom: 16 }}>
+              <TouchableOpacity onPress={() => setShowFilterModal(false)}>
+                <ThemedText style={{ color: colors.text.secondary, fontSize: 16 }}>İptal</ThemedText>
+              </TouchableOpacity>
+              <ThemedText style={{ fontSize: 18, fontWeight: "800", color: colors.text.primary }}>Filtreleme</ThemedText>
+              <TouchableOpacity onPress={() => {
+                // Validate & clamp all raw inputs before applying
+                const ageMin = Math.max(18, Math.min(parseInt(txtAgeMin) || 18, 70));
+                const ageMax = Math.min(70, Math.max(parseInt(txtAgeMax) || 70, ageMin));
+                const distanceKm = Math.max(1, Math.min(100, parseInt(txtDistance) || 100));
+                const heightMin = Math.max(100, Math.min(parseInt(txtHeightMin) || 100, 230));
+                const heightMax = Math.min(230, Math.max(parseInt(txtHeightMax) || 230, heightMin));
+
+                const validated: MatchFilters = {
+                  ...tempFilters,
+                  ageMin, ageMax, distanceKm, heightMin, heightMax,
+                };
+
+                // Sync text inputs to validated values
+                setTxtAgeMin(String(ageMin));
+                setTxtAgeMax(String(ageMax));
+                setTxtDistance(String(distanceKm));
+                setTxtHeightMin(String(heightMin));
+                setTxtHeightMax(String(heightMax));
+
+                setTempFilters(validated);
+                setFilters(validated);
+                setShowFilterModal(false);
+              }}>
+                <ThemedText style={{ color: ACCENT, fontSize: 16, fontWeight: "700" }}>Uygula</ThemedText>
               </TouchableOpacity>
             </View>
 
-            <View style={[styles.cardContainer, { paddingTop: 16 }]}>
-              <View style={styles.card}>
-                <ScrollView
-                  style={styles.cardScroll}
-                  showsVerticalScrollIndicator={false}
-                >
-                  {renderProfileContent(selectedLike)}
-                </ScrollView>
-
-                {/* Match Action Buttons exactly like Kişiler tab */}
-                <View style={styles.actionBarOverlay}>
+            <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: 20 }}>
+              {/* Gender */}
+              <ThemedText style={{ color: colors.text.secondary, fontSize: 13, fontWeight: "600", textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 10 }}>Cinsiyet</ThemedText>
+              <View style={{ flexDirection: "row", gap: 8, marginBottom: 24, flexWrap: "wrap" }}>
+                {GENDER_FILTER_OPTIONS.map(g => (
                   <TouchableOpacity
-                    style={[
-                      styles.actionBtn,
-                      styles.passBtn,
-                      { backgroundColor: isDark ? "#2A2A2A" : "#FFF" },
-                    ]}
-                    activeOpacity={0.8}
-                    onPress={() => setSelectedLike(null)}
-                  >
-                    <IconSymbol
-                      name="xmark"
-                      size={32}
-                      color={colors.text.secondary}
-                    />
-                  </TouchableOpacity>
-                  <TouchableOpacity
-                    style={[
-                      styles.actionBtn,
-                      styles.likeBtn,
-                      { backgroundColor: ACCENT },
-                    ]}
-                    activeOpacity={0.8}
-                    onPress={() => {
-                      const matchedPerson =
-                        selectedLike.name || (selectedLike as any).display_name;
-                      setSelectedLike(null);
-                      setMatchPopup({ name: matchedPerson });
+                    key={g}
+                    onPress={() => setTempFilters(f => ({ ...f, gender: g }))}
+                    style={{
+                      paddingHorizontal: 16, paddingVertical: 10, borderRadius: 20,
+                      backgroundColor: tempFilters.gender === g ? ACCENT : (isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)"),
                     }}
                   >
-                    <IconSymbol name="flame.fill" size={32} color="#FFF" />
+                    <ThemedText style={{ fontSize: 14, fontWeight: "600", color: tempFilters.gender === g ? "#000" : colors.text.primary }}>{g}</ThemedText>
                   </TouchableOpacity>
+                ))}
+              </View>
+
+              {/* Age Range */}
+              <ThemedText style={{ color: colors.text.secondary, fontSize: 13, fontWeight: "600", textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 6 }}>Yaş Aralığı</ThemedText>
+              <ThemedText style={{ color: colors.text.primary, fontSize: 15, fontWeight: "700", marginBottom: 10 }}>{tempFilters.ageMin} – {tempFilters.ageMax}</ThemedText>
+              <View style={{ flexDirection: "row", alignItems: "center", gap: 12, marginBottom: 24 }}>
+                <ThemedText style={{ color: colors.text.tertiary, fontSize: 12 }}>Min</ThemedText>
+                <View style={{ flex: 1 }}>
+                  <TextInput
+                    value={txtAgeMin}
+                    onChangeText={(t: string) => setTxtAgeMin(t.replace(/[^0-9]/g, ""))}
+                    onBlur={() => {
+                      const v = Math.max(18, Math.min(parseInt(txtAgeMin) || 18, tempFilters.ageMax));
+                      setTxtAgeMin(String(v));
+                      setTempFilters(f => ({ ...f, ageMin: v }));
+                    }}
+                    keyboardType="number-pad"
+                    maxLength={2}
+                    style={{ backgroundColor: isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)", paddingHorizontal: 12, paddingVertical: 8, borderRadius: 10, color: colors.text.primary, textAlign: "center", fontSize: 16, fontWeight: "700" }}
+                  />
+                </View>
+                <ThemedText style={{ color: colors.text.tertiary, fontSize: 14 }}>—</ThemedText>
+                <ThemedText style={{ color: colors.text.tertiary, fontSize: 12 }}>Max</ThemedText>
+                <View style={{ flex: 1 }}>
+                  <TextInput
+                    value={txtAgeMax}
+                    onChangeText={(t: string) => setTxtAgeMax(t.replace(/[^0-9]/g, ""))}
+                    onBlur={() => {
+                      const v = Math.min(70, Math.max(parseInt(txtAgeMax) || 70, tempFilters.ageMin));
+                      setTxtAgeMax(String(v));
+                      setTempFilters(f => ({ ...f, ageMax: v }));
+                    }}
+                    keyboardType="number-pad"
+                    maxLength={2}
+                    style={{ backgroundColor: isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)", paddingHorizontal: 12, paddingVertical: 8, borderRadius: 10, color: colors.text.primary, textAlign: "center", fontSize: 16, fontWeight: "700" }}
+                  />
                 </View>
               </View>
-            </View>
+
+              {/* Distance */}
+              <ThemedText style={{ color: colors.text.secondary, fontSize: 13, fontWeight: "600", textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 6 }}>Mesafe</ThemedText>
+              <View style={{ flexDirection: "row", alignItems: "center", gap: 12, marginBottom: 24 }}>
+                <View style={{ flex: 1 }}>
+                  <TextInput
+                    value={txtDistance}
+                    onChangeText={(t: string) => setTxtDistance(t.replace(/[^0-9]/g, ""))}
+                    onBlur={() => {
+                      const v = Math.max(1, Math.min(100, parseInt(txtDistance) || 100));
+                      setTxtDistance(String(v));
+                      setTempFilters(f => ({ ...f, distanceKm: v }));
+                    }}
+                    keyboardType="number-pad"
+                    maxLength={3}
+                    style={{ backgroundColor: isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)", paddingHorizontal: 12, paddingVertical: 8, borderRadius: 10, color: colors.text.primary, textAlign: "center", fontSize: 16, fontWeight: "700" }}
+                  />
+                </View>
+                <ThemedText style={{ color: colors.text.primary, fontSize: 15, fontWeight: "600" }}>km</ThemedText>
+              </View>
+
+              {/* Height Range */}
+              <ThemedText style={{ color: colors.text.secondary, fontSize: 13, fontWeight: "600", textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 6 }}>Boy Aralığı (cm)</ThemedText>
+              <ThemedText style={{ color: colors.text.primary, fontSize: 15, fontWeight: "700", marginBottom: 10 }}>{tempFilters.heightMin} – {tempFilters.heightMax} cm</ThemedText>
+              <View style={{ flexDirection: "row", alignItems: "center", gap: 12, marginBottom: 24 }}>
+                <ThemedText style={{ color: colors.text.tertiary, fontSize: 12 }}>Min</ThemedText>
+                <View style={{ flex: 1 }}>
+                  <TextInput
+                    value={txtHeightMin}
+                    onChangeText={(t: string) => setTxtHeightMin(t.replace(/[^0-9]/g, ""))}
+                    onBlur={() => {
+                      const v = Math.max(100, Math.min(parseInt(txtHeightMin) || 100, tempFilters.heightMax));
+                      setTxtHeightMin(String(v));
+                      setTempFilters(f => ({ ...f, heightMin: v }));
+                    }}
+                    keyboardType="number-pad"
+                    maxLength={3}
+                    style={{ backgroundColor: isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)", paddingHorizontal: 12, paddingVertical: 8, borderRadius: 10, color: colors.text.primary, textAlign: "center", fontSize: 16, fontWeight: "700" }}
+                  />
+                </View>
+                <ThemedText style={{ color: colors.text.tertiary, fontSize: 14 }}>—</ThemedText>
+                <ThemedText style={{ color: colors.text.tertiary, fontSize: 12 }}>Max</ThemedText>
+                <View style={{ flex: 1 }}>
+                  <TextInput
+                    value={txtHeightMax}
+                    onChangeText={(t: string) => setTxtHeightMax(t.replace(/[^0-9]/g, ""))}
+                    onBlur={() => {
+                      const v = Math.min(230, Math.max(parseInt(txtHeightMax) || 230, tempFilters.heightMin));
+                      setTxtHeightMax(String(v));
+                      setTempFilters(f => ({ ...f, heightMax: v }));
+                    }}
+                    keyboardType="number-pad"
+                    maxLength={3}
+                    style={{ backgroundColor: isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)", paddingHorizontal: 12, paddingVertical: 8, borderRadius: 10, color: colors.text.primary, textAlign: "center", fontSize: 16, fontWeight: "700" }}
+                  />
+                </View>
+              </View>
+
+              {/* Star Sign */}
+              <ThemedText style={{ color: colors.text.secondary, fontSize: 13, fontWeight: "600", textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 10 }}>Burç</ThemedText>
+              <View style={{ flexDirection: "row", gap: 8, marginBottom: 16, flexWrap: "wrap" }}>
+                <TouchableOpacity
+                  onPress={() => setTempFilters(f => ({ ...f, starSign: "" }))}
+                  style={{
+                    paddingHorizontal: 14, paddingVertical: 8, borderRadius: 16,
+                    backgroundColor: tempFilters.starSign === "" ? ACCENT : (isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)"),
+                  }}
+                >
+                  <ThemedText style={{ fontSize: 13, fontWeight: "600", color: tempFilters.starSign === "" ? "#000" : colors.text.primary }}>Hepsi</ThemedText>
+                </TouchableOpacity>
+                {STAR_SIGN_OPTIONS.map(s => (
+                  <TouchableOpacity
+                    key={s}
+                    onPress={() => setTempFilters(f => ({ ...f, starSign: f.starSign === s ? "" : s }))}
+                    style={{
+                      paddingHorizontal: 14, paddingVertical: 8, borderRadius: 16,
+                      backgroundColor: tempFilters.starSign === s ? ACCENT : (isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)"),
+                    }}
+                  >
+                    <ThemedText style={{ fontSize: 13, fontWeight: "600", color: tempFilters.starSign === s ? "#000" : colors.text.primary }}>{s}</ThemedText>
+                  </TouchableOpacity>
+                ))}
+              </View>
+
+              {/* Reset Button */}
+              <TouchableOpacity
+                onPress={() => {
+                  setTempFilters({ ...DEFAULT_FILTERS });
+                  setTxtAgeMin(String(DEFAULT_FILTERS.ageMin));
+                  setTxtAgeMax(String(DEFAULT_FILTERS.ageMax));
+                  setTxtDistance(String(DEFAULT_FILTERS.distanceKm));
+                  setTxtHeightMin(String(DEFAULT_FILTERS.heightMin));
+                  setTxtHeightMax(String(DEFAULT_FILTERS.heightMax));
+                }}
+                style={{ alignItems: "center", paddingVertical: 14, marginTop: 8, marginBottom: 16 }}
+              >
+                <ThemedText style={{ color: "#FF3B30", fontSize: 15, fontWeight: "600" }}>Filtreleri Sıfırla</ThemedText>
+              </TouchableOpacity>
+            </ScrollView>
           </View>
-        )}
+        </View>
       </Modal>
     </View>
   );
@@ -1648,9 +2247,9 @@ const styles = StyleSheet.create({
     paddingTop: 4,
   },
   unifiedTraitsColumn: {
-    flexDirection: "column",
-    alignItems: "flex-start",
-    gap: 12,
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: 8,
   },
   unifiedInterestsWrap: {
     flexDirection: "row",
@@ -1664,7 +2263,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 10,
     borderRadius: 16,
-    alignSelf: "flex-start",
+    alignSelf: "center",
     marginTop: -4,
   },
   unifiedActivePlaceText: {
@@ -1676,34 +2275,33 @@ const styles = StyleSheet.create({
     marginTop: 8,
   },
   unifiedPromptQ: {
-    fontSize: 14,
-    fontWeight: "700",
-    opacity: 0.6,
-    marginBottom: 6,
-    textTransform: "uppercase",
-    letterSpacing: 0.5,
+    fontSize: 22,
+    fontWeight: "800",
+    marginBottom: 8,
+    lineHeight: 28,
   },
   unifiedPromptA: {
-    fontSize: 22,
-    fontWeight: "700",
-    lineHeight: 30,
+    fontSize: 16,
+    fontWeight: "500",
+    lineHeight: 24,
+    opacity: 0.85,
   },
   unifiedBio: {
     fontSize: 16,
     fontWeight: "500",
     lineHeight: 24,
-    opacity: 0.9,
+    opacity: 0.85,
   },
   unifiedTraitBadge: {
     flexDirection: "row",
     alignItems: "center",
     backgroundColor: "rgba(150, 150, 150, 0.15)",
     paddingHorizontal: 12,
-    paddingVertical: 8,
+    paddingVertical: 10,
     borderRadius: 20,
     borderWidth: StyleSheet.hairlineWidth,
     borderColor: "rgba(150, 150, 150, 0.2)",
-    marginRight: 8,
+    width: "48%", // 2 columns
   },
   unifiedTraitText: {
     fontSize: 13,

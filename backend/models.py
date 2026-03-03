@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Float, Text, Boolean, UniqueConstraint
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Float, Text, Boolean, UniqueConstraint, Date
 from sqlalchemy.orm import relationship
 from database import Base
 from sqlalchemy.sql import func
@@ -15,9 +15,12 @@ class User(Base):
     phone_number = Column(String, unique=True, index=True, nullable=True)
     avatar_url = Column(String, nullable=True)
     bio = Column(String, nullable=True)
+    birth_date = Column(Date, nullable=True)
 
     role = Column(String, default="standard")
     is_active = Column(Boolean, default=True)
+    push_token = Column(String, nullable=True)  # ExponentPushToken[xxx]
+    push_token_updated_at = Column(DateTime(timezone=True), nullable=True)
 
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
@@ -67,8 +70,8 @@ class Place(Base):
 class Review(Base):
     __tablename__ = "reviews"
     id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, ForeignKey("users.id"))
-    place_id = Column(Integer, ForeignKey("places.id"))
+    user_id = Column(Integer, ForeignKey("users.id"), index=True)
+    place_id = Column(Integer, ForeignKey("places.id"), index=True)
     
     # --- Temel Yorum Bilgileri ---
     comment_text = Column(Text)  # RAG için en kritik veri: "Ambiyansı çok sessiz..."
@@ -126,7 +129,7 @@ class ReviewMedia(Base):
     """
     __tablename__ = "review_media"
     id = Column(Integer, primary_key=True, index=True)
-    review_id = Column(Integer, ForeignKey("reviews.id", ondelete="CASCADE"))
+    review_id = Column(Integer, ForeignKey("reviews.id", ondelete="CASCADE"), index=True)
     
     media_type = Column(String)  # "photo", "video"
     media_url = Column(String, nullable=False)  # Dosya URL'si (S3, Cloudinary, etc.)
@@ -150,16 +153,16 @@ class ReviewMedia(Base):
 class Post(Base):
     __tablename__ = "posts"
     id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
-    place_id = Column(Integer, ForeignKey("places.id"), nullable=True)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False, index=True)
+    place_id = Column(Integer, ForeignKey("places.id"), nullable=True, index=True)
 
     caption = Column(Text, nullable=True)
-    post_type = Column(String, default="photo")  # photo, reel, review_highlight
+    post_type = Column(String, default="photo", index=True)  # photo, reel, review_highlight
 
     like_count = Column(Integer, default=0)
     comment_count = Column(Integer, default=0)
 
-    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), index=True)
 
     user = relationship("User", back_populates="posts")
     place = relationship("Place", back_populates="posts")
@@ -171,7 +174,7 @@ class Post(Base):
 class PostMedia(Base):
     __tablename__ = "post_media"
     id = Column(Integer, primary_key=True, index=True)
-    post_id = Column(Integer, ForeignKey("posts.id", ondelete="CASCADE"))
+    post_id = Column(Integer, ForeignKey("posts.id", ondelete="CASCADE"), index=True)
 
     media_type = Column(String)  # image, video
     media_url = Column(String, nullable=False)
@@ -188,8 +191,8 @@ class PostMedia(Base):
 class PostLike(Base):
     __tablename__ = "post_likes"
     id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
-    post_id = Column(Integer, ForeignKey("posts.id", ondelete="CASCADE"), nullable=False)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False, index=True)
+    post_id = Column(Integer, ForeignKey("posts.id", ondelete="CASCADE"), nullable=False, index=True)
 
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
@@ -202,8 +205,8 @@ class PostLike(Base):
 class PostComment(Base):
     __tablename__ = "post_comments"
     id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
-    post_id = Column(Integer, ForeignKey("posts.id", ondelete="CASCADE"), nullable=False)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False, index=True)
+    post_id = Column(Integer, ForeignKey("posts.id", ondelete="CASCADE"), nullable=False, index=True)
     parent_id = Column(Integer, ForeignKey("post_comments.id", ondelete="CASCADE"), nullable=True)
 
     text = Column(Text, nullable=False)
@@ -218,8 +221,8 @@ class PostComment(Base):
 class Follow(Base):
     __tablename__ = "follows"
     id = Column(Integer, primary_key=True, index=True)
-    follower_id = Column(Integer, ForeignKey("users.id"), nullable=False)
-    following_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    follower_id = Column(Integer, ForeignKey("users.id"), nullable=False, index=True)
+    following_id = Column(Integer, ForeignKey("users.id"), nullable=False, index=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
     follower_user = relationship("User", foreign_keys=[follower_id], back_populates="following")
@@ -232,15 +235,15 @@ class Story(Base):
     """24 saatlik hikaye – mekana bağlı fotoğraf/video"""
     __tablename__ = "stories"
     id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
-    place_id = Column(Integer, ForeignKey("places.id"), nullable=False)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False, index=True)
+    place_id = Column(Integer, ForeignKey("places.id"), nullable=False, index=True)
 
     media_type = Column(String, nullable=False)  # "image", "video"
     media_url = Column(String, nullable=False)
     thumbnail_url = Column(String, nullable=True)
 
     created_at = Column(DateTime(timezone=True), server_default=func.now())
-    expires_at = Column(DateTime(timezone=True), nullable=False)  # created_at + 24 saat
+    expires_at = Column(DateTime(timezone=True), nullable=False, index=True)  # created_at + 24 saat
 
     user = relationship("User", back_populates="stories")
     place = relationship("Place", back_populates="stories")
@@ -249,12 +252,12 @@ class Story(Base):
 class Notification(Base):
     __tablename__ = "notifications"
     id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False, index=True)
     type = Column(String, nullable=False)  # like, comment, follow, mention
     actor_id = Column(Integer, ForeignKey("users.id"), nullable=False)
     post_id = Column(Integer, ForeignKey("posts.id", ondelete="SET NULL"), nullable=True)
-    is_read = Column(Boolean, default=False)
-    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    is_read = Column(Boolean, default=False, index=True)
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), index=True)
 
     user = relationship("User", foreign_keys=[user_id], back_populates="notifications")
     actor = relationship("User", foreign_keys=[actor_id])
@@ -336,3 +339,23 @@ class MatchConversation(Base):
     __table_args__ = (
         UniqueConstraint("user1_id", "user2_id", name="uq_match_conversation_users"),
     )
+
+    messages = relationship("Message", back_populates="conversation", cascade="all, delete-orphan")
+
+
+class Message(Base):
+    """Eşleşme sohbet mesajı"""
+    __tablename__ = "messages"
+    id = Column(Integer, primary_key=True, index=True)
+    conversation_id = Column(Integer, ForeignKey("match_conversations.id", ondelete="CASCADE"), nullable=False, index=True)
+    sender_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    content = Column(Text, nullable=False)
+    message_type = Column(String, default="text")  # "text", "image", "shared_post"
+    media_url = Column(String, nullable=True)  # image mesajları için
+    shared_post_id = Column(Integer, nullable=True)  # shared_post mesajları için
+    is_read = Column(Boolean, default=False)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    conversation = relationship("MatchConversation", back_populates="messages")
+    sender = relationship("User", foreign_keys=[sender_id])
+

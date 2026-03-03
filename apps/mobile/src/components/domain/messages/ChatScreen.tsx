@@ -30,6 +30,8 @@ import { useMessagesStore } from "@/src/store/useMessagesStore";
 import { useChatMessagesStore } from "@/src/store/useChatMessagesStore";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
+import { revealProfile } from "@/src/services/matchService";
+import { toggleFollow } from "@/src/services/userService";
 
 /* ── Types ── */
 interface Message {
@@ -227,7 +229,60 @@ export default function ChatScreen() {
         return initial;
     });
 
-    const contact = CONTACTS[resolvedChatId] || CONTACTS["1"];
+    const storeConversation = useMessagesStore((state) => state.conversations.find(c => c.id === resolvedChatId));
+
+    const contact = CONTACTS[resolvedChatId] || (storeConversation ? {
+        name: storeConversation.name,
+        avatar: storeConversation.avatar,
+        isOnline: storeConversation.isOnline
+    } : CONTACTS["1"]);
+
+    const isMatch = storeConversation?.isMatch;
+    const revealRequestedByMe = storeConversation?.revealRequestedByMe;
+    const isRevealed = storeConversation?.isRevealed;
+
+    const handleRevealToggle = () => {
+        if (!resolvedChatId) return;
+
+        if (revealRequestedByMe) {
+            Alert.alert("Bekleniyor", "Karşı tarafın da sizi beğenmesi bekleniyor.");
+            return;
+        }
+
+        useMessagesStore.getState().toggleRevealRequest(resolvedChatId);
+        success();
+
+        // Gerçek ID ise API'ye de bildir:
+        const maybeConvId = parseInt(resolvedChatId, 10);
+        if (!isNaN(maybeConvId)) {
+            revealProfile(maybeConvId).catch(console.log);
+        }
+
+        // 3 saniye sonra karşı tarafın da beğendiğini simüle edelim (MOCK)
+        setTimeout(() => {
+            const currentConv = useMessagesStore.getState().conversations.find(c => c.id === resolvedChatId);
+            if (currentConv && currentConv.revealRequestedByMe && !currentConv.revealRequestedByThem) {
+                useMessagesStore.getState().mockOtherPersonReveal(resolvedChatId);
+
+                // Eğer MOCK Eşleşme ise veya Backend henüz Follow'u yansıtmadıysa Frontend Testini Kurtarmak İçin:
+                // `resolvedChatId` örn: "match_123456_5" -> buradaki "5" karşı tarafın user_id'sidir.
+                const parts = resolvedChatId.split('_');
+                const targetIdStr = parts[parts.length - 1];
+                const targetId = parseInt(targetIdStr, 10);
+
+                if (!isNaN(targetId)) {
+                    // Backend'e manuel follow the target user.
+                    // (Normalde mutual follow backend revealProfile içinden yapılır ama local/mock için garantiye alıyoruz)
+                    toggleFollow(targetId).catch(console.log);
+                }
+
+                Alert.alert(
+                    "Eşleşme Tamamlandı! 🎉",
+                    "İki taraf da profilleri beğendi. Gerçek profilleriniz görünür oldu ve artık takipleşiyorsunuz!"
+                );
+            }
+        }, 3000);
+    };
 
     useEffect(() => {
         if (messages.length > 0) {
@@ -673,6 +728,20 @@ export default function ChatScreen() {
                 </TouchableOpacity>
 
                 <View style={styles.headerActions}>
+                    {isMatch && !isRevealed && (
+                        <TouchableOpacity
+                            hitSlop={8}
+                            activeOpacity={0.7}
+                            onPress={handleRevealToggle}
+                            style={{ marginRight: 16 }}
+                        >
+                            <IconSymbol
+                                name={revealRequestedByMe ? "heart.fill" : "heart"}
+                                size={24}
+                                color={revealRequestedByMe ? colors.semantic.error : colors.text.primary}
+                            />
+                        </TouchableOpacity>
+                    )}
                     <TouchableOpacity
                         hitSlop={8}
                         activeOpacity={0.7}

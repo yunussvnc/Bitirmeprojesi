@@ -16,6 +16,7 @@ import {
     Platform,
     TouchableWithoutFeedback,
     Keyboard,
+    Alert,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
@@ -28,11 +29,26 @@ import { useAuthStore } from "@/src/store/useAuthStore";
 import { useMessagesStore, Conversation } from "@/src/store/useMessagesStore";
 import { Swipeable } from "react-native-gesture-handler";
 
+/** Doğum tarihinden yaş hesapla */
+function calculateAge(birthDateStr: string | null | undefined): number | null {
+    if (!birthDateStr) return null;
+    const bd = new Date(birthDateStr);
+    if (isNaN(bd.getTime())) return null;
+    const today = new Date();
+    let age = today.getFullYear() - bd.getFullYear();
+    const m = today.getMonth() - bd.getMonth();
+    if (m < 0 || (m === 0 && today.getDate() < bd.getDate())) age--;
+    return age;
+}
+
 export default function MessagesScreen() {
     const { colors } = useTheme();
     const insets = useSafeAreaInsets();
     const router = useRouter();
     const authUser = useAuthStore((s) => s.user);
+
+    const userAge = calculateAge(authUser?.birth_date);
+    const isUnder18 = userAge !== null && userAge < 18;
 
     // Global Store
     const { conversations, archiveConversation, deleteConversation, archiveMultiple, deleteMultiple, markAsRead } = useMessagesStore();
@@ -151,6 +167,11 @@ export default function MessagesScreen() {
                         <Image source={{ uri: item.avatar }} style={styles.avatar} contentFit="cover" />
                         {item.isOnline && (
                             <View style={[styles.onlineDot, { borderColor: colors.background.primary }]} />
+                        )}
+                        {item.isMatch && (
+                            <View style={[styles.matchFlame, { borderColor: colors.background.primary }]}>
+                                <IconSymbol name="flame.fill" size={10} color="#fff" />
+                            </View>
                         )}
                     </View>
 
@@ -279,10 +300,18 @@ export default function MessagesScreen() {
                             activeOpacity={0.7}
                             onPress={() => {
                                 lightImpact();
+                                if (isUnder18) {
+                                    Alert.alert(
+                                        "Yaş Sınırı",
+                                        "18 yaşınıza geldiğinizde eşleşme ekranı aktif olacaktır.",
+                                        [{ text: "Tamam" }]
+                                    );
+                                    return;
+                                }
                                 router.push("/matching" as any);
                             }}
                         >
-                            <IconSymbol name="flame.fill" size={26} color={colors.accent.primary} />
+                            <IconSymbol name="flame.fill" size={26} color={isUnder18 ? colors.text.tertiary : colors.accent.primary} />
                         </TouchableOpacity>
                     )}
 
@@ -523,6 +552,18 @@ const styles = StyleSheet.create({
         borderRadius: 7,
         backgroundColor: "#2ecc71",
         borderWidth: 2.5,
+    },
+    matchFlame: {
+        position: "absolute",
+        bottom: -2,
+        left: -4,
+        width: 20,
+        height: 20,
+        borderRadius: 10,
+        backgroundColor: "#1DB954",
+        borderWidth: 2.5,
+        alignItems: "center",
+        justifyContent: "center",
     },
     cardContent: {
         flex: 1,

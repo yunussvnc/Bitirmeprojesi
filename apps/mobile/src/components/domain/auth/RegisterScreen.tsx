@@ -52,12 +52,14 @@ export default function RegisterScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [birthDate, setBirthDate] = useState('');
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<{
     fullName?: string;
     email?: string;
     password?: string;
     confirmPassword?: string;
+    birthDate?: string;
   }>({});
   const [backgroundImages, setBackgroundImages] = useState<string[]>(FALLBACK_PLACE_IMAGES);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -101,9 +103,36 @@ export default function RegisterScreen() {
     else if (password.length < 8) newErrors.password = 'Şifre en az 8 karakter olmalıdır';
     if (!confirmPassword.trim()) newErrors.confirmPassword = 'Şifre tekrarı gereklidir';
     else if (password !== confirmPassword) newErrors.confirmPassword = 'Şifreler eşleşmiyor';
+    if (!birthDate.trim()) newErrors.birthDate = 'Doğum tarihi gereklidir';
+    else {
+      const parts = birthDate.split('/');
+      if (parts.length !== 3 || parts[0].length !== 2 || parts[1].length !== 2 || parts[2].length !== 4) {
+        newErrors.birthDate = 'GG/AA/YYYY formatında girin';
+      } else {
+        const day = parseInt(parts[0]), month = parseInt(parts[1]), year = parseInt(parts[2]);
+        const d = new Date(year, month - 1, day);
+        if (isNaN(d.getTime()) || d.getDate() !== day || d.getMonth() !== month - 1) {
+          newErrors.birthDate = 'Geçerli bir tarih girin';
+        } else {
+          const today = new Date();
+          if (d > today) {
+            newErrors.birthDate = 'Gelecekte bir tarih girilemez';
+          } else {
+            let age = today.getFullYear() - d.getFullYear();
+            const m = today.getMonth() - d.getMonth();
+            if (m < 0 || (m === 0 && today.getDate() < d.getDate())) age--;
+            if (age <= 13) {
+              newErrors.birthDate = '14 yaşından küçükler uygulamaya kayıt olamaz';
+            } else if (age > 120) {
+              newErrors.birthDate = 'Geçerli bir doğum tarihi girin';
+            }
+          }
+        }
+      }
+    }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
-  }, [fullName, email, password, confirmPassword]);
+  }, [fullName, email, password, confirmPassword, birthDate]);
 
   const handleRegister = useCallback(async () => {
     if (isSubmittingRef.current) return;
@@ -115,11 +144,15 @@ export default function RegisterScreen() {
       const nameParts = fullName.trim().split(' ');
       const first_name = nameParts[0];
       const last_name = nameParts.slice(1).join(' ') || undefined;
+      // Convert DD/MM/YYYY to YYYY-MM-DD for API
+      const bdParts = birthDate.split('/');
+      const birth_date_api = `${bdParts[2]}-${bdParts[1]}-${bdParts[0]}`;
       const data = await registerUser({
         email: email.trim(),
         password,
         first_name,
         last_name,
+        birth_date: birth_date_api,
       });
       useAuthStore.getState().setTokens(data.access_token, data.refresh_token);
       useAuthStore.getState().setUser(data.user);
@@ -132,7 +165,7 @@ export default function RegisterScreen() {
       isSubmittingRef.current = false;
       setLoading(false);
     }
-  }, [validateForm, fullName, email, password]);
+  }, [validateForm, fullName, email, password, birthDate]);
 
   const handleSocialRegister = useCallback((provider: string) => {
     lightImpact();
@@ -228,6 +261,39 @@ export default function RegisterScreen() {
                       error={errors.confirmPassword}
                       containerStyle={styles.inputContainer}
                     />
+                    <Input
+                      variant="onDark"
+                      label="Doğum Tarihi"
+                      placeholder="GG/AA/YYYY"
+                      value={birthDate}
+                      onFocus={() => {
+                        Alert.alert(
+                          'Önemli Bilgilendirme',
+                          '\u2022 14 yaş ve altındaysanız uygulamaya kayıt olamazsınız.\n\u2022 18 yaşın altındaysanız eşleşme ekranına erişemezsiniz.\n\u2022 18 yaş üstündeyseniz yaşınız bu tarihten otomatik hesaplanır.\n\u2022 Doğum tarihinizi doğru girdiğinizden emin olun, sonradan değiştirilemez.',
+                          [{ text: 'Anladım' }]
+                        );
+                      }}
+                      onChangeText={(t: string) => {
+                        // Auto-format: add slashes
+                        let cleaned = t.replace(/[^0-9/]/g, '');
+                        // Remove extra slashes
+                        const digits = cleaned.replace(/\//g, '');
+                        let formatted = '';
+                        for (let i = 0; i < digits.length && i < 8; i++) {
+                          if (i === 2 || i === 4) formatted += '/';
+                          formatted += digits[i];
+                        }
+                        setBirthDate(formatted);
+                        clearFieldError('birthDate');
+                      }}
+                      keyboardType="number-pad"
+                      error={errors.birthDate}
+                      containerStyle={styles.inputContainer}
+                      maxLength={10}
+                    />
+                    <Text style={styles.birthDateInfo}>
+                      ℹ️ Uygulamaya kayıt olmak için 14 yaşından büyük olmanız gerekmektedir. Eğer 18 yaşının altındaysanız, uygulama içindeki kullanımı zorunlu olmayan eşleşme ekranına erişemezsiniz. 18 yaşının üstünde iseniz yaş bilginiz bu tarihten hesaplanacaktır.
+                    </Text>
                     <Button
                       variant="primary"
                       size="large"
@@ -333,6 +399,14 @@ const styles = StyleSheet.create({
   },
   cardInner: { padding: 20, backgroundColor: 'rgba(0,0,0,0.35)' },
   inputContainer: { marginBottom: 12 },
+  birthDateInfo: {
+    fontSize: 12,
+    color: 'rgba(255,255,255,0.6)',
+    lineHeight: 17,
+    marginBottom: 14,
+    marginTop: -4,
+    paddingHorizontal: 4,
+  },
   registerButton: { marginTop: 4 },
   divider: { flexDirection: 'row', alignItems: 'center', marginVertical: 18 },
   dividerLine: { flex: 1, height: 1, backgroundColor: 'rgba(255,255,255,0.25)' },

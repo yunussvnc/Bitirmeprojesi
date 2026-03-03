@@ -1,5 +1,5 @@
 from pydantic import BaseModel, EmailStr
-from datetime import datetime
+from datetime import datetime, date
 from typing import Optional, List
 
 # --- KULLANICI (USER) ŞEMALARI ---
@@ -10,6 +10,7 @@ class UserBase(BaseModel):
     first_name: Optional[str] = None
     last_name: Optional[str] = None
     phone_number: Optional[str] = None
+    birth_date: Optional[date] = None
 
 class UserCreate(UserBase):
     password: str
@@ -20,6 +21,7 @@ class UserUpdate(BaseModel):
     last_name: Optional[str] = None
     bio: Optional[str] = None
     avatar_url: Optional[str] = None
+    birth_date: Optional[date] = None
 
 class User(UserBase):
     id: int
@@ -28,6 +30,7 @@ class User(UserBase):
     avatar_url: Optional[str] = None
     bio: Optional[str] = None
     created_at: datetime
+    birth_date: Optional[date] = None
 
     class Config:
         from_attributes = True
@@ -476,3 +479,44 @@ class QRVerifyResponse(BaseModel):
     place_id: int
     place_name: str
     active_until: Optional[datetime] = None
+
+
+# --- MESAJLAŞMA (MESSAGING) ŞEMALARI ---
+
+class MessageCreate(BaseModel):
+    content: str
+    message_type: str = "text"  # "text", "image", "shared_post"
+    media_url: Optional[str] = None
+    shared_post_id: Optional[int] = None
+
+class MessageResponse(BaseModel):
+    id: int
+    conversation_id: int
+    sender_id: int
+    content: str
+    message_type: str = "text"
+    media_url: Optional[str] = None
+    shared_post_id: Optional[int] = None
+    is_read: bool = False
+    created_at: datetime
+    sender_name: Optional[str] = None
+
+    class Config:
+        from_attributes = True
+
+class PaginatedMessages(BaseModel):
+    items: List[MessageResponse]
+    total: int
+    page: int
+    page_size: int
+
+class TypingEvent(BaseModel):
+    conversation_id: int
+    user_id: int
+    is_typing: bool
+
+
+# --- PUSH TOKEN ---
+
+class PushTokenRequest(BaseModel):
+    token: str  # ExponentPushToken[xxx]

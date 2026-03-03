@@ -22,6 +22,7 @@ import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { ThemedText } from "@/src/components/themed-text";
 import { useTheme } from "@/src/hooks/useTheme";
 import { useMatchStore } from "@/src/store/useMatchStore";
+import { useAuthStore } from "@/src/store/useAuthStore";
 import { apiUploadFile } from "@/src/utils/apiClient";
 import { API_BASE_URL } from "@/src/constants/api";
 import { logger } from "@/src/utils/logger";
@@ -64,22 +65,163 @@ const PROMPT_OPTIONS = [
 ];
 
 const UNIVERSITIES = [
-    "Acıbadem Üniversitesi", "Altınbaş Üniversitesi", "Bahçeşehir Üniversitesi", "Beykent Üniversitesi",
-    "Bezmiâlem Vakıf Üniversitesi", "Biruni Üniversitesi", "Boğaziçi Üniversitesi", "Doğuş Üniversitesi",
-    "Fatih Sultan Mehmet Vakıf Üniversitesi", "Fenerbahçe Üniversitesi", "Galatasaray Üniversitesi",
-    "Haliç Üniversitesi", "Işık Üniversitesi", "İbn Haldun Üniversitesi", "İstanbul Atlas Üniversitesi",
-    "İstanbul Arel Üniversitesi", "İstanbul Aydın Üniversitesi", "İstanbul Bilgi Üniversitesi",
-    "İstanbul Galata Üniversitesi", "İstanbul Gedik Üniversitesi", "İstanbul Gelişim Üniversitesi",
-    "İstanbul Health and Technology University (İSTÜN)", "İstanbul Kent Üniversitesi", "İstanbul Kültür Üniversitesi",
-    "İstanbul Medeniyet Üniversitesi", "İstanbul Medipol Üniversitesi", "İstanbul Okan Üniversitesi",
-    "İstanbul Rumeli Üniversitesi", "İstanbul Sabahattin Zaim Üniversitesi", "İstanbul Teknik Üniversitesi (İTÜ)",
-    "İstanbul Ticaret Üniversitesi", "İstanbul Topkapı Üniversitesi", "İstanbul Üniversitesi",
-    "İstanbul Üniversitesi-Cerrahpaşa", "İstanbul Yeni Yüzyıl Üniversitesi", "İstinye Üniversitesi",
-    "Kadir Has Üniversitesi", "Koç Üniversitesi", "Maltepe Üniversitesi", "Marmara Üniversitesi", "MEF Üniversitesi",
-    "Mimar Sinan Güzel Sanatlar Üniversitesi", "Milli Savunma Üniversitesi", "Nişantaşı Üniversitesi",
-    "Özyeğin Üniversitesi", "Piri Reis Üniversitesi", "Sabancı Üniversitesi", "Sağlık Bilimleri Üniversitesi",
-    "Türk-Alman Üniversitesi", "Türk-Japon Bilim ve Teknoloji Üniversitesi", "Üsküdar Üniversitesi",
-    "Yeditepe Üniversitesi", "Yıldız Teknik Üniversitesi"
+    // A
+    "Abdullah Gül Üniversitesi",
+    "Acıbadem Mehmet Ali Aydınlar Üniversitesi",
+    "Ada Kent Üniversitesi",
+    "Adana Alparslan Türkeş Bilim ve Teknoloji Üniversitesi",
+    "Adıyaman Üniversitesi",
+    "Afyon Kocatepe Üniversitesi",
+    "Afyonkarahisar Sağlık Bilimleri Üniversitesi",
+    "Ağrı İbrahim Çeçen Üniversitesi",
+    "Ahi Evran Üniversitesi",
+    "Akdeniz Üniversitesi",
+    "Akdeniz Karpaz Üniversitesi",
+    "Aksaray Üniversitesi",
+    "Alanya Alaaddin Keykubat Üniversitesi",
+    "Alanya Hamdullah Emin Paşa Üniversitesi",
+    "Altınbaş Üniversitesi",
+    "Amasya Üniversitesi",
+    "Anadolu Üniversitesi",
+    "Ankara Hacı Bayram Veli Üniversitesi",
+    "Ankara Medipol Üniversitesi",
+    "Ankara Müzik ve Güzel Sanatlar Üniversitesi",
+    "Ankara Sosyal Bilimler Üniversitesi",
+    "Ankara Üniversitesi",
+    "Antalya Bilim Üniversitesi",
+    "Antalya Medipol Üniversitesi",
+    "Antalya Tekstil ve Teknoloji Üniversitesi",
+    // B
+    "Bahçeşehir Üniversitesi",
+    "Balıkesir Üniversitesi",
+    "Bandırma Onyedi Eylül Üniversitesi",
+    "Bartın Üniversitesi",
+    "Başkent Üniversitesi",
+    "Batman Üniversitesi",
+    "Bayburt Üniversitesi",
+    "Bezm-i Alem Vakıf Üniversitesi",
+    "Bilecik Şeyh Edebali Üniversitesi",
+    "Bingöl Üniversitesi",
+    "Biruni Üniversitesi",
+    "Bitlis Eren Üniversitesi",
+    "Boğaziçi Üniversitesi",
+    "Bolu Abant İzzet Baysal Üniversitesi",
+    "Burdur Mehmet Akif Ersoy Üniversitesi",
+    // C
+    "Çağ Üniversitesi",
+    "Çanakkale Onsekiz Mart Üniversitesi",
+    "Çankaya Üniversitesi",
+    "Çukurova Üniversitesi",
+    // D
+    "Dicle Üniversitesi",
+    "Doğuş Üniversitesi",
+    "Dokuz Eylül Üniversitesi",
+    "Düzce Üniversitesi",
+    // E
+    "Ege Üniversitesi",
+    "Erciyes Üniversitesi",
+    // F
+    "Fenerbahçe Üniversitesi",
+    "Fırat Üniversitesi",
+    // G
+    "Galatasaray Üniversitesi",
+    "Gaziantep Üniversitesi",
+    "Gediz Üniversitesi",
+    "Gelibolu Üniversitesi",
+    "Giresun Üniversitesi",
+    "Gümüşhane Üniversitesi",
+    // H
+    "Hacettepe Üniversitesi",
+    "Haliç Üniversitesi",
+    "Hasan Kalyoncu Üniversitesi",
+    "Hitit Üniversitesi",
+    // I - İ
+    "Iğdır Üniversitesi",
+    "Işık Üniversitesi",
+    "İstanbul Arel Üniversitesi",
+    "İstanbul Atlas Üniversitesi",
+    "İstanbul Aydın Üniversitesi",
+    "İstanbul Ayvansaray Üniversitesi",
+    "İstanbul Bilgi Üniversitesi",
+    "İstanbul Esenyurt Üniversitesi",
+    "İstanbul Gedik Üniversitesi",
+    "İstanbul Gelişim Üniversitesi",
+    "İstanbul Kemerburgaz Üniversitesi",
+    "İstanbul Medeniyet Üniversitesi",
+    "İstanbul Okan Üniversitesi",
+    "İstanbul Sabahattin Zaim Üniversitesi",
+    "İstanbul Şehir Üniversitesi",
+    "İstanbul Teknik Üniversitesi",
+    "İstanbul Ticaret Üniversitesi",
+    "İstanbul Üniversitesi",
+    "İstanbul Yeni Yüzyıl Üniversitesi",
+    "İzmir Bakırçay Üniversitesi",
+    "İzmir Demokrasi Üniversitesi",
+    "İzmir Katip Çelebi Üniversitesi",
+    // K
+    "Kahramanmaraş Sütçü İmam Üniversitesi",
+    "Karabük Üniversitesi",
+    "Karadeniz Teknik Üniversitesi",
+    "Kasımpaşa Üniversitesi",
+    "Kastamonu Üniversitesi",
+    "Kırıkkale Üniversitesi",
+    "Kırklareli Üniversitesi",
+    "Kilis 7 Aralık Üniversitesi",
+    "Kocaeli Üniversitesi",
+    "Kocaeli Sağlık ve Teknoloji Üniversitesi",
+    "Koç Üniversitesi",
+    "Konya Gıda ve Tarım Üniversitesi",
+    "KTO Karatay Üniversitesi",
+    // M
+    "Maltepe Üniversitesi",
+    "Manisa Celal Bayar Üniversitesi",
+    "Marmara Üniversitesi",
+    "Mersin Üniversitesi",
+    "Mevlana Üniversitesi",
+    "Muğla Sıtkı Koçman Üniversitesi",
+    "Mustafa Kemal Üniversitesi",
+    // N
+    "Namık Kemal Üniversitesi",
+    "Necmettin Erbakan Üniversitesi",
+    "Nevşehir Hacı Bektaş Veli Üniversitesi",
+    "Niğde Ömer Halisdemir Üniversitesi",
+    // O
+    "Ordu Üniversitesi",
+    "Orta Doğu Teknik Üniversitesi",
+    "Osmaniye Korkut Ata Üniversitesi",
+    // P
+    "Pamukkale Üniversitesi",
+    "Piri Reis Üniversitesi",
+    // R
+    "Recep Tayyip Erdoğan Üniversitesi",
+    // S - Ş
+    "Sakarya Üniversitesi",
+    "Selçuk Üniversitesi",
+    "Sinop Üniversitesi",
+    "Sivas Cumhuriyet Üniversitesi",
+    "Süleyman Demirel Üniversitesi",
+    "Süleyman Şah Üniversitesi",
+    "Şırnak Üniversitesi",
+    // T
+    "Tekirdağ Namık Kemal Üniversitesi",
+    "Trabzon Üniversitesi",
+    "Trakya Üniversitesi",
+    "TOBB Ekonomi ve Teknoloji Üniversitesi",
+    "Toros Üniversitesi",
+    "Tunceli Üniversitesi",
+    // U - Ü
+    "Ufuk Üniversitesi",
+    "Uludağ Üniversitesi",
+    "Uşak Üniversitesi",
+    // Y
+    "Yalova Üniversitesi",
+    "Yaşar Üniversitesi",
+    "Yeditepe Üniversitesi",
+    "Yeni Yüzyıl Üniversitesi",
+    "Yıldız Teknik Üniversitesi",
+    "Yüzüncü Yıl Üniversitesi",
+    // Z
+    "Zonguldak Bülent Ecevit Üniversitesi",
 ];
 
 const JOBS = [
@@ -133,11 +275,29 @@ export default function MatchProfileSetupScreen() {
     const [searchQuery, setSearchQuery] = useState("");
 
     const [displayName, setDisplayName] = useState(myProfile?.display_name || "");
-    const [age, setAge] = useState(myProfile?.age?.toString() || "");
+    const authUser = useAuthStore((s) => s.user);
+    // Calculate age from birth_date
+    const calculatedAge = (() => {
+        const bd = authUser?.birth_date;
+        if (!bd) return "";
+        const d = new Date(bd);
+        if (isNaN(d.getTime())) return "";
+        const today = new Date();
+        let a = today.getFullYear() - d.getFullYear();
+        const m = today.getMonth() - d.getMonth();
+        if (m < 0 || (m === 0 && today.getDate() < d.getDate())) a--;
+        return String(a);
+    })();
+    const age = calculatedAge || (myProfile?.age?.toString() || "");
     const [bio, setBio] = useState(myProfile?.bio || "");
     const [height, setHeight] = useState(myProfile?.height?.toString() || "");
     const [gender, setGender] = useState(myProfile?.gender || "");
-    const [education, setEducation] = useState(myProfile?.education || "");
+    const [education, setEducation] = useState(
+        (myProfile?.education || "").replace(" (Mezun)", "")
+    );
+    const [isGraduated, setIsGraduated] = useState(
+        (myProfile?.education || "").includes("(Mezun)")
+    );
     const [locationText, setLocationText] = useState(myProfile?.location_text || "");
     const [smoking, setSmoking] = useState(myProfile?.smoking || "");
     const [drinking, setDrinking] = useState(myProfile?.drinking || "");
@@ -286,6 +446,9 @@ export default function MatchProfileSetupScreen() {
             Alert.alert("Geçersiz Eğitim", "Lütfen listedeki üniversitelerden birini girin veya listeden seçin.");
             return;
         }
+        const finalEducation = trimmedEdu
+            ? (isGraduated ? `${trimmedEdu} (Mezun)` : trimmedEdu)
+            : undefined;
 
         const trimmedJob = locationText.trim();
         if (trimmedJob && !JOBS.includes(trimmedJob)) {
@@ -309,7 +472,7 @@ export default function MatchProfileSetupScreen() {
                 photo_urls: photoUrls.length > 0 ? photoUrls : undefined,
                 height: height ? Number(height) : undefined,
                 gender: gender || undefined,
-                education: education.trim() || undefined,
+                education: finalEducation,
                 location_text: locationText.trim() || undefined,
                 smoking: smoking || undefined,
                 drinking: drinking || undefined,
@@ -535,20 +698,22 @@ export default function MatchProfileSetupScreen() {
                             focusedInput === "age" && styles.inputGlow
                         ]}
                     >
-                        <ThemedText style={[styles.floatingLabel, { color: focusedInput === "age" ? ACCENT : colors.text.secondary }]}>YAŞ</ThemedText>
+                        <ThemedText style={[styles.floatingLabel, { color: colors.text.secondary }]}>YAŞ (Doğum tarihinden)</ThemedText>
                         <TextInput
                             ref={ageRef}
                             value={age}
-                            onChangeText={setAge}
-                            placeholder="Örn: 25"
+                            placeholder="Kayıt sırasında girilen doğum tarihinden hesaplanır"
                             placeholderTextColor={colors.text.tertiary}
                             keyboardType="number-pad"
-                            style={[styles.floatingInput, { color: textColor }]}
-                            onFocus={() => setFocusedInput("age")}
-                            onBlur={() => setFocusedInput(null)}
-                            editable={true}
+                            style={[styles.floatingInput, { color: colors.text.secondary }]}
+                            editable={false}
                         />
                     </Pressable>
+                    {!calculatedAge && (
+                        <ThemedText style={{ color: colors.text.tertiary, fontSize: 11, marginTop: -4, marginBottom: 8, paddingHorizontal: 4 }}>
+                            Yaş bilginiz kayıt sırasında girdiğiniz doğum tarihinden otomatik hesaplanır.
+                        </ThemedText>
+                    )}
 
                     {/* Bio */}
                     <View style={styles.sectionHeader}>
@@ -669,6 +834,29 @@ export default function MatchProfileSetupScreen() {
 
                     {/* Education */}
                     {renderSelectionRow("book.fill", "Eğitim (İsteğe Bağlı)", education, "education")}
+
+                    {/* Mezun Toggle */}
+                    {education.trim() !== "" && (
+                        <TouchableOpacity
+                            style={[styles.selectionRow, { backgroundColor: inputBg, borderColor: inputBorder, marginTop: 0 }]}
+                            onPress={() => setIsGraduated(!isGraduated)}
+                            activeOpacity={0.7}
+                        >
+                            <View style={styles.selectionRowLeft}>
+                                <IconSymbol name="checkmark.seal.fill" size={18} color={isGraduated ? ACCENT : colors.text.secondary} />
+                                <ThemedText style={[styles.selectionRowLabel, { color: textColor }]}>Mezun</ThemedText>
+                            </View>
+                            <View style={[
+                                styles.graduateToggle,
+                                { backgroundColor: isGraduated ? ACCENT : (isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.08)") }
+                            ]}>
+                                <View style={[
+                                    styles.graduateToggleThumb,
+                                    { transform: [{ translateX: isGraduated ? 18 : 0 }] }
+                                ]} />
+                            </View>
+                        </TouchableOpacity>
+                    )}
 
                     {/* Working Location/Job */}
                     {renderSelectionRow("briefcase.fill", "Meslek (İsteğe Bağlı)", locationText, "job")}
@@ -1152,7 +1340,25 @@ const styles = StyleSheet.create({
         fontSize: 15,
         fontWeight: "500",
         textAlign: "right",
-        flexShrink: 1, // Ensure long values like interests truncate properly
+        flexShrink: 1,
         maxWidth: "80%",
+    },
+    graduateToggle: {
+        width: 44,
+        height: 26,
+        borderRadius: 13,
+        justifyContent: "center",
+        paddingHorizontal: 3,
+    },
+    graduateToggleThumb: {
+        width: 20,
+        height: 20,
+        borderRadius: 10,
+        backgroundColor: "#FFF",
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.2,
+        shadowRadius: 2,
+        elevation: 2,
     },
 });
