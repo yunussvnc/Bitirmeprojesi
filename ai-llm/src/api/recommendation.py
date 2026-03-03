@@ -4,7 +4,7 @@
 
 from fastapi import APIRouter, HTTPException, status
 from pydantic import BaseModel
-from typing import Optional
+from typing import Optional, List
 from src.recommendation.engine import RecommendationEngine
 
 router = APIRouter()
@@ -22,20 +22,20 @@ class RecommendationRequest(BaseModel):
 
 class MekanOneri(BaseModel):
     """Önerilen mekan şeması"""
-    mekan_id: int
-    ad: str
-    aciklama: str
-    kategori: str
-    enlem: float
-    boylam: float
-    adres: str
-    benzerlik_skoru: float
-    gerekce: str
+    mekan_id: Optional[int] = None
+    ad: Optional[str] = None
+    aciklama: str = ""
+    kategori: str = ""
+    enlem: Optional[float] = None
+    boylam: Optional[float] = None
+    adres: str = ""
+    benzerlik_skoru: float = 0.0
+    gerekce: str = ""
 
 
 class RecommendationResponse(BaseModel):
     """Öneri response şeması"""
-    oneriler: list[MekanOneri]
+    oneriler: List[MekanOneri]
     sorgu_analizi: str
 
 

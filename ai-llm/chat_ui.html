@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Mekan Öneri Chatbotu</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --primary-hover: #4338ca;
+            --bg-color: #f8fafc;
+            --chat-bg: #ffffff;
+            --user-msg: #4f46e5;
+            --bot-msg: #f1f5f9;
+            --text-dark: #1e293b;
+            --text-light: #64748b;
+            --border: #e2e8f0;
+            --success: #10b981;
+            --shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--text-dark);
+        }
+
+        .chat-container {
+            width: 100%;
+            max-width: 800px;
+            height: 90vh;
+            background: var(--chat-bg);
+            border-radius: 20px;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid var(--border);
+        }
+
+        /* Header */
+        .chat-header {
+            padding: 20px;
+            background: #ffffff;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .bot-avatar {
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, #4f46e5, #ec4899);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+        }
+
+        .header-text h2 {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .header-text p {
+            font-size: 0.85rem;
+            color: var(--success);
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .header-text p::before {
+            content: '';
+            display: block;
+            width: 8px;
+            height: 8px;
+            background: var(--success);
+            border-radius: 50%;
+        }
+
+        .location-picker {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 12px;
+            background: var(--bg-color);
+            border-radius: 8px;
+            font-size: 0.9rem;
+            border: 1px solid var(--border);
+        }
+
+        .location-picker select {
+            border: none;
+            background: transparent;
+            outline: none;
+            font-weight: 500;
+            color: var(--text-dark);
+            cursor: pointer;
+        }
+
+        /* Chat Body */
+        .chat-body {
+            flex: 1;
+            padding: 20px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            background: #f8fafc;
+        }
+
+        .message {
+            max-width: 80%;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .message.bot {
+            align-self: flex-start;
+        }
+
+        .message.user {
+            align-self: flex-end;
+            align-items: flex-end;
+        }
+
+        .bubble {
+            padding: 12px 16px;
+            border-radius: 16px;
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .bot .bubble {
+            background: var(--bot-msg);
+            color: var(--text-dark);
+            border-bottom-left-radius: 4px;
+            box-shadow: 0 1px 2px rgb(0 0 0 / 0.05);
+        }
+
+        .user .bubble {
+            background: var(--user-msg);
+            color: white;
+            border-bottom-right-radius: 4px;
+            box-shadow: 0 1px 2px rgb(0 0 0 / 0.1);
+        }
+
+        /* Mekan Kartı */
+        .place-card {
+            background: white;
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 15px;
+            margin-top: 10px;
+            width: 100%;
+            max-width: 350px;
+            box-shadow: 0 1px 3px rgb(0 0 0 / 0.05);
+            transition: transform 0.2s;
+        }
+
+        .place-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow);
+        }
+
+        .place-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+
+        .place-title {
+            font-weight: 600;
+            font-size: 1.05rem;
+            color: var(--primary);
+        }
+
+        .place-rating {
+            background: #fef3c7;
+            color: #d97706;
+            padding: 4px 8px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .place-detail {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-bottom: 5px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .place-reason {
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px solid var(--border);
+            font-size: 0.85rem;
+            color: var(--success);
+            font-weight: 500;
+        }
+
+        /* Typing Indicator */
+        .typing-indicator {
+            display: none;
+            padding: 12px 16px;
+            background: var(--bot-msg);
+            border-radius: 16px;
+            border-bottom-left-radius: 4px;
+            align-self: flex-start;
+            gap: 4px;
+        }
+
+        .typing-indicator.active {
+            display: flex;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            background: #cbd5e1;
+            border-radius: 50%;
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+
+        .dot:nth-child(1) {
+            animation-delay: -0.32s;
+        }
+
+        .dot:nth-child(2) {
+            animation-delay: -0.16s;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            80%,
+            100% {
+                transform: scale(0);
+            }
+
+            40% {
+                transform: scale(1);
+            }
+        }
+
+        /* Input Area */
+        .chat-input {
+            padding: 20px;
+            background: white;
+            border-top: 1px solid var(--border);
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .input-wrapper {
+            flex: 1;
+            position: relative;
+        }
+
+        .input-wrapper input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid var(--border);
+            border-radius: 25px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.2s;
+            background: var(--bg-color);
+        }
+
+        .input-wrapper input:focus {
+            border-color: var(--primary);
+            background: white;
+        }
+
+        .send-btn {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: none;
+            background: var(--primary);
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .send-btn:hover {
+            background: var(--primary-hover);
+            transform: scale(1.05);
+        }
+
+        .send-btn:active {
+            transform: scale(0.95);
+        }
+
+        .send-btn:disabled {
+            background: #cbd5e1;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .examples {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+
+        .example-chip {
+            background: white;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 5px 12px;
+            border-radius: 15px;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .example-chip:hover {
+            background: var(--primary);
+            color: white;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="chat-container">
+        <!-- Header -->
+        <div class="chat-header">
+            <div class="header-info">
+                <div class="bot-avatar">
+                    <i class="fa-solid fa-robot"></i>
+                </div>
+                <div class="header-text">
+                    <h2>AI Mekan Öneri Asistanı</h2>
+                    <p>Çevrimiçi (Gemma 2)</p>
+                </div>
+            </div>
+
+            <div class="location-picker">
+                <i class="fa-solid fa-location-dot" style="color: #ef4444;"></i>
+                <select id="locationSelect">
+                    <option value="Kadikoy|40.9839|29.0267">Kadıköy</option>
+                    <option value="Taksim|41.0370|28.9850">Taksim</option>
+                    <option value="Besiktas|41.0427|29.0089">Beşiktaş</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Chat Body -->
+        <div class="chat-body" id="chatBody">
+            <!-- Hoşgeldin Mesajı -->
+            <div class="message bot">
+                <div class="bubble">
+                    Merhaba! Ben senin yapay zeka destekli mekan öneri asistanınım. Hangi modda bir yere gitmek
+                    istersin?
+                    <br><br>
+                    <strong>Örnekler:</strong>
+                    <div class="examples">
+                        <div class="example-chip" onclick="fillInput(this.innerText)">Deniz manzaralı sessiz bir kafe
+                        </div>
+                        <div class="example-chip" onclick="fillInput(this.innerText)">Ailecek gidilebilecek bahçeli
+                            mekan</div>
+                        <div class="example-chip" onclick="fillInput(this.innerText)">Romantik akşam yemeği</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Typing Indicator -->
+            <div class="typing-indicator" id="typingIndicator">
+                <div class="dot"></div>
+                <div class="dot"></div>
+                <div class="dot"></div>
+            </div>
+        </div>
+
+        <!-- Input Area -->
+        <div class="chat-input">
+            <div class="input-wrapper">
+                <input type="text" id="userInput" placeholder="Nasıl bir mekan arıyorsun?..." autocomplete="off">
+            </div>
+            <button class="send-btn" id="sendBtn">
+                <i class="fa-solid fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+
+    <script>
+        const chatBody = document.getElementById('chatBody');
+        const userInput = document.getElementById('userInput');
+        const sendBtn = document.getElementById('sendBtn');
+        const typingIndicator = document.getElementById('typingIndicator');
+        const locationSelect = document.getElementById('locationSelect');
+
+        // Backend URL (demo_backend_v2.py port 8080'de)
+        const API_URL = 'http://localhost:8080/api/smart-search-v2';
+
+        function fillInput(text) {
+            userInput.value = text;
+            userInput.focus();
+        }
+
+        function scrollToBottom() {
+            chatBody.scrollTop = chatBody.scrollHeight;
+        }
+
+        function addMessage(text, isUser = false) {
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `message ${isUser ? 'user' : 'bot'}`;
+
+            const bubbleDiv = document.createElement('div');
+            bubbleDiv.className = 'bubble';
+            bubbleDiv.innerHTML = text; // HTML content allowed carefully
+
+            msgDiv.appendChild(bubbleDiv);
+            chatBody.insertBefore(msgDiv, typingIndicator);
+            scrollToBottom();
+        }
+
+        function createPlaceCard(place) {
+            return `
+                <div class="place-card">
+                    <div class="place-header">
+                        <div class="place-title">${place.name || 'Bilinmeyen Mekan'}</div>
+                        <div class="place-rating">
+                            <i class="fa-solid fa-star"></i> ${place.rating || 'N/A'}
+                        </div>
+                    </div>
+                    <div class="place-detail">
+                        <i class="fa-solid fa-location-dot"></i> ${place.distance_km ? place.distance_km + ' km' : 'Yakın'}
+                    </div>
+                    ${place.address ? `<div class="place-detail"><i class="fa-solid fa-map-pin"></i> ${place.address.split(',')[0]}</div>` : ''}
+                    <div class="place-reason">
+                        <i class="fa-solid fa-lightbulb"></i> ${place.recommendation_reason || 'RAG Eşleşmesi'}
+                    </div>
+                </div>
+            `;
+        }
+
+        function showTyping() {
+            typingIndicator.classList.add('active');
+            chatBody.appendChild(typingIndicator); // Move to bottom
+            scrollToBottom();
+            sendBtn.disabled = true;
+            userInput.disabled = true;
+        }
+
+        function hideTyping() {
+            typingIndicator.classList.remove('active');
+            sendBtn.disabled = false;
+            userInput.disabled = false;
+            userInput.focus();
+        }
+
+        async function handleSend() {
+            const text = userInput.value.trim();
+            if (!text) return;
+
+            // Kullanıcı mesajı ekle
+            addMessage(text, true);
+            userInput.value = '';
+
+            // Konum ayarı
+            const locVal = locationSelect.value.split('|');
+            const locName = locVal[0];
+            const lat = parseFloat(locVal[1]);
+            const lng = parseFloat(locVal[2]);
+
+            showTyping();
+
+            try {
+                // API İsteği (Backend'e bağlanıyoruz)
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        query: text,
+                        location: locName,
+                        user_lat: lat,
+                        user_lng: lng,
+                        limit: 3,
+                        max_distance_km: 10.0
+                    })
+                });
+
+                if (!response.ok) throw new Error('API Hatası');
+
+                const data = await response.json();
+
+                hideTyping();
+
+                // Eğer sadece sohbet cümlesi veya uyarı mesajı (is_conversational = true) döndüyse
+                if (data.is_conversational && data.message) {
+                    addMessage(data.message, false);
+                    return;
+                }
+
+                if (data.found === 0 || !data.recommendations || data.recommendations.length === 0) {
+                    addMessage("Üzgünüm, bu kriterlere uygun bir mekan bulamadım. Biraz daha genel bir arama yapabilir misin?");
+                    return;
+                }
+
+                // AI Yanıtı
+                let botResponse = `<p>Bulduğum en uygun mekanlar şunlar:</p>`;
+
+                // Hava Durumu Bilgisini Ekle
+                if (data.context && data.context.weather && data.context.temperature !== null) {
+                    botResponse = `<div style="background:#e0f2fe; color:#0369a1; padding:8px 12px; border-radius:8px; font-size:0.85rem; margin-bottom:10px; display:inline-block;">
+                        <i class="fa-solid fa-cloud-sun"></i> <strong>Hava Durumu:</strong> ${data.context.temperature}°C, ${data.context.weather} koşullarına göre analiz edildi.
+                    </div>` + botResponse;
+                }
+
+                // Mekan kartlarını oluştur
+                data.recommendations.forEach(place => {
+                    botResponse += createPlaceCard(place);
+                });
+
+                if (data._cache && data._cache.hit) {
+                    botResponse += `<p style="font-size:0.75rem; color:#94a3b8; margin-top:8px; text-align:right;">⚡ Redis Cache'den getirildi</p>`;
+                }
+
+                addMessage(botResponse, false);
+
+            } catch (error) {
+                console.error('Error:', error);
+                hideTyping();
+                addMessage("Bağlantı hatası oluştu. Lütfen backend'in (demo_backend_v2.py) çalıştığından emin ol.", false);
+            }
+        }
+
+        // Event Listeners
+        sendBtn.addEventListener('click', handleSend);
+        userInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') handleSend();
+        });
+
+    </script>
+</body>
+
+</html>

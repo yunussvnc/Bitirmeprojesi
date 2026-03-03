@@ -145,15 +145,48 @@ class MekanChatbot:
         print(f"  ARAMA: '{query}'")
         print("="*80 + "\n")
         
-        print("[*] Mekanlar aranıyor...")
+        print("[*] SerpApi ile internetten canli mekanlar araniyor...")
         start_time = time.time()
         
-        # Mekanları bul
-        results = self.retriever.retrieve(
-            query=query,
-            location=self.current_location,
-            top_k=5
-        )
+        try:
+            from serpapi_client import SerpApiClient
+            serp_client = SerpApiClient()
+            
+            # SerpApi ile canli arama yap
+            raw_places = serp_client.search_places(
+                query=query,
+                location=f"{self.current_location['enlem']},{self.current_location['boylam']}",
+                limit=5
+            )
+            
+            # Formati RAGGenerator'un bekledigi yapıya donustur
+            results = []
+            for place in raw_places:
+                results.append({
+                    "score": float(place.get("rating", 0.0)) / 5.0, # Rate'i normalize skor al (0-1 arasi)
+                    "payload": {
+                        "ad": place.get("name", ""),
+                        "adres": place.get("address", ""),
+                        "enlem": place.get("latitude", 0.0),
+                        "boylam": place.get("longitude", 0.0),
+                        "kategori": place.get("category", ""),
+                        "aciklama": place.get("description", "")
+                    }
+                })
+            
+            if not results:
+                raise ValueError("SerpApi sonuc bulamadi")
+                
+        except Exception as e:
+            print(f"\n[!] Canli arama hatasi: {e}")
+            print("[*] Qdrant (Yerel Vektor DB) uzerinden araniyor...")
+            
+            # Mekanları bul (Offline / Local)
+            results = self.retriever.retrieve(
+                query=query,
+                location=self.current_location,
+                top_k=5
+            )
         
         elapsed = (time.time() - start_time) * 1000
         

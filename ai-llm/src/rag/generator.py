@@ -7,12 +7,26 @@ from src.models.llm.llm_wrapper import LLMFactory
 from src.config import settings
 
 
+import logging
+
+logger = logging.getLogger(__name__)
+
+
 class RAGGenerator:
     """RAG sistemi için generator"""
     
     def __init__(self):
-        """Generator'ı başlat"""
-        self.llm = LLMFactory.create_llm()
+        """Generator'ı başlat - LLM lazy load edilir"""
+        self._llm = None
+    
+    @property
+    def llm(self):
+        """LLM'i lazy load et (ilk kullanımda yükler)"""
+        if self._llm is None:
+            logger.info("LLM yükleniyor...")
+            self._llm = LLMFactory.create_llm()
+            logger.info("LLM hazır")
+        return self._llm
     
     def generate_recommendation(
         self,

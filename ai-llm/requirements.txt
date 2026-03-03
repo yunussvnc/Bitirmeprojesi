@@ -21,13 +21,22 @@ qdrant-client==1.7.0
 
 # HTTP Client
 httpx==0.25.2
+requests==2.31.0
+
+# SerpApi - Google Maps Data
+google-search-results==2.4.2
 
 # Utilities
 python-dotenv==1.0.0
 numpy==1.26.2
 pandas==2.1.4
 
+# Cache
+redis==5.0.1
+
 # Fine-tuning
 datasets>=2.14.0  # HuggingFace datasets
-peft>=0.7.0  # Parameter-Efficient Fine-Tuning (opsiyonel, LoRA için)
+peft>=0.8.0  # Parameter-Efficient Fine-Tuning (LoRA/QLoRA)
+scipy>=1.11.0  # Required by peft
+trl>=0.7.0  # Transformer Reinforcement Learning (opsiyonel)
 

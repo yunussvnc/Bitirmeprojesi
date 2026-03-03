@@ -9,8 +9,7 @@ from src.config import settings
 from src.utils.logging_config import setup_logging
 
 # Logging'i ayarla
-setup_logging("INFO")
-logger = setup_logging()
+logger = setup_logging("INFO")
 
 app = FastAPI(
     title="Mekan Öneri Platformu AI Service",

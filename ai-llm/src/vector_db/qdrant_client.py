@@ -135,12 +135,13 @@ class QdrantVectorDB:
     def delete_vectors(self, point_ids: List[int]) -> bool:
         """Vektörleri sil"""
         try:
+            from qdrant_client.models import PointIdsList
             self.client.delete(
                 collection_name=self.collection_name,
-                points_selector=point_ids
+                points_selector=PointIdsList(points=point_ids)
             )
             return True
         except Exception as e:
-            print(f"Vektör silinirken hata: {e}")
+            logger.error(f"Vektör silinirken hata: {e}")
             return False
 
