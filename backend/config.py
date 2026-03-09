@@ -3,7 +3,7 @@ from functools import lru_cache
 
 
 class Settings(BaseSettings):
-    DATABASE_URL: str = "sqlite:///./sqlite.db"
+    DATABASE_URL: str
     ALLOWED_ORIGINS: str = "*"
     JWT_SECRET_KEY: str = "dev-secret-change-in-production"
     JWT_ALGORITHM: str = "HS256"
