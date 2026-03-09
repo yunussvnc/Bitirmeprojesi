@@ -3,7 +3,7 @@
  */
 
 import React, { useMemo, useEffect, useRef } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Modal, Pressable, Animated, PanResponder } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Modal, Pressable, Animated, PanResponder, TouchableWithoutFeedback } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTheme } from "@/src/hooks/useTheme";
 import { IconSymbol, type IconSymbolName } from "@/src/components/ui/icon-symbol";
@@ -67,9 +67,9 @@ export function PostOptionsSheet({ visible, onClose, showFollowActions = false, 
       { key: "report", label: "Raporla", icon: "exclamationmark.triangle", destructive: true },
       ...(showFollowActions
         ? ([
-            { key: "unfollow", label: "Takibi bırak", icon: "person.badge.minus" },
-            { key: "mute", label: "Sessize al", icon: "speaker.slash" },
-          ] as Option[])
+          { key: "unfollow", label: "Takibi bırak", icon: "person.badge.minus" },
+          { key: "mute", label: "Sessize al", icon: "speaker.slash" },
+        ] as Option[])
         : []),
     ],
     [showFollowActions]
@@ -84,37 +84,38 @@ export function PostOptionsSheet({ visible, onClose, showFollowActions = false, 
   return (
     <Modal visible={visible} transparent animationType="fade" onRequestClose={onClose}>
       <Pressable style={styles.overlay} onPress={onClose}>
-        <Animated.View
-          style={[
-            styles.sheet,
-            {
-              backgroundColor: colors.surface.elevated,
-              borderColor: colors.surface.border,
-              paddingBottom: insets.bottom + 12,
-              transform: [{ translateY }],
-            },
-          ]}
-          onPress={(e) => e.stopPropagation()}
-        >
-          <View style={[styles.handle, { backgroundColor: colors.text.tertiary }]} {...panResponder.panHandlers} />
-          {options.map((opt, idx) => (
-            <TouchableOpacity
-              key={opt.key}
-              style={[
-                styles.option,
-                {
-                  borderBottomColor: colors.surface.border,
-                  borderBottomWidth: idx === options.length - 1 ? 0 : StyleSheet.hairlineWidth,
-                },
-              ]}
-              onPress={() => handleSelect(opt.key)}
-              activeOpacity={0.7}
-            >
-              <IconSymbol name={opt.icon} size={20} color={opt.destructive ? colors.semantic.error : colors.text.secondary} />
-              <Text style={[styles.optionLabel, { color: opt.destructive ? colors.semantic.error : colors.text.primary }]}>{opt.label}</Text>
-            </TouchableOpacity>
-          ))}
-        </Animated.View>
+        <TouchableWithoutFeedback onPress={(e) => e.stopPropagation()}>
+          <Animated.View
+            style={[
+              styles.sheet,
+              {
+                backgroundColor: colors.surface.elevated,
+                borderColor: colors.surface.border,
+                paddingBottom: insets.bottom + 12,
+                transform: [{ translateY }],
+              },
+            ]}
+          >
+            <View style={[styles.handle, { backgroundColor: colors.text.tertiary }]} {...panResponder.panHandlers} />
+            {options.map((opt, idx) => (
+              <TouchableOpacity
+                key={opt.key}
+                style={[
+                  styles.option,
+                  {
+                    borderBottomColor: colors.surface.border,
+                    borderBottomWidth: idx === options.length - 1 ? 0 : StyleSheet.hairlineWidth,
+                  },
+                ]}
+                onPress={() => handleSelect(opt.key)}
+                activeOpacity={0.7}
+              >
+                <IconSymbol name={opt.icon} size={20} color={opt.destructive ? colors.semantic.error : colors.text.secondary} />
+                <Text style={[styles.optionLabel, { color: opt.destructive ? colors.semantic.error : colors.text.primary }]}>{opt.label}</Text>
+              </TouchableOpacity>
+            ))}
+          </Animated.View>
+        </TouchableWithoutFeedback>
       </Pressable>
     </Modal>
   );

@@ -16,7 +16,7 @@ from app.middleware.logging import RequestLoggingMiddleware
 from app.middleware.rate_limiter import RateLimiterMiddleware
 
 # Router'lar
-from app.routers import auth, users, places, reviews, feed, stories, notifications, match, upload, recommend, messages
+from app.routers import auth, users, places, reviews, feed, stories, notifications, match, upload, recommend, messages, saved
 
 # ---------------------------------------------------------------------------
 # Logging konfigürasyonu
@@ -86,6 +86,7 @@ app.include_router(match.router)
 app.include_router(upload.router)
 app.include_router(recommend.router)
 app.include_router(messages.router)
+app.include_router(saved.router)
 
 
 # ---------------------------------------------------------------------------

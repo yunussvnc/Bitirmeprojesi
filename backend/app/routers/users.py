@@ -1,14 +1,58 @@
-# routers/users.py — Kullanıcı profil ve takip endpoint'leri
+# routers/users.py — Kullanıcı profil, takip ve arama endpoint'leri
 
 from typing import Optional
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 
 import models, schemas, crud
 from app.dependencies import get_db, get_current_user, get_optional_user
 
 router = APIRouter(tags=["Users"])
+
+
+@router.get("/users/search")
+def search_users(
+    q: str = Query(..., min_length=1, description="Aranacak kullanıcı adı veya isim"),
+    page: int = 1,
+    page_size: int = 20,
+    db: Session = Depends(get_db),
+    current_user: Optional[models.User] = Depends(get_optional_user),
+):
+    """Kullanıcı arama — username veya isim ile."""
+    query = db.query(models.User).filter(models.User.is_active == True)
+    query = query.filter(
+        (models.User.username.ilike(f"%{q}%")) |
+        (models.User.first_name.ilike(f"%{q}%")) |
+        (models.User.last_name.ilike(f"%{q}%"))
+    )
+    total = query.count()
+    offset = (page - 1) * page_size
+    users = query.offset(offset).limit(page_size).all()
+    current_uid = current_user.id if current_user else None
+    items = []
+    for u in users:
+        item = schemas.UserSummary.model_validate(u)
+        if current_uid:
+            item.is_following = crud.is_following(db, current_uid, u.id)
+        items.append(item)
+    return {"items": items, "total": total, "page": page, "page_size": page_size}
+
+
+
+@router.get("/users/blocked")
+def get_blocked_users(
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(get_current_user),
+):
+    """Engellenen kullanıcılar listesi."""
+    blocked_ids = crud.get_blocked_user_ids(db, current_user.id)
+    items = []
+    for uid in blocked_ids:
+        u = crud.get_user_by_id(db, uid)
+        if u:
+            items.append(schemas.UserSummary.model_validate(u))
+    return {"items": items, "total": len(items)}
 
 
 @router.get("/users/{user_id}", response_model=schemas.UserProfile)
@@ -103,3 +147,25 @@ def get_following(
             item.is_following = crud.is_following(db, current_uid, u.id)
         items.append(item)
     return {"items": items, "total": total, "page": page, "page_size": page_size}
+
+
+@router.post("/users/{user_id}/block")
+def toggle_block_user(
+    user_id: int,
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(get_current_user),
+):
+    """Kullanıcıyı engelle / engeli kaldır (toggle)."""
+    if user_id == current_user.id:
+        raise HTTPException(status_code=400, detail="Kendinizi engelleyemezsiniz.")
+    target = crud.get_user_by_id(db, user_id)
+    if not target:
+        raise HTTPException(status_code=404, detail="Kullanıcı bulunamadı.")
+    is_blocked = crud.toggle_block_user(db, current_user.id, user_id)
+    # Engelleme sonrası takipten de çıkar
+    if is_blocked:
+        if crud.is_following(db, current_user.id, user_id):
+            crud.toggle_follow(db, current_user.id, user_id)
+        if crud.is_following(db, user_id, current_user.id):
+            crud.toggle_follow(db, user_id, current_user.id)
+    return {"blocked": is_blocked}

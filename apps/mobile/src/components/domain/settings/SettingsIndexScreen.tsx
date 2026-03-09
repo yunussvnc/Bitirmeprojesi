@@ -15,6 +15,7 @@ import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { BackButton } from "@/src/components/shared/navigation";
 import { createTextStyle, spacing } from "@/src/constants/design";
 import { useAppStore } from "@/src/store/useAppStore";
+import { useAuthStore } from "@/src/store/useAuthStore";
 
 export default function SettingsIndexScreen() {
   const { colors, isDark, setThemeMode, themeMode } = useTheme();
@@ -118,7 +119,12 @@ export default function SettingsIndexScreen() {
             lightImpact();
             Alert.alert("Çıkış", "Hesabınızdan çıkış yapmak istediğinize emin misiniz?", [
               { text: "İptal", style: "cancel" },
-              { text: "Çıkış Yap", style: "destructive", onPress: () => router.replace("/login") },
+              {
+                text: "Çıkış Yap", style: "destructive", onPress: () => {
+                  useAuthStore.getState().logout();
+                  router.replace("/login");
+                }
+              },
             ]);
           },
           icon: "arrow.right.square",

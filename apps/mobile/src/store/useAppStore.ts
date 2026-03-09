@@ -2,6 +2,8 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import type { Post } from "@/src/services/feedService";
+import { toggleSavePlace as apiToggleSavePlace, toggleSavePost as apiToggleSavePost } from "@/src/services/savedService";
+import { logger } from "@/src/utils/logger";
 
 export type SavedPlace = {
   id: string;
@@ -66,17 +68,25 @@ export const useAppStore = create<AppState>()(
         const { savedIds, savedById } = get();
         const exists = savedIds.includes(place.id);
 
+        // Optimistic update — UI anında değişir
         if (exists) {
           const nextIds = savedIds.filter((x) => x !== place.id);
           const { [place.id]: _removed, ...rest } = savedById;
           set({ savedIds: nextIds, savedById: rest });
-          return;
+        } else {
+          set({
+            savedIds: uniq([place.id, ...savedIds]),
+            savedById: { ...savedById, [place.id]: place },
+          });
         }
 
-        set({
-          savedIds: uniq([place.id, ...savedIds]),
-          savedById: { ...savedById, [place.id]: place },
-        });
+        // Backend sync (fire-and-forget)
+        const numericId = Number(place.id);
+        if (!isNaN(numericId)) {
+          apiToggleSavePlace(numericId).catch((err) =>
+            logger.warn("[toggleSave] Backend sync failed:", err)
+          );
+        }
       },
 
       removeSaved: (id) => {
@@ -85,6 +95,14 @@ export const useAppStore = create<AppState>()(
         const nextIds = savedIds.filter((x) => x !== key);
         const { [key]: _removed, ...rest } = savedById;
         set({ savedIds: nextIds, savedById: rest });
+
+        // Backend sync
+        const numericId = Number(id);
+        if (!isNaN(numericId)) {
+          apiToggleSavePlace(numericId).catch((err) =>
+            logger.warn("[removeSaved] Backend sync failed:", err)
+          );
+        }
       },
 
       clearSaved: () => set({ savedIds: [], savedById: {} }),
@@ -96,17 +114,25 @@ export const useAppStore = create<AppState>()(
         const { savedPostIds, savedPostsById } = get();
         const exists = savedPostIds.includes(key);
 
+        // Optimistic update
         if (exists) {
           const nextIds = savedPostIds.filter((x) => x !== key);
           const { [key]: _removed, ...rest } = savedPostsById;
           set({ savedPostIds: nextIds, savedPostsById: rest });
-          return;
+        } else {
+          set({
+            savedPostIds: uniq([key, ...savedPostIds]),
+            savedPostsById: { ...savedPostsById, [key]: post },
+          });
         }
 
-        set({
-          savedPostIds: uniq([key, ...savedPostIds]),
-          savedPostsById: { ...savedPostsById, [key]: post },
-        });
+        // Backend sync
+        const numericId = Number(post.id);
+        if (!isNaN(numericId)) {
+          apiToggleSavePost(numericId).catch((err) =>
+            logger.warn("[toggleSavePost] Backend sync failed:", err)
+          );
+        }
       },
 
       removeSavedPost: (id) => {
@@ -115,6 +141,14 @@ export const useAppStore = create<AppState>()(
         const nextIds = savedPostIds.filter((x) => x !== key);
         const { [key]: _removed, ...rest } = savedPostsById;
         set({ savedPostIds: nextIds, savedPostsById: rest });
+
+        // Backend sync
+        const numericId = Number(id);
+        if (!isNaN(numericId)) {
+          apiToggleSavePost(numericId).catch((err) =>
+            logger.warn("[removeSavedPost] Backend sync failed:", err)
+          );
+        }
       },
 
       clearSavedPosts: () => set({ savedPostIds: [], savedPostsById: {} }),

@@ -14,6 +14,17 @@ from app.dependencies import get_db, get_current_user
 router = APIRouter(tags=["Match"])
 
 
+def _check_age_gate(user: models.User):
+    """Kullanıcının 18 yaşından büyük olup olmadığını kontrol eder"""
+    if not user.birth_date:
+        raise HTTPException(status_code=403, detail="Doğum tarihi bilgisi bulunamadı. Eşleşme özelliklerini kullanabilmek için profilinizi güncelleyin.")
+    
+    today = datetime.utcnow().date()
+    age = today.year - user.birth_date.year - ((today.month, today.day) < (user.birth_date.month, user.birth_date.day))
+    if age < 18:
+        raise HTTPException(status_code=403, detail="Eşleşme özelliklerini kullanabilmek için 18 yaşından büyük olmanız gerekmektedir.")
+
+
 def _match_profile_to_response(profile: models.MatchProfile) -> schemas.MatchProfileResponse:
     """MatchProfile model → response schema dönüşümü"""
     photo_urls = []
@@ -66,6 +77,8 @@ def create_or_update_match_profile(
     current_user: models.User = Depends(get_current_user),
 ):
     """Eşleşme profili oluştur veya güncelle"""
+    _check_age_gate(current_user)
+    
     existing = db.query(models.MatchProfile).filter(
         models.MatchProfile.user_id == current_user.id
     ).first()
@@ -183,6 +196,8 @@ def get_match_candidates(
     Eşleşme adaylarını getir.
     Sıralama: 1) Aynı mekanda QR doğrulanmış, 2) Yakın, 3) Diğer
     """
+    _check_age_gate(current_user)
+
     # Kullanıcının kendi profilini kontrol et
     my_profile = db.query(models.MatchProfile).filter(
         models.MatchProfile.user_id == current_user.id,
@@ -295,6 +310,8 @@ def like_user(
     current_user: models.User = Depends(get_current_user),
 ):
     """Kullanıcıyı beğen veya geç"""
+    _check_age_gate(current_user)
+    
     if data.to_user_id == current_user.id:
         raise HTTPException(status_code=400, detail="Kendinizi beğenemezsiniz.")
 
@@ -379,6 +396,8 @@ def get_match_conversations(
     current_user: models.User = Depends(get_current_user),
 ):
     """Eşleşme konuşmalarını getir"""
+    _check_age_gate(current_user)
+    
     convs = db.query(models.MatchConversation).filter(
         (models.MatchConversation.user1_id == current_user.id) |
         (models.MatchConversation.user2_id == current_user.id),
@@ -448,3 +467,15 @@ def reveal_profile(
 
     db.commit()
     return {"ok": True, "revealed": True}
+
+
+@router.delete("/match/conversations/{conversation_id}")
+def unmatch(
+    conversation_id: int,
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(get_current_user),
+):
+    """Eşleşmeyi bitir — konuşma ve mesajlar silinir."""
+    if not crud.unmatch_conversation(db, conversation_id, current_user.id):
+        raise HTTPException(status_code=404, detail="Konuşma bulunamadı veya yetkiniz yok.")
+    return {"ok": True, "message": "Eşleşme sonlandırıldı."}

@@ -100,7 +100,7 @@ export function MediaPicker({
           fileSize: a.fileSize,
         };
       })
-      .filter((x): x is MediaItem => x != null);
+      .filter((x) => x !== null) as MediaItem[];
 
     if (newItems.length > 0) {
       onSelect(singleOnly ? newItems : [...selected, ...newItems].slice(0, maxCount));

@@ -22,6 +22,7 @@ function useProtectedRoute() {
     const inAuthScreen =
       segments[0] === "login" ||
       segments[0] === "register" ||
+      segments[0] === "forgot-password" ||
       (segments.length === 1 && !segments[0]);
 
     const navigate = () => {

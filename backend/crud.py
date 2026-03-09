@@ -78,8 +78,47 @@ def get_or_create_user_for_login(db: Session, email: str, password: str):
 
 # --- MEKAN (PLACE) İŞLEMLERİ ---
 
+def _enrich_places_with_stats(db: Session, places):
+    import math
+    
+    if not places:
+        return places
+
+    place_ids = [p.id for p in places]
+    
+    # Yorum sayıları
+    reviews_count = (
+        db.query(models.Review.place_id, func.count(models.Review.id).label("cnt"))
+        .filter(models.Review.place_id.in_(place_ids))
+        .group_by(models.Review.place_id)
+        .all()
+    )
+    review_map = {r[0]: r[1] for r in reviews_count}
+
+    # Kaydetme sayıları
+    saved_count = (
+        db.query(models.SavedPlace.place_id, func.count(models.SavedPlace.id).label("cnt"))
+        .filter(models.SavedPlace.place_id.in_(place_ids))
+        .group_by(models.SavedPlace.place_id)
+        .all()
+    )
+    saved_map = {s[0]: s[1] for s in saved_count}
+    
+    for p in places:
+        rc = review_map.get(p.id, 0)
+        sc = saved_map.get(p.id, 0)
+        p.review_count = rc
+        p.saved_count = sc
+        
+        score = p.average_rating * math.log10(rc + 1) if rc > 0 else (p.average_rating or 0.0)
+        p.popularity_score = round(score, 2)
+        
+    return places
+
+
 def get_places(db: Session, skip: int = 0, limit: int = 100):
-    return db.query(models.Place).order_by(models.Place.id.desc()).offset(skip).limit(limit).all()
+    items = db.query(models.Place).order_by(models.Place.id.desc()).offset(skip).limit(limit).all()
+    return _enrich_places_with_stats(db, items)
 
 def get_places_paginated(db: Session, page: int = 1, page_size: int = 20):
     total = db.query(models.Place).count()
@@ -91,7 +130,84 @@ def get_places_paginated(db: Session, page: int = 1, page_size: int = 20):
         .limit(page_size)
         .all()
     )
+    items = _enrich_places_with_stats(db, items)
     return items, total
+
+
+def search_places(
+    db: Session,
+    q: str = "",
+    category: str = None,
+    city: str = None,
+    page: int = 1,
+    page_size: int = 20,
+):
+    """Mekan arama — isim, kategori, şehir filtreleri."""
+    query = db.query(models.Place)
+    if q:
+        query = query.filter(models.Place.name.ilike(f"%{q}%"))
+    if category:
+        query = query.filter(models.Place.category == category)
+    if city:
+        query = query.filter(models.Place.city.ilike(f"%{city}%"))
+    total = query.count()
+    offset = (page - 1) * page_size
+    items = query.order_by(models.Place.average_rating.desc()).offset(offset).limit(page_size).all()
+    items = _enrich_places_with_stats(db, items)
+    return items, total
+
+
+def get_nearby_places(
+    db: Session,
+    lat: float,
+    lng: float,
+    radius_km: float = 5.0,
+    page: int = 1,
+    page_size: int = 20,
+):
+    """
+    Yakındaki mekanları döndürür (Haversine formülü ile).
+    SQLite'da trigonometrik fonksiyon olmadığı için Python'da filtreler.
+    """
+    import math
+
+    all_places = db.query(models.Place).filter(
+        models.Place.latitude.isnot(None),
+        models.Place.longitude.isnot(None),
+    ).all()
+
+    def haversine_km(lat1, lon1, lat2, lon2):
+        R = 6371.0
+        p1, p2 = math.radians(lat1), math.radians(lat2)
+        dp = math.radians(lat2 - lat1)
+        dl = math.radians(lon2 - lon1)
+        a = math.sin(dp/2)**2 + math.cos(p1) * math.cos(p2) * math.sin(dl/2)**2
+        return R * 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
+
+    nearby = []
+    for p in all_places:
+        d = haversine_km(lat, lng, p.latitude, p.longitude)
+        if d <= radius_km:
+            p._distance_km = round(d, 2)
+            nearby.append(p)
+
+    nearby.sort(key=lambda p: p._distance_km)
+    total = len(nearby)
+    offset = (page - 1) * page_size
+    paginated = nearby[offset : offset + page_size]
+    paginated = _enrich_places_with_stats(db, paginated)
+    return paginated, total
+
+
+def get_popular_places(db: Session, page: int = 1, page_size: int = 20):
+    """Popüler mekanlar — puan x yorum bazlı sıralama."""
+    import math
+    all_places = db.query(models.Place).all()
+    all_places = _enrich_places_with_stats(db, all_places)
+    all_places.sort(key=lambda p: p.popularity_score, reverse=True)
+    total = len(all_places)
+    offset = (page - 1) * page_size
+    return all_places[offset : offset + page_size], total
 
 def create_place(db: Session, place: schemas.PlaceCreate):
     db_place = models.Place(
@@ -116,7 +232,11 @@ def create_place(db: Session, place: schemas.PlaceCreate):
     return db_place
 
 def get_place_by_id(db: Session, place_id: int):
-    return db.query(models.Place).filter(models.Place.id == place_id).first()
+    place = db.query(models.Place).filter(models.Place.id == place_id).first()
+    if place:
+        places_enriched = _enrich_places_with_stats(db, [place])
+        return places_enriched[0]
+    return None
 
 def delete_place(db: Session, place_id: int):
     """Mekan siler (ilişkili yorumlar cascade ile silinebilir)."""
@@ -642,3 +762,188 @@ def get_user_stats(db: Session, user_id: int) -> dict:
         "favorite_category": favorite_category,
         "favorite_region": favorite_region,
     }
+
+
+# --- KAYDETME (SAVED / BOOKMARK) ---
+
+def toggle_save_place(db: Session, user_id: int, place_id: int) -> bool:
+    """Mekanı kaydet / kaydı kaldır. Returns is_now_saved."""
+    existing = db.query(models.SavedPlace).filter(
+        models.SavedPlace.user_id == user_id,
+        models.SavedPlace.place_id == place_id,
+    ).first()
+    if existing:
+        db.delete(existing)
+        db.commit()
+        return False
+    saved = models.SavedPlace(user_id=user_id, place_id=place_id)
+    db.add(saved)
+    db.commit()
+    return True
+
+
+def toggle_save_post(db: Session, user_id: int, post_id: int) -> bool:
+    """Postu kaydet / kaydı kaldır. Returns is_now_saved."""
+    existing = db.query(models.SavedPost).filter(
+        models.SavedPost.user_id == user_id,
+        models.SavedPost.post_id == post_id,
+    ).first()
+    if existing:
+        db.delete(existing)
+        db.commit()
+        return False
+    saved = models.SavedPost(user_id=user_id, post_id=post_id)
+    db.add(saved)
+    db.commit()
+    return True
+
+
+def get_saved_places(db: Session, user_id: int, page: int = 1, page_size: int = 20):
+    """Kullanıcının kaydettiği mekanları döndürür (en yeniden eskiye)."""
+    q = db.query(models.SavedPlace).filter(
+        models.SavedPlace.user_id == user_id
+    ).order_by(models.SavedPlace.created_at.desc())
+    total = q.count()
+    items = q.offset((page - 1) * page_size).limit(page_size).all()
+    places = []
+    for sp in items:
+        place = get_place_by_id(db, sp.place_id)
+        if place:
+            places.append(place)
+    return places, total
+
+
+def get_saved_posts(db: Session, user_id: int, page: int = 1, page_size: int = 20):
+    """Kullanıcının kaydettiği postları döndürür (en yeniden eskiye)."""
+    q = db.query(models.SavedPost).filter(
+        models.SavedPost.user_id == user_id
+    ).order_by(models.SavedPost.created_at.desc())
+    total = q.count()
+    items = q.offset((page - 1) * page_size).limit(page_size).all()
+    posts = []
+    for sp in items:
+        post = get_post_by_id(db, sp.post_id)
+        if post:
+            posts.append(post)
+    return posts, total
+
+
+def is_place_saved(db: Session, user_id: int, place_id: int) -> bool:
+    return db.query(models.SavedPlace).filter(
+        models.SavedPlace.user_id == user_id,
+        models.SavedPlace.place_id == place_id,
+    ).first() is not None
+
+
+def is_post_saved(db: Session, user_id: int, post_id: int) -> bool:
+    return db.query(models.SavedPost).filter(
+        models.SavedPost.user_id == user_id,
+        models.SavedPost.post_id == post_id,
+    ).first() is not None
+
+
+# --- YORUM SİLME ---
+
+def delete_comment(db: Session, comment_id: int, user_id: int) -> bool:
+    """Kendi yorumunu sil. Post comment_count'u azalt."""
+    comment = db.query(models.PostComment).filter(
+        models.PostComment.id == comment_id,
+        models.PostComment.user_id == user_id,
+    ).first()
+    if not comment:
+        return False
+    post = db.query(models.Post).filter(models.Post.id == comment.post_id).first()
+    if post and post.comment_count > 0:
+        post.comment_count -= 1
+    db.delete(comment)
+    db.commit()
+    return True
+
+
+# --- RAPOR ---
+
+def create_report(db: Session, reporter_id: int, target_type: str, target_id: int, reason: str, description: str = None):
+    """Rapor oluştur (post, comment, user, match_profile)."""
+    report = models.Report(
+        reporter_id=reporter_id,
+        target_type=target_type,
+        target_id=target_id,
+        reason=reason,
+        description=description,
+    )
+    db.add(report)
+    db.commit()
+    db.refresh(report)
+    return report
+
+
+# --- ENGELLEME ---
+
+def toggle_block_user(db: Session, blocker_id: int, blocked_id: int) -> bool:
+    """Kullanıcıyı engelle / engeli kaldır. Returns is_now_blocked."""
+    existing = db.query(models.UserBlock).filter(
+        models.UserBlock.blocker_id == blocker_id,
+        models.UserBlock.blocked_id == blocked_id,
+    ).first()
+    if existing:
+        db.delete(existing)
+        db.commit()
+        return False
+    block = models.UserBlock(blocker_id=blocker_id, blocked_id=blocked_id)
+    db.add(block)
+    db.commit()
+    return True
+
+
+def is_blocked(db: Session, blocker_id: int, blocked_id: int) -> bool:
+    return db.query(models.UserBlock).filter(
+        models.UserBlock.blocker_id == blocker_id,
+        models.UserBlock.blocked_id == blocked_id,
+    ).first() is not None
+
+
+def get_blocked_user_ids(db: Session, user_id: int) -> list[int]:
+    """Kullanıcının engellediği tüm ID'leri döndürür."""
+    rows = db.query(models.UserBlock.blocked_id).filter(
+        models.UserBlock.blocker_id == user_id
+    ).all()
+    return [r[0] for r in rows]
+
+
+# --- UNMATCH ---
+
+def unmatch_conversation(db: Session, conversation_id: int, user_id: int) -> bool:
+    """Eşleşme konuşmasını sil (unmatch). Mesajlar cascade ile silinir."""
+    conv = db.query(models.MatchConversation).filter(
+        models.MatchConversation.id == conversation_id,
+    ).first()
+    if not conv:
+        return False
+    if conv.user1_id != user_id and conv.user2_id != user_id:
+        return False
+
+    # MatchLike kayıtlarını da sil
+    other_id = conv.user2_id if conv.user1_id == user_id else conv.user1_id
+    db.query(models.MatchLike).filter(
+        ((models.MatchLike.from_user_id == user_id) & (models.MatchLike.to_user_id == other_id)) |
+        ((models.MatchLike.from_user_id == other_id) & (models.MatchLike.to_user_id == user_id))
+    ).delete(synchronize_session=False)
+
+    db.delete(conv)
+    db.commit()
+    return True
+
+
+# --- MEKAN GÜNCELLEME ---
+
+def update_place(db: Session, place_id: int, data: dict):
+    """Mekan bilgilerini günceller."""
+    place = db.query(models.Place).filter(models.Place.id == place_id).first()
+    if not place:
+        return None
+    for key, value in data.items():
+        if hasattr(place, key) and value is not None:
+            setattr(place, key, value)
+    db.commit()
+    db.refresh(place)
+    return place

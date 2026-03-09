@@ -19,6 +19,7 @@ class User(Base):
 
     role = Column(String, default="standard")
     is_active = Column(Boolean, default=True)
+    is_email_verified = Column(Boolean, default=False)
     push_token = Column(String, nullable=True)  # ExponentPushToken[xxx]
     push_token_updated_at = Column(DateTime(timezone=True), nullable=True)
 
@@ -33,6 +34,92 @@ class User(Base):
     notifications = relationship("Notification", foreign_keys="Notification.user_id", back_populates="user")
     stories = relationship("Story", back_populates="user")
     match_profile = relationship("MatchProfile", back_populates="user", uselist=False)
+    email_verifications = relationship("EmailVerification", back_populates="user", cascade="all, delete-orphan")
+    password_resets = relationship("PasswordReset", back_populates="user", cascade="all, delete-orphan")
+    saved_places = relationship("SavedPlace", back_populates="user", cascade="all, delete-orphan")
+    saved_posts = relationship("SavedPost", back_populates="user", cascade="all, delete-orphan")
+
+class EmailVerification(Base):
+    __tablename__ = "email_verifications"
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
+    verification_code = Column(String, nullable=False)
+    expires_at = Column(DateTime(timezone=True), nullable=False)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    user = relationship("User", back_populates="email_verifications")
+
+class PasswordReset(Base):
+    __tablename__ = "password_resets"
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
+    reset_code = Column(String, nullable=False)
+    expires_at = Column(DateTime(timezone=True), nullable=False)
+    attempts = Column(Integer, default=0)  # Brute-force koruması: max 5 deneme
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    user = relationship("User", back_populates="password_resets")
+
+
+class SavedPlace(Base):
+    """Kullanıcının kaydettiği mekanlar (bookmark)"""
+    __tablename__ = "saved_places"
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
+    place_id = Column(Integer, ForeignKey("places.id", ondelete="CASCADE"), nullable=False, index=True)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    user = relationship("User", back_populates="saved_places")
+    place = relationship("Place")
+    __table_args__ = (
+        UniqueConstraint("user_id", "place_id", name="uq_saved_place_user_place"),
+    )
+
+
+class SavedPost(Base):
+    """Kullanıcının kaydettiği postlar (bookmark)"""
+    __tablename__ = "saved_posts"
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
+    post_id = Column(Integer, ForeignKey("posts.id", ondelete="CASCADE"), nullable=False, index=True)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    user = relationship("User", back_populates="saved_posts")
+    post = relationship("Post")
+    __table_args__ = (
+        UniqueConstraint("user_id", "post_id", name="uq_saved_post_user_post"),
+    )
+
+
+class Report(Base):
+    """Rapor — post, yorum veya kullanıcı raporlama"""
+    __tablename__ = "reports"
+    id = Column(Integer, primary_key=True, index=True)
+    reporter_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
+    target_type = Column(String, nullable=False)  # "post", "comment", "user", "match_profile"
+    target_id = Column(Integer, nullable=False)
+    reason = Column(String, nullable=False)  # "spam", "inappropriate", "harassment", "other"
+    description = Column(Text, nullable=True)
+    status = Column(String, default="pending")  # "pending", "reviewed", "dismissed"
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    reporter = relationship("User", foreign_keys=[reporter_id])
+
+
+class UserBlock(Base):
+    """Kullanıcı engelleme"""
+    __tablename__ = "user_blocks"
+    id = Column(Integer, primary_key=True, index=True)
+    blocker_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
+    blocked_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    blocker = relationship("User", foreign_keys=[blocker_id])
+    blocked = relationship("User", foreign_keys=[blocked_id])
+    __table_args__ = (
+        UniqueConstraint("blocker_id", "blocked_id", name="uq_user_block"),
+    )
+
 
 class Place(Base):
     __tablename__ = "places"
@@ -252,9 +339,9 @@ class Story(Base):
 class Notification(Base):
     __tablename__ = "notifications"
     id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, ForeignKey("users.id"), nullable=False, index=True)
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
     type = Column(String, nullable=False)  # like, comment, follow, mention
-    actor_id = Column(Integer, ForeignKey("users.id"), nullable=False)
+    actor_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=True)
     post_id = Column(Integer, ForeignKey("posts.id", ondelete="SET NULL"), nullable=True)
     is_read = Column(Boolean, default=False, index=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now(), index=True)

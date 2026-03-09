@@ -33,6 +33,7 @@ import { lightImpact } from "@/src/utils/haptics";
 import { getAllPlaces } from "@/src/services/mekanService";
 import type { Place } from "@/src/services/mekanService";
 import type { Post } from "@/src/services/feedService";
+import { getSavedPlaces, getSavedPosts } from "@/src/services/savedService";
 
 export default function SavedScreen() {
   const { colors } = useTheme();
@@ -58,10 +59,10 @@ export default function SavedScreen() {
     return unsubscribe;
   }, [navigation]);
 
-  // API'den tüm mekanları çek ve cache'le
+  // API'den tüm mekanları çek ve cache'le + Backend'den kayıtlıları senkronize et
   useEffect(() => {
     let cancelled = false;
-    const loadPlaces = async () => {
+    const loadData = async () => {
       try {
         const places = await getAllPlaces();
         if (cancelled) return;
@@ -70,11 +71,50 @@ export default function SavedScreen() {
           placesMap[String(place.id)] = place;
         });
         setPlacesData(placesMap);
+
+        // Backend Senkronizasyonu (İlk Yükleme)
+        try {
+          // Çoklu istekleri paralel at (kayıtlı mekanlar + kayıtlı postlar)
+          const [savedPlacesRes, savedPostsRes] = await Promise.all([
+            getSavedPlaces(1, 50),
+            getSavedPosts(1, 50)
+          ]);
+
+          if (cancelled) return;
+          const store = useAppStore.getState();
+
+          // Mekanları sync et
+          savedPlacesRes.items.forEach(p => {
+            const strId = String(p.id);
+            if (!store.isSaved(strId)) {
+              store.toggleSave({
+                id: strId,
+                name: p.name,
+                subtitle: p.address || "",
+                photo_url: p.photo_url,
+                category: p.category,
+                tags: p.tags,
+              });
+            }
+          });
+
+          // Postları sync et
+          savedPostsRes.items.forEach(sp => {
+            const strId = String(sp.id);
+            if (!store.isPostSaved(strId)) {
+              store.toggleSavePost(sp as any);
+            }
+          });
+
+        } catch (syncErr) {
+          logger.warn("[SavedScreen] Backend sync failed", syncErr);
+        }
+
       } catch (error) {
         if (!cancelled) logger.error("Error loading places:", error);
       }
     };
-    loadPlaces();
+    loadData();
     return () => {
       cancelled = true;
     };

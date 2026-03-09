@@ -21,6 +21,7 @@ import {
   Image,
   Alert,
   Keyboard,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { BlurView } from 'expo-blur';
@@ -29,19 +30,24 @@ import { Button, Input } from '@/src/components/ui';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
 import { lightImpact, success } from '@/src/utils/haptics';
 import { getAllPlaces } from '@/src/services/mekanService';
-import { registerUser } from '@/src/services/authService';
+import { registerUser, googleLogin, appleLogin } from '@/src/services/authService';
 import { useAuthStore } from '@/src/store/useAuthStore';
 import { API_BASE_URL } from '@/src/constants/api';
+import * as AppleAuthentication from 'expo-apple-authentication';
+import * as WebBrowser from 'expo-web-browser';
+import * as Google from 'expo-auth-session/providers/google';
+
+WebBrowser.maybeCompleteAuthSession();
 
 const { width, height } = Dimensions.get('window');
 
 const FALLBACK_PLACE_IMAGES = [
+  'https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=1200',
+  'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=1200', // Aydınlık kahveci
+  'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1200', // Aydınlık bir kafe içi
   'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200',
   'https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=1200',
-  'https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=1200',
-  'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200',
-  'https://images.unsplash.com/photo-1552566626-52f8b828add9?w=1200',
-  'https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1200',
+  'https://images.unsplash.com/photo-1521017430209-a6cb9156a64b?w=1200', // Işıklı iç mekan
 ];
 
 const CAROUSEL_INTERVAL_MS = 4500;
@@ -54,6 +60,7 @@ export default function RegisterScreen() {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [birthDate, setBirthDate] = useState('');
   const [loading, setLoading] = useState(false);
+  const [showBirthDateInfo, setShowBirthDateInfo] = useState(false);
   const [errors, setErrors] = useState<{
     fullName?: string;
     email?: string;
@@ -61,37 +68,65 @@ export default function RegisterScreen() {
     confirmPassword?: string;
     birthDate?: string;
   }>({});
-  const [backgroundImages, setBackgroundImages] = useState<string[]>(FALLBACK_PLACE_IMAGES);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const fadeAnim = useRef(new Animated.Value(1)).current;
   const isSubmittingRef = useRef(false);
 
-  useEffect(() => {
-    let cancelled = false;
-    getAllPlaces()
-      .then((places) => {
-        if (cancelled) return;
-        const urls = places
-          .map((p) => p.photo_url)
-          .filter((url): url is string => !!url)
-          .map((url) => (url.startsWith('http') ? url : `${API_BASE_URL.replace(/\/$/, '')}${url.startsWith('/') ? '' : '/'}${url}`));
-        if (urls.length >= 5) setBackgroundImages(urls.slice(0, 12));
-      })
-      .catch(() => { });
-    return () => { cancelled = true; };
-  }, []);
+  // Google Auth Setup
+  const [request, response, promptAsync] = Google.useAuthRequest({
+    clientId: 'TODO_YOUR_GOOGLE_CLIENT_ID_WEB',
+    iosClientId: 'TODO_YOUR_GOOGLE_CLIENT_ID_IOS',
+    androidClientId: 'TODO_YOUR_GOOGLE_CLIENT_ID_ANDROID',
+  });
 
-  const imageCount = Math.max(1, backgroundImages.length);
   useEffect(() => {
-    const next = () => {
-      Animated.timing(fadeAnim, { toValue: 0.3, duration: 400, useNativeDriver: true }).start(() => {
-        setCurrentImageIndex((i) => (i + 1) % imageCount);
-        Animated.timing(fadeAnim, { toValue: 1, duration: 600, useNativeDriver: true }).start();
+    if (response?.type === 'success' && response.authentication) {
+      handleGoogleSuccess(response.authentication.idToken || response.authentication.accessToken);
+    }
+  }, [response]);
+
+  const handleGoogleSuccess = async (token: string) => {
+    if (!token) return;
+    setLoading(true);
+    try {
+      const data = await googleLogin(token);
+      useAuthStore.getState().setTokens(data.access_token, data.refresh_token);
+      useAuthStore.getState().setUser(data.user);
+      success();
+      router.replace('/(tabs)');
+    } catch (err: any) {
+      Alert.alert('Giriş Hatası', err.message || 'Google ile giriş başarısız oldu.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const signInWithApple = async () => {
+    try {
+      const credential = await AppleAuthentication.signInAsync({
+        requestedScopes: [
+          AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
+          AppleAuthentication.AppleAuthenticationScope.EMAIL,
+        ],
       });
-    };
-    const t = setInterval(next, CAROUSEL_INTERVAL_MS);
-    return () => clearInterval(t);
-  }, [imageCount, fadeAnim]);
+      if (credential.identityToken) {
+        setLoading(true);
+        const data = await appleLogin(credential.identityToken);
+        useAuthStore.getState().setTokens(data.access_token, data.refresh_token);
+        useAuthStore.getState().setUser(data.user);
+        success();
+        router.replace('/(tabs)');
+      }
+    } catch (e: any) {
+      if (e.code === 'ERR_REQUEST_CANCELED') {
+        // Kullanıcı iptal etti
+      } else {
+        Alert.alert('Giriş Hatası', 'Apple ile giriş başarısız oldu.');
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
 
   const validateForm = useCallback((): boolean => {
     const newErrors: typeof errors = {};
@@ -101,6 +136,9 @@ export default function RegisterScreen() {
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) newErrors.email = 'Geçerli bir e-posta adresi girin';
     if (!password.trim()) newErrors.password = 'Şifre gereklidir';
     else if (password.length < 8) newErrors.password = 'Şifre en az 8 karakter olmalıdır';
+    else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*([^\w\s]|_))/.test(password)) {
+      newErrors.password = 'Büyük harf, küçük harf, rakam ve özel harf girmelisin';
+    }
     if (!confirmPassword.trim()) newErrors.confirmPassword = 'Şifre tekrarı gereklidir';
     else if (password !== confirmPassword) newErrors.confirmPassword = 'Şifreler eşleşmiyor';
     if (!birthDate.trim()) newErrors.birthDate = 'Doğum tarihi gereklidir';
@@ -157,7 +195,7 @@ export default function RegisterScreen() {
       useAuthStore.getState().setTokens(data.access_token, data.refresh_token);
       useAuthStore.getState().setUser(data.user);
       success();
-      router.replace('/(tabs)');
+      router.replace('/verify-email');
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : 'Kayıt başarısız. Lütfen tekrar deneyin.';
       setErrors({ email: msg });
@@ -169,22 +207,23 @@ export default function RegisterScreen() {
 
   const handleSocialRegister = useCallback((provider: string) => {
     lightImpact();
-    Alert.alert('Bilgi', `${provider} ile kayıt yakında eklenecek.`, [{ text: 'Tamam' }]);
-  }, []);
+    if (provider === 'Apple') {
+      signInWithApple();
+    } else if (provider === 'Google') {
+      promptAsync();
+    }
+  }, [promptAsync]);
 
   const clearFieldError = useCallback((field: keyof typeof errors) => {
     setErrors((prev) => (prev[field] ? { ...prev, [field]: undefined } : prev));
   }, []);
 
-  const currentImage = backgroundImages[Math.min(currentImageIndex, imageCount - 1)] ?? FALLBACK_PLACE_IMAGES[0];
+  const currentImage = FALLBACK_PLACE_IMAGES[0];
 
   return (
     <View style={styles.container}>
       <View style={StyleSheet.absoluteFill}>
         <Image source={{ uri: currentImage }} style={styles.backgroundImage} resizeMode="cover" />
-        <Animated.View style={[StyleSheet.absoluteFill, { opacity: fadeAnim }]}>
-          <Image source={{ uri: currentImage }} style={styles.backgroundImage} resizeMode="cover" />
-        </Animated.View>
       </View>
       <LinearGradient
         colors={['rgba(0,0,0,0.2)', 'rgba(0,0,0,0.5)', 'rgba(0,0,0,0.88)']}
@@ -204,139 +243,140 @@ export default function RegisterScreen() {
             keyboardShouldPersistTaps="handled"
             showsVerticalScrollIndicator={false}
           >
-            <View style={styles.content} pointerEvents="box-none">
-              <View style={styles.topBlock}>
-                <View style={styles.header}>
-                  <Text style={styles.brandTitle}>ASEMOS</Text>
-                  <Text style={styles.tagline}>Hesap oluştur, mekanları keşfet</Text>
-                </View>
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+              <View style={{ flex: 1 }}>
+                <View style={styles.content} pointerEvents="box-none">
+                  <View style={styles.topBlock}>
+                    {/* Header (isim ve slogan) kaldırıldı */}
 
-                <BlurView intensity={90} tint="dark" style={styles.card}>
-                  <View style={styles.cardInner}>
-                    <Input
-                      variant="onDark"
-                      label="Ad Soyad"
-                      placeholder="Adınız Soyadınız"
-                      value={fullName}
-                      onChangeText={(t) => { setFullName(t); clearFieldError('fullName'); }}
-                      autoCapitalize="words"
-                      error={errors.fullName}
-                      containerStyle={styles.inputContainer}
-                    />
-                    <Input
-                      variant="onDark"
-                      label="E-posta"
-                      placeholder="ornek@email.com"
-                      value={email}
-                      onChangeText={(t) => { setEmail(t); clearFieldError('email'); }}
-                      keyboardType="email-address"
-                      autoCapitalize="none"
-                      autoComplete="email"
-                      error={errors.email}
-                      containerStyle={styles.inputContainer}
-                    />
-                    <Input
-                      variant="onDark"
-                      label="Şifre"
-                      placeholder="En az 8 karakter"
-                      value={password}
-                      onChangeText={(t) => {
-                        setPassword(t);
-                        clearFieldError('password');
-                        if (confirmPassword && t === confirmPassword) clearFieldError('confirmPassword');
-                      }}
-                      secureTextEntry
-                      autoComplete="password-new"
-                      error={errors.password}
-                      containerStyle={styles.inputContainer}
-                    />
-                    <Input
-                      variant="onDark"
-                      label="Şifre Tekrar"
-                      placeholder="Şifreni tekrar gir"
-                      value={confirmPassword}
-                      onChangeText={(t) => { setConfirmPassword(t); clearFieldError('confirmPassword'); }}
-                      secureTextEntry
-                      autoComplete="password-new"
-                      error={errors.confirmPassword}
-                      containerStyle={styles.inputContainer}
-                    />
-                    <Input
-                      variant="onDark"
-                      label="Doğum Tarihi"
-                      placeholder="GG/AA/YYYY"
-                      value={birthDate}
-                      onFocus={() => {
-                        Alert.alert(
-                          'Önemli Bilgilendirme',
-                          '\u2022 14 yaş ve altındaysanız uygulamaya kayıt olamazsınız.\n\u2022 18 yaşın altındaysanız eşleşme ekranına erişemezsiniz.\n\u2022 18 yaş üstündeyseniz yaşınız bu tarihten otomatik hesaplanır.\n\u2022 Doğum tarihinizi doğru girdiğinizden emin olun, sonradan değiştirilemez.',
-                          [{ text: 'Anladım' }]
-                        );
-                      }}
-                      onChangeText={(t: string) => {
-                        // Auto-format: add slashes
-                        let cleaned = t.replace(/[^0-9/]/g, '');
-                        // Remove extra slashes
-                        const digits = cleaned.replace(/\//g, '');
-                        let formatted = '';
-                        for (let i = 0; i < digits.length && i < 8; i++) {
-                          if (i === 2 || i === 4) formatted += '/';
-                          formatted += digits[i];
-                        }
-                        setBirthDate(formatted);
-                        clearFieldError('birthDate');
-                      }}
-                      keyboardType="number-pad"
-                      error={errors.birthDate}
-                      containerStyle={styles.inputContainer}
-                      maxLength={10}
-                    />
-                    <Text style={styles.birthDateInfo}>
-                      ℹ️ Uygulamaya kayıt olmak için 14 yaşından büyük olmanız gerekmektedir. Eğer 18 yaşının altındaysanız, uygulama içindeki kullanımı zorunlu olmayan eşleşme ekranına erişemezsiniz. 18 yaşının üstünde iseniz yaş bilginiz bu tarihten hesaplanacaktır.
-                    </Text>
-                    <Button
-                      variant="primary"
-                      size="large"
-                      onPress={handleRegister}
-                      loading={loading}
-                      disabled={loading}
-                      style={styles.registerButton}
-                    >
-                      Kayıt Ol
-                    </Button>
+                    <BlurView intensity={90} tint="dark" style={styles.card}>
+                      <View style={styles.cardInner}>
+                        <Input
+                          variant="onDark"
+                          label="Ad Soyad"
+                          placeholder="Adınız Soyadınız"
+                          value={fullName}
+                          onChangeText={(t) => { setFullName(t); clearFieldError('fullName'); }}
+                          autoCapitalize="words"
+                          error={errors.fullName}
+                          containerStyle={styles.inputContainer}
+                        />
+                        <Input
+                          variant="onDark"
+                          label="E-posta"
+                          placeholder="ornek@email.com"
+                          value={email}
+                          onChangeText={(t) => { setEmail(t); clearFieldError('email'); }}
+                          keyboardType="email-address"
+                          autoCapitalize="none"
+                          autoComplete="email"
+                          error={errors.email}
+                          containerStyle={styles.inputContainer}
+                        />
+                        <Input
+                          variant="onDark"
+                          label="Şifre"
+                          placeholder="Örn: UcD.7491"
+                          value={password}
+                          onChangeText={(t) => {
+                            setPassword(t);
+                            clearFieldError('password');
+                            if (confirmPassword && t === confirmPassword) clearFieldError('confirmPassword');
+                          }}
+                          secureTextEntry
+                          autoComplete="password-new"
+                          error={errors.password}
+                          containerStyle={styles.inputContainer}
+                        />
+                        <Input
+                          variant="onDark"
+                          label="Şifre Tekrar"
+                          placeholder="Şifreni tekrar gir"
+                          value={confirmPassword}
+                          onChangeText={(t) => { setConfirmPassword(t); clearFieldError('confirmPassword'); }}
+                          secureTextEntry
+                          autoComplete="password-new"
+                          error={errors.confirmPassword}
+                          containerStyle={styles.inputContainer}
+                        />
+                        <Input
+                          variant="onDark"
+                          label="Doğum Tarihi"
+                          placeholder="GG/AA/YYYY"
+                          value={birthDate}
+                          onFocus={() => {
+                            setShowBirthDateInfo(true);
+                          }}
+                          onBlur={() => {
+                            setShowBirthDateInfo(false);
+                          }}
+                          onChangeText={(t: string) => {
+                            // Auto-format: add slashes
+                            let cleaned = t.replace(/[^0-9/]/g, '');
+                            // Remove extra slashes
+                            const digits = cleaned.replace(/\//g, '');
+                            let formatted = '';
+                            for (let i = 0; i < digits.length && i < 8; i++) {
+                              if (i === 2 || i === 4) formatted += '/';
+                              formatted += digits[i];
+                            }
+                            setBirthDate(formatted);
+                            clearFieldError('birthDate');
+                          }}
+                          keyboardType="number-pad"
+                          error={errors.birthDate}
+                          containerStyle={styles.inputContainer}
+                          maxLength={10}
+                        />
+                        {showBirthDateInfo && (
+                          <Text style={styles.birthDateInfo}>
+                            ℹ️ Uygulamaya kayıt olmak için 14 yaşından büyük olmanız gerekmektedir. Eğer 18 yaşının altındaysanız, uygulama içindeki kullanımı zorunlu olmayan eşleşme ekranına erişemezsiniz. 18 yaşının üstünde iseniz yaş bilginiz bu tarihten hesaplanacaktır.
+                          </Text>
+                        )}
+                        <Button
+                          variant="primary"
+                          size="large"
+                          onPress={handleRegister}
+                          loading={loading}
+                          disabled={loading}
+                          style={styles.registerButton}
+                        >
+                          Kayıt Ol
+                        </Button>
 
-                    <View style={styles.divider}>
-                      <View style={styles.dividerLine} />
-                      <Text style={styles.dividerLabel}>veya</Text>
-                      <View style={styles.dividerLine} />
-                    </View>
-                    <View style={styles.socialRow}>
-                      <TouchableOpacity onPress={() => handleSocialRegister('Google')} style={styles.socialBtnGoogle}>
-                        <Text style={styles.socialIconG}>G</Text>
-                        <Text style={styles.socialBtnTextGoogle}>Google</Text>
-                      </TouchableOpacity>
-                      <TouchableOpacity onPress={() => handleSocialRegister('Apple')} style={styles.socialBtnApple}>
-                        <IconSymbol name="apple.logo" size={20} color="#fff" />
-                        <Text style={styles.socialBtnTextWhite}>Apple</Text>
-                      </TouchableOpacity>
-                    </View>
+                        <View style={styles.divider}>
+                          <View style={styles.dividerLine} />
+                          <Text style={styles.dividerLabel}>veya</Text>
+                          <View style={styles.dividerLine} />
+                        </View>
+                        <View style={styles.socialRow}>
+                          <TouchableOpacity onPress={() => handleSocialRegister('Google')} style={styles.socialBtnGoogle}>
+                            <Text style={styles.socialIconG}>G</Text>
+                            <Text style={styles.socialBtnTextGoogle}>Google</Text>
+                          </TouchableOpacity>
+                          <TouchableOpacity onPress={() => handleSocialRegister('Apple')} style={styles.socialBtnApple}>
+                            <IconSymbol name="apple.logo" size={20} color="#fff" />
+                            <Text style={styles.socialBtnTextWhite}>Apple</Text>
+                          </TouchableOpacity>
+                        </View>
+                      </View>
+                    </BlurView>
                   </View>
-                </BlurView>
+                </View>
               </View>
-            </View>
+            </TouchableWithoutFeedback>
           </ScrollView>
+          <TouchableOpacity
+            style={[styles.footerStatic, { paddingBottom: Math.max(16, insets.bottom + 8) }]}
+            onPress={() => { Keyboard.dismiss(); lightImpact(); router.back(); }}
+            activeOpacity={0.8}
+          >
+            <Text style={styles.footerLabel}>Zaten hesabın var mı? </Text>
+            <Text style={styles.footerLink}>Giriş Yap</Text>
+          </TouchableOpacity>
         </KeyboardAvoidingView>
-
-        <TouchableOpacity
-          style={[styles.footerFixed, { paddingBottom: 16 + insets.bottom }]}
-          onPress={() => { Keyboard.dismiss(); lightImpact(); router.back(); }}
-          activeOpacity={0.8}
-        >
-          <Text style={styles.footerLabel}>Zaten hesabın var mı? </Text>
-          <Text style={styles.footerLink}>Giriş Yap</Text>
-        </TouchableOpacity>
       </SafeAreaView>
-    </View>
+    </View >
   );
 }
 
@@ -345,12 +385,12 @@ const styles = StyleSheet.create({
   safeArea: { flex: 1 },
   keyboardView: { flex: 1 },
   scrollView: { flex: 1 },
-  scrollContent: { flexGrow: 1, paddingBottom: 24 },
+  scrollContent: { flexGrow: 1, paddingBottom: 60 },
   content: {
     flex: 1,
     paddingHorizontal: 24,
     paddingTop: 28,
-    paddingBottom: 56,
+    paddingBottom: 40,
   },
   topBlock: { flex: 1 },
   backgroundImage: { width, height },
@@ -398,16 +438,17 @@ const styles = StyleSheet.create({
     elevation: 16,
   },
   cardInner: { padding: 20, backgroundColor: 'rgba(0,0,0,0.35)' },
-  inputContainer: { marginBottom: 12 },
+  inputContainer: { marginBottom: 14 },
   birthDateInfo: {
     fontSize: 12,
-    color: 'rgba(255,255,255,0.6)',
-    lineHeight: 17,
-    marginBottom: 14,
-    marginTop: -4,
-    paddingHorizontal: 4,
+    color: 'rgba(255,255,255,0.8)',
+    lineHeight: 16,
+    marginBottom: 16,
+    marginTop: -8, // input'un hemen dibinde olması için
+    paddingHorizontal: 6,
+    fontStyle: 'italic',
   },
-  registerButton: { marginTop: 4 },
+  registerButton: { marginTop: 8 },
   divider: { flexDirection: 'row', alignItems: 'center', marginVertical: 18 },
   dividerLine: { flex: 1, height: 1, backgroundColor: 'rgba(255,255,255,0.25)' },
   dividerLabel: { marginHorizontal: 18, fontSize: 13, fontWeight: '600', color: 'rgba(255,255,255,0.7)', letterSpacing: 0.8 },
@@ -435,15 +476,13 @@ const styles = StyleSheet.create({
   socialIconG: { fontSize: 18, fontWeight: '700', color: '#4285F4' },
   socialBtnTextGoogle: { fontSize: 16, fontWeight: '600', color: '#1a1a1a' },
   socialBtnTextWhite: { fontSize: 16, fontWeight: '600', color: '#fff' },
-  footerFixed: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    bottom: 0,
+  footerStatic: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     paddingTop: 16,
+    paddingHorizontal: 24,
+    backgroundColor: 'transparent',
   },
   footerLabel: { fontSize: 16, color: 'rgba(255,255,255,0.9)' },
   footerLink: { fontSize: 16, fontWeight: '700', color: '#ffffff', textDecorationLine: 'underline', letterSpacing: 0.3 },

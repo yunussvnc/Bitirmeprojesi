@@ -61,7 +61,7 @@ PLACES = [
         "longitude": 29.0267,
         "price_range": 1,
         "features": "traditional,quiet,historic",
-        "photo_url": "https://images.unsplash.com/photo-1514432324607-a09d9b4aefda?w=800",
+        "photo_url": "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800",
     },
     {
         "name": "Walter's Coffee Roastery - Moda",
@@ -231,7 +231,7 @@ PLACES = [
         "longitude": 28.9758,
         "price_range": 3,
         "features": "organic,quiet,romantic,seasonal",
-        "photo_url": "https://images.unsplash.com/photo-1550966871-3ed3cdb51f3a?w=800",
+        "photo_url": "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=800",
     },
     {
         "name": "Gram - Karaköy",
@@ -365,7 +365,7 @@ PLACES = [
         "longitude": 28.9752,
         "price_range": 2,
         "features": "cocktails,lively,friends,classic",
-        "photo_url": "https://images.unsplash.com/photo-1575444758702-4a6b9222c016?w=800",
+        "photo_url": "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800",
     },
     {
         "name": "Nola - Asmalımescit",
@@ -555,7 +555,7 @@ PLACES = [
         "longitude": 28.9744,
         "price_range": 4,
         "features": "fine_dining,modern_turkish,quiet,date",
-        "photo_url": "https://images.unsplash.com/photo-1550966871-3ed3cdb51f3a?w=800",
+        "photo_url": "https://images.unsplash.com/photo-1511920170033-f8396924c348?w=800",
     },
     {
         "name": "Kantin - Nişantaşı",
@@ -681,7 +681,7 @@ PLACES = [
         "longitude": 28.9655,
         "price_range": 1,
         "features": "nargile,traditional,historic,outdoor,quiet",
-        "photo_url": "https://images.unsplash.com/photo-1527661929436-1e546b1e5b3e?w=800",
+        "photo_url": "https://images.unsplash.com/photo-1559305616-3f99cd43e353?w=800",
     },
     {
         "name": "Derviş Cafe - Sultanahmet",

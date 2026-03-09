@@ -38,6 +38,7 @@ import { lightImpact } from "@/src/utils/haptics";
 import { useTabBarVisibility } from "@/src/components/layout/TabBarVisibilityContext";
 import { toggleFollow } from "@/src/services/userService";
 import { useAppStore } from "@/src/store/useAppStore";
+import { createReport } from "@/src/services/moderationService";
 
 export default function FeedScreen() {
   const { colors } = useTheme();
@@ -210,7 +211,23 @@ export default function FeedScreen() {
   }, []);
 
   const handleReportPost = useCallback(() => {
-    Alert.alert("Raporlandı", "Geri bildirimin için teşekkürler.");
+    if (!optionsPost) return;
+    const postId = optionsPost.id;
+    Alert.alert("Raporla", "Bu gönderiyi neden raporlıyorsun?", [
+      { text: "Vazgeç", style: "cancel" },
+      { text: "Spam", onPress: () => submitReport(postId, "spam") },
+      { text: "Uygunsuz İçerik", onPress: () => submitReport(postId, "inappropriate") },
+      { text: "Taciz", onPress: () => submitReport(postId, "harassment") },
+    ]);
+  }, [optionsPost]);
+
+  const submitReport = useCallback(async (postId: number, reason: "spam" | "inappropriate" | "harassment" | "other") => {
+    try {
+      await createReport({ target_type: "post", target_id: postId, reason });
+      Alert.alert("Raporlandı ✅", "Geri bildirimin için teşekkürler. İncelenecektir.");
+    } catch {
+      Alert.alert("Raporlandı", "Geri bildirimin için teşekkürler.");
+    }
   }, []);
 
   const handleMuteAuthor = useCallback(() => {
