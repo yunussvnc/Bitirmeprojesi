@@ -143,6 +143,49 @@ class ModelManager:
             print(f"[Model] Preload hatası: {e}")
             return {"status": "error", "error": str(e)}
 
+    def analyze_review_sentiment(self, reviews: Union[str, List[str]]) -> float:
+        """Kısa yorum veya yorum listesi üzerinden kabaca pozitif/negatif duygu analizi skorlaması (-0.2 ile +0.2)"""
+        if not reviews or not self.embedding_model:
+            return 0.0
+            
+        try:
+            import torch
+            positive_refs = ["Harika bir mekan", "Çok lezzetli", "Kesinlikle tavsiye ederim", "Çok güzel", "Mükemmel", "Bayıldım", "Güler yüzlü", "good", "great", "excellent", "amazing", "delicious", "perfect"]
+            negative_refs = ["Çok kötü", "Berbat", "Berbat bir yer", "Tavsiye etmem", "Pahalı", "Kötü hizmet", "Lezzetsiz", "bad", "terrible", "worst", "awful", "expensive"]
+            
+            # Eğer tek bir string geldiyse liste yap
+            if isinstance(reviews, str):
+                reviews = [reviews]
+                
+            # Embeddings hesapla (Batch Inference - Hızlı çalışır)
+            review_embs = self.embedding_model.encode(reviews, convert_to_tensor=True)
+            pos_embs = self.embedding_model.encode(positive_refs, convert_to_tensor=True)
+            neg_embs = self.embedding_model.encode(negative_refs, convert_to_tensor=True)
+            
+            from torch.nn.functional import cosine_similarity
+            total_bonus = 0.0
+            
+            # Her bir yorumu analiz edip ortalamasını alıyoruz
+            for review_emb in review_embs:
+                pos_scores = cosine_similarity(review_emb.unsqueeze(0), pos_embs)
+                neg_scores = cosine_similarity(review_emb.unsqueeze(0), neg_embs)
+                
+                max_pos = pos_scores.max().item()
+                max_neg = neg_scores.max().item()
+                
+                sentiment_diff = max_pos - max_neg
+                # Eskiden 0.4 ile çarpıp +-0.20'ye sınırlandırıyorduk.
+                # Kullanıcı etkinin artmasını istediği için çarpanı 0.8 yapıp sınırı +-0.40 yapıyoruz.
+                bonus = min(max(sentiment_diff * 0.8, -0.40), 0.40)
+                total_bonus += bonus
+                
+            avg_bonus = total_bonus / len(reviews)
+            print(f"🧐 {len(reviews)} adet yorum Analizi Ortalama Bonus: {avg_bonus:.3f}")
+            return avg_bonus
+            
+        except Exception as e:
+            print(f"[Model] Yorum analizi başarısız: {e}")
+            return 0.0
 
 # Global model manager
 model_manager = ModelManager()
@@ -207,6 +250,7 @@ class PlaceData(BaseModel):
     description: str = ""
     photo_url: Optional[str] = None
     review_count: int = 0
+    user_review: Optional[str] = None
 
 
 class SmartSearchRequest(BaseModel):
@@ -217,6 +261,12 @@ class SmartSearchRequest(BaseModel):
     user_lat: Optional[float] = None
     user_lng: Optional[float] = None
     max_distance_km: float = 10.0
+
+
+class AnalyzeReviewRequest(BaseModel):
+    """İsteğe bağlı yorum çekme ve analiz isteği"""
+    data_id: str
+
 
 
 # ==================== HELPER FUNCTIONS ====================
@@ -241,12 +291,33 @@ def parse_natural_query(query: str) -> Dict:
             detected_category = category
             break
     
-    # Bölge algılama
-    districts = ['kadikoy', 'besiktas', 'eminonu', 'beyoglu', 'sisli', 'fatih', 'eyup']
+    # Bölge algılama (İstanbul'un tüm ilçeleri ve alternatif yazılımları)
+    district_map = {
+        'adalar': 'Adalar', 'arnavutköy': 'Arnavutköy', 'arnavutkoy': 'Arnavutköy',
+        'ataşehir': 'Ataşehir', 'atasehir': 'Ataşehir', 'avcılar': 'Avcılar', 'avcilar': 'Avcılar',
+        'bağcılar': 'Bağcılar', 'bagcilar': 'Bağcılar', 'bahçelievler': 'Bahçelievler', 'bahcelievler': 'Bahçelievler',
+        'bakırköy': 'Bakırköy', 'bakirkoy': 'Bakırköy', 'başakşehir': 'Başakşehir', 'basaksehir': 'Başakşehir',
+        'bayrampaşa': 'Bayrampaşa', 'bayrampasa': 'Bayrampaşa', 'beşiktaş': 'Beşiktaş', 'besiktas': 'Beşiktaş',
+        'beykoz': 'Beykoz', 'beylikdüzü': 'Beylikdüzü', 'beylikduzu': 'Beylikdüzü',
+        'beyoğlu': 'Beyoğlu', 'beyoglu': 'Beyoğlu', 'büyükçekmece': 'Büyükçekmece', 'buyukcekmece': 'Büyükçekmece',
+        'çatalca': 'Çatalca', 'catalca': 'Çatalca', 'çekmeköy': 'Çekmeköy', 'cekmekoy': 'Çekmeköy',
+        'esenler': 'Esenler', 'esenyurt': 'Esenyurt', 'eyüp': 'Eyüpsultan', 'eyup': 'Eyüpsultan', 
+        'eyüpsultan': 'Eyüpsultan', 'eyupsultan': 'Eyüpsultan', 'fatih': 'Fatih',
+        'gaziosmanpaşa': 'Gaziosmanpaşa', 'gaziosmanpasa': 'Gaziosmanpaşa', 'güngören': 'Güngören', 'gungoren': 'Güngören',
+        'kadıköy': 'Kadıköy', 'kadikoy': 'Kadıköy', 'kağıthane': 'Kağıthane', 'kagithane': 'Kağıthane',
+        'kartal': 'Kartal', 'küçükçekmece': 'Küçükçekmece', 'kucukcekmece': 'Küçükçekmece',
+        'maltepe': 'Maltepe', 'pendik': 'Pendik', 'sancaktepe': 'Sancaktepe',
+        'sarıyer': 'Sarıyer', 'sariyer': 'Sarıyer', 'silivri': 'Silivri', 'sultanbeyli': 'Sultanbeyli',
+        'sultangazi': 'Sultangazi', 'şile': 'Şile', 'sile': 'Şile', 'şişli': 'Şişli', 'sisli': 'Şişli',
+        'tuzla': 'Tuzla', 'ümraniye': 'Ümraniye', 'umraniye': 'Ümraniye',
+        'üsküdar': 'Üsküdar', 'uskudar': 'Üsküdar', 'zeytinburnu': 'Zeytinburnu',
+        'eminönü': 'Eminönü', 'eminonu': 'Eminönü' # Sık aranan ilçe dışı semt
+    }
+    
     detected_district = None
-    for district in districts:
-        if district in query_lower:
-            detected_district = district.capitalize()
+    for key, proper_name in district_map.items():
+        if key in query_lower:
+            detected_district = proper_name
             break
     
     # Özellik algılama
@@ -269,7 +340,9 @@ def parse_natural_query(query: str) -> Dict:
     
     # 1. Yasaklı/Alakasız Konular (Siyaset, Din, Küfür vb.)
     inappropriate_keywords = ['siyaset', 'parti', 'din', 'küfür', 'argo', 'kavga', 'seçim', 'oy', 'başkan']
-    if any(kw in query_lower for kw in inappropriate_keywords):
+    import re
+    words = set(re.findall(r'\w+', query_lower, flags=re.UNICODE))
+    if any(kw in words for kw in inappropriate_keywords):
         is_inappropriate = True
         
     # 2. Günlük Sohbet (Chit-chat) Tespiti
@@ -319,7 +392,7 @@ def hybrid_score(place: Dict, features: List[str], user_lat=None, user_lng=None,
         "distance_km": 0.0
     }
     
-    # 1. Feature matching (%40)
+    # 1. Feature matching (%35 - biraz düşürüldü ki yoruma yer açılsın)
     place_desc = (place.get('description', '') + ' ' + place.get('name', '')).lower()
     feature_keywords = {
         'wifi': ['wifi', 'wi-fi', 'internet'],
@@ -336,7 +409,7 @@ def hybrid_score(place: Dict, features: List[str], user_lat=None, user_lng=None,
                 matched += 1
     
     if features:
-        scores["feature_score"] = (matched / len(features)) * 0.4
+        scores["feature_score"] = (matched / len(features)) * 0.35
     
     # 2. Distance score (%30)
     if user_lat and user_lng and place.get('latitude') and place.get('longitude'):
@@ -422,12 +495,33 @@ def hybrid_score(place: Dict, features: List[str], user_lat=None, user_lng=None,
             
     scores["time_score"] = max(min(time_score_val, 0.10), -0.20) # Max %10 eklenti
     
+    # 5. Review (Yorum) LLM Duygu Analizi Zekası (%15)
+    review_score_val = 0.0
+    user_review = place.get('user_review', '')
+    if user_review:
+        # LLM üzerinden sentiment çıkarıyoruz (embedding tabanlı kosinüs benzerliği)
+        sentiment_bonus = model_manager.analyze_review_sentiment(user_review)
+        
+        # Sadece pozitifleri veya çok negatifleri etki ettir
+        if sentiment_bonus > 0.05:
+            review_score_val = 0.15 # Max yorum bonusu
+            place['recommendation_reason_bonus'] = "✨ Harika müşteri yorumlarına sahip"
+        elif sentiment_bonus < -0.05:
+            review_score_val = -0.15 # Kötü yorum cezası
+            place['recommendation_reason_bonus'] = "⚠️ Müşteri yorumlarında olumsuz referanslar var"
+        else:
+            review_score_val = 0.05
+    
+    scores["review_ai_score"] = review_score_val
+    
+    # Tüm skorları topla
     scores["total_score"] = min(
         max(
             scores["feature_score"] + 
             scores["distance_score"] + 
             scores["popularity_score"] + 
-            scores["time_score"], 
+            scores["time_score"] +
+            scores.get("review_ai_score", 0.0), 
             0.0
         ),
         1.0
@@ -595,7 +689,9 @@ async def smart_search_v2(request: SmartSearchRequest):
         places = client.search_places(
             query=search_query,
             location=f"{search_location}, Turkey",
-            limit=request.limit * 2
+            limit=request.limit * 2,
+            lat=request.user_lat,
+            lng=request.user_lng
         )
         
         if not places:
@@ -679,7 +775,16 @@ async def smart_search_v2(request: SmartSearchRequest):
         reranked_places = rerank_places(scored_places[:min(20, len(scored_places))], request.query, top_k=5)
         
         # Gerekçeler
+        feature_names = {
+            'wifi': '📶 Sınırsız Wi-Fi',
+            'deniz': '🌊 Deniz Manzaralı',
+            'sessiz': '🤫 Sessiz Ortam',
+            'açık': '🌳 Açık Alan / Bahçe',
+            'çalışma': '💻 Çalışmaya Uygun'
+        }
+        
         for place in reranked_places:
+            scores = place.get('scores', {})
             reasons = []
             
             if place.get('rating', 0) >= 4.8:
@@ -694,16 +799,8 @@ async def smart_search_v2(request: SmartSearchRequest):
                 elif place['distance_km'] <= 5:
                     reasons.append(f"📍 Yakın ({place['distance_km']}km)")
             
-            place_text = (place.get('name', '') + ' ' + place.get('description', '')).lower()
-            for feature in parsed['features']:
-                if feature in place_text:
-                    feature_names = {
-                        'wifi': '📶 WiFi mevcut',
-                        'deniz': '🌊 Deniz manzarası',
-                        'sessiz': '🤫 Sessiz ortam',
-                        'açık': '🌳 Açık alan',
-                        'çalışma': '💻 Çalışma ortamı'
-                    }
+            if parsed['features']:
+                for feature in parsed['features']:
                     if feature in feature_names:
                         reasons.append(feature_names[feature])
             
@@ -739,6 +836,56 @@ async def smart_search_v2(request: SmartSearchRequest):
         import traceback
         traceback.print_exc()
         raise HTTPException(status_code=500, detail=str(e))
+
+
+@app.post("/api/analyze-place-reviews")
+async def analyze_place_reviews(request: AnalyzeReviewRequest):
+    """
+    Seçilen mekan için isteğe bağlı derinlemesine bağımsız (tarafsız) yorum analizi
+    """
+    try:
+        from serpapi_client import SerpApiClient
+        client = SerpApiClient()
+        
+        deep_reviews = client.get_place_reviews(request.data_id, max_reviews=50)
+        
+        if not deep_reviews:
+            return {
+                "success": False,
+                "review_count": 0,
+                "analysis_text": "Yapay zeka analizine elverişli yeterli müşteri geri bildirimi bulunamamıştır."
+            }
+            
+        sentiment_bonus = model_manager.analyze_review_sentiment(deep_reviews)
+        
+        # Tarafsız, analitik ve yapay zeka/üçüncü şahıs ağzıyla (nesnel) metin üretimi
+        # sentiment_bonus: ortalama duygu oranı. Genelde -0.40 ile +0.40 arasında.
+        
+        count = len(deep_reviews)
+        if sentiment_bonus > 0.15:
+            analysis_text = f"Yapay zeka analizine göre, bu mekan için toplanan son {count} müşteri geri bildiriminde çok yüksek oranda memnuniyet saptanmıştır. Özellikle hizmet kalitesi ve genel deneyim müşteriler tarafından şiddetle tavsiye edilmektedir."
+        elif sentiment_bonus > 0.05:
+            analysis_text = f"Yapay zeka tarafından analiz edilen son {count} yoruma dayanarak, müşteri memnuniyetinin genel itibarıyla pozitif yönde olduğu, mekanın standart beklentileri karşıladığı gözlemlenmiştir."
+        elif sentiment_bonus < -0.15:
+            analysis_text = f"Yapay zeka analiz raporuna göre, incelenen {count} güncel yorumda ciddi ve tutarlı müşteri şikayetleri tespit edilmiştir. Kalite, hijyen veya bekleme süresi gibi unsurlar doğrultusunda ziyaret deneyiminin olumsuz olabileceği analiz edilmektedir."
+        elif sentiment_bonus < -0.05:
+            analysis_text = f"Yapay zeka metin analizlerine göre incelenen {count} yorumda, genel işleyiş ve ürüne dair bazı kronik memnuniyetsizlikler mevcuttur. Deneyim kalitesinde dalgalanmalar olduğu saptanmıştır."
+        else:
+            analysis_text = f"Sistem tarafında analiz edilen son {count} yorum doğrultusunda, mekanın belirgin bir pozitif veya negatif uçta yer almadığı, hizmetin ortalama standartlar etrafında şekillendiği tespit edilmiştir."
+            
+        return {
+            "success": True,
+            "review_count": count,
+            "sentiment_score": round(sentiment_bonus, 3),
+            "analysis_text": analysis_text
+        }
+    except Exception as e:
+        print(f"❌ Yorum analizi hatası: {e}")
+        return {
+            "success": False,
+            "review_count": 0,
+            "analysis_text": "Yapay zeka sistemi yorumlara şu anda erişemiyor. Teknik bir aksaklık saptandı."
+        }
 
 
 if __name__ == "__main__":

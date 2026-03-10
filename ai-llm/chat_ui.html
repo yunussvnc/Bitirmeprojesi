@@ -397,6 +397,19 @@
                     <option value="Kadikoy|40.9839|29.0267">Kadıköy</option>
                     <option value="Taksim|41.0370|28.9850">Taksim</option>
                     <option value="Besiktas|41.0427|29.0089">Beşiktaş</option>
+                    <option value="Ortakoy|41.0478|29.0260">Ortaköy</option>
+                    <option value="Sisli|41.0613|28.9877">Şişli</option>
+                    <option value="Eminonu|41.0152|28.9734">Eminönü</option>
+                    <option value="Karakoy|41.0227|28.9760">Karaköy</option>
+                    <option value="Uskudar|41.0256|29.0163">Üsküdar</option>
+                    <option value="Moda|40.9785|29.0242">Moda</option>
+                    <option value="Fatih|41.0185|28.9416">Fatih</option>
+                    <option value="Atasehir|40.9876|29.1171">Ataşehir</option>
+                    <option value="Bakirkoy|40.9833|28.8687">Bakırköy</option>
+                    <option value="Sariyer|41.1685|29.0536">Sarıyer</option>
+                    <option value="Beykoz|41.1396|29.0913">Beykoz</option>
+                    <option value="Sile|41.1748|29.6128">Şile</option>
+                    <option value="Adalar|40.8732|29.1309">Adalar (Princes' Islands)</option>
                 </select>
             </div>
         </div>
@@ -472,23 +485,104 @@
         }
 
         function createPlaceCard(place) {
+            // ... (photo logic) ...
+            let photoHtml = '';
+            if (place.photo_url) {
+                photoHtml = `<img src="${place.photo_url}" alt="${place.name}" class="place-image">`;
+            }
+
+            let badgeHtml = '';
+            if (place.rerank_score > 0.8) {
+                badgeHtml = `<span class="badge" style="background:#f59e0b;"><i class="fa-solid fa-star"></i> Yüksek Eşleşme</span>`;
+            } else if (place.distance_km && place.distance_km < 2) {
+                badgeHtml = `<span class="badge"><i class="fa-solid fa-person-walking"></i> Çok Yakın</span>`;
+            }
+
+            // Review Analysis Button
+            let analysisHtml = '';
+            if (place.data_id) {
+                analysisHtml = `
+                <div style="margin-top: 15px;">
+                    <button onclick="handleAnalyzeReview('${place.data_id}', this)" style="width:100%; padding:8px; background:linear-gradient(135deg, #4f46e5, #ec4899); color:white; border:none; border-radius:8px; cursor:pointer; font-weight:500; font-size:0.9rem; transition:opacity 0.2s;">
+                        <i class="fa-solid fa-wand-magic-sparkles"></i> Yapay Zeka ile Analiz Et
+                    </button>
+                    <div id="analysis-res-${place.data_id}" style="display:none; margin-top:10px; padding:12px; background:#f8fafc; border-left:3px solid #ec4899; border-radius:0 8px 8px 0; font-size:0.85rem; color:#334155; line-height:1.5;"></div>
+                </div>`;
+            }
+
             return `
-                <div class="place-card">
-                    <div class="place-header">
-                        <div class="place-title">${place.name || 'Bilinmeyen Mekan'}</div>
-                        <div class="place-rating">
-                            <i class="fa-solid fa-star"></i> ${place.rating || 'N/A'}
-                        </div>
+            <div class="place-card">
+                ${photoHtml}
+                <div class="place-info">
+                    ${badgeHtml}
+                    <h3 class="place-name">${place.name}</h3>
+                    <p class="place-details">
+                        <i class="fa-solid fa-star" style="color:#fbbf24;"></i> ${place.rating} (${place.review_count} yorum)
+                        <span style="margin:0 8px; color:#cbd5e1;">|</span>
+                        ${place.category}
+                        <span style="margin:0 8px; color:#cbd5e1;">|</span>
+                        ${'₺'.repeat(place.price_level)}
+                    </p>
+                    <p class="place-address"><i class="fa-solid fa-location-dot"></i> ${place.address}</p>
+                    ${place.distance_km ? `<p class="place-address"><i class="fa-solid fa-route"></i> Sana uzaklık: <strong>${place.distance_km} km</strong></p>` : ''}
+                    
+                    <div class="place-score" style="margin-top: 10px;">
+                        <span>Sana Uygunluk Skoru:</span>
+                        <span style="font-weight: 600; color: #10b981;">${Math.round(place.rerank_score * 100)}</span>
                     </div>
-                    <div class="place-detail">
-                        <i class="fa-solid fa-location-dot"></i> ${place.distance_km ? place.distance_km + ' km' : 'Yakın'}
-                    </div>
-                    ${place.address ? `<div class="place-detail"><i class="fa-solid fa-map-pin"></i> ${place.address.split(',')[0]}</div>` : ''}
-                    <div class="place-reason">
-                        <i class="fa-solid fa-lightbulb"></i> ${place.recommendation_reason || 'RAG Eşleşmesi'}
-                    </div>
+                    ${place.recommendation_reason ? `<div class="recommendation-reason"><i class="fa-solid fa-lightbulb" style="color:#d97706;"></i> ${place.recommendation_reason}</div>` : ''}
+                    
+                    ${analysisHtml}
                 </div>
+            </div>
             `;
+        }
+
+        async function handleAnalyzeReview(dataId, btnElement) {
+            const resDiv = document.getElementById(`analysis-res-${dataId}`);
+            if (!resDiv) return;
+
+            // UI Güncelleme - Yükleniyor durumu
+            const originalText = btnElement.innerHTML;
+            btnElement.disabled = true;
+            btnElement.style.opacity = '0.7';
+            btnElement.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Analiz Ediliyor...';
+            resDiv.style.display = 'none';
+
+            try {
+                const response = await fetch('http://localhost:8080/api/analyze-place-reviews', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ data_id: dataId })
+                });
+
+                if (!response.ok) throw new Error('API Hatası');
+                const data = await response.json();
+
+                // Başarılı Analiz Yanıtı
+                btnElement.style.display = 'none'; // Butonu gizle
+                resDiv.style.display = 'block';
+
+                if (data.success) {
+                    resDiv.innerHTML = `<strong>✨ Yapay Zeka Özeti:</strong><br>${data.analysis_text}`;
+                    if (data.sentiment_score > 0) {
+                        resDiv.style.borderLeftColor = '#10b981'; // Yeşil
+                    } else if (data.sentiment_score < 0) {
+                        resDiv.style.borderLeftColor = '#ef4444'; // Kırmızı
+                    } else {
+                        resDiv.style.borderLeftColor = '#f59e0b'; // Sarı
+                    }
+                } else {
+                    resDiv.innerHTML = `<strong>⚠️ Bilgi:</strong> ${data.analysis_text}`;
+                    resDiv.style.borderLeftColor = '#cbd5e1'; // Gri
+                }
+            } catch (error) {
+                console.error('Analiz hatası:', error);
+                btnElement.disabled = false;
+                btnElement.style.opacity = '1';
+                btnElement.innerHTML = originalText;
+                alert("Yorum analizi sırasında bir hata oluştu.");
+            }
         }
 
         function showTyping() {
@@ -523,6 +617,12 @@
             showTyping();
 
             try {
+                // İlçe seçimi yapıldıysa ve aranılan metin ilgili ilçeyi içermiyorsa başına ilçeyi ekle
+                let finalQuery = text;
+                if (locName && !text.toLowerCase().includes(locName.toLowerCase())) {
+                    finalQuery = `${locName} ${text}`;
+                }
+
                 // API İsteği (Backend'e bağlanıyoruz)
                 const response = await fetch(API_URL, {
                     method: 'POST',
@@ -530,7 +630,7 @@
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                        query: text,
+                        query: finalQuery,
                         location: locName,
                         user_lat: lat,
                         user_lng: lng,
