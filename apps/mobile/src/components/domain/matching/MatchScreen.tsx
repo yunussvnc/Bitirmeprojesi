@@ -827,17 +827,17 @@ export default function MatchScreen() {
         }}
       >
         <View style={styles.likesGrid}>
-          {MOCK_LIKES.filter(p => !blockedUsers.includes(p.id) && !actedLikes.includes(p.id)).map((person) => (
+          {candidates.filter(p => !blockedUsers.includes(p.user_id) && !actedLikes.includes(p.user_id) && passesFilter(p)).map((person) => (
             <Pressable
-              key={person.id}
+              key={person.user_id}
               style={({ pressed }) => [
                 styles.likeCard,
                 { transform: [{ scale: pressed ? 0.96 : 1 }] },
               ]}
-              onPress={() => setSelectedLike(person)}
+              onPress={() => setSelectedLike(person as any)}
             >
               <Image
-                source={{ uri: person.photos?.[0] || person.photo }}
+                source={{ uri: person.photo_urls?.[0] || "https://i.pravatar.cc/150" }}
                 style={styles.likeCardImage}
               />
               <LinearGradient
@@ -845,7 +845,7 @@ export default function MatchScreen() {
                 style={styles.likeCardOverlay}
               >
                 <ThemedText style={styles.likeCardName}>
-                  {person.name}, {person.age}
+                  {person.display_name}, {person.age}
                 </ThemedText>
                 <TouchableOpacity
                   style={styles.likeCardLocationRow}
@@ -866,7 +866,7 @@ export default function MatchScreen() {
                     color="rgba(255,255,255,0.7)"
                   />
                   <ThemedText style={styles.likeCardLocationText}>
-                    {person.active_place_name || person.location}
+                    {person.active_place_name || "Mekanda"}
                   </ThemedText>
                 </TouchableOpacity>
               </LinearGradient>

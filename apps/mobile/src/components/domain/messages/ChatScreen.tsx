@@ -32,6 +32,10 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import { revealProfile } from "@/src/services/matchService";
 import { toggleFollow } from "@/src/services/userService";
+import { toggleBlockUser, createReport } from "@/src/services/moderationService";
+import { getMessages as fetchBackendMessages, sendMessage as backendSendMessage, markMessagesRead } from "@/src/services/messageService";
+import { useAuthStore } from "@/src/store/useAuthStore";
+import { logger } from "@/src/utils/logger";
 
 /* ── Types ── */
 interface Message {
@@ -198,6 +202,9 @@ export default function ChatScreen() {
     const flatListRef = useRef<FlatList>(null);
     const didInitialScrollRef = useRef(false);
     const resolvedChatId = chatId || "1";
+    const currentUser = useAuthStore((s) => s.user);
+    const numericConvId = parseInt(resolvedChatId, 10);
+    const isBackendConv = !isNaN(numericConvId) && resolvedChatId === String(numericConvId);
 
     // Store'dan mesajları mount anında bir kere oku (subscribe etme — hydration loop'u önler)
     const [messages, setMessages] = useState<Message[]>(() => {
@@ -228,6 +235,38 @@ export default function ChatScreen() {
         } catch (_e) { /* ignore */ }
         return initial;
     });
+
+    // Backend'den mesaj geçmişini yükle (sayısal conversation id ise)
+    useEffect(() => {
+        if (!isBackendConv) return;
+        (async () => {
+            try {
+                const res = await fetchBackendMessages(numericConvId, 1, 100);
+                if (res.items.length > 0) {
+                    const myId = currentUser?.id;
+                    const backendMsgs: Message[] = res.items.map((m) => ({
+                        id: String(m.id),
+                        text: m.content,
+                        isMine: m.sender_id === myId,
+                        timestamp: (() => {
+                            try {
+                                return new Date(m.created_at).toLocaleTimeString("tr-TR", { hour: "2-digit", minute: "2-digit" });
+                            } catch { return ""; }
+                        })(),
+                        status: m.is_read ? "read" as const : "delivered" as const,
+                        sharedPostId: m.shared_post_id ?? undefined,
+                        imageUri: m.media_url ?? undefined,
+                    }));
+                    setMessages(backendMsgs);
+                }
+                // Okundu bildir
+                markMessagesRead(numericConvId).catch(() => { });
+            } catch (e) {
+                logger.warn("[ChatScreen] Backend mesajları yüklenemedi, dummy data kullanılıyor", e);
+            }
+        })();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isBackendConv, numericConvId]);
 
     const storeConversation = useMessagesStore((state) => state.conversations.find(c => c.id === resolvedChatId));
 
@@ -291,16 +330,24 @@ export default function ChatScreen() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
-    const handleBlock = () => {
+    const handleBlock = async () => {
         setIsOptionsVisible(false);
-        // Backend TODO: Engelleme isteği gönder
+        // Parse user id from chatId format "match_xxx_userId" or numeric
+        const parts = resolvedChatId.split('_');
+        const targetIdStr = parts[parts.length - 1];
+        const targetId = parseInt(targetIdStr, 10);
+        if (!isNaN(targetId)) {
+            try {
+                await toggleBlockUser(targetId);
+            } catch { /* ignore */ }
+        }
         success();
         Alert.alert("Başarılı", `${contact.name} engellendi.`, [
             { text: "Tamam", onPress: () => router.replace("/settings/blocked-users" as any) }
         ]);
     };
 
-    const handleReport = () => {
+    const handleReport = async () => {
         const charCount = reportText.trim().length;
         if (charCount === 0) {
             Alert.alert("Hata", "Lütfen şikayet nedeninizi yazın.");
@@ -312,7 +359,16 @@ export default function ChatScreen() {
         }
 
         setIsReportVisible(false);
-        // Backend TODO: Şikayet ve kısıtlama isteği gönder
+        // Parse user id
+        const parts = resolvedChatId.split('_');
+        const targetIdStr = parts[parts.length - 1];
+        const targetId = parseInt(targetIdStr, 10);
+        if (!isNaN(targetId)) {
+            try {
+                await createReport({ target_type: "user", target_id: targetId, reason: "harassment", description: reportText.trim() });
+                await toggleBlockUser(targetId);
+            } catch { /* ignore */ }
+        }
         success();
         Alert.alert("Başarılı", `Şikayetiniz alındı ve ${contact.name} engellendi.`, [
             { text: "Tamam", onPress: () => router.replace("/settings/blocked-users" as any) }
@@ -349,6 +405,12 @@ export default function ChatScreen() {
                 status: "sent",
             });
             useMessagesStore.getState().updateLastMessageAt(chatId, newMsg.text, newMsg.timestamp, "me");
+        }
+        // Backend'e fire-and-forget sync
+        if (isBackendConv) {
+            backendSendMessage(numericConvId, { content: newMsg.text }).catch((e) =>
+                logger.warn("[ChatScreen] Backend mesaj gönderilemedi", e)
+            );
         }
         setInputText("");
         setTimeout(() => {

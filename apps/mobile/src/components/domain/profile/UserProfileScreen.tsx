@@ -11,6 +11,7 @@ import {
   Modal,
   Pressable,
   ActivityIndicator,
+  Alert,
 } from "react-native";
 import { Image } from "expo-image";
 import { useLocalSearchParams, useRouter } from "expo-router";
@@ -31,7 +32,8 @@ import {
 } from "@/src/services/userService";
 import { useAuthStore } from "@/src/store/useAuthStore";
 import { handleApiError } from "@/src/utils/errorHandler";
-import { lightImpact } from "@/src/utils/haptics";
+import { lightImpact, success } from "@/src/utils/haptics";
+import { toggleBlockUser, createReport } from "@/src/services/moderationService";
 
 const GRID_GAP = 14;
 const GRID_COLS = 2;
@@ -128,6 +130,15 @@ export default function UserProfileScreen() {
     }
   }, [profile, followLoading, currentUser]);
 
+  const reportUser = useCallback(async (reason: "spam" | "inappropriate" | "harassment" | "other") => {
+    try {
+      await createReport({ target_type: "user", target_id: userId, reason });
+      Alert.alert("Raporlandı ✅", "Geri bildirimin için teşekkürler.");
+    } catch {
+      Alert.alert("Raporlandı", "Geri bildirimin kaydedildi.");
+    }
+  }, [userId]);
+
   const handlePostTap = useCallback(async (postId: number) => {
     lightImpact();
     if (isOwnProfile) {
@@ -213,7 +224,40 @@ export default function UserProfileScreen() {
           <TouchableOpacity style={[styles.headerBtn, { backgroundColor: colors.surface.elevated }]} activeOpacity={0.7}>
             <IconSymbol name="bell.fill" size={18} color={colors.text.primary} />
           </TouchableOpacity>
-          <TouchableOpacity style={[styles.headerBtn, { backgroundColor: colors.surface.elevated }]} activeOpacity={0.7}>
+          <TouchableOpacity
+            style={[styles.headerBtn, { backgroundColor: colors.surface.elevated }]}
+            activeOpacity={0.7}
+            onPress={() => {
+              lightImpact();
+              if (isOwnProfile) return;
+              Alert.alert(displayName, "Bu kullanıcı için bir işlem seçin", [
+                { text: "Vazgeç", style: "cancel" },
+                {
+                  text: "Engelle",
+                  style: "destructive",
+                  onPress: async () => {
+                    try {
+                      await toggleBlockUser(userId);
+                      success();
+                      Alert.alert("Engellendi ✅", `${displayName} engellendi.`);
+                      router.back();
+                    } catch { Alert.alert("Hata", "İşlem başarısız."); }
+                  },
+                },
+                {
+                  text: "Raporla",
+                  onPress: () => {
+                    Alert.alert("Raporla", "Neden raporluyorsun?", [
+                      { text: "Vazgeç", style: "cancel" },
+                      { text: "Spam", onPress: () => reportUser("spam") },
+                      { text: "Uygunsuz", onPress: () => reportUser("inappropriate") },
+                      { text: "Taciz", onPress: () => reportUser("harassment") },
+                    ]);
+                  },
+                },
+              ]);
+            }}
+          >
             <IconSymbol name="ellipsis" size={20} color={colors.text.primary} />
           </TouchableOpacity>
         </View>

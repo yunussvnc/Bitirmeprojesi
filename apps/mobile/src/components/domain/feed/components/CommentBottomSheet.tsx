@@ -20,6 +20,7 @@ import {
   Animated,
   PanResponder,
   Dimensions,
+  Alert,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTheme } from "@/src/hooks/useTheme";
@@ -27,8 +28,10 @@ import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { createTextStyle, spacing } from "@/src/constants/design";
 import { getComments, addComment, type PostComment } from "@/src/services/feedService";
 import { handleApiError } from "@/src/utils/errorHandler";
-import { lightImpact } from "@/src/utils/haptics";
+import { lightImpact, success } from "@/src/utils/haptics";
 import { timeAgo } from "@/src/utils/timeAgo";
+import { deleteComment } from "@/src/services/moderationService";
+import { useAuthStore } from "@/src/store/useAuthStore";
 
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 // Kısmi açık yükseklik: handle + başlık + input + ~2 yorum satırı
@@ -197,13 +200,49 @@ export function CommentBottomSheet({ visible, onClose, postId, onCommentAdded }:
 
   const titleStyle = createTextStyle("heading", colors.text.primary);
 
-  const renderItem = ({ item }: { item: PostComment }) => (
-    <View style={[styles.commentRow, { borderBottomColor: colors.surface.border }]}>
-      <Text style={[styles.commentAuthor, { color: colors.text.primary }]}>@{item.author_username || `user_${item.user_id}`}</Text>
-      <Text style={[styles.commentText, { color: colors.text.secondary }]}>{item.text}</Text>
-      <Text style={[styles.commentTime, { color: colors.text.tertiary }]}>{timeAgo(item.created_at)}</Text>
-    </View>
-  );
+  const currentUser = useAuthStore((s) => s.user);
+
+  const handleDeleteComment = useCallback(async (comment: PostComment) => {
+    lightImpact();
+    Alert.alert("Yorumu Sil", "Bu yorumu silmek istiyor musun?", [
+      { text: "Vazgeç", style: "cancel" },
+      {
+        text: "Sil", style: "destructive", onPress: async () => {
+          try {
+            await deleteComment(postId, comment.id);
+            success();
+            setComments((prev) => prev.filter((c) => c.id !== comment.id));
+          } catch {
+            Alert.alert("Hata", "Yorum silinemedi.");
+          }
+        },
+      },
+    ]);
+  }, [postId]);
+
+  const renderItem = ({ item }: { item: PostComment }) => {
+    const isOwn = currentUser?.id === item.user_id;
+    return (
+      <TouchableOpacity
+        activeOpacity={0.8}
+        onLongPress={isOwn ? () => handleDeleteComment(item) : undefined}
+        delayLongPress={400}
+      >
+        <View style={[styles.commentRow, { borderBottomColor: colors.surface.border }]}>
+          <View style={styles.commentContent}>
+            <Text style={[styles.commentAuthor, { color: colors.text.primary }]}>@{item.author_username || `user_${item.user_id}`}</Text>
+            <Text style={[styles.commentText, { color: colors.text.secondary }]}>{item.text}</Text>
+            <Text style={[styles.commentTime, { color: colors.text.tertiary }]}>{timeAgo(item.created_at)}</Text>
+          </View>
+          {isOwn && (
+            <TouchableOpacity style={styles.deleteBtn} onPress={() => handleDeleteComment(item)}>
+              <IconSymbol name="ellipsis" size={20} color={colors.text.tertiary} />
+            </TouchableOpacity>
+          )}
+        </View>
+      </TouchableOpacity>
+    );
+  };
 
   return (
     <Modal visible={modalVisible} transparent animationType="none" onRequestClose={() => snapTo("closed")} statusBarTranslucent>
@@ -368,8 +407,18 @@ const styles = StyleSheet.create({
     paddingVertical: spacing.xl,
   },
   commentRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
     paddingVertical: spacing.md,
     borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+  commentContent: {
+    flex: 1,
+    paddingRight: spacing.sm,
+  },
+  deleteBtn: {
+    padding: spacing.sm,
   },
   commentAuthor: {
     fontSize: 13,

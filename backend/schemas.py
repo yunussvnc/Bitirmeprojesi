@@ -23,10 +23,14 @@ class UserUpdate(BaseModel):
     avatar_url: Optional[str] = None
     birth_date: Optional[date] = None
 
+class SocialLoginRequest(BaseModel):
+    token: str
+
 class User(UserBase):
     id: int
     role: str
     is_active: bool
+    is_email_verified: bool
     avatar_url: Optional[str] = None
     bio: Optional[str] = None
     created_at: datetime
@@ -69,6 +73,11 @@ class Place(PlaceBase):
     average_rating: float
     photo_url: Optional[str] = None
     video_url: Optional[str] = None
+    
+    # Yeni eklenen dinamik / popülerlik alanları
+    review_count: Optional[int] = 0
+    saved_count: Optional[int] = 0
+    popularity_score: Optional[float] = 0.0
 
     class Config:
         from_attributes = True
@@ -166,6 +175,44 @@ class Token(BaseModel):
 class RefreshRequest(BaseModel):
     refresh_token: str
 
+
+# --- E-POSTA DOĞRULAMA (EMAIL VERIFICATION) ŞEMALARI ---
+
+class VerifyEmailRequest(BaseModel):
+    code: str   # 6 haneli doğrulama kodu
+
+class ResendVerificationRequest(BaseModel):
+    email: EmailStr
+
+class ForgotPasswordRequest(BaseModel):
+    email: EmailStr
+
+class ResetPasswordRequest(BaseModel):
+    email: EmailStr
+    code: str           # 6 haneli sıfırlama kodu
+    new_password: str   # Yeni şifre
+
+class ChangePasswordRequest(BaseModel):
+    current_password: str
+    new_password: str
+
+class ReportCreate(BaseModel):
+    target_type: str   # "post", "comment", "user", "match_profile"
+    target_id: int
+    reason: str        # "spam", "inappropriate", "harassment", "other"
+    description: Optional[str] = None
+
+class PlaceUpdate(BaseModel):
+    name: Optional[str] = None
+    address: Optional[str] = None
+    city: Optional[str] = None
+    description: Optional[str] = None
+    category: Optional[str] = None
+    latitude: Optional[float] = None
+    longitude: Optional[float] = None
+    photo_url: Optional[str] = None
+    opening_time: Optional[str] = None
+    closing_time: Optional[str] = None
 
 # --- ÖNERİ (RECOMMEND) ŞEMALARI ---
 

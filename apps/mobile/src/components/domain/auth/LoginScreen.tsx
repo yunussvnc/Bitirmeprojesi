@@ -22,6 +22,7 @@ import {
   Image,
   Alert,
   Keyboard,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { BlurView } from 'expo-blur';
@@ -30,20 +31,25 @@ import { Button, Input } from '@/src/components/ui';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
 import { lightImpact, success } from '@/src/utils/haptics';
 import { getAllPlaces } from '@/src/services/mekanService';
-import { loginUser } from '@/src/services/authService';
+import { loginUser, googleLogin, appleLogin } from '@/src/services/authService';
 import { useAuthStore } from '@/src/store/useAuthStore';
 import { API_BASE_URL } from '@/src/constants/api';
+import * as AppleAuthentication from 'expo-apple-authentication';
+import * as WebBrowser from 'expo-web-browser';
+import * as Google from 'expo-auth-session/providers/google';
+
+WebBrowser.maybeCompleteAuthSession();
 
 const { width, height } = Dimensions.get('window');
 
-// API yoksa veya fotoğraf yoksa kullanılacak kaliteli mekan görselleri
+// API yoksa veya fotoğraf yoksa kullanılacak aydınlık ve kaliteli mekan görselleri
 const FALLBACK_PLACE_IMAGES = [
+  'https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=1200',
+  'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=1200', // Aydınlık kahveci
+  'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1200', // Aydınlık bir kafe içi
   'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200',
   'https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=1200',
-  'https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=1200',
-  'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200',
-  'https://images.unsplash.com/photo-1552566626-52f8b828add9?w=1200',
-  'https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1200',
+  'https://images.unsplash.com/photo-1521017430209-a6cb9156a64b?w=1200', // Işıklı iç mekan
 ];
 
 const CAROUSEL_INTERVAL_MS = 4500;
@@ -54,51 +60,65 @@ export default function LoginScreen() {
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
-  const [backgroundImages, setBackgroundImages] = useState<string[]>(FALLBACK_PLACE_IMAGES);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  const fadeAnim = useRef(new Animated.Value(1)).current;
   const isSubmittingRef = useRef(false);
 
-  // Mekan fotoğraflarını API'den al
-  useEffect(() => {
-    let cancelled = false;
-    getAllPlaces()
-      .then((places) => {
-        if (cancelled) return;
-        const urls = places
-          .map((p) => p.photo_url)
-          .filter((url): url is string => !!url)
-          .map((url) => (url.startsWith('http') ? url : `${API_BASE_URL.replace(/\/$/, '')}${url.startsWith('/') ? '' : '/'}${url}`));
-        if (urls.length >= 5) {
-          setBackgroundImages(urls.slice(0, 12));
-        }
-      })
-      .catch(() => { });
-    return () => {
-      cancelled = true;
-    };
-  }, []);
+  // Google Auth Setup
+  const [request, response, promptAsync] = Google.useAuthRequest({
+    clientId: 'TODO_YOUR_GOOGLE_CLIENT_ID_WEB',
+    iosClientId: 'TODO_YOUR_GOOGLE_CLIENT_ID_IOS',
+    androidClientId: 'TODO_YOUR_GOOGLE_CLIENT_ID_ANDROID',
+  });
 
-  // Arka plan carousel: her CAROUSEL_INTERVAL_MS'de bir sonraki görsel
-  const imageCount = Math.max(1, backgroundImages.length);
   useEffect(() => {
-    const next = () => {
-      Animated.timing(fadeAnim, {
-        toValue: 0.3,
-        duration: 400,
-        useNativeDriver: true,
-      }).start(() => {
-        setCurrentImageIndex((i) => (i + 1) % imageCount);
-        Animated.timing(fadeAnim, {
-          toValue: 1,
-          duration: 600,
-          useNativeDriver: true,
-        }).start();
+    if (response?.type === 'success' && response.authentication) {
+      handleGoogleSuccess(response.authentication.idToken || response.authentication.accessToken);
+    }
+  }, [response]);
+
+  const handleGoogleSuccess = async (token: string) => {
+    if (!token) return;
+    setLoading(true);
+    try {
+      const data = await googleLogin(token);
+      useAuthStore.getState().setTokens(data.access_token, data.refresh_token);
+      useAuthStore.getState().setUser(data.user);
+      success();
+      router.replace('/(tabs)');
+    } catch (err: any) {
+      Alert.alert('Giriş Hatası', err.message || 'Google ile giriş başarısız oldu.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const signInWithApple = async () => {
+    try {
+      const credential = await AppleAuthentication.signInAsync({
+        requestedScopes: [
+          AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
+          AppleAuthentication.AppleAuthenticationScope.EMAIL,
+        ],
       });
-    };
-    const interval = setInterval(next, CAROUSEL_INTERVAL_MS);
-    return () => clearInterval(interval);
-  }, [imageCount, fadeAnim]);
+      if (credential.identityToken) {
+        setLoading(true);
+        const data = await appleLogin(credential.identityToken);
+        useAuthStore.getState().setTokens(data.access_token, data.refresh_token);
+        useAuthStore.getState().setUser(data.user);
+        success();
+        router.replace('/(tabs)');
+      }
+    } catch (e: any) {
+      if (e.code === 'ERR_REQUEST_CANCELED') {
+        // Kullanıcı iptal etti
+      } else {
+        Alert.alert('Giriş Hatası', 'Apple ile giriş başarısız oldu.');
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
 
   const validateForm = useCallback((): boolean => {
     const newErrors: { email?: string; password?: string } = {};
@@ -121,7 +141,12 @@ export default function LoginScreen() {
       useAuthStore.getState().setTokens(data.access_token, data.refresh_token);
       useAuthStore.getState().setUser(data.user);
       success();
-      router.replace('/(tabs)');
+      // E-posta doğrulanmamışsa doğrulama ekranına yönlendir
+      if (!data.user.is_email_verified) {
+        router.replace('/verify-email');
+      } else {
+        router.replace('/(tabs)');
+      }
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : 'Giriş başarısız. Lütfen tekrar deneyin.';
       setErrors({ email: msg });
@@ -133,8 +158,12 @@ export default function LoginScreen() {
 
   const handleSocialLogin = useCallback((provider: string) => {
     lightImpact();
-    Alert.alert('Bilgi', `${provider} ile giriş yakında eklenecek.`, [{ text: 'Tamam' }]);
-  }, []);
+    if (provider === 'Apple') {
+      signInWithApple();
+    } else if (provider === 'Google') {
+      promptAsync();
+    }
+  }, [promptAsync]);
 
   const clearEmailError = useCallback(() => {
     setErrors((prev) => (prev.email ? { ...prev, email: undefined } : prev));
@@ -143,24 +172,17 @@ export default function LoginScreen() {
     setErrors((prev) => (prev.password ? { ...prev, password: undefined } : prev));
   }, []);
 
-  const currentImage = backgroundImages[Math.min(currentImageIndex, imageCount - 1)] ?? FALLBACK_PLACE_IMAGES[0];
+  const currentImage = FALLBACK_PLACE_IMAGES[0];
 
   return (
     <View style={styles.container}>
-      {/* Arka plan: mekan görselleri carousel */}
+      {/* Sabit Arka plan görseli */}
       <View style={StyleSheet.absoluteFill}>
         <Image
           source={{ uri: currentImage }}
           style={styles.backgroundImage}
           resizeMode="cover"
         />
-        <Animated.View style={[StyleSheet.absoluteFill, { opacity: fadeAnim }]}>
-          <Image
-            source={{ uri: currentImage }}
-            style={styles.backgroundImage}
-            resizeMode="cover"
-          />
-        </Animated.View>
       </View>
 
       {/* Koyu gradient overlay – metin ve form okunabilir olsun */}
@@ -182,109 +204,117 @@ export default function LoginScreen() {
             keyboardShouldPersistTaps="handled"
             showsVerticalScrollIndicator={false}
           >
-            <View style={styles.content} pointerEvents="box-none">
-              <View style={styles.topBlock}>
-                {/* Marka & slogan – profesyonel tipografi */}
-                <View style={styles.header}>
-                  <Text style={styles.brandTitle}>ASEMOS</Text>
-                  <Text style={styles.tagline}>
-                    Seni dinleyen, öneren, yönlendiren rehberin
-                  </Text>
-                </View>
-
-                {/* Form kartı – koyu cam efekti */}
-                <BlurView intensity={90} tint="dark" style={styles.card}>
-                  <View style={styles.cardInner}>
-                    <Input
-                      variant="onDark"
-                      label="E-posta"
-                      placeholder="ornek@email.com"
-                      value={email}
-                      onChangeText={(t) => {
-                        setEmail(t);
-                        clearEmailError();
-                      }}
-                      keyboardType="email-address"
-                      autoCapitalize="none"
-                      autoComplete="email"
-                      error={errors.email}
-                      containerStyle={styles.inputContainer}
-                    />
-                    <Input
-                      variant="onDark"
-                      label="Şifre"
-                      placeholder="••••••••"
-                      value={password}
-                      onChangeText={(t) => {
-                        setPassword(t);
-                        clearPasswordError();
-                      }}
-                      secureTextEntry
-                      autoComplete="password"
-                      error={errors.password}
-                      containerStyle={styles.inputContainer}
-                    />
-                    <TouchableOpacity
-                      onPress={() => lightImpact()}
-                      style={styles.forgotWrap}
-                    >
-                      <Text style={styles.forgotText}>Şifreni mi unuttun?</Text>
-                    </TouchableOpacity>
-                    <Button
-                      variant="primary"
-                      size="large"
-                      onPress={handleLogin}
-                      loading={loading}
-                      disabled={loading}
-                      style={styles.loginButton}
-                    >
-                      Giriş Yap
-                    </Button>
-
-                    <View style={styles.divider}>
-                      <View style={styles.dividerLine} />
-                      <Text style={styles.dividerLabel}>veya</Text>
-                      <View style={styles.dividerLine} />
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+              {/* Make sure this outer View stretches to fill the ScrollView content */}
+              <View style={{ flex: 1 }}>
+                <View style={styles.content} pointerEvents="box-none">
+                  <View style={styles.topBlock}>
+                    {/* Marka & slogan – profesyonel tipografi */}
+                    <View style={styles.header}>
+                      <Text style={styles.brandTitle}>ASEMOS</Text>
+                      <Text style={styles.tagline}>
+                        Seni dinleyen, öneren, yönlendiren rehberin
+                      </Text>
                     </View>
 
-                    <View style={styles.socialRow}>
-                      <TouchableOpacity
-                        onPress={() => handleSocialLogin('Google')}
-                        style={styles.socialBtnGoogle}
-                      >
-                        <Text style={styles.socialIconG}>G</Text>
-                        <Text style={styles.socialBtnTextGoogle}>Google</Text>
-                      </TouchableOpacity>
-                      <TouchableOpacity
-                        onPress={() => handleSocialLogin('Apple')}
-                        style={styles.socialBtnApple}
-                      >
-                        <IconSymbol name="apple.logo" size={20} color="#fff" />
-                        <Text style={styles.socialBtnTextWhite}>Apple</Text>
-                      </TouchableOpacity>
-                    </View>
+                    {/* Form kartı – koyu cam efekti */}
+                    <BlurView intensity={90} tint="dark" style={styles.card}>
+                      <View style={styles.cardInner}>
+                        <Input
+                          variant="onDark"
+                          label="E-posta"
+                          placeholder="ornek@email.com"
+                          value={email}
+                          onChangeText={(t) => {
+                            setEmail(t);
+                            clearEmailError();
+                          }}
+                          keyboardType="email-address"
+                          autoCapitalize="none"
+                          autoComplete="email"
+                          error={errors.email}
+                          containerStyle={styles.inputContainer}
+                        />
+                        <Input
+                          variant="onDark"
+                          label="Şifre"
+                          placeholder="••••••••"
+                          value={password}
+                          onChangeText={(t) => {
+                            setPassword(t);
+                            clearPasswordError();
+                          }}
+                          secureTextEntry
+                          autoComplete="password"
+                          error={errors.password}
+                          containerStyle={styles.inputContainer}
+                        />
+                        <TouchableOpacity
+                          onPress={() => {
+                            lightImpact();
+                            router.push('/forgot-password' as any);
+                          }}
+                          style={styles.forgotWrap}
+                        >
+                          <Text style={styles.forgotText}>Şifreni mi unuttun?</Text>
+                        </TouchableOpacity>
+                        <Button
+                          variant="primary"
+                          size="large"
+                          onPress={handleLogin}
+                          loading={loading}
+                          disabled={loading}
+                          style={styles.loginButton}
+                        >
+                          Giriş Yap
+                        </Button>
+
+                        <View style={styles.divider}>
+                          <View style={styles.dividerLine} />
+                          <Text style={styles.dividerLabel}>veya</Text>
+                          <View style={styles.dividerLine} />
+                        </View>
+
+                        <View style={styles.socialRow}>
+                          <TouchableOpacity
+                            onPress={() => handleSocialLogin('Google')}
+                            style={styles.socialBtnGoogle}
+                          >
+                            <Text style={styles.socialIconG}>G</Text>
+                            <Text style={styles.socialBtnTextGoogle}>Google</Text>
+                          </TouchableOpacity>
+                          <TouchableOpacity
+                            onPress={() => handleSocialLogin('Apple')}
+                            style={styles.socialBtnApple}
+                          >
+                            <IconSymbol name="apple.logo" size={20} color="#fff" />
+                            <Text style={styles.socialBtnTextWhite}>Apple</Text>
+                          </TouchableOpacity>
+                        </View>
+                      </View>
+                    </BlurView>
                   </View>
-                </BlurView>
+                </View>
               </View>
-            </View>
+            </TouchableWithoutFeedback>
           </ScrollView>
-        </KeyboardAvoidingView>
 
-        {/* Footer ekranın en altında sabit – klavye açıldığında formun üstüne taşınmaz */}
-        <TouchableOpacity
-          style={[styles.footerFixed, { paddingBottom: 16 + insets.bottom }]}
-          onPress={() => {
-            Keyboard.dismiss();
-            lightImpact();
-            router.push('/register');
-          }}
-          activeOpacity={0.8}
-        >
-          <Text style={styles.footerLabel}>Hesabın yok mu? </Text>
-          <Text style={styles.footerLink}>Kayıt Ol</Text>
-        </TouchableOpacity>
-      </SafeAreaView>
-    </View>
+          {/* Footer formun en altında */}
+          <TouchableOpacity
+            style={[styles.footerStatic, { paddingBottom: Math.max(16, insets.bottom + 8) }]}
+            onPress={() => {
+              Keyboard.dismiss();
+              lightImpact();
+              router.push('/register');
+            }}
+            activeOpacity={0.8}
+          >
+            <Text style={styles.footerLabel}>Hesabın yok mu? </Text>
+            <Text style={styles.footerLink}>Kayıt Ol</Text>
+          </TouchableOpacity>
+        </KeyboardAvoidingView>
+      </SafeAreaView >
+    </View >
   );
 }
 
@@ -304,13 +334,13 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     flexGrow: 1,
-    paddingBottom: 24,
+    paddingBottom: 40,
   },
   content: {
     flex: 1,
     paddingHorizontal: 24,
     paddingTop: 32,
-    paddingBottom: 56,
+    paddingBottom: 24,
   },
   topBlock: {
     flex: 1,
@@ -454,15 +484,13 @@ const styles = StyleSheet.create({
     fontWeight: '600',
     color: '#fff',
   },
-  footerFixed: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    bottom: 0,
+  footerStatic: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
     paddingTop: 16,
+    paddingHorizontal: 24,
+    backgroundColor: 'transparent',
   },
   footerLabel: {
     fontSize: 16,

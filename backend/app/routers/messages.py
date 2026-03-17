@@ -155,6 +155,26 @@ def mark_messages_read(
     return {"ok": True}
 
 
+@router.put("/messages/{message_id}/read")
+def mark_single_message_read(
+    message_id: int,
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(get_current_user),
+):
+    """Belirli bir mesajı okundu olarak işaretle"""
+    msg = db.query(models.Message).filter(models.Message.id == message_id).first()
+    if not msg:
+        raise HTTPException(status_code=404, detail="Mesaj bulunamadı.")
+    
+    _verify_conversation_access(db, msg.conversation_id, current_user.id)
+    
+    if msg.sender_id != current_user.id and not msg.is_read:
+        msg.is_read = True
+        db.commit()
+        
+    return {"ok": True, "is_read": msg.is_read}
+
+
 @router.delete("/messages/{message_id}")
 def delete_message(
     message_id: int,
@@ -311,6 +331,16 @@ async def websocket_chat(
 
                     # Herkese gönder (kendisi dahil — confirmation için)
                     await manager.broadcast_to_conversation(conversation_id, response_data)
+
+                    # Karşı taraf online değilse push notification gönder
+                    import crud
+                    if not manager.is_user_online(other_user_id):
+                        preview = msg.content.strip()[:80] if msg.content else "Yeni mesaj"
+                        crud.create_notification(
+                            db, other_user_id, "message", user_id,
+                            push_extra={"preview": preview, "conversation_id": conversation_id},
+                        )
+
                 finally:
                     db.close()
 

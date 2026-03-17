@@ -212,3 +212,35 @@ def get_place_posts(
     posts, total = crud.get_posts_by_place(db, place_id, page, page_size)
     items = [_post_to_schema(p, db, current_user.id if current_user else None) for p in posts]
     return schemas.PaginatedPosts(items=items, total=total, page=page, page_size=page_size)
+
+
+@router.delete("/posts/{post_id}/comments/{comment_id}")
+def delete_comment(
+    post_id: int,
+    comment_id: int,
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(get_current_user),
+):
+    """Kendi yorumunu sil."""
+    if not crud.delete_comment(db, comment_id, current_user.id):
+        raise HTTPException(status_code=404, detail="Yorum bulunamadı veya yetkiniz yok.")
+    return {"ok": True}
+
+
+@router.post("/report")
+def create_report(
+    data: schemas.ReportCreate,
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(get_current_user),
+):
+    """Post, yorum, kullanıcı veya match profili raporla."""
+    valid_types = ["post", "comment", "user", "match_profile"]
+    if data.target_type not in valid_types:
+        raise HTTPException(status_code=400, detail=f"Geçersiz hedef türü. Geçerli: {valid_types}")
+    valid_reasons = ["spam", "inappropriate", "harassment", "other"]
+    if data.reason not in valid_reasons:
+        raise HTTPException(status_code=400, detail=f"Geçersiz sebep. Geçerli: {valid_reasons}")
+    report = crud.create_report(
+        db, current_user.id, data.target_type, data.target_id, data.reason, data.description
+    )
+    return {"ok": True, "report_id": report.id, "message": "Raporunuz alındı. İncelenecektir."}

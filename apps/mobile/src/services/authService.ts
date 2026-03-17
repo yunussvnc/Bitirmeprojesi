@@ -1,4 +1,4 @@
-import { apiPost, apiGet, apiPut } from "@/src/utils/apiClient";
+import { apiPost, apiGet, apiPut, apiDelete } from "@/src/utils/apiClient";
 
 export type AuthUser = {
   id: number;
@@ -10,6 +10,7 @@ export type AuthUser = {
   bio: string | null;
   role: string;
   is_active: boolean;
+  is_email_verified: boolean;
   created_at: string;
   birth_date: string | null;
 };
@@ -61,4 +62,45 @@ export async function getMe(): Promise<AuthUser> {
 
 export async function updateMe(payload: UpdateProfilePayload): Promise<AuthUser> {
   return apiPut<AuthUser>("/auth/me", payload);
+}
+
+// --- Email Doğrulama ---
+
+export async function verifyEmail(code: string): Promise<{ ok: boolean; message: string }> {
+  return apiPost<{ ok: boolean; message: string }>("/auth/verify-email", { code });
+}
+
+export async function resendVerification(): Promise<{ ok: boolean; message: string }> {
+  return apiPost<{ ok: boolean; message: string }>("/auth/resend-verification", {});
+}
+
+// --- Şifre & Hesap ---
+
+export async function changePassword(currentPassword: string, newPassword: string): Promise<{ ok: boolean; message: string }> {
+  return apiPut<{ ok: boolean; message: string }>("/auth/change-password", {
+    current_password: currentPassword,
+    new_password: newPassword,
+  });
+}
+
+export async function deleteAccount(): Promise<{ ok: boolean; message: string }> {
+  return apiDelete<{ ok: boolean; message: string }>("/auth/me");
+}
+
+export async function forgotPassword(email: string): Promise<{ ok: boolean; message: string }> {
+  return apiPost<{ ok: boolean; message: string }>("/auth/forgot-password", { email }, { skipAuth: true });
+}
+
+export async function resetPassword(email: string, code: string, newPassword: string): Promise<{ ok: boolean; message: string }> {
+  return apiPost<{ ok: boolean; message: string }>("/auth/reset-password", { email, code, new_password: newPassword }, { skipAuth: true });
+}
+
+// --- Sosyal Giriş ---
+
+export async function googleLogin(token: string): Promise<AuthTokens> {
+  return apiPost<AuthTokens>("/auth/google", { token }, { skipAuth: true });
+}
+
+export async function appleLogin(token: string): Promise<AuthTokens> {
+  return apiPost<AuthTokens>("/auth/apple", { token }, { skipAuth: true });
 }
