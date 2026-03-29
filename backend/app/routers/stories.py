@@ -2,7 +2,7 @@
 
 from typing import Optional
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 
 import models, schemas, crud
@@ -43,6 +43,7 @@ def create_story(
     db: Session = Depends(get_db),
     current_user: models.User = Depends(get_current_user),
 ):
+    """Yeni hikaye oluşturur. Mekan ID verilmişse geçerliliği doğrulanır."""
     if data.place_id is not None and not crud.get_place_by_id(db, data.place_id):
         raise HTTPException(status_code=404, detail="Mekan bulunamadı.")
     story = crud.create_story(db, current_user.id, data)
@@ -52,10 +53,11 @@ def create_story(
 @router.get("/places/{place_id}/stories", response_model=schemas.PaginatedStories)
 def get_place_stories(
     place_id: int,
-    page: int = 1,
-    page_size: int = 50,
+    page: int = Query(1, ge=1),
+    page_size: int = Query(50, ge=1, le=100),
     db: Session = Depends(get_db),
 ):
+    """Mekanın hikayelerini sayfalı olarak getirir."""
     stories, total = crud.get_stories_by_place(db, place_id, page, page_size)
     items = [_story_to_schema(s) for s in stories]
     return schemas.PaginatedStories(items=items, total=total, page=page, page_size=page_size)
@@ -63,9 +65,9 @@ def get_place_stories(
 
 @router.get("/feed/stories", response_model=schemas.PaginatedStories)
 def get_feed_stories(
-    page: int = 1,
-    page_size: int = 50,
-    filter: str = "all",
+    page: int = Query(1, ge=1),
+    page_size: int = Query(50, ge=1, le=100),
+    filter: str = Query("all"),
     db: Session = Depends(get_db),
     current_user: Optional[models.User] = Depends(get_optional_user),
 ):

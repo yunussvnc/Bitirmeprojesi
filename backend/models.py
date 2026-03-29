@@ -38,6 +38,31 @@ class User(Base):
     password_resets = relationship("PasswordReset", back_populates="user", cascade="all, delete-orphan")
     saved_places = relationship("SavedPlace", back_populates="user", cascade="all, delete-orphan")
     saved_posts = relationship("SavedPost", back_populates="user", cascade="all, delete-orphan")
+    owned_places = relationship("Place", back_populates="owner")
+
+
+class PendingUser(Base):
+    __tablename__ = "pending_users"
+    id = Column(Integer, primary_key=True, index=True)
+    email = Column(String, unique=True, index=True, nullable=False)
+    password_hash = Column(String, nullable=False)
+    username = Column(String, nullable=True)
+    first_name = Column(String, nullable=True)
+    last_name = Column(String, nullable=True)
+    birth_date = Column(Date, nullable=True)
+    verification_code = Column(String, nullable=False)
+    expires_at = Column(DateTime(timezone=True), nullable=False)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+class PendingVenue(Base):
+    """Mekan kayıtları admin onayı beklerken burada tutulur"""
+    __tablename__ = "pending_venues"
+    id = Column(Integer, primary_key=True, index=True)
+    venue_name = Column(String, nullable=False)
+    email = Column(String, unique=True, index=True, nullable=False)
+    password_hash = Column(String, nullable=False)
+    status = Column(String, default="pending", index=True)  # pending, approved, rejected
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
 
 class EmailVerification(Base):
     __tablename__ = "email_verifications"
@@ -145,11 +170,20 @@ class Place(Base):
     video_url = Column(String, nullable=True)  # Mekan videosu URL'si
     campaign_text = Column(String, nullable=True)  # Mekan kampanyası (ör. 2 al 1 bedava)
 
-    # Çalışma saatleri (HH:MM formatında, ör. "09:00", "23:00")
-    opening_time = Column(String, nullable=True)  # Açılış saati
-    closing_time = Column(String, nullable=True)  # Kapanış saati
+    # Çalışma saatleri ve ekstra iletişim bilgileri
+    opening_time = Column(String, nullable=True)  # Açılış saati (HH:MM)
+    closing_time = Column(String, nullable=True)  # Kapanış saati (HH:MM)
+    is_open = Column(Boolean, default=True)
+    phone_number = Column(String, nullable=True)
+    
+    # JSON Arrays stored as Text
+    gallery_urls = Column(Text, nullable=True)
+    menu_items_json = Column(Text, nullable=True)
 
     # İlişkiler
+    owner_id = Column(Integer, ForeignKey("users.id"), nullable=True, index=True)
+    
+    owner = relationship("User", back_populates="owned_places")
     reviews = relationship("Review", back_populates="place")
     posts = relationship("Post", back_populates="place")
     stories = relationship("Story", back_populates="place")

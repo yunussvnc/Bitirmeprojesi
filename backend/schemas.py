@@ -1,4 +1,4 @@
-from pydantic import BaseModel, EmailStr
+from pydantic import BaseModel, EmailStr, Field
 from datetime import datetime, date
 from typing import Optional, List
 
@@ -54,15 +54,19 @@ class PlaceBase(BaseModel):
     city: str
     description: Optional[str] = None
     campaign_text: Optional[str] = None
-    price_range: Optional[int] = None # 1 ile 4 arası
+    price_range: Optional[int] = Field(None, ge=1, le=4, description="Fiyat segmenti (1-4)")  # 1 ile 4 arası
     category: Optional[str] = None
     features: Optional[str] = None
-    latitude: Optional[float] = None
-    longitude: Optional[float] = None
-    photo_url: Optional[str] = None  # Mekan fotoğrafı
+    latitude: Optional[float] = Field(None, ge=-90, le=90)
+    longitude: Optional[float] = Field(None, ge=-180, le=180)
+    photo_url: Optional[str] = None  # Mekan (kapak) fotoğrafı
     video_url: Optional[str] = None  # Mekan videosu
-    opening_time: Optional[str] = None  # Açılış saati (HH:MM)
-    closing_time: Optional[str] = None  # Kapanış saati (HH:MM)
+    opening_time: Optional[str] = Field(None, pattern=r"^\d{2}:\d{2}$", description="Açılış saati (HH:MM)")
+    closing_time: Optional[str] = Field(None, pattern=r"^\d{2}:\d{2}$", description="Kapanış saati (HH:MM)")
+    is_open: Optional[bool] = None
+    phone_number: Optional[str] = Field(None, max_length=20)
+    gallery_urls: Optional[List[str]] = None
+    menu_items: Optional[List[dict]] = None
 
 class PlaceCreate(PlaceBase):
     pass # Mekan eklerken tüm base alanları kullanıyoruz
@@ -108,23 +112,23 @@ class ReviewMedia(ReviewMediaBase):
 
 class ReviewBase(BaseModel):
     place_id: int
-    comment_text: str
-    rating: int  # 1-5 genel puan
+    comment_text: str = Field(..., min_length=3, max_length=2000, description="Yorum metni")
+    rating: int = Field(..., ge=1, le=5, description="Genel puan (1-5)")
     
     # Google Yorumlar tarzı detaylı bilgiler
     visit_date: Optional[datetime] = None
-    visit_type: Optional[str] = None  # "solo", "friends", "family", "business", "couple"
-    spent_amount: Optional[float] = None
+    visit_type: Optional[str] = Field(None, pattern=r"^(solo|friends|family|business|couple)$")
+    spent_amount: Optional[float] = Field(None, ge=0)
     spent_currency: str = "TRY"
-    wait_time_minutes: Optional[int] = None
+    wait_time_minutes: Optional[int] = Field(None, ge=0, le=480)
     ordered_items: Optional[str] = None  # JSON string
     
     # Kategorik puanlar (opsiyonel)
-    food_rating: Optional[int] = None
-    service_rating: Optional[int] = None
-    atmosphere_rating: Optional[int] = None
-    value_rating: Optional[int] = None
-    cleanliness_rating: Optional[int] = None
+    food_rating: Optional[int] = Field(None, ge=1, le=5)
+    service_rating: Optional[int] = Field(None, ge=1, le=5)
+    atmosphere_rating: Optional[int] = Field(None, ge=1, le=5)
+    value_rating: Optional[int] = Field(None, ge=1, le=5)
+    cleanliness_rating: Optional[int] = Field(None, ge=1, le=5)
 
 class ReviewCreate(ReviewBase):
     """
@@ -175,11 +179,36 @@ class Token(BaseModel):
 class RefreshRequest(BaseModel):
     refresh_token: str
 
+class FirstTimeSetupRequest(BaseModel):
+    """İlk girişte kullanıcı adı ve doğum tarihi ayarlama"""
+    username: str
+    birth_date: date
+
+class VenueRegisterRequest(BaseModel):
+    """Mekan başvuru (kayıt) isteği"""
+    venue_name: str
+    email: EmailStr
+    password: str
+
+class PendingVenueResponse(BaseModel):
+    id: int
+    venue_name: str
+    email: EmailStr
+    status: str
+    created_at: datetime
+    
+    class Config:
+        from_attributes = True
+
 
 # --- E-POSTA DOĞRULAMA (EMAIL VERIFICATION) ŞEMALARI ---
 
 class VerifyEmailRequest(BaseModel):
     code: str   # 6 haneli doğrulama kodu
+
+class VerifyRegisterRequest(BaseModel):
+    email: EmailStr
+    code: str
 
 class ResendVerificationRequest(BaseModel):
     email: EmailStr
@@ -203,16 +232,24 @@ class ReportCreate(BaseModel):
     description: Optional[str] = None
 
 class PlaceUpdate(BaseModel):
-    name: Optional[str] = None
-    address: Optional[str] = None
-    city: Optional[str] = None
-    description: Optional[str] = None
+    name: Optional[str] = Field(None, min_length=2, max_length=100)
+    address: Optional[str] = Field(None, max_length=300)
+    city: Optional[str] = Field(None, max_length=50)
+    description: Optional[str] = Field(None, max_length=2000)
     category: Optional[str] = None
-    latitude: Optional[float] = None
-    longitude: Optional[float] = None
+    latitude: Optional[float] = Field(None, ge=-90, le=90)
+    longitude: Optional[float] = Field(None, ge=-180, le=180)
     photo_url: Optional[str] = None
-    opening_time: Optional[str] = None
-    closing_time: Optional[str] = None
+    video_url: Optional[str] = None
+    campaign_text: Optional[str] = Field(None, max_length=500)
+    features: Optional[str] = None
+    opening_time: Optional[str] = Field(None, pattern=r"^\d{2}:\d{2}$")
+    closing_time: Optional[str] = Field(None, pattern=r"^\d{2}:\d{2}$")
+    is_open: Optional[bool] = None
+    phone_number: Optional[str] = Field(None, max_length=20)
+    price_range: Optional[int] = Field(None, ge=1, le=4)
+    gallery_urls: Optional[List[str]] = None
+    menu_items: Optional[List[dict]] = None
 
 # --- ÖNERİ (RECOMMEND) ŞEMALARI ---
 
@@ -273,7 +310,7 @@ class PostCreate(BaseModel):
     media: List[PostMediaCreate]
 
 class PostCommentCreate(BaseModel):
-    text: str
+    text: str = Field(..., min_length=1, max_length=1000, description="Yorum metni")
 
 class PostComment(BaseModel):
     id: int
@@ -531,7 +568,7 @@ class QRVerifyResponse(BaseModel):
 # --- MESAJLAŞMA (MESSAGING) ŞEMALARI ---
 
 class MessageCreate(BaseModel):
-    content: str
+    content: str = Field(..., min_length=1, max_length=5000, description="Mesaj içeriği")
     message_type: str = "text"  # "text", "image", "shared_post"
     media_url: Optional[str] = None
     shared_post_id: Optional[int] = None

@@ -30,7 +30,7 @@ import { Button, Input } from '@/src/components/ui';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
 import { lightImpact, success } from '@/src/utils/haptics';
 import { getAllPlaces } from '@/src/services/mekanService';
-import { registerUser, googleLogin, appleLogin } from '@/src/services/authService';
+import { registerUser, registerVenue, googleLogin, appleLogin } from '@/src/services/authService';
 import { useAuthStore } from '@/src/store/useAuthStore';
 import { API_BASE_URL } from '@/src/constants/api';
 import * as AppleAuthentication from 'expo-apple-authentication';
@@ -58,15 +58,16 @@ export default function RegisterScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [birthDate, setBirthDate] = useState('');
+  // roleType eklendi ("user" veya "venue")
+  const [roleType, setRoleType] = useState<'user' | 'venue'>('user');
+  const [venueName, setVenueName] = useState('');
   const [loading, setLoading] = useState(false);
-  const [showBirthDateInfo, setShowBirthDateInfo] = useState(false);
   const [errors, setErrors] = useState<{
     fullName?: string;
+    venueName?: string;
     email?: string;
     password?: string;
     confirmPassword?: string;
-    birthDate?: string;
   }>({});
   const isSubmittingRef = useRef(false);
 
@@ -88,10 +89,27 @@ export default function RegisterScreen() {
     setLoading(true);
     try {
       const data = await googleLogin(token);
+      
+      // Check role mismatch purely for UX
+      if (roleType === 'venue' && data.user.role !== 'venue') {
+        throw new Error('Mekan kayıtları sosyal medya ile yapılamaz. Lütfen başvuru formunu doldurun.');
+      } else if (roleType === 'user' && data.user.role === 'venue') {
+        throw new Error('Girdiğiniz hesap bir mekan hesabı. Lütfen "Mekan" sekmesinden giriş yapın.');
+      }
+
       useAuthStore.getState().setTokens(data.access_token, data.refresh_token);
       useAuthStore.getState().setUser(data.user);
       success();
-      router.replace('/(tabs)');
+
+      if (data.user.role === 'venue') {
+         router.replace('/(venue-tabs)' as any);
+      } else {
+        if (!data.user.username || !data.user.birth_date) {
+          router.replace('/first-time-setup' as any);
+        } else {
+          router.replace('/(tabs)');
+        }
+      }
     } catch (err: any) {
       Alert.alert('Giriş Hatası', err.message || 'Google ile giriş başarısız oldu.');
     } finally {
@@ -110,16 +128,33 @@ export default function RegisterScreen() {
       if (credential.identityToken) {
         setLoading(true);
         const data = await appleLogin(credential.identityToken);
+
+        // Check role mismatch purely for UX
+        if (roleType === 'venue' && data.user.role !== 'venue') {
+          throw new Error('Mekan kayıtları sosyal medya ile yapılamaz. Lütfen başvuru formunu doldurun.');
+        } else if (roleType === 'user' && data.user.role === 'venue') {
+          throw new Error('Girdiğiniz hesap bir mekan hesabı. Lütfen "Mekan" sekmesinden giriş yapın.');
+        }
+
         useAuthStore.getState().setTokens(data.access_token, data.refresh_token);
         useAuthStore.getState().setUser(data.user);
         success();
-        router.replace('/(tabs)');
+
+        if (data.user.role === 'venue') {
+           router.replace('/(venue-tabs)' as any);
+        } else {
+          if (!data.user.username || !data.user.birth_date) {
+            router.replace('/first-time-setup' as any);
+          } else {
+            router.replace('/(tabs)');
+          }
+        }
       }
     } catch (e: any) {
       if (e.code === 'ERR_REQUEST_CANCELED') {
         // Kullanıcı iptal etti
       } else {
-        Alert.alert('Giriş Hatası', 'Apple ile giriş başarısız oldu.');
+        Alert.alert('Giriş Hatası', e.message || 'Apple ile giriş başarısız oldu.');
       }
     } finally {
       setLoading(false);
@@ -130,47 +165,28 @@ export default function RegisterScreen() {
 
   const validateForm = useCallback((): boolean => {
     const newErrors: typeof errors = {};
-    if (!fullName.trim()) newErrors.fullName = 'Ad soyad gereklidir';
-    else if (fullName.trim().split(/\s+/).filter(Boolean).length < 2) newErrors.fullName = 'Ad ve soyad girin';
+    if (roleType === 'user') {
+      if (!fullName.trim()) newErrors.fullName = 'Ad soyad gereklidir';
+      else if (fullName.trim().split(/\s+/).filter(Boolean).length < 2) newErrors.fullName = 'Ad ve soyad girin';
+    } else {
+      if (!venueName.trim()) newErrors.venueName = 'Mekan Adı gereklidir';
+    }
+
     if (!email.trim()) newErrors.email = 'E-posta gereklidir';
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) newErrors.email = 'Geçerli bir e-posta adresi girin';
+    
     if (!password.trim()) newErrors.password = 'Şifre gereklidir';
     else if (password.length < 8) newErrors.password = 'Şifre en az 8 karakter olmalıdır';
     else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*([^\w\s]|_))/.test(password)) {
       newErrors.password = 'Büyük harf, küçük harf, rakam ve özel harf girmelisin';
     }
+    
     if (!confirmPassword.trim()) newErrors.confirmPassword = 'Şifre tekrarı gereklidir';
     else if (password !== confirmPassword) newErrors.confirmPassword = 'Şifreler eşleşmiyor';
-    if (!birthDate.trim()) newErrors.birthDate = 'Doğum tarihi gereklidir';
-    else {
-      const parts = birthDate.split('/');
-      if (parts.length !== 3 || parts[0].length !== 2 || parts[1].length !== 2 || parts[2].length !== 4) {
-        newErrors.birthDate = 'GG/AA/YYYY formatında girin';
-      } else {
-        const day = parseInt(parts[0]), month = parseInt(parts[1]), year = parseInt(parts[2]);
-        const d = new Date(year, month - 1, day);
-        if (isNaN(d.getTime()) || d.getDate() !== day || d.getMonth() !== month - 1) {
-          newErrors.birthDate = 'Geçerli bir tarih girin';
-        } else {
-          const today = new Date();
-          if (d > today) {
-            newErrors.birthDate = 'Gelecekte bir tarih girilemez';
-          } else {
-            let age = today.getFullYear() - d.getFullYear();
-            const m = today.getMonth() - d.getMonth();
-            if (m < 0 || (m === 0 && today.getDate() < d.getDate())) age--;
-            if (age <= 13) {
-              newErrors.birthDate = '14 yaşından küçükler uygulamaya kayıt olamaz';
-            } else if (age > 120) {
-              newErrors.birthDate = 'Geçerli bir doğum tarihi girin';
-            }
-          }
-        }
-      }
-    }
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
-  }, [fullName, email, password, confirmPassword, birthDate]);
+  }, [fullName, venueName, email, password, confirmPassword, roleType]);
 
   const handleRegister = useCallback(async () => {
     if (isSubmittingRef.current) return;
@@ -179,23 +195,34 @@ export default function RegisterScreen() {
     lightImpact();
     setLoading(true);
     try {
-      const nameParts = fullName.trim().split(' ');
-      const first_name = nameParts[0];
-      const last_name = nameParts.slice(1).join(' ') || undefined;
-      // Convert DD/MM/YYYY to YYYY-MM-DD for API
-      const bdParts = birthDate.split('/');
-      const birth_date_api = `${bdParts[2]}-${bdParts[1]}-${bdParts[0]}`;
-      const data = await registerUser({
-        email: email.trim(),
-        password,
-        first_name,
-        last_name,
-        birth_date: birth_date_api,
-      });
-      useAuthStore.getState().setTokens(data.access_token, data.refresh_token);
-      useAuthStore.getState().setUser(data.user);
-      success();
-      router.replace('/verify-email');
+      const formattedEmail = email.trim().toLowerCase();
+
+      if (roleType === 'user') {
+        const nameParts = fullName.trim().split(' ');
+        const first_name = nameParts[0];
+        const last_name = nameParts.slice(1).join(' ') || undefined;
+        await registerUser({
+          email: formattedEmail,
+          password,
+          first_name,
+          last_name,
+        });
+        success();
+        router.replace({ pathname: '/verify-email', params: { email: encodeURIComponent(formattedEmail) } });
+      } else {
+        // Venue Registration
+        await registerVenue({
+          venue_name: venueName.trim(),
+          email: formattedEmail,
+          password,
+        });
+        success();
+        Alert.alert(
+          'Başvuru Alındı',
+          'Mekan başvurunuz tarafımıza iletilmiştir. Gün içerisinde size dönüş yapacağız.',
+          [{ text: 'Tamam', onPress: () => router.replace('/login') }]
+        );
+      }
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : 'Kayıt başarısız. Lütfen tekrar deneyin.';
       setErrors({ email: msg });
@@ -203,7 +230,7 @@ export default function RegisterScreen() {
       isSubmittingRef.current = false;
       setLoading(false);
     }
-  }, [validateForm, fullName, email, password, birthDate]);
+  }, [validateForm, fullName, venueName, email, password, roleType]);
 
   const handleSocialRegister = useCallback((provider: string) => {
     lightImpact();
@@ -247,20 +274,55 @@ export default function RegisterScreen() {
               <View style={{ flex: 1 }}>
                 <View style={styles.content} pointerEvents="box-none">
                   <View style={styles.topBlock}>
-                    {/* Header (isim ve slogan) kaldırıldı */}
+                    {/* Toggle Buttons (Kullanıcı / Mekan) */}
+                    <View style={styles.toggleContainer}>
+                      <TouchableOpacity 
+                        style={[styles.toggleBtn, roleType === 'user' && styles.toggleBtnActive]}
+                        onPress={() => {
+                          setRoleType('user');
+                          setErrors({});
+                          lightImpact();
+                        }}
+                      >
+                       <Text style={[styles.toggleTxt, roleType === 'user' && styles.toggleTxtActive]}>Kullanıcı</Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity 
+                        style={[styles.toggleBtn, roleType === 'venue' && styles.toggleBtnActive]}
+                        onPress={() => {
+                          setRoleType('venue');
+                          setErrors({});
+                          lightImpact();
+                        }}
+                      >
+                       <Text style={[styles.toggleTxt, roleType === 'venue' && styles.toggleTxtActive]}>Mekan</Text>
+                      </TouchableOpacity>
+                    </View>
 
                     <BlurView intensity={90} tint="dark" style={styles.card}>
                       <View style={styles.cardInner}>
-                        <Input
-                          variant="onDark"
-                          label="Ad Soyad"
-                          placeholder="Adınız Soyadınız"
-                          value={fullName}
-                          onChangeText={(t) => { setFullName(t); clearFieldError('fullName'); }}
-                          autoCapitalize="words"
-                          error={errors.fullName}
-                          containerStyle={styles.inputContainer}
-                        />
+                        {roleType === 'user' ? (
+                          <Input
+                            variant="onDark"
+                            label="Ad Soyad"
+                            placeholder="Adınız Soyadınız"
+                            value={fullName}
+                            onChangeText={(t) => { setFullName(t); clearFieldError('fullName'); }}
+                            autoCapitalize="words"
+                            error={errors.fullName}
+                            containerStyle={styles.inputContainer}
+                          />
+                        ) : (
+                          <Input
+                            variant="onDark"
+                            label="Mekan Adı"
+                            placeholder="Mekan Adı Giriniz"
+                            value={venueName}
+                            onChangeText={(t) => { setVenueName(t); clearFieldError('venueName'); }}
+                            autoCapitalize="words"
+                            error={errors.venueName}
+                            containerStyle={styles.inputContainer}
+                          />
+                        )}
                         <Input
                           variant="onDark"
                           label="E-posta"
@@ -299,40 +361,6 @@ export default function RegisterScreen() {
                           error={errors.confirmPassword}
                           containerStyle={styles.inputContainer}
                         />
-                        <Input
-                          variant="onDark"
-                          label="Doğum Tarihi"
-                          placeholder="GG/AA/YYYY"
-                          value={birthDate}
-                          onFocus={() => {
-                            setShowBirthDateInfo(true);
-                          }}
-                          onBlur={() => {
-                            setShowBirthDateInfo(false);
-                          }}
-                          onChangeText={(t: string) => {
-                            // Auto-format: add slashes
-                            let cleaned = t.replace(/[^0-9/]/g, '');
-                            // Remove extra slashes
-                            const digits = cleaned.replace(/\//g, '');
-                            let formatted = '';
-                            for (let i = 0; i < digits.length && i < 8; i++) {
-                              if (i === 2 || i === 4) formatted += '/';
-                              formatted += digits[i];
-                            }
-                            setBirthDate(formatted);
-                            clearFieldError('birthDate');
-                          }}
-                          keyboardType="number-pad"
-                          error={errors.birthDate}
-                          containerStyle={styles.inputContainer}
-                          maxLength={10}
-                        />
-                        {showBirthDateInfo && (
-                          <Text style={styles.birthDateInfo}>
-                            ℹ️ Uygulamaya kayıt olmak için 14 yaşından büyük olmanız gerekmektedir. Eğer 18 yaşının altındaysanız, uygulama içindeki kullanımı zorunlu olmayan eşleşme ekranına erişemezsiniz. 18 yaşının üstünde iseniz yaş bilginiz bu tarihten hesaplanacaktır.
-                          </Text>
-                        )}
                         <Button
                           variant="primary"
                           size="large"
@@ -341,24 +369,28 @@ export default function RegisterScreen() {
                           disabled={loading}
                           style={styles.registerButton}
                         >
-                          Kayıt Ol
+                          {roleType === 'user' ? 'Kayıt Ol' : 'Onaya Gönder'}
                         </Button>
 
-                        <View style={styles.divider}>
-                          <View style={styles.dividerLine} />
-                          <Text style={styles.dividerLabel}>veya</Text>
-                          <View style={styles.dividerLine} />
-                        </View>
-                        <View style={styles.socialRow}>
-                          <TouchableOpacity onPress={() => handleSocialRegister('Google')} style={styles.socialBtnGoogle}>
-                            <Text style={styles.socialIconG}>G</Text>
-                            <Text style={styles.socialBtnTextGoogle}>Google</Text>
-                          </TouchableOpacity>
-                          <TouchableOpacity onPress={() => handleSocialRegister('Apple')} style={styles.socialBtnApple}>
-                            <IconSymbol name="apple.logo" size={20} color="#fff" />
-                            <Text style={styles.socialBtnTextWhite}>Apple</Text>
-                          </TouchableOpacity>
-                        </View>
+                        {roleType === 'user' && (
+                          <>
+                            <View style={styles.divider}>
+                              <View style={styles.dividerLine} />
+                              <Text style={styles.dividerLabel}>veya</Text>
+                              <View style={styles.dividerLine} />
+                            </View>
+                            <View style={styles.socialRow}>
+                              <TouchableOpacity onPress={() => handleSocialRegister('Google')} style={styles.socialBtnGoogle}>
+                                <Text style={styles.socialIconG}>G</Text>
+                                <Text style={styles.socialBtnTextGoogle}>Google</Text>
+                              </TouchableOpacity>
+                              <TouchableOpacity onPress={() => handleSocialRegister('Apple')} style={styles.socialBtnApple}>
+                                <IconSymbol name="apple.logo" size={20} color="#fff" />
+                                <Text style={styles.socialBtnTextWhite}>Apple</Text>
+                              </TouchableOpacity>
+                            </View>
+                          </>
+                        )}
                       </View>
                     </BlurView>
                   </View>
@@ -439,14 +471,38 @@ const styles = StyleSheet.create({
   },
   cardInner: { padding: 20, backgroundColor: 'rgba(0,0,0,0.35)' },
   inputContainer: { marginBottom: 14 },
-  birthDateInfo: {
-    fontSize: 12,
-    color: 'rgba(255,255,255,0.8)',
-    lineHeight: 16,
+  toggleContainer: {
+    flexDirection: 'row',
+    backgroundColor: 'rgba(255,255,255,0.1)',
+    borderRadius: 24,
+    padding: 4,
     marginBottom: 16,
-    marginTop: -8, // input'un hemen dibinde olması için
-    paddingHorizontal: 6,
-    fontStyle: 'italic',
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.15)',
+  },
+  toggleBtn: {
+    flex: 1,
+    paddingVertical: 12,
+    borderRadius: 20,
+    alignItems: 'center',
+  },
+  toggleBtnActive: {
+    backgroundColor: '#fff',
+    shadowColor: '#fff',
+    shadowOpacity: 0.3,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 8,
+    elevation: 4,
+  },
+  toggleTxt: {
+    color: '#ccc',
+    fontSize: 15,
+    fontWeight: '600',
+    letterSpacing: 0.4,
+  },
+  toggleTxtActive: {
+    color: '#000',
+    fontWeight: '700',
   },
   registerButton: { marginTop: 8 },
   divider: { flexDirection: 'row', alignItems: 'center', marginVertical: 18 },

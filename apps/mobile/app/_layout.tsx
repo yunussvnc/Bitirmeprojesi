@@ -26,10 +26,19 @@ function useProtectedRoute() {
       (segments.length === 1 && !segments[0]);
 
     const navigate = () => {
+      const user = useAuthStore.getState().user;
       if (!accessToken && !inAuthScreen) {
         router.replace("/login");
       } else if (accessToken && inAuthScreen) {
-        router.replace("/(tabs)");
+        if (user?.role === 'venue') {
+          router.replace("/(venue-tabs)" as any);
+        } else if (user && !user.is_email_verified) {
+          router.replace("/verify-email");
+        } else if (user && (!user.username || !user.birth_date)) {
+          router.replace("/first-time-setup" as any);
+        } else {
+          router.replace("/(tabs)");
+        }
       }
     };
 
@@ -89,6 +98,12 @@ export default function RootLayout() {
                   gestureEnabled: true,
                 }}
               />
+              <Stack.Screen name="login" options={{ gestureEnabled: false }} />
+              <Stack.Screen name="register" options={{ gestureEnabled: false }} />
+              <Stack.Screen name="first-time-setup" options={{ gestureEnabled: false }} />
+              <Stack.Screen name="verify-email" options={{ gestureEnabled: false }} />
+              <Stack.Screen name="(tabs)" options={{ gestureEnabled: false }} />
+              <Stack.Screen name="(venue-tabs)" options={{ gestureEnabled: false }} />
             </Stack>
           </PreferencesProvider>
         </ErrorBoundary>

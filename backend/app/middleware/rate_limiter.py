@@ -90,11 +90,15 @@ def reset_failed_logins(ip: str):
 
 # Rate limit kuralları: (path_prefix, max_requests, window_seconds)
 RATE_LIMIT_RULES = [
-    ("/auth/login", 5, 60),       # 5 req/dk
-    ("/auth/register", 3, 60),    # 3 req/dk
-    ("/auth/refresh", 10, 60),    # 10 req/dk
-    ("/upload/", 10, 60),         # 10 req/dk
-    ("/recommend", 10, 60),       # 10 req/dk
+    ("/auth/login", 5, 60),               # 5 req/dk
+    ("/auth/register", 3, 60),            # 3 req/dk
+    ("/auth/verify-register", 10, 300),   # 10 req/5 dk (OTP Brute Force koruması!)
+    ("/auth/resend-register-code", 3, 60),# 3 req/dk
+    ("/auth/forgot-password", 3, 60),     # 3 req/dk
+    ("/auth/reset-password", 5, 60),      # 5 req/dk (Şifre yenileme Brute Force)
+    ("/auth/refresh", 15, 60),            # 15 req/dk
+    ("/upload/", 10, 60),                 # 10 req/dk
+    ("/recommend", 10, 60),               # 10 req/dk
 ]
 
 # Genel limit

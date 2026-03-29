@@ -6,9 +6,10 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 from fastapi.responses import StreamingResponse
 from sqlalchemy.orm import Session
 import requests
+import httpx
 
-import schemas, crud
-from app.dependencies import get_db
+import schemas, crud, models
+from app.dependencies import get_db, get_current_user, get_admin_user
 from config import get_settings
 
 router = APIRouter(tags=["Places"])
@@ -77,6 +78,106 @@ def read_places(
     )
 
 
+@router.get("/places/my-venue", response_model=schemas.Place)
+def get_my_venue(db: Session = Depends(get_db), current_user: models.User = Depends(get_current_user)):
+    """Mekan yetkilisinin kendisine ait olan mekanı getirir."""
+    if current_user.role != "venue":
+        raise HTTPException(status_code=403, detail="Sadece mekan yetkilileri erişebilir.")
+    
+    place = db.query(models.Place).filter(models.Place.owner_id == current_user.id).first()
+    if not place:
+        raise HTTPException(status_code=404, detail="Size ait bir mekan bulunamadı.")
+    
+    # İstatistik eklemek için crud fonksiyonunu kullanalım
+    enriched_places = crud._enrich_places_with_stats(db, [place])
+    return enriched_places[0]
+
+
+@router.get("/places/my-venue/stats")
+def get_my_venue_stats(
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(get_current_user),
+):
+    """
+    İşletme sahibi için kapsamlı mekan istatistikleri:
+    - Toplam yorum sayısı ve ortalama puan
+    - Kayıt (bookmark) sayısı
+    - Yıldız dağılımı (1-5)
+    - Son 30 gün yorum trendi
+    """
+    if current_user.role != "venue":
+        raise HTTPException(status_code=403, detail="Sadece mekan yetkilileri erişebilir.")
+
+    place = db.query(models.Place).filter(models.Place.owner_id == current_user.id).first()
+    if not place:
+        raise HTTPException(status_code=404, detail="Size ait bir mekan bulunamadı.")
+
+    from sqlalchemy import func as sql_func
+    from datetime import datetime, timedelta, timezone
+
+    # Toplam yorum ve ortalama
+    total_reviews = db.query(models.Review).filter(models.Review.place_id == place.id).count()
+    avg_rating = db.query(sql_func.avg(models.Review.rating)).filter(
+        models.Review.place_id == place.id
+    ).scalar()
+
+    # Kayıt sayısı
+    saved_count = db.query(models.SavedPlace).filter(models.SavedPlace.place_id == place.id).count()
+
+    # Yıldız dağılımı
+    star_distribution = {}
+    for star in range(1, 6):
+        count = db.query(models.Review).filter(
+            models.Review.place_id == place.id,
+            models.Review.rating == star,
+        ).count()
+        star_distribution[star] = count
+
+    # Son 30 gün yorum trendi
+    thirty_days_ago = datetime.now(timezone.utc) - timedelta(days=30)
+    recent_reviews = db.query(models.Review).filter(
+        models.Review.place_id == place.id,
+        models.Review.created_at >= thirty_days_ago,
+    ).count()
+
+    # Yanıtlanmamış yorumlar
+    unanswered = db.query(models.Review).filter(
+        models.Review.place_id == place.id,
+        models.Review.owner_response.is_(None),
+    ).count()
+
+    return {
+        "total_reviews": total_reviews,
+        "average_rating": round(float(avg_rating), 1) if avg_rating else 0,
+        "saved_count": saved_count,
+        "star_distribution": star_distribution,
+        "reviews_last_30_days": recent_reviews,
+        "unanswered_reviews": unanswered,
+    }
+
+
+@router.put("/places/my-venue", response_model=schemas.Place)
+def update_my_venue(
+    data: schemas.PlaceUpdate,
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(get_current_user)
+):
+    """Mekan yetkilisinin kendi mekanındaki bilgileri (kampanya, foto vs) güncellemesini sağlar."""
+    if current_user.role != "venue":
+        raise HTTPException(status_code=403, detail="Sadece mekan yetkilileri erişebilir.")
+        
+    place = db.query(models.Place).filter(models.Place.owner_id == current_user.id).first()
+    if not place:
+        raise HTTPException(status_code=404, detail="Size ait bir mekan bulunamadı.")
+        
+    updated_place = crud.update_place(db, place.id, data.model_dump(exclude_unset=True))
+    if not updated_place:
+        raise HTTPException(status_code=400, detail="Mekan güncellenemedi.")
+        
+    enriched_places = crud._enrich_places_with_stats(db, [updated_place])
+    return enriched_places[0]
+
+
 @router.get("/places/{place_id}", response_model=schemas.Place)
 def read_place(place_id: int, db: Session = Depends(get_db)):
     place = crud.get_place_by_id(db, place_id=place_id)
@@ -101,7 +202,10 @@ def get_place_photo(place_id: int, max_width: int = 400, db: Session = Depends(g
         google_url = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth={max_width}&photoreference={ref}&key={api_key}"
         
         # Fotoğrafı sunucudan indirip istemciye stream et (API anahtarını gizlemek için)
-        response = requests.get(google_url, stream=True)
+        try:
+            response = requests.get(google_url, stream=True, timeout=10)
+        except requests.exceptions.RequestException:
+            raise HTTPException(status_code=504, detail="Google API'sine bağlanılamadı.")
         if response.status_code != 200:
             raise HTTPException(status_code=response.status_code, detail="Fotoğraf Google'dan alınamadı.")
             
@@ -117,8 +221,9 @@ def update_place(
     place_id: int,
     data: schemas.PlaceUpdate,
     db: Session = Depends(get_db),
+    admin: models.User = Depends(get_admin_user),
 ):
-    """Mekan bilgilerini güncelle."""
+    """Mekan bilgilerini güncelle. (Sadece Yöneticiler)"""
     place = crud.update_place(db, place_id, data.model_dump(exclude_unset=True))
     if not place:
         raise HTTPException(status_code=404, detail="Mekan bulunamadı.")

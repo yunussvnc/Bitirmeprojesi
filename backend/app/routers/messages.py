@@ -2,7 +2,7 @@
 
 import json
 import logging
-from datetime import datetime
+from datetime import datetime, timezone
 from typing import List
 
 from fastapi import APIRouter, Depends, HTTPException, WebSocket, WebSocketDisconnect, Query
@@ -90,11 +90,11 @@ async def send_message(
     db: Session = Depends(get_db),
     current_user: models.User = Depends(get_current_user),
 ):
-    """Mesaj gönder (REST fallback — WebSocket olmadan da çalışır)"""
+    """
+    Mesaj gönder (REST fallback — WebSocket olmadan da çalışır).
+    İçerik doğrulaması schema seviyesinde (Field min=1, max=5000) yapılır.
+    """
     conv = _verify_conversation_access(db, conversation_id, current_user.id)
-
-    if not data.content.strip():
-        raise HTTPException(status_code=400, detail="Mesaj boş olamaz.")
 
     msg = models.Message(
         conversation_id=conversation_id,
@@ -107,7 +107,7 @@ async def send_message(
     db.add(msg)
 
     # Konuşmanın last_message_at güncelle
-    conv.last_message_at = datetime.utcnow()
+    conv.last_message_at = datetime.now(timezone.utc)
     db.commit()
     db.refresh(msg)
 
@@ -253,7 +253,8 @@ async def websocket_chat(
         return
 
     user_id = int(user_id)
-
+    other_user_id = None
+    
     # DB ile doğrulama
     db = next(get_db())
     try:
@@ -291,7 +292,7 @@ async def websocket_chat(
             if msg_type == "message":
                 # Yeni mesaj
                 content = data.get("content", "").strip()
-                if not content:
+                if not content or len(content) > 5000:
                     continue
 
                 db = next(get_db())
@@ -309,7 +310,7 @@ async def websocket_chat(
                         models.MatchConversation.id == conversation_id
                     ).first()
                     if conv_obj:
-                        conv_obj.last_message_at = datetime.utcnow()
+                        conv_obj.last_message_at = datetime.now(timezone.utc)
                     db.commit()
                     db.refresh(msg)
 
@@ -382,10 +383,11 @@ async def websocket_chat(
     finally:
         manager.disconnect(conversation_id, user_id)
         # Offline bildir
-        try:
-            await manager.send_to_user(conversation_id, other_user_id, {
+        if other_user_id is not None:
+            try:
+                await manager.send_to_user(conversation_id, other_user_id, {
                 "type": "user_offline",
                 "user_id": user_id,
             })
-        except Exception:
-            pass
+            except Exception:
+                pass

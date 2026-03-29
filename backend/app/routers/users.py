@@ -13,18 +13,20 @@ router = APIRouter(tags=["Users"])
 
 @router.get("/users/search")
 def search_users(
-    q: str = Query(..., min_length=1, description="Aranacak kullanıcı adı veya isim"),
-    page: int = 1,
-    page_size: int = 20,
+    q: str = Query(..., min_length=1, max_length=100, description="Aranacak kullanıcı adı veya isim"),
+    page: int = Query(1, ge=1),
+    page_size: int = Query(20, ge=1, le=100),
     db: Session = Depends(get_db),
     current_user: Optional[models.User] = Depends(get_optional_user),
 ):
-    """Kullanıcı arama — username veya isim ile."""
+    """Kullanıcı arama — username, isim veya soyisim ile. Sayfalama destekler."""
+    # Escape SQL LIKE special characters to prevent injection
+    safe_q = q.replace("%", "\\%").replace("_", "\\_")
     query = db.query(models.User).filter(models.User.is_active == True)
     query = query.filter(
-        (models.User.username.ilike(f"%{q}%")) |
-        (models.User.first_name.ilike(f"%{q}%")) |
-        (models.User.last_name.ilike(f"%{q}%"))
+        (models.User.username.ilike(f"%{safe_q}%")) |
+        (models.User.first_name.ilike(f"%{safe_q}%")) |
+        (models.User.last_name.ilike(f"%{safe_q}%"))
     )
     total = query.count()
     offset = (page - 1) * page_size
@@ -61,6 +63,7 @@ def get_user_profile(
     db: Session = Depends(get_db),
     current_user: Optional[models.User] = Depends(get_optional_user),
 ):
+    """Kullanıcı profil detaylarını takipçi/takip sayılarıyla birlikte getirir."""
     user = crud.get_user_by_id(db, user_id)
     if not user:
         raise HTTPException(status_code=404, detail="Kullanıcı bulunamadı.")
@@ -92,9 +95,12 @@ def toggle_follow_user(
     db: Session = Depends(get_db),
     current_user: models.User = Depends(get_current_user),
 ):
+    """Kullanıcıyı takip et / takibi bırak (toggle). Takip bildirim gönderir."""
     target = crud.get_user_by_id(db, user_id)
     if not target:
         raise HTTPException(status_code=404, detail="Kullanıcı bulunamadı.")
+    if user_id == current_user.id:
+        raise HTTPException(status_code=400, detail="Kendinizi takip edemezsiniz.")
     is_following_now, was_created = crud.toggle_follow(db, current_user.id, user_id)
     if was_created and is_following_now:
         crud.create_notification(db, user_id, "follow", current_user.id)
@@ -104,11 +110,12 @@ def toggle_follow_user(
 @router.get("/users/{user_id}/followers")
 def get_followers(
     user_id: int,
-    page: int = 1,
-    page_size: int = 20,
+    page: int = Query(1, ge=1),
+    page_size: int = Query(20, ge=1, le=100),
     db: Session = Depends(get_db),
     current_user: Optional[models.User] = Depends(get_optional_user),
 ):
+    """Kullanıcının takipçi listesini sayfalı olarak getirir."""
     ids = crud.get_follower_ids(db, user_id)
     total = len(ids)
     offset = (page - 1) * page_size
@@ -128,11 +135,12 @@ def get_followers(
 @router.get("/users/{user_id}/following")
 def get_following(
     user_id: int,
-    page: int = 1,
-    page_size: int = 20,
+    page: int = Query(1, ge=1),
+    page_size: int = Query(20, ge=1, le=100),
     db: Session = Depends(get_db),
     current_user: Optional[models.User] = Depends(get_optional_user),
 ):
+    """Kullanıcının takip ettiklerinin listesini sayfalı olarak getirir."""
     ids = crud.get_following_ids(db, user_id)
     total = len(ids)
     offset = (page - 1) * page_size

@@ -3,7 +3,7 @@
 import json
 import random
 from typing import List, Optional
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
@@ -14,12 +14,22 @@ from app.dependencies import get_db, get_current_user
 router = APIRouter(tags=["Match"])
 
 
+def _safe_json_loads(raw: str | None) -> list:
+    """JSON string’i güvenli şekilde Python listesine dönüştürür."""
+    if not raw:
+        return []
+    try:
+        return json.loads(raw)
+    except (json.JSONDecodeError, TypeError):
+        return []
+
+
 def _check_age_gate(user: models.User):
     """Kullanıcının 18 yaşından büyük olup olmadığını kontrol eder"""
     if not user.birth_date:
         raise HTTPException(status_code=403, detail="Doğum tarihi bilgisi bulunamadı. Eşleşme özelliklerini kullanabilmek için profilinizi güncelleyin.")
     
-    today = datetime.utcnow().date()
+    today = datetime.now(timezone.utc).date()
     age = today.year - user.birth_date.year - ((today.month, today.day) < (user.birth_date.month, user.birth_date.day))
     if age < 18:
         raise HTTPException(status_code=403, detail="Eşleşme özelliklerini kullanabilmek için 18 yaşından büyük olmanız gerekmektedir.")
@@ -27,32 +37,13 @@ def _check_age_gate(user: models.User):
 
 def _match_profile_to_response(profile: models.MatchProfile) -> schemas.MatchProfileResponse:
     """MatchProfile model → response schema dönüşümü"""
-    photo_urls = []
-    if profile.photo_urls:
-        try:
-            photo_urls = json.loads(profile.photo_urls)
-        except (json.JSONDecodeError, TypeError):
-            photo_urls = []
-    interests = []
-    if profile.interests:
-        try:
-            interests = json.loads(profile.interests)
-        except (json.JSONDecodeError, TypeError):
-            interests = []
-
-    prompts = []
-    if profile.prompts:
-        try:
-            prompts = json.loads(profile.prompts)
-        except (json.JSONDecodeError, TypeError):
-            prompts = []
     return schemas.MatchProfileResponse(
         id=profile.id,
         user_id=profile.user_id,
         display_name=profile.display_name,
         age=profile.age,
         bio=profile.bio,
-        photo_urls=photo_urls,
+        photo_urls=_safe_json_loads(profile.photo_urls),
         height=profile.height,
         gender=profile.gender,
         education=profile.education,
@@ -60,14 +51,15 @@ def _match_profile_to_response(profile: models.MatchProfile) -> schemas.MatchPro
         smoking=profile.smoking,
         drinking=profile.drinking,
         looking_for=profile.looking_for,
-        interests=interests,
+        interests=_safe_json_loads(profile.interests),
         star_sign=profile.star_sign,
         family_plans=profile.family_plans,
         exercise=profile.exercise,
-        prompts=prompts,
+        prompts=_safe_json_loads(profile.prompts),
         is_active=profile.is_active,
         created_at=profile.created_at,
     )
+
 
 
 @router.post("/match-profile", response_model=schemas.MatchProfileResponse)
@@ -176,7 +168,7 @@ def verify_qr(
     if not place:
         raise HTTPException(status_code=404, detail="Mekan bulunamadı.")
 
-    active_until = datetime.utcnow() + timedelta(hours=2)
+    active_until = datetime.now(timezone.utc) + timedelta(hours=2)
 
     return schemas.QRVerifyResponse(
         verified=True,
@@ -223,24 +215,9 @@ def get_match_candidates(
         if profile.user_id in already_acted_ids:
             continue
 
-        photo_urls = []
-        if profile.photo_urls:
-            try:
-                photo_urls = json.loads(profile.photo_urls)
-            except (json.JSONDecodeError, TypeError):
-                photo_urls = []
-        interests = []
-        if profile.interests:
-            try:
-                interests = json.loads(profile.interests)
-            except (json.JSONDecodeError, TypeError):
-                interests = []
-        prompts = []
-        if profile.prompts:
-            try:
-                prompts = json.loads(profile.prompts)
-            except (json.JSONDecodeError, TypeError):
-                prompts = []
+        photo_urls = _safe_json_loads(profile.photo_urls)
+        interests = _safe_json_loads(profile.interests)
+        prompts = _safe_json_loads(profile.prompts)
 
         # Son aktif olduğu mekanı bul: Review (check-in) veya Post
         last_place_id = None

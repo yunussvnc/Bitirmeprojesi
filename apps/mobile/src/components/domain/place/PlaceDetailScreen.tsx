@@ -24,10 +24,11 @@ import {
   Animated as RNAnimated,
   Share,
 } from "react-native";
+import { useScrollToTop } from '@react-navigation/native';
 import Animated, { FadeIn } from "react-native-reanimated";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTheme } from "@/src/hooks/useTheme";
-import { Screen, Section } from "@/src/components/layout";
+import { Screen, Section, type ScreenRef } from "@/src/components/layout";
 import { PlaceCard } from "@/src/components/domain/place/PlaceCard";
 import { Button, Card, ReviewForm, RatingStars } from "@/src/components/ui";
 import { useAppStore } from "@/src/store/useAppStore";
@@ -64,11 +65,17 @@ const MOCK_NIGHTCLUB_MENU = [
   { id: 4, category: "Atıştırmalık", items: [{ name: "Karışık Çerez", price: "200 ₺" }, { name: "Meyve Tabağı", price: "350 ₺" }, { name: "Peynir Tabağı", price: "450 ₺" }] },
 ];
 
-export default function PlaceDetailScreen() {
+export default function PlaceDetailScreen({ 
+  providedId, 
+  isVenueDashboard = false 
+}: { 
+  providedId?: string, 
+  isVenueDashboard?: boolean 
+} = {}) {
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
   const params = useLocalSearchParams();
-  const id = String(params?.id ?? "");
+  const id = providedId || String(params?.id ?? "");
 
   const savedIds = useAppStore((s) => s.savedIds);
   const toggleSaved = useAppStore((s) => s.toggleSave);
@@ -88,6 +95,9 @@ export default function PlaceDetailScreen() {
   const [similarPlaces, setSimilarPlaces] = useState<any[]>([]);
   const [showReviews, setShowReviews] = useState(false);
   const [reviewGalleryData, setReviewGalleryData] = useState<{ reviews: Review[]; reviewIndex: number; imageIndex: number } | null>(null);
+
+  const screenRef = useRef<ScreenRef>(null);
+  useScrollToTop(screenRef as any);
 
   const reviewSheetHeight = useRef(new RNAnimated.Value(REVIEW_SHEET_COLLAPSED)).current;
   const reviewStartHeightRef = useRef(REVIEW_SHEET_COLLAPSED);
@@ -399,57 +409,61 @@ export default function PlaceDetailScreen() {
 
   return (
     <Animated.View entering={FadeIn.duration(280)} style={{ flex: 1 }}>
-      <Screen scrollable>
+      <Screen ref={screenRef} scrollable withTabBar={isVenueDashboard}>
         {/* Header with Back and Save */}
-        <View style={styles.header}>
-          <TouchableOpacity
-            onPress={() => {
-              lightImpact();
-              router.back();
-            }}
-            style={[styles.headerButton, { backgroundColor: colors.surface.elevated }]}
-          >
-            <IconSymbol name="chevron.left" size={20} color={colors.text.primary} />
-          </TouchableOpacity>
-
-          <View style={styles.headerRightButtons}>
+        <View style={[styles.header, isVenueDashboard && { justifyContent: "flex-end" }]}>
+          {!isVenueDashboard && (
             <TouchableOpacity
               onPress={() => {
                 lightImpact();
-                handleShare();
+                router.back();
               }}
-              style={[styles.headerButton, { backgroundColor: colors.surface.elevated, marginRight: spacing.sm }]}
+              style={[styles.headerButton, { backgroundColor: colors.surface.elevated }]}
             >
-              <IconSymbol name="square.and.arrow.up" size={20} color={colors.text.primary} />
+              <IconSymbol name="chevron.left" size={20} color={colors.text.primary} />
             </TouchableOpacity>
+          )}
 
-            <TouchableOpacity
-              onPress={() => {
-                if (saved) lightImpact();
-                else success();
-                toggleSaved({
-                  id,
-                  name: place?.name || `Mekan #${id}`,
-                  subtitle: place?.subtitle || place?.description || "Detay ekranı",
-                  photo_url: place?.photo_url,
-                  category: place?.category,
-                  tags: place?.tags,
-                });
-              }}
-              style={[
-                styles.headerButton,
-                {
-                  backgroundColor: saved ? colors.accent.primary : colors.surface.elevated,
-                },
-              ]}
-            >
-              <IconSymbol
-                name={saved ? "heart.fill" : "heart"}
-                size={20}
-                color={saved ? colors.text.inverse : colors.text.primary}
-              />
-            </TouchableOpacity>
-          </View>
+          {!isVenueDashboard && (
+            <View style={styles.headerRightButtons}>
+              <TouchableOpacity
+                onPress={() => {
+                  lightImpact();
+                  handleShare();
+                }}
+                style={[styles.headerButton, { backgroundColor: colors.surface.elevated, marginRight: spacing.sm }]}
+              >
+                <IconSymbol name="square.and.arrow.up" size={20} color={colors.text.primary} />
+              </TouchableOpacity>
+
+              <TouchableOpacity
+                onPress={() => {
+                  if (saved) lightImpact();
+                  else success();
+                  toggleSaved({
+                    id,
+                    name: place?.name || `Mekan #${id}`,
+                    subtitle: place?.subtitle || place?.description || "Detay ekranı",
+                    photo_url: place?.photo_url,
+                    category: place?.category,
+                    tags: place?.tags,
+                  });
+                }}
+                style={[
+                  styles.headerButton,
+                  {
+                    backgroundColor: saved ? colors.accent.primary : colors.surface.elevated,
+                  },
+                ]}
+              >
+                <IconSymbol
+                  name={saved ? "heart.fill" : "heart"}
+                  size={20}
+                  color={saved ? colors.text.inverse : colors.text.primary}
+                />
+              </TouchableOpacity>
+            </View>
+          )}
         </View>
 
         {/* Image */}
@@ -612,7 +626,7 @@ export default function PlaceDetailScreen() {
           )}
 
           {/* Similar Places */}
-          {similarPlaces.length > 0 && (
+          {!isVenueDashboard && similarPlaces.length > 0 && (
             <Section title="Benzer Mekanlar" style={{ marginTop: spacing.xl }}>
               <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.similarScrollContent}>
                 {similarPlaces.map((similarPlace) => (

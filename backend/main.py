@@ -99,8 +99,19 @@ def home():
 
 @app.get("/health")
 def health_check():
+    """
+    Kapsamlı sistem sağlık kontrolü:
+    - Veritabanı bağlantısı
+    - Cloud storage durumu
+    - LLM servisi
+    - WebSocket aktif bağlantılar
+    """
     from app.dependencies import get_db
+    from app.websocket.manager import manager
     import models
+    import cloud_storage
+
+    # DB Kontrolü
     db_ok = False
     db = next(get_db())
     try:
@@ -110,10 +121,24 @@ def health_check():
         pass
     finally:
         db.close()
+
+    # Servis durumları
+    cloud_ok = cloud_storage.is_configured()
+    llm_active = settings.LLM_ENABLED if hasattr(settings, 'LLM_ENABLED') else False
+    ws_online = manager.get_online_user_count()
+
+    overall = "ok" if db_ok else "degraded"
+
     return {
-        "status": "ok" if db_ok else "degraded",
-        "db": db_ok,
+        "status": overall,
+        "version": app.version,
         "timestamp": datetime.utcnow().isoformat(),
+        "services": {
+            "database": {"status": "ok" if db_ok else "error"},
+            "cloud_storage": {"status": "ok" if cloud_ok else "not_configured"},
+            "llm": {"status": "active" if llm_active else "disabled", "provider": getattr(settings, 'LLM_PROVIDER', 'N/A')},
+            "websocket": {"online_users": ws_online},
+        },
     }
 
 

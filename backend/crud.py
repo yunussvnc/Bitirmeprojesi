@@ -7,7 +7,7 @@ import models, schemas
 # bcrypt 72 byte sınırı – uzun şifreleri kırp
 def _to_bcrypt_password(pw: str) -> bytes:
     enc = pw.encode("utf-8")
-    return enc[:72] if len(enc) > 72 else enc
+    return enc[:72] if len(enc) > 72 else enc  # type: ignore
 
 def _hash_password(pw: str) -> str:
     return bcrypt.hashpw(_to_bcrypt_password(pw), bcrypt.gensalt()).decode("ascii")
@@ -42,6 +42,49 @@ def create_user(db: Session, user: schemas.UserCreate):
     db.refresh(db_user)
     return db_user
 
+def get_pending_user_by_email(db: Session, email: str):
+    return db.query(models.PendingUser).filter(models.PendingUser.email == email).first()
+
+def create_pending_user(db: Session, user: schemas.UserCreate, verification_code: str, expires_at: datetime):
+    hashed_password = _hash_password(user.password)
+    db_pend = models.PendingUser(
+        email=user.email,
+        username=user.username,
+        password_hash=hashed_password,
+        first_name=user.first_name,
+        last_name=user.last_name,
+        birth_date=user.birth_date,
+        verification_code=verification_code,
+        expires_at=expires_at
+    )
+    db.add(db_pend)
+    db.commit()
+    db.refresh(db_pend)
+    return db_pend
+
+def delete_pending_user(db: Session, email: str):
+    db_pend = get_pending_user_by_email(db, email)
+    if db_pend:
+        db.delete(db_pend)
+        db.commit()
+
+def create_user_from_pending(db: Session, pending: models.PendingUser):
+    db_user = models.User(
+        email=pending.email,
+        username=pending.username,
+        password_hash=pending.password_hash,
+        first_name=pending.first_name,
+        last_name=pending.last_name,
+        birth_date=pending.birth_date,
+        is_active=True,
+        is_email_verified=True
+    )
+    db.add(db_user)
+    db.delete(pending)
+    db.commit()
+    db.refresh(db_user)
+    return db_user
+
 def update_user(db: Session, user_id: int, data: schemas.UserUpdate):
     user = db.query(models.User).filter(models.User.id == user_id).first()
     if not user:
@@ -61,13 +104,78 @@ def authenticate_user(db: Session, email: str, password: str):
         return False
     return user
 
+# --- PENDING VENUE İŞLEMLERİ ---
+
+def get_pending_venue_by_email(db: Session, email: str):
+    return db.query(models.PendingVenue).filter(models.PendingVenue.email == email).first()
+
+def create_pending_venue(db: Session, venue_data: schemas.VenueRegisterRequest):
+    hashed_password = _hash_password(venue_data.password)
+    db_venue = models.PendingVenue(
+        venue_name=venue_data.venue_name,
+        email=venue_data.email,
+        password_hash=hashed_password,
+        status="pending"
+    )
+    db.add(db_venue)
+    db.commit()
+    db.refresh(db_venue)
+    return db_venue
+
+def get_pending_venues(db: Session, status: str = "pending"):
+    return db.query(models.PendingVenue).filter(models.PendingVenue.status == status).all()
+
+def approve_pending_venue(db: Session, pending_id: int):
+    pending = db.query(models.PendingVenue).filter(models.PendingVenue.id == pending_id).first()
+    if not pending or pending.status != "pending":
+        return None
+    
+    # Kendi içinde User (role=venue) ve Place oluşturur
+    username_base = pending.venue_name.lower().replace(" ", "_")[:30]
+    username = username_base
+    idx = 0
+    while get_user_by_username(db, username):
+        idx += 1
+        username = f"{username_base}_{idx}"
+
+    db_user = models.User(
+        email=pending.email,
+        username=username,
+        password_hash=pending.password_hash,
+        first_name=pending.venue_name,
+        role="venue",
+        is_active=True,
+        is_email_verified=True
+    )
+    db.add(db_user)
+    db.commit()
+    db.refresh(db_user)
+
+    # Place oluştur
+    db_place = models.Place(
+        name=pending.venue_name,
+        address="Varsayılan Adres",
+        city="Belirsiz",
+        category="Kafe", # Default category
+        owner_id=db_user.id
+    )
+    db.add(db_place)
+    db.commit()
+    db.refresh(db_place)
+
+    # Status güncelle
+    pending.status = "approved"
+    db.commit()
+
+    return db_user, db_place
+
 
 def get_or_create_user_for_login(db: Session, email: str, password: str):
     """Auth bypass: kullanıcı varsa döndür, yoksa oluştur. Şifre kontrolü yapılmaz."""
     user = get_user_by_email(db, email)
     if user:
         return user
-    username_base = email.split("@")[0].replace(".", "_")[:30]
+    username_base = email.split("@")[0].replace(".", "_")[:30]  # type: ignore
     username = username_base
     idx = 0
     while get_user_by_username(db, username):
@@ -107,12 +215,23 @@ def _enrich_places_with_stats(db: Session, places):
     for p in places:
         rc = review_map.get(p.id, 0)
         sc = saved_map.get(p.id, 0)
-        p.review_count = rc
-        p.saved_count = sc
+        p.review_count = rc # type: ignore
+        p.saved_count = sc # type: ignore
         
         score = p.average_rating * math.log10(rc + 1) if rc > 0 else (p.average_rating or 0.0)
-        p.popularity_score = round(score, 2)
-        
+        p.popularity_score = round(score, 2) # type: ignore
+
+        # JSON text → Python list deserialization
+        import json as _json
+        try:
+            p.gallery_urls = _json.loads(p.gallery_urls) if p.gallery_urls else []  # type: ignore
+        except Exception:
+            p.gallery_urls = []  # type: ignore
+        try:
+            p.menu_items = _json.loads(p.menu_items_json) if p.menu_items_json else []  # type: ignore
+        except Exception:
+            p.menu_items = []  # type: ignore
+
     return places
 
 
@@ -188,10 +307,10 @@ def get_nearby_places(
     for p in all_places:
         d = haversine_km(lat, lng, p.latitude, p.longitude)
         if d <= radius_km:
-            p._distance_km = round(d, 2)
+            p._distance_km = round(d, 2) # type: ignore
             nearby.append(p)
 
-    nearby.sort(key=lambda p: p._distance_km)
+    nearby.sort(key=lambda p: p._distance_km) # type: ignore
     total = len(nearby)
     offset = (page - 1) * page_size
     paginated = nearby[offset : offset + page_size]
@@ -204,12 +323,13 @@ def get_popular_places(db: Session, page: int = 1, page_size: int = 20):
     import math
     all_places = db.query(models.Place).all()
     all_places = _enrich_places_with_stats(db, all_places)
-    all_places.sort(key=lambda p: p.popularity_score, reverse=True)
+    all_places.sort(key=lambda p: p.popularity_score, reverse=True) # type: ignore
     total = len(all_places)
     offset = (page - 1) * page_size
     return all_places[offset : offset + page_size], total
 
 def create_place(db: Session, place: schemas.PlaceCreate):
+    import json as _json
     db_place = models.Place(
         name=place.name,
         address=place.address,
@@ -225,6 +345,10 @@ def create_place(db: Session, place: schemas.PlaceCreate):
         video_url=getattr(place, "video_url", None),
         opening_time=getattr(place, "opening_time", None),
         closing_time=getattr(place, "closing_time", None),
+        is_open=getattr(place, "is_open", True),
+        phone_number=getattr(place, "phone_number", None),
+        gallery_urls=_json.dumps(place.gallery_urls) if getattr(place, "gallery_urls", None) else None,
+        menu_items_json=_json.dumps(place.menu_items) if getattr(place, "menu_items", None) else None,
     )
     db.add(db_place)
     db.commit()
@@ -339,7 +463,7 @@ def update_place_average_rating(db: Session, place_id: int):
         avg_rating = sum(r.rating for r in reviews) / len(reviews)
         place = db.query(models.Place).filter(models.Place.id == place_id).first()
         if place:
-            place.average_rating = round(avg_rating, 1)
+            place.average_rating = round(avg_rating, 1) # type: ignore
             db.commit()
 
 def mark_review_helpful(db: Session, review_id: int):
@@ -455,11 +579,11 @@ def toggle_post_like(db: Session, post_id: int, user_id: int):
         return None, False
     if like:
         db.delete(like)
-        post.like_count = max(0, post.like_count - 1)
+        post.like_count = max(0, post.like_count - 1) # type: ignore
         db.commit()
         return post, False
     db.add(models.PostLike(post_id=post_id, user_id=user_id))
-    post.like_count += 1
+    post.like_count += 1 # type: ignore
     db.commit()
     db.refresh(post)
     return post, True
@@ -492,7 +616,7 @@ def add_post_comment(db: Session, post_id: int, user_id: int, text: str):
     db.add(comment)
     post = db.query(models.Post).filter(models.Post.id == post_id).first()
     if post:
-        post.comment_count += 1
+        post.comment_count += 1 # type: ignore
     db.commit()
     db.refresh(comment)
     return comment
@@ -937,10 +1061,23 @@ def unmatch_conversation(db: Session, conversation_id: int, user_id: int) -> boo
 # --- MEKAN GÜNCELLEME ---
 
 def update_place(db: Session, place_id: int, data: dict):
-    """Mekan bilgilerini günceller."""
+    """Mekan bilgilerini günceller. gallery_urls ve menu_items için JSON serileştirmesi yapar."""
+    import json as _json
     place = db.query(models.Place).filter(models.Place.id == place_id).first()
     if not place:
         return None
+
+    # Map schema field names to model column names & serialize lists
+    if "gallery_urls" in data and data["gallery_urls"] is not None:
+        place.gallery_urls = _json.dumps(data.pop("gallery_urls"))
+    elif "gallery_urls" in data:
+        data.pop("gallery_urls")
+
+    if "menu_items" in data and data["menu_items"] is not None:
+        place.menu_items_json = _json.dumps(data.pop("menu_items"))
+    elif "menu_items" in data:
+        data.pop("menu_items")
+
     for key, value in data.items():
         if hasattr(place, key) and value is not None:
             setattr(place, key, value)

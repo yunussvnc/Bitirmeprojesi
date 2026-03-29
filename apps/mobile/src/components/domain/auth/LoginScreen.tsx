@@ -58,6 +58,7 @@ export default function LoginScreen() {
   const insets = useSafeAreaInsets();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [roleType, setRoleType] = useState<'user'|'venue'>('user');
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
   const isSubmittingRef = useRef(false);
@@ -80,10 +81,27 @@ export default function LoginScreen() {
     setLoading(true);
     try {
       const data = await googleLogin(token);
+      
+      // Check role mismatch purely for UX
+      if (roleType === 'venue' && data.user.role !== 'venue') {
+        throw new Error('Girdiğiniz hesap bir mekan hesabı değil. Lütfen "Kullanıcı" sekmesinden giriş yapın.');
+      } else if (roleType === 'user' && data.user.role === 'venue') {
+        throw new Error('Girdiğiniz hesap bir mekan hesabı. Lütfen "Mekan" sekmesinden giriş yapın.');
+      }
+
       useAuthStore.getState().setTokens(data.access_token, data.refresh_token);
       useAuthStore.getState().setUser(data.user);
       success();
-      router.replace('/(tabs)');
+
+      if (data.user.role === 'venue') {
+         router.replace('/(venue-tabs)' as any);
+      } else {
+        if (!data.user.username || !data.user.birth_date) {
+          router.replace('/first-time-setup' as any);
+        } else {
+          router.replace('/(tabs)');
+        }
+      }
     } catch (err: any) {
       Alert.alert('Giriş Hatası', err.message || 'Google ile giriş başarısız oldu.');
     } finally {
@@ -102,16 +120,33 @@ export default function LoginScreen() {
       if (credential.identityToken) {
         setLoading(true);
         const data = await appleLogin(credential.identityToken);
+
+        // Check role mismatch purely for UX
+        if (roleType === 'venue' && data.user.role !== 'venue') {
+          throw new Error('Girdiğiniz hesap bir mekan hesabı değil. Lütfen "Kullanıcı" sekmesinden giriş yapın.');
+        } else if (roleType === 'user' && data.user.role === 'venue') {
+          throw new Error('Girdiğiniz hesap bir mekan hesabı. Lütfen "Mekan" sekmesinden giriş yapın.');
+        }
+
         useAuthStore.getState().setTokens(data.access_token, data.refresh_token);
         useAuthStore.getState().setUser(data.user);
         success();
-        router.replace('/(tabs)');
+
+        if (data.user.role === 'venue') {
+           router.replace('/(venue-tabs)' as any);
+        } else {
+          if (!data.user.username || !data.user.birth_date) {
+            router.replace('/first-time-setup' as any);
+          } else {
+            router.replace('/(tabs)');
+          }
+        }
       }
     } catch (e: any) {
       if (e.code === 'ERR_REQUEST_CANCELED') {
         // Kullanıcı iptal etti
       } else {
-        Alert.alert('Giriş Hatası', 'Apple ile giriş başarısız oldu.');
+        Alert.alert('Giriş Hatası', e.message || 'Apple ile giriş başarısız oldu.');
       }
     } finally {
       setLoading(false);
@@ -138,14 +173,29 @@ export default function LoginScreen() {
     setLoading(true);
     try {
       const data = await loginUser({ email: email.trim(), password });
+      
+      // Check role mismatch purely for UX
+      if (roleType === 'venue' && data.user.role !== 'venue') {
+        throw new Error('Girdiğiniz hesap bir mekan hesabı değil. Lütfen "Kullanıcı" sekmesinden giriş yapın.');
+      } else if (roleType === 'user' && data.user.role === 'venue') {
+        throw new Error('Girdiğiniz hesap bir mekan hesabı. Lütfen "Mekan" sekmesinden giriş yapın.');
+      }
+
       useAuthStore.getState().setTokens(data.access_token, data.refresh_token);
       useAuthStore.getState().setUser(data.user);
       success();
-      // E-posta doğrulanmamışsa doğrulama ekranına yönlendir
-      if (!data.user.is_email_verified) {
-        router.replace('/verify-email');
+      
+      if (data.user.role === 'venue') {
+         router.replace('/(venue-tabs)' as any);
       } else {
-        router.replace('/(tabs)');
+        // E-posta doğrulanmamışsa doğrulama ekranına yönlendir
+        if (!data.user.is_email_verified) {
+          router.replace('/verify-email');
+        } else if (!data.user.username || !data.user.birth_date) {
+          router.replace('/first-time-setup' as any);
+        } else {
+          router.replace('/(tabs)');
+        }
       }
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : 'Giriş başarısız. Lütfen tekrar deneyin.';
@@ -218,6 +268,29 @@ export default function LoginScreen() {
                     </View>
 
                     {/* Form kartı – koyu cam efekti */}
+                    <View style={styles.toggleContainer}>
+                      <TouchableOpacity 
+                        style={[styles.toggleBtn, roleType === 'user' && styles.toggleBtnActive]}
+                        onPress={() => {
+                          setRoleType('user');
+                          setErrors({});
+                          lightImpact();
+                        }}
+                      >
+                       <Text style={[styles.toggleTxt, roleType === 'user' && styles.toggleTxtActive]}>Kullanıcı</Text>
+                      </TouchableOpacity>
+                      <TouchableOpacity 
+                        style={[styles.toggleBtn, roleType === 'venue' && styles.toggleBtnActive]}
+                        onPress={() => {
+                          setRoleType('venue');
+                          setErrors({});
+                          lightImpact();
+                        }}
+                      >
+                       <Text style={[styles.toggleTxt, roleType === 'venue' && styles.toggleTxtActive]}>Mekan</Text>
+                      </TouchableOpacity>
+                    </View>
+
                     <BlurView intensity={90} tint="dark" style={styles.card}>
                       <View style={styles.cardInner}>
                         <Input
@@ -402,6 +475,39 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.4,
     shadowRadius: 24,
     elevation: 16,
+  },
+  toggleContainer: {
+    flexDirection: 'row',
+    backgroundColor: 'rgba(255,255,255,0.1)',
+    borderRadius: 24,
+    padding: 4,
+    marginBottom: 6,
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.15)',
+  },
+  toggleBtn: {
+    flex: 1,
+    paddingVertical: 12,
+    borderRadius: 20,
+    alignItems: 'center',
+  },
+  toggleBtnActive: {
+    backgroundColor: '#fff',
+    shadowColor: '#fff',
+    shadowOpacity: 0.3,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 8,
+    elevation: 4,
+  },
+  toggleTxt: {
+    color: '#ccc',
+    fontSize: 15,
+    fontWeight: '600',
+    letterSpacing: 0.4,
+  },
+  toggleTxtActive: {
+    color: '#000',
+    fontWeight: '700',
   },
   cardInner: {
     padding: 26,

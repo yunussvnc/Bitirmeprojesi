@@ -4,7 +4,7 @@
  * Master hava: karanlık arka plan, cam kart, premium tipografi.
  */
 
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import {
     StyleSheet,
@@ -23,13 +23,15 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { BlurView } from 'expo-blur';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { lightImpact, success as successHaptic } from '@/src/utils/haptics';
-import { verifyEmail, resendVerification } from '@/src/services/authService';
+import { verifyEmail, resendVerification, verifyRegister, resendRegisterCode } from '@/src/services/authService';
 import { useAuthStore } from '@/src/store/useAuthStore';
 
 const { width } = Dimensions.get('window');
 const CODE_LENGTH = 6;
 
 export default function EmailVerificationScreen() {
+    const { email: paramsEmailRaw } = useLocalSearchParams<{ email: string }>();
+    const paramsEmail = paramsEmailRaw ? decodeURIComponent(paramsEmailRaw) : undefined;
     const [code, setCode] = useState<string[]>(Array(CODE_LENGTH).fill(''));
     const [loading, setLoading] = useState(false);
     const [resendCooldown, setResendCooldown] = useState(0);
@@ -108,48 +110,53 @@ export default function EmailVerificationScreen() {
             setError('');
 
             try {
-                await verifyEmail(codeStr);
-                successHaptic();
-                // Update user store
-                const currentUser = useAuthStore.getState().user;
-                if (currentUser) {
-                    useAuthStore.getState().setUser({ ...currentUser, is_email_verified: true });
+                if (paramsEmail) {
+                    const data = await verifyRegister(paramsEmail, codeStr);
+                    successHaptic();
+                    useAuthStore.getState().setTokens(data.access_token, data.refresh_token);
+                    useAuthStore.getState().setUser(data.user);
+                    router.replace('/(tabs)');
+                } else {
+                    await verifyEmail(codeStr);
+                    successHaptic();
+                    const currentUser = useAuthStore.getState().user;
+                    if (currentUser) {
+                        useAuthStore.getState().setUser({ ...currentUser, is_email_verified: true });
+                    }
+                    router.replace('/(tabs)');
                 }
-                router.replace('/(tabs)');
             } catch (err: unknown) {
-                const msg =
-                    err instanceof Error ? err.message : 'Kod hatalı veya süresi dolmuş.';
+                const msg = err instanceof Error ? err.message : 'Kod hatalı veya süresi dolmuş.';
                 setError(msg);
                 triggerShake();
-                // Clear code
                 setCode(Array(CODE_LENGTH).fill(''));
                 inputRefs.current[0]?.focus();
             } finally {
                 setLoading(false);
             }
         },
-        [code, triggerShake],
+        [code, triggerShake, paramsEmail],
     );
 
     const handleResend = useCallback(async () => {
         if (resendCooldown > 0) return;
         lightImpact();
         try {
-            await resendVerification();
+            if (paramsEmail) {
+                await resendRegisterCode(paramsEmail);
+            } else {
+                await resendVerification();
+            }
             setResendCooldown(60);
             Alert.alert('Başarılı', 'Yeni doğrulama kodu e-postanıza gönderildi.');
         } catch {
             Alert.alert('Hata', 'Kod gönderilemedi, lütfen tekrar deneyin.');
         }
-    }, [resendCooldown]);
+    }, [resendCooldown, paramsEmail]);
 
-    const handleSkip = useCallback(() => {
-        // Allow user to skip for now and verify later
-        router.replace('/(tabs)');
-    }, []);
-
-    const maskedEmail = user?.email
-        ? user.email.replace(/(.{2})(.*)(@.*)/, '$1***$3')
+    const targetEmail = paramsEmail || user?.email;
+    const maskedEmail = targetEmail
+        ? targetEmail.replace(/(.{2})(.*)(@.*)/, '$1***$3')
         : '***';
 
     return (
@@ -247,14 +254,6 @@ export default function EmailVerificationScreen() {
                             </View>
                         </BlurView>
 
-                        {/* Skip option */}
-                        <TouchableOpacity
-                            style={styles.skipButton}
-                            onPress={handleSkip}
-                            activeOpacity={0.7}
-                        >
-                            <Text style={styles.skipText}>Daha sonra doğrula</Text>
-                        </TouchableOpacity>
                     </View>
                 </KeyboardAvoidingView>
             </SafeAreaView>
@@ -383,16 +382,5 @@ const styles = StyleSheet.create({
     resendLinkDisabled: {
         color: 'rgba(255,255,255,0.4)',
         textDecorationLine: 'none',
-    },
-    skipButton: {
-        alignSelf: 'center',
-        marginTop: 28,
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-    },
-    skipText: {
-        fontSize: 15,
-        color: 'rgba(255,255,255,0.5)',
-        letterSpacing: 0.3,
     },
 });

@@ -1,4 +1,4 @@
-import { apiGet } from "@/src/utils/apiClient";
+import { apiGet, apiPut } from "@/src/utils/apiClient";
 import { logger } from "@/src/utils/logger";
 
 export type Place = {
@@ -20,6 +20,8 @@ export type Place = {
   features?: string;
   opening_time?: string;
   closing_time?: string;
+  review_count?: number;
+  saved_count?: number;
 };
 
 export type PaginatedPlaces = {
@@ -51,8 +53,10 @@ function normalizePlace(p: any): Place {
   const features = p?.features || undefined;
   const opening_time = p?.opening_time || undefined;
   const closing_time = p?.closing_time || undefined;
+  const review_count = typeof p?.review_count === 'number' ? p.review_count : undefined;
+  const saved_count = typeof p?.saved_count === 'number' ? p.saved_count : undefined;
 
-  return { id, name, subtitle, description, campaign_text, tags, category, address, city, latitude, longitude, photo_url, video_url, average_rating, price_range, features, opening_time, closing_time };
+  return { id, name, subtitle, description, campaign_text, tags, category, address, city, latitude, longitude, photo_url, video_url, average_rating, price_range, features, opening_time, closing_time, review_count, saved_count };
 }
 
 export async function getPlaces(page = 1, pageSize = 20): Promise<PaginatedPlaces> {
@@ -111,5 +115,28 @@ export async function checkHealth(): Promise<boolean> {
     return data?.status === "ok";
   } catch {
     return false;
+  }
+}
+
+export async function getMyVenue(): Promise<Place | null> {
+  try {
+    const data = await apiGet<any>('/places/my-venue');
+    if (!data || !data.id) return null;
+    return normalizePlace(data);
+  } catch (error) {
+    logger.error("[getMyVenue] Error:", error);
+    return null;
+  }
+}
+
+export async function updateMyVenue(payload: Partial<Place>): Promise<Place | null> {
+  try {
+    const { id, name, subtitle, tags, average_rating, price_range, ...updateData } = payload as any;
+    const { data } = await apiPut<any>('/places/my-venue', updateData);
+    if (!data || !data.id) return null;
+    return normalizePlace(data);
+  } catch (error) {
+    logger.error("[updateMyVenue] Error:", error);
+    throw error;
   }
 }

@@ -2,7 +2,7 @@
 
 from typing import Optional
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Query
 from sqlalchemy.orm import Session
 
 import models, schemas, crud
@@ -57,12 +57,13 @@ def _post_to_schema(post: models.Post, db: Session, current_user_id: int | None)
 
 @router.get("/feed", response_model=schemas.PaginatedPosts)
 def get_feed(
-    page: int = 1,
-    page_size: int = 20,
-    filter: str = "all",
+    page: int = Query(1, ge=1),
+    page_size: int = Query(20, ge=1, le=100),
+    filter: str = Query("all", description="Filtre: all veya following"),
     db: Session = Depends(get_db),
     current_user: Optional[models.User] = Depends(get_optional_user),
 ):
+    """Ana akış (feed) için gönderileri getirir. Takip filtresi destekler."""
     filter_mode = "following" if filter == "following" else "all"
     posts, total = crud.get_feed_paginated(
         db,
@@ -77,12 +78,13 @@ def get_feed(
 
 @router.get("/feed/reels", response_model=schemas.PaginatedPosts)
 def get_reels(
-    page: int = 1,
-    page_size: int = 20,
-    filter: str = "all",
+    page: int = Query(1, ge=1),
+    page_size: int = Query(20, ge=1, le=100),
+    filter: str = Query("all"),
     db: Session = Depends(get_db),
     current_user: Optional[models.User] = Depends(get_optional_user),
 ):
+    """Reels içeriklerini akış biçiminde getirir."""
     filter_mode = "following" if filter == "following" else "all"
     posts, total = crud.get_feed_paginated(
         db,
@@ -116,6 +118,7 @@ def get_post(
     db: Session = Depends(get_db),
     current_user: Optional[models.User] = Depends(get_optional_user),
 ):
+    """Tek bir gönderiyi detaylarıyla birlikte getirir."""
     post = crud.get_post_by_id(db, post_id)
     if not post:
         raise HTTPException(status_code=404, detail="Gönderi bulunamadı.")
@@ -139,6 +142,7 @@ def toggle_like(
     db: Session = Depends(get_db),
     current_user: models.User = Depends(get_current_user),
 ):
+    """Gönderiyi beğen / beğeniyi geri al (toggle). Beğeni bildirimi gönderir."""
     post = crud.get_post_by_id(db, post_id)
     if not post:
         raise HTTPException(status_code=404, detail="Gönderi bulunamadı.")
@@ -152,10 +156,11 @@ def toggle_like(
 @router.get("/posts/{post_id}/comments")
 def get_post_comments(
     post_id: int,
-    page: int = 1,
-    page_size: int = 20,
+    page: int = Query(1, ge=1),
+    page_size: int = Query(20, ge=1, le=100),
     db: Session = Depends(get_db),
 ):
+    """Gönderinin altındaki yorumları sayfalı olarak getirir."""
     comments, total = crud.get_comments_paginated(db, post_id, page, page_size)
     out = []
     for c in comments:
@@ -191,11 +196,12 @@ def add_comment(
 @router.get("/users/{user_id}/posts", response_model=schemas.PaginatedPosts)
 def get_user_posts(
     user_id: int,
-    page: int = 1,
-    page_size: int = 20,
+    page: int = Query(1, ge=1),
+    page_size: int = Query(20, ge=1, le=100),
     db: Session = Depends(get_db),
     current_user: Optional[models.User] = Depends(get_optional_user),
 ):
+    """Belirli bir kullanıcının gönderilerini sayfalı olarak getirir."""
     posts, total = crud.get_posts_by_user(db, user_id, page, page_size)
     items = [_post_to_schema(p, db, current_user.id if current_user else None) for p in posts]
     return schemas.PaginatedPosts(items=items, total=total, page=page, page_size=page_size)
@@ -204,11 +210,12 @@ def get_user_posts(
 @router.get("/places/{place_id}/posts", response_model=schemas.PaginatedPosts)
 def get_place_posts(
     place_id: int,
-    page: int = 1,
-    page_size: int = 20,
+    page: int = Query(1, ge=1),
+    page_size: int = Query(20, ge=1, le=100),
     db: Session = Depends(get_db),
     current_user: Optional[models.User] = Depends(get_optional_user),
 ):
+    """Belirli bir mekana ait gönderileri sayfalı olarak getirir."""
     posts, total = crud.get_posts_by_place(db, place_id, page, page_size)
     items = [_post_to_schema(p, db, current_user.id if current_user else None) for p in posts]
     return schemas.PaginatedPosts(items=items, total=total, page=page, page_size=page_size)

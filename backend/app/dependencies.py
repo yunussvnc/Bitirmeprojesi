@@ -48,3 +48,8 @@ def get_optional_user(
     if not user_id or payload.get("type") != "access":
         return None
     return db.query(models.User).filter(models.User.id == int(user_id)).first()
+
+def get_admin_user(current_user: models.User = Depends(get_current_user)) -> models.User:
+    if current_user.role != 'admin':
+        raise HTTPException(status_code=403, detail="Sadece yöneticiler bu işlemi yapabilir.")
+    return current_user

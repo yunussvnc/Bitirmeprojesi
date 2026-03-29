@@ -7,7 +7,7 @@ from datetime import datetime
 
 import schemas, crud, models
 from auth import create_access_token, create_refresh_token, decode_token
-from app.dependencies import get_db, get_current_user
+from app.dependencies import get_db, get_current_user, get_admin_user
 import os
 import uuid
 import jwt
@@ -27,25 +27,130 @@ from app.services.email_service import (
 router = APIRouter(prefix="/auth", tags=["Auth"])
 
 
-@router.post("/register", response_model=schemas.Token)
+@router.post("/register")
 def register_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
     if crud.get_user_by_email(db, email=user.email):
         raise HTTPException(status_code=400, detail="Bu e-posta zaten kayıtlı.")
     if user.username and crud.get_user_by_username(db, username=user.username):
         raise HTTPException(status_code=400, detail="Bu kullanıcı adı zaten alınmış.")
-    db_user = crud.create_user(db=db, user=user)
+    
+    # Check if a pending user already exists for this email
+    db_pend = crud.get_pending_user_by_email(db, user.email)
+    if db_pend:
+        crud.delete_pending_user(db, user.email)
 
-    # Doğrulama kodu oluştur ve e-posta gönder
+    import random, string
+    from datetime import datetime, timedelta, timezone
+    from app.services.email_service import _build_verification_html, send_email
+    
+    code = "".join(random.choices(string.digits, k=6))
+    expires_at = datetime.now(timezone.utc) + timedelta(minutes=15)
+    
+    crud.create_pending_user(db, user, code, expires_at)
+    
+    user_name = user.first_name or "Kullanıcı"
+    subject = "AsEmOs — E-posta Doğrulama Kodu"
+    html_body = _build_verification_html(user_name, code)
+    
     try:
-        create_verification_code(db, db_user)
-    except RateLimitError:
-        pass  # İlk kayıtta rate-limit olmaz ama güvenlik için
+        from app.services.email_service import _check_rate_limit, RateLimitError
+        _check_rate_limit(hash(user.email) % 1000000)
+        send_email(user.email, subject, html_body)
+    except RateLimitError as e:
+        # Rate limit var ama kodu ekledik, yine de hata döndürmeyebiliriz veya try-catch i rate limit öncesi yapabiliriz.
+        pass
+    except Exception as e:
+        pass
+        
+    return {"ok": True, "message": "Doğrulama kodu e-postanıza gönderildi.", "email": user.email}
 
+@router.post("/venue-register", response_model=schemas.PendingVenueResponse)
+def venue_register(venue_data: schemas.VenueRegisterRequest, db: Session = Depends(get_db)):
+    if crud.get_user_by_email(db, email=venue_data.email):
+        raise HTTPException(status_code=400, detail="Bu e-posta zaten kayıtlı.")
+    if crud.get_pending_venue_by_email(db, email=venue_data.email):
+        raise HTTPException(status_code=400, detail="Bu e-posta ile bekleyen bir mekan başvuru zaten var.")
+    
+    pending_venue = crud.create_pending_venue(db, venue_data)
+    # E-posta gönderme (İsteğe bağlı: "Talebiniz alındı" vb.)
+    return pending_venue
+
+
+@router.post("/admin/approve-venue/{pending_id}")
+def approve_venue(pending_id: int, db: Session = Depends(get_db), admin: models.User = Depends(get_admin_user)):
+    result = crud.approve_pending_venue(db, pending_id)
+    if not result:
+        raise HTTPException(status_code=400, detail="Başvuru bulunamadı veya onaylanmış/iptal edilmiş.")
+    
+    user, place = result
+    # Burada kullanıcıya "Mekanınız onaylandı, artık giriş yapabilirsiniz" e-postası gönderilebilir.
+    return {"ok": True, "message": "Mekan onaylandı, hesap oluşturuldu.", "user_id": user.id, "place_id": place.id}
+
+@router.post("/first-time-setup", response_model=schemas.User)
+def first_time_setup(
+    body: schemas.FirstTimeSetupRequest, 
+    current_user: models.User = Depends(get_current_user), 
+    db: Session = Depends(get_db)
+):
+    if current_user.username and current_user.birth_date:
+        raise HTTPException(status_code=400, detail="Kullanıcı adı ve doğum tarihi zaten ayarlanmış.")
+    
+    # Username değişecekse çakışma kontrolü
+    if body.username != current_user.username:
+        if crud.get_user_by_username(db, username=body.username):
+            raise HTTPException(status_code=400, detail="Bu kullanıcı adı zaten alınmış.")
+    
+    # Kullanıcı yaşı kontrolü backend tarafında da yapılabilir (14+)
+    from datetime import date
+    today = date.today()
+    age = today.year - body.birth_date.year - ((today.month, today.day) < (body.birth_date.month, body.birth_date.day))
+    if age < 14:
+        raise HTTPException(status_code=400, detail="14 yaşından küçükler uygulamaya kayıt olamaz.")
+
+    current_user.username = body.username
+    current_user.birth_date = body.birth_date
+    db.commit()
+    db.refresh(current_user)
+    
+    return current_user
+
+@router.post("/verify-register", response_model=schemas.Token)
+def verify_register(body: schemas.VerifyRegisterRequest, db: Session = Depends(get_db)):
+    from datetime import datetime, timezone
+    from app.services.email_service import _send_welcome_email
+    
+    db_pend = crud.get_pending_user_by_email(db, email=body.email)
+    if not db_pend:
+        raise HTTPException(status_code=400, detail="Kayıt isteği bulunamadı veya kodu daha önce doğruladınız.")
+    
+    if db_pend.verification_code != body.code:
+        raise HTTPException(status_code=400, detail="Doğrulama kodu hatalı.")
+        
+    # Python 3.12 can compare aware with aware datetimes.
+    now_utc = datetime.now(timezone.utc)
+    # Check if expires_at is naive, if so add timezone. (SQLAlchemy SQLite returns naive objects)
+    pend_expires = db_pend.expires_at
+    if pend_expires.tzinfo is None:
+        pend_expires = pend_expires.replace(tzinfo=timezone.utc)
+        
+    if pend_expires < now_utc:
+        crud.delete_pending_user(db, email=body.email)
+        raise HTTPException(status_code=400, detail="Doğrulama kodunun süresi dolmuş. Lütfen tekrar kayıt olun.")
+        
+    # Kullanıcıyı oluştur
+    db_user = crud.create_user_from_pending(db, db_pend)
+    
+    try:
+        _send_welcome_email(db_user)
+    except Exception:
+        pass
+        
     return schemas.Token(
         access_token=create_access_token(db_user.id),
         refresh_token=create_refresh_token(db_user.id),
         user=schemas.User.model_validate(db_user),
     )
+
 
 
 @router.post("/login", response_model=schemas.Token)
@@ -196,6 +301,37 @@ def resend_verification(
     except RateLimitError as e:
         raise HTTPException(status_code=429, detail=str(e))
 
+    return {"ok": True, "message": "Yeni doğrulama kodu gönderildi."}
+
+@router.post("/resend-register-code")
+def resend_register_code(body: schemas.ResendVerificationRequest, db: Session = Depends(get_db)):
+    from app.services.email_service import _check_rate_limit, RateLimitError, _build_verification_html, send_email
+    import random, string
+    from datetime import datetime, timedelta, timezone
+    
+    db_pend = crud.get_pending_user_by_email(db, email=body.email)
+    if not db_pend:
+        raise HTTPException(status_code=400, detail="Kayıt isteği bulunamadı.")
+        
+    try:
+        _check_rate_limit(hash(body.email) % 1000000)
+    except RateLimitError as e:
+        raise HTTPException(status_code=429, detail=str(e))
+        
+    code = "".join(random.choices(string.digits, k=6))
+    db_pend.verification_code = code
+    db_pend.expires_at = datetime.now(timezone.utc) + timedelta(minutes=15)
+    db.commit()
+    
+    user_name = db_pend.first_name or "Kullanıcı"
+    subject = "AsEmOs — E-posta Doğrulama Kodu"
+    html_body = _build_verification_html(user_name, code)
+    
+    try:
+        send_email(body.email, subject, html_body)
+    except Exception:
+        pass
+        
     return {"ok": True, "message": "Yeni doğrulama kodu gönderildi."}
 
 
