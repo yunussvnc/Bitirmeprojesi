@@ -675,6 +675,20 @@ def rerank_places(places: List[Dict], query: str, top_k: int = 5) -> List[Dict]:
 
 # ==================== ENDPOINTS ====================
 
+@app.get("/", include_in_schema=False)
+@app.get("/ui", include_in_schema=False)
+async def serve_ui():
+    """Chat UI'yi doğrudan backend üzerinden serve et (CORS sorunu olmaz)"""
+    import os
+    from fastapi.responses import HTMLResponse  # type: ignore[import]
+    ui_path = os.path.join(os.path.dirname(__file__), "chat_ui.html")
+    if not os.path.exists(ui_path):
+        return HTMLResponse("<h1>chat_ui.html bulunamadı</h1>", status_code=404)
+    with open(ui_path, "r", encoding="utf-8") as f:
+        content = f.read()
+    return HTMLResponse(content=content)
+
+
 @app.get("/health")
 async def health():
     """Health check"""
