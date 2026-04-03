@@ -135,6 +135,62 @@ SPECIALTY_PATTERNS: Dict[str, Dict] = {
         "label": "İçecekleriyle popüler",
         "positive_boost": ["güzel", "harika", "iyi", "kaliteli", "good"]
     },
+
+    # ==================== TÜRKİYE'YE ÖZGÜ KATEGORİLER ====================
+
+    "nargile": {
+        "keywords": ["nargile", "hookah", "shisha", "nargile kafe", "nargilesi"],
+        "emoji": "💨",
+        "label": "Nargile keyfiyle bilinen",
+        "positive_boost": ["güzel", "kaliteli", "nefis", "iyi", "rahat", "keyifli"]
+    },
+    "döner": {
+        "keywords": ["döner", "doner", "iskender", "döner kebap", "etli döner", "tavuk döner"],
+        "emoji": "🌯",
+        "label": "Döneriyle ünlü",
+        "positive_boost": ["nefis", "lezzetli", "güzel", "harika", "bol", "dolu"]
+    },
+    "simit": {
+        "keywords": ["simit", "simit sarayı", "poğaça", "börek", "pide börek", "çay börek"],
+        "emoji": "🥯",
+        "label": "Simidi/böreğiyle bilinen",
+        "positive_boost": ["taze", "nefis", "güzel", "iyi", "lezzetli", "çıtır"]
+    },
+    "künefe": {
+        "keywords": ["künefe", "baklava", "şöbiyet", "revani", "kadayıf",
+                    "kazandibi", "sütlaç", "muhallebi", "helva", "lokma"],
+        "emoji": "🍮",
+        "label": "Türk tatlılarıyla öne çıkan",
+        "positive_boost": ["nefis", "lezzetli", "güzel", "harika", "tatlı", "muhteşem"]
+    },
+    "çorba": {
+        "keywords": ["çorba", "mercimek çorbası", "işkembe", "ezogelin",
+                    "tarhana", "soup", "yayla çorbası"],
+        "emoji": "🥣",
+        "label": "Çorbasıyla tanınan",
+        "positive_boost": ["sıcak", "güzel", "nefis", "doyurucu", "lezzetli", "iyi"]
+    },
+    "meze": {
+        "keywords": ["meze", "mezze", "rakı", "balık meze", "deniz meze",
+                    "soğuk meze", "sıcak meze", "muhammara", "humus", "cacık"],
+        "emoji": "🫙",
+        "label": "Mezeleriyle ünlü",
+        "positive_boost": ["nefis", "çeşitli", "güzel", "harika", "lezzetli", "taze"]
+    },
+    "çay bahçesi": {
+        "keywords": ["çay bahçesi", "çay evi", "çay ocağı", "çayhane",
+                    "çay bahce", "ay bahçe", "nane limon çayı"],
+        "emoji": "🫖",
+        "label": "Çay bahçesiyle bilinen",
+        "positive_boost": ["huzurlu", "sakin", "güzel", "keyifli", "şık", "ferah"]
+    },
+    "romantik": {
+        "keywords": ["romantik", "romantic", "özel gün", "yıldönümü", "evlilik teklifi",
+                    "sevgiliye", "mum ışığı", "candlelight", "çift için"],
+        "emoji": "🕯️",
+        "label": "Romantik atmosferiyle öne çıkan",
+        "positive_boost": ["muhteşem", "harika", "özel", "güzel", "şahane", "unutulmaz"]
+    },
 }
 
 # Pozitif bağlam kelimeleri (negatif olmayan)

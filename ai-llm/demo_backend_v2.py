@@ -6,8 +6,8 @@ Faz 2 Özellikleri:
 - 2.3: Async Pipeline (paralel işlemler)
 """
 
-from fastapi import FastAPI, HTTPException
-from pydantic import BaseModel
+from fastapi import FastAPI, HTTPException  # type: ignore[import]
+from pydantic import BaseModel  # type: ignore[import]
 from typing import List, Optional, Dict, Union
 from contextlib import asynccontextmanager
 import os
@@ -15,16 +15,16 @@ import math
 import asyncio
 import hashlib
 import json
-import httpx
+import httpx  # type: ignore[import]
 from datetime import datetime
-import redis
+import redis  # type: ignore[import]
 
 # .env dosyasını yükle
-from dotenv import load_dotenv
+from dotenv import load_dotenv  # type: ignore[import]
 load_dotenv()
 
 # Yorum analizi modülü
-from review_analyzer import fast_extract_insights
+from review_analyzer import fast_extract_insights  # type: ignore[import]
 
 # ==================== FAZ 2.1: CACHE SYSTEM ====================
 
@@ -117,8 +117,8 @@ class ModelManager:
     async def preload_models(self) -> Dict:
         """Startup'ta modelleri yükle"""
         try:
-            import torch
-            from sentence_transformers import SentenceTransformer
+            import torch  # type: ignore[import]
+            from sentence_transformers import SentenceTransformer  # type: ignore[import]
             
             # Device
             self.device = "cuda" if torch.cuda.is_available() else "cpu"
@@ -151,7 +151,7 @@ class ModelManager:
             return 0.0
             
         try:
-            import torch
+            import torch  # type: ignore[import]
             positive_refs = ["Harika bir mekan", "Çok lezzetli", "Kesinlikle tavsiye ederim", "Çok güzel", "Mükemmel", "Bayıldım", "Güler yüzlü", "good", "great", "excellent", "amazing", "delicious", "perfect"]
             negative_refs = ["Çok kötü", "Berbat", "Berbat bir yer", "Tavsiye etmem", "Pahalı", "Kötü hizmet", "Lezzetsiz", "bad", "terrible", "worst", "awful", "expensive"]
             
@@ -160,11 +160,11 @@ class ModelManager:
                 reviews = [reviews]
                 
             # Embeddings hesapla (Batch Inference - Hızlı çalışır)
-            review_embs = self.embedding_model.encode(reviews, convert_to_tensor=True)
-            pos_embs = self.embedding_model.encode(positive_refs, convert_to_tensor=True)
-            neg_embs = self.embedding_model.encode(negative_refs, convert_to_tensor=True)
+            review_embs = self.embedding_model.encode(reviews, convert_to_tensor=True)  # type: ignore[union-attr]
+            pos_embs = self.embedding_model.encode(positive_refs, convert_to_tensor=True)  # type: ignore[union-attr]
+            neg_embs = self.embedding_model.encode(negative_refs, convert_to_tensor=True)  # type: ignore[union-attr]
             
-            from torch.nn.functional import cosine_similarity
+            from torch.nn.functional import cosine_similarity  # type: ignore[import]
             total_bonus = 0.0
             
             # Her bir yorumu analiz edip ortalamasını alıyoruz
@@ -327,16 +327,67 @@ def parse_natural_query(query: str) -> Dict:
     # Özellik algılama
     features = []
     feature_keywords = {
-        'wifi': ['wifi', 'wi-fi', 'internet'],
-        'deniz': ['deniz', 'sea', 'ocean', 'manzara', 'view'],
-        'sessiz': ['quiet', 'sessiz', 'sakin', 'peaceful'],
-        'açık': ['outdoor', 'açık', 'garden', 'bahçe', 'teras'],
-        'çalışma': ['work', 'study', 'çalışma', 'workspace'],
+        'wifi': ['wifi', 'wi-fi', 'internet', 'bağlantı'],
+        'deniz': ['deniz', 'sea', 'ocean', 'manzara', 'view', 'boğaz', 'göl'],
+        'sessiz': ['quiet', 'sessiz', 'sakin', 'peaceful', 'huzurlu', 'tenha'],
+        'açık': ['outdoor', 'açık', 'garden', 'bahçe', 'teras', 'balkon', 'dış mekan'],
+        'çalışma': ['work', 'study', 'çalışma', 'workspace', 'laptop', 'uzaktan'],
+        'aile': ['aile', 'aileyle', 'çocuk', 'family', 'bebek', 'aile dostu'],
+        'evcil': ['evcil', 'köpek', 'pet friendly', 'hayvan'],
+        'park': ['park', 'otopark', 'park yeri'],
     }
     
     for feature, keywords in feature_keywords.items():
         if any(kw in query_lower for kw in keywords):
             features.append(feature)
+    
+    # ===================== GELİŞTİRİLMİŞ TÜRKÇE NLP =====================
+    
+    # 1. DUYGU / RUH HALİ ALGILAMA
+    mood_map = {
+        'yorgun':    ['yorgun', 'yoruğum', 'bitik', 'dinlenmek', 'dinginlik', 'stresliyim'],
+        'mutlu':     ['mutlu', 'kutlama', 'kutlamak', 'eğlence', 'eğlenmek', 'parti'],
+        'romantik':  ['romantik', 'sevgili', 'sevgilimle', 'özel gün', 'yıldönümü', 'evlilik teklifi', 'aşk'],
+        'çalışma':  ['müşteri toplantısı', 'iş toplantısı', 'proje', 'online toplantı'],
+        'kahvaltı': ['sabah', 'kahvaltı', 'uyandım', 'kahvaltıya', 'serpme'],
+    }
+    detected_mood = None
+    for mood, keywords in mood_map.items():
+        if any(kw in query_lower for kw in keywords):
+            detected_mood = mood
+            if mood == 'yorgun' and 'sessiz' not in features:
+                features.append('sessiz')  # Yorgun → sessiz yer ekle
+            if mood == 'romantik' and 'açık' not in features:
+                features.append('manzara')  # Romantik → manzara tercih et
+            break
+    
+    # 2. GRUP TİPİ ALGILAMA
+    group_type = 'bireysel'
+    group_keywords = {
+        'aile':       ['aileyle', 'aile olarak', 'çocuklar', 'aileçe', 'anne baba'],
+        'arkadaş':   ['arkadaşlarla', 'grup halinde', 'ekip'],
+        'iş':         ['iş yemeği', 'meslektaş', 'patron', 'toplantı sonrası'],
+        'sevgili':    ['sevgilimle', 'sevgiliye', 'çift olarak', 'romantik'],
+        'kalabalık': ['kalabalık grup', '10 kişi', 'organizasyon', 'toplantı']
+    }
+    for gtype, keywords in group_keywords.items():
+        if any(kw in query_lower for kw in keywords):
+            group_type = gtype
+            if gtype == 'aile' and 'aile' not in features:
+                features.append('aile')
+            break
+    
+    # 3. BÜÜ ALGILAMA
+    budget = 'orta'  # varsayılan
+    if any(kw in query_lower for kw in ['ucuz', 'ekonomik', 'uygun fiyat', 'bütçem kısıtlı', 'hesaplı']):
+        budget = 'ucuz'
+    elif any(kw in query_lower for kw in ['lüks', 'premium', 'özel', 'pahalı olsun', 'en iyi']):
+        budget = 'lüks'
+    
+    # 4. ŞU AN AÇIK MI ALGILAMA
+    want_open_now = any(kw in query_lower for kw in [
+        'şu an açık', 'açık mı', 'gece', 'gece yarısı', 'geç saatte', "şu an", 'hemen'
+    ])
     
     # --- Niyet ve Sohbet Tespiti (Intent Classification) ---
     is_chit_chat = False
@@ -365,6 +416,10 @@ def parse_natural_query(query: str) -> Dict:
         'category': detected_category,
         'district': detected_district,
         'features': features,
+        'mood': detected_mood,
+        'group_type': group_type,
+        'budget': budget,
+        'want_open_now': want_open_now,
         'is_chit_chat': is_chit_chat,
         'is_inappropriate': is_inappropriate
     }
@@ -372,22 +427,67 @@ def parse_natural_query(query: str) -> Dict:
 
 def calculate_distance(lat1: float, lng1: float, lat2: float, lng2: float) -> float:
     """İki nokta arası mesafe (Haversine formülü)"""
-    R = 6371  # Dünya yarıçapı (km)
-    
+    R = 6371
     lat1_rad = math.radians(lat1)
     lat2_rad = math.radians(lat2)
     dlat = math.radians(lat2 - lat1)
     dlng = math.radians(lng2 - lng1)
-    
     a = math.sin(dlat/2)**2 + math.cos(lat1_rad) * math.cos(lat2_rad) * math.sin(dlng/2)**2
     c = 2 * math.asin(math.sqrt(a))
-    
     return R * c
 
 
-def hybrid_score(place: Dict, features: List[str], user_lat=None, user_lng=None, time_of_day=None) -> Dict[str, Union[int, float]]:
+def is_place_open(place: Dict) -> Optional[bool]:
+    """
+    SerpAPI'dan gelen mekan verisindeki çalışma saatlerini parse eder.
+    
+    Returns:
+        True  → kesinlikle açık
+        False → kesinlikle kapalı
+        None  → bilinmiyor (bilgi yok)
+    """
+    hours_raw = place.get('hours') or place.get('opening_hours') or place.get('open_state')
+    
+    if not hours_raw:
+        return None
+    
+    hours_str = str(hours_raw).lower()
+    
+    # Açık sinyalleri
+    if any(kw in hours_str for kw in ['open now', 'şu an açık', 'opens soon']):
+        return True
+    if 'open' in hours_str and 'closed' not in hours_str:
+        return True
+    
+    # Kapalı sinyalleri
+    if any(kw in hours_str for kw in ['closed', 'kapalı']):
+        return False
+    
+    # Saat aralığı parse et (örn: "08:00-22:00")
+    import re
+    time_match = re.search(r'(\d{1,2})[:\.]?(\d{2})\s*[-–]\s*(\d{1,2})[:\.]?(\d{2})', hours_str)
+    if time_match:
+        try:
+            open_h, open_m = int(time_match.group(1)), int(time_match.group(2))
+            close_h, close_m = int(time_match.group(3)), int(time_match.group(4))
+            now = datetime.now()
+            current_minutes = now.hour * 60 + now.minute
+            open_minutes = open_h * 60 + open_m
+            close_minutes = close_h * 60 + close_m
+            
+            if close_minutes < open_minutes:  # Gece yarısını geçiyor
+                return current_minutes >= open_minutes or current_minutes < close_minutes
+            return open_minutes <= current_minutes < close_minutes
+        except Exception:
+            pass
+    
+    return None  # Parse edilemedi
+
+
+
+def hybrid_score(place: Dict, features: List[str], user_lat=None, user_lng=None, time_of_day=None) -> Dict[str, float]:
     """Hibrit skorlama (feature + distance + popularity + time)"""
-    scores: Dict[str, Union[int, float]] = {
+    scores: Dict[str, float] = {
         "feature_score": 0.0,
         "distance_score": 0.0,
         "popularity_score": 0.0,
@@ -396,7 +496,7 @@ def hybrid_score(place: Dict, features: List[str], user_lat=None, user_lng=None,
         "distance_km": 0.0
     }
     
-    # 1. Feature matching (%35 - biraz düşürüldü ki yoruma yer açılsın)
+    # 1. Feature matching (%35)
     place_desc = (place.get('description', '') + ' ' + place.get('name', '')).lower()
     feature_keywords = {
         'wifi': ['wifi', 'wi-fi', 'internet'],
@@ -406,19 +506,19 @@ def hybrid_score(place: Dict, features: List[str], user_lat=None, user_lng=None,
         'çalışma': ['work', 'study', 'çalışma'],
     }
     
-    matched = 0
+    matched: int = 0
     for feature in features:
         if feature in feature_keywords:
             if any(kw in place_desc for kw in feature_keywords[feature]):
-                matched += 1
+                matched += 1  # type: ignore[operator]
     
     if features:
-        scores["feature_score"] = (matched / len(features)) * 0.35
+        scores["feature_score"] = float(matched / len(features)) * 0.35
     
     # 2. Distance score (%30)
     if user_lat and user_lng and place.get('latitude') and place.get('longitude'):
         dist = calculate_distance(user_lat, user_lng, place['latitude'], place['longitude'])
-        scores["distance_km"] = round(dist, 2)
+        scores["distance_km"] = float(round(dist, 2))  # type: ignore[call-overload]
         
         if dist <= 1:
             dist_score = 1.0
@@ -432,8 +532,8 @@ def hybrid_score(place: Dict, features: List[str], user_lat=None, user_lng=None,
         scores["distance_score"] = dist_score * 0.3
     
     # 3. Popularity (%20)
-    rating = place.get('rating', 0)
-    review_count = place.get('review_count', 0)
+    rating: float = float(place.get('rating', 0) or 0)
+    review_count: int = int(place.get('review_count', 0) or 0)
     
     rating_score = (rating / 5.0) * 0.5
     
@@ -455,7 +555,6 @@ def hybrid_score(place: Dict, features: List[str], user_lat=None, user_lng=None,
     weather_condition = "Unknown"
     
     if isinstance(time_of_day, dict):
-        # Eğer sözlük olarak verilmişse (yeni yapı)
         hour = time_of_day.get('hour', int(datetime.now().hour))
         weather = time_of_day.get('weather', {})
         weather_condition = weather.get('condition', 'Unknown').lower()
@@ -470,66 +569,55 @@ def hybrid_score(place: Dict, features: List[str], user_lat=None, user_lng=None,
         time_score_val += 0.05
     elif 11 <= hour < 15 and 'restaurant' in category:
         time_score_val += 0.05
-    elif 18 <= hour <= 23 and ('bar' in category or 'restaurant' in category or 'pub' in category or 'meyhane' in category):
+    elif 18 <= hour <= 23 and ('bar' in category or 'restaurant' in category or 'pub' in category):
         time_score_val += 0.08
     elif hour >= 23 or hour < 6:
-        # Gece yarısı kahveci açık olma ihtimali düşük, pub/bar/gece kulübüne puan ver
         if 'bar' in category or 'pub' in category or 'gece' in place_desc:
             time_score_val += 0.10
         elif 'cafe' in category:
-            time_score_val -= 0.10 # Gece kapalı olma riski
+            time_score_val -= 0.10
             
     # --- Hava Durumu Zekası ---
     is_outdoor = any(kw in place_desc for kw in ['açık', 'bahçe', 'teras', 'outdoor', 'sahil', 'deniz'])
     
     if 'rain' in weather_condition or 'snow' in weather_condition or 'storm' in weather_condition:
-        # Yağmurlu/Karlıysa açık alanlara eksi puan, kapalı alanlara artı puan
         if is_outdoor:
             time_score_val -= 0.15
-            place['recommendation_reason_bonus'] = "🌧️ Yağmurlu hava uyarısı: Açık alanlı olabilir"
         else:
             time_score_val += 0.05
-            place['recommendation_reason_bonus'] = "🌧️ Yağmurlu havaya uygun kapalı mekan"
             
     elif 'clear' in weather_condition or 'sun' in weather_condition:
-        # Güneşliyse açık alanlara artı puan
         if is_outdoor:
             time_score_val += 0.10
-            place['recommendation_reason_bonus'] = "☀️ Güzel havaya uygun açık alan"
             
-    scores["time_score"] = max(min(time_score_val, 0.10), -0.15)  # Max +%10 eklenti, min -%15 ceza
+    scores["time_score"] = max(min(time_score_val, 0.10), -0.15)
     
-    # 5. Review (Yorum) LLM Duygu Analizi Zekası (%15)
+    # 5. Review AI Sentiment (%15)
     review_score_val = 0.0
     user_review = place.get('user_review', '')
     if user_review:
-        # LLM üzerinden sentiment çıkarıyoruz (embedding tabanlı kosinüs benzerliği)
         sentiment_bonus = model_manager.analyze_review_sentiment(user_review)
-        
-        # Sadece pozitifleri veya çok negatifleri etki ettir
         if sentiment_bonus > 0.05:
-            review_score_val = 0.15 # Max yorum bonusu
-            place['recommendation_reason_bonus'] = "✨ Harika müşteri yorumlarına sahip"
+            review_score_val = 0.15
         elif sentiment_bonus < -0.05:
-            review_score_val = -0.15 # Kötü yorum cezası
-            place['recommendation_reason_bonus'] = "⚠️ Müşteri yorumlarında olumsuz referanslar var"
+            review_score_val = -0.15
         else:
             review_score_val = 0.05
     
     scores["review_ai_score"] = review_score_val
     
     # Tüm skorları topla
-    scores["total_score"] = min(
+    scores["total_score"] = float(min(
         max(
-            scores["feature_score"] + 
-            scores["distance_score"] + 
-            scores["popularity_score"] + 
+            scores["feature_score"] +
+            scores["distance_score"] +
+            scores["popularity_score"] +
             scores["time_score"] +
-            scores.get("review_ai_score", 0.0), 
+            scores.get("review_ai_score", 0.0),
             0.0
         ),
         1.0
-    )
+    ))
     
     return scores
 
@@ -582,7 +670,7 @@ def rerank_places(places: List[Dict], query: str, top_k: int = 5) -> List[Dict]:
     
     reranked.sort(key=lambda x: x['rerank_score'], reverse=True)
     
-    return reranked[:top_k]
+    return reranked[:top_k]  # type: ignore[return-value]
 
 
 # ==================== ENDPOINTS ====================
@@ -618,6 +706,82 @@ async def get_info():
         },
         "timestamp": datetime.now().isoformat()
     }
+
+
+@app.get("/api/stats")
+async def get_stats():
+    """
+    Detaylı sistem istatistikleri:
+    - Cache hit/miss oranı
+    - Redis bellek kullanımı
+    - Kaç anahtar saklanıyor
+    - Yorum insight cache sayısı
+    - Uptime
+    """
+    stats = {
+        "timestamp": datetime.now().isoformat(),
+        "system": {
+            "version": "2.1.0",
+            "model_loaded": model_manager.is_loaded,
+            "model_device": model_manager.device,
+        },
+        "cache": {},
+        "review_insights": {},
+        "nlp": {
+            "categories": 6,
+            "districts": 42,
+            "features": 8,
+            "moods": 5,
+            "specialty_patterns": 23,   # review_analyzer kategorileri
+        }
+    }
+    
+    if cache_manager and cache_manager.is_connected:
+        try:
+            import redis as _redis
+            r = _redis.Redis.from_url(cache_manager.redis_url)
+            info = r.info()
+            
+            total_keys: int = int(r.dbsize())
+            
+            insight_keys: int = len(r.keys("review_insights_*"))  # type: ignore[arg-type]
+            search_keys: int  = len(r.keys("smart_search*"))      # type: ignore[arg-type]
+            
+            # Redis info'dan direkt typed değerler al
+            hits: int   = int(info.get("keyspace_hits", 0) or 0)
+            misses: int = int(info.get("keyspace_misses", 0) or 0)
+            hit_total: int = hits + misses
+            hit_rate: float = float(round(hits / hit_total * 100, 1)) if hit_total > 0 else 0.0
+            
+            mem_used_mb:  float = float(round(int(info.get("used_memory", 0) or 0) / 1024 / 1024, 2))
+            mem_peak_mb:  float = float(round(int(info.get("used_memory_peak", 0) or 0) / 1024 / 1024, 2))
+            clients: int  = int(info.get("connected_clients", 0) or 0)
+            
+            stats["cache"] = {  # type: ignore[assignment]
+                "status": "connected",
+                "total_keys": total_keys,
+                "search_cache_keys": search_keys,
+                "insight_cache_keys": insight_keys,
+                "memory_used_mb": mem_used_mb,
+                "memory_peak_mb": mem_peak_mb,
+                "connected_clients": clients,
+                "hits": hits,
+                "misses": misses,
+                "hit_rate_pct": hit_rate,
+            }
+            
+            stats["review_insights"] = {  # type: ignore[assignment]
+                "cached_insights": insight_keys,
+                "ttl_hours": 24,
+                "note": "Her mekan için 24 saat cache tutulur"
+            }
+            
+        except Exception as e:
+            stats["cache"] = {"status": "error", "detail": str(e)}  # type: ignore[assignment]
+    else:
+        stats["cache"] = {"status": "not_connected", "detail": "Redis çalışmıyor"}  # type: ignore[assignment]
+    
+    return stats
 
 
 @app.post("/api/smart-search-v2")
@@ -720,6 +884,24 @@ async def smart_search_v2(request: SmartSearchRequest):
             ]
             if len(distance_filtered) >= 5:
                 filtered_places = distance_filtered
+        
+        # Çalışma Saatleri Filtresi
+        if parsed.get('want_open_now'):
+            open_places = [p for p in filtered_places if is_place_open(p) is not False]
+            if len(open_places) >= 3:
+                filtered_places = open_places
+                print(f"[OpenNow] {len(open_places)}/{len(filtered_places)} mekan açık")
+        
+        # Bütçe Filtresi (NLP'den alınan budget bilgisi)
+        budget = parsed.get('budget', 'orta')
+        if budget == 'ucuz':
+            budget_filtered = [p for p in filtered_places if p.get('price_level', 2) <= 2]
+            if len(budget_filtered) >= 3:
+                filtered_places = budget_filtered
+        elif budget == 'lüks':
+            budget_filtered = [p for p in filtered_places if p.get('price_level', 2) >= 3]
+            if len(budget_filtered) >= 2:
+                filtered_places = budget_filtered
         
         # Hava Durumu Çekme (Open-Meteo API - Ücretsiz, Limitsiz)
         weather_data = {"condition": "Unknown", "temp": None}
