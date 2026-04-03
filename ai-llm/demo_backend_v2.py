@@ -18,11 +18,13 @@ import json
 import httpx
 from datetime import datetime
 import redis
-from redis import Redis
 
 # .env dosyasını yükle
 from dotenv import load_dotenv
 load_dotenv()
+
+# Yorum analizi modülü
+from review_analyzer import fast_extract_insights
 
 # ==================== FAZ 2.1: CACHE SYSTEM ====================
 
@@ -34,7 +36,7 @@ class RedisCacheManager:
         self.ttl = ttl_seconds
         self.hits = 0
         self.misses = 0
-        self.client: Redis = redis.Redis.from_url(redis_url, decode_responses=True)
+        self.client: redis.Redis = redis.Redis.from_url(redis_url, decode_responses=True)
         self.is_connected = False
         self._connect()
 
@@ -261,11 +263,13 @@ class SmartSearchRequest(BaseModel):
     user_lat: Optional[float] = None
     user_lng: Optional[float] = None
     max_distance_km: float = 10.0
+    analyze_reviews: bool = True   # Yorum analizi açık/kapalı (API kredi tasarrufu için)
 
 
 class AnalyzeReviewRequest(BaseModel):
     """İsteğe bağlı yorum çekme ve analiz isteği"""
     data_id: str
+    place_name: Optional[str] = None
 
 
 
@@ -493,7 +497,7 @@ def hybrid_score(place: Dict, features: List[str], user_lat=None, user_lng=None,
             time_score_val += 0.10
             place['recommendation_reason_bonus'] = "☀️ Güzel havaya uygun açık alan"
             
-    scores["time_score"] = max(min(time_score_val, 0.10), -0.20) # Max %10 eklenti
+    scores["time_score"] = max(min(time_score_val, 0.10), -0.15)  # Max +%10 eklenti, min -%15 ceza
     
     # 5. Review (Yorum) LLM Duygu Analizi Zekası (%15)
     review_score_val = 0.0
@@ -774,6 +778,11 @@ async def smart_search_v2(request: SmartSearchRequest):
         # Reranking
         reranked_places = rerank_places(scored_places[:min(20, len(scored_places))], request.query, top_k=5)
         
+        # ==================== YORUM BAZLI INSIGHT ANALİZİ ====================
+        # Her mekan için SerpAPI yorumlarını çekip ne ile övüldüğünü tespit et
+        if request.analyze_reviews:
+            await _enrich_with_review_insights(reranked_places)
+        
         # Gerekçeler
         feature_names = {
             'wifi': '📶 Sınırsız Wi-Fi',
@@ -784,7 +793,6 @@ async def smart_search_v2(request: SmartSearchRequest):
         }
         
         for place in reranked_places:
-            scores = place.get('scores', {})
             reasons = []
             
             if place.get('rating', 0) >= 4.8:
@@ -806,6 +814,13 @@ async def smart_search_v2(request: SmartSearchRequest):
             
             if place.get('recommendation_reason_bonus'):
                 reasons.append(place['recommendation_reason_bonus'])
+            
+            # Yorum bazlı insight'ları gerekçeye ekle
+            review_insights = place.get('review_insights', {})
+            if review_insights and review_insights.get('specialties'):
+                top_specs = review_insights['specialties'][:2]
+                for spec in top_specs:
+                    reasons.insert(0, spec['display'])  # Başa ekle - en önemli bilgi
             
             place['recommendation_reason'] = " • ".join(reasons) if reasons else "Genel uygunluk"
         
@@ -838,10 +853,90 @@ async def smart_search_v2(request: SmartSearchRequest):
         raise HTTPException(status_code=500, detail=str(e))
 
 
+# ==================== REVIEW INSIGHT HELPER ====================
+
+async def _enrich_with_review_insights(places: List[Dict]) -> None:
+    """
+    Reranked mekanların yorumlarını paralel olarak çekip
+    ne ile övüldüklerini tespit eder.
+    
+    Örnek çıktı:
+      place['review_insights'] = {
+          'specialties': [
+              {'emoji': '☕', 'label': 'Kahvesiyle ünlü', 'mention_count': 8, ...},
+              {'emoji': '🍔', 'label': 'Hamburgeriyle meşhur', 'mention_count': 5, ...}
+          ],
+          'top_specialty': '☕ Kahvesiyle ünlü (8 yorum)',
+          'highlight_tags': ['☕ Kahve', '🍔 Hamburger'],
+          'summary': 'Bu mekan özellikle kahvesi ile öne çıkıyor.'
+      }
+    """
+    try:
+        from serpapi_client import SerpApiClient
+        client = SerpApiClient()
+    except Exception as e:
+        print(f"[ReviewInsight] SerpApiClient başlatılamadı: {e}")
+        return
+
+    async def _fetch_and_analyze(place: Dict) -> None:
+        """Tek mekan için yorum çek ve analiz et (async wrapper)"""
+        data_id = place.get('data_id', '')
+        if not data_id:
+            place['review_insights'] = {'specialties': [], 'top_specialty': None,
+                                        'highlight_tags': [], 'summary': ''}
+            return
+
+        # Redis cache'de var mı?
+        insight_cache_key = f"review_insights_{data_id}"
+        if cache_manager:
+            cached = cache_manager.get(insight_cache_key)
+            if cached:
+                place['review_insights'] = cached
+                print(f"[ReviewInsight] Cache hit: {place.get('name', data_id)}")
+                return
+
+        # Yorumları çek (sync → thread pool)
+        try:
+            loop = asyncio.get_event_loop()
+            reviews = await loop.run_in_executor(
+                None,
+                lambda: client.get_place_reviews(data_id, max_reviews=20)  # 20 yorum yeterli
+            )
+        except Exception as e:
+            print(f"[ReviewInsight] Yorum çekme hatası ({data_id}): {e}")
+            reviews = []
+
+        # Yorumları analiz et
+        place_name = place.get('name', '')
+        insights = fast_extract_insights(reviews, place_name)
+        place['review_insights'] = insights
+
+        # Specialties'i log'a yaz
+        if insights.get('specialties'):
+            specs = ', '.join([s['emoji'] + ' ' + s['key'] for s in insights['specialties'][:3]])
+            print(f"[ReviewInsight] {place_name}: {specs}")
+        else:
+            print(f"[ReviewInsight] {place_name}: No specialties detected ({len(reviews)} reviews)")
+
+        # Cache'e kaydet (24 saat TTL - yorum verileri sık değişmez)
+        if cache_manager and reviews:
+            try:
+                cache_manager.client.setex(insight_cache_key, 86400, json.dumps(insights, ensure_ascii=False))
+            except Exception:
+                pass
+
+    # Tüm mekanlar için paralel olarak çalıştır
+    tasks = [_fetch_and_analyze(place) for place in places]
+    await asyncio.gather(*tasks, return_exceptions=True)
+
+
 @app.post("/api/analyze-place-reviews")
 async def analyze_place_reviews(request: AnalyzeReviewRequest):
     """
-    Seçilen mekan için isteğe bağlı derinlemesine bağımsız (tarafsız) yorum analizi
+    Seçilen mekan için derinlemesine yorum analizi:
+    - Sentiment skoru
+    - Mekanın neyle övüldüğü (kahve, hamburger, atmosfer vs.)
+    - Örnek yorumlar
     """
     try:
         from serpapi_client import SerpApiClient
@@ -853,38 +948,78 @@ async def analyze_place_reviews(request: AnalyzeReviewRequest):
             return {
                 "success": False,
                 "review_count": 0,
-                "analysis_text": "Yapay zeka analizine elverişli yeterli müşteri geri bildirimi bulunamamıştır."
+                "analysis_text": "Yapay zeka analizine elverişli yeterli müşteri geri bildirimi bulunamamıştır.",
+                "specialties": []
             }
-            
-        sentiment_bonus = model_manager.analyze_review_sentiment(deep_reviews)
-        
-        # Tarafsız, analitik ve yapay zeka/üçüncü şahıs ağzıyla (nesnel) metin üretimi
-        # sentiment_bonus: ortalama duygu oranı. Genelde -0.40 ile +0.40 arasında.
         
         count = len(deep_reviews)
-        if sentiment_bonus > 0.15:
-            analysis_text = f"Yapay zeka analizine göre, bu mekan için toplanan son {count} müşteri geri bildiriminde çok yüksek oranda memnuniyet saptanmıştır. Özellikle hizmet kalitesi ve genel deneyim müşteriler tarafından şiddetle tavsiye edilmektedir."
-        elif sentiment_bonus > 0.05:
-            analysis_text = f"Yapay zeka tarafından analiz edilen son {count} yoruma dayanarak, müşteri memnuniyetinin genel itibarıyla pozitif yönde olduğu, mekanın standart beklentileri karşıladığı gözlemlenmiştir."
-        elif sentiment_bonus < -0.15:
-            analysis_text = f"Yapay zeka analiz raporuna göre, incelenen {count} güncel yorumda ciddi ve tutarlı müşteri şikayetleri tespit edilmiştir. Kalite, hijyen veya bekleme süresi gibi unsurlar doğrultusunda ziyaret deneyiminin olumsuz olabileceği analiz edilmektedir."
-        elif sentiment_bonus < -0.05:
-            analysis_text = f"Yapay zeka metin analizlerine göre incelenen {count} yorumda, genel işleyiş ve ürüne dair bazı kronik memnuniyetsizlikler mevcuttur. Deneyim kalitesinde dalgalanmalar olduğu saptanmıştır."
+        place_name = request.place_name or ""
+        
+        # 1. Keyword bazlı specialty çıkarma (hızlı, her zaman çalışır)
+        insights = fast_extract_insights(deep_reviews, place_name)
+        
+        # 2. Embedding tabanlı sentiment (model yüklüyse)
+        sentiment_bonus = model_manager.analyze_review_sentiment(deep_reviews)
+        
+        # 3. Analiz metni üret
+        if insights.get('specialties'):
+            top_labels = [s['emoji'] + ' ' + s['label'] for s in insights['specialties'][:3]]
+            specialty_text = ', '.join(top_labels)
+            
+            if sentiment_bonus > 0.10:
+                analysis_text = (
+                    f"Yapay zeka {count} yorumu inceledi. Bu mekan özellikle şunlarla öne çıkıyor: "
+                    f"{specialty_text}. Müşteri memnuniyeti genel olarak çok yüksek."
+                )
+            else:
+                analysis_text = (
+                    f"Yapay zeka {count} yorumu inceledi. Bu mekan özellikle şunlarla biliniyor: "
+                    f"{specialty_text}."
+                )
         else:
-            analysis_text = f"Sistem tarafında analiz edilen son {count} yorum doğrultusunda, mekanın belirgin bir pozitif veya negatif uçta yer almadığı, hizmetin ortalama standartlar etrafında şekillendiği tespit edilmiştir."
+            # Specialty bulunamadıysa sentiment bazlı metin
+            if sentiment_bonus > 0.15:
+                analysis_text = (f"Yapay zeka analizine göre, {count} müşteri geri bildiriminde "
+                                f"çok yüksek oranda memnuniyet saptanmıştır.")
+            elif sentiment_bonus > 0.05:
+                analysis_text = (f"Yapay zeka tarafından analiz edilen {count} yorumda müşteri "
+                                f"memnuniyeti genel olarak pozitif yönde.")
+            elif sentiment_bonus < -0.15:
+                analysis_text = (f"{count} yorumda ciddi müşteri şikayetleri tespit edilmiştir. "
+                                f"Ziyaret öncesi dikkatli değerlendirme önerilir.")
+            else:
+                analysis_text = (f"{count} yorum analiz edildi. Mekan ortalama standartlar "
+                                f"etrafında şekilleniyor.")
+        
+        # Örnek yorumlar (her specialty için)
+        example_reviews = []
+        for spec in insights.get('specialties', [])[:3]:
+            if spec.get('example_review'):
+                example_reviews.append({
+                    "specialty": spec['label'],
+                    "emoji": spec['emoji'],
+                    "review": spec['example_review']
+                })
             
         return {
             "success": True,
             "review_count": count,
             "sentiment_score": round(sentiment_bonus, 3),
-            "analysis_text": analysis_text
+            "analysis_text": analysis_text,
+            "specialties": insights.get('specialties', []),
+            "highlight_tags": insights.get('highlight_tags', []),
+            "example_reviews": example_reviews,
+            "summary": insights.get('summary', '')
         }
     except Exception as e:
         print(f"❌ Yorum analizi hatası: {e}")
+        import traceback
+        traceback.print_exc()
         return {
             "success": False,
             "review_count": 0,
-            "analysis_text": "Yapay zeka sistemi yorumlara şu anda erişemiyor. Teknik bir aksaklık saptandı."
+            "analysis_text": "Yapay zeka sistemi yorumlara şu anda erişemiyor.",
+            "specialties": []
         }
 
 

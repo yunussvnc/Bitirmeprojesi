@@ -148,6 +148,9 @@ class PlaceData(BaseModel):
     category: str = "Kafe"
     description: str = ""
     photo_url: Optional[str] = None
+    review_count: int = 0          # SerpAPI'den gelen alan
+    data_id: Optional[str] = None  # SerpAPI mekan ID'si
+    user_review: Optional[str] = None  # Kullanıcı yorumu
 
 
 class SearchRequest(BaseModel):

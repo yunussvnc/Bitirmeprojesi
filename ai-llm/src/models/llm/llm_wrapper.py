@@ -138,9 +138,7 @@ class HuggingFaceWrapper(LLMWrapper):
             return f"Hata oluştu: {str(e)}"
     
     async def generate_async(self, prompt: str, context: Optional[List[str]] = None) -> str:
-        """Async öneri metni üret"""
-        # Şimdilik sync olarak çağır (async wrapper)
-        import asyncio
+        """Async öneri metni üret (sync üzerinde chain olarak çalışır)"""
         loop = asyncio.get_event_loop()
         return await loop.run_in_executor(None, self.generate, prompt, context)
 

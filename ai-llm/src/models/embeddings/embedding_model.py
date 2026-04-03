@@ -13,9 +13,6 @@ logger = logging.getLogger(__name__)
 class EmbeddingModel:
     """Embedding model yöneticisi - Lazy loading ile"""
     
-    _instance: Optional['EmbeddingModel'] = None
-    _model: Optional[SentenceTransformer] = None
-    
     def __init__(self):
         """Embedding model yöneticisi - model lazy load edilir"""
         self._model = None
