@@ -69,6 +69,17 @@ def delete_pending_user(db: Session, email: str):
         db.commit()
 
 def create_user_from_pending(db: Session, pending: models.PendingUser):
+    # Eğer aynı username ile seed kullanıcı varsa, onu ve yorumlarını sil
+    if pending.username:
+        seed_user = db.query(models.User).filter(
+            models.User.username == pending.username,
+            models.User.role == "seed"
+        ).first()
+        if seed_user:
+            db.query(models.Review).filter(models.Review.user_id == seed_user.id).delete(synchronize_session=False)
+            db.delete(seed_user)
+            db.commit()
+
     db_user = models.User(
         email=pending.email,
         username=pending.username,
@@ -231,6 +242,10 @@ def _enrich_places_with_stats(db: Session, places):
             p.menu_items = _json.loads(p.menu_items_json) if p.menu_items_json else []  # type: ignore
         except Exception:
             p.menu_items = []  # type: ignore
+        try:
+            p.opening_hours_json = _json.loads(p.opening_hours_json) if p.opening_hours_json and isinstance(p.opening_hours_json, str) else (p.opening_hours_json or None)  # type: ignore
+        except Exception:
+            pass  # leave as-is
 
     return places
 
@@ -496,6 +511,8 @@ def create_post(db: Session, user_id: int, data: schemas.PostCreate):
         place_id=data.place_id,
         caption=data.caption,
         post_type=data.post_type or "photo",
+        comments_disabled=data.comments_disabled,
+        likes_hidden=data.likes_hidden,
     )
     db.add(db_post)
     db.commit()
@@ -612,11 +629,14 @@ def get_comments_paginated(db: Session, post_id: int, page: int = 1, page_size: 
 
 
 def add_post_comment(db: Session, post_id: int, user_id: int, text: str):
+    post = db.query(models.Post).filter(models.Post.id == post_id).first()
+    if not post:
+        return None
+    if post.comments_disabled:
+        return None  # Yorumlar kapatılmış
     comment = models.PostComment(post_id=post_id, user_id=user_id, text=text)
     db.add(comment)
-    post = db.query(models.Post).filter(models.Post.id == post_id).first()
-    if post:
-        post.comment_count += 1 # type: ignore
+    post.comment_count += 1 # type: ignore
     db.commit()
     db.refresh(comment)
     return comment
@@ -668,6 +688,7 @@ def create_story(db: Session, user_id: int, data: schemas.StoryCreate):
         media_type=data.media_type,
         media_url=data.media_url,
         thumbnail_url=data.thumbnail_url,
+        is_close_friends=data.is_close_friends,
         expires_at=expires_at,
     )
     db.add(story)
@@ -846,6 +867,8 @@ def get_unread_notification_count(db: Session, user_id: int) -> int:
 
 def get_user_stats(db: Session, user_id: int) -> dict:
     post_count = db.query(models.Post).filter(models.Post.user_id == user_id).count()
+    follower_count = db.query(models.Follow).filter(models.Follow.following_id == user_id).count()
+    following_count = db.query(models.Follow).filter(models.Follow.follower_id == user_id).count()
     review_count = db.query(models.Review).filter(models.Review.user_id == user_id).count()
     visit_count = review_count
     now = datetime.utcnow()
@@ -880,6 +903,8 @@ def get_user_stats(db: Session, user_id: int) -> dict:
             favorite_region = region_row[0]
     return {
         "post_count": post_count,
+        "follower_count": follower_count,
+        "following_count": following_count,
         "review_count": review_count,
         "visit_count": visit_count,
         "visits_this_month": visits_this_month,
@@ -1078,9 +1103,79 @@ def update_place(db: Session, place_id: int, data: dict):
     elif "menu_items" in data:
         data.pop("menu_items")
 
+    if "opening_hours_json" in data and data["opening_hours_json"] is not None:
+        place.opening_hours_json = _json.dumps(data.pop("opening_hours_json"), ensure_ascii=False)
+    elif "opening_hours_json" in data:
+        data.pop("opening_hours_json")
+
     for key, value in data.items():
         if hasattr(place, key) and value is not None:
             setattr(place, key, value)
     db.commit()
     db.refresh(place)
     return place
+
+
+# --- KULLANICI TERCİHLERİ (USER PREFERENCES) ---
+
+def get_or_create_preferences(db: Session, user_id: int) -> models.UserPreferences:
+    """Var olan ayarları getir, yoksa varsayılanlarla oluştur."""
+    prefs = db.query(models.UserPreferences).filter(
+        models.UserPreferences.user_id == user_id
+    ).first()
+    if not prefs:
+        prefs = models.UserPreferences(user_id=user_id)
+        db.add(prefs)
+        db.commit()
+        db.refresh(prefs)
+    return prefs
+
+
+def update_preferences(
+    db: Session, user_id: int, data: "schemas.UserPreferencesUpdate"
+) -> models.UserPreferences:
+    """Kullanıcı tercihlerini kısmi güncelle (PATCH semantiği)."""
+    prefs = get_or_create_preferences(db, user_id)
+    update_data = data.model_dump(exclude_unset=True)
+
+    # hidden_words gelirse JSON string'e çevir
+    if "hidden_words" in update_data:
+        import json as _json
+        prefs.hidden_words_json = _json.dumps(update_data.pop("hidden_words"))
+
+    for field, value in update_data.items():
+        if hasattr(prefs, field):
+            setattr(prefs, field, value)
+
+    db.commit()
+    db.refresh(prefs)
+    return prefs
+
+
+def preferences_to_response(prefs: models.UserPreferences) -> dict:
+    """UserPreferences modelini response dict'e çevir (hidden_words_json deserialize)."""
+    import json as _json
+    hidden_words = []
+    if prefs.hidden_words_json:
+        try:
+            hidden_words = _json.loads(prefs.hidden_words_json)
+        except Exception:
+            hidden_words = []
+    return {
+        "is_private_account": prefs.is_private_account,
+        "default_comments_disabled": prefs.default_comments_disabled,
+        "comment_allowed_audience": prefs.comment_allowed_audience,
+        "unknown_message_requests": prefs.unknown_message_requests,
+        "story_reply_audience": prefs.story_reply_audience,
+        "show_read_receipts": prefs.show_read_receipts,
+        "story_save_to_archive": prefs.story_save_to_archive,
+        "story_save_to_camera_roll": prefs.story_save_to_camera_roll,
+        "hide_offensive_words": prefs.hide_offensive_words,
+        "hidden_words": hidden_words,
+        "upload_quality": prefs.upload_quality,
+        "wifi_auto_high_quality": prefs.wifi_auto_high_quality,
+        "include_location_in_posts": prefs.include_location_in_posts,
+        "language": prefs.language,
+        "updated_at": prefs.updated_at,
+    }
+

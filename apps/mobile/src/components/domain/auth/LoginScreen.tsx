@@ -60,7 +60,8 @@ export default function LoginScreen() {
   const [password, setPassword] = useState('');
   const [roleType, setRoleType] = useState<'user'|'venue'>('user');
   const [loading, setLoading] = useState(false);
-  const [errors, setErrors] = useState<{ email?: string; password?: string }>({});
+  const [showPassword, setShowPassword] = useState(false);
+  const [errors, setErrors] = useState<{ email?: string; password?: string; general?: string }>({});
   const isSubmittingRef = useRef(false);
 
   // Google Auth Setup
@@ -156,7 +157,7 @@ export default function LoginScreen() {
 
 
   const validateForm = useCallback((): boolean => {
-    const newErrors: { email?: string; password?: string } = {};
+    const newErrors: { email?: string; password?: string; general?: string } = {};
     if (!email.trim()) newErrors.email = 'E-posta gereklidir';
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) newErrors.email = 'Geçerli bir e-posta adresi girin';
     if (!password.trim()) newErrors.password = 'Şifre gereklidir';
@@ -197,9 +198,14 @@ export default function LoginScreen() {
           router.replace('/(tabs)');
         }
       }
-    } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : 'Giriş başarısız. Lütfen tekrar deneyin.';
-      setErrors({ email: msg });
+    } catch (err: any) {
+      // Backend'den dönen HTTP hatası veya genel hata mesajı
+      let msg = err instanceof Error ? err.message : 'Giriş başarısız. Lütfen tekrar deneyin.';
+      if (err?.response?.data?.detail) {
+        msg = err.response.data.detail;
+      }
+      setErrors({ general: msg });
+      Alert.alert('Giriş Hatası', msg);
     } finally {
       isSubmittingRef.current = false;
       setLoading(false);
@@ -317,11 +323,23 @@ export default function LoginScreen() {
                             setPassword(t);
                             clearPasswordError();
                           }}
-                          secureTextEntry
+                          secureTextEntry={!showPassword}
+                          rightIcon={showPassword ? 'eye.slash' as any : 'eye' as any}
+                          onRightIconPress={() => {
+                            lightImpact();
+                            setShowPassword(!showPassword);
+                          }}
                           autoComplete="password"
                           error={errors.password}
                           containerStyle={styles.inputContainer}
                         />
+
+                        {errors.general && (
+                          <View style={styles.generalErrorBox}>
+                            <IconSymbol name="exclamationmark.triangle" size={16} color="#ff4d4d" />
+                            <Text style={styles.generalErrorText}>{errors.general}</Text>
+                          </View>
+                        )}
                         <TouchableOpacity
                           onPress={() => {
                             lightImpact();
@@ -608,5 +626,22 @@ const styles = StyleSheet.create({
     color: '#ffffff',
     textDecorationLine: 'underline',
     letterSpacing: 0.3,
+  },
+  generalErrorBox: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'rgba(255, 77, 77, 0.15)',
+    padding: 12,
+    borderRadius: 12,
+    marginBottom: 16,
+    borderWidth: 1,
+    borderColor: 'rgba(255, 77, 77, 0.3)',
+    gap: 8,
+  },
+  generalErrorText: {
+    color: '#ff4d4d',
+    fontSize: 14,
+    fontWeight: '500',
+    flex: 1,
   },
 });

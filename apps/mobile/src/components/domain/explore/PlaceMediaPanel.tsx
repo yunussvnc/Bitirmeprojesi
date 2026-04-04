@@ -62,6 +62,7 @@ const MOCK_PLACE_STORIES: Story[] = [
     created_at: new Date(Date.now() - 1 * 3600000).toISOString(),
     expires_at: new Date(Date.now() + 86400000).toISOString(),
     author: { id: 1, username: 'ahmet_k', first_name: 'Ahmet', avatar_url: 'https://i.pravatar.cc/100?img=11' },
+    is_close_friends: false,
   },
   {
     id: 9002, user_id: 2, media_type: 'image',
@@ -69,6 +70,7 @@ const MOCK_PLACE_STORIES: Story[] = [
     created_at: new Date(Date.now() - 4 * 3600000).toISOString(),
     expires_at: new Date(Date.now() + 86400000).toISOString(),
     author: { id: 2, username: 'elif_d', first_name: 'Elif', avatar_url: 'https://i.pravatar.cc/100?img=5' },
+    is_close_friends: false,
   },
   {
     id: 9003, user_id: 3, media_type: 'image',
@@ -76,6 +78,7 @@ const MOCK_PLACE_STORIES: Story[] = [
     created_at: new Date(Date.now() - 7 * 3600000).toISOString(),
     expires_at: new Date(Date.now() + 86400000).toISOString(),
     author: { id: 3, username: 'can_yilmaz', first_name: 'Can', avatar_url: 'https://i.pravatar.cc/100?img=12' },
+    is_close_friends: false,
   },
   {
     id: 9004, user_id: 4, media_type: 'video',
@@ -84,6 +87,7 @@ const MOCK_PLACE_STORIES: Story[] = [
     created_at: new Date(Date.now() - 10 * 3600000).toISOString(),
     expires_at: new Date(Date.now() + 86400000).toISOString(),
     author: { id: 4, username: 'zeynep_a', first_name: 'Zeynep', avatar_url: 'https://i.pravatar.cc/100?img=9' },
+    is_close_friends: false,
   },
   {
     id: 9005, user_id: 5, media_type: 'image',
@@ -91,6 +95,7 @@ const MOCK_PLACE_STORIES: Story[] = [
     created_at: new Date(Date.now() - 3 * 3600000).toISOString(),
     expires_at: new Date(Date.now() + 86400000).toISOString(),
     author: { id: 5, username: 'mehmet_b', first_name: 'Mehmet', avatar_url: 'https://i.pravatar.cc/100?img=33' },
+    is_close_friends: false,
   },
 ];
 
@@ -382,14 +387,14 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
           </View>
           {/* Hero Cover */}
           <TouchableOpacity
-            style={styles.heroWrap}
+            style={[styles.heroWrap, { backgroundColor: colors.surface.elevated }]}
             onPress={goToPlaceDetail}
             activeOpacity={0.9}
           >
             <Image
               source={heroImage}
               style={styles.heroImage}
-              contentFit="cover"
+              contentFit="contain"
               cachePolicy="memory-disk"
             />
             <LinearGradient

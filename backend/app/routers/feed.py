@@ -45,6 +45,8 @@ def _post_to_schema(post: models.Post, db: Session, current_user_id: int | None)
         place_id=post.place_id,
         caption=post.caption,
         post_type=post.post_type,
+        comments_disabled=getattr(post, "comments_disabled", False),
+        likes_hidden=getattr(post, "likes_hidden", False),
         like_count=post.like_count,
         comment_count=post.comment_count,
         created_at=post.created_at,
@@ -181,6 +183,8 @@ def add_comment(
     if not post:
         raise HTTPException(status_code=404, detail="Gönderi bulunamadı.")
     comment = crud.add_post_comment(db, post_id, current_user.id, data.text)
+    if comment is None:
+        raise HTTPException(status_code=403, detail="Bu gönderide yorumlar kapatılmıştır.")
     if post.user_id != current_user.id:
         crud.create_notification(db, post.user_id, "comment", current_user.id, post_id=post_id)
     return schemas.PostComment(

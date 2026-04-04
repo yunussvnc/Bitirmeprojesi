@@ -1,22 +1,17 @@
-"""
-Backend'de mekanların olup olmadığını test etmek için basit script
-"""
-
+import sys
+import traceback
 from database import SessionLocal
 import crud
 
-def test_places():
+def main():
     db = SessionLocal()
     try:
-        places = crud.get_places(db, skip=0, limit=10)
-        print(f"✅ Toplam {len(places)} mekan bulundu")
-        for place in places[:5]:
-            print(f"  - {place.name} ({place.category})")
-        if len(places) == 0:
-            print("⚠️  Veritabanında mekan yok! Script'i çalıştırın:")
-            print("   python scripts/add_istanbul_places.py")
+        items, total = crud.get_places_paginated(db, page=1, page_size=500)
+        print("Success:", len(items))
+    except Exception as e:
+        traceback.print_exc()
     finally:
         db.close()
 
 if __name__ == "__main__":
-    test_places()
+    main()

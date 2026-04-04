@@ -92,6 +92,7 @@ export function FeedStoriesRow({ filter }: FeedStoriesRowProps) {
         media_type: "image",
         created_at: new Date(now.getTime() - 2 * 3600000).toISOString(),
         expires_at: expiresAt,
+        is_close_friends: false,
       },
       {
         id: 2,
@@ -103,6 +104,7 @@ export function FeedStoriesRow({ filter }: FeedStoriesRowProps) {
         media_type: "image",
         created_at: new Date(now.getTime() - 5 * 3600000).toISOString(),
         expires_at: expiresAt,
+        is_close_friends: false,
       },
       {
         id: 3,
@@ -114,6 +116,7 @@ export function FeedStoriesRow({ filter }: FeedStoriesRowProps) {
         media_type: "image",
         created_at: new Date(now.getTime() - 1 * 3600000).toISOString(),
         expires_at: expiresAt,
+        is_close_friends: false,
       },
       {
         id: 4,
@@ -125,6 +128,7 @@ export function FeedStoriesRow({ filter }: FeedStoriesRowProps) {
         media_type: "image",
         created_at: new Date(now.getTime() - 8 * 3600000).toISOString(),
         expires_at: expiresAt,
+        is_close_friends: false,
       },
       {
         id: 5,
@@ -136,6 +140,7 @@ export function FeedStoriesRow({ filter }: FeedStoriesRowProps) {
         media_type: "image",
         created_at: new Date(now.getTime() - 12 * 3600000).toISOString(),
         expires_at: expiresAt,
+        is_close_friends: false,
       },
       {
         id: 6,
@@ -147,6 +152,7 @@ export function FeedStoriesRow({ filter }: FeedStoriesRowProps) {
         media_type: "image",
         created_at: new Date(now.getTime() - 3 * 3600000).toISOString(),
         expires_at: expiresAt,
+        is_close_friends: false,
       },
       {
         id: 7,
@@ -158,6 +164,7 @@ export function FeedStoriesRow({ filter }: FeedStoriesRowProps) {
         media_type: "image",
         created_at: new Date(now.getTime() - 6 * 3600000).toISOString(),
         expires_at: expiresAt,
+        is_close_friends: false,
       },
     ]);
     setLoading(false);

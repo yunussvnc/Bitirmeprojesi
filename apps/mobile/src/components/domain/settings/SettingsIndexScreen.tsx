@@ -16,12 +16,19 @@ import { BackButton } from "@/src/components/shared/navigation";
 import { createTextStyle, spacing } from "@/src/constants/design";
 import { useAppStore } from "@/src/store/useAppStore";
 import { useAuthStore } from "@/src/store/useAuthStore";
+import { useSettingsStore } from "@/src/store/useSettingsStore";
 
 export default function SettingsIndexScreen() {
   const { colors, isDark, setThemeMode, themeMode } = useTheme();
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const savedIds = useAppStore((s) => s.savedIds);
+  const isPrivate = useSettingsStore((s) => s.isPrivateAccount);
+  const commentAudience = useSettingsStore((s) => s.commentAllowedAudience);
+  const restrictedCount = useSettingsStore((s) => s.restrictedUserIds.length);
+  const language = useSettingsStore((s) => s.language);
+  const uploadQuality = useSettingsStore((s) => s.uploadQuality);
+  const qualityLabel = uploadQuality === 'high' ? 'Yüksek' : uploadQuality === 'auto' ? 'Otomatik' : 'Tasarruf';
   const [searchQuery, setSearchQuery] = useState("");
 
   const nav = (path: string) => () => {
@@ -61,7 +68,7 @@ export default function SettingsIndexScreen() {
     {
       title: "İçeriklerini kimler görebilir?",
       items: [
-        { label: "Hesap Gizliliği", value: "Gizli", onPress: nav("/settings/privacy"), icon: "lock", showArrow: true, keywords: ["hesap gizliliği", "gizlilik", "gizli hesap", "herkese açık"] },
+        { label: "Hesap Gizliliği", value: isPrivate ? "Gizli" : "Açık", onPress: nav("/settings/privacy"), icon: "lock", showArrow: true, keywords: ["hesap gizliliği", "gizlilik", "gizli hesap", "herkese açık"] },
         { label: "Yakın Arkadaşlar", onPress: nav("/settings/close-friends"), icon: "star", showArrow: true, keywords: ["yakın arkadaşlar", "arkadaşlar", "close friends", "cf", "yeşil daire", "liste"] },
         { label: "Engellenenler", value: "3", onPress: nav("/settings/blocked-users"), icon: "nosign", showArrow: true, keywords: ["engellenenler", "engelli", "engel", "kısıtlı", "kişiler", "blok"] },
         { label: "Hikaye ve Konum Ayarları", onPress: nav("/settings/story"), icon: "location.slash", showArrow: true, keywords: ["hikaye ve konum ayarları", "hikaye gizliliği", "hikaye", "story"] },
@@ -71,8 +78,8 @@ export default function SettingsIndexScreen() {
       title: "Başkalarının seninle etkileşimleri",
       items: [
         { label: "Mesajlar ve Hikaye Yanıtları", onPress: nav("/settings/messages"), icon: "bubble.left.and.bubble.right", showArrow: true, keywords: ["mesajlar ve hikaye yanıtları", "mesaj", "dm", "istekler", "yanıt", "yanıtlar", "mesaj istekleri"] },
-        { label: "Yorumlar", value: "Açık", onPress: nav("/settings/comments"), icon: "text.bubble", showArrow: true, keywords: ["yorumlar", "yorum kontrolü", "yorumları kapat"] },
-        { label: "Kısıtlı Hesaplar", value: "0", onPress: nav("/settings/restricted"), icon: "person.crop.circle.badge.xmark", showArrow: true, keywords: ["kısıtlı hesaplar", "kısıtlamalar", "kısıtlı", "kısıtla", "sessize alınanlar"] },
+        { label: "Yorumlar", value: commentAudience === 'everyone' ? 'Açık' : commentAudience === 'followers' ? 'Takipçiler' : 'Kapalı', onPress: nav("/settings/comments"), icon: "text.bubble", showArrow: true, keywords: ["yorumlar", "yorum kontrolü", "yorumları kapat"] },
+        { label: "Kısıtlı Hesaplar", value: `${restrictedCount}`, onPress: nav("/settings/restricted"), icon: "person.crop.circle.badge.xmark", showArrow: true, keywords: ["kısıtlı hesaplar", "kısıtlamalar", "kısıtlı", "kısıtla", "sessize alınanlar"] },
         { label: "Gizlenen Sözcükler", onPress: nav("/settings/hidden-words"), icon: "eye.slash", showArrow: true, keywords: ["gizlenen sözcükler", "filtreler", "küfür", "sansür", "gizli"] },
       ],
     },
@@ -80,8 +87,8 @@ export default function SettingsIndexScreen() {
       title: "Uygulaman ve medya",
       items: [
         { label: "Konum İzinleri", onPress: nav("/settings/location"), icon: "location", showArrow: true, keywords: ["konum izinleri", "lokasyon", "harita", "izin", "location"] },
-        { label: "Medya Kalitesi", value: "Yüksek", onPress: nav("/settings/media-quality"), icon: "photo.circle", showArrow: true, keywords: ["medya kalitesi", "kalite", "yüksek kalite", "çözünürlük", "video", "fotoğraf"] },
-        { label: "Dil Ayarları", value: "Türkçe", onPress: nav("/settings/language"), icon: "globe", showArrow: true, keywords: ["dil ayarları", "dil", "türkçe", "ingilizce", "zaman", "bölge", "language"] },
+        { label: "Medya Kalitesi", value: qualityLabel, onPress: nav("/settings/media-quality"), icon: "photo.circle", showArrow: true, keywords: ["medya kalitesi", "kalite", "yüksek kalite", "çözünürlük", "video", "fotoğraf"] },
+        { label: "Dil Ayarları", value: language === 'tr' ? 'Türkçe' : 'English', onPress: nav("/settings/language"), icon: "globe", showArrow: true, keywords: ["dil ayarları", "dil", "türkçe", "ingilizce", "zaman", "bölge", "language"] },
         { label: "Kamera Ayarları", onPress: nav("/settings/camera"), icon: "camera", showArrow: true, keywords: ["kamera ayarları", "kamera", "fotoğraf", "çekim", "kamera erişimi"] },
         {
           label: "Uygulama Teması",

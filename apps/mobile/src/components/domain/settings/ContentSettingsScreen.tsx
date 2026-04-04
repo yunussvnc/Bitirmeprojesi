@@ -17,6 +17,7 @@ import { lightImpact, success } from "@/src/utils/haptics";
 
 const UPLOAD_LABELS: Record<UploadQuality, string> = {
   high: "Yüksek",
+  auto: "Otomatik",
   data_saver: "Veri tasarrufu",
 };
 

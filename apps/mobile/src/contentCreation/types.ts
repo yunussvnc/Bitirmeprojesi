@@ -31,3 +31,25 @@ export type EditedMedia = {
   filter?: FilterPreset;
   textOverlays?: TextOverlay[];
 };
+
+/** Aspect ratio option for post cropper */
+export type AspectRatioOption = {
+  label: string;
+  value: [number, number] | null; // null = free/original
+  icon: string; // SF Symbol name
+};
+
+/** Crop region coordinates (normalised 0-1) */
+export type CropRegion = {
+  originX: number;
+  originY: number;
+  width: number;
+  height: number;
+};
+
+/** Gallery album info */
+export type GalleryAlbum = {
+  id: string;
+  title: string;
+  assetCount: number;
+};

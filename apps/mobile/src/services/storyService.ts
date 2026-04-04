@@ -7,6 +7,7 @@ export type Story = {
   media_type: string;
   media_url: string;
   thumbnail_url?: string;
+  is_close_friends: boolean;
   created_at: string;
   expires_at: string;
   author?: {
@@ -34,6 +35,7 @@ export type CreateStoryPayload = {
   media_type: "image" | "video";
   media_url: string;
   thumbnail_url?: string;
+  is_close_friends?: boolean;
 };
 
 export type FeedStoriesFilter = "all" | "following";

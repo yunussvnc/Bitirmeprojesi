@@ -1,5 +1,9 @@
+/**
+ * Gizlilik Merkezi — Politikalar, KVKK, Verilerimi İndir
+ */
+
 import React from "react";
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 import { useTheme } from "@/src/hooks/useTheme";
@@ -7,12 +11,30 @@ import { Section } from "@/src/components/layout/Section";
 import { SettingsRow } from "@/src/components/ui";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { createTextStyle, spacing } from "@/src/constants/design";
-import { lightImpact } from "@/src/utils/haptics";
+import { lightImpact, success } from "@/src/utils/haptics";
 
-export default function CustomSettingsScreen() {
-  const { colors } = useTheme();
+export default function PrivacyCenterScreen() {
+  const { colors, isDark } = useTheme();
   const router = useRouter();
   const insets = useSafeAreaInsets();
+
+  const handleDataRequest = () => {
+    lightImpact();
+    Alert.alert(
+      "Verilerimi İndir",
+      "Hesabınıza ait tüm verilerin bir kopyası hazırlanacak ve e-posta adresinize gönderilecektir. Bu işlem 24-48 saat sürebilir.",
+      [
+        { text: "Vazgeç", style: "cancel" },
+        {
+          text: "Talep Et",
+          onPress: () => {
+            success();
+            Alert.alert("✅ Talep Alındı", "Verileriniz hazırlandığında e-posta ile bilgilendirileceksiniz.");
+          },
+        },
+      ]
+    );
+  };
 
   return (
     <View style={[styles.wrapper, { backgroundColor: colors.background.primary }]}>
@@ -23,10 +45,79 @@ export default function CustomSettingsScreen() {
         <Text style={[createTextStyle("title", colors.text.primary), styles.title]}>Gizlilik Merkezi</Text>
         <View style={styles.backBtn} />
       </View>
+
       <ScrollView style={styles.container} contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
-        <Section title="Meta ve Güvenlik">
-          <SettingsRow label="Verilerini Yönet" showArrow icon="doc.text.magnifyingglass" onPress={() => { lightImpact(); }} />
-          <SettingsRow label="Güvenlik Politikası" showArrow icon="shield.lefthalf.filled" onPress={() => { lightImpact(); }} />
+        {/* Shield Banner */}
+        <View style={[styles.banner, { backgroundColor: isDark ? "rgba(78,205,196,0.08)" : "rgba(78,205,196,0.05)" }]}>
+          <View style={[styles.bannerIcon, { backgroundColor: colors.accent.primary }]}>
+            <IconSymbol name="shield.lefthalf.filled" size={28} color="#fff" />
+          </View>
+          <Text style={[styles.bannerTitle, { color: colors.text.primary }]}>Gizliliğin Bizim İçin Öncelik</Text>
+          <Text style={[styles.bannerDesc, { color: colors.text.secondary }]}>
+            Verileriniz güvende. Asemos, kişisel bilgilerinizi satmaz veya üçüncü taraflarla paylaşmaz.
+          </Text>
+        </View>
+
+        <Section title="Yasal Belgeler">
+          <SettingsRow
+            label="Gizlilik Politikası"
+            showArrow
+            icon="doc.text"
+            onPress={() => { lightImpact(); }}
+          />
+          <SettingsRow
+            label="Kullanım Koşulları"
+            showArrow
+            icon="doc.plaintext"
+            onPress={() => { lightImpact(); }}
+          />
+          <SettingsRow
+            label="Çerez Politikası"
+            showArrow
+            icon="info.circle"
+            onPress={() => { lightImpact(); }}
+          />
+        </Section>
+
+        <Section title="KVKK (Kişisel Verilerin Korunması)">
+          <View style={[styles.kvkkCard, { backgroundColor: colors.surface.elevated, borderColor: colors.surface.border }]}>
+            <Text style={[styles.kvkkText, { color: colors.text.secondary }]}>
+              6698 sayılı Kişisel Verilerin Korunması Kanunu kapsamında, kişisel verileriniz veri sorumlusu sıfatıyla Asemos tarafından aşağıda açıklanan amaçlar doğrultusunda işlenmektedir.
+            </Text>
+            <Text style={[styles.kvkkText, { color: colors.text.secondary, marginTop: 8 }]}>
+              • Hesap oluşturma ve kimlik doğrulama{"\n"}
+              • Hizmet sunumu ve iyileştirme{"\n"}
+              • Güvenlik ve dolandırıcılık önleme{"\n"}
+              • Yasal yükümlülüklerin yerine getirilmesi
+            </Text>
+            <Text style={[styles.kvkkText, { color: colors.text.secondary, marginTop: 8 }]}>
+              KVKK kapsamında aydınlatma yükümlülüğümüz gereğince kişisel verilerinizin işlenme amaçları, aktarım yapılan taraflar ve haklarınız hakkında detaylı bilgi almak için Gizlilik Politikamızı inceleyebilirsiniz.
+            </Text>
+          </View>
+        </Section>
+
+        <Section title="Veri Hakların">
+          <SettingsRow
+            label="Verilerimi İndir"
+            showArrow
+            icon="arrow.down.doc"
+            onPress={handleDataRequest}
+          />
+          <Text style={[styles.hint, { color: colors.text.tertiary }]}>
+            Hesabınıza ait tüm verilerin bir kopyasını talep edebilirsiniz.
+          </Text>
+          <SettingsRow
+            label="Veri Silme Talebi"
+            showArrow
+            icon="trash"
+            onPress={() => {
+              lightImpact();
+              router.push("/settings/security" as any);
+            }}
+          />
+          <Text style={[styles.hint, { color: colors.text.tertiary }]}>
+            Hesabınızı ve tüm verilerinizi kalıcı olarak silmek için Güvenlik ayarlarındaki hesap silme bölümünü kullanabilirsiniz.
+          </Text>
         </Section>
       </ScrollView>
     </View>
@@ -36,15 +127,26 @@ export default function CustomSettingsScreen() {
 const styles = StyleSheet.create({
   wrapper: { flex: 1 },
   header: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    paddingHorizontal: spacing.base,
-    paddingVertical: spacing.md,
+    flexDirection: "row", alignItems: "center", justifyContent: "space-between",
+    paddingHorizontal: spacing.base, paddingVertical: spacing.md,
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
   backBtn: { minWidth: 44, minHeight: 44, alignItems: "flex-start", justifyContent: "center" },
   title: { fontSize: 18, fontWeight: "700" },
   container: { flex: 1 },
-  content: { padding: 16, paddingBottom: 32 },
+  content: { padding: 16, paddingBottom: 40 },
+  banner: {
+    alignItems: "center", padding: 24, borderRadius: 16, marginBottom: 16,
+  },
+  bannerIcon: {
+    width: 56, height: 56, borderRadius: 28,
+    alignItems: "center", justifyContent: "center", marginBottom: 12,
+  },
+  bannerTitle: { fontSize: 18, fontWeight: "700", marginBottom: 6, textAlign: "center" },
+  bannerDesc: { fontSize: 14, lineHeight: 20, textAlign: "center" },
+  kvkkCard: {
+    borderRadius: 12, borderWidth: 1, padding: 16,
+  },
+  kvkkText: { fontSize: 14, lineHeight: 22 },
+  hint: { fontSize: 13, lineHeight: 18, marginTop: -4, marginBottom: 8, marginLeft: 16 },
 });

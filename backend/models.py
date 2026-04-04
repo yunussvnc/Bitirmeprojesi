@@ -39,6 +39,50 @@ class User(Base):
     saved_places = relationship("SavedPlace", back_populates="user", cascade="all, delete-orphan")
     saved_posts = relationship("SavedPost", back_populates="user", cascade="all, delete-orphan")
     owned_places = relationship("Place", back_populates="owner")
+    preferences = relationship("UserPreferences", back_populates="user", uselist=False, cascade="all, delete-orphan")
+
+
+class UserPreferences(Base):
+    """
+    Kullanıcı ayarları — sunucu tarafında persist edilen tercihler.
+    Her kullanıcıya 1:1 ilişki ile bağlanır. İlk oluşturma /me/preferences PUT ile yapılır.
+    """
+    __tablename__ = "user_preferences"
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), unique=True, nullable=False, index=True)
+
+    # Gizlilik
+    is_private_account = Column(Boolean, default=False)
+
+    # Yorumlar
+    default_comments_disabled = Column(Boolean, default=False)
+    comment_allowed_audience = Column(String, default="everyone")  # everyone, followers, off
+
+    # Mesajlar
+    unknown_message_requests = Column(Boolean, default=True)
+    story_reply_audience = Column(String, default="everyone")  # everyone, followers, off
+    show_read_receipts = Column(Boolean, default=True)
+
+    # Hikaye
+    story_save_to_archive = Column(Boolean, default=True)
+    story_save_to_camera_roll = Column(Boolean, default=False)
+
+    # İçerik filtreleme
+    hide_offensive_words = Column(Boolean, default=True)
+    hidden_words_json = Column(Text, nullable=True)  # JSON array string
+
+    # Medya & Uygulama
+    upload_quality = Column(String, default="auto")  # high, auto, data_saver
+    wifi_auto_high_quality = Column(Boolean, default=True)
+    include_location_in_posts = Column(Boolean, default=True)
+
+    # Dil
+    language = Column(String, default="tr")  # tr, en
+
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    updated_at = Column(DateTime(timezone=True), onupdate=func.now(), nullable=True)
+
+    user = relationship("User", back_populates="preferences")
 
 
 class PendingUser(Base):
@@ -156,6 +200,7 @@ class Place(Base):
     # --- Proje Formu Gereksinimleri ---
     description = Column(Text)  # RAG için kullanılacak metin
     vector_id = Column(String, unique=True, index=True, nullable=True) # Vektör veritabanındaki (Qdrant vb.) ID karşılığı
+    google_place_id = Column(String, unique=True, index=True, nullable=True)  # Google Places benzersiz ID
     price_range = Column(Integer) # 1-4 arası (TL simgesi sayısı gibi)
     category = Column(String, index=True) # Restoran, Kafe, Kütüphane vb.
     features = Column(Text) # "Ücretsiz Wi-Fi, Priz, Açık Alan" gibi etiketler (JSON string olarak tutulabilir)
@@ -164,6 +209,7 @@ class Place(Base):
     latitude = Column(Float)    # Harita entegrasyonu için
     longitude = Column(Float)   # Harita entegrasyonu için
     average_rating = Column(Float, default=0.0)
+    user_ratings_total = Column(Integer, nullable=True)  # Google'daki toplam yorum sayısı
     
     # Medya içeriği
     photo_url = Column(String, nullable=True)  # Mekan fotoğrafı URL'si
@@ -173,6 +219,7 @@ class Place(Base):
     # Çalışma saatleri ve ekstra iletişim bilgileri
     opening_time = Column(String, nullable=True)  # Açılış saati (HH:MM)
     closing_time = Column(String, nullable=True)  # Kapanış saati (HH:MM)
+    opening_hours_json = Column(Text, nullable=True)  # Günlük detaylı çalışma saatleri (JSON)
     is_open = Column(Boolean, default=True)
     phone_number = Column(String, nullable=True)
     
@@ -280,6 +327,9 @@ class Post(Base):
     caption = Column(Text, nullable=True)
     post_type = Column(String, default="photo", index=True)  # photo, reel, review_highlight
 
+    comments_disabled = Column(Boolean, default=False)  # Yorumları kapat
+    likes_hidden = Column(Boolean, default=False)       # Beğeni sayısını gizle
+
     like_count = Column(Integer, default=0)
     comment_count = Column(Integer, default=0)
 
@@ -357,11 +407,12 @@ class Story(Base):
     __tablename__ = "stories"
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey("users.id"), nullable=False, index=True)
-    place_id = Column(Integer, ForeignKey("places.id"), nullable=False, index=True)
+    place_id = Column(Integer, ForeignKey("places.id"), nullable=True, index=True)  # nullable: hikaye konumsuz olabilir
 
     media_type = Column(String, nullable=False)  # "image", "video"
     media_url = Column(String, nullable=False)
     thumbnail_url = Column(String, nullable=True)
+    is_close_friends = Column(Boolean, default=False)  # Yakın arkadaşlar hikayesi
 
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     expires_at = Column(DateTime(timezone=True), nullable=False, index=True)  # created_at + 24 saat

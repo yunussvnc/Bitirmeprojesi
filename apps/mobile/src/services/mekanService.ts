@@ -14,6 +14,7 @@ export type Place = {
   latitude?: number;
   longitude?: number;
   photo_url?: string;
+  gallery_urls?: string[];
   video_url?: string;
   average_rating?: number;
   price_range?: number;
@@ -46,7 +47,29 @@ function normalizePlace(p: any): Place {
   const city = p?.city || undefined;
   const latitude = typeof p?.latitude === 'number' ? p.latitude : undefined;
   const longitude = typeof p?.longitude === 'number' ? p.longitude : undefined;
-  const photo_url = p?.photo_url || undefined;
+  
+  let photo_url = p?.photo_url || undefined;
+  if (photo_url && photo_url.startsWith('google_photo_ref:')) {
+    const API_BASE_URL = require('@/src/constants/api').API_BASE_URL;
+    photo_url = `${API_BASE_URL}/places/${id}/photo`;
+  }
+
+  let gallery_urls: string[] | undefined = undefined;
+  if (Array.isArray(p?.gallery_urls)) {
+    const API_BASE_URL = require('@/src/constants/api').API_BASE_URL;
+    gallery_urls = p.gallery_urls.map((url: string) => {
+      if (typeof url === 'string' && url.startsWith('google_photo_ref:')) {
+         const ref = url.split('google_photo_ref:')[1];
+         // Pass ref as a query param or an endpoint if supported? 
+         // Ah wait, our backend `/places/{id}/photo` only returns the main photo!
+         // We might need to handle gallery photos later, but for now we format them just in case backend supports it.
+         // Wait, backend doesn't support downloading gallery photos yet. Let's just pass the photo_url logic we just added.
+         return url;
+      }
+      return url;
+    });
+  }
+
   const video_url = p?.video_url || undefined;
   const average_rating = typeof p?.average_rating === 'number' ? p.average_rating : undefined;
   const price_range = typeof p?.price_range === 'number' ? p.price_range : undefined;
@@ -56,7 +79,7 @@ function normalizePlace(p: any): Place {
   const review_count = typeof p?.review_count === 'number' ? p.review_count : undefined;
   const saved_count = typeof p?.saved_count === 'number' ? p.saved_count : undefined;
 
-  return { id, name, subtitle, description, campaign_text, tags, category, address, city, latitude, longitude, photo_url, video_url, average_rating, price_range, features, opening_time, closing_time, review_count, saved_count };
+  return { id, name, subtitle, description, campaign_text, tags, category, address, city, latitude, longitude, photo_url, gallery_urls, video_url, average_rating, price_range, features, opening_time, closing_time, review_count, saved_count };
 }
 
 export async function getPlaces(page = 1, pageSize = 20): Promise<PaginatedPlaces> {

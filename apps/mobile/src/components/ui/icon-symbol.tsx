@@ -27,6 +27,7 @@ const MAPPING = {
   'heart.fill': 'favorite',
   'trash': 'delete',
   'xmark': 'close',
+  'eye': 'visibility',
   'eye.slash': 'visibility-off',
   'exclamationmark.triangle': 'report',
   'speaker.slash': 'volume-off',
@@ -79,6 +80,15 @@ const MAPPING = {
   'square.and.pencil': 'edit',
   'phone.fill': 'phone',
   'flame.fill': 'local-fire-department',
+  'line.3.horizontal': 'menu',
+  'square.and.arrow.up': 'share',
+  'person.fill.questionmark': 'person-search',
+  'person.crop.square.fill': 'account-box',
+  'photo.fill': 'photo',
+  'music.note': 'music-note',
+  'smiley': 'mood',
+  'person.crop.circle.badge.plus': 'person-add',
+  'xmark.circle.fill': 'cancel',
 } as IconMapping;
 
 /**

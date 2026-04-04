@@ -1,15 +1,29 @@
 /**
- * ContentCreationFlow – Akış orkestratörü
- * MediaPicker → EditCanvas → Share (caption, location)
+ * ContentCreationFlow – Premium akış orkestratörü
+ * MediaPicker → EditCanvas → Share  (animasyonlu geçişler)
+ *
+ * react-native-reanimated ile FadeInRight/FadeOutLeft geçiş efektleri.
  */
 
 import React, { useState, useCallback, useMemo } from 'react';
 import { View, StyleSheet } from 'react-native';
+import Animated, {
+  FadeInRight,
+  FadeOutLeft,
+  FadeInLeft,
+  FadeOutRight,
+  SlideInRight,
+  SlideOutLeft,
+  SlideInLeft,
+  SlideOutRight,
+} from 'react-native-reanimated';
 import { MediaPicker } from './MediaPicker';
 import { EditCanvas } from './EditCanvas';
 import type { MediaItem, ContentType, FilterPreset, TextOverlay } from '@/src/contentCreation/types';
 
 export type FlowStep = 'pick' | 'edit' | 'share';
+
+const TRANSITION_DURATION = 280;
 
 export interface ContentCreationFlowProps {
   contentType: ContentType;
@@ -21,12 +35,13 @@ export interface ContentCreationFlowProps {
     isVideo: boolean;
     placeId?: number;
     placeName?: string;
+    [key: string]: any;
   }) => Promise<void>;
   onClose: () => void;
   renderShareStep: (params: {
     mediaUri: string;
     isVideo: boolean;
-    onShare: (placeId?: number, placeName?: string) => Promise<void>;
+    onShare: (payload?: any) => Promise<void>;
     onBack: () => void;
   }) => React.ReactNode;
 }
@@ -41,6 +56,7 @@ export function ContentCreationFlow({
   renderShareStep,
 }: ContentCreationFlowProps) {
   const [step, setStep] = useState<FlowStep>('pick');
+  const [direction, setDirection] = useState<'forward' | 'backward'>('forward');
   const [selected, setSelected] = useState<MediaItem[]>([]);
   const [editIndex, setEditIndex] = useState(0);
   const [filter, setFilter] = useState<FilterPreset>('none');
@@ -50,77 +66,121 @@ export function ContentCreationFlow({
 
   const handleSelect = useCallback((items: MediaItem[]) => {
     setSelected(items);
-    if (items.length > 0) {
+  }, []);
+
+  const handleNextFromPicker = useCallback(() => {
+    if (selected.length > 0) {
       setEditIndex(0);
       setFilter('none');
       setTextOverlays([]);
-      setStep('edit');
+      setDirection('forward');
+      if (contentType === 'story') {
+        setStep('edit');
+      } else {
+        setStep('share');
+      }
     }
-  }, []);
+  }, [selected, contentType]);
 
   const handleEditBack = useCallback(() => {
+    setDirection('backward');
     setStep('pick');
-    setSelected([]);
   }, []);
 
   const handleEditDone = useCallback(() => {
+    setDirection('forward');
     setStep('share');
   }, []);
 
   const handleShareBack = useCallback(() => {
-    setStep('edit');
-  }, []);
+    setDirection('backward');
+    if (contentType === 'story') {
+      setStep('edit');
+    } else {
+      setStep('pick');
+    }
+  }, [contentType]);
 
   const handleShare = useCallback(
-    async (placeId?: number, placeName?: string) => {
+    async (payload?: any) => {
       if (!currentMedia) return;
+
+      const defaultPlaceId = typeof payload?.placeId === 'number' ? payload.placeId : (payload?.placeId || initialPlaceId);
+      const defaultPlaceName = typeof payload?.placeName === 'string' ? payload.placeName : (payload?.placeName || initialPlaceName);
+
       await onShare({
         mediaUri: currentMedia.uri,
         isVideo: currentMedia.type === 'video',
-        placeId: placeId ?? initialPlaceId,
-        placeName: placeName ?? initialPlaceName,
+        placeId: defaultPlaceId,
+        placeName: defaultPlaceName,
+        ...(typeof payload === 'object' ? payload : {}),
       });
     },
     [currentMedia, onShare, initialPlaceId, initialPlaceName]
   );
 
+  const entering = direction === 'forward'
+    ? SlideInRight.duration(TRANSITION_DURATION)
+    : SlideInLeft.duration(TRANSITION_DURATION);
+  const exiting = direction === 'forward'
+    ? SlideOutLeft.duration(TRANSITION_DURATION)
+    : SlideOutRight.duration(TRANSITION_DURATION);
+
   if (step === 'pick') {
     return (
-      <View style={styles.container}>
+      <Animated.View
+        key="pick"
+        entering={direction === 'backward' ? SlideInLeft.duration(TRANSITION_DURATION) : undefined}
+        style={styles.container}
+      >
         <MediaPicker
           contentType={contentType}
           selected={selected}
           onSelect={handleSelect}
+          onNext={handleNextFromPicker}
+          onClose={onClose}
           quality={quality}
         />
-      </View>
+      </Animated.View>
     );
   }
 
   if (step === 'edit' && currentMedia) {
     return (
-      <EditCanvas
-        media={currentMedia}
-        filter={filter}
-        textOverlays={textOverlays}
-        onFilterChange={setFilter}
-        onTextOverlaysChange={setTextOverlays}
-        onDone={handleEditDone}
-        onBack={handleEditBack}
-      />
+      <Animated.View
+        key="edit"
+        entering={entering}
+        exiting={exiting}
+        style={styles.container}
+      >
+        <EditCanvas
+          media={currentMedia}
+          filter={filter}
+          textOverlays={textOverlays}
+          onFilterChange={setFilter}
+          onTextOverlaysChange={setTextOverlays}
+          onDone={handleEditDone}
+          onBack={handleEditBack}
+        />
+      </Animated.View>
     );
   }
 
   if (step === 'share' && currentMedia) {
     return (
-      <View style={styles.container}>
+      <Animated.View
+        key="share"
+        entering={SlideInRight.duration(TRANSITION_DURATION)}
+        exiting={SlideOutRight.duration(TRANSITION_DURATION)}
+        style={styles.container}
+      >
         {renderShareStep({
           mediaUri: currentMedia.uri,
           isVideo: currentMedia.type === 'video',
           onShare: handleShare,
           onBack: handleShareBack,
         })}
-      </View>
+      </Animated.View>
     );
   }
 

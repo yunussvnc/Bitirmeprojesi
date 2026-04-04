@@ -1,7 +1,7 @@
 /**
- * Create Story Screen
+ * Create Story Screen (Premium UI)
  *
- * Content Creation Flow: Medya seç → Düzenle → Konum + Paylaş
+ * Content Creation Flow: Medya seç → Düzenle → Paylaş (Premium Alt Bar)
  * Instagram seviyesinde içerik oluşturma deneyimi
  */
 
@@ -13,27 +13,30 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  ScrollView,
   Alert,
-  Pressable,
   BackHandler,
-  Image,
+  ActivityIndicator,
+  Dimensions,
 } from "react-native";
+import { Image as ExpoImage } from 'expo-image';
+import { LinearGradient } from 'expo-linear-gradient';
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { router, useLocalSearchParams } from "expo-router";
 import { useTheme } from "@/src/hooks/useTheme";
-import { Button } from "@/src/components/ui";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
-import { createTextStyle, spacing, radius } from "@/src/constants/design";
+import { spacing, radius } from "@/src/constants/design";
 import { ContentCreationFlow } from "@/src/components/domain/contentCreation";
 import { createStory } from "@/src/services/storyService";
 import { uploadImage, uploadVideo } from "@/src/services/feedService";
 import { useSettingsStore } from "@/src/store/useSettingsStore";
 import { lightImpact } from "@/src/utils/haptics";
+import { Avatar } from "@/src/components/ui/Avatar";
+import { useAuthStore } from "@/src/store/useAuthStore";
+
+const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get("window");
 
 export default function CreateStoryScreen() {
   const { colors } = useTheme();
-  const insets = useSafeAreaInsets();
   const params = useLocalSearchParams<{ placeId?: string; placeName?: string }>();
   const [selectedPlace, setSelectedPlace] = useState<Place | null>(() => {
     if (params.placeId != null && params.placeName != null) {
@@ -47,7 +50,7 @@ export default function CreateStoryScreen() {
 
   const handleClose = useCallback(() => {
     lightImpact();
-    Alert.alert("Hikayeyi iptal et", "Çıkmak istiyor musunuz?", [
+    Alert.alert("Hikayeyi iptal et", "Çıkmak istiyor musunuz? Değişiklikleriniz silinecek.", [
       { text: "Vazgeç", style: "cancel" },
       {
         text: "Çık",
@@ -69,8 +72,8 @@ export default function CreateStoryScreen() {
   }, [handleClose]);
 
   const handleShare = useCallback(
-    async (params: { mediaUri: string; isVideo: boolean; placeId?: number; placeName?: string }) => {
-      const { mediaUri, isVideo, placeId } = params;
+    async (shareParams: { mediaUri: string; isVideo: boolean; placeId?: number; placeName?: string; isCloseFriends?: boolean }) => {
+      const { mediaUri, isVideo, placeId, isCloseFriends } = shareParams;
       lightImpact();
       const uploadRes = isVideo
         ? await uploadVideo({
@@ -90,6 +93,7 @@ export default function CreateStoryScreen() {
         place_id: placeId ?? undefined,
         media_type: isVideo ? "video" : "image",
         media_url: mediaUrl,
+        is_close_friends: isCloseFriends ?? false,
       });
       if (storySaveToCameraRoll) {
         try {
@@ -108,34 +112,17 @@ export default function CreateStoryScreen() {
   );
 
   const quality = uploadQuality === "data_saver" ? 0.5 : 0.9;
-  const titleStyle = createTextStyle("title", colors.text.primary);
   const placeId = selectedPlace != null ? Number(selectedPlace.id) : undefined;
   const placeName = selectedPlace?.name ?? "";
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background.primary }]}>
-      <View
-        style={[
-          styles.header,
-          {
-            paddingTop: insets.top + spacing.md,
-            borderBottomColor: colors.surface.border,
-          },
-        ]}
-      >
-        <Pressable onPress={handleClose} style={({ pressed }) => [styles.closeBtnArea, pressed && { opacity: 0.6 }]}>
-          <IconSymbol name="xmark" size={24} color={colors.text.primary} />
-        </Pressable>
-        <Text style={[titleStyle, styles.title]}>Hikaye Paylaş</Text>
-        <View style={styles.closeBtnArea} />
-      </View>
-
       <ContentCreationFlow
         contentType="story"
         initialPlaceId={placeId}
         initialPlaceName={placeName}
         quality={quality}
-        onShare={handleShare}
+        onShare={(flowParams) => handleShare(flowParams as any)}
         onClose={handleClose}
         renderShareStep={({ mediaUri, isVideo, onShare, onBack }) => (
           <StoryShareStep
@@ -146,6 +133,7 @@ export default function CreateStoryScreen() {
             onPlacePickerOpen={() => setPlacePickerOpen(true)}
             onShare={onShare}
             onBack={onBack}
+            onClose={handleClose}
           />
         )}
       />
@@ -155,14 +143,17 @@ export default function CreateStoryScreen() {
   );
 }
 
+// ─── Premium StoryShareStep ─────────────────────────────────────────────
+
 interface StoryShareStepProps {
   mediaUri: string;
   isVideo: boolean;
   selectedPlace: Place | null;
   onPlaceChange: (place: Place | null) => void;
   onPlacePickerOpen: () => void;
-  onShare: (placeId?: number, placeName?: string) => Promise<void>;
+  onShare: (payload: { placeId?: number; placeName?: string; type?: 'story' | 'close_friends' }) => Promise<void>;
   onBack: () => void;
+  onClose: () => void;
 }
 
 function StoryShareStep({
@@ -173,127 +164,210 @@ function StoryShareStep({
   onPlacePickerOpen,
   onShare,
   onBack,
+  onClose,
 }: StoryShareStepProps) {
   const { colors } = useTheme();
-  const [loading, setLoading] = useState(false);
+  const insets = useSafeAreaInsets();
+  const [loading, setLoading] = useState<"story" | "close_friends" | null>(null);
+  
+  const authUser = useAuthStore((s) => s.user);
 
-  const handleShare = useCallback(async () => {
-    setLoading(true);
+  const handleShareClick = async (type: "story" | "close_friends") => {
+    setLoading(type);
     try {
-      await onShare(selectedPlace != null ? Number(selectedPlace.id) : undefined, selectedPlace?.name);
+      // NOTE: "close_friends" payload can be added to the backend schema in future
+      await onShare({
+        placeId: selectedPlace != null ? Number(selectedPlace.id) : undefined,
+        placeName: selectedPlace?.name,
+        type
+      });
     } catch (e: unknown) {
       const msg = e instanceof Error ? e.message : "Hikaye paylaşımı başarısız.";
       Alert.alert("Hata", msg);
     } finally {
-      setLoading(false);
+      setLoading(null);
     }
-  }, [onShare, selectedPlace]);
+  };
 
   return (
-    <ScrollView style={styles.flex} contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
-      <View style={styles.previewSection}>
-        <View style={[styles.preview, { backgroundColor: colors.surface.elevated }]}>
-          {isVideo ? (
-            <Image source={{ uri: mediaUri }} style={styles.previewImage} resizeMode="cover" />
-          ) : (
-            <Image source={{ uri: mediaUri }} style={styles.previewImage} resizeMode="cover" />
-          )}
-        </View>
-      </View>
-
-      <View style={[styles.placeTag, { backgroundColor: colors.surface.elevated }]}>
-        <TouchableOpacity
-          style={styles.placeTagInner}
-          onPress={() => {
-            lightImpact();
-            onPlacePickerOpen();
-          }}
-          activeOpacity={0.8}
-        >
-          <IconSymbol name="mappin.circle.fill" size={24} color={colors.accent.primary} />
-          <Text style={[styles.placeName, { color: colors.text.primary }]} numberOfLines={1}>
-            {selectedPlace?.name ?? "Konum ekle"}
-          </Text>
-          <IconSymbol name="chevron.right" size={18} color={colors.text.tertiary} />
-        </TouchableOpacity>
-        {selectedPlace != null && (
-          <TouchableOpacity
-            onPress={() => {
-              lightImpact();
-              onPlaceChange(null);
-            }}
-            hitSlop={8}
-            style={styles.clearPlace}
-          >
-            <IconSymbol name="xmark" size={16} color={colors.text.tertiary} />
+    <View style={[styles.flex, { backgroundColor: '#000' }]}>
+      
+      {/* Immersive Preview */}
+      <View style={[styles.previewWrap, { borderRadius: 24, marginTop: insets.top }]}>
+        <ExpoImage source={{ uri: mediaUri }} style={styles.previewImage} contentFit="cover" />
+        
+        {/* Bottom gradient over preview for depth */}
+        <LinearGradient
+          colors={['transparent', 'rgba(0,0,0,0.6)']}
+          style={styles.previewBottomGradient}
+          pointerEvents="none"
+        />
+        
+        {/* Floating Top Header Over Preview */}
+        <View style={styles.previewHeader}>
+          <TouchableOpacity onPress={onBack} style={styles.backBtnFloat} hitSlop={12}>
+            <IconSymbol name="chevron.left" size={24} color="#fff" />
           </TouchableOpacity>
+          <TouchableOpacity onPress={() => { lightImpact(); onPlacePickerOpen(); }} style={styles.stickerPill}>
+            <IconSymbol name="mappin.and.ellipse" size={16} color={colors.accent.primary} />
+            <Text style={styles.stickerText}>{selectedPlace?.name ?? "Konum"}</Text>
+          </TouchableOpacity>
+        </View>
+
+        {selectedPlace && (
+           <TouchableOpacity onPress={() => onPlaceChange(null)} style={styles.clearPlaceFloat}>
+             <IconSymbol name="xmark.circle.fill" size={24} color="rgba(255,255,255,0.8)" />
+           </TouchableOpacity>
         )}
       </View>
 
-      <Text style={[styles.hint, { color: colors.text.tertiary }]}>24 saat sonra hikaye otomatik silinecek</Text>
+      {/* Premium Bottom Action Bar */}
+      <View style={[styles.bottomBar, { paddingBottom: Math.max(insets.bottom, 16) }]}>
+        <View style={styles.shareOptionsRow}>
+          
+          <TouchableOpacity
+            style={[styles.shareBtnPill, { backgroundColor: 'rgba(255,255,255,0.12)', borderWidth: 1, borderColor: 'rgba(255,255,255,0.15)' }]}
+            onPress={() => handleShareClick("story")}
+            disabled={loading !== null}
+            activeOpacity={0.8}
+          >
+             {loading === "story" ? (
+               <ActivityIndicator size="small" color="#fff" />
+             ) : (
+               <>
+                 <Avatar source={authUser?.avatar_url ? { uri: authUser.avatar_url } : undefined} name={authUser?.username || "A"} size={28} />
+                 <Text style={styles.shareBtnText}>Hikayen</Text>
+               </>
+             )}
+          </TouchableOpacity>
 
-      <View style={styles.actions}>
-        <TouchableOpacity style={[styles.backBtn, { backgroundColor: colors.surface.elevated }]} onPress={onBack}>
-          <IconSymbol name="chevron.left" size={20} color={colors.text.primary} />
-          <Text style={[styles.backBtnText, { color: colors.text.primary }]}>Düzenle</Text>
-        </TouchableOpacity>
-        <Button variant="primary" size="large" onPress={handleShare} loading={loading} disabled={loading} style={styles.submit}>
-          Hikaye Paylaş
-        </Button>
+          <TouchableOpacity
+            style={[styles.shareBtnPill, { backgroundColor: '#1DB954' }]} // Spotify green for Close friends
+            onPress={() => handleShareClick("close_friends")}
+            disabled={loading !== null}
+            activeOpacity={0.8}
+          >
+             {loading === "close_friends" ? (
+               <ActivityIndicator size="small" color="#fff" />
+             ) : (
+               <>
+                 <View style={styles.closeFriendsIconWrap}>
+                   <IconSymbol name="star.fill" size={14} color="#fff" />
+                 </View>
+                 <Text style={styles.shareBtnText}>Yakın Arkadaşlar</Text>
+               </>
+             )}
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={[styles.shareBtnCircle, { backgroundColor: '#fff' }]}
+            onPress={() => handleShareClick("story")}
+            disabled={loading !== null}
+            activeOpacity={0.8}
+          >
+             <IconSymbol name="chevron.right" size={20} color="#000" />
+          </TouchableOpacity>
+          
+        </View>
       </View>
-    </ScrollView>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: { flex: 1 },
   flex: { flex: 1 },
-  header: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    paddingHorizontal: spacing.lg,
-    paddingBottom: spacing.md,
-    borderBottomWidth: StyleSheet.hairlineWidth,
+  previewWrap: {
+    flex: 1,
+    overflow: 'hidden',
+    position: 'relative',
+    marginHorizontal: 8,
+    marginBottom: 8,
+    backgroundColor: '#111',
   },
-  closeBtnArea: {
-    minWidth: 56,
-    minHeight: 48,
-    alignItems: "center",
-    justifyContent: "center",
+  previewImage: {
+    width: '100%',
+    height: '100%',
   },
-  title: { fontSize: 18, fontWeight: "700" },
-  scrollContent: { padding: spacing.lg, paddingBottom: spacing.xl * 2 },
-  previewSection: { marginBottom: spacing.lg },
-  preview: {
-    aspectRatio: 9 / 16,
-    maxHeight: 360,
-    borderRadius: radius.lg,
-    overflow: "hidden",
+  previewBottomGradient: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    height: 80,
   },
-  previewImage: { width: "100%", height: "100%" },
-  placeTag: {
-    flexDirection: "row",
-    alignItems: "center",
-    padding: spacing.sm,
-    paddingRight: spacing.md,
-    borderRadius: radius.md,
-    gap: spacing.sm,
-    marginBottom: spacing.lg,
+  previewHeader: {
+    position: 'absolute',
+    top: 16, left: 16, right: 16,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    zIndex: 10,
   },
-  placeTagInner: { flex: 1, flexDirection: "row", alignItems: "center", gap: spacing.sm },
-  placeName: { flex: 1, fontSize: 16, fontWeight: "600" },
-  clearPlace: { padding: 4 },
-  hint: { fontSize: 13, textAlign: "center", marginBottom: spacing.lg },
-  actions: { gap: spacing.base },
-  backBtn: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: spacing.sm,
-    paddingVertical: spacing.md,
-    borderRadius: radius.md,
+  backBtnFloat: {
+    width: 40, height: 40,
+    borderRadius: 20,
+    backgroundColor: 'rgba(0,0,0,0.4)',
+    alignItems: 'center', justifyContent: 'center',
   },
-  backBtnText: { fontSize: 16, fontWeight: "600" },
-  submit: { marginTop: spacing.sm },
+  stickerPill: {
+    backgroundColor: '#fff',
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    borderRadius: 20,
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    shadowColor: '#000', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.3, shadowRadius: 8, elevation: 6,
+  },
+  stickerText: {
+    color: '#000',
+    fontSize: 16,
+    fontWeight: '800',
+  },
+  clearPlaceFloat: {
+    position: 'absolute',
+    top: 66, right: 16,
+    zIndex: 10,
+  },
+  bottomBar: {
+    backgroundColor: '#000',
+    paddingHorizontal: 16,
+    paddingTop: 16,
+  },
+  shareOptionsRow: {
+    flexDirection: 'row',
+    gap: 8,
+    alignItems: 'center',
+  },
+  shareBtnPill: {
+    flex: 1,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 48,
+    borderRadius: 24,
+    gap: 8,
+  },
+  shareBtnText: {
+    color: '#fff',
+    fontSize: 14,
+    fontWeight: '700',
+  },
+  closeFriendsIconWrap: {
+    width: 28, height: 28,
+    borderRadius: 14,
+    backgroundColor: 'rgba(255,255,255,0.2)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.4)',
+  },
+  shareBtnCircle: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });

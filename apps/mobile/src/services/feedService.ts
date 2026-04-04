@@ -29,6 +29,8 @@ export type Post = {
   place_id?: number;
   caption?: string;
   post_type: string;
+  comments_disabled: boolean;
+  likes_hidden: boolean;
   like_count: number;
   comment_count: number;
   created_at: string;
@@ -58,6 +60,8 @@ export type CreatePostPayload = {
   caption?: string;
   place_id?: number;
   post_type?: string;
+  comments_disabled?: boolean;
+  likes_hidden?: boolean;
   media: { media_type: string; media_url: string; thumbnail_url?: string; order_index?: number }[];
 };
 

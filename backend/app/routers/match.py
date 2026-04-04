@@ -7,6 +7,7 @@ from datetime import datetime, timedelta, timezone
 
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
+from sqlalchemy import func as sa_func
 
 import models, schemas, crud
 from app.dependencies import get_db, get_current_user
@@ -154,7 +155,8 @@ def delete_match_profile(
         raise HTTPException(status_code=404, detail="Eşleşme profiliniz bulunamadı.")
     profile.is_active = False
     db.commit()
-    return {"ok": True}
+    # BUG-14: Frontend store ile tutarlılık için is_active durumunu dön
+    return {"ok": True, "is_active": False}
 
 
 @router.post("/venue/qr-verify", response_model=schemas.QRVerifyResponse)
@@ -204,46 +206,113 @@ def get_match_candidates(
         models.MatchProfile.is_active == True,
     ).all()
 
+    # BUG-15: Engellenen kullanıcıları filtrele (her iki yön)
+    blocked_by_me = {
+        row[0] for row in db.query(models.UserBlock.blocked_id).filter(
+            models.UserBlock.blocker_id == current_user.id
+        ).all()
+    }
+    blocked_me = {
+        row[0] for row in db.query(models.UserBlock.blocker_id).filter(
+            models.UserBlock.blocked_id == current_user.id
+        ).all()
+    }
+    all_blocked_ids = blocked_by_me | blocked_me
+
     # Daha önce beğenilen/geçilen kullanıcıları filtrele
     already_acted = db.query(models.MatchLike.to_user_id).filter(
         models.MatchLike.from_user_id == current_user.id
     ).all()
     already_acted_ids = {row[0] for row in already_acted}
 
+    # BUG-16: N+1 sorgu optimizasyonu — toplu olarak son aktif mekan bilgisini al
+    profile_user_ids = [p.user_id for p in profiles if p.user_id not in already_acted_ids and p.user_id not in all_blocked_ids]
+
+    # Son post ile mekan bilgisi (subquery)
+    place_ids_needed: set = set()
+    latest_posts: dict[int, tuple] = {}  # user_id -> (place_id, place_name, created_at)
+    if profile_user_ids:
+        # Her kullanıcı için en son place_id'li postı bul
+        post_subq = (
+            db.query(
+                models.Post.user_id,
+                models.Post.place_id,
+                models.Post.created_at
+            )
+            .filter(
+                models.Post.user_id.in_(profile_user_ids),
+                models.Post.place_id.isnot(None),
+            )
+            .order_by(models.Post.user_id, models.Post.created_at.desc())
+            .all()
+        )
+        # İlk görülen = en son (user_id'ye göre gruplanmış sıralı)
+        seen_post_users: set = set()
+        for row in post_subq:
+            if row[0] not in seen_post_users:
+                seen_post_users.add(row[0])
+                latest_posts[row[0]] = (row[1], None, row[2])
+                place_ids_needed.add(row[1])
+
+    # Son review ile mekan bilgisi
+    latest_reviews: dict[int, tuple] = {}
+    if profile_user_ids:
+        review_subq = (
+            db.query(
+                models.Review.user_id,
+                models.Review.place_id,
+                models.Review.created_at
+            )
+            .filter(
+                models.Review.user_id.in_(profile_user_ids),
+                models.Review.place_id.isnot(None),
+                models.Review.is_verified == True,
+            )
+            .order_by(models.Review.user_id, models.Review.created_at.desc())
+            .all()
+        )
+        seen_review_users: set = set()
+        for row in review_subq:
+            if row[0] not in seen_review_users:
+                seen_review_users.add(row[0])
+                latest_reviews[row[0]] = (row[1], None, row[2])
+                place_ids_needed.add(row[1])
+
+    # Toplu place name lookup
+    place_name_map: dict[int, str] = {}
+    if place_ids_needed:
+        places = db.query(models.Place.id, models.Place.name).filter(
+            models.Place.id.in_(list(place_ids_needed))
+        ).all()
+        place_name_map = {p[0]: p[1] for p in places}
+
     candidates = []
     for profile in profiles:
         if profile.user_id in already_acted_ids:
+            continue
+        if profile.user_id in all_blocked_ids:
             continue
 
         photo_urls = _safe_json_loads(profile.photo_urls)
         interests = _safe_json_loads(profile.interests)
         prompts = _safe_json_loads(profile.prompts)
 
-        # Son aktif olduğu mekanı bul: Review (check-in) veya Post
+        # Son aktif olduğu mekanı bul (batch sonuçlarından)
         last_place_id = None
         last_place_name = None
         latest_time = None
 
-        latest_post = db.query(models.Post).filter(
-            models.Post.user_id == profile.user_id,
-            models.Post.place_id.isnot(None)
-        ).order_by(models.Post.created_at.desc()).first()
+        if profile.user_id in latest_posts:
+            pid, _, ptime = latest_posts[profile.user_id]
+            last_place_id = pid
+            last_place_name = place_name_map.get(pid)
+            latest_time = ptime
 
-        if latest_post and latest_post.place:
-            last_place_id = latest_post.place_id
-            last_place_name = latest_post.place.name
-            latest_time = latest_post.created_at
-
-        latest_review = db.query(models.Review).filter(
-            models.Review.user_id == profile.user_id,
-            models.Review.place_id.isnot(None),
-            models.Review.is_verified == True
-        ).order_by(models.Review.created_at.desc()).first()
-
-        if latest_review and latest_review.place and latest_review.created_at:
-            if not latest_time or latest_review.created_at > latest_time:
-                last_place_id = latest_review.place_id
-                last_place_name = latest_review.place.name
+        if profile.user_id in latest_reviews:
+            rid, _, rtime = latest_reviews[profile.user_id]
+            if not latest_time or (rtime and rtime > latest_time):
+                last_place_id = rid
+                last_place_name = place_name_map.get(rid)
 
         # Sırf ekran boş kalmasın ve test edilebilsin diye
         if not last_place_name:

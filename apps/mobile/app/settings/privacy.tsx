@@ -1,5 +1,9 @@
+/**
+ * Hesap Gizliliği — Gizli/Herkese Açık hesap toggle
+ */
+
 import React from "react";
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 import { useTheme } from "@/src/hooks/useTheme";
@@ -7,12 +11,38 @@ import { Section } from "@/src/components/layout/Section";
 import { SettingsRow } from "@/src/components/ui";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { createTextStyle, spacing } from "@/src/constants/design";
-import { lightImpact } from "@/src/utils/haptics";
+import { lightImpact, success } from "@/src/utils/haptics";
+import { useSettingsStore } from "@/src/store/useSettingsStore";
 
-export default function CustomSettingsScreen() {
-  const { colors } = useTheme();
+export default function PrivacySettingsScreen() {
+  const { colors, isDark } = useTheme();
   const router = useRouter();
   const insets = useSafeAreaInsets();
+
+  const isPrivate = useSettingsStore((s) => s.isPrivateAccount);
+  const setIsPrivate = useSettingsStore((s) => s.setIsPrivateAccount);
+
+  const handleTogglePrivacy = (val: boolean) => {
+    if (val) {
+      // Gizliye geçiş — doğrudan ayarla
+      setIsPrivate(true);
+      success();
+    } else {
+      // Açığa geçiş — uyarı göster
+      Alert.alert(
+        "Hesap Herkese Açık Olsun mu?",
+        "Hesabını herkese açık yaptığında herkes gönderilerini, hikayelerini ve takipçi listeni görebilir.",
+        [
+          { text: "Vazgeç", style: "cancel" },
+          {
+            text: "Herkese Açık Yap",
+            style: "destructive",
+            onPress: () => { setIsPrivate(false); success(); },
+          },
+        ]
+      );
+    }
+  };
 
   return (
     <View style={[styles.wrapper, { backgroundColor: colors.background.primary }]}>
@@ -23,11 +53,57 @@ export default function CustomSettingsScreen() {
         <Text style={[createTextStyle("title", colors.text.primary), styles.title]}>Hesap Gizliliği</Text>
         <View style={styles.backBtn} />
       </View>
+
       <ScrollView style={styles.container} contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
-        <Section title="Hesap Görünürlüğü">
-          <SettingsRow label="Gizli Hesap" value="Kapalı" showArrow icon="lock" onPress={() => { lightImpact(); }} />
-          <SettingsRow label="Hareket Durumu" value="Açık" showArrow icon="eye" onPress={() => { lightImpact(); }} />
+        {/* Privacy Status Banner */}
+        <View style={[styles.statusBanner, {
+          backgroundColor: isPrivate
+            ? (isDark ? "rgba(78,205,196,0.1)" : "rgba(78,205,196,0.08)")
+            : (isDark ? "rgba(255,179,0,0.1)" : "rgba(255,179,0,0.08)"),
+        }]}>
+          <View style={[styles.statusIcon, {
+            backgroundColor: isPrivate ? colors.accent.primary : "#FFB300",
+          }]}>
+            <IconSymbol name={isPrivate ? "lock.fill" : "lock.open"} size={22} color="#fff" />
+          </View>
+          <View style={styles.statusTextWrap}>
+            <Text style={[styles.statusTitle, { color: colors.text.primary }]}>
+              {isPrivate ? "Gizli Hesap" : "Herkese Açık Hesap"}
+            </Text>
+            <Text style={[styles.statusDesc, { color: colors.text.secondary }]}>
+              {isPrivate
+                ? "Sadece onayladığın kişiler gönderilerini ve hikayelerini görebilir."
+                : "Herkes profilini, gönderilerini ve hikayelerini görebilir."}
+            </Text>
+          </View>
+        </View>
+
+        <Section title="Hesap Durumu">
+          <SettingsRow
+            label="Gizli Hesap"
+            value={isPrivate}
+            switch
+            onValueChange={handleTogglePrivacy}
+            icon="lock"
+          />
+          <Text style={[styles.hint, { color: colors.text.tertiary }]}>
+            Hesabını gizliye çevirdiğinde, yalnızca onayladığın kişiler seni görebilir, gönderilerini ve hikayelerini izleyebilir.
+          </Text>
         </Section>
+
+        <Section title="Gizlilik Etkileri">
+          <SettingsRow label="Gönderi görünürlüğü" value={isPrivate ? "Takipçiler" : "Herkes"} icon="photo.on.rectangle" />
+          <SettingsRow label="Hikaye görünürlüğü" value={isPrivate ? "Takipçiler" : "Herkes"} icon="circle.hexagongrid" />
+          <SettingsRow label="Takipçi istekleri" value={isPrivate ? "Onay gerekli" : "Otomatik"} icon="person.badge.plus" />
+          <SettingsRow label="Profil görünürlüğü" value={isPrivate ? "Sınırlı" : "Tam"} icon="eye" />
+        </Section>
+
+        <View style={styles.tipBox}>
+          <IconSymbol name="lightbulb" size={16} color={colors.accent.primary} />
+          <Text style={[styles.tipText, { color: colors.text.tertiary }]}>
+            İpucu: Gizli hesapların içerikleri keşfet ve harita sayfasında görünmez.
+          </Text>
+        </View>
       </ScrollView>
     </View>
   );
@@ -36,15 +112,29 @@ export default function CustomSettingsScreen() {
 const styles = StyleSheet.create({
   wrapper: { flex: 1 },
   header: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    paddingHorizontal: spacing.base,
-    paddingVertical: spacing.md,
+    flexDirection: "row", alignItems: "center", justifyContent: "space-between",
+    paddingHorizontal: spacing.base, paddingVertical: spacing.md,
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
   backBtn: { minWidth: 44, minHeight: 44, alignItems: "flex-start", justifyContent: "center" },
   title: { fontSize: 18, fontWeight: "700" },
   container: { flex: 1 },
-  content: { padding: 16, paddingBottom: 32 },
+  content: { padding: 16, paddingBottom: 40 },
+  statusBanner: {
+    flexDirection: "row", alignItems: "center", padding: 16,
+    borderRadius: 14, marginBottom: 16, gap: 14,
+  },
+  statusIcon: {
+    width: 48, height: 48, borderRadius: 24,
+    alignItems: "center", justifyContent: "center",
+  },
+  statusTextWrap: { flex: 1 },
+  statusTitle: { fontSize: 17, fontWeight: "700", marginBottom: 4 },
+  statusDesc: { fontSize: 13, lineHeight: 18 },
+  hint: { fontSize: 13, lineHeight: 18, marginTop: -4, marginBottom: 8, marginLeft: 16 },
+  tipBox: {
+    flexDirection: "row", alignItems: "flex-start", gap: 8,
+    paddingTop: 16, paddingHorizontal: 4,
+  },
+  tipText: { flex: 1, fontSize: 13, lineHeight: 18 },
 });

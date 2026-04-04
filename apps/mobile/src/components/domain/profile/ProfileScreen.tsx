@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Alert, Platform, useWindowDimensions, ScrollView, RefreshControl, Share } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useRouter, useNavigation, useFocusEffect } from "expo-router";
 import { API_BASE_URL } from "@/src/constants/api";
 import { Screen } from "@/src/components/layout/Screen";
@@ -22,6 +23,7 @@ export default function ProfileScreen() {
   const router = useRouter();
   const navigation = useNavigation();
   const scrollViewRef = useRef<ScrollView>(null);
+  const insets = useSafeAreaInsets();
   const authUser = useAuthStore((s) => s.user);
   const savedIds = useAppStore((s) => s.savedIds);
 
@@ -96,10 +98,17 @@ export default function ProfileScreen() {
   return (
     <View style={[styles.container, { backgroundColor: colors.background.primary }]}>
       {/* ── Moden Header ── */}
-      <View style={styles.header}>
+      <View style={[styles.header, { paddingTop: insets.top + 16 }]}>
         <Text style={[styles.headerTitle, { color: colors.text.primary }]}>Profil</Text>
 
         <View style={styles.headerRight}>
+          <TouchableOpacity
+            style={[styles.headerBtn, { backgroundColor: colors.surface.elevated }]}
+            activeOpacity={0.7}
+            onPress={() => { lightImpact(); router.push("/search-users" as any); }}
+          >
+            <IconSymbol name="magnifyingglass" size={20} color={colors.text.primary} />
+          </TouchableOpacity>
           <TouchableOpacity
             style={[styles.headerBtn, { backgroundColor: colors.surface.elevated }]}
             activeOpacity={0.7}
@@ -331,22 +340,20 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     paddingHorizontal: 20,
-    paddingTop: Platform.OS === "ios" ? 60 : 40,
-    paddingBottom: 16,
+    paddingBottom: 4,
   },
   headerTitle: {
-    fontSize: 28,
-    fontWeight: "800",
-    letterSpacing: -0.5,
+    fontSize: 26,
+    fontWeight: "700",
   },
   headerRight: {
     flexDirection: "row",
     gap: 12,
   },
   headerBtn: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
+    width: 44,
+    height: 44,
+    borderRadius: 22,
     alignItems: "center",
     justifyContent: "center",
   },

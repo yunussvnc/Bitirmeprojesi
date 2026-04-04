@@ -25,6 +25,7 @@ import { useMatchStore } from "@/src/store/useMatchStore";
 import { usePresence } from "@/src/store/presence";
 import { useAppStore } from "@/src/store/useAppStore";
 import { useMessagesStore } from "@/src/store/useMessagesStore";
+import type { MatchCandidate } from "@/src/services/matchService";
 import {
   Cigarette,
   Wine
@@ -92,94 +93,7 @@ function renderZodiacIcon(signName: string, color: string) {
   return <IconSymbol name="star.fill" size={14} color={color} />;
 }
 
-// Mock data — seni beğenen kişiler (Bumble style rich profiles)
-const richProfile = {
-  active_place_id: 27,
-  active_place_name: "Lucca - Bebek",
-  location: "İstanbul",
-  bio: "ig hottiebutacryinone",
-  about: [
-    { icon: "ruler.fill", text: "171 cm" },
-    { icon: "graduationcap.fill", text: "Üniversite" },
-    { icon: "wineglass.fill", text: "Nadiren" },
-    { icon: "smoke.fill", text: "Evet" },
-    { icon: "person.fill", text: "Kadın" },
-    { icon: "figure.child", text: "Çocuk istemiyor" },
-    { icon: "star.fill", text: "Yay" },
-  ],
-  looking_for: "Uzun süreli ilişki",
-  interests: [
-    { icon: "paintpalette.fill", text: "Sanat" },
-    { icon: "figure.dance", text: "Dans" },
-    { icon: "leaf.fill", text: "Bahçe" },
-    { icon: "cup.and.saucer.fill", text: "Kahve" },
-  ],
-  prompt: {
-    q: "Hiçbir şey yapmamayı en çok sevdiğim yol",
-    a: "rastgele telefon oyunları oynamak",
-  },
-};
 
-const MOCK_LIKES = [
-  {
-    id: 1,
-    name: "Ceren",
-    age: 22,
-    photo: "https://i.pravatar.cc/600?img=1",
-    photos: [
-      "https://i.pravatar.cc/600?img=1",
-      "https://i.pravatar.cc/600?img=2",
-      "https://i.pravatar.cc/600?img=3",
-    ],
-    ...richProfile,
-  },
-  {
-    id: 2,
-    name: "Zeynep",
-    age: 25,
-    photo: "https://i.pravatar.cc/600?img=5",
-    photos: [
-      "https://i.pravatar.cc/600?img=5",
-      "https://i.pravatar.cc/600?img=6",
-    ],
-    ...richProfile,
-  },
-  {
-    id: 3,
-    name: "Ayşe",
-    age: 22,
-    photo: "https://i.pravatar.cc/600?img=9",
-    photos: ["https://i.pravatar.cc/600?img=9"],
-    ...richProfile,
-  },
-  {
-    id: 4,
-    name: "Selin",
-    age: 24,
-    photo: "https://i.pravatar.cc/600?img=16",
-    photos: [
-      "https://i.pravatar.cc/600?img=16",
-      "https://i.pravatar.cc/600?img=17",
-    ],
-    ...richProfile,
-  },
-  {
-    id: 5,
-    name: "Deniz",
-    age: 26,
-    photo: "https://i.pravatar.cc/600?img=20",
-    photos: ["https://i.pravatar.cc/600?img=20"],
-    ...richProfile,
-  },
-  {
-    id: 6,
-    name: "Merve",
-    age: 21,
-    photo: "https://i.pravatar.cc/600?img=25",
-    photos: ["https://i.pravatar.cc/600?img=25"],
-    ...richProfile,
-  },
-];
 
 export default function MatchScreen() {
   const { colors, isDark } = useTheme();
@@ -206,11 +120,10 @@ export default function MatchScreen() {
   const { activePlaceId, activePlaceName, qrVerified, isSessionActive } =
     usePresence();
   const [matchPopup, setMatchPopup] = useState<{ name: string } | null>(null);
+  const matchPopupRef = useRef(false);
   const [scrollMode, setScrollMode] = useState(false);
   const [activeTab, setActiveTab] = useState<"swipe" | "likes">("swipe");
-  const [selectedLike, setSelectedLike] = useState<
-    (typeof MOCK_LIKES)[number] | null
-  >(null);
+  const [selectedLike, setSelectedLike] = useState<MatchCandidate | null>(null);
   const [blockedUsers, setBlockedUsers] = useState<number[]>([]);
   const [actedLikes, setActedLikes] = useState<number[]>([]);
   const [showFilterModal, setShowFilterModal] = useState(false);
@@ -235,6 +148,19 @@ export default function MatchScreen() {
   scrollModeModalRef.current = scrollModeModal;
   const panModal = useRef(new Animated.ValueXY()).current;
   const scrollModalRef = useRef<ScrollView>(null);
+
+  // Track pan.x value safely (avoid _value private API)
+  const panXValue = useRef(0);
+  useEffect(() => {
+    const listenerId = pan.x.addListener(({ value }) => { panXValue.current = value; });
+    return () => pan.x.removeListener(listenerId);
+  }, []);
+
+  const panModalXValue = useRef(0);
+  useEffect(() => {
+    const listenerId = panModal.x.addListener(({ value }) => { panModalXValue.current = value; });
+    return () => panModal.x.removeListener(listenerId);
+  }, []);
 
   useEffect(() => {
     fetchMyProfile();
@@ -289,30 +215,8 @@ export default function MatchScreen() {
     );
   };
 
-  const [attemptedCreate, setAttemptedCreate] = useState(false);
-
-  useEffect(() => {
-    // Uygulama ilk açıldığında profil yoksa otomatik profil oluştur
-    if (!hasProfile && !profileLoading && !attemptedCreate) {
-      setAttemptedCreate(true);
-      createProfile({
-        display_name: "Test Kullanıcı",
-        age: 25,
-        bio: "Test profili",
-        photo_urls: ["https://i.pravatar.cc/600?img=1"],
-        location_text: "Etiler Starbucks",
-        interests: ["Kahve", "Sanat"],
-        looking_for: "Arkadaşlık",
-      }).catch((err) => {
-        console.log("Auto-create profile failed:", err);
-      });
-    }
-    // Mekan 1 için otomatik aktif et
-    if (!activePlaceId || activePlaceId !== "1") {
-      usePresence.getState().startSession("1");
-      usePresence.getState().setActivePlaceName("Etiler Starbucks");
-    }
-  }, [hasProfile, activePlaceId]);
+  // BUG-01 & BUG-02: Hardcoded auto-create profil ve startSession kaldırıldı.
+  // Kullanıcı profilini gerçek akıştan (MatchProfileSetupScreen) oluşturmalı.
 
   useEffect(() => {
     if (hasProfile && activeTab === "swipe" && !profileLoading) {
@@ -335,12 +239,16 @@ export default function MatchScreen() {
 
   const currentCandidate = currentCandidateRaw && passesFilter(currentCandidateRaw) ? currentCandidateRaw : undefined;
 
-  // Auto-skip candidates that don't pass filters
+  // Auto-skip candidates that don't pass filters (BUG-03 & BUG-19: guard against infinite loop and already acted candidates)
   useEffect(() => {
-    if (currentCandidateRaw && !passesFilter(currentCandidateRaw) && currentIndex < candidates.length) {
+    if (
+      currentCandidateRaw && 
+      (!passesFilter(currentCandidateRaw) || actedLikes.includes(currentCandidateRaw.user_id)) && 
+      currentIndex < candidates.length - 1
+    ) {
       nextCandidate();
     }
-  }, [currentIndex, candidates, filters]);
+  }, [currentIndex, candidates, filters, actedLikes]);
 
   const handleSwipe = useCallback(
     async (direction: "left" | "right") => {
@@ -355,28 +263,41 @@ export default function MatchScreen() {
         useNativeDriver: false,
       }).start(() => {
         const placeId = activePlaceId ? parseInt(activePlaceId) : undefined;
+        // BUG-18: Track acted likes for both tabs so they sync
+        setActedLikes((prev) => [...prev, currentCandidate.user_id]);
 
         if (direction === "right") {
           likeCandidate(currentCandidate.user_id, placeId)
             .then((result) => {
               if (result.matched) {
+                matchPopupRef.current = true;
                 setMatchPopup({ name: currentCandidate.display_name });
 
-                // Mesajlara düşmesi için ekle
-                addConversation({
-                  id: String((result as any).conversation_id || `match_${Date.now()}_${currentCandidate.user_id}`),
-                  name: currentCandidate.display_name,
-                  username: (currentCandidate.display_name || "").toLowerCase().replace(/\s/g, ""),
-                  avatar: currentCandidate.photo_urls?.[0] || "https://i.pravatar.cc/150",
-                  lastMessage: "Eşleştiniz! Hemen yazışmaya başla...",
-                  timestamp: "Şimdi",
-                  unread: true,
-                  isOnline: true,
-                  isMatch: true,
-                  lastMessageAt: Date.now()
-                });
+                // BUG-06: Duplicate conversation kontrolü
+                const convId = String(result.conversation_id || `match_${Date.now()}_${currentCandidate.user_id}`);
+                const existing = useMessagesStore.getState().conversations.find(c => c.id === convId);
+                if (!existing) {
+                  addConversation({
+                    id: convId,
+                    name: currentCandidate.display_name,
+                    username: (currentCandidate.display_name || "").toLowerCase().replace(/\s/g, ""),
+                    avatar: currentCandidate.photo_urls?.[0] || "https://i.pravatar.cc/150",
+                    lastMessage: "Eşleştiniz! Hemen yazışmaya başla...",
+                    timestamp: "Şimdi",
+                    unread: true,
+                    isOnline: true,
+                    isMatch: true,
+                    lastMessageAt: Date.now()
+                  });
+                }
 
-                setTimeout(() => setMatchPopup(null), 3000);
+                // BUG-10: Yarış koşulunu önle — popup hâlâ açıksa kapat
+                setTimeout(() => {
+                  if (matchPopupRef.current) {
+                    matchPopupRef.current = false;
+                    setMatchPopup(null);
+                  }
+                }, 3000);
               }
             })
             .catch((err) => console.error("Like failed:", err));
@@ -390,7 +311,7 @@ export default function MatchScreen() {
         scrollViewRef.current?.scrollTo({ x: 0, y: 0, animated: false });
       });
     },
-    [currentCandidate, activePlaceId],
+    [currentCandidate, activePlaceId, likeCandidate, passCandidate, nextCandidate, addConversation],
   );
 
   const scrollModeRef = useRef(scrollMode);
@@ -413,7 +334,7 @@ export default function MatchScreen() {
         return Math.abs(gs.dx) > Math.abs(gs.dy) * 2 && Math.abs(gs.dx) > 15;
       },
       onPanResponderGrant: () => {
-        pan.setOffset({ x: (pan.x as any)._value, y: 0 });
+        pan.setOffset({ x: panXValue.current, y: 0 });
         pan.setValue({ x: 0, y: 0 });
       },
       onPanResponderMove: Animated.event([null, { dx: pan.x }], {
@@ -421,7 +342,7 @@ export default function MatchScreen() {
       }),
       onPanResponderRelease: (_, gs) => {
         pan.flattenOffset();
-        const dragX = (pan.x as any)._value;
+        const dragX = panXValue.current;
         const isSwipeRight = dragX > SWIPE_THRESHOLD || gs.vx > 0.5;
         const isSwipeLeft = dragX < -SWIPE_THRESHOLD || gs.vx < -0.5;
 
@@ -471,31 +392,46 @@ export default function MatchScreen() {
         duration: 250,
         useNativeDriver: false,
       }).start(() => {
-        const swipedPersonId = selectedLike.id;
+        const swipedPersonId = selectedLike.user_id;
         setActedLikes((prev) => [...prev, swipedPersonId]);
 
         if (direction === "right") {
-          const matchedPerson = selectedLike.name || (selectedLike as any).display_name;
+          const matchedPerson = selectedLike.display_name;
 
           const placeId = activePlaceId ? parseInt(activePlaceId) : undefined;
-          const targetId = (selectedLike as any).user_id || selectedLike.id;
-          likeCandidate(targetId, placeId).catch(err => console.log("Mock like fallback"));
-
-          addConversation({
-            id: `match_${Date.now()}_${selectedLike.id}`,
-            name: matchedPerson,
-            username: (matchedPerson || "").toLowerCase().replace(/\s/g, ""),
-            avatar: selectedLike.photo || selectedLike.photos?.[0] || "https://i.pravatar.cc/150",
-            lastMessage: "Eşleştiniz! Hemen yazışmaya başla...",
-            timestamp: "Şimdi",
-            unread: true,
-            isOnline: true,
-            isMatch: true,
-            lastMessageAt: Date.now()
-          });
+          likeCandidate(selectedLike.user_id, placeId)
+            .then((result) => {
+              if (result.matched) {
+                // BUG-06: Duplicate conversation kontrolü
+                const convId = String(result.conversation_id || `match_${Date.now()}_${selectedLike.user_id}`);
+                const existing = useMessagesStore.getState().conversations.find(c => c.id === convId);
+                if (!existing) {
+                  addConversation({
+                    id: convId,
+                    name: matchedPerson,
+                    username: (matchedPerson || "").toLowerCase().replace(/\s/g, ""),
+                    avatar: selectedLike.photo_urls?.[0] || "https://i.pravatar.cc/150",
+                    lastMessage: "Eşleştiniz! Hemen yazışmaya başla...",
+                    timestamp: "Şimdi",
+                    unread: true,
+                    isOnline: true,
+                    isMatch: true,
+                    lastMessageAt: Date.now()
+                  });
+                }
+              }
+            })
+            .catch(err => console.log("Like failed", err));
 
           setSelectedLike(null);
+          matchPopupRef.current = true;
           setMatchPopup({ name: matchedPerson });
+          setTimeout(() => {
+            if (matchPopupRef.current) {
+              matchPopupRef.current = false;
+              setMatchPopup(null);
+            }
+          }, 3000);
         } else {
           setSelectedLike(null);
         }
@@ -503,7 +439,7 @@ export default function MatchScreen() {
         scrollModalRef.current?.scrollTo({ x: 0, y: 0, animated: false });
       });
     },
-    [selectedLike]
+    [selectedLike, activePlaceId, likeCandidate, addConversation]
   );
 
   const handleModalSwipeRef = useRef(handleModalSwipe);
@@ -522,7 +458,7 @@ export default function MatchScreen() {
         return Math.abs(gs.dx) > Math.abs(gs.dy) * 2 && Math.abs(gs.dx) > 15;
       },
       onPanResponderGrant: () => {
-        panModal.setOffset({ x: (panModal.x as any)._value, y: 0 });
+        panModal.setOffset({ x: panModalXValue.current, y: 0 });
         panModal.setValue({ x: 0, y: 0 });
       },
       onPanResponderMove: Animated.event([null, { dx: panModal.x }], {
@@ -530,7 +466,7 @@ export default function MatchScreen() {
       }),
       onPanResponderRelease: (_, gs) => {
         panModal.flattenOffset();
-        const dragX = (panModal.x as any)._value;
+        const dragX = panModalXValue.current;
         const isSwipeRight = dragX > SWIPE_THRESHOLD || gs.vx > 0.5;
         const isSwipeLeft = dragX < -SWIPE_THRESHOLD || gs.vx < -0.5;
 
@@ -625,7 +561,7 @@ export default function MatchScreen() {
             if (activeTab === "swipe" && currentCandidate?.user_id === userId) {
               handleSwipe("left"); // "pass" the candidate
             } else {
-              if (selectedLike && (selectedLike.id === userId || (selectedLike as any).user_id === userId)) {
+              if (selectedLike && selectedLike.user_id === userId) {
                 setSelectedLike(null);
               }
               // Try to pass candidate behind the scenes if we have user_id
@@ -1256,6 +1192,7 @@ export default function MatchScreen() {
                 <TouchableOpacity
                   style={[styles.bumbleBtn, { marginTop: 30 }]}
                   onPress={() => {
+                    matchPopupRef.current = false;
                     setMatchPopup(null);
                     router.push("/(tabs)/messages");
                   }}
@@ -1301,7 +1238,7 @@ export default function MatchScreen() {
 
                 <View style={{ flex: 1, alignItems: "center" }}>
                   <ThemedText style={styles.headerNameText}>
-                    {selectedLike.name || (selectedLike as any).display_name},{" "}
+                    {selectedLike.display_name},{" "}
                     {selectedLike.age}
                   </ThemedText>
                 </View>

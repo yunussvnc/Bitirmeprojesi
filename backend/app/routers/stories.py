@@ -30,6 +30,7 @@ def _story_to_schema(s):
         media_type=s.media_type,
         media_url=s.media_url,
         thumbnail_url=s.thumbnail_url,
+        is_close_friends=getattr(s, "is_close_friends", False),
         created_at=s.created_at,
         expires_at=s.expires_at,
         author=author,

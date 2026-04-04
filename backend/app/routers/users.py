@@ -19,25 +19,95 @@ def search_users(
     db: Session = Depends(get_db),
     current_user: Optional[models.User] = Depends(get_optional_user),
 ):
-    """Kullanıcı arama — username, isim veya soyisim ile. Sayfalama destekler."""
-    # Escape SQL LIKE special characters to prevent injection
+    """
+    Kullanıcı arama — username, isim veya soyisim ile.
+
+    **Premium özellikler:**
+    - Engellenen/engelleyen kullanıcılar sonuçlardan çıkarılır
+    - Venue hesapları (mekan sahipleri) sonuçlara dahil edilmez
+    - Tam eşleşme önce, sonra prefix, sonra içeren sıralaması
+    - Sayfalama ve toplam sayı bilgisi
+    """
+    # ── 1. Güvenli sorgu hazırla ──
     safe_q = q.replace("%", "\\%").replace("_", "\\_")
-    query = db.query(models.User).filter(models.User.is_active == True)
-    query = query.filter(
+    lower_q = q.strip().lower()
+
+    # ── 2. Engellenen kullanıcıları topla (çift yönlü) ──
+    blocked_ids: set[int] = set()
+    if current_user:
+        # Benim engellediğim + beni engelleyen
+        blocked_by_me = db.query(models.UserBlock.blocked_id).filter(
+            models.UserBlock.blocker_id == current_user.id
+        ).all()
+        blocked_me = db.query(models.UserBlock.blocker_id).filter(
+            models.UserBlock.blocked_id == current_user.id
+        ).all()
+        blocked_ids = {r[0] for r in blocked_by_me} | {r[0] for r in blocked_me}
+
+    # ── 3. Temel sorgu: aktif + normal kullanıcılar ──
+    base_query = db.query(models.User).filter(
+        models.User.is_active == True,
+        models.User.role != "venue",  # Venue hesaplarını hariç tut
+    )
+
+    # Kendi kendini aramayı hariç tut
+    if current_user:
+        base_query = base_query.filter(models.User.id != current_user.id)
+
+    # Engellenen kullanıcıları hariç tut
+    if blocked_ids:
+        base_query = base_query.filter(models.User.id.notin_(blocked_ids))
+
+    # ── 4. İsim/kullanıcı adı filtresi ──
+    base_query = base_query.filter(
         (models.User.username.ilike(f"%{safe_q}%")) |
         (models.User.first_name.ilike(f"%{safe_q}%")) |
         (models.User.last_name.ilike(f"%{safe_q}%"))
     )
-    total = query.count()
+
+    total = base_query.count()
+
+    # ── 5. Tüm eşleşen kullanıcıları al & akıllı sıralama ──
+    users = base_query.all()
+
+    def relevance_score(u: models.User) -> int:
+        """0 = en alakalı (exact username), 1 = prefix, 2 = contains"""
+        uname = (u.username or "").lower()
+        fname = (u.first_name or "").lower()
+        lname = (u.last_name or "").lower()
+        # Exact match
+        if uname == lower_q or fname == lower_q or lname == lower_q:
+            return 0
+        # Starts-with match
+        if uname.startswith(lower_q) or fname.startswith(lower_q) or lname.startswith(lower_q):
+            return 1
+        # Contains
+        return 2
+
+    users.sort(key=relevance_score)
+
+    # ── 6. Sayfalama ──
     offset = (page - 1) * page_size
-    users = query.offset(offset).limit(page_size).all()
+    paginated = users[offset: offset + page_size]
+
+    # ── 7. Batch is_following kontrolü (N+1 sorgusu yerine tek sorgu) ──
     current_uid = current_user.id if current_user else None
+    following_set: set[int] = set()
+    if current_uid and paginated:
+        paginated_ids = [u.id for u in paginated]
+        follow_rows = db.query(models.Follow.following_id).filter(
+            models.Follow.follower_id == current_uid,
+            models.Follow.following_id.in_(paginated_ids),
+        ).all()
+        following_set = {r[0] for r in follow_rows}
+
+    # ── 8. Sonuçları serialize et ──
     items = []
-    for u in users:
+    for u in paginated:
         item = schemas.UserSummary.model_validate(u)
-        if current_uid:
-            item.is_following = crud.is_following(db, current_uid, u.id)
+        item.is_following = u.id in following_set
         items.append(item)
+
     return {"items": items, "total": total, "page": page, "page_size": page_size}
 
 

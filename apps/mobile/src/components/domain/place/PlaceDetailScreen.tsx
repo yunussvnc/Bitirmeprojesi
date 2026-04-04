@@ -54,7 +54,7 @@ type Review = {
   media_urls?: string[];
 };
 
-const { height: SCREEN_HEIGHT } = Dimensions.get("window");
+const { height: SCREEN_HEIGHT, width: SCREEN_WIDTH } = Dimensions.get("window");
 const REVIEW_SHEET_COLLAPSED = Math.min(SCREEN_HEIGHT * 0.55, 520);
 const REVIEW_SHEET_EXPANDED = SCREEN_HEIGHT * 0.72;
 
@@ -65,12 +65,12 @@ const MOCK_NIGHTCLUB_MENU = [
   { id: 4, category: "Atıştırmalık", items: [{ name: "Karışık Çerez", price: "200 ₺" }, { name: "Meyve Tabağı", price: "350 ₺" }, { name: "Peynir Tabağı", price: "450 ₺" }] },
 ];
 
-export default function PlaceDetailScreen({ 
-  providedId, 
-  isVenueDashboard = false 
-}: { 
-  providedId?: string, 
-  isVenueDashboard?: boolean 
+export default function PlaceDetailScreen({
+  providedId,
+  isVenueDashboard = false
+}: {
+  providedId?: string,
+  isVenueDashboard?: boolean
 } = {}) {
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
@@ -87,6 +87,7 @@ export default function PlaceDetailScreen({
   const [checkingLocation, setCheckingLocation] = useState(false);
   const [showReviewForm, setShowReviewForm] = useState(false);
   const [submittingReview, setSubmittingReview] = useState(false);
+  const [showHeroImage, setShowHeroImage] = useState(false);
 
   const [reviews, setReviews] = useState<Review[]>([]);
   const [reviewsLoading, setReviewsLoading] = useState(false);
@@ -469,7 +470,12 @@ export default function PlaceDetailScreen({
         {/* Image */}
         <View style={styles.imageContainer}>
           {hasPlaceImage(place) ? (
-            <Image source={heroSource} style={styles.placeImage} resizeMode="cover" />
+            <Pressable onPress={() => {
+              lightImpact();
+              setShowHeroImage(true);
+            }} style={[{ backgroundColor: colors.surface.elevated, flex: 1 }]}>
+              <Image source={heroSource} style={styles.placeImage} resizeMode="contain" />
+            </Pressable>
           ) : (
             <View style={[styles.imagePlaceholder, { backgroundColor: colors.surface.elevated }]}>
               <IconSymbol name="mappin.and.ellipse" size={48} color={colors.text.tertiary} />
@@ -917,6 +923,38 @@ export default function PlaceDetailScreen({
               })()}
           </>
         )}
+      </Modal>
+
+      {/* Hero Image Fullscreen Modal */}
+      <Modal
+        visible={showHeroImage}
+        transparent
+        animationType="fade"
+        onRequestClose={() => setShowHeroImage(false)}
+        statusBarTranslucent
+      >
+        <View style={{ flex: 1, backgroundColor: "#000", justifyContent: "center", alignItems: "center" }}>
+          <View style={{ flexDirection: "row", justifyContent: "flex-end", position: "absolute", top: insets.top || 44, width: "100%", paddingHorizontal: 20, zIndex: 10 }}>
+            <TouchableOpacity onPress={() => setShowHeroImage(false)} style={styles.galleryNavButton}>
+              <IconSymbol name="xmark" size={20} color="#fff" />
+              <Text style={styles.galleryNavText}>Kapat</Text>
+            </TouchableOpacity>
+          </View>
+          <ScrollView
+            maximumZoomScale={4}
+            minimumZoomScale={1}
+            bouncesZoom={true}
+            centerContent={true}
+            showsHorizontalScrollIndicator={false}
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{ flexGrow: 1, justifyContent: "center", alignItems: "center" }}
+            style={{ width: SCREEN_WIDTH, height: SCREEN_HEIGHT }}
+          >
+            <Pressable>
+              <Image source={heroSource} style={{ width: SCREEN_WIDTH, height: SCREEN_HEIGHT * 0.8 }} resizeMode="contain" />
+            </Pressable>
+          </ScrollView>
+        </View>
       </Modal>
 
       {/* Menu Modal */}

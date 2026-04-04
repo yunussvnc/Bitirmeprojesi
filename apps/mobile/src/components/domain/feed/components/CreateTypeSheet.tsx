@@ -1,14 +1,18 @@
 /**
- * CreateTypeSheet – Paylaş butonuna tıklanınca: Gönderi | Hikaye | Reels seçimi
+ * CreateTypeSheet – Premium İçerik Türü Seçimi
+ * 
+ * Feed "+" butonuna basılınca: Gönderi | Hikaye | Reels
+ * Glassmorphism bottom sheet with gradient icon backgrounds.
  */
 
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Modal, Pressable } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Modal, Pressable, Dimensions } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { LinearGradient } from "expo-linear-gradient";
 import { useTheme } from "@/src/hooks/useTheme";
 import { IconSymbol, type IconSymbolName } from "@/src/components/ui/icon-symbol";
-import { lightImpact } from "@/src/utils/haptics";
-import { createTextStyle } from "@/src/constants/design";
+import { lightImpact, mediumImpact } from "@/src/utils/haptics";
+import { spacing } from "@/src/constants/design";
 
 export type CreateType = "post" | "story" | "reels";
 
@@ -18,10 +22,34 @@ export interface CreateTypeSheetProps {
   onSelect: (type: CreateType) => void;
 }
 
-const OPTIONS: { type: CreateType; label: string; icon: IconSymbolName }[] = [
-  { type: "post", label: "Gönderi", icon: "photo" },
-  { type: "story", label: "Hikaye", icon: "circle.hexagongrid.fill" },
-  { type: "reels", label: "Reels", icon: "play.circle.fill" },
+const OPTIONS: {
+  type: CreateType;
+  label: string;
+  subtitle: string;
+  icon: IconSymbolName;
+  gradient: [string, string];
+}[] = [
+  {
+    type: "post",
+    label: "Gönderi",
+    subtitle: "Fotoğraf veya video",
+    icon: "photo",
+    gradient: ["#667eea", "#764ba2"],
+  },
+  {
+    type: "story",
+    label: "Hikaye",
+    subtitle: "24 saat görünür",
+    icon: "circle.hexagongrid.fill",
+    gradient: ["#f093fb", "#f5576c"],
+  },
+  {
+    type: "reels",
+    label: "Reels",
+    subtitle: "Kısa video",
+    icon: "play.circle.fill",
+    gradient: ["#4facfe", "#00f2fe"],
+  },
 ];
 
 export function CreateTypeSheet({ visible, onClose, onSelect }: CreateTypeSheetProps) {
@@ -29,7 +57,7 @@ export function CreateTypeSheet({ visible, onClose, onSelect }: CreateTypeSheetP
   const insets = useSafeAreaInsets();
 
   const handleSelect = (type: CreateType) => {
-    lightImpact();
+    mediumImpact();
     onClose();
     onSelect(type);
   };
@@ -43,31 +71,44 @@ export function CreateTypeSheet({ visible, onClose, onSelect }: CreateTypeSheetP
             {
               backgroundColor: colors.surface.elevated,
               borderColor: colors.surface.border,
-              paddingBottom: insets.bottom + 16,
+              paddingBottom: insets.bottom + 20,
             },
           ]}
           onPress={(e) => e.stopPropagation()}
         >
-          <View style={[styles.handle, { backgroundColor: colors.text.tertiary }]} />
-          <Text style={[createTextStyle("title", colors.text.primary), styles.title]}>Paylaş</Text>
+          {/* Handle */}
+          <View style={[styles.handle, { backgroundColor: colors.text.tertiary + '40' }]} />
+
+          {/* Title */}
+          <Text style={[styles.title, { color: colors.text.primary }]}>Oluştur</Text>
+          <Text style={[styles.subtitle, { color: colors.text.tertiary }]}>
+            Ne paylaşmak istersin?
+          </Text>
+
+          {/* Options */}
           <View style={styles.options}>
             {OPTIONS.map((opt) => (
               <TouchableOpacity
                 key={opt.type}
                 style={[
                   styles.option,
-                  {
-                    backgroundColor: colors.background.tertiary,
-                    borderColor: colors.surface.border,
-                  },
+                  { backgroundColor: colors.background.tertiary + '80', borderColor: colors.surface.border + '40' },
                 ]}
                 onPress={() => handleSelect(opt.type)}
                 activeOpacity={0.7}
               >
-                <View style={[styles.optionIcon, { backgroundColor: colors.surface.elevated }]}>
-                  <IconSymbol name={opt.icon} size={28} color={colors.accent.primary} />
-                </View>
+                {/* Gradient Icon */}
+                <LinearGradient
+                  colors={opt.gradient}
+                  start={{ x: 0, y: 0 }}
+                  end={{ x: 1, y: 1 }}
+                  style={styles.optionIconGradient}
+                >
+                  <IconSymbol name={opt.icon} size={26} color="#fff" />
+                </LinearGradient>
+
                 <Text style={[styles.optionLabel, { color: colors.text.primary }]}>{opt.label}</Text>
+                <Text style={[styles.optionSub, { color: colors.text.tertiary }]}>{opt.subtitle}</Text>
               </TouchableOpacity>
             ))}
           </View>
@@ -80,51 +121,74 @@ export function CreateTypeSheet({ visible, onClose, onSelect }: CreateTypeSheetP
 const styles = StyleSheet.create({
   overlay: {
     flex: 1,
-    backgroundColor: "rgba(0,0,0,0.5)",
+    backgroundColor: "rgba(0,0,0,0.55)",
     justifyContent: "flex-end",
   },
   sheet: {
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    paddingHorizontal: 24,
+    borderTopLeftRadius: 28,
+    borderTopRightRadius: 28,
+    paddingHorizontal: 20,
     paddingTop: 12,
-    borderTopWidth: 1,
+    borderTopWidth: StyleSheet.hairlineWidth,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: -8 },
+    shadowOpacity: 0.15,
+    shadowRadius: 24,
+    elevation: 16,
   },
   handle: {
-    width: 36,
+    width: 40,
     height: 4,
     borderRadius: 2,
     alignSelf: "center",
-    marginBottom: 16,
+    marginBottom: 20,
   },
   title: {
-    fontSize: 18,
-    fontWeight: "700",
-    marginBottom: 20,
+    fontSize: 22,
+    fontWeight: "800",
     textAlign: "center",
+    letterSpacing: -0.5,
+  },
+  subtitle: {
+    fontSize: 14,
+    fontWeight: "500",
+    textAlign: "center",
+    marginTop: 4,
+    marginBottom: 24,
   },
   options: {
     flexDirection: "row",
-    justifyContent: "space-around",
-    gap: 12,
+    gap: 10,
   },
   option: {
     flex: 1,
     alignItems: "center",
-    paddingVertical: 20,
-    borderRadius: 16,
+    paddingVertical: 22,
+    paddingHorizontal: 8,
+    borderRadius: 20,
     borderWidth: 1,
+    gap: 2,
   },
-  optionIcon: {
-    width: 56,
-    height: 56,
-    borderRadius: 28,
+  optionIconGradient: {
+    width: 54,
+    height: 54,
+    borderRadius: 18,
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 12,
+    marginBottom: 10,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.25,
+    shadowRadius: 8,
+    elevation: 6,
   },
   optionLabel: {
-    fontSize: 14,
-    fontWeight: "600",
+    fontSize: 15,
+    fontWeight: "700",
+    letterSpacing: -0.2,
+  },
+  optionSub: {
+    fontSize: 11,
+    fontWeight: "500",
   },
 });

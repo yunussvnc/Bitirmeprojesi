@@ -22,6 +22,8 @@ class UserUpdate(BaseModel):
     bio: Optional[str] = None
     avatar_url: Optional[str] = None
     birth_date: Optional[date] = None
+    phone_number: Optional[str] = None
+    email: Optional[EmailStr] = None
 
 class SocialLoginRequest(BaseModel):
     token: str
@@ -65,6 +67,7 @@ class PlaceBase(BaseModel):
     closing_time: Optional[str] = Field(None, pattern=r"^\d{2}:\d{2}$", description="Kapanış saati (HH:MM)")
     is_open: Optional[bool] = None
     phone_number: Optional[str] = Field(None, max_length=20)
+    opening_hours_json: Optional[dict] = None  # Détailed daily hours
     gallery_urls: Optional[List[str]] = None
     menu_items: Optional[List[dict]] = None
 
@@ -82,6 +85,8 @@ class Place(PlaceBase):
     review_count: Optional[int] = 0
     saved_count: Optional[int] = 0
     popularity_score: Optional[float] = 0.0
+    google_place_id: Optional[str] = None
+    user_ratings_total: Optional[int] = None
 
     class Config:
         from_attributes = True
@@ -250,6 +255,7 @@ class PlaceUpdate(BaseModel):
     price_range: Optional[int] = Field(None, ge=1, le=4)
     gallery_urls: Optional[List[str]] = None
     menu_items: Optional[List[dict]] = None
+    opening_hours_json: Optional[dict] = None
 
 # --- ÖNERİ (RECOMMEND) ŞEMALARI ---
 
@@ -307,6 +313,8 @@ class PostCreate(BaseModel):
     caption: Optional[str] = None
     place_id: Optional[int] = None
     post_type: str = "photo"
+    comments_disabled: bool = False
+    likes_hidden: bool = False
     media: List[PostMediaCreate]
 
 class PostCommentCreate(BaseModel):
@@ -327,6 +335,7 @@ class UserSummary(BaseModel):
     id: int
     username: Optional[str] = None
     first_name: Optional[str] = None
+    last_name: Optional[str] = None
     avatar_url: Optional[str] = None
     is_following: bool = False
 
@@ -347,6 +356,8 @@ class Post(BaseModel):
     place_id: Optional[int] = None
     caption: Optional[str] = None
     post_type: str
+    comments_disabled: bool = False
+    likes_hidden: bool = False
     like_count: int = 0
     comment_count: int = 0
     created_at: datetime
@@ -372,6 +383,7 @@ class StoryCreate(BaseModel):
     media_type: str  # "image", "video"
     media_url: str
     thumbnail_url: Optional[str] = None
+    is_close_friends: bool = False
 
 
 class Story(BaseModel):
@@ -381,6 +393,7 @@ class Story(BaseModel):
     media_type: str
     media_url: str
     thumbnail_url: Optional[str] = None
+    is_close_friends: bool = False
     created_at: datetime
     expires_at: datetime
     author: Optional[UserSummary] = None
@@ -412,7 +425,7 @@ class Notification(BaseModel):
     id: int
     user_id: int
     type: str
-    actor_id: int
+    actor_id: Optional[int] = None
     post_id: Optional[int] = None
     place_id: Optional[int] = None
     is_read: bool = False
@@ -434,6 +447,8 @@ class PaginatedNotifications(BaseModel):
 
 class UserStats(BaseModel):
     post_count: int = 0
+    follower_count: int = 0
+    following_count: int = 0
     review_count: int = 0
     visit_count: int = 0  # verified reviews or all reviews
     visits_this_month: int = 0
@@ -604,3 +619,45 @@ class TypingEvent(BaseModel):
 
 class PushTokenRequest(BaseModel):
     token: str  # ExponentPushToken[xxx]
+
+
+# --- KULLANICI TERCİHLERİ (USER PREFERENCES) ---
+
+class UserPreferencesUpdate(BaseModel):
+    """Kullanıcının ayarlar ekranından güncellediği tercihler."""
+    is_private_account: Optional[bool] = None
+    default_comments_disabled: Optional[bool] = None
+    comment_allowed_audience: Optional[str] = None  # everyone, followers, off
+    unknown_message_requests: Optional[bool] = None
+    story_reply_audience: Optional[str] = None  # everyone, followers, off
+    show_read_receipts: Optional[bool] = None
+    story_save_to_archive: Optional[bool] = None
+    story_save_to_camera_roll: Optional[bool] = None
+    hide_offensive_words: Optional[bool] = None
+    hidden_words: Optional[List[str]] = None
+    upload_quality: Optional[str] = None  # high, auto, data_saver
+    wifi_auto_high_quality: Optional[bool] = None
+    include_location_in_posts: Optional[bool] = None
+    language: Optional[str] = None  # tr, en
+
+
+class UserPreferencesResponse(BaseModel):
+    """Sunucudan dönen tam tercih objesi."""
+    is_private_account: bool = False
+    default_comments_disabled: bool = False
+    comment_allowed_audience: str = "everyone"
+    unknown_message_requests: bool = True
+    story_reply_audience: str = "everyone"
+    show_read_receipts: bool = True
+    story_save_to_archive: bool = True
+    story_save_to_camera_roll: bool = False
+    hide_offensive_words: bool = True
+    hidden_words: List[str] = []
+    upload_quality: str = "auto"
+    wifi_auto_high_quality: bool = True
+    include_location_in_posts: bool = True
+    language: str = "tr"
+    updated_at: Optional[datetime] = None
+
+    class Config:
+        from_attributes = True

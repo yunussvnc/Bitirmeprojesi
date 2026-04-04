@@ -417,6 +417,7 @@ def delete_account(
     db.query(models.UserBlock).filter(
         (models.UserBlock.blocker_id == uid) | (models.UserBlock.blocked_id == uid)
     ).delete(synchronize_session=False)
+    db.query(models.UserPreferences).filter(models.UserPreferences.user_id == uid).delete()
     db.query(models.SavedPlace).filter(models.SavedPlace.user_id == uid).delete()
     db.query(models.SavedPost).filter(models.SavedPost.user_id == uid).delete()
     db.query(models.EmailVerification).filter(models.EmailVerification.user_id == uid).delete()
@@ -489,6 +490,21 @@ def update_me(
         if existing:
             raise HTTPException(status_code=400, detail="Bu kullanıcı adı zaten alınmış.")
     
+    # E-posta benzersizlik kontrolü
+    if data.email and data.email != current_user.email:
+        existing = crud.get_user_by_email(db, data.email)
+        if existing:
+            raise HTTPException(status_code=400, detail="Bu e-posta adresi zaten kullanılıyor.")
+    
+    # Telefon benzersizlik kontrolü
+    if data.phone_number and data.phone_number != current_user.phone_number:
+        existing = db.query(models.User).filter(
+            models.User.phone_number == data.phone_number,
+            models.User.id != current_user.id,
+        ).first()
+        if existing:
+            raise HTTPException(status_code=400, detail="Bu telefon numarası zaten kullanılıyor.")
+    
     try:
         updated = crud.update_user(db, current_user.id, data)
         return updated
@@ -498,6 +514,85 @@ def update_me(
             status_code=400, 
             detail="Profil güncellenirken bir çakışma oluştu. Benzersiz olması gereken bir alan (örn. telefon, e-posta) kullanılmış olabilir."
         )
+
+
+@router.patch("/me", response_model=schemas.User)
+def patch_me(
+    data: schemas.UserUpdate,
+    current_user=Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    """Kısmi profil güncellemesi (frontend personal.tsx kullanır)."""
+    from sqlalchemy.exc import IntegrityError
+
+    if data.username and data.username != current_user.username:
+        existing = crud.get_user_by_username(db, data.username)
+        if existing:
+            raise HTTPException(status_code=400, detail="Bu kullanıcı adı zaten alınmış.")
+
+    if data.email and data.email != current_user.email:
+        existing = crud.get_user_by_email(db, data.email)
+        if existing:
+            raise HTTPException(status_code=400, detail="Bu e-posta adresi zaten kullanılıyor.")
+
+    if data.phone_number and data.phone_number != current_user.phone_number:
+        existing = db.query(models.User).filter(
+            models.User.phone_number == data.phone_number,
+            models.User.id != current_user.id,
+        ).first()
+        if existing:
+            raise HTTPException(status_code=400, detail="Bu telefon numarası zaten kullanılıyor.")
+
+    try:
+        updated = crud.update_user(db, current_user.id, data)
+        return updated
+    except IntegrityError:
+        db.rollback()
+        raise HTTPException(status_code=400, detail="Profil güncellenirken çakışma oluştu.")
+
+
+@router.get("/me/stats", response_model=schemas.UserStats)
+def get_my_stats(
+    current_user=Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    """Oturum açmış kullanıcının istatistikleri (activity.tsx)."""
+    return crud.get_user_stats(db, current_user.id)
+
+
+@router.get("/me/preferences", response_model=schemas.UserPreferencesResponse)
+def get_my_preferences(
+    current_user=Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    """Kullanıcının sunucu tarafındaki tüm ayarlarını getirir."""
+    prefs = crud.get_or_create_preferences(db, current_user.id)
+    return crud.preferences_to_response(prefs)
+
+
+@router.put("/me/preferences", response_model=schemas.UserPreferencesResponse)
+def update_my_preferences(
+    data: schemas.UserPreferencesUpdate,
+    current_user=Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    """Kullanıcı tercihlerini günceller (upsert — yoksa oluşturur)."""
+    # Geçerlilik kontrolleri
+    VALID_AUDIENCES = {"everyone", "followers", "off"}
+    VALID_QUALITIES = {"high", "auto", "data_saver"}
+    VALID_LANGUAGES = {"tr", "en"}
+
+    if data.comment_allowed_audience and data.comment_allowed_audience not in VALID_AUDIENCES:
+        raise HTTPException(status_code=400, detail=f"Geçersiz yorum kitlesi: {data.comment_allowed_audience}")
+    if data.story_reply_audience and data.story_reply_audience not in VALID_AUDIENCES:
+        raise HTTPException(status_code=400, detail=f"Geçersiz hikaye yanıt kitlesi: {data.story_reply_audience}")
+    if data.upload_quality and data.upload_quality not in VALID_QUALITIES:
+        raise HTTPException(status_code=400, detail=f"Geçersiz medya kalitesi: {data.upload_quality}")
+    if data.language and data.language not in VALID_LANGUAGES:
+        raise HTTPException(status_code=400, detail=f"Geçersiz dil: {data.language}")
+
+    prefs = crud.update_preferences(db, current_user.id, data)
+    return crud.preferences_to_response(prefs)
 
 
 # --- Push Token Yönetimi ---

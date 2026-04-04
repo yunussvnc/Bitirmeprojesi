@@ -1,0 +1,469 @@
+import React, { useState, useRef, useCallback, useEffect } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TextInput,
+  FlatList,
+  TouchableOpacity,
+  ActivityIndicator,
+  Platform,
+  Animated,
+  Keyboard,
+} from "react-native";
+import { useRouter } from "expo-router";
+import { Avatar } from "@/src/components/ui";
+import { IconSymbol } from "@/src/components/ui/icon-symbol";
+import { useTheme } from "@/src/hooks/useTheme";
+import { lightImpact } from "@/src/utils/haptics";
+import { searchUsers, type UserSummary } from "@/src/services/searchService";
+import { toggleFollow } from "@/src/services/userService";
+import { useAuthStore } from "@/src/store/useAuthStore";
+import { handleApiError } from "@/src/utils/errorHandler";
+
+const DEBOUNCE_MS = 400;
+
+export default function FriendSearchScreen() {
+  const { colors } = useTheme();
+  const router = useRouter();
+  const authUser = useAuthStore((s) => s.user);
+
+  const [query, setQuery] = useState("");
+  const [results, setResults] = useState<UserSummary[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [searched, setSearched] = useState(false);
+
+  const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const inputRef = useRef<TextInput>(null);
+
+  // Animated glow for the search bar
+  const glowAnim = useRef(new Animated.Value(0)).current;
+
+  // Cleanup debounce timer on unmount
+  useEffect(() => {
+    return () => {
+      if (debounceRef.current) clearTimeout(debounceRef.current);
+    };
+  }, []);
+
+  const handleFocus = () => {
+    Animated.timing(glowAnim, {
+      toValue: 1,
+      duration: 300,
+      useNativeDriver: false,
+    }).start();
+  };
+
+  const handleBlur = () => {
+    Animated.timing(glowAnim, {
+      toValue: 0,
+      duration: 300,
+      useNativeDriver: false,
+    }).start();
+  };
+
+  const glowBorderColor = glowAnim.interpolate({
+    inputRange: [0, 1],
+    outputRange: [colors.surface.border as string, colors.accent.primary as string],
+  });
+
+  const doSearch = useCallback(
+    async (q: string) => {
+      const trimmed = q.trim();
+      if (!trimmed) {
+        setResults([]);
+        setSearched(false);
+        setLoading(false);
+        return;
+      }
+      setLoading(true);
+      setSearched(true);
+      try {
+        const res = await searchUsers(trimmed, 1, 30);
+        // Filter out current user from results
+        const filtered = (res.items || []).filter(
+          (u) => u.id !== authUser?.id
+        );
+        setResults(filtered);
+      } catch (e) {
+        handleApiError(e);
+      } finally {
+        setLoading(false);
+      }
+    },
+    [authUser?.id]
+  );
+
+  const handleChangeText = (text: string) => {
+    setQuery(text);
+    if (debounceRef.current) clearTimeout(debounceRef.current);
+    if (!text.trim()) {
+      setResults([]);
+      setSearched(false);
+      setLoading(false);
+      return;
+    }
+    setLoading(true);
+    debounceRef.current = setTimeout(() => {
+      doSearch(text);
+    }, DEBOUNCE_MS);
+  };
+
+  const clearSearch = () => {
+    setQuery("");
+    setResults([]);
+    setSearched(false);
+    setLoading(false);
+    inputRef.current?.focus();
+  };
+
+  const handleToggleFollow = async (userId: number, index: number) => {
+    lightImpact();
+    // Optimistic update
+    setResults((prev) => {
+      const next = [...prev];
+      next[index] = { ...next[index], is_following: !next[index].is_following };
+      return next;
+    });
+    try {
+      const res = await toggleFollow(userId);
+      setResults((prev) => {
+        const next = [...prev];
+        next[index] = { ...next[index], is_following: res.following };
+        return next;
+      });
+    } catch (e) {
+      // Revert
+      setResults((prev) => {
+        const next = [...prev];
+        next[index] = { ...next[index], is_following: !next[index].is_following };
+        return next;
+      });
+      handleApiError(e);
+    }
+  };
+
+  const navigateToProfile = (user: UserSummary) => {
+    lightImpact();
+    Keyboard.dismiss();
+    if (user.id === authUser?.id) {
+      router.push("/(tabs)/profile" as any);
+    } else {
+      router.push(`/user/${user.id}` as any);
+    }
+  };
+
+  const renderItem = ({ item, index }: { item: UserSummary; index: number }) => {
+    const displayName = item.first_name
+      ? `${item.first_name}${item.last_name ? ` ${item.last_name}` : ""}`
+      : null;
+
+    return (
+      <TouchableOpacity
+        style={styles.userRow}
+        onPress={() => navigateToProfile(item)}
+        activeOpacity={0.7}
+      >
+        <View style={[styles.avatarRing, { borderColor: colors.surface.border }]}>
+          <Avatar
+            source={item.avatar_url ? { uri: item.avatar_url } : undefined}
+            name={item.username || item.first_name || "U"}
+            size={50}
+          />
+        </View>
+
+        <View style={styles.userInfo}>
+          <Text style={[styles.username, { color: colors.text.primary }]} numberOfLines={1}>
+            {item.username || `Kullanıcı ${item.id}`}
+          </Text>
+          {displayName && (
+            <Text style={[styles.fullName, { color: colors.text.secondary }]} numberOfLines={1}>
+              {displayName}
+            </Text>
+          )}
+        </View>
+
+        <TouchableOpacity
+          style={[
+            styles.followBtn,
+            item.is_following
+              ? {
+                  backgroundColor: colors.surface.elevated,
+                  borderWidth: 1,
+                  borderColor: colors.surface.border,
+                }
+              : {
+                  backgroundColor: colors.accent.primary,
+                  borderWidth: 1,
+                  borderColor: colors.accent.primary,
+                },
+          ]}
+          onPress={() => handleToggleFollow(item.id, index)}
+          activeOpacity={0.8}
+        >
+          <Text
+            style={[
+              styles.followBtnText,
+              {
+                color: item.is_following
+                  ? colors.text.primary
+                  : colors.accent.onPrimary,
+              },
+            ]}
+          >
+            {item.is_following ? "Takipte" : "Takip Et"}
+          </Text>
+        </TouchableOpacity>
+      </TouchableOpacity>
+    );
+  };
+
+  return (
+    <View style={[styles.container, { backgroundColor: colors.background.primary }]}>
+      {/* ── Header ── */}
+      <View style={styles.header}>
+        <TouchableOpacity
+          onPress={() => {
+            lightImpact();
+            router.back();
+          }}
+          hitSlop={12}
+          style={[styles.headerBtn, { backgroundColor: colors.surface.elevated }]}
+        >
+          <IconSymbol name="chevron.left" size={20} color={colors.text.primary} />
+        </TouchableOpacity>
+
+        <Text style={[styles.headerTitle, { color: colors.text.primary }]}>Arkadaş Ara</Text>
+
+        <View style={styles.headerBtn} />
+      </View>
+
+      {/* ── Premium Search Bar ── */}
+      <View style={styles.searchSection}>
+        <Animated.View
+          style={[
+            styles.searchContainer,
+            {
+              backgroundColor: colors.surface.elevated,
+              borderColor: glowBorderColor,
+            },
+          ]}
+        >
+          <IconSymbol
+            name="magnifyingglass"
+            size={18}
+            color={colors.text.tertiary}
+          />
+          <TextInput
+            ref={inputRef}
+            style={[styles.searchInput, { color: colors.text.primary }]}
+            placeholder="Kullanıcı adı veya isim ara..."
+            placeholderTextColor={colors.text.tertiary}
+            value={query}
+            onChangeText={handleChangeText}
+            onFocus={handleFocus}
+            onBlur={handleBlur}
+            autoFocus
+            autoCapitalize="none"
+            autoCorrect={false}
+            returnKeyType="search"
+            onSubmitEditing={() => doSearch(query)}
+          />
+          {query.length > 0 && (
+            <TouchableOpacity
+              onPress={clearSearch}
+              hitSlop={8}
+              style={[styles.clearBtn, { backgroundColor: colors.surface.pressed }]}
+            >
+              <IconSymbol name="xmark" size={12} color={colors.text.secondary} />
+            </TouchableOpacity>
+          )}
+        </Animated.View>
+      </View>
+
+      {/* ── Content ── */}
+      <View style={styles.content}>
+        {loading ? (
+          <View style={styles.centerState}>
+            <ActivityIndicator size="small" color={colors.accent.primary} />
+            <Text style={[styles.stateText, { color: colors.text.tertiary }]}>
+              Aranıyor...
+            </Text>
+          </View>
+        ) : searched && results.length === 0 ? (
+          <View style={styles.centerState}>
+            <View style={[styles.emptyIconBox, { backgroundColor: colors.surface.elevated }]}>
+              <IconSymbol name="person.fill.questionmark" size={32} color={colors.text.tertiary} />
+            </View>
+            <Text style={[styles.emptyTitle, { color: colors.text.primary }]}>
+              Kullanıcı Bulunamadı
+            </Text>
+            <Text style={[styles.emptyDesc, { color: colors.text.tertiary }]}>
+              "{query}" ile eşleşen kullanıcı yok.{"\n"}Farklı bir isim deneyin.
+            </Text>
+          </View>
+        ) : !searched ? (
+          <View style={styles.centerState}>
+            <View style={[styles.emptyIconBox, { backgroundColor: colors.surface.elevated }]}>
+              <IconSymbol name="person.2.fill" size={32} color={colors.accent.primary} />
+            </View>
+            <Text style={[styles.emptyTitle, { color: colors.text.primary }]}>
+              Arkadaşlarını Bul
+            </Text>
+            <Text style={[styles.emptyDesc, { color: colors.text.tertiary }]}>
+              Kullanıcı adı veya isim yazarak{"\n"}arkadaşlarını kolayca bulabilirsin.
+            </Text>
+          </View>
+        ) : (
+          <FlatList
+            data={results}
+            keyExtractor={(item) => String(item.id)}
+            renderItem={renderItem}
+            contentContainerStyle={styles.list}
+            keyboardShouldPersistTaps="handled"
+            showsVerticalScrollIndicator={false}
+            ListHeaderComponent={
+              <Text style={[styles.resultCount, { color: colors.text.secondary }]}>
+                {results.length} sonuç bulundu
+              </Text>
+            }
+          />
+        )}
+      </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 20,
+    paddingTop: Platform.OS === "ios" ? 60 : 40,
+    paddingBottom: 12,
+  },
+  headerBtn: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  headerTitle: {
+    fontSize: 20,
+    fontWeight: "800",
+    letterSpacing: -0.5,
+  },
+  searchSection: {
+    paddingHorizontal: 20,
+    paddingBottom: 8,
+  },
+  searchContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderRadius: 16,
+    borderWidth: 1.5,
+    paddingHorizontal: 16,
+    height: 52,
+    gap: 12,
+  },
+  searchInput: {
+    flex: 1,
+    fontSize: 16,
+    fontWeight: "500",
+    letterSpacing: -0.2,
+    paddingVertical: 0,
+  },
+  clearBtn: {
+    width: 24,
+    height: 24,
+    borderRadius: 12,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  content: {
+    flex: 1,
+  },
+  list: {
+    paddingHorizontal: 20,
+    paddingBottom: 40,
+  },
+  resultCount: {
+    fontSize: 13,
+    fontWeight: "600",
+    marginBottom: 8,
+    letterSpacing: 0.2,
+  },
+  userRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 12,
+  },
+  avatarRing: {
+    padding: 2,
+    borderRadius: 40,
+    borderWidth: 1.5,
+  },
+  userInfo: {
+    flex: 1,
+    marginLeft: 14,
+    marginRight: 10,
+  },
+  username: {
+    fontSize: 16,
+    fontWeight: "700",
+    letterSpacing: -0.2,
+  },
+  fullName: {
+    fontSize: 14,
+    marginTop: 2,
+    fontWeight: "400",
+  },
+  followBtn: {
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderRadius: 20,
+    alignItems: "center",
+    justifyContent: "center",
+    minWidth: 100,
+  },
+  followBtnText: {
+    fontSize: 14,
+    fontWeight: "600",
+  },
+  centerState: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 40,
+    paddingBottom: 80,
+  },
+  emptyIconBox: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 20,
+  },
+  emptyTitle: {
+    fontSize: 18,
+    fontWeight: "700",
+    marginBottom: 8,
+  },
+  emptyDesc: {
+    fontSize: 14,
+    fontWeight: "400",
+    textAlign: "center",
+    lineHeight: 20,
+  },
+  stateText: {
+    marginTop: 12,
+    fontSize: 14,
+    fontWeight: "500",
+  },
+});

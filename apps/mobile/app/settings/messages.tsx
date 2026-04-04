@@ -1,3 +1,7 @@
+/**
+ * Mesajlar ve Hikaye Yanıtları Ayarları
+ */
+
 import React from "react";
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -7,12 +11,28 @@ import { Section } from "@/src/components/layout/Section";
 import { SettingsRow } from "@/src/components/ui";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { createTextStyle, spacing } from "@/src/constants/design";
-import { lightImpact } from "@/src/utils/haptics";
+import { lightImpact, success } from "@/src/utils/haptics";
+import { useSettingsStore, type Audience } from "@/src/store/useSettingsStore";
 
-export default function CustomSettingsScreen() {
+const AUDIENCE_LABELS: Record<Audience, string> = {
+  everyone: "Herkes",
+  followers: "Takipçiler",
+  off: "Kapalı",
+};
+
+export default function MessagesSettingsScreen() {
   const { colors } = useTheme();
   const router = useRouter();
   const insets = useSafeAreaInsets();
+
+  const unknownRequests = useSettingsStore((s) => s.unknownMessageRequests);
+  const storyReply = useSettingsStore((s) => s.storyReplyAudience);
+  const readReceipts = useSettingsStore((s) => s.showReadReceipts);
+  const setUnknownRequests = useSettingsStore((s) => s.setUnknownMessageRequests);
+  const setStoryReply = useSettingsStore((s) => s.setStoryReplyAudience);
+  const setReadReceipts = useSettingsStore((s) => s.setShowReadReceipts);
+
+  const audienceOptions: Audience[] = ["everyone", "followers", "off"];
 
   return (
     <View style={[styles.wrapper, { backgroundColor: colors.background.primary }]}>
@@ -20,13 +40,68 @@ export default function CustomSettingsScreen() {
         <TouchableOpacity onPress={() => { lightImpact(); router.back(); }} hitSlop={12} style={styles.backBtn}>
           <IconSymbol name="chevron.left" size={24} color={colors.text.primary} />
         </TouchableOpacity>
-        <Text style={[createTextStyle("title", colors.text.primary), styles.title]}>Mesajlar ve Hikaye Yanıtları</Text>
+        <Text style={[createTextStyle("title", colors.text.primary), styles.title]}>Mesajlar ve Yanıtlar</Text>
         <View style={styles.backBtn} />
       </View>
+
       <ScrollView style={styles.container} contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
-        <Section title="Etkileşimler">
-          <SettingsRow label="Yabancılardan Gelen Mesajlar" value="İstekler Kutusuna" showArrow icon="tray" onPress={() => { lightImpact(); }} />
-          <SettingsRow label="Hikaye Yanıtları" value="Herkes" showArrow icon="bubble.left.and.bubble.right" onPress={() => { lightImpact(); }} />
+        <Section title="Mesaj İstekleri">
+          <SettingsRow
+            label="Tanımadığım kişilerin mesajlarını isteklere al"
+            value={unknownRequests}
+            switch
+            onValueChange={(v: boolean) => { setUnknownRequests(v); success(); }}
+            icon="envelope.badge"
+          />
+          <Text style={[styles.hint, { color: colors.text.tertiary }]}>
+            Takip etmediğin kişilerden gelen mesajlar, mesaj istekleri klasörüne düşer.
+          </Text>
+        </Section>
+
+        <Section title="Hikaye Yanıtları">
+          <Text style={[styles.sectionDesc, { color: colors.text.secondary }]}>
+            Hikayelerine kimlerin yanıt verebileceğini seç
+          </Text>
+          {audienceOptions.map((opt) => (
+            <TouchableOpacity
+              key={opt}
+              style={[styles.radioRow, { borderBottomColor: colors.surface.border }]}
+              onPress={() => { lightImpact(); setStoryReply(opt); success(); }}
+              activeOpacity={0.6}
+            >
+              <Text style={[styles.radioLabel, { color: colors.text.primary }]}>
+                {AUDIENCE_LABELS[opt]}
+              </Text>
+              <View style={[
+                styles.radio,
+                { borderColor: storyReply === opt ? colors.accent.primary : colors.surface.border },
+              ]}>
+                {storyReply === opt && (
+                  <View style={[styles.radioInner, { backgroundColor: colors.accent.primary }]} />
+                )}
+              </View>
+            </TouchableOpacity>
+          ))}
+        </Section>
+
+        <Section title="Okundu Bilgisi">
+          <SettingsRow
+            label="Okundu bilgisini göster"
+            value={readReceipts}
+            switch
+            onValueChange={(v: boolean) => { setReadReceipts(v); success(); }}
+            icon="checkmark.message"
+          />
+          <Text style={[styles.hint, { color: colors.text.tertiary }]}>
+            Kapatırsan, mesajlarını okuduğunu diğer kişiler göremez. Sen de başkalarının okundu bilgisini göremezsin.
+          </Text>
+        </Section>
+
+        <Section title="Grup Mesajları">
+          <SettingsRow label="Herkesin seni gruba eklemesine izin ver" value={true} switch icon="person.3" />
+          <Text style={[styles.hint, { color: colors.text.tertiary }]}>
+            Kapatırsan, yalnızca takip ettiğin kişiler seni gruplara ekleyebilir.
+          </Text>
         </Section>
       </ScrollView>
     </View>
@@ -36,15 +111,24 @@ export default function CustomSettingsScreen() {
 const styles = StyleSheet.create({
   wrapper: { flex: 1 },
   header: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    paddingHorizontal: spacing.base,
-    paddingVertical: spacing.md,
+    flexDirection: "row", alignItems: "center", justifyContent: "space-between",
+    paddingHorizontal: spacing.base, paddingVertical: spacing.md,
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
   backBtn: { minWidth: 44, minHeight: 44, alignItems: "flex-start", justifyContent: "center" },
   title: { fontSize: 18, fontWeight: "700" },
   container: { flex: 1 },
-  content: { padding: 16, paddingBottom: 32 },
+  content: { padding: 16, paddingBottom: 40 },
+  sectionDesc: { fontSize: 14, marginBottom: 8, paddingHorizontal: 16 },
+  hint: { fontSize: 13, lineHeight: 18, marginTop: -4, marginBottom: 8, marginLeft: 16 },
+  radioRow: {
+    flexDirection: "row", alignItems: "center", justifyContent: "space-between",
+    paddingVertical: 14, paddingHorizontal: 16, borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+  radioLabel: { fontSize: 16, fontWeight: "500" },
+  radio: {
+    width: 22, height: 22, borderRadius: 11, borderWidth: 2,
+    alignItems: "center", justifyContent: "center",
+  },
+  radioInner: { width: 12, height: 12, borderRadius: 6 },
 });

@@ -137,6 +137,18 @@ export async function apiPut<T>(
   });
 }
 
+export async function apiPatch<T>(
+  endpoint: string,
+  body?: any,
+  options?: RequestOptions
+): Promise<T> {
+  return apiClient<T>(endpoint, {
+    ...options,
+    method: 'PATCH',
+    body: body ? JSON.stringify(body) : undefined,
+  });
+}
+
 export async function apiDelete<T = void>(endpoint: string, options?: RequestOptions): Promise<T> {
   return apiClient<T>(endpoint, { ...options, method: 'DELETE' });
 }

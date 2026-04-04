@@ -239,9 +239,13 @@ export const useMessagesStore = create<MessagesState>()(
                 )
             })),
 
-            addConversation: (conv) => set((state) => ({
-                conversations: [conv, ...state.conversations]
-            })),
+            addConversation: (conv) => set((state) => {
+                // BUG-17: Aynı ID ile conversation eklenmesini önle
+                if (state.conversations.some(c => c.id === conv.id)) {
+                    return state; // zaten var, ekleme
+                }
+                return { conversations: [conv, ...state.conversations] };
+            }),
 
             restoreDeleted: (id) => set((state) => ({
                 conversations: state.conversations.map(c =>

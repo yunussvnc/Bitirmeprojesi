@@ -31,7 +31,6 @@ import { useChatMessagesStore } from "@/src/store/useChatMessagesStore";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import { revealProfile } from "@/src/services/matchService";
-import { toggleFollow } from "@/src/services/userService";
 import { toggleBlockUser, createReport } from "@/src/services/moderationService";
 import { getMessages as fetchBackendMessages, sendMessage as backendSendMessage, markMessagesRead } from "@/src/services/messageService";
 import { useAuthStore } from "@/src/store/useAuthStore";
@@ -189,6 +188,23 @@ function getInitialMessages(chatId: string): Message[] {
     return [];
 }
 
+/**
+ * BUG-13: ChatId'den hedef user_id'yi güvenli şekilde parse et.
+ * Formatı: tamamen sayısal ("42") veya "match_timestamp_userId" ("match_1711836000000_5")
+ */
+function _parseTargetUserId(chatId: string): number | null {
+    // "match_xxx_userId" formatı
+    if (chatId.startsWith("match_")) {
+        const parts = chatId.split("_");
+        const lastPart = parts[parts.length - 1];
+        const id = parseInt(lastPart, 10);
+        return isNaN(id) ? null : id;
+    }
+    // Tamamen sayısal conversation id
+    const num = parseInt(chatId, 10);
+    return isNaN(num) ? null : num;
+}
+
 export default function ChatScreen() {
     const { colors } = useTheme();
     const insets = useSafeAreaInsets();
@@ -203,6 +219,9 @@ export default function ChatScreen() {
     const didInitialScrollRef = useRef(false);
     const resolvedChatId = chatId || "1";
     const currentUser = useAuthStore((s) => s.user);
+
+    // BUG-11: conversation_id, ya tamamen sayısal ya da "match_xxx_userId" formatında olabilir.
+    // Sayısal ise doğrudan backend conversation id olarak kullan.
     const numericConvId = parseInt(resolvedChatId, 10);
     const isBackendConv = !isNaN(numericConvId) && resolvedChatId === String(numericConvId);
 
@@ -292,35 +311,14 @@ export default function ChatScreen() {
         success();
 
         // Gerçek ID ise API'ye de bildir:
-        const maybeConvId = parseInt(resolvedChatId, 10);
-        if (!isNaN(maybeConvId)) {
-            revealProfile(maybeConvId).catch(console.log);
+        if (isBackendConv) {
+            revealProfile(numericConvId).catch(console.log);
         }
 
-        // 3 saniye sonra karşı tarafın da beğendiğini simüle edelim (MOCK)
-        setTimeout(() => {
-            const currentConv = useMessagesStore.getState().conversations.find(c => c.id === resolvedChatId);
-            if (currentConv && currentConv.revealRequestedByMe && !currentConv.revealRequestedByThem) {
-                useMessagesStore.getState().mockOtherPersonReveal(resolvedChatId);
-
-                // Eğer MOCK Eşleşme ise veya Backend henüz Follow'u yansıtmadıysa Frontend Testini Kurtarmak İçin:
-                // `resolvedChatId` örn: "match_123456_5" -> buradaki "5" karşı tarafın user_id'sidir.
-                const parts = resolvedChatId.split('_');
-                const targetIdStr = parts[parts.length - 1];
-                const targetId = parseInt(targetIdStr, 10);
-
-                if (!isNaN(targetId)) {
-                    // Backend'e manuel follow the target user.
-                    // (Normalde mutual follow backend revealProfile içinden yapılır ama local/mock için garantiye alıyoruz)
-                    toggleFollow(targetId).catch(console.log);
-                }
-
-                Alert.alert(
-                    "Eşleşme Tamamlandı! 🎉",
-                    "İki taraf da profilleri beğendi. Gerçek profilleriniz görünür oldu ve artık takipleşiyorsunuz!"
-                );
-            }
-        }, 3000);
+        // BUG-12: Mock auto-reveal kaldırıldı.
+        // Production'da karşı tarafın reveal etmesi backend'den gelecek.
+        // Backend zaten reveal-profile endpoint'inde her iki taraf da onaylarsa
+        // otomatik olarak mutual follow oluşturuyor.
     };
 
     useEffect(() => {
@@ -332,11 +330,9 @@ export default function ChatScreen() {
 
     const handleBlock = async () => {
         setIsOptionsVisible(false);
-        // Parse user id from chatId format "match_xxx_userId" or numeric
-        const parts = resolvedChatId.split('_');
-        const targetIdStr = parts[parts.length - 1];
-        const targetId = parseInt(targetIdStr, 10);
-        if (!isNaN(targetId)) {
+        // BUG-13: Parse user id — handle both numeric and 'match_xxx_userId' formats
+        const targetId = _parseTargetUserId(resolvedChatId);
+        if (targetId !== null) {
             try {
                 await toggleBlockUser(targetId);
             } catch { /* ignore */ }
@@ -359,11 +355,9 @@ export default function ChatScreen() {
         }
 
         setIsReportVisible(false);
-        // Parse user id
-        const parts = resolvedChatId.split('_');
-        const targetIdStr = parts[parts.length - 1];
-        const targetId = parseInt(targetIdStr, 10);
-        if (!isNaN(targetId)) {
+        // BUG-13: Parse user id
+        const targetId = _parseTargetUserId(resolvedChatId);
+        if (targetId !== null) {
             try {
                 await createReport({ target_type: "user", target_id: targetId, reason: "harassment", description: reportText.trim() });
                 await toggleBlockUser(targetId);

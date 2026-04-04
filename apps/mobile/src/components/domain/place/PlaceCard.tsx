@@ -91,76 +91,76 @@ const PlaceCardComponent = function PlaceCard({
         style={[styles.card]}
         testID={testID}
       >
-      <View style={styles.imageContainer}>
-        {imagePlaceholder ? (
-          <View style={[styles.imagePlaceholder, { backgroundColor: colors.surface.elevated }]}>
-            <IconSymbol name="mappin.and.ellipse" size={32} color={colors.text.tertiary} />
-            <Text style={[styles.placeholderLabel, { color: colors.text.tertiary }]} numberOfLines={1}>
-              Görsel eklenmedi
+        <View style={styles.imageContainer}>
+          {imagePlaceholder ? (
+            <View style={[styles.imagePlaceholder, { backgroundColor: colors.surface.elevated }]}>
+              <IconSymbol name="mappin.and.ellipse" size={32} color={colors.text.tertiary} />
+              <Text style={[styles.placeholderLabel, { color: colors.text.tertiary }]} numberOfLines={1}>
+                Görsel eklenmedi
+              </Text>
+            </View>
+          ) : (
+            <>
+              <Image source={image as any} style={[styles.image, { backgroundColor: colors.surface.elevated }]} contentFit="contain" cachePolicy="memory-disk" />
+              <LinearGradient
+                colors={['rgba(0,0,0,0.15)', 'rgba(0,0,0,0.5)', 'rgba(0,0,0,0.82)']}
+                locations={[0.2, 0.55, 1]}
+                style={styles.gradient}
+              />
+            </>
+          )}
+          {location ? (
+            <View
+              style={[
+                styles.locationBadge,
+                {
+                  backgroundColor: 'rgba(0,0,0,0.4)',
+                },
+              ]}
+            >
+              <IconSymbol name="mappin.circle.fill" size={11} color="rgba(255,255,255,0.95)" />
+              <Text style={styles.locationBadgeText} numberOfLines={1}>{location}</Text>
+            </View>
+          ) : null}
+        </View>
+        <View style={[styles.content, {
+          backgroundColor: colors.background.secondary,
+        }]}>
+          {isRecommended && (
+            <View style={[styles.recommendedBadge, { backgroundColor: colors.accent.primary + '18' }]}>
+              <IconSymbol name="sparkles" size={11} color={colors.accent.primary} />
+              <Text style={[styles.recommendedText, { color: colors.accent.primary }]}>Senin için önerildi</Text>
+            </View>
+          )}
+          <View style={styles.titleRow}>
+            <Text style={[titleStyle as TextStyle, styles.title]} numberOfLines={2}>
+              {title}
             </Text>
+            {distance_m != null && (
+              <Text style={[styles.distanceText, { color: colors.text.tertiary }]}>
+                {distance_m < 1000 ? `${distance_m}m` : `${(distance_m / 1000).toFixed(1)}km`}
+              </Text>
+            )}
           </View>
-        ) : (
-          <>
-            <Image source={image as any} style={styles.image} contentFit="cover" cachePolicy="memory-disk" />
-            <LinearGradient
-              colors={['rgba(0,0,0,0.15)', 'rgba(0,0,0,0.5)', 'rgba(0,0,0,0.82)']}
-              locations={[0.2, 0.55, 1]}
-              style={styles.gradient}
-            />
-          </>
-        )}
-        {location ? (
-          <View
-            style={[
-              styles.locationBadge,
-              {
-                backgroundColor: 'rgba(0,0,0,0.4)',
-              },
-            ]}
-          >
-            <IconSymbol name="mappin.circle.fill" size={11} color="rgba(255,255,255,0.95)" />
-            <Text style={styles.locationBadgeText} numberOfLines={1}>{location}</Text>
-          </View>
-        ) : null}
-      </View>
-      <View style={[styles.content, { 
-        backgroundColor: colors.background.secondary,
-      }]}>
-        {isRecommended && (
-          <View style={[styles.recommendedBadge, { backgroundColor: colors.accent.primary + '18' }]}>
-            <IconSymbol name="sparkles" size={11} color={colors.accent.primary} />
-            <Text style={[styles.recommendedText, { color: colors.accent.primary }]}>Senin için önerildi</Text>
-          </View>
-        )}
-        <View style={styles.titleRow}>
-          <Text style={[titleStyle as TextStyle, styles.title]} numberOfLines={2}>
-            {title}
-          </Text>
-          {distance_m != null && (
-            <Text style={[styles.distanceText, { color: colors.text.tertiary }]}>
-              {distance_m < 1000 ? `${distance_m}m` : `${(distance_m / 1000).toFixed(1)}km`}
+          {explanation && (
+            <Text style={[styles.explanation, { color: colors.text.secondary }]} numberOfLines={3}>
+              {explanation}
             </Text>
           )}
+          {!explanation && subtitle && (
+            <Text style={[styles.subtitle, { color: subtitleColor }]} numberOfLines={2}>
+              {subtitle}
+            </Text>
+          )}
+          {tags && tags.length > 0 && (
+            <View style={styles.tags}>
+              {tags.slice(0, 3).map((tag, index) => (
+                <Chip key={index} label={tag} size="small" />
+              ))}
+            </View>
+          )}
         </View>
-        {explanation && (
-          <Text style={[styles.explanation, { color: colors.text.secondary }]} numberOfLines={3}>
-            {explanation}
-          </Text>
-        )}
-        {!explanation && subtitle && (
-          <Text style={[styles.subtitle, { color: subtitleColor }]} numberOfLines={2}>
-            {subtitle}
-          </Text>
-        )}
-        {tags && tags.length > 0 && (
-          <View style={styles.tags}>
-            {tags.slice(0, 3).map((tag, index) => (
-              <Chip key={index} label={tag} size="small" />
-            ))}
-          </View>
-        )}
-      </View>
-    </TouchableOpacity>
+      </TouchableOpacity>
     </View>
   );
 };

@@ -134,16 +134,6 @@ export function CreateBottomSheet({ visible, onClose }: CreateBottomSheetProps) 
             },
         },
         {
-            id: "edits",
-            label: "Edits",
-            icon: "rectangle.split.2x2",
-            badge: "NEW",
-            onPress: () => {
-                lightImpact();
-                onClose();
-            },
-        },
-        {
             id: "post",
             label: "Gönderi",
             icon: "square.grid.3x3",
@@ -161,25 +151,6 @@ export function CreateBottomSheet({ visible, onClose }: CreateBottomSheetProps) 
                 lightImpact();
                 onClose();
                 router.push("/contentCreation/CreatePostScreen" as any);
-            },
-        },
-        {
-            id: "highlight",
-            label: "Öne Çıkanlar",
-            icon: "heart.circle",
-            onPress: () => {
-                lightImpact();
-                onClose();
-                router.push("/profile/create-highlight" as any);
-            },
-        },
-        {
-            id: "live",
-            label: "Canlı",
-            icon: "dot.radiowaves.left.and.right",
-            onPress: () => {
-                lightImpact();
-                onClose();
             },
         },
     ];

@@ -187,7 +187,7 @@ def read_place(place_id: int, db: Session = Depends(get_db)):
 
 
 @router.get("/places/{place_id}/photo")
-def get_place_photo(place_id: int, max_width: int = 400, db: Session = Depends(get_db)):
+def get_place_photo(place_id: int, max_width: int = 800, db: Session = Depends(get_db)):
     """Mekanın Google fotoğrafını güvenli bir şekilde sunar (API anahtarını gizler)."""
     place = crud.get_place_by_id(db, place_id=place_id)
     if not place or not place.photo_url:
