@@ -163,6 +163,11 @@ def login(
 
     user = crud.authenticate_user(db, user_data.email, user_data.password)
     if not user:
+        if crud.get_pending_user_by_email(db, user_data.email):
+            raise HTTPException(
+                status_code=403, 
+                detail="pending_verification: Lütfen önce e-posta adresinize gönderilen kod ile hesabınızı doğrulayın."
+            )
         record_failed_login(ip)
         raise HTTPException(status_code=401, detail="E-posta veya şifre hatalı.")
 

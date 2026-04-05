@@ -23,6 +23,7 @@ function useProtectedRoute() {
       segments[0] === "login" ||
       segments[0] === "register" ||
       segments[0] === "forgot-password" ||
+      segments[0] === "verify-email" ||
       (segments.length === 1 && !segments[0]);
 
     const navigate = () => {

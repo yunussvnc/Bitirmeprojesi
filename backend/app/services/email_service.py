@@ -151,6 +151,14 @@ def _send_email_mock(to_email: str, subject: str, body: str) -> None:
     logger.info("📧  MOCK E-POSTA (SMTP yapılandırılmamış)")
     logger.info("   Kime : %s", to_email)
     logger.info("   Konu : %s", subject)
+    logger.info("   İçerik (HTML): %s...", body[:300].replace("\n", "")) # HTML'in bir kısmını bas
+    
+    # Pratiklik için kod arayalım (HTML içindeki ardışık 6 rakam)
+    import re
+    codes = re.findall(r'>(\d)<', body)
+    if len(codes) >= 6:
+        logger.info("   Bulunan Kod: %s", "".join(codes[:6]))
+        
     logger.info("=" * 60)
 
 

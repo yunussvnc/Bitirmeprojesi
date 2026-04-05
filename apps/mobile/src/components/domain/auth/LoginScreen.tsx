@@ -204,6 +204,15 @@ export default function LoginScreen() {
       if (err?.response?.data?.detail) {
         msg = err.response.data.detail;
       }
+
+      if (msg.includes('pending_verification:')) {
+        const cleanMsg = msg.replace('pending_verification:', '').trim();
+        Alert.alert('Doğrulama Gerekli', cleanMsg, [
+          { text: 'Doğrula', onPress: () => router.replace({ pathname: '/verify-email', params: { email: encodeURIComponent(email.trim()) } }) }
+        ]);
+        return;
+      }
+
       setErrors({ general: msg });
       Alert.alert('Giriş Hatası', msg);
     } finally {
