@@ -1,11 +1,11 @@
 {
   "expo": {
-    "name": "mobile",
-    "slug": "mobile",
+    "name": "AsEmOs",
+    "slug": "asemos",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "mobile",
+    "scheme": "asemos",
     "userInterfaceStyle": "automatic",
     "ios": {
       "buildNumber": "1",
@@ -15,11 +15,10 @@
         "NSPhotoLibraryUsageDescription": "Bu uygulama yorumlarınıza fotoğraf eklemeniz için galeri erişimine ihtiyaç duyar.",
         "NSCameraUsageDescription": "Bu uygulama yorumlarınıza fotoğraf çekmeniz için kamera erişimine ihtiyaç duyar.",
         "NSAppTransportSecurity": {
-          "NSAllowsArbitraryLoads": true,
           "NSAllowsLocalNetworking": true
         }
       },
-      "bundleIdentifier": "com.anonymous.mobile"
+      "bundleIdentifier": "com.asemos.mobile"
     },
     "android": {
       "versionCode": 1,
@@ -49,24 +48,12 @@
           ],
           "data": [
             {
-              "scheme": "mobile"
-            }
-          ]
-        },
-        {
-          "action": "VIEW",
-          "category": [
-            "BROWSABLE",
-            "DEFAULT"
-          ],
-          "data": [
-            {
-              "scheme": "mobile"
+              "scheme": "asemos"
             }
           ]
         }
       ],
-      "package": "com.anonymous.mobile"
+      "package": "com.asemos.mobile"
     },
     "web": {
       "output": "static",
@@ -74,6 +61,7 @@
     },
     "plugins": [
       "expo-router",
+      "expo-symbols",
       [
         "expo-image-picker",
         {
@@ -95,8 +83,7 @@
       ]
     ],
     "experiments": {
-      "typedRoutes": true,
-      "reactCompiler": true
+      "typedRoutes": true
     }
   }
 }

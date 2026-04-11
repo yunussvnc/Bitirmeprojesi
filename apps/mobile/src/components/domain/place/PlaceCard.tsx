@@ -34,6 +34,7 @@ export interface PlaceCardProps {
   explanation?: string;
   distance_m?: number;
   isRecommended?: boolean;
+  hasMenu?: boolean;
   onPress: () => void;
   testID?: string;
 }
@@ -66,6 +67,7 @@ const PlaceCardComponent = function PlaceCard({
   explanation,
   distance_m,
   isRecommended = false,
+  hasMenu = false,
   onPress,
   testID,
 }: PlaceCardProps) {
@@ -154,9 +156,23 @@ const PlaceCardComponent = function PlaceCard({
           )}
           {tags && tags.length > 0 && (
             <View style={styles.tags}>
+              {hasMenu && (
+                <View style={styles.menuBadge}>
+                  <IconSymbol name="list.bullet.clipboard.fill" size={10} color="#f59e0b" />
+                  <Text style={styles.menuBadgeText}>Menü</Text>
+                </View>
+              )}
               {tags.slice(0, 3).map((tag, index) => (
                 <Chip key={index} label={tag} size="small" />
               ))}
+            </View>
+          )}
+          {!tags?.length && hasMenu && (
+            <View style={styles.tags}>
+              <View style={styles.menuBadge}>
+                <IconSymbol name="list.bullet.clipboard.fill" size={10} color="#f59e0b" />
+                <Text style={styles.menuBadgeText}>Menü</Text>
+              </View>
             </View>
           )}
         </View>
@@ -307,5 +323,22 @@ const styles = StyleSheet.create({
     gap: 6,
     marginTop: 2,
     justifyContent: 'flex-end',
+  },
+  menuBadge: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 3,
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+    borderRadius: 8,
+    backgroundColor: 'rgba(245, 158, 11, 0.12)',
+    borderWidth: 1,
+    borderColor: 'rgba(245, 158, 11, 0.25)',
+  },
+  menuBadgeText: {
+    fontSize: 10,
+    fontWeight: '700',
+    color: '#f59e0b',
+    letterSpacing: 0.3,
   },
 });

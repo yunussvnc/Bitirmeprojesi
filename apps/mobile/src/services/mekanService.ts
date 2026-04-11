@@ -1,5 +1,6 @@
 import { apiGet, apiPut } from "@/src/utils/apiClient";
 import { logger } from "@/src/utils/logger";
+import { API_BASE_URL } from "@/src/constants/api";
 
 export type Place = {
   id: number | string;
@@ -23,6 +24,8 @@ export type Place = {
   closing_time?: string;
   review_count?: number;
   saved_count?: number;
+  popularity_score?: number;
+  menu_items?: any[];
 };
 
 export type PaginatedPlaces = {
@@ -50,13 +53,11 @@ function normalizePlace(p: any): Place {
   
   let photo_url = p?.photo_url || undefined;
   if (photo_url && photo_url.startsWith('google_photo_ref:')) {
-    const API_BASE_URL = require('@/src/constants/api').API_BASE_URL;
     photo_url = `${API_BASE_URL}/places/${id}/photo`;
   }
 
   let gallery_urls: string[] | undefined = undefined;
   if (Array.isArray(p?.gallery_urls)) {
-    const API_BASE_URL = require('@/src/constants/api').API_BASE_URL;
     gallery_urls = p.gallery_urls.map((url: string) => {
       if (typeof url === 'string' && url.startsWith('google_photo_ref:')) {
          const ref = url.split('google_photo_ref:')[1];
@@ -78,8 +79,20 @@ function normalizePlace(p: any): Place {
   const closing_time = p?.closing_time || undefined;
   const review_count = typeof p?.review_count === 'number' ? p.review_count : undefined;
   const saved_count = typeof p?.saved_count === 'number' ? p.saved_count : undefined;
+  const popularity_score = typeof p?.popularity_score === 'number' ? p.popularity_score : undefined;
+  
+  let menu_items: any[] | undefined = undefined;
+  const rawMenu = p?.menu_items ?? p?.menu_items_json;
+  if (rawMenu) {
+    try {
+      menu_items = typeof rawMenu === 'string' ? JSON.parse(rawMenu) : rawMenu;
+      if (!Array.isArray(menu_items)) menu_items = undefined;
+    } catch {
+      menu_items = undefined;
+    }
+  }
 
-  return { id, name, subtitle, description, campaign_text, tags, category, address, city, latitude, longitude, photo_url, gallery_urls, video_url, average_rating, price_range, features, opening_time, closing_time, review_count, saved_count };
+  return { id, name, subtitle, description, campaign_text, tags, category, address, city, latitude, longitude, photo_url, gallery_urls, video_url, average_rating, price_range, features, opening_time, closing_time, review_count, saved_count, popularity_score, menu_items };
 }
 
 export async function getPlaces(page = 1, pageSize = 20): Promise<PaginatedPlaces> {
@@ -154,8 +167,9 @@ export async function getMyVenue(): Promise<Place | null> {
 
 export async function updateMyVenue(payload: Partial<Place>): Promise<Place | null> {
   try {
-    const { id, name, subtitle, tags, average_rating, price_range, ...updateData } = payload as any;
-    const { data } = await apiPut<any>('/places/my-venue', updateData);
+    // Only strip fields that the backend PlaceUpdate schema doesn't accept
+    const { id, subtitle, tags, average_rating, ...updateData } = payload as any;
+    const data = await apiPut<any>('/places/my-venue', updateData);
     if (!data || !data.id) return null;
     return normalizePlace(data);
   } catch (error) {
@@ -163,3 +177,15 @@ export async function updateMyVenue(payload: Partial<Place>): Promise<Place | nu
     throw error;
   }
 }
+
+export async function getMyVenueStats(): Promise<Place | null> {
+  try {
+    const data = await apiGet<any>('/places/my-venue/stats');
+    if (!data || !data.id) return null;
+    return normalizePlace(data);
+  } catch (error) {
+    logger.error("[getMyVenueStats] Error:", error);
+    return null;
+  }
+}
+

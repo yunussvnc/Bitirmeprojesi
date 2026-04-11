@@ -79,6 +79,13 @@ export default function VenueTabsLayout() {
             listeners: () => ({ tabPress: () => selection() }),
           }}
         />
+        <Tabs.Screen
+          name="stats"
+          options={{
+            href: null,
+            title: "İstatistikler",
+          }}
+        />
       </Tabs>
     </TabBarVisibilityProvider>
   );

@@ -89,7 +89,52 @@ const MAPPING = {
   'smiley': 'mood',
   'person.crop.circle.badge.plus': 'person-add',
   'xmark.circle.fill': 'cancel',
+  // --- Production crash fix: 29 previously unmapped icons ---
+  'archivebox': 'archive',
+  'arrow.triangle.2.circlepath': 'sync',
+  'arrow.uturn.backward': 'undo',
+  'building.2': 'business',
+  'camera.rotate.fill': 'flip-camera-ios',
+  'checkmark.circle.fill': 'check-circle',
+  'clock': 'access-time',
+  'doc.text.image': 'article',
+  'doc.text.magnifyingglass': 'find-in-page',
+  'dollarsign.circle': 'attach-money',
+  'envelope.fill': 'email',
+  'exclamationmark.triangle.fill': 'warning',
+  'fork.knife': 'restaurant',
+  'graduationcap.fill': 'school',
+  'link': 'link',
+  'list.bullet.clipboard': 'assignment',
+  'list.bullet.clipboard.fill': 'assignment',
+  'lock.rotation': 'screen-lock-rotation',
+  'mappin': 'place',
+  'nosign': 'block',
+  'pencil': 'edit',
+  'person.text.rectangle': 'badge',
+  'photo.on.rectangle': 'collections',
+  'photo.badge.plus': 'add-photo-alternate',
+  'qrcode.viewfinder': 'qr-code-scanner',
+  'ruler.fill': 'straighten',
+  'square.on.square.squareshape.controlhandles': 'content-copy',
+  'text.bubble.fill': 'textsms',
+  'timer': 'timer',
+  'trash.fill': 'delete',
+  'tray.and.arrow.up': 'upload',
+  'video.badge.plus': 'video-call',
+  'arrow.turn.down.right': 'subdirectory-arrow-right',
+  'star.bubble.fill': 'rate-review',
+  'building.2.fill': 'business',
+  'clock.fill': 'schedule',
+  'tag.fill': 'sell',
+  'doc.text.image.fill': 'article',
+  'creditcard.fill': 'credit-card',
+  'arrow.right.square.fill': 'exit-to-app',
+  'gearshape.fill': 'settings',
 } as IconMapping;
+
+/** Fallback icon when a mapping is missing — prevents Android crash */
+const FALLBACK_ICON: ComponentProps<typeof MaterialIcons>['name'] = 'help-outline';
 
 /**
  * An icon component that uses native SF Symbols on iOS, and Material Icons on Android and web.
@@ -108,5 +153,7 @@ export function IconSymbol({
   style?: StyleProp<TextStyle>;
   weight?: SymbolWeight;
 }) {
-  return <MaterialIcons color={color} size={size} name={MAPPING[name]} style={style} />;
+  const mappedName = MAPPING[name] ?? FALLBACK_ICON;
+  return <MaterialIcons color={color} size={size} name={mappedName} style={style} />;
 }
+

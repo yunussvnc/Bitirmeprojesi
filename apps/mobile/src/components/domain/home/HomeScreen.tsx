@@ -480,6 +480,7 @@ export default function HomeScreen() {
           explanation={isAi ? (item as RecommendItem).explanation : undefined}
           distance_m={isAi ? (item as RecommendItem).distance_m : undefined}
           isRecommended={isAi}
+          hasMenu={!!(place?.menu_items && place.menu_items.length > 0)}
           onPress={() => handlePlacePress(id)}
         />
       );

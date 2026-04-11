@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import { View, StyleSheet, ActivityIndicator } from 'react-native';
+import { useFocusEffect } from 'expo-router';
 import { useAuthStore } from '@/src/store/useAuthStore';
 import { getMyVenue, Place } from '@/src/services/mekanService';
 import PlaceDetailScreen from '@/src/components/domain/place/PlaceDetailScreen';
@@ -8,6 +9,7 @@ export default function VenueDashboardScreen() {
   const { user } = useAuthStore();
   const [loading, setLoading] = useState(true);
   const [venue, setVenue] = useState<Place | null>(null);
+  const [refreshKey, setRefreshKey] = useState(0);
 
   useEffect(() => {
     async function fetchVenue() {
@@ -22,6 +24,13 @@ export default function VenueDashboardScreen() {
     }
     fetchVenue();
   }, []);
+
+  // Re-fetch place data every time this tab gains focus
+  useFocusEffect(
+    useCallback(() => {
+      setRefreshKey((prev) => prev + 1);
+    }, [])
+  );
 
   if (loading) {
     return (
@@ -40,7 +49,7 @@ export default function VenueDashboardScreen() {
   }
 
   // Render the exact same Place Detail Screen that users see!
-  return <PlaceDetailScreen providedId={String(venue.id)} isVenueDashboard />;
+  return <PlaceDetailScreen key={refreshKey} providedId={String(venue.id)} isVenueDashboard />;
 }
 
 const styles = StyleSheet.create({

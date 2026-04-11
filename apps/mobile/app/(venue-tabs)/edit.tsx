@@ -49,6 +49,12 @@ export default function VenueEditScreen() {
   const [newMenuName, setNewMenuName] = useState('');
   const [newMenuPrice, setNewMenuPrice] = useState('');
   const [newMenuDesc, setNewMenuDesc] = useState('');
+  const [newMenuImg, setNewMenuImg] = useState<string | null>(null);
+  const [newMenuCategory, setNewMenuCategory] = useState('');
+
+  // Menu Upload Type Preference
+  const [menuUploadType, setMenuUploadType] = useState<'text' | 'image'>('text');
+  const [menuPhotos, setMenuPhotos] = useState<string[]>([]);
 
   // Fake Reviews State
   const [reviews, setReviews] = useState([
@@ -72,6 +78,17 @@ export default function VenueEditScreen() {
           setCoverPhoto(data.photo_url || null);
           setOpeningTime(data.opening_time || '09:00');
           setClosingTime(data.closing_time || '23:00');
+          
+          if (data.menu_items && Array.isArray(data.menu_items) && data.menu_items.length > 0) {
+            const first = data.menu_items[0];
+            if (first.type === 'image') {
+              setMenuUploadType('image');
+              setMenuPhotos(data.menu_items.map((m: any) => m.uri));
+            } else {
+              setMenuUploadType('text');
+              setMenuItems(data.menu_items);
+            }
+          }
         }
       } catch (err) {
         console.error("Mekan detayları alınamadı", err);
@@ -86,6 +103,10 @@ export default function VenueEditScreen() {
     lightImpact();
     setSaving(true);
     try {
+      const menuPayload = menuUploadType === 'image'
+        ? menuPhotos.map((uri, i) => ({ id: i, type: 'image', uri }))
+        : menuItems;
+
       const updated = await updateMyVenue({
         name,
         address,
@@ -94,6 +115,7 @@ export default function VenueEditScreen() {
         photo_url: coverPhoto || undefined,
         opening_time: openingTime,
         closing_time: closingTime,
+        menu_items: menuPayload,
       });
       if (updated) {
         setVenue(updated);
@@ -134,6 +156,30 @@ export default function VenueEditScreen() {
     }
   };
 
+  const pickMenuItemImage = async () => {
+    lightImpact();
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [1, 1],
+      quality: 0.8,
+    });
+    if (!result.canceled && result.assets && result.assets.length > 0) {
+      setNewMenuImg(result.assets[0].uri);
+    }
+  };
+
+  const pickMenuPhoto = async () => {
+    lightImpact();
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      quality: 0.8,
+    });
+    if (!result.canceled && result.assets && result.assets.length > 0) {
+      setMenuPhotos([...menuPhotos, result.assets[0].uri]);
+    }
+  };
+
   const addMenuItem = () => {
     if (!newMenuName || !newMenuPrice) return;
     setMenuItems([{ 
@@ -141,11 +187,14 @@ export default function VenueEditScreen() {
       name: newMenuName, 
       desc: newMenuDesc || 'İşletme Spesiyali', 
       price: newMenuPrice + ' ₺', 
-      img: 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=200' 
+      img: newMenuImg || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=200',
+      category: newMenuCategory || 'Menü',
     }, ...menuItems]);
     setNewMenuName('');
     setNewMenuPrice('');
     setNewMenuDesc('');
+    setNewMenuImg(null);
+    setNewMenuCategory('');
     success();
   };
 
@@ -409,32 +458,127 @@ export default function VenueEditScreen() {
                 <IconSymbol name="xmark.circle.fill" size={28} color="rgba(255,255,255,0.4)" />
               </TouchableOpacity>
             </View>
-            <View style={styles.menuAddSection}>
-              <View style={{ flexDirection: 'row', gap: 10 }}>
-                <Input value={newMenuName} onChangeText={setNewMenuName} placeholder="Ürün Adı" containerStyle={{ flex: 2, marginBottom: 12 }} />
-                <Input value={newMenuPrice} onChangeText={setNewMenuPrice} placeholder="Fiyat (TL)" containerStyle={{ flex: 1, marginBottom: 12 }} keyboardType="numeric" />
-              </View>
-              <Input value={newMenuDesc} onChangeText={setNewMenuDesc} placeholder="Ürün açıklaması (İsteğe bağlı)" containerStyle={{ marginBottom: 12 }} />
-              <Button variant="secondary" style={{ borderColor: 'rgba(255,255,255,0.2)' }} onPress={addMenuItem}>+ Ürünü Menüye Ekle</Button>
+
+            {/* Segmented Control for Menu Type */}
+            <View style={styles.menuModeTabs}>
+              <TouchableOpacity
+                style={[styles.menuModeTab, menuUploadType === 'text' && styles.menuModeTabActive]}
+                onPress={() => { lightImpact(); setMenuUploadType('text'); }}
+              >
+                <IconSymbol name="list.bullet" size={16} color={menuUploadType === 'text' ? '#10b981' : 'rgba(255,255,255,0.5)'} />
+                <Text style={[styles.menuModeTabText, menuUploadType === 'text' && styles.menuModeTabTextActive]}>Tek Tek Ekle</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[styles.menuModeTab, menuUploadType === 'image' && styles.menuModeTabActive]}
+                onPress={() => { lightImpact(); setMenuUploadType('image'); }}
+              >
+                <IconSymbol name="photo.fill" size={16} color={menuUploadType === 'image' ? '#10b981' : 'rgba(255,255,255,0.5)'} />
+                <Text style={[styles.menuModeTabText, menuUploadType === 'image' && styles.menuModeTabTextActive]}>Fotoğraf Yükle</Text>
+              </TouchableOpacity>
             </View>
-            <FlatList
-              data={menuItems}
-              keyExtractor={item => item.id.toString()}
-              contentContainerStyle={{ paddingBottom: 60 }}
-              showsVerticalScrollIndicator={false}
-              renderItem={({ item }) => (
-                <View style={styles.menuItemCard}>
-                  <Image source={{ uri: item.img }} style={styles.menuItemImg} />
-                  <View style={styles.menuItemInfo}>
-                    <Text style={styles.menuItemName}>{item.name}</Text>
-                    <Text style={styles.menuItemDesc}>{item.desc}</Text>
+
+            {menuUploadType === 'text' ? (
+              <>
+                <View style={styles.menuAddSection}>
+                  <View style={{ flexDirection: 'row', gap: 10 }}>
+                    <Input value={newMenuName} onChangeText={setNewMenuName} placeholder="Ürün Adı" containerStyle={{ flex: 2, marginBottom: 12 }} />
+                    <Input value={newMenuPrice} onChangeText={setNewMenuPrice} placeholder="Fiyat (TL)" containerStyle={{ flex: 1, marginBottom: 12 }} keyboardType="numeric" />
                   </View>
-                  <View style={styles.menuItemPriceBadge}>
-                    <Text style={styles.menuItemPrice}>{item.price}</Text>
+                  <View style={{ flexDirection: 'row', gap: 10 }}>
+                    <Input value={newMenuCategory} onChangeText={setNewMenuCategory} placeholder="Kategori (Yemek, İçecek, Tatlı...)" containerStyle={{ flex: 2, marginBottom: 12 }} />
                   </View>
+                  <Input value={newMenuDesc} onChangeText={setNewMenuDesc} placeholder="Ürün açıklaması (İsteğe bağlı)" containerStyle={{ marginBottom: 12 }} />
+                  
+                  {/* Ürün Görseli Seçici */}
+                  <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12, marginBottom: 16 }}>
+                    <TouchableOpacity style={styles.menuImgPickerBtn} onPress={pickMenuItemImage} activeOpacity={0.8}>
+                      {newMenuImg ? (
+                        <View style={{width: '100%', height: '100%'}}>
+                          <Image source={{ uri: newMenuImg }} style={styles.menuImgPickerPreview} />
+                          <TouchableOpacity
+                            style={styles.menuImgRemoveBtn}
+                            onPress={() => { lightImpact(); setNewMenuImg(null); }}
+                            hitSlop={8}
+                          >
+                            <IconSymbol name="xmark" size={10} color="white" />
+                          </TouchableOpacity>
+                        </View>
+                      ) : (
+                        <View style={{ alignItems: 'center' }}>
+                          <IconSymbol name="photo.badge.plus" size={22} color="rgba(255,255,255,0.4)" />
+                          <Text style={styles.menuImgPickerLabel}>Görsel</Text>
+                        </View>
+                      )}
+                    </TouchableOpacity>
+                    <Text style={{ color: 'rgba(255,255,255,0.4)', fontSize: 13, flex: 1 }}>
+                      Ürün görseli eklemek menünüzün daha çekici görünmesini sağlar.
+                    </Text>
+                  </View>
+
+                  <Button variant="secondary" style={{ borderColor: 'rgba(255,255,255,0.2)' }} onPress={addMenuItem}>+ Ürünü Menüye Ekle</Button>
                 </View>
-              )}
-            />
+                <FlatList
+                  data={menuItems}
+                  keyExtractor={item => item.id.toString()}
+                  contentContainerStyle={{ paddingBottom: 60 }}
+                  showsVerticalScrollIndicator={false}
+                  renderItem={({ item }) => (
+                    <View style={styles.menuItemCard}>
+                      <Image source={{ uri: item.img }} style={styles.menuItemImg} />
+                      <View style={styles.menuItemInfo}>
+                        <Text style={styles.menuItemName}>{item.name}</Text>
+                        <Text style={styles.menuItemDesc}>{item.desc}</Text>
+                        {item.category ? (
+                          <View style={{ flexDirection: 'row', marginTop: 4 }}>
+                            <View style={{ backgroundColor: 'rgba(245, 158, 11, 0.15)', paddingHorizontal: 8, paddingVertical: 2, borderRadius: 6 }}>
+                              <Text style={{ color: '#fbbf24', fontSize: 11, fontWeight: '700' }}>{item.category}</Text>
+                            </View>
+                          </View>
+                        ) : null}
+                      </View>
+                      <View style={styles.menuItemPriceBadge}>
+                        <Text style={styles.menuItemPrice}>{item.price}</Text>
+                      </View>
+                      <TouchableOpacity
+                        style={styles.menuItemDeleteBtn}
+                        onPress={() => { lightImpact(); setMenuItems(menuItems.filter(m => m.id !== item.id)); }}
+                        hitSlop={8}
+                      >
+                        <IconSymbol name="trash" size={15} color="#ef4444" />
+                      </TouchableOpacity>
+                    </View>
+                  )}
+                />
+              </>
+            ) : (
+              <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 60 }}>
+                <Text style={styles.hintTextLeft}>
+                  Fiziksel menünüzün fotoğraflarını çekip direkt yükleyebilirsiniz. Toplu ürün girmek istemiyorsanız en pratik yoldur.
+                </Text>
+
+                <View style={styles.menuPhotosGrid}>
+                  {menuPhotos.map((uri, idx) => (
+                    <View key={idx} style={styles.menuPhotoWrapper}>
+                      <Image source={{ uri }} style={styles.menuPhotoPreview} />
+                      <TouchableOpacity 
+                        style={styles.menuPhotoRemoveBtn}
+                        onPress={() => {
+                          lightImpact();
+                          setMenuPhotos(menuPhotos.filter((_, i) => i !== idx));
+                        }}
+                      >
+                        <IconSymbol name="xmark" size={14} color="white" />
+                      </TouchableOpacity>
+                    </View>
+                  ))}
+                  
+                  <TouchableOpacity style={styles.menuPhotoAddBtn} onPress={pickMenuPhoto} activeOpacity={0.8}>
+                    <IconSymbol name="doc.text.image" size={32} color="rgba(255,255,255,0.4)" />
+                    <Text style={{ color: 'rgba(255,255,255,0.5)', marginTop: 8, fontWeight: '600', fontSize: 13 }}>Sayfa Ekle</Text>
+                  </TouchableOpacity>
+                </View>
+              </ScrollView>
+            )}
           </BlurView>
         </KeyboardAvoidingView>
       </Modal>
@@ -559,7 +703,23 @@ const styles = StyleSheet.create({
   videoUploadBtn: { flexDirection: 'row', backgroundColor: 'rgba(59, 130, 246, 0.15)', padding: 18, borderRadius: 24, borderCurve: 'continuous', alignItems: 'center', justifyContent: 'center', borderWidth: 1, borderColor: 'rgba(59, 130, 246, 0.3)' },
   videoUploadBtnText: { color: '#60a5fa', marginLeft: 12, fontSize: 16, fontWeight: '800' },
   
+  menuModeTabs: { flexDirection: 'row', backgroundColor: 'rgba(0,0,0,0.4)', borderRadius: 16, padding: 4, marginBottom: 20 },
+  menuModeTab: { flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', paddingVertical: 10, borderRadius: 12 },
+  menuModeTabActive: { backgroundColor: 'rgba(16, 185, 129, 0.15)' },
+  menuModeTabText: { color: 'rgba(255,255,255,0.5)', marginLeft: 8, fontWeight: '700', fontSize: 14 },
+  menuModeTabTextActive: { color: '#10b981' },
+
+  menuPhotosGrid: { flexDirection: 'row', flexWrap: 'wrap', gap: 12, marginTop: 12 },
+  menuPhotoWrapper: { width: '47%', aspectRatio: 0.75, borderRadius: 16, borderCurve: 'continuous', overflow: 'hidden', borderWidth: 1, borderColor: 'rgba(255,255,255,0.1)' },
+  menuPhotoPreview: { width: '100%', height: '100%' },
+  menuPhotoRemoveBtn: { position: 'absolute', top: 8, right: 8, backgroundColor: 'rgba(0,0,0,0.65)', width: 28, height: 28, borderRadius: 14, justifyContent: 'center', alignItems: 'center' },
+  menuPhotoAddBtn: { width: '47%', aspectRatio: 0.75, borderRadius: 16, borderCurve: 'continuous', backgroundColor: 'rgba(255,255,255,0.03)', justifyContent: 'center', alignItems: 'center', borderWidth: 1.5, borderColor: 'rgba(255,255,255,0.1)', borderStyle: 'dashed' },
+
   menuAddSection: { backgroundColor: 'rgba(255,255,255,0.03)', padding: 16, borderRadius: 24, borderCurve: 'continuous', marginBottom: 24, borderWidth: 1, borderColor: 'rgba(255,255,255,0.05)' },
+  menuImgPickerBtn: { width: 80, height: 80, borderRadius: 18, borderCurve: 'continuous', backgroundColor: 'rgba(255,255,255,0.05)', borderWidth: 1.5, borderColor: 'rgba(255,255,255,0.12)', borderStyle: 'dashed', justifyContent: 'center', alignItems: 'center', overflow: 'hidden' },
+  menuImgPickerPreview: { width: '100%', height: '100%', borderRadius: 18 },
+  menuImgPickerLabel: { color: 'rgba(255,255,255,0.4)', fontSize: 11, fontWeight: '700', marginTop: 4 },
+  menuImgRemoveBtn: { position: 'absolute', top: 4, right: 4, backgroundColor: 'rgba(0,0,0,0.65)', width: 18, height: 18, borderRadius: 9, justifyContent: 'center', alignItems: 'center' },
   menuItemCard: { flexDirection: 'row', padding: 16, backgroundColor: 'rgba(255,255,255,0.04)', borderRadius: 24, borderCurve: 'continuous', marginBottom: 12, borderWidth: 1, borderColor: 'rgba(255,255,255,0.06)', alignItems: 'center' },
   menuItemImg: { width: 56, height: 56, borderRadius: 16, backgroundColor: 'rgba(255,255,255,0.1)' },
   menuItemInfo: { flex: 1, marginHorizontal: 16 },
@@ -567,6 +727,7 @@ const styles = StyleSheet.create({
   menuItemDesc: { color: 'rgba(255,255,255,0.5)', fontSize: 13, lineHeight: 18 },
   menuItemPriceBadge: { backgroundColor: 'rgba(255,255,255,0.1)', paddingHorizontal: 12, paddingVertical: 8, borderRadius: 12, borderCurve: 'continuous' },
   menuItemPrice: { color: '#ffffff', fontSize: 14, fontWeight: '800' },
+  menuItemDeleteBtn: { marginLeft: 8, padding: 8 },
   
   reviewCard: { backgroundColor: 'rgba(255,255,255,0.04)', borderRadius: 24, borderCurve: 'continuous', padding: 20, marginBottom: 16, borderWidth: 1, borderColor: 'rgba(255,255,255,0.06)' },
   reviewUserRow: { flexDirection: 'row', alignItems: 'center', marginBottom: 12 },

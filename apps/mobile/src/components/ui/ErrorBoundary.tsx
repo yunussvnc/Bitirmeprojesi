@@ -5,9 +5,7 @@
 
 import React, { Component, type ErrorInfo, type ReactNode } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { useTheme } from "@/src/hooks/useTheme";
-import { IconSymbol } from "./icon-symbol";
-import { createTextStyle, spacing } from "@/src/constants/design";
+import { spacing } from "@/src/constants/design";
 
 interface Props {
   children: ReactNode;
@@ -64,25 +62,24 @@ function ErrorBoundaryFallback({
   error: Error;
   onRetry: () => void;
 }) {
-  const { colors } = useTheme();
-  const titleStyle = createTextStyle("heading", colors.text.primary);
-
+  // Hardcoded colors — ErrorBoundary MUST NOT depend on ThemeProvider
+  // If ThemeProvider crashes, this fallback would also crash (cascade failure)
   return (
-    <View style={[styles.container, { backgroundColor: colors.background.primary }]}>
-      <IconSymbol name="exclamationmark.triangle.fill" size={48} color={colors.semantic.warning} />
-      <Text style={[titleStyle, styles.title]}>Bir şeyler ters gitti</Text>
-      <Text style={[styles.message, { color: colors.text.secondary }]}>
+    <View style={[styles.container, { backgroundColor: '#0a0a0a' }]}>
+      <Text style={{ fontSize: 48 }}>⚠️</Text>
+      <Text style={[styles.title, { color: '#ffffff' }]}>Bir şeyler ters gitti</Text>
+      <Text style={[styles.message, { color: '#999999' }]}>
         Beklenmeyen bir hata oluştu. Lütfen tekrar deneyin.
       </Text>
       <TouchableOpacity
-        style={[styles.button, { backgroundColor: colors.accent.primary }]}
+        style={[styles.button, { backgroundColor: '#6366f1' }]}
         onPress={onRetry}
         activeOpacity={0.8}
       >
-        <Text style={[styles.buttonText, { color: colors.accent.onPrimary }]}>Tekrar Dene</Text>
+        <Text style={[styles.buttonText, { color: '#ffffff' }]}>Tekrar Dene</Text>
       </TouchableOpacity>
       {__DEV__ && (
-        <Text style={[styles.debug, { color: colors.text.tertiary }]} numberOfLines={3}>
+        <Text style={[styles.debug, { color: '#666666' }]} numberOfLines={3}>
           {error.message}
         </Text>
       )}

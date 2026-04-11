@@ -2,18 +2,25 @@
  * Haptics Utility
  * 
  * Centralized haptic feedback for better UX.
+ * All calls are wrapped in try/catch to prevent crashes on
+ * web, simulators, and devices without haptic hardware.
  * 
  * @module utils/haptics
  */
 
 import * as Haptics from 'expo-haptics';
+import { Platform } from 'react-native';
+
+/** Haptics only available on native (iOS/Android) */
+const canVibrate = Platform.OS === 'ios' || Platform.OS === 'android';
 
 /**
  * Light haptic feedback for subtle interactions
  * Use for: Button presses, filter selections, chip taps
  */
 export function lightImpact() {
-  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+  if (!canVibrate) return;
+  try { Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light); } catch {}
 }
 
 /**
@@ -21,7 +28,8 @@ export function lightImpact() {
  * Use for: Card presses, important actions
  */
 export function mediumImpact() {
-  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+  if (!canVibrate) return;
+  try { Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium); } catch {}
 }
 
 /**
@@ -29,7 +37,8 @@ export function mediumImpact() {
  * Use for: Save/delete actions, confirmations
  */
 export function heavyImpact() {
-  Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy);
+  if (!canVibrate) return;
+  try { Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Heavy); } catch {}
 }
 
 /**
@@ -37,7 +46,8 @@ export function heavyImpact() {
  * Use for: Successful saves, confirmations
  */
 export function success() {
-  Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success);
+  if (!canVibrate) return;
+  try { Haptics.notificationAsync(Haptics.NotificationFeedbackType.Success); } catch {}
 }
 
 /**
@@ -45,7 +55,8 @@ export function success() {
  * Use for: Warnings, errors
  */
 export function warning() {
-  Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning);
+  if (!canVibrate) return;
+  try { Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning); } catch {}
 }
 
 /**
@@ -53,7 +64,8 @@ export function warning() {
  * Use for: Errors, failures
  */
 export function error() {
-  Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error);
+  if (!canVibrate) return;
+  try { Haptics.notificationAsync(Haptics.NotificationFeedbackType.Error); } catch {}
 }
 
 /**
@@ -61,5 +73,7 @@ export function error() {
  * Use for: Picker selections, toggle switches
  */
 export function selection() {
-  Haptics.selectionAsync();
+  if (!canVibrate) return;
+  try { Haptics.selectionAsync(); } catch {}
 }
+

@@ -58,6 +58,7 @@ export default function RegisterScreen() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
+  const [termsAccepted, setTermsAccepted] = useState(false);
   // roleType eklendi ("user" veya "venue")
   const [roleType, setRoleType] = useState<'user' | 'venue'>('user');
   const [venueName, setVenueName] = useState('');
@@ -191,6 +192,12 @@ export default function RegisterScreen() {
   const handleRegister = useCallback(async () => {
     if (isSubmittingRef.current) return;
     if (!validateForm()) return;
+    
+    if (!termsAccepted) {
+      Alert.alert('Eksik Onay', 'Kayıt olabilmek için Kullanım Koşulları ve Gizlilik Politikası\'nı kabul etmelisiniz.', [{ text: 'Tamam' }]);
+      return;
+    }
+    
     isSubmittingRef.current = true;
     lightImpact();
     setLoading(true);
@@ -230,7 +237,7 @@ export default function RegisterScreen() {
       isSubmittingRef.current = false;
       setLoading(false);
     }
-  }, [validateForm, fullName, venueName, email, password, roleType]);
+  }, [validateForm, fullName, venueName, email, password, roleType, termsAccepted]);
 
   const handleSocialRegister = useCallback((provider: string) => {
     lightImpact();
@@ -361,6 +368,20 @@ export default function RegisterScreen() {
                           error={errors.confirmPassword}
                           containerStyle={styles.inputContainer}
                         />
+                        <TouchableOpacity
+                          style={styles.termsContainer}
+                          onPress={() => { setTermsAccepted(!termsAccepted); lightImpact(); }}
+                          activeOpacity={0.8}
+                        >
+                          <View style={[styles.checkbox, termsAccepted && styles.checkboxActive]}>
+                            {termsAccepted && <IconSymbol name="checkmark" size={14} color="#000" />}
+                          </View>
+                          <Text style={styles.termsText}>
+                            <Text style={styles.termsLink} onPress={() => WebBrowser.openBrowserAsync('https://asemos.com/terms')}>Kullanım Koşulları</Text> ve{' '}
+                            <Text style={styles.termsLink} onPress={() => WebBrowser.openBrowserAsync('https://asemos.com/privacy')}>Gizlilik Politikası</Text>'nı okudum ve kabul ediyorum.
+                          </Text>
+                        </TouchableOpacity>
+
                         <Button
                           variant="primary"
                           size="large"
@@ -504,7 +525,40 @@ const styles = StyleSheet.create({
     color: '#000',
     fontWeight: '700',
   },
-  registerButton: { marginTop: 8 },
+  termsContainer: {
+    flexDirection: 'row',
+    alignItems: 'flex-start',
+    marginTop: 8,
+    marginBottom: 20,
+    paddingHorizontal: 4,
+    gap: 12,
+  },
+  checkbox: {
+    width: 20,
+    height: 20,
+    borderRadius: 6,
+    borderWidth: 1.5,
+    borderColor: 'rgba(255,255,255,0.4)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 2,
+  },
+  checkboxActive: {
+    backgroundColor: '#fff',
+    borderColor: '#fff',
+  },
+  termsText: {
+    flex: 1,
+    fontSize: 13,
+    color: 'rgba(255,255,255,0.75)',
+    lineHeight: 18,
+  },
+  termsLink: {
+    fontWeight: '600',
+    color: '#fff',
+    textDecorationLine: 'underline',
+  },
+  registerButton: { marginTop: 0 },
   divider: { flexDirection: 'row', alignItems: 'center', marginVertical: 18 },
   dividerLine: { flex: 1, height: 1, backgroundColor: 'rgba(255,255,255,0.25)' },
   dividerLabel: { marginHorizontal: 18, fontSize: 13, fontWeight: '600', color: 'rgba(255,255,255,0.7)', letterSpacing: 0.8 },

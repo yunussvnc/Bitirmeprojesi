@@ -1,4 +1,5 @@
-from pydantic import BaseModel, EmailStr, Field
+from pydantic import BaseModel, EmailStr, Field, model_validator
+import json as _json
 from datetime import datetime, date
 from typing import Optional, List
 
@@ -87,6 +88,41 @@ class Place(PlaceBase):
     popularity_score: Optional[float] = 0.0
     google_place_id: Optional[str] = None
     user_ratings_total: Optional[int] = None
+
+    @model_validator(mode='before')
+    @classmethod
+    def _parse_json_fields(cls, values):
+        """ORM modelinden gelen JSON string alanları Python objelerine dönüştürür."""
+        # Handle ORM objects
+        if hasattr(values, '__dict__'):
+            obj = values
+            data = {}
+            # menu_items_json -> menu_items
+            raw_menu = getattr(obj, 'menu_items_json', None)
+            if raw_menu and isinstance(raw_menu, str):
+                try:
+                    data['menu_items'] = _json.loads(raw_menu)
+                except Exception:
+                    pass
+            # gallery_urls (stored as JSON string)
+            raw_gallery = getattr(obj, 'gallery_urls', None)
+            if raw_gallery and isinstance(raw_gallery, str):
+                try:
+                    data['gallery_urls'] = _json.loads(raw_gallery)
+                except Exception:
+                    pass
+            # opening_hours_json (stored as JSON string)
+            raw_hours = getattr(obj, 'opening_hours_json', None)
+            if raw_hours and isinstance(raw_hours, str):
+                try:
+                    data['opening_hours_json'] = _json.loads(raw_hours)
+                except Exception:
+                    pass
+            # Set parsed values on the ORM object for from_attributes to pick up
+            for key, val in data.items():
+                setattr(obj, key, val)
+            return obj
+        return values
 
     class Config:
         from_attributes = True

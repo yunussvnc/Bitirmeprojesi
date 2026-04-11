@@ -58,12 +58,17 @@ const { height: SCREEN_HEIGHT, width: SCREEN_WIDTH } = Dimensions.get("window");
 const REVIEW_SHEET_COLLAPSED = Math.min(SCREEN_HEIGHT * 0.55, 520);
 const REVIEW_SHEET_EXPANDED = SCREEN_HEIGHT * 0.72;
 
-const MOCK_NIGHTCLUB_MENU = [
-  { id: 1, category: "Şişeler", items: [{ name: "Absolut Vodka 70cl", price: "2500 ₺" }, { name: "Chivas Regal 12 Yo 70cl", price: "3500 ₺" }, { name: "Moët & Chandon Ice", price: "5000 ₺" }] },
-  { id: 2, category: "Kokteyller", items: [{ name: "Margarita", price: "350 ₺" }, { name: "Long Island Iced Tea", price: "450 ₺" }, { name: "Negroni", price: "400 ₺" }] },
-  { id: 3, category: "Bira", items: [{ name: "Efes Pilsen", price: "200 ₺" }, { name: "Corona", price: "250 ₺" }] },
-  { id: 4, category: "Atıştırmalık", items: [{ name: "Karışık Çerez", price: "200 ₺" }, { name: "Meyve Tabağı", price: "350 ₺" }, { name: "Peynir Tabağı", price: "450 ₺" }] },
-];
+/** Menü öğelerini kategoriye göre gruplar */
+function groupMenuByCategory(items: any[]): { category: string; items: any[] }[] {
+  const map = new Map<string, any[]>();
+  for (const item of items) {
+    if (item.type === 'image') continue; // image tipli öğeleri atla
+    const cat = item.category || 'Menü';
+    if (!map.has(cat)) map.set(cat, []);
+    map.get(cat)!.push(item);
+  }
+  return Array.from(map.entries()).map(([category, catItems]) => ({ category, items: catItems }));
+}
 
 export default function PlaceDetailScreen({
   providedId,
@@ -235,7 +240,10 @@ export default function PlaceDetailScreen({
   const loadPlaceData = async (cancelled: { current: boolean } = { current: false }) => {
     try {
       const foundPlace = await getPlaceById(id);
-      if (!cancelled.current && foundPlace) setPlace(foundPlace);
+      if (!cancelled.current && foundPlace) {
+        console.log('[PlaceDetail] menu_items:', JSON.stringify(foundPlace.menu_items)?.slice(0, 200));
+        setPlace(foundPlace);
+      }
     } catch (error) {
       if (!cancelled.current) logger.error("Error loading place:", error);
     }
@@ -499,15 +507,16 @@ export default function PlaceDetailScreen({
                 <Text style={{ fontSize: 14, color: "#22c55e", fontWeight: "600" }}>Yorumlar</Text>
               </TouchableOpacity>
 
-              {(place?.category?.toLowerCase().includes("gece") || place?.category?.toLowerCase().includes("club") || place?.category?.toLowerCase().includes("kulüb") || place?.category?.toLowerCase().includes("pub")) && (
+              {place?.menu_items && place.menu_items.length > 0 && (
                 <TouchableOpacity
                   onPress={() => {
                     lightImpact();
                     setShowMenu(true);
                   }}
-                  style={[styles.reviewButton, { borderColor: "#22c55e", backgroundColor: "rgba(34, 197, 94, 0.1)" }]}
+                  style={[styles.reviewButton, { borderColor: "#f59e0b", backgroundColor: "rgba(245, 158, 11, 0.1)" }]}
                 >
-                  <Text style={{ fontSize: 14, color: "#22c55e", fontWeight: "600" }}>Menü</Text>
+                  <IconSymbol name="list.bullet.clipboard.fill" size={14} color="#f59e0b" />
+                  <Text style={{ fontSize: 14, color: "#f59e0b", fontWeight: "600", marginLeft: 4 }}>Menü</Text>
                 </TouchableOpacity>
               )}
             </View>
@@ -602,6 +611,83 @@ export default function PlaceDetailScreen({
             </Card>
           )}
 
+          {/* Inline Menu Preview */}
+          {place?.menu_items && place.menu_items.length > 0 && place.menu_items[0]?.type !== 'image' && (
+            <Card style={styles.sectionCard}>
+              <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: spacing.base }}>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <IconSymbol name="list.bullet.clipboard.fill" size={22} color="#f59e0b" />
+                  <Text style={[h2Style, { fontSize: 20, marginLeft: 8 }]}>Menü</Text>
+                </View>
+                <TouchableOpacity
+                  onPress={() => { lightImpact(); setShowMenu(true); }}
+                  style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: 12, paddingVertical: 6, borderRadius: 20, backgroundColor: 'rgba(245, 158, 11, 0.1)' }}
+                >
+                  <Text style={{ fontSize: 13, color: '#f59e0b', fontWeight: '600' }}>Tümünü Gör</Text>
+                  <IconSymbol name="chevron.right" size={14} color="#f59e0b" />
+                </TouchableOpacity>
+              </View>
+              {place.menu_items.slice(0, 3).map((item: any, idx: number) => (
+                <View
+                  key={idx}
+                  style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    paddingVertical: 12,
+                    borderBottomWidth: idx < Math.min(place.menu_items.length, 3) - 1 ? 1 : 0,
+                    borderBottomColor: colors.surface.border,
+                  }}
+                >
+                  {item.img ? (
+                    <Image source={{ uri: item.img }} style={{ width: 48, height: 48, borderRadius: 12, marginRight: 12, backgroundColor: colors.surface.elevated }} />
+                  ) : (
+                    <View style={{ width: 48, height: 48, borderRadius: 12, marginRight: 12, backgroundColor: colors.surface.elevated, justifyContent: 'center', alignItems: 'center' }}>
+                      <IconSymbol name="fork.knife" size={20} color={colors.text.tertiary} />
+                    </View>
+                  )}
+                  <View style={{ flex: 1 }}>
+                    <Text style={[bodyStyle, { fontWeight: '600' }]} numberOfLines={1}>{item.name}</Text>
+                    {item.desc ? <Text style={[captionStyle, { marginTop: 2 }]} numberOfLines={1}>{item.desc}</Text> : null}
+                  </View>
+                  {item.price ? (
+                    <View style={{ backgroundColor: 'rgba(245, 158, 11, 0.12)', paddingHorizontal: 10, paddingVertical: 5, borderRadius: 10 }}>
+                      <Text style={{ fontSize: 14, fontWeight: '700', color: '#f59e0b' }}>{item.price}</Text>
+                    </View>
+                  ) : null}
+                </View>
+              ))}
+              {place.menu_items.length > 3 && (
+                <Text style={[captionStyle, { textAlign: 'center', marginTop: spacing.sm }]}>+{place.menu_items.length - 3} ürün daha</Text>
+              )}
+            </Card>
+          )}
+
+          {/* Inline Menu Preview — Image Type */}
+          {place?.menu_items && place.menu_items.length > 0 && place.menu_items[0]?.type === 'image' && (
+            <Card style={styles.sectionCard}>
+              <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: spacing.base }}>
+                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                  <IconSymbol name="doc.text.image" size={22} color="#f59e0b" />
+                  <Text style={[h2Style, { fontSize: 20, marginLeft: 8 }]}>Menü</Text>
+                </View>
+                <TouchableOpacity
+                  onPress={() => { lightImpact(); setShowMenu(true); }}
+                  style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: 12, paddingVertical: 6, borderRadius: 20, backgroundColor: 'rgba(245, 158, 11, 0.1)' }}
+                >
+                  <Text style={{ fontSize: 13, color: '#f59e0b', fontWeight: '600' }}>Menüyü Aç</Text>
+                  <IconSymbol name="chevron.right" size={14} color="#f59e0b" />
+                </TouchableOpacity>
+              </View>
+              <View style={{ borderRadius: 16, overflow: 'hidden', height: 180, backgroundColor: colors.surface.elevated }}>
+                <Image source={{ uri: place.menu_items[0].uri }} style={{ width: '100%', height: '100%' }} resizeMode="cover" />
+                <View style={{ ...StyleSheet.absoluteFillObject, backgroundColor: 'rgba(0,0,0,0.3)', justifyContent: 'center', alignItems: 'center' }}>
+                  <IconSymbol name="doc.text.magnifyingglass" size={32} color="#fff" />
+                  <Text style={{ color: '#fff', fontWeight: '700', fontSize: 15, marginTop: 8 }}>{place.menu_items.length} sayfa menü</Text>
+                </View>
+              </View>
+            </Card>
+          )}
+
           {/* Location Preview */}
           {place?.address && (
             <Card style={styles.sectionCard}>
@@ -643,6 +729,7 @@ export default function PlaceDetailScreen({
                       title={similarPlace.name}
                       subtitle={similarPlace.subtitle || similarPlace.description}
                       tags={similarPlace.tags}
+                      hasMenu={!!(similarPlace.menu_items && similarPlace.menu_items.length > 0)}
                       onPress={() => router.push({ pathname: "/place/[id]", params: { id: String(similarPlace.id) } })}
                     />
                   </View>
@@ -1003,22 +1090,129 @@ export default function PlaceDetailScreen({
                 </View>
 
                 <ScrollView
-                  contentContainerStyle={styles.reviewScrollContent}
+                  contentContainerStyle={[styles.reviewScrollContent, { paddingHorizontal: spacing.sm }]}
                   showsVerticalScrollIndicator={false}
                 >
-                  {MOCK_NIGHTCLUB_MENU.map((category) => (
-                    <View key={category.id} style={{ marginBottom: spacing.lg }}>
-                      <Text style={[h2Style, { fontSize: 18, marginBottom: spacing.sm, color: colors.accent.primary }]}>
-                        {category.category}
+                  {place?.menu_items && place.menu_items.length > 0 ? (
+                    place.menu_items[0]?.type === 'image' ? (
+                      /* ===== IMAGE MENU ===== */
+                      <View style={{ gap: spacing.lg }}>
+                        {place.menu_items.map((imgItem: any, idx: number) => (
+                          <View key={idx} style={{
+                            width: SCREEN_WIDTH - 40,
+                            shadowColor: "#000",
+                            shadowOffset: { width: 0, height: 12 },
+                            shadowOpacity: 0.6,
+                            shadowRadius: 16,
+                            elevation: 12,
+                            borderRadius: 20,
+                            overflow: 'hidden',
+                            backgroundColor: colors.surface.elevated,
+                          }}>
+                            <Image
+                              source={{ uri: imgItem.uri }}
+                              style={{ width: '100%', height: (SCREEN_WIDTH - 40) * 1.4 }}
+                              resizeMode="cover"
+                            />
+                            <View style={{
+                              position: 'absolute', bottom: 0, left: 0, right: 0,
+                              paddingVertical: 10, paddingHorizontal: 16,
+                              backgroundColor: 'rgba(0,0,0,0.5)',
+                            }}>
+                              <Text style={{ color: '#fff', fontSize: 13, fontWeight: '600', textAlign: 'center' }}>
+                                Sayfa {idx + 1} / {place.menu_items.length}
+                              </Text>
+                            </View>
+                          </View>
+                        ))}
+                      </View>
+                    ) : (
+                      /* ===== TEXT MENU — PREMIUM CATEGORIZED ===== */
+                      <View style={{ paddingBottom: spacing.lg }}>
+                        {groupMenuByCategory(place.menu_items).map((group, gIdx) => (
+                          <View key={gIdx} style={{ marginBottom: spacing.xl }}>
+                            {/* Category Header */}
+                            <View style={{
+                              flexDirection: 'row', alignItems: 'center',
+                              marginBottom: spacing.base, paddingBottom: spacing.xs,
+                              borderBottomWidth: 2, borderBottomColor: '#f59e0b30',
+                            }}>
+                              <View style={{ width: 4, height: 22, borderRadius: 2, backgroundColor: '#f59e0b', marginRight: 10 }} />
+                              <Text style={[h2Style, { fontSize: 18, color: '#f59e0b', letterSpacing: 0.3 }]}>
+                                {group.category}
+                              </Text>
+                              <Text style={[captionStyle, { marginLeft: 8 }]}>{group.items.length} ürün</Text>
+                            </View>
+                            {/* Menu Items */}
+                            <View style={{ gap: 10 }}>
+                              {group.items.map((item: any, idx: number) => (
+                                <View
+                                  key={idx}
+                                  style={{
+                                    flexDirection: 'row',
+                                    alignItems: 'center',
+                                    backgroundColor: colors.surface.elevated,
+                                    padding: 14,
+                                    borderRadius: 18,
+                                    borderWidth: 0.5,
+                                    borderColor: colors.surface.border,
+                                  }}
+                                >
+                                  {item.img ? (
+                                    <Image
+                                      source={{ uri: item.img }}
+                                      style={{ width: 56, height: 56, borderRadius: 14, marginRight: 14, backgroundColor: colors.surface.default }}
+                                    />
+                                  ) : (
+                                    <View style={{
+                                      width: 56, height: 56, borderRadius: 14, marginRight: 14,
+                                      backgroundColor: colors.surface.default,
+                                      justifyContent: 'center', alignItems: 'center',
+                                    }}>
+                                      <IconSymbol name="fork.knife" size={22} color={colors.text.tertiary} />
+                                    </View>
+                                  )}
+                                  <View style={{ flex: 1 }}>
+                                    <Text style={[bodyStyle, { fontWeight: '700', fontSize: 16, marginBottom: 2 }]}
+                                      numberOfLines={1}
+                                    >
+                                      {item.name}
+                                    </Text>
+                                    {item.desc ? (
+                                      <Text style={{ fontSize: 13, color: colors.text.tertiary, lineHeight: 18 }} numberOfLines={2}>
+                                        {item.desc}
+                                      </Text>
+                                    ) : null}
+                                  </View>
+                                  {item.price ? (
+                                    <View style={{
+                                      backgroundColor: 'rgba(245, 158, 11, 0.12)',
+                                      paddingHorizontal: 14,
+                                      paddingVertical: 7,
+                                      borderRadius: 12,
+                                      marginLeft: 10,
+                                    }}>
+                                      <Text style={{ fontWeight: '800', color: '#f59e0b', fontSize: 15 }}>
+                                        {item.price}
+                                      </Text>
+                                    </View>
+                                  ) : null}
+                                </View>
+                              ))}
+                            </View>
+                          </View>
+                        ))}
+                      </View>
+                    )
+                  ) : (
+                    /* ===== EMPTY STATE ===== */
+                    <View style={{ alignItems: 'center', paddingVertical: 40 }}>
+                      <IconSymbol name="list.bullet.clipboard" size={48} color={colors.text.tertiary} />
+                      <Text style={[bodySmallStyle, { textAlign: 'center', marginTop: spacing.base }]}>
+                        Bu mekan henüz menü eklememiş.
                       </Text>
-                      {category.items.map((item, idx) => (
-                        <View key={idx} style={[styles.menuItemRow, { borderBottomColor: colors.surface.border }]}>
-                          <Text style={[bodyStyle, { flex: 1, color: colors.text.secondary }]}>{item.name}</Text>
-                          <Text style={[bodyStyle, { fontWeight: "600", color: colors.text.primary }]}>{item.price}</Text>
-                        </View>
-                      ))}
                     </View>
-                  ))}
+                  )}
                 </ScrollView>
               </RNAnimated.View>
             </View>

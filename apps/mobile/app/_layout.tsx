@@ -9,6 +9,14 @@ import { useAppStore } from "@/src/store/useAppStore";
 import { useAuthStore } from "@/src/store/useAuthStore";
 import { setAuthInterceptors } from "@/src/utils/apiClient";
 
+if (!__DEV__) {
+  // Prevent console logs from leaking and consuming memory in production
+  console.log = () => {};
+  console.warn = () => {};
+  console.error = () => {};
+  console.info = () => {};
+}
+
 function useProtectedRoute() {
   const segments = useSegments();
   const router = useRouter();
