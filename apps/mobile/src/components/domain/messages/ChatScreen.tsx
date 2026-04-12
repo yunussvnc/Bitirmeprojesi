@@ -35,6 +35,7 @@ import { toggleBlockUser, createReport } from "@/src/services/moderationService"
 import { getMessages as fetchBackendMessages, sendMessage as backendSendMessage, markMessagesRead } from "@/src/services/messageService";
 import { useAuthStore } from "@/src/store/useAuthStore";
 import { logger } from "@/src/utils/logger";
+import { useTranslation } from "react-i18next";
 
 /* ── Types ── */
 interface Message {
@@ -219,6 +220,7 @@ export default function ChatScreen() {
     const didInitialScrollRef = useRef(false);
     const resolvedChatId = chatId || "1";
     const currentUser = useAuthStore((s) => s.user);
+    const { t } = useTranslation();
 
     // BUG-11: conversation_id, ya tamamen sayısal ya da "match_xxx_userId" formatında olabilir.
     // Sayısal ise doğrudan backend conversation id olarak kullan.
@@ -281,7 +283,9 @@ export default function ChatScreen() {
                 // Okundu bildir
                 markMessagesRead(numericConvId).catch(() => { });
             } catch (e) {
-                logger.warn("[ChatScreen] Backend mesajları yüklenemedi, dummy data kullanılıyor", e);
+                // 403 = conversation belongs to another user (expected for seed data)
+                // Only log at debug level to avoid scary console errors
+                if (__DEV__) logger.warn("[ChatScreen] Could not load messages for conv", numericConvId);
             }
         })();
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -303,7 +307,7 @@ export default function ChatScreen() {
         if (!resolvedChatId) return;
 
         if (revealRequestedByMe) {
-            Alert.alert("Bekleniyor", "Karşı tarafın da sizi beğenmesi bekleniyor.");
+            Alert.alert(t("chat.waiting"), t("chat.waiting_desc"));
             return;
         }
 
@@ -338,19 +342,19 @@ export default function ChatScreen() {
             } catch { /* ignore */ }
         }
         success();
-        Alert.alert("Başarılı", `${contact.name} engellendi.`, [
-            { text: "Tamam", onPress: () => router.replace("/settings/blocked-users" as any) }
+        Alert.alert(t("common.success"), t("chat.blocked_success", { name: contact.name }), [
+            { text: t("common.ok"), onPress: () => router.replace("/settings/blocked-users" as any) }
         ]);
     };
 
     const handleReport = async () => {
         const charCount = reportText.trim().length;
         if (charCount === 0) {
-            Alert.alert("Hata", "Lütfen şikayet nedeninizi yazın.");
+            Alert.alert(t("common.error"), t("chat.report_empty"));
             return;
         }
         if (charCount > 500) {
-            Alert.alert("Hata", "Şikayet nedeni en fazla 500 harf olabilir.");
+            Alert.alert(t("common.error"), t("chat.report_max_chars"));
             return;
         }
 
@@ -364,8 +368,8 @@ export default function ChatScreen() {
             } catch { /* ignore */ }
         }
         success();
-        Alert.alert("Başarılı", `Şikayetiniz alındı ve ${contact.name} engellendi.`, [
-            { text: "Tamam", onPress: () => router.replace("/settings/blocked-users" as any) }
+        Alert.alert(t("common.success"), t("chat.report_success", { name: contact.name }), [
+            { text: t("common.ok"), onPress: () => router.replace("/settings/blocked-users" as any) }
         ]);
     };
 
@@ -414,16 +418,17 @@ export default function ChatScreen() {
 
     const handleCameraPress = () => {
         Alert.alert(
-            "Fotoğraf Gönder",
-            "Lütfen bir seçenek belirleyin:",
+        Alert.alert(
+            t("chat.send_photo", "Fotoğraf Gönder"),
+            t("chat.photo_options_desc", "Lütfen bir seçenek belirleyin:"),
             [
                 {
-                    text: "Kamera",
+                    text: t("chat.camera", "Kamera"),
                     onPress: async () => {
                         try {
                             const { status } = await ImagePicker.requestCameraPermissionsAsync();
                             if (status !== 'granted') {
-                                Alert.alert("Hata", "Kamera izni gerekiyor.");
+                                Alert.alert(t("common.error"), t("chat.camera_perm_err"));
                                 return;
                             }
                             const result = await ImagePicker.launchCameraAsync({
@@ -434,17 +439,17 @@ export default function ChatScreen() {
                                 sendImageMessage(result.assets[0].uri);
                             }
                         } catch (error) {
-                            Alert.alert("Hata", "Kamera başlatılamadı (Simülatör kullanıyor olabilirsiniz).");
+                            Alert.alert(t("common.error"), t("chat.camera_err"));
                         }
                     }
                 },
                 {
-                    text: "Galeri",
+                    text: t("chat.gallery", "Galeri"),
                     onPress: async () => {
                         try {
                             const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
                             if (status !== 'granted') {
-                                Alert.alert("Hata", "Galeri izni gerekiyor.");
+                                Alert.alert(t("common.error"), t("chat.gallery_perm_err"));
                                 return;
                             }
                             const result = await ImagePicker.launchImageLibraryAsync({
@@ -455,12 +460,12 @@ export default function ChatScreen() {
                                 sendImageMessage(result.assets[0].uri);
                             }
                         } catch (error) {
-                            Alert.alert("Hata", "Galeri başlatılamadı.");
+                            Alert.alert(t("common.error"), t("chat.gallery_err"));
                         }
                     }
                 },
                 {
-                    text: "İptal",
+                    text: t("common.cancel"),
                     style: "cancel"
                 }
             ]
@@ -481,13 +486,13 @@ export default function ChatScreen() {
         if (chatId) {
             useChatMessagesStore.getState().addMessage(chatId, {
                 id: newMsg.id,
-                text: newMsg.text || "Fotoğraf 📷",
+                text: newMsg.text || t("chat.photo", "Fotoğraf 📷"),
                 isMine: true,
                 timestamp: new Date().toISOString(),
                 imageUri: uri,
                 status: "sent",
             });
-            useMessagesStore.getState().updateLastMessageAt(chatId, newMsg.text || "Fotoğraf 📷", newMsg.timestamp, "me");
+            useMessagesStore.getState().updateLastMessageAt(chatId, newMsg.text || t("chat.photo", "Fotoğraf 📷"), newMsg.timestamp, "me");
         }
         setInputText("");
         setTimeout(() => {
@@ -498,12 +503,12 @@ export default function ChatScreen() {
     const handleDeleteMessage = (msgId: string) => {
         lightImpact();
         Alert.alert(
-            "Mesajı Sil",
-            "Bu mesajı silmek istediğinize emin misiniz?",
+            t("chat.delete_message_title", "Mesajı Sil"),
+            t("chat.delete_message_desc", "Bu mesajı silmek istediğinize emin misiniz?"),
             [
-                { text: "İptal", style: "cancel" },
+                { text: t("common.cancel"), style: "cancel" },
                 {
-                    text: "Sil",
+                    text: t("common.delete"),
                     style: "destructive",
                     onPress: () => {
                         setMessages((prev) => prev.filter((m) => m.id !== msgId));
@@ -600,7 +605,7 @@ export default function ChatScreen() {
                                     {item.placeCard.address}
                                 </Text>
                                 <Text style={[styles.placeCardHint, { color: item.isMine ? "#2ecc71" : colors.accent.primary }]}>
-                                    Keşfet'te aç →
+                                    {t("chat.open_in_explore", "Keşfet'te aç →")}
                                 </Text>
                             </View>
                         </TouchableOpacity>
@@ -663,7 +668,7 @@ export default function ChatScreen() {
                                     </Text>
                                 </View>
                                 <Text style={[styles.placeCardHint, { color: item.isMine ? "#2ecc71" : colors.accent.primary }]}>
-                                    Gönderiyi aç →
+                                    {t("chat.open_post", "Gönderiyi aç →")}
                                 </Text>
                             </View>
                         </TouchableOpacity>
@@ -778,7 +783,7 @@ export default function ChatScreen() {
                             {contact.name}
                         </Text>
                         <Text style={[styles.headerStatus, { color: contact.isOnline ? "#2ecc71" : colors.text.tertiary }]}>
-                            {contact.isOnline ? "Çevrimiçi" : "Son görülme: bugün"}
+                            {contact.isOnline ? t("chat.online", "Çevrimiçi") : t("chat.last_seen_today", "Son görülme: bugün")}
                         </Text>
                     </View>
                 </TouchableOpacity>
@@ -849,7 +854,7 @@ export default function ChatScreen() {
 
                     <TextInput
                         style={[styles.textInput, { color: colors.text.primary }]}
-                        placeholder="Mesaj yaz..."
+                        placeholder={t("chat.type_message")}
                         placeholderTextColor={colors.text.tertiary}
                         value={inputText}
                         onChangeText={setInputText}
@@ -882,21 +887,21 @@ export default function ChatScreen() {
                         <TouchableWithoutFeedback>
                             <View style={[styles.optionsModal, { backgroundColor: colors.surface.elevated }]}>
                                 <TouchableOpacity style={styles.optionBtn} onPress={handleBlock}>
-                                    <Text style={[styles.optionText, { color: "#e74c3c" }]}>Engelle</Text>
+                                    <Text style={[styles.optionText, { color: "#e74c3c" }]}>{t("chat.block")}</Text>
                                 </TouchableOpacity>
                                 <View style={[styles.separator, { backgroundColor: colors.surface.border }]} />
                                 <TouchableOpacity
                                     style={styles.optionBtn}
                                     onPress={() => {
                                         setIsOptionsVisible(false);
-                                        setTimeout(() => setIsReportVisible(true), 300); // Wait for modal fade out
+                                        setTimeout(() => setIsReportVisible(true), 300);
                                     }}
                                 >
-                                    <Text style={[styles.optionText, { color: "#e74c3c" }]}>Şikayet Et ve Kısıtla</Text>
+                                    <Text style={[styles.optionText, { color: "#e74c3c" }]}>{t("chat.report")}</Text>
                                 </TouchableOpacity>
                                 <View style={[styles.separator, { backgroundColor: colors.surface.border }]} />
                                 <TouchableOpacity style={styles.optionBtn} onPress={() => setIsOptionsVisible(false)}>
-                                    <Text style={[styles.optionText, { color: colors.text.primary, fontWeight: "500" }]}>İptal</Text>
+                                    <Text style={[styles.optionText, { color: colors.text.primary, fontWeight: "500" }]}>{t("chat.cancel")}</Text>
                                 </TouchableOpacity>
                             </View>
                         </TouchableWithoutFeedback>
@@ -920,8 +925,8 @@ export default function ChatScreen() {
                 >
                     <View style={styles.reportModalContainer}>
                         <View style={[styles.reportModalContent, { backgroundColor: colors.surface.elevated }]}>
-                            <View style={styles.reportHeader}>
-                                <Text style={[styles.reportTitle, { color: colors.text.primary }]}>Şikayet Nedeni</Text>
+                            <View style={[styles.reportHeaderRow, { borderBottomColor: colors.surface.border }]}>
+                                <Text style={[styles.reportTitle, { color: colors.text.primary }]}>{t("chat.report_user")}</Text>
                                 <TouchableOpacity onPress={() => {
                                     setIsReportVisible(false);
                                     setReportText("");
@@ -930,12 +935,12 @@ export default function ChatScreen() {
                                 </TouchableOpacity>
                             </View>
                             <Text style={[styles.reportDesc, { color: colors.text.secondary }]}>
-                                {contact.name} adlı kullanıcıyı neden şikayet etmek istiyorsunuz? (Maksimum 500 harf)
+                                {t("chat.report_desc", { name: contact.name })}
                             </Text>
                             <View style={[styles.reportInputWrapper, { borderColor: colors.surface.border, backgroundColor: colors.background.primary }]}>
                                 <TextInput
-                                    style={[styles.reportInput, { color: colors.text.primary }]}
-                                    placeholder="Lütfen detaylıca açıklayın..."
+                                    style={[styles.reportInput, { backgroundColor: colors.background.secondary, color: colors.text.primary }]}
+                                    placeholder={t("chat.report_ph")}
                                     placeholderTextColor={colors.text.tertiary}
                                     multiline
                                     value={reportText}
@@ -944,19 +949,19 @@ export default function ChatScreen() {
                                     cursorColor={colors.accent.primary}
                                 />
                             </View>
-                            <Text style={[
-                                styles.wordCount,
-                                { color: reportText.length >= 500 ? "#e74c3c" : colors.text.secondary }
-                            ]}>
-                                {reportText.length} / 500 harf
+                            <Text style={[styles.charCountText, { color: reportText.length > 500 ? colors.semantic.error : colors.text.tertiary }]}>
+                                {t("chat.char_left")} {500 - reportText.length}
                             </Text>
 
                             <TouchableOpacity
-                                style={[styles.submitReportBtn, { backgroundColor: colors.accent.primary }]}
+                                style={[styles.reportSubmitBtn, { backgroundColor: reportText.trim().length === 0 ? colors.surface.border : colors.accent.primary }]}
                                 activeOpacity={0.8}
                                 onPress={handleReport}
+                                disabled={reportText.trim().length === 0}
                             >
-                                <Text style={styles.submitReportText}>Gönder ve Engelle</Text>
+                                <Text style={[styles.reportSubmitText, { color: reportText.trim().length === 0 ? colors.text.tertiary : "#FFFFFF" }]}>
+                                    {t("chat.send")}
+                                </Text>
                             </TouchableOpacity>
                         </View>
                     </View>

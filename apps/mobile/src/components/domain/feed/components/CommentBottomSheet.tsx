@@ -32,6 +32,7 @@ import { lightImpact, success } from "@/src/utils/haptics";
 import { timeAgo } from "@/src/utils/timeAgo";
 import { deleteComment } from "@/src/services/moderationService";
 import { useAuthStore } from "@/src/store/useAuthStore";
+import { useTranslation } from "react-i18next";
 
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 // Kısmi açık yükseklik: handle + başlık + input + ~2 yorum satırı
@@ -56,6 +57,7 @@ export function CommentBottomSheet({ visible, onClose, postId, onCommentAdded }:
   const [sending, setSending] = useState(false);
   const [text, setText] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
+  const { t } = useTranslation();
 
   // Height animasyonu (native driver kapalı — height animate edilemez native'de)
   const animHeight = useRef(new Animated.Value(0)).current;
@@ -204,21 +206,21 @@ export function CommentBottomSheet({ visible, onClose, postId, onCommentAdded }:
 
   const handleDeleteComment = useCallback(async (comment: PostComment) => {
     lightImpact();
-    Alert.alert("Yorumu Sil", "Bu yorumu silmek istiyor musun?", [
-      { text: "Vazgeç", style: "cancel" },
+    Alert.alert(t("feed_comments.delete_comment"), t("feed_comments.delete_comment_confirm"), [
+      { text: t("feed_comments.cancel"), style: "cancel" },
       {
-        text: "Sil", style: "destructive", onPress: async () => {
+        text: t("feed_comments.delete"), style: "destructive", onPress: async () => {
           try {
             await deleteComment(postId, comment.id);
             success();
             setComments((prev) => prev.filter((c) => c.id !== comment.id));
           } catch {
-            Alert.alert("Hata", "Yorum silinemedi.");
+            Alert.alert(t("feed_comments.error"), t("feed_comments.delete_failed"));
           }
         },
       },
     ]);
-  }, [postId]);
+  }, [postId, t]);
 
   const renderItem = ({ item }: { item: PostComment }) => {
     const isOwn = currentUser?.id === item.user_id;
@@ -259,7 +261,7 @@ export function CommentBottomSheet({ visible, onClose, postId, onCommentAdded }:
 
           {/* Başlık */}
           <View style={styles.header}>
-            <Text style={[titleStyle, styles.title]}>Yorumlar</Text>
+            <Text style={[titleStyle, styles.title]}>{t("feed_comments.comments")}</Text>
             <TouchableOpacity
               onPress={() => {
                 lightImpact();
@@ -276,7 +278,7 @@ export function CommentBottomSheet({ visible, onClose, postId, onCommentAdded }:
           {loading ? (
             <View style={styles.loadingWrap}>
               <ActivityIndicator size="small" color={colors.accent.primary} />
-              <Text style={[styles.loadingText, { color: colors.text.tertiary }]}>Yorumlar yükleniyor...</Text>
+              <Text style={[styles.loadingText, { color: colors.text.tertiary }]}>{t("feed_comments.loading")}</Text>
             </View>
           ) : (
             <FlatList
@@ -288,7 +290,7 @@ export function CommentBottomSheet({ visible, onClose, postId, onCommentAdded }:
               renderItem={renderItem}
               style={{ flex: 1 }}
               contentContainerStyle={styles.listContent}
-              ListEmptyComponent={<Text style={[styles.emptyText, { color: colors.text.tertiary }]}>Henüz yorum yok. İlk yorumu sen yap!</Text>}
+              ListEmptyComponent={<Text style={[styles.emptyText, { color: colors.text.tertiary }]}>{t("feed_comments.empty")}</Text>}
             />
           )}
 
@@ -311,7 +313,7 @@ export function CommentBottomSheet({ visible, onClose, postId, onCommentAdded }:
                   borderColor: colors.surface.border,
                 },
               ]}
-              placeholder="Yorum yaz..."
+              placeholder={t("feed_comments.write_comment")}
               placeholderTextColor={colors.text.tertiary}
               value={text}
               onChangeText={setText}

@@ -8,6 +8,7 @@ import { checkHealth } from "@/src/services/mekanService";
 import { useAppStore } from "@/src/store/useAppStore";
 import { useAuthStore } from "@/src/store/useAuthStore";
 import { setAuthInterceptors } from "@/src/utils/apiClient";
+import "@/src/i18n"; // i18n initialization
 
 if (!__DEV__) {
   // Prevent console logs from leaking and consuming memory in production

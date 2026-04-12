@@ -21,6 +21,7 @@ import { IconSymbol, IconSymbolName } from "@/src/components/ui/icon-symbol";
 import { spacing } from "@/src/constants/design";
 import { lightImpact } from "@/src/utils/haptics";
 import { useRouter } from "expo-router";
+import { useTranslation } from "react-i18next";
 
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 // 6 items + header ~ 400px height
@@ -44,6 +45,7 @@ export function CreateBottomSheet({ visible, onClose }: CreateBottomSheetProps) 
     const insets = useSafeAreaInsets();
     const router = useRouter();
     const [modalVisible, setModalVisible] = useState(false);
+    const { t } = useTranslation();
 
     // Height animasyonu (native driver kapalı — height animate edilemez native'de)
     const animHeight = useRef(new Animated.Value(0)).current;
@@ -124,33 +126,32 @@ export function CreateBottomSheet({ visible, onClose }: CreateBottomSheetProps) 
     const options: CreateOption[] = [
         {
             id: "reels",
-            label: "Reels Videosu",
+            label: t("create_sheet.reels_label"),
             icon: "play.rectangle",
             onPress: () => {
-                // Navigasyon rotası (gelecekte eklenecekse vs.)
                 lightImpact();
                 onClose();
-                router.push("/contentCreation/CreatePostScreen" as any);
+                router.push({ pathname: "/contentCreation/CreatePostScreen", params: { preSelect: "reels" } } as any);
             },
         },
         {
             id: "post",
-            label: "Gönderi",
+            label: t("create_sheet.post_label"),
             icon: "square.grid.3x3",
             onPress: () => {
                 lightImpact();
                 onClose();
-                router.push("/contentCreation/CreatePostScreen" as any);
+                router.push({ pathname: "/contentCreation/CreatePostScreen", params: { preSelect: "post" } } as any);
             },
         },
         {
             id: "story",
-            label: "Hikaye",
+            label: t("create_sheet.story_label"),
             icon: "plus.circle",
             onPress: () => {
                 lightImpact();
                 onClose();
-                router.push("/contentCreation/CreatePostScreen" as any);
+                router.push("/contentCreation/CreateStoryScreen" as any);
             },
         },
     ];
@@ -177,7 +178,7 @@ export function CreateBottomSheet({ visible, onClose }: CreateBottomSheetProps) 
                     {/* Handle (tutup çekme çubuğu) */}
                     <View {...panResponder.panHandlers} style={styles.dragArea}>
                         <View style={[styles.handle, { backgroundColor: colors.surface.border }]} />
-                        <Text style={[styles.title, { color: colors.text.primary }]}>Oluştur</Text>
+                        <Text style={[styles.title, { color: colors.text.primary }]}>{t("create_sheet.title")}</Text>
                         <View style={styles.headerSeparator} />
                     </View>
 

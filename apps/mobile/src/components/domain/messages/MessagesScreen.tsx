@@ -28,6 +28,7 @@ import { lightImpact } from "@/src/utils/haptics";
 import { useAuthStore } from "@/src/store/useAuthStore";
 import { useMessagesStore, Conversation } from "@/src/store/useMessagesStore";
 import { Swipeable } from "react-native-gesture-handler";
+import { useTranslation } from "react-i18next";
 
 /** Doğum tarihinden yaş hesapla */
 function calculateAge(birthDateStr: string | null | undefined): number | null {
@@ -58,6 +59,7 @@ export default function MessagesScreen() {
     const searchInputRef = React.useRef<TextInput>(null);
     const [isEditMode, setIsEditMode] = useState(false);
     const [selectedIds, setSelectedIds] = useState<string[]>([]);
+    const { t } = useTranslation();
 
     const username = authUser?.username || authUser?.email || "Kullanıcı";
 
@@ -112,7 +114,7 @@ export default function MessagesScreen() {
                     activeOpacity={0.8}
                 >
                     <IconSymbol name="archivebox" size={20} color="#FFF" />
-                    <Text style={styles.swipeActionLabel}>Arşiv</Text>
+                    <Text style={styles.swipeActionLabel}>{t("messages.archive")}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={[styles.swipeActionBtn, { backgroundColor: colors.semantic.error }]}
@@ -123,7 +125,7 @@ export default function MessagesScreen() {
                     activeOpacity={0.8}
                 >
                     <IconSymbol name="trash" size={20} color="#FFF" />
-                    <Text style={styles.swipeActionLabel}>Sil</Text>
+                    <Text style={styles.swipeActionLabel}>{t("messages.delete")}</Text>
                 </TouchableOpacity>
             </View>
         );
@@ -196,7 +198,7 @@ export default function MessagesScreen() {
                             numberOfLines={1}
                         >
                             {item.lastMessageSender === "me" ? (
-                                <><Text style={{ color: colors.text.tertiary }}>Sen: </Text>{item.lastMessage}</>
+                                <><Text style={{ color: colors.text.tertiary }}>{t("messages.you")} </Text>{item.lastMessage}</>
                             ) : item.lastMessageSender ? (
                                 <><Text style={{ color: colors.text.tertiary }}>{item.lastMessageSender.split(" ")[0]}: </Text>{item.lastMessage}</>
                             ) : (
@@ -239,7 +241,7 @@ export default function MessagesScreen() {
 
     const listHeader = React.useMemo(() => (
         <View style={styles.sectionHeader}>
-            <Text style={[styles.sectionTitle, { color: colors.text.primary }]}>Sohbetler</Text>
+            <Text style={[styles.sectionTitle, { color: colors.text.primary }]}>{t("messages.title")}</Text>
             {!isEditMode && (
                 <TouchableOpacity
                     activeOpacity={0.7}
@@ -248,30 +250,30 @@ export default function MessagesScreen() {
                         router.push("/(tabs)/messages/archive" as any);
                     }}
                 >
-                    <Text style={[styles.requestsLink, { color: colors.accent.primary }]}>Arşiv</Text>
+                    <Text style={[styles.requestsLink, { color: colors.accent.primary }]}>{t("messages.archive")}</Text>
                 </TouchableOpacity>
             )}
         </View>
-    ), [colors, isEditMode, router]);
+    ), [colors, isEditMode, router, t]);
 
     const listEmpty = React.useMemo(() => (
         <View style={styles.emptyState}>
             <View style={[styles.emptyIcon, { borderColor: colors.accent.primary + "40" }]}>
                 <IconSymbol name="paperplane" size={32} color={colors.accent.primary} />
             </View>
-            <Text style={[styles.emptyTitle, { color: colors.text.primary }]}>Henüz sohbet yok</Text>
+            <Text style={[styles.emptyTitle, { color: colors.text.primary }]}>{t("messages.empty")}</Text>
             <Text style={[styles.emptyDesc, { color: colors.text.tertiary }]}>
-                Arkadaşlarınla beğendiğin mekanları paylaş, birlikte keşfet.
+                {t("messages.empty_desc")}
             </Text>
             <TouchableOpacity
                 style={[styles.startBtn, { backgroundColor: colors.accent.primary }]}
                 activeOpacity={0.8}
                 onPress={() => lightImpact()}
             >
-                <Text style={styles.startBtnText}>Sohbet Başlat</Text>
+                <Text style={styles.startBtnText}>{t("messages.start_chat")}</Text>
             </TouchableOpacity>
         </View>
-    ), [colors]);
+    ), [colors, t]);
 
     return (
         <TouchableWithoutFeedback
@@ -327,7 +329,7 @@ export default function MessagesScreen() {
                             onPress={toggleEditMode}
                         >
                             <Text style={{ color: colors.accent.primary, fontSize: 14, fontWeight: "600" }}>
-                                Düzenle
+                                {t("messages.edit")}
                             </Text>
                         </TouchableOpacity>
                     )}
@@ -340,10 +342,10 @@ export default function MessagesScreen() {
                             style={styles.cancelEditBtn}
                             onPress={toggleEditMode}
                         >
-                            <Text style={[styles.cancelEditText, { color: colors.text.secondary }]}>Bitti</Text>
+                            <Text style={[styles.cancelEditText, { color: colors.text.secondary }]}>{t("messages.done")}</Text>
                         </TouchableOpacity>
                         <Text style={[styles.editModeTitle, { color: colors.text.primary }]}>
-                            {selectedIds.length > 0 ? `${selectedIds.length} Seçili` : "Sohbet Seçin"}
+                            {selectedIds.length > 0 ? `${selectedIds.length} ${t("messages.selected")}` : t("messages.select_chat")}
                         </Text>
                         <TouchableOpacity
                             style={[styles.selectAllBtn, { opacity: activeConversations.length > 0 ? 1 : 0.5 }]}
@@ -357,7 +359,7 @@ export default function MessagesScreen() {
                             disabled={activeConversations.length === 0}
                         >
                             <Text style={[styles.selectAllText, { color: colors.accent.primary }]}>
-                                {selectedIds.length === activeConversations.length ? "Tümünü Kaldır" : "Tümünü Seç"}
+                                {selectedIds.length === activeConversations.length ? t("messages.deselect_all") : t("messages.select_all")}
                             </Text>
                         </TouchableOpacity>
                     </View>
@@ -368,7 +370,7 @@ export default function MessagesScreen() {
                             <TextInput
                                 ref={searchInputRef}
                                 style={[styles.searchInput, { color: colors.text.primary }]}
-                                placeholder="Kişi veya mekan ara..."
+                                placeholder={t("messages.search_ph")}
                                 placeholderTextColor={colors.text.tertiary}
                                 value={searchQuery}
                                 onChangeText={setSearchQuery}

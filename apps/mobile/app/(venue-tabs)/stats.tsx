@@ -51,7 +51,7 @@ export default function VenueStatsScreen() {
   if (loading && !stats) {
     return (
       <View style={styles.loadingContainer}>
-        <ActivityIndicator size="large" color="#f59e0b" />
+        <ActivityIndicator size="large" color="#10b981" />
         <Text style={styles.loadingText}>İstatistikler Yükleniyor...</Text>
       </View>
     );
@@ -80,16 +80,16 @@ export default function VenueStatsScreen() {
       <ScrollView 
         contentContainerStyle={styles.container}
         showsVerticalScrollIndicator={false}
-        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor="#f59e0b" />}
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor="#10b981" />}
       >
         <LinearGradient
-          colors={['rgba(245,158,11,0.2)', 'transparent']}
+          colors={['rgba(16,185,129,0.2)', 'transparent']}
           style={styles.heroBanner}
         >
           <Text style={styles.heroLabel}>Mekan Popülerlik Skoru</Text>
           <View style={styles.heroScoreRow}>
             <Text style={styles.heroScore}>{popScore}</Text>
-            <IconSymbol name="flame.fill" size={32} color="#f59e0b" />
+            <IconSymbol name="flame.fill" size={32} color="#10b981" />
           </View>
           <Text style={styles.heroDesc}>Skorunuz mekana yapılan yorum ve kaydetmeler ışığında anlık güncellenir.</Text>
         </LinearGradient>
@@ -97,14 +97,14 @@ export default function VenueStatsScreen() {
         <View style={styles.gridContainer}>
           <StatCard 
             icon="star.fill" 
-            color="#fbbf24" 
+            color="#34d399" 
             title="Ortalama Puan" 
             value={`${averageRating} / 5`} 
             subtitle="Genel müşteri memnuniyeti" 
           />
           <StatCard 
             icon="text.bubble.fill" 
-            color="#3b82f6" 
+            color="#0ea5e9" 
             title="Toplam Yorum" 
             value={reviewCount} 
             subtitle="Tüm zamanlar" 
@@ -118,7 +118,7 @@ export default function VenueStatsScreen() {
           />
           <StatCard 
             icon="eye.fill" 
-            color="#a855f7" 
+            color="#0d9488" 
             title="Profil Görüntüleme" 
             value="--" 
             subtitle="Çok yakında aktif olacak" 
@@ -139,8 +139,8 @@ const styles = StyleSheet.create({
   backButton: { width: 40, height: 40, borderRadius: 20, backgroundColor: 'rgba(255,255,255,0.08)', alignItems: 'center', justifyContent: 'center' },
   headerTitle: { fontSize: 20, fontWeight: '700', color: '#fff', letterSpacing: 0.5 },
   container: { padding: 20, paddingBottom: 80 },
-  heroBanner: { borderRadius: 24, padding: 24, marginBottom: 24, borderWidth: 1, borderColor: 'rgba(245,158,11,0.15)' },
-  heroLabel: { fontSize: 13, fontWeight: '600', color: '#f59e0b', letterSpacing: 1.2, textTransform: 'uppercase', marginBottom: 8 },
+  heroBanner: { borderRadius: 24, padding: 24, marginBottom: 24, borderWidth: 1, borderColor: 'rgba(16,185,129,0.15)' },
+  heroLabel: { fontSize: 13, fontWeight: '600', color: '#10b981', letterSpacing: 1.2, textTransform: 'uppercase', marginBottom: 8 },
   heroScoreRow: { flexDirection: 'row', alignItems: 'center', gap: 12, marginBottom: 12 },
   heroScore: { fontSize: 48, fontWeight: '800', color: '#fff', letterSpacing: -1 },
   heroDesc: { fontSize: 13, color: 'rgba(255,255,255,0.6)', lineHeight: 18 },

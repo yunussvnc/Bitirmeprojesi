@@ -13,6 +13,7 @@ import { useTheme } from "@/src/hooks/useTheme";
 import { IconSymbol, type IconSymbolName } from "@/src/components/ui/icon-symbol";
 import { lightImpact, mediumImpact } from "@/src/utils/haptics";
 import { spacing } from "@/src/constants/design";
+import { useTranslation } from "react-i18next";
 
 export type CreateType = "post" | "story" | "reels";
 
@@ -21,40 +22,40 @@ export interface CreateTypeSheetProps {
   onClose: () => void;
   onSelect: (type: CreateType) => void;
 }
-
-const OPTIONS: {
-  type: CreateType;
-  label: string;
-  subtitle: string;
-  icon: IconSymbolName;
-  gradient: [string, string];
-}[] = [
-  {
-    type: "post",
-    label: "Gönderi",
-    subtitle: "Fotoğraf veya video",
-    icon: "photo",
-    gradient: ["#667eea", "#764ba2"],
-  },
-  {
-    type: "story",
-    label: "Hikaye",
-    subtitle: "24 saat görünür",
-    icon: "circle.hexagongrid.fill",
-    gradient: ["#f093fb", "#f5576c"],
-  },
-  {
-    type: "reels",
-    label: "Reels",
-    subtitle: "Kısa video",
-    icon: "play.circle.fill",
-    gradient: ["#4facfe", "#00f2fe"],
-  },
-];
-
 export function CreateTypeSheet({ visible, onClose, onSelect }: CreateTypeSheetProps) {
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
+  const { t } = useTranslation();
+
+  const OPTIONS: {
+    type: CreateType;
+    label: string;
+    subtitle: string;
+    icon: IconSymbolName;
+    gradient: [string, string];
+  }[] = [
+    {
+      type: "post",
+      label: t("create_sheet.post_label"),
+      subtitle: t("create_sheet.post_sub"),
+      icon: "photo",
+      gradient: ["#667eea", "#764ba2"],
+    },
+    {
+      type: "story",
+      label: t("create_sheet.story_label"),
+      subtitle: t("create_sheet.story_sub"),
+      icon: "circle.hexagongrid.fill",
+      gradient: ["#f093fb", "#f5576c"],
+    },
+    {
+      type: "reels",
+      label: t("create_sheet.reels_label"),
+      subtitle: t("create_sheet.reels_sub"),
+      icon: "play.circle.fill",
+      gradient: ["#4facfe", "#00f2fe"],
+    },
+  ];
 
   const handleSelect = (type: CreateType) => {
     mediumImpact();
@@ -80,9 +81,9 @@ export function CreateTypeSheet({ visible, onClose, onSelect }: CreateTypeSheetP
           <View style={[styles.handle, { backgroundColor: colors.text.tertiary + '40' }]} />
 
           {/* Title */}
-          <Text style={[styles.title, { color: colors.text.primary }]}>Oluştur</Text>
+          <Text style={[styles.title, { color: colors.text.primary }]}>{t("create_sheet.title")}</Text>
           <Text style={[styles.subtitle, { color: colors.text.tertiary }]}>
-            Ne paylaşmak istersin?
+            {t("create_sheet.subtitle")}
           </Text>
 
           {/* Options */}

@@ -6,6 +6,8 @@
 import React, { Component, type ErrorInfo, type ReactNode } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { spacing } from "@/src/constants/design";
+import { useTranslation } from "react-i18next";
+import { IconSymbol } from "@/src/components/ui/IconSymbol";
 
 interface Props {
   children: ReactNode;
@@ -62,21 +64,23 @@ function ErrorBoundaryFallback({
   error: Error;
   onRetry: () => void;
 }) {
+  const { t } = useTranslation();
+
   // Hardcoded colors — ErrorBoundary MUST NOT depend on ThemeProvider
   // If ThemeProvider crashes, this fallback would also crash (cascade failure)
   return (
     <View style={[styles.container, { backgroundColor: '#0a0a0a' }]}>
-      <Text style={{ fontSize: 48 }}>⚠️</Text>
-      <Text style={[styles.title, { color: '#ffffff' }]}>Bir şeyler ters gitti</Text>
-      <Text style={[styles.message, { color: '#999999' }]}>
-        Beklenmeyen bir hata oluştu. Lütfen tekrar deneyin.
+      <IconSymbol name="exclamationmark.triangle.fill" size={64} color="#f87171" />
+      <Text style={[styles.title, { color: '#ffffff' }]}>{t("error_extra.something_went_wrong")}</Text>
+      <Text style={[styles.message, { color: '#9ca3af' }]}>
+        {t("error_extra.unexpected_error")}
       </Text>
       <TouchableOpacity
         style={[styles.button, { backgroundColor: '#6366f1' }]}
         onPress={onRetry}
         activeOpacity={0.8}
       >
-        <Text style={[styles.buttonText, { color: '#ffffff' }]}>Tekrar Dene</Text>
+        <Text style={[styles.buttonText, { color: '#ffffff' }]}>{t("common.retry")}</Text>
       </TouchableOpacity>
       {__DEV__ && (
         <Text style={[styles.debug, { color: '#666666' }]} numberOfLines={3}>

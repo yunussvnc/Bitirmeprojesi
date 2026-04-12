@@ -39,8 +39,10 @@ import { useTabBarVisibility } from "@/src/components/layout/TabBarVisibilityCon
 import { toggleFollow } from "@/src/services/userService";
 import { useAppStore } from "@/src/store/useAppStore";
 import { createReport } from "@/src/services/moderationService";
+import { useTranslation } from "react-i18next";
 
 export default function FeedScreen() {
+  const { t } = useTranslation();
   const { colors } = useTheme();
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
@@ -213,37 +215,37 @@ export default function FeedScreen() {
   const handleReportPost = useCallback(() => {
     if (!optionsPost) return;
     const postId = optionsPost.id;
-    Alert.alert("Raporla", "Bu gönderiyi neden raporlıyorsun?", [
-      { text: "Vazgeç", style: "cancel" },
-      { text: "Spam", onPress: () => submitReport(postId, "spam") },
-      { text: "Uygunsuz İçerik", onPress: () => submitReport(postId, "inappropriate") },
-      { text: "Taciz", onPress: () => submitReport(postId, "harassment") },
+    Alert.alert(t("feed.report_title"), t("feed.report_reason"), [
+      { text: t("feed.cancel"), style: "cancel" },
+      { text: t("feed.spam"), onPress: () => submitReport(postId, "spam") },
+      { text: t("feed.inappropriate"), onPress: () => submitReport(postId, "inappropriate") },
+      { text: t("feed.harassment"), onPress: () => submitReport(postId, "harassment") },
     ]);
-  }, [optionsPost]);
+  }, [optionsPost, t]);
 
   const submitReport = useCallback(async (postId: number, reason: "spam" | "inappropriate" | "harassment" | "other") => {
     try {
       await createReport({ target_type: "post", target_id: postId, reason });
-      Alert.alert("Raporlandı ✅", "Geri bildirimin için teşekkürler. İncelenecektir.");
+      Alert.alert(t("feed.reported"), t("feed.reported_desc"));
     } catch {
-      Alert.alert("Raporlandı", "Geri bildirimin için teşekkürler.");
+      Alert.alert(t("feed.report_title"), t("feed.reported_desc"));
     }
-  }, []);
+  }, [t]);
 
   const handleMuteAuthor = useCallback(() => {
-    Alert.alert("Sessize alındı", "Bu hesaptan gelen içerikler gizlenecek.");
-  }, []);
+    Alert.alert(t("feed.muted_title"), t("feed.muted_desc"));
+  }, [t]);
 
   const handleSavePost = useCallback(
     (post: Post) => {
       const wasSaved = isPostSaved(post.id);
       toggleSavePost(post);
       Alert.alert(
-        wasSaved ? "Arşivden çıkarıldı" : "Arşive eklendi",
-        wasSaved ? "Gönderi arşivden kaldırıldı." : "Gönderi arşive alındı."
+        wasSaved ? t("feed.saved_false") : t("feed.saved_true"),
+        wasSaved ? t("feed.saved_false_desc") : t("feed.saved_true_desc")
       );
     },
-    [isPostSaved, toggleSavePost]
+    [isPostSaved, toggleSavePost, t]
   );
 
   const handleToggleFollow = useCallback(async (post: Post) => {
@@ -294,7 +296,7 @@ export default function FeedScreen() {
     if (loading) {
       return (
         <View style={styles.center}>
-          <LoadingState message="Gönderiler yükleniyor..." />
+          <LoadingState message={t("feed.loading")} />
         </View>
       );
     }
@@ -302,9 +304,9 @@ export default function FeedScreen() {
       <View style={styles.center}>
         <EmptyState
           variant="feed"
-          title="Henüz gönderi yok"
-          description="İlk paylaşımı sen yap!"
-          actionLabel="Paylaş"
+          title={t("feed.empty_title")}
+          description={t("feed.empty_desc")}
+          actionLabel={t("feed.empty_action")}
           onAction={() => setCreateSheetOpen(true)}
         />
       </View>
@@ -465,7 +467,7 @@ export default function FeedScreen() {
             if (h !== headerHeight) setHeaderHeight(h);
           }}
         >
-          <Text style={[titleStyle, styles.title]}>Akış</Text>
+          <Text style={[titleStyle, styles.title]}>{t("feed.title")}</Text>
 
           {/* Dropdown filter — header ortası */}
           <View style={styles.dropdownWrap}>
@@ -478,7 +480,7 @@ export default function FeedScreen() {
               activeOpacity={0.8}
             >
               <Text style={[styles.dropdownLabel, { color: colors.text.primary }]}>
-                {filter === "all" ? "Herkes" : "Takip Ettiklerim"}
+                {filter === "all" ? t("feed.filter_all") : t("feed.filter_following")}
               </Text>
               <IconSymbol name={filterDropdownOpen ? "chevron.up" : "chevron.down"} size={12} color={colors.text.secondary} />
             </TouchableOpacity>
@@ -497,7 +499,7 @@ export default function FeedScreen() {
                   >
                     {filter === opt && <IconSymbol name="checkmark" size={13} color={colors.accent.primary} />}
                     <Text style={[styles.dropdownItemText, { color: filter === opt ? colors.accent.primary : colors.text.primary }]}>
-                      {opt === "all" ? "Herkes" : "Takip Ettiklerim"}
+                      {opt === "all" ? t("feed.filter_all") : t("feed.filter_following")}
                     </Text>
                   </TouchableOpacity>
                 ))}

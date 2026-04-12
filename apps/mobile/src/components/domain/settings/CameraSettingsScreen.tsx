@@ -7,11 +7,13 @@ import React from "react";
 import { View, Text, StyleSheet, ScrollView, Alert, TouchableOpacity } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
+import { useTranslation } from "react-i18next";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { createTextStyle, spacing } from "@/src/constants/design";
 import { useTheme } from "@/src/hooks/useTheme";
 import { Section } from "@/src/components/layout/Section";
 import { SettingsRow } from "@/src/components/ui";
+import { BackButton } from "@/src/components/shared/navigation";
 import { useSettingsStore, type CameraToolbarSide } from "@/src/store/useSettingsStore";
 import { lightImpact, success } from "@/src/utils/haptics";
 
@@ -24,6 +26,7 @@ export default function CameraSettingsScreen() {
   const { colors } = useTheme();
   const router = useRouter();
   const insets = useSafeAreaInsets();
+  const { t } = useTranslation();
   const cameraDefaultFront = useSettingsStore((s) => s.cameraDefaultFront);
   const cameraToolbarSide = useSettingsStore((s) => s.cameraToolbarSide);
   const setCameraDefaultFront = useSettingsStore((s) => s.setCameraDefaultFront);
@@ -31,17 +34,17 @@ export default function CameraSettingsScreen() {
 
   const handleToolbarSide = () => {
     lightImpact();
-    Alert.alert("Kamera araç çubuğu", "Kamera araç çubuğunun ekranın hangi tarafında olmasını istediğini seç.", [
-      { text: "İptal", style: "cancel" },
+    Alert.alert(t("settings_extra.cam_toolbar"), t("settings_extra.cam_toolbar_desc"), [
+      { text: t("common.cancel"), style: "cancel" },
       {
-        text: "Sol taraf",
+        text: t("settings_extra.cam_toolbar_left"),
         onPress: () => {
           setCameraToolbarSide("left");
           success();
         },
       },
       {
-        text: "Sağ taraf",
+        text: t("settings_extra.cam_toolbar_right"),
         onPress: () => {
           setCameraToolbarSide("right");
           success();
@@ -53,37 +56,35 @@ export default function CameraSettingsScreen() {
   return (
     <View style={[styles.wrapper, { backgroundColor: colors.background.primary }]}>
       <View style={[styles.header, { borderBottomColor: colors.surface.border, paddingTop: insets.top + spacing.sm }]}>
-        <TouchableOpacity onPress={() => { lightImpact(); router.back(); }} hitSlop={12} style={styles.backBtn}>
-          <IconSymbol name="chevron.left" size={24} color={colors.accent.primary} />
-        </TouchableOpacity>
-        <Text style={[createTextStyle("title", colors.text.primary), styles.title]}>Kamera ayarları</Text>
+        <BackButton onPress={() => router.back()} />
+        <Text style={[createTextStyle("title", colors.text.primary), styles.title]}>{t("settings_extra.cam_title")}</Text>
         <View style={styles.backBtn} />
       </View>
       <ScrollView style={styles.container} contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
-        <Section title="Hikaye ve içerik">
+        <Section title={t("settings_extra.cam_section_story")}>
           <Text style={[styles.sectionHint, { color: colors.text.tertiary }]}>
-            Hikaye oluştururken galeriden medya seçiliyor. Uygulama içi kamera yakında eklenecek.
+            {t("settings_extra.cam_section_story_hint")}
           </Text>
         </Section>
 
-        <Section title="Kontroller">
+        <Section title={t("settings_extra.cam_section_controls")}>
           <SettingsRow
-            label="Ön kamerayı varsayılan yap"
+            label={t("settings_extra.cam_front_default")}
             value={cameraDefaultFront}
             switch
             onValueChange={setCameraDefaultFront}
             icon="camera.fill"
           />
-          <Text style={[styles.hint, { color: colors.text.tertiary }]}>Hikaye veya video kaydederken ön kamera ile başla</Text>
-          <SettingsRow label="Kamera araç çubuğu" value={TOOLBAR_LABELS[cameraToolbarSide]} onPress={handleToolbarSide} showArrow icon="slider.horizontal.3" />
+          <Text style={[styles.hint, { color: colors.text.tertiary }]}>{t("settings_extra.cam_hint")}</Text>
+          <SettingsRow label={t("settings_extra.cam_toolbar")} value={TOOLBAR_LABELS[cameraToolbarSide]} onPress={handleToolbarSide} showArrow icon="slider.horizontal.3" />
           <Text style={[styles.hint, { color: colors.text.tertiary }]}>
-            Kamera araç çubuğunun ekranın hangi tarafında olacağını seç
+            {t("settings_extra.cam_toolbar_hint")}
           </Text>
         </Section>
 
-        <Section title="Film rulosu">
+        <Section title={t("settings_extra.cam_section_roll")}>
           <Text style={[styles.hint, { color: colors.text.tertiary }]}>
-            Hikaye ve gönderi paylaşırken cihazının galerisine erişim istenecek. Konum ve medya kalitesi verileri, mekan etiketlemesi için kullanılabilir.
+            {t("settings_extra.cam_section_roll_hint")}
           </Text>
         </Section>
       </ScrollView>

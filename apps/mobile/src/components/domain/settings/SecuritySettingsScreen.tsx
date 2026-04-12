@@ -22,12 +22,16 @@ import { createTextStyle, spacing } from "@/src/constants/design";
 import { useAuthStore } from "@/src/store/useAuthStore";
 import { changePassword, deleteAccount } from "@/src/services/authService";
 import { success, lightImpact } from "@/src/utils/haptics";
+import { useTranslation } from "react-i18next";
+import { IconSymbol } from "@/src/components/ui/IconSymbol";
+import { handleApiError } from "@/src/utils/errorHandler";
 
 export default function SecuritySettingsScreen() {
     const { colors } = useTheme();
     const router = useRouter();
     const insets = useSafeAreaInsets();
     const logout = useAuthStore((s) => s.logout);
+    const { t } = useTranslation();
 
     const [currentPass, setCurrentPass] = useState("");
     const [newPass, setNewPass] = useState("");
@@ -37,15 +41,15 @@ export default function SecuritySettingsScreen() {
 
     const handleChangePassword = async () => {
         if (!currentPass.trim()) {
-            Alert.alert("Hata", "Mevcut şifrenizi girin.");
+            Alert.alert(t("common.error"), t("settings_extra.err_current_pwd"));
             return;
         }
         if (newPass.length < 8) {
-            Alert.alert("Hata", "Yeni şifre en az 8 karakter olmalıdır.");
+            Alert.alert(t("common.error"), t("settings_extra.err_pwd_len"));
             return;
         }
         if (newPass !== confirmPass) {
-            Alert.alert("Hata", "Yeni şifreler eşleşmiyor.");
+            Alert.alert(t("common.error"), t("settings_extra.err_pwd_match"));
             return;
         }
 
@@ -53,12 +57,12 @@ export default function SecuritySettingsScreen() {
         try {
             const result = await changePassword(currentPass, newPass);
             success();
-            Alert.alert("Başarılı ✅", result.message);
+            Alert.alert(t("common.success"), result.message);
             setCurrentPass("");
             setNewPass("");
             setConfirmPass("");
         } catch (err: any) {
-            Alert.alert("Hata", err.message || "Şifre değiştirilemedi.");
+            handleApiError(err);
         } finally {
             setLoading(false);
         }
@@ -67,12 +71,12 @@ export default function SecuritySettingsScreen() {
     const handleDeleteAccount = () => {
         lightImpact();
         Alert.alert(
-            "⚠️ Hesabı Sil",
-            "Bu işlem geri alınamaz! Tüm verileriniz, postlarınız, mesajlarınız ve eşleşmeleriniz kalıcı olarak silinecektir.\n\nDevam etmek istiyor musunuz?",
+            t("settings_extra.delete_account"),
+            t("settings_extra.delete_confirm"),
             [
-                { text: "Vazgeç", style: "cancel" },
+                { text: t("common.cancel"), style: "cancel" },
                 {
-                    text: "Hesabımı Sil",
+                    text: t("settings_extra.delete_btn"),
                     style: "destructive",
                     onPress: async () => {
                         setDeleteLoading(true);
@@ -81,9 +85,8 @@ export default function SecuritySettingsScreen() {
                             success();
                             logout();
                             router.replace("/login");
-                            Alert.alert("Hesap Silindi", "Hesabınız kalıcı olarak silindi.");
                         } catch (err: any) {
-                            Alert.alert("Hata", err.message || "Hesap silinemedi.");
+                            handleApiError(err);
                         } finally {
                             setDeleteLoading(false);
                         }
@@ -96,20 +99,19 @@ export default function SecuritySettingsScreen() {
     return (
         <View style={[styles.container, { backgroundColor: colors.background.primary }]}>
             <View style={[styles.header, { borderBottomColor: colors.surface.border, paddingTop: insets.top + spacing.md }]}>
-                <View style={styles.backBtn}>
-                    <BackButton onPress={() => { lightImpact(); router.back(); }} />
-                </View>
-                <Text style={[createTextStyle("title", colors.text.primary), styles.headerTitle]}>Şifre ve Güvenlik</Text>
+                <TouchableOpacity onPress={() => { lightImpact(); router.back(); }} hitSlop={12} style={styles.backBtn}>
+                    <IconSymbol name="chevron.left" size={24} color={colors.accent.primary} />
+                </TouchableOpacity>
+                <Text style={[createTextStyle("title", colors.text.primary), styles.headerTitle]}>{t("settings_extra.sec_title")}</Text>
                 <View style={styles.backBtn} />
             </View>
 
             <ScrollView style={styles.scroll} contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
-                {/* Şifre Değiştir */}
-                <Text style={[styles.sectionTitle, { color: colors.text.secondary }]}>ŞİFRE DEĞİŞTİR</Text>
+                <Text style={[styles.sectionTitle, { color: colors.text.secondary }]}>{t("settings_extra.change_pwd")}</Text>
                 <View style={[styles.card, { backgroundColor: colors.surface.elevated, borderColor: colors.surface.border }]}>
                     <TextInput
                         style={[styles.input, { color: colors.text.primary, borderBottomColor: colors.surface.border }]}
-                        placeholder="Mevcut şifre"
+                        placeholder={t("settings_extra.current_pwd")}
                         placeholderTextColor={colors.text.tertiary}
                         secureTextEntry
                         value={currentPass}
@@ -118,7 +120,7 @@ export default function SecuritySettingsScreen() {
                     />
                     <TextInput
                         style={[styles.input, { color: colors.text.primary, borderBottomColor: colors.surface.border }]}
-                        placeholder="Yeni şifre (min 8 karakter)"
+                        placeholder={t("settings_extra.new_pwd")}
                         placeholderTextColor={colors.text.tertiary}
                         secureTextEntry
                         value={newPass}
@@ -127,7 +129,7 @@ export default function SecuritySettingsScreen() {
                     />
                     <TextInput
                         style={[styles.input, styles.inputLast, { color: colors.text.primary }]}
-                        placeholder="Yeni şifre tekrar"
+                        placeholder={t("settings_extra.new_pwd_confirm")}
                         placeholderTextColor={colors.text.tertiary}
                         secureTextEntry
                         value={confirmPass}
@@ -145,7 +147,7 @@ export default function SecuritySettingsScreen() {
                     {loading ? (
                         <ActivityIndicator color="#fff" size="small" />
                     ) : (
-                        <Text style={styles.primaryBtnText}>Şifreyi Değiştir</Text>
+                        <Text style={styles.primaryBtnText}>{t("settings_extra.change_pwd_btn")}</Text>
                     )}
                 </TouchableOpacity>
 
@@ -157,23 +159,11 @@ export default function SecuritySettingsScreen() {
                     style={styles.forgotLink}
                 >
                     <Text style={[styles.forgotText, { color: colors.accent.primary }]}>
-                        Şifreni mi unuttun?
+                        {t("settings_extra.forgot_pwd")}
                     </Text>
                 </TouchableOpacity>
 
-                {/* Hesap Silme */}
                 <View style={styles.dangerSection}>
-                    <Text style={[styles.sectionTitle, { color: colors.semantic.error }]}>TEHLİKE BÖLGESİ</Text>
-                    <View style={[styles.dangerCard, { borderColor: colors.semantic.error + "40" }]}>
-                        <Text style={[styles.dangerTitle, { color: colors.text.primary }]}>Hesabı Kalıcı Olarak Sil</Text>
-                        <Text style={[styles.dangerDesc, { color: colors.text.secondary }]}>
-                            Hesabınız ve tüm verileriniz geri dönüşümsüz olarak silinecektir. Bu işlem geri alınamaz.
-                        </Text>
-                        <TouchableOpacity
-                            style={[styles.dangerBtn, { borderColor: colors.semantic.error }]}
-                            onPress={handleDeleteAccount}
-                            disabled={deleteLoading}
-                            activeOpacity={0.7}
                         >
                             {deleteLoading ? (
                                 <ActivityIndicator color={colors.semantic.error} size="small" />

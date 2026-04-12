@@ -34,6 +34,7 @@ import { useAuthStore } from "@/src/store/useAuthStore";
 import { handleApiError } from "@/src/utils/errorHandler";
 import { lightImpact, success } from "@/src/utils/haptics";
 import { toggleBlockUser, createReport } from "@/src/services/moderationService";
+import { useTranslation } from 'react-i18next';
 
 const GRID_GAP = 14;
 const GRID_COLS = 2;
@@ -44,6 +45,7 @@ export default function UserProfileScreen() {
   const { colors } = useTheme();
   const currentUser = useAuthStore((s) => s.user);
   const { width: screenWidth } = useWindowDimensions();
+  const { t } = useTranslation();
 
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [stats, setStats] = useState<UserStats | null>(null);
@@ -133,9 +135,9 @@ export default function UserProfileScreen() {
   const reportUser = useCallback(async (reason: "spam" | "inappropriate" | "harassment" | "other") => {
     try {
       await createReport({ target_type: "user", target_id: userId, reason });
-      Alert.alert("Raporlandı ✅", "Geri bildirimin için teşekkürler.");
+      Alert.alert(t("user_profile.reported") + " ✅", t("user_profile.report_thanks"));
     } catch {
-      Alert.alert("Raporlandı", "Geri bildirimin kaydedildi.");
+      Alert.alert(t("user_profile.reported"), t("user_profile.report_saved"));
     }
   }, [userId]);
 
@@ -184,14 +186,14 @@ export default function UserProfileScreen() {
   }, []);
 
   const displayName =
-    profile?.first_name || profile?.username || profile?.email || "Kullanıcı";
+    profile?.first_name || profile?.username || profile?.email || t('profile.user');
   const username = profile?.username || profile?.email || "";
   const postCount = stats?.post_count ?? 0;
 
   if (loading && !profile) {
     return (
       <Screen withTabBar>
-        <LoadingState message="Profil yükleniyor..." />
+        <LoadingState message={t('profile.loading')} />
       </Screen>
     );
   }
@@ -199,7 +201,7 @@ export default function UserProfileScreen() {
   if (!profile || isNaN(userId)) {
     return (
       <Screen withTabBar>
-        <ErrorState title="Profil bulunamadı" onRetry={() => router.back()} />
+        <ErrorState title={t('profile.not_found')} onRetry={() => router.back()} />
       </Screen>
     );
   }
@@ -230,28 +232,28 @@ export default function UserProfileScreen() {
             onPress={() => {
               lightImpact();
               if (isOwnProfile) return;
-              Alert.alert(displayName, "Bu kullanıcı için bir işlem seçin", [
-                { text: "Vazgeç", style: "cancel" },
+              Alert.alert(displayName, t("user_profile.report_reason"), [
+                { text: t("common.cancel"), style: "cancel" },
                 {
-                  text: "Engelle",
+                  text: t("user_profile.block"),
                   style: "destructive",
                   onPress: async () => {
                     try {
                       await toggleBlockUser(userId);
                       success();
-                      Alert.alert("Engellendi ✅", `${displayName} engellendi.`);
+                      Alert.alert(t("user_profile.blocked") + " ✅", t("user_profile.blocked_with_name", { name: displayName }));
                       router.back();
-                    } catch { Alert.alert("Hata", "İşlem başarısız."); }
+                    } catch { Alert.alert(t("common.error"), t("user_profile.action_failed")); }
                   },
                 },
                 {
-                  text: "Raporla",
+                  text: t("user_profile.report_title"),
                   onPress: () => {
-                    Alert.alert("Raporla", "Neden raporluyorsun?", [
-                      { text: "Vazgeç", style: "cancel" },
-                      { text: "Spam", onPress: () => reportUser("spam") },
-                      { text: "Uygunsuz", onPress: () => reportUser("inappropriate") },
-                      { text: "Taciz", onPress: () => reportUser("harassment") },
+                    Alert.alert(t("user_profile.report_title"), t("user_profile.report_reason"), [
+                      { text: t("common.cancel"), style: "cancel" },
+                      { text: t("user_profile.report_spam"), onPress: () => reportUser("spam") },
+                      { text: t("user_profile.report_inappropriate"), onPress: () => reportUser("inappropriate") },
+                      { text: t("user_profile.report_other"), onPress: () => reportUser("harassment") },
                     ]);
                   },
                 },
@@ -318,7 +320,7 @@ export default function UserProfileScreen() {
                   },
                 ]}
               >
-                {profile.is_following ? "Takip Ediliyor" : "Takip Et"}
+                {profile.is_following ? t('profile.following_btn') : t('profile.follow_btn')}
               </Text>
             </TouchableOpacity>
 
@@ -332,7 +334,7 @@ export default function UserProfileScreen() {
               }}
               activeOpacity={0.8}
             >
-              <Text style={[styles.primaryBtnText, { color: colors.text.primary }]}>Mesaj</Text>
+              <Text style={[styles.primaryBtnText, { color: colors.text.primary }]}>{t('profile.message_btn')}</Text>
             </TouchableOpacity>
           </View>
         )}
@@ -341,7 +343,7 @@ export default function UserProfileScreen() {
         <View style={[styles.statsContainer, { backgroundColor: colors.surface.elevated, shadowColor: colors.text.primary }]}>
           <View style={styles.statItem}>
             <Text style={[styles.statNumber, { color: colors.text.primary }]}>{postCount}</Text>
-            <Text style={[styles.statLabel, { color: colors.text.tertiary }]}>Gönderi</Text>
+            <Text style={[styles.statLabel, { color: colors.text.tertiary }]}>{t('profile.posts')}</Text>
           </View>
           <View style={[styles.statDivider, { backgroundColor: colors.surface.border }]} />
           <TouchableOpacity
@@ -353,7 +355,7 @@ export default function UserProfileScreen() {
             }}
           >
             <Text style={[styles.statNumber, { color: colors.text.primary }]}>{profile.followers_count}</Text>
-            <Text style={[styles.statLabel, { color: colors.text.tertiary }]}>Takipçi</Text>
+            <Text style={[styles.statLabel, { color: colors.text.tertiary }]}>{t('profile.followers')}</Text>
           </TouchableOpacity>
           <View style={[styles.statDivider, { backgroundColor: colors.surface.border }]} />
           <TouchableOpacity
@@ -365,7 +367,7 @@ export default function UserProfileScreen() {
             }}
           >
             <Text style={[styles.statNumber, { color: colors.text.primary }]}>{profile.following_count}</Text>
-            <Text style={[styles.statLabel, { color: colors.text.tertiary }]}>Arkadaş</Text>
+            <Text style={[styles.statLabel, { color: colors.text.tertiary }]}>{t('profile.following')}</Text>
           </TouchableOpacity>
         </View>
 
@@ -382,7 +384,7 @@ export default function UserProfileScreen() {
             activeOpacity={0.7}
           >
             <Text style={[styles.tabText, { color: activeTab === "posts" ? colors.background.primary : colors.text.secondary }]}>
-              Gönderiler
+              {t('profile.tab_posts')}
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -396,7 +398,7 @@ export default function UserProfileScreen() {
             activeOpacity={0.7}
           >
             <Text style={[styles.tabText, { color: activeTab === "tagged" ? colors.background.primary : colors.text.secondary }]}>
-              Etiketler
+              {t('profile.tab_tagged')}
             </Text>
           </TouchableOpacity>
         </View>
@@ -451,9 +453,9 @@ export default function UserProfileScreen() {
                 <IconSymbol name="camera.fill" size={32} color={colors.text.tertiary} />
               </View>
               <View style={{ alignItems: "center", gap: 6 }}>
-                <Text style={[styles.emptyTitle, { color: colors.text.primary }]}>Henüz Gönderi Yok</Text>
+                <Text style={[styles.emptyTitle, { color: colors.text.primary }]}>{t('profile.no_posts')}</Text>
                 <Text style={[styles.emptyDesc, { color: colors.text.tertiary }]}>
-                  Bu kullanıcı henüz bir gönderi paylaşmadı.
+                  {t('profile.no_posts_user_desc')}
                 </Text>
               </View>
             </View>
@@ -466,7 +468,7 @@ export default function UserProfileScreen() {
               <IconSymbol name="person.crop.square.fill" size={32} color={colors.text.tertiary} />
             </View>
             <View style={{ alignItems: "center", gap: 6 }}>
-              <Text style={[styles.emptyTitle, { color: colors.text.primary }]}>Etiket Yok</Text>
+              <Text style={[styles.emptyTitle, { color: colors.text.primary }]}>{t('profile.no_tagged_user')}</Text>
             </View>
           </View>
         )}

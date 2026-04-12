@@ -7,11 +7,13 @@ import React from "react";
 import { View, Text, StyleSheet, ScrollView, Alert, TouchableOpacity } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
+import { useTranslation } from "react-i18next";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { createTextStyle, spacing } from "@/src/constants/design";
 import { useTheme } from "@/src/hooks/useTheme";
 import { Section } from "@/src/components/layout/Section";
 import { SettingsRow } from "@/src/components/ui";
+import { BackButton } from "@/src/components/shared/navigation";
 import { useSettingsStore, type UploadQuality } from "@/src/store/useSettingsStore";
 import { lightImpact, success } from "@/src/utils/haptics";
 
@@ -25,6 +27,7 @@ export default function ContentSettingsScreen() {
   const { colors } = useTheme();
   const router = useRouter();
   const insets = useSafeAreaInsets();
+  const { t } = useTranslation();
   const mapShowStories = useSettingsStore((s) => s.mapShowStories);
   const mapShowPosts = useSettingsStore((s) => s.mapShowPosts);
   const uploadQuality = useSettingsStore((s) => s.uploadQuality);
@@ -34,17 +37,17 @@ export default function ContentSettingsScreen() {
 
   const handleUploadQuality = () => {
     lightImpact();
-    Alert.alert("Yükleme kalitesi", "Hikaye ve gönderi paylaşırken kullanılacak medya kalitesi", [
-      { text: "İptal", style: "cancel" },
+    Alert.alert(t("settings_extra.content_upload_title"), t("settings_extra.content_upload_desc"), [
+      { text: t("common.cancel"), style: "cancel" },
       {
-        text: "Yüksek",
+        text: t("settings_extra.content_quality_high"),
         onPress: () => {
           setUploadQuality("high");
           success();
         },
       },
       {
-        text: "Veri tasarrufu",
+        text: t("settings_extra.content_quality_saver"),
         onPress: () => {
           setUploadQuality("data_saver");
           success();
@@ -56,36 +59,34 @@ export default function ContentSettingsScreen() {
   return (
     <View style={[styles.wrapper, { backgroundColor: colors.background.primary }]}>
       <View style={[styles.header, { borderBottomColor: colors.surface.border, paddingTop: insets.top + spacing.sm }]}>
-        <TouchableOpacity onPress={() => { lightImpact(); router.back(); }} hitSlop={12} style={styles.backBtn}>
-          <IconSymbol name="chevron.left" size={24} color={colors.accent.primary} />
-        </TouchableOpacity>
-        <Text style={[createTextStyle("title", colors.text.primary), styles.title]}>İçerik tercihleri</Text>
+        <BackButton onPress={() => router.back()} />
+        <Text style={[createTextStyle("title", colors.text.primary), styles.title]}>{t("settings_extra.content_title")}</Text>
         <View style={styles.backBtn} />
       </View>
       <ScrollView style={styles.container} contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
-        <Section title="Harita / Keşfet">
+        <Section title={t("settings_extra.content_section_map")}>
           <SettingsRow
-            label="Mekanda hikayeleri göster"
+            label={t("settings_extra.content_show_stories")}
             value={mapShowStories}
             switch
             onValueChange={setMapShowStories}
             icon="circle.hexagongrid.fill"
           />
-          <Text style={[styles.hint, { color: colors.text.tertiary }]}>{`Haritada mekan seçildiğinde hikaye ring'leri görünür`}</Text>
+          <Text style={[styles.hint, { color: colors.text.tertiary }]}>{t("settings_extra.content_hint_ring")}</Text>
           <SettingsRow
-            label="Mekanda gönderileri göster"
+            label={t("settings_extra.content_show_posts")}
             value={mapShowPosts}
             switch
             onValueChange={setMapShowPosts}
             icon="photo.on.rectangle.angled"
           />
-          <Text style={[styles.hint, { color: colors.text.tertiary }]}>Haritada mekan seçildiğinde post grid görünür</Text>
+          <Text style={[styles.hint, { color: colors.text.tertiary }]}>{t("settings_extra.content_hint_grid")}</Text>
         </Section>
 
-        <Section title="Medya kalitesi">
-          <SettingsRow label="Yükleme kalitesi" value={UPLOAD_LABELS[uploadQuality]} onPress={handleUploadQuality} showArrow icon="photo" />
+        <Section title={t("settings_extra.content_section_quality")}>
+          <SettingsRow label={t("settings_extra.content_upload_quality")} value={UPLOAD_LABELS[uploadQuality]} onPress={handleUploadQuality} showArrow icon="photo" />
           <Text style={[styles.hint, { color: colors.text.tertiary }]}>
-            Yüksek: Daha iyi görüntü kalitesi, daha fazla veri. Veri tasarrufu: Düşük kalite, az veri.
+            {t("settings_extra.content_quality_hint")}
           </Text>
         </Section>
       </ScrollView>

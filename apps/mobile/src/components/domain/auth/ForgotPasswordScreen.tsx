@@ -32,6 +32,8 @@ import { IconSymbol } from '@/src/components/ui/icon-symbol';
 import { lightImpact, success } from '@/src/utils/haptics';
 import { forgotPassword, resetPassword, loginUser } from '@/src/services/authService';
 import { useAuthStore } from '@/src/store/useAuthStore';
+import { Ionicons } from '@expo/vector-icons';
+import { useTranslation } from "react-i18next";
 
 const { width, height } = Dimensions.get('window');
 
@@ -48,6 +50,7 @@ export default function ForgotPasswordScreen() {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const [errors, setErrors] = useState<Record<string, string>>({});
+    const { t } = useTranslation();
 
     const fadeAnim = useRef(new Animated.Value(0)).current;
 
@@ -63,11 +66,11 @@ export default function ForgotPasswordScreen() {
         Keyboard.dismiss();
         const trimmedEmail = email.trim().toLowerCase();
         if (!trimmedEmail) {
-            setErrors({ email: 'E-posta adresi gerekli' });
+            setErrors({ email: t('forgot_password.email_required') });
             return;
         }
         if (!/\S+@\S+\.\S+/.test(trimmedEmail)) {
-            setErrors({ email: 'Geçerli bir e-posta girin' });
+            setErrors({ email: t('forgot_password.invalid_email') });
             return;
         }
 
@@ -77,14 +80,14 @@ export default function ForgotPasswordScreen() {
             await forgotPassword(trimmedEmail);
             success();
             setStep('reset');
-            Alert.alert('Kod Gönderildi ✅', 'E-posta adresine sıfırlama kodu gönderildi. Lütfen kontrol et.');
+            Alert.alert(t('forgot_password.code_sent'), t('forgot_password.check_email'));
         } catch (e: any) {
-            const msg = e?.response?.data?.detail || e?.message || 'İşlem başarısız';
-            Alert.alert('Hata', msg);
+            const msg = e?.response?.data?.detail || e?.message || t('forgot_password.error');
+            Alert.alert(t('forgot_password.error_title'), msg);
         } finally {
             setLoading(false);
         }
-    }, [email]);
+    }, [email, t]);
 
     const handleResetPassword = useCallback(async () => {
         Keyboard.dismiss();
@@ -92,13 +95,13 @@ export default function ForgotPasswordScreen() {
         const trimmedPassword = newPassword.trim();
 
         const newErrors: Record<string, string> = {};
-        if (!trimmedCode) newErrors.code = 'Sıfırlama kodu gerekli';
-        if (!trimmedPassword) newErrors.newPassword = 'Yeni şifre gerekli';
-        else if (trimmedPassword.length < 8) newErrors.newPassword = 'Şifre en az 8 karakter olmalı';
+        if (!trimmedCode) newErrors.code = t('forgot_password.code_required');
+        if (!trimmedPassword) newErrors.newPassword = t('forgot_password.password_required');
+        else if (trimmedPassword.length < 8) newErrors.newPassword = t('forgot_password.password_short');
         else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*([^\w\s]|_))/.test(trimmedPassword)) {
-            newErrors.newPassword = 'Büyük harf, küçük harf, rakam ve özel harf girmelisin';
+            newErrors.newPassword = t('forgot_password.password_weak');
         }
-        if (trimmedPassword !== confirmPassword.trim()) newErrors.confirmPassword = 'Şifreler eşleşmiyor';
+        if (trimmedPassword !== confirmPassword.trim()) newErrors.confirmPassword = t('forgot_password.passwords_mismatch');
 
         if (Object.keys(newErrors).length > 0) {
             setErrors(newErrors);
@@ -110,7 +113,6 @@ export default function ForgotPasswordScreen() {
         try {
             await resetPassword(email.trim().toLowerCase(), trimmedCode, trimmedPassword);
 
-            // Otomatik giriş işlemini yap
             const tokens = await loginUser({ email: email.trim().toLowerCase(), password: trimmedPassword });
             useAuthStore.getState().setTokens(tokens.access_token, tokens.refresh_token);
             if (tokens.user) {
@@ -119,21 +121,20 @@ export default function ForgotPasswordScreen() {
 
             success();
             Alert.alert(
-                'Şifre Sıfırlandı ✅',
-                'Yeni şifren başarıyla oluşturuldu. Otomatik olarak giriş yapılıyor...',
-                [{ text: 'Tamam', onPress: () => router.replace('/(tabs)') }]
+                t('forgot_password.success_title'),
+                t('forgot_password.success_message'),
+                [{ text: t('forgot_password.ok'), onPress: () => router.replace('/(tabs)/' as any) }]
             );
         } catch (e: any) {
-            const msg = e?.response?.data?.detail || e?.message || 'İşlem başarısız';
-            Alert.alert('Hata', msg);
+            const msg = e?.response?.data?.detail || e?.message || t('forgot_password.error');
+            Alert.alert(t('forgot_password.error_title'), msg);
         } finally {
             setLoading(false);
         }
-    }, [email, code, newPassword, confirmPassword]);
+    }, [email, code, newPassword, confirmPassword, t]);
 
     return (
         <View style={styles.container}>
-            {/* Background */}
             <Animated.Image
                 source={{ uri: BG_IMAGE }}
                 style={[styles.bgImage, { opacity: fadeAnim }]}
@@ -160,7 +161,6 @@ export default function ForgotPasswordScreen() {
                         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
                             <View style={{ flex: 1 }}>
                                 <View style={styles.content}>
-                                    {/* Header */}
                                     <View style={styles.header}>
                                         <TouchableOpacity
                                             onPress={() => {
@@ -183,24 +183,23 @@ export default function ForgotPasswordScreen() {
                                                 <IconSymbol name="lock.rotation" size={36} color="#fff" />
                                             </View>
                                             <Text style={styles.title}>
-                                                {step === 'email' ? 'Şifreni Sıfırla' : 'Yeni Şifre Belirle'}
+                                                {step === 'email' ? t('forgot_password.title') : t('forgot_password.reset_title')}
                                             </Text>
                                             <Text style={styles.subtitle}>
                                                 {step === 'email'
-                                                    ? 'E-posta adresine sıfırlama kodu göndereceğiz.'
-                                                    : 'E-postana gelen kodu gir ve yeni şifreni belirle.'}
+                                                    ? t('forgot_password.subtitle_email')
+                                                    : t('forgot_password.subtitle_reset')}
                                             </Text>
                                         </View>
                                     </View>
 
-                                    {/* Form */}
                                     <BlurView intensity={90} tint="dark" style={styles.card}>
                                         <View style={styles.cardInner}>
                                             {step === 'email' ? (
                                                 <>
                                                     <Input
                                                         variant="onDark"
-                                                        label="E-posta"
+                                                        label={t('forgot_password.email')}
                                                         placeholder="ornek@email.com"
                                                         value={email}
                                                         onChangeText={(t) => {
@@ -221,7 +220,7 @@ export default function ForgotPasswordScreen() {
                                                         disabled={loading}
                                                         style={styles.actionButton}
                                                     >
-                                                        Kod Gönder
+                                                        {t('forgot_password.send_code')}
                                                     </Button>
                                                 </>
                                             ) : (
@@ -232,7 +231,7 @@ export default function ForgotPasswordScreen() {
                                                     </View>
                                                     <Input
                                                         variant="onDark"
-                                                        label="Sıfırlama Kodu"
+                                                        label={t('forgot_password.code')}
                                                         placeholder="123456"
                                                         value={code}
                                                         onChangeText={(t) => {
@@ -246,8 +245,8 @@ export default function ForgotPasswordScreen() {
                                                     />
                                                     <Input
                                                         variant="onDark"
-                                                        label="Yeni Şifre"
-                                                        placeholder="Örn: UcD.7491"
+                                                        label={t('forgot_password.new_password')}
+                                                        placeholder="••••••••"
                                                         value={newPassword}
                                                         onChangeText={(t) => {
                                                             setNewPassword(t);
@@ -259,7 +258,7 @@ export default function ForgotPasswordScreen() {
                                                     />
                                                     <Input
                                                         variant="onDark"
-                                                        label="Yeni Şifre (Tekrar)"
+                                                        label={t('forgot_password.confirm_password')}
                                                         placeholder="••••••••"
                                                         value={confirmPassword}
                                                         onChangeText={(t) => {
@@ -278,7 +277,7 @@ export default function ForgotPasswordScreen() {
                                                         disabled={loading}
                                                         style={styles.actionButton}
                                                     >
-                                                        Şifreyi Sıfırla
+                                                        {t('forgot_password.reset_button')}
                                                     </Button>
 
                                                     <TouchableOpacity
@@ -289,7 +288,7 @@ export default function ForgotPasswordScreen() {
                                                         style={styles.resendWrap}
                                                         activeOpacity={0.7}
                                                     >
-                                                        <Text style={styles.resendText}>Kodu tekrar gönder</Text>
+                                                        <Text style={styles.resendText}>{t("forgot_password.resend_code")}</Text>
                                                     </TouchableOpacity>
                                                 </>
                                             )}
@@ -300,18 +299,9 @@ export default function ForgotPasswordScreen() {
                         </TouchableWithoutFeedback>
                     </ScrollView>
 
-                    {/* Footer */}
-                    <TouchableOpacity
-                        style={[styles.footer, { paddingBottom: Math.max(16, insets.bottom + 8) }]}
-                        onPress={() => {
-                            Keyboard.dismiss();
-                            lightImpact();
-                            router.replace('/login');
-                        }}
-                        activeOpacity={0.8}
-                    >
-                        <Text style={styles.footerText}>Şifreni hatırladın mı? </Text>
-                        <Text style={styles.footerLink}>Giriş Yap</Text>
+                    <TouchableOpacity onPress={() => router.push('/(auth)/login')} style={styles.footer}>
+                        <Text style={styles.footerText}>{t("forgot_password.remember_password")} </Text>
+                        <Text style={styles.footerLink}>{t("forgot_password.login")}</Text>
                     </TouchableOpacity>
                 </KeyboardAvoidingView>
             </SafeAreaView>

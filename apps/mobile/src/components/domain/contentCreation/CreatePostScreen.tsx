@@ -32,11 +32,13 @@ import { ContentCreationFlow } from "@/src/components/domain/contentCreation";
 import { createPost, uploadImage, uploadVideo } from "@/src/services/feedService";
 import { useSettingsStore } from "@/src/store/useSettingsStore";
 import { lightImpact, mediumImpact } from "@/src/utils/haptics";
+import { useTranslation } from "react-i18next";
 
 export default function CreatePostScreen() {
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
   const params = useLocalSearchParams<{ placeId?: string; placeName?: string; preSelect?: string }>();
+  const { t } = useTranslation();
 
   const [selectedPlace, setSelectedPlace] = useState<Place | null>(() => {
     if (params.placeId && params.placeName) {
@@ -49,11 +51,11 @@ export default function CreatePostScreen() {
 
   const handleClose = useCallback(() => {
     lightImpact();
-    Alert.alert("İptal Et", "Gönderi oluşturmayı iptal etmek istiyor musunuz? Yaptığınız değişiklikler silinecek.", [
-      { text: "Vazgeç", style: "cancel" },
-      { text: "Çık", style: "destructive", onPress: () => { lightImpact(); router.back(); } },
+    Alert.alert(t("content_creation.cancel"), t("content_creation.cancel_post_desc"), [
+      { text: t("content_creation.give_up"), style: "cancel" },
+      { text: t("content_creation.exit"), style: "destructive", onPress: () => { lightImpact(); router.back(); } },
     ]);
-  }, []);
+  }, [t]);
 
   useEffect(() => {
     const sub = BackHandler.addEventListener("hardwareBackPress", () => {
@@ -80,7 +82,7 @@ export default function CreatePostScreen() {
             name: "photo.jpg",
           });
       const mediaUrl = uploadRes?.url;
-      if (!mediaUrl) throw new Error("Dosya yüklenemedi.");
+      if (!mediaUrl) throw new Error(t("content_creation.upload_failed"));
 
       await createPost({
         caption: caption?.trim() || undefined,
@@ -98,7 +100,7 @@ export default function CreatePostScreen() {
       });
       router.replace("/(tabs)/feed");
     },
-    []
+    [t]
   );
 
   const quality = uploadQuality === "data_saver" ? 0.5 : 0.9;
@@ -164,6 +166,7 @@ function PostShareStep({
   const [caption, setCaption] = useState("");
   const [commentsDisabled, setCommentsDisabled] = useState(false);
   const [hideLikes, setHideLikes] = useState(false);
+  const { t } = useTranslation();
 
   const handleShareClick = async () => {
     setLoading(true);
@@ -175,7 +178,7 @@ function PostShareStep({
         commentsDisabled
       });
     } catch (e: any) {
-      Alert.alert("Hata", e.message || "Paylaşım başarısız.");
+      Alert.alert(t("edit_profile.error"), e.message || t("content_creation.share_failed"));
     } finally {
       setLoading(false);
     }
@@ -190,7 +193,7 @@ function PostShareStep({
         <TouchableOpacity onPress={onBack} style={styles.headerBtn} hitSlop={12}>
           <IconSymbol name="chevron.left" size={24} color={colors.text.primary} />
         </TouchableOpacity>
-        <Text style={[titleStyle, styles.headerTitle]}>Yeni Gönderi</Text>
+        <Text style={[titleStyle, styles.headerTitle]}>{t("content_creation.new_post")}</Text>
         <View style={styles.headerBtn} />
       </View>
 
@@ -202,7 +205,7 @@ function PostShareStep({
             <ExpoImage source={{ uri: mediaUri }} style={styles.thumbnail} contentFit="cover" />
             <TextInput
               style={[styles.captionInput, { color: colors.text.primary }]}
-              placeholder="Bir açıklama yaz..."
+              placeholder={t("content_creation.caption_ph")}
               placeholderTextColor={colors.text.tertiary}
               value={caption}
               onChangeText={setCaption}
@@ -223,7 +226,7 @@ function PostShareStep({
               </View>
               <View style={styles.actionTextWrap}>
                 <Text style={[styles.actionLabel, { color: selectedPlace ? colors.text.primary : colors.text.secondary }]}>
-                  {selectedPlace?.name || "Konum Ekle"}
+                  {selectedPlace?.name || t("content_creation.add_location")}
                 </Text>
               </View>
               {selectedPlace ? (
@@ -240,7 +243,7 @@ function PostShareStep({
                 <IconSymbol name="person.crop.circle.badge.plus" size={22} color={colors.text.secondary} />
               </View>
               <View style={styles.actionTextWrap}>
-                <Text style={[styles.actionLabel, { color: colors.text.secondary }]}>Kişileri Etiketle</Text>
+                <Text style={[styles.actionLabel, { color: colors.text.secondary }]}>{t("content_creation.tag_people")}</Text>
               </View>
               <IconSymbol name="chevron.right" size={18} color={colors.text.tertiary} />
             </TouchableOpacity>
@@ -250,7 +253,7 @@ function PostShareStep({
                 <IconSymbol name="music.note" size={22} color={colors.text.secondary} />
               </View>
               <View style={styles.actionTextWrap}>
-                <Text style={[styles.actionLabel, { color: colors.text.secondary }]}>Müzik Ekle</Text>
+                <Text style={[styles.actionLabel, { color: colors.text.secondary }]}>{t("content_creation.add_music")}</Text>
               </View>
               <IconSymbol name="chevron.right" size={18} color={colors.text.tertiary} />
             </TouchableOpacity>
@@ -258,12 +261,12 @@ function PostShareStep({
 
           {/* Advanced Settings */}
           <View style={styles.advancedSection}>
-            <Text style={[styles.sectionTitle, { color: colors.text.primary }]}>Gelişmiş Ayarlar</Text>
+            <Text style={[styles.sectionTitle, { color: colors.text.primary }]}>{t("content_creation.adv_settings")}</Text>
             
             <View style={styles.settingRow}>
               <View style={styles.settingTextWrap}>
-                <Text style={[styles.settingLabel, { color: colors.text.primary }]}>Yorumları Kapat</Text>
-                <Text style={[styles.settingDesc, { color: colors.text.tertiary }]}>Bu gönderi için yorum yapmayı devre dışı bırakabilirsiniz.</Text>
+                <Text style={[styles.settingLabel, { color: colors.text.primary }]}>{t("content_creation.disable_comments")}</Text>
+                <Text style={[styles.settingDesc, { color: colors.text.tertiary }]}>{t("content_creation.disable_comments_desc")}</Text>
               </View>
               <Switch
                 value={commentsDisabled}
@@ -274,8 +277,8 @@ function PostShareStep({
 
             <View style={styles.settingRow}>
               <View style={styles.settingTextWrap}>
-                <Text style={[styles.settingLabel, { color: colors.text.primary }]}>Beğeni Sayısını Gizle</Text>
-                <Text style={[styles.settingDesc, { color: colors.text.tertiary }]}>Sadece siz bu gönderideki toplam beğeni sayısını görebilirsiniz.</Text>
+                <Text style={[styles.settingLabel, { color: colors.text.primary }]}>{t("content_creation.hide_likes")}</Text>
+                <Text style={[styles.settingDesc, { color: colors.text.tertiary }]}>{t("content_creation.hide_likes_desc")}</Text>
               </View>
               <Switch
                 value={hideLikes}
@@ -291,13 +294,13 @@ function PostShareStep({
       {/* Share Footbar */}
       <View style={[styles.footer, { paddingBottom: insets.bottom + 12, backgroundColor: colors.surface.elevated, borderTopColor: colors.surface.border }]}>
         <TouchableOpacity style={styles.draftBtn} onPress={onClose} disabled={loading}>
-          <Text style={[styles.draftText, { color: colors.text.primary }]}>Taslak Olarak Kaydet</Text>
+          <Text style={[styles.draftText, { color: colors.text.primary }]}>{t("content_creation.save_draft")}</Text>
         </TouchableOpacity>
         <TouchableOpacity style={[styles.shareBtn, { backgroundColor: colors.accent.primary }]} onPress={handleShareClick} disabled={loading}>
           {loading ? (
             <ActivityIndicator size="small" color="#000" />
           ) : (
-            <Text style={styles.shareText}>Paylaş</Text>
+            <Text style={styles.shareText}>{t("content_creation.share")}</Text>
           )}
         </TouchableOpacity>
       </View>

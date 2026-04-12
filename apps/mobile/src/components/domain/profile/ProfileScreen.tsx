@@ -14,12 +14,14 @@ import { handleApiError } from "@/src/utils/errorHandler";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { Image } from "expo-image";
 import { CreateBottomSheet } from "./components/CreateBottomSheet";
+import { useTranslation } from "react-i18next";
 
 const GRID_GAP = 14;
 const GRID_COLS = 2;
 
 export default function ProfileScreen() {
   const { colors } = useTheme();
+  const { t } = useTranslation();
   const router = useRouter();
   const navigation = useNavigation();
   const scrollViewRef = useRef<ScrollView>(null);
@@ -87,19 +89,19 @@ export default function ProfileScreen() {
   if (!authUser) {
     return (
       <Screen withTabBar>
-        <LoadingState message="Profil yükleniyor..." />
+        <LoadingState message={t('profile.loading')} />
       </Screen>
     );
   }
 
-  const displayName = authUser.first_name || authUser.username || authUser.email || "Kullanıcı";
+  const displayName = authUser.first_name || authUser.username || authUser.email || t('profile.user');
   const username = authUser.username || authUser.email || "";
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background.primary }]}>
       {/* ── Moden Header ── */}
       <View style={[styles.header, { paddingTop: insets.top + 16 }]}>
-        <Text style={[styles.headerTitle, { color: colors.text.primary }]}>Profil</Text>
+        <Text style={[styles.headerTitle, { color: colors.text.primary }]}>{t('profile.title')}</Text>
 
         <View style={styles.headerRight}>
           <TouchableOpacity
@@ -163,7 +165,7 @@ export default function ProfileScreen() {
             onPress={() => { lightImpact(); router.push("/edit-profile" as any); }}
             activeOpacity={0.8}
           >
-            <Text style={styles.primaryBtnText}>Profili Düzenle</Text>
+            <Text style={styles.primaryBtnText}>{t('profile.edit')}</Text>
           </TouchableOpacity>
 
           <TouchableOpacity
@@ -172,7 +174,7 @@ export default function ProfileScreen() {
               lightImpact();
               try {
                 await Share.share({
-                  message: `Kastel'deki profilime göz at! @${username}`,
+                  message: t('profile.share_text', { username }),
                 });
               } catch (e) {
                 console.error(e);
@@ -188,7 +190,7 @@ export default function ProfileScreen() {
         <View style={[styles.statsContainer, { backgroundColor: colors.surface.elevated, shadowColor: colors.text.primary }]}>
           <View style={styles.statItem}>
             <Text style={[styles.statNumber, { color: colors.text.primary }]}>{displayStats.posts}</Text>
-            <Text style={[styles.statLabel, { color: colors.text.tertiary }]}>Gönderi</Text>
+            <Text style={[styles.statLabel, { color: colors.text.tertiary }]}>{t('profile.posts')}</Text>
           </View>
           <View style={[styles.statDivider, { backgroundColor: colors.surface.border }]} />
           <TouchableOpacity
@@ -200,7 +202,7 @@ export default function ProfileScreen() {
             }}
           >
             <Text style={[styles.statNumber, { color: colors.text.primary }]}>{displayStats.followers}</Text>
-            <Text style={[styles.statLabel, { color: colors.text.tertiary }]}>Takipçi</Text>
+            <Text style={[styles.statLabel, { color: colors.text.tertiary }]}>{t('profile.followers')}</Text>
           </TouchableOpacity>
           <View style={[styles.statDivider, { backgroundColor: colors.surface.border }]} />
           <TouchableOpacity
@@ -212,7 +214,7 @@ export default function ProfileScreen() {
             }}
           >
             <Text style={[styles.statNumber, { color: colors.text.primary }]}>{displayStats.following}</Text>
-            <Text style={[styles.statLabel, { color: colors.text.tertiary }]}>Arkadaş</Text>
+            <Text style={[styles.statLabel, { color: colors.text.tertiary }]}>{t('profile.following')}</Text>
           </TouchableOpacity>
         </View>
 
@@ -229,7 +231,7 @@ export default function ProfileScreen() {
             activeOpacity={0.7}
           >
             <Text style={[styles.tabText, { color: activeTab === "posts" ? colors.background.primary : colors.text.secondary }]}>
-              Gönderiler
+              {t('profile.tab_posts')}
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -243,7 +245,7 @@ export default function ProfileScreen() {
             activeOpacity={0.7}
           >
             <Text style={[styles.tabText, { color: activeTab === "tagged" ? colors.background.primary : colors.text.secondary }]}>
-              Etiketler
+              {t('profile.tab_tagged')}
             </Text>
           </TouchableOpacity>
         </View>
@@ -301,9 +303,9 @@ export default function ProfileScreen() {
                 <IconSymbol name="camera.fill" size={32} color={colors.text.tertiary} />
               </View>
               <View style={{ alignItems: "center", gap: 6 }}>
-                <Text style={[styles.emptyTitle, { color: colors.text.primary }]}>Henüz Gönderi Yok</Text>
+                <Text style={[styles.emptyTitle, { color: colors.text.primary }]}>{t('profile.no_posts')}</Text>
                 <Text style={[styles.emptyDesc, { color: colors.text.tertiary }]}>
-                  Mekan keşiflerinizi ve deneyimlerinizi paylaşmaya başlayın.
+                  {t('profile.no_posts_desc')}
                 </Text>
               </View>
             </View>
@@ -316,9 +318,9 @@ export default function ProfileScreen() {
               <IconSymbol name="person.crop.square.fill" size={32} color={colors.text.tertiary} />
             </View>
             <View style={{ alignItems: "center", gap: 6 }}>
-              <Text style={[styles.emptyTitle, { color: colors.text.primary }]}>Henüz Etiketlenmedin</Text>
+              <Text style={[styles.emptyTitle, { color: colors.text.primary }]}>{t('profile.no_tagged')}</Text>
               <Text style={[styles.emptyDesc, { color: colors.text.tertiary }]}>
-                Arkadaşların seni bir gönderide etiketlediğinde burada görebileceksin.
+                {t('profile.no_tagged_desc')}
               </Text>
             </View>
           </View>

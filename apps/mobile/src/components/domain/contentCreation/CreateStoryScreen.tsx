@@ -32,12 +32,14 @@ import { useSettingsStore } from "@/src/store/useSettingsStore";
 import { lightImpact } from "@/src/utils/haptics";
 import { Avatar } from "@/src/components/ui/Avatar";
 import { useAuthStore } from "@/src/store/useAuthStore";
+import { useTranslation } from "react-i18next";
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get("window");
 
 export default function CreateStoryScreen() {
   const { colors } = useTheme();
   const params = useLocalSearchParams<{ placeId?: string; placeName?: string }>();
+  const { t } = useTranslation();
   const [selectedPlace, setSelectedPlace] = useState<Place | null>(() => {
     if (params.placeId != null && params.placeName != null) {
       return { id: parseInt(String(params.placeId), 10), name: params.placeName } as Place;
@@ -50,10 +52,10 @@ export default function CreateStoryScreen() {
 
   const handleClose = useCallback(() => {
     lightImpact();
-    Alert.alert("Hikayeyi iptal et", "Çıkmak istiyor musunuz? Değişiklikleriniz silinecek.", [
-      { text: "Vazgeç", style: "cancel" },
+    Alert.alert(t("content_creation.cancel"), t("content_creation.cancel_desc"), [
+      { text: t("content_creation.give_up"), style: "cancel" },
       {
-        text: "Çık",
+        text: t("content_creation.exit"),
         style: "destructive",
         onPress: () => {
           lightImpact();
@@ -61,7 +63,7 @@ export default function CreateStoryScreen() {
         },
       },
     ]);
-  }, []);
+  }, [t]);
 
   useEffect(() => {
     const sub = BackHandler.addEventListener("hardwareBackPress", () => {
@@ -87,7 +89,7 @@ export default function CreateStoryScreen() {
             name: "story.jpg",
           });
       const mediaUrl = uploadRes?.url;
-      if (mediaUrl == null) throw new Error("Yükleme başarısız.");
+      if (mediaUrl == null) throw new Error(t("content_creation.upload_failed"));
 
       await createStory({
         place_id: placeId ?? undefined,
@@ -108,7 +110,7 @@ export default function CreateStoryScreen() {
       }
       router.back();
     },
-    [storySaveToCameraRoll]
+    [storySaveToCameraRoll, t]
   );
 
   const quality = uploadQuality === "data_saver" ? 0.5 : 0.9;
@@ -169,6 +171,7 @@ function StoryShareStep({
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
   const [loading, setLoading] = useState<"story" | "close_friends" | null>(null);
+  const { t } = useTranslation();
   
   const authUser = useAuthStore((s) => s.user);
 
@@ -182,8 +185,8 @@ function StoryShareStep({
         type
       });
     } catch (e: unknown) {
-      const msg = e instanceof Error ? e.message : "Hikaye paylaşımı başarısız.";
-      Alert.alert("Hata", msg);
+      const msg = e instanceof Error ? e.message : t("content_creation.story_failed");
+      Alert.alert(t("edit_profile.error"), msg);
     } finally {
       setLoading(null);
     }
@@ -210,7 +213,7 @@ function StoryShareStep({
           </TouchableOpacity>
           <TouchableOpacity onPress={() => { lightImpact(); onPlacePickerOpen(); }} style={styles.stickerPill}>
             <IconSymbol name="mappin.and.ellipse" size={16} color={colors.accent.primary} />
-            <Text style={styles.stickerText}>{selectedPlace?.name ?? "Konum"}</Text>
+            <Text style={styles.stickerText}>{selectedPlace?.name ?? t("content_creation.location")}</Text>
           </TouchableOpacity>
         </View>
 
@@ -233,10 +236,10 @@ function StoryShareStep({
           >
              {loading === "story" ? (
                <ActivityIndicator size="small" color="#fff" />
-             ) : (
+              ) : (
                <>
                  <Avatar source={authUser?.avatar_url ? { uri: authUser.avatar_url } : undefined} name={authUser?.username || "A"} size={28} />
-                 <Text style={styles.shareBtnText}>Hikayen</Text>
+                 <Text style={styles.shareBtnText}>{t("content_creation.your_story")}</Text>
                </>
              )}
           </TouchableOpacity>
@@ -249,12 +252,12 @@ function StoryShareStep({
           >
              {loading === "close_friends" ? (
                <ActivityIndicator size="small" color="#fff" />
-             ) : (
+              ) : (
                <>
                  <View style={styles.closeFriendsIconWrap}>
                    <IconSymbol name="star.fill" size={14} color="#fff" />
                  </View>
-                 <Text style={styles.shareBtnText}>Yakın Arkadaşlar</Text>
+                 <Text style={styles.shareBtnText}>{t("content_creation.close_friends")}</Text>
                </>
              )}
           </TouchableOpacity>

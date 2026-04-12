@@ -28,6 +28,8 @@ import { BlurView } from 'expo-blur';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button, Input } from '@/src/components/ui';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
+import { handleApiError } from '@/src/utils/errorHandler';
+import { useTranslation } from 'react-i18next';
 import { lightImpact, success } from '@/src/utils/haptics';
 import { getAllPlaces } from '@/src/services/mekanService';
 import { registerUser, registerVenue, googleLogin, appleLogin } from '@/src/services/authService';
@@ -54,6 +56,7 @@ const CAROUSEL_INTERVAL_MS = 4500;
 
 export default function RegisterScreen() {
   const insets = useSafeAreaInsets();
+  const { t } = useTranslation();
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -74,9 +77,10 @@ export default function RegisterScreen() {
 
   // Google Auth Setup
   const [request, response, promptAsync] = Google.useAuthRequest({
-    clientId: 'TODO_YOUR_GOOGLE_CLIENT_ID_WEB',
-    iosClientId: 'TODO_YOUR_GOOGLE_CLIENT_ID_IOS',
-    androidClientId: 'TODO_YOUR_GOOGLE_CLIENT_ID_ANDROID',
+    clientId: '398883081062-uqa0hbpbo6nhjcbigltircbbg3ngr7oi.apps.googleusercontent.com',
+    iosClientId: '398883081062-uqa0hbpbo6nhjcbigltircbbg3ngr7oi.apps.googleusercontent.com',
+    androidClientId: '398883081062-uqa0hbpbo6nhjcbigltircbbg3ngr7oi.apps.googleusercontent.com',
+    scopes: ['openid', 'profile', 'email'],
   });
 
   useEffect(() => {
@@ -108,7 +112,7 @@ export default function RegisterScreen() {
         if (!data.user.username || !data.user.birth_date) {
           router.replace('/first-time-setup' as any);
         } else {
-          router.replace('/(tabs)');
+          router.replace('/(tabs)/' as any);
         }
       }
     } catch (err: any) {
@@ -147,7 +151,7 @@ export default function RegisterScreen() {
           if (!data.user.username || !data.user.birth_date) {
             router.replace('/first-time-setup' as any);
           } else {
-            router.replace('/(tabs)');
+            router.replace('/(tabs)/' as any);
           }
         }
       }
@@ -291,7 +295,7 @@ export default function RegisterScreen() {
                           lightImpact();
                         }}
                       >
-                       <Text style={[styles.toggleTxt, roleType === 'user' && styles.toggleTxtActive]}>Kullanıcı</Text>
+                        <Text style={[styles.toggleTxt, roleType === 'user' && styles.toggleTxtActive]}>{t('auth.user')}</Text>
                       </TouchableOpacity>
                       <TouchableOpacity 
                         style={[styles.toggleBtn, roleType === 'venue' && styles.toggleBtnActive]}
@@ -301,7 +305,7 @@ export default function RegisterScreen() {
                           lightImpact();
                         }}
                       >
-                       <Text style={[styles.toggleTxt, roleType === 'venue' && styles.toggleTxtActive]}>Mekan</Text>
+                       <Text style={[styles.toggleTxt, roleType === 'venue' && styles.toggleTxtActive]}>{t('auth.venue')}</Text>
                       </TouchableOpacity>
                     </View>
 
@@ -310,8 +314,8 @@ export default function RegisterScreen() {
                         {roleType === 'user' ? (
                           <Input
                             variant="onDark"
-                            label="Ad Soyad"
-                            placeholder="Adınız Soyadınız"
+                            label={t('auth.full_name')}
+                            placeholder={t('auth.full_name_placeholder')}
                             value={fullName}
                             onChangeText={(t) => { setFullName(t); clearFieldError('fullName'); }}
                             autoCapitalize="words"
@@ -321,8 +325,8 @@ export default function RegisterScreen() {
                         ) : (
                           <Input
                             variant="onDark"
-                            label="Mekan Adı"
-                            placeholder="Mekan Adı Giriniz"
+                            label={t('auth.venue_name')}
+                            placeholder={t('auth.venue_name_placeholder')}
                             value={venueName}
                             onChangeText={(t) => { setVenueName(t); clearFieldError('venueName'); }}
                             autoCapitalize="words"
@@ -332,8 +336,8 @@ export default function RegisterScreen() {
                         )}
                         <Input
                           variant="onDark"
-                          label="E-posta"
-                          placeholder="ornek@email.com"
+                          label={t('auth.email')}
+                          placeholder={t('auth.email_placeholder')}
                           value={email}
                           onChangeText={(t) => { setEmail(t); clearFieldError('email'); }}
                           keyboardType="email-address"
@@ -344,8 +348,8 @@ export default function RegisterScreen() {
                         />
                         <Input
                           variant="onDark"
-                          label="Şifre"
-                          placeholder="Örn: UcD.7491"
+                          label={t('auth.password')}
+                          placeholder={t('auth.password_hint')}
                           value={password}
                           onChangeText={(t) => {
                             setPassword(t);
@@ -359,8 +363,8 @@ export default function RegisterScreen() {
                         />
                         <Input
                           variant="onDark"
-                          label="Şifre Tekrar"
-                          placeholder="Şifreni tekrar gir"
+                          label={t('auth.confirm_password')}
+                          placeholder={t('auth.confirm_password_placeholder')}
                           value={confirmPassword}
                           onChangeText={(t) => { setConfirmPassword(t); clearFieldError('confirmPassword'); }}
                           secureTextEntry
@@ -377,8 +381,8 @@ export default function RegisterScreen() {
                             {termsAccepted && <IconSymbol name="checkmark" size={14} color="#000" />}
                           </View>
                           <Text style={styles.termsText}>
-                            <Text style={styles.termsLink} onPress={() => WebBrowser.openBrowserAsync('https://asemos.com/terms')}>Kullanım Koşulları</Text> ve{' '}
-                            <Text style={styles.termsLink} onPress={() => WebBrowser.openBrowserAsync('https://asemos.com/privacy')}>Gizlilik Politikası</Text>'nı okudum ve kabul ediyorum.
+                            <Text style={styles.termsLink} onPress={() => WebBrowser.openBrowserAsync('https://asemos.com/terms')}>{t('auth.terms')}</Text>{t('auth.and')}
+                            <Text style={styles.termsLink} onPress={() => WebBrowser.openBrowserAsync('https://asemos.com/privacy')}>{t('auth.privacy')}</Text>{t('auth.read_and_accept')}
                           </Text>
                         </TouchableOpacity>
 
@@ -390,24 +394,24 @@ export default function RegisterScreen() {
                           disabled={loading}
                           style={styles.registerButton}
                         >
-                          {roleType === 'user' ? 'Kayıt Ol' : 'Onaya Gönder'}
+                          {roleType === 'user' ? t('auth.register') : t('auth.send_approval')}
                         </Button>
 
                         {roleType === 'user' && (
                           <>
                             <View style={styles.divider}>
                               <View style={styles.dividerLine} />
-                              <Text style={styles.dividerLabel}>veya</Text>
+                              <Text style={styles.dividerLabel}>{t('auth.or')}</Text>
                               <View style={styles.dividerLine} />
                             </View>
                             <View style={styles.socialRow}>
                               <TouchableOpacity onPress={() => handleSocialRegister('Google')} style={styles.socialBtnGoogle}>
                                 <Text style={styles.socialIconG}>G</Text>
-                                <Text style={styles.socialBtnTextGoogle}>Google</Text>
+                                <Text style={styles.socialBtnTextGoogle}>{t('auth.google')}</Text>
                               </TouchableOpacity>
                               <TouchableOpacity onPress={() => handleSocialRegister('Apple')} style={styles.socialBtnApple}>
                                 <IconSymbol name="apple.logo" size={20} color="#fff" />
-                                <Text style={styles.socialBtnTextWhite}>Apple</Text>
+                                <Text style={styles.socialBtnTextWhite}>{t('auth.apple')}</Text>
                               </TouchableOpacity>
                             </View>
                           </>
@@ -424,8 +428,8 @@ export default function RegisterScreen() {
             onPress={() => { Keyboard.dismiss(); lightImpact(); router.back(); }}
             activeOpacity={0.8}
           >
-            <Text style={styles.footerLabel}>Zaten hesabın var mı? </Text>
-            <Text style={styles.footerLink}>Giriş Yap</Text>
+            <Text style={styles.footerLabel}>{t('auth.have_account')}</Text>
+            <Text style={styles.footerLink}>{t('auth.login')}</Text>
           </TouchableOpacity>
         </KeyboardAvoidingView>
       </SafeAreaView>

@@ -10,6 +10,8 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { IconSymbol, IconSymbolName } from '@/src/components/ui/icon-symbol';
 import { lightImpact, heavyImpact, selection } from '@/src/utils/haptics';
 import * as WebBrowser from 'expo-web-browser';
+import { useTranslation } from 'react-i18next';
+import { useSettingsStore } from '@/src/store/useSettingsStore';
 
 const SettingRow = ({
   icon,
@@ -44,16 +46,18 @@ const SettingRow = ({
 
 export default function VenueSettingsScreen() {
   const { user, logout } = useAuthStore();
+  const { language, setLanguage } = useSettingsStore();
   const scrollRef = useRef<ScrollView>(null);
+  const { t } = useTranslation();
 
   useScrollToTop(scrollRef);
 
   const handleLogout = () => {
     heavyImpact();
-    Alert.alert('Güvenli Çıkış', 'Mekan yönetim panelinden çıkış yapmak üzeresiniz. Onaylıyor musunuz?', [
-      { text: 'Vazgeç', style: 'cancel' },
+    Alert.alert(t('settings.logout_alert_title'), t('settings.logout_alert_body'), [
+      { text: t('settings.logout_alert_cancel'), style: 'cancel' },
       {
-        text: 'Çıkış Yap',
+        text: t('settings.logout_alert_confirm'),
         style: 'destructive',
         onPress: () => {
           logout();
@@ -65,10 +69,10 @@ export default function VenueSettingsScreen() {
 
   const handleDeleteAccount = () => {
     heavyImpact();
-    Alert.alert('İşletme Hesabını Kapat', 'Tüm mekan profiliniz, fotoğraflarınız, istatistikleriniz ve menü bilgileriniz kalıcı olarak silinecektir. Bu işlem GERİ DÖNDÜRÜLEMEZ.', [
-      { text: 'İptal', style: 'cancel' },
+    Alert.alert(t('settings.delete_alert_title'), t('settings.delete_alert_body'), [
+      { text: t('settings.delete_alert_cancel'), style: 'cancel' },
       {
-        text: 'Kalıcı Olarak Sil',
+        text: t('settings.delete_alert_confirm'),
         style: 'destructive',
         onPress: async () => {
           try {
@@ -76,11 +80,23 @@ export default function VenueSettingsScreen() {
             logout();
             router.replace('/login');
           } catch (err) {
-            Alert.alert("Hata", "Hesap silinirken bir hata oluştu.");
+            Alert.alert(t('settings.error_title'), t('settings.error_body'));
           }
         },
       },
     ]);
+  };
+
+  const handleLanguageSwitch = () => {
+    Alert.alert(
+      t('settings.language_label'),
+      t('settings.language_label'),
+      [
+        { text: 'Türkçe', onPress: () => setLanguage('tr') },
+        { text: 'English', onPress: () => setLanguage('en') },
+        { text: t('settings.logout_alert_cancel'), style: 'cancel' }
+      ]
+    );
   };
 
   return (
@@ -90,7 +106,7 @@ export default function VenueSettingsScreen() {
         contentContainerStyle={styles.container}
         showsVerticalScrollIndicator={false}
       >
-        <Text style={styles.pageTitle}>Ayarlar</Text>
+        <Text style={styles.pageTitle}>{t('settings.title')}</Text>
 
         {/* --- PROFILE HEADER --- */}
         <View style={styles.profileHeader}>
@@ -98,10 +114,10 @@ export default function VenueSettingsScreen() {
             <Text style={styles.profileAvatarText}>{((user?.venue_name || user?.username) ?? 'M').charAt(0).toUpperCase()}</Text>
           </View>
           <View style={styles.profileInfo}>
-            <Text style={styles.profileName} numberOfLines={1}>{user?.venue_name || 'İşletme Profili'}</Text>
+            <Text style={styles.profileName} numberOfLines={1}>{user?.venue_name || t('settings.profile_title')}</Text>
             <View style={styles.roleBadge}>
-              <IconSymbol name="checkmark.seal.fill" size={14} color="#f59e0b" />
-              <Text style={styles.roleText}>Onaylı Partner</Text>
+              <IconSymbol name="checkmark.seal.fill" size={14} color="#10b981" />
+              <Text style={styles.roleText}>{t('settings.verified_partner')}</Text>
             </View>
           </View>
         </View>
@@ -109,18 +125,18 @@ export default function VenueSettingsScreen() {
         {/* --- PREMIUM BANNER --- */}
         <TouchableOpacity activeOpacity={0.9} onPress={lightImpact}>
           <LinearGradient
-            colors={['#b45309', '#f59e0b', '#fbbf24']}
+            colors={['#064e3b', '#059669', '#10b981']}
             start={{ x: 0, y: 0 }}
             end={{ x: 1, y: 1 }}
             style={styles.proBanner}
           >
             <View style={styles.proBannerContent}>
               <View>
-                <Text style={styles.proBannerTitle}>AsEmOs Partner PRO</Text>
-                <Text style={styles.proBannerSub}>Detaylı istatistikler aktif</Text>
+                <Text style={styles.proBannerTitle}>{t('settings.pro_badge')}</Text>
+                <Text style={styles.proBannerSub}>{t('settings.pro_subtitle')}</Text>
               </View>
               <View style={styles.proIconCircle}>
-                <IconSymbol name="star.fill" size={24} color="#b45309" />
+                <IconSymbol name="star.fill" size={24} color="#047857" />
               </View>
             </View>
           </LinearGradient>
@@ -128,57 +144,65 @@ export default function VenueSettingsScreen() {
 
         {/* --- BUSINESS MANAGEMENT --- */}
         <View style={styles.sectionGroup}>
-          <Text style={styles.sectionHeader}>İŞLETME YÖNETİMİ</Text>
+          <Text style={styles.sectionHeader}>{t('settings.section_business')}</Text>
           <BlurView intensity={25} tint="dark" style={styles.sectionBox}>
             <SettingRow 
               icon="chart.bar.fill" 
-              iconColor="#3b82f6" 
-              label="İstatistikler ve Analizler" 
-              subtitle="Profil görüntülenmeleri ve favoriler"
+              iconColor="#10b981" 
+              label={t('settings.stats_label')} 
+              subtitle={t('settings.stats_subtitle')}
               onPress={() => router.push('/(venue-tabs)/stats' as any)} 
             />
             <View style={styles.separator} />
             <SettingRow 
               icon="speaker.slash" 
-              iconColor="#10b981" 
-              label="Kampanya Duyuruları" 
-              subtitle="Mekanınıza özel push bildirim hakkı"
-              onPress={() => Alert.alert('Bilgi', 'Yakında eklenecek.')} 
+              iconColor="#34d399" 
+              label={t('settings.campaign_label')} 
+              subtitle={t('settings.campaign_subtitle')}
+              onPress={() => Alert.alert(t('settings.soon_alert_title'), t('settings.soon_alert_body'))} 
             />
             <View style={styles.separator} />
             <SettingRow 
               icon="creditcard.fill" 
-              iconColor="#a855f7" 
-              label="Fatura ve Üyelik" 
-              subtitle="Aylık abonelik işlemleri"
-              onPress={() => Alert.alert('Bilgi', 'Ödeme sistemi şu an bakımda.')} 
+              iconColor="#059669" 
+              label={t('settings.invoice_label')} 
+              subtitle={t('settings.invoice_subtitle')}
+              onPress={() => Alert.alert(t('settings.soon_alert_title'), t('settings.soon_alert_body'))} 
             />
           </BlurView>
         </View>
 
         {/* --- ACCOUNT & SUPPORT --- */}
         <View style={styles.sectionGroup}>
-          <Text style={styles.sectionHeader}>HESAP VE DESTEK</Text>
+          <Text style={styles.sectionHeader}>{t('settings.section_support')}</Text>
           <BlurView intensity={25} tint="dark" style={styles.sectionBox}>
+            <SettingRow 
+              icon="globe" 
+              iconColor="#3b82f6" 
+              label={t('settings.language_label')} 
+              subtitle={language === 'tr' ? 'Türkçe' : 'English'}
+              onPress={handleLanguageSwitch} 
+            />
+            <View style={styles.separator} />
             <SettingRow 
               icon="bell.fill" 
               iconColor="#f43f5e" 
-              label="Bildirim Tercihleri" 
+              label={t('settings.notifications_label')} 
               onPress={() => {}} 
             />
             <View style={styles.separator} />
             <SettingRow 
               icon="envelope.fill" 
               iconColor="#2dd4bf" 
-              label="Partner Destek Ekibi" 
-              subtitle="7/24 öncelikli destek"
+              label={t('settings.support_label')} 
+              subtitle={t('settings.support_subtitle')}
               onPress={() => {}} 
             />
             <View style={styles.separator} />
             <SettingRow 
               icon="doc.text.fill" 
               iconColor="#94a3b8" 
-              label="Kullanım Koşulları" 
+              label={t('settings.terms_label')} 
               onPress={() => WebBrowser.openBrowserAsync('https://asemos.com/terms')} 
             />
           </BlurView>
@@ -186,11 +210,11 @@ export default function VenueSettingsScreen() {
 
         {/* --- DANGER ZONE --- */}
         <View style={styles.sectionGroup}>
-          <Text style={styles.sectionHeader}>GÜVENLİK</Text>
+          <Text style={styles.sectionHeader}>{t('settings.section_security')}</Text>
           <BlurView intensity={25} tint="dark" style={styles.sectionBox}>
             <SettingRow 
               icon="arrow.right.square.fill" 
-              label="Yönetim Panelinden Çıkış Yap" 
+              label={t('settings.logout_label')} 
               onPress={handleLogout} 
               isDangerous
             />
@@ -199,7 +223,7 @@ export default function VenueSettingsScreen() {
           {/* Minimal Kalıcı Sil Butonu */}
           <View style={styles.dangerZoneWrap}>
             <TouchableOpacity onPress={handleDeleteAccount} activeOpacity={0.6}>
-              <Text style={styles.dangerZoneText}>Veya işletme kaydınızı kalıcı olarak silin</Text>
+              <Text style={styles.dangerZoneText}>{t('settings.delete_account')}</Text>
             </TouchableOpacity>
           </View>
         </View>
@@ -219,16 +243,16 @@ const styles = StyleSheet.create({
   profileAvatar: {
     width: 64, height: 64, borderRadius: 32,
     backgroundColor: '#333', alignItems: 'center', justifyContent: 'center',
-    borderWidth: 2, borderColor: '#f59e0b'
+    borderWidth: 2, borderColor: '#10b981'
   },
   profileAvatarText: { fontSize: 24, fontWeight: '800', color: '#fff' },
   profileInfo: { marginLeft: 16, flex: 1 },
   profileName: { fontSize: 22, fontWeight: '700', color: '#fff', marginBottom: 4 },
   roleBadge: { flexDirection: 'row', alignItems: 'center', gap: 6 },
-  roleText: { fontSize: 13, fontWeight: '600', color: '#f59e0b', letterSpacing: 0.3 },
+  roleText: { fontSize: 13, fontWeight: '600', color: '#10b981', letterSpacing: 0.3 },
 
   // PRO Banner
-  proBanner: { borderRadius: 20, padding: 20, marginBottom: 32, elevation: 8, shadowColor: '#f59e0b', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.3, shadowRadius: 12 },
+  proBanner: { borderRadius: 20, padding: 20, marginBottom: 32, elevation: 8, shadowColor: '#10b981', shadowOffset: { width: 0, height: 4 }, shadowOpacity: 0.3, shadowRadius: 12 },
   proBannerContent: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
   proBannerTitle: { fontSize: 20, fontWeight: '800', color: '#fff', marginBottom: 4, letterSpacing: 0.5 },
   proBannerSub: { fontSize: 13, fontWeight: '500', color: 'rgba(255,255,255,0.9)' },

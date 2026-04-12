@@ -22,6 +22,7 @@ import { Image as ExpoImage } from 'expo-image';
 import { Video, ResizeMode } from 'expo-av';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
+import { useTranslation } from "react-i18next";
 import { radius } from '@/src/constants/design';
 import { LinearGradient } from 'expo-linear-gradient';
 import { lightImpact, mediumImpact } from '@/src/utils/haptics';
@@ -120,6 +121,7 @@ export function EditCanvas({
   onBack,
 }: EditCanvasProps) {
   const insets = useSafeAreaInsets();
+  const { t } = useTranslation();
   const [showTextModal, setShowTextModal] = useState(false);
   const [showFilters, setShowFilters] = useState(false);
   const [editingText, setEditingText] = useState('');
@@ -273,7 +275,7 @@ export function EditCanvas({
           onPress={onDone}
           activeOpacity={0.85}
         >
-          <Text style={styles.nextText}>İleri</Text>
+          <Text style={styles.nextText}>{t("creation.next")}</Text>
           <IconSymbol name="chevron.right" size={16} color="#fff" />
         </TouchableOpacity>
       )}
@@ -320,7 +322,7 @@ export function EditCanvas({
 
             <View style={[styles.modalActions, { paddingBottom: insets.bottom + 16 }]}>
               <TouchableOpacity onPress={() => setShowTextModal(false)} style={styles.modalBtn}>
-                <Text style={styles.modalCancelText}>İptal</Text>
+                <Text style={styles.modalCancelText}>{t("creation.cancel")}</Text>
               </TouchableOpacity>
               <TouchableOpacity onPress={saveText} style={[styles.modalBtn, styles.modalSaveBtn]}>
                 <Text style={styles.modalSaveText}>Bitti</Text>

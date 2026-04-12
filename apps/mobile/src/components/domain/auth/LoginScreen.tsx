@@ -29,6 +29,8 @@ import { BlurView } from 'expo-blur';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button, Input } from '@/src/components/ui';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
+import { handleApiError } from '@/src/utils/errorHandler';
+import { useTranslation } from 'react-i18next';
 import { lightImpact, success } from '@/src/utils/haptics';
 import { getAllPlaces } from '@/src/services/mekanService';
 import { loginUser, googleLogin, appleLogin } from '@/src/services/authService';
@@ -56,19 +58,22 @@ const CAROUSEL_INTERVAL_MS = 4500;
 
 export default function LoginScreen() {
   const insets = useSafeAreaInsets();
+  const { t } = useTranslation();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [roleType, setRoleType] = useState<'user'|'venue'>('user');
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [errors, setErrors] = useState<{ email?: string; password?: string; general?: string }>({});
+  const [errors, setErrors] = useState<Record<string, string>>({});
   const isSubmittingRef = useRef(false);
 
   // Google Auth Setup
+  const redirectUri = Google.useAuthRequest.length ? undefined : undefined; // expo handles this
   const [request, response, promptAsync] = Google.useAuthRequest({
-    clientId: 'TODO_YOUR_GOOGLE_CLIENT_ID_WEB',
-    iosClientId: 'TODO_YOUR_GOOGLE_CLIENT_ID_IOS',
-    androidClientId: 'TODO_YOUR_GOOGLE_CLIENT_ID_ANDROID',
+    clientId: '398883081062-uqa0hbpbo6nhjcbigltircbbg3ngr7oi.apps.googleusercontent.com',
+    iosClientId: '398883081062-uqa0hbpbo6nhjcbigltircbbg3ngr7oi.apps.googleusercontent.com',
+    androidClientId: '398883081062-uqa0hbpbo6nhjcbigltircbbg3ngr7oi.apps.googleusercontent.com',
+    scopes: ['openid', 'profile', 'email'],
   });
 
   useEffect(() => {
@@ -100,7 +105,7 @@ export default function LoginScreen() {
         if (!data.user.username || !data.user.birth_date) {
           router.replace('/first-time-setup' as any);
         } else {
-          router.replace('/(tabs)');
+          router.replace('/(tabs)/' as any);
         }
       }
     } catch (err: any) {
@@ -139,7 +144,7 @@ export default function LoginScreen() {
           if (!data.user.username || !data.user.birth_date) {
             router.replace('/first-time-setup' as any);
           } else {
-            router.replace('/(tabs)');
+            router.replace('/(tabs)/' as any);
           }
         }
       }
@@ -195,7 +200,7 @@ export default function LoginScreen() {
         } else if (!data.user.username || !data.user.birth_date) {
           router.replace('/first-time-setup' as any);
         } else {
-          router.replace('/(tabs)');
+          router.replace('/(tabs)/' as any);
         }
       }
     } catch (err: any) {
@@ -276,9 +281,9 @@ export default function LoginScreen() {
                   <View style={styles.topBlock}>
                     {/* Marka & slogan – profesyonel tipografi */}
                     <View style={styles.header}>
-                      <Text style={styles.brandTitle}>ASEMOS</Text>
+                      <Text style={styles.brandTitle}>{t('auth.app_name')}</Text>
                       <Text style={styles.tagline}>
-                        Seni dinleyen, öneren, yönlendiren rehberin
+                        {t('auth.app_subtitle')}
                       </Text>
                     </View>
 
@@ -292,7 +297,7 @@ export default function LoginScreen() {
                           lightImpact();
                         }}
                       >
-                       <Text style={[styles.toggleTxt, roleType === 'user' && styles.toggleTxtActive]}>Kullanıcı</Text>
+                       <Text style={[styles.toggleTxt, roleType === 'user' && styles.toggleTxtActive]}>{t('auth.user')}</Text>
                       </TouchableOpacity>
                       <TouchableOpacity 
                         style={[styles.toggleBtn, roleType === 'venue' && styles.toggleBtnActive]}
@@ -302,7 +307,7 @@ export default function LoginScreen() {
                           lightImpact();
                         }}
                       >
-                       <Text style={[styles.toggleTxt, roleType === 'venue' && styles.toggleTxtActive]}>Mekan</Text>
+                       <Text style={[styles.toggleTxt, roleType === 'venue' && styles.toggleTxtActive]}>{t('auth.venue')}</Text>
                       </TouchableOpacity>
                     </View>
 
@@ -310,8 +315,8 @@ export default function LoginScreen() {
                       <View style={styles.cardInner}>
                         <Input
                           variant="onDark"
-                          label="E-posta"
-                          placeholder="ornek@email.com"
+                          label={t('auth.email')}
+                          placeholder={t('auth.email_placeholder')}
                           value={email}
                           onChangeText={(t) => {
                             setEmail(t);
@@ -325,8 +330,8 @@ export default function LoginScreen() {
                         />
                         <Input
                           variant="onDark"
-                          label="Şifre"
-                          placeholder="••••••••"
+                          label={t('auth.password')}
+                          placeholder={t('auth.password_placeholder')}
                           value={password}
                           onChangeText={(t) => {
                             setPassword(t);
@@ -356,7 +361,7 @@ export default function LoginScreen() {
                           }}
                           style={styles.forgotWrap}
                         >
-                          <Text style={styles.forgotText}>Şifreni mi unuttun?</Text>
+                          <Text style={styles.forgotText}>{t('auth.forgot_password')}</Text>
                         </TouchableOpacity>
                         <Button
                           variant="primary"
@@ -366,12 +371,12 @@ export default function LoginScreen() {
                           disabled={loading}
                           style={styles.loginButton}
                         >
-                          Giriş Yap
+                          {t('auth.login')}
                         </Button>
 
                         <View style={styles.divider}>
                           <View style={styles.dividerLine} />
-                          <Text style={styles.dividerLabel}>veya</Text>
+                          <Text style={styles.dividerLabel}>{t('auth.or')}</Text>
                           <View style={styles.dividerLine} />
                         </View>
 
@@ -381,14 +386,14 @@ export default function LoginScreen() {
                             style={styles.socialBtnGoogle}
                           >
                             <Text style={styles.socialIconG}>G</Text>
-                            <Text style={styles.socialBtnTextGoogle}>Google</Text>
+                            <Text style={styles.socialBtnTextGoogle}>{t('auth.google')}</Text>
                           </TouchableOpacity>
                           <TouchableOpacity
                             onPress={() => handleSocialLogin('Apple')}
                             style={styles.socialBtnApple}
                           >
                             <IconSymbol name="apple.logo" size={20} color="#fff" />
-                            <Text style={styles.socialBtnTextWhite}>Apple</Text>
+                            <Text style={styles.socialBtnTextWhite}>{t('auth.apple')}</Text>
                           </TouchableOpacity>
                         </View>
                       </View>
@@ -409,8 +414,8 @@ export default function LoginScreen() {
             }}
             activeOpacity={0.8}
           >
-            <Text style={styles.footerLabel}>Hesabın yok mu? </Text>
-            <Text style={styles.footerLink}>Kayıt Ol</Text>
+            <Text style={styles.footerLabel}>{t('auth.no_account')}</Text>
+            <Text style={styles.footerLink}>{t('auth.register')}</Text>
           </TouchableOpacity>
         </KeyboardAvoidingView>
       </SafeAreaView >

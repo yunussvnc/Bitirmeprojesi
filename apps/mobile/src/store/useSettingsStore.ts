@@ -2,6 +2,17 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import { apiGet, apiPut } from "@/src/utils/apiClient";
+import i18n from "../i18n";
+import { getLocales } from "expo-localization";
+
+const getInitialLanguage = (): AppLanguage => {
+  try {
+    const code = getLocales()[0]?.languageCode;
+    return code === 'tr' ? 'tr' : 'en';
+  } catch {
+    return 'tr'; // Fallback in case expo-localization fails completely
+  }
+};
 
 /**
  * Uygulama genelinde kullanıcı tercihleri.
@@ -178,8 +189,12 @@ export const useSettingsStore = create<SettingsState>()(
       removeHiddenWord: (word) => { set({ hiddenWords: get().hiddenWords.filter((w) => w !== word) }); schedulePush(); },
 
       // Dil
-      language: 'tr',
-      setLanguage: (v) => { set({ language: v }); schedulePush(); },
+      language: getInitialLanguage(),
+      setLanguage: (v) => { 
+        set({ language: v }); 
+        i18n.changeLanguage(v);
+        schedulePush(); 
+      },
 
       // Konum
       includeLocationInPosts: true,

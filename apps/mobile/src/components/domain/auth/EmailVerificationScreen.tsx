@@ -18,13 +18,15 @@ import {
     Keyboard,
     Animated,
     Dimensions,
+    ScrollView,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { BlurView } from 'expo-blur';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { lightImpact, success as successHaptic } from '@/src/utils/haptics';
-import { verifyEmail, resendVerification, verifyRegister, resendRegisterCode } from '@/src/services/authService';
+import { resendCode, verifyEmailLogin } from '@/src/services/authService';
 import { useAuthStore } from '@/src/store/useAuthStore';
+import { useTranslation } from "react-i18next";
 
 const { width } = Dimensions.get('window');
 const CODE_LENGTH = 6;
@@ -34,8 +36,10 @@ export default function EmailVerificationScreen() {
     const paramsEmail = paramsEmailRaw ? decodeURIComponent(paramsEmailRaw) : undefined;
     const [code, setCode] = useState<string[]>(Array(CODE_LENGTH).fill(''));
     const [loading, setLoading] = useState(false);
+    const [resendLoading, setResendLoading] = useState(false);
     const [resendCooldown, setResendCooldown] = useState(0);
     const [error, setError] = useState('');
+    const { t } = useTranslation();
     const inputRefs = useRef<(TextInput | null)[]>([]);
     const shakeAnim = useRef(new Animated.Value(0)).current;
 
@@ -99,7 +103,7 @@ export default function EmailVerificationScreen() {
         async (fullCode?: string) => {
             const codeStr = fullCode ?? code.join('');
             if (codeStr.length !== CODE_LENGTH) {
-                setError('Lütfen 6 haneli kodu eksiksiz girin.');
+                setError(t('forgot_password.error_incomplete'));
                 triggerShake();
                 return;
             }
@@ -110,23 +114,17 @@ export default function EmailVerificationScreen() {
             setError('');
 
             try {
-                if (paramsEmail) {
-                    const data = await verifyRegister(paramsEmail, codeStr);
-                    successHaptic();
-                    useAuthStore.getState().setTokens(data.access_token, data.refresh_token);
-                    useAuthStore.getState().setUser(data.user);
-                    router.replace('/(tabs)');
+                const data = await verifyEmailLogin(paramsEmail || '', codeStr);
+                successHaptic();
+                useAuthStore.getState().setTokens(data.access_token, data.refresh_token);
+                useAuthStore.getState().setUser(data.user);
+                if (!data.user.username || !data.user.birth_date) {
+                        router.replace('/first-time-setup' as any);
                 } else {
-                    await verifyEmail(codeStr);
-                    successHaptic();
-                    const currentUser = useAuthStore.getState().user;
-                    if (currentUser) {
-                        useAuthStore.getState().setUser({ ...currentUser, is_email_verified: true });
-                    }
-                    router.replace('/(tabs)');
+                        router.replace('/(tabs)/' as any);
                 }
             } catch (err: unknown) {
-                const msg = err instanceof Error ? err.message : 'Kod hatalı veya süresi dolmuş.';
+                const msg = err instanceof Error ? err.message : t('forgot_password.error_invalid');
                 setError(msg);
                 triggerShake();
                 setCode(Array(CODE_LENGTH).fill(''));
@@ -135,24 +133,23 @@ export default function EmailVerificationScreen() {
                 setLoading(false);
             }
         },
-        [code, triggerShake, paramsEmail],
+        [code, triggerShake, paramsEmail, t],
     );
 
     const handleResend = useCallback(async () => {
         if (resendCooldown > 0) return;
         lightImpact();
+        setResendLoading(true);
         try {
-            if (paramsEmail) {
-                await resendRegisterCode(paramsEmail);
-            } else {
-                await resendVerification();
-            }
+            await resendCode(paramsEmail || '');
             setResendCooldown(60);
-            Alert.alert('Başarılı', 'Yeni doğrulama kodu e-postanıza gönderildi.');
+            Alert.alert(t('forgot_password.success'), t('forgot_password.code_resent'));
         } catch {
-            Alert.alert('Hata', 'Kod gönderilemedi, lütfen tekrar deneyin.');
+            Alert.alert(t('forgot_password.error'), t('forgot_password.error_resend'));
+        } finally {
+            setResendLoading(false);
         }
-    }, [resendCooldown, paramsEmail]);
+    }, [resendCooldown, paramsEmail, t]);
 
     const targetEmail = paramsEmail || user?.email;
     const maskedEmail = targetEmail
@@ -171,16 +168,15 @@ export default function EmailVerificationScreen() {
                     behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
                     style={styles.keyboardView}
                 >
-                    <View style={styles.content}>
+                    <ScrollView contentContainerStyle={styles.content}>
                         {/* Header */}
                         <View style={styles.headerSection}>
                             <View style={styles.iconWrap}>
                                 <Text style={styles.iconEmoji}>📧</Text>
                             </View>
-                            <Text style={styles.title}>E-posta Doğrulama</Text>
+                            <Text style={styles.title}>{t("forgot_password.email_verification")}</Text>
                             <Text style={styles.subtitle}>
-                                <Text style={styles.subtitleBold}>{maskedEmail}</Text> adresine
-                                gönderilen 6 haneli kodu girin.
+                                <Text style={styles.subtitleBold}>{maskedEmail}</Text> {t("forgot_password.enter_code_sent")}
                             </Text>
                         </View>
 
@@ -229,12 +225,12 @@ export default function EmailVerificationScreen() {
                                     activeOpacity={0.8}
                                 >
                                     <Text style={styles.verifyButtonText}>
-                                        {loading ? 'Doğrulanıyor...' : 'Doğrula'}
+                                        {loading ? t('forgot_password.verifying') : t('forgot_password.verify')}
                                     </Text>
                                 </TouchableOpacity>
 
                                 <View style={styles.resendRow}>
-                                    <Text style={styles.resendLabel}>Kod gelmedi mi? </Text>
+                                    <Text style={styles.resendLabel}>{t("forgot_password.didnt_receive")} </Text>
                                     <TouchableOpacity
                                         onPress={handleResend}
                                         disabled={resendCooldown > 0}

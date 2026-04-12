@@ -34,6 +34,10 @@ import { getAllPlaces } from "@/src/services/mekanService";
 import type { Place } from "@/src/services/mekanService";
 import type { Post } from "@/src/services/feedService";
 import { getSavedPlaces, getSavedPosts } from "@/src/services/savedService";
+import { LinearGradient } from "expo-linear-gradient";
+import { useTranslation } from "react-i18next";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { useAuthStore } from "@/src/store/useAuthStore";
 
 export default function SavedScreen() {
   const { colors } = useTheme();
@@ -50,6 +54,9 @@ export default function SavedScreen() {
   const [refreshing, setRefreshing] = useState(false);
   const [sharePost, setSharePost] = useState<Post | null>(null);
   const [placesData, setPlacesData] = useState<Record<string, Place>>({});
+  const insets = useSafeAreaInsets();
+  const { t } = useTranslation();
+  const fetchMe = useAuthStore((s) => s.fetchMe);
 
   // Listen for tab press to scroll to top
   useEffect(() => {
@@ -150,10 +157,10 @@ export default function SavedScreen() {
   const handleClear = useCallback(() => {
     if (tab === "places" && !items.length) return;
     if (tab === "posts" && !postItems.length) return;
-    Alert.alert("Temizle?", tab === "posts" ? "Tüm kaydedilen gönderiler silinsin mi?" : "Tüm kaydedilen mekanlar silinsin mi?", [
-      { text: "Vazgeç", style: "cancel" },
+    Alert.alert(t("common.clear"), tab === "posts" ? t("saved_extra.clear_posts_confirm") : t("saved_extra.clear_places_confirm"), [
+      { text: t("common.cancel"), style: "cancel" },
       {
-        text: "Sil",
+        text: t("common.delete"),
         style: "destructive",
         onPress: () => {
           lightImpact();
@@ -162,7 +169,7 @@ export default function SavedScreen() {
         },
       },
     ]);
-  }, [items.length, postItems.length, clear, clearSavedPosts, tab]);
+  }, [items.length, postItems.length, clear, clearSavedPosts, tab, t]);
 
   const handleRemove = useCallback(
     (id: string | number) => {
@@ -240,7 +247,7 @@ export default function SavedScreen() {
           >
             <IconSymbol name="chevron.left" size={24} color={colors.accent.primary} />
           </TouchableOpacity>
-          <Text style={[titleStyle, styles.title]}>Kaydedilenler</Text>
+          <Text style={[titleStyle, styles.title]}>{t("saved.title")}</Text>
           {((tab === "places" && items.length > 0) || (tab === "posts" && postItems.length > 0)) && (
             <View style={styles.headerRight}>
               <View style={[styles.countBadge, { backgroundColor: colors.surface.elevated }]}>
@@ -265,7 +272,7 @@ export default function SavedScreen() {
             activeOpacity={0.7}
           >
             <Text style={[styles.tabText, { color: tab === "places" ? colors.accent.onPrimary : colors.text.secondary }]}>
-              Mekanlar
+              {t("saved_extra.places")}
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
@@ -274,7 +281,7 @@ export default function SavedScreen() {
             activeOpacity={0.7}
           >
             <Text style={[styles.tabText, { color: tab === "posts" ? colors.accent.onPrimary : colors.text.secondary }]}>
-              Gönderiler
+              {t("saved_extra.posts")}
             </Text>
           </TouchableOpacity>
         </View>
@@ -291,6 +298,7 @@ export default function SavedScreen() {
       handleClear,
       colors.text.tertiary,
       tab,
+      t,
     ]
   );
 
@@ -309,27 +317,27 @@ export default function SavedScreen() {
             >
               <IconSymbol name="chevron.left" size={24} color={colors.accent.primary} />
             </TouchableOpacity>
-            <Text style={[titleStyle, styles.title]}>Kaydedilenler</Text>
+            <Text style={[titleStyle, styles.title]}>{t("saved.title")}</Text>
           </View>
           <View style={styles.tabRow}>
             <TouchableOpacity style={[styles.tabPill, { backgroundColor: colors.accent.primary }]} onPress={() => setTab("places")} activeOpacity={0.7}>
-              <Text style={[styles.tabText, { color: colors.accent.onPrimary }]}>Mekanlar</Text>
+              <Text style={[styles.tabText, { color: colors.accent.onPrimary }]}>{t("saved_extra.places")}</Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={[styles.tabPill, { backgroundColor: colors.surface.elevated }]}
               onPress={() => setTab("posts")}
               activeOpacity={0.7}
             >
-              <Text style={[styles.tabText, { color: colors.text.secondary }]}>Gönderiler</Text>
+              <Text style={[styles.tabText, { color: colors.text.secondary }]}>{t("saved_extra.posts")}</Text>
             </TouchableOpacity>
           </View>
         </View>
         <View style={styles.emptyContainer}>
           <EmptyState
             variant="saved"
-            title="Henüz kayıt yok"
-            description="Beğendiğin mekanları kaydet"
-            actionLabel="Keşfet"
+            title={t("saved_extra.empty_title")}
+            description={t("saved_extra.empty_places_desc")}
+            actionLabel={t("saved_extra.empty_places_action")}
             onAction={() => router.push("/(tabs)/explore")}
           />
         </View>
@@ -352,7 +360,7 @@ export default function SavedScreen() {
             >
               <IconSymbol name="chevron.left" size={24} color={colors.accent.primary} />
             </TouchableOpacity>
-            <Text style={[titleStyle, styles.title]}>Kaydedilenler</Text>
+            <Text style={[titleStyle, styles.title]}>{t("saved.title")}</Text>
           </View>
           <View style={styles.tabRow}>
             <TouchableOpacity
@@ -360,19 +368,19 @@ export default function SavedScreen() {
               onPress={() => setTab("places")}
               activeOpacity={0.7}
             >
-              <Text style={[styles.tabText, { color: colors.text.secondary }]}>Mekanlar</Text>
+              <Text style={[styles.tabText, { color: colors.text.secondary }]}>{t("saved_extra.places")}</Text>
             </TouchableOpacity>
             <TouchableOpacity style={[styles.tabPill, { backgroundColor: colors.accent.primary }]} onPress={() => setTab("posts")} activeOpacity={0.7}>
-              <Text style={[styles.tabText, { color: colors.accent.onPrimary }]}>Gönderiler</Text>
+              <Text style={[styles.tabText, { color: colors.accent.onPrimary }]}>{t("saved_extra.posts")}</Text>
             </TouchableOpacity>
           </View>
         </View>
         <View style={styles.emptyContainer}>
           <EmptyState
             variant="saved"
-            title="Henüz kayıt yok"
-            description="Beğendiğin gönderileri arşive al"
-            actionLabel="Akışa dön"
+            title={t("saved_extra.empty_title")}
+            description={t("saved_extra.empty_posts_desc")}
+            actionLabel={t("saved_extra.empty_posts_action")}
             onAction={() => router.push("/(tabs)/feed")}
           />
         </View>

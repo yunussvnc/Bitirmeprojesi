@@ -9,6 +9,7 @@ import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { Fonts } from "@/src/constants/theme";
 
 import { usePresence } from "@/src/store/presence";
+import { useTranslation } from "react-i18next";
 
 function normalizePlaceId(input: string) {
   const raw = (input ?? "").trim();
@@ -21,6 +22,7 @@ function normalizePlaceId(input: string) {
 export default function QrEnterScreen() {
   const router = useRouter();
   const params = useLocalSearchParams<{ placeId?: string }>();
+  const { t } = useTranslation();
 
   const placeId = useMemo(() => normalizePlaceId(String(params.placeId ?? "")), [params.placeId]);
 
@@ -31,7 +33,7 @@ export default function QrEnterScreen() {
   useEffect(() => {
     // ✅ Otomatik: kullanıcıya soru yok.
     if (!placeId) {
-      setError("Geçersiz QR (placeId bulunamadı).");
+      setError(t("qr.invalid"));
       return;
     }
 
@@ -47,20 +49,20 @@ export default function QrEnterScreen() {
     >
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title" style={styles.title}>
-          QR Girişi
+          {t("qr.title_enter")}
         </ThemedText>
       </ThemedView>
 
       {!error ? (
         <View style={{ marginTop: 12, gap: 8 }}>
-          <ThemedText style={{ opacity: 0.75 }}>Mekân doğrulanıyor… Uygulama otomatik yönlendiriyor.</ThemedText>
+          <ThemedText style={{ opacity: 0.75 }}>{t("qr.verifying")}</ThemedText>
         </View>
       ) : (
         <View style={{ marginTop: 12, gap: 12 }}>
-          <ThemedText style={{ opacity: 0.85 }}>Hata: {error}</ThemedText>
+          <ThemedText style={{ opacity: 0.85 }}>{t("qr.error", { error })}</ThemedText>
 
           <TouchableOpacity activeOpacity={0.85} onPress={() => router.replace("/(tabs)/explore")} style={styles.primaryBtn}>
-            <ThemedText type="defaultSemiBold">Explore’a dön</ThemedText>
+            <ThemedText type="defaultSemiBold">{t("qr.return_explore")}</ThemedText>
           </TouchableOpacity>
         </View>
       )}

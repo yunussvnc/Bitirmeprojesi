@@ -23,6 +23,7 @@ import { Chip } from '@/src/components/ui/Chip';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
 import { createTextStyle, spacing as designSpacing, radius, PLACE_CARD_ASPECT, PLACE_CARD_IMAGE_MAX_HEIGHT } from '@/src/constants/design';
 import { mediumImpact } from '@/src/utils/haptics';
+import { useTranslation } from 'react-i18next';
 
 export interface PlaceCardProps {
   image: ImageSourcePropType;
@@ -72,6 +73,7 @@ const PlaceCardComponent = function PlaceCard({
   testID,
 }: PlaceCardProps) {
   const { colors, isDark } = useTheme();
+  const { t } = useTranslation();
   const titleStyle = createTextStyle('heading', colors.text.primary);
   const subtitleColor = colors.text.primary + 'CC'; // %80 opacity
   const handlePress = () => {
@@ -98,7 +100,7 @@ const PlaceCardComponent = function PlaceCard({
             <View style={[styles.imagePlaceholder, { backgroundColor: colors.surface.elevated }]}>
               <IconSymbol name="mappin.and.ellipse" size={32} color={colors.text.tertiary} />
               <Text style={[styles.placeholderLabel, { color: colors.text.tertiary }]} numberOfLines={1}>
-                Görsel eklenmedi
+                {t('explore.no_image')}
               </Text>
             </View>
           ) : (
@@ -131,7 +133,7 @@ const PlaceCardComponent = function PlaceCard({
           {isRecommended && (
             <View style={[styles.recommendedBadge, { backgroundColor: colors.accent.primary + '18' }]}>
               <IconSymbol name="sparkles" size={11} color={colors.accent.primary} />
-              <Text style={[styles.recommendedText, { color: colors.accent.primary }]}>Senin için önerildi</Text>
+              <Text style={[styles.recommendedText, { color: colors.accent.primary }]}>{t('explore.recommended')}</Text>
             </View>
           )}
           <View style={styles.titleRow}>
@@ -158,8 +160,8 @@ const PlaceCardComponent = function PlaceCard({
             <View style={styles.tags}>
               {hasMenu && (
                 <View style={styles.menuBadge}>
-                  <IconSymbol name="list.bullet.clipboard.fill" size={10} color="#f59e0b" />
-                  <Text style={styles.menuBadgeText}>Menü</Text>
+                  <IconSymbol name="list.bullet.clipboard.fill" size={10} color="#10b981" />
+                  <Text style={styles.menuBadgeText}>{t('explore.menu')}</Text>
                 </View>
               )}
               {tags.slice(0, 3).map((tag, index) => (
@@ -170,8 +172,8 @@ const PlaceCardComponent = function PlaceCard({
           {!tags?.length && hasMenu && (
             <View style={styles.tags}>
               <View style={styles.menuBadge}>
-                <IconSymbol name="list.bullet.clipboard.fill" size={10} color="#f59e0b" />
-                <Text style={styles.menuBadgeText}>Menü</Text>
+                <IconSymbol name="list.bullet.clipboard.fill" size={10} color="#10b981" />
+                <Text style={styles.menuBadgeText}>{t('explore.menu')}</Text>
               </View>
             </View>
           )}
@@ -331,14 +333,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8,
     paddingVertical: 3,
     borderRadius: 8,
-    backgroundColor: 'rgba(245, 158, 11, 0.12)',
+    backgroundColor: 'rgba(16, 185, 129, 0.1)',
     borderWidth: 1,
-    borderColor: 'rgba(245, 158, 11, 0.25)',
+    borderColor: 'rgba(16, 185, 129, 0.2)',
   },
   menuBadgeText: {
     fontSize: 10,
     fontWeight: '700',
-    color: '#f59e0b',
+    color: '#10b981',
     letterSpacing: 0.3,
   },
 });

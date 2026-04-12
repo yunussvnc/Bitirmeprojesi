@@ -16,7 +16,8 @@ import {
   Alert,
   ActivityIndicator,
 } from 'react-native';
-import { CameraView, useCameraPermissions } from 'expo-camera';
+import { CameraView, useCameraPermissions, FlashMode } from 'expo-camera';
+import { useTranslation } from 'react-i18next';
 import { Image as ExpoImage } from 'expo-image';
 import * as MediaLibrary from 'expo-media-library';
 import Animated, {
@@ -51,6 +52,7 @@ export function EmbeddedCamera({
   lastPhotoUri,
 }: EmbeddedCameraProps) {
   const { colors } = useTheme();
+  const { t } = useTranslation();
   const [permission, requestPermission] = useCameraPermissions();
   const [facing, setFacing] = useState<'front' | 'back'>('back');
   const [flash, setFlash] = useState<'off' | 'on' | 'auto'>('off');
@@ -232,7 +234,6 @@ export function EmbeddedCamera({
   }));
 
   const flashIconName = flash === 'off' ? 'bolt.slash.fill' : flash === 'on' ? 'bolt.fill' : 'bolt.badge.automatic.fill';
-  const flashLabel = flash === 'off' ? 'Kapalı' : flash === 'on' ? 'Açık' : 'Otomatik';
 
   // Format duration
   const formatDuration = (secs: number) => {
@@ -255,17 +256,15 @@ export function EmbeddedCamera({
     return (
       <View style={[styles.container, styles.centered, { backgroundColor: '#000' }]}>
         <View style={styles.permissionCard}>
-          <View style={styles.permissionIconWrap}>
-            <IconSymbol name="camera.fill" size={40} color="rgba(255,255,255,0.7)" />
-          </View>
-          <Text style={styles.permissionTitle}>Kamera Erişimi</Text>
-          <Text style={styles.permissionText}>Fotoğraf ve video çekmek için kamera izni gereklidir.</Text>
+          <IconSymbol name="camera.circle.fill" size={64} color="#667eea" />
+          <Text style={styles.permissionTitle}>{t("creation.cam_permission_title")}</Text>
+          <Text style={styles.permissionText}>{t("creation.cam_permission_desc")}</Text>
           <TouchableOpacity
             style={[styles.permissionBtn, { backgroundColor: colors.accent.primary }]}
             onPress={requestPermission}
             activeOpacity={0.8}
           >
-            <Text style={styles.permissionBtnText}>İzin Ver</Text>
+            <Text style={styles.permissionBtnText}>{t("creation.allow")}</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -279,7 +278,7 @@ export function EmbeddedCamera({
         ref={cameraRef}
         style={styles.camera}
         facing={facing}
-        flash={flash}
+        flash={flash as FlashMode}
       />
 
       {/* Top gradient for controls readability */}
@@ -382,7 +381,7 @@ export function EmbeddedCamera({
       {/* Capture mode hint */}
       {!isRecording && contentType !== 'post' && (
         <View style={styles.hintBar}>
-          <Text style={styles.hintText}>Fotoğraf için dokun, video için basılı tut</Text>
+          <Text style={styles.hintText}>{t("creation.cam_hint")}</Text>
         </View>
       )}
     </View>

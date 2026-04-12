@@ -18,6 +18,8 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 import { Image } from "expo-image";
 import { useTheme } from "@/src/hooks/useTheme";
+import { EmptyState } from "@/src/components/ui/EmptyState";
+import { useTranslation } from "react-i18next";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { lightImpact } from "@/src/utils/haptics";
 import { Swipeable } from "react-native-gesture-handler";
@@ -27,6 +29,7 @@ export default function RecentlyDeletedScreen() {
     const { colors } = useTheme();
     const insets = useSafeAreaInsets();
     const router = useRouter();
+    const { t } = useTranslation();
 
     const [isEditMode, setIsEditMode] = useState(false);
     const [selectedIds, setSelectedIds] = useState<string[]>([]);
@@ -87,7 +90,7 @@ export default function RecentlyDeletedScreen() {
                     activeOpacity={0.8}
                 >
                     <IconSymbol name="arrow.uturn.backward" size={20} color="#FFF" />
-                    <Text style={styles.swipeActionLabel}>Geri Al</Text>
+                    <Text style={styles.swipeActionLabel}>{t("common.restore")}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={[styles.swipeActionBtn, { backgroundColor: colors.semantic.error }]}
@@ -98,7 +101,7 @@ export default function RecentlyDeletedScreen() {
                     activeOpacity={0.8}
                 >
                     <IconSymbol name="trash" size={20} color="#FFF" />
-                    <Text style={styles.swipeActionLabel}>Sil</Text>
+                    <Text style={styles.swipeActionLabel}>{t("common.delete")}</Text>
                 </TouchableOpacity>
             </View>
         );
@@ -152,7 +155,9 @@ export default function RecentlyDeletedScreen() {
                             >
                                 {item.name}
                             </Text>
-                            <Text style={[styles.time, { color: colors.semantic.error }]}>{daysLeft} gün kaldı</Text>
+                            <View style={[styles.timeBadge, { backgroundColor: colors.surface.elevated }]}>
+                                <Text style={[styles.time, { color: colors.semantic.error }]}>{t("trash.days_left", { days: daysLeft })}</Text>
+                            </View>
                         </View>
 
                         <Text
@@ -198,9 +203,11 @@ export default function RecentlyDeletedScreen() {
             <View style={[styles.emptyIcon, { borderColor: colors.semantic.error + "40" }]}>
                 <IconSymbol name="trash" size={32} color={colors.semantic.error} />
             </View>
-            <Text style={[styles.emptyTitle, { color: colors.text.primary }]}>Çöp Kutusu Boş</Text>
+            <View style={styles.emptyContainer}>
+                <Text style={[styles.emptyTitle, { color: colors.text.primary }]}>{t("trash.empty")}</Text>
+            </View>
             <Text style={[styles.emptyDesc, { color: colors.text.tertiary }]}>
-                Son silinen sohbetler burada 2 gün boyunca tutulur, ardından kalıcı olarak silinir.
+                {t("trash.empty_desc")}
             </Text>
         </View>
     ), [colors]);
@@ -231,7 +238,7 @@ export default function RecentlyDeletedScreen() {
                 </TouchableOpacity>
 
                 <Text style={[styles.headerTitle, { color: colors.text.primary }]} numberOfLines={1}>
-                    Son Silinenler
+                    {t("messages.recently_deleted")}
                 </Text>
 
                 {/* Boş görünüm için veya Düzenle butonu */}
@@ -243,7 +250,7 @@ export default function RecentlyDeletedScreen() {
                         onPress={toggleEditMode}
                     >
                         <Text style={{ color: colors.accent.primary, fontSize: 14, fontWeight: "600" }}>
-                            Düzenle
+                            {t("trash.edit")}
                         </Text>
                     </TouchableOpacity>
                 ) : (
@@ -258,10 +265,10 @@ export default function RecentlyDeletedScreen() {
                         style={styles.cancelEditBtn}
                         onPress={toggleEditMode}
                     >
-                        <Text style={[styles.cancelEditText, { color: colors.text.secondary }]}>Bitti</Text>
+                        <Text style={[styles.cancelEditText, { color: colors.text.secondary }]}>{t("common.done")}</Text>
                     </TouchableOpacity>
                     <Text style={[styles.editModeTitle, { color: colors.text.primary }]}>
-                        {selectedIds.length > 0 ? `${selectedIds.length} Seçili` : "Sohbet Seçin"}
+                        {selectedIds.length > 0 ? t("trash.selected_count", { count: selectedIds.length }) : t("trash.select_chat")}
                     </Text>
                     <TouchableOpacity
                         style={[styles.selectAllBtn, { opacity: conversations.length > 0 ? 1 : 0.5 }]}
@@ -275,7 +282,7 @@ export default function RecentlyDeletedScreen() {
                         disabled={conversations.length === 0}
                     >
                         <Text style={[styles.selectAllText, { color: colors.accent.primary }]}>
-                            {selectedIds.length === conversations.length ? "Tümünü Kaldır" : "Tümünü Seç"}
+                            {selectedIds.length === conversations.length ? t("common.deselect_all") : t("common.select_all")}
                         </Text>
                     </TouchableOpacity>
                 </View>

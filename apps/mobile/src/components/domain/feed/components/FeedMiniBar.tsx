@@ -2,6 +2,7 @@ import React from "react";
 import { Animated, Text, TouchableOpacity, StyleSheet, View } from "react-native";
 import { useTheme } from "@/src/hooks/useTheme";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
+import { useTranslation } from "react-i18next";
 import { spacing } from "@/src/constants/design";
 import { lightImpact } from "@/src/utils/haptics";
 
@@ -23,6 +24,7 @@ export function FeedMiniBar({
   onNotificationsPress,
 }: FeedMiniBarProps) {
   const { colors } = useTheme();
+  const { t } = useTranslation();
 
   return (
     <Animated.View
@@ -47,7 +49,7 @@ export function FeedMiniBar({
       >
         <IconSymbol name="plus" size={18} color={colors.text.primary} />
       </TouchableOpacity>
-      <Text style={[styles.miniTitle, { color: colors.text.primary }]}>Akış</Text>
+      <Text style={[styles.miniTitle, { color: colors.text.primary }]}>{t('feed.title')}</Text>
       <TouchableOpacity
         style={[styles.miniIconBtn, { backgroundColor: colors.surface.default }]}
         onPress={() => {

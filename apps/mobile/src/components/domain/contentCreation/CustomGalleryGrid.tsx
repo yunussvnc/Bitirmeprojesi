@@ -25,6 +25,8 @@ import { useTheme } from '@/src/hooks/useTheme';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
 import { spacing } from '@/src/constants/design';
 import { lightImpact, mediumImpact } from '@/src/utils/haptics';
+import { useTranslation } from "react-i18next";
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import type { MediaItem, ContentType } from '@/src/contentCreation/types';
 import {
   GALLERY_COLUMNS,
@@ -130,6 +132,7 @@ export function CustomGalleryGrid({
   multiSelectMode = false,
 }: CustomGalleryGridProps) {
   const { colors } = useTheme();
+  const { t } = useTranslation();
   const [assets, setAssets] = useState<MediaLibrary.Asset[]>([]);
   const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(true);
@@ -148,7 +151,7 @@ export function CustomGalleryGrid({
     (async () => {
       const { status } = await MediaLibrary.requestPermissionsAsync();
       if (status !== 'granted') {
-        Alert.alert('İzin Gerekli', 'Galeriye erişim için lütfen izin verin.');
+        Alert.alert(t('creation.gallery_permission_title'), t('creation.gallery_permission_message'));
         setLoading(false);
         return;
       }
@@ -226,12 +229,12 @@ export function CustomGalleryGrid({
     (asset: MediaLibrary.Asset): string | null => {
       if (asset.mediaType === 'video' && asset.duration != null) {
         if (asset.duration > maxVideoSec) {
-          return `Video en fazla ${maxVideoSec} saniye olabilir.`;
+          return t('creation.gallery_video_limit', { seconds: maxVideoSec });
         }
       }
       return null;
     },
-    [maxVideoSec]
+    [maxVideoSec, t]
   );
 
   const handleCellPress = useCallback(
@@ -240,7 +243,7 @@ export function CustomGalleryGrid({
 
       const err = validateAsset(asset);
       if (err) {
-        Alert.alert('Uygun değil', err);
+        Alert.alert(t('creation.gallery_invalid_title'), err);
         return;
       }
 
@@ -269,7 +272,7 @@ export function CustomGalleryGrid({
         }
       } else {
         if (selected.length >= maxCount) {
-          Alert.alert('Limit', `En fazla ${maxCount} medya seçebilirsiniz.`);
+          Alert.alert(t('creation.gallery_limit_title'), t('creation.gallery_limit_message', { count: maxCount }));
           return;
         }
         mediumImpact();
@@ -280,7 +283,7 @@ export function CustomGalleryGrid({
         }
       }
     },
-    [selected, isSingle, maxCount, onSelect, onSingleSelect, onPreviewChange, validateAsset]
+    [selected, isSingle, maxCount, onSelect, onSingleSelect, onPreviewChange, validateAsset, t]
   );
 
   const renderItem = useCallback(
@@ -306,7 +309,7 @@ export function CustomGalleryGrid({
     return (
       <View style={[styles.loadingWrap, { backgroundColor: colors.background.primary }]}>
         <ActivityIndicator size="large" color={colors.accent.primary} />
-        <Text style={[styles.loadingText, { color: colors.text.secondary }]}>Galeri yükleniyor...</Text>
+        <Text style={[styles.loadingText, { color: colors.text.secondary }]}>{t("creation.gallery_loading")}</Text>
       </View>
     );
   }

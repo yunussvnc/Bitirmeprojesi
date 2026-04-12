@@ -61,7 +61,6 @@
     },
     "plugins": [
       "expo-router",
-      "expo-symbols",
       [
         "expo-image-picker",
         {

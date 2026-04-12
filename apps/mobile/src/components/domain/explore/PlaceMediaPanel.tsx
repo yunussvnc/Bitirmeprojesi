@@ -33,6 +33,7 @@ import { handleApiError } from '@/src/utils/errorHandler';
 import type { Place } from '@/src/services/mekanService';
 import { getPlaceImageSource } from '@/src/utils/placeImages';
 import { StoryViewerModal } from './StoryViewerModal';
+import { useTranslation } from 'react-i18next';
 import { useSettingsStore } from '@/src/store/useSettingsStore';
 import { useAppStore } from '@/src/store/useAppStore';
 import { FeedCard, CommentBottomSheet, SharePostSheet } from '@/src/components/domain/feed';
@@ -142,6 +143,7 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
   const [sharePost, setSharePost] = useState<Post | null>(null);
   const hideTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const navigation = useNavigation();
+  const { t } = useTranslation();
 
   const handleStoryNavigateRequest = useCallback((route: string, _currentIndex: number) => {
     storyPausedRef.current = true;
@@ -422,8 +424,8 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
                 })()}
                 <Text style={[styles.heroMeta, { color: 'rgba(255,255,255,0.85)' }]}>
                   {[
-                    mapShowPosts && `${total} gönderi`,
-                    mapShowStories && stories.length > 0 && `${stories.length} hikaye`,
+                    mapShowPosts && t('explore.post_count', { count: total }),
+                    mapShowStories && stories.length > 0 && t('explore.story_count', { count: stories.length }),
                   ]
                     .filter(Boolean)
                     .join(' · ') || (place.category ?? '')}
@@ -462,7 +464,7 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
           <View style={styles.placeStoriesSection}>
             <View style={[styles.sectionHeader, { borderBottomColor: colors.surface.border }]}>
               <IconSymbol name="camera.fill" size={18} color={colors.text.secondary} />
-              <Text style={[styles.sectionHeaderLabel, { color: colors.text.secondary }]}>Hikayeler</Text>
+              <Text style={[styles.sectionHeaderLabel, { color: colors.text.secondary }]}>{t('explore.place_stories')}</Text>
             </View>
             <ScrollView
               horizontal
@@ -521,7 +523,7 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
                       </LinearGradient>
                     )}
                     <Text style={[styles.placeStoryName, { color: seen ? colors.text.tertiary : colors.text.secondary }]} numberOfLines={1}>
-                      {story.author?.first_name || 'Kullanıcı'}
+                      {story.author?.first_name || t('explore.user')}
                     </Text>
                   </TouchableOpacity>
                 );
@@ -533,7 +535,7 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
         {/* Gönderiler başlığı */}
         <View style={[styles.sectionHeader, { borderBottomColor: colors.surface.border }]}>
           <IconSymbol name="square.grid.2x2.fill" size={18} color={colors.text.secondary} />
-          <Text style={[styles.sectionHeaderLabel, { color: colors.text.secondary }]}>Gönderiler</Text>
+          <Text style={[styles.sectionHeaderLabel, { color: colors.text.secondary }]}>{t('explore.place_posts')}</Text>
         </View>
 
         {/* Grid */}
@@ -551,14 +553,14 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
             <View style={styles.emptyWrap}>
               <IconSymbol name="photo.on.rectangle.angled" size={48} color={colors.text.tertiary} />
               <Text style={[styles.emptyText, { color: colors.text.tertiary }]}>
-                İçerik tercihlerinden gönderi veya hikaye gösterimini aç
+                {t('explore.open_preferences')}
               </Text>
             </View>
           ) : isEmpty ? (
             <View style={styles.emptyWrap}>
               <IconSymbol name="photo.on.rectangle.angled" size={48} color={colors.text.tertiary} />
               <Text style={[styles.emptyText, { color: colors.text.tertiary }]}>
-                Bu mekanda henüz paylaşım yok
+                {t('explore.no_posts_here')}
               </Text>
             </View>
           ) : photoPosts.length > 0 ? (
@@ -591,7 +593,7 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
           ) : (
             <View style={styles.emptyWrap}>
               <Text style={[styles.emptyText, { color: colors.text.tertiary }]}>
-                Henüz gönderi yok
+                {t('explore.no_posts')}
               </Text>
             </View>
           )}

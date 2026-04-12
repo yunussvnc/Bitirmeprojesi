@@ -22,24 +22,26 @@ import { getNotifications, markNotificationsRead, type Notification } from "@/sr
 import { handleApiError } from "@/src/utils/errorHandler";
 import { lightImpact } from "@/src/utils/haptics";
 import { timeAgo } from "@/src/utils/timeAgo";
+import { useTranslation } from "react-i18next";
 
-function getNotificationMessage(n: Notification): string {
-  const u = n.actor_username || "Birisi";
+function getNotificationMessage(n: Notification, t: any): string {
+  const u = n.actor_username || t("notifications.someone");
   switch (n.type) {
     case "like":
-      return `${u} gönderini beğendi`;
+      return t("notifications.like", { user: u });
     case "comment":
-      return `${u} gönderine yorum yaptı`;
+      return t("notifications.comment", { user: u });
     case "follow":
-      return `${u} seni takip etmeye başladı`;
+      return t("notifications.follow", { user: u });
     default:
-      return `${u} bir etkileşimde bulundu`;
+      return t("notifications.default", { user: u });
   }
 }
 
 export default function NotificationsScreen() {
   const { colors } = useTheme();
   const router = useRouter();
+  const { t } = useTranslation();
   const [items, setItems] = useState<Notification[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
@@ -93,7 +95,7 @@ export default function NotificationsScreen() {
       >
         <Avatar name={item.actor_username || "?"} size={44} />
         <View style={styles.itemContent}>
-          <Text style={[styles.message, { color: colors.text.primary }]}>{getNotificationMessage(item)}</Text>
+          <Text style={[styles.message, { color: colors.text.primary }]}>{getNotificationMessage(item, t)}</Text>
           <Text style={[styles.time, { color: colors.text.tertiary }]}>{timeAgo(item.created_at)}</Text>
         </View>
       </TouchableOpacity>
@@ -110,12 +112,12 @@ export default function NotificationsScreen() {
             router.back();
           }}
         />
-        <Text style={[createTextStyle("title", colors.text.primary), styles.title]}>Bildirimler</Text>
+        <Text style={[createTextStyle("title", colors.text.primary), styles.title]}>{t("notifications.title")}</Text>
       </View>
 
       {loading && items.length === 0 ? (
         <View style={styles.center}>
-          <LoadingState message="Bildirimler yükleniyor..." />
+          <LoadingState message={t("notifications.loading")} />
         </View>
       ) : (
         <FlatList
@@ -129,7 +131,7 @@ export default function NotificationsScreen() {
           removeClippedSubviews={Platform.OS === "android"}
           contentContainerStyle={items.length === 0 ? styles.listEmpty : styles.listContent}
           ListEmptyComponent={
-            <EmptyState variant="notifications" title="Henüz bildirim yok" description="Yeni etkileşimler burada görünecek" />
+            <EmptyState variant="notifications" title={t("notifications.empty_title")} description={t("notifications.empty_desc")} />
           }
           refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} tintColor={colors.accent.primary} />}
         />

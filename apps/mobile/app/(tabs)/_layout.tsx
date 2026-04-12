@@ -12,6 +12,7 @@ import { StyleSheet, Platform, Text as RNText } from "react-native";
 import { selection } from "@/src/utils/haptics";
 import { AnimatedTabBar } from "@/src/components/layout/AnimatedTabBar";
 import { TabBarVisibilityProvider } from "@/src/components/layout/TabBarVisibilityContext";
+import { useTranslation } from "react-i18next";
 
 function TabIcon({ name, color }: { name: IconSymbolName; focused: boolean; color: string }) {
   return (
@@ -25,6 +26,7 @@ function TabIcon({ name, color }: { name: IconSymbolName; focused: boolean; colo
 
 export default function TabsLayout() {
   const { colors } = useTheme();
+  const { t } = useTranslation();
 
   return (
     <TabBarVisibilityProvider>
@@ -62,7 +64,7 @@ export default function TabsLayout() {
         <Tabs.Screen
           name="index"
           options={{
-            title: "Ana Sayfa",
+            title: t('tabs.home'),
             tabBarIcon: ({ color, focused }) => <TabIcon name="house.fill" focused={focused} color={color} />,
             // @ts-expect-error - listeners works at runtime, expo-router types are incomplete
             listeners: () => ({ tabPress: () => selection() }),
@@ -71,7 +73,7 @@ export default function TabsLayout() {
         <Tabs.Screen
           name="explore"
           options={{
-            title: "Keşfet",
+            title: t('tabs.explore'),
             tabBarIcon: ({ color, focused }) => <TabIcon name="map.fill" focused={focused} color={color} />,
             // @ts-expect-error - listeners works at runtime, expo-router types are incomplete
             listeners: () => ({ tabPress: () => selection() }),
@@ -80,7 +82,7 @@ export default function TabsLayout() {
         <Tabs.Screen
           name="messages"
           options={{
-            title: "Mesajlar",
+            title: t('tabs.messages'),
             tabBarIcon: ({ color, focused }) => <TabIcon name="paperplane" focused={focused} color={color} />,
             // @ts-expect-error - listeners works at runtime, expo-router types are incomplete
             listeners: () => ({ tabPress: () => selection() }),
@@ -89,7 +91,7 @@ export default function TabsLayout() {
         <Tabs.Screen
           name="feed"
           options={{
-            title: "Akış",
+            title: t('tabs.feed'),
             tabBarIcon: ({ color, focused }) => <TabIcon name="square.grid.2x2.fill" focused={focused} color={color} />,
             // @ts-expect-error - listeners works at runtime, expo-router types are incomplete
             listeners: () => ({ tabPress: () => selection() }),
@@ -104,7 +106,7 @@ export default function TabsLayout() {
         <Tabs.Screen
           name="profile"
           options={{
-            title: "Profil",
+            title: t('tabs.profile'),
             tabBarIcon: ({ color, focused }) => <TabIcon name="person.fill" focused={focused} color={color} />,
             // @ts-expect-error - listeners works at runtime, expo-router types are incomplete
             listeners: () => ({ tabPress: () => selection() }),

@@ -21,11 +21,13 @@ import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { lightImpact } from "@/src/utils/haptics";
 import { Swipeable } from "react-native-gesture-handler";
 import { useMessagesStore, Conversation } from "@/src/store/useMessagesStore";
+import { useTranslation } from "react-i18next";
 
 export default function ArchivedMessagesScreen() {
     const { colors } = useTheme();
     const insets = useSafeAreaInsets();
     const router = useRouter();
+    const { t } = useTranslation();
 
     const [isEditMode, setIsEditMode] = useState(false);
     const [selectedIds, setSelectedIds] = useState<string[]>([]);
@@ -71,7 +73,7 @@ export default function ArchivedMessagesScreen() {
                     activeOpacity={0.8}
                 >
                     <IconSymbol name="tray.and.arrow.up" size={20} color="#FFF" />
-                    <Text style={styles.swipeActionLabel}>Geri Al</Text>
+                    <Text style={styles.swipeActionLabel}>{t("messages.unarchive")}</Text>
                 </TouchableOpacity>
                 <TouchableOpacity
                     style={[styles.swipeActionBtn, { backgroundColor: colors.semantic.error }]}
@@ -82,7 +84,7 @@ export default function ArchivedMessagesScreen() {
                     activeOpacity={0.8}
                 >
                     <IconSymbol name="trash" size={20} color="#FFF" />
-                    <Text style={styles.swipeActionLabel}>Sil</Text>
+                    <Text style={styles.swipeActionLabel}>{t("messages.delete")}</Text>
                 </TouchableOpacity>
             </View>
         );
@@ -174,9 +176,9 @@ export default function ArchivedMessagesScreen() {
             <View style={[styles.emptyIcon, { borderColor: colors.accent.primary + "40" }]}>
                 <IconSymbol name="archivebox" size={32} color={colors.accent.primary} />
             </View>
-            <Text style={[styles.emptyTitle, { color: colors.text.primary }]}>Arşiv Boş</Text>
+            <Text style={[styles.emptyTitle, { color: colors.text.primary }]}>{t("messages.archive_empty")}</Text>
             <Text style={[styles.emptyDesc, { color: colors.text.tertiary }]}>
-                Arşivlenmiş sohbetiniz bulunmuyor.
+                {t("messages.archive_empty_desc")}
             </Text>
         </View>
     ), [colors]);
@@ -207,7 +209,7 @@ export default function ArchivedMessagesScreen() {
                 </TouchableOpacity>
 
                 <Text style={[styles.headerTitle, { color: colors.text.primary }]} numberOfLines={1}>
-                    Arşivlenmiş Sohbetler
+                    {t("messages.archived_title")}
                 </Text>
 
                 {/* Boş görünüm için veya Düzenle butonu */}
@@ -219,7 +221,7 @@ export default function ArchivedMessagesScreen() {
                         onPress={toggleEditMode}
                     >
                         <Text style={{ color: colors.accent.primary, fontSize: 14, fontWeight: "600" }}>
-                            Düzenle
+                            {t("messages.edit")}
                         </Text>
                     </TouchableOpacity>
                 )}
@@ -233,10 +235,10 @@ export default function ArchivedMessagesScreen() {
                         style={styles.cancelEditBtn}
                         onPress={toggleEditMode}
                     >
-                        <Text style={[styles.cancelEditText, { color: colors.text.secondary }]}>Bitti</Text>
+                        <Text style={[styles.cancelEditText, { color: colors.text.secondary }]}>{t("messages.done")}</Text>
                     </TouchableOpacity>
                     <Text style={[styles.editModeTitle, { color: colors.text.primary }]}>
-                        {selectedIds.length > 0 ? `${selectedIds.length} Seçili` : "Sohbet Seçin"}
+                        {selectedIds.length > 0 ? t("messages.selected_count", {count: selectedIds.length}) : t("messages.select_chat")}
                     </Text>
                     <TouchableOpacity
                         style={[styles.selectAllBtn, { opacity: conversations.length > 0 ? 1 : 0.5 }]}
@@ -250,7 +252,7 @@ export default function ArchivedMessagesScreen() {
                         disabled={conversations.length === 0}
                     >
                         <Text style={[styles.selectAllText, { color: colors.accent.primary }]}>
-                            {selectedIds.length === conversations.length ? "Tümünü Kaldır" : "Tümünü Seç"}
+                            {selectedIds.length === conversations.length ? t("messages.deselect_all") : t("messages.select_all")}
                         </Text>
                     </TouchableOpacity>
                 </View>

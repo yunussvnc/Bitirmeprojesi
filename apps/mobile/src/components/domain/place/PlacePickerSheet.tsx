@@ -20,6 +20,7 @@ import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { lightImpact } from "@/src/utils/haptics";
 import { createTextStyle } from "@/src/constants/design";
 import { getPlaces, type Place } from "@/src/services/mekanService";
+import { useTranslation } from "react-i18next";
 
 export interface PlacePickerSheetProps {
   visible: boolean;
@@ -32,6 +33,7 @@ export function PlacePickerSheet({ visible, onClose, onSelect }: PlacePickerShee
   const insets = useSafeAreaInsets();
   const [places, setPlaces] = useState<Place[]>([]);
   const [loading, setLoading] = useState(false);
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (!visible) return;
@@ -69,10 +71,10 @@ export function PlacePickerSheet({ visible, onClose, onSelect }: PlacePickerShee
           <View style={[styles.handle, { backgroundColor: colors.text.tertiary }]} />
           <View style={styles.header}>
             <Text style={[createTextStyle("title", colors.text.primary), styles.title]}>
-              Konum ekle
+              {t("content_creation.add_location")}
             </Text>
             <TouchableOpacity onPress={onClose} hitSlop={12}>
-              <Text style={[styles.cancelText, { color: colors.accent.primary }]}>İptal</Text>
+              <Text style={[styles.cancelText, { color: colors.accent.primary }]}>{t("content_creation.cancel")}</Text>
             </TouchableOpacity>
           </View>
           {loading ? (

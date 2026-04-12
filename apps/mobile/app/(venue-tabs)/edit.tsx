@@ -43,8 +43,8 @@ export default function VenueEditScreen() {
 
   // Fake Menu State
   const [menuItems, setMenuItems] = useState([
-    { id: 1, name: 'Americano', desc: 'Sert espresso ve sıcak su', price: '120 ₺', img: 'https://images.unsplash.com/photo-1551030173-122aabc4489c?w=200' },
-    { id: 2, name: 'Latte', desc: 'İpeksi süt köpüğü ile', price: '140 ₺', img: 'https://images.unsplash.com/photo-1541167760496-1628856ab772?w=200' }
+    { id: 1, name: 'Americano', desc: 'Sert espresso ve sıcak su', price: '120 ₺', img: 'https://images.unsplash.com/photo-1551030173-122aabc4489c?w=200', category: 'İçecek' },
+    { id: 2, name: 'Latte', desc: 'İpeksi süt köpüğü ile', price: '140 ₺', img: 'https://images.unsplash.com/photo-1541167760496-1628856ab772?w=200', category: 'İçecek' }
   ]);
   const [newMenuName, setNewMenuName] = useState('');
   const [newMenuPrice, setNewMenuPrice] = useState('');

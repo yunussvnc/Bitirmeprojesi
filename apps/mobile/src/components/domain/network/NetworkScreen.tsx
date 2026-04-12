@@ -11,11 +11,13 @@ import { getFollowers, getFollowing, toggleFollow } from "@/src/services/userSer
 import type { UserProfile } from "@/src/services/userService";
 import { handleApiError } from "@/src/utils/errorHandler";
 import { useAuthStore } from "@/src/store/useAuthStore";
+import { useTranslation } from "react-i18next";
 
 export default function NetworkScreen() {
     const { colors } = useTheme();
     const insets = useSafeAreaInsets();
     const router = useRouter();
+    const { t } = useTranslation();
     const { id, type } = useLocalSearchParams<{ id: string; type: "followers" | "following" }>();
     const [users, setUsers] = useState<UserProfile[]>([]);
     const [loading, setLoading] = useState(true);
@@ -108,7 +110,7 @@ export default function NetworkScreen() {
 
     const renderItem = ({ item, index }: { item: UserProfile; index: number }) => {
         const isSelf = authUser?.id === item.id;
-        const displayName = item.first_name || item.username || "Kullanıcı";
+        const displayName = item.first_name || item.username || t("network.user_fallback");
 
         return (
             <TouchableOpacity
@@ -132,7 +134,7 @@ export default function NetworkScreen() {
 
                 <View style={styles.userInfo}>
                     <Text style={[styles.title, { color: colors.text.primary }]} numberOfLines={1}>
-                        {item.username || `Kullanıcı ${item.id}`}
+                        {item.username || `${t("network.user_fallback")} ${item.id}`}
                     </Text>
                     {item.first_name && (
                         <Text style={[styles.subtitle, { color: colors.text.secondary }]} numberOfLines={1}>
@@ -158,7 +160,7 @@ export default function NetworkScreen() {
                                 { color: item.is_following ? colors.text.primary : colors.background.primary }
                             ]}
                         >
-                            {item.is_following ? "Takipte" : "Takip Et"}
+                            {item.is_following ? t("network.following_btn") : t("network.follow")}
                         </Text>
                     </TouchableOpacity>
                 )}
@@ -182,7 +184,7 @@ export default function NetworkScreen() {
                 </TouchableOpacity>
 
                 <Text style={[styles.headerTitle, { color: colors.text.primary }]}>
-                    {type === "followers" ? "Takipçiler" : "Takip Edilenler"}
+                    {type === "followers" ? t("network.followers") : t("network.following")}
                 </Text>
 
                 <View style={styles.headerBtn} />
@@ -190,7 +192,7 @@ export default function NetworkScreen() {
 
             <View style={[styles.container, { backgroundColor: colors.background.primary }]}>
                 {loading && page === 1 ? (
-                    <LoadingState message="Kullanıcılar yükleniyor..." />
+                    <LoadingState message={t("network.loading")} />
                 ) : (
                     <FlatList
                         data={users}
@@ -204,8 +206,8 @@ export default function NetworkScreen() {
                         ListEmptyComponent={
                             <EmptyState
                                 icon="person.2"
-                                title={type === "followers" ? "Henüz Takipçin Yok" : "Henüz Kimseyi Takip Etmiyorsun"}
-                                description={type === "followers" ? "Seni takip eden kişiler burada görünür." : "Takip ettiğin kullanıcılar burada görünür."}
+                                title={type === "followers" ? t("network.empty_followers") : t("network.empty_following")}
+                                description={type === "followers" ? t("network.empty_followers_desc") : t("network.empty_following_desc")}
                             />
                         }
                     />

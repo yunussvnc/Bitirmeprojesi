@@ -95,9 +95,10 @@ def first_time_setup(
     if current_user.username and current_user.birth_date:
         raise HTTPException(status_code=400, detail="Kullanıcı adı ve doğum tarihi zaten ayarlanmış.")
     
-    # Username değişecekse çakışma kontrolü
-    if body.username != current_user.username:
-        if crud.get_user_by_username(db, username=body.username):
+    # Username değişecekse çakışma kontrolü (Google kullanıcıları için username null olabilir)
+    if body.username:
+        existing = crud.get_user_by_username(db, username=body.username)
+        if existing and existing.id != current_user.id:
             raise HTTPException(status_code=400, detail="Bu kullanıcı adı zaten alınmış.")
     
     # Kullanıcı yaşı kontrolü backend tarafında da yapılabilir (14+)
@@ -192,27 +193,42 @@ def google_login(
 ):
     try:
         client_id = os.getenv("GOOGLE_CLIENT_ID")
-        # Eğer henüz ayarlamadıysa da çalışsın (doğrulamayı atlama: normalde PRODUCTION için atlanmaz)
-        idinfo = id_token.verify_oauth2_token(
-            body.token, google_requests.Request(), client_id
-        ) if client_id else jwt.decode(body.token, options={"verify_signature": False})
+        idinfo = None
+        
+        # Try verifying as id_token first
+        try:
+            if client_id:
+                idinfo = id_token.verify_oauth2_token(
+                    body.token, google_requests.Request(), client_id
+                )
+            else:
+                idinfo = jwt.decode(body.token, options={"verify_signature": False})
+        except Exception:
+            # If id_token verification fails, treat as access_token and fetch userinfo
+            import requests as req_lib
+            resp = req_lib.get(
+                "https://www.googleapis.com/oauth2/v3/userinfo",
+                headers={"Authorization": f"Bearer {body.token}"},
+                timeout=10,
+            )
+            if resp.status_code == 200:
+                idinfo = resp.json()
+            else:
+                raise HTTPException(status_code=400, detail="Geçersiz Google token.")
+        
+        if not idinfo or "email" not in idinfo:
+            raise HTTPException(status_code=400, detail="Google token'dan e-posta alınamadı.")
         
         email = idinfo["email"]
-        first_name = idinfo.get("given_name")
-        last_name = idinfo.get("family_name")
+        first_name = idinfo.get("given_name") or idinfo.get("name", "").split(" ")[0] or None
+        last_name = idinfo.get("family_name") or None
         
         user = crud.get_user_by_email(db, email)
         if not user:
-            username_base = email.split("@")[0].replace(".", "_")[:30]
-            username = username_base
-            idx = 0
-            while crud.get_user_by_username(db, username):
-                idx += 1
-                username = f"{username_base}_{idx}"
             user_data = schemas.UserCreate(
                 email=email, 
                 password="social_login_" + str(uuid.uuid4()), 
-                username=username,
+                username=None,
                 first_name=first_name,
                 last_name=last_name
             )
@@ -227,6 +243,8 @@ def google_login(
             user=schemas.User.model_validate(user),
         )
 
+    except HTTPException:
+        raise
     except Exception as e:
         raise HTTPException(status_code=400, detail="Geçersiz Google token.")
 
@@ -246,16 +264,10 @@ def apple_login(
             
         user = crud.get_user_by_email(db, email)
         if not user:
-            username_base = email.split("@")[0].replace(".", "_")[:30]
-            username = username_base
-            idx = 0
-            while crud.get_user_by_username(db, username):
-                idx += 1
-                username = f"{username_base}_{idx}"
             user_data = schemas.UserCreate(
                 email=email, 
                 password="social_login_" + str(uuid.uuid4()), 
-                username=username,
+                username=None,
             )
             user = crud.create_user(db, user_data)
         

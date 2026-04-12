@@ -48,6 +48,7 @@ import { handleApiError } from "@/src/utils/errorHandler";
 import { lightImpact } from "@/src/utils/haptics";
 import { useAppStore } from "@/src/store/useAppStore";
 import { useTabBarVisibility } from "@/src/components/layout/TabBarVisibilityContext";
+import { useTranslation } from "react-i18next";
 
 /** İstanbul ilçeleri */
 const DISTRICTS = [
@@ -106,13 +107,14 @@ function HomeListHeader({
   onSavedPress: () => void;
 }) {
   const { colors } = useTheme();
+  const { t } = useTranslation();
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View>
         <View style={styles.header}>
           <View style={styles.headerLeft}>
             <View style={styles.titleRow}>
-              <Text style={[createTextStyle("title", colors.text.primary), styles.title]}>Ana Sayfa</Text>
+              <Text style={[createTextStyle("title", colors.text.primary), styles.title]}>{t('home.title')}</Text>
             </View>
           </View>
           <TouchableOpacity
@@ -129,7 +131,7 @@ function HomeListHeader({
             value={query}
             onChangeText={setQuery}
             onSubmit={runRecommend}
-            placeholder="Bugün nasıl bir yere gidelim?"
+            placeholder={t('home.search_placeholder')}
             loading={aiLoading}
             containerStyle={styles.chatInput}
           />
@@ -156,7 +158,7 @@ function HomeListHeader({
               color={hasActiveFilters ? colors.accent.primary : colors.text.tertiary}
             />
             <Text style={[styles.filterTriggerText, { color: hasActiveFilters ? colors.accent.primary : colors.text.secondary }]}>
-              {activeFilterCount > 0 ? `Filtreler (${activeFilterCount})` : "Filtreler"}
+              {activeFilterCount > 0 ? t('home.filters_count', { count: activeFilterCount }) : t('home.filters')}
             </Text>
           </TouchableOpacity>
 
@@ -199,7 +201,7 @@ function HomeListHeader({
         {aiLoading && (
           <View style={[styles.aiLoadingWrap, { backgroundColor: colors.surface.elevated }]}>
             <IconSymbol name="sparkles" size={16} color={colors.accent.primary} />
-            <Text style={[styles.aiLoadingText, { color: colors.text.secondary }]}>AI düşünüyor...</Text>
+            <Text style={[styles.aiLoadingText, { color: colors.text.secondary }]}>{t('home.ai_thinking')}</Text>
           </View>
         )}
       </View>
@@ -209,6 +211,7 @@ function HomeListHeader({
 
 export default function HomeScreen() {
   const { colors } = useTheme();
+  const { t } = useTranslation();
   const navigation = useNavigation();
   const screenRef = useRef<ScreenRef>(null);
   const flatListRef = useRef<FlatList>(null);
@@ -502,7 +505,7 @@ export default function HomeScreen() {
     if (error && !aiLoading) {
       return (
         <View style={styles.centerWrap}>
-          <ErrorState title="Hata" description={error} onRetry={loadPlaces} />
+          <ErrorState title={t('home.error_title')} description={error} onRetry={loadPlaces} />
         </View>
       );
     }
@@ -511,9 +514,9 @@ export default function HomeScreen() {
         <View style={styles.centerWrap}>
           <EmptyState
             variant="search"
-            title="Sonuç bulunamadı"
-            description="Tercihlerinizi veya aramayı değiştirip tekrar deneyin"
-            actionLabel="Temizle"
+            title={t('home.no_results')}
+            description={t('home.no_results_desc')}
+            actionLabel={t('home.clear')}
             onAction={clearAll}
           />
         </View>
@@ -524,9 +527,9 @@ export default function HomeScreen() {
         <View style={styles.centerWrap}>
           <EmptyState
             variant={hasActiveFilters ? "search" : "places"}
-            title={hasActiveFilters ? "Sonuç bulunamadı" : "Henüz mekan yok"}
-            description={hasActiveFilters ? "Filtreleri değiştirin" : "Yakında eklenecek"}
-            actionLabel={hasActiveFilters ? "Temizle" : undefined}
+            title={hasActiveFilters ? t('home.no_results') : t('home.no_places')}
+            description={hasActiveFilters ? t('home.change_filters') : t('home.no_places_desc')}
+            actionLabel={hasActiveFilters ? t('home.clear') : undefined}
             onAction={hasActiveFilters ? clearAll : undefined}
           />
         </View>
@@ -618,7 +621,7 @@ export default function HomeScreen() {
           pointerEvents={miniBarVisible ? "auto" : "none"}
         >
           <View style={styles.miniBarPlaceholder} />
-          <Text style={[styles.miniTitle, { color: colors.text.primary }]}>Ana Sayfa</Text>
+          <Text style={[styles.miniTitle, { color: colors.text.primary }]}>{t('home.title')}</Text>
           <TouchableOpacity
             style={[styles.miniIconBtn, { backgroundColor: colors.surface.default }]}
             onPress={() => {

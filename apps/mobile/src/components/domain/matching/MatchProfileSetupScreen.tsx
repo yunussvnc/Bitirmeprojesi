@@ -27,6 +27,7 @@ import { apiUploadFile } from "@/src/utils/apiClient";
 import { API_BASE_URL } from "@/src/constants/api";
 import { logger } from "@/src/utils/logger";
 import type { MatchProfileCreate } from "@/src/services/matchService";
+import { useTranslation } from "react-i18next";
 
 /** Turn /uploads/foo.jpg into http://host:8000/uploads/foo.jpg */
 const resolvePhotoUrl = (url: string) =>
@@ -249,6 +250,7 @@ export default function MatchProfileSetupScreen() {
     const { colors, isDark } = useTheme();
     const insets = useSafeAreaInsets();
     const { myProfile, createProfile, profileLoading, hasProfile } = useMatchStore();
+    const { t } = useTranslation();
 
     const nameRef = React.useRef<TextInput>(null);
     const ageRef = React.useRef<TextInput>(null);
@@ -333,7 +335,7 @@ export default function MatchProfileSetupScreen() {
 
     const handleSavePrompt = () => {
         if (!tempPromptAnswer.trim()) {
-            Alert.alert("Eksik Bilgi", "Lütfen soruya bir cevap yazın.");
+            Alert.alert(t("match_setup.missing_info"), t("match_setup.please_answer"));
             return;
         }
 
@@ -342,7 +344,7 @@ export default function MatchProfileSetupScreen() {
             newPrompts[editingPromptIndex] = { question: selectedPromptOption, answer: tempPromptAnswer.trim() };
         } else {
             if (newPrompts.length >= 3) {
-                Alert.alert("Sınır Aşıldı", "En fazla 3 soru ekleyebilirsin.");
+                Alert.alert(t("match_setup.limit_exceeded"), t("match_setup.max_q"));
                 return;
             }
             newPrompts.push({ question: selectedPromptOption, answer: tempPromptAnswer.trim() });
@@ -360,7 +362,7 @@ export default function MatchProfileSetupScreen() {
     const handlePickImage = async (slotIndex: number) => {
         const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
         if (status !== "granted") {
-            Alert.alert("İzin Gerekli", "Fotoğraf yüklemek için galeri iznine ihtiyacımız var.");
+            Alert.alert(t("match_setup.perm_required"), t("match_setup.gallery_perm_desc"));
             return;
         }
 
@@ -421,29 +423,29 @@ export default function MatchProfileSetupScreen() {
 
     const handleSave = async () => {
         if (!displayName.trim()) {
-            Alert.alert("Eksik Bilgi", "Lütfen ismini gir.");
+            Alert.alert(t("match_setup.missing_info"), t("match_setup.please_enter_name"));
             return;
         }
         if (/\d/.test(displayName)) {
-            Alert.alert("Geçersiz İsim", "İsimde rakam kullanılamaz.");
+            Alert.alert(t("match_setup.invalid_name"), t("match_setup.no_numbers"));
             return;
         }
 
         const numAge = Number(age);
         if (!age.trim() || isNaN(numAge) || numAge < 18 || numAge > 70) {
-            Alert.alert("Geçersiz Yaş", "Yaş 18 ile 70 arasında olmalıdır.");
+            Alert.alert(t("match_setup.invalid_age"), t("match_setup.age_range"));
             return;
         }
 
         const numHeight = Number(height);
         if (height.trim() && (isNaN(numHeight) || numHeight < 100 || numHeight > 230)) {
-            Alert.alert("Geçersiz Boy", "Boy 100 ile 230 cm arasında olmalıdır.");
+            Alert.alert(t("match_setup.invalid_height"), t("match_setup.height_range"));
             return;
         }
 
         const trimmedEdu = education.trim();
         if (trimmedEdu && !UNIVERSITIES.includes(trimmedEdu)) {
-            Alert.alert("Geçersiz Eğitim", "Lütfen listedeki üniversitelerden birini girin veya listeden seçin.");
+            Alert.alert(t("match_setup.invalid_edu"), t("match_setup.edu_list"));
             return;
         }
         const finalEducation = trimmedEdu
@@ -452,7 +454,7 @@ export default function MatchProfileSetupScreen() {
 
         const trimmedJob = locationText.trim();
         if (trimmedJob && !JOBS.includes(trimmedJob)) {
-            Alert.alert("Geçersiz Meslek", "Lütfen listedeki mesleklerden birini girin veya listeden seçin.");
+            Alert.alert(t("match_setup.invalid_job"), t("match_setup.job_list"));
             return;
         }
 
@@ -486,8 +488,8 @@ export default function MatchProfileSetupScreen() {
             await createProfile(data);
             router.back();
         } catch (error: any) {
-            const msg = error?.message || "Bilinmeyen hata";
-            Alert.alert("Hata", `Profil kaydedilemedi: ${msg}`);
+            const msg = error?.message || t("common.error");
+            Alert.alert(t("common.error"), `${t("match_setup.save_failed")}: ${msg}`);
             logger.error("[MatchProfile] Save failed:", error);
         } finally {
             setSaving(false);
@@ -675,7 +677,7 @@ export default function MatchProfileSetupScreen() {
                             focusedInput === "name" && styles.inputGlow
                         ]}
                     >
-                        <ThemedText style={[styles.floatingLabel, { color: focusedInput === "name" ? ACCENT : colors.text.secondary }]}>İSİM</ThemedText>
+                        <ThemedText style={[styles.floatingLabel, { color: focusedInput === "name" ? ACCENT : colors.text.secondary }]}>{t("match_setup.name")}</ThemedText>
                         <TextInput
                             ref={nameRef}
                             value={displayName}
@@ -698,7 +700,7 @@ export default function MatchProfileSetupScreen() {
                             focusedInput === "age" && styles.inputGlow
                         ]}
                     >
-                        <ThemedText style={[styles.floatingLabel, { color: colors.text.secondary }]}>YAŞ (Doğum tarihinden)</ThemedText>
+                        <ThemedText style={[styles.floatingLabel, { color: colors.text.secondary }]}>{t("match_setup.age")}</ThemedText>
                         <TextInput
                             ref={ageRef}
                             value={age}
@@ -818,7 +820,7 @@ export default function MatchProfileSetupScreen() {
                             focusedInput === "height" && styles.inputGlow
                         ]}
                     >
-                        <ThemedText style={[styles.floatingLabel, { color: focusedInput === "height" ? ACCENT : colors.text.secondary }]}>BOY (CM)</ThemedText>
+                        <ThemedText style={[styles.floatingLabel, { color: focusedInput === "height" ? ACCENT : colors.text.secondary }]}>{t("match_setup.height_cm")}</ThemedText>
                         <TextInput
                             ref={heightRef}
                             value={height}
@@ -844,7 +846,7 @@ export default function MatchProfileSetupScreen() {
                         >
                             <View style={styles.selectionRowLeft}>
                                 <IconSymbol name="checkmark.seal.fill" size={18} color={isGraduated ? ACCENT : colors.text.secondary} />
-                                <ThemedText style={[styles.selectionRowLabel, { color: textColor }]}>Mezun</ThemedText>
+                                <ThemedText style={[styles.selectionRowLabel, { color: textColor }]}>{t("match_setup.graduated")}</ThemedText>
                             </View>
                             <View style={[
                                 styles.graduateToggle,
@@ -902,16 +904,16 @@ export default function MatchProfileSetupScreen() {
                     <View style={[styles.modalContent, { backgroundColor: isDark ? "#1C1C1E" : "#FFF" }]}>
                         <View style={styles.modalHeader}>
                             <TouchableOpacity onPress={() => setIsPromptModalVisible(false)}>
-                                <ThemedText style={{ color: colors.text.secondary, fontSize: 16 }}>İptal</ThemedText>
+                                <ThemedText style={{ color: colors.text.secondary, fontSize: 16 }}>{t("match_setup.cancel")}</ThemedText>
                             </TouchableOpacity>
-                            <ThemedText style={styles.modalTitle}>Soru Ekle</ThemedText>
+                            <ThemedText style={styles.modalTitle}>{t("match_setup.add_prompt")}</ThemedText>
                             <TouchableOpacity onPress={handleSavePrompt}>
-                                <ThemedText style={{ color: ACCENT, fontSize: 16, fontWeight: "700" }}>Kaydet</ThemedText>
+                                <ThemedText style={{ color: ACCENT, fontSize: 16, fontWeight: "700" }}>{t("match_setup.save")}</ThemedText>
                             </TouchableOpacity>
                         </View>
 
                         <ScrollView style={styles.modalScroll} showsVerticalScrollIndicator={false}>
-                            <ThemedText style={[styles.chipGroupLabel, { color: colors.text.secondary, marginTop: 0 }]}>Sorunu Seç</ThemedText>
+                            <ThemedText style={[styles.chipGroupLabel, { color: colors.text.secondary, marginTop: 0 }]}>{t("match_setup.choose_prompt")}</ThemedText>
                             <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={[styles.chipRow, { flexWrap: "nowrap" }]} style={{ marginBottom: 20 }}>
                                 {PROMPT_OPTIONS.map((opt) => {
                                     const isSelected = selectedPromptOption === opt;
@@ -961,7 +963,7 @@ export default function MatchProfileSetupScreen() {
                     <View style={[styles.modalContent, { backgroundColor: isDark ? "#1C1C1E" : "#FFF", height: "60%" }]}>
                         <View style={styles.modalHeader}>
                             <TouchableOpacity onPress={() => setActiveSelectionField(null)}>
-                                <ThemedText style={{ color: colors.text.secondary, fontSize: 16 }}>İptal</ThemedText>
+                                <ThemedText style={{ color: colors.text.secondary, fontSize: 16 }}>{t("match_setup.cancel")}</ThemedText>
                             </TouchableOpacity>
                             <ThemedText style={styles.modalTitle}>
                                 {activeSelectionField === "starSign" && "Burç"}
@@ -970,7 +972,7 @@ export default function MatchProfileSetupScreen() {
                                 {activeSelectionField === "job" && "Meslek"}
                             </ThemedText>
                             <TouchableOpacity onPress={() => setActiveSelectionField(null)}>
-                                <ThemedText style={{ color: ACCENT, fontSize: 16, fontWeight: "700" }}>Bitti</ThemedText>
+                                <ThemedText style={{ color: ACCENT, fontSize: 16, fontWeight: "700" }}>{t("match_setup.done")}</ThemedText>
                             </TouchableOpacity>
                         </View>
 

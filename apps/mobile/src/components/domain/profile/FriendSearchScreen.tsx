@@ -20,6 +20,7 @@ import { searchUsers, type UserSummary } from "@/src/services/searchService";
 import { toggleFollow } from "@/src/services/userService";
 import { useAuthStore } from "@/src/store/useAuthStore";
 import { handleApiError } from "@/src/utils/errorHandler";
+import { useTranslation } from "react-i18next";
 
 const DEBOUNCE_MS = 400;
 
@@ -27,6 +28,7 @@ export default function FriendSearchScreen() {
   const { colors } = useTheme();
   const router = useRouter();
   const authUser = useAuthStore((s) => s.user);
+  const { t } = useTranslation();
 
   const [query, setQuery] = useState("");
   const [results, setResults] = useState<UserSummary[]>([]);
@@ -174,7 +176,7 @@ export default function FriendSearchScreen() {
 
         <View style={styles.userInfo}>
           <Text style={[styles.username, { color: colors.text.primary }]} numberOfLines={1}>
-            {item.username || `Kullanıcı ${item.id}`}
+            {item.username || `${t("profile.user")} ${item.id}`}
           </Text>
           {displayName && (
             <Text style={[styles.fullName, { color: colors.text.secondary }]} numberOfLines={1}>
@@ -211,7 +213,7 @@ export default function FriendSearchScreen() {
               },
             ]}
           >
-            {item.is_following ? "Takipte" : "Takip Et"}
+            {item.is_following ? t("friend_search.following") : t("friend_search.follow")}
           </Text>
         </TouchableOpacity>
       </TouchableOpacity>
@@ -233,7 +235,7 @@ export default function FriendSearchScreen() {
           <IconSymbol name="chevron.left" size={20} color={colors.text.primary} />
         </TouchableOpacity>
 
-        <Text style={[styles.headerTitle, { color: colors.text.primary }]}>Arkadaş Ara</Text>
+        <Text style={[styles.headerTitle, { color: colors.text.primary }]}>{t("friend_search.title")}</Text>
 
         <View style={styles.headerBtn} />
       </View>
@@ -257,7 +259,7 @@ export default function FriendSearchScreen() {
           <TextInput
             ref={inputRef}
             style={[styles.searchInput, { color: colors.text.primary }]}
-            placeholder="Kullanıcı adı veya isim ara..."
+            placeholder={t("friend_search.search_placeholder")}
             placeholderTextColor={colors.text.tertiary}
             value={query}
             onChangeText={handleChangeText}
@@ -287,7 +289,7 @@ export default function FriendSearchScreen() {
           <View style={styles.centerState}>
             <ActivityIndicator size="small" color={colors.accent.primary} />
             <Text style={[styles.stateText, { color: colors.text.tertiary }]}>
-              Aranıyor...
+              {t("friend_search.searching")}
             </Text>
           </View>
         ) : searched && results.length === 0 ? (
@@ -296,10 +298,10 @@ export default function FriendSearchScreen() {
               <IconSymbol name="person.fill.questionmark" size={32} color={colors.text.tertiary} />
             </View>
             <Text style={[styles.emptyTitle, { color: colors.text.primary }]}>
-              Kullanıcı Bulunamadı
+              {t("friend_search.no_user_found")}
             </Text>
             <Text style={[styles.emptyDesc, { color: colors.text.tertiary }]}>
-              "{query}" ile eşleşen kullanıcı yok.{"\n"}Farklı bir isim deneyin.
+              {t("friend_search.no_user_desc", { query })}
             </Text>
           </View>
         ) : !searched ? (
@@ -308,10 +310,10 @@ export default function FriendSearchScreen() {
               <IconSymbol name="person.2.fill" size={32} color={colors.accent.primary} />
             </View>
             <Text style={[styles.emptyTitle, { color: colors.text.primary }]}>
-              Arkadaşlarını Bul
+              {t("friend_search.find_friends")}
             </Text>
             <Text style={[styles.emptyDesc, { color: colors.text.tertiary }]}>
-              Kullanıcı adı veya isim yazarak{"\n"}arkadaşlarını kolayca bulabilirsin.
+              {t("friend_search.find_friends_desc")}
             </Text>
           </View>
         ) : (
@@ -324,7 +326,7 @@ export default function FriendSearchScreen() {
             showsVerticalScrollIndicator={false}
             ListHeaderComponent={
               <Text style={[styles.resultCount, { color: colors.text.secondary }]}>
-                {results.length} sonuç bulundu
+                {t("friend_search.results_count", { count: results.length })}
               </Text>
             }
           />

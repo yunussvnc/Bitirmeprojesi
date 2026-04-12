@@ -31,9 +31,13 @@ import { useTheme } from "@/src/hooks/useTheme";
 import { Screen, Section, type ScreenRef } from "@/src/components/layout";
 import { PlaceCard } from "@/src/components/domain/place/PlaceCard";
 import { Button, Card, ReviewForm, RatingStars } from "@/src/components/ui";
+
+import { handleApiError } from '@/src/utils/errorHandler';
+import { useTranslation } from 'react-i18next';
 import { useAppStore } from "@/src/store/useAppStore";
+import { useSettingsStore } from "@/src/store/useSettingsStore";
 import { getPlaceImageSource, hasPlaceImage } from "@/src/utils/placeImages";
-import { spacing } from "@/src/constants/design";
+import { spacing, createTextStyle } from "@/src/constants/design";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { calculateDistance, getCurrentLocation, type PlaceLocation } from "@/src/utils/location";
@@ -81,6 +85,7 @@ export default function PlaceDetailScreen({
   const insets = useSafeAreaInsets();
   const params = useLocalSearchParams();
   const id = providedId || String(params?.id ?? "");
+  const { t } = useTranslation();
 
   const savedIds = useAppStore((s) => s.savedIds);
   const toggleSaved = useAppStore((s) => s.toggleSave);
@@ -94,6 +99,7 @@ export default function PlaceDetailScreen({
   const [submittingReview, setSubmittingReview] = useState(false);
   const [showHeroImage, setShowHeroImage] = useState(false);
 
+  const [activeTab, setActiveTab] = useState<'info' | 'menu' | 'reviews'>('info');
   const [reviews, setReviews] = useState<Review[]>([]);
   const [reviewsLoading, setReviewsLoading] = useState(false);
   const [reviewsError, setReviewsError] = useState<string | null>(null);
@@ -295,7 +301,7 @@ export default function PlaceDetailScreen({
     try {
       const location = await getCurrentLocation();
       if (!location) {
-        Alert.alert("Konum İzni Gerekli", "Yorum yapabilmek için konum izni vermeniz gerekiyor.", [{ text: "Tamam" }]);
+        Alert.alert(t("place_extra.location_perm_title"), t("place_extra.location_perm_desc"), [{ text: t("common.ok") }]);
         return;
       }
 
@@ -322,7 +328,7 @@ export default function PlaceDetailScreen({
       }
     } catch (error) {
       logger.error("Error checking location:", error);
-      Alert.alert("Hata", "Konumun kontrol edilirken bir sorun oluştu. Lütfen tekrar deneyin.");
+      Alert.alert(t("common.error"), t("place_extra.location_check_err"));
     } finally {
       setCheckingLocation(false);
     }
@@ -330,7 +336,7 @@ export default function PlaceDetailScreen({
 
   const handleSubmitReview = async (rating: number, comment: string) => {
     if (!isNearby) {
-      Alert.alert("Uyarı", "Bu mekanda yorum yapabilmek için mekanın yakınında olmalısınız.");
+      Alert.alert(t("review.warning"), t("place_extra.not_nearby"));
       return;
     }
 
@@ -344,11 +350,11 @@ export default function PlaceDetailScreen({
         user_lng: userLocation?.longitude,
       });
 
-      Alert.alert("Başarılı", "Yorumunuz gönderildi!", [{ text: "Tamam", onPress: () => setShowReviewForm(false) }]);
+      Alert.alert(t("common.success"), t("place_extra.review_sent"), [{ text: t("common.ok"), onPress: () => setShowReviewForm(false) }]);
 
       await loadReviews();
     } catch (error) {
-      Alert.alert("Hata", "Yorum gönderilirken bir hata oluştu.");
+      Alert.alert(t("common.error"), t("place_extra.review_submit_err"));
       logger.error("Error submitting review:", error);
     } finally {
       setSubmittingReview(false);
@@ -364,7 +370,7 @@ export default function PlaceDetailScreen({
           ? `maps://maps.apple.com/?daddr=${lat},${lng}`
           : `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
       Linking.openURL(url).catch(() => {
-        Alert.alert("Hata", "Harita uygulaması açılamadı.");
+        Alert.alert(t("common.error"), t("place_extra.map_app_err"));
       });
     }
   };
@@ -382,7 +388,7 @@ export default function PlaceDetailScreen({
 
   const handleCall = () => {
     // TODO: Mekan telefon numarası eklenmeli
-    Alert.alert("Bilgi", "Bu mekanın telefon numarası henüz eklenmedi.");
+    Alert.alert(t("place_extra.info"), t("place_detail.phone_not_added"));
   };
 
   const heroSource = useMemo(() => {
@@ -487,7 +493,7 @@ export default function PlaceDetailScreen({
           ) : (
             <View style={[styles.imagePlaceholder, { backgroundColor: colors.surface.elevated }]}>
               <IconSymbol name="mappin.and.ellipse" size={48} color={colors.text.tertiary} />
-              <Text style={[bodySmallStyle, { color: colors.text.tertiary, marginTop: 8 }]}>Görsel eklenmedi</Text>
+              <Text style={[bodySmallStyle, { color: colors.text.tertiary, marginTop: 8 }]}>{t("place_detail.no_image")}</Text>
             </View>
           )}
         </View>
@@ -504,21 +510,20 @@ export default function PlaceDetailScreen({
                 }}
                 style={[styles.reviewButton, { borderColor: "#22c55e", backgroundColor: "rgba(34, 197, 94, 0.1)" }]}
               >
-                <Text style={{ fontSize: 14, color: "#22c55e", fontWeight: "600" }}>Yorumlar</Text>
+                <Text style={{ fontSize: 14, color: "#22c55e", fontWeight: "600" }}>{t("place_detail.reviews")}</Text>
               </TouchableOpacity>
-
-              {place?.menu_items && place.menu_items.length > 0 && (
-                <TouchableOpacity
-                  onPress={() => {
-                    lightImpact();
-                    setShowMenu(true);
-                  }}
-                  style={[styles.reviewButton, { borderColor: "#f59e0b", backgroundColor: "rgba(245, 158, 11, 0.1)" }]}
-                >
-                  <IconSymbol name="list.bullet.clipboard.fill" size={14} color="#f59e0b" />
-                  <Text style={{ fontSize: 14, color: "#f59e0b", fontWeight: "600", marginLeft: 4 }}>Menü</Text>
-                </TouchableOpacity>
-              )}
+              <TouchableOpacity
+                style={[styles.reviewButton, { borderColor: "#10b981", backgroundColor: "rgba(16, 185, 129, 0.1)" }]}
+                onPress={() => {
+                  lightImpact();
+                  setShowMenu(true);
+                }}
+              >
+                <View style={[styles.reviewIconContainer, { backgroundColor: "transparent" }]}>
+                  <IconSymbol name="list.bullet.clipboard.fill" size={14} color="#10b981" />
+                  <Text style={{ fontSize: 14, color: "#10b981", fontWeight: "600", marginLeft: 4 }}>{t("place_detail.menu")}</Text>
+                </View>
+              </TouchableOpacity>
             </View>
           </View>
 
@@ -549,7 +554,7 @@ export default function PlaceDetailScreen({
             <Card style={styles.campaignCard}>
               <View style={styles.campaignHeader}>
                 <IconSymbol name="sparkles" size={18} color={colors.accent.primary} />
-                <Text style={[h2Style, { fontSize: 18, marginLeft: 8 }]}>Kampanya</Text>
+                <Text style={[h2Style, { fontSize: 18, marginLeft: 8 }]}>{t("place_detail.campaign")}</Text>
               </View>
               <Text style={[bodyStyle, { lineHeight: 22, color: colors.text.secondary }]}>{place.campaign_text}</Text>
             </Card>
@@ -558,23 +563,23 @@ export default function PlaceDetailScreen({
           {/* Atmosphere Section */}
           {place?.description && (
             <Card style={styles.sectionCard}>
-              <Text style={[h2Style, { fontSize: 20, marginBottom: spacing.base }]}>Atmosfer & Deneyim</Text>
+              <Text style={[h2Style, { fontSize: 20, marginBottom: spacing.base }]}>{t("place_detail.atmosphere")}</Text>
               <Text style={[bodyStyle, { lineHeight: 24, marginBottom: spacing.sm }]}>{place.description}</Text>
               <View style={styles.atmosphereTags}>
                 <View style={[styles.atmosphereTag, { backgroundColor: colors.surface.default }]}>
                   <FontAwesome5 name="volume-mute" size={14} color={colors.text.secondary} solid={false} />
                   <Text style={[bodySmallStyle, { marginLeft: 6 }]}>
-                    {place.tags?.includes("quiet") ? "Sessiz" : "Canlı"} ortam
+                    {place.tags?.includes("quiet") ? t("place_extra.quiet_vibe") : t("place_extra.lively_vibe")} {t("place_extra.vibe_label")}
                   </Text>
                 </View>
                 <View style={[styles.atmosphereTag, { backgroundColor: colors.surface.default }]}>
                   <IconSymbol name="person.fill" size={20} color={colors.text.secondary} />
                   <Text style={[bodySmallStyle, { marginLeft: 6 }]}>
-                    {place.tags?.includes("work") ? "Çalışma" : "Sosyal"} için ideal
+                    {place.tags?.includes("work") ? t("place_extra.work_ideal") : t("place_extra.social_ideal")} {t("place_extra.ideal_for")}
                   </Text>
                 </View>
               </View>
-              <Text style={[h2Style, { fontSize: 18, marginTop: spacing.lg, marginBottom: spacing.base }]}>Özellikler</Text>
+              <Text style={[h2Style, { fontSize: 18, marginTop: spacing.lg, marginBottom: spacing.base }]}>{t("place_detail.features")}</Text>
               <View style={styles.highlightsGrid}>
                 {[
                   { fa5: "wifi" as const, fa5Unavailable: "wifi-slash" as const, label: "Wi-Fi", available: true },
@@ -614,18 +619,20 @@ export default function PlaceDetailScreen({
           {/* Inline Menu Preview */}
           {place?.menu_items && place.menu_items.length > 0 && place.menu_items[0]?.type !== 'image' && (
             <Card style={styles.sectionCard}>
-              <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: spacing.base }}>
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                  <IconSymbol name="list.bullet.clipboard.fill" size={22} color="#f59e0b" />
-                  <Text style={[h2Style, { fontSize: 20, marginLeft: 8 }]}>Menü</Text>
+              <View style={styles.sectionHeaderRow}>
+                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+                  <IconSymbol name="list.bullet.clipboard.fill" size={22} color="#10b981" />
+                  <Text style={[h1Style, { fontSize: 20 }]}>{t("place_detail.menu")}</Text>
                 </View>
-                <TouchableOpacity
-                  onPress={() => { lightImpact(); setShowMenu(true); }}
-                  style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: 12, paddingVertical: 6, borderRadius: 20, backgroundColor: 'rgba(245, 158, 11, 0.1)' }}
-                >
-                  <Text style={{ fontSize: 13, color: '#f59e0b', fontWeight: '600' }}>Tümünü Gör</Text>
-                  <IconSymbol name="chevron.right" size={14} color="#f59e0b" />
-                </TouchableOpacity>
+                {place.menu_items?.length > 4 && (
+                  <TouchableOpacity 
+                    onPress={() => setShowMenu(true)}
+                    style={{ flexDirection: 'row', alignItems: 'center', gap: 4, backgroundColor: 'rgba(16, 185, 129, 0.1)', paddingHorizontal: 10, paddingVertical: 4, borderRadius: 12 }}
+                  >
+                    <Text style={{ fontSize: 13, color: '#10b981', fontWeight: '600' }}>{t("place_detail.see_all")}</Text>
+                    <IconSymbol name="chevron.right" size={14} color="#10b981" />
+                  </TouchableOpacity>
+                )}
               </View>
               {place.menu_items.slice(0, 3).map((item: any, idx: number) => (
                 <View
@@ -650,14 +657,16 @@ export default function PlaceDetailScreen({
                     {item.desc ? <Text style={[captionStyle, { marginTop: 2 }]} numberOfLines={1}>{item.desc}</Text> : null}
                   </View>
                   {item.price ? (
-                    <View style={{ backgroundColor: 'rgba(245, 158, 11, 0.12)', paddingHorizontal: 10, paddingVertical: 5, borderRadius: 10 }}>
-                      <Text style={{ fontSize: 14, fontWeight: '700', color: '#f59e0b' }}>{item.price}</Text>
+                    <View style={{ marginTop: 8, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
+                      <Text style={{ fontSize: 14, fontWeight: '700', color: '#10b981' }}>{item.price}</Text>
                     </View>
                   ) : null}
                 </View>
               ))}
               {place.menu_items.length > 3 && (
-                <Text style={[captionStyle, { textAlign: 'center', marginTop: spacing.sm }]}>+{place.menu_items.length - 3} ürün daha</Text>
+                <Text style={[createTextStyle('caption', colors.text.secondary), styles.moreItemsText]}>
+                  {t('place_detail.more_items', { count: place.menu_items.length - 3 })}
+                </Text>
               )}
             </Card>
           )}
@@ -665,24 +674,27 @@ export default function PlaceDetailScreen({
           {/* Inline Menu Preview — Image Type */}
           {place?.menu_items && place.menu_items.length > 0 && place.menu_items[0]?.type === 'image' && (
             <Card style={styles.sectionCard}>
-              <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: spacing.base }}>
-                <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                  <IconSymbol name="doc.text.image" size={22} color="#f59e0b" />
-                  <Text style={[h2Style, { fontSize: 20, marginLeft: 8 }]}>Menü</Text>
+              <View style={[styles.sectionBox, { marginTop: spacing.md }]}>
+                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 12 }}>
+                  <View style={{ width: 44, height: 44, borderRadius: 22, backgroundColor: 'rgba(16, 185, 129, 0.1)', alignItems: 'center', justifyContent: 'center' }}>
+                    <IconSymbol name="doc.text.image" size={22} color="#10b981" />
+                  </View>
+                  <View style={{ flex: 1 }}>
+                    <Text style={{ color: '#fff', fontSize: 16, fontWeight: '600', marginBottom: 2 }}>{t("place_detail.menu")}</Text>
+                  </View>
+                  <TouchableOpacity onPress={() => setShowMenu(true)} style={{ flexDirection: 'row', alignItems: 'center', gap: 4 }}>
+                    <Text style={{ fontSize: 13, color: '#10b981', fontWeight: '600' }}>{t("place_detail.open_menu")}</Text>
+                    <IconSymbol name="chevron.right" size={14} color="#10b981" />
+                  </TouchableOpacity>
                 </View>
-                <TouchableOpacity
-                  onPress={() => { lightImpact(); setShowMenu(true); }}
-                  style={{ flexDirection: 'row', alignItems: 'center', paddingHorizontal: 12, paddingVertical: 6, borderRadius: 20, backgroundColor: 'rgba(245, 158, 11, 0.1)' }}
-                >
-                  <Text style={{ fontSize: 13, color: '#f59e0b', fontWeight: '600' }}>Menüyü Aç</Text>
-                  <IconSymbol name="chevron.right" size={14} color="#f59e0b" />
-                </TouchableOpacity>
               </View>
               <View style={{ borderRadius: 16, overflow: 'hidden', height: 180, backgroundColor: colors.surface.elevated }}>
                 <Image source={{ uri: place.menu_items[0].uri }} style={{ width: '100%', height: '100%' }} resizeMode="cover" />
                 <View style={{ ...StyleSheet.absoluteFillObject, backgroundColor: 'rgba(0,0,0,0.3)', justifyContent: 'center', alignItems: 'center' }}>
                   <IconSymbol name="doc.text.magnifyingglass" size={32} color="#fff" />
-                  <Text style={{ color: '#fff', fontWeight: '700', fontSize: 15, marginTop: 8 }}>{place.menu_items.length} sayfa menü</Text>
+                  <Text style={{ color: '#fff', fontWeight: '700', fontSize: 15, marginTop: 8 }}>
+                    {t('place_detail.pages_menu', { count: place.menu_items.length })}
+                  </Text>
                 </View>
               </View>
             </Card>
@@ -691,7 +703,7 @@ export default function PlaceDetailScreen({
           {/* Location Preview */}
           {place?.address && (
             <Card style={styles.sectionCard}>
-              <Text style={[h2Style, { fontSize: 20, marginBottom: spacing.base }]}>Konum</Text>
+              <Text style={[h2Style, { fontSize: 20, marginBottom: spacing.base }]}>{t("place_detail.location")}</Text>
               <View style={styles.locationPreview}>
                 <View style={styles.locationAddress}>
                   <IconSymbol name="location.fill" size={20} color={colors.text.secondary} />
@@ -700,7 +712,7 @@ export default function PlaceDetailScreen({
                 {place?.city && <Text style={[bodySmallStyle, { marginTop: 4, marginLeft: 28 }]}>{place.city}</Text>}
                 <View style={styles.locationButtons}>
                   <Button variant="secondary" onPress={handleNavigate} style={{ flex: 1, marginRight: spacing.xs }}>
-                    Yol Tarifi Al
+                    {t("place_detail.get_directions")}
                   </Button>
                   <TouchableOpacity
                     onPress={() => {
@@ -719,7 +731,7 @@ export default function PlaceDetailScreen({
 
           {/* Similar Places */}
           {!isVenueDashboard && similarPlaces.length > 0 && (
-            <Section title="Benzer Mekanlar" style={{ marginTop: spacing.xl }}>
+            <Section title={t("place_detail.similar_places")} style={{ marginTop: spacing.xl }}>
               <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.similarScrollContent}>
                 {similarPlaces.map((similarPlace) => (
                   <View key={similarPlace.id} style={styles.similarCardWrapper}>
@@ -770,7 +782,7 @@ export default function PlaceDetailScreen({
                         <View style={[styles.reviewHandle, { backgroundColor: colors.surface.border }]} />
                       </View>
                       <View style={styles.reviewHeaderRow}>
-                        <Text style={[h2Style, { fontSize: 20 }]}>Yorumlar</Text>
+                        <Text style={[h2Style, { fontSize: 20 }]}>{t("place_detail.reviews")}</Text>
                         <TouchableOpacity
                           onPress={() => {
                             lightImpact();
@@ -793,12 +805,12 @@ export default function PlaceDetailScreen({
                     scrollEventThrottle={16}
                   >
                     {reviewsLoading ? (
-                      <Text style={[bodySmallStyle]}>Yorumlar yükleniyor...</Text>
+                      <Text style={[bodySmallStyle]}>{t('explore.loading_comments')}</Text>
                     ) : reviewsError ? (
                       <Text style={[bodySmallStyle]}>{reviewsError}</Text>
                     ) : !reviews.length ? (
                       <Text style={[bodySmallStyle]}>
-                        Bu mekanda henüz yorum yok. Buradayken ilk yorumu sen bırakabilirsin.
+                        {t('explore.no_comments')}
                       </Text>
                     ) : (
                       <>
@@ -808,7 +820,7 @@ export default function PlaceDetailScreen({
                             <Text style={[styles.ratingBadgeText, { color: colors.accent.onPrimary }]}>{averageRating}</Text>
                           </View>
                           <View style={styles.ratingDetails}>
-                            {[{ label: "Servis" }, { label: "Lezzet" }, { label: "Ambiyans" }].map((item) => (
+                            {[{ label: t('explore.rating_service') }, { label: t('explore.rating_taste') }, { label: t('explore.rating_ambiance') }].map((item) => (
                               <View key={item.label} style={styles.ratingRow}>
                                 <Text style={[bodySmallStyle, { width: 70 }]}>{item.label}:</Text>
                                 <RatingStars value={Number(averageRating)} disabled size={14} />
@@ -822,19 +834,19 @@ export default function PlaceDetailScreen({
                           <View style={styles.reviewsMetaRow}>
                             <View style={styles.reviewsMetaItem}>
                               <IconSymbol name="star.fill" size={16} color={colors.text.tertiary} />
-                              <Text style={[bodySmallStyle, { marginLeft: 6 }]}>{reviews.length} değerlendirme</Text>
+                              <Text style={[bodySmallStyle, { marginLeft: 6 }]}>{t('explore.rating_count', { count: reviews.length })}</Text>
                             </View>
                             <View style={styles.reviewsMetaDivider} />
                             <View style={styles.reviewsMetaItem}>
                               <IconSymbol name="text.bubble.fill" size={16} color={colors.text.tertiary} />
-                              <Text style={[bodySmallStyle, { marginLeft: 6 }]}>{reviews.length} yorum</Text>
+                              <Text style={[bodySmallStyle, { marginLeft: 6 }]}>{t('explore.comment_count', { count: reviews.length })}</Text>
                             </View>
                           </View>
                           {reviews.map((review) => (
                             <View key={review.id} style={[styles.reviewItem, { borderBottomColor: colors.surface.border }]}>
                               <View style={styles.reviewHeader}>
                                 <View style={styles.reviewHeaderLeft}>
-                                  <Text style={[bodyStyle, { fontWeight: "600" }]}>Kullanıcı #{review.user_id}</Text>
+                                  <Text style={[bodyStyle, { fontWeight: "600" }]}>{t('explore.user_id', { id: review.user_id })}</Text>
                                   {review.is_verified && (
                                     <View
                                       style={[
@@ -847,7 +859,7 @@ export default function PlaceDetailScreen({
                                     >
                                       <IconSymbol name="checkmark.seal.fill" size={12} color={colors.accent.primary} />
                                       <Text style={[styles.verifiedBadgeText, { color: colors.accent.primary }]}>
-                                        Verified
+                                        {t('explore.verified')}
                                       </Text>
                                     </View>
                                   )}
@@ -962,11 +974,11 @@ export default function PlaceDetailScreen({
                     {/* Review info overlay */}
                     <View style={styles.galleryReviewOverlay}>
                       <View style={styles.galleryReviewHeader}>
-                        <Text style={styles.galleryReviewAuthor}>Kullanıcı #{currentReview.user_id}</Text>
+                        <Text style={styles.galleryReviewAuthor}>{t('explore.user_id', { id: currentReview.user_id })}</Text>
                         {currentReview.is_verified && (
                           <View style={styles.galleryVerifiedBadge}>
                             <IconSymbol name="checkmark.seal.fill" size={12} color="#4ade80" />
-                            <Text style={styles.galleryVerifiedText}>Verified</Text>
+                            <Text style={styles.galleryVerifiedText}>{t('explore.verified')}</Text>
                           </View>
                         )}
                         <View style={{ flex: 1 }} />
@@ -988,7 +1000,7 @@ export default function PlaceDetailScreen({
                           activeOpacity={0.7}
                         >
                           <IconSymbol name="chevron.left" size={18} color="#fff" />
-                          <Text style={styles.galleryNavText}>Önceki Yorum</Text>
+                          <Text style={styles.galleryNavText}>{t('explore.prev_comment')}</Text>
                         </TouchableOpacity>
 
                         <TouchableOpacity
@@ -1000,7 +1012,7 @@ export default function PlaceDetailScreen({
                           style={[styles.galleryNavButton, !hasNextReview && { opacity: 0.3 }]}
                           activeOpacity={0.7}
                         >
-                          <Text style={styles.galleryNavText}>Sonraki Yorum</Text>
+                          <Text style={styles.galleryNavText}>{t('explore.next_comment')}</Text>
                           <IconSymbol name="chevron.right" size={18} color="#fff" />
                         </TouchableOpacity>
                       </View>
@@ -1024,7 +1036,7 @@ export default function PlaceDetailScreen({
           <View style={{ flexDirection: "row", justifyContent: "flex-end", position: "absolute", top: insets.top || 44, width: "100%", paddingHorizontal: 20, zIndex: 10 }}>
             <TouchableOpacity onPress={() => setShowHeroImage(false)} style={styles.galleryNavButton}>
               <IconSymbol name="xmark" size={20} color="#fff" />
-              <Text style={styles.galleryNavText}>Kapat</Text>
+              <Text style={styles.galleryNavText}>{t('explore.close')}</Text>
             </TouchableOpacity>
           </View>
           <ScrollView
@@ -1075,7 +1087,7 @@ export default function PlaceDetailScreen({
                       <View style={[styles.reviewHandle, { backgroundColor: colors.surface.border }]} />
                     </View>
                     <View style={styles.reviewHeaderRow}>
-                      <Text style={[h2Style, { fontSize: 20 }]}>Menü</Text>
+                      <Text style={[h2Style, { fontSize: 20 }]}>{t('explore.menu')}</Text>
                       <TouchableOpacity
                         onPress={() => {
                           lightImpact();
@@ -1120,7 +1132,7 @@ export default function PlaceDetailScreen({
                               backgroundColor: 'rgba(0,0,0,0.5)',
                             }}>
                               <Text style={{ color: '#fff', fontSize: 13, fontWeight: '600', textAlign: 'center' }}>
-                                Sayfa {idx + 1} / {place.menu_items.length}
+                                {t('place_detail.page_x_of_y', { current: idx + 1, total: place.menu_items.length })}
                               </Text>
                             </View>
                           </View>
@@ -1132,13 +1144,13 @@ export default function PlaceDetailScreen({
                         {groupMenuByCategory(place.menu_items).map((group, gIdx) => (
                           <View key={gIdx} style={{ marginBottom: spacing.xl }}>
                             {/* Category Header */}
-                            <View style={{
-                              flexDirection: 'row', alignItems: 'center',
-                              marginBottom: spacing.base, paddingBottom: spacing.xs,
-                              borderBottomWidth: 2, borderBottomColor: '#f59e0b30',
+                            <View style={{ 
+                              paddingVertical: 12, 
+                              borderBottomWidth: 2, borderBottomColor: '#10b98130',
+                              flexDirection: 'row', alignItems: 'center', marginBottom: 12 
                             }}>
-                              <View style={{ width: 4, height: 22, borderRadius: 2, backgroundColor: '#f59e0b', marginRight: 10 }} />
-                              <Text style={[h2Style, { fontSize: 18, color: '#f59e0b', letterSpacing: 0.3 }]}>
+                              <View style={{ width: 4, height: 22, borderRadius: 2, backgroundColor: '#10b981', marginRight: 10 }} />
+                              <Text style={[h2Style, { fontSize: 18, color: '#10b981', letterSpacing: 0.3 }]}>
                                 {group.category}
                               </Text>
                               <Text style={[captionStyle, { marginLeft: 8 }]}>{group.items.length} ürün</Text>
@@ -1186,15 +1198,17 @@ export default function PlaceDetailScreen({
                                   </View>
                                   {item.price ? (
                                     <View style={{
-                                      backgroundColor: 'rgba(245, 158, 11, 0.12)',
+                                      backgroundColor: 'rgba(16, 185, 129, 0.12)',
                                       paddingHorizontal: 14,
                                       paddingVertical: 7,
                                       borderRadius: 12,
                                       marginLeft: 10,
                                     }}>
-                                      <Text style={{ fontWeight: '800', color: '#f59e0b', fontSize: 15 }}>
-                                        {item.price}
-                                      </Text>
+                                      {item.price && (
+                                        <Text style={{ fontWeight: '800', color: '#10b981', fontSize: 15 }}>
+                                          {item.price}
+                                        </Text>
+                                      )}
                                     </View>
                                   ) : null}
                                 </View>
@@ -1638,11 +1652,32 @@ const styles = StyleSheet.create({
     width: 280,
     marginRight: spacing.base,
   },
+  sectionHeaderRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    marginBottom: spacing.base,
+  },
+  reviewIconContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  sectionBox: {
+    backgroundColor: "rgba(0, 0, 0, 0.05)",
+    borderRadius: 16,
+    padding: spacing.base,
+  },
   menuItemRow: {
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
     paddingVertical: 12,
     borderBottomWidth: 1,
+  },
+  moreItemsText: {
+    marginTop: 8,
+    textAlign: "center",
+    fontWeight: "500",
   },
 });

@@ -8,6 +8,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTheme } from "@/src/hooks/useTheme";
 import { IconSymbol, type IconSymbolName } from "@/src/components/ui/icon-symbol";
 import { lightImpact } from "@/src/utils/haptics";
+import { useTranslation } from "react-i18next";
 
 type PostOptionKey = "save" | "share" | "hide" | "report" | "unfollow" | "mute";
 
@@ -29,6 +30,7 @@ export function PostOptionsSheet({ visible, onClose, showFollowActions = false, 
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
   const translateY = useRef(new Animated.Value(0)).current;
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (visible) translateY.setValue(0);
@@ -61,18 +63,18 @@ export function PostOptionsSheet({ visible, onClose, showFollowActions = false, 
 
   const options = useMemo<Option[]>(
     () => [
-      { key: "save", label: "Kaydet / Favori", icon: "bookmark" },
-      { key: "share", label: "Paylaş", icon: "paperplane.fill" },
-      { key: "hide", label: "İlgilenmiyorum (Gizle)", icon: "eye.slash" },
-      { key: "report", label: "Raporla", icon: "exclamationmark.triangle", destructive: true },
+      { key: "save", label: t("post_options.save"), icon: "bookmark" },
+      { key: "share", label: t("post_options.share"), icon: "paperplane.fill" },
+      { key: "hide", label: t("post_options.hide"), icon: "eye.slash" },
+      { key: "report", label: t("post_options.report"), icon: "exclamationmark.triangle", destructive: true },
       ...(showFollowActions
         ? ([
-          { key: "unfollow", label: "Takibi bırak", icon: "person.badge.minus" },
-          { key: "mute", label: "Sessize al", icon: "speaker.slash" },
+          { key: "unfollow", label: t("post_options.unfollow"), icon: "person.badge.minus" },
+          { key: "mute", label: t("post_options.mute"), icon: "speaker.slash" },
         ] as Option[])
         : []),
     ],
-    [showFollowActions]
+    [showFollowActions, t]
   );
 
   const handleSelect = (key: PostOptionKey) => {

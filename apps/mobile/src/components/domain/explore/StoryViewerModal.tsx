@@ -25,16 +25,8 @@ import type { Story } from '@/src/services/storyService';
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 const STORY_DURATION_MS = 5000;
 
-function timeAgo(dateStr?: string): string {
-  if (!dateStr) return '';
-  const diff = Date.now() - new Date(dateStr).getTime();
-  const mins = Math.floor(diff / 60000);
-  if (mins < 1) return 'Az önce';
-  if (mins < 60) return `${mins} dk önce`;
-  const hours = Math.floor(mins / 60);
-  if (hours < 24) return `${hours} sa önce`;
-  return `${Math.floor(hours / 24)} gün önce`;
-}
+import { timeAgo } from '@/src/utils/timeAgo';
+import { useTranslation } from 'react-i18next';
 
 export interface StoryViewerModalProps {
   stories: Story[];
@@ -57,6 +49,7 @@ export function StoryViewerModal({
 }: StoryViewerModalProps) {
   const [index, setIndex] = useState(initialIndex);
   const progressAnim = useRef(new Animated.Value(0)).current;
+  const { t } = useTranslation();
 
   // initialIndex veya stories değiştiğinde index'i sıfırla
   useEffect(() => {
@@ -271,7 +264,7 @@ export function StoryViewerModal({
               <TouchableOpacity onPress={handleAuthorPress} activeOpacity={0.7}>
                 <View style={styles.authorNameRow}>
                   <Text style={styles.authorName}>
-                    {story.author?.first_name || story.author?.username || 'Kullanıcı'}
+                    {story.author?.first_name || story.author?.username || t('profile.user')}
                   </Text>
                   <Text style={styles.timeAgo}>{timeAgo(story.created_at)}</Text>
                 </View>
@@ -279,7 +272,7 @@ export function StoryViewerModal({
             ) : (
               <View style={styles.authorNameRow}>
                 <Text style={styles.authorName}>
-                  {story.author?.first_name || story.author?.username || 'Kullanıcı'}
+                  {story.author?.first_name || story.author?.username || t('profile.user')}
                 </Text>
                 <Text style={styles.timeAgo}>{timeAgo(story.created_at)}</Text>
               </View>

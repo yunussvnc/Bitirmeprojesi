@@ -37,6 +37,7 @@ import { MAX_MEDIA_COUNT, POST_ASPECT_RATIOS } from '@/src/contentCreation/confi
 import { CustomGalleryGrid } from './CustomGalleryGrid';
 import { ImageCropper } from './ImageCropper';
 import { EmbeddedCamera } from './EmbeddedCamera';
+import { useTranslation } from "react-i18next";
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 
@@ -66,6 +67,7 @@ export function MediaPicker({
 }: MediaPickerProps) {
   const { colors, isDark } = useTheme();
   const insets = useSafeAreaInsets();
+  const { t } = useTranslation();
   const isPostMode = contentType === 'post';
   const isStoryOrReels = contentType === 'story' || contentType === 'reels';
   const maxCount = MAX_MEDIA_COUNT[contentType];
@@ -149,7 +151,7 @@ export function MediaPicker({
             <IconSymbol name="xmark" size={18} color={colors.text.primary} />
           </TouchableOpacity>
 
-          <Text style={[styles.postTitle, { color: colors.text.primary }]}>Yeni Gönderi</Text>
+          <Text style={[styles.postTitle, { color: colors.text.primary }]}>{t("content_creation.new_post")}</Text>
 
           <View style={styles.headerRightGroup}>
             {/* Multi-select indicator */}
@@ -173,7 +175,7 @@ export function MediaPicker({
               activeOpacity={0.8}
             >
               <Text style={[styles.nextBtnText, { color: selected.length > 0 ? '#000' : colors.text.tertiary }]}>
-                İleri
+                {t("content_creation.next")}
               </Text>
               <IconSymbol name="chevron.right" size={13} color={selected.length > 0 ? '#000' : colors.text.tertiary} />
             </TouchableOpacity>
@@ -194,7 +196,7 @@ export function MediaPicker({
           ) : (
             <View style={styles.emptyPreview}>
               <IconSymbol name="photo.on.rectangle.angled" size={44} color="rgba(255,255,255,0.25)" />
-              <Text style={styles.emptyPreviewText}>Bir fotoğraf veya video seçin</Text>
+              <Text style={styles.emptyPreviewText}>{t("content_creation.select_media")}</Text>
             </View>
           )}
         </Animated.View>
@@ -222,7 +224,7 @@ export function MediaPicker({
               styles.modeLabel,
               { color: mode === 'gallery' ? colors.accent.primary : colors.text.tertiary },
             ]}>
-              Galeri
+              {t("content_creation.gallery")}
             </Text>
             {/* Active indicator line */}
             {mode === 'gallery' && <View style={[styles.activeIndicator, { backgroundColor: colors.accent.primary }]} />}
@@ -242,7 +244,7 @@ export function MediaPicker({
               styles.modeLabel,
               { color: mode === 'camera' ? colors.accent.primary : colors.text.tertiary },
             ]}>
-              Kamera
+              {t("content_creation.camera")}
             </Text>
             {mode === 'camera' && <View style={[styles.activeIndicator, { backgroundColor: colors.accent.primary }]} />}
           </TouchableOpacity>
@@ -343,14 +345,14 @@ export function MediaPicker({
         <View style={styles.storyGalleryWrap}>
           {/* Gallery Header */}
           <View style={[styles.storyGalleryHeader, { paddingTop: insets.top + 56 }]}>
-            <Text style={styles.storyGalleryTitle}>Galeri</Text>
+            <Text style={styles.storyGalleryTitle}>{t("content_creation.gallery")}</Text>
             <TouchableOpacity
               style={[styles.cameraSwitchBtn, { backgroundColor: colors.accent.primary }]}
               onPress={() => { lightImpact(); setMode('camera'); }}
               activeOpacity={0.8}
             >
               <IconSymbol name="camera.fill" size={16} color="#000" />
-              <Text style={styles.cameraSwitchText}>Kamera</Text>
+              <Text style={styles.cameraSwitchText}>{t("content_creation.camera")}</Text>
             </TouchableOpacity>
           </View>
 

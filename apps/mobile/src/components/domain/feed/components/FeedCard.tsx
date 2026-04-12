@@ -17,6 +17,7 @@ import { spacing, radius } from "@/src/constants/design";
 import { lightImpact, mediumImpact } from "@/src/utils/haptics";
 import { timeAgo } from "@/src/utils/timeAgo";
 import type { Post } from "@/src/services/feedService";
+import { useTranslation } from "react-i18next";
 
 export interface FeedCardProps {
   post: Post;
@@ -43,6 +44,7 @@ export function FeedCard({
 }: FeedCardProps) {
   const { colors, isDark } = useTheme();
   const { width: screenWidth } = useWindowDimensions();
+  const { t } = useTranslation();
   const [expanded, setExpanded] = useState(false);
   const likeScale = useSharedValue(1);
   const zoomScale = useSharedValue(1);
@@ -189,7 +191,7 @@ export function FeedCard({
               <Text style={[styles.caption, { color: colors.text.primary }]} numberOfLines={expanded ? undefined : 2}>
                 {post.caption}
               </Text>
-              {post.caption.length > 80 && !expanded && <Text style={[styles.more, { color: colors.text.tertiary }]}>daha fazla</Text>}
+              {post.caption.length > 80 && !expanded && <Text style={[styles.more, { color: colors.text.tertiary }]}>{t('feed.more')}</Text>}
               <Text style={[styles.captionTime, { color: colors.text.tertiary }]}>{timeAgo(post.created_at)}</Text>
             </TouchableOpacity>
           ) : (

@@ -28,6 +28,7 @@ import { useMessagesStore, type Conversation } from "@/src/store/useMessagesStor
 import { useChatMessagesStore } from "@/src/store/useChatMessagesStore";
 import type { Post } from "@/src/services/feedService";
 import { spacing } from "@/src/constants/design";
+import { useTranslation } from "react-i18next";
 
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 const SHEET_HEIGHT = Math.round(SCREEN_HEIGHT * 0.55);
@@ -44,6 +45,7 @@ export function SharePostSheet({ visible, onClose, post }: SharePostSheetProps) 
     const [query, setQuery] = useState("");
     const [sentTo, setSentTo] = useState<Set<string>>(new Set());
     const [modalVisible, setModalVisible] = useState(false);
+    const { t } = useTranslation();
 
     const animHeight = useRef(new Animated.Value(0)).current;
     const closingRef = useRef(false);
@@ -145,7 +147,7 @@ export function SharePostSheet({ visible, onClose, post }: SharePostSheetProps) 
             const mediaUrl = post.media[0]?.media_url || "";
             const caption = post.caption || "";
 
-            const messageText = `📸 Gönderi paylaşıldı\n${authorName}${placeName ? ` • ${placeName}` : ""}${caption ? `\n"${caption.slice(0, 80)}${caption.length > 80 ? "..." : ""}"` : ""}`;
+            const messageText = `${t('feed.post_shared')}\n${authorName}${placeName ? ` • ${placeName}` : ""}${caption ? `\n"${caption.slice(0, 80)}${caption.length > 80 ? "..." : ""}"` : ""}`;
 
             const msgId = `share-${post.id}-${Date.now()}`;
             addMessage(conversation.id, {
@@ -160,8 +162,8 @@ export function SharePostSheet({ visible, onClose, post }: SharePostSheetProps) 
 
             updateLastMessageAt(
                 conversation.id,
-                `📸 Gönderi paylaşıldı`,
-                "Az önce",
+                t('feed.post_shared'),
+                t('feed.just_now'),
                 "me"
             );
 
@@ -219,7 +221,7 @@ export function SharePostSheet({ visible, onClose, post }: SharePostSheetProps) 
                     {isSent ? (
                         <View style={[styles.sentBadge, { backgroundColor: "#4CAF5020" }]}>
                             <IconSymbol name="checkmark.circle.fill" size={20} color="#4CAF50" />
-                            <Text style={[styles.sentText, { color: "#4CAF50" }]}>Gönderildi</Text>
+                            <Text style={[styles.sentText, { color: "#4CAF50" }]}>{t('feed.sent_badge')}</Text>
                         </View>
                     ) : (
                         <TouchableOpacity
@@ -227,7 +229,7 @@ export function SharePostSheet({ visible, onClose, post }: SharePostSheetProps) 
                             onPress={() => handleSend(item)}
                             activeOpacity={0.7}
                         >
-                            <Text style={styles.sendBtnText}>Gönder</Text>
+                            <Text style={styles.sendBtnText}>{t('feed.send_btn')}</Text>
                         </TouchableOpacity>
                     )}
                 </TouchableOpacity>
@@ -262,7 +264,7 @@ export function SharePostSheet({ visible, onClose, post }: SharePostSheetProps) 
 
                 {/* Header */}
                 <View style={styles.header}>
-                    <Text style={[styles.title, { color: colors.text.primary }]}>Gönderiyi Paylaş</Text>
+                    <Text style={[styles.title, { color: colors.text.primary }]}>{t('feed.share_title')}</Text>
                     <TouchableOpacity
                         onPress={() => {
                             lightImpact();
@@ -284,14 +286,14 @@ export function SharePostSheet({ visible, onClose, post }: SharePostSheetProps) 
                     <View style={[styles.linkShareIcon, { backgroundColor: colors.accent.primary + '20' }]}>
                         <IconSymbol name="link" size={20} color={colors.accent.primary} />
                     </View>
-                    <Text style={[styles.linkShareText, { color: colors.text.primary }]}>Link ile Paylaş</Text>
+                    <Text style={[styles.linkShareText, { color: colors.text.primary }]}>{t('feed.share_link')}</Text>
                     <IconSymbol name="chevron.right" size={16} color={colors.text.tertiary} />
                 </TouchableOpacity>
 
                 {/* Arama */}
                 <View style={styles.searchWrap}>
                     <SearchInput
-                        placeholder="Kişi ara..."
+                        placeholder={t('feed.search_placeholder')}
                         value={query}
                         onChangeText={setQuery}
                         autoCorrect={false}
@@ -310,7 +312,7 @@ export function SharePostSheet({ visible, onClose, post }: SharePostSheetProps) 
                     keyboardShouldPersistTaps="handled"
                     ListEmptyComponent={
                         <Text style={[styles.emptyText, { color: colors.text.tertiary }]}>
-                            Kişi bulunamadı
+                            {t('feed.user_not_found')}
                         </Text>
                     }
                 />

@@ -23,6 +23,7 @@ import { RatingStars } from '@/src/components/ui/RatingStars';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
 import { createTextStyle, spacing } from '@/src/constants/design';
 import { lightImpact, success } from '@/src/utils/haptics';
+import { useTranslation } from "react-i18next";
 
 export interface EnhancedReviewData {
   rating: number;
@@ -74,6 +75,7 @@ export function EnhancedReviewForm({
   loading = false,
 }: EnhancedReviewFormProps) {
   const { colors } = useTheme();
+  const { t } = useTranslation();
   
   // Temel bilgiler
   const [rating, setRating] = useState(0);
@@ -139,10 +141,10 @@ export function EnhancedReviewForm({
       {/* Ana Puan */}
       <View style={styles.section}>
         <Text style={[titleStyle, { fontSize: 20, marginBottom: spacing.base }]}>
-          Deneyiminizi Paylaşın
+          {t("review.share_exp")}
         </Text>
         <Text style={[labelStyle, { marginBottom: spacing.sm }]}>
-          Genel Puanınız *
+          {t("review.overall_rating")}
         </Text>
         <RatingStars
           value={rating}
@@ -157,7 +159,7 @@ export function EnhancedReviewForm({
       {/* Fotoğraf Ekleme (Placeholder) */}
       <View style={styles.section}>
         <Text style={[labelStyle, { marginBottom: spacing.sm }]}>
-          Fotoğraf Ekleyin (Yakında)
+          {t("review.add_photo")}
         </Text>
         <TouchableOpacity
           onPress={handleAddPhotos}
@@ -170,19 +172,19 @@ export function EnhancedReviewForm({
           ]}
         >
           <IconSymbol name="camera.fill" size={24} color={colors.text.secondary} />
-          <Text style={[labelStyle, { marginTop: 4 }]}>Ekle</Text>
+          <Text style={[labelStyle, { marginTop: 4 }]}>{t("review.add_btn")}</Text>
         </TouchableOpacity>
       </View>
 
       {/* Yorum Metni */}
       <View style={styles.section}>
         <Text style={[labelStyle, { marginBottom: spacing.sm }]}>
-          Yorumunuz (Opsiyonel)
+          {t("review.comment_opt")}
         </Text>
         <TextInput
           value={comment}
           onChangeText={setComment}
-          placeholder="Deneyiminiz hakkında daha fazla bilgi verin..."
+          placeholder={t("review.comment_ph")}
           placeholderTextColor={colors.text.tertiary}
           multiline
           numberOfLines={4}
@@ -201,7 +203,7 @@ export function EnhancedReviewForm({
       {/* Kimlerle Geldiniz */}
       <View style={styles.section}>
         <Text style={[labelStyle, { marginBottom: spacing.sm }]}>
-          Kimlerle Geldiniz?
+          {t("review.who_with")}
         </Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           {VISIT_TYPES.map((type) => (
@@ -254,7 +256,7 @@ export function EnhancedReviewForm({
           }}
           style={styles.expandHeader}
         >
-          <Text style={[labelStyle]}>Detaylı Puanlar (Opsiyonel)</Text>
+          <Text style={[labelStyle]}>{t("review.detailed_ratings")}</Text>
           <IconSymbol
             name={showDetailedRatings ? 'chevron.up' : 'chevron.down'}
             size={16}
@@ -319,7 +321,7 @@ export function EnhancedReviewForm({
           }}
           style={styles.expandHeader}
         >
-          <Text style={[labelStyle]}>Harcama & Bekleme (Opsiyonel)</Text>
+          <Text style={[labelStyle]}>{t("review.spending_waiting")}</Text>
           <IconSymbol
             name={showSpendingInfo ? 'chevron.up' : 'chevron.down'}
             size={16}
@@ -332,7 +334,7 @@ export function EnhancedReviewForm({
             <TextInput
               value={spentAmount}
               onChangeText={setSpentAmount}
-              placeholder="Kişi başı harcama (TL)"
+              placeholder={t("review.spending_ph")}
               placeholderTextColor={colors.text.tertiary}
               keyboardType="numeric"
               style={[
@@ -347,7 +349,7 @@ export function EnhancedReviewForm({
             <TextInput
               value={waitTime}
               onChangeText={setWaitTime}
-              placeholder="Bekleme süresi (dakika)"
+              placeholder={t("review.waiting_ph")}
               placeholderTextColor={colors.text.tertiary}
               keyboardType="numeric"
               style={[
@@ -362,7 +364,7 @@ export function EnhancedReviewForm({
             <TextInput
               value={orderedItems}
               onChangeText={setOrderedItems}
-              placeholder="Ne sipariş ettiniz?"
+              placeholder={t("review.ordered_ph")}
               placeholderTextColor={colors.text.tertiary}
               multiline
               numberOfLines={2}
@@ -389,7 +391,7 @@ export function EnhancedReviewForm({
             disabled={loading}
             style={styles.cancelButton}
           >
-            İptal
+            {t("review.cancel")}
           </Button>
         )}
         <Button
@@ -399,7 +401,7 @@ export function EnhancedReviewForm({
           disabled={rating === 0 || loading}
           style={styles.submitButton}
         >
-          Yayınla
+          {t("review.publish")}
         </Button>
       </View>
     </ScrollView>

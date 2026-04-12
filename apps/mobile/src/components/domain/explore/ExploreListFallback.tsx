@@ -12,6 +12,7 @@ import { AnimatedPlaceCard } from '@/src/components/ui';
 import { getPlaceImageSource, hasPlaceImage } from '@/src/utils/placeImages';
 import type { Place } from '@/src/services/mekanService';
 import { lightImpact } from '@/src/utils/haptics';
+import { useTranslation } from 'react-i18next';
 
 export interface ExploreListFallbackProps {
   places: Place[];
@@ -23,6 +24,7 @@ export interface ExploreListFallbackProps {
 
 export function ExploreListFallback({ places, loading, onRefresh }: ExploreListFallbackProps) {
   const { colors } = useTheme();
+  const { t } = useTranslation();
 
   const getLocationFromName = (name: string) => (name?.includes(' - ') ? name.split(' - ')[1]?.trim() : undefined);
 
@@ -40,13 +42,13 @@ export function ExploreListFallback({ places, loading, onRefresh }: ExploreListF
     />
   );
 
-  const subtitle = 'Yakınındaki mekanları keşfet';
+  const subtitle = t('explore.discover_subtitle');
 
   return (
     <Screen scrollable={false} withTabBar>
       <View style={styles.container}>
         <View style={[styles.header, { backgroundColor: colors.background.secondary }]}>
-          <Text style={[styles.title, { color: colors.text.primary }]}>Keşfet</Text>
+          <Text style={[styles.title, { color: colors.text.primary }]}>{t('explore.title', { defaultValue: 'Keşfet' })}</Text>
           <Text style={[styles.subtitle, { color: colors.text.tertiary }]}>{subtitle}</Text>
         </View>
 
@@ -62,7 +64,7 @@ export function ExploreListFallback({ places, loading, onRefresh }: ExploreListF
             !loading ? (
               <View style={styles.empty}>
                 <IconSymbol name="mappin.and.ellipse" size={48} color={colors.text.tertiary} />
-                <Text style={[styles.emptyText, { color: colors.text.tertiary }]}>Henüz mekan yok</Text>
+                <Text style={[styles.emptyText, { color: colors.text.tertiary }]}>{t('explore.no_places')}</Text>
               </View>
             ) : null
           }

@@ -12,6 +12,7 @@ import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { createTextStyle, spacing } from "@/src/constants/design";
 import { lightImpact, success } from "@/src/utils/haptics";
 import { useSettingsStore, type AppLanguage } from "@/src/store/useSettingsStore";
+import { useTranslation } from "react-i18next";
 
 const LANG_OPTIONS: { key: AppLanguage; label: string; flag: string; native: string }[] = [
   { key: "tr", label: "Türkçe", flag: "🇹🇷", native: "Türkçe" },
@@ -25,17 +26,18 @@ export default function LanguageSettingsScreen() {
 
   const language = useSettingsStore((s) => s.language);
   const setLanguage = useSettingsStore((s) => s.setLanguage);
+  const { t } = useTranslation();
 
   const handleSelect = (lang: AppLanguage) => {
     if (lang === language) return;
     lightImpact();
     Alert.alert(
-      "Dil Değiştir",
-      `Uygulama dili "${LANG_OPTIONS.find(l => l.key === lang)?.label}" olarak değiştirilecek.`,
+      t('language.change_title'),
+      t('language.change_body', { lang: LANG_OPTIONS.find(l => l.key === lang)?.label }),
       [
-        { text: "Vazgeç", style: "cancel" },
+        { text: t('language.cancel'), style: "cancel" },
         {
-          text: "Değiştir",
+          text: t('language.confirm'),
           onPress: () => { setLanguage(lang); success(); },
         },
       ]
@@ -48,12 +50,12 @@ export default function LanguageSettingsScreen() {
         <TouchableOpacity onPress={() => { lightImpact(); router.back(); }} hitSlop={12} style={styles.backBtn}>
           <IconSymbol name="chevron.left" size={24} color={colors.text.primary} />
         </TouchableOpacity>
-        <Text style={[createTextStyle("title", colors.text.primary), styles.title]}>Dil Ayarları</Text>
+        <Text style={[createTextStyle("title", colors.text.primary), styles.title]}>{t('language.title')}</Text>
         <View style={styles.backBtn} />
       </View>
 
       <ScrollView style={styles.container} contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
-        <Section title="Uygulama Dili">
+        <Section title={t('language.section_title')}>
           {LANG_OPTIONS.map((opt) => (
             <TouchableOpacity
               key={opt.key}
@@ -81,7 +83,7 @@ export default function LanguageSettingsScreen() {
         <View style={[styles.noteBox, { backgroundColor: isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.03)" }]}>
           <IconSymbol name="info.circle" size={16} color={colors.text.tertiary} />
           <Text style={[styles.noteText, { color: colors.text.tertiary }]}>
-            Dil değişikliği bazı ekranlarda uygulamanın yeniden başlatılmasını gerektirebilir.
+            {t('language.note')}
           </Text>
         </View>
       </ScrollView>

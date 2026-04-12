@@ -7,9 +7,11 @@ import React from "react";
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
+import { useTranslation } from "react-i18next";
 import { useTheme } from "@/src/hooks/useTheme";
 import { Section } from "@/src/components/layout/Section";
 import { SettingsRow } from "@/src/components/ui";
+import { BackButton } from "@/src/components/shared/navigation";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { createTextStyle, spacing } from "@/src/constants/design";
 import { useSettingsStore, type Audience } from "@/src/store/useSettingsStore";
@@ -25,6 +27,7 @@ export default function StorySettingsScreen() {
   const { colors, isDark } = useTheme();
   const router = useRouter();
   const insets = useSafeAreaInsets();
+  const { t } = useTranslation();
 
   const storySaveToArchive = useSettingsStore((s) => s.storySaveToArchive);
   const storySaveToCameraRoll = useSettingsStore((s) => s.storySaveToCameraRoll);
@@ -41,72 +44,70 @@ export default function StorySettingsScreen() {
   const handleHideFrom = () => {
     lightImpact();
     Alert.alert(
-      "Hikayeyi Gizle",
-      "Belirli kişilerden hikayelerinizi gizlemek için profil ayarlarından düzenleme yapabilirsiniz.",
-      [{ text: "Tamam" }]
+      t("settings_extra.hide_story"),
+      t("settings_extra.hide_story_desc"),
+      [{ text: t("common.ok") }]
     );
   };
 
   return (
     <View style={[styles.wrapper, { backgroundColor: colors.background.primary }]}>
       <View style={[styles.header, { borderBottomColor: colors.surface.border, paddingTop: insets.top + spacing.sm }]}>
-        <TouchableOpacity onPress={() => { lightImpact(); router.back(); }} hitSlop={12} style={styles.backBtn}>
-          <IconSymbol name="chevron.left" size={24} color={colors.accent.primary} />
-        </TouchableOpacity>
-        <Text style={[createTextStyle("title", colors.text.primary), styles.title]}>Hikaye Ayarları</Text>
+        <BackButton onPress={() => router.back()} />
+        <Text style={[createTextStyle("title", colors.text.primary), styles.title]}>{t("settings_extra.story_title")}</Text>
         <View style={styles.backBtn} />
       </View>
 
       <ScrollView style={styles.container} contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
-        <Section title="Görüntüleyenler">
+        <Section title={t("settings_extra.story_section_viewers")}>
           <SettingsRow
-            label="Hikayeyi gizle"
-            value="Düzenle"
+            label={t("settings_extra.story_hide_label")}
+            value={t("settings_extra.story_edit")}
             showArrow
             icon="person.2.fill"
             onPress={handleHideFrom}
           />
           <Text style={[styles.hint, { color: colors.text.tertiary }]}>
-            Hikayeni ve canlı videolarını belirli kişilerden gizle
+            {t("settings_extra.story_hide_hint")}
           </Text>
           <SettingsRow
-            label="Yakın Arkadaşlar"
-            value={`${closeFriendCount} kişi`}
+            label={t("settings_extra.story_close_friends")}
+            value={t("settings_extra.story_close_friends_count", { count: closeFriendCount })}
             showArrow
             icon="star.fill"
             onPress={() => { lightImpact(); router.push("/settings/close-friends" as any); }}
           />
           <Text style={[styles.hint, { color: colors.text.tertiary }]}>
-            Hikayeni sadece belirli kişilerle paylaş
+            {t("settings_extra.story_close_friends_hint")}
           </Text>
         </Section>
 
-        <Section title="Kaydetme">
+        <Section title={t("settings_extra.story_section_save")}>
           <SettingsRow
-            label="Hikayeyi arşive kaydet"
+            label={t("settings_extra.story_save_archive")}
             value={storySaveToArchive}
             switch
             onValueChange={(v: boolean) => { setStorySaveToArchive(v); success(); }}
             icon="square.grid.2x2.fill"
           />
           <Text style={[styles.hint, { color: colors.text.tertiary }]}>
-            24 saat sonra süresi dolan hikayeler arşive taşınır
+            {t("settings_extra.story_save_archive_hint")}
           </Text>
           <SettingsRow
-            label="Hikayeyi film rulosuna kaydet"
+            label={t("settings_extra.story_save_roll")}
             value={storySaveToCameraRoll}
             switch
             onValueChange={(v: boolean) => { setStorySaveToCameraRoll(v); success(); }}
             icon="photo"
           />
           <Text style={[styles.hint, { color: colors.text.tertiary }]}>
-            Fotoğrafları ve videoları otomatik olarak telefonun film rulosuna kaydet
+            {t("settings_extra.story_save_roll_hint")}
           </Text>
         </Section>
 
-        <Section title="Yanıt Verme">
+        <Section title={t("settings_extra.story_section_reply")}>
           <Text style={[styles.sectionDesc, { color: colors.text.secondary }]}>
-            Hikayelerine kimlerin yanıt verebileceğini seç
+            {t("settings_extra.story_reply_desc")}
           </Text>
           {replyOptions.map((opt) => (
             <TouchableOpacity
@@ -116,7 +117,7 @@ export default function StorySettingsScreen() {
               activeOpacity={0.6}
             >
               <Text style={[styles.radioLabel, { color: colors.text.primary }]}>
-                {AUDIENCE_LABELS[opt]}
+                {t(`settings_extra.story_audience_${opt === "everyone" ? "everyone" : opt === "followers" ? "followers" : "off"}`)}
               </Text>
               <View style={[
                 styles.radio,
@@ -130,12 +131,12 @@ export default function StorySettingsScreen() {
           ))}
         </Section>
 
-        <Section title="Konum & Mekan">
-          <SettingsRow label="Hikaye konumu" value={isPrivate ? "Gizli" : "Görünür"} icon="location" />
+        <Section title={t("settings_extra.story_section_location")}>
+          <SettingsRow label={t("settings_extra.story_location_label")} value={isPrivate ? t("settings_extra.story_location_hidden") : t("settings_extra.story_location_visible")} icon="location" />
           <Text style={[styles.hint, { color: colors.text.tertiary }]}>
             {isPrivate
-              ? "Gizli hesaplarda hikayeler haritada görünmez"
-              : "Hikayeleriniz paylaşıldığı mekanın harita sayfasında görünebilir"}
+              ? t("settings_extra.story_location_hint_private")
+              : t("settings_extra.story_location_hint_public")}
           </Text>
         </Section>
       </ScrollView>

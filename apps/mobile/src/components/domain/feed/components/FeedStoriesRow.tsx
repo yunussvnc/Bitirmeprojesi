@@ -15,6 +15,7 @@ import { StoryViewerModal } from "@/src/components/domain/explore/StoryViewerMod
 import { type Story, type FeedStoriesFilter } from "@/src/services/storyService";
 import { lightImpact } from "@/src/utils/haptics";
 import { spacing } from "@/src/constants/design";
+import { useTranslation } from "react-i18next";
 
 const STORY_RING_SIZE = 82;
 const STORY_GRADIENT: [string, string, ...string[]] = ["#4ade80", "#22c55e", "#16a34a", "#15803d"];
@@ -42,6 +43,7 @@ export function FeedStoriesRow({ filter }: FeedStoriesRowProps) {
   const [storyVisible, setStoryVisible] = useState(true);
   const hideTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const navigation = useNavigation();
+  const { t } = useTranslation();
 
   const handleStoryNavigateRequest = useCallback((route: string, _currentIndex: number) => {
     storyPausedRef.current = true;
@@ -237,7 +239,7 @@ export function FeedStoriesRow({ filter }: FeedStoriesRowProps) {
     return (
       <View style={[styles.wrap, styles.loadingWrap]}>
         <ActivityIndicator size="small" color={colors.accent.primary} />
-        <Text style={[styles.loadingText, { color: colors.text.tertiary }]}>Hikayeler yükleniyor...</Text>
+        <Text style={[styles.loadingText, { color: colors.text.tertiary }]}>{t('feed.loading_stories')}</Text>
       </View>
     );
   }
@@ -276,7 +278,7 @@ export function FeedStoriesRow({ filter }: FeedStoriesRowProps) {
                   </LinearGradient>
                 )}
                 <Text style={[styles.placeLabel, { color: seen ? colors.text.tertiary : colors.text.secondary }]} numberOfLines={1}>
-                  {g.label ?? "Kullanıcı"}
+                  {g.label ?? t('explore.user')}
                 </Text>
               </TouchableOpacity>
             );

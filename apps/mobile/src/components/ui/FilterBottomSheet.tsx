@@ -19,6 +19,8 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme } from '@/src/hooks/useTheme';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
 import { lightImpact } from '@/src/utils/haptics';
+import { Button } from "@/src/components/ui/Button";
+import { useTranslation } from "react-i18next";
 
 /* ── Types ── */
 
@@ -111,6 +113,7 @@ function PickerChip({
   onSelect: (v: string | null) => void;
 }) {
   const { colors } = useTheme();
+  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
   const display = value ? options.find((o) => o.value === value)?.label ?? value : label;
 
@@ -143,7 +146,7 @@ function PickerChip({
         <Pressable style={pkStyles.overlay} onPress={() => setOpen(false)}>
           <Pressable style={[pkStyles.sheet, { backgroundColor: colors.surface.elevated }]} onPress={() => {}}>
             <View style={[pkStyles.sheetHeader, { borderBottomColor: colors.surface.border }]}>
-              <Text style={[pkStyles.sheetTitle, { color: colors.text.primary }]}>{label}</Text>
+              <Text style={[styles.title, { color: colors.text.primary }]}>{t("home.filters")}</Text>
               <TouchableOpacity onPress={() => setOpen(false)} hitSlop={12}>
                 <IconSymbol name="xmark" size={18} color={colors.text.tertiary} />
               </TouchableOpacity>
@@ -153,7 +156,7 @@ function PickerChip({
                 onPress={() => { lightImpact(); onSelect(null); setOpen(false); }}
                 style={[pkStyles.option, !value && { backgroundColor: colors.accent.primary + '14' }]}
               >
-                <Text style={[pkStyles.optText, { color: !value ? colors.accent.primary : colors.text.primary }]}>Tümü</Text>
+                <Text style={[pkStyles.optText, { color: !value ? colors.accent.primary : colors.text.primary }]}>{t("filter_extra.all")}</Text>
                 {!value && <IconSymbol name="checkmark" size={16} color={colors.accent.primary} />}
               </TouchableOpacity>
               {options.map((o) => (
@@ -206,6 +209,7 @@ export function FilterBottomSheet({
 }: FilterBottomSheetProps) {
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
+  const { t } = useTranslation();
   const [draft, setDraft] = useState<FilterValues>(values);
   const [internalVisible, setInternalVisible] = useState(false);
   const translateY = useRef(new Animated.Value(800)).current;
@@ -289,12 +293,7 @@ export function FilterBottomSheet({
 
           {/* Title */}
           <View style={styles.titleRow}>
-            <Text style={[styles.title, { color: colors.text.primary }]}>Filtreler</Text>
-            {activeCount > 0 && (
-              <TouchableOpacity onPress={handleClear} activeOpacity={0.7}>
-                <Text style={[styles.clearBtn, { color: colors.accent.primary }]}>Temizle</Text>
-              </TouchableOpacity>
-            )}
+            <Text style={[styles.title, { color: colors.text.primary }]}>{t("home.filters")}</Text>
           </View>
 
           <ScrollView
@@ -304,7 +303,7 @@ export function FilterBottomSheet({
             scrollEventThrottle={16}
           >
             {/* Konum & Tür */}
-            <Text style={[styles.sectionLabel, { color: colors.text.tertiary }]}>Konum & Tür</Text>
+            <Text style={[styles.sectionLabel, { color: colors.text.tertiary }]}>{t("filter_extra.location_type")}</Text>
             <View style={styles.pickerRow}>
               <PickerChip
                 label="İlçe"
@@ -321,7 +320,7 @@ export function FilterBottomSheet({
             </View>
 
             {/* Bütçe */}
-            <Text style={[styles.sectionLabel, { color: colors.text.tertiary }]}>Bütçe</Text>
+            <Text style={[styles.sectionLabel, { color: colors.text.tertiary }]}>{t("filter_extra.budget")}</Text>
             <Segment<'low' | 'mid' | 'high'>
               options={[
                 { value: 'low', label: '₺' },
@@ -333,7 +332,7 @@ export function FilterBottomSheet({
             />
 
             {/* Ortam */}
-            <Text style={[styles.sectionLabel, { color: colors.text.tertiary }]}>Ortam</Text>
+            <Text style={[styles.sectionLabel, { color: colors.text.tertiary }]}>{t("filter_extra.vibe")}</Text>
             <Segment<'quiet' | 'lively'>
               options={[
                 { value: 'quiet', label: 'Sessiz' },
@@ -344,7 +343,7 @@ export function FilterBottomSheet({
             />
 
             {/* Amaç */}
-            <Text style={[styles.sectionLabel, { color: colors.text.tertiary }]}>Amaç</Text>
+            <Text style={[styles.sectionLabel, { color: colors.text.tertiary }]}>{t("filter_extra.purpose")}</Text>
             <Segment<'work' | 'friends' | 'date'>
               options={[
                 { value: 'work', label: 'Çalışma' },
@@ -357,16 +356,13 @@ export function FilterBottomSheet({
           </ScrollView>
 
           {/* Footer */}
-          <View style={[styles.footer, { borderTopColor: colors.surface.border }]}>
-            <TouchableOpacity
-              onPress={handleApply}
-              activeOpacity={0.8}
-              style={[styles.applyBtn, { backgroundColor: colors.accent.primary }]}
-            >
-              <Text style={[styles.applyText, { color: colors.accent.onPrimary }]}>
-                {activeCount > 0 ? `Uygula (${activeCount})` : 'Uygula'}
-              </Text>
+          <View style={[styles.footer, { paddingBottom: insets.bottom + 8, borderTopColor: colors.surface.border }]}>
+            <TouchableOpacity style={styles.clearBtn} onPress={handleClear} activeOpacity={0.7}>
+              <Text style={[styles.clearText, { color: colors.text.secondary }]}>{t("home.clear")}</Text>
             </TouchableOpacity>
+            <Button style={styles.applyBtn} onPress={handleApply}>
+              {t("matching.apply")}
+            </Button>
           </View>
           </Pressable>
         </Animated.View>

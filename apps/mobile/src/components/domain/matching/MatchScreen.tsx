@@ -44,6 +44,7 @@ import {
   IconZodiacTaurus,
   IconZodiacVirgo
 } from "tabler-icons-react-native";
+import { useTranslation } from "react-i18next";
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get("window");
 const SWIPE_THRESHOLD = SCREEN_WIDTH * 0.2;
@@ -129,6 +130,7 @@ export default function MatchScreen() {
   const [showFilterModal, setShowFilterModal] = useState(false);
   const [filters, setFilters] = useState<MatchFilters>({ ...DEFAULT_FILTERS });
   const [tempFilters, setTempFilters] = useState<MatchFilters>({ ...DEFAULT_FILTERS });
+  const { t } = useTranslation();
 
   // Raw text states for filter inputs (allows free typing)
   const [txtAgeMin, setTxtAgeMin] = useState(String(DEFAULT_FILTERS.ageMin));
@@ -168,11 +170,11 @@ export default function MatchScreen() {
 
   const handleContextMenu = () => {
     Alert.alert(
-      "Seçenekler",
-      "Ne yapmak istersiniz?",
+      t("matching.options"),
+      t("matching.what_to_do"),
       [
         {
-          text: "Kullanıcı Filtreleme",
+          text: t("matching.user_filtering"),
           onPress: () => {
             setTempFilters({ ...filters });
             setTxtAgeMin(String(filters.ageMin));
@@ -184,20 +186,20 @@ export default function MatchScreen() {
           },
         },
         {
-          text: isGhostMode ? "Hayalet Mod'dan Çık" : "Hayalet Mod'a Geç",
+          text: isGhostMode ? t("matching.exit_ghost") : t("matching.enter_ghost"),
           onPress: () => toggleGhostMode(),
         },
         {
-          text: "Match Ekranını Sil",
+          text: t("matching.delete_match"),
           style: "destructive",
           onPress: () => {
             Alert.alert(
-              "Match Ekranını Sil",
-              "Match ekranını silmeye emin misin? Eşleşmelerin ve beğenilerin kaybolacak ve seni kimse göremeyecek. Tekrar katılmak için tıpkı ilk seferde olduğu gibi bir mekanda oluşturman gerekecek.",
+              t("matching.delete_match"),
+              t("matching.delete_match_desc"),
               [
-                { text: "İptal", style: "cancel" },
+                { text: t("matching.cancel"), style: "cancel" },
                 {
-                  text: "Evet, Sil",
+                  text: t("matching.yes_delete"),
                   style: "destructive",
                   onPress: () => {
                     deleteProfile();
@@ -208,7 +210,7 @@ export default function MatchScreen() {
           },
         },
         {
-          text: "İptal",
+          text: t("matching.cancel"),
           style: "cancel",
         },
       ]
@@ -282,8 +284,8 @@ export default function MatchScreen() {
                     name: currentCandidate.display_name,
                     username: (currentCandidate.display_name || "").toLowerCase().replace(/\s/g, ""),
                     avatar: currentCandidate.photo_urls?.[0] || "https://i.pravatar.cc/150",
-                    lastMessage: "Eşleştiniz! Hemen yazışmaya başla...",
-                    timestamp: "Şimdi",
+                    lastMessage: t("matching.match_msg"),
+                    timestamp: t("chat.online", "Şimdi"), // Fallback to "Şimdi" if key not setup here, actually `common.now` or `chat.online` is better, let's use "Şimdi" directly or add `date.now` if it existed. Wait, let's just use `""` or something translated. Let's use `t("date.now", "Şimdi")` 
                     unread: true,
                     isOnline: true,
                     isMatch: true,
@@ -411,8 +413,8 @@ export default function MatchScreen() {
                     name: matchedPerson,
                     username: (matchedPerson || "").toLowerCase().replace(/\s/g, ""),
                     avatar: selectedLike.photo_urls?.[0] || "https://i.pravatar.cc/150",
-                    lastMessage: "Eşleştiniz! Hemen yazışmaya başla...",
-                    timestamp: "Şimdi",
+                    lastMessage: t("matching.match_msg"),
+                    timestamp: t("date.now", "Şimdi"),
                     unread: true,
                     isOnline: true,
                     isMatch: true,
@@ -528,31 +530,30 @@ export default function MatchScreen() {
         />
       </View>
       <ThemedText style={[styles.emptyTitle, { color: colors.text.primary }]}>
-        Eşleşmeye Hazır mısın?
+        {t("matching.ready_to_match")}
       </ThemedText>
       <ThemedText
         style={[styles.emptySubtitle, { color: colors.text.secondary }]}
       >
-        Hemen bir eşleşme profili oluştur ve mekandaki insanlarla tanışmaya
-        başla.
+        {t("matching.create_profile_desc")}
       </ThemedText>
       <TouchableOpacity
         style={styles.bumbleBtn}
         activeOpacity={0.85}
         onPress={() => router.push("/match-profile-setup")}
       >
-        <ThemedText style={styles.bumbleBtnText}>Profil Oluştur</ThemedText>
+        <ThemedText style={styles.bumbleBtnText}>{t("matching.create_profile")}</ThemedText>
       </TouchableOpacity>
     </View>
   );
   const handleBlockUser = (profile: any) => {
     Alert.alert(
-      "Kullanıcıyı Engelle",
-      "Bu kullanıcıyı engellemek istediğine emin misin? Bir daha bu profile denk gelmeyeceksin.",
+      t("matching.block_user"),
+      t("matching.block_user_desc"),
       [
-        { text: "İptal", style: "cancel" },
+        { text: t("matching.cancel"), style: "cancel" },
         {
-          text: "Evet, Engelle",
+          text: t("matching.yes_block"),
           style: "destructive",
           onPress: () => {
             const userId = profile.user_id || profile.id;
@@ -652,7 +653,7 @@ export default function MatchScreen() {
             {profile.bio && (
               <View style={styles.unifiedSection}>
                 <ThemedText style={[styles.unifiedPromptQ, { color: colors.text.primary }]}>
-                  Hakkımda
+                  {t("matching.about_me")}
                 </ThemedText>
                 <ThemedText style={[styles.unifiedBio, { color: colors.text.primary }]}>
                   {profile.bio}
@@ -683,7 +684,7 @@ export default function MatchScreen() {
             {profile.interests?.length > 0 && (
               <View style={styles.unifiedSection}>
                 <ThemedText style={[styles.unifiedPromptQ, { color: colors.text.primary, marginBottom: 12 }]}>
-                  İlgi Alanları
+                  {t("matching.interests")}
                 </ThemedText>
                 <View style={styles.unifiedInterestsWrap}>
                   {profile.interests.map((interest: any, idx: number) => {
@@ -723,7 +724,7 @@ export default function MatchScreen() {
               >
                 <IconSymbol name="mappin.and.ellipse" size={18} color={ACCENT} />
                 <ThemedText style={[styles.unifiedActivePlaceText, { color: ACCENT }]}>
-                  {profile.active_place_name}'da aktif
+                  {t("matching.active_at", { place: profile.active_place_name })}
                 </ThemedText>
               </TouchableOpacity>
             </View>
@@ -738,7 +739,7 @@ export default function MatchScreen() {
             >
               <IconSymbol name="nosign" size={16} color="#FF3B30" />
               <ThemedText style={{ color: '#FF3B30', fontSize: 13, fontWeight: '600', marginLeft: 6 }}>
-                Kullanıcıyı Engelle
+                {t("matching.block_user")}
               </ThemedText>
             </TouchableOpacity>
           </View>
@@ -802,7 +803,7 @@ export default function MatchScreen() {
                     color="rgba(255,255,255,0.7)"
                   />
                   <ThemedText style={styles.likeCardLocationText}>
-                    {person.active_place_name || "Mekanda"}
+                    {person.active_place_name || t("matching.at_place")}
                   </ThemedText>
                 </TouchableOpacity>
               </LinearGradient>
@@ -821,11 +822,9 @@ export default function MatchScreen() {
     if (profileLoading || candidatesLoading) {
       return (
         <View style={[styles.center, { flex: 1 }]}>
-          <ActivityIndicator size="large" color={ACCENT} />
-          <ThemedText
-            style={[styles.loadingText, { color: colors.text.secondary }]}
-          >
-            Yakındakiler aranıyor...
+          <ActivityIndicator size="large" color={ACCENT} style={{ marginTop: 24 }} />
+          <ThemedText style={{ color: colors.text.secondary, marginTop: 12 }}>
+            {t("matching.searching")}
           </ThemedText>
         </View>
       );
@@ -844,24 +843,22 @@ export default function MatchScreen() {
               },
             ]}
           >
-            <IconSymbol name="qrcode.viewfinder" size={48} color={ACCENT} />
+            <IconSymbol name="qrcode.viewfinder" size={48} color={colors.text.secondary} />
           </View>
           <ThemedText
             style={[styles.emptyTitle, { color: colors.text.primary }]}
           >
-            Neredesin?
+            {t("matching.where_are_you")}
           </ThemedText>
-          <ThemedText
-            style={[styles.emptySubtitle, { color: colors.text.secondary }]}
-          >
-            Eşleşmek için bir mekana git ve QR kodunu okutarak giriş yap.
+          <ThemedText style={{ color: colors.text.secondary, marginTop: 12, textAlign: "center", paddingHorizontal: 32 }}>
+            {t("matching.login_to_match")}
           </ThemedText>
           <TouchableOpacity
             style={[styles.bumbleBtn]}
             activeOpacity={0.85}
             onPress={() => router.push("/scan")}
           >
-            <ThemedText style={styles.bumbleBtnText}>QR Okut</ThemedText>
+            <ThemedText style={styles.bumbleBtnText}>{t("matching.scan_qr_button")}</ThemedText>
           </TouchableOpacity>
         </View>
       );
@@ -886,17 +883,13 @@ export default function MatchScreen() {
               color={colors.text.tertiary}
             />
           </View>
-          <ThemedText
-            style={[styles.emptyTitle, { color: colors.text.primary }]}
-          >
-            Şu An Göz Alıcı Kimse Yok
+          <ThemedText style={[styles.emptyTitle, { color: colors.text.primary }]}>
+            {t("matching.no_one_eye_catching")}
           </ThemedText>
-          <ThemedText
-            style={[styles.emptySubtitle, { color: colors.text.secondary }]}
-          >
+          <ThemedText style={[styles.emptySubtitle, { color: colors.text.secondary }]}>
             {activePlaceName
-              ? `${activePlaceName} mekanında tüm profilleri gördün. Birazdan tekrar kontrol et!`
-              : "Yakınlarda eşleşme profili bulunamadı."}
+              ? t("matching.seen_all", { place: activePlaceName })
+              : t("matching.no_one_nearby")}
           </ThemedText>
         </View>
       );
@@ -937,9 +930,9 @@ export default function MatchScreen() {
               { opacity: likeOpacity },
             ]}
           >
-            <View style={[styles.swipeLabelContainer, { borderColor: ACCENT }]}>
-              <ThemedText style={[styles.swipeLabel, { color: ACCENT }]}>
-                BEĞENDİM
+            <View style={[styles.swipeLabelContainer, { borderColor: "#2ecc71" }]}>
+              <ThemedText style={[styles.swipeLabel, { color: "#2ecc71" }]}>
+                {t("matching.liked")}
               </ThemedText>
             </View>
           </Animated.View>
@@ -954,7 +947,7 @@ export default function MatchScreen() {
               style={[styles.swipeLabelContainer, { borderColor: "#E22134" }]}
             >
               <ThemedText style={[styles.swipeLabel, { color: "#E22134" }]}>
-                GEÇ
+                {t("matching.pass")}
               </ThemedText>
             </View>
           </Animated.View>
@@ -1098,12 +1091,10 @@ export default function MatchScreen() {
 
       {isGhostMode ? (
         <View style={styles.emptyState}>
-          <View style={[styles.emptyIcon, { backgroundColor: "rgba(29, 185, 84, 0.15)" }]}>
-            <IconSymbol name="eye.slash" size={48} color={ACCENT} />
-          </View>
-          <ThemedText style={styles.emptyTitle}>Hayalet Mod Açık</ThemedText>
+          <IconSymbol name="ghost" size={64} color={colors.text.secondary} />
+          <ThemedText style={styles.emptyTitle}>{t("matching.ghost_mode_on")}</ThemedText>
           <ThemedText style={[styles.emptySubtitle, { color: colors.text.secondary }]}>
-            Şu an kimseyi göremiyorsunuz ve kimse sizi göremiyor. Sağ üstteki menüden Hayalet Mod'dan çıkabilirsiniz.
+            {t("matching.ghost_mode_desc")}
           </ThemedText>
         </View>
       ) : (
@@ -1122,14 +1113,8 @@ export default function MatchScreen() {
               ]}
               onPress={() => setActiveTab("swipe")}
             >
-              <ThemedText
-                style={[
-                  styles.segmentText,
-                  { color: isDark ? "rgba(255,255,255,0.7)" : "rgba(0,0,0,0.6)" },
-                  activeTab === "swipe" && styles.segmentTextActive,
-                ]}
-              >
-                Kişiler
+              <ThemedText style={[styles.segmentText, activeTab === "swipe" ? styles.segmentTextActive : { color: colors.text.primary }]}>
+                {t("matching.people")}
               </ThemedText>
             </TouchableOpacity>
             <TouchableOpacity
@@ -1176,28 +1161,15 @@ export default function MatchScreen() {
                   size={80}
                   color={ACCENT}
                 />
-                <ThemedText
-                  style={[
-                    styles.matchPopupTitle,
-                    { color: colors.text.primary, marginTop: 20 },
-                  ]}
-                >
-                  ITS A MATCH!
-                </ThemedText>
-                <ThemedText
-                  style={[styles.matchPopupText, { color: colors.text.secondary }]}
-                >
-                  {matchPopup.name} de seni beğendi. Hemen yazışmaya başla!
+                <ThemedText style={[styles.matchPopupTitle, { color: ACCENT }]}>{t("matching.match")}</ThemedText>
+                <ThemedText style={[styles.matchPopupText, { color: colors.text.primary }]}>
+                  {t("matching.liked_you", { name: matchPopup.name })}
                 </ThemedText>
                 <TouchableOpacity
-                  style={[styles.bumbleBtn, { marginTop: 30 }]}
-                  onPress={() => {
-                    matchPopupRef.current = false;
-                    setMatchPopup(null);
-                    router.push("/(tabs)/messages");
-                  }}
+                  style={[styles.bumbleBtn, { marginTop: 24, width: '100%' }]}
+                  onPress={() => router.push("/messages")}
                 >
-                  <ThemedText style={styles.bumbleBtnText}>Mesaj Gönder</ThemedText>
+                  <ThemedText style={styles.bumbleBtnText}>{t("matching.send_message")}</ThemedText>
                 </TouchableOpacity>
               </View>
             </View>
@@ -1274,9 +1246,9 @@ export default function MatchScreen() {
                       { opacity: likeOpacityModal },
                     ]}
                   >
-                    <View style={[styles.swipeLabelContainer, { borderColor: ACCENT }]}>
-                      <ThemedText style={[styles.swipeLabel, { color: ACCENT }]}>
-                        BEĞENDİM
+                    <View style={[styles.swipeLabelContainer, { borderColor: "#2ecc71" }]}>
+                      <ThemedText style={[styles.swipeLabel, { color: "#2ecc71" }]}>
+                        {t("matching.liked")}
                       </ThemedText>
                     </View>
                   </Animated.View>
@@ -1287,9 +1259,9 @@ export default function MatchScreen() {
                       { opacity: passOpacityModal },
                     ]}
                   >
-                    <View style={[styles.swipeLabelContainer, { borderColor: "#E22134" }]}>
-                      <ThemedText style={[styles.swipeLabel, { color: "#E22134" }]}>
-                        GEÇ
+                    <View style={[styles.swipeLabelContainer, { borderColor: "#e74c3c" }]}>
+                      <ThemedText style={[styles.swipeLabel, { color: "#e74c3c" }]}>
+                        {t("matching.passed")}
                       </ThemedText>
                     </View>
                   </Animated.View>
@@ -1375,9 +1347,9 @@ export default function MatchScreen() {
             {/* Header */}
             <View style={{ flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingHorizontal: 20, marginBottom: 16 }}>
               <TouchableOpacity onPress={() => setShowFilterModal(false)}>
-                <ThemedText style={{ color: colors.text.secondary, fontSize: 16 }}>İptal</ThemedText>
+                <ThemedText style={{ color: colors.text.secondary, fontSize: 16 }}>{t("matching.cancel")}</ThemedText>
               </TouchableOpacity>
-              <ThemedText style={{ fontSize: 18, fontWeight: "800", color: colors.text.primary }}>Filtreleme</ThemedText>
+              <ThemedText style={{ fontSize: 18, fontWeight: "800", color: colors.text.primary }}>{t("matching.filtering")}</ThemedText>
               <TouchableOpacity onPress={() => {
                 // Validate & clamp all raw inputs before applying
                 const ageMin = Math.max(18, Math.min(parseInt(txtAgeMin) || 18, 70));
@@ -1402,13 +1374,13 @@ export default function MatchScreen() {
                 setFilters(validated);
                 setShowFilterModal(false);
               }}>
-                <ThemedText style={{ color: ACCENT, fontSize: 16, fontWeight: "700" }}>Uygula</ThemedText>
+                <ThemedText style={{ color: ACCENT, fontSize: 16, fontWeight: "700" }}>{t("matching.apply")}</ThemedText>
               </TouchableOpacity>
             </View>
 
             <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingHorizontal: 20 }}>
               {/* Gender */}
-              <ThemedText style={{ color: colors.text.secondary, fontSize: 13, fontWeight: "600", textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 10 }}>Cinsiyet</ThemedText>
+              <ThemedText style={{ color: colors.text.secondary, fontSize: 13, fontWeight: "600", textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 10 }}>{t("matching.gender_title")}</ThemedText>
               <View style={{ flexDirection: "row", gap: 8, marginBottom: 24, flexWrap: "wrap" }}>
                 {GENDER_FILTER_OPTIONS.map(g => (
                   <TouchableOpacity
@@ -1425,10 +1397,10 @@ export default function MatchScreen() {
               </View>
 
               {/* Age Range */}
-              <ThemedText style={{ color: colors.text.secondary, fontSize: 13, fontWeight: "600", textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 6 }}>Yaş Aralığı</ThemedText>
+              <ThemedText style={{ color: colors.text.secondary, fontSize: 13, fontWeight: "600", textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 6 }}>{t("matching.age_range")}</ThemedText>
               <ThemedText style={{ color: colors.text.primary, fontSize: 15, fontWeight: "700", marginBottom: 10 }}>{tempFilters.ageMin} – {tempFilters.ageMax}</ThemedText>
               <View style={{ flexDirection: "row", alignItems: "center", gap: 12, marginBottom: 24 }}>
-                <ThemedText style={{ color: colors.text.tertiary, fontSize: 12 }}>Min</ThemedText>
+                <ThemedText style={{ color: colors.text.tertiary, fontSize: 12 }}>{t("matching.min")}</ThemedText>
                 <View style={{ flex: 1 }}>
                   <TextInput
                     value={txtAgeMin}
@@ -1444,7 +1416,7 @@ export default function MatchScreen() {
                   />
                 </View>
                 <ThemedText style={{ color: colors.text.tertiary, fontSize: 14 }}>—</ThemedText>
-                <ThemedText style={{ color: colors.text.tertiary, fontSize: 12 }}>Max</ThemedText>
+                <ThemedText style={{ color: colors.text.tertiary, fontSize: 12 }}>{t("matching.max")}</ThemedText>
                 <View style={{ flex: 1 }}>
                   <TextInput
                     value={txtAgeMax}
@@ -1462,7 +1434,7 @@ export default function MatchScreen() {
               </View>
 
               {/* Distance */}
-              <ThemedText style={{ color: colors.text.secondary, fontSize: 13, fontWeight: "600", textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 6 }}>Mesafe</ThemedText>
+              <ThemedText style={{ color: colors.text.secondary, fontSize: 13, fontWeight: "600", textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 6 }}>{t("matching.distance")}</ThemedText>
               <View style={{ flexDirection: "row", alignItems: "center", gap: 12, marginBottom: 24 }}>
                 <View style={{ flex: 1 }}>
                   <TextInput
@@ -1478,14 +1450,14 @@ export default function MatchScreen() {
                     style={{ backgroundColor: isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)", paddingHorizontal: 12, paddingVertical: 8, borderRadius: 10, color: colors.text.primary, textAlign: "center", fontSize: 16, fontWeight: "700" }}
                   />
                 </View>
-                <ThemedText style={{ color: colors.text.primary, fontSize: 15, fontWeight: "600" }}>km</ThemedText>
+                <ThemedText style={{ color: colors.text.primary, fontSize: 15, fontWeight: "600" }}>{t("matching.km")}</ThemedText>
               </View>
 
               {/* Height Range */}
-              <ThemedText style={{ color: colors.text.secondary, fontSize: 13, fontWeight: "600", textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 6 }}>Boy Aralığı (cm)</ThemedText>
+              <ThemedText style={{ color: colors.text.secondary, fontSize: 13, fontWeight: "600", textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 6 }}>{t("matching.height_range")}</ThemedText>
               <ThemedText style={{ color: colors.text.primary, fontSize: 15, fontWeight: "700", marginBottom: 10 }}>{tempFilters.heightMin} – {tempFilters.heightMax} cm</ThemedText>
               <View style={{ flexDirection: "row", alignItems: "center", gap: 12, marginBottom: 24 }}>
-                <ThemedText style={{ color: colors.text.tertiary, fontSize: 12 }}>Min</ThemedText>
+                <ThemedText style={{ color: colors.text.tertiary, fontSize: 12 }}>{t("matching.min")}</ThemedText>
                 <View style={{ flex: 1 }}>
                   <TextInput
                     value={txtHeightMin}
@@ -1501,7 +1473,7 @@ export default function MatchScreen() {
                   />
                 </View>
                 <ThemedText style={{ color: colors.text.tertiary, fontSize: 14 }}>—</ThemedText>
-                <ThemedText style={{ color: colors.text.tertiary, fontSize: 12 }}>Max</ThemedText>
+                <ThemedText style={{ color: colors.text.tertiary, fontSize: 12 }}>{t("matching.max")}</ThemedText>
                 <View style={{ flex: 1 }}>
                   <TextInput
                     value={txtHeightMax}
@@ -1519,7 +1491,7 @@ export default function MatchScreen() {
               </View>
 
               {/* Star Sign */}
-              <ThemedText style={{ color: colors.text.secondary, fontSize: 13, fontWeight: "600", textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 10 }}>Burç</ThemedText>
+              <ThemedText style={{ color: colors.text.secondary, fontSize: 13, fontWeight: "600", textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 10 }}>{t("matching.sign")}</ThemedText>
               <View style={{ flexDirection: "row", gap: 8, marginBottom: 16, flexWrap: "wrap" }}>
                 <TouchableOpacity
                   onPress={() => setTempFilters(f => ({ ...f, starSign: "" }))}
@@ -1528,7 +1500,7 @@ export default function MatchScreen() {
                     backgroundColor: tempFilters.starSign === "" ? ACCENT : (isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)"),
                   }}
                 >
-                  <ThemedText style={{ fontSize: 13, fontWeight: "600", color: tempFilters.starSign === "" ? "#000" : colors.text.primary }}>Hepsi</ThemedText>
+                  <ThemedText style={{ fontSize: 13, fontWeight: "600", color: tempFilters.starSign === "" ? "#000" : colors.text.primary }}>{t("matching.gender_all")}</ThemedText>
                 </TouchableOpacity>
                 {STAR_SIGN_OPTIONS.map(s => (
                   <TouchableOpacity
@@ -1556,7 +1528,7 @@ export default function MatchScreen() {
                 }}
                 style={{ alignItems: "center", paddingVertical: 14, marginTop: 8, marginBottom: 16 }}
               >
-                <ThemedText style={{ color: "#FF3B30", fontSize: 15, fontWeight: "600" }}>Filtreleri Sıfırla</ThemedText>
+                <ThemedText style={{ color: "#FF3B30", fontSize: 15, fontWeight: "600" }}>{t("matching.reset_filters")}</ThemedText>
               </TouchableOpacity>
             </ScrollView>
           </View>

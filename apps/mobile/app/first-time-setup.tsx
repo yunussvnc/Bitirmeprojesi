@@ -19,12 +19,14 @@ import { Button, Input } from '@/src/components/ui';
 import { lightImpact, success } from '@/src/utils/haptics';
 import { useAuthStore } from '@/src/store/useAuthStore';
 import { apiPost } from '@/src/utils/apiClient';
+import { useTranslation } from 'react-i18next';
 
 const { width, height } = Dimensions.get('window');
 const BG_IMAGE = 'https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=1200'; // Sleek dark/moody cafe background
 
 export default function FirstTimeSetupScreen() {
   const { user, setUser } = useAuthStore();
+  const { t } = useTranslation();
   const [username, setUsername] = useState('');
   const [birthDate, setBirthDate] = useState('');
   const [loading, setLoading] = useState(false);
@@ -38,30 +40,30 @@ export default function FirstTimeSetupScreen() {
 
   const validateForm = useCallback((): boolean => {
     const newErrors: typeof errors = {};
-    if (!username.trim()) newErrors.username = 'Kullanıcı adı gereklidir';
-    else if (username.length < 3) newErrors.username = 'En az 3 karakter olmalıdır';
-    else if (/\s/.test(username)) newErrors.username = 'Kullanıcı adı boşluk içeremez';
+    if (!username.trim()) newErrors.username = t("first_time_setup.err_req_username");
+    else if (username.length < 3) newErrors.username = t("first_time_setup.err_min_char");
+    else if (/\s/.test(username)) newErrors.username = t("first_time_setup.err_no_space");
 
-    if (!birthDate.trim()) newErrors.birthDate = 'Doğum tarihi gereklidir';
+    if (!birthDate.trim()) newErrors.birthDate = t("first_time_setup.err_req_bd");
     else {
       const parts = birthDate.split('/');
       if (parts.length !== 3 || parts[0].length !== 2 || parts[1].length !== 2 || parts[2].length !== 4) {
-        newErrors.birthDate = 'GG/AA/YYYY formatında girin';
+        newErrors.birthDate = t("first_time_setup.err_format_bd");
       } else {
         const day = parseInt(parts[0]), month = parseInt(parts[1]), year = parseInt(parts[2]);
         const d = new Date(year, month - 1, day);
         if (isNaN(d.getTime()) || d.getDate() !== day || d.getMonth() !== month - 1) {
-          newErrors.birthDate = 'Geçerli bir tarih girin';
+          newErrors.birthDate = t("first_time_setup.err_invalid_date");
         } else {
           const today = new Date();
           if (d > today) {
-            newErrors.birthDate = 'Gelecekte bir tarih girilemez';
+            newErrors.birthDate = t("first_time_setup.err_future_date");
           } else {
             let age = today.getFullYear() - d.getFullYear();
             const m = today.getMonth() - d.getMonth();
             if (m < 0 || (m === 0 && today.getDate() < d.getDate())) age--;
             if (age < 14) {
-              newErrors.birthDate = '14 yaşından küçükler uygulamaya kayıt olamaz';
+              newErrors.birthDate = t("first_time_setup.err_under_14");
             }
           }
         }
@@ -69,7 +71,7 @@ export default function FirstTimeSetupScreen() {
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
-  }, [username, birthDate]);
+  }, [username, birthDate, t]);
 
   const handleSubmit = useCallback(async () => {
     if (isSubmittingRef.current) return;
@@ -89,14 +91,14 @@ export default function FirstTimeSetupScreen() {
 
       setUser(updatedUser);
       success();
-      router.replace('/(tabs)');
+      router.replace('/(tabs)/' as any);
     } catch (err: any) {
-      setErrors({ username: err.message || 'Kullanıcı adınız alınmış olabilir.' });
+      setErrors({ username: err.message || 'Error' });
     } finally {
       isSubmittingRef.current = false;
       setLoading(false);
     }
-  }, [validateForm, username, birthDate, setUser]);
+  }, [validateForm, username, birthDate, setUser, t]);
 
   return (
     <View style={styles.container}>
@@ -126,27 +128,27 @@ export default function FirstTimeSetupScreen() {
               <View style={styles.contentContainer}>
                 
                 <View style={styles.header}>
-                  <Text style={styles.title}>Hoş Geldiniz!</Text>
+                  <Text style={styles.title}>{t("first_time_setup.title")}</Text>
                   <Text style={styles.subtitle}>
-                    Uygulamayı kullanmaya başlamadan önce, ASEMOS deneyimini size özel kılmak için profilinizi tamamlamamız gerekiyor.
+                    {t("first_time_setup.subtitle")}
                   </Text>
                 </View>
 
                 <View style={styles.card}>
                   <BlurView intensity={45} tint="dark" style={styles.cardInner}>
                     <Input
-                      label="Kullanıcı Adı"
-                      placeholder="Benzersiz bir isim seçin"
+                      label={t("first_time_setup.username_label")}
+                      placeholder={t("first_time_setup.username_ph")}
                       value={username}
-                      onChangeText={(t) => { setUsername(t); clearFieldError('username'); }}
+                      onChangeText={(val) => { setUsername(val); clearFieldError('username'); }}
                       autoCapitalize="none"
                       error={errors.username}
                       containerStyle={styles.inputContainer}
                     />
 
                     <Input
-                      label="Doğum Tarihi"
-                      placeholder="GG/AA/YYYY"
+                      label={t("first_time_setup.birth_date_label")}
+                      placeholder={t("first_time_setup.birth_date_ph")}
                       value={birthDate}
                       onFocus={() => setShowBirthDateInfo(true)}
                       onBlur={() => setShowBirthDateInfo(false)}
@@ -170,8 +172,7 @@ export default function FirstTimeSetupScreen() {
                     {showBirthDateInfo && (
                       <View style={styles.infoBox}>
                         <Text style={styles.infoText}>
-                          ℹ️ <Text style={{fontWeight: '700'}}>Neden istiyoruz?</Text> Yaşınız, 18+ eşleştirme dinamiklerini sağlamak ve yasal sınırlarımızı (Minimum 14 yaş) korumak için zorunludur.{"\n\n"}
-                          Güveliğiniz bizim için önemli; yaşınız diğer kullanıcılara doğrudan gösterilmez. Sadece size uygun deneyimi sunmak için bir kez alınır.
+                          ℹ️ <Text style={{fontWeight: '700'}}>{t("first_time_setup.why_ask_title")}</Text> {t("first_time_setup.why_ask_desc")}
                         </Text>
                       </View>
                     )}
@@ -184,7 +185,7 @@ export default function FirstTimeSetupScreen() {
                       disabled={loading}
                       style={styles.submitButton}
                     >
-                      Büyüye Katıl
+                      {t("first_time_setup.submit")}
                     </Button>
                   </BlurView>
                 </View>

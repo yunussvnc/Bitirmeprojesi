@@ -18,6 +18,7 @@ import { createTextStyle, spacing } from "@/src/constants/design";
 import { lightImpact, success } from "@/src/utils/haptics";
 import { useAuthStore } from "@/src/store/useAuthStore";
 import { apiGet, apiPatch } from "@/src/utils/apiClient";
+import { useTranslation } from "react-i18next";
 
 type UserProfile = {
   id: number;
@@ -42,6 +43,7 @@ export default function PersonalDetailsScreen() {
   const [editField, setEditField] = useState<string | null>(null);
   const [editValue, setEditValue] = useState("");
   const [saving, setSaving] = useState(false);
+  const { t } = useTranslation();
 
   const loadProfile = useCallback(async () => {
     try {
@@ -80,20 +82,20 @@ export default function PersonalDetailsScreen() {
       setProfile((prev) => prev ? { ...prev, [editField]: editValue.trim() } : prev);
       setEditField(null);
     } catch (err: any) {
-      Alert.alert("Hata", err.message || "Güncelleme başarısız.");
+      Alert.alert(t("personal_details.update_error"), err.message || t("personal_details.update_failed"));
     } finally {
       setSaving(false);
     }
   };
 
   const fieldLabels: Record<string, string> = {
-    email: "E-posta Adresi",
-    phone: "Telefon Numarası",
-    birth_date: "Doğum Tarihi",
+    email: t("personal_details.email"),
+    phone: t("personal_details.phone"),
+    birth_date: t("personal_details.birth_date"),
   };
 
   const formatDate = (d?: string) => {
-    if (!d) return "Belirtilmedi";
+    if (!d) return t("personal_details.not_specified");
     try {
       return new Date(d).toLocaleDateString("tr-TR", { day: "numeric", month: "long", year: "numeric" });
     } catch { return d; }
@@ -106,7 +108,7 @@ export default function PersonalDetailsScreen() {
         <TouchableOpacity onPress={() => { lightImpact(); router.back(); }} hitSlop={12} style={styles.backBtn}>
           <IconSymbol name="chevron.left" size={24} color={colors.text.primary} />
         </TouchableOpacity>
-        <Text style={[createTextStyle("title", colors.text.primary), styles.title]}>Kişisel Detaylar</Text>
+        <Text style={[createTextStyle("title", colors.text.primary), styles.title]}>{t("personal_details.title")}</Text>
         <View style={styles.backBtn} />
       </View>
 
@@ -118,48 +120,48 @@ export default function PersonalDetailsScreen() {
           <View style={[styles.infoBanner, { backgroundColor: isDark ? "rgba(78,205,196,0.08)" : "rgba(78,205,196,0.06)" }]}>
             <IconSymbol name="info.circle" size={18} color={colors.accent.primary} />
             <Text style={[styles.infoText, { color: colors.text.secondary }]}>
-              Bu bilgiler hesabınıza özeldir ve profilinizde görünmez.
+              {t("personal_details.privacy_info")}
             </Text>
           </View>
 
-          <Section title="İletişim Bilgileri">
+          <Section title={t("personal_details.contact_info")}>
             <SettingsRow
-              label="E-posta Adresi"
-              value={profile?.email || "Kayıtlı değil"}
+              label={t("personal_details.email")}
+              value={profile?.email || t("personal_details.not_registered")}
               showArrow
               icon="envelope"
               onPress={() => openEdit("email", profile?.email || "")}
             />
             <SettingsRow
-              label="Telefon Numarası"
-              value={profile?.phone || "Kayıtlı değil"}
+              label={t("personal_details.phone")}
+              value={profile?.phone || t("personal_details.not_registered")}
               showArrow
               icon="phone"
               onPress={() => openEdit("phone", profile?.phone || "")}
             />
           </Section>
 
-          <Section title="Kimlik Bilgileri">
+          <Section title={t("personal_details.identity_info")}>
             <SettingsRow
-              label="Doğum Tarihi"
+              label={t("personal_details.birth_date")}
               value={formatDate(profile?.birth_date)}
               showArrow
               icon="calendar"
               onPress={() => openEdit("birth_date", profile?.birth_date || "")}
             />
             <Text style={[styles.hint, { color: colors.text.tertiary }]}>
-              Doğum tarihiniz yaşınızı hesaplamak için kullanılır ve profilinizde görünmez.
+              {t("personal_details.birth_date_hint")}
             </Text>
           </Section>
 
-          <Section title="Hesap Bilgileri">
+          <Section title={t("personal_details.account_info")}>
             <SettingsRow
-              label="Kullanıcı ID"
+              label={t("personal_details.user_id")}
               value={`#${profile?.id || "—"}`}
               icon="number"
             />
             <SettingsRow
-              label="Hesap Oluşturulma"
+              label={t("personal_details.account_created")}
               value={formatDate(profile?.created_at)}
               icon="clock"
             />
@@ -173,7 +175,7 @@ export default function PersonalDetailsScreen() {
           <View style={[styles.modalContent, { backgroundColor: colors.background.primary, borderColor: colors.surface.border }]}>
             <View style={styles.modalHeader}>
               <TouchableOpacity onPress={() => setEditField(null)} hitSlop={12}>
-                <Text style={[styles.modalCancel, { color: colors.text.secondary }]}>Vazgeç</Text>
+                <Text style={[styles.modalCancel, { color: colors.text.secondary }]}>{t("personal_details.cancel")}</Text>
               </TouchableOpacity>
               <Text style={[createTextStyle("title", colors.text.primary), styles.modalTitle]}>
                 {editField ? fieldLabels[editField] || editField : ""}
@@ -182,7 +184,7 @@ export default function PersonalDetailsScreen() {
                 {saving ? (
                   <ActivityIndicator size="small" color={colors.accent.primary} />
                 ) : (
-                  <Text style={[styles.modalSave, { color: colors.accent.primary }]}>Kaydet</Text>
+                  <Text style={[styles.modalSave, { color: colors.accent.primary }]}>{t("personal_details.save")}</Text>
                 )}
               </TouchableOpacity>
             </View>

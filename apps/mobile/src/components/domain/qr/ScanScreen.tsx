@@ -12,6 +12,7 @@ import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { Fonts } from "@/src/constants/theme";
 import { usePresence } from "@/src/store/presence";
 import { verifyQR } from "@/src/services/matchService";
+import { useTranslation } from "react-i18next";
 
 type ActiveSession = {
   placeId: string;
@@ -51,31 +52,32 @@ async function readActiveSession(): Promise<ActiveSession | null> {
   }
 }
 
-function formatActiveText(s: ActiveSession | null) {
-  if (!s || s.activeUntil <= Date.now()) return "Aktif oturum yok.";
+function formatActiveText(s: ActiveSession | null, t: any) {
+  if (!s || s.activeUntil <= Date.now()) return t("qr.no_session");
   const mins = Math.max(0, Math.floor((s.activeUntil - Date.now()) / 60000));
-  return mins >= 1 ? `Aktif: Mekan #${s.placeId} • ${mins} dk` : `Aktif: Mekan #${s.placeId}`;
+  return mins >= 1 ? t("qr.active_mins", { placeId: s.placeId, mins }) : t("qr.active", { placeId: s.placeId });
 }
 
 export default function ScanScreen() {
   const params = useLocalSearchParams();
   const placeIdParam = useMemo(() => normalizePlaceId(params?.placeId), [params]);
+  const { t } = useTranslation();
 
-  const [status, setStatus] = useState<string>("Hazırlanıyor...");
+  const [status, setStatus] = useState<string>(t("qr.preparing"));
   const [manualInput, setManualInput] = useState<string>(placeIdParam ?? "1");
 
   const handlingRef = useRef(false);
 
   async function refreshStatus() {
     const s = await readActiveSession();
-    setStatus(formatActiveText(s));
+    setStatus(formatActiveText(s, t));
   }
 
   async function activateAndGo(placeId: string) {
     if (handlingRef.current) return;
     handlingRef.current = true;
     try {
-      setStatus("Aktif ediliyor...");
+      setStatus(t("qr.activating"));
       await setActiveSession(placeId, 2);
 
       // Presence store + QR doğrulama
@@ -125,14 +127,14 @@ export default function ScanScreen() {
     >
       <ThemedView style={styles.titleContainer}>
         <ThemedText type="title" style={styles.title}>
-          scan
+          {t("qr.title_scan")}
         </ThemedText>
       </ThemedView>
 
       {/* Minimal durum kartı */}
       <BlurView intensity={20} style={styles.card}>
         <ThemedText type="defaultSemiBold" style={styles.cardTitle}>
-          QR Durumu
+          {t("qr.status")}
         </ThemedText>
         <ThemedText style={styles.desc}>{status}</ThemedText>
 
@@ -144,14 +146,14 @@ export default function ScanScreen() {
       {/* Manuel test (küçük) */}
       <BlurView intensity={20} style={styles.card}>
         <ThemedText type="defaultSemiBold" style={styles.cardTitle}>
-          Manuel Test (Demo)
+          {t("qr.manual_test")}
         </ThemedText>
 
         <BlurView intensity={20} style={styles.inputContainer}>
           <TextInput
             value={manualInput}
             onChangeText={setManualInput}
-            placeholder="örn: 1"
+            placeholder={t("qr.placeholder")}
             placeholderTextColor="#999"
             style={styles.input}
           />
@@ -168,7 +170,7 @@ export default function ScanScreen() {
         >
           <LinearGradient colors={["#667eea", "#764ba2"]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={styles.primaryBtnGradient}>
             <ThemedText type="defaultSemiBold" style={styles.primaryBtnText}>
-              Aktif Et → Detaya Git
+              {t("qr.activate_go")}
             </ThemedText>
           </LinearGradient>
         </TouchableOpacity>
@@ -176,7 +178,7 @@ export default function ScanScreen() {
         <TouchableOpacity activeOpacity={0.85} onPress={() => router.push("/(tabs)/explore")} style={styles.secondaryBtn}>
           <LinearGradient colors={["#FF6B9D", "#C44569"]} start={{ x: 0, y: 0 }} end={{ x: 1, y: 0 }} style={styles.secondaryBtnGradient}>
             <ThemedText type="defaultSemiBold" style={styles.secondaryBtnText}>
-              Keşfet&apos;e dön
+              {t("qr.return_explore")}
             </ThemedText>
           </LinearGradient>
         </TouchableOpacity>

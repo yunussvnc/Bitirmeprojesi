@@ -39,6 +39,7 @@ export default function PlaceholderSettingsScreen({
     const router = useRouter();
     const insets = useSafeAreaInsets();
     const { width } = useWindowDimensions();
+    const { t } = useTranslation();
 
     // Gentle floating animation
     const floatAnim = useSharedValue(0);
@@ -128,7 +129,7 @@ export default function PlaceholderSettingsScreen({
                 </Animated.View>
 
                 <Animated.View entering={FadeInDown.delay(200).duration(800).springify()}>
-                    <Text style={[createTextStyle('title', colors.text.primary), styles.subtitle]}>Çok Yakında.</Text>
+                    <Text style={[createTextStyle('title', colors.text.primary), styles.subtitle]}>{t("settings_extra.coming_soon")}</Text>
                 </Animated.View>
 
                 <Animated.View entering={FadeInDown.delay(350).duration(800).springify()}>

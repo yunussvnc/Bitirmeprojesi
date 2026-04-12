@@ -27,6 +27,7 @@ import { IconSymbol } from '@/src/components/ui/icon-symbol';
 import { RatingStars } from '@/src/components/ui/RatingStars';
 import { createTextStyle, spacing } from '@/src/constants/design';
 import { lightImpact } from '@/src/utils/haptics';
+import { useTranslation } from "react-i18next";
 
 export interface EnhancedReviewItemProps {
   // Temel bilgiler
@@ -68,24 +69,24 @@ export interface EnhancedReviewItemProps {
 }
 
 const VISIT_TYPE_LABELS: Record<string, string> = {
-  solo: 'Yalnız',
-  friends: 'Arkadaşlarla',
-  family: 'Aileyle',
-  business: 'İş',
-  couple: 'Çiftle',
+  solo: 'solo',
+  friends: 'friends',
+  family: 'family',
+  business: 'business',
+  couple: 'couple',
 };
 
 const RATING_LABELS: Record<string, string> = {
-  food: 'Yemek',
-  service: 'Servis',
-  atmosphere: 'Atmosfer',
-  value: 'Fiyat/Performans',
-  cleanliness: 'Temizlik',
+  food: 'food',
+  service: 'service',
+  atmosphere: 'atmosphere',
+  value: 'value',
+  cleanliness: 'cleanliness',
 };
 
 export function EnhancedReviewItem({
   userId,
-  userName = 'Kullanıcı',
+  userName = 'User',
   userAvatar,
   rating,
   comment,
@@ -111,6 +112,7 @@ export function EnhancedReviewItem({
   ownerResponseAt,
 }: EnhancedReviewItemProps) {
   const { colors } = useTheme();
+  const { t } = useTranslation();
   const [showAllPhotos, setShowAllPhotos] = useState(false);
   const [showDetailedRatings, setShowDetailedRatings] = useState(false);
 
@@ -124,12 +126,12 @@ export function EnhancedReviewItem({
     const diffMs = now.getTime() - date.getTime();
     const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
 
-    if (diffDays === 0) return 'Bugün';
-    if (diffDays === 1) return 'Dün';
-    if (diffDays < 7) return `${diffDays} gün önce`;
-    if (diffDays < 30) return `${Math.floor(diffDays / 7)} hafta önce`;
-    if (diffDays < 365) return `${Math.floor(diffDays / 30)} ay önce`;
-    return `${Math.floor(diffDays / 365)} yıl önce`;
+    if (diffDays === 0) return t('date.today');
+    if (diffDays === 1) return t('date.yesterday');
+    if (diffDays < 7) return t('date.days_ago', { count: diffDays });
+    if (diffDays < 30) return t('date.weeks_ago', { count: Math.floor(diffDays / 7) });
+    if (diffDays < 365) return t('date.months_ago', { count: Math.floor(diffDays / 30) });
+    return t('date.years_ago', { count: Math.floor(diffDays / 365) });
   };
 
   const hasDetailedRatings =
@@ -174,7 +176,7 @@ export function EnhancedReviewItem({
                   color={colors.accent.primary}
                 />
                 <Text style={[styles.verifiedText, { color: colors.accent.primary }]}>
-                  Doğrulanmış
+                  {t('review.verified')}
                 </Text>
               </View>
             )}
@@ -198,7 +200,7 @@ export function EnhancedReviewItem({
             <View style={styles.infoTag}>
               <IconSymbol name="person.2.fill" size={14} color={colors.text.tertiary} />
               <Text style={[captionStyle, { marginLeft: 4 }]}>
-                {VISIT_TYPE_LABELS[visitType] || visitType}
+                {t(`review.visit_types.${VISIT_TYPE_LABELS[visitType]}`)}
               </Text>
             </View>
           )}
@@ -214,7 +216,7 @@ export function EnhancedReviewItem({
             <View style={styles.infoTag}>
               <IconSymbol name="clock" size={14} color={colors.text.tertiary} />
               <Text style={[captionStyle, { marginLeft: 4 }]}>
-                {waitTimeMinutes} dk bekleme
+                {t('review.wait_time', { minutes: waitTimeMinutes })}
               </Text>
             </View>
           )}
@@ -276,7 +278,7 @@ export function EnhancedReviewItem({
             }}
             style={styles.detailedRatingsHeader}
           >
-            <Text style={[bodySmallStyle]}>Detaylı Puanlar</Text>
+            <Text style={[bodySmallStyle]}>{t("review.detailed_scores")}</Text>
             <IconSymbol
               name={showDetailedRatings ? 'chevron.up' : 'chevron.down'}
               size={14}

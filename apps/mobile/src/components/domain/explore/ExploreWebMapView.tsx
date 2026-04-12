@@ -26,6 +26,9 @@ import { lightImpact } from '@/src/utils/haptics';
 import { PlaceMediaPanel } from './PlaceMediaPanel';
 import { useAppStore } from '@/src/store/useAppStore';
 import { getPlaceStatus, type PlaceStatusType } from '@/src/utils/placeStatus';
+import { calculateDistance } from '@/src/utils/location';
+import { DistanceSlider } from '@/src/components/ui/DistanceSlider';
+import { useTranslation } from 'react-i18next';
 
 /** Keşfet haritasında filtrelenebilecek kategoriler */
 const ALL_CATEGORIES = ['Kafe', 'Restoran', 'Bar', 'Meyhane', 'Gece Kulübü', 'Fast Food', 'Nargile Cafe'] as const;
@@ -128,6 +131,7 @@ function setUserMarker(lat,lng){
 
 export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebMapViewProps) {
   const { colors, isDark } = useTheme();
+  const { t } = useTranslation();
   const [userLocation, setUserLocation] = useState<{ latitude: number; longitude: number } | null>(null);
   const [selectedPlace, setSelectedPlace] = useState<Place | null>(null);
   const [mapReady, setMapReady] = useState(false);
@@ -137,9 +141,10 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
   const [showFilter, setShowFilter] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedStatuses, setSelectedStatuses] = useState<PlaceStatusType[]>([]);
+  const [maxDistance, setMaxDistance] = useState<number>(50); // 50km = All City
   const webViewRef = useRef<WebView>(null);
 
-  const activeFilterCount = selectedCategories.length + selectedStatuses.length;
+  const activeFilterCount = selectedCategories.length + selectedStatuses.length + (maxDistance < 50 ? 1 : 0);
 
   const toggleCategory = useCallback((cat: string) => {
     setSelectedCategories((prev) =>
@@ -156,6 +161,7 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
   const clearFilters = useCallback(() => {
     setSelectedCategories([]);
     setSelectedStatuses([]);
+    setMaxDistance(50);
   }, []);
 
   useEffect(() => {
@@ -201,9 +207,14 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
         const status = getPlaceStatus(p.opening_time, p.closing_time);
         if (!selectedStatuses.includes(status.status)) return false;
       }
+      // Mesafe filtresi (Her zaman geçerli)
+      if (userLocation && p.latitude != null && p.longitude != null) {
+        const distKm = calculateDistance(userLocation.latitude, userLocation.longitude, p.latitude, p.longitude) / 1000;
+        if (distKm > maxDistance) return false;
+      }
       return true;
     });
-  }, [places, query, selectedCategories, selectedStatuses]);
+  }, [places, query, selectedCategories, selectedStatuses, maxDistance, userLocation]);
 
   const visiblePlaces = useMemo(
     () => filteredPlaces.filter((p) => p.latitude != null && p.longitude != null),
@@ -255,9 +266,9 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
       );
     } else {
       Alert.alert(
-        'Konum izni gerekli',
-        'Yakınızdaki mekanları görmek için konum erişimine izin verin.',
-        [{ text: 'Tamam' }],
+        t('explore.location_required'),
+        t('explore.location_desc'),
+        [{ text: t('explore.ok') }],
       );
     }
   }, [userLocation]);
@@ -332,12 +343,15 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
     <View style={styles.container}>
       <WebView
         ref={webViewRef}
+        key={isDark ? 'dark' : 'light'}
         source={{ html }}
         style={[styles.map, { backgroundColor: colors.background.tertiary }]}
         scrollEnabled
         bounces={false}
         overScrollMode="never"
         onLoad={() => setMapReady(true)}
+        onContentProcessDidTerminate={() => webViewRef.current?.reload()}
+        onRenderProcessGone={() => webViewRef.current?.reload()}
         onMessage={handleMessage}
         onTouchStart={() => {
           setShowResults(false);
@@ -360,7 +374,7 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
         <View style={styles.searchRow}>
           <View style={styles.searchInputFlex}>
             <SearchInput
-              placeholder="Mekan ara..."
+              placeholder={t('explore.search_placeholder')}
               value={query}
               onChangeText={(text) => {
                 setQuery(text);
@@ -415,7 +429,7 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
           <View style={[styles.filterPanel, { backgroundColor: colors.surface.elevated }]}>
             {/* Kategori */}
             <View style={styles.filterSection}>
-              <Text style={[styles.filterSectionTitle, { color: colors.text.secondary }]}>Kategori</Text>
+              <Text style={[styles.filterSectionTitle, { color: colors.text.secondary }]}>{t('explore.filter_category')}</Text>
               <View style={styles.chipRow}>
                 {ALL_CATEGORIES.map((cat) => {
                   const active = selectedCategories.includes(cat);
@@ -448,7 +462,7 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
 
             {/* Durum */}
             <View style={styles.filterSection}>
-              <Text style={[styles.filterSectionTitle, { color: colors.text.secondary }]}>Durum</Text>
+              <Text style={[styles.filterSectionTitle, { color: colors.text.secondary }]}>{t('explore.filter_status')}</Text>
               <View style={styles.chipRow}>
                 {ALL_STATUSES.map((s) => {
                   const active = selectedStatuses.includes(s.key);
@@ -480,6 +494,20 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
               </View>
             </View>
 
+            {/* Mesafe Filtresi */}
+            {userLocation && (
+              <View style={[styles.filterSection, { marginTop: 4 }]}>
+                <DistanceSlider
+                  min={1}
+                  max={50}
+                  value={maxDistance}
+                  onValueChange={setMaxDistance}
+                  title={t('explore.filter_distance')}
+                  maxLabel={t('explore.whole_city')}
+                />
+              </View>
+            )}
+
             {/* Temizle */}
             {activeFilterCount > 0 && (
               <TouchableOpacity
@@ -487,7 +515,7 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
                 style={styles.clearBtn}
                 activeOpacity={0.7}
               >
-                <Text style={[styles.clearBtnText, { color: colors.accent.primary }]}>Filtreleri Temizle</Text>
+                <Text style={[styles.clearBtnText, { color: colors.accent.primary }]}>{t('explore.filter_clear')}</Text>
               </TouchableOpacity>
             )}
           </View>
@@ -496,7 +524,7 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
           <View style={[styles.resultsCard, { backgroundColor: colors.surface.elevated }]}>
             {filteredPlaces.length === 0 ? (
               <Text style={[styles.emptyText, { color: colors.text.tertiary }]}>
-                Sonuç bulunamadı
+                {t('explore.no_results')}
               </Text>
             ) : (
               <ScrollView
@@ -557,7 +585,7 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
         <View style={styles.loadingOverlay}>
           <ActivityIndicator size="large" color={colors.accent.primary} />
           <Text style={[styles.loadingText, { color: colors.text.secondary }]}>
-            {mapReady ? 'Mekanlar yükleniyor...' : 'Harita yükleniyor...'}
+            {mapReady ? t('explore.loading_places') : t('explore.loading_map')}
           </Text>
         </View>
       )}
