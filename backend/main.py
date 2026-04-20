@@ -10,6 +10,7 @@ from fastapi.staticfiles import StaticFiles
 from sqlalchemy.orm import Session
 
 from database import engine, Base
+import migrate
 from config import get_settings
 from app.middleware.error_handler import ErrorHandlerMiddleware
 from app.middleware.logging import RequestLoggingMiddleware
@@ -36,6 +37,8 @@ settings = get_settings()
 # ---------------------------------------------------------------------------
 # Veritabanı tabloları
 # ---------------------------------------------------------------------------
+# Migration'ları çalıştır (IF NOT EXISTS — güvenli, idempotent)
+migrate.run_migrations(engine)
 # Geliştirme: create_all ile eksik tabloları oluştur
 # Prod: `alembic upgrade head` kullanılmalı
 Base.metadata.create_all(bind=engine)
