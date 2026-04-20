@@ -97,7 +97,7 @@ export function ReviewForm({
         <TextInput
           value={comment}
           onChangeText={setComment}
-          placeholder="Bu mekan hakkında düşüncelerinizi paylaşın..."
+          placeholder={t('review.comment_ph')}
           placeholderTextColor={colors.text.tertiary}
           multiline
           numberOfLines={4}

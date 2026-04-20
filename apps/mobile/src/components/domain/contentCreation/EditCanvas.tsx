@@ -291,7 +291,7 @@ export function EditCanvas({
                 styles.fullscreenTextInput,
                 { color: editingColor },
               ]}
-              placeholder="Yazmaya başla..."
+              placeholder={t('creation.write_placeholder')}
               placeholderTextColor="rgba(255,255,255,0.5)"
               value={editingText}
               onChangeText={setEditingText}

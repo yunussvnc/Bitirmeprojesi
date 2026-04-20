@@ -682,7 +682,7 @@ export default function MatchProfileSetupScreen() {
                             ref={nameRef}
                             value={displayName}
                             onChangeText={setDisplayName}
-                            placeholder="Görünecek ismin"
+                            placeholder={t("match_setup.name_ph")}
                             placeholderTextColor={colors.text.tertiary}
                             style={[styles.floatingInput, { color: textColor }]}
                             onFocus={() => setFocusedInput("name")}
@@ -704,7 +704,7 @@ export default function MatchProfileSetupScreen() {
                         <TextInput
                             ref={ageRef}
                             value={age}
-                            placeholder="Kayıt sırasında girilen doğum tarihinden hesaplanır"
+                            placeholder={t("match_setup.age_ph")}
                             placeholderTextColor={colors.text.tertiary}
                             keyboardType="number-pad"
                             style={[styles.floatingInput, { color: colors.text.secondary }]}
@@ -736,7 +736,7 @@ export default function MatchProfileSetupScreen() {
                             ref={bioRef}
                             value={bio}
                             onChangeText={setBio}
-                            placeholder="Hobilerin, sevdiğin şeyler, ilginç bir özelliğin..."
+                            placeholder={t("match_setup.bio_ph")}
                             placeholderTextColor={colors.text.tertiary}
                             multiline
                             numberOfLines={4}
@@ -825,7 +825,7 @@ export default function MatchProfileSetupScreen() {
                             ref={heightRef}
                             value={height}
                             onChangeText={setHeight}
-                            placeholder="Örn: 180"
+                            placeholder={t("match_setup.height_ph")}
                             placeholderTextColor={colors.text.tertiary}
                             keyboardType="number-pad"
                             style={[styles.floatingInput, { color: textColor }]}
@@ -936,7 +936,7 @@ export default function MatchProfileSetupScreen() {
                             <ThemedText style={[styles.promptQuestion, { color: ACCENT, marginBottom: 12, fontSize: 18 }]}>{selectedPromptOption}</ThemedText>
                             <TextInput
                                 style={[styles.promptAnswerInput, { color: textColor, backgroundColor: inputBg, borderColor: inputBorder }]}
-                                placeholder="Cevabını yaz..."
+                                placeholder={t("match_setup.answer_ph")}
                                 placeholderTextColor={colors.text.tertiary}
                                 value={tempPromptAnswer}
                                 onChangeText={setTempPromptAnswer}

@@ -23,6 +23,7 @@ import { spacing } from "@/src/constants/design";
 import { lightImpact, mediumImpact } from "@/src/utils/haptics";
 import type { Post } from "@/src/services/feedService";
 import { EmptyState } from "@/src/components/ui";
+import { useTranslation } from "react-i18next";
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get("window");
 
@@ -160,6 +161,7 @@ function ReelCell({
 
 export function ReelsView({ posts, loading, refreshing, onRefresh, onLoadMore, onLike, onComment, total }: ReelsViewProps) {
   const { colors } = useTheme();
+  const { t } = useTranslation();
   const [activeIndex, setActiveIndex] = useState(0);
   const onViewableItemsChanged = useRef(({ viewableItems }: { viewableItems: ViewToken[] }) => {
     if (viewableItems.length > 0 && viewableItems[0].index !== null) {
@@ -182,9 +184,9 @@ export function ReelsView({ posts, loading, refreshing, onRefresh, onLoadMore, o
       <View style={styles.emptyWrap}>
         <EmptyState
           variant="reels"
-          title="Henüz reel yok"
-          description="İlk videoyu sen paylaş!"
-          actionLabel="Reel Paylaş"
+          title={t('feed.empty_reel_title')}
+          description={t('feed.empty_reel_desc')}
+          actionLabel={t('feed.empty_reel_action')}
           onAction={() => router.push("/create-post" as any)}
         />
       </View>

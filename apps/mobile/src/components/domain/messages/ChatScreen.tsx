@@ -418,7 +418,6 @@ export default function ChatScreen() {
 
     const handleCameraPress = () => {
         Alert.alert(
-        Alert.alert(
             t("chat.send_photo", "Fotoğraf Gönder"),
             t("chat.photo_options_desc", "Lütfen bir seçenek belirleyin:"),
             [

@@ -266,7 +266,7 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
           ? `maps://maps.apple.com/?daddr=${lat},${lng}`
           : `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
       Linking.openURL(url).catch(() => {
-        Alert.alert('Hata', 'Harita uygulaması açılamadı.');
+        Alert.alert(t('home.error_title'), t('explore.map_error'));
       });
     }
   };

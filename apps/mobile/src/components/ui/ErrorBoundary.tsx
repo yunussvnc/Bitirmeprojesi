@@ -7,7 +7,7 @@ import React, { Component, type ErrorInfo, type ReactNode } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { spacing } from "@/src/constants/design";
 import { useTranslation } from "react-i18next";
-import { IconSymbol } from "@/src/components/ui/IconSymbol";
+import { IconSymbol } from "@/src/components/ui/icon-symbol";
 
 interface Props {
   children: ReactNode;

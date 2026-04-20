@@ -23,7 +23,7 @@ import { useAuthStore } from "@/src/store/useAuthStore";
 import { changePassword, deleteAccount } from "@/src/services/authService";
 import { success, lightImpact } from "@/src/utils/haptics";
 import { useTranslation } from "react-i18next";
-import { IconSymbol } from "@/src/components/ui/IconSymbol";
+import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { handleApiError } from "@/src/utils/errorHandler";
 
 export default function SecuritySettingsScreen() {
@@ -164,12 +164,21 @@ export default function SecuritySettingsScreen() {
                 </TouchableOpacity>
 
                 <View style={styles.dangerSection}>
+                    <Text style={[styles.sectionTitle, { color: colors.text.secondary }]}>{t("settings_extra.danger_zone")}</Text>
+                    <View style={[styles.dangerCard, { backgroundColor: colors.surface.elevated, borderColor: colors.semantic.error + '40' }]}>
+                        <Text style={[styles.dangerTitle, { color: colors.semantic.error }]}>{t("settings_extra.delete_account")}</Text>
+                        <Text style={[styles.dangerDesc, { color: colors.text.secondary }]}>{t("settings_extra.delete_desc")}</Text>
+                        <TouchableOpacity
+                            style={[styles.dangerBtn, { borderColor: colors.semantic.error, opacity: deleteLoading ? 0.6 : 1 }]}
+                            onPress={handleDeleteAccount}
+                            disabled={deleteLoading}
+                            activeOpacity={0.7}
                         >
                             {deleteLoading ? (
                                 <ActivityIndicator color={colors.semantic.error} size="small" />
                             ) : (
                                 <Text style={[styles.dangerBtnText, { color: colors.semantic.error }]}>
-                                    Hesabımı Sil
+                                    {t("settings_extra.delete_btn")}
                                 </Text>
                             )}
                         </TouchableOpacity>

@@ -64,7 +64,7 @@ export default function LoginScreen() {
   const [roleType, setRoleType] = useState<'user'|'venue'>('user');
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [errors, setErrors] = useState<Record<string, string>>({});
+  const [errors, setErrors] = useState<Record<string, string | undefined>>({});
   const isSubmittingRef = useRef(false);
 
   // Google Auth Setup
@@ -109,7 +109,7 @@ export default function LoginScreen() {
         }
       }
     } catch (err: any) {
-      Alert.alert('Giriş Hatası', err.message || 'Google ile giriş başarısız oldu.');
+      Alert.alert(t('auth.login_error_title'), err.message || t('auth.google_login_failed'));
     } finally {
       setLoading(false);
     }
@@ -152,7 +152,7 @@ export default function LoginScreen() {
       if (e.code === 'ERR_REQUEST_CANCELED') {
         // Kullanıcı iptal etti
       } else {
-        Alert.alert('Giriş Hatası', e.message || 'Apple ile giriş başarısız oldu.');
+        Alert.alert(t('auth.login_error_title'), e.message || t('auth.apple_login_failed'));
       }
     } finally {
       setLoading(false);
@@ -163,13 +163,13 @@ export default function LoginScreen() {
 
   const validateForm = useCallback((): boolean => {
     const newErrors: { email?: string; password?: string; general?: string } = {};
-    if (!email.trim()) newErrors.email = 'E-posta gereklidir';
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) newErrors.email = 'Geçerli bir e-posta adresi girin';
-    if (!password.trim()) newErrors.password = 'Şifre gereklidir';
-    else if (password.length < 6) newErrors.password = 'Şifre en az 6 karakter olmalıdır';
+    if (!email.trim()) newErrors.email = t('auth.err_email_required');
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) newErrors.email = t('auth.err_email_invalid');
+    if (!password.trim()) newErrors.password = t('auth.err_password_required');
+    else if (password.length < 6) newErrors.password = t('auth.err_password_short_6');
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
-  }, [email, password]);
+  }, [email, password, t]);
 
   const handleLogin = useCallback(async () => {
     if (isSubmittingRef.current) return;
@@ -212,14 +212,14 @@ export default function LoginScreen() {
 
       if (msg.includes('pending_verification:')) {
         const cleanMsg = msg.replace('pending_verification:', '').trim();
-        Alert.alert('Doğrulama Gerekli', cleanMsg, [
-          { text: 'Doğrula', onPress: () => router.replace({ pathname: '/verify-email', params: { email: encodeURIComponent(email.trim()) } }) }
+        Alert.alert(t('auth.verification_required_title'), cleanMsg, [
+          { text: t('auth.go_to_verify'), onPress: () => router.replace({ pathname: '/verify-email', params: { email: encodeURIComponent(email.trim()) } }) }
         ]);
         return;
       }
 
       setErrors({ general: msg });
-      Alert.alert('Giriş Hatası', msg);
+      Alert.alert(t('auth.login_error_title'), msg);
     } finally {
       isSubmittingRef.current = false;
       setLoading(false);
@@ -235,11 +235,8 @@ export default function LoginScreen() {
     }
   }, [promptAsync]);
 
-  const clearEmailError = useCallback(() => {
-    setErrors((prev) => (prev.email ? { ...prev, email: undefined } : prev));
-  }, []);
-  const clearPasswordError = useCallback(() => {
-    setErrors((prev) => (prev.password ? { ...prev, password: undefined } : prev));
+  const clearFieldError = useCallback((field: string) => {
+    setErrors((prev) => (prev[field] ? { ...prev, [field]: undefined } : prev));
   }, []);
 
   const currentImage = FALLBACK_PLACE_IMAGES[0];
@@ -320,7 +317,7 @@ export default function LoginScreen() {
                           value={email}
                           onChangeText={(t) => {
                             setEmail(t);
-                            clearEmailError();
+                            clearFieldError('email');
                           }}
                           keyboardType="email-address"
                           autoCapitalize="none"
@@ -335,7 +332,7 @@ export default function LoginScreen() {
                           value={password}
                           onChangeText={(t) => {
                             setPassword(t);
-                            clearPasswordError();
+                            clearFieldError('password');
                           }}
                           secureTextEntry={!showPassword}
                           rightIcon={showPassword ? 'eye.slash' as any : 'eye' as any}

@@ -242,15 +242,15 @@ export default function EmailVerificationScreen() {
                                             ]}
                                         >
                                             {resendCooldown > 0
-                                                ? `Tekrar gönder (${resendCooldown}s)`
-                                                : 'Tekrar gönder'}
+                                                ? t('forgot_password.resend_countdown', { seconds: resendCooldown })
+                                                : t('forgot_password.resend')}
                                         </Text>
                                     </TouchableOpacity>
                                 </View>
                             </View>
                         </BlurView>
 
-                    </View>
+                    </ScrollView>
                 </KeyboardAvoidingView>
             </SafeAreaView>
         </View>

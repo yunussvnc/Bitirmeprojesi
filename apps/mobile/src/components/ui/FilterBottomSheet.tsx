@@ -306,13 +306,13 @@ export function FilterBottomSheet({
             <Text style={[styles.sectionLabel, { color: colors.text.tertiary }]}>{t("filter_extra.location_type")}</Text>
             <View style={styles.pickerRow}>
               <PickerChip
-                label="İlçe"
+                label={t('filter_extra.district')}
                 value={draft.location}
                 options={districts.map((d) => ({ value: d, label: d }))}
                 onSelect={(v) => patch('location', v)}
               />
               <PickerChip
-                label="Tür"
+                label={t('filter_extra.category')}
                 value={draft.category}
                 options={placeTypes.map((t) => ({ value: t, label: t }))}
                 onSelect={(v) => patch('category', v)}
@@ -335,8 +335,8 @@ export function FilterBottomSheet({
             <Text style={[styles.sectionLabel, { color: colors.text.tertiary }]}>{t("filter_extra.vibe")}</Text>
             <Segment<'quiet' | 'lively'>
               options={[
-                { value: 'quiet', label: 'Sessiz' },
-                { value: 'lively', label: 'Canlı' },
+                { value: 'quiet', label: t('filter_extra.quiet') },
+                { value: 'lively', label: t('filter_extra.lively') },
               ]}
               value={draft.vibe}
               onChange={(v) => patch('vibe', v)}
@@ -346,9 +346,9 @@ export function FilterBottomSheet({
             <Text style={[styles.sectionLabel, { color: colors.text.tertiary }]}>{t("filter_extra.purpose")}</Text>
             <Segment<'work' | 'friends' | 'date'>
               options={[
-                { value: 'work', label: 'Çalışma' },
-                { value: 'friends', label: 'Arkadaş' },
-                { value: 'date', label: 'Date' },
+                { value: 'work', label: t('filter_extra.work') },
+                { value: 'friends', label: t('filter_extra.friends') },
+                { value: 'date', label: t('filter_extra.date') },
               ]}
               value={draft.purpose}
               onChange={(v) => patch('purpose', v)}

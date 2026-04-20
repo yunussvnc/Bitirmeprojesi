@@ -116,7 +116,7 @@ export default function RegisterScreen() {
         }
       }
     } catch (err: any) {
-      Alert.alert('Giriş Hatası', err.message || 'Google ile giriş başarısız oldu.');
+      Alert.alert(t('auth.login_error_title'), err.message || t('auth.google_login_failed'));
     } finally {
       setLoading(false);
     }
@@ -159,7 +159,7 @@ export default function RegisterScreen() {
       if (e.code === 'ERR_REQUEST_CANCELED') {
         // Kullanıcı iptal etti
       } else {
-        Alert.alert('Giriş Hatası', e.message || 'Apple ile giriş başarısız oldu.');
+        Alert.alert(t('auth.login_error_title'), e.message || t('auth.apple_login_failed'));
       }
     } finally {
       setLoading(false);
@@ -171,34 +171,34 @@ export default function RegisterScreen() {
   const validateForm = useCallback((): boolean => {
     const newErrors: typeof errors = {};
     if (roleType === 'user') {
-      if (!fullName.trim()) newErrors.fullName = 'Ad soyad gereklidir';
-      else if (fullName.trim().split(/\s+/).filter(Boolean).length < 2) newErrors.fullName = 'Ad ve soyad girin';
+      if (!fullName.trim()) newErrors.fullName = t('auth.err_fullname_required');
+      else if (fullName.trim().split(/\s+/).filter(Boolean).length < 2) newErrors.fullName = t('auth.err_fullname_two_words');
     } else {
-      if (!venueName.trim()) newErrors.venueName = 'Mekan Adı gereklidir';
+      if (!venueName.trim()) newErrors.venueName = t('auth.err_venue_name_required');
     }
 
-    if (!email.trim()) newErrors.email = 'E-posta gereklidir';
-    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) newErrors.email = 'Geçerli bir e-posta adresi girin';
+    if (!email.trim()) newErrors.email = t('auth.err_email_required');
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) newErrors.email = t('auth.err_email_invalid');
     
-    if (!password.trim()) newErrors.password = 'Şifre gereklidir';
-    else if (password.length < 8) newErrors.password = 'Şifre en az 8 karakter olmalıdır';
+    if (!password.trim()) newErrors.password = t('auth.err_password_required');
+    else if (password.length < 8) newErrors.password = t('auth.err_password_short_8');
     else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*([^\w\s]|_))/.test(password)) {
-      newErrors.password = 'Büyük harf, küçük harf, rakam ve özel harf girmelisin';
+      newErrors.password = t('auth.err_password_weak');
     }
     
-    if (!confirmPassword.trim()) newErrors.confirmPassword = 'Şifre tekrarı gereklidir';
-    else if (password !== confirmPassword) newErrors.confirmPassword = 'Şifreler eşleşmiyor';
+    if (!confirmPassword.trim()) newErrors.confirmPassword = t('auth.err_confirm_required');
+    else if (password !== confirmPassword) newErrors.confirmPassword = t('auth.err_passwords_mismatch');
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
-  }, [fullName, venueName, email, password, confirmPassword, roleType]);
+  }, [fullName, venueName, email, password, confirmPassword, roleType, t]);
 
   const handleRegister = useCallback(async () => {
     if (isSubmittingRef.current) return;
     if (!validateForm()) return;
     
     if (!termsAccepted) {
-      Alert.alert('Eksik Onay', 'Kayıt olabilmek için Kullanım Koşulları ve Gizlilik Politikası\'nı kabul etmelisiniz.', [{ text: 'Tamam' }]);
+      Alert.alert(t('auth.terms_required_title'), t('auth.terms_required_body'), [{ text: t('explore.ok') }]);
       return;
     }
     
@@ -229,9 +229,9 @@ export default function RegisterScreen() {
         });
         success();
         Alert.alert(
-          'Başvuru Alındı',
-          'Mekan başvurunuz tarafımıza iletilmiştir. Gün içerisinde size dönüş yapacağız.',
-          [{ text: 'Tamam', onPress: () => router.replace('/login') }]
+          t('auth.venue_applied_title'),
+          t('auth.venue_applied_desc'),
+          [{ text: t('common.ok'), onPress: () => router.replace('/login') }]
         );
       }
     } catch (err: unknown) {

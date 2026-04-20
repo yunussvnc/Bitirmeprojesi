@@ -113,7 +113,7 @@ export function EnhancedReviewForm({
 
   const handleSubmit = async () => {
     if (rating === 0) {
-      Alert.alert('Uyarı', 'Lütfen bir puan verin.');
+      Alert.alert(t('review.warning'), t('review.plz_rate'));
       return;
     }
 

@@ -138,7 +138,7 @@ export function EmbeddedCamera({
       }
     } catch (e) {
       console.warn('Photo capture error:', e);
-      Alert.alert('Hata', 'Fotoğraf çekilemedi. Lütfen tekrar deneyin.');
+      Alert.alert(t('home.error_title'), t('creation.capture_failed'));
     } finally {
       setCapturing(false);
     }

@@ -12,6 +12,7 @@ import { IconSymbol, type IconSymbolName } from './icon-symbol';
 import { useTheme } from '@/src/hooks/useTheme';
 import { Button } from './Button';
 import { createTextStyle, spacing, radius } from '@/src/constants/design';
+import { useTranslation } from 'react-i18next';
 
 export interface ErrorStateProps {
   /**
@@ -66,13 +67,17 @@ export interface ErrorStateProps {
  */
 export function ErrorState({
   icon = 'exclamationmark.triangle.fill',
-  title = 'Bir Hata Oluştu',
-  description = 'Bir şeyler yanlış gitti. Lütfen tekrar deneyin.',
-  retryLabel = 'Tekrar Dene',
+  title,
+  description,
+  retryLabel,
   onRetry,
   compact = false,
 }: ErrorStateProps) {
   const { colors } = useTheme();
+  const { t } = useTranslation();
+  const finalTitle = title || t('common.error');
+  const finalDesc = description || t('common.error_desc');
+  const finalRetry = retryLabel || t('common.retry');
   const titleStyle = createTextStyle('heading', colors.text.primary);
   const descriptionStyle = createTextStyle('body', colors.text.secondary);
   
@@ -123,14 +128,14 @@ export function ErrorState({
         <IconSymbol name={icon} size={40} color={colors.semantic.error} />
       </Animated.View>
       <Text style={[titleStyle, styles.title, { marginBottom: spacing.sm }]}>
-        {title}
+        {finalTitle}
       </Text>
       <Text style={[descriptionStyle, styles.description, { marginBottom: spacing.xl }]}>
-        {description}
+        {finalDesc}
       </Text>
       {onRetry && (
         <Button variant="secondary" onPress={onRetry}>
-          {retryLabel}
+          {finalRetry}
         </Button>
       )}
     </Animated.View>
