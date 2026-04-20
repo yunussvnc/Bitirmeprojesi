@@ -24,7 +24,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { BlurView } from 'expo-blur';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { lightImpact, success as successHaptic } from '@/src/utils/haptics';
-import { resendCode, verifyEmailLogin } from '@/src/services/authService';
+import { resendRegisterCode, verifyRegister } from '@/src/services/authService';
 import { useAuthStore } from '@/src/store/useAuthStore';
 import { useTranslation } from "react-i18next";
 
@@ -114,7 +114,7 @@ export default function EmailVerificationScreen() {
             setError('');
 
             try {
-                const data = await verifyEmailLogin(paramsEmail || '', codeStr);
+                const data = await verifyRegister(paramsEmail || '', codeStr);
                 successHaptic();
                 useAuthStore.getState().setTokens(data.access_token, data.refresh_token);
                 useAuthStore.getState().setUser(data.user);
@@ -141,7 +141,7 @@ export default function EmailVerificationScreen() {
         lightImpact();
         setResendLoading(true);
         try {
-            await resendCode(paramsEmail || '');
+            await resendRegisterCode(paramsEmail || '');
             setResendCooldown(60);
             Alert.alert(t('forgot_password.success'), t('forgot_password.code_resent'));
         } catch {
