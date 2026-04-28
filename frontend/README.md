@@ -1,136 +1,73 @@
-# Mekan Öneri Platformu - Mobile App
+# React + TypeScript + Vite
 
-Yapay Zeka Destekli Konum Bazlı Kişiselleştirilmiş Mekan Öneri Platformu'nun mobil uygulaması.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Teknolojiler
+Currently, two official plugins are available:
 
-- **React Native** - Cross-platform mobil uygulama framework'ü
-- **TypeScript** - Tip güvenli JavaScript
-- **React Navigation** - Navigasyon kütüphanesi
-- **Axios** - HTTP client
-- **AsyncStorage** - Local storage
-- **Expo** - React Native geliştirme platformu
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
 
-## Kurulum
+## React Compiler
 
-### Gereksinimler
+The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
 
-- Node.js 18+
-- npm veya yarn
-- Expo CLI
-- Android Studio (Android için) veya Xcode (iOS için)
+## Expanding the ESLint configuration
 
-### Adımlar
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-1. Repository'yi klonlayın:
-```bash
-git clone <repository-url>
-cd frontend
+```js
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+
+      // Remove tseslint.configs.recommended and replace with this
+      tseslint.configs.recommendedTypeChecked,
+      // Alternatively, use this for stricter rules
+      tseslint.configs.strictTypeChecked,
+      // Optionally, add this for stylistic rules
+      tseslint.configs.stylisticTypeChecked,
+
+      // Other configs...
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
 ```
 
-2. Bağımlılıkları yükleyin:
-```bash
-npm install
-# veya
-yarn install
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
+
+export default defineConfig([
+  globalIgnores(['dist']),
+  {
+    files: ['**/*.{ts,tsx}'],
+    extends: [
+      // Other configs...
+      // Enable lint rules for React
+      reactX.configs['recommended-typescript'],
+      // Enable lint rules for React DOM
+      reactDom.configs.recommended,
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: ['./tsconfig.node.json', './tsconfig.app.json'],
+        tsconfigRootDir: import.meta.dirname,
+      },
+      // other options...
+    },
+  },
+])
 ```
-
-3. Çevre değişkenlerini ayarlayın:
-```bash
-cp .env.example .env
-# .env dosyasını düzenleyin ve API URL'ini ayarlayın
-```
-
-4. Uygulamayı başlatın:
-```bash
-npm start
-# veya
-yarn start
-```
-
-5. Mobil cihazda çalıştırmak için:
-   - Android: `npm run android`
-   - iOS: `npm run ios`
-   - Web: `npm run web`
-
-## Proje Yapısı
-
-```
-frontend/
-├── src/
-│   ├── components/    # Yeniden kullanılabilir bileşenler
-│   ├── screens/       # Ekran bileşenleri
-│   ├── navigation/    # Navigasyon yapılandırması
-│   ├── services/      # API servisleri
-│   ├── context/       # Context providers
-│   ├── hooks/         # Custom hooks
-│   ├── utils/         # Yardımcı fonksiyonlar
-│   ├── types/         # TypeScript tip tanımları
-│   └── App.tsx        # Ana uygulama bileşeni
-├── android/           # Android native kodları
-├── ios/               # iOS native kodları
-└── package.json       # Bağımlılıklar
-```
-
-## Özellikler
-
-### Authentication
-- Kullanıcı girişi (JWT tabanlı)
-- Kullanıcı kaydı
-- Oturum yönetimi
-
-### Mekanlar
-- Mekan listesi
-- Mekan detay sayfası
-- Kategori bazlı filtreleme
-- Konum bazlı sıralama
-
-### Öneriler (RAG Interface)
-- Doğal dil ile mekan arama
-- Kişiselleştirilmiş öneriler
-- Konum bazlı öneriler
-- Öneri gerekçeleri
-
-## Geliştirme
-
-### Type Checking
-```bash
-npm run type-check
-```
-
-### Linting
-```bash
-npm run lint
-```
-
-### Build
-```bash
-# Android
-npm run android
-
-# iOS
-npm run ios
-```
-
-## Ortam Değişkenleri
-
-`.env` dosyasında şu değişkenler bulunmalı:
-
-- `EXPO_PUBLIC_API_URL` - Backend API URL'i (örn: http://localhost:8000)
-
-## Konfigürasyon
-
-`app.json` dosyasında uygulama ayarları bulunur:
-- Uygulama adı
-- Bundle identifier
-- İzinler (konum erişimi vb.)
-
-## Lisans
-
-MIT
-
-## Katkıda Bulunanlar
-
-- **Ulaş Can Demirtaş** - UI/UX tasarımı, navigasyon, ekranlar
-- **Utku Gülrek** - API entegrasyonu, frontend API servisleri
-
