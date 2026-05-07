@@ -19,12 +19,80 @@ import httpx  # type: ignore[import]
 from datetime import datetime
 import redis  # type: ignore[import]
 
-# .env dosyasını yükle
+# .env dosyasını yükle — her koşulda bulunur
 from dotenv import load_dotenv  # type: ignore[import]
-load_dotenv()
+import pathlib as _pl
+_env_path = _pl.Path(__file__).parent / ".env"
+load_dotenv(dotenv_path=_env_path, override=True)
+
+
+
+import logging
+logger = logging.getLogger(__name__)
 
 # Yorum analizi modülü
 from review_analyzer import fast_extract_insights  # type: ignore[import]
+
+# ==================== KATMANLI LLM (Groq → Local fallback) ====================
+# llm_wrapper.py'dan import; key .env'den otomatik okunur
+import sys, os as _os
+_ai_llm_root = _os.path.dirname(_os.path.abspath(__file__))
+if _ai_llm_root not in sys.path:
+    sys.path.insert(0, _ai_llm_root)
+
+from src.models.llm.llm_wrapper import LayeredLLMWrapper  # type: ignore[import]
+from src.config import settings  # type: ignore[import]
+
+_llm: Optional[LayeredLLMWrapper] = None  # lazy singleton
+
+def _get_llm() -> LayeredLLMWrapper:
+    global _llm
+    if _llm is None:
+        _llm = LayeredLLMWrapper()
+    return _llm
+
+
+async def generate_llm_response(query: str, places: list, parsed_context: dict) -> str:
+    """
+    Katmanlı LLM ile doğal dil yanıtı üretir.
+      Katman 1: Groq Cloud (hızlı, ~1 sn)
+      Katman 2: Local HuggingFace/Gemma (yavaş ama her zaman çalışır)
+    """
+    if not places:
+        return ""
+
+    # Mekan özetleri
+    summaries = []
+    for i, p in enumerate(places[:5], 1):
+        name    = p.get("name", "?")
+        rating  = p.get("rating", 0)
+        address = p.get("address", "")
+        desc    = p.get("description", "")[:100]
+        reason  = p.get("recommendation_reason", "")
+        summaries.append(f"{i}. {name} (⭐{rating}) — {address}. {desc}. Neden: {reason}")
+
+    mood     = parsed_context.get("mood") or "normal"
+    category = parsed_context.get("category", "mekan")
+    district = parsed_context.get("district", "İstanbul")
+    features = ", ".join(parsed_context.get("features", [])) or "belirtilmedi"
+
+    prompt = (
+        f'Kullanıcı sorgusu: "{query}"\n'
+        f"Ruh hali: {mood}, Kategori: {category}, Bölge: {district}, Özellikler: {features}\n\n"
+        f"Bulunan en iyi mekanlar:\n" + "\n".join(summaries) + "\n\n"
+        f"Bu mekanlara dayanarak kişiselleştirilmiş, sıcak bir öneri mesajı yaz."
+    )
+
+    try:
+        llm = _get_llm()
+        response = await llm.generate_async(prompt)
+        print(f"[LLM] Yanit uretildi — provider={llm.active_provider}")
+        return response
+    except Exception as e:
+        print(f"[LLM] Tum katmanlar basarisiz: {e}")
+        return ""
+
+
 
 # ==================== FAZ 2.1: CACHE SYSTEM ====================
 
@@ -68,13 +136,19 @@ class RedisCacheManager:
             return None
 
     def set(self, key: str, data: Dict) -> None:
-        """Redis'e veri yaz (TTL ile)"""
-        payload = json.dumps(data, ensure_ascii=False)
-        self.client.setex(key, self.ttl, payload)
+        """Redis'e veri yaz (TTL ile) - hata olursa sessizce atla"""
+        try:
+            payload = json.dumps(data, ensure_ascii=False)
+            self.client.setex(key, self.ttl, payload)
+        except Exception as e:
+            print(f"[Cache] set hata (atlanıyor): {e}")
 
     def clear(self) -> None:
         """Redis DB temizle"""
-        self.client.flushdb()
+        try:
+            self.client.flushdb()
+        except Exception:
+            pass
 
     def get_stats(self) -> Dict:
         """Cache istatistikleri"""
@@ -204,21 +278,25 @@ async def lifespan(app: FastAPI):
     # 1. Redis Cache - bağlantı yoksa fallback
     try:
         cache_manager = RedisCacheManager(redis_url=redis_url, ttl_seconds=redis_ttl)
-        print(f"[Startup] Cache Manager (Redis): ✓ {redis_url}")
+        print(f"[Startup] Cache Manager (Redis): OK {redis_url}")
     except Exception as e:
-        print(f"[Startup] Redis bağlanamadı ({e}), in-memory fallback kullanılıyor")
+        print(f"[Startup] Redis baglanamadi ({e}), in-memory fallback")
         cache_manager = None
 
-    # 2. Model Preloading
-    model_status = await model_manager.preload_models()
-    print(f"[Startup] Model Preloading: {model_status['status']}")
+    # 2. Model Preloading — ARKA PLANDA (servis hemen baslar)
+    async def _load_models_bg():
+        model_status = await model_manager.preload_models()
+        print(f"[Model] Yukleme tamamlandi: {model_status['status']}")
+
+    asyncio.create_task(_load_models_bg())
+    print(f"[Startup] Model yukleme arka planda baslatildi...")
     print(f"[Startup] Version: 2.1 (Performance Optimized)")
     print("="*60 + "\n")
 
     yield  # Uygulama burada çalışır
 
     # Shutdown
-    print("[Shutdown] Sistem kapatılıyor...")
+    print("[Shutdown] Sistem kapatiliyor...")
 
 
 app = FastAPI(
@@ -270,6 +348,99 @@ class AnalyzeReviewRequest(BaseModel):
     """İsteğe bağlı yorum çekme ve analiz isteği"""
     data_id: str
     place_name: Optional[str] = None
+
+
+class ImageSearchRequest(BaseModel):
+    """Görselden mekan arama isteği"""
+    image_base64: str          # base64 encoded image (data:image/jpeg;base64,... veya salt base64)
+    mime_type: str = "image/jpeg"
+    location: str = "Istanbul"
+    user_lat: Optional[float] = None
+    user_lng: Optional[float] = None
+    limit: int = 5
+    max_distance_km: float = 10.0
+
+
+# ==================== GEMINI VISION HELPER ====================
+
+async def analyze_image_with_llama(image_base64: str, mime_type: str = "image/jpeg") -> dict:
+    """
+    Groq Llama-4-Scout (multimodal) ile gorseli analiz et.
+    Ekstra API key gerektirmez — mevcut GROQ_API_KEY kullanilir.
+    Doner: { query: str, category: str, keywords: list[str], description: str }
+    """
+    import re
+
+    groq_key = os.getenv("GROQ_API_KEY", "")
+    if not groq_key:
+        return {
+            "query": "kafe",
+            "category": "kafe",
+            "keywords": ["kafe"],
+            "description": "GROQ_API_KEY eksik",
+            "error": "no_key"
+        }
+
+    # base64 prefix temizle ve data URL olustur
+    if "base64," in image_base64:
+        image_base64 = image_base64.split("base64,")[1]
+
+    data_url = f"data:{mime_type};base64,{image_base64}"
+
+    prompt = (
+        "Bu gorseli analiz et. Istanbul'da hangi tur mekan aranmali?\n"
+        "Asagidaki JSON formatinda dondef (baska hicbir sey yazma):\n"
+        '{"query":"turkce_arama_sorgusu","category":"kafe|restoran|bar|diger",'
+        '"keywords":["kelime1","kelime2"],"description":"ne gordun"}\n\n'
+        "Ornekler:\n"
+        '- Kahve fincani -> {"query":"espresso latte sicak kahve","category":"kafe","keywords":["kahve","sicak"],"description":"Kahve fincani"}\n'
+        '- Hamburger    -> {"query":"hamburger lezzetli fast food","category":"restoran","keywords":["hamburger"],"description":"Hamburger"}\n'
+        '- Deniz manzarasi -> {"query":"deniz manzarali teras restorani","category":"restoran","keywords":["deniz","manzara"],"description":"Deniz manzarasi"}\n'
+        '- Kokteyl, bar -> {"query":"kokteyl bar gece hayati","category":"bar","keywords":["alkol","bar"],"description":"Kokteyl icecek"}'
+    )
+
+    body = {
+        "model": "meta-llama/llama-4-scout-17b-16e-instruct",
+        "messages": [{
+            "role": "user",
+            "content": [
+                {"type": "text", "text": prompt},
+                {"type": "image_url", "image_url": {"url": data_url}}
+            ]
+        }],
+        "max_tokens": 200,
+        "temperature": 0.1
+    }
+
+    try:
+        async with httpx.AsyncClient(timeout=30.0) as client:
+            r = await client.post(
+                "https://api.groq.com/openai/v1/chat/completions",
+                json=body,
+                headers={
+                    "Authorization": f"Bearer {groq_key}",
+                    "Content-Type": "application/json"
+                }
+            )
+
+        if r.status_code != 200:
+            print(f"[LlamaVision] Hata {r.status_code}: {r.text[:200]}")
+            return {"query": "kafe", "category": "kafe", "keywords": [], "description": "Analiz basarisiz"}
+
+        text = r.json()["choices"][0]["message"]["content"].strip()
+        print(f"[LlamaVision] Ham yanit: {text[:200]}")
+
+        json_match = re.search(r'\{[\s\S]+?\}', text)
+        if json_match:
+            result = json.loads(json_match.group())
+            print(f"[LlamaVision] Gorsel analiz: {result}")
+            return result
+
+        return {"query": text[:80], "category": "kafe", "keywords": [], "description": text}
+
+    except Exception as e:
+        print(f"[LlamaVision] Hata: {e}")
+        return {"query": "mekan", "category": "kafe", "keywords": [], "description": str(e)}
 
 
 
@@ -1020,10 +1191,22 @@ async def smart_search_v2(request: SmartSearchRequest):
             
             place['recommendation_reason'] = " • ".join(reasons) if reasons else "Genel uygunluk"
         
+        # ==================== GROQ LLM DOĞAL DİL CEVABI ====================
+        llm_message = ""
+        if settings.GROQ_API_KEY and reranked_places:
+            try:
+                llm_message = await generate_llm_response(
+                    request.query, reranked_places, parsed
+                )
+            except Exception as e:
+                print(f"[Groq] LLM atlandı: {e}")
+
+        
         response = {
             "query": request.query,
             "found": len(places),
             "recommendations": reranked_places,
+            "ai_message": llm_message,
             "context": {
                 "weather": weather_data.get("condition"),
                 "temperature": weather_data.get("temp")
@@ -1217,6 +1400,57 @@ async def analyze_place_reviews(request: AnalyzeReviewRequest):
             "analysis_text": "Yapay zeka sistemi yorumlara şu anda erişemiyor.",
             "specialties": []
         }
+
+
+# ==================== GÖRSEL ARAMA ====================
+
+@app.post("/api/image-search")
+async def image_search(request: ImageSearchRequest):
+    """
+    Görsel ile mekan arama:
+    1. Görseli Gemini Vision ile analiz et → ne tür mekan istendiğini anla
+    2. Çıkan sorgu ile smart-search-v2 pipeline'ını çalıştır
+    3. Mekan kartlarını döndür
+    """
+    try:
+        # 1. Görsel Analiz
+        print(f"[ImageSearch] Gorsel analiz ediliyor... ({len(request.image_base64)} bytes b64)")
+        vision_result = await analyze_image_with_llama(request.image_base64, request.mime_type)
+
+        detected_query    = vision_result.get("query", "kafe")
+        detected_category = vision_result.get("category", "kafe")
+        description       = vision_result.get("description", "")
+        has_gemini_error  = "error" in vision_result
+
+        print(f"[ImageSearch] Tespit: '{detected_query}' / {detected_category}")
+
+        # 2. Smart Search pipeline'ını çağır (aynı mantık, farklı sorgu)
+        smart_req = SmartSearchRequest(
+            query=detected_query,
+            location=request.location,
+            limit=request.limit,
+            user_lat=request.user_lat,
+            user_lng=request.user_lng,
+            max_distance_km=request.max_distance_km,
+            analyze_reviews=False,
+        )
+        search_result = await smart_search_v2(smart_req)
+
+        # 3. Sonucu zenginleştir
+        return {
+            **search_result,
+            "image_analysis": {
+                "detected_query": detected_query,
+                "category": detected_category,
+                "description": description,
+                "gemini_available": not has_gemini_error,
+            }
+        }
+
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=str(e))
 
 
 if __name__ == "__main__":

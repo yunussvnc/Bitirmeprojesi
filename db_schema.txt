@@ -1,0 +1,239 @@
+
+### public.alembic_version
+  version_num character varying(32) NOT NULL
+
+### public.email_verifications
+  id integer NOT NULL
+  user_id integer NOT NULL
+  verification_code character varying NOT NULL
+  expires_at timestamp with time zone NOT NULL
+  created_at timestamp with time zone DEFAULT now()
+
+### public.follows
+  id integer NOT NULL
+  follower_id integer NOT NULL
+  following_id integer NOT NULL
+  created_at timestamp with time zone DEFAULT now()
+
+### public.match_conversations
+  id integer NOT NULL
+  user1_id integer NOT NULL
+  user2_id integer NOT NULL
+  place_id integer
+  place_name character varying
+  user1_revealed boolean
+  user2_revealed boolean
+  is_active boolean
+  created_at timestamp with time zone DEFAULT now()
+  last_message_at timestamp with time zone
+
+### public.match_likes
+  id integer NOT NULL
+  from_user_id integer NOT NULL
+  to_user_id integer NOT NULL
+  place_id integer
+  action character varying NOT NULL
+  created_at timestamp with time zone DEFAULT now()
+
+### public.match_profiles
+  id integer NOT NULL
+  user_id integer NOT NULL
+  display_name character varying NOT NULL
+  age integer NOT NULL
+  bio text
+  photo_urls text
+  height integer
+  gender character varying
+  education character varying
+  location_text character varying
+  smoking character varying
+  drinking character varying
+  looking_for character varying
+  interests text
+  star_sign character varying
+  family_plans character varying
+  exercise character varying
+  prompts text
+  is_active boolean
+  created_at timestamp with time zone DEFAULT now()
+  updated_at timestamp with time zone
+
+### public.messages
+  id integer NOT NULL
+  conversation_id integer NOT NULL
+  sender_id integer NOT NULL
+  content text NOT NULL
+  message_type character varying
+  media_url character varying
+  shared_post_id integer
+  is_read boolean
+  created_at timestamp with time zone DEFAULT now()
+
+### public.notifications
+  id integer NOT NULL
+  user_id integer NOT NULL
+  type character varying NOT NULL
+  actor_id integer
+  post_id integer
+  is_read boolean
+  created_at timestamp with time zone DEFAULT now()
+
+### public.password_resets
+  id integer NOT NULL
+  user_id integer NOT NULL
+  reset_code character varying NOT NULL
+  expires_at timestamp with time zone NOT NULL
+  attempts integer
+  created_at timestamp with time zone DEFAULT now()
+
+### public.places
+  id integer NOT NULL
+  name character varying
+  address character varying
+  city character varying
+  description text
+  vector_id character varying
+  price_range integer
+  category character varying
+  features text
+  latitude double precision
+  longitude double precision
+  average_rating double precision
+  photo_url character varying
+  video_url character varying
+  campaign_text character varying
+  opening_time character varying
+  closing_time character varying
+
+### public.post_comments
+  id integer NOT NULL
+  user_id integer NOT NULL
+  post_id integer NOT NULL
+  parent_id integer
+  text text NOT NULL
+  created_at timestamp with time zone DEFAULT now()
+
+### public.post_likes
+  id integer NOT NULL
+  user_id integer NOT NULL
+  post_id integer NOT NULL
+  created_at timestamp with time zone DEFAULT now()
+
+### public.post_media
+  id integer NOT NULL
+  post_id integer
+  media_type character varying
+  media_url character varying NOT NULL
+  thumbnail_url character varying
+  duration_seconds integer
+  aspect_ratio double precision
+  width integer
+  height integer
+  order_index integer
+
+### public.posts
+  id integer NOT NULL
+  user_id integer NOT NULL
+  place_id integer
+  caption text
+  post_type character varying
+  like_count integer
+  comment_count integer
+  created_at timestamp with time zone DEFAULT now()
+
+### public.reports
+  id integer NOT NULL
+  reporter_id integer NOT NULL
+  target_type character varying NOT NULL
+  target_id integer NOT NULL
+  reason character varying NOT NULL
+  description text
+  status character varying
+  created_at timestamp with time zone DEFAULT now()
+
+### public.review_media
+  id integer NOT NULL
+  review_id integer
+  media_type character varying
+  media_url character varying NOT NULL
+  thumbnail_url character varying
+  width integer
+  height integer
+  file_size integer
+  duration_seconds integer
+  order_index integer
+  created_at timestamp with time zone DEFAULT now()
+
+### public.reviews
+  id integer NOT NULL
+  user_id integer
+  place_id integer
+  comment_text text
+  rating integer
+  created_at timestamp with time zone DEFAULT now()
+  updated_at timestamp with time zone
+  is_verified boolean
+  verify_method character varying
+  verified_at timestamp with time zone
+  distance_meters integer
+  visit_date timestamp with time zone
+  visit_type character varying
+  spent_amount double precision
+  spent_currency character varying
+  wait_time_minutes integer
+  ordered_items text
+  food_rating integer
+  service_rating integer
+  atmosphere_rating integer
+  value_rating integer
+  cleanliness_rating integer
+  helpful_count integer
+  report_count integer
+  owner_response text
+  owner_response_at timestamp with time zone
+
+### public.saved_places
+  id integer NOT NULL
+  user_id integer NOT NULL
+  place_id integer NOT NULL
+  created_at timestamp with time zone DEFAULT now()
+
+### public.saved_posts
+  id integer NOT NULL
+  user_id integer NOT NULL
+  post_id integer NOT NULL
+  created_at timestamp with time zone DEFAULT now()
+
+### public.stories
+  id integer NOT NULL
+  user_id integer NOT NULL
+  place_id integer NOT NULL
+  media_type character varying NOT NULL
+  media_url character varying NOT NULL
+  thumbnail_url character varying
+  created_at timestamp with time zone DEFAULT now()
+  expires_at timestamp with time zone NOT NULL
+
+### public.user_blocks
+  id integer NOT NULL
+  blocker_id integer NOT NULL
+  blocked_id integer NOT NULL
+  created_at timestamp with time zone DEFAULT now()
+
+### public.users
+  id integer NOT NULL
+  email character varying NOT NULL
+  password_hash character varying NOT NULL
+  username character varying
+  first_name character varying
+  last_name character varying
+  phone_number character varying
+  avatar_url character varying
+  bio character varying
+  birth_date date
+  role character varying
+  is_active boolean
+  is_email_verified boolean
+  push_token character varying
+  push_token_updated_at timestamp with time zone
+  created_at timestamp with time zone DEFAULT now()

@@ -10,6 +10,9 @@ logger = logging.getLogger("asemos")
 settings = get_settings()
 
 SQLALCHEMY_DATABASE_URL = settings.DATABASE_URL
+if SQLALCHEMY_DATABASE_URL.startswith("postgres://"):
+    # Bazı platformlar `postgres://` kullanıyor; SQLAlchemy için normalize et.
+    SQLALCHEMY_DATABASE_URL = "postgresql://" + SQLALCHEMY_DATABASE_URL[len("postgres://") :]
 
 # ---------------------------------------------------------------------------
 # Engine konfigürasyonu — SQLite vs PostgreSQL otomatik ayarlama

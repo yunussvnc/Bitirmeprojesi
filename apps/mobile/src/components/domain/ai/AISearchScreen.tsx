@@ -22,11 +22,13 @@ import {
   Linking,
   ScrollView,
   Keyboard,
+  Alert,
 } from 'react-native';
 import { Image } from 'expo-image';
+import * as ExpoImagePicker from 'expo-image-picker';
 import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '@/src/hooks/useTheme';
-import { smartSearch, checkAIHealth } from '@/src/services/aiService';
+import { smartSearch, checkAIHealth, getAIBaseUrl, imageSearch } from '@/src/services/aiService';
 import type { Place, SmartSearchResponse } from '@/src/types/ai';
 
 // ─── Sabit lokasyonlar ───────────────────────────────────────
@@ -51,18 +53,23 @@ const EXAMPLE_QUERIES = [
 ];
 
 // ─── Mesaj tipleri ────────────────────────────────────────────
-type UserMessage  = { id: string; type: 'user';    text: string };
-type BotMessage   = { id: string; type: 'bot';     text: string };
-type PlacesMessage = { id: string; type: 'places'; places: Place[]; cached: boolean };
-type ErrorMessage  = { id: string; type: 'error';  text: string };
+type UserMessage    = { id: string; type: 'user';    text: string };
+type ImageMessage   = { id: string; type: 'image';   uri: string; detectedQuery?: string };
+type BotMessage     = { id: string; type: 'bot';     text: string };
+type PlacesMessage  = { id: string; type: 'places';  places: Place[]; cached: boolean };
+type ErrorMessage   = { id: string; type: 'error';   text: string };
 type LoadingMessage = { id: string; type: 'loading' };
-type Message = UserMessage | BotMessage | PlacesMessage | ErrorMessage | LoadingMessage;
+type Message = UserMessage | ImageMessage | BotMessage | PlacesMessage | ErrorMessage | LoadingMessage;
 
 // ─── Mekan Kartı ──────────────────────────────────────────────
 function PlaceCard({ place, colors }: { place: Place; colors: any }) {
   const stars = '★'.repeat(Math.round(place.rating)) + '☆'.repeat(5 - Math.round(place.rating));
   const priceSymbol = '₺'.repeat(place.price_level || 1);
   const score = place.rerank_score ? Math.round(place.rerank_score * 100) : null;
+
+  const [reviewModal, setReviewModal] = useState(false);
+  const [reviewData, setReviewData]   = useState<any>(null);
+  const [reviewLoading, setReviewLoading] = useState(false);
 
   const openMaps = () => {
     if (place.latitude && place.longitude) {
@@ -72,6 +79,29 @@ function PlaceCard({ place, colors }: { place: Place; colors: any }) {
       Linking.openURL(url).catch(() =>
         Linking.openURL(`https://maps.google.com/?q=${place.latitude},${place.longitude}`)
       );
+    }
+  };
+
+  const analyzeReviews = async () => {
+    setReviewModal(true);
+    if (reviewData) return;
+    setReviewLoading(true);
+    try {
+      const base = getAIBaseUrl();
+      const res = await fetch(`${base}/api/analyze-place-reviews`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          data_id: place.data_id || '',
+          place_name: place.name,
+        }),
+      });
+      const json = await res.json();
+      setReviewData(json);
+    } catch (e) {
+      setReviewData({ success: false, analysis_text: 'Yorumlar yüklenemedi.' });
+    } finally {
+      setReviewLoading(false);
     }
   };
 
@@ -136,21 +166,117 @@ function PlaceCard({ place, colors }: { place: Place; colors: any }) {
           </View>
         ) : null}
 
-        {/* Haritada aç */}
-        {place.latitude ? (
+        {/* Aksiyon butonları */}
+        <View style={styles.cardActions}>
+          {/* Haritada Aç */}
+          {place.latitude ? (
+            <TouchableOpacity
+              style={[styles.actionBtn, { borderColor: colors.surface.border }]}
+              onPress={openMaps}
+              accessibilityLabel="Haritada aç"
+            >
+              <Ionicons name="map-outline" size={14} color={colors.text.secondary} />
+              <Text style={[styles.actionBtnText, { color: colors.text.secondary }]}>Haritada Aç</Text>
+            </TouchableOpacity>
+          ) : null}
+
+          {/* Yorum Analiz Et */}
           <TouchableOpacity
-            style={[styles.mapsBtn, { borderColor: colors.surface.border }]}
-            onPress={openMaps}
-            accessibilityLabel="Haritada aç"
+            style={[styles.actionBtn, styles.reviewBtn, { borderColor: colors.accent.primary + '60', backgroundColor: colors.accent.primary + '12' }]}
+            onPress={analyzeReviews}
+            accessibilityLabel="Yorumları AI ile analiz et"
           >
-            <Ionicons name="map-outline" size={14} color={colors.text.secondary} />
-            <Text style={[styles.mapsBtnText, { color: colors.text.secondary }]}>Haritada Aç</Text>
+            <Ionicons name="chatbubble-ellipses-outline" size={14} color={colors.accent.primary} />
+            <Text style={[styles.actionBtnText, { color: colors.accent.primary, fontWeight: '600' }]}>
+              🤖 Yorumları Analiz Et
+            </Text>
           </TouchableOpacity>
-        ) : null}
+        </View>
       </View>
+
+      {/* ── Yorum Analiz Modalı ── */}
+      {reviewModal && (
+        <View style={[styles.reviewOverlay, { backgroundColor: colors.background.primary + 'f5' }]}>
+          {/* Kapat */}
+          <TouchableOpacity style={styles.reviewClose} onPress={() => setReviewModal(false)}>
+            <Ionicons name="close-circle" size={28} color={colors.text.secondary} />
+          </TouchableOpacity>
+
+          <Text style={[styles.reviewTitle, { color: colors.text.primary }]}>
+            🤖 AI Yorum Analizi
+          </Text>
+          <Text style={[styles.reviewPlaceName, { color: colors.accent.primary }]}>
+            {place.name}
+          </Text>
+
+          {reviewLoading ? (
+            <View style={styles.reviewLoadingWrap}>
+              <ActivityIndicator size="large" color={colors.accent.primary} />
+              <Text style={[styles.reviewLoadingText, { color: colors.text.secondary }]}>
+                Yorumlar analiz ediliyor...
+              </Text>
+            </View>
+          ) : reviewData ? (
+            <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1 }}>
+              {/* Analiz metni */}
+              <View style={[styles.reviewAnalysisBox, { backgroundColor: colors.surface.elevated, borderColor: colors.surface.border }]}>
+                <Text style={[styles.reviewAnalysisText, { color: colors.text.primary }]}>
+                  {reviewData.analysis_text || 'Analiz metni bulunamadı.'}
+                </Text>
+              </View>
+
+              {/* Specialties */}
+              {reviewData.specialties && reviewData.specialties.length > 0 && (
+                <View style={{ marginTop: 12 }}>
+                  <Text style={[styles.reviewSectionTitle, { color: colors.text.secondary }]}>
+                    ÖNE ÇIKAN ÖZELLİKLER
+                  </Text>
+                  {reviewData.specialties.slice(0, 5).map((s: any, i: number) => (
+                    <View key={i} style={[styles.specialtyRow, { borderColor: colors.surface.border }]}>
+                      <Text style={styles.specialtyEmoji}>{s.emoji}</Text>
+                      <View style={{ flex: 1 }}>
+                        <Text style={[styles.specialtyLabel, { color: colors.text.primary }]}>{s.label}</Text>
+                        <Text style={[styles.specialtyCount, { color: colors.text.tertiary }]}>
+                          {s.mention_count} yorumda geçiyor
+                        </Text>
+                      </View>
+                      {/* Bar */}
+                      <View style={[styles.specialtyBarBg, { backgroundColor: colors.surface.border }]}>
+                        <View style={[styles.specialtyBar, {
+                          backgroundColor: colors.accent.primary,
+                          width: `${Math.min(100, (s.mention_count / 10) * 100)}%`,
+                        }]} />
+                      </View>
+                    </View>
+                  ))}
+                </View>
+              )}
+
+              {/* Highlight tags */}
+              {reviewData.highlight_tags && reviewData.highlight_tags.length > 0 && (
+                <View style={styles.tagWrap}>
+                  {reviewData.highlight_tags.map((tag: string, i: number) => (
+                    <View key={i} style={[styles.tag, { backgroundColor: colors.accent.primary + '20', borderColor: colors.accent.primary + '40' }]}>
+                      <Text style={[styles.tagText, { color: colors.accent.primary }]}>{tag}</Text>
+                    </View>
+                  ))}
+                </View>
+              )}
+
+              {/* Yorum sayısı */}
+              {reviewData.review_count > 0 && (
+                <Text style={[styles.reviewCountText, { color: colors.text.tertiary }]}>
+                  Toplam {reviewData.review_count} yorum analiz edildi
+                </Text>
+              )}
+            </ScrollView>
+          ) : null}
+        </View>
+      )}
     </View>
   );
 }
+
 
 // ─── Ana Ekran ────────────────────────────────────────────────
 export default function AISearchScreen() {
@@ -160,21 +286,21 @@ export default function AISearchScreen() {
   const [selectedLoc, setSelectedLoc]  = useState(LOCATIONS[0]);
   const [isLoading, setIsLoading]      = useState(false);
   const [modelReady, setModelReady]    = useState<boolean | null>(null);
-  const flatRef = useRef<FlatList>(null);
+  const [keyboardVisible, setKeyboardVisible] = useState(false);
 
-  // Backend health check
+  // Klavye aç/kapa — lokasyon barı gizle
   useEffect(() => {
-    checkAIHealth().then(({ ok, modelLoaded }) => {
-      setModelReady(ok && modelLoaded);
-      if (!ok) {
-        setMessages([{
-          id: 'sys-err',
-          type: 'error',
-          text: '⚠️ AI backend bağlantısı kurulamadı. Lütfen backend\'in çalıştığından emin olun (localhost:8080).',
-        }]);
-      }
-    });
+    const show = Keyboard.addListener('keyboardDidShow', () => setKeyboardVisible(true));
+    const hide = Keyboard.addListener('keyboardDidHide', () => setKeyboardVisible(false));
+    return () => { show.remove(); hide.remove(); };
   }, []);
+
+  const clearChat = useCallback(() => {
+    setMessages([]);
+    setInputText('');
+  }, []);
+
+  const flatRef = useRef<FlatList>(null);
 
   const scrollToBottom = useCallback(() => {
     setTimeout(() => flatRef.current?.scrollToEnd({ animated: true }), 100);
@@ -188,6 +314,140 @@ export default function AISearchScreen() {
   const removeLoading = useCallback(() => {
     setMessages(prev => prev.filter(m => m.type !== 'loading'));
   }, []);
+
+  // ─── Görsel arama ───────────────────────────────────────────────
+  const handleImageSearch = useCallback(async () => {
+    if (isLoading) return;
+
+    // Kamera izni iste
+    const { status } = await ExpoImagePicker.requestMediaLibraryPermissionsAsync();
+    if (status !== 'granted') {
+      Alert.alert('İzin Gerekli', 'Fotoğraf seçmek için galeri iznine ihtiyaç var.');
+      return;
+    }
+
+    // Fotoğraf seç: galeri veya kamera
+    Alert.alert(
+      'Görsel Ara 📸',
+      'Bir yemek, içecek veya ortam fotoğrafı seç — AI mekan bulsun!',
+      [
+        {
+          text: 'Kamerayı Aç',
+          onPress: async () => {
+            const camStatus = await ExpoImagePicker.requestCameraPermissionsAsync();
+            if (camStatus.status !== 'granted') {
+              Alert.alert('İzin Gerekli', 'Kamera izni gerekli.');
+              return;
+            }
+            const result = await ExpoImagePicker.launchCameraAsync({
+              mediaTypes: ExpoImagePicker.MediaTypeOptions.Images,
+              quality: 0.6,
+              base64: true,
+            });
+            if (!result.canceled && result.assets[0]) {
+              await _processPickedImage(result.assets[0]);
+            }
+          },
+        },
+        {
+          text: 'Galeriden Seç',
+          onPress: async () => {
+            const result = await ExpoImagePicker.launchImageLibraryAsync({
+              mediaTypes: ExpoImagePicker.MediaTypeOptions.Images,
+              quality: 0.6,
+              base64: true,
+            });
+            if (!result.canceled && result.assets[0]) {
+              await _processPickedImage(result.assets[0]);
+            }
+          },
+        },
+        { text: 'İptal', style: 'cancel' },
+      ],
+    );
+  }, [isLoading]);
+
+  const _processPickedImage = useCallback(async (asset: ExpoImagePicker.ImagePickerAsset) => {
+    if (!asset.base64) {
+      Alert.alert('Hata', 'Görsel alınamadı.');
+      return;
+    }
+
+    Keyboard.dismiss();
+    setIsLoading(true);
+
+    // Görseli sohbete ekle
+    const imgMsg: ImageMessage = {
+      id: Date.now().toString(),
+      type: 'image',
+      uri: asset.uri,
+    };
+    addMessage(imgMsg);
+    addMessage({ id: `loading-${Date.now()}`, type: 'loading' });
+
+    try {
+      const mimeType = asset.mimeType ?? 'image/jpeg';
+      const res = await imageSearch(asset.base64, mimeType, {
+        location: selectedLoc.label,
+        userLat: selectedLoc.lat,
+        userLng: selectedLoc.lng,
+      });
+
+      removeLoading();
+
+      // Görsel analiz sonucunu göster
+      const analysis = (res as any).image_analysis;
+      if (analysis?.description) {
+        // İmage msg'i güncelle — detected query'yi ekle
+        setMessages(prev => prev.map(m =>
+          m.id === imgMsg.id
+            ? { ...m, detectedQuery: analysis.detected_query }
+            : m
+        ));
+      }
+
+      if (!res.recommendations || res.recommendations.length === 0) {
+        addMessage({
+          id: Date.now().toString(),
+          type: 'bot',
+          text: '😔 Bu görsel için uygun mekan bulamadım. Daha net bir fotoğraf dene.',
+        });
+      } else {
+        addMessage({
+          id: Date.now().toString(),
+          type: 'places',
+          places: res.recommendations,
+          cached: res._cache?.hit ?? false,
+        });
+      }
+    } catch (err: any) {
+      removeLoading();
+      addMessage({
+        id: Date.now().toString(),
+        type: 'error',
+        text: `❌ Görsel analiz hatası: ${err?.message ?? 'Bilinmeyen hata'}`,
+      });
+    } finally {
+      setIsLoading(false);
+    }
+  }, [selectedLoc, addMessage, removeLoading]);
+
+
+  // Backend health check
+  useEffect(() => {
+    checkAIHealth().then(({ ok, modelLoaded }) => {
+      setModelReady(ok && modelLoaded);
+      if (!ok) {
+        const aiUrl = getAIBaseUrl();
+        setMessages([{
+          id: 'sys-err',
+          type: 'error',
+          text: `⚠️ AI backend bağlantısı kurulamadı. (${aiUrl})`,
+        }]);
+      }
+    });
+  }, []);
+
 
   const handleSend = useCallback(async (queryOverride?: string) => {
     const text = (queryOverride ?? inputText).trim();
@@ -269,6 +529,27 @@ export default function AISearchScreen() {
       );
     }
 
+    if (item.type === 'image') {
+      return (
+        <View style={styles.userBubbleWrap}>
+          <View style={[styles.imageBubble, { borderColor: colors.accent.primary + '60', backgroundColor: colors.background.secondary }]}>
+            <Image
+              source={{ uri: item.uri }}
+              style={styles.imageBubbleImg}
+              contentFit="cover"
+              transition={200}
+            />
+            {item.detectedQuery && (
+              <View style={[styles.detectedTag, { backgroundColor: colors.accent.primary }]}>
+                <Ionicons name="sparkles" size={10} color="#fff" />
+                <Text style={styles.detectedTagText}>{item.detectedQuery}</Text>
+              </View>
+            )}
+          </View>
+        </View>
+      );
+    }
+
     if (item.type === 'bot') {
       return (
         <View style={styles.botBubbleWrap}>
@@ -309,7 +590,7 @@ export default function AISearchScreen() {
   return (
     <KeyboardAvoidingView
       style={[styles.root, { backgroundColor: colors.background.primary }]}
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      behavior={Platform.OS === 'ios' ? 'padding' : undefined}
       keyboardVerticalOffset={Platform.OS === 'ios' ? 90 : 0}
     >
       {/* ── Header ── */}
@@ -331,40 +612,42 @@ export default function AISearchScreen() {
         </View>
       </View>
 
-      {/* ── Lokasyon seçici ── */}
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        style={[styles.locBar, { backgroundColor: colors.background.secondary }]}
-        contentContainerStyle={styles.locBarContent}
-      >
-        {LOCATIONS.map(loc => (
-          <TouchableOpacity
-            key={loc.label}
-            style={[
-              styles.locChip,
-              {
-                backgroundColor: selectedLoc.label === loc.label
-                  ? colors.accent.primary
-                  : colors.surface.elevated,
-                borderColor: selectedLoc.label === loc.label
-                  ? colors.accent.primary
-                  : colors.surface.border,
-              },
-            ]}
-            onPress={() => setSelectedLoc(loc)}
-            accessibilityLabel={`Konum seç: ${loc.label}`}
-          >
-            <Text style={{
-              fontSize: 12,
-              fontWeight: '500',
-              color: selectedLoc.label === loc.label ? '#fff' : colors.text.secondary,
-            }}>
-              {loc.label}
-            </Text>
-          </TouchableOpacity>
-        ))}
-      </ScrollView>
+      {/* ── Lokasyon seçici — klavye açıkken gizle ── */}
+      {!keyboardVisible && (
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          style={[styles.locBar, { backgroundColor: colors.background.secondary }]}
+          contentContainerStyle={styles.locBarContent}
+        >
+          {LOCATIONS.map(loc => (
+            <TouchableOpacity
+              key={loc.label}
+              style={[
+                styles.locChip,
+                {
+                  backgroundColor: selectedLoc.label === loc.label
+                    ? colors.accent.primary
+                    : colors.surface.elevated,
+                  borderColor: selectedLoc.label === loc.label
+                    ? colors.accent.primary
+                    : colors.surface.border,
+                },
+              ]}
+              onPress={() => setSelectedLoc(loc)}
+              accessibilityLabel={`Konum seç: ${loc.label}`}
+            >
+              <Text style={{
+                fontSize: 11,
+                fontWeight: '500',
+                color: selectedLoc.label === loc.label ? '#fff' : colors.text.secondary,
+              }}>
+                {loc.label}
+              </Text>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
+      )}
 
       {/* ── Mesaj listesi ── */}
       <FlatList
@@ -372,7 +655,11 @@ export default function AISearchScreen() {
         data={messages}
         keyExtractor={item => item.id}
         renderItem={renderItem}
-        contentContainerStyle={styles.chatContent}
+        contentContainerStyle={[
+          styles.chatContent,
+          { paddingBottom: Platform.OS === 'ios' ? 120 : 80 },
+        ]}
+        keyboardShouldPersistTaps="handled"
         ListEmptyComponent={
           <View style={styles.emptyState}>
             <Ionicons name="sparkles-outline" size={48} color={colors.text.tertiary} />
@@ -400,27 +687,75 @@ export default function AISearchScreen() {
         onContentSizeChange={scrollToBottom}
       />
 
-      {/* ── Input ── */}
-      <View style={[styles.inputBar, { backgroundColor: colors.background.secondary, borderTopColor: colors.surface.border }]}>
-        <TextInput
-          style={[styles.input, { backgroundColor: colors.surface.elevated, color: colors.text.primary, borderColor: colors.surface.border }]}
-          placeholder="Nasıl bir mekan arıyorsun?..."
-          placeholderTextColor={colors.text.tertiary}
-          value={inputText}
-          onChangeText={setInputText}
-          onSubmitEditing={() => handleSend()}
-          returnKeyType="send"
-          editable={!isLoading}
-          multiline={false}
-        />
-        <TouchableOpacity
-          style={[styles.sendBtn, { backgroundColor: isLoading || !inputText.trim() ? colors.surface.border : colors.accent.primary }]}
-          onPress={() => handleSend()}
-          disabled={isLoading || !inputText.trim()}
-          accessibilityLabel="Gönder"
-        >
-          <Ionicons name="paper-plane" size={18} color="#fff" />
-        </TouchableOpacity>
+      {/* ── Input Bar ── */}
+      <View style={[
+        styles.inputBar,
+        {
+          backgroundColor: colors.background.secondary,
+          borderTopColor: colors.surface.border,
+          paddingBottom: Platform.OS === 'ios' ? 28 : 10,
+        },
+      ]}>
+        {/* Üst satır: metin + kamera */}
+        <View style={styles.inputRow}>
+          <TextInput
+            style={[styles.input, { backgroundColor: colors.surface.elevated, color: colors.text.primary, borderColor: colors.surface.border }]}
+            placeholder="Nasıl bir mekan arıyorsun?"
+            placeholderTextColor={colors.text.tertiary}
+            value={inputText}
+            onChangeText={setInputText}
+            onSubmitEditing={() => handleSend()}
+            returnKeyType="send"
+            editable={!isLoading}
+            multiline={false}
+          />
+          {/* Kamera — input içinde sağda */}
+          <TouchableOpacity
+            style={[styles.cameraBtn, { backgroundColor: isLoading ? colors.surface.border : colors.accent.primary + '20', borderColor: colors.accent.primary + '40' }]}
+            onPress={handleImageSearch}
+            disabled={isLoading}
+            accessibilityLabel="Fotoğrafla ara"
+          >
+            <Ionicons name="camera" size={18} color={isLoading ? colors.text.tertiary : colors.accent.primary} />
+          </TouchableOpacity>
+        </View>
+
+        {/* Alt satır: Temizle (varsa) + Mekan Ara */}
+        <View style={styles.actionRow}>
+          {messages.length > 0 && (
+            <TouchableOpacity
+              style={[styles.clearBtnBottom, { backgroundColor: colors.surface.elevated, borderColor: colors.surface.border }]}
+              onPress={clearChat}
+              accessibilityLabel="Sohbeti temizle"
+            >
+              <Ionicons name="trash-outline" size={16} color={colors.text.tertiary} />
+              <Text style={[styles.clearBtnText, { color: colors.text.tertiary }]}>Temizle</Text>
+            </TouchableOpacity>
+          )}
+          <TouchableOpacity
+            style={[
+              styles.sendBtn,
+              {
+                backgroundColor: isLoading || !inputText.trim()
+                  ? colors.surface.border
+                  : colors.accent.primary,
+                flex: 1,
+              },
+            ]}
+            onPress={() => handleSend()}
+            disabled={isLoading || !inputText.trim()}
+            accessibilityLabel="Mekan Ara"
+          >
+            {isLoading ? (
+              <ActivityIndicator size="small" color="#fff" />
+            ) : (
+              <>
+                <Ionicons name="search" size={16} color="#fff" />
+                <Text style={styles.sendBtnText}>Mekan Ara</Text>
+              </>
+            )}
+          </TouchableOpacity>
+        </View>
       </View>
     </KeyboardAvoidingView>
   );
@@ -439,17 +774,23 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
+  clearBtn: {
+    flexDirection: 'row', alignItems: 'center', gap: 5,
+    paddingHorizontal: 12, paddingVertical: 7,
+    borderRadius: 20, borderWidth: 1,
+  },
+  clearBtnText: { fontSize: 12, fontWeight: '500' },
   headerLeft: { flexDirection: 'row', alignItems: 'center', gap: 12 },
   avatar: { width: 40, height: 40, borderRadius: 20, alignItems: 'center', justifyContent: 'center' },
   headerTitle: { fontSize: 16, fontWeight: '700' },
   headerStatus: { fontSize: 12, marginTop: 2 },
 
   // Lokasyon bar
-  locBar: { maxHeight: 48, borderBottomWidth: StyleSheet.hairlineWidth },
-  locBarContent: { paddingHorizontal: 12, paddingVertical: 8, gap: 8, flexDirection: 'row' },
+  locBar: { maxHeight: 40, borderBottomWidth: StyleSheet.hairlineWidth },
+  locBarContent: { paddingHorizontal: 10, paddingVertical: 5, gap: 6, flexDirection: 'row' },
   locChip: {
-    paddingHorizontal: 12, paddingVertical: 5,
-    borderRadius: 20, borderWidth: 1,
+    paddingHorizontal: 10, paddingVertical: 4,
+    borderRadius: 16, borderWidth: 1,
   },
 
   // Chat
@@ -461,7 +802,7 @@ const styles = StyleSheet.create({
   userBubbleText: { color: '#fff', fontSize: 14, lineHeight: 20 },
 
   // Bot bubble
-  botBubbleWrap: { alignSelf: 'flex-start', maxWidth: '95%' },
+  botBubbleWrap: { alignSelf: 'stretch', width: '100%' },
   botBubble: { borderRadius: 18, borderBottomLeftRadius: 4, borderWidth: 1, paddingHorizontal: 14, paddingVertical: 10 },
   botBubbleText: { fontSize: 14, lineHeight: 20 },
   botIntro: { fontSize: 13, marginBottom: 8, marginLeft: 2 },
@@ -483,8 +824,9 @@ const styles = StyleSheet.create({
     overflow: 'hidden', marginBottom: 10,
     shadowColor: '#000', shadowOffset: { width: 0, height: 2 },
     shadowOpacity: 0.06, shadowRadius: 8, elevation: 2,
+    width: '100%',
   },
-  cardImage: { width: '100%', height: 160 },
+  cardImage: { width: '100%', aspectRatio: 16 / 9 },
   cardImagePlaceholder: { width: '100%', height: 120, alignItems: 'center', justifyContent: 'center' },
   cardBody: { padding: 14, gap: 4 },
   cardTitleRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
@@ -504,19 +846,97 @@ const styles = StyleSheet.create({
   },
   mapsBtnText: { fontSize: 12 },
 
+  // Aksiyon butonları (yeni)
+  cardActions: { flexDirection: 'row', flexWrap: 'wrap', gap: 8, marginTop: 10 },
+  actionBtn: {
+    flexDirection: 'row', alignItems: 'center', gap: 6,
+    borderWidth: 1, borderRadius: 8, paddingHorizontal: 10,
+    paddingVertical: 6, alignSelf: 'flex-start',
+  },
+  actionBtnText: { fontSize: 12 },
+  reviewBtn: { flex: 1 },
+
+  // Yorum Analiz Modalı
+  reviewOverlay: {
+    position: 'absolute', top: 0, left: 0, right: 0, bottom: 0,
+    borderRadius: 16, padding: 16, zIndex: 10,
+  },
+  reviewClose: { alignSelf: 'flex-end', marginBottom: 4 },
+  reviewTitle: { fontSize: 16, fontWeight: '700', marginBottom: 2 },
+  reviewPlaceName: { fontSize: 13, fontWeight: '600', marginBottom: 12 },
+  reviewLoadingWrap: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: 12 },
+  reviewLoadingText: { fontSize: 13 },
+  reviewAnalysisBox: { borderRadius: 10, borderWidth: 1, padding: 12 },
+  reviewAnalysisText: { fontSize: 13, lineHeight: 20 },
+  reviewSectionTitle: { fontSize: 10, fontWeight: '700', letterSpacing: 1, marginBottom: 8 },
+  specialtyRow: {
+    flexDirection: 'row', alignItems: 'center', gap: 10,
+    paddingVertical: 8, borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+  specialtyEmoji: { fontSize: 22, width: 32, textAlign: 'center' },
+  specialtyLabel: { fontSize: 13, fontWeight: '600' },
+  specialtyCount: { fontSize: 11, marginTop: 1 },
+  specialtyBarBg: { width: 60, height: 4, borderRadius: 2, overflow: 'hidden' },
+  specialtyBar: { height: 4, borderRadius: 2 },
+  tagWrap: { flexDirection: 'row', flexWrap: 'wrap', gap: 6, marginTop: 12 },
+  tag: { paddingHorizontal: 10, paddingVertical: 4, borderRadius: 12, borderWidth: 1 },
+  tagText: { fontSize: 11, fontWeight: '500' },
+  reviewCountText: { fontSize: 11, textAlign: 'center', marginTop: 12 },
+
   // Input bar
   inputBar: {
-    flexDirection: 'row', alignItems: 'center',
-    paddingHorizontal: 12, paddingVertical: 10, gap: 8,
+    flexDirection: 'column',
+    paddingHorizontal: 12, paddingTop: 10, gap: 8,
     borderTopWidth: StyleSheet.hairlineWidth,
   },
+  inputRow: {
+    flexDirection: 'row', alignItems: 'center', gap: 8,
+  },
   input: {
-    flex: 1, borderRadius: 24, borderWidth: 1,
-    paddingHorizontal: 16, paddingVertical: 10,
-    fontSize: 14, maxHeight: 80,
+    flex: 1, borderRadius: 12, borderWidth: 1,
+    paddingHorizontal: 14, paddingVertical: 11,
+    fontSize: 14,
+  },
+  actionRow: {
+    flexDirection: 'row', alignItems: 'center', gap: 8,
   },
   sendBtn: {
-    width: 44, height: 44, borderRadius: 22,
+    flexDirection: 'row', alignItems: 'center', justifyContent: 'center',
+    gap: 8, borderRadius: 12, paddingVertical: 12,
+  },
+  sendBtnText: {
+    color: '#fff', fontSize: 15, fontWeight: '700',
+  },
+  cameraBtn: {
+    width: 44, height: 44, borderRadius: 12,
     alignItems: 'center', justifyContent: 'center',
+    borderWidth: 1,
+  },
+  clearBtn: {
+    flexDirection: 'row', alignItems: 'center', gap: 4,
+    paddingHorizontal: 10, paddingVertical: 6,
+    borderRadius: 16, borderWidth: 1,
+  },
+  clearBtnBottom: {
+    flexDirection: 'row', alignItems: 'center', gap: 5,
+    paddingHorizontal: 12, paddingVertical: 12,
+    borderRadius: 12, borderWidth: 1,
+  },
+  clearBtnText: { fontSize: 13, fontWeight: '600' },
+
+  // Görsel mesaj balonu
+  imageBubble: {
+    borderWidth: 2, borderRadius: 16, overflow: 'hidden',
+    maxWidth: 220, alignSelf: 'flex-end',
+  },
+  imageBubbleImg: {
+    width: 220, height: 165,
+  },
+  detectedTag: {
+    flexDirection: 'row', alignItems: 'center', gap: 4,
+    paddingHorizontal: 10, paddingVertical: 5,
+  },
+  detectedTagText: {
+    color: '#fff', fontSize: 11, fontWeight: '600', flex: 1, flexWrap: 'wrap',
   },
 });

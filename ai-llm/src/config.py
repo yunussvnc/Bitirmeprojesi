@@ -27,8 +27,12 @@ class Settings(BaseSettings):
     QDRANT_COLLECTION_NAME: str = "mekan_embeddings"
     
     # LLM Ayarları
-    LLM_PROVIDER: str = "huggingface"  # huggingface (Gemma 2)
-    
+    LLM_PROVIDER: str = "layered"
+
+    # Groq API
+    GROQ_API_KEY: str = ""
+    GROQ_MODEL: str = "llama-3.1-8b-instant"
+
     # HuggingFace/Gemma 2 Model Ayarları
     HUGGINGFACE_MODEL: str = "google/gemma-2-2b-it"  # Gemma 2 (2B - hızlı)
     # Gemma 2 model seçenekleri:
@@ -49,6 +53,22 @@ class Settings(BaseSettings):
     
     # Backend API URL (Mekan verilerini almak için)
     BACKEND_API_URL: str = "http://localhost:8000"
+
+    # PostgreSQL — Doğrudan DB bağlantısı
+    DATABASE_URL: str = "postgresql://postgres:123@localhost:5432/ai_mekan_oneri_db"
+
+    @property
+    def database_url_normalized(self) -> str:
+        """
+        Bazı platformlar `postgres://` şeması döndürebilir.
+        SQLAlchemy ve psycopg2 için `postgresql://` ile normalize ediyoruz.
+        """
+        if self.DATABASE_URL.startswith("postgres://"):
+            return "postgresql://" + self.DATABASE_URL[len("postgres://") :]
+        return self.DATABASE_URL
+
+    # Google Maps Places API (New)
+    GOOGLE_MAPS_API_KEY: str = ""
     
     class Config:
         env_file = ".env"

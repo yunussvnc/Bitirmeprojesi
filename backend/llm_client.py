@@ -103,12 +103,32 @@ def groq_generate(prompt: str) -> str:
 
 
 def llm_generate(prompt: str) -> str:
-    provider = settings.LLM_PROVIDER.lower()
-    if provider == "openai":
-        return openai_generate(prompt)
-    if provider == "groq":
-        return groq_generate(prompt)
-    return ollama_generate(prompt)
+    """
+    LLM çağrısı — Groq önce, başarısız olursa scoring fallback.
+
+    Katman 1 → Groq Cloud  (~0.5 sn, ücretsiz kota)
+    Katman 2 → ""  → llm_recommend scoring fallback'e düşer
+               (LLM olmadan puan sırasıyla sonuç üretir, her zaman çalışır)
+
+    Not: Ollama kaldırıldı (5GB+ yük, Groq + scoring yeterli).
+    """
+    import logging
+    log = logging.getLogger(__name__)
+
+    # --- Groq ---
+    if settings.GROQ_API_KEY:
+        try:
+            result = groq_generate(prompt)
+            if result:
+                log.info("[LLM] Yanıt: Groq ✓")
+                return result
+            log.warning("[LLM] Groq boş yanıt döndü")
+        except Exception as e:
+            log.warning(f"[LLM] Groq başarısız → scoring fallback: {e}")
+
+    # --- Scoring fallback ---
+    log.info("[LLM] LLM atlandı — llm_recommend scoring fallback aktif")
+    return ""
 
 
 def build_recommend_prompt(

@@ -1,275 +1,150 @@
-# Mekan Öneri Platformu - AI/LLM Service
+# AI-LLM Place Discovery Service
 
-Yapay Zeka Destekli Konum Bazlı Kişiselleştirilmiş Mekan Öneri Platformu'nun AI servisi. RAG (Retrieval-Augmented Generation) mimarisi kullanarak kişiselleştirilmiş mekan önerileri üretir.
+Semantic place search and recommendation service built for the `AsEmOs` graduation project. The repository combines a FastAPI service, a Qdrant-backed vector search layer, and an interactive CLI chatbot that understands natural-language venue requests in Turkish.
 
-## Teknolojiler
+## Problem
 
-- **FastAPI** - API servisi
-- **PyTorch** - Deep learning framework
-- **Qdrant** - Vektör veritabanı
-- **Sentence Transformers** - Embedding modelleri
-- **Gemma 2** - Google'ın açık kaynak LLM'i (2B/9B modeller)
-- **HuggingFace Transformers** - Model inference
+Traditional location search is keyword-heavy and brittle. This project lets users describe intent in natural language, such as "sessiz wifi olan calisma mekani" or "deniz manzarali romantik aksam yemegi", then ranks venues by semantic similarity, nearby distance, and optional LLM reasoning.
 
-## Mimari
+## What It Does
 
-### RAG (Retrieval-Augmented Generation)
+- Semantic venue search with multilingual sentence embeddings
+- Location-aware ranking with distance calculation
+- Interactive CLI chatbot with built-in example prompts and location presets
+- Optional AI query analysis through a layered LLM setup
+- Qdrant vector storage for retrieval and reusable test tooling
 
-Sistem, şu adımları izleyerek öneriler üretir:
+## Architecture
 
-1. **Retrieval**: Kullanıcı sorgusunu vektör araması ile ilgili mekanları bulur
-2. **Augmentation**: Bulunan mekanları LLM'e context olarak sağlar
-3. **Generation**: LLM kişiselleştirilmiş öneri metni üretir
-
-### Bileşenler
-
-- **Embedding Model**: Türkçe metinleri vektörlere dönüştürür
-- **Vector Database (Qdrant)**: Mekan açıklamalarının embedding'lerini saklar
-- **LLM (Gemma 2)**: Öneri metinleri üretir
-- **RAG Pipeline**: Retrieval ve generation'ı birleştirir
-
-## Kurulum
-
-### Gereksinimler
-
-- Python 3.9+
-- CUDA (GPU için, opsiyonel)
-- Docker (Qdrant için)
-
-### Adımlar
-
-1. Repository'yi klonlayın:
-```bash
-git clone <repository-url>
-cd ai-llm
+```text
+User query
+  -> sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2
+  -> semantic retrieval from Qdrant
+  -> top-k filtering with thresholding
+  -> distance calculation and ranking output
+  -> optional LLM explanation (Groq -> local Gemma fallback)
 ```
 
-2. Virtual environment oluşturun:
-```bash
-python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
+## Results
+
+Validated metrics from `docs/TEST_RESULTS.md`:
+
+- 5/5 location-aware search tests passed
+- 22 venues returned across the test suite
+- 2.086 s average response time
+- 75 ms fastest response after warm-up
+- 10.033 s cold-start response on the first query
+- 0.548 average similarity score
+- 0.4 similarity threshold and top 5 result limit
+
+Additional current system facts:
+
+- Qdrant collection stores 198 real Istanbul venues in the service flow
+- The interactive CLI supports popular preset locations such as Taksim, Kadikoy, Besiktas, Sultanahmet, and Nisantasi
+- The chatbot can fall back from live search to local vector retrieval when needed
+
+## Data
+
+- `data/loaded_places.json`: loaded venue snapshot for local/vector-based testing
+- `data/google_maps_places.json`: raw place data gathered from external search sources
+- Source fields include venue name, category, address, coordinates, rating, and review count
+
+## Tech Stack
+
+- Python, FastAPI, Uvicorn
+- Qdrant, Redis
+- Sentence Transformers, Transformers, Torch
+- Groq Cloud and local HuggingFace Gemma fallback
+- SerpAPI / Google Maps data ingestion utilities
+
+## Project Structure
+
+```text
+ai-llm/
+├── app.py
+├── chatbot_interaktif.py
+├── env.example
+├── requirements.txt
+├── data/
+├── docs/
+├── scripts/
+├── src/
+│   ├── api/
+│   ├── models/
+│   ├── rag/
+│   ├── recommendation/
+│   └── vector_db/
+└── tests/
 ```
 
-3. Bağımlılıkları yükleyin:
+## How To Run
+
+### 1. Install dependencies
+
 ```bash
 pip install -r requirements.txt
 ```
 
-4. Çevre değişkenlerini ayarlayın:
-```bash
-cp .env.example .env
-# .env dosyasını düzenleyin
-```
-
-5. Qdrant'ı başlatın (Docker kullanarak):
-
-**Docker Compose ile (Önerilen):**
-```bash
-docker-compose up -d
-```
-
-**Veya direkt Docker Run ile:**
-```bash
-docker run -d -p 6333:6333 -p 6334:6334 -v $(pwd)/qdrant_storage:/qdrant/storage qdrant/qdrant
-```
-
-**Windows PowerShell:**
-```powershell
-docker run -d -p 6333:6333 -p 6334:6334 -v ${PWD}\qdrant_storage:/qdrant/storage qdrant/qdrant
-```
-
-**Test için (basit, veri kalıcı değil):**
-```bash
-docker run -p 6333:6333 qdrant/qdrant
-```
-
-6. Vektör veritabanını hazırlayın:
-```python
-# scripts/prepare_vector_db.py çalıştırılacak
-```
-
-7. Uygulamayı başlatın:
-```bash
-uvicorn src.main:app --reload --port 8001
-```
-
-API dokümantasyonuna http://localhost:8001/docs adresinden erişebilirsiniz.
-
-## Proje Yapısı
-
-```
-ai-llm/
-├── src/
-│   ├── api/              # API endpoint'leri
-│   ├── rag/              # RAG sistemi (retriever, generator, pipeline)
-│   ├── recommendation/   # Öneri motoru
-│   ├── models/           # ML modelleri (embeddings, LLM)
-│   ├── vector_db/        # Qdrant client
-│   ├── data/             # Veri işleme (collectors, preprocessors, loaders)
-│   ├── config.py         # Konfigürasyon
-│   └── main.py           # FastAPI uygulaması
-├── data/                 # Ham ve işlenmiş veriler
-│   ├── raw/
-│   ├── processed/
-│   └── embeddings/
-├── notebooks/            # Jupyter notebook'lar (araştırma)
-├── tests/                # Test dosyaları
-└── requirements.txt      # Python bağımlılıkları
-```
-
-## Hızlı Başlangıç
-
-Detaylı kullanım için [USAGE.md](USAGE.md) dosyasına bakın.
-
-### Local LLM Kullanımı
-
-Local (yerel) LLM kullanmak için [LOCAL_LLM_SETUP.md](LOCAL_LLM_SETUP.md) kılavuzuna bakın.
-
-### Fine-Tuning (Model Eğitimi)
-
-**Önemli**: OpenAI modelleri kapalı kaynak olduğu için indirilemez. Bunun yerine açık kaynak modelleri (Qwen2, TinyLlama) lokal olarak fine-tune edebilirsiniz.
-
-Fine-tuning için [FINE_TUNING_GUIDE.md](FINE_TUNING_GUIDE.md) kılavuzuna bakın.
-
-### Temel Adımlar
-
-1. Bağımlılıkları yükle: `pip install -r requirements.txt`
-2. `.env` dosyasını oluştur ve OpenAI API key ekle
-3. Qdrant'ı başlat: `docker-compose up -d`
-4. Vektör DB'yi hazırla: `python scripts/prepare_vector_db.py`
-5. Servisi başlat: `uvicorn src.main:app --reload --port 8001`
-
-## Kullanım
-
-### API Endpoint
-
-**POST** `/api/v1/recommend`
-
-**Request:**
-```json
-{
-  "kullanici_metni": "Sakin bir kafe arıyorum, wifi olmalı",
-  "enlem": 41.0082,
-  "boylam": 28.9784,
-  "kategori": "Kafe",
-  "kullanici_id": 1
-}
-```
-
-**Response:**
-```json
-{
-  "sorgu_analizi": "Kullanıcı sakin bir ortamda wifi bağlantısı olan bir kafe arıyor.",
-  "oneriler": [
-    {
-      "mekan_id": 123,
-      "ad": "Sakin Kafe",
-      "aciklama": "...",
-      "kategori": "Kafe",
-      "enlem": 41.0083,
-      "boylam": 28.9785,
-      "adres": "...",
-      "benzerlik_skoru": 0.92,
-      "gerekce": "Sakin ortam ve güçlü wifi bağlantısı ile öne çıkıyor."
-    }
-  ]
-}
-```
-
-## Veri Hazırlama
-
-1. Mekan verilerini toplayın (Backend API'den veya manuel)
-2. Verileri ön işleyin
-3. Embedding'leri oluşturun
-4. Qdrant'a yükleyin
-
-## Model Eğitimi
-
-Embedding modeli önceden eğitilmiş modeller kullanır. Türkçe için:
-- `sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2`
-
-Custom model eğitimi için `notebooks/` klasörüne bakın.
-
-## Geliştirme
-
-### Test Çalıştırma
-```bash
-pytest
-```
-
-### Code Formatting
-```bash
-black .
-isort .
-```
-
-### Linting
-```bash
-flake8 .
-mypy .
-```
-
-## Test
-
-### Konum Bazlı Arama Testleri
-
-Sistemin konum bazlı arama özelliğini test etmek için:
+### 2. Configure environment variables
 
 ```bash
-# Hızlı test
-python tests/test_konum_basit.py
-
-# Detaylı rapor
-python tests/test_konum_rapor.py
-
-# Debug testi
-python tests/test_qdrant_debug.py
+cp env.example .env
 ```
 
-**Test Sonuçları:** [docs/TEST_RESULTS.md](docs/TEST_RESULTS.md) dosyasında detaylı test sonuçları bulabilirsiniz.
+Required runtime values depend on the mode you use:
 
-#### Başarılı Test Örnekleri
+- `QDRANT_URL`
+- `SERPAPI_KEY` for live place search
+- `GROQ_API_KEY` for the cloud LLM layer
+- `GOOGLE_MAPS_API_KEY` only if you use Google Maps based scripts
 
-✅ **5/5 test başarılı**
-- Toplam 22 mekan bulundu
-- Ortalama benzerlik skoru: 0.548
-- En yüksek skor: 0.826 (Deniz manzaralı cafe)
+### 3. Start the API service
 
-**Test Senaryoları:**
-1. ☕ Sultanahmet - "kahve icmek istiyorum" → Kahve Durağı (0.681)
-2. 💻 Taksim - "sessiz calisma mekani" → Sakin Köşe Kafe (0.494)  
-3. 🍳 Kadıköy - "guzel kahvalti" → Meyhane Sofrası (0.468)
-4. 🍽️ Nişantaşı - "sik restoran romantic" → Şato Restaurant (0.723)
-5. 🌊 Beşiktaş - "deniz manzarali cafe" → Deniz Yıldızı Cafe (0.826)
+```bash
+uvicorn app:app --reload --port 8080
+```
 
-## 📚 Dokümantasyon
+### 4. Run the interactive chatbot
 
-Detaylı dokümantasyon için `docs/` klasörüne bakın:
+```bash
+python chatbot_interaktif.py
+```
 
-- **[CHATBOT_KULLANIM.md](docs/CHATBOT_KULLANIM.md)** - İnteraktif chatbot kullanım kılavuzu
-- **[TEST_RESULTS.md](docs/TEST_RESULTS.md)** - Detaylı test sonuçları
-- **[USAGE.md](docs/USAGE.md)** - Kullanım örnekleri
-- **[DOCKER_QDRANT.md](docs/DOCKER_QDRANT.md)** - Qdrant Docker kurulumu
-- **[FINE_TUNING_GUIDE.md](docs/FINE_TUNING_GUIDE.md)** - Model fine-tuning kılavuzu
-- **[LOCAL_LLM_SETUP.md](docs/LOCAL_LLM_SETUP.md)** - Yerel LLM kurulumu
-- **[CHANGELOG.md](docs/CHANGELOG.md)** - Değişiklik geçmişi
+## Interactive CLI Commands
 
-## Ortam Değişkenleri
+| Command | Description |
+| --- | --- |
+| Type any text | Search for a venue with natural language |
+| `ornek` | Show sample prompt categories |
+| `konum` | Change the current location |
+| `yardim` | Print the help menu |
+| `cikis` | Exit the chatbot |
 
-`.env` dosyasında şu değişkenler bulunmalı:
+## Example Queries
 
-- `QDRANT_URL` - Qdrant server URL'i
-- `QDRANT_API_KEY` - Qdrant API key (opsiyonel)
-- `LLM_PROVIDER` - LLM sağlayıcısı (huggingface)
-- `HUGGINGFACE_MODEL` - Model adı (google/gemma-2-2b-it veya google/gemma-2-9b-it)
-- `EMBEDDING_MODEL` - Embedding model adı
-- `BACKEND_API_URL` - Backend API URL'i
+- `kahve icmek istiyorum`
+- `yorgunum sessiz dinlenmek istiyorum`
+- `ailecek gidebilecegimiz cocuk oyun alani olan`
+- `deniz manzarali romantik aksam yemegi`
 
-## Lisans
+## API Endpoints
 
-MIT
+| Endpoint | Method | Description |
+| --- | --- | --- |
+| `/health` | GET | Health check |
+| `/api/info` | GET | Service stats and configuration info |
+| `/api/smart-search-v2` | POST | Natural-language venue search |
+| `/api/analyze-place-reviews` | POST | Review insight extraction |
 
-## Katkıda Bulunanlar
+## Demo Assets
 
-- **Yunusemre Sevinç** - LLM/RAG mimarisi, öneri algoritmaları, vektör veritabanı
+Add screenshots or terminal captures under `screenshots/`:
 
+- chatbot start screen
+- example query and ranked output
+
+## Notes
+
+- The first request can be slow because the embedding or LLM model loads lazily
+- The local CLI and the broader service share core retrieval pieces but support different operating modes
+- Secrets must stay in `.env`; do not hardcode API keys into source files

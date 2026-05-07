@@ -89,6 +89,7 @@ def _normalize_serpapi_place(place: Dict) -> Dict:
         "puan": place.get("rating", 0.0),
         "yorum_sayisi": place.get("review_count", 0),
         "data_id": place.get("data_id", ""),
+        "foto": place.get("photo_url") or place.get("thumbnail") or "",
         "kaynak": "serpapi",
         "yukleme_tarihi": datetime.now().isoformat()
     }
@@ -99,51 +100,139 @@ def _normalize_serpapi_place(place: Dict) -> Dict:
 def fetch_from_backend(api_url: Optional[str] = None) -> List[Dict]:
     """
     Backend API'den mekan verisi çeker.
-    
-    Args:
-        api_url: Backend URL (None ise .env'den alır)
-    
-    Returns:
-        Normalize edilmiş mekan listesi
+    Önce /places endpoint'ini dener, olmadıysa direkt PostgreSQL'e geçer.
     """
     import httpx
-    
+
     url = api_url or settings.BACKEND_API_URL
-    
-    print(f"\n  🌐 Backend: {url}/api/v1/mekanlar")
-    
+
+    # Olası endpoint'leri dene
+    endpoints = [
+        f"{url}/places",
+        f"{url}/api/v1/places",
+        f"{url}/api/v1/mekanlar",
+        f"{url}/mekanlar",
+    ]
+
+    for endpoint in endpoints:
+        try:
+            print(f"\n  🌐 Deneniyor: {endpoint}")
+            with httpx.Client(timeout=10) as client:
+                response = client.get(endpoint, params={"limit": 1000})
+                if response.status_code == 200:
+                    data = response.json()
+                    # List veya dict içinde items/places olabilir
+                    mekanlar = data if isinstance(data, list) else \
+                               data.get("items", data.get("places", data.get("data", [])))
+                    if mekanlar:
+                        print(f"  ✅ {len(mekanlar)} mekan alındı ({endpoint})")
+                        return [_normalize_backend_place(m) for m in mekanlar]
+        except Exception:
+            continue
+
+    print("  ⚠️  Backend API yanıt vermedi → PostgreSQL doğrudan bağlantı deneniyor...")
+    return fetch_from_postgres()
+
+
+def fetch_from_postgres(db_url: Optional[str] = None) -> List[Dict]:
+    """
+    PostgreSQL places tablosunu doğrudan okur.
+    Backend API çalışmıyor olsa bile veri alır.
+    """
     try:
-        with httpx.Client(timeout=30) as client:
-            response = client.get(f"{url}/api/v1/mekanlar", params={"limit": 1000})
-            response.raise_for_status()
-            mekanlar = response.json()
-            
-            print(f"  ✅ Backend'den {len(mekanlar)} mekan alındı")
-            return [_normalize_backend_place(m) for m in mekanlar]
-    
-    except httpx.ConnectError:
-        print(f"  ❌ Backend'e bağlanılamıyor: {url}")
-        print("  💡 Backend'i başlatın: uvicorn src.main:app --port 8000")
+        import psycopg2
+        import psycopg2.extras
+    except ImportError:
+        print("  ❌ psycopg2 yüklü değil: pip install psycopg2-binary")
+        return []
+
+    url = db_url or settings.database_url_normalized
+
+    if not url:
+        print("  ❌ DATABASE_URL tanımlı değil (.env'e ekleyin)")
+        return []
+
+    print(f"\n  🗄️  PostgreSQL: {url.split('@')[-1]}")
+
+    try:
+        conn = psycopg2.connect(url, connect_timeout=5)
+        cur = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+
+        cur.execute("""
+            SELECT
+                p.id,
+                p.name,
+                p.description,
+                p.category,
+                p.address,
+                p.city,
+                p.latitude,
+                p.longitude,
+                p.average_rating,
+                p.features,
+                p.photo_url,
+                p.price_range,
+                COUNT(r.id) AS review_count
+            FROM places p
+            LEFT JOIN reviews r ON r.place_id = p.id
+            GROUP BY p.id
+            ORDER BY p.id;
+        """)
+
+        rows = cur.fetchall()
+        conn.close()
+
+        if not rows:
+            print("  ⚠️  places tablosu boş")
+            return []
+
+        print(f"  ✅ PostgreSQL'den {len(rows)} mekan alındı")
+        return [_normalize_postgres_place(dict(r)) for r in rows]
+
+    except psycopg2.OperationalError as e:
+        print(f"  ❌ PostgreSQL bağlantı hatası: {e}")
+        print("  💡 PostgreSQL çalışıyor mu? docker compose up -d postgres")
         return []
     except Exception as e:
-        print(f"  ❌ Backend hatası: {e}")
+        print(f"  ❌ PostgreSQL hatası: {e}")
         return []
+
+
+def _normalize_postgres_place(row: Dict) -> Dict:
+    """PostgreSQL places satırını standart formata dönüştür"""
+    return {
+        "id":          row.get("id", 0),
+        "ad":          row.get("name", ""),
+        "aciklama":    row.get("description", "") or "",
+        "kategori":    row.get("category", "Diğer") or "Diğer",
+        "adres":       f"{row.get('address', '')} {row.get('city', '')}".strip(),
+        "enlem":       float(row.get("latitude") or 0.0),
+        "boylam":      float(row.get("longitude") or 0.0),
+        "puan":        float(row.get("average_rating") or 0.0),
+        "yorum_sayisi": int(row.get("review_count") or 0),
+        "data_id":     str(row.get("id", "")),
+        "ozellikler":  row.get("features", "") or "",
+        "foto":        row.get("photo_url", "") or "",
+        "kaynak":      "postgresql",
+        "yukleme_tarihi": datetime.now().isoformat()
+    }
 
 
 def _normalize_backend_place(mekan: Dict) -> Dict:
     """Backend mekan verisini standart formata dönüştür"""
     return {
-        "id": mekan.get("id", 0),
-        "ad": mekan.get("ad", mekan.get("name", "")),
-        "aciklama": mekan.get("aciklama", mekan.get("description", "")),
-        "kategori": mekan.get("kategori", mekan.get("category", "Diğer")),
-        "adres": mekan.get("adres", mekan.get("address", "")),
-        "enlem": mekan.get("enlem", mekan.get("latitude", 0.0)),
-        "boylam": mekan.get("boylam", mekan.get("longitude", 0.0)),
-        "puan": mekan.get("puan", mekan.get("rating", 0.0)),
-        "yorum_sayisi": mekan.get("yorum_sayisi", mekan.get("review_count", 0)),
-        "data_id": mekan.get("data_id", ""),
-        "kaynak": "backend",
+        "id":          mekan.get("id", 0),
+        "ad":          mekan.get("name", mekan.get("ad", "")),
+        "aciklama":    mekan.get("description", mekan.get("aciklama", "")),
+        "kategori":    mekan.get("category", mekan.get("kategori", "Diğer")),
+        "adres":       mekan.get("address", mekan.get("adres", "")),
+        "enlem":       float(mekan.get("latitude", mekan.get("enlem", 0.0)) or 0.0),
+        "boylam":      float(mekan.get("longitude", mekan.get("boylam", 0.0)) or 0.0),
+        "puan":        float(mekan.get("average_rating", mekan.get("puan", 0.0)) or 0.0),
+        "yorum_sayisi": mekan.get("review_count", mekan.get("yorum_sayisi", 0)),
+        "data_id":     mekan.get("data_id", ""),
+        "foto":        mekan.get("photo_url") or mekan.get("foto") or "",
+        "kaynak":      "backend",
         "yukleme_tarihi": datetime.now().isoformat()
     }
 
@@ -273,6 +362,7 @@ def load_to_qdrant(mekanlar: List[Dict], batch_size: int = 50) -> Dict:
                         "puan": mekan.get("puan", 0.0),
                         "yorum_sayisi": mekan.get("yorum_sayisi", 0),
                         "data_id": mekan.get("data_id", ""),
+                        "foto": mekan.get("foto") or mekan.get("photo_url") or "",
                         "kaynak": mekan.get("kaynak", ""),
                     }
                 )
@@ -394,9 +484,9 @@ def main():
     
     parser.add_argument(
         "--source",
-        choices=["serpapi", "backend", "both", "sample"],
+        choices=["serpapi", "backend", "postgres", "both", "all", "sample"],
         default="sample",
-        help="Veri kaynağı (varsayılan: sample)"
+        help="Veri kaynak: serpapi | backend | postgres | both | all | sample"
     )
     parser.add_argument(
         "--queries",
@@ -438,22 +528,28 @@ def main():
     print("📥 VERİ TOPLANIYOR")
     print("-"*40)
     
-    if args.source in ("serpapi", "both"):
-        print("\n[SerpAPI] Google Maps'ten mekanlar çekiliyor...")
+    if args.source in ("serpapi", "both", "all"):
+        print("\n[SerpAPI] Google Maps'ten mekanlar cekiliyor...")
         serpapi_places = fetch_from_serpapi(args.queries, args.limit)
         all_places.extend(serpapi_places)
-        print(f"[SerpAPI] ✅ {len(serpapi_places)} mekan alındı")
-    
-    if args.source in ("backend", "both"):
-        print("\n[Backend] API'den mekanlar çekiliyor...")
+        print(f"[SerpAPI] {len(serpapi_places)} mekan alindi")
+
+    if args.source in ("backend", "both", "all"):
+        print("\n[Backend] API + PostgreSQL fallback...")
         backend_places = fetch_from_backend()
         all_places.extend(backend_places)
-        print(f"[Backend] ✅ {len(backend_places)} mekan alındı")
-    
+        print(f"[Backend/DB] {len(backend_places)} mekan alindi")
+
+    if args.source in ("postgres",):
+        print("\n[PostgreSQL] Direkt veritabani baglantisi...")
+        pg_places = fetch_from_postgres()
+        all_places.extend(pg_places)
+        print(f"[PostgreSQL] {len(pg_places)} mekan alindi")
+
     if args.source == "sample":
-        print("\n[Örnek] Hazır İstanbul mekan verisi kullanılıyor...")
+        print("\n[Ornek] Hazir Istanbul mekan verisi kullaniliyor...")
         all_places = load_sample_data()
-        print(f"[Örnek] ✅ {len(all_places)} mekan hazırlandı")
+        print(f"[Ornek] {len(all_places)} mekan hazir")
     
     if not all_places:
         print("\n❌ Hiç mekan verisi alınamadı. Çıkılıyor.")

@@ -1,5 +1,6 @@
+# -*- coding: utf-8 -*-
 """
-SerpApi Client - Google Maps Places verisi çekmek için
+SerpApi Client - Google Maps Places verisi cekmek icin
 Basitleştirilmiş versiyon (demo için)
 """
 
@@ -63,18 +64,18 @@ class SerpApiClient:
         else:
             params["ll"] = "@41.0082,28.9784,11z"  # İstanbul merkez
             
-        print(f"🔍 Aranıyor: {query} (Konum: {params['ll']})")
+        print(f"[SerpApi] Araniyor: {query} (Konum: {params['ll']})")
         
         try:
             response = requests.get(self.BASE_URL, params=params, timeout=30)
             response.raise_for_status()
             data = response.json()
         except requests.RequestException as e:
-            print(f"❌ API hatası: {e}")
+            print(f"[SerpApi] API hatasi: {e}")
             return []
         
         if "error" in data:
-            print(f"❌ SerpApi hatası: {data['error']}")
+            print(f"[SerpApi] Hata: {data['error']}")
             return []
         
         local_results = data.get("local_results", [])
@@ -85,7 +86,7 @@ class SerpApiClient:
             if place:
                 places.append(place)
         
-        print(f"✅ {len(places)} mekan bulundu")
+        print(f"[SerpApi] {len(places)} mekan bulundu")
         return places
     
     def _parse_place(self, item: Dict) -> Optional[Dict]:
@@ -110,14 +111,32 @@ class SerpApiClient:
                 "review_count": item.get("reviews", 0),
                 "price_level": price_level,
                 "category": item.get("type", "Kafe"),
-                "photo_url": item.get("thumbnail"),
+                "photo_url": self._get_best_photo(item),
                 "description": item.get("description", f"{item.get('title', '')} - {item.get('address', '')}"),
                 "user_review": item.get("user_review", "")
             }
             
         except Exception as e:
-            print(f"⚠️ Parse hatası: {e}")
+            print(f"[SerpApi] Parse hatasi: {e}")
             return None
+
+    def _get_best_photo(self, item: Dict) -> Optional[str]:
+        """En iyi fotoğraf URL'ini seç (fallback zinciri)"""
+        # 1. Direkt thumbnail (en sık gelen)
+        if item.get("thumbnail"):
+            return item["thumbnail"]
+        # 2. images dizisinin ilk elemanı
+        images = item.get("images", [])
+        if images and isinstance(images, list):
+            first = images[0]
+            if isinstance(first, dict):
+                return first.get("original") or first.get("thumbnail")
+            if isinstance(first, str):
+                return first
+        # 3. serpapi_thumbnail
+        if item.get("serpapi_thumbnail"):
+            return item["serpapi_thumbnail"]
+        return None
 
     def get_place_reviews(self, data_id: str, max_reviews: int = 50) -> List[str]:
         """
@@ -134,7 +153,7 @@ class SerpApiClient:
         max_pages = (max_reviews // 10) + 1
         page_count = 0
         
-        print(f"📝 {data_id} için yorumlar çekiliyor...")
+        print(f"[SerpApi] {data_id} icin yorumlar cekiliyor...")
         
         while page_count < max_pages and len(reviews) < max_reviews:
             params = {
@@ -154,7 +173,7 @@ class SerpApiClient:
                 res.raise_for_status()
                 data = res.json()
             except Exception as e:
-                print(f"❌ Review çekme hatası: {e}")
+                print(f"[SerpApi] Review hatasi: {e}")
                 break
                 
             # Yorumları al

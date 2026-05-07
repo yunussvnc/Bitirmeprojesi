@@ -9,6 +9,8 @@
  *  GET  /api/stats            → Sistem istatistikleri
  */
 
+import Constants from 'expo-constants';
+import { Platform } from 'react-native';
 import { logger } from '@/src/utils/logger';
 import type {
   SmartSearchRequest,
@@ -16,25 +18,32 @@ import type {
   AnalyzeReviewRequest,
   AnalyzeReviewResponse,
 } from '@/src/types/ai';
-import { Platform } from 'react-native';
+
 
 // ============================================================
-// AI Backend URL — dev modunda PC'nin IP'si, prod'da env var
+// AI Backend URL — Expo host'tan otomatik çözümlenir
+// Manuel IP güncellemeye gerek yok!
+// Override: EXPO_PUBLIC_AI_URL=http://...
 // ============================================================
 function resolveAIBaseUrl(): string {
   const override = process.env.EXPO_PUBLIC_AI_URL;
   if (override && override.startsWith('http')) return override.replace(/\/$/, '');
 
   if (__DEV__) {
-    if (Platform.OS === 'web') return 'http://localhost:8080';
-    // Gerçek telefon veya emülatör → PC'nin Wi-Fi IP'si
-    // PC Wi-Fi: 10.23.0.167  (ipconfig ile güncelle)
-    return 'http://10.23.0.167:8080';
+    if (Platform.OS === 'web') return 'http://localhost:8081';
+    // Expo'nun bağlı olduğu host'u kullan (telefon + PC aynı Wi-Fi'da)
+    const expoHost = Constants.expoConfig?.hostUri?.split(':')[0];
+    if (expoHost) return `http://${expoHost}:8081`;
+    // Fallback: .env'den veya localhost
+    return `http://${process.env.EXPO_PUBLIC_DEV_API_HOST ?? 'localhost'}:8081`;
   }
-  return process.env.EXPO_PUBLIC_AI_URL ?? 'http://10.23.0.167:8080';
+  return process.env.EXPO_PUBLIC_AI_URL ?? 'https://ai.asemos.com';
 }
 
+export const getAIBaseUrl = resolveAIBaseUrl;
+
 export const AI_BASE_URL = resolveAIBaseUrl();
+
 
 // ============================================================
 // Yardımcı fetch fonksiyonu (auth gerektirmiyor)
@@ -139,5 +148,45 @@ export async function checkAIHealth(): Promise<{
     };
   } catch {
     return { ok: false, modelLoaded: false, cache: 'error' };
+  }
+}
+
+/**
+ * Görsel ile mekan ara.
+ * base64 image → Gemini Vision analizi → mekan önerileri
+ */
+export async function imageSearch(
+  imageBase64: string,
+  mimeType: string = 'image/jpeg',
+  opts: {
+    location?: string;
+    userLat?: number;
+    userLng?: number;
+    limit?: number;
+  } = {},
+): Promise<SmartSearchResponse & { image_analysis?: { detected_query: string; category: string; description: string; gemini_available: boolean } }> {
+  try {
+    logger.log('[aiService] imageSearch →', mimeType, imageBase64.length, 'chars');
+    const res = await aiFetch<SmartSearchResponse & { image_analysis?: any }>(
+      '/api/image-search',
+      {
+        method: 'POST',
+        body: JSON.stringify({
+          image_base64: imageBase64,
+          mime_type: mimeType,
+          location: opts.location ?? 'Istanbul',
+          user_lat: opts.userLat,
+          user_lng: opts.userLng,
+          limit: opts.limit ?? 5,
+          max_distance_km: 10,
+        }),
+      },
+      60000, // 60 sn timeout (görsel analiz yavaş olabilir)
+    );
+    logger.log('[aiService] imageSearch ←', res.found, 'sonuç', res.image_analysis?.detected_query);
+    return res;
+  } catch (error) {
+    logger.error('[aiService] imageSearch hatası:', error);
+    throw error;
   }
 }

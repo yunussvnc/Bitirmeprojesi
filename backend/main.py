@@ -2,6 +2,7 @@
 
 import os
 import logging
+from contextlib import asynccontextmanager
 from datetime import datetime
 
 from fastapi import FastAPI, Depends
@@ -44,12 +45,45 @@ migrate.run_migrations(engine)
 Base.metadata.create_all(bind=engine)
 
 # ---------------------------------------------------------------------------
+# Lifespan (startup + shutdown)
+# ---------------------------------------------------------------------------
+@asynccontextmanager
+async def lifespan(application: FastAPI):
+    """Startup ve shutdown işlemleri"""
+    import asyncio
+
+    logger.info("🚀 AsEmOs API v2.0 başlatılıyor...")
+    logger.info("📊 Veritabanı: %s", settings.DATABASE_URL.split("///")[-1])
+    logger.info("🤖 LLM: %s (%s)", settings.LLM_PROVIDER, "aktif" if settings.LLM_ENABLED else "devre dışı")
+    logger.info("☁️  Cloudinary: %s", "yapılandırılmış" if settings.CLOUDINARY_CLOUD_NAME else "yapılandırılmamış")
+    logger.info("🔒 Rate Limiting: aktif")
+
+    if settings.JWT_SECRET_KEY == "dev-secret-change-in-production":
+        logger.warning("⚠️  JWT_SECRET_KEY varsayılan değerde! Production'da mutlaka değiştirin!")
+    if settings.ALLOWED_ORIGINS == "*":
+        logger.warning("⚠️  ALLOWED_ORIGINS=* — Production'da spesifik origin'ler belirleyin!")
+
+    from app.services.tasks import background_scheduler, cleanup_expired_stories
+    cleanup_expired_stories()
+    task = asyncio.create_task(background_scheduler())
+
+    logger.info("✅ API hazır!")
+
+    yield  # Uygulama burada çalışır
+
+    # Shutdown
+    task.cancel()
+    logger.info("🛑 API kapatılıyor...")
+
+
+# ---------------------------------------------------------------------------
 # FastAPI uygulaması
 # ---------------------------------------------------------------------------
 app = FastAPI(
     title="AsEmOs - Mekan Öneri Sistemi API",
     description="Mekan öneri, sosyal akış, eşleşme ve gerçek zamanlı mesajlaşma platformu",
     version="2.0.0",
+    lifespan=lifespan,
 )
 
 # ---------------------------------------------------------------------------
@@ -144,29 +178,3 @@ def health_check():
         },
     }
 
-
-# ---------------------------------------------------------------------------
-# Startup event
-# ---------------------------------------------------------------------------
-@app.on_event("startup")
-async def startup_event():
-    import asyncio
-
-    logger.info("🚀 AsEmOs API v2.0 başlatılıyor...")
-    logger.info("📊 Veritabanı: %s", settings.DATABASE_URL.split("///")[-1])
-    logger.info("🤖 LLM: %s (%s)", settings.LLM_PROVIDER, "aktif" if settings.LLM_ENABLED else "devre dışı")
-    logger.info("☁️  Cloudinary: %s", "yapılandırılmış" if settings.CLOUDINARY_CLOUD_NAME else "yapılandırılmamış")
-    logger.info("🔒 Rate Limiting: aktif")
-
-    # Güvenlik uyarıları
-    if settings.JWT_SECRET_KEY == "dev-secret-change-in-production":
-        logger.warning("⚠️  JWT_SECRET_KEY varsayılan değerde! Production'da mutlaka değiştirin!")
-    if settings.ALLOWED_ORIGINS == "*":
-        logger.warning("⚠️  ALLOWED_ORIGINS=* — Production'da spesifik origin'ler belirleyin!")
-
-    # Background scheduler başlat
-    from app.services.tasks import background_scheduler, cleanup_expired_stories
-    cleanup_expired_stories()  # İlk başlangıçta bir kez çalıştır
-    asyncio.create_task(background_scheduler())
-
-    logger.info("✅ API hazır!")
