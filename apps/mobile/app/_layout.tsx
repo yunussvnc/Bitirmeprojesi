@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Stack, useRouter, useSegments, useRootNavigationState } from "expo-router";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { PreferencesProvider } from "../src/store/preferences";
@@ -24,9 +24,49 @@ function useProtectedRoute() {
   const rootNavigationState = useRootNavigationState();
   const accessToken = useAuthStore((s) => s.accessToken);
   const hydrated = useAuthStore((s) => s.hydrated);
+  const logout = useAuthStore((s) => s.logout);
+  const [isVerifying, setIsVerifying] = useState(true);
+
+  // Basit JWT süresi kontrolü (Ağ isteği atmadan anında karar vermek için)
+  useEffect(() => {
+    if (!hydrated) return;
+    
+    if (accessToken) {
+      try {
+        const payloadBase64 = accessToken.split('.')[1];
+        if (payloadBase64) {
+          // React Native ortamında atob uyumluluğu için basit base64 decoder mantığı
+          const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=';
+          let output = '';
+          let str = String(payloadBase64).replace(/[=]+$/, '');
+          for (
+            let bc = 0, bs, buffer, idx = 0;
+            (buffer = str.charAt(idx++));
+            ~buffer && ((bs = bc % 4 ? bs * 64 + buffer : buffer), bc++ % 4)
+              ? (output += String.fromCharCode(255 & (bs >> ((-2 * bc) & 6))))
+              : 0
+          ) {
+            buffer = chars.indexOf(buffer);
+          }
+          const payload = JSON.parse(output);
+          const isExpired = payload.exp * 1000 <= Date.now();
+          
+          if (isExpired) {
+            console.log("Token expired locally, logging out...");
+            logout();
+          }
+        }
+      } catch (e) {
+        console.warn("Token parse error", e);
+        logout();
+      }
+    }
+    setIsVerifying(false);
+  }, [hydrated, accessToken]);
 
   useEffect(() => {
-    if (!hydrated || !rootNavigationState?.key) return;
+    // isVerifying bitmeden routing yapma ki uygulamanın içine girmesin
+    if (!hydrated || !rootNavigationState?.key || isVerifying) return;
 
     const inAuthScreen =
       segments[0] === "login" ||
@@ -55,7 +95,7 @@ function useProtectedRoute() {
     // Defer navigation to next tick so Stack has time to mount
     const id = setTimeout(navigate, 0);
     return () => clearTimeout(id);
-  }, [accessToken, segments, hydrated, rootNavigationState?.key, router]);
+  }, [accessToken, segments, hydrated, rootNavigationState?.key, router, isVerifying]);
 }
 
 export default function RootLayout() {

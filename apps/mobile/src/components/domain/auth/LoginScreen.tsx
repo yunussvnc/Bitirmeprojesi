@@ -39,6 +39,7 @@ import { API_BASE_URL } from '@/src/constants/api';
 import * as AppleAuthentication from 'expo-apple-authentication';
 import * as WebBrowser from 'expo-web-browser';
 import * as Google from 'expo-auth-session/providers/google';
+import * as AuthSession from 'expo-auth-session';
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -68,12 +69,14 @@ export default function LoginScreen() {
   const isSubmittingRef = useRef(false);
 
   // Google Auth Setup
-  const redirectUri = Google.useAuthRequest.length ? undefined : undefined; // expo handles this
+  const redirectUri = AuthSession.makeRedirectUri({ scheme: 'asemos' });
+
   const [request, response, promptAsync] = Google.useAuthRequest({
     clientId: '398883081062-uqa0hbpbo6nhjcbigltircbbg3ngr7oi.apps.googleusercontent.com',
     iosClientId: '398883081062-uqa0hbpbo6nhjcbigltircbbg3ngr7oi.apps.googleusercontent.com',
     androidClientId: '398883081062-uqa0hbpbo6nhjcbigltircbbg3ngr7oi.apps.googleusercontent.com',
     scopes: ['openid', 'profile', 'email'],
+    redirectUri,
   });
 
   useEffect(() => {
@@ -231,9 +234,19 @@ export default function LoginScreen() {
     if (provider === 'Apple') {
       signInWithApple();
     } else if (provider === 'Google') {
+      // Expo Go'da Google Sign-In desteklenmiyor (Google'ın yeni güvenlik kuralları).
+      // Production build (APK/IPA) alındığında sorunsuz çalışır.
+      if (__DEV__ && !request) {
+        Alert.alert(
+          'Google Giriş',
+          'Google ile giriş şu an geliştirme ortamında (Expo Go) kullanılamıyor. Lütfen e-posta/şifre ile giriş yapın veya production build alın.',
+          [{ text: 'Tamam' }]
+        );
+        return;
+      }
       promptAsync();
     }
-  }, [promptAsync]);
+  }, [promptAsync, request]);
 
   const clearFieldError = useCallback((field: string) => {
     setErrors((prev) => (prev[field] ? { ...prev, [field]: undefined } : prev));

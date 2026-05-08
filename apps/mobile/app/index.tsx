@@ -6,7 +6,8 @@ export default function Index() {
   const hydrated = useAuthStore((s) => s.hydrated);
 
   if (!hydrated) return null;
-
-  if (token) return <Redirect href="/(tabs)" />;
-  return <Redirect href="/login" />;
+  
+  // Yönlendirme mantığı tamamen _layout.tsx içerisindeki useProtectedRoute hook'una bırakıldı
+  // Böylece token doğrulama bitmeden uygulamanın içine (tabs) geçilmesi engelleniyor.
+  return null;
 }
