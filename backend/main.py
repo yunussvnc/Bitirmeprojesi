@@ -164,9 +164,10 @@ async def startup_event():
     if settings.ALLOWED_ORIGINS == "*":
         logger.warning("⚠️  ALLOWED_ORIGINS=* — Production'da spesifik origin'ler belirleyin!")
 
-    # Background scheduler başlat
-    from app.services.tasks import background_scheduler, cleanup_expired_stories
-    cleanup_expired_stories()  # İlk başlangıçta bir kez çalıştır
-    asyncio.create_task(background_scheduler())
+    # Background scheduler başlat (Testlerde devre dışı bırak)
+    if os.getenv("TESTING") != "1":
+        from app.services.tasks import background_scheduler, cleanup_expired_stories
+        cleanup_expired_stories()  # İlk başlangıçta bir kez çalıştır
+        asyncio.create_task(background_scheduler())
 
     logger.info("✅ API hazır!")

@@ -35,43 +35,15 @@ from auth import create_access_token
 # ---------------------------------------------------------------------------
 # Test veritabanı yapılandırması
 # ---------------------------------------------------------------------------
-SQLALCHEMY_DATABASE_URL = "sqlite:///./test_auth.db"
-
-engine = create_engine(
-    SQLALCHEMY_DATABASE_URL, connect_args={"check_same_thread": False}
-)
-TestingSessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+from tests.conftest import TestingSessionLocal
 
 
-def override_get_db():
-    db = TestingSessionLocal()
-    try:
-        yield db
-    finally:
-        db.close()
 
-
-app.dependency_overrides[get_db] = override_get_db
 client = TestClient(app)
 
-
 # ---------------------------------------------------------------------------
-# Her testten önce/sonra veritabanını sıfırla
+# Yardımcı fonksiyonlar
 # ---------------------------------------------------------------------------
-@pytest.fixture(autouse=True)
-def clean_db():
-    Base.metadata.drop_all(bind=engine)
-    Base.metadata.create_all(bind=engine)
-    # Rate-limit cache'ini sıfırla (email servisi)
-    from app.services.email_service import _resend_timestamps
-    _resend_timestamps.clear()
-    # Rate-limiter middleware state'ini sıfırla
-    from app.middleware.rate_limiter import _store, _failed_logins
-    _store._requests.clear()
-    _store._lockouts.clear()
-    _failed_logins.clear()
-    yield
-    Base.metadata.drop_all(bind=engine)
 
 
 # ---------------------------------------------------------------------------

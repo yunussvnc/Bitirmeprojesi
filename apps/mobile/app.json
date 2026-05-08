@@ -69,6 +69,13 @@
         }
       ],
       [
+        "expo-media-library",
+        {
+          "photosPermission": "Bu uygulama yorumlarınıza fotoğraf eklemeniz için galeri erişimine ihtiyaç duyar.",
+          "savePhotosPermission": "Bu uygulama galerinize fotoğraf kaydetmek için erişime ihtiyaç duyar."
+        }
+      ],
+      [
         "expo-splash-screen",
         {
           "image": "./assets/images/splash-icon.png",
