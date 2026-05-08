@@ -52,7 +52,7 @@ const FALLBACK_PLACE_IMAGES = [
   'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1200', // Aydınlık bir kafe içi
   'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200',
   'https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=1200',
-  'https://images.unsplash.com/photo-1521017430209-a6cb9156a64b?w=1200', // Işıklı iç mekan
+  'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1200', // Aydınlık restoran
 ];
 
 const CAROUSEL_INTERVAL_MS = 4500;
@@ -252,15 +252,39 @@ export default function LoginScreen() {
     setErrors((prev) => (prev[field] ? { ...prev, [field]: undefined } : prev));
   }, []);
 
-  const currentImage = FALLBACK_PLACE_IMAGES[0];
+  // --- Arka plan görsel carousel ---
+  const [imgIndex, setImgIndex] = useState(0);
+  const fadeAnim = useRef(new Animated.Value(1)).current;
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // Mevcut görseli fade-out yap
+      Animated.timing(fadeAnim, {
+        toValue: 0,
+        duration: 800,
+        useNativeDriver: true,
+      }).start(() => {
+        // Sonraki görsele geç
+        setImgIndex((prev) => (prev + 1) % FALLBACK_PLACE_IMAGES.length);
+        // Yeni görseli fade-in yap
+        Animated.timing(fadeAnim, {
+          toValue: 1,
+          duration: 800,
+          useNativeDriver: true,
+        }).start();
+      });
+    }, CAROUSEL_INTERVAL_MS);
+
+    return () => clearInterval(interval);
+  }, [fadeAnim]);
 
   return (
     <View style={styles.container}>
-      {/* Sabit Arka plan görseli */}
+      {/* Arka plan görseli carousel — crossfade efekti */}
       <View style={StyleSheet.absoluteFill}>
-        <Image
-          source={{ uri: currentImage }}
-          style={styles.backgroundImage}
+        <Animated.Image
+          source={{ uri: FALLBACK_PLACE_IMAGES[imgIndex] }}
+          style={[styles.backgroundImage, { opacity: fadeAnim }]}
           resizeMode="cover"
         />
       </View>
