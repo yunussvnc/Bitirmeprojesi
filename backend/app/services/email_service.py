@@ -16,6 +16,7 @@ from datetime import datetime, timedelta, timezone
 
 from sqlalchemy.orm import Session
 
+import re
 import models
 from config import get_settings
 
@@ -124,6 +125,15 @@ def _send_email_smtp(to_email: str, subject: str, html_body: str) -> None:
     msg["Subject"] = subject
     msg["From"] = f"AsEmOs <{smtp_from}>"
     msg["To"] = to_email
+    msg["Reply-To"] = smtp_from
+    msg["MIME-Version"] = "1.0"
+    msg["X-Mailer"] = "AsEmOs App"
+
+    # Plain text alternative — HTML-only emails are a major spam signal
+
+    plain_text = re.sub(r'<[^>]+>', '', html_body)
+    plain_text = re.sub(r'\s+', ' ', plain_text).strip()
+    msg.attach(MIMEText(plain_text, "plain", "utf-8"))
     msg.attach(MIMEText(html_body, "html", "utf-8"))
 
     try:
@@ -154,7 +164,7 @@ def _send_email_mock(to_email: str, subject: str, body: str) -> None:
     logger.info("   İçerik (HTML): %s...", body[:300].replace("\n", "")) # HTML'in bir kısmını bas
     
     # Pratiklik için kod arayalım (HTML içindeki ardışık 6 rakam)
-    import re
+
     codes = re.findall(r'>(\d)<', body)
     if len(codes) >= 6:
         logger.info("   Bulunan Kod: %s", "".join(codes[:6]))

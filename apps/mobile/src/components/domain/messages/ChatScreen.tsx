@@ -224,8 +224,11 @@ export default function ChatScreen() {
 
     // BUG-11: conversation_id, ya tamamen sayısal ya da "match_xxx_userId" formatında olabilir.
     // Sayısal ise doğrudan backend conversation id olarak kullan.
+    // BUG-14: Dummy/mock conversation ID'leri (CONTACTS ve DUMMY_MESSAGES_BY_CHAT'te tanımlı)
+    // backend conversation ID'leri ile çakışıyor. Dummy ID'ler backend'e gönderilmemeli.
+    const isDummyConversation = resolvedChatId in CONTACTS || resolvedChatId in DUMMY_MESSAGES_BY_CHAT;
     const numericConvId = parseInt(resolvedChatId, 10);
-    const isBackendConv = !isNaN(numericConvId) && resolvedChatId === String(numericConvId);
+    const isBackendConv = !isDummyConversation && !isNaN(numericConvId) && resolvedChatId === String(numericConvId);
 
     // Store'dan mesajları mount anında bir kere oku (subscribe etme — hydration loop'u önler)
     const [messages, setMessages] = useState<Message[]>(() => {
@@ -924,7 +927,7 @@ export default function ChatScreen() {
                 >
                     <View style={styles.reportModalContainer}>
                         <View style={[styles.reportModalContent, { backgroundColor: colors.surface.elevated }]}>
-                            <View style={[styles.reportHeaderRow, { borderBottomColor: colors.surface.border }]}>
+                            <View style={[styles.reportHeader, { borderBottomColor: colors.surface.border }]}>
                                 <Text style={[styles.reportTitle, { color: colors.text.primary }]}>{t("chat.report_user")}</Text>
                                 <TouchableOpacity onPress={() => {
                                     setIsReportVisible(false);
@@ -948,17 +951,17 @@ export default function ChatScreen() {
                                     cursorColor={colors.accent.primary}
                                 />
                             </View>
-                            <Text style={[styles.charCountText, { color: reportText.length > 500 ? colors.semantic.error : colors.text.tertiary }]}>
+                            <Text style={[styles.wordCount, { color: reportText.length > 500 ? colors.semantic.error : colors.text.tertiary }]}>
                                 {t("chat.char_left")} {500 - reportText.length}
                             </Text>
 
                             <TouchableOpacity
-                                style={[styles.reportSubmitBtn, { backgroundColor: reportText.trim().length === 0 ? colors.surface.border : colors.accent.primary }]}
+                                style={[styles.submitReportBtn, { backgroundColor: reportText.trim().length === 0 ? colors.surface.border : colors.accent.primary }]}
                                 activeOpacity={0.8}
                                 onPress={handleReport}
                                 disabled={reportText.trim().length === 0}
                             >
-                                <Text style={[styles.reportSubmitText, { color: reportText.trim().length === 0 ? colors.text.tertiary : "#FFFFFF" }]}>
+                                <Text style={[styles.submitReportText, { color: reportText.trim().length === 0 ? colors.text.tertiary : "#FFFFFF" }]}>
                                     {t("chat.send")}
                                 </Text>
                             </TouchableOpacity>

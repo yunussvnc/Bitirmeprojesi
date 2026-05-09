@@ -1,18 +1,24 @@
 # routers/auth.py — Kimlik doğrulama endpoint'leri
 
-from fastapi import APIRouter, Depends, HTTPException, Request
-from sqlalchemy.orm import Session
+import os
+import random
+import string
+import uuid
 
-from datetime import datetime
+import jwt
+import requests as req_lib
+from datetime import date, datetime, timedelta, timezone
+
+from fastapi import APIRouter, Depends, HTTPException, Request
+from sqlalchemy.exc import IntegrityError
+from sqlalchemy.orm import Session
+from google.oauth2 import id_token
+from google.auth.transport import requests as google_requests
 
 import schemas, crud, models
 from auth import create_access_token, create_refresh_token, decode_token
+from crud import _hash_password, _verify_password
 from app.dependencies import get_db, get_current_user, get_admin_user
-import os
-import uuid
-import jwt
-from google.oauth2 import id_token
-from google.auth.transport import requests as google_requests
 from app.middleware.rate_limiter import (
     get_client_ip,
     record_failed_login,
@@ -22,6 +28,10 @@ from app.services.email_service import (
     create_verification_code, verify_code,
     create_password_reset_code, verify_password_reset,
     RateLimitError,
+    _check_rate_limit,
+    _build_verification_html,
+    _send_welcome_email,
+    send_email,
 )
 
 router = APIRouter(prefix="/auth", tags=["Auth"])
@@ -34,17 +44,27 @@ def register_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
     if user.username and crud.get_user_by_username(db, username=user.username):
         raise HTTPException(status_code=400, detail="Bu kullanıcı adı zaten alınmış.")
     
-    # Check if a pending user already exists for this email
+    
+    now_utc = datetime.now(timezone.utc)
+    
+    # Check if a valid (unexpired) pending user already exists for this email.
+    # If so, reuse the existing code to prevent retry/timeout race conditions
+    # where a new code is generated but the old code was already emailed.
     db_pend = crud.get_pending_user_by_email(db, user.email)
     if db_pend:
-        crud.delete_pending_user(db, user.email)
-
-    import random, string
-    from datetime import datetime, timedelta, timezone
-    from app.services.email_service import _build_verification_html, send_email
+        pend_expires = db_pend.expires_at
+        if pend_expires.tzinfo is None:
+            pend_expires = pend_expires.replace(tzinfo=timezone.utc)
+        
+        if pend_expires > now_utc:
+            # Pending user still valid — reuse existing code, don't regenerate
+            return {"ok": True, "message": "Doğrulama kodu e-postanıza gönderildi.", "email": user.email}
+        else:
+            # Expired — delete and create fresh
+            crud.delete_pending_user(db, user.email)
     
     code = "".join(random.choices(string.digits, k=6))
-    expires_at = datetime.now(timezone.utc) + timedelta(minutes=15)
+    expires_at = now_utc + timedelta(minutes=15)
     
     crud.create_pending_user(db, user, code, expires_at)
     
@@ -53,11 +73,11 @@ def register_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
     html_body = _build_verification_html(user_name, code)
     
     try:
-        from app.services.email_service import _check_rate_limit, RateLimitError
+
         _check_rate_limit(hash(user.email) % 1000000)
         send_email(user.email, subject, html_body)
     except RateLimitError as e:
-        # Rate limit var ama kodu ekledik, yine de hata döndürmeyebiliriz veya try-catch i rate limit öncesi yapabiliriz.
+        # Rate limit var ama kodu ekledik, yine de hata döndürmeyebiliriz
         pass
     except Exception as e:
         pass
@@ -102,7 +122,7 @@ def first_time_setup(
             raise HTTPException(status_code=400, detail="Bu kullanıcı adı zaten alınmış.")
     
     # Kullanıcı yaşı kontrolü backend tarafında da yapılabilir (14+)
-    from datetime import date
+
     today = date.today()
     age = today.year - body.birth_date.year - ((today.month, today.day) < (body.birth_date.month, body.birth_date.day))
     if age < 14:
@@ -117,14 +137,13 @@ def first_time_setup(
 
 @router.post("/verify-register", response_model=schemas.Token)
 def verify_register(body: schemas.VerifyRegisterRequest, db: Session = Depends(get_db)):
-    from datetime import datetime, timezone
-    from app.services.email_service import _send_welcome_email
+
     
     db_pend = crud.get_pending_user_by_email(db, email=body.email)
     if not db_pend:
         raise HTTPException(status_code=400, detail="Kayıt isteği bulunamadı veya kodu daha önce doğruladınız.")
     
-    if db_pend.verification_code != body.code:
+    if db_pend.verification_code.strip() != body.code.strip():
         raise HTTPException(status_code=400, detail="Doğrulama kodu hatalı.")
         
     # Python 3.12 can compare aware with aware datetimes.
@@ -322,9 +341,7 @@ def resend_verification(
 
 @router.post("/resend-register-code")
 def resend_register_code(body: schemas.ResendVerificationRequest, db: Session = Depends(get_db)):
-    from app.services.email_service import _check_rate_limit, RateLimitError, _build_verification_html, send_email
-    import random, string
-    from datetime import datetime, timedelta, timezone
+
     
     db_pend = crud.get_pending_user_by_email(db, email=body.email)
     if not db_pend:
@@ -380,7 +397,7 @@ def reset_password(
     db: Session = Depends(get_db),
 ):
     """Sıfırlama kodu + yeni şifre ile şifreyi günceller."""
-    from crud import _hash_password
+
 
     user = crud.get_user_by_email(db, email=body.email)
     if not user:
@@ -407,7 +424,7 @@ def change_password(
     db: Session = Depends(get_db),
 ):
     """Mevcut şifre ile yeni şifre belirleme (ayarlar ekranı)."""
-    from crud import _verify_password, _hash_password
+
 
     if not _verify_password(body.current_password, current_user.password_hash):
         raise HTTPException(status_code=400, detail="Mevcut şifreniz hatalı.")
@@ -500,7 +517,7 @@ def update_me(
     current_user=Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
-    from sqlalchemy.exc import IntegrityError
+
     
     if data.username and data.username != current_user.username:
         existing = crud.get_user_by_username(db, data.username)
@@ -540,7 +557,7 @@ def patch_me(
     db: Session = Depends(get_db),
 ):
     """Kısmi profil güncellemesi (frontend personal.tsx kullanır)."""
-    from sqlalchemy.exc import IntegrityError
+
 
     if data.username and data.username != current_user.username:
         existing = crud.get_user_by_username(db, data.username)
