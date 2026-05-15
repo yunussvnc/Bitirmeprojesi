@@ -13,9 +13,11 @@ import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { createTextStyle, spacing } from "@/src/constants/design";
 import { lightImpact, success } from "@/src/utils/haptics";
 import { useSettingsStore } from "@/src/store/useSettingsStore";
+import { useTranslation } from "react-i18next";
 
 export default function PrivacySettingsScreen() {
   const { colors, isDark } = useTheme();
+  const { t } = useTranslation();
   const router = useRouter();
   const insets = useSafeAreaInsets();
 
@@ -30,8 +32,8 @@ export default function PrivacySettingsScreen() {
     } else {
       // Açığa geçiş — uyarı göster
       Alert.alert(
-        "Hesap Herkese Açık Olsun mu?",
-        "Hesabını herkese açık yaptığında herkes gönderilerini, hikayelerini ve takipçi listeni görebilir.",
+        t("settings_privacy.public_account", "Herkese Açık Hesap"),
+        t("settings_privacy.public_desc", "Herkes profilini, gönderilerini ve hikayelerini görebilir."),
         [
           { text: "Vazgeç", style: "cancel" },
           {
@@ -50,7 +52,7 @@ export default function PrivacySettingsScreen() {
         <TouchableOpacity onPress={() => { lightImpact(); router.back(); }} hitSlop={12} style={styles.backBtn}>
           <IconSymbol name="chevron.left" size={24} color={colors.text.primary} />
         </TouchableOpacity>
-        <Text style={[createTextStyle("title", colors.text.primary), styles.title]}>Hesap Gizliliği</Text>
+        <Text style={[createTextStyle("title", colors.text.primary), styles.title]}>{t("settings_privacy.title", "Hesap Gizliliği")}</Text>
         <View style={styles.backBtn} />
       </View>
 
@@ -68,40 +70,40 @@ export default function PrivacySettingsScreen() {
           </View>
           <View style={styles.statusTextWrap}>
             <Text style={[styles.statusTitle, { color: colors.text.primary }]}>
-              {isPrivate ? "Gizli Hesap" : "Herkese Açık Hesap"}
+              {isPrivate ? t("settings_privacy.private_account", "Gizli Hesap") : t("settings_privacy.public_account", "Herkese Açık Hesap")}
             </Text>
             <Text style={[styles.statusDesc, { color: colors.text.secondary }]}>
               {isPrivate
-                ? "Sadece onayladığın kişiler gönderilerini ve hikayelerini görebilir."
-                : "Herkes profilini, gönderilerini ve hikayelerini görebilir."}
+                ? t("settings_privacy.private_desc", "Sadece onayladığın kişiler gönderilerini ve hikayelerini görebilir.")
+                : t("settings_privacy.public_desc", "Herkes profilini, gönderilerini ve hikayelerini görebilir.")}
             </Text>
           </View>
         </View>
 
-        <Section title="Hesap Durumu">
+        <Section title={t("settings_privacy.status", "Hesap Durumu")}>
           <SettingsRow
-            label="Gizli Hesap"
+            label={t("settings_privacy.private_account", "Gizli Hesap")}
             value={isPrivate}
             switch
             onValueChange={handleTogglePrivacy}
             icon="lock"
           />
           <Text style={[styles.hint, { color: colors.text.tertiary }]}>
-            Hesabını gizliye çevirdiğinde, yalnızca onayladığın kişiler seni görebilir, gönderilerini ve hikayelerini izleyebilir.
+            {t("settings_privacy.hint", "Hesabını gizliye çevirdiğinde, yalnızca onayladığın kişiler seni görebilir, gönderilerini ve hikayelerini izleyebilir.")}
           </Text>
         </Section>
 
-        <Section title="Gizlilik Etkileri">
-          <SettingsRow label="Gönderi görünürlüğü" value={isPrivate ? "Takipçiler" : "Herkes"} icon="photo.on.rectangle" />
-          <SettingsRow label="Hikaye görünürlüğü" value={isPrivate ? "Takipçiler" : "Herkes"} icon="circle.hexagongrid" />
-          <SettingsRow label="Takipçi istekleri" value={isPrivate ? "Onay gerekli" : "Otomatik"} icon="person.badge.plus" />
-          <SettingsRow label="Profil görünürlüğü" value={isPrivate ? "Sınırlı" : "Tam"} icon="eye" />
+        <Section title={t("settings_privacy.effects", "Gizlilik Etkileri")}>
+          <SettingsRow label={t("settings_privacy.post_vis", "Gönderi görünürlüğü")} value={isPrivate ? t("settings_privacy.followers", "Takipçiler") : t("settings_privacy.everyone", "Herkes")} icon="photo.on.rectangle" />
+          <SettingsRow label={t("settings_privacy.story_vis", "Hikaye görünürlüğü")} value={isPrivate ? t("settings_privacy.followers", "Takipçiler") : t("settings_privacy.everyone", "Herkes")} icon="circle.hexagongrid" />
+          <SettingsRow label={t("settings_privacy.followers_req", "Takipçi istekleri")} value={isPrivate ? t("settings_privacy.approval", "Onay gerekli") : t("settings_privacy.automatic", "Otomatik")} icon="person.badge.plus" />
+          <SettingsRow label={t("settings_privacy.profile_vis", "Profil görünürlüğü")} value={isPrivate ? t("settings_privacy.limited", "Sınırlı") : t("settings_privacy.full", "Tam")} icon="eye" />
         </Section>
 
         <View style={styles.tipBox}>
           <IconSymbol name="lightbulb" size={16} color={colors.accent.primary} />
           <Text style={[styles.tipText, { color: colors.text.tertiary }]}>
-            İpucu: Gizli hesapların içerikleri keşfet ve harita sayfasında görünmez.
+            {t("settings_privacy.tip", "İpucu: Gizli hesapların içerikleri keşfet ve harita sayfasında görünmez.")}
           </Text>
         </View>
       </ScrollView>

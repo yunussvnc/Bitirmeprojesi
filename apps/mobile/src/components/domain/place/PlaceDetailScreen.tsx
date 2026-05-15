@@ -5,6 +5,7 @@
  * Premium dark-first design with rich information architecture.
  */
 
+import { getTranslatedCategory } from '@/src/utils/categories';
 import { router, useLocalSearchParams } from "expo-router";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
@@ -63,11 +64,11 @@ const REVIEW_SHEET_COLLAPSED = Math.min(SCREEN_HEIGHT * 0.55, 520);
 const REVIEW_SHEET_EXPANDED = SCREEN_HEIGHT * 0.72;
 
 /** Menü öğelerini kategoriye göre gruplar */
-function groupMenuByCategory(items: any[]): { category: string; items: any[] }[] {
+function groupMenuByCategory(items: any[], t: any): { category: string; items: any[] }[] {
   const map = new Map<string, any[]>();
   for (const item of items) {
     if (item.type === 'image') continue; // image tipli öğeleri atla
-    const cat = item.category || 'Menü';
+    const cat = getTranslatedCategory(item.category, t) || t("place_detail.menu");
     if (!map.has(cat)) map.set(cat, []);
     map.get(cat)!.push(item);
   }
@@ -400,6 +401,11 @@ export default function PlaceDetailScreen({
     return getPlaceImageSource(place || id);
   }, [place, id]);
 
+  const menuGroups = useMemo(() => {
+    if (!place?.menu_items) return [];
+    return groupMenuByCategory(place.menu_items, t);
+  }, [place?.menu_items, t]);
+
   const averageRating = useMemo(() => {
     if (!reviews.length) return null;
     const sum = reviews.reduce((acc, r) => acc + (r.rating || 0), 0);
@@ -528,7 +534,7 @@ export default function PlaceDetailScreen({
           </View>
 
           <View style={styles.metaRow}>
-            {place?.category && <Text style={[bodySmallStyle, { color: colors.text.secondary }]}>{place.category}</Text>}
+            {place?.category && <Text style={[bodySmallStyle, { color: colors.text.secondary }]}>{getTranslatedCategory(place.category, t)}</Text>}
             {place?.city && place?.category && <Text style={[bodySmallStyle, { color: colors.text.tertiary }]}> • </Text>}
             {place?.city && <Text style={[bodySmallStyle, { color: colors.text.secondary }]}>{place.city}</Text>}
           </View>
@@ -582,15 +588,15 @@ export default function PlaceDetailScreen({
               <Text style={[h2Style, { fontSize: 18, marginTop: spacing.lg, marginBottom: spacing.base }]}>{t("place_detail.features")}</Text>
               <View style={styles.highlightsGrid}>
                 {[
-                  { fa5: "wifi" as const, fa5Unavailable: "wifi-slash" as const, label: "Wi-Fi", available: true },
-                  { fa5: "plug" as const, fa5Unavailable: "plug" as const, label: "Priz", available: true },
+                  { fa5: "wifi" as const, fa5Unavailable: "wifi-slash" as const, label: t("place_detail.feature_wifi"), available: true },
+                  { fa5: "plug" as const, fa5Unavailable: "plug" as const, label: t("place_detail.feature_plug"), available: true },
                   {
                     fa5: "volume-mute" as const,
                     fa5Unavailable: "volume-mute" as const,
-                    label: "Sessiz",
+                    label: t("place_detail.feature_quiet"),
                     available: place?.tags?.includes("quiet"),
                   },
-                  { fa5: "umbrella" as const, fa5Unavailable: "umbrella" as const, label: "Terasta\nOturma", available: false },
+                  { fa5: "umbrella" as const, fa5Unavailable: "umbrella" as const, label: t("place_detail.feature_terrace"), available: false },
                 ].map((item, idx) => {
                   const iconName = item.available ? item.fa5 : item.fa5Unavailable;
                   const iconColor = item.available ? colors.text.primary : colors.text.tertiary;
@@ -1141,7 +1147,7 @@ export default function PlaceDetailScreen({
                     ) : (
                       /* ===== TEXT MENU — PREMIUM CATEGORIZED ===== */
                       <View style={{ paddingBottom: spacing.lg }}>
-                        {groupMenuByCategory(place.menu_items).map((group, gIdx) => (
+                        {groupMenuByCategory(place.menu_items, t).map((group, gIdx) => (
                           <View key={gIdx} style={{ marginBottom: spacing.xl }}>
                             {/* Category Header */}
                             <View style={{ 
@@ -1223,7 +1229,7 @@ export default function PlaceDetailScreen({
                     <View style={{ alignItems: 'center', paddingVertical: 40 }}>
                       <IconSymbol name="list.bullet.clipboard" size={48} color={colors.text.tertiary} />
                       <Text style={[bodySmallStyle, { textAlign: 'center', marginTop: spacing.base }]}>
-                        Bu mekan henüz menü eklememiş.
+                        {t("place_detail.no_menu", "Bu mekan henüz menü eklememiş.")}
                       </Text>
                     </View>
                   )}

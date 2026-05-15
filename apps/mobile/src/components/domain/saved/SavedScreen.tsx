@@ -56,7 +56,6 @@ export default function SavedScreen() {
   const [placesData, setPlacesData] = useState<Record<string, Place>>({});
   const insets = useSafeAreaInsets();
   const { t } = useTranslation();
-  const fetchMe = useAuthStore((s) => s.fetchMe);
 
   // Listen for tab press to scroll to top
   useEffect(() => {

@@ -444,7 +444,7 @@ export default function LoginScreen() {
             onPress={() => {
               Keyboard.dismiss();
               lightImpact();
-              router.push('/register');
+              router.push({ pathname: '/register', params: { roleType } });
             }}
             activeOpacity={0.8}
           >

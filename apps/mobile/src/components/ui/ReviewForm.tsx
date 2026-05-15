@@ -13,6 +13,7 @@ import { Button } from '@/src/components/ui/Button';
 import { RatingStars } from '@/src/components/ui/RatingStars';
 import { createTextStyle } from '@/src/constants/design';
 import { lightImpact, success } from '@/src/utils/haptics';
+import { useTranslation } from 'react-i18next';
 
 export interface ReviewFormProps {
   /**
@@ -49,6 +50,7 @@ export function ReviewForm({
   style,
 }: ReviewFormProps) {
   const { colors, spacing } = useTheme();
+  const { t } = useTranslation();
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
 
@@ -72,13 +74,13 @@ export function ReviewForm({
   return (
     <View style={[styles.container, style]}>
       <Text style={[titleStyle, styles.title, { marginBottom: spacing.base }]}>
-        Yorum Yap
+        {t("review.write_review")}
       </Text>
 
       {/* Rating */}
       <View style={styles.ratingSection}>
         <Text style={[labelStyle, { marginBottom: spacing.sm }]}>
-          Puan Verin
+          {t("review.give_rating")}
         </Text>
         <RatingStars
           value={rating}
@@ -92,7 +94,7 @@ export function ReviewForm({
       {/* Comment */}
       <View style={styles.commentSection}>
         <Text style={[labelStyle, { marginBottom: spacing.sm }]}>
-          Yorumunuz (Opsiyonel)
+          {t("review.your_comment_optional")}
         </Text>
         <TextInput
           value={comment}
@@ -122,7 +124,7 @@ export function ReviewForm({
             disabled={loading}
             style={styles.cancelButton}
           >
-            İptal
+            {t("common.cancel")}
           </Button>
         )}
         <Button
@@ -132,7 +134,7 @@ export function ReviewForm({
           disabled={rating === 0 || loading}
           style={styles.submitButton}
         >
-          Gönder
+          {t("review.submit")}
         </Button>
       </View>
     </View>

@@ -14,6 +14,7 @@ import { createTextStyle, spacing } from "@/src/constants/design";
 import { lightImpact } from "@/src/utils/haptics";
 import { apiGet } from "@/src/utils/apiClient";
 import { LinearGradient } from "expo-linear-gradient";
+import { useTranslation } from "react-i18next";
 
 type UserStats = {
   post_count?: number;
@@ -25,6 +26,7 @@ type UserStats = {
 
 export default function ActivityScreen() {
   const { colors, isDark } = useTheme();
+  const { t } = useTranslation();
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const [stats, setStats] = useState<UserStats | null>(null);
@@ -44,10 +46,10 @@ export default function ActivityScreen() {
   useEffect(() => { loadStats(); }, [loadStats]);
 
   const statCards: { label: string; value: number; icon: string; gradient: [string, string] }[] = [
-    { label: "Gönderi", value: stats?.post_count ?? 0, icon: "photo.on.rectangle", gradient: ["#4ECDC4", "#44B8AE"] },
-    { label: "Takipçi", value: stats?.follower_count ?? 0, icon: "person.2", gradient: ["#667EEA", "#5A6FD6"] },
-    { label: "Takip", value: stats?.following_count ?? 0, icon: "person.badge.plus", gradient: ["#F093FB", "#D06AE6"] },
-    { label: "Değerlendirme", value: stats?.review_count ?? 0, icon: "star", gradient: ["#FFB347", "#F5A623"] },
+    { label: t("settings_activity.posts", "Gönderi"), value: stats?.post_count ?? 0, icon: "photo.on.rectangle", gradient: ["#4ECDC4", "#44B8AE"] },
+    { label: t("settings_activity.followers", "Takipçi"), value: stats?.follower_count ?? 0, icon: "person.2", gradient: ["#667EEA", "#5A6FD6"] },
+    { label: t("settings_activity.following", "Takip"), value: stats?.following_count ?? 0, icon: "person.badge.plus", gradient: ["#F093FB", "#D06AE6"] },
+    { label: t("settings_activity.reviews", "Değerlendirme"), value: stats?.review_count ?? 0, icon: "star", gradient: ["#FFB347", "#F5A623"] },
   ];
 
   return (
@@ -56,7 +58,7 @@ export default function ActivityScreen() {
         <TouchableOpacity onPress={() => { lightImpact(); router.back(); }} hitSlop={12} style={styles.backBtn}>
           <IconSymbol name="chevron.left" size={24} color={colors.text.primary} />
         </TouchableOpacity>
-        <Text style={[createTextStyle("title", colors.text.primary), styles.title]}>Ziyaret Geçmişi</Text>
+        <Text style={[createTextStyle("title", colors.text.primary), styles.title]}>{t("settings_activity.title", "Ziyaret Geçmişi")}</Text>
         <View style={styles.backBtn} />
       </View>
 
@@ -65,7 +67,7 @@ export default function ActivityScreen() {
       ) : (
         <ScrollView style={styles.container} contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
           {/* Stats Grid */}
-          <Text style={[styles.sectionTitle, { color: colors.text.secondary }]}>İSTATİSTİKLERİN</Text>
+          <Text style={[styles.sectionTitle, { color: colors.text.secondary }]}>{t("settings_activity.your_stats", "İSTATİSTİKLERİN")}</Text>
           <View style={styles.grid}>
             {statCards.map((card) => (
               <LinearGradient
@@ -83,23 +85,23 @@ export default function ActivityScreen() {
           </View>
 
           {/* Activity Summary */}
-          <Text style={[styles.sectionTitle, { color: colors.text.secondary, marginTop: 24 }]}>AKTİVİTE ÖZETİ</Text>
+          <Text style={[styles.sectionTitle, { color: colors.text.secondary, marginTop: 24 }]}>{t("settings_activity.summary", "AKTİVİTE ÖZETİ")}</Text>
           <View style={[styles.summaryCard, { backgroundColor: colors.surface.elevated, borderColor: colors.surface.border }]}>
             <View style={styles.summaryRow}>
               <IconSymbol name="mappin.circle" size={20} color={colors.accent.primary} />
-              <Text style={[styles.summaryLabel, { color: colors.text.primary }]}>Ziyaret edilen mekan</Text>
+              <Text style={[styles.summaryLabel, { color: colors.text.primary }]}>{t("settings_activity.visited_places", "Ziyaret edilen mekan")}</Text>
               <Text style={[styles.summaryValue, { color: colors.accent.primary }]}>{stats?.visit_count ?? 0}</Text>
             </View>
             <View style={[styles.divider, { backgroundColor: colors.surface.border }]} />
             <View style={styles.summaryRow}>
               <IconSymbol name="text.bubble" size={20} color={colors.accent.primary} />
-              <Text style={[styles.summaryLabel, { color: colors.text.primary }]}>Toplam değerlendirme</Text>
+              <Text style={[styles.summaryLabel, { color: colors.text.primary }]}>{t("settings_activity.total_reviews", "Toplam değerlendirme")}</Text>
               <Text style={[styles.summaryValue, { color: colors.accent.primary }]}>{stats?.review_count ?? 0}</Text>
             </View>
             <View style={[styles.divider, { backgroundColor: colors.surface.border }]} />
             <View style={styles.summaryRow}>
               <IconSymbol name="heart" size={20} color={colors.accent.primary} />
-              <Text style={[styles.summaryLabel, { color: colors.text.primary }]}>Beğenilen gönderi</Text>
+              <Text style={[styles.summaryLabel, { color: colors.text.primary }]}>{t("settings_activity.liked_posts", "Beğenilen gönderi")}</Text>
               <Text style={[styles.summaryValue, { color: colors.accent.primary }]}>—</Text>
             </View>
           </View>
@@ -107,7 +109,7 @@ export default function ActivityScreen() {
           <View style={styles.tipBox}>
             <IconSymbol name="lightbulb" size={16} color={colors.accent.primary} />
             <Text style={[styles.tipText, { color: colors.text.tertiary }]}>
-              İstatistiklerin gerçek zamanlı olarak güncellenir ve sadece sen görebilirsin.
+              {t("settings_activity.tip", "İstatistiklerin gerçek zamanlı olarak güncellenir ve sadece sen görebilirsin.")}
             </Text>
           </View>
         </ScrollView>

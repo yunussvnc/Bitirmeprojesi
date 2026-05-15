@@ -13,15 +13,17 @@ import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { createTextStyle, spacing } from "@/src/constants/design";
 import { lightImpact, success } from "@/src/utils/haptics";
 import { useSettingsStore, type UploadQuality } from "@/src/store/useSettingsStore";
+import { useTranslation } from "react-i18next";
 
-const QUALITY_OPTIONS: { key: UploadQuality; label: string; desc: string; icon: string }[] = [
-  { key: "high", label: "Yüksek Kalite", desc: "En iyi görüntü ve video kalitesi. Daha fazla veri kullanır.", icon: "sparkles" },
-  { key: "auto", label: "Otomatik", desc: "Bağlantı hızına göre otomatik ayarlanır.", icon: "wand.and.rays" },
-  { key: "data_saver", label: "Veri Tasarrufu", desc: "Düşük kalite, minimum veri kullanımı.", icon: "arrow.down.circle" },
+const getQualityOptions = (t: any): { key: UploadQuality; label: string; desc: string; icon: string }[] => [
+  { key: "high", label: t("settings_media.high", "Yüksek Kalite"), desc: t("settings_media.high_desc", "En iyi görüntü ve video kalitesi. Daha fazla veri kullanır."), icon: "sparkles" },
+  { key: "auto", label: t("settings_media.auto", "Otomatik"), desc: t("settings_media.auto_desc", "Bağlantı hızına göre otomatik ayarlanır."), icon: "wand.and.rays" },
+  { key: "data_saver", label: t("settings_media.data_saver", "Veri Tasarrufu"), desc: t("settings_media.data_desc", "Düşük kalite, minimum veri kullanımı."), icon: "arrow.down.circle" },
 ];
 
 export default function MediaQualityScreen() {
   const { colors, isDark } = useTheme();
+  const { t } = useTranslation();
   const router = useRouter();
   const insets = useSafeAreaInsets();
 
@@ -36,13 +38,13 @@ export default function MediaQualityScreen() {
         <TouchableOpacity onPress={() => { lightImpact(); router.back(); }} hitSlop={12} style={styles.backBtn}>
           <IconSymbol name="chevron.left" size={24} color={colors.text.primary} />
         </TouchableOpacity>
-        <Text style={[createTextStyle("title", colors.text.primary), styles.title]}>Medya Kalitesi</Text>
+        <Text style={[createTextStyle("title", colors.text.primary), styles.title]}>{t("settings_media.title", "Medya Kalitesi")}</Text>
         <View style={styles.backBtn} />
       </View>
 
       <ScrollView style={styles.container} contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
-        <Section title="Yükleme Kalitesi">
-          {QUALITY_OPTIONS.map((opt) => (
+        <Section title={t("settings_media.quality", "Yükleme Kalitesi")}>
+          {getQualityOptions(t).map((opt) => (
             <TouchableOpacity
               key={opt.key}
               style={[
@@ -76,25 +78,25 @@ export default function MediaQualityScreen() {
           ))}
         </Section>
 
-        <Section title="Wi-Fi Ayarları">
+        <Section title={t("settings_media.wifi_title", "Wi-Fi Ayarları")}>
           <SettingsRow
-            label="Wi-Fi'da en yüksek kaliteyi kullan"
+            label={t("settings_media.wifi_high", "Wi-Fi'da en yüksek kaliteyi kullan")}
             value={wifiAuto}
             switch
             onValueChange={(v: boolean) => { setWifiAuto(v); success(); }}
             icon="wifi"
           />
           <Text style={[styles.hint, { color: colors.text.tertiary }]}>
-            Wi-Fi bağlantısında seçilen kaliteden bağımsız olarak en yüksek kalite kullanılır.
+            {t("settings_media.wifi_hint", "Wi-Fi bağlantısında seçilen kaliteden bağımsız olarak en yüksek kalite kullanılır.")}
           </Text>
         </Section>
 
-        <Section title="Akış Kalitesi">
-          <SettingsRow label="Video otomatik oynat" value={true} switch icon="play.circle" />
+        <Section title={t("settings_media.stream_title", "Akış Kalitesi")}>
+          <SettingsRow label={t("settings_media.autoplay", "Video otomatik oynat")} value={true} switch icon="play.circle" />
           <Text style={[styles.hint, { color: colors.text.tertiary }]}>
-            Akışta reels ve video içerikler otomatik oynatılır.
+            {t("settings_media.autoplay_hint", "Akışta reels ve video içerikler otomatik oynatılır.")}
           </Text>
-          <SettingsRow label="Yüksek çözünürlükte yükle" value={quality === "high"} icon="photo.circle" />
+          <SettingsRow label={t("settings_media.upload_high", "Yüksek çözünürlükte yükle")} value={quality === "high"} icon="photo.circle" />
         </Section>
       </ScrollView>
     </View>

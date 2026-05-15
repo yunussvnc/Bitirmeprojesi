@@ -13,15 +13,17 @@ import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { createTextStyle, spacing } from "@/src/constants/design";
 import { lightImpact, success } from "@/src/utils/haptics";
 import { useSettingsStore, type Audience } from "@/src/store/useSettingsStore";
+import { useTranslation } from "react-i18next";
 
-const AUDIENCE_LABELS: Record<Audience, string> = {
-  everyone: "Herkes",
-  followers: "Takipçiler",
-  off: "Kapalı",
-};
+const getAudienceLabels = (t: any): Record<Audience, string> => ({
+  everyone: t("settings_messages.everyone", "Herkes"),
+  followers: t("settings_messages.followers", "Takipçiler"),
+  off: t("settings_messages.nobody", "Kapalı"),
+});
 
 export default function MessagesSettingsScreen() {
   const { colors } = useTheme();
+  const { t } = useTranslation();
   const router = useRouter();
   const insets = useSafeAreaInsets();
 
@@ -40,27 +42,27 @@ export default function MessagesSettingsScreen() {
         <TouchableOpacity onPress={() => { lightImpact(); router.back(); }} hitSlop={12} style={styles.backBtn}>
           <IconSymbol name="chevron.left" size={24} color={colors.text.primary} />
         </TouchableOpacity>
-        <Text style={[createTextStyle("title", colors.text.primary), styles.title]}>Mesajlar ve Yanıtlar</Text>
+        <Text style={[createTextStyle("title", colors.text.primary), styles.title]}>{t("settings_messages.title", "Mesajlar ve Yanıtlar")}</Text>
         <View style={styles.backBtn} />
       </View>
 
       <ScrollView style={styles.container} contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
-        <Section title="Mesaj İstekleri">
+        <Section title={t("settings_messages.msg_requests", "Mesaj İstekleri")}>
           <SettingsRow
-            label="Tanımadığım kişilerin mesajlarını isteklere al"
+            label={t("settings_messages.req_desc", "Tanımadığım kişilerin mesajlarını isteklere al")}
             value={unknownRequests}
             switch
             onValueChange={(v: boolean) => { setUnknownRequests(v); success(); }}
             icon="envelope.badge"
           />
           <Text style={[styles.hint, { color: colors.text.tertiary }]}>
-            Takip etmediğin kişilerden gelen mesajlar, mesaj istekleri klasörüne düşer.
+            {t("settings_messages.req_hint", "Takip etmediğin kişilerden gelen mesajlar, mesaj istekleri klasörüne düşer.")}
           </Text>
         </Section>
 
-        <Section title="Hikaye Yanıtları">
+        <Section title={t("settings_messages.replies", "Hikaye Yanıtları")}>
           <Text style={[styles.sectionDesc, { color: colors.text.secondary }]}>
-            Hikayelerine kimlerin yanıt verebileceğini seç
+            {t("settings_messages.allow_replies", "Hikayelerine kimlerin yanıt verebileceğini seç")}
           </Text>
           {audienceOptions.map((opt) => (
             <TouchableOpacity
@@ -70,7 +72,7 @@ export default function MessagesSettingsScreen() {
               activeOpacity={0.6}
             >
               <Text style={[styles.radioLabel, { color: colors.text.primary }]}>
-                {AUDIENCE_LABELS[opt]}
+                {getAudienceLabels(t)[opt]}
               </Text>
               <View style={[
                 styles.radio,
@@ -84,23 +86,23 @@ export default function MessagesSettingsScreen() {
           ))}
         </Section>
 
-        <Section title="Okundu Bilgisi">
+        <Section title={t("settings_messages.read_receipts", "Okundu Bilgisi")}>
           <SettingsRow
-            label="Okundu bilgisini göster"
+            label={t("settings_messages.show_read", "Okundu bilgisini göster")}
             value={readReceipts}
             switch
             onValueChange={(v: boolean) => { setReadReceipts(v); success(); }}
             icon="checkmark.message"
           />
           <Text style={[styles.hint, { color: colors.text.tertiary }]}>
-            Kapatırsan, mesajlarını okuduğunu diğer kişiler göremez. Sen de başkalarının okundu bilgisini göremezsin.
+            {t("settings_messages.show_read_desc", "Kapatırsan, mesajlarını okuduğunu diğer kişiler göremez. Sen de başkalarının okundu bilgisini göremezsin.")}
           </Text>
         </Section>
 
-        <Section title="Grup Mesajları">
-          <SettingsRow label="Herkesin seni gruba eklemesine izin ver" value={true} switch icon="person.3" />
+        <Section title={t("settings_messages.groups", "Grup Mesajları")}>
+          <SettingsRow label={t("settings_messages.group_allow", "Herkesin seni gruba eklemesine izin ver")} value={true} switch icon="person.3" />
           <Text style={[styles.hint, { color: colors.text.tertiary }]}>
-            Kapatırsan, yalnızca takip ettiğin kişiler seni gruplara ekleyebilir.
+            {t("settings_messages.group_hint", "Kapatırsan, yalnızca takip ettiğin kişiler seni gruplara ekleyebilir.")}
           </Text>
         </Section>
       </ScrollView>

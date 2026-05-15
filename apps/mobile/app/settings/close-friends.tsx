@@ -15,6 +15,7 @@ import { createTextStyle, spacing } from "@/src/constants/design";
 import { lightImpact, success } from "@/src/utils/haptics";
 import { useSettingsStore } from "@/src/store/useSettingsStore";
 import { apiGet } from "@/src/utils/apiClient";
+import { useTranslation } from "react-i18next";
 
 type FollowUser = {
   id: number;
@@ -25,6 +26,7 @@ type FollowUser = {
 
 export default function CloseFriendsScreen() {
   const { colors, isDark } = useTheme();
+  const { t } = useTranslation();
   const router = useRouter();
   const insets = useSafeAreaInsets();
 
@@ -69,7 +71,7 @@ export default function CloseFriendsScreen() {
         />
         <View style={styles.rowInfo}>
           <Text style={[styles.username, { color: colors.text.primary }]}>
-            {item.username || item.first_name || `Kullanıcı #${item.id}`}
+            {item.username || item.first_name || `${t("settings_close_friends.user", "Kullanıcı")} #${item.id}`}
           </Text>
           {item.first_name && item.username && (
             <Text style={[styles.fullName, { color: colors.text.tertiary }]}>{item.first_name}</Text>
@@ -97,7 +99,7 @@ export default function CloseFriendsScreen() {
         <TouchableOpacity onPress={() => { lightImpact(); router.back(); }} hitSlop={12} style={styles.backBtn}>
           <IconSymbol name="chevron.left" size={24} color={colors.text.primary} />
         </TouchableOpacity>
-        <Text style={[createTextStyle("title", colors.text.primary), styles.headerTitle]}>Yakın Arkadaşlar</Text>
+        <Text style={[createTextStyle("title", colors.text.primary), styles.headerTitle]}>{t("settings_close_friends.title", "Yakın Arkadaşlar")}</Text>
         <View style={styles.backBtn}>
           <Text style={[styles.countBadge, { color: colors.accent.primary }]}>{closeFriendIds.length}</Text>
         </View>
@@ -109,7 +111,7 @@ export default function CloseFriendsScreen() {
           <IconSymbol name="star.fill" size={14} color="#fff" />
         </View>
         <Text style={[styles.infoText, { color: colors.text.secondary }]}>
-          Yakın arkadaşlarına özel hikaye paylaşabilirsin. Listeye eklediğin kişiler bilgilendirilmez.
+          {t("settings_close_friends.info", "Yakın arkadaşlarına özel hikaye paylaşabilirsin. Listeye eklediğin kişiler bilgilendirilmez.")}
         </Text>
       </View>
 
@@ -118,7 +120,7 @@ export default function CloseFriendsScreen() {
         <IconSymbol name="magnifyingglass" size={18} color={colors.text.tertiary} />
         <TextInput
           style={[styles.searchInput, { color: colors.text.primary }]}
-          placeholder="Ara..."
+          placeholder={t("settings_close_friends.search", "Ara...")}
           placeholderTextColor={colors.text.tertiary}
           value={search}
           onChangeText={setSearch}
@@ -132,7 +134,7 @@ export default function CloseFriendsScreen() {
         <View style={styles.emptyContainer}>
           <IconSymbol name="person.2" size={48} color={colors.text.tertiary} />
           <Text style={[styles.emptyText, { color: colors.text.tertiary }]}>
-            {search ? "Sonuç bulunamadı" : "Henüz birini takip etmiyorsunuz"}
+            {search ? t("settings_close_friends.empty", "Sonuç bulunamadı") : t("settings_close_friends.no_following", "Henüz birini takip etmiyorsunuz")}
           </Text>
         </View>
       ) : (

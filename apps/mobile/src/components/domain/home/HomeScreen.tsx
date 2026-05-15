@@ -476,7 +476,7 @@ export default function HomeScreen() {
           index={index}
           image={getPlaceImageSource(merged)}
           imagePlaceholder={!hasPlaceImage(merged)}
-          title={it.name ?? "Mekan"}
+          title={it.name ?? t('common.venue')}
           subtitle={it.subtitle ?? place?.subtitle}
           tags={it.tags ?? place?.tags}
           location={loc}

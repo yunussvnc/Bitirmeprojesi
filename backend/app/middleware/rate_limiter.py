@@ -3,10 +3,12 @@
 import time
 import logging
 from collections import defaultdict
-from typing import Dict, List, Tuple
 
+# pyrefly: ignore [missing-import]
 from fastapi import Request
+# pyrefly: ignore [missing-import]
 from fastapi.responses import JSONResponse
+# pyrefly: ignore [missing-import]
 from starlette.middleware.base import BaseHTTPMiddleware
 
 logger = logging.getLogger("asemos")
@@ -19,8 +21,8 @@ class RateLimitStore:
     """
 
     def __init__(self):
-        self._requests: Dict[str, List[float]] = defaultdict(list)
-        self._lockouts: Dict[str, float] = {}  # IP → lockout bitiş zamanı
+        self._requests: dict[str, list[float]] = defaultdict(list)
+        self._lockouts: dict[str, float] = {}  # IP → lockout bitiş zamanı
 
     def _cleanup(self, key: str, window: int):
         """Pencere dışındaki eski kayıtları temizle"""
@@ -42,7 +44,7 @@ class RateLimitStore:
         self._lockouts[key] = time.time() + duration_seconds
         logger.warning("🔒 IP kilitlendi: %s (%d saniye)", key, duration_seconds)
 
-    def check_rate(self, key: str, max_requests: int, window_seconds: int) -> Tuple[bool, int]:
+    def check_rate(self, key: str, max_requests: int, window_seconds: int) -> tuple[bool, int]:
         """
         Rate limit kontrolü.
         Returns: (izin_var_mı, kalan_hak)
@@ -61,7 +63,7 @@ class RateLimitStore:
 _store = RateLimitStore()
 
 # Failed login sayacı (brute-force koruması)
-_failed_logins: Dict[str, int] = defaultdict(int)
+_failed_logins: dict[str, int] = defaultdict(int)
 MAX_FAILED_LOGINS = 10
 LOCKOUT_DURATION = 900  # 15 dakika
 
@@ -90,12 +92,12 @@ def reset_failed_logins(ip: str):
 
 # Rate limit kuralları: (path_prefix, max_requests, window_seconds)
 RATE_LIMIT_RULES = [
-    ("/auth/login", 5, 60),               # 5 req/dk
-    ("/auth/register", 3, 60),            # 3 req/dk
-    ("/auth/verify-register", 10, 300),   # 10 req/5 dk (OTP Brute Force koruması!)
-    ("/auth/resend-register-code", 3, 60),# 3 req/dk
-    ("/auth/forgot-password", 3, 60),     # 3 req/dk
-    ("/auth/reset-password", 5, 60),      # 5 req/dk (Şifre yenileme Brute Force)
+    ("/auth/login", 50, 60),              # 50 req/dk (Geliştirme için artırıldı)
+    ("/auth/register", 30, 60),           # 30 req/dk
+    ("/auth/verify-register", 50, 300),   # 50 req/5 dk
+    ("/auth/resend-register-code", 30, 60),# 30 req/dk
+    ("/auth/forgot-password", 30, 60),    # 30 req/dk
+    ("/auth/reset-password", 50, 60),     # 50 req/dk
     ("/auth/refresh", 15, 60),            # 15 req/dk
     ("/upload/", 10, 60),                 # 10 req/dk
     ("/recommend", 10, 60),               # 10 req/dk

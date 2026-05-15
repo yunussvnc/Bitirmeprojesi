@@ -12,24 +12,26 @@ import { SettingsRow } from "@/src/components/ui";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { createTextStyle, spacing } from "@/src/constants/design";
 import { lightImpact, success } from "@/src/utils/haptics";
+import { useTranslation } from "react-i18next";
 
 export default function PrivacyCenterScreen() {
   const { colors, isDark } = useTheme();
+  const { t } = useTranslation();
   const router = useRouter();
   const insets = useSafeAreaInsets();
 
   const handleDataRequest = () => {
     lightImpact();
     Alert.alert(
-      "Verilerimi İndir",
-      "Hesabınıza ait tüm verilerin bir kopyası hazırlanacak ve e-posta adresinize gönderilecektir. Bu işlem 24-48 saat sürebilir.",
+      t("settings_privacy_center.download_data", "Verilerimi İndir"),
+      t("settings_privacy_center.download_desc", "Hesabınıza ait tüm verilerin bir kopyası hazırlanacak ve e-posta adresinize gönderilecektir. Bu işlem 24-48 saat sürebilir."),
       [
-        { text: "Vazgeç", style: "cancel" },
+        { text: t("common.cancel", "Vazgeç"), style: "cancel" },
         {
-          text: "Talep Et",
+          text: t("common.request", "Talep Et"),
           onPress: () => {
             success();
-            Alert.alert("✅ Talep Alındı", "Verileriniz hazırlandığında e-posta ile bilgilendirileceksiniz.");
+            Alert.alert(t("common.success_requested", "✅ Talep Alındı"), t("settings_privacy_center.data_ready_desc", "Verileriniz hazırlandığında e-posta ile bilgilendirileceksiniz."));
           },
         },
       ]
@@ -42,7 +44,7 @@ export default function PrivacyCenterScreen() {
         <TouchableOpacity onPress={() => { lightImpact(); router.back(); }} hitSlop={12} style={styles.backBtn}>
           <IconSymbol name="chevron.left" size={24} color={colors.text.primary} />
         </TouchableOpacity>
-        <Text style={[createTextStyle("title", colors.text.primary), styles.title]}>Gizlilik Merkezi</Text>
+        <Text style={[createTextStyle("title", colors.text.primary), styles.title]}>{t("settings_privacy_center.title", "Gizlilik Merkezi")}</Text>
         <View style={styles.backBtn} />
       </View>
 
@@ -52,62 +54,53 @@ export default function PrivacyCenterScreen() {
           <View style={[styles.bannerIcon, { backgroundColor: colors.accent.primary }]}>
             <IconSymbol name="shield.lefthalf.filled" size={28} color="#fff" />
           </View>
-          <Text style={[styles.bannerTitle, { color: colors.text.primary }]}>Gizliliğin Bizim İçin Öncelik</Text>
+          <Text style={[styles.bannerTitle, { color: colors.text.primary }]}>{t("settings_privacy_center.priority_title", "Gizliliğin Bizim İçin Öncelik")}</Text>
           <Text style={[styles.bannerDesc, { color: colors.text.secondary }]}>
-            Verileriniz güvende. Asemos, kişisel bilgilerinizi satmaz veya üçüncü taraflarla paylaşmaz.
+            {t("settings_privacy_center.priority_desc", "Verileriniz güvende. Asemos, kişisel bilgilerinizi satmaz veya üçüncü taraflarla paylaşmaz.")}
           </Text>
         </View>
 
-        <Section title="Yasal Belgeler">
+        <Section title={t("settings_privacy_center.permissions", "Yasal Belgeler")}>
           <SettingsRow
-            label="Gizlilik Politikası"
+            label={t("settings_privacy_center.data_policy", "Gizlilik Politikası")}
             showArrow
             icon="doc.text"
             onPress={() => { lightImpact(); }}
           />
           <SettingsRow
-            label="Kullanım Koşulları"
+            label={t("settings_privacy_center.tos", "Kullanım Koşulları")}
             showArrow
             icon="doc.plaintext"
             onPress={() => { lightImpact(); }}
           />
           <SettingsRow
-            label="Çerez Politikası"
+            label={t("settings_privacy_center.cookie_policy", "Çerez Politikası")}
             showArrow
             icon="info.circle"
             onPress={() => { lightImpact(); }}
           />
         </Section>
 
-        <Section title="KVKK (Kişisel Verilerin Korunması)">
+        <Section title={t("settings_privacy_center.kvkk_title", "KVKK (Kişisel Verilerin Korunması)")}>
           <View style={[styles.kvkkCard, { backgroundColor: colors.surface.elevated, borderColor: colors.surface.border }]}>
             <Text style={[styles.kvkkText, { color: colors.text.secondary }]}>
-              6698 sayılı Kişisel Verilerin Korunması Kanunu kapsamında, kişisel verileriniz veri sorumlusu sıfatıyla Asemos tarafından aşağıda açıklanan amaçlar doğrultusunda işlenmektedir.
-            </Text>
-            <Text style={[styles.kvkkText, { color: colors.text.secondary, marginTop: 8 }]}>
-              • Hesap oluşturma ve kimlik doğrulama{"\n"}
-              • Hizmet sunumu ve iyileştirme{"\n"}
-              • Güvenlik ve dolandırıcılık önleme{"\n"}
-              • Yasal yükümlülüklerin yerine getirilmesi
-            </Text>
-            <Text style={[styles.kvkkText, { color: colors.text.secondary, marginTop: 8 }]}>
-              KVKK kapsamında aydınlatma yükümlülüğümüz gereğince kişisel verilerinizin işlenme amaçları, aktarım yapılan taraflar ve haklarınız hakkında detaylı bilgi almak için Gizlilik Politikamızı inceleyebilirsiniz.
+              {t("settings_privacy_center.kvkk_desc", "6698 sayılı Kişisel Verilerin Korunması Kanunu kapsamında...")}
             </Text>
           </View>
         </Section>
 
-        <Section title="Veri Hakların">
+        <Section title={t("settings_privacy_center.data_controls", "Veri Hakların")}>
           <SettingsRow
-            label="Verilerimi İndir"
+            label={t("settings_privacy_center.download_data", "Verilerimi İndir")}
             showArrow
             icon="arrow.down.doc"
             onPress={handleDataRequest}
           />
           <Text style={[styles.hint, { color: colors.text.tertiary }]}>
-            Hesabınıza ait tüm verilerin bir kopyasını talep edebilirsiniz.
+            {t("settings_privacy_center.download_data_hint", "Hesabınıza ait tüm verilerin bir kopyasını talep edebilirsiniz.")}
           </Text>
           <SettingsRow
-            label="Veri Silme Talebi"
+            label={t("settings_privacy_center.delete_data", "Veri Silme Talebi")}
             showArrow
             icon="trash"
             onPress={() => {
@@ -116,7 +109,7 @@ export default function PrivacyCenterScreen() {
             }}
           />
           <Text style={[styles.hint, { color: colors.text.tertiary }]}>
-            Hesabınızı ve tüm verilerinizi kalıcı olarak silmek için Güvenlik ayarlarındaki hesap silme bölümünü kullanabilirsiniz.
+            {t("settings_privacy_center.delete_data_hint", "Hesabınızı ve tüm verilerinizi kalıcı olarak silmek için Güvenlik ayarlarındaki hesap silme bölümünü kullanabilirsiniz.")}
           </Text>
         </Section>
       </ScrollView>

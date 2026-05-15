@@ -4,6 +4,7 @@
  */
 
 import React, { useEffect, useState, useMemo, useRef, useCallback } from 'react';
+import { getTranslatedCategory } from '@/src/utils/categories';
 import {
   View,
   Text,
@@ -224,11 +225,11 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
       return {
         ...s,
         place_id: Number(place.id),
-        place: { id: Number(place.id), name: place.name || '', category: place.category || '' },
+        place: { id: Number(place.id), name: place.name || '', category: getTranslatedCategory(place.category, t) || '' },
         ...(real ? { user_id: real.user_id, author: real.author } : {}),
       };
     });
-  }, [stories, posts, place.id, place.name, place.category]);
+  }, [stories, posts, place.id, place.name, getTranslatedCategory(place.category, t)]);
   const selectedPost = useMemo(
     () => (selectedPostId ? posts.find((p) => p.id === selectedPostId) || null : null),
     [posts, selectedPostId]
@@ -278,7 +279,7 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
       name: place.name || '',
       subtitle: place.subtitle,
       photo_url: place.photo_url,
-      category: place.category,
+      category: getTranslatedCategory(place.category, t),
       tags: place.tags,
     });
   };
@@ -428,7 +429,7 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
                     mapShowStories && stories.length > 0 && t('explore.story_count', { count: stories.length }),
                   ]
                     .filter(Boolean)
-                    .join(' · ') || (place.category ?? '')}
+                    .join(' · ') || (getTranslatedCategory(place.category, t) ?? '')}
                 </Text>
               </View>
               <View style={styles.heroActions}>

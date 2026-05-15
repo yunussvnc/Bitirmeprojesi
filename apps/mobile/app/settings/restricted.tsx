@@ -13,9 +13,11 @@ import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { createTextStyle, spacing } from "@/src/constants/design";
 import { lightImpact, success } from "@/src/utils/haptics";
 import { useSettingsStore } from "@/src/store/useSettingsStore";
+import { useTranslation } from "react-i18next";
 
 export default function RestrictedAccountsScreen() {
   const { colors, isDark } = useTheme();
+  const { t } = useTranslation();
   const router = useRouter();
   const insets = useSafeAreaInsets();
 
@@ -24,10 +26,10 @@ export default function RestrictedAccountsScreen() {
 
   const handleRemove = (id: number) => {
     lightImpact();
-    Alert.alert("Kısıtlamayı Kaldır", "Bu kullanıcının kısıtlamasını kaldırmak istiyor musunuz?", [
-      { text: "Vazgeç", style: "cancel" },
+    Alert.alert(t("settings_restricted.unrestrict_title", "Kısıtlamayı Kaldır"), t("settings_restricted.unrestrict_desc", "Bu kullanıcının kısıtlamasını kaldırmak istiyor musunuz?"), [
+      { text: t("settings_restricted.cancel", "Vazgeç"), style: "cancel" },
       {
-        text: "Kaldır",
+        text: t("settings_restricted.unrestrict", "Kaldır"),
         style: "destructive",
         onPress: () => { toggleRestricted(id); success(); },
       },
@@ -40,7 +42,7 @@ export default function RestrictedAccountsScreen() {
         <TouchableOpacity onPress={() => { lightImpact(); router.back(); }} hitSlop={12} style={styles.backBtn}>
           <IconSymbol name="chevron.left" size={24} color={colors.text.primary} />
         </TouchableOpacity>
-        <Text style={[createTextStyle("title", colors.text.primary), styles.headerTitle]}>Kısıtlı Hesaplar</Text>
+        <Text style={[createTextStyle("title", colors.text.primary), styles.headerTitle]}>{t("settings_restricted.title", "Kısıtlı Hesaplar")}</Text>
         <View style={styles.backBtn} />
       </View>
 
@@ -48,7 +50,7 @@ export default function RestrictedAccountsScreen() {
       <View style={[styles.infoBanner, { backgroundColor: isDark ? "rgba(255,179,0,0.08)" : "rgba(255,179,0,0.06)" }]}>
         <IconSymbol name="info.circle" size={18} color="#FFB300" />
         <Text style={[styles.infoText, { color: colors.text.secondary }]}>
-          Kısıtladığın kişiler mesaj gönderebilir ancak bildirim almaz, yorumları yalnızca onlar görebilir. Engellenmekten farklıdır.
+          {t("settings_restricted.info", "Kısıtladığın kişiler mesaj gönderebilir ancak bildirim almaz, yorumları yalnızca onlar görebilir. Engellenmekten farklıdır.")}
         </Text>
       </View>
 
@@ -57,9 +59,9 @@ export default function RestrictedAccountsScreen() {
           <View style={[styles.emptyIcon, { backgroundColor: isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.03)" }]}>
             <IconSymbol name="checkmark.shield" size={48} color={colors.text.tertiary} />
           </View>
-          <Text style={[styles.emptyTitle, { color: colors.text.primary }]}>Kısıtlı hesap yok</Text>
+          <Text style={[styles.emptyTitle, { color: colors.text.primary }]}>{t("settings_restricted.no_restricted", "Kısıtlı hesap yok")}</Text>
           <Text style={[styles.emptyDesc, { color: colors.text.tertiary }]}>
-            Bir kullanıcıyı kısıtlamak için profilindeki menüden{"\n"}"Kısıtla" seçeneğini kullanabilirsin.
+            {t("settings_restricted.empty_desc", "Bir kullanıcıyı kısıtlamak için profilindeki menüden\n\"Kısıtla\" seçeneğini kullanabilirsin.")}
           </Text>
         </View>
       ) : (
@@ -72,13 +74,13 @@ export default function RestrictedAccountsScreen() {
               <View style={[styles.avatarPlaceholder, { backgroundColor: colors.surface.elevated }]}>
                 <IconSymbol name="person.fill" size={20} color={colors.text.tertiary} />
               </View>
-              <Text style={[styles.userId, { color: colors.text.primary }]}>Kullanıcı #{item}</Text>
+              <Text style={[styles.userId, { color: colors.text.primary }]}>{t("settings_restricted.user", "Kullanıcı")} #{item}</Text>
               <TouchableOpacity
                 style={[styles.removeBtn, { borderColor: colors.semantic.error }]}
                 onPress={() => handleRemove(item)}
                 activeOpacity={0.7}
               >
-                <Text style={[styles.removeText, { color: colors.semantic.error }]}>Kaldır</Text>
+                <Text style={[styles.removeText, { color: colors.semantic.error }]}>{t("settings_restricted.unrestrict", "Kaldır")}</Text>
               </TouchableOpacity>
             </View>
           )}

@@ -17,6 +17,7 @@ import {
 } from 'react-native';
 import { WebView } from 'react-native-webview';
 import type { WebViewMessageEvent } from 'react-native-webview';
+import { CATEGORY_KEYS, STATUS_KEYS, getTranslatedCategory } from '@/src/utils/categories';
 import * as Location from 'expo-location';
 import { useTheme } from '@/src/hooks/useTheme';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
@@ -30,13 +31,8 @@ import { calculateDistance } from '@/src/utils/location';
 import { DistanceSlider } from '@/src/components/ui/DistanceSlider';
 import { useTranslation } from 'react-i18next';
 
-/** Keşfet haritasında filtrelenebilecek kategoriler */
-const ALL_CATEGORIES = ['Kafe', 'Restoran', 'Bar', 'Meyhane', 'Gece Kulübü', 'Fast Food', 'Nargile Cafe'] as const;
-const ALL_STATUSES: { key: PlaceStatusType; label: string; color: string }[] = [
-  { key: 'open', label: 'Açık', color: '#4CAF50' },
-  { key: 'closing_soon', label: 'Kapanıyor', color: '#FF9800' },
-  { key: 'closed', label: 'Kapalı', color: '#F44336' },
-];
+/** Category keys matching backend data values + translation keys */
+
 
 const ISTANBUL_CENTER = { latitude: 41.0082, longitude: 28.9784 };
 
@@ -431,11 +427,11 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
             <View style={styles.filterSection}>
               <Text style={[styles.filterSectionTitle, { color: colors.text.secondary }]}>{t('explore.filter_category')}</Text>
               <View style={styles.chipRow}>
-                {ALL_CATEGORIES.map((cat) => {
-                  const active = selectedCategories.includes(cat);
+                {CATEGORY_KEYS.map(({ value, tKey }) => {
+                  const active = selectedCategories.includes(value);
                   return (
                     <TouchableOpacity
-                      key={cat}
+                      key={value}
                       style={[
                         styles.chip,
                         {
@@ -443,7 +439,7 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
                           borderColor: active ? colors.accent.primary : colors.surface.border,
                         },
                       ]}
-                      onPress={() => toggleCategory(cat)}
+                      onPress={() => toggleCategory(value)}
                       activeOpacity={0.7}
                     >
                       <Text
@@ -452,7 +448,7 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
                           { color: active ? '#fff' : colors.text.primary },
                         ]}
                       >
-                        {cat}
+                        {t(tKey)}
                       </Text>
                     </TouchableOpacity>
                   );
@@ -464,7 +460,7 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
             <View style={styles.filterSection}>
               <Text style={[styles.filterSectionTitle, { color: colors.text.secondary }]}>{t('explore.filter_status')}</Text>
               <View style={styles.chipRow}>
-                {ALL_STATUSES.map((s) => {
+                {STATUS_KEYS.map((s) => {
                   const active = selectedStatuses.includes(s.key);
                   return (
                     <TouchableOpacity
@@ -486,7 +482,7 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
                           { color: active ? '#fff' : colors.text.primary },
                         ]}
                       >
-                        {s.label}
+                        {t(s.tKey)}
                       </Text>
                     </TouchableOpacity>
                   );

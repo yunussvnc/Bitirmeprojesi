@@ -423,6 +423,11 @@ const styles = StyleSheet.create({
         flex: 1,
         marginRight: 8,
     },
+    timeBadge: {
+        paddingHorizontal: 6,
+        paddingVertical: 2,
+        borderRadius: 8,
+    },
     time: {
         fontSize: 13,
         fontWeight: "400",
@@ -477,6 +482,10 @@ const styles = StyleSheet.create({
         textAlign: "center",
         lineHeight: 20,
         marginBottom: 28,
+    },
+    emptyContainer: {
+        alignItems: "center",
+        marginBottom: 8,
     },
 
     /* Swipe Actions – rounded buttons with labels (MessagesScreen ile aynı) */

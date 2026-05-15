@@ -11,39 +11,20 @@ import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { createTextStyle, spacing } from "@/src/constants/design";
 import { lightImpact } from "@/src/utils/haptics";
 import { Section } from "@/src/components/layout/Section";
+import { useTranslation } from "react-i18next";
 
-const FAQ_ITEMS = [
-  {
-    q: "Hesabımı nasıl gizli yapabilirim?",
-    a: "Ayarlar > Hesap Gizliliği bölümünden hesabınızı gizli moda geçirebilirsiniz. Gizli hesaplarda yalnızca onayladığınız kişiler gönderilerinizi görebilir.",
-  },
-  {
-    q: "Şifremi unuttum, ne yapmalıyım?",
-    a: "Giriş ekranındaki 'Şifremi Unuttum' bağlantısına tıklayarak e-posta adresinize sıfırlama linki gönderebilirsiniz.",
-  },
-  {
-    q: "Birini nasıl engellerim?",
-    a: "Kullanıcının profiline gidin, sağ üst köşedeki menü simgesine (⋯) tıklayın ve 'Engelle' seçeneğini seçin. Engellenen kişiler sizinle iletişim kuramaz.",
-  },
-  {
-    q: "Gönderilerimi kimler görebilir?",
-    a: "Eğer hesabınız herkese açıksa herkes, gizli ise sadece takipçileriniz görebilir. Hikayelerinizi yakın arkadaşlar listesiyle sınırlandırabilirsiniz.",
-  },
-  {
-    q: "Hesabımı nasıl silebilirim?",
-    a: "Ayarlar > Şifre ve Güvenlik > Tehlike Bölgesi altından hesabınızı kalıcı olarak silebilirsiniz. Bu işlem geri alınamaz.",
-  },
-  {
-    q: "Mekan nasıl eklerim?",
-    a: "Harita ekranında istediğiniz konuma uzun basarak yeni mekan ekleme formunu açabilirsiniz. Eklenen mekanlar moderasyon sonrası yayına alınır.",
-  },
-];
 
 export default function HelpCenterScreen() {
   const { colors, isDark } = useTheme();
+  const { t } = useTranslation();
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const FAQ_ITEMS = Array.from({ length: 6 }).map((_, idx) => ({
+    q: t(`settings_help.faq_${idx}_q`),
+    a: t(`settings_help.faq_${idx}_a`),
+  }));
 
   const handleEmail = () => {
     lightImpact();
@@ -56,12 +37,12 @@ export default function HelpCenterScreen() {
         <TouchableOpacity onPress={() => { lightImpact(); router.back(); }} hitSlop={12} style={styles.backBtn}>
           <IconSymbol name="chevron.left" size={24} color={colors.text.primary} />
         </TouchableOpacity>
-        <Text style={[createTextStyle("title", colors.text.primary), styles.title]}>Yardım Merkezi</Text>
+        <Text style={[createTextStyle("title", colors.text.primary), styles.title]}>{t("settings_help.title", "Yardım Merkezi")}</Text>
         <View style={styles.backBtn} />
       </View>
 
       <ScrollView style={styles.container} contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
-        <Section title="Sıkça Sorulan Sorular">
+        <Section title={t("settings_help.faqs", "Sıkça Sorulan Sorular")}>
           {FAQ_ITEMS.map((item, idx) => (
             <View key={idx}>
               <TouchableOpacity
@@ -85,7 +66,7 @@ export default function HelpCenterScreen() {
           ))}
         </Section>
 
-        <Section title="Bize Ulaşın">
+        <Section title={t("settings_help.contact", "Bize Ulaşın")}>
           <TouchableOpacity
             style={[styles.contactCard, { backgroundColor: colors.surface.elevated, borderColor: colors.surface.border }]}
             onPress={handleEmail}
@@ -95,7 +76,7 @@ export default function HelpCenterScreen() {
               <IconSymbol name="envelope.fill" size={20} color="#fff" />
             </View>
             <View style={styles.contactInfo}>
-              <Text style={[styles.contactTitle, { color: colors.text.primary }]}>Hata Bildir / Destek Talebi</Text>
+              <Text style={[styles.contactTitle, { color: colors.text.primary }]}>{t("settings_help.report_problem", "Hata Bildir / Destek Talebi")}</Text>
               <Text style={[styles.contactDesc, { color: colors.text.tertiary }]}>destek@asemos.com</Text>
             </View>
             <IconSymbol name="chevron.right" size={16} color={colors.text.tertiary} />
@@ -110,7 +91,7 @@ export default function HelpCenterScreen() {
               <IconSymbol name="lightbulb.fill" size={20} color="#fff" />
             </View>
             <View style={styles.contactInfo}>
-              <Text style={[styles.contactTitle, { color: colors.text.primary }]}>Öneride Bulun</Text>
+              <Text style={[styles.contactTitle, { color: colors.text.primary }]}>{t("settings_help.support", "Öneride Bulun")}</Text>
               <Text style={[styles.contactDesc, { color: colors.text.tertiary }]}>oneri@asemos.com</Text>
             </View>
             <IconSymbol name="chevron.right" size={16} color={colors.text.tertiary} />

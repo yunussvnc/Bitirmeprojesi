@@ -12,6 +12,7 @@ import { SettingsRow } from "@/src/components/ui";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { createTextStyle, spacing } from "@/src/constants/design";
 import { lightImpact } from "@/src/utils/haptics";
+import { useTranslation } from "react-i18next";
 
 const APP_VERSION = "1.0.0";
 const BUILD_NUMBER = "2026.03.30";
@@ -23,6 +24,7 @@ const DEPS = [
 
 export default function AboutScreen() {
   const { colors, isDark } = useTheme();
+  const { t } = useTranslation();
   const router = useRouter();
   const insets = useSafeAreaInsets();
 
@@ -32,7 +34,7 @@ export default function AboutScreen() {
         <TouchableOpacity onPress={() => { lightImpact(); router.back(); }} hitSlop={12} style={styles.backBtn}>
           <IconSymbol name="chevron.left" size={24} color={colors.text.primary} />
         </TouchableOpacity>
-        <Text style={[createTextStyle("title", colors.text.primary), styles.title]}>Hakkında</Text>
+        <Text style={[createTextStyle("title", colors.text.primary), styles.title]}>{t("settings_about.title", "Hakkında")}</Text>
         <View style={styles.backBtn} />
       </View>
 
@@ -45,7 +47,7 @@ export default function AboutScreen() {
           />
           <Text style={[styles.appName, { color: colors.text.primary }]}>Asemos</Text>
           <Text style={[styles.tagline, { color: colors.accent.primary }]}>
-            Mekan keşfet • Eşleş • Paylaş
+            {t("settings_about.tagline", "Mekan keşfet • Eşleş • Paylaş")}
           </Text>
           <View style={[styles.versionBadge, { backgroundColor: isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)" }]}>
             <Text style={[styles.versionText, { color: colors.text.secondary }]}>
@@ -54,35 +56,35 @@ export default function AboutScreen() {
           </View>
         </View>
 
-        <Section title="Uygulama Bilgileri">
-          <SettingsRow label="Sürüm" value={`v${APP_VERSION}`} icon="info.circle" />
+        <Section title={t("settings_about.app_info", "Uygulama Bilgileri")}>
+          <SettingsRow label={t("settings_help.version", "Sürüm")} value={`v${APP_VERSION}`} icon="info.circle" />
           <SettingsRow label="Build" value={BUILD_NUMBER} icon="hammer" />
           <SettingsRow label="Platform" value="React Native + Expo" icon="apps.iphone" />
           <SettingsRow label="Backend" value="FastAPI + PostgreSQL" icon="server.rack" />
         </Section>
 
-        <Section title="Yasal">
+        <Section title={t("settings_about.legal", "Yasal")}>
           <SettingsRow
-            label="Kullanım Koşulları"
+            label={t("settings_about.terms", "Kullanım Koşulları")}
             showArrow
             icon="doc.plaintext"
             onPress={() => { lightImpact(); }}
           />
           <SettingsRow
-            label="Gizlilik Politikası"
+            label={t("settings_about.data_policy", "Gizlilik Politikası")}
             showArrow
             icon="shield"
             onPress={() => { lightImpact(); router.push("/settings/privacy-center" as any); }}
           />
           <SettingsRow
-            label="KVKK Aydınlatma Metni"
+            label={t("settings_about.kvkk", "KVKK Aydınlatma Metni")}
             showArrow
             icon="doc.text"
             onPress={() => { lightImpact(); router.push("/settings/privacy-center" as any); }}
           />
         </Section>
 
-        <Section title="Açık Kaynak Bağımlılıklar">
+        <Section title={t("settings_about.open_source", "Açık Kaynak Bağımlılıklar")}>
           {DEPS.map((dep) => (
             <View key={dep} style={[styles.depRow, { borderBottomColor: colors.surface.border }]}>
               <IconSymbol name="shippingbox" size={16} color={colors.text.tertiary} />
@@ -90,17 +92,14 @@ export default function AboutScreen() {
             </View>
           ))}
           <Text style={[styles.hint, { color: colors.text.tertiary }]}>
-            Bu uygulama açık kaynak topluluk projelerine dayanmaktadır. Tüm lisanslar ilgili kütüphanelerin deposunda mevcuttur.
+            {t("settings_about.oss_hint", "Bu uygulama açık kaynak topluluk projelerine dayanmaktadır. Tüm lisanslar ilgili kütüphanelerin deposunda mevcuttur.")}
           </Text>
         </Section>
 
         {/* Footer */}
         <View style={styles.footer}>
           <Text style={[styles.footerText, { color: colors.text.tertiary }]}>
-            © 2026 Asemos. Tüm hakları saklıdır.
-          </Text>
-          <Text style={[styles.footerSubtext, { color: colors.text.tertiary }]}>
-            Sevgiyle İstanbul'da yapıldı ❤️
+            © 2026 Asemos.
           </Text>
         </View>
       </ScrollView>

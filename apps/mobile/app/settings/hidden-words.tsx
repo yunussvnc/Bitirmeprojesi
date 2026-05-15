@@ -16,9 +16,11 @@ import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { createTextStyle, spacing } from "@/src/constants/design";
 import { lightImpact, success } from "@/src/utils/haptics";
 import { useSettingsStore } from "@/src/store/useSettingsStore";
+import { useTranslation } from "react-i18next";
 
 export default function HiddenWordsScreen() {
   const { colors, isDark } = useTheme();
+  const { t } = useTranslation();
   const router = useRouter();
   const insets = useSafeAreaInsets();
 
@@ -34,7 +36,7 @@ export default function HiddenWordsScreen() {
     const word = newWord.trim();
     if (!word) return;
     if (hiddenWords.includes(word.toLowerCase())) {
-      Alert.alert("Bilgi", "Bu sözcük zaten listede.");
+      Alert.alert("Bilgi", t("settings_hidden.already_added", "Bu sözcük zaten listede."));
       return;
     }
     addWord(word);
@@ -48,34 +50,34 @@ export default function HiddenWordsScreen() {
         <TouchableOpacity onPress={() => { lightImpact(); router.back(); }} hitSlop={12} style={styles.backBtn}>
           <IconSymbol name="chevron.left" size={24} color={colors.text.primary} />
         </TouchableOpacity>
-        <Text style={[createTextStyle("title", colors.text.primary), styles.title]}>Gizlenen Sözcükler</Text>
+        <Text style={[createTextStyle("title", colors.text.primary), styles.title]}>{t("settings_hidden.title", "Gizlenen Sözcükler")}</Text>
         <View style={styles.backBtn} />
       </View>
 
       <ScrollView style={styles.container} contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
-        <Section title="Otomatik Filtre">
+        <Section title={t("settings_hidden.auto_filter", "Otomatik Filtre")}>
           <SettingsRow
-            label="Rahatsız edici sözcükleri gizle"
+            label={t("settings_hidden.hide_offensive", "Rahatsız edici sözcükleri gizle")}
             value={hideOffensive}
             switch
             onValueChange={(v: boolean) => { setHideOffensive(v); success(); }}
             icon="shield.lefthalf.filled"
           />
           <Text style={[styles.hint, { color: colors.text.tertiary }]}>
-            Küfür, hakaret ve spam içerikli yorumlar otomatik olarak gizlenir. Bu yorum silinmez, sadece diğer kullanıcılardan saklanır.
+            {t("settings_hidden.hide_desc", "Küfür, hakaret ve spam içerikli yorumlar otomatik olarak gizlenir. Bu yorum silinmez, sadece diğer kullanıcılardan saklanır.")}
           </Text>
         </Section>
 
-        <Section title="Özel Sözcük Listesi">
+        <Section title={t("settings_hidden.custom_list", "Özel Sözcük Listesi")}>
           <Text style={[styles.sectionDesc, { color: colors.text.secondary }]}>
-            Aşağıya eklediğin sözcükleri içeren yorumlar otomatik olarak gizlenir.
+            {t("settings_hidden.custom_desc", "Aşağıya eklediğin sözcükleri içeren yorumlar otomatik olarak gizlenir.")}
           </Text>
 
           {/* Add word input */}
           <View style={[styles.addRow, { borderColor: colors.surface.border }]}>
             <TextInput
               style={[styles.addInput, { color: colors.text.primary, backgroundColor: colors.surface.elevated }]}
-              placeholder="Sözcük ekle..."
+              placeholder={t("settings_hidden.add_placeholder", "Sözcük ekle...")}
               placeholderTextColor={colors.text.tertiary}
               value={newWord}
               onChangeText={setNewWord}
@@ -111,7 +113,7 @@ export default function HiddenWordsScreen() {
           ) : (
             <View style={styles.emptyChips}>
               <Text style={[styles.emptyText, { color: colors.text.tertiary }]}>
-                Henüz özel sözcük eklenmedi
+                {t("settings_hidden.empty_chips", "Henüz özel sözcük eklenmedi")}
               </Text>
             </View>
           )}
@@ -120,7 +122,7 @@ export default function HiddenWordsScreen() {
         <View style={styles.tipBox}>
           <IconSymbol name="lightbulb" size={16} color={colors.accent.primary} />
           <Text style={[styles.tipText, { color: colors.text.tertiary }]}>
-            İpucu: Sözcükler büyük/küçük harf duyarsız olarak eşleştirilir.
+            {t("settings_hidden.tip", "İpucu: Sözcükler büyük/küçük harf duyarsız olarak eşleştirilir.")}
           </Text>
         </View>
       </ScrollView>

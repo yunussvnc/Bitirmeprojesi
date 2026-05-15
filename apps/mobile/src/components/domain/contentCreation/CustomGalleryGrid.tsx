@@ -326,7 +326,7 @@ export function CustomGalleryGrid({
         activeOpacity={0.7}
       >
         <Text style={[styles.albumLabel, { color: colors.text.primary }]}>
-          {selectedAlbum?.title ?? 'Son Eklenenler'}
+          {selectedAlbum?.title ?? t('gallery.recents')}
         </Text>
         <IconSymbol
           name={showAlbumPicker ? 'chevron.up' : 'chevron.down'}
@@ -352,7 +352,7 @@ export function CustomGalleryGrid({
               }}
             >
               <Text style={[styles.albumItemText, { color: !selectedAlbum ? colors.accent.primary : colors.text.primary }]}>
-                Son Eklenenler
+                {t('gallery.recents')}
               </Text>
               {!selectedAlbum && <IconSymbol name="checkmark" size={16} color={colors.accent.primary} />}
             </TouchableOpacity>
@@ -412,7 +412,7 @@ export function CustomGalleryGrid({
           <View style={styles.emptyWrap}>
             <IconSymbol name="photo.on.rectangle" size={40} color={colors.text.tertiary} />
             <Text style={[styles.emptyText, { color: colors.text.tertiary }]}>
-              Bu albümde fotoğraf bulunamadı.
+              {t('creation.gallery_empty')}
             </Text>
           </View>
         }

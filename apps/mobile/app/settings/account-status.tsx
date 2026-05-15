@@ -16,6 +16,8 @@ import { createTextStyle, spacing } from "@/src/constants/design";
 import { lightImpact } from "@/src/utils/haptics";
 import { useAuthStore } from "@/src/store/useAuthStore";
 import { apiGet } from "@/src/utils/apiClient";
+import { useTranslation } from "react-i18next";
+import i18n from "@/src/i18n";
 
 type AccountInfo = {
   id: number;
@@ -32,6 +34,7 @@ export default function AccountStatusScreen() {
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const authUser = useAuthStore((s) => s.user);
+  const { t } = useTranslation();
 
   const [info, setInfo] = useState<AccountInfo | null>(null);
   const [loading, setLoading] = useState(true);
@@ -60,8 +63,11 @@ export default function AccountStatusScreen() {
 
   const isActive = info?.is_active !== false;
   const formatDate = (d?: string) => {
-    if (!d) return "Bilinmiyor";
-    try { return new Date(d).toLocaleDateString("tr-TR", { day: "numeric", month: "long", year: "numeric" }); }
+    if (!d) return t("account_status.unknown");
+    try {
+      const locale = i18n.language === 'tr' ? 'tr-TR' : 'en-US';
+      return new Date(d).toLocaleDateString(locale, { day: "numeric", month: "long", year: "numeric" });
+    }
     catch { return d; }
   };
 
@@ -71,7 +77,7 @@ export default function AccountStatusScreen() {
         <TouchableOpacity onPress={() => { lightImpact(); router.back(); }} hitSlop={12} style={styles.backBtn}>
           <IconSymbol name="chevron.left" size={24} color={colors.text.primary} />
         </TouchableOpacity>
-        <Text style={[createTextStyle("title", colors.text.primary), styles.title]}>Hesap Durumu</Text>
+        <Text style={[createTextStyle("title", colors.text.primary), styles.title]}>{t("settings_account_status.title", "Hesap Durumu")}</Text>
         <View style={styles.backBtn} />
       </View>
 
@@ -89,33 +95,33 @@ export default function AccountStatusScreen() {
               <IconSymbol name={isActive ? "checkmark.shield.fill" : "xmark.shield"} size={28} color="#fff" />
             </View>
             <Text style={[styles.statusTitle, { color: colors.text.primary }]}>
-              {isActive ? "Hesabınız Aktif" : "Hesabınız Kısıtlı"}
+              {isActive ? t("account_status.active") : t("account_status.restricted")}
             </Text>
             <Text style={[styles.statusDesc, { color: colors.text.secondary }]}>
               {isActive
-                ? "Hesabınızda herhangi bir kısıtlama bulunmuyor. Tüm özellikleri kullanabilirsiniz."
-                : "Hesabınızda bazı kısıtlamalar mevcut. Detaylar için Yardım Merkezi'ne başvurun."}
+                ? t("account_status.active_desc")
+                : t("account_status.restricted_desc")}
             </Text>
           </View>
 
-          <Section title="Hesap Bilgileri">
-            <SettingsRow label="Kullanıcı Adı" value={`@${info?.username || "—"}`} icon="at" />
-            <SettingsRow label="Kullanıcı ID" value={`#${info?.id || "—"}`} icon="number" />
-            <SettingsRow label="E-posta" value={info?.email || "—"} icon="envelope" />
-            <SettingsRow label="Hesap Rolü" value={
-              info?.role === "admin" ? "Yönetici" :
-              info?.role === "venue" ? "Mekan Sahibi" : "Kullanıcı"
+          <Section title={t("account_status.account_info")}>
+            <SettingsRow label={t("account_status.username")} value={`@${info?.username || "—"}`} icon="at" />
+            <SettingsRow label={t("account_status.user_id")} value={`#${info?.id || "—"}`} icon="number" />
+            <SettingsRow label={t("account_status.email")} value={info?.email || "—"} icon="envelope" />
+            <SettingsRow label={t("account_status.account_role")} value={
+              info?.role === "admin" ? t("account_status.role_admin") :
+              info?.role === "venue" ? t("account_status.role_venue") : t("account_status.role_user")
             } icon="person.text.rectangle" />
           </Section>
 
-          <Section title="Doğrulama Durumu">
+          <Section title={t("account_status.verification")}>
             <SettingsRow
-              label="E-posta Doğrulama"
-              value={info?.is_email_verified ? "Doğrulanmış ✅" : "Doğrulanmamış ⚠️"}
+              label={t("account_status.email_verified")}
+              value={info?.is_email_verified ? t("account_status.verified") : t("account_status.not_verified")}
               icon="checkmark.seal"
             />
             <SettingsRow
-              label="Hesap Oluşturma Tarihi"
+              label={t("account_status.created_at")}
               value={formatDate(info?.created_at)}
               icon="calendar"
             />
@@ -128,7 +134,7 @@ export default function AccountStatusScreen() {
               activeOpacity={0.7}
             >
               <IconSymbol name="questionmark.circle" size={18} color={colors.accent.primary} />
-              <Text style={[styles.helpLinkText, { color: colors.accent.primary }]}>Yardım Merkezi'ne Git</Text>
+              <Text style={[styles.helpLinkText, { color: colors.accent.primary }]}>{t("account_status.go_help")}</Text>
             </TouchableOpacity>
           )}
         </ScrollView>

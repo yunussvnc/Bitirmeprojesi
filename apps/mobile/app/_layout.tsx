@@ -42,7 +42,7 @@ function useProtectedRoute() {
           for (
             let bc = 0, bs, buffer, idx = 0;
             (buffer = str.charAt(idx++));
-            ~buffer && ((bs = bc % 4 ? bs * 64 + buffer : buffer), bc++ % 4)
+            ~buffer && ((bs = bc % 4 ? (bs || 0) * 64 + buffer : buffer), bc++ % 4)
               ? (output += String.fromCharCode(255 & (bs >> ((-2 * bc) & 6))))
               : 0
           ) {

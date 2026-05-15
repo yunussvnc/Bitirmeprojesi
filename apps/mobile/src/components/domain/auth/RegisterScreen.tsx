@@ -6,7 +6,7 @@
  * @module screens/RegisterScreen
  */
 
-import { router } from 'expo-router';
+import { router, useLocalSearchParams } from 'expo-router';
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import {
   StyleSheet,
@@ -62,8 +62,9 @@ export default function RegisterScreen() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [termsAccepted, setTermsAccepted] = useState(false);
+  const params = useLocalSearchParams();
   // roleType eklendi ("user" veya "venue")
-  const [roleType, setRoleType] = useState<'user' | 'venue'>('user');
+  const [roleType, setRoleType] = useState<'user' | 'venue'>((params.roleType as 'user' | 'venue') || 'user');
   const [venueName, setVenueName] = useState('');
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<{

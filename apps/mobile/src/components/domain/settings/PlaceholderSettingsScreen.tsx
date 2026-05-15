@@ -23,6 +23,7 @@ import Animated, {
     FadeInDown,
 } from 'react-native-reanimated';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useTranslation } from 'react-i18next';
 
 interface Props {
     title: string;
@@ -32,14 +33,15 @@ interface Props {
 
 export default function PlaceholderSettingsScreen({
     title,
-    description = 'Bu özellik üzerinde özenle çalışıyoruz.\nÇok yakında güçlü bir deneyimle karşınızda olacak.',
+    description,
     iconName = 'sparkles',
 }: Props) {
     const { colors, isDark } = useTheme();
     const router = useRouter();
     const insets = useSafeAreaInsets();
-    const { width } = useWindowDimensions();
     const { t } = useTranslation();
+    const { width } = useWindowDimensions();
+    const resolvedDescription = description ?? t('placeholder_screen.coming_soon_desc');
 
     // Gentle floating animation
     const floatAnim = useSharedValue(0);
@@ -133,7 +135,7 @@ export default function PlaceholderSettingsScreen({
                 </Animated.View>
 
                 <Animated.View entering={FadeInDown.delay(350).duration(800).springify()}>
-                    <Text style={[createTextStyle('body', colors.text.secondary), styles.description]}>{description}</Text>
+                    <Text style={[createTextStyle('body', colors.text.secondary), styles.description]}>{resolvedDescription}</Text>
                 </Animated.View>
             </View>
         </View>

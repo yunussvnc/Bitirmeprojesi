@@ -1,4 +1,5 @@
-from pydantic import BaseModel, EmailStr, Field, model_validator
+# pyrefly: ignore [missing-import]
+from pydantic import BaseModel, EmailStr, Field, model_validator, field_validator
 import json as _json
 from datetime import datetime, date
 from typing import Optional, List
@@ -13,6 +14,13 @@ class UserBase(BaseModel):
     phone_number: Optional[str] = None
     birth_date: Optional[date] = None
 
+    @field_validator('birth_date')
+    @classmethod
+    def check_birth_date(cls, v):
+        if v is not None and (v.year < 1950 or v.year > 2023):
+            raise ValueError('Doğum yılı 1950 ile 2023 arasında olmalıdır.')
+        return v
+
 class UserCreate(UserBase):
     password: str
 
@@ -25,6 +33,13 @@ class UserUpdate(BaseModel):
     birth_date: Optional[date] = None
     phone_number: Optional[str] = None
     email: Optional[EmailStr] = None
+
+    @field_validator('birth_date')
+    @classmethod
+    def check_birth_date(cls, v):
+        if v is not None and (v.year < 1950 or v.year > 2023):
+            raise ValueError('Doğum yılı 1950 ile 2023 arasında olmalıdır.')
+        return v
 
 class SocialLoginRequest(BaseModel):
     token: str
@@ -224,6 +239,13 @@ class FirstTimeSetupRequest(BaseModel):
     """İlk girişte kullanıcı adı ve doğum tarihi ayarlama"""
     username: str
     birth_date: date
+
+    @field_validator('birth_date')
+    @classmethod
+    def check_birth_date(cls, v):
+        if v.year < 1950 or v.year > 2023:
+            raise ValueError('Doğum yılı 1950 ile 2023 arasında olmalıdır.')
+        return v
 
 class VenueRegisterRequest(BaseModel):
     """Mekan başvuru (kayıt) isteği"""
