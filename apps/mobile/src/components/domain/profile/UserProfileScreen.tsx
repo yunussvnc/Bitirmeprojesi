@@ -34,7 +34,9 @@ import { useAuthStore } from "@/src/store/useAuthStore";
 import { handleApiError } from "@/src/utils/errorHandler";
 import { lightImpact, success } from "@/src/utils/haptics";
 import { toggleBlockUser, createReport } from "@/src/services/moderationService";
+import { acceptFollowRequest, rejectFollowRequest } from '@/src/services/userService';
 import { useTranslation } from 'react-i18next';
+import debounce from 'lodash/debounce';
 
 const GRID_GAP = 14;
 const GRID_COLS = 2;
@@ -107,30 +109,51 @@ export default function UserProfileScreen() {
     load(true);
   }, [load]);
 
-  const handleFollow = useCallback(async () => {
-    if (!profile || followLoading || !currentUser) return;
-    lightImpact();
-    setFollowLoading(true);
-    const prev = profile.is_following;
-    setProfile((p) =>
-      p
-        ? {
-          ...p,
-          is_following: !p.is_following,
-          followers_count: p.followers_count + (prev ? -1 : 1),
-        }
-        : p
-    );
-    try {
-      const res = await toggleFollow(profile.id);
-      setProfile((p) => (p ? { ...p, is_following: res.following } : p));
-    } catch (e) {
-      setProfile((p) => (p ? { ...p, is_following: prev } : p));
-      handleApiError(e);
-    } finally {
-      setFollowLoading(false);
-    }
-  }, [profile, followLoading, currentUser]);
+  // Dummygram: Prevent spam clicks with debounce while keeping UI optimistic
+  const handleFollow = useCallback(
+    debounce(async () => {
+      // Use the latest profile state inside the debounced function
+      setProfile((currentProfile) => {
+        if (!currentProfile || followLoading || !currentUser) return currentProfile;
+        
+        lightImpact();
+        setFollowLoading(true);
+        
+        // Optimistic update
+        const prevProfile = { ...currentProfile };
+        const optimisticProfile = {
+          ...currentProfile,
+          is_following: !currentProfile.is_following,
+          follow_status: currentProfile.is_following ? null : ('accepted' as any), // Simplistic assumption
+        };
+
+        // Async API Call
+        (async () => {
+          try {
+            const res = await toggleFollow(currentProfile.id);
+            setProfile((p) => {
+              if (!p) return p;
+              return {
+                ...p,
+                is_following: res.status === 'accepted',
+                follow_status: res.status as 'pending' | 'accepted' | null,
+                followers_count: res.followers_count,
+              };
+            });
+          } catch (e) {
+            // Revert on error
+            setProfile(prevProfile);
+            handleApiError(e);
+          } finally {
+            setFollowLoading(false);
+          }
+        })();
+
+        return optimisticProfile;
+      });
+    }, 500, { leading: true, trailing: false }),
+    [followLoading, currentUser]
+  );
 
   const reportUser = useCallback(async (reason: "spam" | "inappropriate" | "harassment" | "other") => {
     try {
@@ -304,7 +327,7 @@ export default function UserProfileScreen() {
             <TouchableOpacity
               style={[
                 styles.primaryBtn,
-                profile.is_following
+                profile.is_following || profile.follow_status === 'pending'
                   ? { backgroundColor: colors.surface.elevated, borderWidth: 1, borderColor: colors.surface.border }
                   : { backgroundColor: colors.accent.primary, borderWidth: 1, borderColor: colors.accent.primary },
               ]}
@@ -316,11 +339,17 @@ export default function UserProfileScreen() {
                 style={[
                   styles.primaryBtnText,
                   {
-                    color: profile.is_following ? colors.text.primary : "#fff",
+                    color: profile.is_following || profile.follow_status === 'pending'
+                      ? colors.text.primary
+                      : '#fff',
                   },
                 ]}
               >
-                {profile.is_following ? t('profile.following_btn') : t('profile.follow_btn')}
+                {profile.is_following
+                  ? t('profile.following_btn')
+                  : profile.follow_status === 'pending'
+                    ? t('profile.requested_btn')
+                    : t('profile.follow_btn')}
               </Text>
             </TouchableOpacity>
 

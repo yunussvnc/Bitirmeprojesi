@@ -8,6 +8,7 @@ from fastapi import APIRouter, HTTPException, UploadFile, File, Depends
 import models
 import cloud_storage
 from app.dependencies import get_current_user
+from app.services.media_processor import MediaProcessor
 
 router = APIRouter(prefix="/upload", tags=["Upload"])
 
@@ -76,20 +77,41 @@ async def upload_image(
     contents = await file.read()
     _validate_size(contents, MAX_IMAGE_SIZE, "Görsel")
 
+    from fastapi.concurrency import run_in_threadpool
+
+    # Media Optimizasyonu (Event loop bloke olmaması için threadpool'da çalıştırılır)
+    variants = await run_in_threadpool(MediaProcessor.process_variants, contents)
+
     if cloud_storage.is_configured():
         try:
-            result = cloud_storage.upload_image(contents)
+            result = await run_in_threadpool(cloud_storage.upload_image_variants, variants)
             return result
         except Exception as e:
             raise HTTPException(status_code=500, detail=f"Yükleme hatası: {str(e)}")
     else:
         # Local fallback — Cloudinary yoksa uploads/ klasörüne kaydet
         os.makedirs(_uploads_dir, exist_ok=True)
-        filename = f"{uuid.uuid4().hex}.{ext}"
-        filepath = os.path.join(_uploads_dir, filename)
-        with open(filepath, "wb") as f:
-            f.write(contents)
-        return {"url": f"/uploads/{filename}", "public_id": filename}
+        base_filename = uuid.uuid4().hex
+        
+        full_path = os.path.join(_uploads_dir, f"{base_filename}_full.webp")
+        with open(full_path, "wb") as f:
+            f.write(variants["full_bytes"])
+            
+        med_path = os.path.join(_uploads_dir, f"{base_filename}_medium.webp")
+        with open(med_path, "wb") as f:
+            f.write(variants["medium_bytes"])
+            
+        thumb_path = os.path.join(_uploads_dir, f"{base_filename}_thumb.webp")
+        with open(thumb_path, "wb") as f:
+            f.write(variants["thumbnail_bytes"])
+            
+        return {
+            "url": f"/uploads/{base_filename}_full.webp",
+            "medium_url": f"/uploads/{base_filename}_medium.webp",
+            "thumbnail_url": f"/uploads/{base_filename}_thumb.webp",
+            "blurhash": variants.get("blurhash"),
+            "public_id": base_filename
+        }
 
 
 @router.post("/video")

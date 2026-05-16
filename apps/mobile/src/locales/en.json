@@ -84,6 +84,7 @@
     "user": "User",
     "follow_btn": "Follow",
     "following_btn": "Following",
+    "requested_btn": "Requested",
     "message_btn": "Message",
     "share_text": "Check out my profile on ASEMOS! @{{username}}"
   },
@@ -263,8 +264,20 @@
     "like": "{{user}} liked your post",
     "comment": "{{user}} commented on your post",
     "follow": "{{user}} started following you",
+    "follow_request_msg": "{{user}} wants to follow you",
+    "follow_accepted_msg": "{{user}} accepted your follow request",
+    "tag": "{{user}} tagged you in a post",
     "default": "{{user}} interacted with you",
-    "someone": "Someone"
+    "someone": "Someone",
+    "tab_all": "All",
+    "tab_requests": "Follow Requests",
+    "accept": "Accept",
+    "reject": "Reject",
+    "accepted": "Accepted",
+    "digest_like": "{{user}} and {{count}} others liked your post",
+    "digest_comment": "{{user}} and {{count}} others commented on your post",
+    "empty_requests": "No follow requests",
+    "empty_requests_desc": "Pending follow requests will appear here"
   },
   "qr": {
     "title_enter": "QR Entry",
@@ -324,7 +337,9 @@
     "next": "Next",
     "select_media": "Select a photo or video",
     "gallery": "Gallery",
-    "camera": "Camera"
+    "camera": "Camera",
+    "tagged_count": "{{count}} people tagged",
+    "search_users": "Search users..."
   },
   "first_time_setup": {
     "title": "Welcome!",
@@ -1292,5 +1307,15 @@
     "stored_on_device": "Stored on device",
     "history_desc": "Your location data is securely stored on your device and never shared with third parties.",
     "open_settings": "Open System Location Settings"
+  },
+  "upload": {
+    "validating": "Checking media...",
+    "compressing": "Optimizing...",
+    "uploading": "Uploading...",
+    "creating": "Publishing...",
+    "done": "Published!",
+    "error": "Upload failed",
+    "preparing": "Preparing...",
+    "retry": "Retry"
   }
 }

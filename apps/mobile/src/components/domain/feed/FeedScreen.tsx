@@ -252,9 +252,10 @@ export default function FeedScreen() {
     if (!post.author?.id) return;
     try {
       const res = await toggleFollow(post.author.id);
+      const newFollowing = res.status === "accepted";
       setPosts((prev) =>
         prev.map((p) =>
-          p.user_id === post.user_id ? (p.author ? { ...p, author: { ...p.author, is_following: res.following } } : p) : p
+          p.user_id === post.user_id ? (p.author ? { ...p, author: { ...p.author, is_following: newFollowing } } : p) : p
         )
       );
     } catch {

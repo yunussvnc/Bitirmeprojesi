@@ -84,6 +84,7 @@
     "user": "Kullanıcı",
     "follow_btn": "Takip Et",
     "following_btn": "Takip Ediliyor",
+    "requested_btn": "İstendi",
     "message_btn": "Mesaj",
     "share_text": "ASEMOS'daki profilime göz at! @{{username}}"
   },
@@ -284,8 +285,20 @@
     "like": "{{user}} gönderini beğendi",
     "comment": "{{user}} gönderine yorum yaptı",
     "follow": "{{user}} seni takip etmeye başladı",
+    "follow_request_msg": "{{user}} seni takip etmek istiyor",
+    "follow_accepted_msg": "{{user}} takip isteğini kabul etti",
+    "tag": "{{user}} seni bir gönderide etiketledi",
     "default": "{{user}} bir etkileşimde bulundu",
-    "someone": "Birisi"
+    "someone": "Birisi",
+    "tab_all": "Tümü",
+    "tab_requests": "Takip İstekleri",
+    "accept": "Onayla",
+    "reject": "Reddet",
+    "accepted": "Onaylandı",
+    "digest_like": "{{user}} ve {{count}} kişi daha gönderini beğendi",
+    "digest_comment": "{{user}} ve {{count}} kişi daha gönderine yorum yaptı",
+    "empty_requests": "Takip isteği yok",
+    "empty_requests_desc": "Bekleyen takip istekleri burada görünecek"
   },
   "qr": {
     "title_enter": "QR Girişi",
@@ -345,7 +358,9 @@
     "next": "İleri",
     "select_media": "Bir fotoğraf veya video seçin",
     "gallery": "Galeri",
-    "camera": "Kamera"
+    "camera": "Kamera",
+    "tagged_count": "{{count}} kişi etiketlendi",
+    "search_users": "Kullanıcı ara..."
   },
   "first_time_setup": {
     "title": "Hoş Geldiniz!",
@@ -1224,5 +1239,15 @@
     "stored_on_device": "Cihazda saklanır",
     "history_desc": "Konum verileriniz yalnızca cihazınızda saklanır ve hiçbir zaman üçüncü taraflarla paylaşılmaz.",
     "open_settings": "Sistem Konum Ayarlarını Aç"
+  },
+  "upload": {
+    "validating": "Medya kontrol ediliyor...",
+    "compressing": "Optimize ediliyor...",
+    "uploading": "Yükleniyor...",
+    "creating": "Yayınlanıyor...",
+    "done": "Yayınlandı!",
+    "error": "Yükleme başarısız",
+    "preparing": "Hazırlanıyor...",
+    "retry": "Tekrar Dene"
   }
 }

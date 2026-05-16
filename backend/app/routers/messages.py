@@ -44,6 +44,7 @@ def _message_to_response(msg: models.Message) -> schemas.MessageResponse:
         media_url=msg.media_url,
         shared_post_id=msg.shared_post_id,
         is_read=msg.is_read,
+        status=msg.status or "sent",
         created_at=msg.created_at,
         sender_name=sender_name,
     )
@@ -304,6 +305,7 @@ async def websocket_chat(
                         message_type=data.get("message_type", "text"),
                         media_url=data.get("media_url"),
                         shared_post_id=data.get("shared_post_id"),
+                        status="sent",
                     )
                     db.add(msg)
                     conv_obj = db.query(models.MatchConversation).filter(
@@ -314,28 +316,44 @@ async def websocket_chat(
                     db.commit()
                     db.refresh(msg)
 
-                    # Sender'a geri bildir (id ve timestamp ile)
-                    response_data = {
-                        "type": "new_message",
-                        "message": {
-                            "id": msg.id,
-                            "conversation_id": msg.conversation_id,
-                            "sender_id": msg.sender_id,
-                            "content": msg.content,
-                            "message_type": msg.message_type,
-                            "media_url": msg.media_url,
-                            "shared_post_id": msg.shared_post_id,
-                            "is_read": msg.is_read,
-                            "created_at": msg.created_at.isoformat() if msg.created_at else None,
-                        },
+                    msg_data = {
+                        "id": msg.id,
+                        "conversation_id": msg.conversation_id,
+                        "sender_id": msg.sender_id,
+                        "content": msg.content,
+                        "message_type": msg.message_type,
+                        "media_url": msg.media_url,
+                        "shared_post_id": msg.shared_post_id,
+                        "is_read": msg.is_read,
+                        "status": "sent",
+                        "created_at": msg.created_at.isoformat() if msg.created_at else None,
                     }
 
-                    # Herkese gönder (kendisi dahil — confirmation için)
-                    await manager.broadcast_to_conversation(conversation_id, response_data)
+                    # 1️⃣ Sender'a sent onayı
+                    await manager.send_to_user(conversation_id, user_id, {
+                        "type": "message:sent",
+                        "message": msg_data,
+                    })
 
-                    # Karşı taraf online değilse push notification gönder
-                    import crud
-                    if not manager.is_user_online(other_user_id):
+                    # 2️⃣ Karşı tarafa gönder — başarılıysa delivered
+                    delivered = await manager.send_to_user(conversation_id, other_user_id, {
+                        "type": "new_message",
+                        "message": msg_data,
+                    })
+
+                    if delivered:
+                        # Status'u delivered yap
+                        msg.status = "delivered"
+                        db.commit()
+                        # Sender'a delivered bildir
+                        await manager.send_to_user(conversation_id, user_id, {
+                            "type": "message:status",
+                            "message_id": msg.id,
+                            "status": "delivered",
+                        })
+                    else:
+                        # Karşı taraf offline — push notification gönder
+                        import crud
                         preview = msg.content.strip()[:80] if msg.content else "Yeni mesaj"
                         crud.create_notification(
                             db, other_user_id, "message", user_id,
@@ -358,23 +376,32 @@ async def websocket_chat(
                 )
 
             elif msg_type == "read":
-                # Tüm mesajları okundu işaretle
+                # Mesajları okundu işaretle (spesifik ID'ler veya tümü)
+                message_ids = data.get("message_ids", [])
                 db = next(get_db())
                 try:
-                    db.query(models.Message).filter(
+                    query = db.query(models.Message).filter(
                         models.Message.conversation_id == conversation_id,
                         models.Message.sender_id != user_id,
-                        models.Message.is_read == False,
-                    ).update({"is_read": True})
+                    )
+                    if message_ids:
+                        query = query.filter(models.Message.id.in_(message_ids))
+                    else:
+                        query = query.filter(models.Message.is_read == False)
+
+                    updated_ids = [m.id for m in query.all()]
+                    query.update({"is_read": True, "status": "read"}, synchronize_session=False)
                     db.commit()
                 finally:
                     db.close()
 
-                await manager.broadcast_to_conversation(
-                    conversation_id,
-                    {"type": "messages_read", "user_id": user_id},
-                    exclude_user_id=user_id,
-                )
+                # Sender'a read bildir
+                await manager.send_to_user(conversation_id, other_user_id, {
+                    "type": "message:status",
+                    "message_ids": updated_ids,
+                    "status": "read",
+                    "reader_id": user_id,
+                })
 
     except WebSocketDisconnect:
         pass

@@ -59,10 +59,11 @@ class User(UserBase):
 
 
 class UserProfile(User):
-    """Profil sayfası için: followers/following sayıları + is_following"""
+    """Profil sayfası için: followers/following sayıları + is_following + follow_status"""
     followers_count: int = 0
     following_count: int = 0
     is_following: bool = False
+    follow_status: Optional[str] = None  # "pending", "accepted", or None (not following)
 
 # --- MEKAN (PLACE) ŞEMALARI ---
 
@@ -141,6 +142,11 @@ class Place(PlaceBase):
 
     class Config:
         from_attributes = True
+
+class DeviceTokenCreate(BaseModel):
+    token: str
+    platform: Optional[str] = None
+    device_id: Optional[str] = None
 
 # --- YORUM (REVIEW) ŞEMALARI ---
 
@@ -355,6 +361,8 @@ class PostMediaBase(BaseModel):
     media_type: str
     media_url: str
     thumbnail_url: Optional[str] = None
+    medium_url: Optional[str] = None
+    blurhash: Optional[str] = None
     order_index: int = 0
 
 class PostMediaCreate(PostMediaBase):
@@ -374,6 +382,7 @@ class PostCreate(BaseModel):
     comments_disabled: bool = False
     likes_hidden: bool = False
     media: List[PostMediaCreate]
+    tagged_user_ids: Optional[List[int]] = None
 
 class PostCommentCreate(BaseModel):
     text: str = Field(..., min_length=1, max_length=1000, description="Yorum metni")
@@ -423,6 +432,7 @@ class Post(BaseModel):
     author: Optional[UserSummary] = None
     place: Optional[PlaceSummary] = None
     media: List[PostMedia] = []
+    tagged_users: List[UserSummary] = []
 
     class Config:
         from_attributes = True
@@ -487,8 +497,14 @@ class Notification(BaseModel):
     post_id: Optional[int] = None
     place_id: Optional[int] = None
     is_read: bool = False
+    payload: Optional[str] = None
     created_at: datetime
     actor_username: Optional[str] = None
+    # Munia-style rich payload fields (parsed from JSON payload)
+    actor_avatar: Optional[str] = None
+    post_thumbnail: Optional[str] = None
+    # Novu-style digest grouping
+    group_count: int = 0  # "X, Y ve 3 kişi daha beğendi" — 0 = no grouping
 
     class Config:
         from_attributes = True
@@ -655,6 +671,7 @@ class MessageResponse(BaseModel):
     media_url: Optional[str] = None
     shared_post_id: Optional[int] = None
     is_read: bool = False
+    status: str = "sent"  # "sent", "delivered", "read"
     created_at: datetime
     sender_name: Optional[str] = None
 
@@ -679,6 +696,60 @@ class PushTokenRequest(BaseModel):
     token: str  # ExponentPushToken[xxx]
 
 
+# --- TOPLULUK ODALARI (COMMUNITY ROOMS) ---
+
+class CommunityRoomCreate(BaseModel):
+    name: str = Field(..., min_length=2, max_length=100)
+    description: Optional[str] = None
+    place_id: Optional[int] = None
+    room_type: str = "venue"  # "venue", "region", "topic"
+    cover_image_url: Optional[str] = None
+
+class CommunityRoomResponse(BaseModel):
+    id: int
+    name: str
+    description: Optional[str] = None
+    place_id: Optional[int] = None
+    cover_image_url: Optional[str] = None
+    room_type: str = "venue"
+    is_active: bool = True
+    member_count: int = 0
+    created_by: int
+    created_at: datetime
+    last_message_at: Optional[datetime] = None
+    is_member: bool = False  # Mevcut kullanıcı üye mi?
+
+    class Config:
+        from_attributes = True
+
+class CommunityMessageCreate(BaseModel):
+    content: str = Field(..., min_length=1, max_length=5000)
+    message_type: str = "text"  # "text", "image", "place_share"
+    media_url: Optional[str] = None
+    shared_place_id: Optional[int] = None
+
+class CommunityMessageResponse(BaseModel):
+    id: int
+    room_id: int
+    sender_id: int
+    content: str
+    message_type: str = "text"
+    media_url: Optional[str] = None
+    shared_place_id: Optional[int] = None
+    created_at: datetime
+    sender_name: Optional[str] = None
+    sender_avatar: Optional[str] = None
+
+    class Config:
+        from_attributes = True
+
+class PaginatedCommunityMessages(BaseModel):
+    items: List[CommunityMessageResponse]
+    total: int
+    page: int
+    page_size: int
+
+
 # --- KULLANICI TERCİHLERİ (USER PREFERENCES) ---
 
 class UserPreferencesUpdate(BaseModel):
@@ -697,6 +768,11 @@ class UserPreferencesUpdate(BaseModel):
     wifi_auto_high_quality: Optional[bool] = None
     include_location_in_posts: Optional[bool] = None
     language: Optional[str] = None  # tr, en
+    # Bildirim Tercihleri (Novu Subscriber Preferences)
+    notify_likes: Optional[bool] = None
+    notify_comments: Optional[bool] = None
+    notify_follows: Optional[bool] = None
+    notify_messages: Optional[bool] = None
 
 
 class UserPreferencesResponse(BaseModel):
@@ -715,6 +791,11 @@ class UserPreferencesResponse(BaseModel):
     wifi_auto_high_quality: bool = True
     include_location_in_posts: bool = True
     language: str = "tr"
+    # Bildirim Tercihleri
+    notify_likes: bool = True
+    notify_comments: bool = True
+    notify_follows: bool = True
+    notify_messages: bool = True
     updated_at: Optional[datetime] = None
 
     class Config:

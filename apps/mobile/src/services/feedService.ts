@@ -38,6 +38,7 @@ export type Post = {
   author?: UserSummary;
   place?: PlaceSummary;
   media: PostMedia[];
+  tagged_users?: UserSummary[];
 };
 
 export type PaginatedPosts = {
@@ -63,6 +64,7 @@ export type CreatePostPayload = {
   comments_disabled?: boolean;
   likes_hidden?: boolean;
   media: { media_type: string; media_url: string; thumbnail_url?: string; order_index?: number }[];
+  tagged_user_ids?: number[];
 };
 
 export type FeedFilter = "all" | "following";

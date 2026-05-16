@@ -46,6 +46,11 @@ type AppState = {
   pendingSharedPostId: number | null;
   setPendingSharedPostId: (id: number) => void;
   clearPendingSharedPostId: () => void;
+
+  unreadNotificationCount: number;
+  setUnreadNotificationCount: (count: number) => void;
+  addUnreadNotificationCount: (count: number) => void;
+  clearUnreadNotificationCount: () => void;
 };
 
 const uniq = (arr: string[]) => Array.from(new Set(arr));
@@ -61,6 +66,7 @@ export const useAppStore = create<AppState>()(
       apiHealthy: null,
       pendingPlaceName: null,
       pendingSharedPostId: null,
+      unreadNotificationCount: 0,
 
       isSaved: (id) => get().savedIds.includes(id),
 
@@ -170,6 +176,10 @@ export const useAppStore = create<AppState>()(
 
       setPendingSharedPostId: (id) => set({ pendingSharedPostId: id }),
       clearPendingSharedPostId: () => set({ pendingSharedPostId: null }),
+
+      setUnreadNotificationCount: (count) => set({ unreadNotificationCount: count }),
+      addUnreadNotificationCount: (count) => set((state) => ({ unreadNotificationCount: state.unreadNotificationCount + count })),
+      clearUnreadNotificationCount: () => set({ unreadNotificationCount: 0 }),
     }),
     {
       name: "app-store-v2",

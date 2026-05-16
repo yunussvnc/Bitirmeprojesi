@@ -14,58 +14,102 @@ from starlette.middleware.base import BaseHTTPMiddleware
 logger = logging.getLogger("asemos")
 
 
-class RateLimitStore:
+class RedisRateLimitStore:
     """
-    Sliding window rate limiter — bellek tabanlı.
-    Her IP+endpoint çifti için son istek zaman damgalarını tutar.
+    Redis tabanlı dağıtık (distributed) rate limiter.
+    Çoklu sunucu ortamında (Multi-Node) güvenli hız sınırlaması sağlar.
+    INCR ve EXPIRE komutlarıyla Fixed Window algoritması kullanır.
     """
 
-    def __init__(self):
-        self._requests: dict[str, list[float]] = defaultdict(list)
-        self._lockouts: dict[str, float] = {}  # IP → lockout bitiş zamanı
-
-    def _cleanup(self, key: str, window: int):
-        """Pencere dışındaki eski kayıtları temizle"""
-        now = time.time()
-        self._requests[key] = [
-            t for t in self._requests[key] if now - t < window
-        ]
-
-    def is_locked_out(self, key: str) -> bool:
+    async def is_locked_out(self, key: str) -> bool:
         """IP kilidi kontrolü"""
-        if key in self._lockouts:
-            if time.time() < self._lockouts[key]:
-                return True
-            del self._lockouts[key]
-        return False
+        from app.core.redis_client import get_redis
+        redis = get_redis()
+        if not redis:
+            return False
+            
+        lock_key = f"lockout:{key}"
+        return await redis.exists(lock_key) > 0
 
-    def lock_out(self, key: str, duration_seconds: int = 900):
+    async def lock_out(self, key: str, duration_seconds: int = 900):
         """IP'yi belirli süre kilitle (varsayılan 15 dk)"""
-        self._lockouts[key] = time.time() + duration_seconds
-        logger.warning("🔒 IP kilitlendi: %s (%d saniye)", key, duration_seconds)
+        from app.core.redis_client import get_redis
+        redis = get_redis()
+        if not redis:
+            return
+            
+        lock_key = f"lockout:{key}"
+        await redis.setex(lock_key, duration_seconds, "1")
+        logger.warning("🔒 IP kilitlendi (Redis): %s (%d saniye)", key, duration_seconds)
 
-    def check_rate(self, key: str, max_requests: int, window_seconds: int) -> tuple[bool, int]:
+    async def check_rate(self, key: str, max_requests: int, window_seconds: int) -> tuple[bool, int]:
         """
         Rate limit kontrolü.
         Returns: (izin_var_mı, kalan_hak)
         """
-        self._cleanup(key, window_seconds)
-        count = len(self._requests[key])
-
-        if count >= max_requests:
-            return False, 0
-
-        self._requests[key].append(time.time())
-        return True, max_requests - count - 1
+        from app.core.redis_client import get_redis
+        redis = get_redis()
+        
+        # Redis yoksa trafiği kesme (Graceful degradation)
+        if not redis:
+            return True, max_requests
+            
+        rate_key = f"ratelimit:{key}"
+        
+        try:
+            # Pipeline ile iki işlemi atomik yap
+            pipe = redis.pipeline()
+            pipe.incr(rate_key)
+            # Kaç saniye ömrü kaldığını kontrol et (yoksa -1 veya -2 döner)
+            pipe.ttl(rate_key)
+            results = await pipe.execute()
+            
+            count = results[0]
+            ttl = results[1]
+            
+            # Anahtar yeni oluşturulduysa TTL set et
+            if count == 1 or ttl < 0:
+                await redis.expire(rate_key, window_seconds)
+                
+            if count > max_requests:
+                return False, 0
+                
+            return True, max_requests - count
+            
+        except Exception as e:
+            logger.error("Rate limiter hatası: %s", str(e))
+            return True, max_requests
 
 
 # Global store
-_store = RateLimitStore()
+_store = RedisRateLimitStore()
 
-# Failed login sayacı (brute-force koruması)
-_failed_logins: dict[str, int] = defaultdict(int)
 MAX_FAILED_LOGINS = 10
 LOCKOUT_DURATION = 900  # 15 dakika
+
+async def record_failed_login(ip: str):
+    """Başarısız login girişimini Redis'e kaydet"""
+    from app.core.redis_client import get_redis
+    redis = get_redis()
+    if not redis:
+        return
+        
+    fail_key = f"failed_login:{ip}"
+    count = await redis.incr(fail_key)
+    if count == 1:
+        await redis.expire(fail_key, LOCKOUT_DURATION)
+        
+    if count >= MAX_FAILED_LOGINS:
+        await _store.lock_out(ip, LOCKOUT_DURATION)
+        await redis.delete(fail_key)
+        logger.warning("🚨 Brute-force tespit edildi: %s — %d dk kilitlendi", ip, LOCKOUT_DURATION // 60)
+
+async def reset_failed_logins(ip: str):
+    """Başarılı login sonrası Redis'teki sayacı sıfırla"""
+    from app.core.redis_client import get_redis
+    redis = get_redis()
+    if redis:
+        await redis.delete(f"failed_login:{ip}")
 
 
 def get_client_ip(request: Request) -> str:
@@ -74,20 +118,6 @@ def get_client_ip(request: Request) -> str:
     if forwarded:
         return forwarded.split(",")[0].strip()
     return request.client.host if request.client else "unknown"
-
-
-def record_failed_login(ip: str):
-    """Başarısız login girişimini kaydet"""
-    _failed_logins[ip] += 1
-    if _failed_logins[ip] >= MAX_FAILED_LOGINS:
-        _store.lock_out(ip, LOCKOUT_DURATION)
-        _failed_logins[ip] = 0
-        logger.warning("🚨 Brute-force tespit edildi: %s — %d dk kilitlendi", ip, LOCKOUT_DURATION // 60)
-
-
-def reset_failed_logins(ip: str):
-    """Başarılı login sonrası sayacı sıfırla"""
-    _failed_logins.pop(ip, None)
 
 
 # Rate limit kuralları: (path_prefix, max_requests, window_seconds)
@@ -123,18 +153,18 @@ class RateLimiterMiddleware(BaseHTTPMiddleware):
         ip = get_client_ip(request)
 
         # IP kilidi kontrolü
-        if _store.is_locked_out(ip):
-            remaining = int(_store._lockouts.get(ip, 0) - time.time())
+        is_locked = await _store.is_locked_out(ip)
+        if is_locked:
             return JSONResponse(
                 status_code=429,
-                content={"detail": f"Çok fazla başarısız deneme. {remaining} saniye sonra tekrar deneyin."},
+                content={"detail": "Çok fazla başarısız deneme. Lütfen daha sonra tekrar deneyin."},
             )
 
         # Endpoint bazlı rate limit
         for prefix, max_req, window in RATE_LIMIT_RULES:
             if path.startswith(prefix):
                 key = f"{ip}:{prefix}"
-                allowed, remaining = _store.check_rate(key, max_req, window)
+                allowed, remaining = await _store.check_rate(key, max_req, window)
                 if not allowed:
                     logger.warning("⚠️ Rate limit aşıldı: %s → %s", ip, prefix)
                     return JSONResponse(
@@ -147,7 +177,7 @@ class RateLimiterMiddleware(BaseHTTPMiddleware):
 
         # Genel rate limit
         key = f"{ip}:general"
-        allowed, remaining = _store.check_rate(key, GENERAL_RATE_LIMIT, GENERAL_WINDOW)
+        allowed, remaining = await _store.check_rate(key, GENERAL_RATE_LIMIT, GENERAL_WINDOW)
         if not allowed:
             logger.warning("⚠️ Genel rate limit aşıldı: %s", ip)
             return JSONResponse(

@@ -113,10 +113,11 @@ export function ContentCreationFlow({
         isVideo: currentMedia.type === 'video',
         placeId: defaultPlaceId,
         placeName: defaultPlaceName,
+        mediaItems: selected, // Pass all selected media for carousel support
         ...(typeof payload === 'object' ? payload : {}),
       });
     },
-    [currentMedia, onShare, initialPlaceId, initialPlaceName]
+    [currentMedia, selected, onShare, initialPlaceId, initialPlaceName]
   );
 
   const entering = direction === 'forward'

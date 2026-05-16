@@ -26,13 +26,13 @@ import { useTheme } from "@/src/hooks/useTheme";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { spacing, radius } from "@/src/constants/design";
 import { ContentCreationFlow } from "@/src/components/domain/contentCreation";
-import { createStory } from "@/src/services/storyService";
-import { uploadImage, uploadVideo } from "@/src/services/feedService";
 import { useSettingsStore } from "@/src/store/useSettingsStore";
-import { lightImpact } from "@/src/utils/haptics";
+import { useUploadPipelineStore } from "@/src/store/useUploadPipelineStore";
+import { lightImpact, success } from "@/src/utils/haptics";
 import { Avatar } from "@/src/components/ui/Avatar";
 import { useAuthStore } from "@/src/store/useAuthStore";
 import { useTranslation } from "react-i18next";
+import type { MediaItem } from "@/src/contentCreation/types";
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get("window");
 
@@ -49,6 +49,7 @@ export default function CreateStoryScreen() {
   const [placePickerOpen, setPlacePickerOpen] = useState(false);
   const uploadQuality = useSettingsStore((s) => s.uploadQuality);
   const storySaveToCameraRoll = useSettingsStore((s) => s.storySaveToCameraRoll);
+  const enqueueStory = useUploadPipelineStore((s) => s.enqueueStory);
 
   const handleClose = useCallback(() => {
     lightImpact();
@@ -73,30 +74,32 @@ export default function CreateStoryScreen() {
     return () => sub.remove();
   }, [handleClose]);
 
+  /**
+   * Novu-inspired: Enqueue story upload and immediately navigate back.
+   * The upload continues in the background via useUploadPipelineStore.
+   */
   const handleShare = useCallback(
     async (shareParams: { mediaUri: string; isVideo: boolean; placeId?: number; placeName?: string; isCloseFriends?: boolean }) => {
       const { mediaUri, isVideo, placeId, isCloseFriends } = shareParams;
       lightImpact();
-      const uploadRes = isVideo
-        ? await uploadVideo({
-            uri: mediaUri,
-            type: "video/mp4",
-            name: "story.mp4",
-          })
-        : await uploadImage({
-            uri: mediaUri,
-            type: "image/jpeg",
-            name: "story.jpg",
-          });
-      const mediaUrl = uploadRes?.url;
-      if (mediaUrl == null) throw new Error(t("content_creation.upload_failed"));
 
-      await createStory({
-        place_id: placeId ?? undefined,
-        media_type: isVideo ? "video" : "image",
-        media_url: mediaUrl,
-        is_close_friends: isCloseFriends ?? false,
-      });
+      const mediaItem: MediaItem = {
+        uri: mediaUri,
+        type: isVideo ? 'video' : 'image',
+      };
+
+      // Enqueue to pipeline (Novu pattern: fire and forget)
+      enqueueStory(
+        {
+          placeId: placeId ?? null,
+          isVideo,
+          mediaUri,
+          isCloseFriends: isCloseFriends ?? false,
+        },
+        mediaItem
+      );
+
+      // Save to camera roll if enabled
       if (storySaveToCameraRoll) {
         try {
           const MediaLibrary = await import("expo-media-library");
@@ -105,12 +108,15 @@ export default function CreateStoryScreen() {
             await MediaLibrary.saveToLibraryAsync(mediaUri);
           }
         } catch {
-          // İzin reddedildi veya paket yok
+          // Permission denied or module not available
         }
       }
+
+      success();
+      // Instagram-style: Return immediately
       router.back();
     },
-    [storySaveToCameraRoll, t]
+    [storySaveToCameraRoll, enqueueStory]
   );
 
   const quality = uploadQuality === "data_saver" ? 0.5 : 0.9;

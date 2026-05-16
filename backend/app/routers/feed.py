@@ -2,7 +2,9 @@
 
 from typing import Optional
 
+# pyrefly: ignore [missing-import]
 from fastapi import APIRouter, Depends, HTTPException, Query
+# pyrefly: ignore [missing-import]
 from sqlalchemy.orm import Session
 
 import models, schemas, crud
@@ -38,6 +40,18 @@ def _post_to_schema(post: models.Post, db: Session, current_user_id: int | None)
         )
         for m in (post.media or [])
     ]
+    # Serialize tagged users
+    tagged_users = [
+        schemas.UserSummary(
+            id=tag.user.id,
+            username=tag.user.username,
+            first_name=tag.user.first_name,
+            avatar_url=tag.user.avatar_url,
+            is_following=crud.is_following(db, current_user_id, tag.user.id) if current_user_id else False,
+        )
+        for tag in (post.tags or [])
+        if tag.user
+    ]
     is_liked = crud.is_post_liked_by_user(db, post.id, current_user_id) if current_user_id else False
     return schemas.Post(
         id=post.id,
@@ -54,28 +68,65 @@ def _post_to_schema(post: models.Post, db: Session, current_user_id: int | None)
         author=author,
         place=place,
         media=media,
+        tagged_users=tagged_users,
     )
 
 
+from fastapi.concurrency import run_in_threadpool
+import json
+from fastapi import BackgroundTasks
+
+def _get_feed_db_sync(db: Session, page: int, page_size: int, current_user_id: int | None, filter_mode: str):
+    """DB işlemlerini threadpool'da güvenle çalıştırmak için kapsayıcı"""
+    posts, total = crud.get_feed_paginated(
+        db,
+        page=page,
+        page_size=page_size,
+        current_user_id=current_user_id,
+        filter_mode=filter_mode,
+    )
+    items = [_post_to_schema(p, db, current_user_id) for p in posts]
+    # Redis'e serialize edebilmek için dict'e çeviriyoruz
+    # schema.dict() datetime'ları otomatik ISO formata çevirmezse diye default=str kullanacağız
+    return {"items": [i.dict() for i in items], "total": total, "page": page, "page_size": page_size}
+
+
 @router.get("/feed", response_model=schemas.PaginatedPosts)
-def get_feed(
+async def get_feed(
     page: int = Query(1, ge=1),
     page_size: int = Query(20, ge=1, le=100),
     filter: str = Query("all", description="Filtre: all veya following"),
     db: Session = Depends(get_db),
     current_user: Optional[models.User] = Depends(get_optional_user),
 ):
-    """Ana akış (feed) için gönderileri getirir. Takip filtresi destekler."""
+    """Ana akış (feed) için gönderileri getirir. Redis Cache destekler."""
+    from app.core.redis_client import get_redis
+    redis = get_redis()
+    
     filter_mode = "following" if filter == "following" else "all"
-    posts, total = crud.get_feed_paginated(
-        db,
-        page=page,
-        page_size=page_size,
-        current_user_id=current_user.id if current_user else None,
-        filter_mode=filter_mode,
-    )
-    items = [_post_to_schema(p, db, current_user.id if current_user else None) for p in posts]
-    return schemas.PaginatedPosts(items=items, total=total, page=page, page_size=page_size)
+    user_id_str = str(current_user.id) if current_user else "anon"
+    cache_key = f"cache:feed:{filter_mode}:{user_id_str}:p{page}:s{page_size}"
+    
+    if redis:
+        try:
+            cached = await redis.get(cache_key)
+            if cached:
+                return json.loads(cached)
+        except Exception:
+            pass
+
+    # DB İşlemini ThreadPool'da çalıştır (Event loop blocklanmasın)
+    current_uid = current_user.id if current_user else None
+    result = await run_in_threadpool(_get_feed_db_sync, db, page, page_size, current_uid, filter_mode)
+    
+    if redis:
+        try:
+            # TTL: 5 dakika (300 saniye)
+            await redis.setex(cache_key, 300, json.dumps(result, default=str))
+        except Exception:
+            pass
+
+    return result
 
 
 @router.get("/feed/reels", response_model=schemas.PaginatedPosts)
@@ -100,9 +151,41 @@ def get_reels(
     return schemas.PaginatedPosts(items=items, total=total, page=page, page_size=page_size)
 
 
+@router.get("/feed/discover", response_model=schemas.PaginatedPosts)
+def get_discover_feed(
+    page: int = Query(1, ge=1),
+    page_size: int = Query(20, ge=1, le=100),
+    db: Session = Depends(get_db),
+    current_user: Optional[models.User] = Depends(get_optional_user),
+):
+    """
+    Keşfet (Discover) akışı.
+    Etkileşim skoru ve zaman aşımı (Time Decay) algoritmasına göre sıralanmış
+    ve AI moderasyonundan geçmiş (is_flagged=False) postları getirir.
+    """
+    posts, total = crud.get_discover_feed_paginated(db, page=page, page_size=page_size)
+    items = [_post_to_schema(p, db, current_user.id if current_user else None) for p in posts]
+    return schemas.PaginatedPosts(items=items, total=total, page=page, page_size=page_size)
+
+
+async def invalidate_feed_cache():
+    """Yeni post atıldığında feed önbelleğini temizler"""
+    from app.core.redis_client import get_redis
+    redis = get_redis()
+    if not redis:
+        return
+    try:
+        # scan_iter ile 'cache:feed:*' anahtarlarını bulup sil
+        async for key in redis.scan_iter(match="cache:feed:*"):
+            await redis.delete(key)
+    except Exception:
+        pass
+
+
 @router.post("/posts", response_model=schemas.Post)
 def create_post(
     data: schemas.PostCreate,
+    background_tasks: BackgroundTasks,
     db: Session = Depends(get_db),
     current_user: models.User = Depends(get_current_user),
 ):
@@ -111,6 +194,10 @@ def create_post(
     post = crud.create_post(db, current_user.id, data)
     db.refresh(post)
     post = crud.get_post_by_id(db, post.id)
+    
+    # Cache Invalidation'ı arka plana at
+    background_tasks.add_task(invalidate_feed_cache)
+    
     return _post_to_schema(post, db, current_user.id)
 
 
@@ -151,7 +238,14 @@ def toggle_like(
     post, liked = crud.toggle_post_like(db, post_id, current_user.id)
     post = crud.get_post_by_id(db, post_id)
     if liked and post.user_id != current_user.id:
-        crud.create_notification(db, post.user_id, "like", current_user.id, post_id=post_id)
+        import json
+        thumb = post.media[0].thumbnail_url or post.media[0].media_url if post.media else None
+        payload = json.dumps({
+            "actor_avatar": current_user.avatar_url,
+            "actor_username": current_user.username,
+            "post_thumbnail": thumb
+        })
+        crud.create_notification(db, post.user_id, "like", current_user.id, post_id=post_id, payload=payload)
     return {"liked": liked, "like_count": post.like_count}
 
 
@@ -186,7 +280,15 @@ def add_comment(
     if comment is None:
         raise HTTPException(status_code=403, detail="Bu gönderide yorumlar kapatılmıştır.")
     if post.user_id != current_user.id:
-        crud.create_notification(db, post.user_id, "comment", current_user.id, post_id=post_id)
+        import json
+        thumb = post.media[0].thumbnail_url or post.media[0].media_url if post.media else None
+        payload = json.dumps({
+            "actor_avatar": current_user.avatar_url,
+            "actor_username": current_user.username,
+            "post_thumbnail": thumb,
+            "text": data.text[:50]
+        })
+        crud.create_notification(db, post.user_id, "comment", current_user.id, post_id=post_id, payload=payload)
     return schemas.PostComment(
         id=comment.id,
         user_id=comment.user_id,
@@ -206,6 +308,12 @@ def get_user_posts(
     current_user: Optional[models.User] = Depends(get_optional_user),
 ):
     """Belirli bir kullanıcının gönderilerini sayfalı olarak getirir."""
+    # Gizlilik kontrolü (Munia Privacy Guard)
+    from app.services.privacy_guard import PrivacyGuard
+    viewer_id = current_user.id if current_user else None
+    if not PrivacyGuard.can_view_content(db, user_id, viewer_id):
+        return schemas.PaginatedPosts(items=[], total=0, page=page, page_size=page_size)
+    
     posts, total = crud.get_posts_by_user(db, user_id, page, page_size)
     items = [_post_to_schema(p, db, current_user.id if current_user else None) for p in posts]
     return schemas.PaginatedPosts(items=items, total=total, page=page, page_size=page_size)

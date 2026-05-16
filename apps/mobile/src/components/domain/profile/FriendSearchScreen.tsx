@@ -129,9 +129,10 @@ export default function FriendSearchScreen() {
     });
     try {
       const res = await toggleFollow(userId);
+      const newFollowing = res.status === "accepted";
       setResults((prev) => {
         const next = [...prev];
-        next[index] = { ...next[index], is_following: res.following };
+        next[index] = { ...next[index], is_following: newFollowing };
         return next;
       });
     } catch (e) {

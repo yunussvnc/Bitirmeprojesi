@@ -1,6 +1,7 @@
 # services/push.py — Expo Push Notification servisi
 
 import logging
+# pyrefly: ignore [missing-import]
 import httpx
 from typing import List, Optional
 from datetime import datetime
@@ -125,6 +126,10 @@ def notification_push_content(
         "message": {
             "title": f"💬 {actor_name}",
             "body": extra.get("preview", "Yeni mesaj") if extra else "Yeni mesaj",
+        },
+        "tag": {
+            "title": "🏷️ Etiketlendin",
+            "body": f"{actor_name} seni bir gönderide etiketledi",
         },
     }
 

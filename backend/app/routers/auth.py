@@ -166,8 +166,8 @@ def verify_register(body: schemas.VerifyRegisterRequest, db: Session = Depends(g
         pass
         
     return schemas.Token(
-        access_token=create_access_token(db_user.id),
-        refresh_token=create_refresh_token(db_user.id),
+        access_token=create_access_token(db_user.id, db_user.token_version or 0),
+        refresh_token=create_refresh_token(db_user.id, db_user.token_version or 0),
         user=schemas.User.model_validate(db_user),
     )
 
@@ -196,9 +196,10 @@ def login(
 
     reset_failed_logins(ip)
 
+    tv = user.token_version or 0
     return schemas.Token(
-        access_token=create_access_token(user.id),
-        refresh_token=create_refresh_token(user.id),
+        access_token=create_access_token(user.id, tv),
+        refresh_token=create_refresh_token(user.id, tv),
         user=schemas.User.model_validate(user),
     )
 
@@ -257,8 +258,8 @@ def google_login(
         db.commit()
 
         return schemas.Token(
-            access_token=create_access_token(user.id),
-            refresh_token=create_refresh_token(user.id),
+            access_token=create_access_token(user.id, user.token_version or 0),
+            refresh_token=create_refresh_token(user.id, user.token_version or 0),
             user=schemas.User.model_validate(user),
         )
 
@@ -294,8 +295,8 @@ def apple_login(
         db.commit()
 
         return schemas.Token(
-            access_token=create_access_token(user.id),
-            refresh_token=create_refresh_token(user.id),
+            access_token=create_access_token(user.id, user.token_version or 0),
+            refresh_token=create_refresh_token(user.id, user.token_version or 0),
             user=schemas.User.model_validate(user),
         )
     except Exception as e:
@@ -485,10 +486,28 @@ def delete_account(
     mp = db.query(models.MatchProfile).filter(models.MatchProfile.user_id == uid).first()
     if mp:
         db.delete(mp)
+    # PostTag temizliği (eksik cascade)
+    db.query(models.PostTag).filter(models.PostTag.user_id == uid).delete(synchronize_session=False)
     db.commit()
     db.delete(current_user)
     db.commit()
     return {"ok": True, "message": "Hesabınız kalıcı olarak silindi."}
+
+
+@router.post("/deactivate")
+def deactivate_account(
+    current_user: models.User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    """
+    Hesabı geçici olarak devre dışı bırakır (Soft Delete — GDPR uyumlu).
+    Kullanıcı 30 gün içinde tekrar giriş yaparsa hesap yeniden aktif olur.
+    """
+    current_user.is_active = False
+    # Token version'ı artır — tüm mevcut token'lar geçersiz olur
+    current_user.token_version = (current_user.token_version or 0) + 1
+    db.commit()
+    return {"ok": True, "message": "Hesabınız devre dışı bırakıldı. 30 gün içinde giriş yaparak yeniden aktif edebilirsiniz."}
 
 @router.post("/refresh", response_model=schemas.Token)
 def refresh_token(body: schemas.RefreshRequest, db: Session = Depends(get_db)):
@@ -499,11 +518,78 @@ def refresh_token(body: schemas.RefreshRequest, db: Session = Depends(get_db)):
     user = crud.get_user_by_id(db, int(user_id))
     if not user or not user.is_active:
         raise HTTPException(status_code=401, detail="Kullanıcı bulunamadı.")
+    # Token version kontrolü
+    token_ver = payload.get("ver", 0)
+    user_ver = user.token_version if user.token_version is not None else 0
+    if token_ver != user_ver:
+        raise HTTPException(status_code=401, detail="Oturumunuz sonlandırılmış. Lütfen tekrar giriş yapın.")
+    tv = user.token_version or 0
     return schemas.Token(
-        access_token=create_access_token(user.id),
-        refresh_token=create_refresh_token(user.id),
+        access_token=create_access_token(user.id, tv),
+        refresh_token=create_refresh_token(user.id, tv),
         user=schemas.User.model_validate(user),
     )
+
+
+@router.post("/logout-all")
+def logout_all_sessions(
+    current_user: models.User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    """
+    Tüm cihazlardan çıkış yap.
+    token_version artırılarak mevcut tüm access ve refresh token'lar anında geçersiz kılınır.
+    """
+    current_user.token_version = (current_user.token_version or 0) + 1
+    
+    # Push token'ları temizle
+    db.query(models.DeviceToken).filter(models.DeviceToken.user_id == current_user.id).delete()
+    db.commit()
+    # Yeni token'lar üret (mevcut cihaz hâlâ giriş yapılı kalır)
+    tv = current_user.token_version
+    return {
+        "ok": True,
+        "message": "Tüm cihazlardan çıkış yapıldı.",
+        "access_token": create_access_token(current_user.id, tv),
+        "refresh_token": create_refresh_token(current_user.id, tv),
+    }
+
+
+@router.post("/device-token")
+def register_device_token(
+    data: schemas.DeviceTokenCreate,
+    current_user: models.User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    """Cihazın push token'ını kaydeder (Login veya app start sonrası çağrılır)"""
+    # Önce bu token başkasına aitse sil (aynı cihazda başka hesaba geçilmiş olabilir)
+    db.query(models.DeviceToken).filter(models.DeviceToken.token == data.token).delete()
+    
+    # Kullanıcı için token'ı ekle
+    new_token = models.DeviceToken(
+        user_id=current_user.id,
+        token=data.token,
+        platform=data.platform,
+        device_id=data.device_id
+    )
+    db.add(new_token)
+    db.commit()
+    return {"ok": True, "message": "Device token registered"}
+
+
+@router.delete("/device-token")
+def unregister_device_token(
+    token: str,
+    current_user: models.User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    """Çıkış yaparken cihazın push token'ını siler"""
+    db.query(models.DeviceToken).filter(
+        models.DeviceToken.token == token,
+        models.DeviceToken.user_id == current_user.id
+    ).delete()
+    db.commit()
+    return {"ok": True, "message": "Device token removed"}
 
 
 @router.get("/me", response_model=schemas.User)

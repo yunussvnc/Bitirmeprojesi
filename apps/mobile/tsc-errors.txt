@@ -1,0 +1,21 @@
+src/components/ui/OptimizedImage.tsx(5,18): error TS2430: Interface 'OptimizedImageProps' incorrectly extends interface 'Omit<ImageProps, "source" | "placeholder">'.
+  Types of property 'style' are incompatible.
+    Type 'StyleProp<ViewStyle>' is not assignable to type 'StyleProp<ImageStyle>'.
+      Type 'ViewStyle' is not assignable to type 'StyleProp<ImageStyle>'.
+        Type 'ViewStyle' is not assignable to type 'ImageStyle'.
+          Types of property 'overflow' are incompatible.
+            Type '"visible" | "hidden" | "scroll" | undefined' is not assignable to type '"visible" | "hidden" | undefined'.
+              Type '"scroll"' is not assignable to type '"visible" | "hidden" | undefined'.
+src/components/ui/OptimizedImage.tsx(92,7): error TS2322: Type 'StyleProp<ViewStyle>' is not assignable to type 'StyleProp<ImageStyle>'.
+  Type 'ViewStyle' is not assignable to type 'StyleProp<ImageStyle>'.
+    Type 'ViewStyle' is not assignable to type 'ImageStyle'.
+      Types of property 'overflow' are incompatible.
+        Type '"visible" | "hidden" | "scroll" | undefined' is not assignable to type '"visible" | "hidden" | undefined'.
+          Type '"scroll"' is not assignable to type '"visible" | "hidden" | undefined'.
+src/providers/PushNotificationProvider.tsx(3,25): error TS2307: Cannot find module 'expo-device' or its corresponding type declarations.
+src/providers/PushNotificationProvider.tsx(6,10): error TS2305: Module '"@/src/services/api"' has no exported member 'api'.
+src/providers/PushNotificationProvider.tsx(7,25): error TS2307: Cannot find module '@/src/context/AuthContext' or its corresponding type declarations.
+src/providers/PushNotificationProvider.tsx(11,35): error TS2322: Type 'Promise<{ shouldShowAlert: true; shouldPlaySound: true; shouldSetBadge: false; }>' is not assignable to type 'Promise<NotificationBehavior>'.
+  Type '{ shouldShowAlert: true; shouldPlaySound: true; shouldSetBadge: false; }' is missing the following properties from type 'NotificationBehavior': shouldShowBanner, shouldShowList
+src/providers/PushNotificationProvider.tsx(21,32): error TS2554: Expected 1 arguments, but got 0.
+src/providers/PushNotificationProvider.tsx(22,28): error TS2554: Expected 1 arguments, but got 0.

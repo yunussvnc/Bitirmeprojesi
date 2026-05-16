@@ -8,6 +8,8 @@ import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { spacing } from "@/src/constants/design";
 import { useTranslation } from "react-i18next";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
+import { captureException, addBreadcrumb } from "@/src/services/sentryService";
+import { analytics, AnalyticsEvents } from "@/src/services/analyticsService";
 
 interface Props {
   children: ReactNode;
@@ -32,6 +34,19 @@ export class ErrorBoundary extends Component<Props, State> {
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     this.props.onError?.(error, errorInfo);
+
+    // Sentry'ye hata gönder (production'da da çalışır)
+    captureException(error, {
+      componentStack: errorInfo.componentStack,
+      source: "ErrorBoundary",
+    });
+
+    // Analitik: Crash recovery kaydı
+    analytics.track(AnalyticsEvents.CRASH_RECOVERED, {
+      error_name: error.name,
+      error_message: error.message,
+    });
+
     if (__DEV__) {
       console.error("ErrorBoundary caught:", error, errorInfo);
     }

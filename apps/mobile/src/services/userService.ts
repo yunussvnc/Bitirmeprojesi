@@ -24,14 +24,23 @@ export type UserProfile = {
   followers_count: number;
   following_count: number;
   is_following: boolean;
+  follow_status: 'pending' | 'accepted' | null;  // Dummygram: tip güvenli follow durumu
 };
 
 export async function getUserProfile(userId: number): Promise<UserProfile> {
   return apiGet<UserProfile>(`/users/${userId}`);
 }
 
-export async function toggleFollow(userId: number): Promise<{ following: boolean }> {
-  return apiPost<{ following: boolean }>(`/users/${userId}/follow`);
+export async function toggleFollow(userId: number): Promise<{ status: string | null; followers_count: number }> {
+  return apiPost<{ status: string | null; followers_count: number }>(`/users/${userId}/follow`);
+}
+
+export async function acceptFollowRequest(userId: number): Promise<{ success: boolean }> {
+  return apiPost<{ success: boolean }>(`/users/${userId}/follow/accept`);
+}
+
+export async function rejectFollowRequest(userId: number): Promise<{ success: boolean }> {
+  return apiPost<{ success: boolean }>(`/users/${userId}/follow/reject`);
 }
 
 export async function getUserStats(userId: number): Promise<UserStats> {
