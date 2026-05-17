@@ -34,7 +34,7 @@ export default function RecentlyDeletedScreen() {
     const [isEditMode, setIsEditMode] = useState(false);
     const [selectedIds, setSelectedIds] = useState<string[]>([]);
 
-    const conversations = useMessagesStore(state => state.conversations).filter(c => c.isDeleted);
+    const conversations = useMessagesStore(state => state.conversations).filter(c => c.isDeleted || c.hasDeletedHistory);
     const restoreDeleted = useMessagesStore(state => state.restoreDeleted);
     const permanentlyDelete = useMessagesStore(state => state.permanentlyDelete);
     const restoreDeletedMultiple = useMessagesStore(state => state.restoreDeletedMultiple);
@@ -125,6 +125,9 @@ export default function RecentlyDeletedScreen() {
                     if (isEditMode) {
                         lightImpact();
                         toggleSelection(item.id);
+                    } else {
+                        lightImpact();
+                        router.push(`/chat/${item.id}?viewDeleted=true&name=${encodeURIComponent(item.name)}&avatar=${encodeURIComponent(item.avatar)}` as any);
                     }
                 }}
             >

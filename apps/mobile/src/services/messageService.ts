@@ -125,3 +125,27 @@ export async function getUnreadCount(
         throw error;
     }
 }
+
+export interface OpenConversationResponse {
+    conversation_id: number;
+    user_id: number;
+    username: string;
+    name: string;
+    avatar_url?: string | null;
+}
+
+/**
+ * Belirtilen kullanıcıyla DM konuşması aç (veya mevcut olanı getir).
+ * Profil ekranındaki "Mesaj" butonu ve boş DM ekranındaki "Start Chat" için kullanılır.
+ */
+export async function openConversation(userId: number): Promise<OpenConversationResponse> {
+    try {
+        return await apiPost<OpenConversationResponse>(
+            "/messages/conversation/open",
+            { user_id: userId }
+        );
+    } catch (error) {
+        logger.error("[messageService] openConversation error:", error);
+        throw error;
+    }
+}

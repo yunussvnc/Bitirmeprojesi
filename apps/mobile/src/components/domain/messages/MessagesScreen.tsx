@@ -60,6 +60,60 @@ export default function MessagesScreen() {
     const [isEditMode, setIsEditMode] = useState(false);
     const [selectedIds, setSelectedIds] = useState<string[]>([]);
     const { t } = useTranslation();
+    const { getMatchConversations } = require("@/src/services/matchService");
+
+    React.useEffect(() => {
+        // Ekran her yüklendiğinde (veya authUser değiştiğinde) backend'den konuşma listesini çek
+        if (!authUser) return;
+        getMatchConversations().then((backendConvs: any[]) => {
+            const store = useMessagesStore.getState();
+            backendConvs.forEach((bc) => {
+                const chatId = String(bc.id);
+                const existing = store.conversations.find(c => c.id === chatId);
+                const lastMsg = bc.last_message_text || '';
+                const senderId = bc.last_message_sender_id;
+                const senderType = senderId === authUser.id ? 'me' : bc.other_user_display_name;
+                
+                // Eğer store'da hiç yoksa, tamamen yeni ekle
+                if (!existing) {
+                    store.addConversation({
+                        id: chatId,
+                        name: bc.other_user_display_name,
+                        username: '',
+                        avatar: bc.other_user_photo || '',
+                        lastMessage: lastMsg,
+                        lastMessageSender: senderType as any,
+                        timestamp: bc.last_message_at ? new Date(bc.last_message_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '',
+                        unread: bc.unread_count > 0,
+                        isOnline: false,
+                        lastMessageAt: bc.last_message_at ? new Date(bc.last_message_at).getTime() : new Date(bc.created_at).getTime(),
+                        isMatch: !bc.my_profile_revealed || !bc.other_profile_revealed,
+                        isRevealed: bc.my_profile_revealed && bc.other_profile_revealed,
+                        revealRequestedByMe: bc.my_profile_revealed,
+                        revealRequestedByThem: bc.other_profile_revealed,
+                    });
+                } else {
+                    // Sadece son mesaj ve okunmamış durumunu güncelle (silinme vs korunsun)
+                    if (bc.last_message_at) {
+                        const bcTime = new Date(bc.last_message_at).getTime();
+                        if (bcTime > (existing.lastMessageAt || 0)) {
+                            store.updateLastMessageAt(
+                                chatId,
+                                lastMsg,
+                                new Date(bc.last_message_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                                senderType as any,
+                                false,
+                                bc.unread_count > 0
+                            );
+                        } else if (bc.unread_count > 0 && !existing.unread) {
+                            // Okunmamış durumunu senkronize et
+                            store.updateLastMessageAt(chatId, existing.lastMessage, existing.timestamp, existing.lastMessageSender, false, true);
+                        }
+                    }
+                }
+            });
+        }).catch((e: any) => console.log("Failed to fetch DMs inbox", e));
+    }, [authUser]);
 
     const username = authUser?.username || authUser?.email || "Kullanıcı";
 
@@ -268,7 +322,13 @@ export default function MessagesScreen() {
             <TouchableOpacity
                 style={[styles.startBtn, { backgroundColor: colors.accent.primary }]}
                 activeOpacity={0.8}
-                onPress={() => lightImpact()}
+                onPress={() => {
+                    lightImpact();
+                    router.push({
+                        pathname: "/search-users",
+                        params: { mode: "chat" }
+                    } as any);
+                }}
             >
                 <Text style={styles.startBtnText}>{t("messages.start_chat")}</Text>
             </TouchableOpacity>

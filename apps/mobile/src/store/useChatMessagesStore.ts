@@ -17,6 +17,7 @@ type ChatMessagesState = {
     messagesByChat: Record<string, Message[]>;
     getMessages: (chatId: string) => Message[];
     addMessage: (chatId: string, msg: Message) => void;
+    clearStore: () => void;
 };
 
 export const useChatMessagesStore = create<ChatMessagesState>()(
@@ -37,6 +38,7 @@ export const useChatMessagesStore = create<ChatMessagesState>()(
                         },
                     };
                 }),
+            clearStore: () => set({ messagesByChat: {} }),
         }),
         {
             name: "chat-messages-store",

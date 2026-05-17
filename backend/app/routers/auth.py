@@ -194,9 +194,10 @@ def login(
     if not user.is_active:
         raise HTTPException(status_code=403, detail="Hesabınız devre dışı bırakılmış.")
 
-    reset_failed_logins(ip)
+    user.token_version = (user.token_version or 0) + 1
+    db.commit()
 
-    tv = user.token_version or 0
+    tv = user.token_version
     return schemas.Token(
         access_token=create_access_token(user.id, tv),
         refresh_token=create_refresh_token(user.id, tv),
@@ -255,11 +256,13 @@ def google_login(
             user = crud.create_user(db, user_data)
             
         user.is_email_verified = True
+        user.token_version = (user.token_version or 0) + 1
         db.commit()
 
+        tv = user.token_version
         return schemas.Token(
-            access_token=create_access_token(user.id, user.token_version or 0),
-            refresh_token=create_refresh_token(user.id, user.token_version or 0),
+            access_token=create_access_token(user.id, tv),
+            refresh_token=create_refresh_token(user.id, tv),
             user=schemas.User.model_validate(user),
         )
 
@@ -292,11 +295,13 @@ def apple_login(
             user = crud.create_user(db, user_data)
         
         user.is_email_verified = True
+        user.token_version = (user.token_version or 0) + 1
         db.commit()
 
+        tv = user.token_version
         return schemas.Token(
-            access_token=create_access_token(user.id, user.token_version or 0),
-            refresh_token=create_refresh_token(user.id, user.token_version or 0),
+            access_token=create_access_token(user.id, tv),
+            refresh_token=create_refresh_token(user.id, tv),
             user=schemas.User.model_validate(user),
         )
     except Exception as e:
@@ -561,11 +566,17 @@ def register_device_token(
     current_user: models.User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
-    """Cihazın push token'ını kaydeder (Login veya app start sonrası çağrılır)"""
-    # Önce bu token başkasına aitse sil (aynı cihazda başka hesaba geçilmiş olabilir)
-    db.query(models.DeviceToken).filter(models.DeviceToken.token == data.token).delete()
+    """Cihazın push token'ını kaydeder (Login veya app start sonrası çağrılır)
     
-    # Kullanıcı için token'ı ekle
+    token_version ile tek cihaz girişi zorlandığı için push da tek cihaza gitmelidir.
+    Bu nedenle yeni token kaydedilmeden önce kullanıcının TÜM eski tokenları silinir.
+    """
+    # Kullanıcının tüm eski cihaz tokenlarını sil (tek cihaz kuralı)
+    db.query(models.DeviceToken).filter(
+        models.DeviceToken.user_id == current_user.id
+    ).delete()
+    
+    # Yeni token'ı kaydet
     new_token = models.DeviceToken(
         user_id=current_user.id,
         token=data.token,

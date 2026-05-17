@@ -128,8 +128,10 @@ class ConnectionManager:
             self._global_connections[user_id].discard(websocket)
             if not self._global_connections[user_id]:
                 del self._global_connections[user_id]
+                # Son bağlantı da kapandı → Redis'teki online durumunu temizle
+                import asyncio
+                asyncio.create_task(self._clear_user_online(user_id))
         logger.info("🔌 WS Global ayrıldı: user=%d", user_id)
-        # Redis'te durumunu güncelle (cleanup task bırakılabilir)
 
     async def send_global_notification(self, user_id: int, data: dict):
         """Redis Pub/Sub ile global bildirim at."""
@@ -139,19 +141,39 @@ class ConnectionManager:
             "data": data
         })
         
-        # Kullanıcı offline ise push notification gönder
-        from app.core.redis_client import get_redis
-        redis = get_redis()
-        is_online = False
-        if redis:
-            is_online = await redis.exists(f"online_user:{user_id}") > 0
+        # Kullanıcı online ise push gönderme.
+        # Önce: Bu sunucudaki lokal bellek bağlantılarını kontrol et (en güvenilir yol)
+        # Global notification WS'e bağlı mı?
+        is_online = user_id in self._global_connections and len(self._global_connections[user_id]) > 0
+        
+        # Herhangi bir chat/sohbet WS'ine bağlı mı? (Mesaj ekranındayken de push gelmesin)
+        if not is_online:
+            is_online = user_id in self._user_connections and len(self._user_connections[user_id]) > 0
+        
+        # Sonra: Lokal bağlantı yoksa Redis'e bak (multi-node / farklı sunucu durumu için)
+        if not is_online:
+            from app.core.redis_client import get_redis
+            redis = get_redis()
+            if redis:
+                try:
+                    is_online = await redis.exists(f"online_user:{user_id}") > 0
+                except Exception:
+                    pass  # Redis erişilemezse push gönder (güvenli taraf)
             
         if not is_online:
             import asyncio
             from app.services.push_provider import trigger_push_notification
-            # data içinde title/body varsa push at
-            title = data.get("title", "Yeni Bildirim")
-            body = data.get("message", "AsemOS'tan yeni bir bildiriminiz var.")
+            
+            title = "Yeni Bildirim"
+            body = "AsemOS'tan yeni bir bildiriminiz var."
+
+            if data.get("type") == "new_message":
+                title = data.get("sender_name", title)
+                body = data.get("content", body)
+            else:
+                title = data.get("title", title)
+                body = data.get("message", body)
+                
             asyncio.create_task(trigger_push_notification(user_id, title, body, data))
 
     async def _local_send_global(self, user_id: int, data: dict):
@@ -206,24 +228,12 @@ class ConnectionManager:
         })
         
         # Kullanıcı Redis'te online ise True (Delivered), değilse False (Sent) döner
+        # NOT: Push notification bu fonksiyondan ATILMAZ — send_global_notification üstlenir.
         from app.core.redis_client import get_redis
         redis = get_redis()
         is_online = False
         if redis:
             is_online = await redis.exists(f"online_user:{user_id}") > 0
-            
-        if not is_online:
-            import asyncio
-            from app.services.push_provider import trigger_push_notification
-            sender_name = data.get("sender_name", "Birisi")
-            content = data.get("content", "Size bir mesaj gönderdi.")
-            # DM geldiğinde tetikleniyor
-            asyncio.create_task(trigger_push_notification(
-                user_id=user_id, 
-                title=f"{sender_name} size mesaj gönderdi", 
-                body=content,
-                data={"type": "message", "conversation_id": conversation_id, "url": f"/dm/{conversation_id}"}
-            ))
             
         return is_online
 
@@ -319,6 +329,16 @@ class ConnectionManager:
         if redis:
             # 60 saniye TTL. Frontend ping attıkça uzatılır.
             await redis.setex(f"online_user:{user_id}", 60, "1")
+
+    async def _clear_user_online(self, user_id: int):
+        """Kullanıcının online durumunu Redis'ten siler."""
+        from app.core.redis_client import get_redis
+        redis = get_redis()
+        if redis:
+            try:
+                await redis.delete(f"online_user:{user_id}")
+            except Exception:
+                pass
 
     def get_room_online_count(self, room_id: str) -> int:
         """Lokal online sayısı. Cluster geneli için Redis kümeleri kullanılmalıdır."""

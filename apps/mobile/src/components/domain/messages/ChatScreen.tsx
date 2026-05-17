@@ -36,6 +36,7 @@ import { getMessages as fetchBackendMessages, sendMessage as backendSendMessage,
 import { useAuthStore } from "@/src/store/useAuthStore";
 import { logger } from "@/src/utils/logger";
 import { useTranslation } from "react-i18next";
+import { API_BASE_URL } from "@/src/constants/api";
 
 /* ── Types ── */
 interface Message {
@@ -210,7 +211,7 @@ export default function ChatScreen() {
     const { colors } = useTheme();
     const insets = useSafeAreaInsets();
     const router = useRouter();
-    const { chatId } = useLocalSearchParams<{ chatId: string }>();
+    const { chatId, name: nameParam, avatar: avatarParam, viewDeleted } = useLocalSearchParams<{ chatId: string; name?: string; avatar?: string; viewDeleted?: string }>();
     const [inputText, setInputText] = useState("");
     const [lastSeenId, setLastSeenId] = useState<string | null>(null);
     const [isOptionsVisible, setIsOptionsVisible] = useState(false);
@@ -220,15 +221,16 @@ export default function ChatScreen() {
     const didInitialScrollRef = useRef(false);
     const resolvedChatId = chatId || "1";
     const currentUser = useAuthStore((s) => s.user);
-    const { t } = useTranslation();
+    const accessToken = useAuthStore((s) => s.accessToken);
+    const { t, i18n } = useTranslation();
+    const currentLocale = i18n.language === 'tr' ? 'tr-TR' : 'en-US';
 
-    // BUG-11: conversation_id, ya tamamen sayısal ya da "match_xxx_userId" formatında olabilir.
-    // Sayısal ise doğrudan backend conversation id olarak kullan.
-    // BUG-14: Dummy/mock conversation ID'leri (CONTACTS ve DUMMY_MESSAGES_BY_CHAT'te tanımlı)
-    // backend conversation ID'leri ile çakışıyor. Dummy ID'ler backend'e gönderilmemeli.
-    const isDummyConversation = resolvedChatId in CONTACTS || resolvedChatId in DUMMY_MESSAGES_BY_CHAT;
+    // BUG-14: Sadece "match_xxx_userId" formatındaki ID'ler ya da sayısal olmayan ID'ler dummy sayılır.
+    // Sayısal ID'ler artık her zaman backend conversation ID'si olarak işlenir.
     const numericConvId = parseInt(resolvedChatId, 10);
-    const isBackendConv = !isDummyConversation && !isNaN(numericConvId) && resolvedChatId === String(numericConvId);
+    const isNumeric = !isNaN(numericConvId) && resolvedChatId === String(numericConvId);
+    const isDummyConversation = !isNumeric && !resolvedChatId.startsWith("match_");
+    const isBackendConv = isNumeric;
 
     // Store'dan mesajları mount anında bir kere oku (subscribe etme — hydration loop'u önler)
     const [messages, setMessages] = useState<Message[]>(() => {
@@ -247,7 +249,7 @@ export default function ChatScreen() {
                         timestamp: (() => {
                             try {
                                 const d = new Date(m.timestamp);
-                                return d.toLocaleTimeString("tr-TR", { hour: "2-digit", minute: "2-digit" });
+                                return d.toLocaleTimeString(currentLocale, { hour: "2-digit", minute: "2-digit" });
                             } catch (_e) { return m.timestamp; }
                         })(),
                         imageUri: m.imageUri,
@@ -260,47 +262,234 @@ export default function ChatScreen() {
         return initial;
     });
 
-    // Backend'den mesaj geçmişini yükle (sayısal conversation id ise)
+    const storeConversation = useMessagesStore((state) => state.conversations.find(c => c.id === resolvedChatId));
+
+    // historyClearedAt var ise ondan önceki mesajları filtrele (viewDeleted true değilse)
+    const visibleMessages = React.useMemo(() => {
+        if (storeConversation?.historyClearedAt && viewDeleted !== "true") {
+            return messages.filter(m => {
+                try {
+                    const msgTime = new Date(m.timestamp).getTime();
+                    if (isNaN(msgTime)) return true;
+                    return msgTime >= storeConversation.historyClearedAt!;
+                } catch {
+                    return true;
+                }
+            });
+        }
+        return messages;
+    }, [messages, storeConversation?.historyClearedAt]);
+
+    useEffect(() => {
+        useMessagesStore.getState().setActiveConversation(resolvedChatId);
+        return () => {
+            useMessagesStore.getState().setActiveConversation(null);
+        };
+    }, [resolvedChatId]);
+
+    // Anlık "görüldü" güncellemesi için Chat WebSocket listener
+    useEffect(() => {
+        if (!isBackendConv || !accessToken) return;
+
+        const WS_BASE = API_BASE_URL.replace(/^http/, 'ws');
+        const wsUrl = `${WS_BASE}/ws/chat/${numericConvId}?token=${accessToken}`;
+        const ws = new WebSocket(wsUrl);
+
+        ws.onopen = () => {
+            console.log(`✅ Chat WS connected to: ${wsUrl}`);
+        };
+
+        ws.onerror = (e) => {
+            console.warn(`❌ Chat WS error:`, e);
+        };
+
+        ws.onclose = (e) => {
+            console.log(`🔌 Chat WS closed. Code: ${e.code}, Reason: ${e.reason}`);
+        };
+
+        ws.onmessage = (event) => {
+            try {
+                const data = JSON.parse(event.data);
+                console.log(`📬 Chat WS message received:`, data.type);
+
+                if (data.type === 'message:status') {
+                    // Karşı taraf mesajları okudu → anlık olarak status'ü "read" yap
+                    const messageIds: string[] = (data.message_ids ?? (data.message_id ? [String(data.message_id)] : [])).map(String);
+                    if (messageIds.length > 0 && data.status === 'read') {
+                        setMessages((prev) =>
+                            prev.map((m) =>
+                                m.isMine && messageIds.includes(m.id)
+                                    ? { ...m, status: 'read' as const }
+                                    : m
+                            )
+                        );
+                    }
+                } else if (data.type === 'new_message' && data.message) {
+                    // Karşı taraftan yeni mesaj geldi → listeye ekle
+                    const msg = data.message;
+                    if (msg.sender_id !== currentUser?.id) {
+                        setMessages((prev) => {
+                            if (prev.some((m) => m.id === String(msg.id))) return prev;
+                            return [...prev, {
+                                id: String(msg.id),
+                                text: msg.content ?? '',
+                                isMine: false,
+                                imageUri: msg.media_url ?? undefined,
+                                timestamp: (() => {
+                                    try {
+                                        return new Date(msg.created_at).toLocaleTimeString(currentLocale, { hour: '2-digit', minute: '2-digit' });
+                                    } catch { return ''; }
+                                })(),
+                            }];
+                        });
+                    }
+                } else if (data.type === 'message:sent') {
+                    // Kendi gönderdiğimiz mesajın ID'si backend'den onaylandı
+                    const msg = data.message;
+                    if (msg) {
+                        setMessages((prev) =>
+                            prev.map((m) =>
+                                (m.status === 'sent' && m.text === msg.content)
+                                    ? { ...m, id: String(msg.id), status: 'delivered' as const }
+                                    : m
+                            )
+                        );
+                    }
+                }
+            } catch { /* ignore parse errors */ }
+        };
+
+        return () => {
+            ws.close(1000, 'Screen unmounted');
+        };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isBackendConv, numericConvId, accessToken]);
+
+    // Backend'den mesaj geçmişini yükle ve 3 saniyede bir yeni mesajları kontrol et
     useEffect(() => {
         if (!isBackendConv) return;
-        (async () => {
+
+        const myId = currentUser?.id;
+
+        const loadMessages = async () => {
             try {
                 const res = await fetchBackendMessages(numericConvId, 1, 100);
                 if (res.items.length > 0) {
-                    const myId = currentUser?.id;
                     const backendMsgs: Message[] = res.items.map((m) => ({
                         id: String(m.id),
                         text: m.content,
                         isMine: m.sender_id === myId,
                         timestamp: (() => {
                             try {
-                                return new Date(m.created_at).toLocaleTimeString("tr-TR", { hour: "2-digit", minute: "2-digit" });
+                                return new Date(m.created_at).toLocaleTimeString(currentLocale, { hour: "2-digit", minute: "2-digit" });
                             } catch { return ""; }
                         })(),
-                        status: m.is_read ? "read" as const : "delivered" as const,
+                        // Benim mesajlarım için: is_read=true → read, false → sent
+                        // Karşı tarafın mesajları için durum gösterilmez (isMine=false)
+                        status: m.sender_id === myId
+                            ? (m.is_read ? "read" as const : "sent" as const)
+                            : undefined,
                         sharedPostId: m.shared_post_id ?? undefined,
-                        imageUri: m.media_url ?? undefined,
+                        imageUri: m.media_url ? (m.media_url.startsWith('/') ? `${API_BASE_URL}${m.media_url}` : m.media_url) : undefined,
                     }));
-                    setMessages(backendMsgs);
+                    setMessages((prev) => {
+                        // Backend verisini önceki mesajlarla birleştir (delivered statüsünü korumak için)
+                        const mergedMsgs = backendMsgs.map(newMsg => {
+                            const oldMsg = prev.find(m => m.id === newMsg.id);
+                            if (oldMsg) {
+                                // Eski mesaj 'delivered' ise ve yeni mesaj henüz 'read' değilse ('sent' ise), 'delivered' kalmasını sağla
+                                if (oldMsg.status === 'delivered' && newMsg.status === 'sent') {
+                                    return { ...newMsg, status: 'delivered' as const };
+                                }
+                            }
+                            return newMsg;
+                        });
+
+                        // Liste uzunlukları veya statüleri değişmişse listeyi güncelle
+                        const isSame = prev.length === mergedMsgs.length && prev.every((m, i) => 
+                            m.id === mergedMsgs[i].id && m.status === mergedMsgs[i].status
+                        );
+                        
+                        return isSame ? prev : mergedMsgs;
+                    });
+
+                    // Store'u render sonrasında güncelle (render sırasında state güncelleme hatasını önler)
+                    const latestMsg = backendMsgs[backendMsgs.length - 1];
+                    if (latestMsg && backendMsgs.length > 0) {
+                        const convs = useMessagesStore.getState().conversations;
+                        const textToSave = latestMsg.text || (latestMsg.imageUri ? t('chat.photo', 'Fotoğraf 📷') : '');
+                        const sender = latestMsg.isMine ? 'me' : contact.name || 'Kullanıcı';
+
+                        setTimeout(() => {
+                            if (!convs.some(c => c.id === chatId)) {
+                                useMessagesStore.getState().addConversation({
+                                    id: chatId,
+                                    name: contact.name || 'Kullanıcı',
+                                    username: '',
+                                    avatar: contact.avatar || '',
+                                    lastMessage: textToSave,
+                                    lastMessageSender: sender as any,
+                                    timestamp: latestMsg.timestamp,
+                                    unread: !latestMsg.isMine,
+                                    isOnline: contact.isOnline || false,
+                                    lastMessageAt: Date.now(),
+                                });
+                            } else {
+                                const c = convs.find(c => c.id === chatId);
+                                let shouldUnhide = false;
+                                if (c?.isDeleted) {
+                                    const latestTime = new Date(latestMsg.timestamp).getTime();
+                                    if (c.historyClearedAt && !isNaN(latestTime) && latestTime > c.historyClearedAt) {
+                                        shouldUnhide = true;
+                                    }
+                                }
+                                useMessagesStore.getState().updateLastMessageAt(
+                                    chatId,
+                                    textToSave,
+                                    latestMsg.timestamp,
+                                    sender as any,
+                                    shouldUnhide
+                                );
+                                if (c?.isArchived) useMessagesStore.getState().unarchiveConversation(chatId);
+                            }
+                        }, 0);
+                    }
                 }
                 // Okundu bildir
                 markMessagesRead(numericConvId).catch(() => { });
             } catch (e) {
-                // 403 = conversation belongs to another user (expected for seed data)
-                // Only log at debug level to avoid scary console errors
                 if (__DEV__) logger.warn("[ChatScreen] Could not load messages for conv", numericConvId);
             }
-        })();
+        };
+
+        // İlk yükleme
+        loadMessages();
+
+        // 3 saniyede bir polling (arka plandaki güvenlik ağı)
+        const pollInterval = setInterval(loadMessages, 3000);
+
+        return () => clearInterval(pollInterval);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isBackendConv, numericConvId]);
 
-    const storeConversation = useMessagesStore((state) => state.conversations.find(c => c.id === resolvedChatId));
-
+    // Contact bilgisini öncelik sırasıyla belirle:
+    // 1. Mock CONTACTS (sadece sahte data için)
+    // 2. Store'daki konuşma (önceden yüklenmiş)
+    // 3. Navigation param'ları (openConversation'dan gelenler) ← YENİ
+    // 4. Boş fallback (asla Ahmet Yılmaz değil)
     const contact = CONTACTS[resolvedChatId] || (storeConversation ? {
         name: storeConversation.name,
         avatar: storeConversation.avatar,
-        isOnline: storeConversation.isOnline
-    } : CONTACTS["1"]);
+        isOnline: storeConversation.isOnline,
+    } : nameParam ? {
+        name: decodeURIComponent(nameParam),
+        avatar: avatarParam ? decodeURIComponent(avatarParam) : `https://ui-avatars.com/api/?name=${encodeURIComponent(nameParam)}&background=random`,
+        isOnline: false,
+    } : {
+        name: "Kullanıcı",
+        avatar: "https://ui-avatars.com/api/?name=K&background=random",
+        isOnline: false,
+    });
 
     const isMatch = storeConversation?.isMatch;
     const revealRequestedByMe = storeConversation?.revealRequestedByMe;
@@ -392,7 +581,7 @@ export default function ChatScreen() {
             id: String(Date.now()),
             text: inputText.trim(),
             isMine: true,
-            timestamp: new Date().toLocaleTimeString("tr-TR", { hour: "2-digit", minute: "2-digit" }),
+            timestamp: new Date().toLocaleTimeString(currentLocale, { hour: "2-digit", minute: "2-digit" }),
             status: "sent",
         };
         setMessages((prev) => [...prev, newMsg]);
@@ -405,18 +594,44 @@ export default function ChatScreen() {
                 timestamp: new Date().toISOString(),
                 status: "sent",
             });
-            useMessagesStore.getState().updateLastMessageAt(chatId, newMsg.text, newMsg.timestamp, "me");
+            const convs = useMessagesStore.getState().conversations;
+            if (!convs.some(c => c.id === chatId)) {
+                // Konuşma listede yoksa yeni oluştur
+                useMessagesStore.getState().addConversation({
+                    id: chatId,
+                    name: contact.name || "Kullanıcı",
+                    username: "", // Opsiyonel
+                    avatar: contact.avatar || "",
+                    lastMessage: newMsg.text,
+                    lastMessageSender: "me",
+                    timestamp: newMsg.timestamp,
+                    unread: false,
+                    isOnline: contact.isOnline || false,
+                    lastMessageAt: Date.now(),
+                });
+            } else {
+                useMessagesStore.getState().updateLastMessageAt(chatId, newMsg.text, newMsg.timestamp, "me", true);
+                const c = convs.find(c => c.id === chatId);
+                if (c?.isArchived) useMessagesStore.getState().unarchiveConversation(chatId);
+            }
         }
-        // Backend'e fire-and-forget sync
+        // Backend'e gönder ve ID'yi gerçek db ID'si ile değiştir
         if (isBackendConv) {
-            backendSendMessage(numericConvId, { content: newMsg.text }).catch((e) =>
-                logger.warn("[ChatScreen] Backend mesaj gönderilemedi", e)
-            );
+            backendSendMessage(numericConvId, { content: newMsg.text })
+                .then((sent) => {
+                    setMessages((prev) =>
+                        prev.map((m) =>
+                            m.id === newMsg.id
+                                ? { ...m, id: String(sent.id), status: 'delivered' as const }
+                                : m
+                        )
+                    );
+                })
+                .catch((e) =>
+                    logger.warn("[ChatScreen] Backend mesaj gönderilemedi", e)
+                );
         }
         setInputText("");
-        setTimeout(() => {
-            flatListRef.current?.scrollToEnd({ animated: true });
-        }, 100);
     };
 
     const handleCameraPress = () => {
@@ -474,32 +689,63 @@ export default function ChatScreen() {
         );
     };
 
-    const sendImageMessage = (uri: string) => {
-        const newMsg: Message = {
-            id: String(Date.now()),
-            text: inputText.trim(),
+    const sendImageMessage = async (uri: string) => {
+        if (!isBackendConv) return;
+
+        // Fotoğrafla birlikte yazı gönderilmişse al, yoksa backend hata vermesin diye varsayılan at
+        const currentText = inputText.trim() || t('chat.photo', '📷 Fotoğraf');
+
+        // Optimistic UI: hemen göster
+        const tempId = `temp_${Date.now()}`;
+        const optimisticMsg: Message = {
+            id: tempId,
+            text: currentText === t('chat.photo', '📷 Fotoğraf') ? "" : currentText,
             imageUri: uri,
             isMine: true,
-            timestamp: new Date().toLocaleTimeString("tr-TR", { hour: "2-digit", minute: "2-digit" }),
+            timestamp: new Date().toLocaleTimeString(currentLocale, { hour: "2-digit", minute: "2-digit" }),
             status: "sent",
         };
-        setMessages((prev) => [...prev, newMsg]);
-        // Store'a ve conversations'a yaz
-        if (chatId) {
-            useChatMessagesStore.getState().addMessage(chatId, {
-                id: newMsg.id,
-                text: newMsg.text || t("chat.photo", "Fotoğraf 📷"),
-                isMine: true,
-                timestamp: new Date().toISOString(),
-                imageUri: uri,
-                status: "sent",
+        setMessages((prev) => [...prev, optimisticMsg]);
+
+        try {
+            // 1. Görseli backend'e upload et
+            const filename = uri.split('/').pop() || 'photo.jpg';
+            const match = /\.([^.]+)$/.exec(filename);
+            const type = match ? `image/${match[1].toLowerCase().replace('jpg', 'jpeg')}` : 'image/jpeg';
+
+            const { apiUploadFile } = await import('@/src/utils/apiClient');
+            const uploadResult = await apiUploadFile('/upload/image', { uri, name: filename, type });
+            const mediaUrl: string = uploadResult.url;
+
+            // 2. Backend'e mesaj olarak gönder
+            const sent = await backendSendMessage(numericConvId, {
+                content: currentText,
+                message_type: "image",
+                media_url: mediaUrl,
             });
-            useMessagesStore.getState().updateLastMessageAt(chatId, newMsg.text || t("chat.photo", "Fotoğraf 📷"), newMsg.timestamp, "me");
+
+            // 3. Optimistic mesajı gerçek ID ile güncelle
+            setMessages((prev) =>
+                prev.map((m) =>
+                    m.id === tempId
+                        ? { ...m, id: String(sent.id), status: 'delivered' as const }
+                        : m
+                )
+            );
+
+            // Store güncelle
+            const textToSave = t('chat.photo', 'Fotoğraf 📷');
+            setTimeout(() => {
+                useMessagesStore.getState().updateLastMessageAt(chatId, textToSave, optimisticMsg.timestamp, 'me', true);
+            }, 0);
+        } catch (err) {
+            logger.error('[sendImageMessage] Upload failed:', err);
+            // Hatalı optimistic mesajı kaldır
+            setMessages((prev) => prev.filter((m) => m.id !== tempId));
+            Alert.alert(t('common.error', 'Hata'), t('chat.photo_send_err', 'Fotoğraf gönderilemedi.'));
         }
-        setInputText("");
-        setTimeout(() => {
-            flatListRef.current?.scrollToEnd({ animated: true });
-        }, 100);
+
+        setInputText('');
     };
 
     const handleDeleteMessage = (msgId: string) => {
@@ -540,14 +786,18 @@ export default function ChatScreen() {
         if (item.isMine) {
             const isRead = item.status === 'read' || item.seen || (isLast && lastSeenId === item.id);
             const isDelivered = item.status === 'delivered';
-            const tickColor = "#2ecc71";
+            const readColor = "#2196F3";     // Mavi → görüldü
+            const defaultColor = "rgba(255,255,255,0.6)"; // Soluk → gönderildi/teslim edildi
 
             if (isRead) {
-                tickIcon = <MaterialCommunityIcons name="check-all" size={16} color={tickColor} style={{ marginLeft: 4 }} />;
+                // Çift mavi tik → görüldü
+                tickIcon = <MaterialCommunityIcons name="check-all" size={16} color={readColor} style={{ marginLeft: 4 }} />;
             } else if (isDelivered) {
-                tickIcon = <MaterialCommunityIcons name="check-all" size={16} color={tickColor} style={{ marginLeft: 4 }} />;
+                // Çift gri tik → teslim edildi (karşı tarafa ulaştı, okumadı)
+                tickIcon = <MaterialCommunityIcons name="check-all" size={16} color={defaultColor} style={{ marginLeft: 4 }} />;
             } else {
-                tickIcon = <MaterialCommunityIcons name="check" size={16} color={tickColor} style={{ marginLeft: 4 }} />;
+                // Tek gri tik → gönderildi (sunucuya ulaştı)
+                tickIcon = <MaterialCommunityIcons name="check" size={16} color={defaultColor} style={{ marginLeft: 4 }} />;
             }
         }
 
@@ -822,20 +1072,15 @@ export default function ChatScreen() {
             <FlatList
                 ref={flatListRef}
                 style={{ flex: 1 }}
-                data={messages}
+                data={[...visibleMessages].reverse()}
+                inverted={true}
                 keyExtractor={(item) => item.id}
                 renderItem={renderMessage}
-                contentContainerStyle={styles.messageList}
+                contentContainerStyle={[styles.messageList, { paddingTop: 20 }]}
                 showsVerticalScrollIndicator={false}
                 keyboardShouldPersistTaps="handled"
                 keyboardDismissMode="on-drag"
                 onScrollBeginDrag={() => Keyboard.dismiss()}
-                onContentSizeChange={() => {
-                    if (!didInitialScrollRef.current) {
-                        didInitialScrollRef.current = true;
-                        setTimeout(() => flatListRef.current?.scrollToEnd({ animated: false }), 50);
-                    }
-                }}
             />
 
             {/* ── Input Bar ── */}

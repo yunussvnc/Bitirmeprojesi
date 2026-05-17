@@ -258,6 +258,16 @@ export default function NotificationsScreen() {
       <View style={[styles.container, { backgroundColor: colors.background.primary }]}>
         {/* Header */}
         <View style={styles.header}>
+          <TouchableOpacity
+            style={styles.backBtn}
+            onPress={() => {
+              lightImpact();
+              router.back();
+            }}
+            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+          >
+            <IconSymbol name="chevron.left" size={24} color={colors.text.primary} />
+          </TouchableOpacity>
           <Text style={[styles.title, { color: colors.text.primary }]}>
             {t('notifications.title')}
           </Text>
@@ -348,9 +358,19 @@ export default function NotificationsScreen() {
 const styles = StyleSheet.create({
   container: { flex: 1 },
   header: {
+    flexDirection: 'row',
+    alignItems: 'center',
     paddingHorizontal: 20,
     paddingTop: 16,
     paddingBottom: 10,
+    gap: 12,
+  },
+  backBtn: {
+    width: 32,
+    height: 32,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: -8, // biraz sola yasla
   },
   title: {
     fontSize: 28,

@@ -37,11 +37,8 @@ settings = get_settings()
 # ---------------------------------------------------------------------------
 # Veritabanı tabloları
 # ---------------------------------------------------------------------------
-# Migration'ları çalıştır (IF NOT EXISTS — güvenli, idempotent)
+# Tabloları oluşturur (Zaten varsa atlar)
 migrate.run_migrations(engine)
-# Geliştirme: create_all ile eksik tabloları oluştur
-# Prod: `alembic upgrade head` kullanılmalı
-Base.metadata.create_all(bind=engine)
 
 # ---------------------------------------------------------------------------
 # FastAPI uygulaması

@@ -100,7 +100,7 @@ async def trigger_push_notification(user_id: int, title: str, body: str, data: O
             notif_type = data["type"]
             prefs = db.query(UserPreferences).filter(UserPreferences.user_id == user_id).first()
             if prefs:
-                if notif_type == "message" and not prefs.notify_messages:
+                if notif_type in ("message", "new_message") and not prefs.notify_messages:
                     return
                 elif notif_type in ["like", "comment"] and not prefs.notify_likes: # Basit gruplama
                     return

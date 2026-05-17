@@ -15,6 +15,7 @@ import { useEffect, useRef, useCallback } from 'react';
 import { AppState, AppStateStatus } from 'react-native';
 import { useAuthStore } from '@/src/store/useAuthStore';
 import { useNotificationStore } from '@/src/store/useNotificationStore';
+import { useMessagesStore } from '@/src/store/useMessagesStore';
 import { API_BASE_URL } from '@/src/constants/api';
 
 // WebSocket URL'sini HTTP URL'sinden üret (http:// -> ws://, https:// -> wss://)
@@ -56,8 +57,50 @@ export function useNotificationSocket() {
         const data = JSON.parse(event.data);
         console.log('📬 Notification WS message received:', data.type);
 
-        // Novu real-time: Store'a bildir — store unreadCount + notifications listesini günceller
-        handleWebSocketMessage(data);
+        if (data.type === 'new_message') {
+          // DM listesini güncelle (MessagesScreen'de anında görünsün)
+          const msg = data.message;
+          const senderName = data.sender_name || 'Birisi';
+          const content = data.content || 'Yeni bir mesaj gönderdi.';
+          const convIdStr = msg.conversation_id.toString();
+
+          const store = useMessagesStore.getState();
+          const existingConv = store.conversations.find(c => c.id === convIdStr);
+
+          if (existingConv) {
+            // Var olan sohbeti güncelle
+            store.updateLastMessageAt(
+                convIdStr,
+                content,
+                "Şimdi",
+                senderName,
+                true,  // unhide
+                true   // isUnread
+            );
+          } else {
+            // Listede olmayan yeni bir sohbet geldi — hemen ekle
+            store.addConversation({
+              id: convIdStr,
+              name: senderName,
+              username: senderName.toLowerCase().replace(/\s+/g, ''),
+              avatar: `https://ui-avatars.com/api/?name=${encodeURIComponent(senderName)}&background=random`,
+              lastMessage: content,
+              lastMessageSender: senderName,
+              timestamp: "Şimdi",
+              lastMessageAt: Date.now(),
+              unread: true,
+              isOnline: false,
+            });
+          }
+
+          // Sadece uygulamanın içinde dolaşıyorsak In-App Bildirim Gösterilmesi Expo'nun kendi Push handler'ı tarafından (PushNotificationProvider.tsx)
+          // otomatik olarak shouldShowAlert: true ile yönetiliyor. 
+          // Çift bildirim olmaması için burada manuel olarak scheduleNotificationAsync ÇAĞRILMAZ.
+
+        } else {
+          // Novu real-time: Store'a bildir — store unreadCount + notifications listesini günceller
+          handleWebSocketMessage(data);
+        }
       } catch (err) {
         console.error('WS parse error:', err);
       }

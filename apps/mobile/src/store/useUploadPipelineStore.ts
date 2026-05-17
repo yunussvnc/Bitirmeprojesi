@@ -86,13 +86,20 @@ export const useUploadPipelineStore = create<UploadPipelineState>((set, get) => 
     updateJob(jobId, { progress: baseProgress });
 
     const uploadFn = item.type === 'video' ? uploadVideo : uploadImage;
-    const ext = item.type === 'video' ? 'mp4' : 'jpg';
-    const mime = item.type === 'video' ? 'video/mp4' : 'image/jpeg';
+    const filename = item.uri.split('/').pop() || `media_${index}.jpg`;
+    const match = /\.([^.]+)$/.exec(filename);
+    
+    let ext = match ? match[1].toLowerCase() : 'jpg';
+    if (ext === 'jpg') ext = 'jpeg';
+    
+    const mime = item.type === 'video' 
+      ? `video/${ext === 'mov' ? 'quicktime' : 'mp4'}`
+      : `image/${ext}`;
 
     const result = await uploadFn({
       uri: item.uri,
       type: mime,
-      name: `media_${index}.${ext}`,
+      name: filename,
     });
 
     if (!result?.url) {

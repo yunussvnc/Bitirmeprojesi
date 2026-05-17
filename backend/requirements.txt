@@ -48,5 +48,6 @@ typing_extensions==4.15.0
 urllib3==2.6.3
 uvicorn==0.41.0
 websockets==16.0
-psycopg2-binary==2.9.9redis>=5.0.0
+psycopg2-binary==2.9.9
+redis>=5.0.0
 blurhash-python>=1.2.0

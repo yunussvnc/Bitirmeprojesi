@@ -35,6 +35,7 @@ import { handleApiError } from "@/src/utils/errorHandler";
 import { lightImpact, success } from "@/src/utils/haptics";
 import { toggleBlockUser, createReport } from "@/src/services/moderationService";
 import { acceptFollowRequest, rejectFollowRequest } from '@/src/services/userService';
+import { openConversation } from '@/src/services/messageService';
 import { useTranslation } from 'react-i18next';
 import debounce from 'lodash/debounce';
 
@@ -57,6 +58,7 @@ export default function UserProfileScreen() {
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [followLoading, setFollowLoading] = useState(false);
+  const [messageLoading, setMessageLoading] = useState(false);
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
   const [commentPostId, setCommentPostId] = useState<number | null>(null);
   const [sharePostForSheet, setSharePostForSheet] = useState<Post | null>(null);
@@ -163,6 +165,22 @@ export default function UserProfileScreen() {
       Alert.alert(t("user_profile.reported"), t("user_profile.report_saved"));
     }
   }, [userId]);
+
+  const handleMessagePress = useCallback(async () => {
+    if (!profile) return;
+    lightImpact();
+    setMessageLoading(true);
+    try {
+      const res = await openConversation(profile.id);
+      const name = encodeURIComponent(res.name);
+      const avatar = encodeURIComponent(res.avatar_url || '');
+      router.push(`/chat/${res.conversation_id}?name=${name}&avatar=${avatar}` as any);
+    } catch (e) {
+      handleApiError(e);
+    } finally {
+      setMessageLoading(false);
+    }
+  }, [profile, router]);
 
   const handlePostTap = useCallback(async (postId: number) => {
     lightImpact();
@@ -358,12 +376,13 @@ export default function UserProfileScreen() {
                 styles.primaryBtn,
                 { backgroundColor: colors.surface.elevated, borderWidth: 1, borderColor: colors.surface.border }
               ]}
-              onPress={() => {
-                lightImpact();
-              }}
+              onPress={handleMessagePress}
               activeOpacity={0.8}
+              disabled={messageLoading}
             >
-              <Text style={[styles.primaryBtnText, { color: colors.text.primary }]}>{t('profile.message_btn')}</Text>
+              <Text style={[styles.primaryBtnText, { color: colors.text.primary }]}>
+                {messageLoading ? '...' : t('profile.message_btn')}
+              </Text>
             </TouchableOpacity>
           </View>
         )}

@@ -18,10 +18,10 @@ def seed_database():
 
         # 1. Create Users
         users_data = [
-            {"id": 1, "email": "test@test.com", "username": "tester1", "first_name": "Test", "last_name": "User"},
+            {"id": 1, "email": "ulascan1903@icloud.com", "username": "ulascan", "first_name": "Ulaş Can", "last_name": "Demirtaş"},
             {"id": 2, "email": "ahmet@test.com", "username": "ahmet", "first_name": "Ahmet", "last_name": "Yılmaz"},
             {"id": 3, "email": "elif@test.com", "username": "elif", "first_name": "Elif", "last_name": "Kaya"},
-            {"id": 4, "email": "burak@test.com", "username": "burak", "first_name": "Burak", "last_name": "Demir"},
+            {"id": 4, "email": "burak@test.com", "username": "burak", "first_name": "Burak", "last_name": "Diemir"},
             {"id": 5, "email": "zeynep@test.com", "username": "zeynep", "first_name": "Zeynep", "last_name": "Toprak"},
             {"id": 6, "email": "can@test.com", "username": "can", "first_name": "Can", "last_name": "Aydın"},
             {"id": 7, "email": "selin@test.com", "username": "selin", "first_name": "Selin", "last_name": "Arslan"},

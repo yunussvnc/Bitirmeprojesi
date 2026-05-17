@@ -468,6 +468,21 @@ def get_match_conversations(
             except (json.JSONDecodeError, TypeError):
                 pass
 
+        # Son mesajı al
+        last_message = db.query(models.Message).filter(
+            models.Message.conversation_id == conv.id
+        ).order_by(models.Message.created_at.desc()).first()
+
+        last_message_text = last_message.content if last_message else None
+        last_message_sender_id = last_message.sender_id if last_message else None
+
+        # Okunmamış mesaj sayısını hesapla (karşı tarafın gönderdiği ve is_read=False olanlar)
+        unread_count = db.query(models.Message).filter(
+            models.Message.conversation_id == conv.id,
+            models.Message.sender_id == other_user_id,
+            models.Message.is_read == False
+        ).count()
+
         result.append(schemas.MatchConversationResponse(
             id=conv.id,
             other_user_display_name=other_name,
@@ -479,6 +494,9 @@ def get_match_conversations(
             is_active=conv.is_active,
             created_at=conv.created_at,
             last_message_at=conv.last_message_at,
+            last_message_text=last_message_text,
+            last_message_sender_id=last_message_sender_id,
+            unread_count=unread_count,
         ))
 
     return result

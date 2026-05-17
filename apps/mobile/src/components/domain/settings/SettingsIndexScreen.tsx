@@ -17,6 +17,9 @@ import { createTextStyle, spacing } from "@/src/constants/design";
 import { useAppStore } from "@/src/store/useAppStore";
 import { useAuthStore } from "@/src/store/useAuthStore";
 import { useSettingsStore } from "@/src/store/useSettingsStore";
+import { useMessagesStore } from "@/src/store/useMessagesStore";
+import { useChatMessagesStore } from "@/src/store/useChatMessagesStore";
+import { useNotificationStore } from "@/src/store/useNotificationStore";
 import { useTranslation } from "react-i18next";
 
 export default function SettingsIndexScreen() {
@@ -131,6 +134,12 @@ export default function SettingsIndexScreen() {
               {
                 text: t('settings_main.logout'), style: "destructive", onPress: () => {
                   useAuthStore.getState().logout();
+                  
+                  // Clear local messaging and notification stores to prevent data leakage
+                  useMessagesStore.getState().clearStore();
+                  useChatMessagesStore.getState().clearStore();
+                  useNotificationStore.setState({ notifications: [], followRequests: [], unreadCount: 0 });
+                  
                   router.replace("/login");
                 }
               },

@@ -26,6 +26,7 @@ import { useTheme } from "@/src/hooks/useTheme";
 import { lightImpact, mediumImpact } from "@/src/utils/haptics";
 import { useMessagesStore, type Conversation } from "@/src/store/useMessagesStore";
 import { useChatMessagesStore } from "@/src/store/useChatMessagesStore";
+import { sendMessage } from "@/src/services/messageService";
 import type { Post } from "@/src/services/feedService";
 import { spacing } from "@/src/constants/design";
 import { useTranslation } from "react-i18next";
@@ -163,9 +164,18 @@ export function SharePostSheet({ visible, onClose, post }: SharePostSheetProps) 
             updateLastMessageAt(
                 conversation.id,
                 t('feed.post_shared'),
-                t('feed.just_now'),
-                "me"
+                new Date().toISOString(),
+                "me",
+                true // unhide = true
             );
+
+            // Backend API call
+            sendMessage(parseInt(conversation.id, 10), {
+                content: messageText,
+                message_type: "shared_post",
+                media_url: mediaUrl || undefined,
+                shared_post_id: post.id,
+            }).catch(e => console.log("Post share error:", e));
 
             setSentTo((prev) => new Set(prev).add(conversation.id));
         },

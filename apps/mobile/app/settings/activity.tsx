@@ -26,7 +26,7 @@ type UserStats = {
 
 export default function ActivityScreen() {
   const { colors, isDark } = useTheme();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const [stats, setStats] = useState<UserStats | null>(null);
@@ -78,7 +78,7 @@ export default function ActivityScreen() {
                 style={styles.statCard}
               >
                 <IconSymbol name={card.icon as any} size={24} color="rgba(255,255,255,0.9)" />
-                <Text style={styles.statValue}>{card.value.toLocaleString("tr-TR")}</Text>
+                <Text style={styles.statValue}>{card.value.toLocaleString(i18n.language === 'tr' ? 'tr-TR' : 'en-US')}</Text>
                 <Text style={styles.statLabel}>{card.label}</Text>
               </LinearGradient>
             ))}

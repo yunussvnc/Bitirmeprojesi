@@ -632,6 +632,9 @@ class MatchConversationResponse(BaseModel):
     is_active: bool = True
     created_at: datetime
     last_message_at: Optional[datetime] = None
+    last_message_text: Optional[str] = None
+    last_message_sender_id: Optional[int] = None
+    unread_count: int = 0
 
     class Config:
         from_attributes = True
@@ -688,6 +691,9 @@ class TypingEvent(BaseModel):
     conversation_id: int
     user_id: int
     is_typing: bool
+
+class OpenConversationRequest(BaseModel):
+    user_id: int
 
 
 # --- PUSH TOKEN ---

@@ -50,8 +50,9 @@ export const PushNotificationProvider: React.FC<{ children: React.ReactNode }> =
       if (data && data.url) {
         // Deep linking yönlendirmesi
         router.push(data.url as any);
-      } else if (data && data.type === 'message' && data.conversation_id) {
-        router.push(`/dm/${data.conversation_id}` as any);
+      } else if (data && (data.type === 'new_message' || data.type === 'message') && data.conversation_id) {
+        // Mesaj bildirimine tıklandı → o sohbete git
+        router.push(`/chat/${data.conversation_id}` as any);
       }
     });
 

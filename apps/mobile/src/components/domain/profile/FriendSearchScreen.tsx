@@ -11,7 +11,7 @@ import {
   Animated,
   Keyboard,
 } from "react-native";
-import { useRouter } from "expo-router";
+import { useRouter, useLocalSearchParams } from "expo-router";
 import { Avatar } from "@/src/components/ui";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { useTheme } from "@/src/hooks/useTheme";
@@ -21,6 +21,7 @@ import { toggleFollow } from "@/src/services/userService";
 import { useAuthStore } from "@/src/store/useAuthStore";
 import { handleApiError } from "@/src/utils/errorHandler";
 import { useTranslation } from "react-i18next";
+import { openConversation } from "@/src/services/messageService";
 
 const DEBOUNCE_MS = 400;
 
@@ -146,9 +147,26 @@ export default function FriendSearchScreen() {
     }
   };
 
-  const navigateToProfile = (user: UserSummary) => {
+  const { mode } = useLocalSearchParams<{ mode?: string }>();
+
+  const navigateToProfile = async (user: UserSummary) => {
     lightImpact();
     Keyboard.dismiss();
+    
+    if (mode === "chat") {
+      try {
+        const res = await openConversation(user.id);
+        const displayName = user.first_name
+          ? `${user.first_name}${user.last_name ? ` ${user.last_name}` : ""}`
+          : user.username || `User ${user.id}`;
+          
+        router.push(`/chat/${res.conversation_id}?name=${encodeURIComponent(displayName)}&avatar=${encodeURIComponent(user.avatar_url || "")}` as any);
+      } catch (e) {
+        handleApiError(e);
+      }
+      return;
+    }
+
     if (user.id === authUser?.id) {
       router.push("/(tabs)/profile" as any);
     } else {
@@ -186,37 +204,39 @@ export default function FriendSearchScreen() {
           )}
         </View>
 
-        <TouchableOpacity
-          style={[
-            styles.followBtn,
-            item.is_following
-              ? {
-                  backgroundColor: colors.surface.elevated,
-                  borderWidth: 1,
-                  borderColor: colors.surface.border,
-                }
-              : {
-                  backgroundColor: colors.accent.primary,
-                  borderWidth: 1,
-                  borderColor: colors.accent.primary,
-                },
-          ]}
-          onPress={() => handleToggleFollow(item.id, index)}
-          activeOpacity={0.8}
-        >
-          <Text
+        {mode !== "chat" && (
+          <TouchableOpacity
             style={[
-              styles.followBtnText,
-              {
-                color: item.is_following
-                  ? colors.text.primary
-                  : colors.accent.onPrimary,
-              },
+              styles.followBtn,
+              item.is_following
+                ? {
+                    backgroundColor: colors.surface.elevated,
+                    borderWidth: 1,
+                    borderColor: colors.surface.border,
+                  }
+                : {
+                    backgroundColor: colors.accent.primary,
+                    borderWidth: 1,
+                    borderColor: colors.accent.primary,
+                  },
             ]}
+            onPress={() => handleToggleFollow(item.id, index)}
+            activeOpacity={0.8}
           >
-            {item.is_following ? t("friend_search.following") : t("friend_search.follow")}
-          </Text>
-        </TouchableOpacity>
+            <Text
+              style={[
+                styles.followBtnText,
+                {
+                  color: item.is_following
+                    ? colors.text.primary
+                    : colors.accent.onPrimary,
+                },
+              ]}
+            >
+              {item.is_following ? t("friend_search.following") : t("friend_search.follow")}
+            </Text>
+          </TouchableOpacity>
+        )}
       </TouchableOpacity>
     );
   };

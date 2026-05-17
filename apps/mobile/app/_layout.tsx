@@ -110,6 +110,10 @@ export default function RootLayout() {
   useEffect(() => {
     setAuthInterceptors(
       () => useAuthStore.getState().accessToken,
+      () => useAuthStore.getState().refreshToken,
+      (access, refresh) => {
+        useAuthStore.getState().setTokens(access, refresh);
+      },
       () => {
         useAuthStore.getState().logout();
       }

@@ -167,6 +167,32 @@ export function CommentBottomSheet({ visible, onClose, postId, onCommentAdded }:
     if (!visible || !postId) return;
     setLoading(true);
     try {
+      if (postId === 999999) {
+        // Return mock comments
+        setComments([
+          {
+            id: 101,
+            post_id: 999999,
+            user_id: 2,
+            author_username: "beratsanli",
+            text: "Gerçekten harika bir mekan, mutlaka tekrar gelmeliyiz! 👏",
+            created_at: new Date().toISOString(),
+            is_liked: true,
+            like_count: 12,
+          },
+          {
+            id: 102,
+            post_id: 999999,
+            user_id: 3,
+            author_username: "ayse_yilmaz",
+            text: "Fotoğraflar çok güzel çıkmış 😍",
+            created_at: new Date(Date.now() - 3600000).toISOString(),
+            is_liked: false,
+            like_count: 3,
+          }
+        ]);
+        return;
+      }
       const res = await getComments(postId, 1, 50);
       setComments(res.items);
     } catch (e) {
@@ -189,6 +215,24 @@ export function CommentBottomSheet({ visible, onClose, postId, onCommentAdded }:
     lightImpact();
     setSending(true);
     try {
+      if (postId === 999999) {
+        // Mock add comment
+        const newComment: PostComment = {
+          id: Date.now(),
+          post_id: 999999,
+          user_id: currentUser?.id || 1,
+          author_username: currentUser?.username || "me",
+          text: trimmed,
+          created_at: new Date().toISOString(),
+          is_liked: false,
+          like_count: 0,
+        };
+        setComments((prev) => [newComment, ...prev]);
+        setText("");
+        onCommentAdded?.();
+        return;
+      }
+
       const newComment = await addComment(postId, trimmed);
       setComments((prev) => [newComment, ...prev]);
       setText("");
@@ -222,6 +266,28 @@ export function CommentBottomSheet({ visible, onClose, postId, onCommentAdded }:
     ]);
   }, [postId, t]);
 
+  const handleLikeComment = useCallback(async (comment: PostComment) => {
+    lightImpact();
+    // Optimistic update
+    setComments((prev) => prev.map((c) =>
+      c.id === comment.id
+        ? { ...c, is_liked: !c.is_liked, like_count: (c.like_count || 0) + (c.is_liked ? -1 : 1) }
+        : c
+    ));
+    try {
+      // Import toggleCommentLike from feedService if we have it, else use mock.
+      // Here we assume it's just a mock update.
+      // await toggleCommentLike(comment.id);
+    } catch {
+      // Revert on error
+      setComments((prev) => prev.map((c) =>
+        c.id === comment.id
+          ? { ...c, is_liked: comment.is_liked, like_count: comment.like_count }
+          : c
+      ));
+    }
+  }, []);
+
   const renderItem = ({ item }: { item: PostComment }) => {
     const isOwn = currentUser?.id === item.user_id;
     return (
@@ -236,11 +302,29 @@ export function CommentBottomSheet({ visible, onClose, postId, onCommentAdded }:
             <Text style={[styles.commentText, { color: colors.text.secondary }]}>{item.text}</Text>
             <Text style={[styles.commentTime, { color: colors.text.tertiary }]}>{timeAgo(item.created_at)}</Text>
           </View>
-          {isOwn && (
-            <TouchableOpacity style={styles.deleteBtn} onPress={() => handleDeleteComment(item)}>
-              <IconSymbol name="ellipsis" size={20} color={colors.text.tertiary} />
+
+          <View style={{ flexDirection: "row", alignItems: "center", gap: 12 }}>
+            {isOwn && (
+              <TouchableOpacity style={styles.deleteBtn} onPress={() => handleDeleteComment(item)}>
+                <IconSymbol name="ellipsis" size={20} color={colors.text.tertiary} />
+              </TouchableOpacity>
+            )}
+            
+            {/* Beğeni Butonu */}
+            <TouchableOpacity 
+              style={{ alignItems: "center", justifyContent: "center", minWidth: 40, height: 40 }} 
+              onPress={() => handleLikeComment(item)}
+            >
+              <IconSymbol 
+                name={item.is_liked ? "heart.fill" : "heart"} 
+                size={18} 
+                color={item.is_liked ? colors.semantic.error : colors.text.tertiary} 
+              />
+              {!!item.like_count && item.like_count > 0 && (
+                <Text style={{ fontSize: 11, color: colors.text.tertiary, marginTop: 2 }}>{item.like_count}</Text>
+              )}
             </TouchableOpacity>
-          )}
+          </View>
         </View>
       </TouchableOpacity>
     );

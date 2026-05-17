@@ -52,6 +52,57 @@ def _message_to_response(msg: models.Message) -> schemas.MessageResponse:
 
 # ---- REST ENDPOINTS ----
 
+@router.post("/messages/conversation/open")
+def open_or_create_conversation(
+    data: schemas.OpenConversationRequest,
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(get_current_user),
+):
+    """
+    Belirtilen kullanıcıyla mevcut DM konuşmasını getir veya yenisini oluştur.
+    Profil ekranındaki 'Mesaj' butonu için kullanılır.
+    """
+    other_user_id = data.user_id
+
+    if other_user_id == current_user.id:
+        raise HTTPException(status_code=400, detail="Kendinizle konuşamazsınız.")
+
+    # Karşı kullanıcı var mı?
+    other_user = db.query(models.User).filter(models.User.id == other_user_id).first()
+    if not other_user:
+        raise HTTPException(status_code=404, detail="Kullanıcı bulunamadı.")
+
+    # Mevcut konuşma var mı? (her iki sırayı da kontrol et)
+    conv = db.query(models.MatchConversation).filter(
+        (
+            (models.MatchConversation.user1_id == current_user.id) &
+            (models.MatchConversation.user2_id == other_user_id)
+        ) | (
+            (models.MatchConversation.user1_id == other_user_id) &
+            (models.MatchConversation.user2_id == current_user.id)
+        )
+    ).first()
+
+    if not conv:
+        # Yeni konuşma oluştur
+        conv = models.MatchConversation(
+            user1_id=current_user.id,
+            user2_id=other_user_id,
+            is_active=True,
+        )
+        db.add(conv)
+        db.commit()
+        db.refresh(conv)
+
+    return {
+        "conversation_id": conv.id,
+        "user_id": other_user_id,
+        "username": other_user.username or other_user.email,
+        "name": other_user.first_name or other_user.username or other_user.email,
+        "avatar_url": other_user.avatar_url,
+    }
+
+
 @router.get("/messages/{conversation_id}", response_model=schemas.PaginatedMessages)
 def get_messages(
     conversation_id: int,
@@ -114,44 +165,68 @@ async def send_message(
 
     response = _message_to_response(msg)
 
-    # WebSocket'e de push et (karşı tarafa)
+    # WebSocket üzerinden konuşma odasına gönder (Sohbet içindeyse)
     other_user_id = conv.user2_id if conv.user1_id == current_user.id else conv.user1_id
-    await manager.broadcast_to_conversation(
+    await manager.send_to_user(
         conversation_id,
+        other_user_id,
         {
             "type": "new_message",
             "message": response.model_dump(mode="json"),
+            "sender_name": current_user.first_name or current_user.username or f"User {current_user.id}",
+            "content": data.content.strip()[:80],
         },
-        exclude_user_id=current_user.id,
     )
 
-    # Karşı taraf WS'de online değilse push notification gönder
-    if not manager.is_user_online(other_user_id):
-        import crud
-        preview = data.content.strip()[:80] if data.content else "Yeni mesaj"
-        crud.create_notification(
-            db, other_user_id, "message", current_user.id,
-            push_extra={"preview": preview, "conversation_id": conversation_id},
-        )
+    # WebSocket üzerinden global sokete de gönder (Uygulama içi bildirim ve DM liste güncellemesi için)
+    await manager.send_global_notification(
+        other_user_id,
+        {
+            "type": "new_message",
+            "message": response.model_dump(mode="json"),
+            "sender_name": current_user.first_name or current_user.username or f"User {current_user.id}",
+            "content": data.content.strip()[:80],
+            "conversation_id": conversation_id,
+        }
+    )
 
     return response
 
 
 @router.post("/messages/{conversation_id}/read")
-def mark_messages_read(
+async def mark_messages_read(
     conversation_id: int,
     db: Session = Depends(get_db),
     current_user: models.User = Depends(get_current_user),
 ):
-    """Konuşmadaki tüm mesajları okundu olarak işaretle"""
+    """Konuşmadaki tüm mesajları okundu olarak işaretle ve karşı tarafa bildir"""
     _verify_conversation_access(db, conversation_id, current_user.id)
 
-    db.query(models.Message).filter(
+    query = db.query(models.Message).filter(
         models.Message.conversation_id == conversation_id,
         models.Message.sender_id != current_user.id,  # Sadece karşı tarafın mesajları
         models.Message.is_read == False,
-    ).update({"is_read": True})
+    )
+    
+    messages_to_update = query.all()
+    if not messages_to_update:
+        return {"ok": True}
+        
+    updated_ids = [m.id for m in messages_to_update]
+    # Senders of these messages (should be all the same other_user_id in a DM)
+    other_user_id = messages_to_update[0].sender_id
+    
+    query.update({"is_read": True, "status": "read"}, synchronize_session=False)
     db.commit()
+
+    # Karşı tarafa okundu bilgisini anlık ilet
+    from app.websocket.manager import manager
+    await manager.send_to_user(conversation_id, other_user_id, {
+        "type": "message:status",
+        "message_ids": updated_ids,
+        "status": "read",
+        "reader_id": current_user.id,
+    })
 
     return {"ok": True}
 
@@ -351,14 +426,22 @@ async def websocket_chat(
                             "message_id": msg.id,
                             "status": "delivered",
                         })
-                    else:
-                        # Karşı taraf offline — push notification gönder
-                        import crud
-                        preview = msg.content.strip()[:80] if msg.content else "Yeni mesaj"
-                        crud.create_notification(
-                            db, other_user_id, "message", user_id,
-                            push_extra={"preview": preview, "conversation_id": conversation_id},
-                        )
+
+                    # Her durumda global sokete bildir (DM list güncellemesi + offline push)
+                    # Bu çağrı zaten: online ise WS, offline ise Expo push atar — çift push olmaz
+                    preview = msg.content.strip()[:80] if msg.content else "Yeni mesaj"
+                    sender_user = db.query(models.User).filter(models.User.id == user_id).first()
+                    sender_name = (sender_user.first_name or sender_user.username or f"User {user_id}") if sender_user else f"User {user_id}"
+                    await manager.send_global_notification(
+                        other_user_id,
+                        {
+                            "type": "new_message",
+                            "message": msg_data,
+                            "sender_name": sender_name,
+                            "content": preview,
+                            "conversation_id": conversation_id,
+                        }
+                    )
 
                 finally:
                     db.close()

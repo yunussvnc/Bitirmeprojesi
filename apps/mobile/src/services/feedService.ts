@@ -55,6 +55,8 @@ export type PostComment = {
   text: string;
   created_at: string;
   author_username?: string;
+  is_liked?: boolean;
+  like_count?: number;
 };
 
 export type CreatePostPayload = {
@@ -113,6 +115,11 @@ export async function deletePost(id: number): Promise<void> {
 
 export async function toggleLike(postId: number): Promise<{ liked: boolean; like_count: number }> {
   return apiPost<{ liked: boolean; like_count: number }>(`/posts/${postId}/like`);
+}
+
+export async function toggleCommentLike(commentId: number): Promise<{ liked: boolean; like_count: number }> {
+  // Mock endpoint veya eklenebilir, şimdilik client-side mock ile yetinebiliriz eğer yoksa.
+  return apiPost<{ liked: boolean; like_count: number }>(`/comments/${commentId}/like`);
 }
 
 export async function getComments(

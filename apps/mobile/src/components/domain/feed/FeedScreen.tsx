@@ -110,7 +110,56 @@ export default function FeedScreen() {
         }
 
         if (refresh) {
-          setPosts(res.items);
+          const MOCK_SUPER_POST: Post = {
+            id: 999999,
+            user_id: 1,
+            place_id: 1,
+            caption: "Bu inanılmaz bir deneyimdi! 🎉 Mekanın atmosferine bayıldım. Yorumlarda düşüncelerinizi bekliyorum! #MockPost #Deneyim #Harika",
+            post_type: "review",
+            comments_disabled: false,
+            likes_hidden: false,
+            like_count: 1542,
+            comment_count: 89,
+            created_at: new Date().toISOString(),
+            is_liked: true,
+            author: {
+              id: 1,
+              username: "ulascan_demo",
+              first_name: "Ulaş Can",
+              avatar_url: "https://ui-avatars.com/api/?name=Ulaş+Can",
+              is_following: false,
+            },
+            place: {
+              id: 1,
+              name: "Fakülte Teras",
+              category: "Cafe & Bar",
+            },
+            media: [
+              {
+                id: 1,
+                post_id: 999999,
+                media_type: "image",
+                media_url: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&q=80",
+                order_index: 0,
+              },
+              {
+                id: 2,
+                post_id: 999999,
+                media_type: "image",
+                media_url: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80",
+                order_index: 1,
+              }
+            ],
+            tagged_users: [
+              {
+                id: 2,
+                username: "beratsanli",
+                first_name: "Berat",
+              }
+            ]
+          };
+
+          setPosts([MOCK_SUPER_POST, ...res.items.filter(p => p.id !== 999999)]);
           setPage(1);
         } else {
           setPosts((prev) => (p === 1 ? res.items : [...prev, ...res.items]));
