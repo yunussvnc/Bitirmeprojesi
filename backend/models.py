@@ -460,13 +460,24 @@ class Story(Base):
     media_type = Column(String, nullable=False)  # "image", "video"
     media_url = Column(String, nullable=False)
     thumbnail_url = Column(String, nullable=True)
-    is_close_friends = Column(Boolean, default=False)  # Yakın arkadaşlar hikayesi
+
+    # Gizlilik: 'public' | 'close_friends'
+    privacy_type = Column(String, default="public", nullable=False, index=True)
+    # is_close_friends: geriye dönük uyumluluk için property
+    @property
+    def is_close_friends(self) -> bool:
+        return self.privacy_type == "close_friends"
+
+    # Konum meta verisi (JSONB yerine JSON text — SQLite/PostgreSQL uyumlu)
+    # Örnek: {"place_id": 5, "name": "Kadıköy", "lat": 40.99, "lng": 29.02}
+    location_data = Column(Text, nullable=True)
 
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     expires_at = Column(DateTime(timezone=True), nullable=False, index=True)  # created_at + 24 saat
 
     user = relationship("User", back_populates="stories")
     place = relationship("Place", back_populates="stories")
+    replies = relationship("Message", back_populates="parent_story", foreign_keys="Message.parent_story_id")
 
 
 class Notification(Base):
@@ -573,15 +584,19 @@ class Message(Base):
     conversation_id = Column(Integer, ForeignKey("match_conversations.id", ondelete="CASCADE"), nullable=False, index=True)
     sender_id = Column(Integer, ForeignKey("users.id"), nullable=False)
     content = Column(Text, nullable=False)
-    message_type = Column(String, default="text")  # "text", "image", "shared_post"
+    message_type = Column(String, default="text")  # "text", "image", "shared_post", "story_reply"
     media_url = Column(String, nullable=True)  # image mesajları için
     shared_post_id = Column(Integer, nullable=True)  # shared_post mesajları için
+    # Hikayeye yanıt: hangi hikayeye yanıt verildiği + anlık snapshot (hikaye 24s sonra silinse bile görünür)
+    parent_story_id = Column(Integer, ForeignKey("stories.id", ondelete="SET NULL"), nullable=True, index=True)
+    story_snapshot_url = Column(String, nullable=True)  # Hikayenin media_url kopyası
     is_read = Column(Boolean, default=False)
     status = Column(String, default="sent", index=True)  # "sent", "delivered", "read"
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
     conversation = relationship("MatchConversation", back_populates="messages")
     sender = relationship("User", foreign_keys=[sender_id])
+    parent_story = relationship("Story", foreign_keys=[parent_story_id])
 
     __table_args__ = (
         # Munia performans optimizasyonu: mesaj sorgularını hızlandırır

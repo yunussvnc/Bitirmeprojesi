@@ -3,7 +3,7 @@
 from typing import Optional
 
 # pyrefly: ignore [missing-import]
-from fastapi import APIRouter, Depends, HTTPException, Query
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Query
 # pyrefly: ignore [missing-import]
 from sqlalchemy.orm import Session
 
@@ -74,7 +74,6 @@ def _post_to_schema(post: models.Post, db: Session, current_user_id: int | None)
 
 from fastapi.concurrency import run_in_threadpool
 import json
-from fastapi import BackgroundTasks
 
 def _get_feed_db_sync(db: Session, page: int, page_size: int, current_user_id: int | None, filter_mode: str):
     """DB işlemlerini threadpool'da güvenle çalıştırmak için kapsayıcı"""
@@ -228,6 +227,7 @@ def delete_post_endpoint(
 @router.post("/posts/{post_id}/like")
 def toggle_like(
     post_id: int,
+    background_tasks: BackgroundTasks,
     db: Session = Depends(get_db),
     current_user: models.User = Depends(get_current_user),
 ):
@@ -246,6 +246,7 @@ def toggle_like(
             "post_thumbnail": thumb
         })
         crud.create_notification(db, post.user_id, "like", current_user.id, post_id=post_id, payload=payload)
+    background_tasks.add_task(invalidate_feed_cache)
     return {"liked": liked, "like_count": post.like_count}
 
 
@@ -270,6 +271,7 @@ def get_post_comments(
 def add_comment(
     post_id: int,
     data: schemas.PostCommentCreate,
+    background_tasks: BackgroundTasks,
     db: Session = Depends(get_db),
     current_user: models.User = Depends(get_current_user),
 ):
@@ -289,6 +291,7 @@ def add_comment(
             "text": data.text[:50]
         })
         crud.create_notification(db, post.user_id, "comment", current_user.id, post_id=post_id, payload=payload)
+    background_tasks.add_task(invalidate_feed_cache)
     return schemas.PostComment(
         id=comment.id,
         user_id=comment.user_id,

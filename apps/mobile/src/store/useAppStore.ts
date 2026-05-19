@@ -51,6 +51,10 @@ type AppState = {
   setUnreadNotificationCount: (count: number) => void;
   addUnreadNotificationCount: (count: number) => void;
   clearUnreadNotificationCount: () => void;
+
+  deletedPostIds: number[];
+  addDeletedPostId: (id: number) => void;
+  clearDeletedPostIds: () => void;
 };
 
 const uniq = (arr: string[]) => Array.from(new Set(arr));
@@ -67,6 +71,7 @@ export const useAppStore = create<AppState>()(
       pendingPlaceName: null,
       pendingSharedPostId: null,
       unreadNotificationCount: 0,
+      deletedPostIds: [],
 
       isSaved: (id) => get().savedIds.includes(id),
 
@@ -179,7 +184,16 @@ export const useAppStore = create<AppState>()(
 
       setUnreadNotificationCount: (count) => set({ unreadNotificationCount: count }),
       addUnreadNotificationCount: (count) => set((state) => ({ unreadNotificationCount: state.unreadNotificationCount + count })),
-      clearUnreadNotificationCount: () => set({ unreadNotificationCount: 0 }),
+      clearUnreadNotificationCount: () => {
+        set({ unreadNotificationCount: 0 });
+      },
+
+      addDeletedPostId: (id: number) => {
+        set((state) => ({ deletedPostIds: uniq([...state.deletedPostIds.map(String), String(id)]).map(Number) }));
+      },
+      clearDeletedPostIds: () => {
+        set({ deletedPostIds: [] });
+      },
     }),
     {
       name: "app-store-v2",

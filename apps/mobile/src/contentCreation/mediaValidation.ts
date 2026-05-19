@@ -7,7 +7,7 @@
  * Dummygram-inspired: Simple, predictable validation functions.
  */
 
-import * as FileSystem from 'expo-file-system';
+import { File } from 'expo-file-system';
 import type {
   MediaItem,
   ContentType,
@@ -43,20 +43,22 @@ export async function validateMedia(
 ): Promise<ValidationResult> {
   const errors: string[] = [];
 
-  // 1. File existence
+  // 1. File existence (SDK 53+ API)
   try {
-    const info = await FileSystem.getInfoAsync(item.uri);
-    if (!info.exists) {
+    const file = new File(item.uri);
+    if (!file.exists) {
       errors.push('File does not exist');
       return { valid: false, errors };
     }
 
     // 2. File size
-    if (info.size && info.size > MAX_FILE_BYTES) {
-      errors.push(`File size (${(info.size / 1024 / 1024).toFixed(1)}MB) exceeds maximum (${MAX_FILE_SIZE_MB}MB)`);
+    const size = file.size;
+    if (size && size > MAX_FILE_BYTES) {
+      errors.push(`File size (${(size / 1024 / 1024).toFixed(1)}MB) exceeds maximum (${MAX_FILE_SIZE_MB}MB)`);
     }
   } catch {
-    // FileSystem not available on web, skip size check
+    // File check not available, skip — validation yine de devam etsin
+    console.log('[MediaValidation] File check skipped (URI may not be a local file)');
   }
 
   // 3. Video duration
@@ -107,9 +109,9 @@ export async function validateMediaBatch(
  */
 export async function getMediaMetadata(uri: string): Promise<Partial<MediaMetadata>> {
   try {
-    const info = await FileSystem.getInfoAsync(uri);
+    const file = new File(uri);
     return {
-      fileSize: info.exists && info.size ? info.size : 0,
+      fileSize: file.exists ? (file.size ?? 0) : 0,
     };
   } catch {
     return {};

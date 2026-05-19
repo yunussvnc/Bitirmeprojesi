@@ -43,6 +43,8 @@ def _message_to_response(msg: models.Message) -> schemas.MessageResponse:
         message_type=msg.message_type,
         media_url=msg.media_url,
         shared_post_id=msg.shared_post_id,
+        parent_story_id=msg.parent_story_id,
+        story_snapshot_url=msg.story_snapshot_url,
         is_read=msg.is_read,
         status=msg.status or "sent",
         created_at=msg.created_at,
@@ -155,6 +157,8 @@ async def send_message(
         message_type=data.message_type,
         media_url=data.media_url,
         shared_post_id=data.shared_post_id,
+        parent_story_id=data.parent_story_id,
+        story_snapshot_url=data.story_snapshot_url,
     )
     db.add(msg)
 

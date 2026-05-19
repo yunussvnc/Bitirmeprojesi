@@ -18,11 +18,11 @@ export function CreateBottomSheet({ visible, onClose }: CreateBottomSheetProps) 
 
     const handleSelect = (type: CreateType) => {
         if (type === "reels") {
-            router.push({ pathname: "/contentCreation/CreatePostScreen", params: { preSelect: "reels" } } as any);
+            router.push({ pathname: "/create-post", params: { preSelect: "reels" } } as any);
         } else if (type === "post") {
-            router.push({ pathname: "/contentCreation/CreatePostScreen", params: { preSelect: "post" } } as any);
+            router.push({ pathname: "/create-post", params: { preSelect: "post" } } as any);
         } else if (type === "story") {
-            router.push("/contentCreation/CreateStoryScreen" as any);
+            router.push("/create-story" as any);
         }
     };
 

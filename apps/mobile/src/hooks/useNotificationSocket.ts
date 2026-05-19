@@ -9,6 +9,7 @@
  * - App arka plana geçince kopar, öne gelince yeniden bağlan
  * - Foreground'a dönüşte unread count senkronize et
  * - Reconnect with exponential backoff
+ * - Token expire olduğunda reconnect loop'u engelle
  */
 
 import { useEffect, useRef, useCallback } from 'react';
@@ -31,13 +32,22 @@ export function useNotificationSocket() {
   const syncUnreadCount = useNotificationStore((s) => s.syncUnreadCount);
   const isConnecting = useRef(false);
 
+  // Ref ile güncel auth durumunu takip et — closure'ların stale değer okumasını engeller
+  const isAuthenticatedRef = useRef(isAuthenticated);
+  const accessTokenRef = useRef(accessToken);
+  useEffect(() => {
+    isAuthenticatedRef.current = isAuthenticated;
+    accessTokenRef.current = accessToken;
+  }, [isAuthenticated, accessToken]);
+
   const connect = useCallback(() => {
-    if (!isAuthenticated || !accessToken || isConnecting.current || wsRef.current) return;
+    // Guard: sadece auth durumu aktifse bağlan
+    if (!isAuthenticatedRef.current || !accessTokenRef.current || isConnecting.current || wsRef.current) return;
 
     isConnecting.current = true;
 
     // Auth token'ı query parameter olarak ekle
-    const wsUrl = `${WS_URL}?token=${accessToken}`;
+    const wsUrl = `${WS_URL}?token=${accessTokenRef.current}`;
     const ws = new WebSocket(wsUrl);
 
     ws.onopen = () => {
@@ -116,17 +126,23 @@ export function useNotificationSocket() {
       isConnecting.current = false;
       wsRef.current = null;
 
-      // Kasıtlı kapanmamışsa yeniden bağlanmayı dene (exponential backoff)
-      if (isAuthenticated && event.code !== 1000 && event.code !== 4001) {
+      // Kasıtlı kapanmamışsa VE hâlâ authenticate ise yeniden bağlanmayı dene
+      // isAuthenticatedRef.current kullanılıyor — stale closure'dan kaçınmak için
+      if (isAuthenticatedRef.current && event.code !== 1000 && event.code !== 4001) {
         const attempt = reconnectAttemptRef.current;
         const delay = Math.min(3000 * Math.pow(1.5, attempt), 30000); // max 30s
         reconnectAttemptRef.current = attempt + 1;
-        reconnectTimeoutRef.current = setTimeout(connect, delay);
+        reconnectTimeoutRef.current = setTimeout(() => {
+          // Reconnect sırasında auth durumunu bir kez daha kontrol et
+          if (isAuthenticatedRef.current) {
+            connect();
+          }
+        }, delay);
       }
     };
 
     wsRef.current = ws;
-  }, [isAuthenticated, accessToken, handleWebSocketMessage]);
+  }, [handleWebSocketMessage]);
 
   const disconnect = useCallback(() => {
     if (reconnectTimeoutRef.current) {
@@ -155,9 +171,11 @@ export function useNotificationSocket() {
   useEffect(() => {
     const handleAppStateChange = (nextAppState: AppStateStatus) => {
       if (nextAppState === 'active') {
-        connect();
-        // Foreground'a dönüşte unread count'u senkronize et
-        syncUnreadCount();
+        // Sadece auth durumu aktifse bağlan ve sync yap
+        if (isAuthenticatedRef.current) {
+          connect();
+          syncUnreadCount();
+        }
       } else if (nextAppState === 'background') {
         disconnect();
       }

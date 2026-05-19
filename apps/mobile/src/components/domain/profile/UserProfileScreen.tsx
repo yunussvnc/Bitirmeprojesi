@@ -31,6 +31,7 @@ import {
   type UserStats,
 } from "@/src/services/userService";
 import { useAuthStore } from "@/src/store/useAuthStore";
+import { useNotificationStore } from "@/src/store/useNotificationStore";
 import { handleApiError } from "@/src/utils/errorHandler";
 import { lightImpact, success } from "@/src/utils/haptics";
 import { toggleBlockUser, createReport } from "@/src/services/moderationService";
@@ -126,7 +127,7 @@ export default function UserProfileScreen() {
         const optimisticProfile = {
           ...currentProfile,
           is_following: !currentProfile.is_following,
-          follow_status: currentProfile.is_following ? null : ('accepted' as any), // Simplistic assumption
+          follow_status: currentProfile.is_following ? null : ('accepted' as any),
         };
 
         // Async API Call
@@ -142,6 +143,18 @@ export default function UserProfileScreen() {
                 followers_count: res.followers_count,
               };
             });
+            
+            // After follow succeeds, refresh notifications to ensure follow notification appears
+            if (res.status === 'accepted') {
+              try {
+                const store = useNotificationStore.getState();
+                setTimeout(() => {
+                  store.loadNotifications(1);
+                }, 500);
+              } catch (e) {
+                // Silently fail — notifications are nice-to-have
+              }
+            }
           } catch (e) {
             // Revert on error
             setProfile(prevProfile);

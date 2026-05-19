@@ -1,6 +1,6 @@
 from datetime import datetime, timedelta, timezone
 # pyrefly: ignore [missing-import]
-from sqlalchemy import func
+from sqlalchemy import func, or_, and_
 # pyrefly: ignore [missing-import]
 from sqlalchemy.orm import Session, joinedload
 # pyrefly: ignore [missing-import]
@@ -239,15 +239,18 @@ def _enrich_places_with_stats(db: Session, places):
         # JSON text → Python list deserialization
         import json as _json
         try:
-            p.gallery_urls = _json.loads(p.gallery_urls) if p.gallery_urls else []  # type: ignore
+            parsed_gallery = _json.loads(p.gallery_urls) if p.gallery_urls and isinstance(p.gallery_urls, str) else p.gallery_urls
+            p.gallery_urls = parsed_gallery if isinstance(parsed_gallery, list) else []  # type: ignore
         except Exception:
             p.gallery_urls = []  # type: ignore
         try:
-            p.menu_items = _json.loads(p.menu_items_json) if p.menu_items_json else []  # type: ignore
+            parsed_menu = _json.loads(p.menu_items_json) if p.menu_items_json and isinstance(p.menu_items_json, str) else p.menu_items_json
+            p.menu_items = parsed_menu if isinstance(parsed_menu, list) else []  # type: ignore
         except Exception:
             p.menu_items = []  # type: ignore
         try:
-            p.opening_hours_json = _json.loads(p.opening_hours_json) if p.opening_hours_json and isinstance(p.opening_hours_json, str) else (p.opening_hours_json or None)  # type: ignore
+            parsed_hours = _json.loads(p.opening_hours_json) if p.opening_hours_json and isinstance(p.opening_hours_json, str) else p.opening_hours_json
+            p.opening_hours_json = parsed_hours if isinstance(parsed_hours, dict) else None  # type: ignore
         except Exception:
             pass  # leave as-is
 
@@ -743,14 +746,22 @@ def get_posts_by_place(db: Session, place_id: int, page: int = 1, page_size: int
 # --- STORY (Hikaye) ---
 
 def create_story(db: Session, user_id: int, data: schemas.StoryCreate):
+    import json as _json
     expires_at = datetime.now(timezone.utc) + timedelta(hours=24)
+
+    # Gizlilik tipi: eski is_close_friends alanına geriye dönük destek
+    privacy_type = data.resolved_privacy_type() if hasattr(data, 'resolved_privacy_type') else (
+        "close_friends" if data.is_close_friends else data.privacy_type
+    )
+
     story = models.Story(
         user_id=user_id,
         place_id=data.place_id,
         media_type=data.media_type,
         media_url=data.media_url,
         thumbnail_url=data.thumbnail_url,
-        is_close_friends=data.is_close_friends,
+        privacy_type=privacy_type,
+        location_data=_json.dumps(data.location_data) if data.location_data else None,
         expires_at=expires_at,
     )
     db.add(story)
@@ -764,6 +775,8 @@ def get_stories_by_place(db: Session, place_id: int, page: int = 1, page_size: i
     base = (
         db.query(models.Story)
         .filter(models.Story.place_id == place_id, models.Story.expires_at > now)
+        # Mekan hikayelerinde sadece genel (public) hikayeler görünür
+        .filter(models.Story.privacy_type == "public")
     )
     total = base.count()
     offset = (page - 1) * page_size
@@ -787,16 +800,63 @@ def get_feed_stories(
     current_user_id: int | None = None,
     filter_mode: str = "all",
 ):
-    """Akış için hikayeler – süresi dolmamış, takip edilenler veya herkes."""
+    """
+    Akış hikayelerini getirir.
+
+    Gizlilik filtresi (AŞAMA 4):
+    • public hikayeler herkese görünür
+    • close_friends hikayeler SADECE o kullanıcının
+      'close_friends' listesindeki kullanıcılara görünür.
+
+    Yakın arkadaş listesi mantığı:
+      Hikaye sahibinin, izleyiciyi takip etmesi (mutual follow) VE
+      hikayeyi close_friends olarak işaretlemesi gerekir.
+      Bu implementasyonda basitlik için: mutual follow = close_friends listesi.
+    """
     now = datetime.now(timezone.utc)
-    base = db.query(models.Story).filter(models.Story.expires_at > now)
-    if filter_mode == "following" and current_user_id:
-        following_ids = (
+
+    if current_user_id:
+        # Kullanıcının takip ettikleri (following)
+        following_ids_sq = (
             db.query(models.Follow.following_id)
             .filter(models.Follow.follower_id == current_user_id)
             .subquery()
         )
-        base = base.filter(models.Story.user_id.in_(following_ids))
+        # Kullanıcıyı takip edenler (followers) — mutual için gerekli
+        follower_ids_sq = (
+            db.query(models.Follow.follower_id)
+            .filter(models.Follow.following_id == current_user_id)
+            .subquery()
+        )
+
+        from sqlalchemy import or_, and_  # noqa – already imported at top level; kept for clarity
+
+        # Gizlilik koşulu:
+        # 1. Genel hikayeler herkes görebilir
+        # 2. close_friends hikayeleri sadece mutual follow (karşılıklı takip) varsa
+        privacy_filter = or_(
+            models.Story.privacy_type == "public",
+            and_(
+                models.Story.privacy_type == "close_friends",
+                # Hikaye sahibi beni takip ediyor (ben close_friends listesindeyim)
+                models.Story.user_id.in_(follower_ids_sq),
+            )
+        )
+
+        base = db.query(models.Story).filter(
+            models.Story.expires_at > now,
+            privacy_filter,
+        )
+
+        if filter_mode == "following":
+            base = base.filter(models.Story.user_id.in_(following_ids_sq))
+    else:
+        # Giriş yapmamış kullanıcı: sadece public hikayeler
+        base = db.query(models.Story).filter(
+            models.Story.expires_at > now,
+            models.Story.privacy_type == "public",
+        )
+
     total = base.count()
     offset = (page - 1) * page_size
     stories = (
@@ -814,10 +874,11 @@ def get_feed_stories(
 
 # --- FOLLOW (Kademe 5) ---
 
-def toggle_follow(db: Session, follower_id: int, following_id: int) -> tuple[str | None, bool]:
-    """Takip et / takipten çık. Returns (status, was_created). Status: 'accepted' or 'pending' or None."""
+def toggle_follow(db: Session, follower_id: int, following_id: int) -> tuple[bool, bool]:
+    """Takip et / takipten çık. Returns (is_following, was_created).
+    is_following is True when the follow relationship is active ("accepted")."""
     if follower_id == following_id:
-        return None, False
+        return False, False
     
     existing = db.query(models.Follow).filter(
         models.Follow.follower_id == follower_id,
@@ -827,7 +888,7 @@ def toggle_follow(db: Session, follower_id: int, following_id: int) -> tuple[str
     if existing:
         db.delete(existing)
         db.commit()
-        return None, False
+        return False, False
 
     # Check if target user is private
     target_prefs = db.query(models.UserPreferences).filter(models.UserPreferences.user_id == following_id).first()
@@ -837,7 +898,8 @@ def toggle_follow(db: Session, follower_id: int, following_id: int) -> tuple[str
     new_follow = models.Follow(follower_id=follower_id, following_id=following_id, status=status)
     db.add(new_follow)
     db.commit()
-    return status, True
+    is_following = status == "accepted"
+    return is_following, True
 
 def accept_follow_request(db: Session, follower_id: int, following_id: int) -> bool:
     """Pending bir takip isteğini onaylar."""

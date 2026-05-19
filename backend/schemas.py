@@ -451,7 +451,18 @@ class StoryCreate(BaseModel):
     media_type: str  # "image", "video"
     media_url: str
     thumbnail_url: Optional[str] = None
+    # Gizlilik: 'public' | 'close_friends'
+    privacy_type: str = "public"
+    # Geriye dönük uyumluluk (eski mobil istemciler is_close_friends gönderebilir)
     is_close_friends: bool = False
+    # Konum meta verisi: {"place_id": 5, "name": "Kadıköy", "lat": 40.99, "lng": 29.02}
+    location_data: Optional[dict] = None
+
+    def resolved_privacy_type(self) -> str:
+        """is_close_friends True ise close_friends döndür (geriye dönük)."""
+        if self.is_close_friends:
+            return "close_friends"
+        return self.privacy_type
 
 
 class Story(BaseModel):
@@ -461,7 +472,9 @@ class Story(BaseModel):
     media_type: str
     media_url: str
     thumbnail_url: Optional[str] = None
+    privacy_type: str = "public"
     is_close_friends: bool = False
+    location_data: Optional[dict] = None
     created_at: datetime
     expires_at: datetime
     author: Optional[UserSummary] = None
@@ -661,9 +674,11 @@ class QRVerifyResponse(BaseModel):
 
 class MessageCreate(BaseModel):
     content: str = Field(..., min_length=1, max_length=5000, description="Mesaj içeriği")
-    message_type: str = "text"  # "text", "image", "shared_post"
+    message_type: str = "text"  # "text", "image", "shared_post", "story_reply"
     media_url: Optional[str] = None
     shared_post_id: Optional[int] = None
+    parent_story_id: Optional[int] = None
+    story_snapshot_url: Optional[str] = None
 
 class MessageResponse(BaseModel):
     id: int
@@ -673,6 +688,8 @@ class MessageResponse(BaseModel):
     message_type: str = "text"
     media_url: Optional[str] = None
     shared_post_id: Optional[int] = None
+    parent_story_id: Optional[int] = None
+    story_snapshot_url: Optional[str] = None
     is_read: bool = False
     status: str = "sent"  # "sent", "delivered", "read"
     created_at: datetime

@@ -63,3 +63,21 @@ export async function getFeedStories(
 export async function createStory(payload: CreateStoryPayload): Promise<Story> {
   return apiPost<Story>("/stories", payload);
 }
+
+export async function getUserStories(
+  userId: number,
+  page = 1,
+  pageSize = 50
+): Promise<PaginatedStories> {
+  return apiGet<PaginatedStories>(
+    `/users/${userId}/stories?page=${page}&page_size=${pageSize}`
+  );
+}
+
+/** Bir hikayeye metin yanıtı gönder — DM olarak kaydolur */
+export async function replyToStory(
+  storyId: number,
+  text: string
+): Promise<{ ok: boolean; conversation_id: number; message_id: number }> {
+  return apiPost(`/stories/${storyId}/reply`, { text });
+}

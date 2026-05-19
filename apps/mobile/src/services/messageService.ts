@@ -19,10 +19,13 @@ export interface BackendMessage {
     conversation_id: number;
     sender_id: number;
     content: string;
-    message_type: string; // "text" | "image" | "shared_post"
+    message_type: string; // "text" | "image" | "shared_post" | "story_reply"
     media_url?: string | null;
     shared_post_id?: number | null;
+    parent_story_id?: number | null;
+    story_snapshot_url?: string | null;
     is_read: boolean;
+    status?: string;
     created_at: string;
     sender_name?: string | null;
 }
@@ -39,6 +42,8 @@ export interface SendMessagePayload {
     message_type?: string;
     media_url?: string;
     shared_post_id?: number;
+    parent_story_id?: number;
+    story_snapshot_url?: string;
 }
 
 // --- API Functions ---

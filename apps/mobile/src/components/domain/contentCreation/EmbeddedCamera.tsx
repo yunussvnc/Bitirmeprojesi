@@ -59,6 +59,8 @@ export function EmbeddedCamera({
   const [isRecording, setIsRecording] = useState(false);
   const [recordDuration, setRecordDuration] = useState(0);
   const [capturing, setCapturing] = useState(false);
+  // Kamera hazır olana kadar deklanşör devre dışı
+  const [isCameraReady, setIsCameraReady] = useState(false);
   const cameraRef = useRef<CameraView>(null);
   const recordTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const isRecordingRef = useRef(false);
@@ -115,7 +117,7 @@ export function EmbeddedCamera({
   }, []);
 
   const takePhoto = useCallback(async () => {
-    if (!cameraRef.current || capturing) return;
+    if (!cameraRef.current || capturing || !isCameraReady) return;
     setCapturing(true);
     mediumImpact();
     shutterScale.value = withSequence(
@@ -124,8 +126,9 @@ export function EmbeddedCamera({
     );
 
     try {
+      // skipProcessing:false → iOS'ta EXIF rotasyonu otomatik düzeltilir
       const photo = await cameraRef.current.takePictureAsync({
-        quality: 0.9,
+        quality: 0.92,
         skipProcessing: false,
       });
       if (photo) {
@@ -142,7 +145,7 @@ export function EmbeddedCamera({
     } finally {
       setCapturing(false);
     }
-  }, [capturing, onCapture]);
+  }, [capturing, isCameraReady, onCapture]);
 
   const stopRecording = useCallback(() => {
     if (recordTimerRef.current) {
@@ -200,13 +203,12 @@ export function EmbeddedCamera({
     }
   }, [maxVideoSec, onCapture, stopRecording]);
 
-  const handleShutterPress = useCallback(() => {
-    if (isRecordingRef.current) {
-      stopRecording();
-    } else {
+  // onPressIn → anlık fotoğraf çekimi (onPress'e kıyasla ~300ms daha hızlı)
+  const handleShutterPressIn = useCallback(() => {
+    if (!isRecordingRef.current) {
       takePhoto();
     }
-  }, [takePhoto, stopRecording]);
+  }, [takePhoto]);
 
   const handleShutterLongPress = useCallback(() => {
     if (contentType !== 'post') {
@@ -279,7 +281,15 @@ export function EmbeddedCamera({
         style={styles.camera}
         facing={facing}
         flash={flash as FlashMode}
+        onCameraReady={() => setIsCameraReady(true)}
       />
+
+      {/* Kamera hazırlanıyor overlay */}
+      {!isCameraReady && (
+        <View style={styles.cameraLoadingOverlay}>
+          <ActivityIndicator size="large" color="#fff" />
+        </View>
+      )}
 
       {/* Top gradient for controls readability */}
       <LinearGradient
@@ -351,10 +361,10 @@ export function EmbeddedCamera({
               styles.shutterOuter,
               isRecording && { borderColor: '#FF3B30' },
             ]}
-            onPress={handleShutterPress}
+            onPressIn={handleShutterPressIn}
             onLongPress={handleShutterLongPress}
             onPressOut={handleShutterRelease}
-            delayLongPress={350}
+            delayLongPress={400}
             activeOpacity={0.9}
           >
             <View
@@ -379,9 +389,14 @@ export function EmbeddedCamera({
       </View>
 
       {/* Capture mode hint */}
-      {!isRecording && contentType !== 'post' && (
+      {!isRecording && !isCameraReady && (
         <View style={styles.hintBar}>
-          <Text style={styles.hintText}>{t("creation.cam_hint")}</Text>
+          <Text style={styles.hintText}>Kamera hazırlanıyor...</Text>
+        </View>
+      )}
+      {!isRecording && isCameraReady && contentType !== 'post' && (
+        <View style={styles.hintBar}>
+          <Text style={styles.hintText}>Fotoğraf için dokun, video için basılı tut</Text>
         </View>
       )}
     </View>
@@ -397,6 +412,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     gap: 16,
+  },
+  cameraLoadingOverlay: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: 'rgba(0,0,0,0.6)',
+    alignItems: 'center',
+    justifyContent: 'center',
+    zIndex: 5,
   },
   camera: {
     flex: 1,

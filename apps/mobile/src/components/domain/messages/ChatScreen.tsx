@@ -53,6 +53,11 @@ interface Message {
     seen?: boolean;
     status?: "sent" | "delivered" | "read";
     sharedPostId?: number;
+    /** story_reply mesajı için: yanıtlanan hikayenin thumbnail URL'si (null = hikaye silindi/süresi doldu) */
+    storySnapshotUrl?: string | null;
+    isStoryReply?: boolean;
+    /** Yanıtlanan hikayenin ID'si (derin bağ linkleme için) */
+    parentStoryId?: number | null;
 }
 
 /* ── Dummy Contact Data ── */
@@ -384,13 +389,14 @@ export default function ChatScreen() {
                                 return new Date(m.created_at).toLocaleTimeString(currentLocale, { hour: "2-digit", minute: "2-digit" });
                             } catch { return ""; }
                         })(),
-                        // Benim mesajlarım için: is_read=true → read, false → sent
-                        // Karşı tarafın mesajları için durum gösterilmez (isMine=false)
                         status: m.sender_id === myId
                             ? (m.is_read ? "read" as const : "sent" as const)
                             : undefined,
                         sharedPostId: m.shared_post_id ?? undefined,
                         imageUri: m.media_url ? (m.media_url.startsWith('/') ? `${API_BASE_URL}${m.media_url}` : m.media_url) : undefined,
+                        isStoryReply: m.message_type === 'story_reply',
+                        storySnapshotUrl: m.story_snapshot_url ?? undefined,
+                        parentStoryId: m.parent_story_id ?? undefined,
                     }));
                     setMessages((prev) => {
                         // Backend verisini önceki mesajlarla birleştir (delivered statüsünü korumak için)
@@ -877,6 +883,74 @@ export default function ChatScreen() {
             );
         }
 
+        // ── Hikayeye Yanıt Mesajı (AŞAMA 5) ──
+        if (item.isStoryReply) {
+            // Hikayenin süresi dolmuş / silinmiş mi? (snapshot URL yoksa → expired)
+            const isStoryExpired = !item.storySnapshotUrl;
+
+            return (
+                <TouchableOpacity
+                    style={[styles.messageBubbleRow, item.isMine ? styles.myRow : styles.theirRow]}
+                    onLongPress={longPressHandler}
+                    activeOpacity={0.9}
+                >
+                    <View style={[styles.messageContentWrapper, item.isMine ? { alignItems: 'flex-end' } : { alignItems: 'flex-start' }]}>
+                        <View
+                            style={[
+                                styles.storyReplyCard,
+                                {
+                                    backgroundColor: item.isMine ? "#ffffff" : colors.surface.elevated,
+                                    borderColor: item.isMine ? 'rgba(0,0,0,0.08)' : colors.surface.border,
+                                    opacity: isStoryExpired ? 0.7 : 1,
+                                },
+                            ]}
+                        >
+                            {/* Hikaye Önizleme Bandı */}
+                            {isStoryExpired ? (
+                                // Hikaye silindi / süresi doldu
+                                <View style={[styles.storyReplyThumb, styles.storyReplyThumbExpired]}>
+                                    <IconSymbol name="clock.badge.xmark" size={22} color="rgba(255,255,255,0.5)" />
+                                </View>
+                            ) : (
+                                <Image
+                                    source={{ uri: item.storySnapshotUrl! }}
+                                    style={styles.storyReplyThumb}
+                                    contentFit="cover"
+                                />
+                            )}
+                            <View style={styles.storyReplyContent}>
+                                <Text
+                                    style={[
+                                        styles.storyReplyLabel,
+                                        { color: item.isMine ? 'rgba(0,0,0,0.45)' : colors.text.tertiary },
+                                    ]}
+                                >
+                                    {isStoryExpired
+                                        ? 'Bu hikayeye artık ulaşılamıyor'
+                                        : (item.isMine ? 'Hikayeye yanıt verdim' : 'Hikayenize yanıt verdi')
+                                    }
+                                </Text>
+                                <Text
+                                    style={[
+                                        styles.newMsgText,
+                                        { color: item.isMine ? '#000' : colors.text.primary },
+                                    ]}
+                                >
+                                    {item.text}
+                                </Text>
+                            </View>
+                        </View>
+                        <View style={[styles.newTimeRow, item.isMine ? { justifyContent: 'flex-end' } : { justifyContent: 'flex-start' }]}>
+                            <Text style={[styles.newMsgTime, { color: colors.text.tertiary }]}>
+                                {item.timestamp}
+                            </Text>
+                            {item.isMine && tickIcon}
+                        </View>
+                    </View>
+                </TouchableOpacity>
+            );
+        }
+
         // Paylaşılan gönderi mesajı
         if (item.sharedPostId && item.imageUri) {
             return (
@@ -1028,7 +1102,16 @@ export default function ChatScreen() {
                     <IconSymbol name="chevron.left" size={26} color={colors.text.primary} />
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.headerProfile} activeOpacity={0.8}>
+                <TouchableOpacity 
+                    style={styles.headerProfile} 
+                    activeOpacity={0.8}
+                    onPress={() => {
+                        const userId = _parseTargetUserId(resolvedChatId);
+                        if (userId) {
+                            router.push(`/user/${userId}` as any);
+                        }
+                    }}
+                >
                     <Image source={{ uri: contact.avatar }} style={styles.headerAvatar} contentFit="cover" />
                     <View>
                         <Text style={[styles.headerName, { color: colors.text.primary }]} numberOfLines={1}>
@@ -1460,5 +1543,33 @@ const styles = StyleSheet.create({
         color: "#fff",
         fontSize: 16,
         fontWeight: "600",
+    },
+    // ── Story Reply Card ──
+    storyReplyCard: {
+        flexDirection: "row",
+        borderRadius: 18,
+        borderWidth: 1,
+        overflow: "hidden",
+        maxWidth: 280,
+    },
+    storyReplyThumb: {
+        width: 72,
+        height: 88,
+    },
+    storyReplyThumbExpired: {
+        backgroundColor: '#3a3a3a',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    storyReplyContent: {
+        flex: 1,
+        padding: 10,
+        justifyContent: "center",
+        gap: 4,
+    },
+    storyReplyLabel: {
+        fontSize: 11,
+        fontWeight: "600",
+        letterSpacing: 0.2,
     },
 });

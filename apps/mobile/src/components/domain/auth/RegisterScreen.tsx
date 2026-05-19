@@ -262,7 +262,7 @@ export default function RegisterScreen() {
   return (
     <View style={styles.container}>
       <View style={StyleSheet.absoluteFill}>
-        <Image source={{ uri: currentImage }} style={styles.backgroundImage} resizeMode="cover" />
+        <Image source={{ uri: currentImage }} style={StyleSheet.absoluteFillObject} resizeMode="cover" />
       </View>
       <LinearGradient
         colors={['rgba(0,0,0,0.2)', 'rgba(0,0,0,0.5)', 'rgba(0,0,0,0.88)']}
@@ -451,7 +451,7 @@ const styles = StyleSheet.create({
     paddingBottom: 40,
   },
   topBlock: { flex: 1 },
-  backgroundImage: { width, height },
+  backgroundImage: { width: '100%' as any, height: '100%' as any },  // kullanılmıyor
   header: { alignItems: 'center', marginBottom: 20 },
   logoWrap: {
     width: 72,

@@ -40,6 +40,7 @@ import { toggleFollow } from "@/src/services/userService";
 import { useAppStore } from "@/src/store/useAppStore";
 import { createReport } from "@/src/services/moderationService";
 import { useTranslation } from "react-i18next";
+import { useUploadPipelineStore } from "@/src/store/useUploadPipelineStore";
 
 export default function FeedScreen() {
   const { t } = useTranslation();
@@ -79,6 +80,9 @@ export default function FeedScreen() {
   const pageSize = 15;
   const toggleSavePost = useAppStore((s) => s.toggleSavePost);
   const isPostSaved = useAppStore((s) => s.isPostSaved);
+  const deletedPostIds = useAppStore((s) => s.deletedPostIds);
+
+  const visiblePosts = React.useMemo(() => posts.filter((p) => !deletedPostIds.includes(p.id)), [posts, deletedPostIds]);
 
   const handleCreateSelect = useCallback((type: CreateType) => {
     if (type === "post") {
@@ -110,56 +114,7 @@ export default function FeedScreen() {
         }
 
         if (refresh) {
-          const MOCK_SUPER_POST: Post = {
-            id: 999999,
-            user_id: 1,
-            place_id: 1,
-            caption: "Bu inanılmaz bir deneyimdi! 🎉 Mekanın atmosferine bayıldım. Yorumlarda düşüncelerinizi bekliyorum! #MockPost #Deneyim #Harika",
-            post_type: "review",
-            comments_disabled: false,
-            likes_hidden: false,
-            like_count: 1542,
-            comment_count: 89,
-            created_at: new Date().toISOString(),
-            is_liked: true,
-            author: {
-              id: 1,
-              username: "ulascan_demo",
-              first_name: "Ulaş Can",
-              avatar_url: "https://ui-avatars.com/api/?name=Ulaş+Can",
-              is_following: false,
-            },
-            place: {
-              id: 1,
-              name: "Fakülte Teras",
-              category: "Cafe & Bar",
-            },
-            media: [
-              {
-                id: 1,
-                post_id: 999999,
-                media_type: "image",
-                media_url: "https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=800&q=80",
-                order_index: 0,
-              },
-              {
-                id: 2,
-                post_id: 999999,
-                media_type: "image",
-                media_url: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800&q=80",
-                order_index: 1,
-              }
-            ],
-            tagged_users: [
-              {
-                id: 2,
-                username: "beratsanli",
-                first_name: "Berat",
-              }
-            ]
-          };
-
-          setPosts([MOCK_SUPER_POST, ...res.items.filter(p => p.id !== 999999)]);
+          setPosts(res.items);
           setPage(1);
         } else {
           setPosts((prev) => (p === 1 ? res.items : [...prev, ...res.items]));
@@ -188,6 +143,18 @@ export default function FeedScreen() {
     animateMiniBar(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps -- load on filter change only
   }, [filter]);
+
+  // Upload tamamlandığında otomatik yenile
+  const uploadJobs = useUploadPipelineStore((s) => s.jobs);
+  const processedUploads = useRef(new Set<string>());
+  
+  useEffect(() => {
+    const newlyCompleted = uploadJobs.filter((j) => j.stage === 'done' && !processedUploads.current.has(j.id));
+    if (newlyCompleted.length > 0) {
+      newlyCompleted.forEach(j => processedUploads.current.add(j.id));
+      loadFeed(true);
+    }
+  }, [uploadJobs, loadFeed]);
 
   const refreshUnread = useCallback(async () => {
     try {
@@ -617,7 +584,7 @@ export default function FeedScreen() {
         <FlatList
           ref={flatListRef}
           style={styles.list}
-          data={posts}
+          data={visiblePosts}
           keyExtractor={(item) => String(item.id)}
           renderItem={renderItem}
           ListEmptyComponent={listEmpty}

@@ -284,7 +284,7 @@ export default function LoginScreen() {
       <View style={StyleSheet.absoluteFill}>
         <Animated.Image
           source={{ uri: FALLBACK_PLACE_IMAGES[imgIndex] }}
-          style={[styles.backgroundImage, { opacity: fadeAnim }]}
+          style={[StyleSheet.absoluteFillObject, { opacity: fadeAnim }]}
           resizeMode="cover"
         />
       </View>
@@ -485,8 +485,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   backgroundImage: {
-    width,
-    height,
+    // Kullanılmıyor — absoluteFillObject kullanılıyor
+    width: '100%' as any,
+    height: '100%' as any,
   },
   header: {
     alignItems: 'center',

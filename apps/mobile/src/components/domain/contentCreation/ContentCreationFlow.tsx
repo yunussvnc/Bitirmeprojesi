@@ -19,9 +19,10 @@ import Animated, {
 } from 'react-native-reanimated';
 import { MediaPicker } from './MediaPicker';
 import { EditCanvas } from './EditCanvas';
+import { StoryMediaEditor } from './StoryMediaEditor';
 import type { MediaItem, ContentType, FilterPreset, TextOverlay } from '@/src/contentCreation/types';
 
-export type FlowStep = 'pick' | 'edit' | 'share';
+export type FlowStep = 'pick' | 'gesture-editor' | 'edit' | 'share';
 
 const TRANSITION_DURATION = 280;
 
@@ -68,24 +69,43 @@ export function ContentCreationFlow({
     setSelected(items);
   }, []);
 
-  const handleNextFromPicker = useCallback(() => {
-    if (selected.length > 0) {
+  const handleNextFromPicker = useCallback((items: MediaItem[]) => {
+    if (items.length > 0 || selected.length > 0) {
+      const finalItems = items.length > 0 ? items : selected;
+      setSelected(finalItems);
       setEditIndex(0);
       setFilter('none');
       setTextOverlays([]);
       setDirection('forward');
       if (contentType === 'story') {
-        setStep('edit');
+        // Hikaye için önce gesture editörü
+        setStep('gesture-editor');
       } else {
         setStep('share');
       }
     }
   }, [selected, contentType]);
 
-  const handleEditBack = useCallback(() => {
+  const handleEditorConfirm = useCallback((editedUri: string) => {
+    // Editleden gelen URI'yi mevcut media'ya yaz
+    setSelected((prev) => prev.map((m, i) => i === editIndex ? { ...m, uri: editedUri } : m));
+    setDirection('forward');
+    setStep('edit');
+  }, [editIndex]);
+
+  const handleEditorCancel = useCallback(() => {
     setDirection('backward');
     setStep('pick');
   }, []);
+
+  const handleEditBack = useCallback(() => {
+    setDirection('backward');
+    if (contentType === 'story') {
+      setStep('gesture-editor');
+    } else {
+      setStep('pick');
+    }
+  }, [contentType]);
 
   const handleEditDone = useCallback(() => {
     setDirection('forward');
@@ -138,9 +158,31 @@ export function ContentCreationFlow({
           contentType={contentType}
           selected={selected}
           onSelect={handleSelect}
-          onNext={handleNextFromPicker}
+          onNext={(items?: MediaItem[]) => handleNextFromPicker(items ?? selected)}
           onClose={onClose}
           quality={quality}
+        />
+      </Animated.View>
+    );
+  }
+
+  // ── Gesture Editörü (sadece story) ──
+  if (step === 'gesture-editor' && currentMedia) {
+    return (
+      <Animated.View
+        key="gesture-editor"
+        entering={direction === 'forward'
+          ? SlideInRight.duration(TRANSITION_DURATION)
+          : SlideInLeft.duration(TRANSITION_DURATION)}
+        exiting={direction === 'forward'
+          ? SlideOutLeft.duration(TRANSITION_DURATION)
+          : SlideOutRight.duration(TRANSITION_DURATION)}
+        style={styles.container}
+      >
+        <StoryMediaEditor
+          uri={currentMedia.uri}
+          onConfirm={handleEditorConfirm}
+          onCancel={handleEditorCancel}
         />
       </Animated.View>
     );

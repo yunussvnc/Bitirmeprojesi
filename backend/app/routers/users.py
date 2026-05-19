@@ -197,20 +197,27 @@ def toggle_follow_user(
     if user_id == current_user.id:
         raise HTTPException(status_code=400, detail="Kendinizi takip edemezsiniz.")
     
-    status, was_created = crud.toggle_follow(db, current_user.id, user_id)
+    is_following, was_created = crud.toggle_follow(db, current_user.id, user_id)
     
-    if was_created and status:
+    # determine status string for notifications/UI
+    follow_row = db.query(models.Follow).filter(
+        models.Follow.follower_id == current_user.id,
+        models.Follow.following_id == user_id,
+    ).first()
+    follow_status = follow_row.status if follow_row else None
+
+    if was_created and follow_status:
         import json
         payload = json.dumps({
             "actor_avatar": current_user.avatar_url,
             "actor_username": current_user.username
         })
-        notif_type = "follow" if status == "accepted" else "follow_request"
+        notif_type = "follow" if follow_status == "accepted" else "follow_request"
         crud.create_notification(db, user_id, notif_type, current_user.id, payload=payload)
     
     # Dummygram: Anlık UI güncellemesi için güncel followers_count dön
     followers_count = len(crud.get_follower_ids(db, user_id))
-    return {"status": status, "followers_count": followers_count}
+    return {"status": follow_status, "followers_count": followers_count, "following": is_following}
 
 @router.post("/users/{user_id}/follow/accept")
 def accept_follow_request(

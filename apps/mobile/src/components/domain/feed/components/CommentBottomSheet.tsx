@@ -167,32 +167,6 @@ export function CommentBottomSheet({ visible, onClose, postId, onCommentAdded }:
     if (!visible || !postId) return;
     setLoading(true);
     try {
-      if (postId === 999999) {
-        // Return mock comments
-        setComments([
-          {
-            id: 101,
-            post_id: 999999,
-            user_id: 2,
-            author_username: "beratsanli",
-            text: "Gerçekten harika bir mekan, mutlaka tekrar gelmeliyiz! 👏",
-            created_at: new Date().toISOString(),
-            is_liked: true,
-            like_count: 12,
-          },
-          {
-            id: 102,
-            post_id: 999999,
-            user_id: 3,
-            author_username: "ayse_yilmaz",
-            text: "Fotoğraflar çok güzel çıkmış 😍",
-            created_at: new Date(Date.now() - 3600000).toISOString(),
-            is_liked: false,
-            like_count: 3,
-          }
-        ]);
-        return;
-      }
       const res = await getComments(postId, 1, 50);
       setComments(res.items);
     } catch (e) {
@@ -215,24 +189,6 @@ export function CommentBottomSheet({ visible, onClose, postId, onCommentAdded }:
     lightImpact();
     setSending(true);
     try {
-      if (postId === 999999) {
-        // Mock add comment
-        const newComment: PostComment = {
-          id: Date.now(),
-          post_id: 999999,
-          user_id: currentUser?.id || 1,
-          author_username: currentUser?.username || "me",
-          text: trimmed,
-          created_at: new Date().toISOString(),
-          is_liked: false,
-          like_count: 0,
-        };
-        setComments((prev) => [newComment, ...prev]);
-        setText("");
-        onCommentAdded?.();
-        return;
-      }
-
       const newComment = await addComment(postId, trimmed);
       setComments((prev) => [newComment, ...prev]);
       setText("");

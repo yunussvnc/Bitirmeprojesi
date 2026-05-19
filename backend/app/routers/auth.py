@@ -571,21 +571,33 @@ def register_device_token(
     token_version ile tek cihaz girişi zorlandığı için push da tek cihaza gitmelidir.
     Bu nedenle yeni token kaydedilmeden önce kullanıcının TÜM eski tokenları silinir.
     """
-    # Kullanıcının tüm eski cihaz tokenlarını sil (tek cihaz kuralı)
-    db.query(models.DeviceToken).filter(
-        models.DeviceToken.user_id == current_user.id
-    ).delete()
-    
-    # Yeni token'ı kaydet
-    new_token = models.DeviceToken(
-        user_id=current_user.id,
-        token=data.token,
-        platform=data.platform,
-        device_id=data.device_id
-    )
-    db.add(new_token)
-    db.commit()
-    return {"ok": True, "message": "Device token registered"}
+    try:
+        # Önce bu token kimdeyse ondan sil (aynı cihaza farklı hesapla girilmiş olabilir)
+        db.query(models.DeviceToken).filter(
+            models.DeviceToken.token == data.token
+        ).delete(synchronize_session=False)
+
+        # Kullanıcının tüm eski cihaz tokenlarını sil (tek cihaz kuralı)
+        db.query(models.DeviceToken).filter(
+            models.DeviceToken.user_id == current_user.id
+        ).delete(synchronize_session=False)
+        
+        # Yeni token'ı kaydet
+        new_token = models.DeviceToken(
+            user_id=current_user.id,
+            token=data.token,
+            platform=data.platform,
+            device_id=data.device_id
+        )
+        db.add(new_token)
+        db.commit()
+        return {"ok": True, "message": "Device token registered"}
+    except IntegrityError as e:
+        db.rollback()
+        raise HTTPException(status_code=400, detail="Bu token zaten başka bir cihaza kayıtlı.")
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(status_code=500, detail="Cihaz token'ı kaydedilirken hata oluştu.")
 
 
 @router.delete("/device-token")

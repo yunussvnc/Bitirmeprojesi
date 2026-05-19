@@ -53,6 +53,10 @@ type UploadPipelineState = {
   clearCompleted: () => void;
   clearAll: () => void;
 
+  // Upload-done event listeners
+  _doneListeners: Set<(contentType: ContentType) => void>;
+  onUploadDone: (fn: (contentType: ContentType) => void) => () => void;
+
   // Selectors
   getActiveJob: () => UploadJob | undefined;
   getJobById: (id: string) => UploadJob | undefined;
@@ -85,8 +89,18 @@ export const useUploadPipelineStore = create<UploadPipelineState>((set, get) => 
     const baseProgress = Math.round((index / total) * 100);
     updateJob(jobId, { progress: baseProgress });
 
+    // URI artık CustomGalleryGrid'de file:// olarak çözümlenmiş olmalı
+    const uri = item.uri;
+    console.log(`[UploadPipeline]   URI: ${uri.substring(0, 100)}`);
+
+    // Güvenlik kontrolü: ph:// hala geliyorsa uyar
+    if (uri.startsWith('ph://') || uri.startsWith('ph-upload://')) {
+      console.error(`[UploadPipeline] ✗ HATA: ph:// URI hala çözümlenmemiş! URI: ${uri}`);
+      throw new Error('Fotoğraf URI çözümlenemedi. Lütfen tekrar deneyin.');
+    }
+
     const uploadFn = item.type === 'video' ? uploadVideo : uploadImage;
-    const filename = item.uri.split('/').pop() || `media_${index}.jpg`;
+    const filename = uri.split('/').pop() || `media_${index}.jpg`;
     const match = /\.([^.]+)$/.exec(filename);
     
     let ext = match ? match[1].toLowerCase() : 'jpg';
@@ -96,11 +110,13 @@ export const useUploadPipelineStore = create<UploadPipelineState>((set, get) => 
       ? `video/${ext === 'mov' ? 'quicktime' : 'mp4'}`
       : `image/${ext}`;
 
+    console.log(`[UploadPipeline]   Uploading as ${mime}, filename: ${filename}`);
     const result = await uploadFn({
-      uri: item.uri,
+      uri,
       type: mime,
       name: filename,
     });
+    console.log(`[UploadPipeline]   Upload result:`, JSON.stringify(result));
 
     if (!result?.url) {
       throw new Error(`Upload failed for media item ${index + 1}`);
@@ -118,9 +134,11 @@ export const useUploadPipelineStore = create<UploadPipelineState>((set, get) => 
 
     try {
       // Stage 1: VALIDATING
+      console.log(`[UploadPipeline] ▶ Stage 1/5: VALIDATING (${job.mediaItems.length} items)`);
       updateJob(jobId, { stage: 'validating', progress: 0 });
       const validation = await validateMediaBatch(job.mediaItems, job.contentType);
       if (!validation.valid) {
+        console.error(`[UploadPipeline] ✗ Validation failed:`, validation.errors);
         updateJob(jobId, {
           stage: 'error',
           error: validation.errors.join('; '),
@@ -128,25 +146,30 @@ export const useUploadPipelineStore = create<UploadPipelineState>((set, get) => 
         });
         return;
       }
+      console.log(`[UploadPipeline] ✓ Validation passed`);
       updateJob(jobId, { progress: 100 });
 
       // Stage 2: COMPRESSING (placeholder — expo-image-manipulator integration point)
+      console.log(`[UploadPipeline] ▶ Stage 2/5: COMPRESSING (skipped)`);
       updateJob(jobId, { stage: 'compressing', progress: 0 });
       // For now, skip compression — media is used as-is
       updateJob(jobId, { progress: 100 });
 
       // Stage 3: UPLOADING — sequential upload of all media
+      console.log(`[UploadPipeline] ▶ Stage 3/5: UPLOADING`);
       updateJob(jobId, { stage: 'uploading', progress: 0 });
       const uploadedUrls: string[] = [];
       const thumbnailUrls: (string | undefined)[] = [];
 
       for (let i = 0; i < job.mediaItems.length; i++) {
+        console.log(`[UploadPipeline]   Uploading item ${i + 1}/${job.mediaItems.length}: ${job.mediaItems[i].uri.substring(0, 60)}...`);
         const url = await uploadSingleMedia(
           job.mediaItems[i],
           jobId,
           i,
           job.mediaItems.length
         );
+        console.log(`[UploadPipeline]   ✓ Uploaded → ${url.substring(0, 80)}...`);
         uploadedUrls.push(url);
         thumbnailUrls.push(undefined); // Thumbnail generation can be added later
       }
@@ -154,10 +177,12 @@ export const useUploadPipelineStore = create<UploadPipelineState>((set, get) => 
       updateJob(jobId, { uploadedUrls, thumbnailUrls });
 
       // Stage 4: CREATING_POST — send to API
+      console.log(`[UploadPipeline] ▶ Stage 4/5: CREATING_POST`);
       updateJob(jobId, { stage: 'creating_post', progress: 0 });
 
       if (job.contentType === 'story') {
         const storyPayload = job.payload as SanitizedStoryPayload;
+        console.log(`[UploadPipeline]   Creating story...`);
         await createStory({
           ...storyPayload,
           media_url: uploadedUrls[0],
@@ -165,6 +190,7 @@ export const useUploadPipelineStore = create<UploadPipelineState>((set, get) => 
         });
       } else {
         const postPayload = job.payload as SanitizedPostPayload;
+        console.log(`[UploadPipeline]   Creating post with ${uploadedUrls.length} media, caption: "${postPayload.caption?.substring(0, 30) ?? '(none)'}"`);
         await createPost({
           caption: postPayload.caption,
           place_id: postPayload.place_id,
@@ -184,10 +210,14 @@ export const useUploadPipelineStore = create<UploadPipelineState>((set, get) => 
       updateJob(jobId, { progress: 100 });
 
       // Stage 5: DONE
+      console.log(`[UploadPipeline] ✓ Stage 5/5: DONE — Job ${jobId} completed!`);
       updateJob(jobId, { stage: 'done', progress: 100 });
       logger.info(`[UploadPipeline] Job ${jobId} completed successfully`);
+      // Fire done listeners so UI can auto-refresh
+      get()._doneListeners.forEach((fn) => fn(job.contentType));
     } catch (error) {
       const message = error instanceof Error ? error.message : 'Unknown error';
+      console.error(`[UploadPipeline] ✗ Job ${jobId} FAILED:`, message, error);
       logger.error(`[UploadPipeline] Job ${jobId} failed: ${message}`);
 
       const currentJob = get().getJobById(jobId);
@@ -204,6 +234,13 @@ export const useUploadPipelineStore = create<UploadPipelineState>((set, get) => 
   return {
     jobs: [],
     processing: false,
+    _doneListeners: new Set(),
+
+    // Register a listener for upload-done events. Returns an unsubscribe fn.
+    onUploadDone(fn: (contentType: ContentType) => void): () => void {
+      get()._doneListeners.add(fn);
+      return () => get()._doneListeners.delete(fn);
+    },
 
     // ── Enqueue a post upload ───────────────────────────
     enqueuePost(input: RawPostInput, mediaItems: MediaItem[]): string {

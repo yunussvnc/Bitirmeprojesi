@@ -35,6 +35,9 @@ export default function ProfileScreen() {
   const [refreshing, setRefreshing] = useState(false);
   const [createSheetVisible, setCreateSheetVisible] = useState(false);
   const [activeTab, setActiveTab] = useState<"posts" | "tagged">("posts");
+  const deletedPostIds = useAppStore((s) => s.deletedPostIds);
+  const visiblePosts = React.useMemo(() => posts.filter((p) => !deletedPostIds.includes(p.id)), [posts, deletedPostIds]);
+
   const { width: screenWidth } = useWindowDimensions();
   const cellSize = (screenWidth - 32 - GRID_GAP * (GRID_COLS - 1)) / GRID_COLS;
 
@@ -252,9 +255,9 @@ export default function ProfileScreen() {
 
         {/* ── Content Grid ── */}
         {activeTab === "posts" && (
-          posts.length > 0 ? (
+          visiblePosts.length > 0 ? (
             <View style={styles.grid}>
-              {posts.map((item, idx) => (
+              {visiblePosts.map((item, idx) => (
                 <TouchableOpacity
                   key={item.id}
                   style={[

@@ -37,6 +37,7 @@ import { StoryViewerModal } from './StoryViewerModal';
 import { useTranslation } from 'react-i18next';
 import { useSettingsStore } from '@/src/store/useSettingsStore';
 import { useAppStore } from '@/src/store/useAppStore';
+import { useAuthStore } from '@/src/store/useAuthStore';
 import { FeedCard, CommentBottomSheet, SharePostSheet } from '@/src/components/domain/feed';
 import { getPlaceStatus } from '@/src/utils/placeStatus';
 
@@ -128,6 +129,7 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
   const savedIds = useAppStore((s) => s.savedIds);
   const toggleSaved = useAppStore((s) => s.toggleSave);
   const saved = savedIds.includes(String(place.id));
+  const currentUser = useAuthStore((s) => s.user);
 
   const [posts, setPosts] = useState<Post[]>([]);
   const [stories, setStories] = useState<Story[]>([]);
@@ -609,6 +611,7 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
             onStoryViewed={(id) => setViewedStoryIds((prev) => new Set(prev).add(id))}
             onPlaceNavigate={handleStoryNavigateRequest}
             onAuthorNavigate={posts.length > 0 ? handleStoryNavigateRequest : undefined}
+            currentUserId={currentUser?.id}
           />
         )}
 
