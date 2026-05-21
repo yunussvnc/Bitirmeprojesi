@@ -69,8 +69,13 @@ export function FeedCard({
   const isVideo = firstMedia?.media_type === "video";
 
   const imageWidth = screenWidth;
-  // Default to 4:5 aspect ratio like Instagram
-  const imageHeight = imageWidth * (4 / 5);
+  let imageHeight = imageWidth * (4 / 5); // Default to 4:5
+
+  if (firstMedia?.width && firstMedia?.height) {
+    // Dynamic height based on actual aspect ratio to prevent cropping
+    const aspectRatio = firstMedia.width / firstMedia.height;
+    imageHeight = imageWidth / aspectRatio;
+  }
 
   const handleLike = useCallback(() => {
     mediumImpact();

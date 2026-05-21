@@ -87,8 +87,6 @@ export default function FeedScreen() {
   const handleCreateSelect = useCallback((type: CreateType) => {
     if (type === "post") {
       router.push("/create-post" as any);
-    } else if (type === "reels") {
-      router.push({ pathname: "/create-post", params: { preSelect: "reels" } } as any);
     } else if (type === "story") {
       router.push("/create-story" as any);
     }

@@ -125,7 +125,8 @@ export default function CreatePostScreen() {
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background.primary }]}>
-      <ContentCreationFlow
+      <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : undefined} style={{ flex: 1 }} keyboardVerticalOffset={Platform.OS === "ios" ? 100 : 0}>
+        <ContentCreationFlow
         contentType={contentType}
         initialPlaceId={placeId}
         initialPlaceName={placeName}
@@ -149,7 +150,8 @@ export default function CreatePostScreen() {
         )}
       />
 
-      <PlacePickerSheet visible={placePickerOpen} onClose={() => setPlacePickerOpen(false)} onSelect={(place) => setSelectedPlace(place)} />
+        <PlacePickerSheet visible={placePickerOpen} onClose={() => setPlacePickerOpen(false)} onSelect={(place) => setSelectedPlace(place)} />
+      </KeyboardAvoidingView>
     </View>
   );
 }

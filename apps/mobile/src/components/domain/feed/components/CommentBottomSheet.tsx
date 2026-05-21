@@ -21,6 +21,7 @@ import {
   PanResponder,
   Dimensions,
   Alert,
+  Keyboard,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTheme } from "@/src/hooks/useTheme";
@@ -55,16 +56,30 @@ export function CommentBottomSheet({ visible, onClose, postId, onCommentAdded }:
   const [comments, setComments] = useState<PostComment[]>([]);
   const [loading, setLoading] = useState(false);
   const [sending, setSending] = useState(false);
-  const [text, setText] = useState("");
   const [modalVisible, setModalVisible] = useState(false);
+  const [keyboardHeight, setKeyboardHeight] = useState(0);
+  const [text, setText] = useState("");
   const { t } = useTranslation();
 
   // Height animasyonu (native driver kapalı — height animate edilemez native'de)
   const animHeight = useRef(new Animated.Value(0)).current;
+  const animKeyboard = useRef(new Animated.Value(0)).current;
   const snapRef = useRef<"collapsed" | "expanded">("collapsed");
   const closingRef = useRef(false);
   const onCloseRef = useRef(onClose);
   onCloseRef.current = onClose;
+
+  useEffect(() => {
+    const showSub = Keyboard.addListener(Platform.OS === 'ios' ? 'keyboardWillShow' : 'keyboardDidShow', (e) => {
+      setKeyboardHeight(e.endCoordinates.height);
+      Animated.timing(animKeyboard, { toValue: e.endCoordinates.height, duration: 250, useNativeDriver: false }).start();
+    });
+    const hideSub = Keyboard.addListener(Platform.OS === 'ios' ? 'keyboardWillHide' : 'keyboardDidHide', () => {
+      setKeyboardHeight(0);
+      Animated.timing(animKeyboard, { toValue: 0, duration: 250, useNativeDriver: false }).start();
+    });
+    return () => { showSub.remove(); hideSub.remove(); };
+  }, [animKeyboard]);
 
   const snapTo = useCallback(
     (target: "collapsed" | "expanded" | "closed") => {
@@ -289,11 +304,11 @@ export function CommentBottomSheet({ visible, onClose, postId, onCommentAdded }:
   return (
     <Modal visible={modalVisible} transparent animationType="none" onRequestClose={() => snapTo("closed")} statusBarTranslucent>
       {/* Backdrop */}
-      <Pressable style={[styles.backdrop, { backgroundColor: "rgba(0,0,0,0.45)" }]} onPress={() => snapTo("closed")} />
+      <Pressable style={[styles.backdrop, { backgroundColor: "rgba(0,0,0,0.45)" }]} onPress={() => { Keyboard.dismiss(); snapTo("closed"); }} />
 
-      {/* Sheet — her zaman ekranın altına sabitli, height ile büyür/küçülür */}
-      <Animated.View style={[styles.sheet, { height: animHeight, backgroundColor: colors.background.primary }]}>
-        <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : undefined} style={{ flex: 1 }} keyboardVerticalOffset={0}>
+      {/* Sheet — bottom animKeyboard ile yükselir */}
+      <Animated.View style={[styles.sheet, { height: animHeight, bottom: animKeyboard, backgroundColor: colors.background.primary }]}>
+        <View style={{ flex: 1 }}>
           {/* Handle — sürükleme alanı */}
           <View style={styles.handleRow} {...panResponder.panHandlers}>
             <View style={[styles.handle, { backgroundColor: colors.surface.border }]} />
@@ -386,7 +401,7 @@ export function CommentBottomSheet({ visible, onClose, postId, onCommentAdded }:
               )}
             </TouchableOpacity>
           </View>
-        </KeyboardAvoidingView>
+        </View>
       </Animated.View>
     </Modal>
   );

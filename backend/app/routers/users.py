@@ -2,7 +2,9 @@
 
 from typing import Optional
 
+# pyrefly: ignore [missing-import]
 from fastapi import APIRouter, Depends, HTTPException, Query
+# pyrefly: ignore [missing-import]
 from sqlalchemy.orm import Session
 
 import models, schemas, crud
@@ -214,6 +216,16 @@ def toggle_follow_user(
         })
         notif_type = "follow" if follow_status == "accepted" else "follow_request"
         crud.create_notification(db, user_id, notif_type, current_user.id, payload=payload)
+    elif not was_created:
+        # Unfollowed — remove any pending follow_request notification
+        stale = db.query(models.Notification).filter(
+            models.Notification.user_id == user_id,
+            models.Notification.actor_id == current_user.id,
+            models.Notification.type.in_(["follow_request", "follow"]),
+        ).all()
+        for s in stale:
+            db.delete(s)
+        db.commit()
     
     # Dummygram: Anlık UI güncellemesi için güncel followers_count dön
     followers_count = len(crud.get_follower_ids(db, user_id))

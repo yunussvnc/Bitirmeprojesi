@@ -438,7 +438,9 @@ export default function LoginScreen() {
             </TouchableWithoutFeedback>
           </ScrollView>
 
-          {/* Footer formun en altında */}
+        </KeyboardAvoidingView>
+
+          {/* Footer formun en altında, klavye ile yukarı çıkmasın diye KeyboardAvoidingView dışında */}
           <TouchableOpacity
             style={[styles.footerStatic, { paddingBottom: Math.max(16, insets.bottom + 8) }]}
             onPress={() => {
@@ -451,7 +453,6 @@ export default function LoginScreen() {
             <Text style={styles.footerLabel}>{t('auth.no_account')}</Text>
             <Text style={styles.footerLink}>{t('auth.register')}</Text>
           </TouchableOpacity>
-        </KeyboardAvoidingView>
       </SafeAreaView >
     </View >
   );

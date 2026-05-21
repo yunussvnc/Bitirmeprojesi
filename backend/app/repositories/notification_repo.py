@@ -99,9 +99,20 @@ class PostgresNotificationRepository(BaseNotificationRepository):
         return items, total
 
     def get_follow_requests(self, user_id: int, page: int = 1, page_size: int = 20) -> Tuple[List[models.Notification], int]:
+        # Only show follow_request notifications where the Follow row is STILL pending
+        # This prevents stale notifications after the requester unfollowed
+        pending_follower_ids = (
+            self.db.query(models.Follow.follower_id)
+            .filter(
+                models.Follow.following_id == user_id,
+                models.Follow.status == "pending",
+            )
+            .subquery()
+        )
         base = self.db.query(models.Notification).filter(
             models.Notification.user_id == user_id,
-            models.Notification.type == "follow_request"
+            models.Notification.type == "follow_request",
+            models.Notification.actor_id.in_(pending_follower_ids),
         )
         total = base.count()
         offset = (page - 1) * page_size

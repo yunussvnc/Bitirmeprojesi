@@ -7,6 +7,8 @@ export type PostMedia = {
   media_url: string;
   thumbnail_url?: string;
   order_index: number;
+  width?: number;
+  height?: number;
 };
 
 export type UserSummary = {

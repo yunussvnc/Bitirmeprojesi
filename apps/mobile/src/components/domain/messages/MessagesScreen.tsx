@@ -425,20 +425,32 @@ export default function MessagesScreen() {
                     </View>
                 ) : (
                     <View style={styles.searchSection}>
-                        <View style={[styles.searchBar, { backgroundColor: colors.surface.elevated, borderColor: searchFocused ? colors.accent.primary : colors.surface.border }]}>
-                            <IconSymbol name="magnifyingglass" size={18} color={colors.text.tertiary} />
-                            <TextInput
-                                ref={searchInputRef}
-                                style={[styles.searchInput, { color: colors.text.primary }]}
-                                placeholder={t("messages.search_ph")}
-                                placeholderTextColor={colors.text.tertiary}
-                                value={searchQuery}
-                                onChangeText={setSearchQuery}
-                                autoCapitalize="none"
-                                cursorColor={colors.accent.primary}
-                                onFocus={() => setSearchFocused(true)}
-                                onBlur={() => setSearchFocused(false)}
-                            />
+                        <View style={styles.searchRow}>
+                            <View style={[styles.searchBar, { flex: 1, backgroundColor: colors.surface.elevated, borderColor: searchFocused ? colors.accent.primary : colors.surface.border }]}>
+                                <IconSymbol name="magnifyingglass" size={18} color={colors.text.tertiary} />
+                                <TextInput
+                                    ref={searchInputRef}
+                                    style={[styles.searchInput, { color: colors.text.primary }]}
+                                    placeholder={t("messages.search_ph")}
+                                    placeholderTextColor={colors.text.tertiary}
+                                    value={searchQuery}
+                                    onChangeText={setSearchQuery}
+                                    autoCapitalize="none"
+                                    cursorColor={colors.accent.primary}
+                                    onFocus={() => setSearchFocused(true)}
+                                    onBlur={() => setSearchFocused(false)}
+                                />
+                            </View>
+                            <TouchableOpacity
+                                style={[styles.newChatBtn, { backgroundColor: colors.accent.primary }]}
+                                activeOpacity={0.8}
+                                onPress={() => {
+                                    lightImpact();
+                                    router.push({ pathname: "/search-users", params: { mode: "chat" } } as any);
+                                }}
+                            >
+                                <IconSymbol name="plus" size={20} color="#fff" />
+                            </TouchableOpacity>
                         </View>
                     </View>
                 )}
@@ -532,6 +544,11 @@ const styles = StyleSheet.create({
         paddingTop: 12,
         paddingBottom: 8,
     },
+    searchRow: {
+        flexDirection: "row",
+        alignItems: "center",
+        gap: 10,
+    },
     searchBar: {
         flexDirection: "row",
         alignItems: "center",
@@ -544,6 +561,14 @@ const styles = StyleSheet.create({
         flex: 1,
         marginLeft: 8,
         fontSize: 15,
+    },
+    newChatBtn: {
+        width: 38,
+        height: 38,
+        borderRadius: 12,
+        alignItems: "center",
+        justifyContent: "center",
+        flexShrink: 0,
     },
 
     /* Section Header */

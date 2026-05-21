@@ -84,13 +84,18 @@ export default function UserProfileScreen() {
         setProfile(p);
         setStats(statsRes);
         setPosts(
-          postsRes.items.map((post) => ({
-            id: post.id,
-            place_id: post.place_id,
-            thumbnail:
-              post.media?.[0]?.thumbnail_url || post.media?.[0]?.media_url,
-            media_type: post.media?.[0]?.media_type,
-          }))
+          postsRes.items.map((post) => {
+            const sortedMedia = [...(post.media || [])].sort(
+              (a, b) => (a.order_index ?? 0) - (b.order_index ?? 0)
+            );
+            const firstMedia = sortedMedia[0];
+            return {
+              id: post.id,
+              place_id: post.place_id,
+              thumbnail: firstMedia?.thumbnail_url || firstMedia?.media_url,
+              media_type: firstMedia?.media_type,
+            };
+          })
         );
       } catch (e) {
         handleApiError(e);

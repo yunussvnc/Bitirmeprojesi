@@ -424,6 +424,7 @@ export default function RegisterScreen() {
               </View>
             </TouchableWithoutFeedback>
           </ScrollView>
+        </KeyboardAvoidingView>
           <TouchableOpacity
             style={[styles.footerStatic, { paddingBottom: Math.max(16, insets.bottom + 8) }]}
             onPress={() => { Keyboard.dismiss(); lightImpact(); router.back(); }}
@@ -432,7 +433,6 @@ export default function RegisterScreen() {
             <Text style={styles.footerLabel}>{t('auth.have_account')}</Text>
             <Text style={styles.footerLink}>{t('auth.login')}</Text>
           </TouchableOpacity>
-        </KeyboardAvoidingView>
       </SafeAreaView>
     </View >
   );

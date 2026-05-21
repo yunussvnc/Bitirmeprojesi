@@ -17,9 +17,7 @@ export function CreateBottomSheet({ visible, onClose }: CreateBottomSheetProps) 
     const router = useRouter();
 
     const handleSelect = (type: CreateType) => {
-        if (type === "reels") {
-            router.push({ pathname: "/create-post", params: { preSelect: "reels" } } as any);
-        } else if (type === "post") {
+        if (type === "post") {
             router.push({ pathname: "/create-post", params: { preSelect: "post" } } as any);
         } else if (type === "story") {
             router.push("/create-story" as any);

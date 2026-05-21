@@ -5,14 +5,20 @@ import random
 import string
 import uuid
 
+# pyrefly: ignore [missing-import]
 import jwt
 import requests as req_lib
 from datetime import date, datetime, timedelta, timezone
 
+# pyrefly: ignore [missing-import]
 from fastapi import APIRouter, Depends, HTTPException, Request
+# pyrefly: ignore [missing-import]
 from sqlalchemy.exc import IntegrityError
+# pyrefly: ignore [missing-import]
 from sqlalchemy.orm import Session
+# pyrefly: ignore [missing-import]
 from google.oauth2 import id_token
+# pyrefly: ignore [missing-import]
 from google.auth.transport import requests as google_requests
 
 import schemas, crud, models
@@ -735,6 +741,33 @@ def update_my_preferences(
         raise HTTPException(status_code=400, detail=f"Geçersiz dil: {data.language}")
 
     prefs = crud.update_preferences(db, current_user.id, data)
+
+    # Hesap gizliden açığa alındığında bekleyen tüm takip isteklerini otomatik kabul et
+    if data.is_private_account is False:
+        import json
+        pending_follows = db.query(models.Follow).filter(
+            models.Follow.following_id == current_user.id,
+            models.Follow.status == "pending",
+        ).all()
+        for follow_row in pending_follows:
+            follow_row.status = "accepted"
+            # Takip eden kişiye "kabul edildi" bildirimi gönder
+            payload = json.dumps({
+                "actor_avatar": current_user.avatar_url,
+                "actor_username": current_user.username,
+            })
+            crud.create_notification(
+                db, follow_row.follower_id, "follow_accepted", current_user.id, payload=payload
+            )
+            # Eski follow_request bildirimini kaldır (artık geçersiz)
+            db.query(models.Notification).filter(
+                models.Notification.user_id == current_user.id,
+                models.Notification.actor_id == follow_row.follower_id,
+                models.Notification.type == "follow_request",
+            ).delete(synchronize_session=False)
+        if pending_follows:
+            db.commit()
+
     return crud.preferences_to_response(prefs)
 
 

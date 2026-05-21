@@ -64,9 +64,16 @@ export const useNotificationStore = create<NotificationStoreState>((set, get) =>
     set({ loading: true });
     try {
       const res = await getNotifications(page, 30);
-      set({ notifications: res.items });
-      // Açıldığında okundu yap
-      if (res.items.length > 0) {
+      // Deduplicate by id (prevents WS + REST race duplicates)
+      const seen = new Set<number>();
+      const unique = res.items.filter((n) => {
+        if (seen.has(n.id)) return false;
+        seen.add(n.id);
+        return true;
+      });
+      set({ notifications: unique });
+      // Mark all read on open
+      if (unique.length > 0) {
         await markNotificationsRead();
         set({ unreadCount: 0 });
       }
@@ -144,15 +151,18 @@ export const useNotificationStore = create<NotificationStoreState>((set, get) =>
 
   // ── Takip isteğini kabul et (Dummygram optimistic) ────
   async acceptRequest(actorId: number, notificationId: number) {
-    // Optimistic: Bildirimi follow_accepted'a çevir
+    // Optimistic: remove from followRequests, convert in notifications to follow_accepted
     set((s) => ({
-      notifications: s.notifications.map((n) =>
-        n.id === notificationId ? { ...n, type: 'follow_accepted' } : n
-      ),
+      notifications: s.notifications
+        .map((n) =>
+          n.id === notificationId ? { ...n, type: 'follow_accepted' } : n
+        ),
       followRequests: s.followRequests.filter((n) => n.id !== notificationId),
     }));
     try {
       await acceptFollowRequest(actorId);
+      // Reload both to sync server state
+      get().loadFollowRequests();
     } catch (e) {
       // Revert on error
       logger.error('[NotificationStore] acceptRequest failed:', e);
@@ -163,13 +173,14 @@ export const useNotificationStore = create<NotificationStoreState>((set, get) =>
 
   // ── Takip isteğini reddet (Dummygram optimistic) ──────
   async rejectRequest(actorId: number, notificationId: number) {
-    // Optimistic: Bildirimi kaldır
+    // Optimistic: remove from both lists immediately
     set((s) => ({
       notifications: s.notifications.filter((n) => n.id !== notificationId),
       followRequests: s.followRequests.filter((n) => n.id !== notificationId),
     }));
     try {
       await rejectFollowRequest(actorId);
+      get().loadFollowRequests();
     } catch (e) {
       logger.error('[NotificationStore] rejectRequest failed:', e);
       get().loadFollowRequests();
@@ -209,14 +220,21 @@ export const useNotificationStore = create<NotificationStoreState>((set, get) =>
         } catch { /* ignore */ }
       }
 
-      set((s) => ({
-        notifications: [newNotif, ...s.notifications],
-        unreadCount: s.unreadCount + 1,
-        // Follow request ise ayrı listeye de ekle
-        followRequests: parsed.type === 'follow_request'
-          ? [newNotif, ...s.followRequests]
-          : s.followRequests,
-      }));
+      // Deduplicate by id — prevent double-add from WS + HTTP fetch
+      set((s) => {
+        const alreadyExists = s.notifications.some((n) => n.id === newNotif.id);
+        if (alreadyExists) return {}; // no-op
+        return {
+          notifications: [newNotif, ...s.notifications],
+          unreadCount: s.unreadCount + 1,
+          // Follow request → also add to followRequests list (deduplicated)
+          followRequests: parsed.type === 'follow_request'
+            ? (s.followRequests.some((n) => n.id === newNotif.id)
+                ? s.followRequests
+                : [newNotif, ...s.followRequests])
+            : s.followRequests,
+        };
+      });
     } catch (e) {
       logger.error('[NotificationStore] handleWebSocketMessage failed:', e);
     }

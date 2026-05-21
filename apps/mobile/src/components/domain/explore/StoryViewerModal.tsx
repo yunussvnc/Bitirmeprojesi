@@ -18,6 +18,7 @@ import {
   TextInput,
   KeyboardAvoidingView,
   ActivityIndicator,
+  Keyboard,
 } from 'react-native';
 import { Image } from 'expo-image';
 import { Video, ResizeMode } from 'expo-av';
@@ -66,6 +67,17 @@ export function StoryViewerModal({
   }, [initialIndex, stories]);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const dragY = useRef(new Animated.Value(0)).current;
+  const animKeyboard = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    const showSub = Keyboard.addListener(Platform.OS === 'ios' ? 'keyboardWillShow' : 'keyboardDidShow', (e) => {
+      Animated.timing(animKeyboard, { toValue: e.endCoordinates.height, duration: 250, useNativeDriver: false }).start();
+    });
+    const hideSub = Keyboard.addListener(Platform.OS === 'ios' ? 'keyboardWillHide' : 'keyboardDidHide', () => {
+      Animated.timing(animKeyboard, { toValue: 0, duration: 250, useNativeDriver: false }).start();
+    });
+    return () => { showSub.remove(); hideSub.remove(); };
+  }, [animKeyboard]);
 
   const story = stories[index];
   const isImage = story?.media_type !== 'video';
@@ -206,10 +218,7 @@ export function StoryViewerModal({
       onRequestClose={onClose}
       statusBarTranslucent
     >
-      <KeyboardAvoidingView
-        style={{ flex: 1 }}
-        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      >
+      <View style={{ flex: 1 }}>
       <Animated.View
         style={[
           styles.overlay,
@@ -329,7 +338,7 @@ export function StoryViewerModal({
 
         {/* ── Yanıt Kutusu (sadece başkasının hikayesinde) ── */}
         {showReplyBar && (
-          <View style={styles.replyBar} pointerEvents="box-none">
+          <Animated.View style={[styles.replyBar, { bottom: Animated.add(Platform.OS === 'ios' ? 36 : 20, animKeyboard) }]} pointerEvents="box-none">
             <View style={styles.replyInputRow}>
               <TextInput
                 style={styles.replyInput}
@@ -358,10 +367,10 @@ export function StoryViewerModal({
                 )}
               </TouchableOpacity>
             </View>
-          </View>
+          </Animated.View>
         )}
       </Animated.View>
-      </KeyboardAvoidingView>
+      </View>
     </Modal>
   );
 }
@@ -466,7 +475,6 @@ const styles = StyleSheet.create({
   // ── Reply Bar ──
   replyBar: {
     position: 'absolute',
-    bottom: Platform.OS === 'ios' ? 36 : 20,
     left: 16,
     right: 16,
     zIndex: 20,

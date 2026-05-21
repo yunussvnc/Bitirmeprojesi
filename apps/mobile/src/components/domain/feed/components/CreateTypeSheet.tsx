@@ -14,7 +14,7 @@ import { lightImpact, mediumImpact } from "@/src/utils/haptics";
 import { spacing } from "@/src/constants/design";
 import { useTranslation } from "react-i18next";
 
-export type CreateType = "post" | "story" | "reels";
+export type CreateType = "post" | "story";
 
 export interface CreateTypeSheetProps {
   visible: boolean;
@@ -43,12 +43,6 @@ export function CreateTypeSheet({ visible, onClose, onSelect }: CreateTypeSheetP
       label: t("create_sheet.story_label"),
       subtitle: t("create_sheet.story_sub"),
       icon: "circle.hexagongrid.fill",
-    },
-    {
-      type: "reels",
-      label: t("create_sheet.reels_label"),
-      subtitle: t("create_sheet.reels_sub"),
-      icon: "play.circle.fill",
     },
   ];
 

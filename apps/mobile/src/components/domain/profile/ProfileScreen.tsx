@@ -13,7 +13,6 @@ import { getUserProfile, getUserStats, getUserPosts, type UserProfile, type User
 import { handleApiError } from "@/src/utils/errorHandler";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { Image } from "expo-image";
-import { CreateBottomSheet } from "./components/CreateBottomSheet";
 import { useTranslation } from "react-i18next";
 
 const GRID_GAP = 14;
@@ -33,7 +32,6 @@ export default function ProfileScreen() {
   const [stats, setStats] = useState<UserStats | null>(null);
   const [posts, setPosts] = useState<{ id: number; place_id?: number; thumbnail?: string; media_type?: string }[]>([]);
   const [refreshing, setRefreshing] = useState(false);
-  const [createSheetVisible, setCreateSheetVisible] = useState(false);
   const [activeTab, setActiveTab] = useState<"posts" | "tagged">("posts");
   const deletedPostIds = useAppStore((s) => s.deletedPostIds);
   const visiblePosts = React.useMemo(() => posts.filter((p) => !deletedPostIds.includes(p.id)), [posts, deletedPostIds]);
@@ -52,12 +50,18 @@ export default function ProfileScreen() {
       setProfile(p);
       setStats(s);
       setPosts(
-        postsRes.items.map((post) => ({
-          id: post.id,
-          place_id: post.place_id,
-          thumbnail: post.media?.[0]?.thumbnail_url || post.media?.[0]?.media_url,
-          media_type: post.media?.[0]?.media_type,
-        }))
+        postsRes.items.map((post) => {
+          const sortedMedia = [...(post.media || [])].sort(
+            (a, b) => (a.order_index ?? 0) - (b.order_index ?? 0)
+          );
+          const firstMedia = sortedMedia[0];
+          return {
+            id: post.id,
+            place_id: post.place_id,
+            thumbnail: firstMedia?.thumbnail_url || firstMedia?.media_url,
+            media_type: firstMedia?.media_type,
+          };
+        })
       );
     } catch (e) {
       handleApiError(e);
@@ -113,13 +117,6 @@ export default function ProfileScreen() {
             onPress={() => { lightImpact(); router.push("/search-users" as any); }}
           >
             <IconSymbol name="magnifyingglass" size={20} color={colors.text.primary} />
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.headerBtn, { backgroundColor: colors.surface.elevated }]}
-            activeOpacity={0.7}
-            onPress={() => { lightImpact(); setCreateSheetVisible(true); }}
-          >
-            <IconSymbol name="plus" size={20} color={colors.text.primary} />
           </TouchableOpacity>
           <TouchableOpacity
             style={[styles.headerBtn, { backgroundColor: colors.surface.elevated }]}
@@ -330,8 +327,6 @@ export default function ProfileScreen() {
         )}
 
       </ScrollView>
-
-      <CreateBottomSheet visible={createSheetVisible} onClose={() => setCreateSheetVisible(false)} />
     </View>
   );
 }
