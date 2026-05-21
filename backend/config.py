@@ -11,7 +11,7 @@ class Settings(BaseSettings):
     JWT_REFRESH_TOKEN_EXPIRE_DAYS: int = 30
     PASSWORD_MIN_LENGTH: int = 6
     LLM_ENABLED: bool = True
-    LLM_PROVIDER: str = "ollama"
+    LLM_PROVIDER: str = "groq"  # groq (default), openai, veya ollama
     OLLAMA_BASE_URL: str = "http://127.0.0.1:11434"
     OLLAMA_MODEL: str = "gemma2"
     OPENAI_API_KEY: str = ""

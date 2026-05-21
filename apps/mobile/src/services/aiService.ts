@@ -1,12 +1,12 @@
 /**
  * AI Mekan Öneri Servisi
- * demo_backend_v2.py (localhost:8080) ile entegrasyon
+ * ai-llm/app.py (Port 8080) ile entegrasyon
  *
  * Endpoints:
  *  POST /api/smart-search-v2  → Doğal dil ile mekan ara
  *  POST /api/analyze-place-reviews → Yorum analizi
  *  GET  /health               → Backend sağlık kontrolü
- *  GET  /api/stats            → Sistem istatistikleri
+ *  GET  /api/info             → Sistem bilgileri
  */
 
 import Constants from 'expo-constants';
@@ -30,12 +30,12 @@ function resolveAIBaseUrl(): string {
   if (override && override.startsWith('http')) return override.replace(/\/$/, '');
 
   if (__DEV__) {
-    if (Platform.OS === 'web') return 'http://localhost:8081';
+    if (Platform.OS === 'web') return 'http://localhost:8080';
     // Expo'nun bağlı olduğu host'u kullan (telefon + PC aynı Wi-Fi'da)
     const expoHost = Constants.expoConfig?.hostUri?.split(':')[0];
-    if (expoHost) return `http://${expoHost}:8081`;
+    if (expoHost) return `http://${expoHost}:8080`;
     // Fallback: .env'den veya localhost
-    return `http://${process.env.EXPO_PUBLIC_DEV_API_HOST ?? 'localhost'}:8081`;
+    return `http://${process.env.EXPO_PUBLIC_DEV_API_HOST ?? 'localhost'}:8080`;
   }
   return process.env.EXPO_PUBLIC_AI_URL ?? 'https://ai.asemos.com';
 }
