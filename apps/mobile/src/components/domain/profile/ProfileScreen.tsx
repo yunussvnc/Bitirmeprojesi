@@ -272,7 +272,7 @@ export default function ProfileScreen() {
                   ]}
                   onPress={() => {
                     lightImpact();
-                    if (item.place_id) router.push(`/place/${item.place_id}` as any);
+                    router.push(`/p/post/${item.id}` as any);
                   }}
                   activeOpacity={0.9}
                 >

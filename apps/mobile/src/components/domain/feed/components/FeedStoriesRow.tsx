@@ -18,6 +18,7 @@ import { spacing } from "@/src/constants/design";
 import { useTranslation } from "react-i18next";
 import { useUploadPipelineStore } from "@/src/store/useUploadPipelineStore";
 import { useAuthStore } from "@/src/store/useAuthStore";
+import { useAppStore } from "@/src/store/useAppStore";
 
 const STORY_RING_SIZE = 82;
 const STORY_GRADIENT: [string, string, ...string[]] = ["#4ade80", "#22c55e", "#16a34a", "#15803d"];
@@ -38,7 +39,10 @@ export function FeedStoriesRow({ filter }: FeedStoriesRowProps) {
   const { colors } = useTheme();
   const [stories, setStories] = useState<Story[]>([]);
   const [loading, setLoading] = useState(true);
-  const [viewedGroupIds, setViewedGroupIds] = useState<Set<string>>(new Set());
+  
+  const viewedGroupKeys = useAppStore((s) => s.viewedStoryGroupKeys);
+  const addViewedGroupKey = useAppStore((s) => s.addViewedStoryGroupKey);
+
   const currentUser = useAuthStore((s) => s.user);
   const [storyViewerIndex, setStoryViewerIndex] = useState<number | null>(null);
   const viewerStoriesRef = useRef<Story[]>([]);
@@ -148,10 +152,10 @@ export function FeedStoriesRow({ filter }: FeedStoriesRowProps) {
   }, [stories, getGroupKey]);
 
   const sortedGroups = useMemo(() => {
-    const unseen = storyGroups.filter((g) => !viewedGroupIds.has(g.groupKey));
-    const seen = storyGroups.filter((g) => viewedGroupIds.has(g.groupKey));
+    const unseen = storyGroups.filter((g) => !viewedGroupKeys.includes(g.groupKey));
+    const seen = storyGroups.filter((g) => viewedGroupKeys.includes(g.groupKey));
     return [...unseen, ...seen];
-  }, [storyGroups, viewedGroupIds]);
+  }, [storyGroups, viewedGroupKeys]);
 
   const handleGroupTap = useCallback(
     (groupKey: string, tapIndex: number) => {
@@ -172,10 +176,10 @@ export function FeedStoriesRow({ filter }: FeedStoriesRowProps) {
       const story = stories.find((s) => s.id === storyId);
       if (story) {
         const key = getGroupKey(story);
-        setViewedGroupIds((prev) => new Set(prev).add(key));
+        addViewedGroupKey(key);
       }
     },
-    [stories, getGroupKey]
+    [stories, getGroupKey, addViewedGroupKey]
   );
 
   if (loading && stories.length === 0) {
@@ -192,7 +196,7 @@ export function FeedStoriesRow({ filter }: FeedStoriesRowProps) {
       <View style={[styles.wrap, { borderBottomColor: colors.surface.border }]}>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.row}>
           {sortedGroups.map((g, idx) => {
-            const seen = viewedGroupIds.has(g.groupKey);
+            const seen = viewedGroupKeys.includes(g.groupKey);
             return (
               <TouchableOpacity key={g.groupKey} style={styles.ringWrap} onPress={() => handleGroupTap(g.groupKey, idx)} activeOpacity={0.8}>
                 {seen ? (

@@ -203,6 +203,7 @@ export function CustomGalleryGrid({
           } catch { /* fallback to asset.uri */ }
           const firstItem: MediaItem = {
             uri: resolvedUri,
+            assetId: first.id,
             type: first.mediaType === 'video' ? 'video' : 'image',
             width: first.width,
             height: first.height,
@@ -267,6 +268,7 @@ export function CustomGalleryGrid({
 
       const item: MediaItem = {
         uri: resolvedUri,
+        assetId: asset.id,
         type: asset.mediaType === 'video' ? 'video' : 'image',
         width: asset.width,
         height: asset.height,
@@ -281,7 +283,7 @@ export function CustomGalleryGrid({
       }
 
       // Multi-select toggle — resolvedUri ile karşılaştır
-      const existingIndex = selected.findIndex((s) => s.uri === resolvedUri || s.uri === asset.uri);
+      const existingIndex = selected.findIndex((s) => s.assetId === asset.id || s.uri === resolvedUri || s.uri === asset.uri);
       if (existingIndex >= 0) {
         const newSelected = selected.filter((_, i) => i !== existingIndex);
         onSelect(newSelected);
@@ -306,7 +308,7 @@ export function CustomGalleryGrid({
 
   const renderItem = useCallback(
     ({ item: asset }: { item: MediaLibrary.Asset }) => {
-      const selIdx = selected.findIndex((s) => s.uri === asset.uri);
+      const selIdx = selected.findIndex((s) => s.assetId === asset.id || s.uri === asset.uri);
       return (
         <GalleryCell
           asset={asset}

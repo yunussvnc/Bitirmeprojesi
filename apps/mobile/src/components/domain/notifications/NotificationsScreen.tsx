@@ -254,7 +254,7 @@ export default function NotificationsScreen() {
     : t('notifications.empty_desc');
 
   return (
-    <Screen withTabBar>
+    <Screen withTabBar scrollable={false}>
       <View style={[styles.container, { backgroundColor: colors.background.primary }]}>
         {/* Header */}
         <View style={styles.header}>

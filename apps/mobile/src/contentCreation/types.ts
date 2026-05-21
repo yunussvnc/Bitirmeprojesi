@@ -14,6 +14,7 @@ export type ContentType = 'story' | 'post' | 'reels';
 
 export type MediaItem = {
   uri: string;
+  assetId?: string;
   type: 'image' | 'video';
   width?: number;
   height?: number;

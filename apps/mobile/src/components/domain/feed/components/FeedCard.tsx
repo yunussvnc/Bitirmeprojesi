@@ -1,12 +1,22 @@
 /**
  * Feed Card Component
  *
- * Post kartı — PlaceCard ile aynı tasarım diline sahip:
- * yuvarlak köşeler, derinlik gölgesi, görsel üzerinde gradient overlay.
+ * Post kartı — carousel (çoklu görsel) desteği ile.
+ * Tek görsel → pinch zoom (SnapbackZoom)
+ * Çoklu görsel → yatay kaydırmalı carousel + dot indicator
  */
 
-import React, { useState, useCallback } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, useWindowDimensions } from "react-native";
+import React, { useState, useCallback, useRef } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  useWindowDimensions,
+  ScrollView,
+  NativeSyntheticEvent,
+  NativeScrollEvent,
+} from "react-native";
 import Animated, { useSharedValue, useAnimatedStyle, withSpring } from "react-native-reanimated";
 import { SnapbackZoom } from "react-native-zoom-toolkit";
 import { Image } from "expo-image";
@@ -46,11 +56,21 @@ export function FeedCard({
   const { width: screenWidth } = useWindowDimensions();
   const { t } = useTranslation();
   const [expanded, setExpanded] = useState(false);
+  const [currentIndex, setCurrentIndex] = useState(0);
   const likeScale = useSharedValue(1);
   const zoomScale = useSharedValue(1);
 
+  const mediaList = [...(post.media ?? [])].sort((a, b) => (a.order_index ?? 0) - (b.order_index ?? 0));
+  const isCarousel = mediaList.length > 1;
+
+  // Dynamic image height from first media's aspect ratio
+  const firstMedia = mediaList[0];
+  const displayUrl = firstMedia?.media_url;
+  const isVideo = firstMedia?.media_type === "video";
+
   const imageWidth = screenWidth;
-  const imageHeight = imageWidth * (3 / 4);
+  // Default to 4:5 aspect ratio like Instagram
+  const imageHeight = imageWidth * (4 / 5);
 
   const handleLike = useCallback(() => {
     mediumImpact();
@@ -76,12 +96,15 @@ export function FeedCard({
     [onZoomChange]
   );
 
-  const firstMedia = post.media[0];
-  const displayUrl = firstMedia?.media_url;
-  const isVideo = firstMedia?.media_type === "video";
-  const username = post.author?.username || post.author?.first_name || `user_${post.user_id}`;
+  const handleScroll = useCallback(
+    (e: NativeSyntheticEvent<NativeScrollEvent>) => {
+      const idx = Math.round(e.nativeEvent.contentOffset.x / imageWidth);
+      setCurrentIndex(idx);
+    },
+    [imageWidth]
+  );
 
-  const depthHighlightColor = isDark ? "rgba(255,255,255,0.06)" : "rgba(255,255,255,0.8)";
+  const username = post.author?.username || post.author?.first_name || `user_${post.user_id}`;
 
   return (
     <Animated.View style={[styles.wrapper, wrapperAnimStyle]}>
@@ -121,29 +144,79 @@ export function FeedCard({
           )}
         </TouchableOpacity>
 
-        {/* Görsel — pinch zoom via SnapbackZoom */}
-        <View style={styles.imageContainer}>
-          <SnapbackZoom
-            timingConfig={{ duration: 200 }}
-            onPinchStart={() => notifyZoom(true)}
-            onGestureEnd={() => notifyZoom(false)}
-            onUpdate={(e) => {
-              "worklet";
-              zoomScale.value = e.scale;
-            }}
-          >
-            {displayUrl ? (
-              <Image source={{ uri: displayUrl }} style={{ width: imageWidth, height: imageHeight }} contentFit="cover" cachePolicy="memory-disk" />
-            ) : (
-              <View style={[{ width: imageWidth, height: imageHeight }, styles.imagePlaceholder, { backgroundColor: colors.surface.elevated }]}>
-                <IconSymbol name="photo" size={40} color={colors.text.tertiary} />
+        {/* Görsel alanı */}
+        <View style={[styles.imageContainer, { height: imageHeight }]}>
+          {isCarousel ? (
+            // ── Carousel mode ──────────────────────────────────────────
+            <>
+              <ScrollView
+                horizontal
+                pagingEnabled
+                showsHorizontalScrollIndicator={false}
+                onScroll={handleScroll}
+                scrollEventThrottle={16}
+                style={{ width: imageWidth, height: imageHeight }}
+              >
+                {mediaList.map((media, idx) => (
+                  <View key={idx} style={{ width: imageWidth, height: imageHeight }}>
+                    <Image
+                      source={{ uri: media.media_url }}
+                      style={{ width: imageWidth, height: imageHeight }}
+                      contentFit="cover"
+                      cachePolicy="memory-disk"
+                    />
+                  </View>
+                ))}
+              </ScrollView>
+
+              {/* Carousel count badge (Instagram-style top-right) */}
+              <View style={styles.carouselBadge}>
+                <Text style={styles.carouselBadgeText}>{currentIndex + 1}/{mediaList.length}</Text>
               </View>
-            )}
-          </SnapbackZoom>
-          {isVideo && (
-            <View style={styles.videoBadge}>
-              <IconSymbol name="play.circle.fill" size={30} color="rgba(255,255,255,0.9)" />
-            </View>
+
+              {/* Dot pagination */}
+              {mediaList.length <= 10 && (
+                <View style={styles.dotsRow}>
+                  {mediaList.map((_, idx) => (
+                    <View
+                      key={idx}
+                      style={[
+                        styles.dot,
+                        idx === currentIndex
+                          ? { backgroundColor: colors.accent.primary, width: 16 }
+                          : { backgroundColor: "rgba(255,255,255,0.5)", width: 6 },
+                      ]}
+                    />
+                  ))}
+                </View>
+              )}
+            </>
+          ) : (
+            // ── Single image mode with pinch zoom ──────────────────────
+            <>
+              <SnapbackZoom
+                timingConfig={{ duration: 200 }}
+                onPinchStart={() => notifyZoom(true)}
+                onGestureEnd={() => notifyZoom(false)}
+                onUpdate={(e) => {
+                  "worklet";
+                  zoomScale.value = e.scale;
+                }}
+              >
+                {displayUrl ? (
+                  <Image source={{ uri: displayUrl }} style={{ width: imageWidth, height: imageHeight }} contentFit="cover" cachePolicy="memory-disk" />
+                ) : (
+                  <View style={[{ width: imageWidth, height: imageHeight }, styles.imagePlaceholder, { backgroundColor: colors.surface.elevated }]}>
+                    <IconSymbol name="photo" size={40} color={colors.text.tertiary} />
+                  </View>
+                )}
+              </SnapbackZoom>
+              {isVideo && (
+                <View style={styles.videoBadge}>
+                  <IconSymbol name="play.circle.fill" size={30} color="rgba(255,255,255,0.9)" />
+                </View>
+              )}
+            </>
           )}
         </View>
 
@@ -208,34 +281,16 @@ const styles = StyleSheet.create({
     shadowColor: "#000",
     elevation: 8,
   },
-  depthLayer: {
-    position: "absolute",
-    left: 2,
-    right: 2,
-    bottom: -4,
-    height: 8,
-    borderBottomLeftRadius: radius.lg,
-    borderBottomRightRadius: radius.lg,
-  },
   card: {
     borderRadius: radius.lg,
     overflow: "visible",
     borderWidth: StyleSheet.hairlineWidth,
   },
-  topHighlight: {
-    position: "absolute",
-    top: 0,
-    left: 0,
-    right: 0,
-    height: 1.5,
-    zIndex: 10,
-    borderTopLeftRadius: radius.lg,
-    borderTopRightRadius: radius.lg,
-  },
   imageContainer: {
     width: "100%",
-    overflow: "visible",
+    overflow: "hidden",
     zIndex: 2,
+    position: "relative",
   },
   imagePlaceholder: {
     alignItems: "center",
@@ -273,6 +328,37 @@ const styles = StyleSheet.create({
     bottom: spacing.md,
     right: spacing.md,
   },
+  // ── Carousel ──
+  carouselBadge: {
+    position: "absolute",
+    top: 10,
+    right: 12,
+    backgroundColor: "rgba(0,0,0,0.55)",
+    borderRadius: 12,
+    paddingHorizontal: 8,
+    paddingVertical: 3,
+  },
+  carouselBadgeText: {
+    color: "#fff",
+    fontSize: 12,
+    fontWeight: "700",
+    letterSpacing: 0.3,
+  },
+  dotsRow: {
+    position: "absolute",
+    bottom: 10,
+    left: 0,
+    right: 0,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 5,
+  },
+  dot: {
+    height: 6,
+    borderRadius: 3,
+  },
+  // ── Content ──
   content: {
     paddingHorizontal: spacing.lg,
     paddingTop: spacing.md,

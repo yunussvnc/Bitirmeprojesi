@@ -42,6 +42,7 @@ export interface ContentCreationFlowProps {
   renderShareStep: (params: {
     mediaUri: string;
     isVideo: boolean;
+    mediaItems?: MediaItem[];
     onShare: (payload?: any) => Promise<void>;
     onBack: () => void;
   }) => React.ReactNode;
@@ -220,6 +221,7 @@ export function ContentCreationFlow({
         {renderShareStep({
           mediaUri: currentMedia.uri,
           isVideo: currentMedia.type === 'video',
+          mediaItems: selected,
           onShare: handleShare,
           onBack: handleShareBack,
         })}

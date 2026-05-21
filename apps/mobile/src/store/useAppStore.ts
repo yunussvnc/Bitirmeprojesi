@@ -55,6 +55,10 @@ type AppState = {
   deletedPostIds: number[];
   addDeletedPostId: (id: number) => void;
   clearDeletedPostIds: () => void;
+
+  viewedStoryGroupKeys: string[];
+  addViewedStoryGroupKey: (key: string) => void;
+  clearViewedStoryGroupKeys: () => void;
 };
 
 const uniq = (arr: string[]) => Array.from(new Set(arr));
@@ -72,6 +76,7 @@ export const useAppStore = create<AppState>()(
       pendingSharedPostId: null,
       unreadNotificationCount: 0,
       deletedPostIds: [],
+      viewedStoryGroupKeys: [],
 
       isSaved: (id) => get().savedIds.includes(id),
 
@@ -194,6 +199,13 @@ export const useAppStore = create<AppState>()(
       clearDeletedPostIds: () => {
         set({ deletedPostIds: [] });
       },
+
+      addViewedStoryGroupKey: (key: string) => {
+        set((state) => ({ viewedStoryGroupKeys: uniq([...state.viewedStoryGroupKeys, key]) }));
+      },
+      clearViewedStoryGroupKeys: () => {
+        set({ viewedStoryGroupKeys: [] });
+      },
     }),
     {
       name: "app-store-v2",
@@ -204,6 +216,7 @@ export const useAppStore = create<AppState>()(
         savedPostIds: state.savedPostIds,
         savedPostsById: state.savedPostsById,
         recentPrompts: state.recentPrompts,
+        viewedStoryGroupKeys: state.viewedStoryGroupKeys,
       }),
     }
   )

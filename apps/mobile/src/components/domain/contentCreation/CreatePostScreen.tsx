@@ -132,15 +132,16 @@ export default function CreatePostScreen() {
         quality={quality}
         onShare={(flowParams) => handleShare(flowParams as any)}
         onClose={handleClose}
-        renderShareStep={({ mediaUri, isVideo, onShare, onBack }) => (
+        renderShareStep={({ mediaUri, isVideo, mediaItems, onShare, onBack }) => (
           <PostShareStep
             mediaUri={mediaUri}
             isVideo={isVideo}
+            mediaItems={mediaItems}
             selectedPlace={selectedPlace}
             onPlaceChange={setSelectedPlace}
             onPlacePickerOpen={() => setPlacePickerOpen(true)}
             onShare={({ placeId, placeName, caption, commentsDisabled, likesHidden, taggedUserIds }) =>
-              handleShare({ mediaUri, isVideo, placeId, placeName, caption, disableComments: commentsDisabled, likesHidden, taggedUserIds })
+              handleShare({ mediaUri, isVideo, placeId, placeName, caption, disableComments: commentsDisabled, likesHidden, taggedUserIds, mediaItems })
             }
             onBack={onBack}
             onClose={handleClose}
@@ -158,6 +159,7 @@ export default function CreatePostScreen() {
 interface PostShareStepProps {
   mediaUri: string;
   isVideo: boolean;
+  mediaItems?: MediaItem[];
   selectedPlace: Place | null;
   onPlaceChange: (place: Place | null) => void;
   onPlacePickerOpen: () => void;
@@ -175,6 +177,8 @@ interface PostShareStepProps {
 
 function PostShareStep({
   mediaUri,
+  isVideo,
+  mediaItems,
   selectedPlace,
   onPlaceChange,
   onPlacePickerOpen,
@@ -293,7 +297,20 @@ function PostShareStep({
 
           {/* Caption & Thumbnail Row */}
           <View style={[styles.captionRow, { borderBottomColor: colors.surface.border }]}>
-            <ExpoImage source={{ uri: mediaUri }} style={styles.thumbnail} contentFit="cover" />
+            {mediaItems && mediaItems.length > 1 ? (
+              <View style={styles.multiThumbWrap}>
+                <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.multiThumbScroll}>
+                  {mediaItems.map((item, index) => (
+                    <ExpoImage key={index} source={{ uri: item.uri }} style={styles.thumbnail} contentFit="cover" />
+                  ))}
+                </ScrollView>
+                <View style={[styles.multiCountBadge, { backgroundColor: colors.accent.primary }]}>
+                  <Text style={styles.multiCountText}>{mediaItems.length}</Text>
+                </View>
+              </View>
+            ) : (
+              <ExpoImage source={{ uri: mediaUri }} style={styles.thumbnail} contentFit="cover" />
+            )}
             <TextInput
               style={[styles.captionInput, { color: colors.text.primary }]}
               placeholder={t("content_creation.caption_ph")}
@@ -513,6 +530,30 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     backgroundColor: '#1a1a1a',
     overflow: 'hidden',
+  },
+  multiThumbWrap: {
+    position: 'relative',
+    maxWidth: 160,
+  },
+  multiThumbScroll: {
+    gap: 6,
+    paddingRight: 4,
+  },
+  multiCountBadge: {
+    position: 'absolute',
+    top: 4,
+    right: 4,
+    minWidth: 20,
+    height: 20,
+    borderRadius: 10,
+    alignItems: 'center',
+    justifyContent: 'center',
+    paddingHorizontal: 4,
+  },
+  multiCountText: {
+    color: '#000',
+    fontSize: 11,
+    fontWeight: '800',
   },
   captionInput: {
     flex: 1,

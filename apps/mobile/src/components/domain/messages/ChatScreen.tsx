@@ -4,7 +4,7 @@
  * Bireysel sohbet ekranı — mekan paylaşımı odaklı mesajlaşma.
  */
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import {
     View,
     Text,
@@ -18,7 +18,16 @@ import {
     TouchableWithoutFeedback,
     Alert,
     Keyboard,
+    Dimensions,
 } from "react-native";
+import Animated, {
+    useSharedValue,
+    useAnimatedStyle,
+    withSpring,
+    withTiming,
+    runOnJS,
+} from 'react-native-reanimated';
+import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useRouter, useLocalSearchParams } from "expo-router";
 import { Image } from "expo-image";
@@ -222,8 +231,116 @@ export default function ChatScreen() {
     const [isOptionsVisible, setIsOptionsVisible] = useState(false);
     const [isReportVisible, setIsReportVisible] = useState(false);
     const [reportText, setReportText] = useState("");
+    // Image viewer
+    const [selectedImageUri, setSelectedImageUri] = useState<string | null>(null);
+    // Preview modal: URI seçildi, gönderilmedi — kullanıcı onaylasın
+    const [previewUri, setPreviewUri] = useState<string | null>(null);
     const flatListRef = useRef<FlatList>(null);
     const didInitialScrollRef = useRef(false);
+
+    // ── Image Viewer Animations ──
+    const imgScale = useSharedValue(1);
+    const imgTranslateX = useSharedValue(0);
+    const imgTranslateY = useSharedValue(0);
+    const savedScale = useSharedValue(1);
+    const savedTranslateX = useSharedValue(0);
+    const savedTranslateY = useSharedValue(0);
+    const overlayOpacity = useSharedValue(0);
+
+    const openImageViewer = useCallback((uri: string) => {
+        imgScale.value = 1;
+        imgTranslateX.value = 0;
+        imgTranslateY.value = 0;
+        savedScale.value = 1;
+        savedTranslateX.value = 0;
+        savedTranslateY.value = 0;
+        overlayOpacity.value = withTiming(1, { duration: 150 });
+        setSelectedImageUri(uri);
+    }, []);
+
+    const closeImageViewer = useCallback(() => {
+        // Reanimated callback'leri bazen RN JS thread'inde gecikmeye (4-5 sn) yol açar.
+        // Bu yüzden animasyonu başlatıp, JS tarafında setTimeout ile kapatıyoruz.
+        overlayOpacity.value = withTiming(0, { duration: 150 });
+        imgScale.value = withTiming(0.9, { duration: 150 });
+        
+        setTimeout(() => {
+            setSelectedImageUri(null);
+        }, 150);
+    }, []);
+
+    const pinchGesture = Gesture.Pinch()
+        .onUpdate((e) => {
+            imgScale.value = Math.max(0.5, Math.min(savedScale.value * e.scale, 6));
+        })
+        .onEnd(() => {
+            if (imgScale.value < 1) {
+                imgScale.value = withSpring(1);
+                imgTranslateX.value = withSpring(0);
+                imgTranslateY.value = withSpring(0);
+                savedScale.value = 1;
+                savedTranslateX.value = 0;
+                savedTranslateY.value = 0;
+            } else {
+                savedScale.value = imgScale.value;
+            }
+        });
+
+    const panGesture = Gesture.Pan()
+        .onUpdate((e) => {
+            if (savedScale.value > 1) {
+                imgTranslateX.value = savedTranslateX.value + e.translationX;
+                imgTranslateY.value = savedTranslateY.value + e.translationY;
+            } else {
+                imgTranslateY.value = e.translationY;
+                overlayOpacity.value = Math.max(0, 1 - Math.abs(e.translationY) / 400);
+            }
+        })
+        .onEnd((e) => {
+            if (savedScale.value <= 1 && Math.abs(e.translationY) > 80) {
+                // Kapatırken görselin ekrandan uçup gitmesi için (flash olmaması için)
+                imgTranslateY.value = withTiming(e.translationY + Math.sign(e.translationY) * 500, { duration: 150 });
+                runOnJS(closeImageViewer)();
+            } else if (savedScale.value <= 1) {
+                imgTranslateY.value = withSpring(0);
+                overlayOpacity.value = withTiming(1);
+            } else {
+                savedTranslateX.value = imgTranslateX.value;
+                savedTranslateY.value = imgTranslateY.value;
+            }
+        });
+
+    const doubleTapGesture = Gesture.Tap()
+        .numberOfTaps(2)
+        .onEnd(() => {
+            if (imgScale.value > 1) {
+                imgScale.value = withSpring(1);
+                imgTranslateX.value = withSpring(0);
+                imgTranslateY.value = withSpring(0);
+                savedScale.value = 1;
+                savedTranslateX.value = 0;
+                savedTranslateY.value = 0;
+            } else {
+                imgScale.value = withSpring(2.5);
+                savedScale.value = 2.5;
+            }
+        });
+
+    const combinedGesture = Gesture.Simultaneous(pinchGesture, panGesture);
+    const allGestures = Gesture.Race(doubleTapGesture, combinedGesture);
+
+    const animatedImageStyle = useAnimatedStyle(() => ({
+        transform: [
+            { scale: imgScale.value },
+            { translateX: imgTranslateX.value },
+            { translateY: imgTranslateY.value },
+        ],
+    }));
+
+    const animatedOverlayStyle = useAnimatedStyle(() => ({
+        opacity: overlayOpacity.value,
+    }));
+
     const resolvedChatId = chatId || "1";
     const currentUser = useAuthStore((s) => s.user);
     const accessToken = useAuthStore((s) => s.accessToken);
@@ -659,7 +776,8 @@ export default function ChatScreen() {
                                 quality: 0.8,
                             });
                             if (!result.canceled && result.assets && result.assets.length > 0) {
-                                sendImageMessage(result.assets[0].uri);
+                                // Önizleme göster — kullanıcı onaylasın
+                                setPreviewUri(result.assets[0].uri);
                             }
                         } catch (error) {
                             Alert.alert(t("common.error"), t("chat.camera_err"));
@@ -676,11 +794,12 @@ export default function ChatScreen() {
                                 return;
                             }
                             const result = await ImagePicker.launchImageLibraryAsync({
-                                mediaTypes: ['images', 'videos'],
+                                mediaTypes: ['images'],
                                 quality: 0.8,
                             });
                             if (!result.canceled && result.assets && result.assets.length > 0) {
-                                sendImageMessage(result.assets[0].uri);
+                                // Önizleme göster — kullanıcı onaylasın
+                                setPreviewUri(result.assets[0].uri);
                             }
                         } catch (error) {
                             Alert.alert(t("common.error"), t("chat.gallery_err"));
@@ -698,20 +817,37 @@ export default function ChatScreen() {
     const sendImageMessage = async (uri: string) => {
         if (!isBackendConv) return;
 
-        // Fotoğrafla birlikte yazı gönderilmişse al, yoksa backend hata vermesin diye varsayılan at
-        const currentText = inputText.trim() || t('chat.photo', '📷 Fotoğraf');
+        // Önizleme modalını kapat
+        setPreviewUri(null);
+
+        // Fotoğrafla birlikte yazı gönderilmişse al
+        const captionText = inputText.trim();
 
         // Optimistic UI: hemen göster
-        const tempId = `temp_${Date.now()}`;
+        const tempId = `temp_img_${Date.now()}`;
         const optimisticMsg: Message = {
             id: tempId,
-            text: currentText === t('chat.photo', '📷 Fotoğraf') ? "" : currentText,
+            text: captionText,
             imageUri: uri,
             isMine: true,
             timestamp: new Date().toLocaleTimeString(currentLocale, { hour: "2-digit", minute: "2-digit" }),
             status: "sent",
         };
         setMessages((prev) => [...prev, optimisticMsg]);
+
+        // Store'a kaydet (navigasyon sonrası kaybolmasın)
+        if (chatId) {
+            useChatMessagesStore.getState().addMessage(chatId, {
+                id: tempId,
+                text: captionText,
+                isMine: true,
+                timestamp: new Date().toISOString(),
+                imageUri: uri,
+                status: "sent",
+            });
+        }
+
+        setInputText('');
 
         try {
             // 1. Görseli backend'e upload et
@@ -725,21 +861,34 @@ export default function ChatScreen() {
 
             // 2. Backend'e mesaj olarak gönder
             const sent = await backendSendMessage(numericConvId, {
-                content: currentText,
+                content: captionText || t('chat.photo', '📷 Fotoğraf'),
                 message_type: "image",
                 media_url: mediaUrl,
             });
 
             // 3. Optimistic mesajı gerçek ID ile güncelle
+            const realId = String(sent.id);
             setMessages((prev) =>
                 prev.map((m) =>
                     m.id === tempId
-                        ? { ...m, id: String(sent.id), status: 'delivered' as const }
+                        ? { ...m, id: realId, imageUri: mediaUrl.startsWith('/') ? `${API_BASE_URL}${mediaUrl}` : mediaUrl, status: 'delivered' as const }
                         : m
                 )
             );
 
-            // Store güncelle
+            // Store'daki temp mesajı da gerçek ID ile güncelle
+            if (chatId) {
+                const store = useChatMessagesStore.getState();
+                const existing = store.messagesByChat[chatId] ?? [];
+                const updated = existing.map((m) =>
+                    m.id === tempId
+                        ? { ...m, id: realId, imageUri: mediaUrl.startsWith('/') ? `${API_BASE_URL}${mediaUrl}` : mediaUrl, status: 'delivered' as const }
+                        : m
+                );
+                useChatMessagesStore.setState({ messagesByChat: { ...store.messagesByChat, [chatId]: updated } });
+            }
+
+            // conversations store güncelle
             const textToSave = t('chat.photo', 'Fotoğraf 📷');
             setTimeout(() => {
                 useMessagesStore.getState().updateLastMessageAt(chatId, textToSave, optimisticMsg.timestamp, 'me', true);
@@ -748,10 +897,15 @@ export default function ChatScreen() {
             logger.error('[sendImageMessage] Upload failed:', err);
             // Hatalı optimistic mesajı kaldır
             setMessages((prev) => prev.filter((m) => m.id !== tempId));
+            if (chatId) {
+                const store = useChatMessagesStore.getState();
+                const existing = store.messagesByChat[chatId] ?? [];
+                useChatMessagesStore.setState({
+                    messagesByChat: { ...store.messagesByChat, [chatId]: existing.filter((m) => m.id !== tempId) }
+                });
+            }
             Alert.alert(t('common.error', 'Hata'), t('chat.photo_send_err', 'Fotoğraf gönderilemedi.'));
         }
-
-        setInputText('');
     };
 
     const handleDeleteMessage = (msgId: string) => {
@@ -1012,9 +1166,18 @@ export default function ChatScreen() {
         // Fotoğraflı mesaj
         if (item.imageUri) {
             return (
-                <TouchableOpacity style={[styles.messageBubbleRow, item.isMine ? styles.myRow : styles.theirRow]} onLongPress={longPressHandler} activeOpacity={0.9}>
+                <TouchableOpacity
+                    style={[styles.messageBubbleRow, item.isMine ? styles.myRow : styles.theirRow]}
+                    onLongPress={longPressHandler}
+                    activeOpacity={0.9}
+                >
                     <View style={[styles.messageContentWrapper, item.isMine ? { alignItems: 'flex-end' } : { alignItems: 'flex-start' }]}>
-                        <View style={[styles.imageBubble, item.isMine ? { backgroundColor: "#ffffff" } : { backgroundColor: colors.surface.elevated, borderColor: colors.surface.border, borderWidth: 1 }]}>
+                        <TouchableOpacity
+                            activeOpacity={0.92}
+                            onPress={() => openImageViewer(item.imageUri!)}
+                            onLongPress={longPressHandler}
+                            style={[styles.imageBubble, item.isMine ? { backgroundColor: "#ffffff" } : { backgroundColor: colors.surface.elevated, borderColor: colors.surface.border, borderWidth: 1 }]}
+                        >
                             <Image
                                 source={{ uri: item.imageUri }}
                                 style={styles.messageImage}
@@ -1025,7 +1188,7 @@ export default function ChatScreen() {
                                     {item.text}
                                 </Text>
                             ) : null}
-                        </View>
+                        </TouchableOpacity>
                         <View style={[styles.newTimeRow, item.isMine ? { justifyContent: 'flex-end' } : { justifyContent: 'flex-start' }]}>
                             <Text style={[styles.newMsgTime, { color: colors.text.tertiary }]}>
                                 {item.timestamp}
@@ -1296,6 +1459,97 @@ export default function ChatScreen() {
                         </View>
                     </View>
                 </KeyboardAvoidingView>
+            </Modal>
+
+            {/* ── Fotoğraf Önizleme Modalı (gönderilmeden önce) ── */}
+            <Modal
+                visible={!!previewUri}
+                transparent
+                animationType="slide"
+                onRequestClose={() => setPreviewUri(null)}
+            >
+                <View style={styles.previewModalOverlay}>
+                    <View style={styles.previewModalContent}>
+                        {/* Üst bar */}
+                        <View style={styles.previewTopBar}>
+                            <TouchableOpacity onPress={() => setPreviewUri(null)} hitSlop={12}>
+                                <Text style={styles.previewCancel}>İptal</Text>
+                            </TouchableOpacity>
+                            <Text style={styles.previewTitle}>Fotoğraf Gönder</Text>
+                            <TouchableOpacity
+                                onPress={() => previewUri && sendImageMessage(previewUri)}
+                                hitSlop={12}
+                                style={styles.previewSendBtn}
+                            >
+                                <Text style={styles.previewSendText}>Gönder</Text>
+                            </TouchableOpacity>
+                        </View>
+
+                        {/* Önizleme Görseli */}
+                        {previewUri && (
+                            <Image
+                                source={{ uri: previewUri }}
+                                style={styles.previewImage}
+                                contentFit="contain"
+                            />
+                        )}
+
+                        {/* Caption alanı */}
+                        <View style={[styles.previewCaptionBar, { backgroundColor: colors.surface.elevated, borderTopColor: colors.surface.border }]}>
+                            <TextInput
+                                style={[styles.previewCaptionInput, { color: colors.text.primary }]}
+                                placeholder="Açıklama ekle..."
+                                placeholderTextColor={colors.text.tertiary}
+                                value={inputText}
+                                onChangeText={setInputText}
+                                multiline
+                                maxLength={500}
+                                cursorColor={colors.accent.primary}
+                            />
+                        </View>
+                    </View>
+                </View>
+            </Modal>
+
+            {/* ── Tam Ekran Görsel Görüntüleyici ── */}
+            <Modal
+                visible={!!selectedImageUri}
+                transparent={true}
+                animationType="none"
+                statusBarTranslucent
+                onRequestClose={closeImageViewer}
+            >
+                <Animated.View style={[styles.imageViewerOverlay, animatedOverlayStyle]}>
+                    {/* Kapatma Butonu */}
+                    <TouchableOpacity
+                        style={styles.imageViewerCloseBtn}
+                        onPress={closeImageViewer}
+                        activeOpacity={0.7}
+                        hitSlop={16}
+                    >
+                        <View style={styles.imageViewerCloseBtnInner}>
+                            <Text style={styles.imageViewerCloseX}>✕</Text>
+                        </View>
+                    </TouchableOpacity>
+
+                    {/* Pinch/Pan/DoubleTap Gesture Alanı */}
+                    <GestureDetector gesture={allGestures}>
+                        <Animated.View style={[styles.imageViewerContainer, animatedImageStyle]}>
+                            {selectedImageUri && (
+                                <Image
+                                    source={{ uri: selectedImageUri }}
+                                    style={styles.imageViewerImage}
+                                    contentFit="contain"
+                                />
+                            )}
+                        </Animated.View>
+                    </GestureDetector>
+
+                    {/* Alt ipucu */}
+                    <View style={styles.imageViewerHint}>
+                        <Text style={styles.imageViewerHintText}>Aşağı kaydır: kapat  ·  Kıstır: yakınlaştır  ·  Çift dokun: 2.5×</Text>
+                    </View>
+                </Animated.View>
             </Modal>
         </KeyboardAvoidingView>
     );
@@ -1571,5 +1825,110 @@ const styles = StyleSheet.create({
         fontSize: 11,
         fontWeight: "600",
         letterSpacing: 0.2,
+    },
+
+    // ── Preview Modal ──
+    previewModalOverlay: {
+        flex: 1,
+        backgroundColor: 'rgba(0,0,0,0.92)',
+        justifyContent: 'flex-end',
+    },
+    previewModalContent: {
+        flex: 1,
+        backgroundColor: '#000',
+    },
+    previewTopBar: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingHorizontal: 16,
+        paddingTop: 56,
+        paddingBottom: 12,
+        backgroundColor: 'rgba(0,0,0,0.7)',
+    },
+    previewCancel: {
+        color: 'rgba(255,255,255,0.8)',
+        fontSize: 16,
+        fontWeight: '500',
+    },
+    previewTitle: {
+        color: '#fff',
+        fontSize: 16,
+        fontWeight: '700',
+    },
+    previewSendBtn: {
+        backgroundColor: '#2ecc71',
+        paddingHorizontal: 16,
+        paddingVertical: 8,
+        borderRadius: 20,
+    },
+    previewSendText: {
+        color: '#fff',
+        fontSize: 15,
+        fontWeight: '700',
+    },
+    previewImage: {
+        flex: 1,
+        width: '100%',
+    },
+    previewCaptionBar: {
+        paddingHorizontal: 16,
+        paddingVertical: 10,
+        borderTopWidth: StyleSheet.hairlineWidth,
+    },
+    previewCaptionInput: {
+        fontSize: 15,
+        minHeight: 40,
+        maxHeight: 100,
+    },
+
+    // ── Image Viewer ──
+    imageViewerOverlay: {
+        flex: 1,
+        backgroundColor: '#000',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    imageViewerContainer: {
+        width: Dimensions.get('window').width,
+        height: Dimensions.get('window').height,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    imageViewerImage: {
+        width: Dimensions.get('window').width,
+        height: Dimensions.get('window').height,
+    },
+    imageViewerCloseBtn: {
+        position: 'absolute',
+        top: 52,
+        right: 20,
+        zIndex: 100,
+    },
+    imageViewerCloseBtnInner: {
+        width: 36,
+        height: 36,
+        borderRadius: 18,
+        backgroundColor: 'rgba(255,255,255,0.18)',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderWidth: 1,
+        borderColor: 'rgba(255,255,255,0.25)',
+    },
+    imageViewerCloseX: {
+        color: '#fff',
+        fontSize: 16,
+        fontWeight: '600',
+        lineHeight: 18,
+    },
+    imageViewerHint: {
+        position: 'absolute',
+        bottom: 36,
+        alignSelf: 'center',
+    },
+    imageViewerHintText: {
+        color: 'rgba(255,255,255,0.35)',
+        fontSize: 12,
+        textAlign: 'center',
     },
 });

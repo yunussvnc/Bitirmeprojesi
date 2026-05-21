@@ -217,6 +217,7 @@ export default function FeedScreen() {
 
   const handleHidePost = useCallback((postId: number) => {
     setPosts((prev) => prev.filter((p) => p.id !== postId));
+    useAppStore.getState().addDeletedPostId(postId);
   }, []);
 
   const handleSharePost = useCallback(async (post: Post) => {
