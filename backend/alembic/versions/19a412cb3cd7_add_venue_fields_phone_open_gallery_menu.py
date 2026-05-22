@@ -19,11 +19,20 @@ depends_on: Union[str, Sequence[str], None] = None
 
 
 def upgrade() -> None:
+    # Check if columns already exist (to handle merge migration conflicts)
+    conn = op.get_bind()
+    inspector = sa.inspect(conn)
+    places_columns = [col['name'] for col in inspector.get_columns('places')]
+    
     with op.batch_alter_table('places', schema=None) as batch_op:
-        batch_op.add_column(sa.Column('is_open', sa.Boolean(), nullable=True))
-        batch_op.add_column(sa.Column('phone_number', sa.String(), nullable=True))
-        batch_op.add_column(sa.Column('gallery_urls', sa.Text(), nullable=True))
-        batch_op.add_column(sa.Column('menu_items_json', sa.Text(), nullable=True))
+        if 'is_open' not in places_columns:
+            batch_op.add_column(sa.Column('is_open', sa.Boolean(), nullable=True))
+        if 'phone_number' not in places_columns:
+            batch_op.add_column(sa.Column('phone_number', sa.String(), nullable=True))
+        if 'gallery_urls' not in places_columns:
+            batch_op.add_column(sa.Column('gallery_urls', sa.Text(), nullable=True))
+        if 'menu_items_json' not in places_columns:
+            batch_op.add_column(sa.Column('menu_items_json', sa.Text(), nullable=True))
 
 
 def downgrade() -> None:
