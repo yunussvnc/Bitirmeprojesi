@@ -1,0 +1,136 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                    RENDER.COM DEPLOYMENT - HIZLI ADIMLAR                   ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+📋 ÖNCE BU DOSYALARI OKUYUN:
+   • DEPLOYMENT_SUMMARY.md (Hızlı Özet)
+   • RENDER_DEPLOYMENT.md (Detaylı Rehber)
+   • ENV_VARIABLES_CHECKLIST.md (Environment Variables)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🚀 ADIM ADIM DEPLOYMENT:
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ 1. GIT PUSH                                                                 │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+   git add backend/runtime.txt backend/build.sh backend/render.yaml
+   git commit -m "Add Render deployment config"
+   git push origin main
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ 2. RENDER.COM - HESAP                                                       │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+   → render.com
+   → "Get Started for Free"
+   → GitHub ile giriş yap
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ 3. POSTGRESQL OLUŞTUR                                                       │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+   Dashboard → New → PostgreSQL
+   
+   Name:     asemos-db
+   Region:   Frankfurt
+   Plan:     Free
+   
+   ⚠️ "Internal Database URL"i kopyala! (Environment variables için gerekli)
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ 4. WEB SERVICE OLUŞTUR                                                      │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+   Dashboard → New → Web Service
+   
+   Repository:      BitirmeProjesi (GitHub)
+   Branch:          main
+   Root Directory:  backend
+   Runtime:         Python 3
+   Region:          Frankfurt
+   
+   Build Command:   chmod +x build.sh && ./build.sh
+   Start Command:   uvicorn main:app --host 0.0.0.0 --port $PORT
+   
+   Instance Type:   Free
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ 5. ENVIRONMENT VARIABLES                                                    │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+   Environment tab'dan EKLE:
+
+   🔴 KRİTİK (mevcut .env'den kopyala):
+   ────────────────────────────────────────
+   DATABASE_URL               ← PostgreSQL'den kopyala (Adım 3)
+   JWT_SECRET_KEY             ← YENİ güçlü key oluştur!
+   GROQ_API_KEY              ← gsk_...
+   GOOGLE_MAPS_API_KEY       ← AIzaSy...
+   SMTP_USER                  ← Gmail adresi
+   SMTP_PASS                  ← Gmail App Password
+   CLOUDINARY_CLOUD_NAME      ← Cloud name
+   CLOUDINARY_API_KEY         ← API key
+   CLOUDINARY_API_SECRET      ← API secret
+
+   🟢 STANDART (olduğu gibi kopyala):
+   ────────────────────────────────────────
+   JWT_ALGORITHM              = HS256
+   JWT_ACCESS_TOKEN_EXPIRE_MINUTES = 30
+   JWT_REFRESH_TOKEN_EXPIRE_DAYS = 30
+   ALLOWED_ORIGINS            = *
+   LLM_ENABLED                = True
+   LLM_PROVIDER               = groq
+   GROQ_MODEL                 = llama-3.1-8b-instant
+   RECOMMEND_CACHE_TTL        = 1800
+   SMTP_HOST                  = smtp.gmail.com
+   SMTP_PORT                  = 587
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ 6. DEPLOY!                                                                  │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+   "Create Web Service" → Logs'u izle (5-10 dakika)
+   
+   ✅ "Your service is live at https://asemos-backend.onrender.com"
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ 7. TEST ET                                                                  │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+   curl https://asemos-backend.onrender.com/health
+   
+   Beklenen: {"status": "ok", ...}
+
+═══════════════════════════════════════════════════════════════════════════════
+
+⚠️ ÖNEMLİ NOTLAR:
+
+   • DATABASE_URL: "Internal" kullan, "External" değil!
+   • JWT_SECRET_KEY: Production için yeni key oluştur!
+     python -c "import secrets; print(secrets.token_hex(32))"
+   • SMTP_PASS: Gmail App Password kullan (normal şifre değil!)
+   • Free tier: 15 dk inaktivite sonrası uyur (ilk istek yavaş)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+📱 MOBILE APP BAĞLANTISI:
+
+   1. Mobile app'te backend URL'i güncelle:
+      const API_URL = "https://asemos-backend.onrender.com";
+   
+   2. APK oluştur:
+      cd apps/mobile
+      eas build --platform android --profile preview
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🎉 TEBRİKLER! Backend'iniz production'da!
+
+API URL: https://asemos-backend.onrender.com
+Docs:    https://asemos-backend.onrender.com/docs
+
+Bu URL'i profesörünüzle APK ile birlikte paylaşabilirsiniz!
+
+═══════════════════════════════════════════════════════════════════════════════
