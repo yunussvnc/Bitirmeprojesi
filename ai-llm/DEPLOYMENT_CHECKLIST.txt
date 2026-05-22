@@ -1,0 +1,255 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                  AI-LLM SERVICE DEPLOYMENT CHECKLIST                       ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+📅 Tarih: _______________
+👤 Deploy Eden: _______________
+
+═══════════════════════════════════════════════════════════════════════════════
+
+📋 ÖN HAZIRLIK
+
+   ☐ Backend servisi zaten deploy edilmiş (asemos-backend)
+   ☐ PostgreSQL database hazır (asemos-db)
+   ☐ Database URL (Internal) kopyalandı
+   ☐ GROQ_API_KEY hazır
+   ☐ SERPAPI_KEY hazır
+   ☐ GOOGLE_MAPS_API_KEY hazır (opsiyonel)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🗂️ DOSYA KONTROLÜ
+
+   ☐ ai-llm/runtime.txt              (Python 3.11.11)
+   ☐ ai-llm/build.sh                 (Build script)
+   ☐ ai-llm/render.yaml              (Render config)
+   ☐ ai-llm/requirements.txt         (Dependencies)
+   ☐ ai-llm/app.py                   (Main app)
+   ☐ ai-llm/QUICK_DEPLOY_STEPS.txt   (Deployment guide)
+   ☐ ai-llm/ENV_VARIABLES_CHECKLIST.md
+   ☐ ai-llm/DEPLOYMENT_README.md
+   ☐ ai-llm/BACKEND_INTEGRATION.md
+
+═══════════════════════════════════════════════════════════════════════════════
+
+📤 GIT PUSH
+
+   ☐ git add ai-llm/
+   ☐ git commit -m "Add AI-LLM Render deployment config"
+   ☐ git push origin main
+   ☐ GitHub'da dosyalar görünüyor
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🌐 RENDER.COM SETUP
+
+   ☐ Dashboard → New → Web Service
+   ☐ Repository: BitirmeProjesi seçildi
+   ☐ Branch: main
+   ☐ Root Directory: ai-llm ⚠️ (ÖNEMLI!)
+   ☐ Runtime: Python 3
+   ☐ Region: Frankfurt
+   ☐ Build Command: chmod +x build.sh && ./build.sh
+   ☐ Start Command: uvicorn app:app --host 0.0.0.0 --port $PORT
+   ☐ Instance Type: Free
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🔑 ENVIRONMENT VARIABLES - KRİTİK
+
+   ☐ GROQ_API_KEY         = _______________________________________
+   ☐ SERPAPI_KEY          = _______________________________________
+   ☐ DATABASE_URL         = _______________________________________ (Internal)
+   ☐ BACKEND_API_URL      = https://asemos-backend.onrender.com
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🔑 ENVIRONMENT VARIABLES - STANDART
+
+   ☐ GROQ_MODEL                 = llama-3.1-8b-instant
+   ☐ LLM_PROVIDER              = layered
+   ☐ HUGGINGFACE_MODEL         = google/gemma-2-2b-it
+   ☐ USE_4BIT_QUANTIZATION     = true
+   ☐ EMBEDDING_MODEL           = sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2
+   ☐ EMBEDDING_DEVICE          = cpu
+   ☐ TOP_K_RESULTS             = 5
+   ☐ SIMILARITY_THRESHOLD      = 0.4
+   ☐ CORS_ORIGINS              = *
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🔑 ENVIRONMENT VARIABLES - OPSİYONEL (Boş bırakılabilir)
+
+   ☐ QDRANT_URL               = (boş)
+   ☐ QDRANT_COLLECTION_NAME   = mekan_embeddings
+   ☐ REDIS_URL                = (boş)
+   ☐ REDIS_TTL_SECONDS        = 3600
+   ☐ GOOGLE_MAPS_API_KEY      = _______________________ (opsiyonel)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🚀 DEPLOYMENT
+
+   ☐ "Create Web Service" tıklandı
+   ☐ Build başladı (logs açık)
+   
+   Build Progress:
+   ☐ Dependencies yükleniyor... (~10-15 dk)
+   ☐ PyTorch/Transformers yükleniyor...
+   ☐ Build başarılı!
+   ☐ Service başlatılıyor...
+   ☐ "Your service is live" mesajı geldi
+   
+   URL: https://asemos-ai.onrender.com
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🧪 TEST - HEALTH CHECK
+
+   ☐ Terminal açıldı
+   ☐ Komut çalıştırıldı:
+   
+      curl https://asemos-ai.onrender.com/health
+   
+   ☐ Beklenen yanıt:
+   
+      {"status": "ok", "version": "2.1.0", ...}
+   
+   ☐ Sonuç: ___________
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🧪 TEST - SYSTEM INFO
+
+   ☐ Komut çalıştırıldı:
+   
+      curl https://asemos-ai.onrender.com/api/info
+   
+   ☐ Sistem bilgileri görüntülendi
+   ☐ Sonuç: ___________
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🧪 TEST - SMART SEARCH
+
+   ☐ Komut çalıştırıldı:
+   
+      curl -X POST https://asemos-ai.onrender.com/api/smart-search-v2 \
+        -H "Content-Type: application/json" \
+        -d '{"query": "Beşiktaş yakınında kafe", "location": "Istanbul"}'
+   
+   ☐ Mekan önerileri geldi
+   ☐ AI message oluşturuldu
+   ☐ Sonuç: ___________
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🔗 BACKEND INTEGRATION
+
+   ☐ Backend Render dashboard açıldı
+   ☐ Environment variables açıldı
+   ☐ Yeni variable eklendi:
+   
+      AI_SERVICE_URL = https://asemos-ai.onrender.com
+   
+   ☐ Backend manual deploy başlatıldı
+   ☐ Backend deploy başarılı
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🧪 TEST - BACKEND ↔ AI CONNECTION
+
+   ☐ Backend endpoint test edildi:
+   
+      curl https://asemos-backend.onrender.com/api/recommendations/ai-health
+   
+   ☐ Backend → AI bağlantısı çalışıyor
+   ☐ Sonuç: ___________
+
+═══════════════════════════════════════════════════════════════════════════════
+
+📱 MOBILE APP UPDATE
+
+   ☐ Mobile app config dosyası açıldı
+   ☐ Backend URL güncellendi:
+   
+      BACKEND_URL: 'https://asemos-backend.onrender.com'
+   
+   ☐ APK build başlatıldı (opsiyonel)
+   ☐ Mobile app test edildi
+
+═══════════════════════════════════════════════════════════════════════════════
+
+⚠️ EXPECTED WARNINGS (Normal)
+
+   ☐ "Redis connection failed" → Normal, kod fallback yapar
+   ☐ "Qdrant connection failed" → Normal, kod skip eder
+   ☐ "Model loading failed" → Normal, Groq API kullanılır
+   ☐ "Out of memory" → Normal, free tier RAM yetersiz
+   ☐ Cold start ~30 sn → Normal, free tier sleep
+
+═══════════════════════════════════════════════════════════════════════════════
+
+✅ SUCCESS CRITERIA
+
+Deployment başarılı sayılır:
+
+   ☐ /health endpoint OK
+   ☐ /api/info sistem bilgileri dönüyor
+   ☐ /api/smart-search-v2 mekan önerileri çalışıyor
+   ☐ Backend AI servisine bağlanabiliyor
+   ☐ Error handling çalışıyor
+   ☐ Logs temiz (kritik hata yok)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+📊 MONITORING SETUP
+
+   ☐ Render Dashboard → Logs bookmark yapıldı
+   ☐ Render Dashboard → Metrics bookmark yapıldı
+   ☐ Health check cron job kuruldu (opsiyonel):
+   
+      */5 * * * * curl -f https://asemos-ai.onrender.com/health
+   
+   ☐ API usage tracking başlatıldı
+
+═══════════════════════════════════════════════════════════════════════════════
+
+📝 DEPLOYMENT NOTES
+
+   Deployment Tarihi: _______________
+   Deployment Süresi: _______________
+   İlk Build Süresi: _______________
+   
+   Karşılaşılan Problemler:
+   _____________________________________________________________________
+   _____________________________________________________________________
+   
+   Çözümler:
+   _____________________________________________________________________
+   _____________________________________________________________________
+   
+   Production URL: https://asemos-ai.onrender.com
+   
+   Notlar:
+   _____________________________________________________________________
+   _____________________________________________________________________
+   _____________________________________________________________________
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🎉 DEPLOYMENT TAMAMLANDI!
+
+   Service Name:    asemos-ai
+   Production URL:  https://asemos-ai.onrender.com
+   API Docs:        https://asemos-ai.onrender.com/docs
+   Health:          https://asemos-ai.onrender.com/health
+   
+   Backend URL:     https://asemos-backend.onrender.com
+   Database:        asemos-db (shared)
+   
+   Status:          ☐ LIVE ☐ PENDING ☐ FAILED
+   
+   İmza: _______________
+
+═══════════════════════════════════════════════════════════════════════════════

@@ -1,0 +1,258 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║              RENDER.COM AI-LLM SERVİSİ DEPLOYMENT - HIZLI ADIMLAR         ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+📋 ÖNCEKİ ADIMLAR:
+   • Backend servisi zaten deploy edilmiş olmalı (asemos-backend)
+   • PostgreSQL database zaten hazır olmalı (asemos-db)
+   • Şimdi AI servisini deploy ediyoruz (asemos-ai)
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🚀 ADIM ADIM DEPLOYMENT:
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ 1. GIT PUSH                                                                 │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+   git add ai-llm/runtime.txt ai-llm/build.sh ai-llm/render.yaml
+   git commit -m "Add AI-LLM service Render deployment config"
+   git push origin main
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ 2. RENDER.COM - YENİ WEB SERVICE OLUŞTUR                                   │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+   Dashboard → New → Web Service
+   
+   Repository:      BitirmeProjesi (GitHub)
+   Branch:          main
+   Root Directory:  ai-llm          ⚠️ "backend" değil "ai-llm"!
+   Runtime:         Python 3
+   Region:          Frankfurt
+   
+   Build Command:   chmod +x build.sh && ./build.sh
+   Start Command:   uvicorn app:app --host 0.0.0.0 --port $PORT
+   
+   Instance Type:   Free
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ 3. ENVIRONMENT VARIABLES (AI Service)                                      │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+   Environment tab'dan EKLE:
+
+   🔴 KRİTİK (mevcut .env'den kopyala):
+   ────────────────────────────────────────
+   GROQ_API_KEY               ← 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
+   SERPAPI_KEY               ← 7611394bab18f12168e1aa91e034263a4ebdc2cb61fb2d28456027171c5aa887
+   GOOGLE_MAPS_API_KEY       ← AIzaSyBQY9P0Yywn15sfInnONao9SHCFcTcIR_w
+   DATABASE_URL              ← Backend ile AYNI database URL (asemos-db'den)
+
+   🟡 BACKEND İLETİŞİMİ:
+   ────────────────────────────────────────
+   BACKEND_API_URL           ← https://asemos-backend.onrender.com
+                               (Backend servisinizin URL'i)
+
+   🟢 STANDART (olduğu gibi):
+   ────────────────────────────────────────
+   GROQ_MODEL                = llama-3.1-8b-instant
+   LLM_PROVIDER              = layered
+   HUGGINGFACE_MODEL         = google/gemma-2-2b-it
+   USE_4BIT_QUANTIZATION     = true
+   EMBEDDING_MODEL           = sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2
+   EMBEDDING_DEVICE          = cpu
+   TOP_K_RESULTS             = 5
+   SIMILARITY_THRESHOLD      = 0.4
+   CORS_ORIGINS              = *
+   
+   ⚪ OPSİYONEL (boş bırakılabilir):
+   ────────────────────────────────────────
+   QDRANT_URL                = (boş - Render'da Qdrant yok)
+   REDIS_URL                 = (boş - Render'da Redis yok)
+   QDRANT_COLLECTION_NAME    = mekan_embeddings
+   REDIS_TTL_SECONDS         = 3600
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ 4. DEPLOY!                                                                  │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+   "Create Web Service" → Logs'u izle (10-15 dakika)
+   
+   ⚠️ İLK DEPLOYMENT UZUN SÜREBİLİR:
+      • PyTorch ve ML kütüphaneleri ağırdır (~2GB)
+      • Embedding model startup'ta indirilir
+      • İlk başlangıç 5-10 dakika sürebilir
+   
+   ✅ "Your service is live at https://asemos-ai.onrender.com"
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ 5. TEST ET                                                                  │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+   # Health check
+   curl https://asemos-ai.onrender.com/health
+   
+   Beklenen: {"status": "ok", "version": "2.1.0", ...}
+   
+   # Sistem bilgileri
+   curl https://asemos-ai.onrender.com/api/info
+   
+   # Test arama
+   curl -X POST https://asemos-ai.onrender.com/api/smart-search-v2 \
+     -H "Content-Type: application/json" \
+     -d '{"query": "Beşiktaş yakınında deniz manzaralı kafe", "location": "Istanbul"}'
+
+┌─────────────────────────────────────────────────────────────────────────────┐
+│ 6. BACKEND'E AI SERVICE URL EKLE                                           │
+└─────────────────────────────────────────────────────────────────────────────┘
+
+   Backend servisi AI servisini çağırabilsin diye:
+   
+   1. Render Dashboard → asemos-backend → Environment
+   
+   2. Yeni environment variable ekle:
+      
+      AI_SERVICE_URL = https://asemos-ai.onrender.com
+   
+   3. Manuel Deploy (sağ üstte "Manual Deploy" → "Deploy latest commit")
+
+═══════════════════════════════════════════════════════════════════════════════
+
+⚠️ ÖNEMLİ NOTLAR:
+
+   • DATABASE_URL: Backend ile AYNI database kullan!
+   • Free Tier Sınırları:
+     - 512 MB RAM (ML modelleri için az, bazı özellikler devre dışı kalabilir)
+     - 15 dk inaktivite sonrası uyur (ilk istek yavaş - cold start ~30 sn)
+     - PyTorch/Transformers çok ağır → bazı özellikler çalışmayabilir
+   
+   • Optimize Edilmiş Ayarlar (Free Tier için):
+     - Quantization: true (bellek tasarrufu)
+     - Device: cpu (GPU yok)
+     - Minimal model: gemma-2-2b-it (en küçük model)
+   
+   • Qdrant & Redis: 
+     - Free tier'da harici servis bağlanamaz
+     - Kod otomatik fallback yapar (çalışmaya devam eder)
+     - Performans düşer ama işlevsellik korunur
+
+═══════════════════════════════════════════════════════════════════════════════
+
+📊 SERVİS MİMARİSİ:
+
+   ┌──────────────┐         ┌──────────────┐         ┌──────────────┐
+   │              │         │              │         │              │
+   │    Mobile    │────────▶│   Backend    │────────▶│   AI-LLM     │
+   │     App      │         │   (Main)     │         │   Service    │
+   │              │         │              │         │              │
+   └──────────────┘         └──────────────┘         └──────────────┘
+                                   │                        │
+                                   │                        │
+                                   └────────┬───────────────┘
+                                            ▼
+                                   ┌──────────────┐
+                                   │              │
+                                   │  PostgreSQL  │
+                                   │  (asemos-db) │
+                                   │              │
+                                   └──────────────┘
+
+   URL'ler:
+   • Backend:  https://asemos-backend.onrender.com
+   • AI:       https://asemos-ai.onrender.com
+   • Database: Internal Render.com URL
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🔗 SERVİSLER ARASI İLETİŞİM:
+
+   Backend → AI Service çağrıları:
+   
+   1. Kullanıcı backend'e istek atar
+   2. Backend, AI servisi gerekiyorsa AI_SERVICE_URL'i kullanır
+   3. AI servisi yanıt döner
+   4. Backend mobil app'e yanıt gönderir
+   
+   Örnek backend kodu:
+   
+   import httpx
+   
+   AI_SERVICE_URL = os.getenv("AI_SERVICE_URL", "http://localhost:8080")
+   
+   async def get_smart_recommendations(query: str):
+       async with httpx.AsyncClient() as client:
+           response = await client.post(
+               f"{AI_SERVICE_URL}/api/smart-search-v2",
+               json={"query": query, "location": "Istanbul"}
+           )
+           return response.json()
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🎯 EXPECTED DEPLOYMENT FLOW:
+
+   1. Push kodu ✓
+   2. Render build başlar (10-15 dk)
+      → pip install requirements.txt
+      → ML kütüphaneleri indirilir
+   3. Service başlar
+      → Models preload edilir (arka planda)
+      → Redis/Qdrant bağlanamaz (ignore)
+   4. Health check OK ✓
+   5. Service hazır!
+
+═══════════════════════════════════════════════════════════════════════════════
+
+🎉 TEBRİKLER! AI Servisiniz production'da!
+
+AI API URL:  https://asemos-ai.onrender.com
+Health:      https://asemos-ai.onrender.com/health
+API Docs:    https://asemos-ai.onrender.com/docs
+Info:        https://asemos-ai.onrender.com/api/info
+
+Backend URL: https://asemos-backend.onrender.com
+
+═══════════════════════════════════════════════════════════════════════════════
+
+📝 CHECKLIST:
+
+   ☐ Git push yapıldı
+   ☐ Render.com'da yeni Web Service oluşturuldu
+   ☐ Root directory: ai-llm seçildi
+   ☐ Environment variables eklendi:
+      ☐ GROQ_API_KEY
+      ☐ SERPAPI_KEY
+      ☐ GOOGLE_MAPS_API_KEY
+      ☐ DATABASE_URL
+      ☐ BACKEND_API_URL
+   ☐ Deploy başladı ve başarıyla tamamlandı
+   ☐ /health endpoint test edildi
+   ☐ /api/smart-search-v2 test edildi
+   ☐ Backend'e AI_SERVICE_URL eklendi
+   ☐ Backend yeniden deploy edildi
+
+═══════════════════════════════════════════════════════════════════════════════
+
+❓ SORUN GİDERME:
+
+   SORUN: "ModuleNotFoundError: No module named 'torch'"
+   ÇÖZÜM: requirements.txt'te torch var mı kontrol et, rebuild et
+
+   SORUN: "Out of memory" / "Killed"
+   ÇÖZÜM: Free tier RAM yetersiz, model yüklemesi başarısız
+          → Normal, çoğu özellik Groq API ile çalışır
+          → Local model özelliği devre dışı kalır (OK)
+
+   SORUN: Service çok yavaş başlıyor
+   ÇÖZÜM: ML modelleri ağır, normal (~30 sn cold start)
+
+   SORUN: Redis/Qdrant bağlanamıyor
+   ÇÖZÜM: Normal, free tier'da harici servis yok
+          → Kod otomatik fallback yapar (çalışmaya devam eder)
+
+   SORUN: Backend AI servisine erişemiyor
+   ÇÖZÜM: Backend'deki AI_SERVICE_URL doğru mu?
+          → https://asemos-ai.onrender.com (trailing slash YOK)
+
+═══════════════════════════════════════════════════════════════════════════════
