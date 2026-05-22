@@ -1,7 +1,7 @@
 """add_pending_users
 
 Revision ID: faff45b5894d
-Revises: c9f113d270ec
+Revises: ebc9379c7d94
 Create Date: 2026-03-10 17:12:52.008403
 
 """
@@ -13,7 +13,7 @@ import sqlalchemy as sa
 
 # revision identifiers, used by Alembic.
 revision: str = 'faff45b5894d'
-down_revision: Union[str, None] = 'c9f113d270ec'
+down_revision: Union[str, None] = 'ebc9379c7d94'
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
 
