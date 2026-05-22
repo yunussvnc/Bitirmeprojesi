@@ -1,8 +1,8 @@
 # FastAPI ve Web Framework
 fastapi==0.104.1
 uvicorn[standard]==0.24.0
-pydantic==2.5.0
-pydantic-settings==2.1.0
+pydantic>=2.12.0
+pydantic-settings>=2.2.0
 
 # Machine Learning ve NLP
 torch==2.12.0
