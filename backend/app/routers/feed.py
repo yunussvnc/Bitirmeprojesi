@@ -74,6 +74,7 @@ def _post_to_schema(post: models.Post, db: Session, current_user_id: int | None)
     )
 
 
+# pyrefly: ignore [missing-import]
 from fastapi.concurrency import run_in_threadpool
 import json
 
@@ -278,9 +279,24 @@ def get_post_comments(
     page: int = Query(1, ge=1),
     page_size: int = Query(20, ge=1, le=100),
     db: Session = Depends(get_db),
+    current_user: Optional[models.User] = Depends(get_optional_user),
 ):
     """Gönderinin altındaki yorumları sayfalı olarak getirir."""
-    comments, total = crud.get_comments_paginated(db, post_id, page, page_size)
+    blocked_ids = set()
+    if current_user:
+        blocked_by_me = {r[0] for r in db.query(models.UserBlock.blocked_id).filter(models.UserBlock.blocker_id == current_user.id).all()}
+        blocked_me = {r[0] for r in db.query(models.UserBlock.blocker_id).filter(models.UserBlock.blocked_id == current_user.id).all()}
+        blocked_ids = blocked_by_me | blocked_me
+
+    # Normalde crud içinde yapılmalı ama basitlik için burada filtreleyebiliriz.
+    # Doğru sayfalama için DB bazında filtrelemek daha iyi:
+    comments_query = db.query(models.Comment).filter(models.Comment.post_id == post_id)
+    if blocked_ids:
+        comments_query = comments_query.filter(models.Comment.user_id.notin_(blocked_ids))
+        
+    total = comments_query.count()
+    comments = comments_query.order_by(models.Comment.created_at.desc()).offset((page - 1) * page_size).limit(page_size).all()
+    
     out = []
     for c in comments:
         d = {"id": c.id, "user_id": c.user_id, "post_id": c.post_id, "text": c.text, "created_at": c.created_at}

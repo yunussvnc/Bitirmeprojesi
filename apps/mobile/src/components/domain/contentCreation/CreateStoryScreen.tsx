@@ -60,7 +60,11 @@ export default function CreateStoryScreen() {
         style: "destructive",
         onPress: () => {
           lightImpact();
-          router.back();
+          if (router.canGoBack()) {
+            router.back();
+          } else {
+            router.replace("/(tabs)/feed");
+          }
         },
       },
     ]);
@@ -114,7 +118,11 @@ export default function CreateStoryScreen() {
 
       success();
       // Instagram-style: Return immediately
-      router.back();
+      if (router.canGoBack()) {
+        router.back();
+      } else {
+        router.replace("/(tabs)/feed");
+      }
     },
     [storySaveToCameraRoll, enqueueStory]
   );
@@ -159,7 +167,7 @@ interface StoryShareStepProps {
   selectedPlace: Place | null;
   onPlaceChange: (place: Place | null) => void;
   onPlacePickerOpen: () => void;
-  onShare: (payload: { placeId?: number; placeName?: string; type?: 'story' | 'close_friends' }) => Promise<void>;
+  onShare: (payload: { placeId?: number; placeName?: string; type?: 'story' }) => Promise<void>;
   onBack: () => void;
   onClose: () => void;
 }
@@ -176,12 +184,12 @@ function StoryShareStep({
 }: StoryShareStepProps) {
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
-  const [loading, setLoading] = useState<"story" | "close_friends" | null>(null);
+  const [loading, setLoading] = useState<"story" | null>(null);
   const { t } = useTranslation();
   
   const authUser = useAuthStore((s) => s.user);
 
-  const handleShareClick = async (type: "story" | "close_friends") => {
+  const handleShareClick = async (type: "story") => {
     setLoading(type);
     try {
       // NOTE: "close_friends" payload can be added to the backend schema in future
@@ -250,23 +258,6 @@ function StoryShareStep({
              )}
           </TouchableOpacity>
 
-          <TouchableOpacity
-            style={[styles.shareBtnPill, { backgroundColor: '#1DB954' }]} // Spotify green for Close friends
-            onPress={() => handleShareClick("close_friends")}
-            disabled={loading !== null}
-            activeOpacity={0.8}
-          >
-             {loading === "close_friends" ? (
-               <ActivityIndicator size="small" color="#fff" />
-              ) : (
-               <>
-                 <View style={styles.closeFriendsIconWrap}>
-                   <IconSymbol name="star.fill" size={14} color="#fff" />
-                 </View>
-                 <Text style={styles.shareBtnText}>{t("content_creation.close_friends")}</Text>
-               </>
-             )}
-          </TouchableOpacity>
 
           <TouchableOpacity
             style={[styles.shareBtnCircle, { backgroundColor: '#fff' }]}

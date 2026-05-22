@@ -73,7 +73,6 @@ export default function SettingsIndexScreen() {
       title: t('settings_main.section_visibility'),
       items: [
         { label: t('settings_main.account_privacy'), value: isPrivate ? t('settings_main.private') : t('settings_main.public'), onPress: nav("/settings/privacy"), icon: "lock", showArrow: true, keywords: ["gizlilik", "privacy"] },
-        { label: t('settings_main.close_friends'), onPress: nav("/settings/close-friends"), icon: "star", showArrow: true, keywords: ["yakın arkadaş", "close friends"] },
         { label: t('settings_main.blocked'), onPress: nav("/settings/blocked-users"), icon: "nosign", showArrow: true, keywords: ["engellenen", "blocked"] },
         { label: t('settings_main.story_location'), onPress: nav("/settings/story"), icon: "location.slash", showArrow: true, keywords: ["hikaye", "story", "location"] },
       ],

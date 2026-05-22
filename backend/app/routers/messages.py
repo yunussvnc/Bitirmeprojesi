@@ -6,7 +6,9 @@ import logging
 from datetime import datetime, timezone
 from typing import List, Optional
 
+# pyrefly: ignore [missing-import]
 from fastapi import APIRouter, Depends, HTTPException, WebSocket, WebSocketDisconnect, Query
+# pyrefly: ignore [missing-import]
 from sqlalchemy.orm import Session
 
 import models, schemas
@@ -286,7 +288,23 @@ def get_messages(
 
     messages.reverse()
 
-    items = [_message_to_response(m) for m in messages]
+    # Blocked user filtering for shared posts
+    blocked_by_me = {r[0] for r in db.query(models.UserBlock.blocked_id).filter(models.UserBlock.blocker_id == current_user.id).all()}
+    blocked_me = {r[0] for r in db.query(models.UserBlock.blocker_id).filter(models.UserBlock.blocked_id == current_user.id).all()}
+    all_blocked_ids = blocked_by_me | blocked_me
+
+    items = []
+    for m in messages:
+        resp = _message_to_response(m)
+        if resp.shared_post_id and all_blocked_ids:
+            post = db.query(models.Post).filter(models.Post.id == resp.shared_post_id).first()
+            if post and post.user_id in all_blocked_ids:
+                author = db.query(models.User).filter(models.User.id == post.user_id).first()
+                author_name = author.username if author else "Bilinmeyen"
+                resp.content = f"Engellediğiniz {author_name} kullanıcısının gönderisi"
+                resp.shared_post_id = None
+                resp.media_url = None
+        items.append(resp)
     return schemas.PaginatedMessages(
         items=items, total=total, page=page, page_size=page_size
     )
@@ -612,10 +630,26 @@ async def websocket_chat(
                         "message": msg_data,
                     })
 
+                    msg_data_for_receiver = msg_data.copy()
+                    
+                    if msg.shared_post_id:
+                        blocked_by_receiver = {r[0] for r in db.query(models.UserBlock.blocked_id).filter(models.UserBlock.blocker_id == other_user_id).all()}
+                        blocked_receiver = {r[0] for r in db.query(models.UserBlock.blocker_id).filter(models.UserBlock.blocked_id == other_user_id).all()}
+                        receiver_all_blocked = blocked_by_receiver | blocked_receiver
+                        
+                        if receiver_all_blocked:
+                            post = db.query(models.Post).filter(models.Post.id == msg.shared_post_id).first()
+                            if post and post.user_id in receiver_all_blocked:
+                                author = db.query(models.User).filter(models.User.id == post.user_id).first()
+                                author_name = author.username if author else "Bilinmeyen"
+                                msg_data_for_receiver["content"] = f"Engellediğiniz {author_name} kullanıcısının gönderisi"
+                                msg_data_for_receiver["shared_post_id"] = None
+                                msg_data_for_receiver["media_url"] = None
+
                     # Karşı tarafa ilet
                     delivered = await manager.send_to_user(conversation_id, other_user_id, {
                         "type": "new_message",
-                        "message": msg_data,
+                        "message": msg_data_for_receiver,
                     })
 
                     if delivered:

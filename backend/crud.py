@@ -636,6 +636,7 @@ def get_feed_paginated_cursor(
         - Cursor formatı: "<created_at_iso>:<post_id>"
     """
     from datetime import datetime as _dt
+    # pyrefly: ignore [missing-import]
     from sqlalchemy import or_, and_
 
     if filter_mode == "following":
@@ -722,8 +723,13 @@ def get_feed_paginated_cursor(
     base = db.query(models.Post).filter(models.Post.is_flagged == False)
 
     if current_user_id:
-        # Takip ettiklerimi ve private hesapları çıkar, kendimi de çıkar
-        exclude_ids = my_following_ids | private_user_ids | {current_user_id}
+        # Engellediğim veya beni engelleyen kişileri bul
+        blocked_by_me = {r[0] for r in db.query(models.UserBlock.blocked_id).filter(models.UserBlock.blocker_id == current_user_id).all()}
+        blocked_me = {r[0] for r in db.query(models.UserBlock.blocker_id).filter(models.UserBlock.blocked_id == current_user_id).all()}
+        all_blocked_ids = blocked_by_me | blocked_me
+        
+        # Takip ettiklerimi, private hesapları, kendimi ve engellenenleri çıkar
+        exclude_ids = my_following_ids | private_user_ids | {current_user_id} | all_blocked_ids
         base = base.filter(models.Post.user_id.notin_(exclude_ids))
     else:
         # Giriş yapmamış → sadece public hesapların gönderileri
@@ -1034,6 +1040,7 @@ def get_feed_stories(
             .subquery()
         )
 
+        # pyrefly: ignore [missing-import]
         from sqlalchemy import or_, and_  # noqa – already imported at top level; kept for clarity
 
         # Gizlilik koşulu:
@@ -1490,6 +1497,18 @@ def toggle_block_user(db: Session, blocker_id: int, blocked_id: int) -> bool:
         return False
     block = models.UserBlock(blocker_id=blocker_id, blocked_id=blocked_id)
     db.add(block)
+    
+    # Engelleme durumunda her iki yöndeki takipler (follow ve follow_request) silinmeli
+    db.query(models.Follow).filter(
+        (
+            (models.Follow.follower_id == blocker_id) & 
+            (models.Follow.following_id == blocked_id)
+        ) | (
+            (models.Follow.follower_id == blocked_id) & 
+            (models.Follow.following_id == blocker_id)
+        )
+    ).delete(synchronize_session=False)
+
     db.commit()
     return True
 

@@ -33,7 +33,7 @@ export default function StorySettingsScreen() {
   const storySaveToCameraRoll = useSettingsStore((s) => s.storySaveToCameraRoll);
   const storyReplyAudience = useSettingsStore((s) => s.storyReplyAudience);
   const isPrivate = useSettingsStore((s) => s.isPrivateAccount);
-  const closeFriendCount = useSettingsStore((s) => s.closeFriendIds.length);
+
 
   const setStorySaveToArchive = useSettingsStore((s) => s.setStorySaveToArchive);
   const setStorySaveToCameraRoll = useSettingsStore((s) => s.setStorySaveToCameraRoll);
@@ -70,16 +70,7 @@ export default function StorySettingsScreen() {
           <Text style={[styles.hint, { color: colors.text.tertiary }]}>
             {t("settings_extra.story_hide_hint")}
           </Text>
-          <SettingsRow
-            label={t("settings_extra.story_close_friends")}
-            value={t("settings_extra.story_close_friends_count", { count: closeFriendCount })}
-            showArrow
-            icon="star.fill"
-            onPress={() => { lightImpact(); router.push("/settings/close-friends" as any); }}
-          />
-          <Text style={[styles.hint, { color: colors.text.tertiary }]}>
-            {t("settings_extra.story_close_friends_hint")}
-          </Text>
+
         </Section>
 
         <Section title={t("settings_extra.story_section_save")}>

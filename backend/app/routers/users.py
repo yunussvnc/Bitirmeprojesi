@@ -140,6 +140,21 @@ def get_user_profile(
     user = crud.get_user_by_id(db, user_id)
     if not user:
         raise HTTPException(status_code=404, detail="Kullanıcı bulunamadı.")
+        
+    if current_user:
+        # Hard block (Tam Görünmezlik) kontrolü
+        block_exists = db.query(models.UserBlock).filter(
+            (
+                (models.UserBlock.blocker_id == current_user.id) & 
+                (models.UserBlock.blocked_id == user_id)
+            ) | (
+                (models.UserBlock.blocker_id == user_id) & 
+                (models.UserBlock.blocked_id == current_user.id)
+            )
+        ).first()
+        if block_exists:
+            raise HTTPException(status_code=404, detail="Kullanıcı bulunamadı.")
+            
     followers_count = len(crud.get_follower_ids(db, user_id))
     following_count = len(crud.get_following_ids(db, user_id))
     
@@ -179,10 +194,26 @@ def get_user_profile(
 def get_user_stats_endpoint(
     user_id: int,
     db: Session = Depends(get_db),
+    current_user: Optional[models.User] = Depends(get_optional_user),
 ):
     user = crud.get_user_by_id(db, user_id)
     if not user:
         raise HTTPException(status_code=404, detail="Kullanıcı bulunamadı.")
+        
+    if current_user:
+        # Hard block (Tam Görünmezlik) kontrolü
+        block_exists = db.query(models.UserBlock).filter(
+            (
+                (models.UserBlock.blocker_id == current_user.id) & 
+                (models.UserBlock.blocked_id == user_id)
+            ) | (
+                (models.UserBlock.blocker_id == user_id) & 
+                (models.UserBlock.blocked_id == current_user.id)
+            )
+        ).first()
+        if block_exists:
+            raise HTTPException(status_code=404, detail="Kullanıcı bulunamadı.")
+            
     return crud.get_user_stats(db, user_id)
 
 

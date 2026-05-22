@@ -5,8 +5,11 @@ import random
 from typing import List, Optional
 from datetime import datetime, timedelta, timezone
 
+# pyrefly: ignore [missing-import]
 from fastapi import APIRouter, Depends, HTTPException
+# pyrefly: ignore [missing-import]
 from sqlalchemy.orm import Session
+# pyrefly: ignore [missing-import]
 from sqlalchemy import func as sa_func
 
 import models, schemas, crud
@@ -450,16 +453,32 @@ def get_match_conversations(
         models.MatchConversation.is_active == True,
     ).order_by(models.MatchConversation.last_message_at.desc().nullslast()).all()
 
+    # Bloklu kullanıcıları al
+    blocked_by_me = {r[0] for r in db.query(models.UserBlock.blocked_id).filter(models.UserBlock.blocker_id == current_user.id).all()}
+    blocked_me = {r[0] for r in db.query(models.UserBlock.blocker_id).filter(models.UserBlock.blocked_id == current_user.id).all()}
+    all_blocked_ids = blocked_by_me | blocked_me
+
     result = []
     for conv in convs:
         other_user_id = conv.user2_id if conv.user1_id == current_user.id else conv.user1_id
+        
+        # Ghost mod: Eğer birbirlerini engellemişlerse konuşmayı inbox'ta hiç gösterme
+        if other_user_id in all_blocked_ids:
+            continue
+            
         is_user1 = conv.user1_id == current_user.id
 
         other_profile = db.query(models.MatchProfile).filter(
             models.MatchProfile.user_id == other_user_id
         ).first()
 
-        other_name = other_profile.display_name if other_profile else "Bilinmeyen"
+        other_user = db.query(models.User).filter(models.User.id == other_user_id).first()
+
+        if other_profile:
+            other_name = other_profile.display_name
+        else:
+            other_name = other_user.first_name or other_user.username or "Bilinmeyen" if other_user else "Bilinmeyen"
+
         other_photo = None
         if other_profile and other_profile.photo_urls:
             try:
@@ -467,6 +486,9 @@ def get_match_conversations(
                 other_photo = photos[0] if photos else None
             except (json.JSONDecodeError, TypeError):
                 pass
+        
+        if not other_photo and other_user and other_user.avatar_url:
+            other_photo = other_user.avatar_url
 
         # Son mesajı al
         last_message = db.query(models.Message).filter(

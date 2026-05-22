@@ -15,6 +15,7 @@ import {
   Easing,
   Alert,
   Share,
+  Platform,
 } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -585,7 +586,7 @@ export default function FeedScreen() {
           initialNumToRender={6}
           maxToRenderPerBatch={6}
           windowSize={5}
-          removeClippedSubviews={true}
+          removeClippedSubviews={Platform.OS === "android"}
           scrollEnabled={!isCardZooming}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} tintColor={colors.accent.primary} />

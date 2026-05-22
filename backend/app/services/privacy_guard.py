@@ -3,6 +3,7 @@
 Munia-tarzı Gizlilik Doğrulama Katmanı (Privacy Validation Middleware).
 Gizli profillerin verilerinin API üzerinden sızmasını engeller.
 """
+# pyrefly: ignore [missing-import]
 from sqlalchemy.orm import Session
 import models
 
@@ -39,21 +40,33 @@ class PrivacyGuard:
         
         Kurallar:
         - Kendi profilin → her zaman True
+        - Viewer veya Target birbirini engellemişse → False (Ghost mode)
         - Hedef public → True
         - Hedef private & viewer takipçi → True
         - Hedef private & viewer takipçi DEĞİL → False
         """
-        # Kendi profilini her zaman görebilir
         if viewer_user_id and viewer_user_id == target_user_id:
             return True
 
-        # Public profiller herkese açık
+        # Ghost Mode (Engelleme) Kontrolü
+        if viewer_user_id:
+            block_exists = db.query(models.UserBlock).filter(
+                (
+                    (models.UserBlock.blocker_id == viewer_user_id) & 
+                    (models.UserBlock.blocked_id == target_user_id)
+                ) | (
+                    (models.UserBlock.blocker_id == target_user_id) & 
+                    (models.UserBlock.blocked_id == viewer_user_id)
+                )
+            ).first()
+            if block_exists:
+                return False
+
         if not PrivacyGuard.is_private(db, target_user_id):
             return True
 
-        # Private profil — takipçi kontrolü
         if not viewer_user_id:
-            return False  # Giriş yapmamış kullanıcı
+            return False
 
         return PrivacyGuard.is_follower(db, viewer_user_id, target_user_id)
 
