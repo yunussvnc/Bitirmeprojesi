@@ -107,7 +107,10 @@
     "search_ph": "Kişi veya mekan ara...",
     "recently_deleted": "Son Silinenler",
     "archived_title": "Arşivlenmiş Sohbetler",
-    "archived": "Arşivlendi"
+    "archived": "Arşivlendi",
+    "unarchive": "Arşivden Çıkar",
+    "archive_empty": "Arşiv Boş",
+    "archive_empty_desc": "Arşivlenmiş sohbetiniz bulunmuyor"
   },
   "settings": {
     "title": "Ayarlar",

@@ -64,7 +64,6 @@ export default function SettingsIndexScreen() {
           showArrow: true,
           keywords: ["kaydedildi", "saved", "bookmark"],
         },
-        { label: t('settings_main.deleted_messages'), onPress: nav("/settings/recently-deleted"), icon: "trash", showArrow: true, keywords: ["silinen", "deleted", "trash"] },
         { label: t('settings_main.visit_history'), onPress: nav("/settings/activity"), icon: "clock.arrow.circlepath", showArrow: true, keywords: ["geçmiş", "history", "activity"] },
         { label: t('settings_main.notifications'), onPress: nav("/notifications"), icon: "bell", showArrow: true, keywords: ["bildirimler", "notifications"] },
         { label: t('settings_main.content_prefs'), onPress: nav("/settings/content"), icon: "slider.horizontal.3", showArrow: true, keywords: ["içerik", "content", "preferences"] },

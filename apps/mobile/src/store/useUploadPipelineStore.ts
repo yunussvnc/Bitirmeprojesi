@@ -203,6 +203,8 @@ export const useUploadPipelineStore = create<UploadPipelineState>((set, get) => 
             media_url: url,
             thumbnail_url: thumbnailUrls[i],
             order_index: i,
+            width: job.mediaItems[i].width,
+            height: job.mediaItems[i].height,
           })),
         });
       }

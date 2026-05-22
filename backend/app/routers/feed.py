@@ -12,6 +12,8 @@ from app.dependencies import get_db, get_current_user, get_optional_user
 
 router = APIRouter(tags=["Feed"])
 
+FEED_PAGE_SIZE = 12  # Her sayfada kaç gönderi gelsin
+
 
 def _post_to_schema(post: models.Post, db: Session, current_user_id: int | None) -> schemas.Post:
     is_following = False
@@ -75,37 +77,50 @@ def _post_to_schema(post: models.Post, db: Session, current_user_id: int | None)
 from fastapi.concurrency import run_in_threadpool
 import json
 
-def _get_feed_db_sync(db: Session, page: int, page_size: int, current_user_id: int | None, filter_mode: str):
-    """DB işlemlerini threadpool'da güvenle çalıştırmak için kapsayıcı"""
-    posts, total = crud.get_feed_paginated(
+def _get_feed_db_sync(
+    db: Session,
+    cursor: str | None,
+    page_size: int,
+    current_user_id: int | None,
+    filter_mode: str,
+):
+    """DB işlemlerini threadpool'da güvenle çalıştırmak için kapsayıcı (cursor-based)"""
+    posts, next_cursor, has_more = crud.get_feed_paginated_cursor(
         db,
-        page=page,
+        cursor=cursor,
         page_size=page_size,
         current_user_id=current_user_id,
         filter_mode=filter_mode,
     )
     items = [_post_to_schema(p, db, current_user_id) for p in posts]
-    # Redis'e serialize edebilmek için dict'e çeviriyoruz
-    # schema.dict() datetime'ları otomatik ISO formata çevirmezse diye default=str kullanacağız
-    return {"items": [i.dict() for i in items], "total": total, "page": page, "page_size": page_size}
+    return {
+        "items": [i.dict() for i in items],
+        "next_cursor": next_cursor,
+        "has_more": has_more,
+        "page_size": page_size,
+    }
 
 
-@router.get("/feed", response_model=schemas.PaginatedPosts)
+@router.get("/feed", response_model=schemas.CursorPaginatedPosts)
 async def get_feed(
-    page: int = Query(1, ge=1),
-    page_size: int = Query(20, ge=1, le=100),
+    cursor: Optional[str] = Query(None, description="Sayfalama cursor'u (önceki yanıttaki next_cursor)"),
+    page_size: int = Query(FEED_PAGE_SIZE, ge=1, le=50),
     filter: str = Query("all", description="Filtre: all veya following"),
+    # Geriye dönük uyumluluk: eski istemciler page gönderebilir, görmezden gel
+    page: int = Query(1, ge=1, include_in_schema=False),
     db: Session = Depends(get_db),
     current_user: Optional[models.User] = Depends(get_optional_user),
 ):
-    """Ana akış (feed) için gönderileri getirir. Redis Cache destekler."""
+    """Ana akış (feed) için gönderileri cursor tabanlı sayfalama ile getirir."""
     from app.core.redis_client import get_redis
     redis = get_redis()
-    
+
     filter_mode = "following" if filter == "following" else "all"
-    user_id_str = str(current_user.id) if current_user else "anon"
-    cache_key = f"cache:feed:{filter_mode}:{user_id_str}:p{page}:s{page_size}"
-    
+    current_uid = current_user.id if current_user else None
+    user_id_str = str(current_uid) if current_uid else "anon"
+    cursor_key = cursor or "start"
+    cache_key = f"cache:feed_v2:{filter_mode}:{user_id_str}:c{cursor_key}:s{page_size}"
+
     if redis:
         try:
             cached = await redis.get(cache_key)
@@ -114,40 +129,47 @@ async def get_feed(
         except Exception:
             pass
 
-    # DB İşlemini ThreadPool'da çalıştır (Event loop blocklanmasın)
-    current_uid = current_user.id if current_user else None
-    result = await run_in_threadpool(_get_feed_db_sync, db, page, page_size, current_uid, filter_mode)
-    
+    result = await run_in_threadpool(
+        _get_feed_db_sync, db, cursor, page_size, current_uid, filter_mode
+    )
+
     if redis:
         try:
-            # TTL: 5 dakika (300 saniye)
-            await redis.setex(cache_key, 300, json.dumps(result, default=str))
+            ttl = 60 if cursor else 30  # İlk sayfa daha kısa cache (yeni içerik gelir)
+            await redis.setex(cache_key, ttl, json.dumps(result, default=str))
         except Exception:
             pass
 
     return result
 
 
-@router.get("/feed/reels", response_model=schemas.PaginatedPosts)
+@router.get("/feed/reels", response_model=schemas.CursorPaginatedPosts)
 def get_reels(
-    page: int = Query(1, ge=1),
-    page_size: int = Query(20, ge=1, le=100),
+    cursor: Optional[str] = Query(None),
+    page_size: int = Query(FEED_PAGE_SIZE, ge=1, le=50),
     filter: str = Query("all"),
+    page: int = Query(1, ge=1, include_in_schema=False),
     db: Session = Depends(get_db),
     current_user: Optional[models.User] = Depends(get_optional_user),
 ):
-    """Reels içeriklerini akış biçiminde getirir."""
+    """Reels içeriklerini cursor tabanlı sayfalama ile getirir."""
     filter_mode = "following" if filter == "following" else "all"
-    posts, total = crud.get_feed_paginated(
+    current_uid = current_user.id if current_user else None
+    posts, next_cursor, has_more = crud.get_feed_paginated_cursor(
         db,
-        page=page,
+        cursor=cursor,
         page_size=page_size,
-        current_user_id=current_user.id if current_user else None,
+        current_user_id=current_uid,
         filter_mode=filter_mode,
         post_type="reel",
     )
-    items = [_post_to_schema(p, db, current_user.id if current_user else None) for p in posts]
-    return schemas.PaginatedPosts(items=items, total=total, page=page, page_size=page_size)
+    items = [_post_to_schema(p, db, current_uid) for p in posts]
+    return schemas.CursorPaginatedPosts(
+        items=items,
+        next_cursor=next_cursor,
+        has_more=has_more,
+        page_size=page_size,
+    )
 
 
 @router.get("/feed/discover", response_model=schemas.PaginatedPosts)

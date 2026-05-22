@@ -154,3 +154,39 @@ export async function openConversation(userId: number): Promise<OpenConversation
         throw error;
     }
 }
+
+// --- Mesajlaşma Gizlilik Izni ---
+
+export interface ConversationPermission {
+    can_send: boolean;
+    can_send_media: boolean;
+    hide_read_receipt: boolean;
+    reason?: string;
+    messages_sent_count: number;
+    awaiting_reply: boolean;
+}
+
+/**
+ * Mevcut kullanıcının bu konuşmada mesajlaşma izinlerini sorgula.
+ * ChatScreen konuşma açılırken bunu çağırarak UI'ı kilitleme/açma için kullanır.
+ */
+export async function getConversationPermission(
+    conversationId: number
+): Promise<ConversationPermission> {
+    try {
+        return await apiGet<ConversationPermission>(
+            `/messages/${conversationId}/permission`
+        );
+    } catch (error) {
+        logger.error("[messageService] getConversationPermission error:", error);
+        // Hata durumunda güvenli fallback: her şeyi kilitle
+        return {
+            can_send: false,
+            can_send_media: false,
+            hide_read_receipt: true,
+            reason: "fetch_error",
+            messages_sent_count: 0,
+            awaiting_reply: false,
+        };
+    }
+}

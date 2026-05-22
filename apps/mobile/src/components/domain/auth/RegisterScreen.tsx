@@ -282,7 +282,6 @@ export default function RegisterScreen() {
             keyboardShouldPersistTaps="handled"
             showsVerticalScrollIndicator={false}
           >
-            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
               <View style={{ flex: 1 }}>
                 <View style={styles.content} pointerEvents="box-none">
                   <View style={styles.topBlock}>
@@ -358,7 +357,8 @@ export default function RegisterScreen() {
                             if (confirmPassword && t === confirmPassword) clearFieldError('confirmPassword');
                           }}
                           secureTextEntry
-                          autoComplete="password-new"
+                          autoComplete="off"
+                          textContentType="oneTimeCode"
                           error={errors.password}
                           containerStyle={styles.inputContainer}
                         />
@@ -369,7 +369,8 @@ export default function RegisterScreen() {
                           value={confirmPassword}
                           onChangeText={(t) => { setConfirmPassword(t); clearFieldError('confirmPassword'); }}
                           secureTextEntry
-                          autoComplete="password-new"
+                          autoComplete="off"
+                          textContentType="oneTimeCode"
                           error={errors.confirmPassword}
                           containerStyle={styles.inputContainer}
                         />
@@ -422,7 +423,6 @@ export default function RegisterScreen() {
                   </View>
                 </View>
               </View>
-            </TouchableWithoutFeedback>
           </ScrollView>
         </KeyboardAvoidingView>
           <TouchableOpacity

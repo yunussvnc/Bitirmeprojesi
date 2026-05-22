@@ -614,6 +614,211 @@ def get_feed_paginated(
     return posts, total
 
 
+def get_feed_paginated_cursor(
+    db: Session,
+    page_size: int = 12,
+    cursor: str | None = None,
+    current_user_id: int | None = None,
+    filter_mode: str = "all",
+    post_type: str | None = None,
+    scoring_context=None,   # FeedScoringContext | None — dışarıdan geçilebilir (test kolaylığı)
+):
+    """
+    Cursor tabanlı feed sayfalama.
+
+    filter_mode = "all"  → Puanlanmış / kişiselleştirilmiş keşfet akışı.
+        - Sadece hesabı açık (public) olan ve takip etmediğimiz kişilerin gönderileri.
+        - Her gönderi FeedScoringContext ile puanlanır (etkileşim + tazelik + sosyal + ilgi).
+        - Cursor formatı: "score:<float>:<post_id>"  (azalan skor sırası)
+
+    filter_mode = "following" → Saf kronolojik takip akışı.
+        - Sadece takip ettiklerinin gönderileri, zaman sırasıyla.
+        - Cursor formatı: "<created_at_iso>:<post_id>"
+    """
+    from datetime import datetime as _dt
+    from sqlalchemy import or_, and_
+
+    if filter_mode == "following":
+        # ── TAKIP AKışı: saf kronoloji ─────────────────────────────────────
+        if not current_user_id:
+            return [], None, False
+
+        following_ids_sq = (
+            db.query(models.Follow.following_id)
+            .filter(
+                models.Follow.follower_id == current_user_id,
+                models.Follow.status == "accepted",
+            )
+            .subquery()
+        )
+        base = (
+            db.query(models.Post)
+            .filter(
+                models.Post.is_flagged == False,
+                models.Post.user_id.in_(following_ids_sq),
+            )
+        )
+        if post_type:
+            base = base.filter(models.Post.post_type == post_type)
+
+        # Cursor decode (created_at:id formatı)
+        if cursor:
+            try:
+                cursor_dt_str, cursor_id_str = cursor.rsplit(":", 1)
+                cursor_dt = _dt.fromisoformat(cursor_dt_str)
+                cursor_id = int(cursor_id_str)
+                base = base.filter(
+                    or_(
+                        models.Post.created_at < cursor_dt,
+                        and_(
+                            models.Post.created_at == cursor_dt,
+                            models.Post.id < cursor_id,
+                        ),
+                    )
+                )
+            except (ValueError, AttributeError):
+                pass
+
+        posts = (
+            base.options(
+                joinedload(models.Post.user),
+                joinedload(models.Post.place),
+                joinedload(models.Post.media),
+                joinedload(models.Post.tags).joinedload(models.PostTag.user),
+            )
+            .order_by(models.Post.created_at.desc(), models.Post.id.desc())
+            .limit(page_size + 1)
+            .all()
+        )
+        has_more = len(posts) > page_size
+        if has_more:
+            posts = posts[:page_size]
+        next_cursor: str | None = None
+        if has_more and posts:
+            last = posts[-1]
+            next_cursor = f"{last.created_at.isoformat()}:{last.id}"
+        return posts, next_cursor, has_more
+
+    # ── HERKES AKışI: Puanlanmış Keşfet Feed'i ─────────────────────────────
+    # Sadece: hesabı açık + benim takip etmediğim (ve ben değilim) kişilerin gönderileri
+    from app.services.feed_scorer import FeedScoringContext, score_post
+
+    # Benim takip ettiklerimin ID seti
+    my_following_ids: set[int] = set()
+    if current_user_id:
+        rows = db.query(models.Follow.following_id).filter(
+            models.Follow.follower_id == current_user_id,
+            models.Follow.status == "accepted",
+        ).all()
+        my_following_ids = {r[0] for r in rows}
+
+    # Private hesapların ID seti
+    private_user_ids: set[int] = {
+        r[0] for r in db.query(models.UserPreferences.user_id)
+        .filter(models.UserPreferences.is_private_account == True).all()
+    }
+
+    # Filtre: kamuya açık, takip etmediğim, benim değilim
+    base = db.query(models.Post).filter(models.Post.is_flagged == False)
+
+    if current_user_id:
+        # Takip ettiklerimi ve private hesapları çıkar, kendimi de çıkar
+        exclude_ids = my_following_ids | private_user_ids | {current_user_id}
+        base = base.filter(models.Post.user_id.notin_(exclude_ids))
+    else:
+        # Giriş yapmamış → sadece public hesapların gönderileri
+        base = base.filter(models.Post.user_id.notin_(private_user_ids))
+
+    if post_type:
+        base = base.filter(models.Post.post_type == post_type)
+
+    # Cursor: "score:<float>:<post_id>"
+    # Puanlı feed'de cursor'u basit kronoloji yerine skor bazlı tutuyoruz.
+    # Pratik çözüm: cursor'dan sonraki sayfayı almak için geniş bir zaman penceresi çekip
+    # Python'da puanla, sonra offset ile kes.
+    # Büyük veritabanlarında bu pencereyi daraltmak gerekir; şu an son 30 günlük içerik yeterli.
+    cursor_score_threshold: float | None = None
+    cursor_post_id: int | None = None
+    if cursor and cursor.startswith("score:"):
+        try:
+            _, score_str, post_id_str = cursor.split(":", 2)
+            cursor_score_threshold = float(score_str)
+            cursor_post_id = int(post_id_str)
+        except (ValueError, AttributeError):
+            pass
+
+    # Puanlama bağlamını oluştur (dışarıdan geçilmemişse)
+    if scoring_context is None:
+        if current_user_id:
+            scoring_context = FeedScoringContext.build(db, current_user_id)
+        else:
+            scoring_context = FeedScoringContext.empty()
+
+    # Çekme penceresi: son 30 gün (çok eski içerik zaten düşük tazelik puanı alır)
+    from datetime import timedelta, timezone as _tz
+    window_start = _dt.now(_tz.utc) - timedelta(days=30)
+
+    # Makul bir batch çek (page_size * 8), puanla, sırala, kes
+    # Not: 25M+ veritabanında bu sorgu index taramasıyla hızlıdır.
+    BATCH_MULTIPLIER = 8
+    batch_size = page_size * BATCH_MULTIPLIER
+
+    raw_posts = (
+        base.filter(models.Post.created_at >= window_start)
+        .options(
+            joinedload(models.Post.user),
+            joinedload(models.Post.place),
+            joinedload(models.Post.media),
+            joinedload(models.Post.tags).joinedload(models.PostTag.user),
+        )
+        .order_by(models.Post.created_at.desc())
+        .limit(batch_size)
+        .all()
+    )
+
+    # Tüm postları puana göre sırala
+    scored: list[tuple[float, models.Post]] = []
+    for p in raw_posts:
+        s = score_post(
+            p,
+            fof_ids=scoring_context.fof_ids,
+            direct_following_of_friends=scoring_context.direct_following_of_friends,
+            user_interest_keywords=scoring_context.user_interest_keywords,
+            liked_place_categories=scoring_context.liked_place_categories,
+        )
+        scored.append((s, p))
+
+    # Azalan puana göre sırala, eşit puanda en yeni önce
+    scored.sort(key=lambda x: (-x[0], -x[1].id))
+
+    # Cursor'dan sonrasını al
+    if cursor_score_threshold is not None and cursor_post_id is not None:
+        # Cursor noktasından sonraki elemanları bul
+        cursor_idx = None
+        for i, (s, p) in enumerate(scored):
+            if p.id == cursor_post_id:
+                cursor_idx = i
+                break
+        if cursor_idx is not None:
+            scored = scored[cursor_idx + 1:]
+        else:
+            # Cursor bulunamadı (eski içerik temizlenmiş olabilir) — eşik bazlı geç
+            scored = [(s, p) for s, p in scored if s < cursor_score_threshold or (s == cursor_score_threshold and p.id < cursor_post_id)]
+
+    has_more = len(scored) > page_size
+    page_scored = scored[:page_size]
+
+    posts = [p for _, p in page_scored]
+
+    next_cursor_all: str | None = None
+    if has_more and page_scored:
+        last_score, last_post = page_scored[-1]
+        next_cursor_all = f"score:{last_score}:{last_post.id}"
+
+    return posts, next_cursor_all, has_more
+
+
+
 def get_post_by_id(db: Session, post_id: int):
     return (
         db.query(models.Post)

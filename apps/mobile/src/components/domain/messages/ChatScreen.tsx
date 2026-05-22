@@ -41,7 +41,7 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import { revealProfile } from "@/src/services/matchService";
 import { toggleBlockUser, createReport } from "@/src/services/moderationService";
-import { getMessages as fetchBackendMessages, sendMessage as backendSendMessage, markMessagesRead } from "@/src/services/messageService";
+import { getMessages as fetchBackendMessages, sendMessage as backendSendMessage, markMessagesRead, getConversationPermission, type ConversationPermission } from "@/src/services/messageService";
 import { useAuthStore } from "@/src/store/useAuthStore";
 import { logger } from "@/src/utils/logger";
 import { useTranslation } from "react-i18next";
@@ -70,7 +70,7 @@ interface Message {
 }
 
 /* ── Dummy Contact Data ── */
-const CONTACTS: Record<string, { name: string; avatar: string; isOnline: boolean }> = {
+const CONTACTS: Record<string, { name: string; avatar: string; isOnline: boolean; targetUserId?: number }> = {
     "1": { name: "Ahmet Yılmaz", avatar: "https://i.pravatar.cc/150?img=1", isOnline: true },
     "2": { name: "Elif Kaya", avatar: "https://i.pravatar.cc/150?img=5", isOnline: false },
     "3": { name: "Burak Demir", avatar: "https://i.pravatar.cc/150?img=3", isOnline: true },
@@ -231,6 +231,8 @@ export default function ChatScreen() {
     const [isOptionsVisible, setIsOptionsVisible] = useState(false);
     const [isReportVisible, setIsReportVisible] = useState(false);
     const [reportText, setReportText] = useState("");
+    // Mesajlaşma izin durumu
+    const [msgPermission, setMsgPermission] = useState<ConversationPermission | null>(null);
     // Image viewer
     const [selectedImageUri, setSelectedImageUri] = useState<string | null>(null);
     // Preview modal: URI seçildi, gönderilmedi — kullanıcı onaylasın
@@ -386,21 +388,8 @@ export default function ChatScreen() {
 
     const storeConversation = useMessagesStore((state) => state.conversations.find(c => c.id === resolvedChatId));
 
-    // historyClearedAt var ise ondan önceki mesajları filtrele (viewDeleted true değilse)
-    const visibleMessages = React.useMemo(() => {
-        if (storeConversation?.historyClearedAt && viewDeleted !== "true") {
-            return messages.filter(m => {
-                try {
-                    const msgTime = new Date(m.timestamp).getTime();
-                    if (isNaN(msgTime)) return true;
-                    return msgTime >= storeConversation.historyClearedAt!;
-                } catch {
-                    return true;
-                }
-            });
-        }
-        return messages;
-    }, [messages, storeConversation?.historyClearedAt]);
+    // Tüm mesajlar görünür (soft-delete kaldırıldı)
+    const visibleMessages = messages;
 
     useEffect(() => {
         useMessagesStore.getState().setActiveConversation(resolvedChatId);
@@ -559,19 +548,11 @@ export default function ChatScreen() {
                                 });
                             } else {
                                 const c = convs.find(c => c.id === chatId);
-                                let shouldUnhide = false;
-                                if (c?.isDeleted) {
-                                    const latestTime = new Date(latestMsg.timestamp).getTime();
-                                    if (c.historyClearedAt && !isNaN(latestTime) && latestTime > c.historyClearedAt) {
-                                        shouldUnhide = true;
-                                    }
-                                }
                                 useMessagesStore.getState().updateLastMessageAt(
                                     chatId,
                                     textToSave,
                                     latestMsg.timestamp,
                                     sender as any,
-                                    shouldUnhide
                                 );
                                 if (c?.isArchived) useMessagesStore.getState().unarchiveConversation(chatId);
                             }
@@ -595,6 +576,23 @@ export default function ChatScreen() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isBackendConv, numericConvId]);
 
+    // 🔐 Mesajlaşma iznini yükle (konuşma açılınca + her 10 saniyede bir yenile)
+    useEffect(() => {
+        if (!isBackendConv) {
+            // Dummy konuşma → tam serbest
+            setMsgPermission({ can_send: true, can_send_media: true, hide_read_receipt: false, messages_sent_count: 0, awaiting_reply: false });
+            return;
+        }
+        const loadPerm = async () => {
+            const perm = await getConversationPermission(numericConvId);
+            setMsgPermission(perm);
+        };
+        loadPerm();
+        const permInterval = setInterval(loadPerm, 10000);
+        return () => clearInterval(permInterval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isBackendConv, numericConvId]);
+
     // Contact bilgisini öncelik sırasıyla belirle:
     // 1. Mock CONTACTS (sadece sahte data için)
     // 2. Store'daki konuşma (önceden yüklenmiş)
@@ -604,14 +602,17 @@ export default function ChatScreen() {
         name: storeConversation.name,
         avatar: storeConversation.avatar,
         isOnline: storeConversation.isOnline,
+        targetUserId: storeConversation.targetUserId,
     } : nameParam ? {
         name: decodeURIComponent(nameParam),
         avatar: avatarParam ? decodeURIComponent(avatarParam) : `https://ui-avatars.com/api/?name=${encodeURIComponent(nameParam)}&background=random`,
         isOnline: false,
+        targetUserId: undefined,
     } : {
         name: "Kullanıcı",
         avatar: "https://ui-avatars.com/api/?name=K&background=random",
         isOnline: false,
+        targetUserId: undefined,
     });
 
     const isMatch = storeConversation?.isMatch;
@@ -699,6 +700,18 @@ export default function ChatScreen() {
 
     const sendMessage = () => {
         if (!inputText.trim()) return;
+
+        // 🔐 Gönderme izni kontrolü
+        if (msgPermission && !msgPermission.can_send) {
+            Alert.alert(
+                t("chat.restricted_title", "Mesaj Gönderilemedi"),
+                msgPermission.reason === "awaiting_reply"
+                    ? t("chat.awaiting_reply", "Karşı taraf henüz cevap vermedi. Cevap verene kadar yeni mesaj gönderemezsiniz.")
+                    : t("chat.cannot_send", "Bu kullanıcıya mesaj gönderme izniniz yok."),
+            );
+            return;
+        }
+
         lightImpact();
         const newMsg: Message = {
             id: String(Date.now()),
@@ -708,6 +721,10 @@ export default function ChatScreen() {
             status: "sent",
         };
         setMessages((prev) => [...prev, newMsg]);
+        // İzin sayacını optimistik olarak artır
+        if (msgPermission) {
+            setMsgPermission(prev => prev ? { ...prev, messages_sent_count: prev.messages_sent_count + 1, can_send: false, awaiting_reply: true } : prev);
+        }
         // Store'a ve conversations'a yaz
         if (chatId) {
             useChatMessagesStore.getState().addMessage(chatId, {
@@ -733,7 +750,7 @@ export default function ChatScreen() {
                     lastMessageAt: Date.now(),
                 });
             } else {
-                useMessagesStore.getState().updateLastMessageAt(chatId, newMsg.text, newMsg.timestamp, "me", true);
+                useMessagesStore.getState().updateLastMessageAt(chatId, newMsg.text, newMsg.timestamp, "me");
                 const c = convs.find(c => c.id === chatId);
                 if (c?.isArchived) useMessagesStore.getState().unarchiveConversation(chatId);
             }
@@ -758,6 +775,14 @@ export default function ChatScreen() {
     };
 
     const handleCameraPress = () => {
+        // 🔐 Medya izni kontrolü
+        if (msgPermission && !msgPermission.can_send_media) {
+            Alert.alert(
+                t("chat.restricted_title", "Medya Gönderilemedi"),
+                t("chat.media_restricted", "Bu konuşmada medya gönderebilmek için karşılıklı takipleşmeniz gerekiyor.")
+            );
+            return;
+        }
         Alert.alert(
             t("chat.send_photo", "Fotoğraf Gönder"),
             t("chat.photo_options_desc", "Lütfen bir seçenek belirleyin:"),
@@ -891,7 +916,7 @@ export default function ChatScreen() {
             // conversations store güncelle
             const textToSave = t('chat.photo', 'Fotoğraf 📷');
             setTimeout(() => {
-                useMessagesStore.getState().updateLastMessageAt(chatId, textToSave, optimisticMsg.timestamp, 'me', true);
+                useMessagesStore.getState().updateLastMessageAt(chatId, textToSave, optimisticMsg.timestamp, 'me');
             }, 0);
         } catch (err) {
             logger.error('[sendImageMessage] Upload failed:', err);
@@ -1269,7 +1294,8 @@ export default function ChatScreen() {
                     style={styles.headerProfile} 
                     activeOpacity={0.8}
                     onPress={() => {
-                        const userId = _parseTargetUserId(resolvedChatId);
+                        // Önce gerçek backend user ID'yi dene, yoksa mock data için fallback kullan
+                        const userId = contact.targetUserId || _parseTargetUserId(resolvedChatId);
                         if (userId) {
                             router.push(`/user/${userId}` as any);
                         }
@@ -1329,6 +1355,20 @@ export default function ChatScreen() {
                 onScrollBeginDrag={() => Keyboard.dismiss()}
             />
 
+            {/* ── Kısıtlı Mod Bilgi Banner'ı ── */}
+            {msgPermission && !msgPermission.can_send_media && isBackendConv && (
+                <View style={[styles.restrictionBanner, { backgroundColor: colors.surface.elevated, borderTopColor: colors.surface.border }]}>
+                    <IconSymbol name="lock.fill" size={13} color={colors.text.tertiary} />
+                    <Text style={[styles.restrictionText, { color: colors.text.tertiary }]}>
+                        {msgPermission.awaiting_reply
+                            ? t("chat.restriction_awaiting", "Cevap bekleniyor — yeni mesaj gönderilemez")
+                            : msgPermission.reason === "private_account_no_mutual"
+                            ? t("chat.restriction_private", "Gizli hesap — mesaj göndermek için takipleşin")
+                            : t("chat.restriction_limited", "Kısıtlı mod — karşılıklı takipleşince kısıtlamalar kalkar")}
+                    </Text>
+                </View>
+            )}
+
             {/* ── Input Bar ── */}
             <View
                 style={[
@@ -1341,19 +1381,29 @@ export default function ChatScreen() {
                 ]}
             >
                 <View style={[styles.inputContainer, { backgroundColor: colors.surface.elevated, borderColor: colors.surface.border }]}>
-                    <TouchableOpacity style={styles.cameraBtn} activeOpacity={0.7} onPress={handleCameraPress}>
+                    {/* Kamera butonu — medya kısıtlıysa soluk göster */}
+                    <TouchableOpacity
+                        style={[styles.cameraBtn, msgPermission && !msgPermission.can_send_media && { opacity: 0.35 }]}
+                        activeOpacity={0.7}
+                        onPress={handleCameraPress}
+                    >
                         <IconSymbol name="camera.fill" size={20} color={colors.accent.primary} />
                     </TouchableOpacity>
 
                     <TextInput
                         style={[styles.textInput, { color: colors.text.primary }]}
-                        placeholder={t("chat.type_message")}
+                        placeholder={
+                            msgPermission && !msgPermission.can_send
+                                ? t("chat.input_locked", "Mesaj gönderme kısıtlandı…")
+                                : t("chat.type_message")
+                        }
                         placeholderTextColor={colors.text.tertiary}
                         value={inputText}
                         onChangeText={setInputText}
                         multiline
                         maxLength={1000}
                         cursorColor={colors.accent.primary}
+                        editable={!msgPermission || msgPermission.can_send}
                     />
                 </View>
 
@@ -1930,5 +1980,18 @@ const styles = StyleSheet.create({
         color: 'rgba(255,255,255,0.35)',
         fontSize: 12,
         textAlign: 'center',
+    },
+    restrictionBanner: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 6,
+        paddingHorizontal: 16,
+        paddingVertical: 7,
+        borderTopWidth: StyleSheet.hairlineWidth,
+    },
+    restrictionText: {
+        fontSize: 12,
+        fontWeight: '500',
+        flex: 1,
     },
 });

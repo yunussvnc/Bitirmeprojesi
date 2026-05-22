@@ -109,7 +109,6 @@ function HomeListHeader({
   const { colors } = useTheme();
   const { t } = useTranslation();
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View>
         <View style={styles.header}>
           <View style={styles.headerLeft}>
@@ -205,7 +204,6 @@ function HomeListHeader({
           </View>
         )}
       </View>
-    </TouchableWithoutFeedback>
   );
 }
 

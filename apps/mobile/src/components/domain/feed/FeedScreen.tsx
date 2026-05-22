@@ -48,8 +48,8 @@ export default function FeedScreen() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
-  const [page, setPage] = useState(1);
-  const [total, setTotal] = useState(0);
+  const [nextCursor, setNextCursor] = useState<string | null>(null);
+  const [hasMore, setHasMore] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
   const [filter, setFilter] = useState<FeedFilter>("all");
   const [commentPostId, setCommentPostId] = useState<number | null>(null);
@@ -77,7 +77,7 @@ export default function FeedScreen() {
   const { hide: hideTabBar, show: showTabBar } = useTabBarVisibility();
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
-  const pageSize = 15;
+  const PAGE_SIZE = 12;
   const toggleSavePost = useAppStore((s) => s.toggleSavePost);
   const isPostSaved = useAppStore((s) => s.isPostSaved);
   const deletedPostIds = useAppStore((s) => s.deletedPostIds);
@@ -93,19 +93,21 @@ export default function FeedScreen() {
   }, []);
 
   const loadFeed = useCallback(
-    async (refresh = false) => {
-      const p = refresh ? 1 : page;
+    async (refresh = false, cursorOverride?: string | null) => {
+      // refresh=true ise cursor'u sıfırla ve baştan yükle
+      const activeCursor = refresh ? null : (cursorOverride !== undefined ? cursorOverride : nextCursor);
       try {
-        if (p === 1) setLoading(true);
+        if (refresh) setLoading(true);
         else setLoadingMore(true);
-        const res = await getFeed(p, pageSize, filter);
+
+        const res = await getFeed(activeCursor, PAGE_SIZE, filter);
         const pendingSharedPostId = useAppStore.getState().pendingSharedPostId;
 
         if (refresh && pendingSharedPostId) {
           try {
             const sharedPost = await getPost(pendingSharedPostId);
             useAppStore.getState().clearPendingSharedPostId();
-            res.items = [sharedPost, ...res.items.filter(post => post.id !== pendingSharedPostId)];
+            res.items = [sharedPost, ...res.items.filter((post) => post.id !== pendingSharedPostId)];
           } catch (e) {
             console.log("Paylaşılan gönderi bulunamadı veya hata:", e);
           }
@@ -113,11 +115,11 @@ export default function FeedScreen() {
 
         if (refresh) {
           setPosts(res.items);
-          setPage(1);
         } else {
-          setPosts((prev) => (p === 1 ? res.items : [...prev, ...res.items]));
+          setPosts((prev) => [...prev, ...res.items]);
         }
-        setTotal(res.total);
+        setNextCursor(res.next_cursor);
+        setHasMore(res.has_more);
       } catch (e) {
         handleApiError(e);
       } finally {
@@ -126,12 +128,16 @@ export default function FeedScreen() {
         setLoadingMore(false);
       }
     },
-    [page, filter]
+    // nextCursor dependency sadece "daha fazla yükle" için gerekli
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [filter, nextCursor]
   );
 
   useEffect(() => {
+    // Filtre değişince baştan başla
+    setNextCursor(null);
+    setHasMore(true);
     loadFeed(true);
-    // Scroll'u başa döndür ve animasyonları sıfırla
     flatListRef.current?.scrollToOffset({ offset: 0, animated: false });
     lastScrollY.current = 0;
     lastToggleY.current = 0;
@@ -139,17 +145,17 @@ export default function FeedScreen() {
     animateHeader(false);
     animateStory(false);
     animateMiniBar(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- load on filter change only
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- filtre değişince sıfırla
   }, [filter]);
 
   // Upload tamamlandığında otomatik yenile
   const uploadJobs = useUploadPipelineStore((s) => s.jobs);
   const processedUploads = useRef(new Set<string>());
-  
+
   useEffect(() => {
     const newlyCompleted = uploadJobs.filter((j) => j.stage === 'done' && !processedUploads.current.has(j.id));
     if (newlyCompleted.length > 0) {
-      newlyCompleted.forEach(j => processedUploads.current.add(j.id));
+      newlyCompleted.forEach((j) => processedUploads.current.add(j.id));
       loadFeed(true);
     }
   }, [uploadJobs, loadFeed]);
@@ -172,18 +178,15 @@ export default function FeedScreen() {
   const handleRefresh = useCallback(() => {
     lightImpact();
     setRefreshing(true);
+    setNextCursor(null);
+    setHasMore(true);
     loadFeed(true);
   }, [loadFeed]);
 
   const handleLoadMore = useCallback(() => {
-    if (loadingMore || posts.length >= total) return;
-    setPage((p) => p + 1);
-  }, [loadingMore, posts.length, total]);
-
-  useEffect(() => {
-    if (page > 1) loadFeed(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- load on page change only
-  }, [page]);
+    if (loadingMore || !hasMore) return;
+    loadFeed(false);
+  }, [loadingMore, hasMore, loadFeed]);
 
   const handleLike = useCallback(async (post: Post) => {
     setPosts((prev) =>

@@ -1,19 +1,19 @@
 /**
- * PostDetailScreen – Tek gönderi detay sayfası
+ * PostDetailScreen – Tek gönderi detay sayfası / Kullanıcı akışı
  * Profil grid'den tıklandığında açılır.
- * Kendi gönderisi ise "Sil" seçeneği gösterir.
+ * Tıklanan gönderiyi odaklayarak kullanıcının o ana kadarki gönderilerini kaydırılabilir bir akış olarak sunar.
  */
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import {
   View,
   Text,
   StyleSheet,
-  ScrollView,
   TouchableOpacity,
   Alert,
   ActivityIndicator,
 } from "react-native";
+import { FlatList } from "react-native-gesture-handler";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { router, useLocalSearchParams } from "expo-router";
 import { useTheme } from "@/src/hooks/useTheme";
@@ -22,6 +22,7 @@ import { FeedCard } from "./components/FeedCard";
 import { CommentBottomSheet } from "./components/CommentBottomSheet";
 import { PostOptionsSheet } from "./components/PostOptionsSheet";
 import { getPost, deletePost, toggleLike, type Post } from "@/src/services/feedService";
+import { getUserPosts } from "@/src/services/userService";
 import { useAuthStore } from "@/src/store/useAuthStore";
 import { useAppStore } from "@/src/store/useAppStore";
 import { handleApiError } from "@/src/utils/errorHandler";
@@ -35,19 +36,32 @@ export default function PostDetailScreen() {
   const { t } = useTranslation();
   const authUser = useAuthStore((s) => s.user);
 
-  const [post, setPost] = useState<Post | null>(null);
+  const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
   const [commentOpen, setCommentOpen] = useState(false);
   const [optionsOpen, setOptionsOpen] = useState(false);
+  const [commentPostId, setCommentPostId] = useState<number | null>(null);
+  const [optionsPost, setOptionsPost] = useState<Post | null>(null);
+  const [listReady, setListReady] = useState(false);
 
-  const isOwnPost = post?.user_id === authUser?.id;
+  const flatListRef = useRef<FlatList>(null);
+  const deletedPostIds = useAppStore((s) => s.deletedPostIds);
+  const visiblePosts = React.useMemo(() => posts.filter((p) => !deletedPostIds.includes(p.id)), [posts, deletedPostIds]);
 
-  const loadPost = useCallback(async () => {
+  const initialIndex = React.useMemo(() => {
+    if (!postId) return 0;
+    const idx = visiblePosts.findIndex((p) => p.id.toString() === postId);
+    return idx >= 0 ? idx : 0;
+  }, [visiblePosts, postId]);
+
+  const loadPosts = useCallback(async () => {
     if (!postId) return;
     setLoading(true);
     try {
-      const data = await getPost(parseInt(postId, 10));
-      setPost(data);
+      const currentPost = await getPost(parseInt(postId, 10));
+      // Tıklanan postun sahibinin son 50 gönderisini getir (akış şeklinde görebilmesi için)
+      const userPostsData = await getUserPosts(currentPost.user_id, 1, 50);
+      setPosts(userPostsData.items);
     } catch (e) {
       handleApiError(e);
     } finally {
@@ -56,40 +70,34 @@ export default function PostDetailScreen() {
   }, [postId]);
 
   useEffect(() => {
-    loadPost();
-  }, [loadPost]);
+    loadPosts();
+  }, [loadPosts]);
 
-  const handleLike = useCallback(async () => {
-    if (!post) return;
+  const handleLike = useCallback(async (likedPost: Post) => {
     lightImpact();
     // Optimistic update
-    setPost((prev) =>
-      prev
-        ? {
-            ...prev,
-            is_liked: !prev.is_liked,
-            like_count: prev.like_count + (prev.is_liked ? -1 : 1),
-          }
-        : prev
+    setPosts((prev) =>
+      prev.map((p) =>
+        p.id === likedPost.id
+          ? { ...p, is_liked: !p.is_liked, like_count: p.like_count + (p.is_liked ? -1 : 1) }
+          : p
+      )
     );
     try {
-      await toggleLike(post.id);
+      await toggleLike(likedPost.id);
     } catch {
       // Revert
-      setPost((prev) =>
-        prev
-          ? {
-              ...prev,
-              is_liked: !prev.is_liked,
-              like_count: prev.like_count + (prev.is_liked ? -1 : 1),
-            }
-          : prev
+      setPosts((prev) =>
+        prev.map((p) =>
+          p.id === likedPost.id
+            ? { ...p, is_liked: !p.is_liked, like_count: p.like_count + (p.is_liked ? -1 : 1) }
+            : p
+        )
       );
     }
-  }, [post]);
+  }, []);
 
-  const handleDelete = useCallback(() => {
-    if (!post) return;
+  const handleDelete = useCallback((deletedPost: Post) => {
     Alert.alert(
       t("post_detail.delete_title", "Gönderiyi Sil"),
       t("post_detail.delete_confirm", "Bu gönderi kalıcı olarak silinecek. Emin misiniz?"),
@@ -100,10 +108,11 @@ export default function PostDetailScreen() {
           style: "destructive",
           onPress: async () => {
             try {
-              await deletePost(post.id);
-              useAppStore.getState().addDeletedPostId(post.id);
+              await deletePost(deletedPost.id);
+              useAppStore.getState().addDeletedPostId(deletedPost.id);
               success();
-              router.back();
+              setPosts((prev) => prev.filter((p) => p.id !== deletedPost.id));
+              if (visiblePosts.length <= 1) router.back();
             } catch (e) {
               handleApiError(e);
             }
@@ -111,15 +120,15 @@ export default function PostDetailScreen() {
         },
       ]
     );
-  }, [post, t]);
+  }, [t, visiblePosts.length]);
 
   const handleOptionsSelect = useCallback(
     (key: string) => {
-      if (key === "delete") {
-        handleDelete();
+      if (key === "delete" && optionsPost) {
+        handleDelete(optionsPost);
       }
     },
-    [handleDelete]
+    [handleDelete, optionsPost]
   );
 
   if (loading) {
@@ -141,7 +150,7 @@ export default function PostDetailScreen() {
     );
   }
 
-  if (!post) {
+  if (visiblePosts.length === 0) {
     return (
       <View style={[styles.container, { backgroundColor: colors.background.primary }]}>
         <View style={[styles.header, { paddingTop: insets.top + 8 }]}>
@@ -168,47 +177,83 @@ export default function PostDetailScreen() {
           <IconSymbol name="chevron.left" size={24} color={colors.text.primary} />
         </TouchableOpacity>
         <Text style={[styles.headerTitle, { color: colors.text.primary }]}>
-          {t("post_detail.title", "Gönderi")}
+          {t("post_detail.title", "Gönderiler")}
         </Text>
-        {isOwnPost ? (
-          <TouchableOpacity onPress={handleDelete} hitSlop={12} style={styles.backBtn}>
-            <IconSymbol name="trash" size={20} color={colors.semantic.error} />
-          </TouchableOpacity>
-        ) : (
-          <TouchableOpacity onPress={() => setOptionsOpen(true)} hitSlop={12} style={styles.backBtn}>
-            <IconSymbol name="ellipsis" size={20} color={colors.text.primary} />
-          </TouchableOpacity>
-        )}
+        <View style={styles.backBtn} />
       </View>
 
-      <ScrollView
-        contentContainerStyle={[styles.scrollContent, { paddingBottom: insets.bottom + 20 }]}
+      <FlatList
+        ref={flatListRef}
+        data={visiblePosts}
+        keyExtractor={(item) => item.id.toString()}
+        // initialScrollIndex kaldırıldı, çünkü dinamik yüksekliklerde hatalı scroll'a neden oluyor.
+        // Bunun yerine manuel scroll yapıyoruz (viewPosition: 0 = en tepeye hizala)
+        style={{ opacity: listReady ? 1 : 0 }}
+        onLayout={() => {
+          if (!listReady) {
+            if (initialIndex > 0 && visiblePosts.length > 0) {
+              setTimeout(() => {
+                flatListRef.current?.scrollToIndex({
+                  index: initialIndex,
+                  animated: false,
+                  viewPosition: 0,
+                });
+                setListReady(true);
+              }, 150); // Liste çizildikten hemen sonra hizala ve görünür yap
+            } else {
+              setListReady(true);
+            }
+          }
+        }}
         showsVerticalScrollIndicator={false}
-      >
-        <FeedCard
-          post={post}
-          onLike={handleLike}
-          onComment={() => setCommentOpen(true)}
-          onOptionsPress={() => isOwnPost ? handleDelete() : setOptionsOpen(true)}
-          onAuthorPress={() => {
-            if (post.author) {
-              router.push(`/user/${post.author.id}` as any);
-            }
-          }}
-          onPlacePress={() => {
-            if (post.place_id) {
-              router.push(`/place/${post.place_id}` as any);
-            }
-          }}
-        />
-      </ScrollView>
+        contentContainerStyle={{ paddingBottom: insets.bottom + 20, paddingTop: 8 }}
+        renderItem={({ item }) => {
+          const isOwnPost = item.user_id === authUser?.id;
+          return (
+            <View style={{ marginBottom: 16 }}>
+              <FeedCard
+                post={item}
+                onLike={() => handleLike(item)}
+                onComment={() => {
+                  setCommentPostId(item.id);
+                  setCommentOpen(true);
+                }}
+                onOptionsPress={() => {
+                  if (isOwnPost) {
+                    handleDelete(item);
+                  } else {
+                    setOptionsPost(item);
+                    setOptionsOpen(true);
+                  }
+                }}
+                onAuthorPress={() => {
+                  if (item.author) {
+                    router.push(`/user/${item.author.id}` as any);
+                  }
+                }}
+                onPlacePress={() => {
+                  if (item.place_id) {
+                    router.push(`/place/${item.place_id}` as any);
+                  }
+                }}
+              />
+            </View>
+          );
+        }}
+      />
 
       <CommentBottomSheet
         visible={commentOpen}
         onClose={() => setCommentOpen(false)}
-        postId={post.id}
+        postId={commentPostId || 0}
         onCommentAdded={() => {
-          setPost((prev) => prev ? { ...prev, comment_count: prev.comment_count + 1 } : prev);
+          if (commentPostId) {
+            setPosts((prev) =>
+              prev.map((p) =>
+                p.id === commentPostId ? { ...p, comment_count: p.comment_count + 1 } : p
+              )
+            );
+          }
         }}
       />
 
@@ -245,8 +290,5 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-  },
-  scrollContent: {
-    paddingTop: 8,
   },
 });

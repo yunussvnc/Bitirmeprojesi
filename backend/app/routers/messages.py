@@ -1,9 +1,10 @@
 # routers/messages.py — Mesajlaşma endpoint'leri (REST + WebSocket)
+# Gizlilik Kuralları Motoru dahil
 
 import json
 import logging
 from datetime import datetime, timezone
-from typing import List
+from typing import List, Optional
 
 from fastapi import APIRouter, Depends, HTTPException, WebSocket, WebSocketDisconnect, Query
 from sqlalchemy.orm import Session
@@ -18,6 +19,10 @@ logger = logging.getLogger("asemos")
 router = APIRouter(tags=["Messages"])
 
 
+# ─────────────────────────────────────────────────────────────
+# Yardımcı: Konuşma erişim doğrulaması
+# ─────────────────────────────────────────────────────────────
+
 def _verify_conversation_access(db: Session, conversation_id: int, user_id: int) -> models.MatchConversation:
     """Kullanıcının bu konuşmaya erişimi var mı kontrol et"""
     conv = db.query(models.MatchConversation).filter(
@@ -29,6 +34,118 @@ def _verify_conversation_access(db: Session, conversation_id: int, user_id: int)
         raise HTTPException(status_code=403, detail="Bu konuşmaya erişiminiz yok.")
     return conv
 
+
+# ─────────────────────────────────────────────────────────────
+# 🔐 Merkezi Mesajlaşma Gizlilik Motoru
+# ─────────────────────────────────────────────────────────────
+
+def _get_messaging_permission(
+    db: Session,
+    conversation_id: int,
+    sender_id: int,
+) -> schemas.ConversationPermission:
+    """
+    Gönderici (sender_id) → alıcı yönünde mesajlaşma izinlerini hesapla.
+
+    Kurallar:
+    1. B gizli + karşılıklı takip yok → can_send=False
+    2. B açık + karşılıklı takip yok → max 1 metin, medya yok, read receipt gizli
+    3. Karşılıklı takip → sınırsız, medya serbest, read receipt anlık
+    """
+    conv = db.query(models.MatchConversation).filter(
+        models.MatchConversation.id == conversation_id
+    ).first()
+    if not conv:
+        return schemas.ConversationPermission(
+            can_send=False, can_send_media=False, hide_read_receipt=True,
+            reason="conversation_not_found"
+        )
+
+    # Alıcı kim?
+    receiver_id = conv.user2_id if conv.user1_id == sender_id else conv.user1_id
+
+    receiver = db.query(models.User).filter(models.User.id == receiver_id).first()
+    if not receiver:
+        return schemas.ConversationPermission(
+            can_send=False, can_send_media=False, hide_read_receipt=True,
+            reason="receiver_not_found"
+        )
+
+    # ── Takip durumu ──────────────────────────────────────────
+    # A → B (gönderici B'yi takip ediyor mu?)
+    a_follows_b = db.query(models.Follow).filter(
+        models.Follow.follower_id == sender_id,
+        models.Follow.following_id == receiver_id,
+        models.Follow.status == "accepted",
+    ).first() is not None
+
+    # B → A (alıcı göndericiye geri takip ediyor mu?)
+    b_follows_a = db.query(models.Follow).filter(
+        models.Follow.follower_id == receiver_id,
+        models.Follow.following_id == sender_id,
+        models.Follow.status == "accepted",
+    ).first() is not None
+
+    mutual = a_follows_b and b_follows_a
+
+    # ── Kural 3: Karşılıklı takip → tam serbest ──────────────
+    if mutual:
+        return schemas.ConversationPermission(
+            can_send=True,
+            can_send_media=True,
+            hide_read_receipt=False,
+            reason="mutual_follow",
+        )
+
+    # ── Kural 1: B gizli hesap + takipleşme yok → tamamen engel ─
+    if receiver.is_private_account:
+        return schemas.ConversationPermission(
+            can_send=False,
+            can_send_media=False,
+            hide_read_receipt=True,
+            reason="private_account_no_mutual",
+        )
+
+    # ── Kural 2: B açık hesap, kısıtlı mod ───────────────────
+    # Göndericinin bu konuşmada gönderdiği toplam mesaj sayısı
+    sent_count = db.query(models.Message).filter(
+        models.Message.conversation_id == conversation_id,
+        models.Message.sender_id == sender_id,
+    ).count()
+
+    # Alıcının bu konuşmada gönderdiği son mesaj (cevap verdi mi?)
+    last_receiver_msg = db.query(models.Message).filter(
+        models.Message.conversation_id == conversation_id,
+        models.Message.sender_id == receiver_id,
+    ).order_by(models.Message.created_at.desc()).first()
+
+    awaiting_reply = last_receiver_msg is None  # B hiç cevap vermedi
+
+    # Limit kontrolü: zaten 1 mesaj gönderilmişse ve B cevap vermediyse → engelle
+    if sent_count >= 1 and awaiting_reply:
+        return schemas.ConversationPermission(
+            can_send=False,
+            can_send_media=False,
+            hide_read_receipt=True,
+            reason="awaiting_reply",
+            messages_sent_count=sent_count,
+            awaiting_reply=True,
+        )
+
+    # İlk metin gönderilebilir ama medya yasak, read receipt gizli
+    return schemas.ConversationPermission(
+        can_send=True,
+        can_send_media=False,
+        hide_read_receipt=True,
+        reason="restricted_first_message",
+        messages_sent_count=sent_count,
+        awaiting_reply=awaiting_reply,
+    )
+
+
+# ─────────────────────────────────────────────────────────────
+# Yardımcı: Message → Response dönüşümü
+# ─────────────────────────────────────────────────────────────
 
 def _message_to_response(msg: models.Message) -> schemas.MessageResponse:
     """Message model → response schema"""
@@ -52,7 +169,9 @@ def _message_to_response(msg: models.Message) -> schemas.MessageResponse:
     )
 
 
-# ---- REST ENDPOINTS ----
+# ─────────────────────────────────────────────────────────────
+# REST ENDPOINTS
+# ─────────────────────────────────────────────────────────────
 
 @router.post("/messages/conversation/open")
 def open_or_create_conversation(
@@ -63,19 +182,19 @@ def open_or_create_conversation(
     """
     Belirtilen kullanıcıyla mevcut DM konuşmasını getir veya yenisini oluştur.
     Profil ekranındaki 'Mesaj' butonu için kullanılır.
+    Gizli hesaplara sadece karşılıklı takip varsa konuşma açılır.
     """
     other_user_id = data.user_id
 
     if other_user_id == current_user.id:
         raise HTTPException(status_code=400, detail="Kendinizle konuşamazsınız.")
 
-    # Karşı kullanıcı var mı?
     other_user = db.query(models.User).filter(models.User.id == other_user_id).first()
     if not other_user:
         raise HTTPException(status_code=404, detail="Kullanıcı bulunamadı.")
 
-    # Mevcut konuşma var mı? (her iki sırayı da kontrol et)
-    conv = db.query(models.MatchConversation).filter(
+    # Gizli hesap kontrolü — mevcut konuşma yoksa ve karşılıklı takip yoksa engelle
+    existing_conv = db.query(models.MatchConversation).filter(
         (
             (models.MatchConversation.user1_id == current_user.id) &
             (models.MatchConversation.user2_id == other_user_id)
@@ -85,8 +204,29 @@ def open_or_create_conversation(
         )
     ).first()
 
+    if not existing_conv and other_user.is_private_account:
+        # Karşılıklı takip var mı?
+        mutual = (
+            db.query(models.Follow).filter(
+                models.Follow.follower_id == current_user.id,
+                models.Follow.following_id == other_user_id,
+                models.Follow.status == "accepted",
+            ).first() is not None
+        ) and (
+            db.query(models.Follow).filter(
+                models.Follow.follower_id == other_user_id,
+                models.Follow.following_id == current_user.id,
+                models.Follow.status == "accepted",
+            ).first() is not None
+        )
+        if not mutual:
+            raise HTTPException(
+                status_code=403,
+                detail="private_account_no_mutual"
+            )
+
+    conv = existing_conv
     if not conv:
-        # Yeni konuşma oluştur
         conv = models.MatchConversation(
             user1_id=current_user.id,
             user2_id=other_user_id,
@@ -103,6 +243,20 @@ def open_or_create_conversation(
         "name": other_user.first_name or other_user.username or other_user.email,
         "avatar_url": other_user.avatar_url,
     }
+
+
+@router.get("/messages/{conversation_id}/permission", response_model=schemas.ConversationPermission)
+def get_conversation_permission(
+    conversation_id: int,
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(get_current_user),
+):
+    """
+    Mevcut kullanıcının bu konuşmada mesajlaşma izinlerini döner.
+    Frontend, konuşma ekranı açılırken bunu çağırarak UI'ı kilitler/açar.
+    """
+    _verify_conversation_access(db, conversation_id, current_user.id)
+    return _get_messaging_permission(db, conversation_id, current_user.id)
 
 
 @router.get("/messages/{conversation_id}", response_model=schemas.PaginatedMessages)
@@ -128,7 +282,6 @@ def get_messages(
         (page - 1) * page_size
     ).limit(page_size).all()
 
-    # Eski→Yeni sırasıyla dön (UI'da kolay render için)
     messages.reverse()
 
     items = [_message_to_response(m) for m in messages]
@@ -145,10 +298,27 @@ async def send_message(
     current_user: models.User = Depends(get_current_user),
 ):
     """
-    Mesaj gönder (REST fallback — WebSocket olmadan da çalışır).
-    İçerik doğrulaması schema seviyesinde (Field min=1, max=5000) yapılır.
+    Mesaj gönder (REST fallback).
+    Gizlilik kuralları burada uygulanır.
     """
     conv = _verify_conversation_access(db, conversation_id, current_user.id)
+
+    # 🔐 Gizlilik kontrolü
+    perm = _get_messaging_permission(db, conversation_id, current_user.id)
+
+    if not perm.can_send:
+        raise HTTPException(
+            status_code=403,
+            detail=perm.reason or "messaging_not_allowed"
+        )
+
+    # Medya içeriyorsa ek kontrol
+    has_media = bool(data.media_url) or data.message_type not in ("text", "shared_post")
+    if has_media and not perm.can_send_media:
+        raise HTTPException(
+            status_code=403,
+            detail="media_not_allowed_restricted_mode"
+        )
 
     msg = models.Message(
         conversation_id=conversation_id,
@@ -161,16 +331,15 @@ async def send_message(
         story_snapshot_url=data.story_snapshot_url,
     )
     db.add(msg)
-
-    # Konuşmanın last_message_at güncelle
     conv.last_message_at = datetime.now(timezone.utc)
     db.commit()
     db.refresh(msg)
 
     response = _message_to_response(msg)
 
-    # WebSocket üzerinden konuşma odasına gönder (Sohbet içindeyse)
     other_user_id = conv.user2_id if conv.user1_id == current_user.id else conv.user1_id
+
+    # Karşı tarafa mesajı ilet
     await manager.send_to_user(
         conversation_id,
         other_user_id,
@@ -182,7 +351,7 @@ async def send_message(
         },
     )
 
-    # WebSocket üzerinden global sokete de gönder (Uygulama içi bildirim ve DM liste güncellemesi için)
+    # Global bildirim (DM liste güncellemesi + push)
     await manager.send_global_notification(
         other_user_id,
         {
@@ -203,34 +372,42 @@ async def mark_messages_read(
     db: Session = Depends(get_db),
     current_user: models.User = Depends(get_current_user),
 ):
-    """Konuşmadaki tüm mesajları okundu olarak işaretle ve karşı tarafa bildir"""
-    _verify_conversation_access(db, conversation_id, current_user.id)
+    """
+    Konuşmadaki tüm mesajları okundu olarak işaretle.
+    Karşılıklı takip yoksa karşı tarafa "görüldü" bilgisi gönderilmez.
+    """
+    conv = _verify_conversation_access(db, conversation_id, current_user.id)
+
+    # Karşı tarafın sender_id'si
+    other_user_id = conv.user2_id if conv.user1_id == current_user.id else conv.user1_id
+
+    # 🔐 Görüldü gizleme: karşı tarafın izin durumunu kontrol et
+    # (B mesaj gönderdi, A okudu → A'nın gönderim izni değil, B'nin A'ya gönderim izni sorulur)
+    other_perm = _get_messaging_permission(db, conversation_id, other_user_id)
+    should_hide_receipt = other_perm.hide_read_receipt
 
     query = db.query(models.Message).filter(
         models.Message.conversation_id == conversation_id,
-        models.Message.sender_id != current_user.id,  # Sadece karşı tarafın mesajları
+        models.Message.sender_id != current_user.id,
         models.Message.is_read == False,
     )
-    
+
     messages_to_update = query.all()
     if not messages_to_update:
         return {"ok": True}
-        
+
     updated_ids = [m.id for m in messages_to_update]
-    # Senders of these messages (should be all the same other_user_id in a DM)
-    other_user_id = messages_to_update[0].sender_id
-    
     query.update({"is_read": True, "status": "read"}, synchronize_session=False)
     db.commit()
 
-    # Karşı tarafa okundu bilgisini anlık ilet
-    from app.websocket.manager import manager
-    await manager.send_to_user(conversation_id, other_user_id, {
-        "type": "message:status",
-        "message_ids": updated_ids,
-        "status": "read",
-        "reader_id": current_user.id,
-    })
+    # 🔐 Read receipt: sadece karşılıklı takip varsa anlık ilet
+    if not should_hide_receipt:
+        await manager.send_to_user(conversation_id, other_user_id, {
+            "type": "message:status",
+            "message_ids": updated_ids,
+            "status": "read",
+            "reader_id": current_user.id,
+        })
 
     return {"ok": True}
 
@@ -245,13 +422,13 @@ def mark_single_message_read(
     msg = db.query(models.Message).filter(models.Message.id == message_id).first()
     if not msg:
         raise HTTPException(status_code=404, detail="Mesaj bulunamadı.")
-    
+
     _verify_conversation_access(db, msg.conversation_id, current_user.id)
-    
+
     if msg.sender_id != current_user.id and not msg.is_read:
         msg.is_read = True
         db.commit()
-        
+
     return {"ok": True, "is_read": msg.is_read}
 
 
@@ -291,7 +468,9 @@ def unread_count(
     return {"count": count}
 
 
-# ---- WEBSOCKET ENDPOINT ----
+# ─────────────────────────────────────────────────────────────
+# WEBSOCKET ENDPOINT
+# ─────────────────────────────────────────────────────────────
 
 @router.websocket("/ws/chat/{conversation_id}")
 async def websocket_chat(
@@ -314,9 +493,9 @@ async def websocket_chat(
     - Read:        {"type": "messages_read", "user_id": 123}
     - Online:      {"type": "user_online", "user_id": 123}
     - Offline:     {"type": "user_offline", "user_id": 123}
+    - Hata:        {"type": "error", "code": "PERMISSION_DENIED", "detail": "..."}
     """
 
-    # Token doğrulama
     if not token:
         await websocket.close(code=4001, reason="Token gerekli")
         return
@@ -334,8 +513,7 @@ async def websocket_chat(
 
     user_id = int(user_id)
     other_user_id = None
-    
-    # DB ile doğrulama
+
     db = next(get_db())
     try:
         conv = db.query(models.MatchConversation).filter(
@@ -349,10 +527,8 @@ async def websocket_chat(
     finally:
         db.close()
 
-    # Bağlan
     await manager.connect(websocket, conversation_id, user_id)
 
-    # Karşı tarafa online bildir
     await manager.send_to_user(conversation_id, other_user_id, {
         "type": "user_online",
         "user_id": user_id,
@@ -370,13 +546,33 @@ async def websocket_chat(
             msg_type = data.get("type")
 
             if msg_type == "message":
-                # Yeni mesaj
                 content = data.get("content", "").strip()
                 if not content or len(content) > 5000:
                     continue
 
                 db = next(get_db())
                 try:
+                    # 🔐 Gizlilik kontrolü (WebSocket üzerinden gelen mesajlarda da zorunlu)
+                    perm = _get_messaging_permission(db, conversation_id, user_id)
+
+                    if not perm.can_send:
+                        await manager.send_to_user(conversation_id, user_id, {
+                            "type": "error",
+                            "code": "PERMISSION_DENIED",
+                            "detail": perm.reason or "messaging_not_allowed",
+                        })
+                        continue
+
+                    # Medya kontrolü
+                    has_media = bool(data.get("media_url")) or data.get("message_type", "text") not in ("text", "shared_post")
+                    if has_media and not perm.can_send_media:
+                        await manager.send_to_user(conversation_id, user_id, {
+                            "type": "error",
+                            "code": "PERMISSION_DENIED",
+                            "detail": "media_not_allowed_restricted_mode",
+                        })
+                        continue
+
                     msg = models.Message(
                         conversation_id=conversation_id,
                         sender_id=user_id,
@@ -408,31 +604,27 @@ async def websocket_chat(
                         "created_at": msg.created_at.isoformat() if msg.created_at else None,
                     }
 
-                    # 1️⃣ Sender'a sent onayı
+                    # Sender'a onay
                     await manager.send_to_user(conversation_id, user_id, {
                         "type": "message:sent",
                         "message": msg_data,
                     })
 
-                    # 2️⃣ Karşı tarafa gönder — başarılıysa delivered
+                    # Karşı tarafa ilet
                     delivered = await manager.send_to_user(conversation_id, other_user_id, {
                         "type": "new_message",
                         "message": msg_data,
                     })
 
                     if delivered:
-                        # Status'u delivered yap
                         msg.status = "delivered"
                         db.commit()
-                        # Sender'a delivered bildir
                         await manager.send_to_user(conversation_id, user_id, {
                             "type": "message:status",
                             "message_id": msg.id,
                             "status": "delivered",
                         })
 
-                    # Her durumda global sokete bildir (DM list güncellemesi + offline push)
-                    # Bu çağrı zaten: online ise WS, offline ise Expo push atar — çift push olmaz
                     preview = msg.content.strip()[:80] if msg.content else "Yeni mesaj"
                     sender_user = db.query(models.User).filter(models.User.id == user_id).first()
                     sender_name = (sender_user.first_name or sender_user.username or f"User {user_id}") if sender_user else f"User {user_id}"
@@ -451,7 +643,6 @@ async def websocket_chat(
                     db.close()
 
             elif msg_type == "typing":
-                # Typing indicator
                 await manager.broadcast_to_conversation(
                     conversation_id,
                     {
@@ -463,10 +654,13 @@ async def websocket_chat(
                 )
 
             elif msg_type == "read":
-                # Mesajları okundu işaretle (spesifik ID'ler veya tümü)
                 message_ids = data.get("message_ids", [])
                 db = next(get_db())
                 try:
+                    # 🔐 Read receipt gizleme: karşı tarafın izin durumuna bak
+                    other_perm = _get_messaging_permission(db, conversation_id, other_user_id)
+                    should_hide_receipt = other_perm.hide_read_receipt
+
                     query = db.query(models.Message).filter(
                         models.Message.conversation_id == conversation_id,
                         models.Message.sender_id != user_id,
@@ -482,13 +676,14 @@ async def websocket_chat(
                 finally:
                     db.close()
 
-                # Sender'a read bildir
-                await manager.send_to_user(conversation_id, other_user_id, {
-                    "type": "message:status",
-                    "message_ids": updated_ids,
-                    "status": "read",
-                    "reader_id": user_id,
-                })
+                # 🔐 Sadece izin varsa karşı tarafa bildir
+                if not should_hide_receipt and updated_ids:
+                    await manager.send_to_user(conversation_id, other_user_id, {
+                        "type": "message:status",
+                        "message_ids": updated_ids,
+                        "status": "read",
+                        "reader_id": user_id,
+                    })
 
     except WebSocketDisconnect:
         pass
@@ -496,12 +691,11 @@ async def websocket_chat(
         logger.error("WebSocket hatası: %s", str(e))
     finally:
         manager.disconnect(conversation_id, user_id)
-        # Offline bildir
         if other_user_id is not None:
             try:
                 await manager.send_to_user(conversation_id, other_user_id, {
-                "type": "user_offline",
-                "user_id": user_id,
-            })
+                    "type": "user_offline",
+                    "user_id": user_id,
+                })
             except Exception:
                 pass

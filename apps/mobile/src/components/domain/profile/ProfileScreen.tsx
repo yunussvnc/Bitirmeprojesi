@@ -36,6 +36,8 @@ export default function ProfileScreen() {
   const deletedPostIds = useAppStore((s) => s.deletedPostIds);
   const visiblePosts = React.useMemo(() => posts.filter((p) => !deletedPostIds.includes(p.id)), [posts, deletedPostIds]);
 
+  const [initialLoading, setInitialLoading] = useState(true);
+
   const { width: screenWidth } = useWindowDimensions();
   const cellSize = (screenWidth - 32 - GRID_GAP * (GRID_COLS - 1)) / GRID_COLS;
 
@@ -65,6 +67,8 @@ export default function ProfileScreen() {
       );
     } catch (e) {
       handleApiError(e);
+    } finally {
+      setInitialLoading(false);
     }
   }, [authUser?.id]);
 
@@ -93,7 +97,7 @@ export default function ProfileScreen() {
     posts: stats?.post_count ?? 0,
   };
 
-  if (!authUser) {
+  if (!authUser || initialLoading) {
     return (
       <Screen withTabBar>
         <LoadingState message={t('profile.loading')} />
@@ -101,14 +105,20 @@ export default function ProfileScreen() {
     );
   }
 
-  const displayName = authUser.first_name || authUser.username || authUser.email || t('profile.user');
+  const fullName = [profile?.first_name || authUser.first_name, profile?.last_name || (authUser as any).last_name].filter(Boolean).join(" ");
+  const displayName = fullName || authUser.username || authUser.email || t('profile.user');
   const username = authUser.username || authUser.email || "";
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background.primary }]}>
       {/* ── Moden Header ── */}
       <View style={[styles.header, { paddingTop: insets.top + 16 }]}>
-        <Text style={[styles.headerTitle, { color: colors.text.primary }]}>{t('profile.title')}</Text>
+        {/* Ortadaki Username (Absolute) */}
+        <View pointerEvents="none" style={[StyleSheet.absoluteFill, { alignItems: 'center', justifyContent: 'flex-end', paddingBottom: 10, zIndex: 0 }]}>
+          <Text style={{ color: colors.text.primary, fontSize: 16, fontWeight: "600" }}>{username}</Text>
+        </View>
+
+        <Text style={[styles.headerTitle, { color: colors.text.primary, zIndex: 1 }]}>{t('profile.title', 'Profil')}</Text>
 
         <View style={styles.headerRight}>
           <TouchableOpacity
@@ -148,10 +158,6 @@ export default function ProfileScreen() {
 
           <View style={styles.heroInfo}>
             <Text style={[styles.heroName, { color: colors.text.primary }]}>{displayName}</Text>
-            <View style={[styles.usernamePill, { backgroundColor: colors.surface.elevated }]}>
-              <Text style={[styles.heroUsername, { color: colors.text.secondary }]}>@{username}</Text>
-            </View>
-
             {profile?.bio ? (
               <Text style={[styles.bioText, { color: colors.text.secondary }]}>{profile.bio}</Text>
             ) : null}

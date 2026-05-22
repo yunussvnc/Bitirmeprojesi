@@ -12,16 +12,14 @@ export interface Conversation {
     timestamp: string;
     unread: boolean;
     isOnline: boolean;
+    targetUserId?: number; // Gerçek kullanıcı profil ID'si
     sharedPlace?: string;
     isMatch?: boolean;
     isRevealed?: boolean;
     revealRequestedByMe?: boolean;
     revealRequestedByThem?: boolean;
     isArchived?: boolean;
-    isDeleted?: boolean;
-    deletedAt?: number;
-    hasDeletedHistory?: boolean;
-    historyClearedAt?: number;
+    isRequest?: boolean;
     lastMessageAt: number; // Son mesajın gerçek timestamp'i (sıralama için)
 }
 
@@ -42,7 +40,7 @@ type MessagesState = {
     unarchiveConversation: (id: string) => void;
     deleteConversation: (id: string) => void;
     markAsRead: (id: string) => void;
-    updateLastMessageAt: (id: string, message: string, timestamp: string, sender?: "me" | string, unhide?: boolean, isUnread?: boolean) => void;
+    updateLastMessageAt: (id: string, message: string, timestamp: string, sender?: "me" | string, isUnread?: boolean) => void;
     toggleRevealRequest: (id: string) => void;
     mockOtherPersonReveal: (id: string) => void;
 
@@ -51,12 +49,8 @@ type MessagesState = {
     deleteMultiple: (ids: string[]) => void;
 
     addConversation: (conversation: Conversation) => void;
+    updateConversationMeta: (id: string, meta: Partial<Pick<Conversation, 'avatar' | 'name' | 'isRevealed' | 'isMatch' | 'revealRequestedByMe' | 'revealRequestedByThem' | 'targetUserId'>>) => void;
 
-    restoreDeleted: (id: string) => void;
-    restoreDeletedMultiple: (ids: string[]) => void;
-    permanentlyDelete: (id: string) => void;
-    permanentlyDeleteMultiple: (ids: string[]) => void;
-    purgeExpiredMessages: () => void;
     clearStore: () => void;
 };
 
@@ -81,9 +75,7 @@ export const useMessagesStore = create<MessagesState>()(
             })),
 
             deleteConversation: (id) => set((state) => ({
-                conversations: state.conversations.map(c =>
-                    c.id === id ? { ...c, isDeleted: true, deletedAt: Date.now(), hasDeletedHistory: true, historyClearedAt: Date.now() } : c
-                )
+                conversations: state.conversations.filter(c => c.id !== id)
             })),
 
             markAsRead: (id) => set((state) => ({
@@ -92,7 +84,7 @@ export const useMessagesStore = create<MessagesState>()(
                 )
             })),
 
-            updateLastMessageAt: (id, message, timestamp, sender, unhide, isUnread) => set((state) => ({
+            updateLastMessageAt: (id, message, timestamp, sender, isUnread) => set((state) => ({
                 conversations: state.conversations.map(c => {
                     if (c.id === id) {
                         return { 
@@ -101,7 +93,6 @@ export const useMessagesStore = create<MessagesState>()(
                             timestamp, 
                             lastMessageAt: Date.now(), 
                             ...(sender !== undefined ? { lastMessageSender: sender } : {}),
-                            ...(unhide ? { isDeleted: false, deletedAt: undefined, hasDeletedHistory: false, historyClearedAt: undefined } : {}),
                             ...(isUnread !== undefined ? { unread: isUnread } : {})
                         };
                     }
@@ -153,9 +144,7 @@ export const useMessagesStore = create<MessagesState>()(
             })),
 
             deleteMultiple: (ids) => set((state) => ({
-                conversations: state.conversations.map(c =>
-                    ids.includes(c.id) ? { ...c, isDeleted: true, deletedAt: Date.now(), hasDeletedHistory: true, historyClearedAt: Date.now() } : c
-                )
+                conversations: state.conversations.filter(c => !ids.includes(c.id))
             })),
 
             addConversation: (conv) => set((state) => {
@@ -166,38 +155,11 @@ export const useMessagesStore = create<MessagesState>()(
                 return { conversations: [conv, ...state.conversations] };
             }),
 
-            restoreDeleted: (id) => set((state) => ({
+            updateConversationMeta: (id, meta) => set((state) => ({
                 conversations: state.conversations.map(c =>
-                    c.id === id ? { ...c, isDeleted: false, deletedAt: undefined, hasDeletedHistory: false, historyClearedAt: undefined } : c
+                    c.id === id ? { ...c, ...meta } : c
                 )
             })),
-
-            restoreDeletedMultiple: (ids) => set((state) => ({
-                conversations: state.conversations.map(c =>
-                    ids.includes(c.id) ? { ...c, isDeleted: false, deletedAt: undefined, hasDeletedHistory: false, historyClearedAt: undefined } : c
-                )
-            })),
-
-            permanentlyDelete: (id) => set((state) => ({
-                conversations: state.conversations.filter(c => c.id !== id)
-            })),
-
-            permanentlyDeleteMultiple: (ids) => set((state) => ({
-                conversations: state.conversations.filter(c => !ids.includes(c.id))
-            })),
-
-            purgeExpiredMessages: () => set((state) => {
-                const now = Date.now();
-                const TWO_DAYS = 2 * 24 * 60 * 60 * 1000;
-                return {
-                    conversations: state.conversations.filter(c => {
-                        if (c.isDeleted && c.deletedAt) {
-                            return (now - c.deletedAt) <= TWO_DAYS;
-                        }
-                        return true;
-                    })
-                };
-            }),
 
             clearStore: () => set({ conversations: INITIAL_CONVERSATIONS, activeConversationId: null })
         }),

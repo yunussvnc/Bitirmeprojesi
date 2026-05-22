@@ -32,7 +32,7 @@ export default function ArchivedMessagesScreen() {
     const [isEditMode, setIsEditMode] = useState(false);
     const [selectedIds, setSelectedIds] = useState<string[]>([]);
 
-    const conversations = useMessagesStore(state => state.conversations).filter(c => c.isArchived && !c.isDeleted);
+    const conversations = useMessagesStore(state => state.conversations).filter(c => c.isArchived);
     const unarchiveConversation = useMessagesStore(state => state.unarchiveConversation);
     const deleteConversation = useMessagesStore(state => state.deleteConversation);
     const unarchiveMultiple = useMessagesStore(state => state.unarchiveMultiple);
@@ -124,7 +124,19 @@ export default function ArchivedMessagesScreen() {
                     )}
                     {/* Avatar */}
                     <View style={styles.avatarContainer}>
-                        <Image source={{ uri: item.avatar }} style={styles.avatar} contentFit="cover" />
+                        {item.avatar ? (
+                            <Image
+                                source={{ uri: item.avatar }}
+                                style={styles.avatar}
+                                contentFit="cover"
+                            />
+                        ) : (
+                            <View style={[styles.avatar, styles.avatarPlaceholder]}>
+                                <Text style={styles.avatarInitial}>
+                                    {(item.name || '?').charAt(0).toUpperCase()}
+                                </Text>
+                            </View>
+                        )}
                         {item.isOnline && (
                             <View style={[styles.onlineDot, { borderColor: colors.background.primary }]} />
                         )}
@@ -356,6 +368,16 @@ const styles = StyleSheet.create({
         width: 52,
         height: 52,
         borderRadius: 26,
+    },
+    avatarPlaceholder: {
+        backgroundColor: '#2a2a3a',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    avatarInitial: {
+        fontSize: 20,
+        fontWeight: '700',
+        color: '#a0a0c0',
     },
     onlineDot: {
         position: "absolute",

@@ -158,8 +158,7 @@ export default function ForgotPasswordScreen() {
                         showsVerticalScrollIndicator={false}
                         keyboardShouldPersistTaps="handled"
                     >
-                        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-                            <View style={{ flex: 1 }}>
+                        <View style={{ flex: 1 }}>
                                 <View style={styles.content}>
                                     <View style={styles.header}>
                                         <TouchableOpacity
@@ -253,6 +252,8 @@ export default function ForgotPasswordScreen() {
                                                             setErrors((prev) => ({ ...prev, newPassword: '' }));
                                                         }}
                                                         secureTextEntry
+                                                        textContentType="oneTimeCode"
+                                                        autoComplete="off"
                                                         error={errors.newPassword}
                                                         containerStyle={styles.inputContainer}
                                                     />
@@ -266,6 +267,8 @@ export default function ForgotPasswordScreen() {
                                                             setErrors((prev) => ({ ...prev, confirmPassword: '' }));
                                                         }}
                                                         secureTextEntry
+                                                        textContentType="oneTimeCode"
+                                                        autoComplete="off"
                                                         error={errors.confirmPassword}
                                                         containerStyle={styles.inputContainer}
                                                     />
@@ -296,7 +299,6 @@ export default function ForgotPasswordScreen() {
                                     </BlurView>
                                 </View>
                             </View>
-                        </TouchableWithoutFeedback>
                     </ScrollView>
 
                     <TouchableOpacity onPress={() => router.replace('/login')} style={styles.footer}>

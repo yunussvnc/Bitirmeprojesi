@@ -364,6 +364,8 @@ class PostMediaBase(BaseModel):
     medium_url: Optional[str] = None
     blurhash: Optional[str] = None
     order_index: int = 0
+    width: Optional[int] = None
+    height: Optional[int] = None
 
 class PostMediaCreate(PostMediaBase):
     pass
@@ -441,6 +443,19 @@ class PaginatedPosts(BaseModel):
     items: List[Post]
     total: int
     page: int
+    page_size: int
+
+
+class CursorPaginatedPosts(BaseModel):
+    """
+    Cursor tabanlı sayfalama yanıtı.
+    Büyük veri setleri (25M+ gönderi) için OFFSET yerine kullanılır.
+    next_cursor: Sonraki sayfayı almak için gönderilecek opaque token (ISO datetime:id).
+    has_more: Daha fazla içerik var mı?
+    """
+    items: List[Post]
+    next_cursor: Optional[str] = None   # "<created_at_iso>:<post_id>"
+    has_more: bool = False
     page_size: int
 
 
@@ -711,6 +726,16 @@ class TypingEvent(BaseModel):
 
 class OpenConversationRequest(BaseModel):
     user_id: int
+
+
+class ConversationPermission(BaseModel):
+    """Gönderici → alıcı yönünde mesajlaşma izin durumu"""
+    can_send: bool
+    can_send_media: bool
+    hide_read_receipt: bool
+    reason: Optional[str] = None          # UI'da gösterilebilir açıklama kodu
+    messages_sent_count: int = 0          # Gönderici'nin bu konuşmada gönderdiği mesaj sayısı
+    awaiting_reply: bool = False          # True = karşı taraf henüz cevap vermedi
 
 
 # --- PUSH TOKEN ---

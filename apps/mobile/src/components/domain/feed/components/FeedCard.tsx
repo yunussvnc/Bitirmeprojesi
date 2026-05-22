@@ -63,19 +63,25 @@ export function FeedCard({
   const mediaList = [...(post.media ?? [])].sort((a, b) => (a.order_index ?? 0) - (b.order_index ?? 0));
   const isCarousel = mediaList.length > 1;
 
-  // Dynamic image height from first media's aspect ratio
+  // Her medya için ayrı yükseklik hesapla (kırpma olmasın)
   const firstMedia = mediaList[0];
   const displayUrl = firstMedia?.media_url;
   const isVideo = firstMedia?.media_type === "video";
 
   const imageWidth = screenWidth;
-  let imageHeight = imageWidth * (4 / 5); // Default to 4:5
 
-  if (firstMedia?.width && firstMedia?.height) {
-    // Dynamic height based on actual aspect ratio to prevent cropping
-    const aspectRatio = firstMedia.width / firstMedia.height;
-    imageHeight = imageWidth / aspectRatio;
+  /** Tek bir medya için gerçek boyutunu kullanarak yükseklik hesapla */
+  function getMediaHeight(media: typeof firstMedia): number {
+    if (media?.width && media?.height && media.width > 0 && media.height > 0) {
+      return imageWidth * (media.height / media.width);
+    }
+    return imageWidth; // boyut bilgisi yoksa kare (1:1) fallback
   }
+
+  // Carousel'da tüm slaytların en büyük yüksekliğini al (tutarlı kart boyu)
+  const imageHeight = isCarousel
+    ? Math.max(...mediaList.map(getMediaHeight))
+    : getMediaHeight(firstMedia);
 
   const handleLike = useCallback(() => {
     mediumImpact();
@@ -92,6 +98,12 @@ export function FeedCard({
   const wrapperAnimStyle = useAnimatedStyle(() => ({
     zIndex: zoomScale.value > 1.01 ? 999 : 0,
     elevation: zoomScale.value > 1.01 ? 999 : 8,
+  }));
+
+  const imageContainerAnimStyle = useAnimatedStyle(() => ({
+    zIndex: zoomScale.value > 1.01 ? 100 : 2,
+    elevation: zoomScale.value > 1.01 ? 100 : 2,
+    overflow: zoomScale.value > 1.01 ? "visible" : "hidden",
   }));
 
   const notifyZoom = useCallback(
@@ -150,7 +162,7 @@ export function FeedCard({
         </TouchableOpacity>
 
         {/* Görsel alanı */}
-        <View style={[styles.imageContainer, { height: imageHeight }]}>
+        <Animated.View style={[styles.imageContainer, { height: imageHeight }, imageContainerAnimStyle]}>
           {isCarousel ? (
             // ── Carousel mode ──────────────────────────────────────────
             <>
@@ -162,16 +174,19 @@ export function FeedCard({
                 scrollEventThrottle={16}
                 style={{ width: imageWidth, height: imageHeight }}
               >
-                {mediaList.map((media, idx) => (
-                  <View key={idx} style={{ width: imageWidth, height: imageHeight }}>
-                    <Image
-                      source={{ uri: media.media_url }}
-                      style={{ width: imageWidth, height: imageHeight }}
-                      contentFit="cover"
-                      cachePolicy="memory-disk"
-                    />
-                  </View>
-                ))}
+                {mediaList.map((media, idx) => {
+                  const slideHeight = getMediaHeight(media);
+                  return (
+                    <View key={idx} style={{ width: imageWidth, height: imageHeight, alignItems: "center", justifyContent: "center" }}>
+                      <Image
+                        source={{ uri: media.media_url }}
+                        style={{ width: imageWidth, height: slideHeight }}
+                        contentFit="contain"
+                        cachePolicy="memory-disk"
+                      />
+                    </View>
+                  );
+                })}
               </ScrollView>
 
               {/* Carousel count badge (Instagram-style top-right) */}
@@ -209,7 +224,7 @@ export function FeedCard({
                 }}
               >
                 {displayUrl ? (
-                  <Image source={{ uri: displayUrl }} style={{ width: imageWidth, height: imageHeight }} contentFit="cover" cachePolicy="memory-disk" />
+                  <Image source={{ uri: displayUrl }} style={{ width: imageWidth, height: imageHeight }} contentFit="contain" cachePolicy="memory-disk" />
                 ) : (
                   <View style={[{ width: imageWidth, height: imageHeight }, styles.imagePlaceholder, { backgroundColor: colors.surface.elevated }]}>
                     <IconSymbol name="photo" size={40} color={colors.text.tertiary} />
@@ -223,7 +238,7 @@ export function FeedCard({
               )}
             </>
           )}
-        </View>
+        </Animated.View>
 
         {/* İçerik alanı */}
         <View style={[styles.content, { backgroundColor: colors.background.secondary }]}>
