@@ -1128,10 +1128,15 @@ async def smart_search_v2(request: SmartSearchRequest):
                 time_of_day=time_weather_context
             )
             
+            # Mesafe filtresi: max_distance_km'den uzak mekanları çıkar
+            distance_km = scores.get("distance_km", 0)
+            if request.max_distance_km and distance_km > 0 and distance_km > request.max_distance_km:
+                continue  # Çok uzak, atla
+            
             scored_places.append({
                 **place,
                 "match_score": round(scores["total_score"], 3),
-                "distance_km": scores["distance_km"],
+                "distance_km": distance_km,
                 "score_breakdown": {
                     "feature": round(scores["feature_score"], 3),
                     "distance": round(scores["distance_score"], 3),

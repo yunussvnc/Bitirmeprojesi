@@ -2,7 +2,7 @@ import Constants from "expo-constants";
 import { Platform } from "react-native";
 
 /** Dev fallback when expoHost unavailable – override via EXPO_PUBLIC_DEV_API_HOST */
-const DEV_API_FALLBACK = "10.23.0.39:8000";
+const DEV_API_FALLBACK = "192.168.1.36:8000";
 const PROD_API_DEFAULT = "https://api.asemos.com";
 
 const expoHost = Constants.expoConfig?.hostUri?.split(":")[0];

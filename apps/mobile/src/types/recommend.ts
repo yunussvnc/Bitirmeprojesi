@@ -26,6 +26,8 @@ export type RecommendItem = {
   photo_url?: string;
   explanation?: string;
   tags?: string[];
+  subtitle?: string;
+  data_id?: string; // Google Place ID (yorum analizi için)
 };
 
 export type RecommendResponse = {

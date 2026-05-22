@@ -65,7 +65,7 @@ const PLACE_TYPES = [
   "Kebapçı", "Balıkçı", "Tatlıcı", "Pastane", "Burgerci", "Pizzacı", "Dönerci", "Nargile Cafe",
 ];
 
-type DisplayMode = "browse" | "ai";
+type DisplayMode = "idle" | "browse" | "ai";
 
 /** Common shape for list items (RecommendItem | Place) */
 type PlaceLike = { id: number | string; name?: string; category?: string; photo_url?: string; description?: string; subtitle?: string; tags?: string[] };
@@ -225,7 +225,7 @@ export default function HomeScreen() {
   const [error, setError] = useState("");
   const [aiItems, setAiItems] = useState<RecommendItem[]>([]);
   const [aiSummary, setAiSummary] = useState("");
-  const [displayMode, setDisplayMode] = useState<DisplayMode>("browse");
+  const [displayMode, setDisplayMode] = useState<DisplayMode>("idle");
   const [refreshing, setRefreshing] = useState(false);
   const [placesById, setPlacesById] = useState<Record<string, Place>>({});
   const [filterSheetOpen, setFilterSheetOpen] = useState(false);
@@ -418,7 +418,7 @@ export default function HomeScreen() {
     return list.slice(0, 12);
   }, [allPlaces, filters.category, filters.location]);
 
-  const displayList = displayMode === "ai" ? aiItems : filteredPlaces;
+  const displayList = displayMode === "ai" ? aiItems : displayMode === "browse" ? filteredPlaces : [];
   const isAiMode = displayMode === "ai";
 
   const handleApplyFilters = useCallback(
@@ -429,6 +429,10 @@ export default function HomeScreen() {
         purpose: v.purpose ?? undefined,
         budget: v.budget ?? undefined,
       });
+      // Filtre uygulandığında browse moduna geç
+      if (v.category || v.location) {
+        setDisplayMode("browse");
+      }
     },
     [patchPrefs]
   );
@@ -438,7 +442,7 @@ export default function HomeScreen() {
     resetPrefs();
     setFilters({ location: null, category: null, vibe: null, purpose: null, budget: null });
     setQuery("");
-    setDisplayMode("browse");
+    setDisplayMode("idle");
   }, [resetPrefs]);
 
   const getLocationFromName = (name: string) => (name?.includes(" - ") ? name.split(" - ")[1]?.trim() : undefined);
@@ -495,6 +499,10 @@ export default function HomeScreen() {
   const viewabilityConfig = useRef({ itemVisiblePercentThreshold: 50 }).current;
 
   const listEmpty = useCallback(() => {
+    // Idle modda hiçbir şey gösterme (başlangıç durumu)
+    if (displayMode === "idle") {
+      return null;
+    }
     if (loading && allPlaces.length === 0) {
       return (
         <View style={styles.skeletonWrap}>
@@ -522,7 +530,7 @@ export default function HomeScreen() {
         </View>
       );
     }
-    if (!isAiMode && filteredPlaces.length === 0) {
+    if (displayMode === "browse" && filteredPlaces.length === 0) {
       return (
         <View style={styles.centerWrap}>
           <EmptyState
@@ -537,6 +545,7 @@ export default function HomeScreen() {
     }
     return null;
   }, [
+    displayMode,
     loading,
     allPlaces.length,
     error,

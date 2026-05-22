@@ -106,10 +106,7 @@ export default function TabsLayout() {
         <Tabs.Screen
           name="ai"
           options={{
-            title: "AI Öneri",
-            tabBarIcon: ({ color, focused }) => <TabIcon name="sparkles" focused={focused} color={color} />,
-            // @ts-expect-error - listeners works at runtime
-            listeners: () => ({ tabPress: () => selection() }),
+            href: null,
           }}
         />
         <Tabs.Screen

@@ -34,8 +34,8 @@ function resolveAIBaseUrl(): string {
     // Expo'nun bağlı olduğu host'u kullan (telefon + PC aynı Wi-Fi'da)
     const expoHost = Constants.expoConfig?.hostUri?.split(':')[0];
     if (expoHost) return `http://${expoHost}:8080`;
-    // Fallback: .env'den veya localhost
-    return `http://${process.env.EXPO_PUBLIC_DEV_API_HOST ?? 'localhost'}:8080`;
+    // Fallback: .env'den veya local IP
+    return `http://${process.env.EXPO_PUBLIC_DEV_API_HOST?.split(':')[0] ?? '192.168.1.36'}:8080`;
   }
   return process.env.EXPO_PUBLIC_AI_URL ?? 'https://ai.asemos.com';
 }

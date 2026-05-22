@@ -84,7 +84,15 @@ class SerpApiClient:
         for item in local_results[:limit]:
             place = self._parse_place(item)
             if place:
-                places.append(place)
+                # Sadece popüler mekanları al (ara sokak dönercisi gibi yerleri filtrele)
+                rating = place.get('rating', 0)
+                review_count = place.get('review_count', 0)
+                
+                # Minimum kalite kriterleri
+                if rating >= 4.0 and review_count >= 50:
+                    places.append(place)
+                elif rating >= 4.5 and review_count >= 20:  # Çok iyi puanlılar için daha az yorum yeterli
+                    places.append(place)
         
         print(f"[SerpApi] {len(places)} mekan bulundu")
         return places
