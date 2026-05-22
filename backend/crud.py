@@ -1253,7 +1253,8 @@ def create_notification(
     from app.services.notification_provider import OmnichannelManager
 
     repo = PostgresNotificationRepository(db)
-    manager = OmnichannelManager(repo)
+    manager = OmnichannelManager(repo, db=db)
+
 
     place_id = None
     if post_id:

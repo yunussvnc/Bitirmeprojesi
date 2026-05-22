@@ -428,6 +428,21 @@ export default function LoginScreen() {
                             <Text style={styles.socialBtnTextWhite}>{t('auth.apple')}</Text>
                           </TouchableOpacity>
                         </View>
+
+                        {/* Kayıt ol linki — Google ve Apple'ın hemen altında */}
+                        <TouchableOpacity
+                          style={styles.registerRow}
+                          onPress={() => {
+                            Keyboard.dismiss();
+                            lightImpact();
+                            router.push({ pathname: '/register', params: { roleType } });
+                          }}
+                          activeOpacity={0.8}
+                        >
+                          <Text style={styles.footerLabel}>{t('auth.no_account')}</Text>
+                          <Text style={styles.footerLink}>{t('auth.register')}</Text>
+                        </TouchableOpacity>
+
                       </View>
                     </BlurView>
                   </View>
@@ -436,22 +451,9 @@ export default function LoginScreen() {
           </ScrollView>
 
         </KeyboardAvoidingView>
+      </SafeAreaView>
+    </View>
 
-          {/* Footer formun en altında, klavye ile yukarı çıkmasın diye KeyboardAvoidingView dışında */}
-          <TouchableOpacity
-            style={[styles.footerStatic, { paddingBottom: Math.max(16, insets.bottom + 8) }]}
-            onPress={() => {
-              Keyboard.dismiss();
-              lightImpact();
-              router.push({ pathname: '/register', params: { roleType } });
-            }}
-            activeOpacity={0.8}
-          >
-            <Text style={styles.footerLabel}>{t('auth.no_account')}</Text>
-            <Text style={styles.footerLink}>{t('auth.register')}</Text>
-          </TouchableOpacity>
-      </SafeAreaView >
-    </View >
   );
 }
 
@@ -662,6 +664,13 @@ const styles = StyleSheet.create({
     paddingTop: 16,
     paddingHorizontal: 24,
     backgroundColor: 'transparent',
+  },
+  registerRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 20,
+    gap: 4,
   },
   footerLabel: {
     fontSize: 16,

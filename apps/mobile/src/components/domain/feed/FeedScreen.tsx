@@ -92,6 +92,16 @@ export default function FeedScreen() {
     }
   }, []);
 
+  /** Aynı id'ye sahip postları kaldırır — ilk görülen kazanır */
+  const dedupeById = useCallback((items: Post[]): Post[] => {
+    const seen = new Set<number>();
+    return items.filter((p) => {
+      if (seen.has(p.id)) return false;
+      seen.add(p.id);
+      return true;
+    });
+  }, []);
+
   const loadFeed = useCallback(
     async (refresh = false, cursorOverride?: string | null) => {
       // refresh=true ise cursor'u sıfırla ve baştan yükle
@@ -114,9 +124,9 @@ export default function FeedScreen() {
         }
 
         if (refresh) {
-          setPosts(res.items);
+          setPosts(dedupeById(res.items));
         } else {
-          setPosts((prev) => [...prev, ...res.items]);
+          setPosts((prev) => dedupeById([...prev, ...res.items]));
         }
         setNextCursor(res.next_cursor);
         setHasMore(res.has_more);
@@ -130,7 +140,7 @@ export default function FeedScreen() {
     },
     // nextCursor dependency sadece "daha fazla yükle" için gerekli
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [filter, nextCursor]
+    [filter, nextCursor, dedupeById]
   );
 
   useEffect(() => {
@@ -503,27 +513,7 @@ export default function FeedScreen() {
               </Text>
               <IconSymbol name={filterDropdownOpen ? "chevron.up" : "chevron.down"} size={12} color={colors.text.secondary} />
             </TouchableOpacity>
-            {filterDropdownOpen && (
-              <View style={[styles.dropdownMenu, { backgroundColor: colors.surface.elevated, borderColor: colors.surface.border }]}>
-                {(["all", "following"] as const).map((opt) => (
-                  <TouchableOpacity
-                    key={opt}
-                    style={[styles.dropdownItem, filter === opt && { backgroundColor: colors.accent.primary + "18" }]}
-                    onPress={() => {
-                      lightImpact();
-                      setFilter(opt);
-                      setFilterDropdownOpen(false);
-                    }}
-                    activeOpacity={0.7}
-                  >
-                    {filter === opt && <IconSymbol name="checkmark" size={13} color={colors.accent.primary} />}
-                    <Text style={[styles.dropdownItemText, { color: filter === opt ? colors.accent.primary : colors.text.primary }]}>
-                      {opt === "all" ? t("feed.filter_all") : t("feed.filter_following")}
-                    </Text>
-                  </TouchableOpacity>
-                ))}
-              </View>
-            )}
+
           </View>
 
           <View style={styles.headerRight}>
@@ -606,6 +596,46 @@ export default function FeedScreen() {
           onEndReached={handleLoadMore}
           onEndReachedThreshold={0.3}
         />
+
+        {/* Filter dropdown overlay — FlatList dışında, her zaman üstte */}
+        {filterDropdownOpen && (
+          <>
+            <TouchableOpacity
+              style={styles.dropdownBackdrop}
+              activeOpacity={1}
+              onPress={() => setFilterDropdownOpen(false)}
+            />
+            <View
+              style={[
+                styles.dropdownMenu,
+                {
+                  backgroundColor: colors.surface.elevated,
+                  borderColor: colors.surface.border,
+                  top: insets.top + headerHeight,
+                },
+              ]}
+            >
+              {(["all", "following"] as const).map((opt) => (
+                <TouchableOpacity
+                  key={opt}
+                  style={[styles.dropdownItem, filter === opt && { backgroundColor: colors.accent.primary + "18" }]}
+                  onPress={() => {
+                    lightImpact();
+                    setFilter(opt);
+                    setFilterDropdownOpen(false);
+                  }}
+                  activeOpacity={0.7}
+                >
+                  {filter === opt && <IconSymbol name="checkmark" size={13} color={colors.accent.primary} />}
+                  <Text style={[styles.dropdownItemText, { color: filter === opt ? colors.accent.primary : colors.text.primary }]}>
+                    {opt === "all" ? t("feed.filter_all") : t("feed.filter_following")}
+                  </Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+          </>
+        )}
+
         <FeedMiniBar
           visible={miniBarVisible}
           opacity={miniBarOpacity}
@@ -701,6 +731,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     pointerEvents: "box-none",
   },
+  dropdownBackdrop: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    zIndex: 30,
+  },
   dropdownTrigger: {
     flexDirection: "row",
     alignItems: "center",
@@ -717,7 +755,6 @@ const styles = StyleSheet.create({
   },
   dropdownMenu: {
     position: "absolute",
-    top: 44,
     left: "50%",
     transform: [{ translateX: -90 }],
     width: 180,
@@ -728,7 +765,8 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.15,
     shadowRadius: 8,
-    elevation: 8,
+    elevation: 10,
+    zIndex: 31,
   },
   dropdownItem: {
     flexDirection: "row",

@@ -119,6 +119,14 @@ def notification_push_content(
             "title": "👤 Yeni Takipçi",
             "body": f"{actor_name} seni takip etmeye başladı",
         },
+        "follow_request": {
+            "title": "👤 Takip İsteği",
+            "body": f"{actor_name} seni takip etmek istiyor",
+        },
+        "follow_accepted": {
+            "title": "✅ Takip İsteği Kabul Edildi",
+            "body": f"{actor_name} takip isteğini kabul etti",
+        },
         "match": {
             "title": "🔥 Yeni Eşleşme!",
             "body": f"{actor_name} ile eşleştin!",
@@ -132,6 +140,7 @@ def notification_push_content(
             "body": f"{actor_name} seni bir gönderide etiketledi",
         },
     }
+
 
     template = templates.get(notif_type, {
         "title": "AsEmOs",

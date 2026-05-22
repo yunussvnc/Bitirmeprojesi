@@ -98,7 +98,8 @@ def _get_messaging_permission(
         )
 
     # ── Kural 1: B gizli hesap + takipleşme yok → tamamen engel ─
-    if receiver.is_private_account:
+    receiver_is_private = bool(receiver.preferences and receiver.preferences.is_private_account)
+    if receiver_is_private:
         return schemas.ConversationPermission(
             can_send=False,
             can_send_media=False,
@@ -204,7 +205,8 @@ def open_or_create_conversation(
         )
     ).first()
 
-    if not existing_conv and other_user.is_private_account:
+    other_is_private = bool(other_user.preferences and other_user.preferences.is_private_account)
+    if not existing_conv and other_is_private:
         # Karşılıklı takip var mı?
         mutual = (
             db.query(models.Follow).filter(

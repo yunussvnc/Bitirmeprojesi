@@ -285,6 +285,11 @@ export default function RegisterScreen() {
               <View style={{ flex: 1 }}>
                 <View style={styles.content} pointerEvents="box-none">
                   <View style={styles.topBlock}>
+                    {/* Marka başlığı — login ekranıyla aynı konum ve boyut */}
+                    <View style={styles.header}>
+                      <Text style={styles.brandTitle}>{t('auth.app_name')}</Text>
+                    </View>
+
                     {/* Toggle Buttons (Kullanıcı / Mekan) */}
                     <View style={styles.toggleContainer}>
                       <TouchableOpacity 
@@ -418,23 +423,26 @@ export default function RegisterScreen() {
                             </View>
                           </>
                         )}
+
+                        {/* Giriş linki — her iki roleType için kart içinde */}
+                        <TouchableOpacity
+                          style={styles.loginRow}
+                          onPress={() => { Keyboard.dismiss(); lightImpact(); router.back(); }}
+                          activeOpacity={0.8}
+                        >
+                          <Text style={styles.footerLabel}>{t('auth.have_account')}</Text>
+                          <Text style={styles.footerLink}>{t('auth.login')}</Text>
+                        </TouchableOpacity>
                       </View>
+
                     </BlurView>
                   </View>
                 </View>
               </View>
           </ScrollView>
         </KeyboardAvoidingView>
-          <TouchableOpacity
-            style={[styles.footerStatic, { paddingBottom: Math.max(16, insets.bottom + 8) }]}
-            onPress={() => { Keyboard.dismiss(); lightImpact(); router.back(); }}
-            activeOpacity={0.8}
-          >
-            <Text style={styles.footerLabel}>{t('auth.have_account')}</Text>
-            <Text style={styles.footerLink}>{t('auth.login')}</Text>
-          </TouchableOpacity>
       </SafeAreaView>
-    </View >
+    </View>
   );
 }
 
@@ -452,23 +460,17 @@ const styles = StyleSheet.create({
   },
   topBlock: { flex: 1 },
   backgroundImage: { width: '100%' as any, height: '100%' as any },  // kullanılmıyor
-  header: { alignItems: 'center', marginBottom: 20 },
-  logoWrap: {
-    width: 72,
-    height: 72,
-    borderRadius: 36,
-    backgroundColor: 'rgba(255,255,255,0.18)',
+  header: {
     alignItems: 'center',
-    justifyContent: 'center',
-    marginBottom: 14,
+    marginBottom: 36,
   },
-  logoEmoji: { fontSize: 36 },
+
   brandTitle: {
-    fontSize: 34,
+    fontSize: 40,
     fontWeight: '800',
     color: '#ffffff',
     letterSpacing: 3,
-    marginBottom: 6,
+    marginBottom: 10,
     textShadowColor: 'rgba(0,0,0,0.4)',
     textShadowOffset: { width: 0, height: 2 },
     textShadowRadius: 8,
@@ -598,6 +600,13 @@ const styles = StyleSheet.create({
     paddingTop: 16,
     paddingHorizontal: 24,
     backgroundColor: 'transparent',
+  },
+  loginRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 20,
+    gap: 4,
   },
   footerLabel: { fontSize: 16, color: 'rgba(255,255,255,0.9)' },
   footerLink: { fontSize: 16, fontWeight: '700', color: '#ffffff', textDecorationLine: 'underline', letterSpacing: 0.3 },
