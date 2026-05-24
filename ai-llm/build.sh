@@ -4,8 +4,8 @@
 
 set -o errexit  # Hata durumunda dur
 
-echo "🔧 Python paketleri yükleniyor..."
+echo "Python paketleri yükleniyor..."
 pip install --upgrade pip
 pip install -r requirements.txt
 
-echo "✅ Build tamamlandı!"
+echo "Build tamamlandı!"

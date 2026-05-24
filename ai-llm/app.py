@@ -15,6 +15,7 @@ import math
 import asyncio
 import hashlib
 import json
+import re
 import httpx  # type: ignore[import]
 from datetime import datetime
 import redis  # type: ignore[import]
@@ -42,6 +43,14 @@ if _ai_llm_root not in sys.path:
 
 from src.models.llm.llm_wrapper import LayeredLLMWrapper  # type: ignore[import]
 from src.config import settings  # type: ignore[import]
+from scripts.prepare_vector_db import (  # type: ignore[import]
+    get_mekanlar_from_json,
+    create_embedding_text,
+)
+from qdrant_client.models import PointStruct  # type: ignore[import]
+
+# ==================== RAG SYSTEM ====================
+from src.rag.pipeline import RAGPipeline  # type: ignore[import]
 
 _llm: Optional[LayeredLLMWrapper] = None  # lazy singleton
 
@@ -52,7 +61,295 @@ def _get_llm() -> LayeredLLMWrapper:
     return _llm
 
 
-async def generate_llm_response(query: str, places: list, parsed_context: dict) -> str:
+SUPPORTED_LANGUAGES = {
+    "tr": "Turkish",
+    "en": "English",
+    "de": "German",
+    "fr": "French",
+    "es": "Spanish",
+    "ar": "Arabic",
+    "ru": "Russian",
+}
+
+LANGUAGE_ALIASES = {
+    "turkish": "tr", "turkce": "tr", "türkçe": "tr",
+    "english": "en", "ingilizce": "en", "İngilizce": "en",
+    "german": "de", "deutsch": "de", "almanca": "de",
+    "french": "fr", "francais": "fr", "français": "fr", "fransizca": "fr", "fransızca": "fr",
+    "spanish": "es", "espanol": "es", "español": "es", "ispanyolca": "es", "İspanyolca": "es",
+    "arabic": "ar", "arabic": "ar", "arapca": "ar", "arapça": "ar",
+    "russian": "ru", "russkiy": "ru", "rusca": "ru", "rusça": "ru",
+}
+
+MESSAGE_TEMPLATES = {
+    "inappropriate": {
+        "tr": "Üzgünüm, ben sadece bir mekan öneri asistanıyım. Siyasi, dini veya argo sohbetlere katılamıyorum. Lütfen bana mekanlarla ilgili bir soru sor. 🤖🍔",
+        "en": "Sorry, I am only a venue recommendation assistant. I cannot join political, religious, or offensive chats. Please ask me something about places. 🤖🍔",
+        "de": "Tut mir leid, ich bin nur ein Assistent für Ortsempfehlungen. An politischen, religiösen oder beleidigenden Gesprächen kann ich nicht teilnehmen. Bitte frage mich etwas über Orte. 🤖🍔",
+        "fr": "Désolé, je suis uniquement un assistant de recommandation de lieux. Je ne peux pas participer aux discussions politiques, religieuses ou offensantes. Pose-moi plutôt une question sur des lieux. 🤖🍔",
+        "es": "Lo siento, solo soy un asistente de recomendación de lugares. No puedo participar en conversaciones políticas, religiosas u ofensivas. Pregúntame algo sobre lugares. 🤖🍔",
+        "ar": "عذرًا، أنا مساعد مخصص فقط لاقتراح الأماكن. لا يمكنني المشاركة في محادثات سياسية أو دينية أو مسيئة. من فضلك اسألني عن الأماكن. 🤖🍔",
+        "ru": "Извините, я только помощник по рекомендациям мест. Я не участвую в политических, религиозных или оскорбительных беседах. Пожалуйста, спросите меня о местах. 🤖🍔",
+    },
+    "chit_chat": {
+        "tr": "Merhaba! İyiyim, teşekkür ederim. Ben seni aradığın en güzel mekanlara götürmek için buradayım. Bugün nasıl bir yere gitmek istersin? (Örn: Beşiktaş'ta deniz manzaralı sakin bir kafe) ☕",
+        "en": "Hi! I am doing well, thank you. I am here to help you find great places. What kind of place would you like today? (Example: a quiet cafe with a sea view in Besiktas) ☕",
+        "de": "Hallo! Mir geht es gut, danke. Ich helfe dir, tolle Orte zu finden. Was für einen Ort suchst du heute? (Beispiel: ein ruhiges Café mit Meerblick in Besiktas) ☕",
+        "fr": "Bonjour ! Je vais bien, merci. Je suis là pour t’aider à trouver de super lieux. Quel type d’endroit cherches-tu aujourd’hui ? (Exemple : un café calme avec vue sur la mer à Besiktas) ☕",
+        "es": "¡Hola! Estoy bien, gracias. Estoy aquí para ayudarte a encontrar buenos lugares. ¿Qué tipo de lugar buscas hoy? (Ejemplo: un café tranquilo con vista al mar en Besiktas) ☕",
+        "ar": "مرحبًا! أنا بخير، شكرًا لك. أنا هنا لمساعدتك في العثور على أماكن رائعة. ما نوع المكان الذي تريده اليوم؟ (مثال: مقهى هادئ بإطلالة على البحر في بشكتاش) ☕",
+        "ru": "Привет! У меня всё хорошо, спасибо. Я помогу тебе найти отличные места. Какое место ты ищешь сегодня? (Например: тихое кафе с видом на море в Бешикташе) ☕",
+    },
+    "no_vector_match": {
+        "tr": "Vektör veritabanında eşleşen mekan bulunamadı",
+        "en": "No matching places were found in the vector database",
+        "de": "In der Vektordatenbank wurden keine passenden Orte gefunden",
+        "fr": "Aucun lieu correspondant n’a été trouvé dans la base vectorielle",
+        "es": "No se encontraron lugares coincidentes en la base de datos vectorial",
+        "ar": "لم يتم العثور على أماكن مطابقة في قاعدة بيانات المتجهات",
+        "ru": "В векторной базе данных не найдено подходящих мест",
+    },
+    "reviews_unavailable": {
+        "tr": "Yapay zeka sistemi yorumlara şu anda erişemiyor.",
+        "en": "The AI system cannot access reviews right now.",
+        "de": "Das KI-System kann derzeit nicht auf Bewertungen zugreifen.",
+        "fr": "Le système d’IA ne peut pas accéder aux avis pour le moment.",
+        "es": "El sistema de IA no puede acceder a las reseñas en este momento.",
+        "ar": "لا يستطيع نظام الذكاء الاصطناعي الوصول إلى المراجعات حاليًا.",
+        "ru": "Система ИИ сейчас не может получить доступ к отзывам.",
+    },
+    "not_enough_reviews": {
+        "tr": "Yapay zeka analizine elverişli yeterli müşteri geri bildirimi bulunamamıştır.",
+        "en": "There is not enough customer feedback for AI analysis.",
+        "de": "Es gibt nicht genügend Kundenfeedback für eine KI-Analyse.",
+        "fr": "Il n’y a pas assez d’avis clients pour une analyse par IA.",
+        "es": "No hay suficientes comentarios de clientes para el análisis de IA.",
+        "ar": "لا توجد ملاحظات كافية من العملاء لإجراء تحليل بالذكاء الاصطناعي.",
+        "ru": "Недостаточно отзывов клиентов для анализа ИИ.",
+    },
+}
+
+REASON_LABELS = {
+    "high_rating": {"tr": "Yüksek puan", "en": "High rating", "de": "Hohe Bewertung", "fr": "Note élevée", "es": "Alta puntuación", "ar": "تقييم مرتفع", "ru": "Высокий рейтинг"},
+    "many_reviews": {"tr": "Çok yorumlu", "en": "Many reviews", "de": "Viele Bewertungen", "fr": "Beaucoup d’avis", "es": "Muchas reseñas", "ar": "مراجعات كثيرة", "ru": "Много отзывов"},
+    "reviews": {"tr": "yorum", "en": "reviews", "de": "Bewertungen", "fr": "avis", "es": "reseñas", "ar": "مراجعة", "ru": "отзывов"},
+    "very_near": {"tr": "Çok yakın", "en": "Very close", "de": "Sehr nah", "fr": "Très proche", "es": "Muy cerca", "ar": "قريب جدًا", "ru": "Очень близко"},
+    "near": {"tr": "Yakın", "en": "Nearby", "de": "In der Nähe", "fr": "Proche", "es": "Cerca", "ar": "قريب", "ru": "Рядом"},
+    "general_fit": {"tr": "Genel uygunluk", "en": "Overall fit", "de": "Allgemein passend", "fr": "Bonne adéquation générale", "es": "Adecuación general", "ar": "ملاءمة عامة", "ru": "Общее соответствие"},
+}
+
+FEATURE_LABELS = {
+    "wifi": {"tr": "📶 Sınırsız Wi-Fi", "en": "📶 Unlimited Wi-Fi", "de": "📶 Unbegrenztes WLAN", "fr": "📶 Wi-Fi illimité", "es": "📶 Wi-Fi ilimitado", "ar": "📶 واي فاي غير محدود", "ru": "📶 Безлимитный Wi-Fi"},
+    "deniz": {"tr": "🌊 Deniz Manzaralı", "en": "🌊 Sea view", "de": "🌊 Meerblick", "fr": "🌊 Vue sur mer", "es": "🌊 Vista al mar", "ar": "🌊 إطلالة بحرية", "ru": "🌊 Вид на море"},
+    "sessiz": {"tr": "🤫 Sessiz Ortam", "en": "🤫 Quiet atmosphere", "de": "🤫 Ruhige Atmosphäre", "fr": "🤫 Ambiance calme", "es": "🤫 Ambiente tranquilo", "ar": "🤫 أجواء هادئة", "ru": "🤫 Тихая атмосфера"},
+    "açık": {"tr": "🌳 Açık Alan / Bahçe", "en": "🌳 Outdoor seating / garden", "de": "🌳 Außenbereich / Garten", "fr": "🌳 Terrasse / jardin", "es": "🌳 Zona exterior / jardín", "ar": "🌳 جلسات خارجية / حديقة", "ru": "🌳 Открытая зона / сад"},
+    "çalışma": {"tr": "💻 Çalışmaya Uygun", "en": "💻 Good for working", "de": "💻 Gut zum Arbeiten", "fr": "💻 Adapté au travail", "es": "💻 Adecuado para trabajar", "ar": "💻 مناسب للعمل", "ru": "💻 Подходит для работы"},
+}
+
+SPECIALTY_TRANSLATIONS = {
+    "kahve": {"en": "Known for coffee", "de": "Bekannt für Kaffee", "fr": "Réputé pour son café", "es": "Famoso por su café", "ar": "مشهور بالقهوة", "ru": "Известно кофе"},
+    "çay": {"en": "Known for tea", "de": "Bekannt für Tee", "fr": "Réputé pour son thé", "es": "Conocido por su té", "ar": "مشهور بالشاي", "ru": "Известно чаем"},
+    "hamburger": {"en": "Famous for burgers", "de": "Berühmt für Burger", "fr": "Réputé pour ses burgers", "es": "Famoso por sus hamburguesas", "ar": "مشهور بالبرغر", "ru": "Известно бургерами"},
+    "pizza": {"en": "Known for pizza", "de": "Bekannt für Pizza", "fr": "Réputé pour ses pizzas", "es": "Conocido por su pizza", "ar": "مشهور بالبيتزا", "ru": "Известно пиццей"},
+    "tatlı": {"en": "Famous for desserts", "de": "Berühmt für Desserts", "fr": "Réputé pour ses desserts", "es": "Famoso por sus postres", "ar": "مشهور بالحلويات", "ru": "Известно десертами"},
+    "kahvaltı": {"en": "Popular for breakfast", "de": "Beliebt fürs Frühstück", "fr": "Populaire pour le petit-déjeuner", "es": "Popular para desayunar", "ar": "مشهور بالإفطار", "ru": "Популярно для завтрака"},
+    "kebap": {"en": "Known for kebab", "de": "Bekannt für Kebab", "fr": "Réputé pour ses kebabs", "es": "Conocido por su kebab", "ar": "مشهور بالكباب", "ru": "Известно кебабом"},
+    "balık": {"en": "Famous for seafood", "de": "Berühmt für Fisch und Meeresfrüchte", "fr": "Réputé pour ses fruits de mer", "es": "Famoso por sus mariscos", "ar": "مشهور بالمأكولات البحرية", "ru": "Известно морепродуктами"},
+    "sandviç": {"en": "Known for sandwiches", "de": "Bekannt für Sandwiches", "fr": "Réputé pour ses sandwichs", "es": "Conocido por sus sándwiches", "ar": "مشهور بالسندويتشات", "ru": "Известно сэндвичами"},
+    "manzara": {"en": "Known for the view", "de": "Bekannt für die Aussicht", "fr": "Réputé pour la vue", "es": "Destaca por sus vistas", "ar": "مشهور بالإطلالة", "ru": "Известно видом"},
+    "atmosfer": {"en": "Loved for the atmosphere", "de": "Beliebt wegen der Atmosphäre", "fr": "Apprécié pour son ambiance", "es": "Apreciado por su ambiente", "ar": "محبوب بسبب الأجواء", "ru": "Ценится за атмосферу"},
+    "müzik": {"en": "Known for music", "de": "Bekannt für Musik", "fr": "Réputé pour sa musique", "es": "Conocido por su música", "ar": "مشهور بالموسيقى", "ru": "Известно музыкой"},
+    "hizmet": {"en": "Known for service quality", "de": "Bekannt für guten Service", "fr": "Réputé pour la qualité du service", "es": "Conocido por su buen servicio", "ar": "مشهور بجودة الخدمة", "ru": "Известно качеством обслуживания"},
+    "fiyat": {"en": "Known for good value", "de": "Bekannt für faire Preise", "fr": "Réputé pour son bon rapport qualité-prix", "es": "Conocido por sus buenos precios", "ar": "مشهور بالقيمة الجيدة", "ru": "Известно хорошими ценами"},
+    "smoothie": {"en": "Famous for drinks", "de": "Berühmt für Getränke", "fr": "Réputé pour ses boissons", "es": "Famoso por sus bebidas", "ar": "مشهور بالمشروبات", "ru": "Известно напитками"},
+    "kokteyl": {"en": "Popular for drinks", "de": "Beliebt für Getränke", "fr": "Populaire pour ses boissons", "es": "Popular por sus bebidas", "ar": "مشهور بالمشروبات", "ru": "Популярно благодаря напиткам"},
+    "nargile": {"en": "Known for hookah", "de": "Bekannt für Shisha", "fr": "Réputé pour la chicha", "es": "Conocido por la shisha", "ar": "مشهور بالشيشة", "ru": "Известно кальяном"},
+    "döner": {"en": "Famous for doner", "de": "Berühmt für Döner", "fr": "Réputé pour son döner", "es": "Famoso por su döner", "ar": "مشهور بالدونر", "ru": "Известно донером"},
+    "simit": {"en": "Known for simit and pastries", "de": "Bekannt für Simit und Gebäck", "fr": "Réputé pour le simit et les viennoiseries", "es": "Conocido por simit y bollería", "ar": "مشهور بالسميت والمعجنات", "ru": "Известно симитом и выпечкой"},
+    "künefe": {"en": "Known for Turkish desserts", "de": "Bekannt für türkische Desserts", "fr": "Réputé pour ses desserts turcs", "es": "Conocido por postres turcos", "ar": "مشهور بالحلويات التركية", "ru": "Известно турецкими десертами"},
+    "çorba": {"en": "Known for soup", "de": "Bekannt für Suppen", "fr": "Réputé pour ses soupes", "es": "Conocido por sus sopas", "ar": "مشهور بالشوربة", "ru": "Известно супами"},
+    "meze": {"en": "Famous for meze", "de": "Berühmt für Meze", "fr": "Réputé pour ses mezzés", "es": "Famoso por sus mezes", "ar": "مشهور بالمقبلات", "ru": "Известно мезе"},
+    "çay bahçesi": {"en": "Known as a tea garden", "de": "Bekannt als Teegarten", "fr": "Réputé comme jardin de thé", "es": "Conocido como jardín de té", "ar": "مشهور كحديقة شاي", "ru": "Известно как чайный сад"},
+    "romantik": {"en": "Known for a romantic atmosphere", "de": "Bekannt für romantische Atmosphäre", "fr": "Réputé pour son ambiance romantique", "es": "Conocido por su ambiente romántico", "ar": "مشهور بالأجواء الرومانسية", "ru": "Известно романтической атмосферой"},
+}
+
+
+def normalize_language(language: Optional[str] = None, locale: Optional[str] = None) -> Optional[str]:
+    """Request dil/locale bilgisini desteklenen iki harfli koda indirger."""
+    for value in (language, locale):
+        if not value:
+            continue
+        cleaned = value.strip().lower().replace("_", "-")
+        primary = cleaned.split("-")[0]
+        if primary in SUPPORTED_LANGUAGES:
+            return primary
+        if cleaned in LANGUAGE_ALIASES:
+            return LANGUAGE_ALIASES[cleaned]
+        if primary in LANGUAGE_ALIASES:
+            return LANGUAGE_ALIASES[primary]
+    return None
+
+
+def detect_language_from_query(query: str) -> str:
+    """Harici bağımlılık olmadan demo için basit dil sezgisi."""
+    text = (query or "").lower()
+    if re.search(r"[\u0600-\u06ff]", text):
+        return "ar"
+    if re.search(r"[\u0400-\u04ff]", text):
+        return "ru"
+    if any(ch in text for ch in "çğıöşü"):
+        return "tr"
+
+    keyword_scores = {
+        "tr": ["merhaba", "mekan", "kafe", "kahve", "yemek", "öner", "oner", "sessiz", "yakın", "yakin"],
+        "en": ["hello", "place", "coffee", "restaurant", "recommend", "quiet", "near", "best"],
+        "de": ["hallo", "ort", "cafe", "kaffee", "restaurant", "empfehlen", "ruhig", "nähe", "nahe"],
+        "fr": ["bonjour", "lieu", "cafe", "café", "restaurant", "recommande", "veux", "calme", "près", "pres", "meilleur"],
+        "es": ["hola", "lugar", "cafe", "café", "restaurante", "quiero", "recomienda", "tranquilo", "cerca", "mejor"],
+    }
+    best_lang = "tr"
+    best_score = 0
+    for lang, words in keyword_scores.items():
+        score = sum(1 for word in words if word in text)
+        if score > best_score:
+            best_lang = lang
+            best_score = score
+    return best_lang if best_score else "tr"
+
+
+def resolve_response_language(
+    query: str,
+    language: Optional[str] = None,
+    locale: Optional[str] = None
+) -> str:
+    return normalize_language(language, locale) or detect_language_from_query(query)
+
+
+def lang_name(lang: str) -> str:
+    return SUPPORTED_LANGUAGES.get(lang, "Turkish")
+
+
+def localized(template_key: str, lang: str) -> str:
+    return MESSAGE_TEMPLATES.get(template_key, {}).get(lang) or MESSAGE_TEMPLATES[template_key]["tr"]
+
+
+def reason_label(key: str, lang: str) -> str:
+    return REASON_LABELS.get(key, {}).get(lang) or REASON_LABELS[key]["tr"]
+
+
+def translate_specialty_label(spec: Dict, lang: str) -> str:
+    if lang == "tr":
+        return spec.get("label", "")
+    key = spec.get("key", "")
+    return SPECIALTY_TRANSLATIONS.get(key, {}).get(lang) or spec.get("label", "")
+
+
+def localize_review_insights(insights: Dict, lang: str) -> Dict:
+    """Review analyzer skorlarını korur, sadece kullanıcıya görünen metinleri uyarlar."""
+    if lang == "tr" or not insights:
+        return insights
+
+    localized_insights = {**insights}
+    specialties = []
+    review_word = reason_label("reviews", lang)
+
+    for spec in insights.get("specialties", []):
+        label = translate_specialty_label(spec, lang)
+        translated = {**spec, "label": label}
+        translated["display"] = f"{spec.get('emoji', '')} {label} ({spec.get('mention_count', 0)} {review_word})"
+        specialties.append(translated)
+
+    localized_insights["specialties"] = specialties
+    localized_insights["top_specialty"] = specialties[0]["display"] if specialties else None
+    localized_insights["highlight_tags"] = [
+        f"{s.get('emoji', '')} {s.get('key', '').title()}" for s in specialties[:3]
+    ]
+    if specialties:
+        labels = ", ".join(s["label"] for s in specialties[:2])
+        localized_insights["summary"] = {
+            "en": f"This place stands out in customer reviews for: {labels}.",
+            "de": f"Dieses Lokal sticht in Kundenbewertungen besonders hervor durch: {labels}.",
+            "fr": f"Ce lieu se distingue dans les avis clients pour : {labels}.",
+            "es": f"Este lugar destaca en las reseñas de clientes por: {labels}.",
+            "ar": f"يبرز هذا المكان في مراجعات العملاء بسبب: {labels}.",
+            "ru": f"Это место выделяется в отзывах клиентов благодаря: {labels}.",
+        }.get(lang, localized_insights.get("summary", ""))
+    return localized_insights
+
+
+def build_review_analysis_text(count: int, specialties: List[Dict], sentiment_bonus: float, lang: str) -> str:
+    if specialties:
+        specialty_text = ", ".join([s["emoji"] + " " + s["label"] for s in specialties[:3]])
+        if lang == "tr":
+            if sentiment_bonus > 0.10:
+                return f"Yapay zeka {count} yorumu inceledi. Bu mekan özellikle şunlarla öne çıkıyor: {specialty_text}. Müşteri memnuniyeti genel olarak çok yüksek."
+            return f"Yapay zeka {count} yorumu inceledi. Bu mekan özellikle şunlarla biliniyor: {specialty_text}."
+        templates = {
+            "en": "AI analyzed {count} reviews. This place especially stands out for: {specialty_text}.",
+            "de": "Die KI hat {count} Bewertungen analysiert. Dieser Ort fällt besonders auf durch: {specialty_text}.",
+            "fr": "L’IA a analysé {count} avis. Ce lieu se distingue surtout pour : {specialty_text}.",
+            "es": "La IA analizó {count} reseñas. Este lugar destaca especialmente por: {specialty_text}.",
+            "ar": "حلل الذكاء الاصطناعي {count} مراجعة. يبرز هذا المكان خصوصًا بسبب: {specialty_text}.",
+            "ru": "ИИ проанализировал {count} отзывов. Это место особенно выделяется благодаря: {specialty_text}.",
+        }
+        extra = {
+            "en": " Customer satisfaction is generally very high.",
+            "de": " Die Kundenzufriedenheit ist insgesamt sehr hoch.",
+            "fr": " La satisfaction client est globalement très élevée.",
+            "es": " La satisfacción del cliente es generalmente muy alta.",
+            "ar": " رضا العملاء مرتفع جدًا بشكل عام.",
+            "ru": " Удовлетворенность клиентов в целом очень высокая.",
+        }.get(lang, "")
+        return templates.get(lang, templates["en"]).format(count=count, specialty_text=specialty_text) + (extra if sentiment_bonus > 0.10 else "")
+
+    if lang == "tr":
+        if sentiment_bonus > 0.15:
+            return f"Yapay zeka analizine göre, {count} müşteri geri bildiriminde çok yüksek oranda memnuniyet saptanmıştır."
+        if sentiment_bonus > 0.05:
+            return f"Yapay zeka tarafından analiz edilen {count} yorumda müşteri memnuniyeti genel olarak pozitif yönde."
+        if sentiment_bonus < -0.15:
+            return f"{count} yorumda ciddi müşteri şikayetleri tespit edilmiştir. Ziyaret öncesi dikkatli değerlendirme önerilir."
+        return f"{count} yorum analiz edildi. Mekan ortalama standartlar etrafında şekilleniyor."
+
+    sentiment_templates = {
+        "positive_high": {
+            "en": "AI analysis found very high satisfaction across {count} customer reviews.",
+            "de": "Die KI-Analyse zeigt eine sehr hohe Zufriedenheit in {count} Kundenbewertungen.",
+            "fr": "L’analyse IA indique une très forte satisfaction dans {count} avis clients.",
+            "es": "El análisis de IA encontró una satisfacción muy alta en {count} reseñas de clientes.",
+            "ar": "أظهر تحليل الذكاء الاصطناعي رضا مرتفعًا جدًا في {count} مراجعة من العملاء.",
+            "ru": "Анализ ИИ выявил очень высокий уровень удовлетворенности в {count} отзывах клиентов.",
+        },
+        "positive": {
+            "en": "In {count} reviews analyzed by AI, customer satisfaction is generally positive.",
+            "de": "In {count} von der KI analysierten Bewertungen ist die Kundenzufriedenheit insgesamt positiv.",
+            "fr": "Dans {count} avis analysés par l’IA, la satisfaction client est globalement positive.",
+            "es": "En {count} reseñas analizadas por IA, la satisfacción del cliente es generalmente positiva.",
+            "ar": "في {count} مراجعة حللها الذكاء الاصطناعي، تبدو رضا العملاء إيجابيًا بشكل عام.",
+            "ru": "В {count} отзывах, проанализированных ИИ, удовлетворенность клиентов в целом положительная.",
+        },
+        "negative": {
+            "en": "AI detected serious customer complaints in {count} reviews. Consider carefully before visiting.",
+            "de": "Die KI hat in {count} Bewertungen deutliche Kundenbeschwerden erkannt. Vor dem Besuch sorgfältig abwägen.",
+            "fr": "L’IA a détecté des plaintes clients importantes dans {count} avis. À considérer avant la visite.",
+            "es": "La IA detectó quejas importantes de clientes en {count} reseñas. Conviene evaluarlo antes de visitar.",
+            "ar": "اكتشف الذكاء الاصطناعي شكاوى جدية من العملاء في {count} مراجعة. يُنصح بالتقييم قبل الزيارة.",
+            "ru": "ИИ обнаружил серьезные жалобы клиентов в {count} отзывах. Стоит внимательно оценить перед посещением.",
+        },
+        "neutral": {
+            "en": "{count} reviews were analyzed. This place appears to be around average standards.",
+            "de": "{count} Bewertungen wurden analysiert. Dieser Ort scheint im durchschnittlichen Bereich zu liegen.",
+            "fr": "{count} avis ont été analysés. Ce lieu semble se situer dans la moyenne.",
+            "es": "Se analizaron {count} reseñas. Este lugar parece estar dentro de estándares promedio.",
+            "ar": "تم تحليل {count} مراجعة. يبدو هذا المكان ضمن المستوى المتوسط.",
+            "ru": "Проанализировано {count} отзывов. Это место выглядит примерно на среднем уровне.",
+        },
+    }
+    key = "positive_high" if sentiment_bonus > 0.15 else "positive" if sentiment_bonus > 0.05 else "negative" if sentiment_bonus < -0.15 else "neutral"
+    return sentiment_templates[key].get(lang, sentiment_templates[key]["en"]).format(count=count)
+
+
+async def generate_llm_response(query: str, places: list, parsed_context: dict, language: str = "tr") -> str:
     """
     Katmanlı LLM ile doğal dil yanıtı üretir.
       Katman 1: Groq Cloud (hızlı, ~1 sn)
@@ -69,7 +366,7 @@ async def generate_llm_response(query: str, places: list, parsed_context: dict) 
         address = p.get("address", "")
         desc    = p.get("description", "")[:100]
         reason  = p.get("recommendation_reason", "")
-        summaries.append(f"{i}. {name} (⭐{rating}) — {address}. {desc}. Neden: {reason}")
+        summaries.append(f"{i}. {name} (⭐{rating}) - {address}. {desc}. Reason: {reason}")
 
     mood     = parsed_context.get("mood") or "normal"
     category = parsed_context.get("category", "mekan")
@@ -80,7 +377,8 @@ async def generate_llm_response(query: str, places: list, parsed_context: dict) 
         f'Kullanıcı sorgusu: "{query}"\n'
         f"Ruh hali: {mood}, Kategori: {category}, Bölge: {district}, Özellikler: {features}\n\n"
         f"Bulunan en iyi mekanlar:\n" + "\n".join(summaries) + "\n\n"
-        f"Bu mekanlara dayanarak kişiselleştirilmiş, sıcak bir öneri mesajı yaz."
+        f"Bu mekanlara dayanarak kişiselleştirilmiş, sıcak bir öneri mesajı yaz. "
+        f"Respond only in {lang_name(language)}."
     )
 
     try:
@@ -206,7 +504,7 @@ class ModelManager:
             )
             
             self.is_loaded = True
-            print("[Model] ✓ Modeller yüklendi!")
+            print("[Model] OK Modeller yüklendi!")
             
             return {
                 "status": "success",
@@ -266,6 +564,145 @@ class ModelManager:
 # Global model manager
 model_manager = ModelManager()
 
+# Global RAG pipeline (lazy init)
+rag_pipeline: Optional[RAGPipeline] = None
+rag_bootstrap_lock = asyncio.Lock()
+rag_bootstrap_status: Dict[str, Union[str, int, bool, None]] = {
+    "ready": False,
+    "indexed_count": 0,
+    "source_count": 0,
+    "storage_mode": None,
+    "data_path": None,
+    "last_error": None,
+}
+
+
+def _resolve_rag_data_path() -> str:
+    data_path = settings.RAG_DATA_PATH or "data/loaded_places.json"
+    if os.path.isabs(data_path):
+        return data_path
+    return os.path.join(_ai_llm_root, data_path)
+
+
+def _bootstrap_rag_index_sync(force_reindex: Optional[bool] = None) -> Dict[str, Union[str, int, bool, None]]:
+    """loaded_places.json snapshot'ını Qdrant'a güvenli şekilde indeksler."""
+    global rag_bootstrap_status
+
+    if not settings.RAG_AUTO_INDEX:
+        rag_bootstrap_status.update({"ready": False, "last_error": "RAG_AUTO_INDEX disabled"})
+        return rag_bootstrap_status
+
+    data_path = _resolve_rag_data_path()
+    force = settings.RAG_FORCE_REINDEX if force_reindex is None else force_reindex
+
+    try:
+        rag = _get_rag_pipeline()
+        if not rag:
+            raise RuntimeError("RAG pipeline başlatılamadı")
+
+        retriever = rag.retriever
+        vector_db = retriever.vector_db
+        embedding_model = retriever.embedding_model
+
+        mekanlar = get_mekanlar_from_json(json_path=data_path)
+        if not mekanlar:
+            raise RuntimeError(f"RAG veri dosyasında mekan bulunamadı: {data_path}")
+
+        vector_size = embedding_model.get_vector_size()
+        vector_db.create_collection_if_not_exists(vector_size=vector_size)
+
+        current_count = vector_db.count_vectors()
+        source_count = len(mekanlar)
+        if current_count >= source_count and not force:
+            rag_bootstrap_status = {
+                "ready": True,
+                "indexed_count": current_count,
+                "source_count": source_count,
+                "storage_mode": getattr(vector_db, "storage_mode", "unknown"),
+                "data_path": data_path,
+                "last_error": None,
+            }
+            print(f"[RAG] Index hazır: {current_count}/{source_count} vektör")
+            return rag_bootstrap_status
+
+        print(f"[RAG] Index yükleniyor: {source_count} mekan ({data_path})")
+        embedding_texts = [create_embedding_text(mekan) for mekan in mekanlar]
+        embeddings = embedding_model.encode(embedding_texts)
+
+        points = []
+        for i, (embedding, mekan) in enumerate(zip(embeddings, mekanlar), 1):
+            point_id = int(mekan.get("id") or i)
+            points.append(PointStruct(
+                id=point_id,
+                vector=embedding,
+                payload={
+                    "id": point_id,
+                    "ad": mekan.get("ad", ""),
+                    "aciklama": mekan.get("aciklama", ""),
+                    "kategori": mekan.get("kategori", ""),
+                    "enlem": mekan.get("enlem"),
+                    "boylam": mekan.get("boylam"),
+                    "adres": mekan.get("adres", ""),
+                    "rating": mekan.get("rating", 0),
+                    "review_count": mekan.get("review_count", 0),
+                    "user_review": mekan.get("user_review", "")
+                }
+            ))
+
+        batch_size = 100
+        uploaded = 0
+        for i in range(0, len(points), batch_size):
+            batch = points[i:i + batch_size]
+            if vector_db.add_vectors(batch):
+                uploaded += len(batch)
+            else:
+                raise RuntimeError(f"Qdrant batch yükleme başarısız: {i}-{i + len(batch)}")
+
+        indexed_count = vector_db.count_vectors() or uploaded
+        rag_bootstrap_status = {
+            "ready": indexed_count > 0,
+            "indexed_count": indexed_count,
+            "source_count": source_count,
+            "storage_mode": getattr(vector_db, "storage_mode", "unknown"),
+            "data_path": data_path,
+            "last_error": None,
+        }
+        print(f"[RAG] Index yüklendi: {indexed_count}/{source_count} vektör")
+        return rag_bootstrap_status
+    except Exception as e:
+        rag_bootstrap_status.update({
+            "ready": False,
+            "last_error": str(e),
+            "data_path": data_path,
+        })
+        print(f"[RAG] Index bootstrap hatası: {e}")
+        return rag_bootstrap_status
+
+
+async def ensure_rag_ready(force_reindex: Optional[bool] = None) -> Dict[str, Union[str, int, bool, None]]:
+    """İlk RAG isteğinde veya startup arka planında index'in hazır olmasını sağlar."""
+    if rag_bootstrap_status.get("ready") and not force_reindex:
+        return rag_bootstrap_status
+
+    async with rag_bootstrap_lock:
+        if rag_bootstrap_status.get("ready") and not force_reindex:
+            return rag_bootstrap_status
+        return await asyncio.to_thread(_bootstrap_rag_index_sync, force_reindex)
+
+def _get_rag_pipeline() -> Optional[RAGPipeline]:
+    """RAG pipeline'ını lazy init ile al"""
+    global rag_pipeline
+    if rag_pipeline is None:
+        try:
+            print("[RAG] RAG sistemi başlatılıyor...")
+            rag_pipeline = RAGPipeline()
+            print("[RAG] OK RAG sistemi hazır!")
+            return rag_pipeline
+        except Exception as e:
+            print(f"[RAG] UYARI RAG başlatılamadı (devre dışı): {e}")
+            return None
+    return rag_pipeline
+
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -290,7 +727,17 @@ async def lifespan(app: FastAPI):
 
     asyncio.create_task(_load_models_bg())
     print(f"[Startup] Model yukleme arka planda baslatildi...")
-    print(f"[Startup] Version: 2.1 (Performance Optimized)")
+
+    # 3. RAG System - ARKA PLANDA (opsiyonel)
+    async def _load_rag_bg():
+        if settings.RAG_INDEX_ON_STARTUP:
+            await ensure_rag_ready()
+        else:
+            _get_rag_pipeline()
+
+    asyncio.create_task(_load_rag_bg())
+    print(f"[Startup] RAG sistemi arka planda baslatiliyor...")
+    print(f"[Startup] Version: 2.1 (Performance Optimized + RAG)")
     print("="*60 + "\n")
 
     yield  # Uygulama burada çalışır
@@ -342,12 +789,16 @@ class SmartSearchRequest(BaseModel):
     user_lng: Optional[float] = None
     max_distance_km: float = 10.0
     analyze_reviews: bool = True   # Yorum analizi açık/kapalı (API kredi tasarrufu için)
+    language: Optional[str] = None
+    locale: Optional[str] = None
 
 
 class AnalyzeReviewRequest(BaseModel):
     """İsteğe bağlı yorum çekme ve analiz isteği"""
     data_id: str
     place_name: Optional[str] = None
+    language: Optional[str] = None
+    locale: Optional[str] = None
 
 
 class ImageSearchRequest(BaseModel):
@@ -359,6 +810,8 @@ class ImageSearchRequest(BaseModel):
     user_lng: Optional[float] = None
     limit: int = 5
     max_distance_km: float = 10.0
+    language: Optional[str] = None
+    locale: Optional[str] = None
 
 
 # ==================== GEMINI VISION HELPER ====================
@@ -850,7 +1303,6 @@ def rerank_places(places: List[Dict], query: str, top_k: int = 5) -> List[Dict]:
 @app.get("/ui", include_in_schema=False)
 async def serve_ui():
     """Chat UI'yi doğrudan backend üzerinden serve et (CORS sorunu olmaz)"""
-    import os
     from fastapi.responses import HTMLResponse  # type: ignore[import]
     ui_path = os.path.join(os.path.dirname(__file__), "chat_ui.html")
     if not os.path.exists(ui_path):
@@ -868,7 +1320,15 @@ async def health():
         "status": "ok",
         "version": "2.1.0",
         "cache": "redis" if cache_ok else "none (fallback)",
-        "model_loaded": model_manager.is_loaded
+        "model_loaded": model_manager.is_loaded,
+        "rag": {
+            "ready": rag_bootstrap_status.get("ready"),
+            "indexed_count": rag_bootstrap_status.get("indexed_count"),
+            "source_count": rag_bootstrap_status.get("source_count"),
+            "storage_mode": rag_bootstrap_status.get("storage_mode"),
+            "auto_index": settings.RAG_AUTO_INDEX,
+            "last_error": rag_bootstrap_status.get("last_error")
+        }
     }
 
 
@@ -888,6 +1348,13 @@ async def get_info():
         "model_stats": {
             "is_loaded": model_manager.is_loaded,
             "device": model_manager.device
+        },
+        "rag": {
+            **rag_bootstrap_status,
+            "auto_index": settings.RAG_AUTO_INDEX,
+            "index_on_startup": settings.RAG_INDEX_ON_STARTUP,
+            "collection": settings.QDRANT_COLLECTION_NAME,
+            "qdrant_url": settings.QDRANT_URL or ":memory:"
         },
         "timestamp": datetime.now().isoformat()
     }
@@ -980,6 +1447,7 @@ async def smart_search_v2(request: SmartSearchRequest):
     - Async: Paralel işlemler
     """
     try:
+        response_language = resolve_response_language(request.query, request.language, request.locale)
         # 1. CACHE CHECK
         cache_key = None
         if cache_manager:
@@ -987,7 +1455,8 @@ async def smart_search_v2(request: SmartSearchRequest):
                 request.query,
                 request.location,
                 user_lat=str(request.user_lat),
-                user_lng=str(request.user_lng)
+                user_lng=str(request.user_lng),
+                language=response_language
             )
             cached_result = cache_manager.get(cache_key)
             if cached_result:
@@ -1012,7 +1481,7 @@ async def smart_search_v2(request: SmartSearchRequest):
                 "query": request.query,
                 "found": 0,
                 "is_conversational": True,
-                "message": "Üzgünüm, ben sadece bir mekan öneri asistanıyım. Siyasi, dini veya argo sohbetlere katılamıyorum. Lütfen bana mekanlarla ilgili bir soru sor. 🤖🍔",
+                "message": localized("inappropriate", response_language),
                 "recommendations": [],
                 "_cache": {"hit": False}
             }
@@ -1022,7 +1491,7 @@ async def smart_search_v2(request: SmartSearchRequest):
                 "query": request.query,
                 "found": 0,
                 "is_conversational": True,
-                "message": "Merhaba! İyiyim, teşekkür ederim. Ben seni aradığın en güzel mekanlara götürmek için buradayım. Bugün nasıl bir yere gitmek istersin? (Örn: Beşiktaş'ta deniz manzaralı sakin bir kafe) ☕",
+                "message": localized("chit_chat", response_language),
                 "recommendations": [],
                 "_cache": {"hit": False}
             }
@@ -1150,34 +1619,64 @@ async def smart_search_v2(request: SmartSearchRequest):
         # Reranking
         reranked_places = rerank_places(scored_places[:min(20, len(scored_places))], request.query, top_k=5)
         
+        # ==================== RAG ENHANCEMENT ====================
+        # RAG sistemi ile ek bağlam ekle (vektör veritabanından semantik arama)
+        rag_context = None
+        rag_status = await ensure_rag_ready()
+        try:
+            rag = _get_rag_pipeline()
+            if rag and rag_status.get("ready"):
+                print(f"[RAG] Sorgu için ek bağlam aranıyor: {request.query}")
+                rag_result = rag.process(
+                    user_query=request.query,
+                    location={"lat": request.user_lat, "lng": request.user_lng} if request.user_lat and request.user_lng else None,
+                    language=response_language
+                )
+                if rag_result and rag_result.get("oneriler"):
+                    rag_context = {
+                        "similar_places_count": len(rag_result["oneriler"]),
+                        "source_count": rag_status.get("source_count", 0),
+                        "indexed_count": rag_status.get("indexed_count", 0),
+                        "storage_mode": rag_status.get("storage_mode"),
+                        "analysis": rag_result.get("sorgu_analizi", ""),
+                        "top_matches": [
+                            {
+                                "name": place.get("ad"),
+                                "category": place.get("kategori"),
+                                "score": place.get("benzerlik_skoru", 0)
+                            }
+                            for place in rag_result["oneriler"][:3]
+                        ]
+                    }
+                    print(f"[RAG] OK {len(rag_result['oneriler'])} benzer mekan bulundu (vektör veritabanı)")
+        except Exception as e:
+            print(f"[RAG] Hata (atlanıyor): {e}")
+
         # ==================== YORUM BAZLI INSIGHT ANALİZİ ====================
         # Her mekan için SerpAPI yorumlarını çekip ne ile övüldüğünü tespit et
         if request.analyze_reviews:
-            await _enrich_with_review_insights(reranked_places)
+            await _enrich_with_review_insights(reranked_places, response_language)
         
         # Gerekçeler
         feature_names = {
-            'wifi': '📶 Sınırsız Wi-Fi',
-            'deniz': '🌊 Deniz Manzaralı',
-            'sessiz': '🤫 Sessiz Ortam',
-            'açık': '🌳 Açık Alan / Bahçe',
-            'çalışma': '💻 Çalışmaya Uygun'
+            key: labels.get(response_language, labels["tr"])
+            for key, labels in FEATURE_LABELS.items()
         }
         
         for place in reranked_places:
             reasons = []
             
             if place.get('rating', 0) >= 4.8:
-                reasons.append(f"⭐ Yüksek puan ({place['rating']})")
+                reasons.append(f"⭐ {reason_label('high_rating', response_language)} ({place['rating']})")
             
             if place.get('review_count', 0) > 500:
-                reasons.append(f"💬 Çok yorumlu ({place['review_count']} yorum)")
+                reasons.append(f"💬 {reason_label('many_reviews', response_language)} ({place['review_count']} {reason_label('reviews', response_language)})")
             
             if place.get('distance_km') and place['distance_km'] > 0:
                 if place['distance_km'] <= 2:
-                    reasons.append(f"📍 Çok yakın ({place['distance_km']}km)")
+                    reasons.append(f"📍 {reason_label('very_near', response_language)} ({place['distance_km']}km)")
                 elif place['distance_km'] <= 5:
-                    reasons.append(f"📍 Yakın ({place['distance_km']}km)")
+                    reasons.append(f"📍 {reason_label('near', response_language)} ({place['distance_km']}km)")
             
             if parsed['features']:
                 for feature in parsed['features']:
@@ -1194,14 +1693,14 @@ async def smart_search_v2(request: SmartSearchRequest):
                 for spec in top_specs:
                     reasons.insert(0, spec['display'])  # Başa ekle - en önemli bilgi
             
-            place['recommendation_reason'] = " • ".join(reasons) if reasons else "Genel uygunluk"
+            place['recommendation_reason'] = " • ".join(reasons) if reasons else reason_label("general_fit", response_language)
         
         # ==================== GROQ LLM DOĞAL DİL CEVABI ====================
         llm_message = ""
         if settings.GROQ_API_KEY and reranked_places:
             try:
                 llm_message = await generate_llm_response(
-                    request.query, reranked_places, parsed
+                    request.query, reranked_places, parsed, response_language
                 )
             except Exception as e:
                 print(f"[Groq] LLM atlandı: {e}")
@@ -1212,10 +1711,16 @@ async def smart_search_v2(request: SmartSearchRequest):
             "found": len(places),
             "recommendations": reranked_places,
             "ai_message": llm_message,
+            "message": llm_message,
             "context": {
                 "weather": weather_data.get("condition"),
-                "temperature": weather_data.get("temp")
+                "temperature": weather_data.get("temp"),
+                "rag_enhanced": rag_context is not None,
+                "rag_source_count": rag_status.get("source_count", 0),
+                "rag_indexed_count": rag_status.get("indexed_count", 0),
+                "language": response_language
             },
+            "rag_context": rag_context,  # RAG'dan gelen ek bilgi
             "_cache": {"hit": False}
         }
 
@@ -1239,7 +1744,7 @@ async def smart_search_v2(request: SmartSearchRequest):
 
 # ==================== REVIEW INSIGHT HELPER ====================
 
-async def _enrich_with_review_insights(places: List[Dict]) -> None:
+async def _enrich_with_review_insights(places: List[Dict], language: str = "tr") -> None:
     """
     Reranked mekanların yorumlarını paralel olarak çekip
     ne ile övüldüklerini tespit eder.
@@ -1271,7 +1776,7 @@ async def _enrich_with_review_insights(places: List[Dict]) -> None:
             return
 
         # Redis cache'de var mı?
-        insight_cache_key = f"review_insights_{data_id}"
+        insight_cache_key = f"review_insights_{data_id}_{language}"
         if cache_manager:
             cached = cache_manager.get(insight_cache_key)
             if cached:
@@ -1293,6 +1798,7 @@ async def _enrich_with_review_insights(places: List[Dict]) -> None:
         # Yorumları analiz et
         place_name = place.get('name', '')
         insights = fast_extract_insights(reviews, place_name)
+        insights = localize_review_insights(insights, language)
         place['review_insights'] = insights
 
         # Specialties'i log'a yaz
@@ -1314,6 +1820,86 @@ async def _enrich_with_review_insights(places: List[Dict]) -> None:
     await asyncio.gather(*tasks, return_exceptions=True)
 
 
+@app.post("/api/rag-search")
+async def rag_search(request: SmartSearchRequest):
+    """
+    Pure RAG search - Sadece vektör veritabanı araması
+    SerpAPI kullanmadan, sadece yerel veritabanından semantik arama yapar
+    """
+    try:
+        response_language = resolve_response_language(request.query, request.language, request.locale)
+        rag_status = await ensure_rag_ready()
+        if not rag_status.get("ready"):
+            raise HTTPException(
+                status_code=503,
+                detail={
+                    "message": "RAG index hazır değil.",
+                    "rag": rag_status
+                }
+            )
+
+        rag = _get_rag_pipeline()
+        if not rag:
+            raise HTTPException(
+                status_code=503,
+                detail="RAG sistemi kullanılamıyor. Vektör veritabanı yüklenmemiş olabilir."
+            )
+
+        # RAG ile ara
+        result = rag.process(
+            user_query=request.query,
+            location={
+                "lat": request.user_lat,
+                "lng": request.user_lng
+            } if request.user_lat and request.user_lng else None,
+            language=response_language
+        )
+
+        if not result or not result.get("oneriler"):
+            return {
+                "query": request.query,
+                "found": 0,
+                "recommendations": [],
+                "message": localized("no_vector_match", response_language),
+                "source": "RAG (Vector Database)",
+                "rag": rag_status
+            }
+
+        # Format response
+        recommendations = []
+        for oneri in result["oneriler"]:
+            recommendations.append({
+                "name": oneri.get("ad"),
+                "address": oneri.get("adres"),
+                "latitude": oneri.get("enlem"),
+                "longitude": oneri.get("boylam"),
+                "category": oneri.get("kategori"),
+                "description": oneri.get("aciklama"),
+                "similarity_score": round(oneri.get("benzerlik_skoru", 0), 3),
+                "recommendation_reason": oneri.get("gerekce", "")
+            })
+
+        return {
+            "query": request.query,
+            "found": len(recommendations),
+            "recommendations": recommendations,
+            "analysis": result.get("sorgu_analizi", ""),
+            "source": "RAG (Vector Database)",
+            "hybrid_mode": False,
+            "rag_context": {
+                "rag_enhanced": True,
+                "rag_source_count": rag_status.get("source_count", 0),
+                "rag_indexed_count": rag_status.get("indexed_count", 0),
+                "storage_mode": rag_status.get("storage_mode")
+            }
+        }
+
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=str(e))
+
+
 @app.post("/api/analyze-place-reviews")
 async def analyze_place_reviews(request: AnalyzeReviewRequest):
     """
@@ -1323,6 +1909,11 @@ async def analyze_place_reviews(request: AnalyzeReviewRequest):
     - Örnek yorumlar
     """
     try:
+        response_language = resolve_response_language(
+            request.place_name or "",
+            request.language,
+            request.locale
+        )
         from serpapi_client import SerpApiClient
         client = SerpApiClient()
         
@@ -1332,7 +1923,7 @@ async def analyze_place_reviews(request: AnalyzeReviewRequest):
             return {
                 "success": False,
                 "review_count": 0,
-                "analysis_text": "Yapay zeka analizine elverişli yeterli müşteri geri bildirimi bulunamamıştır.",
+                "analysis_text": localized("not_enough_reviews", response_language),
                 "specialties": []
             }
         
@@ -1341,39 +1932,18 @@ async def analyze_place_reviews(request: AnalyzeReviewRequest):
         
         # 1. Keyword bazlı specialty çıkarma (hızlı, her zaman çalışır)
         insights = fast_extract_insights(deep_reviews, place_name)
+        insights = localize_review_insights(insights, response_language)
         
         # 2. Embedding tabanlı sentiment (model yüklüyse)
         sentiment_bonus = model_manager.analyze_review_sentiment(deep_reviews)
         
         # 3. Analiz metni üret
-        if insights.get('specialties'):
-            top_labels = [s['emoji'] + ' ' + s['label'] for s in insights['specialties'][:3]]
-            specialty_text = ', '.join(top_labels)
-            
-            if sentiment_bonus > 0.10:
-                analysis_text = (
-                    f"Yapay zeka {count} yorumu inceledi. Bu mekan özellikle şunlarla öne çıkıyor: "
-                    f"{specialty_text}. Müşteri memnuniyeti genel olarak çok yüksek."
-                )
-            else:
-                analysis_text = (
-                    f"Yapay zeka {count} yorumu inceledi. Bu mekan özellikle şunlarla biliniyor: "
-                    f"{specialty_text}."
-                )
-        else:
-            # Specialty bulunamadıysa sentiment bazlı metin
-            if sentiment_bonus > 0.15:
-                analysis_text = (f"Yapay zeka analizine göre, {count} müşteri geri bildiriminde "
-                                f"çok yüksek oranda memnuniyet saptanmıştır.")
-            elif sentiment_bonus > 0.05:
-                analysis_text = (f"Yapay zeka tarafından analiz edilen {count} yorumda müşteri "
-                                f"memnuniyeti genel olarak pozitif yönde.")
-            elif sentiment_bonus < -0.15:
-                analysis_text = (f"{count} yorumda ciddi müşteri şikayetleri tespit edilmiştir. "
-                                f"Ziyaret öncesi dikkatli değerlendirme önerilir.")
-            else:
-                analysis_text = (f"{count} yorum analiz edildi. Mekan ortalama standartlar "
-                                f"etrafında şekilleniyor.")
+        analysis_text = build_review_analysis_text(
+            count,
+            insights.get('specialties', []),
+            sentiment_bonus,
+            response_language
+        )
         
         # Örnek yorumlar (her specialty için)
         example_reviews = []
@@ -1393,16 +1963,17 @@ async def analyze_place_reviews(request: AnalyzeReviewRequest):
             "specialties": insights.get('specialties', []),
             "highlight_tags": insights.get('highlight_tags', []),
             "example_reviews": example_reviews,
-            "summary": insights.get('summary', '')
+            "summary": insights.get('summary', ''),
+            "language": response_language
         }
     except Exception as e:
-        print(f"❌ Yorum analizi hatası: {e}")
+        print(f"[ReviewInsight] HATA Yorum analizi hatası: {e}")
         import traceback
         traceback.print_exc()
         return {
             "success": False,
             "review_count": 0,
-            "analysis_text": "Yapay zeka sistemi yorumlara şu anda erişemiyor.",
+            "analysis_text": localized("reviews_unavailable", response_language if 'response_language' in locals() else "tr"),
             "specialties": []
         }
 
@@ -1438,6 +2009,8 @@ async def image_search(request: ImageSearchRequest):
             user_lng=request.user_lng,
             max_distance_km=request.max_distance_km,
             analyze_reviews=False,
+            language=request.language,
+            locale=request.locale,
         )
         search_result = await smart_search_v2(smart_req)
 

@@ -36,6 +36,16 @@ services:
         value: 5
       - key: SIMILARITY_THRESHOLD
         value: 0.4
+      - key: RAG_DATA_PATH
+        value: data/loaded_places.json
+      - key: RAG_AUTO_INDEX
+        value: true
+      - key: RAG_INDEX_ON_STARTUP
+        value: false
+      - key: RAG_FORCE_REINDEX
+        value: false
+      - key: RAG_USE_LLM_GENERATOR
+        value: false
       # CORS
       - key: CORS_ORIGINS
         value: "*"
@@ -47,6 +57,8 @@ services:
         value: ""
       - key: QDRANT_COLLECTION_NAME
         value: mekan_embeddings
+      - key: QDRANT_API_KEY
+        sync: false
       - key: REDIS_URL
         value: ""
       - key: REDIS_TTL_SECONDS
