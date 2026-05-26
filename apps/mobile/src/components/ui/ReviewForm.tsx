@@ -13,6 +13,7 @@ import { Button } from '@/src/components/ui/Button';
 import { RatingStars } from '@/src/components/ui/RatingStars';
 import { createTextStyle } from '@/src/constants/design';
 import { lightImpact, success } from '@/src/utils/haptics';
+import { useTranslation } from 'react-i18next';
 
 export interface ReviewFormProps {
   /**
@@ -49,6 +50,7 @@ export function ReviewForm({
   style,
 }: ReviewFormProps) {
   const { colors, spacing } = useTheme();
+  const { t } = useTranslation();
   const [rating, setRating] = useState(0);
   const [comment, setComment] = useState('');
 

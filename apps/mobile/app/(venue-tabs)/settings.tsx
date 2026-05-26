@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { View, Text, StyleSheet, ScrollView, Alert, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Alert, TouchableOpacity, Linking } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useAuthStore } from '@/src/store/useAuthStore';
 import { deleteAccount } from '@/src/services/authService';
@@ -12,6 +12,7 @@ import { lightImpact, heavyImpact, selection } from '@/src/utils/haptics';
 import * as WebBrowser from 'expo-web-browser';
 import { useTranslation } from 'react-i18next';
 import { useSettingsStore } from '@/src/store/useSettingsStore';
+import { getLanguageDisplayName, getSystemLanguageTag } from '@/src/utils/locale';
 
 const SettingRow = ({
   icon,
@@ -46,7 +47,7 @@ const SettingRow = ({
 
 export default function VenueSettingsScreen() {
   const { user, logout } = useAuthStore();
-  const { language, setLanguage } = useSettingsStore();
+  const language = useSettingsStore((s) => s.language);
   const scrollRef = useRef<ScrollView>(null);
   const { t } = useTranslation();
 
@@ -90,11 +91,12 @@ export default function VenueSettingsScreen() {
   const handleLanguageSwitch = () => {
     Alert.alert(
       t('settings.language_label'),
-      t('settings.language_label'),
+      t('language.system_note', {
+        lang: getLanguageDisplayName(language),
+        locale: getSystemLanguageTag() ?? language,
+      }),
       [
-        { text: 'Türkçe', onPress: () => setLanguage('tr') },
-        { text: 'English', onPress: () => setLanguage('en') },
-        { text: t('settings.logout_alert_cancel'), style: 'cancel' }
+        { text: t('common.ok'), style: 'cancel' }
       ]
     );
   };
@@ -180,7 +182,7 @@ export default function VenueSettingsScreen() {
               icon="globe" 
               iconColor="#3b82f6" 
               label={t('settings.language_label')} 
-              subtitle={language === 'tr' ? 'Türkçe' : 'English'}
+              subtitle={getLanguageDisplayName(language)}
               onPress={handleLanguageSwitch} 
             />
             <View style={styles.separator} />
@@ -188,7 +190,7 @@ export default function VenueSettingsScreen() {
               icon="bell.fill" 
               iconColor="#f43f5e" 
               label={t('settings.notifications_label')} 
-              onPress={() => {}} 
+              onPress={() => Alert.alert(t('settings.soon_alert_title'), t('settings.soon_alert_body'))} 
             />
             <View style={styles.separator} />
             <SettingRow 
@@ -196,7 +198,7 @@ export default function VenueSettingsScreen() {
               iconColor="#2dd4bf" 
               label={t('settings.support_label')} 
               subtitle={t('settings.support_subtitle')}
-              onPress={() => {}} 
+              onPress={() => Linking.openURL('mailto:support@asemos.com')} 
             />
             <View style={styles.separator} />
             <SettingRow 

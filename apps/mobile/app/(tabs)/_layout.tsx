@@ -8,11 +8,12 @@
 import { Tabs } from "expo-router";
 import { useTheme } from "@/src/hooks/useTheme";
 import { IconSymbol, type IconSymbolName } from "@/src/components/ui/icon-symbol";
-import { StyleSheet, Platform, Text as RNText } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 import { selection } from "@/src/utils/haptics";
 import { AnimatedTabBar } from "@/src/components/layout/AnimatedTabBar";
 import { TabBarVisibilityProvider } from "@/src/components/layout/TabBarVisibilityContext";
 import { useTranslation } from "react-i18next";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
 function TabIcon({ name, color }: { name: IconSymbolName; focused: boolean; color: string }) {
   return (
@@ -27,6 +28,8 @@ function TabIcon({ name, color }: { name: IconSymbolName; focused: boolean; colo
 export default function TabsLayout() {
   const { colors } = useTheme();
   const { t } = useTranslation();
+  const insets = useSafeAreaInsets();
+  const bottomInset = Math.max(insets.bottom, Platform.OS === "ios" ? 24 : 16);
 
   return (
     <TabBarVisibilityProvider>
@@ -43,12 +46,13 @@ export default function TabsLayout() {
             backgroundColor: colors.background.secondary,
             borderTopWidth: StyleSheet.hairlineWidth,
             borderTopColor: colors.surface.border,
-            height: Platform.OS === "ios" ? 100 : 60,
-            paddingTop: 8,
-            paddingBottom: Platform.OS === "ios" ? 28 : 8,
+            height: 56 + bottomInset,
+            paddingTop: 6,
+            paddingBottom: bottomInset,
             elevation: 0,
             shadowOpacity: 0,
           },
+          tabBarAllowFontScaling: false,
           tabBarActiveTintColor: colors.accent.primary,
           tabBarInactiveTintColor: colors.text.tertiary,
           tabBarLabelStyle: {

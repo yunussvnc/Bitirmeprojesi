@@ -1,6 +1,9 @@
+# pyrefly: ignore [missing-import]
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Float, Text, Boolean, UniqueConstraint, Date
+# pyrefly: ignore [missing-import]
 from sqlalchemy.orm import relationship
 from database import Base
+# pyrefly: ignore [missing-import]
 from sqlalchemy.sql import func
 
 class User(Base):
@@ -24,11 +27,13 @@ class User(Base):
     push_token_updated_at = Column(DateTime(timezone=True), nullable=True)
 
     created_at = Column(DateTime(timezone=True), server_default=func.now())
+    token_version = Column(Integer, default=0)  # Oturum yönetimi: artırılınca tüm tokenlar geçersiz olur
 
     reviews = relationship("Review", back_populates="user")
     posts = relationship("Post", back_populates="user")
     post_likes = relationship("PostLike", back_populates="user")
     post_comments = relationship("PostComment", back_populates="user")
+    tagged_posts = relationship("PostTag", back_populates="user", cascade="all, delete-orphan")
     followers = relationship("Follow", foreign_keys="Follow.following_id", back_populates="following_user")
     following = relationship("Follow", foreign_keys="Follow.follower_id", back_populates="follower_user")
     notifications = relationship("Notification", foreign_keys="Notification.user_id", back_populates="user")
@@ -79,10 +84,31 @@ class UserPreferences(Base):
     # Dil
     language = Column(String, default="tr")  # tr, en
 
+    # Bildirim Tercihleri (Novu Subscriber Preferences)
+    notify_likes = Column(Boolean, default=True)       # Beğeni bildirimleri
+    notify_comments = Column(Boolean, default=True)    # Yorum bildirimleri
+    notify_follows = Column(Boolean, default=True)     # Takip bildirimleri
+    notify_messages = Column(Boolean, default=True)    # DM bildirimleri
+
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now(), nullable=True)
 
     user = relationship("User", back_populates="preferences")
+
+
+class DeviceToken(Base):
+    """
+    Kullanıcıların birden fazla cihazındaki push notification token'larını (FCM/APNs) tutar.
+    """
+    __tablename__ = "device_tokens"
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), index=True)
+    token = Column(String, unique=True, nullable=False) # ExponentPushToken[...]
+    platform = Column(String, nullable=True) # ios, android, web
+    device_id = Column(String, nullable=True) # Optional unique device identifier
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    
+    user = relationship("User", backref="device_tokens")
 
 
 class PendingUser(Base):
@@ -329,6 +355,7 @@ class Post(Base):
 
     comments_disabled = Column(Boolean, default=False)  # Yorumları kapat
     likes_hidden = Column(Boolean, default=False)       # Beğeni sayısını gizle
+    is_flagged = Column(Boolean, default=False, index=True) # AI Content Moderation
 
     like_count = Column(Integer, default=0)
     comment_count = Column(Integer, default=0)
@@ -340,6 +367,7 @@ class Post(Base):
     media = relationship("PostMedia", back_populates="post", cascade="all, delete-orphan")
     likes = relationship("PostLike", back_populates="post", cascade="all, delete-orphan")
     comments = relationship("PostComment", back_populates="post", cascade="all, delete-orphan")
+    tags = relationship("PostTag", back_populates="post", cascade="all, delete-orphan")
 
 
 class PostMedia(Base):
@@ -350,6 +378,8 @@ class PostMedia(Base):
     media_type = Column(String)  # image, video
     media_url = Column(String, nullable=False)
     thumbnail_url = Column(String, nullable=True)
+    medium_url = Column(String, nullable=True)  # 600x600 WebP
+    blurhash = Column(String, nullable=True)    # Progressive loading placeholder
     duration_seconds = Column(Integer, nullable=True)
     aspect_ratio = Column(Float, nullable=True)
     width = Column(Integer, nullable=True)
@@ -381,10 +411,27 @@ class PostComment(Base):
     parent_id = Column(Integer, ForeignKey("post_comments.id", ondelete="CASCADE"), nullable=True)
 
     text = Column(Text, nullable=False)
+    is_flagged = Column(Boolean, default=False, index=True) # AI Content Moderation
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
     user = relationship("User", back_populates="post_comments")
     post = relationship("Post", back_populates="comments")
+
+
+class PostTag(Base):
+    """Post'ta etiketlenen kullanıcılar (Instagram tag benzeri)"""
+    __tablename__ = "post_tags"
+    id = Column(Integer, primary_key=True, index=True)
+    post_id = Column(Integer, ForeignKey("posts.id", ondelete="CASCADE"), nullable=False, index=True)
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    post = relationship("Post", back_populates="tags")
+    user = relationship("User", back_populates="tagged_posts")
+
+    __table_args__ = (
+        UniqueConstraint("post_id", "user_id", name="uq_post_tag_post_user"),
+    )
 
 
 # --- TAKİP + BİLDİRİM (Kademe 5) ---
@@ -394,6 +441,7 @@ class Follow(Base):
     id = Column(Integer, primary_key=True, index=True)
     follower_id = Column(Integer, ForeignKey("users.id"), nullable=False, index=True)
     following_id = Column(Integer, ForeignKey("users.id"), nullable=False, index=True)
+    status = Column(String, default="accepted", index=True)  # "pending", "accepted"
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
     follower_user = relationship("User", foreign_keys=[follower_id], back_populates="following")
@@ -412,23 +460,37 @@ class Story(Base):
     media_type = Column(String, nullable=False)  # "image", "video"
     media_url = Column(String, nullable=False)
     thumbnail_url = Column(String, nullable=True)
-    is_close_friends = Column(Boolean, default=False)  # Yakın arkadaşlar hikayesi
+
+    # Gizlilik: 'public' | 'close_friends'
+    privacy_type = Column(String, default="public", nullable=False, index=True)
+    # is_close_friends: geriye dönük uyumluluk için property
+    @property
+    def is_close_friends(self) -> bool:
+        return self.privacy_type == "close_friends"
+
+    # Konum meta verisi (JSONB yerine JSON text — SQLite/PostgreSQL uyumlu)
+    # Örnek: {"place_id": 5, "name": "Kadıköy", "lat": 40.99, "lng": 29.02}
+    location_data = Column(Text, nullable=True)
 
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     expires_at = Column(DateTime(timezone=True), nullable=False, index=True)  # created_at + 24 saat
 
     user = relationship("User", back_populates="stories")
     place = relationship("Place", back_populates="stories")
+    replies = relationship("Message", back_populates="parent_story", foreign_keys="Message.parent_story_id")
 
 
 class Notification(Base):
     __tablename__ = "notifications"
     id = Column(Integer, primary_key=True, index=True)
     user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
-    type = Column(String, nullable=False)  # like, comment, follow, mention
+    type = Column(String, nullable=False)  # like, comment, follow, follow_request, follow_accepted, tag, mention
     actor_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=True)
     post_id = Column(Integer, ForeignKey("posts.id", ondelete="SET NULL"), nullable=True)
+    place_id = Column(Integer, ForeignKey("places.id", ondelete="SET NULL"), nullable=True)  # Munia: doğrudan navigasyon
     is_read = Column(Boolean, default=False, index=True)
+    payload = Column(Text, nullable=True)  # Munia JSON: avatar, username, post thumb, comment text vb.
+    group_key = Column(String, nullable=True, index=True)  # Novu digest: "like:post:42" — aynı gruba ait bildirimleri birleştir
     created_at = Column(DateTime(timezone=True), server_default=func.now(), index=True)
 
     user = relationship("User", foreign_keys=[user_id], back_populates="notifications")
@@ -522,12 +584,82 @@ class Message(Base):
     conversation_id = Column(Integer, ForeignKey("match_conversations.id", ondelete="CASCADE"), nullable=False, index=True)
     sender_id = Column(Integer, ForeignKey("users.id"), nullable=False)
     content = Column(Text, nullable=False)
-    message_type = Column(String, default="text")  # "text", "image", "shared_post"
+    message_type = Column(String, default="text")  # "text", "image", "shared_post", "story_reply"
     media_url = Column(String, nullable=True)  # image mesajları için
     shared_post_id = Column(Integer, nullable=True)  # shared_post mesajları için
+    # Hikayeye yanıt: hangi hikayeye yanıt verildiği + anlık snapshot (hikaye 24s sonra silinse bile görünür)
+    parent_story_id = Column(Integer, ForeignKey("stories.id", ondelete="SET NULL"), nullable=True, index=True)
+    story_snapshot_url = Column(String, nullable=True)  # Hikayenin media_url kopyası
     is_read = Column(Boolean, default=False)
+    status = Column(String, default="sent", index=True)  # "sent", "delivered", "read"
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
     conversation = relationship("MatchConversation", back_populates="messages")
     sender = relationship("User", foreign_keys=[sender_id])
+    parent_story = relationship("Story", foreign_keys=[parent_story_id])
+
+    __table_args__ = (
+        # Munia performans optimizasyonu: mesaj sorgularını hızlandırır
+        # Index("ix_messages_conv_created", "conversation_id", "created_at"),  # SQLite compound index
+    )
+
+
+# --- TOPLULUK ODALARI (COMMUNITY ROOMS) ---
+
+class CommunityRoom(Base):
+    """Mekan veya bölge odaklı topluluk sohbet odası"""
+    __tablename__ = "community_rooms"
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String, nullable=False, index=True)          # "Kadıköy Kahvecileri"
+    description = Column(Text, nullable=True)
+    place_id = Column(Integer, ForeignKey("places.id"), nullable=True, index=True)  # Mekana bağlıysa
+    cover_image_url = Column(String, nullable=True)
+
+    room_type = Column(String, default="venue")  # "venue", "region", "topic"
+    is_active = Column(Boolean, default=True)
+    max_members = Column(Integer, default=500)
+
+    created_by = Column(Integer, ForeignKey("users.id"), nullable=False)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+    last_message_at = Column(DateTime(timezone=True), nullable=True)
+
+    # İlişkiler
+    place = relationship("Place")
+    creator = relationship("User", foreign_keys=[created_by])
+    members = relationship("CommunityMember", back_populates="room", cascade="all, delete-orphan")
+    messages = relationship("CommunityMessage", back_populates="room", cascade="all, delete-orphan")
+
+
+class CommunityMember(Base):
+    """Topluluk odası üyeliği"""
+    __tablename__ = "community_members"
+    id = Column(Integer, primary_key=True, index=True)
+    room_id = Column(Integer, ForeignKey("community_rooms.id", ondelete="CASCADE"), nullable=False, index=True)
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False, index=True)
+    role = Column(String, default="member")  # "member", "admin", "moderator"
+    joined_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    room = relationship("CommunityRoom", back_populates="members")
+    user = relationship("User")
+
+    __table_args__ = (
+        UniqueConstraint("room_id", "user_id", name="uq_community_member_room_user"),
+    )
+
+
+class CommunityMessage(Base):
+    """Topluluk odası mesajı"""
+    __tablename__ = "community_messages"
+    id = Column(Integer, primary_key=True, index=True)
+    room_id = Column(Integer, ForeignKey("community_rooms.id", ondelete="CASCADE"), nullable=False, index=True)
+    sender_id = Column(Integer, ForeignKey("users.id"), nullable=False, index=True)
+    content = Column(Text, nullable=False)
+    message_type = Column(String, default="text")  # "text", "image", "place_share"
+    media_url = Column(String, nullable=True)
+    shared_place_id = Column(Integer, ForeignKey("places.id"), nullable=True)  # Mekan paylaşımı
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    room = relationship("CommunityRoom", back_populates="messages")
+    sender = relationship("User", foreign_keys=[sender_id])
+    shared_place = relationship("Place")
 

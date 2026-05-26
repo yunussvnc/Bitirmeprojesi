@@ -128,7 +128,7 @@ export default function AccountStatusScreen() {
               activeOpacity={0.7}
             >
               <IconSymbol name="questionmark.circle" size={18} color={colors.accent.primary} />
-              <Text style={[styles.helpLinkText, { color: colors.accent.primary }]}>Yardım Merkezi'ne Git</Text>
+              <Text style={[styles.helpLinkText, { color: colors.accent.primary }]}>Yardım Merkezi&apos;ne Git</Text>
             </TouchableOpacity>
           )}
         </ScrollView>

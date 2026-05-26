@@ -15,12 +15,17 @@ import {
   Platform,
   Animated,
   PanResponder,
+  TextInput,
+  KeyboardAvoidingView,
+  ActivityIndicator,
+  Keyboard,
 } from 'react-native';
 import { Image } from 'expo-image';
 import { Video, ResizeMode } from 'expo-av';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
-import { lightImpact } from '@/src/utils/haptics';
+import { lightImpact, success } from '@/src/utils/haptics';
 import type { Story } from '@/src/services/storyService';
+import { replyToStory } from '@/src/services/storyService';
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 const STORY_DURATION_MS = 5000;
@@ -36,6 +41,8 @@ export interface StoryViewerModalProps {
   onStoryViewed?: (storyId: number) => void;
   onAuthorNavigate?: (route: string, currentIndex: number) => void;
   onPlaceNavigate?: (route: string, currentIndex: number) => void;
+  /** Aktif kullanıcının ID'si — kendi hikayelerinde yanıt kutusu gizlenir */
+  currentUserId?: number;
 }
 
 export function StoryViewerModal({
@@ -46,8 +53,11 @@ export function StoryViewerModal({
   onStoryViewed,
   onAuthorNavigate,
   onPlaceNavigate,
+  currentUserId,
 }: StoryViewerModalProps) {
   const [index, setIndex] = useState(initialIndex);
+  const [replyText, setReplyText] = useState('');
+  const [replySending, setReplySending] = useState(false);
   const progressAnim = useRef(new Animated.Value(0)).current;
   const { t } = useTranslation();
 
@@ -57,6 +67,17 @@ export function StoryViewerModal({
   }, [initialIndex, stories]);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const dragY = useRef(new Animated.Value(0)).current;
+  const animKeyboard = useRef(new Animated.Value(0)).current;
+
+  useEffect(() => {
+    const showSub = Keyboard.addListener(Platform.OS === 'ios' ? 'keyboardWillShow' : 'keyboardDidShow', (e) => {
+      Animated.timing(animKeyboard, { toValue: e.endCoordinates.height, duration: 250, useNativeDriver: false }).start();
+    });
+    const hideSub = Keyboard.addListener(Platform.OS === 'ios' ? 'keyboardWillHide' : 'keyboardDidHide', () => {
+      Animated.timing(animKeyboard, { toValue: 0, duration: 250, useNativeDriver: false }).start();
+    });
+    return () => { showSub.remove(); hideSub.remove(); };
+  }, [animKeyboard]);
 
   const story = stories[index];
   const isImage = story?.media_type !== 'video';
@@ -168,6 +189,25 @@ export function StoryViewerModal({
     onPlaceNavigate?.(`/place/${pid}`, index);
   }, [story?.place_id, story?.place?.id, index, onPlaceNavigate]);
 
+  const handleSendReply = useCallback(async () => {
+    if (!replyText.trim() || !story || replySending) return;
+    setReplySending(true);
+    try {
+      await replyToStory(story.id, replyText.trim());
+      success();
+      setReplyText('');
+    } catch (e) {
+      // Sessizce başarısız ol — UX'i bozmayalım
+      console.warn('[StoryViewer] Reply failed:', e);
+    } finally {
+      setReplySending(false);
+    }
+  }, [replyText, story, replySending]);
+
+  // Başkasının hikayesinde mi?
+  const isOwnStory = story?.user_id != null && currentUserId != null && story.user_id === currentUserId;
+  const showReplyBar = !isOwnStory;
+
   if (!story) return null;
 
   return (
@@ -178,6 +218,7 @@ export function StoryViewerModal({
       onRequestClose={onClose}
       statusBarTranslucent
     >
+      <View style={{ flex: 1 }}>
       <Animated.View
         style={[
           styles.overlay,
@@ -294,7 +335,42 @@ export function StoryViewerModal({
             )}
           </View>
         </View>
+
+        {/* ── Yanıt Kutusu (sadece başkasının hikayesinde) ── */}
+        {showReplyBar && (
+          <Animated.View style={[styles.replyBar, { bottom: Animated.add(Platform.OS === 'ios' ? 36 : 20, animKeyboard) }]} pointerEvents="box-none">
+            <View style={styles.replyInputRow}>
+              <TextInput
+                style={styles.replyInput}
+                placeholder="Yanıt gönder..."
+                placeholderTextColor="rgba(255,255,255,0.5)"
+                value={replyText}
+                onChangeText={setReplyText}
+                maxLength={500}
+                returnKeyType="send"
+                onSubmitEditing={handleSendReply}
+                editable={!replySending}
+              />
+              <TouchableOpacity
+                style={[
+                  styles.replySendBtn,
+                  replyText.trim() ? styles.replySendBtnActive : null,
+                ]}
+                onPress={handleSendReply}
+                disabled={!replyText.trim() || replySending}
+                activeOpacity={0.75}
+              >
+                {replySending ? (
+                  <ActivityIndicator size="small" color="#fff" />
+                ) : (
+                  <IconSymbol name="paperplane.fill" size={18} color="#fff" />
+                )}
+              </TouchableOpacity>
+            </View>
+          </Animated.View>
+        )}
       </Animated.View>
+      </View>
     </Modal>
   );
 }
@@ -395,5 +471,41 @@ const styles = StyleSheet.create({
   progressActiveWrap: {
     ...StyleSheet.absoluteFillObject,
     flexDirection: 'row',
+  },
+  // ── Reply Bar ──
+  replyBar: {
+    position: 'absolute',
+    left: 16,
+    right: 16,
+    zIndex: 20,
+  },
+  replyInputRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 10,
+    backgroundColor: 'rgba(255,255,255,0.15)',
+    borderRadius: 28,
+    borderWidth: 1,
+    borderColor: 'rgba(255,255,255,0.3)',
+    paddingHorizontal: 16,
+    paddingVertical: 6,
+  },
+  replyInput: {
+    flex: 1,
+    color: '#fff',
+    fontSize: 15,
+    paddingVertical: 6,
+    minHeight: 36,
+  },
+  replySendBtn: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    backgroundColor: 'rgba(255,255,255,0.2)',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  replySendBtnActive: {
+    backgroundColor: '#4ade80',
   },
 });

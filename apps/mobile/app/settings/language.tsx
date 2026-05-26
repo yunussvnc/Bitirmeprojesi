@@ -1,22 +1,28 @@
 /**
- * Dil Ayarları — Uygulama dili seçimi
+ * Dil Ayarları — Sistem dilini takip eder
  */
 
 import React from "react";
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from "react-native";
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 import { useTheme } from "@/src/hooks/useTheme";
 import { Section } from "@/src/components/layout/Section";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { createTextStyle, spacing } from "@/src/constants/design";
-import { lightImpact, success } from "@/src/utils/haptics";
-import { useSettingsStore, type AppLanguage } from "@/src/store/useSettingsStore";
+import { lightImpact } from "@/src/utils/haptics";
+import { useSettingsStore } from "@/src/store/useSettingsStore";
+import { getLanguageDisplayName, getSystemLanguageTag, type AppLanguage } from "@/src/utils/locale";
 import { useTranslation } from "react-i18next";
 
 const LANG_OPTIONS: { key: AppLanguage; label: string; flag: string; native: string }[] = [
   { key: "tr", label: "Türkçe", flag: "🇹🇷", native: "Türkçe" },
   { key: "en", label: "English", flag: "🇬🇧", native: "English" },
+  { key: "de", label: "Deutsch", flag: "🇩🇪", native: "Deutsch" },
+  { key: "fr", label: "Français", flag: "🇫🇷", native: "Français" },
+  { key: "es", label: "Español", flag: "🇪🇸", native: "Español" },
+  { key: "ar", label: "العربية", flag: "🇸🇦", native: "العربية" },
+  { key: "ru", label: "Русский", flag: "🇷🇺", native: "Русский" },
 ];
 
 export default function LanguageSettingsScreen() {
@@ -25,24 +31,7 @@ export default function LanguageSettingsScreen() {
   const insets = useSafeAreaInsets();
 
   const language = useSettingsStore((s) => s.language);
-  const setLanguage = useSettingsStore((s) => s.setLanguage);
   const { t } = useTranslation();
-
-  const handleSelect = (lang: AppLanguage) => {
-    if (lang === language) return;
-    lightImpact();
-    Alert.alert(
-      t('language.change_title'),
-      t('language.change_body', { lang: LANG_OPTIONS.find(l => l.key === lang)?.label }),
-      [
-        { text: t('language.cancel'), style: "cancel" },
-        {
-          text: t('language.confirm'),
-          onPress: () => { setLanguage(lang); success(); },
-        },
-      ]
-    );
-  };
 
   return (
     <View style={[styles.wrapper, { backgroundColor: colors.background.primary }]}>
@@ -60,8 +49,8 @@ export default function LanguageSettingsScreen() {
             <TouchableOpacity
               key={opt.key}
               style={[styles.langRow, { borderBottomColor: colors.surface.border }]}
-              onPress={() => handleSelect(opt.key)}
-              activeOpacity={0.6}
+              disabled
+              activeOpacity={1}
             >
               <Text style={styles.flag}>{opt.flag}</Text>
               <View style={styles.langInfo}>
@@ -83,7 +72,10 @@ export default function LanguageSettingsScreen() {
         <View style={[styles.noteBox, { backgroundColor: isDark ? "rgba(255,255,255,0.04)" : "rgba(0,0,0,0.03)" }]}>
           <IconSymbol name="info.circle" size={16} color={colors.text.tertiary} />
           <Text style={[styles.noteText, { color: colors.text.tertiary }]}>
-            {t('language.note')}
+            {t('language.system_note', {
+              lang: getLanguageDisplayName(language),
+              locale: getSystemLanguageTag() ?? language,
+            })}
           </Text>
         </View>
       </ScrollView>

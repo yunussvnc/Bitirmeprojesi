@@ -22,7 +22,8 @@ function resolveBaseUrl(): string {
     const devHost = process.env.EXPO_PUBLIC_DEV_API_HOST ?? DEV_API_FALLBACK;
     return `http://${devHost}`;
   }
-  return PROD_API_DEFAULT;
+  // Production: Render backend URL
+  return "https://asemos-backend.onrender.com";
 }
 
 export const API_BASE_URL = resolveBaseUrl();

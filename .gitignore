@@ -25,6 +25,12 @@ node_modules/
 dist/
 build/
 
+# Expo / mobile artifacts
+.expo/
+*.apk
+*.aab
+*.tsbuildinfo
+
 # Logs
 *.log
 npm-debug.log*

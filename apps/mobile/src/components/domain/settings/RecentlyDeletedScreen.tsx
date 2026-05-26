@@ -296,7 +296,7 @@ export default function RecentlyDeletedScreen() {
                 ItemSeparatorComponent={renderSeparator}
                 ListEmptyComponent={listEmpty}
                 contentContainerStyle={{
-                    paddingBottom: insets.bottom + (Platform.OS === "ios" ? 100 : 72),
+                    paddingBottom: Math.max(insets.bottom, Platform.OS === "ios" ? 24 : 16) + 72,
                 }}
                 showsVerticalScrollIndicator={false}
             />
@@ -305,7 +305,7 @@ export default function RecentlyDeletedScreen() {
             {isEditMode && selectedIds.length > 0 && (
                 <View style={[
                     styles.floatingActions,
-                    { bottom: Platform.OS === 'ios' ? 100 : 80 }
+                    { bottom: Math.max(insets.bottom, Platform.OS === 'ios' ? 24 : 16) + 72 }
                 ]}>
                     <TouchableOpacity
                         style={[styles.fab, { backgroundColor: colors.semantic.info, borderColor: colors.surface.border, borderWidth: 1 }]}
@@ -427,6 +427,11 @@ const styles = StyleSheet.create({
         fontSize: 13,
         fontWeight: "400",
     },
+    timeBadge: {
+        borderRadius: 10,
+        paddingHorizontal: 8,
+        paddingVertical: 3,
+    },
     message: {
         fontSize: 14,
         fontWeight: "400",
@@ -457,6 +462,9 @@ const styles = StyleSheet.create({
         alignItems: "center",
         paddingTop: 80,
         paddingHorizontal: 40,
+    },
+    emptyContainer: {
+        alignItems: "center",
     },
     emptyIcon: {
         width: 72,

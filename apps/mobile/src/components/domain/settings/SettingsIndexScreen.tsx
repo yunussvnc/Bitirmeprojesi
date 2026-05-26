@@ -18,6 +18,7 @@ import { useAppStore } from "@/src/store/useAppStore";
 import { useAuthStore } from "@/src/store/useAuthStore";
 import { useSettingsStore } from "@/src/store/useSettingsStore";
 import { useTranslation } from "react-i18next";
+import { getLanguageDisplayName } from "@/src/utils/locale";
 
 export default function SettingsIndexScreen() {
   const { colors, isDark, setThemeMode, themeMode } = useTheme();
@@ -90,7 +91,7 @@ export default function SettingsIndexScreen() {
       items: [
         { label: t('settings_main.location_perms'), onPress: nav("/settings/location"), icon: "location", showArrow: true, keywords: ["konum", "location"] },
         { label: t('settings_main.media_quality'), value: qualityLabel, onPress: nav("/settings/media-quality"), icon: "photo.circle", showArrow: true, keywords: ["kalite", "quality", "media"] },
-        { label: t('settings_main.language'), value: language === 'tr' ? 'Türkçe' : 'English', onPress: nav("/settings/language"), icon: "globe", showArrow: true, keywords: ["dil", "language"] },
+        { label: t('settings_main.language'), value: getLanguageDisplayName(language), onPress: nav("/settings/language"), icon: "globe", showArrow: true, keywords: ["dil", "language"] },
         { label: t('settings_main.camera'), onPress: nav("/settings/camera"), icon: "camera", showArrow: true, keywords: ["kamera", "camera"] },
         {
           label: t('settings_main.theme'),

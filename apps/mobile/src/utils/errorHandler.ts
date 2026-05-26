@@ -152,3 +152,12 @@ export function formatError(error: AppError): ErrorResponse {
     retryable: error.retryable,
   };
 }
+
+export function isNotFoundError(error: unknown): boolean {
+  if (error instanceof AppError) {
+    return error.code === 'NOT_FOUND';
+  }
+
+  const msg = error instanceof Error ? error.message : String(error);
+  return msg.includes('API error: 404') || msg === 'Not found';
+}

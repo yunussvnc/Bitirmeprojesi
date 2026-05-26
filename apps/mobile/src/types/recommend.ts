@@ -15,6 +15,8 @@ export type RecommendRequest = {
   location?: Location;
   radius_m?: number;
   category?: string;
+  language?: string;
+  locale?: string;
 };
 
 export type RecommendItem = {

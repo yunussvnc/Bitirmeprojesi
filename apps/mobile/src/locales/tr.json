@@ -87,23 +87,6 @@
     "message_btn": "Mesaj",
     "share_text": "ASEMOS'daki profilime göz at! @{{username}}"
   },
-  "messages": {
-    "title": "Mesajlar",
-    "search_placeholder": "Mesajlarda ara...",
-    "no_messages": "Henüz mesaj yok",
-    "no_messages_desc": "Eşleştiğiniz kişilerle sohbet başlatın",
-    "archived_title": "Arşivlenmiş Sohbetler",
-    "edit": "Düzenle",
-    "done": "Bitti",
-    "select_chat": "Sohbet Seçin",
-    "selected_count": "{{count}} Seçili",
-    "select_all": "Tümünü Seç",
-    "deselect_all": "Tümünü Kaldır",
-    "unarchive": "Geri Al",
-    "delete": "Sil",
-    "archive_empty": "Arşiv Boş",
-    "archive_empty_desc": "Arşivlenmiş sohbetiniz bulunmuyor."
-  },
   "settings": {
     "title": "Ayarlar",
     "profile_title": "İşletme Profili",
@@ -153,7 +136,8 @@
     "change_body": "Uygulama dili \"{{lang}}\" olarak değiştirilecek.",
     "cancel": "Vazgeç",
     "confirm": "Değiştir",
-    "note": "Dil değişikliği bazı ekranlarda uygulamanın yeniden başlatılmasını gerektirebilir."
+    "note": "Dil değişikliği bazı ekranlarda uygulamanın yeniden başlatılmasını gerektirebilir.",
+    "system_note": "Uygulama telefon dilini takip eder. Geçerli sistem locale: {{locale}}. Aktif uygulama dili: {{lang}}."
   },
   "common": {
     "cancel": "Vazgeç",
@@ -406,14 +390,22 @@
     "typing": "yazıyor...",
     "empty": "Henüz sohbet yok",
     "empty_desc": "Arkadaşlarınla beğendiğin mekanları paylaş, birlikte keşfet.",
+    "empty_requests_title": "Mesaj İsteği Yok",
+    "empty_requests_desc": "Bekleyen bir mesaj isteğiniz bulunmuyor.",
     "start_chat": "Sohbet Başlat",
     "edit": "Düzenle",
     "done": "Bitti",
     "select_chat": "Sohbet Seçin",
     "selected": "Seçili",
+    "selected_count": "{{count}} Seçili",
     "deselect_all": "Tümünü Kaldır",
     "select_all": "Tümünü Seç",
-    "search_ph": "Kişi veya mekan ara..."
+    "search_ph": "Kişi veya mekan ara...",
+    "archived_title": "Arşivlenmiş Sohbetler",
+    "archived": "Arşivlendi",
+    "unarchive": "Arşivden Çıkar",
+    "archive_empty": "Arşiv Boş",
+    "archive_empty_desc": "Arşivlenmiş sohbetiniz bulunmuyor"
   },
   "matching": {
     "no_one_left": "Yakında kimse kalmadı",
@@ -836,6 +828,18 @@
     "review_submit_err": "Yorum gönderilirken bir hata oluştu.",
     "map_app_err": "Harita uygulaması açılamadı.",
     "info": "Bilgi"
+  },
+  "place_card": {
+    "analyze_reviews": "Yorum Analizi",
+    "review_analysis": "AI Yorum Analizi",
+    "analyzing": "Yorumlar analiz ediliyor...",
+    "analysis_error": "Analiz yapılırken bir hata oluştu",
+    "sentiment": "Duygu",
+    "detailed_analysis": "Detaylı Analiz",
+    "highlights": "Öne Çıkanlar",
+    "specialties": "Özel Özellikler",
+    "mentions": "bahis",
+    "analyzed_reviews": "{{count}} yorum analiz edildi"
   },
   "user_profile": {
     "reported": "Raporlandı",

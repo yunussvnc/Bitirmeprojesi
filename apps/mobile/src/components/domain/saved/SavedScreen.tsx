@@ -37,7 +37,6 @@ import { getSavedPlaces, getSavedPosts } from "@/src/services/savedService";
 import { LinearGradient } from "expo-linear-gradient";
 import { useTranslation } from "react-i18next";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { useAuthStore } from "@/src/store/useAuthStore";
 
 export default function SavedScreen() {
   const { colors } = useTheme();
@@ -56,7 +55,6 @@ export default function SavedScreen() {
   const [placesData, setPlacesData] = useState<Record<string, Place>>({});
   const insets = useSafeAreaInsets();
   const { t } = useTranslation();
-  const fetchMe = useAuthStore((s) => s.fetchMe);
 
   // Listen for tab press to scroll to top
   useEffect(() => {

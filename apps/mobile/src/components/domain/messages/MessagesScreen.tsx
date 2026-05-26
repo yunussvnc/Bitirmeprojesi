@@ -59,7 +59,74 @@ export default function MessagesScreen() {
     const searchInputRef = React.useRef<TextInput>(null);
     const [isEditMode, setIsEditMode] = useState(false);
     const [selectedIds, setSelectedIds] = useState<string[]>([]);
+    const [viewMode, setViewMode] = useState<'chats'|'requests'>('chats');
     const { t } = useTranslation();
+    const { getMatchConversations } = require("@/src/services/matchService");
+
+    React.useEffect(() => {
+        // Ekran her yüklendiğinde (veya authUser değiştiğinde) backend'den konuşma listesini çek
+        if (!authUser) return;
+        getMatchConversations().then((backendConvs: any[]) => {
+            const store = useMessagesStore.getState();
+            backendConvs.forEach((bc) => {
+                const chatId = String(bc.id);
+                const existing = store.conversations.find(c => c.id === chatId);
+                const lastMsg = bc.last_message_text || '';
+                const senderId = bc.last_message_sender_id;
+                const senderType = senderId === authUser.id ? 'me' : bc.other_user_display_name;
+                const freshAvatar = bc.other_user_photo || null;
+
+                if (!existing) {
+                    // Yeni konuşma — tamamen ekle
+                    store.addConversation({
+                        id: chatId,
+                        name: bc.other_user_display_name,
+                        username: '',
+                        avatar: freshAvatar ?? '',
+                        lastMessage: lastMsg,
+                        lastMessageSender: senderType as any,
+                        timestamp: bc.last_message_at ? new Date(bc.last_message_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) : '',
+                        unread: bc.unread_count > 0,
+                        isOnline: false,
+                        targetUserId: bc.other_user_id,
+                        lastMessageAt: bc.last_message_at ? new Date(bc.last_message_at).getTime() : new Date(bc.created_at).getTime(),
+                        isMatch: !bc.my_profile_revealed || !bc.other_profile_revealed,
+                        isRevealed: bc.my_profile_revealed && bc.other_profile_revealed,
+                        revealRequestedByMe: bc.my_profile_revealed,
+                        revealRequestedByThem: bc.other_profile_revealed,
+                        isRequest: bc.is_request ?? false,
+                    });
+                } else {
+                    // Mevcut konuşma — profil alanlarını (avatar, isim) her zaman güncelle,
+                    // son mesaj ve okunmamış durumunu da senkronize et
+                    store.updateConversationMeta(chatId, {
+                        avatar: freshAvatar ?? existing.avatar,
+                        name: bc.other_user_display_name || existing.name,
+                        targetUserId: bc.other_user_id,
+                        isRevealed: bc.my_profile_revealed && bc.other_profile_revealed,
+                        revealRequestedByMe: bc.my_profile_revealed,
+                        revealRequestedByThem: bc.other_profile_revealed,
+                        isMatch: !bc.my_profile_revealed || !bc.other_profile_revealed,
+                    });
+
+                    if (bc.last_message_at) {
+                        const bcTime = new Date(bc.last_message_at).getTime();
+                        if (bcTime > (existing.lastMessageAt || 0)) {
+                            store.updateLastMessageAt(
+                                chatId,
+                                lastMsg,
+                                new Date(bc.last_message_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                                senderType as any,
+                                bc.unread_count > 0
+                            );
+                        } else if (bc.unread_count > 0 && !existing.unread) {
+                            store.updateLastMessageAt(chatId, existing.lastMessage, existing.timestamp, existing.lastMessageSender, true);
+                        }
+                    }
+                }
+            });
+        }).catch((e: any) => console.log("Failed to fetch DMs inbox", e));
+    }, [authUser]);
 
     const username = authUser?.username || authUser?.email || "Kullanıcı";
 
@@ -86,9 +153,10 @@ export default function MessagesScreen() {
         setSelectedIds([]);
     };
 
-    const activeConversations = conversations.filter(c => !c.isArchived && !c.isDeleted);
+    const activeConversations = conversations.filter(c => !c.isArchived);
+    const displayedConversations = activeConversations.filter(c => viewMode === 'requests' ? c.isRequest : !c.isRequest);
 
-    const filteredConversations = activeConversations
+    const filteredConversations = displayedConversations
         .filter((c) => {
             if (!searchQuery) return true;
             const q = searchQuery.toLowerCase();
@@ -166,7 +234,20 @@ export default function MessagesScreen() {
                     )}
                     {/* Avatar */}
                     <View style={styles.avatarContainer}>
-                        <Image source={{ uri: item.avatar }} style={styles.avatar} contentFit="cover" />
+                        {item.avatar ? (
+                            <Image
+                                source={{ uri: item.avatar }}
+                                style={styles.avatar}
+                                contentFit="cover"
+                            />
+                        ) : (
+                            // Avatar URL yoksa baş harf placeholder göster
+                            <View style={[styles.avatar, styles.avatarPlaceholder]}>
+                                <Text style={styles.avatarInitial}>
+                                    {(item.name || '?').charAt(0).toUpperCase()}
+                                </Text>
+                            </View>
+                        )}
                         {item.isOnline && (
                             <View style={[styles.onlineDot, { borderColor: colors.background.primary }]} />
                         )}
@@ -241,7 +322,18 @@ export default function MessagesScreen() {
 
     const listHeader = React.useMemo(() => (
         <View style={styles.sectionHeader}>
-            <Text style={[styles.sectionTitle, { color: colors.text.primary }]}>{t("messages.title")}</Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center', gap: 16 }}>
+                <TouchableOpacity onPress={() => setViewMode('chats')}>
+                    <Text style={[styles.sectionTitle, { color: viewMode === 'chats' ? colors.text.primary : colors.text.tertiary }]}>
+                        {t("messages.title")}
+                    </Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => setViewMode('requests')}>
+                    <Text style={[styles.sectionTitle, { color: viewMode === 'requests' ? colors.text.primary : colors.text.tertiary }]}>
+                        İstekler
+                    </Text>
+                </TouchableOpacity>
+            </View>
             {!isEditMode && (
                 <TouchableOpacity
                     activeOpacity={0.7}
@@ -254,35 +346,38 @@ export default function MessagesScreen() {
                 </TouchableOpacity>
             )}
         </View>
-    ), [colors, isEditMode, router, t]);
+    ), [colors, viewMode, isEditMode, router, t]);
 
     const listEmpty = React.useMemo(() => (
         <View style={styles.emptyState}>
             <View style={[styles.emptyIcon, { borderColor: colors.accent.primary + "40" }]}>
-                <IconSymbol name="paperplane" size={32} color={colors.accent.primary} />
+                <IconSymbol name={viewMode === 'requests' ? "tray" : "paperplane"} size={32} color={colors.accent.primary} />
             </View>
-            <Text style={[styles.emptyTitle, { color: colors.text.primary }]}>{t("messages.empty")}</Text>
-            <Text style={[styles.emptyDesc, { color: colors.text.tertiary }]}>
-                {t("messages.empty_desc")}
+            <Text style={[styles.emptyTitle, { color: colors.text.primary }]}>
+                {viewMode === 'requests' ? t("messages.empty_requests_title", "Mesaj İsteği Yok") : t("messages.empty")}
             </Text>
-            <TouchableOpacity
-                style={[styles.startBtn, { backgroundColor: colors.accent.primary }]}
-                activeOpacity={0.8}
-                onPress={() => lightImpact()}
-            >
-                <Text style={styles.startBtnText}>{t("messages.start_chat")}</Text>
-            </TouchableOpacity>
+            <Text style={[styles.emptyDesc, { color: colors.text.tertiary }]}>
+                {viewMode === 'requests' ? t("messages.empty_requests_desc", "Bekleyen bir mesaj isteğiniz bulunmuyor.") : t("messages.empty_desc")}
+            </Text>
+            {viewMode === 'chats' && (
+                <TouchableOpacity
+                    style={[styles.startBtn, { backgroundColor: colors.accent.primary }]}
+                    activeOpacity={0.8}
+                    onPress={() => {
+                        lightImpact();
+                        router.push({
+                            pathname: "/search-users",
+                            params: { mode: "chat" }
+                        } as any);
+                    }}
+                >
+                    <Text style={styles.startBtnText}>{t("messages.start_chat")}</Text>
+                </TouchableOpacity>
+            )}
         </View>
-    ), [colors, t]);
+    ), [colors, viewMode, router, t]);
 
     return (
-        <TouchableWithoutFeedback
-            onPress={() => {
-                Keyboard.dismiss();
-                setSearchFocused(false);
-            }}
-            accessible={false}
-        >
             <View style={[styles.container, { backgroundColor: colors.background.primary }]}>
                 {/* ── Header ── */}
                 <View
@@ -365,20 +460,32 @@ export default function MessagesScreen() {
                     </View>
                 ) : (
                     <View style={styles.searchSection}>
-                        <View style={[styles.searchBar, { backgroundColor: colors.surface.elevated, borderColor: searchFocused ? colors.accent.primary : colors.surface.border }]}>
-                            <IconSymbol name="magnifyingglass" size={18} color={colors.text.tertiary} />
-                            <TextInput
-                                ref={searchInputRef}
-                                style={[styles.searchInput, { color: colors.text.primary }]}
-                                placeholder={t("messages.search_ph")}
-                                placeholderTextColor={colors.text.tertiary}
-                                value={searchQuery}
-                                onChangeText={setSearchQuery}
-                                autoCapitalize="none"
-                                cursorColor={colors.accent.primary}
-                                onFocus={() => setSearchFocused(true)}
-                                onBlur={() => setSearchFocused(false)}
-                            />
+                        <View style={styles.searchRow}>
+                            <View style={[styles.searchBar, { flex: 1, backgroundColor: colors.surface.elevated, borderColor: searchFocused ? colors.accent.primary : colors.surface.border }]}>
+                                <IconSymbol name="magnifyingglass" size={18} color={colors.text.tertiary} />
+                                <TextInput
+                                    ref={searchInputRef}
+                                    style={[styles.searchInput, { color: colors.text.primary }]}
+                                    placeholder={t("messages.search_ph")}
+                                    placeholderTextColor={colors.text.tertiary}
+                                    value={searchQuery}
+                                    onChangeText={setSearchQuery}
+                                    autoCapitalize="none"
+                                    cursorColor={colors.accent.primary}
+                                    onFocus={() => setSearchFocused(true)}
+                                    onBlur={() => setSearchFocused(false)}
+                                />
+                            </View>
+                            <TouchableOpacity
+                                style={[styles.newChatBtn, { backgroundColor: colors.accent.primary }]}
+                                activeOpacity={0.8}
+                                onPress={() => {
+                                    lightImpact();
+                                    router.push({ pathname: "/search-users", params: { mode: "chat" } } as any);
+                                }}
+                            >
+                                <IconSymbol name="plus" size={20} color="#fff" />
+                            </TouchableOpacity>
                         </View>
                     </View>
                 )}
@@ -424,7 +531,6 @@ export default function MessagesScreen() {
                     </View>
                 )}
             </View>
-        </TouchableWithoutFeedback>
     );
 }
 
@@ -472,6 +578,11 @@ const styles = StyleSheet.create({
         paddingTop: 12,
         paddingBottom: 8,
     },
+    searchRow: {
+        flexDirection: "row",
+        alignItems: "center",
+        gap: 10,
+    },
     searchBar: {
         flexDirection: "row",
         alignItems: "center",
@@ -484,6 +595,14 @@ const styles = StyleSheet.create({
         flex: 1,
         marginLeft: 8,
         fontSize: 15,
+    },
+    newChatBtn: {
+        width: 38,
+        height: 38,
+        borderRadius: 12,
+        alignItems: "center",
+        justifyContent: "center",
+        flexShrink: 0,
     },
 
     /* Section Header */
@@ -544,6 +663,16 @@ const styles = StyleSheet.create({
         width: 52,
         height: 52,
         borderRadius: 26,
+    },
+    avatarPlaceholder: {
+        backgroundColor: '#2a2a3a',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    avatarInitial: {
+        fontSize: 20,
+        fontWeight: '700',
+        color: '#a0a0c0',
     },
     onlineDot: {
         position: "absolute",

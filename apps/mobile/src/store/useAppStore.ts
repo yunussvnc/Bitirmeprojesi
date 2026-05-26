@@ -46,6 +46,19 @@ type AppState = {
   pendingSharedPostId: number | null;
   setPendingSharedPostId: (id: number) => void;
   clearPendingSharedPostId: () => void;
+
+  unreadNotificationCount: number;
+  setUnreadNotificationCount: (count: number) => void;
+  addUnreadNotificationCount: (count: number) => void;
+  clearUnreadNotificationCount: () => void;
+
+  deletedPostIds: number[];
+  addDeletedPostId: (id: number) => void;
+  clearDeletedPostIds: () => void;
+
+  viewedStoryGroupKeys: string[];
+  addViewedStoryGroupKey: (key: string) => void;
+  clearViewedStoryGroupKeys: () => void;
 };
 
 const uniq = (arr: string[]) => Array.from(new Set(arr));
@@ -61,6 +74,9 @@ export const useAppStore = create<AppState>()(
       apiHealthy: null,
       pendingPlaceName: null,
       pendingSharedPostId: null,
+      unreadNotificationCount: 0,
+      deletedPostIds: [],
+      viewedStoryGroupKeys: [],
 
       isSaved: (id) => get().savedIds.includes(id),
 
@@ -170,6 +186,26 @@ export const useAppStore = create<AppState>()(
 
       setPendingSharedPostId: (id) => set({ pendingSharedPostId: id }),
       clearPendingSharedPostId: () => set({ pendingSharedPostId: null }),
+
+      setUnreadNotificationCount: (count) => set({ unreadNotificationCount: count }),
+      addUnreadNotificationCount: (count) => set((state) => ({ unreadNotificationCount: state.unreadNotificationCount + count })),
+      clearUnreadNotificationCount: () => {
+        set({ unreadNotificationCount: 0 });
+      },
+
+      addDeletedPostId: (id: number) => {
+        set((state) => ({ deletedPostIds: uniq([...state.deletedPostIds.map(String), String(id)]).map(Number) }));
+      },
+      clearDeletedPostIds: () => {
+        set({ deletedPostIds: [] });
+      },
+
+      addViewedStoryGroupKey: (key: string) => {
+        set((state) => ({ viewedStoryGroupKeys: uniq([...state.viewedStoryGroupKeys, key]) }));
+      },
+      clearViewedStoryGroupKeys: () => {
+        set({ viewedStoryGroupKeys: [] });
+      },
     }),
     {
       name: "app-store-v2",
@@ -180,6 +216,7 @@ export const useAppStore = create<AppState>()(
         savedPostIds: state.savedPostIds,
         savedPostsById: state.savedPostsById,
         recentPrompts: state.recentPrompts,
+        viewedStoryGroupKeys: state.viewedStoryGroupKeys,
       }),
     }
   )

@@ -77,16 +77,17 @@ class TestFeedListing:
         response = client.get("/feed")
         assert response.status_code == 200
         data = response.json()
-        assert data["total"] >= 1
         assert len(data["items"]) >= 1
+        assert "has_more" in data
 
     def test_feed_with_author_info(self, client):
         uid = create_test_user(email="feedauth@test.com", username="feedauth")
         create_test_post(uid)
-        headers = get_auth_headers(uid)
-        response = client.get("/feed", headers=headers)
+        # Keşfet akışında giriş yapmış kullanıcı kendi gönderisini görmez; anonim feed kullan
+        response = client.get("/feed")
         data = response.json()
-        post = data["items"][0]
+        assert data["items"], "Feed boş döndü"
+        post = next(p for p in data["items"] if p.get("author", {}).get("username") == "feedauth")
         assert post["author"]["username"] == "feedauth"
 
     def test_feed_following_filter(self, client):
@@ -108,10 +109,11 @@ class TestFeedListing:
         uid = create_test_user(email="fpag@test.com", username="fpag")
         for i in range(5):
             create_test_post(uid, caption=f"Post {i}")
-        response = client.get("/feed?page=1&page_size=2")
+        response = client.get("/feed?page_size=2")
         data = response.json()
         assert len(data["items"]) == 2
-        assert data["total"] == 5
+        assert data["has_more"] is True
+        assert data["next_cursor"] is not None
 
 
 class TestReels:

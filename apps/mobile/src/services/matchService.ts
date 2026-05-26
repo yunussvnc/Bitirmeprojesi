@@ -84,6 +84,9 @@ export interface MatchConversation {
     is_active: boolean;
     created_at: string;
     last_message_at?: string;
+    last_message_text?: string;
+    last_message_sender_id?: number;
+    unread_count: number;
 }
 
 export interface QRVerifyResponse {

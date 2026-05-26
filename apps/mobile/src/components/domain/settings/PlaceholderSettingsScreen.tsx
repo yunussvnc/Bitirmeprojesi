@@ -13,6 +13,7 @@ import { useTheme } from '@/src/hooks/useTheme';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
 import { createTextStyle, spacing } from '@/src/constants/design';
 import { lightImpact } from '@/src/utils/haptics';
+import { useTranslation } from 'react-i18next';
 import Animated, {
     useSharedValue,
     useAnimatedStyle,

@@ -59,7 +59,7 @@ export default function RestrictedAccountsScreen() {
           </View>
           <Text style={[styles.emptyTitle, { color: colors.text.primary }]}>Kısıtlı hesap yok</Text>
           <Text style={[styles.emptyDesc, { color: colors.text.tertiary }]}>
-            Bir kullanıcıyı kısıtlamak için profilindeki menüden{"\n"}"Kısıtla" seçeneğini kullanabilirsin.
+            Bir kullanıcıyı kısıtlamak için profilindeki menüden{"\n"}&quot;Kısıtla&quot; seçeneğini kullanabilirsin.
           </Text>
         </View>
       ) : (

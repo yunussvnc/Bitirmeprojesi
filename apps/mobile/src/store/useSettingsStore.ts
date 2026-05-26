@@ -3,16 +3,7 @@ import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import { apiGet, apiPut } from "@/src/utils/apiClient";
 import i18n from "../i18n";
-import { getLocales } from "expo-localization";
-
-const getInitialLanguage = (): AppLanguage => {
-  try {
-    const code = getLocales()[0]?.languageCode;
-    return code === 'tr' ? 'tr' : 'en';
-  } catch {
-    return 'tr'; // Fallback in case expo-localization fails completely
-  }
-};
+import { getSystemAppLanguage, type AppLanguage } from "@/src/utils/locale";
 
 /**
  * Uygulama genelinde kullanıcı tercihleri.
@@ -23,8 +14,6 @@ const getInitialLanguage = (): AppLanguage => {
 export type UploadQuality = 'high' | 'auto' | 'data_saver';
 export type CameraToolbarSide = 'left' | 'right';
 export type Audience = 'everyone' | 'followers' | 'off';
-export type AppLanguage = 'tr' | 'en';
-
 type BackendPrefs = {
   is_private_account: boolean;
   default_comments_disabled: boolean;
@@ -189,10 +178,11 @@ export const useSettingsStore = create<SettingsState>()(
       removeHiddenWord: (word) => { set({ hiddenWords: get().hiddenWords.filter((w) => w !== word) }); schedulePush(); },
 
       // Dil
-      language: getInitialLanguage(),
-      setLanguage: (v) => { 
-        set({ language: v }); 
-        i18n.changeLanguage(v);
+      language: getSystemAppLanguage(),
+      setLanguage: () => { 
+        const systemLanguage = getSystemAppLanguage();
+        set({ language: systemLanguage }); 
+        i18n.changeLanguage(systemLanguage);
         schedulePush(); 
       },
 
@@ -229,7 +219,7 @@ export const useSettingsStore = create<SettingsState>()(
             uploadQuality: prefs.upload_quality as UploadQuality,
             wifiAutoHighQuality: prefs.wifi_auto_high_quality,
             includeLocationInPosts: prefs.include_location_in_posts,
-            language: prefs.language as AppLanguage,
+            language: getSystemAppLanguage(),
           });
         } catch {
           // İlk kullanımda backend'de kayıt olmayabilir, default'lar kullanılır
@@ -255,7 +245,7 @@ export const useSettingsStore = create<SettingsState>()(
             upload_quality: s.uploadQuality,
             wifi_auto_high_quality: s.wifiAutoHighQuality,
             include_location_in_posts: s.includeLocationInPosts,
-            language: s.language,
+            language: getSystemAppLanguage(),
           });
         } catch {
           // Sessiz başarısızlık — lokal durum korunur
@@ -272,7 +262,18 @@ export const useSettingsStore = create<SettingsState>()(
         for (const [key, value] of Object.entries(rest)) {
           if (typeof value !== "function") plainState[key] = value;
         }
+        plainState.language = getSystemAppLanguage();
         return plainState as any;
+      },
+      merge: (persistedState, currentState) => {
+        const { hasExplicitLanguagePreference: _hasExplicitLanguagePreference, ...persisted } =
+          (persistedState as Partial<SettingsState> & { hasExplicitLanguagePreference?: boolean }) ?? {};
+
+        return {
+          ...currentState,
+          ...persisted,
+          language: getSystemAppLanguage(),
+        };
       },
     }
   )

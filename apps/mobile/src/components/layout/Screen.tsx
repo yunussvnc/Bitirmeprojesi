@@ -110,11 +110,12 @@ export const Screen = forwardRef<ScreenRef, ScreenProps>(({
   // Top padding: safe area inset (status bar / notch) + extra visual spacing
   const topPadding = insets.top + designSpacing.base;
   
-  // Bottom padding: clear gap above tab bar
-  // Tab bar is absolute positioned: ~88px on iOS, ~60px on Android
-  const bottomPadding = withTabBar 
-    ? (Platform.OS === 'ios' ? 100 : 72)
-    : designSpacing.xxl;
+  const bottomInset = Math.max(insets.bottom, Platform.OS === 'ios' ? 24 : 16);
+
+  // Bottom padding: clear gap above the absolute tab bar and system navigation area.
+  const bottomPadding = withTabBar
+    ? 56 + bottomInset + designSpacing.base
+    : bottomInset + designSpacing.base;
 
   const containerStyle = [
     styles.container,

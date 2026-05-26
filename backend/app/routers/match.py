@@ -5,8 +5,11 @@ import random
 from typing import List, Optional
 from datetime import datetime, timedelta, timezone
 
+# pyrefly: ignore [missing-import]
 from fastapi import APIRouter, Depends, HTTPException
+# pyrefly: ignore [missing-import]
 from sqlalchemy.orm import Session
+# pyrefly: ignore [missing-import]
 from sqlalchemy import func as sa_func
 
 import models, schemas, crud
@@ -450,16 +453,32 @@ def get_match_conversations(
         models.MatchConversation.is_active == True,
     ).order_by(models.MatchConversation.last_message_at.desc().nullslast()).all()
 
+    # Bloklu kullanıcıları al
+    blocked_by_me = {r[0] for r in db.query(models.UserBlock.blocked_id).filter(models.UserBlock.blocker_id == current_user.id).all()}
+    blocked_me = {r[0] for r in db.query(models.UserBlock.blocker_id).filter(models.UserBlock.blocked_id == current_user.id).all()}
+    all_blocked_ids = blocked_by_me | blocked_me
+
     result = []
     for conv in convs:
         other_user_id = conv.user2_id if conv.user1_id == current_user.id else conv.user1_id
+        
+        # Ghost mod: Eğer birbirlerini engellemişlerse konuşmayı inbox'ta hiç gösterme
+        if other_user_id in all_blocked_ids:
+            continue
+            
         is_user1 = conv.user1_id == current_user.id
 
         other_profile = db.query(models.MatchProfile).filter(
             models.MatchProfile.user_id == other_user_id
         ).first()
 
-        other_name = other_profile.display_name if other_profile else "Bilinmeyen"
+        other_user = db.query(models.User).filter(models.User.id == other_user_id).first()
+
+        if other_profile:
+            other_name = other_profile.display_name
+        else:
+            other_name = other_user.first_name or other_user.username or "Bilinmeyen" if other_user else "Bilinmeyen"
+
         other_photo = None
         if other_profile and other_profile.photo_urls:
             try:
@@ -467,6 +486,24 @@ def get_match_conversations(
                 other_photo = photos[0] if photos else None
             except (json.JSONDecodeError, TypeError):
                 pass
+        
+        if not other_photo and other_user and other_user.avatar_url:
+            other_photo = other_user.avatar_url
+
+        # Son mesajı al
+        last_message = db.query(models.Message).filter(
+            models.Message.conversation_id == conv.id
+        ).order_by(models.Message.created_at.desc()).first()
+
+        last_message_text = last_message.content if last_message else None
+        last_message_sender_id = last_message.sender_id if last_message else None
+
+        # Okunmamış mesaj sayısını hesapla (karşı tarafın gönderdiği ve is_read=False olanlar)
+        unread_count = db.query(models.Message).filter(
+            models.Message.conversation_id == conv.id,
+            models.Message.sender_id == other_user_id,
+            models.Message.is_read == False
+        ).count()
 
         result.append(schemas.MatchConversationResponse(
             id=conv.id,
@@ -479,6 +516,9 @@ def get_match_conversations(
             is_active=conv.is_active,
             created_at=conv.created_at,
             last_message_at=conv.last_message_at,
+            last_message_text=last_message_text,
+            last_message_sender_id=last_message_sender_id,
+            unread_count=unread_count,
         ))
 
     return result

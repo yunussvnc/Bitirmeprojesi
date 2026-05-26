@@ -610,7 +610,7 @@ export default function VenueEditScreen() {
                       </Text>
                     </View>
                   </View>
-                  <Text style={styles.reviewText}>"{review.text}"</Text>
+                  <Text style={styles.reviewText}>{`"${review.text}"`}</Text>
 
                   {review.reply ? (
                     <LinearGradient colors={['rgba(16, 185, 129, 0.15)', 'rgba(16, 185, 129, 0.05)']} style={styles.reviewReplyBox}>

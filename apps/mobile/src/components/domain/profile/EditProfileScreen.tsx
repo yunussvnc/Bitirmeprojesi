@@ -10,6 +10,7 @@ import { useAuthStore } from "@/src/store/useAuthStore";
 import { updateMe } from "@/src/services/authService";
 import { uploadImage } from "@/src/services/feedService";
 import { handleApiError } from "@/src/utils/errorHandler";
+import { logger } from "@/src/utils/logger";
 import { lightImpact } from "@/src/utils/haptics";
 import { useTranslation } from "react-i18next";
 
@@ -79,7 +80,7 @@ export default function EditProfileScreen() {
     } catch (e) {
       const err = handleApiError(e);
       Alert.alert(t("edit_profile.error"), err.userMessage || t("edit_profile.error_desc"));
-      console.error("Profile update error:", e);
+      logger.warn("Profile update error:", e);
     } finally {
       setLoading(false);
     }
@@ -125,7 +126,12 @@ export default function EditProfileScreen() {
           </TouchableOpacity>
         </View>
 
-        <ScrollView style={styles.container} showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 100 }} keyboardShouldPersistTaps="handled">
+        <ScrollView
+          style={styles.container}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ paddingBottom: 100 + Math.max(insets.bottom, 0) }}
+          keyboardShouldPersistTaps="handled"
+        >
           {/* ── Avatar Section ── */}
           <View style={styles.avatarWrap}>
             <TouchableOpacity onPress={pickAvatar} activeOpacity={0.8} style={styles.avatarTouchable}>

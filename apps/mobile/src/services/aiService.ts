@@ -12,12 +12,16 @@
 import Constants from 'expo-constants';
 import { Platform } from 'react-native';
 import { logger } from '@/src/utils/logger';
+import { apiPost } from '@/src/utils/apiClient';
+import { getSystemLanguagePayload, normalizeAppLanguageCode } from '@/src/utils/locale';
 import type {
   SmartSearchRequest,
   SmartSearchResponse,
   AnalyzeReviewRequest,
   AnalyzeReviewResponse,
+  Place,
 } from '@/src/types/ai';
+import type { RecommendResponse } from '@/src/types/recommend';
 
 
 // ============================================================
@@ -37,12 +41,30 @@ function resolveAIBaseUrl(): string {
     // Fallback: .env'den veya local IP
     return `http://${process.env.EXPO_PUBLIC_DEV_API_HOST?.split(':')[0] ?? '192.168.1.36'}:8080`;
   }
-  return process.env.EXPO_PUBLIC_AI_URL ?? 'https://ai.asemos.com';
+  // Production: Render AI service URL
+  return 'https://asemos-ai.onrender.com';
 }
 
 export const getAIBaseUrl = resolveAIBaseUrl;
 
 export const AI_BASE_URL = resolveAIBaseUrl();
+
+export function normalizeAILanguageCode(value?: string | null): string | undefined {
+  return normalizeAppLanguageCode(value);
+}
+
+export function getCurrentAILanguagePayload(): { language: string; locale?: string } {
+  return getSystemLanguagePayload();
+}
+
+function withCurrentAILanguage<T extends { language?: string; locale?: string }>(req: T): T {
+  const current = getCurrentAILanguagePayload();
+  return {
+    ...req,
+    language: current.language,
+    locale: current.locale,
+  };
+}
 
 
 // ============================================================
@@ -87,6 +109,53 @@ async function aiFetch<T>(
 // API Fonksiyonları
 // ============================================================
 
+function normalizeSmartSearchResponse(res: SmartSearchResponse): SmartSearchResponse {
+  const message = res.message || res.ai_message || '';
+  return {
+    ...res,
+    message,
+    ai_message: res.ai_message || message,
+    recommendations: res.recommendations || [],
+    _cache: res._cache || { hit: false },
+  };
+}
+
+function mapBackendFallbackToSmartSearch(req: SmartSearchRequest, res: RecommendResponse): SmartSearchResponse {
+  const recommendations: Place[] = (res.items || []).map((item) => ({
+    name: item.name,
+    address: item.subtitle || '',
+    latitude: req.user_lat ?? 0,
+    longitude: req.user_lng ?? 0,
+    rating: 0,
+    review_count: 0,
+    price_level: 1,
+    category: item.category || 'Mekan',
+    description: item.explanation || '',
+    photo_url: item.photo_url || null,
+    data_id: item.data_id || String(item.id),
+    distance_km: item.distance_m ? item.distance_m / 1000 : undefined,
+    recommendation_reason: item.explanation,
+    review_insights: item.tags?.length
+      ? {
+          specialties: [],
+          top_specialty: null,
+          highlight_tags: item.tags,
+          summary: '',
+          review_count_analyzed: 0,
+        }
+      : undefined,
+  }));
+
+  return {
+    query: req.query,
+    found: recommendations.length,
+    recommendations,
+    message: res.summary || '',
+    ai_message: res.summary || '',
+    _cache: { hit: res.cached || false },
+  };
+}
+
 /**
  * Doğal dil sorgusu ile mekan ara.
  * Örn: "Kadıköy'de deniz manzaralı sessiz kafe"
@@ -94,17 +163,25 @@ async function aiFetch<T>(
 export async function smartSearch(
   req: SmartSearchRequest,
 ): Promise<SmartSearchResponse> {
+  const localizedReq = withCurrentAILanguage(req);
   try {
-    logger.log('[aiService] smartSearch →', req.query);
+    logger.log('[aiService] smartSearch →', localizedReq.query, localizedReq.language);
     const res = await aiFetch<SmartSearchResponse>(
       '/api/smart-search-v2',
-      { method: 'POST', body: JSON.stringify(req) },
+      { method: 'POST', body: JSON.stringify(localizedReq) },
     );
     logger.log('[aiService] smartSearch ←', res.found, 'sonuç');
-    return res;
+    return normalizeSmartSearchResponse(res);
   } catch (error) {
-    logger.error('[aiService] smartSearch hatası:', error);
-    throw error;
+    logger.warn('[aiService] smartSearch hatası, backend fallback deneniyor:', error);
+    const fallback = await apiPost<RecommendResponse>('/recommend', {
+      queryText: localizedReq.query,
+      location: localizedReq.user_lat && localizedReq.user_lng ? { lat: localizedReq.user_lat, lng: localizedReq.user_lng } : undefined,
+      radius_m: localizedReq.max_distance_km ? localizedReq.max_distance_km * 1000 : undefined,
+      language: localizedReq.language,
+      locale: localizedReq.locale,
+    });
+    return mapBackendFallbackToSmartSearch(localizedReq, fallback);
   }
 }
 
@@ -114,11 +191,12 @@ export async function smartSearch(
 export async function analyzeReviews(
   req: AnalyzeReviewRequest,
 ): Promise<AnalyzeReviewResponse> {
+  const localizedReq = withCurrentAILanguage(req);
   try {
-    logger.log('[aiService] analyzeReviews →', req.data_id);
+    logger.log('[aiService] analyzeReviews →', localizedReq.data_id, localizedReq.language);
     const res = await aiFetch<AnalyzeReviewResponse>(
       '/api/analyze-place-reviews',
-      { method: 'POST', body: JSON.stringify(req) },
+      { method: 'POST', body: JSON.stringify(localizedReq) },
     );
     return res;
   } catch (error) {
@@ -179,12 +257,13 @@ export async function imageSearch(
           user_lng: opts.userLng,
           limit: opts.limit ?? 5,
           max_distance_km: 10,
+          ...getCurrentAILanguagePayload(),
         }),
       },
       60000, // 60 sn timeout (görsel analiz yavaş olabilir)
     );
     logger.log('[aiService] imageSearch ←', res.found, 'sonuç', res.image_analysis?.detected_query);
-    return res;
+    return normalizeSmartSearchResponse(res) as SmartSearchResponse & { image_analysis?: { detected_query: string; category: string; description: string; gemini_available: boolean } };
   } catch (error) {
     logger.error('[aiService] imageSearch hatası:', error);
     throw error;

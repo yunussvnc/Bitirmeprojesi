@@ -299,7 +299,7 @@ export default function ForgotPasswordScreen() {
                         </TouchableWithoutFeedback>
                     </ScrollView>
 
-                    <TouchableOpacity onPress={() => router.push('/(auth)/login')} style={styles.footer}>
+                    <TouchableOpacity onPress={() => router.push('/login')} style={styles.footer}>
                         <Text style={styles.footerText}>{t("forgot_password.remember_password")} </Text>
                         <Text style={styles.footerLink}>{t("forgot_password.login")}</Text>
                     </TouchableOpacity>

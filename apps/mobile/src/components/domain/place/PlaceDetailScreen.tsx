@@ -32,7 +32,7 @@ import { Screen, Section, type ScreenRef } from "@/src/components/layout";
 import { PlaceCard } from "@/src/components/domain/place/PlaceCard";
 import { Button, Card, ReviewForm, RatingStars } from "@/src/components/ui";
 
-import { handleApiError } from '@/src/utils/errorHandler';
+import { handleApiError, isNotFoundError } from '@/src/utils/errorHandler';
 import { useTranslation } from 'react-i18next';
 import { useAppStore } from "@/src/store/useAppStore";
 import { useSettingsStore } from "@/src/store/useSettingsStore";
@@ -266,6 +266,11 @@ export default function PlaceDetailScreen({
       }
     } catch (error) {
       if (!cancelled.current) {
+        if (isNotFoundError(error)) {
+          setReviews([]);
+          setReviewsError(null);
+          return;
+        }
         logger.error("Error loading reviews:", error);
         setReviewsError("Yorumlar yüklenirken bir hata oluştu.");
       }
@@ -783,15 +788,29 @@ export default function PlaceDetailScreen({
                       </View>
                       <View style={styles.reviewHeaderRow}>
                         <Text style={[h2Style, { fontSize: 20 }]}>{t("place_detail.reviews")}</Text>
-                        <TouchableOpacity
-                          onPress={() => {
-                            lightImpact();
-                            setShowReviews(false);
-                          }}
-                          activeOpacity={0.7}
-                        >
-                          <IconSymbol name="xmark.circle.fill" size={28} color={colors.text.tertiary} />
-                        </TouchableOpacity>
+                        <View style={{ flexDirection: "row", alignItems: "center", gap: spacing.sm }}>
+                          <Button
+                            variant="secondary"
+                            size="small"
+                            onPress={async () => {
+                              lightImpact();
+                              await checkUserLocation();
+                              setShowReviewForm(true);
+                            }}
+                            loading={checkingLocation}
+                          >
+                            {t("review.add_btn")}
+                          </Button>
+                          <TouchableOpacity
+                            onPress={() => {
+                              lightImpact();
+                              setShowReviews(false);
+                            }}
+                            activeOpacity={0.7}
+                          >
+                            <IconSymbol name="xmark.circle.fill" size={28} color={colors.text.tertiary} />
+                          </TouchableOpacity>
+                        </View>
                       </View>
                     </View>
                   </View>
@@ -804,6 +823,15 @@ export default function PlaceDetailScreen({
                     }}
                     scrollEventThrottle={16}
                   >
+                    {showReviewForm && (
+                      <ReviewForm
+                        onSubmit={handleSubmitReview}
+                        onCancel={() => setShowReviewForm(false)}
+                        loading={submittingReview}
+                        style={{ marginBottom: spacing.lg }}
+                      />
+                    )}
+
                     {reviewsLoading ? (
                       <Text style={[bodySmallStyle]}>{t('explore.loading_comments')}</Text>
                     ) : reviewsError ? (
@@ -910,7 +938,7 @@ export default function PlaceDetailScreen({
                   <View style={styles.imageModalOverlay}>
                     <Pressable style={styles.imageModalBackdrop} onPress={() => setReviewGalleryData(null)} />
                     {/* Top bar: close + counter */}
-                    <View style={styles.galleryTopBar}>
+                    <View style={[styles.galleryTopBar, { paddingTop: Math.max(insets.top + spacing.base, spacing.xl) }]}>
                       <TouchableOpacity
                         onPress={() => {
                           lightImpact();

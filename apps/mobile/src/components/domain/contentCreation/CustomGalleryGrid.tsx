@@ -195,8 +195,15 @@ export function CustomGalleryGrid({
         // Auto-preview first asset
         if (result.assets.length > 0 && onPreviewChange) {
           const first = result.assets[0];
+          // iOS'ta ph:// URI'leri upload'da çalışmaz — localUri al
+          let resolvedUri = first.uri;
+          try {
+            const info = await MediaLibrary.getAssetInfoAsync(first);
+            if (info?.localUri) resolvedUri = info.localUri;
+          } catch { /* fallback to asset.uri */ }
           const firstItem: MediaItem = {
-            uri: first.uri,
+            uri: resolvedUri,
+            assetId: first.id,
             type: first.mediaType === 'video' ? 'video' : 'image',
             width: first.width,
             height: first.height,
@@ -238,7 +245,7 @@ export function CustomGalleryGrid({
   );
 
   const handleCellPress = useCallback(
-    (asset: MediaLibrary.Asset) => {
+    async (asset: MediaLibrary.Asset) => {
       lightImpact();
 
       const err = validateAsset(asset);
@@ -247,8 +254,21 @@ export function CustomGalleryGrid({
         return;
       }
 
+      // iOS'ta ph:// / ph-upload:// URI'leri fetch ile gönderilemez.
+      // Asset objesinden localUri (file://) al.
+      let resolvedUri = asset.uri;
+      try {
+        const assetInfo = await MediaLibrary.getAssetInfoAsync(asset);
+        if (assetInfo?.localUri) {
+          resolvedUri = assetInfo.localUri;
+        }
+      } catch (e) {
+        console.warn('[Gallery] getAssetInfoAsync failed, using asset.uri:', e);
+      }
+
       const item: MediaItem = {
-        uri: asset.uri,
+        uri: resolvedUri,
+        assetId: asset.id,
         type: asset.mediaType === 'video' ? 'video' : 'image',
         width: asset.width,
         height: asset.height,
@@ -262,8 +282,8 @@ export function CustomGalleryGrid({
         return;
       }
 
-      // Multi-select toggle
-      const existingIndex = selected.findIndex((s) => s.uri === asset.uri);
+      // Multi-select toggle — resolvedUri ile karşılaştır
+      const existingIndex = selected.findIndex((s) => s.assetId === asset.id || s.uri === resolvedUri || s.uri === asset.uri);
       if (existingIndex >= 0) {
         const newSelected = selected.filter((_, i) => i !== existingIndex);
         onSelect(newSelected);
@@ -288,7 +308,7 @@ export function CustomGalleryGrid({
 
   const renderItem = useCallback(
     ({ item: asset }: { item: MediaLibrary.Asset }) => {
-      const selIdx = selected.findIndex((s) => s.uri === asset.uri);
+      const selIdx = selected.findIndex((s) => s.assetId === asset.id || s.uri === asset.uri);
       return (
         <GalleryCell
           asset={asset}
@@ -326,7 +346,7 @@ export function CustomGalleryGrid({
         activeOpacity={0.7}
       >
         <Text style={[styles.albumLabel, { color: colors.text.primary }]}>
-          {selectedAlbum?.title ?? 'Son Eklenenler'}
+          {selectedAlbum?.title ?? t('gallery.recents')}
         </Text>
         <IconSymbol
           name={showAlbumPicker ? 'chevron.up' : 'chevron.down'}
@@ -352,7 +372,7 @@ export function CustomGalleryGrid({
               }}
             >
               <Text style={[styles.albumItemText, { color: !selectedAlbum ? colors.accent.primary : colors.text.primary }]}>
-                Son Eklenenler
+                {t('gallery.recents')}
               </Text>
               {!selectedAlbum && <IconSymbol name="checkmark" size={16} color={colors.accent.primary} />}
             </TouchableOpacity>
@@ -412,7 +432,7 @@ export function CustomGalleryGrid({
           <View style={styles.emptyWrap}>
             <IconSymbol name="photo.on.rectangle" size={40} color={colors.text.tertiary} />
             <Text style={[styles.emptyText, { color: colors.text.tertiary }]}>
-              Bu albümde fotoğraf bulunamadı.
+              {t('creation.gallery_empty')}
             </Text>
           </View>
         }

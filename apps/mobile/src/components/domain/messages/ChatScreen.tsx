@@ -4,7 +4,7 @@
  * Bireysel sohbet ekranı — mekan paylaşımı odaklı mesajlaşma.
  */
 
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect, useCallback } from "react";
 import {
     View,
     Text,
@@ -18,7 +18,16 @@ import {
     TouchableWithoutFeedback,
     Alert,
     Keyboard,
+    Dimensions,
 } from "react-native";
+import Animated, {
+    useSharedValue,
+    useAnimatedStyle,
+    withSpring,
+    withTiming,
+    runOnJS,
+} from 'react-native-reanimated';
+import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useRouter, useLocalSearchParams } from "expo-router";
 import { Image } from "expo-image";
@@ -32,10 +41,11 @@ import { MaterialCommunityIcons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import { revealProfile } from "@/src/services/matchService";
 import { toggleBlockUser, createReport } from "@/src/services/moderationService";
-import { getMessages as fetchBackendMessages, sendMessage as backendSendMessage, markMessagesRead } from "@/src/services/messageService";
+import { getMessages as fetchBackendMessages, sendMessage as backendSendMessage, markMessagesRead, getConversationPermission, type ConversationPermission } from "@/src/services/messageService";
 import { useAuthStore } from "@/src/store/useAuthStore";
 import { logger } from "@/src/utils/logger";
 import { useTranslation } from "react-i18next";
+import { API_BASE_URL } from "@/src/constants/api";
 
 /* ── Types ── */
 interface Message {
@@ -52,10 +62,15 @@ interface Message {
     seen?: boolean;
     status?: "sent" | "delivered" | "read";
     sharedPostId?: number;
+    /** story_reply mesajı için: yanıtlanan hikayenin thumbnail URL'si (null = hikaye silindi/süresi doldu) */
+    storySnapshotUrl?: string | null;
+    isStoryReply?: boolean;
+    /** Yanıtlanan hikayenin ID'si (derin bağ linkleme için) */
+    parentStoryId?: number | null;
 }
 
 /* ── Dummy Contact Data ── */
-const CONTACTS: Record<string, { name: string; avatar: string; isOnline: boolean }> = {
+const CONTACTS: Record<string, { name: string; avatar: string; isOnline: boolean; targetUserId?: number }> = {
     "1": { name: "Ahmet Yılmaz", avatar: "https://i.pravatar.cc/150?img=1", isOnline: true },
     "2": { name: "Elif Kaya", avatar: "https://i.pravatar.cc/150?img=5", isOnline: false },
     "3": { name: "Burak Demir", avatar: "https://i.pravatar.cc/150?img=3", isOnline: true },
@@ -210,22 +225,136 @@ export default function ChatScreen() {
     const { colors } = useTheme();
     const insets = useSafeAreaInsets();
     const router = useRouter();
-    const { chatId } = useLocalSearchParams<{ chatId: string }>();
+    const { chatId, name: nameParam, avatar: avatarParam, viewDeleted } = useLocalSearchParams<{ chatId: string; name?: string; avatar?: string; viewDeleted?: string }>();
     const [inputText, setInputText] = useState("");
     const [lastSeenId, setLastSeenId] = useState<string | null>(null);
     const [isOptionsVisible, setIsOptionsVisible] = useState(false);
     const [isReportVisible, setIsReportVisible] = useState(false);
     const [reportText, setReportText] = useState("");
+    // Mesajlaşma izin durumu
+    const [msgPermission, setMsgPermission] = useState<ConversationPermission | null>(null);
+    // Image viewer
+    const [selectedImageUri, setSelectedImageUri] = useState<string | null>(null);
+    // Preview modal: URI seçildi, gönderilmedi — kullanıcı onaylasın
+    const [previewUri, setPreviewUri] = useState<string | null>(null);
     const flatListRef = useRef<FlatList>(null);
     const didInitialScrollRef = useRef(false);
+
+    // ── Image Viewer Animations ──
+    const imgScale = useSharedValue(1);
+    const imgTranslateX = useSharedValue(0);
+    const imgTranslateY = useSharedValue(0);
+    const savedScale = useSharedValue(1);
+    const savedTranslateX = useSharedValue(0);
+    const savedTranslateY = useSharedValue(0);
+    const overlayOpacity = useSharedValue(0);
+
+    const openImageViewer = useCallback((uri: string) => {
+        imgScale.value = 1;
+        imgTranslateX.value = 0;
+        imgTranslateY.value = 0;
+        savedScale.value = 1;
+        savedTranslateX.value = 0;
+        savedTranslateY.value = 0;
+        overlayOpacity.value = withTiming(1, { duration: 150 });
+        setSelectedImageUri(uri);
+    }, []);
+
+    const closeImageViewer = useCallback(() => {
+        // Reanimated callback'leri bazen RN JS thread'inde gecikmeye (4-5 sn) yol açar.
+        // Bu yüzden animasyonu başlatıp, JS tarafında setTimeout ile kapatıyoruz.
+        overlayOpacity.value = withTiming(0, { duration: 150 });
+        imgScale.value = withTiming(0.9, { duration: 150 });
+        
+        setTimeout(() => {
+            setSelectedImageUri(null);
+        }, 150);
+    }, []);
+
+    const pinchGesture = Gesture.Pinch()
+        .onUpdate((e) => {
+            imgScale.value = Math.max(0.5, Math.min(savedScale.value * e.scale, 6));
+        })
+        .onEnd(() => {
+            if (imgScale.value < 1) {
+                imgScale.value = withSpring(1);
+                imgTranslateX.value = withSpring(0);
+                imgTranslateY.value = withSpring(0);
+                savedScale.value = 1;
+                savedTranslateX.value = 0;
+                savedTranslateY.value = 0;
+            } else {
+                savedScale.value = imgScale.value;
+            }
+        });
+
+    const panGesture = Gesture.Pan()
+        .onUpdate((e) => {
+            if (savedScale.value > 1) {
+                imgTranslateX.value = savedTranslateX.value + e.translationX;
+                imgTranslateY.value = savedTranslateY.value + e.translationY;
+            } else {
+                imgTranslateY.value = e.translationY;
+                overlayOpacity.value = Math.max(0, 1 - Math.abs(e.translationY) / 400);
+            }
+        })
+        .onEnd((e) => {
+            if (savedScale.value <= 1 && Math.abs(e.translationY) > 80) {
+                // Kapatırken görselin ekrandan uçup gitmesi için (flash olmaması için)
+                imgTranslateY.value = withTiming(e.translationY + Math.sign(e.translationY) * 500, { duration: 150 });
+                runOnJS(closeImageViewer)();
+            } else if (savedScale.value <= 1) {
+                imgTranslateY.value = withSpring(0);
+                overlayOpacity.value = withTiming(1);
+            } else {
+                savedTranslateX.value = imgTranslateX.value;
+                savedTranslateY.value = imgTranslateY.value;
+            }
+        });
+
+    const doubleTapGesture = Gesture.Tap()
+        .numberOfTaps(2)
+        .onEnd(() => {
+            if (imgScale.value > 1) {
+                imgScale.value = withSpring(1);
+                imgTranslateX.value = withSpring(0);
+                imgTranslateY.value = withSpring(0);
+                savedScale.value = 1;
+                savedTranslateX.value = 0;
+                savedTranslateY.value = 0;
+            } else {
+                imgScale.value = withSpring(2.5);
+                savedScale.value = 2.5;
+            }
+        });
+
+    const combinedGesture = Gesture.Simultaneous(pinchGesture, panGesture);
+    const allGestures = Gesture.Race(doubleTapGesture, combinedGesture);
+
+    const animatedImageStyle = useAnimatedStyle(() => ({
+        transform: [
+            { scale: imgScale.value },
+            { translateX: imgTranslateX.value },
+            { translateY: imgTranslateY.value },
+        ],
+    }));
+
+    const animatedOverlayStyle = useAnimatedStyle(() => ({
+        opacity: overlayOpacity.value,
+    }));
+
     const resolvedChatId = chatId || "1";
     const currentUser = useAuthStore((s) => s.user);
-    const { t } = useTranslation();
+    const accessToken = useAuthStore((s) => s.accessToken);
+    const { t, i18n } = useTranslation();
+    const currentLocale = i18n.language === 'tr' ? 'tr-TR' : 'en-US';
 
-    // BUG-11: conversation_id, ya tamamen sayısal ya da "match_xxx_userId" formatında olabilir.
-    // Sayısal ise doğrudan backend conversation id olarak kullan.
+    // BUG-14: Sadece "match_xxx_userId" formatındaki ID'ler ya da sayısal olmayan ID'ler dummy sayılır.
+    // Sayısal ID'ler artık her zaman backend conversation ID'si olarak işlenir.
     const numericConvId = parseInt(resolvedChatId, 10);
-    const isBackendConv = !isNaN(numericConvId) && resolvedChatId === String(numericConvId);
+    const isNumeric = !isNaN(numericConvId) && resolvedChatId === String(numericConvId);
+    const isDummyConversation = !isNumeric && !resolvedChatId.startsWith("match_");
+    const isBackendConv = isNumeric;
 
     // Store'dan mesajları mount anında bir kere oku (subscribe etme — hydration loop'u önler)
     const [messages, setMessages] = useState<Message[]>(() => {
@@ -244,7 +373,7 @@ export default function ChatScreen() {
                         timestamp: (() => {
                             try {
                                 const d = new Date(m.timestamp);
-                                return d.toLocaleTimeString("tr-TR", { hour: "2-digit", minute: "2-digit" });
+                                return d.toLocaleTimeString(currentLocale, { hour: "2-digit", minute: "2-digit" });
                             } catch (_e) { return m.timestamp; }
                         })(),
                         imageUri: m.imageUri,
@@ -257,47 +386,234 @@ export default function ChatScreen() {
         return initial;
     });
 
-    // Backend'den mesaj geçmişini yükle (sayısal conversation id ise)
+    const storeConversation = useMessagesStore((state) => state.conversations.find(c => c.id === resolvedChatId));
+
+    // Tüm mesajlar görünür (soft-delete kaldırıldı)
+    const visibleMessages = messages;
+
+    useEffect(() => {
+        useMessagesStore.getState().setActiveConversation(resolvedChatId);
+        return () => {
+            useMessagesStore.getState().setActiveConversation(null);
+        };
+    }, [resolvedChatId]);
+
+    // Anlık "görüldü" güncellemesi için Chat WebSocket listener
+    useEffect(() => {
+        if (!isBackendConv || !accessToken) return;
+
+        const WS_BASE = API_BASE_URL.replace(/^http/, 'ws');
+        const wsUrl = `${WS_BASE}/ws/chat/${numericConvId}?token=${accessToken}`;
+        const ws = new WebSocket(wsUrl);
+
+        ws.onopen = () => {
+            console.log(`✅ Chat WS connected to: ${wsUrl}`);
+        };
+
+        ws.onerror = (e) => {
+            console.warn(`❌ Chat WS error:`, e);
+        };
+
+        ws.onclose = (e) => {
+            console.log(`🔌 Chat WS closed. Code: ${e.code}, Reason: ${e.reason}`);
+        };
+
+        ws.onmessage = (event) => {
+            try {
+                const data = JSON.parse(event.data);
+                console.log(`📬 Chat WS message received:`, data.type);
+
+                if (data.type === 'message:status') {
+                    // Karşı taraf mesajları okudu → anlık olarak status'ü "read" yap
+                    const messageIds: string[] = (data.message_ids ?? (data.message_id ? [String(data.message_id)] : [])).map(String);
+                    if (messageIds.length > 0 && data.status === 'read') {
+                        setMessages((prev) =>
+                            prev.map((m) =>
+                                m.isMine && messageIds.includes(m.id)
+                                    ? { ...m, status: 'read' as const }
+                                    : m
+                            )
+                        );
+                    }
+                } else if (data.type === 'new_message' && data.message) {
+                    // Karşı taraftan yeni mesaj geldi → listeye ekle
+                    const msg = data.message;
+                    if (msg.sender_id !== currentUser?.id) {
+                        setMessages((prev) => {
+                            if (prev.some((m) => m.id === String(msg.id))) return prev;
+                            return [...prev, {
+                                id: String(msg.id),
+                                text: msg.content ?? '',
+                                isMine: false,
+                                imageUri: msg.media_url ?? undefined,
+                                timestamp: (() => {
+                                    try {
+                                        return new Date(msg.created_at).toLocaleTimeString(currentLocale, { hour: '2-digit', minute: '2-digit' });
+                                    } catch { return ''; }
+                                })(),
+                            }];
+                        });
+                    }
+                } else if (data.type === 'message:sent') {
+                    // Kendi gönderdiğimiz mesajın ID'si backend'den onaylandı
+                    const msg = data.message;
+                    if (msg) {
+                        setMessages((prev) =>
+                            prev.map((m) =>
+                                (m.status === 'sent' && m.text === msg.content)
+                                    ? { ...m, id: String(msg.id), status: 'delivered' as const }
+                                    : m
+                            )
+                        );
+                    }
+                }
+            } catch { /* ignore parse errors */ }
+        };
+
+        return () => {
+            ws.close(1000, 'Screen unmounted');
+        };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isBackendConv, numericConvId, accessToken]);
+
+    // Backend'den mesaj geçmişini yükle ve 3 saniyede bir yeni mesajları kontrol et
     useEffect(() => {
         if (!isBackendConv) return;
-        (async () => {
+
+        const myId = currentUser?.id;
+
+        const loadMessages = async () => {
             try {
                 const res = await fetchBackendMessages(numericConvId, 1, 100);
                 if (res.items.length > 0) {
-                    const myId = currentUser?.id;
                     const backendMsgs: Message[] = res.items.map((m) => ({
                         id: String(m.id),
                         text: m.content,
                         isMine: m.sender_id === myId,
                         timestamp: (() => {
                             try {
-                                return new Date(m.created_at).toLocaleTimeString("tr-TR", { hour: "2-digit", minute: "2-digit" });
+                                return new Date(m.created_at).toLocaleTimeString(currentLocale, { hour: "2-digit", minute: "2-digit" });
                             } catch { return ""; }
                         })(),
-                        status: m.is_read ? "read" as const : "delivered" as const,
+                        status: m.sender_id === myId
+                            ? (m.is_read ? "read" as const : "sent" as const)
+                            : undefined,
                         sharedPostId: m.shared_post_id ?? undefined,
-                        imageUri: m.media_url ?? undefined,
+                        imageUri: m.media_url ? (m.media_url.startsWith('/') ? `${API_BASE_URL}${m.media_url}` : m.media_url) : undefined,
+                        isStoryReply: m.message_type === 'story_reply',
+                        storySnapshotUrl: m.story_snapshot_url ?? undefined,
+                        parentStoryId: m.parent_story_id ?? undefined,
                     }));
-                    setMessages(backendMsgs);
+                    setMessages((prev) => {
+                        // Backend verisini önceki mesajlarla birleştir (delivered statüsünü korumak için)
+                        const mergedMsgs = backendMsgs.map(newMsg => {
+                            const oldMsg = prev.find(m => m.id === newMsg.id);
+                            if (oldMsg) {
+                                // Eski mesaj 'delivered' ise ve yeni mesaj henüz 'read' değilse ('sent' ise), 'delivered' kalmasını sağla
+                                if (oldMsg.status === 'delivered' && newMsg.status === 'sent') {
+                                    return { ...newMsg, status: 'delivered' as const };
+                                }
+                            }
+                            return newMsg;
+                        });
+
+                        // Liste uzunlukları veya statüleri değişmişse listeyi güncelle
+                        const isSame = prev.length === mergedMsgs.length && prev.every((m, i) => 
+                            m.id === mergedMsgs[i].id && m.status === mergedMsgs[i].status
+                        );
+                        
+                        return isSame ? prev : mergedMsgs;
+                    });
+
+                    // Store'u render sonrasında güncelle (render sırasında state güncelleme hatasını önler)
+                    const latestMsg = backendMsgs[backendMsgs.length - 1];
+                    if (latestMsg && backendMsgs.length > 0) {
+                        const convs = useMessagesStore.getState().conversations;
+                        const textToSave = latestMsg.text || (latestMsg.imageUri ? t('chat.photo', 'Fotoğraf 📷') : '');
+                        const sender = latestMsg.isMine ? 'me' : contact.name || 'Kullanıcı';
+
+                        setTimeout(() => {
+                            if (!convs.some(c => c.id === chatId)) {
+                                useMessagesStore.getState().addConversation({
+                                    id: chatId,
+                                    name: contact.name || 'Kullanıcı',
+                                    username: '',
+                                    avatar: contact.avatar || '',
+                                    lastMessage: textToSave,
+                                    lastMessageSender: sender as any,
+                                    timestamp: latestMsg.timestamp,
+                                    unread: !latestMsg.isMine,
+                                    isOnline: contact.isOnline || false,
+                                    lastMessageAt: Date.now(),
+                                });
+                            } else {
+                                const c = convs.find(c => c.id === chatId);
+                                useMessagesStore.getState().updateLastMessageAt(
+                                    chatId,
+                                    textToSave,
+                                    latestMsg.timestamp,
+                                    sender as any,
+                                );
+                                if (c?.isArchived) useMessagesStore.getState().unarchiveConversation(chatId);
+                            }
+                        }, 0);
+                    }
                 }
                 // Okundu bildir
                 markMessagesRead(numericConvId).catch(() => { });
             } catch (e) {
-                // 403 = conversation belongs to another user (expected for seed data)
-                // Only log at debug level to avoid scary console errors
                 if (__DEV__) logger.warn("[ChatScreen] Could not load messages for conv", numericConvId);
             }
-        })();
+        };
+
+        // İlk yükleme
+        loadMessages();
+
+        // 3 saniyede bir polling (arka plandaki güvenlik ağı)
+        const pollInterval = setInterval(loadMessages, 3000);
+
+        return () => clearInterval(pollInterval);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isBackendConv, numericConvId]);
 
-    const storeConversation = useMessagesStore((state) => state.conversations.find(c => c.id === resolvedChatId));
+    // 🔐 Mesajlaşma iznini yükle (konuşma açılınca + her 10 saniyede bir yenile)
+    useEffect(() => {
+        if (!isBackendConv) {
+            // Dummy konuşma → tam serbest
+            setMsgPermission({ can_send: true, can_send_media: true, hide_read_receipt: false, messages_sent_count: 0, awaiting_reply: false });
+            return;
+        }
+        const loadPerm = async () => {
+            const perm = await getConversationPermission(numericConvId);
+            setMsgPermission(perm);
+        };
+        loadPerm();
+        const permInterval = setInterval(loadPerm, 10000);
+        return () => clearInterval(permInterval);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isBackendConv, numericConvId]);
 
+    // Contact bilgisini öncelik sırasıyla belirle:
+    // 1. Mock CONTACTS (sadece sahte data için)
+    // 2. Store'daki konuşma (önceden yüklenmiş)
+    // 3. Navigation param'ları (openConversation'dan gelenler) ← YENİ
+    // 4. Boş fallback (asla Ahmet Yılmaz değil)
     const contact = CONTACTS[resolvedChatId] || (storeConversation ? {
         name: storeConversation.name,
         avatar: storeConversation.avatar,
-        isOnline: storeConversation.isOnline
-    } : CONTACTS["1"]);
+        isOnline: storeConversation.isOnline,
+        targetUserId: storeConversation.targetUserId,
+    } : nameParam ? {
+        name: decodeURIComponent(nameParam),
+        avatar: avatarParam ? decodeURIComponent(avatarParam) : `https://ui-avatars.com/api/?name=${encodeURIComponent(nameParam)}&background=random`,
+        isOnline: false,
+        targetUserId: undefined,
+    } : {
+        name: "Kullanıcı",
+        avatar: "https://ui-avatars.com/api/?name=K&background=random",
+        isOnline: false,
+        targetUserId: undefined,
+    });
 
     const isMatch = storeConversation?.isMatch;
     const revealRequestedByMe = storeConversation?.revealRequestedByMe;
@@ -384,15 +700,31 @@ export default function ChatScreen() {
 
     const sendMessage = () => {
         if (!inputText.trim()) return;
+
+        // 🔐 Gönderme izni kontrolü
+        if (msgPermission && !msgPermission.can_send) {
+            Alert.alert(
+                t("chat.restricted_title", "Mesaj Gönderilemedi"),
+                msgPermission.reason === "awaiting_reply"
+                    ? t("chat.awaiting_reply", "Karşı taraf henüz cevap vermedi. Cevap verene kadar yeni mesaj gönderemezsiniz.")
+                    : t("chat.cannot_send", "Bu kullanıcıya mesaj gönderme izniniz yok."),
+            );
+            return;
+        }
+
         lightImpact();
         const newMsg: Message = {
             id: String(Date.now()),
             text: inputText.trim(),
             isMine: true,
-            timestamp: new Date().toLocaleTimeString("tr-TR", { hour: "2-digit", minute: "2-digit" }),
+            timestamp: new Date().toLocaleTimeString(currentLocale, { hour: "2-digit", minute: "2-digit" }),
             status: "sent",
         };
         setMessages((prev) => [...prev, newMsg]);
+        // İzin sayacını optimistik olarak artır
+        if (msgPermission) {
+            setMsgPermission(prev => prev ? { ...prev, messages_sent_count: prev.messages_sent_count + 1, can_send: false, awaiting_reply: true } : prev);
+        }
         // Store'a ve conversations'a yaz
         if (chatId) {
             useChatMessagesStore.getState().addMessage(chatId, {
@@ -402,21 +734,55 @@ export default function ChatScreen() {
                 timestamp: new Date().toISOString(),
                 status: "sent",
             });
-            useMessagesStore.getState().updateLastMessageAt(chatId, newMsg.text, newMsg.timestamp, "me");
+            const convs = useMessagesStore.getState().conversations;
+            if (!convs.some(c => c.id === chatId)) {
+                // Konuşma listede yoksa yeni oluştur
+                useMessagesStore.getState().addConversation({
+                    id: chatId,
+                    name: contact.name || "Kullanıcı",
+                    username: "", // Opsiyonel
+                    avatar: contact.avatar || "",
+                    lastMessage: newMsg.text,
+                    lastMessageSender: "me",
+                    timestamp: newMsg.timestamp,
+                    unread: false,
+                    isOnline: contact.isOnline || false,
+                    lastMessageAt: Date.now(),
+                });
+            } else {
+                useMessagesStore.getState().updateLastMessageAt(chatId, newMsg.text, newMsg.timestamp, "me");
+                const c = convs.find(c => c.id === chatId);
+                if (c?.isArchived) useMessagesStore.getState().unarchiveConversation(chatId);
+            }
         }
-        // Backend'e fire-and-forget sync
+        // Backend'e gönder ve ID'yi gerçek db ID'si ile değiştir
         if (isBackendConv) {
-            backendSendMessage(numericConvId, { content: newMsg.text }).catch((e) =>
-                logger.warn("[ChatScreen] Backend mesaj gönderilemedi", e)
-            );
+            backendSendMessage(numericConvId, { content: newMsg.text })
+                .then((sent) => {
+                    setMessages((prev) =>
+                        prev.map((m) =>
+                            m.id === newMsg.id
+                                ? { ...m, id: String(sent.id), status: 'delivered' as const }
+                                : m
+                        )
+                    );
+                })
+                .catch((e) =>
+                    logger.warn("[ChatScreen] Backend mesaj gönderilemedi", e)
+                );
         }
         setInputText("");
-        setTimeout(() => {
-            flatListRef.current?.scrollToEnd({ animated: true });
-        }, 100);
     };
 
     const handleCameraPress = () => {
+        // 🔐 Medya izni kontrolü
+        if (msgPermission && !msgPermission.can_send_media) {
+            Alert.alert(
+                t("chat.restricted_title", "Medya Gönderilemedi"),
+                t("chat.media_restricted", "Bu konuşmada medya gönderebilmek için karşılıklı takipleşmeniz gerekiyor.")
+            );
+            return;
+        }
         Alert.alert(
             t("chat.send_photo", "Fotoğraf Gönder"),
             t("chat.photo_options_desc", "Lütfen bir seçenek belirleyin:"),
@@ -435,7 +801,8 @@ export default function ChatScreen() {
                                 quality: 0.8,
                             });
                             if (!result.canceled && result.assets && result.assets.length > 0) {
-                                sendImageMessage(result.assets[0].uri);
+                                // Önizleme göster — kullanıcı onaylasın
+                                setPreviewUri(result.assets[0].uri);
                             }
                         } catch (error) {
                             Alert.alert(t("common.error"), t("chat.camera_err"));
@@ -452,11 +819,12 @@ export default function ChatScreen() {
                                 return;
                             }
                             const result = await ImagePicker.launchImageLibraryAsync({
-                                mediaTypes: ['images', 'videos'],
+                                mediaTypes: ['images'],
                                 quality: 0.8,
                             });
                             if (!result.canceled && result.assets && result.assets.length > 0) {
-                                sendImageMessage(result.assets[0].uri);
+                                // Önizleme göster — kullanıcı onaylasın
+                                setPreviewUri(result.assets[0].uri);
                             }
                         } catch (error) {
                             Alert.alert(t("common.error"), t("chat.gallery_err"));
@@ -471,32 +839,98 @@ export default function ChatScreen() {
         );
     };
 
-    const sendImageMessage = (uri: string) => {
-        const newMsg: Message = {
-            id: String(Date.now()),
-            text: inputText.trim(),
+    const sendImageMessage = async (uri: string) => {
+        if (!isBackendConv) return;
+
+        // Önizleme modalını kapat
+        setPreviewUri(null);
+
+        // Fotoğrafla birlikte yazı gönderilmişse al
+        const captionText = inputText.trim();
+
+        // Optimistic UI: hemen göster
+        const tempId = `temp_img_${Date.now()}`;
+        const optimisticMsg: Message = {
+            id: tempId,
+            text: captionText,
             imageUri: uri,
             isMine: true,
-            timestamp: new Date().toLocaleTimeString("tr-TR", { hour: "2-digit", minute: "2-digit" }),
+            timestamp: new Date().toLocaleTimeString(currentLocale, { hour: "2-digit", minute: "2-digit" }),
             status: "sent",
         };
-        setMessages((prev) => [...prev, newMsg]);
-        // Store'a ve conversations'a yaz
+        setMessages((prev) => [...prev, optimisticMsg]);
+
+        // Store'a kaydet (navigasyon sonrası kaybolmasın)
         if (chatId) {
             useChatMessagesStore.getState().addMessage(chatId, {
-                id: newMsg.id,
-                text: newMsg.text || t("chat.photo", "Fotoğraf 📷"),
+                id: tempId,
+                text: captionText,
                 isMine: true,
                 timestamp: new Date().toISOString(),
                 imageUri: uri,
                 status: "sent",
             });
-            useMessagesStore.getState().updateLastMessageAt(chatId, newMsg.text || t("chat.photo", "Fotoğraf 📷"), newMsg.timestamp, "me");
         }
-        setInputText("");
-        setTimeout(() => {
-            flatListRef.current?.scrollToEnd({ animated: true });
-        }, 100);
+
+        setInputText('');
+
+        try {
+            // 1. Görseli backend'e upload et
+            const filename = uri.split('/').pop() || 'photo.jpg';
+            const match = /\.([^.]+)$/.exec(filename);
+            const type = match ? `image/${match[1].toLowerCase().replace('jpg', 'jpeg')}` : 'image/jpeg';
+
+            const { apiUploadFile } = await import('@/src/utils/apiClient');
+            const uploadResult = await apiUploadFile('/upload/image', { uri, name: filename, type });
+            const mediaUrl: string = uploadResult.url;
+
+            // 2. Backend'e mesaj olarak gönder
+            const sent = await backendSendMessage(numericConvId, {
+                content: captionText || t('chat.photo', '📷 Fotoğraf'),
+                message_type: "image",
+                media_url: mediaUrl,
+            });
+
+            // 3. Optimistic mesajı gerçek ID ile güncelle
+            const realId = String(sent.id);
+            setMessages((prev) =>
+                prev.map((m) =>
+                    m.id === tempId
+                        ? { ...m, id: realId, imageUri: mediaUrl.startsWith('/') ? `${API_BASE_URL}${mediaUrl}` : mediaUrl, status: 'delivered' as const }
+                        : m
+                )
+            );
+
+            // Store'daki temp mesajı da gerçek ID ile güncelle
+            if (chatId) {
+                const store = useChatMessagesStore.getState();
+                const existing = store.messagesByChat[chatId] ?? [];
+                const updated = existing.map((m) =>
+                    m.id === tempId
+                        ? { ...m, id: realId, imageUri: mediaUrl.startsWith('/') ? `${API_BASE_URL}${mediaUrl}` : mediaUrl, status: 'delivered' as const }
+                        : m
+                );
+                useChatMessagesStore.setState({ messagesByChat: { ...store.messagesByChat, [chatId]: updated } });
+            }
+
+            // conversations store güncelle
+            const textToSave = t('chat.photo', 'Fotoğraf 📷');
+            setTimeout(() => {
+                useMessagesStore.getState().updateLastMessageAt(chatId, textToSave, optimisticMsg.timestamp, 'me');
+            }, 0);
+        } catch (err) {
+            logger.error('[sendImageMessage] Upload failed:', err);
+            // Hatalı optimistic mesajı kaldır
+            setMessages((prev) => prev.filter((m) => m.id !== tempId));
+            if (chatId) {
+                const store = useChatMessagesStore.getState();
+                const existing = store.messagesByChat[chatId] ?? [];
+                useChatMessagesStore.setState({
+                    messagesByChat: { ...store.messagesByChat, [chatId]: existing.filter((m) => m.id !== tempId) }
+                });
+            }
+            Alert.alert(t('common.error', 'Hata'), t('chat.photo_send_err', 'Fotoğraf gönderilemedi.'));
+        }
     };
 
     const handleDeleteMessage = (msgId: string) => {
@@ -537,14 +971,18 @@ export default function ChatScreen() {
         if (item.isMine) {
             const isRead = item.status === 'read' || item.seen || (isLast && lastSeenId === item.id);
             const isDelivered = item.status === 'delivered';
-            const tickColor = "#2ecc71";
+            const readColor = "#2196F3";     // Mavi → görüldü
+            const defaultColor = "rgba(255,255,255,0.6)"; // Soluk → gönderildi/teslim edildi
 
             if (isRead) {
-                tickIcon = <MaterialCommunityIcons name="check-all" size={16} color={tickColor} style={{ marginLeft: 4 }} />;
+                // Çift mavi tik → görüldü
+                tickIcon = <MaterialCommunityIcons name="check-all" size={16} color={readColor} style={{ marginLeft: 4 }} />;
             } else if (isDelivered) {
-                tickIcon = <MaterialCommunityIcons name="check-all" size={16} color={tickColor} style={{ marginLeft: 4 }} />;
+                // Çift gri tik → teslim edildi (karşı tarafa ulaştı, okumadı)
+                tickIcon = <MaterialCommunityIcons name="check-all" size={16} color={defaultColor} style={{ marginLeft: 4 }} />;
             } else {
-                tickIcon = <MaterialCommunityIcons name="check" size={16} color={tickColor} style={{ marginLeft: 4 }} />;
+                // Tek gri tik → gönderildi (sunucuya ulaştı)
+                tickIcon = <MaterialCommunityIcons name="check" size={16} color={defaultColor} style={{ marginLeft: 4 }} />;
             }
         }
 
@@ -624,6 +1062,74 @@ export default function ChatScreen() {
             );
         }
 
+        // ── Hikayeye Yanıt Mesajı (AŞAMA 5) ──
+        if (item.isStoryReply) {
+            // Hikayenin süresi dolmuş / silinmiş mi? (snapshot URL yoksa → expired)
+            const isStoryExpired = !item.storySnapshotUrl;
+
+            return (
+                <TouchableOpacity
+                    style={[styles.messageBubbleRow, item.isMine ? styles.myRow : styles.theirRow]}
+                    onLongPress={longPressHandler}
+                    activeOpacity={0.9}
+                >
+                    <View style={[styles.messageContentWrapper, item.isMine ? { alignItems: 'flex-end' } : { alignItems: 'flex-start' }]}>
+                        <View
+                            style={[
+                                styles.storyReplyCard,
+                                {
+                                    backgroundColor: item.isMine ? "#ffffff" : colors.surface.elevated,
+                                    borderColor: item.isMine ? 'rgba(0,0,0,0.08)' : colors.surface.border,
+                                    opacity: isStoryExpired ? 0.7 : 1,
+                                },
+                            ]}
+                        >
+                            {/* Hikaye Önizleme Bandı */}
+                            {isStoryExpired ? (
+                                // Hikaye silindi / süresi doldu
+                                <View style={[styles.storyReplyThumb, styles.storyReplyThumbExpired]}>
+                                    <IconSymbol name="clock.badge.xmark" size={22} color="rgba(255,255,255,0.5)" />
+                                </View>
+                            ) : (
+                                <Image
+                                    source={{ uri: item.storySnapshotUrl! }}
+                                    style={styles.storyReplyThumb}
+                                    contentFit="cover"
+                                />
+                            )}
+                            <View style={styles.storyReplyContent}>
+                                <Text
+                                    style={[
+                                        styles.storyReplyLabel,
+                                        { color: item.isMine ? 'rgba(0,0,0,0.45)' : colors.text.tertiary },
+                                    ]}
+                                >
+                                    {isStoryExpired
+                                        ? 'Bu hikayeye artık ulaşılamıyor'
+                                        : (item.isMine ? 'Hikayeye yanıt verdim' : 'Hikayenize yanıt verdi')
+                                    }
+                                </Text>
+                                <Text
+                                    style={[
+                                        styles.newMsgText,
+                                        { color: item.isMine ? '#000' : colors.text.primary },
+                                    ]}
+                                >
+                                    {item.text}
+                                </Text>
+                            </View>
+                        </View>
+                        <View style={[styles.newTimeRow, item.isMine ? { justifyContent: 'flex-end' } : { justifyContent: 'flex-start' }]}>
+                            <Text style={[styles.newMsgTime, { color: colors.text.tertiary }]}>
+                                {item.timestamp}
+                            </Text>
+                            {item.isMine && tickIcon}
+                        </View>
+                    </View>
+                </TouchableOpacity>
+            );
+        }
+
         // Paylaşılan gönderi mesajı
         if (item.sharedPostId && item.imageUri) {
             return (
@@ -685,9 +1191,18 @@ export default function ChatScreen() {
         // Fotoğraflı mesaj
         if (item.imageUri) {
             return (
-                <TouchableOpacity style={[styles.messageBubbleRow, item.isMine ? styles.myRow : styles.theirRow]} onLongPress={longPressHandler} activeOpacity={0.9}>
+                <TouchableOpacity
+                    style={[styles.messageBubbleRow, item.isMine ? styles.myRow : styles.theirRow]}
+                    onLongPress={longPressHandler}
+                    activeOpacity={0.9}
+                >
                     <View style={[styles.messageContentWrapper, item.isMine ? { alignItems: 'flex-end' } : { alignItems: 'flex-start' }]}>
-                        <View style={[styles.imageBubble, item.isMine ? { backgroundColor: "#ffffff" } : { backgroundColor: colors.surface.elevated, borderColor: colors.surface.border, borderWidth: 1 }]}>
+                        <TouchableOpacity
+                            activeOpacity={0.92}
+                            onPress={() => openImageViewer(item.imageUri!)}
+                            onLongPress={longPressHandler}
+                            style={[styles.imageBubble, item.isMine ? { backgroundColor: "#ffffff" } : { backgroundColor: colors.surface.elevated, borderColor: colors.surface.border, borderWidth: 1 }]}
+                        >
                             <Image
                                 source={{ uri: item.imageUri }}
                                 style={styles.messageImage}
@@ -698,7 +1213,7 @@ export default function ChatScreen() {
                                     {item.text}
                                 </Text>
                             ) : null}
-                        </View>
+                        </TouchableOpacity>
                         <View style={[styles.newTimeRow, item.isMine ? { justifyContent: 'flex-end' } : { justifyContent: 'flex-start' }]}>
                             <Text style={[styles.newMsgTime, { color: colors.text.tertiary }]}>
                                 {item.timestamp}
@@ -775,7 +1290,17 @@ export default function ChatScreen() {
                     <IconSymbol name="chevron.left" size={26} color={colors.text.primary} />
                 </TouchableOpacity>
 
-                <TouchableOpacity style={styles.headerProfile} activeOpacity={0.8}>
+                <TouchableOpacity 
+                    style={styles.headerProfile} 
+                    activeOpacity={0.8}
+                    onPress={() => {
+                        // Önce gerçek backend user ID'yi dene, yoksa mock data için fallback kullan
+                        const userId = contact.targetUserId || _parseTargetUserId(resolvedChatId);
+                        if (userId) {
+                            router.push(`/user/${userId}` as any);
+                        }
+                    }}
+                >
                     <Image source={{ uri: contact.avatar }} style={styles.headerAvatar} contentFit="cover" />
                     <View>
                         <Text style={[styles.headerName, { color: colors.text.primary }]} numberOfLines={1}>
@@ -819,21 +1344,30 @@ export default function ChatScreen() {
             <FlatList
                 ref={flatListRef}
                 style={{ flex: 1 }}
-                data={messages}
+                data={[...visibleMessages].reverse()}
+                inverted={true}
                 keyExtractor={(item) => item.id}
                 renderItem={renderMessage}
-                contentContainerStyle={styles.messageList}
+                contentContainerStyle={[styles.messageList, { paddingTop: 20 }]}
                 showsVerticalScrollIndicator={false}
                 keyboardShouldPersistTaps="handled"
                 keyboardDismissMode="on-drag"
                 onScrollBeginDrag={() => Keyboard.dismiss()}
-                onContentSizeChange={() => {
-                    if (!didInitialScrollRef.current) {
-                        didInitialScrollRef.current = true;
-                        setTimeout(() => flatListRef.current?.scrollToEnd({ animated: false }), 50);
-                    }
-                }}
             />
+
+            {/* ── Kısıtlı Mod Bilgi Banner'ı ── */}
+            {msgPermission && !msgPermission.can_send_media && isBackendConv && (
+                <View style={[styles.restrictionBanner, { backgroundColor: colors.surface.elevated, borderTopColor: colors.surface.border }]}>
+                    <IconSymbol name="lock.fill" size={13} color={colors.text.tertiary} />
+                    <Text style={[styles.restrictionText, { color: colors.text.tertiary }]}>
+                        {msgPermission.awaiting_reply
+                            ? t("chat.restriction_awaiting", "Cevap bekleniyor — yeni mesaj gönderilemez")
+                            : msgPermission.reason === "private_account_no_mutual"
+                            ? t("chat.restriction_private", "Gizli hesap — mesaj göndermek için takipleşin")
+                            : t("chat.restriction_limited", "Kısıtlı mod — karşılıklı takipleşince kısıtlamalar kalkar")}
+                    </Text>
+                </View>
+            )}
 
             {/* ── Input Bar ── */}
             <View
@@ -847,19 +1381,29 @@ export default function ChatScreen() {
                 ]}
             >
                 <View style={[styles.inputContainer, { backgroundColor: colors.surface.elevated, borderColor: colors.surface.border }]}>
-                    <TouchableOpacity style={styles.cameraBtn} activeOpacity={0.7} onPress={handleCameraPress}>
+                    {/* Kamera butonu — medya kısıtlıysa soluk göster */}
+                    <TouchableOpacity
+                        style={[styles.cameraBtn, msgPermission && !msgPermission.can_send_media && { opacity: 0.35 }]}
+                        activeOpacity={0.7}
+                        onPress={handleCameraPress}
+                    >
                         <IconSymbol name="camera.fill" size={20} color={colors.accent.primary} />
                     </TouchableOpacity>
 
                     <TextInput
                         style={[styles.textInput, { color: colors.text.primary }]}
-                        placeholder={t("chat.type_message")}
+                        placeholder={
+                            msgPermission && !msgPermission.can_send
+                                ? t("chat.input_locked", "Mesaj gönderme kısıtlandı…")
+                                : t("chat.type_message")
+                        }
                         placeholderTextColor={colors.text.tertiary}
                         value={inputText}
                         onChangeText={setInputText}
                         multiline
                         maxLength={1000}
                         cursorColor={colors.accent.primary}
+                        editable={!msgPermission || msgPermission.can_send}
                     />
                 </View>
 
@@ -924,7 +1468,7 @@ export default function ChatScreen() {
                 >
                     <View style={styles.reportModalContainer}>
                         <View style={[styles.reportModalContent, { backgroundColor: colors.surface.elevated }]}>
-                            <View style={[styles.reportHeaderRow, { borderBottomColor: colors.surface.border }]}>
+                            <View style={[styles.reportHeader, { borderBottomColor: colors.surface.border }]}>
                                 <Text style={[styles.reportTitle, { color: colors.text.primary }]}>{t("chat.report_user")}</Text>
                                 <TouchableOpacity onPress={() => {
                                     setIsReportVisible(false);
@@ -948,23 +1492,114 @@ export default function ChatScreen() {
                                     cursorColor={colors.accent.primary}
                                 />
                             </View>
-                            <Text style={[styles.charCountText, { color: reportText.length > 500 ? colors.semantic.error : colors.text.tertiary }]}>
+                            <Text style={[styles.wordCount, { color: reportText.length > 500 ? colors.semantic.error : colors.text.tertiary }]}>
                                 {t("chat.char_left")} {500 - reportText.length}
                             </Text>
 
                             <TouchableOpacity
-                                style={[styles.reportSubmitBtn, { backgroundColor: reportText.trim().length === 0 ? colors.surface.border : colors.accent.primary }]}
+                                style={[styles.submitReportBtn, { backgroundColor: reportText.trim().length === 0 ? colors.surface.border : colors.accent.primary }]}
                                 activeOpacity={0.8}
                                 onPress={handleReport}
                                 disabled={reportText.trim().length === 0}
                             >
-                                <Text style={[styles.reportSubmitText, { color: reportText.trim().length === 0 ? colors.text.tertiary : "#FFFFFF" }]}>
+                                <Text style={[styles.submitReportText, { color: reportText.trim().length === 0 ? colors.text.tertiary : "#FFFFFF" }]}>
                                     {t("chat.send")}
                                 </Text>
                             </TouchableOpacity>
                         </View>
                     </View>
                 </KeyboardAvoidingView>
+            </Modal>
+
+            {/* ── Fotoğraf Önizleme Modalı (gönderilmeden önce) ── */}
+            <Modal
+                visible={!!previewUri}
+                transparent
+                animationType="slide"
+                onRequestClose={() => setPreviewUri(null)}
+            >
+                <View style={styles.previewModalOverlay}>
+                    <View style={styles.previewModalContent}>
+                        {/* Üst bar */}
+                        <View style={styles.previewTopBar}>
+                            <TouchableOpacity onPress={() => setPreviewUri(null)} hitSlop={12}>
+                                <Text style={styles.previewCancel}>İptal</Text>
+                            </TouchableOpacity>
+                            <Text style={styles.previewTitle}>Fotoğraf Gönder</Text>
+                            <TouchableOpacity
+                                onPress={() => previewUri && sendImageMessage(previewUri)}
+                                hitSlop={12}
+                                style={styles.previewSendBtn}
+                            >
+                                <Text style={styles.previewSendText}>Gönder</Text>
+                            </TouchableOpacity>
+                        </View>
+
+                        {/* Önizleme Görseli */}
+                        {previewUri && (
+                            <Image
+                                source={{ uri: previewUri }}
+                                style={styles.previewImage}
+                                contentFit="contain"
+                            />
+                        )}
+
+                        {/* Caption alanı */}
+                        <View style={[styles.previewCaptionBar, { backgroundColor: colors.surface.elevated, borderTopColor: colors.surface.border }]}>
+                            <TextInput
+                                style={[styles.previewCaptionInput, { color: colors.text.primary }]}
+                                placeholder="Açıklama ekle..."
+                                placeholderTextColor={colors.text.tertiary}
+                                value={inputText}
+                                onChangeText={setInputText}
+                                multiline
+                                maxLength={500}
+                                cursorColor={colors.accent.primary}
+                            />
+                        </View>
+                    </View>
+                </View>
+            </Modal>
+
+            {/* ── Tam Ekran Görsel Görüntüleyici ── */}
+            <Modal
+                visible={!!selectedImageUri}
+                transparent={true}
+                animationType="none"
+                statusBarTranslucent
+                onRequestClose={closeImageViewer}
+            >
+                <Animated.View style={[styles.imageViewerOverlay, animatedOverlayStyle]}>
+                    {/* Kapatma Butonu */}
+                    <TouchableOpacity
+                        style={styles.imageViewerCloseBtn}
+                        onPress={closeImageViewer}
+                        activeOpacity={0.7}
+                        hitSlop={16}
+                    >
+                        <View style={styles.imageViewerCloseBtnInner}>
+                            <Text style={styles.imageViewerCloseX}>✕</Text>
+                        </View>
+                    </TouchableOpacity>
+
+                    {/* Pinch/Pan/DoubleTap Gesture Alanı */}
+                    <GestureDetector gesture={allGestures}>
+                        <Animated.View style={[styles.imageViewerContainer, animatedImageStyle]}>
+                            {selectedImageUri && (
+                                <Image
+                                    source={{ uri: selectedImageUri }}
+                                    style={styles.imageViewerImage}
+                                    contentFit="contain"
+                                />
+                            )}
+                        </Animated.View>
+                    </GestureDetector>
+
+                    {/* Alt ipucu */}
+                    <View style={styles.imageViewerHint}>
+                        <Text style={styles.imageViewerHintText}>Aşağı kaydır: kapat  ·  Kıstır: yakınlaştır  ·  Çift dokun: 2.5×</Text>
+                    </View>
+                </Animated.View>
             </Modal>
         </KeyboardAvoidingView>
     );
@@ -1212,5 +1847,151 @@ const styles = StyleSheet.create({
         color: "#fff",
         fontSize: 16,
         fontWeight: "600",
+    },
+    // ── Story Reply Card ──
+    storyReplyCard: {
+        flexDirection: "row",
+        borderRadius: 18,
+        borderWidth: 1,
+        overflow: "hidden",
+        maxWidth: 280,
+    },
+    storyReplyThumb: {
+        width: 72,
+        height: 88,
+    },
+    storyReplyThumbExpired: {
+        backgroundColor: '#3a3a3a',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    storyReplyContent: {
+        flex: 1,
+        padding: 10,
+        justifyContent: "center",
+        gap: 4,
+    },
+    storyReplyLabel: {
+        fontSize: 11,
+        fontWeight: "600",
+        letterSpacing: 0.2,
+    },
+
+    // ── Preview Modal ──
+    previewModalOverlay: {
+        flex: 1,
+        backgroundColor: 'rgba(0,0,0,0.92)',
+        justifyContent: 'flex-end',
+    },
+    previewModalContent: {
+        flex: 1,
+        backgroundColor: '#000',
+    },
+    previewTopBar: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between',
+        paddingHorizontal: 16,
+        paddingTop: 56,
+        paddingBottom: 12,
+        backgroundColor: 'rgba(0,0,0,0.7)',
+    },
+    previewCancel: {
+        color: 'rgba(255,255,255,0.8)',
+        fontSize: 16,
+        fontWeight: '500',
+    },
+    previewTitle: {
+        color: '#fff',
+        fontSize: 16,
+        fontWeight: '700',
+    },
+    previewSendBtn: {
+        backgroundColor: '#2ecc71',
+        paddingHorizontal: 16,
+        paddingVertical: 8,
+        borderRadius: 20,
+    },
+    previewSendText: {
+        color: '#fff',
+        fontSize: 15,
+        fontWeight: '700',
+    },
+    previewImage: {
+        flex: 1,
+        width: '100%',
+    },
+    previewCaptionBar: {
+        paddingHorizontal: 16,
+        paddingVertical: 10,
+        borderTopWidth: StyleSheet.hairlineWidth,
+    },
+    previewCaptionInput: {
+        fontSize: 15,
+        minHeight: 40,
+        maxHeight: 100,
+    },
+
+    // ── Image Viewer ──
+    imageViewerOverlay: {
+        flex: 1,
+        backgroundColor: '#000',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    imageViewerContainer: {
+        width: Dimensions.get('window').width,
+        height: Dimensions.get('window').height,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    imageViewerImage: {
+        width: Dimensions.get('window').width,
+        height: Dimensions.get('window').height,
+    },
+    imageViewerCloseBtn: {
+        position: 'absolute',
+        top: 52,
+        right: 20,
+        zIndex: 100,
+    },
+    imageViewerCloseBtnInner: {
+        width: 36,
+        height: 36,
+        borderRadius: 18,
+        backgroundColor: 'rgba(255,255,255,0.18)',
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderWidth: 1,
+        borderColor: 'rgba(255,255,255,0.25)',
+    },
+    imageViewerCloseX: {
+        color: '#fff',
+        fontSize: 16,
+        fontWeight: '600',
+        lineHeight: 18,
+    },
+    imageViewerHint: {
+        position: 'absolute',
+        bottom: 36,
+        alignSelf: 'center',
+    },
+    imageViewerHintText: {
+        color: 'rgba(255,255,255,0.35)',
+        fontSize: 12,
+        textAlign: 'center',
+    },
+    restrictionBanner: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 6,
+        paddingHorizontal: 16,
+        paddingVertical: 7,
+        borderTopWidth: StyleSheet.hairlineWidth,
+    },
+    restrictionText: {
+        fontSize: 12,
+        fontWeight: '500',
+        flex: 1,
     },
 });

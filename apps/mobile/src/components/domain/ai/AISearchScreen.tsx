@@ -27,6 +27,7 @@ import {
 import { Image } from 'expo-image';
 import * as ExpoImagePicker from 'expo-image-picker';
 import { Ionicons } from '@expo/vector-icons';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme } from '@/src/hooks/useTheme';
 import { smartSearch, checkAIHealth, getAIBaseUrl, imageSearch } from '@/src/services/aiService';
 import type { Place, SmartSearchResponse } from '@/src/types/ai';
@@ -281,6 +282,7 @@ function PlaceCard({ place, colors }: { place: Place; colors: any }) {
 // ─── Ana Ekran ────────────────────────────────────────────────
 export default function AISearchScreen() {
   const { colors } = useTheme();
+  const insets = useSafeAreaInsets();
   const [messages, setMessages]         = useState<Message[]>([]);
   const [inputText, setInputText]       = useState('');
   const [selectedLoc, setSelectedLoc]  = useState(LOCATIONS[0]);
@@ -468,7 +470,7 @@ export default function AISearchScreen() {
 
       const res: SmartSearchResponse = await smartSearch({
         query: finalQuery,
-        location: selectedLoc.label,
+        location: "Istanbul",  // 🔧 FIX: Always use "Istanbul" for SerpAPI location parameter
         user_lat: selectedLoc.lat,
         user_lng: selectedLoc.lng,
         limit: 5,
@@ -478,8 +480,10 @@ export default function AISearchScreen() {
 
       removeLoading();
 
-      if (res.is_conversational && res.message) {
-        addMessage({ id: Date.now().toString(), type: 'bot', text: res.message });
+      const aiMessage = res.message || res.ai_message;
+
+      if (res.is_conversational && aiMessage) {
+        addMessage({ id: Date.now().toString(), type: 'bot', text: aiMessage });
       } else if (!res.recommendations || res.recommendations.length === 0) {
         addMessage({
           id: Date.now().toString(),
@@ -487,6 +491,9 @@ export default function AISearchScreen() {
           text: '😔 Bu kriterlere uygun bir mekan bulamadım. Biraz daha genel bir arama dene.',
         });
       } else {
+        if (aiMessage) {
+          addMessage({ id: Date.now().toString(), type: 'bot', text: aiMessage });
+        }
         addMessage({
           id: Date.now().toString(),
           type: 'places',
@@ -494,12 +501,12 @@ export default function AISearchScreen() {
           cached: res._cache?.hit ?? false,
         });
       }
-    } catch (err: any) {
+    } catch {
       removeLoading();
       addMessage({
         id: Date.now().toString(),
-        type: 'error',
-        text: `❌ Hata: ${err?.message ?? 'Bilinmeyen hata'}`,
+        type: 'bot',
+        text: 'AI servisine şu anda ulaşamadım. Demo sırasında akışı bozmayalım; biraz daha genel bir arama veya ana sayfadaki önerilerle devam edebilirsin.',
       });
     } finally {
       setIsLoading(false);
@@ -594,7 +601,16 @@ export default function AISearchScreen() {
       keyboardVerticalOffset={Platform.OS === 'ios' ? 90 : 0}
     >
       {/* ── Header ── */}
-      <View style={[styles.header, { backgroundColor: colors.background.secondary, borderBottomColor: colors.surface.border }]}>
+      <View
+        style={[
+          styles.header,
+          {
+            backgroundColor: colors.background.secondary,
+            borderBottomColor: colors.surface.border,
+            paddingTop: Math.max(insets.top, 8),
+          },
+        ]}
+      >
         <View style={styles.headerLeft}>
           <View style={[styles.avatar, { backgroundColor: colors.accent.primary }]}>
             <Ionicons name="sparkles" size={20} color="#fff" />
@@ -657,7 +673,7 @@ export default function AISearchScreen() {
         renderItem={renderItem}
         contentContainerStyle={[
           styles.chatContent,
-          { paddingBottom: Platform.OS === 'ios' ? 120 : 80 },
+          { paddingBottom: 96 + Math.max(insets.bottom, Platform.OS === 'ios' ? 24 : 16) },
         ]}
         keyboardShouldPersistTaps="handled"
         ListEmptyComponent={
@@ -693,7 +709,7 @@ export default function AISearchScreen() {
         {
           backgroundColor: colors.background.secondary,
           borderTopColor: colors.surface.border,
-          paddingBottom: Platform.OS === 'ios' ? 28 : 10,
+          paddingBottom: Math.max(insets.bottom, Platform.OS === 'ios' ? 24 : 16),
         },
       ]}>
         {/* Üst satır: metin + kamera */}
@@ -774,12 +790,6 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     borderBottomWidth: StyleSheet.hairlineWidth,
   },
-  clearBtn: {
-    flexDirection: 'row', alignItems: 'center', gap: 5,
-    paddingHorizontal: 12, paddingVertical: 7,
-    borderRadius: 20, borderWidth: 1,
-  },
-  clearBtnText: { fontSize: 12, fontWeight: '500' },
   headerLeft: { flexDirection: 'row', alignItems: 'center', gap: 12 },
   avatar: { width: 40, height: 40, borderRadius: 20, alignItems: 'center', justifyContent: 'center' },
   headerTitle: { fontSize: 16, fontWeight: '700' },

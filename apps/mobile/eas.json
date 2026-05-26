@@ -9,13 +9,27 @@
     },
     "preview": {
       "distribution": "internal",
+      "android": {
+        "buildType": "apk"
+      },
       "env": {
-        "EXPO_PUBLIC_API_URL": "https://api.asemos.com"
+        "EXPO_PUBLIC_API_URL": "https://asemos-backend.onrender.com",
+        "EXPO_PUBLIC_AI_URL": "https://asemos-ai.onrender.com",
+        "EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID": "679997414714-fh8svv3nf4kj30b5rmk0dc6uue2kjt3g.apps.googleusercontent.com",
+        "EXPO_PUBLIC_GOOGLE_ANDROID_CLIENT_ID": "679997414714-slib9kqb05ff6em2s0o3n7a0eomussfp.apps.googleusercontent.com",
+        "EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID": "679997414714-tmuoj8op62tqss9pbnsat1mg5kgra36o.apps.googleusercontent.com"
       }
     },
     "production": {
+      "android": {
+        "buildType": "apk"
+      },
       "env": {
-        "EXPO_PUBLIC_API_URL": "https://api.asemos.com"
+        "EXPO_PUBLIC_API_URL": "https://asemos-backend.onrender.com",
+        "EXPO_PUBLIC_AI_URL": "https://asemos-ai.onrender.com",
+        "EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID": "679997414714-fh8svv3nf4kj30b5rmk0dc6uue2kjt3g.apps.googleusercontent.com",
+        "EXPO_PUBLIC_GOOGLE_ANDROID_CLIENT_ID": "679997414714-slib9kqb05ff6em2s0o3n7a0eomussfp.apps.googleusercontent.com",
+        "EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID": "679997414714-tmuoj8op62tqss9pbnsat1mg5kgra36o.apps.googleusercontent.com"
       }
     }
   },

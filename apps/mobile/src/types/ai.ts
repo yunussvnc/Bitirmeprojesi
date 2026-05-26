@@ -74,6 +74,8 @@ export interface SmartSearchRequest {
   user_lng?: number;
   max_distance_km?: number;
   analyze_reviews?: boolean; // false yaparak API kredisi tasarrufu
+  language?: string;
+  locale?: string;
 }
 
 export interface SmartSearchResponse {
@@ -82,9 +84,11 @@ export interface SmartSearchResponse {
   recommendations: Place[];
   is_conversational?: boolean;
   message?: string;
+  ai_message?: string;
   context?: {
     weather: string | null;
     temperature: number | null;
+    language?: string;
   };
   _cache: {
     hit: boolean;
@@ -99,6 +103,8 @@ export interface SmartSearchResponse {
 export interface AnalyzeReviewRequest {
   data_id: string;
   place_name?: string;
+  language?: string;
+  locale?: string;
 }
 
 export interface AnalyzeReviewResponse {
@@ -110,4 +116,5 @@ export interface AnalyzeReviewResponse {
   highlight_tags: string[];
   example_reviews: ExampleReview[];
   summary: string;
+  language?: string;
 }

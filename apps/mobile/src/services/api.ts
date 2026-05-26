@@ -1,5 +1,5 @@
 import type { RecommendRequest, RecommendResponse } from "../types/recommend";
-import { smartSearch } from "./aiService";
+import { getCurrentAILanguagePayload, smartSearch } from "./aiService";
 import { apiPost } from "@/src/utils/apiClient";
 import { logger } from "@/src/utils/logger";
 import type { Place } from "../types/ai";
@@ -18,17 +18,20 @@ function hashPlaceId(dataId: string): number {
 export async function recommendPlaces(
   req: RecommendRequest
 ): Promise<RecommendResponse> {
+  const languagePayload = getCurrentAILanguagePayload();
   try {
     // ============================================================
     // ÖNCELİK 1: AI Servisi (SerpAPI + Groq) - Gerçek Zamanlı
     // ============================================================
+    // Kullanıcının gerçek GPS konumunu kullan
     const result = await smartSearch({
       query: req.queryText || "",
-      location: req.location ? `${req.location.lat},${req.location.lng}` : undefined,
+      location: undefined, // GPS koordinatlarından otomatik belirlenecek
       user_lat: req.location?.lat,
       user_lng: req.location?.lng,
       limit: 10,
-      max_distance_km: req.radius_m ? req.radius_m / 1000 : 5,
+      max_distance_km: req.radius_m ? req.radius_m / 1000 : 10,
+      ...languagePayload,
     });
     
     // AI servisi Place[] döndürüyor, RecommendItem[] formatına çevir
@@ -53,8 +56,7 @@ export async function recommendPlaces(
     
     return {
       items,
-      summary: result.message || "",
-      query: req.queryText || "",
+      summary: result.message || result.ai_message || "",
       cached: result._cache?.hit || false,
     };
   } catch (error) {
@@ -64,7 +66,10 @@ export async function recommendPlaces(
     logger.warn("[recommendPlaces] AI Servisi hatası, veritabanına fallback:", error);
     
     try {
-      const backendResult = await apiPost<RecommendResponse>("/recommend", req);
+      const backendResult = await apiPost<RecommendResponse>("/recommend", {
+        ...req,
+        ...languagePayload,
+      });
       logger.log("[recommendPlaces] Veritabanı fallback başarılı:", backendResult.items?.length || 0, "sonuç");
       return backendResult;
     } catch (backendError) {

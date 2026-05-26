@@ -1,4 +1,5 @@
 import { apiGet, apiPut } from "@/src/utils/apiClient";
+import { isNotFoundError } from "@/src/utils/errorHandler";
 import { logger } from "@/src/utils/logger";
 import { API_BASE_URL } from "@/src/constants/api";
 
@@ -140,6 +141,10 @@ export async function getPlaceById(id: string | number): Promise<Place | null> {
     if (!data || !data.id) return null;
     return normalizePlace(data);
   } catch (error) {
+    if (isNotFoundError(error)) {
+      logger.warn(`[getPlaceById] Place not found for id=${id}`);
+      return null;
+    }
     logger.error(`[getPlaceById] Error for id=${id}:`, error);
     return null;
   }

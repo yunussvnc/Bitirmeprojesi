@@ -473,6 +473,9 @@ export default function HomeScreen() {
       };
       const loc = getLocationFromName(it.name ?? "");
       const isAi = displayMode === "ai";
+      
+      // Get data_id from RecommendItem if available
+      const dataId = (item as RecommendItem).data_id;
 
       return (
         <AnimatedPlaceCard
@@ -488,6 +491,7 @@ export default function HomeScreen() {
           distance_m={isAi ? (item as RecommendItem).distance_m : undefined}
           isRecommended={isAi}
           hasMenu={!!(place?.menu_items && place.menu_items.length > 0)}
+          data_id={dataId}
           onPress={() => handlePlacePress(id)}
         />
       );

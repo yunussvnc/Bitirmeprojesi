@@ -16,6 +16,9 @@ import { type Story, type FeedStoriesFilter } from "@/src/services/storyService"
 import { lightImpact } from "@/src/utils/haptics";
 import { spacing } from "@/src/constants/design";
 import { useTranslation } from "react-i18next";
+import { useUploadPipelineStore } from "@/src/store/useUploadPipelineStore";
+import { useAuthStore } from "@/src/store/useAuthStore";
+import { useAppStore } from "@/src/store/useAppStore";
 
 const STORY_RING_SIZE = 82;
 const STORY_GRADIENT: [string, string, ...string[]] = ["#4ade80", "#22c55e", "#16a34a", "#15803d"];
@@ -36,7 +39,11 @@ export function FeedStoriesRow({ filter }: FeedStoriesRowProps) {
   const { colors } = useTheme();
   const [stories, setStories] = useState<Story[]>([]);
   const [loading, setLoading] = useState(true);
-  const [viewedGroupIds, setViewedGroupIds] = useState<Set<string>>(new Set());
+  
+  const viewedGroupKeys = useAppStore((s) => s.viewedStoryGroupKeys);
+  const addViewedGroupKey = useAppStore((s) => s.addViewedStoryGroupKey);
+
+  const currentUser = useAuthStore((s) => s.user);
   const [storyViewerIndex, setStoryViewerIndex] = useState<number | null>(null);
   const viewerStoriesRef = useRef<Story[]>([]);
   const storyPausedRef = useRef(false);
@@ -52,6 +59,20 @@ export function FeedStoriesRow({ filter }: FeedStoriesRowProps) {
     hideTimeoutRef.current = setTimeout(() => setStoryVisible(false), 400);
   }, []);
 
+  // loadStories'i erken tanımla (useFocusEffect onu kullandığı için önce tanımlanmalı)
+  const loadStories = useCallback(async () => {
+    setLoading(true);
+    try {
+      const res = await import("@/src/services/storyService").then((m) => m.getFeedStories(1, 50, filter));
+      setStories(res.items ?? []);
+    } catch (e) {
+      console.warn('[FeedStoriesRow] Failed to load stories:', e);
+      setStories([]);
+    } finally {
+      setLoading(false);
+    }
+  }, [filter]);
+
   useFocusEffect(
     useCallback(() => {
       if (storyPausedRef.current) {
@@ -62,7 +83,9 @@ export function FeedStoriesRow({ filter }: FeedStoriesRowProps) {
         }
         setStoryVisible(true);
       }
-    }, [])
+      // Ekrana her dönüşde hikayeler yenilensin
+      loadStories();
+    }, [loadStories])
   );
 
   useEffect(() => {
@@ -79,101 +102,19 @@ export function FeedStoriesRow({ filter }: FeedStoriesRowProps) {
     return unsubscribe;
   }, [navigation]);
 
-  const loadStories = useCallback(async () => {
-    setLoading(true);
-    const now = new Date();
-    const expiresAt = new Date(now.getTime() + 24 * 60 * 60 * 1000).toISOString();
-    setStories([
-      {
-        id: 1,
-        user_id: 1,
-        place_id: 101,
-        place: { id: 101, name: "Cafe Luna", category: "Cafe" },
-        author: { id: 1, username: "ahmet_k", first_name: "Ahmet", avatar_url: "https://i.pravatar.cc/100?img=11" },
-        media_url: "https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=400",
-        media_type: "image",
-        created_at: new Date(now.getTime() - 2 * 3600000).toISOString(),
-        expires_at: expiresAt,
-        is_close_friends: false,
-      },
-      {
-        id: 2,
-        user_id: 2,
-        place_id: 102,
-        place: { id: 102, name: "Sunset Beach", category: "Beach" },
-        author: { id: 2, username: "elif_d", first_name: "Elif", avatar_url: "https://i.pravatar.cc/100?img=5" },
-        media_url: "https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=400",
-        media_type: "image",
-        created_at: new Date(now.getTime() - 5 * 3600000).toISOString(),
-        expires_at: expiresAt,
-        is_close_friends: false,
-      },
-      {
-        id: 3,
-        user_id: 3,
-        place_id: 103,
-        place: { id: 103, name: "Mountain View", category: "Nature" },
-        author: { id: 3, username: "can_y", first_name: "Can", avatar_url: "https://i.pravatar.cc/100?img=12" },
-        media_url: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400",
-        media_type: "image",
-        created_at: new Date(now.getTime() - 1 * 3600000).toISOString(),
-        expires_at: expiresAt,
-        is_close_friends: false,
-      },
-      {
-        id: 4,
-        user_id: 4,
-        place_id: 104,
-        place: { id: 104, name: "City Lights", category: "Restaurant" },
-        author: { id: 4, username: "zeynep_a", first_name: "Zeynep", avatar_url: "https://i.pravatar.cc/100?img=9" },
-        media_url: "https://images.unsplash.com/photo-1514565131-fce0801e5785?w=400",
-        media_type: "image",
-        created_at: new Date(now.getTime() - 8 * 3600000).toISOString(),
-        expires_at: expiresAt,
-        is_close_friends: false,
-      },
-      {
-        id: 5,
-        user_id: 5,
-        place_id: 105,
-        place: { id: 105, name: "Art Gallery", category: "Culture" },
-        author: { id: 5, username: "mehmet_b", first_name: "Mehmet", avatar_url: "https://i.pravatar.cc/100?img=33" },
-        media_url: "https://images.unsplash.com/photo-1460661419201-fd4cecdf8a8b?w=400",
-        media_type: "image",
-        created_at: new Date(now.getTime() - 12 * 3600000).toISOString(),
-        expires_at: expiresAt,
-        is_close_friends: false,
-      },
-      {
-        id: 6,
-        user_id: 6,
-        place_id: 106,
-        place: { id: 106, name: "Park Central", category: "Park" },
-        author: { id: 6, username: "selin_k", first_name: "Selin", avatar_url: "https://i.pravatar.cc/100?img=23" },
-        media_url: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400",
-        media_type: "image",
-        created_at: new Date(now.getTime() - 3 * 3600000).toISOString(),
-        expires_at: expiresAt,
-        is_close_friends: false,
-      },
-      {
-        id: 7,
-        user_id: 7,
-        place_id: 107,
-        place: { id: 107, name: "Rooftop Bar", category: "Bar" },
-        author: { id: 7, username: "burak_t", first_name: "Burak", avatar_url: "https://i.pravatar.cc/100?img=15" },
-        media_url: "https://images.unsplash.com/photo-1566073771259-6a8506099945?w=400",
-        media_type: "image",
-        created_at: new Date(now.getTime() - 6 * 3600000).toISOString(),
-        expires_at: expiresAt,
-        is_close_friends: false,
-      },
-    ]);
-    setLoading(false);
-  }, [filter]);
-
+  // İlk yükleme
   useEffect(() => {
     loadStories();
+  }, [loadStories]);
+
+  // Hikaye yükleme pipeline tamamlanınca otomatik yenile
+  useEffect(() => {
+    const unsub = useUploadPipelineStore.getState().onUploadDone((contentType) => {
+      if (contentType === 'story') {
+        setTimeout(() => loadStories(), 1000);
+      }
+    });
+    return unsub;
   }, [loadStories]);
 
   const getGroupKey = useCallback((s: Story) => {
@@ -191,7 +132,13 @@ export function FeedStoriesRow({ filter }: FeedStoriesRowProps) {
       const key = getGroupKey(s);
       if (!seen.has(key)) {
         seen.add(key);
-        const groupStoryIds = stories.filter((st) => getGroupKey(st) === key).map((st) => st.id);
+        // groupStoryIds backend'den en yeni ilk (desc) geliyor,
+        // oynatırken en eski ilk (asc) olması için ters çeviriyoruz.
+        const groupStoryIds = stories
+          .filter((st) => getGroupKey(st) === key)
+          .map((st) => st.id)
+          .reverse();
+        
         groups.push({
           groupKey: key,
           label: s.place?.name || s.author?.first_name || s.author?.username,
@@ -205,10 +152,10 @@ export function FeedStoriesRow({ filter }: FeedStoriesRowProps) {
   }, [stories, getGroupKey]);
 
   const sortedGroups = useMemo(() => {
-    const unseen = storyGroups.filter((g) => !viewedGroupIds.has(g.groupKey));
-    const seen = storyGroups.filter((g) => viewedGroupIds.has(g.groupKey));
+    const unseen = storyGroups.filter((g) => !viewedGroupKeys.includes(g.groupKey));
+    const seen = storyGroups.filter((g) => viewedGroupKeys.includes(g.groupKey));
     return [...unseen, ...seen];
-  }, [storyGroups, viewedGroupIds]);
+  }, [storyGroups, viewedGroupKeys]);
 
   const handleGroupTap = useCallback(
     (groupKey: string, tapIndex: number) => {
@@ -229,10 +176,10 @@ export function FeedStoriesRow({ filter }: FeedStoriesRowProps) {
       const story = stories.find((s) => s.id === storyId);
       if (story) {
         const key = getGroupKey(story);
-        setViewedGroupIds((prev) => new Set(prev).add(key));
+        addViewedGroupKey(key);
       }
     },
-    [stories, getGroupKey]
+    [stories, getGroupKey, addViewedGroupKey]
   );
 
   if (loading && stories.length === 0) {
@@ -249,7 +196,7 @@ export function FeedStoriesRow({ filter }: FeedStoriesRowProps) {
       <View style={[styles.wrap, { borderBottomColor: colors.surface.border }]}>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.row}>
           {sortedGroups.map((g, idx) => {
-            const seen = viewedGroupIds.has(g.groupKey);
+            const seen = viewedGroupKeys.includes(g.groupKey);
             return (
               <TouchableOpacity key={g.groupKey} style={styles.ringWrap} onPress={() => handleGroupTap(g.groupKey, idx)} activeOpacity={0.8}>
                 {seen ? (
@@ -298,6 +245,7 @@ export function FeedStoriesRow({ filter }: FeedStoriesRowProps) {
           onStoryViewed={handleStoryViewed}
           onAuthorNavigate={handleStoryNavigateRequest}
           onPlaceNavigate={handleStoryNavigateRequest}
+          currentUserId={currentUser?.id}
         />
       )}
     </>

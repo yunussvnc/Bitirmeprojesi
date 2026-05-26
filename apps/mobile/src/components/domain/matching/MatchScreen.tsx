@@ -55,7 +55,12 @@ const STAR_SIGN_OPTIONS = [
   "Koç", "Boğa", "İkizler", "Yengeç", "Aslan", "Başak",
   "Terazi", "Akrep", "Yay", "Oğlak", "Kova", "Balık",
 ];
-const GENDER_FILTER_OPTIONS = ["Hepsi", "Kadın", "Erkek", "Diğer"];
+const GENDER_FILTER_KEYS = [
+  { value: "Hepsi", tKey: "matching.gender_all" },
+  { value: "Kadın", tKey: "matching.gender_female" },
+  { value: "Erkek", tKey: "matching.gender_male" },
+  { value: "Diğer", tKey: "matching.gender_other" },
+];
 
 interface MatchFilters {
   gender: string;
@@ -201,8 +206,12 @@ export default function MatchScreen() {
                 {
                   text: t("matching.yes_delete"),
                   style: "destructive",
-                  onPress: () => {
-                    deleteProfile();
+                  onPress: async () => {
+                    try {
+                      await deleteProfile();
+                    } catch (error) {
+                      Alert.alert(t("common.error"), t("place_extra.review_submit_err", "Bir hata oluştu. Lütfen tekrar deneyin."));
+                    }
                   },
                 },
               ]
@@ -1046,7 +1055,7 @@ export default function MatchScreen() {
               color: colors.text.primary,
             }}
           >
-            Eşleşme
+            {t("match_profile.matching_title")}
           </ThemedText>
         </View>
 
@@ -1069,13 +1078,15 @@ export default function MatchScreen() {
             bottom: 4,
           }}
         >
-          <TouchableOpacity
-            style={{ marginRight: 16 }}
-            hitSlop={12}
-            onPress={handleContextMenu}
-          >
-            <IconSymbol name="ellipsis" size={24} color={ACCENT} />
-          </TouchableOpacity>
+          {hasProfile && (
+            <TouchableOpacity
+              style={{ marginRight: 16 }}
+              hitSlop={12}
+              onPress={handleContextMenu}
+            >
+              <IconSymbol name="ellipsis" size={24} color={ACCENT} />
+            </TouchableOpacity>
+          )}
           <TouchableOpacity
             onPress={() => router.push("/match-profile-setup")}
             hitSlop={12}
@@ -1091,7 +1102,7 @@ export default function MatchScreen() {
 
       {isGhostMode ? (
         <View style={styles.emptyState}>
-          <IconSymbol name="ghost" size={64} color={colors.text.secondary} />
+          <IconSymbol name="eye.slash" size={64} color={colors.text.secondary} />
           <ThemedText style={styles.emptyTitle}>{t("matching.ghost_mode_on")}</ThemedText>
           <ThemedText style={[styles.emptySubtitle, { color: colors.text.secondary }]}>
             {t("matching.ghost_mode_desc")}
@@ -1136,7 +1147,7 @@ export default function MatchScreen() {
                   activeTab === "likes" && styles.segmentTextActive,
                 ]}
               >
-                Beğeniler
+                {t("match_profile.likes_title")}
               </ThemedText>
             </TouchableOpacity>
           </View>
@@ -1215,13 +1226,15 @@ export default function MatchScreen() {
                   </ThemedText>
                 </View>
 
-                <TouchableOpacity
-                  style={{ position: "absolute", right: 16, bottom: 8 }}
-                  hitSlop={12}
-                  onPress={handleContextMenu}
-                >
-                  <IconSymbol name="ellipsis" size={24} color={ACCENT} />
-                </TouchableOpacity>
+                {hasProfile && (
+                  <TouchableOpacity
+                    style={{ position: "absolute", right: 16, bottom: 8 }}
+                    hitSlop={12}
+                    onPress={handleContextMenu}
+                  >
+                    <IconSymbol name="ellipsis" size={24} color={ACCENT} />
+                  </TouchableOpacity>
+                )}
               </View>
 
               <View style={[styles.cardContainer, { paddingTop: 16 }]}>
@@ -1382,16 +1395,16 @@ export default function MatchScreen() {
               {/* Gender */}
               <ThemedText style={{ color: colors.text.secondary, fontSize: 13, fontWeight: "600", textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 10 }}>{t("matching.gender_title")}</ThemedText>
               <View style={{ flexDirection: "row", gap: 8, marginBottom: 24, flexWrap: "wrap" }}>
-                {GENDER_FILTER_OPTIONS.map(g => (
+                {GENDER_FILTER_KEYS.map(g => (
                   <TouchableOpacity
-                    key={g}
-                    onPress={() => setTempFilters(f => ({ ...f, gender: g }))}
+                    key={g.value}
+                    onPress={() => setTempFilters(f => ({ ...f, gender: g.value }))}
                     style={{
                       paddingHorizontal: 16, paddingVertical: 10, borderRadius: 20,
-                      backgroundColor: tempFilters.gender === g ? ACCENT : (isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)"),
+                      backgroundColor: tempFilters.gender === g.value ? ACCENT : (isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)"),
                     }}
                   >
-                    <ThemedText style={{ fontSize: 14, fontWeight: "600", color: tempFilters.gender === g ? "#000" : colors.text.primary }}>{g}</ThemedText>
+                    <ThemedText style={{ fontSize: 14, fontWeight: "600", color: tempFilters.gender === g.value ? "#000" : colors.text.primary }}>{t(g.tKey)}</ThemedText>
                   </TouchableOpacity>
                 ))}
               </View>
@@ -1502,7 +1515,7 @@ export default function MatchScreen() {
                 >
                   <ThemedText style={{ fontSize: 13, fontWeight: "600", color: tempFilters.starSign === "" ? "#000" : colors.text.primary }}>{t("matching.gender_all")}</ThemedText>
                 </TouchableOpacity>
-                {STAR_SIGN_OPTIONS.map(s => (
+                {STAR_SIGN_OPTIONS.map((s, idx) => (
                   <TouchableOpacity
                     key={s}
                     onPress={() => setTempFilters(f => ({ ...f, starSign: f.starSign === s ? "" : s }))}
@@ -1511,7 +1524,7 @@ export default function MatchScreen() {
                       backgroundColor: tempFilters.starSign === s ? ACCENT : (isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)"),
                     }}
                   >
-                    <ThemedText style={{ fontSize: 13, fontWeight: "600", color: tempFilters.starSign === s ? "#000" : colors.text.primary }}>{s}</ThemedText>
+                    <ThemedText style={{ fontSize: 13, fontWeight: "600", color: tempFilters.starSign === s ? "#000" : colors.text.primary }}>{t(`zodiac.sign_${idx}`, s)}</ThemedText>
                   </TouchableOpacity>
                 ))}
               </View>

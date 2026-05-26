@@ -357,7 +357,7 @@ export function FilterBottomSheet({
 
           {/* Footer */}
           <View style={[styles.footer, { paddingBottom: insets.bottom + 8, borderTopColor: colors.surface.border }]}>
-            <TouchableOpacity style={styles.clearBtn} onPress={handleClear} activeOpacity={0.7}>
+            <TouchableOpacity style={styles.clearButton} onPress={handleClear} activeOpacity={0.7}>
               <Text style={[styles.clearText, { color: colors.text.secondary }]}>{t("home.clear")}</Text>
             </TouchableOpacity>
             <Button style={styles.applyBtn} onPress={handleApply}>
@@ -430,7 +430,12 @@ const styles = StyleSheet.create({
     paddingBottom: 12,
   },
   title: { fontSize: 18, fontWeight: '700' },
-  clearBtn: { fontSize: 14, fontWeight: '600' },
+  clearButton: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: 48,
+  },
+  clearText: { fontSize: 14, fontWeight: '600' },
   body: {
     paddingHorizontal: 20,
     paddingBottom: 8,

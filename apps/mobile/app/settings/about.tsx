@@ -100,7 +100,7 @@ export default function AboutScreen() {
             © 2026 Asemos. Tüm hakları saklıdır.
           </Text>
           <Text style={[styles.footerSubtext, { color: colors.text.tertiary }]}>
-            Sevgiyle İstanbul'da yapıldı ❤️
+            Sevgiyle İstanbul&apos;da yapıldı ❤️
           </Text>
         </View>
       </ScrollView>

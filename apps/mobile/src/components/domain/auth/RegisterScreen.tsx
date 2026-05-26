@@ -38,6 +38,7 @@ import { API_BASE_URL } from '@/src/constants/api';
 import * as AppleAuthentication from 'expo-apple-authentication';
 import * as WebBrowser from 'expo-web-browser';
 import * as Google from 'expo-auth-session/providers/google';
+import { googleAuthRequestConfig, hasGoogleClientIdForPlatform } from '@/src/config/socialAuth';
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -74,18 +75,39 @@ export default function RegisterScreen() {
     confirmPassword?: string;
   }>({});
   const isSubmittingRef = useRef(false);
+  const [isAppleAvailable, setIsAppleAvailable] = useState(false);
 
   // Google Auth Setup
-  const [request, response, promptAsync] = Google.useAuthRequest({
-    clientId: '398883081062-uqa0hbpbo6nhjcbigltircbbg3ngr7oi.apps.googleusercontent.com',
-    iosClientId: '398883081062-uqa0hbpbo6nhjcbigltircbbg3ngr7oi.apps.googleusercontent.com',
-    androidClientId: '398883081062-uqa0hbpbo6nhjcbigltircbbg3ngr7oi.apps.googleusercontent.com',
-    scopes: ['openid', 'profile', 'email'],
-  });
+  const [request, response, promptAsync] = Google.useAuthRequest(googleAuthRequestConfig);
+
+  useEffect(() => {
+    let mounted = true;
+    if (Platform.OS !== 'ios') {
+      setIsAppleAvailable(false);
+      return;
+    }
+
+    AppleAuthentication.isAvailableAsync()
+      .then((available) => {
+        if (mounted) setIsAppleAvailable(available);
+      })
+      .catch(() => {
+        if (mounted) setIsAppleAvailable(false);
+      });
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   useEffect(() => {
     if (response?.type === 'success' && response.authentication) {
-      handleGoogleSuccess(response.authentication.idToken || response.authentication.accessToken);
+      const token = response.authentication.idToken;
+      if (!token) {
+        Alert.alert(t('auth.login_error_title'), 'Google kimlik tokenı alınamadı. Google client ID ve OpenID ayarlarını kontrol edin.');
+        return;
+      }
+      handleGoogleSuccess(token);
     }
   }, [response]);
 
@@ -124,6 +146,11 @@ export default function RegisterScreen() {
 
   const signInWithApple = async () => {
     try {
+      if (Platform.OS !== 'ios' || !isAppleAvailable) {
+        Alert.alert(t('auth.login_error_title'), 'Apple ile giriş yalnızca desteklenen iOS cihazlarda kullanılabilir.');
+        return;
+      }
+
       const credential = await AppleAuthentication.signInAsync({
         requestedScopes: [
           AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
@@ -248,9 +275,17 @@ export default function RegisterScreen() {
     if (provider === 'Apple') {
       signInWithApple();
     } else if (provider === 'Google') {
+      if (!hasGoogleClientIdForPlatform()) {
+        Alert.alert(t('auth.login_error_title'), 'Google giriş için EXPO_PUBLIC_GOOGLE_* client ID değerleri eksik.');
+        return;
+      }
+      if (!request) {
+        Alert.alert(t('auth.login_error_title'), 'Google giriş isteği hazırlanamadı. Lütfen yapılandırmayı kontrol edin.');
+        return;
+      }
       promptAsync();
     }
-  }, [promptAsync]);
+  }, [promptAsync, request, t, isAppleAvailable]);
 
   const clearFieldError = useCallback((field: keyof typeof errors) => {
     setErrors((prev) => (prev[field] ? { ...prev, [field]: undefined } : prev));
@@ -409,10 +444,12 @@ export default function RegisterScreen() {
                                 <Text style={styles.socialIconG}>G</Text>
                                 <Text style={styles.socialBtnTextGoogle}>{t('auth.google')}</Text>
                               </TouchableOpacity>
-                              <TouchableOpacity onPress={() => handleSocialRegister('Apple')} style={styles.socialBtnApple}>
-                                <IconSymbol name="apple.logo" size={20} color="#fff" />
-                                <Text style={styles.socialBtnTextWhite}>{t('auth.apple')}</Text>
-                              </TouchableOpacity>
+                              {isAppleAvailable && (
+                                <TouchableOpacity onPress={() => handleSocialRegister('Apple')} style={styles.socialBtnApple}>
+                                  <IconSymbol name="apple.logo" size={20} color="#fff" />
+                                  <Text style={styles.socialBtnTextWhite}>{t('auth.apple')}</Text>
+                                </TouchableOpacity>
+                              )}
                             </View>
                           </>
                         )}

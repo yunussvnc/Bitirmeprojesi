@@ -15,6 +15,7 @@ import {
   Easing,
   Alert,
   Share,
+  Platform,
 } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -40,6 +41,7 @@ import { toggleFollow } from "@/src/services/userService";
 import { useAppStore } from "@/src/store/useAppStore";
 import { createReport } from "@/src/services/moderationService";
 import { useTranslation } from "react-i18next";
+import { useUploadPipelineStore } from "@/src/store/useUploadPipelineStore";
 
 export default function FeedScreen() {
   const { t } = useTranslation();
@@ -47,8 +49,8 @@ export default function FeedScreen() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
-  const [page, setPage] = useState(1);
-  const [total, setTotal] = useState(0);
+  const [nextCursor, setNextCursor] = useState<string | null>(null);
+  const [hasMore, setHasMore] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
   const [filter, setFilter] = useState<FeedFilter>("all");
   const [commentPostId, setCommentPostId] = useState<number | null>(null);
@@ -76,46 +78,59 @@ export default function FeedScreen() {
   const { hide: hideTabBar, show: showTabBar } = useTabBarVisibility();
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
-  const pageSize = 15;
+  const PAGE_SIZE = 12;
   const toggleSavePost = useAppStore((s) => s.toggleSavePost);
   const isPostSaved = useAppStore((s) => s.isPostSaved);
+  const deletedPostIds = useAppStore((s) => s.deletedPostIds);
+
+  const visiblePosts = React.useMemo(() => posts.filter((p) => !deletedPostIds.includes(p.id)), [posts, deletedPostIds]);
 
   const handleCreateSelect = useCallback((type: CreateType) => {
     if (type === "post") {
       router.push("/create-post" as any);
-    } else if (type === "reels") {
-      router.push({ pathname: "/create-post", params: { preSelect: "reels" } } as any);
     } else if (type === "story") {
       router.push("/create-story" as any);
     }
   }, []);
 
+  /** Aynı id'ye sahip postları kaldırır — ilk görülen kazanır */
+  const dedupeById = useCallback((items: Post[]): Post[] => {
+    const seen = new Set<number>();
+    return items.filter((p) => {
+      if (seen.has(p.id)) return false;
+      seen.add(p.id);
+      return true;
+    });
+  }, []);
+
   const loadFeed = useCallback(
-    async (refresh = false) => {
-      const p = refresh ? 1 : page;
+    async (refresh = false, cursorOverride?: string | null) => {
+      // refresh=true ise cursor'u sıfırla ve baştan yükle
+      const activeCursor = refresh ? null : (cursorOverride !== undefined ? cursorOverride : nextCursor);
       try {
-        if (p === 1) setLoading(true);
+        if (refresh) setLoading(true);
         else setLoadingMore(true);
-        const res = await getFeed(p, pageSize, filter);
+
+        const res = await getFeed(activeCursor, PAGE_SIZE, filter);
         const pendingSharedPostId = useAppStore.getState().pendingSharedPostId;
 
         if (refresh && pendingSharedPostId) {
           try {
             const sharedPost = await getPost(pendingSharedPostId);
             useAppStore.getState().clearPendingSharedPostId();
-            res.items = [sharedPost, ...res.items.filter(post => post.id !== pendingSharedPostId)];
+            res.items = [sharedPost, ...res.items.filter((post) => post.id !== pendingSharedPostId)];
           } catch (e) {
             console.log("Paylaşılan gönderi bulunamadı veya hata:", e);
           }
         }
 
         if (refresh) {
-          setPosts(res.items);
-          setPage(1);
+          setPosts(dedupeById(res.items));
         } else {
-          setPosts((prev) => (p === 1 ? res.items : [...prev, ...res.items]));
+          setPosts((prev) => dedupeById([...prev, ...res.items]));
         }
-        setTotal(res.total);
+        setNextCursor(res.next_cursor);
+        setHasMore(res.has_more);
       } catch (e) {
         handleApiError(e);
       } finally {
@@ -124,12 +139,16 @@ export default function FeedScreen() {
         setLoadingMore(false);
       }
     },
-    [page, filter]
+    // nextCursor dependency sadece "daha fazla yükle" için gerekli
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [filter, nextCursor, dedupeById]
   );
 
   useEffect(() => {
+    // Filtre değişince baştan başla
+    setNextCursor(null);
+    setHasMore(true);
     loadFeed(true);
-    // Scroll'u başa döndür ve animasyonları sıfırla
     flatListRef.current?.scrollToOffset({ offset: 0, animated: false });
     lastScrollY.current = 0;
     lastToggleY.current = 0;
@@ -137,8 +156,20 @@ export default function FeedScreen() {
     animateHeader(false);
     animateStory(false);
     animateMiniBar(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- load on filter change only
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- filtre değişince sıfırla
   }, [filter]);
+
+  // Upload tamamlandığında otomatik yenile
+  const uploadJobs = useUploadPipelineStore((s) => s.jobs);
+  const processedUploads = useRef(new Set<string>());
+
+  useEffect(() => {
+    const newlyCompleted = uploadJobs.filter((j) => j.stage === 'done' && !processedUploads.current.has(j.id));
+    if (newlyCompleted.length > 0) {
+      newlyCompleted.forEach((j) => processedUploads.current.add(j.id));
+      loadFeed(true);
+    }
+  }, [uploadJobs, loadFeed]);
 
   const refreshUnread = useCallback(async () => {
     try {
@@ -158,18 +189,15 @@ export default function FeedScreen() {
   const handleRefresh = useCallback(() => {
     lightImpact();
     setRefreshing(true);
+    setNextCursor(null);
+    setHasMore(true);
     loadFeed(true);
   }, [loadFeed]);
 
   const handleLoadMore = useCallback(() => {
-    if (loadingMore || posts.length >= total) return;
-    setPage((p) => p + 1);
-  }, [loadingMore, posts.length, total]);
-
-  useEffect(() => {
-    if (page > 1) loadFeed(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- load on page change only
-  }, [page]);
+    if (loadingMore || !hasMore) return;
+    loadFeed(false);
+  }, [loadingMore, hasMore, loadFeed]);
 
   const handleLike = useCallback(async (post: Post) => {
     setPosts((prev) =>
@@ -201,6 +229,7 @@ export default function FeedScreen() {
 
   const handleHidePost = useCallback((postId: number) => {
     setPosts((prev) => prev.filter((p) => p.id !== postId));
+    useAppStore.getState().addDeletedPostId(postId);
   }, []);
 
   const handleSharePost = useCallback(async (post: Post) => {
@@ -252,9 +281,10 @@ export default function FeedScreen() {
     if (!post.author?.id) return;
     try {
       const res = await toggleFollow(post.author.id);
+      const newFollowing = res.status === "accepted";
       setPosts((prev) =>
         prev.map((p) =>
-          p.user_id === post.user_id ? (p.author ? { ...p, author: { ...p.author, is_following: res.following } } : p) : p
+          p.user_id === post.user_id ? (p.author ? { ...p, author: { ...p.author, is_following: newFollowing } } : p) : p
         )
       );
     } catch {
@@ -484,27 +514,7 @@ export default function FeedScreen() {
               </Text>
               <IconSymbol name={filterDropdownOpen ? "chevron.up" : "chevron.down"} size={12} color={colors.text.secondary} />
             </TouchableOpacity>
-            {filterDropdownOpen && (
-              <View style={[styles.dropdownMenu, { backgroundColor: colors.surface.elevated, borderColor: colors.surface.border }]}>
-                {(["all", "following"] as const).map((opt) => (
-                  <TouchableOpacity
-                    key={opt}
-                    style={[styles.dropdownItem, filter === opt && { backgroundColor: colors.accent.primary + "18" }]}
-                    onPress={() => {
-                      lightImpact();
-                      setFilter(opt);
-                      setFilterDropdownOpen(false);
-                    }}
-                    activeOpacity={0.7}
-                  >
-                    {filter === opt && <IconSymbol name="checkmark" size={13} color={colors.accent.primary} />}
-                    <Text style={[styles.dropdownItemText, { color: filter === opt ? colors.accent.primary : colors.text.primary }]}>
-                      {opt === "all" ? t("feed.filter_all") : t("feed.filter_following")}
-                    </Text>
-                  </TouchableOpacity>
-                ))}
-              </View>
-            )}
+
           </View>
 
           <View style={styles.headerRight}>
@@ -567,7 +577,7 @@ export default function FeedScreen() {
         <FlatList
           ref={flatListRef}
           style={styles.list}
-          data={posts}
+          data={visiblePosts}
           keyExtractor={(item) => String(item.id)}
           renderItem={renderItem}
           ListEmptyComponent={listEmpty}
@@ -576,7 +586,7 @@ export default function FeedScreen() {
           initialNumToRender={6}
           maxToRenderPerBatch={6}
           windowSize={5}
-          removeClippedSubviews={true}
+          removeClippedSubviews={Platform.OS === "android"}
           scrollEnabled={!isCardZooming}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} tintColor={colors.accent.primary} />
@@ -587,6 +597,46 @@ export default function FeedScreen() {
           onEndReached={handleLoadMore}
           onEndReachedThreshold={0.3}
         />
+
+        {/* Filter dropdown overlay — FlatList dışında, her zaman üstte */}
+        {filterDropdownOpen && (
+          <>
+            <TouchableOpacity
+              style={styles.dropdownBackdrop}
+              activeOpacity={1}
+              onPress={() => setFilterDropdownOpen(false)}
+            />
+            <View
+              style={[
+                styles.dropdownMenu,
+                {
+                  backgroundColor: colors.surface.elevated,
+                  borderColor: colors.surface.border,
+                  top: insets.top + headerHeight,
+                },
+              ]}
+            >
+              {(["all", "following"] as const).map((opt) => (
+                <TouchableOpacity
+                  key={opt}
+                  style={[styles.dropdownItem, filter === opt && { backgroundColor: colors.accent.primary + "18" }]}
+                  onPress={() => {
+                    lightImpact();
+                    setFilter(opt);
+                    setFilterDropdownOpen(false);
+                  }}
+                  activeOpacity={0.7}
+                >
+                  {filter === opt && <IconSymbol name="checkmark" size={13} color={colors.accent.primary} />}
+                  <Text style={[styles.dropdownItemText, { color: filter === opt ? colors.accent.primary : colors.text.primary }]}>
+                    {opt === "all" ? t("feed.filter_all") : t("feed.filter_following")}
+                  </Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+          </>
+        )}
+
         <FeedMiniBar
           visible={miniBarVisible}
           opacity={miniBarOpacity}
@@ -682,6 +732,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     pointerEvents: "box-none",
   },
+  dropdownBackdrop: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    zIndex: 30,
+  },
   dropdownTrigger: {
     flexDirection: "row",
     alignItems: "center",
@@ -698,7 +756,6 @@ const styles = StyleSheet.create({
   },
   dropdownMenu: {
     position: "absolute",
-    top: 44,
     left: "50%",
     transform: [{ translateX: -90 }],
     width: 180,
@@ -709,7 +766,8 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.15,
     shadowRadius: 8,
-    elevation: 8,
+    elevation: 10,
+    zIndex: 31,
   },
   dropdownItem: {
     flexDirection: "row",

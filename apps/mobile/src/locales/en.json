@@ -87,23 +87,6 @@
     "message_btn": "Message",
     "share_text": "Check out my profile on ASEMOS! @{{username}}"
   },
-  "messages": {
-    "title": "Messages",
-    "search_placeholder": "Search messages...",
-    "no_messages": "No messages yet",
-    "no_messages_desc": "Start chatting with your matches",
-    "archived_title": "Archived Chats",
-    "edit": "Edit",
-    "done": "Done",
-    "select_chat": "Select Chat",
-    "selected_count": "{{count}} Selected",
-    "select_all": "Select All",
-    "deselect_all": "Deselect All",
-    "unarchive": "Unarchive",
-    "delete": "Delete",
-    "archive_empty": "Archive Empty",
-    "archive_empty_desc": "You have no archived chats."
-  },
   "settings": {
     "title": "Settings",
     "profile_title": "Business Profile",
@@ -153,7 +136,8 @@
     "change_body": "App language will be changed to \"{{lang}}\".",
     "cancel": "Cancel",
     "confirm": "Change",
-    "note": "Language changes may require the app to restart on some screens."
+    "note": "Language changes may require the app to restart on some screens.",
+    "system_note": "The app follows your phone language. Current system locale: {{locale}}. Active app language: {{lang}}."
   },
   "common": {
     "cancel": "Cancel",
@@ -406,14 +390,22 @@
     "typing": "typing...",
     "empty": "No chats yet",
     "empty_desc": "Share your favorite venues with friends and explore together.",
+    "empty_requests_title": "No Message Requests",
+    "empty_requests_desc": "You have no pending message requests.",
     "start_chat": "Start Chat",
     "edit": "Edit",
     "done": "Done",
     "select_chat": "Select Chat",
     "selected": "Selected",
+    "selected_count": "{{count}} Selected",
     "deselect_all": "Deselect All",
     "select_all": "Select All",
-    "search_ph": "Search person or place..."
+    "search_ph": "Search person or place...",
+    "archived_title": "Archived Chats",
+    "archived": "Archived",
+    "unarchive": "Unarchive",
+    "archive_empty": "Archive Empty",
+    "archive_empty_desc": "You have no archived chats."
   },
   "matching": {
     "no_one_left": "No one left nearby",
@@ -836,6 +828,18 @@
     "review_submit_err": "An error occurred while submitting your review.",
     "map_app_err": "Could not open maps app.",
     "info": "Info"
+  },
+  "place_card": {
+    "analyze_reviews": "Review Analysis",
+    "review_analysis": "AI Review Analysis",
+    "analyzing": "Analyzing reviews...",
+    "analysis_error": "An error occurred during analysis",
+    "sentiment": "Sentiment",
+    "detailed_analysis": "Detailed Analysis",
+    "highlights": "Highlights",
+    "specialties": "Specialties",
+    "mentions": "mentions",
+    "analyzed_reviews": "{{count}} reviews analyzed"
   },
   "user_profile": {
     "reported": "Reported",

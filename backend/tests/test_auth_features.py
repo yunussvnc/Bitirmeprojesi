@@ -208,6 +208,79 @@ def test_verify_register_success(mock_send, mock_welcome):
     db.close()
 
 
+@patch("app.routers.auth._verify_google_id_token")
+def test_google_social_login_creates_verified_active_user(mock_verify):
+    """Google ID token doğrulandıysa kullanıcı doğrulanmış/aktif oluşur."""
+    mock_verify.return_value = {
+        "email": "google-user@test.com",
+        "email_verified": True,
+        "given_name": "Google",
+        "family_name": "User",
+        "iss": "https://accounts.google.com",
+    }
+
+    response = client.post("/auth/google", json={"token": "verified-google-id-token"})
+
+    assert response.status_code == 200
+    data = response.json()
+    assert data["user"]["email"] == "google-user@test.com"
+    assert data["user"]["is_email_verified"] is True
+    assert data["user"]["is_active"] is True
+
+    db = TestingSessionLocal()
+    user = db.query(models.User).filter_by(email="google-user@test.com").first()
+    assert user is not None
+    assert user.is_email_verified is True
+    assert user.is_active is True
+    db.close()
+
+
+@patch("app.routers.auth._verify_google_id_token")
+def test_google_social_login_rejects_unverified_email(mock_verify):
+    """Google email_verified false ise hesap açılmaz."""
+    mock_verify.return_value = {
+        "email": "not-verified@test.com",
+        "email_verified": False,
+    }
+
+    response = client.post("/auth/google", json={"token": "verified-google-id-token"})
+
+    assert response.status_code == 400
+    assert "doğrulanmamış" in response.json()["detail"]
+
+
+@patch("app.routers.auth._verify_apple_identity_token")
+def test_apple_social_login_creates_verified_active_user(mock_verify):
+    """Apple identity token doğrulandıysa kullanıcı doğrulanmış/aktif oluşur."""
+    mock_verify.return_value = {
+        "email": "apple-user@test.com",
+        "email_verified": "true",
+        "sub": "apple-subject",
+    }
+
+    response = client.post("/auth/apple", json={"token": "verified-apple-identity-token"})
+
+    assert response.status_code == 200
+    data = response.json()
+    assert data["user"]["email"] == "apple-user@test.com"
+    assert data["user"]["is_email_verified"] is True
+    assert data["user"]["is_active"] is True
+
+
+@patch("app.routers.auth._verify_apple_identity_token")
+def test_apple_social_login_requires_email(mock_verify):
+    """Provider id saklanmadığı için email gelmeyen Apple token reddedilir."""
+    mock_verify.return_value = {
+        "sub": "apple-subject-without-email",
+        "email_verified": "true",
+    }
+
+    response = client.post("/auth/apple", json={"token": "verified-apple-identity-token"})
+
+    assert response.status_code == 400
+    assert "e-posta" in response.json()["detail"]
+
+
 @patch("app.services.email_service.send_email")
 def test_verify_register_wrong_code(mock_send):
     """Yanlış kod ile verify-register → 400."""
