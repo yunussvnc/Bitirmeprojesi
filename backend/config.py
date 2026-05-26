@@ -23,6 +23,11 @@ class Settings(BaseSettings):
     CLOUDINARY_API_KEY: str = ""
     CLOUDINARY_API_SECRET: str = ""
     GOOGLE_MAPS_API_KEY: str = ""
+    # Social login token audiences. Use comma-separated values for *_ALLOWED_CLIENT_IDS.
+    GOOGLE_CLIENT_ID: str = ""
+    GOOGLE_ALLOWED_CLIENT_IDS: str = ""
+    APPLE_CLIENT_ID: str = ""
+    APPLE_ALLOWED_CLIENT_IDS: str = ""
 
     # E-posta (SMTP) ayarları — Gmail için App Password kullanılmalı
     SMTP_HOST: str = "smtp.gmail.com"

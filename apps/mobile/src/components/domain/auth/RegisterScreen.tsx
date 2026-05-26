@@ -6,7 +6,7 @@
  * @module screens/RegisterScreen
  */
 
-import { router, useLocalSearchParams } from 'expo-router';
+import { router } from 'expo-router';
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import {
   StyleSheet,
@@ -38,6 +38,7 @@ import { API_BASE_URL } from '@/src/constants/api';
 import * as AppleAuthentication from 'expo-apple-authentication';
 import * as WebBrowser from 'expo-web-browser';
 import * as Google from 'expo-auth-session/providers/google';
+import { googleAuthRequestConfig, hasGoogleClientIdForPlatform } from '@/src/config/socialAuth';
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -62,9 +63,8 @@ export default function RegisterScreen() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [termsAccepted, setTermsAccepted] = useState(false);
-  const params = useLocalSearchParams();
   // roleType eklendi ("user" veya "venue")
-  const [roleType, setRoleType] = useState<'user' | 'venue'>((params.roleType as 'user' | 'venue') || 'user');
+  const [roleType, setRoleType] = useState<'user' | 'venue'>('user');
   const [venueName, setVenueName] = useState('');
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState<{
@@ -75,18 +75,39 @@ export default function RegisterScreen() {
     confirmPassword?: string;
   }>({});
   const isSubmittingRef = useRef(false);
+  const [isAppleAvailable, setIsAppleAvailable] = useState(false);
 
   // Google Auth Setup
-  const [request, response, promptAsync] = Google.useAuthRequest({
-    clientId: '398883081062-uqa0hbpbo6nhjcbigltircbbg3ngr7oi.apps.googleusercontent.com',
-    iosClientId: '398883081062-uqa0hbpbo6nhjcbigltircbbg3ngr7oi.apps.googleusercontent.com',
-    androidClientId: '398883081062-uqa0hbpbo6nhjcbigltircbbg3ngr7oi.apps.googleusercontent.com',
-    scopes: ['openid', 'profile', 'email'],
-  });
+  const [request, response, promptAsync] = Google.useAuthRequest(googleAuthRequestConfig);
+
+  useEffect(() => {
+    let mounted = true;
+    if (Platform.OS !== 'ios') {
+      setIsAppleAvailable(false);
+      return;
+    }
+
+    AppleAuthentication.isAvailableAsync()
+      .then((available) => {
+        if (mounted) setIsAppleAvailable(available);
+      })
+      .catch(() => {
+        if (mounted) setIsAppleAvailable(false);
+      });
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   useEffect(() => {
     if (response?.type === 'success' && response.authentication) {
-      handleGoogleSuccess(response.authentication.idToken || response.authentication.accessToken);
+      const token = response.authentication.idToken;
+      if (!token) {
+        Alert.alert(t('auth.login_error_title'), 'Google kimlik tokenı alınamadı. Google client ID ve OpenID ayarlarını kontrol edin.');
+        return;
+      }
+      handleGoogleSuccess(token);
     }
   }, [response]);
 
@@ -125,6 +146,11 @@ export default function RegisterScreen() {
 
   const signInWithApple = async () => {
     try {
+      if (Platform.OS !== 'ios' || !isAppleAvailable) {
+        Alert.alert(t('auth.login_error_title'), 'Apple ile giriş yalnızca desteklenen iOS cihazlarda kullanılabilir.');
+        return;
+      }
+
       const credential = await AppleAuthentication.signInAsync({
         requestedScopes: [
           AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
@@ -249,9 +275,17 @@ export default function RegisterScreen() {
     if (provider === 'Apple') {
       signInWithApple();
     } else if (provider === 'Google') {
+      if (!hasGoogleClientIdForPlatform()) {
+        Alert.alert(t('auth.login_error_title'), 'Google giriş için EXPO_PUBLIC_GOOGLE_* client ID değerleri eksik.');
+        return;
+      }
+      if (!request) {
+        Alert.alert(t('auth.login_error_title'), 'Google giriş isteği hazırlanamadı. Lütfen yapılandırmayı kontrol edin.');
+        return;
+      }
       promptAsync();
     }
-  }, [promptAsync]);
+  }, [promptAsync, request, t, isAppleAvailable]);
 
   const clearFieldError = useCallback((field: keyof typeof errors) => {
     setErrors((prev) => (prev[field] ? { ...prev, [field]: undefined } : prev));
@@ -262,7 +296,7 @@ export default function RegisterScreen() {
   return (
     <View style={styles.container}>
       <View style={StyleSheet.absoluteFill}>
-        <Image source={{ uri: currentImage }} style={StyleSheet.absoluteFillObject} resizeMode="cover" />
+        <Image source={{ uri: currentImage }} style={styles.backgroundImage} resizeMode="cover" />
       </View>
       <LinearGradient
         colors={['rgba(0,0,0,0.2)', 'rgba(0,0,0,0.5)', 'rgba(0,0,0,0.88)']}
@@ -282,14 +316,10 @@ export default function RegisterScreen() {
             keyboardShouldPersistTaps="handled"
             showsVerticalScrollIndicator={false}
           >
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
               <View style={{ flex: 1 }}>
                 <View style={styles.content} pointerEvents="box-none">
                   <View style={styles.topBlock}>
-                    {/* Marka başlığı — login ekranıyla aynı konum ve boyut */}
-                    <View style={styles.header}>
-                      <Text style={styles.brandTitle}>{t('auth.app_name')}</Text>
-                    </View>
-
                     {/* Toggle Buttons (Kullanıcı / Mekan) */}
                     <View style={styles.toggleContainer}>
                       <TouchableOpacity 
@@ -362,8 +392,7 @@ export default function RegisterScreen() {
                             if (confirmPassword && t === confirmPassword) clearFieldError('confirmPassword');
                           }}
                           secureTextEntry
-                          autoComplete="off"
-                          textContentType="oneTimeCode"
+                          autoComplete="password-new"
                           error={errors.password}
                           containerStyle={styles.inputContainer}
                         />
@@ -374,8 +403,7 @@ export default function RegisterScreen() {
                           value={confirmPassword}
                           onChangeText={(t) => { setConfirmPassword(t); clearFieldError('confirmPassword'); }}
                           secureTextEntry
-                          autoComplete="off"
-                          textContentType="oneTimeCode"
+                          autoComplete="password-new"
                           error={errors.confirmPassword}
                           containerStyle={styles.inputContainer}
                         />
@@ -416,33 +444,33 @@ export default function RegisterScreen() {
                                 <Text style={styles.socialIconG}>G</Text>
                                 <Text style={styles.socialBtnTextGoogle}>{t('auth.google')}</Text>
                               </TouchableOpacity>
-                              <TouchableOpacity onPress={() => handleSocialRegister('Apple')} style={styles.socialBtnApple}>
-                                <IconSymbol name="apple.logo" size={20} color="#fff" />
-                                <Text style={styles.socialBtnTextWhite}>{t('auth.apple')}</Text>
-                              </TouchableOpacity>
+                              {isAppleAvailable && (
+                                <TouchableOpacity onPress={() => handleSocialRegister('Apple')} style={styles.socialBtnApple}>
+                                  <IconSymbol name="apple.logo" size={20} color="#fff" />
+                                  <Text style={styles.socialBtnTextWhite}>{t('auth.apple')}</Text>
+                                </TouchableOpacity>
+                              )}
                             </View>
                           </>
                         )}
-
-                        {/* Giriş linki — her iki roleType için kart içinde */}
-                        <TouchableOpacity
-                          style={styles.loginRow}
-                          onPress={() => { Keyboard.dismiss(); lightImpact(); router.back(); }}
-                          activeOpacity={0.8}
-                        >
-                          <Text style={styles.footerLabel}>{t('auth.have_account')}</Text>
-                          <Text style={styles.footerLink}>{t('auth.login')}</Text>
-                        </TouchableOpacity>
                       </View>
-
                     </BlurView>
                   </View>
                 </View>
               </View>
+            </TouchableWithoutFeedback>
           </ScrollView>
+          <TouchableOpacity
+            style={[styles.footerStatic, { paddingBottom: Math.max(16, insets.bottom + 8) }]}
+            onPress={() => { Keyboard.dismiss(); lightImpact(); router.back(); }}
+            activeOpacity={0.8}
+          >
+            <Text style={styles.footerLabel}>{t('auth.have_account')}</Text>
+            <Text style={styles.footerLink}>{t('auth.login')}</Text>
+          </TouchableOpacity>
         </KeyboardAvoidingView>
       </SafeAreaView>
-    </View>
+    </View >
   );
 }
 
@@ -459,18 +487,24 @@ const styles = StyleSheet.create({
     paddingBottom: 40,
   },
   topBlock: { flex: 1 },
-  backgroundImage: { width: '100%' as any, height: '100%' as any },  // kullanılmıyor
-  header: {
+  backgroundImage: { width, height },
+  header: { alignItems: 'center', marginBottom: 20 },
+  logoWrap: {
+    width: 72,
+    height: 72,
+    borderRadius: 36,
+    backgroundColor: 'rgba(255,255,255,0.18)',
     alignItems: 'center',
-    marginBottom: 36,
+    justifyContent: 'center',
+    marginBottom: 14,
   },
-
+  logoEmoji: { fontSize: 36 },
   brandTitle: {
-    fontSize: 40,
+    fontSize: 34,
     fontWeight: '800',
     color: '#ffffff',
     letterSpacing: 3,
-    marginBottom: 10,
+    marginBottom: 6,
     textShadowColor: 'rgba(0,0,0,0.4)',
     textShadowOffset: { width: 0, height: 2 },
     textShadowRadius: 8,
@@ -600,13 +634,6 @@ const styles = StyleSheet.create({
     paddingTop: 16,
     paddingHorizontal: 24,
     backgroundColor: 'transparent',
-  },
-  loginRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 20,
-    gap: 4,
   },
   footerLabel: { fontSize: 16, color: 'rgba(255,255,255,0.9)' },
   footerLink: { fontSize: 16, fontWeight: '700', color: '#ffffff', textDecorationLine: 'underline', letterSpacing: 0.3 },

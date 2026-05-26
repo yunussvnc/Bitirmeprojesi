@@ -37,7 +37,8 @@
           "NSAllowsLocalNetworking": true
         }
       },
-      "bundleIdentifier": "com.asemos.mobile"
+      "bundleIdentifier": "com.asemos.mobile",
+      "usesAppleSignIn": true
     },
     "android": {
       "versionCode": 1,

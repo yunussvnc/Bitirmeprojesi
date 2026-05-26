@@ -22,6 +22,7 @@ import {
   Image,
   Alert,
   Keyboard,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { BlurView } from 'expo-blur';
@@ -38,7 +39,7 @@ import { API_BASE_URL } from '@/src/constants/api';
 import * as AppleAuthentication from 'expo-apple-authentication';
 import * as WebBrowser from 'expo-web-browser';
 import * as Google from 'expo-auth-session/providers/google';
-import * as AuthSession from 'expo-auth-session';
+import { googleAuthRequestConfig, hasGoogleClientIdForPlatform } from '@/src/config/socialAuth';
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -51,7 +52,7 @@ const FALLBACK_PLACE_IMAGES = [
   'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1200', // Aydınlık bir kafe içi
   'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200',
   'https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=1200',
-  'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1200', // Aydınlık restoran
+  'https://images.unsplash.com/photo-1521017430209-a6cb9156a64b?w=1200', // Işıklı iç mekan
 ];
 
 const CAROUSEL_INTERVAL_MS = 4500;
@@ -66,21 +67,39 @@ export default function LoginScreen() {
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState<Record<string, string | undefined>>({});
   const isSubmittingRef = useRef(false);
+  const [isAppleAvailable, setIsAppleAvailable] = useState(false);
 
   // Google Auth Setup
-  const redirectUri = AuthSession.makeRedirectUri({ scheme: 'asemos' });
+  const [request, response, promptAsync] = Google.useAuthRequest(googleAuthRequestConfig);
 
-  const [request, response, promptAsync] = Google.useAuthRequest({
-    clientId: '398883081062-uqa0hbpbo6nhjcbigltircbbg3ngr7oi.apps.googleusercontent.com',
-    iosClientId: '398883081062-uqa0hbpbo6nhjcbigltircbbg3ngr7oi.apps.googleusercontent.com',
-    androidClientId: '398883081062-uqa0hbpbo6nhjcbigltircbbg3ngr7oi.apps.googleusercontent.com',
-    scopes: ['openid', 'profile', 'email'],
-    redirectUri,
-  });
+  useEffect(() => {
+    let mounted = true;
+    if (Platform.OS !== 'ios') {
+      setIsAppleAvailable(false);
+      return;
+    }
+
+    AppleAuthentication.isAvailableAsync()
+      .then((available) => {
+        if (mounted) setIsAppleAvailable(available);
+      })
+      .catch(() => {
+        if (mounted) setIsAppleAvailable(false);
+      });
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   useEffect(() => {
     if (response?.type === 'success' && response.authentication) {
-      handleGoogleSuccess(response.authentication.idToken || response.authentication.accessToken);
+      const token = response.authentication.idToken;
+      if (!token) {
+        Alert.alert(t('auth.login_error_title'), 'Google kimlik tokenı alınamadı. Google client ID ve OpenID ayarlarını kontrol edin.');
+        return;
+      }
+      handleGoogleSuccess(token);
     }
   }, [response]);
 
@@ -119,6 +138,11 @@ export default function LoginScreen() {
 
   const signInWithApple = async () => {
     try {
+      if (Platform.OS !== 'ios' || !isAppleAvailable) {
+        Alert.alert(t('auth.login_error_title'), 'Apple ile giriş yalnızca desteklenen iOS cihazlarda kullanılabilir.');
+        return;
+      }
+
       const credential = await AppleAuthentication.signInAsync({
         requestedScopes: [
           AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
@@ -233,57 +257,31 @@ export default function LoginScreen() {
     if (provider === 'Apple') {
       signInWithApple();
     } else if (provider === 'Google') {
-      // Expo Go'da Google Sign-In desteklenmiyor (Google'ın yeni güvenlik kuralları).
-      // Production build (APK/IPA) alındığında sorunsuz çalışır.
-      if (__DEV__ && !request) {
-        Alert.alert(
-          'Google Giriş',
-          'Google ile giriş şu an geliştirme ortamında (Expo Go) kullanılamıyor. Lütfen e-posta/şifre ile giriş yapın veya production build alın.',
-          [{ text: 'Tamam' }]
-        );
+      if (!hasGoogleClientIdForPlatform()) {
+        Alert.alert(t('auth.login_error_title'), 'Google giriş için EXPO_PUBLIC_GOOGLE_* client ID değerleri eksik.');
+        return;
+      }
+      if (!request) {
+        Alert.alert(t('auth.login_error_title'), 'Google giriş isteği hazırlanamadı. Lütfen yapılandırmayı kontrol edin.');
         return;
       }
       promptAsync();
     }
-  }, [promptAsync, request]);
+  }, [promptAsync, request, t, isAppleAvailable]);
 
   const clearFieldError = useCallback((field: string) => {
     setErrors((prev) => (prev[field] ? { ...prev, [field]: undefined } : prev));
   }, []);
 
-  // --- Arka plan görsel carousel ---
-  const [imgIndex, setImgIndex] = useState(0);
-  const fadeAnim = useRef(new Animated.Value(1)).current;
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      // Mevcut görseli fade-out yap
-      Animated.timing(fadeAnim, {
-        toValue: 0,
-        duration: 800,
-        useNativeDriver: true,
-      }).start(() => {
-        // Sonraki görsele geç
-        setImgIndex((prev) => (prev + 1) % FALLBACK_PLACE_IMAGES.length);
-        // Yeni görseli fade-in yap
-        Animated.timing(fadeAnim, {
-          toValue: 1,
-          duration: 800,
-          useNativeDriver: true,
-        }).start();
-      });
-    }, CAROUSEL_INTERVAL_MS);
-
-    return () => clearInterval(interval);
-  }, [fadeAnim]);
+  const currentImage = FALLBACK_PLACE_IMAGES[0];
 
   return (
     <View style={styles.container}>
-      {/* Arka plan görseli carousel — crossfade efekti */}
+      {/* Sabit Arka plan görseli */}
       <View style={StyleSheet.absoluteFill}>
-        <Animated.Image
-          source={{ uri: FALLBACK_PLACE_IMAGES[imgIndex] }}
-          style={[StyleSheet.absoluteFillObject, { opacity: fadeAnim }]}
+        <Image
+          source={{ uri: currentImage }}
+          style={styles.backgroundImage}
           resizeMode="cover"
         />
       </View>
@@ -307,6 +305,7 @@ export default function LoginScreen() {
             keyboardShouldPersistTaps="handled"
             showsVerticalScrollIndicator={false}
           >
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
               {/* Make sure this outer View stretches to fill the ScrollView content */}
               <View style={{ flex: 1 }}>
                 <View style={styles.content} pointerEvents="box-none">
@@ -406,54 +405,58 @@ export default function LoginScreen() {
                           {t('auth.login')}
                         </Button>
 
-                        <View style={styles.divider}>
-                          <View style={styles.dividerLine} />
-                          <Text style={styles.dividerLabel}>{t('auth.or')}</Text>
-                          <View style={styles.dividerLine} />
-                        </View>
+                        {roleType === 'user' && (
+                          <>
+                            <View style={styles.divider}>
+                              <View style={styles.dividerLine} />
+                              <Text style={styles.dividerLabel}>{t('auth.or')}</Text>
+                              <View style={styles.dividerLine} />
+                            </View>
 
-                        <View style={styles.socialRow}>
-                          <TouchableOpacity
-                            onPress={() => handleSocialLogin('Google')}
-                            style={styles.socialBtnGoogle}
-                          >
-                            <Text style={styles.socialIconG}>G</Text>
-                            <Text style={styles.socialBtnTextGoogle}>{t('auth.google')}</Text>
-                          </TouchableOpacity>
-                          <TouchableOpacity
-                            onPress={() => handleSocialLogin('Apple')}
-                            style={styles.socialBtnApple}
-                          >
-                            <IconSymbol name="apple.logo" size={20} color="#fff" />
-                            <Text style={styles.socialBtnTextWhite}>{t('auth.apple')}</Text>
-                          </TouchableOpacity>
-                        </View>
-
-                        {/* Kayıt ol linki — Google ve Apple'ın hemen altında */}
-                        <TouchableOpacity
-                          style={styles.registerRow}
-                          onPress={() => {
-                            Keyboard.dismiss();
-                            lightImpact();
-                            router.push({ pathname: '/register', params: { roleType } });
-                          }}
-                          activeOpacity={0.8}
-                        >
-                          <Text style={styles.footerLabel}>{t('auth.no_account')}</Text>
-                          <Text style={styles.footerLink}>{t('auth.register')}</Text>
-                        </TouchableOpacity>
-
+                            <View style={styles.socialRow}>
+                              <TouchableOpacity
+                                onPress={() => handleSocialLogin('Google')}
+                                style={styles.socialBtnGoogle}
+                              >
+                                <Text style={styles.socialIconG}>G</Text>
+                                <Text style={styles.socialBtnTextGoogle}>{t('auth.google')}</Text>
+                              </TouchableOpacity>
+                              {isAppleAvailable && (
+                                <TouchableOpacity
+                                  onPress={() => handleSocialLogin('Apple')}
+                                  style={styles.socialBtnApple}
+                                >
+                                  <IconSymbol name="apple.logo" size={20} color="#fff" />
+                                  <Text style={styles.socialBtnTextWhite}>{t('auth.apple')}</Text>
+                                </TouchableOpacity>
+                              )}
+                            </View>
+                          </>
+                        )}
                       </View>
                     </BlurView>
                   </View>
                 </View>
               </View>
+            </TouchableWithoutFeedback>
           </ScrollView>
 
+          {/* Footer formun en altında */}
+          <TouchableOpacity
+            style={[styles.footerStatic, { paddingBottom: Math.max(16, insets.bottom + 8) }]}
+            onPress={() => {
+              Keyboard.dismiss();
+              lightImpact();
+              router.push('/register');
+            }}
+            activeOpacity={0.8}
+          >
+            <Text style={styles.footerLabel}>{t('auth.no_account')}</Text>
+            <Text style={styles.footerLink}>{t('auth.register')}</Text>
+          </TouchableOpacity>
         </KeyboardAvoidingView>
-      </SafeAreaView>
-    </View>
-
+      </SafeAreaView >
+    </View >
   );
 }
 
@@ -485,9 +488,8 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   backgroundImage: {
-    // Kullanılmıyor — absoluteFillObject kullanılıyor
-    width: '100%' as any,
-    height: '100%' as any,
+    width,
+    height,
   },
   header: {
     alignItems: 'center',
@@ -664,13 +666,6 @@ const styles = StyleSheet.create({
     paddingTop: 16,
     paddingHorizontal: 24,
     backgroundColor: 'transparent',
-  },
-  registerRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: 20,
-    gap: 4,
   },
   footerLabel: {
     fontSize: 16,
