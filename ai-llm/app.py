@@ -1297,6 +1297,157 @@ def rerank_places(places: List[Dict], query: str, top_k: int = 5) -> List[Dict]:
     return reranked[:top_k]  # type: ignore[return-value]
 
 
+def _normalize_place_name(name: Optional[str]) -> str:
+    """Birleştirme için mekan adını normalize et."""
+    if not name:
+        return ""
+    return re.sub(r"\s+", " ", name.strip().lower())
+
+
+def _rag_oneri_to_recommendation(oneri: Dict) -> Dict:
+    """RAG onerisini smart-search-v2 / mobil Place formatına çevir."""
+    mekan_id = oneri.get("mekan_id") or oneri.get("id")
+    similarity = float(oneri.get("benzerlik_skoru", 0) or 0)
+    reason = oneri.get("gerekce") or f"RAG benzerlik: {similarity:.2f}"
+    return {
+        "name": oneri.get("ad") or "",
+        "address": oneri.get("adres") or "",
+        "latitude": float(oneri.get("enlem") or 0),
+        "longitude": float(oneri.get("boylam") or 0),
+        "rating": float(oneri.get("rating") or 0),
+        "review_count": int(oneri.get("review_count") or 0),
+        "price_level": int(oneri.get("price_level") or 2),
+        "category": oneri.get("kategori") or "Mekan",
+        "description": oneri.get("aciklama") or "",
+        "photo_url": oneri.get("photo_url"),
+        "data_id": str(mekan_id) if mekan_id is not None else "",
+        "match_score": round(similarity, 3),
+        "rerank_score": round(similarity, 3),
+        "recommendation_reason": reason,
+        "source": "rag",
+    }
+
+
+def _build_rag_context(
+    rag_status: Dict[str, Union[str, int, bool, None]],
+    rag_result: Optional[Dict],
+    used_for_results: bool,
+) -> Dict:
+    """Mobil uyumlu RAG metadata."""
+    oneriler = (rag_result or {}).get("oneriler") or []
+    return {
+        "rag_enhanced": used_for_results and len(oneriler) > 0,
+        "rag_source_count": rag_status.get("source_count", 0),
+        "rag_indexed_count": rag_status.get("indexed_count", 0),
+        "storage_mode": rag_status.get("storage_mode"),
+        "similar_places_count": len(oneriler),
+        "analysis": (rag_result or {}).get("sorgu_analizi", ""),
+        "top_matches": [
+            {
+                "name": place.get("ad"),
+                "category": place.get("kategori"),
+                "score": place.get("benzerlik_skoru", 0),
+            }
+            for place in oneriler[:3]
+        ],
+    }
+
+
+def _merge_recommendations(
+    primary: List[Dict],
+    supplemental: List[Dict],
+    limit: int,
+) -> List[Dict]:
+    """SerpAPI sonuçlarını koruyup RAG ile eksikleri tamamla (isim bazlı dedupe)."""
+    merged = list(primary)
+    seen = {_normalize_place_name(p.get("name")) for p in merged if p.get("name")}
+    for place in supplemental:
+        if len(merged) >= limit:
+            break
+        key = _normalize_place_name(place.get("name"))
+        if key and key in seen:
+            continue
+        if key:
+            seen.add(key)
+        merged.append(place)
+    return merged[:limit]
+
+
+def _score_rag_recommendations(
+    places: List[Dict],
+    parsed: Dict,
+    request: "SmartSearchRequest",
+    time_weather_context: Optional[Dict] = None,
+) -> List[Dict]:
+    """RAG mekanlarına hibrit skor ve mesafe filtresi uygula."""
+    scored: List[Dict] = []
+    for place in places:
+        scores = hybrid_score(
+            place,
+            parsed.get("features", []),
+            user_lat=request.user_lat,
+            user_lng=request.user_lng,
+            time_of_day=time_weather_context,
+        )
+        distance_km = scores.get("distance_km", 0)
+        if request.max_distance_km and distance_km > 0 and distance_km > request.max_distance_km:
+            continue
+        rag_score = float(place.get("rerank_score") or place.get("match_score") or 0)
+        total = min(max(scores["total_score"] * 0.6 + rag_score * 0.4, 0.0), 1.0)
+        scored.append({
+            **place,
+            "match_score": round(total, 3),
+            "rerank_score": round(total, 3),
+            "distance_km": distance_km,
+            "score_breakdown": {
+                "feature": round(scores["feature_score"], 3),
+                "distance": round(scores["distance_score"], 3),
+                "popularity": round(scores["popularity_score"], 3),
+                "time": round(scores["time_score"], 3),
+                "rag_similarity": round(rag_score, 3),
+            },
+        })
+    scored.sort(key=lambda x: x.get("rerank_score", 0), reverse=True)
+    return scored
+
+
+async def _fetch_rag_results(
+    query: str,
+    request: "SmartSearchRequest",
+    response_language: str,
+    rag_status: Dict[str, Union[str, int, bool, None]],
+    limit: int,
+) -> tuple[List[Dict], Optional[Dict], str]:
+    """RAG pipeline ile öneri listesi döndür."""
+    rag = _get_rag_pipeline()
+    if not rag or not rag_status.get("ready"):
+        return [], None, ""
+
+    location = None
+    if request.user_lat is not None and request.user_lng is not None:
+        location = {"lat": request.user_lat, "lng": request.user_lng}
+
+    try:
+        rag_result = await asyncio.to_thread(
+            rag.process,
+            user_query=query,
+            location=location,
+            language=response_language,
+        )
+    except Exception as e:
+        print(f"[RAG] Arama hatası (atlanıyor): {e}")
+        return [], None, ""
+
+    if not rag_result or not rag_result.get("oneriler"):
+        return [], rag_result, ""
+
+    recommendations = [
+        _rag_oneri_to_recommendation(oneri)
+        for oneri in rag_result["oneriler"][:limit]
+    ]
+    return recommendations, rag_result, rag_result.get("sorgu_analizi", "") or ""
+
+
 # ==================== ENDPOINTS ====================
 
 @app.get("/", include_in_schema=False)
@@ -1468,12 +1619,10 @@ async def smart_search_v2(request: SmartSearchRequest):
                     }
                 }
         
-        # 2. SEARCH
+        # 2. SEARCH (SerpAPI + RAG hibrit)
         start_time = datetime.now()
-        
-        from serpapi_client import SerpApiClient
-        
         parsed = parse_natural_query(request.query)
+        result_limit = min(max(request.limit, 5), 10)
         
         # --- Niyet Kontrolü (Intent Check) ---
         if parsed.get('is_inappropriate'):
@@ -1495,73 +1644,35 @@ async def smart_search_v2(request: SmartSearchRequest):
                 "recommendations": [],
                 "_cache": {"hit": False}
             }
-        
+
+        rag_status = await ensure_rag_ready()
         search_location = parsed['district'] or request.location
         
-        # Sadece kategori yerine çıkartılan özellikleri de Google Maps aramasına dahil et
-        # Eğer hiç özellik yoksa, tüm query'i aratmak daha spesifik sonuç verebilir
         if parsed['features']:
             feature_str = " ".join(parsed['features'])
             search_query = f"{feature_str} {parsed['category']} in {search_location}"
         else:
-            # Doğrudan NLP'nin kaçırdığı detaylar için orijinal query'i kullan ama lokasyon ekle
             search_query = f"{request.query} in {search_location}"
-            
-        client = SerpApiClient()
-        places = client.search_places(
-            query=search_query,
-            location=f"{search_location}, Turkey",
-            limit=request.limit * 2,
-            lat=request.user_lat,
-            lng=request.user_lng
-        )
-        
-        if not places:
-            return {
-                "query": request.query,
-                "found": 0,
-                "recommendations": [],
-                "_cache": {"hit": False}
-            }
-        
-        # Kategori filtresi
-        filtered_places = [p for p in places if strict_category_match(parsed['category'], p.get('category', ''))]
-        if len(filtered_places) < 3:
-            filtered_places = places
-        
-        # Mesafe filtresi
-        if request.user_lat and request.user_lng:
-            distance_filtered = [
-                p for p in filtered_places
-                if p.get('latitude') and p.get('longitude')
-                and calculate_distance(request.user_lat, request.user_lng, p['latitude'], p['longitude']) <= request.max_distance_km
-            ]
-            if len(distance_filtered) >= 5:
-                filtered_places = distance_filtered
-        
-        # Çalışma Saatleri Filtresi
-        if parsed.get('want_open_now'):
-            open_places = [p for p in filtered_places if is_place_open(p) is not False]
-            if len(open_places) >= 3:
-                filtered_places = open_places
-                print(f"[OpenNow] {len(open_places)}/{len(filtered_places)} mekan açık")
-        
-        # Bütçe Filtresi (NLP'den alınan budget bilgisi)
-        budget = parsed.get('budget', 'orta')
-        if budget == 'ucuz':
-            budget_filtered = [p for p in filtered_places if p.get('price_level', 2) <= 2]
-            if len(budget_filtered) >= 3:
-                filtered_places = budget_filtered
-        elif budget == 'lüks':
-            budget_filtered = [p for p in filtered_places if p.get('price_level', 2) >= 3]
-            if len(budget_filtered) >= 2:
-                filtered_places = budget_filtered
-        
-        # Hava Durumu Çekme (Open-Meteo API - Ücretsiz, Limitsiz)
+
+        # SerpAPI (ana kaynak; başarısız olursa RAG devreye girer)
+        places: List[Dict] = []
+        try:
+            from serpapi_client import SerpApiClient
+            client = SerpApiClient()
+            places = client.search_places(
+                query=search_query,
+                location=f"{search_location}, Turkey",
+                limit=request.limit * 2,
+                lat=request.user_lat,
+                lng=request.user_lng
+            )
+        except Exception as e:
+            print(f"[SerpApi] Kullanılamıyor, RAG fallback denenecek: {e}")
+
+        # Hava Durumu (Open-Meteo)
         weather_data = {"condition": "Unknown", "temp": None}
         if request.user_lat and request.user_lng:
             try:
-                # WMO Weather interpretation codes
                 weather_codes = {
                     0: "Clear sky", 1: "Mainly clear", 2: "Partly cloudy", 3: "Overcast",
                     45: "Fog", 48: "Depositing rime fog",
@@ -1570,9 +1681,10 @@ async def smart_search_v2(request: SmartSearchRequest):
                     71: "Slight Snow", 73: "Moderate Snow", 75: "Heavy Snow",
                     95: "Thunderstorm", 96: "Thunderstorm with slight hail", 99: "Thunderstorm with heavy hail"
                 }
-                
                 with httpx.Client(timeout=3.0) as w_client:
-                    w_res = w_client.get(f"https://api.open-meteo.com/v1/forecast?latitude={request.user_lat}&longitude={request.user_lng}&current_weather=true")
+                    w_res = w_client.get(
+                        f"https://api.open-meteo.com/v1/forecast?latitude={request.user_lat}&longitude={request.user_lng}&current_weather=true"
+                    )
                     if w_res.status_code == 200:
                         current = w_res.json().get("current_weather", {})
                         code = current.get("weathercode", -1)
@@ -1581,76 +1693,129 @@ async def smart_search_v2(request: SmartSearchRequest):
             except Exception as e:
                 print(f"[Weather] Hava durumu çekilemedi: {e}")
 
-        # Skorlama İçin Zaman ve Hava Durumu Paketi
         time_weather_context = {
             "hour": int(datetime.now().hour),
             "weather": weather_data
         }
-        
-        scored_places = []
-        for place in filtered_places:
-            scores = hybrid_score(
-                place,
-                parsed['features'],
-                user_lat=request.user_lat,
-                user_lng=request.user_lng,
-                time_of_day=time_weather_context
-            )
-            
-            # Mesafe filtresi: max_distance_km'den uzak mekanları çıkar
-            distance_km = scores.get("distance_km", 0)
-            if request.max_distance_km and distance_km > 0 and distance_km > request.max_distance_km:
-                continue  # Çok uzak, atla
-            
-            scored_places.append({
-                **place,
-                "match_score": round(scores["total_score"], 3),
-                "distance_km": distance_km,
-                "score_breakdown": {
-                    "feature": round(scores["feature_score"], 3),
-                    "distance": round(scores["distance_score"], 3),
-                    "popularity": round(scores["popularity_score"], 3),
-                    "time": round(scores["time_score"], 3)
-                }
-            })
-        
-        scored_places.sort(key=lambda x: x['match_score'], reverse=True)
-        
-        # Reranking
-        reranked_places = rerank_places(scored_places[:min(20, len(scored_places))], request.query, top_k=5)
-        
-        # ==================== RAG ENHANCEMENT ====================
-        # RAG sistemi ile ek bağlam ekle (vektör veritabanından semantik arama)
-        rag_context = None
-        rag_status = await ensure_rag_ready()
-        try:
-            rag = _get_rag_pipeline()
-            if rag and rag_status.get("ready"):
-                print(f"[RAG] Sorgu için ek bağlam aranıyor: {request.query}")
-                rag_result = rag.process(
-                    user_query=request.query,
-                    location={"lat": request.user_lat, "lng": request.user_lng} if request.user_lat and request.user_lng else None,
-                    language=response_language
+
+        reranked_places: List[Dict] = []
+        if places:
+            filtered_places = [p for p in places if strict_category_match(parsed['category'], p.get('category', ''))]
+            if len(filtered_places) < 3:
+                filtered_places = places
+
+            if request.user_lat and request.user_lng:
+                distance_filtered = [
+                    p for p in filtered_places
+                    if p.get('latitude') and p.get('longitude')
+                    and calculate_distance(request.user_lat, request.user_lng, p['latitude'], p['longitude']) <= request.max_distance_km
+                ]
+                if len(distance_filtered) >= 5:
+                    filtered_places = distance_filtered
+
+            if parsed.get('want_open_now'):
+                open_places = [p for p in filtered_places if is_place_open(p) is not False]
+                if len(open_places) >= 3:
+                    filtered_places = open_places
+                    print(f"[OpenNow] {len(open_places)}/{len(filtered_places)} mekan açık")
+
+            budget = parsed.get('budget', 'orta')
+            if budget == 'ucuz':
+                budget_filtered = [p for p in filtered_places if p.get('price_level', 2) <= 2]
+                if len(budget_filtered) >= 3:
+                    filtered_places = budget_filtered
+            elif budget == 'lüks':
+                budget_filtered = [p for p in filtered_places if p.get('price_level', 2) >= 3]
+                if len(budget_filtered) >= 2:
+                    filtered_places = budget_filtered
+
+            scored_places = []
+            for place in filtered_places:
+                scores = hybrid_score(
+                    place,
+                    parsed['features'],
+                    user_lat=request.user_lat,
+                    user_lng=request.user_lng,
+                    time_of_day=time_weather_context
                 )
-                if rag_result and rag_result.get("oneriler"):
-                    rag_context = {
-                        "similar_places_count": len(rag_result["oneriler"]),
-                        "source_count": rag_status.get("source_count", 0),
-                        "indexed_count": rag_status.get("indexed_count", 0),
-                        "storage_mode": rag_status.get("storage_mode"),
-                        "analysis": rag_result.get("sorgu_analizi", ""),
-                        "top_matches": [
-                            {
-                                "name": place.get("ad"),
-                                "category": place.get("kategori"),
-                                "score": place.get("benzerlik_skoru", 0)
-                            }
-                            for place in rag_result["oneriler"][:3]
-                        ]
+                distance_km = scores.get("distance_km", 0)
+                if request.max_distance_km and distance_km > 0 and distance_km > request.max_distance_km:
+                    continue
+                scored_places.append({
+                    **place,
+                    "source": "serpapi",
+                    "match_score": round(scores["total_score"], 3),
+                    "distance_km": distance_km,
+                    "score_breakdown": {
+                        "feature": round(scores["feature_score"], 3),
+                        "distance": round(scores["distance_score"], 3),
+                        "popularity": round(scores["popularity_score"], 3),
+                        "time": round(scores["time_score"], 3)
                     }
-                    print(f"[RAG] OK {len(rag_result['oneriler'])} benzer mekan bulundu (vektör veritabanı)")
-        except Exception as e:
-            print(f"[RAG] Hata (atlanıyor): {e}")
+                })
+
+            scored_places.sort(key=lambda x: x['match_score'], reverse=True)
+            reranked_places = rerank_places(
+                scored_places[:min(20, len(scored_places))],
+                request.query,
+                top_k=result_limit
+            )
+
+        # RAG: boş SerpAPI sonucunda birincil kaynak; aksi halde eksikleri tamamlar
+        rag_result: Optional[Dict] = None
+        rag_analysis = ""
+        rag_used_for_results = False
+        rag_recommendations, rag_result, rag_analysis = await _fetch_rag_results(
+            request.query,
+            request,
+            response_language,
+            rag_status,
+            result_limit,
+        )
+
+        if rag_recommendations:
+            scored_rag = _score_rag_recommendations(
+                rag_recommendations, parsed, request, time_weather_context
+            )
+            if not reranked_places:
+                reranked_places = scored_rag[:result_limit]
+                rag_used_for_results = True
+                print(f"[RAG] Birincil fallback: {len(reranked_places)} mekan")
+            elif len(reranked_places) < result_limit:
+                reranked_places = _merge_recommendations(reranked_places, scored_rag, result_limit)
+                rag_used_for_results = True
+                print(f"[RAG] SerpAPI ile birleştirildi: {len(reranked_places)} mekan")
+
+        rag_context = _build_rag_context(
+            rag_status,
+            rag_result,
+            rag_used_for_results or bool(rag_recommendations),
+        )
+
+        if not reranked_places:
+            empty_msg = rag_analysis or localized("no_vector_match", response_language)
+            return {
+                "query": request.query,
+                "found": 0,
+                "recommendations": [],
+                "message": empty_msg,
+                "ai_message": empty_msg,
+                "source": "RAG" if rag_status.get("ready") else "none",
+                "hybrid_mode": False,
+                "rag_enhanced": False,
+                "rag_source_count": rag_status.get("source_count", 0),
+                "rag_indexed_count": rag_status.get("indexed_count", 0),
+                "rag_context": rag_context,
+                "context": {
+                    "weather": weather_data.get("condition"),
+                    "temperature": weather_data.get("temp"),
+                    "rag_enhanced": False,
+                    "rag_source_count": rag_status.get("source_count", 0),
+                    "rag_indexed_count": rag_status.get("indexed_count", 0),
+                    "language": response_language,
+                },
+                "_cache": {"hit": False},
+            }
 
         # ==================== YORUM BAZLI INSIGHT ANALİZİ ====================
         # Her mekan için SerpAPI yorumlarını çekip ne ile övüldüğünü tespit et
@@ -1696,31 +1861,44 @@ async def smart_search_v2(request: SmartSearchRequest):
             place['recommendation_reason'] = " • ".join(reasons) if reasons else reason_label("general_fit", response_language)
         
         # ==================== GROQ LLM DOĞAL DİL CEVABI ====================
-        llm_message = ""
+        llm_message = rag_analysis if rag_used_for_results else ""
         if settings.GROQ_API_KEY and reranked_places:
             try:
                 llm_message = await generate_llm_response(
                     request.query, reranked_places, parsed, response_language
-                )
+                ) or llm_message
             except Exception as e:
                 print(f"[Groq] LLM atlandı: {e}")
 
-        
+        has_serp = any(p.get("source") != "rag" for p in reranked_places)
+        has_rag = any(p.get("source") == "rag" for p in reranked_places)
+        if has_serp and has_rag:
+            data_source = "SerpAPI+RAG"
+        elif has_rag:
+            data_source = "RAG (Vector Database)"
+        else:
+            data_source = "SerpAPI"
+
         response = {
             "query": request.query,
-            "found": len(places),
+            "found": len(reranked_places),
             "recommendations": reranked_places,
             "ai_message": llm_message,
             "message": llm_message,
+            "source": data_source,
+            "hybrid_mode": has_serp and has_rag,
+            "rag_enhanced": rag_context.get("rag_enhanced", False),
+            "rag_source_count": rag_status.get("source_count", 0),
+            "rag_indexed_count": rag_status.get("indexed_count", 0),
+            "rag_context": rag_context,
             "context": {
                 "weather": weather_data.get("condition"),
                 "temperature": weather_data.get("temp"),
-                "rag_enhanced": rag_context is not None,
+                "rag_enhanced": rag_context.get("rag_enhanced", False),
                 "rag_source_count": rag_status.get("source_count", 0),
                 "rag_indexed_count": rag_status.get("indexed_count", 0),
                 "language": response_language
             },
-            "rag_context": rag_context,  # RAG'dan gelen ek bilgi
             "_cache": {"hit": False}
         }
 
