@@ -1,0 +1,19 @@
+{
+  "include": ["."],
+  "exclude": [".venv", "__pycache__", "*.egg-info"],
+  "venvPath": ".",
+  "venv": ".venv",
+  "pythonVersion": "3.11",
+  "typeCheckingMode": "off",
+  "reportMissingImports": false,
+  "reportMissingModuleSource": false,
+  "reportGeneralTypeIssues": false,
+  "reportOptionalMemberAccess": false,
+  "reportOptionalSubscript": false,
+  "reportIndexIssue": false,
+  "reportArgumentType": false,
+  "reportReturnType": false,
+  "reportOperatorIssue": false,
+  "reportAttributeAccessIssue": false,
+  "useLibraryCodeForTypes": true
+}

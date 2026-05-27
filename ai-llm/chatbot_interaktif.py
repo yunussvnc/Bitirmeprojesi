@@ -11,6 +11,7 @@ os.environ['QDRANT_URL'] = 'http://localhost:6333'
 
 from src.rag.retriever import RAGRetriever
 from src.rag.generator import RAGGenerator
+from review_analyzer import fast_extract_insights
 import math
 import time
 
@@ -254,6 +255,63 @@ class MekanChatbot:
                     print(f"     {analiz}\n")
             except Exception as e:
                 print(f"\n[!] AI analizi yapilamadi: {e}\n")
+        
+        # Yorum tabanlı insight analizi
+        self._show_review_insights(results)
+    
+    def _show_review_insights(self, results: list) -> None:
+        """
+        SerpAPI'dan gelen yüzüncü yorumları çekip
+        her mekanın neyle övüldüğünü gösterir.
+        """
+        try:
+            from serpapi_client import SerpApiClient
+            client = SerpApiClient()
+        except Exception:
+            return  # SerpAPI yoksa sessizce atla
+        
+        print("\n" + "-"*80)
+        print("  YORUM ANALiZi - Mekanlar Ne ile Ovuluyor?")
+        print("-"*80)
+        
+        has_any = False
+        for result in results:
+            payload = result.get('payload', {})
+            data_id = payload.get('data_id', '')
+            name = payload.get('ad', 'Bilinmeyen')
+            
+            if not data_id:
+                continue
+            
+            try:
+                print(f"\n  [{name}] yorumlar aliniyor...", end="", flush=True)
+                reviews = client.get_place_reviews(data_id, max_reviews=15)
+                
+                if not reviews:
+                    print(" yorum bulunamadi")
+                    continue
+                
+                insights = fast_extract_insights(reviews, name)
+                specialties = insights.get('specialties', [])
+                
+                if specialties:
+                    has_any = True
+                    print(f" ({len(reviews)} yorum analiz edildi)")
+                    for spec in specialties[:3]:
+                        print(f"    {spec['display']}")
+                        if spec.get('example_review'):
+                            review_short = spec['example_review'][:80]
+                            print(f"    Ornek: \"{review_short}\"")
+                else:
+                    print(f" ({len(reviews)} yorum - ozellik tespiti yapılamdı)")
+                    
+            except Exception as e:
+                print(f" hata: {e}")
+        
+        if not has_any:
+            print("\n  [i] Yorum insight'i icin mekan data_id bilgisi gerekli (SerpAPI sonuclari)")
+        
+        print("\n" + "-"*80 + "\n")
     
     def run(self):
         """Chatbot'u çalıştır"""

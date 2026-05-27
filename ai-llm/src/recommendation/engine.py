@@ -33,7 +33,8 @@ class RecommendationEngine:
         enlem: float,
         boylam: float,
         kategori: str = None,
-        kullanici_id: int = None
+        kullanici_id: int = None,
+        language: str = "tr"
     ) -> Dict[str, Any]:
         """
         Kişiselleştirilmiş mekan önerileri al
@@ -54,7 +55,8 @@ class RecommendationEngine:
         recommendations = self.rag_pipeline.process(
             user_query=kullanici_metni,
             location=location,
-            kullanici_id=kullanici_id
+            kullanici_id=kullanici_id,
+            language=(language or "tr").split("-")[0].lower()
         )
         
         # Backend'den detaylı mekan bilgilerini al (opsiyonel)

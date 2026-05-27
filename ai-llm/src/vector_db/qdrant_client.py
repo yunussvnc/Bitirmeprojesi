@@ -17,16 +17,25 @@ class QdrantVectorDB:
     def __init__(self):
         """Qdrant client'ı başlat"""
         try:
-            client_kwargs = {"url": settings.QDRANT_URL}
-            if settings.QDRANT_API_KEY:
-                client_kwargs["api_key"] = settings.QDRANT_API_KEY
+            qdrant_url = (settings.QDRANT_URL or "").strip()
+            # In-memory mode kontrolü
+            if not qdrant_url or qdrant_url == ":memory:" or qdrant_url.lower() == "memory":
+                logger.info("Qdrant in-memory mode kullanılıyor")
+                self.client = QdrantClient(":memory:")
+                self.storage_mode = "memory"
+            else:
+                # Remote/local server mode
+                client_kwargs = {"url": qdrant_url}
+                if settings.QDRANT_API_KEY:
+                    client_kwargs["api_key"] = settings.QDRANT_API_KEY
+                self.client = QdrantClient(**client_kwargs)
+                self.storage_mode = "remote"
             
-            self.client = QdrantClient(**client_kwargs)
             self.collection_name = settings.QDRANT_COLLECTION_NAME
             
             # Bağlantıyı test et
             self._test_connection()
-            logger.info(f"Qdrant bağlantısı başarılı: {settings.QDRANT_URL}")
+            logger.info(f"Qdrant bağlantısı başarılı: {qdrant_url or ':memory:'}")
         except Exception as e:
             logger.error(f"Qdrant bağlantısı kurulamadı: {e}")
             raise
@@ -60,6 +69,29 @@ class QdrantVectorDB:
         except Exception as e:
             logger.error(f"Koleksiyon oluşturulurken hata: {e}")
             raise
+
+    def collection_exists(self) -> bool:
+        """Koleksiyon var mı?"""
+        try:
+            collections = self.client.get_collections()
+            return self.collection_name in [col.name for col in collections.collections]
+        except Exception as e:
+            logger.error(f"Koleksiyon kontrolünde hata: {e}")
+            return False
+
+    def count_vectors(self) -> int:
+        """Koleksiyondaki vektör sayısını döndür."""
+        try:
+            if not self.collection_exists():
+                return 0
+            result = self.client.count(
+                collection_name=self.collection_name,
+                exact=True
+            )
+            return int(result.count or 0)
+        except Exception as e:
+            logger.error(f"Vektör sayısı okunurken hata: {e}")
+            return 0
     
     def add_vectors(
         self,
