@@ -689,6 +689,41 @@ async def ensure_rag_ready(force_reindex: Optional[bool] = None) -> Dict[str, Un
             return rag_bootstrap_status
         return await asyncio.to_thread(_bootstrap_rag_index_sync, force_reindex)
 
+
+def _rag_status_for_health() -> Dict[str, Union[str, int, bool, None]]:
+    """Health/info: bootstrap henuz calismadiysa JSON ve Qdrant sayimini yansitir."""
+    out: Dict[str, Union[str, int, bool, None]] = {
+        "ready": rag_bootstrap_status.get("ready"),
+        "indexed_count": rag_bootstrap_status.get("indexed_count") or 0,
+        "source_count": rag_bootstrap_status.get("source_count") or 0,
+        "storage_mode": rag_bootstrap_status.get("storage_mode"),
+        "data_path": rag_bootstrap_status.get("data_path"),
+        "last_error": rag_bootstrap_status.get("last_error"),
+    }
+    if not out["source_count"]:
+        try:
+            data_path = _resolve_rag_data_path()
+            if os.path.isfile(data_path):
+                mekanlar = get_mekanlar_from_json(json_path=data_path)
+                out["source_count"] = len(mekanlar or [])
+                out["data_path"] = data_path
+        except Exception:
+            pass
+    if rag_pipeline is not None:
+        try:
+            cnt = rag_pipeline.retriever.vector_db.count_vectors() or 0
+            if cnt:
+                out["indexed_count"] = cnt
+                src = int(out["source_count"] or 0)
+                out["ready"] = cnt > 0 and (src == 0 or cnt >= src)
+                out["storage_mode"] = getattr(
+                    rag_pipeline.retriever.vector_db, "storage_mode", out.get("storage_mode")
+                )
+        except Exception:
+            pass
+    return out
+
+
 def _get_rag_pipeline() -> Optional[RAGPipeline]:
     """RAG pipeline'ını lazy init ile al"""
     global rag_pipeline
@@ -1493,12 +1528,9 @@ async def health():
         "cache": "redis" if cache_ok else "none (fallback)",
         "model_loaded": model_manager.is_loaded,
         "rag": {
-            "ready": rag_bootstrap_status.get("ready"),
-            "indexed_count": rag_bootstrap_status.get("indexed_count"),
-            "source_count": rag_bootstrap_status.get("source_count"),
-            "storage_mode": rag_bootstrap_status.get("storage_mode"),
+            **_rag_status_for_health(),
             "auto_index": settings.RAG_AUTO_INDEX,
-            "last_error": rag_bootstrap_status.get("last_error")
+            "index_on_startup": settings.RAG_INDEX_ON_STARTUP,
         }
     }
 
