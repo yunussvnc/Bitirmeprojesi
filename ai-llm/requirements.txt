@@ -34,6 +34,9 @@ pandas>=2.1.0
 # Cache
 redis==5.0.1
 
+# PostgreSQL (places sync startup)
+psycopg2-binary>=2.9.9
+
 # Fine-tuning
 datasets>=2.14.0  # HuggingFace datasets
 peft>=0.8.0  # Parameter-Efficient Fine-Tuning (LoRA/QLoRA)

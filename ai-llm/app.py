@@ -584,6 +584,17 @@ def _resolve_rag_data_path() -> str:
     return os.path.join(_ai_llm_root, data_path)
 
 
+def _count_places_in_json(data_path: Optional[str] = None) -> int:
+    """loaded_places.json kayıt sayısı (bootstrap öncesi /health için)."""
+    path = data_path or _resolve_rag_data_path()
+    try:
+        with open(path, encoding="utf-8") as handle:
+            data = json.load(handle)
+        return len(data) if isinstance(data, list) else 0
+    except Exception:
+        return 0
+
+
 def _bootstrap_rag_index_sync(force_reindex: Optional[bool] = None) -> Dict[str, Union[str, int, bool, None]]:
     """loaded_places.json snapshot'ını Qdrant'a güvenli şekilde indeksler."""
     global rag_bootstrap_status
@@ -701,14 +712,11 @@ def _rag_status_for_health() -> Dict[str, Union[str, int, bool, None]]:
         "last_error": rag_bootstrap_status.get("last_error"),
     }
     if not out["source_count"]:
-        try:
-            data_path = _resolve_rag_data_path()
-            if os.path.isfile(data_path):
-                mekanlar = get_mekanlar_from_json(json_path=data_path)
-                out["source_count"] = len(mekanlar or [])
-                out["data_path"] = data_path
-        except Exception:
-            pass
+        data_path = _resolve_rag_data_path()
+        json_count = _count_places_in_json(data_path)
+        if json_count:
+            out["source_count"] = json_count
+            out["data_path"] = data_path
     if rag_pipeline is not None:
         try:
             cnt = rag_pipeline.retriever.vector_db.count_vectors() or 0
@@ -746,6 +754,13 @@ async def lifespan(app: FastAPI):
     print("\n" + "="*60)
     print("FAZ 2: STARTUP - Sistem Başlatılıyor")
     print("="*60)
+
+    data_path = _resolve_rag_data_path()
+    json_count = _count_places_in_json(data_path)
+    if json_count:
+        rag_bootstrap_status["source_count"] = json_count
+        rag_bootstrap_status["data_path"] = data_path
+        print(f"[RAG] JSON snapshot: {json_count} mekan ({data_path})")
 
     # 1. Redis Cache - bağlantı yoksa fallback
     try:

@@ -39,7 +39,12 @@ SAMPLE_QUERY = {
 def test_health(client):
     r = client.get("/health")
     assert r.status_code == 200
-    assert r.json().get("status") == "ok"
+    data = r.json()
+    assert data.get("status") == "ok"
+    rag = data.get("rag") or {}
+    json_path = os.path.join(_AI_ROOT, "data", "loaded_places.json")
+    if os.path.isfile(json_path):
+        assert rag.get("source_count", 0) > 0
 
 
 def test_rag_search_returns_structure(client):

@@ -61,6 +61,7 @@ def count_db_places(db_url: str) -> Optional[int]:
     try:
         import psycopg2
     except ImportError:
+        print("[PlacesSync] psycopg2-binary yuklu degil (pip install psycopg2-binary)")
         return None
 
     try:

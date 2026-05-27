@@ -41,7 +41,7 @@ services:
       - key: RAG_AUTO_INDEX
         value: true
       - key: RAG_INDEX_ON_STARTUP
-        value: false
+        value: true
       - key: RAG_FORCE_REINDEX
         value: false
       - key: RAG_USE_LLM_GENERATOR
