@@ -41,6 +41,7 @@
     "no_places": "No venues yet",
     "recommended": "Recommended for you",
     "menu": "Menu",
+    "menu_coming_soon": "Coming soon",
     "no_image": "No image added",
     "place_stories": "Stories",
     "place_posts": "Posts",
@@ -390,7 +391,12 @@
     "pages_menu": "{{count}} page menu",
     "items": "{{count}} items",
     "page_x_of_y": "Page {{current}} / {{total}}",
-    "no_menu": "This venue hasn't added a menu yet."
+    "no_menu": "This venue hasn't added a menu yet.",
+    "menu_coming_soon": "Coming soon",
+    "menu_coming_soon_desc": "This venue's menu will be added shortly.",
+    "hours_unavailable": "Hours not available",
+    "opening_hours": "Opening Hours",
+    "guest_review": "Guest review"
   },
   "feed_comments": {
     "comments": "Comments",

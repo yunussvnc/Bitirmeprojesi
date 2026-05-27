@@ -56,6 +56,10 @@ class Settings(BaseSettings):
     RAG_INDEX_ON_STARTUP: bool = False
     RAG_FORCE_REINDEX: bool = False
     RAG_USE_LLM_GENERATOR: bool = False
+
+    # Postgres place sync (loaded_places.json -> places tablosu)
+    PLACES_SYNC_ON_STARTUP: bool = False
+    PLACES_SYNC_MIN_RATIO: float = 0.95
     
     # Backend API URL (Mekan verilerini almak için)
     BACKEND_API_URL: str = "http://localhost:8000"

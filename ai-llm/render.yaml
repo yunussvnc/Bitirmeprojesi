@@ -46,6 +46,10 @@ services:
         value: false
       - key: RAG_USE_LLM_GENERATOR
         value: false
+      - key: PLACES_SYNC_ON_STARTUP
+        value: true
+      - key: PLACES_SYNC_MIN_RATIO
+        value: "0.95"
       # CORS
       - key: CORS_ORIGINS
         value: "*"

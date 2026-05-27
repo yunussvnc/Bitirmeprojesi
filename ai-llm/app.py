@@ -737,6 +737,26 @@ async def lifespan(app: FastAPI):
 
     asyncio.create_task(_load_rag_bg())
     print(f"[Startup] RAG sistemi arka planda baslatiliyor...")
+
+    # 4. Postgres place sync — JSON snapshot DB'den gerideyse arka planda upsert
+    async def _sync_places_bg():
+        if not settings.PLACES_SYNC_ON_STARTUP:
+            return
+        try:
+            from scripts.serpapi_to_postgres import maybe_sync_places_on_startup
+            await asyncio.to_thread(
+                maybe_sync_places_on_startup,
+                settings.database_url_normalized,
+                _resolve_rag_data_path(),
+                settings.PLACES_SYNC_MIN_RATIO,
+            )
+        except Exception as exc:
+            print(f"[PlacesSync] Startup sync basarisiz: {exc}")
+
+    asyncio.create_task(_sync_places_bg())
+    if settings.PLACES_SYNC_ON_STARTUP:
+        print("[Startup] Postgres place sync arka planda kontrol edilecek...")
+
     print(f"[Startup] Version: 2.1 (Performance Optimized + RAG)")
     print("="*60 + "\n")
 

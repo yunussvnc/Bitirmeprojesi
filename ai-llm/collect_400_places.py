@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+﻿# -*- coding: utf-8 -*-
 """
 İstanbul'dan 400 Popüler Mekan Toplama Scripti
 Farklı bölge ve kategorilerden çeşitli mekanlar toplar
@@ -238,6 +238,16 @@ def main():
         parser = argparse.ArgumentParser(description="SerpAPI ile Istanbul mekan snapshot'ını kontrollü artır")
         parser.add_argument("--target", type=int, default=400, help="Hedef toplam mekan sayısı")
         parser.add_argument("--output", default="loaded_places.json", help="data/ altındaki çıktı dosyası")
+        parser.add_argument(
+            "--sync-postgres",
+            action="store_true",
+            help="JSON kaydından sonra PostgreSQL places tablosuna otomatik aktar",
+        )
+        parser.add_argument(
+            "--no-sync-postgres",
+            action="store_true",
+            help="DATABASE_URL olsa bile Postgres aktarimini atla",
+        )
         args = parser.parse_args()
 
         collector = PlaceCollector()
@@ -255,10 +265,27 @@ def main():
         # JSON'a kaydet
         total = collector.save_to_json(filename=args.output)
         
+        from src.config import settings
+
+        should_sync = (
+            args.sync_postgres
+            or (not args.no_sync_postgres and bool(os.getenv("DATABASE_URL", "").strip()))
+        )
+        if should_sync:
+            print("\n>> PostgreSQL'e aktariliyor...")
+            from scripts.serpapi_to_postgres import serpapi_to_postgres
+
+            json_path = os.path.join(os.path.dirname(__file__), "data", args.output)
+            serpapi_to_postgres(settings.database_url_normalized, json_path=json_path)
+
         print("\n" + "="*70)
         print("OK ISLEM TAMAMLANDI!")
         print(f"* {total} mekan loaded_places.json dosyasinda")
-        print("* Simdi demo_rag_complete.py ile Qdrant'a yukleyebilirsiniz")
+        if should_sync:
+            print("* Mekanlar PostgreSQL'e aktarildi — mobil uygulama kartlarda gorebilir")
+        else:
+            print("* Postgres aktarimi: python scripts/serpapi_to_postgres.py")
+        print("* Qdrant indeks: python scripts/prepare_vector_db.py --force")
         print("="*70 + "\n")
         
     except KeyboardInterrupt:

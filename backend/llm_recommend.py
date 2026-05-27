@@ -291,6 +291,7 @@ def recommend_pipeline(
 
     # --- 3. Build scoring-based items (fallback) ---
     def _make_item(sc, dist, tags, p, explanation=None):
+        review_count = getattr(p, "review_count", None) or getattr(p, "user_ratings_total", None)
         return {
             "id": p.id,
             "name": p.name,
@@ -300,6 +301,12 @@ def recommend_pipeline(
             "photo_url": getattr(p, "photo_url", None),
             "explanation": explanation,
             "tags": tags,
+            "opening_time": getattr(p, "opening_time", None),
+            "closing_time": getattr(p, "closing_time", None),
+            "average_rating": getattr(p, "average_rating", None),
+            "review_count": review_count,
+            "price_range": getattr(p, "price_range", None),
+            "address": getattr(p, "address", None),
         }
 
     fallback_items = [_make_item(sc, dist, tags, p) for sc, dist, tags, p in top_candidates[:10]]

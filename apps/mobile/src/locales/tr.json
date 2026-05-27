@@ -41,6 +41,7 @@
     "no_places": "Henüz mekan yok",
     "recommended": "Senin için önerildi",
     "menu": "Menü",
+    "menu_coming_soon": "Yakında eklenecek",
     "no_image": "Görsel eklenmedi",
     "place_stories": "Hikayeler",
     "place_posts": "Gönderiler",
@@ -412,7 +413,12 @@
     "pages_menu": "{{count}} sayfa menü",
     "items": "{{count}} ürün",
     "page_x_of_y": "Sayfa {{current}} / {{total}}",
-    "no_menu": "Bu mekan henüz menü eklememiş."
+    "no_menu": "Bu mekan henüz menü eklememiş.",
+    "menu_coming_soon": "Yakında eklenecek",
+    "menu_coming_soon_desc": "Bu mekanın menüsü kısa süre içinde eklenecek.",
+    "hours_unavailable": "Saat bilgisi mevcut değil",
+    "opening_hours": "Çalışma Saatleri",
+    "guest_review": "Misafir yorumu"
   },
   "feed_comments": {
     "comments": "Yorumlar",

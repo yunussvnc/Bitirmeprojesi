@@ -348,6 +348,12 @@ class RecommendItem(BaseModel):
     photo_url: Optional[str] = None
     explanation: Optional[str] = None
     tags: List[str] = []
+    opening_time: Optional[str] = None
+    closing_time: Optional[str] = None
+    average_rating: Optional[float] = None
+    review_count: Optional[int] = None
+    price_range: Optional[int] = None
+    address: Optional[str] = None
 
 class RecommendResponse(BaseModel):
     items: List[RecommendItem]

@@ -1,347 +1,308 @@
 """
 scripts/serpapi_to_postgres.py
 ================================
-SerpAPI/Qdrant mekanlarini PostgreSQL places tablosuna aktar.
+SerpAPI / loaded_places.json mekanlarini PostgreSQL places tablosuna aktar.
 
-- data/loaded_places.json dosyasini okur
-- Kategori, sehir, ozellikleri akillica parse eder
-- price_range otomatik belirlenir
-- features JSON array olarak yazilir
-- vector_id olarak Qdrant id kaydedilir
-- ON CONFLICT ile ayni mekan 2 kez eklenmez
+- data/loaded_places.json (English veya Turkish alan adlari) okur
+- vector_id (data_id) ile upsert yapar
+- SerpAPI saatleri varsa kullanir, yoksa kategori varsayilanlari
+- price_level -> price_range (1-4) donusumu
 
 Kullanim:
     python scripts/serpapi_to_postgres.py
     python scripts/serpapi_to_postgres.py --db "postgresql://user:pass@host/db"
-    python scripts/serpapi_to_postgres.py --dry-run   # ekleme yapma, sadece goster
+    python scripts/serpapi_to_postgres.py --dry-run
+    python scripts/serpapi_to_postgres.py --json data/loaded_places.json
 """
 
-import sys
-import os
-import json
-import re
+from __future__ import annotations
+
 import argparse
-from datetime import datetime
-from typing import Optional
+import json
+import os
+import sys
+from typing import Dict, List, Optional, Set
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from dotenv import load_dotenv
+
 load_dotenv()
+
 from src.config import settings
+from scripts.serpapi_place_utils import place_to_postgres_row
+
+DEFAULT_JSON_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "loaded_places.json")
 
 
-# ── Sabitler ─────────────────────────────────────────────────────────────────
-
-JSON_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "loaded_places.json")
-
-# Istanbul semtlerinden sehir cikar
-ISTANBUL_SEMTLERI = [
-    "Kadikoy", "Besiktas", "Beyoglu", "Sisli", "Fatih", "Uskudar",
-    "Bakirkoy", "Maltepe", "Kartal", "Pendik", "Umraniye", "Sariyer",
-    "Kagithane", "Gaziosmanpasa", "Eyup", "Bayrampasa", "Avcilar",
-    "Buyukcekmece", "Catalca", "Silivri", "Arnavutkoy", "Basaksehir",
-    "Esenyurt", "Bagcilar", "Bahcelievler", "Esenler", "Gungoren",
-    "Sultangazi", "Adalar", "Atasehir", "Cekmekoy", "Sancaktepe",
-    "Sultanbeyli", "Tuzla", "Beykoz", "Sile", # sic
-    # Semtler
-    "Karakoy", "Taksim", "Galata", "Ortakoy", "Bebek", "Etiler",
-    "Nisantasi", "Cihangir", "Balat", "Fener", "Moda", "Kuzguncuk",
-    "Eminonu", "Sultanahmet", "Kapalicarsı", "Bogazici",
-]
-
-# Kategori → price_range (1=ucuz, 2=orta, 3=pahali, 4=lüks)
-KATEGORI_FIYAT = {
-    "Kafe": 1, "kahvalti": 1, "Fastfood": 1, "Sokak yemegi": 1,
-    "Restoran": 2, "Bar": 2, "Canli muzik": 2, "Ortak calisma": 1,
-    "Deniz mahsulleri": 3, "Steakhouse": 3, "Japon": 3,
-    "Fine dining": 4, "Roof": 3, "Rooftop": 3, "Lüks": 4,
-}
-
-# Kategori → özellik etiketleri
-KATEGORI_OZELLIKLER = {
-    "Kafe": ["wifi", "oturma_alani", "icecek"],
-    "Bar": ["alkol", "canli_muzik", "gece_hayati"],
-    "Restoran": ["yemek", "rezervasyon", "aile_dostu"],
-    "Kahvalti": ["sabah_acik", "kahvalti", "aile_dostu"],
-    "Deniz mahsulleri": ["taze_balik", "deniz_manzarasi", "yemek"],
-    "Ortak Calisma": ["wifi", "sessiz", "calisma_ortami", "priz"],
-    "Rooftop": ["teras", "sehir_manzarasi", "romantik"],
-    "Canli muzik": ["canli_muzik", "eglence", "bar"],
-    "default": ["mekan"],
-}
+def resolve_json_path(json_path: Optional[str] = None) -> str:
+    return json_path or DEFAULT_JSON_PATH
 
 
-# ── Yardımcı Fonksiyonlar ─────────────────────────────────────────────────────
-
-def parse_city(adres: str) -> str:
-    """Adresten sehir/semt cikar"""
-    if not adres:
-        return "Istanbul"
-    adres_upper = adres.upper()
-    for semt in ISTANBUL_SEMTLERI:
-        if semt.upper() in adres_upper:
-            return semt
-    if "ISTANBUL" in adres_upper or "İSTANBUL" in adres_upper:
-        return "Istanbul"
-    return "Istanbul"
-
-
-def get_price_range(kategori: str, puan: float) -> int:
-    """Kategori ve puana gore fiyat araligi (1-4)"""
-    if not kategori:
-        return 2
-    for key, val in KATEGORI_FIYAT.items():
-        if key.lower() in kategori.lower():
-            return val
-    # Yüksek puanli mekanlar genellikle daha pahali
-    if puan >= 4.7:
-        return 3
-    if puan >= 4.3:
-        return 2
-    return 1
-
-
-def get_features(mekan: dict) -> list:
-    """Mekan icin özellik listesi olustur"""
-    kategori = mekan.get("kategori", "")
-    aciklama = (mekan.get("aciklama", "") or "").lower()
-    features = []
-
-    # Kategoriye gore temel ozellikler
-    for key, vals in KATEGORI_OZELLIKLER.items():
-        if key.lower() in kategori.lower():
-            features.extend(vals)
-            break
-    else:
-        features.extend(KATEGORI_OZELLIKLER["default"])
-
-    # Açiklamadan ek özellikler çikar
-    kelime_map = {
-        "wifi": "wifi",
-        "wi-fi": "wifi",
-        "manzara": "manzarali",
-        "teras": "teras",
-        "bahce": "bahce",
-        "rezervasyon": "rezervasyon",
-        "vegan": "vegan",
-        "vegetarian": "vejetaryen",
-        "gluten": "glutensiz",
-        "canlı müzik": "canli_muzik",
-        "canli muzik": "canli_muzik",
-        "nargile": "nargile",
-        "kahvaltı": "kahvalti",
-        "boğaz": "bogaz_manzarasi",
-        "bogaz": "bogaz_manzarasi",
-        "deniz": "deniz_manzarasi",
-        "çocuk": "cocuk_dostu",
-        "cocuk": "cocuk_dostu",
-        "otopark": "otopark",
-        "paket": "paket_servis",
-        "teslimat": "teslimat",
-        "temiz": "temiz",
-        "romantik": "romantik",
-    }
-    for kelime, etiket in kelime_map.items():
-        if kelime in aciklama and etiket not in features:
-            features.append(etiket)
-
-    # Yüksek puan etiketleri
-    puan = mekan.get("puan", 0) or 0
-    if puan >= 4.7:
-        features.append("cok_populer")
-    elif puan >= 4.4:
-        features.append("populer")
-
-    return list(set(features))  # deduplicate
-
-
-def make_opening_hours(kategori: str) -> tuple:
-    """Kategoriye gore tahmini calisma saatleri"""
-    k = (kategori or "").lower()
-    if any(x in k for x in ["bar", "canli", "gece", "kulup"]):
-        return "18:00", "02:00"
-    if any(x in k for x in ["kahvalti", "kafe"]):
-        return "07:00", "22:00"
-    if any(x in k for x in ["restoran", "deniz"]):
-        return "11:00", "23:00"
-    return "09:00", "22:00"
-
-
-# ── Ana Script ────────────────────────────────────────────────────────────────
-
-def load_places_from_json(json_path: str) -> list:
-    """JSON dosyasindan mekanlari oku"""
+def load_places_from_json(json_path: str, *, quiet: bool = False) -> List[dict]:
     if not os.path.exists(json_path):
-        print(f"HATA: {json_path} bulunamadi!")
-        print("Once 'python scripts/load_data.py --source serpapi --save-json' calistirin")
+        if not quiet:
+            print(f"HATA: {json_path} bulunamadi!")
+            print("Once toplayin: python collect_400_places.py")
+            print("veya: python scripts/load_data.py --source serpapi --save-json")
         return []
-    with open(json_path, encoding="utf-8") as f:
-        data = json.load(f)
-    print(f"JSON'dan {len(data)} mekan okundu")
+    with open(json_path, encoding="utf-8") as handle:
+        data = json.load(handle)
+    if not isinstance(data, list):
+        if not quiet:
+            print("HATA: JSON bir liste olmali")
+        return []
+    if not quiet:
+        print(f"JSON'dan {len(data)} mekan okundu ({json_path})")
     return data
 
 
-def serpapi_to_postgres(db_url: str, dry_run: bool = False):
+def count_db_places(db_url: str) -> Optional[int]:
     try:
         import psycopg2
-        import psycopg2.extras
+    except ImportError:
+        return None
+
+    try:
+        conn = psycopg2.connect(db_url, connect_timeout=10)
+        cur = conn.cursor()
+        cur.execute("SELECT COUNT(*) FROM places;")
+        total = int(cur.fetchone()[0])
+        cur.close()
+        conn.close()
+        return total
+    except Exception as exc:
+        print(f"[PlacesSync] DB sayimi basarisiz: {exc}")
+        return None
+
+
+def maybe_sync_places_on_startup(
+    db_url: Optional[str] = None,
+    json_path: Optional[str] = None,
+    min_ratio: float = 0.95,
+) -> Optional[Dict[str, int]]:
+    """
+    loaded_places.json snapshot'i Postgres'teki mekan sayisindan buyukse upsert calistirir.
+    Render/startup icin guvenli: DB zaten guncelse atlar.
+    """
+    db_url = (db_url or settings.database_url_normalized or "").strip()
+    if not db_url:
+        print("[PlacesSync] DATABASE_URL yok, atlaniyor")
+        return None
+
+    json_path = resolve_json_path(json_path)
+    json_places = load_places_from_json(json_path, quiet=True)
+    if not json_places:
+        print(f"[PlacesSync] JSON bos veya bulunamadi: {json_path}")
+        return None
+
+    db_count = count_db_places(db_url)
+    if db_count is None:
+        return None
+
+    json_count = len(json_places)
+    threshold = max(1, int(json_count * min_ratio))
+    if db_count >= threshold:
+        print(f"[PlacesSync] DB guncel ({db_count}/{json_count}), sync atlandi")
+        return {"inserted": 0, "updated": 0, "skipped": json_count, "failed": 0}
+
+    print(f"[PlacesSync] DB geride ({db_count}/{json_count}), upsert basliyor...")
+    return serpapi_to_postgres(db_url, json_path=json_path, dry_run=False)
+
+
+def _preview_rows(rows: List[dict], limit: int = 5) -> None:
+    print("--- DRY RUN ORNEKLERI ---\n")
+    for row in rows[:limit]:
+        print(f"  Ad       : {row['name']}")
+        print(f"  Kategori : {row['category']}")
+        print(f"  Adres    : {row['address']}")
+        print(f"  Sehir    : {row['city']}")
+        print(f"  Puan     : {row['average_rating']} ({row['user_ratings_total']} yorum)")
+        print(f"  Fiyat    : {'$' * row['price_range']}")
+        print(f"  Saat     : {row['opening_time']} - {row['closing_time']}")
+        print(f"  vector_id: {row['vector_id']}")
+        print()
+
+
+def serpapi_to_postgres(
+    db_url: str,
+    json_path: str = DEFAULT_JSON_PATH,
+    dry_run: bool = False,
+) -> Dict[str, int]:
+    try:
+        import psycopg2
     except ImportError:
         print("HATA: pip install psycopg2-binary")
         sys.exit(1)
 
-    # ── Veri yukle ──
-    mekanlar = load_places_from_json(JSON_PATH)
-    if not mekanlar:
+    raw_places = load_places_from_json(json_path)
+    if not raw_places:
         sys.exit(1)
 
-    print(f"\n{'='*65}")
-    print("  SERPAPI → POSTGRESQL AKTARIM")
-    print(f"{'='*65}")
-    print(f"  Toplam mekan  : {len(mekanlar)}")
+    rows: List[dict] = []
+    skipped_invalid = 0
+    for raw in raw_places:
+        row = place_to_postgres_row(raw)
+        if row:
+            rows.append(row)
+        else:
+            skipped_invalid += 1
+
+    print(f"\n{'=' * 65}")
+    print("  SERPAPI -> POSTGRESQL AKTARIM")
+    print(f"{'=' * 65}")
+    print(f"  Gecerli kayit : {len(rows)}")
+    print(f"  Gecersiz/atla : {skipped_invalid}")
     print(f"  Veritabani    : {db_url.split('@')[-1]}")
-    print(f"  Mod           : {'DRY-RUN (ekleme yapilmaz)' if dry_run else 'CANLI'}")
-    print(f"{'='*65}\n")
+    print(f"  Mod           : {'DRY-RUN' if dry_run else 'CANLI UPSERT'}")
+    print(f"{'=' * 65}\n")
 
     if dry_run:
-        print("--- DRY RUN ORNEKLERI (ilk 5 mekan) ---\n")
-        for m in mekanlar[:5]:
-            city = parse_city(m.get("adres", ""))
-            price = get_price_range(m.get("kategori", ""), m.get("puan", 0))
-            feats = get_features(m)
-            open_t, close_t = make_opening_hours(m.get("kategori", ""))
-            print(f"  Ad       : {m.get('ad')}")
-            print(f"  Kategori : {m.get('kategori')}")
-            print(f"  Adres    : {m.get('adres')}")
-            print(f"  Sehir    : {city}")
-            print(f"  Puan     : {m.get('puan')}  |  Fiyat: {'$'*price}")
-            print(f"  Features : {feats}")
-            print(f"  Saat     : {open_t} - {close_t}")
-            print()
-        return
+        _preview_rows(rows)
+        return {"inserted": 0, "updated": 0, "skipped": skipped_invalid, "failed": 0}
 
-    # ── DB baglantisi ──
+    stats = {"inserted": 0, "updated": 0, "skipped": skipped_invalid, "failed": 0}
+
     try:
-        conn = psycopg2.connect(db_url, connect_timeout=5)
+        conn = psycopg2.connect(db_url, connect_timeout=10)
         conn.autocommit = False
         cur = conn.cursor()
         print("PostgreSQL baglantisi OK\n")
-    except Exception as e:
-        print(f"HATA: PostgreSQL baglanamadi: {e}")
+    except Exception as exc:
+        print(f"HATA: PostgreSQL baglanamadi: {exc}")
         sys.exit(1)
 
-    # ── Mevcut mekan adlarini cek (duplicate atlama icin) ──
-    cur.execute("SELECT LOWER(name) FROM places;")
-    existing_names = {row[0] for row in cur.fetchall()}
-    print(f"Mevcut kayit sayisi: {len(existing_names)}")
+    cur.execute("SELECT vector_id, LOWER(name) FROM places WHERE vector_id IS NOT NULL;")
+    existing_vector_ids: Set[str] = set()
+    existing_names: Set[str] = set()
+    for vector_id, name in cur.fetchall():
+        if vector_id:
+            existing_vector_ids.add(str(vector_id))
+        if name:
+            existing_names.add(name)
 
-    # ── Mekanlari donustur ve ekle ──
-    eklenen = 0
-    atlanan = 0
-    hatali  = 0
+    print(f"Mevcut kayit (vector_id'li): {len(existing_vector_ids)}")
 
-    SQL = """
+    upsert_sql = """
         INSERT INTO places (
             name, description, category, address, city,
-            latitude, longitude, average_rating,
+            latitude, longitude, average_rating, user_ratings_total,
             features, photo_url, price_range,
-            opening_time, closing_time, vector_id
+            opening_time, closing_time, opening_hours_json,
+            vector_id, google_place_id
         ) VALUES (
-            %s, %s, %s, %s, %s,
-            %s, %s, %s,
-            %s, %s, %s,
-            %s, %s, %s
+            %(name)s, %(description)s, %(category)s, %(address)s, %(city)s,
+            %(latitude)s, %(longitude)s, %(average_rating)s, %(user_ratings_total)s,
+            %(features)s, %(photo_url)s, %(price_range)s,
+            %(opening_time)s, %(closing_time)s, %(opening_hours_json)s,
+            %(vector_id)s, %(google_place_id)s
         )
-        ON CONFLICT DO NOTHING
+        ON CONFLICT (vector_id) DO UPDATE SET
+            name = EXCLUDED.name,
+            description = EXCLUDED.description,
+            category = EXCLUDED.category,
+            address = EXCLUDED.address,
+            city = EXCLUDED.city,
+            latitude = EXCLUDED.latitude,
+            longitude = EXCLUDED.longitude,
+            average_rating = EXCLUDED.average_rating,
+            user_ratings_total = EXCLUDED.user_ratings_total,
+            features = EXCLUDED.features,
+            photo_url = EXCLUDED.photo_url,
+            price_range = EXCLUDED.price_range,
+            opening_time = EXCLUDED.opening_time,
+            closing_time = EXCLUDED.closing_time,
+            opening_hours_json = EXCLUDED.opening_hours_json,
+            google_place_id = EXCLUDED.google_place_id
         RETURNING id;
     """
 
-    for m in mekanlar:
-        ad = (m.get("ad") or "").strip()
-        if not ad:
-            atlanan += 1
-            continue
+    insert_sql = """
+        INSERT INTO places (
+            name, description, category, address, city,
+            latitude, longitude, average_rating, user_ratings_total,
+            features, photo_url, price_range,
+            opening_time, closing_time, opening_hours_json,
+            vector_id, google_place_id
+        ) VALUES (
+            %(name)s, %(description)s, %(category)s, %(address)s, %(city)s,
+            %(latitude)s, %(longitude)s, %(average_rating)s, %(user_ratings_total)s,
+            %(features)s, %(photo_url)s, %(price_range)s,
+            %(opening_time)s, %(closing_time)s, %(opening_hours_json)s,
+            NULL, NULL
+        )
+        RETURNING id;
+    """
 
-        # Zaten var mi?
-        if ad.lower() in existing_names:
-            print(f"  [ATLA] Zaten var: {ad}")
-            atlanan += 1
-            continue
-
-        # Donustur
-        category     = m.get("kategori") or "Diger"
-        description  = (m.get("aciklama") or "").strip()
-        address      = (m.get("adres") or "").strip()
-        city         = parse_city(address)
-        lat          = m.get("enlem") or 0.0
-        lng          = m.get("boylam") or 0.0
-        avg_rating   = m.get("puan") or 0.0
-        photo_url    = m.get("foto") or None
-        vector_id    = str(m.get("data_id") or m.get("id") or "")
-        price_range  = get_price_range(category, avg_rating)
-        features     = json.dumps(get_features(m), ensure_ascii=False)
-        opening_time, closing_time = make_opening_hours(category)
+    for row in rows:
+        name_key = row["name"].lower()
+        vector_id = row.get("vector_id")
 
         try:
-            cur.execute(SQL, (
-                ad, description, category, address, city,
-                lat, lng, avg_rating,
-                features, photo_url, price_range,
-                opening_time, closing_time, vector_id
-            ))
+            cur.execute("SAVEPOINT place_sync_row")
+            if vector_id:
+                was_existing = vector_id in existing_vector_ids
+                cur.execute(upsert_sql, row)
+                result = cur.fetchone()
+                if result:
+                    if was_existing:
+                        stats["updated"] += 1
+                        print(f"  [~] id={result[0]:5d} | {row['name'][:45]:<45}")
+                    else:
+                        stats["inserted"] += 1
+                        print(f"  [+] id={result[0]:5d} | {row['name'][:45]:<45}")
+                    existing_vector_ids.add(vector_id)
+                    existing_names.add(name_key)
+                cur.execute("RELEASE SAVEPOINT place_sync_row")
+                continue
+
+            if name_key in existing_names:
+                stats["skipped"] += 1
+                cur.execute("RELEASE SAVEPOINT place_sync_row")
+                continue
+
+            cur.execute(insert_sql, row)
             result = cur.fetchone()
             if result:
-                new_id = result[0]
-                existing_names.add(ad.lower())
-                eklenen += 1
-                print(f"  [+] id={new_id:5d} | {ad[:45]:<45} | {category[:20]:<20} | {city}")
-            else:
-                atlanan += 1
-        except Exception as e:
-            print(f"  [!] HATA ({ad}): {e}")
-            hatali += 1
-            conn.rollback()
+                stats["inserted"] += 1
+                existing_names.add(name_key)
+                print(f"  [+] id={result[0]:5d} | {row['name'][:45]:<45} (vector_id yok)")
+            cur.execute("RELEASE SAVEPOINT place_sync_row")
+        except Exception as exc:
+            cur.execute("ROLLBACK TO SAVEPOINT place_sync_row")
+            stats["failed"] += 1
+            print(f"  [!] HATA ({row['name']}): {exc}")
 
-    # ── Kaydet ──
     try:
         conn.commit()
-        print(f"\n{'='*65}")
-        print(f"  TAMAMLANDI")
-        print(f"{'='*65}")
-        print(f"  Eklenen  : {eklenen}")
-        print(f"  Atlanan  : {atlanan} (zaten mevcut veya bos)")
-        print(f"  Hatali   : {hatali}")
-
-        # Son kontrol
         cur.execute("SELECT COUNT(*) FROM places;")
         total = cur.fetchone()[0]
-        print(f"  Toplam   : {total} mekan PostgreSQL'de")
-        print(f"{'='*65}\n")
-    except Exception as e:
-        print(f"Commit hatasi: {e}")
+        print(f"\n{'=' * 65}")
+        print("  TAMAMLANDI")
+        print(f"{'=' * 65}")
+        print(f"  Yeni eklenen : {stats['inserted']}")
+        print(f"  Guncellenen  : {stats['updated']}")
+        print(f"  Atlanan      : {stats['skipped']}")
+        print(f"  Hatali       : {stats['failed']}")
+        print(f"  Toplam DB    : {total}")
+        print(f"{'=' * 65}\n")
+    except Exception as exc:
+        print(f"Commit hatasi: {exc}")
         conn.rollback()
     finally:
         cur.close()
         conn.close()
 
+    return stats
 
-# ── Entry point ───────────────────────────────────────────────────────────────
 
-def main():
+def main() -> None:
     parser = argparse.ArgumentParser(description="SerpAPI mekanlarini PostgreSQL'e aktar")
-    parser.add_argument(
-        "--db",
-        default=settings.DATABASE_URL,
-        help="PostgreSQL baglanti URL (varsayilan: config'den)"
-    )
-    parser.add_argument(
-        "--dry-run",
-        action="store_true",
-        help="Sadece goster, veritabanina yazma"
-    )
+    parser.add_argument("--db", default=settings.database_url_normalized, help="PostgreSQL URL")
+    parser.add_argument("--json", default=DEFAULT_JSON_PATH, help="Kaynak JSON dosyasi")
+    parser.add_argument("--dry-run", action="store_true", help="Sadece onizleme")
     args = parser.parse_args()
-
-    serpapi_to_postgres(args.db, dry_run=args.dry_run)
+    serpapi_to_postgres(args.db, json_path=args.json, dry_run=args.dry_run)
 
 
 if __name__ == "__main__":

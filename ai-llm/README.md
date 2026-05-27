@@ -163,6 +163,8 @@ python collect_400_places.py --target 600
 python scripts/prepare_vector_db.py --json data/loaded_places.json --force
 ```
 
+**Auto Postgres sync:** `collect_400_places.py` upserts to `places` when `DATABASE_URL` is set (use `--no-sync-postgres` to skip); on Render, `PLACES_SYNC_ON_STARTUP=true` re-syncs `loaded_places.json` if the DB count falls below 95% of the JSON snapshot.
+
 ## Demo Assets
 
 Add screenshots or terminal captures under `screenshots/`:
