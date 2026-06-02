@@ -7,6 +7,8 @@ import sys
 import os
 import asyncio
 import httpx
+import json
+import argparse
 
 # Proje root'unu path'e ekle
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
@@ -14,20 +16,49 @@ sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')
 from src.vector_db.qdrant_client import QdrantVectorDB
 from src.models.embeddings.embedding_model import EmbeddingModel
 from src.config import settings
-from src.utils.logging_config import setup_logging
 from qdrant_client.models import PointStruct
 from dotenv import load_dotenv
+import logging
 
 # Logging'i ayarla
-setup_logging("INFO")
-logger = setup_logging()
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 # .env dosyasını yükle
 load_dotenv()
 
 
+def get_mekanlar_from_json(json_path=None):
+    """JSON dosyasından mekanları al"""
+    try:
+        json_path = json_path or os.path.join(os.path.dirname(__file__), '..', 'data', 'loaded_places.json')
+        with open(json_path, 'r', encoding='utf-8') as f:
+            mekanlar = json.load(f)
+        logger.info(f"JSON'dan {len(mekanlar)} mekan alındı")
+
+        # JSON formatını normalize et
+        normalized = []
+        for idx, mekan in enumerate(mekanlar):
+            normalized.append({
+                "id": idx + 1,
+                "ad": mekan.get("name", ""),
+                "kategori": mekan.get("category", ""),
+                "aciklama": mekan.get("description", ""),
+                "adres": mekan.get("address", ""),
+                "enlem": mekan.get("latitude"),
+                "boylam": mekan.get("longitude"),
+                "rating": mekan.get("rating", 0),
+                "review_count": mekan.get("review_count", 0),
+                "user_review": mekan.get("user_review", "")
+            })
+        return normalized
+    except Exception as e:
+        logger.error(f"JSON dosyasından mekan alınamadı: {e}")
+        return []
+
+
 def get_mekanlar_from_backend():
-    """Backend API'den mekanları al"""
+    """Backend API'den mekanları al (fallback)"""
     try:
         with httpx.Client() as client:
             response = client.get(
@@ -58,56 +89,59 @@ def create_embedding_text(mekan: dict) -> str:
     # Açıklama
     if mekan.get("aciklama"):
         parts.append(mekan["aciklama"])
-    
+
+    # Kullanıcı yorumu (önemli!)
+    if mekan.get("user_review"):
+        parts.append(f"Yorum: {mekan['user_review']}")
+
     # Adres
     if mekan.get("adres"):
         parts.append(f"Konum: {mekan['adres']}")
-    
+
     return " ".join(parts)
 
 
-def prepare_and_upload_embeddings():
+def prepare_and_upload_embeddings(json_path=None, limit=None, force_reindex=False):
     """Mekanları embedding'e dönüştür ve Qdrant'a yükle"""
     print("\n" + "="*60)
-    print("Vektör Veritabanı Hazırlama")
+    print("Vektor Veritabani Hazirlama")
     print("="*60 + "\n")
-    
-    # 1. Backend'den mekanları al
-    print("📥 Backend'den mekanlar alınıyor...")
-    mekanlar = get_mekanlar_from_backend()
-    
+
+    # 1. JSON'dan mekanları al (öncelikli)
+    print("[1/5] JSON dosyasindan mekanlar yukleniyor...")
+    mekanlar = get_mekanlar_from_json(json_path=json_path)
+
     if not mekanlar:
-        print("⚠ Backend'den mekan alınamadı. Örnek veri kullanılacak...")
-        # Örnek veri oluştur
-        mekanlar = [
-            {
-                "id": i,
-                "ad": f"Örnek Mekan {i}",
-                "kategori": "Kafe" if i % 2 == 0 else "Restoran",
-                "aciklama": f"Güzel bir mekan {i}",
-                "adres": f"Adres {i}",
-                "enlem": 41.0082 + (i * 0.001),
-                "boylam": 28.9784 + (i * 0.001)
-            }
-            for i in range(1, 6)
-        ]
+        print("UYARI: JSON'dan mekan alinamadi. Backend API deneniyor...")
+        mekanlar = get_mekanlar_from_backend()
+
+    if not mekanlar:
+        print("HATA: Hic mekan bulunamadi. Script durduruluyor...")
+        return
+
+    if limit:
+        mekanlar = mekanlar[:limit]
     
-    print(f"✓ {len(mekanlar)} mekan bulundu\n")
+    print(f"OK: {len(mekanlar)} mekan bulundu\n")
     
     # 2. Embedding modelini yükle
-    print("🤖 Embedding modeli yükleniyor...")
+    print("[2/5] Embedding modeli yukleniyor...")
     embedding_model = EmbeddingModel()
     vector_size = embedding_model.get_vector_size()
-    print(f"✓ Model yüklendi (Vektör boyutu: {vector_size})\n")
+    print(f"OK: Model yuklendi (Vektor boyutu: {vector_size})\n")
     
     # 3. Qdrant'ı hazırla
-    print("🗄️  Qdrant bağlantısı kuruluyor...")
+    print("[3/5] Qdrant baglantisi kuruluyor...")
     vector_db = QdrantVectorDB()
     vector_db.create_collection_if_not_exists(vector_size=vector_size)
-    print("✓ Qdrant hazır\n")
+    current_count = vector_db.count_vectors()
+    if current_count >= len(mekanlar) and not force_reindex:
+        print(f"OK: Qdrant koleksiyonunda zaten {current_count} vektor var; yeniden yukleme atlandi")
+        return
+    print("OK: Qdrant hazir\n")
     
     # 4. Embedding'leri oluştur
-    print("🔄 Embedding'ler oluşturuluyor...")
+    print("[4/5] Embedding'ler olusturuluyor...")
     embedding_texts = []
     mekan_data = []
     
@@ -117,10 +151,10 @@ def prepare_and_upload_embeddings():
         mekan_data.append(mekan)
     
     embeddings = embedding_model.encode(embedding_texts)
-    print(f"✓ {len(embeddings)} embedding oluşturuldu\n")
+    print(f"OK: {len(embeddings)} embedding olusturuldu\n")
     
     # 5. Qdrant'a yükle
-    print("📤 Qdrant'a yükleniyor...")
+    print("[5/5] Qdrant'a yukleniyor...")
     points = []
     for i, (embedding, mekan) in enumerate(zip(embeddings, mekan_data)):
         point = PointStruct(
@@ -134,6 +168,9 @@ def prepare_and_upload_embeddings():
                 "enlem": mekan.get("enlem"),
                 "boylam": mekan.get("boylam"),
                 "adres": mekan.get("adres", ""),
+                "rating": mekan.get("rating", 0),
+                "review_count": mekan.get("review_count", 0),
+                "user_review": mekan.get("user_review", "")
             }
         )
         points.append(point)
@@ -144,21 +181,31 @@ def prepare_and_upload_embeddings():
         batch = points[i:i+batch_size]
         success = vector_db.add_vectors(batch)
         if success:
-            print(f"  ✓ {min(i+batch_size, len(points))}/{len(points)} mekan yüklendi")
+            print(f"  OK: {min(i+batch_size, len(points))}/{len(points)} mekan yuklendi")
         else:
-            print(f"  ✗ Batch yüklenirken hata oluştu")
+            print(f"  HATA: Batch yuklenirken hata olustu")
     
-    print(f"\n✓ Toplam {len(points)} mekan Qdrant'a yüklendi")
+    print(f"\nOK: Toplam {len(points)} mekan Qdrant'a yuklendi")
     print("\n" + "="*60)
-    print("Vektör veritabanı hazırlama tamamlandı! 🎉")
+    print("Vektor veritabani hazirlama tamamlandi! BASARILI!")
     print("="*60 + "\n")
 
 
 if __name__ == "__main__":
     try:
-        prepare_and_upload_embeddings()
+        parser = argparse.ArgumentParser(description="loaded_places.json verisini Qdrant'a indeksle")
+        parser.add_argument("--json", dest="json_path", default=None, help="Mekan JSON dosyası yolu")
+        parser.add_argument("--limit", type=int, default=None, help="Yüklenecek maksimum mekan sayısı")
+        parser.add_argument("--force", action="store_true", help="Mevcut sayı yeterli olsa bile upsert yap")
+        args = parser.parse_args()
+
+        prepare_and_upload_embeddings(
+            json_path=args.json_path,
+            limit=args.limit,
+            force_reindex=args.force
+        )
     except KeyboardInterrupt:
-        print("\n\n⚠ İşlem kullanıcı tarafından durduruldu")
+        print("\n\nUYARI: İşlem kullanıcı tarafından durduruldu")
         sys.exit(1)
     except Exception as e:
         logger.error(f"Hata: {e}")

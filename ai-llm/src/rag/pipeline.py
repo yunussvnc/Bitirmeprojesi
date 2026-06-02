@@ -19,7 +19,8 @@ class RAGPipeline:
         self,
         user_query: str,
         location: Dict[str, float] = None,
-        kullanici_id: int = None
+        kullanici_id: int = None,
+        language: str = "tr"
     ) -> Dict[str, Any]:
         """
         Kullanıcı sorgusunu işle ve öneriler üret
@@ -47,7 +48,8 @@ class RAGPipeline:
         # 2. Generator: LLM ile öneri metni üret
         recommendation = self.generator.generate_recommendation(
             user_query=user_query,
-            retrieved_mekanlar=retrieved_mekanlar
+            retrieved_mekanlar=retrieved_mekanlar,
+            language=language
         )
         
         return recommendation

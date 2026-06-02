@@ -48,6 +48,7 @@ Additional current system facts:
 - `data/loaded_places.json`: loaded venue snapshot for local/vector-based testing
 - `data/google_maps_places.json`: raw place data gathered from external search sources
 - Source fields include venue name, category, address, coordinates, rating, and review count
+- On Render, RAG can auto-index `data/loaded_places.json` into Qdrant. If `QDRANT_URL` is empty, the service uses in-memory Qdrant and rebuilds the index after each restart.
 
 ## Tech Stack
 
@@ -94,6 +95,9 @@ cp env.example .env
 Required runtime values depend on the mode you use:
 
 - `QDRANT_URL`
+- `QDRANT_API_KEY` if using Qdrant Cloud
+- `RAG_AUTO_INDEX=true`
+- `RAG_INDEX_ON_STARTUP=false` for faster cold starts, or `true` to build the vector index during startup
 - `SERPAPI_KEY` for live place search
 - `GROQ_API_KEY` for the cloud LLM layer
 - `GOOGLE_MAPS_API_KEY` only if you use Google Maps based scripts
@@ -134,7 +138,32 @@ python chatbot_interaktif.py
 | `/health` | GET | Health check |
 | `/api/info` | GET | Service stats and configuration info |
 | `/api/smart-search-v2` | POST | Natural-language venue search |
+| `/api/rag-search` | POST | RAG-only semantic venue search from the vector database |
 | `/api/analyze-place-reviews` | POST | Review insight extraction |
+
+## Render RAG Setup
+
+For a persistent production RAG index, create a Qdrant Cloud cluster and set these Render environment variables:
+
+```bash
+QDRANT_URL=https://<cluster-url>
+QDRANT_API_KEY=<qdrant-api-key>
+QDRANT_COLLECTION_NAME=mekan_embeddings
+RAG_AUTO_INDEX=true
+RAG_INDEX_ON_STARTUP=false
+RAG_DATA_PATH=data/loaded_places.json
+```
+
+If `QDRANT_URL` is left empty, `/api/rag-search` still works in demo mode: the service creates an in-memory vector database and loads the JSON snapshot lazily on the first RAG request. This survives within the same process, but Render restarts rebuild it.
+
+To increase the local snapshot deliberately, run it only from a local environment that has `SERPAPI_KEY`:
+
+```bash
+python collect_400_places.py --target 600
+python scripts/prepare_vector_db.py --json data/loaded_places.json --force
+```
+
+**Auto Postgres sync:** `collect_400_places.py` upserts to `places` when `DATABASE_URL` is set (use `--no-sync-postgres` to skip); on Render, `PLACES_SYNC_ON_STARTUP=true` re-syncs `loaded_places.json` if the DB count falls below 95% of the JSON snapshot.
 
 ## Demo Assets
 

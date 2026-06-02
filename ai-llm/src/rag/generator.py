@@ -11,6 +11,16 @@ import logging
 
 logger = logging.getLogger(__name__)
 
+SUPPORTED_LANGUAGES = {
+    "tr": "Turkish",
+    "en": "English",
+    "de": "German",
+    "fr": "French",
+    "es": "Spanish",
+    "ar": "Arabic",
+    "ru": "Russian",
+}
+
 
 class RAGGenerator:
     """RAG sistemi için generator"""
@@ -31,7 +41,8 @@ class RAGGenerator:
     def generate_recommendation(
         self,
         user_query: str,
-        retrieved_mekanlar: List[Dict[str, Any]]
+        retrieved_mekanlar: List[Dict[str, Any]],
+        language: str = "tr"
     ) -> Dict[str, Any]:
         """
         LLM kullanarak kişiselleştirilmiş öneri metni üret
@@ -59,11 +70,14 @@ Lütfen:
 2. Her mekan için neden önerildiğini açıkla (kısa gerekçe)
 3. En uygun 3-5 mekanı öner
 
-Yanıtı Türkçe olarak, samimi ve kullanıcı dostu bir dille ver.
+Yanıtı samimi ve kullanıcı dostu bir dille ver. Respond only in {SUPPORTED_LANGUAGES.get(language, "Turkish")}.
 """
         
-        # LLM'den yanıt al
-        response = self.llm.generate(prompt)
+        # Production RAG smoke testleri LLM secret'ına bağlı kalmamalı.
+        if settings.RAG_USE_LLM_GENERATOR:
+            response = self.llm.generate(prompt)
+        else:
+            response = self._build_deterministic_analysis(user_query, retrieved_mekanlar)
         
         return {
             "sorgu_analizi": self._extract_query_analysis(response),
@@ -86,6 +100,21 @@ Yanıtı Türkçe olarak, samimi ve kullanıcı dostu bir dille ver.
         """LLM yanıtından sorgu analizini çıkar"""
         # Basit bir implementasyon - daha gelişmiş parsing yapılabilir
         return response.split("\n")[0] if response else ""
+
+    def _build_deterministic_analysis(
+        self,
+        user_query: str,
+        retrieved_mekanlar: List[Dict[str, Any]]
+    ) -> str:
+        """LLM olmadan RAG sonucunu anlaşılır kılan kısa analiz üret."""
+        names = [
+            item.get("payload", {}).get("ad")
+            for item in retrieved_mekanlar[:3]
+            if item.get("payload", {}).get("ad")
+        ]
+        if not names:
+            return f'"{user_query}" sorgusu için vektör veritabanında eşleşen mekanlar bulundu.'
+        return f'"{user_query}" sorgusu için en yakın RAG eşleşmeleri: {", ".join(names)}.'
     
     def _format_recommendations(
         self,

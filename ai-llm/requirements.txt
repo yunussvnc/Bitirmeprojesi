@@ -1,15 +1,15 @@
 # FastAPI ve Web Framework
 fastapi==0.104.1
 uvicorn[standard]==0.24.0
-pydantic==2.5.0
-pydantic-settings==2.1.0
+pydantic>=2.12.0
+pydantic-settings>=2.2.0
 
 # Machine Learning ve NLP
-torch==2.1.1
-sentence-transformers==2.2.2
-transformers>=4.35.2
-accelerate>=0.24.0  # HuggingFace model optimizasyonu için
-bitsandbytes>=0.41.0  # Quantization desteği (opsiyonel, GPU için)
+torch==2.12.0
+sentence-transformers>=2.7.0
+transformers>=4.40.0
+accelerate>=0.30.0  # HuggingFace model optimizasyonu için
+bitsandbytes>=0.43.0  # Quantization desteği (opsiyonel, GPU için)
 
 # LangChain (opsiyonel - temel özellikler için)
 langchain>=0.1.0
@@ -28,11 +28,14 @@ google-search-results==2.4.2
 
 # Utilities
 python-dotenv==1.0.0
-numpy==1.26.2
-pandas==2.1.4
+numpy>=1.26.0,<2.0.0
+pandas>=2.1.0
 
 # Cache
 redis==5.0.1
+
+# PostgreSQL (places sync startup)
+psycopg2-binary>=2.9.9
 
 # Fine-tuning
 datasets>=2.14.0  # HuggingFace datasets
