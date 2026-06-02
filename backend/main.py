@@ -160,8 +160,8 @@ async def startup_event():
     try:
         from app.middleware.sentry_middleware import init_sentry
         init_sentry(app)
-    except ModuleNotFoundError:
-        logger.warning("Sentry middleware modulu bulunamadi; Sentry atlandi.")
+    except ImportError as exc:
+        logger.warning("Sentry middleware yuklenemedi (%s); Sentry atlandi.", exc)
 
     # Güvenlik uyarıları
     if settings.JWT_SECRET_KEY == "dev-secret-change-in-production":
