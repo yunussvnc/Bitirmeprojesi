@@ -12,14 +12,14 @@ export interface Conversation {
     timestamp: string;
     unread: boolean;
     isOnline: boolean;
+    targetUserId?: number; // Gerçek kullanıcı profil ID'si
     sharedPlace?: string;
     isMatch?: boolean;
     isRevealed?: boolean;
     revealRequestedByMe?: boolean;
     revealRequestedByThem?: boolean;
     isArchived?: boolean;
-    isDeleted?: boolean;
-    deletedAt?: number;
+    isRequest?: boolean;
     lastMessageAt: number; // Son mesajın gerçek timestamp'i (sıralama için)
 }
 
@@ -28,117 +28,19 @@ const MINUTE = 60 * 1000;
 const HOUR = 60 * MINUTE;
 const DAY = 24 * HOUR;
 
-const INITIAL_CONVERSATIONS: Conversation[] = [
-    {
-        id: "1",
-        name: "Ahmet Yılmaz",
-        username: "ahmetyilmaz",
-        avatar: "https://i.pravatar.cc/150?img=1",
-        lastMessage: "Olur ikisine de bakalım! Haritada kaydediyorum 📌",
-        lastMessageSender: "Ahmet Yılmaz",
-        timestamp: "2dk",
-        unread: true,
-        isOnline: true,
-        sharedPlace: "Sortie - Kuruçeşme",
-        lastMessageAt: now - 2 * MINUTE,
-    },
-    {
-        id: "2",
-        name: "Elif Kaya",
-        username: "elifkaya",
-        avatar: "https://i.pravatar.cc/150?img=5",
-        lastMessage: "Çok güzel görünüyor! Cumartesi akşamı olur mu?",
-        lastMessageSender: "me",
-        timestamp: "15dk",
-        unread: true,
-        isOnline: false,
-        sharedPlace: "Kastel - Beyoğlu",
-        lastMessageAt: now - 15 * MINUTE,
-    },
-    {
-        id: "3",
-        name: "Burak Demir",
-        username: "burakdemir",
-        avatar: "https://i.pravatar.cc/150?img=3",
-        lastMessage: "Olur, Cuma akşamı uyar bana",
-        lastMessageSender: "me",
-        timestamp: "1sa",
-        unread: false,
-        isOnline: true,
-        lastMessageAt: now - 1 * HOUR,
-    },
-    {
-        id: "4",
-        name: "Zeynep Toprak",
-        username: "zeyneptoprak",
-        avatar: "https://i.pravatar.cc/150?img=9",
-        lastMessage: "Ne güzel! Bir sonraki sefere ben de geleyim",
-        lastMessageSender: "Zeynep Toprak",
-        timestamp: "3sa",
-        unread: false,
-        isOnline: false,
-        lastMessageAt: now - 3 * HOUR,
-    },
-    {
-        id: "5",
-        name: "Can Aydın",
-        username: "canaydin",
-        avatar: "https://i.pravatar.cc/150?img=8",
-        lastMessage: "Evet kaydettim, çok iyi görünüyor!",
-        lastMessageSender: "me",
-        timestamp: "5sa",
-        unread: false,
-        isOnline: false,
-        lastMessageAt: now - 5 * HOUR,
-    },
-    {
-        id: "6",
-        name: "Selin Arslan",
-        username: "selinarslan",
-        avatar: "https://i.pravatar.cc/150?img=10",
-        lastMessage: "Süpermiş! Teşekkürler 🙏",
-        lastMessageSender: "me",
-        timestamp: "Dün",
-        unread: false,
-        isOnline: true,
-        sharedPlace: "Oligark - Kuruçeşme",
-        lastMessageAt: now - 1 * DAY,
-    },
-    {
-        id: "7",
-        name: "Mert Özkan",
-        username: "mertozkan",
-        avatar: "https://i.pravatar.cc/150?img=11",
-        lastMessage: "Vay be, detay ver! 🍽️",
-        lastMessageSender: "me",
-        timestamp: "Dün",
-        unread: false,
-        isOnline: false,
-        lastMessageAt: now - 1.5 * DAY,
-    },
-    {
-        id: "8",
-        name: "Deniz Güneş",
-        username: "denizgunes",
-        avatar: "https://i.pravatar.cc/150?img=12",
-        lastMessage: "Teşekkürler! Hemen kaydediyorum",
-        lastMessageSender: "me",
-        timestamp: "2g",
-        unread: false,
-        isOnline: false,
-        sharedPlace: "Fakülte Teras - Beyoğlu",
-        lastMessageAt: now - 2 * DAY,
-    },
-];
+const INITIAL_CONVERSATIONS: Conversation[] = [];
 
 type MessagesState = {
     conversations: Conversation[];
+    activeConversationId: string | null;
+
+    setActiveConversation: (id: string | null) => void;
 
     archiveConversation: (id: string) => void;
     unarchiveConversation: (id: string) => void;
     deleteConversation: (id: string) => void;
     markAsRead: (id: string) => void;
-    updateLastMessageAt: (id: string, message: string, timestamp: string, sender?: "me" | string) => void;
+    updateLastMessageAt: (id: string, message: string, timestamp: string, sender?: "me" | string, isUnread?: boolean) => void;
     toggleRevealRequest: (id: string) => void;
     mockOtherPersonReveal: (id: string) => void;
 
@@ -147,18 +49,18 @@ type MessagesState = {
     deleteMultiple: (ids: string[]) => void;
 
     addConversation: (conversation: Conversation) => void;
+    updateConversationMeta: (id: string, meta: Partial<Pick<Conversation, 'avatar' | 'name' | 'isRevealed' | 'isMatch' | 'revealRequestedByMe' | 'revealRequestedByThem' | 'targetUserId'>>) => void;
 
-    restoreDeleted: (id: string) => void;
-    restoreDeletedMultiple: (ids: string[]) => void;
-    permanentlyDelete: (id: string) => void;
-    permanentlyDeleteMultiple: (ids: string[]) => void;
-    purgeExpiredMessages: () => void;
+    clearStore: () => void;
 };
 
 export const useMessagesStore = create<MessagesState>()(
     persist(
         (set) => ({
             conversations: INITIAL_CONVERSATIONS,
+            activeConversationId: null,
+
+            setActiveConversation: (id) => set({ activeConversationId: id }),
 
             archiveConversation: (id) => set((state) => ({
                 conversations: state.conversations.map(c =>
@@ -173,9 +75,7 @@ export const useMessagesStore = create<MessagesState>()(
             })),
 
             deleteConversation: (id) => set((state) => ({
-                conversations: state.conversations.map(c =>
-                    c.id === id ? { ...c, isDeleted: true, deletedAt: Date.now() } : c
-                )
+                conversations: state.conversations.filter(c => c.id !== id)
             })),
 
             markAsRead: (id) => set((state) => ({
@@ -184,10 +84,20 @@ export const useMessagesStore = create<MessagesState>()(
                 )
             })),
 
-            updateLastMessageAt: (id, message, timestamp, sender) => set((state) => ({
-                conversations: state.conversations.map(c =>
-                    c.id === id ? { ...c, lastMessage: message, timestamp, lastMessageAt: Date.now(), ...(sender !== undefined ? { lastMessageSender: sender } : {}) } : c
-                )
+            updateLastMessageAt: (id, message, timestamp, sender, isUnread) => set((state) => ({
+                conversations: state.conversations.map(c => {
+                    if (c.id === id) {
+                        return { 
+                            ...c, 
+                            lastMessage: message, 
+                            timestamp, 
+                            lastMessageAt: Date.now(), 
+                            ...(sender !== undefined ? { lastMessageSender: sender } : {}),
+                            ...(isUnread !== undefined ? { unread: isUnread } : {})
+                        };
+                    }
+                    return c;
+                })
             })),
 
             toggleRevealRequest: (id) => set((state) => ({
@@ -234,9 +144,7 @@ export const useMessagesStore = create<MessagesState>()(
             })),
 
             deleteMultiple: (ids) => set((state) => ({
-                conversations: state.conversations.map(c =>
-                    ids.includes(c.id) ? { ...c, isDeleted: true, deletedAt: Date.now() } : c
-                )
+                conversations: state.conversations.filter(c => !ids.includes(c.id))
             })),
 
             addConversation: (conv) => set((state) => {
@@ -247,38 +155,13 @@ export const useMessagesStore = create<MessagesState>()(
                 return { conversations: [conv, ...state.conversations] };
             }),
 
-            restoreDeleted: (id) => set((state) => ({
+            updateConversationMeta: (id, meta) => set((state) => ({
                 conversations: state.conversations.map(c =>
-                    c.id === id ? { ...c, isDeleted: false, deletedAt: undefined } : c
+                    c.id === id ? { ...c, ...meta } : c
                 )
             })),
 
-            restoreDeletedMultiple: (ids) => set((state) => ({
-                conversations: state.conversations.map(c =>
-                    ids.includes(c.id) ? { ...c, isDeleted: false, deletedAt: undefined } : c
-                )
-            })),
-
-            permanentlyDelete: (id) => set((state) => ({
-                conversations: state.conversations.filter(c => c.id !== id)
-            })),
-
-            permanentlyDeleteMultiple: (ids) => set((state) => ({
-                conversations: state.conversations.filter(c => !ids.includes(c.id))
-            })),
-
-            purgeExpiredMessages: () => set((state) => {
-                const now = Date.now();
-                const TWO_DAYS = 2 * 24 * 60 * 60 * 1000;
-                return {
-                    conversations: state.conversations.filter(c => {
-                        if (c.isDeleted && c.deletedAt) {
-                            return (now - c.deletedAt) <= TWO_DAYS;
-                        }
-                        return true;
-                    })
-                };
-            })
+            clearStore: () => set({ conversations: INITIAL_CONVERSATIONS, activeConversationId: null })
         }),
         {
             name: "messages-store-v2",

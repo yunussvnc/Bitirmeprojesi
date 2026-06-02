@@ -6,16 +6,15 @@
  */
 
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Modal, Pressable, Dimensions } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Modal, Pressable } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { LinearGradient } from "expo-linear-gradient";
 import { useTheme } from "@/src/hooks/useTheme";
 import { IconSymbol, type IconSymbolName } from "@/src/components/ui/icon-symbol";
 import { lightImpact, mediumImpact } from "@/src/utils/haptics";
 import { spacing } from "@/src/constants/design";
 import { useTranslation } from "react-i18next";
 
-export type CreateType = "post" | "story" | "reels";
+export type CreateType = "post" | "story";
 
 export interface CreateTypeSheetProps {
   visible: boolean;
@@ -32,28 +31,18 @@ export function CreateTypeSheet({ visible, onClose, onSelect }: CreateTypeSheetP
     label: string;
     subtitle: string;
     icon: IconSymbolName;
-    gradient: [string, string];
   }[] = [
     {
       type: "post",
       label: t("create_sheet.post_label"),
       subtitle: t("create_sheet.post_sub"),
       icon: "photo",
-      gradient: ["#667eea", "#764ba2"],
     },
     {
       type: "story",
       label: t("create_sheet.story_label"),
       subtitle: t("create_sheet.story_sub"),
       icon: "circle.hexagongrid.fill",
-      gradient: ["#f093fb", "#f5576c"],
-    },
-    {
-      type: "reels",
-      label: t("create_sheet.reels_label"),
-      subtitle: t("create_sheet.reels_sub"),
-      icon: "play.circle.fill",
-      gradient: ["#4facfe", "#00f2fe"],
     },
   ];
 
@@ -98,15 +87,10 @@ export function CreateTypeSheet({ visible, onClose, onSelect }: CreateTypeSheetP
                 onPress={() => handleSelect(opt.type)}
                 activeOpacity={0.7}
               >
-                {/* Gradient Icon */}
-                <LinearGradient
-                  colors={opt.gradient}
-                  start={{ x: 0, y: 0 }}
-                  end={{ x: 1, y: 1 }}
-                  style={styles.optionIconGradient}
-                >
-                  <IconSymbol name={opt.icon} size={26} color="#fff" />
-                </LinearGradient>
+                {/* Tinted Icon Container */}
+                <View style={[styles.optionIconContainer, { backgroundColor: colors.accent.primary + '15' }]}>
+                  <IconSymbol name={opt.icon} size={28} color={colors.accent.primary} />
+                </View>
 
                 <Text style={[styles.optionLabel, { color: colors.text.primary }]}>{opt.label}</Text>
                 <Text style={[styles.optionSub, { color: colors.text.tertiary }]}>{opt.subtitle}</Text>
@@ -170,18 +154,13 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     gap: 2,
   },
-  optionIconGradient: {
-    width: 54,
-    height: 54,
-    borderRadius: 18,
+  optionIconContainer: {
+    width: 56,
+    height: 56,
+    borderRadius: 28,
     alignItems: "center",
     justifyContent: "center",
-    marginBottom: 10,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.25,
-    shadowRadius: 8,
-    elevation: 6,
+    marginBottom: 12,
   },
   optionLabel: {
     fontSize: 15,

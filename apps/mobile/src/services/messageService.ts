@@ -19,10 +19,13 @@ export interface BackendMessage {
     conversation_id: number;
     sender_id: number;
     content: string;
-    message_type: string; // "text" | "image" | "shared_post"
+    message_type: string; // "text" | "image" | "shared_post" | "story_reply"
     media_url?: string | null;
     shared_post_id?: number | null;
+    parent_story_id?: number | null;
+    story_snapshot_url?: string | null;
     is_read: boolean;
+    status?: string;
     created_at: string;
     sender_name?: string | null;
 }
@@ -39,6 +42,8 @@ export interface SendMessagePayload {
     message_type?: string;
     media_url?: string;
     shared_post_id?: number;
+    parent_story_id?: number;
+    story_snapshot_url?: string;
 }
 
 // --- API Functions ---
@@ -123,5 +128,65 @@ export async function getUnreadCount(
     } catch (error) {
         logger.error("[messageService] getUnreadCount error:", error);
         throw error;
+    }
+}
+
+export interface OpenConversationResponse {
+    conversation_id: number;
+    user_id: number;
+    username: string;
+    name: string;
+    avatar_url?: string | null;
+}
+
+/**
+ * Belirtilen kullanıcıyla DM konuşması aç (veya mevcut olanı getir).
+ * Profil ekranındaki "Mesaj" butonu ve boş DM ekranındaki "Start Chat" için kullanılır.
+ */
+export async function openConversation(userId: number): Promise<OpenConversationResponse> {
+    try {
+        return await apiPost<OpenConversationResponse>(
+            "/messages/conversation/open",
+            { user_id: userId }
+        );
+    } catch (error) {
+        logger.error("[messageService] openConversation error:", error);
+        throw error;
+    }
+}
+
+// --- Mesajlaşma Gizlilik Izni ---
+
+export interface ConversationPermission {
+    can_send: boolean;
+    can_send_media: boolean;
+    hide_read_receipt: boolean;
+    reason?: string;
+    messages_sent_count: number;
+    awaiting_reply: boolean;
+}
+
+/**
+ * Mevcut kullanıcının bu konuşmada mesajlaşma izinlerini sorgula.
+ * ChatScreen konuşma açılırken bunu çağırarak UI'ı kilitleme/açma için kullanır.
+ */
+export async function getConversationPermission(
+    conversationId: number
+): Promise<ConversationPermission> {
+    try {
+        return await apiGet<ConversationPermission>(
+            `/messages/${conversationId}/permission`
+        );
+    } catch (error) {
+        logger.error("[messageService] getConversationPermission error:", error);
+        // Hata durumunda güvenli fallback: her şeyi kilitle
+        return {
+            can_send: false,
+            can_send_media: false,
+            hide_read_receipt: true,
+            reason: "fetch_error",
+            messages_sent_count: 0,
+            awaiting_reply: false,
+        };
     }
 }

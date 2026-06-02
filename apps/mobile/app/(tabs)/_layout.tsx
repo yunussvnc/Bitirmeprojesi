@@ -14,6 +14,9 @@ import { AnimatedTabBar } from "@/src/components/layout/AnimatedTabBar";
 import { TabBarVisibilityProvider } from "@/src/components/layout/TabBarVisibilityContext";
 import { useTranslation } from "react-i18next";
 
+import { useMessagesStore } from "@/src/store/useMessagesStore";
+import { useRegisterPushToken } from "@/src/hooks/useRegisterPushToken";
+
 function TabIcon({ name, color }: { name: IconSymbolName; focused: boolean; color: string }) {
   return (
     <IconSymbol
@@ -27,6 +30,13 @@ function TabIcon({ name, color }: { name: IconSymbolName; focused: boolean; colo
 export default function TabsLayout() {
   const { colors } = useTheme();
   const { t } = useTranslation();
+
+  const unreadMessagesCount = useMessagesStore((state) => 
+    state.conversations.filter(c => c.unread && !c.isArchived && !c.isDeleted).length
+  );
+
+  // Kullanıcı giriş yaptığında Expo Push Token'ı backend'e kaydet
+  useRegisterPushToken();
 
   return (
     <TabBarVisibilityProvider>
@@ -84,6 +94,12 @@ export default function TabsLayout() {
           options={{
             title: t('tabs.messages'),
             tabBarIcon: ({ color, focused }) => <TabIcon name="paperplane" focused={focused} color={color} />,
+            tabBarBadge: unreadMessagesCount > 0 ? unreadMessagesCount : undefined,
+            tabBarBadgeStyle: {
+              backgroundColor: colors.semantic?.success || '#34C759',
+              color: '#FFF',
+              fontSize: 10,
+            },
             // @ts-expect-error - listeners works at runtime, expo-router types are incomplete
             listeners: () => ({ tabPress: () => selection() }),
           }}
@@ -99,12 +115,6 @@ export default function TabsLayout() {
         />
         <Tabs.Screen
           name="matching"
-          options={{
-            href: null,
-          }}
-        />
-        <Tabs.Screen
-          name="ai"
           options={{
             href: null,
           }}
