@@ -19,7 +19,6 @@ import {
   TouchableOpacity,
   Animated,
   Dimensions,
-  Image,
   Alert,
   Keyboard,
   TouchableWithoutFeedback,
@@ -32,8 +31,8 @@ import { IconSymbol } from '@/src/components/ui/icon-symbol';
 import { handleApiError } from '@/src/utils/errorHandler';
 import { useTranslation } from 'react-i18next';
 import { lightImpact, success } from '@/src/utils/haptics';
-import { getAllPlaces } from '@/src/services/mekanService';
 import { loginUser, googleLogin, appleLogin } from '@/src/services/authService';
+import { AuthBackgroundCarousel } from '@/src/components/domain/auth/AuthBackgroundCarousel';
 import { useAuthStore } from '@/src/store/useAuthStore';
 import { API_BASE_URL } from '@/src/constants/api';
 import * as AppleAuthentication from 'expo-apple-authentication';
@@ -44,18 +43,6 @@ import { googleAuthRequestConfig, hasGoogleClientIdForPlatform } from '@/src/con
 WebBrowser.maybeCompleteAuthSession();
 
 const { width, height } = Dimensions.get('window');
-
-// API yoksa veya fotoğraf yoksa kullanılacak aydınlık ve kaliteli mekan görselleri
-const FALLBACK_PLACE_IMAGES = [
-  'https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=1200',
-  'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=1200', // Aydınlık kahveci
-  'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1200', // Aydınlık bir kafe içi
-  'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200',
-  'https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=1200',
-  'https://images.unsplash.com/photo-1521017430209-a6cb9156a64b?w=1200', // Işıklı iç mekan
-];
-
-const CAROUSEL_INTERVAL_MS = 4500;
 
 export default function LoginScreen() {
   const insets = useSafeAreaInsets();
@@ -273,18 +260,9 @@ export default function LoginScreen() {
     setErrors((prev) => (prev[field] ? { ...prev, [field]: undefined } : prev));
   }, []);
 
-  const currentImage = FALLBACK_PLACE_IMAGES[0];
-
   return (
     <View style={styles.container}>
-      {/* Sabit Arka plan görseli */}
-      <View style={StyleSheet.absoluteFill}>
-        <Image
-          source={{ uri: currentImage }}
-          style={styles.backgroundImage}
-          resizeMode="cover"
-        />
-      </View>
+      <AuthBackgroundCarousel />
 
       {/* Koyu gradient overlay – metin ve form okunabilir olsun */}
       <LinearGradient
@@ -534,7 +512,7 @@ const styles = StyleSheet.create({
   card: {
     width: '100%',
     borderRadius: 28,
-    overflow: 'hidden',
+    overflow: 'visible',
     marginTop: 20,
     marginBottom: 12,
     borderWidth: 1,

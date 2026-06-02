@@ -17,16 +17,6 @@ interface ArchiveStory {
     durationStr: string;
 }
 
-// Dummy data for edit highlight UI
-const DUMMY_ARCHIVE: ArchiveStory[] = [
-    { id: "1", image: "https://picsum.photos/400/600?random=1", durationStr: "0:15" },
-    { id: "2", image: "https://picsum.photos/400/600?random=2", durationStr: "0:05" },
-    { id: "3", image: "https://picsum.photos/400/600?random=3", durationStr: "0:12" },
-    { id: "4", image: "https://picsum.photos/400/600?random=4", durationStr: "0:10" },
-    { id: "5", image: "https://picsum.photos/400/600?random=5", durationStr: "0:08" },
-    { id: "6", image: "https://picsum.photos/400/600?random=6", durationStr: "0:15" },
-];
-
 export default function EditHighlightRoute() {
     const { colors } = useTheme();
     const insets = useSafeAreaInsets();
@@ -35,7 +25,7 @@ export default function EditHighlightRoute() {
     const cellSize = (width - GRID_GAP * (GRID_COLS - 1)) / GRID_COLS;
 
     // Start with all selected for the "Seçilenler" tab
-    const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set(["1", "2", "3", "4", "5", "6"]));
+    const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
     const [highlightName, setHighlightName] = useState(".");
     const [activeTab, setActiveTab] = useState<"selected" | "stories">("selected");
 
@@ -97,9 +87,7 @@ export default function EditHighlightRoute() {
         );
     };
 
-    const dataToRender = activeTab === "selected"
-        ? DUMMY_ARCHIVE // Display all in dummy so user can see toggle effect on "Seçilenler"
-        : DUMMY_ARCHIVE; // Typically "Stories" tab displays the entire archive regardless of selection
+    const dataToRender: ArchiveStory[] = [];
 
     return (
         <View style={[styles.container, { backgroundColor: '#000' }]}>

@@ -18,19 +18,6 @@ interface ArchiveStory {
     durationStr: string;
 }
 
-// Dummy data for archive UI match
-const DUMMY_ARCHIVE: ArchiveStory[] = [
-    { id: "1", image: "https://picsum.photos/400/600?random=1", dateStr: "2\nAra", durationStr: "0:20" },
-    { id: "2", image: "https://picsum.photos/400/600?random=2", dateStr: "11\nAra", durationStr: "0:13" },
-    { id: "3", image: "https://picsum.photos/400/600?random=3", dateStr: "31\nAra", durationStr: "0:15" },
-    { id: "4", image: "https://picsum.photos/400/600?random=4", dateStr: "12\nOca", durationStr: "0:20" },
-    { id: "5", image: "https://picsum.photos/400/600?random=5", dateStr: "4\nOca", durationStr: "0:20" },
-    { id: "6", image: "https://picsum.photos/400/600?random=6", dateStr: "15\nOca", durationStr: "0:05" },
-    { id: "7", image: "https://picsum.photos/400/600?random=7", dateStr: "16\nOca", durationStr: "0:20" },
-    { id: "8", image: "https://picsum.photos/400/600?random=8", dateStr: "25\nOca", durationStr: "0:17" },
-    { id: "9", image: "https://picsum.photos/400/600?random=9", dateStr: "21\nŞub", durationStr: "1:00" },
-];
-
 export default function CreateHighlightRoute() {
     const { colors, isDark } = useTheme();
     const insets = useSafeAreaInsets();
@@ -137,12 +124,20 @@ export default function CreateHighlightRoute() {
             </View>
 
             <FlatList
-                data={DUMMY_ARCHIVE}
+                data={[] as ArchiveStory[]}
                 keyExtractor={(item) => item.id}
                 numColumns={GRID_COLS}
                 renderItem={renderItem}
-                contentContainerStyle={{ paddingBottom: insets.bottom + 20 }}
+                contentContainerStyle={{ flexGrow: 1, paddingBottom: insets.bottom + 20 }}
                 showsVerticalScrollIndicator={false}
+                ListEmptyComponent={
+                    <View style={styles.emptyWrap}>
+                        <Text style={[styles.emptyTitle, { color: '#fff' }]}>Arşivde hikaye yok</Text>
+                        <Text style={[styles.emptyDesc, { color: colors.text.tertiary }]}>
+                            Öne çıkan oluşturmak için süresi dolmuş hikayeleriniz burada listelenir.
+                        </Text>
+                    </View>
+                }
             />
         </View>
     );
@@ -241,5 +236,23 @@ const styles = StyleSheet.create({
     selectedOverlay: {
         backgroundColor: 'rgba(255,255,255,0.2)', // Light white overlay when selected
         zIndex: -1, // Make sure it's below text
-    }
+    },
+    emptyWrap: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center',
+        paddingHorizontal: 32,
+        paddingTop: 80,
+    },
+    emptyTitle: {
+        fontSize: 18,
+        fontWeight: '700',
+        marginBottom: 8,
+        textAlign: 'center',
+    },
+    emptyDesc: {
+        fontSize: 14,
+        lineHeight: 20,
+        textAlign: 'center',
+    },
 });

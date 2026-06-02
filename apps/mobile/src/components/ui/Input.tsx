@@ -45,6 +45,11 @@ export interface InputProps extends Omit<TextInputProps, 'style'> {
    * Error message (shown below input)
    */
   error?: string;
+
+  /**
+   * Helper text below the field (e.g. password requirements)
+   */
+  helperText?: string;
   
   /**
    * Left icon name (for search variant)
@@ -107,6 +112,7 @@ export function Input({
   variant = 'default',
   label,
   error,
+  helperText,
   leftIcon,
   rightIcon,
   onRightIconPress,
@@ -185,15 +191,30 @@ export function Input({
             onPress={onRightIconPress}
             style={styles.rightIcon}
             accessibilityRole="button"
+            hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
           >
             <IconSymbol
               name={rightIcon}
-              size={20}
+              size={22}
               color={iconColor}
             />
           </TouchableOpacity>
         )}
       </View>
+
+      {helperText && !error && (
+        <Text
+          style={[
+            styles.helperText,
+            {
+              color: isOnDark ? 'rgba(255,255,255,0.65)' : colors.text.tertiary,
+              fontSize: typography.scale.caption.fontSize,
+            },
+          ]}
+        >
+          {helperText}
+        </Text>
+      )}
 
       {error && (
         <Text
@@ -228,12 +249,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 12,
     borderWidth: 1,
-    minHeight: 48,
-    maxHeight: 52,
+    minHeight: 52,
+    overflow: 'visible',
   },
   searchContainer: {
     minHeight: 48,
-    maxHeight: 52,
     height: 50,
   },
   input: {
@@ -244,8 +264,15 @@ const styles = StyleSheet.create({
     marginRight: 10, // Tighter spacing
   },
   rightIcon: {
-    marginLeft: 10, // Tighter spacing
-    padding: 4,
+    marginLeft: 8,
+    minWidth: 40,
+    minHeight: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  helperText: {
+    marginTop: 6,
+    lineHeight: 18,
   },
   error: {
     marginTop: 4,
