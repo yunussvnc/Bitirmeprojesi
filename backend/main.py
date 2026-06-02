@@ -157,8 +157,11 @@ async def startup_event():
     logger.info("🔒 Rate Limiting: aktif")
 
     # Sentry başlat (DSN yoksa sessizce devre dışı kalır)
-    from app.middleware.sentry_middleware import init_sentry
-    init_sentry(app)
+    try:
+        from app.middleware.sentry_middleware import init_sentry
+        init_sentry(app)
+    except ModuleNotFoundError:
+        logger.warning("Sentry middleware modulu bulunamadi; Sentry atlandi.")
 
     # Güvenlik uyarıları
     if settings.JWT_SECRET_KEY == "dev-secret-change-in-production":
