@@ -176,6 +176,7 @@
     "retry": "Tekrar Dene",
     "close": "Kapat",
     "done": "Bitti",
+    "next": "İleri",
     "clear": "Temizle",
     "restore": "Geri Al",
     "select_all": "Tümünü Seç",
@@ -1158,7 +1159,8 @@
     "kvkk_desc": "6698 sayılı Kişisel Verilerin Korunması Kanunu kapsamında, kişisel verileriniz veri sorumlusu sıfatıyla Asemos tarafından aşağıda açıklanan amaçlar doğrultusunda işlenmektedir.\n\n• Hesap oluşturma ve kimlik doğrulama\n• Hizmet sunumu ve iyileştirme\n• Güvenlik ve dolandırıcılık önleme\n• Yasal yükümlülüklerin yerine getirilmesi\n\nKVKK kapsamında aydınlatma yükümlülüğümüz gereğince kişisel verilerinizin işlenme amaçları, aktarım yapılan taraflar ve haklarınız hakkında detaylı bilgi almak için Gizlilik Politikamızı okuyabilirsiniz.",
     "download_data_hint": "Hesabınıza ait tüm verilerin bir kopyasını talep edebilirsiniz.",
     "delete_data": "Veri Silme Talebi",
-    "delete_data_hint": "Hesabınızı ve tüm verilerinizi kalıcı olarak silmek için Güvenlik ayarlarındaki hesap silme bölümünü kullanabilirsiniz."
+    "delete_data_hint": "Hesabınızı ve tüm verilerinizi kalıcı olarak silmek için Güvenlik ayarlarındaki hesap silme bölümünü kullanabilirsiniz.",
+    "download_coming_soon": "Veri dışa aktarma özelliği yakında eklenecek. Şimdilik hesap silme talebi için Güvenlik ayarlarını kullanabilirsiniz."
   },
   "settings_account_status": {
     "title": "Hesap Durumu",
@@ -1266,5 +1268,22 @@
     "terms_body": "Asemos'a hoş geldiniz. Hesap oluşturarak veya uygulamayı kullanarak bu Kullanım Koşullarını kabul etmiş olursunuz.\n\n1. Hizmet\nAsemos; mekan keşfi, deneyim paylaşımı, mekanda eşleşme ve bağlantı kurduğunuz kişilerle mesajlaşma imkânı sunar.\n\n2. Hesap\nDoğru bilgi vermeli, giriş bilgilerinizi korumalı ve en az 14 yaşında (veya ülkenizdeki asgari yaşta) olmalısınız. Hesabınızdaki işlemlerden siz sorumlusunuz.\n\n3. Kabul edilebilir kullanım\nBaşkalarına taciz, yasa dışı içerik, kimlik taklidi, spam, hizmeti kazıma veya güvenlik/ moderasyon araçlarını aşma girişiminde bulunmayın.\n\n4. İçerik\nPaylaştığınız içeriğin sahibi sizsiniz. Asemos'a yalnızca hizmeti sunmak için barındırma, gösterme ve işleme lisansı verirsiniz. Kuralları veya yasayı ihlal eden içerik kaldırılabilir.\n\n5. Eşleşme ve mesajlaşma\nEşleşme mekan varlığı ve profil ayarlarına bağlıdır. Eşleşme veya yanıt garanti edilmez. Güvenliğiniz için engelleme ve şikâyet araçları sunulur.\n\n6. Mekanlar\nMekan bilgileri kullanıcı veya üçüncü taraflardan gelebilir. Saat, menü ve uygunluk önceden haber verilmeksizin değişebilir.\n\n7. Askıya alma\nBu koşulları ihlal eden veya topluluğa risk oluşturan hesaplar askıya alınabilir veya kapatılabilir.\n\n8. Sorumluluk reddi\nHizmet, yasaların izin verdiği ölçüde \"olduğu gibi\" sunulur.\n\n9. Değişiklikler\nKoşullar güncellenebilir. Bildirim sonrası kullanıma devam güncel koşulları kabul sayılır.\n\n10. İletişim\nSorularınız için: support@asemos.com",
     "privacy_body": "Asemos gizliliğinize saygı duyar. Bu politika hangi verileri topladığımızı ve nedenini açıklar.\n\n1. Topladığımız veriler\n• Hesap: e-posta, ad, kullanıcı adı, doğum tarihi, profil fotoğrafları\n• Kullanım: uygulama etkileşimleri, cihaz türü, çökme kayıtları\n• Konum: harita, check-in veya mekanda eşleşme için izin verdiğinizde\n• Oluşturduğunuz içerik: gönderiler, hikayeler, yorumlar, mesajlar\n\n2. Kullanım amaçları\n• Hizmeti sunmak ve geliştirmek\n• Mekan önerilerini kişiselleştirmek\n• Güvenlik, dolandırıcılık önleme ve moderasyon\n• Yasal yükümlülükler ve destek talepleri\n\n3. Paylaşım\nKişisel verilerinizi satmayız. Veriler yalnızca sözleşmeli hizmet sağlayıcılarla (barındırma, analitik, bildirim), yasa gereği veya kullanıcıları korumak için paylaşılır.\n\n4. Saklama\nVeriler hesabınız aktifken ve sonrasında yasal, güvenlik veya yedekleme gereksinimleri için sınırlı süre tutulur.\n\n5. Haklarınız\nBölgenize göre erişim, düzeltme, silme veya işlemeyi kısıtlama talep edebilirsiniz. Uygulama ayarları veya support@asemos.com.\n\n6. Güvenlik\nVerileri korumak için teknik ve idari önlemler uygularız; hiçbir iletim yöntemi %100 güvenli değildir.\n\n7. Çocuklar\nHizmet, koşullarda belirtilen asgari yaşın altındaki kullanıcılar için değildir.\n\n8. Uluslararası aktarım\nVeriler sağlayıcılarımızın faaliyet gösterdiği ülkelerde, gerekli hallerde uygun güvencelerle işlenebilir.\n\n9. Güncellemeler\nÖnemli değişiklikler uygulama içinde veya uygun olduğunda e-posta ile duyurulur.",
     "cookies_body": "Asemos, web sitesinde ve uygulamada (uygun olduğunda) çerez ve benzeri teknolojiler kullanır.\n\n1. Zorunlu\nOturum, güvenlik ve temel işlevler için gereklidir.\n\n2. Tercihler\nDil ve görünüm ayarlarını hatırlar.\n\n3. Analitik\nKullanımı anlayarak performans ve özellikleri geliştirmemize yardımcı olur. Gerekli yerlerde onay istenir.\n\n4. Pazarlama\nYalnızca tanıtım veya kampanyalara açık rıza verdiğinizde kullanılır.\n\nÇerezleri tarayıcı ayarlarından yönetebilirsiniz. Mobil uygulamada ilgili tanımlayıcılar cihaz gizlilik ayarlarından kontrol edilebilir."
+  },
+  "highlights": {
+    "add_title": "Öne çıkanlara ekle",
+    "edit_title": "Öne Çıkarmayı Düzenle",
+    "edit_cover": "Kapağı Düzenle",
+    "name_label": "Ad",
+    "name_placeholder": "Öne Çıkanlar",
+    "tab_selected": "Seçilenler",
+    "tab_all_posts": "Gönderiler",
+    "no_selection": "Seçili gönderi yok",
+    "empty_posts_title": "Gönderi bulunamadı",
+    "empty_posts_desc": "Öne çıkan oluşturmak için paylaştığınız fotoğraf veya reel gönderileri burada listelenir."
+  },
+  "places": {
+    "list_title": "Mekanlar",
+    "dev_only_list": "Mekan listesi geliştirme modunda örnek veri ile gösterilir. Uygulamada keşfet haritasını kullanın.",
+    "empty": "Mekan bulunamadı"
   }
 }

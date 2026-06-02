@@ -1,7 +1,6 @@
 # routers/match.py — Eşleşme sistemi endpoint'leri
 
 import json
-import random
 from typing import List, Optional
 from datetime import datetime, timedelta, timezone
 
@@ -316,16 +315,6 @@ def get_match_candidates(
             if not latest_time or (rtime and rtime > latest_time):
                 last_place_id = rid
                 last_place_name = place_name_map.get(rid)
-
-        # Sırf ekran boş kalmasın ve test edilebilsin diye
-        if not last_place_name:
-            random.seed(profile.user_id)
-            mock_places = ["Lucca - Bebek", "Kronotrop Coffee - Cihangir", "Cup of Joy - Nişantaşı", "Sortie - Kuruçeşme", "MOC Karaköy"]
-            last_place_name = random.choice(mock_places)
-            db_place = db.query(models.Place).filter(models.Place.name == last_place_name).first()
-            if db_place:
-                last_place_id = db_place.id
-            random.seed()
 
         candidates.append(schemas.MatchCandidateResponse(
             user_id=profile.user_id,

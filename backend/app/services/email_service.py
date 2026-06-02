@@ -117,9 +117,14 @@ def _send_email_smtp(to_email: str, subject: str, html_body: str) -> None:
     smtp_from = getattr(settings, "SMTP_FROM", None) or os.getenv("SMTP_FROM", "") or smtp_user
 
     if not smtp_user or not smtp_pass:
-        logger.warning("⚠️  SMTP_USER/SMTP_PASS tanımlı değil → mock moduna geçiliyor")
-        _send_email_mock(to_email, subject, html_body)
-        return
+        if _dev_email_mock_allowed():
+            logger.warning("⚠️  SMTP yok — DEV_SKIP_EMAIL_VERIFICATION ile mock gönderim")
+            _send_email_mock(to_email, subject, html_body)
+            return
+        raise EmailNotConfiguredError(
+            "E-posta servisi yapılandırılmamış. SMTP_USER ve SMTP_PASS ayarlayın "
+            "veya yalnızca geliştirme için DEV_SKIP_EMAIL_VERIFICATION=true kullanın."
+        )
 
     msg = MIMEMultipart("alternative")
     msg["Subject"] = subject
@@ -198,6 +203,19 @@ def _check_rate_limit(user_id: int) -> None:
 class RateLimitError(Exception):
     """Rate limit aşıldığında fırlatılır."""
     pass
+
+
+class EmailNotConfiguredError(Exception):
+    """SMTP yapılandırması eksik ve dev bypass kapalı."""
+    pass
+
+
+def _dev_email_mock_allowed() -> bool:
+    settings = get_settings()
+    flag = getattr(settings, "DEV_SKIP_EMAIL_VERIFICATION", False)
+    if flag:
+        return True
+    return os.getenv("DEV_SKIP_EMAIL_VERIFICATION", "").lower() in ("1", "true", "yes")
 
 
 # =====================================================================

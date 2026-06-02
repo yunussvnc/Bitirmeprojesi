@@ -11,7 +11,7 @@ class Settings(BaseSettings):
     JWT_REFRESH_TOKEN_EXPIRE_DAYS: int = 30
     PASSWORD_MIN_LENGTH: int = 6
     LLM_ENABLED: bool = True
-    LLM_PROVIDER: str = "ollama"
+    LLM_PROVIDER: str = "groq"
     OLLAMA_BASE_URL: str = "http://127.0.0.1:11434"
     OLLAMA_MODEL: str = "gemma2"
     OPENAI_API_KEY: str = ""
@@ -35,6 +35,9 @@ class Settings(BaseSettings):
     SMTP_USER: str = ""      # Gmail adresin (ör: asemos.app@gmail.com)
     SMTP_PASS: str = ""      # Gmail App Password (16 karakterlik)
     SMTP_FROM: str = ""      # Gönderici adres (boşsa SMTP_USER kullanılır)
+
+    # Geliştirme: SMTP yokken konsola mock log (prod'da kullanmayın)
+    DEV_SKIP_EMAIL_VERIFICATION: bool = False
 
     model_config = {"env_file": ".env", "extra": "ignore"}
 

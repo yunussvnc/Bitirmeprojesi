@@ -38,7 +38,7 @@ import { API_BASE_URL } from '@/src/constants/api';
 import * as AppleAuthentication from 'expo-apple-authentication';
 import * as WebBrowser from 'expo-web-browser';
 import * as Google from 'expo-auth-session/providers/google';
-import { googleAuthRequestConfig, hasGoogleClientIdForPlatform } from '@/src/config/socialAuth';
+import { googleAuthRequestConfig, hasGoogleClientIdForPlatform, getGoogleClientIdConfigError } from '@/src/config/socialAuth';
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -245,7 +245,7 @@ export default function LoginScreen() {
       signInWithApple();
     } else if (provider === 'Google') {
       if (!hasGoogleClientIdForPlatform()) {
-        Alert.alert(t('auth.login_error_title'), 'Google giriş için EXPO_PUBLIC_GOOGLE_* client ID değerleri eksik.');
+        Alert.alert(t('auth.login_error_title'), getGoogleClientIdConfigError());
         return;
       }
       if (!request) {

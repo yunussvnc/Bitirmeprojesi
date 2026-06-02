@@ -11,7 +11,7 @@ import { Section } from "@/src/components/layout/Section";
 import { SettingsRow } from "@/src/components/ui";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { createTextStyle, spacing } from "@/src/constants/design";
-import { lightImpact, success } from "@/src/utils/haptics";
+import { lightImpact } from "@/src/utils/haptics";
 import { useTranslation } from "react-i18next";
 
 export default function PrivacyCenterScreen() {
@@ -24,17 +24,10 @@ export default function PrivacyCenterScreen() {
     lightImpact();
     Alert.alert(
       t("settings_privacy_center.download_data", "Verilerimi İndir"),
-      t("settings_privacy_center.download_desc", "Hesabınıza ait tüm verilerin bir kopyası hazırlanacak ve e-posta adresinize gönderilecektir. Bu işlem 24-48 saat sürebilir."),
-      [
-        { text: t("common.cancel", "Vazgeç"), style: "cancel" },
-        {
-          text: t("common.request", "Talep Et"),
-          onPress: () => {
-            success();
-            Alert.alert(t("common.success_requested", "✅ Talep Alındı"), t("settings_privacy_center.data_ready_desc", "Verileriniz hazırlandığında e-posta ile bilgilendirileceksiniz."));
-          },
-        },
-      ]
+      t(
+        "settings_privacy_center.download_coming_soon",
+        "Veri dışa aktarma özelliği yakında eklenecek. Şimdilik hesap silme talebi için Güvenlik ayarlarını kullanabilirsiniz."
+      )
     );
   };
 

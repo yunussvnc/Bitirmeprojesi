@@ -24,6 +24,7 @@ from app.services.email_service import (
     create_verification_code, verify_code,
     create_password_reset_code, verify_password_reset,
     RateLimitError,
+    EmailNotConfiguredError,
     _build_verification_html,
     _check_rate_limit,
     send_email,
@@ -164,11 +165,14 @@ def register_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
         _check_rate_limit(hash(user.email) % 1000000)
         send_email(user.email, subject, html_body)
     except RateLimitError as e:
-        # Rate limit var ama kodu ekledik, yine de hata döndürmeyebiliriz veya try-catch i rate limit öncesi yapabiliriz.
-        pass
-    except Exception as e:
-        pass
-        
+        raise HTTPException(status_code=429, detail=str(e))
+    except EmailNotConfiguredError as e:
+        crud.delete_pending_user(db, user.email)
+        raise HTTPException(status_code=503, detail=str(e))
+    except Exception:
+        crud.delete_pending_user(db, user.email)
+        raise HTTPException(status_code=503, detail="Doğrulama e-postası gönderilemedi. Lütfen daha sonra tekrar deneyin.")
+
     return {"ok": True, "message": "Doğrulama kodu e-postanıza gönderildi.", "email": user.email}
 
 @router.post("/venue-register", response_model=schemas.PendingVenueResponse)
@@ -368,6 +372,8 @@ def resend_verification(
         create_verification_code(db, current_user)
     except RateLimitError as e:
         raise HTTPException(status_code=429, detail=str(e))
+    except EmailNotConfiguredError as e:
+        raise HTTPException(status_code=503, detail=str(e))
 
     return {"ok": True, "message": "Yeni doğrulama kodu gönderildi."}
 
@@ -394,9 +400,13 @@ def resend_register_code(body: schemas.ResendVerificationRequest, db: Session = 
     
     try:
         send_email(body.email, subject, html_body)
+    except RateLimitError as e:
+        raise HTTPException(status_code=429, detail=str(e))
+    except EmailNotConfiguredError as e:
+        raise HTTPException(status_code=503, detail=str(e))
     except Exception:
-        pass
-        
+        raise HTTPException(status_code=503, detail="Doğrulama e-postası gönderilemedi.")
+
     return {"ok": True, "message": "Yeni doğrulama kodu gönderildi."}
 
 
@@ -417,6 +427,8 @@ def forgot_password(
             create_password_reset_code(db, user)
         except RateLimitError as e:
             raise HTTPException(status_code=429, detail=str(e))
+        except EmailNotConfiguredError as e:
+            raise HTTPException(status_code=503, detail=str(e))
 
     # Her durumda aynı cevap — e-posta var mı yok mu sızdırmıyoruz
     return {"ok": True, "message": "E-posta adresinize şifre sıfırlama kodu gönderildi."}

@@ -34,6 +34,7 @@ import { timeAgo } from "@/src/utils/timeAgo";
 import { deleteComment } from "@/src/services/moderationService";
 import { useAuthStore } from "@/src/store/useAuthStore";
 import { useTranslation } from "react-i18next";
+import { useBlockedUserIds } from "@/src/hooks/useBlockedUserIds";
 
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 // Kısmi açık yükseklik: handle + başlık + input + ~2 yorum satırı
@@ -60,6 +61,7 @@ export function CommentBottomSheet({ visible, onClose, postId, onCommentAdded }:
   const [keyboardHeight, setKeyboardHeight] = useState(0);
   const [text, setText] = useState("");
   const { t } = useTranslation();
+  const { isBlocked } = useBlockedUserIds();
 
   // Height animasyonu (native driver kapalı — height animate edilemez native'de)
   const animHeight = useRef(new Animated.Value(0)).current;
@@ -183,13 +185,13 @@ export function CommentBottomSheet({ visible, onClose, postId, onCommentAdded }:
     setLoading(true);
     try {
       const res = await getComments(postId, 1, 50);
-      setComments(res.items);
+      setComments(res.items.filter((c) => !isBlocked(c.user_id)));
     } catch (e) {
       handleApiError(e);
     } finally {
       setLoading(false);
     }
-  }, [visible, postId]);
+  }, [visible, postId, isBlocked]);
 
   useEffect(() => {
     if (visible) {

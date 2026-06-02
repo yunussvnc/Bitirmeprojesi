@@ -65,7 +65,7 @@ class Settings(BaseSettings):
     BACKEND_API_URL: str = "http://localhost:8000"
 
     # PostgreSQL — Doğrudan DB bağlantısı
-    DATABASE_URL: str = "postgresql://postgres:123@localhost:5432/ai_mekan_oneri_db"
+    DATABASE_URL: str = "postgresql://postgres:123@localhost:5433/ai_mekan_oneri_db"
 
     @property
     def database_url_normalized(self) -> str:

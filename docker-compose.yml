@@ -7,10 +7,31 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: 123
       POSTGRES_DB: ai_mekan_oneri_db
+    # Host: localhost:5433 — backend/.env.example ve ai-llm/env.example ile uyumlu
     ports:
       - "5433:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d ai_mekan_oneri_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # Geliştirme: PostgreSQL GUI + AI SQL (http://localhost:10824)
+  # Docker içinden bağlantı: host=db, port=5432, user=postgres, pass=123, db=ai_mekan_oneri_db
+  chat2db:
+    image: chat2db/chat2db:latest
+    container_name: asemos_chat2db
+    restart: unless-stopped
+    ports:
+      - "10824:10824"
+    volumes:
+      - chat2db_data:/root/.chat2db
+    depends_on:
+      db:
+        condition: service_healthy
 
 volumes:
   postgres_data:
+  chat2db_data:

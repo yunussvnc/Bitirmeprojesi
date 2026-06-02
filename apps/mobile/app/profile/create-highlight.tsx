@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, FlatList, useWindowDimensions, StatusBar } from "react-native";
+import React, { useState, useEffect, useCallback } from "react";
+import { View, Text, StyleSheet, TouchableOpacity, FlatList, useWindowDimensions, StatusBar, ActivityIndicator } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 import { Image } from "expo-image";
@@ -7,6 +7,10 @@ import { useTheme } from "@/src/hooks/useTheme";
 import { createTextStyle } from "@/src/constants/design";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { lightImpact } from "@/src/utils/haptics";
+import { useAuthStore } from "@/src/store/useAuthStore";
+import { getUserPosts } from "@/src/services/userService";
+import type { Post } from "@/src/services/feedService";
+import { useTranslation } from "react-i18next";
 
 const GRID_GAP = 1;
 const GRID_COLS = 3;
@@ -18,14 +22,55 @@ interface ArchiveStory {
     durationStr: string;
 }
 
+function postToArchiveItem(post: Post): ArchiveStory | null {
+    const url = post.media?.[0]?.media_url;
+    if (!url) return null;
+    const d = new Date(post.created_at);
+    const dateStr = Number.isNaN(d.getTime()) ? "" : String(d.getDate()).padStart(2, "0");
+    return {
+        id: String(post.id),
+        image: url,
+        dateStr,
+        durationStr: post.post_type === "reel" ? "Reel" : "",
+    };
+}
+
 export default function CreateHighlightRoute() {
     const { colors, isDark } = useTheme();
+    const { t } = useTranslation();
     const insets = useSafeAreaInsets();
     const router = useRouter();
     const { width } = useWindowDimensions();
     const cellSize = (width - GRID_GAP * (GRID_COLS - 1)) / GRID_COLS;
+    const userId = useAuthStore((s) => s.user?.id);
 
     const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+    const [archiveItems, setArchiveItems] = useState<ArchiveStory[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    const loadPosts = useCallback(async () => {
+        if (!userId) {
+            setArchiveItems([]);
+            setLoading(false);
+            return;
+        }
+        setLoading(true);
+        try {
+            const res = await getUserPosts(userId, 1, 60);
+            const items = (res.items ?? [])
+                .map(postToArchiveItem)
+                .filter((x): x is ArchiveStory => x != null);
+            setArchiveItems(items);
+        } catch {
+            setArchiveItems([]);
+        } finally {
+            setLoading(false);
+        }
+    }, [userId]);
+
+    useEffect(() => {
+        loadPosts();
+    }, [loadPosts]);
 
     const toggleSelect = (id: string) => {
         lightImpact();
@@ -46,7 +91,7 @@ export default function CreateHighlightRoute() {
                 onPress={() => toggleSelect(item.id)}
                 style={{
                     width: cellSize,
-                    height: cellSize * 1.8, // Portre oranı
+                    height: cellSize * 1.8,
                     marginBottom: GRID_GAP,
                     marginRight: GRID_GAP,
                     position: "relative",
@@ -58,12 +103,12 @@ export default function CreateHighlightRoute() {
                     style={StyleSheet.absoluteFillObject}
                     contentFit="cover"
                 />
-                {/* Date Badge */}
-                <View style={styles.dateBadge}>
-                    <Text style={styles.dateText}>{item.dateStr}</Text>
-                </View>
+                {item.dateStr ? (
+                    <View style={styles.dateBadge}>
+                        <Text style={styles.dateText}>{item.dateStr}</Text>
+                    </View>
+                ) : null}
 
-                {/* Selected Circle */}
                 <View style={styles.circleContainer}>
                     <View style={[styles.circleWrap, isSelected && styles.circleWrapSelected]}>
                         {isSelected ? (
@@ -76,10 +121,10 @@ export default function CreateHighlightRoute() {
                     </View>
                 </View>
 
-                {/* Duration Label */}
-                <Text style={styles.durationText}>{item.durationStr}</Text>
+                {item.durationStr ? (
+                    <Text style={styles.durationText}>{item.durationStr}</Text>
+                ) : null}
 
-                {/* Dark Overlay when selected */}
                 {isSelected && <View style={[StyleSheet.absoluteFillObject, styles.selectedOverlay]} />}
             </TouchableOpacity>
         );
@@ -89,7 +134,6 @@ export default function CreateHighlightRoute() {
         <View style={[styles.container, { backgroundColor: '#000' }]}>
             <StatusBar barStyle="light-content" />
 
-            {/* ── Header ── */}
             <View style={[styles.header, { paddingTop: insets.top + 8, backgroundColor: '#000' }]}>
                 <TouchableOpacity
                     onPress={() => {
@@ -99,18 +143,23 @@ export default function CreateHighlightRoute() {
                     hitSlop={12}
                     style={styles.headerBtnLeft}
                 >
-                    <Text style={[styles.headerActionText, { color: colors.accent.primary }]}>İptal</Text>
+                    <Text style={[styles.headerActionText, { color: colors.accent.primary }]}>
+                        {t("common.cancel", "İptal")}
+                    </Text>
                 </TouchableOpacity>
 
                 <Text style={[createTextStyle("title", "#fff"), styles.headerTitle]} numberOfLines={1}>
-                    Öne çıkanlara ekle
+                    {t("highlights.add_title", "Öne çıkanlara ekle")}
                 </Text>
 
                 <TouchableOpacity
                     onPress={() => {
                         if (selectedIds.size > 0) {
                             lightImpact();
-                            router.push("/profile/edit-highlight" as any);
+                            router.push({
+                                pathname: "/profile/edit-highlight",
+                                params: { selected: Array.from(selectedIds).join(",") },
+                            } as any);
                         }
                     }}
                     hitSlop={12}
@@ -118,27 +167,35 @@ export default function CreateHighlightRoute() {
                     disabled={selectedIds.size === 0}
                 >
                     <Text style={[styles.headerActionText, { color: selectedIds.size > 0 ? colors.accent.primary : '#555', fontWeight: '700' }]}>
-                        İleri
+                        {t("common.next", "İleri")}
                     </Text>
                 </TouchableOpacity>
             </View>
 
-            <FlatList
-                data={[] as ArchiveStory[]}
-                keyExtractor={(item) => item.id}
-                numColumns={GRID_COLS}
-                renderItem={renderItem}
-                contentContainerStyle={{ flexGrow: 1, paddingBottom: insets.bottom + 20 }}
-                showsVerticalScrollIndicator={false}
-                ListEmptyComponent={
-                    <View style={styles.emptyWrap}>
-                        <Text style={[styles.emptyTitle, { color: '#fff' }]}>Arşivde hikaye yok</Text>
-                        <Text style={[styles.emptyDesc, { color: colors.text.tertiary }]}>
-                            Öne çıkan oluşturmak için süresi dolmuş hikayeleriniz burada listelenir.
-                        </Text>
-                    </View>
-                }
-            />
+            {loading ? (
+                <View style={styles.emptyWrap}>
+                    <ActivityIndicator color={colors.accent.primary} />
+                </View>
+            ) : (
+                <FlatList
+                    data={archiveItems}
+                    keyExtractor={(item) => item.id}
+                    numColumns={GRID_COLS}
+                    renderItem={renderItem}
+                    contentContainerStyle={{ flexGrow: 1, paddingBottom: insets.bottom + 20 }}
+                    showsVerticalScrollIndicator={false}
+                    ListEmptyComponent={
+                        <View style={styles.emptyWrap}>
+                            <Text style={[styles.emptyTitle, { color: '#fff' }]}>
+                                {t("highlights.empty_posts_title", "Gönderi bulunamadı")}
+                            </Text>
+                            <Text style={[styles.emptyDesc, { color: colors.text.tertiary }]}>
+                                {t("highlights.empty_posts_desc", "Öne çıkan oluşturmak için paylaştığınız fotoğraf veya reel gönderileri burada listelenir.")}
+                            </Text>
+                        </View>
+                    }
+                />
+            )}
         </View>
     );
 }
@@ -205,9 +262,7 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
-    circleWrapSelected: {
-        // optional drop shadow when selected
-    },
+    circleWrapSelected: {},
     circleInner: {
         width: 24,
         height: 24,
@@ -234,8 +289,8 @@ const styles = StyleSheet.create({
         textShadowRadius: 3,
     },
     selectedOverlay: {
-        backgroundColor: 'rgba(255,255,255,0.2)', // Light white overlay when selected
-        zIndex: -1, // Make sure it's below text
+        backgroundColor: 'rgba(255,255,255,0.2)',
+        zIndex: -1,
     },
     emptyWrap: {
         flex: 1,

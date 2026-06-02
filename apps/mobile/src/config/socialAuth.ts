@@ -18,3 +18,22 @@ export function hasGoogleClientIdForPlatform(): boolean {
   return Boolean(GOOGLE_WEB_CLIENT_ID);
 }
 
+/** Kullanıcıya gösterilecek yapılandırma hatası (EAS / .env.local) */
+export function getGoogleClientIdConfigError(): string {
+  if (Platform.OS === 'ios') {
+    return (
+      'Google giriş için EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID veya EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID tanımlı değil. ' +
+      'Yerel: apps/mobile/.env.local — production: EAS Secrets veya eas.json → build.production.env (scheme: asemos).'
+    );
+  }
+  if (Platform.OS === 'android') {
+    return (
+      'Google giriş için EXPO_PUBLIC_GOOGLE_ANDROID_CLIENT_ID veya EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID tanımlı değil. ' +
+      'Yerel: apps/mobile/.env.local — production: EAS Secrets veya eas.json → build.production.env (scheme: asemos).'
+    );
+  }
+  return (
+    'Google giriş için EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID tanımlı değil. ' +
+    'Yerel: apps/mobile/.env.local — production: EAS Secrets veya eas.json → build.production.env.'
+  );
+}

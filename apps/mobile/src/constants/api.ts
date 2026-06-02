@@ -1,8 +1,12 @@
 import Constants from "expo-constants";
 import { Platform } from "react-native";
 
-/** Dev fallback when expoHost unavailable – override via EXPO_PUBLIC_DEV_API_HOST */
-const DEV_API_FALLBACK = "192.168.1.9:8000";
+/**
+ * Dev fallback when Expo hostUri is unavailable (physical device on LAN).
+ * Override in .env.local: EXPO_PUBLIC_DEV_API_HOST=YOUR_LAN_IP:8000
+ */
+const DEV_API_FALLBACK = "localhost:8000";
+/** Production / release builds (EAS production profile sets EXPO_PUBLIC_API_URL) */
 const PROD_API_DEFAULT = "https://api.asemos.com";
 
 const expoHost = Constants.expoConfig?.hostUri?.split(":")[0];

@@ -19,6 +19,7 @@ import { useTranslation } from "react-i18next";
 import { useUploadPipelineStore } from "@/src/store/useUploadPipelineStore";
 import { useAuthStore } from "@/src/store/useAuthStore";
 import { useAppStore } from "@/src/store/useAppStore";
+import { useBlockedUserIds } from "@/src/hooks/useBlockedUserIds";
 
 const STORY_RING_SIZE = 82;
 const STORY_GRADIENT: [string, string, ...string[]] = ["#4ade80", "#22c55e", "#16a34a", "#15803d"];
@@ -44,6 +45,7 @@ export function FeedStoriesRow({ filter }: FeedStoriesRowProps) {
   const addViewedGroupKey = useAppStore((s) => s.addViewedStoryGroupKey);
 
   const currentUser = useAuthStore((s) => s.user);
+  const { isBlocked } = useBlockedUserIds();
   const [storyViewerIndex, setStoryViewerIndex] = useState<number | null>(null);
   const viewerStoriesRef = useRef<Story[]>([]);
   const storyPausedRef = useRef(false);
@@ -64,14 +66,18 @@ export function FeedStoriesRow({ filter }: FeedStoriesRowProps) {
     setLoading(true);
     try {
       const res = await import("@/src/services/storyService").then((m) => m.getFeedStories(1, 50, filter));
-      setStories(res.items ?? []);
+      setStories(
+        (res.items ?? []).filter(
+          (s) => !isBlocked(s.user_id) && !isBlocked(s.author?.id)
+        )
+      );
     } catch (e) {
       console.warn('[FeedStoriesRow] Failed to load stories:', e);
       setStories([]);
     } finally {
       setLoading(false);
     }
-  }, [filter]);
+  }, [filter, isBlocked]);
 
   useFocusEffect(
     useCallback(() => {
