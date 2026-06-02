@@ -16,6 +16,7 @@ from datetime import datetime, timedelta, timezone
 
 from sqlalchemy.orm import Session
 
+import re
 import models
 from config import get_settings
 
@@ -116,14 +117,28 @@ def _send_email_smtp(to_email: str, subject: str, html_body: str) -> None:
     smtp_from = getattr(settings, "SMTP_FROM", None) or os.getenv("SMTP_FROM", "") or smtp_user
 
     if not smtp_user or not smtp_pass:
-        logger.warning("⚠️  SMTP_USER/SMTP_PASS tanımlı değil → mock moduna geçiliyor")
-        _send_email_mock(to_email, subject, html_body)
-        return
+        if _dev_email_mock_allowed():
+            logger.warning("⚠️  SMTP yok — DEV_SKIP_EMAIL_VERIFICATION ile mock gönderim")
+            _send_email_mock(to_email, subject, html_body)
+            return
+        raise EmailNotConfiguredError(
+            "E-posta servisi yapılandırılmamış. SMTP_USER ve SMTP_PASS ayarlayın "
+            "veya yalnızca geliştirme için DEV_SKIP_EMAIL_VERIFICATION=true kullanın."
+        )
 
     msg = MIMEMultipart("alternative")
     msg["Subject"] = subject
     msg["From"] = f"AsEmOs <{smtp_from}>"
     msg["To"] = to_email
+    msg["Reply-To"] = smtp_from
+    msg["MIME-Version"] = "1.0"
+    msg["X-Mailer"] = "AsEmOs App"
+
+    # Plain text alternative — HTML-only emails are a major spam signal
+
+    plain_text = re.sub(r'<[^>]+>', '', html_body)
+    plain_text = re.sub(r'\s+', ' ', plain_text).strip()
+    msg.attach(MIMEText(plain_text, "plain", "utf-8"))
     msg.attach(MIMEText(html_body, "html", "utf-8"))
 
     try:
@@ -154,7 +169,7 @@ def _send_email_mock(to_email: str, subject: str, body: str) -> None:
     logger.info("   İçerik (HTML): %s...", body[:300].replace("\n", "")) # HTML'in bir kısmını bas
     
     # Pratiklik için kod arayalım (HTML içindeki ardışık 6 rakam)
-    import re
+
     codes = re.findall(r'>(\d)<', body)
     if len(codes) >= 6:
         logger.info("   Bulunan Kod: %s", "".join(codes[:6]))
@@ -188,6 +203,19 @@ def _check_rate_limit(user_id: int) -> None:
 class RateLimitError(Exception):
     """Rate limit aşıldığında fırlatılır."""
     pass
+
+
+class EmailNotConfiguredError(Exception):
+    """SMTP yapılandırması eksik ve dev bypass kapalı."""
+    pass
+
+
+def _dev_email_mock_allowed() -> bool:
+    settings = get_settings()
+    flag = getattr(settings, "DEV_SKIP_EMAIL_VERIFICATION", False)
+    if flag:
+        return True
+    return os.getenv("DEV_SKIP_EMAIL_VERIFICATION", "").lower() in ("1", "true", "yes")
 
 
 # =====================================================================

@@ -2,7 +2,6 @@
 
 import os
 import logging
-from contextlib import asynccontextmanager
 from datetime import datetime
 
 from fastapi import FastAPI, Depends
@@ -18,7 +17,7 @@ from app.middleware.logging import RequestLoggingMiddleware
 from app.middleware.rate_limiter import RateLimiterMiddleware
 
 # Router'lar
-from app.routers import auth, users, places, reviews, feed, stories, notifications, match, upload, recommend, messages, saved
+from app.routers import auth, users, places, reviews, feed, stories, notifications, match, upload, recommend, messages, saved, community
 
 # ---------------------------------------------------------------------------
 # Logging konfigürasyonu
@@ -38,43 +37,8 @@ settings = get_settings()
 # ---------------------------------------------------------------------------
 # Veritabanı tabloları
 # ---------------------------------------------------------------------------
-# Migration'ları çalıştır (IF NOT EXISTS — güvenli, idempotent)
+# Tabloları oluşturur (Zaten varsa atlar)
 migrate.run_migrations(engine)
-# Geliştirme: create_all ile eksik tabloları oluştur
-# Prod: `alembic upgrade head` kullanılmalı
-Base.metadata.create_all(bind=engine)
-
-# ---------------------------------------------------------------------------
-# Lifespan (startup + shutdown)
-# ---------------------------------------------------------------------------
-@asynccontextmanager
-async def lifespan(application: FastAPI):
-    """Startup ve shutdown işlemleri"""
-    import asyncio
-
-    logger.info("🚀 AsEmOs API v2.0 başlatılıyor...")
-    logger.info("📊 Veritabanı: %s", settings.DATABASE_URL.split("///")[-1])
-    logger.info("🤖 LLM: %s (%s)", settings.LLM_PROVIDER, "aktif" if settings.LLM_ENABLED else "devre dışı")
-    logger.info("☁️  Cloudinary: %s", "yapılandırılmış" if settings.CLOUDINARY_CLOUD_NAME else "yapılandırılmamış")
-    logger.info("🔒 Rate Limiting: aktif")
-
-    if settings.JWT_SECRET_KEY == "dev-secret-change-in-production":
-        logger.warning("⚠️  JWT_SECRET_KEY varsayılan değerde! Production'da mutlaka değiştirin!")
-    if settings.ALLOWED_ORIGINS == "*":
-        logger.warning("⚠️  ALLOWED_ORIGINS=* — Production'da spesifik origin'ler belirleyin!")
-
-    from app.services.tasks import background_scheduler, cleanup_expired_stories
-    cleanup_expired_stories()
-    task = asyncio.create_task(background_scheduler())
-
-    logger.info("✅ API hazır!")
-
-    yield  # Uygulama burada çalışır
-
-    # Shutdown
-    task.cancel()
-    logger.info("🛑 API kapatılıyor...")
-
 
 # ---------------------------------------------------------------------------
 # FastAPI uygulaması
@@ -83,7 +47,6 @@ app = FastAPI(
     title="AsEmOs - Mekan Öneri Sistemi API",
     description="Mekan öneri, sosyal akış, eşleşme ve gerçek zamanlı mesajlaşma platformu",
     version="2.0.0",
-    lifespan=lifespan,
 )
 
 # ---------------------------------------------------------------------------
@@ -124,6 +87,7 @@ app.include_router(upload.router)
 app.include_router(recommend.router)
 app.include_router(messages.router)
 app.include_router(saved.router)
+app.include_router(community.router)
 
 
 # ---------------------------------------------------------------------------
@@ -162,7 +126,7 @@ def health_check():
     # Servis durumları
     cloud_ok = cloud_storage.is_configured()
     llm_active = settings.LLM_ENABLED if hasattr(settings, 'LLM_ENABLED') else False
-    ws_online = manager.get_online_user_count()
+    ws_online = len(manager._global_connections)
 
     overall = "ok" if db_ok else "degraded"
 
@@ -178,3 +142,48 @@ def health_check():
         },
     }
 
+
+# ---------------------------------------------------------------------------
+# Startup event
+# ---------------------------------------------------------------------------
+@app.on_event("startup")
+async def startup_event():
+    import asyncio
+
+    logger.info("🚀 AsEmOs API v2.0 başlatılıyor...")
+    logger.info("📊 Veritabanı: %s", settings.DATABASE_URL.split("///")[-1])
+    logger.info("🤖 LLM: %s (%s)", settings.LLM_PROVIDER, "aktif" if settings.LLM_ENABLED else "devre dışı")
+    logger.info("☁️  Cloudinary: %s", "yapılandırılmış" if settings.CLOUDINARY_CLOUD_NAME else "yapılandırılmamış")
+    logger.info("🔒 Rate Limiting: aktif")
+
+    # Sentry başlat (DSN yoksa sessizce devre dışı kalır)
+    from app.middleware.sentry_middleware import init_sentry
+    init_sentry(app)
+
+    # Güvenlik uyarıları
+    if settings.JWT_SECRET_KEY == "dev-secret-change-in-production":
+        logger.warning("⚠️  JWT_SECRET_KEY varsayılan değerde! Production'da mutlaka değiştirin!")
+    if settings.ALLOWED_ORIGINS == "*":
+        logger.warning("⚠️  ALLOWED_ORIGINS=* — Production'da spesifik origin'ler belirleyin!")
+
+    # Redis başlat
+    from app.core.redis_client import connect_redis
+    await connect_redis()
+
+    # WebSocket Redis Pub/Sub Listener başlat
+    from app.websocket.manager import manager
+    await manager.start_redis_listener()
+
+    # Background scheduler başlat (Testlerde devre dışı bırak)
+    if os.getenv("TESTING") != "1":
+        from app.services.tasks import background_scheduler, cleanup_expired_stories
+        cleanup_expired_stories()  # İlk başlangıçta bir kez çalıştır
+        asyncio.create_task(background_scheduler())
+
+    logger.info("✅ API hazır!")
+
+@app.on_event("shutdown")
+async def shutdown_event():
+    from app.core.redis_client import disconnect_redis
+    await disconnect_redis()
+    logger.info("🛑 API kapatılıyor...")

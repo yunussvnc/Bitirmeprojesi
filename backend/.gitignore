@@ -4,7 +4,12 @@ __pycache__/
 
 # Virtual environment
 venv/
+.venv/
 .env
 
 # Database
 *.db
+*.db-wal
+*.db-shm
+*.db-journal
+uploads/

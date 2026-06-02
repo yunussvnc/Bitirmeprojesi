@@ -1,4 +1,5 @@
-from pydantic import BaseModel, EmailStr, Field, model_validator
+# pyrefly: ignore [missing-import]
+from pydantic import BaseModel, EmailStr, Field, model_validator, field_validator
 import json as _json
 from datetime import datetime, date
 from typing import Optional, List
@@ -13,6 +14,13 @@ class UserBase(BaseModel):
     phone_number: Optional[str] = None
     birth_date: Optional[date] = None
 
+    @field_validator('birth_date')
+    @classmethod
+    def check_birth_date(cls, v):
+        if v is not None and (v.year < 1950 or v.year > 2023):
+            raise ValueError('Doğum yılı 1950 ile 2023 arasında olmalıdır.')
+        return v
+
 class UserCreate(UserBase):
     password: str
 
@@ -25,6 +33,13 @@ class UserUpdate(BaseModel):
     birth_date: Optional[date] = None
     phone_number: Optional[str] = None
     email: Optional[EmailStr] = None
+
+    @field_validator('birth_date')
+    @classmethod
+    def check_birth_date(cls, v):
+        if v is not None and (v.year < 1950 or v.year > 2023):
+            raise ValueError('Doğum yılı 1950 ile 2023 arasında olmalıdır.')
+        return v
 
 class SocialLoginRequest(BaseModel):
     token: str
@@ -44,10 +59,11 @@ class User(UserBase):
 
 
 class UserProfile(User):
-    """Profil sayfası için: followers/following sayıları + is_following"""
+    """Profil sayfası için: followers/following sayıları + is_following + follow_status"""
     followers_count: int = 0
     following_count: int = 0
     is_following: bool = False
+    follow_status: Optional[str] = None  # "pending", "accepted", or None (not following)
 
 # --- MEKAN (PLACE) ŞEMALARI ---
 
@@ -126,6 +142,11 @@ class Place(PlaceBase):
 
     class Config:
         from_attributes = True
+
+class DeviceTokenCreate(BaseModel):
+    token: str
+    platform: Optional[str] = None
+    device_id: Optional[str] = None
 
 # --- YORUM (REVIEW) ŞEMALARI ---
 
@@ -225,6 +246,13 @@ class FirstTimeSetupRequest(BaseModel):
     username: str
     birth_date: date
 
+    @field_validator('birth_date')
+    @classmethod
+    def check_birth_date(cls, v):
+        if v.year < 1950 or v.year > 2023:
+            raise ValueError('Doğum yılı 1950 ile 2023 arasında olmalıdır.')
+        return v
+
 class VenueRegisterRequest(BaseModel):
     """Mekan başvuru (kayıt) isteği"""
     venue_name: str
@@ -320,6 +348,12 @@ class RecommendItem(BaseModel):
     photo_url: Optional[str] = None
     explanation: Optional[str] = None
     tags: List[str] = []
+    opening_time: Optional[str] = None
+    closing_time: Optional[str] = None
+    average_rating: Optional[float] = None
+    review_count: Optional[int] = None
+    price_range: Optional[int] = None
+    address: Optional[str] = None
 
 class RecommendResponse(BaseModel):
     items: List[RecommendItem]
@@ -333,7 +367,11 @@ class PostMediaBase(BaseModel):
     media_type: str
     media_url: str
     thumbnail_url: Optional[str] = None
+    medium_url: Optional[str] = None
+    blurhash: Optional[str] = None
     order_index: int = 0
+    width: Optional[int] = None
+    height: Optional[int] = None
 
 class PostMediaCreate(PostMediaBase):
     pass
@@ -352,6 +390,7 @@ class PostCreate(BaseModel):
     comments_disabled: bool = False
     likes_hidden: bool = False
     media: List[PostMediaCreate]
+    tagged_user_ids: Optional[List[int]] = None
 
 class PostCommentCreate(BaseModel):
     text: str = Field(..., min_length=1, max_length=1000, description="Yorum metni")
@@ -401,6 +440,7 @@ class Post(BaseModel):
     author: Optional[UserSummary] = None
     place: Optional[PlaceSummary] = None
     media: List[PostMedia] = []
+    tagged_users: List[UserSummary] = []
 
     class Config:
         from_attributes = True
@@ -412,6 +452,19 @@ class PaginatedPosts(BaseModel):
     page_size: int
 
 
+class CursorPaginatedPosts(BaseModel):
+    """
+    Cursor tabanlı sayfalama yanıtı.
+    Büyük veri setleri (25M+ gönderi) için OFFSET yerine kullanılır.
+    next_cursor: Sonraki sayfayı almak için gönderilecek opaque token (ISO datetime:id).
+    has_more: Daha fazla içerik var mı?
+    """
+    items: List[Post]
+    next_cursor: Optional[str] = None   # "<created_at_iso>:<post_id>"
+    has_more: bool = False
+    page_size: int
+
+
 # --- HİKAYE (STORY) ---
 
 class StoryCreate(BaseModel):
@@ -419,7 +472,18 @@ class StoryCreate(BaseModel):
     media_type: str  # "image", "video"
     media_url: str
     thumbnail_url: Optional[str] = None
+    # Gizlilik: 'public' | 'close_friends'
+    privacy_type: str = "public"
+    # Geriye dönük uyumluluk (eski mobil istemciler is_close_friends gönderebilir)
     is_close_friends: bool = False
+    # Konum meta verisi: {"place_id": 5, "name": "Kadıköy", "lat": 40.99, "lng": 29.02}
+    location_data: Optional[dict] = None
+
+    def resolved_privacy_type(self) -> str:
+        """is_close_friends True ise close_friends döndür (geriye dönük)."""
+        if self.is_close_friends:
+            return "close_friends"
+        return self.privacy_type
 
 
 class Story(BaseModel):
@@ -429,7 +493,9 @@ class Story(BaseModel):
     media_type: str
     media_url: str
     thumbnail_url: Optional[str] = None
+    privacy_type: str = "public"
     is_close_friends: bool = False
+    location_data: Optional[dict] = None
     created_at: datetime
     expires_at: datetime
     author: Optional[UserSummary] = None
@@ -465,8 +531,14 @@ class Notification(BaseModel):
     post_id: Optional[int] = None
     place_id: Optional[int] = None
     is_read: bool = False
+    payload: Optional[str] = None
     created_at: datetime
     actor_username: Optional[str] = None
+    # Munia-style rich payload fields (parsed from JSON payload)
+    actor_avatar: Optional[str] = None
+    post_thumbnail: Optional[str] = None
+    # Novu-style digest grouping
+    group_count: int = 0  # "X, Y ve 3 kişi daha beğendi" — 0 = no grouping
 
     class Config:
         from_attributes = True
@@ -594,6 +666,9 @@ class MatchConversationResponse(BaseModel):
     is_active: bool = True
     created_at: datetime
     last_message_at: Optional[datetime] = None
+    last_message_text: Optional[str] = None
+    last_message_sender_id: Optional[int] = None
+    unread_count: int = 0
 
     class Config:
         from_attributes = True
@@ -620,9 +695,11 @@ class QRVerifyResponse(BaseModel):
 
 class MessageCreate(BaseModel):
     content: str = Field(..., min_length=1, max_length=5000, description="Mesaj içeriği")
-    message_type: str = "text"  # "text", "image", "shared_post"
+    message_type: str = "text"  # "text", "image", "shared_post", "story_reply"
     media_url: Optional[str] = None
     shared_post_id: Optional[int] = None
+    parent_story_id: Optional[int] = None
+    story_snapshot_url: Optional[str] = None
 
 class MessageResponse(BaseModel):
     id: int
@@ -632,7 +709,10 @@ class MessageResponse(BaseModel):
     message_type: str = "text"
     media_url: Optional[str] = None
     shared_post_id: Optional[int] = None
+    parent_story_id: Optional[int] = None
+    story_snapshot_url: Optional[str] = None
     is_read: bool = False
+    status: str = "sent"  # "sent", "delivered", "read"
     created_at: datetime
     sender_name: Optional[str] = None
 
@@ -650,11 +730,78 @@ class TypingEvent(BaseModel):
     user_id: int
     is_typing: bool
 
+class OpenConversationRequest(BaseModel):
+    user_id: int
+
+
+class ConversationPermission(BaseModel):
+    """Gönderici → alıcı yönünde mesajlaşma izin durumu"""
+    can_send: bool
+    can_send_media: bool
+    hide_read_receipt: bool
+    reason: Optional[str] = None          # UI'da gösterilebilir açıklama kodu
+    messages_sent_count: int = 0          # Gönderici'nin bu konuşmada gönderdiği mesaj sayısı
+    awaiting_reply: bool = False          # True = karşı taraf henüz cevap vermedi
+
 
 # --- PUSH TOKEN ---
 
 class PushTokenRequest(BaseModel):
     token: str  # ExponentPushToken[xxx]
+
+
+# --- TOPLULUK ODALARI (COMMUNITY ROOMS) ---
+
+class CommunityRoomCreate(BaseModel):
+    name: str = Field(..., min_length=2, max_length=100)
+    description: Optional[str] = None
+    place_id: Optional[int] = None
+    room_type: str = "venue"  # "venue", "region", "topic"
+    cover_image_url: Optional[str] = None
+
+class CommunityRoomResponse(BaseModel):
+    id: int
+    name: str
+    description: Optional[str] = None
+    place_id: Optional[int] = None
+    cover_image_url: Optional[str] = None
+    room_type: str = "venue"
+    is_active: bool = True
+    member_count: int = 0
+    created_by: int
+    created_at: datetime
+    last_message_at: Optional[datetime] = None
+    is_member: bool = False  # Mevcut kullanıcı üye mi?
+
+    class Config:
+        from_attributes = True
+
+class CommunityMessageCreate(BaseModel):
+    content: str = Field(..., min_length=1, max_length=5000)
+    message_type: str = "text"  # "text", "image", "place_share"
+    media_url: Optional[str] = None
+    shared_place_id: Optional[int] = None
+
+class CommunityMessageResponse(BaseModel):
+    id: int
+    room_id: int
+    sender_id: int
+    content: str
+    message_type: str = "text"
+    media_url: Optional[str] = None
+    shared_place_id: Optional[int] = None
+    created_at: datetime
+    sender_name: Optional[str] = None
+    sender_avatar: Optional[str] = None
+
+    class Config:
+        from_attributes = True
+
+class PaginatedCommunityMessages(BaseModel):
+    items: List[CommunityMessageResponse]
+    total: int
+    page: int
+    page_size: int
 
 
 # --- KULLANICI TERCİHLERİ (USER PREFERENCES) ---
@@ -675,6 +822,11 @@ class UserPreferencesUpdate(BaseModel):
     wifi_auto_high_quality: Optional[bool] = None
     include_location_in_posts: Optional[bool] = None
     language: Optional[str] = None  # tr, en
+    # Bildirim Tercihleri (Novu Subscriber Preferences)
+    notify_likes: Optional[bool] = None
+    notify_comments: Optional[bool] = None
+    notify_follows: Optional[bool] = None
+    notify_messages: Optional[bool] = None
 
 
 class UserPreferencesResponse(BaseModel):
@@ -693,6 +845,11 @@ class UserPreferencesResponse(BaseModel):
     wifi_auto_high_quality: bool = True
     include_location_in_posts: bool = True
     language: str = "tr"
+    # Bildirim Tercihleri
+    notify_likes: bool = True
+    notify_comments: bool = True
+    notify_follows: bool = True
+    notify_messages: bool = True
     updated_at: Optional[datetime] = None
 
     class Config:
