@@ -19,7 +19,6 @@ import {
   TouchableOpacity,
   Animated,
   Dimensions,
-  Image,
   Alert,
   Keyboard,
   TouchableWithoutFeedback,
@@ -32,29 +31,18 @@ import { IconSymbol } from '@/src/components/ui/icon-symbol';
 import { handleApiError } from '@/src/utils/errorHandler';
 import { useTranslation } from 'react-i18next';
 import { lightImpact, success } from '@/src/utils/haptics';
-import { getAllPlaces } from '@/src/services/mekanService';
 import { loginUser, googleLogin, appleLogin } from '@/src/services/authService';
+import { AuthBackgroundCarousel } from '@/src/components/domain/auth/AuthBackgroundCarousel';
 import { useAuthStore } from '@/src/store/useAuthStore';
 import { API_BASE_URL } from '@/src/constants/api';
 import * as AppleAuthentication from 'expo-apple-authentication';
 import * as WebBrowser from 'expo-web-browser';
 import * as Google from 'expo-auth-session/providers/google';
+import { googleAuthRequestConfig, hasGoogleClientIdForPlatform, getGoogleClientIdConfigError } from '@/src/config/socialAuth';
 
 WebBrowser.maybeCompleteAuthSession();
 
 const { width, height } = Dimensions.get('window');
-
-// API yoksa veya fotoğraf yoksa kullanılacak aydınlık ve kaliteli mekan görselleri
-const FALLBACK_PLACE_IMAGES = [
-  'https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=1200',
-  'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=1200', // Aydınlık kahveci
-  'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1200', // Aydınlık bir kafe içi
-  'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200',
-  'https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=1200',
-  'https://images.unsplash.com/photo-1521017430209-a6cb9156a64b?w=1200', // Işıklı iç mekan
-];
-
-const CAROUSEL_INTERVAL_MS = 4500;
 
 export default function LoginScreen() {
   const insets = useSafeAreaInsets();
@@ -66,19 +54,39 @@ export default function LoginScreen() {
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState<Record<string, string | undefined>>({});
   const isSubmittingRef = useRef(false);
+  const [isAppleAvailable, setIsAppleAvailable] = useState(false);
 
   // Google Auth Setup
-  const redirectUri = Google.useAuthRequest.length ? undefined : undefined; // expo handles this
-  const [request, response, promptAsync] = Google.useAuthRequest({
-    clientId: '398883081062-uqa0hbpbo6nhjcbigltircbbg3ngr7oi.apps.googleusercontent.com',
-    iosClientId: '398883081062-uqa0hbpbo6nhjcbigltircbbg3ngr7oi.apps.googleusercontent.com',
-    androidClientId: '398883081062-uqa0hbpbo6nhjcbigltircbbg3ngr7oi.apps.googleusercontent.com',
-    scopes: ['openid', 'profile', 'email'],
-  });
+  const [request, response, promptAsync] = Google.useAuthRequest(googleAuthRequestConfig);
+
+  useEffect(() => {
+    let mounted = true;
+    if (Platform.OS !== 'ios') {
+      setIsAppleAvailable(false);
+      return;
+    }
+
+    AppleAuthentication.isAvailableAsync()
+      .then((available) => {
+        if (mounted) setIsAppleAvailable(available);
+      })
+      .catch(() => {
+        if (mounted) setIsAppleAvailable(false);
+      });
+
+    return () => {
+      mounted = false;
+    };
+  }, []);
 
   useEffect(() => {
     if (response?.type === 'success' && response.authentication) {
-      handleGoogleSuccess(response.authentication.idToken || response.authentication.accessToken);
+      const token = response.authentication.idToken;
+      if (!token) {
+        Alert.alert(t('auth.login_error_title'), 'Google kimlik tokenı alınamadı. Google client ID ve OpenID ayarlarını kontrol edin.');
+        return;
+      }
+      handleGoogleSuccess(token);
     }
   }, [response]);
 
@@ -117,6 +125,11 @@ export default function LoginScreen() {
 
   const signInWithApple = async () => {
     try {
+      if (Platform.OS !== 'ios' || !isAppleAvailable) {
+        Alert.alert(t('auth.login_error_title'), 'Apple ile giriş yalnızca desteklenen iOS cihazlarda kullanılabilir.');
+        return;
+      }
+
       const credential = await AppleAuthentication.signInAsync({
         requestedScopes: [
           AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
@@ -231,26 +244,25 @@ export default function LoginScreen() {
     if (provider === 'Apple') {
       signInWithApple();
     } else if (provider === 'Google') {
+      if (!hasGoogleClientIdForPlatform()) {
+        Alert.alert(t('auth.login_error_title'), getGoogleClientIdConfigError());
+        return;
+      }
+      if (!request) {
+        Alert.alert(t('auth.login_error_title'), 'Google giriş isteği hazırlanamadı. Lütfen yapılandırmayı kontrol edin.');
+        return;
+      }
       promptAsync();
     }
-  }, [promptAsync]);
+  }, [promptAsync, request, t, isAppleAvailable]);
 
   const clearFieldError = useCallback((field: string) => {
     setErrors((prev) => (prev[field] ? { ...prev, [field]: undefined } : prev));
   }, []);
 
-  const currentImage = FALLBACK_PLACE_IMAGES[0];
-
   return (
     <View style={styles.container}>
-      {/* Sabit Arka plan görseli */}
-      <View style={StyleSheet.absoluteFill}>
-        <Image
-          source={{ uri: currentImage }}
-          style={styles.backgroundImage}
-          resizeMode="cover"
-        />
-      </View>
+      <AuthBackgroundCarousel />
 
       {/* Koyu gradient overlay – metin ve form okunabilir olsun */}
       <LinearGradient
@@ -371,28 +383,34 @@ export default function LoginScreen() {
                           {t('auth.login')}
                         </Button>
 
-                        <View style={styles.divider}>
-                          <View style={styles.dividerLine} />
-                          <Text style={styles.dividerLabel}>{t('auth.or')}</Text>
-                          <View style={styles.dividerLine} />
-                        </View>
+                        {roleType === 'user' && (
+                          <>
+                            <View style={styles.divider}>
+                              <View style={styles.dividerLine} />
+                              <Text style={styles.dividerLabel}>{t('auth.or')}</Text>
+                              <View style={styles.dividerLine} />
+                            </View>
 
-                        <View style={styles.socialRow}>
-                          <TouchableOpacity
-                            onPress={() => handleSocialLogin('Google')}
-                            style={styles.socialBtnGoogle}
-                          >
-                            <Text style={styles.socialIconG}>G</Text>
-                            <Text style={styles.socialBtnTextGoogle}>{t('auth.google')}</Text>
-                          </TouchableOpacity>
-                          <TouchableOpacity
-                            onPress={() => handleSocialLogin('Apple')}
-                            style={styles.socialBtnApple}
-                          >
-                            <IconSymbol name="apple.logo" size={20} color="#fff" />
-                            <Text style={styles.socialBtnTextWhite}>{t('auth.apple')}</Text>
-                          </TouchableOpacity>
-                        </View>
+                            <View style={styles.socialRow}>
+                              <TouchableOpacity
+                                onPress={() => handleSocialLogin('Google')}
+                                style={styles.socialBtnGoogle}
+                              >
+                                <Text style={styles.socialIconG}>G</Text>
+                                <Text style={styles.socialBtnTextGoogle}>{t('auth.google')}</Text>
+                              </TouchableOpacity>
+                              {isAppleAvailable && (
+                                <TouchableOpacity
+                                  onPress={() => handleSocialLogin('Apple')}
+                                  style={styles.socialBtnApple}
+                                >
+                                  <IconSymbol name="apple.logo" size={20} color="#fff" />
+                                  <Text style={styles.socialBtnTextWhite}>{t('auth.apple')}</Text>
+                                </TouchableOpacity>
+                              )}
+                            </View>
+                          </>
+                        )}
                       </View>
                     </BlurView>
                   </View>
@@ -494,7 +512,7 @@ const styles = StyleSheet.create({
   card: {
     width: '100%',
     borderRadius: 28,
-    overflow: 'hidden',
+    overflow: 'visible',
     marginTop: 20,
     marginBottom: 12,
     borderWidth: 1,
