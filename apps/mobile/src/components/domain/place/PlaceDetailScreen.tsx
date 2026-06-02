@@ -5,6 +5,7 @@
  * Premium dark-first design with rich information architecture.
  */
 
+import { getTranslatedCategory } from '@/src/utils/categories';
 import { router, useLocalSearchParams } from "expo-router";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
@@ -37,6 +38,7 @@ import { useTranslation } from 'react-i18next';
 import { useAppStore } from "@/src/store/useAppStore";
 import { useSettingsStore } from "@/src/store/useSettingsStore";
 import { getPlaceImageSource, hasPlaceImage } from "@/src/utils/placeImages";
+import { buildPlaceCardMeta, getPlaceStatusLocalized, formatPriceRange } from "@/src/utils/placeCardHelpers";
 import { spacing, createTextStyle } from "@/src/constants/design";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
@@ -63,11 +65,11 @@ const REVIEW_SHEET_COLLAPSED = Math.min(SCREEN_HEIGHT * 0.55, 520);
 const REVIEW_SHEET_EXPANDED = SCREEN_HEIGHT * 0.72;
 
 /** Menü öğelerini kategoriye göre gruplar */
-function groupMenuByCategory(items: any[]): { category: string; items: any[] }[] {
+function groupMenuByCategory(items: any[], t: any): { category: string; items: any[] }[] {
   const map = new Map<string, any[]>();
   for (const item of items) {
     if (item.type === 'image') continue; // image tipli öğeleri atla
-    const cat = item.category || 'Menü';
+    const cat = getTranslatedCategory(item.category, t) || t("place_detail.menu");
     if (!map.has(cat)) map.set(cat, []);
     map.get(cat)!.push(item);
   }
@@ -400,6 +402,11 @@ export default function PlaceDetailScreen({
     return getPlaceImageSource(place || id);
   }, [place, id]);
 
+  const menuGroups = useMemo(() => {
+    if (!place?.menu_items) return [];
+    return groupMenuByCategory(place.menu_items, t);
+  }, [place?.menu_items, t]);
+
   const averageRating = useMemo(() => {
     if (!reviews.length) return null;
     const sum = reviews.reduce((acc, r) => acc + (r.rating || 0), 0);
@@ -414,6 +421,13 @@ export default function PlaceDetailScreen({
     }
     return `${(dist / 1000).toFixed(1)} km uzakta`;
   }, [userLocation, place]);
+
+  const placeMeta = useMemo(() => buildPlaceCardMeta(place), [place]);
+  const hoursStatus = useMemo(
+    () => getPlaceStatusLocalized(place?.opening_time, place?.closing_time, t),
+    [place?.opening_time, place?.closing_time, t],
+  );
+  const priceLabel = useMemo(() => formatPriceRange(placeMeta.priceRange), [placeMeta.priceRange]);
 
   // Typography styles - inline to avoid type issues
   const h1Style = { fontSize: 24, fontWeight: "700" as const, color: colors.text.primary };
@@ -528,10 +542,59 @@ export default function PlaceDetailScreen({
           </View>
 
           <View style={styles.metaRow}>
-            {place?.category && <Text style={[bodySmallStyle, { color: colors.text.secondary }]}>{place.category}</Text>}
+            {place?.category && <Text style={[bodySmallStyle, { color: colors.text.secondary }]}>{getTranslatedCategory(place.category, t)}</Text>}
             {place?.city && place?.category && <Text style={[bodySmallStyle, { color: colors.text.tertiary }]}> • </Text>}
             {place?.city && <Text style={[bodySmallStyle, { color: colors.text.secondary }]}>{place.city}</Text>}
+            {priceLabel ? (
+              <>
+                <Text style={[bodySmallStyle, { color: colors.text.tertiary }]}> • </Text>
+                <Text style={[bodySmallStyle, { color: colors.text.secondary, fontWeight: '700' }]}>{priceLabel}</Text>
+              </>
+            ) : null}
           </View>
+
+          {(placeMeta.rating != null && placeMeta.rating > 0) || place?.opening_time ? (
+            <View style={styles.quickInfoRow}>
+              {placeMeta.rating != null && placeMeta.rating > 0 ? (
+                <View style={[styles.quickInfoChip, { backgroundColor: colors.surface.elevated }]}>
+                  <IconSymbol name="star.fill" size={14} color="#FBBF24" />
+                  <Text style={[bodySmallStyle, { fontWeight: '700', marginLeft: 4 }]}>
+                    {placeMeta.rating.toFixed(1)}
+                  </Text>
+                  {placeMeta.reviewCount ? (
+                    <Text style={[captionStyle, { marginLeft: 4 }]}>
+                      ({t('explore.rating_count', { count: placeMeta.reviewCount })})
+                    </Text>
+                  ) : null}
+                </View>
+              ) : null}
+              {place?.opening_time && place?.closing_time ? (
+                <View style={[styles.quickInfoChip, { backgroundColor: colors.surface.elevated }]}>
+                  <View style={[styles.statusDot, { backgroundColor: hoursStatus.color }]} />
+                  <Text style={[bodySmallStyle, { marginLeft: 6, fontWeight: '600' }]}>
+                    {hoursStatus.hoursText}
+                  </Text>
+                  <Text style={[captionStyle, { marginLeft: 6, color: hoursStatus.color, fontWeight: '700' }]}>
+                    {hoursStatus.label}
+                  </Text>
+                </View>
+              ) : (
+                <View style={[styles.quickInfoChip, { backgroundColor: colors.surface.elevated }]}>
+                  <IconSymbol name="clock.fill" size={14} color={colors.text.tertiary} />
+                  <Text style={[captionStyle, { marginLeft: 6 }]}>{t('place_detail.hours_unavailable')}</Text>
+                </View>
+              )}
+            </View>
+          ) : null}
+
+          {place?.user_review ? (
+            <View style={[styles.userReviewBox, { backgroundColor: colors.surface.elevated, borderColor: colors.surface.border }]}>
+              <IconSymbol name="quote.opening" size={16} color={colors.text.tertiary} />
+              <Text style={[bodySmallStyle, styles.userReviewText]} numberOfLines={3}>
+                {place.user_review.replace(/^"|"$/g, '')}
+              </Text>
+            </View>
+          ) : null}
 
           {/* Tags */}
         </View>
@@ -582,15 +645,15 @@ export default function PlaceDetailScreen({
               <Text style={[h2Style, { fontSize: 18, marginTop: spacing.lg, marginBottom: spacing.base }]}>{t("place_detail.features")}</Text>
               <View style={styles.highlightsGrid}>
                 {[
-                  { fa5: "wifi" as const, fa5Unavailable: "wifi-slash" as const, label: "Wi-Fi", available: true },
-                  { fa5: "plug" as const, fa5Unavailable: "plug" as const, label: "Priz", available: true },
+                  { fa5: "wifi" as const, fa5Unavailable: "wifi-slash" as const, label: t("place_detail.feature_wifi"), available: true },
+                  { fa5: "plug" as const, fa5Unavailable: "plug" as const, label: t("place_detail.feature_plug"), available: true },
                   {
                     fa5: "volume-mute" as const,
                     fa5Unavailable: "volume-mute" as const,
-                    label: "Sessiz",
+                    label: t("place_detail.feature_quiet"),
                     available: place?.tags?.includes("quiet"),
                   },
-                  { fa5: "umbrella" as const, fa5Unavailable: "umbrella" as const, label: "Terasta\nOturma", available: false },
+                  { fa5: "umbrella" as const, fa5Unavailable: "umbrella" as const, label: t("place_detail.feature_terrace"), available: false },
                 ].map((item, idx) => {
                   const iconName = item.available ? item.fa5 : item.fa5Unavailable;
                   const iconColor = item.available ? colors.text.primary : colors.text.tertiary;
@@ -700,6 +763,27 @@ export default function PlaceDetailScreen({
             </Card>
           )}
 
+          {/* Inline Menu Preview — Coming Soon */}
+          {(!place?.menu_items || place.menu_items.length === 0) && (
+            <Card style={styles.sectionCard}>
+              <View style={styles.sectionHeaderRow}>
+                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
+                  <IconSymbol name="list.bullet.clipboard" size={22} color={colors.text.tertiary} />
+                  <Text style={[h1Style, { fontSize: 20 }]}>{t("place_detail.menu")}</Text>
+                </View>
+              </View>
+              <View style={[styles.menuComingSoonBox, { backgroundColor: colors.surface.elevated, borderColor: colors.surface.border }]}>
+                <IconSymbol name="clock.fill" size={28} color={colors.text.tertiary} />
+                <Text style={[bodyStyle, { marginTop: spacing.sm, fontWeight: '600', textAlign: 'center' }]}>
+                  {t('place_detail.menu_coming_soon')}
+                </Text>
+                <Text style={[captionStyle, { marginTop: 4, textAlign: 'center' }]}>
+                  {t('place_detail.menu_coming_soon_desc')}
+                </Text>
+              </View>
+            </Card>
+          )}
+
           {/* Location Preview */}
           {place?.address && (
             <Card style={styles.sectionCard}>
@@ -733,7 +817,9 @@ export default function PlaceDetailScreen({
           {!isVenueDashboard && similarPlaces.length > 0 && (
             <Section title={t("place_detail.similar_places")} style={{ marginTop: spacing.xl }}>
               <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.similarScrollContent}>
-                {similarPlaces.map((similarPlace) => (
+                {similarPlaces.map((similarPlace) => {
+                  const similarMeta = buildPlaceCardMeta(similarPlace);
+                  return (
                   <View key={similarPlace.id} style={styles.similarCardWrapper}>
                     <PlaceCard
                       image={getPlaceImageSource(similarPlace)}
@@ -741,11 +827,18 @@ export default function PlaceDetailScreen({
                       title={similarPlace.name}
                       subtitle={similarPlace.subtitle || similarPlace.description}
                       tags={similarPlace.tags}
-                      hasMenu={!!(similarPlace.menu_items && similarPlace.menu_items.length > 0)}
+                      hasMenu={similarMeta.hasMenu}
+                      menuComingSoon={similarMeta.menuComingSoon}
+                      openingTime={similarMeta.openingTime}
+                      closingTime={similarMeta.closingTime}
+                      rating={similarMeta.rating}
+                      reviewCount={similarMeta.reviewCount}
+                      priceLabel={similarMeta.priceLabel}
+                      category={similarMeta.category}
                       onPress={() => router.push({ pathname: "/place/[id]", params: { id: String(similarPlace.id) } })}
                     />
                   </View>
-                ))}
+                );})}
               </ScrollView>
             </Section>
           )}
@@ -1141,7 +1234,7 @@ export default function PlaceDetailScreen({
                     ) : (
                       /* ===== TEXT MENU — PREMIUM CATEGORIZED ===== */
                       <View style={{ paddingBottom: spacing.lg }}>
-                        {groupMenuByCategory(place.menu_items).map((group, gIdx) => (
+                        {groupMenuByCategory(place.menu_items, t).map((group, gIdx) => (
                           <View key={gIdx} style={{ marginBottom: spacing.xl }}>
                             {/* Category Header */}
                             <View style={{ 
@@ -1223,7 +1316,7 @@ export default function PlaceDetailScreen({
                     <View style={{ alignItems: 'center', paddingVertical: 40 }}>
                       <IconSymbol name="list.bullet.clipboard" size={48} color={colors.text.tertiary} />
                       <Text style={[bodySmallStyle, { textAlign: 'center', marginTop: spacing.base }]}>
-                        Bu mekan henüz menü eklememiş.
+                        {t("place_detail.menu_coming_soon")}
                       </Text>
                     </View>
                   )}
@@ -1345,6 +1438,47 @@ const styles = StyleSheet.create({
   metaRow: {
     flexDirection: "row",
     alignItems: "center",
+    flexWrap: "wrap",
+  },
+  quickInfoRow: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    gap: spacing.sm,
+    marginTop: spacing.sm,
+  },
+  quickInfoChip: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingHorizontal: spacing.sm,
+    paddingVertical: spacing.xs,
+    borderRadius: 12,
+  },
+  statusDot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+  },
+  userReviewBox: {
+    flexDirection: "row",
+    alignItems: "flex-start",
+    gap: spacing.sm,
+    marginTop: spacing.base,
+    padding: spacing.base,
+    borderRadius: 14,
+    borderWidth: StyleSheet.hairlineWidth,
+  },
+  userReviewText: {
+    flex: 1,
+    fontStyle: "italic",
+    lineHeight: 20,
+  },
+  menuComingSoonBox: {
+    alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: spacing.xl,
+    paddingHorizontal: spacing.base,
+    borderRadius: 16,
+    borderWidth: StyleSheet.hairlineWidth,
   },
   tagsRow: {
     flexDirection: "row",

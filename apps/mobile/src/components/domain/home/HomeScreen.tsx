@@ -39,6 +39,7 @@ import {
 } from "@/src/components/shared/ui";
 import { usePreferences } from "@/src/store/preferences";
 import { getPlaceImageSource, hasPlaceImage } from "@/src/utils/placeImages";
+import { buildPlaceCardMeta } from "@/src/utils/placeCardHelpers";
 import { createTextStyle, s } from "@/src/constants/design";
 import { getAllPlaces } from "@/src/services/mekanService";
 import { recommendPlaces } from "@/src/services/api";
@@ -65,7 +66,7 @@ const PLACE_TYPES = [
   "Kebapçı", "Balıkçı", "Tatlıcı", "Pastane", "Burgerci", "Pizzacı", "Dönerci", "Nargile Cafe",
 ];
 
-type DisplayMode = "idle" | "browse" | "ai";
+type DisplayMode = "browse" | "ai";
 
 /** Common shape for list items (RecommendItem | Place) */
 type PlaceLike = { id: number | string; name?: string; category?: string; photo_url?: string; description?: string; subtitle?: string; tags?: string[] };
@@ -109,7 +110,6 @@ function HomeListHeader({
   const { colors } = useTheme();
   const { t } = useTranslation();
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
       <View>
         <View style={styles.header}>
           <View style={styles.headerLeft}>
@@ -205,7 +205,6 @@ function HomeListHeader({
           </View>
         )}
       </View>
-    </TouchableWithoutFeedback>
   );
 }
 
@@ -225,7 +224,7 @@ export default function HomeScreen() {
   const [error, setError] = useState("");
   const [aiItems, setAiItems] = useState<RecommendItem[]>([]);
   const [aiSummary, setAiSummary] = useState("");
-  const [displayMode, setDisplayMode] = useState<DisplayMode>("idle");
+  const [displayMode, setDisplayMode] = useState<DisplayMode>("browse");
   const [refreshing, setRefreshing] = useState(false);
   const [placesById, setPlacesById] = useState<Record<string, Place>>({});
   const [filterSheetOpen, setFilterSheetOpen] = useState(false);
@@ -418,7 +417,7 @@ export default function HomeScreen() {
     return list.slice(0, 12);
   }, [allPlaces, filters.category, filters.location]);
 
-  const displayList = displayMode === "ai" ? aiItems : displayMode === "browse" ? filteredPlaces : [];
+  const displayList = displayMode === "ai" ? aiItems : filteredPlaces;
   const isAiMode = displayMode === "ai";
 
   const handleApplyFilters = useCallback(
@@ -429,10 +428,6 @@ export default function HomeScreen() {
         purpose: v.purpose ?? undefined,
         budget: v.budget ?? undefined,
       });
-      // Filtre uygulandığında browse moduna geç
-      if (v.category || v.location) {
-        setDisplayMode("browse");
-      }
     },
     [patchPrefs]
   );
@@ -442,7 +437,7 @@ export default function HomeScreen() {
     resetPrefs();
     setFilters({ location: null, category: null, vibe: null, purpose: null, budget: null });
     setQuery("");
-    setDisplayMode("idle");
+    setDisplayMode("browse");
   }, [resetPrefs]);
 
   const getLocationFromName = (name: string) => (name?.includes(" - ") ? name.split(" - ")[1]?.trim() : undefined);
@@ -462,7 +457,19 @@ export default function HomeScreen() {
     ({ item, index }: { item: RecommendItem | Place; index: number }) => {
       const it = item as PlaceLike;
       const id = String(it.id);
+      const isAi = displayMode === "ai";
       const place = placesById[id] || (item as Place);
+      const aiItem = isAi ? (item as RecommendItem) : undefined;
+      const mergedForMeta: Partial<Place> = {
+        ...place,
+        opening_time: place?.opening_time ?? aiItem?.opening_time,
+        closing_time: place?.closing_time ?? aiItem?.closing_time,
+        average_rating: place?.average_rating ?? aiItem?.average_rating,
+        review_count: place?.review_count ?? aiItem?.review_count,
+        price_range: place?.price_range ?? aiItem?.price_range,
+        category: place?.category ?? aiItem?.category,
+        address: place?.address ?? aiItem?.address,
+      };
       const merged = {
         id,
         name: it.name,
@@ -472,7 +479,7 @@ export default function HomeScreen() {
         subtitle: it.subtitle ?? place?.subtitle,
       };
       const loc = getLocationFromName(it.name ?? "");
-      const isAi = displayMode === "ai";
+      const meta = buildPlaceCardMeta(mergedForMeta);
 
       return (
         <AnimatedPlaceCard
@@ -480,14 +487,21 @@ export default function HomeScreen() {
           index={index}
           image={getPlaceImageSource(merged)}
           imagePlaceholder={!hasPlaceImage(merged)}
-          title={it.name ?? "Mekan"}
-          subtitle={it.subtitle ?? place?.subtitle}
+          title={it.name ?? t('common.venue')}
+          subtitle={it.subtitle ?? place?.subtitle ?? place?.description}
           tags={it.tags ?? place?.tags}
           location={loc}
           explanation={isAi ? (item as RecommendItem).explanation : undefined}
           distance_m={isAi ? (item as RecommendItem).distance_m : undefined}
           isRecommended={isAi}
-          hasMenu={!!(place?.menu_items && place.menu_items.length > 0)}
+          hasMenu={meta.hasMenu}
+          menuComingSoon={meta.menuComingSoon}
+          openingTime={meta.openingTime}
+          closingTime={meta.closingTime}
+          rating={meta.rating}
+          reviewCount={meta.reviewCount}
+          priceLabel={meta.priceLabel}
+          category={meta.category ?? it.category ?? place?.category}
           onPress={() => handlePlacePress(id)}
         />
       );
@@ -499,10 +513,6 @@ export default function HomeScreen() {
   const viewabilityConfig = useRef({ itemVisiblePercentThreshold: 50 }).current;
 
   const listEmpty = useCallback(() => {
-    // Idle modda hiçbir şey gösterme (başlangıç durumu)
-    if (displayMode === "idle") {
-      return null;
-    }
     if (loading && allPlaces.length === 0) {
       return (
         <View style={styles.skeletonWrap}>
@@ -530,7 +540,7 @@ export default function HomeScreen() {
         </View>
       );
     }
-    if (displayMode === "browse" && filteredPlaces.length === 0) {
+    if (!isAiMode && filteredPlaces.length === 0) {
       return (
         <View style={styles.centerWrap}>
           <EmptyState
@@ -545,7 +555,6 @@ export default function HomeScreen() {
     }
     return null;
   }, [
-    displayMode,
     loading,
     allPlaces.length,
     error,

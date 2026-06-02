@@ -26,8 +26,12 @@ export type RecommendItem = {
   photo_url?: string;
   explanation?: string;
   tags?: string[];
-  subtitle?: string;
-  data_id?: string; // Google Place ID (yorum analizi için)
+  opening_time?: string;
+  closing_time?: string;
+  average_rating?: number;
+  review_count?: number;
+  price_range?: number;
+  address?: string;
 };
 
 export type RecommendResponse = {

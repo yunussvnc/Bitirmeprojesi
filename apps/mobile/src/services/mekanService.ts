@@ -1,6 +1,7 @@
 import { apiGet, apiPut } from "@/src/utils/apiClient";
 import { logger } from "@/src/utils/logger";
 import { API_BASE_URL } from "@/src/constants/api";
+import { normalizePriceRange } from "@/src/utils/placeCardHelpers";
 
 export type Place = {
   id: number | string;
@@ -26,6 +27,9 @@ export type Place = {
   saved_count?: number;
   popularity_score?: number;
   menu_items?: any[];
+  user_review?: string;
+  phone_number?: string;
+  data_id?: string;
 };
 
 export type PaginatedPlaces = {
@@ -72,14 +76,34 @@ function normalizePlace(p: any): Place {
   }
 
   const video_url = p?.video_url || undefined;
-  const average_rating = typeof p?.average_rating === 'number' ? p.average_rating : undefined;
-  const price_range = typeof p?.price_range === 'number' ? p.price_range : undefined;
+  const average_rating =
+    typeof p?.average_rating === 'number'
+      ? p.average_rating
+      : typeof p?.rating === 'number'
+        ? p.rating
+        : typeof p?.puan === 'number'
+          ? p.puan
+          : undefined;
+  const price_range = normalizePriceRange(p?.price_range ?? p?.price_level);
   const features = p?.features || undefined;
-  const opening_time = p?.opening_time || undefined;
-  const closing_time = p?.closing_time || undefined;
-  const review_count = typeof p?.review_count === 'number' ? p.review_count : undefined;
+  const opening_time = p?.opening_time || p?.acilis || undefined;
+  const closing_time = p?.closing_time || p?.kapanis || undefined;
+  const review_count = (() => {
+    const appReviews = typeof p?.review_count === 'number' ? p.review_count : undefined;
+    const googleReviews =
+      typeof p?.user_ratings_total === 'number'
+        ? p.user_ratings_total
+        : typeof p?.yorum_sayisi === 'number'
+          ? p.yorum_sayisi
+          : undefined;
+    if (typeof appReviews === 'number' && appReviews > 0) return appReviews;
+    return googleReviews ?? appReviews;
+  })();
   const saved_count = typeof p?.saved_count === 'number' ? p.saved_count : undefined;
   const popularity_score = typeof p?.popularity_score === 'number' ? p.popularity_score : undefined;
+  const user_review = p?.user_review || undefined;
+  const phone_number = p?.phone_number || p?.telefon || undefined;
+  const data_id = p?.data_id || p?.vector_id || undefined;
   
   let menu_items: any[] | undefined = undefined;
   const rawMenu = p?.menu_items ?? p?.menu_items_json;
@@ -92,7 +116,34 @@ function normalizePlace(p: any): Place {
     }
   }
 
-  return { id, name, subtitle, description, campaign_text, tags, category, address, city, latitude, longitude, photo_url, gallery_urls, video_url, average_rating, price_range, features, opening_time, closing_time, review_count, saved_count, popularity_score, menu_items };
+  return {
+    id,
+    name,
+    subtitle,
+    description,
+    campaign_text,
+    tags,
+    category,
+    address,
+    city,
+    latitude,
+    longitude,
+    photo_url,
+    gallery_urls,
+    video_url,
+    average_rating,
+    price_range,
+    features,
+    opening_time,
+    closing_time,
+    review_count,
+    saved_count,
+    popularity_score,
+    menu_items,
+    user_review,
+    phone_number,
+    data_id,
+  };
 }
 
 export async function getPlaces(page = 1, pageSize = 20): Promise<PaginatedPlaces> {
@@ -124,7 +175,7 @@ export async function getPlaces(page = 1, pageSize = 20): Promise<PaginatedPlace
 
 export async function getAllPlaces(): Promise<Place[]> {
   try {
-    const data = await apiGet<any>('/places/?page=1&page_size=500');
+    const data = await apiGet<any>('/places/?page=1&page_size=1000');
     const arr = Array.isArray(data?.items) ? data.items : Array.isArray(data) ? data : [];
     logger.log(`[getAllPlaces] Loaded ${arr.length} places`);
     return arr.map(normalizePlace);
