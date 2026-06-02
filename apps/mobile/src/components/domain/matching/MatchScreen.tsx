@@ -45,6 +45,8 @@ import {
   IconZodiacVirgo
 } from "tabler-icons-react-native";
 import { useTranslation } from "react-i18next";
+import { toggleBlockUser } from "@/src/services/moderationService";
+import { useBlockedUserIds } from "@/src/hooks/useBlockedUserIds";
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get("window");
 const SWIPE_THRESHOLD = SCREEN_WIDTH * 0.2;
@@ -55,7 +57,12 @@ const STAR_SIGN_OPTIONS = [
   "Koç", "Boğa", "İkizler", "Yengeç", "Aslan", "Başak",
   "Terazi", "Akrep", "Yay", "Oğlak", "Kova", "Balık",
 ];
-const GENDER_FILTER_OPTIONS = ["Hepsi", "Kadın", "Erkek", "Diğer"];
+const GENDER_FILTER_KEYS = [
+  { value: "Hepsi", tKey: "matching.gender_all" },
+  { value: "Kadın", tKey: "matching.gender_female" },
+  { value: "Erkek", tKey: "matching.gender_male" },
+  { value: "Diğer", tKey: "matching.gender_other" },
+];
 
 interface MatchFilters {
   gender: string;
@@ -125,7 +132,7 @@ export default function MatchScreen() {
   const [scrollMode, setScrollMode] = useState(false);
   const [activeTab, setActiveTab] = useState<"swipe" | "likes">("swipe");
   const [selectedLike, setSelectedLike] = useState<MatchCandidate | null>(null);
-  const [blockedUsers, setBlockedUsers] = useState<number[]>([]);
+  const { addBlocked, isBlocked } = useBlockedUserIds();
   const [actedLikes, setActedLikes] = useState<number[]>([]);
   const [showFilterModal, setShowFilterModal] = useState(false);
   const [filters, setFilters] = useState<MatchFilters>({ ...DEFAULT_FILTERS });
@@ -201,8 +208,12 @@ export default function MatchScreen() {
                 {
                   text: t("matching.yes_delete"),
                   style: "destructive",
-                  onPress: () => {
-                    deleteProfile();
+                  onPress: async () => {
+                    try {
+                      await deleteProfile();
+                    } catch (error) {
+                      Alert.alert(t("common.error"), t("place_extra.review_submit_err", "Bir hata oluştu. Lütfen tekrar deneyin."));
+                    }
                   },
                 },
               ]
@@ -239,13 +250,21 @@ export default function MatchScreen() {
     return true;
   };
 
-  const currentCandidate = currentCandidateRaw && passesFilter(currentCandidateRaw) ? currentCandidateRaw : undefined;
+  const currentCandidate =
+    currentCandidateRaw &&
+    passesFilter(currentCandidateRaw) &&
+    !isBlocked(currentCandidateRaw.user_id) &&
+    !actedLikes.includes(currentCandidateRaw.user_id)
+      ? currentCandidateRaw
+      : undefined;
 
   // Auto-skip candidates that don't pass filters (BUG-03 & BUG-19: guard against infinite loop and already acted candidates)
   useEffect(() => {
     if (
-      currentCandidateRaw && 
-      (!passesFilter(currentCandidateRaw) || actedLikes.includes(currentCandidateRaw.user_id)) && 
+      currentCandidateRaw &&
+      (!passesFilter(currentCandidateRaw) ||
+        actedLikes.includes(currentCandidateRaw.user_id) ||
+        isBlocked(currentCandidateRaw.user_id)) &&
       currentIndex < candidates.length - 1
     ) {
       nextCandidate();
@@ -555,9 +574,15 @@ export default function MatchScreen() {
         {
           text: t("matching.yes_block"),
           style: "destructive",
-          onPress: () => {
+          onPress: async () => {
             const userId = profile.user_id || profile.id;
-            setBlockedUsers(prev => [...prev, userId]);
+            try {
+              await toggleBlockUser(userId);
+              addBlocked(userId);
+            } catch {
+              Alert.alert(t("common.error"), t("user_profile.action_failed"));
+              return;
+            }
 
             if (activeTab === "swipe" && currentCandidate?.user_id === userId) {
               handleSwipe("left"); // "pass" the candidate
@@ -764,7 +789,7 @@ export default function MatchScreen() {
         }}
       >
         <View style={styles.likesGrid}>
-          {candidates.filter(p => !blockedUsers.includes(p.user_id) && !actedLikes.includes(p.user_id) && passesFilter(p)).map((person) => (
+          {candidates.filter(p => !isBlocked(p.user_id) && !actedLikes.includes(p.user_id) && passesFilter(p)).map((person) => (
             <Pressable
               key={person.user_id}
               style={({ pressed }) => [
@@ -1046,7 +1071,7 @@ export default function MatchScreen() {
               color: colors.text.primary,
             }}
           >
-            Eşleşme
+            {t("match_profile.matching_title")}
           </ThemedText>
         </View>
 
@@ -1069,13 +1094,15 @@ export default function MatchScreen() {
             bottom: 4,
           }}
         >
-          <TouchableOpacity
-            style={{ marginRight: 16 }}
-            hitSlop={12}
-            onPress={handleContextMenu}
-          >
-            <IconSymbol name="ellipsis" size={24} color={ACCENT} />
-          </TouchableOpacity>
+          {hasProfile && (
+            <TouchableOpacity
+              style={{ marginRight: 16 }}
+              hitSlop={12}
+              onPress={handleContextMenu}
+            >
+              <IconSymbol name="ellipsis" size={24} color={ACCENT} />
+            </TouchableOpacity>
+          )}
           <TouchableOpacity
             onPress={() => router.push("/match-profile-setup")}
             hitSlop={12}
@@ -1091,7 +1118,7 @@ export default function MatchScreen() {
 
       {isGhostMode ? (
         <View style={styles.emptyState}>
-          <IconSymbol name="ghost" size={64} color={colors.text.secondary} />
+          <IconSymbol name="eye.slash" size={64} color={colors.text.secondary} />
           <ThemedText style={styles.emptyTitle}>{t("matching.ghost_mode_on")}</ThemedText>
           <ThemedText style={[styles.emptySubtitle, { color: colors.text.secondary }]}>
             {t("matching.ghost_mode_desc")}
@@ -1136,7 +1163,7 @@ export default function MatchScreen() {
                   activeTab === "likes" && styles.segmentTextActive,
                 ]}
               >
-                Beğeniler
+                {t("match_profile.likes_title")}
               </ThemedText>
             </TouchableOpacity>
           </View>
@@ -1215,13 +1242,15 @@ export default function MatchScreen() {
                   </ThemedText>
                 </View>
 
-                <TouchableOpacity
-                  style={{ position: "absolute", right: 16, bottom: 8 }}
-                  hitSlop={12}
-                  onPress={handleContextMenu}
-                >
-                  <IconSymbol name="ellipsis" size={24} color={ACCENT} />
-                </TouchableOpacity>
+                {hasProfile && (
+                  <TouchableOpacity
+                    style={{ position: "absolute", right: 16, bottom: 8 }}
+                    hitSlop={12}
+                    onPress={handleContextMenu}
+                  >
+                    <IconSymbol name="ellipsis" size={24} color={ACCENT} />
+                  </TouchableOpacity>
+                )}
               </View>
 
               <View style={[styles.cardContainer, { paddingTop: 16 }]}>
@@ -1382,16 +1411,16 @@ export default function MatchScreen() {
               {/* Gender */}
               <ThemedText style={{ color: colors.text.secondary, fontSize: 13, fontWeight: "600", textTransform: "uppercase", letterSpacing: 0.5, marginBottom: 10 }}>{t("matching.gender_title")}</ThemedText>
               <View style={{ flexDirection: "row", gap: 8, marginBottom: 24, flexWrap: "wrap" }}>
-                {GENDER_FILTER_OPTIONS.map(g => (
+                {GENDER_FILTER_KEYS.map(g => (
                   <TouchableOpacity
-                    key={g}
-                    onPress={() => setTempFilters(f => ({ ...f, gender: g }))}
+                    key={g.value}
+                    onPress={() => setTempFilters(f => ({ ...f, gender: g.value }))}
                     style={{
                       paddingHorizontal: 16, paddingVertical: 10, borderRadius: 20,
-                      backgroundColor: tempFilters.gender === g ? ACCENT : (isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)"),
+                      backgroundColor: tempFilters.gender === g.value ? ACCENT : (isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)"),
                     }}
                   >
-                    <ThemedText style={{ fontSize: 14, fontWeight: "600", color: tempFilters.gender === g ? "#000" : colors.text.primary }}>{g}</ThemedText>
+                    <ThemedText style={{ fontSize: 14, fontWeight: "600", color: tempFilters.gender === g.value ? "#000" : colors.text.primary }}>{t(g.tKey)}</ThemedText>
                   </TouchableOpacity>
                 ))}
               </View>
@@ -1502,7 +1531,7 @@ export default function MatchScreen() {
                 >
                   <ThemedText style={{ fontSize: 13, fontWeight: "600", color: tempFilters.starSign === "" ? "#000" : colors.text.primary }}>{t("matching.gender_all")}</ThemedText>
                 </TouchableOpacity>
-                {STAR_SIGN_OPTIONS.map(s => (
+                {STAR_SIGN_OPTIONS.map((s, idx) => (
                   <TouchableOpacity
                     key={s}
                     onPress={() => setTempFilters(f => ({ ...f, starSign: f.starSign === s ? "" : s }))}
@@ -1511,7 +1540,7 @@ export default function MatchScreen() {
                       backgroundColor: tempFilters.starSign === s ? ACCENT : (isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)"),
                     }}
                   >
-                    <ThemedText style={{ fontSize: 13, fontWeight: "600", color: tempFilters.starSign === s ? "#000" : colors.text.primary }}>{s}</ThemedText>
+                    <ThemedText style={{ fontSize: 13, fontWeight: "600", color: tempFilters.starSign === s ? "#000" : colors.text.primary }}>{t(`zodiac.sign_${idx}`, s)}</ThemedText>
                   </TouchableOpacity>
                 ))}
               </View>
