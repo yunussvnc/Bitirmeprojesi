@@ -3,22 +3,42 @@
     "name": "AsEmOs",
     "slug": "asemos",
     "version": "1.0.0",
+    "owner": "ulascan",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "asemos",
     "userInterfaceStyle": "automatic",
+    "extra": {
+      "eas": {
+        "projectId": "f10d96ca-d411-496e-b091-a71891e7b03c"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/your-project-id",
+      "enabled": true,
+      "fallbackToCacheTimeout": 0,
+      "checkAutomatically": "ON_LOAD"
+    },
     "ios": {
       "buildNumber": "1",
       "supportsTablet": true,
       "infoPlist": {
         "NSLocationWhenInUseUsageDescription": "Bu uygulama mekanların yakınında olup olmadığınızı kontrol etmek için konum bilgisine ihtiyaç duyar.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "Bu uygulama yakınınızdaki mekanları bildirebilmek için arka planda konum erişimine ihtiyaç duyar.",
         "NSPhotoLibraryUsageDescription": "Bu uygulama yorumlarınıza fotoğraf eklemeniz için galeri erişimine ihtiyaç duyar.",
         "NSCameraUsageDescription": "Bu uygulama yorumlarınıza fotoğraf çekmeniz için kamera erişimine ihtiyaç duyar.",
+        "UIBackgroundModes": [
+          "remote-notification"
+        ],
         "NSAppTransportSecurity": {
           "NSAllowsLocalNetworking": true
         }
       },
-      "bundleIdentifier": "com.asemos.mobile"
+      "bundleIdentifier": "com.asemos.mobile",
+      "usesAppleSignIn": true
     },
     "android": {
       "versionCode": 1,
@@ -69,6 +89,13 @@
         }
       ],
       [
+        "expo-media-library",
+        {
+          "photosPermission": "Bu uygulama yorumlarınıza fotoğraf eklemeniz için galeri erişimine ihtiyaç duyar.",
+          "savePhotosPermission": "Bu uygulama galerinize fotoğraf kaydetmek için erişime ihtiyaç duyar."
+        }
+      ],
+      [
         "expo-splash-screen",
         {
           "image": "./assets/images/splash-icon.png",
@@ -79,7 +106,16 @@
             "backgroundColor": "#000000"
           }
         }
-      ]
+      ],
+      [
+        "expo-notifications",
+        {
+          "icon": "./assets/images/icon.png",
+          "color": "#ffffff"
+        }
+      ],
+      "expo-localization",
+      "expo-web-browser"
     ],
     "experiments": {
       "typedRoutes": true
