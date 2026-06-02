@@ -63,7 +63,7 @@ class GroqWrapper(LLMWrapper):
         if not self.api_key:
             raise ValueError("GROQ_API_KEY tanimli degil — .env dosyasini kontrol edin")
 
-        logger.info(f"[GroqWrapper] Hazir: model={self.model}, key={self.api_key[:8]}...")
+        logger.info(f"[GroqWrapper] Hazir: model={self.model}, key_configured=True")
 
 
     # ---- iç yardımcı ----
@@ -273,8 +273,8 @@ class LayeredLLMWrapper(LLMWrapper):
         # Katman 2: Local (lazy — sadece Groq çökünce yüklenir)
         self._local = HuggingFaceWrapper(model_name=local_model)
 
-        active = "Groq → Local" if self._groq else "Local only"
-        logger.info(f"[LayeredLLM] Hazır — mod: {active}")
+        active = "Groq -> Local" if self._groq else "Local only"
+        logger.info(f"[LayeredLLM] Hazır - mod: {active}")
 
     # ---- sync ----
 
@@ -282,10 +282,10 @@ class LayeredLLMWrapper(LLMWrapper):
         if self._groq:
             try:
                 result = self._groq.generate(prompt, context)
-                logger.info("[LayeredLLM] Yanıt: Groq ✓")
+                logger.info("[LayeredLLM] Yanıt: Groq OK")
                 return result
             except Exception as e:
-                logger.warning(f"[LayeredLLM] Groq başarısız → Local fallback: {e}")
+                logger.warning(f"[LayeredLLM] Groq başarısız -> Local fallback: {e}")
 
         logger.info("[LayeredLLM] Yanıt: Local HuggingFace")
         return self._local.generate(prompt, context)
@@ -296,10 +296,10 @@ class LayeredLLMWrapper(LLMWrapper):
         if self._groq:
             try:
                 result = await self._groq.generate_async(prompt, context)
-                logger.info("[LayeredLLM] Async yanıt: Groq ✓")
+                logger.info("[LayeredLLM] Async yanıt: Groq OK")
                 return result
             except Exception as e:
-                logger.warning(f"[LayeredLLM] Groq başarısız → Local fallback: {e}")
+                logger.warning(f"[LayeredLLM] Groq başarısız -> Local fallback: {e}")
 
         logger.info("[LayeredLLM] Async yanıt: Local HuggingFace")
         return await self._local.generate_async(prompt, context)

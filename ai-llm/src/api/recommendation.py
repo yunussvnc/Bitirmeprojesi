@@ -18,6 +18,8 @@ class RecommendationRequest(BaseModel):
     boylam: float
     kategori: Optional[str] = None
     kullanici_id: Optional[int] = None
+    language: Optional[str] = None
+    locale: Optional[str] = None
 
 
 class MekanOneri(BaseModel):
@@ -55,7 +57,8 @@ async def get_recommendations(request: RecommendationRequest):
             enlem=request.enlem,
             boylam=request.boylam,
             kategori=request.kategori,
-            kullanici_id=request.kullanici_id
+            kullanici_id=request.kullanici_id,
+            language=request.language or request.locale or "tr"
         )
         
         return RecommendationResponse(**recommendations)

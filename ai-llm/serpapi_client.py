@@ -109,6 +109,12 @@ class SerpApiClient:
             price = item.get("price", "")
             price_level = len(price) if price else 2
             
+            hours = (
+                item.get("hours")
+                or item.get("operating_hours")
+                or item.get("open_state")
+            )
+
             return {
                 "name": item.get("title", ""),
                 "address": item.get("address", ""),
@@ -121,7 +127,8 @@ class SerpApiClient:
                 "category": item.get("type", "Kafe"),
                 "photo_url": self._get_best_photo(item),
                 "description": item.get("description", f"{item.get('title', '')} - {item.get('address', '')}"),
-                "user_review": item.get("user_review", "")
+                "user_review": item.get("user_review", ""),
+                "hours": hours,
             }
             
         except Exception as e:
