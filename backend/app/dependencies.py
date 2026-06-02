@@ -34,6 +34,11 @@ def get_current_user(
     user = db.query(models.User).filter(models.User.id == int(user_id)).first()
     if not user or not user.is_active:
         raise HTTPException(status_code=401, detail="Kullanıcı bulunamadı.")
+    # Token version kontrolü (Oturum Yönetimi)
+    token_ver = payload.get("ver", 0)
+    user_ver = user.token_version if user.token_version is not None else 0
+    if token_ver != user_ver:
+        raise HTTPException(status_code=401, detail="Oturumunuz sonlandırılmış. Lütfen tekrar giriş yapın.")
     return user
 
 

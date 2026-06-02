@@ -3,6 +3,10 @@
 
 import os
 import sys
+
+os.environ["TESTING"] = "1"
+os.environ["DATABASE_URL"] = "sqlite:///./test_suite.db"
+
 import pytest
 from datetime import datetime, timedelta, timezone, date
 from unittest.mock import patch

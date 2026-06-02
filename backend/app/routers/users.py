@@ -2,11 +2,14 @@
 
 from typing import Optional
 
+# pyrefly: ignore [missing-import]
 from fastapi import APIRouter, Depends, HTTPException, Query
+# pyrefly: ignore [missing-import]
 from sqlalchemy.orm import Session
 
 import models, schemas, crud
 from app.dependencies import get_db, get_current_user, get_optional_user
+from app.services.rate_limiter import follow_rate_limiter
 
 router = APIRouter(tags=["Users"])
 
@@ -137,29 +140,84 @@ def get_user_profile(
     user = crud.get_user_by_id(db, user_id)
     if not user:
         raise HTTPException(status_code=404, detail="Kullanıcı bulunamadı.")
+        
+    if current_user:
+        # Hard block (Tam Görünmezlik) kontrolü
+        block_exists = db.query(models.UserBlock).filter(
+            (
+                (models.UserBlock.blocker_id == current_user.id) & 
+                (models.UserBlock.blocked_id == user_id)
+            ) | (
+                (models.UserBlock.blocker_id == user_id) & 
+                (models.UserBlock.blocked_id == current_user.id)
+            )
+        ).first()
+        if block_exists:
+            raise HTTPException(status_code=404, detail="Kullanıcı bulunamadı.")
+            
     followers_count = len(crud.get_follower_ids(db, user_id))
     following_count = len(crud.get_following_ids(db, user_id))
-    is_following = crud.is_following(db, current_user.id if current_user else 0, user_id)
-    return schemas.UserProfile(
+    
+    # Dummygram-style: follow_status hesapla (pending, accepted, veya None)
+    follow_status = None
+    is_following = False
+    if current_user:
+        follow_row = db.query(models.Follow).filter(
+            models.Follow.follower_id == current_user.id,
+            models.Follow.following_id == user_id,
+        ).first()
+        if follow_row:
+            follow_status = follow_row.status  # "pending" or "accepted"
+            is_following = follow_row.status == "accepted"
+    
+    # Gizlilik kontrolü (Munia Privacy Guard)
+    from app.services.privacy_guard import PrivacyGuard
+    viewer_id = current_user.id if current_user else None
+    can_view = PrivacyGuard.can_view_content(db, user_id, viewer_id)
+    
+    profile = schemas.UserProfile(
         **schemas.User.model_validate(user).model_dump(),
         followers_count=followers_count,
         following_count=following_count,
         is_following=is_following,
+        follow_status=follow_status,
     )
+    
+    # Gizli profil & takipçi değilse → post/istatistik gizlenir
+    if not can_view:
+        return PrivacyGuard.filter_profile_for_non_follower(profile.model_dump())
+    
+    return profile
 
 
 @router.get("/users/{user_id}/stats", response_model=schemas.UserStats)
 def get_user_stats_endpoint(
     user_id: int,
     db: Session = Depends(get_db),
+    current_user: Optional[models.User] = Depends(get_optional_user),
 ):
     user = crud.get_user_by_id(db, user_id)
     if not user:
         raise HTTPException(status_code=404, detail="Kullanıcı bulunamadı.")
+        
+    if current_user:
+        # Hard block (Tam Görünmezlik) kontrolü
+        block_exists = db.query(models.UserBlock).filter(
+            (
+                (models.UserBlock.blocker_id == current_user.id) & 
+                (models.UserBlock.blocked_id == user_id)
+            ) | (
+                (models.UserBlock.blocker_id == user_id) & 
+                (models.UserBlock.blocked_id == current_user.id)
+            )
+        ).first()
+        if block_exists:
+            raise HTTPException(status_code=404, detail="Kullanıcı bulunamadı.")
+            
     return crud.get_user_stats(db, user_id)
 
 
-@router.post("/users/{user_id}/follow")
+@router.post("/users/{user_id}/follow", dependencies=[Depends(follow_rate_limiter)])
 def toggle_follow_user(
     user_id: int,
     db: Session = Depends(get_db),
@@ -171,10 +229,72 @@ def toggle_follow_user(
         raise HTTPException(status_code=404, detail="Kullanıcı bulunamadı.")
     if user_id == current_user.id:
         raise HTTPException(status_code=400, detail="Kendinizi takip edemezsiniz.")
-    is_following_now, was_created = crud.toggle_follow(db, current_user.id, user_id)
-    if was_created and is_following_now:
-        crud.create_notification(db, user_id, "follow", current_user.id)
-    return {"following": is_following_now}
+    
+    is_following, was_created = crud.toggle_follow(db, current_user.id, user_id)
+    
+    # determine status string for notifications/UI
+    follow_row = db.query(models.Follow).filter(
+        models.Follow.follower_id == current_user.id,
+        models.Follow.following_id == user_id,
+    ).first()
+    follow_status = follow_row.status if follow_row else None
+
+    if was_created and follow_status:
+        import json
+        payload = json.dumps({
+            "actor_avatar": current_user.avatar_url,
+            "actor_username": current_user.username
+        })
+        notif_type = "follow" if follow_status == "accepted" else "follow_request"
+        crud.create_notification(db, user_id, notif_type, current_user.id, payload=payload)
+    elif not was_created:
+        # Unfollowed — remove any pending follow_request notification
+        stale = db.query(models.Notification).filter(
+            models.Notification.user_id == user_id,
+            models.Notification.actor_id == current_user.id,
+            models.Notification.type.in_(["follow_request", "follow"]),
+        ).all()
+        for s in stale:
+            db.delete(s)
+        db.commit()
+    
+    # Dummygram: Anlık UI güncellemesi için güncel followers_count dön
+    followers_count = len(crud.get_follower_ids(db, user_id))
+    return {"status": follow_status, "followers_count": followers_count, "following": is_following}
+
+@router.post("/users/{user_id}/follow/accept")
+def accept_follow_request(
+    user_id: int,
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(get_current_user),
+):
+    """Bize gelen takip isteğini kabul eder."""
+    # user_id follower'dır, current_user ise following_id'dir.
+    success = crud.accept_follow_request(db, follower_id=user_id, following_id=current_user.id)
+    if not success:
+        raise HTTPException(status_code=404, detail="Takip isteği bulunamadı.")
+    
+    # İstek kabul edilince bildirim gönder
+    import json
+    payload = json.dumps({
+        "actor_avatar": current_user.avatar_url,
+        "actor_username": current_user.username
+    })
+    crud.create_notification(db, user_id, "follow_accepted", current_user.id, payload=payload)
+    return {"success": True}
+
+@router.post("/users/{user_id}/follow/reject")
+def reject_follow_request(
+    user_id: int,
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(get_current_user),
+):
+    """Bize gelen takip isteğini reddeder."""
+    success = crud.reject_follow_request(db, follower_id=user_id, following_id=current_user.id)
+    if not success:
+        raise HTTPException(status_code=404, detail="Takip isteği bulunamadı.")
+    return {"success": True}
+
 
 
 @router.get("/users/{user_id}/followers")

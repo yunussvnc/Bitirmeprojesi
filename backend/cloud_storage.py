@@ -59,6 +59,52 @@ def upload_image(file_bytes: bytes, folder: str = "asemos/places") -> dict:
         "bytes": result.get("bytes"),
     }
 
+def upload_image_variants(variants: dict, folder: str = "asemos/posts") -> dict:
+    """
+    3 farklı varyantı (thumbnail, medium, full) Cloudinary'ye yükler.
+    Aslında Cloudinary tek bir master dosyadan dönüşüm yapabilir ama
+    blurhash ve anlık progressive yükleme için 3 ayrı küçük dosya saklamak 
+    agresif cache sisteminde (Munia style) daha performanslıdır.
+    """
+    _ensure_configured()
+    
+    import uuid
+    base_id = uuid.uuid4().hex
+    
+    # Full (Master) upload
+    res_full = cloudinary.uploader.upload(
+        variants["full_bytes"],
+        folder=folder,
+        public_id=f"{base_id}_full",
+        resource_type="image"
+    )
+    
+    # Medium upload
+    res_med = cloudinary.uploader.upload(
+        variants["medium_bytes"],
+        folder=folder,
+        public_id=f"{base_id}_medium",
+        resource_type="image"
+    )
+    
+    # Thumbnail upload
+    res_thumb = cloudinary.uploader.upload(
+        variants["thumbnail_bytes"],
+        folder=folder,
+        public_id=f"{base_id}_thumb",
+        resource_type="image"
+    )
+    
+    return {
+        "url": res_full["secure_url"],
+        "medium_url": res_med["secure_url"],
+        "thumbnail_url": res_thumb["secure_url"],
+        "public_id": res_full["public_id"],
+        "width": res_full.get("width"),
+        "height": res_full.get("height"),
+        "blurhash": variants.get("blurhash")
+    }
+
 
 def upload_video(file_bytes: bytes, folder: str = "asemos/videos") -> dict:
     _ensure_configured()

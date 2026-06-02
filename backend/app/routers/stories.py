@@ -3,6 +3,7 @@
 from typing import Optional
 
 from fastapi import APIRouter, Depends, HTTPException, Query
+from pydantic import BaseModel, Field
 from sqlalchemy.orm import Session
 
 import models, schemas, crud
@@ -83,3 +84,123 @@ def get_feed_stories(
     )
     items = [_story_to_schema(s) for s in stories]
     return schemas.PaginatedStories(items=items, total=total, page=page, page_size=page_size)
+
+
+@router.get("/users/{user_id}/stories", response_model=schemas.PaginatedStories)
+def get_user_stories(
+    user_id: int,
+    page: int = Query(1, ge=1),
+    page_size: int = Query(50, ge=1, le=100),
+    db: Session = Depends(get_db),
+):
+    """Belirli bir kullanıcının aktif hikayelerini getirir."""
+    from datetime import datetime, timezone
+    query = db.query(models.Story).filter(
+        models.Story.user_id == user_id,
+        models.Story.expires_at > datetime.now(timezone.utc),
+    ).order_by(models.Story.created_at.desc())
+    total = query.count()
+    stories = query.offset((page - 1) * page_size).limit(page_size).all()
+    items = [_story_to_schema(s) for s in stories]
+    return schemas.PaginatedStories(items=items, total=total, page=page, page_size=page_size)
+
+
+class StoryReplyRequest(BaseModel):
+    text: str = Field(..., min_length=1, max_length=500)
+
+
+@router.post("/stories/{story_id}/reply")
+async def reply_to_story(
+    story_id: int,
+    data: StoryReplyRequest,
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(get_current_user),
+):
+    """
+    Bir hikayeye yanıt ver → DM konuşmasına story_reply mesajı olarak kaydeder.
+
+    Akış:
+    1. Hikaye var mı ve süresi dolmamış mı kontrol et
+    2. Kendi hikayene yanıt veremezsin
+    3. Bu iki kullanıcı arasında mevcut DM konuşması var mı? Yoksa oluştur
+    4. Yanıtı story_reply tipinde mesaj olarak kaydet (snapshot_url hikaye silindikten sonra da çalışır)
+    5. WebSocket üzerinden story sahibine anlık bildir
+    """
+    from datetime import datetime, timezone
+
+    # 1. Hikayeyi bul
+    story = db.query(models.Story).filter(models.Story.id == story_id).first()
+    if not story:
+        raise HTTPException(status_code=404, detail="Hikaye bulunamadı.")
+    if story.expires_at.replace(tzinfo=timezone.utc) < datetime.now(timezone.utc):
+        raise HTTPException(status_code=410, detail="Bu hikayenin süresi dolmuş.")
+
+    # 2. Kendi hikayene yanıt verme
+    story_owner_id = story.user_id
+    if story_owner_id == current_user.id:
+        raise HTTPException(status_code=400, detail="Kendi hikayenize yanıt veremezsiniz.")
+
+    # 3. Mevcut DM konuşmasını bul veya oluştur
+    conv = db.query(models.MatchConversation).filter(
+        (
+            (models.MatchConversation.user1_id == current_user.id) &
+            (models.MatchConversation.user2_id == story_owner_id)
+        ) | (
+            (models.MatchConversation.user1_id == story_owner_id) &
+            (models.MatchConversation.user2_id == current_user.id)
+        )
+    ).first()
+
+    if not conv:
+        conv = models.MatchConversation(
+            user1_id=current_user.id,
+            user2_id=story_owner_id,
+            is_active=True,
+        )
+        db.add(conv)
+        db.flush()  # ID almak için flush, commit henüz değil
+
+    # 4. story_reply mesajını kaydet (snapshot URL hikaye silindikten sonra da görünür)
+    snapshot_url = story.thumbnail_url or story.media_url
+    msg = models.Message(
+        conversation_id=conv.id,
+        sender_id=current_user.id,
+        content=data.text.strip(),
+        message_type="story_reply",
+        parent_story_id=story.id,
+        story_snapshot_url=snapshot_url,
+        status="sent",
+    )
+    db.add(msg)
+    conv.last_message_at = datetime.now(timezone.utc)
+    db.commit()
+    db.refresh(msg)
+
+    # 5. WebSocket üzerinden hikaye sahibine bildir
+    from app.websocket.manager import manager
+    sender_name = current_user.first_name or current_user.username or f"User {current_user.id}"
+    msg_data = {
+        "id": msg.id,
+        "conversation_id": conv.id,
+        "sender_id": msg.sender_id,
+        "content": msg.content,
+        "message_type": "story_reply",
+        "parent_story_id": story.id,
+        "story_snapshot_url": snapshot_url,
+        "is_read": False,
+        "status": "sent",
+        "created_at": msg.created_at.isoformat() if msg.created_at else None,
+    }
+    await manager.send_global_notification(story_owner_id, {
+        "type": "new_message",
+        "message": msg_data,
+        "sender_name": sender_name,
+        "content": f"Hikayenize yanıt verdi: {data.text[:60]}",
+        "conversation_id": conv.id,
+    })
+
+    return {
+        "ok": True,
+        "conversation_id": conv.id,
+        "message_id": msg.id,
+    }

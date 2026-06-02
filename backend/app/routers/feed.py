@@ -2,13 +2,17 @@
 
 from typing import Optional
 
-from fastapi import APIRouter, Depends, HTTPException, Query
+# pyrefly: ignore [missing-import]
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Query
+# pyrefly: ignore [missing-import]
 from sqlalchemy.orm import Session
 
 import models, schemas, crud
 from app.dependencies import get_db, get_current_user, get_optional_user
 
 router = APIRouter(tags=["Feed"])
+
+FEED_PAGE_SIZE = 12  # Her sayfada kaç gönderi gelsin
 
 
 def _post_to_schema(post: models.Post, db: Session, current_user_id: int | None) -> schemas.Post:
@@ -38,6 +42,18 @@ def _post_to_schema(post: models.Post, db: Session, current_user_id: int | None)
         )
         for m in (post.media or [])
     ]
+    # Serialize tagged users
+    tagged_users = [
+        schemas.UserSummary(
+            id=tag.user.id,
+            username=tag.user.username,
+            first_name=tag.user.first_name,
+            avatar_url=tag.user.avatar_url,
+            is_following=crud.is_following(db, current_user_id, tag.user.id) if current_user_id else False,
+        )
+        for tag in (post.tags or [])
+        if tag.user
+    ]
     is_liked = crud.is_post_liked_by_user(db, post.id, current_user_id) if current_user_id else False
     return schemas.Post(
         id=post.id,
@@ -54,55 +70,144 @@ def _post_to_schema(post: models.Post, db: Session, current_user_id: int | None)
         author=author,
         place=place,
         media=media,
+        tagged_users=tagged_users,
     )
 
 
-@router.get("/feed", response_model=schemas.PaginatedPosts)
-def get_feed(
-    page: int = Query(1, ge=1),
-    page_size: int = Query(20, ge=1, le=100),
-    filter: str = Query("all", description="Filtre: all veya following"),
-    db: Session = Depends(get_db),
-    current_user: Optional[models.User] = Depends(get_optional_user),
+# pyrefly: ignore [missing-import]
+from fastapi.concurrency import run_in_threadpool
+import json
+
+def _get_feed_db_sync(
+    db: Session,
+    cursor: str | None,
+    page_size: int,
+    current_user_id: int | None,
+    filter_mode: str,
 ):
-    """Ana akış (feed) için gönderileri getirir. Takip filtresi destekler."""
-    filter_mode = "following" if filter == "following" else "all"
-    posts, total = crud.get_feed_paginated(
+    """DB işlemlerini threadpool'da güvenle çalıştırmak için kapsayıcı (cursor-based)"""
+    posts, next_cursor, has_more = crud.get_feed_paginated_cursor(
         db,
-        page=page,
+        cursor=cursor,
         page_size=page_size,
-        current_user_id=current_user.id if current_user else None,
+        current_user_id=current_user_id,
         filter_mode=filter_mode,
     )
-    items = [_post_to_schema(p, db, current_user.id if current_user else None) for p in posts]
-    return schemas.PaginatedPosts(items=items, total=total, page=page, page_size=page_size)
+    items = [_post_to_schema(p, db, current_user_id) for p in posts]
+    return {
+        "items": [i.dict() for i in items],
+        "next_cursor": next_cursor,
+        "has_more": has_more,
+        "page_size": page_size,
+    }
 
 
-@router.get("/feed/reels", response_model=schemas.PaginatedPosts)
-def get_reels(
-    page: int = Query(1, ge=1),
-    page_size: int = Query(20, ge=1, le=100),
-    filter: str = Query("all"),
+@router.get("/feed", response_model=schemas.CursorPaginatedPosts)
+async def get_feed(
+    cursor: Optional[str] = Query(None, description="Sayfalama cursor'u (önceki yanıttaki next_cursor)"),
+    page_size: int = Query(FEED_PAGE_SIZE, ge=1, le=50),
+    filter: str = Query("all", description="Filtre: all veya following"),
+    # Geriye dönük uyumluluk: eski istemciler page gönderebilir, görmezden gel
+    page: int = Query(1, ge=1, include_in_schema=False),
     db: Session = Depends(get_db),
     current_user: Optional[models.User] = Depends(get_optional_user),
 ):
-    """Reels içeriklerini akış biçiminde getirir."""
+    """Ana akış (feed) için gönderileri cursor tabanlı sayfalama ile getirir."""
+    from app.core.redis_client import get_redis
+    redis = get_redis()
+
     filter_mode = "following" if filter == "following" else "all"
-    posts, total = crud.get_feed_paginated(
+    current_uid = current_user.id if current_user else None
+    user_id_str = str(current_uid) if current_uid else "anon"
+    cursor_key = cursor or "start"
+    cache_key = f"cache:feed_v2:{filter_mode}:{user_id_str}:c{cursor_key}:s{page_size}"
+
+    if redis:
+        try:
+            cached = await redis.get(cache_key)
+            if cached:
+                return json.loads(cached)
+        except Exception:
+            pass
+
+    result = await run_in_threadpool(
+        _get_feed_db_sync, db, cursor, page_size, current_uid, filter_mode
+    )
+
+    if redis:
+        try:
+            ttl = 60 if cursor else 30  # İlk sayfa daha kısa cache (yeni içerik gelir)
+            await redis.setex(cache_key, ttl, json.dumps(result, default=str))
+        except Exception:
+            pass
+
+    return result
+
+
+@router.get("/feed/reels", response_model=schemas.CursorPaginatedPosts)
+def get_reels(
+    cursor: Optional[str] = Query(None),
+    page_size: int = Query(FEED_PAGE_SIZE, ge=1, le=50),
+    filter: str = Query("all"),
+    page: int = Query(1, ge=1, include_in_schema=False),
+    db: Session = Depends(get_db),
+    current_user: Optional[models.User] = Depends(get_optional_user),
+):
+    """Reels içeriklerini cursor tabanlı sayfalama ile getirir."""
+    filter_mode = "following" if filter == "following" else "all"
+    current_uid = current_user.id if current_user else None
+    posts, next_cursor, has_more = crud.get_feed_paginated_cursor(
         db,
-        page=page,
+        cursor=cursor,
         page_size=page_size,
-        current_user_id=current_user.id if current_user else None,
+        current_user_id=current_uid,
         filter_mode=filter_mode,
         post_type="reel",
     )
+    items = [_post_to_schema(p, db, current_uid) for p in posts]
+    return schemas.CursorPaginatedPosts(
+        items=items,
+        next_cursor=next_cursor,
+        has_more=has_more,
+        page_size=page_size,
+    )
+
+
+@router.get("/feed/discover", response_model=schemas.PaginatedPosts)
+def get_discover_feed(
+    page: int = Query(1, ge=1),
+    page_size: int = Query(20, ge=1, le=100),
+    db: Session = Depends(get_db),
+    current_user: Optional[models.User] = Depends(get_optional_user),
+):
+    """
+    Keşfet (Discover) akışı.
+    Etkileşim skoru ve zaman aşımı (Time Decay) algoritmasına göre sıralanmış
+    ve AI moderasyonundan geçmiş (is_flagged=False) postları getirir.
+    """
+    posts, total = crud.get_discover_feed_paginated(db, page=page, page_size=page_size)
     items = [_post_to_schema(p, db, current_user.id if current_user else None) for p in posts]
     return schemas.PaginatedPosts(items=items, total=total, page=page, page_size=page_size)
+
+
+async def invalidate_feed_cache():
+    """Yeni post atıldığında feed önbelleğini temizler"""
+    from app.core.redis_client import get_redis
+    redis = get_redis()
+    if not redis:
+        return
+    try:
+        # scan_iter ile 'cache:feed:*' anahtarlarını bulup sil
+        async for key in redis.scan_iter(match="cache:feed:*"):
+            await redis.delete(key)
+    except Exception:
+        pass
 
 
 @router.post("/posts", response_model=schemas.Post)
 def create_post(
     data: schemas.PostCreate,
+    background_tasks: BackgroundTasks,
     db: Session = Depends(get_db),
     current_user: models.User = Depends(get_current_user),
 ):
@@ -111,6 +216,10 @@ def create_post(
     post = crud.create_post(db, current_user.id, data)
     db.refresh(post)
     post = crud.get_post_by_id(db, post.id)
+    
+    # Cache Invalidation'ı arka plana at
+    background_tasks.add_task(invalidate_feed_cache)
+    
     return _post_to_schema(post, db, current_user.id)
 
 
@@ -141,6 +250,7 @@ def delete_post_endpoint(
 @router.post("/posts/{post_id}/like")
 def toggle_like(
     post_id: int,
+    background_tasks: BackgroundTasks,
     db: Session = Depends(get_db),
     current_user: models.User = Depends(get_current_user),
 ):
@@ -151,7 +261,15 @@ def toggle_like(
     post, liked = crud.toggle_post_like(db, post_id, current_user.id)
     post = crud.get_post_by_id(db, post_id)
     if liked and post.user_id != current_user.id:
-        crud.create_notification(db, post.user_id, "like", current_user.id, post_id=post_id)
+        import json
+        thumb = post.media[0].thumbnail_url or post.media[0].media_url if post.media else None
+        payload = json.dumps({
+            "actor_avatar": current_user.avatar_url,
+            "actor_username": current_user.username,
+            "post_thumbnail": thumb
+        })
+        crud.create_notification(db, post.user_id, "like", current_user.id, post_id=post_id, payload=payload)
+    background_tasks.add_task(invalidate_feed_cache)
     return {"liked": liked, "like_count": post.like_count}
 
 
@@ -161,9 +279,24 @@ def get_post_comments(
     page: int = Query(1, ge=1),
     page_size: int = Query(20, ge=1, le=100),
     db: Session = Depends(get_db),
+    current_user: Optional[models.User] = Depends(get_optional_user),
 ):
     """Gönderinin altındaki yorumları sayfalı olarak getirir."""
-    comments, total = crud.get_comments_paginated(db, post_id, page, page_size)
+    blocked_ids = set()
+    if current_user:
+        blocked_by_me = {r[0] for r in db.query(models.UserBlock.blocked_id).filter(models.UserBlock.blocker_id == current_user.id).all()}
+        blocked_me = {r[0] for r in db.query(models.UserBlock.blocker_id).filter(models.UserBlock.blocked_id == current_user.id).all()}
+        blocked_ids = blocked_by_me | blocked_me
+
+    # Normalde crud içinde yapılmalı ama basitlik için burada filtreleyebiliriz.
+    # Doğru sayfalama için DB bazında filtrelemek daha iyi:
+    comments_query = db.query(models.Comment).filter(models.Comment.post_id == post_id)
+    if blocked_ids:
+        comments_query = comments_query.filter(models.Comment.user_id.notin_(blocked_ids))
+        
+    total = comments_query.count()
+    comments = comments_query.order_by(models.Comment.created_at.desc()).offset((page - 1) * page_size).limit(page_size).all()
+    
     out = []
     for c in comments:
         d = {"id": c.id, "user_id": c.user_id, "post_id": c.post_id, "text": c.text, "created_at": c.created_at}
@@ -176,6 +309,7 @@ def get_post_comments(
 def add_comment(
     post_id: int,
     data: schemas.PostCommentCreate,
+    background_tasks: BackgroundTasks,
     db: Session = Depends(get_db),
     current_user: models.User = Depends(get_current_user),
 ):
@@ -186,7 +320,16 @@ def add_comment(
     if comment is None:
         raise HTTPException(status_code=403, detail="Bu gönderide yorumlar kapatılmıştır.")
     if post.user_id != current_user.id:
-        crud.create_notification(db, post.user_id, "comment", current_user.id, post_id=post_id)
+        import json
+        thumb = post.media[0].thumbnail_url or post.media[0].media_url if post.media else None
+        payload = json.dumps({
+            "actor_avatar": current_user.avatar_url,
+            "actor_username": current_user.username,
+            "post_thumbnail": thumb,
+            "text": data.text[:50]
+        })
+        crud.create_notification(db, post.user_id, "comment", current_user.id, post_id=post_id, payload=payload)
+    background_tasks.add_task(invalidate_feed_cache)
     return schemas.PostComment(
         id=comment.id,
         user_id=comment.user_id,
@@ -206,6 +349,12 @@ def get_user_posts(
     current_user: Optional[models.User] = Depends(get_optional_user),
 ):
     """Belirli bir kullanıcının gönderilerini sayfalı olarak getirir."""
+    # Gizlilik kontrolü (Munia Privacy Guard)
+    from app.services.privacy_guard import PrivacyGuard
+    viewer_id = current_user.id if current_user else None
+    if not PrivacyGuard.can_view_content(db, user_id, viewer_id):
+        return schemas.PaginatedPosts(items=[], total=0, page=page, page_size=page_size)
+    
     posts, total = crud.get_posts_by_user(db, user_id, page, page_size)
     items = [_post_to_schema(p, db, current_user.id if current_user else None) for p in posts]
     return schemas.PaginatedPosts(items=items, total=total, page=page, page_size=page_size)
