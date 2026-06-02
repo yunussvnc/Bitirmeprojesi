@@ -11,7 +11,7 @@ import {
   Animated,
   Keyboard,
 } from "react-native";
-import { useRouter } from "expo-router";
+import { useRouter, useLocalSearchParams, useFocusEffect } from "expo-router";
 import { Avatar } from "@/src/components/ui";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { useTheme } from "@/src/hooks/useTheme";
@@ -21,6 +21,8 @@ import { toggleFollow } from "@/src/services/userService";
 import { useAuthStore } from "@/src/store/useAuthStore";
 import { handleApiError } from "@/src/utils/errorHandler";
 import { useTranslation } from "react-i18next";
+import { openConversation } from "@/src/services/messageService";
+import { useBlockedUserIds } from "@/src/hooks/useBlockedUserIds";
 
 const DEBOUNCE_MS = 400;
 
@@ -37,11 +39,17 @@ export default function FriendSearchScreen() {
 
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const inputRef = useRef<TextInput>(null);
+  const { isBlocked, refresh: refreshBlocked } = useBlockedUserIds();
 
   // Animated glow for the search bar
   const glowAnim = useRef(new Animated.Value(0)).current;
 
-  // Cleanup debounce timer on unmount
+  useFocusEffect(
+    useCallback(() => {
+      refreshBlocked();
+    }, [refreshBlocked])
+  );
+
   useEffect(() => {
     return () => {
       if (debounceRef.current) clearTimeout(debounceRef.current);
@@ -81,10 +89,10 @@ export default function FriendSearchScreen() {
       setLoading(true);
       setSearched(true);
       try {
+        await refreshBlocked();
         const res = await searchUsers(trimmed, 1, 30);
-        // Filter out current user from results
         const filtered = (res.items || []).filter(
-          (u) => u.id !== authUser?.id
+          (u) => u.id !== authUser?.id && !isBlocked(u.id)
         );
         setResults(filtered);
       } catch (e) {
@@ -93,7 +101,7 @@ export default function FriendSearchScreen() {
         setLoading(false);
       }
     },
-    [authUser?.id]
+    [authUser?.id, isBlocked, refreshBlocked]
   );
 
   const handleChangeText = (text: string) => {
@@ -129,9 +137,10 @@ export default function FriendSearchScreen() {
     });
     try {
       const res = await toggleFollow(userId);
+      const newFollowing = res.status === "accepted";
       setResults((prev) => {
         const next = [...prev];
-        next[index] = { ...next[index], is_following: res.following };
+        next[index] = { ...next[index], is_following: newFollowing };
         return next;
       });
     } catch (e) {
@@ -145,9 +154,26 @@ export default function FriendSearchScreen() {
     }
   };
 
-  const navigateToProfile = (user: UserSummary) => {
+  const { mode } = useLocalSearchParams<{ mode?: string }>();
+
+  const navigateToProfile = async (user: UserSummary) => {
     lightImpact();
     Keyboard.dismiss();
+    
+    if (mode === "chat") {
+      try {
+        const res = await openConversation(user.id);
+        const displayName = user.first_name
+          ? `${user.first_name}${user.last_name ? ` ${user.last_name}` : ""}`
+          : user.username || `User ${user.id}`;
+          
+        router.push(`/chat/${res.conversation_id}?name=${encodeURIComponent(displayName)}&avatar=${encodeURIComponent(user.avatar_url || "")}` as any);
+      } catch (e) {
+        handleApiError(e);
+      }
+      return;
+    }
+
     if (user.id === authUser?.id) {
       router.push("/(tabs)/profile" as any);
     } else {
@@ -185,37 +211,39 @@ export default function FriendSearchScreen() {
           )}
         </View>
 
-        <TouchableOpacity
-          style={[
-            styles.followBtn,
-            item.is_following
-              ? {
-                  backgroundColor: colors.surface.elevated,
-                  borderWidth: 1,
-                  borderColor: colors.surface.border,
-                }
-              : {
-                  backgroundColor: colors.accent.primary,
-                  borderWidth: 1,
-                  borderColor: colors.accent.primary,
-                },
-          ]}
-          onPress={() => handleToggleFollow(item.id, index)}
-          activeOpacity={0.8}
-        >
-          <Text
+        {mode !== "chat" && (
+          <TouchableOpacity
             style={[
-              styles.followBtnText,
-              {
-                color: item.is_following
-                  ? colors.text.primary
-                  : colors.accent.onPrimary,
-              },
+              styles.followBtn,
+              item.is_following
+                ? {
+                    backgroundColor: colors.surface.elevated,
+                    borderWidth: 1,
+                    borderColor: colors.surface.border,
+                  }
+                : {
+                    backgroundColor: colors.accent.primary,
+                    borderWidth: 1,
+                    borderColor: colors.accent.primary,
+                  },
             ]}
+            onPress={() => handleToggleFollow(item.id, index)}
+            activeOpacity={0.8}
           >
-            {item.is_following ? t("friend_search.following") : t("friend_search.follow")}
-          </Text>
-        </TouchableOpacity>
+            <Text
+              style={[
+                styles.followBtnText,
+                {
+                  color: item.is_following
+                    ? colors.text.primary
+                    : colors.accent.onPrimary,
+                },
+              ]}
+            >
+              {item.is_following ? t("friend_search.following") : t("friend_search.follow")}
+            </Text>
+          </TouchableOpacity>
+        )}
       </TouchableOpacity>
     );
   };

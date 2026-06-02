@@ -30,22 +30,16 @@ export default function VenueEditScreen() {
   const [closingTime, setClosingTime] = useState('23:00');
   const [isOpen, setIsOpen] = useState(true);
   const [priceRange, setPriceRange] = useState(2);
-  const [galleryImages, setGalleryImages] = useState<string[]>([
-    'https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=200',
-    'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=200',
-    'https://images.unsplash.com/photo-1511920170033-f8396924c648?w=200'
-  ]);
+  const [galleryImages, setGalleryImages] = useState<string[]>([]);
 
   // Modals
   const [showMenuModal, setShowMenuModal] = useState(false);
   const [showMediaModal, setShowMediaModal] = useState(false);
   const [showReviewsModal, setShowReviewsModal] = useState(false);
 
-  // Fake Menu State
-  const [menuItems, setMenuItems] = useState([
-    { id: 1, name: 'Americano', desc: 'Sert espresso ve sıcak su', price: '120 ₺', img: 'https://images.unsplash.com/photo-1551030173-122aabc4489c?w=200', category: 'İçecek' },
-    { id: 2, name: 'Latte', desc: 'İpeksi süt köpüğü ile', price: '140 ₺', img: 'https://images.unsplash.com/photo-1541167760496-1628856ab772?w=200', category: 'İçecek' }
-  ]);
+  const [menuItems, setMenuItems] = useState<
+    { id: number; name: string; desc: string; price: string; img?: string; category: string }[]
+  >([]);
   const [newMenuName, setNewMenuName] = useState('');
   const [newMenuPrice, setNewMenuPrice] = useState('');
   const [newMenuDesc, setNewMenuDesc] = useState('');
@@ -56,11 +50,9 @@ export default function VenueEditScreen() {
   const [menuUploadType, setMenuUploadType] = useState<'text' | 'image'>('text');
   const [menuPhotos, setMenuPhotos] = useState<string[]>([]);
 
-  // Fake Reviews State
-  const [reviews, setReviews] = useState([
-    { id: 1, user: 'Ahmet Y.', avatar: 'https://i.pravatar.cc/100?img=11', text: 'Harika bir mekan, kahveleri süper!', rating: 5, date: '2 gün önce', reply: '' },
-    { id: 2, user: 'Selin K.', avatar: 'https://i.pravatar.cc/100?img=5', text: 'Biraz kalabalıktı ama servis fena değil.', rating: 3, date: '1 hafta önce', reply: '' }
-  ]);
+  const [reviews, setReviews] = useState<
+    { id: number; user: string; avatar?: string; text: string; rating: number; date: string; reply: string }[]
+  >([]);
   const [replyInputs, setReplyInputs] = useState<Record<number, string>>({});
 
   useEffect(() => {
@@ -187,7 +179,7 @@ export default function VenueEditScreen() {
       name: newMenuName, 
       desc: newMenuDesc || 'İşletme Spesiyali', 
       price: newMenuPrice + ' ₺', 
-      img: newMenuImg || 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?w=200',
+      img: newMenuImg || undefined,
       category: newMenuCategory || 'Menü',
     }, ...menuItems]);
     setNewMenuName('');
@@ -256,7 +248,9 @@ export default function VenueEditScreen() {
                   <IconSymbol name="star.bubble.fill" size={24} color="#34d399" />
                 </View>
                 <Text style={styles.actionTileText}>Yorumlar</Text>
-                <View style={styles.notificationBadge}><Text style={styles.badgeText}>2</Text></View>
+                {reviews.length > 0 && (
+                  <View style={styles.notificationBadge}><Text style={styles.badgeText}>{reviews.length}</Text></View>
+                )}
               </LinearGradient>
             </TouchableOpacity>
           </Animated.View>
@@ -520,11 +514,22 @@ export default function VenueEditScreen() {
                 <FlatList
                   data={menuItems}
                   keyExtractor={item => item.id.toString()}
-                  contentContainerStyle={{ paddingBottom: 60 }}
+                  contentContainerStyle={{ paddingBottom: 60, flexGrow: 1 }}
                   showsVerticalScrollIndicator={false}
+                  ListEmptyComponent={
+                    <Text style={[styles.hintTextLeft, { textAlign: 'center', marginTop: 24 }]}>
+                      Henüz menü öğesi yok. Yukarıdan ürün ekleyebilirsiniz.
+                    </Text>
+                  }
                   renderItem={({ item }) => (
                     <View style={styles.menuItemCard}>
-                      <Image source={{ uri: item.img }} style={styles.menuItemImg} />
+                      {item.img ? (
+                        <Image source={{ uri: item.img }} style={styles.menuItemImg} />
+                      ) : (
+                        <View style={[styles.menuItemImg, { backgroundColor: 'rgba(255,255,255,0.08)', justifyContent: 'center', alignItems: 'center' }]}>
+                          <IconSymbol name="fork.knife" size={22} color="rgba(255,255,255,0.35)" />
+                        </View>
+                      )}
                       <View style={styles.menuItemInfo}>
                         <Text style={styles.menuItemName}>{item.name}</Text>
                         <Text style={styles.menuItemDesc}>{item.desc}</Text>
@@ -596,10 +601,21 @@ export default function VenueEditScreen() {
               </TouchableOpacity>
             </View>
             <ScrollView style={{ marginTop: 24 }} keyboardShouldPersistTaps="handled" showsVerticalScrollIndicator={false}>
+              {reviews.length === 0 ? (
+                <Text style={[styles.hintTextLeft, { textAlign: 'center', marginTop: 32, marginBottom: 40 }]}>
+                  Henüz müşteri yorumu yok. Uygulama üzerinden gelen yorumlar burada listelenecek.
+                </Text>
+              ) : null}
               {reviews.map(review => (
                 <View key={review.id} style={styles.reviewCard}>
                   <View style={styles.reviewUserRow}>
-                    <Image source={{ uri: review.avatar }} style={styles.reviewAvatar} />
+                    {review.avatar ? (
+                      <Image source={{ uri: review.avatar }} style={styles.reviewAvatar} />
+                    ) : (
+                      <View style={[styles.reviewAvatar, { backgroundColor: 'rgba(255,255,255,0.1)', justifyContent: 'center', alignItems: 'center' }]}>
+                        <IconSymbol name="person.fill" size={18} color="rgba(255,255,255,0.5)" />
+                      </View>
+                    )}
                     <View style={{flex: 1}}>
                       <Text style={styles.reviewUserName}>{review.user}</Text>
                       <Text style={styles.reviewDate}>{review.date}</Text>
