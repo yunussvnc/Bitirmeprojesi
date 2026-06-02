@@ -260,7 +260,7 @@ export function EditCanvas({
                   )}
                 </View>
                 <Text style={[styles.filterLabel, filter === f && { fontWeight: '800', color: '#fff' }]}>
-                  {f === 'none' ? 'Normal' : f === 'warm' ? 'Sıcak' : f === 'cool' ? 'Soğuk' : f === 'vintage' ? 'Retro' : 'Dizi'}
+                  {f === 'none' ? t('filters.normal', 'Normal') : f === 'warm' ? t('filters.warm', 'Sıcak') : f === 'cool' ? t('filters.cool', 'Soğuk') : f === 'vintage' ? t('filters.vintage', 'Retro') : t('filters.cinematic', 'Dizi')}
                 </Text>
               </TouchableOpacity>
             ))}

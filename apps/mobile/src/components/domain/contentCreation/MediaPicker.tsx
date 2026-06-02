@@ -7,7 +7,7 @@
  * Instagram/TikTok seviyesinde Premium deneyim, kendi tasarım dilimiz.
  */
 
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useMemo } from 'react';
 import {
   View,
   Text,
@@ -16,26 +16,21 @@ import {
   Dimensions,
   StatusBar,
 } from 'react-native';
+import { Image as ExpoImage } from 'expo-image';
 import * as MediaLibrary from 'expo-media-library';
 import Animated, {
   FadeIn,
   useSharedValue,
   useAnimatedStyle,
-  withSpring,
 } from 'react-native-reanimated';
-import {
-  Gesture,
-  GestureDetector,
-} from 'react-native-gesture-handler';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme } from '@/src/hooks/useTheme';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
 import { spacing } from '@/src/constants/design';
 import { lightImpact, mediumImpact } from '@/src/utils/haptics';
-import type { MediaItem, ContentType, AspectRatioOption } from '@/src/contentCreation/types';
-import { MAX_MEDIA_COUNT, POST_ASPECT_RATIOS } from '@/src/contentCreation/config';
+import type { MediaItem, ContentType } from '@/src/contentCreation/types';
+import { MAX_MEDIA_COUNT } from '@/src/contentCreation/config';
 import { CustomGalleryGrid } from './CustomGalleryGrid';
-import { ImageCropper } from './ImageCropper';
 import { EmbeddedCamera } from './EmbeddedCamera';
 import { useTranslation } from "react-i18next";
 
@@ -73,14 +68,32 @@ export function MediaPicker({
   const maxCount = MAX_MEDIA_COUNT[contentType];
 
   const [mode, setMode] = useState<PickerMode>(isStoryOrReels ? 'camera' : 'gallery');
-  const [previewItem, setPreviewItem] = useState<MediaItem | null>(null);
-  const [aspectRatio, setAspectRatio] = useState<AspectRatioOption>(POST_ASPECT_RATIOS[0]); // 1:1 default
+  const [previewItem, setPreviewItem] = useState<MediaItem | null>(() => {
+    return selected.length > 0 ? selected[selected.length - 1] : null;
+  });
   const [lastPhotoUri, setLastPhotoUri] = useState<string | null>(null);
-  const [isMultiSelect, setIsMultiSelect] = useState(false);
+  const [isMultiSelect, setIsMultiSelect] = useState(() => selected.length > 1);
 
-  // Split-view resizable height
-  const previewHeight = useSharedValue(DEFAULT_PREVIEW_HEIGHT);
-  const savedPreviewHeight = useSharedValue(DEFAULT_PREVIEW_HEIGHT);
+  // Compute dynamic preview height from image aspect ratio (Instagram-style, no black bars)
+  const dynamicPreviewHeight = useMemo(() => {
+    if (!previewItem?.width || !previewItem?.height) return DEFAULT_PREVIEW_HEIGHT;
+    const imgRatio = previewItem.width / previewItem.height;
+    const h = SCREEN_WIDTH / imgRatio;
+    return Math.max(MIN_PREVIEW_HEIGHT, Math.min(MAX_PREVIEW_HEIGHT, h));
+  }, [previewItem]);
+
+  // (split-view gesture removed — height is now derived from image aspect ratio)
+
+  // Sync state when navigating back from share screen
+  useEffect(() => {
+    if (selected.length > 0 && previewItem === null) {
+      setPreviewItem(selected[selected.length - 1]);
+    }
+    if (selected.length > 1 && !isMultiSelect) {
+      setIsMultiSelect(true);
+    }
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [selected]);
 
   // Load last photo for camera gallery shortcut
   useEffect(() => {
@@ -95,47 +108,25 @@ export function MediaPicker({
     })();
   }, []);
 
-  // Handle preview change from gallery
   const handlePreviewChange = useCallback((item: MediaItem | null) => {
     setPreviewItem(item);
   }, []);
 
-  // Handle camera capture
   const handleCameraCapture = useCallback((item: MediaItem) => {
     onSelect([item]);
     onNext();
   }, [onSelect, onNext]);
 
-  // Handle single select (story/reels galeri)
   const handleSingleSelect = useCallback((item: MediaItem) => {
     onSelect([item]);
     setTimeout(() => onNext(), 150);
   }, [onSelect, onNext]);
 
-  // Split-view resize gesture (Post mode)
-  const resizeGesture = Gesture.Pan()
-    .onUpdate((e) => {
-      'worklet';
-      const newH = savedPreviewHeight.value + e.translationY;
-      previewHeight.value = Math.max(MIN_PREVIEW_HEIGHT, Math.min(MAX_PREVIEW_HEIGHT, newH));
-    })
-    .onEnd(() => {
-      'worklet';
-      savedPreviewHeight.value = previewHeight.value;
-      // Snap to nearest nice height
-      const mid = (MIN_PREVIEW_HEIGHT + MAX_PREVIEW_HEIGHT) / 2;
-      if (previewHeight.value < MIN_PREVIEW_HEIGHT + 40) {
-        previewHeight.value = withSpring(MIN_PREVIEW_HEIGHT, { damping: 20, stiffness: 200 });
-        savedPreviewHeight.value = MIN_PREVIEW_HEIGHT;
-      } else if (previewHeight.value > MAX_PREVIEW_HEIGHT - 40) {
-        previewHeight.value = withSpring(MAX_PREVIEW_HEIGHT, { damping: 20, stiffness: 200 });
-        savedPreviewHeight.value = MAX_PREVIEW_HEIGHT;
-      }
-    });
-
-  const previewAnimStyle = useAnimatedStyle(() => ({
-    height: previewHeight.value,
-  }));
+  const handleNext = useCallback(() => {
+    if (selected.length === 0) return;
+    mediumImpact();
+    onNext();
+  }, [selected, onNext]);
 
   // ─────────────────────────────────────────────────────────
   // POST MODE — Split-View: Cropper + Gallery Grid
@@ -165,12 +156,7 @@ export function MediaPicker({
                 styles.nextBtnPost,
                 { backgroundColor: selected.length > 0 ? colors.accent.primary : colors.surface.border + '60' },
               ]}
-              onPress={() => {
-                if (selected.length > 0) {
-                  mediumImpact();
-                  onNext();
-                }
-              }}
+              onPress={handleNext}
               disabled={selected.length === 0}
               activeOpacity={0.8}
             >
@@ -182,16 +168,14 @@ export function MediaPicker({
           </View>
         </View>
 
-        {/* Cropper Preview / Empty State */}
-        <Animated.View style={[styles.previewSection, previewAnimStyle, { backgroundColor: '#000' }]}>
+        {/* Preview — Instagram-style: dynamic height, no black bars */}
+        <View style={[styles.previewSection, { height: dynamicPreviewHeight, backgroundColor: 'transparent' }]}>
           {previewItem ? (
-            <ImageCropper
-              imageUri={previewItem.uri}
-              imageWidth={previewItem.width}
-              imageHeight={previewItem.height}
-              containerHeight={DEFAULT_PREVIEW_HEIGHT}
-              aspectRatio={aspectRatio}
-              onAspectRatioChange={setAspectRatio}
+            <ExpoImage
+              source={{ uri: previewItem.uri }}
+              style={{ width: SCREEN_WIDTH, height: dynamicPreviewHeight }}
+              contentFit="cover"
+              cachePolicy="memory"
             />
           ) : (
             <View style={styles.emptyPreview}>
@@ -199,14 +183,12 @@ export function MediaPicker({
               <Text style={styles.emptyPreviewText}>{t("content_creation.select_media")}</Text>
             </View>
           )}
-        </Animated.View>
+        </View>
 
-        {/* Drag Handle to resize */}
-        <GestureDetector gesture={resizeGesture}>
-          <View style={[styles.dragHandle, { backgroundColor: colors.background.primary }]}>
-            <View style={[styles.dragPill, { backgroundColor: colors.text.tertiary + '50' }]} />
-          </View>
-        </GestureDetector>
+        {/* Separator */}
+        <View style={[styles.dragHandle, { backgroundColor: colors.background.primary }]}>
+          <View style={[styles.dragPill, { backgroundColor: colors.text.tertiary + '30' }]} />
+        </View>
 
         {/* Mode Toggle Bar */}
         <View style={[styles.modeBar, { backgroundColor: colors.background.primary }]}>

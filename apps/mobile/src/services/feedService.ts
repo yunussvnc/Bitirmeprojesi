@@ -7,6 +7,8 @@ export type PostMedia = {
   media_url: string;
   thumbnail_url?: string;
   order_index: number;
+  width?: number;
+  height?: number;
 };
 
 export type UserSummary = {
@@ -38,12 +40,22 @@ export type Post = {
   author?: UserSummary;
   place?: PlaceSummary;
   media: PostMedia[];
+  tagged_users?: UserSummary[];
 };
 
 export type PaginatedPosts = {
   items: Post[];
   total: number;
   page: number;
+  page_size: number;
+};
+
+/** Cursor tabanl\u0131 sayfalama yan\u0131t\u0131 — /feed ve /feed/reels i\u00e7in */
+export type CursorPaginatedPosts = {
+  items: Post[];
+  /** Bir sonraki sayfay\u0131 almak i\u00e7in geri g\u00f6nderilecek opaque token. null ise son sayfa. */
+  next_cursor: string | null;
+  has_more: boolean;
   page_size: number;
 };
 
@@ -54,6 +66,8 @@ export type PostComment = {
   text: string;
   created_at: string;
   author_username?: string;
+  is_liked?: boolean;
+  like_count?: number;
 };
 
 export type CreatePostPayload = {
@@ -63,28 +77,31 @@ export type CreatePostPayload = {
   comments_disabled?: boolean;
   likes_hidden?: boolean;
   media: { media_type: string; media_url: string; thumbnail_url?: string; order_index?: number }[];
+  tagged_user_ids?: number[];
 };
 
 export type FeedFilter = "all" | "following";
 
+/** Cursor tabanl\u0131 feed y\u00fckle \u2014 "Herkes" ve "Takip Ettiklerim" i\u00e7in */
 export async function getFeed(
-  page = 1,
-  pageSize = 20,
+  cursor: string | null = null,
+  pageSize = 12,
   filter: FeedFilter = "all"
-): Promise<PaginatedPosts> {
-  return apiGet<PaginatedPosts>(
-    `/feed?page=${page}&page_size=${pageSize}&filter=${filter}`
-  );
+): Promise<CursorPaginatedPosts> {
+  const params = new URLSearchParams({ page_size: String(pageSize), filter });
+  if (cursor) params.set("cursor", cursor);
+  return apiGet<CursorPaginatedPosts>(`/feed?${params.toString()}`);
 }
 
+/** Cursor tabanl\u0131 reels y\u00fckle */
 export async function getReels(
-  page = 1,
-  pageSize = 20,
+  cursor: string | null = null,
+  pageSize = 12,
   filter: FeedFilter = "all"
-): Promise<PaginatedPosts> {
-  return apiGet<PaginatedPosts>(
-    `/feed/reels?page=${page}&page_size=${pageSize}&filter=${filter}`
-  );
+): Promise<CursorPaginatedPosts> {
+  const params = new URLSearchParams({ page_size: String(pageSize), filter });
+  if (cursor) params.set("cursor", cursor);
+  return apiGet<CursorPaginatedPosts>(`/feed/reels?${params.toString()}`);
 }
 
 export async function getPost(id: number): Promise<Post> {
@@ -111,6 +128,10 @@ export async function deletePost(id: number): Promise<void> {
 
 export async function toggleLike(postId: number): Promise<{ liked: boolean; like_count: number }> {
   return apiPost<{ liked: boolean; like_count: number }>(`/posts/${postId}/like`);
+}
+
+export async function toggleCommentLike(commentId: number): Promise<{ liked: boolean; like_count: number }> {
+  return apiPost<{ liked: boolean; like_count: number }>(`/comments/${commentId}/like`);
 }
 
 export async function getComments(
