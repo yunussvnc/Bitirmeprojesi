@@ -30,6 +30,7 @@ function resolveAIBaseUrl(): string {
   if (override && override.startsWith('http')) return override.replace(/\/$/, '');
 
   if (__DEV__) {
+    // iOS Simulator: localhost; physical device: expo hostUri or EXPO_PUBLIC_DEV_API_HOST
     if (Platform.OS === 'web') return 'http://localhost:8080';
     // Expo'nun bağlı olduğu host'u kullan (telefon + PC aynı Wi-Fi'da)
     const expoHost = Constants.expoConfig?.hostUri?.split(':')[0];
@@ -37,7 +38,7 @@ function resolveAIBaseUrl(): string {
     // Fallback: .env'den veya local IP
     return `http://${process.env.EXPO_PUBLIC_DEV_API_HOST?.split(':')[0] ?? '192.168.1.36'}:8080`;
   }
-  return process.env.EXPO_PUBLIC_AI_URL ?? 'https://ai.asemos.com';
+  return process.env.EXPO_PUBLIC_AI_URL ?? 'https://asemos-ai.onrender.com';
 }
 
 export const getAIBaseUrl = resolveAIBaseUrl;
