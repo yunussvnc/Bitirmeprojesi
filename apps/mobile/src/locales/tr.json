@@ -16,8 +16,8 @@
     "no_results": "Sonuç bulunamadı",
     "no_results_desc": "Tercihlerinizi veya aramayı değiştirip tekrar deneyin",
     "clear": "Temizle",
-    "no_places": "Yaşadığınız şehirde mekan yok, yakında eklenecek",
-    "no_places_desc": "Yeni mekanlar eklendiğinde burada görünecek",
+    "no_places": "Henüz mekan yok",
+    "no_places_desc": "Yakında eklenecek",
     "change_filters": "Filtreleri değiştirin",
     "venue": "Mekan"
   },
@@ -37,9 +37,8 @@
     "status_closing": "Kapanıyor",
     "status_closed": "Kapalı",
     "whole_city": "Bütün Şehir",
-    "place_map_count": "{{count}} mekan",
     "discover_subtitle": "Yakınındaki mekanları keşfet",
-    "no_places": "Yaşadığınız şehirde mekan yok, yakında eklenecek",
+    "no_places": "Henüz mekan yok",
     "recommended": "Senin için önerildi",
     "menu": "Menü",
     "no_image": "Görsel eklenmedi",
@@ -413,14 +412,7 @@
     "pages_menu": "{{count}} sayfa menü",
     "items": "{{count}} ürün",
     "page_x_of_y": "Sayfa {{current}} / {{total}}",
-    "no_menu": "Bu mekan henüz menü eklememiş.",
-    "google_reviews_section": "Yorumlar",
-    "google_reviews_badge": "Google yorumları",
-    "google_review_rating": "{{rating}}/5",
-    "google_reviews_loading": "Google yorumları yükleniyor…",
-    "google_reviews_empty": "Bu mekan için Google yorumu bulunamadı.",
-    "google_reviews_error": "Google yorumları yüklenemedi.",
-    "google_reviews_see_more": "Daha fazla"
+    "no_menu": "Bu mekan henüz menü eklememiş."
   },
   "feed_comments": {
     "comments": "Yorumlar",
@@ -522,7 +514,7 @@
     "email_placeholder": "ornek@email.com",
     "password": "Şifre",
     "password_placeholder": "••••••••",
-    "password_requirements": "Bir küçük harf, bir büyük harf, rakam ve noktalama kullanmalı ve en az 8 karakter olmalı",
+    "password_hint": "Örn: UcD.7491",
     "confirm_password": "Şifre Tekrar",
     "confirm_password_placeholder": "Şifreni tekrar gir",
     "forgot_password": "Şifreni mi unuttun?",
@@ -561,23 +553,7 @@
     "err_passwords_mismatch": "Şifreler eşleşmiyor",
     "err_fullname_required": "Ad soyad gereklidir",
     "err_fullname_two_words": "Ad ve soyad girin",
-    "err_venue_name_required": "Mekan Adı gereklidir",
-    "err_email_taken": "Bu e-posta zaten kayıtlı",
-    "err_wrong_password": "Şifre hatalı girdiniz",
-    "err_network": "İnternet bağlantınızı kontrol edin ve tekrar deneyin.",
-    "err_generic": "İşlem başarısız. Lütfen tekrar deneyin.",
-    "google_dev_title": "Google Giriş",
-    "google_dev_body": "Google ile giriş geliştirme ortamında (Expo Go) sınırlıdır. E-posta/şifre kullanın veya production build alın.",
-    "apple_ios_only": "Apple ile giriş yalnızca iOS cihazlarda kullanılabilir.",
-    "apple_unavailable": "Bu cihazda Apple ile giriş kullanılamıyor. Güncel bir iOS build deneyin."
-  },
-  "legal_documents": {
-    "terms_title": "Kullanım Koşulları",
-    "privacy_title": "Gizlilik Politikası",
-    "cookies_title": "Çerez Politikası",
-    "terms_body": "ASEMOS Kullanım Koşulları\n\n1. Hizmet: ASEMOS, mekan keşfi ve sosyal eşleşme sunan bir mobil uygulamadır.\n2. Hesap: Kayıt sırasında doğru bilgi vermekle yükümlüsünüz. Hesap güvenliğinden siz sorumlusunuz.\n3. İçerik: Topluluk kurallarına aykırı, yasa dışı veya başkalarının haklarını ihlal eden içerik paylaşamazsınız.\n4. Mekan hesapları: Mekan başvuruları ayrı onay sürecine tabidir.\n5. Fesih: Kuralları ihlal eden hesaplar uyarı veya kalıcı kapatma ile sonuçlanabilir.\n6. Değişiklik: Koşullar güncellenebilir; önemli değişiklikler uygulama içinde duyurulur.\n\nSorularınız için: destek@asemos.com",
-    "privacy_body": "ASEMOS Gizlilik Politikası\n\nVeri sorumlusu: ASEMOS.\n\nToplanan veriler: hesap bilgileri (e-posta, ad), profil tercihleri, konum (izin verdiğinizde), kullanım ve cihaz bildirim tokenları.\n\nAmaçlar: hesap oluşturma, hizmet sunumu, güvenlik, yasal yükümlülükler.\n\nPaylaşım: Verileriniz reklam amacıyla satılmaz. Hizmet sağlayıcılar (barındırma, bildirim) yalnızca hizmet için sınırlı erişim alır.\n\nHaklarınız: KVKK kapsamında erişim, düzeltme, silme taleplerinizi uygulama ayarlarından veya destek@asemos.com üzerinden iletebilirsiniz.\n\nSaklama: Hesap silindiğinde veriler makul sürede silinir veya anonimleştirilir.",
-    "cookies_body": "ASEMOS Çerez ve Benzeri Teknolojiler\n\nOturum ve tercihlerinizi hatırlamak için cihazda yerel depolama ve benzeri teknolojiler kullanılabilir. Zorunlu çerezler uygulamanın çalışması için gereklidir. Analitik tercihleri ayarlardan yönetebilirsiniz."
+    "err_venue_name_required": "Mekan Adı gereklidir"
   },
   "chat": {
     "delete_message": "Mesajı Sil",

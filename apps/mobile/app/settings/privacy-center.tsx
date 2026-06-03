@@ -65,28 +65,19 @@ export default function PrivacyCenterScreen() {
             label={t("settings_privacy_center.data_policy", "Gizlilik Politikası")}
             showArrow
             icon="doc.text"
-            onPress={() => {
-              lightImpact();
-              router.push({ pathname: "/settings/legal-document", params: { type: "privacy" } } as never);
-            }}
+            onPress={() => { lightImpact(); }}
           />
           <SettingsRow
             label={t("settings_privacy_center.tos", "Kullanım Koşulları")}
             showArrow
             icon="doc.plaintext"
-            onPress={() => {
-              lightImpact();
-              router.push({ pathname: "/settings/legal-document", params: { type: "terms" } } as never);
-            }}
+            onPress={() => { lightImpact(); }}
           />
           <SettingsRow
             label={t("settings_privacy_center.cookie_policy", "Çerez Politikası")}
             showArrow
             icon="info.circle"
-            onPress={() => {
-              lightImpact();
-              router.push({ pathname: "/settings/legal-document", params: { type: "cookies" } } as never);
-            }}
+            onPress={() => { lightImpact(); }}
           />
         </Section>
 

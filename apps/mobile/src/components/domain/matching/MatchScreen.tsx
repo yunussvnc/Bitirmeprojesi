@@ -45,8 +45,6 @@ import {
   IconZodiacVirgo
 } from "tabler-icons-react-native";
 import { useTranslation } from "react-i18next";
-import { toggleBlockUser } from "@/src/services/moderationService";
-import { useBlockedUserIds } from "@/src/hooks/useBlockedUserIds";
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get("window");
 const SWIPE_THRESHOLD = SCREEN_WIDTH * 0.2;
@@ -132,7 +130,7 @@ export default function MatchScreen() {
   const [scrollMode, setScrollMode] = useState(false);
   const [activeTab, setActiveTab] = useState<"swipe" | "likes">("swipe");
   const [selectedLike, setSelectedLike] = useState<MatchCandidate | null>(null);
-  const { addBlocked, isBlocked } = useBlockedUserIds();
+  const [blockedUsers, setBlockedUsers] = useState<number[]>([]);
   const [actedLikes, setActedLikes] = useState<number[]>([]);
   const [showFilterModal, setShowFilterModal] = useState(false);
   const [filters, setFilters] = useState<MatchFilters>({ ...DEFAULT_FILTERS });
@@ -250,21 +248,13 @@ export default function MatchScreen() {
     return true;
   };
 
-  const currentCandidate =
-    currentCandidateRaw &&
-    passesFilter(currentCandidateRaw) &&
-    !isBlocked(currentCandidateRaw.user_id) &&
-    !actedLikes.includes(currentCandidateRaw.user_id)
-      ? currentCandidateRaw
-      : undefined;
+  const currentCandidate = currentCandidateRaw && passesFilter(currentCandidateRaw) ? currentCandidateRaw : undefined;
 
   // Auto-skip candidates that don't pass filters (BUG-03 & BUG-19: guard against infinite loop and already acted candidates)
   useEffect(() => {
     if (
-      currentCandidateRaw &&
-      (!passesFilter(currentCandidateRaw) ||
-        actedLikes.includes(currentCandidateRaw.user_id) ||
-        isBlocked(currentCandidateRaw.user_id)) &&
+      currentCandidateRaw && 
+      (!passesFilter(currentCandidateRaw) || actedLikes.includes(currentCandidateRaw.user_id)) && 
       currentIndex < candidates.length - 1
     ) {
       nextCandidate();
@@ -574,15 +564,9 @@ export default function MatchScreen() {
         {
           text: t("matching.yes_block"),
           style: "destructive",
-          onPress: async () => {
+          onPress: () => {
             const userId = profile.user_id || profile.id;
-            try {
-              await toggleBlockUser(userId);
-              addBlocked(userId);
-            } catch {
-              Alert.alert(t("common.error"), t("user_profile.action_failed"));
-              return;
-            }
+            setBlockedUsers(prev => [...prev, userId]);
 
             if (activeTab === "swipe" && currentCandidate?.user_id === userId) {
               handleSwipe("left"); // "pass" the candidate
@@ -789,7 +773,7 @@ export default function MatchScreen() {
         }}
       >
         <View style={styles.likesGrid}>
-          {candidates.filter(p => !isBlocked(p.user_id) && !actedLikes.includes(p.user_id) && passesFilter(p)).map((person) => (
+          {candidates.filter(p => !blockedUsers.includes(p.user_id) && !actedLikes.includes(p.user_id) && passesFilter(p)).map((person) => (
             <Pressable
               key={person.user_id}
               style={({ pressed }) => [

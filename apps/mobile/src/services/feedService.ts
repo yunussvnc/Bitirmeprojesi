@@ -131,6 +131,7 @@ export async function toggleLike(postId: number): Promise<{ liked: boolean; like
 }
 
 export async function toggleCommentLike(commentId: number): Promise<{ liked: boolean; like_count: number }> {
+  // Mock endpoint veya eklenebilir, şimdilik client-side mock ile yetinebiliriz eğer yoksa.
   return apiPost<{ liked: boolean; like_count: number }>(`/comments/${commentId}/like`);
 }
 

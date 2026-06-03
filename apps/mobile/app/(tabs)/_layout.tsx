@@ -129,12 +129,6 @@ export default function TabsLayout() {
           }}
         />
         <Tabs.Screen
-          name="ai"
-          options={{
-            href: null,
-          }}
-        />
-        <Tabs.Screen
           name="saved"
           options={{
             href: null,

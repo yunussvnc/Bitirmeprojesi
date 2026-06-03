@@ -30,22 +30,11 @@ import { getPlaceStatus, type PlaceStatusType } from '@/src/utils/placeStatus';
 import { calculateDistance } from '@/src/utils/location';
 import { DistanceSlider } from '@/src/components/ui/DistanceSlider';
 import { useTranslation } from 'react-i18next';
-import { GOOGLE_MAPS_API_KEY } from '@/src/constants/maps';
 
 /** Category keys matching backend data values + translation keys */
 
 
 const ISTANBUL_CENTER = { latitude: 41.0082, longitude: 28.9784 };
-const WHOLE_CITY_KM = 50;
-
-type MapMarker = {
-  id: number | string;
-  latitude: number;
-  longitude: number;
-  name: string;
-  statusColor: string;
-  category?: string;
-};
 
 export interface ExploreWebMapViewProps {
   places: Place[];
@@ -53,115 +42,20 @@ export interface ExploreWebMapViewProps {
   onLoadPlaces: () => void;
 }
 
-function buildGoogleMapHTML(apiKey: string, accentColor: string, isDark: boolean) {
-  const mapBg = isDark ? '#1a1a1a' : '#f5f5f5';
-  const darkStyles = JSON.stringify([
-    { elementType: 'geometry', stylers: [{ color: '#212121' }] },
-    { elementType: 'labels.text.fill', stylers: [{ color: '#757575' }] },
-    { elementType: 'labels.text.stroke', stylers: [{ color: '#212121' }] },
-    { featureType: 'road', elementType: 'geometry', stylers: [{ color: '#38414e' }] },
-    { featureType: 'road', elementType: 'geometry.stroke', stylers: [{ color: '#212a37' }] },
-    { featureType: 'water', elementType: 'geometry', stylers: [{ color: '#0e1626' }] },
-  ]);
-
-  return `<!DOCTYPE html>
-<html><head>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<style>
-  *{margin:0;padding:0;box-sizing:border-box}
-  html,body,#map{width:100%;height:100%;overflow:hidden;background:${mapBg}}
-  .place-label{font-family:-apple-system,BlinkMacSystemFont,sans-serif;font-size:13px;font-weight:600;color:#111;padding:2px 0}
-  .place-meta{font-size:11px;color:#666;margin-top:2px}
-</style>
-</head><body>
-<div id="map"></div>
-<script>
-var map,infoWindow,activeMarkerId=null,userCircle=null,placeMarkers=[];
-
-function initMap(){
-  map=new google.maps.Map(document.getElementById('map'),{
-    center:{lat:${ISTANBUL_CENTER.latitude},lng:${ISTANBUL_CENTER.longitude}},
-    zoom:13,
-    disableDefaultUI:true,
-    gestureHandling:'greedy',
-    styles:${isDark ? darkStyles : '[]'}
-  });
-  infoWindow=new google.maps.InfoWindow({maxWidth:220});
-  map.addListener('click',function(){
-    activeMarkerId=null;
-    infoWindow.close();
-    window.ReactNativeWebView.postMessage(JSON.stringify({type:'deselect'}));
-  });
-  window.ReactNativeWebView.postMessage(JSON.stringify({type:'mapReady'}));
-}
-
-function pinIcon(color){
-  var c=color||'${accentColor}';
-  var svg='<svg xmlns="http://www.w3.org/2000/svg" width="32" height="40" viewBox="0 0 32 40"><path d="M16 0C7.2 0 0 7.2 0 16c0 12 16 24 16 24s16-12 16-24C32 7.2 24.8 0 16 0z" fill="'+c+'"/><circle cx="16" cy="14" r="5.5" fill="#fff" opacity="0.95"/></svg>';
-  return {url:'data:image/svg+xml;charset=UTF-8,'+encodeURIComponent(svg),scaledSize:new google.maps.Size(32,40),anchor:new google.maps.Point(16,40)};
-}
-
-function popupHtml(p){
-  var cat=p.category?'<div class="place-meta">'+String(p.category).replace(/</g,'&lt;')+'</div>':'';
-  return '<div class="place-label">'+String(p.name||'Mekan').replace(/</g,'&lt;')+'</div>'+cat;
-}
-
-function updateMarkers(places){
-  if(!map)return;
-  placeMarkers.forEach(function(m){m.setMap(null);});
-  placeMarkers=[];
-  if(!places||!places.length)return;
-  places.forEach(function(p){
-    if(p.latitude==null||p.longitude==null)return;
-    var color=p.statusColor||'${accentColor}';
-    var marker=new google.maps.Marker({
-      position:{lat:p.latitude,lng:p.longitude},
-      map:map,
-      icon:pinIcon(color),
-      title:p.name||''
-    });
-    marker.addListener('click',function(){
-      activeMarkerId=p.id;
-      infoWindow.setContent(popupHtml(p));
-      infoWindow.open(map,marker);
-      window.ReactNativeWebView.postMessage(JSON.stringify({type:'marker',id:p.id}));
-    });
-    placeMarkers.push(marker);
-  });
-}
-
-function flyToInitial(lat,lng,zoom){if(map)map.setCenter({lat:lat,lng:lng});if(map&&zoom)map.setZoom(zoom);}
-function flyTo(lat,lng,zoom){if(!map)return;map.panTo({lat:lat,lng:lng});if(zoom)map.setZoom(zoom);}
-function setUserMarker(lat,lng){
-  if(!map)return;
-  if(userCircle)userCircle.setMap(null);
-  userCircle=new google.maps.Circle({center:{lat:lat,lng:lng},radius:80,fillColor:'#4285F4',fillOpacity:0.25,strokeColor:'#4285F4',strokeWeight:2,map:map});
-}
-function selectPin(id){activeMarkerId=id;}
-</script>
-<script async defer src="https://maps.googleapis.com/maps/api/js?key=${apiKey}&callback=initMap"></script>
-</body></html>`;
-}
-
-function buildLeafletMapHTML(accentColor: string, isDark: boolean) {
+function buildMapHTML(accentColor: string, isDark: boolean) {
   const tileUrl = isDark
     ? 'https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png'
     : 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
 
   const tileAttr = '&copy; <a href="https://carto.com/">CARTO</a>';
+
   const mapBg = isDark ? '#1a1a1a' : '#e0e0e0';
-  const popupBg = isDark ? '#2a2a2a' : '#ffffff';
-  const popupText = isDark ? '#f5f5f5' : '#111111';
-  const popupMeta = isDark ? '#aaaaaa' : '#666666';
 
   return `<!DOCTYPE html>
 <html><head>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css"/>
-<link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css"/>
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-<script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
   html,body,#map{width:100%;height:100%;overflow:hidden;background:${mapBg}!important}
@@ -169,12 +63,17 @@ function buildLeafletMapHTML(accentColor: string, isDark: boolean) {
   .leaflet-tile-pane .leaflet-layer{background:${mapBg}}
   .leaflet-tile{background:${mapBg}!important}
   .leaflet-control-attribution{display:none!important}
-  .leaflet-popup-content-wrapper{border-radius:12px;padding:0;overflow:hidden;box-shadow:0 4px 16px rgba(0,0,0,0.18)}
-  .leaflet-popup-content{margin:10px 14px;font-family:-apple-system,BlinkMacSystemFont,sans-serif}
-  .place-label{font-size:13px;font-weight:700;color:${popupText}}
-  .place-meta{font-size:11px;color:${popupMeta};margin-top:3px}
-  .marker-cluster-small,.marker-cluster-medium,.marker-cluster-large{background:rgba(66,133,244,0.25)!important}
-  .marker-cluster-small div,.marker-cluster-medium div,.marker-cluster-large div{background:${accentColor}!important;color:#fff!important;font-weight:700}
+  .custom-pin{
+    width:28px;height:28px;border-radius:50%;
+    border:3px solid #fff;
+    box-shadow:0 2px 6px rgba(0,0,0,0.35);
+    transition:transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .25s ease;
+  }
+  .custom-pin.active{
+    transform:scale(1.45);
+    box-shadow:0 0 0 8px rgba(255,255,255,0.25),0 4px 12px rgba(0,0,0,0.4);
+    border-color:#fff;
+  }
 </style>
 </head><body>
 <div id="map"></div>
@@ -182,67 +81,48 @@ function buildLeafletMapHTML(accentColor: string, isDark: boolean) {
 var map=L.map('map',{zoomControl:false,touchZoom:true,doubleClickZoom:true,scrollWheelZoom:true,boxZoom:true}).setView([${ISTANBUL_CENTER.latitude},${ISTANBUL_CENTER.longitude}],13);
 L.tileLayer('${tileUrl}',{maxZoom:19,attribution:'${tileAttr}',keepBuffer:14,subdomains:'abc',crossOrigin:true,updateWhenIdle:false}).addTo(map);
 
-var markerCluster=L.markerClusterGroup({showCoverageOnHover:false,maxClusterRadius:50,spiderfyOnMaxZoom:true});
-map.addLayer(markerCluster);
-var activeMarker=null;
+var activePinEl=null;
+var markerLayer=L.layerGroup().addTo(map);
 
-function pinIcon(color){
-  var c=color||'${accentColor}';
-  var svg='<svg xmlns="http://www.w3.org/2000/svg" width="32" height="40" viewBox="0 0 32 40"><path d="M16 0C7.2 0 0 7.2 0 16c0 12 16 24 16 24s16-12 16-24C32 7.2 24.8 0 16 0z" fill="'+c+'"/><circle cx="16" cy="14" r="5.5" fill="#fff" opacity="0.95"/></svg>';
-  return L.icon({iconUrl:'data:image/svg+xml;charset=UTF-8,'+encodeURIComponent(svg),iconSize:[32,40],iconAnchor:[16,40],popupAnchor:[0,-38]});
+function makeIcon(color){
+  return L.divIcon({className:'',html:'<div class="custom-pin" style="background:'+color+'"></div>',iconSize:[28,28],iconAnchor:[14,14]});
 }
 
-function popupHtml(p){
-  var cat=p.category?'<div class="place-meta">'+String(p.category).replace(/</g,'&lt;')+'</div>':'';
-  return '<div class="place-label">'+String(p.name||'Mekan').replace(/</g,'&lt;')+'</div>'+cat;
-}
-
-function selectPin(marker){
-  if(activeMarker&&activeMarker.setOpacity)activeMarker.setOpacity(1);
-  activeMarker=marker||null;
-  if(activeMarker&&activeMarker.setOpacity)activeMarker.setOpacity(1);
+function selectPin(el){
+  if(activePinEl) activePinEl.classList.remove('active');
+  if(el){el.classList.add('active');activePinEl=el;}
+  else{activePinEl=null;}
 }
 
 function updateMarkers(places){
-  markerCluster.clearLayers();
+  markerLayer.clearLayers();
   if(!places||!places.length)return;
   places.forEach(function(p){
     if(p.latitude==null||p.longitude==null)return;
     var color=p.statusColor||'${accentColor}';
-    var m=L.marker([p.latitude,p.longitude],{icon:pinIcon(color)});
-    m.bindPopup(popupHtml(p),{closeButton:false,offset:[0,-4]});
-    m.on('click',function(){
-      selectPin(m);
-      m.openPopup();
-      window.ReactNativeWebView.postMessage(JSON.stringify({type:'marker',id:p.id}));
-    });
-    markerCluster.addLayer(m);
+    var icon=makeIcon(color);
+    var m=L.marker([p.latitude,p.longitude],{icon:icon})
+      .on('click',function(e){selectPin(e.target.getElement().querySelector('.custom-pin'));window.ReactNativeWebView.postMessage(JSON.stringify({type:'marker',id:p.id}))});
+    markerLayer.addLayer(m);
   });
 }
 
-function flyToInitial(lat,lng,zoom){map.setView([lat,lng],zoom||13);}
+function flyToInitial(lat,lng,zoom){
+  map.setView([lat,lng],zoom||13);
+}
 
 map.on('click',function(){
   selectPin(null);
-  map.closePopup();
   window.ReactNativeWebView.postMessage(JSON.stringify({type:'deselect'}));
 });
 
-function flyTo(lat,lng,zoom){map.flyTo([lat,lng],zoom||15)}
+function flyTo(lat,lng,zoom){map.flyTo([lat,lng],zoom||13)}
 function setUserMarker(lat,lng){
   if(window._userCircle) map.removeLayer(window._userCircle);
   window._userCircle=L.circleMarker([lat,lng],{radius:8,fillColor:'#4285F4',color:'#fff',weight:3,fillOpacity:1}).addTo(map);
 }
-window.ReactNativeWebView.postMessage(JSON.stringify({type:'mapReady'}));
 </script>
 </body></html>`;
-}
-
-function buildMapHTML(accentColor: string, isDark: boolean): string {
-  if (GOOGLE_MAPS_API_KEY) {
-    return buildGoogleMapHTML(GOOGLE_MAPS_API_KEY, accentColor, isDark);
-  }
-  return buildLeafletMapHTML(accentColor, isDark);
 }
 
 export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebMapViewProps) {
@@ -292,10 +172,9 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
     })();
   }, []);
 
-  // Tema değişince HTML yenilenir, WebView reload olur – mapReady sıfırla
+  // Tema değişince HTML yenilenir, WebView reload olur – mapReady sıfırla ki onLoad'ta tekrar inject edilsin
   useEffect(() => {
     setMapReady(false);
-    setDidAutoCenter(false);
   }, [isDark]);
 
   const filteredPlaces = useMemo(() => {
@@ -324,8 +203,8 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
         const status = getPlaceStatus(p.opening_time, p.closing_time);
         if (!selectedStatuses.includes(status.status)) return false;
       }
-      // Mesafe filtresi — yalnızca slider 50 km'den düşükse uygula ("Bütün Şehir" = filtre yok)
-      if (userLocation && maxDistance < WHOLE_CITY_KM && p.latitude != null && p.longitude != null) {
+      // Mesafe filtresi (Her zaman geçerli)
+      if (userLocation && p.latitude != null && p.longitude != null) {
         const distKm = calculateDistance(userLocation.latitude, userLocation.longitude, p.latitude, p.longitude) / 1000;
         if (distKm > maxDistance) return false;
       }
@@ -338,18 +217,12 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
     [filteredPlaces],
   );
 
-  const mapMarkers = useMemo<MapMarker[]>(() => {
+  // Haritaya gönderilecek mekanları statusColor ile zenginleştir
+  const visiblePlacesWithStatus = useMemo(() => {
     const now = new Date();
     return visiblePlaces.map((p) => {
       const status = getPlaceStatus(p.opening_time, p.closing_time, now);
-      return {
-        id: p.id,
-        latitude: p.latitude!,
-        longitude: p.longitude!,
-        name: p.name,
-        statusColor: status.color,
-        category: p.category,
-      };
+      return { ...p, statusColor: status.color };
     });
   }, [visiblePlaces]);
 
@@ -361,21 +234,17 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
       script.push(`setUserMarker(${userLocation.latitude},${userLocation.longitude})`);
       setDidAutoCenter(true);
     }
-    script.push(`updateMarkers(${JSON.stringify(mapMarkers)})`);
+    script.push(`updateMarkers(${JSON.stringify(visiblePlacesWithStatus)})`);
     webViewRef.current.injectJavaScript(script.join(';') + ';true;');
-  }, [mapReady, userLocation, mapMarkers, didAutoCenter]);
+  }, [mapReady, userLocation, visiblePlacesWithStatus, didAutoCenter]);
 
   const handleMessage = useCallback(
     (event: WebViewMessageEvent) => {
       try {
         const data = JSON.parse(event.nativeEvent.data);
-        if (data.type === 'mapReady') {
-          setMapReady(true);
-          return;
-        }
         if (data.type === 'marker') {
           lightImpact();
-          const place = places.find((p) => String(p.id) === String(data.id));
+          const place = places.find((p) => p.id === data.id);
           setSelectedPlace(place ?? null);
         } else if (data.type === 'deselect') {
           setSelectedPlace(null);
@@ -476,6 +345,7 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
         scrollEnabled
         bounces={false}
         overScrollMode="never"
+        onLoad={() => setMapReady(true)}
         onContentProcessDidTerminate={() => webViewRef.current?.reload()}
         onRenderProcessGone={() => webViewRef.current?.reload()}
         onMessage={handleMessage}
@@ -706,14 +576,6 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
           <IconSymbol name="mappin.and.ellipse" size={22} color={colors.text.primary} />
         </TouchableOpacity>
       </View>
-
-      {!loading && mapReady && visiblePlaces.length > 0 && !selectedPlace && (
-        <View style={[styles.badge, { backgroundColor: colors.surface.elevated }]}>
-          <Text style={[styles.badgeText, { color: colors.text.secondary }]}>
-            {t('explore.place_map_count', { count: visiblePlaces.length })}
-          </Text>
-        </View>
-      )}
 
       {(loading || !mapReady) && (
         <View style={styles.loadingOverlay}>

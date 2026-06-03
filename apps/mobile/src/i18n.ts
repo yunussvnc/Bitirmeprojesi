@@ -1,7 +1,6 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import { getLocales } from 'expo-localization';
-import { Platform } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 import tr from './locales/tr.json';
@@ -12,30 +11,16 @@ const languageDetector = {
   async: true,
   detect: async (callback: (lng: string | readonly string[] | undefined) => void) => {
     try {
-      // Web için localStorage kullan, native için AsyncStorage
-      if (Platform.OS === 'web') {
-        if (typeof window !== 'undefined' && window.localStorage) {
-          const storedData = window.localStorage.getItem('asemos-settings');
-          if (storedData) {
-            const parsed = JSON.parse(storedData);
-            if (parsed?.state?.language) {
-              callback(parsed.state.language);
-              return;
-            }
-          }
-        }
-      } else {
-        const storedData = await AsyncStorage.getItem('asemos-settings');
-        if (storedData) {
-          const parsed = JSON.parse(storedData);
-          if (parsed?.state?.language) {
-            callback(parsed.state.language);
-            return;
-          }
+      const storedData = await AsyncStorage.getItem('asemos-settings');
+      if (storedData) {
+        const parsed = JSON.parse(storedData);
+        if (parsed?.state?.language) {
+          callback(parsed.state.language);
+          return;
         }
       }
     } catch (e) {
-      console.warn('Error reading language from storage', e);
+      console.warn('Error reading language from AsyncStorage', e);
     }
     
     // Fallback to system locale

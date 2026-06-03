@@ -1,14 +1,14 @@
-import { Platform } from 'react-native';
+﻿import { Platform } from 'react-native';
 
-/** app.json → expo.scheme */
+/** app.json ÔåÆ expo.scheme */
 export const APP_SCHEME = 'asemos';
 
-/** app.json → expo.owner / expo.slug */
+/** app.json ÔåÆ expo.owner / expo.slug */
 export const EXPO_OWNER = 'icardiii';
 export const EXPO_SLUG = 'asemos';
 
 /**
- * Google Cloud Console → Web client → Authorized redirect URIs.
+ * Google Cloud Console ÔåÆ Web client ÔåÆ Authorized redirect URIs.
  * Must match exactly (registered as https://auth.expo.io/@icardiii/asemos).
  */
 export const GOOGLE_EXPO_AUTH_REDIRECT_URI = `https://auth.expo.io/@${EXPO_OWNER}/${EXPO_SLUG}`;
@@ -30,7 +30,7 @@ const FALLBACK_GOOGLE_CLIENT_ID =
 const fallbackWebClientId = GOOGLE_WEB_CLIENT_ID || FALLBACK_GOOGLE_CLIENT_ID;
 
 /**
- * Web client owns the auth.expo.io redirect URI — prefer EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID
+ * Web client owns the auth.expo.io redirect URI ÔÇö prefer EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID
  * for OAuth on every platform so redirect_uri matches Google Console.
  */
 export const googleAuthRequestConfig = {
@@ -48,27 +48,27 @@ export function hasGoogleClientIdForPlatform(): boolean {
   return Boolean(webClientId);
 }
 
-/** @deprecated Use hasGoogleClientIdForPlatform — kept for call-site compatibility */
+/** @deprecated Use hasGoogleClientIdForPlatform ÔÇö kept for call-site compatibility */
 export function isGoogleSignInConfigured(): boolean {
   return hasGoogleClientIdForPlatform();
 }
 
-/** Kullanıcıya gösterilecek yapılandırma hatası (EAS / .env.local) */
+/** Kullan─▒c─▒ya g├Âsterilecek yap─▒land─▒rma hatas─▒ (EAS / .env.local) */
 export function getGoogleClientIdConfigError(): string {
   if (Platform.OS === 'ios') {
     return (
-      'Google giriş için EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID veya EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID tanımlı değil. ' +
-      'Yerel: apps/mobile/.env.local — production: EAS Secrets (redirect: auth.expo.io/@icardiii/asemos).'
+      'Google giri┼ş i├ğin EXPO_PUBLIC_GOOGLE_IOS_CLIENT_ID veya EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID tan─▒ml─▒ de─şil. ' +
+      'Yerel: apps/mobile/.env.local ÔÇö production: EAS Secrets (redirect: auth.expo.io/@icardiii/asemos).'
     );
   }
   if (Platform.OS === 'android') {
     return (
-      'Google giriş için EXPO_PUBLIC_GOOGLE_ANDROID_CLIENT_ID veya EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID tanımlı değil. ' +
-      'Yerel: apps/mobile/.env.local — production: EAS Secrets (redirect: auth.expo.io/@icardiii/asemos).'
+      'Google giri┼ş i├ğin EXPO_PUBLIC_GOOGLE_ANDROID_CLIENT_ID veya EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID tan─▒ml─▒ de─şil. ' +
+      'Yerel: apps/mobile/.env.local ÔÇö production: EAS Secrets (redirect: auth.expo.io/@icardiii/asemos).'
     );
   }
   return (
-    'Google giriş için EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID tanımlı değil. ' +
-    'Yerel: apps/mobile/.env.local — production: EAS Secrets (redirect: auth.expo.io/@icardiii/asemos).'
+    'Google giri┼ş i├ğin EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID tan─▒ml─▒ de─şil. ' +
+    'Yerel: apps/mobile/.env.local ÔÇö production: EAS Secrets (redirect: auth.expo.io/@icardiii/asemos).'
   );
 }

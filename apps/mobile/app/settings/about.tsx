@@ -68,13 +68,13 @@ export default function AboutScreen() {
             label={t("settings_about.terms", "Kullanım Koşulları")}
             showArrow
             icon="doc.plaintext"
-            onPress={() => { lightImpact(); router.push({ pathname: "/settings/legal-document", params: { type: "terms" } } as any); }}
+            onPress={() => { lightImpact(); }}
           />
           <SettingsRow
             label={t("settings_about.data_policy", "Gizlilik Politikası")}
             showArrow
             icon="shield"
-            onPress={() => { lightImpact(); router.push({ pathname: "/settings/legal-document", params: { type: "privacy" } } as any); }}
+            onPress={() => { lightImpact(); router.push("/settings/privacy-center" as any); }}
           />
           <SettingsRow
             label={t("settings_about.kvkk", "KVKK Aydınlatma Metni")}

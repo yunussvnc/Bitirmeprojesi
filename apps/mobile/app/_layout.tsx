@@ -78,12 +78,9 @@ function useProtectedRoute() {
       segments[0] === "verify-email" ||
       (segments.length === 1 && !segments[0]);
 
-    const isPublicLegalScreen =
-      segments[0] === "settings" && segments[1] === "legal-document";
-
     const navigate = () => {
       const user = useAuthStore.getState().user;
-      if (!accessToken && !inAuthScreen && !isPublicLegalScreen) {
+      if (!accessToken && !inAuthScreen) {
         router.replace("/login");
       } else if (accessToken && inAuthScreen) {
         if (user?.role === 'venue') {

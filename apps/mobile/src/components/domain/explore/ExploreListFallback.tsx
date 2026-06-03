@@ -10,7 +10,6 @@ import { Screen } from '@/src/components/layout';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
 import { AnimatedPlaceCard } from '@/src/components/ui';
 import { getPlaceImageSource, hasPlaceImage } from '@/src/utils/placeImages';
-import { buildPlaceCardMeta } from '@/src/utils/placeCardHelpers';
 import type { Place } from '@/src/services/mekanService';
 import { lightImpact } from '@/src/utils/haptics';
 import { useTranslation } from 'react-i18next';
@@ -29,29 +28,19 @@ export function ExploreListFallback({ places, loading, onRefresh }: ExploreListF
 
   const getLocationFromName = (name: string) => (name?.includes(' - ') ? name.split(' - ')[1]?.trim() : undefined);
 
-  const renderItem = ({ item, index }: { item: Place; index: number }) => {
-    const meta = buildPlaceCardMeta(item);
-    return (
-      <AnimatedPlaceCard
-        index={index}
-        image={getPlaceImageSource(item)}
-        imagePlaceholder={!hasPlaceImage(item)}
-        title={item.name}
-        subtitle={item.subtitle ?? item.description}
-        tags={item.tags}
-        location={getLocationFromName(item.name)}
-        hasMenu={meta.hasMenu}
-        menuComingSoon={meta.menuComingSoon}
-        openingTime={meta.openingTime}
-        closingTime={meta.closingTime}
-        rating={meta.rating}
-        reviewCount={meta.reviewCount}
-        priceLabel={meta.priceLabel}
-        category={meta.category}
-        onPress={() => { lightImpact(); router.push({ pathname: '/place/[id]', params: { id: String(item.id) } } as any); }}
-      />
-    );
-  };
+  const renderItem = ({ item, index }: { item: Place; index: number }) => (
+    <AnimatedPlaceCard
+      index={index}
+      image={getPlaceImageSource(item)}
+      imagePlaceholder={!hasPlaceImage(item)}
+      title={item.name}
+      subtitle={item.subtitle}
+      tags={item.tags}
+      location={getLocationFromName(item.name)}
+      hasMenu={!!(item.menu_items && item.menu_items.length > 0)}
+      onPress={() => { lightImpact(); router.push({ pathname: '/place/[id]', params: { id: String(item.id) } } as any); }}
+    />
+  );
 
   const subtitle = t('explore.discover_subtitle');
 

@@ -1,42 +1,43 @@
-{
+﻿{
   "expo": {
     "name": "AsEmOs",
     "slug": "asemos",
     "version": "1.0.0",
+    "owner": "icardiii",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "asemos",
     "userInterfaceStyle": "automatic",
+    "extra": {
+      "eas": {
+        "projectId": "4f60443c-0251-424b-a0e2-a38833dc97d4"
+      }
+    },
     "runtimeVersion": {
       "policy": "appVersion"
     },
     "updates": {
+      "url": "https://u.expo.dev/4f60443c-0251-424b-a0e2-a38833dc97d4",
       "enabled": true,
       "fallbackToCacheTimeout": 0,
-      "checkAutomatically": "ON_LOAD",
-      "url": "https://u.expo.dev/4f60443c-0251-424b-a0e2-a38833dc97d4"
+      "checkAutomatically": "ON_LOAD"
     },
     "ios": {
       "buildNumber": "1",
       "supportsTablet": true,
       "infoPlist": {
-        "NSLocationWhenInUseUsageDescription": "Bu uygulama mekanların yakınında olup olmadığınızı kontrol etmek için konum bilgisine ihtiyaç duyar.",
-        "NSLocationAlwaysAndWhenInUseUsageDescription": "Bu uygulama yakınınızdaki mekanları bildirebilmek için arka planda konum erişimine ihtiyaç duyar.",
-        "NSPhotoLibraryUsageDescription": "Bu uygulama yorumlarınıza fotoğraf eklemeniz için galeri erişimine ihtiyaç duyar.",
-        "NSCameraUsageDescription": "Bu uygulama yorumlarınıza fotoğraf çekmeniz için kamera erişimine ihtiyaç duyar.",
+        "NSLocationWhenInUseUsageDescription": "Bu uygulama mekanlarÄ±n yakÄ±nÄ±nda olup olmadÄ±ÄŸÄ±nÄ±zÄ± kontrol etmek iÃ§in konum bilgisine ihtiyaÃ§ duyar.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "Bu uygulama yakÄ±nÄ±nÄ±zdaki mekanlarÄ± bildirebilmek iÃ§in arka planda konum eriÅŸimine ihtiyaÃ§ duyar.",
+        "NSPhotoLibraryUsageDescription": "Bu uygulama yorumlarÄ±nÄ±za fotoÄŸraf eklemeniz iÃ§in galeri eriÅŸimine ihtiyaÃ§ duyar.",
+        "NSCameraUsageDescription": "Bu uygulama yorumlarÄ±nÄ±za fotoÄŸraf Ã§ekmeniz iÃ§in kamera eriÅŸimine ihtiyaÃ§ duyar.",
         "UIBackgroundModes": [
-          "remote-notification",
-          "remote-notification",
-          "remote-notification",
           "remote-notification"
         ],
         "NSAppTransportSecurity": {
           "NSAllowsLocalNetworking": true
-        },
-        "ITSAppUsesNonExemptEncryption": false
+        }
       },
-      "bundleIdentifier": "com.asemos.mobile",
-      "usesAppleSignIn": true
+      "bundleIdentifier": "com.asemos.mobile"
     },
     "android": {
       "versionCode": 1,
@@ -53,27 +54,11 @@
         "android.permission.READ_EXTERNAL_STORAGE",
         "android.permission.WRITE_EXTERNAL_STORAGE",
         "android.permission.CAMERA",
-        "android.permission.RECORD_AUDIO",
-        "android.permission.READ_MEDIA_VISUAL_USER_SELECTED",
-        "android.permission.READ_MEDIA_IMAGES",
-        "android.permission.READ_MEDIA_VIDEO",
-        "android.permission.READ_MEDIA_AUDIO"
+        "android.permission.RECORD_AUDIO"
       ],
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
       "intentFilters": [
-        {
-          "action": "VIEW",
-          "category": [
-            "BROWSABLE",
-            "DEFAULT"
-          ],
-          "data": [
-            {
-              "scheme": "asemos"
-            }
-          ]
-        },
         {
           "action": "VIEW",
           "category": [
@@ -98,15 +83,15 @@
       [
         "expo-image-picker",
         {
-          "photosPermission": "Bu uygulama yorumlarınıza fotoğraf eklemeniz için galeri erişimine ihtiyaç duyar.",
-          "cameraPermission": "Bu uygulama yorumlarınıza fotoğraf çekmeniz için kamera erişimine ihtiyaç duyar."
+          "photosPermission": "Bu uygulama yorumlarÄ±nÄ±za fotoÄŸraf eklemeniz iÃ§in galeri eriÅŸimine ihtiyaÃ§ duyar.",
+          "cameraPermission": "Bu uygulama yorumlarÄ±nÄ±za fotoÄŸraf Ã§ekmeniz iÃ§in kamera eriÅŸimine ihtiyaÃ§ duyar."
         }
       ],
       [
         "expo-media-library",
         {
-          "photosPermission": "Bu uygulama yorumlarınıza fotoğraf eklemeniz için galeri erişimine ihtiyaç duyar.",
-          "savePhotosPermission": "Bu uygulama galerinize fotoğraf kaydetmek için erişime ihtiyaç duyar."
+          "photosPermission": "Bu uygulama yorumlarÄ±nÄ±za fotoÄŸraf eklemeniz iÃ§in galeri eriÅŸimine ihtiyaÃ§ duyar.",
+          "savePhotosPermission": "Bu uygulama galerinize fotoÄŸraf kaydetmek iÃ§in eriÅŸime ihtiyaÃ§ duyar."
         }
       ],
       [
@@ -129,18 +114,10 @@
         }
       ],
       "expo-localization",
-      "expo-web-browser",
-      "expo-apple-authentication"
+      "expo-web-browser"
     ],
     "experiments": {
       "typedRoutes": true
-    },
-    "extra": {
-      "router": {},
-      "eas": {
-        "projectId": "4f60443c-0251-424b-a0e2-a38833dc97d4"
-      }
-    },
-    "owner": "icardiii"
+    }
   }
 }

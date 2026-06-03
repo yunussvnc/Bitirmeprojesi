@@ -26,12 +26,6 @@ export type RecommendItem = {
   photo_url?: string;
   explanation?: string;
   tags?: string[];
-  opening_time?: string;
-  closing_time?: string;
-  average_rating?: number;
-  review_count?: number;
-  price_range?: number;
-  address?: string;
 };
 
 export type RecommendResponse = {

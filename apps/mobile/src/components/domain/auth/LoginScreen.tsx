@@ -1,8 +1,8 @@
-/**
+﻿/**
  * Premium Login Screen
  *
- * Arka planda mekan görselleri carousel, profesyonel tipografi,
- * koyu overlay ile okunabilir form. Üst düzey giriş deneyimi.
+ * Arka planda mekan gÃ¶rselleri carousel, profesyonel tipografi,
+ * koyu overlay ile okunabilir form. Ãœst dÃ¼zey giriÅŸ deneyimi.
  *
  * @module screens/LoginScreen
  */
@@ -28,26 +28,30 @@ import { BlurView } from 'expo-blur';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button, Input } from '@/src/components/ui';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
+import { handleApiError } from '@/src/utils/errorHandler';
 import { useTranslation } from 'react-i18next';
 import { lightImpact, success } from '@/src/utils/haptics';
-import { loginUser } from '@/src/services/authService';
+import { getAllPlaces } from '@/src/services/mekanService';
+import { loginUser, googleLogin, appleLogin } from '@/src/services/authService';
 import { useAuthStore } from '@/src/store/useAuthStore';
-import { getAuthUserMessage } from '@/src/utils/authErrors';
-import { useSocialAuth } from '@/src/hooks/useSocialAuth';
+import { API_BASE_URL } from '@/src/constants/api';
+import * as AppleAuthentication from 'expo-apple-authentication';
 import * as WebBrowser from 'expo-web-browser';
+import * as Google from 'expo-auth-session/providers/google';
+import { googleAuthRequestConfig } from '@/src/config/socialAuth';
 
 WebBrowser.maybeCompleteAuthSession();
 
 const { width, height } = Dimensions.get('window');
 
-// API yoksa veya fotoğraf yoksa kullanılacak aydınlık ve kaliteli mekan görselleri
+// API yoksa veya fotoÄŸraf yoksa kullanÄ±lacak aydÄ±nlÄ±k ve kaliteli mekan gÃ¶rselleri
 const FALLBACK_PLACE_IMAGES = [
   'https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=1200',
-  'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=1200', // Aydınlık kahveci
-  'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1200', // Aydınlık bir kafe içi
+  'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=1200', // AydÄ±nlÄ±k kahveci
+  'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1200', // AydÄ±nlÄ±k bir kafe iÃ§i
   'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200',
   'https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=1200',
-  'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1200', // Aydınlık restoran
+  'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1200', // AydÄ±nlÄ±k restoran
 ];
 
 const CAROUSEL_INTERVAL_MS = 4500;
@@ -63,8 +67,96 @@ export default function LoginScreen() {
   const [errors, setErrors] = useState<Record<string, string | undefined>>({});
   const isSubmittingRef = useRef(false);
 
-  const { loading: socialLoading, promptGoogle, signInWithApple } = useSocialAuth(roleType);
-  const formLoading = loading || socialLoading;
+  // Google Auth Setup (auth.expo.io/@icardiii/asemos)
+  const [request, response, promptAsync] = Google.useAuthRequest({
+    ...googleAuthRequestConfig,
+    scopes: [...googleAuthRequestConfig.scopes],
+  });
+
+  useEffect(() => {
+    if (response?.type === 'success' && response.authentication) {
+      handleGoogleSuccess(response.authentication.idToken || response.authentication.accessToken);
+    }
+  }, [response]);
+
+  const handleGoogleSuccess = async (token: string) => {
+    if (!token) return;
+    setLoading(true);
+    try {
+      const data = await googleLogin(token);
+      
+      // Check role mismatch purely for UX
+      if (roleType === 'venue' && data.user.role !== 'venue') {
+        throw new Error('GirdiÄŸiniz hesap bir mekan hesabÄ± deÄŸil. LÃ¼tfen "KullanÄ±cÄ±" sekmesinden giriÅŸ yapÄ±n.');
+      } else if (roleType === 'user' && data.user.role === 'venue') {
+        throw new Error('GirdiÄŸiniz hesap bir mekan hesabÄ±. LÃ¼tfen "Mekan" sekmesinden giriÅŸ yapÄ±n.');
+      }
+
+      useAuthStore.getState().setTokens(data.access_token, data.refresh_token);
+      useAuthStore.getState().setUser(data.user);
+      success();
+
+      if (data.user.role === 'venue') {
+         router.replace('/(venue-tabs)' as any);
+      } else {
+        if (!data.user.username || !data.user.birth_date) {
+          router.replace('/first-time-setup' as any);
+        } else {
+          router.replace('/(tabs)/' as any);
+        }
+      }
+    } catch (err: any) {
+      Alert.alert(t('auth.login_error_title'), err.message || t('auth.google_login_failed'));
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const signInWithApple = async () => {
+    try {
+      const credential = await AppleAuthentication.signInAsync({
+        requestedScopes: [
+          AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
+          AppleAuthentication.AppleAuthenticationScope.EMAIL,
+        ],
+      });
+      if (credential.identityToken) {
+        setLoading(true);
+        const data = await appleLogin(credential.identityToken);
+
+        // Check role mismatch purely for UX
+        if (roleType === 'venue' && data.user.role !== 'venue') {
+          throw new Error('GirdiÄŸiniz hesap bir mekan hesabÄ± deÄŸil. LÃ¼tfen "KullanÄ±cÄ±" sekmesinden giriÅŸ yapÄ±n.');
+        } else if (roleType === 'user' && data.user.role === 'venue') {
+          throw new Error('GirdiÄŸiniz hesap bir mekan hesabÄ±. LÃ¼tfen "Mekan" sekmesinden giriÅŸ yapÄ±n.');
+        }
+
+        useAuthStore.getState().setTokens(data.access_token, data.refresh_token);
+        useAuthStore.getState().setUser(data.user);
+        success();
+
+        if (data.user.role === 'venue') {
+           router.replace('/(venue-tabs)' as any);
+        } else {
+          if (!data.user.username || !data.user.birth_date) {
+            router.replace('/first-time-setup' as any);
+          } else {
+            router.replace('/(tabs)/' as any);
+          }
+        }
+      }
+    } catch (e: any) {
+      if (e.code === 'ERR_REQUEST_CANCELED') {
+        // KullanÄ±cÄ± iptal etti
+      } else {
+        Alert.alert(t('auth.login_error_title'), e.message || t('auth.apple_login_failed'));
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
 
   const validateForm = useCallback((): boolean => {
     const newErrors: { email?: string; password?: string; general?: string } = {};
@@ -87,9 +179,9 @@ export default function LoginScreen() {
       
       // Check role mismatch purely for UX
       if (roleType === 'venue' && data.user.role !== 'venue') {
-        throw new Error('Girdiğiniz hesap bir mekan hesabı değil. Lütfen "Kullanıcı" sekmesinden giriş yapın.');
+        throw new Error('GirdiÄŸiniz hesap bir mekan hesabÄ± deÄŸil. LÃ¼tfen "KullanÄ±cÄ±" sekmesinden giriÅŸ yapÄ±n.');
       } else if (roleType === 'user' && data.user.role === 'venue') {
-        throw new Error('Girdiğiniz hesap bir mekan hesabı. Lütfen "Mekan" sekmesinden giriş yapın.');
+        throw new Error('GirdiÄŸiniz hesap bir mekan hesabÄ±. LÃ¼tfen "Mekan" sekmesinden giriÅŸ yapÄ±n.');
       }
 
       useAuthStore.getState().setTokens(data.access_token, data.refresh_token);
@@ -99,7 +191,7 @@ export default function LoginScreen() {
       if (data.user.role === 'venue') {
          router.replace('/(venue-tabs)' as any);
       } else {
-        // E-posta doğrulanmamışsa doğrulama ekranına yönlendir
+        // E-posta doÄŸrulanmamÄ±ÅŸsa doÄŸrulama ekranÄ±na yÃ¶nlendir
         if (!data.user.is_email_verified) {
           router.replace('/verify-email');
         } else if (!data.user.username || !data.user.birth_date) {
@@ -108,27 +200,21 @@ export default function LoginScreen() {
           router.replace('/(tabs)/' as any);
         }
       }
-    } catch (err: unknown) {
-      const raw =
-        err instanceof Error
-          ? err.message
-          : '';
-      if (raw.includes('pending_verification:')) {
-        const cleanMsg = raw.replace(/pending_verification:\s*/i, '').trim();
+    } catch (err: any) {
+      // Backend'den dÃ¶nen HTTP hatasÄ± veya genel hata mesajÄ±
+      let msg = err instanceof Error ? err.message : 'GiriÅŸ baÅŸarÄ±sÄ±z. LÃ¼tfen tekrar deneyin.';
+      if (err?.response?.data?.detail) {
+        msg = err.response.data.detail;
+      }
+
+      if (msg.includes('pending_verification:')) {
+        const cleanMsg = msg.replace('pending_verification:', '').trim();
         Alert.alert(t('auth.verification_required_title'), cleanMsg, [
-          {
-            text: t('auth.go_to_verify'),
-            onPress: () =>
-              router.replace({
-                pathname: '/verify-email',
-                params: { email: encodeURIComponent(email.trim()) },
-              }),
-          },
+          { text: t('auth.go_to_verify'), onPress: () => router.replace({ pathname: '/verify-email', params: { email: encodeURIComponent(email.trim()) } }) }
         ]);
         return;
       }
 
-      const msg = getAuthUserMessage(err, t);
       setErrors({ general: msg });
       Alert.alert(t('auth.login_error_title'), msg);
     } finally {
@@ -139,29 +225,42 @@ export default function LoginScreen() {
 
   const handleSocialLogin = useCallback((provider: string) => {
     lightImpact();
-    if (provider === 'Apple') signInWithApple();
-    else if (provider === 'Google') promptGoogle();
-  }, [promptGoogle, signInWithApple]);
+    if (provider === 'Apple') {
+      signInWithApple();
+    } else if (provider === 'Google') {
+      // Expo Go'da Google Sign-In desteklenmiyor (Google'Ä±n yeni gÃ¼venlik kurallarÄ±).
+      // Production build (APK/IPA) alÄ±ndÄ±ÄŸÄ±nda sorunsuz Ã§alÄ±ÅŸÄ±r.
+      if (__DEV__ && !request) {
+        Alert.alert(
+          'Google GiriÅŸ',
+          'Google ile giriÅŸ ÅŸu an geliÅŸtirme ortamÄ±nda (Expo Go) kullanÄ±lamÄ±yor. LÃ¼tfen e-posta/ÅŸifre ile giriÅŸ yapÄ±n veya production build alÄ±n.',
+          [{ text: 'Tamam' }]
+        );
+        return;
+      }
+      promptAsync();
+    }
+  }, [promptAsync, request]);
 
   const clearFieldError = useCallback((field: string) => {
     setErrors((prev) => (prev[field] ? { ...prev, [field]: undefined } : prev));
   }, []);
 
-  // --- Arka plan görsel carousel ---
+  // --- Arka plan gÃ¶rsel carousel ---
   const [imgIndex, setImgIndex] = useState(0);
   const fadeAnim = useRef(new Animated.Value(1)).current;
 
   useEffect(() => {
     const interval = setInterval(() => {
-      // Mevcut görseli fade-out yap
+      // Mevcut gÃ¶rseli fade-out yap
       Animated.timing(fadeAnim, {
         toValue: 0,
         duration: 800,
         useNativeDriver: true,
       }).start(() => {
-        // Sonraki görsele geç
+        // Sonraki gÃ¶rsele geÃ§
         setImgIndex((prev) => (prev + 1) % FALLBACK_PLACE_IMAGES.length);
-        // Yeni görseli fade-in yap
+        // Yeni gÃ¶rseli fade-in yap
         Animated.timing(fadeAnim, {
           toValue: 1,
           duration: 800,
@@ -175,7 +274,7 @@ export default function LoginScreen() {
 
   return (
     <View style={styles.container}>
-      {/* Arka plan görseli carousel — crossfade efekti */}
+      {/* Arka plan gÃ¶rseli carousel â€” crossfade efekti */}
       <View style={StyleSheet.absoluteFill}>
         <Animated.Image
           source={{ uri: FALLBACK_PLACE_IMAGES[imgIndex] }}
@@ -184,7 +283,7 @@ export default function LoginScreen() {
         />
       </View>
 
-      {/* Koyu gradient overlay – metin ve form okunabilir olsun */}
+      {/* Koyu gradient overlay â€“ metin ve form okunabilir olsun */}
       <LinearGradient
         colors={['rgba(0,0,0,0.2)', 'rgba(0,0,0,0.5)', 'rgba(0,0,0,0.88)']}
         locations={[0, 0.4, 0.85]}
@@ -207,7 +306,7 @@ export default function LoginScreen() {
               <View style={{ flex: 1 }}>
                 <View style={styles.content} pointerEvents="box-none">
                   <View style={styles.topBlock}>
-                    {/* Marka & slogan – profesyonel tipografi */}
+                    {/* Marka & slogan â€“ profesyonel tipografi */}
                     <View style={styles.header}>
                       <Text style={styles.brandTitle}>{t('auth.app_name')}</Text>
                       <Text style={styles.tagline}>
@@ -215,7 +314,7 @@ export default function LoginScreen() {
                       </Text>
                     </View>
 
-                    {/* Form kartı – koyu cam efekti */}
+                    {/* Form kartÄ± â€“ koyu cam efekti */}
                     <View style={styles.toggleContainer}>
                       <TouchableOpacity 
                         style={[styles.toggleBtn, roleType === 'user' && styles.toggleBtnActive]}
@@ -295,8 +394,8 @@ export default function LoginScreen() {
                           variant="primary"
                           size="large"
                           onPress={handleLogin}
-                          loading={formLoading}
-                          disabled={formLoading}
+                          loading={loading}
+                          disabled={loading}
                           style={styles.loginButton}
                         >
                           {t('auth.login')}
@@ -325,7 +424,7 @@ export default function LoginScreen() {
                           </TouchableOpacity>
                         </View>
 
-                        {/* Kayıt ol linki — Google ve Apple'ın hemen altında */}
+                        {/* KayÄ±t ol linki â€” Google ve Apple'Ä±n hemen altÄ±nda */}
                         <TouchableOpacity
                           style={styles.registerRow}
                           onPress={() => {
@@ -381,7 +480,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   backgroundImage: {
-    // Kullanılmıyor — absoluteFillObject kullanılıyor
+    // KullanÄ±lmÄ±yor â€” absoluteFillObject kullanÄ±lÄ±yor
     width: '100%' as any,
     height: '100%' as any,
   },

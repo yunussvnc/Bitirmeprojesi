@@ -1,13 +1,8 @@
-import Constants from "expo-constants";
+﻿import Constants from "expo-constants";
 import { Platform } from "react-native";
 
-/**
- * Dev fallback when Expo hostUri is unavailable (physical device on LAN).
- * Override in .env.local: EXPO_PUBLIC_DEV_API_HOST=YOUR_LAN_IP:8000
- */
-const DEV_API_FALLBACK = "localhost:8000";
-/** iOS Simulator: localhost (default). Physical device: EXPO_PUBLIC_DEV_API_HOST=LAN_IP:8000 */
-/** Production / release builds (EAS production profile sets EXPO_PUBLIC_API_URL) */
+/** Dev fallback when expoHost unavailable â€“ override via EXPO_PUBLIC_DEV_API_HOST */
+const DEV_API_FALLBACK = "192.168.1.9:8000";
 const PROD_API_DEFAULT = "https://asemos-backend.onrender.com";
 
 const expoHost = Constants.expoConfig?.hostUri?.split(":")[0];

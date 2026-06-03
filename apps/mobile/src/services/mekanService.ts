@@ -1,7 +1,6 @@
 import { apiGet, apiPost, apiPut } from "@/src/utils/apiClient";
 import { logger } from "@/src/utils/logger";
 import { API_BASE_URL } from "@/src/constants/api";
-import { normalizePriceRange } from "@/src/utils/placeCardHelpers";
 
 export type Place = {
   id: number | string;
@@ -27,27 +26,9 @@ export type Place = {
   saved_count?: number;
   popularity_score?: number;
   menu_items?: any[];
-  user_review?: string;
-  phone_number?: string;
-  data_id?: string;
-  vector_id?: string;
+  // Takip sistemi
   follower_count?: number;
   is_following?: boolean;
-};
-
-export type GoogleReview = {
-  author_name: string;
-  rating: number;
-  text: string;
-  relative_time?: string | null;
-  avatar_url?: string | null;
-};
-
-export type GoogleReviewsResponse = {
-  reviews: GoogleReview[];
-  total_fetched: number;
-  display_limit: number;
-  source: string;
 };
 
 export type PaginatedPlaces = {
@@ -56,15 +37,6 @@ export type PaginatedPlaces = {
   page: number;
   page_size: number;
 };
-
-function parseCoord(value: unknown): number | undefined {
-  if (typeof value === "number" && Number.isFinite(value)) return value;
-  if (typeof value === "string" && value.trim() !== "") {
-    const parsed = Number.parseFloat(value);
-    return Number.isFinite(parsed) ? parsed : undefined;
-  }
-  return undefined;
-}
 
 function normalizePlace(p: any): Place {
   const id = p?.id ?? p?._id ?? p?.place_id ?? String(Math.random());
@@ -79,8 +51,8 @@ function normalizePlace(p: any): Place {
   const category = p?.category || undefined;
   const address = p?.address || undefined;
   const city = p?.city || undefined;
-  const latitude = parseCoord(p?.latitude ?? p?.lat ?? p?.enlem);
-  const longitude = parseCoord(p?.longitude ?? p?.lng ?? p?.boylam);
+  const latitude = typeof p?.latitude === 'number' ? p.latitude : undefined;
+  const longitude = typeof p?.longitude === 'number' ? p.longitude : undefined;
   
   let photo_url = p?.photo_url || undefined;
   if (photo_url && photo_url.startsWith('google_photo_ref:')) {
@@ -98,34 +70,14 @@ function normalizePlace(p: any): Place {
   }
 
   const video_url = p?.video_url || undefined;
-  const average_rating =
-    typeof p?.average_rating === 'number'
-      ? p.average_rating
-      : typeof p?.rating === 'number'
-        ? p.rating
-        : typeof p?.puan === 'number'
-          ? p.puan
-          : undefined;
-  const price_range = normalizePriceRange(p?.price_range ?? p?.price_level);
+  const average_rating = typeof p?.average_rating === 'number' ? p.average_rating : undefined;
+  const price_range = typeof p?.price_range === 'number' ? p.price_range : undefined;
   const features = p?.features || undefined;
-  const opening_time = p?.opening_time || p?.acilis || undefined;
-  const closing_time = p?.closing_time || p?.kapanis || undefined;
-  const review_count = (() => {
-    const appReviews = typeof p?.review_count === 'number' ? p.review_count : undefined;
-    const googleReviews =
-      typeof p?.user_ratings_total === 'number'
-        ? p.user_ratings_total
-        : typeof p?.yorum_sayisi === 'number'
-          ? p.yorum_sayisi
-          : undefined;
-    if (typeof appReviews === 'number' && appReviews > 0) return appReviews;
-    return googleReviews ?? appReviews;
-  })();
+  const opening_time = p?.opening_time || undefined;
+  const closing_time = p?.closing_time || undefined;
+  const review_count = typeof p?.review_count === 'number' ? p.review_count : undefined;
   const saved_count = typeof p?.saved_count === 'number' ? p.saved_count : undefined;
   const popularity_score = typeof p?.popularity_score === 'number' ? p.popularity_score : undefined;
-  const user_review = p?.user_review || undefined;
-  const phone_number = p?.phone_number || p?.telefon || undefined;
-  const data_id = p?.data_id || p?.vector_id || undefined;
   const follower_count = typeof p?.follower_count === 'number' ? p.follower_count : 0;
   const is_following = typeof p?.is_following === 'boolean' ? p.is_following : false;
   
@@ -140,52 +92,7 @@ function normalizePlace(p: any): Place {
     }
   }
 
-  return {
-    id,
-    name,
-    subtitle,
-    description,
-    campaign_text,
-    tags,
-    category,
-    address,
-    city,
-    latitude,
-    longitude,
-    photo_url,
-    gallery_urls,
-    video_url,
-    average_rating,
-    price_range,
-    features,
-    opening_time,
-    closing_time,
-    review_count,
-    saved_count,
-    popularity_score,
-    menu_items,
-    user_review,
-    phone_number,
-    data_id,
-    vector_id: p?.vector_id || data_id,
-    follower_count,
-    is_following,
-  };
-}
-
-export async function getPlaceGoogleReviews(
-  placeId: string | number,
-  limit = 5,
-): Promise<GoogleReviewsResponse> {
-  const data = await apiGet<GoogleReviewsResponse>(
-    `/places/${placeId}/google-reviews?limit=${limit}`,
-  );
-  return {
-    reviews: data?.reviews ?? [],
-    total_fetched: data?.total_fetched ?? 0,
-    display_limit: data?.display_limit ?? limit,
-    source: data?.source ?? "google_maps",
-  };
+  return { id, name, subtitle, description, campaign_text, tags, category, address, city, latitude, longitude, photo_url, gallery_urls, video_url, average_rating, price_range, features, opening_time, closing_time, review_count, saved_count, popularity_score, menu_items, follower_count, is_following };
 }
 
 export async function getPlaces(page = 1, pageSize = 20): Promise<PaginatedPlaces> {
@@ -217,22 +124,10 @@ export async function getPlaces(page = 1, pageSize = 20): Promise<PaginatedPlace
 
 export async function getAllPlaces(): Promise<Place[]> {
   try {
-    const pageSize = 200;
-    let page = 1;
-    let total = Number.POSITIVE_INFINITY;
-    const all: Place[] = [];
-
-    while (all.length < total) {
-      const batch = await getPlaces(page, pageSize);
-      total = batch.total;
-      if (batch.items.length === 0) break;
-      all.push(...batch.items);
-      if (batch.items.length < pageSize) break;
-      page += 1;
-    }
-
-    logger.log(`[getAllPlaces] Loaded ${all.length} places`);
-    return all;
+    const data = await apiGet<any>('/places/?page=1&page_size=500');
+    const arr = Array.isArray(data?.items) ? data.items : Array.isArray(data) ? data : [];
+    logger.log(`[getAllPlaces] Loaded ${arr.length} places`);
+    return arr.map(normalizePlace);
   } catch (error) {
     logger.error("[getAllPlaces] Error:", error);
     throw error;

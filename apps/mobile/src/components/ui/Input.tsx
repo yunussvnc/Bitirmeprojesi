@@ -17,7 +17,6 @@ import {
   StyleSheet,
   ViewStyle,
   TextStyle,
-  Platform,
 } from 'react-native';
 import { IconSymbol, type IconSymbolName } from './icon-symbol';
 import { useTheme } from '@/src/hooks/useTheme';
@@ -46,11 +45,6 @@ export interface InputProps extends Omit<TextInputProps, 'style'> {
    * Error message (shown below input)
    */
   error?: string;
-
-  /**
-   * Helper text below the field (e.g. password requirements)
-   */
-  helperText?: string;
   
   /**
    * Left icon name (for search variant)
@@ -113,7 +107,6 @@ export function Input({
   variant = 'default',
   label,
   error,
-  helperText,
   leftIcon,
   rightIcon,
   onRightIconPress,
@@ -133,15 +126,6 @@ export function Input({
   const inputColor = isOnDark ? '#ffffff' : colors.text.primary;
   const placeholderColor = isOnDark ? 'rgba(255,255,255,0.6)' : colors.text.secondary;
   const iconColor = isOnDark ? 'rgba(255,255,255,0.7)' : colors.text.secondary;
-  const bodyFontSize = typography.scale.body.fontSize;
-  const fieldMinHeight = isOnDark ? 50 : 52;
-  const fieldPaddingVertical = isSearch
-    ? spacing.sm
-    : isOnDark
-      ? Platform.OS === 'android' ? 10 : spacing.sm
-      : rightIcon
-        ? spacing.sm
-        : spacing.base;
 
   return (
     <View style={[styles.container, containerStyle]} testID={testID}>
@@ -168,11 +152,9 @@ export function Input({
             backgroundColor: inputBg,
             borderColor: inputBorder,
             paddingHorizontal: spacing.base,
-            paddingVertical: fieldPaddingVertical,
-            minHeight: isSearch ? undefined : fieldMinHeight,
+            paddingVertical: isSearch ? spacing.sm : spacing.base,
           },
           isSearch && styles.searchContainer,
-          rightIcon && !isSearch && !isOnDark && styles.inputContainerWithRightIcon,
         ]}
       >
         {leftIcon && (
@@ -189,18 +171,12 @@ export function Input({
             styles.input,
             {
               color: inputColor,
-              fontSize: bodyFontSize,
-              lineHeight: isOnDark ? Math.round(bodyFontSize * 1.3) : bodyFontSize,
+              fontSize: typography.scale.body.fontSize,
               flex: 1,
-              minHeight: isOnDark ? 22 : undefined,
             },
             inputStyle,
           ]}
           placeholderTextColor={placeholderColor}
-          {...(Platform.OS === 'android' && {
-            includeFontPadding: false,
-            textAlignVertical: 'center',
-          })}
           {...textInputProps}
         />
 
@@ -209,7 +185,6 @@ export function Input({
             onPress={onRightIconPress}
             style={styles.rightIcon}
             accessibilityRole="button"
-            hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
           >
             <IconSymbol
               name={rightIcon}
@@ -219,20 +194,6 @@ export function Input({
           </TouchableOpacity>
         )}
       </View>
-
-      {helperText && !error && (
-        <Text
-          style={[
-            styles.helperText,
-            {
-              color: isOnDark ? 'rgba(255,255,255,0.65)' : colors.text.tertiary,
-              fontSize: typography.scale.caption.fontSize,
-            },
-          ]}
-        >
-          {helperText}
-        </Text>
-      )}
 
       {error && (
         <Text
@@ -267,33 +228,24 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     borderRadius: 12,
     borderWidth: 1,
-    minHeight: 52,
-    overflow: 'hidden',
-  },
-  inputContainerWithRightIcon: {
     minHeight: 48,
-    maxHeight: 48,
+    maxHeight: 52,
   },
   searchContainer: {
     minHeight: 48,
+    maxHeight: 52,
     height: 50,
   },
   input: {
     flex: 1,
-    paddingVertical: 0,
+    paddingVertical: 0, // Remove default padding for exact 48px
   },
   leftIcon: {
     marginRight: 10, // Tighter spacing
   },
   rightIcon: {
-    marginLeft: 8,
+    marginLeft: 10, // Tighter spacing
     padding: 4,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  helperText: {
-    marginTop: 6,
-    lineHeight: 18,
   },
   error: {
     marginTop: 4,

@@ -16,8 +16,8 @@
     "no_results": "No results found",
     "no_results_desc": "Try changing your preferences or search query",
     "clear": "Clear",
-    "no_places": "No venues in your city yet — coming soon",
-    "no_places_desc": "New venues will appear here when added",
+    "no_places": "No places yet",
+    "no_places_desc": "Coming soon",
     "change_filters": "Change filters",
     "venue": "Venue"
   },
@@ -37,9 +37,8 @@
     "status_closing": "Closing Soon",
     "status_closed": "Closed",
     "whole_city": "Whole City",
-    "place_map_count": "{{count}} places",
     "discover_subtitle": "Discover venues near you",
-    "no_places": "No venues in your city yet — coming soon",
+    "no_places": "No venues yet",
     "recommended": "Recommended for you",
     "menu": "Menu",
     "no_image": "No image added",
@@ -391,14 +390,7 @@
     "pages_menu": "{{count}} page menu",
     "items": "{{count}} items",
     "page_x_of_y": "Page {{current}} / {{total}}",
-    "no_menu": "This venue hasn't added a menu yet.",
-    "google_reviews_section": "Reviews",
-    "google_reviews_badge": "Google reviews",
-    "google_review_rating": "{{rating}}/5",
-    "google_reviews_loading": "Loading Google reviews…",
-    "google_reviews_empty": "No Google reviews found for this place.",
-    "google_reviews_error": "Could not load Google reviews.",
-    "google_reviews_see_more": "See more"
+    "no_menu": "This venue hasn't added a menu yet."
   },
   "feed_comments": {
     "comments": "Comments",
@@ -490,7 +482,7 @@
     "email_placeholder": "example@email.com",
     "password": "Password",
     "password_placeholder": "••••••••",
-    "password_requirements": "Use one lowercase letter, one uppercase letter, a number, and punctuation; at least 8 characters.",
+    "password_hint": "e.g., UcD.7491",
     "confirm_password": "Confirm Password",
     "confirm_password_placeholder": "Re-enter your password",
     "forgot_password": "Forgot password?",
@@ -529,23 +521,7 @@
     "err_passwords_mismatch": "Passwords do not match",
     "err_fullname_required": "Full name is required",
     "err_fullname_two_words": "Enter both first and last name",
-    "err_venue_name_required": "Venue name is required",
-    "err_email_taken": "This email is already registered",
-    "err_wrong_password": "Incorrect password",
-    "err_network": "Check your internet connection and try again.",
-    "err_generic": "Something went wrong. Please try again.",
-    "google_dev_title": "Google Sign-In",
-    "google_dev_body": "Google sign-in is limited in development (Expo Go). Use email/password or a production build.",
-    "apple_ios_only": "Apple sign-in is only available on iOS devices.",
-    "apple_unavailable": "Apple sign-in is not available on this device. Try a current iOS build."
-  },
-  "legal_documents": {
-    "terms_title": "Terms of Use",
-    "privacy_title": "Privacy Policy",
-    "cookies_title": "Cookie Policy",
-    "terms_body": "ASEMOS Terms of Use\n\n1. Service: ASEMOS is a mobile app for venue discovery and social matching.\n2. Account: You must provide accurate information at registration and keep your credentials secure.\n3. Content: You may not post illegal content or content that violates others' rights or community guidelines.\n4. Venue accounts: Venue applications follow a separate approval process.\n5. Termination: Accounts that violate rules may be warned or permanently closed.\n6. Changes: Terms may be updated; material changes will be announced in the app.\n\nContact: support@asemos.com",
-    "privacy_body": "ASEMOS Privacy Policy\n\nData controller: ASEMOS.\n\nData collected: account data (email, name), profile preferences, location (when permitted), usage and device notification tokens.\n\nPurposes: account creation, service delivery, security, legal compliance.\n\nSharing: We do not sell your data for advertising. Service providers (hosting, notifications) receive limited access only to operate the service.\n\nYour rights: You may request access, correction, or deletion via in-app settings or support@asemos.com.\n\nRetention: When you delete your account, data is removed or anonymized within a reasonable period.",
-    "cookies_body": "ASEMOS Cookies and Similar Technologies\n\nWe may use local storage and similar technologies to remember sessions and preferences. Essential storage is required for the app to function. Analytics preferences can be managed in settings."
+    "err_venue_name_required": "Venue name is required"
   },
   "creation": {
     "next": "Next",
