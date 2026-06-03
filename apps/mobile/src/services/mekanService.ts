@@ -57,6 +57,15 @@ export type PaginatedPlaces = {
   page_size: number;
 };
 
+function parseCoord(value: unknown): number | undefined {
+  if (typeof value === "number" && Number.isFinite(value)) return value;
+  if (typeof value === "string" && value.trim() !== "") {
+    const parsed = Number.parseFloat(value);
+    return Number.isFinite(parsed) ? parsed : undefined;
+  }
+  return undefined;
+}
+
 function normalizePlace(p: any): Place {
   const id = p?.id ?? p?._id ?? p?.place_id ?? String(Math.random());
   const name = String(p?.name ?? p?.title ?? p?.mekan_adi ?? "Mekan");
@@ -70,8 +79,8 @@ function normalizePlace(p: any): Place {
   const category = p?.category || undefined;
   const address = p?.address || undefined;
   const city = p?.city || undefined;
-  const latitude = typeof p?.latitude === 'number' ? p.latitude : undefined;
-  const longitude = typeof p?.longitude === 'number' ? p.longitude : undefined;
+  const latitude = parseCoord(p?.latitude);
+  const longitude = parseCoord(p?.longitude);
   
   let photo_url = p?.photo_url || undefined;
   if (photo_url && photo_url.startsWith('google_photo_ref:')) {
@@ -208,10 +217,22 @@ export async function getPlaces(page = 1, pageSize = 20): Promise<PaginatedPlace
 
 export async function getAllPlaces(): Promise<Place[]> {
   try {
-    const data = await apiGet<any>('/places/?page=1&page_size=1000');
-    const arr = Array.isArray(data?.items) ? data.items : Array.isArray(data) ? data : [];
-    logger.log(`[getAllPlaces] Loaded ${arr.length} places`);
-    return arr.map(normalizePlace);
+    const pageSize = 200;
+    let page = 1;
+    let total = Number.POSITIVE_INFINITY;
+    const all: Place[] = [];
+
+    while (all.length < total) {
+      const batch = await getPlaces(page, pageSize);
+      total = batch.total;
+      if (batch.items.length === 0) break;
+      all.push(...batch.items);
+      if (batch.items.length < pageSize) break;
+      page += 1;
+    }
+
+    logger.log(`[getAllPlaces] Loaded ${all.length} places`);
+    return all;
   } catch (error) {
     logger.error("[getAllPlaces] Error:", error);
     throw error;

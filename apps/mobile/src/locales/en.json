@@ -37,6 +37,7 @@
     "status_closing": "Closing Soon",
     "status_closed": "Closed",
     "whole_city": "Whole City",
+    "place_map_count": "{{count}} places",
     "discover_subtitle": "Discover venues near you",
     "no_places": "No venues yet",
     "recommended": "Recommended for you",

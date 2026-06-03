@@ -37,6 +37,7 @@
     "status_closing": "Kapanıyor",
     "status_closed": "Kapalı",
     "whole_city": "Bütün Şehir",
+    "place_map_count": "{{count}} mekan",
     "discover_subtitle": "Yakınındaki mekanları keşfet",
     "no_places": "Henüz mekan yok",
     "recommended": "Senin için önerildi",
