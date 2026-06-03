@@ -290,21 +290,35 @@ export default function RegisterScreen() {
                           error={errors.confirmPassword}
                           containerStyle={styles.inputContainer}
                         />
-                        <TouchableOpacity
-                          style={styles.termsContainer}
-                          onPress={() => { setTermsAccepted(!termsAccepted); lightImpact(); }}
-                          activeOpacity={0.8}
-                        >
-                          <View style={[styles.checkbox, termsAccepted && styles.checkboxActive]}>
-                            {termsAccepted && <IconSymbol name="checkmark" size={14} color="#000" />}
-                          </View>
+                        <View style={styles.termsContainer}>
+                          <TouchableOpacity
+                            onPress={() => { setTermsAccepted(!termsAccepted); lightImpact(); }}
+                            activeOpacity={0.8}
+                            hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
+                          >
+                            <View style={[styles.checkbox, termsAccepted && styles.checkboxActive]}>
+                              {termsAccepted && <IconSymbol name="checkmark" size={14} color="#000" />}
+                            </View>
+                          </TouchableOpacity>
                           <Text style={styles.termsText}>
-                            <Text style={styles.termsLink} onPress={() => openLegalDoc('terms')}>{t('auth.terms')}</Text>
+                            <Text
+                              style={styles.termsLink}
+                              onPress={() => openLegalDoc('terms')}
+                              suppressHighlighting
+                            >
+                              {t('auth.terms')}
+                            </Text>
                             {t('auth.and')}
-                            <Text style={styles.termsLink} onPress={() => openLegalDoc('privacy')}>{t('auth.privacy')}</Text>
+                            <Text
+                              style={styles.termsLink}
+                              onPress={() => openLegalDoc('privacy')}
+                              suppressHighlighting
+                            >
+                              {t('auth.privacy')}
+                            </Text>
                             {t('auth.read_and_accept')}
                           </Text>
-                        </TouchableOpacity>
+                        </View>
 
                         <Button
                           variant="primary"

@@ -71,8 +71,19 @@ class RecommendationEngine:
         self,
         oneriler: List[Dict[str, Any]]
     ) -> List[Dict[str, Any]]:
-        """Backend'den detaylı mekan bilgilerini al"""
-        # Backend API'den mekan detaylarını çekme
-        # Şimdilik öneriler olduğu gibi dönüyor
-        return oneriler
+        """Backend'den detaylı mekan bilgilerini al; eksik kayıtları döndürme."""
+        enriched: List[Dict[str, Any]] = []
+        for oneri in oneriler:
+            name = (oneri.get("ad") or oneri.get("name") or "").strip()
+            if len(name) < 2:
+                continue
+            try:
+                lat = float(oneri.get("enlem") or oneri.get("latitude") or 0)
+                lng = float(oneri.get("boylam") or oneri.get("longitude") or 0)
+            except (TypeError, ValueError):
+                continue
+            if abs(lat) < 0.0001 and abs(lng) < 0.0001:
+                continue
+            enriched.append(oneri)
+        return enriched
 

@@ -3,6 +3,7 @@ import { smartSearch } from "./aiService";
 import { apiPost } from "@/src/utils/apiClient";
 import { logger } from "@/src/utils/logger";
 import type { Place } from "../types/ai";
+import { filterCompleteAiRecommendations } from "@/src/utils/aiPlaceValidation";
 
 // Google Place ID'yi numeric ID'ye çevir
 function hashPlaceId(dataId: string): number {
@@ -29,10 +30,13 @@ export async function recommendPlaces(
       user_lng: req.location?.lng,
       limit: 10,
       max_distance_km: req.radius_m ? req.radius_m / 1000 : 5,
+      analyze_reviews: false,
     });
-    
+
+    const completePlaces = filterCompleteAiRecommendations(result.recommendations || []);
+
     // AI servisi Place[] döndürüyor, RecommendItem[] formatına çevir
-    const items = (result.recommendations || []).map((place: Place) => {
+    const items = completePlaces.map((place: Place) => {
       const dataId = place.data_id || "";
       const numericId = dataId ? hashPlaceId(dataId) : Math.floor(Math.random() * 1000000);
       

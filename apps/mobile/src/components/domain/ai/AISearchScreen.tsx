@@ -30,6 +30,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useTheme } from '@/src/hooks/useTheme';
 import { smartSearch, checkAIHealth, getAIBaseUrl, imageSearch } from '@/src/services/aiService';
 import type { Place, SmartSearchResponse } from '@/src/types/ai';
+import { filterCompleteAiRecommendations } from '@/src/utils/aiPlaceValidation';
 
 // ─── Sabit lokasyonlar ───────────────────────────────────────
 const LOCATIONS = [
@@ -413,12 +414,21 @@ export default function AISearchScreen() {
           text: '😔 Bu görsel için uygun mekan bulamadım. Daha net bir fotoğraf dene.',
         });
       } else {
-        addMessage({
-          id: Date.now().toString(),
-          type: 'places',
-          places: res.recommendations,
-          cached: res._cache?.hit ?? false,
-        });
+        const places = filterCompleteAiRecommendations(res.recommendations ?? []);
+        if (places.length === 0) {
+          addMessage({
+            id: Date.now().toString(),
+            type: 'bot',
+            text: '😔 Bu görsel için tam bilgili mekan bulamadım. Daha net bir fotoğraf dene.',
+          });
+        } else {
+          addMessage({
+            id: Date.now().toString(),
+            type: 'places',
+            places,
+            cached: res._cache?.hit ?? false,
+          });
+        }
       }
     } catch (err: any) {
       removeLoading();
@@ -433,19 +443,19 @@ export default function AISearchScreen() {
   }, [selectedLoc, addMessage, removeLoading]);
 
 
-  // Backend health check
+  // Backend health check (non-blocking — aramayı geciktirmez)
   useEffect(() => {
-    checkAIHealth().then(({ ok, modelLoaded }) => {
-      setModelReady(ok && modelLoaded);
-      if (!ok) {
-        const aiUrl = getAIBaseUrl();
-        setMessages([{
-          id: 'sys-err',
-          type: 'error',
-          text: `⚠️ AI backend bağlantısı kurulamadı. (${aiUrl})`,
-        }]);
-      }
-    });
+    let cancelled = false;
+    checkAIHealth()
+      .then(({ ok }) => {
+        if (!cancelled) setModelReady(ok);
+      })
+      .catch(() => {
+        if (!cancelled) setModelReady(false);
+      });
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
 
@@ -487,12 +497,21 @@ export default function AISearchScreen() {
           text: '😔 Bu kriterlere uygun bir mekan bulamadım. Biraz daha genel bir arama dene.',
         });
       } else {
-        addMessage({
-          id: Date.now().toString(),
-          type: 'places',
-          places: res.recommendations,
-          cached: res._cache?.hit ?? false,
-        });
+        const places = filterCompleteAiRecommendations(res.recommendations ?? []);
+        if (places.length === 0) {
+          addMessage({
+            id: Date.now().toString(),
+            type: 'bot',
+            text: '😔 Bu kriterlere uygun tam bilgili bir mekan bulamadım. Biraz daha genel bir arama dene.',
+          });
+        } else {
+          addMessage({
+            id: Date.now().toString(),
+            type: 'places',
+            places,
+            cached: res._cache?.hit ?? false,
+          });
+        }
       }
     } catch (err: any) {
       removeLoading();

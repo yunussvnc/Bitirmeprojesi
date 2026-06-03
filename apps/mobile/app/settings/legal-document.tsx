@@ -65,6 +65,9 @@ export default function LegalDocumentScreen() {
         contentContainerStyle={styles.content}
         showsVerticalScrollIndicator={false}
       >
+        <Text style={[styles.lead, { color: colors.text.primary }]}>
+          {t(TITLE_KEYS[docType])}
+        </Text>
         <Text style={[styles.body, { color: colors.text.secondary }]}>
           {t(BODY_KEYS[docType])}
         </Text>
@@ -86,6 +89,17 @@ const styles = StyleSheet.create({
   backBtn: { minWidth: 44, minHeight: 44, alignItems: 'flex-start', justifyContent: 'center' },
   title: { fontSize: 18, fontWeight: '700', flex: 1, textAlign: 'center' },
   container: { flex: 1 },
-  content: { padding: 20, paddingBottom: 48 },
-  body: { fontSize: 15, lineHeight: 24 },
+  content: { paddingHorizontal: 22, paddingTop: 20, paddingBottom: 56 },
+  lead: {
+    fontSize: 22,
+    fontWeight: '700',
+    letterSpacing: -0.3,
+    marginBottom: 16,
+    lineHeight: 28,
+  },
+  body: {
+    fontSize: 16,
+    lineHeight: 26,
+    letterSpacing: 0.15,
+  },
 });

@@ -85,13 +85,18 @@ export function useSocialAuth(roleType: RoleType) {
       Alert.alert(t('auth.login_error_title'), getGoogleClientIdConfigError());
       return;
     }
-    if (__DEV__ && !request) {
-      Alert.alert(t('auth.google_dev_title'), t('auth.google_dev_body'), [
-        { text: t('common.ok') },
-      ]);
+    if (!request) {
+      Alert.alert(
+        t('auth.login_error_title'),
+        t('auth.google_not_ready', 'Google giriş hazırlanıyor. Birkaç saniye sonra tekrar deneyin.'),
+      );
       return;
     }
-    await promptAsync({ showInRecents: true });
+    try {
+      await promptAsync({ showInRecents: true, useProxy: true });
+    } catch {
+      Alert.alert(t('auth.login_error_title'), t('auth.google_login_failed'));
+    }
   }, [promptAsync, request, t]);
 
   const signInWithApple = useCallback(async () => {

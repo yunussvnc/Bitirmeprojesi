@@ -52,7 +52,7 @@ export const AI_BASE_URL = resolveAIBaseUrl();
 async function aiFetch<T>(
   path: string,
   options: RequestInit = {},
-  timeoutMs = 40000,
+  timeoutMs = 28000,
 ): Promise<T> {
   const url = `${AI_BASE_URL}${path}`;
   const controller = new AbortController();
@@ -99,7 +99,14 @@ export async function smartSearch(
     logger.log('[aiService] smartSearch →', req.query);
     const res = await aiFetch<SmartSearchResponse>(
       '/api/smart-search-v2',
-      { method: 'POST', body: JSON.stringify(req) },
+      {
+        method: 'POST',
+        body: JSON.stringify({
+          ...req,
+          analyze_reviews: req.analyze_reviews ?? false,
+        }),
+      },
+      28000,
     );
     logger.log('[aiService] smartSearch ←', res.found, 'sonuç');
     return res;
@@ -141,7 +148,7 @@ export async function checkAIHealth(): Promise<{
       status: string;
       model_loaded: boolean;
       cache: string;
-    }>('/health', { method: 'GET' }, 5000);
+    }>('/health', { method: 'GET' }, 2500);
     return {
       ok: data.status === 'ok',
       modelLoaded: data.model_loaded ?? false,

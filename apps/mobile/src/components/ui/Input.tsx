@@ -133,11 +133,12 @@ export function Input({
   const inputColor = isOnDark ? '#ffffff' : colors.text.primary;
   const placeholderColor = isOnDark ? 'rgba(255,255,255,0.6)' : colors.text.secondary;
   const iconColor = isOnDark ? 'rgba(255,255,255,0.7)' : colors.text.secondary;
-  const fieldMinHeight = isOnDark ? 48 : 52;
+  const bodyFontSize = typography.scale.body.fontSize;
+  const fieldMinHeight = isOnDark ? 50 : 52;
   const fieldPaddingVertical = isSearch
     ? spacing.sm
     : isOnDark
-      ? spacing.sm
+      ? Platform.OS === 'android' ? 10 : spacing.sm
       : rightIcon
         ? spacing.sm
         : spacing.base;
@@ -171,7 +172,7 @@ export function Input({
             minHeight: isSearch ? undefined : fieldMinHeight,
           },
           isSearch && styles.searchContainer,
-          rightIcon && !isSearch && styles.inputContainerWithRightIcon,
+          rightIcon && !isSearch && !isOnDark && styles.inputContainerWithRightIcon,
         ]}
       >
         {leftIcon && (
@@ -188,9 +189,10 @@ export function Input({
             styles.input,
             {
               color: inputColor,
-              fontSize: typography.scale.body.fontSize,
-              lineHeight: typography.scale.body.fontSize,
+              fontSize: bodyFontSize,
+              lineHeight: isOnDark ? Math.round(bodyFontSize * 1.3) : bodyFontSize,
               flex: 1,
+              minHeight: isOnDark ? 22 : undefined,
             },
             inputStyle,
           ]}

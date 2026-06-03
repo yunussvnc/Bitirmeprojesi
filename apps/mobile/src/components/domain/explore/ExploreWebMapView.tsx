@@ -375,7 +375,7 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
         }
         if (data.type === 'marker') {
           lightImpact();
-          const place = places.find((p) => p.id === data.id);
+          const place = places.find((p) => String(p.id) === String(data.id));
           setSelectedPlace(place ?? null);
         } else if (data.type === 'deselect') {
           setSelectedPlace(null);

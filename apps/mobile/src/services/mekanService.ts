@@ -79,8 +79,8 @@ function normalizePlace(p: any): Place {
   const category = p?.category || undefined;
   const address = p?.address || undefined;
   const city = p?.city || undefined;
-  const latitude = parseCoord(p?.latitude);
-  const longitude = parseCoord(p?.longitude);
+  const latitude = parseCoord(p?.latitude ?? p?.lat ?? p?.enlem);
+  const longitude = parseCoord(p?.longitude ?? p?.lng ?? p?.boylam);
   
   let photo_url = p?.photo_url || undefined;
   if (photo_url && photo_url.startsWith('google_photo_ref:')) {

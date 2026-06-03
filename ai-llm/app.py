@@ -858,7 +858,7 @@ class SmartSearchRequest(BaseModel):
     user_lat: Optional[float] = None
     user_lng: Optional[float] = None
     max_distance_km: float = 10.0
-    analyze_reviews: bool = True   # Yorum analizi açık/kapalı (API kredi tasarrufu için)
+    analyze_reviews: bool = False  # Yorum analizi (varsayılan kapalı — daha hızlı yanıt)
     language: Optional[str] = None
     locale: Optional[str] = None
 
@@ -1372,6 +1372,31 @@ def _normalize_place_name(name: Optional[str]) -> str:
     if not name:
         return ""
     return re.sub(r"\s+", " ", name.strip().lower())
+
+
+def _is_complete_recommendation(place: Dict) -> bool:
+    """Mobil PlaceCard için eksik Groq/RAG kartlarını eler."""
+    name = (place.get("name") or "").strip()
+    if len(name) < 2:
+        return False
+    try:
+        lat = float(place.get("latitude") if place.get("latitude") is not None else 0)
+        lng = float(place.get("longitude") if place.get("longitude") is not None else 0)
+    except (TypeError, ValueError):
+        return False
+    if abs(lat) < 0.0001 and abs(lng) < 0.0001:
+        return False
+    if not (-90 <= lat <= 90 and -180 <= lng <= 180):
+        return False
+    category = (place.get("category") or "").strip()
+    address = (place.get("address") or "").strip()
+    if not category and not address:
+        return False
+    return True
+
+
+def _sanitize_recommendations(places: List[Dict]) -> List[Dict]:
+    return [p for p in places if _is_complete_recommendation(p)]
 
 
 def _rag_oneri_to_recommendation(oneri: Dict) -> Dict:
@@ -1927,13 +1952,44 @@ async def smart_search_v2(request: SmartSearchRequest):
             
             place['recommendation_reason'] = " • ".join(reasons) if reasons else reason_label("general_fit", response_language)
         
-        # ==================== GROQ LLM DOĞAL DİL CEVABI ====================
+        reranked_places = _sanitize_recommendations(reranked_places)
+        if not reranked_places:
+            empty_msg = rag_analysis or localized("no_vector_match", response_language)
+            return {
+                "query": request.query,
+                "found": 0,
+                "recommendations": [],
+                "message": empty_msg,
+                "ai_message": empty_msg,
+                "source": "RAG" if rag_status.get("ready") else "none",
+                "hybrid_mode": False,
+                "rag_enhanced": False,
+                "rag_source_count": rag_status.get("source_count", 0),
+                "rag_indexed_count": rag_status.get("indexed_count", 0),
+                "rag_context": rag_context,
+                "context": {
+                    "weather": weather_data.get("condition"),
+                    "temperature": weather_data.get("temp"),
+                    "rag_enhanced": False,
+                    "rag_source_count": rag_status.get("source_count", 0),
+                    "rag_indexed_count": rag_status.get("indexed_count", 0),
+                    "language": response_language,
+                },
+                "_cache": {"hit": False},
+            }
+
+        # ==================== GROQ LLM DOĞAL DİL CEVABI (kısa zaman aşımı) ====================
         llm_message = rag_analysis if rag_used_for_results else ""
         if settings.GROQ_API_KEY and reranked_places:
             try:
-                llm_message = await generate_llm_response(
-                    request.query, reranked_places, parsed, response_language
+                llm_message = await asyncio.wait_for(
+                    generate_llm_response(
+                        request.query, reranked_places, parsed, response_language
+                    ),
+                    timeout=3.0,
                 ) or llm_message
+            except asyncio.TimeoutError:
+                print("[Groq] LLM zaman aşımı (3s) — özet atlandı")
             except Exception as e:
                 print(f"[Groq] LLM atlandı: {e}")
 
