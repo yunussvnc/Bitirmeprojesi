@@ -183,6 +183,26 @@ async def startup_event():
         cleanup_expired_stories()  # İlk başlangıçta bir kez çalıştır
         asyncio.create_task(background_scheduler())
 
+    # Explore harita pinleri: DB bos/eksikse loaded_places.json upsert
+    if os.getenv("TESTING") != "1" and settings.PLACES_SYNC_ON_STARTUP:
+        async def _sync_places_bg():
+            try:
+                from scripts.sync_loaded_places import maybe_sync_places_on_startup
+                json_path = settings.PLACES_JSON_PATH
+                if not os.path.isabs(json_path):
+                    json_path = os.path.join(os.path.dirname(__file__), json_path)
+                await asyncio.to_thread(
+                    maybe_sync_places_on_startup,
+                    settings.DATABASE_URL,
+                    json_path,
+                    settings.PLACES_SYNC_MIN_RATIO,
+                )
+            except Exception as exc:
+                logger.warning("Places sync basarisiz: %s", exc)
+
+        asyncio.create_task(_sync_places_bg())
+        logger.info("Postgres place sync arka planda kontrol edilecek...")
+
     logger.info("✅ API hazır!")
 
 @app.on_event("shutdown")

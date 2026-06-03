@@ -41,6 +41,11 @@ class Settings(BaseSettings):
     # Geliştirme: SMTP yokken konsola mock log (prod'da kullanmayın)
     DEV_SKIP_EMAIL_VERIFICATION: bool = False
 
+    # Explore harita pinleri: loaded_places.json → Postgres startup sync
+    PLACES_SYNC_ON_STARTUP: bool = True
+    PLACES_SYNC_MIN_RATIO: float = 0.95
+    PLACES_JSON_PATH: str = "data/loaded_places.json"
+
     model_config = {"env_file": ".env", "extra": "ignore"}
 
 

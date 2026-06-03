@@ -29,6 +29,12 @@ services:
         value: groq
       - key: RECOMMEND_CACHE_TTL
         value: 1800
+      - key: PLACES_SYNC_ON_STARTUP
+        value: true
+      - key: PLACES_SYNC_MIN_RATIO
+        value: "0.95"
+      - key: PLACES_JSON_PATH
+        value: data/loaded_places.json
       # Aşağıdaki değerler Render dashboard'dan manuel girilmeli
       - key: GROQ_API_KEY
         sync: false

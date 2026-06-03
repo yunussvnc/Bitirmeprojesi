@@ -2,6 +2,31 @@
 
 Backend için yardımcı scriptler.
 
+## Explore Harita Pinleri — loaded_places.json Sync
+
+812 gerçek İstanbul mekanını PostgreSQL `places` tablosuna aktarır (lat/lng dahil).
+
+### Otomatik (Render deploy)
+
+`PLACES_SYNC_ON_STARTUP=true` (varsayılan) ile backend açılışında DB sayısı JSON'un %95'inden azsa upsert çalışır.
+Build sırasında `build.sh`, `ai-llm/data/loaded_places.json` dosyasını `backend/data/` altına kopyalar.
+
+### Manuel (Render Postgres'e karşı lokal)
+
+```powershell
+cd backend
+$env:DATABASE_URL = "postgresql://..."   # Render Dashboard → asemos-db → External Database URL
+python scripts/sync_loaded_places.py --json ../ai-llm/data/loaded_places.json
+```
+
+Önizleme: `--dry-run` ekleyin.
+
+Doğrulama:
+
+```powershell
+curl "https://asemos-backend.onrender.com/places/?page_size=5"
+```
+
 ## Mekan Ekleme Scripti
 
 İstanbul'daki tüm büyük zincirleri veritabanına eklemek için kullanılır.
