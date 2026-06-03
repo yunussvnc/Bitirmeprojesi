@@ -3,21 +3,14 @@
     "name": "AsEmOs",
     "slug": "asemos",
     "version": "1.0.0",
-    "owner": "ulascan",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "asemos",
     "userInterfaceStyle": "automatic",
-    "extra": {
-      "eas": {
-        "projectId": "f10d96ca-d411-496e-b091-a71891e7b03c"
-      }
-    },
     "runtimeVersion": {
       "policy": "appVersion"
     },
     "updates": {
-      "url": "https://u.expo.dev/f10d96ca-d411-496e-b091-a71891e7b03c",
       "enabled": true,
       "fallbackToCacheTimeout": 0,
       "checkAutomatically": "ON_LOAD"
