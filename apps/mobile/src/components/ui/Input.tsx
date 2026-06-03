@@ -17,6 +17,7 @@ import {
   StyleSheet,
   ViewStyle,
   TextStyle,
+  Platform,
 } from 'react-native';
 import { IconSymbol, type IconSymbolName } from './icon-symbol';
 import { useTheme } from '@/src/hooks/useTheme';
@@ -132,6 +133,14 @@ export function Input({
   const inputColor = isOnDark ? '#ffffff' : colors.text.primary;
   const placeholderColor = isOnDark ? 'rgba(255,255,255,0.6)' : colors.text.secondary;
   const iconColor = isOnDark ? 'rgba(255,255,255,0.7)' : colors.text.secondary;
+  const fieldMinHeight = isOnDark ? 48 : 52;
+  const fieldPaddingVertical = isSearch
+    ? spacing.sm
+    : isOnDark
+      ? spacing.sm
+      : rightIcon
+        ? spacing.sm
+        : spacing.base;
 
   return (
     <View style={[styles.container, containerStyle]} testID={testID}>
@@ -158,9 +167,11 @@ export function Input({
             backgroundColor: inputBg,
             borderColor: inputBorder,
             paddingHorizontal: spacing.base,
-            paddingVertical: isSearch ? spacing.sm : spacing.base,
+            paddingVertical: fieldPaddingVertical,
+            minHeight: isSearch ? undefined : fieldMinHeight,
           },
           isSearch && styles.searchContainer,
+          rightIcon && !isSearch && styles.inputContainerWithRightIcon,
         ]}
       >
         {leftIcon && (
@@ -178,11 +189,16 @@ export function Input({
             {
               color: inputColor,
               fontSize: typography.scale.body.fontSize,
+              lineHeight: typography.scale.body.fontSize,
               flex: 1,
             },
             inputStyle,
           ]}
           placeholderTextColor={placeholderColor}
+          {...(Platform.OS === 'android' && {
+            includeFontPadding: false,
+            textAlignVertical: 'center',
+          })}
           {...textInputProps}
         />
 
@@ -195,7 +211,7 @@ export function Input({
           >
             <IconSymbol
               name={rightIcon}
-              size={22}
+              size={20}
               color={iconColor}
             />
           </TouchableOpacity>
@@ -250,7 +266,11 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     borderWidth: 1,
     minHeight: 52,
-    overflow: 'visible',
+    overflow: 'hidden',
+  },
+  inputContainerWithRightIcon: {
+    minHeight: 48,
+    maxHeight: 48,
   },
   searchContainer: {
     minHeight: 48,
@@ -258,15 +278,14 @@ const styles = StyleSheet.create({
   },
   input: {
     flex: 1,
-    paddingVertical: 0, // Remove default padding for exact 48px
+    paddingVertical: 0,
   },
   leftIcon: {
     marginRight: 10, // Tighter spacing
   },
   rightIcon: {
     marginLeft: 8,
-    minWidth: 40,
-    minHeight: 40,
+    padding: 4,
     alignItems: 'center',
     justifyContent: 'center',
   },
