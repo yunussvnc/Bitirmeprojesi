@@ -15,6 +15,37 @@ from starlette.middleware.base import BaseHTTPMiddleware
 logger = logging.getLogger("asemos")
 
 
+class RedisRateLimitStore:
+    """Redis-backed fixed-window rate limiter (Render REDIS_URL)."""
+
+    def __init__(self):
+        from app.core.redis_client import get_redis
+        self._redis = get_redis()
+
+    async def is_locked_out(self, key: str) -> bool:
+        if not self._redis:
+            return False
+        ttl = await self._redis.ttl(f"lockout:{key}")
+        return ttl is not None and ttl > 0
+
+    async def lock_out(self, key: str, duration_seconds: int = 900):
+        if not self._redis:
+            return
+        await self._redis.setex(f"lockout:{key}", duration_seconds, "1")
+        logger.warning("🔒 IP kilitlendi (Redis): %s (%d saniye)", key, duration_seconds)
+
+    async def check_rate(self, key: str, max_requests: int, window_seconds: int) -> tuple[bool, int]:
+        if not self._redis:
+            return True, max_requests
+        redis_key = f"rate:{key}"
+        count = await self._redis.incr(redis_key)
+        if count == 1:
+            await self._redis.expire(redis_key, window_seconds)
+        if count > max_requests:
+            return False, 0
+        return True, max_requests - count
+
+
 class InMemoryRateLimitStore:
     """Simple in-memory fixed-window rate limiter for tests and local dev.
     Stores _requests and _lockouts dicts so tests can clear them.

@@ -130,16 +130,19 @@ export function handleApiError(error: unknown): AppError {
       );
     }
 
+    const rawDetail = msg.includes(' - ') ? msg.split(' - ').slice(1).join(' - ') : '';
+
     if (status >= 500) {
+      const serverMsg = mapApiDetailToTurkish(rawDetail, status);
       return new AppError(
-        'Server error',
+        msg,
         'SERVER_ERROR',
-        'Sunucu hatası oluştu. Lütfen daha sonra tekrar deneyin.',
+        serverMsg.includes('Bir hata oluştu')
+          ? 'Sunucu hatası oluştu. Lütfen daha sonra tekrar deneyin.'
+          : serverMsg,
         true
       );
     }
-
-    const rawDetail = msg.includes(' - ') ? msg.split(' - ').slice(1).join(' - ') : '';
     const userMessage = mapApiDetailToTurkish(rawDetail, status);
 
     return new AppError(

@@ -128,10 +128,15 @@ async function fetchWithRetry(
     try {
       const json = JSON.parse(body);
       if (json.detail) {
-        let detailMsg = typeof json.detail === 'string' ? json.detail : JSON.stringify(json.detail);
+        const detailMsg =
+          typeof json.detail === 'string' ? json.detail : JSON.stringify(json.detail);
         detail = `API error: ${response.status} - ${detailMsg}`;
+      } else if (json.error?.message) {
+        detail = `API error: ${response.status} - ${json.error.message}`;
+      } else if (typeof json.message === 'string') {
+        detail = `API error: ${response.status} - ${json.message}`;
       }
-    } catch { }
+    } catch { /* non-JSON body */ }
     throw new Error(detail);
   } catch (error) {
     clearTimeout(timeoutId);
