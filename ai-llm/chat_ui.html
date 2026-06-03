@@ -459,8 +459,9 @@
         const typingIndicator = document.getElementById('typingIndicator');
         const locationSelect = document.getElementById('locationSelect');
 
-        // Backend URL (demo_backend_v2.py port 8080'de)
-        const API_URL = 'http://localhost:8080/api/smart-search-v2';
+        // Same-origin API (app.py on Render / local uvicorn)
+        const SMART_SEARCH_URL = '/api/smart-search-v2';
+        const ANALYZE_REVIEWS_URL = '/api/analyze-place-reviews';
 
         function fillInput(text) {
             userInput.value = text;
@@ -550,7 +551,7 @@
             resDiv.style.display = 'none';
 
             try {
-                const response = await fetch('http://localhost:8080/api/analyze-place-reviews', {
+                const response = await fetch(ANALYZE_REVIEWS_URL, {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ data_id: dataId })
@@ -624,7 +625,7 @@
                 }
 
                 // API İsteği (Backend'e bağlanıyoruz)
-                const response = await fetch(API_URL, {
+                const response = await fetch(SMART_SEARCH_URL, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
@@ -680,7 +681,7 @@
             } catch (error) {
                 console.error('Error:', error);
                 hideTyping();
-                addMessage("Bağlantı hatası oluştu. Lütfen backend'in (demo_backend_v2.py) çalıştığından emin ol.", false);
+                addMessage("Sunucuya bağlanılamadı. Lütfen bir süre sonra tekrar deneyin; sorun devam ederse <a href=\"/health\" target=\"_blank\" rel=\"noopener\">/health</a> durumunu kontrol edin.", false);
             }
         }
 
