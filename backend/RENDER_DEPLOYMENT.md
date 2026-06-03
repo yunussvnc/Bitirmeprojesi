@@ -2,6 +2,20 @@
 
 Bu rehber, AsEmOs FastAPI backend'ini Render.com'a deploy etmek için adım adım talimatlar içerir.
 
+---
+
+## Render Dashboard: Build Command Override (kritik)
+
+Blueprint (
+ender.yaml) doğru olsa bile, serviste **Settings → Build Command** alanında eski bir değer kayıtlıysa Render onu kullanır ve deploy başarısız olur.
+
+**Yanlış (Alembic — artık yok):** python3.11 -m pip install --upgrade pip && python3.11 -m pip install -r requirements.txt && python3.11 -m alembic upgrade head
+
+**Doğru seçenekler:** [RENDER_BUILD_COMMAND.md](./RENDER_BUILD_COMMAND.md)
+
+- Tercih: chmod +x build.sh && ./build.sh
+- Alternatif: python3.11 -m pip install --upgrade pip && python3.11 -m pip install -r requirements.txt && python3.11 migrate.py
+
 ## 📋 Ön Hazırlık
 
 ### ✅ Tamamlanan Hazırlıklar
