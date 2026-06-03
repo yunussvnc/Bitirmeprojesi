@@ -36,16 +36,32 @@ const resolvePhotoUrl = (url: string) =>
 const ACCENT = "#1DB954";
 const ACCENT_DARK = "#1AA34A";
 
-const GENDER_OPTIONS = ["Erkek", "Kadın", "Diğer"];
-const LOOKING_FOR_OPTIONS = [
-    "Uzun süreli ilişki",
-    "Kısa süreli ilişki",
-    "Arkadaşlık",
-    "Henüz bilmiyorum",
+const GENDER_OPTION_KEYS = [
+    { value: "Erkek", tKey: "match_profile.gender_male" },
+    { value: "Kadın", tKey: "match_profile.gender_female" },
+    { value: "Diğer", tKey: "match_profile.gender_other" },
 ];
-const SMOKING_OPTIONS = ["Evet", "Hayır", "Bazen"];
-const DRINKING_OPTIONS = ["Evet", "Hayır", "Bazen"];
-const EXERCISE_OPTIONS = ["Düzenli", "Bazen", "Hiç"];
+const LOOKING_FOR_KEYS = [
+    { value: "Uzun süreli ilişki", tKey: "match_profile.looking_long" },
+    { value: "Kısa süreli ilişki", tKey: "match_profile.looking_short" },
+    { value: "Arkadaşlık", tKey: "match_profile.looking_friends" },
+    { value: "Henüz bilmiyorum", tKey: "match_profile.looking_unsure" },
+];
+const SMOKING_KEYS = [
+    { value: "Evet", tKey: "match_profile.yes" },
+    { value: "Hayır", tKey: "match_profile.no" },
+    { value: "Bazen", tKey: "match_profile.sometimes" },
+];
+const DRINKING_KEYS = [
+    { value: "Evet", tKey: "match_profile.yes" },
+    { value: "Hayır", tKey: "match_profile.no" },
+    { value: "Bazen", tKey: "match_profile.sometimes" },
+];
+const EXERCISE_KEYS = [
+    { value: "Düzenli", tKey: "match_profile.regular" },
+    { value: "Bazen", tKey: "match_profile.sometimes" },
+    { value: "Hiç", tKey: "match_profile.never" },
+];
 const STAR_SIGN_OPTIONS = [
     "Koç", "Boğa", "İkizler", "Yengeç", "Aslan", "Başak",
     "Terazi", "Akrep", "Yay", "Oğlak", "Kova", "Balık",
@@ -554,9 +570,21 @@ export default function MatchProfileSetupScreen() {
     ) => {
         let displayValue = "";
         if (Array.isArray(value)) {
-            displayValue = value.length > 0 ? value.join(", ") : "Ekle";
+            const translatedVals = value.map(v => {
+               if(field === "interests") {
+                 const idx = INTEREST_OPTIONS.indexOf(v);
+                 return idx !== -1 ? t(`interests.int_${idx}`, v) : v;
+               }
+               return v;
+            });
+            displayValue = translatedVals.length > 0 ? translatedVals.join(", ") : t("match_profile.add_placeholder");
         } else {
-            displayValue = value || "Ekle";
+            if(field === "starSign" && value) {
+               const idx = STAR_SIGN_OPTIONS.indexOf(value as string);
+               displayValue = idx !== -1 ? t(`zodiac.sign_${idx}`, value as string) : value as string;
+            } else {
+               displayValue = value || t("match_profile.add_placeholder");
+            }
         }
         const hasValue = Array.isArray(value) ? value.length > 0 : !!value;
 
@@ -582,7 +610,7 @@ export default function MatchProfileSetupScreen() {
         );
     };
 
-    const renderInlineSelection = (icon: any, label: string, options: string[], value: string, setValue: (v: string) => void) => {
+    const renderInlineSelectionKeyed = (icon: any, label: string, options: { value: string; tKey: string }[], value: string, setValue: (v: string) => void) => {
         return (
             <View style={{ marginBottom: 16 }}>
                 <View style={{ flexDirection: "row", alignItems: "center", marginBottom: 8, paddingHorizontal: 4 }}>
@@ -593,18 +621,18 @@ export default function MatchProfileSetupScreen() {
                 </View>
                 <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={[styles.chipRow, { flexWrap: "nowrap" }]} style={{ paddingHorizontal: 4 }}>
                     {options.map((opt) => {
-                        const isSelected = value === opt;
+                        const isSelected = value === opt.value;
                         return (
                             <TouchableOpacity
-                                key={opt}
+                                key={opt.value}
                                 style={[
                                     styles.pillChip,
                                     { backgroundColor: isSelected ? ACCENT : inputBg },
                                     isSelected && styles.pillChipActiveGlow
                                 ]}
-                                onPress={() => setValue(isSelected ? "" : opt)}
+                                onPress={() => setValue(isSelected ? "" : opt.value)}
                             >
-                                <ThemedText style={[styles.pillChipText, { color: isSelected ? "#000" : textColor }]}>{opt}</ThemedText>
+                                <ThemedText style={[styles.pillChipText, { color: isSelected ? "#000" : textColor }]}>{t(opt.tKey)}</ThemedText>
                             </TouchableOpacity>
                         );
                     })}
@@ -626,11 +654,11 @@ export default function MatchProfileSetupScreen() {
                     <IconSymbol name="xmark" size={24} color={textColor} />
                 </TouchableOpacity>
                 <ThemedText style={[styles.headerTitle, { color: textColor }]}>
-                    {hasProfile ? "Profili Düzenle" : "Eşleşme Profili"}
+                    {hasProfile ? t("match_profile.edit_profile") : t("match_profile.match_profile")}
                 </ThemedText>
                 <TouchableOpacity onPress={handleSave} disabled={isFormBusy}>
                     <ThemedText style={[styles.headerSave, { color: ACCENT, opacity: isFormBusy ? 0.5 : 1 }]}>
-                        {isFormBusy ? "..." : "Bitti"}
+                        {isFormBusy ? "..." : t("match_profile.done")}
                     </ThemedText>
                 </TouchableOpacity>
             </View>
@@ -646,7 +674,7 @@ export default function MatchProfileSetupScreen() {
                     {/* Photo Grid */}
                     <View style={styles.sectionHeader}>
                         <ThemedText style={[styles.sectionLabel, { color: colors.text.secondary }]}>
-                            Fotoğraflar
+                            {t("match_profile.photos")}
                         </ThemedText>
                     </View>
                     <View style={styles.photoGrid}>
@@ -665,7 +693,7 @@ export default function MatchProfileSetupScreen() {
                     {/* Required Fields */}
                     <View style={styles.sectionHeader}>
                         <ThemedText style={[styles.sectionLabel, { color: textColor }]}>
-                            Temel Bilgiler
+                            {t("match_profile.basic_info")}
                         </ThemedText>
                     </View>
 
@@ -713,14 +741,14 @@ export default function MatchProfileSetupScreen() {
                     </Pressable>
                     {!calculatedAge && (
                         <ThemedText style={{ color: colors.text.tertiary, fontSize: 11, marginTop: -4, marginBottom: 8, paddingHorizontal: 4 }}>
-                            Yaş bilginiz kayıt sırasında girdiğiniz doğum tarihinden otomatik hesaplanır.
+                            {t("match_profile.age_auto_hint")}
                         </ThemedText>
                     )}
 
                     {/* Bio */}
                     <View style={styles.sectionHeader}>
                         <ThemedText style={[styles.sectionLabel, { color: textColor }]}>
-                            Kendinden Bahset
+                            {t("match_profile.about_you")}
                         </ThemedText>
                     </View>
 
@@ -752,10 +780,10 @@ export default function MatchProfileSetupScreen() {
                     <View style={[styles.sectionHeader, { marginTop: 24, marginBottom: 12, flexDirection: "row", justifyContent: "space-between", alignItems: "center" }]}>
                         <View>
                             <ThemedText style={[styles.sectionLabel, { color: textColor }]}>
-                                Sorular
+                                {t("match_profile.prompts")}
                             </ThemedText>
                             <ThemedText style={[styles.sectionHint, { color: colors.text.tertiary }]}>
-                                Profiline kişilik kat
+                                {t("match_profile.prompts_hint")}
                             </ThemedText>
                         </View>
                         {prompts.length < 3 && (
@@ -768,7 +796,12 @@ export default function MatchProfileSetupScreen() {
                     {prompts.map((item, index) => (
                         <View key={index} style={[styles.promptCard, { backgroundColor: inputBg, borderColor: inputBorder }]}>
                             <View style={{ flex: 1 }}>
-                                <ThemedText style={[styles.promptQuestion, { color: ACCENT }]}>{item.question}</ThemedText>
+                                <ThemedText style={[styles.promptQuestion, { color: ACCENT }]}>
+                                    {(() => {
+                                        const pIdx = PROMPT_OPTIONS.indexOf(item.question);
+                                        return pIdx !== -1 ? t(`prompts.prompt_${pIdx}`, item.question) : item.question;
+                                    })()}
+                                </ThemedText>
                                 <ThemedText style={[styles.promptAnswer, { color: textColor }]}>{item.answer}</ThemedText>
                             </View>
                             <View style={styles.promptActions}>
@@ -785,29 +818,29 @@ export default function MatchProfileSetupScreen() {
                     {/* About You */}
                     <View style={[styles.sectionHeader, { marginTop: 32, marginBottom: 12 }]}>
                         <ThemedText style={[styles.sectionLabel, { color: textColor }]}>
-                            Hayat Tarzı & Hakkında
+                            {t("match_profile.lifestyle")}
                         </ThemedText>
                     </View>
 
-                    {renderInlineSelection("person.fill", "Cinsiyet", GENDER_OPTIONS, gender, setGender)}
-                    {renderInlineSelection("heart.fill", "Ne Arıyorum", LOOKING_FOR_OPTIONS, lookingFor, setLookingFor)}
-                    {renderSelectionRow("star.fill", "Burç", starSign, "starSign")}
-                    {renderSelectionRow("sparkles", "İlgi Alanları", interests, "interests")}
+                    {renderInlineSelectionKeyed("person.fill", t("match_profile.gender"), GENDER_OPTION_KEYS, gender, setGender)}
+                    {renderInlineSelectionKeyed("heart.fill", t("match_profile.looking_for"), LOOKING_FOR_KEYS, lookingFor, setLookingFor)}
+                    {renderSelectionRow("star.fill", t("match_profile.zodiac"), starSign, "starSign")}
+                    {renderSelectionRow("sparkles", t("match_profile.interests_label"), interests, "interests")}
 
                     <View style={[styles.sectionHeader, { marginTop: 24, marginBottom: 12 }]}>
                         <ThemedText style={[styles.sectionLabel, { color: textColor }]}>
-                            Alışkanlıklar
+                            {t("match_profile.habits")}
                         </ThemedText>
                     </View>
 
-                    {renderInlineSelection("flame.fill", "Sigara", SMOKING_OPTIONS, smoking, setSmoking)}
-                    {renderInlineSelection("drop.fill", "İçki", DRINKING_OPTIONS, drinking, setDrinking)}
-                    {renderInlineSelection("figure.run", "Egzersiz", EXERCISE_OPTIONS, exercise, setExercise)}
+                    {renderInlineSelectionKeyed("flame.fill", t("match_profile.smoking"), SMOKING_KEYS, smoking, setSmoking)}
+                    {renderInlineSelectionKeyed("drop.fill", t("match_profile.drinking"), DRINKING_KEYS, drinking, setDrinking)}
+                    {renderInlineSelectionKeyed("figure.run", t("match_profile.exercise"), EXERCISE_KEYS, exercise, setExercise)}
 
                     {/* Basic Info */}
                     <View style={[styles.sectionHeader, { marginTop: 24, marginBottom: 12 }]}>
                         <ThemedText style={[styles.sectionLabel, { color: textColor }]}>
-                            Diğer Detaylar
+                            {t("match_profile.other_details")}
                         </ThemedText>
                     </View>
 
@@ -835,7 +868,7 @@ export default function MatchProfileSetupScreen() {
                     </Pressable>
 
                     {/* Education */}
-                    {renderSelectionRow("book.fill", "Eğitim (İsteğe Bağlı)", education, "education")}
+                    {renderSelectionRow("book.fill", t("match_profile.education_optional"), education, "education")}
 
                     {/* Mezun Toggle */}
                     {education.trim() !== "" && (
@@ -861,7 +894,7 @@ export default function MatchProfileSetupScreen() {
                     )}
 
                     {/* Working Location/Job */}
-                    {renderSelectionRow("briefcase.fill", "Meslek (İsteğe Bağlı)", locationText, "job")}
+                    {renderSelectionRow("briefcase.fill", t("match_profile.job_optional"), locationText, "job")}
 
                     {/* Save Button inside ScrollView to ensure no occlusion */}
                     <View style={{ marginTop: 32, paddingBottom: 40 }}>
@@ -881,7 +914,7 @@ export default function MatchProfileSetupScreen() {
                                     <ActivityIndicator color="#000" />
                                 ) : (
                                     <ThemedText style={styles.premiumSaveBtnText}>
-                                        {hasProfile ? "Profili Güncelle" : "Profili Yarat"}
+                                        {hasProfile ? t("match_profile.update_profile") : t("match_profile.create_new_profile")}
                                     </ThemedText>
                                 )}
                             </LinearGradient>
@@ -915,7 +948,7 @@ export default function MatchProfileSetupScreen() {
                         <ScrollView style={styles.modalScroll} showsVerticalScrollIndicator={false}>
                             <ThemedText style={[styles.chipGroupLabel, { color: colors.text.secondary, marginTop: 0 }]}>{t("match_setup.choose_prompt")}</ThemedText>
                             <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={[styles.chipRow, { flexWrap: "nowrap" }]} style={{ marginBottom: 20 }}>
-                                {PROMPT_OPTIONS.map((opt) => {
+                                {PROMPT_OPTIONS.map((opt, idx) => {
                                     const isSelected = selectedPromptOption === opt;
                                     return (
                                         <TouchableOpacity
@@ -933,7 +966,12 @@ export default function MatchProfileSetupScreen() {
                                 })}
                             </ScrollView>
 
-                            <ThemedText style={[styles.promptQuestion, { color: ACCENT, marginBottom: 12, fontSize: 18 }]}>{selectedPromptOption}</ThemedText>
+                            <ThemedText style={[styles.promptQuestion, { color: ACCENT, marginBottom: 12, fontSize: 18 }]}>
+                                {(() => {
+                                    const pIdx = PROMPT_OPTIONS.indexOf(selectedPromptOption);
+                                    return pIdx !== -1 ? t(`prompts.prompt_${pIdx}`, selectedPromptOption) : selectedPromptOption;
+                                })()}
+                            </ThemedText>
                             <TextInput
                                 style={[styles.promptAnswerInput, { color: textColor, backgroundColor: inputBg, borderColor: inputBorder }]}
                                 placeholder={t("match_setup.answer_ph")}
@@ -966,10 +1004,10 @@ export default function MatchProfileSetupScreen() {
                                 <ThemedText style={{ color: colors.text.secondary, fontSize: 16 }}>{t("match_setup.cancel")}</ThemedText>
                             </TouchableOpacity>
                             <ThemedText style={styles.modalTitle}>
-                                {activeSelectionField === "starSign" && "Burç"}
-                                {activeSelectionField === "interests" && "İlgi Alanları"}
-                                {activeSelectionField === "education" && "Eğitim"}
-                                {activeSelectionField === "job" && "Meslek"}
+                                {activeSelectionField === "starSign" && t("match_profile.zodiac")}
+                                {activeSelectionField === "interests" && t("match_profile.interests_label")}
+                                {activeSelectionField === "education" && t("match_profile.education_modal")}
+                                {activeSelectionField === "job" && t("match_profile.job_modal")}
                             </ThemedText>
                             <TouchableOpacity onPress={() => setActiveSelectionField(null)}>
                                 <ThemedText style={{ color: ACCENT, fontSize: 16, fontWeight: "700" }}>{t("match_setup.done")}</ThemedText>
@@ -982,7 +1020,7 @@ export default function MatchProfileSetupScreen() {
                                     <IconSymbol name="magnifyingglass" size={16} color={colors.text.tertiary} />
                                     <TextInput
                                         style={{ flex: 1, paddingVertical: 10, paddingHorizontal: 8, color: textColor }}
-                                        placeholder="Ara..."
+                                        placeholder={t("match_profile.search_placeholder")}
                                         placeholderTextColor={colors.text.tertiary}
                                         value={searchQuery}
                                         onChangeText={setSearchQuery}
@@ -1018,7 +1056,7 @@ export default function MatchProfileSetupScreen() {
                                         </TouchableOpacity>
                                     );
                                 })}
-                                {activeSelectionField === "starSign" && STAR_SIGN_OPTIONS.map((opt) => {
+                                {activeSelectionField === "starSign" && STAR_SIGN_OPTIONS.map((opt, idx) => {
                                     const isSelected = starSign === opt;
                                     return (
                                         <TouchableOpacity
@@ -1026,11 +1064,11 @@ export default function MatchProfileSetupScreen() {
                                             style={[styles.pillChip, { backgroundColor: isSelected ? ACCENT : inputBg }, isSelected && styles.pillChipActiveGlow]}
                                             onPress={() => setStarSign(isSelected ? "" : opt)}
                                         >
-                                            <ThemedText style={[styles.pillChipText, { color: isSelected ? "#000" : textColor }]}>{opt}</ThemedText>
+                                            <ThemedText style={[styles.pillChipText, { color: isSelected ? "#000" : textColor }]}>{t(`zodiac.sign_${idx}`, opt)}</ThemedText>
                                         </TouchableOpacity>
                                     );
                                 })}
-                                {activeSelectionField === "interests" && INTEREST_OPTIONS.map((opt) => {
+                                {activeSelectionField === "interests" && INTEREST_OPTIONS.map((opt, idx) => {
                                     const isSelected = interests.includes(opt);
                                     return (
                                         <TouchableOpacity
@@ -1038,7 +1076,7 @@ export default function MatchProfileSetupScreen() {
                                             style={[styles.pillChip, { backgroundColor: isSelected ? ACCENT : inputBg }, isSelected && styles.pillChipActiveGlow]}
                                             onPress={() => toggleInterest(opt)}
                                         >
-                                            <ThemedText style={[styles.pillChipText, { color: isSelected ? "#000" : textColor }]}>{opt}</ThemedText>
+                                            <ThemedText style={[styles.pillChipText, { color: isSelected ? "#000" : textColor }]}>{t(`interests.int_${idx}`, opt)}</ThemedText>
                                         </TouchableOpacity>
                                     );
                                 })}

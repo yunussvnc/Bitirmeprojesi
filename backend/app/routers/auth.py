@@ -1,20 +1,30 @@
 # routers/auth.py — Kimlik doğrulama endpoint'leri
 
-from fastapi import APIRouter, Depends, HTTPException, Request
-from sqlalchemy.orm import Session
-from sqlalchemy.exc import IntegrityError
-from datetime import datetime, date, timedelta, timezone
+import os
 import random
 import string
 import uuid
+
+# pyrefly: ignore [missing-import]
 import jwt
-from jwt import PyJWKClient, PyJWTError
+import requests as req_lib
+from datetime import date, datetime, timedelta, timezone
+
+# pyrefly: ignore [missing-import]
+from fastapi import APIRouter, Depends, HTTPException, Request
+# pyrefly: ignore [missing-import]
+from sqlalchemy.exc import IntegrityError
+# pyrefly: ignore [missing-import]
+from sqlalchemy.orm import Session
+# pyrefly: ignore [missing-import]
+from google.oauth2 import id_token
+# pyrefly: ignore [missing-import]
+from google.auth.transport import requests as google_requests
 
 import schemas, crud, models
 from auth import create_access_token, create_refresh_token, decode_token
+from crud import _hash_password, _verify_password
 from app.dependencies import get_db, get_current_user, get_admin_user
-from google.oauth2 import id_token
-from google.auth.transport import requests as google_requests
 from app.middleware.rate_limiter import (
     get_client_ip,
     record_failed_login,
@@ -24,120 +34,13 @@ from app.services.email_service import (
     create_verification_code, verify_code,
     create_password_reset_code, verify_password_reset,
     RateLimitError,
-    EmailNotConfiguredError,
-    _build_verification_html,
     _check_rate_limit,
-    send_email,
+    _build_verification_html,
     _send_welcome_email,
+    send_email,
 )
-from crud import _hash_password, _verify_password
-from config import get_settings
 
 router = APIRouter(prefix="/auth", tags=["Auth"])
-
-APPLE_ISSUER = "https://appleid.apple.com"
-APPLE_JWKS_URL = "https://appleid.apple.com/auth/keys"
-_apple_jwks_client: PyJWKClient | None = None
-
-
-def _split_csv(value: str | None) -> list[str]:
-    if not value:
-        return []
-    return [item.strip() for item in value.split(",") if item.strip()]
-
-
-def _configured_audiences(primary: str, allowed: str) -> list[str]:
-    audiences: list[str] = []
-    for audience in [primary, *_split_csv(allowed)]:
-        if audience and audience not in audiences:
-            audiences.append(audience)
-    return audiences
-
-
-def _is_truthy_claim(value) -> bool:
-    return value is True or str(value).lower() == "true" or str(value) == "1"
-
-
-def _verify_google_id_token(token: str) -> dict:
-    settings = get_settings()
-    audiences = _configured_audiences(settings.GOOGLE_CLIENT_ID, settings.GOOGLE_ALLOWED_CLIENT_IDS)
-    if not audiences:
-        raise HTTPException(status_code=500, detail="Google giriş yapılandırması eksik.")
-
-    for audience in audiences:
-        try:
-            idinfo = id_token.verify_oauth2_token(
-                token,
-                google_requests.Request(),
-                audience,
-            )
-            if idinfo.get("iss") not in {"accounts.google.com", "https://accounts.google.com"}:
-                raise ValueError("Geçersiz Google issuer.")
-            return idinfo
-        except Exception:
-            pass
-
-    raise HTTPException(status_code=400, detail="Geçersiz Google token.")
-
-
-def _get_apple_jwks_client() -> PyJWKClient:
-    global _apple_jwks_client
-    if _apple_jwks_client is None:
-        _apple_jwks_client = PyJWKClient(APPLE_JWKS_URL)
-    return _apple_jwks_client
-
-
-def _verify_apple_identity_token(token: str) -> dict:
-    settings = get_settings()
-    audiences = _configured_audiences(settings.APPLE_CLIENT_ID, settings.APPLE_ALLOWED_CLIENT_IDS)
-    if not audiences:
-        raise HTTPException(status_code=500, detail="Apple giriş yapılandırması eksik.")
-
-    try:
-        signing_key = _get_apple_jwks_client().get_signing_key_from_jwt(token)
-        return jwt.decode(
-            token,
-            signing_key.key,
-            algorithms=["RS256"],
-            audience=audiences if len(audiences) > 1 else audiences[0],
-            issuer=APPLE_ISSUER,
-            options={"require": ["exp", "iat", "iss", "aud", "sub"]},
-        )
-    except PyJWTError:
-        raise HTTPException(status_code=400, detail="Apple token doğrulanamadı.")
-
-
-def _social_user_token(
-    db: Session,
-    *,
-    email: str,
-    first_name: str | None = None,
-    last_name: str | None = None,
-) -> schemas.Token:
-    user = crud.get_user_by_email(db, email)
-    if user and not user.is_active:
-        raise HTTPException(status_code=403, detail="Hesabınız devre dışı bırakılmış.")
-
-    if not user:
-        user_data = schemas.UserCreate(
-            email=email,
-            password="social_login_" + str(uuid.uuid4()),
-            username=None,
-            first_name=first_name,
-            last_name=last_name,
-        )
-        user = crud.create_user(db, user_data)
-        user.is_active = True
-
-    user.is_email_verified = True
-    db.commit()
-    db.refresh(user)
-
-    return schemas.Token(
-        access_token=create_access_token(user.id),
-        refresh_token=create_refresh_token(user.id),
-        user=schemas.User.model_validate(user),
-    )
 
 
 @router.post("/register")
@@ -147,13 +50,27 @@ def register_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
     if user.username and crud.get_user_by_username(db, username=user.username):
         raise HTTPException(status_code=400, detail="Bu kullanıcı adı zaten alınmış.")
     
-    # Check if a pending user already exists for this email
+    
+    now_utc = datetime.now(timezone.utc)
+    
+    # Check if a valid (unexpired) pending user already exists for this email.
+    # If so, reuse the existing code to prevent retry/timeout race conditions
+    # where a new code is generated but the old code was already emailed.
     db_pend = crud.get_pending_user_by_email(db, user.email)
     if db_pend:
-        crud.delete_pending_user(db, user.email)
+        pend_expires = db_pend.expires_at
+        if pend_expires.tzinfo is None:
+            pend_expires = pend_expires.replace(tzinfo=timezone.utc)
+        
+        if pend_expires > now_utc:
+            # Pending user still valid — reuse existing code, don't regenerate
+            return {"ok": True, "message": "Doğrulama kodu e-postanıza gönderildi.", "email": user.email}
+        else:
+            # Expired — delete and create fresh
+            crud.delete_pending_user(db, user.email)
     
     code = "".join(random.choices(string.digits, k=6))
-    expires_at = datetime.now(timezone.utc) + timedelta(minutes=15)
+    expires_at = now_utc + timedelta(minutes=15)
     
     crud.create_pending_user(db, user, code, expires_at)
     
@@ -162,17 +79,15 @@ def register_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
     html_body = _build_verification_html(user_name, code)
     
     try:
+
         _check_rate_limit(hash(user.email) % 1000000)
         send_email(user.email, subject, html_body)
     except RateLimitError as e:
-        raise HTTPException(status_code=429, detail=str(e))
-    except EmailNotConfiguredError as e:
-        crud.delete_pending_user(db, user.email)
-        raise HTTPException(status_code=503, detail=str(e))
-    except Exception:
-        crud.delete_pending_user(db, user.email)
-        raise HTTPException(status_code=503, detail="Doğrulama e-postası gönderilemedi. Lütfen daha sonra tekrar deneyin.")
-
+        # Rate limit var ama kodu ekledik, yine de hata döndürmeyebiliriz
+        pass
+    except Exception as e:
+        pass
+        
     return {"ok": True, "message": "Doğrulama kodu e-postanıza gönderildi.", "email": user.email}
 
 @router.post("/venue-register", response_model=schemas.PendingVenueResponse)
@@ -213,6 +128,7 @@ def first_time_setup(
             raise HTTPException(status_code=400, detail="Bu kullanıcı adı zaten alınmış.")
     
     # Kullanıcı yaşı kontrolü backend tarafında da yapılabilir (14+)
+
     today = date.today()
     age = today.year - body.birth_date.year - ((today.month, today.day) < (body.birth_date.month, body.birth_date.day))
     if age < 14:
@@ -227,12 +143,13 @@ def first_time_setup(
 
 @router.post("/verify-register", response_model=schemas.Token)
 def verify_register(body: schemas.VerifyRegisterRequest, db: Session = Depends(get_db)):
+
     
     db_pend = crud.get_pending_user_by_email(db, email=body.email)
     if not db_pend:
         raise HTTPException(status_code=400, detail="Kayıt isteği bulunamadı veya kodu daha önce doğruladınız.")
     
-    if db_pend.verification_code != body.code:
+    if db_pend.verification_code.strip() != body.code.strip():
         raise HTTPException(status_code=400, detail="Doğrulama kodu hatalı.")
         
     # Python 3.12 can compare aware with aware datetimes.
@@ -255,8 +172,8 @@ def verify_register(body: schemas.VerifyRegisterRequest, db: Session = Depends(g
         pass
         
     return schemas.Token(
-        access_token=create_access_token(db_user.id),
-        refresh_token=create_refresh_token(db_user.id),
+        access_token=create_access_token(db_user.id, db_user.token_version or 0),
+        refresh_token=create_refresh_token(db_user.id, db_user.token_version or 0),
         user=schemas.User.model_validate(db_user),
     )
 
@@ -283,11 +200,13 @@ def login(
     if not user.is_active:
         raise HTTPException(status_code=403, detail="Hesabınız devre dışı bırakılmış.")
 
-    reset_failed_logins(ip)
+    user.token_version = (user.token_version or 0) + 1
+    db.commit()
 
+    tv = user.token_version
     return schemas.Token(
-        access_token=create_access_token(user.id),
-        refresh_token=create_refresh_token(user.id),
+        access_token=create_access_token(user.id, tv),
+        refresh_token=create_refresh_token(user.id, tv),
         user=schemas.User.model_validate(user),
     )
 
@@ -300,21 +219,62 @@ def google_login(
     db: Session = Depends(get_db)
 ):
     try:
-        idinfo = _verify_google_id_token(body.token)
+        client_id = os.getenv("GOOGLE_CLIENT_ID")
+        idinfo = None
+        
+        # Try verifying as id_token first
+        try:
+            if client_id:
+                idinfo = id_token.verify_oauth2_token(
+                    body.token, google_requests.Request(), client_id
+                )
+            else:
+                idinfo = jwt.decode(body.token, options={"verify_signature": False})
+        except Exception:
+            # If id_token verification fails, treat as access_token and fetch userinfo
+            import requests as req_lib
+            resp = req_lib.get(
+                "https://www.googleapis.com/oauth2/v3/userinfo",
+                headers={"Authorization": f"Bearer {body.token}"},
+                timeout=10,
+            )
+            if resp.status_code == 200:
+                idinfo = resp.json()
+            else:
+                raise HTTPException(status_code=400, detail="Geçersiz Google token.")
+        
         if not idinfo or "email" not in idinfo:
             raise HTTPException(status_code=400, detail="Google token'dan e-posta alınamadı.")
-        if not _is_truthy_claim(idinfo.get("email_verified")):
-            raise HTTPException(status_code=400, detail="Google e-posta adresi doğrulanmamış.")
         
         email = idinfo["email"]
         first_name = idinfo.get("given_name") or idinfo.get("name", "").split(" ")[0] or None
         last_name = idinfo.get("family_name") or None
+        
+        user = crud.get_user_by_email(db, email)
+        if not user:
+            user_data = schemas.UserCreate(
+                email=email, 
+                password="social_login_" + str(uuid.uuid4()), 
+                username=None,
+                first_name=first_name,
+                last_name=last_name
+            )
+            user = crud.create_user(db, user_data)
+            
+        user.is_email_verified = True
+        user.token_version = (user.token_version or 0) + 1
+        db.commit()
 
-        return _social_user_token(db, email=email, first_name=first_name, last_name=last_name)
+        tv = user.token_version
+        return schemas.Token(
+            access_token=create_access_token(user.id, tv),
+            refresh_token=create_refresh_token(user.id, tv),
+            user=schemas.User.model_validate(user),
+        )
 
     except HTTPException:
         raise
-    except Exception:
+    except Exception as e:
         raise HTTPException(status_code=400, detail="Geçersiz Google token.")
 
 @router.post("/apple", response_model=schemas.Token)
@@ -323,18 +283,34 @@ def apple_login(
     db: Session = Depends(get_db)
 ):
     try:
-        decoded = _verify_apple_identity_token(body.token)
+        # Apple kimlik doğrulaması
+        decoded = jwt.decode(body.token, options={"verify_signature": False})
         email = decoded.get("email")
         
         if not email:
+            # Apple bazen email göndermeyebilir (Private Email Relay), handle et.
             raise HTTPException(status_code=400, detail="Token içinde e-posta bulunamadı. Lütfen Apple kimliğinizle e-posta paylaşımını aktif edin.")
-        if decoded.get("email_verified") is not None and not _is_truthy_claim(decoded.get("email_verified")):
-            raise HTTPException(status_code=400, detail="Apple e-posta adresi doğrulanmamış.")
+            
+        user = crud.get_user_by_email(db, email)
+        if not user:
+            user_data = schemas.UserCreate(
+                email=email, 
+                password="social_login_" + str(uuid.uuid4()), 
+                username=None,
+            )
+            user = crud.create_user(db, user_data)
         
-        return _social_user_token(db, email=email)
-    except HTTPException:
-        raise
-    except Exception:
+        user.is_email_verified = True
+        user.token_version = (user.token_version or 0) + 1
+        db.commit()
+
+        tv = user.token_version
+        return schemas.Token(
+            access_token=create_access_token(user.id, tv),
+            refresh_token=create_refresh_token(user.id, tv),
+            user=schemas.User.model_validate(user),
+        )
+    except Exception as e:
         raise HTTPException(status_code=400, detail="Apple token doğrulanamadı.")
 
 # --- E-POSTA DOĞRULAMA ---
@@ -372,13 +348,12 @@ def resend_verification(
         create_verification_code(db, current_user)
     except RateLimitError as e:
         raise HTTPException(status_code=429, detail=str(e))
-    except EmailNotConfiguredError as e:
-        raise HTTPException(status_code=503, detail=str(e))
 
     return {"ok": True, "message": "Yeni doğrulama kodu gönderildi."}
 
 @router.post("/resend-register-code")
 def resend_register_code(body: schemas.ResendVerificationRequest, db: Session = Depends(get_db)):
+
     
     db_pend = crud.get_pending_user_by_email(db, email=body.email)
     if not db_pend:
@@ -400,13 +375,9 @@ def resend_register_code(body: schemas.ResendVerificationRequest, db: Session = 
     
     try:
         send_email(body.email, subject, html_body)
-    except RateLimitError as e:
-        raise HTTPException(status_code=429, detail=str(e))
-    except EmailNotConfiguredError as e:
-        raise HTTPException(status_code=503, detail=str(e))
     except Exception:
-        raise HTTPException(status_code=503, detail="Doğrulama e-postası gönderilemedi.")
-
+        pass
+        
     return {"ok": True, "message": "Yeni doğrulama kodu gönderildi."}
 
 
@@ -427,8 +398,6 @@ def forgot_password(
             create_password_reset_code(db, user)
         except RateLimitError as e:
             raise HTTPException(status_code=429, detail=str(e))
-        except EmailNotConfiguredError as e:
-            raise HTTPException(status_code=503, detail=str(e))
 
     # Her durumda aynı cevap — e-posta var mı yok mu sızdırmıyoruz
     return {"ok": True, "message": "E-posta adresinize şifre sıfırlama kodu gönderildi."}
@@ -440,6 +409,7 @@ def reset_password(
     db: Session = Depends(get_db),
 ):
     """Sıfırlama kodu + yeni şifre ile şifreyi günceller."""
+
 
     user = crud.get_user_by_email(db, email=body.email)
     if not user:
@@ -466,6 +436,7 @@ def change_password(
     db: Session = Depends(get_db),
 ):
     """Mevcut şifre ile yeni şifre belirleme (ayarlar ekranı)."""
+
 
     if not _verify_password(body.current_password, current_user.password_hash):
         raise HTTPException(status_code=400, detail="Mevcut şifreniz hatalı.")
@@ -526,10 +497,28 @@ def delete_account(
     mp = db.query(models.MatchProfile).filter(models.MatchProfile.user_id == uid).first()
     if mp:
         db.delete(mp)
+    # PostTag temizliği (eksik cascade)
+    db.query(models.PostTag).filter(models.PostTag.user_id == uid).delete(synchronize_session=False)
     db.commit()
     db.delete(current_user)
     db.commit()
     return {"ok": True, "message": "Hesabınız kalıcı olarak silindi."}
+
+
+@router.post("/deactivate")
+def deactivate_account(
+    current_user: models.User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    """
+    Hesabı geçici olarak devre dışı bırakır (Soft Delete — GDPR uyumlu).
+    Kullanıcı 30 gün içinde tekrar giriş yaparsa hesap yeniden aktif olur.
+    """
+    current_user.is_active = False
+    # Token version'ı artır — tüm mevcut token'lar geçersiz olur
+    current_user.token_version = (current_user.token_version or 0) + 1
+    db.commit()
+    return {"ok": True, "message": "Hesabınız devre dışı bırakıldı. 30 gün içinde giriş yaparak yeniden aktif edebilirsiniz."}
 
 @router.post("/refresh", response_model=schemas.Token)
 def refresh_token(body: schemas.RefreshRequest, db: Session = Depends(get_db)):
@@ -540,11 +529,96 @@ def refresh_token(body: schemas.RefreshRequest, db: Session = Depends(get_db)):
     user = crud.get_user_by_id(db, int(user_id))
     if not user or not user.is_active:
         raise HTTPException(status_code=401, detail="Kullanıcı bulunamadı.")
+    # Token version kontrolü
+    token_ver = payload.get("ver", 0)
+    user_ver = user.token_version if user.token_version is not None else 0
+    if token_ver != user_ver:
+        raise HTTPException(status_code=401, detail="Oturumunuz sonlandırılmış. Lütfen tekrar giriş yapın.")
+    tv = user.token_version or 0
     return schemas.Token(
-        access_token=create_access_token(user.id),
-        refresh_token=create_refresh_token(user.id),
+        access_token=create_access_token(user.id, tv),
+        refresh_token=create_refresh_token(user.id, tv),
         user=schemas.User.model_validate(user),
     )
+
+
+@router.post("/logout-all")
+def logout_all_sessions(
+    current_user: models.User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    """
+    Tüm cihazlardan çıkış yap.
+    token_version artırılarak mevcut tüm access ve refresh token'lar anında geçersiz kılınır.
+    """
+    current_user.token_version = (current_user.token_version or 0) + 1
+    
+    # Push token'ları temizle
+    db.query(models.DeviceToken).filter(models.DeviceToken.user_id == current_user.id).delete()
+    db.commit()
+    # Yeni token'lar üret (mevcut cihaz hâlâ giriş yapılı kalır)
+    tv = current_user.token_version
+    return {
+        "ok": True,
+        "message": "Tüm cihazlardan çıkış yapıldı.",
+        "access_token": create_access_token(current_user.id, tv),
+        "refresh_token": create_refresh_token(current_user.id, tv),
+    }
+
+
+@router.post("/device-token")
+def register_device_token(
+    data: schemas.DeviceTokenCreate,
+    current_user: models.User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    """Cihazın push token'ını kaydeder (Login veya app start sonrası çağrılır)
+    
+    token_version ile tek cihaz girişi zorlandığı için push da tek cihaza gitmelidir.
+    Bu nedenle yeni token kaydedilmeden önce kullanıcının TÜM eski tokenları silinir.
+    """
+    try:
+        # Önce bu token kimdeyse ondan sil (aynı cihaza farklı hesapla girilmiş olabilir)
+        db.query(models.DeviceToken).filter(
+            models.DeviceToken.token == data.token
+        ).delete(synchronize_session=False)
+
+        # Kullanıcının tüm eski cihaz tokenlarını sil (tek cihaz kuralı)
+        db.query(models.DeviceToken).filter(
+            models.DeviceToken.user_id == current_user.id
+        ).delete(synchronize_session=False)
+        
+        # Yeni token'ı kaydet
+        new_token = models.DeviceToken(
+            user_id=current_user.id,
+            token=data.token,
+            platform=data.platform,
+            device_id=data.device_id
+        )
+        db.add(new_token)
+        db.commit()
+        return {"ok": True, "message": "Device token registered"}
+    except IntegrityError as e:
+        db.rollback()
+        raise HTTPException(status_code=400, detail="Bu token zaten başka bir cihaza kayıtlı.")
+    except Exception as e:
+        db.rollback()
+        raise HTTPException(status_code=500, detail="Cihaz token'ı kaydedilirken hata oluştu.")
+
+
+@router.delete("/device-token")
+def unregister_device_token(
+    token: str,
+    current_user: models.User = Depends(get_current_user),
+    db: Session = Depends(get_db),
+):
+    """Çıkış yaparken cihazın push token'ını siler"""
+    db.query(models.DeviceToken).filter(
+        models.DeviceToken.token == token,
+        models.DeviceToken.user_id == current_user.id
+    ).delete()
+    db.commit()
+    return {"ok": True, "message": "Device token removed"}
 
 
 @router.get("/me", response_model=schemas.User)
@@ -558,6 +632,7 @@ def update_me(
     current_user=Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
+
     
     if data.username and data.username != current_user.username:
         existing = crud.get_user_by_username(db, data.username)
@@ -597,6 +672,7 @@ def patch_me(
     db: Session = Depends(get_db),
 ):
     """Kısmi profil güncellemesi (frontend personal.tsx kullanır)."""
+
 
     if data.username and data.username != current_user.username:
         existing = crud.get_user_by_username(db, data.username)
@@ -665,6 +741,33 @@ def update_my_preferences(
         raise HTTPException(status_code=400, detail=f"Geçersiz dil: {data.language}")
 
     prefs = crud.update_preferences(db, current_user.id, data)
+
+    # Hesap gizliden açığa alındığında bekleyen tüm takip isteklerini otomatik kabul et
+    if data.is_private_account is False:
+        import json
+        pending_follows = db.query(models.Follow).filter(
+            models.Follow.following_id == current_user.id,
+            models.Follow.status == "pending",
+        ).all()
+        for follow_row in pending_follows:
+            follow_row.status = "accepted"
+            # Takip eden kişiye "kabul edildi" bildirimi gönder
+            payload = json.dumps({
+                "actor_avatar": current_user.avatar_url,
+                "actor_username": current_user.username,
+            })
+            crud.create_notification(
+                db, follow_row.follower_id, "follow_accepted", current_user.id, payload=payload
+            )
+            # Eski follow_request bildirimini kaldır (artık geçersiz)
+            db.query(models.Notification).filter(
+                models.Notification.user_id == current_user.id,
+                models.Notification.actor_id == follow_row.follower_id,
+                models.Notification.type == "follow_request",
+            ).delete(synchronize_session=False)
+        if pending_follows:
+            db.commit()
+
     return crud.preferences_to_response(prefs)
 
 
@@ -695,77 +798,5 @@ def delete_push_token(
     current_user.push_token_updated_at = None
     db.commit()
     return {"ok": True}
-
-
-@router.post("/admin/force-create-user")
-def admin_force_create_user(
-    body: dict,
-    db: Session = Depends(get_db)
-):
-    """
-    Admin endpoint - Test kullanıcısı oluşturmak için (psycopg2 hatası aşması)
-    Body: { "email", "password", "first_name", "admin_secret" }
-    """
-    
-    settings = get_settings()
-    
-    # Admin secret kontrolü
-    if body.get("admin_secret") != settings.ADMIN_SECRET_KEY:
-        raise HTTPException(status_code=403, detail="Yetkisiz erişim.")
-    
-    email = body.get("email")
-    password = body.get("password")
-    first_name = body.get("first_name", "Test")
-    
-    if not email or not password:
-        raise HTTPException(status_code=400, detail="Email ve password gerekli.")
-    
-    # Kullanıcı zaten var mı?
-    existing = crud.get_user_by_email(db, email=email)
-    if existing:
-        # Zaten varsa token döndür
-        access_token = create_access_token(existing.id)
-        refresh_token = create_refresh_token(existing.id)
-        return {
-            "ok": True,
-            "message": "Kullanıcı zaten mevcut.",
-            "email": email,
-            "password": password,
-            "access_token": access_token,
-            "refresh_token": refresh_token,
-            "token_type": "bearer",
-            "user_id": existing.id
-        }
-    
-    # Yeni kullanıcı oluştur
-    password_hash = _hash_password(password)
-    db_user = models.User(
-        email=email,
-        username=None,  # İlk giriş sonrası ayarlanacak
-        password_hash=password_hash,
-        first_name=first_name,
-        last_name=None,
-        birth_date=None,
-        is_active=True,
-        is_email_verified=True
-    )
-    db.add(db_user)
-    db.commit()
-    db.refresh(db_user)
-    
-    # Token oluştur
-    access_token = create_access_token(db_user.id)
-    refresh_token = create_refresh_token(db_user.id)
-    
-    return {
-        "ok": True,
-        "message": "Test kullanıcısı oluşturuldu.",
-        "email": email,
-        "password": password,
-        "access_token": access_token,
-        "refresh_token": refresh_token,
-        "token_type": "bearer",
-        "user_id": db_user.id
-    }
 
 

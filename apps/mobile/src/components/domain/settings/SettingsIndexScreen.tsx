@@ -17,6 +17,9 @@ import { createTextStyle, spacing } from "@/src/constants/design";
 import { useAppStore } from "@/src/store/useAppStore";
 import { useAuthStore } from "@/src/store/useAuthStore";
 import { useSettingsStore } from "@/src/store/useSettingsStore";
+import { useMessagesStore } from "@/src/store/useMessagesStore";
+import { useChatMessagesStore } from "@/src/store/useChatMessagesStore";
+import { useNotificationStore } from "@/src/store/useNotificationStore";
 import { useTranslation } from "react-i18next";
 
 export default function SettingsIndexScreen() {
@@ -61,7 +64,6 @@ export default function SettingsIndexScreen() {
           showArrow: true,
           keywords: ["kaydedildi", "saved", "bookmark"],
         },
-        { label: t('settings_main.deleted_messages'), onPress: nav("/settings/recently-deleted"), icon: "trash", showArrow: true, keywords: ["silinen", "deleted", "trash"] },
         { label: t('settings_main.visit_history'), onPress: nav("/settings/activity"), icon: "clock.arrow.circlepath", showArrow: true, keywords: ["geçmiş", "history", "activity"] },
         { label: t('settings_main.notifications'), onPress: nav("/notifications"), icon: "bell", showArrow: true, keywords: ["bildirimler", "notifications"] },
         { label: t('settings_main.content_prefs'), onPress: nav("/settings/content"), icon: "slider.horizontal.3", showArrow: true, keywords: ["içerik", "content", "preferences"] },
@@ -71,8 +73,7 @@ export default function SettingsIndexScreen() {
       title: t('settings_main.section_visibility'),
       items: [
         { label: t('settings_main.account_privacy'), value: isPrivate ? t('settings_main.private') : t('settings_main.public'), onPress: nav("/settings/privacy"), icon: "lock", showArrow: true, keywords: ["gizlilik", "privacy"] },
-        { label: t('settings_main.close_friends'), onPress: nav("/settings/close-friends"), icon: "star", showArrow: true, keywords: ["yakın arkadaş", "close friends"] },
-        { label: t('settings_main.blocked'), value: "3", onPress: nav("/settings/blocked-users"), icon: "nosign", showArrow: true, keywords: ["engellenen", "blocked"] },
+        { label: t('settings_main.blocked'), onPress: nav("/settings/blocked-users"), icon: "nosign", showArrow: true, keywords: ["engellenen", "blocked"] },
         { label: t('settings_main.story_location'), onPress: nav("/settings/story"), icon: "location.slash", showArrow: true, keywords: ["hikaye", "story", "location"] },
       ],
     },
@@ -131,6 +132,12 @@ export default function SettingsIndexScreen() {
               {
                 text: t('settings_main.logout'), style: "destructive", onPress: () => {
                   useAuthStore.getState().logout();
+                  
+                  // Clear local messaging and notification stores to prevent data leakage
+                  useMessagesStore.getState().clearStore();
+                  useChatMessagesStore.getState().clearStore();
+                  useNotificationStore.setState({ notifications: [], followRequests: [], unreadCount: 0 });
+                  
                   router.replace("/login");
                 }
               },
@@ -154,7 +161,7 @@ export default function SettingsIndexScreen() {
       if (item.keywords) {
         const match = item.keywords.find(k => k.includes(q));
         if (match) {
-          return { ...item, subtitle: `"${match}" içerir` };
+          return { ...item, subtitle: `"${match}"` };
         }
       }
       return null;

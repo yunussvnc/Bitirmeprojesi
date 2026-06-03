@@ -79,8 +79,15 @@ export const useMatchStore = create<MatchState>()(
                 try {
                     await matchService.deleteMatchProfile();
                     set({ myProfile: null, hasProfile: false });
-                } catch (error) {
-                    throw error;
+                } catch (error: any) {
+                    // If the backend says 404 or profile not found, just clear it locally
+                    const msg = error?.message?.toLowerCase() || "";
+                    const code = error?.code || "";
+                    if (msg.includes("404") || msg.includes("not found") || code === "NOT_FOUND") {
+                        set({ myProfile: null, hasProfile: false });
+                    } else {
+                        throw error;
+                    }
                 }
             },
 

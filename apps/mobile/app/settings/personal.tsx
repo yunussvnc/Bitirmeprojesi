@@ -43,7 +43,7 @@ export default function PersonalDetailsScreen() {
   const [editField, setEditField] = useState<string | null>(null);
   const [editValue, setEditValue] = useState("");
   const [saving, setSaving] = useState(false);
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const loadProfile = useCallback(async () => {
     try {
@@ -97,7 +97,8 @@ export default function PersonalDetailsScreen() {
   const formatDate = (d?: string) => {
     if (!d) return t("personal_details.not_specified");
     try {
-      return new Date(d).toLocaleDateString("tr-TR", { day: "numeric", month: "long", year: "numeric" });
+      const locale = i18n.language === 'tr' ? 'tr-TR' : 'en-US';
+      return new Date(d).toLocaleDateString(locale, { day: "numeric", month: "long", year: "numeric" });
     } catch { return d; }
   };
 

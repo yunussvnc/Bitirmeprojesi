@@ -11,7 +11,7 @@ import {
   Animated,
   Keyboard,
 } from "react-native";
-import { useRouter, useLocalSearchParams, useFocusEffect } from "expo-router";
+import { useRouter, useLocalSearchParams } from "expo-router";
 import { Avatar } from "@/src/components/ui";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { useTheme } from "@/src/hooks/useTheme";
@@ -22,7 +22,6 @@ import { useAuthStore } from "@/src/store/useAuthStore";
 import { handleApiError } from "@/src/utils/errorHandler";
 import { useTranslation } from "react-i18next";
 import { openConversation } from "@/src/services/messageService";
-import { useBlockedUserIds } from "@/src/hooks/useBlockedUserIds";
 
 const DEBOUNCE_MS = 400;
 
@@ -39,17 +38,11 @@ export default function FriendSearchScreen() {
 
   const debounceRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const inputRef = useRef<TextInput>(null);
-  const { isBlocked, refresh: refreshBlocked } = useBlockedUserIds();
 
   // Animated glow for the search bar
   const glowAnim = useRef(new Animated.Value(0)).current;
 
-  useFocusEffect(
-    useCallback(() => {
-      refreshBlocked();
-    }, [refreshBlocked])
-  );
-
+  // Cleanup debounce timer on unmount
   useEffect(() => {
     return () => {
       if (debounceRef.current) clearTimeout(debounceRef.current);
@@ -89,10 +82,10 @@ export default function FriendSearchScreen() {
       setLoading(true);
       setSearched(true);
       try {
-        await refreshBlocked();
         const res = await searchUsers(trimmed, 1, 30);
+        // Filter out current user from results
         const filtered = (res.items || []).filter(
-          (u) => u.id !== authUser?.id && !isBlocked(u.id)
+          (u) => u.id !== authUser?.id
         );
         setResults(filtered);
       } catch (e) {
@@ -101,7 +94,7 @@ export default function FriendSearchScreen() {
         setLoading(false);
       }
     },
-    [authUser?.id, isBlocked, refreshBlocked]
+    [authUser?.id]
   );
 
   const handleChangeText = (text: string) => {

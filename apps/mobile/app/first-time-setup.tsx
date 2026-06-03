@@ -137,6 +137,7 @@ export default function FirstTimeSetupScreen() {
                 <View style={styles.card}>
                   <BlurView intensity={45} tint="dark" style={styles.cardInner}>
                     <Input
+                      variant="onDark"
                       label={t("first_time_setup.username_label")}
                       placeholder={t("first_time_setup.username_ph")}
                       value={username}
@@ -147,6 +148,7 @@ export default function FirstTimeSetupScreen() {
                     />
 
                     <Input
+                      variant="onDark"
                       label={t("first_time_setup.birth_date_label")}
                       placeholder={t("first_time_setup.birth_date_ph")}
                       value={birthDate}

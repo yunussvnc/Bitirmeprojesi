@@ -201,14 +201,14 @@ def get_or_create_user_for_login(db: Session, email: str, password: str):
 
 # --- MEKAN (PLACE) İŞLEMLERİ ---
 
-def _enrich_places_with_stats(db: Session, places):
+def _enrich_places_with_stats(db: Session, places, current_user_id: int | None = None):
     import math
-    
+
     if not places:
         return places
 
     place_ids = [p.id for p in places]
-    
+
     # Yorum sayıları
     reviews_count = (
         db.query(models.Review.place_id, func.count(models.Review.id).label("cnt"))
@@ -226,15 +226,39 @@ def _enrich_places_with_stats(db: Session, places):
         .all()
     )
     saved_map = {s[0]: s[1] for s in saved_count}
-    
+
+    # Takipçi sayıları
+    follower_counts = (
+        db.query(models.PlaceFollow.place_id, func.count(models.PlaceFollow.id).label("cnt"))
+        .filter(models.PlaceFollow.place_id.in_(place_ids))
+        .group_by(models.PlaceFollow.place_id)
+        .all()
+    )
+    follower_map = {f[0]: f[1] for f in follower_counts}
+
+    # Takip durumu (giriş yapmış kullanıcı için)
+    following_set: set = set()
+    if current_user_id:
+        follows = (
+            db.query(models.PlaceFollow.place_id)
+            .filter(
+                models.PlaceFollow.user_id == current_user_id,
+                models.PlaceFollow.place_id.in_(place_ids),
+            )
+            .all()
+        )
+        following_set = {f[0] for f in follows}
+
     for p in places:
         rc = review_map.get(p.id, 0)
         sc = saved_map.get(p.id, 0)
-        p.review_count = rc # type: ignore
-        p.saved_count = sc # type: ignore
-        
+        p.review_count = rc  # type: ignore
+        p.saved_count = sc  # type: ignore
+        p.follower_count = follower_map.get(p.id, 0)  # type: ignore
+        p.is_following = p.id in following_set  # type: ignore
+
         score = p.average_rating * math.log10(rc + 1) if rc > 0 else (p.average_rating or 0.0)
-        p.popularity_score = round(score, 2) # type: ignore
+        p.popularity_score = round(score, 2)  # type: ignore
 
         # JSON text → Python list deserialization
         import json as _json
@@ -255,6 +279,7 @@ def _enrich_places_with_stats(db: Session, places):
             pass  # leave as-is
 
     return places
+
 
 
 def get_places(db: Session, skip: int = 0, limit: int = 100):
@@ -396,10 +421,10 @@ def create_place(db: Session, place: schemas.PlaceCreate):
     db.refresh(db_place)
     return db_place
 
-def get_place_by_id(db: Session, place_id: int):
+def get_place_by_id(db: Session, place_id: int, current_user_id: int | None = None):
     place = db.query(models.Place).filter(models.Place.id == place_id).first()
     if place:
-        places_enriched = _enrich_places_with_stats(db, [place])
+        places_enriched = _enrich_places_with_stats(db, [place], current_user_id=current_user_id)
         return places_enriched[0]
     return None
 
@@ -420,7 +445,162 @@ def update_place_vector_id(db: Session, place_id: int, vector_id: str):
         db.commit()
     return db_place
 
+
+# --- MEKAN TAKİP İŞLEMLERİ ---
+
+def toggle_place_follow(db: Session, user_id: int, place_id: int) -> dict:
+    """Mekanı takip et / bırak (toggle). Sonuç: {followed: bool, follower_count: int}"""
+    existing = db.query(models.PlaceFollow).filter(
+        models.PlaceFollow.user_id == user_id,
+        models.PlaceFollow.place_id == place_id,
+    ).first()
+
+    if existing:
+        db.delete(existing)
+        db.commit()
+        followed = False
+    else:
+        follow = models.PlaceFollow(user_id=user_id, place_id=place_id)
+        db.add(follow)
+        db.commit()
+        followed = True
+
+    count = db.query(models.PlaceFollow).filter(models.PlaceFollow.place_id == place_id).count()
+    return {"followed": followed, "follower_count": count}
+
+
+def record_place_interaction(db: Session, user_id: int, place_id: int, interaction_type: str = "view") -> None:
+    """
+    Kullanıcı–mekan etkileşim skoru güncelle.
+    interaction_type: 'view' (+1), 'search' (+2), 'review' (+5)
+    """
+    score_map = {"view": 1, "search": 2, "review": 5, "like": 3}
+    delta = score_map.get(interaction_type, 1)
+
+    existing = db.query(models.PlaceInteraction).filter(
+        models.PlaceInteraction.user_id == user_id,
+        models.PlaceInteraction.place_id == place_id,
+    ).first()
+
+    if existing:
+        existing.score += delta  # type: ignore
+        if interaction_type == "view":
+            existing.view_count += 1  # type: ignore
+        elif interaction_type == "search":
+            existing.search_count += 1  # type: ignore
+        db.commit()
+    else:
+        interaction = models.PlaceInteraction(
+            user_id=user_id,
+            place_id=place_id,
+            score=delta,
+            view_count=1 if interaction_type == "view" else 0,
+            search_count=1 if interaction_type == "search" else 0,
+        )
+        db.add(interaction)
+        try:
+            db.commit()
+        except Exception:
+            db.rollback()
+
+
+def get_place_posts(db: Session, place_id: int, current_user_id: int | None = None, page: int = 1, page_size: int = 18):
+    """Mekana ait gönderileri getir (mekan kartı için). Sadece gizli olmayan hesapların gönderileri listelenir."""
+    total = db.query(models.Post)\
+        .join(models.User, models.Post.user_id == models.User.id)\
+        .outerjoin(models.UserPreferences, models.User.id == models.UserPreferences.user_id)\
+        .filter(
+            models.Post.place_id == place_id,
+            models.Post.is_flagged == False,
+            or_(
+                models.UserPreferences.is_private_account == False,
+                models.UserPreferences.is_private_account == None
+            )
+        ).count()
+
+    posts = (
+        db.query(models.Post)
+        .join(models.User, models.Post.user_id == models.User.id)
+        .outerjoin(models.UserPreferences, models.User.id == models.UserPreferences.user_id)
+        .options(joinedload(models.Post.media), joinedload(models.Post.user))
+        .filter(
+            models.Post.place_id == place_id,
+            models.Post.is_flagged == False,
+            or_(
+                models.UserPreferences.is_private_account == False,
+                models.UserPreferences.is_private_account == None
+            )
+        )
+        .order_by(models.Post.created_at.desc())
+        .offset((page - 1) * page_size)
+        .limit(page_size)
+        .all()
+    )
+
+    # is_liked bilgisini ekle
+    liked_set: set = set()
+    if current_user_id and posts:
+        post_ids = [p.id for p in posts]
+        liked = db.query(models.PostLike.post_id).filter(
+            models.PostLike.user_id == current_user_id,
+            models.PostLike.post_id.in_(post_ids),
+        ).all()
+        liked_set = {l[0] for l in liked}
+
+    for p in posts:
+        p.is_liked = p.id in liked_set  # type: ignore
+        if p.user:
+            p.author = p.user  # type: ignore
+
+    return posts, total
+
+
+def get_place_stories(db: Session, place_id: int):
+    """Mekana ait aktif (süresi dolmamış) hikayeleri getir. Sadece gizli olmayan hesapların hikayeleri listelenir."""
+    from datetime import datetime, timezone
+    now = datetime.now(timezone.utc)
+    stories = (
+        db.query(models.Story)
+        .join(models.User, models.Story.user_id == models.User.id)
+        .outerjoin(models.UserPreferences, models.User.id == models.UserPreferences.user_id)
+        .options(joinedload(models.Story.user))
+        .filter(
+            models.Story.place_id == place_id,
+            models.Story.expires_at > now,
+            or_(
+                models.UserPreferences.is_private_account == False,
+                models.UserPreferences.is_private_account == None
+            )
+        )
+        .order_by(models.Story.created_at.desc())
+        .all()
+    )
+    for s in stories:
+        if s.user:
+            s.author = s.user  # type: ignore
+    return stories
+
+
+def get_followed_place_ids(db: Session, user_id: int) -> list[int]:
+    """Kullanıcının takip ettiği mekan ID'lerini döner (feed için)."""
+    rows = db.query(models.PlaceFollow.place_id).filter(
+        models.PlaceFollow.user_id == user_id
+    ).all()
+    return [r[0] for r in rows]
+
+
+def get_interacted_place_ids(db: Session, user_id: int, min_score: int = 2) -> list[int]:
+    """Kullanıcının belirli bir eşiğin üzerinde etkileşim skoru olan mekan ID'leri."""
+    rows = db.query(models.PlaceInteraction.place_id).filter(
+        models.PlaceInteraction.user_id == user_id,
+        models.PlaceInteraction.score >= min_score,
+    ).all()
+    return [r[0] for r in rows]
+
+
 # --- YORUM (REVIEW) İŞLEMLERİ ---
+
+
 
 def create_review(
     db: Session,
@@ -640,7 +820,7 @@ def get_feed_paginated_cursor(
     from sqlalchemy import or_, and_
 
     if filter_mode == "following":
-        # ── TAKIP AKışı: saf kronoloji ─────────────────────────────────────
+        # ── TAKIP AKışı: saf kronoloji + takip edilen MEKANLAR ─────────────
         if not current_user_id:
             return [], None, False
 
@@ -652,11 +832,30 @@ def get_feed_paginated_cursor(
             )
             .subquery()
         )
+
+        # Takip edilen mekan sahiplerinin ID'leri
+        followed_place_ids = get_followed_place_ids(db, current_user_id)
+        venue_owner_ids: list[int] = []
+        if followed_place_ids:
+            rows = db.query(models.Place.owner_id).filter(
+                models.Place.id.in_(followed_place_ids),
+                models.Place.owner_id.isnot(None),
+            ).all()
+            venue_owner_ids = [r[0] for r in rows if r[0]]
+
+        # Kullanıcı takipleri + mekan sahiplerini birleştir
         base = (
             db.query(models.Post)
             .filter(
                 models.Post.is_flagged == False,
-                models.Post.user_id.in_(following_ids_sq),
+                or_(
+                    models.Post.user_id.in_(following_ids_sq),
+                    # Takip edilen mekanın sahibinin o mekana ait gönderileri
+                    and_(
+                        models.Post.user_id.in_(venue_owner_ids),
+                        models.Post.place_id.in_(followed_place_ids),
+                    ) if followed_place_ids else False,
+                ),
             )
         )
         if post_type:
@@ -699,6 +898,7 @@ def get_feed_paginated_cursor(
             last = posts[-1]
             next_cursor = f"{last.created_at.isoformat()}:{last.id}"
         return posts, next_cursor, has_more
+
 
     # ── HERKES AKışI: Puanlanmış Keşfet Feed'i ─────────────────────────────
     # Sadece: hesabı açık + benim takip etmediğim (ve ben değilim) kişilerin gönderileri
@@ -791,6 +991,7 @@ def get_feed_paginated_cursor(
             direct_following_of_friends=scoring_context.direct_following_of_friends,
             user_interest_keywords=scoring_context.user_interest_keywords,
             liked_place_categories=scoring_context.liked_place_categories,
+            interacted_place_ids=scoring_context.interacted_place_ids,
         )
         scored.append((s, p))
 

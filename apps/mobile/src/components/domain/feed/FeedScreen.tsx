@@ -42,7 +42,6 @@ import { useAppStore } from "@/src/store/useAppStore";
 import { createReport } from "@/src/services/moderationService";
 import { useTranslation } from "react-i18next";
 import { useUploadPipelineStore } from "@/src/store/useUploadPipelineStore";
-import { useBlockedUserIds } from "@/src/hooks/useBlockedUserIds";
 
 export default function FeedScreen() {
   const { t } = useTranslation();
@@ -83,18 +82,8 @@ export default function FeedScreen() {
   const toggleSavePost = useAppStore((s) => s.toggleSavePost);
   const isPostSaved = useAppStore((s) => s.isPostSaved);
   const deletedPostIds = useAppStore((s) => s.deletedPostIds);
-  const { isBlocked } = useBlockedUserIds();
 
-  const visiblePosts = React.useMemo(
-    () =>
-      posts.filter(
-        (p) =>
-          !deletedPostIds.includes(p.id) &&
-          !isBlocked(p.user_id) &&
-          !isBlocked(p.author?.id)
-      ),
-    [posts, deletedPostIds, isBlocked]
-  );
+  const visiblePosts = React.useMemo(() => posts.filter((p) => !deletedPostIds.includes(p.id)), [posts, deletedPostIds]);
 
   const handleCreateSelect = useCallback((type: CreateType) => {
     if (type === "post") {
@@ -123,9 +112,6 @@ export default function FeedScreen() {
         else setLoadingMore(true);
 
         const res = await getFeed(activeCursor, PAGE_SIZE, filter);
-        res.items = res.items.filter(
-          (p) => !isBlocked(p.user_id) && !isBlocked(p.author?.id)
-        );
         const pendingSharedPostId = useAppStore.getState().pendingSharedPostId;
 
         if (refresh && pendingSharedPostId) {
@@ -155,7 +141,7 @@ export default function FeedScreen() {
     },
     // nextCursor dependency sadece "daha fazla yükle" için gerekli
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [filter, nextCursor, dedupeById, isBlocked]
+    [filter, nextCursor, dedupeById]
   );
 
   useEffect(() => {

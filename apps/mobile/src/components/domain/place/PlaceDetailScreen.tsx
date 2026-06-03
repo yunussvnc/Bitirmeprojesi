@@ -37,16 +37,18 @@ import { handleApiError } from '@/src/utils/errorHandler';
 import { useTranslation } from 'react-i18next';
 import { useAppStore } from "@/src/store/useAppStore";
 import { useSettingsStore } from "@/src/store/useSettingsStore";
+import { useAuthStore } from "@/src/store/useAuthStore";
 import { getPlaceImageSource, hasPlaceImage } from "@/src/utils/placeImages";
-import { buildPlaceCardMeta, getPlaceStatusLocalized, formatPriceRange } from "@/src/utils/placeCardHelpers";
 import { spacing, createTextStyle } from "@/src/constants/design";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { calculateDistance, getCurrentLocation, type PlaceLocation } from "@/src/utils/location";
-import { getPlaceById, getAllPlaces } from "@/src/services/mekanService";
+import { getPlaceById, getAllPlaces, togglePlaceFollow, getPlacePosts, getPlaceStories, recordPlaceInteraction } from "@/src/services/mekanService";
 import { lightImpact, success, warning } from "@/src/utils/haptics";
 import { logger } from "@/src/utils/logger";
 import { apiGet, apiPost } from "@/src/utils/apiClient";
+import { FlatList } from "react-native";
+import { StoryViewerModal } from "../explore/StoryViewerModal";
 
 type Review = {
   id: number;
@@ -92,6 +94,7 @@ export default function PlaceDetailScreen({
   const savedIds = useAppStore((s) => s.savedIds);
   const toggleSaved = useAppStore((s) => s.toggleSave);
   const saved = savedIds.includes(id);
+  const currentUser = useAuthStore((s) => s.user);
 
   const [place, setPlace] = useState<any>(null);
   const [userLocation, setUserLocation] = useState<PlaceLocation | null>(null);
@@ -109,6 +112,17 @@ export default function PlaceDetailScreen({
   const [similarPlaces, setSimilarPlaces] = useState<any[]>([]);
   const [showReviews, setShowReviews] = useState(false);
   const [reviewGalleryData, setReviewGalleryData] = useState<{ reviews: Review[]; reviewIndex: number; imageIndex: number } | null>(null);
+
+  // Takip & Sosyal İçerik
+  const [isFollowing, setIsFollowing] = useState(false);
+  const [followerCount, setFollowerCount] = useState(0);
+  const [followLoading, setFollowLoading] = useState(false);
+  const [placePosts, setPlacePosts] = useState<any[]>([]);
+  const [placeStories, setPlaceStories] = useState<any[]>([]);
+  const [socialLoading, setSocialLoading] = useState(false);
+  const [showPostsSection, setShowPostsSection] = useState(false);
+  const [selectedStoryIndex, setSelectedStoryIndex] = useState(0);
+  const [showStoriesModal, setShowStoriesModal] = useState(false);
 
   const screenRef = useRef<ScreenRef>(null);
   useScrollToTop(screenRef as any);
@@ -240,6 +254,7 @@ export default function PlaceDetailScreen({
     const cancelled = { current: false };
     loadPlaceData(cancelled);
     loadReviews(cancelled);
+    loadSocialContent(cancelled);
     return () => {
       cancelled.current = true;
     };
@@ -251,9 +266,58 @@ export default function PlaceDetailScreen({
       if (!cancelled.current && foundPlace) {
         console.log('[PlaceDetail] menu_items:', JSON.stringify(foundPlace.menu_items)?.slice(0, 200));
         setPlace(foundPlace);
+        // Takip durumunu place verisiyle al (is_following zaten enrich'de geliyor)
+        if (typeof foundPlace.is_following === 'boolean') {
+          setIsFollowing(foundPlace.is_following);
+        }
+        if (typeof foundPlace.follower_count === 'number') {
+          setFollowerCount(foundPlace.follower_count);
+        }
+      }
+      // Etkileşimi arka planda kaydet (algoritmik boost)
+      if (!cancelled.current) {
+        recordPlaceInteraction(id, 'view').catch(() => {});
       }
     } catch (error) {
       if (!cancelled.current) logger.error("Error loading place:", error);
+    }
+  };
+
+  const loadSocialContent = async (cancelled: { current: boolean } = { current: false }) => {
+    if (!id) return;
+    setSocialLoading(true);
+    try {
+      const [postsData, storiesData] = await Promise.all([
+        getPlacePosts(id, 1, 18),
+        getPlaceStories(id),
+      ]);
+      if (!cancelled.current) {
+        setPlacePosts(postsData?.items || []);
+        setPlaceStories(storiesData?.items || []);
+        if ((postsData?.items?.length || 0) > 0 || (storiesData?.items?.length || 0) > 0) {
+          setShowPostsSection(true);
+        }
+      }
+    } catch (error) {
+      if (!cancelled.current) logger.error("Error loading social content:", error);
+    } finally {
+      if (!cancelled.current) setSocialLoading(false);
+    }
+  };
+
+  const handleFollow = async () => {
+    if (followLoading) return;
+    setFollowLoading(true);
+    try {
+      lightImpact();
+      const result = await togglePlaceFollow(id);
+      setIsFollowing(result.followed);
+      setFollowerCount(result.follower_count);
+      if (result.followed) success();
+    } catch (error) {
+      logger.error("Error toggling follow:", error);
+    } finally {
+      setFollowLoading(false);
     }
   };
 
@@ -422,13 +486,6 @@ export default function PlaceDetailScreen({
     return `${(dist / 1000).toFixed(1)} km uzakta`;
   }, [userLocation, place]);
 
-  const placeMeta = useMemo(() => buildPlaceCardMeta(place), [place]);
-  const hoursStatus = useMemo(
-    () => getPlaceStatusLocalized(place?.opening_time, place?.closing_time, t),
-    [place?.opening_time, place?.closing_time, t],
-  );
-  const priceLabel = useMemo(() => formatPriceRange(placeMeta.priceRange), [placeMeta.priceRange]);
-
   // Typography styles - inline to avoid type issues
   const h1Style = { fontSize: 24, fontWeight: "700" as const, color: colors.text.primary };
   const h2Style = { fontSize: 20, fontWeight: "700" as const, color: colors.text.primary };
@@ -440,7 +497,10 @@ export default function PlaceDetailScreen({
     <Animated.View entering={FadeIn.duration(280)} style={{ flex: 1 }}>
       <Screen ref={screenRef} scrollable withTabBar={isVenueDashboard}>
         {/* Header with Back and Save */}
-        <View style={[styles.header, isVenueDashboard && { justifyContent: "flex-end" }]}>
+        <View style={[styles.header, isVenueDashboard && { justifyContent: "space-between", paddingHorizontal: spacing.sm }]}>
+          {isVenueDashboard && (
+            <Text style={[h2Style, { fontSize: 18, fontWeight: '700' }]}>Mekan Paneli</Text>
+          )}
           {!isVenueDashboard && (
             <TouchableOpacity
               onPress={() => {
@@ -453,7 +513,61 @@ export default function PlaceDetailScreen({
             </TouchableOpacity>
           )}
 
-          {!isVenueDashboard && (
+          {isVenueDashboard ? (
+            <View style={{ flexDirection: 'row', gap: 8 }}>
+              {/* Hikaye Paylaş */}
+              <TouchableOpacity
+                onPress={() => {
+                  lightImpact();
+                  router.push({
+                    pathname: "/create-story",
+                    params: { isVenue: "true", placeId: String(place?.id), placeName: place?.name }
+                  });
+                }}
+                activeOpacity={0.8}
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  gap: 6,
+                  backgroundColor: 'rgba(240, 148, 51, 0.15)',
+                  paddingHorizontal: 12,
+                  paddingVertical: 8,
+                  borderRadius: 16,
+                  borderWidth: 1,
+                  borderColor: 'rgba(240, 148, 51, 0.3)'
+                }}
+              >
+                <IconSymbol name="camera.fill" size={14} color="#f09433" />
+                <Text style={{ fontSize: 12, color: '#f09433', fontWeight: '600' }}>Hikaye</Text>
+              </TouchableOpacity>
+              
+              {/* Gönderi Paylaş */}
+              <TouchableOpacity
+                onPress={() => {
+                  lightImpact();
+                  router.push({
+                    pathname: "/create-post",
+                    params: { isVenue: "true", placeId: String(place?.id), placeName: place?.name }
+                  });
+                }}
+                activeOpacity={0.8}
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  gap: 6,
+                  backgroundColor: colors.accent.primary + '22',
+                  paddingHorizontal: 12,
+                  paddingVertical: 8,
+                  borderRadius: 16,
+                  borderWidth: 1,
+                  borderColor: colors.accent.primary + '44'
+                }}
+              >
+                <IconSymbol name="plus" size={14} color={colors.accent.primary} />
+                <Text style={{ fontSize: 12, color: colors.accent.primary, fontWeight: '600' }}>Gönderi</Text>
+              </TouchableOpacity>
+            </View>
+          ) : (
             <View style={styles.headerRightButtons}>
               <TouchableOpacity
                 onPress={() => {
@@ -545,62 +659,92 @@ export default function PlaceDetailScreen({
             {place?.category && <Text style={[bodySmallStyle, { color: colors.text.secondary }]}>{getTranslatedCategory(place.category, t)}</Text>}
             {place?.city && place?.category && <Text style={[bodySmallStyle, { color: colors.text.tertiary }]}> • </Text>}
             {place?.city && <Text style={[bodySmallStyle, { color: colors.text.secondary }]}>{place.city}</Text>}
-            {priceLabel ? (
-              <>
-                <Text style={[bodySmallStyle, { color: colors.text.tertiary }]}> • </Text>
-                <Text style={[bodySmallStyle, { color: colors.text.secondary, fontWeight: '700' }]}>{priceLabel}</Text>
-              </>
-            ) : null}
           </View>
 
-          {(placeMeta.rating != null && placeMeta.rating > 0) || place?.opening_time ? (
-            <View style={styles.quickInfoRow}>
-              {placeMeta.rating != null && placeMeta.rating > 0 ? (
-                <View style={[styles.quickInfoChip, { backgroundColor: colors.surface.elevated }]}>
-                  <IconSymbol name="star.fill" size={14} color="#FBBF24" />
-                  <Text style={[bodySmallStyle, { fontWeight: '700', marginLeft: 4 }]}>
-                    {placeMeta.rating.toFixed(1)}
-                  </Text>
-                  {placeMeta.reviewCount ? (
-                    <Text style={[captionStyle, { marginLeft: 4 }]}>
-                      ({t('explore.rating_count', { count: placeMeta.reviewCount })})
-                    </Text>
-                  ) : null}
-                </View>
-              ) : null}
-              {place?.opening_time && place?.closing_time ? (
-                <View style={[styles.quickInfoChip, { backgroundColor: colors.surface.elevated }]}>
-                  <View style={[styles.statusDot, { backgroundColor: hoursStatus.color }]} />
-                  <Text style={[bodySmallStyle, { marginLeft: 6, fontWeight: '600' }]}>
-                    {hoursStatus.hoursText}
-                  </Text>
-                  <Text style={[captionStyle, { marginLeft: 6, color: hoursStatus.color, fontWeight: '700' }]}>
-                    {hoursStatus.label}
-                  </Text>
-                </View>
-              ) : (
-                <View style={[styles.quickInfoChip, { backgroundColor: colors.surface.elevated }]}>
-                  <IconSymbol name="clock.fill" size={14} color={colors.text.tertiary} />
-                  <Text style={[captionStyle, { marginLeft: 6 }]}>{t('place_detail.hours_unavailable')}</Text>
-                </View>
+          {/* Takip Et Butonu + Takipçi Sayısı */}
+          {!isVenueDashboard && (
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 14, gap: 12 }}>
+              <TouchableOpacity
+                onPress={handleFollow}
+                disabled={followLoading}
+                style={[
+                  {
+                    paddingHorizontal: 20,
+                    paddingVertical: 9,
+                    borderRadius: 22,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    gap: 6,
+                    opacity: followLoading ? 0.7 : 1,
+                  },
+                  isFollowing
+                    ? { backgroundColor: colors.surface.elevated, borderWidth: 1, borderColor: colors.surface.border }
+                    : { backgroundColor: colors.accent.primary },
+                ]}
+              >
+                <IconSymbol
+                  name={isFollowing ? 'checkmark' : 'plus'}
+                  size={14}
+                  color={isFollowing ? colors.text.primary : colors.text.inverse}
+                />
+                <Text style={[
+                  { fontSize: 14, fontWeight: '600' },
+                  isFollowing ? { color: colors.text.primary } : { color: colors.text.inverse },
+                ]}>
+                  {isFollowing ? 'Takiptesin' : 'Takip Et'}
+                </Text>
+              </TouchableOpacity>
+              {followerCount > 0 && (
+                <Text style={{ fontSize: 13, color: colors.text.secondary }}>
+                  {followerCount >= 1000
+                    ? `${(followerCount / 1000).toFixed(1)}B`
+                    : followerCount} takipçi
+                </Text>
               )}
             </View>
-          ) : null}
-
-          {place?.user_review ? (
-            <View style={[styles.userReviewBox, { backgroundColor: colors.surface.elevated, borderColor: colors.surface.border }]}>
-              <IconSymbol name="quote.opening" size={16} color={colors.text.tertiary} />
-              <Text style={[bodySmallStyle, styles.userReviewText]} numberOfLines={3}>
-                {place.user_review.replace(/^"|"$/g, '')}
-              </Text>
-            </View>
-          ) : null}
+          )}
 
           {/* Tags */}
         </View>
 
         {/* Content */}
         <View style={styles.content}>
+          {/* Mekanın Aktif Hikayeleri */}
+          {placeStories && placeStories.length > 0 && (
+            <View style={{ paddingHorizontal: spacing.base, marginBottom: spacing.md }}>
+              <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 12, paddingVertical: 4 }}>
+                <TouchableOpacity
+                  onPress={() => {
+                    lightImpact();
+                    setSelectedStoryIndex(0);
+                    setShowStoriesModal(true);
+                  }}
+                  activeOpacity={0.8}
+                  style={{ alignItems: 'center' }}
+                >
+                  <View style={{
+                    width: 72,
+                    height: 72,
+                    borderRadius: 36,
+                    borderWidth: 2,
+                    borderColor: '#f09433',
+                    padding: 3,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                    {place?.photo_url ? (
+                      <Image source={{ uri: place.photo_url }} style={{ width: 60, height: 60, borderRadius: 30 }} />
+                    ) : (
+                      <View style={{ width: 60, height: 60, borderRadius: 30, backgroundColor: colors.surface.elevated, justifyContent: 'center', alignItems: 'center' }}>
+                        <IconSymbol name="camera.fill" size={24} color={colors.text.secondary} />
+                      </View>
+                    )}
+                  </View>
+                  <Text style={{ fontSize: 12, color: colors.text.primary, marginTop: 4, fontWeight: '600' }}>Hikayeler</Text>
+                </TouchableOpacity>
+              </ScrollView>
+            </View>
+          )}
           {/* Place Meta Section */}
           <View style={styles.placeMetaSection}>
             <View style={styles.placeMetaRow}>
@@ -763,27 +907,6 @@ export default function PlaceDetailScreen({
             </Card>
           )}
 
-          {/* Inline Menu Preview — Coming Soon */}
-          {(!place?.menu_items || place.menu_items.length === 0) && (
-            <Card style={styles.sectionCard}>
-              <View style={styles.sectionHeaderRow}>
-                <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8 }}>
-                  <IconSymbol name="list.bullet.clipboard" size={22} color={colors.text.tertiary} />
-                  <Text style={[h1Style, { fontSize: 20 }]}>{t("place_detail.menu")}</Text>
-                </View>
-              </View>
-              <View style={[styles.menuComingSoonBox, { backgroundColor: colors.surface.elevated, borderColor: colors.surface.border }]}>
-                <IconSymbol name="clock.fill" size={28} color={colors.text.tertiary} />
-                <Text style={[bodyStyle, { marginTop: spacing.sm, fontWeight: '600', textAlign: 'center' }]}>
-                  {t('place_detail.menu_coming_soon')}
-                </Text>
-                <Text style={[captionStyle, { marginTop: 4, textAlign: 'center' }]}>
-                  {t('place_detail.menu_coming_soon_desc')}
-                </Text>
-              </View>
-            </Card>
-          )}
-
           {/* Location Preview */}
           {place?.address && (
             <Card style={styles.sectionCard}>
@@ -813,13 +936,61 @@ export default function PlaceDetailScreen({
             </Card>
           )}
 
+          {/* Mekan Gönderileri Grid */}
+          {placePosts && placePosts.length > 0 && (
+            <Card style={{ ...StyleSheet.flatten(styles.sectionCard), padding: spacing.base, marginBottom: spacing.xl }}>
+              <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8, marginBottom: spacing.md }}>
+                <IconSymbol name="square.grid.3x3.fill" size={20} color={colors.text.primary} />
+                <Text style={[h2Style, { fontSize: 20 }]}>Gönderiler</Text>
+                <View style={{
+                  backgroundColor: colors.surface.elevated,
+                  paddingHorizontal: 8,
+                  paddingVertical: 2,
+                  borderRadius: 12,
+                  marginLeft: 4
+                }}>
+                  <Text style={{ fontSize: 12, color: colors.text.secondary, fontWeight: '600' }}>{placePosts.length}</Text>
+                </View>
+              </View>
+              
+              <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 4 }}>
+                {placePosts.map((post, idx) => {
+                  const postImg = post.media?.[0]?.media_url || post.media_url;
+                  return (
+                    <TouchableOpacity
+                      key={post.id || idx}
+                      onPress={() => {
+                        lightImpact();
+                        router.push(`/p/post/${post.id}`);
+                      }}
+                      activeOpacity={0.8}
+                      style={{
+                        width: (SCREEN_WIDTH - spacing.base * 2 - 32 - 8) / 3,
+                        height: (SCREEN_WIDTH - spacing.base * 2 - 32 - 8) / 3,
+                        borderRadius: 8,
+                        overflow: 'hidden',
+                        backgroundColor: colors.surface.elevated
+                      }}
+                    >
+                      {postImg ? (
+                        <Image source={{ uri: postImg }} style={{ width: '100%', height: '100%' }} resizeMode="cover" />
+                      ) : (
+                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                          <IconSymbol name="photo" size={24} color={colors.text.tertiary} />
+                        </View>
+                      )}
+                    </TouchableOpacity>
+                  );
+                })}
+              </View>
+            </Card>
+          )}
+
           {/* Similar Places */}
           {!isVenueDashboard && similarPlaces.length > 0 && (
             <Section title={t("place_detail.similar_places")} style={{ marginTop: spacing.xl }}>
               <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.similarScrollContent}>
-                {similarPlaces.map((similarPlace) => {
-                  const similarMeta = buildPlaceCardMeta(similarPlace);
-                  return (
+                {similarPlaces.map((similarPlace) => (
                   <View key={similarPlace.id} style={styles.similarCardWrapper}>
                     <PlaceCard
                       image={getPlaceImageSource(similarPlace)}
@@ -827,18 +998,11 @@ export default function PlaceDetailScreen({
                       title={similarPlace.name}
                       subtitle={similarPlace.subtitle || similarPlace.description}
                       tags={similarPlace.tags}
-                      hasMenu={similarMeta.hasMenu}
-                      menuComingSoon={similarMeta.menuComingSoon}
-                      openingTime={similarMeta.openingTime}
-                      closingTime={similarMeta.closingTime}
-                      rating={similarMeta.rating}
-                      reviewCount={similarMeta.reviewCount}
-                      priceLabel={similarMeta.priceLabel}
-                      category={similarMeta.category}
+                      hasMenu={!!(similarPlace.menu_items && similarPlace.menu_items.length > 0)}
                       onPress={() => router.push({ pathname: "/place/[id]", params: { id: String(similarPlace.id) } })}
                     />
                   </View>
-                );})}
+                ))}
               </ScrollView>
             </Section>
           )}
@@ -1316,7 +1480,7 @@ export default function PlaceDetailScreen({
                     <View style={{ alignItems: 'center', paddingVertical: 40 }}>
                       <IconSymbol name="list.bullet.clipboard" size={48} color={colors.text.tertiary} />
                       <Text style={[bodySmallStyle, { textAlign: 'center', marginTop: spacing.base }]}>
-                        {t("place_detail.menu_coming_soon")}
+                        {t("place_detail.no_menu", "Bu mekan henüz menü eklememiş.")}
                       </Text>
                     </View>
                   )}
@@ -1326,6 +1490,17 @@ export default function PlaceDetailScreen({
           </View>
         )}
       </Modal>
+
+      {/* Story Viewer Modal */}
+      {placeStories && placeStories.length > 0 && (
+        <StoryViewerModal
+          stories={placeStories}
+          initialIndex={selectedStoryIndex}
+          visible={showStoriesModal}
+          onClose={() => setShowStoriesModal(false)}
+          currentUserId={currentUser?.id}
+        />
+      )}
     </Animated.View>
   );
 }
@@ -1438,47 +1613,6 @@ const styles = StyleSheet.create({
   metaRow: {
     flexDirection: "row",
     alignItems: "center",
-    flexWrap: "wrap",
-  },
-  quickInfoRow: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: spacing.sm,
-    marginTop: spacing.sm,
-  },
-  quickInfoChip: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: spacing.sm,
-    paddingVertical: spacing.xs,
-    borderRadius: 12,
-  },
-  statusDot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-  },
-  userReviewBox: {
-    flexDirection: "row",
-    alignItems: "flex-start",
-    gap: spacing.sm,
-    marginTop: spacing.base,
-    padding: spacing.base,
-    borderRadius: 14,
-    borderWidth: StyleSheet.hairlineWidth,
-  },
-  userReviewText: {
-    flex: 1,
-    fontStyle: "italic",
-    lineHeight: 20,
-  },
-  menuComingSoonBox: {
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: spacing.xl,
-    paddingHorizontal: spacing.base,
-    borderRadius: 16,
-    borderWidth: StyleSheet.hairlineWidth,
   },
   tagsRow: {
     flexDirection: "row",

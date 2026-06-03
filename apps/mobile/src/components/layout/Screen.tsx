@@ -137,6 +137,7 @@ export const Screen = forwardRef<ScreenRef, ScreenProps>(({
             contentContainerStyle,
           ]}
           showsVerticalScrollIndicator={false}
+          keyboardShouldPersistTaps="handled"
           scrollEventThrottle={16}
           decelerationRate="normal"
           overScrollMode="never"

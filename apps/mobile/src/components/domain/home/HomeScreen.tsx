@@ -39,7 +39,6 @@ import {
 } from "@/src/components/shared/ui";
 import { usePreferences } from "@/src/store/preferences";
 import { getPlaceImageSource, hasPlaceImage } from "@/src/utils/placeImages";
-import { buildPlaceCardMeta } from "@/src/utils/placeCardHelpers";
 import { createTextStyle, s } from "@/src/constants/design";
 import { getAllPlaces } from "@/src/services/mekanService";
 import { recommendPlaces } from "@/src/services/api";
@@ -457,19 +456,7 @@ export default function HomeScreen() {
     ({ item, index }: { item: RecommendItem | Place; index: number }) => {
       const it = item as PlaceLike;
       const id = String(it.id);
-      const isAi = displayMode === "ai";
       const place = placesById[id] || (item as Place);
-      const aiItem = isAi ? (item as RecommendItem) : undefined;
-      const mergedForMeta: Partial<Place> = {
-        ...place,
-        opening_time: place?.opening_time ?? aiItem?.opening_time,
-        closing_time: place?.closing_time ?? aiItem?.closing_time,
-        average_rating: place?.average_rating ?? aiItem?.average_rating,
-        review_count: place?.review_count ?? aiItem?.review_count,
-        price_range: place?.price_range ?? aiItem?.price_range,
-        category: place?.category ?? aiItem?.category,
-        address: place?.address ?? aiItem?.address,
-      };
       const merged = {
         id,
         name: it.name,
@@ -479,7 +466,7 @@ export default function HomeScreen() {
         subtitle: it.subtitle ?? place?.subtitle,
       };
       const loc = getLocationFromName(it.name ?? "");
-      const meta = buildPlaceCardMeta(mergedForMeta);
+      const isAi = displayMode === "ai";
 
       return (
         <AnimatedPlaceCard
@@ -488,20 +475,13 @@ export default function HomeScreen() {
           image={getPlaceImageSource(merged)}
           imagePlaceholder={!hasPlaceImage(merged)}
           title={it.name ?? t('common.venue')}
-          subtitle={it.subtitle ?? place?.subtitle ?? place?.description}
+          subtitle={it.subtitle ?? place?.subtitle}
           tags={it.tags ?? place?.tags}
           location={loc}
           explanation={isAi ? (item as RecommendItem).explanation : undefined}
           distance_m={isAi ? (item as RecommendItem).distance_m : undefined}
           isRecommended={isAi}
-          hasMenu={meta.hasMenu}
-          menuComingSoon={meta.menuComingSoon}
-          openingTime={meta.openingTime}
-          closingTime={meta.closingTime}
-          rating={meta.rating}
-          reviewCount={meta.reviewCount}
-          priceLabel={meta.priceLabel}
-          category={meta.category ?? it.category ?? place?.category}
+          hasMenu={!!(place?.menu_items && place.menu_items.length > 0)}
           onPress={() => handlePlacePress(id)}
         />
       );

@@ -22,6 +22,7 @@ export default function EditProfileScreen() {
   const { t } = useTranslation();
 
   const [firstName, setFirstName] = useState(authUser?.first_name || "");
+  const [lastName, setLastName] = useState((authUser as any)?.last_name || "");
   const [username, setUsername] = useState(authUser?.username || "");
   const [bio, setBio] = useState(authUser?.bio || "");
   const [avatarUri, setAvatarUri] = useState<string | null>(authUser?.avatar_url || null);
@@ -30,6 +31,7 @@ export default function EditProfileScreen() {
   useEffect(() => {
     if (authUser) {
       setFirstName(authUser.first_name || "");
+      setLastName((authUser as any).last_name || "");
       setUsername(authUser.username || "");
       setBio(authUser.bio || "");
       setAvatarUri(authUser.avatar_url || null);
@@ -70,6 +72,7 @@ export default function EditProfileScreen() {
       }
       const updated = await updateMe({
         first_name: (firstName || "").trim() || undefined,
+        last_name: (lastName || "").trim() || undefined,
         username: (username || "").trim() || undefined,
         bio: (bio || "").trim() || undefined,
         avatar_url: avatarUrl || undefined,
@@ -148,6 +151,18 @@ export default function EditProfileScreen() {
                 placeholderTextColor={colors.text.tertiary}
                 value={firstName}
                 onChangeText={setFirstName}
+                autoCorrect={false}
+              />
+            </View>
+
+            <View style={[styles.inputGroup, { backgroundColor: colors.surface.elevated }]}>
+              <Text style={[styles.inputLabel, { color: colors.text.secondary }]}>{t("edit_profile.last_name", "SOYAD")}</Text>
+              <TextInput
+                style={[styles.input, { color: colors.text.primary }]}
+                placeholder={t("edit_profile.last_name_ph", "Soyadınız")}
+                placeholderTextColor={colors.text.tertiary}
+                value={lastName}
+                onChangeText={setLastName}
                 autoCorrect={false}
               />
             </View>

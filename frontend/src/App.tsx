@@ -1,16 +1,16 @@
 import { useEffect, useRef } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { motion, useScroll, useTransform, type Variants } from 'framer-motion'
 import {
   MapPin, Users, MessageCircle, Brain,
   Heart, ArrowRight, Zap, Coffee,
-  ChevronRight, Menu, Compass, Camera, Bell, Star, Bookmark, Globe, Shield, Route
+  ChevronRight, Menu, Compass, Camera, Bell, Star, Bookmark, Route
 } from 'lucide-react'
 import ParticleBackground from './components/ParticleBackground'
 import './index.css'
 
-const fade = { hidden:{opacity:0,y:40}, visible:{opacity:1,y:0,transition:{duration:.7,ease:[.25,.46,.45,.94]}} }
-const stagger = { hidden:{opacity:0}, visible:{opacity:1,transition:{staggerChildren:.12}} }
-const scaleIn = { hidden:{opacity:0,scale:.88}, visible:{opacity:1,scale:1,transition:{duration:.8,ease:[.25,.46,.45,.94]}} }
+const fade: Variants = { hidden:{opacity:0,y:40}, visible:{opacity:1,y:0,transition:{duration:.7,ease:[.25,.46,.45,.94]}} }
+const stagger: Variants = { hidden:{opacity:0}, visible:{opacity:1,transition:{staggerChildren:.12}} }
+const scaleIn: Variants = { hidden:{opacity:0,scale:.88}, visible:{opacity:1,scale:1,transition:{duration:.8,ease:[.25,.46,.45,.94]}} }
 
 /*
  * Bento Grid — 12 column magazine layout

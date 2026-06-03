@@ -430,7 +430,8 @@ const styles = StyleSheet.create({
     paddingBottom: 12,
   },
   title: { fontSize: 18, fontWeight: '700' },
-  clearBtn: { fontSize: 14, fontWeight: '600' },
+  clearBtn: { padding: 4 },
+  clearText: { fontSize: 14, fontWeight: '600' },
   body: {
     paddingHorizontal: 20,
     paddingBottom: 8,

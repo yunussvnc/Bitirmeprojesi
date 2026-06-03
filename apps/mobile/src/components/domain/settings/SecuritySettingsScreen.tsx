@@ -114,6 +114,8 @@ export default function SecuritySettingsScreen() {
                         placeholder={t("settings_extra.current_pwd")}
                         placeholderTextColor={colors.text.tertiary}
                         secureTextEntry
+                        textContentType="oneTimeCode"
+                        autoComplete="off"
                         value={currentPass}
                         onChangeText={setCurrentPass}
                         autoCapitalize="none"
@@ -123,6 +125,8 @@ export default function SecuritySettingsScreen() {
                         placeholder={t("settings_extra.new_pwd")}
                         placeholderTextColor={colors.text.tertiary}
                         secureTextEntry
+                        textContentType="oneTimeCode"
+                        autoComplete="off"
                         value={newPass}
                         onChangeText={setNewPass}
                         autoCapitalize="none"
@@ -132,6 +136,8 @@ export default function SecuritySettingsScreen() {
                         placeholder={t("settings_extra.new_pwd_confirm")}
                         placeholderTextColor={colors.text.tertiary}
                         secureTextEntry
+                        textContentType="oneTimeCode"
+                        autoComplete="off"
                         value={confirmPass}
                         onChangeText={setConfirmPass}
                         autoCapitalize="none"

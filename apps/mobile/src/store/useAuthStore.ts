@@ -2,6 +2,9 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import type { AuthUser } from "@/src/services/authService";
+import { useMessagesStore } from "./useMessagesStore";
+import { useChatMessagesStore } from "./useChatMessagesStore";
+import { useNotificationStore } from "./useNotificationStore";
 
 type AuthState = {
   accessToken: string | null;
@@ -28,8 +31,15 @@ export const useAuthStore = create<AuthState>()(
 
       setUser: (user) => set({ user }),
 
-      logout: () =>
-        set({ accessToken: null, refreshToken: null, user: null }),
+      logout: () => {
+        set({ accessToken: null, refreshToken: null, user: null });
+        
+        // Merkezi çıkış (logout) işleminde, eski verilerin diğer hesaplarda görünmesini
+        // engellemek için yerel önbellekleri (store) temizle.
+        useMessagesStore.getState().clearStore();
+        useChatMessagesStore.getState().clearStore();
+        useNotificationStore.setState({ notifications: [], followRequests: [], unreadCount: 0 });
+      },
 
       setHydrated: (v) => set({ hydrated: v }),
     }),

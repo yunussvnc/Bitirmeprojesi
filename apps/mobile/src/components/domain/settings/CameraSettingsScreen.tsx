@@ -17,10 +17,10 @@ import { BackButton } from "@/src/components/shared/navigation";
 import { useSettingsStore, type CameraToolbarSide } from "@/src/store/useSettingsStore";
 import { lightImpact, success } from "@/src/utils/haptics";
 
-const TOOLBAR_LABELS: Record<CameraToolbarSide, string> = {
-  left: "Sol taraf",
-  right: "Sağ taraf",
-};
+const getToolbarLabels = (t: any): Record<CameraToolbarSide, string> => ({
+  left: t("settings_camera.left", "Sol Taraf"),
+  right: t("settings_camera.right", "Sağ Taraf"),
+});
 
 export default function CameraSettingsScreen() {
   const { colors } = useTheme();
@@ -76,7 +76,7 @@ export default function CameraSettingsScreen() {
             icon="camera.fill"
           />
           <Text style={[styles.hint, { color: colors.text.tertiary }]}>{t("settings_extra.cam_hint")}</Text>
-          <SettingsRow label={t("settings_extra.cam_toolbar")} value={TOOLBAR_LABELS[cameraToolbarSide]} onPress={handleToolbarSide} showArrow icon="slider.horizontal.3" />
+          <SettingsRow label={t("settings_camera.toolbar", "Kamera Araç Çubuğu")} value={getToolbarLabels(t)[cameraToolbarSide]} onPress={handleToolbarSide} showArrow icon="slider.horizontal.3" />
           <Text style={[styles.hint, { color: colors.text.tertiary }]}>
             {t("settings_extra.cam_toolbar_hint")}
           </Text>

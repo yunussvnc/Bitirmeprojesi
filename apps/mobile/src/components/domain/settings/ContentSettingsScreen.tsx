@@ -17,10 +17,10 @@ import { BackButton } from "@/src/components/shared/navigation";
 import { useSettingsStore, type UploadQuality } from "@/src/store/useSettingsStore";
 import { lightImpact, success } from "@/src/utils/haptics";
 
-const UPLOAD_LABELS: Record<UploadQuality, string> = {
-  high: "Yüksek",
-  auto: "Otomatik",
-  data_saver: "Veri tasarrufu",
+const UPLOAD_LABEL_KEYS: Record<UploadQuality, string> = {
+  high: "content_settings.quality_high",
+  auto: "content_settings.quality_auto",
+  data_saver: "content_settings.quality_saver",
 };
 
 export default function ContentSettingsScreen() {
@@ -84,7 +84,7 @@ export default function ContentSettingsScreen() {
         </Section>
 
         <Section title={t("settings_extra.content_section_quality")}>
-          <SettingsRow label={t("settings_extra.content_upload_quality")} value={UPLOAD_LABELS[uploadQuality]} onPress={handleUploadQuality} showArrow icon="photo" />
+          <SettingsRow label={t("settings_extra.content_upload_quality")} value={t(UPLOAD_LABEL_KEYS[uploadQuality])} onPress={handleUploadQuality} showArrow icon="photo" />
           <Text style={[styles.hint, { color: colors.text.tertiary }]}>
             {t("settings_extra.content_quality_hint")}
           </Text>

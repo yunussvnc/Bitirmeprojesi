@@ -9,13 +9,27 @@ interface RequestOptions extends RequestInit {
 }
 
 let _getAccessToken: (() => string | null) | null = null;
+let _getRefreshToken: (() => string | null) | null = null;
+let _onTokenRefresh: ((access: string, refresh: string) => void) | null = null;
 let _onUnauthorized: (() => void) | null = null;
+
+let _isRefreshing = false;
+let _refreshSubscribers: ((token: string) => void)[] = [];
+
+function onRefreshed(token: string) {
+  _refreshSubscribers.forEach((cb) => cb(token));
+  _refreshSubscribers = [];
+}
 
 export function setAuthInterceptors(
   getToken: () => string | null,
+  getRefreshToken: () => string | null,
+  onTokenRefresh: (access: string, refresh: string) => void,
   onUnauthorized: () => void,
 ) {
   _getAccessToken = getToken;
+  _getRefreshToken = getRefreshToken;
+  _onTokenRefresh = onTokenRefresh;
   _onUnauthorized = onUnauthorized;
 }
 
@@ -29,12 +43,12 @@ async function fetchWithRetry(
   const timeoutId = setTimeout(() => controller.abort(), 10000);
 
   try {
-    const token = options.skipAuth ? null : _getAccessToken?.();
+    let token = options.skipAuth ? null : _getAccessToken?.();
     const authHeaders: Record<string, string> = token
       ? { Authorization: `Bearer ${token}` }
       : {};
 
-    const response = await fetch(url, {
+    let response = await fetch(url, {
       ...options,
       signal: controller.signal,
       headers: {
@@ -50,11 +64,60 @@ async function fetchWithRetry(
     if (response.ok) return response;
 
     if (response.status === 401 && !options.skipAuth) {
-      _onUnauthorized?.();
-      throw new Error('Unauthorized');
+      // Refresh token mantığı
+      const refreshToken = _getRefreshToken?.();
+      if (refreshToken) {
+        if (!_isRefreshing) {
+          _isRefreshing = true;
+          try {
+            const refreshUrl = `${API_BASE_URL}/auth/refresh`;
+            const refreshRes = await fetch(refreshUrl, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({ refresh_token: refreshToken })
+            });
+
+            if (refreshRes.ok) {
+              const data = await refreshRes.json();
+              _onTokenRefresh?.(data.access_token, data.refresh_token);
+              onRefreshed(data.access_token);
+              
+              // Orijinal isteği yeni token ile tekrarla
+              const newAuthHeaders = { Authorization: `Bearer ${data.access_token}` };
+              return await fetch(url, {
+                ...options,
+                headers: { ...options.headers, ...newAuthHeaders }
+              });
+            } else {
+              throw new Error("Refresh failed");
+            }
+          } catch (e) {
+            _onUnauthorized?.();
+            throw new Error('Unauthorized');
+          } finally {
+            _isRefreshing = false;
+          }
+        } else {
+          // Zaten yenileniyorsa, yenilenmesini bekle ve isteği tekrarla
+          return new Promise((resolve, reject) => {
+            _refreshSubscribers.push((newToken) => {
+              const newAuthHeaders = { Authorization: `Bearer ${newToken}` };
+              fetch(url, {
+                ...options,
+                headers: { ...options.headers, ...newAuthHeaders }
+              }).then(resolve).catch(reject);
+            });
+          });
+        }
+      } else {
+        _onUnauthorized?.();
+        throw new Error('Unauthorized');
+      }
     }
 
-    if (response.status >= 500 && retries > 0) {
+    // POST/PUT/PATCH/DELETE işlemleri idempotent değildir — retry yapma
+    const isReadOnly = !options.method || options.method === 'GET';
+    if (isReadOnly && response.status >= 500 && retries > 0) {
       logger.warn(`Retrying request to ${url}, attempts left: ${retries}`);
       await new Promise(resolve => setTimeout(resolve, retryDelay));
       return fetchWithRetry(url, options, retries - 1, retryDelay * 2);
@@ -79,7 +142,8 @@ async function fetchWithRetry(
         (error.message.includes('Network request failed') ||
           error.message.includes('Failed to fetch') ||
           error.name === 'AbortError'));
-    if (isNetworkError && retries > 0) {
+    const isReadOnly = !options.method || options.method === 'GET';
+    if (isNetworkError && isReadOnly && retries > 0) {
       logger.warn(`Retrying request to ${url}, attempts left: ${retries}`);
       await new Promise(resolve => setTimeout(resolve, retryDelay));
       return fetchWithRetry(url, options, retries - 1, retryDelay * 2);

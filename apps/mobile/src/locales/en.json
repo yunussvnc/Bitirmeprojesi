@@ -41,7 +41,6 @@
     "no_places": "No venues yet",
     "recommended": "Recommended for you",
     "menu": "Menu",
-    "menu_coming_soon": "Coming soon",
     "no_image": "No image added",
     "place_stories": "Stories",
     "place_posts": "Posts",
@@ -152,7 +151,6 @@
     "retry": "Retry",
     "close": "Close",
     "done": "Done",
-    "next": "Next",
     "clear": "Clear",
     "restore": "Restore",
     "select_all": "Select All",
@@ -392,12 +390,7 @@
     "pages_menu": "{{count}} page menu",
     "items": "{{count}} items",
     "page_x_of_y": "Page {{current}} / {{total}}",
-    "no_menu": "This venue hasn't added a menu yet.",
-    "menu_coming_soon": "Coming soon",
-    "menu_coming_soon_desc": "This venue's menu will be added shortly.",
-    "hours_unavailable": "Hours not available",
-    "opening_hours": "Opening Hours",
-    "guest_review": "Guest review"
+    "no_menu": "This venue hasn't added a menu yet."
   },
   "feed_comments": {
     "comments": "Comments",
@@ -489,7 +482,7 @@
     "email_placeholder": "example@email.com",
     "password": "Password",
     "password_placeholder": "••••••••",
-    "password_requirements_hint": "At least 8 characters with uppercase, lowercase, a number, and a special character.",
+    "password_hint": "e.g., UcD.7491",
     "confirm_password": "Confirm Password",
     "confirm_password_placeholder": "Re-enter your password",
     "forgot_password": "Forgot password?",
@@ -1224,8 +1217,7 @@
     "kvkk_desc": "Within the scope of GDPR, your personal data is processed by Asemos as the data controller for the following purposes:\n\n• Account creation and identity verification\n• Service presentation and improvement\n• Security and fraud prevention\n• Fulfillment of legal obligations\n\nIn accordance with our disclosure obligation under GDPR, for more information on the purposes of processing your personal data, to whom and for what purposes it may be transferred, please read our Privacy Policy.",
     "download_data_hint": "You can request a copy of all data associated with your account.",
     "delete_data": "Data Deletion Request",
-    "delete_data_hint": "To permanently delete your account and all your data, you can use the account deletion section in Security settings.",
-    "download_coming_soon": "Data export is coming soon. For now, use Security settings for account deletion requests."
+    "delete_data_hint": "To permanently delete your account and all your data, you can use the account deletion section in Security settings."
   },
   "settings_account_status": {
     "title": "Account Status",
@@ -1325,30 +1317,5 @@
     "error": "Upload failed",
     "preparing": "Preparing...",
     "retry": "Retry"
-  },
-  "legal_documents": {
-    "terms_title": "Terms of Service",
-    "privacy_title": "Privacy Policy",
-    "cookies_title": "Cookie Policy",
-    "terms_body": "Welcome to Asemos. By creating an account or using the app, you agree to these Terms of Service.\n\n1. Service\nAsemos helps you discover venues, share experiences, match with other users at venues, and message people you connect with.\n\n2. Account\nYou must provide accurate information, keep your login credentials secure, and be at least 14 years old (or the minimum age required in your country). You are responsible for activity on your account.\n\n3. Acceptable use\nDo not harass others, post illegal content, impersonate people, spam, scrape the service, or attempt to bypass security or moderation tools.\n\n4. Content\nYou retain ownership of content you post. You grant Asemos a limited license to host, display, and process that content solely to operate the service. We may remove content that violates our rules or applicable law.\n\n5. Matching and messaging\nMatching features depend on venue presence and profile settings. We do not guarantee matches or responses. Block and report tools are available for your safety.\n\n6. Venues\nVenue information may come from users or third-party sources. Hours, menus, and availability may change without notice.\n\n7. Suspension\nWe may suspend or terminate accounts that violate these terms or pose a risk to the community.\n\n8. Disclaimer\nThe service is provided \"as is\" without warranties to the extent permitted by law.\n\n9. Changes\nWe may update these terms. Continued use after notice means you accept the updated terms.\n\n10. Contact\nFor questions: support@asemos.com",
-    "privacy_body": "Asemos respects your privacy. This policy explains what we collect and why.\n\n1. Data we collect\n• Account data: email, name, username, birth date, profile photos\n• Usage data: app interactions, device type, crash logs\n• Location data: when you enable location for maps, check-in, or matching at venues\n• Content you create: posts, stories, comments, messages\n\n2. How we use data\n• Provide and improve the service\n• Personalize recommendations and venue discovery\n• Safety, fraud prevention, and moderation\n• Legal compliance and support requests\n\n3. Sharing\nWe do not sell your personal data. We share data only with service providers under contract (hosting, analytics, push notifications), when required by law, or to protect users.\n\n4. Retention\nWe keep data while your account is active and for a limited period afterward as required for legal, security, or backup purposes.\n\n5. Your rights\nDepending on your region, you may request access, correction, deletion, or restriction of processing. Use in-app settings or contact support@asemos.com.\n\n6. Security\nWe use technical and organizational measures to protect data. No method of transmission is 100% secure.\n\n7. Children\nThe service is not intended for users below the minimum age stated in our terms.\n\n8. International transfers\nData may be processed in countries where our providers operate, with appropriate safeguards where required.\n\n9. Updates\nWe will post material changes in the app or by email where appropriate.",
-    "cookies_body": "Asemos uses cookies and similar technologies on our website and in the app where applicable.\n\n1. Essential\nRequired for login sessions, security, and core functionality.\n\n2. Preferences\nRemember language and display settings.\n\n3. Analytics\nHelp us understand usage patterns to improve performance and features. Where required, we ask for consent.\n\n4. Marketing\nOnly used if you opt in to promotional communications or partner campaigns.\n\nYou can manage cookies in your browser settings. In the mobile app, related identifiers may be controlled through device privacy settings."
-  },
-  "highlights": {
-    "add_title": "Add to highlights",
-    "edit_title": "Edit highlight",
-    "edit_cover": "Edit cover",
-    "name_label": "Name",
-    "name_placeholder": "Highlights",
-    "tab_selected": "Selected",
-    "tab_all_posts": "Posts",
-    "no_selection": "No posts selected",
-    "empty_posts_title": "No posts found",
-    "empty_posts_desc": "Your photo and reel posts appear here when you create a highlight."
-  },
-  "places": {
-    "list_title": "Places",
-    "dev_only_list": "The places list shows sample data in development mode. Use Explore on the map in the app.",
-    "empty": "No places found"
   }
 }

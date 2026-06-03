@@ -13,9 +13,11 @@ import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { createTextStyle, spacing } from "@/src/constants/design";
 import { lightImpact, success } from "@/src/utils/haptics";
 import { useSettingsStore } from "@/src/store/useSettingsStore";
+import { useTranslation } from "react-i18next";
 
 export default function LocationSettingsScreen() {
   const { colors, isDark } = useTheme();
+  const { t } = useTranslation();
   const router = useRouter();
   const insets = useSafeAreaInsets();
 
@@ -48,23 +50,23 @@ export default function LocationSettingsScreen() {
         success();
       } else {
         Alert.alert(
-          "İzin Gerekli",
-          "Konum özelliklerini kullanmak için ayarlardan konum iznini etkinleştirin.",
+          t("common.error", "İzin Gerekli"),
+          t("settings_location.enable_desc", "Konum özelliklerini kullanmak için ayarlardan konum iznini etkinleştirin."),
           [
-            { text: "Vazgeç", style: "cancel" },
-            { text: "Ayarları Aç", onPress: () => Linking.openSettings() },
+            { text: t("common.cancel", "Vazgeç"), style: "cancel" },
+            { text: t("common.settings", "Ayarları Aç"), onPress: () => Linking.openSettings() },
           ]
         );
       }
     } catch {
-      Alert.alert("Hata", "Konum izni kontrol edilemedi.");
+      Alert.alert(t("common.error", "Hata"), t("settings_location.error_check", "Konum izni kontrol edilemedi."));
     }
   };
 
-  const statusLabel = permStatus === "granted" ? "İzin Verildi ✅" :
-                      permStatus === "denied" ? "Reddedildi ❌" :
-                      permStatus === "checking" ? "Kontrol ediliyor..." :
-                      "Kullanılamıyor";
+  const statusLabel = permStatus === "granted" ? `${t("settings_location.granted", "İzin Verildi")} ✅` :
+                      permStatus === "denied" ? `${t("settings_location.denied", "Reddedildi")} ❌` :
+                      permStatus === "checking" ? t("settings_location.checking", "Kontrol ediliyor...") :
+                      t("settings_location.unavailable", "Kullanılamıyor");
 
   const statusColor = permStatus === "granted" ? "#4ECE8D" :
                       permStatus === "denied" ? "#FF4757" : colors.text.tertiary;
@@ -75,7 +77,7 @@ export default function LocationSettingsScreen() {
         <TouchableOpacity onPress={() => { lightImpact(); router.back(); }} hitSlop={12} style={styles.backBtn}>
           <IconSymbol name="chevron.left" size={24} color={colors.text.primary} />
         </TouchableOpacity>
-        <Text style={[createTextStyle("title", colors.text.primary), styles.title]}>Konum İzinleri</Text>
+        <Text style={[createTextStyle("title", colors.text.primary), styles.title]}>{t("settings_location.title", "Konum İzinleri")}</Text>
         <View style={styles.backBtn} />
       </View>
 
@@ -90,7 +92,7 @@ export default function LocationSettingsScreen() {
             <IconSymbol name={permStatus === "granted" ? "location.fill" : "location.slash"} size={22} color="#fff" />
           </View>
           <View style={styles.statusInfo}>
-            <Text style={[styles.statusTitle, { color: colors.text.primary }]}>Konum Erişimi</Text>
+            <Text style={[styles.statusTitle, { color: colors.text.primary }]}>{t("settings_location.access", "Konum Erişimi")}</Text>
             <Text style={[styles.statusValue, { color: statusColor }]}>{statusLabel}</Text>
           </View>
           {permStatus !== "granted" && (
@@ -99,29 +101,29 @@ export default function LocationSettingsScreen() {
               onPress={requestPermission}
               activeOpacity={0.7}
             >
-              <Text style={styles.grantBtnText}>İzin Ver</Text>
+              <Text style={styles.grantBtnText}>{t("settings_location.grant", "İzin Ver")}</Text>
             </TouchableOpacity>
           )}
         </View>
 
-        <Section title="Konum Tercihleri">
+        <Section title={t("settings_location.preferences", "Konum Tercihleri")}>
           <SettingsRow
-            label="Paylaşımlarda konum bilgisi ekle"
+            label={t("settings_location.add_to_posts", "Paylaşımlarda konum bilgisi ekle")}
             value={includeLocation}
             switch
             onValueChange={(v: boolean) => { setIncludeLocation(v); success(); }}
             icon="mappin.and.ellipse"
           />
           <Text style={[styles.hint, { color: colors.text.tertiary }]}>
-            Gönderi ve hikaye paylaşırken konumun otomatik olarak eklenmesini sağlar.
+            {t("settings_location.add_to_posts_desc", "Gönderi ve hikaye paylaşırken konumun otomatik olarak eklenmesini sağlar.")}
           </Text>
         </Section>
 
-        <Section title="Harita Kullanımı">
-          <SettingsRow label="Yakındaki mekanlar" value={permStatus === "granted" ? "Aktif" : "Kapalı"} icon="building.2" />
-          <SettingsRow label="Konum geçmişi" value="Cihazda saklanır" icon="clock.arrow.circlepath" />
+        <Section title={t("settings_location.map_usage", "Harita Kullanımı")}>
+          <SettingsRow label={t("settings_location.nearby_places", "Yakındaki mekanlar")} value={permStatus === "granted" ? t("settings_location.active", "Aktif") : t("common.off", "Kapalı")} icon="building.2" />
+          <SettingsRow label={t("settings_location.location_history", "Konum geçmişi")} value={t("settings_location.stored_on_device", "Cihazda saklanır")} icon="clock.arrow.circlepath" />
           <Text style={[styles.hint, { color: colors.text.tertiary }]}>
-            Konum verileriniz yalnızca cihazınızda saklanır ve hiçbir zaman üçüncü taraflarla paylaşılmaz.
+            {t("settings_location.history_desc", "Konum verileriniz yalnızca cihazınızda saklanır ve hiçbir zaman üçüncü taraflarla paylaşılmaz.")}
           </Text>
         </Section>
 
@@ -133,7 +135,7 @@ export default function LocationSettingsScreen() {
           >
             <IconSymbol name="gear" size={18} color={colors.accent.primary} />
             <Text style={[styles.settingsLinkText, { color: colors.accent.primary }]}>
-              Sistem Konum Ayarlarını Aç
+              {t("settings_location.open_settings", "Sistem Konum Ayarlarını Aç")}
             </Text>
           </TouchableOpacity>
         )}

@@ -12,6 +12,7 @@ import type { UserProfile } from "@/src/services/userService";
 import { handleApiError } from "@/src/utils/errorHandler";
 import { useAuthStore } from "@/src/store/useAuthStore";
 import { useTranslation } from "react-i18next";
+import debounce from "lodash/debounce";
 
 export default function NetworkScreen() {
     const { colors } = useTheme();
@@ -81,36 +82,53 @@ export default function NetworkScreen() {
         }
     }, [page, fetchUsers]);
 
-    const handleToggleFollow = async (userId: number, currentIndex: number) => {
-        lightImpact();
-        // Optimistic update
-        setUsers(prev => {
-            const next = [...prev];
-            next[currentIndex].is_following = !next[currentIndex].is_following;
-            return next;
-        });
+    // Dummygram: Prevent spam clicks with debounce while keeping UI optimistic
+    const handleToggleFollow = useCallback(
+        debounce(async (userId: number, currentIndex: number) => {
+            lightImpact();
+            // Optimistic update — save previous state for revert
+            setUsers(prev => {
+                const next = [...prev];
+                next[currentIndex] = {
+                    ...next[currentIndex],
+                    is_following: !next[currentIndex].is_following,
+                    follow_status: next[currentIndex].is_following ? null : 'accepted',
+                };
+                return next;
+            });
 
-        try {
-            const res = await toggleFollow(userId);
-            setUsers(prev => {
-                const next = [...prev];
-                next[currentIndex].is_following = res.following;
-                return next;
-            });
-        } catch (e) {
-            // Revert on error
-            setUsers(prev => {
-                const next = [...prev];
-                next[currentIndex].is_following = !next[currentIndex].is_following;
-                return next;
-            });
-            handleApiError(e);
-        }
-    };
+            try {
+                const res = await toggleFollow(userId);
+                setUsers(prev => {
+                    const next = [...prev];
+                    next[currentIndex] = {
+                        ...next[currentIndex],
+                        is_following: res.status === 'accepted',
+                        follow_status: res.status as 'pending' | 'accepted' | null,
+                    };
+                    return next;
+                });
+            } catch (e) {
+                // Revert on error
+                setUsers(prev => {
+                    const next = [...prev];
+                    next[currentIndex] = {
+                        ...next[currentIndex],
+                        is_following: !next[currentIndex].is_following,
+                        follow_status: next[currentIndex].is_following ? null : 'accepted',
+                    };
+                    return next;
+                });
+                handleApiError(e);
+            }
+        }, 500, { leading: true, trailing: false }),
+        []
+    );
 
     const renderItem = ({ item, index }: { item: UserProfile; index: number }) => {
         const isSelf = authUser?.id === item.id;
         const displayName = item.first_name || item.username || t("network.user_fallback");
+        const isPending = item.follow_status === 'pending';
 
         return (
             <TouchableOpacity
@@ -147,7 +165,7 @@ export default function NetworkScreen() {
                     <TouchableOpacity
                         style={[
                             styles.followBtn,
-                            item.is_following
+                            item.is_following || isPending
                                 ? { backgroundColor: colors.surface.elevated, borderWidth: 1, borderColor: colors.surface.border }
                                 : { backgroundColor: colors.text.primary, borderWidth: 1, borderColor: colors.text.primary }
                         ]}
@@ -157,10 +175,14 @@ export default function NetworkScreen() {
                         <Text
                             style={[
                                 styles.followBtnText,
-                                { color: item.is_following ? colors.text.primary : colors.background.primary }
+                                { color: item.is_following || isPending ? colors.text.primary : colors.background.primary }
                             ]}
                         >
-                            {item.is_following ? t("network.following_btn") : t("network.follow")}
+                            {item.is_following
+                                ? t("network.following_btn")
+                                : isPending
+                                    ? t("profile.requested_btn")
+                                    : t("network.follow")}
                         </Text>
                     </TouchableOpacity>
                 )}

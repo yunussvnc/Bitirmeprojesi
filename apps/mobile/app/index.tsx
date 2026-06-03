@@ -7,6 +7,8 @@ export default function Index() {
 
   if (!hydrated) return null;
 
+  // Token varsa _layout.tsx'deki useProtectedRoute süresi dolmuşsa logout edecek
+  // ve tekrar buraya düşecek. Token yoksa login'e yönlendir.
   if (token) return <Redirect href="/(tabs)" />;
   return <Redirect href="/login" />;
 }

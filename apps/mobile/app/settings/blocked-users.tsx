@@ -13,6 +13,7 @@ import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { createTextStyle, spacing } from "@/src/constants/design";
 import { lightImpact, success } from "@/src/utils/haptics";
 import { getBlockedUsers, toggleBlockUser } from "@/src/services/moderationService";
+import { useTranslation } from "react-i18next";
 
 type BlockedUser = {
   id: number;
@@ -23,6 +24,7 @@ type BlockedUser = {
 
 export default function BlockedUsersScreen() {
   const { colors } = useTheme();
+  const { t } = useTranslation();
   const router = useRouter();
   const insets = useSafeAreaInsets();
   const [users, setUsers] = useState<BlockedUser[]>([]);
@@ -41,10 +43,10 @@ export default function BlockedUsersScreen() {
 
   const handleUnblock = (user: BlockedUser) => {
     lightImpact();
-    Alert.alert("Engeli Kaldır", `${user.username || user.first_name || "Bu kullanıcı"} engelinden çıkarılsın mı?`, [
-      { text: "Vazgeç", style: "cancel" },
+    Alert.alert(t("settings_blocked.unblock_confirm_title", "Engeli Kaldır"), t("settings_blocked.unblock_confirm_desc", `${user.username || user.first_name || "Bu kullanıcı"} engelinden çıkarılsın mı?`), [
+      { text: t("settings_blocked.cancel", "Vazgeç"), style: "cancel" },
       {
-        text: "Engeli Kaldır", style: "destructive", onPress: async () => {
+        text: t("settings_blocked.unblock", "Engeli Kaldır"), style: "destructive", onPress: async () => {
           try {
             await toggleBlockUser(user.id);
             success();
@@ -62,7 +64,7 @@ export default function BlockedUsersScreen() {
           <IconSymbol name="chevron.left" size={24} color={colors.text.primary} />
         </TouchableOpacity>
         <Text style={[createTextStyle("title", colors.text.primary), styles.headerTitle]}>
-          Engellenenler
+          {t("settings_blocked.title", "Engellenenler")}
         </Text>
         <View style={styles.backBtn} />
       </View>
@@ -72,7 +74,7 @@ export default function BlockedUsersScreen() {
       ) : users.length === 0 ? (
         <View style={styles.emptyContainer}>
           <IconSymbol name="checkmark.shield" size={48} color={colors.text.tertiary} />
-          <Text style={[styles.emptyText, { color: colors.text.tertiary }]}>Engellenen kullanıcı yok</Text>
+          <Text style={[styles.emptyText, { color: colors.text.tertiary }]}>{t("settings_blocked.no_blocked", "Engellenen kullanıcı yok")}</Text>
         </View>
       ) : (
         <FlatList
@@ -87,7 +89,7 @@ export default function BlockedUsersScreen() {
               />
               <View style={styles.rowInfo}>
                 <Text style={[styles.username, { color: colors.text.primary }]}>
-                  {item.username || item.first_name || `Kullanıcı #${item.id}`}
+                  {item.username || item.first_name || `${t("settings_blocked.user", "Kullanıcı")} #${item.id}`}
                 </Text>
               </View>
               <TouchableOpacity
@@ -95,7 +97,7 @@ export default function BlockedUsersScreen() {
                 onPress={() => handleUnblock(item)}
                 activeOpacity={0.7}
               >
-                <Text style={[styles.unblockText, { color: colors.semantic.error }]}>Kaldır</Text>
+                <Text style={[styles.unblockText, { color: colors.semantic.error }]}>{t("settings_blocked.unblock", "Kaldır")}</Text>
               </TouchableOpacity>
             </View>
           )}

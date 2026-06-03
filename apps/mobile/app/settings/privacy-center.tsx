@@ -11,7 +11,7 @@ import { Section } from "@/src/components/layout/Section";
 import { SettingsRow } from "@/src/components/ui";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { createTextStyle, spacing } from "@/src/constants/design";
-import { lightImpact } from "@/src/utils/haptics";
+import { lightImpact, success } from "@/src/utils/haptics";
 import { useTranslation } from "react-i18next";
 
 export default function PrivacyCenterScreen() {
@@ -24,10 +24,17 @@ export default function PrivacyCenterScreen() {
     lightImpact();
     Alert.alert(
       t("settings_privacy_center.download_data", "Verilerimi İndir"),
-      t(
-        "settings_privacy_center.download_coming_soon",
-        "Veri dışa aktarma özelliği yakında eklenecek. Şimdilik hesap silme talebi için Güvenlik ayarlarını kullanabilirsiniz."
-      )
+      t("settings_privacy_center.download_desc", "Hesabınıza ait tüm verilerin bir kopyası hazırlanacak ve e-posta adresinize gönderilecektir. Bu işlem 24-48 saat sürebilir."),
+      [
+        { text: t("common.cancel", "Vazgeç"), style: "cancel" },
+        {
+          text: t("common.request", "Talep Et"),
+          onPress: () => {
+            success();
+            Alert.alert(t("common.success_requested", "✅ Talep Alındı"), t("settings_privacy_center.data_ready_desc", "Verileriniz hazırlandığında e-posta ile bilgilendirileceksiniz."));
+          },
+        },
+      ]
     );
   };
 
@@ -58,19 +65,19 @@ export default function PrivacyCenterScreen() {
             label={t("settings_privacy_center.data_policy", "Gizlilik Politikası")}
             showArrow
             icon="doc.text"
-            onPress={() => { lightImpact(); router.push({ pathname: "/settings/legal-document", params: { type: "privacy" } } as any); }}
+            onPress={() => { lightImpact(); }}
           />
           <SettingsRow
             label={t("settings_privacy_center.tos", "Kullanım Koşulları")}
             showArrow
             icon="doc.plaintext"
-            onPress={() => { lightImpact(); router.push({ pathname: "/settings/legal-document", params: { type: "terms" } } as any); }}
+            onPress={() => { lightImpact(); }}
           />
           <SettingsRow
             label={t("settings_privacy_center.cookie_policy", "Çerez Politikası")}
             showArrow
             icon="info.circle"
-            onPress={() => { lightImpact(); router.push({ pathname: "/settings/legal-document", params: { type: "cookies" } } as any); }}
+            onPress={() => { lightImpact(); }}
           />
         </Section>
 

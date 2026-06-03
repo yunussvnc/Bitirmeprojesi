@@ -13,7 +13,6 @@ import { getUserProfile, getUserStats, getUserPosts, type UserProfile, type User
 import { handleApiError } from "@/src/utils/errorHandler";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { Image } from "expo-image";
-import { CreateBottomSheet } from "./components/CreateBottomSheet";
 import { useTranslation } from "react-i18next";
 
 const GRID_GAP = 14;
@@ -33,8 +32,12 @@ export default function ProfileScreen() {
   const [stats, setStats] = useState<UserStats | null>(null);
   const [posts, setPosts] = useState<{ id: number; place_id?: number; thumbnail?: string; media_type?: string }[]>([]);
   const [refreshing, setRefreshing] = useState(false);
-  const [createSheetVisible, setCreateSheetVisible] = useState(false);
   const [activeTab, setActiveTab] = useState<"posts" | "tagged">("posts");
+  const deletedPostIds = useAppStore((s) => s.deletedPostIds);
+  const visiblePosts = React.useMemo(() => posts.filter((p) => !deletedPostIds.includes(p.id)), [posts, deletedPostIds]);
+
+  const [initialLoading, setInitialLoading] = useState(true);
+
   const { width: screenWidth } = useWindowDimensions();
   const cellSize = (screenWidth - 32 - GRID_GAP * (GRID_COLS - 1)) / GRID_COLS;
 
@@ -49,15 +52,23 @@ export default function ProfileScreen() {
       setProfile(p);
       setStats(s);
       setPosts(
-        postsRes.items.map((post) => ({
-          id: post.id,
-          place_id: post.place_id,
-          thumbnail: post.media?.[0]?.thumbnail_url || post.media?.[0]?.media_url,
-          media_type: post.media?.[0]?.media_type,
-        }))
+        postsRes.items.map((post) => {
+          const sortedMedia = [...(post.media || [])].sort(
+            (a, b) => (a.order_index ?? 0) - (b.order_index ?? 0)
+          );
+          const firstMedia = sortedMedia[0];
+          return {
+            id: post.id,
+            place_id: post.place_id,
+            thumbnail: firstMedia?.thumbnail_url || firstMedia?.media_url,
+            media_type: firstMedia?.media_type,
+          };
+        })
       );
     } catch (e) {
       handleApiError(e);
+    } finally {
+      setInitialLoading(false);
     }
   }, [authUser?.id]);
 
@@ -86,7 +97,7 @@ export default function ProfileScreen() {
     posts: stats?.post_count ?? 0,
   };
 
-  if (!authUser) {
+  if (!authUser || initialLoading) {
     return (
       <Screen withTabBar>
         <LoadingState message={t('profile.loading')} />
@@ -94,14 +105,20 @@ export default function ProfileScreen() {
     );
   }
 
-  const displayName = authUser.first_name || authUser.username || authUser.email || t('profile.user');
+  const fullName = [profile?.first_name || authUser.first_name, profile?.last_name || (authUser as any).last_name].filter(Boolean).join(" ");
+  const displayName = fullName || authUser.username || authUser.email || t('profile.user');
   const username = authUser.username || authUser.email || "";
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background.primary }]}>
       {/* ── Moden Header ── */}
       <View style={[styles.header, { paddingTop: insets.top + 16 }]}>
-        <Text style={[styles.headerTitle, { color: colors.text.primary }]}>{t('profile.title')}</Text>
+        {/* Ortadaki Username (Absolute) */}
+        <View pointerEvents="none" style={[StyleSheet.absoluteFill, { alignItems: 'center', justifyContent: 'flex-end', paddingBottom: 10, zIndex: 0 }]}>
+          <Text style={{ color: colors.text.primary, fontSize: 16, fontWeight: "600" }}>{username}</Text>
+        </View>
+
+        <Text style={[styles.headerTitle, { color: colors.text.primary, zIndex: 1 }]}>{t('profile.title', 'Profil')}</Text>
 
         <View style={styles.headerRight}>
           <TouchableOpacity
@@ -110,13 +127,6 @@ export default function ProfileScreen() {
             onPress={() => { lightImpact(); router.push("/search-users" as any); }}
           >
             <IconSymbol name="magnifyingglass" size={20} color={colors.text.primary} />
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.headerBtn, { backgroundColor: colors.surface.elevated }]}
-            activeOpacity={0.7}
-            onPress={() => { lightImpact(); setCreateSheetVisible(true); }}
-          >
-            <IconSymbol name="plus" size={20} color={colors.text.primary} />
           </TouchableOpacity>
           <TouchableOpacity
             style={[styles.headerBtn, { backgroundColor: colors.surface.elevated }]}
@@ -148,10 +158,6 @@ export default function ProfileScreen() {
 
           <View style={styles.heroInfo}>
             <Text style={[styles.heroName, { color: colors.text.primary }]}>{displayName}</Text>
-            <View style={[styles.usernamePill, { backgroundColor: colors.surface.elevated }]}>
-              <Text style={[styles.heroUsername, { color: colors.text.secondary }]}>@{username}</Text>
-            </View>
-
             {profile?.bio ? (
               <Text style={[styles.bioText, { color: colors.text.secondary }]}>{profile.bio}</Text>
             ) : null}
@@ -252,9 +258,9 @@ export default function ProfileScreen() {
 
         {/* ── Content Grid ── */}
         {activeTab === "posts" && (
-          posts.length > 0 ? (
+          visiblePosts.length > 0 ? (
             <View style={styles.grid}>
-              {posts.map((item, idx) => (
+              {visiblePosts.map((item, idx) => (
                 <TouchableOpacity
                   key={item.id}
                   style={[
@@ -269,7 +275,7 @@ export default function ProfileScreen() {
                   ]}
                   onPress={() => {
                     lightImpact();
-                    if (item.place_id) router.push(`/place/${item.place_id}` as any);
+                    router.push(`/p/post/${item.id}` as any);
                   }}
                   activeOpacity={0.9}
                 >
@@ -327,8 +333,6 @@ export default function ProfileScreen() {
         )}
 
       </ScrollView>
-
-      <CreateBottomSheet visible={createSheetVisible} onClose={() => setCreateSheetVisible(false)} />
     </View>
   );
 }

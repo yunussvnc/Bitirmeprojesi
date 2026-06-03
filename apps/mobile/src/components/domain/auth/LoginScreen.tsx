@@ -19,9 +19,9 @@ import {
   TouchableOpacity,
   Animated,
   Dimensions,
+  Image,
   Alert,
   Keyboard,
-  TouchableWithoutFeedback,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { BlurView } from 'expo-blur';
@@ -31,18 +31,30 @@ import { IconSymbol } from '@/src/components/ui/icon-symbol';
 import { handleApiError } from '@/src/utils/errorHandler';
 import { useTranslation } from 'react-i18next';
 import { lightImpact, success } from '@/src/utils/haptics';
+import { getAllPlaces } from '@/src/services/mekanService';
 import { loginUser, googleLogin, appleLogin } from '@/src/services/authService';
-import { AuthBackgroundCarousel } from '@/src/components/domain/auth/AuthBackgroundCarousel';
 import { useAuthStore } from '@/src/store/useAuthStore';
 import { API_BASE_URL } from '@/src/constants/api';
 import * as AppleAuthentication from 'expo-apple-authentication';
 import * as WebBrowser from 'expo-web-browser';
 import * as Google from 'expo-auth-session/providers/google';
-import { googleAuthRequestConfig, hasGoogleClientIdForPlatform, getGoogleClientIdConfigError } from '@/src/config/socialAuth';
+import * as AuthSession from 'expo-auth-session';
 
 WebBrowser.maybeCompleteAuthSession();
 
 const { width, height } = Dimensions.get('window');
+
+// API yoksa veya fotoğraf yoksa kullanılacak aydınlık ve kaliteli mekan görselleri
+const FALLBACK_PLACE_IMAGES = [
+  'https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=1200',
+  'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=1200', // Aydınlık kahveci
+  'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1200', // Aydınlık bir kafe içi
+  'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200',
+  'https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=1200',
+  'https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1200', // Aydınlık restoran
+];
+
+const CAROUSEL_INTERVAL_MS = 4500;
 
 export default function LoginScreen() {
   const insets = useSafeAreaInsets();
@@ -54,39 +66,21 @@ export default function LoginScreen() {
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState<Record<string, string | undefined>>({});
   const isSubmittingRef = useRef(false);
-  const [isAppleAvailable, setIsAppleAvailable] = useState(false);
 
   // Google Auth Setup
-  const [request, response, promptAsync] = Google.useAuthRequest(googleAuthRequestConfig);
+  const redirectUri = AuthSession.makeRedirectUri({ scheme: 'asemos' });
 
-  useEffect(() => {
-    let mounted = true;
-    if (Platform.OS !== 'ios') {
-      setIsAppleAvailable(false);
-      return;
-    }
-
-    AppleAuthentication.isAvailableAsync()
-      .then((available) => {
-        if (mounted) setIsAppleAvailable(available);
-      })
-      .catch(() => {
-        if (mounted) setIsAppleAvailable(false);
-      });
-
-    return () => {
-      mounted = false;
-    };
-  }, []);
+  const [request, response, promptAsync] = Google.useAuthRequest({
+    clientId: '398883081062-uqa0hbpbo6nhjcbigltircbbg3ngr7oi.apps.googleusercontent.com',
+    iosClientId: '398883081062-uqa0hbpbo6nhjcbigltircbbg3ngr7oi.apps.googleusercontent.com',
+    androidClientId: '398883081062-uqa0hbpbo6nhjcbigltircbbg3ngr7oi.apps.googleusercontent.com',
+    scopes: ['openid', 'profile', 'email'],
+    redirectUri,
+  });
 
   useEffect(() => {
     if (response?.type === 'success' && response.authentication) {
-      const token = response.authentication.idToken;
-      if (!token) {
-        Alert.alert(t('auth.login_error_title'), 'Google kimlik tokenı alınamadı. Google client ID ve OpenID ayarlarını kontrol edin.');
-        return;
-      }
-      handleGoogleSuccess(token);
+      handleGoogleSuccess(response.authentication.idToken || response.authentication.accessToken);
     }
   }, [response]);
 
@@ -125,11 +119,6 @@ export default function LoginScreen() {
 
   const signInWithApple = async () => {
     try {
-      if (Platform.OS !== 'ios' || !isAppleAvailable) {
-        Alert.alert(t('auth.login_error_title'), 'Apple ile giriş yalnızca desteklenen iOS cihazlarda kullanılabilir.');
-        return;
-      }
-
       const credential = await AppleAuthentication.signInAsync({
         requestedScopes: [
           AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
@@ -244,25 +233,60 @@ export default function LoginScreen() {
     if (provider === 'Apple') {
       signInWithApple();
     } else if (provider === 'Google') {
-      if (!hasGoogleClientIdForPlatform()) {
-        Alert.alert(t('auth.login_error_title'), getGoogleClientIdConfigError());
-        return;
-      }
-      if (!request) {
-        Alert.alert(t('auth.login_error_title'), 'Google giriş isteği hazırlanamadı. Lütfen yapılandırmayı kontrol edin.');
+      // Expo Go'da Google Sign-In desteklenmiyor (Google'ın yeni güvenlik kuralları).
+      // Production build (APK/IPA) alındığında sorunsuz çalışır.
+      if (__DEV__ && !request) {
+        Alert.alert(
+          'Google Giriş',
+          'Google ile giriş şu an geliştirme ortamında (Expo Go) kullanılamıyor. Lütfen e-posta/şifre ile giriş yapın veya production build alın.',
+          [{ text: 'Tamam' }]
+        );
         return;
       }
       promptAsync();
     }
-  }, [promptAsync, request, t, isAppleAvailable]);
+  }, [promptAsync, request]);
 
   const clearFieldError = useCallback((field: string) => {
     setErrors((prev) => (prev[field] ? { ...prev, [field]: undefined } : prev));
   }, []);
 
+  // --- Arka plan görsel carousel ---
+  const [imgIndex, setImgIndex] = useState(0);
+  const fadeAnim = useRef(new Animated.Value(1)).current;
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // Mevcut görseli fade-out yap
+      Animated.timing(fadeAnim, {
+        toValue: 0,
+        duration: 800,
+        useNativeDriver: true,
+      }).start(() => {
+        // Sonraki görsele geç
+        setImgIndex((prev) => (prev + 1) % FALLBACK_PLACE_IMAGES.length);
+        // Yeni görseli fade-in yap
+        Animated.timing(fadeAnim, {
+          toValue: 1,
+          duration: 800,
+          useNativeDriver: true,
+        }).start();
+      });
+    }, CAROUSEL_INTERVAL_MS);
+
+    return () => clearInterval(interval);
+  }, [fadeAnim]);
+
   return (
     <View style={styles.container}>
-      <AuthBackgroundCarousel />
+      {/* Arka plan görseli carousel — crossfade efekti */}
+      <View style={StyleSheet.absoluteFill}>
+        <Animated.Image
+          source={{ uri: FALLBACK_PLACE_IMAGES[imgIndex] }}
+          style={[StyleSheet.absoluteFillObject, { opacity: fadeAnim }]}
+          resizeMode="cover"
+        />
+      </View>
 
       {/* Koyu gradient overlay – metin ve form okunabilir olsun */}
       <LinearGradient
@@ -283,7 +307,6 @@ export default function LoginScreen() {
             keyboardShouldPersistTaps="handled"
             showsVerticalScrollIndicator={false}
           >
-            <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
               {/* Make sure this outer View stretches to fill the ScrollView content */}
               <View style={{ flex: 1 }}>
                 <View style={styles.content} pointerEvents="box-none">
@@ -383,58 +406,54 @@ export default function LoginScreen() {
                           {t('auth.login')}
                         </Button>
 
-                        {roleType === 'user' && (
-                          <>
-                            <View style={styles.divider}>
-                              <View style={styles.dividerLine} />
-                              <Text style={styles.dividerLabel}>{t('auth.or')}</Text>
-                              <View style={styles.dividerLine} />
-                            </View>
+                        <View style={styles.divider}>
+                          <View style={styles.dividerLine} />
+                          <Text style={styles.dividerLabel}>{t('auth.or')}</Text>
+                          <View style={styles.dividerLine} />
+                        </View>
 
-                            <View style={styles.socialRow}>
-                              <TouchableOpacity
-                                onPress={() => handleSocialLogin('Google')}
-                                style={styles.socialBtnGoogle}
-                              >
-                                <Text style={styles.socialIconG}>G</Text>
-                                <Text style={styles.socialBtnTextGoogle}>{t('auth.google')}</Text>
-                              </TouchableOpacity>
-                              {isAppleAvailable && (
-                                <TouchableOpacity
-                                  onPress={() => handleSocialLogin('Apple')}
-                                  style={styles.socialBtnApple}
-                                >
-                                  <IconSymbol name="apple.logo" size={20} color="#fff" />
-                                  <Text style={styles.socialBtnTextWhite}>{t('auth.apple')}</Text>
-                                </TouchableOpacity>
-                              )}
-                            </View>
-                          </>
-                        )}
+                        <View style={styles.socialRow}>
+                          <TouchableOpacity
+                            onPress={() => handleSocialLogin('Google')}
+                            style={styles.socialBtnGoogle}
+                          >
+                            <Text style={styles.socialIconG}>G</Text>
+                            <Text style={styles.socialBtnTextGoogle}>{t('auth.google')}</Text>
+                          </TouchableOpacity>
+                          <TouchableOpacity
+                            onPress={() => handleSocialLogin('Apple')}
+                            style={styles.socialBtnApple}
+                          >
+                            <IconSymbol name="apple.logo" size={20} color="#fff" />
+                            <Text style={styles.socialBtnTextWhite}>{t('auth.apple')}</Text>
+                          </TouchableOpacity>
+                        </View>
+
+                        {/* Kayıt ol linki — Google ve Apple'ın hemen altında */}
+                        <TouchableOpacity
+                          style={styles.registerRow}
+                          onPress={() => {
+                            Keyboard.dismiss();
+                            lightImpact();
+                            router.push({ pathname: '/register', params: { roleType } });
+                          }}
+                          activeOpacity={0.8}
+                        >
+                          <Text style={styles.footerLabel}>{t('auth.no_account')}</Text>
+                          <Text style={styles.footerLink}>{t('auth.register')}</Text>
+                        </TouchableOpacity>
+
                       </View>
                     </BlurView>
                   </View>
                 </View>
               </View>
-            </TouchableWithoutFeedback>
           </ScrollView>
 
-          {/* Footer formun en altında */}
-          <TouchableOpacity
-            style={[styles.footerStatic, { paddingBottom: Math.max(16, insets.bottom + 8) }]}
-            onPress={() => {
-              Keyboard.dismiss();
-              lightImpact();
-              router.push('/register');
-            }}
-            activeOpacity={0.8}
-          >
-            <Text style={styles.footerLabel}>{t('auth.no_account')}</Text>
-            <Text style={styles.footerLink}>{t('auth.register')}</Text>
-          </TouchableOpacity>
         </KeyboardAvoidingView>
-      </SafeAreaView >
-    </View >
+      </SafeAreaView>
+    </View>
+
   );
 }
 
@@ -466,8 +485,9 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   backgroundImage: {
-    width,
-    height,
+    // Kullanılmıyor — absoluteFillObject kullanılıyor
+    width: '100%' as any,
+    height: '100%' as any,
   },
   header: {
     alignItems: 'center',
@@ -512,7 +532,7 @@ const styles = StyleSheet.create({
   card: {
     width: '100%',
     borderRadius: 28,
-    overflow: 'visible',
+    overflow: 'hidden',
     marginTop: 20,
     marginBottom: 12,
     borderWidth: 1,
@@ -644,6 +664,13 @@ const styles = StyleSheet.create({
     paddingTop: 16,
     paddingHorizontal: 24,
     backgroundColor: 'transparent',
+  },
+  registerRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: 20,
+    gap: 4,
   },
   footerLabel: {
     fontSize: 16,

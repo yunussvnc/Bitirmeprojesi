@@ -31,10 +31,14 @@ import {
   type UserStats,
 } from "@/src/services/userService";
 import { useAuthStore } from "@/src/store/useAuthStore";
+import { useNotificationStore } from "@/src/store/useNotificationStore";
 import { handleApiError } from "@/src/utils/errorHandler";
 import { lightImpact, success } from "@/src/utils/haptics";
 import { toggleBlockUser, createReport } from "@/src/services/moderationService";
+import { acceptFollowRequest, rejectFollowRequest } from '@/src/services/userService';
+import { openConversation } from '@/src/services/messageService';
 import { useTranslation } from 'react-i18next';
+import debounce from 'lodash/debounce';
 
 const GRID_GAP = 14;
 const GRID_COLS = 2;
@@ -55,6 +59,7 @@ export default function UserProfileScreen() {
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
   const [followLoading, setFollowLoading] = useState(false);
+  const [messageLoading, setMessageLoading] = useState(false);
   const [selectedPost, setSelectedPost] = useState<Post | null>(null);
   const [commentPostId, setCommentPostId] = useState<number | null>(null);
   const [sharePostForSheet, setSharePostForSheet] = useState<Post | null>(null);
@@ -79,13 +84,18 @@ export default function UserProfileScreen() {
         setProfile(p);
         setStats(statsRes);
         setPosts(
-          postsRes.items.map((post) => ({
-            id: post.id,
-            place_id: post.place_id,
-            thumbnail:
-              post.media?.[0]?.thumbnail_url || post.media?.[0]?.media_url,
-            media_type: post.media?.[0]?.media_type,
-          }))
+          postsRes.items.map((post) => {
+            const sortedMedia = [...(post.media || [])].sort(
+              (a, b) => (a.order_index ?? 0) - (b.order_index ?? 0)
+            );
+            const firstMedia = sortedMedia[0];
+            return {
+              id: post.id,
+              place_id: post.place_id,
+              thumbnail: firstMedia?.thumbnail_url || firstMedia?.media_url,
+              media_type: firstMedia?.media_type,
+            };
+          })
         );
       } catch (e) {
         handleApiError(e);
@@ -107,30 +117,63 @@ export default function UserProfileScreen() {
     load(true);
   }, [load]);
 
-  const handleFollow = useCallback(async () => {
-    if (!profile || followLoading || !currentUser) return;
-    lightImpact();
-    setFollowLoading(true);
-    const prev = profile.is_following;
-    setProfile((p) =>
-      p
-        ? {
-          ...p,
-          is_following: !p.is_following,
-          followers_count: p.followers_count + (prev ? -1 : 1),
-        }
-        : p
-    );
-    try {
-      const res = await toggleFollow(profile.id);
-      setProfile((p) => (p ? { ...p, is_following: res.following } : p));
-    } catch (e) {
-      setProfile((p) => (p ? { ...p, is_following: prev } : p));
-      handleApiError(e);
-    } finally {
-      setFollowLoading(false);
-    }
-  }, [profile, followLoading, currentUser]);
+  // Dummygram: Prevent spam clicks with debounce while keeping UI optimistic
+  const handleFollow = useCallback(
+    debounce(async () => {
+      // Use the latest profile state inside the debounced function
+      setProfile((currentProfile) => {
+        if (!currentProfile || followLoading || !currentUser) return currentProfile;
+        
+        lightImpact();
+        setFollowLoading(true);
+        
+        // Optimistic update
+        const prevProfile = { ...currentProfile };
+        const optimisticProfile = {
+          ...currentProfile,
+          is_following: !currentProfile.is_following,
+          follow_status: currentProfile.is_following ? null : ('accepted' as any),
+        };
+
+        // Async API Call
+        (async () => {
+          try {
+            const res = await toggleFollow(currentProfile.id);
+            setProfile((p) => {
+              if (!p) return p;
+              return {
+                ...p,
+                is_following: res.status === 'accepted',
+                follow_status: res.status as 'pending' | 'accepted' | null,
+                followers_count: res.followers_count,
+              };
+            });
+            
+            // After follow succeeds, refresh notifications to ensure follow notification appears
+            if (res.status === 'accepted') {
+              try {
+                const store = useNotificationStore.getState();
+                setTimeout(() => {
+                  store.loadNotifications(1);
+                }, 500);
+              } catch (e) {
+                // Silently fail — notifications are nice-to-have
+              }
+            }
+          } catch (e) {
+            // Revert on error
+            setProfile(prevProfile);
+            handleApiError(e);
+          } finally {
+            setFollowLoading(false);
+          }
+        })();
+
+        return optimisticProfile;
+      });
+    }, 500, { leading: true, trailing: false }),
+    [followLoading, currentUser]
+  );
 
   const reportUser = useCallback(async (reason: "spam" | "inappropriate" | "harassment" | "other") => {
     try {
@@ -140,6 +183,22 @@ export default function UserProfileScreen() {
       Alert.alert(t("user_profile.reported"), t("user_profile.report_saved"));
     }
   }, [userId]);
+
+  const handleMessagePress = useCallback(async () => {
+    if (!profile) return;
+    lightImpact();
+    setMessageLoading(true);
+    try {
+      const res = await openConversation(profile.id);
+      const name = encodeURIComponent(res.name);
+      const avatar = encodeURIComponent(res.avatar_url || '');
+      router.push(`/chat/${res.conversation_id}?name=${name}&avatar=${avatar}` as any);
+    } catch (e) {
+      handleApiError(e);
+    } finally {
+      setMessageLoading(false);
+    }
+  }, [profile, router]);
 
   const handlePostTap = useCallback(async (postId: number) => {
     lightImpact();
@@ -304,7 +363,7 @@ export default function UserProfileScreen() {
             <TouchableOpacity
               style={[
                 styles.primaryBtn,
-                profile.is_following
+                profile.is_following || profile.follow_status === 'pending'
                   ? { backgroundColor: colors.surface.elevated, borderWidth: 1, borderColor: colors.surface.border }
                   : { backgroundColor: colors.accent.primary, borderWidth: 1, borderColor: colors.accent.primary },
               ]}
@@ -316,11 +375,17 @@ export default function UserProfileScreen() {
                 style={[
                   styles.primaryBtnText,
                   {
-                    color: profile.is_following ? colors.text.primary : "#fff",
+                    color: profile.is_following || profile.follow_status === 'pending'
+                      ? colors.text.primary
+                      : '#fff',
                   },
                 ]}
               >
-                {profile.is_following ? t('profile.following_btn') : t('profile.follow_btn')}
+                {profile.is_following
+                  ? t('profile.following_btn')
+                  : profile.follow_status === 'pending'
+                    ? t('profile.requested_btn')
+                    : t('profile.follow_btn')}
               </Text>
             </TouchableOpacity>
 
@@ -329,12 +394,13 @@ export default function UserProfileScreen() {
                 styles.primaryBtn,
                 { backgroundColor: colors.surface.elevated, borderWidth: 1, borderColor: colors.surface.border }
               ]}
-              onPress={() => {
-                lightImpact();
-              }}
+              onPress={handleMessagePress}
               activeOpacity={0.8}
+              disabled={messageLoading}
             >
-              <Text style={[styles.primaryBtnText, { color: colors.text.primary }]}>{t('profile.message_btn')}</Text>
+              <Text style={[styles.primaryBtnText, { color: colors.text.primary }]}>
+                {messageLoading ? '...' : t('profile.message_btn')}
+              </Text>
             </TouchableOpacity>
           </View>
         )}

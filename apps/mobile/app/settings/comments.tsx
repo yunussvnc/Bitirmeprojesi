@@ -13,15 +13,17 @@ import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { createTextStyle, spacing } from "@/src/constants/design";
 import { lightImpact, success } from "@/src/utils/haptics";
 import { useSettingsStore, type Audience } from "@/src/store/useSettingsStore";
+import { useTranslation } from "react-i18next";
 
-const AUDIENCE_LABELS: Record<Audience, string> = {
-  everyone: "Herkes",
-  followers: "Takipçiler",
-  off: "Kapalı",
-};
+const getAudienceLabels = (t: any): Record<Audience, string> => ({
+  everyone: t("settings_comments.everyone", "Herkes"),
+  followers: t("settings_comments.followers", "Takipçiler"),
+  off: t("settings_comments.nobody", "Kapalı"),
+});
 
 export default function CommentsSettingsScreen() {
   const { colors, isDark } = useTheme();
+  const { t } = useTranslation();
   const router = useRouter();
   const insets = useSafeAreaInsets();
 
@@ -38,25 +40,25 @@ export default function CommentsSettingsScreen() {
         <TouchableOpacity onPress={() => { lightImpact(); router.back(); }} hitSlop={12} style={styles.backBtn}>
           <IconSymbol name="chevron.left" size={24} color={colors.text.primary} />
         </TouchableOpacity>
-        <Text style={[createTextStyle("title", colors.text.primary), styles.title]}>Yorumlar</Text>
+        <Text style={[createTextStyle("title", colors.text.primary), styles.title]}>{t("settings_comments.title", "Yorumlar")}</Text>
         <View style={styles.backBtn} />
       </View>
 
       <ScrollView style={styles.container} contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
-        <Section title="Yorum Kontrolleri">
+        <Section title={t("settings_comments.controls", "Yorum Kontrolleri")}>
           <SettingsRow
-            label="Varsayılan olarak yorumları kapat"
+            label={t("settings_comments.disable_default", "Varsayılan olarak yorumları kapat")}
             value={defaultDisabled}
             switch
             onValueChange={(v: boolean) => { setDefaultDisabled(v); success(); }}
             icon="text.bubble"
           />
           <Text style={[styles.hint, { color: colors.text.tertiary }]}>
-            Açıldığında, yeni paylaşımlarında yorumlar varsayılan olarak kapalı olur. Her paylaşımda bunu ayrıca değiştirebilirsin.
+            {t("settings_comments.disable_hint", "Açıldığında, yeni paylaşımlarında yorumlar varsayılan olarak kapalı olur. Her paylaşımda bunu ayrıca değiştirebilirsin.")}
           </Text>
         </Section>
 
-        <Section title="Kimler yorum yapabilir?">
+        <Section title={t("settings_comments.allow_from", "Kimler yorum yapabilir?")}>
           {audienceOptions.map((opt) => (
             <TouchableOpacity
               key={opt}
@@ -65,7 +67,7 @@ export default function CommentsSettingsScreen() {
               activeOpacity={0.6}
             >
               <Text style={[styles.radioLabel, { color: colors.text.primary }]}>
-                {AUDIENCE_LABELS[opt]}
+                {getAudienceLabels(t)[opt]}
               </Text>
               <View style={[
                 styles.radio,
@@ -78,19 +80,19 @@ export default function CommentsSettingsScreen() {
             </TouchableOpacity>
           ))}
           <Text style={[styles.hint, { color: colors.text.tertiary }]}>
-            Takipçiler: Yalnızca seni takip eden kişiler yorum yapabilir. Kapalı: Hiç kimse yorum yapamaz.
+            {t("settings_comments.allow_hint", "Takipçiler: Yalnızca seni takip eden kişiler yorum yapabilir. Kapalı: Hiç kimse yorum yapamaz.")}
           </Text>
         </Section>
 
-        <Section title="Yorum Filtresi">
+        <Section title={t("settings_comments.filter", "Yorum Filtresi")}>
           <SettingsRow
-            label="Uygunsuz yorumları gizle"
+            label={t("settings_comments.hide_offensive", "Uygunsuz yorumları gizle")}
             value={true}
             switch
             icon="shield.lefthalf.filled"
           />
           <Text style={[styles.hint, { color: colors.text.tertiary }]}>
-            Yapay zekâ destekli filtre, spam ve uygunsuz içerikli yorumları otomatik olarak gizler.
+            {t("settings_comments.hide_desc", "Yapay zekâ destekli filtre, spam ve uygunsuz içerikli yorumları otomatik olarak gizler.")}
           </Text>
         </Section>
       </ScrollView>

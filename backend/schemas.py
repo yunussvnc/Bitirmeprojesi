@@ -105,6 +105,10 @@ class Place(PlaceBase):
     google_place_id: Optional[str] = None
     user_ratings_total: Optional[int] = None
 
+    # Mekan takip sistemi
+    follower_count: Optional[int] = 0
+    is_following: Optional[bool] = False
+
     @model_validator(mode='before')
     @classmethod
     def _parse_json_fields(cls, values):
