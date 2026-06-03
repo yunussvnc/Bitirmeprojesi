@@ -6,6 +6,34 @@
  * @module utils/errorHandler
  */
 
+function mapApiDetailToTurkish(detail: string, status: number): string {
+  const d = detail.trim();
+  if (!d) {
+    if (status === 400) return 'Geçersiz istek. Lütfen bilgilerinizi kontrol edin.';
+    return 'Bir hata oluştu. Lütfen tekrar deneyin.';
+  }
+  const lower = d.toLowerCase();
+  if (lower.includes('zaten kayıtlı') || lower.includes('already registered')) {
+    return 'Bu e-posta zaten kayıtlı';
+  }
+  if (
+    status === 401 &&
+    (lower.includes('e-posta veya şifre') ||
+      lower.includes('şifre') ||
+      lower.includes('password') ||
+      lower.includes('credentials'))
+  ) {
+    return 'Şifre hatalı girdiniz';
+  }
+  if (lower.includes('mevcut şifreniz hatalı')) {
+    return 'Şifre hatalı girdiniz';
+  }
+  if (/[ğüşıöçĞÜŞİÖÇ]/.test(d)) {
+    return d;
+  }
+  return 'Bir hata oluştu. Lütfen tekrar deneyin.';
+}
+
 export class AppError extends Error {
   public code: string;
   public userMessage: string;
@@ -111,8 +139,8 @@ export function handleApiError(error: unknown): AppError {
       );
     }
 
-    // Extract actual message from backend if present
-    const userMessage = msg.includes(' - ') ? msg.split(' - ')[1] : 'Bir hata oluştu. Lütfen tekrar deneyin.';
+    const rawDetail = msg.includes(' - ') ? msg.split(' - ').slice(1).join(' - ') : '';
+    const userMessage = mapApiDetailToTurkish(rawDetail, status);
 
     return new AppError(
       msg,

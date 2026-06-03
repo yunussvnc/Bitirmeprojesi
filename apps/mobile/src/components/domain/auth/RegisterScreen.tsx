@@ -7,7 +7,7 @@
  */
 
 import { router, useLocalSearchParams } from 'expo-router';
-import React, { useState, useRef, useEffect, useCallback } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import {
   StyleSheet,
   View,
@@ -28,16 +28,12 @@ import { BlurView } from 'expo-blur';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button, Input } from '@/src/components/ui';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
-import { handleApiError } from '@/src/utils/errorHandler';
 import { useTranslation } from 'react-i18next';
 import { lightImpact, success } from '@/src/utils/haptics';
-import { getAllPlaces } from '@/src/services/mekanService';
-import { registerUser, registerVenue, googleLogin, appleLogin } from '@/src/services/authService';
-import { useAuthStore } from '@/src/store/useAuthStore';
-import { API_BASE_URL } from '@/src/constants/api';
-import * as AppleAuthentication from 'expo-apple-authentication';
+import { registerUser, registerVenue } from '@/src/services/authService';
+import { getAuthUserMessage } from '@/src/utils/authErrors';
+import { useSocialAuth } from '@/src/hooks/useSocialAuth';
 import * as WebBrowser from 'expo-web-browser';
-import * as Google from 'expo-auth-session/providers/google';
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -62,6 +58,7 @@ export default function RegisterScreen() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [termsAccepted, setTermsAccepted] = useState(false);
+  const [passwordFocused, setPasswordFocused] = useState(false);
   const params = useLocalSearchParams();
   // roleType eklendi ("user" veya "venue")
   const [roleType, setRoleType] = useState<'user' | 'venue'>((params.roleType as 'user' | 'venue') || 'user');
@@ -76,98 +73,13 @@ export default function RegisterScreen() {
   }>({});
   const isSubmittingRef = useRef(false);
 
-  // Google Auth Setup
-  const [request, response, promptAsync] = Google.useAuthRequest({
-    clientId: '398883081062-uqa0hbpbo6nhjcbigltircbbg3ngr7oi.apps.googleusercontent.com',
-    iosClientId: '398883081062-uqa0hbpbo6nhjcbigltircbbg3ngr7oi.apps.googleusercontent.com',
-    androidClientId: '398883081062-uqa0hbpbo6nhjcbigltircbbg3ngr7oi.apps.googleusercontent.com',
-    scopes: ['openid', 'profile', 'email'],
-  });
+  const { loading: socialLoading, promptGoogle, signInWithApple } = useSocialAuth(roleType);
+  const formLoading = loading || socialLoading;
 
-  useEffect(() => {
-    if (response?.type === 'success' && response.authentication) {
-      handleGoogleSuccess(response.authentication.idToken || response.authentication.accessToken);
-    }
-  }, [response]);
-
-  const handleGoogleSuccess = async (token: string) => {
-    if (!token) return;
-    setLoading(true);
-    try {
-      const data = await googleLogin(token);
-      
-      // Check role mismatch purely for UX
-      if (roleType === 'venue' && data.user.role !== 'venue') {
-        throw new Error('Mekan kayıtları sosyal medya ile yapılamaz. Lütfen başvuru formunu doldurun.');
-      } else if (roleType === 'user' && data.user.role === 'venue') {
-        throw new Error('Girdiğiniz hesap bir mekan hesabı. Lütfen "Mekan" sekmesinden giriş yapın.');
-      }
-
-      useAuthStore.getState().setTokens(data.access_token, data.refresh_token);
-      useAuthStore.getState().setUser(data.user);
-      success();
-
-      if (data.user.role === 'venue') {
-         router.replace('/(venue-tabs)' as any);
-      } else {
-        if (!data.user.username || !data.user.birth_date) {
-          router.replace('/first-time-setup' as any);
-        } else {
-          router.replace('/(tabs)/' as any);
-        }
-      }
-    } catch (err: any) {
-      Alert.alert(t('auth.login_error_title'), err.message || t('auth.google_login_failed'));
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const signInWithApple = async () => {
-    try {
-      const credential = await AppleAuthentication.signInAsync({
-        requestedScopes: [
-          AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
-          AppleAuthentication.AppleAuthenticationScope.EMAIL,
-        ],
-      });
-      if (credential.identityToken) {
-        setLoading(true);
-        const data = await appleLogin(credential.identityToken);
-
-        // Check role mismatch purely for UX
-        if (roleType === 'venue' && data.user.role !== 'venue') {
-          throw new Error('Mekan kayıtları sosyal medya ile yapılamaz. Lütfen başvuru formunu doldurun.');
-        } else if (roleType === 'user' && data.user.role === 'venue') {
-          throw new Error('Girdiğiniz hesap bir mekan hesabı. Lütfen "Mekan" sekmesinden giriş yapın.');
-        }
-
-        useAuthStore.getState().setTokens(data.access_token, data.refresh_token);
-        useAuthStore.getState().setUser(data.user);
-        success();
-
-        if (data.user.role === 'venue') {
-           router.replace('/(venue-tabs)' as any);
-        } else {
-          if (!data.user.username || !data.user.birth_date) {
-            router.replace('/first-time-setup' as any);
-          } else {
-            router.replace('/(tabs)/' as any);
-          }
-        }
-      }
-    } catch (e: any) {
-      if (e.code === 'ERR_REQUEST_CANCELED') {
-        // Kullanıcı iptal etti
-      } else {
-        Alert.alert(t('auth.login_error_title'), e.message || t('auth.apple_login_failed'));
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
-
-
+  const openLegalDoc = useCallback((type: 'terms' | 'privacy') => {
+    lightImpact();
+    router.push({ pathname: '/settings/legal-document', params: { type } } as never);
+  }, []);
 
   const validateForm = useCallback((): boolean => {
     const newErrors: typeof errors = {};
@@ -236,8 +148,7 @@ export default function RegisterScreen() {
         );
       }
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : 'Kayıt başarısız. Lütfen tekrar deneyin.';
-      setErrors({ email: msg });
+      setErrors({ email: getAuthUserMessage(err, t) });
     } finally {
       isSubmittingRef.current = false;
       setLoading(false);
@@ -246,12 +157,9 @@ export default function RegisterScreen() {
 
   const handleSocialRegister = useCallback((provider: string) => {
     lightImpact();
-    if (provider === 'Apple') {
-      signInWithApple();
-    } else if (provider === 'Google') {
-      promptAsync();
-    }
-  }, [promptAsync]);
+    if (provider === 'Apple') signInWithApple();
+    else if (provider === 'Google') promptGoogle();
+  }, [promptGoogle, signInWithApple]);
 
   const clearFieldError = useCallback((field: keyof typeof errors) => {
     setErrors((prev) => (prev[field] ? { ...prev, [field]: undefined } : prev));
@@ -354,13 +262,16 @@ export default function RegisterScreen() {
                         <Input
                           variant="onDark"
                           label={t('auth.password')}
-                          placeholder={t('auth.password_hint')}
+                          placeholder={t('auth.password_placeholder')}
                           value={password}
-                          onChangeText={(t) => {
-                            setPassword(t);
+                          onChangeText={(text) => {
+                            setPassword(text);
                             clearFieldError('password');
-                            if (confirmPassword && t === confirmPassword) clearFieldError('confirmPassword');
+                            if (confirmPassword && text === confirmPassword) clearFieldError('confirmPassword');
                           }}
+                          onFocus={() => setPasswordFocused(true)}
+                          onBlur={() => setPasswordFocused(false)}
+                          helperText={passwordFocused ? t('auth.password_requirements') : undefined}
                           secureTextEntry
                           autoComplete="off"
                           textContentType="oneTimeCode"
@@ -388,8 +299,10 @@ export default function RegisterScreen() {
                             {termsAccepted && <IconSymbol name="checkmark" size={14} color="#000" />}
                           </View>
                           <Text style={styles.termsText}>
-                            <Text style={styles.termsLink} onPress={() => WebBrowser.openBrowserAsync('https://asemos.com/terms')}>{t('auth.terms')}</Text>{t('auth.and')}
-                            <Text style={styles.termsLink} onPress={() => WebBrowser.openBrowserAsync('https://asemos.com/privacy')}>{t('auth.privacy')}</Text>{t('auth.read_and_accept')}
+                            <Text style={styles.termsLink} onPress={() => openLegalDoc('terms')}>{t('auth.terms')}</Text>
+                            {t('auth.and')}
+                            <Text style={styles.termsLink} onPress={() => openLegalDoc('privacy')}>{t('auth.privacy')}</Text>
+                            {t('auth.read_and_accept')}
                           </Text>
                         </TouchableOpacity>
 
@@ -397,8 +310,8 @@ export default function RegisterScreen() {
                           variant="primary"
                           size="large"
                           onPress={handleRegister}
-                          loading={loading}
-                          disabled={loading}
+                          loading={formLoading}
+                          disabled={formLoading}
                           style={styles.registerButton}
                         >
                           {roleType === 'user' ? t('auth.register') : t('auth.send_approval')}

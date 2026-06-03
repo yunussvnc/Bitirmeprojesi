@@ -65,6 +65,19 @@ keytool -list -v -keystore %USERPROFILE%\.android\debug.keystore -alias androidd
 
 EAS credentials kullanıyorsanız: eas credentials ile release keystore SHA-1’i alın.
 
+### 3. Redirect URI (Web OAuth client)
+
+Mobil uygulama `expo-auth-session` ile şu URI’yi kullanır (`apps/mobile/src/config/socialAuth.ts`):
+
+| URI | Açıklama |
+|-----|----------|
+| `asemos://oauthredirect` | `app.json` → `scheme: asemos`, path `oauthredirect` |
+| `com.asemos.mobile:/oauthredirect` | İsteğe bağlı; bazı native yapılandırmalarda |
+
+**Google Cloud → Credentials → Web client → Authorized redirect URIs** listesine `asemos://oauthredirect` ekleyin. `asemos://` tek başına (path olmadan) **geçersizdir** ve `invalid_request` / 400 hatası verir.
+
+Geliştirmede gerçek URI’yi görmek için uygulama açılışında `getGoogleRedirectUri()` çıktısını loglayın.
+
 ---
 
 ## Apple Developer
