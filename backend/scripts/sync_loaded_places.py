@@ -14,7 +14,8 @@ import argparse
 import json
 import os
 import sys
-from typing import Dict, List, Optional, Set
+import time
+from typing import Dict, List, Optional, Set, Tuple
 
 sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
@@ -24,6 +25,12 @@ load_dotenv()
 
 from config import get_settings
 from scripts.place_utils import place_to_postgres_row
+
+DEFAULT_PROGRESS_EVERY = 25
+DEFAULT_BATCH_SIZE = 50
+DEFAULT_CONNECT_TIMEOUT = 30
+DEFAULT_STATEMENT_TIMEOUT_MS = 600_000  # 10 dk (uzak Render icin)
+
 
 def _is_postgres_url(db_url: str) -> bool:
     u = (db_url or "").strip().lower()
@@ -39,6 +46,18 @@ def _database_target_label(db_url: str) -> str:
     if "@" in u:
         return u.split("@", 1)[-1]
     return u[:80]
+
+
+def _log_progress(done: int, total: int, stats: Dict[str, int], *, elapsed: float) -> None:
+    pct = (100.0 * done / total) if total else 100.0
+    rate = done / elapsed if elapsed > 0 else 0.0
+    print(
+        f"  [{done}/{total}] %{pct:.0f} | "
+        f"+{stats['inserted']} guncelle:{stats['updated']} "
+        f"atla:{stats['skipped']} hata:{stats['failed']} | "
+        f"{rate:.1f} kayit/sn",
+        flush=True,
+    )
 
 
 DEFAULT_JSON_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "loaded_places.json")
@@ -74,6 +93,21 @@ def load_places_from_json(json_path: str, *, quiet: bool = False) -> List[dict]:
     return data
 
 
+def _postgres_connect(db_url: str, *, connect_timeout: int = DEFAULT_CONNECT_TIMEOUT):
+    import psycopg2
+
+    options = f"-c statement_timeout={DEFAULT_STATEMENT_TIMEOUT_MS}"
+    return psycopg2.connect(
+        db_url,
+        connect_timeout=connect_timeout,
+        options=options,
+        keepalives=1,
+        keepalives_idle=30,
+        keepalives_interval=10,
+        keepalives_count=5,
+    )
+
+
 def count_db_places(db_url: str) -> Optional[int]:
     try:
         import psycopg2
@@ -82,7 +116,7 @@ def count_db_places(db_url: str) -> Optional[int]:
         return None
 
     try:
-        conn = psycopg2.connect(db_url, connect_timeout=10)
+        conn = _postgres_connect(db_url)
         cur = conn.cursor()
         cur.execute("SELECT COUNT(*) FROM places;")
         total = int(cur.fetchone()[0])
@@ -125,13 +159,104 @@ def maybe_sync_places_on_startup(
     return sync_loaded_places(db_url, json_path=json_path, dry_run=False)
 
 
+UPSERT_SQL = """
+    INSERT INTO places (
+        name, description, category, address, city,
+        latitude, longitude, average_rating, user_ratings_total,
+        features, photo_url, price_range,
+        opening_time, closing_time, opening_hours_json,
+        vector_id, google_place_id
+    ) VALUES (
+        %(name)s, %(description)s, %(category)s, %(address)s, %(city)s,
+        %(latitude)s, %(longitude)s, %(average_rating)s, %(user_ratings_total)s,
+        %(features)s, %(photo_url)s, %(price_range)s,
+        %(opening_time)s, %(closing_time)s, %(opening_hours_json)s,
+        %(vector_id)s, %(google_place_id)s
+    )
+    ON CONFLICT (vector_id) DO UPDATE SET
+        name = EXCLUDED.name,
+        description = EXCLUDED.description,
+        category = EXCLUDED.category,
+        address = EXCLUDED.address,
+        city = EXCLUDED.city,
+        latitude = EXCLUDED.latitude,
+        longitude = EXCLUDED.longitude,
+        average_rating = EXCLUDED.average_rating,
+        user_ratings_total = EXCLUDED.user_ratings_total,
+        features = EXCLUDED.features,
+        photo_url = EXCLUDED.photo_url,
+        price_range = EXCLUDED.price_range,
+        opening_time = EXCLUDED.opening_time,
+        closing_time = EXCLUDED.closing_time,
+        opening_hours_json = EXCLUDED.opening_hours_json,
+        google_place_id = EXCLUDED.google_place_id;
+"""
+
+INSERT_SQL = """
+    INSERT INTO places (
+        name, description, category, address, city,
+        latitude, longitude, average_rating, user_ratings_total,
+        features, photo_url, price_range,
+        opening_time, closing_time, opening_hours_json,
+        vector_id, google_place_id
+    ) VALUES (
+        %(name)s, %(description)s, %(category)s, %(address)s, %(city)s,
+        %(latitude)s, %(longitude)s, %(average_rating)s, %(user_ratings_total)s,
+        %(features)s, %(photo_url)s, %(price_range)s,
+        %(opening_time)s, %(closing_time)s, %(opening_hours_json)s,
+        NULL, NULL
+    );
+"""
+
+
+def _load_existing_keys(cur) -> Tuple[Set[str], Set[str]]:
+    cur.execute("SELECT vector_id, LOWER(name) FROM places WHERE vector_id IS NOT NULL;")
+    existing_vector_ids: Set[str] = set()
+    existing_names: Set[str] = set()
+    for vector_id, name in cur.fetchall():
+        if vector_id:
+            existing_vector_ids.add(str(vector_id))
+        if name:
+            existing_names.add(name)
+    return existing_vector_ids, existing_names
+
+
+def _execute_batch_safe(
+    cur,
+    sql: str,
+    batch: List[dict],
+    stats: Dict[str, int],
+    *,
+    on_success,
+) -> None:
+    """Tek tek dene; batch'te bir hata tumunu dusurmesin."""
+    from psycopg2.extras import execute_batch
+
+    if not batch:
+        return
+    try:
+        execute_batch(cur, sql, batch, page_size=len(batch))
+        on_success(batch)
+    except Exception:
+        for row in batch:
+            try:
+                cur.execute(sql, row)
+                on_success([row])
+            except Exception as exc:
+                stats["failed"] += 1
+                print(f"  [!] HATA ({row.get('name', '?')}): {exc}", flush=True)
+
+
 def sync_loaded_places(
     db_url: str,
     json_path: Optional[str] = None,
     dry_run: bool = False,
+    *,
+    progress_every: int = DEFAULT_PROGRESS_EVERY,
+    batch_size: int = DEFAULT_BATCH_SIZE,
 ) -> Dict[str, int]:
     try:
-        import psycopg2
+        import psycopg2  # noqa: F401 — baglanti testi
     except ImportError:
         print("HATA: pip install psycopg2-binary")
         sys.exit(1)
@@ -157,124 +282,119 @@ def sync_loaded_places(
     print(f"  Gecersiz/atla : {skipped_invalid}")
     print(f"  Veritabani    : {_database_target_label(db_url)}")
     print(f"  Mod           : {'DRY-RUN' if dry_run else 'CANLI UPSERT'}")
+    if not dry_run:
+        print(f"  Ilerleme      : her {progress_every} kayit | batch commit: {batch_size}")
     print(f"{'=' * 65}\n")
 
     if dry_run:
         for row in rows[:5]:
             print(f"  {row['name'][:45]:<45} | {row['latitude']}, {row['longitude']}")
+        with_vid = sum(1 for r in rows if r.get("vector_id"))
+        print(f"\n  (dry-run) vector_id'li: {with_vid}, vectorsiz: {len(rows) - with_vid}")
         return {"inserted": 0, "updated": 0, "skipped": skipped_invalid, "failed": 0}
 
     stats = {"inserted": 0, "updated": 0, "skipped": skipped_invalid, "failed": 0}
 
     try:
-        conn = psycopg2.connect(db_url, connect_timeout=10)
+        conn = _postgres_connect(db_url)
         conn.autocommit = False
         cur = conn.cursor()
-        print("PostgreSQL baglantisi OK\n")
+        print("PostgreSQL baglantisi OK\n", flush=True)
     except Exception as exc:
         print(f"HATA: PostgreSQL baglanamadi: {exc}")
         sys.exit(1)
 
-    cur.execute("SELECT vector_id, LOWER(name) FROM places WHERE vector_id IS NOT NULL;")
-    existing_vector_ids: Set[str] = set()
-    existing_names: Set[str] = set()
-    for vector_id, name in cur.fetchall():
-        if vector_id:
-            existing_vector_ids.add(str(vector_id))
-        if name:
-            existing_names.add(name)
+    existing_vector_ids, existing_names = _load_existing_keys(cur)
+    print(f"Mevcut kayit (vector_id'li): {len(existing_vector_ids)}", flush=True)
 
-    print(f"Mevcut kayit (vector_id'li): {len(existing_vector_ids)}")
+    upsert_rows = [r for r in rows if r.get("vector_id")]
+    insert_rows = [r for r in rows if not r.get("vector_id")]
+    total_work = len(upsert_rows) + len(insert_rows)
+    done = 0
+    last_logged = 0
+    started = time.monotonic()
+    pending_upsert: List[dict] = []
+    pending_insert: List[dict] = []
 
-    upsert_sql = """
-        INSERT INTO places (
-            name, description, category, address, city,
-            latitude, longitude, average_rating, user_ratings_total,
-            features, photo_url, price_range,
-            opening_time, closing_time, opening_hours_json,
-            vector_id, google_place_id
-        ) VALUES (
-            %(name)s, %(description)s, %(category)s, %(address)s, %(city)s,
-            %(latitude)s, %(longitude)s, %(average_rating)s, %(user_ratings_total)s,
-            %(features)s, %(photo_url)s, %(price_range)s,
-            %(opening_time)s, %(closing_time)s, %(opening_hours_json)s,
-            %(vector_id)s, %(google_place_id)s
-        )
-        ON CONFLICT (vector_id) DO UPDATE SET
-            name = EXCLUDED.name,
-            description = EXCLUDED.description,
-            category = EXCLUDED.category,
-            address = EXCLUDED.address,
-            city = EXCLUDED.city,
-            latitude = EXCLUDED.latitude,
-            longitude = EXCLUDED.longitude,
-            average_rating = EXCLUDED.average_rating,
-            user_ratings_total = EXCLUDED.user_ratings_total,
-            features = EXCLUDED.features,
-            photo_url = EXCLUDED.photo_url,
-            price_range = EXCLUDED.price_range,
-            opening_time = EXCLUDED.opening_time,
-            closing_time = EXCLUDED.closing_time,
-            opening_hours_json = EXCLUDED.opening_hours_json,
-            google_place_id = EXCLUDED.google_place_id
-        RETURNING id;
-    """
+    def _maybe_log_progress() -> None:
+        nonlocal last_logged
+        if done - last_logged >= progress_every or done >= total_work:
+            _log_progress(done, total_work, stats, elapsed=time.monotonic() - started)
+            last_logged = done
 
-    insert_sql = """
-        INSERT INTO places (
-            name, description, category, address, city,
-            latitude, longitude, average_rating, user_ratings_total,
-            features, photo_url, price_range,
-            opening_time, closing_time, opening_hours_json,
-            vector_id, google_place_id
-        ) VALUES (
-            %(name)s, %(description)s, %(category)s, %(address)s, %(city)s,
-            %(latitude)s, %(longitude)s, %(average_rating)s, %(user_ratings_total)s,
-            %(features)s, %(photo_url)s, %(price_range)s,
-            %(opening_time)s, %(closing_time)s, %(opening_hours_json)s,
-            NULL, NULL
-        )
-        RETURNING id;
-    """
+    print(
+        f"Upsert basliyor: {len(upsert_rows)} vector_id'li, "
+        f"{len(insert_rows)} vectorsiz (toplam is: {total_work})\n",
+        flush=True,
+    )
 
-    for row in rows:
-        name_key = row["name"].lower()
-        vector_id = row.get("vector_id")
+    def _flush_upsert_batch() -> None:
+        nonlocal done, pending_upsert
+        if not pending_upsert:
+            return
+        batch = pending_upsert
+        pending_upsert = []
 
-        try:
-            cur.execute("SAVEPOINT place_sync_row")
-            if vector_id:
-                was_existing = vector_id in existing_vector_ids
-                cur.execute(upsert_sql, row)
-                result = cur.fetchone()
-                if result:
-                    if was_existing:
-                        stats["updated"] += 1
-                    else:
-                        stats["inserted"] += 1
-                    existing_vector_ids.add(vector_id)
-                    existing_names.add(name_key)
-                cur.execute("RELEASE SAVEPOINT place_sync_row")
-                continue
-
-            if name_key in existing_names:
-                stats["skipped"] += 1
-                cur.execute("RELEASE SAVEPOINT place_sync_row")
-                continue
-
-            cur.execute(insert_sql, row)
-            result = cur.fetchone()
-            if result:
-                stats["inserted"] += 1
+        def on_success(ok_rows: List[dict]) -> None:
+            nonlocal done
+            for row in ok_rows:
+                vid = str(row["vector_id"])
+                name_key = row["name"].lower()
+                if vid in existing_vector_ids:
+                    stats["updated"] += 1
+                else:
+                    stats["inserted"] += 1
+                existing_vector_ids.add(vid)
                 existing_names.add(name_key)
-            cur.execute("RELEASE SAVEPOINT place_sync_row")
-        except Exception as exc:
-            cur.execute("ROLLBACK TO SAVEPOINT place_sync_row")
-            stats["failed"] += 1
-            print(f"  [!] HATA ({row['name']}): {exc}")
+            done += len(ok_rows)
+
+        _execute_batch_safe(cur, UPSERT_SQL, batch, stats, on_success=on_success)
+        conn.commit()
+
+    def _flush_insert_batch() -> None:
+        nonlocal done, pending_insert
+        if not pending_insert:
+            return
+        batch = pending_insert
+        pending_insert = []
+
+        def on_success(ok_rows: List[dict]) -> None:
+            nonlocal done
+            for row in ok_rows:
+                stats["inserted"] += 1
+                existing_names.add(row["name"].lower())
+            done += len(ok_rows)
+
+        _execute_batch_safe(cur, INSERT_SQL, batch, stats, on_success=on_success)
+        conn.commit()
+
+    for row in upsert_rows:
+        pending_upsert.append(row)
+        if len(pending_upsert) >= batch_size:
+            _flush_upsert_batch()
+            _maybe_log_progress()
+
+    _flush_upsert_batch()
+    _maybe_log_progress()
+
+    for row in insert_rows:
+        name_key = row["name"].lower()
+        if name_key in existing_names:
+            stats["skipped"] += 1
+            done += 1
+            _maybe_log_progress()
+            continue
+
+        pending_insert.append(row)
+        if len(pending_insert) >= batch_size:
+            _flush_insert_batch()
+            _maybe_log_progress()
+
+    _flush_insert_batch()
+    done = total_work
+    _maybe_log_progress()
 
     try:
-        conn.commit()
         cur.execute("SELECT COUNT(*) FROM places;")
         total = cur.fetchone()[0]
         print(f"\n{'=' * 65}")
@@ -285,11 +405,12 @@ def sync_loaded_places(
         print(f"  Atlanan      : {stats['skipped']}")
         print(f"  Hatali       : {stats['failed']}")
         print(f"  Toplam DB    : {total}")
+        print(f"  Sure         : {time.monotonic() - started:.1f} sn")
         print(f"{'=' * 65}\n")
         if total == 0 and stats["inserted"] == 0 and stats["updated"] == 0:
             print("UYARI: places tablosu hala bos. DATABASE_URL veya JSON yolunu kontrol edin.")
     except Exception as exc:
-        print(f"Commit hatasi: {exc}")
+        print(f"Son sayim hatasi: {exc}")
         conn.rollback()
     finally:
         cur.close()
@@ -312,15 +433,30 @@ def main() -> None:
         action="store_true",
         help="Yerel SQLite ile calistirmaya izin ver (varsayilan: sadece Postgres)",
     )
+    parser.add_argument(
+        "--progress-every",
+        type=int,
+        default=DEFAULT_PROGRESS_EVERY,
+        help=f"Ilerleme log araligi (varsayilan: {DEFAULT_PROGRESS_EVERY})",
+    )
+    parser.add_argument(
+        "--batch-size",
+        type=int,
+        default=DEFAULT_BATCH_SIZE,
+        help=f"Commit batch boyutu (varsayilan: {DEFAULT_BATCH_SIZE})",
+    )
     args = parser.parse_args()
 
     db_url = (args.db or "").strip()
-    if not db_url:
+    if args.dry_run:
+        if not db_url:
+            db_url = "postgresql://dry-run/local"
+    elif not db_url:
         print("HATA: DATABASE_URL veya --db gerekli.")
         print("Render Postgres icin Dashboard -> asemos-db -> External Database URL kullanin.")
         sys.exit(2)
 
-    if not _is_postgres_url(db_url) and not args.allow_sqlite:
+    if not args.dry_run and not _is_postgres_url(db_url) and not args.allow_sqlite:
         print("HATA: Hedef veritabani PostgreSQL degil!")
         print(f"  Algilanan: {_database_target_label(db_url)}")
         print("  Yerel backend/.env icindeki sqlite:///... Render API verisini DOLDURMAZ.")
@@ -328,7 +464,13 @@ def main() -> None:
         print("  Yerel SQLite testi icin: --allow-sqlite")
         sys.exit(2)
 
-    sync_loaded_places(db_url, json_path=args.json, dry_run=args.dry_run)
+    sync_loaded_places(
+        db_url,
+        json_path=args.json,
+        dry_run=args.dry_run,
+        progress_every=max(1, args.progress_every),
+        batch_size=max(1, args.batch_size),
+    )
 
 
 if __name__ == "__main__":
