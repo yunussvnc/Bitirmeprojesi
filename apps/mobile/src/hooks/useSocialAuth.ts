@@ -91,7 +91,7 @@ export function useSocialAuth(roleType: RoleType) {
       ]);
       return;
     }
-    await promptAsync({ useProxy: false, showInRecents: true });
+    await promptAsync({ showInRecents: true });
   }, [promptAsync, request, t]);
 
   const signInWithApple = useCallback(async () => {
