@@ -9,6 +9,6 @@ pip install --upgrade pip
 pip install -r requirements.txt
 
 echo "🗄️  Veritabanı migration'ları çalıştırılıyor..."
-alembic upgrade head
+python migrate.py
 
 echo "✅ Build tamamlandı!"
