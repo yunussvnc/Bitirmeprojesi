@@ -5,6 +5,7 @@ Places router + CRUD + DB entegrasyon testleri.
 Mekan CRUD, arama, yakın mekanlar, popüler, venue dashboard.
 """
 
+# pyrefly: ignore [missing-import]
 import pytest
 from tests.conftest import (
     create_test_user, create_test_place, create_test_review,
@@ -211,3 +212,103 @@ class TestVenueDashboard:
         })
         assert response.status_code == 200
         assert response.json()["name"] == "Updated Name"
+
+
+class TestPlaceFollow:
+    """Mekan takip sistem testleri."""
+
+    def test_follow_toggle_flow(self, client):
+        uid = create_test_user(email="follower@test.com", username="follower")
+        pid = create_test_place(name="FollowCafe")
+        headers = get_auth_headers(uid)
+
+        # 1. İlk durum: takip etmiyor
+        response = client.get(f"/places/{pid}/follow-status", headers=headers)
+        assert response.status_code == 200
+        data = response.json()
+        assert data["is_following"] is False
+        assert data["follower_count"] == 0
+
+        # 2. Takip et
+        response = client.post(f"/places/{pid}/follow", headers=headers)
+        assert response.status_code == 200
+        assert response.json()["followed"] is True
+
+        # 3. Durumu kontrol et
+        response = client.get(f"/places/{pid}/follow-status", headers=headers)
+        data = response.json()
+        assert data["is_following"] is True
+        assert data["follower_count"] == 1
+
+        # 4. Takipten çık (toggle)
+        response = client.post(f"/places/{pid}/follow", headers=headers)
+        assert response.status_code == 200
+        assert response.json()["followed"] is False
+
+        # 5. Son durumu kontrol et
+        response = client.get(f"/places/{pid}/follow-status", headers=headers)
+        data = response.json()
+        assert data["is_following"] is False
+        assert data["follower_count"] == 0
+
+
+class TestPlaceSocialContent:
+    """Mekan sosyal içerik testleri (posts & stories)."""
+
+    def test_get_place_posts(self, client):
+        pid = create_test_place(name="SocialCafe")
+        response = client.get(f"/places/{pid}/posts")
+        assert response.status_code == 200
+        data = response.json()
+        assert "items" in data
+        assert "total" in data
+
+    def test_get_place_stories(self, client):
+        pid = create_test_place(name="SocialCafe2")
+        response = client.get(f"/places/{pid}/stories")
+        assert response.status_code == 200
+        data = response.json()
+        assert "items" in data
+        assert "total" in data
+
+    def test_get_place_posts_privacy_filtering(self, client):
+        from tests.conftest import create_test_post
+        pid = create_test_place(name="PrivacyCafe")
+        
+        # 1. Gizli hesap oluştur ve UserPreferences üzerinden private yap
+        private_uid = create_test_user(email="private_user@test.com", username="private_user")
+        db = TestingSessionLocal()
+        prefs = models.UserPreferences(user_id=private_uid, is_private_account=True)
+        db.add(prefs)
+        db.commit()
+        db.close()
+        
+        create_test_post(user_id=private_uid, place_id=pid, caption="Private Post")
+
+        # 2. Açık hesap oluştur ve post paylaş
+        public_uid = create_test_user(email="public_user@test.com", username="public_user")
+        create_test_post(user_id=public_uid, place_id=pid, caption="Public Post")
+
+        # 3. Mekan gönderilerini çek
+        response = client.get(f"/places/{pid}/posts")
+        assert response.status_code == 200
+        data = response.json()
+        
+        # Sadece açık hesabın gönderisi görünmeli
+        assert data["total"] == 1
+        assert len(data["items"]) == 1
+        assert data["items"][0]["caption"] == "Public Post"
+
+
+class TestPlaceInteract:
+    """Mekan etkileşim kayıt testleri."""
+
+    def test_record_place_interaction(self, client):
+        uid = create_test_user(email="interactor@test.com", username="interactor")
+        pid = create_test_place(name="InteractCafe")
+        headers = get_auth_headers(uid)
+
+        response = client.post(f"/places/{pid}/interact?interaction_type=view", headers=headers)
+        assert response.status_code == 200
+        assert response.json()["ok"] is True
+

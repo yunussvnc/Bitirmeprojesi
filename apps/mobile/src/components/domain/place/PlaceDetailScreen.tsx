@@ -37,15 +37,18 @@ import { handleApiError } from '@/src/utils/errorHandler';
 import { useTranslation } from 'react-i18next';
 import { useAppStore } from "@/src/store/useAppStore";
 import { useSettingsStore } from "@/src/store/useSettingsStore";
+import { useAuthStore } from "@/src/store/useAuthStore";
 import { getPlaceImageSource, hasPlaceImage } from "@/src/utils/placeImages";
 import { spacing, createTextStyle } from "@/src/constants/design";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { calculateDistance, getCurrentLocation, type PlaceLocation } from "@/src/utils/location";
-import { getPlaceById, getAllPlaces } from "@/src/services/mekanService";
+import { getPlaceById, getAllPlaces, togglePlaceFollow, getPlacePosts, getPlaceStories, recordPlaceInteraction } from "@/src/services/mekanService";
 import { lightImpact, success, warning } from "@/src/utils/haptics";
 import { logger } from "@/src/utils/logger";
 import { apiGet, apiPost } from "@/src/utils/apiClient";
+import { FlatList } from "react-native";
+import { StoryViewerModal } from "../explore/StoryViewerModal";
 
 type Review = {
   id: number;
@@ -91,6 +94,7 @@ export default function PlaceDetailScreen({
   const savedIds = useAppStore((s) => s.savedIds);
   const toggleSaved = useAppStore((s) => s.toggleSave);
   const saved = savedIds.includes(id);
+  const currentUser = useAuthStore((s) => s.user);
 
   const [place, setPlace] = useState<any>(null);
   const [userLocation, setUserLocation] = useState<PlaceLocation | null>(null);
@@ -108,6 +112,17 @@ export default function PlaceDetailScreen({
   const [similarPlaces, setSimilarPlaces] = useState<any[]>([]);
   const [showReviews, setShowReviews] = useState(false);
   const [reviewGalleryData, setReviewGalleryData] = useState<{ reviews: Review[]; reviewIndex: number; imageIndex: number } | null>(null);
+
+  // Takip & Sosyal İçerik
+  const [isFollowing, setIsFollowing] = useState(false);
+  const [followerCount, setFollowerCount] = useState(0);
+  const [followLoading, setFollowLoading] = useState(false);
+  const [placePosts, setPlacePosts] = useState<any[]>([]);
+  const [placeStories, setPlaceStories] = useState<any[]>([]);
+  const [socialLoading, setSocialLoading] = useState(false);
+  const [showPostsSection, setShowPostsSection] = useState(false);
+  const [selectedStoryIndex, setSelectedStoryIndex] = useState(0);
+  const [showStoriesModal, setShowStoriesModal] = useState(false);
 
   const screenRef = useRef<ScreenRef>(null);
   useScrollToTop(screenRef as any);
@@ -239,6 +254,7 @@ export default function PlaceDetailScreen({
     const cancelled = { current: false };
     loadPlaceData(cancelled);
     loadReviews(cancelled);
+    loadSocialContent(cancelled);
     return () => {
       cancelled.current = true;
     };
@@ -250,9 +266,58 @@ export default function PlaceDetailScreen({
       if (!cancelled.current && foundPlace) {
         console.log('[PlaceDetail] menu_items:', JSON.stringify(foundPlace.menu_items)?.slice(0, 200));
         setPlace(foundPlace);
+        // Takip durumunu place verisiyle al (is_following zaten enrich'de geliyor)
+        if (typeof foundPlace.is_following === 'boolean') {
+          setIsFollowing(foundPlace.is_following);
+        }
+        if (typeof foundPlace.follower_count === 'number') {
+          setFollowerCount(foundPlace.follower_count);
+        }
+      }
+      // Etkileşimi arka planda kaydet (algoritmik boost)
+      if (!cancelled.current) {
+        recordPlaceInteraction(id, 'view').catch(() => {});
       }
     } catch (error) {
       if (!cancelled.current) logger.error("Error loading place:", error);
+    }
+  };
+
+  const loadSocialContent = async (cancelled: { current: boolean } = { current: false }) => {
+    if (!id) return;
+    setSocialLoading(true);
+    try {
+      const [postsData, storiesData] = await Promise.all([
+        getPlacePosts(id, 1, 18),
+        getPlaceStories(id),
+      ]);
+      if (!cancelled.current) {
+        setPlacePosts(postsData?.items || []);
+        setPlaceStories(storiesData?.items || []);
+        if ((postsData?.items?.length || 0) > 0 || (storiesData?.items?.length || 0) > 0) {
+          setShowPostsSection(true);
+        }
+      }
+    } catch (error) {
+      if (!cancelled.current) logger.error("Error loading social content:", error);
+    } finally {
+      if (!cancelled.current) setSocialLoading(false);
+    }
+  };
+
+  const handleFollow = async () => {
+    if (followLoading) return;
+    setFollowLoading(true);
+    try {
+      lightImpact();
+      const result = await togglePlaceFollow(id);
+      setIsFollowing(result.followed);
+      setFollowerCount(result.follower_count);
+      if (result.followed) success();
+    } catch (error) {
+      logger.error("Error toggling follow:", error);
+    } finally {
+      setFollowLoading(false);
     }
   };
 
@@ -432,7 +497,10 @@ export default function PlaceDetailScreen({
     <Animated.View entering={FadeIn.duration(280)} style={{ flex: 1 }}>
       <Screen ref={screenRef} scrollable withTabBar={isVenueDashboard}>
         {/* Header with Back and Save */}
-        <View style={[styles.header, isVenueDashboard && { justifyContent: "flex-end" }]}>
+        <View style={[styles.header, isVenueDashboard && { justifyContent: "space-between", paddingHorizontal: spacing.sm }]}>
+          {isVenueDashboard && (
+            <Text style={[h2Style, { fontSize: 18, fontWeight: '700' }]}>Mekan Paneli</Text>
+          )}
           {!isVenueDashboard && (
             <TouchableOpacity
               onPress={() => {
@@ -445,7 +513,61 @@ export default function PlaceDetailScreen({
             </TouchableOpacity>
           )}
 
-          {!isVenueDashboard && (
+          {isVenueDashboard ? (
+            <View style={{ flexDirection: 'row', gap: 8 }}>
+              {/* Hikaye Paylaş */}
+              <TouchableOpacity
+                onPress={() => {
+                  lightImpact();
+                  router.push({
+                    pathname: "/create-story",
+                    params: { isVenue: "true", placeId: String(place?.id), placeName: place?.name }
+                  });
+                }}
+                activeOpacity={0.8}
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  gap: 6,
+                  backgroundColor: 'rgba(240, 148, 51, 0.15)',
+                  paddingHorizontal: 12,
+                  paddingVertical: 8,
+                  borderRadius: 16,
+                  borderWidth: 1,
+                  borderColor: 'rgba(240, 148, 51, 0.3)'
+                }}
+              >
+                <IconSymbol name="camera.fill" size={14} color="#f09433" />
+                <Text style={{ fontSize: 12, color: '#f09433', fontWeight: '600' }}>Hikaye</Text>
+              </TouchableOpacity>
+              
+              {/* Gönderi Paylaş */}
+              <TouchableOpacity
+                onPress={() => {
+                  lightImpact();
+                  router.push({
+                    pathname: "/create-post",
+                    params: { isVenue: "true", placeId: String(place?.id), placeName: place?.name }
+                  });
+                }}
+                activeOpacity={0.8}
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  gap: 6,
+                  backgroundColor: colors.accent.primary + '22',
+                  paddingHorizontal: 12,
+                  paddingVertical: 8,
+                  borderRadius: 16,
+                  borderWidth: 1,
+                  borderColor: colors.accent.primary + '44'
+                }}
+              >
+                <IconSymbol name="plus" size={14} color={colors.accent.primary} />
+                <Text style={{ fontSize: 12, color: colors.accent.primary, fontWeight: '600' }}>Gönderi</Text>
+              </TouchableOpacity>
+            </View>
+          ) : (
             <View style={styles.headerRightButtons}>
               <TouchableOpacity
                 onPress={() => {
@@ -539,11 +661,90 @@ export default function PlaceDetailScreen({
             {place?.city && <Text style={[bodySmallStyle, { color: colors.text.secondary }]}>{place.city}</Text>}
           </View>
 
+          {/* Takip Et Butonu + Takipçi Sayısı */}
+          {!isVenueDashboard && (
+            <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 14, gap: 12 }}>
+              <TouchableOpacity
+                onPress={handleFollow}
+                disabled={followLoading}
+                style={[
+                  {
+                    paddingHorizontal: 20,
+                    paddingVertical: 9,
+                    borderRadius: 22,
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    gap: 6,
+                    opacity: followLoading ? 0.7 : 1,
+                  },
+                  isFollowing
+                    ? { backgroundColor: colors.surface.elevated, borderWidth: 1, borderColor: colors.surface.border }
+                    : { backgroundColor: colors.accent.primary },
+                ]}
+              >
+                <IconSymbol
+                  name={isFollowing ? 'checkmark' : 'plus'}
+                  size={14}
+                  color={isFollowing ? colors.text.primary : colors.text.inverse}
+                />
+                <Text style={[
+                  { fontSize: 14, fontWeight: '600' },
+                  isFollowing ? { color: colors.text.primary } : { color: colors.text.inverse },
+                ]}>
+                  {isFollowing ? 'Takiptesin' : 'Takip Et'}
+                </Text>
+              </TouchableOpacity>
+              {followerCount > 0 && (
+                <Text style={{ fontSize: 13, color: colors.text.secondary }}>
+                  {followerCount >= 1000
+                    ? `${(followerCount / 1000).toFixed(1)}B`
+                    : followerCount} takipçi
+                </Text>
+              )}
+            </View>
+          )}
+
           {/* Tags */}
         </View>
 
         {/* Content */}
         <View style={styles.content}>
+          {/* Mekanın Aktif Hikayeleri */}
+          {placeStories && placeStories.length > 0 && (
+            <View style={{ paddingHorizontal: spacing.base, marginBottom: spacing.md }}>
+              <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 12, paddingVertical: 4 }}>
+                <TouchableOpacity
+                  onPress={() => {
+                    lightImpact();
+                    setSelectedStoryIndex(0);
+                    setShowStoriesModal(true);
+                  }}
+                  activeOpacity={0.8}
+                  style={{ alignItems: 'center' }}
+                >
+                  <View style={{
+                    width: 72,
+                    height: 72,
+                    borderRadius: 36,
+                    borderWidth: 2,
+                    borderColor: '#f09433',
+                    padding: 3,
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                  }}>
+                    {place?.photo_url ? (
+                      <Image source={{ uri: place.photo_url }} style={{ width: 60, height: 60, borderRadius: 30 }} />
+                    ) : (
+                      <View style={{ width: 60, height: 60, borderRadius: 30, backgroundColor: colors.surface.elevated, justifyContent: 'center', alignItems: 'center' }}>
+                        <IconSymbol name="camera.fill" size={24} color={colors.text.secondary} />
+                      </View>
+                    )}
+                  </View>
+                  <Text style={{ fontSize: 12, color: colors.text.primary, marginTop: 4, fontWeight: '600' }}>Hikayeler</Text>
+                </TouchableOpacity>
+              </ScrollView>
+            </View>
+          )}
           {/* Place Meta Section */}
           <View style={styles.placeMetaSection}>
             <View style={styles.placeMetaRow}>
@@ -731,6 +932,56 @@ export default function PlaceDetailScreen({
                     <IconSymbol name="phone.fill" size={20} color={colors.text.primary} />
                   </TouchableOpacity>
                 </View>
+              </View>
+            </Card>
+          )}
+
+          {/* Mekan Gönderileri Grid */}
+          {placePosts && placePosts.length > 0 && (
+            <Card style={{ ...StyleSheet.flatten(styles.sectionCard), padding: spacing.base, marginBottom: spacing.xl }}>
+              <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8, marginBottom: spacing.md }}>
+                <IconSymbol name="square.grid.3x3.fill" size={20} color={colors.text.primary} />
+                <Text style={[h2Style, { fontSize: 20 }]}>Gönderiler</Text>
+                <View style={{
+                  backgroundColor: colors.surface.elevated,
+                  paddingHorizontal: 8,
+                  paddingVertical: 2,
+                  borderRadius: 12,
+                  marginLeft: 4
+                }}>
+                  <Text style={{ fontSize: 12, color: colors.text.secondary, fontWeight: '600' }}>{placePosts.length}</Text>
+                </View>
+              </View>
+              
+              <View style={{ flexDirection: 'row', flexWrap: 'wrap', gap: 4 }}>
+                {placePosts.map((post, idx) => {
+                  const postImg = post.media?.[0]?.media_url || post.media_url;
+                  return (
+                    <TouchableOpacity
+                      key={post.id || idx}
+                      onPress={() => {
+                        lightImpact();
+                        router.push(`/p/post/${post.id}`);
+                      }}
+                      activeOpacity={0.8}
+                      style={{
+                        width: (SCREEN_WIDTH - spacing.base * 2 - 32 - 8) / 3,
+                        height: (SCREEN_WIDTH - spacing.base * 2 - 32 - 8) / 3,
+                        borderRadius: 8,
+                        overflow: 'hidden',
+                        backgroundColor: colors.surface.elevated
+                      }}
+                    >
+                      {postImg ? (
+                        <Image source={{ uri: postImg }} style={{ width: '100%', height: '100%' }} resizeMode="cover" />
+                      ) : (
+                        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                          <IconSymbol name="photo" size={24} color={colors.text.tertiary} />
+                        </View>
+                      )}
+                    </TouchableOpacity>
+                  );
+                })}
               </View>
             </Card>
           )}
@@ -1239,6 +1490,17 @@ export default function PlaceDetailScreen({
           </View>
         )}
       </Modal>
+
+      {/* Story Viewer Modal */}
+      {placeStories && placeStories.length > 0 && (
+        <StoryViewerModal
+          stories={placeStories}
+          initialIndex={selectedStoryIndex}
+          visible={showStoriesModal}
+          onClose={() => setShowStoriesModal(false)}
+          currentUserId={currentUser?.id}
+        />
+      )}
     </Animated.View>
   );
 }

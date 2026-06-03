@@ -1,3 +1,4 @@
+# pyrefly: ignore [missing-import]
 from pydantic_settings import BaseSettings
 from functools import lru_cache
 
@@ -7,8 +8,8 @@ class Settings(BaseSettings):
     ALLOWED_ORIGINS: str = "*"
     JWT_SECRET_KEY: str = "dev-secret-change-in-production"
     JWT_ALGORITHM: str = "HS256"
-    JWT_ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
-    JWT_REFRESH_TOKEN_EXPIRE_DAYS: int = 30
+    JWT_ACCESS_TOKEN_EXPIRE_MINUTES: int = 525600  # 1 yıl (Instagram tarzı kalıcı oturum)
+    JWT_REFRESH_TOKEN_EXPIRE_DAYS: int = 365
     PASSWORD_MIN_LENGTH: int = 6
     LLM_ENABLED: bool = True
     LLM_PROVIDER: str = "ollama"

@@ -38,6 +38,7 @@ W_ENGAGEMENT = 40   # max puan: etkileşim
 W_FRESHNESS  = 20   # max puan: tazelik
 W_SOCIAL     = 25   # max puan: sosyal yakınlık
 W_INTEREST   = 15   # max puan: ilgi alanı
+W_VENUE_BOOST = 10  # bonus: daha önce etkileşim olan mekanın gönderisi
 
 COMMENT_WEIGHT = 2.0   # yorumun beğeniye oranla ağırlığı
 FRESHNESS_HALF_LIFE_HOURS = 48   # bu kadar saat sonra tazelik puanı %50 düşer
@@ -119,14 +120,19 @@ def score_post(
     direct_following_of_friends: set[int],  # arkadaşın arkadaşları
     user_interest_keywords: set[str],       # MatchProfile.interests → lower set
     liked_place_categories: set[str],       # kullanıcının beğenilerinden gelen mekan kategorileri
+    interacted_place_ids: set[int] | None = None,  # etkileşim skoru olan mekan ID'leri
 ) -> float:
-    """Tek bir post için bileşik 0-100 skor döner."""
+    """Tek bir post için bileşik 0-100+ skor döner."""
     eng  = _engagement_score(post.like_count or 0, post.comment_count or 0)
     frs  = _freshness_score(post.created_at)
     soc  = _social_score(post.user_id, fof_ids, direct_following_of_friends)
     place_cat = post.place.category if post.place else None
     intr = _interest_score(place_cat, user_interest_keywords, liked_place_categories)
-    total = eng + frs + soc + intr
+    # Mekan etkileşim boost'u: kullanıcı bu mekanla daha önce etkileşime girdiyse
+    venue_boost = 0.0
+    if interacted_place_ids and post.place_id and post.place_id in interacted_place_ids:
+        venue_boost = W_VENUE_BOOST
+    total = eng + frs + soc + intr + venue_boost
     return round(total, 4)
 
 
@@ -144,11 +150,13 @@ class FeedScoringContext:
         direct_following_of_friends: set[int],
         user_interest_keywords: set[str],
         liked_place_categories: set[str],
+        interacted_place_ids: set[int] | None = None,
     ):
         self.fof_ids = fof_ids
         self.direct_following_of_friends = direct_following_of_friends
         self.user_interest_keywords = user_interest_keywords
         self.liked_place_categories = liked_place_categories
+        self.interacted_place_ids = interacted_place_ids or set()
 
     @classmethod
     def build(cls, db, current_user_id: int) -> "FeedScoringContext":
@@ -206,11 +214,16 @@ class FeedScoringContext:
         )
         liked_place_categories = {r[0].lower() for r in liked_place_rows if r[0]}
 
+        # 6. Etkileşim skoru olan mekan ID'leri (kart açma, AI arama vb.)
+        import crud as _crud
+        interacted_ids = set(_crud.get_interacted_place_ids(db, current_user_id, min_score=2))
+
         logger.debug(
-            "FeedScoringContext built: fof=%d, interests=%d, liked_cats=%d",
+            "FeedScoringContext built: fof=%d, interests=%d, liked_cats=%d, interacted_places=%d",
             len(direct_following_of_friends),
             len(user_interest_keywords),
             len(liked_place_categories),
+            len(interacted_ids),
         )
 
         return cls(
@@ -218,6 +231,7 @@ class FeedScoringContext:
             direct_following_of_friends=direct_following_of_friends,
             user_interest_keywords=user_interest_keywords,
             liked_place_categories=liked_place_categories,
+            interacted_place_ids=interacted_ids,
         )
 
     @classmethod
@@ -228,4 +242,5 @@ class FeedScoringContext:
             direct_following_of_friends=set(),
             user_interest_keywords=set(),
             liked_place_categories=set(),
+            interacted_place_ids=set(),
         )

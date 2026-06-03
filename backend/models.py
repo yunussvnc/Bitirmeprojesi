@@ -216,6 +216,46 @@ class UserBlock(Base):
     )
 
 
+class PlaceFollow(Base):
+    """Kullanıcının mekanı takip etmesi — tek yönlü (kullanıcı → mekan)"""
+    __tablename__ = "place_follows"
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
+    place_id = Column(Integer, ForeignKey("places.id", ondelete="CASCADE"), nullable=False, index=True)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    user = relationship("User", backref="place_follows")
+    place = relationship("Place", back_populates="followers")
+
+    __table_args__ = (
+        UniqueConstraint("user_id", "place_id", name="uq_place_follow_user_place"),
+    )
+
+
+class PlaceInteraction(Base):
+    """
+    Kullanıcı–mekan etkileşim skoru — algoritmik feed boosting için.
+    Kaynaklar: mekan kartı açma, AI arama, yorum yapma, beğenme vb.
+    """
+    __tablename__ = "place_interactions"
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
+    place_id = Column(Integer, ForeignKey("places.id", ondelete="CASCADE"), nullable=False, index=True)
+    # Ağırlıklı skor: kart_açma=1, AI_arama=2, yorum=5, beğeni=3
+    score = Column(Integer, default=0)
+    view_count = Column(Integer, default=0)      # Kaç kez mekan kartı açıldı
+    search_count = Column(Integer, default=0)    # AI aramada kaç kez çıktı/tıklandı
+    last_interacted_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    user = relationship("User", backref="place_interactions")
+    place = relationship("Place", back_populates="interactions")
+
+    __table_args__ = (
+        UniqueConstraint("user_id", "place_id", name="uq_place_interaction_user_place"),
+    )
+
+
 class Place(Base):
     __tablename__ = "places"
     id = Column(Integer, primary_key=True, index=True)
@@ -260,6 +300,8 @@ class Place(Base):
     reviews = relationship("Review", back_populates="place")
     posts = relationship("Post", back_populates="place")
     stories = relationship("Story", back_populates="place")
+    followers = relationship("PlaceFollow", back_populates="place", cascade="all, delete-orphan")
+    interactions = relationship("PlaceInteraction", back_populates="place", cascade="all, delete-orphan")
 
 class Review(Base):
     __tablename__ = "reviews"
