@@ -3,7 +3,7 @@
 ## ✅ Hazırlanan Dosyalar
 
 1. **`runtime.txt`** - Python 3.11.11 versiyonu
-2. **`build.sh`** - Deployment script (pip install + alembic migrations)
+2. **`build.sh`** - Deployment script (pip install + python migrate.py)
 3. **`render.yaml`** - Infrastructure as Code (opsiyonel)
 4. **`.env.production`** - Environment variables şablonu (GIT'e eklenmedi)
 5. **`RENDER_DEPLOYMENT.md`** - Detaylı deployment rehberi (Türkçe)

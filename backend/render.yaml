@@ -3,6 +3,7 @@ services:
     name: asemos-backend
     runtime: python
     plan: free
+    # Migrations via build.sh: python migrate.py only (never Alembic)
     buildCommand: chmod +x build.sh && ./build.sh
     startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
     envVars:
@@ -54,4 +55,5 @@ databases:
   - name: asemos-db
     databaseName: asemos
     plan: free
+    # Migrations via build.sh: python migrate.py only (never Alembic)
     region: frankfurt

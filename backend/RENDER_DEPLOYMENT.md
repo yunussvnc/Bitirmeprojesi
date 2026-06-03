@@ -15,7 +15,7 @@ Bu rehber, AsEmOs FastAPI backend'ini Render.com'a deploy etmek için adım adı
 ### 📦 Backend Özellikleri
 - Framework: FastAPI + Uvicorn
 - Database: SQLite (local) → PostgreSQL (production)
-- Migrations: Alembic
+- Migrations: migrate.py \(SQLAlchemy create_all\)
 - Features: JWT Auth, WebSocket, File Upload (Cloudinary), LLM (Groq), SMTP
 
 ---
@@ -154,7 +154,7 @@ SMTP_PORT=587
 2. Build ve deploy süreci başlayacak (5-10 dakika sürebilir)
 3. Logs'u takip edin:
    - Dependencies yükleniyor...
-   - Alembic migrations çalışıyor...
+   - migrate.py çalışıyor...
    - Uvicorn başlatılıyor...
 
 4. Deploy tamamlandığında size bir URL verilecek:
@@ -300,7 +300,7 @@ Bir environment variable değiştirdiğinizde:
 1. Render Shell'e bağlanın
 2. Migration'ı manual çalıştırın:
    ```bash
-   alembic upgrade head
+   python migrate.py
    ```
 3. Service'i restart edin
 
