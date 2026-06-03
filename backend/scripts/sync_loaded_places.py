@@ -25,6 +25,22 @@ load_dotenv()
 from config import get_settings
 from scripts.place_utils import place_to_postgres_row
 
+def _is_postgres_url(db_url: str) -> bool:
+    u = (db_url or "").strip().lower()
+    return u.startswith("postgresql://") or u.startswith("postgres://")
+
+
+def _database_target_label(db_url: str) -> str:
+    u = (db_url or "").strip()
+    if not u:
+        return "(bos)"
+    if u.lower().startswith("sqlite"):
+        return f"SQLite ({u})"
+    if "@" in u:
+        return u.split("@", 1)[-1]
+    return u[:80]
+
+
 DEFAULT_JSON_PATH = os.path.join(os.path.dirname(__file__), "..", "data", "loaded_places.json")
 FALLBACK_JSON_PATH = os.path.join(
     os.path.dirname(__file__), "..", "..", "ai-llm", "data", "loaded_places.json"
@@ -139,7 +155,7 @@ def sync_loaded_places(
     print(f"{'=' * 65}")
     print(f"  Gecerli kayit : {len(rows)}")
     print(f"  Gecersiz/atla : {skipped_invalid}")
-    print(f"  Veritabani    : {db_url.split('@')[-1]}")
+    print(f"  Veritabani    : {_database_target_label(db_url)}")
     print(f"  Mod           : {'DRY-RUN' if dry_run else 'CANLI UPSERT'}")
     print(f"{'=' * 65}\n")
 
@@ -270,6 +286,8 @@ def sync_loaded_places(
         print(f"  Hatali       : {stats['failed']}")
         print(f"  Toplam DB    : {total}")
         print(f"{'=' * 65}\n")
+        if total == 0 and stats["inserted"] == 0 and stats["updated"] == 0:
+            print("UYARI: places tablosu hala bos. DATABASE_URL veya JSON yolunu kontrol edin.")
     except Exception as exc:
         print(f"Commit hatasi: {exc}")
         conn.rollback()
@@ -282,11 +300,35 @@ def sync_loaded_places(
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="loaded_places.json -> PostgreSQL")
-    parser.add_argument("--db", default=get_settings().DATABASE_URL, help="PostgreSQL URL")
+    parser.add_argument(
+        "--db",
+        default=os.getenv("DATABASE_URL") or get_settings().DATABASE_URL,
+        help="PostgreSQL URL (Render: External Database URL)",
+    )
     parser.add_argument("--json", default=None, help="Kaynak JSON dosyasi")
     parser.add_argument("--dry-run", action="store_true", help="Sadece onizleme")
+    parser.add_argument(
+        "--allow-sqlite",
+        action="store_true",
+        help="Yerel SQLite ile calistirmaya izin ver (varsayilan: sadece Postgres)",
+    )
     args = parser.parse_args()
-    sync_loaded_places(args.db, json_path=args.json, dry_run=args.dry_run)
+
+    db_url = (args.db or "").strip()
+    if not db_url:
+        print("HATA: DATABASE_URL veya --db gerekli.")
+        print("Render Postgres icin Dashboard -> asemos-db -> External Database URL kullanin.")
+        sys.exit(2)
+
+    if not _is_postgres_url(db_url) and not args.allow_sqlite:
+        print("HATA: Hedef veritabani PostgreSQL degil!")
+        print(f"  Algilanan: {_database_target_label(db_url)}")
+        print("  Yerel backend/.env icindeki sqlite:///... Render API verisini DOLDURMAZ.")
+        print("  Cozum: PowerShell'de $env:DATABASE_URL = '<External Database URL>' sonra scripti tekrar calistirin.")
+        print("  Yerel SQLite testi icin: --allow-sqlite")
+        sys.exit(2)
+
+    sync_loaded_places(db_url, json_path=args.json, dry_run=args.dry_run)
 
 
 if __name__ == "__main__":
