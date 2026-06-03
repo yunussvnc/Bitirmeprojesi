@@ -30,8 +30,24 @@ export type Place = {
   user_review?: string;
   phone_number?: string;
   data_id?: string;
+  vector_id?: string;
   follower_count?: number;
   is_following?: boolean;
+};
+
+export type GoogleReview = {
+  author_name: string;
+  rating: number;
+  text: string;
+  relative_time?: string | null;
+  avatar_url?: string | null;
+};
+
+export type GoogleReviewsResponse = {
+  reviews: GoogleReview[];
+  total_fetched: number;
+  display_limit: number;
+  source: string;
 };
 
 export type PaginatedPlaces = {
@@ -142,8 +158,24 @@ function normalizePlace(p: any): Place {
     user_review,
     phone_number,
     data_id,
+    vector_id: p?.vector_id || data_id,
     follower_count,
     is_following,
+  };
+}
+
+export async function getPlaceGoogleReviews(
+  placeId: string | number,
+  limit = 5,
+): Promise<GoogleReviewsResponse> {
+  const data = await apiGet<GoogleReviewsResponse>(
+    `/places/${placeId}/google-reviews?limit=${limit}`,
+  );
+  return {
+    reviews: data?.reviews ?? [],
+    total_fetched: data?.total_fetched ?? 0,
+    display_limit: data?.display_limit ?? limit,
+    source: data?.source ?? "google_maps",
   };
 }
 

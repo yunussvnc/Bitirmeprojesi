@@ -390,7 +390,14 @@
     "pages_menu": "{{count}} page menu",
     "items": "{{count}} items",
     "page_x_of_y": "Page {{current}} / {{total}}",
-    "no_menu": "This venue hasn't added a menu yet."
+    "no_menu": "This venue hasn't added a menu yet.",
+    "google_reviews_section": "Reviews",
+    "google_reviews_badge": "Google reviews",
+    "google_review_rating": "{{rating}}/5",
+    "google_reviews_loading": "Loading Google reviews…",
+    "google_reviews_empty": "No Google reviews found for this place.",
+    "google_reviews_error": "Could not load Google reviews.",
+    "google_reviews_see_more": "See more"
   },
   "feed_comments": {
     "comments": "Comments",

@@ -147,6 +147,22 @@ class Place(PlaceBase):
     class Config:
         from_attributes = True
 
+
+class GoogleReviewItem(BaseModel):
+    author_name: str
+    rating: float = Field(ge=0, le=5)
+    text: str
+    relative_time: Optional[str] = None
+    avatar_url: Optional[str] = None
+
+
+class GoogleReviewsResponse(BaseModel):
+    reviews: List[GoogleReviewItem] = []
+    total_fetched: int = 0
+    display_limit: int = 5
+    source: str = "google_maps"
+
+
 class DeviceTokenCreate(BaseModel):
     token: str
     platform: Optional[str] = None

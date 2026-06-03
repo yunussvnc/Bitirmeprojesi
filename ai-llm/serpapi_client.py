@@ -153,36 +153,30 @@ class SerpApiClient:
             return item["serpapi_thumbnail"]
         return None
 
-    def get_place_reviews(self, data_id: str, max_reviews: int = 50) -> List[str]:
-        """
-        Belirli bir mekan için (data_id üzerinden) son yorumları çeker (Pagination ile).
-        SerpApi token harcamasını sınırlamak için en fazla max_reviews kadar (örn: 5 sayfa) çeker.
-        """
+    def _fetch_review_pages(self, data_id: str, max_reviews: int) -> List[Dict]:
+        """Ham SerpAPI yorum kayıtlarını sayfalayarak döner."""
         if not data_id:
             return []
-            
-        reviews = []
+
+        collected: List[Dict] = []
         next_page = None
-        
-        # Her SerpApi sayfası yaklaşık 10 yorum getirir. Max 50 için 5 istek yapar.
         max_pages = (max_reviews // 10) + 1
         page_count = 0
-        
+
         print(f"[SerpApi] {data_id} icin yorumlar cekiliyor...")
-        
-        while page_count < max_pages and len(reviews) < max_reviews:
+
+        while page_count < max_pages and len(collected) < max_reviews:
             params = {
                 "engine": "google_maps_reviews",
                 "data_id": data_id,
-                "sort_by": "newestFirst", # En yeniler
+                "sort_by": "newestFirst",
                 "hl": "tr",
                 "gl": "tr",
-                "api_key": self.api_key
+                "api_key": self.api_key,
             }
-            
             if next_page:
                 params["next_page_token"] = next_page
-                
+
             try:
                 res = requests.get(self.BASE_URL, params=params, timeout=15)
                 res.raise_for_status()
@@ -190,28 +184,56 @@ class SerpApiClient:
             except Exception as e:
                 print(f"[SerpApi] Review hatasi: {e}")
                 break
-                
-            # Yorumları al
+
             page_reviews = data.get("reviews", [])
-            for r in page_reviews:
-                snippet = r.get("snippet", "").strip()
-                if snippet:
-                    reviews.append(snippet)
-                    
-            if len(reviews) >= max_reviews:
-                reviews = reviews[:max_reviews]
+            collected.extend(page_reviews)
+            if len(collected) >= max_reviews:
+                collected = collected[:max_reviews]
                 break
-                
-            # Sonraki sayfa token'i
+
             pagination = data.get("serpapi_pagination", {})
             next_page = pagination.get("next_page_token")
-            
             if not next_page:
-                break # Başka sayfa kalmadı
-                
+                break
             page_count += 1
-            
-        return reviews
+
+        return collected
+
+    @staticmethod
+    def _parse_structured_review(raw: Dict) -> Optional[Dict]:
+        text = (raw.get("snippet") or raw.get("extract") or "").strip()
+        if not text:
+            return None
+        user = raw.get("user") or {}
+        author = (user.get("name") or "Google kullanıcısı").strip()
+        rating = raw.get("rating")
+        try:
+            rating = float(rating) if rating is not None else 0.0
+        except (TypeError, ValueError):
+            rating = 0.0
+        relative_time = raw.get("date") or raw.get("iso_date") or ""
+        return {
+            "author_name": author,
+            "rating": rating,
+            "text": text,
+            "relative_time": str(relative_time).strip() or None,
+            "avatar_url": user.get("thumbnail"),
+        }
+
+    def get_place_reviews_structured(self, data_id: str, max_reviews: int = 50) -> List[Dict]:
+        """Yazar adı, puan, metin ve zaman ile yapılandırılmış yorumlar."""
+        result = []
+        for raw in self._fetch_review_pages(data_id, max_reviews):
+            parsed = self._parse_structured_review(raw)
+            if parsed:
+                result.append(parsed)
+        return result
+
+    def get_place_reviews(self, data_id: str, max_reviews: int = 50) -> List[str]:
+        """
+        Belirli bir mekan için (data_id üzerinden) son yorum metinlerini çeker.
+        """
+        return [r["text"] for r in self.get_place_reviews_structured(data_id, max_reviews)]
 
 
 def test_client():

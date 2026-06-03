@@ -43,7 +43,17 @@ import { spacing, createTextStyle } from "@/src/constants/design";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { calculateDistance, getCurrentLocation, type PlaceLocation } from "@/src/utils/location";
-import { getPlaceById, getAllPlaces, togglePlaceFollow, getPlacePosts, getPlaceStories, recordPlaceInteraction } from "@/src/services/mekanService";
+import {
+  getPlaceById,
+  getAllPlaces,
+  togglePlaceFollow,
+  getPlacePosts,
+  getPlaceStories,
+  recordPlaceInteraction,
+  getPlaceGoogleReviews,
+  type GoogleReview,
+} from "@/src/services/mekanService";
+import { GoogleReviewCard } from "@/src/components/domain/place/GoogleReviewCard";
 import { lightImpact, success, warning } from "@/src/utils/haptics";
 import { logger } from "@/src/utils/logger";
 import { apiGet, apiPost } from "@/src/utils/apiClient";
@@ -108,6 +118,10 @@ export default function PlaceDetailScreen({
   const [reviews, setReviews] = useState<Review[]>([]);
   const [reviewsLoading, setReviewsLoading] = useState(false);
   const [reviewsError, setReviewsError] = useState<string | null>(null);
+  const [googleReviews, setGoogleReviews] = useState<GoogleReview[]>([]);
+  const [googleReviewsTotal, setGoogleReviewsTotal] = useState(0);
+  const [googleReviewsLoading, setGoogleReviewsLoading] = useState(false);
+  const [googleReviewsError, setGoogleReviewsError] = useState<string | null>(null);
   const [lastDistance, setLastDistance] = useState<number | null>(null);
   const [similarPlaces, setSimilarPlaces] = useState<any[]>([]);
   const [showReviews, setShowReviews] = useState(false);
@@ -254,6 +268,7 @@ export default function PlaceDetailScreen({
     const cancelled = { current: false };
     loadPlaceData(cancelled);
     loadReviews(cancelled);
+    loadGoogleReviews(cancelled);
     loadSocialContent(cancelled);
     return () => {
       cancelled.current = true;
@@ -333,10 +348,30 @@ export default function PlaceDetailScreen({
     } catch (error) {
       if (!cancelled.current) {
         logger.error("Error loading reviews:", error);
-        setReviewsError("Yorumlar yüklenirken bir hata oluştu.");
+        setReviewsError(t("place_detail.google_reviews_error"));
       }
     } finally {
       if (!cancelled.current) setReviewsLoading(false);
+    }
+  };
+
+  const loadGoogleReviews = async (cancelled: { current: boolean } = { current: false }) => {
+    if (!id) return;
+    setGoogleReviewsLoading(true);
+    setGoogleReviewsError(null);
+    try {
+      const data = await getPlaceGoogleReviews(id, 5);
+      if (!cancelled.current) {
+        setGoogleReviews(data.reviews || []);
+        setGoogleReviewsTotal(data.total_fetched || 0);
+      }
+    } catch (error) {
+      if (!cancelled.current) {
+        logger.error("Error loading Google reviews:", error);
+        setGoogleReviewsError(t("place_detail.google_reviews_error"));
+      }
+    } finally {
+      if (!cancelled.current) setGoogleReviewsLoading(false);
     }
   };
 
@@ -766,6 +801,53 @@ export default function PlaceDetailScreen({
               <Text style={[bodyStyle, { lineHeight: 22, color: colors.text.secondary }]}>{place.campaign_text}</Text>
             </Card>
           )}
+
+          {/* Google Maps reviews */}
+          <Card style={styles.sectionCard}>
+            <View style={styles.sectionHeaderRow}>
+              <Text style={[h2Style, { fontSize: 20 }]}>{t("place_detail.google_reviews_section")}</Text>
+              {googleReviewsTotal > 5 && (
+                <TouchableOpacity
+                  onPress={() => {
+                    lightImpact();
+                    setShowReviews(true);
+                  }}
+                  activeOpacity={0.7}
+                >
+                  <Text style={{ fontSize: 14, fontWeight: "600", color: colors.accent.primary }}>
+                    {t("place_detail.google_reviews_see_more")}
+                  </Text>
+                </TouchableOpacity>
+              )}
+            </View>
+            {googleReviewsLoading ? (
+              <Text style={[bodySmallStyle, { marginTop: spacing.sm }]}>
+                {t("place_detail.google_reviews_loading")}
+              </Text>
+            ) : googleReviewsError ? (
+              <Text style={[bodySmallStyle, { marginTop: spacing.sm, color: colors.text.tertiary }]}>
+                {googleReviewsError}
+              </Text>
+            ) : googleReviews.length === 0 ? (
+              <Text style={[bodySmallStyle, { marginTop: spacing.sm, color: colors.text.tertiary }]}>
+                {t("place_detail.google_reviews_empty")}
+              </Text>
+            ) : (
+              <View style={{ marginTop: spacing.xs }}>
+                {googleReviews.map((gr, idx) => (
+                  <GoogleReviewCard
+                    key={`${gr.author_name}-${idx}`}
+                    review={gr}
+                    showMoreLink={gr.text.length > 180}
+                    onMorePress={() => {
+                      lightImpact();
+                      setShowReviews(true);
+                    }}
+                  />
+                ))}
+              </View>
+            )}
+          </Card>
 
           {/* Atmosphere Section */}
           {place?.description && (

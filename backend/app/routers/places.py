@@ -318,6 +318,40 @@ def read_place(
     return place
 
 
+@router.get("/places/{place_id}/google-reviews", response_model=schemas.GoogleReviewsResponse)
+def get_place_google_reviews(
+    place_id: int,
+    limit: int = Query(5, ge=1, le=50, description="İstemciye döndürülecek yorum sayısı"),
+    db: Session = Depends(get_db),
+):
+    """
+    SerpAPI ile Google Maps yorumlarını çeker (en fazla 50), önbelleğe alır,
+    istemciye `limit` kadar döner (varsayılan 5).
+    """
+    place = crud.get_place_by_id(db, place_id=place_id)
+    if not place:
+        raise HTTPException(status_code=404, detail="Mekan bulunamadı.")
+
+    data_id = (place.vector_id or "").strip()
+    if not data_id:
+        return schemas.GoogleReviewsResponse(reviews=[], total_fetched=0, display_limit=limit)
+
+    from services.google_reviews import fetch_google_reviews
+
+    settings = get_settings()
+    all_reviews = fetch_google_reviews(
+        data_id,
+        max_reviews=50,
+        api_key=settings.SERPAPI_KEY or None,
+    )
+    items = [schemas.GoogleReviewItem(**r) for r in all_reviews[:limit]]
+    return schemas.GoogleReviewsResponse(
+        reviews=items,
+        total_fetched=len(all_reviews),
+        display_limit=limit,
+    )
+
+
 @router.get("/places/{place_id}/photo")
 def get_place_photo(place_id: int, max_width: int = 800, db: Session = Depends(get_db)):
     """Mekanın Google fotoğrafını güvenli bir şekilde sunar (API anahtarını gizler)."""

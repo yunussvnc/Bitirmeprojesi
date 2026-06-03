@@ -412,7 +412,14 @@
     "pages_menu": "{{count}} sayfa menü",
     "items": "{{count}} ürün",
     "page_x_of_y": "Sayfa {{current}} / {{total}}",
-    "no_menu": "Bu mekan henüz menü eklememiş."
+    "no_menu": "Bu mekan henüz menü eklememiş.",
+    "google_reviews_section": "Yorumlar",
+    "google_reviews_badge": "Google yorumları",
+    "google_review_rating": "{{rating}}/5",
+    "google_reviews_loading": "Google yorumları yükleniyor…",
+    "google_reviews_empty": "Bu mekan için Google yorumu bulunamadı.",
+    "google_reviews_error": "Google yorumları yüklenemedi.",
+    "google_reviews_see_more": "Daha fazla"
   },
   "feed_comments": {
     "comments": "Yorumlar",
