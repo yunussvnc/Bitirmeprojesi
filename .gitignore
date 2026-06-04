@@ -51,3 +51,8 @@ ai-llm/.env
 .coverage
 htmlcov/
 .pytest_cache/
+
+# Agent & AI & Local Data
+.agents/
+skills-lock.json
+data/
