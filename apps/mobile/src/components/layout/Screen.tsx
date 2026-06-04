@@ -111,9 +111,12 @@ export const Screen = forwardRef<ScreenRef, ScreenProps>(({
   const topPadding = insets.top + designSpacing.base;
   
   // Bottom padding: clear gap above tab bar
-  // Tab bar is absolute positioned: ~88px on iOS, ~60px on Android
+  // Tab bar height = 50 (icon+label) + bottom inset — matches _layout.tsx
+  const TAB_ICON_AREA = 50;
+  const tabBarBottom = Math.max(insets.bottom, Platform.OS === 'android' ? 8 : 0);
+  const tabBarHeight = TAB_ICON_AREA + tabBarBottom;
   const bottomPadding = withTabBar 
-    ? (Platform.OS === 'ios' ? 100 : 72)
+    ? tabBarHeight + designSpacing.sm
     : designSpacing.xxl;
 
   const containerStyle = [

@@ -8,7 +8,8 @@
 import { Tabs } from "expo-router";
 import { useTheme } from "@/src/hooks/useTheme";
 import { IconSymbol, type IconSymbolName } from "@/src/components/ui/icon-symbol";
-import { StyleSheet, Platform, Text as RNText } from "react-native";
+import { StyleSheet, Platform } from "react-native";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { selection } from "@/src/utils/haptics";
 import { AnimatedTabBar } from "@/src/components/layout/AnimatedTabBar";
 import { TabBarVisibilityProvider } from "@/src/components/layout/TabBarVisibilityContext";
@@ -30,8 +31,16 @@ function TabIcon({ name, color }: { name: IconSymbolName; focused: boolean; colo
 export default function TabsLayout() {
   const { colors } = useTheme();
   const { t } = useTranslation();
+  const insets = useSafeAreaInsets();
 
-  const unreadMessagesCount = useMessagesStore((state) => 
+  // Dinamik tab bar boyutu — her cihazın safe area'sına göre ayarlan
+  // iOS: home indicator (~34px) + ikon+etiket (~50px)
+  // Android: navigation bar inset (0-48px arası) + ikon+etiket (~50px)
+  const TAB_ICON_AREA = 50; // ikon + etiket yüksekliği
+  const bottomPadding = Math.max(insets.bottom, Platform.OS === 'android' ? 8 : 0);
+  const tabBarHeight = TAB_ICON_AREA + bottomPadding;
+
+  const unreadMessagesCount = useMessagesStore((state) =>
     state.conversations.filter(c => c.unread && !c.isArchived).length
   );
 
@@ -53,9 +62,9 @@ export default function TabsLayout() {
             backgroundColor: colors.background.secondary,
             borderTopWidth: StyleSheet.hairlineWidth,
             borderTopColor: colors.surface.border,
-            height: Platform.OS === "ios" ? 100 : 60,
+            height: tabBarHeight,
             paddingTop: 8,
-            paddingBottom: Platform.OS === "ios" ? 28 : 8,
+            paddingBottom: bottomPadding,
             elevation: 0,
             shadowOpacity: 0,
           },
@@ -64,7 +73,7 @@ export default function TabsLayout() {
           tabBarLabelStyle: {
             fontSize: 10,
             fontWeight: "500",
-            marginTop: 4,
+            marginTop: 2,
           },
           tabBarItemStyle: {
             paddingVertical: 4,
