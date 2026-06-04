@@ -434,8 +434,8 @@ def get_match_conversations(
     current_user: models.User = Depends(get_current_user),
 ):
     """Eşleşme konuşmalarını getir"""
-    _check_age_gate(current_user)
-    
+    # NOT: Mevcut konuşmaları görmek için yaş/doğum tarihi kontrolü gerekmez.
+    # _check_age_gate sadece yeni eşleşme arama ve beğenme için geçerlidir.
     convs = db.query(models.MatchConversation).filter(
         (models.MatchConversation.user1_id == current_user.id) |
         (models.MatchConversation.user2_id == current_user.id),
