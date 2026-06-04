@@ -38,6 +38,7 @@ import { API_BASE_URL } from '@/src/constants/api';
 import * as AppleAuthentication from 'expo-apple-authentication';
 import * as WebBrowser from 'expo-web-browser';
 import * as Google from 'expo-auth-session/providers/google';
+import { LegalModal } from '@/src/components/ui/LegalModal';
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -62,6 +63,7 @@ export default function RegisterScreen() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [termsAccepted, setTermsAccepted] = useState(false);
+  const [legalModalType, setLegalModalType] = useState<'terms' | 'privacy' | null>(null);
   const params = useLocalSearchParams();
   // roleType eklendi ("user" veya "venue")
   const [roleType, setRoleType] = useState<'user' | 'venue'>((params.roleType as 'user' | 'venue') || 'user');
@@ -405,8 +407,8 @@ export default function RegisterScreen() {
                             {termsAccepted && <IconSymbol name="checkmark" size={14} color="#000" />}
                           </View>
                           <Text style={styles.termsText}>
-                            <Text style={styles.termsLink} onPress={() => WebBrowser.openBrowserAsync('https://asemos.com/terms')}>{t('auth.terms')}</Text>{t('auth.and')}
-                            <Text style={styles.termsLink} onPress={() => WebBrowser.openBrowserAsync('https://asemos.com/privacy')}>{t('auth.privacy')}</Text>{t('auth.read_and_accept')}
+                            <Text style={styles.termsLink} onPress={() => setLegalModalType('terms')}>{t('auth.terms')}</Text>{t('auth.and')}
+                            <Text style={styles.termsLink} onPress={() => setLegalModalType('privacy')}>{t('auth.privacy')}</Text>{t('auth.read_and_accept')}
                           </Text>
                         </TouchableOpacity>
 
@@ -457,6 +459,12 @@ export default function RegisterScreen() {
                 </View>
               </View>
           </ScrollView>
+
+          <LegalModal 
+            visible={legalModalType !== null} 
+            type={legalModalType} 
+            onClose={() => setLegalModalType(null)} 
+          />
         </KeyboardAvoidingView>
       </SafeAreaView>
     </View>
