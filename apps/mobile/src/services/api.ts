@@ -6,7 +6,11 @@ export async function recommendPlaces(
   req: RecommendRequest
 ): Promise<RecommendResponse> {
   try {
-    return await apiPost<RecommendResponse>("/recommend", req);
+    return await apiPost<RecommendResponse>("/recommend", req, {
+      timeoutMs: 45000,
+      retries: 2,
+      retryDelay: 2000,
+    });
   } catch (error) {
     logger.error("[recommendPlaces] Error:", error);
     throw error;

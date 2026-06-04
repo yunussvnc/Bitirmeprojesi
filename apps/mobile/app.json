@@ -1,4 +1,4 @@
-﻿{
+{
   "expo": {
     "name": "AsEmOs",
     "slug": "asemos",
@@ -26,16 +26,18 @@
       "buildNumber": "1",
       "supportsTablet": true,
       "infoPlist": {
-        "NSLocationWhenInUseUsageDescription": "Bu uygulama mekanlarÄ±n yakÄ±nÄ±nda olup olmadÄ±ÄŸÄ±nÄ±zÄ± kontrol etmek iÃ§in konum bilgisine ihtiyaÃ§ duyar.",
-        "NSLocationAlwaysAndWhenInUseUsageDescription": "Bu uygulama yakÄ±nÄ±nÄ±zdaki mekanlarÄ± bildirebilmek iÃ§in arka planda konum eriÅŸimine ihtiyaÃ§ duyar.",
-        "NSPhotoLibraryUsageDescription": "Bu uygulama yorumlarÄ±nÄ±za fotoÄŸraf eklemeniz iÃ§in galeri eriÅŸimine ihtiyaÃ§ duyar.",
-        "NSCameraUsageDescription": "Bu uygulama yorumlarÄ±nÄ±za fotoÄŸraf Ã§ekmeniz iÃ§in kamera eriÅŸimine ihtiyaÃ§ duyar.",
+        "NSLocationWhenInUseUsageDescription": "Bu uygulama mekanların yakınında olup olmadığınızı kontrol etmek için konum bilgisine ihtiyaç duyar.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "Bu uygulama yakınınızdaki mekanları bildirebilmek için arka planda konum erişimine ihtiyaç duyar.",
+        "NSPhotoLibraryUsageDescription": "Bu uygulama yorumlarınıza fotoğraf eklemeniz için galeri erişimine ihtiyaç duyar.",
+        "NSCameraUsageDescription": "Bu uygulama yorumlarınıza fotoğraf çekmeniz için kamera erişimine ihtiyaç duyar.",
         "UIBackgroundModes": [
+          "remote-notification",
           "remote-notification"
         ],
         "NSAppTransportSecurity": {
           "NSAllowsLocalNetworking": true
-        }
+        },
+        "ITSAppUsesNonExemptEncryption": false
       },
       "bundleIdentifier": "com.asemos.mobile"
     },
@@ -54,7 +56,11 @@
         "android.permission.READ_EXTERNAL_STORAGE",
         "android.permission.WRITE_EXTERNAL_STORAGE",
         "android.permission.CAMERA",
-        "android.permission.RECORD_AUDIO"
+        "android.permission.RECORD_AUDIO",
+        "android.permission.READ_MEDIA_VISUAL_USER_SELECTED",
+        "android.permission.READ_MEDIA_IMAGES",
+        "android.permission.READ_MEDIA_VIDEO",
+        "android.permission.READ_MEDIA_AUDIO"
       ],
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
@@ -83,15 +89,15 @@
       [
         "expo-image-picker",
         {
-          "photosPermission": "Bu uygulama yorumlarÄ±nÄ±za fotoÄŸraf eklemeniz iÃ§in galeri eriÅŸimine ihtiyaÃ§ duyar.",
-          "cameraPermission": "Bu uygulama yorumlarÄ±nÄ±za fotoÄŸraf Ã§ekmeniz iÃ§in kamera eriÅŸimine ihtiyaÃ§ duyar."
+          "photosPermission": "Bu uygulama yorumlarınıza fotoğraf eklemeniz için galeri erişimine ihtiyaç duyar.",
+          "cameraPermission": "Bu uygulama yorumlarınıza fotoğraf çekmeniz için kamera erişimine ihtiyaç duyar."
         }
       ],
       [
         "expo-media-library",
         {
-          "photosPermission": "Bu uygulama yorumlarÄ±nÄ±za fotoÄŸraf eklemeniz iÃ§in galeri eriÅŸimine ihtiyaÃ§ duyar.",
-          "savePhotosPermission": "Bu uygulama galerinize fotoÄŸraf kaydetmek iÃ§in eriÅŸime ihtiyaÃ§ duyar."
+          "photosPermission": "Bu uygulama yorumlarınıza fotoğraf eklemeniz için galeri erişimine ihtiyaç duyar.",
+          "savePhotosPermission": "Bu uygulama galerinize fotoğraf kaydetmek için erişime ihtiyaç duyar."
         }
       ],
       [

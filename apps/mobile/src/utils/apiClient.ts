@@ -6,6 +6,8 @@ interface RequestOptions extends RequestInit {
   retries?: number;
   retryDelay?: number;
   skipAuth?: boolean;
+  /** Varsayılan 10000 ms; AI/öneri gibi yavaş endpoint'ler için artırın */
+  timeoutMs?: number;
 }
 
 let _getAccessToken: (() => string | null) | null = null;
@@ -39,8 +41,9 @@ async function fetchWithRetry(
   retries = 3,
   retryDelay = 1000
 ): Promise<Response> {
+  const timeoutMs = options.timeoutMs ?? 10000;
   const controller = new AbortController();
-  const timeoutId = setTimeout(() => controller.abort(), 10000);
+  const timeoutId = setTimeout(() => controller.abort(), timeoutMs);
 
   try {
     let token = options.skipAuth ? null : _getAccessToken?.();
