@@ -17,8 +17,8 @@ export function LegalModal({ visible, type, onClose }: LegalModalProps) {
 
   if (!visible || !type) return null;
 
-  const title = type === 'terms' ? t('auth.terms') : t('auth.privacy');
-  const bodyText = type === 'terms' ? t('terms_body') : t('privacy_body');
+  const title = type === 'terms' ? t('legal_documents.terms_title') : t('legal_documents.privacy_title');
+  const bodyText = type === 'terms' ? t('legal_documents.terms_body') : t('legal_documents.privacy_body');
 
   return (
     <Modal
