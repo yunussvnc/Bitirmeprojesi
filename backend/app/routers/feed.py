@@ -126,7 +126,7 @@ async def get_feed(
         try:
             cached = await redis.get(cache_key)
             if cached:
-                return json.loads(cached)
+                return schemas.CursorPaginatedPosts(**json.loads(cached))
         except Exception:
             pass
 
@@ -141,7 +141,7 @@ async def get_feed(
         except Exception:
             pass
 
-    return result
+    return schemas.CursorPaginatedPosts(**result)
 
 
 @router.get("/feed/reels", response_model=schemas.CursorPaginatedPosts)

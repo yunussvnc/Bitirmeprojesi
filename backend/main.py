@@ -128,14 +128,23 @@ def health_check():
     llm_active = settings.LLM_ENABLED if hasattr(settings, 'LLM_ENABLED') else False
     ws_online = len(manager._global_connections)
 
-    overall = "ok" if db_ok else "degraded"
+    schema_ok = True
+    schema_checks: dict = {}
+    if db_ok:
+        try:
+            schema_checks = migrate.schema_patch_status()
+            schema_ok = all(schema_checks.values())
+        except Exception:
+            schema_ok = False
+
+    overall = "ok" if db_ok and schema_ok else "degraded"
 
     return {
         "status": overall,
         "version": app.version,
         "timestamp": datetime.utcnow().isoformat(),
         "services": {
-            "database": {"status": "ok" if db_ok else "error"},
+            "database": {"status": "ok" if db_ok else "error", "schema_patches": schema_checks},
             "cloud_storage": {"status": "ok" if cloud_ok else "not_configured"},
             "llm": {"status": "active" if llm_active else "disabled", "provider": getattr(settings, 'LLM_PROVIDER', 'N/A')},
             "websocket": {"online_users": ws_online},

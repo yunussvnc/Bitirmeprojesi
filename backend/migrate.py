@@ -44,8 +44,30 @@ def _apply_schema_patches(conn) -> None:
             continue
         col_type = pg_type if dialect == "postgresql" else sqlite_type
         logger.info("Şema yaması: %s.%s ekleniyor (%s)", table, column, col_type)
-        conn.execute(text(f"ALTER TABLE {table} ADD COLUMN {column} {col_type}"))
+        try:
+            if dialect == "postgresql":
+                conn.execute(
+                    text(f"ALTER TABLE {table} ADD COLUMN IF NOT EXISTS {column} {col_type}")
+                )
+            else:
+                conn.execute(text(f"ALTER TABLE {table} ADD COLUMN {column} {col_type}"))
+        except Exception as exc:
+            logger.error("Şema yaması başarısız %s.%s: %s", table, column, exc)
+            raise
     conn.commit()
+
+
+def schema_patch_status(engine_override=None) -> dict[str, bool]:
+    """Health / deploy doğrulama: kritik kolonların varlığı."""
+    db_engine = engine_override or engine
+    checks = {
+        "posts.is_flagged": False,
+        "post_comments.is_flagged": False,
+    }
+    with db_engine.connect() as conn:
+        checks["posts.is_flagged"] = _column_exists(conn, "posts", "is_flagged")
+        checks["post_comments.is_flagged"] = _column_exists(conn, "post_comments", "is_flagged")
+    return checks
 
 
 def run_migrations(engine_override=None):

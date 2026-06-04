@@ -1,4 +1,5 @@
 from datetime import datetime, timedelta, timezone
+import logging
 # pyrefly: ignore [missing-import]
 from sqlalchemy import func, or_, and_
 # pyrefly: ignore [missing-import]
@@ -7,6 +8,34 @@ from sqlalchemy.orm import Session, joinedload
 import bcrypt
 import models, schemas
 from app.services.moderator import AIModerator
+
+_logger = logging.getLogger("asemos.crud")
+_posts_is_flagged_available: bool | None = None
+
+
+def _posts_has_is_flagged_column(db: Session) -> bool:
+    """Render'da migrate gecikirse feed 500 vermesin diye kolon varlığını cache'ler."""
+    global _posts_is_flagged_available
+    if _posts_is_flagged_available is not None:
+        return _posts_is_flagged_available
+    try:
+        from migrate import _column_exists
+        bind = db.get_bind()
+        with bind.connect() as conn:
+            _posts_is_flagged_available = _column_exists(conn, "posts", "is_flagged")
+    except Exception:
+        _posts_is_flagged_available = True
+    if not _posts_is_flagged_available:
+        _logger.warning(
+            "posts.is_flagged kolonu yok — feed moderasyon filtresi atlandi; migrate.py calistirin"
+        )
+    return _posts_is_flagged_available
+
+
+def _filter_non_flagged_posts(query, db: Session):
+    if _posts_has_is_flagged_column(db):
+        return query.filter(models.Post.is_flagged == False)
+    return query
 
 # bcrypt 72 byte sınırı – uzun şifreleri kırp
 def _to_bcrypt_password(pw: str) -> bytes:
@@ -844,18 +873,13 @@ def get_feed_paginated_cursor(
             venue_owner_ids = [r[0] for r in rows if r[0]]
 
         # Kullanıcı takipleri + mekan sahiplerini birleştir
-        base = (
-            db.query(models.Post)
-            .filter(
-                models.Post.is_flagged == False,
-                or_(
-                    models.Post.user_id.in_(following_ids_sq),
-                    # Takip edilen mekanın sahibinin o mekana ait gönderileri
-                    and_(
-                        models.Post.user_id.in_(venue_owner_ids),
-                        models.Post.place_id.in_(followed_place_ids),
-                    ) if followed_place_ids else False,
-                ),
+        base = _filter_non_flagged_posts(db.query(models.Post), db).filter(
+            or_(
+                models.Post.user_id.in_(following_ids_sq),
+                and_(
+                    models.Post.user_id.in_(venue_owner_ids),
+                    models.Post.place_id.in_(followed_place_ids),
+                ) if followed_place_ids else False,
             )
         )
         if post_type:
@@ -920,7 +944,7 @@ def get_feed_paginated_cursor(
     }
 
     # Filtre: kamuya açık, takip etmediğim, benim değilim
-    base = db.query(models.Post).filter(models.Post.is_flagged == False)
+    base = _filter_non_flagged_posts(db.query(models.Post), db)
 
     if current_user_id:
         # Engellediğim veya beni engelleyen kişileri bul
@@ -1884,8 +1908,8 @@ def get_discover_feed_paginated(db: Session, page: int = 1, page_size: int = 20)
             )
         )
         
-        base = db.query(models.Post).filter(models.Post.is_flagged == False)
-        
+        base = _filter_non_flagged_posts(db.query(models.Post), db)
+
         # Order by computed score
         items = (
             base.options(
@@ -1901,7 +1925,7 @@ def get_discover_feed_paginated(db: Session, page: int = 1, page_size: int = 20)
         return items, base.count()
     except Exception as e:
         # Fallback to simple chronological if DB doesn't support pow/extract epoch (like SQLite)
-        base = db.query(models.Post).filter(models.Post.is_flagged == False)
+        base = _filter_non_flagged_posts(db.query(models.Post), db)
         items = (
             base.options(
                 joinedload(models.Post.user),

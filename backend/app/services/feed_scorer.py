@@ -216,7 +216,11 @@ class FeedScoringContext:
 
         # 6. Etkileşim skoru olan mekan ID'leri (kart açma, AI arama vb.)
         import crud as _crud
-        interacted_ids = set(_crud.get_interacted_place_ids(db, current_user_id, min_score=2))
+        try:
+            interacted_ids = set(_crud.get_interacted_place_ids(db, current_user_id, min_score=2))
+        except Exception as exc:
+            logger.warning("get_interacted_place_ids atlandi: %s", exc)
+            interacted_ids = set()
 
         logger.debug(
             "FeedScoringContext built: fof=%d, interests=%d, liked_cats=%d, interacted_places=%d",

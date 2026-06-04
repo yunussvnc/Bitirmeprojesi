@@ -21,6 +21,8 @@ services:
         value: 30
       - key: JWT_REFRESH_TOKEN_EXPIRE_DAYS
         value: 30
+      # Production web: https://asemos.app,https://admin.asemos.app
+      # Mobil native istemci: "*" (Render dashboard'da güncelleyin)
       - key: ALLOWED_ORIGINS
         value: "*"
       - key: LLM_ENABLED
