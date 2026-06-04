@@ -77,15 +77,18 @@ class TestFeedListing:
         response = client.get("/feed")
         assert response.status_code == 200
         data = response.json()
-        assert data["total"] >= 1
         assert len(data["items"]) >= 1
+        assert "has_more" in data
+        assert "page_size" in data
 
     def test_feed_with_author_info(self, client):
-        uid = create_test_user(email="feedauth@test.com", username="feedauth")
-        create_test_post(uid)
-        headers = get_auth_headers(uid)
+        uid_author = create_test_user(email="feedauth@test.com", username="feedauth")
+        uid_viewer = create_test_user(email="feedview@test.com", username="feedview")
+        create_test_post(uid_author)
+        headers = get_auth_headers(uid_viewer)
         response = client.get("/feed", headers=headers)
         data = response.json()
+        assert len(data["items"]) >= 1
         post = data["items"][0]
         assert post["author"]["username"] == "feedauth"
 
@@ -108,10 +111,14 @@ class TestFeedListing:
         uid = create_test_user(email="fpag@test.com", username="fpag")
         for i in range(5):
             create_test_post(uid, caption=f"Post {i}")
-        response = client.get("/feed?page=1&page_size=2")
+        response = client.get("/feed?page_size=2")
         data = response.json()
         assert len(data["items"]) == 2
-        assert data["total"] == 5
+        assert data.get("has_more") is True
+        next_cursor = data.get("next_cursor")
+        assert next_cursor
+        response2 = client.get(f"/feed?page_size=2&cursor={next_cursor}")
+        assert len(response2.json()["items"]) >= 1
 
 
 class TestReels:

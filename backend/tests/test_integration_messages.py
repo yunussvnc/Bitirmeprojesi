@@ -16,9 +16,13 @@ import crud
 
 
 def _setup_conversation():
-    """İki kullanıcı ve aralarında konuşma oluşturur."""
+    """İki kullanıcı, karşılıklı takip ve konuşma oluşturur (tam mesajlaşma izni)."""
     uid1 = create_test_user(email="msg1@test.com", username="msg1", birth_date=date(2000, 1, 1))
     uid2 = create_test_user(email="msg2@test.com", username="msg2", birth_date=date(2000, 1, 1))
+    db = TestingSessionLocal()
+    crud.toggle_follow(db, uid1, uid2)
+    crud.toggle_follow(db, uid2, uid1)
+    db.close()
     cid = create_match_conversation(uid1, uid2, place_name="Msg Cafe")
     return uid1, uid2, cid
 
