@@ -1,7 +1,7 @@
 /**
- * KayÄ±t ekranÄ± â€“ GiriÅŸ ekranÄ± ile aynÄ± tasarÄ±m
+ * Kayıt ekranı – Giriş ekranı ile aynı tasarım
  * Arka planda mekan carousel, koyu overlay, cam kart, onDark inputlar.
- * KaydÄ±rma yok.
+ * Kaydırma yok.
  *
  * @module screens/RegisterScreen
  */
@@ -28,20 +28,28 @@ import { BlurView } from 'expo-blur';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button, Input } from '@/src/components/ui';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
+import { handleApiError } from '@/src/utils/errorHandler';
 import { useTranslation } from 'react-i18next';
 import { lightImpact, success } from '@/src/utils/haptics';
-import { registerUser, registerVenue } from '@/src/services/authService';
-import { useSocialAuth } from '@/src/hooks/useSocialAuth';
+import { getAllPlaces } from '@/src/services/mekanService';
+import { registerUser, registerVenue, googleLogin, appleLogin } from '@/src/services/authService';
+import { useAuthStore } from '@/src/store/useAuthStore';
+import { API_BASE_URL } from '@/src/constants/api';
+import * as AppleAuthentication from 'expo-apple-authentication';
+import * as WebBrowser from 'expo-web-browser';
+import * as Google from 'expo-auth-session/providers/google';
+
+WebBrowser.maybeCompleteAuthSession();
 
 const { width, height } = Dimensions.get('window');
 
 const FALLBACK_PLACE_IMAGES = [
   'https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=1200',
-  'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=1200', // AydÄ±nlÄ±k kahveci
-  'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1200', // AydÄ±nlÄ±k bir kafe iÃ§i
+  'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=1200', // Aydınlık kahveci
+  'https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=1200', // Aydınlık bir kafe içi
   'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200',
   'https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=1200',
-  'https://images.unsplash.com/photo-1521017430209-a6cb9156a64b?w=1200', // IÅŸÄ±klÄ± iÃ§ mekan
+  'https://images.unsplash.com/photo-1521017430209-a6cb9156a64b?w=1200', // Işıklı iç mekan
 ];
 
 const CAROUSEL_INTERVAL_MS = 4500;
@@ -67,10 +75,102 @@ export default function RegisterScreen() {
     confirmPassword?: string;
   }>({});
   const [isPasswordFocused, setIsPasswordFocused] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const isSubmittingRef = useRef(false);
 
-  const { loading: socialLoading, promptGoogle, signInWithApple } = useSocialAuth(roleType, 'register');
-  const formLoading = loading || socialLoading;
+  // Google Auth Setup
+  const [request, response, promptAsync] = Google.useAuthRequest({
+    clientId: '398883081062-uqa0hbpbo6nhjcbigltircbbg3ngr7oi.apps.googleusercontent.com',
+    iosClientId: '398883081062-uqa0hbpbo6nhjcbigltircbbg3ngr7oi.apps.googleusercontent.com',
+    androidClientId: '398883081062-uqa0hbpbo6nhjcbigltircbbg3ngr7oi.apps.googleusercontent.com',
+    scopes: ['openid', 'profile', 'email'],
+  });
+
+  useEffect(() => {
+    if (response?.type === 'success' && response.authentication) {
+      handleGoogleSuccess(response.authentication.idToken || response.authentication.accessToken);
+    }
+  }, [response]);
+
+  const handleGoogleSuccess = async (token: string) => {
+    if (!token) return;
+    setLoading(true);
+    try {
+      const data = await googleLogin(token);
+      
+      // Check role mismatch purely for UX
+      if (roleType === 'venue' && data.user.role !== 'venue') {
+        throw new Error('Mekan kayıtları sosyal medya ile yapılamaz. Lütfen başvuru formunu doldurun.');
+      } else if (roleType === 'user' && data.user.role === 'venue') {
+        throw new Error('Girdiğiniz hesap bir mekan hesabı. Lütfen "Mekan" sekmesinden giriş yapın.');
+      }
+
+      useAuthStore.getState().setTokens(data.access_token, data.refresh_token);
+      useAuthStore.getState().setUser(data.user);
+      success();
+
+      if (data.user.role === 'venue') {
+         router.replace('/(venue-tabs)' as any);
+      } else {
+        if (!data.user.username || !data.user.birth_date) {
+          router.replace('/first-time-setup' as any);
+        } else {
+          router.replace('/(tabs)/' as any);
+        }
+      }
+    } catch (err: any) {
+      Alert.alert(t('auth.login_error_title'), err.message || t('auth.google_login_failed'));
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const signInWithApple = async () => {
+    try {
+      const credential = await AppleAuthentication.signInAsync({
+        requestedScopes: [
+          AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
+          AppleAuthentication.AppleAuthenticationScope.EMAIL,
+        ],
+      });
+      if (credential.identityToken) {
+        setLoading(true);
+        const data = await appleLogin(credential.identityToken);
+
+        // Check role mismatch purely for UX
+        if (roleType === 'venue' && data.user.role !== 'venue') {
+          throw new Error('Mekan kayıtları sosyal medya ile yapılamaz. Lütfen başvuru formunu doldurun.');
+        } else if (roleType === 'user' && data.user.role === 'venue') {
+          throw new Error('Girdiğiniz hesap bir mekan hesabı. Lütfen "Mekan" sekmesinden giriş yapın.');
+        }
+
+        useAuthStore.getState().setTokens(data.access_token, data.refresh_token);
+        useAuthStore.getState().setUser(data.user);
+        success();
+
+        if (data.user.role === 'venue') {
+           router.replace('/(venue-tabs)' as any);
+        } else {
+          if (!data.user.username || !data.user.birth_date) {
+            router.replace('/first-time-setup' as any);
+          } else {
+            router.replace('/(tabs)/' as any);
+          }
+        }
+      }
+    } catch (e: any) {
+      if (e.code === 'ERR_REQUEST_CANCELED') {
+        // Kullanıcı iptal etti
+      } else {
+        Alert.alert(t('auth.login_error_title'), e.message || t('auth.apple_login_failed'));
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
 
   const validateForm = useCallback((): boolean => {
     const newErrors: typeof errors = {};
@@ -139,7 +239,7 @@ export default function RegisterScreen() {
         );
       }
     } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : 'KayÄ±t baÅŸarÄ±sÄ±z. LÃ¼tfen tekrar deneyin.';
+      const msg = err instanceof Error ? err.message : 'Kayıt başarısız. Lütfen tekrar deneyin.';
       setErrors({ email: msg });
     } finally {
       isSubmittingRef.current = false;
@@ -149,20 +249,18 @@ export default function RegisterScreen() {
 
   const handleSocialRegister = useCallback((provider: string) => {
     lightImpact();
-    if (provider === 'Apple') signInWithApple();
-    else if (provider === 'Google') promptGoogle();
-  }, [promptGoogle, signInWithApple]);
+    if (provider === 'Apple') {
+      signInWithApple();
+    } else if (provider === 'Google') {
+      promptAsync();
+    }
+  }, [promptAsync]);
 
   const clearFieldError = useCallback((field: keyof typeof errors) => {
     setErrors((prev) => (prev[field] ? { ...prev, [field]: undefined } : prev));
   }, []);
 
   const currentImage = FALLBACK_PLACE_IMAGES[0];
-
-  const openLegal = (docType: 'terms' | 'privacy') => {
-    lightImpact();
-    router.push({ pathname: '/settings/legal-document', params: { type: docType } } as any);
-  };
 
   return (
     <View style={styles.container}>
@@ -187,16 +285,15 @@ export default function RegisterScreen() {
             keyboardShouldPersistTaps="handled"
             showsVerticalScrollIndicator={false}
           >
-            <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
               <View style={{ flex: 1 }}>
                 <View style={styles.content} pointerEvents="box-none">
                   <View style={styles.topBlock}>
-                    {/* Marka baÅŸlÄ±ÄŸÄ± â€” login ekranÄ±yla aynÄ± konum ve boyut */}
+                    {/* Marka başlığı — login ekranıyla aynı konum ve boyut */}
                     <View style={styles.header}>
                       <Text style={styles.brandTitle}>{t('auth.app_name')}</Text>
                     </View>
 
-                    {/* Toggle Buttons (KullanÄ±cÄ± / Mekan) */}
+                    {/* Toggle Buttons (Kullanıcı / Mekan) */}
                     <View style={styles.toggleContainer}>
                       <TouchableOpacity 
                         style={[styles.toggleBtn, roleType === 'user' && styles.toggleBtnActive]}
@@ -265,11 +362,15 @@ export default function RegisterScreen() {
                           onChangeText={(t) => {
                             setPassword(t);
                             clearFieldError('password');
-                            if (confirmPassword && t === confirmPassword) clearFieldError('confirmPassword');
                           }}
                           onFocus={() => setIsPasswordFocused(true)}
                           onBlur={() => setIsPasswordFocused(false)}
-                          secureTextEntry
+                          secureTextEntry={!showPassword}
+                          rightIcon={showPassword ? 'eye.slash' as any : 'eye' as any}
+                          onRightIconPress={() => {
+                            lightImpact();
+                            setShowPassword(!showPassword);
+                          }}
                           autoComplete="off"
                           textContentType="oneTimeCode"
                           error={errors.password}
@@ -284,7 +385,12 @@ export default function RegisterScreen() {
                           placeholder={t('auth.confirm_password_placeholder')}
                           value={confirmPassword}
                           onChangeText={(t) => { setConfirmPassword(t); clearFieldError('confirmPassword'); }}
-                          secureTextEntry
+                          secureTextEntry={!showConfirmPassword}
+                          rightIcon={showConfirmPassword ? 'eye.slash' as any : 'eye' as any}
+                          onRightIconPress={() => {
+                            lightImpact();
+                            setShowConfirmPassword(!showConfirmPassword);
+                          }}
                           autoComplete="off"
                           textContentType="oneTimeCode"
                           error={errors.confirmPassword}
@@ -299,8 +405,8 @@ export default function RegisterScreen() {
                             {termsAccepted && <IconSymbol name="checkmark" size={14} color="#000" />}
                           </View>
                           <Text style={styles.termsText}>
-                            <Text style={styles.termsLink} onPress={() => openLegal('terms')}>{t('auth.terms')}</Text>{t('auth.and')}
-                            <Text style={styles.termsLink} onPress={() => openLegal('privacy')}>{t('auth.privacy')}</Text>{t('auth.read_and_accept')}
+                            <Text style={styles.termsLink} onPress={() => WebBrowser.openBrowserAsync('https://asemos.com/terms')}>{t('auth.terms')}</Text>{t('auth.and')}
+                            <Text style={styles.termsLink} onPress={() => WebBrowser.openBrowserAsync('https://asemos.com/privacy')}>{t('auth.privacy')}</Text>{t('auth.read_and_accept')}
                           </Text>
                         </TouchableOpacity>
 
@@ -308,8 +414,8 @@ export default function RegisterScreen() {
                           variant="primary"
                           size="large"
                           onPress={handleRegister}
-                          loading={formLoading}
-                          disabled={formLoading}
+                          loading={loading}
+                          disabled={loading}
                           style={styles.registerButton}
                         >
                           {roleType === 'user' ? t('auth.register') : t('auth.send_approval')}
@@ -335,7 +441,7 @@ export default function RegisterScreen() {
                           </>
                         )}
 
-                        {/* GiriÅŸ linki â€” her iki roleType iÃ§in kart iÃ§inde */}
+                        {/* Giriş linki — her iki roleType için kart içinde */}
                         <TouchableOpacity
                           style={styles.loginRow}
                           onPress={() => { Keyboard.dismiss(); lightImpact(); router.back(); }}
@@ -350,7 +456,6 @@ export default function RegisterScreen() {
                   </View>
                 </View>
               </View>
-            </TouchableWithoutFeedback>
           </ScrollView>
         </KeyboardAvoidingView>
       </SafeAreaView>
@@ -371,7 +476,7 @@ const styles = StyleSheet.create({
     paddingBottom: 40,
   },
   topBlock: { flex: 1 },
-  backgroundImage: { width: '100%' as any, height: '100%' as any },  // kullanÄ±lmÄ±yor
+  backgroundImage: { width: '100%' as any, height: '100%' as any },  // kullanılmıyor
   header: {
     alignItems: 'center',
     marginBottom: 36,
