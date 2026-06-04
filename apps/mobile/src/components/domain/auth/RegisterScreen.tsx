@@ -28,19 +28,11 @@ import { BlurView } from 'expo-blur';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button, Input } from '@/src/components/ui';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
-import { handleApiError } from '@/src/utils/errorHandler';
 import { useTranslation } from 'react-i18next';
 import { lightImpact, success } from '@/src/utils/haptics';
-import { getAllPlaces } from '@/src/services/mekanService';
-import { registerUser, registerVenue, googleLogin, appleLogin } from '@/src/services/authService';
-import { useAuthStore } from '@/src/store/useAuthStore';
-import { API_BASE_URL } from '@/src/constants/api';
-import * as AppleAuthentication from 'expo-apple-authentication';
+import { registerUser, registerVenue } from '@/src/services/authService';
+import { useSocialAuth } from '@/src/hooks/useSocialAuth';
 import * as WebBrowser from 'expo-web-browser';
-import * as Google from 'expo-auth-session/providers/google';
-import { googleAuthRequestConfig } from '@/src/config/socialAuth';
-
-WebBrowser.maybeCompleteAuthSession();
 
 const { width, height } = Dimensions.get('window');
 
@@ -77,96 +69,8 @@ export default function RegisterScreen() {
   }>({});
   const isSubmittingRef = useRef(false);
 
-  // Google Auth Setup
-  const [request, response, promptAsync] = Google.useAuthRequest({
-    ...googleAuthRequestConfig,
-    scopes: [...googleAuthRequestConfig.scopes],
-  });
-
-  useEffect(() => {
-    if (response?.type === 'success' && response.authentication) {
-      handleGoogleSuccess(response.authentication.idToken || response.authentication.accessToken);
-    }
-  }, [response]);
-
-  const handleGoogleSuccess = async (token: string) => {
-    if (!token) return;
-    setLoading(true);
-    try {
-      const data = await googleLogin(token);
-      
-      // Check role mismatch purely for UX
-      if (roleType === 'venue' && data.user.role !== 'venue') {
-        throw new Error('Mekan kayÄ±tlarÄ± sosyal medya ile yapÄ±lamaz. LÃ¼tfen baÅŸvuru formunu doldurun.');
-      } else if (roleType === 'user' && data.user.role === 'venue') {
-        throw new Error('GirdiÄŸiniz hesap bir mekan hesabÄ±. LÃ¼tfen "Mekan" sekmesinden giriÅŸ yapÄ±n.');
-      }
-
-      useAuthStore.getState().setTokens(data.access_token, data.refresh_token);
-      useAuthStore.getState().setUser(data.user);
-      success();
-
-      if (data.user.role === 'venue') {
-         router.replace('/(venue-tabs)' as any);
-      } else {
-        if (!data.user.username || !data.user.birth_date) {
-          router.replace('/first-time-setup' as any);
-        } else {
-          router.replace('/(tabs)/' as any);
-        }
-      }
-    } catch (err: any) {
-      Alert.alert(t('auth.login_error_title'), err.message || t('auth.google_login_failed'));
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const signInWithApple = async () => {
-    try {
-      const credential = await AppleAuthentication.signInAsync({
-        requestedScopes: [
-          AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
-          AppleAuthentication.AppleAuthenticationScope.EMAIL,
-        ],
-      });
-      if (credential.identityToken) {
-        setLoading(true);
-        const data = await appleLogin(credential.identityToken);
-
-        // Check role mismatch purely for UX
-        if (roleType === 'venue' && data.user.role !== 'venue') {
-          throw new Error('Mekan kayÄ±tlarÄ± sosyal medya ile yapÄ±lamaz. LÃ¼tfen baÅŸvuru formunu doldurun.');
-        } else if (roleType === 'user' && data.user.role === 'venue') {
-          throw new Error('GirdiÄŸiniz hesap bir mekan hesabÄ±. LÃ¼tfen "Mekan" sekmesinden giriÅŸ yapÄ±n.');
-        }
-
-        useAuthStore.getState().setTokens(data.access_token, data.refresh_token);
-        useAuthStore.getState().setUser(data.user);
-        success();
-
-        if (data.user.role === 'venue') {
-           router.replace('/(venue-tabs)' as any);
-        } else {
-          if (!data.user.username || !data.user.birth_date) {
-            router.replace('/first-time-setup' as any);
-          } else {
-            router.replace('/(tabs)/' as any);
-          }
-        }
-      }
-    } catch (e: any) {
-      if (e.code === 'ERR_REQUEST_CANCELED') {
-        // KullanÄ±cÄ± iptal etti
-      } else {
-        Alert.alert(t('auth.login_error_title'), e.message || t('auth.apple_login_failed'));
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
-
-
+  const { loading: socialLoading, promptGoogle, signInWithApple } = useSocialAuth(roleType, 'register');
+  const formLoading = loading || socialLoading;
 
   const validateForm = useCallback((): boolean => {
     const newErrors: typeof errors = {};
@@ -245,12 +149,9 @@ export default function RegisterScreen() {
 
   const handleSocialRegister = useCallback((provider: string) => {
     lightImpact();
-    if (provider === 'Apple') {
-      signInWithApple();
-    } else if (provider === 'Google') {
-      promptAsync();
-    }
-  }, [promptAsync]);
+    if (provider === 'Apple') signInWithApple();
+    else if (provider === 'Google') promptGoogle();
+  }, [promptGoogle, signInWithApple]);
 
   const clearFieldError = useCallback((field: keyof typeof errors) => {
     setErrors((prev) => (prev[field] ? { ...prev, [field]: undefined } : prev));
@@ -396,8 +297,8 @@ export default function RegisterScreen() {
                           variant="primary"
                           size="large"
                           onPress={handleRegister}
-                          loading={loading}
-                          disabled={loading}
+                          loading={formLoading}
+                          disabled={formLoading}
                           style={styles.registerButton}
                         >
                           {roleType === 'user' ? t('auth.register') : t('auth.send_approval')}

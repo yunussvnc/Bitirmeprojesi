@@ -42,10 +42,9 @@ export const googleAuthRequestConfig = {
 };
 
 export function hasGoogleClientIdForPlatform(): boolean {
-  const { webClientId, iosClientId, androidClientId } = googleAuthRequestConfig;
-  if (Platform.OS === 'ios') return Boolean(iosClientId || webClientId);
-  if (Platform.OS === 'android') return Boolean(androidClientId || webClientId);
-  return Boolean(webClientId);
+  if (Platform.OS === 'ios') return Boolean(GOOGLE_IOS_CLIENT_ID || GOOGLE_WEB_CLIENT_ID);
+  if (Platform.OS === 'android') return Boolean(GOOGLE_ANDROID_CLIENT_ID || GOOGLE_WEB_CLIENT_ID);
+  return Boolean(GOOGLE_WEB_CLIENT_ID);
 }
 
 /** @deprecated Use hasGoogleClientIdForPlatform ÔÇö kept for call-site compatibility */

@@ -28,19 +28,11 @@ import { BlurView } from 'expo-blur';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button, Input } from '@/src/components/ui';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
-import { handleApiError } from '@/src/utils/errorHandler';
 import { useTranslation } from 'react-i18next';
 import { lightImpact, success } from '@/src/utils/haptics';
-import { getAllPlaces } from '@/src/services/mekanService';
-import { loginUser, googleLogin, appleLogin } from '@/src/services/authService';
+import { loginUser } from '@/src/services/authService';
 import { useAuthStore } from '@/src/store/useAuthStore';
-import { API_BASE_URL } from '@/src/constants/api';
-import * as AppleAuthentication from 'expo-apple-authentication';
-import * as WebBrowser from 'expo-web-browser';
-import * as Google from 'expo-auth-session/providers/google';
-import { googleAuthRequestConfig } from '@/src/config/socialAuth';
-
-WebBrowser.maybeCompleteAuthSession();
+import { useSocialAuth } from '@/src/hooks/useSocialAuth';
 
 const { width, height } = Dimensions.get('window');
 
@@ -67,96 +59,8 @@ export default function LoginScreen() {
   const [errors, setErrors] = useState<Record<string, string | undefined>>({});
   const isSubmittingRef = useRef(false);
 
-  // Google Auth Setup (auth.expo.io/@icardiii/asemos)
-  const [request, response, promptAsync] = Google.useAuthRequest({
-    ...googleAuthRequestConfig,
-    scopes: [...googleAuthRequestConfig.scopes],
-  });
-
-  useEffect(() => {
-    if (response?.type === 'success' && response.authentication) {
-      handleGoogleSuccess(response.authentication.idToken || response.authentication.accessToken);
-    }
-  }, [response]);
-
-  const handleGoogleSuccess = async (token: string) => {
-    if (!token) return;
-    setLoading(true);
-    try {
-      const data = await googleLogin(token);
-      
-      // Check role mismatch purely for UX
-      if (roleType === 'venue' && data.user.role !== 'venue') {
-        throw new Error('GirdiÄŸiniz hesap bir mekan hesabÄ± deÄŸil. LÃ¼tfen "KullanÄ±cÄ±" sekmesinden giriÅŸ yapÄ±n.');
-      } else if (roleType === 'user' && data.user.role === 'venue') {
-        throw new Error('GirdiÄŸiniz hesap bir mekan hesabÄ±. LÃ¼tfen "Mekan" sekmesinden giriÅŸ yapÄ±n.');
-      }
-
-      useAuthStore.getState().setTokens(data.access_token, data.refresh_token);
-      useAuthStore.getState().setUser(data.user);
-      success();
-
-      if (data.user.role === 'venue') {
-         router.replace('/(venue-tabs)' as any);
-      } else {
-        if (!data.user.username || !data.user.birth_date) {
-          router.replace('/first-time-setup' as any);
-        } else {
-          router.replace('/(tabs)/' as any);
-        }
-      }
-    } catch (err: any) {
-      Alert.alert(t('auth.login_error_title'), err.message || t('auth.google_login_failed'));
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  const signInWithApple = async () => {
-    try {
-      const credential = await AppleAuthentication.signInAsync({
-        requestedScopes: [
-          AppleAuthentication.AppleAuthenticationScope.FULL_NAME,
-          AppleAuthentication.AppleAuthenticationScope.EMAIL,
-        ],
-      });
-      if (credential.identityToken) {
-        setLoading(true);
-        const data = await appleLogin(credential.identityToken);
-
-        // Check role mismatch purely for UX
-        if (roleType === 'venue' && data.user.role !== 'venue') {
-          throw new Error('GirdiÄŸiniz hesap bir mekan hesabÄ± deÄŸil. LÃ¼tfen "KullanÄ±cÄ±" sekmesinden giriÅŸ yapÄ±n.');
-        } else if (roleType === 'user' && data.user.role === 'venue') {
-          throw new Error('GirdiÄŸiniz hesap bir mekan hesabÄ±. LÃ¼tfen "Mekan" sekmesinden giriÅŸ yapÄ±n.');
-        }
-
-        useAuthStore.getState().setTokens(data.access_token, data.refresh_token);
-        useAuthStore.getState().setUser(data.user);
-        success();
-
-        if (data.user.role === 'venue') {
-           router.replace('/(venue-tabs)' as any);
-        } else {
-          if (!data.user.username || !data.user.birth_date) {
-            router.replace('/first-time-setup' as any);
-          } else {
-            router.replace('/(tabs)/' as any);
-          }
-        }
-      }
-    } catch (e: any) {
-      if (e.code === 'ERR_REQUEST_CANCELED') {
-        // KullanÄ±cÄ± iptal etti
-      } else {
-        Alert.alert(t('auth.login_error_title'), e.message || t('auth.apple_login_failed'));
-      }
-    } finally {
-      setLoading(false);
-    }
-  };
-
-
+  const { loading: socialLoading, promptGoogle, signInWithApple } = useSocialAuth(roleType, 'login');
+  const formLoading = loading || socialLoading;
 
   const validateForm = useCallback((): boolean => {
     const newErrors: { email?: string; password?: string; general?: string } = {};
@@ -225,22 +129,9 @@ export default function LoginScreen() {
 
   const handleSocialLogin = useCallback((provider: string) => {
     lightImpact();
-    if (provider === 'Apple') {
-      signInWithApple();
-    } else if (provider === 'Google') {
-      // Expo Go'da Google Sign-In desteklenmiyor (Google'Ä±n yeni gÃ¼venlik kurallarÄ±).
-      // Production build (APK/IPA) alÄ±ndÄ±ÄŸÄ±nda sorunsuz Ã§alÄ±ÅŸÄ±r.
-      if (__DEV__ && !request) {
-        Alert.alert(
-          'Google GiriÅŸ',
-          'Google ile giriÅŸ ÅŸu an geliÅŸtirme ortamÄ±nda (Expo Go) kullanÄ±lamÄ±yor. LÃ¼tfen e-posta/ÅŸifre ile giriÅŸ yapÄ±n veya production build alÄ±n.',
-          [{ text: 'Tamam' }]
-        );
-        return;
-      }
-      promptAsync();
-    }
-  }, [promptAsync, request]);
+    if (provider === 'Apple') signInWithApple();
+    else if (provider === 'Google') promptGoogle();
+  }, [promptGoogle, signInWithApple]);
 
   const clearFieldError = useCallback((field: string) => {
     setErrors((prev) => (prev[field] ? { ...prev, [field]: undefined } : prev));
@@ -394,8 +285,8 @@ export default function LoginScreen() {
                           variant="primary"
                           size="large"
                           onPress={handleLogin}
-                          loading={loading}
-                          disabled={loading}
+                          loading={formLoading}
+                          disabled={formLoading}
                           style={styles.loginButton}
                         >
                           {t('auth.login')}
