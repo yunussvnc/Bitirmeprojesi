@@ -84,8 +84,8 @@ export function PostOptionsSheet({ visible, onClose, showFollowActions = false, 
   };
 
   return (
-    <Modal visible={visible} transparent animationType="fade" onRequestClose={onClose}>
-      <Pressable style={styles.overlay} onPress={onClose}>
+    <Modal visible={visible} transparent animationType="slide" onRequestClose={onClose}>
+      <Pressable style={styles.overlay} onPress={onClose} android_disableSound>
         <TouchableWithoutFeedback onPress={(e) => e.stopPropagation()}>
           <Animated.View
             style={[

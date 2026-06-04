@@ -53,8 +53,8 @@ export function CreateTypeSheet({ visible, onClose, onSelect }: CreateTypeSheetP
   };
 
   return (
-    <Modal visible={visible} transparent animationType="fade" onRequestClose={onClose}>
-      <Pressable style={styles.overlay} onPress={onClose}>
+    <Modal visible={visible} transparent animationType="slide" onRequestClose={onClose}>
+      <Pressable style={styles.overlay} onPress={onClose} android_disableSound>
         <Pressable
           style={[
             styles.sheet,

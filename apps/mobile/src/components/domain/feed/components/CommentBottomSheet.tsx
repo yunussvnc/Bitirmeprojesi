@@ -324,6 +324,7 @@ export function CommentBottomSheet({ visible, onClose, postId, onCommentAdded }:
               }}
               style={styles.closeBtn}
               activeOpacity={0.7}
+              hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}
             >
               <IconSymbol name="xmark.circle.fill" size={28} color={colors.text.tertiary} />
             </TouchableOpacity>
@@ -442,7 +443,7 @@ const styles = StyleSheet.create({
     fontWeight: "700",
   },
   closeBtn: {
-    padding: 4,
+    padding: 8,
   },
   loadingWrap: {
     flex: 1,
