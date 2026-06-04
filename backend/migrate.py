@@ -19,6 +19,8 @@ _SCHEMA_PATCHES = [
     ("users", "token_version", "INTEGER NOT NULL DEFAULT 0", "INTEGER NOT NULL DEFAULT 0"),
     ("users", "push_token", "VARCHAR", "VARCHAR"),
     ("users", "push_token_updated_at", "TIMESTAMP WITH TIME ZONE", "DATETIME"),
+    ("posts", "is_flagged", "BOOLEAN NOT NULL DEFAULT FALSE", "BOOLEAN NOT NULL DEFAULT 0"),
+    ("post_comments", "is_flagged", "BOOLEAN NOT NULL DEFAULT FALSE", "BOOLEAN NOT NULL DEFAULT 0"),
 ]
 
 

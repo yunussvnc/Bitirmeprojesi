@@ -1,9 +1,10 @@
 # routers/auth.py — Kimlik doğrulama endpoint'leri
 
 import os
-import random
+import secrets
 import string
 import uuid
+import logging
 
 # pyrefly: ignore [missing-import]
 import jwt
@@ -42,6 +43,95 @@ from app.services.email_service import (
 
 router = APIRouter(prefix="/auth", tags=["Auth"])
 
+auth_logger = logging.getLogger("asemos.auth")
+
+
+def _parse_allowed_client_ids(primary: str, extra: str) -> list[str]:
+    ids: list[str] = []
+    if primary and primary.strip():
+        ids.append(primary.strip())
+    if extra:
+        ids.extend(part.strip() for part in extra.split(",") if part.strip())
+    return list(dict.fromkeys(ids))
+
+
+def _generate_verification_code(length: int = 6) -> str:
+    return "".join(secrets.choice(string.digits) for _ in range(length))
+
+
+def _verify_google_id_token(token: str) -> dict:
+    """Google ID token veya access token doğrulaması; email_verified zorunlu."""
+    settings_module = __import__("config", fromlist=["get_settings"]).get_settings()
+    client_ids = _parse_allowed_client_ids(
+        settings_module.GOOGLE_CLIENT_ID, settings_module.GOOGLE_ALLOWED_CLIENT_IDS
+    )
+
+    if client_ids:
+        for client_id in client_ids:
+            try:
+                idinfo = id_token.verify_oauth2_token(
+                    token, google_requests.Request(), client_id
+                )
+                if not idinfo.get("email_verified", False):
+                    raise HTTPException(
+                        status_code=400,
+                        detail="Google e-postası doğrulanmamış.",
+                    )
+                return idinfo
+            except HTTPException:
+                raise
+            except Exception:
+                continue
+
+    resp = req_lib.get(
+        "https://www.googleapis.com/oauth2/v3/userinfo",
+        headers={"Authorization": f"Bearer {token}"},
+        timeout=10,
+    )
+    if resp.status_code != 200:
+        raise HTTPException(status_code=400, detail="Geçersiz Google token.")
+    idinfo = resp.json()
+    if not idinfo.get("email_verified", False):
+        raise HTTPException(
+            status_code=400,
+            detail="Google e-postası doğrulanmamış.",
+        )
+    if not idinfo.get("email"):
+        raise HTTPException(
+            status_code=400,
+            detail="Google token'dan e-posta alınamadı.",
+        )
+    return idinfo
+
+
+def _verify_apple_identity_token(token: str) -> dict:
+    """Apple identity token — JWKS ile imza doğrulaması (prod); testte mock."""
+    settings_module = __import__("config", fromlist=["get_settings"]).get_settings()
+    client_ids = _parse_allowed_client_ids(
+        settings_module.APPLE_CLIENT_ID, settings_module.APPLE_ALLOWED_CLIENT_IDS
+    )
+
+    if os.getenv("TESTING") == "1" and not client_ids:
+        return jwt.decode(token, options={"verify_signature": False})
+
+    if not client_ids:
+        raise HTTPException(
+            status_code=400,
+            detail="Apple Sign-In yapılandırılmamış.",
+        )
+
+    from jwt import PyJWKClient
+
+    jwks_client = PyJWKClient("https://appleid.apple.com/auth/keys", cache_keys=True)
+    signing_key = jwks_client.get_signing_key_from_jwt(token)
+    return jwt.decode(
+        token,
+        signing_key.key,
+        algorithms=["RS256"],
+        audience=client_ids,
+        issuer="https://appleid.apple.com",
+    )
+
 
 @router.post("/register")
 def register_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
@@ -69,7 +159,7 @@ def register_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
             # Expired — delete and create fresh
             crud.delete_pending_user(db, user.email)
     
-    code = "".join(random.choices(string.digits, k=6))
+    code = _generate_verification_code()
     expires_at = now_utc + timedelta(minutes=15)
     
     crud.create_pending_user(db, user, code, expires_at)
@@ -79,14 +169,16 @@ def register_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
     html_body = _build_verification_html(user_name, code)
     
     try:
-
         _check_rate_limit(hash(user.email) % 1000000)
         send_email(user.email, subject, html_body)
     except RateLimitError as e:
-        # Rate limit var ama kodu ekledik, yine de hata döndürmeyebiliriz
-        pass
-    except Exception as e:
-        pass
+        raise HTTPException(status_code=429, detail=str(e))
+    except Exception:
+        auth_logger.exception("Kayıt doğrulama e-postası gönderilemedi: %s", user.email)
+        raise HTTPException(
+            status_code=503,
+            detail="E-posta gönderilemedi. Lütfen daha sonra tekrar deneyin.",
+        )
         
     return {"ok": True, "message": "Doğrulama kodu e-postanıza gönderildi.", "email": user.email}
 
@@ -219,33 +311,12 @@ def google_login(
     db: Session = Depends(get_db)
 ):
     try:
-        client_id = os.getenv("GOOGLE_CLIENT_ID")
-        idinfo = None
-        
-        # Try verifying as id_token first
-        try:
-            if client_id:
-                idinfo = id_token.verify_oauth2_token(
-                    body.token, google_requests.Request(), client_id
-                )
-            else:
-                idinfo = jwt.decode(body.token, options={"verify_signature": False})
-        except Exception:
-            # If id_token verification fails, treat as access_token and fetch userinfo
-            import requests as req_lib
-            resp = req_lib.get(
-                "https://www.googleapis.com/oauth2/v3/userinfo",
-                headers={"Authorization": f"Bearer {body.token}"},
-                timeout=10,
+        idinfo = _verify_google_id_token(body.token)
+        if not idinfo.get("email_verified", False):
+            raise HTTPException(
+                status_code=400,
+                detail="Google e-postası doğrulanmamış.",
             )
-            if resp.status_code == 200:
-                idinfo = resp.json()
-            else:
-                raise HTTPException(status_code=400, detail="Geçersiz Google token.")
-        
-        if not idinfo or "email" not in idinfo:
-            raise HTTPException(status_code=400, detail="Google token'dan e-posta alınamadı.")
-        
         email = idinfo["email"]
         first_name = idinfo.get("given_name") or idinfo.get("name", "").split(" ")[0] or None
         last_name = idinfo.get("family_name") or None
@@ -283,8 +354,7 @@ def apple_login(
     db: Session = Depends(get_db)
 ):
     try:
-        # Apple kimlik doğrulaması
-        decoded = jwt.decode(body.token, options={"verify_signature": False})
+        decoded = _verify_apple_identity_token(body.token)
         email = decoded.get("email")
         
         if not email:
@@ -310,7 +380,9 @@ def apple_login(
             refresh_token=create_refresh_token(user.id, tv),
             user=schemas.User.model_validate(user),
         )
-    except Exception as e:
+    except HTTPException:
+        raise
+    except Exception:
         raise HTTPException(status_code=400, detail="Apple token doğrulanamadı.")
 
 # --- E-POSTA DOĞRULAMA ---
@@ -364,7 +436,7 @@ def resend_register_code(body: schemas.ResendVerificationRequest, db: Session = 
     except RateLimitError as e:
         raise HTTPException(status_code=429, detail=str(e))
         
-    code = "".join(random.choices(string.digits, k=6))
+    code = _generate_verification_code()
     db_pend.verification_code = code
     db_pend.expires_at = datetime.now(timezone.utc) + timedelta(minutes=15)
     db.commit()
@@ -376,7 +448,11 @@ def resend_register_code(body: schemas.ResendVerificationRequest, db: Session = 
     try:
         send_email(body.email, subject, html_body)
     except Exception:
-        pass
+        auth_logger.exception("Kayıt kodu yeniden gönderilemedi: %s", body.email)
+        raise HTTPException(
+            status_code=503,
+            detail="E-posta gönderilemedi. Lütfen daha sonra tekrar deneyin.",
+        )
         
     return {"ok": True, "message": "Yeni doğrulama kodu gönderildi."}
 
