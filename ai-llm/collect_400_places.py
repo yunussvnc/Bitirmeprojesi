@@ -41,7 +41,17 @@ class PlaceCollector:
             "Şişli": {"lat": 41.0600, "lng": 28.9869},
             "Üsküdar": {"lat": 41.0223, "lng": 29.0161},
             "Sarıyer": {"lat": 41.1683, "lng": 29.0488},
-            "Bakırköy": {"lat": 40.9785, "lng": 28.8546}
+            "Bakırköy": {"lat": 40.9785, "lng": 28.8546},
+            "Ümraniye": {"lat": 41.0265, "lng": 29.1248},
+            "Maltepe": {"lat": 40.9357, "lng": 29.1551},
+            "Beylikdüzü": {"lat": 41.0027, "lng": 28.6401},
+            "Bahçelievler": {"lat": 41.0027, "lng": 28.8597},
+            "Ataşehir": {"lat": 40.9923, "lng": 29.1244},
+            "Kartal": {"lat": 40.9061, "lng": 29.1873},
+            "Pendik": {"lat": 40.8775, "lng": 29.2533},
+            "Kağıthane": {"lat": 41.0797, "lng": 28.9727},
+            "Esenyurt": {"lat": 41.0290, "lng": 28.6765},
+            "Avcılar": {"lat": 40.9793, "lng": 28.7214},
         }
         
         # Kategoriler ve sorgu şablonları

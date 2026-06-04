@@ -50,18 +50,27 @@ def _first(*values: Any) -> Any:
 
 
 def _normalize_place_category(category: str) -> str:
+    """Mobil/backend ile aynı 7 kategori sözlüğü."""
     raw = (category or "").strip()
     if not raw:
         return "Restoran"
-    lower = raw.lower()
-    if re.search(r"irlanda\s*(pap|pub)|irish\s*pub", lower):
+    if re.search(r"irlanda\s*(pap|pub)|irish\s*pub", raw, re.I):
         return "Bar"
     allowed = ("Kafe", "Restoran", "Bar", "Meyhane", "Gece Kulübü", "Fast Food", "Nargile Cafe")
     if raw in allowed:
         return raw
-    if any(x in lower for x in ("pub", "bira", "cocktail", "bar")):
+    lower = raw.lower()
+    if any(x in lower for x in ("gece", "kulup", "kulüp", "night", "club")):
+        return "Gece Kulübü"
+    if "meyhane" in lower:
+        return "Meyhane"
+    if any(x in lower for x in ("nargile", "hookah", "shisha")):
+        return "Nargile Cafe"
+    if any(x in lower for x in ("fast food", "fastfood", "burger", "doner", "döner", "kebap", "pizza")):
+        return "Fast Food"
+    if any(x in lower for x in ("pub", "bira", "cocktail", "kokteyl", "bar", "canlı", "canli")):
         return "Bar"
-    if any(x in lower for x in ("kahve", "kafe", "cafe", "coffee")):
+    if any(x in lower for x in ("kahve", "kafe", "cafe", "coffee", "pastane", "fırın", "firin", "brunch")):
         return "Kafe"
     return "Restoran"
 
