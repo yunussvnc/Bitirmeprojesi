@@ -1,4 +1,4 @@
-﻿/**
+/**
  * KayÄ±t ekranÄ± â€“ GiriÅŸ ekranÄ± ile aynÄ± tasarÄ±m
  * Arka planda mekan carousel, koyu overlay, cam kart, onDark inputlar.
  * KaydÄ±rma yok.
@@ -66,6 +66,7 @@ export default function RegisterScreen() {
     password?: string;
     confirmPassword?: string;
   }>({});
+  const [isPasswordFocused, setIsPasswordFocused] = useState(false);
   const isSubmittingRef = useRef(false);
 
   const { loading: socialLoading, promptGoogle, signInWithApple } = useSocialAuth(roleType, 'register');
@@ -266,12 +267,17 @@ export default function RegisterScreen() {
                             clearFieldError('password');
                             if (confirmPassword && t === confirmPassword) clearFieldError('confirmPassword');
                           }}
+                          onFocus={() => setIsPasswordFocused(true)}
+                          onBlur={() => setIsPasswordFocused(false)}
                           secureTextEntry
                           autoComplete="off"
                           textContentType="oneTimeCode"
                           error={errors.password}
-                          containerStyle={styles.inputContainer}
+                          containerStyle={isPasswordFocused && !errors.password ? { marginBottom: 4 } : styles.inputContainer}
                         />
+                        {isPasswordFocused && !errors.password && (
+                          <Text style={styles.passwordRulesText}>{t('auth.password_rules')}</Text>
+                        )}
                         <Input
                           variant="onDark"
                           label={t('auth.confirm_password')}
@@ -405,6 +411,13 @@ const styles = StyleSheet.create({
   },
   cardInner: { padding: 20, backgroundColor: 'rgba(0,0,0,0.35)' },
   inputContainer: { marginBottom: 14 },
+  passwordRulesText: {
+    color: 'rgba(255,255,255,0.6)',
+    fontSize: 12,
+    marginTop: -2,
+    marginBottom: 14,
+    marginLeft: 4,
+  },
   toggleContainer: {
     flexDirection: 'row',
     backgroundColor: 'rgba(255,255,255,0.1)',

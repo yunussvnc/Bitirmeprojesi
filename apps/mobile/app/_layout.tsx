@@ -76,6 +76,7 @@ function useProtectedRoute() {
       segments[0] === "register" ||
       segments[0] === "forgot-password" ||
       segments[0] === "verify-email" ||
+      (segments[0] === "settings" && segments[1] === "legal-document") ||
       (segments.length === 1 && !segments[0]);
 
     const navigate = () => {
