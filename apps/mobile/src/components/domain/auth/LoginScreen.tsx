@@ -22,6 +22,7 @@ import {
   Image,
   Alert,
   Keyboard,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { BlurView } from 'expo-blur';
@@ -193,7 +194,7 @@ export default function LoginScreen() {
             keyboardShouldPersistTaps="handled"
             showsVerticalScrollIndicator={false}
           >
-              {/* Make sure this outer View stretches to fill the ScrollView content */}
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
               <View style={{ flex: 1 }}>
                 <View style={styles.content} pointerEvents="box-none">
                   <View style={styles.topBlock}>
@@ -334,6 +335,7 @@ export default function LoginScreen() {
                   </View>
                 </View>
               </View>
+            </TouchableWithoutFeedback>
           </ScrollView>
 
         </KeyboardAvoidingView>

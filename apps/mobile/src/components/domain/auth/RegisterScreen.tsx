@@ -32,7 +32,6 @@ import { useTranslation } from 'react-i18next';
 import { lightImpact, success } from '@/src/utils/haptics';
 import { registerUser, registerVenue } from '@/src/services/authService';
 import { useSocialAuth } from '@/src/hooks/useSocialAuth';
-import * as WebBrowser from 'expo-web-browser';
 
 const { width, height } = Dimensions.get('window');
 
@@ -159,6 +158,11 @@ export default function RegisterScreen() {
 
   const currentImage = FALLBACK_PLACE_IMAGES[0];
 
+  const openLegal = (docType: 'terms' | 'privacy') => {
+    lightImpact();
+    router.push({ pathname: '/settings/legal-document', params: { type: docType } } as any);
+  };
+
   return (
     <View style={styles.container}>
       <View style={StyleSheet.absoluteFill}>
@@ -182,6 +186,7 @@ export default function RegisterScreen() {
             keyboardShouldPersistTaps="handled"
             showsVerticalScrollIndicator={false}
           >
+            <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
               <View style={{ flex: 1 }}>
                 <View style={styles.content} pointerEvents="box-none">
                   <View style={styles.topBlock}>
@@ -288,8 +293,8 @@ export default function RegisterScreen() {
                             {termsAccepted && <IconSymbol name="checkmark" size={14} color="#000" />}
                           </View>
                           <Text style={styles.termsText}>
-                            <Text style={styles.termsLink} onPress={() => WebBrowser.openBrowserAsync('https://asemos.com/terms')}>{t('auth.terms')}</Text>{t('auth.and')}
-                            <Text style={styles.termsLink} onPress={() => WebBrowser.openBrowserAsync('https://asemos.com/privacy')}>{t('auth.privacy')}</Text>{t('auth.read_and_accept')}
+                            <Text style={styles.termsLink} onPress={() => openLegal('terms')}>{t('auth.terms')}</Text>{t('auth.and')}
+                            <Text style={styles.termsLink} onPress={() => openLegal('privacy')}>{t('auth.privacy')}</Text>{t('auth.read_and_accept')}
                           </Text>
                         </TouchableOpacity>
 
@@ -339,6 +344,7 @@ export default function RegisterScreen() {
                   </View>
                 </View>
               </View>
+            </TouchableWithoutFeedback>
           </ScrollView>
         </KeyboardAvoidingView>
       </SafeAreaView>

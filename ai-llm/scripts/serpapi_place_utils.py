@@ -49,11 +49,29 @@ def _first(*values: Any) -> Any:
     return None
 
 
+def _normalize_place_category(category: str) -> str:
+    raw = (category or "").strip()
+    if not raw:
+        return "Restoran"
+    lower = raw.lower()
+    if re.search(r"irlanda\s*(pap|pub)|irish\s*pub", lower):
+        return "Bar"
+    allowed = ("Kafe", "Restoran", "Bar", "Meyhane", "Gece Kulübü", "Fast Food", "Nargile Cafe")
+    if raw in allowed:
+        return raw
+    if any(x in lower for x in ("pub", "bira", "cocktail", "bar")):
+        return "Bar"
+    if any(x in lower for x in ("kahve", "kafe", "cafe", "coffee")):
+        return "Kafe"
+    return "Restoran"
+
+
 def normalize_loaded_place(raw: Dict[str, Any]) -> Dict[str, Any]:
     """Map SerpAPI / legacy Turkish keys to a canonical English record."""
     name = str(_first(raw.get("name"), raw.get("ad"), raw.get("title")) or "").strip()
     address = str(_first(raw.get("address"), raw.get("adres")) or "").strip()
-    category = str(_first(raw.get("category"), raw.get("kategori"), raw.get("type")) or "Diğer").strip()
+    category_raw = str(_first(raw.get("category"), raw.get("kategori"), raw.get("type")) or "Diğer").strip()
+    category = _normalize_place_category(category_raw)
     description = str(
         _first(raw.get("description"), raw.get("aciklama"), raw.get("açıklama")) or ""
     ).strip()

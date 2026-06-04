@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Alert, ScrollView, Platform, Keyboard } from "react-native";
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, Alert, ScrollView, Platform, Keyboard, TouchableWithoutFeedback } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 import * as ImagePicker from "expo-image-picker";
@@ -129,6 +129,8 @@ export default function EditProfileScreen() {
         </View>
 
         <ScrollView style={styles.container} showsVerticalScrollIndicator={false} contentContainerStyle={{ paddingBottom: 100 }} keyboardShouldPersistTaps="handled">
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+            <View>
           {/* ── Avatar Section ── */}
           <View style={styles.avatarWrap}>
             <TouchableOpacity onPress={pickAvatar} activeOpacity={0.8} style={styles.avatarTouchable}>
@@ -211,6 +213,8 @@ export default function EditProfileScreen() {
               <IconSymbol name="chevron.right" size={16} color={colors.text.tertiary} />
             </TouchableOpacity>
           </View>
+            </View>
+          </TouchableWithoutFeedback>
         </ScrollView>
       </View>
     );

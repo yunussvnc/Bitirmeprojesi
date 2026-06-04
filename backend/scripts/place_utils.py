@@ -27,6 +27,73 @@ KATEGORI_FIYAT = {
     "lüks": 4, "luks": 4,
 }
 
+ALLOWED_PLACE_CATEGORIES = (
+    "Kafe",
+    "Restoran",
+    "Bar",
+    "Meyhane",
+    "Gece Kulübü",
+    "Fast Food",
+    "Nargile Cafe",
+)
+
+_BLOCKED_CATEGORY_RE = re.compile(
+    r"irlanda\s*(pap|pub)|irish\s*pub",
+    re.IGNORECASE,
+)
+
+
+def normalize_place_category(category: str) -> str:
+    """Ham SerpAPI kategorisini uygulama sözlüğüne indirger; sahte/aykırı etiketleri engeller."""
+    raw = (category or "").strip()
+    if not raw:
+        return "Restoran"
+
+    if _BLOCKED_CATEGORY_RE.search(raw):
+        return "Bar"
+
+    lower = raw.lower()
+    if raw in ALLOWED_PLACE_CATEGORIES:
+        return raw
+
+    if any(x in lower for x in ("gece", "kulup", "kulüp", "night", "club")):
+        return "Gece Kulübü"
+    if "meyhane" in lower:
+        return "Meyhane"
+    if any(x in lower for x in ("nargile", "hookah", "shisha")):
+        return "Nargile Cafe"
+    if any(x in lower for x in ("fast food", "fastfood", "burger", "doner", "döner", "kebap", "pizza")):
+        return "Fast Food"
+    if any(x in lower for x in ("pub", "bira", "cocktail", "kokteyl", "bar", "canlı", "canli")):
+        return "Bar"
+    if any(x in lower for x in ("kahve", "kafe", "cafe", "coffee", "pastane", "fırın", "firin", "brunch")):
+        return "Kafe"
+    if any(
+        x in lower
+        for x in (
+            "restoran",
+            "restaurant",
+            "lokanta",
+            "mutfak",
+            "balik",
+            "balık",
+            "deniz",
+            "japon",
+            "italyan",
+            "vegan",
+            "müze",
+            "muze",
+            "galeri",
+            "turistik",
+            "kahvaltı",
+            "kahvalti",
+        )
+    ):
+        return "Restoran"
+
+    return "Restoran"
+
+
 KATEGORI_OZELLIKLER = {
     "kafe": ["wifi", "oturma_alani", "icecek"],
     "kahve": ["wifi", "oturma_alani", "icecek"],
@@ -52,7 +119,8 @@ def _first(*values: Any) -> Any:
 def normalize_loaded_place(raw: Dict[str, Any]) -> Dict[str, Any]:
     name = str(_first(raw.get("name"), raw.get("ad"), raw.get("title")) or "").strip()
     address = str(_first(raw.get("address"), raw.get("adres")) or "").strip()
-    category = str(_first(raw.get("category"), raw.get("kategori"), raw.get("type")) or "Diğer").strip()
+    category_raw = str(_first(raw.get("category"), raw.get("kategori"), raw.get("type")) or "Diğer").strip()
+    category = normalize_place_category(category_raw)
     description = str(
         _first(raw.get("description"), raw.get("aciklama"), raw.get("açıklama")) or ""
     ).strip()

@@ -68,7 +68,7 @@ export default function AboutScreen() {
             label={t("settings_about.terms", "Kullanım Koşulları")}
             showArrow
             icon="doc.plaintext"
-            onPress={() => { lightImpact(); }}
+            onPress={() => { lightImpact(); router.push({ pathname: "/settings/legal-document", params: { type: "terms" } } as any); }}
           />
           <SettingsRow
             label={t("settings_about.data_policy", "Gizlilik Politikası")}

@@ -5,7 +5,7 @@
  * Premium dark-first design with rich information architecture.
  */
 
-import { getTranslatedCategory } from '@/src/utils/categories';
+import { getTranslatedCategory, normalizePlaceCategory } from '@/src/utils/categories';
 import { router, useLocalSearchParams } from "expo-router";
 import { useEffect, useMemo, useRef, useState } from "react";
 import {
@@ -49,6 +49,7 @@ import { logger } from "@/src/utils/logger";
 import { apiGet, apiPost } from "@/src/utils/apiClient";
 import { FlatList } from "react-native";
 import { StoryViewerModal } from "../explore/StoryViewerModal";
+import { GoogleReviewCard, type GoogleReview } from "./GoogleReviewCard";
 
 type Review = {
   id: number;
@@ -108,6 +109,8 @@ export default function PlaceDetailScreen({
   const [reviews, setReviews] = useState<Review[]>([]);
   const [reviewsLoading, setReviewsLoading] = useState(false);
   const [reviewsError, setReviewsError] = useState<string | null>(null);
+  const [googleReviews, setGoogleReviews] = useState<GoogleReview[]>([]);
+  const [googleReviewsLoading, setGoogleReviewsLoading] = useState(false);
   const [lastDistance, setLastDistance] = useState<number | null>(null);
   const [similarPlaces, setSimilarPlaces] = useState<any[]>([]);
   const [showReviews, setShowReviews] = useState(false);
@@ -240,6 +243,15 @@ export default function PlaceDetailScreen({
   }, [showReviews, reviewSheetHeight]);
 
   useEffect(() => {
+    if (!showReviews || !id) return;
+    const cancelled = { current: false };
+    loadGoogleReviews(cancelled);
+    return () => {
+      cancelled.current = true;
+    };
+  }, [showReviews, id]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
     if (showMenu) {
       menuSheetHeight.setValue(REVIEW_SHEET_COLLAPSED);
       menuStartHeightRef.current = REVIEW_SHEET_COLLAPSED;
@@ -265,7 +277,11 @@ export default function PlaceDetailScreen({
       const foundPlace = await getPlaceById(id);
       if (!cancelled.current && foundPlace) {
         console.log('[PlaceDetail] menu_items:', JSON.stringify(foundPlace.menu_items)?.slice(0, 200));
-        setPlace(foundPlace);
+        const normalizedCat = normalizePlaceCategory(foundPlace.category);
+        setPlace({
+          ...foundPlace,
+          category: normalizedCat || foundPlace.category,
+        });
         // Takip durumunu place verisiyle al (is_following zaten enrich'de geliyor)
         if (typeof foundPlace.is_following === 'boolean') {
           setIsFollowing(foundPlace.is_following);
@@ -333,10 +349,28 @@ export default function PlaceDetailScreen({
     } catch (error) {
       if (!cancelled.current) {
         logger.error("Error loading reviews:", error);
-        setReviewsError("Yorumlar yüklenirken bir hata oluştu.");
+        setReviewsError(t("explore.no_comments"));
       }
     } finally {
       if (!cancelled.current) setReviewsLoading(false);
+    }
+  };
+
+  const loadGoogleReviews = async (cancelled: { current: boolean } = { current: false }) => {
+    if (!id) return;
+    setGoogleReviewsLoading(true);
+    try {
+      const data = await apiGet<{ reviews: GoogleReview[] }>(`/places/${id}/google-reviews?limit=5`);
+      if (!cancelled.current) {
+        setGoogleReviews(data?.reviews ?? []);
+      }
+    } catch (error) {
+      if (!cancelled.current) {
+        logger.error("Error loading Google reviews:", error);
+        setGoogleReviews([]);
+      }
+    } finally {
+      if (!cancelled.current) setGoogleReviewsLoading(false);
     }
   };
 
@@ -472,10 +506,15 @@ export default function PlaceDetailScreen({
   }, [place?.menu_items, t]);
 
   const averageRating = useMemo(() => {
-    if (!reviews.length) return null;
-    const sum = reviews.reduce((acc, r) => acc + (r.rating || 0), 0);
-    return (sum / reviews.length).toFixed(1);
-  }, [reviews]);
+    const pool = reviews.length
+      ? reviews
+      : googleReviews.map((r) => ({ rating: r.rating }));
+    if (!pool.length) return null;
+    const sum = pool.reduce((acc, r) => acc + (r.rating || 0), 0);
+    return (sum / pool.length).toFixed(1);
+  }, [reviews, googleReviews]);
+
+  const totalReviewCount = reviews.length + googleReviews.length;
 
   const distanceText = useMemo(() => {
     if (!userLocation || !place?.latitude || !place?.longitude) return null;
@@ -1061,16 +1100,17 @@ export default function PlaceDetailScreen({
                     }}
                     scrollEventThrottle={16}
                   >
-                    {reviewsLoading ? (
-                      <Text style={[bodySmallStyle]}>{t('explore.loading_comments')}</Text>
-                    ) : reviewsError ? (
+                    {reviewsLoading || googleReviewsLoading ? (
+                      <Text style={[bodySmallStyle]}>{t('place_detail.reviews_loading')}</Text>
+                    ) : reviewsError && !googleReviews.length ? (
                       <Text style={[bodySmallStyle]}>{reviewsError}</Text>
-                    ) : !reviews.length ? (
+                    ) : !reviews.length && !googleReviews.length ? (
                       <Text style={[bodySmallStyle]}>
-                        {t('explore.no_comments')}
+                        {t('place_detail.reviews_empty')}
                       </Text>
                     ) : (
                       <>
+                        {averageRating && (
                         <View style={[styles.reviewsSummaryCard, { borderColor: colors.surface.border }]}>
                           <View style={[styles.ratingBadge, { backgroundColor: colors.accent.primary }]}>
                             <IconSymbol name="star.fill" size={18} color={colors.accent.onPrimary} />
@@ -1086,19 +1126,32 @@ export default function PlaceDetailScreen({
                             ))}
                           </View>
                         </View>
+                        )}
 
                         <View style={{ marginTop: spacing.lg }}>
                           <View style={styles.reviewsMetaRow}>
                             <View style={styles.reviewsMetaItem}>
                               <IconSymbol name="star.fill" size={16} color={colors.text.tertiary} />
-                              <Text style={[bodySmallStyle, { marginLeft: 6 }]}>{t('explore.rating_count', { count: reviews.length })}</Text>
+                              <Text style={[bodySmallStyle, { marginLeft: 6 }]}>{t('explore.rating_count', { count: totalReviewCount })}</Text>
                             </View>
                             <View style={styles.reviewsMetaDivider} />
                             <View style={styles.reviewsMetaItem}>
                               <IconSymbol name="text.bubble.fill" size={16} color={colors.text.tertiary} />
-                              <Text style={[bodySmallStyle, { marginLeft: 6 }]}>{t('explore.comment_count', { count: reviews.length })}</Text>
+                              <Text style={[bodySmallStyle, { marginLeft: 6 }]}>{t('explore.comment_count', { count: totalReviewCount })}</Text>
                             </View>
                           </View>
+                          {googleReviews.map((review, idx) => (
+                            <GoogleReviewCard
+                              key={`g-${idx}-${review.author_name}`}
+                              review={review}
+                              borderColor={colors.surface.border}
+                            />
+                          ))}
+                          {reviews.length > 0 && (
+                            <Text style={[bodyStyle, { fontWeight: '700', marginTop: spacing.lg, marginBottom: spacing.sm }]}>
+                              {t('place_detail.community_reviews')}
+                            </Text>
+                          )}
                           {reviews.map((review) => (
                             <View key={review.id} style={[styles.reviewItem, { borderBottomColor: colors.surface.border }]}>
                               <View style={styles.reviewHeader}>
