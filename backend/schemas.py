@@ -243,6 +243,9 @@ class Review(ReviewBase):
     # İlişkili medya
     media: List[ReviewMedia] = []
 
+    # Yazar bilgisi (Post şemasındaki author gibi, ama modelde user olarak geçiyor)
+    user: Optional['UserSummary'] = None
+
     class Config:
         from_attributes = True
 
@@ -874,3 +877,4 @@ class UserPreferencesResponse(BaseModel):
 
     class Config:
         from_attributes = True
+Review.model_rebuild()

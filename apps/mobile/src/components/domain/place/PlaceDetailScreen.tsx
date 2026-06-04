@@ -61,6 +61,11 @@ type Review = {
   created_at: string;
   media_url?: string;
   media_urls?: string[];
+  user?: {
+    username?: string;
+    first_name?: string;
+    avatar_url?: string;
+  };
 };
 
 const { height: SCREEN_HEIGHT, width: SCREEN_WIDTH } = Dimensions.get("window");
@@ -109,6 +114,9 @@ export default function PlaceDetailScreen({
   const [reviews, setReviews] = useState<Review[]>([]);
   const [reviewsLoading, setReviewsLoading] = useState(false);
   const [reviewsError, setReviewsError] = useState<string | null>(null);
+  const [reviewsPage, setReviewsPage] = useState(1);
+  const [hasMoreReviews, setHasMoreReviews] = useState(true);
+  const [reviewsLoadingMore, setReviewsLoadingMore] = useState(false);
   const [googleReviews, setGoogleReviews] = useState<GoogleReview[]>([]);
   const [googleReviewsLoading, setGoogleReviewsLoading] = useState(false);
   const [lastDistance, setLastDistance] = useState<number | null>(null);
@@ -265,7 +273,7 @@ export default function PlaceDetailScreen({
   useEffect(() => {
     const cancelled = { current: false };
     loadPlaceData(cancelled);
-    loadReviews(cancelled);
+    loadReviews(1, false, cancelled);
     loadSocialContent(cancelled);
     return () => {
       cancelled.current = true;
@@ -337,22 +345,35 @@ export default function PlaceDetailScreen({
     }
   };
 
-  const loadReviews = async (cancelled: { current: boolean } = { current: false }) => {
+  const loadReviews = async (pageToLoad = 1, append = false, cancelled: { current: boolean } = { current: false }) => {
     if (!id) return;
-    setReviewsLoading(true);
+    if (pageToLoad === 1) {
+      setReviewsLoading(true);
+    } else {
+      setReviewsLoadingMore(true);
+    }
     setReviewsError(null);
     try {
-      const data = await apiGet<Review[]>(`/places/${id}/reviews`);
+      const data = await apiGet<Review[]>(`/places/${id}/reviews?page=${pageToLoad}&page_size=20`);
       if (!cancelled.current) {
-        setReviews(data || []);
+        if (append) {
+          setReviews(prev => [...prev, ...(data || [])]);
+        } else {
+          setReviews(data || []);
+        }
+        setHasMoreReviews((data?.length || 0) === 20);
+        setReviewsPage(pageToLoad);
       }
     } catch (error) {
       if (!cancelled.current) {
         logger.error("Error loading reviews:", error);
-        setReviewsError(t("explore.no_comments"));
+        if (pageToLoad === 1) setReviewsError(t("explore.no_comments"));
       }
     } finally {
-      if (!cancelled.current) setReviewsLoading(false);
+      if (!cancelled.current) {
+        setReviewsLoading(false);
+        setReviewsLoadingMore(false);
+      }
     }
   };
 
@@ -1155,8 +1176,15 @@ export default function PlaceDetailScreen({
                           {reviews.map((review) => (
                             <View key={review.id} style={[styles.reviewItem, { borderBottomColor: colors.surface.border }]}>
                               <View style={styles.reviewHeader}>
-                                <View style={styles.reviewHeaderLeft}>
-                                  <Text style={[bodyStyle, { fontWeight: "600" }]}>{t('explore.user_id', { id: review.user_id })}</Text>
+                                <View style={[styles.reviewHeaderLeft, { alignItems: 'center' }]}>
+                                  {review.user?.avatar_url ? (
+                                    <Image source={{ uri: review.user.avatar_url }} style={{ width: 32, height: 32, borderRadius: 16, marginRight: 8, backgroundColor: colors.surface.default }} />
+                                  ) : (
+                                    <View style={{ width: 32, height: 32, borderRadius: 16, marginRight: 8, backgroundColor: colors.surface.default, justifyContent: 'center', alignItems: 'center' }}>
+                                      <IconSymbol name="person.fill" size={16} color={colors.text.tertiary} />
+                                    </View>
+                                  )}
+                                  <Text style={[bodyStyle, { fontWeight: "600" }]}>{review.user?.username || review.user?.first_name || t('explore.user_id', { id: review.user_id })}</Text>
                                   {review.is_verified && (
                                     <View
                                       style={[
@@ -1198,6 +1226,17 @@ export default function PlaceDetailScreen({
                               )}
                             </View>
                           ))}
+                          {hasMoreReviews && reviews.length > 0 && (
+                            <TouchableOpacity
+                              style={{ paddingVertical: 16, alignItems: 'center', marginTop: 8 }}
+                              onPress={() => loadReviews(reviewsPage + 1, true)}
+                              disabled={reviewsLoadingMore}
+                            >
+                              <Text style={[bodyStyle, { color: colors.accent.primary, fontWeight: '600' }]}>
+                                {reviewsLoadingMore ? t('place_detail.loading', { defaultValue: 'Yükleniyor...' }) : "Daha Fazla Yükle"}
+                              </Text>
+                            </TouchableOpacity>
+                          )}
                         </View>
                       </>
                     )}
