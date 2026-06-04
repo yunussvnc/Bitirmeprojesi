@@ -554,7 +554,7 @@ class ModelManager:
                 total_bonus += bonus
                 
             avg_bonus = total_bonus / len(reviews)
-            print(f"🧐 {len(reviews)} adet yorum Analizi Ortalama Bonus: {avg_bonus:.3f}")
+            print(f"[YorumAnalizi] {len(reviews)} adet yorum Analizi Ortalama Bonus: {avg_bonus:.3f}")
             return avg_bonus
             
         except Exception as e:
@@ -1737,7 +1737,13 @@ async def smart_search_v2(request: SmartSearchRequest):
                 "_cache": {"hit": False}
             }
 
-        rag_status = await ensure_rag_ready()
+        rag_status: Dict[str, Union[str, int, bool, None]] = rag_bootstrap_status.copy()
+        if not rag_status.get("ready"):
+            try:
+                rag_status = await asyncio.wait_for(ensure_rag_ready(), timeout=5.0)
+            except asyncio.TimeoutError:
+                print("[RAG] Index henüz hazır değil (5s timeout), SerpAPI ile devam ediliyor")
+                rag_status = rag_bootstrap_status.copy()
         search_location = parsed['district'] or request.location
         
         if parsed['features']:
