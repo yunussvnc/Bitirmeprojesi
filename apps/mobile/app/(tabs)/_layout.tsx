@@ -32,7 +32,7 @@ export default function TabsLayout() {
   const { t } = useTranslation();
 
   const unreadMessagesCount = useMessagesStore((state) => 
-    state.conversations.filter(c => c.unread && !c.isArchived && !c.isDeleted).length
+    state.conversations.filter(c => c.unread && !c.isArchived).length
   );
 
   // Kullanıcı giriş yaptığında Expo Push Token'ı backend'e kaydet
@@ -116,10 +116,7 @@ export default function TabsLayout() {
         <Tabs.Screen
           name="ai"
           options={{
-            title: t('tabs.ai'),
-            tabBarIcon: ({ color, focused }) => <TabIcon name="sparkles" focused={focused} color={color} />,
-            // @ts-expect-error - listeners works at runtime, expo-router types are incomplete
-            listeners: () => ({ tabPress: () => selection() }),
+            href: null,
           }}
         />
         <Tabs.Screen
