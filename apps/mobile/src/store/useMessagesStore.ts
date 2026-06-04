@@ -40,7 +40,7 @@ type MessagesState = {
     unarchiveConversation: (id: string) => void;
     deleteConversation: (id: string) => void;
     markAsRead: (id: string) => void;
-    updateLastMessageAt: (id: string, message: string, timestamp: string, sender?: "me" | string, isUnread?: boolean) => void;
+    updateLastMessageAt: (id: string, message: string, timestamp: string, sender?: "me" | string, isUnread?: boolean, actualTimestamp?: number) => void;
     toggleRevealRequest: (id: string) => void;
     mockOtherPersonReveal: (id: string) => void;
 
@@ -84,14 +84,14 @@ export const useMessagesStore = create<MessagesState>()(
                 )
             })),
 
-            updateLastMessageAt: (id, message, timestamp, sender, isUnread) => set((state) => ({
+            updateLastMessageAt: (id, message, timestamp, sender, isUnread, actualTimestamp) => set((state) => ({
                 conversations: state.conversations.map(c => {
                     if (c.id === id) {
                         return { 
                             ...c, 
                             lastMessage: message, 
                             timestamp, 
-                            lastMessageAt: Date.now(), 
+                            lastMessageAt: actualTimestamp !== undefined ? actualTimestamp : Date.now(), 
                             ...(sender !== undefined ? { lastMessageSender: sender } : {}),
                             ...(isUnread !== undefined ? { unread: isUnread } : {})
                         };

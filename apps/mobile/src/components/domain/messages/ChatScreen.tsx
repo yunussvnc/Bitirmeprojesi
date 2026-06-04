@@ -348,6 +348,8 @@ export default function ChatScreen() {
     const accessToken = useAuthStore((s) => s.accessToken);
     const { t, i18n } = useTranslation();
     const currentLocale = i18n.language === 'tr' ? 'tr-TR' : 'en-US';
+    // Polling guard: son görülen mesaj ID'sini tutarak gereksiz store güncellemesini önler
+    const lastStoredMsgIdRef = useRef<string | null>(null);
 
     // BUG-14: Sadece "match_xxx_userId" formatındaki ID'ler ya da sayısal olmayan ID'ler dummy sayılır.
     // Sayısal ID'ler artık her zaman backend conversation ID'si olarak işlenir.
@@ -528,12 +530,15 @@ export default function ChatScreen() {
                     // Store'u render sonrasında güncelle (render sırasında state güncelleme hatasını önler)
                     const latestMsg = backendMsgs[backendMsgs.length - 1];
                     if (latestMsg && backendMsgs.length > 0) {
-                        const convs = useMessagesStore.getState().conversations;
                         const textToSave = latestMsg.text || (latestMsg.imageUri ? t('chat.photo', 'Fotoğraf 📷') : '');
                         const sender = latestMsg.isMine ? 'me' : contact.name || 'Kullanıcı';
+                        // Gerçek backend timestamp'ini kullan — Date.now() kullanma! (sıralama bozulur)
+                        const latestItem = res.items[res.items.length - 1];
+                        const realTimestamp = latestItem?.created_at ? new Date(latestItem.created_at).getTime() : undefined;
 
                         setTimeout(() => {
-                            if (!convs.some(c => c.id === chatId)) {
+                            const freshConvs = useMessagesStore.getState().conversations;
+                            if (!freshConvs.some(c => c.id === chatId)) {
                                 useMessagesStore.getState().addConversation({
                                     id: chatId,
                                     name: contact.name || 'Kullanıcı',
@@ -544,16 +549,27 @@ export default function ChatScreen() {
                                     timestamp: latestMsg.timestamp,
                                     unread: !latestMsg.isMine,
                                     isOnline: contact.isOnline || false,
-                                    lastMessageAt: Date.now(),
+                                    lastMessageAt: realTimestamp ?? Date.now(),
                                 });
+                                lastStoredMsgIdRef.current = latestMsg.id;
                             } else {
-                                const c = convs.find(c => c.id === chatId);
-                                useMessagesStore.getState().updateLastMessageAt(
-                                    chatId,
-                                    textToSave,
-                                    latestMsg.timestamp,
-                                    sender as any,
-                                );
+                                const c = freshConvs.find(c => c.id === chatId);
+                                const existingTs = c?.lastMessageAt ?? 0;
+                                // Sadece yeni bir mesaj geldiyse store'u güncelle
+                                // (polling sırasında aynı mesaj tekrar tekrar işlenirse sıralama bozulur)
+                                if (lastStoredMsgIdRef.current !== latestMsg.id) {
+                                    lastStoredMsgIdRef.current = latestMsg.id;
+                                    if (realTimestamp === undefined || realTimestamp >= existingTs) {
+                                        useMessagesStore.getState().updateLastMessageAt(
+                                            chatId,
+                                            textToSave,
+                                            latestMsg.timestamp,
+                                            sender as any,
+                                            undefined,
+                                            realTimestamp,
+                                        );
+                                    }
+                                }
                                 if (c?.isArchived) useMessagesStore.getState().unarchiveConversation(chatId);
                             }
                         }, 0);

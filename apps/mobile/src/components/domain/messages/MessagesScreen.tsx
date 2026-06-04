@@ -117,10 +117,11 @@ export default function MessagesScreen() {
                                 lastMsg,
                                 new Date(bc.last_message_at).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
                                 senderType as any,
-                                bc.unread_count > 0
+                                bc.unread_count > 0,
+                                bcTime
                             );
                         } else if (bc.unread_count > 0 && !existing.unread) {
-                            store.updateLastMessageAt(chatId, existing.lastMessage, existing.timestamp, existing.lastMessageSender, true);
+                            store.updateLastMessageAt(chatId, existing.lastMessage, existing.timestamp, existing.lastMessageSender, true, existing.lastMessageAt);
                         }
                     }
                 }
