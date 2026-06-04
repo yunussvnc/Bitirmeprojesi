@@ -5,12 +5,14 @@ from functools import lru_cache
 
 class Settings(BaseSettings):
     DATABASE_URL: str
+    # Production (Render): ALLOWED_ORIGINS=https://asemos.app,https://admin.asemos.app
+    # Mobile native apps: ALLOWED_ORIGINS=* (veya boş bırakmayın — aşağıdaki varsayılan *)
     ALLOWED_ORIGINS: str = "*"
     JWT_SECRET_KEY: str = "dev-secret-change-in-production"
     JWT_ALGORITHM: str = "HS256"
-    JWT_ACCESS_TOKEN_EXPIRE_MINUTES: int = 525600  # 1 yıl (Instagram tarzı kalıcı oturum)
+    JWT_ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
     JWT_REFRESH_TOKEN_EXPIRE_DAYS: int = 365
-    PASSWORD_MIN_LENGTH: int = 6
+    PASSWORD_MIN_LENGTH: int = 8
     LLM_ENABLED: bool = True
     LLM_PROVIDER: str = "groq"
     OLLAMA_BASE_URL: str = "http://127.0.0.1:11434"

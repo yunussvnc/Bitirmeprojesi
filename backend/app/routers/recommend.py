@@ -5,13 +5,18 @@ from sqlalchemy.orm import Session
 
 import schemas, crud
 from llm_recommend import recommend_pipeline
-from app.dependencies import get_db
+from app.dependencies import get_db, get_current_user
+import models
 
 router = APIRouter(tags=["Recommend"])
 
 
 @router.post("/recommend", response_model=schemas.RecommendResponse)
-def recommend_places(req: schemas.RecommendRequest, db: Session = Depends(get_db)):
+def recommend_places(
+    req: schemas.RecommendRequest,
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(get_current_user),
+):
     places = crud.get_places(db, skip=0, limit=500)
 
     user_lat = req.location.lat if req.location else None

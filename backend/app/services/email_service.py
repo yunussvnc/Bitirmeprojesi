@@ -6,7 +6,7 @@ Tanımlanmamışsa geliştirme ortamı için konsola yazar (fallback).
 """
 
 import os
-import random
+import secrets
 import string
 import logging
 import smtplib
@@ -28,7 +28,7 @@ VERIFICATION_EXPIRE_MINUTES = 15
 
 def _generate_code() -> str:
     """Kriptografik olarak güvenli 6 haneli sayısal doğrulama kodu üretir."""
-    return "".join(random.choices(string.digits, k=VERIFICATION_CODE_LENGTH))
+    return "".join(secrets.choice(string.digits) for _ in range(VERIFICATION_CODE_LENGTH))
 
 
 def _build_verification_html(user_name: str, code: str) -> str:

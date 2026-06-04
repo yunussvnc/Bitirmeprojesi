@@ -95,7 +95,7 @@ def _get_feed_db_sync(
     )
     items = [_post_to_schema(p, db, current_user_id) for p in posts]
     return {
-        "items": [i.dict() for i in items],
+        "items": [i.model_dump(mode="json") for i in items],
         "next_cursor": next_cursor,
         "has_more": has_more,
         "page_size": page_size,
@@ -290,12 +290,12 @@ def get_post_comments(
 
     # Normalde crud içinde yapılmalı ama basitlik için burada filtreleyebiliriz.
     # Doğru sayfalama için DB bazında filtrelemek daha iyi:
-    comments_query = db.query(models.Comment).filter(models.Comment.post_id == post_id)
+    comments_query = db.query(models.PostComment).filter(models.PostComment.post_id == post_id)
     if blocked_ids:
-        comments_query = comments_query.filter(models.Comment.user_id.notin_(blocked_ids))
+        comments_query = comments_query.filter(models.PostComment.user_id.notin_(blocked_ids))
         
     total = comments_query.count()
-    comments = comments_query.order_by(models.Comment.created_at.desc()).offset((page - 1) * page_size).limit(page_size).all()
+    comments = comments_query.order_by(models.PostComment.created_at.desc()).offset((page - 1) * page_size).limit(page_size).all()
     
     out = []
     for c in comments:

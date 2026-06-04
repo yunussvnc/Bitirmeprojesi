@@ -5,6 +5,8 @@ from typing import Optional
 # pyrefly: ignore [missing-import]
 from fastapi import APIRouter, Depends, HTTPException, Query
 # pyrefly: ignore [missing-import]
+from sqlalchemy import case
+# pyrefly: ignore [missing-import]
 from sqlalchemy.orm import Session
 
 import models, schemas, crud
@@ -70,28 +72,30 @@ def search_users(
 
     total = base_query.count()
 
-    # ── 5. Tüm eşleşen kullanıcıları al & akıllı sıralama ──
-    users = base_query.all()
-
-    def relevance_score(u: models.User) -> int:
-        """0 = en alakalı (exact username), 1 = prefix, 2 = contains"""
-        uname = (u.username or "").lower()
-        fname = (u.first_name or "").lower()
-        lname = (u.last_name or "").lower()
-        # Exact match
-        if uname == lower_q or fname == lower_q or lname == lower_q:
-            return 0
-        # Starts-with match
-        if uname.startswith(lower_q) or fname.startswith(lower_q) or lname.startswith(lower_q):
-            return 1
-        # Contains
-        return 2
-
-    users.sort(key=relevance_score)
-
-    # ── 6. Sayfalama ──
+    # ── 5. DB seviyesinde sıralama + sayfalama ──
+    prefix = f"{lower_q}%"
+    relevance = case(
+        (
+            (models.User.username.ilike(lower_q))
+            | (models.User.first_name.ilike(lower_q))
+            | (models.User.last_name.ilike(lower_q)),
+            0,
+        ),
+        (
+            (models.User.username.ilike(prefix))
+            | (models.User.first_name.ilike(prefix))
+            | (models.User.last_name.ilike(prefix)),
+            1,
+        ),
+        else_=2,
+    )
     offset = (page - 1) * page_size
-    paginated = users[offset: offset + page_size]
+    paginated = (
+        base_query.order_by(relevance, models.User.username.asc())
+        .offset(offset)
+        .limit(page_size)
+        .all()
+    )
 
     # ── 7. Batch is_following kontrolü (N+1 sorgusu yerine tek sorgu) ──
     current_uid = current_user.id if current_user else None
