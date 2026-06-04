@@ -1,5 +1,6 @@
 # routers/feed.py — Post / Feed / Reels / Like / Comment endpoint'leri
 
+import logging
 from typing import Optional
 
 # pyrefly: ignore [missing-import]
@@ -11,6 +12,7 @@ import models, schemas, crud
 from app.dependencies import get_db, get_current_user, get_optional_user
 
 router = APIRouter(tags=["Feed"])
+logger = logging.getLogger("asemos.feed")
 
 FEED_PAGE_SIZE = 12  # Her sayfada kaç gönderi gelsin
 
@@ -28,20 +30,23 @@ def _post_to_schema(post: models.Post, db: Session, current_user_id: int | None)
     ) if post.user else None
     place = schemas.PlaceSummary(
         id=post.place.id,
-        name=post.place.name,
+        name=(post.place.name or "").strip() or "Mekan",
         category=post.place.category,
     ) if post.place else None
-    media = [
-        schemas.PostMedia(
-            id=m.id,
-            post_id=m.post_id,
-            media_type=m.media_type,
-            media_url=m.media_url,
-            thumbnail_url=m.thumbnail_url,
-            order_index=m.order_index,
+    media = []
+    for m in post.media or []:
+        if not m.media_url:
+            continue
+        media.append(
+            schemas.PostMedia(
+                id=m.id,
+                post_id=m.post_id,
+                media_type=m.media_type or "image",
+                media_url=m.media_url,
+                thumbnail_url=m.thumbnail_url,
+                order_index=m.order_index or 0,
+            )
         )
-        for m in (post.media or [])
-    ]
     # Serialize tagged users
     tagged_users = [
         schemas.UserSummary(
@@ -60,7 +65,7 @@ def _post_to_schema(post: models.Post, db: Session, current_user_id: int | None)
         user_id=post.user_id,
         place_id=post.place_id,
         caption=post.caption,
-        post_type=post.post_type,
+        post_type=post.post_type or "photo",
         comments_disabled=getattr(post, "comments_disabled", False),
         likes_hidden=getattr(post, "likes_hidden", False),
         like_count=post.like_count,
@@ -130,18 +135,25 @@ async def get_feed(
         except Exception:
             pass
 
-    result = await run_in_threadpool(
-        _get_feed_db_sync, db, cursor, page_size, current_uid, filter_mode
-    )
+    try:
+        result = await run_in_threadpool(
+            _get_feed_db_sync, db, cursor, page_size, current_uid, filter_mode
+        )
+        payload = schemas.CursorPaginatedPosts(**result)
+    except Exception as exc:
+        logger.exception("GET /feed failed (filter=%s): %s", filter_mode, exc)
+        return schemas.CursorPaginatedPosts(
+            items=[], next_cursor=None, has_more=False, page_size=page_size
+        )
 
     if redis:
         try:
             ttl = 60 if cursor else 30  # İlk sayfa daha kısa cache (yeni içerik gelir)
-            await redis.setex(cache_key, ttl, json.dumps(result, default=str))
+            await redis.setex(cache_key, ttl, json.dumps(payload.model_dump(mode="json"), default=str))
         except Exception:
             pass
 
-    return schemas.CursorPaginatedPosts(**result)
+    return payload
 
 
 @router.get("/feed/reels", response_model=schemas.CursorPaginatedPosts)

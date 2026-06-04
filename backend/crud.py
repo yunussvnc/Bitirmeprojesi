@@ -873,15 +873,15 @@ def get_feed_paginated_cursor(
             venue_owner_ids = [r[0] for r in rows if r[0]]
 
         # Kullanıcı takipleri + mekan sahiplerini birleştir
-        base = _filter_non_flagged_posts(db.query(models.Post), db).filter(
-            or_(
-                models.Post.user_id.in_(following_ids_sq),
+        feed_filters = [models.Post.user_id.in_(following_ids_sq)]
+        if followed_place_ids and venue_owner_ids:
+            feed_filters.append(
                 and_(
                     models.Post.user_id.in_(venue_owner_ids),
                     models.Post.place_id.in_(followed_place_ids),
-                ) if followed_place_ids else False,
+                )
             )
-        )
+        base = _filter_non_flagged_posts(db.query(models.Post), db).filter(or_(*feed_filters))
         if post_type:
             base = base.filter(models.Post.post_type == post_type)
 
@@ -954,10 +954,12 @@ def get_feed_paginated_cursor(
         
         # Takip ettiklerimi, private hesapları, kendimi ve engellenenleri çıkar
         exclude_ids = my_following_ids | private_user_ids | {current_user_id} | all_blocked_ids
-        base = base.filter(models.Post.user_id.notin_(exclude_ids))
+        if exclude_ids:
+            base = base.filter(models.Post.user_id.notin_(exclude_ids))
     else:
         # Giriş yapmamış → sadece public hesapların gönderileri
-        base = base.filter(models.Post.user_id.notin_(private_user_ids))
+        if private_user_ids:
+            base = base.filter(models.Post.user_id.notin_(private_user_ids))
 
     if post_type:
         base = base.filter(models.Post.post_type == post_type)

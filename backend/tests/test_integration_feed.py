@@ -120,6 +120,26 @@ class TestFeedListing:
         response2 = client.get(f"/feed?page_size=2&cursor={next_cursor}")
         assert len(response2.json()["items"]) >= 1
 
+    def test_feed_with_null_place_name(self, client):
+        """Prod DB'de name=NULL mekanlar feed'i 500 yapmamalı."""
+        uid = create_test_user(email="feednull@test.com", username="feednull")
+        db = TestingSessionLocal()
+        place = models.Place(
+            name=None,
+            address="Adres",
+            city="Istanbul",
+            latitude=41.0,
+            longitude=29.0,
+        )
+        db.add(place)
+        db.commit()
+        db.refresh(place)
+        db.close()
+        create_test_post(uid, place_id=place.id, caption="Mekansız isim")
+        response = client.get("/feed")
+        assert response.status_code == 200
+        assert any(p.get("place") and p["place"]["name"] for p in response.json()["items"])
+
 
 class TestReels:
     """GET /feed/reels — Reels akışı."""
