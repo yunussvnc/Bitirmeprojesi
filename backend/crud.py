@@ -1721,6 +1721,11 @@ def is_blocked(db: Session, blocker_id: int, blocked_id: int) -> bool:
     ).first() is not None
 
 
+def users_block_each_other(db: Session, user_a: int, user_b: int) -> bool:
+    """Her iki yönde engel var mı (A→B veya B→A)."""
+    return is_blocked(db, user_a, user_b) or is_blocked(db, user_b, user_a)
+
+
 def get_blocked_user_ids(db: Session, user_id: int) -> list[int]:
     """Kullanıcının engellediği tüm ID'leri döndürür."""
     rows = db.query(models.UserBlock.blocked_id).filter(

@@ -12,6 +12,7 @@ from tests.conftest import (
     get_auth_headers, TestingSessionLocal,
 )
 import models
+import crud
 
 
 def _setup_conversation():
@@ -174,3 +175,42 @@ class TestDeleteMessage:
         headers = get_auth_headers(uid1)
         response = client.delete("/messages/99999", headers=headers)
         assert response.status_code == 404
+
+
+class TestBlockMessaging:
+    """Engelleme — mesajlaşma ve konuşma açma kısıtları."""
+
+    def test_blocked_user_cannot_send_message(self, client):
+        """A, B'yi engeller; B, A'ya mesaj gönderemez."""
+        uid1, uid2, cid = _setup_conversation()
+        db = TestingSessionLocal()
+        crud.toggle_block_user(db, uid1, uid2)
+        db.close()
+
+        response = _send_message(client, uid2, cid, "Engellenmiş mesaj")
+        assert response.status_code == 403
+
+    def test_blocker_cannot_send_to_blocked(self, client):
+        """Engelleyen de engellenene mesaj gönderemez."""
+        uid1, uid2, cid = _setup_conversation()
+        db = TestingSessionLocal()
+        crud.toggle_block_user(db, uid1, uid2)
+        db.close()
+
+        response = _send_message(client, uid1, cid, "Ben de gönderemem")
+        assert response.status_code == 403
+
+    def test_open_conversation_rejected_when_blocked(self, client):
+        uid1 = create_test_user(email="blkopen1@test.com", username="blkopen1", birth_date=date(2000, 1, 1))
+        uid2 = create_test_user(email="blkopen2@test.com", username="blkopen2", birth_date=date(2000, 1, 1))
+        db = TestingSessionLocal()
+        crud.toggle_block_user(db, uid1, uid2)
+        db.close()
+
+        headers = get_auth_headers(uid2)
+        response = client.post(
+            "/messages/conversation/open",
+            headers=headers,
+            json={"user_id": uid1},
+        )
+        assert response.status_code == 403

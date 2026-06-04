@@ -272,7 +272,13 @@ class TestScenarioBlockFlow:
         usernames = [u["username"] for u in search.json()["items"]]
         assert "bflow2" not in usernames
 
-        # 5. Engeli kaldır
+        # 5. Engellenen kullanıcı mesaj gönderemez
+        cid = create_match_conversation(uid1, uid2, place_name="Block Cafe")
+        h2 = get_auth_headers(uid2)
+        msg = client.post(f"/messages/{cid}", headers=h2, json={"content": "Engel testi"})
+        assert msg.status_code == 403
+
+        # 6. Engeli kaldır
         unblock = client.post(f"/users/{uid2}/block", headers=h1)
         assert unblock.json()["blocked"] is False
 

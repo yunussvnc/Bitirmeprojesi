@@ -45,6 +45,8 @@ import {
   IconZodiacVirgo
 } from "tabler-icons-react-native";
 import { useTranslation } from "react-i18next";
+import { toggleBlockUser } from "@/src/services/moderationService";
+import { lightImpact, success } from "@/src/utils/haptics";
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get("window");
 const SWIPE_THRESHOLD = SCREEN_WIDTH * 0.2;
@@ -131,6 +133,7 @@ export default function MatchScreen() {
   const [activeTab, setActiveTab] = useState<"swipe" | "likes">("swipe");
   const [selectedLike, setSelectedLike] = useState<MatchCandidate | null>(null);
   const [blockedUsers, setBlockedUsers] = useState<number[]>([]);
+  const [blockingUserId, setBlockingUserId] = useState<number | null>(null);
   const [actedLikes, setActedLikes] = useState<number[]>([]);
   const [showFilterModal, setShowFilterModal] = useState(false);
   const [filters, setFilters] = useState<MatchFilters>({ ...DEFAULT_FILTERS });
@@ -556,6 +559,25 @@ export default function MatchScreen() {
     </View>
   );
   const handleBlockUser = (profile: any) => {
+    const userId = profile.user_id || profile.id;
+    if (!userId || blockingUserId === userId) return;
+
+    const displayName = profile.display_name || profile.name || t("matching.block_user");
+
+    const removeFromUi = () => {
+      setBlockedUsers((prev) => (prev.includes(userId) ? prev : [...prev, userId]));
+      if (activeTab === "swipe" && currentCandidate?.user_id === userId) {
+        handleSwipe("left");
+      } else {
+        if (selectedLike && selectedLike.user_id === userId) {
+          setSelectedLike(null);
+        }
+        if (profile.user_id) {
+          passCandidate(profile.user_id, profile.active_place_id);
+        }
+      }
+    };
+
     Alert.alert(
       t("matching.block_user"),
       t("matching.block_user_desc"),
@@ -564,22 +586,25 @@ export default function MatchScreen() {
         {
           text: t("matching.yes_block"),
           style: "destructive",
-          onPress: () => {
-            const userId = profile.user_id || profile.id;
-            setBlockedUsers(prev => [...prev, userId]);
-
-            if (activeTab === "swipe" && currentCandidate?.user_id === userId) {
-              handleSwipe("left"); // "pass" the candidate
-            } else {
-              if (selectedLike && selectedLike.user_id === userId) {
-                setSelectedLike(null);
-              }
-              // Try to pass candidate behind the scenes if we have user_id
-              if (profile.user_id) passCandidate(profile.user_id, profile.active_place_id);
+          onPress: async () => {
+            setBlockingUserId(userId);
+            try {
+              await toggleBlockUser(userId);
+              lightImpact();
+              success();
+              removeFromUi();
+              Alert.alert(
+                t("common.success"),
+                t("matching.blocked_with_name", { name: displayName }),
+              );
+            } catch {
+              Alert.alert(t("common.error"), t("matching.block_failed"));
+            } finally {
+              setBlockingUserId(null);
             }
-          }
-        }
-      ]
+          },
+        },
+      ],
     );
   };
 

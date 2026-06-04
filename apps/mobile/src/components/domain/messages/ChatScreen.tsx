@@ -703,12 +703,14 @@ export default function ChatScreen() {
 
         // 🔐 Gönderme izni kontrolü
         if (msgPermission && !msgPermission.can_send) {
-            Alert.alert(
-                t("chat.restricted_title", "Mesaj Gönderilemedi"),
-                msgPermission.reason === "awaiting_reply"
-                    ? t("chat.awaiting_reply", "Karşı taraf henüz cevap vermedi. Cevap verene kadar yeni mesaj gönderemezsiniz.")
-                    : t("chat.cannot_send", "Bu kullanıcıya mesaj gönderme izniniz yok."),
-            );
+            const blockedMsg = t("chat.blocked_cannot_send");
+            const body =
+                msgPermission.reason === "blocked"
+                    ? blockedMsg
+                    : msgPermission.reason === "awaiting_reply"
+                      ? t("chat.awaiting_reply")
+                      : t("chat.cannot_send");
+            Alert.alert(t("chat.restricted_title"), body);
             return;
         }
 

@@ -12,6 +12,7 @@ from fastapi import APIRouter, Depends, HTTPException, WebSocket, WebSocketDisco
 from sqlalchemy.orm import Session
 
 import models, schemas
+import crud
 from auth import decode_token
 from app.dependencies import get_db, get_current_user
 from app.websocket.manager import manager
@@ -19,6 +20,14 @@ from app.websocket.manager import manager
 logger = logging.getLogger("asemos")
 
 router = APIRouter(tags=["Messages"])
+
+_BLOCK_OPEN_DETAIL = "Bu kullanıcıyla mesajlaşamazsınız. Engelleme nedeniyle erişim kapalı."
+_BLOCK_SEND_DETAIL = "Bu kullanıcıyla mesaj gönderemezsiniz. Engel mevcut."
+
+
+def _raise_if_users_blocked(db: Session, user_a: int, user_b: int) -> None:
+    if crud.users_block_each_other(db, user_a, user_b):
+        raise HTTPException(status_code=403, detail=_BLOCK_OPEN_DETAIL)
 
 
 # ─────────────────────────────────────────────────────────────
@@ -65,6 +74,14 @@ def _get_messaging_permission(
 
     # Alıcı kim?
     receiver_id = conv.user2_id if conv.user1_id == sender_id else conv.user1_id
+
+    if crud.users_block_each_other(db, sender_id, receiver_id):
+        return schemas.ConversationPermission(
+            can_send=False,
+            can_send_media=False,
+            hide_read_receipt=True,
+            reason="blocked",
+        )
 
     receiver = db.query(models.User).filter(models.User.id == receiver_id).first()
     if not receiver:
@@ -195,6 +212,8 @@ def open_or_create_conversation(
     other_user = db.query(models.User).filter(models.User.id == other_user_id).first()
     if not other_user:
         raise HTTPException(status_code=404, detail="Kullanıcı bulunamadı.")
+
+    _raise_if_users_blocked(db, current_user.id, other_user_id)
 
     # Gizli hesap kontrolü — mevcut konuşma yoksa ve karşılıklı takip yoksa engelle
     existing_conv = db.query(models.MatchConversation).filter(
@@ -327,10 +346,8 @@ async def send_message(
     perm = _get_messaging_permission(db, conversation_id, current_user.id)
 
     if not perm.can_send:
-        raise HTTPException(
-            status_code=403,
-            detail=perm.reason or "messaging_not_allowed"
-        )
+        detail = _BLOCK_SEND_DETAIL if perm.reason == "blocked" else (perm.reason or "messaging_not_allowed")
+        raise HTTPException(status_code=403, detail=detail)
 
     # Medya içeriyorsa ek kontrol
     has_media = bool(data.media_url) or data.message_type not in ("text", "shared_post")
@@ -576,10 +593,11 @@ async def websocket_chat(
                     perm = _get_messaging_permission(db, conversation_id, user_id)
 
                     if not perm.can_send:
+                        ws_detail = _BLOCK_SEND_DETAIL if perm.reason == "blocked" else (perm.reason or "messaging_not_allowed")
                         await manager.send_to_user(conversation_id, user_id, {
                             "type": "error",
                             "code": "PERMISSION_DENIED",
-                            "detail": perm.reason or "messaging_not_allowed",
+                            "detail": ws_detail,
                         })
                         continue
 
