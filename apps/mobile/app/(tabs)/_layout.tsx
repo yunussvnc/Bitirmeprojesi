@@ -122,12 +122,7 @@ export default function TabsLayout() {
             listeners: () => ({ tabPress: () => selection() }),
           }}
         />
-        <Tabs.Screen
-          name="ai"
-          options={{
-            href: null,
-          }}
-        />
+
         <Tabs.Screen
           name="matching"
           options={{
