@@ -4,7 +4,29 @@
     "explore": "Keşfet",
     "messages": "Mesajlar",
     "feed": "Akış",
+    "ai": "AI Ara",
     "profile": "Profil"
+  },
+  "ai_search": {
+    "title": "AI Mekan Önerisi",
+    "status_connecting": "Bağlanıyor...",
+    "status_online": "● Çevrimiçi",
+    "status_offline": "● Bağlantı yok",
+    "city_label": "Şehir",
+    "city_select_a11y": "Şehir seç: {{city}}",
+    "city_limited_data": "Bu şehir için veri sınırlı; İstanbul en kapsamlı sonuçları verir.",
+    "empty_title": "AI Mekan Asistanı",
+    "empty_desc": "Doğal dil ile mekan arayın:\natmosfer, özellik veya mahalle yazın — AI bulur.",
+    "input_placeholder": "Nasıl bir mekan arıyorsun?",
+    "no_results": "😔 Bu kriterlere uygun bir mekan bulamadım. Biraz daha genel bir arama dene.",
+    "no_results_other_city": "😔 {{city}} için henüz yeterli mekan verisi yok. İstanbul’u deneyebilir veya sorgunu genelleştirebilirsin.",
+    "cities": {
+      "istanbul": "İstanbul",
+      "ankara": "Ankara",
+      "izmir": "İzmir",
+      "antalya": "Antalya",
+      "bursa": "Bursa"
+    }
   },
   "home": {
     "title": "Ana Sayfa",

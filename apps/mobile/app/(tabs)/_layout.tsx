@@ -114,6 +114,15 @@ export default function TabsLayout() {
           }}
         />
         <Tabs.Screen
+          name="ai"
+          options={{
+            title: t('tabs.ai'),
+            tabBarIcon: ({ color, focused }) => <TabIcon name="sparkles" focused={focused} color={color} />,
+            // @ts-expect-error - listeners works at runtime, expo-router types are incomplete
+            listeners: () => ({ tabPress: () => selection() }),
+          }}
+        />
+        <Tabs.Screen
           name="matching"
           options={{
             href: null,

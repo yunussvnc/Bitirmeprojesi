@@ -24,6 +24,9 @@ export type UploadQuality = 'high' | 'auto' | 'data_saver';
 export type CameraToolbarSide = 'left' | 'right';
 export type Audience = 'everyone' | 'followers' | 'off';
 export type AppLanguage = 'tr' | 'en';
+import type { AiSearchCityId } from '../constants/aiCities';
+import { DEFAULT_AI_SEARCH_CITY_ID } from '../constants/aiCities';
+export type { AiSearchCityId };
 
 type BackendPrefs = {
   is_private_account: boolean;
@@ -103,6 +106,10 @@ export type SettingsState = {
   // —— Konum ——
   includeLocationInPosts: boolean;
   setIncludeLocationInPosts: (v: boolean) => void;
+
+  // —— AI arama şehri ——
+  aiSearchCityId: AiSearchCityId;
+  setAiSearchCityId: (v: AiSearchCityId) => void;
 
   // —— Kısıtlı Hesaplar ——
   restrictedUserIds: number[];
@@ -199,6 +206,10 @@ export const useSettingsStore = create<SettingsState>()(
       // Konum
       includeLocationInPosts: true,
       setIncludeLocationInPosts: (v) => { set({ includeLocationInPosts: v }); schedulePush(); },
+
+      // AI arama şehri (lokal persist; backend prefs dışı)
+      aiSearchCityId: DEFAULT_AI_SEARCH_CITY_ID,
+      setAiSearchCityId: (v) => set({ aiSearchCityId: v }),
 
       // Kısıtlı
       restrictedUserIds: [],

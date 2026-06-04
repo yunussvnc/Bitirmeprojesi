@@ -4,7 +4,29 @@
     "explore": "Explore",
     "messages": "Messages",
     "feed": "Feed",
+    "ai": "AI Search",
     "profile": "Profile"
+  },
+  "ai_search": {
+    "title": "AI Venue Suggestions",
+    "status_connecting": "Connecting...",
+    "status_online": "● Online",
+    "status_offline": "● Offline",
+    "city_label": "City",
+    "city_select_a11y": "Select city: {{city}}",
+    "city_limited_data": "Limited data for this city; Istanbul has the fullest results.",
+    "empty_title": "AI Venue Assistant",
+    "empty_desc": "Search in natural language:\ndescribe vibe, features, or neighborhood — AI finds places.",
+    "input_placeholder": "What kind of place are you looking for?",
+    "no_results": "😔 No venues matched your criteria. Try a broader search.",
+    "no_results_other_city": "😔 Not enough venue data for {{city}} yet. Try Istanbul or broaden your query.",
+    "cities": {
+      "istanbul": "Istanbul",
+      "ankara": "Ankara",
+      "izmir": "Izmir",
+      "antalya": "Antalya",
+      "bursa": "Bursa"
+    }
   },
   "home": {
     "title": "Home",
