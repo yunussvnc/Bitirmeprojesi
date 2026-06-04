@@ -26,7 +26,9 @@ export type Audience = 'everyone' | 'followers' | 'off';
 export type AppLanguage = 'tr' | 'en';
 import type { AiSearchCityId } from '../constants/aiCities';
 import { DEFAULT_AI_SEARCH_CITY_ID } from '../constants/aiCities';
+import type { AiSearchDistrictId } from '../constants/aiDistricts';
 export type { AiSearchCityId };
+export type { AiSearchDistrictId };
 
 type BackendPrefs = {
   is_private_account: boolean;
@@ -107,9 +109,11 @@ export type SettingsState = {
   includeLocationInPosts: boolean;
   setIncludeLocationInPosts: (v: boolean) => void;
 
-  // —— AI arama şehri ——
+  // —— AI arama şehri / ilçe ——
   aiSearchCityId: AiSearchCityId;
   setAiSearchCityId: (v: AiSearchCityId) => void;
+  aiSearchDistrictId: AiSearchDistrictId | null;
+  setAiSearchDistrictId: (v: AiSearchDistrictId | null) => void;
 
   // —— Kısıtlı Hesaplar ——
   restrictedUserIds: number[];
@@ -207,9 +211,16 @@ export const useSettingsStore = create<SettingsState>()(
       includeLocationInPosts: true,
       setIncludeLocationInPosts: (v) => { set({ includeLocationInPosts: v }); schedulePush(); },
 
-      // AI arama şehri (lokal persist; backend prefs dışı)
+      // AI arama şehri / ilçe (lokal persist; backend prefs dışı)
       aiSearchCityId: DEFAULT_AI_SEARCH_CITY_ID,
-      setAiSearchCityId: (v) => set({ aiSearchCityId: v }),
+      setAiSearchCityId: (v) => {
+        set({
+          aiSearchCityId: v,
+          aiSearchDistrictId: v === 'istanbul' ? get().aiSearchDistrictId : null,
+        });
+      },
+      aiSearchDistrictId: null,
+      setAiSearchDistrictId: (v) => set({ aiSearchDistrictId: v }),
 
       // Kısıtlı
       restrictedUserIds: [],

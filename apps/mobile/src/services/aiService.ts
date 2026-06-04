@@ -18,6 +18,7 @@ import type {
   AnalyzeReviewRequest,
   AnalyzeReviewResponse,
 } from '@/src/types/ai';
+import type { ResolvedAiSearchLocation } from '@/src/utils/aiSearchLocation';
 
 
 // ============================================================
@@ -88,23 +89,37 @@ async function aiFetch<T>(
 // API Fonksiyonları
 // ============================================================
 
+/** Konum alanlarını API gövdesine ekle (sorgu önceliği `resolveAiSearchLocation` ile). */
+export function buildSmartSearchBody(
+  req: SmartSearchRequest,
+  resolved: ResolvedAiSearchLocation,
+): SmartSearchRequest & { district?: string | null } {
+  return {
+    ...req,
+    location: resolved.location,
+    user_lat: resolved.user_lat,
+    user_lng: resolved.user_lng,
+    district: resolved.district?.apiLocation ?? null,
+    analyze_reviews: req.analyze_reviews ?? false,
+  };
+}
+
 /**
  * Doğal dil sorgusu ile mekan ara.
  * Örn: "Kadıköy'de deniz manzaralı sessiz kafe"
  */
 export async function smartSearch(
   req: SmartSearchRequest,
+  resolved?: ResolvedAiSearchLocation,
 ): Promise<SmartSearchResponse> {
   try {
-    logger.log('[aiService] smartSearch →', req.query);
+    const body = resolved ? buildSmartSearchBody(req, resolved) : { ...req, analyze_reviews: req.analyze_reviews ?? false };
+    logger.log('[aiService] smartSearch →', req.query, 'loc=', body.location);
     const res = await aiFetch<SmartSearchResponse>(
       '/api/smart-search-v2',
       {
         method: 'POST',
-        body: JSON.stringify({
-          ...req,
-          analyze_reviews: req.analyze_reviews ?? false,
-        }),
+        body: JSON.stringify(body),
       },
       28000,
     );

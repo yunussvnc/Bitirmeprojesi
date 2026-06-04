@@ -69,6 +69,8 @@ export interface Place {
 export interface SmartSearchRequest {
   query: string;
   location?: string;
+  /** İstanbul ilçe adı (opsiyonel; backend öncelikle sorgudan parse eder) */
+  district?: string | null;
   limit?: number;
   user_lat?: number;
   user_lng?: number;

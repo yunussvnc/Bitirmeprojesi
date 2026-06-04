@@ -32,7 +32,9 @@ import { useTheme } from '@/src/hooks/useTheme';
 import { smartSearch, checkAIHealth, getAIBaseUrl, imageSearch } from '@/src/services/aiService';
 import type { Place, SmartSearchResponse } from '@/src/types/ai';
 import { filterCompleteAiRecommendations } from '@/src/utils/aiPlaceValidation';
+import { resolveAiSearchLocation } from '@/src/utils/aiSearchLocation';
 import { AI_SEARCH_CITIES, getAiCityById, type AiSearchCity, type AiSearchCityId } from '@/src/constants/aiCities';
+import { getIstanbulDistrictsForPicker } from '@/src/constants/aiDistricts';
 import { useSettingsStore } from '@/src/store/useSettingsStore';
 
 const EXAMPLE_QUERIES = [
@@ -276,7 +278,10 @@ export default function AISearchScreen() {
   const { t } = useTranslation();
   const aiSearchCityId = useSettingsStore((s) => s.aiSearchCityId);
   const setAiSearchCityId = useSettingsStore((s) => s.setAiSearchCityId);
+  const aiSearchDistrictId = useSettingsStore((s) => s.aiSearchDistrictId);
+  const setAiSearchDistrictId = useSettingsStore((s) => s.setAiSearchDistrictId);
   const selectedCity: AiSearchCity = getAiCityById(aiSearchCityId);
+  const istanbulDistricts = getIstanbulDistrictsForPicker();
   const [messages, setMessages]         = useState<Message[]>([]);
   const [inputText, setInputText]       = useState('');
   const [isLoading, setIsLoading]      = useState(false);
@@ -382,10 +387,15 @@ export default function AISearchScreen() {
 
     try {
       const mimeType = asset.mimeType ?? 'image/jpeg';
+      const resolved = resolveAiSearchLocation({
+        query: '',
+        city: selectedCity,
+        districtId: aiSearchDistrictId,
+      });
       const res = await imageSearch(asset.base64, mimeType, {
-        location: selectedCity.apiLocation,
-        userLat: selectedCity.lat,
-        userLng: selectedCity.lng,
+        location: resolved.location,
+        userLat: resolved.user_lat,
+        userLng: resolved.user_lng,
       });
 
       removeLoading();
@@ -434,7 +444,7 @@ export default function AISearchScreen() {
     } finally {
       setIsLoading(false);
     }
-  }, [selectedCity, addMessage, removeLoading]);
+  }, [selectedCity, aiSearchDistrictId, addMessage, removeLoading]);
 
 
   // Backend health check (non-blocking — aramayı geciktirmez)
@@ -466,15 +476,20 @@ export default function AISearchScreen() {
     addMessage({ id: `loading-${Date.now()}`, type: 'loading' });
 
     try {
-      const res: SmartSearchResponse = await smartSearch({
+      const resolved = resolveAiSearchLocation({
         query: text,
-        location: selectedCity.apiLocation,
-        user_lat: selectedCity.lat,
-        user_lng: selectedCity.lng,
-        limit: 5,
-        max_distance_km: 10,
-        analyze_reviews: false,
+        city: selectedCity,
+        districtId: aiSearchDistrictId,
       });
+      const res: SmartSearchResponse = await smartSearch(
+        {
+          query: text,
+          limit: 5,
+          max_distance_km: 10,
+          analyze_reviews: false,
+        },
+        resolved,
+      );
 
       removeLoading();
 
@@ -517,7 +532,7 @@ export default function AISearchScreen() {
     } finally {
       setIsLoading(false);
     }
-  }, [inputText, isLoading, selectedCity, addMessage, removeLoading, t]);
+  }, [inputText, isLoading, selectedCity, aiSearchDistrictId, addMessage, removeLoading, t]);
 
   // ─── Render item ────────────────────────────────────────────
   const renderItem = useCallback(({ item }: { item: Message }) => {
@@ -669,6 +684,68 @@ export default function AISearchScreen() {
             <Text style={[styles.cityHint, { color: colors.text.tertiary }]}>
               {t('ai_search.city_limited_data')}
             </Text>
+          )}
+          {selectedCity.id === 'istanbul' && (
+            <>
+              <Text style={[styles.cityBarLabel, { color: colors.text.tertiary, marginTop: 6 }]}>
+                {t('ai_search.district_label')}
+              </Text>
+              <ScrollView
+                horizontal
+                showsHorizontalScrollIndicator={false}
+                contentContainerStyle={styles.locBarContent}
+              >
+                <TouchableOpacity
+                  style={[
+                    styles.locChip,
+                    {
+                      backgroundColor: !aiSearchDistrictId
+                        ? colors.accent.primary
+                        : colors.surface.elevated,
+                      borderColor: !aiSearchDistrictId
+                        ? colors.accent.primary
+                        : colors.surface.border,
+                    },
+                  ]}
+                  onPress={() => setAiSearchDistrictId(null)}
+                  accessibilityLabel={t('ai_search.district_all_a11y')}
+                >
+                  <Text style={{
+                    fontSize: 12,
+                    fontWeight: '600',
+                    color: !aiSearchDistrictId ? '#fff' : colors.text.secondary,
+                  }}>
+                    {t('ai_search.district_all')}
+                  </Text>
+                </TouchableOpacity>
+                {istanbulDistricts.map((district) => (
+                  <TouchableOpacity
+                    key={district.id}
+                    style={[
+                      styles.locChip,
+                      {
+                        backgroundColor: aiSearchDistrictId === district.id
+                          ? colors.accent.primary
+                          : colors.surface.elevated,
+                        borderColor: aiSearchDistrictId === district.id
+                          ? colors.accent.primary
+                          : colors.surface.border,
+                      },
+                    ]}
+                    onPress={() => setAiSearchDistrictId(district.id)}
+                    accessibilityLabel={t('ai_search.district_select_a11y', { district: district.apiLocation })}
+                  >
+                    <Text style={{
+                      fontSize: 12,
+                      fontWeight: '600',
+                      color: aiSearchDistrictId === district.id ? '#fff' : colors.text.secondary,
+                    }}>
+                      {district.apiLocation}
+                    </Text>
+                  </TouchableOpacity>
+                ))}
+              </ScrollView>
+            </>
           )}
         </View>
       )}
