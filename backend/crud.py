@@ -1550,50 +1550,62 @@ def get_unread_notification_count(db: Session, user_id: int) -> int:
 # --- PROFİL İSTATİSTİKLERİ (Kademe 6) ---
 
 def get_user_stats(db: Session, user_id: int) -> dict:
-    post_count = db.query(models.Post).filter(models.Post.user_id == user_id).count()
-    follower_count = db.query(models.Follow).filter(models.Follow.following_id == user_id).count()
-    following_count = db.query(models.Follow).filter(models.Follow.follower_id == user_id).count()
-    review_count = db.query(models.Review).filter(models.Review.user_id == user_id).count()
-    visit_count = review_count
+    """
+    Kullanıcı istatistiklerini tek SQL sorgusuyla getirir.
+    7 ayrı round-trip yerine 1 CTE sorgusu → cloud DB gecikmesi minimize edilir.
+    """
+    from sqlalchemy import text as sa_text
     now = datetime.utcnow()
     start_of_month = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)
-    visits_this_month = (
-        db.query(models.Review)
-        .filter(models.Review.user_id == user_id, models.Review.created_at >= start_of_month)
-        .count()
-    )
-    favorite_category = None
-    favorite_region = None
-    if review_count > 0:
-        cat_row = (
-            db.query(models.Place.category, func.count(models.Review.id))
-            .join(models.Review, models.Review.place_id == models.Place.id)
-            .filter(models.Review.user_id == user_id, models.Place.category.isnot(None))
-            .group_by(models.Place.category)
-            .order_by(func.count(models.Review.id).desc())
-            .first()
+
+    sql = sa_text("""
+        WITH
+        counts AS (
+            SELECT
+                (SELECT COUNT(*) FROM posts         WHERE user_id = :uid)                                          AS post_count,
+                (SELECT COUNT(*) FROM follows        WHERE following_id = :uid AND status = 'accepted')            AS follower_count,
+                (SELECT COUNT(*) FROM follows        WHERE follower_id  = :uid AND status = 'accepted')            AS following_count,
+                (SELECT COUNT(*) FROM reviews        WHERE user_id = :uid)                                         AS review_count,
+                (SELECT COUNT(*) FROM reviews        WHERE user_id = :uid AND created_at >= :start_of_month)       AS visits_this_month
+        ),
+        fav_category AS (
+            SELECT p.category
+            FROM reviews r JOIN places p ON p.id = r.place_id
+            WHERE r.user_id = :uid AND p.category IS NOT NULL
+            GROUP BY p.category ORDER BY COUNT(*) DESC LIMIT 1
+        ),
+        fav_region AS (
+            SELECT p.city
+            FROM reviews r JOIN places p ON p.id = r.place_id
+            WHERE r.user_id = :uid AND p.city IS NOT NULL
+            GROUP BY p.city ORDER BY COUNT(*) DESC LIMIT 1
         )
-        if cat_row and cat_row[0]:
-            favorite_category = cat_row[0]
-        region_row = (
-            db.query(models.Place.city, func.count(models.Review.id))
-            .join(models.Review, models.Review.place_id == models.Place.id)
-            .filter(models.Review.user_id == user_id, models.Place.city.isnot(None))
-            .group_by(models.Place.city)
-            .order_by(func.count(models.Review.id).desc())
-            .first()
-        )
-        if region_row and region_row[0]:
-            favorite_region = region_row[0]
+        SELECT
+            c.post_count, c.follower_count, c.following_count,
+            c.review_count, c.visits_this_month,
+            fc.category AS favorite_category,
+            fr.city     AS favorite_region
+        FROM counts c
+        LEFT JOIN fav_category fc ON true
+        LEFT JOIN fav_region   fr ON true;
+    """)
+
+    row = db.execute(sql, {"uid": user_id, "start_of_month": start_of_month}).fetchone()
+    if row is None:
+        return {
+            "post_count": 0, "follower_count": 0, "following_count": 0,
+            "review_count": 0, "visit_count": 0, "visits_this_month": 0,
+            "favorite_category": None, "favorite_region": None,
+        }
     return {
-        "post_count": post_count,
-        "follower_count": follower_count,
-        "following_count": following_count,
-        "review_count": review_count,
-        "visit_count": visit_count,
-        "visits_this_month": visits_this_month,
-        "favorite_category": favorite_category,
-        "favorite_region": favorite_region,
+        "post_count": row.post_count or 0,
+        "follower_count": row.follower_count or 0,
+        "following_count": row.following_count or 0,
+        "review_count": row.review_count or 0,
+        "visit_count": row.review_count or 0,
+        "visits_this_month": row.visits_this_month or 0,
+        "favorite_category": row.favorite_category,
+        "favorite_region": row.favorite_region,
     }
 
 

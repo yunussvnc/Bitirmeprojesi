@@ -7,6 +7,7 @@ Backend her başladığında main.py tarafından otomatik çalışır.
 """
 
 import logging
+# pyrefly: ignore [missing-import]
 from sqlalchemy import inspect, text
 
 from database import engine, Base
@@ -31,6 +32,8 @@ _SCHEMA_PATCHES = [
     # stories tablosu genişletme
     ("stories", "duration_seconds", "INTEGER", "INTEGER"),
     ("stories", "view_count", "INTEGER DEFAULT 0", "INTEGER DEFAULT 0"),
+    # follows tablosu genişletme (follow request sistemi)
+    ("follows", "status", "VARCHAR(20) NOT NULL DEFAULT 'accepted'", "VARCHAR(20) NOT NULL DEFAULT 'accepted'"),
 ]
 
 
@@ -80,6 +83,37 @@ def schema_patch_status(engine_override=None) -> dict[str, bool]:
     return checks
 
 
+def _apply_custom_ddl(conn) -> None:
+    """create_all'ın otomatik oluşturamadığı özel DDL adımları."""
+    dialect = conn.dialect.name
+
+    # user_visited_places tablosu (mekan ziyaret takibi)
+    if not _table_exists(conn, "user_visited_places"):
+        logger.info("Şema: user_visited_places tablosu oluşturuluyor...")
+        if dialect == "postgresql":
+            conn.execute(text("""
+                CREATE TABLE IF NOT EXISTS user_visited_places (
+                    id SERIAL PRIMARY KEY,
+                    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+                    place_id INTEGER NOT NULL REFERENCES places(id) ON DELETE CASCADE,
+                    visited_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+                    UNIQUE(user_id, place_id)
+                );
+            """))
+        else:
+            conn.execute(text("""
+                CREATE TABLE IF NOT EXISTS user_visited_places (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    user_id INTEGER NOT NULL REFERENCES users(id) ON DELETE CASCADE,
+                    place_id INTEGER NOT NULL REFERENCES places(id) ON DELETE CASCADE,
+                    visited_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+                    UNIQUE(user_id, place_id)
+                );
+            """))
+        conn.commit()
+        logger.info("✅ user_visited_places tablosu oluşturuldu")
+
+
 def run_migrations(engine_override=None):
     """
     Tüm modelleri kontrol eder ve veritabanında olmayan tabloları oluşturur.
@@ -90,6 +124,7 @@ def run_migrations(engine_override=None):
     Base.metadata.create_all(bind=db_engine)
     with db_engine.connect() as conn:
         _apply_schema_patches(conn)
+        _apply_custom_ddl(conn)
     logger.info("✅ Tablolar ve şema yamaları hazır!")
 
 
