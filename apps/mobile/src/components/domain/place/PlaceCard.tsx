@@ -80,10 +80,21 @@ const PlaceCardComponent = function PlaceCard({
     // Same as explicit address or location badge
     if (address && trimmed.toLowerCase() === address.trim().toLowerCase()) return true;
     if (location && trimmed.toLowerCase() === location.trim().toLowerCase()) return true;
-    // Very short strings (≤ 12 chars) are typically district names like "Karaköy"
-    if (trimmed.length <= 12) return true;
-    // Starts with a number → likely a street address
-    if (/^\d/.test(trimmed)) return true;
+    
+    // Explicit district names to prevent showing them as description
+    const ISTANBUL_DISTRICTS = [
+      "kadikoy", "kadıköy", "besiktas", "beşiktaş", "beyoglu", "beyoğlu",
+      "sisli", "şişli", "fatih", "uskudar", "üsküdar", "bakirkoy", "bakırköy",
+      "maltepe", "kartal", "pendik", "umraniye", "ümraniye", "sariyer", "sarıyer",
+      "kagithane", "kağıthane", "eyup", "eyüp", "atasehir", "ataşehir",
+      "karakoy", "karaköy", "taksim", "galata", "ortakoy", "ortaköy", "bebek",
+      "etiler", "nisantasi", "nişantaşı", "cihangir", "balat", "fener", "moda",
+      "kuzguncuk", "eminonu", "eminönü", "sultanahmet"
+    ];
+    if (ISTANBUL_DISTRICTS.includes(trimmed.toLowerCase())) return true;
+    
+    // Starts with a number followed by space and letter -> likely a street address
+    if (/^\d+\s+[a-zA-ZğüşıöçĞÜŞİÖÇ]/.test(trimmed)) return true;
     return false;
   };
   const cleanSubtitle = isLocationLike(subtitle) ? undefined : subtitle;

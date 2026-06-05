@@ -43,19 +43,30 @@ function normalizePlace(p: any): Place {
   const name = String(p?.name ?? p?.title ?? p?.mekan_adi ?? "Mekan");
   const rawDescription: string = p?.description ?? p?.aciklama ?? "";
 
-  // The Google Maps import script stored descriptions as "PlaceName - Address",
-  // which is NOT a real description. Detect & discard this pattern so cards
-  // show nothing instead of the address.
-  const isAddressFormatted = (desc: string): boolean => {
-    if (!desc) return false;
-    // Pattern: starts with the place name followed by " - " (address follows)
-    const namePrefix = name.toLowerCase().slice(0, 20);
-    if (desc.toLowerCase().startsWith(namePrefix) && desc.includes(' - ')) return true;
-    // Also discard if description contains typical address indicators and is short
-    if (desc.length < 30 && /\bNo[:.]\s*\d|Cd\.|Sk\.|Mah\.|mahalle/i.test(desc)) return true;
-    return false;
+  // Helper to clean address prefix and keep real review/description
+  const cleanPlaceDescription = (placeName: string, desc: string): string => {
+    if (!desc) return "";
+    const lines = desc.split('\n');
+    const cleanedLines: string[] = [];
+    const lowerName = placeName.toLowerCase().trim();
+    const namePrefix = lowerName.slice(0, 20);
+    
+    for (let line of lines) {
+      const trimmedLine = line.trim();
+      if (!trimmedLine) continue;
+      const lowerLine = trimmedLine.toLowerCase();
+      
+      const isAddressLine = 
+        (lowerLine.startsWith(namePrefix) && lowerLine.includes(' - ')) ||
+        (trimmedLine.length < 80 && /\bNo[:.]\s*\d|Cd\.|Sk\.|Mah\.|mahalle|sokak|caddesi|ilçesi|yokuşu|bulvarı|yol/i.test(trimmedLine)) ||
+        (trimmedLine.length <= 25 && (lowerLine === lowerName || lowerLine.includes('istanbul')));
+        
+      if (isAddressLine) continue;
+      cleanedLines.push(trimmedLine);
+    }
+    return cleanedLines.join('\n\n').trim();
   };
-  const description = isAddressFormatted(rawDescription) ? "" : rawDescription;
+  const description = cleanPlaceDescription(name, rawDescription);
 
   const campaign_text = p?.campaign_text ?? p?.campaign ?? p?.kampanya ?? undefined;
 
