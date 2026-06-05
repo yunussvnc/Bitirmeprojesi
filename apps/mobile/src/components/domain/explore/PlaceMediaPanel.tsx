@@ -58,49 +58,6 @@ const PLACE_STORY_SIZE = 82;
 // Instagram story ring gradient
 const STORY_GRADIENT: [string, string, ...string[]] = ['#4ade80', '#22c55e', '#16a34a', '#15803d'];
 
-const MOCK_PLACE_STORIES: Story[] = [
-  {
-    id: 9001, user_id: 1, media_type: 'image',
-    media_url: 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=400&h=400&fit=crop',
-    created_at: new Date(Date.now() - 1 * 3600000).toISOString(),
-    expires_at: new Date(Date.now() + 86400000).toISOString(),
-    author: { id: 1, username: 'ahmet_k', first_name: 'Ahmet', avatar_url: 'https://i.pravatar.cc/100?img=11' },
-    is_close_friends: false,
-  },
-  {
-    id: 9002, user_id: 2, media_type: 'image',
-    media_url: 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=400&h=400&fit=crop',
-    created_at: new Date(Date.now() - 4 * 3600000).toISOString(),
-    expires_at: new Date(Date.now() + 86400000).toISOString(),
-    author: { id: 2, username: 'elif_d', first_name: 'Elif', avatar_url: 'https://i.pravatar.cc/100?img=5' },
-    is_close_friends: false,
-  },
-  {
-    id: 9003, user_id: 3, media_type: 'image',
-    media_url: 'https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=400&h=400&fit=crop',
-    created_at: new Date(Date.now() - 7 * 3600000).toISOString(),
-    expires_at: new Date(Date.now() + 86400000).toISOString(),
-    author: { id: 3, username: 'can_yilmaz', first_name: 'Can', avatar_url: 'https://i.pravatar.cc/100?img=12' },
-    is_close_friends: false,
-  },
-  {
-    id: 9004, user_id: 4, media_type: 'video',
-    media_url: 'https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=400&h=400&fit=crop',
-    thumbnail_url: 'https://images.unsplash.com/photo-1466978913421-dad2ebd01d17?w=400&h=400&fit=crop',
-    created_at: new Date(Date.now() - 10 * 3600000).toISOString(),
-    expires_at: new Date(Date.now() + 86400000).toISOString(),
-    author: { id: 4, username: 'zeynep_a', first_name: 'Zeynep', avatar_url: 'https://i.pravatar.cc/100?img=9' },
-    is_close_friends: false,
-  },
-  {
-    id: 9005, user_id: 5, media_type: 'image',
-    media_url: 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400&h=400&fit=crop',
-    created_at: new Date(Date.now() - 3 * 3600000).toISOString(),
-    expires_at: new Date(Date.now() + 86400000).toISOString(),
-    author: { id: 5, username: 'mehmet_b', first_name: 'Mehmet', avatar_url: 'https://i.pravatar.cc/100?img=33' },
-    is_close_friends: false,
-  },
-];
 
 /** Tüm post'lardan media URL'lerini topla */
 function collectMediaItems(posts: Post[]): { url: string; isVideo: boolean; postId: number }[] {
@@ -218,20 +175,8 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
   const gridItems = collectMediaItems(photoPosts);
 
   const rawStories = useMemo(() => {
-    if (stories.length > 0) return stories;
-    const realAuthors = posts
-      .filter((p) => p.author && p.user_id)
-      .map((p) => ({ user_id: p.user_id, author: p.author! }));
-    return MOCK_PLACE_STORIES.map((s, i) => {
-      const real = realAuthors[i % realAuthors.length];
-      return {
-        ...s,
-        place_id: Number(place.id),
-        place: { id: Number(place.id), name: place.name || '', category: getTranslatedCategory(place.category, t) || '' },
-        ...(real ? { user_id: real.user_id, author: real.author } : {}),
-      };
-    });
-  }, [stories, posts, place.id, place.name, getTranslatedCategory(place.category, t)]);
+    return stories;
+  }, [stories]);
   const selectedPost = useMemo(
     () => (selectedPostId ? posts.find((p) => p.id === selectedPostId) || null : null),
     [posts, selectedPostId]
