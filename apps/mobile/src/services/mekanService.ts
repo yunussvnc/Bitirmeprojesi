@@ -41,7 +41,22 @@ export type PaginatedPlaces = {
 function normalizePlace(p: any): Place {
   const id = p?.id ?? p?._id ?? p?.place_id ?? String(Math.random());
   const name = String(p?.name ?? p?.title ?? p?.mekan_adi ?? "Mekan");
-  const description = p?.description ?? p?.aciklama ?? "";
+  const rawDescription: string = p?.description ?? p?.aciklama ?? "";
+
+  // The Google Maps import script stored descriptions as "PlaceName - Address",
+  // which is NOT a real description. Detect & discard this pattern so cards
+  // show nothing instead of the address.
+  const isAddressFormatted = (desc: string): boolean => {
+    if (!desc) return false;
+    // Pattern: starts with the place name followed by " - " (address follows)
+    const namePrefix = name.toLowerCase().slice(0, 20);
+    if (desc.toLowerCase().startsWith(namePrefix) && desc.includes(' - ')) return true;
+    // Also discard if description contains typical address indicators and is short
+    if (desc.length < 30 && /\bNo[:.]\s*\d|Cd\.|Sk\.|Mah\.|mahalle/i.test(desc)) return true;
+    return false;
+  };
+  const description = isAddressFormatted(rawDescription) ? "" : rawDescription;
+
   const campaign_text = p?.campaign_text ?? p?.campaign ?? p?.kampanya ?? undefined;
   const subtitle =
     p?.subtitle ??
