@@ -436,6 +436,8 @@ class UserSummary(BaseModel):
     last_name: Optional[str] = None
     avatar_url: Optional[str] = None
     is_following: bool = False
+    follow_status: Optional[str] = None  # "pending" | "accepted" | None
+    is_private: bool = False
 
     class Config:
         from_attributes = True

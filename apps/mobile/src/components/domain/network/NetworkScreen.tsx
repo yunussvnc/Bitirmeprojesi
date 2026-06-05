@@ -1,5 +1,14 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, RefreshControl, Platform } from "react-native";
+import React, { useState, useEffect, useCallback, useRef } from "react";
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
+  RefreshControl,
+  Platform,
+  Animated,
+} from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useRouter, useLocalSearchParams } from "expo-router";
 import { Screen } from "@/src/components/layout/Screen";
@@ -7,304 +16,502 @@ import { Avatar, LoadingState, EmptyState } from "@/src/components/ui";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { useTheme } from "@/src/hooks/useTheme";
 import { lightImpact } from "@/src/utils/haptics";
-import { getFollowers, getFollowing, toggleFollow } from "@/src/services/userService";
-import type { UserProfile } from "@/src/services/userService";
+import {
+  getFollowers,
+  getFollowing,
+  getFriends,
+  toggleFollow,
+  type UserSummary,
+} from "@/src/services/userService";
 import { handleApiError } from "@/src/utils/errorHandler";
 import { useAuthStore } from "@/src/store/useAuthStore";
 import { useTranslation } from "react-i18next";
 import debounce from "lodash/debounce";
 
+type TabKey = "followers" | "following" | "friends";
+
+const TABS: { key: TabKey; label: string }[] = [
+  { key: "followers", label: "Takipçiler" },
+  { key: "following", label: "Takip" },
+  { key: "friends", label: "Arkadaşlar" },
+];
+
 export default function NetworkScreen() {
-    const { colors } = useTheme();
-    const insets = useSafeAreaInsets();
-    const router = useRouter();
-    const { t } = useTranslation();
-    const { id, type } = useLocalSearchParams<{ id: string; type: "followers" | "following" }>();
-    const [users, setUsers] = useState<UserProfile[]>([]);
-    const [loading, setLoading] = useState(true);
-    const [refreshing, setRefreshing] = useState(false);
-    const [page, setPage] = useState(1);
-    const [loadingMore, setLoadingMore] = useState(false);
-    const [hasMore, setHasMore] = useState(true);
-    const authUser = useAuthStore((s) => s.user);
+  const { colors } = useTheme();
+  const insets = useSafeAreaInsets();
+  const router = useRouter();
+  const { t } = useTranslation();
+  const params = useLocalSearchParams<{ id: string; type: TabKey }>();
+  const authUser = useAuthStore((s) => s.user);
 
-    const fetchUsers = useCallback(async (reset = false) => {
-        if (!id || !type) return;
-        try {
-            if (reset) {
-                setLoading(true);
-                setPage(1);
-            } else {
-                setLoadingMore(true);
-            }
+  const initialTab: TabKey =
+    params.type === "following" || params.type === "friends" ? params.type : "followers";
+  const [activeTab, setActiveTab] = useState<TabKey>(initialTab);
 
-            const p = reset ? 1 : page;
-            const res = type === "followers"
-                ? await getFollowers(Number(id), p, 20)
-                : await getFollowing(Number(id), p, 20);
+  const [users, setUsers] = useState<UserSummary[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [refreshing, setRefreshing] = useState(false);
+  const [page, setPage] = useState(1);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [hasMore, setHasMore] = useState(true);
+  const [privacyBlocked, setPrivacyBlocked] = useState(false);
 
-            let newItems = res.items || [];
+  // Tab indicator animation
+  const tabIndicatorX = useRef(new Animated.Value(0)).current;
 
-            if (reset) {
-                setUsers(newItems);
-            } else {
-                setUsers(prev => [...prev, ...newItems]);
-            }
-            setHasMore(newItems.length === 20);
-        } catch (e) {
-            handleApiError(e);
-        } finally {
-            setLoading(false);
-            setRefreshing(false);
-            setLoadingMore(false);
+  const userId = Number(params.id);
+
+  const fetchUsers = useCallback(
+    async (tab: TabKey, reset = false) => {
+      if (!userId) return;
+      try {
+        if (reset) {
+          setLoading(true);
+          setPage(1);
+          setPrivacyBlocked(false);
+        } else {
+          setLoadingMore(true);
         }
-    }, [id, type, page]);
+        const p = reset ? 1 : page;
+        let res;
+        if (tab === "followers") res = await getFollowers(userId, p, 20);
+        else if (tab === "following") res = await getFollowing(userId, p, 20);
+        else res = await getFriends(userId, p, 20);
 
-    useEffect(() => {
-        fetchUsers(true);
-    }, [id, type]); // Only run when params change
+        const newItems = res.items || [];
+        if (reset) setUsers(newItems);
+        else setUsers((prev) => [...prev, ...newItems]);
+        setHasMore(newItems.length === 20);
+      } catch (e: unknown) {
+        // 403 → gizli hesap
+        const status = (e as { status?: number; code?: string })?.status;
+        if (status === 403) {
+          setPrivacyBlocked(true);
+          setUsers([]);
+        } else {
+          handleApiError(e);
+        }
+      } finally {
+        setLoading(false);
+        setRefreshing(false);
+        setLoadingMore(false);
+      }
+    },
+    [userId, page]
+  );
 
-    const handleRefresh = () => {
+  useEffect(() => {
+    fetchUsers(activeTab, true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeTab, userId]);
+
+  const switchTab = (tab: TabKey, index: number) => {
+    lightImpact();
+    setActiveTab(tab);
+    Animated.spring(tabIndicatorX, {
+      toValue: index,
+      useNativeDriver: false,
+      friction: 10,
+      tension: 80,
+    }).start();
+  };
+
+  const handleRefresh = () => {
+    lightImpact();
+    setRefreshing(true);
+    fetchUsers(activeTab, true);
+  };
+
+  const loadMore = () => {
+    if (!loading && !loadingMore && hasMore) {
+      setPage((p) => p + 1);
+    }
+  };
+
+  useEffect(() => {
+    if (page > 1) {
+      fetchUsers(activeTab);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [page]);
+
+  // Optimistic follow toggle with debounce
+  const handleToggleFollow = useCallback(
+    debounce(
+      async (targetId: number, index: number) => {
         lightImpact();
-        setRefreshing(true);
-        fetchUsers(true);
-    };
+        // Optimistic update
+        setUsers((prev) => {
+          const next = [...prev];
+          const cur = next[index];
+          if (!cur) return prev;
+          const willFollow = !cur.is_following && cur.follow_status !== "pending";
+          next[index] = {
+            ...cur,
+            is_following: willFollow && !cur.is_private,
+            follow_status: willFollow
+              ? cur.is_private
+                ? "pending"
+                : "accepted"
+              : null,
+          };
+          return next;
+        });
 
-    const loadMore = () => {
-        if (!loading && !loadingMore && hasMore) {
-            setPage(p => p + 1);
+        try {
+          const res = await toggleFollow(targetId);
+          setUsers((prev) => {
+            const next = [...prev];
+            if (!next[index]) return prev;
+            next[index] = {
+              ...next[index],
+              is_following: res.status === "accepted",
+              follow_status: res.status as "pending" | "accepted" | null,
+            };
+            return next;
+          });
+        } catch (e) {
+          // Revert
+          setUsers((prev) => {
+            const next = [...prev];
+            const cur = next[index];
+            if (!cur) return prev;
+            next[index] = {
+              ...cur,
+              is_following: !cur.is_following,
+              follow_status: cur.is_following ? null : "accepted",
+            };
+            return next;
+          });
+          handleApiError(e);
         }
-    };
+      },
+      500,
+      { leading: true, trailing: false }
+    ),
+    []
+  );
 
-    useEffect(() => {
-        if (page > 1) {
-            fetchUsers();
-        }
-    }, [page, fetchUsers]);
+  const renderFollowBtn = (item: UserSummary, index: number) => {
+    const isSelf = authUser?.id === item.id;
+    if (isSelf) return null;
 
-    // Dummygram: Prevent spam clicks with debounce while keeping UI optimistic
-    const handleToggleFollow = useCallback(
-        debounce(async (userId: number, currentIndex: number) => {
-            lightImpact();
-            // Optimistic update — save previous state for revert
-            setUsers(prev => {
-                const next = [...prev];
-                next[currentIndex] = {
-                    ...next[currentIndex],
-                    is_following: !next[currentIndex].is_following,
-                    follow_status: next[currentIndex].is_following ? null : 'accepted',
-                };
-                return next;
-            });
+    const isPending = item.follow_status === "pending";
+    const isFollowing = item.is_following;
 
-            try {
-                const res = await toggleFollow(userId);
-                setUsers(prev => {
-                    const next = [...prev];
-                    next[currentIndex] = {
-                        ...next[currentIndex],
-                        is_following: res.status === 'accepted',
-                        follow_status: res.status as 'pending' | 'accepted' | null,
-                    };
-                    return next;
-                });
-            } catch (e) {
-                // Revert on error
-                setUsers(prev => {
-                    const next = [...prev];
-                    next[currentIndex] = {
-                        ...next[currentIndex],
-                        is_following: !next[currentIndex].is_following,
-                        follow_status: next[currentIndex].is_following ? null : 'accepted',
-                    };
-                    return next;
-                });
-                handleApiError(e);
-            }
-        }, 500, { leading: true, trailing: false }),
-        []
-    );
+    let label: string;
+    let btnStyle: object;
+    let textStyle: object;
 
-    const renderItem = ({ item, index }: { item: UserProfile; index: number }) => {
-        const isSelf = authUser?.id === item.id;
-        const displayName = item.first_name || item.username || t("network.user_fallback");
-        const isPending = item.follow_status === 'pending';
-
-        return (
-            <TouchableOpacity
-                style={styles.userRow}
-                onPress={() => {
-                    lightImpact();
-                    if (isSelf) {
-                        router.push("/(tabs)/profile" as any);
-                    } else {
-                        router.push(`/user/${item.id}` as any);
-                    }
-                }}
-            >
-                <View style={[styles.avatarRing, { borderColor: colors.surface.border }]}>
-                    <Avatar
-                        source={item.avatar_url ? { uri: item.avatar_url } : undefined}
-                        name={displayName}
-                        size={56}
-                    />
-                </View>
-
-                <View style={styles.userInfo}>
-                    <Text style={[styles.title, { color: colors.text.primary }]} numberOfLines={1}>
-                        {item.username || `${t("network.user_fallback")} ${item.id}`}
-                    </Text>
-                    {item.first_name && (
-                        <Text style={[styles.subtitle, { color: colors.text.secondary }]} numberOfLines={1}>
-                            {item.first_name} {item.last_name || ""}
-                        </Text>
-                    )}
-                </View>
-
-                {!isSelf && (
-                    <TouchableOpacity
-                        style={[
-                            styles.followBtn,
-                            item.is_following || isPending
-                                ? { backgroundColor: colors.surface.elevated, borderWidth: 1, borderColor: colors.surface.border }
-                                : { backgroundColor: colors.text.primary, borderWidth: 1, borderColor: colors.text.primary }
-                        ]}
-                        onPress={() => handleToggleFollow(item.id, index)}
-                        activeOpacity={0.8}
-                    >
-                        <Text
-                            style={[
-                                styles.followBtnText,
-                                { color: item.is_following || isPending ? colors.text.primary : colors.background.primary }
-                            ]}
-                        >
-                            {item.is_following
-                                ? t("network.following_btn")
-                                : isPending
-                                    ? t("profile.requested_btn")
-                                    : t("network.follow")}
-                        </Text>
-                    </TouchableOpacity>
-                )}
-            </TouchableOpacity>
-        );
-    };
+    if (isFollowing) {
+      label = "Takip Ediliyor";
+      btnStyle = {
+        backgroundColor: colors.surface.elevated,
+        borderWidth: 1,
+        borderColor: colors.surface.border,
+      };
+      textStyle = { color: colors.text.primary };
+    } else if (isPending) {
+      label = "İstek Gönderildi";
+      btnStyle = {
+        backgroundColor: colors.surface.elevated,
+        borderWidth: 1,
+        borderColor: colors.surface.border,
+      };
+      textStyle = { color: colors.text.secondary };
+    } else {
+      label = "Takip Et";
+      btnStyle = { backgroundColor: colors.accent.primary };
+      textStyle = { color: "#fff" };
+    }
 
     return (
-        <Screen scrollable={false} style={{ paddingHorizontal: 0 }}>
-            {/* Modern Header */}
-            <View style={styles.header}>
-                <TouchableOpacity
-                    onPress={() => {
-                        lightImpact();
-                        router.back();
-                    }}
-                    hitSlop={12}
-                    style={[styles.headerBtn, { backgroundColor: colors.surface.elevated }]}
-                >
-                    <IconSymbol name="chevron.left" size={20} color={colors.text.primary} />
-                </TouchableOpacity>
-
-                <Text style={[styles.headerTitle, { color: colors.text.primary }]}>
-                    {type === "followers" ? t("network.followers") : t("network.following")}
-                </Text>
-
-                <View style={styles.headerBtn} />
-            </View>
-
-            <View style={[styles.container, { backgroundColor: colors.background.primary }]}>
-                {loading && page === 1 ? (
-                    <LoadingState message={t("network.loading")} />
-                ) : (
-                    <FlatList
-                        data={users}
-                        keyExtractor={item => String(item.id)}
-                        renderItem={renderItem}
-                        contentContainerStyle={users.length === 0 ? styles.empty : styles.list}
-                        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={handleRefresh} tintColor={colors.accent.primary} />}
-                        onEndReached={loadMore}
-                        onEndReachedThreshold={0.5}
-                        showsVerticalScrollIndicator={false}
-                        ListEmptyComponent={
-                            <EmptyState
-                                icon="person.2"
-                                title={type === "followers" ? t("network.empty_followers") : t("network.empty_following")}
-                                description={type === "followers" ? t("network.empty_followers_desc") : t("network.empty_following_desc")}
-                            />
-                        }
-                    />
-                )}
-            </View>
-        </Screen>
+      <TouchableOpacity
+        style={[styles.followBtn, btnStyle]}
+        onPress={() => handleToggleFollow(item.id, index)}
+        activeOpacity={0.8}
+      >
+        <Text style={[styles.followBtnText, textStyle]}>{label}</Text>
+      </TouchableOpacity>
     );
+  };
+
+  const renderItem = ({ item, index }: { item: UserSummary; index: number }) => {
+    const isSelf = authUser?.id === item.id;
+    const displayName =
+      item.first_name ||
+      item.username ||
+      `Kullanıcı ${item.id}`;
+
+    return (
+      <TouchableOpacity
+        style={styles.userRow}
+        activeOpacity={0.75}
+        onPress={() => {
+          lightImpact();
+          if (isSelf) router.push("/(tabs)/profile" as never);
+          else router.push(`/user/${item.id}` as never);
+        }}
+      >
+        <View
+          style={[
+            styles.avatarRing,
+            {
+              borderColor: item.is_private
+                ? colors.text.tertiary
+                : colors.surface.border,
+            },
+          ]}
+        >
+          <Avatar
+            source={item.avatar_url ? { uri: item.avatar_url } : undefined}
+            name={displayName}
+            size={52}
+          />
+        </View>
+
+        <View style={styles.userInfo}>
+          <View style={styles.nameRow}>
+            <Text
+              style={[styles.title, { color: colors.text.primary }]}
+              numberOfLines={1}
+            >
+              {item.username || displayName}
+            </Text>
+            {item.is_private && (
+              <IconSymbol
+                name="lock.fill"
+                size={12}
+                color={colors.text.tertiary}
+                style={{ marginLeft: 4, marginTop: 2 }}
+              />
+            )}
+          </View>
+          {item.first_name && (
+            <Text
+              style={[styles.subtitle, { color: colors.text.secondary }]}
+              numberOfLines={1}
+            >
+              {item.first_name} {item.last_name || ""}
+            </Text>
+          )}
+        </View>
+
+        {renderFollowBtn(item, index)}
+      </TouchableOpacity>
+    );
+  };
+
+  const renderPrivacyBlocked = () => (
+    <View style={styles.privacyWrap}>
+      <View style={[styles.privacyIcon, { backgroundColor: colors.surface.elevated }]}>
+        <IconSymbol name="lock.fill" size={36} color={colors.text.tertiary} />
+      </View>
+      <Text style={[styles.privacyTitle, { color: colors.text.primary }]}>
+        Bu hesap gizlidir
+      </Text>
+      <Text style={[styles.privacyDesc, { color: colors.text.secondary }]}>
+        Bu kullanıcının takipçi listesini görmek için takip etmeniz gerekiyor.
+      </Text>
+    </View>
+  );
+
+  const tabIndicatorWidth = `${100 / TABS.length}%`;
+
+  return (
+    <Screen scrollable={false} style={{ paddingHorizontal: 0 }}>
+      {/* Header */}
+      <View style={[styles.header, { paddingTop: Platform.OS === "ios" ? insets.top + 8 : 16 }]}>
+        <TouchableOpacity
+          onPress={() => { lightImpact(); router.back(); }}
+          hitSlop={12}
+          style={[styles.headerBtn, { backgroundColor: colors.surface.elevated }]}
+        >
+          <IconSymbol name="chevron.left" size={20} color={colors.text.primary} />
+        </TouchableOpacity>
+        <Text style={[styles.headerTitle, { color: colors.text.primary }]}>
+          {TABS.find((t) => t.key === activeTab)?.label ?? ""}
+        </Text>
+        <View style={styles.headerBtn} />
+      </View>
+
+      {/* Tab bar */}
+      <View style={[styles.tabBar, { borderBottomColor: colors.surface.border }]}>
+        {TABS.map((tab, i) => {
+          const isActive = tab.key === activeTab;
+          return (
+            <TouchableOpacity
+              key={tab.key}
+              style={styles.tabItem}
+              onPress={() => switchTab(tab.key, i)}
+              activeOpacity={0.7}
+            >
+              <Text
+                style={[
+                  styles.tabLabel,
+                  {
+                    color: isActive ? colors.accent.primary : colors.text.tertiary,
+                    fontWeight: isActive ? "700" : "500",
+                  },
+                ]}
+              >
+                {tab.label}
+              </Text>
+              {isActive && (
+                <View
+                  style={[styles.tabUnderline, { backgroundColor: colors.accent.primary }]}
+                />
+              )}
+            </TouchableOpacity>
+          );
+        })}
+      </View>
+
+      {/* Content */}
+      <View style={[styles.container, { backgroundColor: colors.background.primary }]}>
+        {loading && page === 1 ? (
+          <LoadingState message="Yükleniyor..." />
+        ) : privacyBlocked ? (
+          renderPrivacyBlocked()
+        ) : (
+          <FlatList
+            data={users}
+            keyExtractor={(item) => `${item.id}`}
+            renderItem={renderItem}
+            contentContainerStyle={users.length === 0 ? styles.empty : styles.list}
+            refreshControl={
+              <RefreshControl
+                refreshing={refreshing}
+                onRefresh={handleRefresh}
+                tintColor={colors.accent.primary}
+              />
+            }
+            onEndReached={loadMore}
+            onEndReachedThreshold={0.5}
+            showsVerticalScrollIndicator={false}
+            ListFooterComponent={
+              loadingMore ? (
+                <View style={{ paddingVertical: 20, alignItems: "center" }}>
+                  <LoadingState message="" />
+                </View>
+              ) : null
+            }
+            ListEmptyComponent={
+              <EmptyState
+                icon={
+                  activeTab === "friends"
+                    ? "person.2.fill"
+                    : activeTab === "followers"
+                    ? "person.crop.circle"
+                    : "person.badge.plus"
+                }
+                title={
+                  activeTab === "friends"
+                    ? "Henüz arkadaşın yok"
+                    : activeTab === "followers"
+                    ? "Henüz takipçin yok"
+                    : "Henüz kimseyi takip etmiyorsun"
+                }
+                description={
+                  activeTab === "friends"
+                    ? "Karşılıklı takipleştiğin kişiler burada görünür."
+                    : activeTab === "followers"
+                    ? "Seni takip eden kişiler burada görünecek."
+                    : "Takip ettiğin kişiler burada görünecek."
+                }
+              />
+            }
+          />
+        )}
+      </View>
+    </Screen>
+  );
 }
 
 const styles = StyleSheet.create({
-    header: {
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "space-between",
-        paddingHorizontal: 20,
-        paddingBottom: 16,
-    },
-    headerBtn: {
-        width: 40,
-        height: 40,
-        borderRadius: 20,
-        alignItems: "center",
-        justifyContent: "center",
-    },
-    headerTitle: {
-        fontSize: 20,
-        fontWeight: "800",
-        letterSpacing: -0.5,
-    },
-    container: {
-        flex: 1,
-    },
-    list: {
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-    },
-    empty: {
-        flex: 1,
-        justifyContent: "center",
-    },
-    userRow: {
-        flexDirection: "row",
-        alignItems: "center",
-        paddingVertical: 14,
-    },
-    avatarRing: {
-        padding: 2,
-        borderRadius: 40,
-        borderWidth: 1.5,
-    },
-    userInfo: {
-        flex: 1,
-        marginLeft: 14,
-        marginRight: 10,
-    },
-    title: {
-        fontSize: 16,
-        fontWeight: "700",
-        letterSpacing: -0.2,
-    },
-    subtitle: {
-        fontSize: 14,
-        marginTop: 2,
-        fontWeight: "400",
-    },
-    followBtn: {
-        paddingHorizontal: 16,
-        paddingVertical: 8,
-        borderRadius: 20,
-        alignItems: "center",
-        justifyContent: "center",
-        minWidth: 110,
-    },
-    followBtnText: {
-        fontSize: 14,
-        fontWeight: "600",
-    },
+  header: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 20,
+    paddingBottom: 12,
+  },
+  headerBtn: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  headerTitle: {
+    fontSize: 18,
+    fontWeight: "800",
+    letterSpacing: -0.4,
+  },
+  tabBar: {
+    flexDirection: "row",
+    borderBottomWidth: 1,
+    marginBottom: 4,
+  },
+  tabItem: {
+    flex: 1,
+    alignItems: "center",
+    paddingBottom: 12,
+    paddingTop: 4,
+    position: "relative",
+  },
+  tabLabel: {
+    fontSize: 15,
+    letterSpacing: -0.2,
+  },
+  tabUnderline: {
+    position: "absolute",
+    bottom: 0,
+    left: "15%",
+    right: "15%",
+    height: 2.5,
+    borderRadius: 2,
+  },
+  container: { flex: 1 },
+  list: { paddingVertical: 6, paddingHorizontal: 20 },
+  empty: { flex: 1, justifyContent: "center" },
+  userRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 12,
+  },
+  avatarRing: {
+    padding: 2,
+    borderRadius: 40,
+    borderWidth: 1.5,
+  },
+  userInfo: { flex: 1, marginLeft: 12, marginRight: 8 },
+  nameRow: { flexDirection: "row", alignItems: "center" },
+  title: { fontSize: 15, fontWeight: "700", letterSpacing: -0.2, flexShrink: 1 },
+  subtitle: { fontSize: 13, marginTop: 2 },
+  followBtn: {
+    paddingHorizontal: 14,
+    paddingVertical: 7,
+    borderRadius: 18,
+    alignItems: "center",
+    justifyContent: "center",
+    minWidth: 100,
+  },
+  followBtnText: { fontSize: 13, fontWeight: "600" },
+  privacyWrap: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 40,
+    gap: 16,
+  },
+  privacyIcon: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  privacyTitle: { fontSize: 18, fontWeight: "700", textAlign: "center" },
+  privacyDesc: { fontSize: 14, textAlign: "center", lineHeight: 20 },
 });

@@ -1391,6 +1391,13 @@ def get_following_ids(db: Session, user_id: int) -> list[int]:
     ).all()]
 
 
+def get_mutual_friend_ids(db: Session, user_id: int) -> list[int]:
+    """Karşılıklı accepted follow olan kullanıcıların id listesi (arkadaşlar)."""
+    following_ids = set(get_following_ids(db, user_id))
+    follower_ids = set(get_follower_ids(db, user_id))
+    return list(following_ids & follower_ids)
+
+
 # --- NOTIFICATION (Kademe 5 – Novu Workflow + Munia Payload) ---
 
 
@@ -1554,6 +1561,7 @@ def get_user_stats(db: Session, user_id: int) -> dict:
     Kullanıcı istatistiklerini tek SQL sorgusuyla getirir.
     7 ayrı round-trip yerine 1 CTE sorgusu → cloud DB gecikmesi minimize edilir.
     """
+    # pyrefly: ignore [missing-import]
     from sqlalchemy import text as sa_text
     now = datetime.utcnow()
     start_of_month = now.replace(day=1, hour=0, minute=0, second=0, microsecond=0)

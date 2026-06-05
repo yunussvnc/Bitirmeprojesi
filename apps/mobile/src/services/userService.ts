@@ -24,7 +24,20 @@ export type UserProfile = {
   followers_count: number;
   following_count: number;
   is_following: boolean;
-  follow_status: 'pending' | 'accepted' | null;  // Dummygram: tip güvenli follow durumu
+  follow_status: 'pending' | 'accepted' | null;
+  is_private?: boolean;
+};
+
+/** Takipçi/takip/arkadaş listeleri için tip */
+export type UserSummary = {
+  id: number;
+  username: string | null;
+  first_name: string | null;
+  last_name: string | null;
+  avatar_url: string | null;
+  is_following: boolean;
+  follow_status: 'pending' | 'accepted' | null;
+  is_private: boolean;
 };
 
 export async function getUserProfile(userId: number): Promise<UserProfile> {
@@ -63,7 +76,7 @@ export async function getUserPosts(
 }
 
 export type NetworkResponse = {
-  items: UserProfile[];
+  items: UserSummary[];
   total: number;
   page: number;
   page_size: number;
@@ -75,4 +88,8 @@ export async function getFollowers(userId: number, page = 1, pageSize = 20): Pro
 
 export async function getFollowing(userId: number, page = 1, pageSize = 20): Promise<NetworkResponse> {
   return apiGet<NetworkResponse>(`/users/${userId}/following?page=${page}&page_size=${pageSize}`);
+}
+
+export async function getFriends(userId: number, page = 1, pageSize = 20): Promise<NetworkResponse> {
+  return apiGet<NetworkResponse>(`/users/${userId}/friends?page=${page}&page_size=${pageSize}`);
 }

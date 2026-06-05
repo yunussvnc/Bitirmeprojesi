@@ -301,6 +301,52 @@ def reject_follow_request(
 
 
 
+def _enrich_user_summary(
+    db, user, current_uid: int | None
+) -> "schemas.UserSummary":
+    """UserSummary'ye follow_status ve is_private ekler. N+1 yerine çağrı başına 2 sorgu."""
+    item = schemas.UserSummary.model_validate(user)
+    if current_uid is not None and current_uid != user.id:
+        follow_row = db.query(models.Follow).filter(
+            models.Follow.follower_id == current_uid,
+            models.Follow.following_id == user.id,
+        ).first()
+        if follow_row:
+            item.is_following = follow_row.status == "accepted"
+            item.follow_status = follow_row.status
+        else:
+            item.is_following = False
+            item.follow_status = None
+    # Gizlilik bayrağını ekle
+    prefs = db.query(models.UserPreferences).filter(
+        models.UserPreferences.user_id == user.id
+    ).first()
+    item.is_private = prefs.is_private_account if prefs else False
+    return item
+
+
+def _privacy_check_list(db, user_id: int, current_uid: int | None) -> bool:
+    """
+    Takipçi/takip/arkadaş listesini görebilme yetkisi:
+    - kendi hesabı → True
+    - hedef public → True
+    - hedef private + ben takip ediyorum (accepted) → True
+    - diğer → False (gizli hesap)
+    """
+    from app.services.privacy_guard import PrivacyGuard
+    if current_uid and current_uid == user_id:
+        return True
+    prefs = db.query(models.UserPreferences).filter(
+        models.UserPreferences.user_id == user_id
+    ).first()
+    is_private = prefs.is_private_account if prefs else False
+    if not is_private:
+        return True
+    if current_uid is None:
+        return False
+    return PrivacyGuard.is_follower(db, current_uid, user_id)
+
+
 @router.get("/users/{user_id}/followers")
 def get_followers(
     user_id: int,
@@ -309,20 +355,15 @@ def get_followers(
     db: Session = Depends(get_db),
     current_user: Optional[models.User] = Depends(get_optional_user),
 ):
-    """Kullanıcının takipçi listesini sayfalı olarak getirir."""
+    """Kullanıcının takipçi listesini sayfalı olarak getirir (gizlilik kontrolüyle)."""
+    current_uid = current_user.id if current_user else None
+    if not _privacy_check_list(db, user_id, current_uid):
+        raise HTTPException(status_code=403, detail="Bu hesap gizlidir.")
     ids = crud.get_follower_ids(db, user_id)
     total = len(ids)
-    offset = (page - 1) * page_size
-    paginated_ids = ids[offset : offset + page_size]
-    users = [crud.get_user_by_id(db, uid) for uid in paginated_ids]
-    users = [u for u in users if u]
-    current_uid = current_user.id if current_user else None
-    items = []
-    for u in users:
-        item = schemas.UserSummary.model_validate(u)
-        if current_uid is not None:
-            item.is_following = crud.is_following(db, current_uid, u.id)
-        items.append(item)
+    paginated_ids = ids[(page - 1) * page_size : page * page_size]
+    users = [u for u in (crud.get_user_by_id(db, uid) for uid in paginated_ids) if u]
+    items = [_enrich_user_summary(db, u, current_uid) for u in users]
     return {"items": items, "total": total, "page": page, "page_size": page_size}
 
 
@@ -334,20 +375,35 @@ def get_following(
     db: Session = Depends(get_db),
     current_user: Optional[models.User] = Depends(get_optional_user),
 ):
-    """Kullanıcının takip ettiklerinin listesini sayfalı olarak getirir."""
+    """Kullanıcının takip ettiklerinin listesini sayfalı olarak getirir (gizlilik kontrolüyle)."""
+    current_uid = current_user.id if current_user else None
+    if not _privacy_check_list(db, user_id, current_uid):
+        raise HTTPException(status_code=403, detail="Bu hesap gizlidir.")
     ids = crud.get_following_ids(db, user_id)
     total = len(ids)
-    offset = (page - 1) * page_size
-    paginated_ids = ids[offset : offset + page_size]
-    users = [crud.get_user_by_id(db, uid) for uid in paginated_ids]
-    users = [u for u in users if u]
+    paginated_ids = ids[(page - 1) * page_size : page * page_size]
+    users = [u for u in (crud.get_user_by_id(db, uid) for uid in paginated_ids) if u]
+    items = [_enrich_user_summary(db, u, current_uid) for u in users]
+    return {"items": items, "total": total, "page": page, "page_size": page_size}
+
+
+@router.get("/users/{user_id}/friends")
+def get_friends(
+    user_id: int,
+    page: int = Query(1, ge=1),
+    page_size: int = Query(20, ge=1, le=100),
+    db: Session = Depends(get_db),
+    current_user: Optional[models.User] = Depends(get_optional_user),
+):
+    """Karşılıklı takip eden kullanıcılar (arkadaşlar) listesi (gizlilik kontrolüyle)."""
     current_uid = current_user.id if current_user else None
-    items = []
-    for u in users:
-        item = schemas.UserSummary.model_validate(u)
-        if current_uid is not None:
-            item.is_following = crud.is_following(db, current_uid, u.id)
-        items.append(item)
+    if not _privacy_check_list(db, user_id, current_uid):
+        raise HTTPException(status_code=403, detail="Bu hesap gizlidir.")
+    ids = crud.get_mutual_friend_ids(db, user_id)
+    total = len(ids)
+    paginated_ids = ids[(page - 1) * page_size : page * page_size]
+    users = [u for u in (crud.get_user_by_id(db, uid) for uid in paginated_ids) if u]
+    items = [_enrich_user_summary(db, u, current_uid) for u in users]
     return {"items": items, "total": total, "page": page, "page_size": page_size}
 
 

@@ -435,6 +435,18 @@ export default function UserProfileScreen() {
             <Text style={[styles.statNumber, { color: colors.text.primary }]}>{profile.following_count}</Text>
             <Text style={[styles.statLabel, { color: colors.text.tertiary }]}>{t('profile.following')}</Text>
           </TouchableOpacity>
+          <View style={[styles.statDivider, { backgroundColor: colors.surface.border }]} />
+          <TouchableOpacity
+            style={styles.statItem}
+            activeOpacity={0.7}
+            onPress={() => {
+              lightImpact();
+              router.push(`/network?id=${profile.id}&type=friends` as any);
+            }}
+          >
+            <Text style={[styles.statNumber, { color: colors.text.primary }]}>—</Text>
+            <Text style={[styles.statLabel, { color: colors.text.tertiary }]}>Arkadaşlar</Text>
+          </TouchableOpacity>
         </View>
 
         {/* ── Modern Tabs ── */}
