@@ -17,7 +17,7 @@ def recommend_places(
     db: Session = Depends(get_db),
     current_user: models.User = Depends(get_current_user),
 ):
-    places = crud.get_places(db, skip=0, limit=500)
+    places = crud.get_places(db, skip=0, limit=2000)
 
     user_lat = req.location.lat if req.location else None
     user_lng = req.location.lng if req.location else None

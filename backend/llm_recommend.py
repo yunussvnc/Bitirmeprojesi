@@ -9,6 +9,27 @@ from llm_client import llm_generate, build_recommend_prompt
 
 settings = get_settings()
 
+DISTRICTS = [
+    "adalar", "arnavutkoy", "atasehir", "avcilar", "bagcilar", "bahcelievler", "bakirkoy",
+    "basaksehir", "bayrampasa", "besiktas", "beykoz", "beylikduzu", "beyoglu", "buyukcekmece",
+    "catalca", "cekmekoy", "esenler", "esenyurt", "eyupsultan", "fatih", "gaziosmanpasa",
+    "gungoren", "kadikoy", "kagithane", "kartal", "kucukcekmece", "maltepe", "pendik",
+    "sancaktepe", "sariyer", "silivri", "sile", "sisli", "sultanbeyli", "sultangazi",
+    "tuzla", "umraniye", "uskudar", "zeytinburnu"
+]
+
+def normalize_tr(text: str) -> str:
+    if not text:
+        return ""
+    text = text.lower()
+    replacements = {
+        'ç': 'c', 'ğ': 'g', 'ı': 'i', 'ö': 'o', 'ş': 's', 'ü': 'u',
+        'ch': 'c', 'sh': 's', 'â': 'a', 'î': 'i', 'û': 'u'
+    }
+    for k, v in replacements.items():
+        text = text.replace(k, v)
+    return text
+
 # ---------------------------------------------------------------------------
 # In-memory cache  {key: (timestamp, response_dict)}
 # ---------------------------------------------------------------------------
@@ -129,6 +150,7 @@ def score_place(
     query: str,
     user_lat: Optional[float] = None,
     user_lng: Optional[float] = None,
+    explicit_district: Optional[str] = None,
 ) -> Tuple[float, Optional[int], List[str]]:
     features = _split_features(getattr(place, "features", None))
     category = (getattr(place, "category", "") or "").lower()
@@ -154,15 +176,34 @@ def score_place(
     # Query text match
     q = query.strip().lower()
     if q:
-        haystack = " ".join([
-            str(getattr(place, "name", "") or ""),
-            str(getattr(place, "description", "") or ""),
-            str(getattr(place, "address", "") or ""),
-            category,
-            " ".join(sorted(features)),
-        ]).lower()
-        if q in haystack:
-            score += 3.0
+        p_name = normalize_tr(getattr(place, "name", "") or "")
+        p_cat = normalize_tr(getattr(place, "category", "") or "")
+        p_desc = normalize_tr(getattr(place, "description", "") or "")
+        p_addr = normalize_tr(getattr(place, "address", "") or "")
+        p_feat = " ".join(normalize_tr(f) for f in features)
+        
+        p_haystack = f"{p_name} {p_cat} {p_desc} {p_addr} {p_feat}"
+        
+        norm_q = normalize_tr(q)
+        if norm_q in p_haystack:
+            score += 10.0
+        else:
+            q_words = [w for w in norm_q.split() if len(w) > 2]
+            STOP_WORDS = {"bana", "bir", "icin", "en", "uygun", "mekan", "oner", "oneri", "onerir", "misin", "musun", "miyim", "yiyecek", "icilecek", "gidecek", "bulunan", "yeri"}
+            keywords = [w for w in q_words if w not in STOP_WORDS]
+            
+            for word in keywords:
+                if word in DISTRICTS:
+                    if word in p_addr or word in p_name:
+                        score += 15.0  # Massive bonus for requested district
+                elif word in p_cat or word in p_name:
+                    score += 8.0
+                elif word in p_desc or word in p_feat or word in p_addr:
+                    score += 4.0
+
+        # Special query matches (e.g., burger/hamburger)
+        if ("burger" in norm_q or "hamburger" in norm_q) and ("burger" in p_name or "burger" in p_cat or "burger" in p_feat or "hamburger" in p_name or "hamburger" in p_cat or "hamburger" in p_feat):
+            score += 10.0
 
     # Distance
     distance_m: Optional[int] = None
@@ -218,7 +259,7 @@ def recommend_pipeline(
 ) -> dict:
     """
     Full recommend pipeline:
-    1) Filter by distance (if location provided)
+    1) Filter by distance (or explicit district matching)
     2) Filter by category (if provided)
     3) Score all candidates
     4) Pick top 30, send top to LLM
@@ -232,6 +273,14 @@ def recommend_pipeline(
     budget = _norm(budget, _BUDGET_MAP, "mid")
     cat_filter = (category or "").strip().lower()
 
+    # Detect explicit district in query (e.g. "Beşiktaş'ta")
+    norm_query = normalize_tr(query)
+    explicit_district = None
+    for d in DISTRICTS:
+        if d in norm_query:
+            explicit_district = d
+            break
+
     # --- Cache check ---
     c_lat = user_lat or 41.0082
     c_lng = user_lng or 28.9784
@@ -241,23 +290,48 @@ def recommend_pipeline(
         cached["cached"] = True
         return cached
 
-    # --- 1. Distance filter ---
+    # --- 1. Distance & District filter ---
     filtered = []
     for p in places:
         p_lat = getattr(p, "latitude", None)
         p_lng = getattr(p, "longitude", None)
-        if user_lat and user_lng and p_lat and p_lng:
+        
+        # If district is explicitly requested, require the place to be in that district
+        if explicit_district:
+            p_addr = normalize_tr(getattr(p, "address", "") or "")
+            p_name = normalize_tr(getattr(p, "name", "") or "")
+            if explicit_district not in p_addr and explicit_district not in p_name:
+                continue
+        # Otherwise filter by distance from user coordinates
+        elif user_lat and user_lng and p_lat and p_lng:
             dist = haversine(user_lat, user_lng, p_lat, p_lng)
             if dist > radius_m:
                 continue
+                
         if cat_filter:
             p_cat = (getattr(p, "category", "") or "").lower()
             if cat_filter not in p_cat and p_cat not in cat_filter:
                 continue
         filtered.append(p)
 
-    # Auto-expand radius if too few results
-    if len(filtered) < 5 and user_lat and user_lng:
+    # Fallback if explicit district filter yielded too few results
+    if explicit_district and len(filtered) < 3:
+        filtered = []
+        for p in places:
+            p_lat = getattr(p, "latitude", None)
+            p_lng = getattr(p, "longitude", None)
+            if user_lat and user_lng and p_lat and p_lng:
+                dist = haversine(user_lat, user_lng, p_lat, p_lng)
+                if dist > 15000:  # Relax distance up to 15km
+                    continue
+            if cat_filter:
+                p_cat = (getattr(p, "category", "") or "").lower()
+                if cat_filter not in p_cat and p_cat not in cat_filter:
+                    continue
+            filtered.append(p)
+
+    # Auto-expand radius if too few results (only if not searching by explicit district)
+    if not explicit_district and len(filtered) < 5 and user_lat and user_lng:
         for mult in [2, 4]:
             expanded = []
             expanded_radius = radius_m * mult
@@ -283,7 +357,7 @@ def recommend_pipeline(
     # --- 2. Score ---
     scored = []
     for p in filtered:
-        sc, dist, tags = score_place(p, vibe, purpose, budget, query, user_lat, user_lng)
+        sc, dist, tags = score_place(p, vibe, purpose, budget, query, user_lat, user_lng, explicit_district)
         scored.append((sc, dist, tags, p))
 
     scored.sort(key=lambda x: x[0], reverse=True)
