@@ -71,19 +71,19 @@ const PlaceCardComponent = function PlaceCard({
     : null;
 
   // Short description: use explanation (AI mode) or subtitle.
-  // Guard: skip subtitle when it matches address/location text or is clearly just a
-  // district/neighborhood name (≤ 15 chars) — these come from DB import artefacts.
+  // Guard: skip subtitle only when it clearly matches address/location text
+  // or is so short it can only be a district name (≤ 12 chars).
   const isLocationLike = (s?: string): boolean => {
     if (!s) return false;
-    const t = s.trim();
-    if (t.length === 0) return true;
+    const trimmed = s.trim();
+    if (trimmed.length === 0) return true;
     // Same as explicit address or location badge
-    if (address && t.toLowerCase() === address.trim().toLowerCase()) return true;
-    if (location && t.toLowerCase() === location.trim().toLowerCase()) return true;
-    // Very short strings (≤ 15 chars) are typically district/neighborhood names, not descriptions
-    if (t.length <= 15) return true;
+    if (address && trimmed.toLowerCase() === address.trim().toLowerCase()) return true;
+    if (location && trimmed.toLowerCase() === location.trim().toLowerCase()) return true;
+    // Very short strings (≤ 12 chars) are typically district names like "Karaköy"
+    if (trimmed.length <= 12) return true;
     // Starts with a number → likely a street address
-    if (/^\d/.test(t)) return true;
+    if (/^\d/.test(trimmed)) return true;
     return false;
   };
   const cleanSubtitle = isLocationLike(subtitle) ? undefined : subtitle;

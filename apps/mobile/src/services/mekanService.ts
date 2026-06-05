@@ -58,9 +58,40 @@ function normalizePlace(p: any): Place {
   const description = isAddressFormatted(rawDescription) ? "" : rawDescription;
 
   const campaign_text = p?.campaign_text ?? p?.campaign ?? p?.kampanya ?? undefined;
+
+  // Parse features JSON array → human-readable Turkish labels
+  const FEATURE_LABELS: Record<string, string> = {
+    yemek: 'Yemek', rezervasyon: 'Rezervasyon', aile: 'Aile Dostu',
+    wifi: 'Wi-Fi', oturma_alani: 'Oturma Alanı', icecek: 'İçecek',
+    kahve: 'Kahve', teras: 'Teras', paket: 'Paket Servis',
+    alkol: 'Alkol', vegan: 'Vegan', vejetaryen: 'Vejetaryen',
+    gluten_free: 'Glüten Yok', canlı_muzik: 'Canlı Müzik',
+    otopark: 'Otopark', engelli: 'Engelli Erişimi',
+    deniz_manzarası: 'Deniz Manzarası', bahçe: 'Bahçe',
+    nargile: 'Nargile', fast_food: 'Fast Food',
+  };
+  let featuresArr: string[] = [];
+  if (p?.features) {
+    try {
+      const parsed = typeof p.features === 'string' ? JSON.parse(p.features) : p.features;
+      if (Array.isArray(parsed)) featuresArr = parsed.slice(0, 3);
+    } catch { /* ignore */ }
+  }
+  const featuresLabel = featuresArr
+    .map((f: string) => FEATURE_LABELS[f] ?? f)
+    .filter(Boolean)
+    .join(' · ');
+
+  // Subtitle priority:
+  //  1. Explicit DB subtitle
+  //  2. Real description (first 80 chars)
+  //  3. Features label (from features array)
+  //  4. Category name as last resort
   const subtitle =
     p?.subtitle ??
-    (description ? String(description).slice(0, 80) : undefined);
+    (description ? String(description).slice(0, 80) : undefined) ??
+    (featuresLabel || undefined) ??
+    (p?.category ? String(p.category) : undefined);
 
   const tags = Array.isArray(p?.tags) ? p.tags : (p?.category ? [p.category] : undefined);
   const category = p?.category || undefined;
