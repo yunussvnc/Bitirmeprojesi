@@ -83,6 +83,8 @@ L.tileLayer('${tileUrl}',{maxZoom:19,attribution:'${tileAttr}',keepBuffer:14,sub
 
 var activePinEl=null;
 var markerLayer=L.layerGroup().addTo(map);
+// Diff-based marker cache: id → {marker, color}
+var markerCache={};
 
 function makeIcon(color){
   return L.divIcon({className:'',html:'<div class="custom-pin" style="background:'+color+'"></div>',iconSize:[28,28],iconAnchor:[14,14]});
@@ -95,15 +97,46 @@ function selectPin(el){
 }
 
 function updateMarkers(places){
-  markerLayer.clearLayers();
-  if(!places||!places.length)return;
+  if(!places||!places.length){
+    // Tümünü temizle
+    Object.keys(markerCache).forEach(function(id){
+      markerLayer.removeLayer(markerCache[id].marker);
+    });
+    markerCache={};
+    return;
+  }
+  // Gelen ID seti
+  var incoming={};
   places.forEach(function(p){
     if(p.latitude==null||p.longitude==null)return;
+    incoming[p.id]=p;
+  });
+  // Artık görünmeyen marker'ları kaldır
+  Object.keys(markerCache).forEach(function(id){
+    if(!incoming[id]){
+      markerLayer.removeLayer(markerCache[id].marker);
+      delete markerCache[id];
+    }
+  });
+  // Yeni marker'ları ekle (renk değişimi dahil)
+  Object.keys(incoming).forEach(function(id){
+    var p=incoming[id];
     var color=p.statusColor||'${accentColor}';
-    var icon=makeIcon(color);
-    var m=L.marker([p.latitude,p.longitude],{icon:icon})
-      .on('click',function(e){selectPin(e.target.getElement().querySelector('.custom-pin'));window.ReactNativeWebView.postMessage(JSON.stringify({type:'marker',id:p.id}))});
+    if(markerCache[id]){
+      // Renk değiştiyse ikonu güncelle, marker'ı yeniden oluşturma
+      if(markerCache[id].color!==color){
+        markerCache[id].marker.setIcon(makeIcon(color));
+        markerCache[id].color=color;
+      }
+      return; // Zaten haritada, dokunma
+    }
+    var m=L.marker([p.latitude,p.longitude],{icon:makeIcon(color)})
+      .on('click',function(e){
+        selectPin(e.target.getElement().querySelector('.custom-pin'));
+        window.ReactNativeWebView.postMessage(JSON.stringify({type:'marker',id:p.id}));
+      });
     markerLayer.addLayer(m);
+    markerCache[id]={marker:m,color:color};
   });
 }
 
