@@ -21,6 +21,16 @@ _SCHEMA_PATCHES = [
     ("users", "push_token_updated_at", "TIMESTAMP WITH TIME ZONE", "DATETIME"),
     ("posts", "is_flagged", "BOOLEAN NOT NULL DEFAULT FALSE", "BOOLEAN NOT NULL DEFAULT 0"),
     ("post_comments", "is_flagged", "BOOLEAN NOT NULL DEFAULT FALSE", "BOOLEAN NOT NULL DEFAULT 0"),
+    # notifications tablosu genişletme (Munia/Novu özellikleri)
+    ("notifications", "place_id", "INTEGER REFERENCES places(id) ON DELETE SET NULL", "INTEGER"),
+    ("notifications", "payload", "TEXT", "TEXT"),
+    ("notifications", "group_key", "VARCHAR(100)", "VARCHAR(100)"),
+    # post_media tablosu genişletme
+    ("post_media", "medium_url", "VARCHAR", "VARCHAR"),
+    ("post_media", "blurhash", "VARCHAR", "VARCHAR"),
+    # stories tablosu genişletme
+    ("stories", "duration_seconds", "INTEGER", "INTEGER"),
+    ("stories", "view_count", "INTEGER DEFAULT 0", "INTEGER DEFAULT 0"),
 ]
 
 
