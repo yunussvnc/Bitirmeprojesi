@@ -30,10 +30,8 @@ import models
 
 # ─── Konfig ───────────────────────────────────────────────────────────────────
 API_KEYS = [
-    "a59636ca588532c289430fdc52a669b15a713e3624b3a4ec666e434940fc350d",
-    "fd2dfd8099095740ac0308362a1f3da300ed3786254a2edcc533d2aff3319b13",
-    "4b52b2178b1f8d79bcc4b9e6bc05da96fb451cc0245965d3cc80f17085f69b6d",
-    "cd1d2e696a2c321815cb17a4dc133ecc2ab541e19fd7a7409b6478182812c5b4",
+    # "YOUR_SERPAPI_KEY_1",
+    # "YOUR_SERPAPI_KEY_2",
 ]
 PLACEHOLDER_EMAIL_DOMAIN = "reviews.placeholder"
 REQUEST_DELAY = 1.0          # saniye — rate limit
