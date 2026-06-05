@@ -86,6 +86,7 @@ function HomeListHeader({
   setAiSummary,
   setFilterSheetOpen,
   clearAll,
+  clearAiResults,
   savedCount,
   onSavedPress,
 }: {
@@ -103,6 +104,7 @@ function HomeListHeader({
   setAiSummary: (s: string) => void;
   setFilterSheetOpen: (v: boolean) => void;
   clearAll: () => void;
+  clearAiResults: () => void;
   savedCount: number;
   onSavedPress: () => void;
 }) {
@@ -116,13 +118,25 @@ function HomeListHeader({
               <Text style={[createTextStyle("title", colors.text.primary), styles.title]}>{t('home.title')}</Text>
             </View>
           </View>
-          <TouchableOpacity
-            onPress={onSavedPress}
-            style={[styles.savedBtn, { backgroundColor: colors.surface.elevated }]}
-            activeOpacity={0.7}
-          >
-            <IconSymbol name="bookmark.fill" size={22} color={colors.text.secondary} />
-          </TouchableOpacity>
+          <View style={styles.headerRight}>
+            {isAiMode && (
+              <TouchableOpacity
+                onPress={clearAiResults}
+                style={[styles.clearAiBtn, { backgroundColor: colors.accent.primary + "15", borderColor: colors.accent.primary + "40" }]}
+                activeOpacity={0.7}
+              >
+                <IconSymbol name="xmark" size={13} color={colors.accent.primary} />
+                <Text style={[styles.clearAiBtnText, { color: colors.accent.primary }]}>{t('home.clear')}</Text>
+              </TouchableOpacity>
+            )}
+            <TouchableOpacity
+              onPress={onSavedPress}
+              style={[styles.savedBtn, { backgroundColor: colors.surface.elevated }]}
+              activeOpacity={0.7}
+            >
+              <IconSymbol name="bookmark.fill" size={22} color={colors.text.secondary} />
+            </TouchableOpacity>
+          </View>
         </View>
 
         <View style={styles.searchWrap}>
@@ -436,17 +450,37 @@ export default function HomeScreen() {
     resetPrefs();
     setFilters({ location: null, category: null, vibe: null, purpose: null, budget: null });
     setQuery("");
+    setAiItems([]);
+    setAiSummary("");
     setDisplayMode("browse");
   }, [resetPrefs]);
+
+  const clearAiResults = useCallback(() => {
+    lightImpact();
+    setQuery("");
+    setAiItems([]);
+    setAiSummary("");
+    setDisplayMode("browse");
+  }, []);
 
   const getLocationFromName = (name: string) => (name?.includes(" - ") ? name.split(" - ")[1]?.trim() : undefined);
 
   const navigatingRef = useRef(false);
-  const handlePlacePress = useCallback((id: string) => {
+  const handlePlacePress = useCallback((id: string, name?: string, category?: string, photo_url?: string, subtitle?: string, description?: string) => {
     if (navigatingRef.current) return;
     navigatingRef.current = true;
     lightImpact();
-    router.push({ pathname: "/place/[id]", params: { id } } as any);
+    router.push({
+      pathname: "/place/[id]",
+      params: {
+        id,
+        name: name || "",
+        category: category || "",
+        photo_url: photo_url || "",
+        subtitle: subtitle || "",
+        description: description || "",
+      }
+    } as any);
     setTimeout(() => {
       navigatingRef.current = false;
     }, 1000);
@@ -483,7 +517,14 @@ export default function HomeScreen() {
           distance_m={isAi ? (item as RecommendItem).distance_m : undefined}
           isRecommended={isAi}
           hasMenu={!!(place?.menu_items && place.menu_items.length > 0)}
-          onPress={() => handlePlacePress(id)}
+          onPress={() => handlePlacePress(
+            id,
+            it.name ?? t('common.venue'),
+            it.category ?? place?.category,
+            it.photo_url ?? place?.photo_url,
+            it.subtitle ?? place?.subtitle,
+            it.description ?? place?.description
+          )}
         />
       );
     },
@@ -583,6 +624,7 @@ export default function HomeScreen() {
               setAiSummary={setAiSummary}
               setFilterSheetOpen={setFilterSheetOpen}
               clearAll={clearAll}
+              clearAiResults={clearAiResults}
               savedCount={savedIds.length}
               onSavedPress={() => {
                 lightImpact();
@@ -646,6 +688,24 @@ const styles = StyleSheet.create({
     overflow: "visible",
   },
   headerLeft: { flex: 1 },
+  headerRight: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+  },
+  clearAiBtn: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 5,
+    paddingHorizontal: 12,
+    paddingVertical: 7,
+    borderRadius: 20,
+    borderWidth: 1,
+  },
+  clearAiBtnText: {
+    fontSize: 13,
+    fontWeight: "600",
+  },
   titleRow: { flexDirection: "row", alignItems: "center", gap: 8 },
   dot: { width: 8, height: 8, borderRadius: 4 },
   title: { fontSize: 26, fontWeight: "700", marginBottom: 0 },

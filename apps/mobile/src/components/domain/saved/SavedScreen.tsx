@@ -225,7 +225,16 @@ export default function SavedScreen() {
           title={item.name}
           subtitle={item.subtitle}
           tags={item.tags}
-          onPress={() => router.push({ pathname: "/place/[id]", params: { id: String(item.id) } })}
+          onPress={() => router.push({
+            pathname: "/place/[id]",
+            params: {
+              id: String(item.id),
+              name: item.name || "",
+              subtitle: item.subtitle || "",
+              photo_url: item.photo_url || "",
+              category: item.category || "",
+            }
+          })}
         />
       </Swipeable>
     ),

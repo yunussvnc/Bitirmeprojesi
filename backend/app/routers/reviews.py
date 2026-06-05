@@ -3,9 +3,13 @@
 from typing import List, Optional
 from math import radians, sin, cos, atan2, sqrt
 
+# pyrefly: ignore [missing-import]
 from fastapi import APIRouter, Depends, HTTPException, Query
+# pyrefly: ignore [missing-import]
 from pydantic import BaseModel, Field
-from sqlalchemy.orm import Session
+# pyrefly: ignore [missing-import]
+from sqlalchemy.orm import Session, joinedload
+# pyrefly: ignore [missing-import]
 from sqlalchemy import func as sql_func
 
 import models, schemas, crud
@@ -106,7 +110,14 @@ def get_place_reviews(
     - `highest`: En yüksek puanlı
     - `lowest`: En düşük puanlı
     """
-    query = db.query(models.Review).filter(models.Review.place_id == place_id)
+    query = (
+        db.query(models.Review)
+        .filter(models.Review.place_id == place_id)
+        .options(
+            joinedload(models.Review.user),
+            joinedload(models.Review.media)
+        )
+    )
 
     if sort == "oldest":
         query = query.order_by(models.Review.created_at.asc())
@@ -198,7 +209,14 @@ def get_my_venue_reviews(
     if not place:
         raise HTTPException(status_code=404, detail="Size ait bir mekan bulunamadı.")
 
-    query = db.query(models.Review).filter(models.Review.place_id == place.id)
+    query = (
+        db.query(models.Review)
+        .filter(models.Review.place_id == place.id)
+        .options(
+            joinedload(models.Review.user),
+            joinedload(models.Review.media)
+        )
+    )
 
     if sort == "oldest":
         query = query.order_by(models.Review.created_at.asc())

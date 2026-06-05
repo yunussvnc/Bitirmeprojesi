@@ -38,7 +38,20 @@ export function ExploreListFallback({ places, loading, onRefresh }: ExploreListF
       tags={item.tags}
       location={getLocationFromName(item.name)}
       hasMenu={!!(item.menu_items && item.menu_items.length > 0)}
-      onPress={() => { lightImpact(); router.push({ pathname: '/place/[id]', params: { id: String(item.id) } } as any); }}
+      onPress={() => {
+        lightImpact();
+        router.push({
+          pathname: '/place/[id]',
+          params: {
+            id: String(item.id),
+            name: item.name || '',
+            category: item.category || '',
+            photo_url: item.photo_url || '',
+            subtitle: item.subtitle || '',
+            description: item.description || '',
+          }
+        } as any);
+      }}
     />
   );
 

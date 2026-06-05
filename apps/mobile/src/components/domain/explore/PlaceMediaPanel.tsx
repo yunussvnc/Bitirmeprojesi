@@ -200,7 +200,17 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
     if (navigatingRef.current) return;
     navigatingRef.current = true;
     lightImpact();
-    router.push({ pathname: '/place/[id]', params: { id: String(place.id) } } as any);
+    router.push({
+      pathname: '/place/[id]',
+      params: {
+        id: String(place.id),
+        name: place.name || '',
+        category: place.category || '',
+        photo_url: place.photo_url || '',
+        subtitle: place.subtitle || '',
+        description: place.description || '',
+      }
+    } as any);
     setTimeout(() => { navigatingRef.current = false; }, 1000);
   };
 

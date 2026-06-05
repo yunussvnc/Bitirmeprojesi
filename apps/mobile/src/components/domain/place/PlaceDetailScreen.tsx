@@ -102,7 +102,25 @@ export default function PlaceDetailScreen({
   const saved = savedIds.includes(id);
   const currentUser = useAuthStore((s) => s.user);
 
-  const [place, setPlace] = useState<any>(null);
+  const [place, setPlace] = useState<any>(() => {
+    if (params && (params.name || params.title)) {
+      return {
+        id: Number(id),
+        name: params.name || params.title || "",
+        category: params.category || "",
+        photo_url: params.photo_url || params.image || "",
+        description: params.description || params.subtitle || "",
+        subtitle: params.subtitle || "",
+        gallery_urls: [],
+        menu_items: [],
+        review_count: 0,
+        saved_count: 0,
+        follower_count: 0,
+        is_following: false,
+      };
+    }
+    return null;
+  });
   const [userLocation, setUserLocation] = useState<PlaceLocation | null>(null);
   const [isNearby, setIsNearby] = useState(false);
   const [checkingLocation, setCheckingLocation] = useState(false);
@@ -1059,7 +1077,17 @@ export default function PlaceDetailScreen({
                       subtitle={similarPlace.subtitle || similarPlace.description}
                       tags={similarPlace.tags}
                       hasMenu={!!(similarPlace.menu_items && similarPlace.menu_items.length > 0)}
-                      onPress={() => router.push({ pathname: "/place/[id]", params: { id: String(similarPlace.id) } })}
+                      onPress={() => router.push({
+                        pathname: "/place/[id]",
+                        params: {
+                          id: String(similarPlace.id),
+                          name: similarPlace.name || "",
+                          category: similarPlace.category || "",
+                          photo_url: similarPlace.photo_url || "",
+                          subtitle: similarPlace.subtitle || similarPlace.description || "",
+                          description: similarPlace.description || "",
+                        }
+                      })}
                     />
                   </View>
                 ))}

@@ -24,6 +24,7 @@ from datetime import datetime, timedelta
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import requests
+# pyrefly: ignore [missing-import]
 from sqlalchemy.orm import Session
 from database import SessionLocal
 import models
@@ -255,6 +256,7 @@ def insert_reviews_for_place(
 
 def update_place_rating(db: Session, place_id: int):
     """Mekanın average_rating'ini yeniden hesapla."""
+    # pyrefly: ignore [missing-import]
     from sqlalchemy import func
     result = db.query(func.avg(models.Review.rating)).filter(
         models.Review.place_id == place_id
@@ -311,6 +313,7 @@ def run(limit: int, reviews_per_place: int, resume: bool):
         )
 
         # Her mekanın mevcut yorum sayısını tek sorguda al
+        # pyrefly: ignore [missing-import]
         from sqlalchemy import func
         review_counts = dict(
             db.query(models.Review.place_id, func.count(models.Review.id))
@@ -418,6 +421,7 @@ def run(limit: int, reviews_per_place: int, resume: bool):
     # Final istatistik
     db = SessionLocal()
     try:
+        # pyrefly: ignore [missing-import]
         from sqlalchemy import func as f2
         total_in_db = db.query(f2.count(models.Review.id)).scalar()
     finally:
