@@ -153,13 +153,30 @@ def authenticate_user(db: Session, email: str, password: str):
 def get_pending_venue_by_email(db: Session, email: str):
     return db.query(models.PendingVenue).filter(models.PendingVenue.email == email).first()
 
+def get_pending_venue_by_id(db: Session, pending_id: int):
+    return db.query(models.PendingVenue).filter(models.PendingVenue.id == pending_id).first()
+
 def create_pending_venue(db: Session, venue_data: schemas.VenueRegisterRequest):
     hashed_password = _hash_password(venue_data.password)
+
+    # Eğer claimed_place_id verilmişse ve o mekana zaten bir sahip atandıysa hata ver
+    if venue_data.claimed_place_id:
+        already_owned = db.query(models.Place).filter(
+            models.Place.id == venue_data.claimed_place_id,
+            models.Place.owner_id.isnot(None)
+        ).first()
+        if already_owned:
+            raise ValueError("Bu mekan zaten başka bir kullanıcıya bağlı.")
+
     db_venue = models.PendingVenue(
         venue_name=venue_data.venue_name,
         email=venue_data.email,
         password_hash=hashed_password,
-        status="pending"
+        status="pending",
+        claimed_place_id=venue_data.claimed_place_id,
+        contact_name=venue_data.contact_name,
+        contact_phone=venue_data.contact_phone,
+        notes=venue_data.notes,
     )
     db.add(db_venue)
     db.commit()
@@ -169,12 +186,59 @@ def create_pending_venue(db: Session, venue_data: schemas.VenueRegisterRequest):
 def get_pending_venues(db: Session, status: str = "pending"):
     return db.query(models.PendingVenue).filter(models.PendingVenue.status == status).all()
 
-def approve_pending_venue(db: Session, pending_id: int):
+def get_pending_venues_with_place(db: Session, status: str = "pending"):
+    """Place bilgisiyle birlikte pending_venues listesi (admin için)."""
+    rows = (
+        db.query(models.PendingVenue)
+        .filter(models.PendingVenue.status == status)
+        .order_by(models.PendingVenue.created_at.desc())
+        .all()
+    )
+    result = []
+    for pv in rows:
+        place_name = None
+        place_address = None
+        if pv.claimed_place_id:
+            place = db.query(models.Place).filter(models.Place.id == pv.claimed_place_id).first()
+            if place:
+                place_name = place.name
+                place_address = place.address
+        result.append({
+            "id": pv.id,
+            "venue_name": pv.venue_name,
+            "email": pv.email,
+            "status": pv.status,
+            "claimed_place_id": pv.claimed_place_id,
+            "claimed_place_name": place_name,
+            "claimed_place_address": place_address,
+            "contact_name": pv.contact_name,
+            "contact_phone": pv.contact_phone,
+            "notes": pv.notes,
+            "rejected_reason": pv.rejected_reason,
+            "reviewed_at": pv.reviewed_at,
+            "created_at": pv.created_at,
+        })
+    return result
+
+def approve_pending_venue(db: Session, pending_id: int, admin_id: int | None = None):
+    """
+    Mekan sahipliği başvurusunu onayla.
+    YENİ PLACE OLUŞTURMAZ — Google'dan çekilmiş mevcut Place'e owner_id atar.
+    """
+    from datetime import datetime, timezone as tz
     pending = db.query(models.PendingVenue).filter(models.PendingVenue.id == pending_id).first()
     if not pending or pending.status != "pending":
         return None
-    
-    # Kendi içinde User (role=venue) ve Place oluşturur
+
+    if not pending.claimed_place_id:
+        return None  # Eşleştirilecek mekan belirtilmemiş
+
+    # Mevcut mekanı bul
+    place = db.query(models.Place).filter(models.Place.id == pending.claimed_place_id).first()
+    if not place:
+        return None
+
+    # Venue User hesabı oluştur
     username_base = pending.venue_name.lower().replace(" ", "_")[:30]
     username = username_base
     idx = 0
@@ -189,29 +253,37 @@ def approve_pending_venue(db: Session, pending_id: int):
         first_name=pending.venue_name,
         role="venue",
         is_active=True,
-        is_email_verified=True
+        is_email_verified=True,
     )
     db.add(db_user)
+    db.flush()  # id almak için
+
+    # Mevcut Place'e sahip ata (YENİ PLACE OLUŞTURULMAZ)
+    place.owner_id = db_user.id
+
+    # Pending kaydını güncelle
+    pending.status = "approved"
+    pending.reviewed_at = datetime.now(tz.utc)
+    pending.reviewed_by_id = admin_id
     db.commit()
     db.refresh(db_user)
+    db.refresh(place)
 
-    # Place oluştur
-    db_place = models.Place(
-        name=pending.venue_name,
-        address="Varsayılan Adres",
-        city="Belirsiz",
-        category="Kafe", # Default category
-        owner_id=db_user.id
-    )
-    db.add(db_place)
+    return db_user, place
+
+def reject_pending_venue(db: Session, pending_id: int, reason: str, admin_id: int | None = None) -> bool:
+    """
+    Mekan sahipliği başvurusunu reddet ve kaydı sil.
+    Silme sayesinde aynı e-posta ile tekrar başvuru yapılabilir.
+    """
+    pending = db.query(models.PendingVenue).filter(models.PendingVenue.id == pending_id).first()
+    if not pending or pending.status != "pending":
+        return False
+
+    # Kaydı sil — böylece aynı e-posta ile tekrar başvuru yapılabilir
+    db.delete(pending)
     db.commit()
-    db.refresh(db_place)
-
-    # Status güncelle
-    pending.status = "approved"
-    db.commit()
-
-    return db_user, db_place
+    return True
 
 
 def get_or_create_user_for_login(db: Session, email: str, password: str):

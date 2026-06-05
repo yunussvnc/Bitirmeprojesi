@@ -53,6 +53,10 @@ export type RegisterVenuePayload = {
   venue_name: string;
   email: string;
   password: string;
+  claimed_place_id: number;    // ZORUNLU — Sistemdeki Google mekan ID'si
+  contact_name?: string;       // Yetkili adı soyadı
+  contact_phone?: string;      // Telefon
+  notes?: string;              // Ek açıklama
 };
 
 export async function registerVenue(payload: RegisterVenuePayload): Promise<{ id: number; venue_name: string; email: string; status: string }> {

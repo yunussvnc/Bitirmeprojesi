@@ -132,7 +132,25 @@ class PendingVenue(Base):
     email = Column(String, unique=True, index=True, nullable=False)
     password_hash = Column(String, nullable=False)
     status = Column(String, default="pending", index=True)  # pending, approved, rejected
+
+    # Sahip olunan mekan — Google'dan çekilmiş mevcut Place kaydı
+    claimed_place_id = Column(Integer, ForeignKey("places.id", ondelete="SET NULL"), nullable=True, index=True)
+
+    # Başvuru sahibi iletişim bilgileri (doğrulama için)
+    contact_name = Column(String, nullable=True)   # Yetkili adı soyadı
+    contact_phone = Column(String, nullable=True)  # Telefon
+
+    # Ek açıklama
+    notes = Column(Text, nullable=True)
+
+    # Admin işlem bilgileri
+    rejected_reason = Column(Text, nullable=True)
+    reviewed_at = Column(DateTime(timezone=True), nullable=True)
+    reviewed_by_id = Column(Integer, ForeignKey("users.id", ondelete="SET NULL"), nullable=True)
+
     created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    claimed_place = relationship("Place", foreign_keys=[claimed_place_id])
 
 class EmailVerification(Base):
     __tablename__ = "email_verifications"

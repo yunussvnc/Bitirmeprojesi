@@ -277,20 +277,44 @@ class FirstTimeSetupRequest(BaseModel):
         return v
 
 class VenueRegisterRequest(BaseModel):
-    """Mekan başvuru (kayıt) isteği"""
+    """Mekan sahipliği başvuru isteği"""
     venue_name: str
     email: EmailStr
     password: str
+    claimed_place_id: int            # ZORUNLU — Hangi Google mekanına sahip olduğunu belirtir
+    contact_name: Optional[str] = None   # Yetkili adı soyadı
+    contact_phone: Optional[str] = None  # İletişim telefonu
+    notes: Optional[str] = None          # Admin'e ek açıklama
 
 class PendingVenueResponse(BaseModel):
     id: int
     venue_name: str
     email: EmailStr
-    status: str
+    status: str                           # pending | approved | rejected
+    claimed_place_id: Optional[int] = None
+    claimed_place_name: Optional[str] = None   # Place.name (computed, okuma için)
+    claimed_place_address: Optional[str] = None
+    contact_name: Optional[str] = None
+    contact_phone: Optional[str] = None
+    notes: Optional[str] = None
+    rejected_reason: Optional[str] = None
+    reviewed_at: Optional[datetime] = None
     created_at: datetime
-    
+
     class Config:
         from_attributes = True
+
+class VenueRejectRequest(BaseModel):
+    """Admin red gerekçesi"""
+    reason: str
+
+class VenueClaimStatusResponse(BaseModel):
+    """Başvuru durumu — mobil status ekranı için"""
+    status: str           # pending | approved | rejected | not_found
+    venue_name: Optional[str] = None
+    claimed_place_name: Optional[str] = None
+    rejected_reason: Optional[str] = None
+    reviewed_at: Optional[datetime] = None
 
 
 # --- E-POSTA DOĞRULAMA (EMAIL VERIFICATION) ŞEMALARI ---

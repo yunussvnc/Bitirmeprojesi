@@ -65,7 +65,6 @@ export default function RegisterScreen() {
   const [termsAccepted, setTermsAccepted] = useState(false);
   const [legalModalType, setLegalModalType] = useState<'terms' | 'privacy' | null>(null);
   const params = useLocalSearchParams();
-  // roleType eklendi ("user" veya "venue")
   const [roleType, setRoleType] = useState<'user' | 'venue'>((params.roleType as 'user' | 'venue') || 'user');
   const [venueName, setVenueName] = useState('');
   const [loading, setLoading] = useState(false);
@@ -75,11 +74,21 @@ export default function RegisterScreen() {
     email?: string;
     password?: string;
     confirmPassword?: string;
+    claimedPlace?: string;
   }>({});
   const [isPasswordFocused, setIsPasswordFocused] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const isSubmittingRef = useRef(false);
+
+  // --- Venue 2-adım akışı ---
+  // venueStep: 'place-search' (1. adım) | 'account' (2. adım)
+  const [venueStep, setVenueStep] = useState<'place-search' | 'account'>('place-search');
+  const [placeSearchQuery, setPlaceSearchQuery] = useState('');
+  const [placeSearchResults, setPlaceSearchResults] = useState<Array<{id: number; name: string; address: string; category: string}>>([]);
+  const [selectedPlace, setSelectedPlace] = useState<{id: number; name: string; address: string} | null>(null);
+  const [placeSearchLoading, setPlaceSearchLoading] = useState(false);
+  const placeSearchTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // Google Auth Setup
   const [request, response, promptAsync] = Google.useAuthRequest({
@@ -174,12 +183,32 @@ export default function RegisterScreen() {
 
 
 
+  // Mekan arama — debounced
+  const searchPlaces = useCallback(async (q: string) => {
+    if (q.trim().length < 2) { setPlaceSearchResults([]); return; }
+    setPlaceSearchLoading(true);
+    try {
+      const { apiGet } = await import('@/src/utils/apiClient');
+      const res = await apiGet<any>(`/places/?q=${encodeURIComponent(q.trim())}&limit=10`, { skipAuth: true } as any);
+      const items = res?.items ?? res ?? [];
+      setPlaceSearchResults(items.map((p: any) => ({ id: p.id, name: p.name, address: p.address, category: p.category })));
+    } catch { setPlaceSearchResults([]); }
+    finally { setPlaceSearchLoading(false); }
+  }, []);
+
+  const handlePlaceQueryChange = useCallback((q: string) => {
+    setPlaceSearchQuery(q);
+    if (placeSearchTimeout.current) clearTimeout(placeSearchTimeout.current);
+    placeSearchTimeout.current = setTimeout(() => searchPlaces(q), 400);
+  }, [searchPlaces]);
+
   const validateForm = useCallback((): boolean => {
     const newErrors: typeof errors = {};
     if (roleType === 'user') {
       if (!fullName.trim()) newErrors.fullName = t('auth.err_fullname_required');
       else if (fullName.trim().split(/\s+/).filter(Boolean).length < 2) newErrors.fullName = t('auth.err_fullname_two_words');
     } else {
+      if (!selectedPlace) newErrors.claimedPlace = 'Lütfen mekanınızı listeden seçin.';
       if (!venueName.trim()) newErrors.venueName = t('auth.err_venue_name_required');
     }
 
@@ -197,7 +226,7 @@ export default function RegisterScreen() {
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
-  }, [fullName, venueName, email, password, confirmPassword, roleType, t]);
+  }, [fullName, venueName, email, password, confirmPassword, roleType, selectedPlace, t]);
 
   const handleRegister = useCallback(async () => {
     if (isSubmittingRef.current) return;
@@ -227,16 +256,21 @@ export default function RegisterScreen() {
         success();
         router.replace({ pathname: '/verify-email', params: { email: encodeURIComponent(formattedEmail) } });
       } else {
-        // Venue Registration
+        // Venue Registration — claimed_place_id zorunlu
+        if (!selectedPlace) {
+          setErrors({ claimedPlace: 'Lütfen mekanınızı seçin.' });
+          return;
+        }
         await registerVenue({
-          venue_name: venueName.trim(),
+          venue_name: venueName.trim() || selectedPlace.name,
           email: formattedEmail,
           password,
+          claimed_place_id: selectedPlace.id,
         });
         success();
         Alert.alert(
           t('auth.venue_applied_title'),
-          t('auth.venue_applied_desc'),
+          `"${selectedPlace.name}" mekanı için başvurunuz alındı. Admin onayından sonra giriş yapabilirsiniz.`,
           [{ text: t('common.ok'), onPress: () => router.replace('/login') }]
         );
       }
@@ -332,72 +366,186 @@ export default function RegisterScreen() {
                             error={errors.fullName}
                             containerStyle={styles.inputContainer}
                           />
+                        ) : venueStep === 'place-search' ? (
+                          /* ── 1. ADIM: Mekan Ara & Seç ── */
+                          <View>
+                            <Text style={{ color: 'rgba(255,255,255,0.7)', fontSize: 13, marginBottom: 8 }}>
+                              Sistemimizde kayıtlı mekanınızı arayın ve seçin.
+                            </Text>
+                            <Input
+                              variant="onDark"
+                              label="Mekan Ara"
+                              placeholder="Mekan adı veya adres..."
+                              value={placeSearchQuery}
+                              onChangeText={handlePlaceQueryChange}
+                              autoCapitalize="words"
+                              containerStyle={styles.inputContainer}
+                            />
+                            {errors.claimedPlace ? (
+                              <Text style={{ color: '#ff6b6b', fontSize: 12, marginBottom: 8 }}>{errors.claimedPlace}</Text>
+                            ) : null}
+                            {placeSearchLoading && (
+                              <Text style={{ color: 'rgba(255,255,255,0.5)', fontSize: 12, marginBottom: 8 }}>Aranıyor...</Text>
+                            )}
+                            {placeSearchResults.length > 0 && (
+                              <View style={{ marginBottom: 8 }}>
+                                {placeSearchResults.map((place) => (
+                                  <TouchableOpacity
+                                    key={place.id}
+                                    onPress={() => {
+                                      setSelectedPlace(place);
+                                      setVenueName(place.name);
+                                      setPlaceSearchResults([]);
+                                      setVenueStep('account');
+                                      setErrors({});
+                                      lightImpact();
+                                    }}
+                                    style={{
+                                      backgroundColor: 'rgba(255,255,255,0.08)',
+                                      borderRadius: 10,
+                                      padding: 12,
+                                      marginBottom: 6,
+                                      borderWidth: 1,
+                                      borderColor: 'rgba(255,255,255,0.12)',
+                                    }}
+                                  >
+                                    <Text style={{ color: '#fff', fontWeight: '600', fontSize: 14 }}>{place.name}</Text>
+                                    <Text style={{ color: 'rgba(255,255,255,0.55)', fontSize: 12, marginTop: 2 }}>{place.address} · {place.category}</Text>
+                                  </TouchableOpacity>
+                                ))}
+                              </View>
+                            )}
+                            {placeSearchQuery.length >= 2 && !placeSearchLoading && placeSearchResults.length === 0 && (
+                              <Text style={{ color: 'rgba(255,255,255,0.4)', fontSize: 12, marginBottom: 8 }}>
+                                Mekan bulunamadı. Farklı bir arama deneyin.
+                              </Text>
+                            )}
+                          </View>
                         ) : (
-                          <Input
-                            variant="onDark"
-                            label={t('auth.venue_name')}
-                            placeholder={t('auth.venue_name_placeholder')}
-                            value={venueName}
-                            onChangeText={(t) => { setVenueName(t); clearFieldError('venueName'); }}
-                            autoCapitalize="words"
-                            error={errors.venueName}
-                            containerStyle={styles.inputContainer}
-                          />
+                          /* ── 2. ADIM: Hesap Bilgileri — seçilen mekan göster ── */
+                          <View>
+                            {/* Seçilen mekan kartı */}
+                            <TouchableOpacity
+                              onPress={() => { setVenueStep('place-search'); setSelectedPlace(null); setErrors({}); }}
+                              style={{
+                                backgroundColor: 'rgba(99,211,135,0.15)',
+                                borderRadius: 10,
+                                padding: 12,
+                                marginBottom: 12,
+                                borderWidth: 1,
+                                borderColor: 'rgba(99,211,135,0.4)',
+                                flexDirection: 'row',
+                                alignItems: 'center',
+                                justifyContent: 'space-between',
+                              }}
+                            >
+                              <View style={{ flex: 1 }}>
+                                <Text style={{ color: '#63d387', fontWeight: '700', fontSize: 13 }}>✓ Seçilen Mekan</Text>
+                                <Text style={{ color: '#fff', fontWeight: '600', fontSize: 14, marginTop: 2 }}>{selectedPlace?.name}</Text>
+                                <Text style={{ color: 'rgba(255,255,255,0.55)', fontSize: 12 }}>{selectedPlace?.address}</Text>
+                              </View>
+                              <Text style={{ color: 'rgba(255,255,255,0.4)', fontSize: 12 }}>Değiştir</Text>
+                            </TouchableOpacity>
+                            <Input
+                              variant="onDark"
+                              label={t('auth.email')}
+                              placeholder={t('auth.email_placeholder')}
+                              value={email}
+                              onChangeText={(t) => { setEmail(t); clearFieldError('email'); }}
+                              keyboardType="email-address"
+                              autoCapitalize="none"
+                              autoComplete="email"
+                              error={errors.email}
+                              containerStyle={styles.inputContainer}
+                            />
+                            <Input
+                              variant="onDark"
+                              label={t('auth.password')}
+                              placeholder={t('auth.password_hint')}
+                              value={password}
+                              onChangeText={(t) => { setPassword(t); clearFieldError('password'); }}
+                              onFocus={() => setIsPasswordFocused(true)}
+                              onBlur={() => setIsPasswordFocused(false)}
+                              secureTextEntry={!showPassword}
+                              rightIcon={showPassword ? 'eye.slash' as any : 'eye' as any}
+                              onRightIconPress={() => { lightImpact(); setShowPassword(!showPassword); }}
+                              autoComplete="off"
+                              textContentType="oneTimeCode"
+                              error={errors.password}
+                              containerStyle={isPasswordFocused && !errors.password ? { marginBottom: 4 } : styles.inputContainer}
+                            />
+                            {isPasswordFocused && !errors.password && (
+                              <Text style={styles.passwordRulesText}>{t('auth.password_rules')}</Text>
+                            )}
+                            <Input
+                              variant="onDark"
+                              label={t('auth.confirm_password')}
+                              placeholder={t('auth.confirm_password_placeholder')}
+                              value={confirmPassword}
+                              onChangeText={(t) => { setConfirmPassword(t); clearFieldError('confirmPassword'); }}
+                              secureTextEntry={!showConfirmPassword}
+                              rightIcon={showConfirmPassword ? 'eye.slash' as any : 'eye' as any}
+                              onRightIconPress={() => { lightImpact(); setShowConfirmPassword(!showConfirmPassword); }}
+                              autoComplete="off"
+                              textContentType="oneTimeCode"
+                              error={errors.confirmPassword}
+                              containerStyle={styles.inputContainer}
+                            />
+                          </View>
                         )}
-                        <Input
-                          variant="onDark"
-                          label={t('auth.email')}
-                          placeholder={t('auth.email_placeholder')}
-                          value={email}
-                          onChangeText={(t) => { setEmail(t); clearFieldError('email'); }}
-                          keyboardType="email-address"
-                          autoCapitalize="none"
-                          autoComplete="email"
-                          error={errors.email}
-                          containerStyle={styles.inputContainer}
-                        />
-                        <Input
-                          variant="onDark"
-                          label={t('auth.password')}
-                          placeholder={t('auth.password_hint')}
-                          value={password}
-                          onChangeText={(t) => {
-                            setPassword(t);
-                            clearFieldError('password');
-                          }}
-                          onFocus={() => setIsPasswordFocused(true)}
-                          onBlur={() => setIsPasswordFocused(false)}
-                          secureTextEntry={!showPassword}
-                          rightIcon={showPassword ? 'eye.slash' as any : 'eye' as any}
-                          onRightIconPress={() => {
-                            lightImpact();
-                            setShowPassword(!showPassword);
-                          }}
-                          autoComplete="off"
-                          textContentType="oneTimeCode"
-                          error={errors.password}
-                          containerStyle={isPasswordFocused && !errors.password ? { marginBottom: 4 } : styles.inputContainer}
-                        />
-                        {isPasswordFocused && !errors.password && (
-                          <Text style={styles.passwordRulesText}>{t('auth.password_rules')}</Text>
+
+                        {/* Kullanıcı modunda email/şifre alanları — her zaman göster */}
+                        {roleType === 'user' && (
+                          <>
+                            <Input
+                              variant="onDark"
+                              label={t('auth.email')}
+                              placeholder={t('auth.email_placeholder')}
+                              value={email}
+                              onChangeText={(t) => { setEmail(t); clearFieldError('email'); }}
+                              keyboardType="email-address"
+                              autoCapitalize="none"
+                              autoComplete="email"
+                              error={errors.email}
+                              containerStyle={styles.inputContainer}
+                            />
+                            <Input
+                              variant="onDark"
+                              label={t('auth.password')}
+                              placeholder={t('auth.password_hint')}
+                              value={password}
+                              onChangeText={(t) => { setPassword(t); clearFieldError('password'); }}
+                              onFocus={() => setIsPasswordFocused(true)}
+                              onBlur={() => setIsPasswordFocused(false)}
+                              secureTextEntry={!showPassword}
+                              rightIcon={showPassword ? 'eye.slash' as any : 'eye' as any}
+                              onRightIconPress={() => { lightImpact(); setShowPassword(!showPassword); }}
+                              autoComplete="off"
+                              textContentType="oneTimeCode"
+                              error={errors.password}
+                              containerStyle={isPasswordFocused && !errors.password ? { marginBottom: 4 } : styles.inputContainer}
+                            />
+                            {isPasswordFocused && !errors.password && (
+                              <Text style={styles.passwordRulesText}>{t('auth.password_rules')}</Text>
+                            )}
+                            <Input
+                              variant="onDark"
+                              label={t('auth.confirm_password')}
+                              placeholder={t('auth.confirm_password_placeholder')}
+                              value={confirmPassword}
+                              onChangeText={(t) => { setConfirmPassword(t); clearFieldError('confirmPassword'); }}
+                              secureTextEntry={!showConfirmPassword}
+                              rightIcon={showConfirmPassword ? 'eye.slash' as any : 'eye' as any}
+                              onRightIconPress={() => { lightImpact(); setShowConfirmPassword(!showConfirmPassword); }}
+                              autoComplete="off"
+                              textContentType="oneTimeCode"
+                              error={errors.confirmPassword}
+                              containerStyle={styles.inputContainer}
+                            />
+                          </>
                         )}
-                        <Input
-                          variant="onDark"
-                          label={t('auth.confirm_password')}
-                          placeholder={t('auth.confirm_password_placeholder')}
-                          value={confirmPassword}
-                          onChangeText={(t) => { setConfirmPassword(t); clearFieldError('confirmPassword'); }}
-                          secureTextEntry={!showConfirmPassword}
-                          rightIcon={showConfirmPassword ? 'eye.slash' as any : 'eye' as any}
-                          onRightIconPress={() => {
-                            lightImpact();
-                            setShowConfirmPassword(!showConfirmPassword);
-                          }}
-                          autoComplete="off"
-                          textContentType="oneTimeCode"
-                          error={errors.confirmPassword}
-                          containerStyle={styles.inputContainer}
-                        />
+
+
                         <TouchableOpacity
                           style={styles.termsContainer}
                           onPress={() => { setTermsAccepted(!termsAccepted); lightImpact(); }}

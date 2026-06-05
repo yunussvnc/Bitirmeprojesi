@@ -184,25 +184,135 @@ def register_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
 
 @router.post("/venue-register", response_model=schemas.PendingVenueResponse)
 def venue_register(venue_data: schemas.VenueRegisterRequest, db: Session = Depends(get_db)):
+    """
+    Mekan sahipliği başvurusu.
+    claimed_place_id — sistemdeki (Google'dan çekilmiş) mevcut Place.id'si zorunludur.
+    """
     if crud.get_user_by_email(db, email=venue_data.email):
         raise HTTPException(status_code=400, detail="Bu e-posta zaten kayıtlı.")
     if crud.get_pending_venue_by_email(db, email=venue_data.email):
-        raise HTTPException(status_code=400, detail="Bu e-posta ile bekleyen bir mekan başvuru zaten var.")
-    
-    pending_venue = crud.create_pending_venue(db, venue_data)
-    # E-posta gönderme (İsteğe bağlı: "Talebiniz alındı" vb.)
-    return pending_venue
+        raise HTTPException(status_code=400, detail="Bu e-posta ile bekleyen bir mekan başvurusu zaten var.")
+
+    try:
+        pending_venue = crud.create_pending_venue(db, venue_data)
+    except ValueError as exc:
+        raise HTTPException(status_code=400, detail=str(exc))
+
+    # Başvuru onay bekleme e-postası (opsiyonel — servis hazırsa açılabilir)
+    # send_email(venue_data.email, "Başvurunuz Alındı", "...")
+
+    place_name = None
+    place_address = None
+    if pending_venue.claimed_place_id:
+        place = db.query(models.Place).filter(models.Place.id == pending_venue.claimed_place_id).first()
+        if place:
+            place_name = place.name
+            place_address = place.address
+
+    return schemas.PendingVenueResponse(
+        id=pending_venue.id,
+        venue_name=pending_venue.venue_name,
+        email=pending_venue.email,
+        status=pending_venue.status,
+        claimed_place_id=pending_venue.claimed_place_id,
+        claimed_place_name=place_name,
+        claimed_place_address=place_address,
+        contact_name=pending_venue.contact_name,
+        contact_phone=pending_venue.contact_phone,
+        notes=pending_venue.notes,
+        rejected_reason=pending_venue.rejected_reason,
+        reviewed_at=pending_venue.reviewed_at,
+        created_at=pending_venue.created_at,
+    )
+
+
+@router.get("/venue-register/status", response_model=schemas.VenueClaimStatusResponse)
+def venue_claim_status(email: str, db: Session = Depends(get_db)):
+    """
+    Başvuru durumu sorgulama — mobil uygulama için.
+    Kullanıcı e-postasıyla kendi başvurusunun durumunu görebilir.
+    """
+    pending = crud.get_pending_venue_by_email(db, email=email)
+    if not pending:
+        return schemas.VenueClaimStatusResponse(status="not_found")
+
+    place_name = None
+    if pending.claimed_place_id:
+        place = db.query(models.Place).filter(models.Place.id == pending.claimed_place_id).first()
+        if place:
+            place_name = place.name
+
+    return schemas.VenueClaimStatusResponse(
+        status=pending.status,
+        venue_name=pending.venue_name,
+        claimed_place_name=place_name,
+        rejected_reason=pending.rejected_reason,
+        reviewed_at=pending.reviewed_at,
+    )
+
+
+@router.get("/admin/pending-venues")
+def list_pending_venues(
+    status: str = "pending",
+    db: Session = Depends(get_db),
+    admin: models.User = Depends(get_admin_user),
+):
+    """
+    Admin: tüm bekleyen (veya onaylanmış/reddedilmiş) mekan başvurularını listele.
+    ?status=pending | approved | rejected
+    """
+    return crud.get_pending_venues_with_place(db, status=status)
 
 
 @router.post("/admin/approve-venue/{pending_id}")
-def approve_venue(pending_id: int, db: Session = Depends(get_db), admin: models.User = Depends(get_admin_user)):
-    result = crud.approve_pending_venue(db, pending_id)
+def approve_venue(
+    pending_id: int,
+    db: Session = Depends(get_db),
+    admin: models.User = Depends(get_admin_user),
+):
+    """
+    Admin: mekan başvurusunu onayla.
+    - Venue User hesabı oluşturulur.
+    - Mevcut Google Place kaydına owner_id atanır (YENİ PLACE OLUŞTURULMAZ).
+    - Reddedilmiş başvuruyu veya claimed_place_id olmayan başvuruyu onaylamak hata verir.
+    """
+    result = crud.approve_pending_venue(db, pending_id, admin_id=admin.id)
     if not result:
-        raise HTTPException(status_code=400, detail="Başvuru bulunamadı veya onaylanmış/iptal edilmiş.")
-    
+        raise HTTPException(
+            status_code=400,
+            detail="Başvuru bulunamadı, zaten onaylanmış/iptal edilmiş veya eşleştirilecek mekan belirtilmemiş."
+        )
+
     user, place = result
-    # Burada kullanıcıya "Mekanınız onaylandı, artık giriş yapabilirsiniz" e-postası gönderilebilir.
-    return {"ok": True, "message": "Mekan onaylandı, hesap oluşturuldu.", "user_id": user.id, "place_id": place.id}
+    return {
+        "ok": True,
+        "message": "Mekan onaylandı. Hesap oluşturuldu, mevcut mekan kaydına bağlandı.",
+        "user_id": user.id,
+        "user_email": user.email,
+        "place_id": place.id,
+        "place_name": place.name,
+    }
+
+
+@router.post("/admin/reject-venue/{pending_id}")
+def reject_venue(
+    pending_id: int,
+    body: schemas.VenueRejectRequest,
+    db: Session = Depends(get_db),
+    admin: models.User = Depends(get_admin_user),
+):
+    """
+    Admin: mekan başvurusunu reddet ve kaydı sil.
+    Silme sonrası aynı e-posta ile tekrar başvuru yapılabilir.
+    """
+    success = crud.reject_pending_venue(db, pending_id, reason=body.reason, admin_id=admin.id)
+    if not success:
+        raise HTTPException(
+            status_code=400,
+            detail="Başvuru bulunamadı veya zaten işleme alınmış."
+        )
+    return {"ok": True, "message": "Başvuru reddedildi ve silindi. Başvuru sahibi aynı e-posta ile tekrar başvurabilir."}
+
 
 @router.post("/first-time-setup", response_model=schemas.User)
 def first_time_setup(

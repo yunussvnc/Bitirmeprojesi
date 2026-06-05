@@ -34,6 +34,14 @@ _SCHEMA_PATCHES = [
     ("stories", "view_count", "INTEGER DEFAULT 0", "INTEGER DEFAULT 0"),
     # follows tablosu genişletme (follow request sistemi)
     ("follows", "status", "VARCHAR(20) NOT NULL DEFAULT 'accepted'", "VARCHAR(20) NOT NULL DEFAULT 'accepted'"),
+    # pending_venues tablosu genişletme (venue claim sistemi)
+    ("pending_venues", "claimed_place_id", "INTEGER REFERENCES places(id) ON DELETE SET NULL", "INTEGER"),
+    ("pending_venues", "contact_name", "VARCHAR", "VARCHAR"),
+    ("pending_venues", "contact_phone", "VARCHAR", "VARCHAR"),
+    ("pending_venues", "notes", "TEXT", "TEXT"),
+    ("pending_venues", "rejected_reason", "TEXT", "TEXT"),
+    ("pending_venues", "reviewed_at", "TIMESTAMP WITH TIME ZONE", "DATETIME"),
+    ("pending_venues", "reviewed_by_id", "INTEGER REFERENCES users(id) ON DELETE SET NULL", "INTEGER"),
 ]
 
 

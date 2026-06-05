@@ -211,7 +211,18 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
   }, [isDark]);
 
   const filteredPlaces = useMemo(() => {
-    const q = query.trim().toLowerCase();
+    const normalizeText = (text: string) => {
+      return text
+        .toLowerCase()
+        .replace(/ğ/g, 'g')
+        .replace(/ü/g, 'u')
+        .replace(/ş/g, 's')
+        .replace(/ı/g, 'i')
+        .replace(/ö/g, 'o')
+        .replace(/ç/g, 'c');
+    };
+
+    const q = normalizeText(query.trim());
     return places.filter((p) => {
       // Metin arama
       if (q) {
@@ -223,9 +234,9 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
           p.subtitle,
         ]
           .filter(Boolean)
-          .join(' ')
-          .toLowerCase();
-        if (!haystack.includes(q)) return false;
+          .join(' ');
+        
+        if (!normalizeText(haystack).includes(q)) return false;
       }
       // Kategori filtresi
       if (selectedCategories.length > 0) {
