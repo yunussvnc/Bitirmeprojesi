@@ -77,7 +77,7 @@ def _get_token(user_id: int) -> str:
 # 1. KAYIT & EMAIL DOĞRULAMA
 # ===========================================================================
 
-@patch("app.services.email_service.send_email")
+@patch("app.routers.auth.send_email")
 def test_register_creates_pending_user(mock_send):
     """POST /auth/register → PendingUser oluşturulur, doğrulama kodu gönderilir."""
     response = client.post("/auth/register", json={
@@ -140,8 +140,8 @@ def test_register_overwrites_expired_pending(mock_send):
     db.close()
 
 
-@patch("app.services.email_service._send_welcome_email")
-@patch("app.services.email_service.send_email")
+@patch("app.routers.auth._send_welcome_email")
+@patch("app.routers.auth.send_email")
 def test_verify_register_success(mock_send, mock_welcome):
     """Doğru kod ile verify-register → User oluşur, token döner."""
     # Önce kayıt
@@ -293,7 +293,7 @@ def test_verify_register_expired_code(mock_send):
     assert "süresi dolmuş" in response.json()["detail"]
 
 
-@patch("app.services.email_service.send_email")
+@patch("app.routers.auth.send_email")
 def test_resend_register_code(mock_send):
     """POST /auth/resend-register-code → Yeni kod gönderilir."""
     client.post("/auth/register", json={

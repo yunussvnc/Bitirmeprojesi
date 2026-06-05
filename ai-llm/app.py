@@ -19,6 +19,12 @@ import re
 import httpx  # type: ignore[import]
 from datetime import datetime
 import redis  # type: ignore[import]
+import sqlite3
+try:
+    import psycopg2  # type: ignore[import]
+    import psycopg2.extras  # type: ignore[import]
+except ImportError:
+    psycopg2 = None
 
 # .env dosyasını yükle — her koşulda bulunur
 from dotenv import load_dotenv  # type: ignore[import]
@@ -433,11 +439,12 @@ class RedisCacheManager:
             self.misses += 1
             return None
 
-    def set(self, key: str, data: Dict) -> None:
+    def set(self, key: str, data: Dict, ex: Optional[int] = None) -> None:
         """Redis'e veri yaz (TTL ile) - hata olursa sessizce atla"""
         try:
             payload = json.dumps(data, ensure_ascii=False)
-            self.client.setex(key, self.ttl, payload)
+            ttl = ex if ex is not None else self.ttl
+            self.client.setex(key, ttl, payload)
         except Exception as e:
             print(f"[Cache] set hata (atlanıyor): {e}")
 
@@ -577,6 +584,117 @@ rag_bootstrap_status: Dict[str, Union[str, int, bool, None]] = {
 }
 
 
+
+def get_db_connection():
+    """DATABASE_URL parametresine göre SQLite veya PostgreSQL bağlantısı döner."""
+    db_url = settings.DATABASE_URL
+    if not db_url:
+        raise ValueError("DATABASE_URL .env dosyasında tanımlı değil.")
+
+    if db_url.startswith("sqlite:///"):
+        db_path = db_url.replace("sqlite:///", "")
+        if not os.path.isabs(db_path):
+            db_path = os.path.abspath(os.path.join(_ai_llm_root, db_path))
+        conn = sqlite3.connect(db_path)
+        conn.row_factory = sqlite3.Row
+        # Türkçe karakterler için UTF-8
+        conn.execute("PRAGMA encoding = 'UTF-8'")
+        return conn
+    else:
+        # PostgreSQL
+        if psycopg2 is None:
+            raise ImportError("psycopg2-binary paketi yüklü değil.")
+        normalized_url = db_url
+        if normalized_url.startswith("postgres://"):
+            normalized_url = "postgresql://" + normalized_url[len("postgres://"):]
+        conn = psycopg2.connect(normalized_url)
+        return conn
+
+
+def execute_query(query: str, params: tuple = None) -> List[Dict]:
+    """Sorguyu çalıştırır ve sütun isimleriyle eşleşen sözlük listesi döner."""
+    db_url = settings.DATABASE_URL or ""
+    is_sqlite = db_url.startswith("sqlite:///")
+    
+    conn = get_db_connection()
+    try:
+        if is_sqlite:
+            cursor = conn.cursor()
+            sqlite_query = query.replace("%s", "?")
+            if params:
+                cursor.execute(sqlite_query, params)
+            else:
+                cursor.execute(sqlite_query)
+            rows = cursor.fetchall()
+            return [dict(row) for row in rows]
+        else:
+            cursor = conn.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+            if params:
+                cursor.execute(query, params)
+            else:
+                cursor.execute(query)
+            rows = cursor.fetchall()
+            return [dict(row) for row in rows]
+    finally:
+        conn.close()
+
+
+def get_places_from_db() -> List[Dict]:
+    """Veritabanındaki tüm mekanları ve yorum sayısını/yorum metinlerini çeker."""
+    db_url = settings.DATABASE_URL or ""
+    is_sqlite = db_url.startswith("sqlite:///")
+    
+    if is_sqlite:
+        query = """
+            SELECT p.*, 
+                   COUNT(r.id) AS review_count, 
+                   GROUP_CONCAT(r.comment_text, ' ') AS concatenated_reviews
+            FROM places p
+            LEFT JOIN reviews r ON r.place_id = p.id
+            GROUP BY p.id
+        """
+    else:
+        query = """
+            SELECT p.*, 
+                   COUNT(r.id) AS review_count, 
+                   string_agg(r.comment_text, ' ') AS concatenated_reviews
+            FROM places p
+            LEFT JOIN reviews r ON r.place_id = p.id
+            GROUP BY p.id
+        """
+        
+    rows = execute_query(query)
+    
+    normalized = []
+    for idx, row in enumerate(rows):
+        place_id = row.get("id") or (idx + 1)
+        normalized.append({
+            "id": place_id,
+            "ad": row.get("name") or "",
+            "kategori": row.get("category") or "Mekan",
+            "aciklama": row.get("description") or "",
+            "adres": f"{row.get('address', '')} {row.get('city', '')}".strip(),
+            "enlem": float(row.get("latitude")) if row.get("latitude") is not None else None,
+            "boylam": float(row.get("longitude")) if row.get("longitude") is not None else None,
+            "rating": float(row.get("average_rating") or 0.0),
+            "review_count": int(row.get("review_count") or row.get("user_ratings_total") or 0),
+            "user_review": row.get("concatenated_reviews") or ""
+        })
+    return normalized
+
+
+def get_db_reviews(place_id: int) -> List[Dict]:
+    """Belirli bir mekan için veritabanındaki yorumları çeker."""
+    query = """
+        SELECT r.comment_text, r.rating, r.created_at, u.username
+        FROM reviews r
+        LEFT JOIN users u ON r.user_id = u.id
+        WHERE r.place_id = %s
+        ORDER BY r.created_at DESC
+    """
+    return execute_query(query, (place_id,))
+
+
 def _resolve_rag_data_path() -> str:
     data_path = settings.RAG_DATA_PATH or "data/loaded_places.json"
     if os.path.isabs(data_path):
@@ -615,9 +733,22 @@ def _bootstrap_rag_index_sync(force_reindex: Optional[bool] = None) -> Dict[str,
         vector_db = retriever.vector_db
         embedding_model = retriever.embedding_model
 
-        mekanlar = get_mekanlar_from_json(json_path=data_path)
+        # Database'den mekanları çekmeyi dene, hata alırsan JSON fallback yap
+        db_loaded = False
+        try:
+            mekanlar = get_places_from_db()
+            if mekanlar:
+                db_loaded = True
+                data_path = f"database: {settings.DATABASE_URL.split('@')[-1]}"
+                print(f"[RAG] Veritabanından {len(mekanlar)} mekan çekildi (Qdrant index için).")
+        except Exception as db_exc:
+            print(f"[RAG] Veritabanı çekimi başarısız ({db_exc}), JSON fallback yapılıyor...")
+            
+        if not db_loaded:
+            mekanlar = get_mekanlar_from_json(json_path=data_path)
+
         if not mekanlar:
-            raise RuntimeError(f"RAG veri dosyasında mekan bulunamadı: {data_path}")
+            raise RuntimeError(f"RAG veri kaynağında mekan bulunamadı (database/json).")
 
         vector_size = embedding_model.get_vector_size()
         vector_db.create_collection_if_not_exists(vector_size=vector_size)
@@ -1738,182 +1869,336 @@ async def smart_search_v2(request: SmartSearchRequest):
             }
 
         rag_status: Dict[str, Union[str, int, bool, None]] = rag_bootstrap_status.copy()
-        if not rag_status.get("ready"):
-            try:
-                rag_status = await asyncio.wait_for(ensure_rag_ready(), timeout=5.0)
-            except asyncio.TimeoutError:
-                print("[RAG] Index henüz hazır değil (5s timeout), SerpAPI ile devam ediliyor")
-                rag_status = rag_bootstrap_status.copy()
-        search_location = parsed['district'] or request.location
         
-        if parsed['features']:
-            feature_str = " ".join(parsed['features'])
-            search_query = f"{feature_str} {parsed['category']} in {search_location}"
-        else:
-            search_query = f"{request.query} in {search_location}"
-
-        # SerpAPI (ana kaynak; başarısız olursa RAG devreye girer)
-        places: List[Dict] = []
-        try:
-            from serpapi_client import SerpApiClient
-            client = SerpApiClient()
-            places = client.search_places(
-                query=search_query,
-                location=f"{search_location}, Turkey",
-                limit=request.limit * 2,
-                lat=request.user_lat,
-                lng=request.user_lng
-            )
-        except Exception as e:
-            print(f"[SerpApi] Kullanılamıyor, RAG fallback denenecek: {e}")
-
-        # Hava Durumu (Open-Meteo)
-        weather_data = {"condition": "Unknown", "temp": None}
-        if request.user_lat and request.user_lng:
-            try:
-                weather_codes = {
-                    0: "Clear sky", 1: "Mainly clear", 2: "Partly cloudy", 3: "Overcast",
-                    45: "Fog", 48: "Depositing rime fog",
-                    51: "Light Drizzle", 53: "Moderate Drizzle", 55: "Dense Drizzle",
-                    61: "Slight Rain", 63: "Moderate Rain", 65: "Heavy Rain",
-                    71: "Slight Snow", 73: "Moderate Snow", 75: "Heavy Snow",
-                    95: "Thunderstorm", 96: "Thunderstorm with slight hail", 99: "Thunderstorm with heavy hail"
-                }
-                with httpx.Client(timeout=3.0) as w_client:
-                    w_res = w_client.get(
-                        f"https://api.open-meteo.com/v1/forecast?latitude={request.user_lat}&longitude={request.user_lng}&current_weather=true"
-                    )
-                    if w_res.status_code == 200:
-                        current = w_res.json().get("current_weather", {})
-                        code = current.get("weathercode", -1)
-                        weather_data["condition"] = weather_codes.get(code, "Unknown")
-                        weather_data["temp"] = current.get("temperature")
-            except Exception as e:
-                print(f"[Weather] Hava durumu çekilemedi: {e}")
-
-        time_weather_context = {
-            "hour": int(datetime.now().hour),
-            "weather": weather_data
-        }
-
+        # 1. DATABASE SEARCH
+        db_search_success = False
         reranked_places: List[Dict] = []
-        if places:
-            filtered_places = [p for p in places if strict_category_match(parsed['category'], p.get('category', ''))]
-            if len(filtered_places) < 3:
-                filtered_places = places
-
-            if request.user_lat and request.user_lng:
-                distance_filtered = [
-                    p for p in filtered_places
-                    if p.get('latitude') and p.get('longitude')
-                    and calculate_distance(request.user_lat, request.user_lng, p['latitude'], p['longitude']) <= request.max_distance_km
-                ]
-                if len(distance_filtered) >= 5:
-                    filtered_places = distance_filtered
-
-            if parsed.get('want_open_now'):
-                open_places = [p for p in filtered_places if is_place_open(p) is not False]
-                if len(open_places) >= 3:
-                    filtered_places = open_places
-                    print(f"[OpenNow] {len(open_places)}/{len(filtered_places)} mekan açık")
-
-            budget = parsed.get('budget', 'orta')
-            if budget == 'ucuz':
-                budget_filtered = [p for p in filtered_places if p.get('price_level', 2) <= 2]
-                if len(budget_filtered) >= 3:
-                    filtered_places = budget_filtered
-            elif budget == 'lüks':
-                budget_filtered = [p for p in filtered_places if p.get('price_level', 2) >= 3]
-                if len(budget_filtered) >= 2:
-                    filtered_places = budget_filtered
-
-            scored_places = []
-            for place in filtered_places:
-                scores = hybrid_score(
-                    place,
-                    parsed['features'],
-                    user_lat=request.user_lat,
-                    user_lng=request.user_lng,
-                    time_of_day=time_weather_context
-                )
-                distance_km = scores.get("distance_km", 0)
-                if request.max_distance_km and distance_km > 0 and distance_km > request.max_distance_km:
-                    continue
-                scored_places.append({
-                    **place,
-                    "source": "serpapi",
-                    "match_score": round(scores["total_score"], 3),
-                    "distance_km": distance_km,
-                    "score_breakdown": {
-                        "feature": round(scores["feature_score"], 3),
-                        "distance": round(scores["distance_score"], 3),
-                        "popularity": round(scores["popularity_score"], 3),
-                        "time": round(scores["time_score"], 3)
-                    }
-                })
-
-            scored_places.sort(key=lambda x: x['match_score'], reverse=True)
-            reranked_places = rerank_places(
-                scored_places[:min(20, len(scored_places))],
-                request.query,
-                top_k=result_limit
-            )
-
-        # RAG: boş SerpAPI sonucunda birincil kaynak; aksi halde eksikleri tamamlar
-        rag_result: Optional[Dict] = None
-        rag_analysis = ""
         rag_used_for_results = False
-        rag_recommendations, rag_result, rag_analysis = await _fetch_rag_results(
-            request.query,
-            request,
-            response_language,
-            rag_status,
-            result_limit,
-        )
+        rag_context = {}
+        weather_data = {"condition": "Unknown", "temp": None}
 
-        if rag_recommendations:
-            scored_rag = _score_rag_recommendations(
-                rag_recommendations, parsed, request, time_weather_context
+        if settings.DATABASE_URL:
+            try:
+                print(f"[SmartSearch] Database search starting (query: '{request.query}')...")
+                if not rag_status.get("ready"):
+                    try:
+                        rag_status = await asyncio.to_thread(_bootstrap_rag_index_sync)
+                    except Exception:
+                        pass
+
+                # Qdrant semantic search
+                rag_recommendations = []
+                rag_result = None
+                rag_analysis = ""
+                
+                if rag_status.get("ready"):
+                    rag_recommendations, rag_result, rag_analysis = await _fetch_rag_results(
+                        request.query,
+                        request,
+                        response_language,
+                        rag_status,
+                        result_limit * 2,
+                    )
+
+                place_ids_with_scores = []
+                if rag_recommendations:
+                    for rec in rag_recommendations:
+                        pid = rec.get("data_id") or rec.get("id")
+                        if pid:
+                            place_ids_with_scores.append((int(pid), rec.get("match_score", 1.0)))
+
+                # Keyword SQL fallback
+                if not place_ids_with_scores:
+                    keywords = [k.strip() for k in request.query.split() if len(k.strip()) > 1]
+                    if keywords:
+                        where_clauses = []
+                        sql_params = []
+                        for k in keywords:
+                            where_clauses.append("(name LIKE %s OR category LIKE %s OR description LIKE %s)")
+                            sql_params.extend([f"%{k}%", f"%{k}%", f"%{k}%"])
+                        where_str = " OR ".join(where_clauses)
+                        sql = f"SELECT id FROM places WHERE {where_str} LIMIT {result_limit}"
+                        fallback_rows = execute_query(sql, tuple(sql_params))
+                        place_ids_with_scores = [(int(r["id"]), 1.0) for r in fallback_rows]
+
+                # Average rating fallback
+                if not place_ids_with_scores:
+                    sql = f"SELECT id FROM places ORDER BY average_rating DESC, user_ratings_total DESC LIMIT {result_limit}"
+                    fallback_rows = execute_query(sql)
+                    place_ids_with_scores = [(int(r["id"]), 0.5) for r in fallback_rows]
+
+                if place_ids_with_scores:
+                    db_places = []
+                    seen_ids = set()
+                    unique_ids_with_scores = []
+                    for pid, score in place_ids_with_scores:
+                        if pid not in seen_ids:
+                            seen_ids.add(pid)
+                            unique_ids_with_scores.append((pid, score))
+
+                    for pid, score in unique_ids_with_scores:
+                        p_rows = execute_query("SELECT * FROM places WHERE id = %s", (pid,))
+                        if not p_rows:
+                            continue
+                        row = p_rows[0]
+
+                        r_rows = get_db_reviews(pid)
+                        reviews_list = []
+                        for r in r_rows:
+                            reviews_list.append({
+                                "username": r.get("username") or "Anonim",
+                                "rating": r.get("rating") or 5,
+                                "comment_text": r.get("comment_text") or "",
+                                "created_at": str(r.get("created_at") or "")
+                            })
+
+                        dist_km = 0.0
+                        if request.user_lat and request.user_lng and row.get("latitude") and row.get("longitude"):
+                            dist_km = calculate_distance(request.user_lat, request.user_lng, row["latitude"], row["longitude"])
+                            dist_km = round(dist_km, 2)
+
+                        gallery = []
+                        if row.get("gallery_urls"):
+                            try:
+                                gallery = json.loads(row["gallery_urls"]) if isinstance(row["gallery_urls"], str) else row["gallery_urls"]
+                            except Exception:
+                                pass
+
+                        menu = []
+                        if row.get("menu_items_json"):
+                            try:
+                                menu = json.loads(row["menu_items_json"]) if isinstance(row["menu_items_json"], str) else row["menu_items_json"]
+                            except Exception:
+                                pass
+
+                        hours = {}
+                        if row.get("opening_hours_json"):
+                            try:
+                                hours = json.loads(row["opening_hours_json"]) if isinstance(row["opening_hours_json"], str) else row["opening_hours_json"]
+                            except Exception:
+                                pass
+
+                        place_dict = {
+                            "id": pid,
+                            "name": row.get("name") or "",
+                            "address": row.get("address") or "",
+                            "city": row.get("city") or "",
+                            "description": row.get("description") or "",
+                            "price_level": int(row.get("price_range") or 2),
+                            "category": row.get("category") or "Mekan",
+                            "features": row.get("features") or "",
+                            "latitude": float(row["latitude"]) if row.get("latitude") is not None else 0.0,
+                            "longitude": float(row["longitude"]) if row.get("longitude") is not None else 0.0,
+                            "rating": float(row.get("average_rating") or 0.0),
+                            "review_count": len(reviews_list) or int(row.get("user_ratings_total") or 0),
+                            "photo_url": row.get("photo_url") or "",
+                            "video_url": row.get("video_url") or "",
+                            "campaign_text": row.get("campaign_text") or "",
+                            "opening_time": row.get("opening_time") or "",
+                            "closing_time": row.get("closing_time") or "",
+                            "opening_hours_json": hours,
+                            "is_open": bool(row.get("is_open", True)),
+                            "phone_number": row.get("phone_number") or "",
+                            "gallery_urls": gallery,
+                            "menu_items": menu,
+                            "reviews": reviews_list,
+                            "data_id": str(pid),
+                            "match_score": score,
+                            "distance_km": dist_km,
+                            "source": "database"
+                        }
+                        db_places.append(place_dict)
+
+                    def get_sort_key(p):
+                        score_val = p.get("match_score", 0.0) * 10.0
+                        rating_val = p.get("rating", 0.0)
+                        reviews_val = math.log(p.get("review_count", 0) + 1) * 0.1
+                        return score_val + rating_val + reviews_val
+
+                    db_places.sort(key=get_sort_key, reverse=True)
+                    reranked_places = db_places[:result_limit]
+                    rag_used_for_results = True
+
+                rag_context = _build_rag_context(
+                    rag_status,
+                    rag_result,
+                    rag_used_for_results or bool(rag_recommendations)
+                )
+
+                db_search_success = True
+                print(f"[SmartSearch] Database search success: {len(reranked_places)} places found.")
+            except Exception as db_err:
+                print(f"[SmartSearch] Database search error (falling back to SerpAPI): {db_err}")
+                import traceback
+                traceback.print_exc()
+
+        # 2. SERPAPI FALLBACK (Run if DB fails or returned no places)
+        if not db_search_success or not reranked_places:
+            print("[SmartSearch] Falling back to SerpAPI...")
+            search_location = parsed['district'] or request.location
+            if parsed['features']:
+                feature_str = " ".join(parsed['features'])
+                search_query = f"{feature_str} {parsed['category']} in {search_location}"
+            else:
+                search_query = f"{request.query} in {search_location}"
+
+            places: List[Dict] = []
+            try:
+                from serpapi_client import SerpApiClient
+                client = SerpApiClient()
+                places = client.search_places(
+                    query=search_query,
+                    location=f"{search_location}, Turkey",
+                    limit=request.limit * 2,
+                    lat=request.user_lat,
+                    lng=request.user_lng
+                )
+            except Exception as e:
+                print(f"[SerpApi] Kullanılamıyor, RAG fallback denenecek: {e}")
+
+            # Weather
+            weather_data = {"condition": "Unknown", "temp": None}
+            if request.user_lat and request.user_lng:
+                try:
+                    weather_codes = {
+                        0: "Clear sky", 1: "Mainly clear", 2: "Partly cloudy", 3: "Overcast",
+                        45: "Fog", 48: "Depositing rime fog",
+                        51: "Light Drizzle", 53: "Moderate Drizzle", 55: "Dense Drizzle",
+                        61: "Slight Rain", 63: "Moderate Rain", 65: "Heavy Rain",
+                        71: "Slight Snow", 73: "Moderate Snow", 75: "Heavy Snow",
+                        95: "Thunderstorm", 96: "Thunderstorm with slight hail", 99: "Thunderstorm with heavy hail"
+                    }
+                    with httpx.Client(timeout=3.0) as w_client:
+                        w_res = w_client.get(
+                            f"https://api.open-meteo.com/v1/forecast?latitude={request.user_lat}&longitude={request.user_lng}&current_weather=true"
+                        )
+                        if w_res.status_code == 200:
+                            current = w_res.json().get("current_weather", {})
+                            code = current.get("weathercode", -1)
+                            weather_data["condition"] = weather_codes.get(code, "Unknown")
+                            weather_data["temp"] = current.get("temperature")
+                except Exception as e:
+                    print(f"[Weather] Hava durumu çekilemedi: {e}")
+
+            time_weather_context = {
+                "hour": int(datetime.now().hour),
+                "weather": weather_data
+            }
+
+            if places:
+                filtered_places = [p for p in places if strict_category_match(parsed['category'], p.get('category', ''))]
+                if len(filtered_places) < 3:
+                    filtered_places = places
+
+                if request.user_lat and request.user_lng:
+                    distance_filtered = [
+                        p for p in filtered_places
+                        if p.get('latitude') and p.get('longitude')
+                        and calculate_distance(request.user_lat, request.user_lng, p['latitude'], p['longitude']) <= request.max_distance_km
+                    ]
+                    if len(distance_filtered) >= 5:
+                        filtered_places = distance_filtered
+
+                if parsed.get('want_open_now'):
+                    open_places = [p for p in filtered_places if is_place_open(p) is not False]
+                    if len(open_places) >= 3:
+                        filtered_places = open_places
+
+                budget = parsed.get('budget', 'orta')
+                if budget == 'ucuz':
+                    budget_filtered = [p for p in filtered_places if p.get('price_level', 2) <= 2]
+                    if len(budget_filtered) >= 3:
+                        filtered_places = budget_filtered
+                elif budget == 'lüks':
+                    budget_filtered = [p for p in filtered_places if p.get('price_level', 2) >= 3]
+                    if len(budget_filtered) >= 2:
+                        filtered_places = budget_filtered
+
+                scored_places = []
+                for place in filtered_places:
+                    scores = hybrid_score(
+                        place,
+                        parsed['features'],
+                        user_lat=request.user_lat,
+                        user_lng=request.user_lng,
+                        time_of_day=time_weather_context
+                    )
+                    distance_km = scores.get("distance_km", 0)
+                    if request.max_distance_km and distance_km > 0 and distance_km > request.max_distance_km:
+                        continue
+                    scored_places.append({
+                        **place,
+                        "source": "serpapi",
+                        "match_score": round(scores["total_score"], 3),
+                        "distance_km": distance_km,
+                        "score_breakdown": {
+                            "feature": round(scores["feature_score"], 3),
+                            "distance": round(scores["distance_score"], 3),
+                            "popularity": round(scores["popularity_score"], 3),
+                            "time": round(scores["time_score"], 3)
+                        }
+                    })
+
+                scored_places.sort(key=lambda x: x['match_score'], reverse=True)
+                reranked_places = rerank_places(
+                    scored_places[:min(20, len(scored_places))],
+                    request.query,
+                    top_k=result_limit
+                )
+
+            # RAG fallback
+            rag_result: Optional[Dict] = None
+            rag_analysis = ""
+            rag_used_for_results = False
+            rag_recommendations, rag_result, rag_analysis = await _fetch_rag_results(
+                request.query,
+                request,
+                response_language,
+                rag_status,
+                result_limit,
             )
+
+            if rag_recommendations:
+                scored_rag = _score_rag_recommendations(
+                    rag_recommendations, parsed, request, time_weather_context
+                )
+                if not reranked_places:
+                    reranked_places = scored_rag[:result_limit]
+                    rag_used_for_results = True
+                elif len(reranked_places) < result_limit:
+                    reranked_places = _merge_recommendations(reranked_places, scored_rag, result_limit)
+                    rag_used_for_results = True
+
+            rag_context = _build_rag_context(
+                rag_status,
+                rag_result,
+                rag_used_for_results or bool(rag_recommendations),
+            )
+
             if not reranked_places:
-                reranked_places = scored_rag[:result_limit]
-                rag_used_for_results = True
-                print(f"[RAG] Birincil fallback: {len(reranked_places)} mekan")
-            elif len(reranked_places) < result_limit:
-                reranked_places = _merge_recommendations(reranked_places, scored_rag, result_limit)
-                rag_used_for_results = True
-                print(f"[RAG] SerpAPI ile birleştirildi: {len(reranked_places)} mekan")
-
-        rag_context = _build_rag_context(
-            rag_status,
-            rag_result,
-            rag_used_for_results or bool(rag_recommendations),
-        )
-
-        if not reranked_places:
-            empty_msg = rag_analysis or localized("no_vector_match", response_language)
-            return {
-                "query": request.query,
-                "found": 0,
-                "recommendations": [],
-                "message": empty_msg,
-                "ai_message": empty_msg,
-                "source": "RAG" if rag_status.get("ready") else "none",
-                "hybrid_mode": False,
-                "rag_enhanced": False,
-                "rag_source_count": rag_status.get("source_count", 0),
-                "rag_indexed_count": rag_status.get("indexed_count", 0),
-                "rag_context": rag_context,
-                "context": {
-                    "weather": weather_data.get("condition"),
-                    "temperature": weather_data.get("temp"),
+                empty_msg = rag_analysis or localized("no_vector_match", response_language)
+                return {
+                    "query": request.query,
+                    "found": 0,
+                    "recommendations": [],
+                    "message": empty_msg,
+                    "ai_message": empty_msg,
+                    "source": "RAG" if rag_status.get("ready") else "none",
+                    "hybrid_mode": False,
                     "rag_enhanced": False,
                     "rag_source_count": rag_status.get("source_count", 0),
                     "rag_indexed_count": rag_status.get("indexed_count", 0),
-                    "language": response_language,
-                },
-                "_cache": {"hit": False},
-            }
+                    "rag_context": rag_context,
+                    "context": {
+                        "weather": weather_data.get("condition"),
+                        "temperature": weather_data.get("temp"),
+                        "rag_enhanced": False,
+                        "rag_source_count": rag_status.get("source_count", 0),
+                        "rag_indexed_count": rag_status.get("indexed_count", 0),
+                        "language": response_language,
+                    },
+                    "_cache": {"hit": False},
+                }
 
         # ==================== YORUM BAZLI INSIGHT ANALİZİ ====================
         # Her mekan için SerpAPI yorumlarını çekip ne ile övüldüğünü tespit et
@@ -1999,9 +2284,16 @@ async def smart_search_v2(request: SmartSearchRequest):
             except Exception as e:
                 print(f"[Groq] LLM atlandı: {e}")
 
-        has_serp = any(p.get("source") != "rag" for p in reranked_places)
+        has_serp = any(p.get("source") == "serpapi" for p in reranked_places)
         has_rag = any(p.get("source") == "rag" for p in reranked_places)
-        if has_serp and has_rag:
+        has_db = any(p.get("source") == "database" for p in reranked_places)
+
+        if has_db:
+            if has_rag or rag_status.get("ready"):
+                data_source = "Database+RAG"
+            else:
+                data_source = "Database"
+        elif has_serp and has_rag:
             data_source = "SerpAPI+RAG"
         elif has_rag:
             data_source = "RAG (Vector Database)"
@@ -2055,52 +2347,55 @@ async def _enrich_with_review_insights(places: List[Dict], language: str = "tr")
     """
     Reranked mekanların yorumlarını paralel olarak çekip
     ne ile övüldüklerini tespit eder.
-    
-    Örnek çıktı:
-      place['review_insights'] = {
-          'specialties': [
-              {'emoji': '☕', 'label': 'Kahvesiyle ünlü', 'mention_count': 8, ...},
-              {'emoji': '🍔', 'label': 'Hamburgeriyle meşhur', 'mention_count': 5, ...}
-          ],
-          'top_specialty': '☕ Kahvesiyle ünlü (8 yorum)',
-          'highlight_tags': ['☕ Kahve', '🍔 Hamburger'],
-          'summary': 'Bu mekan özellikle kahvesi ile öne çıkıyor.'
-      }
     """
-    try:
-        from serpapi_client import SerpApiClient
-        client = SerpApiClient()
-    except Exception as e:
-        print(f"[ReviewInsight] SerpApiClient başlatılamadı: {e}")
-        return
-
     async def _fetch_and_analyze(place: Dict) -> None:
-        """Tek mekan için yorum çek ve analiz et (async wrapper)"""
+        """Tek mekan için yorum çek ve analiz et"""
+        place_id = place.get('id')
         data_id = place.get('data_id', '')
-        if not data_id:
+        if not place_id and not data_id:
             place['review_insights'] = {'specialties': [], 'top_specialty': None,
                                         'highlight_tags': [], 'summary': ''}
             return
 
-        # Redis cache'de var mı?
-        insight_cache_key = f"review_insights_{data_id}_{language}"
+        cache_id = str(place_id or data_id)
+        insight_cache_key = f"review_insights_{cache_id}_{language}"
         if cache_manager:
             cached = cache_manager.get(insight_cache_key)
             if cached:
                 place['review_insights'] = cached
-                print(f"[ReviewInsight] Cache hit: {place.get('name', data_id)}")
+                print(f"[ReviewInsight] Cache hit: {place.get('name', cache_id)}")
                 return
 
-        # Yorumları çek (sync → thread pool)
-        try:
-            loop = asyncio.get_event_loop()
-            reviews = await loop.run_in_executor(
-                None,
-                lambda: client.get_place_reviews(data_id, max_reviews=20)  # 20 yorum yeterli
-            )
-        except Exception as e:
-            print(f"[ReviewInsight] Yorum çekme hatası ({data_id}): {e}")
-            reviews = []
+        # 1. Database'den çekmeyi dene
+        reviews = []
+        db_success = False
+        if settings.DATABASE_URL and place_id:
+            try:
+                loop = asyncio.get_event_loop()
+                db_reviews = await loop.run_in_executor(
+                    None,
+                    lambda: get_db_reviews(int(place_id))
+                )
+                reviews = [r.get("comment_text", "") for r in db_reviews if r.get("comment_text")]
+                db_success = True
+                print(f"[ReviewInsight] Database reviews loaded: {place.get('name')} ({len(reviews)} reviews)")
+            except Exception as e:
+                print(f"[ReviewInsight] Database reviews failed for {place_id}: {e}")
+
+        # 2. Fallback: SerpAPI'den çekmeyi dene
+        if not db_success or not reviews:
+            try:
+                from serpapi_client import SerpApiClient
+                client = SerpApiClient()
+                if data_id:
+                    loop = asyncio.get_event_loop()
+                    reviews = await loop.run_in_executor(
+                        None,
+                        lambda: client.get_place_reviews(data_id, max_reviews=20)
+                    )
+                    print(f"[ReviewInsight] SerpAPI reviews loaded: {place.get('name')} ({len(reviews)} reviews)")
+            except Exception as e:
+                print(f"[ReviewInsight] SerpAPI reviews failed for {data_id}: {e}")
 
         # Yorumları analiz et
         place_name = place.get('name', '')
@@ -2115,14 +2410,13 @@ async def _enrich_with_review_insights(places: List[Dict], language: str = "tr")
         else:
             print(f"[ReviewInsight] {place_name}: No specialties detected ({len(reviews)} reviews)")
 
-        # Cache'e kaydet (24 saat TTL - yorum verileri sık değişmez)
+        # Cache'e kaydet (24 saat TTL)
         if cache_manager and reviews:
             try:
                 cache_manager.client.setex(insight_cache_key, 86400, json.dumps(insights, ensure_ascii=False))
             except Exception:
                 pass
 
-    # Tüm mekanlar için paralel olarak çalıştır
     tasks = [_fetch_and_analyze(place) for place in places]
     await asyncio.gather(*tasks, return_exceptions=True)
 
@@ -2207,6 +2501,111 @@ async def rag_search(request: SmartSearchRequest):
         raise HTTPException(status_code=500, detail=str(e))
 
 
+async def generate_review_analysis_llm(place_name: str, reviews: List[str], language: str = "tr") -> Dict:
+    """
+    Groq LLM ile detaylı yorum analizi yapar (JSON Modunda).
+    Döner:
+    {
+       "sentiment_score": float, # 1.0 - 5.0
+       "analysis_text": str, # Değerlendirme metni
+       "specialties": List[Dict], # [{"emoji": "☕", "label": "Kahvesiyle ünlü"}, ...]
+       "summary": str # Kısa özet metni
+    }
+    """
+    if not reviews:
+        return {}
+
+    # Yorumları birleştir (limit 20 yorum ki prompt/tokens sınırı aşılmasın)
+    joined_reviews = "\n".join([f"- {r}" for r in reviews[:20]])
+    prompt = (
+        f"Aşağıda '{place_name}' isimli mekan için yapılmış gerçek kullanıcı yorumları verilmiştir:\n"
+        f"{joined_reviews}\n\n"
+        f"Lütfen bu yorumları analiz et ve mekan hakkında JSON formatında şu alanları içeren bir yanıt döndür:\n"
+        f"1. \"sentiment_score\": Müşteri memnuniyet skoru (1.0 ile 5.0 arasında float bir değer).\n"
+        f"2. \"analysis_text\": Yorumlara dayalı detaylı, samimi, akıcı ve tarafsız bir değerlendirme metni (en az 2-3 cümle).\n"
+        f"3. \"specialties\": Mekanın yorumlarda en çok övüldüğü veya öne çıktığı özellikleri temsil eden en fazla 3 adet obje içeren liste. Her obje 'emoji' ve 'label' (etiket metni, örn: 'Harika kahve') içermelidir.\n"
+        f"4. \"summary\": Mekanı özetleyen tek cümlelik kısa bir açıklama.\n\n"
+        f"Yanıt dilini kesinlikle '{lang_name(language)}' yap. Yalnızca geçerli bir JSON objesi döndür."
+    )
+
+    groq_key = settings.GROQ_API_KEY or os.getenv("GROQ_API_KEY", "")
+    if not groq_key:
+        print("[ReviewInsight] GROQ_API_KEY eksik, local wrapper fallback.")
+        try:
+            llm = _get_llm()
+            response = await llm.generate_async(prompt)
+            clean_response = response.strip()
+            if clean_response.startswith("```json"):
+                clean_response = clean_response[7:]
+            if clean_response.endswith("```"):
+                clean_response = clean_response[:-3]
+            clean_response = clean_response.strip()
+            parsed = json.loads(clean_response)
+            return parsed
+        except Exception as e:
+            print(f"[ReviewInsight] Local LLM yorum analizi hatası: {e}")
+            return {}
+
+    groq_model = settings.GROQ_MODEL or os.getenv("GROQ_MODEL", "llama-3.1-8b-instant")
+    import httpx
+    
+    headers = {
+        "Authorization": f"Bearer {groq_key}",
+        "Content-Type": "application/json"
+    }
+    
+    payload = {
+        "model": groq_model,
+        "messages": [
+            {
+                "role": "system",
+                "content": (
+                    f"Sen AsEmOs adlı mekan öneri uygulamasının yapay zeka asistanısın. "
+                    f"Mekan yorumlarını analiz ederek sadece JSON formatında yanıt verirsin. "
+                    f"Yanıt dilini kesinlikle '{lang_name(language)}' yapmalısın."
+                )
+            },
+            {
+                "role": "user",
+                "content": prompt
+            }
+        ],
+        "response_format": {"type": "json_object"},
+        "temperature": 0.2,
+        "max_tokens": 1000
+    }
+
+    try:
+        async with httpx.AsyncClient(timeout=10.0) as client:
+            resp = await client.post(
+                "https://api.groq.com/openai/v1/chat/completions",
+                headers=headers,
+                json=payload
+            )
+            if resp.status_code != 200:
+                raise RuntimeError(f"Groq API hatası: {resp.status_code} — {resp.text[:200]}")
+            
+            result = resp.json()
+            content = result["choices"][0]["message"]["content"]
+            parsed = json.loads(content.strip())
+            return parsed
+    except Exception as e:
+        print(f"[ReviewInsight] Groq JSON API call failed: {e}")
+        try:
+            llm = _get_llm()
+            response = await llm.generate_async(prompt)
+            clean_response = response.strip()
+            if clean_response.startswith("```json"):
+                clean_response = clean_response[7:]
+            if clean_response.endswith("```"):
+                clean_response = clean_response[:-3]
+            clean_response = clean_response.strip()
+            return json.loads(clean_response)
+        except Exception as fallback_e:
+            print(f"[ReviewInsight] Fallback LLM also failed: {fallback_e}")
+            return {}
+
+
 @app.post("/api/analyze-place-reviews")
 async def analyze_place_reviews(request: AnalyzeReviewRequest):
     """
@@ -2221,58 +2620,151 @@ async def analyze_place_reviews(request: AnalyzeReviewRequest):
             request.language,
             request.locale
         )
-        from serpapi_client import SerpApiClient
-        client = SerpApiClient()
         
-        deep_reviews = client.get_place_reviews(request.data_id, max_reviews=50)
+        place_id = None
+        try:
+            place_id = int(request.data_id)
+        except Exception:
+            pass
+
+        cache_id = str(place_id or request.data_id)
+        llm_cache_key = f"groq_review_analysis_{cache_id}_{response_language}"
         
-        if not deep_reviews:
+        # 1. CACHE CHECK (Redis)
+        if cache_manager:
+            cached_analysis = cache_manager.get(llm_cache_key)
+            if cached_analysis:
+                print(f"[ReviewInsight] Groq Analysis Cache Hit: {request.place_name or cache_id}")
+                return cached_analysis
+
+        # 2. LOAD REVIEWS
+        reviews = []
+        db_success = False
+        google_place_id = request.data_id
+        
+        # Query database first
+        if settings.DATABASE_URL and place_id:
+            try:
+                # Resolve google_place_id from local database first
+                p_rows = execute_query("SELECT google_place_id FROM places WHERE id = %s", (place_id,))
+                if p_rows and p_rows[0].get("google_place_id"):
+                    google_place_id = p_rows[0]["google_place_id"]
+
+                db_reviews = get_db_reviews(place_id)
+                reviews = [r.get("comment_text", "") for r in db_reviews if r.get("comment_text")]
+                db_success = True
+                print(f"[ReviewInsight] Loaded {len(reviews)} reviews from DB for {request.place_name}")
+            except Exception as db_err:
+                print(f"[ReviewInsight] DB query failed in analyze: {db_err}")
+
+        # Fallback to SerpAPI if database fails or returns no reviews
+        if not db_success or not reviews:
+            try:
+                from serpapi_client import SerpApiClient
+                client = SerpApiClient()
+                deep_reviews = client.get_place_reviews(google_place_id, max_reviews=50)
+                reviews = deep_reviews
+                print(f"[ReviewInsight] Loaded {len(reviews)} reviews from SerpAPI for {request.place_name}")
+            except Exception as e:
+                print(f"[ReviewInsight] SerpAPI query failed in analyze: {e}")
+
+        if not reviews:
             return {
                 "success": False,
                 "review_count": 0,
                 "analysis_text": localized("not_enough_reviews", response_language),
                 "specialties": []
             }
-        
-        count = len(deep_reviews)
+
+        count = len(reviews)
         place_name = request.place_name or ""
-        
-        # 1. Keyword bazlı specialty çıkarma (hızlı, her zaman çalışır)
-        insights = fast_extract_insights(deep_reviews, place_name)
-        insights = localize_review_insights(insights, response_language)
-        
-        # 2. Embedding tabanlı sentiment (model yüklüyse)
-        sentiment_bonus = model_manager.analyze_review_sentiment(deep_reviews)
-        
-        # 3. Analiz metni üret
-        analysis_text = build_review_analysis_text(
-            count,
-            insights.get('specialties', []),
-            sentiment_bonus,
-            response_language
-        )
-        
-        # Örnek yorumlar (her specialty için)
-        example_reviews = []
-        for spec in insights.get('specialties', [])[:3]:
-            if spec.get('example_review'):
-                example_reviews.append({
-                    "specialty": spec['label'],
-                    "emoji": spec['emoji'],
-                    "review": spec['example_review']
-                })
+
+        # 3. GROQ LLM ANALYSIS (Premium Dynamic Analysis)
+        llm_analysis = {}
+        if settings.GROQ_API_KEY:
+            try:
+                # If reviews are dicts (from DB), extract text. If strings (from SerpAPI), keep as is.
+                reviews_text = [r.get("comment_text") if isinstance(r, dict) else r for r in reviews]
+                reviews_text = [r for r in reviews_text if r]
+                
+                llm_analysis = await generate_review_analysis_llm(place_name, reviews_text, response_language)
+            except Exception as llm_err:
+                print(f"[ReviewInsight] Groq review analysis failed: {llm_err}")
+
+        # Construct final response
+        if llm_analysis and llm_analysis.get("analysis_text"):
+            # Use Groq response
+            sentiment_score = float(llm_analysis.get("sentiment_score") or 4.5)
+            analysis_text = llm_analysis.get("analysis_text")
+            specialties = llm_analysis.get("specialties") or []
+            summary = llm_analysis.get("summary") or ""
             
-        return {
-            "success": True,
-            "review_count": count,
-            "sentiment_score": round(sentiment_bonus, 3),
-            "analysis_text": analysis_text,
-            "specialties": insights.get('specialties', []),
-            "highlight_tags": insights.get('highlight_tags', []),
-            "example_reviews": example_reviews,
-            "summary": insights.get('summary', ''),
-            "language": response_language
-        }
+            # Map specialties to include required keys (key, display, etc. for frontend compatibility)
+            for spec in specialties:
+                spec["key"] = spec.get("label", "")
+                spec["display"] = f"{spec.get('emoji', '⭐')} {spec.get('label', '')}"
+                spec["mention_count"] = count // 4 or 1
+
+            highlight_tags = [spec.get("label", "") for spec in specialties]
+            
+            response_payload = {
+                "success": True,
+                "review_count": count,
+                "sentiment_score": sentiment_score,
+                "analysis_text": analysis_text,
+                "specialties": specialties,
+                "highlight_tags": highlight_tags,
+                "example_reviews": [],
+                "summary": summary,
+                "language": response_language,
+                "source": "groq_llm"
+            }
+        else:
+            # Fallback to local keyword/sentiment-based analyzer
+            reviews_text = [r.get("comment_text") if isinstance(r, dict) else r for r in reviews]
+            reviews_text = [r for r in reviews_text if r]
+            
+            insights = fast_extract_insights(reviews_text, place_name)
+            insights = localize_review_insights(insights, response_language)
+            sentiment_bonus = model_manager.analyze_review_sentiment(reviews_text)
+            
+            analysis_text = build_review_analysis_text(
+                count,
+                insights.get('specialties', []),
+                sentiment_bonus,
+                response_language
+            )
+            
+            example_reviews = []
+            for spec in insights.get('specialties', [])[:3]:
+                if spec.get('example_review'):
+                    example_reviews.append({
+                        "specialty": spec['label'],
+                        "emoji": spec['emoji'],
+                        "review": spec['example_review']
+                    })
+            
+            response_payload = {
+                "success": True,
+                "review_count": count,
+                "sentiment_score": round(3.0 + sentiment_bonus * 2.0, 3), # Map to 1-5 scale
+                "analysis_text": analysis_text,
+                "specialties": insights.get('specialties', []),
+                "highlight_tags": insights.get('highlight_tags', []),
+                "example_reviews": example_reviews,
+                "summary": insights.get('summary', ''),
+                "language": response_language,
+                "source": "fallback_keyword"
+            }
+
+        # Cache response in Redis (24h TTL)
+        if cache_manager:
+            try:
+                cache_manager.set(llm_cache_key, response_payload, ex=86400)
+            except Exception as cache_err:
+                print(f"[ReviewInsight] Cache write failed: {cache_err}")
+
+        return response_payload
     except Exception as e:
         print(f"[ReviewInsight] HATA Yorum analizi hatası: {e}")
         import traceback
@@ -2283,59 +2775,6 @@ async def analyze_place_reviews(request: AnalyzeReviewRequest):
             "analysis_text": localized("reviews_unavailable", response_language if 'response_language' in locals() else "tr"),
             "specialties": []
         }
-
-
-# ==================== GÖRSEL ARAMA ====================
-
-@app.post("/api/image-search")
-async def image_search(request: ImageSearchRequest):
-    """
-    Görsel ile mekan arama:
-    1. Görseli Gemini Vision ile analiz et → ne tür mekan istendiğini anla
-    2. Çıkan sorgu ile smart-search-v2 pipeline'ını çalıştır
-    3. Mekan kartlarını döndür
-    """
-    try:
-        # 1. Görsel Analiz
-        print(f"[ImageSearch] Gorsel analiz ediliyor... ({len(request.image_base64)} bytes b64)")
-        vision_result = await analyze_image_with_llama(request.image_base64, request.mime_type)
-
-        detected_query    = vision_result.get("query", "kafe")
-        detected_category = vision_result.get("category", "kafe")
-        description       = vision_result.get("description", "")
-        has_gemini_error  = "error" in vision_result
-
-        print(f"[ImageSearch] Tespit: '{detected_query}' / {detected_category}")
-
-        # 2. Smart Search pipeline'ını çağır (aynı mantık, farklı sorgu)
-        smart_req = SmartSearchRequest(
-            query=detected_query,
-            location=request.location,
-            limit=request.limit,
-            user_lat=request.user_lat,
-            user_lng=request.user_lng,
-            max_distance_km=request.max_distance_km,
-            analyze_reviews=False,
-            language=request.language,
-            locale=request.locale,
-        )
-        search_result = await smart_search_v2(smart_req)
-
-        # 3. Sonucu zenginleştir
-        return {
-            **search_result,
-            "image_analysis": {
-                "detected_query": detected_query,
-                "category": detected_category,
-                "description": description,
-                "gemini_available": not has_gemini_error,
-            }
-        }
-
-    except Exception as e:
-        import traceback
-        traceback.print_exc()
-        raise HTTPException(status_code=500, detail=str(e))
 
 
 if __name__ == "__main__":
