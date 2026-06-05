@@ -209,6 +209,7 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
         photo_url: place.photo_url || '',
         subtitle: place.subtitle || '',
         description: place.description || '',
+        address: place.address || '',
       }
     } as any);
     setTimeout(() => { navigatingRef.current = false; }, 1000);

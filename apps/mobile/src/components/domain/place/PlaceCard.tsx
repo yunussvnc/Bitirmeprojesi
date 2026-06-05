@@ -30,6 +30,7 @@ export interface PlaceCardProps {
   imagePlaceholder?: boolean;
   location?: string;
   explanation?: string;
+  address?: string;
   distance_m?: number;
   isRecommended?: boolean;
   hasMenu?: boolean;
@@ -46,6 +47,7 @@ const PlaceCardComponent = function PlaceCard({
   imagePlaceholder = false,
   location,
   explanation,
+  address,
   distance_m,
   isRecommended = false,
   hasMenu = false,
@@ -68,8 +70,10 @@ const PlaceCardComponent = function PlaceCard({
     ? tags[0]
     : null;
 
-  // Short description: use explanation (AI mode) or subtitle
-  const description = explanation || subtitle;
+  // Short description: use explanation (AI mode) or subtitle.
+  // Guard: never show subtitle if it is identical to the address (DB data leakage).
+  const cleanSubtitle = subtitle && address && subtitle.trim() === address.trim() ? undefined : subtitle;
+  const description = explanation || cleanSubtitle;
 
   return (
     <TouchableOpacity

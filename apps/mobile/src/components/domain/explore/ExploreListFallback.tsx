@@ -37,6 +37,7 @@ export function ExploreListFallback({ places, loading, onRefresh }: ExploreListF
       subtitle={item.subtitle}
       tags={item.tags}
       location={getLocationFromName(item.name)}
+      address={item.address}
       hasMenu={!!(item.menu_items && item.menu_items.length > 0)}
       onPress={() => {
         lightImpact();
@@ -49,6 +50,7 @@ export function ExploreListFallback({ places, loading, onRefresh }: ExploreListF
             photo_url: item.photo_url || '',
             subtitle: item.subtitle || '',
             description: item.description || '',
+            address: item.address || '',
           }
         } as any);
       }}

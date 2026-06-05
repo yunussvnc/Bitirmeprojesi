@@ -109,8 +109,9 @@ export default function PlaceDetailScreen({
         name: params.name || params.title || "",
         category: params.category || "",
         photo_url: params.photo_url || params.image || "",
-        description: params.description || params.subtitle || "",
+        description: params.description || "",
         subtitle: params.subtitle || "",
+        address: params.address || "",
         gallery_urls: [],
         menu_items: [],
         review_count: 0,
@@ -845,8 +846,8 @@ export default function PlaceDetailScreen({
             </Card>
           )}
 
-          {/* Atmosphere Section */}
-          {place?.description && (
+          {/* Atmosphere Section – only when description exists and is not identical to address */}
+          {place?.description && place.description !== place.address && (
             <Card style={styles.sectionCard}>
               <Text style={[h2Style, { fontSize: 20, marginBottom: spacing.base }]}>{t("place_detail.atmosphere")}</Text>
               <Text style={[bodyStyle, { lineHeight: 24, marginBottom: spacing.sm }]}>{place.description}</Text>
@@ -1075,6 +1076,7 @@ export default function PlaceDetailScreen({
                       imagePlaceholder={!hasPlaceImage(similarPlace)}
                       title={similarPlace.name}
                       subtitle={similarPlace.subtitle || similarPlace.description}
+                      address={similarPlace.address}
                       tags={similarPlace.tags}
                       hasMenu={!!(similarPlace.menu_items && similarPlace.menu_items.length > 0)}
                       onPress={() => router.push({
@@ -1086,6 +1088,7 @@ export default function PlaceDetailScreen({
                           photo_url: similarPlace.photo_url || "",
                           subtitle: similarPlace.subtitle || similarPlace.description || "",
                           description: similarPlace.description || "",
+                          address: similarPlace.address || "",
                         }
                       })}
                     />

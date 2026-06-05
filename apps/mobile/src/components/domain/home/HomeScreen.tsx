@@ -466,7 +466,7 @@ export default function HomeScreen() {
   const getLocationFromName = (name: string) => (name?.includes(" - ") ? name.split(" - ")[1]?.trim() : undefined);
 
   const navigatingRef = useRef(false);
-  const handlePlacePress = useCallback((id: string, name?: string, category?: string, photo_url?: string, subtitle?: string, description?: string) => {
+  const handlePlacePress = useCallback((id: string, name?: string, category?: string, photo_url?: string, subtitle?: string, description?: string, address?: string) => {
     if (navigatingRef.current) return;
     navigatingRef.current = true;
     lightImpact();
@@ -479,6 +479,7 @@ export default function HomeScreen() {
         photo_url: photo_url || "",
         subtitle: subtitle || "",
         description: description || "",
+        address: address || "",
       }
     } as any);
     setTimeout(() => {
@@ -513,6 +514,7 @@ export default function HomeScreen() {
           tags={it.tags ?? place?.tags}
           category={it.category ?? place?.category}
           location={loc}
+          address={(place as any)?.address}
           explanation={isAi ? (item as RecommendItem).explanation : undefined}
           distance_m={isAi ? (item as RecommendItem).distance_m : undefined}
           isRecommended={isAi}
@@ -523,7 +525,8 @@ export default function HomeScreen() {
             it.category ?? place?.category,
             it.photo_url ?? place?.photo_url,
             it.subtitle ?? place?.subtitle,
-            it.description ?? place?.description
+            it.description ?? place?.description,
+            (place as any)?.address
           )}
         />
       );

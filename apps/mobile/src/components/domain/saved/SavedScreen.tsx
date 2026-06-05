@@ -225,6 +225,7 @@ export default function SavedScreen() {
           title={item.name}
           subtitle={item.subtitle}
           tags={item.tags}
+          address={item.address}
           onPress={() => router.push({
             pathname: "/place/[id]",
             params: {
@@ -233,6 +234,8 @@ export default function SavedScreen() {
               subtitle: item.subtitle || "",
               photo_url: item.photo_url || "",
               category: item.category || "",
+              description: item.description || "",
+              address: item.address || "",
             }
           })}
         />
