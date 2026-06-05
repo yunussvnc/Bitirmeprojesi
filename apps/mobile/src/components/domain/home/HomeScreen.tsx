@@ -477,6 +477,7 @@ export default function HomeScreen() {
           title={it.name ?? t('common.venue')}
           subtitle={it.subtitle ?? place?.subtitle}
           tags={it.tags ?? place?.tags}
+          category={it.category ?? place?.category}
           location={loc}
           explanation={isAi ? (item as RecommendItem).explanation : undefined}
           distance_m={isAi ? (item as RecommendItem).distance_m : undefined}
@@ -726,7 +727,7 @@ const styles = StyleSheet.create({
   },
   sectionTitle: { fontSize: 16, fontWeight: "700", marginTop: s(5) },
   count: { fontSize: 13 },
-  listContent: { gap: s(5), paddingBottom: s(8) },
+  listContent: { gap: 12, paddingBottom: s(8), paddingHorizontal: 16 },
   listContentEmpty: { flexGrow: 1 },
   centerWrap: { minHeight: 320, justifyContent: "center" },
   skeletonWrap: { paddingHorizontal: 20, paddingBottom: 24, gap: 12 },

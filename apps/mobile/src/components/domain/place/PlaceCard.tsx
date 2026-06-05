@@ -2,9 +2,8 @@
  * Place Card Component
  * 
  * Large place card for listings and recommendations.
- * Spotify-inspired design with image, title, subtitle, and tags.
- * 
- * @module components/place/PlaceCard
+ * Design matches the screenshot: full-bleed image, location badge bottom-right,
+ * title + short description below, category chip bottom-right of content.
  */
 
 import React from 'react';
@@ -15,14 +14,11 @@ import {
   Text,
   StyleSheet,
   ImageSourcePropType,
-  type TextStyle,
 } from 'react-native';
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useTheme } from '@/src/hooks/useTheme';
-import { Chip } from '@/src/components/ui/Chip';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
-import { createTextStyle, spacing as designSpacing, radius, PLACE_CARD_ASPECT, PLACE_CARD_IMAGE_MAX_HEIGHT } from '@/src/constants/design';
 import { mediumImpact } from '@/src/utils/haptics';
 import { useTranslation } from 'react-i18next';
 
@@ -37,28 +33,11 @@ export interface PlaceCardProps {
   distance_m?: number;
   isRecommended?: boolean;
   hasMenu?: boolean;
+  category?: string;
   onPress: () => void;
   testID?: string;
 }
 
-/**
- * Place Card Component
- * 
- * Large card component for displaying places.
- * Features image with gradient overlay, title, subtitle, and tags.
- * 
- * @example
- * ```tsx
- * <PlaceCard
- *   image={require('@/assets/places/place-1.jpg')}
- *   title="Café Luna"
- *   subtitle="Sessiz, çalışmalık"
- *   tags={['quiet', 'work', 'cafe']}
- *   rank={1}
- *   onPress={() => navigateToPlace(placeId)}
- * />
- * ```
- */
 const PlaceCardComponent = function PlaceCard({
   image,
   title,
@@ -70,169 +49,147 @@ const PlaceCardComponent = function PlaceCard({
   distance_m,
   isRecommended = false,
   hasMenu = false,
+  category,
   onPress,
   testID,
 }: PlaceCardProps) {
-  const { colors, isDark } = useTheme();
+  const { colors } = useTheme();
   const { t } = useTranslation();
-  const titleStyle = createTextStyle('heading', colors.text.primary);
-  const subtitleColor = colors.text.primary + 'CC'; // %80 opacity
+
   const handlePress = () => {
     mediumImpact();
     onPress();
   };
 
-  // 3D depth colors derived from theme
-  const depthEdgeColor = isDark ? 'rgba(0,0,0,0.7)' : 'rgba(0,0,0,0.12)';
-  const depthHighlightColor = isDark ? 'rgba(255,255,255,0.06)' : 'rgba(255,255,255,0.8)';
+  // Category to display: prefer explicit prop, fall back to first tag
+  const categoryLabel = category
+    ? getTranslatedCategory(category, t)
+    : tags && tags.length > 0
+    ? tags[0]
+    : null;
+
+  // Short description: use explanation (AI mode) or subtitle
+  const description = explanation || subtitle;
 
   return (
-    <View style={styles.animatedWrapper}>
-      {/* 3D depth layer — sits behind the card to simulate thickness */}
-      <View style={[styles.depthLayer]} />
-      <TouchableOpacity
-        onPress={handlePress}
-        activeOpacity={0.95}
-        style={[styles.card]}
-        testID={testID}
-      >
-        <View style={styles.imageContainer}>
-          {imagePlaceholder ? (
-            <View style={[styles.imagePlaceholder, { backgroundColor: colors.surface.elevated }]}>
-              <IconSymbol name="mappin.and.ellipse" size={32} color={colors.text.tertiary} />
-              <Text style={[styles.placeholderLabel, { color: colors.text.tertiary }]} numberOfLines={1}>
-                {t('explore.no_image')}
-              </Text>
-            </View>
-          ) : (
-            <>
-              <Image source={image as any} style={[styles.image, { backgroundColor: colors.surface.elevated }]} contentFit="contain" cachePolicy="memory-disk" />
-              <LinearGradient
-                colors={['rgba(0,0,0,0.15)', 'rgba(0,0,0,0.5)', 'rgba(0,0,0,0.82)']}
-                locations={[0.2, 0.55, 1]}
-                style={styles.gradient}
-              />
-            </>
-          )}
-          {location ? (
-            <View
-              style={[
-                styles.locationBadge,
-                {
-                  backgroundColor: 'rgba(0,0,0,0.4)',
-                },
-              ]}
-            >
-              <IconSymbol name="mappin.circle.fill" size={11} color="rgba(255,255,255,0.95)" />
-              <Text style={styles.locationBadgeText} numberOfLines={1}>{location}</Text>
-            </View>
-          ) : null}
-        </View>
-        <View style={[styles.content, {
-          backgroundColor: colors.background.secondary,
-        }]}>
-          {isRecommended && (
-            <View style={[styles.recommendedBadge, { backgroundColor: colors.accent.primary + '18' }]}>
-              <IconSymbol name="sparkles" size={11} color={colors.accent.primary} />
-              <Text style={[styles.recommendedText, { color: colors.accent.primary }]}>{t('explore.recommended')}</Text>
-            </View>
-          )}
-          <View style={styles.titleRow}>
-            <Text style={[titleStyle as TextStyle, styles.title]} numberOfLines={2}>
-              {title}
+    <TouchableOpacity
+      onPress={handlePress}
+      activeOpacity={0.93}
+      style={[styles.card, { backgroundColor: colors.background.secondary }]}
+      testID={testID}
+    >
+      {/* ── Image section ── */}
+      <View style={styles.imageContainer}>
+        {imagePlaceholder ? (
+          <View style={[styles.imagePlaceholder, { backgroundColor: colors.surface.elevated }]}>
+            <IconSymbol name="mappin.and.ellipse" size={32} color={colors.text.tertiary} />
+            <Text style={[styles.placeholderLabel, { color: colors.text.tertiary }]} numberOfLines={1}>
+              {t('explore.no_image')}
             </Text>
-            {distance_m != null && (
-              <Text style={[styles.distanceText, { color: colors.text.tertiary }]}>
-                {distance_m < 1000 ? `${distance_m}m` : `${(distance_m / 1000).toFixed(1)}km`}
-              </Text>
-            )}
           </View>
-          {explanation && (
-            <Text style={[styles.explanation, { color: colors.text.secondary }]} numberOfLines={3}>
-              {explanation}
+        ) : (
+          <>
+            <Image
+              source={image as any}
+              style={styles.image}
+              contentFit="cover"
+              cachePolicy="memory-disk"
+            />
+            {/* Bottom gradient so location badge is readable */}
+            <LinearGradient
+              colors={['transparent', 'rgba(0,0,0,0.55)']}
+              locations={[0.5, 1]}
+              style={styles.gradient}
+            />
+          </>
+        )}
+
+        {/* Location badge — bottom right of image */}
+        {location && (
+          <View style={styles.locationBadge}>
+            <IconSymbol name="mappin.circle.fill" size={11} color="rgba(255,255,255,0.9)" />
+            <Text style={styles.locationBadgeText} numberOfLines={1}>
+              {location}
+            </Text>
+          </View>
+        )}
+
+        {/* AI recommended badge — top left */}
+        {isRecommended && (
+          <View style={[styles.aiBadge, { backgroundColor: colors.accent.primary }]}>
+            <IconSymbol name="sparkles" size={10} color="#fff" />
+            <Text style={styles.aiBadgeText}>{t('explore.recommended')}</Text>
+          </View>
+        )}
+      </View>
+
+      {/* ── Content section ── */}
+      <View style={styles.content}>
+        {/* Title row */}
+        <View style={styles.titleRow}>
+          <Text style={[styles.title, { color: colors.text.primary }]} numberOfLines={2}>
+            {title}
+          </Text>
+          {distance_m != null && (
+            <Text style={[styles.distance, { color: colors.text.tertiary }]}>
+              {distance_m < 1000
+                ? `${Math.round(distance_m)}m`
+                : `${(distance_m / 1000).toFixed(1)}km`}
             </Text>
           )}
-          {!explanation && subtitle && (
-            <Text style={[styles.subtitle, { color: subtitleColor }]} numberOfLines={2}>
-              {subtitle}
-            </Text>
-          )}
-          {tags && tags.length > 0 && (
-            <View style={styles.tags}>
-              {hasMenu && (
-                <View style={styles.menuBadge}>
-                  <IconSymbol name="list.bullet.clipboard.fill" size={10} color="#10b981" />
-                  <Text style={styles.menuBadgeText}>{t('explore.menu')}</Text>
-                </View>
-              )}
-              {tags.slice(0, 3).map((tag, index) => (
-                <Chip key={index} label={tag} size="small" />
-              ))}
-            </View>
-          )}
-          {!tags?.length && hasMenu && (
-            <View style={styles.tags}>
-              <View style={styles.menuBadge}>
+        </View>
+
+        {/* Description — short, max 2 lines */}
+        {description ? (
+          <Text
+            style={[styles.description, { color: colors.text.secondary }]}
+            numberOfLines={2}
+          >
+            {description}
+          </Text>
+        ) : null}
+
+        {/* Bottom row: category chip right-aligned */}
+        <View style={styles.bottomRow}>
+          <View style={styles.leftBadges}>
+            {hasMenu && (
+              <View style={[styles.menuBadge]}>
                 <IconSymbol name="list.bullet.clipboard.fill" size={10} color="#10b981" />
                 <Text style={styles.menuBadgeText}>{t('explore.menu')}</Text>
               </View>
+            )}
+          </View>
+
+          {categoryLabel ? (
+            <View style={[styles.categoryChip, { backgroundColor: colors.surface.elevated, borderColor: colors.surface.border }]}>
+              <Text style={[styles.categoryChipText, { color: colors.text.secondary }]}>
+                {categoryLabel}
+              </Text>
             </View>
-          )}
+          ) : null}
         </View>
-      </TouchableOpacity>
-    </View>
+      </View>
+    </TouchableOpacity>
   );
 };
 
 export const PlaceCard = React.memo(PlaceCardComponent);
 
 const styles = StyleSheet.create({
-  animatedWrapper: {
-    // 3D multi-layer shadow for depth
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 6 },
-    shadowOpacity: 0.25,
-    shadowRadius: 12,
-    elevation: 8,
-  },
-  depthLayer: {
-    // Fake 3D thickness layer behind the card
-    position: 'absolute',
-    left: 2,
-    right: 2,
-    bottom: -4,
-    height: 8,
-    borderBottomLeftRadius: radius.lg,
-    borderBottomRightRadius: radius.lg,
-  },
   card: {
     width: '100%',
-    borderRadius: radius.lg,
+    borderRadius: 16,
     overflow: 'hidden',
-    // Subtle border for 3D edge
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: 'rgba(255,255,255,0.08)',
-  },
-  topHighlight: {
-    // Top edge light reflection for 3D feel
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    height: 1.5,
-    zIndex: 10,
-    borderTopLeftRadius: radius.lg,
-    borderTopRightRadius: radius.lg,
-  },
-  bottomEdge: {
-    // Bottom dark edge for 3D thickness illusion
-    height: 3,
-    marginTop: -1,
+    // Shadow
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.18,
+    shadowRadius: 10,
+    elevation: 6,
   },
   imageContainer: {
     width: '100%',
-    aspectRatio: PLACE_CARD_ASPECT,
-    maxHeight: PLACE_CARD_IMAGE_MAX_HEIGHT,
+    aspectRatio: 16 / 9,
   },
   image: {
     ...StyleSheet.absoluteFillObject,
@@ -243,7 +200,7 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     alignItems: 'center',
     justifyContent: 'center',
-    gap: designSpacing.sm,
+    gap: 8,
   },
   placeholderLabel: {
     fontSize: 13,
@@ -254,94 +211,111 @@ const styles = StyleSheet.create({
     bottom: 0,
     left: 0,
     right: 0,
-    height: '70%',
+    height: '50%',
   },
+  // Location badge — bottom RIGHT of image (matching screenshot)
   locationBadge: {
     position: 'absolute',
-    bottom: designSpacing.sm,
-    left: designSpacing.sm,
+    bottom: 10,
+    right: 10,
     flexDirection: 'row',
     alignItems: 'center',
     gap: 4,
     paddingVertical: 4,
     paddingHorizontal: 8,
     borderRadius: 8,
+    backgroundColor: 'rgba(0,0,0,0.45)',
   },
   locationBadgeText: {
     fontSize: 12,
     fontWeight: '600',
     color: 'rgba(255,255,255,0.95)',
-    maxWidth: 120,
+    maxWidth: 130,
   },
-  content: {
-    paddingVertical: designSpacing.base,
-    paddingHorizontal: designSpacing.md,
-  },
-  recommendedBadge: {
+  aiBadge: {
+    position: 'absolute',
+    top: 10,
+    left: 10,
     flexDirection: 'row',
     alignItems: 'center',
-    alignSelf: 'flex-start',
     gap: 4,
-    paddingHorizontal: 8,
     paddingVertical: 3,
+    paddingHorizontal: 8,
     borderRadius: 8,
-    marginBottom: 6,
   },
-  recommendedText: {
-    fontSize: 11,
+  aiBadgeText: {
+    fontSize: 10,
     fontWeight: '700',
-    letterSpacing: 0.3,
+    color: '#fff',
+    letterSpacing: 0.2,
+  },
+  content: {
+    paddingVertical: 14,
+    paddingHorizontal: 14,
   },
   titleRow: {
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'flex-start',
     justifyContent: 'space-between',
     marginBottom: 6,
+    gap: 8,
   },
   title: {
-    fontSize: 16,
+    fontSize: 17,
     fontWeight: '700',
-    letterSpacing: 0.1,
+    letterSpacing: -0.2,
     flex: 1,
+    lineHeight: 22,
   },
-  distanceText: {
+  distance: {
     fontSize: 12,
     fontWeight: '600',
-    marginLeft: 8,
-  },
-  explanation: {
-    fontSize: 13,
-    lineHeight: 19,
-    marginBottom: 8,
-    fontStyle: 'italic',
-  },
-  subtitle: {
-    fontSize: 14,
-    lineHeight: 20,
-    marginBottom: 8,
-  },
-  tags: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 6,
     marginTop: 2,
-    justifyContent: 'flex-end',
+  },
+  description: {
+    fontSize: 13,
+    lineHeight: 18,
+    marginBottom: 10,
+  },
+  bottomRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    marginTop: 2,
+  },
+  leftBadges: {
+    flexDirection: 'row',
+    gap: 6,
+    flex: 1,
   },
   menuBadge: {
     flexDirection: 'row',
     alignItems: 'center',
     gap: 3,
     paddingHorizontal: 8,
-    paddingVertical: 3,
+    paddingVertical: 4,
     borderRadius: 8,
     backgroundColor: 'rgba(16, 185, 129, 0.1)',
     borderWidth: 1,
     borderColor: 'rgba(16, 185, 129, 0.2)',
+    alignSelf: 'flex-start',
   },
   menuBadgeText: {
     fontSize: 10,
     fontWeight: '700',
     color: '#10b981',
     letterSpacing: 0.3,
+  },
+  // Category chip — bottom RIGHT of content (matching screenshot)
+  categoryChip: {
+    paddingHorizontal: 12,
+    paddingVertical: 5,
+    borderRadius: 10,
+    borderWidth: 1,
+    alignSelf: 'flex-end',
+  },
+  categoryChipText: {
+    fontSize: 12,
+    fontWeight: '600',
   },
 });
