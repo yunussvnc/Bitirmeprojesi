@@ -108,7 +108,7 @@ export default function ArchivedMessagesScreen() {
                     if (isEditMode) {
                         toggleSelection(item.id);
                     } else {
-                        router.push(`/chat/${item.id}` as any);
+                        router.push(`/chat/${item.id}?name=${encodeURIComponent(item.name)}&avatar=${encodeURIComponent(item.avatar)}&targetUserId=${item.targetUserId}` as any);
                     }
                 }}
             >

@@ -24,6 +24,7 @@ import {
   Keyboard,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { router } from "expo-router";
 import { useTheme } from "@/src/hooks/useTheme";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { createTextStyle, spacing } from "@/src/constants/design";
@@ -268,11 +269,19 @@ export function CommentBottomSheet({ visible, onClose, postId, onCommentAdded }:
         delayLongPress={400}
       >
         <View style={[styles.commentRow, { borderBottomColor: colors.surface.border }]}>
-          <View style={styles.commentContent}>
+          <TouchableOpacity
+            style={styles.commentContent}
+            activeOpacity={0.7}
+            onPress={() => {
+              Keyboard.dismiss();
+              onClose();
+              router.push(`/user/${item.user_id}` as any);
+            }}
+          >
             <Text style={[styles.commentAuthor, { color: colors.text.primary }]}>@{item.author_username || `user_${item.user_id}`}</Text>
             <Text style={[styles.commentText, { color: colors.text.secondary }]}>{item.text}</Text>
             <Text style={[styles.commentTime, { color: colors.text.tertiary }]}>{timeAgo(item.created_at)}</Text>
-          </View>
+          </TouchableOpacity>
 
           <View style={{ flexDirection: "row", alignItems: "center", gap: 12 }}>
             {isOwn && (

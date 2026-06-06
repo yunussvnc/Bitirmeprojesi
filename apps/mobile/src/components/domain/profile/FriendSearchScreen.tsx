@@ -160,7 +160,7 @@ export default function FriendSearchScreen() {
           ? `${user.first_name}${user.last_name ? ` ${user.last_name}` : ""}`
           : user.username || `User ${user.id}`;
           
-        router.push(`/chat/${res.conversation_id}?name=${encodeURIComponent(displayName)}&avatar=${encodeURIComponent(user.avatar_url || "")}` as any);
+        router.push(`/chat/${res.conversation_id}?name=${encodeURIComponent(displayName)}&avatar=${encodeURIComponent(user.avatar_url || "")}&targetUserId=${user.id}` as any);
       } catch (e) {
         handleApiError(e);
       }

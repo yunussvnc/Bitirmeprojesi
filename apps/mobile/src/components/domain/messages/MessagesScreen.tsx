@@ -219,7 +219,7 @@ export default function MessagesScreen() {
                         toggleSelection(item.id);
                     } else {
                         markAsRead(item.id);
-                        router.push(`/chat/${item.id}` as any);
+                        router.push(`/chat/${item.id}?name=${encodeURIComponent(item.name)}&avatar=${encodeURIComponent(item.avatar)}&targetUserId=${item.targetUserId}` as any);
                     }
                 }}
             >

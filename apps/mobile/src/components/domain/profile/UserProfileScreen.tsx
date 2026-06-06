@@ -117,60 +117,63 @@ export default function UserProfileScreen() {
     load(true);
   }, [load]);
 
+  const profileRef = React.useRef(profile);
+  useEffect(() => {
+    profileRef.current = profile;
+  }, [profile]);
+
   // Dummygram: Prevent spam clicks with debounce while keeping UI optimistic
   const handleFollow = useCallback(
     debounce(async () => {
-      // Use the latest profile state inside the debounced function
-      setProfile((currentProfile) => {
-        if (!currentProfile || followLoading || !currentUser) return currentProfile;
-        
-        lightImpact();
-        setFollowLoading(true);
-        
-        // Optimistic update
-        const prevProfile = { ...currentProfile };
-        const optimisticProfile = {
-          ...currentProfile,
-          is_following: !currentProfile.is_following,
-          follow_status: currentProfile.is_following ? null : ('accepted' as any),
-        };
+      const currentProfile = profileRef.current;
+      if (!currentProfile || followLoading || !currentUser) return;
+      
+      lightImpact();
+      setFollowLoading(true);
+      
+      // Optimistic update
+      const prevProfile = { ...currentProfile };
+      const willFollow = !currentProfile.is_following;
+      const optimisticProfile: UserProfile = {
+        ...currentProfile,
+        is_following: willFollow,
+        follow_status: willFollow ? ('accepted' as any) : null,
+        followers_count: currentProfile.followers_count + (willFollow ? 1 : -1),
+      };
 
-        // Async API Call
-        (async () => {
+      setProfile(optimisticProfile);
+
+      // Async API Call
+      try {
+        const res = await toggleFollow(currentProfile.id);
+        setProfile((p) => {
+          if (!p) return p;
+          return {
+            ...p,
+            is_following: res.status === 'accepted',
+            follow_status: res.status as 'pending' | 'accepted' | null,
+            followers_count: res.followers_count,
+          };
+        });
+        
+        // After follow succeeds, refresh notifications to ensure follow notification appears
+        if (res.status === 'accepted') {
           try {
-            const res = await toggleFollow(currentProfile.id);
-            setProfile((p) => {
-              if (!p) return p;
-              return {
-                ...p,
-                is_following: res.status === 'accepted',
-                follow_status: res.status as 'pending' | 'accepted' | null,
-                followers_count: res.followers_count,
-              };
-            });
-            
-            // After follow succeeds, refresh notifications to ensure follow notification appears
-            if (res.status === 'accepted') {
-              try {
-                const store = useNotificationStore.getState();
-                setTimeout(() => {
-                  store.loadNotifications(1);
-                }, 500);
-              } catch (e) {
-                // Silently fail — notifications are nice-to-have
-              }
-            }
+            const store = useNotificationStore.getState();
+            setTimeout(() => {
+              store.loadNotifications(1);
+            }, 500);
           } catch (e) {
-            // Revert on error
-            setProfile(prevProfile);
-            handleApiError(e);
-          } finally {
-            setFollowLoading(false);
+            // Silently fail — notifications are nice-to-have
           }
-        })();
-
-        return optimisticProfile;
-      });
+        }
+      } catch (e) {
+        // Revert on error
+        setProfile(prevProfile);
+        handleApiError(e);
+      } finally {
+        setFollowLoading(false);
+      }
     }, 500, { leading: true, trailing: false }),
     [followLoading, currentUser]
   );
@@ -192,7 +195,7 @@ export default function UserProfileScreen() {
       const res = await openConversation(profile.id);
       const name = encodeURIComponent(res.name);
       const avatar = encodeURIComponent(res.avatar_url || '');
-      router.push(`/chat/${res.conversation_id}?name=${name}&avatar=${avatar}` as any);
+      router.push(`/chat/${res.conversation_id}?name=${name}&avatar=${avatar}&targetUserId=${profile.id}` as any);
     } catch (e) {
       handleApiError(e);
     } finally {

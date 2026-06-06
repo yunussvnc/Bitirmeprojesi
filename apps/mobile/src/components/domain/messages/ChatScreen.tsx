@@ -225,7 +225,7 @@ export default function ChatScreen() {
     const { colors } = useTheme();
     const insets = useSafeAreaInsets();
     const router = useRouter();
-    const { chatId, name: nameParam, avatar: avatarParam, viewDeleted } = useLocalSearchParams<{ chatId: string; name?: string; avatar?: string; viewDeleted?: string }>();
+    const { chatId, name: nameParam, avatar: avatarParam, targetUserId: targetUserIdParam, viewDeleted } = useLocalSearchParams<{ chatId: string; name?: string; avatar?: string; targetUserId?: string; viewDeleted?: string }>();
     const [inputText, setInputText] = useState("");
     const [lastSeenId, setLastSeenId] = useState<string | null>(null);
     const [isOptionsVisible, setIsOptionsVisible] = useState(false);
@@ -623,7 +623,7 @@ export default function ChatScreen() {
         name: decodeURIComponent(nameParam),
         avatar: avatarParam ? decodeURIComponent(avatarParam) : `https://ui-avatars.com/api/?name=${encodeURIComponent(nameParam)}&background=random`,
         isOnline: false,
-        targetUserId: undefined,
+        targetUserId: targetUserIdParam ? parseInt(targetUserIdParam, 10) : undefined,
     } : {
         name: "Kullanıcı",
         avatar: "https://ui-avatars.com/api/?name=K&background=random",
@@ -666,8 +666,8 @@ export default function ChatScreen() {
 
     const handleBlock = async () => {
         setIsOptionsVisible(false);
-        // BUG-13: Parse user id — handle both numeric and 'match_xxx_userId' formats
-        const targetId = _parseTargetUserId(resolvedChatId);
+        // BUG-13: Parse user id — prioritize contact.targetUserId
+        const targetId = contact.targetUserId || _parseTargetUserId(resolvedChatId);
         if (targetId !== null) {
             try {
                 await toggleBlockUser(targetId);
@@ -691,8 +691,8 @@ export default function ChatScreen() {
         }
 
         setIsReportVisible(false);
-        // BUG-13: Parse user id
-        const targetId = _parseTargetUserId(resolvedChatId);
+        // BUG-13: Parse user id — prioritize contact.targetUserId
+        const targetId = contact.targetUserId || _parseTargetUserId(resolvedChatId);
         if (targetId !== null) {
             try {
                 await createReport({ target_type: "user", target_id: targetId, reason: "harassment", description: reportText.trim() });
