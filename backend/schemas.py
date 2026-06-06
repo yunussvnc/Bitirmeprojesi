@@ -385,6 +385,7 @@ class RecommendRequest(BaseModel):
     location: Optional[Location] = None
     radius_m: int = 3000
     category: Optional[str] = None
+    district: Optional[str] = None  # Kullanıcının seçtiği ilçe (dropdown)
 
 class RecommendItem(BaseModel):
     id: int

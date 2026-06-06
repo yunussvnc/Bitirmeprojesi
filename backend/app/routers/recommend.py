@@ -32,6 +32,7 @@ def recommend_places(
         user_lng=user_lng,
         radius_m=req.radius_m,
         category=req.category,
+        selected_district=req.district,
     )
 
     items = [schemas.RecommendItem(**it) for it in result["items"]]

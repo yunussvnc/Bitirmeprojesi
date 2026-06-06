@@ -50,20 +50,7 @@ import { useAppStore } from "@/src/store/useAppStore";
 import { useTabBarVisibility } from "@/src/components/layout/TabBarVisibilityContext";
 import { useTranslation } from "react-i18next";
 
-/** İstanbul ilçeleri */
-const DISTRICTS = [
-  "Adalar", "Arnavutköy", "Ataşehir", "Avcılar", "Bağcılar", "Bahçelievler", "Bakırköy",
-  "Başakşehir", "Bayrampaşa", "Beşiktaş", "Beykoz", "Beylikdüzü", "Beyoğlu", "Büyükçekmece",
-  "Çatalca", "Çekmeköy", "Esenler", "Esenyurt", "Eyüpsultan", "Fatih", "Gaziosmanpaşa",
-  "Güngören", "Kadıköy", "Kağıthane", "Kartal", "Küçükçekmece", "Maltepe", "Pendik",
-  "Sancaktepe", "Sarıyer", "Silivri", "Şile", "Şişli", "Sultanbeyli", "Sultangazi",
-  "Tuzla", "Ümraniye", "Üsküdar", "Zeytinburnu",
-];
 
-const PLACE_TYPES = [
-  "Bar", "Meyhane", "Gece Kulübü", "Kafe", "Restoran", "Fast Food",
-  "Kebapçı", "Balıkçı", "Tatlıcı", "Pastane", "Burgerci", "Pizzacı", "Dönerci", "Nargile Cafe",
-];
 
 type DisplayMode = "browse" | "ai";
 
@@ -251,11 +238,8 @@ export default function HomeScreen() {
   const { hide: hideTabBar, show: showTabBar } = useTabBarVisibility();
   const insets = useSafeAreaInsets();
   const [filters, setFilters] = useState<FilterValues>({
-    location: null,
-    category: null,
-    vibe: null,
-    purpose: null,
-    budget: null,
+    province: null,
+    district: null,
   });
 
   useEffect(() => {
@@ -315,13 +299,13 @@ export default function HomeScreen() {
       const res: RecommendResponse = await recommendPlaces({
         queryText: query.trim() || undefined,
         preferences: {
-          vibe: prefs.vibe || filters.vibe || undefined,
-          purpose: prefs.purpose || filters.purpose || undefined,
-          budget: prefs.budget || filters.budget || undefined,
+          vibe: prefs.vibe || undefined,
+          purpose: prefs.purpose || undefined,
+          budget: prefs.budget || undefined,
         },
         location: userLocation || undefined,
         radius_m: 5000,
-        category: filters.category || undefined,
+        district: filters.district || undefined,
       });
       setAiItems(res.items ?? []);
       setAiSummary(res.summary || "");
@@ -399,36 +383,16 @@ export default function HomeScreen() {
 
   const filteredPlaces = useMemo(() => {
     let list = [...allPlaces];
-    const norm = (str: string) =>
-      str
-        .toLowerCase()
-        .replace(/ı/g, "i")
-        .replace(/ş/g, "s")
-        .replace(/ğ/g, "g")
-        .replace(/ü/g, "u")
-        .replace(/ö/g, "o")
-        .replace(/ç/g, "c");
-
-    if (filters.category) {
-      const search = norm(filters.category);
-      list = list.filter((p) => {
-        const cat = norm(p.category ?? "");
-        const name = norm(p.name ?? "");
-        const desc = norm(p.description ?? "");
-        const sub = norm(p.subtitle ?? "");
-        return cat.includes(search) || name.includes(search) || desc.includes(search) || sub.includes(search);
-      });
-    }
-    if (filters.location) {
-      const locNorm = filters.location.toLowerCase();
+    if (filters.district) {
+      const locNorm = filters.district.toLowerCase();
       list = list.filter((p) => {
         const name = (p.name ?? "").toLowerCase();
         const addr = (p.address ?? "").toLowerCase();
-        return name.includes(` - ${locNorm}`) || name.includes(` ${locNorm}`) || addr.includes(locNorm);
+        return name.includes(locNorm) || addr.includes(locNorm);
       });
     }
     return list.slice(0, 12);
-  }, [allPlaces, filters.category, filters.location]);
+  }, [allPlaces, filters.district]);
 
   const displayList = displayMode === "ai" ? aiItems : filteredPlaces;
   const isAiMode = displayMode === "ai";
@@ -436,19 +400,14 @@ export default function HomeScreen() {
   const handleApplyFilters = useCallback(
     (v: FilterValues) => {
       setFilters(v);
-      patchPrefs({
-        vibe: v.vibe ?? undefined,
-        purpose: v.purpose ?? undefined,
-        budget: v.budget ?? undefined,
-      });
     },
-    [patchPrefs]
+    []
   );
 
   const clearAll = useCallback(() => {
     lightImpact();
     resetPrefs();
-    setFilters({ location: null, category: null, vibe: null, purpose: null, budget: null });
+    setFilters({ province: null, district: null });
     setQuery("");
     setAiItems([]);
     setAiSummary("");
@@ -602,8 +561,6 @@ export default function HomeScreen() {
           onClose={() => setFilterSheetOpen(false)}
           values={filters}
           onApply={handleApplyFilters}
-          districts={DISTRICTS}
-          placeTypes={PLACE_TYPES}
         />
 
         <FlatList

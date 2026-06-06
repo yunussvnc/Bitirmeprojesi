@@ -1,6 +1,6 @@
 /**
- * FilterBottomSheet – Premium filtre bottom sheet.
- * Segmented kontroller, choice chip'ler ve SelectField'ler.
+ * FilterBottomSheet – Konum Seçimi bottom sheet.
+ * İl ve İlçe dropdown'ları ile konum bazlı filtreleme.
  */
 
 import React, { useState, useEffect, useRef } from 'react';
@@ -25,11 +25,8 @@ import { useTranslation } from "react-i18next";
 /* ── Types ── */
 
 export interface FilterValues {
-  location: string | null;
-  category: string | null;
-  vibe: 'quiet' | 'lively' | null;
-  purpose: 'work' | 'friends' | 'date' | null;
-  budget: 'low' | 'mid' | 'high' | null;
+  province: string | null;
+  district: string | null;
 }
 
 export interface FilterBottomSheetProps {
@@ -37,136 +34,132 @@ export interface FilterBottomSheetProps {
   onClose: () => void;
   values: FilterValues;
   onApply: (v: FilterValues) => void;
-  districts: string[];
-  placeTypes: string[];
 }
 
-/* ── Helpers ── */
+/* ── Data ── */
 
-interface SegmentOption<T extends string> {
-  value: T;
-  label: string;
-}
+const PROVINCES = ["İstanbul"];
 
-function Segment<T extends string>({
-  options,
-  value,
-  onChange,
-}: {
-  options: SegmentOption<T>[];
-  value: T | null;
-  onChange: (v: T | null) => void;
-}) {
-  const { colors } = useTheme();
-  return (
-    <View style={segStyles.row}>
-      {options.map((o) => {
-        const active = o.value === value;
-        return (
-          <TouchableOpacity
-            key={o.value}
-            onPress={() => { lightImpact(); onChange(active ? null : o.value); }}
-            activeOpacity={0.7}
-            style={[
-              segStyles.item,
-              {
-                backgroundColor: active ? colors.accent.primary : colors.background.tertiary,
-                borderColor: active ? colors.accent.primary : colors.surface.border,
-              },
-            ]}
-          >
-            <Text
-              style={[
-                segStyles.label,
-                { color: active ? colors.accent.onPrimary : colors.text.secondary },
-              ]}
-            >
-              {o.label}
-            </Text>
-          </TouchableOpacity>
-        );
-      })}
-    </View>
-  );
-}
+const ISTANBUL_DISTRICTS = [
+  "Adalar", "Arnavutköy", "Ataşehir", "Avcılar", "Bağcılar", "Bahçelievler", "Bakırköy",
+  "Başakşehir", "Bayrampaşa", "Beşiktaş", "Beykoz", "Beylikdüzü", "Beyoğlu", "Büyükçekmece",
+  "Çatalca", "Çekmeköy", "Esenler", "Esenyurt", "Eyüpsultan", "Fatih", "Gaziosmanpaşa",
+  "Güngören", "Kadıköy", "Kağıthane", "Kartal", "Küçükçekmece", "Maltepe", "Pendik",
+  "Sancaktepe", "Sarıyer", "Silivri", "Sultanbeyli", "Sultangazi", "Şile", "Şişli",
+  "Tuzla", "Ümraniye", "Üsküdar", "Zeytinburnu",
+];
 
-const segStyles = StyleSheet.create({
-  row: { flexDirection: 'row', gap: 8, flexWrap: 'wrap' },
-  item: {
-    paddingHorizontal: 16,
-    paddingVertical: 9,
-    borderRadius: 20,
-    borderWidth: 1,
-  },
-  label: { fontSize: 13, fontWeight: '600' },
-});
+const DISTRICT_MAP: Record<string, string[]> = {
+  "İstanbul": ISTANBUL_DISTRICTS,
+};
 
-function PickerChip({
+/* ── Dropdown Picker ── */
+
+function DropdownPicker({
   label,
   value,
   options,
   onSelect,
+  disabled,
+  placeholder,
 }: {
   label: string;
   value: string | null;
-  options: { value: string; label: string }[];
+  options: string[];
   onSelect: (v: string | null) => void;
+  disabled?: boolean;
+  placeholder?: string;
 }) {
   const { colors } = useTheme();
-  const { t } = useTranslation();
   const [open, setOpen] = useState(false);
-  const display = value ? options.find((o) => o.value === value)?.label ?? value : label;
+  const display = value || placeholder || label;
 
   return (
     <>
+      <Text style={[dpStyles.label, { color: colors.text.tertiary }]}>{label}</Text>
       <TouchableOpacity
-        onPress={() => { lightImpact(); setOpen(true); }}
-        activeOpacity={0.7}
+        onPress={() => {
+          if (!disabled) {
+            lightImpact();
+            setOpen(true);
+          }
+        }}
+        activeOpacity={disabled ? 1 : 0.7}
         style={[
-          pkStyles.chip,
+          dpStyles.selector,
           {
-            backgroundColor: value ? colors.accent.primary + '14' : colors.background.tertiary,
-            borderColor: value ? colors.accent.primary + '40' : colors.surface.border,
+            backgroundColor: disabled
+              ? colors.background.tertiary + '60'
+              : value
+              ? colors.accent.primary + '12'
+              : colors.background.tertiary,
+            borderColor: disabled
+              ? colors.surface.border + '60'
+              : value
+              ? colors.accent.primary + '30'
+              : colors.surface.border,
+            opacity: disabled ? 0.5 : 1,
           },
         ]}
       >
         <Text
           style={[
-            pkStyles.text,
-            { color: value ? colors.accent.primary : colors.text.secondary },
+            dpStyles.selectorText,
+            {
+              color: disabled
+                ? colors.text.tertiary
+                : value
+                ? colors.text.primary
+                : colors.text.secondary,
+            },
           ]}
           numberOfLines={1}
         >
           {display}
         </Text>
-        <IconSymbol name="chevron.down" size={14} color={value ? colors.accent.primary : colors.text.tertiary} />
+        <IconSymbol
+          name="chevron.down"
+          size={16}
+          color={disabled ? colors.text.tertiary + '60' : value ? colors.accent.primary : colors.text.tertiary}
+        />
       </TouchableOpacity>
 
       <Modal visible={open} transparent animationType="fade" onRequestClose={() => setOpen(false)}>
-        <Pressable style={pkStyles.overlay} onPress={() => setOpen(false)}>
-          <Pressable style={[pkStyles.sheet, { backgroundColor: colors.surface.elevated }]} onPress={() => {}}>
-            <View style={[pkStyles.sheetHeader, { borderBottomColor: colors.surface.border }]}>
-              <Text style={[styles.title, { color: colors.text.primary }]}>{t("home.filters")}</Text>
+        <Pressable style={dpStyles.overlay} onPress={() => setOpen(false)}>
+          <Pressable style={[dpStyles.sheet, { backgroundColor: colors.surface.elevated }]} onPress={() => {}}>
+            <View style={[dpStyles.sheetHeader, { borderBottomColor: colors.surface.border }]}>
+              <Text style={[dpStyles.sheetTitle, { color: colors.text.primary }]}>{label}</Text>
               <TouchableOpacity onPress={() => setOpen(false)} hitSlop={12}>
                 <IconSymbol name="xmark" size={18} color={colors.text.tertiary} />
               </TouchableOpacity>
             </View>
-            <ScrollView style={pkStyles.scroll} showsVerticalScrollIndicator>
+            <ScrollView style={dpStyles.scroll} showsVerticalScrollIndicator>
+              {/* Tümü seçeneği */}
               <TouchableOpacity
                 onPress={() => { lightImpact(); onSelect(null); setOpen(false); }}
-                style={[pkStyles.option, !value && { backgroundColor: colors.accent.primary + '14' }]}
+                style={[dpStyles.option, !value && { backgroundColor: colors.accent.primary + '14' }]}
               >
-                <Text style={[pkStyles.optText, { color: !value ? colors.accent.primary : colors.text.primary }]}>{t("filter_extra.all")}</Text>
+                <Text style={[dpStyles.optText, { color: !value ? colors.accent.primary : colors.text.primary }]}>Tümü</Text>
                 {!value && <IconSymbol name="checkmark" size={16} color={colors.accent.primary} />}
               </TouchableOpacity>
               {options.map((o) => (
                 <TouchableOpacity
-                  key={o.value}
-                  onPress={() => { lightImpact(); onSelect(o.value); setOpen(false); }}
-                  style={[pkStyles.option, o.value === value && { backgroundColor: colors.accent.primary + '14' }]}
+                  key={o}
+                  onPress={() => { lightImpact(); onSelect(o); setOpen(false); }}
+                  style={[dpStyles.option, o === value && { backgroundColor: colors.accent.primary + '14' }]}
                 >
-                  <Text style={[pkStyles.optText, { color: o.value === value ? colors.accent.primary : colors.text.primary, fontWeight: o.value === value ? '600' : '400' }]}>{o.label}</Text>
-                  {o.value === value && <IconSymbol name="checkmark" size={16} color={colors.accent.primary} />}
+                  <Text
+                    style={[
+                      dpStyles.optText,
+                      {
+                        color: o === value ? colors.accent.primary : colors.text.primary,
+                        fontWeight: o === value ? '600' : '400',
+                      },
+                    ]}
+                  >
+                    {o}
+                  </Text>
+                  {o === value && <IconSymbol name="checkmark" size={16} color={colors.accent.primary} />}
                 </TouchableOpacity>
               ))}
             </ScrollView>
@@ -177,23 +170,56 @@ function PickerChip({
   );
 }
 
-const pkStyles = StyleSheet.create({
-  chip: {
+const dpStyles = StyleSheet.create({
+  label: {
+    fontSize: 12,
+    fontWeight: '600',
+    textTransform: 'uppercase',
+    letterSpacing: 0.5,
+    marginTop: 18,
+    marginBottom: 8,
+  },
+  selector: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 6,
-    paddingHorizontal: 14,
-    paddingVertical: 9,
-    borderRadius: 20,
+    justifyContent: 'space-between',
+    paddingHorizontal: 16,
+    paddingVertical: 14,
+    borderRadius: 14,
     borderWidth: 1,
   },
-  text: { fontSize: 13, fontWeight: '500' },
-  overlay: { flex: 1, backgroundColor: 'rgba(0,0,0,0.45)', justifyContent: 'center', alignItems: 'center', padding: 24 },
-  sheet: { width: '100%', maxWidth: 340, borderRadius: 16, overflow: 'hidden', maxHeight: 360 },
-  sheetHeader: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingHorizontal: 16, paddingVertical: 12, borderBottomWidth: StyleSheet.hairlineWidth },
+  selectorText: { fontSize: 15, fontWeight: '500', flex: 1 },
+  overlay: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,0.45)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 24,
+  },
+  sheet: {
+    width: '100%',
+    maxWidth: 340,
+    borderRadius: 16,
+    overflow: 'hidden',
+    maxHeight: 420,
+  },
+  sheetHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+  },
   sheetTitle: { fontSize: 15, fontWeight: '600' },
-  scroll: { maxHeight: 300 },
-  option: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', paddingVertical: 13, paddingHorizontal: 16 },
+  scroll: { maxHeight: 360 },
+  option: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingVertical: 13,
+    paddingHorizontal: 16,
+  },
   optText: { fontSize: 15 },
 });
 
@@ -204,8 +230,6 @@ export function FilterBottomSheet({
   onClose,
   values,
   onApply,
-  districts,
-  placeTypes,
 }: FilterBottomSheetProps) {
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
@@ -252,10 +276,7 @@ export function FilterBottomSheet({
     })
   ).current;
 
-  const patch = <K extends keyof FilterValues>(k: K, v: FilterValues[K]) =>
-    setDraft((d) => ({ ...d, [k]: v }));
-
-  const activeCount = [draft.location, draft.category, draft.vibe, draft.purpose, draft.budget].filter(Boolean).length;
+  const districtOptions = draft.province ? (DISTRICT_MAP[draft.province] || []) : [];
 
   const handleApply = () => {
     lightImpact();
@@ -265,7 +286,7 @@ export function FilterBottomSheet({
 
   const handleClear = () => {
     lightImpact();
-    const empty: FilterValues = { location: null, category: null, vibe: null, purpose: null, budget: null };
+    const empty: FilterValues = { province: null, district: null };
     setDraft(empty);
     onApply(empty);
     closeWithAnimation();
@@ -293,7 +314,12 @@ export function FilterBottomSheet({
 
           {/* Title */}
           <View style={styles.titleRow}>
-            <Text style={[styles.title, { color: colors.text.primary }]}>{t("home.filters")}</Text>
+            <View>
+              <Text style={[styles.title, { color: colors.text.primary }]}>Konum Seçimi</Text>
+              <Text style={[styles.subtitle, { color: colors.text.tertiary }]}>
+                Lütfen il ve ilçe seçiniz.
+              </Text>
+            </View>
           </View>
 
           <ScrollView
@@ -302,66 +328,37 @@ export function FilterBottomSheet({
             onScroll={(e) => { scrollY.current = e.nativeEvent.contentOffset.y; }}
             scrollEventThrottle={16}
           >
-            {/* Konum & Tür */}
-            <Text style={[styles.sectionLabel, { color: colors.text.tertiary }]}>{t("filter_extra.location_type")}</Text>
-            <View style={styles.pickerRow}>
-              <PickerChip
-                label={t('filter_extra.district')}
-                value={draft.location}
-                options={districts.map((d) => ({ value: d, label: d }))}
-                onSelect={(v) => patch('location', v)}
-              />
-              <PickerChip
-                label={t('filter_extra.category')}
-                value={draft.category}
-                options={placeTypes.map((t) => ({ value: t, label: t }))}
-                onSelect={(v) => patch('category', v)}
-              />
-            </View>
-
-            {/* Bütçe */}
-            <Text style={[styles.sectionLabel, { color: colors.text.tertiary }]}>{t("filter_extra.budget")}</Text>
-            <Segment<'low' | 'mid' | 'high'>
-              options={[
-                { value: 'low', label: '₺' },
-                { value: 'mid', label: '₺₺' },
-                { value: 'high', label: '₺₺₺' },
-              ]}
-              value={draft.budget}
-              onChange={(v) => patch('budget', v)}
+            {/* İl Seçimi */}
+            <DropdownPicker
+              label="İL SEÇİMİ"
+              value={draft.province}
+              options={PROVINCES}
+              placeholder="İl seçiniz..."
+              onSelect={(v) => {
+                setDraft((d) => ({ province: v, district: null }));
+              }}
             />
 
-            {/* Ortam */}
-            <Text style={[styles.sectionLabel, { color: colors.text.tertiary }]}>{t("filter_extra.vibe")}</Text>
-            <Segment<'quiet' | 'lively'>
-              options={[
-                { value: 'quiet', label: t('filter_extra.quiet') },
-                { value: 'lively', label: t('filter_extra.lively') },
-              ]}
-              value={draft.vibe}
-              onChange={(v) => patch('vibe', v)}
-            />
-
-            {/* Amaç */}
-            <Text style={[styles.sectionLabel, { color: colors.text.tertiary }]}>{t("filter_extra.purpose")}</Text>
-            <Segment<'work' | 'friends' | 'date'>
-              options={[
-                { value: 'work', label: t('filter_extra.work') },
-                { value: 'friends', label: t('filter_extra.friends') },
-                { value: 'date', label: t('filter_extra.date') },
-              ]}
-              value={draft.purpose}
-              onChange={(v) => patch('purpose', v)}
+            {/* İlçe Seçimi */}
+            <DropdownPicker
+              label="İLÇE SEÇİMİ"
+              value={draft.district}
+              options={districtOptions}
+              placeholder="Önce il seçiniz..."
+              disabled={!draft.province}
+              onSelect={(v) => {
+                setDraft((d) => ({ ...d, district: v }));
+              }}
             />
           </ScrollView>
 
           {/* Footer */}
           <View style={[styles.footer, { paddingBottom: insets.bottom + 8, borderTopColor: colors.surface.border }]}>
             <TouchableOpacity style={styles.clearBtn} onPress={handleClear} activeOpacity={0.7}>
-              <Text style={[styles.clearText, { color: colors.text.secondary }]}>{t("home.clear")}</Text>
+              <Text style={[styles.clearText, { color: colors.text.secondary }]}>Temizle</Text>
             </TouchableOpacity>
             <Button style={styles.applyBtn} onPress={handleApply}>
-              {t("matching.apply")}
+              Uygula
             </Button>
           </View>
           </Pressable>
@@ -373,29 +370,15 @@ export function FilterBottomSheet({
 
 /* ── Summary helpers (used by parent) ── */
 
-const LABEL_MAP: Record<string, string> = {
-  low: '₺',
-  mid: '₺₺',
-  high: '₺₺₺',
-  quiet: 'Sessiz',
-  lively: 'Canlı',
-  work: 'Çalışma',
-  friends: 'Arkadaş',
-  date: 'Date',
-};
-
 export function getFilterSummaryChips(v: FilterValues, max = 3): { chips: string[]; extra: number } {
   const all: string[] = [];
-  if (v.location) all.push(v.location);
-  if (v.category) all.push(v.category);
-  if (v.budget) all.push(LABEL_MAP[v.budget] ?? v.budget);
-  if (v.vibe) all.push(LABEL_MAP[v.vibe] ?? v.vibe);
-  if (v.purpose) all.push(LABEL_MAP[v.purpose] ?? v.purpose);
+  if (v.province) all.push(v.province);
+  if (v.district) all.push(v.district);
   return { chips: all.slice(0, max), extra: Math.max(0, all.length - max) };
 }
 
 export function countActiveFilters(v: FilterValues): number {
-  return [v.location, v.category, v.vibe, v.purpose, v.budget].filter(Boolean).length;
+  return [v.province, v.district].filter(Boolean).length;
 }
 
 /* ── Styles ── */
@@ -430,21 +413,13 @@ const styles = StyleSheet.create({
     paddingBottom: 12,
   },
   title: { fontSize: 18, fontWeight: '700' },
+  subtitle: { fontSize: 13, marginTop: 4 },
   clearBtn: { padding: 4 },
   clearText: { fontSize: 14, fontWeight: '600' },
   body: {
     paddingHorizontal: 20,
     paddingBottom: 8,
   },
-  sectionLabel: {
-    fontSize: 12,
-    fontWeight: '600',
-    textTransform: 'uppercase',
-    letterSpacing: 0.5,
-    marginTop: 18,
-    marginBottom: 10,
-  },
-  pickerRow: { flexDirection: 'row', gap: 10 },
   footer: {
     paddingHorizontal: 20,
     paddingTop: 12,
@@ -455,9 +430,5 @@ const styles = StyleSheet.create({
     borderRadius: 14,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  applyText: {
-    fontSize: 16,
-    fontWeight: '700',
   },
 });

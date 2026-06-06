@@ -256,6 +256,7 @@ def recommend_pipeline(
     user_lng: Optional[float] = None,
     radius_m: int = 3000,
     category: Optional[str] = None,
+    selected_district: Optional[str] = None,
 ) -> dict:
     """
     Full recommend pipeline:
@@ -281,10 +282,16 @@ def recommend_pipeline(
             explicit_district = d
             break
 
+    # Smart priority: query'deki ilçe > dropdown ilçe > GPS mesafe
+    # Eğer kullanıcı mesajında ilçe belirtmemişse, dropdown seçimini kullan
+    effective_district = explicit_district
+    if not effective_district and selected_district:
+        effective_district = normalize_tr(selected_district)
+
     # --- Cache check ---
     c_lat = user_lat or 41.0082
     c_lng = user_lng or 28.9784
-    ck = _cache_key(vibe, purpose, budget, c_lat, c_lng, cat_filter, query)
+    ck = _cache_key(vibe, purpose, budget, c_lat, c_lng, cat_filter, query + (effective_district or ""))
     cached = _cache_get(ck)
     if cached:
         cached["cached"] = True
@@ -296,11 +303,11 @@ def recommend_pipeline(
         p_lat = getattr(p, "latitude", None)
         p_lng = getattr(p, "longitude", None)
         
-        # If district is explicitly requested, require the place to be in that district
-        if explicit_district:
+        # If district is determined (from query OR dropdown), filter by district
+        if effective_district:
             p_addr = normalize_tr(getattr(p, "address", "") or "")
             p_name = normalize_tr(getattr(p, "name", "") or "")
-            if explicit_district not in p_addr and explicit_district not in p_name:
+            if effective_district not in p_addr and effective_district not in p_name:
                 continue
         # Otherwise filter by distance from user coordinates
         elif user_lat and user_lng and p_lat and p_lng:
@@ -314,8 +321,8 @@ def recommend_pipeline(
                 continue
         filtered.append(p)
 
-    # Fallback if explicit district filter yielded too few results
-    if explicit_district and len(filtered) < 3:
+    # Fallback if district filter yielded too few results
+    if effective_district and len(filtered) < 3:
         filtered = []
         for p in places:
             p_lat = getattr(p, "latitude", None)
@@ -330,8 +337,8 @@ def recommend_pipeline(
                     continue
             filtered.append(p)
 
-    # Auto-expand radius if too few results (only if not searching by explicit district)
-    if not explicit_district and len(filtered) < 5 and user_lat and user_lng:
+    # Auto-expand radius if too few results (only if not searching by district)
+    if not effective_district and len(filtered) < 5 and user_lat and user_lng:
         for mult in [2, 4]:
             expanded = []
             expanded_radius = radius_m * mult

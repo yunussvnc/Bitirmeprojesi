@@ -15,6 +15,7 @@ export type RecommendRequest = {
   location?: Location;
   radius_m?: number;
   category?: string;
+  district?: string;
 };
 
 export type RecommendItem = {
