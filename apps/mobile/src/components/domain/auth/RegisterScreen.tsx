@@ -39,6 +39,7 @@ import * as AppleAuthentication from 'expo-apple-authentication';
 import * as WebBrowser from 'expo-web-browser';
 import * as Google from 'expo-auth-session/providers/google';
 import { LegalModal } from '@/src/components/ui/LegalModal';
+import { googleAuthRequestConfig } from '@/src/config/socialAuth';
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -92,10 +93,8 @@ export default function RegisterScreen() {
 
   // Google Auth Setup
   const [request, response, promptAsync] = Google.useAuthRequest({
-    clientId: '398883081062-uqa0hbpbo6nhjcbigltircbbg3ngr7oi.apps.googleusercontent.com',
-    iosClientId: '398883081062-uqa0hbpbo6nhjcbigltircbbg3ngr7oi.apps.googleusercontent.com',
-    androidClientId: '398883081062-uqa0hbpbo6nhjcbigltircbbg3ngr7oi.apps.googleusercontent.com',
-    scopes: ['openid', 'profile', 'email'],
+    ...googleAuthRequestConfig,
+    scopes: [...googleAuthRequestConfig.scopes],
   });
 
   useEffect(() => {

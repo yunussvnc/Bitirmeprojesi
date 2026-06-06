@@ -1,4 +1,5 @@
-﻿import { Platform } from 'react-native';
+import { Platform } from 'react-native';
+import Constants from 'expo-constants';
 
 /** app.json ÔåÆ expo.scheme */
 export const APP_SCHEME = 'asemos';
@@ -15,9 +16,13 @@ export const GOOGLE_EXPO_AUTH_REDIRECT_URI = `https://auth.expo.io/@${EXPO_OWNER
 
 /**
  * OAuth redirect URI for expo-auth-session + Google Web client.
+ * In Expo Go, we use the auth.expo.io proxy.
+ * In standalone apps / dev client builds, we return undefined so that
+ * expo-auth-session automatically uses the correct native redirect URI.
  */
-export function getGoogleRedirectUri(): string {
-  return GOOGLE_EXPO_AUTH_REDIRECT_URI;
+export function getGoogleRedirectUri(): string | undefined {
+  const isExpoGo = Constants.appOwnership === 'expo';
+  return isExpoGo ? GOOGLE_EXPO_AUTH_REDIRECT_URI : undefined;
 }
 
 export const GOOGLE_WEB_CLIENT_ID = process.env.EXPO_PUBLIC_GOOGLE_WEB_CLIENT_ID;
