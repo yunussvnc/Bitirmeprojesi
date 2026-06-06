@@ -58,7 +58,7 @@ export function SharePostSheet({ visible, onClose, post }: SharePostSheetProps) 
     const addMessage = useChatMessagesStore((s) => s.addMessage);
 
     const filteredConversations = useMemo(() => {
-        const active = conversations.filter((c) => !c.isDeleted && !c.isArchived);
+        const active = conversations.filter((c) => !c.isArchived);
         if (!query.trim()) return active;
         const q = query.trim().toLowerCase();
         return active.filter(

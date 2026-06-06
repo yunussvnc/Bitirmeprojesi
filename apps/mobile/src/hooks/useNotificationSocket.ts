@@ -84,8 +84,8 @@ export function useNotificationSocket() {
                 content,
                 "Şimdi",
                 senderName,
-                true,  // unhide
-                true   // isUnread
+                true,       // isUnread
+                Date.now()  // actualTimestamp
             );
           } else {
             // Listede olmayan yeni bir sohbet geldi — hemen ekle
