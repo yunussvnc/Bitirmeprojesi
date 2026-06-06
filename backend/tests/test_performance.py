@@ -48,12 +48,12 @@ class TestLargeDataset:
         for i in range(30):
             create_test_post(uid, caption=f"Post {i}")
         start = time.time()
-        response = client.get("/feed?page=1&page_size=20")
+        response = client.get("/feed?page_size=20")
         elapsed = time.time() - start
         assert response.status_code == 200
         data = response.json()
-        assert data["total"] == 30
         assert len(data["items"]) == 20
+        assert data["has_more"] is True
         assert elapsed < 5.0, f"30 post feed {elapsed:.2f}s sürdü"
 
     def test_search_with_many_places(self, client):
@@ -86,29 +86,45 @@ class TestPaginationAccuracy:
             create_test_post(uid, caption=f"PagPost {i}")
 
         # Sayfa 1
-        r1 = client.get("/feed?page=1&page_size=3")
+        r1 = client.get("/feed?page_size=3")
+        d1 = r1.json()
+        assert d1["has_more"] is True
+        c1 = d1["next_cursor"]
+        assert c1
+
         # Sayfa 2
-        r2 = client.get("/feed?page=2&page_size=3")
+        r2 = client.get(f"/feed?page_size=3&cursor={c1}")
+        d2 = r2.json()
+        assert d2["has_more"] is True
+        c2 = d2["next_cursor"]
+        assert c2
+
         # Sayfa 3
-        r3 = client.get("/feed?page=3&page_size=3")
+        r3 = client.get(f"/feed?page_size=3&cursor={c2}")
+        d3 = r3.json()
 
         all_ids = set()
-        for r in [r1, r2, r3]:
-            for item in r.json()["items"]:
+        for d in [d1, d2, d3]:
+            for item in d["items"]:
                 all_ids.add(item["id"])
 
-        # Sayfalar arasında çakışma olmamalı
-        assert len(all_ids) == 9  # 3 * 3 = 9 unique post
+        # Sayfalar arasında çakışma olmamalı ve toplam 9 unique post olmalı
+        assert len(all_ids) == 9
 
     def test_last_page_partial(self, client):
         uid = create_test_user(email="lastpg@test.com", username="lastpg")
         for i in range(5):
             create_test_post(uid, caption=f"LastPg {i}")
 
-        response = client.get("/feed?page=2&page_size=3")
+        r1 = client.get("/feed?page_size=3")
+        d1 = r1.json()
+        c1 = d1["next_cursor"]
+        assert c1
+
+        response = client.get(f"/feed?page_size=3&cursor={c1}")
         data = response.json()
         assert len(data["items"]) == 2  # 5 - 3 = 2
-        assert data["total"] == 5
+        assert data["has_more"] is False
 
 
 class TestNearbyPerformance:

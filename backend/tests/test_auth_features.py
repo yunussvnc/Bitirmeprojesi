@@ -35,7 +35,7 @@ from auth import create_access_token
 # ---------------------------------------------------------------------------
 # Test veritabanı yapılandırması
 # ---------------------------------------------------------------------------
-from tests.conftest import TestingSessionLocal
+from tests.conftest import TestingSessionLocal, create_test_place
 
 
 
@@ -452,10 +452,12 @@ def test_first_time_setup_underage():
 
 def test_venue_register():
     """Mekan kayıt başvurusu → PendingVenue oluşur."""
+    pid = create_test_place(name="Cafe Test")
     response = client.post("/auth/venue-register", json={
         "venue_name": "Cafe Test",
         "email": "cafe@test.com",
         "password": "VenuePass123!",
+        "claimed_place_id": pid,
     })
     assert response.status_code == 200
     data = response.json()
@@ -465,15 +467,19 @@ def test_venue_register():
 
 def test_venue_register_duplicate():
     """Aynı e-posta ile tekrar venue kayıt → 400."""
+    pid1 = create_test_place(name="Cafe A")
+    pid2 = create_test_place(name="Cafe B")
     client.post("/auth/venue-register", json={
         "venue_name": "Cafe A",
         "email": "dup_venue@test.com",
         "password": "Pass123!",
+        "claimed_place_id": pid1,
     })
     response = client.post("/auth/venue-register", json={
         "venue_name": "Cafe B",
         "email": "dup_venue@test.com",
         "password": "Pass123!",
+        "claimed_place_id": pid2,
     })
     assert response.status_code == 400
     assert "bekleyen bir mekan başvuru" in response.json()["detail"]
@@ -481,10 +487,12 @@ def test_venue_register_duplicate():
 
 def test_venue_approval():
     """Admin onayı → User (role=venue) + Place oluşur."""
+    pid = create_test_place(name="Onay Cafe")
     reg = client.post("/auth/venue-register", json={
         "venue_name": "Onay Cafe",
         "email": "onay@test.com",
         "password": "Pass123!",
+        "claimed_place_id": pid,
     })
     pending_id = reg.json()["id"]
 

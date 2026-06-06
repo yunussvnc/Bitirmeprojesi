@@ -91,8 +91,8 @@ class TestPaginationContract:
         response = client.get("/feed")
         data = response.json()
         assert "items" in data
-        assert "total" in data
-        assert "page" in data
+        assert "next_cursor" in data
+        assert "has_more" in data
         assert "page_size" in data
 
     def test_search_pagination_format(self, client):

@@ -128,11 +128,13 @@ class TestScenarioVenueFlow:
     """Senaryo 3: Mekan sahibi akışı."""
 
     def test_venue_registration_to_dashboard(self, client):
+        pid = create_test_place(name="E2E Cafe")
         # 1. Venue kayıt
         reg = client.post("/auth/venue-register", json={
             "venue_name": "E2E Cafe",
             "email": "e2ecafe@test.com",
             "password": "VenuePass123!",
+            "claimed_place_id": pid,
         })
         assert reg.status_code == 200
         pending_id = reg.json()["id"]
