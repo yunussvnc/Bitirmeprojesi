@@ -63,8 +63,10 @@ export type SettingsState = {
   // —— Medya kalitesi ——
   uploadQuality: UploadQuality;
   wifiAutoHighQuality: boolean;
+  videoAutoplay: boolean;
   setUploadQuality: (v: UploadQuality) => void;
   setWifiAutoHighQuality: (v: boolean) => void;
+  setVideoAutoplay: (v: boolean) => void;
 
   // —— Kamera ——
   cameraDefaultFront: boolean;
@@ -90,9 +92,11 @@ export type SettingsState = {
   unknownMessageRequests: boolean;
   storyReplyAudience: Audience;
   showReadReceipts: boolean;
+  allowGroupAdd: boolean;
   setUnknownMessageRequests: (v: boolean) => void;
   setStoryReplyAudience: (v: Audience) => void;
   setShowReadReceipts: (v: boolean) => void;
+  setAllowGroupAdd: (v: boolean) => void;
 
   // —— Gizlenen Sözcükler ——
   hideOffensiveWords: boolean;
@@ -125,6 +129,8 @@ export type SettingsState = {
   _isSyncing: boolean;
 };
 
+import { AppState } from "react-native";
+
 /** Backend'e tek seferli push yapmak için debounce timer */
 let _pushDebounce: ReturnType<typeof setTimeout> | null = null;
 
@@ -132,8 +138,19 @@ function schedulePush() {
   if (_pushDebounce) clearTimeout(_pushDebounce);
   _pushDebounce = setTimeout(() => {
     useSettingsStore.getState().pushToBackend();
-  }, 1500);
+  }, 300);
 }
+
+// Flush debounced push immediately when the app goes to background or becomes inactive
+AppState.addEventListener("change", (nextAppState) => {
+  if (nextAppState === "background" || nextAppState === "inactive") {
+    if (_pushDebounce) {
+      clearTimeout(_pushDebounce);
+      _pushDebounce = null;
+      useSettingsStore.getState().pushToBackend().catch(() => {});
+    }
+  }
+});
 
 export const useSettingsStore = create<SettingsState>()(
   persist(
@@ -153,8 +170,10 @@ export const useSettingsStore = create<SettingsState>()(
       // Medya
       uploadQuality: 'high',
       wifiAutoHighQuality: true,
+      videoAutoplay: true,
       setUploadQuality: (v) => { set({ uploadQuality: v }); schedulePush(); },
       setWifiAutoHighQuality: (v) => { set({ wifiAutoHighQuality: v }); schedulePush(); },
+      setVideoAutoplay: (v) => set({ videoAutoplay: v }),
 
       // Kamera
       cameraDefaultFront: false,
@@ -183,9 +202,11 @@ export const useSettingsStore = create<SettingsState>()(
       unknownMessageRequests: true,
       storyReplyAudience: 'everyone',
       showReadReceipts: true,
+      allowGroupAdd: true,
       setUnknownMessageRequests: (v) => { set({ unknownMessageRequests: v }); schedulePush(); },
       setStoryReplyAudience: (v) => { set({ storyReplyAudience: v }); schedulePush(); },
       setShowReadReceipts: (v) => { set({ showReadReceipts: v }); schedulePush(); },
+      setAllowGroupAdd: (v) => set({ allowGroupAdd: v }),
 
       // Gizlenen Sözcükler
       hideOffensiveWords: true,

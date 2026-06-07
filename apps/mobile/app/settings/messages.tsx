@@ -30,9 +30,11 @@ export default function MessagesSettingsScreen() {
   const unknownRequests = useSettingsStore((s) => s.unknownMessageRequests);
   const storyReply = useSettingsStore((s) => s.storyReplyAudience);
   const readReceipts = useSettingsStore((s) => s.showReadReceipts);
+  const allowGroupAdd = useSettingsStore((s) => s.allowGroupAdd);
   const setUnknownRequests = useSettingsStore((s) => s.setUnknownMessageRequests);
   const setStoryReply = useSettingsStore((s) => s.setStoryReplyAudience);
   const setReadReceipts = useSettingsStore((s) => s.setShowReadReceipts);
+  const setAllowGroupAdd = useSettingsStore((s) => s.setAllowGroupAdd);
 
   const audienceOptions: Audience[] = ["everyone", "followers", "off"];
 
@@ -100,7 +102,13 @@ export default function MessagesSettingsScreen() {
         </Section>
 
         <Section title={t("settings_messages.groups", "Grup Mesajları")}>
-          <SettingsRow label={t("settings_messages.group_allow", "Herkesin seni gruba eklemesine izin ver")} value={true} switch icon="person.3" />
+          <SettingsRow
+            label={t("settings_messages.group_allow", "Herkesin seni gruba eklemesine izin ver")}
+            value={allowGroupAdd}
+            switch
+            onValueChange={(v: boolean) => { setAllowGroupAdd(v); success(); }}
+            icon="person.3"
+          />
           <Text style={[styles.hint, { color: colors.text.tertiary }]}>
             {t("settings_messages.group_hint", "Kapatırsan, yalnızca takip ettiğin kişiler seni gruplara ekleyebilir.")}
           </Text>

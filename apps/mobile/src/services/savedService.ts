@@ -2,7 +2,7 @@
  * Saved Service — Backend'den kayıtlı mekan/post yönetimi
  */
 
-import { apiGet, apiPost } from "@/src/utils/apiClient";
+import { apiGet, apiPost, apiDelete } from "@/src/utils/apiClient";
 import type { Place } from "./mekanService";
 
 export type SavedToggleResponse = {
@@ -57,4 +57,14 @@ export async function toggleSavePost(postId: number): Promise<SavedToggleRespons
 /** Kayıtlı postlar listesi */
 export async function getSavedPosts(page = 1, pageSize = 20): Promise<PaginatedSavedPosts> {
     return apiGet<PaginatedSavedPosts>(`/saved/posts?page=${page}&page_size=${pageSize}`);
+}
+
+/** Tüm kayıtlı mekanları temizle */
+export async function clearSavedPlacesApi(): Promise<{ ok: boolean; message: string }> {
+    return apiDelete<{ ok: boolean; message: string }>("/saved/places");
+}
+
+/** Tüm kayıtlı postları temizle */
+export async function clearSavedPostsApi(): Promise<{ ok: boolean; message: string }> {
+    return apiDelete<{ ok: boolean; message: string }>("/saved/posts");
 }

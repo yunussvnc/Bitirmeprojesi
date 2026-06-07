@@ -23,7 +23,7 @@ import { useTranslation } from "react-i18next";
 type UserProfile = {
   id: number;
   email?: string;
-  phone?: string;
+  phone_number?: string;
   birth_date?: string;
   username?: string;
   first_name?: string;
@@ -55,6 +55,7 @@ export default function PersonalDetailsScreen() {
         setProfile({
           id: authUser.id,
           email: (authUser as any).email,
+          phone_number: (authUser as any).phone_number,
           username: (authUser as any).username,
           first_name: (authUser as any).first_name,
         });
@@ -90,7 +91,7 @@ export default function PersonalDetailsScreen() {
 
   const fieldLabels: Record<string, string> = {
     email: t("personal_details.email"),
-    phone: t("personal_details.phone"),
+    phone_number: t("personal_details.phone"),
     birth_date: t("personal_details.birth_date"),
   };
 
@@ -135,10 +136,10 @@ export default function PersonalDetailsScreen() {
             />
             <SettingsRow
               label={t("personal_details.phone")}
-              value={profile?.phone || t("personal_details.not_registered")}
+              value={profile?.phone_number || t("personal_details.not_registered")}
               showArrow
               icon="phone"
-              onPress={() => openEdit("phone", profile?.phone || "")}
+              onPress={() => openEdit("phone_number", profile?.phone_number || "")}
             />
           </Section>
 
@@ -201,7 +202,7 @@ export default function PersonalDetailsScreen() {
               placeholderTextColor={colors.text.tertiary}
               autoFocus
               autoCapitalize="none"
-              keyboardType={editField === "email" ? "email-address" : editField === "phone" ? "phone-pad" : "default"}
+              keyboardType={editField === "email" ? "email-address" : editField === "phone_number" ? "phone-pad" : "default"}
             />
           </View>
         </KeyboardAvoidingView>

@@ -29,8 +29,10 @@ export default function CommentsSettingsScreen() {
 
   const defaultDisabled = useSettingsStore((s) => s.defaultCommentsDisabled);
   const audience = useSettingsStore((s) => s.commentAllowedAudience);
+  const hideOffensiveWords = useSettingsStore((s) => s.hideOffensiveWords);
   const setDefaultDisabled = useSettingsStore((s) => s.setDefaultCommentsDisabled);
   const setAudience = useSettingsStore((s) => s.setCommentAllowedAudience);
+  const setHideOffensiveWords = useSettingsStore((s) => s.setHideOffensiveWords);
 
   const audienceOptions: Audience[] = ["everyone", "followers", "off"];
 
@@ -87,8 +89,9 @@ export default function CommentsSettingsScreen() {
         <Section title={t("settings_comments.filter", "Yorum Filtresi")}>
           <SettingsRow
             label={t("settings_comments.hide_offensive", "Uygunsuz yorumları gizle")}
-            value={true}
+            value={hideOffensiveWords}
             switch
+            onValueChange={(v: boolean) => { setHideOffensiveWords(v); success(); }}
             icon="shield.lefthalf.filled"
           />
           <Text style={[styles.hint, { color: colors.text.tertiary }]}>

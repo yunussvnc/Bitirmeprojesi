@@ -660,6 +660,12 @@ def delete_account(
     db.query(models.Story).filter(models.Story.user_id == uid).delete()
     db.query(models.PostLike).filter(models.PostLike.user_id == uid).delete()
     db.query(models.PostComment).filter(models.PostComment.user_id == uid).delete()
+    db.query(models.PlaceFollow).filter(models.PlaceFollow.user_id == uid).delete(synchronize_session=False)
+    db.query(models.PlaceInteraction).filter(models.PlaceInteraction.user_id == uid).delete(synchronize_session=False)
+    db.query(models.CommunityMember).filter(models.CommunityMember.user_id == uid).delete(synchronize_session=False)
+    db.query(models.CommunityMessage).filter(models.CommunityMessage.sender_id == uid).delete(synchronize_session=False)
+    db.query(models.StoryView).filter(models.StoryView.viewer_id == uid).delete(synchronize_session=False)
+    db.query(models.CommentLike).filter(models.CommentLike.user_id == uid).delete(synchronize_session=False)
     # Postlar ve medya
     for p in db.query(models.Post).filter(models.Post.user_id == uid).all():
         db.query(models.PostMedia).filter(models.PostMedia.post_id == p.id).delete()

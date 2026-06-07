@@ -1755,6 +1755,16 @@ def get_saved_posts(db: Session, user_id: int, page: int = 1, page_size: int = 2
     return posts, total
 
 
+def clear_saved_places(db: Session, user_id: int) -> None:
+    db.query(models.SavedPlace).filter(models.SavedPlace.user_id == user_id).delete(synchronize_session=False)
+    db.commit()
+
+
+def clear_saved_posts(db: Session, user_id: int) -> None:
+    db.query(models.SavedPost).filter(models.SavedPost.user_id == user_id).delete(synchronize_session=False)
+    db.commit()
+
+
 def is_place_saved(db: Session, user_id: int, place_id: int) -> bool:
     return db.query(models.SavedPlace).filter(
         models.SavedPlace.user_id == user_id,

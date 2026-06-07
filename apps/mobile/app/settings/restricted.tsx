@@ -2,9 +2,9 @@
  * Kısıtlı Hesaplar — Kısıtlanan kullanıcıları yönet
  */
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import {
-  View, Text, StyleSheet, FlatList, TouchableOpacity, Alert,
+  View, Text, StyleSheet, FlatList, TouchableOpacity, Alert, Image, ActivityIndicator,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
@@ -14,6 +14,7 @@ import { createTextStyle, spacing } from "@/src/constants/design";
 import { lightImpact, success } from "@/src/utils/haptics";
 import { useSettingsStore } from "@/src/store/useSettingsStore";
 import { useTranslation } from "react-i18next";
+import { apiGet } from "@/src/utils/apiClient";
 
 export default function RestrictedAccountsScreen() {
   const { colors, isDark } = useTheme();
@@ -23,6 +24,53 @@ export default function RestrictedAccountsScreen() {
 
   const restrictedIds = useSettingsStore((s) => s.restrictedUserIds);
   const toggleRestricted = useSettingsStore((s) => s.toggleRestrictedUser);
+
+  interface RestrictedProfile {
+    id: number;
+    username: string;
+    avatar_url: string | null;
+  }
+
+  const [profiles, setProfiles] = useState<RestrictedProfile[]>([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (restrictedIds.length === 0) {
+      setProfiles([]);
+      return;
+    }
+
+    const fetchProfiles = async () => {
+      setLoading(true);
+      try {
+        const data = await Promise.all(
+          restrictedIds.map(async (id) => {
+            try {
+              const res = await apiGet<any>(`/users/${id}`);
+              return {
+                id,
+                username: res.username || `user_${id}`,
+                avatar_url: res.avatar_url || null,
+              };
+            } catch {
+              return {
+                id,
+                username: `${t("settings_restricted.user", "Kullanıcı")} #${id}`,
+                avatar_url: null,
+              };
+            }
+          })
+        );
+        setProfiles(data);
+      } catch (err) {
+        console.warn("Restricted profiles fetch failed:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProfiles();
+  }, [restrictedIds, t]);
 
   const handleRemove = (id: number) => {
     lightImpact();
@@ -54,7 +102,9 @@ export default function RestrictedAccountsScreen() {
         </Text>
       </View>
 
-      {restrictedIds.length === 0 ? (
+      {loading && profiles.length === 0 ? (
+        <ActivityIndicator style={{ marginTop: 40 }} color={colors.accent.primary} />
+      ) : restrictedIds.length === 0 ? (
         <View style={styles.emptyContainer}>
           <View style={[styles.emptyIcon, { backgroundColor: isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.03)" }]}>
             <IconSymbol name="checkmark.shield" size={48} color={colors.text.tertiary} />
@@ -66,18 +116,22 @@ export default function RestrictedAccountsScreen() {
         </View>
       ) : (
         <FlatList
-          data={restrictedIds}
-          keyExtractor={(item) => String(item)}
+          data={profiles}
+          keyExtractor={(item) => String(item.id)}
           contentContainerStyle={styles.listContent}
           renderItem={({ item }) => (
             <View style={[styles.row, { borderBottomColor: colors.surface.border }]}>
-              <View style={[styles.avatarPlaceholder, { backgroundColor: colors.surface.elevated }]}>
-                <IconSymbol name="person.fill" size={20} color={colors.text.tertiary} />
-              </View>
-              <Text style={[styles.userId, { color: colors.text.primary }]}>{t("settings_restricted.user", "Kullanıcı")} #{item}</Text>
+              {item.avatar_url ? (
+                <Image source={{ uri: item.avatar_url }} style={styles.avatarImage} />
+              ) : (
+                <View style={[styles.avatarPlaceholder, { backgroundColor: colors.surface.elevated }]}>
+                  <IconSymbol name="person.fill" size={20} color={colors.text.tertiary} />
+                </View>
+              )}
+              <Text style={[styles.userId, { color: colors.text.primary }]}>{item.username}</Text>
               <TouchableOpacity
                 style={[styles.removeBtn, { borderColor: colors.semantic.error }]}
-                onPress={() => handleRemove(item)}
+                onPress={() => handleRemove(item.id)}
                 activeOpacity={0.7}
               >
                 <Text style={[styles.removeText, { color: colors.semantic.error }]}>{t("settings_restricted.unrestrict", "Kaldır")}</Text>
@@ -119,6 +173,10 @@ const styles = StyleSheet.create({
   avatarPlaceholder: {
     width: 44, height: 44, borderRadius: 22,
     alignItems: "center", justifyContent: "center", marginRight: 12,
+  },
+  avatarImage: {
+    width: 44, height: 44, borderRadius: 22,
+    marginRight: 12,
   },
   userId: { flex: 1, fontSize: 15, fontWeight: "600" },
   removeBtn: { borderWidth: 1.5, borderRadius: 8, paddingHorizontal: 14, paddingVertical: 6 },

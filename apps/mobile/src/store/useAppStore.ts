@@ -2,7 +2,12 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import type { Post } from "@/src/services/feedService";
-import { toggleSavePlace as apiToggleSavePlace, toggleSavePost as apiToggleSavePost } from "@/src/services/savedService";
+import {
+  toggleSavePlace as apiToggleSavePlace,
+  toggleSavePost as apiToggleSavePost,
+  clearSavedPlacesApi as apiClearSavedPlaces,
+  clearSavedPostsApi as apiClearSavedPosts,
+} from "@/src/services/savedService";
 import { logger } from "@/src/utils/logger";
 
 export type SavedPlace = {
@@ -123,7 +128,12 @@ export const useAppStore = create<AppState>()(
         }
       },
 
-      clearSaved: () => set({ savedIds: [], savedById: {} }),
+      clearSaved: () => {
+        set({ savedIds: [], savedById: {} });
+        apiClearSavedPlaces().catch((err) =>
+          logger.warn("[clearSaved] Backend sync failed:", err)
+        );
+      },
 
       isPostSaved: (id) => get().savedPostIds.includes(String(id)),
 
@@ -169,7 +179,12 @@ export const useAppStore = create<AppState>()(
         }
       },
 
-      clearSavedPosts: () => set({ savedPostIds: [], savedPostsById: {} }),
+      clearSavedPosts: () => {
+        set({ savedPostIds: [], savedPostsById: {} });
+        apiClearSavedPosts().catch((err) =>
+          logger.warn("[clearSavedPosts] Backend sync failed:", err)
+        );
+      },
 
       addRecentPrompt: (prompt) => {
         const p = prompt.trim();

@@ -29,8 +29,10 @@ export default function MediaQualityScreen() {
 
   const quality = useSettingsStore((s) => s.uploadQuality);
   const wifiAuto = useSettingsStore((s) => s.wifiAutoHighQuality);
+  const videoAutoplay = useSettingsStore((s) => s.videoAutoplay);
   const setQuality = useSettingsStore((s) => s.setUploadQuality);
   const setWifiAuto = useSettingsStore((s) => s.setWifiAutoHighQuality);
+  const setVideoAutoplay = useSettingsStore((s) => s.setVideoAutoplay);
 
   return (
     <View style={[styles.wrapper, { backgroundColor: colors.background.primary }]}>
@@ -92,7 +94,13 @@ export default function MediaQualityScreen() {
         </Section>
 
         <Section title={t("settings_media.stream_title", "Akış Kalitesi")}>
-          <SettingsRow label={t("settings_media.autoplay", "Video otomatik oynat")} value={true} switch icon="play.circle" />
+          <SettingsRow
+            label={t("settings_media.autoplay", "Video otomatik oynat")}
+            value={videoAutoplay}
+            switch
+            onValueChange={(v: boolean) => { setVideoAutoplay(v); success(); }}
+            icon="play.circle"
+          />
           <Text style={[styles.hint, { color: colors.text.tertiary }]}>
             {t("settings_media.autoplay_hint", "Akışta reels ve video içerikler otomatik oynatılır.")}
           </Text>

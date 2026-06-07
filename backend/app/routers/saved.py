@@ -65,3 +65,23 @@ def get_saved_posts(
     posts, total = crud.get_saved_posts(db, current_user.id, page, page_size)
     items = [_post_to_schema(p, db, current_user.id) for p in posts]
     return schemas.PaginatedPosts(items=items, total=total, page=page, page_size=page_size)
+
+
+@router.delete("/places")
+def clear_saved_places(
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(get_current_user),
+):
+    """Kullanıcının tüm kayıtlı mekanlarını siler."""
+    crud.clear_saved_places(db, current_user.id)
+    return {"ok": True, "message": "Tüm kayıtlı mekanlar temizlendi."}
+
+
+@router.delete("/posts")
+def clear_saved_posts(
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(get_current_user),
+):
+    """Kullanıcının tüm kayıtlı gönderilerini siler."""
+    crud.clear_saved_posts(db, current_user.id)
+    return {"ok": True, "message": "Tüm kayıtlı gönderiler temizlendi."}
