@@ -293,6 +293,7 @@
     "follow_request_msg": "{{user}} wants to follow you",
     "follow_accepted_msg": "{{user}} accepted your follow request",
     "tag": "{{user}} tagged you in a post",
+    "campaign": "{{user}} shared a new campaign: \"{{campaign_text}}\"",
     "default": "{{user}} interacted with you",
     "someone": "Someone",
     "tab_all": "All",

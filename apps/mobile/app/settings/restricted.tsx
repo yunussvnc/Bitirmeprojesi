@@ -14,7 +14,7 @@ import { createTextStyle, spacing } from "@/src/constants/design";
 import { lightImpact, success } from "@/src/utils/haptics";
 import { useSettingsStore } from "@/src/store/useSettingsStore";
 import { useTranslation } from "react-i18next";
-import { apiGet } from "@/src/utils/apiClient";
+import { apiGet, apiPost } from "@/src/utils/apiClient";
 
 export default function RestrictedAccountsScreen() {
   const { colors, isDark } = useTheme();
@@ -43,24 +43,26 @@ export default function RestrictedAccountsScreen() {
     const fetchProfiles = async () => {
       setLoading(true);
       try {
-        const data = await Promise.all(
-          restrictedIds.map(async (id) => {
-            try {
-              const res = await apiGet<any>(`/users/${id}`);
-              return {
-                id,
-                username: res.username || `user_${id}`,
-                avatar_url: res.avatar_url || null,
-              };
-            } catch {
-              return {
-                id,
-                username: `${t("settings_restricted.user", "Kullanıcı")} #${id}`,
-                avatar_url: null,
-              };
-            }
-          })
-        );
+        const res = await apiPost<{ items: RestrictedProfile[] }>("/users/batch", {
+          user_ids: restrictedIds,
+        });
+        const itemsMap = new Map(res.items.map((item) => [item.id, item]));
+        const data = restrictedIds.map((id) => {
+          const matched = itemsMap.get(id);
+          if (matched) {
+            return {
+              id,
+              username: matched.username || `user_${id}`,
+              avatar_url: matched.avatar_url || null,
+            };
+          } else {
+            return {
+              id,
+              username: `${t("settings_restricted.user", "Kullanıcı")} #${id}`,
+              avatar_url: null,
+            };
+          }
+        });
         setProfiles(data);
       } catch (err) {
         console.warn("Restricted profiles fetch failed:", err);

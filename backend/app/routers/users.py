@@ -125,6 +125,46 @@ def search_users(
         items.append(item)
 
     return {"items": items, "total": total, "page": page, "page_size": page_size}
+from pydantic import BaseModel
+
+class UserBatchRequest(BaseModel):
+    user_ids: list[int]
+
+
+@router.post("/users/batch")
+def get_users_batch(
+    req: UserBatchRequest,
+    db: Session = Depends(get_db),
+    current_user: Optional[models.User] = Depends(get_optional_user),
+):
+    """Batch fetch user profiles by user IDs, checking block lists."""
+    blocked_ids = set()
+    if current_user and req.user_ids:
+        blocked_by_me = db.query(models.UserBlock.blocked_id).filter(
+            models.UserBlock.blocker_id == current_user.id,
+            models.UserBlock.blocked_id.in_(req.user_ids)
+        ).all()
+        blocked_me = db.query(models.UserBlock.blocker_id).filter(
+            models.UserBlock.blocked_id == current_user.id,
+            models.UserBlock.blocker_id.in_(req.user_ids)
+        ).all()
+        blocked_ids = {r[0] for r in blocked_by_me} | {r[0] for r in blocked_me}
+
+    valid_ids = [uid for uid in req.user_ids if uid not in blocked_ids]
+    if not valid_ids:
+        return {"items": [], "total": 0}
+
+    users = db.query(models.User).filter(
+        models.User.id.in_(valid_ids),
+        models.User.is_active == True
+    ).all()
+
+    current_uid = current_user.id if current_user else None
+    items = []
+    for u in users:
+        items.append(_enrich_user_summary(db, u, current_uid))
+
+    return {"items": items, "total": len(items)}
 
 
 

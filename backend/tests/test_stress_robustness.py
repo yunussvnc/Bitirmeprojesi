@@ -290,5 +290,6 @@ class TestEdgeCases:
     def test_empty_feed(self, client):
         response = client.get("/feed")
         assert response.status_code == 200
-        assert response.json()["total"] == 0
+        assert response.json()["has_more"] is False
         assert response.json()["items"] == []
+

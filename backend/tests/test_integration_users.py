@@ -269,3 +269,46 @@ class TestUserStats:
         assert response.status_code == 200
         data = response.json()
         assert data["total"] == 1
+
+
+class TestUserBatch:
+    """POST /users/batch — Toplu profil bilgisi getirme."""
+
+    def test_get_users_batch_success(self, client):
+        uid1 = create_test_user(email="batch1@test.com", username="batch1")
+        uid2 = create_test_user(email="batch2@test.com", username="batch2")
+        uid3 = create_test_user(email="batch3@test.com", username="batch3")
+
+        response = client.post("/users/batch", json={"user_ids": [uid1, uid2, uid3]})
+        assert response.status_code == 200
+        data = response.json()
+        assert data["total"] == 3
+        usernames = [u["username"] for u in data["items"]]
+        assert "batch1" in usernames
+        assert "batch2" in usernames
+        assert "batch3" in usernames
+
+    def test_get_users_batch_with_block(self, client):
+        uid1 = create_test_user(email="batchblk1@test.com", username="batchblk1")
+        uid2 = create_test_user(email="batchblk2@test.com", username="batchblk2")
+        uid3 = create_test_user(email="batchblk3@test.com", username="batchblk3")
+
+        # Block user 2
+        db = TestingSessionLocal()
+        crud.toggle_block_user(db, uid1, uid2)
+        db.close()
+
+        # Call with auth headers for user 1
+        headers = get_auth_headers(uid1)
+        response = client.post(
+            "/users/batch",
+            headers=headers,
+            json={"user_ids": [uid1, uid2, uid3]}
+        )
+        assert response.status_code == 200
+        data = response.json()
+        # Should exclude user 2 because they are blocked
+        usernames = [u["username"] for u in data["items"]]
+        assert "batchblk1" in usernames
+        assert "batchblk2" not in usernames
+        assert "batchblk3" in usernames

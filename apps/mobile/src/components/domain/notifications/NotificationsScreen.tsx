@@ -58,6 +58,7 @@ function getNotifIcon(type: string): { name: string; color: string } {
     case 'follow_accepted': return { name: 'person.badge.check.fill', color: '#4ECE8D' };
     case 'tag': return { name: 'at', color: '#AF52DE' };
     case 'mention': return { name: 'at', color: '#5856D6' };
+    case 'campaign': return { name: 'megaphone.fill', color: '#FF9500' };
     default: return { name: 'bell.fill', color: '#999' };
   }
 }
@@ -79,6 +80,18 @@ function getNotifMessage(n: Notification, t: any): string {
     case 'follow_request': return t('notifications.follow_request_msg', { user });
     case 'follow_accepted': return t('notifications.follow_accepted_msg', { user });
     case 'tag': return t('notifications.tag', { user });
+    case 'campaign': {
+      let campaign_text = '';
+      try {
+        if (n.payload) {
+          const parsed = typeof n.payload === 'string' ? JSON.parse(n.payload) : n.payload;
+          campaign_text = parsed.campaign_text || '';
+        }
+      } catch (e) {
+        console.warn('Failed to parse campaign notification payload:', e);
+      }
+      return t('notifications.campaign', { user, campaign_text });
+    }
     default: return t('notifications.default', { user });
   }
 }

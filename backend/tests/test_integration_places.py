@@ -66,7 +66,9 @@ class TestPlaceCreate:
     """POST /places/ — Mekan oluşturma."""
 
     def test_create_place(self, client):
-        response = client.post("/places/", json={
+        uid = create_test_user(email="createplace@test.com", username="createplace")
+        headers = get_auth_headers(uid)
+        response = client.post("/places/", headers=headers, json={
             "name": "Yeni Kafe",
             "address": "Adres 1",
             "city": "Ankara",
@@ -78,7 +80,9 @@ class TestPlaceCreate:
         assert response.json()["name"] == "Yeni Kafe"
 
     def test_create_place_minimal(self, client):
-        response = client.post("/places/", json={
+        uid = create_test_user(email="createplacemin@test.com", username="createplacemin")
+        headers = get_auth_headers(uid)
+        response = client.post("/places/", headers=headers, json={
             "name": "Minimal Cafe",
             "address": "Adres",
             "city": "Istanbul",
@@ -311,4 +315,46 @@ class TestPlaceInteract:
         response = client.post(f"/places/{pid}/interact?interaction_type=view", headers=headers)
         assert response.status_code == 200
         assert response.json()["ok"] is True
+
+
+class TestCampaignNotifications:
+    """Mekan kampanya güncellemesi bildirim testleri."""
+
+    def test_campaign_notification_sent_to_followers(self, client):
+        # 1. Takipçi oluştur
+        follower_uid = create_test_user(email="f_campaign@test.com", username="f_campaign")
+        
+        # 2. Venue sahibi ve mekan oluştur
+        owner_uid, pid = create_venue_user(email="owner_campaign@test.com", username="owner_campaign")
+        
+        # 3. Takipçi mekanı takip etsin
+        db = TestingSessionLocal()
+        follow = models.PlaceFollow(user_id=follower_uid, place_id=pid)
+        db.add(follow)
+        db.commit()
+        db.close()
+        
+        # 4. Venue sahibi kampanyayı güncellesin
+        owner_headers = get_auth_headers(owner_uid)
+        response = client.put(
+            "/places/my-venue",
+            headers=owner_headers,
+            json={"campaign_text": "Özel Kampanya: %50 İndirim!"}
+        )
+        assert response.status_code == 200
+        
+        # 5. Takipçinin bildirimlerini kontrol et
+        follower_headers = get_auth_headers(follower_uid)
+        notif_response = client.get("/notifications", headers=follower_headers)
+        assert notif_response.status_code == 200
+        notifs = notif_response.json()["items"]
+        
+        # Kampanya bildirimi olmalı
+        campaign_notifs = [n for n in notifs if n["type"] == "campaign"]
+        assert len(campaign_notifs) == 1
+        
+        import json
+        payload = json.loads(campaign_notifs[0]["payload"])
+        assert payload["campaign_text"] == "Özel Kampanya: %50 İndirim!"
+        assert payload["place_id"] == pid
 

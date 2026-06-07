@@ -433,15 +433,36 @@ def get_nearby_places(
     page_size: int = 20,
 ):
     """
-    Yakındaki mekanları döndürür — Bounding Box Pre-Filter + Haversine.
-
-    Optimizasyon stratejisi (PostGIS ST_DWithin eşdeğeri):
-    1. SQL seviyesinde coğrafi kutu (bounding box) filtresi → indeks dostu, O(1)
-    2. Kutu içindeki mekanlar için Python Haversine → hassas mesafe + sıralama
-
-    Bu yaklaşım 10.000+ mekan için bile milisaniye seviyesinde çalışır.
-    PostgreSQL + PostGIS'e geçildiğinde ST_DWithin ile değiştirilebilir.
+    Yakındaki mekanları döndürür — PostgreSQL/PostGIS veya SQLite (Bounding Box + Haversine) fallback.
     """
+    bind = db.get_bind()
+    if bind.dialect.name == "postgresql":
+        # PostgreSQL/PostGIS optimize edilmiş ST_DistanceSphere sorgusu
+        distance_expr = func.ST_DistanceSphere(
+            func.ST_MakePoint(models.Place.longitude, models.Place.latitude),
+            func.ST_MakePoint(lng, lat)
+        )
+        query = db.query(
+            models.Place,
+            (distance_expr / 1000.0).label("distance_km")
+        ).filter(
+            models.Place.latitude.isnot(None),
+            models.Place.longitude.isnot(None),
+            distance_expr <= radius_km * 1000.0
+        ).order_by("distance_km")
+        
+        total = query.count()
+        offset = (page - 1) * page_size
+        results = query.offset(offset).limit(page_size).all()
+        
+        paginated = []
+        for p, d_km in results:
+            p._distance_km = round(d_km, 2)
+            paginated.append(p)
+            
+        paginated = _enrich_places_with_stats(db, paginated)
+        return paginated, total
+
     import math
 
     # 1️⃣ Bounding Box hesaplama (1° lat ≈ 111km, 1° lng ≈ 111km * cos(lat))

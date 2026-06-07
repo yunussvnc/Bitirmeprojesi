@@ -36,10 +36,10 @@ def normalize_tr(text: str) -> str:
 _cache: Dict[str, Tuple[float, dict]] = {}
 
 
-def _cache_key(vibe: str, purpose: str, budget: str, lat: float, lng: float, category: str, query: str) -> str:
+def _cache_key(vibe: str, purpose: str, budget: str, lat: float, lng: float, category: str, query: str, user_id: Optional[int] = None) -> str:
     grid_lat = round(lat, 2)
     grid_lng = round(lng, 2)
-    raw = f"{vibe}|{purpose}|{budget}|{grid_lat}|{grid_lng}|{category}|{query}"
+    raw = f"{vibe}|{purpose}|{budget}|{grid_lat}|{grid_lng}|{category}|{query}|{user_id}"
     return hashlib.md5(raw.encode()).hexdigest()
 
 
@@ -151,6 +151,7 @@ def score_place(
     user_lat: Optional[float] = None,
     user_lng: Optional[float] = None,
     explicit_district: Optional[str] = None,
+    interaction_score: float = 0.0,
 ) -> Tuple[float, Optional[int], List[str]]:
     features = _split_features(getattr(place, "features", None))
     category = (getattr(place, "category", "") or "").lower()
@@ -219,6 +220,10 @@ def score_place(
         elif dist < 3000:
             score += 0.5
 
+    # Interaction history bonus
+    if interaction_score > 0:
+        score += min(interaction_score * 0.5, 5.0)
+
     return score, distance_m, tags
 
 
@@ -257,6 +262,8 @@ def recommend_pipeline(
     radius_m: int = 3000,
     category: Optional[str] = None,
     selected_district: Optional[str] = None,
+    db: Any = None,
+    user_id: Optional[int] = None,
 ) -> dict:
     """
     Full recommend pipeline:
@@ -291,11 +298,25 @@ def recommend_pipeline(
     # --- Cache check ---
     c_lat = user_lat or 41.0082
     c_lng = user_lng or 28.9784
-    ck = _cache_key(vibe, purpose, budget, c_lat, c_lng, cat_filter, query + (effective_district or ""))
+    ck = _cache_key(vibe, purpose, budget, c_lat, c_lng, cat_filter, query + (effective_district or ""), user_id)
     cached = _cache_get(ck)
     if cached:
         cached["cached"] = True
         return cached
+
+    # Batch fetch place interactions for this user and places
+    interactions_map = {}
+    if db and user_id and places:
+        try:
+            import models
+            place_ids = [p.id for p in places]
+            interactions = db.query(models.PlaceInteraction.place_id, models.PlaceInteraction.score).filter(
+                models.PlaceInteraction.user_id == user_id,
+                models.PlaceInteraction.place_id.in_(place_ids)
+            ).all()
+            interactions_map = {item.place_id: item.score for item in interactions}
+        except Exception as e:
+            pass
 
     # --- 1. Distance & District filter ---
     filtered = []
@@ -364,7 +385,11 @@ def recommend_pipeline(
     # --- 2. Score ---
     scored = []
     for p in filtered:
-        sc, dist, tags = score_place(p, vibe, purpose, budget, query, user_lat, user_lng, explicit_district)
+        interaction_score = interactions_map.get(p.id, 0.0)
+        sc, dist, tags = score_place(
+            p, vibe, purpose, budget, query, user_lat, user_lng,
+            explicit_district, interaction_score=interaction_score
+        )
         scored.append((sc, dist, tags, p))
 
     scored.sort(key=lambda x: x[0], reverse=True)

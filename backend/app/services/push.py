@@ -139,6 +139,10 @@ def notification_push_content(
             "title": "🏷️ Etiketlendin",
             "body": f"{actor_name} seni bir gönderide etiketledi",
         },
+        "campaign": {
+            "title": "📢 Kampanya Güncellemesi",
+            "body": extra.get("campaign_text", f"{actor_name} yeni bir kampanya paylaştı") if extra else f"{actor_name} yeni bir kampanya paylaştı",
+        },
     }
 
 

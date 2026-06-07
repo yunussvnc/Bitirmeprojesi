@@ -170,10 +170,32 @@ def update_my_venue(
     if not place:
         raise HTTPException(status_code=404, detail="Size ait bir mekan bulunamadı.")
         
+    old_campaign = place.campaign_text
+    new_campaign = data.campaign_text
+        
     updated_place = crud.update_place(db, place.id, data.model_dump(exclude_unset=True))
     if not updated_place:
         raise HTTPException(status_code=400, detail="Mekan güncellenemedi.")
         
+    campaign_changed = (new_campaign is not None) and (new_campaign != old_campaign)
+    if campaign_changed and new_campaign.strip():
+        import json
+        followers = db.query(models.PlaceFollow).filter(models.PlaceFollow.place_id == place.id).all()
+        payload_data = {
+            "place_id": place.id,
+            "place_name": place.name,
+            "campaign_text": new_campaign.strip(),
+        }
+        for follow in followers:
+            crud.create_notification(
+                db=db,
+                user_id=follow.user_id,
+                type="campaign",
+                actor_id=current_user.id,
+                push_extra=payload_data,
+                payload=json.dumps(payload_data),
+            )
+
     enriched_places = crud._enrich_places_with_stats(db, [updated_place], current_user_id=current_user.id)
     return enriched_places[0]
 
