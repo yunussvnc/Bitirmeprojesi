@@ -133,7 +133,7 @@ start_service(
 # 4. Hazir ol bekle
 print("\n[5] Servisler hazir olana kadar bekleniyor...")
 time.sleep(5)
-b_ok  = wait_for_service("http://localhost:8000/health", "Backend")
+b_ok  = wait_for_service("http://localhost:8000/health", "Backend", timeout=60)
 print()
 ai_ok = wait_for_service("http://localhost:8081/health", "AI-LLM", timeout=60)
 print()

@@ -153,6 +153,7 @@ export default function UserProfileScreen() {
             is_following: res.status === 'accepted',
             follow_status: res.status as 'pending' | 'accepted' | null,
             followers_count: res.followers_count,
+            friends_count: res.friends_count,
           };
         });
         
@@ -432,10 +433,10 @@ export default function UserProfileScreen() {
             activeOpacity={0.7}
             onPress={() => {
               lightImpact();
-              router.push(`/network?id=${profile.id}&type=following` as any);
+              router.push(`/network?id=${profile.id}&type=friends` as any);
             }}
           >
-            <Text style={[styles.statNumber, { color: colors.text.primary }]}>{profile.following_count}</Text>
+            <Text style={[styles.statNumber, { color: colors.text.primary }]}>{profile.friends_count}</Text>
             <Text style={[styles.statLabel, { color: colors.text.tertiary }]}>{t('profile.following')}</Text>
           </TouchableOpacity>
         </View>

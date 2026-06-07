@@ -122,25 +122,48 @@ export default function FriendSearchScreen() {
 
   const handleToggleFollow = async (userId: number, index: number) => {
     lightImpact();
+    const original = results[index];
+    if (!original) return;
+
     // Optimistic update
     setResults((prev) => {
       const next = [...prev];
-      next[index] = { ...next[index], is_following: !next[index].is_following };
+      const cur = next[index];
+      if (!cur) return prev;
+      const willFollow = !cur.is_following && cur.follow_status !== "pending";
+      next[index] = {
+        ...cur,
+        is_following: willFollow && !cur.is_private,
+        follow_status: willFollow
+          ? cur.is_private
+            ? "pending"
+            : "accepted"
+          : null,
+      };
       return next;
     });
     try {
       const res = await toggleFollow(userId);
-      const newFollowing = res.status === "accepted";
       setResults((prev) => {
         const next = [...prev];
-        next[index] = { ...next[index], is_following: newFollowing };
+        if (!next[index]) return prev;
+        next[index] = {
+          ...next[index],
+          is_following: res.status === "accepted",
+          follow_status: res.status as "pending" | "accepted" | null,
+        };
         return next;
       });
     } catch (e) {
       // Revert
       setResults((prev) => {
         const next = [...prev];
-        next[index] = { ...next[index], is_following: !next[index].is_following };
+        if (!next[index]) return prev;
+        next[index] = {
+          ...next[index],
+          is_following: original.is_following,
+          follow_status: original.follow_status,
+        };
         return next;
       });
       handleApiError(e);
@@ -204,39 +227,50 @@ export default function FriendSearchScreen() {
           )}
         </View>
 
-        {mode !== "chat" && (
-          <TouchableOpacity
-            style={[
-              styles.followBtn,
-              item.is_following
-                ? {
-                    backgroundColor: colors.surface.elevated,
-                    borderWidth: 1,
-                    borderColor: colors.surface.border,
-                  }
-                : {
-                    backgroundColor: colors.accent.primary,
-                    borderWidth: 1,
-                    borderColor: colors.accent.primary,
-                  },
-            ]}
-            onPress={() => handleToggleFollow(item.id, index)}
-            activeOpacity={0.8}
-          >
-            <Text
-              style={[
-                styles.followBtnText,
-                {
-                  color: item.is_following
-                    ? colors.text.primary
-                    : colors.accent.onPrimary,
-                },
-              ]}
+        {mode !== "chat" && (() => {
+          const isPending = item.follow_status === "pending";
+          const isFollowing = item.is_following;
+
+          let label: string;
+          let btnStyle: object;
+          let textStyle: object;
+
+          if (isFollowing) {
+            label = t("friend_search.following");
+            btnStyle = {
+              backgroundColor: colors.surface.elevated,
+              borderWidth: 1,
+              borderColor: colors.surface.border,
+            };
+            textStyle = { color: colors.text.primary };
+          } else if (isPending) {
+            label = t("profile.requested_btn");
+            btnStyle = {
+              backgroundColor: colors.surface.elevated,
+              borderWidth: 1,
+              borderColor: colors.surface.border,
+            };
+            textStyle = { color: colors.text.secondary };
+          } else {
+            label = t("friend_search.follow");
+            btnStyle = {
+              backgroundColor: colors.accent.primary,
+              borderWidth: 1,
+              borderColor: colors.accent.primary,
+            };
+            textStyle = { color: colors.accent.onPrimary };
+          }
+
+          return (
+            <TouchableOpacity
+              style={[styles.followBtn, btnStyle]}
+              onPress={() => handleToggleFollow(item.id, index)}
+              activeOpacity={0.8}
             >
-              {item.is_following ? t("friend_search.following") : t("friend_search.follow")}
-            </Text>
-          </TouchableOpacity>
-        )}
+              <Text style={[styles.followBtnText, textStyle]}>{label}</Text>
+            </TouchableOpacity>
+          );
+        })()}
       </TouchableOpacity>
     );
   };

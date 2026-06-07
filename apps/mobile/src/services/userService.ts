@@ -23,6 +23,7 @@ export type UserProfile = {
   created_at: string;
   followers_count: number;
   following_count: number;
+  friends_count: number;
   is_following: boolean;
   follow_status: 'pending' | 'accepted' | null;
   is_private?: boolean;
@@ -44,8 +45,8 @@ export async function getUserProfile(userId: number): Promise<UserProfile> {
   return apiGet<UserProfile>(`/users/${userId}`);
 }
 
-export async function toggleFollow(userId: number): Promise<{ status: string | null; followers_count: number }> {
-  return apiPost<{ status: string | null; followers_count: number }>(`/users/${userId}/follow`);
+export async function toggleFollow(userId: number): Promise<{ status: string | null; followers_count: number; friends_count: number }> {
+  return apiPost<{ status: string | null; followers_count: number; friends_count: number }>(`/users/${userId}/follow`);
 }
 
 export async function acceptFollowRequest(userId: number): Promise<{ success: boolean }> {

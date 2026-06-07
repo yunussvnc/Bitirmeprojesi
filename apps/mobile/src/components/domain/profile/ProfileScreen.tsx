@@ -93,7 +93,7 @@ export default function ProfileScreen() {
 
   const displayStats = {
     followers: profile?.followers_count ?? 0,
-    following: profile?.following_count ?? 0,
+    friends: profile?.friends_count ?? 0,
     posts: stats?.post_count ?? 0,
   };
 
@@ -216,10 +216,10 @@ export default function ProfileScreen() {
             activeOpacity={0.7}
             onPress={() => {
               lightImpact();
-              router.push(`/network?id=${authUser.id}&type=following` as any);
+              router.push(`/network?id=${authUser.id}&type=friends` as any);
             }}
           >
-            <Text style={[styles.statNumber, { color: colors.text.primary }]}>{displayStats.following}</Text>
+            <Text style={[styles.statNumber, { color: colors.text.primary }]}>{displayStats.friends}</Text>
             <Text style={[styles.statLabel, { color: colors.text.tertiary }]}>{t('profile.following')}</Text>
           </TouchableOpacity>
         </View>

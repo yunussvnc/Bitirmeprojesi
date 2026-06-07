@@ -97,22 +97,31 @@ def search_users(
         .all()
     )
 
-    # ── 7. Batch is_following kontrolü (N+1 sorgusu yerine tek sorgu) ──
+    # ── 7. Batch follows kontrolü (N+1 sorgusu yerine tek sorgu) ──
     current_uid = current_user.id if current_user else None
-    following_set: set[int] = set()
+    following_map: dict[int, str] = {}
     if current_uid and paginated:
         paginated_ids = [u.id for u in paginated]
-        follow_rows = db.query(models.Follow.following_id).filter(
+        follow_rows = db.query(models.Follow.following_id, models.Follow.status).filter(
             models.Follow.follower_id == current_uid,
             models.Follow.following_id.in_(paginated_ids),
         ).all()
-        following_set = {r[0] for r in follow_rows}
+        following_map = {r[0]: r[1] for r in follow_rows}
 
     # ── 8. Sonuçları serialize et ──
     items = []
     for u in paginated:
         item = schemas.UserSummary.model_validate(u)
-        item.is_following = u.id in following_set
+        status = following_map.get(u.id)
+        item.is_following = status == "accepted"
+        item.follow_status = status
+        
+        # Privacy check
+        prefs = db.query(models.UserPreferences).filter(
+            models.UserPreferences.user_id == u.id
+        ).first()
+        item.is_private = prefs.is_private_account if prefs else False
+        
         items.append(item)
 
     return {"items": items, "total": total, "page": page, "page_size": page_size}
@@ -161,6 +170,7 @@ def get_user_profile(
             
     followers_count = len(crud.get_follower_ids(db, user_id))
     following_count = len(crud.get_following_ids(db, user_id))
+    friends_count = len(crud.get_mutual_friend_ids(db, user_id))
     
     # Dummygram-style: follow_status hesapla (pending, accepted, veya None)
     follow_status = None
@@ -183,6 +193,7 @@ def get_user_profile(
         **schemas.User.model_validate(user).model_dump(),
         followers_count=followers_count,
         following_count=following_count,
+        friends_count=friends_count,
         is_following=is_following,
         follow_status=follow_status,
     )
@@ -262,9 +273,15 @@ def toggle_follow_user(
             db.delete(s)
         db.commit()
     
-    # Dummygram: Anlık UI güncellemesi için güncel followers_count dön
+    # Dummygram: Anlık UI güncellemesi için güncel followers_count ve friends_count dön
     followers_count = len(crud.get_follower_ids(db, user_id))
-    return {"status": follow_status, "followers_count": followers_count, "following": is_following}
+    friends_count = len(crud.get_mutual_friend_ids(db, user_id))
+    return {
+        "status": follow_status,
+        "followers_count": followers_count,
+        "following": is_following,
+        "friends_count": friends_count
+    }
 
 @router.post("/users/{user_id}/follow/accept")
 def accept_follow_request(

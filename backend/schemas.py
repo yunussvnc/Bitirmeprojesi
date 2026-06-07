@@ -62,6 +62,7 @@ class UserProfile(User):
     """Profil sayfası için: followers/following sayıları + is_following + follow_status"""
     followers_count: int = 0
     following_count: int = 0
+    friends_count: int = 0
     is_following: bool = False
     follow_status: Optional[str] = None  # "pending", "accepted", or None (not following)
 
@@ -607,6 +608,7 @@ class UserStats(BaseModel):
     post_count: int = 0
     follower_count: int = 0
     following_count: int = 0
+    friends_count: int = 0
     review_count: int = 0
     visit_count: int = 0  # verified reviews or all reviews
     visits_this_month: int = 0

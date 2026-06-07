@@ -1645,6 +1645,7 @@ def get_user_stats(db: Session, user_id: int) -> dict:
                 (SELECT COUNT(*) FROM posts         WHERE user_id = :uid)                                          AS post_count,
                 (SELECT COUNT(*) FROM follows        WHERE following_id = :uid AND status = 'accepted')            AS follower_count,
                 (SELECT COUNT(*) FROM follows        WHERE follower_id  = :uid AND status = 'accepted')            AS following_count,
+                (SELECT COUNT(*) FROM follows f1 JOIN follows f2 ON f1.follower_id = f2.following_id AND f1.following_id = f2.follower_id WHERE f1.follower_id = :uid AND f1.status = 'accepted' AND f2.status = 'accepted') AS friends_count,
                 (SELECT COUNT(*) FROM reviews        WHERE user_id = :uid)                                         AS review_count,
                 (SELECT COUNT(*) FROM reviews        WHERE user_id = :uid AND created_at >= :start_of_month)       AS visits_this_month
         ),
@@ -1661,7 +1662,7 @@ def get_user_stats(db: Session, user_id: int) -> dict:
             GROUP BY p.city ORDER BY COUNT(*) DESC LIMIT 1
         )
         SELECT
-            c.post_count, c.follower_count, c.following_count,
+            c.post_count, c.follower_count, c.following_count, c.friends_count,
             c.review_count, c.visits_this_month,
             fc.category AS favorite_category,
             fr.city     AS favorite_region
@@ -1673,7 +1674,7 @@ def get_user_stats(db: Session, user_id: int) -> dict:
     row = db.execute(sql, {"uid": user_id, "start_of_month": start_of_month}).fetchone()
     if row is None:
         return {
-            "post_count": 0, "follower_count": 0, "following_count": 0,
+            "post_count": 0, "follower_count": 0, "following_count": 0, "friends_count": 0,
             "review_count": 0, "visit_count": 0, "visits_this_month": 0,
             "favorite_category": None, "favorite_region": None,
         }
@@ -1681,6 +1682,7 @@ def get_user_stats(db: Session, user_id: int) -> dict:
         "post_count": row.post_count or 0,
         "follower_count": row.follower_count or 0,
         "following_count": row.following_count or 0,
+        "friends_count": row.friends_count or 0,
         "review_count": row.review_count or 0,
         "visit_count": row.review_count or 0,
         "visits_this_month": row.visits_this_month or 0,

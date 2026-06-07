@@ -19,6 +19,8 @@ export type UserSummary = {
     last_name?: string | null;
     avatar_url: string | null;
     is_following?: boolean;
+    follow_status?: 'pending' | 'accepted' | null;
+    is_private?: boolean;
 };
 
 export type PaginatedUsers = {
