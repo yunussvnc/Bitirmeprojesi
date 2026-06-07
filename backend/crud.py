@@ -2035,3 +2035,68 @@ def get_discover_feed_paginated(db: Session, page: int = 1, page_size: int = 20)
         )
         return items, base.count()
 
+
+# --- COMMENT LIKES & STORY VIEWS CRUD ---
+
+def toggle_comment_like(db: Session, comment_id: int, user_id: int) -> tuple[bool, int]:
+    """Yorumu beğen / beğeniyi geri al."""
+    like = db.query(models.CommentLike).filter(
+        models.CommentLike.comment_id == comment_id,
+        models.CommentLike.user_id == user_id
+    ).first()
+    if like:
+        db.delete(like)
+        liked = False
+    else:
+        new_like = models.CommentLike(comment_id=comment_id, user_id=user_id)
+        db.add(new_like)
+        liked = True
+    db.commit()
+    count = db.query(models.CommentLike).filter(models.CommentLike.comment_id == comment_id).count()
+    return liked, count
+
+
+def is_comment_liked_by_user(db: Session, comment_id: int, user_id: int) -> bool:
+    """Yorumun kullanıcı tarafından beğenilip beğenilmediğini kontrol et."""
+    return db.query(models.CommentLike).filter(
+        models.CommentLike.comment_id == comment_id,
+        models.CommentLike.user_id == user_id
+    ).first() is not None
+
+
+def record_story_view(db: Session, story_id: int, viewer_id: int) -> bool:
+    """Hikaye izlenme kaydı oluştur."""
+    # Kendi hikayesini izlemeyi kaydetmeyebiliriz, ancak basitlik için kaydediyoruz
+    exists = db.query(models.StoryView).filter(
+        models.StoryView.story_id == story_id,
+        models.StoryView.viewer_id == viewer_id
+    ).first()
+    if exists:
+        return False
+    view = models.StoryView(story_id=story_id, viewer_id=viewer_id)
+    db.add(view)
+    db.commit()
+    return True
+
+
+def get_story_views_count(db: Session, story_id: int) -> int:
+    """Hikayenin toplam benzersiz izlenme sayısını al."""
+    return db.query(models.StoryView).filter(models.StoryView.story_id == story_id).count()
+
+
+def is_story_viewed_by_user(db: Session, story_id: int, user_id: int) -> bool:
+    """Hikayenin kullanıcı tarafından izlenip izlenmediğini kontrol et."""
+    return db.query(models.StoryView).filter(
+        models.StoryView.story_id == story_id,
+        models.StoryView.viewer_id == user_id
+    ).first() is not None
+
+
+def get_story_viewers(db: Session, story_id: int) -> list[models.User]:
+    """Hikayeyi izleyen kullanıcıların listesini getirir."""
+    views = db.query(models.StoryView).filter(models.StoryView.story_id == story_id).all()
+    viewer_ids = [v.viewer_id for v in views]
+    if not viewer_ids:
+        return []
+    return db.query(models.User).filter(models.User.id.in_(viewer_ids)).all()
+

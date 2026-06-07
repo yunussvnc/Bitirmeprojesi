@@ -451,6 +451,8 @@ class PostComment(BaseModel):
     text: str
     created_at: datetime
     author_username: Optional[str] = None
+    like_count: int = 0
+    is_liked: bool = False
 
     class Config:
         from_attributes = True
@@ -551,6 +553,8 @@ class Story(BaseModel):
     expires_at: datetime
     author: Optional[UserSummary] = None
     place: Optional[PlaceSummary] = None
+    view_count: int = 0
+    is_viewed: bool = False
 
     class Config:
         from_attributes = True
@@ -561,6 +565,11 @@ class PaginatedStories(BaseModel):
     total: int
     page: int
     page_size: int
+
+
+class StoryViewerList(BaseModel):
+    items: List[UserSummary]
+    total: int
 
 
 # --- PAGİNATED RESPONSE ---

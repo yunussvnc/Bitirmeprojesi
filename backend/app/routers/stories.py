@@ -12,7 +12,7 @@ from app.dependencies import get_db, get_current_user, get_optional_user
 router = APIRouter(tags=["Stories"])
 
 
-def _story_to_schema(s):
+def _story_to_schema(s, db: Session, current_user_id: Optional[int] = None):
     author = None
     if s.user:
         author = schemas.UserSummary(
@@ -24,6 +24,10 @@ def _story_to_schema(s):
     place = None
     if s.place:
         place = schemas.PlaceSummary(id=s.place.id, name=s.place.name, category=s.place.category)
+    
+    view_count = crud.get_story_views_count(db, s.id)
+    is_viewed = crud.is_story_viewed_by_user(db, s.id, current_user_id) if current_user_id else False
+
     return schemas.Story(
         id=s.id,
         user_id=s.user_id,
@@ -36,6 +40,8 @@ def _story_to_schema(s):
         expires_at=s.expires_at,
         author=author,
         place=place,
+        view_count=view_count,
+        is_viewed=is_viewed,
     )
 
 
@@ -49,7 +55,7 @@ def create_story(
     if data.place_id is not None and not crud.get_place_by_id(db, data.place_id):
         raise HTTPException(status_code=404, detail="Mekan bulunamadı.")
     story = crud.create_story(db, current_user.id, data)
-    return _story_to_schema(story)
+    return _story_to_schema(story, db, current_user.id)
 
 
 @router.get("/places/{place_id}/stories", response_model=schemas.PaginatedStories)
@@ -61,7 +67,7 @@ def get_place_stories(
 ):
     """Mekanın hikayelerini sayfalı olarak getirir."""
     stories, total = crud.get_stories_by_place(db, place_id, page, page_size)
-    items = [_story_to_schema(s) for s in stories]
+    items = [_story_to_schema(s, db) for s in stories]
     return schemas.PaginatedStories(items=items, total=total, page=page, page_size=page_size)
 
 
@@ -82,7 +88,7 @@ def get_feed_stories(
         current_user_id=current_user.id if current_user else None,
         filter_mode=filter_mode,
     )
-    items = [_story_to_schema(s) for s in stories]
+    items = [_story_to_schema(s, db, current_user.id if current_user else None) for s in stories]
     return schemas.PaginatedStories(items=items, total=total, page=page, page_size=page_size)
 
 
@@ -101,7 +107,7 @@ def get_user_stories(
     ).order_by(models.Story.created_at.desc())
     total = query.count()
     stories = query.offset((page - 1) * page_size).limit(page_size).all()
-    items = [_story_to_schema(s) for s in stories]
+    items = [_story_to_schema(s, db) for s in stories]
     return schemas.PaginatedStories(items=items, total=total, page=page, page_size=page_size)
 
 
@@ -204,3 +210,59 @@ async def reply_to_story(
         "conversation_id": conv.id,
         "message_id": msg.id,
     }
+
+
+@router.post("/stories/{story_id}/view")
+def record_story_view_endpoint(
+    story_id: int,
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(get_current_user),
+):
+    """Hikaye izlenme kaydı oluşturur."""
+    recorded = crud.record_story_view(db, story_id, current_user.id)
+    return {"ok": True, "recorded": recorded}
+
+
+@router.get("/stories/{story_id}/viewers", response_model=schemas.StoryViewerList)
+def get_story_viewers_endpoint(
+    story_id: int,
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(get_current_user),
+):
+    """Hikayeyi izleyen kullanıcıların listesini getirir (sadece hikaye sahibine açık)."""
+    story = db.query(models.Story).filter(models.Story.id == story_id).first()
+    if not story:
+        raise HTTPException(status_code=404, detail="Hikaye bulunamadı.")
+    if story.user_id != current_user.id:
+        raise HTTPException(status_code=403, detail="Sadece kendi hikayelerinizin izleyicilerini görebilirsiniz.")
+    
+    viewers = crud.get_story_viewers(db, story_id)
+    items = []
+    for u in viewers:
+        # Check if following
+        is_following = crud.is_following(db, current_user.id, u.id)
+        follow_status = None
+        follow_row = db.query(models.Follow).filter(
+            models.Follow.follower_id == current_user.id,
+            models.Follow.following_id == u.id,
+        ).first()
+        if follow_row:
+            follow_status = follow_row.status
+
+        # Privacy check
+        prefs = db.query(models.UserPreferences).filter(
+            models.UserPreferences.user_id == u.id
+        ).first()
+        is_private = prefs.is_private_account if prefs else False
+
+        items.append(schemas.UserSummary(
+            id=u.id,
+            username=u.username,
+            first_name=u.first_name,
+            last_name=u.last_name,
+            avatar_url=u.avatar_url,
+            is_following=is_following,
+            follow_status=follow_status,
+            is_private=is_private,
+        ))
+    return schemas.StoryViewerList(items=items, total=len(items))

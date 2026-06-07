@@ -45,6 +45,8 @@ class User(Base):
     saved_posts = relationship("SavedPost", back_populates="user", cascade="all, delete-orphan")
     owned_places = relationship("Place", back_populates="owner")
     preferences = relationship("UserPreferences", back_populates="user", uselist=False, cascade="all, delete-orphan")
+    comment_likes = relationship("CommentLike", back_populates="user", cascade="all, delete-orphan")
+    story_views = relationship("StoryView", foreign_keys="StoryView.viewer_id", back_populates="viewer", cascade="all, delete-orphan")
 
 
 class UserPreferences(Base):
@@ -476,6 +478,7 @@ class PostComment(Base):
 
     user = relationship("User", back_populates="post_comments")
     post = relationship("Post", back_populates="comments")
+    likes = relationship("CommentLike", back_populates="comment", cascade="all, delete-orphan")
 
 
 class PostTag(Base):
@@ -538,6 +541,7 @@ class Story(Base):
     user = relationship("User", back_populates="stories")
     place = relationship("Place", back_populates="stories")
     replies = relationship("Message", back_populates="parent_story", foreign_keys="Message.parent_story_id")
+    views = relationship("StoryView", back_populates="story", cascade="all, delete-orphan")
 
 
 class Notification(Base):
@@ -722,4 +726,34 @@ class CommunityMessage(Base):
     room = relationship("CommunityRoom", back_populates="messages")
     sender = relationship("User", foreign_keys=[sender_id])
     shared_place = relationship("Place")
+
+
+class CommentLike(Base):
+    __tablename__ = "comment_likes"
+    id = Column(Integer, primary_key=True, index=True)
+    comment_id = Column(Integer, ForeignKey("post_comments.id", ondelete="CASCADE"), nullable=False, index=True)
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    comment = relationship("PostComment", back_populates="likes")
+    user = relationship("User", back_populates="comment_likes")
+
+    __table_args__ = (
+        UniqueConstraint("user_id", "comment_id", name="uq_comment_like_user_comment"),
+    )
+
+
+class StoryView(Base):
+    __tablename__ = "story_views"
+    id = Column(Integer, primary_key=True, index=True)
+    story_id = Column(Integer, ForeignKey("stories.id", ondelete="CASCADE"), nullable=False, index=True)
+    viewer_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    story = relationship("Story", back_populates="views")
+    viewer = relationship("User", foreign_keys=[viewer_id], back_populates="story_views")
+
+    __table_args__ = (
+        UniqueConstraint("viewer_id", "story_id", name="uq_story_view_user_story"),
+    )
 

@@ -311,7 +311,17 @@ def get_post_comments(
     
     out = []
     for c in comments:
-        d = {"id": c.id, "user_id": c.user_id, "post_id": c.post_id, "text": c.text, "created_at": c.created_at}
+        like_count = db.query(models.CommentLike).filter(models.CommentLike.comment_id == c.id).count()
+        is_liked = crud.is_comment_liked_by_user(db, c.id, current_user.id) if current_user else False
+        d = {
+            "id": c.id,
+            "user_id": c.user_id,
+            "post_id": c.post_id,
+            "text": c.text,
+            "created_at": c.created_at,
+            "like_count": like_count,
+            "is_liked": is_liked
+        }
         d["author_username"] = c.user.username if c.user else None
         out.append(d)
     return {"items": out, "total": total, "page": page, "page_size": page_size}
@@ -349,6 +359,8 @@ def add_comment(
         text=comment.text,
         created_at=comment.created_at,
         author_username=current_user.username,
+        like_count=0,
+        is_liked=False,
     )
 
 
@@ -397,6 +409,24 @@ def delete_comment(
     if not crud.delete_comment(db, comment_id, current_user.id):
         raise HTTPException(status_code=404, detail="Yorum bulunamadı veya yetkiniz yok.")
     return {"ok": True}
+
+
+@router.post("/posts/{post_id}/comments/{comment_id}/like")
+def toggle_comment_like(
+    post_id: int,
+    comment_id: int,
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(get_current_user),
+):
+    """Yorumu beğen / beğeniyi geri al."""
+    comment = db.query(models.PostComment).filter(
+        models.PostComment.id == comment_id,
+        models.PostComment.post_id == post_id
+    ).first()
+    if not comment:
+        raise HTTPException(status_code=404, detail="Yorum bulunamadı.")
+    liked, count = crud.toggle_comment_like(db, comment_id, current_user.id)
+    return {"liked": liked, "like_count": count}
 
 
 @router.post("/report")

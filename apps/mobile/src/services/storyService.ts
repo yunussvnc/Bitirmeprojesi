@@ -1,4 +1,5 @@
 import { apiGet, apiPost } from "@/src/utils/apiClient";
+import type { UserSummary } from "./userService";
 
 export type Story = {
   id: number;
@@ -21,6 +22,8 @@ export type Story = {
     name: string;
     category?: string;
   };
+  view_count?: number;
+  is_viewed?: boolean;
 };
 
 export type PaginatedStories = {
@@ -80,4 +83,14 @@ export async function replyToStory(
   text: string
 ): Promise<{ ok: boolean; conversation_id: number; message_id: number }> {
   return apiPost(`/stories/${storyId}/reply`, { text });
+}
+
+/** Hikaye izlenme kaydı gönder */
+export async function recordStoryView(storyId: number): Promise<{ ok: boolean; recorded: boolean }> {
+  return apiPost(`/stories/${storyId}/view`);
+}
+
+/** Hikayeyi izleyen kullanıcıların listesini al */
+export async function getStoryViewers(storyId: number): Promise<{ items: UserSummary[]; total: number }> {
+  return apiGet<{ items: UserSummary[]; total: number }>(`/stories/${storyId}/viewers`);
 }
