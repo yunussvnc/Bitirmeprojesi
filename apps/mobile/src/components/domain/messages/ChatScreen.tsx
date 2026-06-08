@@ -46,6 +46,7 @@ import { useAuthStore } from "@/src/store/useAuthStore";
 import { logger } from "@/src/utils/logger";
 import { useTranslation } from "react-i18next";
 import { API_BASE_URL } from "@/src/constants/api";
+import { resolveChatTargetUserId } from "@/src/utils/chatTargetUser";
 
 /* ── Types ── */
 interface Message {
@@ -202,23 +203,6 @@ function getInitialMessages(chatId: string): Message[] {
     if (msgs) return msgs.map((m) => ({ ...m }));
     // Tanımlanmamış chatId için boş dizi
     return [];
-}
-
-/**
- * BUG-13: ChatId'den hedef user_id'yi güvenli şekilde parse et.
- * Formatı: tamamen sayısal ("42") veya "match_timestamp_userId" ("match_1711836000000_5")
- */
-function _parseTargetUserId(chatId: string): number | null {
-    // "match_xxx_userId" formatı
-    if (chatId.startsWith("match_")) {
-        const parts = chatId.split("_");
-        const lastPart = parts[parts.length - 1];
-        const id = parseInt(lastPart, 10);
-        return isNaN(id) ? null : id;
-    }
-    // Tamamen sayısal conversation id
-    const num = parseInt(chatId, 10);
-    return isNaN(num) ? null : num;
 }
 
 export default function ChatScreen() {
@@ -549,6 +533,7 @@ export default function ChatScreen() {
                                     timestamp: latestMsg.timestamp,
                                     unread: !latestMsg.isMine,
                                     isOnline: contact.isOnline || false,
+                                    targetUserId: contact.targetUserId,
                                     lastMessageAt: realTimestamp ?? Date.now(),
                                 });
                                 lastStoredMsgIdRef.current = latestMsg.id;
@@ -666,12 +651,17 @@ export default function ChatScreen() {
 
     const handleBlock = async () => {
         setIsOptionsVisible(false);
-        // BUG-13: Parse user id — prioritize contact.targetUserId
-        const targetId = contact.targetUserId || _parseTargetUserId(resolvedChatId);
-        if (targetId !== null) {
-            try {
-                await toggleBlockUser(targetId);
-            } catch { /* ignore */ }
+        const targetId = resolveChatTargetUserId(contact.targetUserId, resolvedChatId);
+        if (targetId === null) {
+            Alert.alert(t("common.error"), t("chat.target_user_unavailable", "Bu sohbetin kullanıcı bilgisi yüklenemedi. Lütfen sohbet listesinden tekrar açın."));
+            return;
+        }
+
+        try {
+            await toggleBlockUser(targetId);
+        } catch {
+            Alert.alert(t("common.error"), t("chat.block_failed", "Kullanıcı engellenemedi. Lütfen tekrar deneyin."));
+            return;
         }
         success();
         Alert.alert(t("common.success"), t("chat.blocked_success", { name: contact.name }), [
@@ -691,13 +681,18 @@ export default function ChatScreen() {
         }
 
         setIsReportVisible(false);
-        // BUG-13: Parse user id — prioritize contact.targetUserId
-        const targetId = contact.targetUserId || _parseTargetUserId(resolvedChatId);
-        if (targetId !== null) {
-            try {
-                await createReport({ target_type: "user", target_id: targetId, reason: "harassment", description: reportText.trim() });
-                await toggleBlockUser(targetId);
-            } catch { /* ignore */ }
+        const targetId = resolveChatTargetUserId(contact.targetUserId, resolvedChatId);
+        if (targetId === null) {
+            Alert.alert(t("common.error"), t("chat.target_user_unavailable", "Bu sohbetin kullanıcı bilgisi yüklenemedi. Lütfen sohbet listesinden tekrar açın."));
+            return;
+        }
+
+        try {
+            await createReport({ target_type: "user", target_id: targetId, reason: "harassment", description: reportText.trim() });
+            await toggleBlockUser(targetId);
+        } catch {
+            Alert.alert(t("common.error"), t("chat.report_failed", "Şikayet gönderilemedi. Lütfen tekrar deneyin."));
+            return;
         }
         success();
         Alert.alert(t("common.success"), t("chat.report_success", { name: contact.name }), [
@@ -765,6 +760,7 @@ export default function ChatScreen() {
                     timestamp: newMsg.timestamp,
                     unread: false,
                     isOnline: contact.isOnline || false,
+                    targetUserId: contact.targetUserId,
                     lastMessageAt: Date.now(),
                 });
             } else {
@@ -1312,8 +1308,7 @@ export default function ChatScreen() {
                     style={styles.headerProfile} 
                     activeOpacity={0.8}
                     onPress={() => {
-                        // Önce gerçek backend user ID'yi dene, yoksa mock data için fallback kullan
-                        const userId = contact.targetUserId || _parseTargetUserId(resolvedChatId);
+                        const userId = resolveChatTargetUserId(contact.targetUserId, resolvedChatId);
                         if (userId) {
                             router.push(`/user/${userId}` as any);
                         }

@@ -87,6 +87,9 @@ export function useNotificationSocket() {
                 true,       // isUnread
                 Date.now()  // actualTimestamp
             );
+            if (!existingConv.targetUserId && typeof msg.sender_id === 'number') {
+              store.updateConversationMeta(convIdStr, { targetUserId: msg.sender_id });
+            }
           } else {
             // Listede olmayan yeni bir sohbet geldi — hemen ekle
             store.addConversation({
@@ -100,6 +103,7 @@ export function useNotificationSocket() {
               lastMessageAt: Date.now(),
               unread: true,
               isOnline: false,
+              targetUserId: typeof msg.sender_id === 'number' ? msg.sender_id : undefined,
             });
           }
 

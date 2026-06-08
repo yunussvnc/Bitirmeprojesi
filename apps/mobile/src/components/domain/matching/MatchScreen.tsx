@@ -300,6 +300,7 @@ export default function MatchScreen() {
                     timestamp: t("chat.online", "Şimdi"), // Fallback to "Şimdi" if key not setup here, actually `common.now` or `chat.online` is better, let's use "Şimdi" directly or add `date.now` if it existed. Wait, let's just use `""` or something translated. Let's use `t("date.now", "Şimdi")` 
                     unread: true,
                     isOnline: true,
+                    targetUserId: currentCandidate.user_id,
                     isMatch: true,
                     lastMessageAt: Date.now()
                   });
@@ -429,6 +430,7 @@ export default function MatchScreen() {
                     timestamp: t("date.now", "Şimdi"),
                     unread: true,
                     isOnline: true,
+                    targetUserId: selectedLike.user_id,
                     isMatch: true,
                     lastMessageAt: Date.now()
                   });

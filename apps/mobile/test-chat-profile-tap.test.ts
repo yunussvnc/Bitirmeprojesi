@@ -5,56 +5,29 @@
  * Expected: Navigate to user profile page
  */
 
-describe("ChatScreen - Profile Tap Navigation", () => {
-  it("should parse numeric conversation ID correctly", () => {
-    const _parseTargetUserId = (chatId: string): number | null => {
-      if (chatId.startsWith("match_")) {
-        const parts = chatId.split("_");
-        const lastPart = parts[parts.length - 1];
-        const id = parseInt(lastPart, 10);
-        return isNaN(id) ? null : id;
-      }
-      const num = parseInt(chatId, 10);
-      return isNaN(num) ? null : num;
-    };
+import { parseLegacyMatchTargetUserId, resolveChatTargetUserId } from "./src/utils/chatTargetUser";
 
-    expect(_parseTargetUserId("42")).toBe(42);
-    expect(_parseTargetUserId("123")).toBe(123);
+describe("ChatScreen - Profile Tap Navigation", () => {
+  it("should not treat numeric backend conversation IDs as user IDs", () => {
+    expect(resolveChatTargetUserId(undefined, "42")).toBeNull();
+    expect(resolveChatTargetUserId(null, "123")).toBeNull();
   });
 
-  it("should parse match format conversation ID correctly", () => {
-    const _parseTargetUserId = (chatId: string): number | null => {
-      if (chatId.startsWith("match_")) {
-        const parts = chatId.split("_");
-        const lastPart = parts[parts.length - 1];
-        const id = parseInt(lastPart, 10);
-        return isNaN(id) ? null : id;
-      }
-      const num = parseInt(chatId, 10);
-      return isNaN(num) ? null : num;
-    };
+  it("should prefer explicit target user IDs", () => {
+    expect(resolveChatTargetUserId(99, "42")).toBe(99);
+  });
 
-    expect(_parseTargetUserId("match_1711836000000_5")).toBe(5);
-    expect(_parseTargetUserId("match_1234567890_99")).toBe(99);
+  it("should parse legacy match format conversation IDs correctly", () => {
+    expect(parseLegacyMatchTargetUserId("match_1711836000000_5")).toBe(5);
+    expect(parseLegacyMatchTargetUserId("match_1234567890_99")).toBe(99);
   });
 
   it("should return null for invalid conversation IDs", () => {
-    const _parseTargetUserId = (chatId: string): number | null => {
-      if (chatId.startsWith("match_")) {
-        const parts = chatId.split("_");
-        const lastPart = parts[parts.length - 1];
-        const id = parseInt(lastPart, 10);
-        return isNaN(id) ? null : id;
-      }
-      const num = parseInt(chatId, 10);
-      return isNaN(num) ? null : num;
-    };
-
-    expect(_parseTargetUserId("invalid_format")).toBeNull();
-    expect(_parseTargetUserId("abc")).toBeNull();
+    expect(resolveChatTargetUserId(undefined, "invalid_format")).toBeNull();
+    expect(parseLegacyMatchTargetUserId("abc")).toBeNull();
   });
 
-  it("should have headerProfile with onPress handler", () => {
+  it("should have headerProfile with onPress handler when target ID is known", () => {
     // This would be an integration test with Expo Router
     // Verifying the TouchableOpacity has onPress prop that calls router.push
     // Mock test: just verify the handler logic exists
@@ -63,13 +36,9 @@ describe("ChatScreen - Profile Tap Navigation", () => {
     };
 
     const chatId = "42";
-    const _parseTargetUserId = (chatId: string): number | null => {
-      const num = parseInt(chatId, 10);
-      return isNaN(num) ? null : num;
-    };
 
     // Simulate tap
-    const userId = _parseTargetUserId(chatId);
+    const userId = resolveChatTargetUserId(42, chatId);
     if (userId) {
       mockRouter.push(`/user/${userId}`);
     }
