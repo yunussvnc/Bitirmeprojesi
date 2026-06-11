@@ -12,6 +12,7 @@ import { uploadImage } from "@/src/services/feedService";
 import { handleApiError } from "@/src/utils/errorHandler";
 import { lightImpact } from "@/src/utils/haptics";
 import { useTranslation } from "react-i18next";
+import { captureException } from "@/src/services/sentryService";
 
 export default function EditProfileScreen() {
   const { colors } = useTheme();
@@ -26,6 +27,7 @@ export default function EditProfileScreen() {
   const [username, setUsername] = useState(authUser?.username || "");
   const [bio, setBio] = useState(authUser?.bio || "");
   const [avatarUri, setAvatarUri] = useState<string | null>(authUser?.avatar_url || null);
+  const [avatarSize, setAvatarSize] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -39,19 +41,37 @@ export default function EditProfileScreen() {
   }, [authUser?.id]);
 
   const pickAvatar = async () => {
-    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if (status !== "granted") {
-      Alert.alert(t("edit_profile.perm_req"), t("edit_profile.perm_desc"));
-      return;
-    }
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ["images"],
-      allowsEditing: true,
-      aspect: [1, 1],
-      quality: 0.8,
-    });
-    if (!result.canceled && result.assets[0]) {
-      setAvatarUri(result.assets[0].uri);
+    try {
+      const permission = await ImagePicker.getMediaLibraryPermissionsAsync();
+      if (!permission.granted && !permission.canAskAgain) {
+        Alert.alert(t("edit_profile.error", "Hata"), "Fotoğraf erişimine izin vermeniz gerekiyor. Ayarlar > İzinler");
+        return;
+      }
+      const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+      if (status !== "granted") {
+        Alert.alert(t("edit_profile.error", "Hata"), "Fotoğraf erişimine izin vermeniz gerekiyor. Ayarlar > İzinler");
+        return;
+      }
+
+      const result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ["images"],
+        allowsEditing: true,
+        aspect: [1, 1],
+        quality: 0.8,
+      });
+
+      if (!result.canceled && result.assets[0]) {
+        const asset = result.assets[0];
+        if (asset.fileSize && asset.fileSize > 5 * 1024 * 1024) {
+          Alert.alert(t("edit_profile.error", "Hata"), "Dosya boyutu 5MB'dan küçük olmalıdır.");
+          return;
+        }
+        setAvatarUri(asset.uri);
+        setAvatarSize(asset.fileSize || null);
+      }
+    } catch (e) {
+      const err = handleApiError(e);
+      Alert.alert(t("edit_profile.error", "Hata"), `Beklenmeyen bir hata oluştu. (Kod: ${err.code || "UNKNOWN_ERROR"})`);
     }
   };
 
@@ -63,13 +83,49 @@ export default function EditProfileScreen() {
     try {
       let avatarUrl = authUser.avatar_url;
       if (avatarUri && avatarUri !== authUser.avatar_url) {
-        const uploadRes = await uploadImage({
-          uri: avatarUri,
-          type: "image/jpeg",
-          name: "avatar.jpg",
-        });
+        if (avatarSize && avatarSize > 5 * 1024 * 1024) {
+          Alert.alert(t("edit_profile.error", "Hata"), "Dosya boyutu 5MB'dan küçük olmalıdır.");
+          setLoading(false);
+          return;
+        }
+
+        let uploadRes;
+        try {
+          uploadRes = await uploadImage({
+            uri: avatarUri,
+            type: "image/jpeg",
+            name: "avatar.jpg",
+          });
+        } catch (uploadError: any) {
+          captureException(uploadError, {
+            userId: authUser?.id,
+            fileSize: avatarSize,
+            mimeType: "image/jpeg",
+            platform: Platform.OS,
+          });
+
+          const err = handleApiError(uploadError);
+          let errorMsg = `Beklenmeyen bir hata oluştu. (Kod: ${err.code || "UNKNOWN_ERROR"})`;
+          if (err.code === "NETWORK_ERROR") {
+            errorMsg = "Bağlantı hatası. İnternet bağlantınızı kontrol edin.";
+          } else if (err.code === "PERMISSION_DENIED") {
+            errorMsg = "Fotoğraf erişimine izin vermeniz gerekiyor. Ayarlar > İzinler";
+          }
+
+          Alert.alert(t("edit_profile.error", "Hata"), errorMsg);
+          setLoading(false);
+          return;
+        }
+
         avatarUrl = uploadRes?.url || avatarUrl;
+
+        // Optimistic UI update: update user avatar in store immediately upon upload success
+        setUser({
+          ...authUser,
+          avatar_url: avatarUrl,
+        });
       }
+
       const updated = await updateMe({
         first_name: (firstName || "").trim() || undefined,
         last_name: (lastName || "").trim() || undefined,
@@ -86,7 +142,8 @@ export default function EditProfileScreen() {
     } finally {
       setLoading(false);
     }
-    };
+  };
+
 
     if (!authUser) {
       router.replace("/login");
