@@ -89,7 +89,11 @@
     "prev_comment": "Önceki Yorum",
     "next_comment": "Sonraki Yorum",
     "close": "Kapat",
-    "loading_menu": "Menü yükleniyor..."
+    "loading_menu": "Menü yükleniyor...",
+    "select_district": "İlçe Seçin",
+    "select_district_title": "İlçe Seçin",
+    "all_districts": "Tüm İlçeler",
+    "district_label": "İlçe"
   },
   "profile": {
     "title": "Profil",
