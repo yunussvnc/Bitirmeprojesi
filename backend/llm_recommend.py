@@ -280,6 +280,12 @@ def recommend_pipeline(
     purpose = _norm(purpose, _PURPOSE_MAP, "work")
     budget = _norm(budget, _BUDGET_MAP, "mid")
     cat_filter = (category or "").strip().lower()
+    if cat_filter in ("cafe", "café", "kafe"):
+        cat_filter = "kafe"
+    elif cat_filter in ("restaurant", "restoran"):
+        cat_filter = "restoran"
+    elif cat_filter in ("bar", "pub"):
+        cat_filter = "bar"
 
     # Detect explicit district in query (e.g. "Beşiktaş'ta")
     norm_query = normalize_tr(query)
