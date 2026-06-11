@@ -49,6 +49,7 @@ import { lightImpact } from "@/src/utils/haptics";
 import { useAppStore } from "@/src/store/useAppStore";
 import { useTabBarVisibility } from "@/src/components/layout/TabBarVisibilityContext";
 import { useTranslation } from "react-i18next";
+import { parseIntent } from "@/src/utils/intentParser";
 
 
 
@@ -224,6 +225,7 @@ export default function HomeScreen() {
   const [error, setError] = useState("");
   const [aiItems, setAiItems] = useState<RecommendItem[]>([]);
   const [aiSummary, setAiSummary] = useState("");
+  const [validationWarning, setValidationWarning] = useState<string | null>(null);
   const [displayMode, setDisplayMode] = useState<DisplayMode>("browse");
   const [refreshing, setRefreshing] = useState(false);
   const [placesById, setPlacesById] = useState<Record<string, Place>>({});
@@ -292,12 +294,28 @@ export default function HomeScreen() {
   };
 
   const runRecommend = useCallback(async () => {
+    const trimmed = query.trim();
+    if (!trimmed) return;
+
+    const parsed = parseIntent(trimmed);
+    if (parsed.intentScore < 0.5 || parsed.category === null) {
+      setValidationWarning(t("home.validation_warning"));
+      setAiItems([]);
+      setAiSummary("");
+      setDisplayMode("ai");
+      return;
+    }
+
+    setValidationWarning(null);
     try {
       setAiLoading(true);
       setError("");
       setAiSummary("");
+
+      const apiCategory = parsed.category === "cafe" ? "Kafe" : parsed.category === "restaurant" ? "Restoran" : undefined;
+
       const res: RecommendResponse = await recommendPlaces({
-        queryText: query.trim() || undefined,
+        queryText: trimmed || undefined,
         preferences: {
           vibe: prefs.vibe || undefined,
           purpose: prefs.purpose || undefined,
@@ -305,6 +323,7 @@ export default function HomeScreen() {
         },
         location: userLocation || undefined,
         radius_m: 5000,
+        category: apiCategory,
         district: filters.district || undefined,
       });
       setAiItems(res.items ?? []);
@@ -316,7 +335,7 @@ export default function HomeScreen() {
     } finally {
       setAiLoading(false);
     }
-  }, [query, prefs, filters, userLocation]);
+  }, [query, prefs, filters, userLocation, t]);
 
   const animateMiniBar = useCallback(
     (visible: boolean) => {
@@ -411,6 +430,7 @@ export default function HomeScreen() {
     setQuery("");
     setAiItems([]);
     setAiSummary("");
+    setValidationWarning(null);
     setDisplayMode("browse");
   }, [resetPrefs]);
 
@@ -419,6 +439,7 @@ export default function HomeScreen() {
     setQuery("");
     setAiItems([]);
     setAiSummary("");
+    setValidationWarning(null);
     setDisplayMode("browse");
   }, []);
 
@@ -511,6 +532,18 @@ export default function HomeScreen() {
         </View>
       );
     }
+    if (isAiMode && validationWarning) {
+      return (
+        <View style={styles.warningCardContainer}>
+          <View style={[styles.warningCard, { backgroundColor: colors.surface.elevated, borderColor: colors.accent.primary + "30" }]}>
+            <IconSymbol name="exclamationmark.triangle.fill" size={24} color={colors.accent.primary} />
+            <Text style={[styles.warningText, { color: colors.text.primary }]}>
+              {validationWarning}
+            </Text>
+          </View>
+        </View>
+      );
+    }
     if (isAiMode && !aiLoading && aiItems.length === 0) {
       return (
         <View style={styles.centerWrap}>
@@ -548,6 +581,9 @@ export default function HomeScreen() {
     filteredPlaces.length,
     hasActiveFilters,
     clearAll,
+    validationWarning,
+    colors,
+    t,
   ]);
 
   const hasAnyFilter = hasActiveFilters || query.trim();
@@ -771,5 +807,26 @@ const styles = StyleSheet.create({
     borderRadius: 17,
     alignItems: "center",
     justifyContent: "center",
+  },
+  warningCardContainer: {
+    padding: 16,
+    alignItems: "center",
+    justifyContent: "center",
+    minHeight: 200,
+  },
+  warningCard: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+    padding: 16,
+    borderRadius: 16,
+    borderWidth: 1,
+    width: "100%",
+  },
+  warningText: {
+    flex: 1,
+    fontSize: 14,
+    fontWeight: "600",
+    lineHeight: 20,
   },
 });

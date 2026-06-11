@@ -45,6 +45,7 @@
     "no_places": "Henüz mekan yok",
     "no_places_desc": "Yakında eklenecek",
     "change_filters": "Filtreleri değiştirin",
+    "validation_warning": "Lütfen bir mekan veya aktivite özelliği giriniz.",
     "venue": "Mekan"
   },
   "explore": {

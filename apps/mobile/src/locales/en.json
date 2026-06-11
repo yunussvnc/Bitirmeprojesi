@@ -45,6 +45,7 @@
     "no_places": "No places yet",
     "no_places_desc": "Coming soon",
     "change_filters": "Change filters",
+    "validation_warning": "Please enter a venue type or activity.",
     "venue": "Venue"
   },
   "explore": {
