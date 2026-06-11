@@ -16,7 +16,7 @@ import {
   Alert,
   ActivityIndicator,
 } from 'react-native';
-import { CameraView, useCameraPermissions, FlashMode } from 'expo-camera';
+import { CameraView, useCameraPermissions, useMicrophonePermissions, FlashMode } from 'expo-camera';
 import { useTranslation } from 'react-i18next';
 import { Image as ExpoImage } from 'expo-image';
 import * as MediaLibrary from 'expo-media-library';
@@ -54,6 +54,7 @@ export function EmbeddedCamera({
   const { colors } = useTheme();
   const { t } = useTranslation();
   const [permission, requestPermission] = useCameraPermissions();
+  const [micPermission, requestMicPermission] = useMicrophonePermissions();
   const [facing, setFacing] = useState<'front' | 'back'>('back');
   const [flash, setFlash] = useState<'off' | 'on' | 'auto'>('off');
   const [isRecording, setIsRecording] = useState(false);
@@ -76,7 +77,10 @@ export function EmbeddedCamera({
     if (!permission?.granted) {
       requestPermission();
     }
-  }, [permission]);
+    if (contentType === 'story' && !micPermission?.granted) {
+      requestMicPermission();
+    }
+  }, [permission, micPermission, contentType]);
 
   // Cleanup timer on unmount
   useEffect(() => {
@@ -245,7 +249,7 @@ export function EmbeddedCamera({
   };
 
   // Permission not yet checked
-  if (!permission) {
+  if (!permission || (contentType === 'story' && !micPermission)) {
     return (
       <View style={[styles.container, styles.centered, { backgroundColor: '#000' }]}>
         <ActivityIndicator size="large" color={colors.accent.primary} />
@@ -254,16 +258,32 @@ export function EmbeddedCamera({
   }
 
   // Permission denied
-  if (!permission.granted) {
+  const isMicDenied = contentType === 'story' && !micPermission.granted;
+  if (!permission.granted || isMicDenied) {
     return (
       <View style={[styles.container, styles.centered, { backgroundColor: '#000' }]}>
         <View style={styles.permissionCard}>
           <IconSymbol name="camera.circle.fill" size={64} color="#667eea" />
-          <Text style={styles.permissionTitle}>{t("creation.cam_permission_title")}</Text>
-          <Text style={styles.permissionText}>{t("creation.cam_permission_desc")}</Text>
+          <Text style={styles.permissionTitle}>
+            {isMicDenied && !permission.granted 
+              ? "Kamera ve Mikrofon Erişimi" 
+              : isMicDenied 
+                ? "Mikrofon Erişimi" 
+                : t("creation.cam_permission_title")}
+          </Text>
+          <Text style={styles.permissionText}>
+            {contentType === 'story'
+              ? "Hikaye oluşturmak için kamera ve mikrofon izinleri gereklidir. Lütfen ayarlardan izin verin."
+              : t("creation.cam_permission_desc")}
+          </Text>
           <TouchableOpacity
             style={[styles.permissionBtn, { backgroundColor: colors.accent.primary }]}
-            onPress={requestPermission}
+            onPress={async () => {
+              await requestPermission();
+              if (contentType === 'story') {
+                await requestMicPermission();
+              }
+            }}
             activeOpacity={0.8}
           >
             <Text style={styles.permissionBtnText}>{t("creation.allow")}</Text>
