@@ -1,18 +1,24 @@
 # routers/places.py — Mekan CRUD + arama + keşif + takip + gönderi/hikaye endpoint'leri
 
-from typing import Optional
-from datetime import datetime, timedelta, timezone
-
 # pyrefly: ignore [missing-import]
 from fastapi import APIRouter, Depends, HTTPException, Query, BackgroundTasks
 # pyrefly: ignore [missing-import]
-from fastapi.responses import StreamingResponse
+from fastapi.responses import StreamingResponse, RedirectResponse
+# pyrefly: ignore [missing-import]
+from fastapi.concurrency import run_in_threadpool
+# pyrefly: ignore [missing-import]
+from fastapi.encoders import jsonable_encoder
 # pyrefly: ignore [missing-import]
 from sqlalchemy.orm import Session
+# pyrefly: ignore [missing-import]
+from sqlalchemy import func as sql_func
 import requests
+import json
+import logging
 
 import schemas, crud, models
 from app.dependencies import get_db, get_current_user, get_admin_user, get_optional_user
+from app.core.redis_client import get_redis
 from config import get_settings
 
 router = APIRouter(tags=["Places"])
@@ -59,8 +65,6 @@ def get_popular_places(
 
 async def invalidate_places_cache():
     """Yeni mekan eklendiğinde önbellekteki mekan aramalarını temizler"""
-    from app.core.redis_client import get_redis
-    import logging
     logger = logging.getLogger("asemos")
     redis = get_redis()
     if not redis:
@@ -92,12 +96,6 @@ async def read_places(
     limit: Optional[int] = None,
     db: Session = Depends(get_db),
 ):
-    from app.core.redis_client import get_redis
-    from fastapi.concurrency import run_in_threadpool
-    from fastapi.encoders import jsonable_encoder
-    import json
-    import logging
-    
     logger = logging.getLogger("asemos")
     redis = get_redis()
     
@@ -165,8 +163,6 @@ def get_my_venue_stats(
     place = db.query(models.Place).filter(models.Place.owner_id == current_user.id).first()
     if not place:
         raise HTTPException(status_code=404, detail="Size ait bir mekan bulunamadı.")
-
-    from sqlalchemy import func as sql_func
 
     total_reviews = db.query(models.Review).filter(models.Review.place_id == place.id).count()
     avg_rating = db.query(sql_func.avg(models.Review.rating)).filter(
@@ -435,7 +431,6 @@ def get_place_photo(place_id: int, max_width: int = 800, db: Session = Depends(g
             
         return StreamingResponse(response.iter_content(chunk_size=8192), media_type=response.headers.get("content-type", "image/jpeg"))
 
-    from fastapi.responses import RedirectResponse
     return RedirectResponse(url=place.photo_url)
 
 
