@@ -44,6 +44,9 @@ export interface ErrorResponse {
  * Convert various error types to user-friendly AppError
  */
 export function handleApiError(error: unknown): AppError {
+  if (error instanceof AppError) {
+    return error;
+  }
   const msg = error instanceof Error ? error.message : String(error);
   // Network errors (fetch throws TypeError or "Failed to fetch")
   if (

@@ -55,14 +55,12 @@ class MediaProcessor:
         """Küçük bir versiyonunu alıp blurhash string'i üretir."""
         try:
             import blurhash
-            import numpy as np
             with Image.open(io.BytesIO(file_bytes)) as img:
                 if img.mode != "RGB":
                     img = img.convert("RGB")
                 # Blurhash hesabı için resmi çok küçültmek hızı artırır (ör: 32x32)
                 img.thumbnail((32, 32), Image.Resampling.LANCZOS)
-                image_array = np.array(img)
-                return blurhash.encode(image_array, x_components=4, y_components=3)
+                return blurhash.encode(img, x_components=4, y_components=3)
         except Exception as e:
             logger.error(f"Blurhash oluşturma hatası: {e}")
             return None
