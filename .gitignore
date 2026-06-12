@@ -56,3 +56,8 @@ htmlcov/
 .agents/
 skills-lock.json
 data/
+
+# Temporary / Test files
+metro_response.txt
+backend/get_reviews.py
+
