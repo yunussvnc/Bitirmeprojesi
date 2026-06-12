@@ -62,3 +62,42 @@ class TestRecommendIntegration:
         # InteractedPlace must be first because of interaction score bonus
         first_item = data["items"][0]
         assert first_item["name"] == "InteractedPlace"
+
+    def test_recommend_chit_chat(self, client):
+        uid = create_test_user(email="rec_chat@test.com", username="rec_chat")
+        headers = get_auth_headers(uid)
+        response = client.post(
+            "/recommend",
+            headers=headers,
+            json={
+                "queryText": "naber",
+                "preferences": {"vibe": "quiet", "purpose": "work", "budget": "mid"},
+                "location": {"lat": 41.01, "lng": 28.97},
+                "radius_m": 5000
+            }
+        )
+        assert response.status_code == 200
+        data = response.json()
+        assert len(data["items"]) == 0
+        assert "merhaba! ben senin yapay zeka" in data["summary"].lower()
+
+    def test_recommend_inappropriate_content(self, client):
+        uid = create_test_user(email="rec_inapp@test.com", username="rec_inapp")
+        headers = get_auth_headers(uid)
+        response = client.post(
+            "/recommend",
+            headers=headers,
+            json={
+                "queryText": "parti siyaset",
+                "preferences": {"vibe": "quiet", "purpose": "work", "budget": "mid"},
+                "location": {"lat": 41.01, "lng": 28.97},
+                "radius_m": 5000
+            }
+        )
+        assert response.status_code == 200
+        data = response.json()
+        assert len(data["items"]) == 0
+        assert "siyasi, dini veya argo" in data["summary"].lower()
+
+
+

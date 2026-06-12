@@ -281,6 +281,42 @@ def recommend_pipeline(
     budget = _norm(budget, _BUDGET_MAP, "mid")
     cat_filter = (category or "").strip().lower()
 
+    # --- Intent / Chit-Chat Check ---
+    query_lower = normalize_tr(query or "")
+    
+    # Günlük Sohbet (Chit-chat) kelimeleri
+    chit_chat_keywords = ['merhaba', 'selam', 'nasisin', 'nasilsin', 'nasiylsin', 'naber', 'iyi misin', 'hey', 'gunaydin', 'günaydın', 'iyi aksamlar', 'iyi akşamlar']
+    
+    is_chit_chat = False
+    # 1. Cümle çok kısaysa ve chit-chat kelimesiyle başlıyor ya da direkt o kelimeyse
+    if len(query_lower.split()) <= 3 and any(query_lower.startswith(kw) or query_lower == kw for kw in chit_chat_keywords):
+        is_chit_chat = True
+        
+    # 2. Cümlede hiç mekan kelimesi veya özelliği geçmiyorsa ve chit-chat kelimesi varsa
+    if not is_chit_chat:
+        mekan_keywords = ['kafe', 'kahve', 'cafe', 'coffee', 'mekan', 'yer', 'restoran', 'restaurant', 'yemek', 'lokanta', 'kebap', 'pizza', 'burger', 'bar', 'pub', 'tatli', 'tatlı']
+        has_mekan_keyword = any(kw in query_lower for kw in mekan_keywords)
+        if not has_mekan_keyword and any(kw in query_lower for kw in chit_chat_keywords):
+            is_chit_chat = True
+
+    # 3. Uygunsuz/Yasaklı içerik kontrolü
+    inappropriate_keywords = ['siyaset', 'parti', 'din', 'kufur', 'küfür', 'argo', 'kavga', 'secim', 'seçim', 'oy', 'baskan', 'başkan']
+    is_inappropriate = any(kw in query_lower for kw in inappropriate_keywords)
+
+    if is_inappropriate:
+        return {
+            "items": [],
+            "summary": "Üzgünüm, ben sadece bir mekan öneri asistanıyım. Siyasi, dini veya argo sohbetlere katılamıyorum. Lütfen bana mekanlarla ilgili bir soru sor. 🤖🍔",
+            "cached": False
+        }
+
+    if is_chit_chat:
+        return {
+            "items": [],
+            "summary": "Merhaba! Ben senin yapay zeka asistanınım. Mekanlar hakkında sorular sorabilirsin (örneğin: Beşiktaş'ta deniz manzaralı sakin bir kafe) veya gitmek istediğin yeri söyleyebilirsin. ☕🍔",
+            "cached": False
+        }
+
     # Detect explicit district in query (e.g. "Beşiktaş'ta")
     norm_query = normalize_tr(query)
     explicit_district = None

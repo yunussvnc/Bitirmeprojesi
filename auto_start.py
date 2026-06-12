@@ -4,7 +4,7 @@ auto_start.py
 ==============
 1. ngrok'un guncel adresini localhost:4040'tan okur
 2. ai-llm/.env ve backend/.env dosyalarini gunceller
-3. Backend (8000) ve AI-LLM (8081) servislerini baslatir
+3. Backend (8000) ve AI-LLM (8080) servislerini baslatir
 
 Kullanim:
     python auto_start.py
@@ -122,12 +122,12 @@ start_service(
 )
 
 # 3. AI-LLM baslat
-print("\n[4] AI-LLM (:8081) baslatiliyor...")
+print("\n[4] AI-LLM (:8080) baslatiliyor...")
 start_service(
     "AI-LLM",
     ROOT + "\\ai-llm",
     [os.path.join(ROOT, ".venv", "Scripts", "uvicorn.exe"),
-     "app:app", "--host", "0.0.0.0", "--port", "8081", "--reload"]
+     "app:app", "--host", "0.0.0.0", "--port", "8080", "--reload"]
 )
 
 # 4. Hazir ol bekle
@@ -135,7 +135,7 @@ print("\n[5] Servisler hazir olana kadar bekleniyor...")
 time.sleep(5)
 b_ok  = wait_for_service("http://localhost:8000/health", "Backend", timeout=60)
 print()
-ai_ok = wait_for_service("http://localhost:8081/health", "AI-LLM", timeout=60)
+ai_ok = wait_for_service("http://localhost:8080/health", "AI-LLM", timeout=60)
 print()
 
 # 5. Ozet
@@ -144,7 +144,7 @@ print("  SONUC")
 print("=" * 55)
 print(f"  ngrok    : {host_port or 'BULUNAMADI'}")
 print(f"  Backend  : {'OK :8000' if b_ok else 'HATA'}")
-print(f"  AI-LLM   : {'OK :8081' if ai_ok else 'HATA'}")
+print(f"  AI-LLM   : {'OK :8080' if ai_ok else 'HATA'}")
 if host_port:
     print(f"  DB URL   : postgresql://{DB_USER}:***@{host_port}/{DB_NAME}")
 print("=" * 55)
