@@ -57,32 +57,84 @@ def get_popular_places(
     return schemas.PaginatedPlaces(items=items, total=total, page=page, page_size=page_size)
 
 
+async def invalidate_places_cache():
+    """Yeni mekan eklendiğinde önbellekteki mekan aramalarını temizler"""
+    from app.core.redis_client import get_redis
+    import logging
+    logger = logging.getLogger("asemos")
+    redis = get_redis()
+    if not redis:
+        return
+    try:
+        async for key in redis.scan_iter(match="cache:places:*"):
+            await redis.delete(key)
+        logger.info("🧹 Mekan önbelleği (places cache) başarıyla temizlendi.")
+    except Exception as e:
+        logger.error(f"Mekan önbellek temizleme hatası: {e}")
+
+
 @router.post("/places/", response_model=schemas.Place)
 def create_new_place(
     place: schemas.PlaceCreate,
+    background_tasks: BackgroundTasks,
     db: Session = Depends(get_db),
     current_user: models.User = Depends(get_current_user),
 ):
+    background_tasks.add_task(invalidate_places_cache)
     return crud.create_place(db=db, place=place)
 
 
 @router.get("/places/", response_model=schemas.PaginatedPlaces)
-def read_places(
+async def read_places(
     page: int = 1,
     page_size: int = 20,
     skip: Optional[int] = None,
     limit: Optional[int] = None,
     db: Session = Depends(get_db),
 ):
+    from app.core.redis_client import get_redis
+    from fastapi.concurrency import run_in_threadpool
+    from fastapi.encoders import jsonable_encoder
+    import json
+    import logging
+    
+    logger = logging.getLogger("asemos")
+    redis = get_redis()
+    
+    # Cache key format: cache:places:page:{page}:size:{page_size}:skip:{skip}:limit:{limit}
+    cache_key = f"cache:places:page:{page}:size:{page_size}:skip:{skip}:limit:{limit}"
+    
+    if redis:
+        try:
+            cached_data = await redis.get(cache_key)
+            if cached_data:
+                logger.info(f"⚡ Places cache hit: {cache_key}")
+                return json.loads(cached_data)
+        except Exception as e:
+            logger.error(f"Places cache read error: {e}")
+            
+    # Eğer önbellekte yoksa veritabanından çek (Async threadpool'da)
     if skip is not None or limit is not None:
-        items = crud.get_places(db, skip=skip or 0, limit=limit or 500)
-        return schemas.PaginatedPlaces(
+        items = await run_in_threadpool(crud.get_places, db, skip=skip or 0, limit=limit or 500)
+        res = schemas.PaginatedPlaces(
             items=items, total=len(items), page=1, page_size=len(items)
         )
-    items, total = crud.get_places_paginated(db, page=page, page_size=page_size)
-    return schemas.PaginatedPlaces(
-        items=items, total=total, page=page, page_size=page_size
-    )
+    else:
+        items, total = await run_in_threadpool(crud.get_places_paginated, db, page=page, page_size=page_size)
+        res = schemas.PaginatedPlaces(
+            items=items, total=total, page=page, page_size=page_size
+        )
+        
+    # Önbelleğe kaydet (15 dakika = 900 saniye)
+    if redis:
+        try:
+            res_json = json.dumps(jsonable_encoder(res))
+            await redis.setex(cache_key, 900, res_json)
+            logger.info(f"💾 Places cached in Redis: {cache_key}")
+        except Exception as e:
+            logger.error(f"Places cache write error: {e}")
+            
+    return res
 
 
 @router.get("/places/my-venue", response_model=schemas.Place)
