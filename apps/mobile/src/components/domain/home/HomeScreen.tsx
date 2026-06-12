@@ -19,6 +19,7 @@ import {
   Easing,
   Keyboard,
   TouchableWithoutFeedback,
+  Alert,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { FlatList } from "react-native-gesture-handler";
@@ -50,7 +51,30 @@ import { useAppStore } from "@/src/store/useAppStore";
 import { useTabBarVisibility } from "@/src/components/layout/TabBarVisibilityContext";
 import { useTranslation } from "react-i18next";
 
+/* ── İlçe algılama (prompt'ta il/ilçe var mı?) ── */
+const DISTRICTS = [
+  "adalar", "arnavutkoy", "atasehir", "avcilar", "bagcilar", "bahcelievler", "bakirkoy",
+  "basaksehir", "bayrampasa", "besiktas", "beykoz", "beylikduzu", "beyoglu", "buyukcekmece",
+  "catalca", "cekmekoy", "esenler", "esenyurt", "eyupsultan", "fatih", "gaziosmanpasa",
+  "gungoren", "kadikoy", "kagithane", "kartal", "kucukcekmece", "maltepe", "pendik",
+  "sancaktepe", "sariyer", "silivri", "sile", "sisli", "sultanbeyli", "sultangazi",
+  "tuzla", "umraniye", "uskudar", "zeytinburnu", "istanbul",
+];
 
+function normalizeTr(text: string): string {
+  if (!text) return "";
+  return text
+    .toLowerCase()
+    .replace(/ç/g, "c").replace(/ğ/g, "g").replace(/ı/g, "i")
+    .replace(/ö/g, "o").replace(/ş/g, "s").replace(/ü/g, "u")
+    .replace(/â/g, "a").replace(/î/g, "i").replace(/û/g, "u");
+}
+
+/** Prompt metninde herhangi bir İstanbul ilçesi veya "istanbul" geçiyor mu? */
+function queryContainsLocation(query: string): boolean {
+  const norm = normalizeTr(query);
+  return DISTRICTS.some((d) => norm.includes(d));
+}
 
 type DisplayMode = "browse" | "ai";
 
@@ -292,12 +316,30 @@ export default function HomeScreen() {
   };
 
   const runRecommend = useCallback(async () => {
+    const trimmedQuery = query.trim();
+
+    // Konum kontrolü: filtreden ilçe seçili mi VEYA prompt'ta ilçe/il geçiyor mu?
+    const hasFilterDistrict = Boolean(filters.district);
+    const hasQueryLocation = trimmedQuery ? queryContainsLocation(trimmedQuery) : false;
+
+    if (!hasFilterDistrict && !hasQueryLocation) {
+      Alert.alert(
+        "Konum Gerekli",
+        "Lütfen filtreden il ve ilçe seçiniz veya arama metnine bir ilçe adı yazınız (örn: Kadıköy'de kafe, Beşiktaş'ta bar).",
+        [
+          { text: "Filtre Aç", onPress: () => setFilterSheetOpen(true) },
+          { text: "Tamam", style: "cancel" },
+        ],
+      );
+      return;
+    }
+
     try {
       setAiLoading(true);
       setError("");
       setAiSummary("");
       const res: RecommendResponse = await recommendPlaces({
-        queryText: query.trim() || undefined,
+        queryText: trimmedQuery || undefined,
         preferences: {
           vibe: prefs.vibe || undefined,
           purpose: prefs.purpose || undefined,
