@@ -1,44 +1,128 @@
 # pyrefly: ignore [missing-import]
 from pydantic import BaseModel, EmailStr, Field, model_validator, field_validator
+import re
 import json as _json
 from datetime import datetime, date
 from typing import Optional, List
+
+# --- ORTAK VALIDASYON YARDIMCILARI ---
+
+_PHONE_REGEX = re.compile(
+    r'^(\+90|0)?[5][0-9]{9}$'           # Türkiye: +905xx, 05xx, 5xx
+    r'|^\+[1-9]\d{7,14}$'               # Uluslararası: +X...
+)
+
+_USERNAME_REGEX = re.compile(r'^[a-zA-Z][a-zA-Z0-9_]{2,29}$')
+
+_NAME_REGEX = re.compile(r'^[\w\u00C0-\u024F\u1E00-\u1EFF\'\-\s]{2,50}$', re.UNICODE)
+
+def _validate_phone_value(v: str) -> str:
+    """Telefon numaraşını normalize eder ve doğrular."""
+    cleaned = re.sub(r'[\s\-().]+', '', v)
+    if not _PHONE_REGEX.match(cleaned):
+        raise ValueError('Geçerli bir telefon numarası giriniz (örn: 05551234567 veya +905551234567).')
+    # Normalize to E.164 (+90...)
+    if cleaned.startswith('05'):
+        return '+90' + cleaned[1:]
+    if cleaned.startswith('5') and len(cleaned) == 10:
+        return '+90' + cleaned
+    return cleaned
+
+def _validate_password_value(v: str) -> str:
+    """Profesyonel şifre kuralı kontrolü."""
+    if len(v) < 8:
+        raise ValueError('Şifre en az 8 karakter olmalıdır.')
+    if len(v) > 128:
+        raise ValueError('Şifre en fazla 128 karakter olabilir.')
+    if not re.search(r'[A-Z]', v):
+        raise ValueError('Şifre en az 1 büyük harf içermelidir.')
+    if not re.search(r'[a-z]', v):
+        raise ValueError('Şifre en az 1 küçük harf içermelidir.')
+    if not re.search(r'\d', v):
+        raise ValueError('Şifre en az 1 rakam içermelidir.')
+    if not re.search(r'[^a-zA-Z0-9]', v):
+        raise ValueError('Şifre en az 1 özel karakter içermelidir (!@#$%^&* vb.).')
+    return v
 
 # --- KULLANICI (USER) ŞEMALARI ---
 
 class UserBase(BaseModel):
     email: EmailStr
-    username: Optional[str] = None
-    first_name: Optional[str] = None
-    last_name: Optional[str] = None
+    username: Optional[str] = Field(None, min_length=3, max_length=30)
+    first_name: Optional[str] = Field(None, min_length=2, max_length=50)
+    last_name: Optional[str] = Field(None, min_length=2, max_length=50)
     phone_number: Optional[str] = None
+
+    @field_validator('username')
+    @classmethod
+    def validate_username(cls, v):
+        if v is not None and v.strip():
+            if not _USERNAME_REGEX.match(v.strip()):
+                raise ValueError(
+                    'Kullanıcı adı 3-30 karakter, harf ile başlamalı ve '
+                    'yalnızca harf, rakam, alt çizgi (_) içerebilir.'
+                )
+        return v.strip() if v else v
+
+    @field_validator('phone_number')
+    @classmethod
+    def validate_phone(cls, v):
+        if v is not None and v.strip():
+            return _validate_phone_value(v.strip())
+        return v
+
     birth_date: Optional[date] = None
 
     @field_validator('birth_date')
     @classmethod
     def check_birth_date(cls, v):
-        if v is not None and (v.year < 1950 or v.year > 2023):
-            raise ValueError('Doğum yılı 1950 ile 2023 arasında olmalıdır.')
+        if v is not None:
+            if v.year < 1940 or v.year > 2006:
+                raise ValueError('Doğum yılı 1940-2006 arasında olmalıdır (18 yaş altı kayıt olamaz).')
         return v
 
 class UserCreate(UserBase):
     password: str
 
+    @field_validator('password')
+    @classmethod
+    def validate_password(cls, v):
+        return _validate_password_value(v)
+
 class UserUpdate(BaseModel):
-    username: Optional[str] = None
-    first_name: Optional[str] = None
-    last_name: Optional[str] = None
-    bio: Optional[str] = None
+    username: Optional[str] = Field(None, min_length=3, max_length=30)
+    first_name: Optional[str] = Field(None, min_length=2, max_length=50)
+    last_name: Optional[str] = Field(None, min_length=2, max_length=50)
+    bio: Optional[str] = Field(None, max_length=160)
     avatar_url: Optional[str] = None
     birth_date: Optional[date] = None
     phone_number: Optional[str] = None
     email: Optional[EmailStr] = None
 
+    @field_validator('username')
+    @classmethod
+    def validate_username(cls, v):
+        if v is not None and v.strip():
+            if not _USERNAME_REGEX.match(v.strip()):
+                raise ValueError(
+                    'Kullanıcı adı 3-30 karakter, harf ile başlamalı ve '
+                    'yalnızca harf, rakam, alt çizgi (_) içerebilir.'
+                )
+        return v.strip() if v else v
+
+    @field_validator('phone_number')
+    @classmethod
+    def validate_phone(cls, v):
+        if v is not None and v.strip():
+            return _validate_phone_value(v.strip())
+        return v
+
     @field_validator('birth_date')
     @classmethod
     def check_birth_date(cls, v):
-        if v is not None and (v.year < 1950 or v.year > 2023):
-            raise ValueError('Doğum yılı 1950 ile 2023 arasında olmalıdır.')
+        if v is not None:
+            if v.year < 1940 or v.year > 2006:
+                raise ValueError('Doğum yılı 1940-2006 arasında olmalıdır (18 yaş altı kayıt olamaz).')
         return v
 
 class SocialLoginRequest(BaseModel):
@@ -63,6 +147,7 @@ class UserProfile(User):
     followers_count: int = 0
     following_count: int = 0
     friends_count: int = 0
+    place_follow_count: int = 0  # Kullanıcının takip ettiği mekan sayısı
     is_following: bool = False
     follow_status: Optional[str] = None  # "pending", "accepted", or None (not following)
 
@@ -267,25 +352,47 @@ class RefreshRequest(BaseModel):
 
 class FirstTimeSetupRequest(BaseModel):
     """İlk girişte kullanıcı adı ve doğum tarihi ayarlama"""
-    username: str
+    username: str = Field(..., min_length=3, max_length=30)
     birth_date: date
+
+    @field_validator('username')
+    @classmethod
+    def validate_username(cls, v):
+        if not _USERNAME_REGEX.match(v.strip()):
+            raise ValueError(
+                'Kullanıcı adı 3-30 karakter, harf ile başlamalı ve '
+                'yalnızca harf, rakam, alt çizgi (_) içerebilir.'
+            )
+        return v.strip()
 
     @field_validator('birth_date')
     @classmethod
     def check_birth_date(cls, v):
-        if v.year < 1950 or v.year > 2023:
-            raise ValueError('Doğum yılı 1950 ile 2023 arasında olmalıdır.')
+        if v.year < 1940 or v.year > 2006:
+            raise ValueError('Doğum yılı 1940-2006 arasında olmalıdır (18 yaş altı kayıt olamaz).')
         return v
 
 class VenueRegisterRequest(BaseModel):
     """Mekan sahipliği başvuru isteği"""
-    venue_name: str
+    venue_name: str = Field(..., min_length=2, max_length=100)
     email: EmailStr
     password: str
-    claimed_place_id: int            # ZORUNLU — Hangi Google mekanına sahip olduğunu belirtir
-    contact_name: Optional[str] = None   # Yetkili adı soyadı
-    contact_phone: Optional[str] = None  # İletişim telefonu
-    notes: Optional[str] = None          # Admin'e ek açıklama
+    claimed_place_id: int
+    contact_name: Optional[str] = Field(None, min_length=2, max_length=100)
+    contact_phone: Optional[str] = None
+    notes: Optional[str] = Field(None, max_length=500)
+
+    @field_validator('password')
+    @classmethod
+    def validate_password(cls, v):
+        return _validate_password_value(v)
+
+    @field_validator('contact_phone')
+    @classmethod
+    def validate_contact_phone(cls, v):
+        if v is not None and v.strip():
+            return _validate_phone_value(v.strip())
+        return v
 
 class PendingVenueResponse(BaseModel):
     id: int
@@ -335,12 +442,22 @@ class ForgotPasswordRequest(BaseModel):
 
 class ResetPasswordRequest(BaseModel):
     email: EmailStr
-    code: str           # 6 haneli sıfırlama kodu
-    new_password: str   # Yeni şifre
+    code: str
+    new_password: str
+
+    @field_validator('new_password')
+    @classmethod
+    def validate_new_password(cls, v):
+        return _validate_password_value(v)
 
 class ChangePasswordRequest(BaseModel):
     current_password: str
     new_password: str
+
+    @field_validator('new_password')
+    @classmethod
+    def validate_new_password(cls, v):
+        return _validate_password_value(v)
 
 class ReportCreate(BaseModel):
     target_type: str   # "post", "comment", "user", "match_profile"
@@ -453,6 +570,7 @@ class PostComment(BaseModel):
     author_username: Optional[str] = None
     like_count: int = 0
     is_liked: bool = False
+    is_flagged: bool = False
 
     class Config:
         from_attributes = True
@@ -531,6 +649,12 @@ class StoryCreate(BaseModel):
     is_close_friends: bool = False
     # Konum meta verisi: {"place_id": 5, "name": "Kadıköy", "lat": 40.99, "lng": 29.02}
     location_data: Optional[dict] = None
+    # Mention: etiketlenen kullanıcı ID listesi
+    mentioned_user_ids: Optional[List[int]] = None
+    # Link sticker
+    link_type: Optional[str] = None    # 'place', 'profile', 'event'
+    link_id: Optional[int] = None
+    link_label: Optional[str] = None
 
     def resolved_privacy_type(self) -> str:
         """is_close_friends True ise close_friends döndür (geriye dönük)."""
@@ -549,12 +673,19 @@ class Story(BaseModel):
     privacy_type: str = "public"
     is_close_friends: bool = False
     location_data: Optional[dict] = None
+    is_archived: bool = False
+    mentioned_user_ids: Optional[List[int]] = None
+    link_type: Optional[str] = None
+    link_id: Optional[int] = None
+    link_label: Optional[str] = None
     created_at: datetime
     expires_at: datetime
     author: Optional[UserSummary] = None
     place: Optional[PlaceSummary] = None
     view_count: int = 0
     is_viewed: bool = False
+    reaction_count: int = 0
+    my_reaction: Optional[str] = None  # Giriş yapan kullanıcının tepkisi
 
     class Config:
         from_attributes = True
@@ -567,9 +698,57 @@ class PaginatedStories(BaseModel):
     page_size: int
 
 
+class StoryViewerItem(BaseModel):
+    """Hikaye görüntüleyici — analitik alanlarla birlikte"""
+    user: UserSummary
+    viewed_at: datetime
+    watch_duration_seconds: int = 0
+    did_visit_profile: bool = False
+    did_visit_place: bool = False
+    source: Optional[str] = None
+
+    class Config:
+        from_attributes = True
+
+
 class StoryViewerList(BaseModel):
-    items: List[UserSummary]
+    items: List[StoryViewerItem]
     total: int
+    # Toplam analitik özet (mekan hesabı için)
+    total_watch_seconds: int = 0
+    profile_visit_count: int = 0
+    place_visit_count: int = 0
+
+
+class StoryReactionResponse(BaseModel):
+    emoji: str
+    user: UserSummary
+    created_at: datetime
+
+    class Config:
+        from_attributes = True
+
+
+class StoryReactionListResponse(BaseModel):
+    items: List[StoryReactionResponse]
+    total: int
+    counts: dict  # {'❤️': 5, '🔥': 3, ...}
+
+
+class StoryViewAnalyticsUpdate(BaseModel):
+    """Frontend'den izleme bittiğinde gönderilir"""
+    watch_duration_seconds: int = 0
+    did_visit_profile: bool = False
+    did_visit_place: bool = False
+    source: Optional[str] = None
+
+
+class StoryHiddenUsersUpdate(BaseModel):
+    hidden_user_ids: List[int]
+
+
+class StoryHiddenUsersResponse(BaseModel):
+    hidden_users: List[UserSummary]
 
 
 # --- PAGİNATED RESPONSE ---

@@ -75,6 +75,10 @@ export default function FeedScreen() {
   const storyHiddenRef = useRef(false);
   const miniBarVisibleRef = useRef(false);
   const flatListRef = useRef<FlatList>(null);
+  // Ref olarak nextCursor — loadFeed'in dependency loop'unu önler
+  const nextCursorRef = useRef<string | null>(null);
+  // Eş zamanlı birden fazla isteği engeller
+  const isLoadingRef = useRef(false);
   const { hide: hideTabBar, show: showTabBar } = useTabBarVisibility();
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
@@ -104,12 +108,20 @@ export default function FeedScreen() {
   }, []);
 
   const loadFeed = useCallback(
-    async (refresh = false, cursorOverride?: string | null) => {
-      // refresh=true ise cursor'u sıfırla ve baştan yükle
-      const activeCursor = refresh ? null : (cursorOverride !== undefined ? cursorOverride : nextCursor);
+    async (refresh = false) => {
+      // Eş zamanlı çift istek engeli
+      if (isLoadingRef.current) return;
+      isLoadingRef.current = true;
+
+      // refresh=true ise cursor'u sıfırla
+      const activeCursor = refresh ? null : nextCursorRef.current;
       try {
-        if (refresh) setLoading(true);
-        else setLoadingMore(true);
+        if (refresh) {
+          setLoading(true);
+          nextCursorRef.current = null;
+        } else {
+          setLoadingMore(true);
+        }
 
         const res = await getFeed(activeCursor, PAGE_SIZE, filter);
         const pendingSharedPostId = useAppStore.getState().pendingSharedPostId;
@@ -124,24 +136,28 @@ export default function FeedScreen() {
           }
         }
 
+        // nextCursor'u hem state hem ref olarak sakla
+        nextCursorRef.current = res.next_cursor;
+        setNextCursor(res.next_cursor);
+        setHasMore(res.has_more);
+
         if (refresh) {
           setPosts(dedupeById(res.items));
         } else {
           setPosts((prev) => dedupeById([...prev, ...res.items]));
         }
-        setNextCursor(res.next_cursor);
-        setHasMore(res.has_more);
       } catch (e) {
         handleApiError(e);
       } finally {
         setLoading(false);
         setRefreshing(false);
         setLoadingMore(false);
+        isLoadingRef.current = false;
       }
     },
-    // nextCursor dependency sadece "daha fazla yükle" için gerekli
+    // nextCursor'u ref'ten okuyoruz — artık dependency'e gerek yok
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [filter, nextCursor, dedupeById]
+    [filter, dedupeById]
   );
 
   useEffect(() => {
@@ -195,7 +211,7 @@ export default function FeedScreen() {
   }, [loadFeed]);
 
   const handleLoadMore = useCallback(() => {
-    if (loadingMore || !hasMore) return;
+    if (loadingMore || !hasMore || isLoadingRef.current) return;
     loadFeed(false);
   }, [loadingMore, hasMore, loadFeed]);
 

@@ -236,6 +236,24 @@ class UserBlock(Base):
     )
 
 
+class StoryHiddenUser(Base):
+    """Hikayesi gizlenen kullanıcılar (Kullanıcının hikayelerini göremeyecek kişiler)"""
+    __tablename__ = "story_hidden_users"
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
+    hidden_user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    # user: hikayeyi paylaşan kişi
+    # hidden_user: hikayeyi göremeyecek kişi
+    user = relationship("User", foreign_keys=[user_id])
+    hidden_user = relationship("User", foreign_keys=[hidden_user_id])
+
+    __table_args__ = (
+        UniqueConstraint("user_id", "hidden_user_id", name="uq_story_hidden_user"),
+    )
+
+
 class PlaceFollow(Base):
     """Kullanıcının mekanı takip etmesi — tek yönlü (kullanıcı → mekan)"""
     __tablename__ = "place_follows"
@@ -535,6 +553,17 @@ class Story(Base):
     # Örnek: {"place_id": 5, "name": "Kadıköy", "lat": 40.99, "lng": 29.02}
     location_data = Column(Text, nullable=True)
 
+    # Arşiv: 24s dolunca görünmez ama silinmez
+    is_archived = Column(Boolean, default=False, nullable=False, index=True)
+
+    # Mention: JSON array string — etiketlenen kullanıcı ID'leri [3, 7, 12]
+    mentioned_user_ids = Column(Text, nullable=True)
+
+    # Link sticker: Mekana / Profile / Etkinliğe yönlendirme
+    link_type = Column(String, nullable=True)   # 'place', 'profile', 'event'
+    link_id = Column(Integer, nullable=True)    # İlgili kaydın ID'si
+    link_label = Column(String, nullable=True)  # "Bu mekanı incele" gibi label
+
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     expires_at = Column(DateTime(timezone=True), nullable=False, index=True)  # created_at + 24 saat
 
@@ -542,6 +571,7 @@ class Story(Base):
     place = relationship("Place", back_populates="stories")
     replies = relationship("Message", back_populates="parent_story", foreign_keys="Message.parent_story_id")
     views = relationship("StoryView", back_populates="story", cascade="all, delete-orphan")
+    reactions = relationship("StoryReaction", back_populates="story", cascade="all, delete-orphan")
 
 
 class Notification(Base):
@@ -750,6 +780,12 @@ class StoryView(Base):
     viewer_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
+    # Analitik alanlar (mekan hesabı için detaylı görünür, normal kullanıcıya gizlenir)
+    watch_duration_seconds = Column(Integer, default=0, nullable=False)  # Kaç saniye izledi
+    did_visit_profile = Column(Boolean, default=False, nullable=False)    # Profiline tıkladı mı?
+    did_visit_place = Column(Boolean, default=False, nullable=False)      # Mekana tıkladı mı?
+    source = Column(String, nullable=True)  # 'feed', 'place', 'profile', 'mention'
+
     story = relationship("Story", back_populates="views")
     viewer = relationship("User", foreign_keys=[viewer_id], back_populates="story_views")
 
@@ -757,3 +793,19 @@ class StoryView(Base):
         UniqueConstraint("viewer_id", "story_id", name="uq_story_view_user_story"),
     )
 
+
+class StoryReaction(Base):
+    """Hikayeye emoji tepkisi — kişi başı 1 tepki (değiştirilebilir)"""
+    __tablename__ = "story_reactions"
+    id = Column(Integer, primary_key=True, index=True)
+    story_id = Column(Integer, ForeignKey("stories.id", ondelete="CASCADE"), nullable=False, index=True)
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
+    emoji = Column(String, nullable=False)  # '❤️', '🔥', '😍', '👏', '😂'
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    story = relationship("Story", back_populates="reactions")
+    user = relationship("User")
+
+    __table_args__ = (
+        UniqueConstraint("story_id", "user_id", name="uq_story_reaction_story_user"),
+    )

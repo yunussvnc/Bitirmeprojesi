@@ -34,7 +34,7 @@ import { PlaceMediaPanel } from './PlaceMediaPanel';
 import { useAppStore } from '@/src/store/useAppStore';
 import { getPlaceStatus, type PlaceStatusType } from '@/src/utils/placeStatus';
 import { calculateDistance } from '@/src/utils/location';
-import { DistanceSlider } from '@/src/components/ui/DistanceSlider';
+
 import { useTranslation } from 'react-i18next';
 
 /** Category keys matching backend data values + translation keys */
@@ -176,12 +176,12 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
   const [showFilter, setShowFilter] = useState(false);
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedStatuses, setSelectedStatuses] = useState<PlaceStatusType[]>([]);
-  const [maxDistance, setMaxDistance] = useState<number>(50); // 50km = All City
+
   const [selectedDistrict, setSelectedDistrict] = useState<AiSearchDistrict | null>(null);
   const [districtModalOpen, setDistrictModalOpen] = useState(false);
   const webViewRef = useRef<WebView>(null);
 
-  const activeFilterCount = selectedCategories.length + selectedStatuses.length + (maxDistance < 50 ? 1 : 0);
+  const activeFilterCount = selectedCategories.length + selectedStatuses.length;
 
   const toggleCategory = useCallback((cat: string) => {
     setSelectedCategories((prev) =>
@@ -198,7 +198,6 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
   const clearFilters = useCallback(() => {
     setSelectedCategories([]);
     setSelectedStatuses([]);
-    setMaxDistance(50);
     setSelectedDistrict(null);
   }, []);
 
@@ -262,14 +261,9 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
           return false;
         }
       }
-      // Mesafe filtresi (İlçe filtresi aktifse bypass et)
-      if (!selectedDistrict && userLocation && p.latitude != null && p.longitude != null) {
-        const distKm = calculateDistance(userLocation.latitude, userLocation.longitude, p.latitude, p.longitude) / 1000;
-        if (distKm > maxDistance) return false;
-      }
       return true;
     });
-  }, [places, query, selectedCategories, selectedStatuses, maxDistance, userLocation, selectedDistrict]);
+  }, [places, query, selectedCategories, selectedStatuses, userLocation, selectedDistrict]);
 
   const visiblePlaces = useMemo(
     () => filteredPlaces.filter((p) => p.latitude != null && p.longitude != null),
@@ -627,19 +621,7 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
               </View>
             </View>
 
-            {/* Mesafe Filtresi */}
-            {userLocation && (
-              <View style={[styles.filterSection, { marginTop: 4 }]}>
-                <DistanceSlider
-                  min={1}
-                  max={50}
-                  value={maxDistance}
-                  onValueChange={setMaxDistance}
-                  title={t('explore.filter_distance')}
-                  maxLabel={t('explore.whole_city')}
-                />
-              </View>
-            )}
+
 
             {/* Temizle */}
             {activeFilterCount > 0 && (

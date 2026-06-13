@@ -1,8 +1,3 @@
-/**
- * Kişisel Detaylar — Backend bağlantılı
- * Kullanıcının e-posta, telefon ve doğum tarihini gösterir ve düzenleme imkânı sunar.
- */
-
 import React, { useState, useEffect, useCallback } from "react";
 import {
   View, Text, StyleSheet, ScrollView, TouchableOpacity,
@@ -19,6 +14,7 @@ import { lightImpact, success } from "@/src/utils/haptics";
 import { useAuthStore } from "@/src/store/useAuthStore";
 import { apiGet, apiPatch } from "@/src/utils/apiClient";
 import { useTranslation } from "react-i18next";
+import { validateEmail, validatePhone } from "@/src/utils/validators";
 
 type UserProfile = {
   id: number;
@@ -43,6 +39,7 @@ export default function PersonalDetailsScreen() {
   const [editField, setEditField] = useState<string | null>(null);
   const [editValue, setEditValue] = useState("");
   const [saving, setSaving] = useState(false);
+  const [inlineError, setInlineError] = useState<string | null>(null);
   const { t, i18n } = useTranslation();
 
   const loadProfile = useCallback(async () => {
@@ -71,16 +68,43 @@ export default function PersonalDetailsScreen() {
     lightImpact();
     setEditField(field);
     setEditValue(currentValue || "");
+    setInlineError(null);
   };
 
   const handleSave = async () => {
     if (!editField) return;
+
+    const val = editValue.trim();
+    let saveVal = val;
+
+    if (editField === "email") {
+      const res = validateEmail(val);
+      if (!res.valid) {
+        setInlineError(res.error || t("personal_details.invalid_email_desc", "Geçerli bir e-posta adresi giriniz."));
+        return;
+      }
+      saveVal = val.toLowerCase();
+    } else if (editField === "phone_number") {
+      if (!val) {
+        // Boş bırakılabilir
+        saveVal = "";
+      } else {
+        const res = validatePhone(val);
+        if (!res.valid) {
+          setInlineError(res.error || t("personal_details.invalid_phone_desc", "Geçerli bir telefon numarası giriniz (örn: 05551234567)."));
+          return;
+        }
+        saveVal = res.normalized || val; // E.164 normalise
+      }
+    }
+
+    setInlineError(null);
     setSaving(true);
     try {
-      const payload: Record<string, string> = { [editField]: editValue.trim() };
+      const payload: Record<string, string> = { [editField]: saveVal };
       await apiPatch("/auth/me", payload);
       success();
-      setProfile((prev) => prev ? { ...prev, [editField]: editValue.trim() } : prev);
+      setProfile((prev) => prev ? { ...prev, [editField]: saveVal } : prev);
       setEditField(null);
     } catch (err: any) {
       Alert.alert(t("personal_details.update_error"), err.message || t("personal_details.update_failed"));
@@ -194,16 +218,26 @@ export default function PersonalDetailsScreen() {
               style={[styles.modalInput, {
                 color: colors.text.primary,
                 backgroundColor: colors.surface.elevated,
-                borderColor: colors.surface.border,
+                borderColor: inlineError ? '#FF6B6B' : colors.surface.border,
               }]}
               value={editValue}
-              onChangeText={setEditValue}
+              onChangeText={(v) => {
+                setEditValue(v);
+                // Kullanıcı yazarken hatayı temizle
+                if (inlineError) setInlineError(null);
+              }}
               placeholder={editField ? fieldLabels[editField] : ""}
               placeholderTextColor={colors.text.tertiary}
               autoFocus
               autoCapitalize="none"
               keyboardType={editField === "email" ? "email-address" : editField === "phone_number" ? "phone-pad" : "default"}
             />
+            {inlineError ? (
+              <View style={styles.inlineErrorRow}>
+                <IconSymbol name="exclamationmark.circle" size={14} color="#FF6B6B" />
+                <Text style={styles.inlineErrorText}>{inlineError}</Text>
+              </View>
+            ) : null}
           </View>
         </KeyboardAvoidingView>
       </Modal>
@@ -243,5 +277,18 @@ const styles = StyleSheet.create({
   modalInput: {
     fontSize: 16, paddingHorizontal: 16, paddingVertical: 14,
     borderRadius: 12, borderWidth: 1,
+  },
+  inlineErrorRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    marginTop: 8,
+    paddingHorizontal: 4,
+  },
+  inlineErrorText: {
+    fontSize: 13,
+    color: '#FF6B6B',
+    fontWeight: '500',
+    flex: 1,
   },
 });

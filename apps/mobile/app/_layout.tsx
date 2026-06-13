@@ -71,27 +71,44 @@ function useProtectedRoute() {
     // isVerifying bitmeden routing yapma ki uygulamanın içine girmesin
     if (!hydrated || !rootNavigationState?.key || isVerifying) return;
 
-    const inAuthScreen =
+    const isAuthScreen =
       segments[0] === "login" ||
       segments[0] === "register" ||
       segments[0] === "forgot-password" ||
-      segments[0] === "verify-email" ||
-      (segments[0] === "settings" && segments[1] === "legal-document") ||
       (segments.length === 1 && !segments[0]);
+
+    const isPublicScreen =
+      (segments[0] === "settings" && segments[1] === "legal-document");
+
+    const isVerifyEmailScreen = segments[0] === "verify-email";
 
     const navigate = () => {
       const user = useAuthStore.getState().user;
-      if (!accessToken && !inAuthScreen) {
-        router.replace("/login");
-      } else if (accessToken && inAuthScreen) {
-        if (user?.role === 'venue') {
-          router.replace("/(venue-tabs)" as any);
-        } else if (user && !user.is_email_verified) {
-          router.replace("/verify-email");
-        } else if (user && (!user.username || !user.birth_date)) {
-          router.replace("/first-time-setup" as any);
-        } else {
-          router.replace("/(tabs)");
+      
+      if (!accessToken) {
+        // Not logged in. Must be in auth screen, public screen, or verify email.
+        if (!isAuthScreen && !isPublicScreen && !isVerifyEmailScreen) {
+          router.replace("/login");
+        }
+      } else {
+        // Logged in
+        if (isAuthScreen) {
+          if (user?.role === 'venue') {
+            router.replace("/(venue-tabs)" as any);
+          } else if (user && !user.is_email_verified) {
+            router.replace("/verify-email");
+          } else if (user && (!user.username || !user.birth_date)) {
+            router.replace("/first-time-setup" as any);
+          } else {
+            router.replace("/(tabs)");
+          }
+        } else if (isVerifyEmailScreen && user?.is_email_verified) {
+          // If they are verified but trying to access verify-email, send to tabs
+          if (user?.role === 'venue') {
+            router.replace("/(venue-tabs)" as any);
+          } else {
+            router.replace("/(tabs)");
+          }
         }
       }
     };
@@ -167,6 +184,7 @@ export default function RootLayout() {
                 <Stack.Screen name="verify-email" options={{ gestureEnabled: false }} />
                 <Stack.Screen name="(tabs)" options={{ gestureEnabled: false }} />
                 <Stack.Screen name="(venue-tabs)" options={{ gestureEnabled: false }} />
+                <Stack.Screen name="saved" options={{ gestureEnabled: true, animation: "slide_from_right" }} />
               </Stack>
             </PreferencesProvider>
           </PushNotificationProvider>

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Alert, ScrollView, Platform, Keyboard, TouchableWithoutFeedback } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
@@ -12,6 +12,8 @@ import { uploadImage } from "@/src/services/feedService";
 import { handleApiError } from "@/src/utils/errorHandler";
 import { lightImpact } from "@/src/utils/haptics";
 import { useTranslation } from "react-i18next";
+import { captureException } from "@/src/services/sentryService";
+import { validateUsername, validateName, validateBio, BIO_MAX_LENGTH } from "@/src/utils/validators";
 
 export default function EditProfileScreen() {
   const { colors } = useTheme();
@@ -26,7 +28,27 @@ export default function EditProfileScreen() {
   const [username, setUsername] = useState(authUser?.username || "");
   const [bio, setBio] = useState(authUser?.bio || "");
   const [avatarUri, setAvatarUri] = useState<string | null>(authUser?.avatar_url || null);
+  const [avatarSize, setAvatarSize] = useState<number | null>(null);
   const [loading, setLoading] = useState(false);
+
+  // Anlık validasyon hataları
+  const [fieldErrors, setFieldErrors] = useState<{
+    firstName?: string;
+    lastName?: string;
+    username?: string;
+    bio?: string;
+  }>({});
+
+  // Hesaplanmış validasyon sonuçları (kaydet butonu için)
+  const validationState = useMemo(() => {
+    const firstNameOk = !firstName.trim() || validateName(firstName).valid;
+    const lastNameOk = !lastName.trim() || validateName(lastName).valid;
+    const usernameOk = !username.trim() || validateUsername(username).valid;
+    const bioOk = validateBio(bio).valid;
+    return { firstNameOk, lastNameOk, usernameOk, bioOk, allOk: firstNameOk && lastNameOk && usernameOk && bioOk };
+  }, [firstName, lastName, username, bio]);
+
+  const bioValidation = validateBio(bio);
 
   useEffect(() => {
     if (authUser) {
@@ -39,19 +61,39 @@ export default function EditProfileScreen() {
   }, [authUser?.id]);
 
   const pickAvatar = async () => {
-    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    if (status !== "granted") {
-      Alert.alert(t("edit_profile.perm_req"), t("edit_profile.perm_desc"));
-      return;
-    }
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ["images"],
-      allowsEditing: true,
-      aspect: [1, 1],
-      quality: 0.8,
-    });
-    if (!result.canceled && result.assets[0]) {
-      setAvatarUri(result.assets[0].uri);
+    try {
+      // Önce mevcut izin durumunu kontrol et
+      const permission = await ImagePicker.getMediaLibraryPermissionsAsync();
+      if (!permission.granted && !permission.canAskAgain) {
+        Alert.alert(t("edit_profile.error", "Hata"), "Fotoğraf erişimine izin vermeniz gerekiyor. Ayarlar > İzinler");
+        return;
+      }
+      const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+      if (status !== "granted") {
+        Alert.alert(t("edit_profile.perm_req"), t("edit_profile.perm_desc"));
+        return;
+      }
+
+      const result = await ImagePicker.launchImageLibraryAsync({
+        mediaTypes: ["images"],
+        allowsEditing: true,
+        aspect: [1, 1],
+        quality: 0.8,
+      });
+
+      if (!result.canceled && result.assets[0]) {
+        const asset = result.assets[0];
+        // Dosya boyutu kontrolü (5MB limit)
+        if (asset.fileSize && asset.fileSize > 5 * 1024 * 1024) {
+          Alert.alert(t("edit_profile.error", "Hata"), "Dosya boyutu 5MB'dan küçük olmalıdır.");
+          return;
+        }
+        setAvatarUri(asset.uri);
+        setAvatarSize(asset.fileSize || null);
+      }
+    } catch (e) {
+      const err = handleApiError(e);
+      Alert.alert(t("edit_profile.error", "Hata"), `Beklenmeyen bir hata oluştu. (Kod: ${err.code || "UNKNOWN_ERROR"})`);
     }
   };
 
@@ -59,15 +101,39 @@ export default function EditProfileScreen() {
     Keyboard.dismiss();
     lightImpact();
     if (!authUser) return;
+    if (!validationState.allOk) return; // Güvenlik önlemi
     setLoading(true);
     try {
       let avatarUrl = authUser.avatar_url;
       if (avatarUri && avatarUri !== authUser.avatar_url) {
-        const uploadRes = await uploadImage({
-          uri: avatarUri,
-          type: "image/jpeg",
-          name: "avatar.jpg",
-        });
+        // Kayıt öncesi ek boyut kontrolü
+        if (avatarSize && avatarSize > 5 * 1024 * 1024) {
+          Alert.alert(t("edit_profile.error", "Hata"), "Dosya boyutu 5MB'dan küçük olmalıdır.");
+          setLoading(false);
+          return;
+        }
+        let uploadRes;
+        try {
+          uploadRes = await uploadImage({
+            uri: avatarUri,
+            type: "image/jpeg",
+            name: "avatar.jpg",
+          });
+        } catch (uploadError: any) {
+          captureException(uploadError, {
+            userId: authUser?.id,
+            fileSize: avatarSize,
+            mimeType: "image/jpeg",
+            platform: Platform.OS,
+          });
+          const err = handleApiError(uploadError);
+          let errorMsg = `Beklenmeyen bir hata oluştu. (Kod: ${err.code || "UNKNOWN_ERROR"})`;
+          if (err.code === "NETWORK_ERROR") errorMsg = "Bağlantı hatası. İnternet bağlantınızı kontrol edin.";
+          else if (err.code === "PERMISSION_DENIED") errorMsg = "Fotoğraf erişimine izin vermeniz gerekiyor.";
+          Alert.alert(t("edit_profile.error", "Hata"), errorMsg);
+          setLoading(false);
+          return;
+        }
         avatarUrl = uploadRes?.url || avatarUrl;
       }
       const updated = await updateMe({
@@ -117,8 +183,14 @@ export default function EditProfileScreen() {
           <TouchableOpacity
             onPress={handleSave}
             hitSlop={12}
-            style={[styles.headerBtn, { backgroundColor: colors.surface.elevated, opacity: loading ? 0.5 : 1 }]}
-            disabled={loading}
+            style={[
+              styles.headerBtn,
+              {
+                backgroundColor: validationState.allOk ? colors.surface.elevated : colors.surface.border,
+                opacity: loading ? 0.5 : 1,
+              }
+            ]}
+            disabled={loading || !validationState.allOk}
           >
             {loading ? (
               <IconSymbol name="arrow.triangle.2.circlepath" size={20} color={colors.accent.primary} />
@@ -145,54 +217,90 @@ export default function EditProfileScreen() {
 
           {/* ── Forms Section ── */}
           <View style={styles.formContainer}>
-            <View style={[styles.inputGroup, { backgroundColor: colors.surface.elevated }]}>
+            <View style={[styles.inputGroup, { backgroundColor: colors.surface.elevated, borderColor: fieldErrors.firstName ? '#FF6B6B' : 'transparent', borderWidth: 1 }]}>
               <Text style={[styles.inputLabel, { color: colors.text.secondary }]}>{t("edit_profile.first_name")}</Text>
               <TextInput
                 style={[styles.input, { color: colors.text.primary }]}
                 placeholder={t("edit_profile.first_name_ph")}
                 placeholderTextColor={colors.text.tertiary}
                 value={firstName}
-                onChangeText={setFirstName}
+                onChangeText={(v) => {
+                  setFirstName(v);
+                  const res = validateName(v);
+                  setFieldErrors(prev => ({ ...prev, firstName: v.trim() && !res.valid ? res.error : undefined }));
+                }}
                 autoCorrect={false}
               />
+              {fieldErrors.firstName ? (
+                <Text style={styles.fieldError}>{fieldErrors.firstName}</Text>
+              ) : null}
             </View>
 
-            <View style={[styles.inputGroup, { backgroundColor: colors.surface.elevated }]}>
+            <View style={[styles.inputGroup, { backgroundColor: colors.surface.elevated, borderColor: fieldErrors.lastName ? '#FF6B6B' : 'transparent', borderWidth: 1 }]}>
               <Text style={[styles.inputLabel, { color: colors.text.secondary }]}>{t("edit_profile.last_name", "SOYAD")}</Text>
               <TextInput
                 style={[styles.input, { color: colors.text.primary }]}
                 placeholder={t("edit_profile.last_name_ph", "Soyadınız")}
                 placeholderTextColor={colors.text.tertiary}
                 value={lastName}
-                onChangeText={setLastName}
+                onChangeText={(v) => {
+                  setLastName(v);
+                  const res = validateName(v);
+                  setFieldErrors(prev => ({ ...prev, lastName: v.trim() && !res.valid ? res.error : undefined }));
+                }}
                 autoCorrect={false}
               />
+              {fieldErrors.lastName ? (
+                <Text style={styles.fieldError}>{fieldErrors.lastName}</Text>
+              ) : null}
             </View>
 
-            <View style={[styles.inputGroup, { backgroundColor: colors.surface.elevated }]}>
+            <View style={[styles.inputGroup, { backgroundColor: colors.surface.elevated, borderColor: fieldErrors.username ? '#FF6B6B' : 'transparent', borderWidth: 1 }]}>
               <Text style={[styles.inputLabel, { color: colors.text.secondary }]}>{t("edit_profile.username")}</Text>
               <TextInput
                 style={[styles.input, { color: colors.text.primary }]}
                 placeholder={t("edit_profile.username_ph")}
                 placeholderTextColor={colors.text.tertiary}
                 value={username}
-                onChangeText={setUsername}
+                onChangeText={(v) => {
+                  setUsername(v);
+                  const res = validateUsername(v);
+                  setFieldErrors(prev => ({ ...prev, username: v.trim() && !res.valid ? res.error : undefined }));
+                }}
                 autoCapitalize="none"
                 autoCorrect={false}
               />
+              {fieldErrors.username ? (
+                <Text style={styles.fieldError}>{fieldErrors.username}</Text>
+              ) : null}
             </View>
 
-            <View style={[styles.inputGroup, { backgroundColor: colors.surface.elevated }]}>
-              <Text style={[styles.inputLabel, { color: colors.text.secondary }]}>{t("edit_profile.bio")}</Text>
+            <View style={[styles.inputGroup, { backgroundColor: colors.surface.elevated, borderColor: fieldErrors.bio ? '#FF6B6B' : 'transparent', borderWidth: 1 }]}>
+              <View style={styles.bioHeader}>
+                <Text style={[styles.inputLabel, { color: colors.text.secondary }]}>{t("edit_profile.bio")}</Text>
+                <Text style={[
+                  styles.bioCounter,
+                  { color: bioValidation.remaining < 20 ? (bioValidation.remaining < 0 ? '#FF6B6B' : '#FF9500') : colors.text.tertiary }
+                ]}>
+                  {bio.length}/{BIO_MAX_LENGTH}
+                </Text>
+              </View>
               <TextInput
                 style={[styles.input, styles.bioInput, { color: colors.text.primary }]}
                 placeholder={t("edit_profile.bio_ph")}
                 placeholderTextColor={colors.text.tertiary}
                 value={bio}
-                onChangeText={setBio}
+                onChangeText={(v) => {
+                  setBio(v);
+                  const res = validateBio(v);
+                  setFieldErrors(prev => ({ ...prev, bio: !res.valid ? res.error : undefined }));
+                }}
                 multiline
-                maxLength={150}
+                maxLength={BIO_MAX_LENGTH + 10} // +10 ile kullanıcı sınırı görür ama kaydedilemez
               />
+              {fieldErrors.bio ? (
+                <Text style={styles.fieldError}>{fieldErrors.bio}</Text>
+              ) : null}
             </View>
           </View>
 
@@ -283,7 +391,6 @@ export default function EditProfileScreen() {
       paddingHorizontal: 16,
       paddingTop: 12,
       paddingBottom: 8,
-      borderWidth: 0,
       shadowColor: "#000",
       shadowOffset: { width: 0, height: 2 },
       shadowOpacity: 0.03,
@@ -305,6 +412,23 @@ export default function EditProfileScreen() {
       minHeight: 60,
       textAlignVertical: "top",
       paddingTop: 8,
+    },
+    bioHeader: {
+      flexDirection: 'row',
+      justifyContent: 'space-between',
+      alignItems: 'center',
+      marginBottom: 4,
+    },
+    bioCounter: {
+      fontSize: 12,
+      fontWeight: '600',
+    },
+    fieldError: {
+      fontSize: 12,
+      color: '#FF6B6B',
+      fontWeight: '500',
+      marginTop: 4,
+      marginBottom: 2,
     },
     settingsContainer: {
       paddingHorizontal: 20,

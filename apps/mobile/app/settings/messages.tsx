@@ -62,32 +62,6 @@ export default function MessagesSettingsScreen() {
           </Text>
         </Section>
 
-        <Section title={t("settings_messages.replies", "Hikaye Yanıtları")}>
-          <Text style={[styles.sectionDesc, { color: colors.text.secondary }]}>
-            {t("settings_messages.allow_replies", "Hikayelerine kimlerin yanıt verebileceğini seç")}
-          </Text>
-          {audienceOptions.map((opt) => (
-            <TouchableOpacity
-              key={opt}
-              style={[styles.radioRow, { borderBottomColor: colors.surface.border }]}
-              onPress={() => { lightImpact(); setStoryReply(opt); success(); }}
-              activeOpacity={0.6}
-            >
-              <Text style={[styles.radioLabel, { color: colors.text.primary }]}>
-                {getAudienceLabels(t)[opt]}
-              </Text>
-              <View style={[
-                styles.radio,
-                { borderColor: storyReply === opt ? colors.accent.primary : colors.surface.border },
-              ]}>
-                {storyReply === opt && (
-                  <View style={[styles.radioInner, { backgroundColor: colors.accent.primary }]} />
-                )}
-              </View>
-            </TouchableOpacity>
-          ))}
-        </Section>
-
         <Section title={t("settings_messages.read_receipts", "Okundu Bilgisi")}>
           <SettingsRow
             label={t("settings_messages.show_read", "Okundu bilgisini göster")}
@@ -98,19 +72,6 @@ export default function MessagesSettingsScreen() {
           />
           <Text style={[styles.hint, { color: colors.text.tertiary }]}>
             {t("settings_messages.show_read_desc", "Kapatırsan, mesajlarını okuduğunu diğer kişiler göremez. Sen de başkalarının okundu bilgisini göremezsin.")}
-          </Text>
-        </Section>
-
-        <Section title={t("settings_messages.groups", "Grup Mesajları")}>
-          <SettingsRow
-            label={t("settings_messages.group_allow", "Herkesin seni gruba eklemesine izin ver")}
-            value={allowGroupAdd}
-            switch
-            onValueChange={(v: boolean) => { setAllowGroupAdd(v); success(); }}
-            icon="person.3"
-          />
-          <Text style={[styles.hint, { color: colors.text.tertiary }]}>
-            {t("settings_messages.group_hint", "Kapatırsan, yalnızca takip ettiğin kişiler seni gruplara ekleyebilir.")}
           </Text>
         </Section>
       </ScrollView>

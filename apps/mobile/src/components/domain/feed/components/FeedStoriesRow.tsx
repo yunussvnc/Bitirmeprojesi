@@ -60,7 +60,10 @@ export function FeedStoriesRow({ filter }: FeedStoriesRowProps) {
   }, []);
 
   // loadStories'i erken tanımla (useFocusEffect onu kullandığı için önce tanımlanmalı)
+  const isStoriesLoadingRef = useRef(false);
   const loadStories = useCallback(async () => {
+    if (isStoriesLoadingRef.current) return;
+    isStoriesLoadingRef.current = true;
     setLoading(true);
     try {
       const res = await import("@/src/services/storyService").then((m) => m.getFeedStories(1, 50, filter));
@@ -70,6 +73,7 @@ export function FeedStoriesRow({ filter }: FeedStoriesRowProps) {
       setStories([]);
     } finally {
       setLoading(false);
+      isStoriesLoadingRef.current = false;
     }
   }, [filter]);
 
@@ -102,10 +106,7 @@ export function FeedStoriesRow({ filter }: FeedStoriesRowProps) {
     return unsubscribe;
   }, [navigation]);
 
-  // İlk yükleme
-  useEffect(() => {
-    loadStories();
-  }, [loadStories]);
+  // İlk yükleme useFocusEffect tarafından yapılır — ayrı useEffect gereksiz ve duplicate isteğe neden olur
 
   // Hikaye yükleme pipeline tamamlanınca otomatik yenile
   useEffect(() => {

@@ -2,6 +2,8 @@
 
 from typing import Optional
 from datetime import datetime, timedelta, timezone
+import json
+import logging
 
 # pyrefly: ignore [missing-import]
 from fastapi import APIRouter, Depends, HTTPException, Query, BackgroundTasks
@@ -16,8 +18,6 @@ from sqlalchemy.orm import Session
 # pyrefly: ignore [missing-import]
 from sqlalchemy import func as sql_func
 import requests
-import json
-import logging
 
 import schemas, crud, models
 from app.dependencies import get_db, get_current_user, get_admin_user, get_optional_user
@@ -34,10 +34,11 @@ def search_places(
     city: Optional[str] = Query(None, description="Şehir filtresi"),
     page: int = 1,
     page_size: int = 20,
+    minimal: bool = Query(False, description="True ise stats/enrich atlanır (hızlı listeleme)"),
     db: Session = Depends(get_db),
 ):
     """Mekan arama — isim, kategori, şehir ile filtreleme."""
-    items, total = crud.search_places(db, q=q, category=category, city=city, page=page, page_size=page_size)
+    items, total = crud.search_places(db, q=q, category=category, city=city, page=page, page_size=page_size, minimal=minimal)
     return schemas.PaginatedPlaces(items=items, total=total, page=page, page_size=page_size)
 
 
@@ -101,10 +102,8 @@ async def read_places(
 ):
     logger = logging.getLogger("asemos")
     redis = get_redis()
-    
-    # Cache key format: cache:places:page:{page}:size:{page_size}:skip:{skip}:limit:{limit}
     cache_key = f"cache:places:page:{page}:size:{page_size}:skip:{skip}:limit:{limit}"
-    
+
     if redis:
         try:
             cached_data = await redis.get(cache_key)
@@ -113,8 +112,7 @@ async def read_places(
                 return json.loads(cached_data)
         except Exception as e:
             logger.error(f"Places cache read error: {e}")
-            
-    # Eğer önbellekte yoksa veritabanından çek (Async threadpool'da)
+
     if skip is not None or limit is not None:
         items = await run_in_threadpool(crud.get_places, db, skip=skip or 0, limit=limit or 500)
         res = schemas.PaginatedPlaces(
@@ -125,16 +123,15 @@ async def read_places(
         res = schemas.PaginatedPlaces(
             items=items, total=total, page=page, page_size=page_size
         )
-        
-    # Önbelleğe kaydet (15 dakika = 900 saniye)
+
     if redis:
         try:
             res_json = json.dumps(jsonable_encoder(res))
-            await redis.setex(cache_key, 900, res_json)
+            await redis.setex(cache_key, 900, res_json)  # 15 dakika
             logger.info(f"💾 Places cached in Redis: {cache_key}")
         except Exception as e:
             logger.error(f"Places cache write error: {e}")
-            
+
     return res
 
 

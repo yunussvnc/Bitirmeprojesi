@@ -69,140 +69,6 @@ interface Message {
     parentStoryId?: number | null;
 }
 
-/* ── Dummy Contact Data ── */
-const CONTACTS: Record<string, { name: string; avatar: string; isOnline: boolean; targetUserId?: number }> = {
-    "1": { name: "Ahmet Yılmaz", avatar: "https://i.pravatar.cc/150?img=1", isOnline: true },
-    "2": { name: "Elif Kaya", avatar: "https://i.pravatar.cc/150?img=5", isOnline: false },
-    "3": { name: "Burak Demir", avatar: "https://i.pravatar.cc/150?img=3", isOnline: true },
-    "4": { name: "Zeynep Toprak", avatar: "https://i.pravatar.cc/150?img=9", isOnline: false },
-    "5": { name: "Can Aydın", avatar: "https://i.pravatar.cc/150?img=8", isOnline: false },
-    "6": { name: "Selin Arslan", avatar: "https://i.pravatar.cc/150?img=10", isOnline: true },
-    "7": { name: "Mert Özkan", avatar: "https://i.pravatar.cc/150?img=11", isOnline: false },
-    "8": { name: "Deniz Güneş", avatar: "https://i.pravatar.cc/150?img=12", isOnline: false },
-};
-
-/* ── Dummy Messages (per chatId) ── */
-const DUMMY_MESSAGES_BY_CHAT: Record<string, Message[]> = {
-    "1": [
-        { id: "1-1", text: "Selam! Nasılsın?", isMine: false, timestamp: "14:20" },
-        { id: "1-2", text: "İyiyim, sen nasılsın?", isMine: true, timestamp: "14:21", status: "read" },
-        {
-            id: "1-3",
-            text: "Dün harika bir mekan keşfettim, sana da önermek istedim!",
-            isMine: false,
-            timestamp: "14:22",
-        },
-        {
-            id: "1-4",
-            text: "",
-            isMine: false,
-            timestamp: "14:22",
-            placeCard: {
-                name: "Sortie - Kuruçeşme",
-                address: "Kuruçeşme, İstanbul",
-                image: "https://picsum.photos/400/200?random=42",
-            },
-        },
-        { id: "1-5", text: "Vay be çok güzel görünüyor! Boğaz manzarası varmış 😍", isMine: true, timestamp: "14:25", status: "read" },
-        { id: "1-6", text: "Evet, köprü manzaralı. Bu akşam gidelim mi?", isMine: false, timestamp: "14:26" },
-        {
-            id: "1-7",
-            text: "",
-            isMine: true,
-            timestamp: "14:28",
-            status: "read",
-            placeCard: {
-                name: "Fakülte Teras - Beyoğlu",
-                address: "Beyoğlu, İstanbul",
-                image: "https://picsum.photos/400/200?random=88",
-            },
-        },
-        { id: "1-8", text: "Ben de burası güzel olur dedim, ne dersin? 🎵", isMine: true, timestamp: "14:28", status: "delivered" },
-        { id: "1-9", text: "Olur ikisine de bakalım! Haritada kaydediyorum 📌", isMine: false, timestamp: "14:30" },
-    ],
-    "2": [
-        { id: "2-1", text: "Merhaba Elif! Bu hafta sonu plan var mı?", isMine: true, timestamp: "10:05", status: "read" },
-        { id: "2-2", text: "Henüz yok, bir fikrin mi var?", isMine: false, timestamp: "10:08" },
-        {
-            id: "2-3",
-            text: "",
-            isMine: false,
-            timestamp: "10:10",
-            placeCard: {
-                name: "Kastel - Beyoğlu",
-                address: "Beyoğlu, İstanbul",
-                image: "https://picsum.photos/400/200?random=55",
-            },
-        },
-        { id: "2-4", text: "Burası yeni açılmış, gidelim mi? 🎉", isMine: false, timestamp: "10:10" },
-        { id: "2-5", text: "Çok güzel görünüyor! Cumartesi akşamı olur mu?", isMine: true, timestamp: "10:15", status: "read" },
-    ],
-    "3": [
-        { id: "3-1", text: "Burak, dün akşam nasıldı?", isMine: true, timestamp: "09:00", status: "read" },
-        { id: "3-2", text: "Efsaneydi! Bir daha gitmemiz lazım 🔥", isMine: false, timestamp: "09:05" },
-        { id: "3-3", text: "Bu hafta sonu gidelim mi tekrar?", isMine: false, timestamp: "09:06" },
-        { id: "3-4", text: "Olur, Cuma akşamı uyar bana", isMine: true, timestamp: "09:10", status: "read" },
-    ],
-    "4": [
-        { id: "4-1", text: "Zeynep önerdiğin mekanı denedim!", isMine: true, timestamp: "16:30", status: "read" },
-        { id: "4-2", text: "Nasıldı, beğendin mi? 😊", isMine: false, timestamp: "16:35" },
-        { id: "4-3", text: "Teşekkürler, harika bir yermiş 🤩", isMine: true, timestamp: "16:40", status: "read" },
-        { id: "4-4", text: "Ne güzel! Bir sonraki sefere ben de geleyim", isMine: false, timestamp: "16:42" },
-    ],
-    "5": [
-        { id: "5-1", text: "Can, şu yeni açılan yeri gördün mü?", isMine: false, timestamp: "11:00" },
-        { id: "5-2", text: "Hangisini kastediyorsun?", isMine: true, timestamp: "11:05", status: "read" },
-        { id: "5-3", text: "Kadıköy'deki teras mekan", isMine: false, timestamp: "11:06" },
-        { id: "5-4", text: "Sen de kaydettin mi orayı?", isMine: false, timestamp: "11:07" },
-        { id: "5-5", text: "Evet kaydettim, çok iyi görünüyor!", isMine: true, timestamp: "11:10", status: "read" },
-    ],
-    "6": [
-        { id: "6-1", text: "Selin, akşam için bir yer önerir misin?", isMine: true, timestamp: "18:00", status: "read" },
-        {
-            id: "6-2",
-            text: "",
-            isMine: false,
-            timestamp: "18:05",
-            placeCard: {
-                name: "Oligark - Kuruçeşme",
-                address: "Kuruçeşme, İstanbul",
-                image: "https://picsum.photos/400/200?random=77",
-            },
-        },
-        { id: "6-3", text: "Mekan önerisini yolladım 📍", isMine: false, timestamp: "18:05" },
-        { id: "6-4", text: "Süpermiş! Teşekkürler 🙏", isMine: true, timestamp: "18:10", status: "delivered" },
-    ],
-    "7": [
-        { id: "7-1", text: "Mert, pop-up restoran nasıldı?", isMine: true, timestamp: "20:00", status: "read" },
-        { id: "7-2", text: "Efsaneydi! Şef bizzat servis yaptı", isMine: false, timestamp: "20:10" },
-        { id: "7-3", text: "Pop-up restorandan geldim, anlatacaklarım var", isMine: false, timestamp: "20:15" },
-        { id: "7-4", text: "Vay be, detay ver! 🍽️", isMine: true, timestamp: "20:20", status: "read" },
-    ],
-    "8": [
-        { id: "8-1", text: "Deniz, o mekanın adresi neydi?", isMine: true, timestamp: "12:00", status: "read" },
-        { id: "8-2", text: "Haritada işaretledim sana 📌", isMine: false, timestamp: "12:10" },
-        {
-            id: "8-3",
-            text: "",
-            isMine: false,
-            timestamp: "12:11",
-            placeCard: {
-                name: "Fakülte Teras - Beyoğlu",
-                address: "Beyoğlu, İstanbul",
-                image: "https://picsum.photos/400/200?random=99",
-            },
-        },
-        { id: "8-4", text: "Teşekkürler! Hemen kaydediyorum", isMine: true, timestamp: "12:15", status: "read" },
-    ],
-};
-
-/** Her chatId için mesaj listesinin bağımsız bir kopyasını döndürür */
-function getInitialMessages(chatId: string): Message[] {
-    const msgs = DUMMY_MESSAGES_BY_CHAT[chatId];
-    if (msgs) return msgs.map((m) => ({ ...m }));
-    // Tanımlanmamış chatId için boş dizi
-    return [];
-}
 
 /**
  * BUG-13: ChatId'den hedef user_id'yi güvenli şekilde parse et.
@@ -360,7 +226,7 @@ export default function ChatScreen() {
 
     // Store'dan mesajları mount anında bir kere oku (subscribe etme — hydration loop'u önler)
     const [messages, setMessages] = useState<Message[]>(() => {
-        const initial = getInitialMessages(resolvedChatId);
+        const initial: Message[] = [];
         // Store'da paylaşılmış gönderi mesajları varsa ekle
         try {
             const storeData = useChatMessagesStore.getState().messagesByChat[resolvedChatId];
@@ -610,11 +476,10 @@ export default function ChatScreen() {
     }, [isBackendConv, numericConvId]);
 
     // Contact bilgisini öncelik sırasıyla belirle:
-    // 1. Mock CONTACTS (sadece sahte data için)
-    // 2. Store'daki konuşma (önceden yüklenmiş)
-    // 3. Navigation param'ları (openConversation'dan gelenler) ← YENİ
-    // 4. Boş fallback (asla Ahmet Yılmaz değil)
-    const contact = CONTACTS[resolvedChatId] || (storeConversation ? {
+    // 1. Store'daki konuşma (önceden yüklenmiş)
+    // 2. Navigation param'ları (openConversation'dan gelenler) ← YENİ
+    // 3. Boş fallback
+    const contact = storeConversation ? {
         name: storeConversation.name,
         avatar: storeConversation.avatar,
         isOnline: storeConversation.isOnline,
@@ -629,7 +494,7 @@ export default function ChatScreen() {
         avatar: "https://ui-avatars.com/api/?name=K&background=random",
         isOnline: false,
         targetUserId: undefined,
-    });
+    };
 
     const isMatch = storeConversation?.isMatch;
     const revealRequestedByMe = storeConversation?.revealRequestedByMe;

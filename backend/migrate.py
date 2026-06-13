@@ -47,6 +47,22 @@ _SCHEMA_PATCHES = [
     ("user_preferences", "notify_comments", "BOOLEAN NOT NULL DEFAULT TRUE", "BOOLEAN NOT NULL DEFAULT 1"),
     ("user_preferences", "notify_follows", "BOOLEAN NOT NULL DEFAULT TRUE", "BOOLEAN NOT NULL DEFAULT 1"),
     ("user_preferences", "notify_messages", "BOOLEAN NOT NULL DEFAULT TRUE", "BOOLEAN NOT NULL DEFAULT 1"),
+    # messages tablosu genişletme (hikaye yanıtı özellikleri)
+    ("messages", "parent_story_id", "INTEGER REFERENCES stories(id) ON DELETE SET NULL", "INTEGER"),
+    ("messages", "story_snapshot_url", "VARCHAR", "VARCHAR"),
+    ("messages", "status", "VARCHAR DEFAULT 'sent'", "VARCHAR DEFAULT 'sent'"),
+    # ── Hikaye Sistemi Genişletme (v2) ──────────────────────────────────────
+    # stories: arşiv, mention, link sticker
+    ("stories", "is_archived", "BOOLEAN NOT NULL DEFAULT FALSE", "BOOLEAN NOT NULL DEFAULT 0"),
+    ("stories", "mentioned_user_ids", "TEXT", "TEXT"),
+    ("stories", "link_type", "VARCHAR", "VARCHAR"),
+    ("stories", "link_id", "INTEGER", "INTEGER"),
+    ("stories", "link_label", "VARCHAR", "VARCHAR"),
+    # story_views: analitik alanlar
+    ("story_views", "watch_duration_seconds", "INTEGER NOT NULL DEFAULT 0", "INTEGER NOT NULL DEFAULT 0"),
+    ("story_views", "did_visit_profile", "BOOLEAN NOT NULL DEFAULT FALSE", "BOOLEAN NOT NULL DEFAULT 0"),
+    ("story_views", "did_visit_place", "BOOLEAN NOT NULL DEFAULT FALSE", "BOOLEAN NOT NULL DEFAULT 0"),
+    ("story_views", "source", "VARCHAR", "VARCHAR"),
 ]
 
 

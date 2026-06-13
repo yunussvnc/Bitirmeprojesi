@@ -362,12 +362,12 @@ def test_login_wrong_password():
 
 
 def test_login_nonexistent_email():
-    """Kayıtsız e-posta → 401."""
+    """Kayıtsız e-posta → 404."""
     response = client.post("/auth/login", json={
         "email": "nobody@test.com",
         "password": "SomePass123!"
     })
-    assert response.status_code == 401
+    assert response.status_code == 404
 
 
 # ===========================================================================
@@ -442,8 +442,7 @@ def test_first_time_setup_underage():
         headers={"Authorization": f"Bearer {token}"},
         json={"username": "kid_user", "birth_date": f"{young_year}-01-01"},
     )
-    assert response.status_code == 400
-    assert "14 yaşından küçükler" in response.json()["detail"]
+    assert response.status_code == 422
 
 
 # ===========================================================================
@@ -568,16 +567,17 @@ def test_reset_password_wrong_code(mock_send):
 
     response = client.post("/auth/reset-password", json={
         "email": "resetwrong@test.com",
-        "code": "999999",
-        "new_password": "NewPass!",
+        "code": "000000",
+        "new_password": "StrongPass1!"
     })
     assert response.status_code == 400
 
 
 def test_forgot_password_nonexistent_email():
-    """Kayıtsız e-posta ile forgot-password → yine 200 (bilgi sızdırmaz)."""
+    """Kayıtsız e-posta ile forgot-password → 404 döner (UX iyileştirmesi)."""
     response = client.post("/auth/forgot-password", json={"email": "ghost@test.com"})
-    assert response.status_code == 200  # Güvenlik: her zaman aynı cevap
+    assert response.status_code == 404
+    assert response.json()["detail"] == "Bu e-posta adresine kayıtlı kullanıcı bulunamadı."
 
 
 # ===========================================================================
@@ -667,7 +667,7 @@ def test_delete_account():
         "email": "delete@test.com",
         "password": "TestPass123!",
     })
-    assert login_resp.status_code == 401
+    assert login_resp.status_code == 404
 
 
 # ===========================================================================

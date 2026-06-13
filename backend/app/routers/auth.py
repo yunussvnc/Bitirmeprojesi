@@ -120,6 +120,7 @@ def _verify_apple_identity_token(token: str) -> dict:
             detail="Apple Sign-In yapılandırılmamış.",
         )
 
+    # pyrefly: ignore [missing-import]
     from jwt import PyJWKClient
 
     jwks_client = PyJWKClient("https://appleid.apple.com/auth/keys", cache_keys=True)
@@ -389,15 +390,20 @@ def login(
 ):
     ip = get_client_ip(request)
 
-    user = crud.authenticate_user(db, user_data.email, user_data.password)
-    if not user:
+    db_user = crud.get_user_by_email(db, user_data.email)
+    if not db_user:
         if crud.get_pending_user_by_email(db, user_data.email):
             raise HTTPException(
                 status_code=403, 
                 detail="pending_verification: Lütfen önce e-posta adresinize gönderilen kod ile hesabınızı doğrulayın."
             )
         record_failed_login(ip)
-        raise HTTPException(status_code=401, detail="E-posta veya şifre hatalı.")
+        raise HTTPException(status_code=404, detail="Bu e-posta adresine ait kullanıcı bulunamadı.")
+
+    user = crud.authenticate_user(db, user_data.email, user_data.password)
+    if not user:
+        record_failed_login(ip)
+        raise HTTPException(status_code=401, detail="Şifre hatalı.")
 
     if not user.is_active:
         raise HTTPException(status_code=403, detail="Hesabınız devre dışı bırakılmış.")
@@ -435,7 +441,7 @@ def google_login(
         if not user:
             user_data = schemas.UserCreate(
                 email=email, 
-                password="social_login_" + str(uuid.uuid4()), 
+                password="SocialLogin1!_" + str(uuid.uuid4()), 
                 username=None,
                 first_name=first_name,
                 last_name=last_name
@@ -475,8 +481,8 @@ def apple_login(
         if not user:
             user_data = schemas.UserCreate(
                 email=email, 
-                password="social_login_" + str(uuid.uuid4()), 
-                username=None,
+                password="SocialLogin1!_" + str(uuid.uuid4()), 
+                username=None
             )
             user = crud.create_user(db, user_data)
         
@@ -576,16 +582,17 @@ def forgot_password(
 ):
     """
     Şifre sıfırlama kodu oluşturur ve e-posta gönderir.
-    Güvenlik: e-posta bulunamasa bile aynı mesaj döner (bilgi sızdırmaz).
+    Kullanıcı bulunamazsa özel olarak 404 döner (UX iyileştirmesi).
     """
     user = crud.get_user_by_email(db, email=body.email)
-    if user:
-        try:
-            create_password_reset_code(db, user)
-        except RateLimitError as e:
-            raise HTTPException(status_code=429, detail=str(e))
+    if not user:
+        raise HTTPException(status_code=404, detail="Bu e-posta adresine kayıtlı kullanıcı bulunamadı.")
 
-    # Her durumda aynı cevap — e-posta var mı yok mu sızdırmıyoruz
+    try:
+        create_password_reset_code(db, user)
+    except RateLimitError as e:
+        raise HTTPException(status_code=429, detail=str(e))
+
     return {"ok": True, "message": "E-posta adresinize şifre sıfırlama kodu gönderildi."}
 
 
@@ -603,6 +610,14 @@ def reset_password(
 
     if len(body.new_password) < 8:
         raise HTTPException(status_code=400, detail="Şifre en az 8 karakter olmalıdır.")
+        
+    import re
+    pwd_pattern = re.compile(r'(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*([^\w\s]|_))')
+    if not pwd_pattern.search(body.new_password):
+        raise HTTPException(
+            status_code=400,
+            detail="Şifre en az bir büyük harf, bir küçük harf, bir rakam ve bir özel karakter içermelidir."
+        )
 
     new_hash = _hash_password(body.new_password)
     success = verify_password_reset(db, user, body.code.strip(), new_hash)
@@ -628,6 +643,14 @@ def change_password(
         raise HTTPException(status_code=400, detail="Mevcut şifreniz hatalı.")
     if len(body.new_password) < 8:
         raise HTTPException(status_code=400, detail="Yeni şifre en az 8 karakter olmalıdır.")
+    
+    import re
+    pwd_pattern = re.compile(r'(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*([^\w\s]|_))')
+    if not pwd_pattern.search(body.new_password):
+        raise HTTPException(
+            status_code=400,
+            detail="Şifre en az bir büyük harf, bir küçük harf, bir rakam ve bir özel karakter içermelidir."
+        )
 
     current_user.password_hash = _hash_password(body.new_password)
     db.commit()
@@ -645,7 +668,10 @@ def delete_account(
     db.query(models.Notification).filter(
         (models.Notification.user_id == uid) | (models.Notification.actor_id == uid)
     ).delete(synchronize_session=False)
-    db.query(models.Report).filter(models.Report.reporter_id == uid).delete()
+    db.query(models.Report).filter(
+        (models.Report.reporter_id == uid) | 
+        ((models.Report.target_type == "user") & (models.Report.target_id == uid))
+    ).delete(synchronize_session=False)
     db.query(models.UserBlock).filter(
         (models.UserBlock.blocker_id == uid) | (models.UserBlock.blocked_id == uid)
     ).delete(synchronize_session=False)
@@ -691,6 +717,10 @@ def delete_account(
         db.delete(mp)
     # PostTag temizliği (eksik cascade)
     db.query(models.PostTag).filter(models.PostTag.user_id == uid).delete(synchronize_session=False)
+    # Kalan eksik PostgreSQL tablolarını temizle
+    db.query(models.CommunityRoom).filter(models.CommunityRoom.created_by == uid).delete(synchronize_session=False)
+    db.query(models.Place).filter(models.Place.owner_id == uid).delete(synchronize_session=False)
+    
     db.commit()
     db.delete(current_user)
     db.commit()
@@ -779,7 +809,10 @@ def register_device_token(
         db.query(models.DeviceToken).filter(
             models.DeviceToken.user_id == current_user.id
         ).delete(synchronize_session=False)
-        
+
+        # Silmelerin veritabanına gönderildiğinden emin ol (UNIQUE çakışmasını önler)
+        db.flush()
+
         # Yeni token'ı kaydet
         new_token = models.DeviceToken(
             user_id=current_user.id,
@@ -790,9 +823,30 @@ def register_device_token(
         db.add(new_token)
         db.commit()
         return {"ok": True, "message": "Device token registered"}
-    except IntegrityError as e:
+    except IntegrityError:
         db.rollback()
-        raise HTTPException(status_code=400, detail="Bu token zaten başka bir cihaza kayıtlı.")
+        # Flush sonrası IntegrityError olmamalı, ama olursa yine de düzgün handle et
+        # Token'ı zorla sil ve tekrar dene
+        try:
+            db.query(models.DeviceToken).filter(
+                models.DeviceToken.token == data.token
+            ).delete(synchronize_session=False)
+            db.query(models.DeviceToken).filter(
+                models.DeviceToken.user_id == current_user.id
+            ).delete(synchronize_session=False)
+            db.flush()
+            new_token = models.DeviceToken(
+                user_id=current_user.id,
+                token=data.token,
+                platform=data.platform,
+                device_id=data.device_id
+            )
+            db.add(new_token)
+            db.commit()
+            return {"ok": True, "message": "Device token registered"}
+        except Exception:
+            db.rollback()
+            raise HTTPException(status_code=500, detail="Cihaz token'ı kaydedilirken hata oluştu.")
     except Exception as e:
         db.rollback()
         raise HTTPException(status_code=500, detail="Cihaz token'ı kaydedilirken hata oluştu.")
@@ -931,6 +985,9 @@ def update_my_preferences(
         raise HTTPException(status_code=400, detail=f"Geçersiz medya kalitesi: {data.upload_quality}")
     if data.language and data.language not in VALID_LANGUAGES:
         raise HTTPException(status_code=400, detail=f"Geçersiz dil: {data.language}")
+
+    if data.is_private_account and data.story_reply_audience == "everyone":
+        data.story_reply_audience = "followers"
 
     prefs = crud.update_preferences(db, current_user.id, data)
 

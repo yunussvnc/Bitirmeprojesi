@@ -66,6 +66,10 @@ type AppState = {
   viewedStoryGroupKeys: string[];
   addViewedStoryGroupKey: (key: string) => void;
   clearViewedStoryGroupKeys: () => void;
+
+  blockedUserIds: number[];
+  addBlockedUserId: (id: number) => void;
+  clearBlockedUserIds: () => void;
 };
 
 const uniq = (arr: string[]) => Array.from(new Set(arr));
@@ -84,6 +88,7 @@ export const useAppStore = create<AppState>()(
       unreadNotificationCount: 0,
       deletedPostIds: [],
       viewedStoryGroupKeys: [],
+      blockedUserIds: [],
 
       isSaved: (id) => get().savedIds.includes(id),
 
@@ -222,6 +227,13 @@ export const useAppStore = create<AppState>()(
       },
       clearViewedStoryGroupKeys: () => {
         set({ viewedStoryGroupKeys: [] });
+      },
+
+      addBlockedUserId: (id: number) => {
+        set((state) => ({ blockedUserIds: uniq([...state.blockedUserIds.map(String), String(id)]).map(Number) }));
+      },
+      clearBlockedUserIds: () => {
+        set({ blockedUserIds: [] });
       },
     }),
     {

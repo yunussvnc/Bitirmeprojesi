@@ -25,6 +25,7 @@ import { success, lightImpact } from "@/src/utils/haptics";
 import { useTranslation } from "react-i18next";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { handleApiError } from "@/src/utils/errorHandler";
+import { validatePassword } from "@/src/utils/validators";
 
 export default function SecuritySettingsScreen() {
     const { colors } = useTheme();
@@ -39,19 +40,30 @@ export default function SecuritySettingsScreen() {
     const [loading, setLoading] = useState(false);
     const [deleteLoading, setDeleteLoading] = useState(false);
 
+    // Anlık validasyon
+    const [pwdErrors, setPwdErrors] = useState<{
+        current?: string;
+        new?: string;
+        confirm?: string;
+    }>({});
+    const [newPwdStrength, setNewPwdStrength] = useState<{ score: number; strength: 'weak' | 'medium' | 'strong' } | null>(null);
+
     const handleChangePassword = async () => {
+        const newErrors: typeof pwdErrors = {};
+
         if (!currentPass.trim()) {
-            Alert.alert(t("common.error"), t("settings_extra.err_current_pwd"));
-            return;
+            newErrors.current = t("settings_extra.err_current_pwd", "Mevcut şifrenizi giriniz.");
         }
-        if (newPass.length < 8) {
-            Alert.alert(t("common.error"), t("settings_extra.err_pwd_len"));
-            return;
+
+        const pwdRes = validatePassword(newPass);
+        if (!pwdRes.valid) {
+            newErrors.new = pwdRes.error;
+        } else if (newPass !== confirmPass) {
+            newErrors.confirm = t("settings_extra.err_pwd_match", "Şifreler eşleşmiyor.");
         }
-        if (newPass !== confirmPass) {
-            Alert.alert(t("common.error"), t("settings_extra.err_pwd_match"));
-            return;
-        }
+
+        setPwdErrors(newErrors);
+        if (Object.keys(newErrors).length > 0) return;
 
         setLoading(true);
         try {
@@ -61,6 +73,8 @@ export default function SecuritySettingsScreen() {
             setCurrentPass("");
             setNewPass("");
             setConfirmPass("");
+            setPwdErrors({});
+            setNewPwdStrength(null);
         } catch (err: any) {
             handleApiError(err);
         } finally {
@@ -86,7 +100,8 @@ export default function SecuritySettingsScreen() {
                             logout();
                             router.replace("/login");
                         } catch (err: any) {
-                            handleApiError(err);
+                            const errorObj = handleApiError(err);
+                            Alert.alert(t("common.error"), errorObj.userMessage);
                         } finally {
                             setDeleteLoading(false);
                         }
@@ -109,39 +124,81 @@ export default function SecuritySettingsScreen() {
             <ScrollView style={styles.scroll} contentContainerStyle={styles.content} showsVerticalScrollIndicator={false}>
                 <Text style={[styles.sectionTitle, { color: colors.text.secondary }]}>{t("settings_extra.change_pwd")}</Text>
                 <View style={[styles.card, { backgroundColor: colors.surface.elevated, borderColor: colors.surface.border }]}>
-                    <TextInput
-                        style={[styles.input, { color: colors.text.primary, borderBottomColor: colors.surface.border }]}
-                        placeholder={t("settings_extra.current_pwd")}
-                        placeholderTextColor={colors.text.tertiary}
-                        secureTextEntry
-                        textContentType="oneTimeCode"
-                        autoComplete="off"
-                        value={currentPass}
-                        onChangeText={setCurrentPass}
-                        autoCapitalize="none"
-                    />
-                    <TextInput
-                        style={[styles.input, { color: colors.text.primary, borderBottomColor: colors.surface.border }]}
-                        placeholder={t("settings_extra.new_pwd")}
-                        placeholderTextColor={colors.text.tertiary}
-                        secureTextEntry
-                        textContentType="oneTimeCode"
-                        autoComplete="off"
-                        value={newPass}
-                        onChangeText={setNewPass}
-                        autoCapitalize="none"
-                    />
-                    <TextInput
-                        style={[styles.input, styles.inputLast, { color: colors.text.primary }]}
-                        placeholder={t("settings_extra.new_pwd_confirm")}
-                        placeholderTextColor={colors.text.tertiary}
-                        secureTextEntry
-                        textContentType="oneTimeCode"
-                        autoComplete="off"
-                        value={confirmPass}
-                        onChangeText={setConfirmPass}
-                        autoCapitalize="none"
-                    />
+                    <View style={styles.inputWrapper}>
+                        <TextInput
+                            style={[styles.input, { color: colors.text.primary, borderBottomColor: pwdErrors.current ? '#FF6B6B' : colors.surface.border }]}
+                            placeholder={t("settings_extra.current_pwd")}
+                            placeholderTextColor={colors.text.tertiary}
+                            secureTextEntry
+                            textContentType="oneTimeCode"
+                            autoComplete="off"
+                            value={currentPass}
+                            onChangeText={(v) => { setCurrentPass(v); if (pwdErrors.current) setPwdErrors(p => ({...p, current: undefined})); }}
+                            autoCapitalize="none"
+                        />
+                        {pwdErrors.current ? <Text style={styles.fieldErr}>{pwdErrors.current}</Text> : null}
+                    </View>
+                    <View style={styles.inputWrapper}>
+                        <TextInput
+                            style={[styles.input, { color: colors.text.primary, borderBottomColor: pwdErrors.new ? '#FF6B6B' : colors.surface.border }]}
+                            placeholder={t("settings_extra.new_pwd")}
+                            placeholderTextColor={colors.text.tertiary}
+                            secureTextEntry
+                            textContentType="oneTimeCode"
+                            autoComplete="off"
+                            value={newPass}
+                            onChangeText={(v) => {
+                                setNewPass(v);
+                                if (pwdErrors.new) setPwdErrors(p => ({...p, new: undefined}));
+                                const r = validatePassword(v);
+                                setNewPwdStrength(v ? { score: r.score, strength: r.strength } : null);
+                            }}
+                            autoCapitalize="none"
+                        />
+                        {/* Şifre Güç Göstergesi */}
+                        {newPass.length > 0 && newPwdStrength && (
+                            <View style={styles.strengthContainer}>
+                                <View style={styles.strengthBar}>
+                                    {[0,1,2,3].map(i => (
+                                        <View key={i} style={[styles.strengthSegment, {
+                                            backgroundColor: i < newPwdStrength.score
+                                                ? newPwdStrength.strength === 'strong' ? '#4ECDC4'
+                                                : newPwdStrength.strength === 'medium' ? '#FF9500' : '#FF6B6B'
+                                                : colors.surface.border
+                                        }]} />
+                                    ))}
+                                </View>
+                                <Text style={[styles.strengthLabel, {
+                                    color: newPwdStrength.strength === 'strong' ? '#4ECDC4' : newPwdStrength.strength === 'medium' ? '#FF9500' : '#FF6B6B'
+                                }]}>
+                                    {newPwdStrength.strength === 'strong' ? 'Çok Güçlü ✓' : newPwdStrength.strength === 'medium' ? 'Orta' : 'Zayıf'}
+                                </Text>
+                            </View>
+                        )}
+                        {pwdErrors.new ? <Text style={styles.fieldErr}>{pwdErrors.new}</Text> : null}
+                    </View>
+                    <View style={styles.inputWrapper}>
+                        <TextInput
+                            style={[styles.input, styles.inputLast, { color: colors.text.primary, borderBottomColor: pwdErrors.confirm ? '#FF6B6B' : 'transparent' }]}
+                            placeholder={t("settings_extra.new_pwd_confirm")}
+                            placeholderTextColor={colors.text.tertiary}
+                            secureTextEntry
+                            textContentType="oneTimeCode"
+                            autoComplete="off"
+                            value={confirmPass}
+                            onChangeText={(v) => { setConfirmPass(v); if (pwdErrors.confirm) setPwdErrors(p => ({...p, confirm: undefined})); }}
+                            autoCapitalize="none"
+                        />
+                        {pwdErrors.confirm ? <Text style={styles.fieldErr}>{pwdErrors.confirm}</Text> : null}
+                    </View>
+                </View>
+
+                {/* Şifre kuralları ipucu */}
+                <View style={styles.pwdHintBox}>
+                    <IconSymbol name="info.circle" size={14} color={colors.text.tertiary} />
+                    <Text style={[styles.pwdHintText, { color: colors.text.tertiary }]}>
+                        {t("settings_extra.pwd_rules", "En az 8 karakter, büyük harf, küçük harf, rakam ve noktalama işareti içermelidir.")}
+                    </Text>
                 </View>
 
                 <TouchableOpacity
@@ -276,5 +333,53 @@ const styles = StyleSheet.create({
     dangerBtnText: {
         fontSize: 15,
         fontWeight: "700",
+    },
+    pwdHintBox: {
+        flexDirection: "row",
+        alignItems: "flex-start",
+        gap: 6,
+        marginTop: 8,
+        marginBottom: 4,
+        paddingHorizontal: 4,
+    },
+    pwdHintText: {
+        flex: 1,
+        fontSize: 12,
+        lineHeight: 17,
+    },
+    inputWrapper: {
+        paddingHorizontal: 0,
+    },
+    fieldErr: {
+        fontSize: 12,
+        color: '#FF6B6B',
+        fontWeight: '500',
+        paddingHorizontal: 16,
+        paddingBottom: 8,
+        marginTop: -4,
+    },
+    strengthContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 8,
+        paddingHorizontal: 16,
+        paddingBottom: 8,
+        marginTop: -4,
+    },
+    strengthBar: {
+        flex: 1,
+        flexDirection: 'row',
+        gap: 4,
+        height: 4,
+    },
+    strengthSegment: {
+        flex: 1,
+        borderRadius: 2,
+    },
+    strengthLabel: {
+        fontSize: 12,
+        fontWeight: '700',
+        minWidth: 64,
+        textAlign: 'right',
     },
 });

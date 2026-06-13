@@ -19,10 +19,8 @@ class InAppProvider(NotificationProvider):
     async def send(self, user_id: int, notification_data: dict, push_extra: dict = None):
         try:
             from app.websocket.manager import manager
-            loop = asyncio.get_running_loop()
-            loop.create_task(manager.send_global_notification(user_id, notification_data))
-        except RuntimeError:
-            pass  # No running loop
+            # Doğrudan await et, loop kapanmadan önce işini bitirsin
+            await manager.send_global_notification(user_id, notification_data)
         except Exception as e:
             logger.error(f"InAppProvider Hatası: {e}")
 
@@ -120,10 +118,11 @@ class OmnichannelManager:
             except Exception:
                 pass
 
-        # Provider listesini her seferinde taze kur (PushProvider için db + actor bilgisi)
+        # Provider listesini her seferinde taze kur
+        # PushProvider kaldırıldı, çünkü InAppProvider (manager.py) içinde 
+        # offline ise push atma mantığı zaten var (trigger_push_notification).
         providers = [
             InAppProvider(),
-            PushProvider(db=self.db, actor_name=actor_name),
         ]
 
         # 2. Provider'lara (Novu Channels) Dağıtım
@@ -136,14 +135,18 @@ class OmnichannelManager:
             "payload": notif.payload,
             "group_key": notif.group_key,
             "created_at": notif.created_at.isoformat() if notif.created_at else None,
+            "sender_name": actor_name,  # Push içeriği için
         }
 
         try:
             loop = asyncio.get_running_loop()
             for provider in providers:
+                # Fire and forget (main loop)
                 loop.create_task(provider.send(user_id, ws_data, push_extra))
         except RuntimeError:
-            # Sync context — push'u fire-and-forget thread'de çalıştır
+            # Sync context — asyncio.run ile main thread'de hızlıca dispatch et
+            # PushProvider silindiği için artık InAppProvider anında döner (create_task)
+            # ve herhangi bir IO beklemesi yapmaz.
             import threading
 
             def _run_push():
@@ -153,6 +156,8 @@ class OmnichannelManager:
                 try:
                     for provider in providers:
                         _loop.run_until_complete(provider.send(user_id, ws_data, push_extra))
+                    # Wait for pending tasks to start
+                    _loop.run_until_complete(_asyncio.sleep(0))
                 finally:
                     _loop.close()
 

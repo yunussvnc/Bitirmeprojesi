@@ -40,6 +40,7 @@ import * as WebBrowser from 'expo-web-browser';
 import * as Google from 'expo-auth-session/providers/google';
 import { LegalModal } from '@/src/components/ui/LegalModal';
 import { googleAuthRequestConfig } from '@/src/config/socialAuth';
+import { validatePassword } from '@/src/utils/validators';
 
 WebBrowser.maybeCompleteAuthSession();
 
@@ -80,6 +81,7 @@ export default function RegisterScreen() {
   const [isPasswordFocused, setIsPasswordFocused] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [passwordStrength, setPasswordStrength] = useState<{ score: number; strength: 'weak' | 'medium' | 'strong' } | null>(null);
   const isSubmittingRef = useRef(false);
 
   // --- Venue 2-adım akışı ---
@@ -462,7 +464,7 @@ export default function RegisterScreen() {
                               label={t('auth.password')}
                               placeholder={t('auth.password_hint')}
                               value={password}
-                              onChangeText={(t) => { setPassword(t); clearFieldError('password'); }}
+                              onChangeText={(t) => { setPassword(t); clearFieldError('password'); const r = validatePassword(t); setPasswordStrength(t ? { score: r.score, strength: r.strength } : null); }}
                               onFocus={() => setIsPasswordFocused(true)}
                               onBlur={() => setIsPasswordFocused(false)}
                               secureTextEntry={!showPassword}
@@ -473,6 +475,34 @@ export default function RegisterScreen() {
                               error={errors.password}
                               containerStyle={isPasswordFocused && !errors.password ? { marginBottom: 4 } : styles.inputContainer}
                             />
+                            {/* Şifre Güç Göstergesi */}
+                            {password.length > 0 && passwordStrength && (
+                              <View style={styles.strengthContainer}>
+                                <View style={styles.strengthBar}>
+                                  {[0,1,2,3].map(i => (
+                                    <View
+                                      key={i}
+                                      style={[
+                                        styles.strengthSegment,
+                                        {
+                                          backgroundColor: i < passwordStrength.score
+                                            ? passwordStrength.strength === 'strong' ? '#4ECDC4'
+                                              : passwordStrength.strength === 'medium' ? '#FF9500'
+                                              : '#FF6B6B'
+                                            : 'rgba(255,255,255,0.2)'
+                                        }
+                                      ]}
+                                    />
+                                  ))}
+                                </View>
+                                <Text style={[
+                                  styles.strengthLabel,
+                                  { color: passwordStrength.strength === 'strong' ? '#4ECDC4' : passwordStrength.strength === 'medium' ? '#FF9500' : '#FF6B6B' }
+                                ]}>
+                                  {passwordStrength.strength === 'strong' ? 'Çok Güçlü ✓' : passwordStrength.strength === 'medium' ? 'Orta' : 'Zayıf'}
+                                </Text>
+                              </View>
+                            )}
                             {isPasswordFocused && !errors.password && (
                               <Text style={styles.passwordRulesText}>{t('auth.password_rules')}</Text>
                             )}
@@ -513,7 +543,7 @@ export default function RegisterScreen() {
                               label={t('auth.password')}
                               placeholder={t('auth.password_hint')}
                               value={password}
-                              onChangeText={(t) => { setPassword(t); clearFieldError('password'); }}
+                              onChangeText={(t) => { setPassword(t); clearFieldError('password'); const r = validatePassword(t); setPasswordStrength(t ? { score: r.score, strength: r.strength } : null); }}
                               onFocus={() => setIsPasswordFocused(true)}
                               onBlur={() => setIsPasswordFocused(false)}
                               secureTextEntry={!showPassword}
@@ -524,6 +554,34 @@ export default function RegisterScreen() {
                               error={errors.password}
                               containerStyle={isPasswordFocused && !errors.password ? { marginBottom: 4 } : styles.inputContainer}
                             />
+                            {/* Şifre Güç Göstergesi */}
+                            {password.length > 0 && passwordStrength && (
+                              <View style={styles.strengthContainer}>
+                                <View style={styles.strengthBar}>
+                                  {[0,1,2,3].map(i => (
+                                    <View
+                                      key={i}
+                                      style={[
+                                        styles.strengthSegment,
+                                        {
+                                          backgroundColor: i < passwordStrength.score
+                                            ? passwordStrength.strength === 'strong' ? '#4ECDC4'
+                                              : passwordStrength.strength === 'medium' ? '#FF9500'
+                                              : '#FF6B6B'
+                                            : 'rgba(255,255,255,0.2)'
+                                        }
+                                      ]}
+                                    />
+                                  ))}
+                                </View>
+                                <Text style={[
+                                  styles.strengthLabel,
+                                  { color: passwordStrength.strength === 'strong' ? '#4ECDC4' : passwordStrength.strength === 'medium' ? '#FF9500' : '#FF6B6B' }
+                                ]}>
+                                  {passwordStrength.strength === 'strong' ? 'Çok Güçlü ✓' : passwordStrength.strength === 'medium' ? 'Orta' : 'Zayıf'}
+                                </Text>
+                              </View>
+                            )}
                             {isPasswordFocused && !errors.password && (
                               <Text style={styles.passwordRulesText}>{t('auth.password_rules')}</Text>
                             )}
@@ -677,6 +735,29 @@ const styles = StyleSheet.create({
     marginTop: -2,
     marginBottom: 14,
     marginLeft: 4,
+  },
+  strengthContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+    marginBottom: 10,
+    marginTop: -6,
+  },
+  strengthBar: {
+    flex: 1,
+    flexDirection: 'row',
+    gap: 4,
+    height: 4,
+  },
+  strengthSegment: {
+    flex: 1,
+    borderRadius: 2,
+  },
+  strengthLabel: {
+    fontSize: 12,
+    fontWeight: '700',
+    minWidth: 64,
+    textAlign: 'right',
   },
   toggleContainer: {
     flexDirection: 'row',

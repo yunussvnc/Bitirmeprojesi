@@ -93,19 +93,6 @@ export default function MediaQualityScreen() {
           </Text>
         </Section>
 
-        <Section title={t("settings_media.stream_title", "Akış Kalitesi")}>
-          <SettingsRow
-            label={t("settings_media.autoplay", "Video otomatik oynat")}
-            value={videoAutoplay}
-            switch
-            onValueChange={(v: boolean) => { setVideoAutoplay(v); success(); }}
-            icon="play.circle"
-          />
-          <Text style={[styles.hint, { color: colors.text.tertiary }]}>
-            {t("settings_media.autoplay_hint", "Akışta reels ve video içerikler otomatik oynatılır.")}
-          </Text>
-          <SettingsRow label={t("settings_media.upload_high", "Yüksek çözünürlükte yükle")} value={quality === "high"} icon="photo.circle" />
-        </Section>
       </ScrollView>
     </View>
   );

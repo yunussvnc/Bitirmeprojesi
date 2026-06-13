@@ -58,13 +58,12 @@ export default function SettingsIndexScreen() {
           value: `${savedIds.length}`,
           onPress: () => {
             lightImpact();
-            router.replace("/(tabs)/saved" as any);
+            router.push("/saved" as any);
           },
           icon: "bookmark",
           showArrow: true,
           keywords: ["kaydedildi", "saved", "bookmark"],
         },
-        { label: t('settings_main.visit_history'), onPress: nav("/settings/activity"), icon: "clock.arrow.circlepath", showArrow: true, keywords: ["geçmiş", "history", "activity"] },
         { label: t('settings_main.notifications'), onPress: nav("/notifications"), icon: "bell", showArrow: true, keywords: ["bildirimler", "notifications"] },
         { label: t('settings_main.content_prefs'), onPress: nav("/settings/content"), icon: "slider.horizontal.3", showArrow: true, keywords: ["içerik", "content", "preferences"] },
       ],
@@ -83,7 +82,6 @@ export default function SettingsIndexScreen() {
         { label: t('settings_main.messages_replies'), onPress: nav("/settings/messages"), icon: "bubble.left.and.bubble.right", showArrow: true, keywords: ["mesaj", "messages", "replies"] },
         { label: t('settings_main.comments'), value: commentAudience === 'everyone' ? t('settings_main.public') : commentAudience === 'followers' ? t('settings_main.followers_only') : t('settings_main.off'), onPress: nav("/settings/comments"), icon: "text.bubble", showArrow: true, keywords: ["yorum", "comments"] },
         { label: t('settings_main.restricted'), value: `${restrictedCount}`, onPress: nav("/settings/restricted"), icon: "person.crop.circle.badge.xmark", showArrow: true, keywords: ["kısıtlı", "restricted"] },
-        { label: t('settings_main.hidden_words'), onPress: nav("/settings/hidden-words"), icon: "eye.slash", showArrow: true, keywords: ["gizlenen", "hidden words"] },
       ],
     },
     {

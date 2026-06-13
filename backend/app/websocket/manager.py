@@ -30,22 +30,25 @@ class ConnectionManager:
 
     async def start_redis_listener(self):
         """Sunucu kalktığında Redis Pub/Sub kanalını dinlemeye başlar."""
+        self._listener_task = asyncio.create_task(self._listen_loop())
+
+    async def _listen_loop(self):
+        """Redis'ten gelen mesajları okuyup lokal WebSocket'lere dağıtır (Otomatik Reconnect ile)."""
         from app.core.redis_client import get_redis
-        redis = get_redis()
-        if not redis:
-            logger.warning("Redis bağlantısı yok, Pub/Sub listener başlatılamadı.")
-            return
+        
+        while True:
+            try:
+                redis = get_redis()
+                if not redis:
+                    logger.warning("Redis bağlantısı yok, Pub/Sub listener 10 saniye sonra tekrar deneyecek.")
+                    await asyncio.sleep(10)
+                    continue
 
-        pubsub = redis.pubsub()
-        await pubsub.subscribe("ws:cluster:events")
-        logger.info("📡 Redis Pub/Sub WebSocket listener başlatıldı (Channel: ws:cluster:events)")
+                pubsub = redis.pubsub()
+                await pubsub.subscribe("ws:cluster:events")
+                logger.info("📡 Redis Pub/Sub WebSocket listener başlatıldı (Channel: ws:cluster:events)")
 
-        self._listener_task = asyncio.create_task(self._listen_loop(pubsub))
-
-    async def _listen_loop(self, pubsub):
-        """Redis'ten gelen mesajları okuyup lokal WebSocket'lere dağıtır."""
-        try:
-            async for message in pubsub.listen():
+                async for message in pubsub.listen():
                 if message["type"] != "message":
                     continue
                 
@@ -77,10 +80,12 @@ class ConnectionManager:
                     pass
                 except Exception as e:
                     logger.error("Pub/Sub mesaj işleme hatası: %s", str(e))
-        except asyncio.CancelledError:
-            pass
-        except Exception as e:
-            logger.error("Pub/Sub listener çöktü: %s", str(e))
+            except asyncio.CancelledError:
+                logger.info("🛑 Redis Pub/Sub listener durduruldu (Cancelled).")
+                break
+            except Exception as e:
+                logger.error("Pub/Sub listener çöktü (Bağlantı koptu): %s. 5 sn içinde yeniden bağlanılıyor...", str(e))
+                await asyncio.sleep(5)
 
     async def _publish_event(self, payload: dict):
         """Tüm cluster'a (diğer sunuculara da) event fırlat."""
@@ -174,7 +179,15 @@ class ConnectionManager:
                 title = data.get("title", title)
                 body = data.get("message", body)
                 
-            asyncio.create_task(trigger_push_notification(user_id, title, body, data))
+            task = trigger_push_notification(user_id, title, body, data)
+            try:
+                # If we are in the main loop, this is perfectly safe
+                loop = asyncio.get_running_loop()
+                loop.create_task(task)
+            except RuntimeError:
+                # If there's no running loop, just run it
+                asyncio.run(task)
+
 
     async def _local_send_global(self, user_id: int, data: dict):
         """Sadece lokal RAM'deki websocket'e gönderir."""

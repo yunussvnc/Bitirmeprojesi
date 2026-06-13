@@ -6,13 +6,14 @@
  */
 
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Modal, Pressable } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Modal, Pressable, Alert } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTheme } from "@/src/hooks/useTheme";
 import { IconSymbol, type IconSymbolName } from "@/src/components/ui/icon-symbol";
 import { lightImpact, mediumImpact } from "@/src/utils/haptics";
 import { spacing } from "@/src/constants/design";
 import { useTranslation } from "react-i18next";
+import { FEATURE_FLAGS } from "@/src/constants/featureFlags";
 
 export type CreateType = "post" | "story";
 
@@ -48,6 +49,14 @@ export function CreateTypeSheet({ visible, onClose, onSelect }: CreateTypeSheetP
 
   const handleSelect = (type: CreateType) => {
     mediumImpact();
+    if (type === "post" && !FEATURE_FLAGS.ENABLE_POST_SHARING) {
+      Alert.alert(t("create_sheet.coming_soon", "Yakında"), "Gönderi paylaşımı yakında aktif olacaktır.");
+      return;
+    }
+    if (type === "story" && !FEATURE_FLAGS.ENABLE_STORIES) {
+      Alert.alert(t("create_sheet.coming_soon", "Yakında"), "Hikaye paylaşımı yakında aktif olacaktır.");
+      return;
+    }
     onClose();
     onSelect(type);
   };

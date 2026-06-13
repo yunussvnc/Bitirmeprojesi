@@ -16,8 +16,15 @@ import {
   ScrollView,
   NativeSyntheticEvent,
   NativeScrollEvent,
+  TouchableWithoutFeedback,
 } from "react-native";
-import Animated, { useSharedValue, useAnimatedStyle, withSpring } from "react-native-reanimated";
+import Animated, {
+  useSharedValue,
+  useAnimatedStyle,
+  withSpring,
+  withSequence,
+  withTiming,
+} from "react-native-reanimated";
 import { SnapbackZoom } from "react-native-zoom-toolkit";
 import { Image } from "expo-image";
 import { useTheme } from "@/src/hooks/useTheme";
@@ -59,6 +66,60 @@ export function FeedCard({
   const [currentIndex, setCurrentIndex] = useState(0);
   const likeScale = useSharedValue(1);
   const zoomScale = useSharedValue(1);
+
+  // Double-tap kalp animasyonu — lastTap ref ile
+  const heartScale = useSharedValue(0);
+  const heartOpacity = useSharedValue(0);
+  const [heartPos, setHeartPos] = useState({ x: 0, y: 0 });
+  const lastTapRef = useRef<number>(0);
+  const doubleTapTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const DOUBLE_TAP_DELAY = 300; // ms
+
+  const triggerHeartBurst = useCallback(
+    (x: number, y: number) => {
+      setHeartPos({ x, y });
+      heartScale.value = 0;
+      heartOpacity.value = 0;
+      heartScale.value = withSequence(
+        withSpring(1.4, { damping: 10, stiffness: 200 }),
+        withTiming(1, { duration: 150 }),
+        withTiming(0, { duration: 350 })
+      );
+      heartOpacity.value = withSequence(
+        withTiming(1, { duration: 80 }),
+        withTiming(1, { duration: 380 }),
+        withTiming(0, { duration: 250 })
+      );
+    },
+    [heartScale, heartOpacity]
+  );
+
+  const handleImageTap = useCallback(
+    (x: number, y: number) => {
+      const now = Date.now();
+      const delta = now - lastTapRef.current;
+
+      if (delta < DOUBLE_TAP_DELAY && delta > 0) {
+        // Çift tıklama — önceki tek tıklama timer'ını iptal et
+        if (doubleTapTimerRef.current) {
+          clearTimeout(doubleTapTimerRef.current);
+          doubleTapTimerRef.current = null;
+        }
+        lastTapRef.current = 0;
+        triggerHeartBurst(x, y);
+        mediumImpact();
+        onLike?.(); // Her zaman toggle et — parent state doğru yönetir
+      } else {
+        lastTapRef.current = now;
+      }
+    },
+    [onLike, triggerHeartBurst]
+  );
+
+  const heartAnimStyle = useAnimatedStyle(() => ({
+    transform: [{ scale: heartScale.value }],
+    opacity: heartOpacity.value,
+  }));
 
   const mediaList = [...(post.media ?? [])].sort((a, b) => (a.order_index ?? 0) - (b.order_index ?? 0));
   const isCarousel = mediaList.length > 1;
@@ -161,8 +222,15 @@ export function FeedCard({
           )}
         </TouchableOpacity>
 
-        {/* Görsel alanı */}
+        {/* Görsel alanı — çift tıkla beğen */}
         <Animated.View style={[styles.imageContainer, { height: imageHeight }, imageContainerAnimStyle]}>
+          <TouchableWithoutFeedback
+            onPress={(e) => {
+              const { locationX, locationY } = e.nativeEvent;
+              handleImageTap(locationX, locationY);
+            }}
+          >
+            <View style={{ width: "100%", height: imageHeight }}>
           {isCarousel ? (
             // ── Carousel mode ──────────────────────────────────────────
             <>
@@ -238,6 +306,20 @@ export function FeedCard({
               )}
             </>
           )}
+            </View>
+          </TouchableWithoutFeedback>
+
+          {/* Kalp burst animasyonu */}
+          <Animated.View
+            pointerEvents="none"
+            style={[
+              styles.heartBurst,
+              { left: heartPos.x - 40, top: heartPos.y - 40 },
+              heartAnimStyle,
+            ]}
+          >
+            <Text style={styles.heartEmoji}>❤️</Text>
+          </Animated.View>
         </Animated.View>
 
         {/* İçerik alanı */}
@@ -311,6 +393,17 @@ const styles = StyleSheet.create({
     overflow: "hidden",
     zIndex: 2,
     position: "relative",
+  },
+  heartBurst: {
+    position: "absolute",
+    width: 80,
+    height: 80,
+    alignItems: "center",
+    justifyContent: "center",
+    zIndex: 999,
+  },
+  heartEmoji: {
+    fontSize: 72,
   },
   imagePlaceholder: {
     alignItems: "center",

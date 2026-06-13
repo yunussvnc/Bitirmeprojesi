@@ -14,7 +14,7 @@ import {
   Alert,
 } from "react-native";
 import { Image } from "expo-image";
-import { useLocalSearchParams, useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter, useFocusEffect } from "expo-router";
 import { API_BASE_URL } from "@/src/constants/api";
 import { Screen } from "@/src/components/layout";
 import { Avatar, LoadingState, ErrorState } from "@/src/components/ui";
@@ -37,6 +37,7 @@ import { lightImpact, success } from "@/src/utils/haptics";
 import { toggleBlockUser, createReport } from "@/src/services/moderationService";
 import { acceptFollowRequest, rejectFollowRequest } from '@/src/services/userService';
 import { openConversation } from '@/src/services/messageService';
+import { useAppStore } from '@/src/store/useAppStore';
 import { useTranslation } from 'react-i18next';
 import debounce from 'lodash/debounce';
 
@@ -111,6 +112,12 @@ export default function UserProfileScreen() {
     load();
   }, [load]);
 
+  useFocusEffect(
+    useCallback(() => {
+      setActiveTab("posts");
+    }, [])
+  );
+
   const handleRefresh = useCallback(() => {
     lightImpact();
     setRefreshing(true);
@@ -122,16 +129,13 @@ export default function UserProfileScreen() {
     profileRef.current = profile;
   }, [profile]);
 
-  // Dummygram: Prevent spam clicks with debounce while keeping UI optimistic
-  const handleFollow = useCallback(
-    debounce(async () => {
-      const currentProfile = profileRef.current;
-      if (!currentProfile || followLoading || !currentUser) return;
-      
-      lightImpact();
-      setFollowLoading(true);
-      
-      // Optimistic update
+  const handleFollow = useCallback(async () => {
+    const currentProfile = profileRef.current;
+    if (!currentProfile || !currentUser) return;
+    
+    lightImpact();
+    
+    // Optimistic update
       const prevProfile = { ...currentProfile };
       const willFollow = !currentProfile.is_following;
       const optimisticProfile: UserProfile = {
@@ -175,9 +179,7 @@ export default function UserProfileScreen() {
       } finally {
         setFollowLoading(false);
       }
-    }, 500, { leading: true, trailing: false }),
-    [followLoading, currentUser]
-  );
+  }, [currentUser]);
 
   const reportUser = useCallback(async (reason: "spam" | "inappropriate" | "harassment" | "other") => {
     try {
@@ -303,6 +305,7 @@ export default function UserProfileScreen() {
                   onPress: async () => {
                     try {
                       await toggleBlockUser(userId);
+                      useAppStore.getState().addBlockedUserId(userId);
                       success();
                       Alert.alert(t("user_profile.blocked") + " ✅", t("user_profile.blocked_with_name", { name: displayName }));
                       router.back();
@@ -373,7 +376,6 @@ export default function UserProfileScreen() {
               ]}
               onPress={handleFollow}
               activeOpacity={0.8}
-              disabled={followLoading}
             >
               <Text
                 style={[
