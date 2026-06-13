@@ -25,7 +25,8 @@ import { Video, ResizeMode } from 'expo-av';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
 import { lightImpact, success } from '@/src/utils/haptics';
 import type { Story } from '@/src/services/storyService';
-import { replyToStory } from '@/src/services/storyService';
+import { replyToStory, reactToStory, updateStoryViewAnalytics, STORY_EMOJIS, type StoryEmoji } from '@/src/services/storyService';
+import { router } from 'expo-router';
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 const STORY_DURATION_MS = 5000;
@@ -58,13 +59,25 @@ export function StoryViewerModal({
   const [index, setIndex] = useState(initialIndex);
   const [replyText, setReplyText] = useState('');
   const [replySending, setReplySending] = useState(false);
+  const [showEmojiTray, setShowEmojiTray] = useState(false);
+  const [myReaction, setMyReaction] = useState<string | null>(null);
+  const [reactionSending, setReactionSending] = useState(false);
+  const openedAtRef = useRef<number>(Date.now());
   const progressAnim = useRef(new Animated.Value(0)).current;
   const { t } = useTranslation();
 
   // initialIndex veya stories değiştiğinde index'i sıfırla
   useEffect(() => {
     setIndex(initialIndex);
+    openedAtRef.current = Date.now();
   }, [initialIndex, stories]);
+
+  // Hikaye değişince reaction'u güncelle
+  useEffect(() => {
+    const s = stories[index];
+    setMyReaction(s?.my_reaction ?? null);
+    openedAtRef.current = Date.now();
+  }, [index, stories]);
   const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const dragY = useRef(new Animated.Value(0)).current;
   const animKeyboard = useRef(new Animated.Value(0)).current;
@@ -102,6 +115,18 @@ export function StoryViewerModal({
     if (story) onStoryViewed?.(story.id);
   }, [index, story?.id]); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // Analitik: hikayeyi kapat veya bir sonrakine geçerken izleme süresini gönder
+  const sendAnalytics = useCallback((opts?: { visitedProfile?: boolean; visitedPlace?: boolean }) => {
+    const s = stories[index];
+    if (!s) return;
+    const duration = Math.round((Date.now() - openedAtRef.current) / 1000);
+    updateStoryViewAnalytics(s.id, {
+      watch_duration_seconds: duration,
+      did_visit_profile: opts?.visitedProfile ?? false,
+      did_visit_place: opts?.visitedPlace ?? false,
+    }).catch(() => {});
+  }, [stories, index]);
+
   useEffect(() => {
     if (!story || !isImage || !visible) return;
     progressAnim.setValue(0);
@@ -131,9 +156,10 @@ export function StoryViewerModal({
   }, [goNext]);
 
   const closeWithReset = useCallback(() => {
+    sendAnalytics();
     dragY.setValue(0);
     onClose();
-  }, [dragY, onClose]);
+  }, [dragY, onClose, sendAnalytics]);
 
   const animateClose = useCallback(() => {
     Animated.timing(dragY, {
@@ -179,15 +205,17 @@ export function StoryViewerModal({
   const handleAuthorPress = useCallback(() => {
     if (!story?.user_id) return;
     lightImpact();
+    sendAnalytics({ visitedProfile: true });
     onAuthorNavigate?.(`/user/${story.user_id}`, index);
-  }, [story?.user_id, index, onAuthorNavigate]);
+  }, [story?.user_id, index, onAuthorNavigate, sendAnalytics]);
 
   const handlePlacePress = useCallback(() => {
     const pid = story?.place_id ?? story?.place?.id;
     if (!pid) return;
     lightImpact();
+    sendAnalytics({ visitedPlace: true });
     onPlaceNavigate?.(`/place/${pid}`, index);
-  }, [story?.place_id, story?.place?.id, index, onPlaceNavigate]);
+  }, [story?.place_id, story?.place?.id, index, onPlaceNavigate, sendAnalytics]);
 
   const handleSendReply = useCallback(async () => {
     if (!replyText.trim() || !story || replySending) return;
@@ -196,13 +224,43 @@ export function StoryViewerModal({
       await replyToStory(story.id, replyText.trim());
       success();
       setReplyText('');
+      setShowEmojiTray(false);
     } catch (e) {
-      // Sessizce başarısız ol — UX'i bozmayalım
       console.warn('[StoryViewer] Reply failed:', e);
     } finally {
       setReplySending(false);
     }
   }, [replyText, story, replySending]);
+
+  const handleReaction = useCallback(async (emoji: StoryEmoji) => {
+    if (!story || reactionSending) return;
+    setReactionSending(true);
+    lightImpact();
+    try {
+      const res = await reactToStory(story.id, emoji);
+      if (res.action === 'removed') {
+        setMyReaction(null);
+      } else {
+        setMyReaction(emoji);
+      }
+      setShowEmojiTray(false);
+    } catch (e) {
+      console.warn('[StoryViewer] Reaction failed:', e);
+    } finally {
+      setReactionSending(false);
+    }
+  }, [story, reactionSending]);
+
+  const handleLinkSticker = useCallback(() => {
+    if (!story?.link_type || !story?.link_id) return;
+    lightImpact();
+    sendAnalytics({ visitedPlace: story.link_type === 'place' });
+    if (story.link_type === 'place') {
+      onPlaceNavigate?.(`/place/${story.link_id}`, index);
+    } else if (story.link_type === 'profile') {
+      onAuthorNavigate?.(`/user/${story.link_id}`, index);
+    }
+  }, [story, index, onPlaceNavigate, onAuthorNavigate, sendAnalytics]);
 
   // Başkasının hikayesinde mi?
   const isOwnStory = story?.user_id != null && currentUserId != null && story.user_id === currentUserId;
@@ -336,16 +394,61 @@ export function StoryViewerModal({
           </View>
         </View>
 
-        {/* ── Yanıt Kutusu (sadece başkasının hikayesinde) ── */}
+        {/* ── Link Sticker (varsa) ── */}
+        {story.link_type && story.link_id && (
+          <TouchableOpacity
+            style={styles.linkSticker}
+            onPress={handleLinkSticker}
+            activeOpacity={0.85}
+          >
+            <IconSymbol name="link" size={14} color="#000" />
+            <Text style={styles.linkStickerText} numberOfLines={1}>
+              {story.link_label || (story.link_type === 'place' ? 'Bu mekanı incele' : 'Profile git')}
+            </Text>
+          </TouchableOpacity>
+        )}
+
+        {/* ── Yanıt Kutusu + Emoji Tray (sadece başkasının hikayesinde) ── */}
         {showReplyBar && (
           <Animated.View style={[styles.replyBar, { bottom: Animated.add(Platform.OS === 'ios' ? 36 : 20, animKeyboard) }]} pointerEvents="box-none">
+            {/* Emoji Tepki Tray */}
+            {showEmojiTray && (
+              <View style={styles.emojiTray}>
+                {STORY_EMOJIS.map((emoji) => (
+                  <TouchableOpacity
+                    key={emoji}
+                    style={[
+                      styles.emojiBtn,
+                      myReaction === emoji && styles.emojiBtnActive,
+                    ]}
+                    onPress={() => handleReaction(emoji)}
+                    disabled={reactionSending}
+                    activeOpacity={0.7}
+                  >
+                    <Text style={styles.emojiText}>{emoji}</Text>
+                  </TouchableOpacity>
+                ))}
+              </View>
+            )}
+
             <View style={styles.replyInputRow}>
+              {/* Emoji toggle butonu */}
+              <TouchableOpacity
+                style={styles.emojiToggleBtn}
+                onPress={() => setShowEmojiTray((v) => !v)}
+                activeOpacity={0.7}
+              >
+                <Text style={styles.emojiToggleText}>
+                  {myReaction ?? '😀'}
+                </Text>
+              </TouchableOpacity>
+
               <TextInput
                 style={styles.replyInput}
-                placeholder="Yanıt gönder..."
+                placeholder={t('story.reply_placeholder', { defaultValue: 'Yanıt gönder...' })}
                 placeholderTextColor="rgba(255,255,255,0.5)"
                 value={replyText}
-                onChangeText={setReplyText}
+                onChangeText={(v) => { setReplyText(v); setShowEmojiTray(false); }}
                 maxLength={500}
                 returnKeyType="send"
                 onSubmitEditing={handleSendReply}
@@ -507,5 +610,68 @@ const styles = StyleSheet.create({
   },
   replySendBtnActive: {
     backgroundColor: '#4ade80',
+  },
+  // ── Emoji Reaction Tray ──
+  emojiTray: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    gap: 8,
+    marginBottom: 10,
+    backgroundColor: 'rgba(0,0,0,0.5)',
+    borderRadius: 32,
+    paddingHorizontal: 12,
+    paddingVertical: 8,
+    alignSelf: 'center',
+  },
+  emojiBtn: {
+    width: 44,
+    height: 44,
+    borderRadius: 22,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(255,255,255,0.08)',
+  },
+  emojiBtnActive: {
+    backgroundColor: 'rgba(255,255,255,0.28)',
+    transform: [{ scale: 1.15 }],
+  },
+  emojiText: {
+    fontSize: 22,
+  },
+  emojiToggleBtn: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'rgba(255,255,255,0.15)',
+  },
+  emojiToggleText: {
+    fontSize: 18,
+  },
+  // ── Link Sticker ──
+  linkSticker: {
+    position: 'absolute',
+    bottom: 190,
+    alignSelf: 'center',
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+    backgroundColor: '#fff',
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    borderRadius: 24,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 8,
+    elevation: 6,
+    zIndex: 15,
+  },
+  linkStickerText: {
+    fontSize: 14,
+    fontWeight: '700',
+    color: '#000',
+    maxWidth: 200,
   },
 });

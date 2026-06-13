@@ -1287,6 +1287,9 @@ def create_story(db: Session, user_id: int, data: schemas.StoryCreate):
         "close_friends" if data.is_close_friends else data.privacy_type
     )
 
+    # Mention: list → JSON string
+    mentioned_json = _json.dumps(data.mentioned_user_ids) if data.mentioned_user_ids else None
+
     story = models.Story(
         user_id=user_id,
         place_id=data.place_id,
@@ -1295,6 +1298,10 @@ def create_story(db: Session, user_id: int, data: schemas.StoryCreate):
         thumbnail_url=data.thumbnail_url,
         privacy_type=privacy_type,
         location_data=_json.dumps(data.location_data) if data.location_data else None,
+        mentioned_user_ids=mentioned_json,
+        link_type=data.link_type,
+        link_id=data.link_id,
+        link_label=data.link_label,
         expires_at=expires_at,
     )
     db.add(story)
@@ -2132,17 +2139,58 @@ def is_comment_liked_by_user(db: Session, comment_id: int, user_id: int) -> bool
     ).first() is not None
 
 
-def record_story_view(db: Session, story_id: int, viewer_id: int) -> bool:
-    """Hikaye izlenme kaydı oluştur."""
-    # Kendi hikayesini izlemeyi kaydetmeyebiliriz, ancak basitlik için kaydediyoruz
+def record_story_view(db: Session, story_id: int, viewer_id: int, source: str | None = None) -> bool:
+    """Hikaye izlenme kaydı oluştur. Daha önce izlediyse False döndür."""
     exists = db.query(models.StoryView).filter(
         models.StoryView.story_id == story_id,
         models.StoryView.viewer_id == viewer_id
     ).first()
     if exists:
         return False
-    view = models.StoryView(story_id=story_id, viewer_id=viewer_id)
+    view = models.StoryView(
+        story_id=story_id,
+        viewer_id=viewer_id,
+        source=source,
+    )
     db.add(view)
+    db.commit()
+    return True
+
+
+def update_story_view_analytics(
+    db: Session,
+    story_id: int,
+    viewer_id: int,
+    watch_duration_seconds: int = 0,
+    did_visit_profile: bool = False,
+    did_visit_place: bool = False,
+    source: str | None = None,
+) -> bool:
+    """Mevcut izleme kaydının analitik alanlarını güncelle (UPSERT mantığı)."""
+    view = db.query(models.StoryView).filter(
+        models.StoryView.story_id == story_id,
+        models.StoryView.viewer_id == viewer_id
+    ).first()
+    if not view:
+        # Kaydı daha önce açmadıysa oluştur
+        view = models.StoryView(
+            story_id=story_id,
+            viewer_id=viewer_id,
+            watch_duration_seconds=watch_duration_seconds,
+            did_visit_profile=did_visit_profile,
+            did_visit_place=did_visit_place,
+            source=source,
+        )
+        db.add(view)
+    else:
+        # Güncelle — toplam süreyi biriktir
+        view.watch_duration_seconds = max(view.watch_duration_seconds, watch_duration_seconds)
+        if did_visit_profile:
+            view.did_visit_profile = True
+        if did_visit_place:
+            view.did_visit_place = True
+        if source and not view.source:
+            view.source = source
     db.commit()
     return True
 
@@ -2160,11 +2208,134 @@ def is_story_viewed_by_user(db: Session, story_id: int, user_id: int) -> bool:
     ).first() is not None
 
 
+def get_story_viewers_with_analytics(db: Session, story_id: int) -> list[models.StoryView]:
+    """Hikayeyi izleyenleri analitik alanlarla birlikte getirir."""
+    return (
+        db.query(models.StoryView)
+        .filter(models.StoryView.story_id == story_id)
+        .order_by(models.StoryView.created_at.desc())
+        .all()
+    )
+
+
 def get_story_viewers(db: Session, story_id: int) -> list[models.User]:
-    """Hikayeyi izleyen kullanıcıların listesini getirir."""
+    """Geriye dönük uyumluluk: Hikayeyi izleyen User listesi."""
     views = db.query(models.StoryView).filter(models.StoryView.story_id == story_id).all()
     viewer_ids = [v.viewer_id for v in views]
     if not viewer_ids:
         return []
     return db.query(models.User).filter(models.User.id.in_(viewer_ids)).all()
+
+
+# ── Story Reactions ───────────────────────────────────────────────────────────
+
+ALLOWED_STORY_EMOJIS = {'❤️', '🔥', '😍', '👏', '😂'}
+
+
+def upsert_story_reaction(
+    db: Session,
+    story_id: int,
+    user_id: int,
+    emoji: str,
+) -> tuple[models.StoryReaction, bool]:
+    """
+    Tepki ekle veya değiştir.
+    Returns: (reaction, created)
+    """
+    existing = db.query(models.StoryReaction).filter(
+        models.StoryReaction.story_id == story_id,
+        models.StoryReaction.user_id == user_id,
+    ).first()
+    if existing:
+        existing.emoji = emoji
+        db.commit()
+        db.refresh(existing)
+        return existing, False
+    reaction = models.StoryReaction(story_id=story_id, user_id=user_id, emoji=emoji)
+    db.add(reaction)
+    db.commit()
+    db.refresh(reaction)
+    return reaction, True
+
+
+def delete_story_reaction(db: Session, story_id: int, user_id: int) -> bool:
+    """Tepkiyi kaldır."""
+    existing = db.query(models.StoryReaction).filter(
+        models.StoryReaction.story_id == story_id,
+        models.StoryReaction.user_id == user_id,
+    ).first()
+    if not existing:
+        return False
+    db.delete(existing)
+    db.commit()
+    return True
+
+
+def get_story_reactions(db: Session, story_id: int) -> list[models.StoryReaction]:
+    """Hikayenin tüm tepkilerini getir."""
+    return (
+        db.query(models.StoryReaction)
+        .filter(models.StoryReaction.story_id == story_id)
+        .order_by(models.StoryReaction.created_at.desc())
+        .all()
+    )
+
+
+def get_story_reaction_counts(db: Session, story_id: int) -> dict:
+    """Emoji bazlı tepki sayılarını getirir: {'❤️': 5, '🔥': 3}"""
+    from sqlalchemy import func as sqlfunc
+    rows = (
+        db.query(models.StoryReaction.emoji, sqlfunc.count(models.StoryReaction.id))
+        .filter(models.StoryReaction.story_id == story_id)
+        .group_by(models.StoryReaction.emoji)
+        .all()
+    )
+    return {emoji: count for emoji, count in rows}
+
+
+def get_my_story_reaction(db: Session, story_id: int, user_id: int) -> str | None:
+    """Kullanıcının bu hikayeye verdiği tepkiyi getirir."""
+    r = db.query(models.StoryReaction).filter(
+        models.StoryReaction.story_id == story_id,
+        models.StoryReaction.user_id == user_id,
+    ).first()
+    return r.emoji if r else None
+
+
+# ── Story Archive ─────────────────────────────────────────────────────────────
+
+
+def get_archived_stories(db: Session, user_id: int, page: int = 1, page_size: int = 30):
+    """Kullanıcının arşivlenmiş hikayelerini getir."""
+    base = (
+        db.query(models.Story)
+        .filter(
+            models.Story.user_id == user_id,
+            models.Story.is_archived == True,
+        )
+        .order_by(models.Story.created_at.desc())
+    )
+    total = base.count()
+    stories = base.offset((page - 1) * page_size).limit(page_size).all()
+    return stories, total
+
+
+def archive_expired_stories(db: Session, user_id: int | None = None) -> int:
+    """
+    Süresi dolmuş hikayeleri arşivler (is_archived=True).
+    user_id verilirse sadece o kullanıcının hikayeleri arşivlenir.
+    Returns: arşivlenen hikaye sayısı
+    """
+    now = datetime.now(timezone.utc)
+    q = db.query(models.Story).filter(
+        models.Story.expires_at <= now,
+        models.Story.is_archived == False,
+    )
+    if user_id is not None:
+        q = q.filter(models.Story.user_id == user_id)
+    stories = q.all()
+    for s in stories:
+        s.is_archived = True
+    db.commit()
+    return len(stories)
 

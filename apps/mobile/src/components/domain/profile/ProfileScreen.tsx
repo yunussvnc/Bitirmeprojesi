@@ -213,6 +213,14 @@ export default function ProfileScreen() {
           >
             <IconSymbol name="square.and.arrow.up" size={18} color={colors.text.primary} />
           </TouchableOpacity>
+
+          <TouchableOpacity
+            style={[styles.secondaryBtn, { backgroundColor: colors.surface.elevated, borderColor: colors.surface.border }]}
+            onPress={() => { lightImpact(); router.push('/profile/story-archive' as any); }}
+            activeOpacity={0.8}
+          >
+            <IconSymbol name="archivebox" size={18} color={colors.text.primary} />
+          </TouchableOpacity>
         </View>
 
         {/* ── Stats Card ── */}

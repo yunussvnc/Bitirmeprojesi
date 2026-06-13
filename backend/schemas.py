@@ -649,6 +649,12 @@ class StoryCreate(BaseModel):
     is_close_friends: bool = False
     # Konum meta verisi: {"place_id": 5, "name": "Kadıköy", "lat": 40.99, "lng": 29.02}
     location_data: Optional[dict] = None
+    # Mention: etiketlenen kullanıcı ID listesi
+    mentioned_user_ids: Optional[List[int]] = None
+    # Link sticker
+    link_type: Optional[str] = None    # 'place', 'profile', 'event'
+    link_id: Optional[int] = None
+    link_label: Optional[str] = None
 
     def resolved_privacy_type(self) -> str:
         """is_close_friends True ise close_friends döndür (geriye dönük)."""
@@ -667,12 +673,19 @@ class Story(BaseModel):
     privacy_type: str = "public"
     is_close_friends: bool = False
     location_data: Optional[dict] = None
+    is_archived: bool = False
+    mentioned_user_ids: Optional[List[int]] = None
+    link_type: Optional[str] = None
+    link_id: Optional[int] = None
+    link_label: Optional[str] = None
     created_at: datetime
     expires_at: datetime
     author: Optional[UserSummary] = None
     place: Optional[PlaceSummary] = None
     view_count: int = 0
     is_viewed: bool = False
+    reaction_count: int = 0
+    my_reaction: Optional[str] = None  # Giriş yapan kullanıcının tepkisi
 
     class Config:
         from_attributes = True
@@ -685,9 +698,49 @@ class PaginatedStories(BaseModel):
     page_size: int
 
 
+class StoryViewerItem(BaseModel):
+    """Hikaye görüntüleyici — analitik alanlarla birlikte"""
+    user: UserSummary
+    viewed_at: datetime
+    watch_duration_seconds: int = 0
+    did_visit_profile: bool = False
+    did_visit_place: bool = False
+    source: Optional[str] = None
+
+    class Config:
+        from_attributes = True
+
+
 class StoryViewerList(BaseModel):
-    items: List[UserSummary]
+    items: List[StoryViewerItem]
     total: int
+    # Toplam analitik özet (mekan hesabı için)
+    total_watch_seconds: int = 0
+    profile_visit_count: int = 0
+    place_visit_count: int = 0
+
+
+class StoryReactionResponse(BaseModel):
+    emoji: str
+    user: UserSummary
+    created_at: datetime
+
+    class Config:
+        from_attributes = True
+
+
+class StoryReactionListResponse(BaseModel):
+    items: List[StoryReactionResponse]
+    total: int
+    counts: dict  # {'❤️': 5, '🔥': 3, ...}
+
+
+class StoryViewAnalyticsUpdate(BaseModel):
+    """Frontend'den izleme bittiğinde gönderilir"""
+    watch_duration_seconds: int = 0
+    did_visit_profile: bool = False
+    did_visit_place: bool = False
+    source: Optional[str] = None
 
 
 class StoryHiddenUsersUpdate(BaseModel):
