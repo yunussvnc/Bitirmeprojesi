@@ -570,7 +570,7 @@ def update_hidden_story_users(
     return {"hidden_users": items}
 
 
-@router.get("/users/{user_id}/tagged-posts", response_model=schemas.PaginatedResponse[schemas.PostResponse])
+@router.get("/users/{user_id}/tagged-posts", response_model=schemas.PaginatedPosts)
 def get_user_tagged_posts(
     user_id: int,
     page: int = Query(1, ge=1),
