@@ -4,6 +4,7 @@ import json
 import logging
 import asyncio
 from typing import Dict, Set
+# pyrefly: ignore [missing-import]
 from fastapi import WebSocket
 
 logger = logging.getLogger("asemos")
@@ -36,6 +37,9 @@ class ConnectionManager:
         """Redis'ten gelen mesajları okuyup lokal WebSocket'lere dağıtır (Otomatik Reconnect ile)."""
         from app.core.redis_client import get_redis
         
+        MAX_CONSECUTIVE_FAILURES = 5
+        consecutive_failures = 0
+        
         while True:
             try:
                 redis = get_redis()
@@ -48,61 +52,59 @@ class ConnectionManager:
                 await pubsub.subscribe("ws:cluster:events")
                 logger.info("📡 Redis Pub/Sub WebSocket listener başlatıldı (Channel: ws:cluster:events)")
 
-                import time
-                last_ping_time = time.time()
+                # Bağlantı başarılı oldu → sayacı sıfırla
+                consecutive_failures = 0
 
-                while True:
+                async for message in pubsub.listen():
+                    if message["type"] != "message":
+                        continue
+                        
                     try:
-                        # timeout=None ile bloklamadan (non-blocking) okuma yapıyoruz
-                        message = await pubsub.get_message(ignore_subscribe_messages=True, timeout=None)
+                        payload = json.loads(message["data"])
+                        target_type = payload.get("target_type")
+                        data = payload.get("data")
                         
-                        if message and message["type"] == "message":
-                            try:
-                                payload = json.loads(message["data"])
-                                target_type = payload.get("target_type")
-                                data = payload.get("data")
-                                
-                                if target_type == "global":
-                                    user_id = payload.get("user_id")
-                                    await self._local_send_global(user_id, data)
-                                
-                                elif target_type == "user":
-                                    conversation_id = payload.get("conversation_id")
-                                    user_id = payload.get("user_id")
-                                    await self._local_send_to_user(conversation_id, user_id, data)
-                                    
-                                elif target_type == "conversation_broadcast":
-                                    conversation_id = payload.get("conversation_id")
-                                    exclude_uid = payload.get("exclude_user_id")
-                                    await self._local_broadcast_to_conversation(conversation_id, data, exclude_uid)
-                                    
-                                elif target_type == "room_broadcast":
-                                    room_id = payload.get("room_id")
-                                    exclude_uid = payload.get("exclude_user_id")
-                                    await self._local_broadcast_to_room(room_id, data, exclude_uid)
+                        if target_type == "global":
+                            user_id = payload.get("user_id")
+                            await self._local_send_global(user_id, data)
+                        
+                        elif target_type == "user":
+                            conversation_id = payload.get("conversation_id")
+                            user_id = payload.get("user_id")
+                            await self._local_send_to_user(conversation_id, user_id, data)
+                            
+                        elif target_type == "conversation_broadcast":
+                            conversation_id = payload.get("conversation_id")
+                            exclude_uid = payload.get("exclude_user_id")
+                            await self._local_broadcast_to_conversation(conversation_id, data, exclude_uid)
+                            
+                        elif target_type == "room_broadcast":
+                            room_id = payload.get("room_id")
+                            exclude_uid = payload.get("exclude_user_id")
+                            await self._local_broadcast_to_room(room_id, data, exclude_uid)
 
-                            except json.JSONDecodeError:
-                                pass
-                            except Exception as e:
-                                logger.error("Pub/Sub mesaj işleme hatası: %s", str(e))
-                        
-                        # Eğer 3 saniyeden fazla zaman geçtiyse, Upstash koparmasın diye manuel PING atıyoruz
-                        if time.time() - last_ping_time > 3.0:
-                            await pubsub.ping()
-                            last_ping_time = time.time()
-                        
-                        # Döngü çok hızlı dönüp CPU'yu %100 yapmasın diye çok kısa bir bekleme
-                        if not message:
-                            await asyncio.sleep(0.1)
-
-                    except Exception as loop_e:
-                        raise loop_e
+                    except json.JSONDecodeError:
+                        pass
+                    except Exception as e:
+                        logger.error("Pub/Sub mesaj işleme hatası: %s", str(e))
 
             except asyncio.CancelledError:
                 logger.info("🛑 Redis Pub/Sub listener durduruldu (Cancelled).")
                 break
             except Exception as e:
-                logger.warning("Pub/Sub listener bağlantı koptu (%s). 5 sn içinde yeniden bağlanılıyor...", str(e))
+                consecutive_failures += 1
+                if consecutive_failures >= MAX_CONSECUTIVE_FAILURES:
+                    logger.warning(
+                        "⚠️ Redis Pub/Sub %d kez üst üste başarısız oldu. "
+                        "Tek sunucu (single-instance) moduna geçiliyor. "
+                        "WebSocket mesajları lokal olarak yönlendirilecek, işlevsellik kaybı yok.",
+                        consecutive_failures
+                    )
+                    break  # Sonsuz döngüden çık, lokal fallback (_simulate_local_pubsub) devralacak
+                logger.warning(
+                    "Pub/Sub listener bağlantı koptu (%s). Deneme %d/%d — 5 sn içinde yeniden bağlanılıyor...",
+                    str(e), consecutive_failures, MAX_CONSECUTIVE_FAILURES
+                )
                 await asyncio.sleep(5)
 
     async def _publish_event(self, payload: dict):
