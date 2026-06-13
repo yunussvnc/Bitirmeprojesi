@@ -25,7 +25,8 @@ async def connect_redis():
             decode_responses=True, # Verileri string olarak döndür (byte yerine)
             max_connections=50,    # Bağlantı havuzu
             health_check_interval=30, # Cloud Redis için bağlantı kopmasını engeller
-            socket_keepalive=True     # TCP seviyesinde canlı tutar
+            socket_keepalive=True,    # TCP seviyesinde canlı tutar
+            socket_timeout=60.0       # Render/Upstash'in default 5sn soket okuma hatasını ezer
         )
         # Bağlantıyı test et
         await redis_client.ping()
