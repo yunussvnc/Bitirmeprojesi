@@ -458,15 +458,48 @@ def get_following(
     db: Session = Depends(get_db),
     current_user: Optional[models.User] = Depends(get_optional_user),
 ):
-    """Kullanıcının takip ettiklerinin listesini sayfalı olarak getirir (gizlilik kontrolüyle)."""
+    """Kullanıcının takip ettiklerinin listesini sayfalı olarak getirir (Mekanlar dahil)."""
     current_uid = current_user.id if current_user else None
     if not _privacy_check_list(db, user_id, current_uid):
         raise HTTPException(status_code=403, detail="Bu hesap gizlidir.")
-    ids = crud.get_following_ids(db, user_id)
-    total = len(ids)
-    paginated_ids = ids[(page - 1) * page_size : page * page_size]
-    users = [u for u in (crud.get_user_by_id(db, uid) for uid in paginated_ids) if u]
-    items = [_enrich_user_summary(db, u, current_uid) for u in users]
+        
+    user_ids = crud.get_following_ids(db, user_id)
+    place_ids = crud.get_followed_place_ids(db, user_id)
+    
+    all_items = [("user", uid) for uid in user_ids] + [("place", pid) for pid in place_ids]
+    total = len(all_items)
+    
+    paginated_items = all_items[(page - 1) * page_size : page * page_size]
+    
+    items = []
+    for item_type, idx in paginated_items:
+        if item_type == "user":
+            u = crud.get_user_by_id(db, idx)
+            if u:
+                items.append(_enrich_user_summary(db, u, current_uid))
+        elif item_type == "place":
+            p = crud.get_place_by_id(db, idx)
+            if p:
+                is_following_place = True
+                if current_uid and current_uid != user_id:
+                    is_following_place = db.query(models.PlaceFollow).filter(
+                        models.PlaceFollow.user_id == current_uid,
+                        models.PlaceFollow.place_id == p.id
+                    ).first() is not None
+                    
+                place_summary = schemas.UserSummary(
+                    id=p.id,
+                    username=p.category or "Mekan",
+                    first_name=p.name,
+                    last_name="",
+                    avatar_url=p.photo_url,
+                    is_following=is_following_place,
+                    follow_status="accepted" if is_following_place else None,
+                    is_private=False,
+                    item_type="place"
+                )
+                items.append(place_summary)
+
     return {"items": items, "total": total, "page": page, "page_size": page_size}
 
 
@@ -535,3 +568,43 @@ def update_hidden_story_users(
     hidden_users = crud.update_hidden_story_users(db, current_user.id, data.hidden_user_ids)
     items = [_enrich_user_summary(db, user, current_user.id) for user in hidden_users]
     return {"hidden_users": items}
+
+
+@router.get("/users/{user_id}/tagged-posts", response_model=schemas.PaginatedResponse[schemas.PostResponse])
+def get_user_tagged_posts(
+    user_id: int,
+    page: int = Query(1, ge=1),
+    page_size: int = Query(20, ge=1, le=100),
+    db: Session = Depends(get_db),
+    current_user: Optional[models.User] = Depends(get_optional_user),
+):
+    """Kullanıcının etiketlendiği gönderileri getirir."""
+    current_uid = current_user.id if current_user else None
+    
+    if not _privacy_check_list(db, user_id, current_uid):
+        raise HTTPException(status_code=403, detail="Bu hesap gizlidir.")
+
+    # Etiketlenen post ID'lerini çek
+    post_ids = db.query(models.PostTag.post_id).filter(
+        models.PostTag.user_id == user_id
+    ).all()
+    post_ids = [r[0] for r in post_ids]
+    
+    if not post_ids:
+        return {"items": [], "total": 0, "page": page, "page_size": page_size}
+        
+    query = db.query(models.Post).filter(
+        models.Post.id.in_(post_ids),
+        models.Post.is_deleted == False
+    )
+    
+    query = query.order_by(models.Post.created_at.desc())
+    total = query.count()
+    posts = query.offset((page - 1) * page_size).limit(page_size).all()
+    
+    items = []
+    from app.routers.feed import format_post_response
+    for p in posts:
+        items.append(format_post_response(db, p, current_uid))
+        
+    return {"items": items, "total": total, "page": page, "page_size": page_size}

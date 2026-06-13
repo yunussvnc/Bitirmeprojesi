@@ -32,8 +32,8 @@ import debounce from "lodash/debounce";
 type TabKey = "followers" | "following" | "friends";
 
 const TABS: { key: TabKey; label: string }[] = [
-  { key: "followers", label: "Takipçiler" },
   { key: "following", label: "Takip" },
+  { key: "followers", label: "Takipçiler" },
   { key: "friends", label: "Arkadaşlar" },
 ];
 
@@ -146,6 +146,12 @@ export default function NetworkScreen() {
     debounce(
       async (targetId: number, index: number) => {
         lightImpact();
+        
+        // cur referansını dışarı alalım
+        const currentUsers = users;
+        const curUser = currentUsers[index];
+        if (!curUser) return;
+        
         // Optimistic update
         setUsers((prev) => {
           const next = [...prev];
@@ -165,7 +171,15 @@ export default function NetworkScreen() {
         });
 
         try {
-          const res = await toggleFollow(targetId);
+          let res;
+          if ((curUser as any).item_type === "place") {
+            const { togglePlaceFollow } = require("@/src/services/mekanService");
+            res = await togglePlaceFollow(targetId);
+            res = { status: res.following ? "accepted" : null };
+          } else {
+            res = await toggleFollow(targetId);
+          }
+
           setUsers((prev) => {
             const next = [...prev];
             if (!next[index]) return prev;
@@ -242,12 +256,12 @@ export default function NetworkScreen() {
     );
   };
 
-  const renderItem = ({ item, index }: { item: UserSummary; index: number }) => {
-    const isSelf = authUser?.id === item.id;
+  const renderItem = ({ item, index }: { item: UserSummary & { item_type?: string }; index: number }) => {
+    const isSelf = authUser?.id === item.id && item.item_type !== "place";
     const displayName =
       item.first_name ||
       item.username ||
-      `Kullanıcı ${item.id}`;
+      (item.item_type === "place" ? `Mekan ${item.id}` : `Kullanıcı ${item.id}`);
 
     return (
       <TouchableOpacity
@@ -255,8 +269,13 @@ export default function NetworkScreen() {
         activeOpacity={0.75}
         onPress={() => {
           lightImpact();
-          if (isSelf) router.push("/(tabs)/profile" as never);
-          else router.push(`/user/${item.id}` as never);
+          if (item.item_type === "place") {
+            router.push(`/place/${item.id}` as never);
+          } else if (isSelf) {
+            router.push("/(tabs)/profile" as never);
+          } else {
+            router.push(`/user/${item.id}` as never);
+          }
         }}
       >
         <View
@@ -325,7 +344,10 @@ export default function NetworkScreen() {
   const tabIndicatorWidth = `${100 / TABS.length}%`;
 
   return (
-    <Screen scrollable={false} style={{ paddingHorizontal: 0 }}>
+    <Screen 
+      scrollable={false} 
+      contentContainerStyle={{ paddingHorizontal: 0, paddingTop: 0, paddingBottom: 0 }}
+    >
       {/* Header */}
       <View style={[styles.header, { paddingTop: Platform.OS === "ios" ? insets.top + 8 : 16 }]}>
         <TouchableOpacity
@@ -382,8 +404,8 @@ export default function NetworkScreen() {
         ) : (
           <FlatList
             data={visibleUsers}
-            keyExtractor={(item) => `${item.id}`}
-            renderItem={renderItem}
+            keyExtractor={(item) => `${(item as any).item_type || "user"}-${item.id}`}
+            renderItem={renderItem as any}
             contentContainerStyle={visibleUsers.length === 0 ? styles.empty : styles.list}
             refreshControl={
               <RefreshControl

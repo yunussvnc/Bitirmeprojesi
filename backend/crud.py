@@ -1680,6 +1680,12 @@ def delete_notification(db: Session, notification_id: int, user_id: int) -> bool
     repo = PostgresNotificationRepository(db)
     return repo.delete(notification_id, user_id)
 
+def delete_like_notification(db: Session, user_id: int, actor_id: int, post_id: int) -> bool:
+    from app.repositories.notification_repo import PostgresNotificationRepository
+    repo = PostgresNotificationRepository(db)
+    return repo.delete_like_notification(user_id, actor_id, post_id)
+
+
 
 def get_unread_notification_count(db: Session, user_id: int) -> int:
     from app.repositories.notification_repo import PostgresNotificationRepository

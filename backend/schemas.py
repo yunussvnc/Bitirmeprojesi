@@ -574,6 +574,7 @@ class UserSummary(BaseModel):
     is_following: bool = False
     follow_status: Optional[str] = None  # "pending" | "accepted" | None
     is_private: bool = False
+    item_type: str = "user"
 
     class Config:
         from_attributes = True

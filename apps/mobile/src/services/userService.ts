@@ -107,3 +107,11 @@ export async function getHiddenStoryUsers(): Promise<StoryHiddenUsersResponse> {
 export async function updateHiddenStoryUsers(hidden_user_ids: number[]): Promise<StoryHiddenUsersResponse> {
   return apiPost<StoryHiddenUsersResponse>(`/users/me/hidden-story-users`, { hidden_user_ids });
 }
+
+export async function getTaggedPosts(
+  userId: number,
+  page = 1,
+  pageSize = 30
+): Promise<UserPostsResponse> {
+  return apiGet<UserPostsResponse>(`/users/${userId}/tagged-posts?page=${page}&page_size=${pageSize}`);
+}

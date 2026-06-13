@@ -42,6 +42,9 @@ const TEXT_COLORS = ['#FFFFFF', '#000000', '#FF3B30', '#34C759', '#007AFF', '#FF
 
 export interface EditCanvasProps {
   media: MediaItem;
+  allMedia?: MediaItem[];
+  editIndex?: number;
+  onEditIndexChange?: (index: number) => void;
   filter: FilterPreset;
   textOverlays: TextOverlay[];
   onFilterChange: (f: FilterPreset) => void;
@@ -113,6 +116,9 @@ function DraggableText({ textData, onRemove }: { textData: TextOverlay; onRemove
 
 export function EditCanvas({
   media,
+  allMedia = [],
+  editIndex = 0,
+  onEditIndexChange,
   filter,
   textOverlays,
   onFilterChange,
@@ -268,6 +274,24 @@ export function EditCanvas({
         </View>
       )}
 
+      {/* Thumbnail Strip for Multi-Select */}
+      {!showFilters && allMedia.length > 1 && (
+        <View style={[styles.thumbnailStrip, { bottom: insets.bottom + 80 }]}>
+          <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.thumbnailStripContent}>
+            {allMedia.map((m, idx) => (
+              <TouchableOpacity
+                key={`${m.uri}-${idx}`}
+                style={[styles.thumbnailWrap, editIndex === idx && styles.thumbnailActive]}
+                onPress={() => onEditIndexChange?.(idx)}
+                activeOpacity={0.8}
+              >
+                <ExpoImage source={{ uri: m.uri }} style={styles.thumbnailImage} contentFit="cover" />
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
+        </View>
+      )}
+
       {/* 4) Floating Next/Done Button */}
       {!showFilters && (
         <TouchableOpacity
@@ -300,7 +324,6 @@ export function EditCanvas({
               maxLength={100}
               autoCapitalize="sentences"
             />
-            
             <View style={styles.colorPickerWrap}>
               <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.colorRow}>
                 {TEXT_COLORS.map((c) => (
@@ -410,7 +433,35 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   filterBtnActive: {
+    borderColor: '#fff',
+    borderWidth: 2,
     transform: [{ scale: 1.05 }],
+  },
+  thumbnailStrip: {
+    position: 'absolute',
+    left: 0, right: 0,
+    height: 70,
+  },
+  thumbnailStripContent: {
+    paddingHorizontal: 20,
+    alignItems: 'center',
+    gap: 12,
+  },
+  thumbnailWrap: {
+    width: 50,
+    height: 50,
+    borderRadius: 8,
+    overflow: 'hidden',
+    borderWidth: 2,
+    borderColor: 'transparent',
+  },
+  thumbnailActive: {
+    borderColor: '#fff',
+    transform: [{ scale: 1.1 }],
+  },
+  thumbnailImage: {
+    width: '100%',
+    height: '100%',
   },
   filterPreview: {
     width: 68, height: 68,

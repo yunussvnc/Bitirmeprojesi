@@ -160,8 +160,8 @@ export default function RootLayout() {
                 <Stack.Screen
                   name="create-post"
                   options={{
-                    presentation: "modal",
                     gestureEnabled: true,
+                    animation: "slide_from_right",
                   }}
                 />
                 <Stack.Screen

@@ -392,7 +392,7 @@ export default function UserProfileScreen() {
             activeOpacity={0.7}
             onPress={() => {
               lightImpact();
-              router.push(`/network?id=${profile.id}&type=friends` as any);
+              router.push(`/network?id=${profile.id}&type=following` as any);
             }}
           >
             <Text style={[styles.statNumber, { color: colors.text.primary }]}>{profile.friends_count}</Text>

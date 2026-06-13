@@ -272,15 +272,20 @@ def toggle_like(
         raise HTTPException(status_code=404, detail="Gönderi bulunamadı.")
     post, liked = crud.toggle_post_like(db, post_id, current_user.id)
     post = crud.get_post_by_id(db, post_id)
-    if liked and post.user_id != current_user.id:
-        import json
-        thumb = post.media[0].thumbnail_url or post.media[0].media_url if post.media else None
-        payload = json.dumps({
-            "actor_avatar": current_user.avatar_url,
-            "actor_username": current_user.username,
-            "post_thumbnail": thumb
-        })
-        crud.create_notification(db, post.user_id, "like", current_user.id, post_id=post_id, payload=payload)
+    if post.user_id != current_user.id:
+        # Eski beğeni bildirimini temizle (spam engellemek için)
+        crud.delete_like_notification(db, user_id=post.user_id, actor_id=current_user.id, post_id=post_id)
+
+        if liked:
+            # Sadece yeni bir beğeni atıldığında bildirim yolla
+            import json
+            thumb = post.media[0].thumbnail_url or post.media[0].media_url if post.media else None
+            payload = json.dumps({
+                "actor_avatar": current_user.avatar_url,
+                "actor_username": current_user.username,
+                "post_thumbnail": thumb
+            })
+            crud.create_notification(db, post.user_id, "like", current_user.id, post_id=post_id, payload=payload)
     background_tasks.add_task(invalidate_feed_cache)
     return {"liked": liked, "like_count": post.like_count}
 

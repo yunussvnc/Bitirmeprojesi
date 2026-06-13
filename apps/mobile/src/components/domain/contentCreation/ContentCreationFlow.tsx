@@ -115,12 +115,8 @@ export function ContentCreationFlow({
 
   const handleShareBack = useCallback(() => {
     setDirection('backward');
-    if (contentType === 'story') {
-      setStep('edit');
-    } else {
-      setStep('pick');
-    }
-  }, [contentType]);
+    setStep('edit');
+  }, []);
 
   const handleShare = useCallback(
     async (payload?: any) => {
@@ -199,6 +195,9 @@ export function ContentCreationFlow({
       >
         <EditCanvas
           media={currentMedia}
+          allMedia={selected}
+          editIndex={editIndex}
+          onEditIndexChange={setEditIndex}
           filter={filter}
           textOverlays={textOverlays}
           onFilterChange={setFilter}

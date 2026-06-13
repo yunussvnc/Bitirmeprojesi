@@ -31,10 +31,12 @@ export default function ProfileScreen() {
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [stats, setStats] = useState<UserStats | null>(null);
   const [posts, setPosts] = useState<{ id: number; place_id?: number; thumbnail?: string; media_type?: string }[]>([]);
+  const [taggedPosts, setTaggedPosts] = useState<{ id: number; place_id?: number; thumbnail?: string; media_type?: string }[]>([]);
   const [refreshing, setRefreshing] = useState(false);
   const [activeTab, setActiveTab] = useState<"posts" | "tagged">("posts");
   const deletedPostIds = useAppStore((s) => s.deletedPostIds);
   const visiblePosts = React.useMemo(() => posts.filter((p) => !deletedPostIds.includes(p.id)), [posts, deletedPostIds]);
+  const visibleTaggedPosts = React.useMemo(() => taggedPosts.filter((p) => !deletedPostIds.includes(p.id)), [taggedPosts, deletedPostIds]);
 
   // initialLoading sadece ilk açılışta true — sonraki focus'larda UI gizlenmez
   const hasLoadedOnce = useRef(false);
@@ -47,27 +49,30 @@ export default function ProfileScreen() {
   const loadProfile = useCallback(async (silent = false) => {
     if (!authUser) return;
     try {
-      const [p, s, postsRes] = await Promise.all([
+      const [p, s, postsRes, taggedRes] = await Promise.all([
         getUserProfile(authUser.id),
         getUserStats(authUser.id),
         getUserPosts(authUser.id, 1, 30),
+        import('@/src/services/userService').then(m => m.getTaggedPosts(authUser.id, 1, 30))
       ]);
       setProfile(p);
       setStats(s);
-      setPosts(
-        postsRes.items.map((post) => {
-          const sortedMedia = [...(post.media || [])].sort(
-            (a, b) => (a.order_index ?? 0) - (b.order_index ?? 0)
-          );
-          const firstMedia = sortedMedia[0];
-          return {
-            id: post.id,
-            place_id: post.place_id,
-            thumbnail: firstMedia?.thumbnail_url || firstMedia?.media_url,
-            media_type: firstMedia?.media_type,
-          };
-        })
-      );
+      
+      const formatPostThumb = (post: any) => {
+        const sortedMedia = [...(post.media || [])].sort(
+          (a, b) => (a.order_index ?? 0) - (b.order_index ?? 0)
+        );
+        const firstMedia = sortedMedia[0];
+        return {
+          id: post.id,
+          place_id: post.place_id,
+          thumbnail: firstMedia?.thumbnail_url || firstMedia?.media_url,
+          media_type: firstMedia?.media_type,
+        };
+      };
+      
+      setPosts(postsRes.items.map(formatPostThumb));
+      setTaggedPosts(taggedRes.items.map(formatPostThumb));
     } catch (e) {
       if (!silent) handleApiError(e);
     } finally {
@@ -235,7 +240,7 @@ export default function ProfileScreen() {
             activeOpacity={0.7}
             onPress={() => {
               lightImpact();
-              router.push(`/network?id=${authUser.id}&type=friends` as any);
+              router.push(`/network?id=${authUser.id}&type=following` as any);
             }}
           >
             <Text style={[styles.statNumber, { color: colors.text.primary }]}>{displayStats.friends}</Text>
@@ -288,80 +293,80 @@ export default function ProfileScreen() {
         </View>
 
         {/* ── Content Grid ── */}
-        {activeTab === "posts" && (
-          visiblePosts.length > 0 ? (
-            <View style={styles.grid}>
-              {visiblePosts.map((item, idx) => (
-                <TouchableOpacity
-                  key={item.id}
-                  style={[
-                    styles.gridCell,
-                    {
-                      width: cellSize,
-                      height: cellSize * 1.25, // Give it a slight portrait ratio for better aesthetics
-                      marginRight: (idx + 1) % GRID_COLS !== 0 ? GRID_GAP : 0,
-                      marginBottom: GRID_GAP,
-                      backgroundColor: colors.surface.elevated
-                    },
-                  ]}
-                  onPress={() => {
-                    lightImpact();
-                    router.push(`/p/post/${item.id}` as any);
-                  }}
-                  activeOpacity={0.9}
-                >
-                  {item.thumbnail ? (
-                    <Image
-                      source={{ uri: item.thumbnail.startsWith('/') ? `${API_BASE_URL}${item.thumbnail}` : item.thumbnail }}
-                      style={StyleSheet.absoluteFill}
-                      contentFit="cover"
-                      cachePolicy="memory-disk"
-                    />
-                  ) : (
-                    <View style={styles.gridPlaceholder}>
-                      <IconSymbol
-                        name={item.media_type === "video" ? "play.fill" : "photo.fill"}
-                        size={28}
-                        color={colors.text.tertiary}
+        {(() => {
+          const currentList = activeTab === "posts" ? visiblePosts : visibleTaggedPosts;
+          
+          if (currentList.length > 0) {
+            return (
+              <View style={styles.grid}>
+                {currentList.map((item, idx) => (
+                  <TouchableOpacity
+                    key={item.id}
+                    style={[
+                      styles.gridCell,
+                      {
+                        width: cellSize,
+                        height: cellSize * 1.25,
+                        marginRight: (idx + 1) % GRID_COLS !== 0 ? GRID_GAP : 0,
+                        marginBottom: GRID_GAP,
+                        backgroundColor: colors.surface.elevated
+                      },
+                    ]}
+                    onPress={() => {
+                      lightImpact();
+                      router.push(`/p/post/${item.id}` as any);
+                    }}
+                    activeOpacity={0.9}
+                  >
+                    {item.thumbnail ? (
+                      <Image
+                        source={{ uri: item.thumbnail.startsWith('/') ? `${API_BASE_URL}${item.thumbnail}` : item.thumbnail }}
+                        style={StyleSheet.absoluteFill}
+                        contentFit="cover"
+                        cachePolicy="memory-disk"
                       />
-                    </View>
-                  )}
-                  {item.media_type === "video" && item.thumbnail && (
-                    <View style={styles.videoBadge}>
-                      <IconSymbol name="play.fill" size={12} color="#fff" />
-                    </View>
-                  )}
-                </TouchableOpacity>
-              ))}
-            </View>
-          ) : (
+                    ) : (
+                      <View style={styles.gridPlaceholder}>
+                        <IconSymbol
+                          name={item.media_type === "video" ? "play.fill" : "photo.fill"}
+                          size={28}
+                          color={colors.text.tertiary}
+                        />
+                      </View>
+                    )}
+                    {item.media_type === "video" && item.thumbnail && (
+                      <View style={styles.videoBadge}>
+                        <IconSymbol name="play.fill" size={12} color="#fff" />
+                      </View>
+                    )}
+                  </TouchableOpacity>
+                ))}
+              </View>
+            );
+          }
+
+          return (
             <View style={styles.emptyState}>
               <View style={[styles.emptyIconBox, { backgroundColor: colors.surface.elevated }]}>
-                <IconSymbol name="camera.fill" size={32} color={colors.text.tertiary} />
+                <IconSymbol 
+                  name={activeTab === "posts" ? "camera.fill" : "person.crop.square.fill"} 
+                  size={32} 
+                  color={colors.text.tertiary} 
+                />
               </View>
               <View style={{ alignItems: "center", gap: 6 }}>
-                <Text style={[styles.emptyTitle, { color: colors.text.primary }]}>{t('profile.no_posts')}</Text>
+                <Text style={[styles.emptyTitle, { color: colors.text.primary }]}>
+                  {activeTab === "posts" ? t('profile.no_posts') : t('profile.no_tagged', 'Etiketlendiğin Gönderi Yok')}
+                </Text>
                 <Text style={[styles.emptyDesc, { color: colors.text.tertiary }]}>
-                  {t('profile.no_posts_desc')}
+                  {activeTab === "posts" 
+                    ? t('profile.no_posts_desc') 
+                    : t('profile.no_tagged_desc', 'İnsanlar seni fotoğraf ve videolara etiketlediğinde burada görünecekler.')}
                 </Text>
               </View>
             </View>
-          )
-        )}
-
-        {activeTab === "tagged" && (
-          <View style={styles.emptyState}>
-            <View style={[styles.emptyIconBox, { backgroundColor: colors.surface.elevated }]}>
-              <IconSymbol name="person.crop.square.fill" size={32} color={colors.text.tertiary} />
-            </View>
-            <View style={{ alignItems: "center", gap: 6 }}>
-              <Text style={[styles.emptyTitle, { color: colors.text.primary }]}>{t('profile.no_tagged')}</Text>
-              <Text style={[styles.emptyDesc, { color: colors.text.tertiary }]}>
-                {t('profile.no_tagged_desc')}
-              </Text>
-            </View>
-          </View>
-        )}
+          );
+        })()}
 
       </ScrollView>
     </View>

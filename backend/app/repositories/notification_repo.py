@@ -138,12 +138,26 @@ class PostgresNotificationRepository(BaseNotificationRepository):
         return False
 
     def delete(self, notification_id: int, user_id: int) -> bool:
-        n = self.db.query(models.Notification).filter(
+        """Kullanıcının kendi bildirimini silmesi (hard delete)"""
+        notif = self.db.query(models.Notification).filter(
             models.Notification.id == notification_id,
-            models.Notification.user_id == user_id,
+            models.Notification.user_id == user_id
         ).first()
-        if n:
-            self.db.delete(n)
+        if notif:
+            self.db.delete(notif)
+            self.db.commit()
+            return True
+        return False
+
+    def delete_like_notification(self, user_id: int, actor_id: int, post_id: int) -> bool:
+        """Beğeni geri çekildiğinde bildirimi silmek için (tekrar beğenince spam olmaması için)"""
+        deleted_count = self.db.query(models.Notification).filter(
+            models.Notification.user_id == user_id,
+            models.Notification.actor_id == actor_id,
+            models.Notification.post_id == post_id,
+            models.Notification.type == "like"
+        ).delete()
+        if deleted_count > 0:
             self.db.commit()
             return True
         return False
