@@ -441,8 +441,13 @@ export default function ChatScreen() {
                         }, 0);
                     }
                 }
-                // Okundu bildir
-                markMessagesRead(numericConvId).catch(() => { });
+                
+                // Sadece karşı taraftan gelen ve henüz okunmamış mesaj varsa "okundu" bildirimi at.
+                // Polling'de sürekli boş yere POST atılmasını engeller.
+                const hasUnreadFromOther = res.items.some((m: any) => m.sender_id !== myId && !m.is_read);
+                if (hasUnreadFromOther) {
+                    markMessagesRead(numericConvId).catch(() => { });
+                }
             } catch (e) {
                 if (__DEV__) logger.warn("[ChatScreen] Could not load messages for conv", numericConvId);
             }
@@ -451,8 +456,9 @@ export default function ChatScreen() {
         // İlk yükleme
         loadMessages();
 
-        // 3 saniyede bir polling (arka plandaki güvenlik ağı)
-        const pollInterval = setInterval(loadMessages, 3000);
+        // Arka plan güvenlik ağı polling'i (3 saniye çok agresif, 30 saniyeye çekiyoruz)
+        // Çünkü WebSocket zaten anlık mesajları getiriyor.
+        const pollInterval = setInterval(loadMessages, 30000);
 
         return () => clearInterval(pollInterval);
         // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -470,7 +476,8 @@ export default function ChatScreen() {
             setMsgPermission(perm);
         };
         loadPerm();
-        const permInterval = setInterval(loadPerm, 10000);
+        // İzin kontrolünü de agresif yapmaya gerek yok, 30 saniye iyidir.
+        const permInterval = setInterval(loadPerm, 30000);
         return () => clearInterval(permInterval);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isBackendConv, numericConvId]);

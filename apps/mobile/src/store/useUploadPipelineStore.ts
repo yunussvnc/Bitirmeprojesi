@@ -14,6 +14,7 @@
  */
 
 import { create } from 'zustand';
+import * as ImageManipulator from 'expo-image-manipulator';
 import type {
   UploadJob,
   UploadStage,
@@ -149,11 +150,39 @@ export const useUploadPipelineStore = create<UploadPipelineState>((set, get) => 
       console.log(`[UploadPipeline] ✓ Validation passed`);
       updateJob(jobId, { progress: 100 });
 
-      // Stage 2: COMPRESSING (placeholder — expo-image-manipulator integration point)
-      console.log(`[UploadPipeline] ▶ Stage 2/5: COMPRESSING (skipped)`);
+      // Stage 2: COMPRESSING (Fixes EXIF rotation & optimizes)
+      console.log(`[UploadPipeline] ▶ Stage 2/5: COMPRESSING`);
       updateJob(jobId, { stage: 'compressing', progress: 0 });
-      // For now, skip compression — media is used as-is
-      updateJob(jobId, { progress: 100 });
+      
+      const compressedItems: MediaItem[] = [];
+      for (let i = 0; i < job.mediaItems.length; i++) {
+        const item = job.mediaItems[i];
+        if (item.type === 'image') {
+          try {
+            // Empty action array [] + JPEG format bakes EXIF rotation into pixel data
+            // This prevents images uploaded from camera roll from appearing sideways
+            const manipResult = await ImageManipulator.manipulateAsync(
+              item.uri,
+              [],
+              { compress: 0.85, format: ImageManipulator.SaveFormat.JPEG }
+            );
+            compressedItems.push({
+              ...item,
+              uri: manipResult.uri,
+              width: manipResult.width,
+              height: manipResult.height,
+            });
+          } catch (err) {
+            console.warn(`[UploadPipeline] Image processing failed for item ${i}, using original:`, err);
+            compressedItems.push(item);
+          }
+        } else {
+          compressedItems.push(item);
+        }
+      }
+      
+      job.mediaItems = compressedItems;
+      updateJob(jobId, { mediaItems: compressedItems, progress: 100 });
 
       // Stage 3: UPLOADING — sequential upload of all media
       console.log(`[UploadPipeline] ▶ Stage 3/5: UPLOADING`);

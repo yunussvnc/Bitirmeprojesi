@@ -954,7 +954,6 @@ def get_feed_paginated_cursor(
                 models.Follow.follower_id == current_user_id,
                 models.Follow.status == "accepted",
             )
-            .subquery()
         )
 
         # Takip edilen mekan sahiplerinin ID'leri
@@ -1360,13 +1359,11 @@ def get_feed_stories(
         following_ids_sq = (
             db.query(models.Follow.following_id)
             .filter(models.Follow.follower_id == current_user_id)
-            .subquery()
         )
         # Kullanıcıyı takip edenler (followers) — mutual için gerekli
         follower_ids_sq = (
             db.query(models.Follow.follower_id)
             .filter(models.Follow.following_id == current_user_id)
-            .subquery()
         )
 
         # pyrefly: ignore [missing-import]
@@ -1389,7 +1386,6 @@ def get_feed_stories(
         hidden_by_sq = (
             db.query(models.StoryHiddenUser.user_id)
             .filter(models.StoryHiddenUser.hidden_user_id == current_user_id)
-            .subquery()
         )
 
         base = db.query(models.Story).filter(

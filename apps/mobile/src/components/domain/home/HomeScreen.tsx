@@ -630,7 +630,7 @@ export default function HomeScreen() {
               savedCount={savedIds.length}
               onSavedPress={() => {
                 lightImpact();
-                router.push("/(tabs)/saved");
+                router.push("/saved" as any);
               }}
             />
           }
@@ -669,7 +669,7 @@ export default function HomeScreen() {
             style={[styles.miniIconBtn, { backgroundColor: colors.surface.default }]}
             onPress={() => {
               lightImpact();
-              router.push("/(tabs)/saved");
+              router.push("/saved" as any);
             }}
           >
             <IconSymbol name="bookmark.fill" size={18} color={colors.text.primary} />
@@ -789,10 +789,10 @@ const styles = StyleSheet.create({
   },
   sectionTitle: { fontSize: 16, fontWeight: "700", marginTop: s(5) },
   count: { fontSize: 13 },
-  listContent: { gap: 12, paddingBottom: s(8), paddingHorizontal: 16 },
+  listContent: { gap: 12, paddingBottom: s(8) },
   listContentEmpty: { flexGrow: 1 },
   centerWrap: { minHeight: 320, justifyContent: "center" },
-  skeletonWrap: { paddingHorizontal: 20, paddingBottom: 24, gap: 12 },
+  skeletonWrap: { paddingBottom: 24, gap: 12 },
   miniBar: {
     position: "absolute",
     left: 0,

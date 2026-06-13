@@ -284,7 +284,7 @@ class ReviewMedia(ReviewMediaBase):
 
 class ReviewBase(BaseModel):
     place_id: int
-    comment_text: str = Field(..., min_length=3, max_length=2000, description="Yorum metni")
+    comment_text: str = Field(..., min_length=3, max_length=10000, description="Yorum metni")
     rating: int = Field(..., ge=1, le=5, description="Genel puan (1-5)")
     
     # Google Yorumlar tarzı detaylı bilgiler
