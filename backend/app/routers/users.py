@@ -594,8 +594,7 @@ def get_user_tagged_posts(
         return {"items": [], "total": 0, "page": page, "page_size": page_size}
         
     query = db.query(models.Post).filter(
-        models.Post.id.in_(post_ids),
-        models.Post.is_deleted == False
+        models.Post.id.in_(post_ids)
     )
     
     query = query.order_by(models.Post.created_at.desc())
