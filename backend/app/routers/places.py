@@ -416,8 +416,8 @@ def get_place_reviews_list(
     items = []
     for r in reviews:
         user = r.user
-        author_name = user.full_name if user else "Anonim"
-        avatar_url = user.profile_image_url if user else None
+        author_name = f"{user.first_name or ''} {user.last_name or ''}".strip() if user else "Anonim"
+        avatar_url = user.avatar_url if user else None
 
         relative_time = None
         if r.created_at:
@@ -455,15 +455,6 @@ def get_place_reviews_list(
         source="database",
     )
 
-
-# Geriye dönük uyumluluk — eski /google-reviews yolunu da destekle
-@router.get("/places/{place_id}/google-reviews", response_model=schemas.ReviewsListResponse, include_in_schema=False)
-def get_place_google_reviews_compat(
-    place_id: int,
-    limit: int = Query(5, ge=1, le=50),
-    db: Session = Depends(get_db),
-):
-    return get_place_reviews_list(place_id=place_id, limit=limit, db=db)
 
 
 @router.get("/places/{place_id}/photo")

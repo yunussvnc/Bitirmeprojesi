@@ -16,8 +16,7 @@ export type ReviewItemType = {
   avatar_url?: string | null;
 };
 
-// Geriye dönük uyumluluk
-export type GoogleReview = ReviewItemType;
+
 
 type Props = {
   review: ReviewItemType;
@@ -59,8 +58,7 @@ export function ReviewCard({ review, borderColor }: Props) {
   );
 }
 
-// Geriye dönük uyumluluk — eski isimle de import edilebilir
-export const GoogleReviewCard = ReviewCard;
+
 
 const styles = StyleSheet.create({
   reviewItem: {

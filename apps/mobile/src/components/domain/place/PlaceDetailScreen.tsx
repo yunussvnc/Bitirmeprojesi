@@ -50,7 +50,7 @@ import { logger } from "@/src/utils/logger";
 import { apiGet, apiPost } from "@/src/utils/apiClient";
 import { FlatList } from "react-native";
 import { StoryViewerModal } from "../explore/StoryViewerModal";
-import { ReviewCard, type ReviewItemType as GoogleReview } from "./ReviewCard";
+import { ReviewCard, type ReviewItemType } from "./ReviewCard";
 
 type Review = {
   id: number;
@@ -221,7 +221,7 @@ export default function PlaceDetailScreen({
   const [reviewsPage, setReviewsPage] = useState(1);
   const [hasMoreReviews, setHasMoreReviews] = useState(true);
   const [reviewsLoadingMore, setReviewsLoadingMore] = useState(false);
-  const [googleReviews, setGoogleReviews] = useState<GoogleReview[]>([]);
+  const [googleReviews, setGoogleReviews] = useState<ReviewItemType[]>([]);
   const [googleReviewsLoading, setGoogleReviewsLoading] = useState(false);
   const [lastDistance, setLastDistance] = useState<number | null>(null);
   const [similarPlaces, setSimilarPlaces] = useState<any[]>([]);
@@ -508,7 +508,7 @@ export default function PlaceDetailScreen({
     if (!id) return;
     setGoogleReviewsLoading(true);
     try {
-      const data = await apiGet<{ reviews: GoogleReview[] }>(`/places/${id}/reviews-list?limit=5`);
+      const data = await apiGet<{ reviews: ReviewItemType[] }>(`/places/${id}/reviews-list?limit=5`);
       if (!cancelled.current) {
         setGoogleReviews(data?.reviews ?? []);
       }

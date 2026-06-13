@@ -250,9 +250,7 @@ class ReviewsListResponse(BaseModel):
     display_limit: int = 5
     source: str = "database"
 
-# Geriye dönük uyumluluk (eski isimlerle referans veren kodlar için)
-GoogleReviewItem = ReviewItem
-GoogleReviewsResponse = ReviewsListResponse
+
 
 
 class DeviceTokenCreate(BaseModel):
