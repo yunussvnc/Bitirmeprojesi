@@ -186,17 +186,8 @@ class FeedScoringContext:
         # 3. İkinci derece — FoF'un takip ettikleri (sadece set farkı için)
         fof_ids: set[int] = set()  # Şu an direkt following_of_friends yeterli
 
-        # 4. İlgi alanı keyword'leri — MatchProfile.interests (JSON array)
+        # 4. İlgi alanı keyword'leri (Eşleşme/Match özelliği kaldırıldı, şimdilik boş)
         user_interest_keywords: set[str] = set()
-        match_profile = db.query(models.MatchProfile).filter(
-            models.MatchProfile.user_id == current_user_id
-        ).first()
-        if match_profile and match_profile.interests:
-            try:
-                interests_list = json.loads(match_profile.interests)
-                user_interest_keywords = {str(i).lower() for i in interests_list}
-            except (json.JSONDecodeError, TypeError):
-                pass
 
         # 5. Kullanıcının beğendiği postların bağlı place kategorileri
         liked_place_categories: set[str] = set()
