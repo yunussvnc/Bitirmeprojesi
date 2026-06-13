@@ -49,37 +49,37 @@ class ConnectionManager:
                 logger.info("📡 Redis Pub/Sub WebSocket listener başlatıldı (Channel: ws:cluster:events)")
 
                 async for message in pubsub.listen():
-                if message["type"] != "message":
-                    continue
-                
-                try:
-                    payload = json.loads(message["data"])
-                    target_type = payload.get("target_type")
-                    data = payload.get("data")
+                    if message["type"] != "message":
+                        continue
                     
-                    if target_type == "global":
-                        user_id = payload.get("user_id")
-                        await self._local_send_global(user_id, data)
-                    
-                    elif target_type == "user":
-                        conversation_id = payload.get("conversation_id")
-                        user_id = payload.get("user_id")
-                        await self._local_send_to_user(conversation_id, user_id, data)
+                    try:
+                        payload = json.loads(message["data"])
+                        target_type = payload.get("target_type")
+                        data = payload.get("data")
                         
-                    elif target_type == "conversation_broadcast":
-                        conversation_id = payload.get("conversation_id")
-                        exclude_uid = payload.get("exclude_user_id")
-                        await self._local_broadcast_to_conversation(conversation_id, data, exclude_uid)
+                        if target_type == "global":
+                            user_id = payload.get("user_id")
+                            await self._local_send_global(user_id, data)
                         
-                    elif target_type == "room_broadcast":
-                        room_id = payload.get("room_id")
-                        exclude_uid = payload.get("exclude_user_id")
-                        await self._local_broadcast_to_room(room_id, data, exclude_uid)
+                        elif target_type == "user":
+                            conversation_id = payload.get("conversation_id")
+                            user_id = payload.get("user_id")
+                            await self._local_send_to_user(conversation_id, user_id, data)
+                            
+                        elif target_type == "conversation_broadcast":
+                            conversation_id = payload.get("conversation_id")
+                            exclude_uid = payload.get("exclude_user_id")
+                            await self._local_broadcast_to_conversation(conversation_id, data, exclude_uid)
+                            
+                        elif target_type == "room_broadcast":
+                            room_id = payload.get("room_id")
+                            exclude_uid = payload.get("exclude_user_id")
+                            await self._local_broadcast_to_room(room_id, data, exclude_uid)
 
-                except json.JSONDecodeError:
-                    pass
-                except Exception as e:
-                    logger.error("Pub/Sub mesaj işleme hatası: %s", str(e))
+                    except json.JSONDecodeError:
+                        pass
+                    except Exception as e:
+                        logger.error("Pub/Sub mesaj işleme hatası: %s", str(e))
             except asyncio.CancelledError:
                 logger.info("🛑 Redis Pub/Sub listener durduruldu (Cancelled).")
                 break
