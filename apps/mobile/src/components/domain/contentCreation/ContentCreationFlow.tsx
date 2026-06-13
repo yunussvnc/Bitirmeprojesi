@@ -16,6 +16,8 @@ import Animated, {
   SlideOutLeft,
   SlideInLeft,
   SlideOutRight,
+  SlideInDown,
+  SlideOutDown,
 } from 'react-native-reanimated';
 import { MediaPicker } from './MediaPicker';
 import { EditCanvas } from './EditCanvas';
@@ -45,6 +47,7 @@ export interface ContentCreationFlowProps {
     mediaItems?: MediaItem[];
     onShare: (payload?: any) => Promise<void>;
     onBack: () => void;
+    onEditMedia?: (index: number) => void;
   }) => React.ReactNode;
 }
 
@@ -61,7 +64,8 @@ export function ContentCreationFlow({
   const [direction, setDirection] = useState<'forward' | 'backward'>('forward');
   const [selected, setSelected] = useState<MediaItem[]>([]);
   const [editIndex, setEditIndex] = useState(0);
-  const [filter, setFilter] = useState<FilterPreset>('none');
+  // Yalnızca tek bir "textOverlays" state'i var, story mantığından kaldı. 
+  // Gönderi için artık kullanılmıyor olabilir ama kırılmaması için tutuyoruz.
   const [textOverlays, setTextOverlays] = useState<TextOverlay[]>([]);
 
   const currentMedia = useMemo(() => selected[editIndex] ?? null, [selected, editIndex]);
@@ -75,7 +79,6 @@ export function ContentCreationFlow({
       const finalItems = items.length > 0 ? items : selected;
       setSelected(finalItems);
       setEditIndex(0);
-      setFilter('none');
       setTextOverlays([]);
       setDirection('forward');
       if (contentType === 'story') {
@@ -108,14 +111,24 @@ export function ContentCreationFlow({
     }
   }, [contentType]);
 
-  const handleEditDone = useCallback(() => {
+  const handleEditDone = useCallback((editedUri?: string, appliedFilter?: FilterPreset, cropState?: { scale: number; translateX: number; translateY: number }) => {
+    if (editedUri) {
+      setSelected((prev) => prev.map((m, i) => {
+        if (i === editIndex) {
+          // İlk düzenlemede originalUri'yi sakla
+          const originalUri = m.originalUri || m.uri;
+          return { ...m, uri: editedUri, originalUri, width: 1080, height: 1080, filter: appliedFilter, cropState };
+        }
+        return m;
+      }));
+    }
     setDirection('forward');
     setStep('share');
-  }, []);
+  }, [editIndex]);
 
   const handleShareBack = useCallback(() => {
     setDirection('backward');
-    setStep('edit');
+    setStep('pick');
   }, []);
 
   const handleShare = useCallback(
@@ -189,8 +202,8 @@ export function ContentCreationFlow({
     return (
       <Animated.View
         key="edit"
-        entering={entering}
-        exiting={exiting}
+        entering={SlideInDown.duration(TRANSITION_DURATION)}
+        exiting={SlideOutDown.duration(TRANSITION_DURATION)}
         style={styles.container}
       >
         <EditCanvas
@@ -198,9 +211,7 @@ export function ContentCreationFlow({
           allMedia={selected}
           editIndex={editIndex}
           onEditIndexChange={setEditIndex}
-          filter={filter}
           textOverlays={textOverlays}
-          onFilterChange={setFilter}
           onTextOverlaysChange={setTextOverlays}
           onDone={handleEditDone}
           onBack={handleEditBack}
@@ -223,6 +234,11 @@ export function ContentCreationFlow({
           mediaItems: selected,
           onShare: handleShare,
           onBack: handleShareBack,
+          onEditMedia: (index: number) => {
+            setEditIndex(index);
+            setDirection('backward');
+            setStep('edit');
+          }
         })}
       </Animated.View>
     );

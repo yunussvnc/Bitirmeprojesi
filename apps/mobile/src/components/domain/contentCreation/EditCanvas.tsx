@@ -1,22 +1,17 @@
 /**
- * EditCanvas – Premium Fullscreen düzenleme alanı
- * Sürüklenebilir metinler, şeffaf asılı araç çubukları, gelişmiş deneyim
+ * EditCanvas – Premium Feed Post düzenleme alanı
+ * Standart gönderi mantığına uygun: Sabit önizleme, alt tarafta filtreler
  */
 
-import React, { useState, useCallback, useRef, useMemo } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import {
   View,
   Text,
   StyleSheet,
   TouchableOpacity,
   Dimensions,
-  Platform,
-  TextInput,
-  Modal,
   ScrollView,
-  Animated,
-  PanResponder,
-  KeyboardAvoidingView,
+  ActivityIndicator,
 } from 'react-native';
 import { Image as ExpoImage } from 'expo-image';
 import { Video, ResizeMode } from 'expo-av';
@@ -24,11 +19,12 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
 import { useTranslation } from "react-i18next";
 import { radius } from '@/src/constants/design';
-import { LinearGradient } from 'expo-linear-gradient';
-import { lightImpact, mediumImpact } from '@/src/utils/haptics';
+import { lightImpact } from '@/src/utils/haptics';
+import { useTheme } from '@/src/hooks/useTheme';
 import type { MediaItem, FilterPreset, TextOverlay } from '@/src/contentCreation/types';
+import { ImageCropper, ImageCropperRef } from './ImageCropper';
 
-const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
+const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
 const FILTER_OVERLAYS: Record<FilterPreset, { bg: string; opacity: number } | null> = {
   none: null,
@@ -38,80 +34,15 @@ const FILTER_OVERLAYS: Record<FilterPreset, { bg: string; opacity: number } | nu
   dramatic: { bg: '#1A1A2E', opacity: 0.25 },
 };
 
-const TEXT_COLORS = ['#FFFFFF', '#000000', '#FF3B30', '#34C759', '#007AFF', '#FF9500', '#AF52DE'];
-
 export interface EditCanvasProps {
   media: MediaItem;
   allMedia?: MediaItem[];
   editIndex?: number;
   onEditIndexChange?: (index: number) => void;
-  filter: FilterPreset;
-  textOverlays: TextOverlay[];
-  onFilterChange: (f: FilterPreset) => void;
+  textOverlays: TextOverlay[]; // Korunuyor, ancak Feed postlarında metin yazılmaz.
   onTextOverlaysChange: (t: TextOverlay[]) => void;
-  onDone: () => void;
+  onDone: (croppedUri?: string, filter?: FilterPreset, cropState?: { scale: number; translateX: number; translateY: number }) => void;
   onBack: () => void;
-}
-
-// Sürüklenebilir Metin Komponenti
-function DraggableText({ textData, onRemove }: { textData: TextOverlay; onRemove: () => void }) {
-  const pan = useRef(new Animated.ValueXY({ x: textData.x, y: textData.y })).current;
-  const scale = useRef(new Animated.Value(1)).current;
-  const panValue = useRef({ x: textData.x, y: textData.y });
-
-  React.useEffect(() => {
-    const id = pan.addListener((value) => {
-      panValue.current = value;
-    });
-    return () => {
-      pan.removeListener(id);
-    };
-  }, [pan]);
-
-  const panResponder = useRef(
-    PanResponder.create({
-      onStartShouldSetPanResponder: () => true,
-      onPanResponderGrant: () => {
-        pan.setOffset({
-          x: panValue.current.x,
-          y: panValue.current.y,
-        });
-        pan.setValue({ x: 0, y: 0 });
-        Animated.spring(scale, { toValue: 1.1, useNativeDriver: false }).start();
-        lightImpact();
-      },
-      onPanResponderMove: Animated.event([null, { dx: pan.x, dy: pan.y }], { useNativeDriver: false }),
-      onPanResponderRelease: () => {
-        pan.flattenOffset();
-        Animated.spring(scale, { toValue: 1, useNativeDriver: false }).start();
-      },
-    })
-  ).current;
-
-  return (
-    <Animated.View
-      {...panResponder.panHandlers}
-      style={[
-        styles.textOverlayContainer,
-        {
-          transform: [{ translateX: pan.x }, { translateY: pan.y }, { scale }],
-        },
-      ]}
-    >
-      <TouchableOpacity
-        onLongPress={() => {
-          mediumImpact();
-          onRemove();
-        }}
-        activeOpacity={0.9}
-        delayLongPress={300}
-      >
-        <Text style={[styles.overlayText, { color: textData.color }]}>
-          {textData.text}
-        </Text>
-      </TouchableOpacity>
-    </Animated.View>
-  );
 }
 
 export function EditCanvas({
@@ -119,241 +50,145 @@ export function EditCanvas({
   allMedia = [],
   editIndex = 0,
   onEditIndexChange,
-  filter,
   textOverlays,
-  onFilterChange,
   onTextOverlaysChange,
   onDone,
   onBack,
 }: EditCanvasProps) {
   const insets = useSafeAreaInsets();
   const { t } = useTranslation();
-  const [showTextModal, setShowTextModal] = useState(false);
-  const [showFilters, setShowFilters] = useState(false);
-  const [editingText, setEditingText] = useState('');
-  const [editingColor, setEditingColor] = useState(TEXT_COLORS[0]);
+  const { colors } = useTheme();
+  const cropperRef = useRef<ImageCropperRef>(null);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [filter, setFilter] = useState<FilterPreset>(media.filter || 'none');
 
   const filterOverlay = FILTER_OVERLAYS[filter];
+  const baseUri = media.originalUri || media.uri;
 
-  const addText = useCallback(() => {
-    lightImpact();
-    setEditingText('');
-    setEditingColor(TEXT_COLORS[0]);
-    setShowFilters(false);
-    setShowTextModal(true);
-  }, []);
-
-  const saveText = useCallback(() => {
-    if (!editingText.trim()) {
-      setShowTextModal(false);
+  const handleDone = async () => {
+    if (media.type === 'video') {
+      onDone(undefined, filter, media.cropState); // Videolarda kırpma şimdilik yok
       return;
     }
-    mediumImpact();
-    const newOverlay: TextOverlay = {
-      id: `t-${Date.now()}`,
-      text: editingText.trim(),
-      color: editingColor,
-      x: SCREEN_WIDTH / 2 - 80,
-      y: SCREEN_HEIGHT / 2 - 20,
-      width: 160,
-      height: 40,
-    };
-    onTextOverlaysChange([...textOverlays, newOverlay]);
-    setShowTextModal(false);
-  }, [editingText, editingColor, textOverlays, onTextOverlaysChange]);
-
-  const removeText = useCallback(
-    (id: string) => {
-      onTextOverlaysChange(textOverlays.filter((t) => t.id !== id));
-    },
-    [textOverlays, onTextOverlaysChange]
-  );
+    setIsProcessing(true);
+    if (cropperRef.current) {
+      const uri = await cropperRef.current.cropImage();
+      const cropState = cropperRef.current.getCropState();
+      setIsProcessing(false);
+      onDone(uri || undefined, filter, cropState);
+    } else {
+      setIsProcessing(false);
+      onDone(undefined, filter, media.cropState);
+    }
+  };
 
   return (
-    <View style={styles.container}>
-      {/* 1) Canvas Area (Fullscreen or aspect-controlled) */}
-      <View style={styles.canvasWrap}>
-        <View style={[styles.canvas]}>
-          {media.type === 'video' ? (
-            <Video
-              source={{ uri: media.uri }}
-              style={StyleSheet.absoluteFill}
-              resizeMode={ResizeMode.COVER}
-              shouldPlay
-              isLooping
-            />
-          ) : (
-            <ExpoImage
-              source={{ uri: media.uri }}
-              style={StyleSheet.absoluteFill}
-              contentFit="cover"
-            />
-          )}
-
-          {filterOverlay && (
-            <View
-              style={[
-                StyleSheet.absoluteFill,
-                { backgroundColor: filterOverlay.bg, opacity: filterOverlay.opacity },
-              ]}
-              pointerEvents="none"
-            />
-          )}
-
-          {textOverlays.map((t) => (
-            <DraggableText key={t.id} textData={t} onRemove={() => removeText(t.id)} />
-          ))}
-
-          {/* Top Gradient for readability of icons */}
-          <LinearGradient
-            colors={['rgba(0,0,0,0.55)', 'rgba(0,0,0,0.15)', 'transparent']}
-            locations={[0, 0.6, 1]}
-            style={[styles.gradientTop, { height: insets.top + 120 }]}
-            pointerEvents="none"
-          />
-        </View>
-      </View>
-
-      {/* 2) Floating Top Tools */}
-      <View style={[styles.topTools, { top: insets.top + 16 }]}>
-        <TouchableOpacity onPress={onBack} style={styles.iconCircle} hitSlop={12}>
-          <IconSymbol name="xmark" size={20} color="#fff" />
+    <View style={[styles.container, { backgroundColor: colors.background.primary, paddingTop: insets.top }]}>
+      
+      {/* 1) Header */}
+      <View style={styles.header}>
+        <TouchableOpacity onPress={onBack} style={styles.headerBtn} hitSlop={12} activeOpacity={0.7}>
+          <Text style={[styles.nextText, { color: colors.text.primary, fontWeight: '500' }]}>{t('create.cancel', 'Vazgeç')}</Text>
         </TouchableOpacity>
-
-        <View style={styles.topRightTools}>
-          <TouchableOpacity onPress={addText} style={styles.iconCircle} activeOpacity={0.8}>
-            <Text style={styles.iconLabel}>Aa</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={[styles.iconCircle, showFilters && { backgroundColor: 'rgba(255,255,255,0.4)' }]}
-            onPress={() => {
-              lightImpact();
-              setShowFilters(!showFilters);
-            }}
-            activeOpacity={0.8}
-          >
-            <IconSymbol name="sparkles" size={20} color="#fff" />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.iconCircle} onPress={() => lightImpact()} activeOpacity={0.8}>
-            <IconSymbol name="music.note" size={20} color="#fff" />
-          </TouchableOpacity>
-          <TouchableOpacity style={styles.iconCircle} onPress={() => lightImpact()} activeOpacity={0.8}>
-            <IconSymbol name="smiley" size={20} color="#fff" />
-          </TouchableOpacity>
-        </View>
+        <Text style={[styles.headerTitle, { color: colors.text.primary }]}>{t('create.edit_post', 'Düzenle')}</Text>
+        <TouchableOpacity onPress={handleDone} style={styles.headerBtnRight} hitSlop={12} activeOpacity={0.7} disabled={isProcessing}>
+          {isProcessing ? (
+            <ActivityIndicator size="small" color={colors.accent.primary} />
+          ) : (
+            <Text style={[styles.nextText, { color: colors.accent.primary }]}>{t('create.done', 'Bitti')}</Text>
+          )}
+        </TouchableOpacity>
       </View>
 
-      {/* 3) Floating Bottom Filters (Optional) */}
-      {showFilters && (
-        <View style={[styles.filterDrawer, { paddingBottom: insets.bottom + 80 }]}>
+      <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
+        {/* 2) 1:1 Image Preview Area */}
+        <View style={[styles.canvasWrap, { backgroundColor: colors.surface.border }]}>
+          {media.type === 'video' ? (
+            <View style={StyleSheet.absoluteFill}>
+              <Video
+                source={{ uri: baseUri }}
+                style={StyleSheet.absoluteFill}
+                resizeMode={ResizeMode.COVER}
+                shouldPlay
+                isLooping
+              />
+              {filterOverlay && (
+                <View
+                  style={[
+                    StyleSheet.absoluteFill,
+                    { backgroundColor: filterOverlay.bg, opacity: filterOverlay.opacity },
+                  ]}
+                  pointerEvents="none"
+                />
+              )}
+            </View>
+          ) : (
+            <ImageCropper
+              ref={cropperRef}
+              imageUri={baseUri}
+              imageWidth={media.width || 1080}
+              imageHeight={media.height || 1080}
+              containerHeight={SCREEN_WIDTH}
+              filterOverlay={filterOverlay}
+              initialCropState={media.cropState}
+            />
+          )}
+        </View>
+
+        {/* 3) Thumbnail Strip for Multi-Select */}
+        {allMedia.length > 1 && (
+          <View style={styles.thumbnailStrip}>
+            <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.thumbnailStripContent}>
+              {allMedia.map((m, idx) => (
+                <TouchableOpacity
+                  key={`${m.uri}-${idx}`}
+                  style={[
+                    styles.thumbnailWrap,
+                    editIndex === idx && { borderColor: colors.accent.primary, borderWidth: 2 }
+                  ]}
+                  onPress={() => {
+                    lightImpact();
+                    onEditIndexChange?.(idx);
+                  }}
+                  activeOpacity={0.8}
+                >
+                  <ExpoImage source={{ uri: m.uri }} style={styles.thumbnailImage} contentFit="cover" />
+                </TouchableOpacity>
+              ))}
+            </ScrollView>
+          </View>
+        )}
+
+        {/* 4) Filters Section */}
+        <View style={styles.filtersSection}>
+          <Text style={[styles.sectionTitle, { color: colors.text.primary }]}>{t('filters.title', 'Filtreler')}</Text>
           <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.filterRow}>
             {(Object.keys(FILTER_OVERLAYS) as FilterPreset[]).map((f) => (
               <TouchableOpacity
                 key={f}
                 style={[
                   styles.filterBtn,
-                  filter === f && styles.filterBtnActive,
+                  filter === f && { backgroundColor: colors.surface.border },
                 ]}
                 onPress={() => {
                   lightImpact();
-                  onFilterChange(f);
+                  setFilter(f);
                 }}
               >
-                <View style={[styles.filterPreview, filter === f && { borderColor: '#fff', borderWidth: 3 }]}>
-                  <ExpoImage source={{ uri: media.uri }} style={StyleSheet.absoluteFill} contentFit="cover" />
+                <View style={[styles.filterPreview, filter === f && { borderColor: colors.accent.primary, borderWidth: 3 }]}>
+                  <ExpoImage source={{ uri: baseUri }} style={StyleSheet.absoluteFill} contentFit="cover" />
                   {FILTER_OVERLAYS[f] && (
                     <View style={[StyleSheet.absoluteFill, { backgroundColor: FILTER_OVERLAYS[f]!.bg, opacity: FILTER_OVERLAYS[f]!.opacity * 2.5 }]} />
                   )}
                 </View>
-                <Text style={[styles.filterLabel, filter === f && { fontWeight: '800', color: '#fff' }]}>
+                <Text style={[styles.filterLabel, { color: colors.text.primary }, filter === f && { fontWeight: '700' }]}>
                   {f === 'none' ? t('filters.normal', 'Normal') : f === 'warm' ? t('filters.warm', 'Sıcak') : f === 'cool' ? t('filters.cool', 'Soğuk') : f === 'vintage' ? t('filters.vintage', 'Retro') : t('filters.cinematic', 'Dizi')}
                 </Text>
               </TouchableOpacity>
             ))}
           </ScrollView>
         </View>
-      )}
-
-      {/* Thumbnail Strip for Multi-Select */}
-      {!showFilters && allMedia.length > 1 && (
-        <View style={[styles.thumbnailStrip, { bottom: insets.bottom + 80 }]}>
-          <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.thumbnailStripContent}>
-            {allMedia.map((m, idx) => (
-              <TouchableOpacity
-                key={`${m.uri}-${idx}`}
-                style={[styles.thumbnailWrap, editIndex === idx && styles.thumbnailActive]}
-                onPress={() => onEditIndexChange?.(idx)}
-                activeOpacity={0.8}
-              >
-                <ExpoImage source={{ uri: m.uri }} style={styles.thumbnailImage} contentFit="cover" />
-              </TouchableOpacity>
-            ))}
-          </ScrollView>
-        </View>
-      )}
-
-      {/* 4) Floating Next/Done Button */}
-      {!showFilters && (
-        <TouchableOpacity
-          style={[styles.nextBtn, { bottom: insets.bottom + 20 }]}
-          onPress={onDone}
-          activeOpacity={0.85}
-        >
-          <Text style={styles.nextText}>{t("creation.next")}</Text>
-          <IconSymbol name="chevron.right" size={16} color="#fff" />
-        </TouchableOpacity>
-      )}
-
-      {/* 5) Text Editor Modal */}
-      <Modal visible={showTextModal} transparent animationType="fade">
-        <KeyboardAvoidingView style={styles.modalOverlay} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
-          <TouchableOpacity style={StyleSheet.absoluteFill} activeOpacity={1} onPress={saveText} />
-          
-          <View style={styles.textModalInner}>
-            <TextInput
-              style={[
-                styles.fullscreenTextInput,
-                { color: editingColor },
-              ]}
-              placeholder={t('creation.write_placeholder')}
-              placeholderTextColor="rgba(255,255,255,0.5)"
-              value={editingText}
-              onChangeText={setEditingText}
-              autoFocus
-              multiline
-              maxLength={100}
-              autoCapitalize="sentences"
-            />
-            <View style={styles.colorPickerWrap}>
-              <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.colorRow}>
-                {TEXT_COLORS.map((c) => (
-                  <TouchableOpacity
-                    key={c}
-                    style={[
-                      styles.colorDot,
-                      { backgroundColor: c },
-                      editingColor === c && styles.colorDotSelected,
-                    ]}
-                    onPress={() => {
-                      lightImpact();
-                      setEditingColor(c);
-                    }}
-                  />
-                ))}
-              </ScrollView>
-            </View>
-
-            <View style={[styles.modalActions, { paddingBottom: insets.bottom + 16 }]}>
-              <TouchableOpacity onPress={() => setShowTextModal(false)} style={styles.modalBtn}>
-                <Text style={styles.modalCancelText}>{t("creation.cancel")}</Text>
-              </TouchableOpacity>
-              <TouchableOpacity onPress={saveText} style={[styles.modalBtn, styles.modalSaveBtn]}>
-                <Text style={styles.modalSaveText}>Bitti</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </KeyboardAvoidingView>
-      </Modal>
+      </ScrollView>
     </View>
   );
 }
@@ -361,206 +196,88 @@ export function EditCanvas({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000',
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 16,
+    height: 56,
+  },
+  headerBtn: {
+    minWidth: 40,
+    height: 40,
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+  },
+  headerBtnRight: {
+    height: 40,
+    alignItems: 'flex-end',
+    justifyContent: 'center',
+  },
+  headerTitle: {
+    fontSize: 17,
+    fontWeight: '700',
+  },
+  nextText: {
+    fontSize: 16,
+    fontWeight: '600',
+    color: '#007AFF', // Standard iOS blue for action
+  },
+  scrollContent: {
+    paddingBottom: 40,
   },
   canvasWrap: {
-    flex: 1,
+    width: SCREEN_WIDTH,
+    height: SCREEN_WIDTH, // 1:1 Aspect Ratio
     overflow: 'hidden',
   },
-  canvas: {
+  thumbnailStrip: {
+    marginTop: 16,
+  },
+  thumbnailStripContent: {
+    paddingHorizontal: 16,
+    gap: 8,
+  },
+  thumbnailWrap: {
+    width: 60,
+    height: 60,
+    borderRadius: radius.sm,
+    overflow: 'hidden',
+    borderColor: 'transparent',
+    borderWidth: 2,
+  },
+  thumbnailImage: {
     flex: 1,
-    width: '100%',
-    height: '100%',
   },
-  gradientTop: {
-    position: 'absolute',
-    top: 0, left: 0, right: 0,
+  filtersSection: {
+    marginTop: 24,
   },
-  topTools: {
-    position: 'absolute',
-    left: 20, right: 16,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-start',
-    zIndex: 10,
-  },
-  topRightTools: {
-    gap: 16,
-    alignItems: 'center',
-  },
-  iconCircle: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
-    backgroundColor: 'rgba(0,0,0,0.3)',
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.15)',
-    shadowColor: '#000', shadowOffset: { width: 0, height: 2 }, shadowOpacity: 0.3, shadowRadius: 4,
-  },
-  iconLabel: {
-    color: '#fff',
-    fontSize: 18,
-    fontWeight: '700',
-    fontFamily: Platform.OS === 'ios' ? 'AvenirNext-Bold' : 'sans-serif-condensed',
-  },
-  textOverlayContainer: {
-    position: 'absolute',
-    padding: 12, // Extra tap target area
-    zIndex: 100,
-  },
-  overlayText: {
-    fontSize: 28,
-    fontWeight: '800',
-    textShadowColor: 'rgba(0,0,0,0.7)',
-    textShadowOffset: { width: 0, height: 2 },
-    textShadowRadius: 6,
-    textAlign: 'center',
-  },
-  filterDrawer: {
-    position: 'absolute',
-    bottom: 0, left: 0, right: 0,
-    backgroundColor: 'rgba(0,0,0,0.6)',
-    paddingTop: 24,
+  sectionTitle: {
+    fontSize: 15,
+    fontWeight: '600',
+    marginLeft: 16,
+    marginBottom: 12,
   },
   filterRow: {
-    paddingHorizontal: 20,
-    gap: 20,
+    paddingHorizontal: 16,
+    gap: 16,
   },
   filterBtn: {
     alignItems: 'center',
     gap: 8,
-  },
-  filterBtnActive: {
-    borderColor: '#fff',
-    borderWidth: 2,
-    transform: [{ scale: 1.05 }],
-  },
-  thumbnailStrip: {
-    position: 'absolute',
-    left: 0, right: 0,
-    height: 70,
-  },
-  thumbnailStripContent: {
-    paddingHorizontal: 20,
-    alignItems: 'center',
-    gap: 12,
-  },
-  thumbnailWrap: {
-    width: 50,
-    height: 50,
-    borderRadius: 8,
-    overflow: 'hidden',
-    borderWidth: 2,
-    borderColor: 'transparent',
-  },
-  thumbnailActive: {
-    borderColor: '#fff',
-    transform: [{ scale: 1.1 }],
-  },
-  thumbnailImage: {
-    width: '100%',
-    height: '100%',
+    borderRadius: radius.md,
+    padding: 6,
   },
   filterPreview: {
-    width: 68, height: 68,
-    borderRadius: 34,
-    borderWidth: 2,
-    borderColor: 'rgba(255,255,255,0.4)',
+    width: 70,
+    height: 70,
+    borderRadius: radius.sm,
     overflow: 'hidden',
+    borderColor: 'transparent',
+    borderWidth: 3,
   },
   filterLabel: {
-    color: '#ccc',
-    fontSize: 13,
-    fontWeight: '600',
-  },
-  nextBtn: {
-    position: 'absolute',
-    right: 20,
-    backgroundColor: '#1DB954',
-    paddingHorizontal: 24,
-    paddingVertical: 13,
-    borderRadius: 30,
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 6,
-    shadowColor: '#1DB954',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.4,
-    shadowRadius: 12,
-    elevation: 8,
-    zIndex: 10,
-  },
-  nextText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: '800',
-    letterSpacing: -0.2,
-  },
-  /* MODAL STYLES */
-  modalOverlay: {
-    flex: 1,
-    backgroundColor: 'rgba(0,0,0,0.75)',
-  },
-  textModalInner: {
-    flex: 1,
-    justifyContent: 'center',
-    paddingHorizontal: 20,
-  },
-  fullscreenTextInput: {
-    fontSize: 36,
-    fontWeight: '800',
-    textAlign: 'center',
-    textShadowColor: 'rgba(0,0,0,0.6)',
-    textShadowOffset: { width: 0, height: 2 },
-    textShadowRadius: 8,
-    marginBottom: 40,
-  },
-  colorPickerWrap: {
-    position: 'absolute',
-    bottom: 120,
-    left: 0, right: 0,
-  },
-  colorRow: {
-    paddingHorizontal: 20,
-    gap: 16,
-    alignItems: 'center',
-  },
-  colorDot: {
-    width: 40, height: 40,
-    borderRadius: 20,
-    borderWidth: 2,
-    borderColor: 'rgba(255,255,255,0.5)',
-  },
-  colorDotSelected: {
-    borderWidth: 4,
-    borderColor: '#fff',
-    transform: [{ scale: 1.15 }],
-  },
-  modalActions: {
-    position: 'absolute',
-    bottom: 20, left: 20, right: 20,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  modalBtn: {
-    padding: 12,
-  },
-  modalSaveBtn: {
-    backgroundColor: '#fff',
-    paddingHorizontal: 24,
-    borderRadius: 20,
-  },
-  modalCancelText: {
-    color: '#fff',
-    fontSize: 17,
-    fontWeight: '600',
-  },
-  modalSaveText: {
-    color: '#000',
-    fontSize: 17,
-    fontWeight: '800',
+    fontSize: 12,
   },
 });

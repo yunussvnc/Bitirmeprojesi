@@ -395,7 +395,7 @@ export default function UserProfileScreen() {
               router.push(`/network?id=${profile.id}&type=following` as any);
             }}
           >
-            <Text style={[styles.statNumber, { color: colors.text.primary }]}>{profile.friends_count}</Text>
+            <Text style={[styles.statNumber, { color: colors.text.primary }]}>{profile.following_count + (profile.place_follow_count || 0)}</Text>
             <Text style={[styles.statLabel, { color: colors.text.tertiary }]}>{t('profile.following')}</Text>
           </TouchableOpacity>
         </View>

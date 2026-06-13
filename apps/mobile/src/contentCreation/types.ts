@@ -14,12 +14,15 @@ export type ContentType = 'story' | 'post' | 'reels';
 
 export type MediaItem = {
   uri: string;
+  originalUri?: string;
   assetId?: string;
   type: 'image' | 'video';
   width?: number;
   height?: number;
   duration?: number;
   fileSize?: number;
+  cropState?: { scale: number; translateX: number; translateY: number };
+  filter?: FilterPreset;
 };
 
 export type FilterPreset = 'none' | 'warm' | 'cool' | 'vintage' | 'dramatic';

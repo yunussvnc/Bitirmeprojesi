@@ -17,6 +17,7 @@ import {
   StatusBar,
 } from 'react-native';
 import { Image as ExpoImage } from 'expo-image';
+import { Video, ResizeMode } from 'expo-av';
 import * as MediaLibrary from 'expo-media-library';
 import Animated, {
   FadeIn,
@@ -184,16 +185,24 @@ export function MediaPicker({
           </View>
         </View>
 
-        {/* Preview — 1:1 Kare Kırpıcı */}
+        {/* Preview — Sadece Görselleme */}
         <View style={[styles.previewSection, { height: dynamicPreviewHeight, backgroundColor: 'transparent' }]}>
           {previewItem ? (
-            <ImageCropper
-              ref={cropperRef}
-              imageUri={previewItem.uri}
-              imageWidth={previewItem.width || 1080}
-              imageHeight={previewItem.height || 1080}
-              containerHeight={dynamicPreviewHeight}
-            />
+            previewItem.type === 'video' ? (
+              <Video
+                source={{ uri: previewItem.uri }}
+                style={{ width: SCREEN_WIDTH, height: dynamicPreviewHeight }}
+                resizeMode={ResizeMode.COVER}
+                shouldPlay
+                isLooping
+              />
+            ) : (
+              <ExpoImage
+                source={{ uri: previewItem.uri }}
+                style={{ width: SCREEN_WIDTH, height: dynamicPreviewHeight }}
+                contentFit="cover"
+              />
+            )
           ) : (
             <View style={styles.emptyPreview}>
               <IconSymbol name="photo.on.rectangle.angled" size={44} color="rgba(255,255,255,0.25)" />

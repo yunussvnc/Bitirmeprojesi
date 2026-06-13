@@ -133,7 +133,7 @@ export default function CreatePostScreen() {
         quality={quality}
         onShare={(flowParams) => handleShare(flowParams as any)}
         onClose={handleClose}
-        renderShareStep={({ mediaUri, isVideo, mediaItems, onShare, onBack }) => (
+        renderShareStep={({ mediaUri, isVideo, mediaItems, onShare, onBack, onEditMedia }) => (
           <PostShareStep
             mediaUri={mediaUri}
             isVideo={isVideo}
@@ -146,6 +146,7 @@ export default function CreatePostScreen() {
             }
             onBack={onBack}
             onClose={handleClose}
+            onEditMedia={onEditMedia}
           />
         )}
       />
@@ -175,6 +176,7 @@ interface PostShareStepProps {
   }) => Promise<void>;
   onBack: () => void;
   onClose: () => void;
+  onEditMedia?: (index: number) => void;
 }
 
 function PostShareStep({
@@ -187,6 +189,7 @@ function PostShareStep({
   onShare,
   onBack,
   onClose,
+  onEditMedia,
 }: PostShareStepProps) {
   const { colors, isDark } = useTheme();
   const insets = useSafeAreaInsets();
@@ -303,7 +306,9 @@ function PostShareStep({
               <View style={styles.multiThumbWrap}>
                 <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.multiThumbScroll}>
                   {mediaItems.map((item, index) => (
-                    <ExpoImage key={index} source={{ uri: item.uri }} style={styles.thumbnail} contentFit="cover" />
+                    <TouchableOpacity key={index} onPress={() => onEditMedia?.(index)} activeOpacity={0.8}>
+                      <ExpoImage source={{ uri: item.uri }} style={styles.thumbnail} contentFit="cover" />
+                    </TouchableOpacity>
                   ))}
                 </ScrollView>
                 <View style={[styles.multiCountBadge, { backgroundColor: colors.accent.primary }]}>
@@ -311,7 +316,9 @@ function PostShareStep({
                 </View>
               </View>
             ) : (
-              <ExpoImage source={{ uri: mediaUri }} style={styles.thumbnail} contentFit="cover" />
+              <TouchableOpacity onPress={() => onEditMedia?.(0)} activeOpacity={0.8}>
+                <ExpoImage source={{ uri: mediaUri }} style={styles.thumbnail} contentFit="cover" />
+              </TouchableOpacity>
             )}
             <TextInput
               style={[styles.captionInput, { color: colors.text.primary }]}

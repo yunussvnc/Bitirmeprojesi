@@ -108,8 +108,8 @@ export default function ProfileScreen() {
 
   const displayStats = {
     followers: profile?.followers_count ?? 0,
-    // "Takip" = karşılıklı kullanıcı takipleri + takip edilen mekanlar
-    friends: (profile?.friends_count ?? 0) + (profile?.place_follow_count ?? 0),
+    // "Takip" = takip edilen kullanıcılar + takip edilen mekanlar
+    friends: (profile?.following_count ?? 0) + (profile?.place_follow_count ?? 0),
     posts: stats?.post_count ?? 0,
   };
 

@@ -48,22 +48,31 @@ export interface ImageCropperProps {
   imageHeight?: number;
   /** Container height for the cropper view */
   containerHeight: number;
+  /** Optional filter overlay to apply */
+  filterOverlay?: { bg: string; opacity: number } | null;
+  /** Initial crop state to restore non-destructive edits */
+  initialCropState?: { scale: number; translateX: number; translateY: number };
 }
 
 export interface ImageCropperRef {
   cropImage: () => Promise<string | null>;
+  getCropState: () => { scale: number; translateX: number; translateY: number };
 }
+
+// Sabit 1:1 (Kare) oranı zorunlu kılıyoruz
+const FIXED_ASPECT_RATIO = { label: '1:1', value: [1, 1] } as AspectRatioOption;
 
 export const ImageCropper = React.forwardRef<ImageCropperRef, ImageCropperProps>(({
   imageUri,
   imageWidth = 1080,
   imageHeight = 1080,
   containerHeight,
+  filterOverlay,
+  initialCropState,
 }, ref) => {
   const { colors } = useTheme();
 
-  // Sabit 1:1 (Kare) oranı zorunlu kılıyoruz
-  const aspectRatio = { label: '1:1', value: [1, 1] } as AspectRatioOption;
+  const aspectRatio = FIXED_ASPECT_RATIO;
 
   // Gesture values
   const scale = useSharedValue(1);
@@ -86,6 +95,13 @@ export const ImageCropper = React.forwardRef<ImageCropperRef, ImageCropperProps>
         console.error("ViewShot capture failed:", err);
       }
       return null;
+    },
+    getCropState: () => {
+      return {
+        scale: scale.value,
+        translateX: translateX.value,
+        translateY: translateY.value,
+      };
     }
   }));
 
@@ -114,13 +130,22 @@ export const ImageCropper = React.forwardRef<ImageCropperRef, ImageCropperProps>
   // Reset transforms when aspect ratio or image changes
   useEffect(() => {
     'worklet';
-    scale.value = withSpring(1, SPRING_CONFIG);
-    savedScale.value = 1;
-    translateX.value = withSpring(0, SPRING_CONFIG);
-    translateY.value = withSpring(0, SPRING_CONFIG);
-    savedTranslateX.value = 0;
-    savedTranslateY.value = 0;
-  }, [aspectRatio, imageUri]);
+    if (initialCropState) {
+      scale.value = initialCropState.scale;
+      savedScale.value = initialCropState.scale;
+      translateX.value = initialCropState.translateX;
+      translateY.value = initialCropState.translateY;
+      savedTranslateX.value = initialCropState.translateX;
+      savedTranslateY.value = initialCropState.translateY;
+    } else {
+      scale.value = withSpring(1, SPRING_CONFIG);
+      savedScale.value = 1;
+      translateX.value = withSpring(0, SPRING_CONFIG);
+      translateY.value = withSpring(0, SPRING_CONFIG);
+      savedTranslateX.value = 0;
+      savedTranslateY.value = 0;
+    }
+  }, [aspectRatio, imageUri, initialCropState]);
 
   // Image display dimensions (computed once for reuse)
   const imageDisplayStyle = useMemo(() => {
@@ -248,6 +273,17 @@ export const ImageCropper = React.forwardRef<ImageCropperRef, ImageCropperProps>
             <View style={[styles.gridLineV, { left: '33.33%' }]} />
             <View style={[styles.gridLineV, { left: '66.66%' }]} />
           </View>
+
+          {/* Filter overlay */}
+          {filterOverlay && (
+            <View
+              style={[
+                StyleSheet.absoluteFill,
+                { backgroundColor: filterOverlay.bg, opacity: filterOverlay.opacity },
+              ]}
+              pointerEvents="none"
+            />
+          )}
         </ViewShot>
 
         {/* Scrim overlays — darkened areas outside crop */}
