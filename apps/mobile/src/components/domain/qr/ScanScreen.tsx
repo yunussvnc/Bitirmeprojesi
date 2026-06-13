@@ -11,7 +11,7 @@ import { ThemedView } from "@/src/components/themed-view";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { Fonts } from "@/src/constants/theme";
 import { usePresence } from "@/src/store/presence";
-import { verifyQR } from "@/src/services/matchService";
+import { getPlaceById } from "@/src/services/mekanService";
 import { useTranslation } from "react-i18next";
 
 type ActiveSession = {
@@ -84,10 +84,12 @@ export default function ScanScreen() {
       const presence = usePresence.getState();
       presence.startSession(placeId);
       try {
-        const verifyResult = await verifyQR(parseInt(placeId));
-        if (verifyResult.verified) {
+        const placeInfo = await getPlaceById(placeId);
+        if (placeInfo) {
           presence.setQrVerified(true);
-          presence.setActivePlaceName(verifyResult.place_name);
+          presence.setActivePlaceName(placeInfo.name);
+        } else {
+          presence.setQrVerified(false);
         }
       } catch {
         // QR doğrulama başarısız olsa bile oturumu başlat

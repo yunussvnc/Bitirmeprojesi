@@ -392,68 +392,7 @@ def read_place(
     return place
 
 
-@router.get("/places/{place_id}/reviews-list", response_model=schemas.ReviewsListResponse)
-def get_place_reviews_list(
-    place_id: int,
-    limit: int = Query(5, ge=1, le=50, description="İstemciye döndürülecek yorum sayısı"),
-    db: Session = Depends(get_db),
-):
-    """
-    Mekanın tüm yorumlarını (Google + uygulama içi) veritabanından döner.
-    """
-    place = db.query(models.Place).filter(models.Place.id == place_id).first()
-    if not place:
-        raise HTTPException(status_code=404, detail="Mekan bulunamadı.")
 
-    reviews = (
-        db.query(models.Review)
-        .filter(models.Review.place_id == place_id)
-        .order_by(models.Review.created_at.desc())
-        .limit(limit)
-        .all()
-    )
-
-    items = []
-    for r in reviews:
-        user = r.user
-        author_name = f"{user.first_name or ''} {user.last_name or ''}".strip() if user else "Anonim"
-        avatar_url = user.avatar_url if user else None
-
-        relative_time = None
-        if r.created_at:
-            from datetime import datetime, timezone
-            now = datetime.now(timezone.utc)
-            created = r.created_at if r.created_at.tzinfo else r.created_at.replace(tzinfo=timezone.utc)
-            diff = now - created
-            days = diff.days
-            if days < 1:
-                hours = diff.seconds // 3600
-                relative_time = f"{hours} saat önce" if hours > 0 else "az önce"
-            elif days < 7:
-                relative_time = f"{days} gün önce"
-            elif days < 30:
-                relative_time = f"{days // 7} hafta önce"
-            elif days < 365:
-                relative_time = f"{days // 30} ay önce"
-            else:
-                relative_time = f"{days // 365} yıl önce"
-
-        items.append(schemas.ReviewItem(
-            author_name=author_name,
-            rating=float(r.rating) if r.rating else 0,
-            text=r.comment_text or "",
-            relative_time=relative_time,
-            avatar_url=avatar_url,
-        ))
-
-    total = db.query(models.Review).filter(models.Review.place_id == place_id).count()
-
-    return schemas.ReviewsListResponse(
-        reviews=items,
-        total_fetched=total,
-        display_limit=limit,
-        source="database",
-    )
 
 
 

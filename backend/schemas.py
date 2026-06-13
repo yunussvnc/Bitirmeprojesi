@@ -234,21 +234,7 @@ class Place(PlaceBase):
         from_attributes = True
 
 
-class ReviewItem(BaseModel):
-    """Tek bir yorum satırı (Google veya uygulama içi)."""
-    author_name: str
-    rating: float = Field(ge=0, le=5)
-    text: str
-    relative_time: Optional[str] = None
-    avatar_url: Optional[str] = None
 
-
-class ReviewsListResponse(BaseModel):
-    """Mekan yorumları liste yanıtı."""
-    reviews: List[ReviewItem] = []
-    total_fetched: int = 0
-    display_limit: int = 5
-    source: str = "database"
 
 
 

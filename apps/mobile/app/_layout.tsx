@@ -171,13 +171,7 @@ export default function RootLayout() {
                     gestureEnabled: true,
                   }}
                 />
-                <Stack.Screen
-                  name="match-profile-setup"
-                  options={{
-                    presentation: "modal",
-                    gestureEnabled: true,
-                  }}
-                />
+
                 <Stack.Screen name="login" options={{ gestureEnabled: false }} />
                 <Stack.Screen name="register" options={{ gestureEnabled: false }} />
                 <Stack.Screen name="first-time-setup" options={{ gestureEnabled: false }} />

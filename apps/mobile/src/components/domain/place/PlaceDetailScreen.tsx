@@ -221,8 +221,6 @@ export default function PlaceDetailScreen({
   const [reviewsPage, setReviewsPage] = useState(1);
   const [hasMoreReviews, setHasMoreReviews] = useState(true);
   const [reviewsLoadingMore, setReviewsLoadingMore] = useState(false);
-  const [googleReviews, setGoogleReviews] = useState<ReviewItemType[]>([]);
-  const [googleReviewsLoading, setGoogleReviewsLoading] = useState(false);
   const [lastDistance, setLastDistance] = useState<number | null>(null);
   const [similarPlaces, setSimilarPlaces] = useState<any[]>([]);
   const [showReviews, setShowReviews] = useState(false);
@@ -365,11 +363,6 @@ export default function PlaceDetailScreen({
 
   useEffect(() => {
     if (!showReviews || !id) return;
-    const cancelled = { current: false };
-    loadGoogleReviews(cancelled);
-    return () => {
-      cancelled.current = true;
-    };
   }, [showReviews, id]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
@@ -504,23 +497,7 @@ export default function PlaceDetailScreen({
     }
   };
 
-  const loadGoogleReviews = async (cancelled: { current: boolean } = { current: false }) => {
-    if (!id) return;
-    setGoogleReviewsLoading(true);
-    try {
-      const data = await apiGet<{ reviews: ReviewItemType[] }>(`/places/${id}/reviews-list?limit=5`);
-      if (!cancelled.current) {
-        setGoogleReviews(data?.reviews ?? []);
-      }
-    } catch (error) {
-      if (!cancelled.current) {
-        logger.error("Error loading Google reviews:", error);
-        setGoogleReviews([]);
-      }
-    } finally {
-      if (!cancelled.current) setGoogleReviewsLoading(false);
-    }
-  };
+
 
   const loadSimilarPlaces = async (cancelled: { current: boolean } = { current: false }) => {
     if (!place?.category) return;
@@ -666,15 +643,12 @@ export default function PlaceDetailScreen({
   }, [place?.menu_items, t]);
 
   const averageRating = useMemo(() => {
-    const pool = reviews.length
-      ? reviews
-      : googleReviews.map((r) => ({ rating: r.rating }));
-    if (!pool.length) return null;
-    const sum = pool.reduce((acc, r) => acc + (r.rating || 0), 0);
-    return (sum / pool.length).toFixed(1);
-  }, [reviews, googleReviews]);
+    if (!reviews.length) return null;
+    const sum = reviews.reduce((acc, r) => acc + (r.rating || 0), 0);
+    return (sum / reviews.length).toFixed(1);
+  }, [reviews]);
 
-  const totalReviewCount = reviews.length + googleReviews.length;
+  const totalReviewCount = reviews.length;
 
   const distanceText = useMemo(() => {
     if (!userLocation || !place?.latitude || !place?.longitude) return null;
@@ -1277,11 +1251,11 @@ export default function PlaceDetailScreen({
                     }}
                     scrollEventThrottle={16}
                   >
-                    {reviewsLoading || googleReviewsLoading ? (
+                    {reviewsLoading ? (
                       <Text style={[bodySmallStyle]}>{t('place_detail.reviews_loading')}</Text>
-                    ) : reviewsError && !googleReviews.length ? (
+                    ) : reviewsError ? (
                       <Text style={[bodySmallStyle]}>{reviewsError}</Text>
-                    ) : !reviews.length && !googleReviews.length ? (
+                    ) : !reviews.length ? (
                       <Text style={[bodySmallStyle]}>
                         {t('place_detail.reviews_empty')}
                       </Text>
@@ -1317,18 +1291,7 @@ export default function PlaceDetailScreen({
                               <Text style={[bodySmallStyle, { marginLeft: 6 }]}>{t('explore.comment_count', { count: totalReviewCount })}</Text>
                             </View>
                           </View>
-                          {googleReviews.map((review, idx) => (
-                            <ReviewCard
-                              key={`g-${idx}-${review.author_name}`}
-                              review={review}
-                              borderColor={colors.surface.border}
-                            />
-                          ))}
-                          {reviews.length > 0 && (
-                            <Text style={[bodyStyle, { fontWeight: '700', marginTop: spacing.lg, marginBottom: spacing.sm }]}>
-                              {t('place_detail.community_reviews')}
-                            </Text>
-                          )}
+
                           {reviews.map((review) => (
                             <View key={review.id} style={[styles.reviewItem, { borderBottomColor: colors.surface.border }]}>
                               <View style={styles.reviewHeader}>

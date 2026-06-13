@@ -30,17 +30,7 @@ import { useMessagesStore, Conversation } from "@/src/store/useMessagesStore";
 import { Swipeable } from "react-native-gesture-handler";
 import { useTranslation } from "react-i18next";
 
-/** Doğum tarihinden yaş hesapla */
-function calculateAge(birthDateStr: string | null | undefined): number | null {
-    if (!birthDateStr) return null;
-    const bd = new Date(birthDateStr);
-    if (isNaN(bd.getTime())) return null;
-    const today = new Date();
-    let age = today.getFullYear() - bd.getFullYear();
-    const m = today.getMonth() - bd.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < bd.getDate())) age--;
-    return age;
-}
+
 
 export default function MessagesScreen() {
     const { colors } = useTheme();
@@ -48,8 +38,7 @@ export default function MessagesScreen() {
     const router = useRouter();
     const authUser = useAuthStore((s) => s.user);
 
-    const userAge = calculateAge(authUser?.birth_date);
-    const isUnder18 = userAge !== null && userAge < 18;
+
 
     // Global Store
     const { conversations, archiveConversation, deleteConversation, archiveMultiple, deleteMultiple, markAsRead } = useMessagesStore();
@@ -379,27 +368,7 @@ export default function MessagesScreen() {
                         },
                     ]}
                 >
-                    {!isEditMode && (
-                        <TouchableOpacity
-                            style={styles.headerLeftBtn}
-                            hitSlop={8}
-                            activeOpacity={0.7}
-                            onPress={() => {
-                                lightImpact();
-                                if (isUnder18) {
-                                    Alert.alert(
-                                        "Yaş Sınırı",
-                                        "18 yaşınıza geldiğinizde eşleşme ekranı aktif olacaktır.",
-                                        [{ text: "Tamam" }]
-                                    );
-                                    return;
-                                }
-                                router.push("/matching" as any);
-                            }}
-                        >
-                            <IconSymbol name="flame.fill" size={26} color={isUnder18 ? colors.text.tertiary : colors.accent.primary} />
-                        </TouchableOpacity>
-                    )}
+
 
                     <Text style={[styles.headerTitle, { color: colors.text.primary }]} numberOfLines={1}>
                         {username}
