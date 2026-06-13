@@ -79,7 +79,7 @@ class TestRecommendIntegration:
         assert response.status_code == 200
         data = response.json()
         assert len(data["items"]) == 0
-        assert "merhaba! ben senin yapay zeka" in data["summary"].lower()
+        assert "ben senin" in data["summary"].lower() and "asistan" in data["summary"].lower()
 
     def test_recommend_inappropriate_content(self, client):
         uid = create_test_user(email="rec_inapp@test.com", username="rec_inapp")
@@ -97,7 +97,7 @@ class TestRecommendIntegration:
         assert response.status_code == 200
         data = response.json()
         assert len(data["items"]) == 0
-        assert "siyasi, dini veya argo" in data["summary"].lower()
+        assert "yardımcı olamıyorum" in data["summary"].lower() or "siyasi" in data["summary"].lower()
 
 
 

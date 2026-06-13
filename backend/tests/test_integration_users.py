@@ -74,7 +74,7 @@ class TestUpdateProfile:
         uid1 = create_test_user(email="phone1@test.com", username="phone1")
         db = TestingSessionLocal()
         user = db.query(models.User).filter_by(id=uid1).first()
-        user.phone_number = "5551234567"
+        user.phone_number = "+905551234567"
         db.commit()
         db.close()
         uid2 = create_test_user(email="phone2@test.com", username="phone2")
