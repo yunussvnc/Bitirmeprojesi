@@ -427,18 +427,18 @@ async def reply_to_story(
         raise HTTPException(status_code=400, detail="Kendi hikayenize yanıt veremezsiniz.")
 
     story_owner_id = story.user_id
-    conv = db.query(models.MatchConversation).filter(
+    conv = db.query(models.Conversation).filter(
         (
-            (models.MatchConversation.user1_id == current_user.id) &
-            (models.MatchConversation.user2_id == story_owner_id)
+            (models.Conversation.user1_id == current_user.id) &
+            (models.Conversation.user2_id == story_owner_id)
         ) | (
-            (models.MatchConversation.user1_id == story_owner_id) &
-            (models.MatchConversation.user2_id == current_user.id)
+            (models.Conversation.user1_id == story_owner_id) &
+            (models.Conversation.user2_id == current_user.id)
         )
     ).first()
 
     if not conv:
-        conv = models.MatchConversation(
+        conv = models.Conversation(
             user1_id=current_user.id,
             user2_id=story_owner_id,
             is_active=True,

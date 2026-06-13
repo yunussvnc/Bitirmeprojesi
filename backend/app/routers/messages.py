@@ -34,10 +34,10 @@ def _raise_if_users_blocked(db: Session, user_a: int, user_b: int) -> None:
 # Yardımcı: Konuşma erişim doğrulaması
 # ─────────────────────────────────────────────────────────────
 
-def _verify_conversation_access(db: Session, conversation_id: int, user_id: int) -> models.MatchConversation:
+def _verify_conversation_access(db: Session, conversation_id: int, user_id: int) -> models.Conversation:
     """Kullanıcının bu konuşmaya erişimi var mı kontrol et"""
-    conv = db.query(models.MatchConversation).filter(
-        models.MatchConversation.id == conversation_id
+    conv = db.query(models.Conversation).filter(
+        models.Conversation.id == conversation_id
     ).first()
     if not conv:
         raise HTTPException(status_code=404, detail="Konuşma bulunamadı.")
@@ -63,8 +63,8 @@ def _get_messaging_permission(
     2. B açık + karşılıklı takip yok → max 1 metin, medya yok, read receipt gizli
     3. Karşılıklı takip → sınırsız, medya serbest, read receipt anlık
     """
-    conv = db.query(models.MatchConversation).filter(
-        models.MatchConversation.id == conversation_id
+    conv = db.query(models.Conversation).filter(
+        models.Conversation.id == conversation_id
     ).first()
     if not conv:
         return schemas.ConversationPermission(
@@ -216,13 +216,13 @@ def open_or_create_conversation(
     _raise_if_users_blocked(db, current_user.id, other_user_id)
 
     # Gizli hesap kontrolü — mevcut konuşma yoksa ve karşılıklı takip yoksa engelle
-    existing_conv = db.query(models.MatchConversation).filter(
+    existing_conv = db.query(models.Conversation).filter(
         (
-            (models.MatchConversation.user1_id == current_user.id) &
-            (models.MatchConversation.user2_id == other_user_id)
+            (models.Conversation.user1_id == current_user.id) &
+            (models.Conversation.user2_id == other_user_id)
         ) | (
-            (models.MatchConversation.user1_id == other_user_id) &
-            (models.MatchConversation.user2_id == current_user.id)
+            (models.Conversation.user1_id == other_user_id) &
+            (models.Conversation.user2_id == current_user.id)
         )
     ).first()
 
@@ -250,7 +250,7 @@ def open_or_create_conversation(
 
     conv = existing_conv
     if not conv:
-        conv = models.MatchConversation(
+        conv = models.Conversation(
             user1_id=current_user.id,
             user2_id=other_user_id,
             is_active=True,
@@ -266,6 +266,66 @@ def open_or_create_conversation(
         "name": other_user.first_name or other_user.username or other_user.email,
         "avatar_url": other_user.avatar_url,
     }
+
+@router.get("/messages/conversations", response_model=List[schemas.ConversationResponse])
+def get_conversations(
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(get_current_user)
+):
+    """
+    Kullanıcının aktif sohbetlerini (DM) listeler.
+    """
+    convs = db.query(models.Conversation).filter(
+        (models.Conversation.user1_id == current_user.id) |
+        (models.Conversation.user2_id == current_user.id),
+        models.Conversation.is_active == True,
+    ).order_by(models.Conversation.last_message_at.desc().nullslast()).all()
+
+    result = []
+    for conv in convs:
+        other_user_id = conv.user2_id if conv.user1_id == current_user.id else conv.user1_id
+        other_user = db.query(models.User).filter(models.User.id == other_user_id).first()
+        if not other_user:
+            continue
+
+        unread_count = db.query(models.Message).filter(
+            models.Message.conversation_id == conv.id,
+            models.Message.sender_id == other_user_id,
+            models.Message.is_read == False
+        ).count()
+
+        last_msg = db.query(models.Message).filter(
+            models.Message.conversation_id == conv.id
+        ).order_by(models.Message.created_at.desc()).first()
+
+        last_msg_text = None
+        last_msg_sender_id = None
+        if last_msg:
+            if last_msg.message_type == "image":
+                last_msg_text = "📷 Fotoğraf"
+            elif last_msg.message_type == "story_reply":
+                last_msg_text = "Hikayeye yanıt verdi"
+            else:
+                last_msg_text = last_msg.content
+            last_msg_sender_id = last_msg.sender_id
+
+        result.append(schemas.ConversationResponse(
+            id=conv.id,
+            other_user_display_name=other_user.first_name or other_user.username or "Kullanıcı",
+            other_user_photo=other_user.avatar_url,
+            other_user_id=other_user.id,
+            place_name=conv.place_name,
+            is_active=conv.is_active,
+            created_at=conv.created_at,
+            last_message_at=conv.last_message_at,
+            last_message_text=last_msg_text,
+            last_message_sender_id=last_msg_sender_id,
+            unread_count=unread_count,
+            is_request=False
+        ))
+
+    return result
+
 
 
 @router.get("/messages/{conversation_id}/permission", response_model=schemas.ConversationPermission)
@@ -553,8 +613,8 @@ async def websocket_chat(
 
     db = next(get_db())
     try:
-        conv = db.query(models.MatchConversation).filter(
-            models.MatchConversation.id == conversation_id
+        conv = db.query(models.Conversation).filter(
+            models.Conversation.id == conversation_id
         ).first()
         if not conv or user_id not in (conv.user1_id, conv.user2_id):
             await websocket.close(code=4003, reason="Bu konuşmaya erişiminiz yok")
@@ -621,8 +681,8 @@ async def websocket_chat(
                         status="sent",
                     )
                     db.add(msg)
-                    conv_obj = db.query(models.MatchConversation).filter(
-                        models.MatchConversation.id == conversation_id
+                    conv_obj = db.query(models.Conversation).filter(
+                        models.Conversation.id == conversation_id
                     ).first()
                     if conv_obj:
                         conv_obj.last_message_at = datetime.now(timezone.utc)

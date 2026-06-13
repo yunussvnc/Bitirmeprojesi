@@ -38,7 +38,6 @@ class User(Base):
     following = relationship("Follow", foreign_keys="Follow.follower_id", back_populates="follower_user")
     notifications = relationship("Notification", foreign_keys="Notification.user_id", back_populates="user")
     stories = relationship("Story", back_populates="user")
-    match_profile = relationship("MatchProfile", back_populates="user", uselist=False)
     email_verifications = relationship("EmailVerification", back_populates="user", cascade="all, delete-orphan")
     password_resets = relationship("PasswordReset", back_populates="user", cascade="all, delete-orphan")
     saved_places = relationship("SavedPlace", back_populates="user", cascade="all, delete-orphan")
@@ -591,70 +590,16 @@ class Notification(Base):
     actor = relationship("User", foreign_keys=[actor_id])
 
 
-# --- EŞLEŞME SİSTEMİ (Kademe 6) ---
-
-class MatchProfile(Base):
-    """Eşleşme profili — uygulama profilinden bağımsız"""
-    __tablename__ = "match_profiles"
-    id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(Integer, ForeignKey("users.id"), unique=True, nullable=False)
-
-    display_name = Column(String, nullable=False)
-    age = Column(Integer, nullable=False)
-    bio = Column(Text, nullable=True)
-    photo_urls = Column(Text, nullable=True)  # JSON array string
-
-    # Hakkımda detayları
-    height = Column(Integer, nullable=True)  # cm
-    gender = Column(String, nullable=True)  # "Erkek", "Kadın", "Diğer"
-    education = Column(String, nullable=True)
-    location_text = Column(String, nullable=True)  # serbest metin konum
-    smoking = Column(String, nullable=True)  # "Evet", "Hayır", "Bazen"
-    drinking = Column(String, nullable=True)  # "Evet", "Hayır", "Bazen"
-    looking_for = Column(String, nullable=True)  # "Uzun süreli ilişki", "Arkadaşlık", vb.
-    interests = Column(Text, nullable=True)  # JSON array string
-    star_sign = Column(String, nullable=True)
-    family_plans = Column(String, nullable=True)
-    exercise = Column(String, nullable=True)
-    prompts = Column(Text, nullable=True)  # JSON array string of {"question": "...", "answer": "..."}
-
-    is_active = Column(Boolean, default=True)
-    created_at = Column(DateTime(timezone=True), server_default=func.now())
-    updated_at = Column(DateTime(timezone=True), onupdate=func.now(), nullable=True)
-
-    user = relationship("User", back_populates="match_profile")
 
 
-class MatchLike(Base):
-    """Beğenme/geçme kaydı"""
-    __tablename__ = "match_likes"
-    id = Column(Integer, primary_key=True, index=True)
-    from_user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
-    to_user_id = Column(Integer, ForeignKey("users.id"), nullable=False)
-    place_id = Column(Integer, ForeignKey("places.id"), nullable=True)
-    action = Column(String, nullable=False)  # "like" veya "pass"
-    created_at = Column(DateTime(timezone=True), server_default=func.now())
-
-    from_user = relationship("User", foreign_keys=[from_user_id])
-    to_user = relationship("User", foreign_keys=[to_user_id])
-    place = relationship("Place")
-
-    __table_args__ = (
-        UniqueConstraint("from_user_id", "to_user_id", name="uq_match_like_from_to"),
-    )
-
-
-class MatchConversation(Base):
-    """Eşleşme sonrası sohbet kanalı"""
-    __tablename__ = "match_conversations"
+class Conversation(Base):
+    """Kullanıcılar arası özel sohbet kanalı (DM)"""
+    __tablename__ = "conversations"
     id = Column(Integer, primary_key=True, index=True)
     user1_id = Column(Integer, ForeignKey("users.id"), nullable=False)
     user2_id = Column(Integer, ForeignKey("users.id"), nullable=False)
     place_id = Column(Integer, ForeignKey("places.id"), nullable=True)
     place_name = Column(String, nullable=True)
-
-    user1_revealed = Column(Boolean, default=False)
-    user2_revealed = Column(Boolean, default=False)
 
     is_active = Column(Boolean, default=True)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
@@ -665,17 +610,17 @@ class MatchConversation(Base):
     place = relationship("Place")
 
     __table_args__ = (
-        UniqueConstraint("user1_id", "user2_id", name="uq_match_conversation_users"),
+        UniqueConstraint("user1_id", "user2_id", name="uq_conversation_users"),
     )
 
     messages = relationship("Message", back_populates="conversation", cascade="all, delete-orphan")
 
 
 class Message(Base):
-    """Eşleşme sohbet mesajı"""
+    """Sohbet mesajı"""
     __tablename__ = "messages"
     id = Column(Integer, primary_key=True, index=True)
-    conversation_id = Column(Integer, ForeignKey("match_conversations.id", ondelete="CASCADE"), nullable=False, index=True)
+    conversation_id = Column(Integer, ForeignKey("conversations.id", ondelete="CASCADE"), nullable=False, index=True)
     sender_id = Column(Integer, ForeignKey("users.id"), nullable=False)
     content = Column(Text, nullable=False)
     message_type = Column(String, default="text")  # "text", "image", "shared_post", "story_reply"
@@ -688,7 +633,7 @@ class Message(Base):
     status = Column(String, default="sent", index=True)  # "sent", "delivered", "read"
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
-    conversation = relationship("MatchConversation", back_populates="messages")
+    conversation = relationship("Conversation", back_populates="messages")
     sender = relationship("User", foreign_keys=[sender_id])
     parent_story = relationship("Story", foreign_keys=[parent_story_id])
 

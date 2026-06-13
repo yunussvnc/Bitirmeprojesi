@@ -69,14 +69,14 @@ def seed_database():
         db.add_all(place_objects)
         db.commit()
 
-        # 3. Create MatchConversations
+        # 3. Create Conversations
         now = datetime.now(timezone.utc)
         convs_data = []
         # Conv 1: me (1) vs Ahmet (2)
         # Conv 2: me (1) vs Elif (3)
         # Conv 3: me (1) vs Burak (4)
         for i in range(1, 9):
-            conv = models.MatchConversation(
+            conv = models.Conversation(
                 id=i,
                 user1_id=1,
                 user2_id=i+1,

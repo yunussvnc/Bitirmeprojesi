@@ -49,6 +49,19 @@ export interface SendMessagePayload {
 // --- API Functions ---
 
 /**
+ * Kullanıcının aktif sohbet (DM) listesini getir
+ */
+export async function getConversations(): Promise<any[]> {
+    try {
+        return await apiGet<any[]>("/messages/conversations");
+    } catch (error) {
+        logger.error("[messageService] getConversations error:", error);
+        throw error;
+    }
+}
+
+
+/**
  * Mesaj geçmişini getir (en eskiden yeniye sıralı)
  */
 export async function getMessages(

@@ -1925,28 +1925,6 @@ def get_blocked_user_ids(db: Session, user_id: int) -> list[int]:
     return [r[0] for r in rows]
 
 
-# --- UNMATCH ---
-
-def unmatch_conversation(db: Session, conversation_id: int, user_id: int) -> bool:
-    """Eşleşme konuşmasını sil (unmatch). Mesajlar cascade ile silinir."""
-    conv = db.query(models.MatchConversation).filter(
-        models.MatchConversation.id == conversation_id,
-    ).first()
-    if not conv:
-        return False
-    if conv.user1_id != user_id and conv.user2_id != user_id:
-        return False
-
-    # MatchLike kayıtlarını da sil
-    other_id = conv.user2_id if conv.user1_id == user_id else conv.user1_id
-    db.query(models.MatchLike).filter(
-        ((models.MatchLike.from_user_id == user_id) & (models.MatchLike.to_user_id == other_id)) |
-        ((models.MatchLike.from_user_id == other_id) & (models.MatchLike.to_user_id == user_id))
-    ).delete(synchronize_session=False)
-
-    db.delete(conv)
-    db.commit()
-    return True
 
 
 # --- MEKAN GÜNCELLEME ---

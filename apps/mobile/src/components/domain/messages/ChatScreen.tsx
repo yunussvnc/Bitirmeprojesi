@@ -503,31 +503,6 @@ export default function ChatScreen() {
         targetUserId: undefined,
     };
 
-    const isMatch = storeConversation?.isMatch;
-    const revealRequestedByMe = storeConversation?.revealRequestedByMe;
-    const isRevealed = storeConversation?.isRevealed;
-
-    const handleRevealToggle = () => {
-        if (!resolvedChatId) return;
-
-        if (revealRequestedByMe) {
-            Alert.alert(t("chat.waiting"), t("chat.waiting_desc"));
-            return;
-        }
-
-        useMessagesStore.getState().toggleRevealRequest(resolvedChatId);
-        success();
-
-        // Gerçek ID ise API'ye de bildir:
-        if (isBackendConv) {
-            revealProfile(numericConvId).catch(console.log);
-        }
-
-        // BUG-12: Mock auto-reveal kaldırıldı.
-        // Production'da karşı tarafın reveal etmesi backend'den gelecek.
-        // Backend zaten reveal-profile endpoint'inde her iki taraf da onaylarsa
-        // otomatik olarak mutual follow oluşturuyor.
-    };
 
     useEffect(() => {
         if (messages.length > 0) {
@@ -1203,20 +1178,7 @@ export default function ChatScreen() {
                 </TouchableOpacity>
 
                 <View style={styles.headerActions}>
-                    {isMatch && !isRevealed && (
-                        <TouchableOpacity
-                            hitSlop={8}
-                            activeOpacity={0.7}
-                            onPress={handleRevealToggle}
-                            style={{ marginRight: 16 }}
-                        >
-                            <IconSymbol
-                                name={revealRequestedByMe ? "heart.fill" : "heart"}
-                                size={24}
-                                color={revealRequestedByMe ? colors.semantic.error : colors.text.primary}
-                            />
-                        </TouchableOpacity>
-                    )}
+
                     <TouchableOpacity
                         hitSlop={8}
                         activeOpacity={0.7}

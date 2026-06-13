@@ -808,132 +808,22 @@ class UserStats(BaseModel):
     favorite_region: Optional[str] = None
 
 
-# --- EŞLEŞME (MATCHING) ŞEMALARI ---
-
-class MatchProfileCreate(BaseModel):
-    display_name: str
-    age: int
-    bio: Optional[str] = None
-    photo_urls: Optional[List[str]] = None
-    height: Optional[int] = None
-    gender: Optional[str] = None
-    education: Optional[str] = None
-    location_text: Optional[str] = None
-    smoking: Optional[str] = None
-    drinking: Optional[str] = None
-    looking_for: Optional[str] = None
-    interests: Optional[List[str]] = None
-    star_sign: Optional[str] = None
-    family_plans: Optional[str] = None
-    exercise: Optional[str] = None
-    prompts: Optional[List[dict]] = None
-
-class MatchProfileUpdate(BaseModel):
-    display_name: Optional[str] = None
-    age: Optional[int] = None
-    bio: Optional[str] = None
-    photo_urls: Optional[List[str]] = None
-    height: Optional[int] = None
-    gender: Optional[str] = None
-    education: Optional[str] = None
-    location_text: Optional[str] = None
-    smoking: Optional[str] = None
-    drinking: Optional[str] = None
-    looking_for: Optional[str] = None
-    interests: Optional[List[str]] = None
-    star_sign: Optional[str] = None
-    family_plans: Optional[str] = None
-    exercise: Optional[str] = None
-    prompts: Optional[List[dict]] = None
-    is_active: Optional[bool] = None
-
-class MatchProfileResponse(BaseModel):
-    id: int
-    user_id: int
-    display_name: str
-    age: int
-    bio: Optional[str] = None
-    photo_urls: List[str] = []
-    height: Optional[int] = None
-    gender: Optional[str] = None
-    education: Optional[str] = None
-    location_text: Optional[str] = None
-    smoking: Optional[str] = None
-    drinking: Optional[str] = None
-    looking_for: Optional[str] = None
-    interests: List[str] = []
-    star_sign: Optional[str] = None
-    family_plans: Optional[str] = None
-    exercise: Optional[str] = None
-    prompts: List[dict] = []
-    is_active: bool = True
-    created_at: datetime
-
-    class Config:
-        from_attributes = True
-
-class MatchLikeCreate(BaseModel):
-    to_user_id: int
-    place_id: Optional[int] = None
-    action: str  # "like" veya "pass"
-
-class MatchCandidateResponse(BaseModel):
-    """Aday profili — eşleşme kartında gösterilecek"""
-    user_id: int
-    display_name: str
-    age: int
-    bio: Optional[str] = None
-    photo_urls: List[str] = []
-    height: Optional[int] = None
-    gender: Optional[str] = None
-    education: Optional[str] = None
-    smoking: Optional[str] = None
-    drinking: Optional[str] = None
-    looking_for: Optional[str] = None
-    interests: List[str] = []
-    star_sign: Optional[str] = None
-    exercise: Optional[str] = None
-    prompts: List[dict] = []
-    active_place_id: Optional[int] = None
-    active_place_name: Optional[str] = None
-    is_qr_verified: bool = False
-    distance_priority: int = 0  # 0=aynı mekan, 1=yakın, 2=uzak
-
-class MatchConversationResponse(BaseModel):
+class ConversationResponse(BaseModel):
     id: int
     other_user_display_name: str
     other_user_photo: Optional[str] = None
     other_user_id: int
     place_name: Optional[str] = None
-    my_profile_revealed: bool = False
-    other_profile_revealed: bool = False
     is_active: bool = True
     created_at: datetime
     last_message_at: Optional[datetime] = None
     last_message_text: Optional[str] = None
     last_message_sender_id: Optional[int] = None
     unread_count: int = 0
+    is_request: bool = False
 
     class Config:
         from_attributes = True
-
-class MatchActionResponse(BaseModel):
-    """Beğenme/geçme sonucu"""
-    action: str
-    matched: bool = False
-    conversation_id: Optional[int] = None
-
-class QRVerifyRequest(BaseModel):
-    place_id: int
-    user_lat: Optional[float] = None
-    user_lng: Optional[float] = None
-
-class QRVerifyResponse(BaseModel):
-    verified: bool
-    place_id: int
-    place_name: str
-    active_until: Optional[datetime] = None
-
 
 # --- MESAJLAŞMA (MESSAGING) ŞEMALARI ---
 

@@ -14,10 +14,6 @@ export interface Conversation {
     isOnline: boolean;
     targetUserId?: number; // Gerçek kullanıcı profil ID'si
     sharedPlace?: string;
-    isMatch?: boolean;
-    isRevealed?: boolean;
-    revealRequestedByMe?: boolean;
-    revealRequestedByThem?: boolean;
     isArchived?: boolean;
     isRequest?: boolean;
     lastMessageAt: number; // Son mesajın gerçek timestamp'i (sıralama için)
@@ -41,15 +37,13 @@ type MessagesState = {
     deleteConversation: (id: string) => void;
     markAsRead: (id: string) => void;
     updateLastMessageAt: (id: string, message: string, timestamp: string, sender?: "me" | string, isUnread?: boolean, actualTimestamp?: number) => void;
-    toggleRevealRequest: (id: string) => void;
-    mockOtherPersonReveal: (id: string) => void;
 
     archiveMultiple: (ids: string[]) => void;
     unarchiveMultiple: (ids: string[]) => void;
     deleteMultiple: (ids: string[]) => void;
 
     addConversation: (conversation: Conversation) => void;
-    updateConversationMeta: (id: string, meta: Partial<Pick<Conversation, 'avatar' | 'name' | 'isRevealed' | 'isMatch' | 'revealRequestedByMe' | 'revealRequestedByThem' | 'targetUserId'>>) => void;
+    updateConversationMeta: (id: string, meta: Partial<Pick<Conversation, 'avatar' | 'name' | 'targetUserId'>>) => void;
 
     clearStore: () => void;
 };
@@ -100,36 +94,6 @@ export const useMessagesStore = create<MessagesState>()(
                 })
             })),
 
-            toggleRevealRequest: (id) => set((state) => ({
-                conversations: state.conversations.map(c => {
-                    if (c.id === id) {
-                        const newReqMe = !c.revealRequestedByMe;
-                        const fullyRevealed = newReqMe && c.revealRequestedByThem;
-                        return {
-                            ...c,
-                            revealRequestedByMe: newReqMe,
-                            isRevealed: fullyRevealed || c.isRevealed,
-                            isMatch: fullyRevealed ? false : c.isMatch // Remove match status when fully revealed
-                        };
-                    }
-                    return c;
-                })
-            })),
-
-            mockOtherPersonReveal: (id) => set((state) => ({
-                conversations: state.conversations.map(c => {
-                    if (c.id === id) {
-                        const fullyRevealed = c.revealRequestedByMe && true;
-                        return {
-                            ...c,
-                            revealRequestedByThem: true,
-                            isRevealed: fullyRevealed || c.isRevealed,
-                            isMatch: fullyRevealed ? false : c.isMatch,
-                        };
-                    }
-                    return c;
-                })
-            })),
 
             archiveMultiple: (ids) => set((state) => ({
                 conversations: state.conversations.map(c =>

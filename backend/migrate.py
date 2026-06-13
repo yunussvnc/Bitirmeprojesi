@@ -150,6 +150,21 @@ def run_migrations(engine_override=None):
     """
     db_engine = engine_override or engine
     logger.info("Veritabanı tabloları kontrol ediliyor/oluşturuluyor...")
+    with db_engine.connect() as conn:
+        # Match Migration: match_conversations -> conversations
+        if _table_exists(conn, "match_conversations") and not _table_exists(conn, "conversations"):
+            logger.info("Şema: match_conversations tablosu conversations olarak yeniden adlandırılıyor...")
+            conn.execute(text("ALTER TABLE match_conversations RENAME TO conversations"))
+            conn.commit()
+
+        # Match Migration: Drop old unused tables
+        if _table_exists(conn, "match_profiles"):
+            conn.execute(text("DROP TABLE match_profiles"))
+            conn.commit()
+        if _table_exists(conn, "match_likes"):
+            conn.execute(text("DROP TABLE match_likes"))
+            conn.commit()
+
     Base.metadata.create_all(bind=db_engine)
     with db_engine.connect() as conn:
         _apply_schema_patches(conn)

@@ -61,12 +61,12 @@ export default function MessagesScreen() {
     const [selectedIds, setSelectedIds] = useState<string[]>([]);
     const [viewMode, setViewMode] = useState<'chats'|'requests'>('chats');
     const { t } = useTranslation();
-    const { getMatchConversations } = require("@/src/services/matchService");
+    const { getConversations } = require("@/src/services/messageService");
 
     React.useEffect(() => {
         // Ekran her yüklendiğinde (veya authUser değiştiğinde) backend'den konuşma listesini çek
         if (!authUser) return;
-        getMatchConversations().then((backendConvs: any[]) => {
+        getConversations().then((backendConvs: any[]) => {
             const store = useMessagesStore.getState();
             backendConvs.forEach((bc) => {
                 const chatId = String(bc.id);
@@ -90,10 +90,6 @@ export default function MessagesScreen() {
                         isOnline: false,
                         targetUserId: bc.other_user_id,
                         lastMessageAt: bc.last_message_at ? new Date(bc.last_message_at).getTime() : new Date(bc.created_at).getTime(),
-                        isMatch: !bc.my_profile_revealed || !bc.other_profile_revealed,
-                        isRevealed: bc.my_profile_revealed && bc.other_profile_revealed,
-                        revealRequestedByMe: bc.my_profile_revealed,
-                        revealRequestedByThem: bc.other_profile_revealed,
                         isRequest: bc.is_request ?? false,
                     });
                 } else {
@@ -103,10 +99,6 @@ export default function MessagesScreen() {
                         avatar: freshAvatar ?? existing.avatar,
                         name: bc.other_user_display_name || existing.name,
                         targetUserId: bc.other_user_id,
-                        isRevealed: bc.my_profile_revealed && bc.other_profile_revealed,
-                        revealRequestedByMe: bc.my_profile_revealed,
-                        revealRequestedByThem: bc.other_profile_revealed,
-                        isMatch: !bc.my_profile_revealed || !bc.other_profile_revealed,
                     });
 
                     if (bc.last_message_at) {
@@ -252,11 +244,7 @@ export default function MessagesScreen() {
                         {item.isOnline && (
                             <View style={[styles.onlineDot, { borderColor: colors.background.primary }]} />
                         )}
-                        {item.isMatch && (
-                            <View style={[styles.matchFlame, { borderColor: colors.background.primary }]}>
-                                <IconSymbol name="flame.fill" size={10} color="#fff" />
-                            </View>
-                        )}
+
                     </View>
 
                     {/* İçerik */}

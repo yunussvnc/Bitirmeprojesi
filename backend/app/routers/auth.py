@@ -707,8 +707,8 @@ def delete_account(
     db.query(models.MatchLike).filter(
         (models.MatchLike.from_user_id == uid) | (models.MatchLike.to_user_id == uid)
     ).delete(synchronize_session=False)
-    for conv in db.query(models.MatchConversation).filter(
-        (models.MatchConversation.user1_id == uid) | (models.MatchConversation.user2_id == uid)
+    for conv in db.query(models.Conversation).filter(
+        (models.Conversation.user1_id == uid) | (models.Conversation.user2_id == uid)
     ).all():
         db.query(models.Message).filter(models.Message.conversation_id == conv.id).delete()
         db.delete(conv)

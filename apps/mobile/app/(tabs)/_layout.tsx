@@ -123,12 +123,7 @@ export default function TabsLayout() {
           }}
         />
 
-        <Tabs.Screen
-          name="matching"
-          options={{
-            href: null,
-          }}
-        />
+
         <Tabs.Screen
           name="profile"
           options={{
