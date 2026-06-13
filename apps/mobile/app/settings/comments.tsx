@@ -33,8 +33,9 @@ export default function CommentsSettingsScreen() {
   const setDefaultDisabled = useSettingsStore((s) => s.setDefaultCommentsDisabled);
   const setAudience = useSettingsStore((s) => s.setCommentAllowedAudience);
   const setHideOffensiveWords = useSettingsStore((s) => s.setHideOffensiveWords);
+  const isPrivate = useSettingsStore((s) => s.isPrivateAccount);
 
-  const audienceOptions: Audience[] = ["everyone", "followers", "off"];
+  const audienceOptions: Audience[] = isPrivate ? ["followers", "off"] : ["everyone", "followers", "off"];
 
   return (
     <View style={[styles.wrapper, { backgroundColor: colors.background.primary }]}>

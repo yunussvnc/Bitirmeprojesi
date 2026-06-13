@@ -68,6 +68,7 @@ export type PostComment = {
   author_username?: string;
   is_liked?: boolean;
   like_count?: number;
+  is_flagged?: boolean;
 };
 
 export type CreatePostPayload = {

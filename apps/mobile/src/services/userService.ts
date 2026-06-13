@@ -24,6 +24,7 @@ export type UserProfile = {
   followers_count: number;
   following_count: number;
   friends_count: number;
+  place_follow_count: number; // Takip edilen mekan sayısı
   is_following: boolean;
   follow_status: 'pending' | 'accepted' | null;
   is_private?: boolean;
@@ -93,4 +94,16 @@ export async function getFollowing(userId: number, page = 1, pageSize = 20): Pro
 
 export async function getFriends(userId: number, page = 1, pageSize = 20): Promise<NetworkResponse> {
   return apiGet<NetworkResponse>(`/users/${userId}/friends?page=${page}&page_size=${pageSize}`);
+}
+
+export type StoryHiddenUsersResponse = {
+  hidden_users: UserSummary[];
+};
+
+export async function getHiddenStoryUsers(): Promise<StoryHiddenUsersResponse> {
+  return apiGet<StoryHiddenUsersResponse>(`/users/me/hidden-story-users`);
+}
+
+export async function updateHiddenStoryUsers(hidden_user_ids: number[]): Promise<StoryHiddenUsersResponse> {
+  return apiPost<StoryHiddenUsersResponse>(`/users/me/hidden-story-users`, { hidden_user_ids });
 }

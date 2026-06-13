@@ -36,12 +36,15 @@ export default function ProfileScreen() {
   const deletedPostIds = useAppStore((s) => s.deletedPostIds);
   const visiblePosts = React.useMemo(() => posts.filter((p) => !deletedPostIds.includes(p.id)), [posts, deletedPostIds]);
 
+  // initialLoading sadece ilk açılışta true — sonraki focus'larda UI gizlenmez
+  const hasLoadedOnce = useRef(false);
   const [initialLoading, setInitialLoading] = useState(true);
+  const lastNavTime = useRef<number>(0);
 
   const { width: screenWidth } = useWindowDimensions();
   const cellSize = (screenWidth - 32 - GRID_GAP * (GRID_COLS - 1)) / GRID_COLS;
 
-  const loadProfile = useCallback(async () => {
+  const loadProfile = useCallback(async (silent = false) => {
     if (!authUser) return;
     try {
       const [p, s, postsRes] = await Promise.all([
@@ -66,9 +69,12 @@ export default function ProfileScreen() {
         })
       );
     } catch (e) {
-      handleApiError(e);
+      if (!silent) handleApiError(e);
     } finally {
-      setInitialLoading(false);
+      if (!hasLoadedOnce.current) {
+        hasLoadedOnce.current = true;
+        setInitialLoading(false);
+      }
     }
   }, [authUser?.id]);
 
@@ -81,7 +87,11 @@ export default function ProfileScreen() {
 
   useFocusEffect(
     useCallback(() => {
-      loadProfile();
+      // Ekrana her dönüşte sekmeyi "gönderiler"e sıfırla
+      setActiveTab("posts");
+      // İlk açılış: loading göster. Sonraki focus'lar: arka planda sessizce güncelle.
+      const silent = hasLoadedOnce.current;
+      loadProfile(silent);
     }, [loadProfile])
   );
 
@@ -93,7 +103,8 @@ export default function ProfileScreen() {
 
   const displayStats = {
     followers: profile?.followers_count ?? 0,
-    friends: profile?.friends_count ?? 0,
+    // "Takip" = karşılıklı kullanıcı takipleri + takip edilen mekanlar
+    friends: (profile?.friends_count ?? 0) + (profile?.place_follow_count ?? 0),
     posts: stats?.post_count ?? 0,
   };
 
@@ -124,14 +135,26 @@ export default function ProfileScreen() {
           <TouchableOpacity
             style={[styles.headerBtn, { backgroundColor: colors.surface.elevated }]}
             activeOpacity={0.7}
-            onPress={() => { lightImpact(); router.push("/search-users" as any); }}
+            onPress={() => {
+              const now = Date.now();
+              if (now - lastNavTime.current > 1000) {
+                lastNavTime.current = now;
+                router.push("/search-users" as any);
+              }
+            }}
           >
             <IconSymbol name="magnifyingglass" size={20} color={colors.text.primary} />
           </TouchableOpacity>
           <TouchableOpacity
             style={[styles.headerBtn, { backgroundColor: colors.surface.elevated }]}
             activeOpacity={0.7}
-            onPress={() => router.push("/settings" as any)}
+            onPress={() => {
+              const now = Date.now();
+              if (now - lastNavTime.current > 1000) {
+                lastNavTime.current = now;
+                router.push("/settings" as any);
+              }
+            }}
           >
             <IconSymbol name="line.3.horizontal" size={20} color={colors.text.primary} />
           </TouchableOpacity>
@@ -204,11 +227,11 @@ export default function ProfileScreen() {
             activeOpacity={0.7}
             onPress={() => {
               lightImpact();
-              router.push(`/network?id=${authUser.id}&type=followers` as any);
+              router.push(`/network?id=${authUser.id}&type=friends` as any);
             }}
           >
-            <Text style={[styles.statNumber, { color: colors.text.primary }]}>{displayStats.followers}</Text>
-            <Text style={[styles.statLabel, { color: colors.text.tertiary }]}>{t('profile.followers')}</Text>
+            <Text style={[styles.statNumber, { color: colors.text.primary }]}>{displayStats.friends}</Text>
+            <Text style={[styles.statLabel, { color: colors.text.tertiary }]}>{t('profile.following')}</Text>
           </TouchableOpacity>
           <View style={[styles.statDivider, { backgroundColor: colors.surface.border }]} />
           <TouchableOpacity
@@ -216,11 +239,11 @@ export default function ProfileScreen() {
             activeOpacity={0.7}
             onPress={() => {
               lightImpact();
-              router.push(`/network?id=${authUser.id}&type=friends` as any);
+              router.push(`/network?id=${authUser.id}&type=followers` as any);
             }}
           >
-            <Text style={[styles.statNumber, { color: colors.text.primary }]}>{displayStats.friends}</Text>
-            <Text style={[styles.statLabel, { color: colors.text.tertiary }]}>{t('profile.following')}</Text>
+            <Text style={[styles.statNumber, { color: colors.text.primary }]}>{displayStats.followers}</Text>
+            <Text style={[styles.statLabel, { color: colors.text.tertiary }]}>{t('profile.followers')}</Text>
           </TouchableOpacity>
         </View>
 

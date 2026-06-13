@@ -236,6 +236,24 @@ class UserBlock(Base):
     )
 
 
+class StoryHiddenUser(Base):
+    """Hikayesi gizlenen kullanıcılar (Kullanıcının hikayelerini göremeyecek kişiler)"""
+    __tablename__ = "story_hidden_users"
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
+    hidden_user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    # user: hikayeyi paylaşan kişi
+    # hidden_user: hikayeyi göremeyecek kişi
+    user = relationship("User", foreign_keys=[user_id])
+    hidden_user = relationship("User", foreign_keys=[hidden_user_id])
+
+    __table_args__ = (
+        UniqueConstraint("user_id", "hidden_user_id", name="uq_story_hidden_user"),
+    )
+
+
 class PlaceFollow(Base):
     """Kullanıcının mekanı takip etmesi — tek yönlü (kullanıcı → mekan)"""
     __tablename__ = "place_follows"

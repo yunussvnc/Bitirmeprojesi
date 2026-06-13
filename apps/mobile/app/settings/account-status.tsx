@@ -4,7 +4,7 @@
 
 import React, { useState, useEffect, useCallback } from "react";
 import {
-  View, Text, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator,
+  View, Text, StyleSheet, ScrollView, TouchableOpacity, ActivityIndicator, Alert,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
@@ -15,7 +15,7 @@ import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { createTextStyle, spacing } from "@/src/constants/design";
 import { lightImpact } from "@/src/utils/haptics";
 import { useAuthStore } from "@/src/store/useAuthStore";
-import { apiGet } from "@/src/utils/apiClient";
+import { apiGet, apiDelete } from "@/src/utils/apiClient";
 import { useTranslation } from "react-i18next";
 import i18n from "@/src/i18n";
 
@@ -69,6 +69,32 @@ export default function AccountStatusScreen() {
       return new Date(d).toLocaleDateString(locale, { day: "numeric", month: "long", year: "numeric" });
     }
     catch { return d; }
+  };
+
+  const handleDeleteAccount = () => {
+    lightImpact();
+    Alert.alert(
+      t("account_status.delete_title", "Hesabımı Kalıcı Olarak Sil"),
+      t("account_status.delete_desc", "Hesabınızı silmek istediğinize emin misiniz? Bu işlem geri alınamaz."),
+      [
+        { text: t("common.cancel", "Vazgeç"), style: "cancel" },
+        { 
+          text: t("account_status.delete_confirm", "Evet, Sil"), 
+          style: "destructive", 
+          onPress: async () => {
+            try {
+              setLoading(true);
+              await apiDelete("/auth/me");
+              useAuthStore.getState().logout();
+              router.replace("/login");
+            } catch (e) {
+              Alert.alert(t("common.error", "Hata"), t("account_status.delete_error", "Hesap silinirken bir hata oluştu."));
+              setLoading(false);
+            }
+          }
+        }
+      ]
+    );
   };
 
   return (
@@ -137,6 +163,15 @@ export default function AccountStatusScreen() {
               <Text style={[styles.helpLinkText, { color: colors.accent.primary }]}>{t("account_status.go_help")}</Text>
             </TouchableOpacity>
           )}
+
+          <TouchableOpacity
+            style={[styles.deleteLink, { borderColor: colors.semantic.error }]}
+            onPress={handleDeleteAccount}
+            activeOpacity={0.7}
+          >
+            <IconSymbol name="trash" size={18} color={colors.semantic.error} />
+            <Text style={[styles.deleteLinkText, { color: colors.semantic.error }]}>{t("account_status.delete_title", "Hesabımı Kalıcı Olarak Sil")}</Text>
+          </TouchableOpacity>
         </ScrollView>
       )}
     </View>
@@ -168,4 +203,9 @@ const styles = StyleSheet.create({
     gap: 8, paddingVertical: 14, marginTop: 20, borderRadius: 12, borderWidth: 1.5,
   },
   helpLinkText: { fontSize: 15, fontWeight: "700" },
+  deleteLink: {
+    flexDirection: "row", alignItems: "center", justifyContent: "center",
+    gap: 8, paddingVertical: 14, marginTop: 12, borderRadius: 12, borderWidth: 1.5,
+  },
+  deleteLinkText: { fontSize: 15, fontWeight: "700" },
 });

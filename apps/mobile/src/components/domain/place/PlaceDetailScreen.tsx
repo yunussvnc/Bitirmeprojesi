@@ -7,7 +7,7 @@
 
 import { getTranslatedCategory, normalizePlaceCategory } from '@/src/utils/categories';
 import { router, useLocalSearchParams } from "expo-router";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   View,
   Text,
@@ -24,6 +24,7 @@ import {
   PanResponder,
   Animated as RNAnimated,
   Share,
+  ActivityIndicator,
 } from "react-native";
 import { useScrollToTop } from '@react-navigation/native';
 import Animated, { FadeIn } from "react-native-reanimated";
@@ -84,6 +85,89 @@ function groupMenuByCategory(items: any[], t: any): { category: string; items: a
   return Array.from(map.entries()).map(([category, catItems]) => ({ category, items: catItems }));
 }
 
+
+/** Swipe-down-to-close fullscreen image viewer */
+function HeroImageViewer({
+  heroSource, insetTop, onClose, screenWidth, screenHeight, t,
+}: {
+  heroSource: any;
+  insetTop: number;
+  onClose: () => void;
+  screenWidth: number;
+  screenHeight: number;
+  t: (key: string) => string;
+}) {
+  const translateY = useRef(new RNAnimated.Value(0)).current;
+  const opacity = useRef(new RNAnimated.Value(1)).current;
+
+  const panResponder = useRef(
+    PanResponder.create({
+      onStartShouldSetPanResponder: () => false,
+      onMoveShouldSetPanResponder: (_, g) => Math.abs(g.dy) > 10 && Math.abs(g.dy) > Math.abs(g.dx),
+      onPanResponderMove: (_, g) => {
+        if (g.dy > 0) {
+          translateY.setValue(g.dy);
+          opacity.setValue(Math.max(0.3, 1 - g.dy / 300));
+        }
+      },
+      onPanResponderRelease: (_, g) => {
+        if (g.dy > 80 || g.vy > 0.8) {
+          // Threshold aşıldı — kapat
+          RNAnimated.parallel([
+            RNAnimated.timing(translateY, { toValue: screenHeight, duration: 220, useNativeDriver: true }),
+            RNAnimated.timing(opacity, { toValue: 0, duration: 200, useNativeDriver: true }),
+          ]).start(() => onClose());
+        } else {
+          // Geri döndür
+          RNAnimated.parallel([
+            RNAnimated.spring(translateY, { toValue: 0, useNativeDriver: true }),
+            RNAnimated.spring(opacity, { toValue: 1, useNativeDriver: true }),
+          ]).start();
+        }
+      },
+    })
+  ).current;
+
+  return (
+    <RNAnimated.View
+      style={{ flex: 1, backgroundColor: "#000", justifyContent: "center", alignItems: "center", opacity }}
+      {...panResponder.panHandlers}
+    >
+      {/* Kapat butonu */}
+      <View style={{ flexDirection: "row", justifyContent: "flex-end", position: "absolute", top: insetTop, width: "100%", paddingHorizontal: 20, zIndex: 10 }}>
+        <TouchableOpacity onPress={onClose} style={{ flexDirection: "row", alignItems: "center", gap: 6, backgroundColor: "rgba(0,0,0,0.5)", paddingHorizontal: 12, paddingVertical: 8, borderRadius: 20 }}>
+          <IconSymbol name="xmark" size={18} color="#fff" />
+          <Text style={{ color: "#fff", fontSize: 14, fontWeight: "600" }}>{t('explore.close')}</Text>
+        </TouchableOpacity>
+      </View>
+
+      {/* Görsel + sürükleme geri bildirimi */}
+      <RNAnimated.View style={{ transform: [{ translateY }] }}>
+        <ScrollView
+          maximumZoomScale={4}
+          minimumZoomScale={1}
+          bouncesZoom
+          centerContent
+          showsHorizontalScrollIndicator={false}
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={{ flexGrow: 1, justifyContent: "center", alignItems: "center" }}
+          style={{ width: screenWidth, height: screenHeight }}
+        >
+          <Pressable>
+            <Image source={heroSource} style={{ width: screenWidth, height: screenHeight * 0.8 }} resizeMode="contain" />
+          </Pressable>
+        </ScrollView>
+      </RNAnimated.View>
+
+      {/* Swipe ipucu */}
+      <View style={{ position: "absolute", bottom: 40, alignItems: "center", gap: 4 }}>
+        <View style={{ width: 40, height: 4, borderRadius: 2, backgroundColor: "rgba(255,255,255,0.4)" }} />
+        <Text style={{ color: "rgba(255,255,255,0.5)", fontSize: 12 }}>Kapatmak için aşağı kaydırın</Text>
+      </View>
+    </RNAnimated.View>
+  );
+}
+
 export default function PlaceDetailScreen({
   providedId,
   isVenueDashboard = false
@@ -96,6 +180,7 @@ export default function PlaceDetailScreen({
   const params = useLocalSearchParams();
   const id = providedId || String(params?.id ?? "");
   const { t } = useTranslation();
+  const settings = useSettingsStore();
 
   const savedIds = useAppStore((s) => s.savedIds);
   const toggleSaved = useAppStore((s) => s.toggleSave);
@@ -156,6 +241,15 @@ export default function PlaceDetailScreen({
 
   const screenRef = useRef<ScreenRef>(null);
   useScrollToTop(screenRef as any);
+
+  // Çift tıklama koruması — 600ms içinde tekrar navigasyona izin vermez
+  const navGuard = useRef(false);
+  const navigateToPlace = useCallback((placeData: Record<string, string>) => {
+    if (navGuard.current) return;
+    navGuard.current = true;
+    router.push({ pathname: "/place/[id]", params: placeData } as any);
+    setTimeout(() => { navGuard.current = false; }, 600);
+  }, [router]);
 
   const reviewSheetHeight = useRef(new RNAnimated.Value(REVIEW_SHEET_COLLAPSED)).current;
   const reviewStartHeightRef = useRef(REVIEW_SHEET_COLLAPSED);
@@ -303,7 +397,6 @@ export default function PlaceDetailScreen({
     try {
       const foundPlace = await getPlaceById(id);
       if (!cancelled.current && foundPlace) {
-        console.log('[PlaceDetail] menu_items:', JSON.stringify(foundPlace.menu_items)?.slice(0, 200));
         const normalizedCat = normalizePlaceCategory(foundPlace.category);
         setPlace({
           ...foundPlace,
@@ -350,19 +443,34 @@ export default function PlaceDetailScreen({
 
   const handleFollow = async () => {
     if (followLoading) return;
+
+    // ──── OPTİMİSTİK GÜNCELLEME ────
+    // UI'ı hemen güncelle — API cevabı bekleme
+    const prevFollowing = isFollowing;
+    const prevCount = followerCount;
+    const newFollowing = !isFollowing;
+    setIsFollowing(newFollowing);
+    setFollowerCount(prev => newFollowing ? prev + 1 : Math.max(0, prev - 1));
+    lightImpact();
+    if (newFollowing) success();
+    // ──────────────────────────────
+
     setFollowLoading(true);
     try {
-      lightImpact();
       const result = await togglePlaceFollow(id);
+      // API'den gelen gerçek değeri uygula (sayı tutarsızlığı olmaması için)
       setIsFollowing(result.followed);
       setFollowerCount(result.follower_count);
-      if (result.followed) success();
     } catch (error) {
+      // Hata durumunda eski duruma geri dön (rollback)
+      setIsFollowing(prevFollowing);
+      setFollowerCount(prevCount);
       logger.error("Error toggling follow:", error);
     } finally {
       setFollowLoading(false);
     }
   };
+
 
   const loadReviews = async (pageToLoad = 1, append = false, cancelled: { current: boolean } = { current: false }) => {
     if (!id) return;
@@ -415,24 +523,36 @@ export default function PlaceDetailScreen({
   };
 
   const loadSimilarPlaces = async (cancelled: { current: boolean } = { current: false }) => {
+    if (!place?.category) return;
     try {
-      const places = await getAllPlaces();
+      // Sadece aynı kategorideki 6 mekanu çek — minimal=true ile enrich atlanır
+      const data = await apiGet<any>(`/places/search?category=${encodeURIComponent(place.category)}&page_size=6&minimal=true`);
       if (cancelled.current) return;
-      const filtered = places.filter((p) => String(p.id) !== id && p.category === place?.category).slice(0, 5);
-      setSimilarPlaces(filtered);
+      const items: any[] = data?.items ?? [];
+      const filtered = items.filter((p: any) => String(p.id) !== id).slice(0, 5);
+      setSimilarPlaces(filtered.map((p: any) => ({
+        id: p.id,
+        name: p.name,
+        category: p.category,
+        photo_url: p.photo_url,
+        average_rating: p.average_rating,
+        address: p.address,
+      })));
     } catch (error) {
       if (!cancelled.current) logger.error("Error loading similar places:", error);
     }
   };
 
   useEffect(() => {
-    if (!place) return;
+    if (!place?.category) return;
     const cancelled = { current: false };
-    loadSimilarPlaces(cancelled);
+    // Benzer mekanları biraz geciktirerek yükle (ana veri yüklenmesin diye)
+    const timer = setTimeout(() => loadSimilarPlaces(cancelled), 300);
     return () => {
       cancelled.current = true;
+      clearTimeout(timer);
     };
-  }, [place?.id, place?.category]); // eslint-disable-line react-hooks/exhaustive-deps -- loadSimilarPlaces uses place in closure
+  }, [place?.id, place?.category]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const checkUserLocation = async () => {
     if (!place?.latitude || !place?.longitude) return;
@@ -571,6 +691,14 @@ export default function PlaceDetailScreen({
   const bodyStyle = { fontSize: 15, fontWeight: "400" as const, color: colors.text.primary };
   const bodySmallStyle = { fontSize: 14, fontWeight: "400" as const, color: colors.text.secondary };
   const captionStyle = { fontSize: 12, fontWeight: "400" as const, color: colors.text.tertiary };
+
+  if (!place) {
+    return (
+      <View style={{ flex: 1, backgroundColor: colors.background?.primary || '#fff', justifyContent: 'center', alignItems: 'center' }}>
+        <ActivityIndicator size="large" color={colors.accent?.primary || '#000'} />
+      </View>
+    );
+  }
 
   return (
     <Animated.View entering={FadeIn.duration(280)} style={{ flex: 1 }}>
@@ -789,7 +917,7 @@ export default function PlaceDetailScreen({
         {/* Content */}
         <View style={styles.content}>
           {/* Mekanın Aktif Hikayeleri */}
-          {placeStories && placeStories.length > 0 && (
+          {settings.mapShowStories && placeStories && placeStories.length > 0 && (
             <View style={{ paddingHorizontal: spacing.base, marginBottom: spacing.md }}>
               <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={{ gap: 12, paddingVertical: 4 }}>
                 <TouchableOpacity
@@ -1016,7 +1144,7 @@ export default function PlaceDetailScreen({
           )}
 
           {/* Mekan Gönderileri Grid */}
-          {placePosts && placePosts.length > 0 && (
+          {settings.mapShowPosts && placePosts && placePosts.length > 0 && (
             <Card style={{ ...StyleSheet.flatten(styles.sectionCard), padding: spacing.base, marginBottom: spacing.xl }}>
               <View style={{ flexDirection: 'row', alignItems: 'center', gap: 8, marginBottom: spacing.md }}>
                 <IconSymbol name="square.grid.3x3.fill" size={20} color={colors.text.primary} />
@@ -1079,17 +1207,14 @@ export default function PlaceDetailScreen({
                       address={similarPlace.address}
                       tags={similarPlace.tags}
                       hasMenu={!!(similarPlace.menu_items && similarPlace.menu_items.length > 0)}
-                      onPress={() => router.push({
-                        pathname: "/place/[id]",
-                        params: {
-                          id: String(similarPlace.id),
-                          name: similarPlace.name || "",
-                          category: similarPlace.category || "",
-                          photo_url: similarPlace.photo_url || "",
-                          subtitle: similarPlace.subtitle || similarPlace.description || "",
-                          description: similarPlace.description || "",
-                          address: similarPlace.address || "",
-                        }
+                      onPress={() => navigateToPlace({
+                        id: String(similarPlace.id),
+                        name: similarPlace.name || "",
+                        category: similarPlace.category || "",
+                        photo_url: similarPlace.photo_url || "",
+                        subtitle: similarPlace.subtitle || similarPlace.description || "",
+                        description: similarPlace.description || "",
+                        address: similarPlace.address || "",
                       })}
                     />
                   </View>
@@ -1404,7 +1529,7 @@ export default function PlaceDetailScreen({
         )}
       </Modal>
 
-      {/* Hero Image Fullscreen Modal */}
+      {/* Hero Image Fullscreen Modal — swipe down to close */}
       <Modal
         visible={showHeroImage}
         transparent
@@ -1412,28 +1537,14 @@ export default function PlaceDetailScreen({
         onRequestClose={() => setShowHeroImage(false)}
         statusBarTranslucent
       >
-        <View style={{ flex: 1, backgroundColor: "#000", justifyContent: "center", alignItems: "center" }}>
-          <View style={{ flexDirection: "row", justifyContent: "flex-end", position: "absolute", top: insets.top || 44, width: "100%", paddingHorizontal: 20, zIndex: 10 }}>
-            <TouchableOpacity onPress={() => setShowHeroImage(false)} style={styles.galleryNavButton}>
-              <IconSymbol name="xmark" size={20} color="#fff" />
-              <Text style={styles.galleryNavText}>{t('explore.close')}</Text>
-            </TouchableOpacity>
-          </View>
-          <ScrollView
-            maximumZoomScale={4}
-            minimumZoomScale={1}
-            bouncesZoom={true}
-            centerContent={true}
-            showsHorizontalScrollIndicator={false}
-            showsVerticalScrollIndicator={false}
-            contentContainerStyle={{ flexGrow: 1, justifyContent: "center", alignItems: "center" }}
-            style={{ width: SCREEN_WIDTH, height: SCREEN_HEIGHT }}
-          >
-            <Pressable>
-              <Image source={heroSource} style={{ width: SCREEN_WIDTH, height: SCREEN_HEIGHT * 0.8 }} resizeMode="contain" />
-            </Pressable>
-          </ScrollView>
-        </View>
+        <HeroImageViewer
+          heroSource={heroSource}
+          insetTop={insets.top || 44}
+          onClose={() => setShowHeroImage(false)}
+          screenWidth={SCREEN_WIDTH}
+          screenHeight={SCREEN_HEIGHT}
+          t={t}
+        />
       </Modal>
 
       {/* Menu Modal */}

@@ -47,6 +47,10 @@ _SCHEMA_PATCHES = [
     ("user_preferences", "notify_comments", "BOOLEAN NOT NULL DEFAULT TRUE", "BOOLEAN NOT NULL DEFAULT 1"),
     ("user_preferences", "notify_follows", "BOOLEAN NOT NULL DEFAULT TRUE", "BOOLEAN NOT NULL DEFAULT 1"),
     ("user_preferences", "notify_messages", "BOOLEAN NOT NULL DEFAULT TRUE", "BOOLEAN NOT NULL DEFAULT 1"),
+    # messages tablosu genişletme (hikaye yanıtı özellikleri)
+    ("messages", "parent_story_id", "INTEGER REFERENCES stories(id) ON DELETE SET NULL", "INTEGER"),
+    ("messages", "story_snapshot_url", "VARCHAR", "VARCHAR"),
+    ("messages", "status", "VARCHAR DEFAULT 'sent'", "VARCHAR DEFAULT 'sent'"),
 ]
 
 

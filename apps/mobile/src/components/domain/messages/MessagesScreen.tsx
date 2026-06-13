@@ -417,7 +417,7 @@ export default function MessagesScreen() {
                         {username}
                     </Text>
 
-                    {!isEditMode && (
+                    {!isEditMode && filteredConversations.length > 0 && (
                         <TouchableOpacity
                             style={styles.headerBtn}
                             hitSlop={8}

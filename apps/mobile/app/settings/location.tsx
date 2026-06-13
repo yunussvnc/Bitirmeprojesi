@@ -14,15 +14,13 @@ import { createTextStyle, spacing } from "@/src/constants/design";
 import { lightImpact, success } from "@/src/utils/haptics";
 import { useSettingsStore } from "@/src/store/useSettingsStore";
 import { useTranslation } from "react-i18next";
+import * as Location from "expo-location";
 
 export default function LocationSettingsScreen() {
   const { colors, isDark } = useTheme();
   const { t } = useTranslation();
   const router = useRouter();
   const insets = useSafeAreaInsets();
-
-  const includeLocation = useSettingsStore((s) => s.includeLocationInPosts);
-  const setIncludeLocation = useSettingsStore((s) => s.setIncludeLocationInPosts);
 
   const [permStatus, setPermStatus] = useState<string>("checking");
 
@@ -32,7 +30,6 @@ export default function LocationSettingsScreen() {
 
   const checkPermission = async () => {
     try {
-      const Location = await import("expo-location");
       const { status } = await Location.getForegroundPermissionsAsync();
       setPermStatus(status);
     } catch {
@@ -43,7 +40,6 @@ export default function LocationSettingsScreen() {
   const requestPermission = async () => {
     lightImpact();
     try {
-      const Location = await import("expo-location");
       const { status } = await Location.requestForegroundPermissionsAsync();
       setPermStatus(status);
       if (status === "granted") {
@@ -106,19 +102,6 @@ export default function LocationSettingsScreen() {
           )}
         </View>
 
-        <Section title={t("settings_location.preferences", "Konum Tercihleri")}>
-          <SettingsRow
-            label={t("settings_location.add_to_posts", "Paylaşımlarda konum bilgisi ekle")}
-            value={includeLocation}
-            switch
-            onValueChange={(v: boolean) => { setIncludeLocation(v); success(); }}
-            icon="mappin.and.ellipse"
-          />
-          <Text style={[styles.hint, { color: colors.text.tertiary }]}>
-            {t("settings_location.add_to_posts_desc", "Gönderi ve hikaye paylaşırken konumun otomatik olarak eklenmesini sağlar.")}
-          </Text>
-        </Section>
-
         <Section title={t("settings_location.map_usage", "Harita Kullanımı")}>
           <SettingsRow label={t("settings_location.nearby_places", "Yakındaki mekanlar")} value={permStatus === "granted" ? t("settings_location.active", "Aktif") : t("common.off", "Kapalı")} icon="building.2" />
           <SettingsRow label={t("settings_location.location_history", "Konum geçmişi")} value={t("settings_location.stored_on_device", "Cihazda saklanır")} icon="clock.arrow.circlepath" />
@@ -126,19 +109,6 @@ export default function LocationSettingsScreen() {
             {t("settings_location.history_desc", "Konum verileriniz yalnızca cihazınızda saklanır ve hiçbir zaman üçüncü taraflarla paylaşılmaz.")}
           </Text>
         </Section>
-
-        {Platform.OS === "ios" && (
-          <TouchableOpacity
-            style={[styles.settingsLink, { borderColor: colors.surface.border }]}
-            onPress={() => Linking.openSettings()}
-            activeOpacity={0.6}
-          >
-            <IconSymbol name="gear" size={18} color={colors.accent.primary} />
-            <Text style={[styles.settingsLinkText, { color: colors.accent.primary }]}>
-              {t("settings_location.open_settings", "Sistem Konum Ayarlarını Aç")}
-            </Text>
-          </TouchableOpacity>
-        )}
       </ScrollView>
     </View>
   );

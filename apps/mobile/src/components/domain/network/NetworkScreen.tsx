@@ -10,7 +10,7 @@ import {
   Animated,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { useRouter, useLocalSearchParams } from "expo-router";
+import { useRouter, useLocalSearchParams, useFocusEffect } from "expo-router";
 import { Screen } from "@/src/components/layout/Screen";
 import { Avatar, LoadingState, EmptyState } from "@/src/components/ui";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
@@ -25,6 +25,7 @@ import {
 } from "@/src/services/userService";
 import { handleApiError } from "@/src/utils/errorHandler";
 import { useAuthStore } from "@/src/store/useAuthStore";
+import { useAppStore } from "@/src/store/useAppStore";
 import { useTranslation } from "react-i18next";
 import debounce from "lodash/debounce";
 
@@ -60,6 +61,9 @@ export default function NetworkScreen() {
   const tabIndicatorX = useRef(new Animated.Value(0)).current;
 
   const userId = Number(params.id);
+
+  const blockedIds = useAppStore((s: any) => s.blockedUserIds || []);
+  const visibleUsers = users.filter((u) => !blockedIds.includes(u.id));
 
   const fetchUsers = useCallback(
     async (tab: TabKey, reset = false) => {
@@ -100,10 +104,12 @@ export default function NetworkScreen() {
     [userId, page]
   );
 
-  useEffect(() => {
-    fetchUsers(activeTab, true);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeTab, userId]);
+  useFocusEffect(
+    useCallback(() => {
+      fetchUsers(activeTab, true);
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [activeTab, userId])
+  );
 
   const switchTab = (tab: TabKey, index: number) => {
     lightImpact();
@@ -375,10 +381,10 @@ export default function NetworkScreen() {
           renderPrivacyBlocked()
         ) : (
           <FlatList
-            data={users}
+            data={visibleUsers}
             keyExtractor={(item) => `${item.id}`}
             renderItem={renderItem}
-            contentContainerStyle={users.length === 0 ? styles.empty : styles.list}
+            contentContainerStyle={visibleUsers.length === 0 ? styles.empty : styles.list}
             refreshControl={
               <RefreshControl
                 refreshing={refreshing}

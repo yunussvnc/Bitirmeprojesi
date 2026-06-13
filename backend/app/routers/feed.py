@@ -306,6 +306,11 @@ def get_post_comments(
     if blocked_ids:
         comments_query = comments_query.filter(models.PostComment.user_id.notin_(blocked_ids))
         
+    if current_user:
+        prefs = db.query(models.UserPreferences).filter(models.UserPreferences.user_id == current_user.id).first()
+        if prefs and getattr(prefs, "hide_offensive_words", True):
+            comments_query = comments_query.filter(models.PostComment.is_flagged == False)
+            
     total = comments_query.count()
     comments = comments_query.order_by(models.PostComment.created_at.desc()).offset((page - 1) * page_size).limit(page_size).all()
     

@@ -315,7 +315,7 @@ export default function SavedScreen() {
 
   if (tab === "places" && items.length === 0) {
     return (
-      <Screen onRefresh={handleRefresh} refreshing={refreshing} withTabBar>
+      <Screen onRefresh={handleRefresh} refreshing={refreshing}>
         <View style={styles.header}>
           <View style={styles.headerRow}>
             <TouchableOpacity
@@ -358,7 +358,7 @@ export default function SavedScreen() {
 
   if (tab === "posts" && postItems.length === 0) {
     return (
-      <Screen onRefresh={handleRefresh} refreshing={refreshing} withTabBar>
+      <Screen onRefresh={handleRefresh} refreshing={refreshing}>
         <View style={styles.header}>
           <View style={styles.headerRow}>
             <TouchableOpacity
@@ -400,7 +400,7 @@ export default function SavedScreen() {
   }
 
   return (
-    <Screen scrollable={false} withTabBar>
+    <Screen scrollable={false}>
       {tab === "places" ? (
         <FlatList
           ref={flatListRef}

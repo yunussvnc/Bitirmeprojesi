@@ -174,7 +174,15 @@ class ConnectionManager:
                 title = data.get("title", title)
                 body = data.get("message", body)
                 
-            asyncio.create_task(trigger_push_notification(user_id, title, body, data))
+            task = trigger_push_notification(user_id, title, body, data)
+            try:
+                # If we are in the main loop, this is perfectly safe
+                loop = asyncio.get_running_loop()
+                loop.create_task(task)
+            except RuntimeError:
+                # If there's no running loop, just run it
+                asyncio.run(task)
+
 
     async def _local_send_global(self, user_id: int, data: dict):
         """Sadece lokal RAM'deki websocket'e gönderir."""

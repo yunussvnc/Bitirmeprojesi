@@ -183,7 +183,27 @@ export const useSettingsStore = create<SettingsState>()(
 
       // Gizlilik
       isPrivateAccount: false,
-      setIsPrivateAccount: (v) => { set({ isPrivateAccount: v }); schedulePush(); },
+      setIsPrivateAccount: (v) => { 
+        set((state) => {
+          let newStoryAudience = state.storyReplyAudience;
+          let newCommentAudience = state.commentAllowedAudience;
+          
+          if (v) {
+             if (newStoryAudience === 'everyone') newStoryAudience = 'followers';
+             if (newCommentAudience === 'everyone') newCommentAudience = 'followers';
+          } else {
+             if (newStoryAudience === 'followers') newStoryAudience = 'everyone';
+             if (newCommentAudience === 'followers') newCommentAudience = 'everyone';
+          }
+          
+          return { 
+            isPrivateAccount: v, 
+            storyReplyAudience: newStoryAudience,
+            commentAllowedAudience: newCommentAudience
+          };
+        }); 
+        schedulePush(); 
+      },
 
       // Yakın Arkadaşlar
       closeFriendIds: [],
@@ -258,12 +278,17 @@ export const useSettingsStore = create<SettingsState>()(
         set({ _isSyncing: true });
         try {
           const prefs = await apiGet<BackendPrefs>("/auth/me/preferences");
+          let validatedStoryReplyAudience = prefs.story_reply_audience as Audience;
+          if (prefs.is_private_account && validatedStoryReplyAudience === 'everyone') {
+            validatedStoryReplyAudience = 'followers';
+          }
+
           set({
             isPrivateAccount: prefs.is_private_account,
             defaultCommentsDisabled: prefs.default_comments_disabled,
             commentAllowedAudience: prefs.comment_allowed_audience as Audience,
             unknownMessageRequests: prefs.unknown_message_requests,
-            storyReplyAudience: prefs.story_reply_audience as Audience,
+            storyReplyAudience: validatedStoryReplyAudience,
             showReadReceipts: prefs.show_read_receipts,
             storySaveToArchive: prefs.story_save_to_archive,
             storySaveToCameraRoll: prefs.story_save_to_camera_roll,

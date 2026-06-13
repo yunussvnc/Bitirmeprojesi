@@ -408,6 +408,7 @@ def search_places(
     city: str = None,
     page: int = 1,
     page_size: int = 20,
+    minimal: bool = False,
 ):
     """Mekan arama — isim, kategori, şehir filtreleri."""
     query = db.query(models.Place)
@@ -420,7 +421,8 @@ def search_places(
     total = query.count()
     offset = (page - 1) * page_size
     items = query.order_by(models.Place.average_rating.desc()).offset(offset).limit(page_size).all()
-    items = _enrich_places_with_stats(db, items)
+    if not minimal:
+        items = _enrich_places_with_stats(db, items)
     return items, total
 
 
@@ -1375,9 +1377,18 @@ def get_feed_stories(
             )
         )
 
+        # Kullanıcının kendisinden hikayesini gizlediği kişilerin listesi
+        # (Eğer hikaye sahibi beni gizli listesine eklediyse, o hikayeyi göremem)
+        hidden_by_sq = (
+            db.query(models.StoryHiddenUser.user_id)
+            .filter(models.StoryHiddenUser.hidden_user_id == current_user_id)
+            .subquery()
+        )
+
         base = db.query(models.Story).filter(
             models.Story.expires_at > now,
             privacy_filter,
+            ~models.Story.user_id.in_(hidden_by_sq),
         )
 
         if filter_mode == "following":
@@ -1405,6 +1416,32 @@ def get_feed_stories(
 
 
 # --- FOLLOW (Kademe 5) ---
+
+def get_hidden_story_users(db: Session, user_id: int):
+    """Kullanıcının hikayesini gizlediği kişileri getirir."""
+    hidden_users = (
+        db.query(models.User)
+        .join(models.StoryHiddenUser, models.StoryHiddenUser.hidden_user_id == models.User.id)
+        .filter(models.StoryHiddenUser.user_id == user_id)
+        .all()
+    )
+    return hidden_users
+
+def update_hidden_story_users(db: Session, user_id: int, hidden_user_ids: list[int]):
+    """Kullanıcının hikayesini gizlediği kişilerin listesini günceller."""
+    # Eski listeyi sil
+    db.query(models.StoryHiddenUser).filter(models.StoryHiddenUser.user_id == user_id).delete()
+    
+    # Yeni listeyi ekle
+    new_hidden_users = [
+        models.StoryHiddenUser(user_id=user_id, hidden_user_id=h_id)
+        for h_id in hidden_user_ids
+    ]
+    if new_hidden_users:
+        db.add_all(new_hidden_users)
+        
+    db.commit()
+    return get_hidden_story_users(db, user_id)
 
 def toggle_follow(db: Session, follower_id: int, following_id: int) -> tuple[bool, bool]:
     """Takip et / takipten çık. Returns (is_following, was_created).

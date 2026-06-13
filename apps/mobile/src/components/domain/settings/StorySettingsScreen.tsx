@@ -39,15 +39,11 @@ export default function StorySettingsScreen() {
   const setStorySaveToCameraRoll = useSettingsStore((s) => s.setStorySaveToCameraRoll);
   const setStoryReply = useSettingsStore((s) => s.setStoryReplyAudience);
 
-  const replyOptions: Audience[] = ["everyone", "followers", "off"];
+  const replyOptions: Audience[] = isPrivate ? ["followers", "off"] : ["everyone", "followers", "off"];
 
   const handleHideFrom = () => {
     lightImpact();
-    Alert.alert(
-      t("settings_extra.hide_story"),
-      t("settings_extra.hide_story_desc"),
-      [{ text: t("common.ok") }]
-    );
+    router.push("/settings/hide-story" as any);
   };
 
   return (
@@ -84,16 +80,6 @@ export default function StorySettingsScreen() {
           <Text style={[styles.hint, { color: colors.text.tertiary }]}>
             {t("settings_extra.story_save_archive_hint")}
           </Text>
-          <SettingsRow
-            label={t("settings_extra.story_save_roll")}
-            value={storySaveToCameraRoll}
-            switch
-            onValueChange={(v: boolean) => { setStorySaveToCameraRoll(v); success(); }}
-            icon="photo"
-          />
-          <Text style={[styles.hint, { color: colors.text.tertiary }]}>
-            {t("settings_extra.story_save_roll_hint")}
-          </Text>
         </Section>
 
         <Section title={t("settings_extra.story_section_reply")}>
@@ -122,14 +108,6 @@ export default function StorySettingsScreen() {
           ))}
         </Section>
 
-        <Section title={t("settings_extra.story_section_location")}>
-          <SettingsRow label={t("settings_extra.story_location_label")} value={isPrivate ? t("settings_extra.story_location_hidden") : t("settings_extra.story_location_visible")} icon="location" />
-          <Text style={[styles.hint, { color: colors.text.tertiary }]}>
-            {isPrivate
-              ? t("settings_extra.story_location_hint_private")
-              : t("settings_extra.story_location_hint_public")}
-          </Text>
-        </Section>
       </ScrollView>
     </View>
   );

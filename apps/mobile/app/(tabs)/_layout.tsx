@@ -138,12 +138,7 @@ export default function TabsLayout() {
             listeners: () => ({ tabPress: () => selection() }),
           }}
         />
-        <Tabs.Screen
-          name="saved"
-          options={{
-            href: null,
-          }}
-        />
+
         <Tabs.Screen
           name="messages/archive"
           options={{

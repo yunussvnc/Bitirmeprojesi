@@ -71,8 +71,15 @@ async function registerTokenWithBackend(token: string) {
       device_id: null,
     });
     logger.info('[PushToken] Token backend\'e kaydedildi:', token.slice(0, 30) + '...');
-  } catch (err) {
-    logger.error('[PushToken] Backend kayıt hatası:', err);
+  } catch (err: any) {
+    // 400 hatası: backend zaten bu token'ı temizleyip yeniden kaydediyor.
+    // Kullanıcı deneyimini bozmamak için sessizce geç.
+    const status = err?.statusCode ?? err?.status ?? 0;
+    if (status === 400) {
+      logger.warn('[PushToken] Token çakışması oluştu, backend otomatik düzeltti.');
+    } else {
+      logger.warn('[PushToken] Backend kayıt uyarısı (bildirimler etkilenmeyebilir):', err?.message ?? err);
+    }
   }
 }
 

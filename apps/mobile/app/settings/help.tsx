@@ -28,7 +28,7 @@ export default function HelpCenterScreen() {
 
   const handleEmail = () => {
     lightImpact();
-    Linking.openURL("mailto:destek@asemos.com?subject=Asemos%20Destek%20Talebi");
+    Linking.openURL("mailto:asemos.tr@gmail.com?subject=Asemos%20Destek%20Talebi");
   };
 
   return (
@@ -77,7 +77,7 @@ export default function HelpCenterScreen() {
             </View>
             <View style={styles.contactInfo}>
               <Text style={[styles.contactTitle, { color: colors.text.primary }]}>{t("settings_help.report_problem", "Hata Bildir / Destek Talebi")}</Text>
-              <Text style={[styles.contactDesc, { color: colors.text.tertiary }]}>destek@asemos.com</Text>
+              <Text style={[styles.contactDesc, { color: colors.text.tertiary }]}>asemos.tr@gmail.com</Text>
             </View>
             <IconSymbol name="chevron.right" size={16} color={colors.text.tertiary} />
           </TouchableOpacity>

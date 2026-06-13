@@ -34,6 +34,7 @@ import { lightImpact, success } from "@/src/utils/haptics";
 import { timeAgo } from "@/src/utils/timeAgo";
 import { deleteComment } from "@/src/services/moderationService";
 import { useAuthStore } from "@/src/store/useAuthStore";
+import { useSettingsStore } from "@/src/store/useSettingsStore";
 import { useTranslation } from "react-i18next";
 
 const SCREEN_HEIGHT = Dimensions.get("window").height;
@@ -184,7 +185,11 @@ export function CommentBottomSheet({ visible, onClose, postId, onCommentAdded }:
     setLoading(true);
     try {
       const res = await getComments(postId, 1, 50);
-      setComments(res.items);
+      const hideOffensiveWords = useSettingsStore.getState().hideOffensiveWords;
+      const filtered = hideOffensiveWords 
+        ? res.items.filter((c: PostComment) => !c.is_flagged)
+        : res.items;
+      setComments(filtered);
     } catch (e) {
       handleApiError(e);
     } finally {

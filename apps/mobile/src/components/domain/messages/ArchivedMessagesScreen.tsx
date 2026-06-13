@@ -225,7 +225,7 @@ export default function ArchivedMessagesScreen() {
                 </Text>
 
                 {/* Boş görünüm için veya Düzenle butonu */}
-                {!isEditMode && (
+                {!isEditMode && conversations.length > 0 && (
                     <TouchableOpacity
                         style={styles.headerBtn}
                         hitSlop={8}

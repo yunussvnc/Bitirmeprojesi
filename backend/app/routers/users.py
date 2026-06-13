@@ -208,9 +208,28 @@ def get_user_profile(
         if block_exists:
             raise HTTPException(status_code=404, detail="Kullanıcı bulunamadı.")
             
-    followers_count = len(crud.get_follower_ids(db, user_id))
-    following_count = len(crud.get_following_ids(db, user_id))
-    friends_count = len(crud.get_mutual_friend_ids(db, user_id))
+    followers_count = db.query(models.Follow).filter(
+        models.Follow.following_id == user_id,
+        models.Follow.status == "accepted"
+    ).count()
+    following_count = db.query(models.Follow).filter(
+        models.Follow.follower_id == user_id,
+        models.Follow.status == "accepted"
+    ).count()
+    # Karşılıklı takip (arkadaş) sayısı: subquery ile tam SQL'de hesaplanır
+    following_ids_subq = db.query(models.Follow.following_id).filter(
+        models.Follow.follower_id == user_id,
+        models.Follow.status == "accepted"
+    ).subquery()
+    friends_count = db.query(models.Follow).filter(
+        models.Follow.following_id == user_id,
+        models.Follow.status == "accepted",
+        models.Follow.follower_id.in_(following_ids_subq)
+    ).count()
+    place_follow_count = db.query(models.PlaceFollow).filter(
+        models.PlaceFollow.user_id == user_id
+    ).count()
+
     
     # Dummygram-style: follow_status hesapla (pending, accepted, veya None)
     follow_status = None
@@ -234,6 +253,7 @@ def get_user_profile(
         followers_count=followers_count,
         following_count=following_count,
         friends_count=friends_count,
+        place_follow_count=place_follow_count,
         is_following=is_following,
         follow_status=follow_status,
     )
@@ -273,19 +293,22 @@ def get_user_stats_endpoint(
 
 
 @router.post("/users/{user_id}/follow", dependencies=[Depends(follow_rate_limiter)])
-def toggle_follow_user(
+async def toggle_follow_user(
     user_id: int,
     db: Session = Depends(get_db),
     current_user: models.User = Depends(get_current_user),
 ):
     """Kullanıcıyı takip et / takibi bırak (toggle). Takip bildirim gönderir."""
+    # Run DB-blocking target fetch in a fast way
     target = crud.get_user_by_id(db, user_id)
     if not target:
         raise HTTPException(status_code=404, detail="Kullanıcı bulunamadı.")
     if user_id == current_user.id:
         raise HTTPException(status_code=400, detail="Kendinizi takip edemezsiniz.")
     
-    is_following, was_created = crud.toggle_follow(db, current_user.id, user_id)
+    # Run heavy toggle logic in a thread pool so it doesn't block asyncio
+    from fastapi.concurrency import run_in_threadpool
+    is_following, was_created = await run_in_threadpool(crud.toggle_follow, db, current_user.id, user_id)
     
     # determine status string for notifications/UI
     follow_row = db.query(models.Follow).filter(
@@ -314,8 +337,11 @@ def toggle_follow_user(
         db.commit()
     
     # Dummygram: Anlık UI güncellemesi için güncel followers_count ve friends_count dön
-    followers_count = len(crud.get_follower_ids(db, user_id))
-    friends_count = len(crud.get_mutual_friend_ids(db, user_id))
+    def _get_counts():
+        return len(crud.get_follower_ids(db, user_id)), len(crud.get_mutual_friend_ids(db, user_id))
+        
+    followers_count, friends_count = await run_in_threadpool(_get_counts)
+    
     return {
         "status": follow_status,
         "followers_count": followers_count,
@@ -484,3 +510,28 @@ def toggle_block_user(
         if crud.is_following(db, user_id, current_user.id):
             crud.toggle_follow(db, user_id, current_user.id)
     return {"blocked": is_blocked}
+
+
+@router.get("/users/me/hidden-story-users", response_model=schemas.StoryHiddenUsersResponse)
+def get_hidden_story_users(
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(get_current_user),
+):
+    """Kullanıcının hikayesini gizlediği kişileri getirir."""
+    hidden_users = crud.get_hidden_story_users(db, current_user.id)
+    # _enrich_user_summary kullanarak user_summary formatına çevirelim
+    items = [_enrich_user_summary(db, user, current_user.id) for user in hidden_users]
+    return {"hidden_users": items}
+
+
+@router.post("/users/me/hidden-story-users", response_model=schemas.StoryHiddenUsersResponse)
+def update_hidden_story_users(
+    data: schemas.StoryHiddenUsersUpdate,
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(get_current_user),
+):
+    """Kullanıcının hikayesini gizlediği kişilerin listesini günceller."""
+    # Listeyi crud fonksiyonu ile güncelle
+    hidden_users = crud.update_hidden_story_users(db, current_user.id, data.hidden_user_ids)
+    items = [_enrich_user_summary(db, user, current_user.id) for user in hidden_users]
+    return {"hidden_users": items}

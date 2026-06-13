@@ -419,7 +419,7 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
         </View>
 
         {/* Mekan Hikayeleri */}
-        {!loading && (
+        {!loading && mapShowStories && (
           <View style={styles.placeStoriesSection}>
             <View style={[styles.sectionHeader, { borderBottomColor: colors.surface.border }]}>
               <IconSymbol name="camera.fill" size={18} color={colors.text.secondary} />
@@ -491,72 +491,62 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
           </View>
         )}
 
-        {/* Gönderiler başlığı */}
-        <View style={[styles.sectionHeader, { borderBottomColor: colors.surface.border }]}>
-          <IconSymbol name="square.grid.2x2.fill" size={18} color={colors.text.secondary} />
-          <Text style={[styles.sectionHeaderLabel, { color: colors.text.secondary }]}>{t('explore.place_posts')}</Text>
-        </View>
+        {/* Gönderiler */}
+        {mapShowPosts && (
+          <>
+            <View style={[styles.sectionHeader, { borderBottomColor: colors.surface.border }]}>
+              <IconSymbol name="square.grid.2x2.fill" size={18} color={colors.text.secondary} />
+              <Text style={[styles.sectionHeaderLabel, { color: colors.text.secondary }]}>{t('explore.place_posts')}</Text>
+            </View>
 
-        {/* Grid */}
-        <ScrollView
-          style={styles.gridScroll}
-          contentContainerStyle={styles.gridContent}
-          showsVerticalScrollIndicator={false}
-          nestedScrollEnabled
-        >
-          {loading ? (
-            <View style={styles.loadingWrap}>
-              <ActivityIndicator size="small" color={colors.accent.primary} />
-            </View>
-          ) : showPreferencesHint ? (
-            <View style={styles.emptyWrap}>
-              <IconSymbol name="photo.on.rectangle.angled" size={48} color={colors.text.tertiary} />
-              <Text style={[styles.emptyText, { color: colors.text.tertiary }]}>
-                {t('explore.open_preferences')}
-              </Text>
-            </View>
-          ) : isEmpty ? (
-            <View style={styles.emptyWrap}>
-              <IconSymbol name="photo.on.rectangle.angled" size={48} color={colors.text.tertiary} />
-              <Text style={[styles.emptyText, { color: colors.text.tertiary }]}>
-                {t('explore.no_posts_here')}
-              </Text>
-            </View>
-          ) : photoPosts.length > 0 ? (
-            <View style={styles.grid}>
-              {gridItems.slice(0, 12).map((item, idx) => (
-                <TouchableOpacity
-                  key={`${item.postId}-${idx}`}
-                  style={[styles.cell, { width: CELL_SIZE, height: CELL_SIZE }]}
-                  onPress={() => {
-                    lightImpact();
-                    const post = posts.find((p) => p.id === item.postId);
-                    if (post) setSelectedPostId(post.id);
-                  }}
-                  activeOpacity={0.9}
-                >
-                  <Image
-                    source={{ uri: item.url }}
-                    style={StyleSheet.absoluteFill}
-                    contentFit="cover"
-                    cachePolicy="memory-disk"
-                  />
-                  {item.isVideo && (
-                    <View style={styles.videoBadge}>
-                      <IconSymbol name="play.fill" size={14} color="#fff" />
-                    </View>
-                  )}
-                </TouchableOpacity>
-              ))}
-            </View>
-          ) : (
-            <View style={styles.emptyWrap}>
-              <Text style={[styles.emptyText, { color: colors.text.tertiary }]}>
-                {t('explore.no_posts')}
-              </Text>
-            </View>
-          )}
-        </ScrollView>
+            <ScrollView
+              style={styles.gridScroll}
+              contentContainerStyle={styles.gridContent}
+              showsVerticalScrollIndicator={false}
+              nestedScrollEnabled
+            >
+              {loading ? (
+                <View style={styles.loadingWrap}>
+                  <ActivityIndicator size="small" color={colors.accent.primary} />
+                </View>
+              ) : photoPosts.length > 0 ? (
+                <View style={styles.grid}>
+                  {gridItems.slice(0, 12).map((item, idx) => (
+                    <TouchableOpacity
+                      key={`${item.postId}-${idx}`}
+                      style={[styles.cell, { width: CELL_SIZE, height: CELL_SIZE }]}
+                      onPress={() => {
+                        lightImpact();
+                        const post = posts.find((p) => p.id === item.postId);
+                        if (post) setSelectedPostId(post.id);
+                      }}
+                      activeOpacity={0.9}
+                    >
+                      <Image
+                        source={{ uri: item.url }}
+                        style={StyleSheet.absoluteFill}
+                        contentFit="cover"
+                        cachePolicy="memory-disk"
+                      />
+                      {item.isVideo && (
+                        <View style={styles.videoBadge}>
+                          <IconSymbol name="play.fill" size={14} color="#fff" />
+                        </View>
+                      )}
+                    </TouchableOpacity>
+                  ))}
+                </View>
+              ) : (
+                <View style={styles.emptyWrap}>
+                  <IconSymbol name="photo.on.rectangle.angled" size={48} color={colors.text.tertiary} />
+                  <Text style={[styles.emptyText, { color: colors.text.tertiary }]}>
+                    {t('explore.no_posts_here')}
+                  </Text>
+                </View>
+              )}
+            </ScrollView>
+          </>
+        )}
 
         {storyViewerIndex !== null && (
           <StoryViewerModal
