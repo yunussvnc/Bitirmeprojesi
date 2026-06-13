@@ -2283,6 +2283,7 @@ def get_story_reactions(db: Session, story_id: int) -> list[models.StoryReaction
 
 def get_story_reaction_counts(db: Session, story_id: int) -> dict:
     """Emoji bazlı tepki sayılarını getirir: {'❤️': 5, '🔥': 3}"""
+    # pyrefly: ignore [missing-import]
     from sqlalchemy import func as sqlfunc
     rows = (
         db.query(models.StoryReaction.emoji, sqlfunc.count(models.StoryReaction.id))

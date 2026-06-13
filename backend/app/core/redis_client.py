@@ -24,6 +24,8 @@ async def connect_redis():
             encoding="utf-8",
             decode_responses=True, # Verileri string olarak döndür (byte yerine)
             max_connections=50,    # Bağlantı havuzu
+            health_check_interval=30, # Cloud Redis için bağlantı kopmasını engeller
+            socket_keepalive=True     # TCP seviyesinde canlı tutar
         )
         # Bağlantıyı test et
         await redis_client.ping()
