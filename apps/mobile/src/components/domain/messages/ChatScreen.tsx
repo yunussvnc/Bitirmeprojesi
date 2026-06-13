@@ -586,9 +586,15 @@ export default function ChatScreen() {
             status: "sent",
         };
         setMessages((prev) => [...prev, newMsg]);
-        // İzin sayacını optimistik olarak artır
+        // İzin sayacını optimistik olarak artır (Sadece karşılıklı takip değilse kısıtla)
         if (msgPermission) {
-            setMsgPermission(prev => prev ? { ...prev, messages_sent_count: prev.messages_sent_count + 1, can_send: false, awaiting_reply: true } : prev);
+            setMsgPermission(prev => {
+                if (!prev) return prev;
+                if (prev.reason === "mutual_follow") {
+                    return { ...prev, messages_sent_count: prev.messages_sent_count + 1 };
+                }
+                return { ...prev, messages_sent_count: prev.messages_sent_count + 1, can_send: false, awaiting_reply: true };
+            });
         }
         // Store'a ve conversations'a yaz
         if (chatId) {
