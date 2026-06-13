@@ -144,24 +144,13 @@ class OmnichannelManager:
                 # Fire and forget (main loop)
                 loop.create_task(provider.send(user_id, ws_data, push_extra))
         except RuntimeError:
-            # Sync context — asyncio.run ile main thread'de hızlıca dispatch et
-            # PushProvider silindiği için artık InAppProvider anında döner (create_task)
-            # ve herhangi bir IO beklemesi yapmaz.
-            import threading
-
-            def _run_push():
-                import asyncio as _asyncio
-                _loop = _asyncio.new_event_loop()
-                _asyncio.set_event_loop(_loop)
-                try:
-                    for provider in providers:
-                        _loop.run_until_complete(provider.send(user_id, ws_data, push_extra))
-                    # Wait for pending tasks to start
-                    _loop.run_until_complete(_asyncio.sleep(0))
-                finally:
-                    _loop.close()
-
-            t = threading.Thread(target=_run_push, daemon=True)
-            t.start()
+            # Sync context — FastAPI's threadpool (anyio) üzerinden main loop'a dispatch et
+            try:
+                import anyio.from_thread
+                for provider in providers:
+                    anyio.from_thread.run(provider.send, user_id, ws_data, push_extra)
+            except Exception as e:
+                import logging
+                logging.getLogger("asemos").error(f"Sync notification dispatch failed: {e}")
 
         return notif

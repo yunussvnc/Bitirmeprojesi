@@ -50,3 +50,4 @@ websockets==16.0
 psycopg2-binary==2.9.9
 redis>=5.0.0
 blurhash-python>=1.2.0
+numpy

@@ -61,10 +61,6 @@ export default function UserProfileScreen() {
   const [refreshing, setRefreshing] = useState(false);
   const [followLoading, setFollowLoading] = useState(false);
   const [messageLoading, setMessageLoading] = useState(false);
-  const [selectedPost, setSelectedPost] = useState<Post | null>(null);
-  const [commentPostId, setCommentPostId] = useState<number | null>(null);
-  const [sharePostForSheet, setSharePostForSheet] = useState<Post | null>(null);
-  const [postLoading, setPostLoading] = useState(false);
   const [activeTab, setActiveTab] = useState<"posts" | "tagged">("posts");
 
   const userId = id ? parseInt(id, 10) : NaN;
@@ -206,49 +202,10 @@ export default function UserProfileScreen() {
     }
   }, [profile, router]);
 
-  const handlePostTap = useCallback(async (postId: number) => {
+  const handlePostTap = useCallback((postId: number) => {
     lightImpact();
-    if (isOwnProfile) {
-      // If it's self, can just go to single post view or similar if available, but modal is fine
-    }
-    setPostLoading(true);
-    try {
-      const fullPost = await getPost(postId);
-      setSelectedPost(fullPost);
-    } catch (e) {
-      handleApiError(e);
-    } finally {
-      setPostLoading(false);
-    }
-  }, [isOwnProfile]);
-
-  const handleLike = useCallback(async () => {
-    if (!selectedPost) return;
-    const prev = selectedPost;
-    setSelectedPost(p =>
-      p ? { ...p, is_liked: !p.is_liked, like_count: p.like_count + (p.is_liked ? -1 : 1) } : p
-    );
-    try {
-      const res = await toggleLike(selectedPost.id);
-      setSelectedPost(p =>
-        p ? { ...p, is_liked: res.liked, like_count: res.like_count } : p
-      );
-    } catch (e) {
-      setSelectedPost(prev);
-      handleApiError(e);
-    }
-  }, [selectedPost]);
-
-  const handleCommentAdded = useCallback(() => {
-    setSelectedPost(p =>
-      p ? { ...p, comment_count: p.comment_count + 1 } : p
-    );
-  }, []);
-
-  const closePostModal = useCallback(() => {
-    setSelectedPost(null);
-    setCommentPostId(null);
-  }, []);
+    router.push(`/p/post/${postId}` as any);
+  }, [router]);
 
   const displayName =
     profile?.first_name || profile?.username || profile?.email || t('profile.user');
@@ -546,72 +503,6 @@ export default function UserProfileScreen() {
         )}
 
       </ScrollView>
-
-      {/* ── Post Loading Overlay ── */}
-      {postLoading && (
-        <View style={styles.loadingOverlay}>
-          <ActivityIndicator size="large" color={colors.accent.primary} />
-        </View>
-      )}
-
-      {/* ── Post Detail Modal ── */}
-      {selectedPost && (
-        <Modal
-          visible
-          transparent
-          animationType="fade"
-          onRequestClose={closePostModal}
-          statusBarTranslucent
-        >
-          <Pressable
-            style={[styles.postModalOverlay, { backgroundColor: colors.overlay?.dark || 'rgba(0,0,0,0.6)' }]}
-            onPress={closePostModal}
-          >
-            <Pressable
-              style={[styles.postModalContent, { backgroundColor: colors.background.primary }]}
-              onPress={(e) => e.stopPropagation()}
-            >
-              <TouchableOpacity
-                style={styles.postModalClose}
-                onPress={() => {
-                  lightImpact();
-                  closePostModal();
-                }}
-                activeOpacity={0.8}
-                hitSlop={8}
-              >
-                <View style={[styles.postModalCloseBg, { backgroundColor: colors.surface.elevated }]}>
-                  <IconSymbol name="xmark" size={16} color={colors.text.primary} />
-                </View>
-              </TouchableOpacity>
-              <FeedCard
-                post={selectedPost}
-                onAuthorPress={() => { }}
-                onPlacePress={() => {
-                  closePostModal();
-                  if (selectedPost.place_id)
-                    router.push(`/place/${selectedPost.place_id}` as any);
-                }}
-                onLike={handleLike}
-                onComment={() => setCommentPostId(selectedPost.id)}
-                onShare={() => setSharePostForSheet(selectedPost)}
-              />
-            </Pressable>
-            <CommentBottomSheet
-              visible={commentPostId != null}
-              postId={commentPostId ?? 0}
-              onClose={() => setCommentPostId(null)}
-              onCommentAdded={() => handleCommentAdded()}
-            />
-          </Pressable>
-        </Modal>
-      )}
-
-      <SharePostSheet
-        visible={!!sharePostForSheet}
-        onClose={() => setSharePostForSheet(null)}
-        post={sharePostForSheet}
-      />
     </View>
   );
 }
