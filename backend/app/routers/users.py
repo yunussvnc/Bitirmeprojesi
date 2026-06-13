@@ -602,8 +602,8 @@ def get_user_tagged_posts(
     posts = query.offset((page - 1) * page_size).limit(page_size).all()
     
     items = []
-    from app.routers.feed import format_post_response
+    from app.routers.feed import _post_to_schema
     for p in posts:
-        items.append(format_post_response(db, p, current_uid))
+        items.append(_post_to_schema(p, db, current_uid))
         
     return {"items": items, "total": total, "page": page, "page_size": page_size}
