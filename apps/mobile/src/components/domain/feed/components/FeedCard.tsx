@@ -131,18 +131,8 @@ export function FeedCard({
 
   const imageWidth = screenWidth;
 
-  /** Tek bir medya için gerçek boyutunu kullanarak yükseklik hesapla */
-  function getMediaHeight(media: typeof firstMedia): number {
-    if (media?.width && media?.height && media.width > 0 && media.height > 0) {
-      return imageWidth * (media.height / media.width);
-    }
-    return imageWidth; // boyut bilgisi yoksa kare (1:1) fallback
-  }
-
-  // Carousel'da tüm slaytların en büyük yüksekliğini al (tutarlı kart boyu)
-  const imageHeight = isCarousel
-    ? Math.max(...mediaList.map(getMediaHeight))
-    : getMediaHeight(firstMedia);
+  // Tüm fotoğraflar (tekil veya carousel) sabit 1:1 (Kare) olarak gösterilecek.
+  const imageHeight = imageWidth;
 
   const handleLike = useCallback(() => {
     mediumImpact();
@@ -243,13 +233,12 @@ export function FeedCard({
                 style={{ width: imageWidth, height: imageHeight }}
               >
                 {mediaList.map((media, idx) => {
-                  const slideHeight = getMediaHeight(media);
                   return (
                     <View key={idx} style={{ width: imageWidth, height: imageHeight, alignItems: "center", justifyContent: "center" }}>
                       <Image
                         source={{ uri: media.media_url }}
-                        style={{ width: imageWidth, height: slideHeight }}
-                        contentFit="contain"
+                        style={{ width: imageWidth, height: imageHeight }}
+                        contentFit="cover"
                         cachePolicy="memory-disk"
                       />
                     </View>
@@ -292,7 +281,7 @@ export function FeedCard({
                 }}
               >
                 {displayUrl ? (
-                  <Image source={{ uri: displayUrl }} style={{ width: imageWidth, height: imageHeight }} contentFit="contain" cachePolicy="memory-disk" />
+                  <Image source={{ uri: displayUrl }} style={{ width: imageWidth, height: imageHeight }} contentFit="cover" cachePolicy="memory-disk" />
                 ) : (
                   <View style={[{ width: imageWidth, height: imageHeight }, styles.imagePlaceholder, { backgroundColor: colors.surface.elevated }]}>
                     <IconSymbol name="photo" size={40} color={colors.text.tertiary} />

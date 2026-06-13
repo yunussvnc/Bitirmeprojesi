@@ -16,6 +16,7 @@ import {
   Dimensions,
 } from 'react-native';
 import { Image as ExpoImage } from 'expo-image';
+import ViewShot from 'react-native-view-shot';
 import {
   Gesture,
   GestureDetector,
@@ -47,21 +48,22 @@ export interface ImageCropperProps {
   imageHeight?: number;
   /** Container height for the cropper view */
   containerHeight: number;
-  /** Currently selected aspect ratio */
-  aspectRatio: AspectRatioOption;
-  /** Callback to change aspect ratio */
-  onAspectRatioChange: (ratio: AspectRatioOption) => void;
 }
 
-export function ImageCropper({
+export interface ImageCropperRef {
+  cropImage: () => Promise<string | null>;
+}
+
+export const ImageCropper = React.forwardRef<ImageCropperRef, ImageCropperProps>(({
   imageUri,
   imageWidth = 1080,
   imageHeight = 1080,
   containerHeight,
-  aspectRatio,
-  onAspectRatioChange,
-}: ImageCropperProps) {
+}, ref) => {
   const { colors } = useTheme();
+
+  // Sabit 1:1 (Kare) oranı zorunlu kılıyoruz
+  const aspectRatio = { label: '1:1', value: [1, 1] } as AspectRatioOption;
 
   // Gesture values
   const scale = useSharedValue(1);
@@ -70,6 +72,22 @@ export function ImageCropper({
   const translateY = useSharedValue(0);
   const savedTranslateX = useSharedValue(0);
   const savedTranslateY = useSharedValue(0);
+
+  const viewShotRef = React.useRef<any>(null);
+
+  React.useImperativeHandle(ref, () => ({
+    cropImage: async () => {
+      try {
+        if (viewShotRef.current && viewShotRef.current.capture) {
+          const uri = await viewShotRef.current.capture();
+          return uri;
+        }
+      } catch (err) {
+        console.error("ViewShot capture failed:", err);
+      }
+      return null;
+    }
+  }));
 
   // Calculate crop frame dimensions
   const cropFrame = useMemo(() => {
@@ -197,7 +215,9 @@ export function ImageCropper({
     <View style={[styles.container, { height: containerHeight, backgroundColor: '#000' }]}>
       {/* Crop viewport */}
       <View style={styles.viewportWrap}>
-        <View
+        <ViewShot
+          ref={viewShotRef}
+          options={{ format: "jpg", quality: 0.9 }}
           style={[
             styles.cropViewport,
             { width: cropFrame.width, height: cropFrame.height },
@@ -228,7 +248,7 @@ export function ImageCropper({
             <View style={[styles.gridLineV, { left: '33.33%' }]} />
             <View style={[styles.gridLineV, { left: '66.66%' }]} />
           </View>
-        </View>
+        </ViewShot>
 
         {/* Scrim overlays — darkened areas outside crop */}
         <View style={[styles.scrimTop, { height: scrimTopH }]} />
@@ -236,45 +256,9 @@ export function ImageCropper({
         <View style={[styles.scrimLeft, { top: scrimTopH, height: cropFrame.height, width: scrimSideW }]} />
         <View style={[styles.scrimRight, { top: scrimTopH, height: cropFrame.height, width: scrimSideW }]} />
       </View>
-
-      {/* Aspect Ratio Pills */}
-      <View style={styles.ratioBar}>
-        {POST_ASPECT_RATIOS.map((opt) => {
-          const active = aspectRatio.label === opt.label;
-          return (
-            <TouchableOpacity
-              key={opt.label}
-              style={[
-                styles.ratioPill,
-                active && { backgroundColor: colors.accent.primary },
-                !active && { backgroundColor: 'rgba(255,255,255,0.12)' },
-              ]}
-              onPress={() => {
-                mediumImpact();
-                onAspectRatioChange(opt);
-              }}
-              activeOpacity={0.8}
-            >
-              <IconSymbol
-                name={opt.icon as any}
-                size={13}
-                color={active ? '#000' : 'rgba(255,255,255,0.75)'}
-              />
-              <Text
-                style={[
-                  styles.ratioLabel,
-                  { color: active ? '#000' : 'rgba(255,255,255,0.75)' },
-                ]}
-              >
-                {opt.label}
-              </Text>
-            </TouchableOpacity>
-          );
-        })}
-      </View>
     </View>
   );
-}
+});
 
 const styles = StyleSheet.create({
   container: {

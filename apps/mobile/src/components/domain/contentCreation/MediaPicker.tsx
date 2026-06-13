@@ -7,7 +7,7 @@
  * Instagram/TikTok seviyesinde Premium deneyim, kendi tasarım dilimiz.
  */
 
-import React, { useState, useCallback, useEffect, useMemo } from 'react';
+import React, { useState, useCallback, useEffect, useMemo, useRef } from 'react';
 import {
   View,
   Text,
@@ -32,6 +32,7 @@ import type { MediaItem, ContentType } from '@/src/contentCreation/types';
 import { MAX_MEDIA_COUNT } from '@/src/contentCreation/config';
 import { CustomGalleryGrid } from './CustomGalleryGrid';
 import { EmbeddedCamera } from './EmbeddedCamera';
+import { ImageCropper, ImageCropperRef } from './ImageCropper';
 import { useTranslation } from "react-i18next";
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
@@ -74,13 +75,10 @@ export function MediaPicker({
   const [lastPhotoUri, setLastPhotoUri] = useState<string | null>(null);
   const [isMultiSelect, setIsMultiSelect] = useState(() => selected.length > 1);
 
-  // Compute dynamic preview height from image aspect ratio (Instagram-style, no black bars)
-  const dynamicPreviewHeight = useMemo(() => {
-    if (!previewItem?.width || !previewItem?.height) return DEFAULT_PREVIEW_HEIGHT;
-    const imgRatio = previewItem.width / previewItem.height;
-    const h = SCREEN_WIDTH / imgRatio;
-    return Math.max(MIN_PREVIEW_HEIGHT, Math.min(MAX_PREVIEW_HEIGHT, h));
-  }, [previewItem]);
+  // 1:1 kare olması için genişliği baz alıyoruz
+  const dynamicPreviewHeight = SCREEN_WIDTH;
+
+  const cropperRef = useRef<ImageCropperRef>(null);
 
   // (split-view gesture removed — height is now derived from image aspect ratio)
 
@@ -122,11 +120,29 @@ export function MediaPicker({
     setTimeout(() => onNext(), 150);
   }, [onSelect, onNext]);
 
-  const handleNext = useCallback(() => {
+  const handleNext = useCallback(async () => {
     if (selected.length === 0) return;
     mediumImpact();
+
+    if (isPostMode && cropperRef.current) {
+      const croppedUri = await cropperRef.current.cropImage();
+      if (croppedUri) {
+        const newSelected = [...selected];
+        const previewIndex = newSelected.findIndex(s => s.uri === previewItem?.uri);
+        if (previewIndex !== -1) {
+          newSelected[previewIndex] = { ...newSelected[previewIndex], uri: croppedUri };
+        } else {
+          newSelected[0] = { ...newSelected[0], uri: croppedUri };
+        }
+        
+        onSelect(newSelected);
+        setTimeout(() => onNext(), 150);
+        return;
+      }
+    }
+
     onNext();
-  }, [selected, onNext]);
+  }, [selected, onNext, previewItem, isPostMode, onSelect]);
 
   // ─────────────────────────────────────────────────────────
   // POST MODE — Split-View: Cropper + Gallery Grid
@@ -168,14 +184,15 @@ export function MediaPicker({
           </View>
         </View>
 
-        {/* Preview — Instagram-style: dynamic height, no black bars */}
+        {/* Preview — 1:1 Kare Kırpıcı */}
         <View style={[styles.previewSection, { height: dynamicPreviewHeight, backgroundColor: 'transparent' }]}>
           {previewItem ? (
-            <ExpoImage
-              source={{ uri: previewItem.uri }}
-              style={{ width: SCREEN_WIDTH, height: dynamicPreviewHeight }}
-              contentFit="cover"
-              cachePolicy="memory"
+            <ImageCropper
+              ref={cropperRef}
+              imageUri={previewItem.uri}
+              imageWidth={previewItem.width || 1080}
+              imageHeight={previewItem.height || 1080}
+              containerHeight={dynamicPreviewHeight}
             />
           ) : (
             <View style={styles.emptyPreview}>
