@@ -2,17 +2,26 @@
 
 from typing import Optional
 from datetime import datetime, timedelta, timezone
+import json
+import logging
 
 # pyrefly: ignore [missing-import]
 from fastapi import APIRouter, Depends, HTTPException, Query, BackgroundTasks
 # pyrefly: ignore [missing-import]
-from fastapi.responses import StreamingResponse
+from fastapi.responses import StreamingResponse, RedirectResponse
+# pyrefly: ignore [missing-import]
+from fastapi.concurrency import run_in_threadpool
+# pyrefly: ignore [missing-import]
+from fastapi.encoders import jsonable_encoder
 # pyrefly: ignore [missing-import]
 from sqlalchemy.orm import Session
+# pyrefly: ignore [missing-import]
+from sqlalchemy import func as sql_func
 import requests
 
 import schemas, crud, models
 from app.dependencies import get_db, get_current_user, get_admin_user, get_optional_user
+from app.core.redis_client import get_redis
 from config import get_settings
 
 router = APIRouter(tags=["Places"])
@@ -25,10 +34,11 @@ def search_places(
     city: Optional[str] = Query(None, description="Şehir filtresi"),
     page: int = 1,
     page_size: int = 20,
+    minimal: bool = Query(False, description="True ise stats/enrich atlanır (hızlı listeleme)"),
     db: Session = Depends(get_db),
 ):
     """Mekan arama — isim, kategori, şehir ile filtreleme."""
-    items, total = crud.search_places(db, q=q, category=category, city=city, page=page, page_size=page_size)
+    items, total = crud.search_places(db, q=q, category=category, city=city, page=page, page_size=page_size, minimal=minimal)
     return schemas.PaginatedPlaces(items=items, total=total, page=page, page_size=page_size)
 
 
@@ -57,32 +67,72 @@ def get_popular_places(
     return schemas.PaginatedPlaces(items=items, total=total, page=page, page_size=page_size)
 
 
+async def invalidate_places_cache():
+    """Yeni mekan eklendiğinde önbellekteki mekan aramalarını temizler"""
+    logger = logging.getLogger("asemos")
+    redis = get_redis()
+    if not redis:
+        return
+    try:
+        async for key in redis.scan_iter(match="cache:places:*"):
+            await redis.delete(key)
+        logger.info("🧹 Mekan önbelleği (places cache) başarıyla temizlendi.")
+    except Exception as e:
+        logger.error(f"Mekan önbellek temizleme hatası: {e}")
+
+
 @router.post("/places/", response_model=schemas.Place)
 def create_new_place(
     place: schemas.PlaceCreate,
+    background_tasks: BackgroundTasks,
     db: Session = Depends(get_db),
     current_user: models.User = Depends(get_current_user),
 ):
+    background_tasks.add_task(invalidate_places_cache)
     return crud.create_place(db=db, place=place)
 
 
 @router.get("/places/", response_model=schemas.PaginatedPlaces)
-def read_places(
+async def read_places(
     page: int = 1,
     page_size: int = 20,
     skip: Optional[int] = None,
     limit: Optional[int] = None,
     db: Session = Depends(get_db),
 ):
+    logger = logging.getLogger("asemos")
+    redis = get_redis()
+    cache_key = f"cache:places:page:{page}:size:{page_size}:skip:{skip}:limit:{limit}"
+
+    if redis:
+        try:
+            cached_data = await redis.get(cache_key)
+            if cached_data:
+                logger.info(f"⚡ Places cache hit: {cache_key}")
+                return json.loads(cached_data)
+        except Exception as e:
+            logger.error(f"Places cache read error: {e}")
+
     if skip is not None or limit is not None:
-        items = crud.get_places(db, skip=skip or 0, limit=limit or 500)
-        return schemas.PaginatedPlaces(
+        items = await run_in_threadpool(crud.get_places, db, skip=skip or 0, limit=limit or 500)
+        res = schemas.PaginatedPlaces(
             items=items, total=len(items), page=1, page_size=len(items)
         )
-    items, total = crud.get_places_paginated(db, page=page, page_size=page_size)
-    return schemas.PaginatedPlaces(
-        items=items, total=total, page=page, page_size=page_size
-    )
+    else:
+        items, total = await run_in_threadpool(crud.get_places_paginated, db, page=page, page_size=page_size)
+        res = schemas.PaginatedPlaces(
+            items=items, total=total, page=page, page_size=page_size
+        )
+
+    if redis:
+        try:
+            res_json = json.dumps(jsonable_encoder(res))
+            await redis.setex(cache_key, 900, res_json)  # 15 dakika
+            logger.info(f"💾 Places cached in Redis: {cache_key}")
+        except Exception as e:
+            logger.error(f"Places cache write error: {e}")
+
+    return res
 
 
 @router.get("/places/my-venue", response_model=schemas.Place)
@@ -113,8 +163,6 @@ def get_my_venue_stats(
     place = db.query(models.Place).filter(models.Place.owner_id == current_user.id).first()
     if not place:
         raise HTTPException(status_code=404, detail="Size ait bir mekan bulunamadı.")
-
-    from sqlalchemy import func as sql_func
 
     total_reviews = db.query(models.Review).filter(models.Review.place_id == place.id).count()
     avg_rating = db.query(sql_func.avg(models.Review.rating)).filter(
@@ -383,7 +431,6 @@ def get_place_photo(place_id: int, max_width: int = 800, db: Session = Depends(g
             
         return StreamingResponse(response.iter_content(chunk_size=8192), media_type=response.headers.get("content-type", "image/jpeg"))
 
-    from fastapi.responses import RedirectResponse
     return RedirectResponse(url=place.photo_url)
 
 
