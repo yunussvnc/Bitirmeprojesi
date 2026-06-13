@@ -61,6 +61,8 @@ services:
         sync: false
       - key: CLOUDINARY_API_SECRET
         sync: false
+      - key: REDIS_URL
+        value: redis://red-d8mpm63eo5us73f24hgg:6379
 
 databases:
   - name: asemos-db

@@ -64,9 +64,9 @@ services:
       - key: QDRANT_API_KEY
         sync: false
       - key: REDIS_URL
-        value: ""
+        value: redis://red-d8mpm63eo5us73f24hgg:6379
       - key: REDIS_TTL_SECONDS
         value: 3600
       # Backend API URL (for inter-service communication)
       - key: BACKEND_API_URL
-        sync: false
+        value: https://asemos-backend.onrender.com
