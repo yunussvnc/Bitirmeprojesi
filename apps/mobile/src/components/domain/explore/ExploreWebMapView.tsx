@@ -14,9 +14,15 @@ import {
   Alert,
   Keyboard,
   ScrollView,
+  Modal,
 } from 'react-native';
 import { WebView } from 'react-native-webview';
 import type { WebViewMessageEvent } from 'react-native-webview';
+import {
+  ISTANBUL_AI_DISTRICTS,
+  getIstanbulDistrictsForPicker,
+  type AiSearchDistrict,
+} from '@/src/constants/aiDistricts';
 import { CATEGORY_KEYS, STATUS_KEYS, getTranslatedCategory } from '@/src/utils/categories';
 import * as Location from 'expo-location';
 import { useTheme } from '@/src/hooks/useTheme';
@@ -171,6 +177,8 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedStatuses, setSelectedStatuses] = useState<PlaceStatusType[]>([]);
   const [maxDistance, setMaxDistance] = useState<number>(50); // 50km = All City
+  const [selectedDistrict, setSelectedDistrict] = useState<AiSearchDistrict | null>(null);
+  const [districtModalOpen, setDistrictModalOpen] = useState(false);
   const webViewRef = useRef<WebView>(null);
 
   const activeFilterCount = selectedCategories.length + selectedStatuses.length + (maxDistance < 50 ? 1 : 0);
@@ -191,6 +199,7 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
     setSelectedCategories([]);
     setSelectedStatuses([]);
     setMaxDistance(50);
+    setSelectedDistrict(null);
   }, []);
 
   useEffect(() => {
@@ -247,14 +256,20 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
         const status = getPlaceStatus(p.opening_time, p.closing_time);
         if (!selectedStatuses.includes(status.status)) return false;
       }
-      // Mesafe filtresi (Her zaman geçerli)
-      if (userLocation && p.latitude != null && p.longitude != null) {
+      // İlçe filtresi
+      if (selectedDistrict) {
+        if (!p.city || normalizeText(p.city) !== normalizeText(selectedDistrict.apiLocation)) {
+          return false;
+        }
+      }
+      // Mesafe filtresi (İlçe filtresi aktifse bypass et)
+      if (!selectedDistrict && userLocation && p.latitude != null && p.longitude != null) {
         const distKm = calculateDistance(userLocation.latitude, userLocation.longitude, p.latitude, p.longitude) / 1000;
         if (distKm > maxDistance) return false;
       }
       return true;
     });
-  }, [places, query, selectedCategories, selectedStatuses, maxDistance, userLocation]);
+  }, [places, query, selectedCategories, selectedStatuses, maxDistance, userLocation, selectedDistrict]);
 
   const visiblePlaces = useMemo(
     () => filteredPlaces.filter((p) => p.latitude != null && p.longitude != null),
@@ -281,6 +296,31 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
     script.push(`updateMarkers(${JSON.stringify(visiblePlacesWithStatus)})`);
     webViewRef.current.injectJavaScript(script.join(';') + ';true;');
   }, [mapReady, userLocation, visiblePlacesWithStatus, didAutoCenter]);
+
+  const prevDistrictRef = useRef<AiSearchDistrict | null>(null);
+
+  useEffect(() => {
+    if (mapReady && webViewRef.current) {
+      if (selectedDistrict) {
+        setSelectedPlace(null);
+        webViewRef.current.injectJavaScript(
+          `flyTo(${selectedDistrict.lat},${selectedDistrict.lng},14);selectPin(null);true;`,
+        );
+      } else if (prevDistrictRef.current) {
+        setSelectedPlace(null);
+        if (userLocation) {
+          webViewRef.current.injectJavaScript(
+            `flyTo(${userLocation.latitude},${userLocation.longitude},15);selectPin(null);true;`,
+          );
+        } else {
+          webViewRef.current.injectJavaScript(
+            `flyTo(${ISTANBUL_CENTER.latitude},${ISTANBUL_CENTER.longitude},13);selectPin(null);true;`,
+          );
+        }
+      }
+      prevDistrictRef.current = selectedDistrict;
+    }
+  }, [selectedDistrict, mapReady, userLocation]);
 
   const handleMessage = useCallback(
     (event: WebViewMessageEvent) => {
@@ -464,6 +504,59 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
           </TouchableOpacity>
         </View>
 
+        {/* İlçe Seçici */}
+        <TouchableOpacity
+          style={[
+            styles.districtSelector,
+            {
+              backgroundColor: selectedDistrict ? colors.accent.primary + '1A' : colors.surface.elevated,
+              borderColor: selectedDistrict ? colors.accent.primary : colors.surface.border,
+            },
+          ]}
+          onPress={() => {
+            lightImpact();
+            setDistrictModalOpen(true);
+          }}
+          activeOpacity={0.7}
+        >
+          <View style={styles.districtSelectorLeft}>
+            <IconSymbol
+              name="mappin.and.ellipse"
+              size={14}
+              color={selectedDistrict ? colors.accent.primary : colors.text.secondary}
+            />
+            <Text
+              style={[
+                styles.districtSelectorText,
+                { color: selectedDistrict ? colors.accent.primary : colors.text.primary },
+              ]}
+            >
+              {selectedDistrict 
+                ? `${t('explore.district_label', 'İlçe')}: ${selectedDistrict.apiLocation}` 
+                : t('explore.select_district', 'İlçe Seçin')}
+            </Text>
+          </View>
+          <View style={styles.districtSelectorRight}>
+            {selectedDistrict && (
+              <TouchableOpacity
+                onPress={(e) => {
+                  e.stopPropagation();
+                  lightImpact();
+                  setSelectedDistrict(null);
+                }}
+                style={styles.clearDistrictBtn}
+              >
+                <IconSymbol name="xmark.circle.fill" size={16} color={colors.accent.primary} />
+              </TouchableOpacity>
+            )}
+            <IconSymbol
+              name="chevron.down"
+              size={12}
+              color={selectedDistrict ? colors.accent.primary : colors.text.secondary}
+            />
+          </View>
+        </TouchableOpacity>
+
         {/* Filtre Paneli */}
         {showFilter && (
           <View style={[styles.filterPanel, { backgroundColor: colors.surface.elevated }]}>
@@ -629,6 +722,109 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
           </Text>
         </View>
       )}
+
+      <Modal
+        visible={districtModalOpen}
+        animationType="slide"
+        transparent={true}
+        onRequestClose={() => setDistrictModalOpen(false)}
+      >
+        <View style={styles.modalBackdrop}>
+          <TouchableOpacity
+            style={styles.modalDismissArea}
+            activeOpacity={1}
+            onPress={() => setDistrictModalOpen(false)}
+          />
+          <View style={[styles.modalContent, { backgroundColor: colors.surface.elevated }]}>
+            <View style={styles.modalHeader}>
+              <Text style={[styles.modalTitle, { color: colors.text.primary }]}>
+                {t('explore.select_district_title', 'İlçe Seçin')}
+              </Text>
+              <TouchableOpacity
+                onPress={() => {
+                  lightImpact();
+                  setDistrictModalOpen(false);
+                }}
+                style={styles.modalCloseBtn}
+              >
+                <IconSymbol name="xmark.circle.fill" size={24} color={colors.text.secondary} />
+              </TouchableOpacity>
+            </View>
+
+            <ScrollView
+              style={styles.modalScroll}
+              contentContainerStyle={styles.modalScrollContent}
+              showsVerticalScrollIndicator={false}
+            >
+              {/* "Tümü" seçeneği */}
+              <TouchableOpacity
+                style={[
+                  styles.districtItem,
+                  !selectedDistrict && [
+                    styles.districtItemActive,
+                    { backgroundColor: colors.accent.primary + '1F' }
+                  ],
+                  { borderBottomColor: colors.surface.border }
+                ]}
+                onPress={() => {
+                  lightImpact();
+                  setSelectedDistrict(null);
+                  setDistrictModalOpen(false);
+                }}
+              >
+                <Text
+                  style={[
+                    styles.districtItemText,
+                    { color: !selectedDistrict ? colors.accent.primary : colors.text.primary },
+                    !selectedDistrict && styles.districtItemTextActive
+                  ]}
+                >
+                  {t('explore.all_districts', 'Tüm İlçeler')}
+                </Text>
+                {!selectedDistrict && (
+                  <IconSymbol name="checkmark" size={18} color={colors.accent.primary} />
+                )}
+              </TouchableOpacity>
+
+              {/* İlçeler listesi */}
+              {getIstanbulDistrictsForPicker().map((district) => {
+                const isActive = selectedDistrict?.id === district.id;
+                return (
+                  <TouchableOpacity
+                    key={district.id}
+                    style={[
+                      styles.districtItem,
+                      isActive && [
+                        styles.districtItemActive,
+                        { backgroundColor: colors.accent.primary + '1F' }
+                      ],
+                      { borderBottomColor: colors.surface.border }
+                    ]}
+                    onPress={() => {
+                      lightImpact();
+                      setSelectedDistrict(district);
+                      setDistrictModalOpen(false);
+                    }}
+                  >
+                    <Text
+                      style={[
+                        styles.districtItemText,
+                        { color: isActive ? colors.accent.primary : colors.text.primary },
+                        isActive && styles.districtItemTextActive
+                      ]}
+                    >
+                      {district.apiLocation}
+                    </Text>
+                    {isActive && (
+                      <IconSymbol name="checkmark" size={18} color={colors.accent.primary} />
+                    )}
+                  </TouchableOpacity>
+                );
+              })}
+            </ScrollView>
+          </View>
+        </View>
+      </Modal>
 
       {selectedPlace && (
         <PlaceMediaPanel
@@ -800,4 +996,85 @@ const styles = StyleSheet.create({
     borderRadius: 10,
   },
   badgeText: { fontSize: 13 },
+  modalBackdrop: {
+    flex: 1,
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    justifyContent: 'flex-end',
+  },
+  modalDismissArea: {
+    flex: 1,
+  },
+  modalContent: {
+    borderTopLeftRadius: 24,
+    borderTopRightRadius: 24,
+    maxHeight: '70%',
+    paddingBottom: Platform.OS === 'ios' ? 34 : 24,
+  },
+  modalHeader: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
+    paddingVertical: 16,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: 'rgba(0, 0, 0, 0.1)',
+  },
+  modalTitle: {
+    fontSize: 18,
+    fontWeight: '700',
+  },
+  modalCloseBtn: {
+    padding: 4,
+  },
+  modalScroll: {
+    paddingHorizontal: 16,
+  },
+  modalScrollContent: {
+    paddingVertical: 8,
+  },
+  districtItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingVertical: 14,
+    paddingHorizontal: 16,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+  },
+  districtItemActive: {
+    borderRadius: 12,
+  },
+  districtItemText: {
+    fontSize: 16,
+    fontWeight: '500',
+  },
+  districtItemTextActive: {
+    fontWeight: '700',
+  },
+  districtSelector: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: 14,
+    paddingVertical: 10,
+    borderRadius: 12,
+    marginTop: 10,
+    borderWidth: 1,
+  },
+  districtSelectorLeft: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  districtSelectorText: {
+    fontSize: 14,
+    fontWeight: '600',
+  },
+  districtSelectorRight: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+  },
+  clearDistrictBtn: {
+    padding: 2,
+  },
 });
