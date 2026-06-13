@@ -258,7 +258,7 @@ export function EmbeddedCamera({
   }
 
   // Permission denied
-  const isMicDenied = contentType === 'story' && !micPermission.granted;
+  const isMicDenied = contentType === 'story' && (!micPermission || !micPermission.granted);
   if (!permission.granted || isMicDenied) {
     return (
       <View style={[styles.container, styles.centered, { backgroundColor: '#000' }]}>
