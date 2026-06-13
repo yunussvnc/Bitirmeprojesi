@@ -1,5 +1,5 @@
 /**
- * Google Maps review row — styled like in-app community reviews.
+ * Review card — tüm yorumlar (Google + uygulama içi) için ortak kart.
  */
 
 import React from 'react';
@@ -8,7 +8,7 @@ import { useTheme } from '@/src/hooks/useTheme';
 import { RatingStars } from '@/src/components/ui';
 import { createTextStyle, spacing } from '@/src/constants/design';
 
-export type GoogleReview = {
+export type ReviewItemType = {
   author_name: string;
   rating: number;
   text: string;
@@ -16,12 +16,14 @@ export type GoogleReview = {
   avatar_url?: string | null;
 };
 
+
+
 type Props = {
-  review: GoogleReview;
+  review: ReviewItemType;
   borderColor: string;
 };
 
-export function GoogleReviewCard({ review, borderColor }: Props) {
+export function ReviewCard({ review, borderColor }: Props) {
   const { colors } = useTheme();
   const bodyStyle = createTextStyle('body', colors.text.primary);
   const bodySmallStyle = createTextStyle('bodySmall', colors.text.secondary);
@@ -55,6 +57,8 @@ export function GoogleReviewCard({ review, borderColor }: Props) {
     </View>
   );
 }
+
+
 
 const styles = StyleSheet.create({
   reviewItem: {

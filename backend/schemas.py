@@ -234,7 +234,8 @@ class Place(PlaceBase):
         from_attributes = True
 
 
-class GoogleReviewItem(BaseModel):
+class ReviewItem(BaseModel):
+    """Tek bir yorum satırı (Google veya uygulama içi)."""
     author_name: str
     rating: float = Field(ge=0, le=5)
     text: str
@@ -242,11 +243,14 @@ class GoogleReviewItem(BaseModel):
     avatar_url: Optional[str] = None
 
 
-class GoogleReviewsResponse(BaseModel):
-    reviews: List[GoogleReviewItem] = []
+class ReviewsListResponse(BaseModel):
+    """Mekan yorumları liste yanıtı."""
+    reviews: List[ReviewItem] = []
     total_fetched: int = 0
     display_limit: int = 5
-    source: str = "google_maps"
+    source: str = "database"
+
+
 
 
 class DeviceTokenCreate(BaseModel):
