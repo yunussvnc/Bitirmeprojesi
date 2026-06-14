@@ -63,6 +63,12 @@ _SCHEMA_PATCHES = [
     ("story_views", "did_visit_profile", "BOOLEAN NOT NULL DEFAULT FALSE", "BOOLEAN NOT NULL DEFAULT 0"),
     ("story_views", "did_visit_place", "BOOLEAN NOT NULL DEFAULT FALSE", "BOOLEAN NOT NULL DEFAULT 0"),
     ("story_views", "source", "VARCHAR", "VARCHAR"),
+    # status columns for posts and stories
+    ("posts", "status", "VARCHAR(20) NOT NULL DEFAULT 'approved'", "VARCHAR(20) NOT NULL DEFAULT 'approved'"),
+    ("stories", "status", "VARCHAR(20) NOT NULL DEFAULT 'approved'", "VARCHAR(20) NOT NULL DEFAULT 'approved'"),
+    # stories privacy and location data
+    ("stories", "privacy_type", "VARCHAR(50) NOT NULL DEFAULT 'public'", "VARCHAR(50) NOT NULL DEFAULT 'public'"),
+    ("stories", "location_data", "TEXT", "TEXT"),
 ]
 
 

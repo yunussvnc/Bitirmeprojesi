@@ -3,7 +3,7 @@ from pydantic import BaseModel, EmailStr, Field, model_validator, field_validato
 import re
 import json as _json
 from datetime import datetime, date
-from typing import Optional, List
+from typing import Optional, List, Dict
 
 # --- ORTAK VALIDASYON YARDIMCILARI ---
 
@@ -1099,3 +1099,74 @@ class UserPreferencesResponse(BaseModel):
     class Config:
         from_attributes = True
 Review.model_rebuild()
+
+# --- ADMIN PANEL SCHEMAS ---
+
+class AdminStatsResponse(BaseModel):
+    total_users: int
+    total_venues: int
+    active_stories: int
+    ai_queries_today: int
+
+class AdminAuditLogResponse(BaseModel):
+    id: int
+    admin_id: int
+    action: str
+    target_type: str
+    target_id: Optional[int] = None
+    details: Optional[Dict] = None
+    created_at: datetime
+
+    class Config:
+        from_attributes = True
+
+class AIQueryLogCreate(BaseModel):
+    user_id: Optional[int] = None
+    query_text: str
+    query_type: str
+    llm_layer: str
+    response_time_ms: int
+    result_count: int
+    status: str
+
+class AIQueryLogResponse(BaseModel):
+    id: int
+    user_id: Optional[int] = None
+    query_text: str
+    query_type: str
+    llm_layer: str
+    response_time_ms: int
+    result_count: int
+    status: str
+    created_at: datetime
+
+    class Config:
+        from_attributes = True
+
+class PaginatedAIQueryLogs(BaseModel):
+    items: List[AIQueryLogResponse]
+    total: int
+    page: int
+    page_size: int
+
+class ReportResponse(BaseModel):
+    id: int
+    reporter_id: int
+    target_type: str
+    target_id: int
+    reason: str
+    description: Optional[str] = None
+    status: str
+    created_at: datetime
+
+    class Config:
+        from_attributes = True
+
+class SystemHealthItem(BaseModel):
+    status: str
+    latency_ms: float
+
+class SystemHealthResponse(BaseModel):
+    status: str
+    services: Dict[str, SystemHealthItem]
+
