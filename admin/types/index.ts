@@ -134,7 +134,10 @@ export interface RedisStats {
 }
 
 export interface QdrantStats {
-  collections: string[];
-  vectors_count: number;
-  status: string;
+  collections?: string[];
+  vectors_count?: number;
+  status?: string;
+  version?: string;
+  phase?: string;
+  features?: string[];
 }

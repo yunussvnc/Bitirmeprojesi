@@ -228,9 +228,9 @@ export default function SystemDiagnostics() {
           <CardHeader>
             <CardTitle className="text-base font-bold flex items-center gap-2">
               <Database className="h-5 w-5 text-emerald-500" />
-              Qdrant Vektör Tabanı Detayları
+              AI & Vektör Tabanı Detayları
             </CardTitle>
-            <CardDescription>Semantik indeksleme ve koleksiyon boyutları</CardDescription>
+            <CardDescription>Semantik indeksleme ve AI çalışma durumu</CardDescription>
           </CardHeader>
           <CardContent className="space-y-4">
             {loading ? (
@@ -240,26 +240,44 @@ export default function SystemDiagnostics() {
               </div>
             ) : qdrant ? (
               <div className="space-y-3">
-                <div className="flex justify-between items-center py-2 border-b border-zinc-100 dark:border-zinc-800/40">
-                  <span className="text-sm text-zinc-500">Koleksiyonlar</span>
-                  <div className="flex gap-1.5 flex-wrap">
-                    {qdrant.collections.length > 0 ? (
-                      qdrant.collections.map((c, i) => (
-                        <Badge key={i} variant="outline" className="text-xs shadow-none">{c}</Badge>
-                      ))
-                    ) : (
-                      <span className="text-xs text-zinc-400">Koleksiyon yok</span>
-                    )}
+                {qdrant.version && (
+                  <div className="flex justify-between items-center py-2 border-b border-zinc-100 dark:border-zinc-800/40">
+                    <span className="text-sm text-zinc-500">AI Sürüm Versiyonu</span>
+                    <span className="font-semibold text-zinc-800 dark:text-zinc-200">{qdrant.version}</span>
                   </div>
-                </div>
-                <div className="flex justify-between items-center py-2 border-b border-zinc-100 dark:border-zinc-800/40">
-                  <span className="text-sm text-zinc-500">Vektörize Edilmiş Mekan Sayısı</span>
-                  <span className="font-semibold text-zinc-800 dark:text-zinc-200">{qdrant.vectors_count}</span>
-                </div>
-                <div className="flex justify-between items-center py-2">
-                  <span className="text-sm text-zinc-500">Veritabanı Durumu</span>
-                  <Badge className="bg-emerald-500/10 text-emerald-600 border-emerald-500/20 capitalize shadow-none">{qdrant.status}</Badge>
-                </div>
+                )}
+                {qdrant.phase && (
+                  <div className="flex justify-between items-center py-2 border-b border-zinc-100 dark:border-zinc-800/40">
+                    <span className="text-sm text-zinc-500">Çalışma Fazı</span>
+                    <span className="font-semibold text-zinc-800 dark:text-zinc-200">{qdrant.phase}</span>
+                  </div>
+                )}
+                {qdrant.collections && Array.isArray(qdrant.collections) && (
+                  <div className="flex justify-between items-center py-2 border-b border-zinc-100 dark:border-zinc-800/40">
+                    <span className="text-sm text-zinc-500">Koleksiyonlar</span>
+                    <div className="flex gap-1.5 flex-wrap">
+                      {qdrant.collections.length > 0 ? (
+                        qdrant.collections.map((c, i) => (
+                          <Badge key={i} variant="outline" className="text-xs shadow-none">{c}</Badge>
+                        ))
+                      ) : (
+                        <span className="text-xs text-zinc-400">Koleksiyon yok</span>
+                      )}
+                    </div>
+                  </div>
+                )}
+                {qdrant.vectors_count !== undefined && (
+                  <div className="flex justify-between items-center py-2 border-b border-zinc-100 dark:border-zinc-800/40">
+                    <span className="text-sm text-zinc-500">Vektörize Edilmiş Mekan Sayısı</span>
+                    <span className="font-semibold text-zinc-800 dark:text-zinc-200">{qdrant.vectors_count}</span>
+                  </div>
+                )}
+                {qdrant.status && (
+                  <div className="flex justify-between items-center py-2">
+                    <span className="text-sm text-zinc-500">Veritabanı Durumu</span>
+                    <Badge className="bg-emerald-500/10 text-emerald-600 border-emerald-500/20 capitalize shadow-none">{qdrant.status}</Badge>
+                  </div>
+                )}
               </div>
             ) : (
               <div className="text-center py-6 text-zinc-500 text-sm">Qdrant servis bilgisine erişilemedi.</div>
