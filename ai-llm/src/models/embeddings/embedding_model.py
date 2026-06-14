@@ -11,29 +11,38 @@ logger = logging.getLogger(__name__)
 
 
 class EmbeddingModel:
-    """Embedding model yöneticisi - Lazy loading ile"""
+    """Embedding model yöneticisi - Lazy loading ve Singleton ile"""
+    _shared_model = None  # Class-level shared model to prevent multiple loads
     
     def __init__(self):
         """Embedding model yöneticisi - model lazy load edilir"""
-        self._model = None
         self.model_name = settings.EMBEDDING_MODEL
         self.device = settings.EMBEDDING_DEVICE
     
     @property
     def model(self) -> SentenceTransformer:
-        """Model'i lazy load et"""
-        if self._model is None:
+        """Model'i lazy load et ve paylaş"""
+        if EmbeddingModel._shared_model is None:
             logger.info(f"Embedding model yükleniyor: {self.model_name}")
             try:
-                self._model = SentenceTransformer(
+                # Thread limitlerini set et
+                import torch
+                torch.set_num_threads(1)
+                torch.set_num_interop_threads(1)
+                
+                EmbeddingModel._shared_model = SentenceTransformer(
                     self.model_name,
                     device=self.device
                 )
                 logger.info(f"Embedding model başarıyla yüklendi ({self.device})")
+                
+                # Garbage collector
+                import gc
+                gc.collect()
             except Exception as e:
                 logger.error(f"Embedding model yüklenirken hata: {e}")
                 raise
-        return self._model
+        return EmbeddingModel._shared_model
     
     def encode(self, texts: List[str], batch_size: int = 32) -> List[List[float]]:
         """

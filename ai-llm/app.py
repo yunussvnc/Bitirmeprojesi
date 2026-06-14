@@ -6,11 +6,18 @@ Faz 2 Özellikleri:
 - 2.3: Async Pipeline (paralel işlemler)
 """
 
+import os
+# PyTorch/CPU multi-threading optimizasyonları (Render OOM önlemek için)
+os.environ["OMP_NUM_THREADS"] = "1"
+os.environ["MKL_NUM_THREADS"] = "1"
+os.environ["OPENBLAS_NUM_THREADS"] = "1"
+os.environ["VECLIB_MAXIMUM_THREADS"] = "1"
+os.environ["NUMEXPR_NUM_THREADS"] = "1"
+
 from fastapi import FastAPI, HTTPException, BackgroundTasks  # type: ignore[import]
 from pydantic import BaseModel  # type: ignore[import]
 from typing import List, Optional, Dict, Union
 from contextlib import asynccontextmanager
-import os
 import math
 import asyncio
 import hashlib
@@ -497,18 +504,16 @@ class ModelManager:
         """Startup'ta modelleri yükle"""
         try:
             import torch  # type: ignore[import]
-            from sentence_transformers import SentenceTransformer  # type: ignore[import]
             
             # Device
             self.device = "cuda" if torch.cuda.is_available() else "cpu"
             print(f"[Model] Device: {self.device}")
             
-            # Embedding model
+            # Embedding model (Singleton Wrapper ile yükle)
             print("[Model] Embedding model yükleniyor...")
-            self.embedding_model = SentenceTransformer(
-                "sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2",
-                device=self.device
-            )
+            from src.models.embeddings.embedding_model import EmbeddingModel
+            wrapper = EmbeddingModel()
+            self.embedding_model = wrapper.model
             
             self.is_loaded = True
             print("[Model] OK Modeller yüklendi!")
