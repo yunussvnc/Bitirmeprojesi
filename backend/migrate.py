@@ -156,7 +156,11 @@ def run_migrations(engine_override=None):
     """
     db_engine = engine_override or engine
     logger.info("Veritabanı tabloları kontrol ediliyor/oluşturuluyor...")
-    Base.metadata.create_all(bind=db_engine)
+    try:
+        Base.metadata.create_all(bind=db_engine)
+    except Exception as e:
+        logger.warning("create_all sirasinda hata olustu (bazı tablolar/kisitlar zaten var olabilir): %s", e)
+        
     with db_engine.connect() as conn:
         _apply_schema_patches(conn)
         _apply_custom_ddl(conn)
