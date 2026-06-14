@@ -375,7 +375,7 @@ def verify_register(body: schemas.VerifyRegisterRequest, db: Session = Depends(g
         pass
         
     return schemas.Token(
-        access_token=create_access_token(db_user.id, db_user.token_version or 0),
+        access_token=create_access_token(db_user.id, db_user.token_version or 0, role=db_user.role),
         refresh_token=create_refresh_token(db_user.id, db_user.token_version or 0),
         user=schemas.User.model_validate(db_user),
     )
@@ -413,7 +413,7 @@ def login(
 
     tv = user.token_version
     return schemas.Token(
-        access_token=create_access_token(user.id, tv),
+        access_token=create_access_token(user.id, tv, role=user.role),
         refresh_token=create_refresh_token(user.id, tv),
         user=schemas.User.model_validate(user),
     )
@@ -454,7 +454,7 @@ def google_login(
 
         tv = user.token_version
         return schemas.Token(
-            access_token=create_access_token(user.id, tv),
+            access_token=create_access_token(user.id, tv, role=user.role),
             refresh_token=create_refresh_token(user.id, tv),
             user=schemas.User.model_validate(user),
         )
@@ -492,7 +492,7 @@ def apple_login(
 
         tv = user.token_version
         return schemas.Token(
-            access_token=create_access_token(user.id, tv),
+            access_token=create_access_token(user.id, tv, role=user.role),
             refresh_token=create_refresh_token(user.id, tv),
             user=schemas.User.model_validate(user),
         )
@@ -758,7 +758,7 @@ def refresh_token(body: schemas.RefreshRequest, db: Session = Depends(get_db)):
         raise HTTPException(status_code=401, detail="Oturumunuz sonlandırılmış. Lütfen tekrar giriş yapın.")
     tv = user.token_version or 0
     return schemas.Token(
-        access_token=create_access_token(user.id, tv),
+        access_token=create_access_token(user.id, tv, role=user.role),
         refresh_token=create_refresh_token(user.id, tv),
         user=schemas.User.model_validate(user),
     )
@@ -783,7 +783,7 @@ def logout_all_sessions(
     return {
         "ok": True,
         "message": "Tüm cihazlardan çıkış yapıldı.",
-        "access_token": create_access_token(current_user.id, tv),
+        "access_token": create_access_token(current_user.id, tv, role=current_user.role),
         "refresh_token": create_refresh_token(current_user.id, tv),
     }
 
