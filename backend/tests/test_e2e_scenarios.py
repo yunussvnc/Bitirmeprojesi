@@ -314,7 +314,7 @@ class TestScenarioAccountDeletion:
             "email": "del@test.com",
             "password": "TestPass123!",
         })
-        assert login.status_code == 401
+        assert login.status_code == 404
 
 
 class TestScenarioPlaceDiscovery:

@@ -49,7 +49,7 @@ export function useSocialAuth(roleType: RoleType, context: SocialAuthContext = '
   const { t } = useTranslation();
   const [loading, setLoading] = useState(false);
 
-  const [request, response, promptAsync] = Google.useAuthRequest({
+  const [request, response, promptAsync] = Google.useIdTokenAuthRequest({
     ...googleAuthRequestConfig,
     scopes: [...googleAuthRequestConfig.scopes],
   });
@@ -75,14 +75,39 @@ export function useSocialAuth(roleType: RoleType, context: SocialAuthContext = '
 
   useEffect(() => {
     if (!response) return;
-    if (response.type === 'success' && response.authentication) {
+
+    if (response.type === 'success') {
+      // Öncelik: authentication nesnesindeki idToken > accessToken
+      // Fallback: response.params içindeki id_token > access_token
       const token =
-        response.authentication.idToken || response.authentication.accessToken;
-      if (token) finishSocialLogin(token);
+        response.authentication?.idToken ||
+        response.authentication?.accessToken ||
+        (response.params as Record<string, string>)?.id_token ||
+        (response.params as Record<string, string>)?.access_token;
+
+      if (token) {
+        finishSocialLogin(token);
+      } else if (__DEV__) {
+        console.warn('[GoogleAuth] Başarılı yanıt alındı ama token bulunamadı:', response);
+        Alert.alert(
+          t('auth.login_error_title'),
+          'Google giriş yanıtında token bulunamadı. Lütfen tekrar deneyin.',
+        );
+      }
       return;
     }
+
     if (response.type === 'error') {
+      if (__DEV__) {
+        console.error('[GoogleAuth] Hata:', response.error);
+      }
       Alert.alert(t('auth.login_error_title'), t('auth.google_login_failed'));
+    }
+
+    if (response.type === 'dismiss') {
+      if (__DEV__) {
+        console.log('[GoogleAuth] Kullanıcı girişi iptal etti.');
+      }
     }
   }, [response, finishSocialLogin, t]);
 

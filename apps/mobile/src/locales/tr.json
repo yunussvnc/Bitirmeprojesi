@@ -93,6 +93,7 @@
     "district_label": "İlçe",
     "select_district": "İlçe Seçin",
     "select_district_title": "İlçe Seçin",
+    "all_districts": "Tüm İlçeler",
     "district_all": "Tüm İstanbul",
     "location_fallback": "Konum alınamadı, İstanbul merkezi baz alınıyor"
   },

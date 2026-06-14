@@ -8,21 +8,27 @@ Traditional location search is keyword-heavy and brittle. This project lets user
 
 ## What It Does
 
-- Semantic venue search with multilingual sentence embeddings
-- Location-aware ranking with distance calculation
-- Interactive CLI chatbot with built-in example prompts and location presets
-- Optional AI query analysis through a layered LLM setup
-- Qdrant vector storage for retrieval and reusable test tooling
+- **Semantic Venue Search:** Natural language search with multilingual sentence embeddings.
+- **Location-Aware Ranking:** Distance calculations with automatic GPS coordination and district filters.
+- **Resilient Layered LLM Setup:** Groq Cloud (`llama-3.1-8b-instant`) with automatic fallback to local Gemma 2 or algorithmic scoring.
+- **Smart Content Filtering:** Multi-language (7 languages: TR, EN, DE, FR, ES, AR, RU) filters to detect and block inappropriate inputs (politics, religion, slang).
+- **Chit-chat Bypass:** Captures casual conversation queries (e.g., "naber", "hello") and responds with friendly, localized assistance instead of returning blank venue recommendations.
+- **Redis Response Caching:** Speeds up response times (down to 75ms) by caching queries and bypassing embedding calculations for duplicate prompts.
+- **Qdrant Vector Storage:** Auto-indexed and synced directly from the PostgreSQL backend database (with local JSON fallback).
 
 ## Architecture
 
 ```text
 User query
-  -> sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2
-  -> semantic retrieval from Qdrant
-  -> top-k filtering with thresholding
-  -> distance calculation and ranking output
-  -> optional LLM explanation (Groq -> local Gemma fallback)
+  -> Check multi-language content filters (inappropriate/slang detection)
+  -> Check chit-chat bypass (greeting/casual conversation detection)
+  -> Check Redis query cache (returns in 75ms if hit)
+  -> Calculate query embeddings (sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2)
+  -> Semantic retrieval from Qdrant vector database
+  -> Filter by district / location coordinates
+  -> Apply AI recommendation history scoring (penalize previously recommended venues)
+  -> Rank top-k candidates using similarity scores and distance weighting
+  -> Generate natural language explanation using Layered LLM (Groq -> Gemma fallback)
 ```
 
 ## Results

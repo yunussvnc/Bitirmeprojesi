@@ -16,8 +16,7 @@ from app.middleware.error_handler import ErrorHandlerMiddleware
 from app.middleware.logging import RequestLoggingMiddleware
 from app.middleware.rate_limiter import RateLimiterMiddleware
 
-# Router'lar
-from app.routers import auth, users, places, reviews, feed, stories, notifications, upload, recommend, messages, saved, community
+from app.routers import auth, users, places, reviews, feed, stories, notifications, upload, recommend, messages, saved, community, admin
 
 # ---------------------------------------------------------------------------
 # Logging konfigürasyonu
@@ -88,6 +87,7 @@ app.include_router(recommend.router)
 app.include_router(messages.router)
 app.include_router(saved.router)
 app.include_router(community.router)
+app.include_router(admin.router)
 
 
 # ---------------------------------------------------------------------------
@@ -99,16 +99,18 @@ def home():
 
 
 @app.get("/health")
-def health_check():
+async def health_check():
     """
     Kapsamlı sistem sağlık kontrolü:
     - Veritabanı bağlantısı
     - Cloud storage durumu
     - LLM servisi
     - WebSocket aktif bağlantılar
+    - Redis bağlantısı
     """
     from app.dependencies import get_db
     from app.websocket.manager import manager
+    from app.core.redis_client import get_redis
     import models
     import cloud_storage
 
@@ -122,6 +124,17 @@ def health_check():
         pass
     finally:
         db.close()
+
+    # Redis Kontrolü
+    redis_ok = False
+    redis_err = None
+    redis_client = get_redis()
+    if redis_client:
+        try:
+            await redis_client.ping()
+            redis_ok = True
+        except Exception as e:
+            redis_err = str(e)
 
     # Servis durumları
     cloud_ok = cloud_storage.is_configured()
@@ -137,7 +150,7 @@ def health_check():
         except Exception:
             schema_ok = False
 
-    overall = "ok" if db_ok and schema_ok else "degraded"
+    overall = "ok" if db_ok and schema_ok and redis_ok else "degraded"
 
     return {
         "status": overall,
@@ -145,6 +158,7 @@ def health_check():
         "timestamp": datetime.utcnow().isoformat(),
         "services": {
             "database": {"status": "ok" if db_ok else "error", "schema_patches": schema_checks},
+            "redis": {"status": "ok" if redis_ok else "error", "detail": redis_err if not redis_ok else "connected"},
             "cloud_storage": {"status": "ok" if cloud_ok else "not_configured"},
             "llm": {"status": "active" if llm_active else "disabled", "provider": getattr(settings, 'LLM_PROVIDER', 'N/A')},
             "websocket": {"online_users": ws_online},

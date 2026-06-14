@@ -1,5 +1,5 @@
 # pyrefly: ignore [missing-import]
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Float, Text, Boolean, UniqueConstraint, Date
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Float, Text, Boolean, UniqueConstraint, Date, JSON
 # pyrefly: ignore [missing-import]
 from sqlalchemy.orm import relationship
 from database import Base
@@ -435,6 +435,7 @@ class Post(Base):
     comments_disabled = Column(Boolean, default=False)  # Yorumları kapat
     likes_hidden = Column(Boolean, default=False)       # Beğeni sayısını gizle
     is_flagged = Column(Boolean, default=False, index=True) # AI Content Moderation
+    status = Column(String(20), default="approved", index=True) # approved, pending, rejected
 
     like_count = Column(Integer, default=0)
     comment_count = Column(Integer, default=0)
@@ -543,6 +544,7 @@ class Story(Base):
 
     # Gizlilik: 'public' | 'close_friends'
     privacy_type = Column(String, default="public", nullable=False, index=True)
+    status = Column(String(20), default="approved", index=True) # approved, pending, rejected
     # is_close_friends: geriye dönük uyumluluk için property
     @property
     def is_close_friends(self) -> bool:
@@ -754,3 +756,31 @@ class StoryReaction(Base):
     __table_args__ = (
         UniqueConstraint("story_id", "user_id", name="uq_story_reaction_story_user"),
     )
+
+
+class AdminAuditLog(Base):
+    __tablename__ = "admin_audit_logs"
+    id = Column(Integer, primary_key=True, index=True)
+    admin_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
+    action = Column(String(100), nullable=False)        # 'ban_user', 'delete_post' vb.
+    target_type = Column(String(50), nullable=False)    # 'user', 'post', 'venue'
+    target_id = Column(Integer, nullable=True)
+    details = Column(JSON, nullable=True)               # Detayları tutan JSON objesi
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    admin = relationship("User", foreign_keys=[admin_id])
+
+
+class AIQueryLog(Base):
+    __tablename__ = "ai_query_logs"
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="SET NULL"), nullable=True, index=True)
+    query_text = Column(Text, nullable=False)
+    query_type = Column(String(50), nullable=False)     # 'venue_search', 'chit_chat', 'blocked'
+    llm_layer = Column(String(20), nullable=False)      # 'groq', 'gemma_fallback'
+    response_time_ms = Column(Integer, nullable=False)
+    result_count = Column(Integer, nullable=False)
+    status = Column(String(20), nullable=False)         # 'success', 'fallback', 'error'
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    user = relationship("User", foreign_keys=[user_id])

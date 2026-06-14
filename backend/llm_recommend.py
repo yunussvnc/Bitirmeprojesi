@@ -281,6 +281,135 @@ def recommend_pipeline(
     budget = _norm(budget, _BUDGET_MAP, "mid")
     cat_filter = (category or "").strip().lower()
 
+    # --- Intent / Content Guard ---
+    query_lower = normalize_tr(query or "")
+    query_raw = (query or "").strip().lower()
+
+    # ── 1. YASAKLI / UYGUNSUZ İÇERİK (kapsamlı) ──
+    _BLOCKED_CATEGORIES = {
+        # Siyaset
+        "siyaset", "parti", "secim", "oy", "baskan", "cumhurbaskani", "milletvekili",
+        "muhalefet", "iktidar", "akp", "chp", "mhp", "hdp", "iyi parti", "politika",
+        "hukumet", "darbe", "propaganda", "atatürk", "ataturk", "erdogan",
+        # Din / Mezhep
+        "din", "namaz", "cami", "kilise", "havra", "dua", "cennet", "cehennem",
+        "allah", "tanri", "ibadet", "mezhep", "sunni", "alevi", "sii", "hristiyan",
+        "musevi", "ateist", "ateizm", "islam", "kuran", "incil", "tevrat",
+        # Küfür / Argo / Hakaret
+        "kufur", "argo", "küfür", "orospu", "amk", "aq", "siktirgit", "piç",
+        "ibne", "göt", "yarrak", "amina", "sikerim", "siktir", "oç", "mk",
+        "pezevenk", "kahpe", "puşt", "gerizekalı", "salak", "aptal", "mal",
+        "dangalak", "ahmak", "embesil", "sik", "am",
+        # Şiddet / Yasadışı
+        "kavga", "dovus", "silah", "bicak", "uyusturucu", "esrar", "kokain",
+        "eroin", "bonzai", "hirsizlik", "dolandiricilik", "bomba", "patlama",
+        "terör", "teror", "intihar", "cinayet", "tecavuz", "taciz",
+        "soygun", "gasp",
+        # Cinsel içerik
+        "porno", "seks", "cinsel", "erotik", "striptiz", "fuhuş", "fuhus",
+        "genelev", "escort", "masöz",
+        # Kumar
+        "kumar", "bahis", "iddaa", "casino", "rulet", "slot", "bet",
+    }
+
+    # Bloklanacak kelime var mı?
+    is_blocked = any(bw in query_lower for bw in _BLOCKED_CATEGORIES)
+    if is_blocked:
+        return {
+            "items": [],
+            "summary": "Üzgünüm, ben sadece mekan ve yemek önerisi yapan bir asistanım. "
+                       "Bu tür konularda yardımcı olamıyorum. 🤖\n\n"
+                       "Bana mekanlarla ilgili sorular sorabilirsin, örneğin:\n"
+                       "• Kadıköy'de sakin bir kafe\n"
+                       "• Beşiktaş'ta hamburgerci\n"
+                       "• Beyoğlu'nda canlı müzikli bar",
+            "cached": False,
+        }
+
+    # ── 2. SOHBET / SELAMLAşMA ──
+    _GREETINGS = {
+        "merhaba", "selam", "naber", "nasisin", "nasilsin", "nasılsın", "nasiylsin",
+        "iyi misin", "hey", "gunaydin", "günaydın", "iyi aksamlar", "iyi aksam",
+        "iyi geceler", "helo", "hello", "hi", "sa", "as", "selamun aleykum",
+        "aleykum selam", "slm", "nbr", "mrb",
+    }
+
+    words = query_lower.split()
+    if len(words) <= 4 and any(query_lower.startswith(g) or query_lower == g for g in _GREETINGS):
+        return {
+            "items": [],
+            "summary": "Merhaba! 👋 Ben senin mekan öneri asistanınım.\n\n"
+                       "Bana bir ilçe adı ve ne aradığını söyle, hemen en iyi yerleri bulayım! Örneğin:\n"
+                       "• Beşiktaş'ta deniz manzaralı sakin bir kafe ☕\n"
+                       "• Kadıköy'de en iyi burger nerede? 🍔\n"
+                       "• Şişli'de arkadaşlarla gidilecek bar 🍺",
+            "cached": False,
+        }
+
+    # ── 3. MEKAN İLGİSİ KONTROLÜ ──
+    # Query mekan/yemek/içecek/konum ile alakalı mı?
+    # En az bir "pozitif" kelime bulunmalı, yoksa asistan yönlendirmesi döner.
+
+    _VENUE_KEYWORDS = {
+        # Mekan türleri
+        "kafe", "cafe", "kahve", "coffee", "restoran", "restaurant", "lokanta",
+        "bistro", "meyhane", "taverna", "bar", "pub", "biraevi", "birahane",
+        "lounge", "club", "gece kulubu", "disko", "mekan", "yer", "isletme",
+        "pastane", "firin", "bakery", "kasap", "manav", "market", "dukkan",
+        "magaza", "alisveris", "avm", "carsı", "pazar", "büfe", "bufe",
+        "kantin", "yemekhane", "food court", "sokak lezzetleri",
+        # Yemek türleri
+        "yemek", "yiyecek", "food", "kebap", "kebab", "doner", "pide",
+        "lahmacun", "pizza", "burger", "hamburger", "kofte", "sushi",
+        "ramen", "noodle", "makarna", "pasta", "salata", "corba", "soup",
+        "kahvalti", "brunch", "ogle yemegi", "aksam yemegi", "iftar",
+        "sahur", "meze", "balik", "et", "tavuk", "vegan", "vejetaryen",
+        "steak", "izlama", "biftek", "tantuni", "cigkofte", "dürüm", "durum",
+        "wrap", "sandvic", "sandwich", "tost", "gozleme", "borek", "simit",
+        "pogaca", "acma", "croissant", "waffle", "krep", "pancake",
+        "mantı", "manti", "iskender", "adana", "urfa", "beyti",
+        # Tatlı / İçecek
+        "tatli", "dessert", "baklava", "kunefe", "dondurma", "cheesecake",
+        "tiramisu", "profiterol", "sufle", "brownie", "cookie", "kurabiye",
+        "cay", "tea", "latte", "espresso", "americano", "cappuccino",
+        "mocha", "frappe", "smoothie", "meyve suyu", "limonata", "ayran",
+        "bira", "beer", "sarap", "wine", "kokteyl", "cocktail", "raki",
+        "viski", "whiskey", "votka", "vodka", "cin", "gin", "mojito",
+        # Özellikler / Atmosfer
+        "wifi", "internet", "calismak", "calisma", "laptop", "uzaktan",
+        "sessiz", "sakin", "canli", "muzikli", "muzik", "live", "conser",
+        "acik hava", "teras", "bahce", "balkon", "deniz manzarasi",
+        "manzara", "rooftop", "romantik", "samimi", "sicak", "cool",
+        "trendy", "hipster", "vintage", "retro", "modern", "luks", "butik",
+        "cozy", "keyifli", "rahat", "ferah",
+        # Genel arama niyet kelimeleri
+        "oner", "oneri", "tavsiye", "nerede", "bul", "ara", "git",
+        "gidecek", "yiyecek", "icecek", "icilecek", "dene", "kesfet",
+        "gitmek", "yemek yemek", "icmek", "oturmak", "takilmak",
+        "bulusma", "arkadas", "randevu", "date", "kutlama",
+        "dogum gunu", "ozel gun", "etkinlik", "parti",
+    }
+
+    # İlçe/konum adı geçiyor mu?
+    has_district = any(d in query_lower for d in DISTRICTS)
+
+    # Mekan/yemek ile ilgili kelime geçiyor mu?
+    has_venue_keyword = any(vk in query_lower for vk in _VENUE_KEYWORDS)
+
+    # İkisi de yoksa → mekan ile alakalı değil
+    if not has_district and not has_venue_keyword:
+        return {
+            "items": [],
+            "summary": "Merhaba! Ben senin yapay zeka asistanınım. 🤖\n\n"
+                       "Sadece mekan ve yemek önerisi yapabilirim. "
+                       "Mekanlar hakkında sorular sorabilirsin, örneğin:\n"
+                       "• Beşiktaş'ta deniz manzaralı sakin bir kafe ☕\n"
+                       "• Kadıköy'de en iyi burger nerede? 🍔\n"
+                       "• Şişli'de arkadaşlarla gidilecek bar 🍺\n\n"
+                       "Veya gitmek istediğin ilçeyi söyleyebilirsin!",
+            "cached": False,
+        }
+
     # Detect explicit district in query (e.g. "Beşiktaş'ta")
     norm_query = normalize_tr(query)
     explicit_district = None

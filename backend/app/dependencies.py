@@ -58,3 +58,9 @@ def get_admin_user(current_user: models.User = Depends(get_current_user)) -> mod
     if current_user.role != 'admin':
         raise HTTPException(status_code=403, detail="Sadece yöneticiler bu işlemi yapabilir.")
     return current_user
+
+def get_admin_or_venue_user(current_user: models.User = Depends(get_current_user)) -> models.User:
+    if current_user.role not in ['admin', 'venue']:
+        raise HTTPException(status_code=403, detail="Bu işlemi yapmak için yetkiniz bulunmamaktadır.")
+    return current_user
+

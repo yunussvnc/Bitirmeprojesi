@@ -253,7 +253,7 @@ export async function apiUploadFile<T = { url: string }>(
         const json = JSON.parse(text);
         if (json.detail) detail = json.detail;
       } catch { }
-      throw new Error(detail);
+      throw new Error(`API error: ${response.status} - ${detail}`);
     }
     const text = await response.text();
     if (!text.trim()) return {} as T;
