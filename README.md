@@ -62,7 +62,15 @@ Projenin son fazında sisteme entegre edilen modern ve performans odaklı özell
 | **Vektör Arama** | Qdrant + `paraphrase-multilingual-MiniLM-L12-v2` | Çok dilli (multilingual) semantik arama yeteneği ve 198 doğrulanmış İstanbul mekanı. |
 | **Önbellek (Cache)** | Redis (FastAPI + AI-LLM katmanlarında ayrı ayrı caching) | Mekan sorgularını ve oturum verilerini milisaniyeler seviyesine indiren önbellek yapısı. |
 | **Medya Depolama**| Cloudinary & Local Storage Fallback | Kullanıcı profil resimleri, postlar ve hikaye medyaları için CDN destekli depolama. |
-| **Kapsülleme** | Docker Compose | Çoklu servis mimarisini tek komutla ayağa kaldıran yapı. |
+| **Kapsülleme & Dağıtım** | Docker & Docker Compose | Yerel geliştirmede servisleri tek komutla ayağa kaldırır. Bulutta (Render.com) ise Dockerfile'lar üzerinden konteyner tabanlı otomatik dağıtım sağlar. |
+
+---
+
+## 🐳 Bulut Dağıtımı (Render & Docker)
+
+AsEmOs platformunun tüm sunucu servisleri bulutta (Render.com) **Docker** ile çalışmaktadır:
+*   **Otomatik Algılama (Auto-Detect):** GitHub reposuna kod gönderildiğinde (push), Render ilgili servis dizinlerindeki `Dockerfile`'ları otomatik tespit ederek Docker imajını bulutta derler ve çalıştırır.
+*   **Bellek & CPU Optimizasyonları (OOM Önleme):** AI Servisi (`asemos-ai`) gibi bellek sınırı bulunan (Render Free/Starter - 2GB RAM) ortamlarda, PyTorch thread sayısı sınırlandırılmış (`torch.set_num_threads(1)`) ve Uvicorn worker sayısı `1`'e indirilerek bellek aşımı (OOM) tamamen engellenmiştir.
 
 ---
 
