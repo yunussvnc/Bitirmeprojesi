@@ -312,8 +312,15 @@ def recommend_pipeline(
         "kumar", "bahis", "iddaa", "casino", "rulet", "slot", "bet",
     }
 
-    # Bloklanacak kelime var mı?
-    is_blocked = any(bw in query_lower for bw in _BLOCKED_CATEGORIES)
+    # Bloklanacak kelime var mı? (Kelime sınırlarına duyarlı tam eşleşme kontrolü)
+    import re
+    is_blocked = False
+    for bw in _BLOCKED_CATEGORIES:
+        pattern = r'\b' + re.escape(bw) + r'\b'
+        if re.search(pattern, query_lower):
+            is_blocked = True
+            break
+
     if is_blocked:
         return {
             "items": [],
@@ -390,14 +397,49 @@ def recommend_pipeline(
         "dogum gunu", "ozel gun", "etkinlik", "parti",
     }
 
-    # İlçe/konum adı geçiyor mu?
-    has_district = any(d in query_lower for d in DISTRICTS)
+    # Mekan/yemek ilgisi tespiti (Groq LLM Sınıflandırması + Local Fallback)
+    import logging
+    logger = logging.getLogger("asemos.recommend")
+    
+    is_venue_related = None
+    
+    # 1. Eğer LLM etkinse Groq ile akıllı intent sınıflandırması dene
+    if settings.LLM_ENABLED and settings.LLM_PROVIDER.lower() == "groq":
+        try:
+            from llm_client import llm_generate
+            intent_prompt = (
+                "Sen bir mekan ve yemek öneri asistanı yönlendiricisisin. "
+                "Sana gelen kullanıcı sorgusunun bir kafe, restoran, bar, kütüphane, çalışma alanı vb. "
+                "mekan arayışı, yemek veya içecek önerisi talebi veya mekanlarla ilgili bir soru olup olmadığını analiz et.\n\n"
+                "Sorgu şunlardan biriyle alakalıysa 'is_venue_related': true dön:\n"
+                "- Belirli bir yemek/içecek türü yenecek/içilecek mekan bulmak (örn: döner, hamburger, kahve, bira, sushi)\n"
+                "- Belirli bir bölgede mekan aramak (örn: Kadıköy'de sessiz yer, Beşiktaş'ta bar)\n"
+                "- Mekan özellikleri veya aktiviteleri (örn: wifi olan kafe, canlı müzik, deniz manzarası, ders çalışılacak yer)\n"
+                "- Mekan/yemek tavsiyesi istemek veya 'nerede yenir/içilir' gibi sorular.\n\n"
+                "Eğer sorgu tamamen alakasız genel kültür, sohbet, matematik, yazılım, siyaset veya mekan dışı başka bir konuysa 'is_venue_related': false dön.\n\n"
+                "Yanıtı sadece ve sadece aşağıdaki gibi geçerli bir JSON formatında ver, başka hiçbir açıklama veya metin ekleme:\n"
+                "{\n"
+                '  "is_venue_related": true // veya false\n'
+                "}\n\n"
+                f'Analiz edilecek kullanıcı sorgusu:\n"{query}"'
+            )
+            raw_response = llm_generate(intent_prompt)
+            parsed_intent = _safe_json(raw_response)
+            if "is_venue_related" in parsed_intent:
+                is_venue_related = bool(parsed_intent.get("is_venue_related", False))
+                logger.info(f"[INTENT] Groq classified query '{query}' as venue-related: {is_venue_related}")
+        except Exception as e:
+            logger.error(f"[INTENT] Groq classification failed: {e}")
+            is_venue_related = None
+            
+    # 2. Groq devredışıysa veya hata aldıysa (fallback olarak) mevcut kelime/ilçe kontrolünü yap
+    if is_venue_related is None:
+        has_district = any(d in query_lower for d in DISTRICTS)
+        has_venue_keyword = any(vk in query_lower for vk in _VENUE_KEYWORDS)
+        is_venue_related = has_district or has_venue_keyword
+        logger.info(f"[INTENT] Fallback check classified query '{query}' as venue-related: {is_venue_related}")
 
-    # Mekan/yemek ile ilgili kelime geçiyor mu?
-    has_venue_keyword = any(vk in query_lower for vk in _VENUE_KEYWORDS)
-
-    # İkisi de yoksa → mekan ile alakalı değil
-    if not has_district and not has_venue_keyword:
+    if not is_venue_related:
         return {
             "items": [],
             "summary": "Merhaba! Ben senin yapay zeka asistanınım. 🤖\n\n"
