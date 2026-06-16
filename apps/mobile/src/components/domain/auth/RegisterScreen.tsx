@@ -322,9 +322,8 @@ export default function RegisterScreen() {
             keyboardShouldPersistTaps="handled"
             showsVerticalScrollIndicator={false}
           >
-              <View style={{ flex: 1 }}>
-                <View style={styles.content} pointerEvents="box-none">
-                  <View style={styles.topBlock}>
+            <View style={styles.content} pointerEvents="box-none">
+              <View style={styles.topBlock}>
                     {/* Marka başlığı — login ekranıyla aynı konum ve boyut */}
                     <View style={styles.header}>
                       <Text style={styles.brandTitle}>{t('auth.app_name')}</Text>
@@ -658,11 +657,9 @@ export default function RegisterScreen() {
                           <Text style={styles.footerLink}>{t('auth.login')}</Text>
                         </TouchableOpacity>
                       </View>
-
                     </BlurView>
                   </View>
                 </View>
-              </View>
           </ScrollView>
 
           <LegalModal 
@@ -683,12 +680,14 @@ const styles = StyleSheet.create({
   scrollView: { flex: 1 },
   scrollContent: { flexGrow: 1, paddingBottom: 60 },
   content: {
-    flex: 1,
+    width: '100%',
     paddingHorizontal: 24,
     paddingTop: 28,
     paddingBottom: 40,
   },
-  topBlock: { flex: 1 },
+  topBlock: {
+    alignSelf: 'stretch',
+  },
   backgroundImage: { width: '100%' as any, height: '100%' as any },  // kullanılmıyor
   header: {
     alignItems: 'center',
@@ -714,7 +713,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 24,
   },
   card: {
-    width: '100%',
+    alignSelf: 'stretch',
     borderRadius: 28,
     overflow: 'hidden',
     marginTop: 12,

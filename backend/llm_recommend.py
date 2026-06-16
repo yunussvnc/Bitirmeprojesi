@@ -206,6 +206,14 @@ def score_place(
         if ("burger" in norm_q or "hamburger" in norm_q) and ("burger" in p_name or "burger" in p_cat or "burger" in p_feat or "hamburger" in p_name or "hamburger" in p_cat or "hamburger" in p_feat):
             score += 10.0
 
+        # Kategori Cezalandırma / Ödüllendirme Kuralları (Gündüz vs Gece Mekanı Cezası)
+        day_keywords = {"kahvalti", "kahve", "kafe", "tatli", "ders calisma", "kütüphane", "kutupane", "calismak", "work"}
+        night_categories = {"bar", "pub", "meyhane", "gece kulubu", "gece kulübü", "club"}
+        has_day_keyword = any(dk in norm_q for dk in day_keywords)
+        norm_category = normalize_tr(category)
+        if has_day_keyword and norm_category in night_categories:
+            score -= 5.0
+
     # Distance
     distance_m: Optional[int] = None
     p_lat = getattr(place, "latitude", None)
