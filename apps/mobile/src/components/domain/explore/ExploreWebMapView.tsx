@@ -50,7 +50,7 @@ export interface ExploreWebMapViewProps {
 
 function buildMapHTML(accentColor: string, isDark: boolean) {
   const tileUrl = isDark
-    ? 'https://{s}.basemaps.cartocdn.com/dark_nolabels/{z}/{x}/{y}{r}.png'
+    ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
     : 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
 
   const tileAttr = '&copy; <a href="https://carto.com/">CARTO</a>';
@@ -69,16 +69,67 @@ function buildMapHTML(accentColor: string, isDark: boolean) {
   .leaflet-tile-pane .leaflet-layer{background:${mapBg}}
   .leaflet-tile{background:${mapBg}!important}
   .leaflet-control-attribution{display:none!important}
+  .leaflet-div-icon {
+    background: transparent !important;
+    border: none !important;
+    overflow: visible !important;
+  }
+  .custom-marker-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: visible !important;
+  }
   .custom-pin{
     width:28px;height:28px;border-radius:50%;
     border:3px solid #fff;
     box-shadow:0 2px 6px rgba(0,0,0,0.35);
     transition:transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .25s ease;
+    z-index: 2;
   }
   .custom-pin.active{
     transform:scale(1.45);
     box-shadow:0 0 0 8px rgba(255,255,255,0.25),0 4px 12px rgba(0,0,0,0.4);
     border-color:#fff;
+    z-index: 4;
+  }
+  .pin-label {
+    position: absolute;
+    top: 32px;
+    background: rgba(20, 20, 20, 0.88);
+    color: #ffffff;
+    font-size: 10px;
+    font-weight: 600;
+    padding: 3px 6px;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.18);
+    white-space: nowrap;
+    max-width: 110px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.4);
+    pointer-events: none;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s ease;
+    z-index: 3;
+  }
+  /* Show labels only when zoom level is high enough */
+  .show-labels .pin-label {
+    opacity: 1;
+    visibility: visible;
+  }
+  /* Active marker's label should always be visible and highlighted */
+  .custom-pin.active + .pin-label {
+    opacity: 1 !important;
+    visibility: visible !important;
+    background: rgba(30, 30, 30, 0.95) !important;
+    border-color: #ffffff !important;
+    font-weight: 700 !important;
+    transform: scale(1.1);
+    z-index: 5;
   }
 </style>
 </head><body>
@@ -87,13 +138,31 @@ function buildMapHTML(accentColor: string, isDark: boolean) {
 var map=L.map('map',{zoomControl:false,touchZoom:true,doubleClickZoom:true,scrollWheelZoom:true,boxZoom:true}).setView([${ISTANBUL_CENTER.latitude},${ISTANBUL_CENTER.longitude}],13);
 L.tileLayer('${tileUrl}',{maxZoom:19,attribution:'${tileAttr}',keepBuffer:14,subdomains:'abc',crossOrigin:true,updateWhenIdle:false}).addTo(map);
 
+function checkZoom() {
+  var zoom = map.getZoom();
+  var container = map.getContainer();
+  if (zoom >= 14) {
+    container.classList.add('show-labels');
+  } else {
+    container.classList.remove('show-labels');
+  }
+}
+map.on('zoomend', checkZoom);
+checkZoom();
+
 var activePinEl=null;
 var markerLayer=L.layerGroup().addTo(map);
-// Diff-based marker cache: id → {marker, color}
+// Diff-based marker cache: id → {marker, color, name}
 var markerCache={};
 
-function makeIcon(color){
-  return L.divIcon({className:'',html:'<div class="custom-pin" style="background:'+color+'"></div>',iconSize:[28,28],iconAnchor:[14,14]});
+function makeIcon(color, name){
+  var escapedName = name ? name.replace(/'/g, "\\'").replace(/"/g, '&quot;') : '';
+  return L.divIcon({
+    className: 'custom-marker-container',
+    html: '<div class="custom-pin" style="background:'+color+'"></div><div class="pin-label">'+escapedName+'</div>',
+    iconSize: [28,28],
+    iconAnchor: [14,14]
+  });
 }
 
 function selectPin(el){
@@ -129,20 +198,21 @@ function updateMarkers(places){
     var p=incoming[id];
     var color=p.statusColor||'${accentColor}';
     if(markerCache[id]){
-      // Renk değiştiyse ikonu güncelle, marker'ı yeniden oluşturma
-      if(markerCache[id].color!==color){
-        markerCache[id].marker.setIcon(makeIcon(color));
+      // Renk veya isim değiştiyse ikonu güncelle
+      if(markerCache[id].color!==color || markerCache[id].name!==p.name){
+        markerCache[id].marker.setIcon(makeIcon(color, p.name));
         markerCache[id].color=color;
+        markerCache[id].name=p.name;
       }
       return; // Zaten haritada, dokunma
     }
-    var m=L.marker([p.latitude,p.longitude],{icon:makeIcon(color)})
+    var m=L.marker([p.latitude,p.longitude],{icon:makeIcon(color, p.name)})
       .on('click',function(e){
         selectPin(e.target.getElement().querySelector('.custom-pin'));
         window.ReactNativeWebView.postMessage(JSON.stringify({type:'marker',id:p.id}));
       });
     markerLayer.addLayer(m);
-    markerCache[id]={marker:m,color:color};
+    markerCache[id]={marker:m,color:color,name:p.name};
   });
 }
 
