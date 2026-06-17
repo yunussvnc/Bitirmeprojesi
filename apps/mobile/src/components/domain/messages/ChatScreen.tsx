@@ -374,6 +374,8 @@ export default function ChatScreen() {
                     }));
                     setMessages((prev) => {
                         // Backend verisini önceki mesajlarla birleştir (delivered statüsünü korumak için)
+                        const backendIdSet = new Set(backendMsgs.map(m => m.id));
+
                         const mergedMsgs = backendMsgs.map(newMsg => {
                             const oldMsg = prev.find(m => m.id === newMsg.id);
                             if (oldMsg) {
@@ -385,12 +387,27 @@ export default function ChatScreen() {
                             return newMsg;
                         });
 
+                        // Henüz backend'de olmayan optimistic (geçici ID'li) mesajları koru.
+                        // Bu mesajlar Date.now() ile oluşturulduğundan sayısal ama çok büyük ID'ye sahiptir.
+                        // Backend'den onay gelene kadar (polling) bu mesajlar ekrandan kaybolmamalı.
+                        const pendingOptimistic = prev.filter(m => {
+                            if (backendIdSet.has(m.id)) return false; // Backend zaten biliyor
+                            if (!m.isMine) return false;              // Sadece kendi mesajlarımız
+                            // Geçici ID kontrolü: "temp_" prefix'i veya çok büyük sayısal ID (Date.now())
+                            const isTemp = m.id.startsWith('temp_') || (Number(m.id) > 1_700_000_000_000);
+                            return isTemp && m.status === 'sent';
+                        });
+
+                        const finalMsgs = pendingOptimistic.length > 0
+                            ? [...mergedMsgs, ...pendingOptimistic]
+                            : mergedMsgs;
+
                         // Liste uzunlukları veya statüleri değişmişse listeyi güncelle
-                        const isSame = prev.length === mergedMsgs.length && prev.every((m, i) => 
-                            m.id === mergedMsgs[i].id && m.status === mergedMsgs[i].status
+                        const isSame = prev.length === finalMsgs.length && prev.every((m, i) =>
+                            m.id === finalMsgs[i].id && m.status === finalMsgs[i].status
                         );
-                        
-                        return isSame ? prev : mergedMsgs;
+
+                        return isSame ? prev : finalMsgs;
                     });
 
                     // Store'u render sonrasında güncelle (render sırasında state güncelleme hatasını önler)

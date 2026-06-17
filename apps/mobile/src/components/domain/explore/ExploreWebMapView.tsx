@@ -54,7 +54,6 @@ function buildMapHTML(accentColor: string, isDark: boolean) {
     : 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
 
   const tileAttr = '&copy; <a href="https://carto.com/">CARTO</a>';
-
   const mapBg = isDark ? '#1a1a1a' : '#e0e0e0';
 
   return `<!DOCTYPE html>
@@ -69,167 +68,131 @@ function buildMapHTML(accentColor: string, isDark: boolean) {
   .leaflet-tile-pane .leaflet-layer{background:${mapBg}}
   .leaflet-tile{background:${mapBg}!important}
   .leaflet-control-attribution{display:none!important}
-  .leaflet-div-icon {
-    background: transparent !important;
-    border: none !important;
-    overflow: visible !important;
-  }
-  .custom-marker-inner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    width: 28px;
-    height: 28px;
-    overflow: visible !important;
+  .leaflet-div-icon{background:transparent!important;border:none!important;overflow:visible!important}
+  .custom-marker-inner{
+    display:flex;flex-direction:column;align-items:center;justify-content:center;
+    position:relative;width:28px;height:28px;overflow:visible!important;
+    will-change:transform;
   }
   .custom-pin{
     width:28px;height:28px;border-radius:50%;
     border:3px solid #fff;
     box-shadow:0 2px 6px rgba(0,0,0,0.35);
-    transition:transform .25s cubic-bezier(.34,1.56,.64,1),box-shadow .25s ease;
-    z-index: 2;
+    z-index:2;will-change:transform;
   }
   .custom-pin.active{
     transform:scale(1.45);
     box-shadow:0 0 0 8px rgba(255,255,255,0.25),0 4px 12px rgba(0,0,0,0.4);
-    border-color:#fff;
-    z-index: 4;
+    border-color:#fff;z-index:4;
   }
-  .pin-label {
-    position: absolute;
-    top: 32px;
-    background: rgba(20, 20, 20, 0.88);
-    color: #ffffff;
-    font-size: 10px;
-    font-weight: 600;
-    padding: 3px 6px;
-    border-radius: 6px;
-    border: 1px solid rgba(255,255,255,0.18);
-    white-space: nowrap;
-    max-width: 110px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.4);
-    pointer-events: none;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.25s ease, visibility 0.25s ease, transform 0.25s ease;
-    z-index: 3;
+  .pin-label{
+    position:absolute;top:32px;
+    background:rgba(20,20,20,0.88);color:#fff;
+    font-size:10px;font-weight:600;padding:3px 6px;
+    border-radius:6px;border:1px solid rgba(255,255,255,0.18);
+    white-space:nowrap;max-width:110px;overflow:hidden;text-overflow:ellipsis;
+    box-shadow:0 2px 5px rgba(0,0,0,0.4);
+    pointer-events:none;opacity:0;visibility:hidden;z-index:3;
   }
-  /* Show labels only when zoom level is high enough */
-  .show-labels .pin-label {
-    opacity: 1;
-    visibility: visible;
-  }
-  /* Active marker's label should always be visible and highlighted */
-  .custom-pin.active + .pin-label {
-    opacity: 1 !important;
-    visibility: visible !important;
-    background: rgba(30, 30, 30, 0.95) !important;
-    border-color: #ffffff !important;
-    font-weight: 700 !important;
-    transform: scale(1.1);
-    z-index: 5;
+  .show-labels .pin-label{opacity:1;visibility:visible}
+  .custom-pin.active + .pin-label{
+    opacity:1!important;visibility:visible!important;
+    background:rgba(30,30,30,0.95)!important;
+    border-color:#fff!important;font-weight:700!important;
+    transform:scale(1.1);z-index:5;
   }
 </style>
 </head><body>
 <div id="map"></div>
 <script>
-var map=L.map('map',{zoomControl:false,touchZoom:true,doubleClickZoom:true,scrollWheelZoom:true,boxZoom:true}).setView([${ISTANBUL_CENTER.latitude},${ISTANBUL_CENTER.longitude}],13);
-L.tileLayer('${tileUrl}',{maxZoom:19,attribution:'${tileAttr}',keepBuffer:14,subdomains:'abc',crossOrigin:true,updateWhenIdle:false}).addTo(map);
+var map=L.map('map',{
+  zoomControl:false,touchZoom:true,doubleClickZoom:true,
+  scrollWheelZoom:true,boxZoom:true,preferCanvas:true
+}).setView([${ISTANBUL_CENTER.latitude},${ISTANBUL_CENTER.longitude}],13);
 
-function checkZoom() {
-  var zoom = map.getZoom();
-  var container = map.getContainer();
-  if (zoom >= 14) {
-    container.classList.add('show-labels');
-  } else {
-    container.classList.remove('show-labels');
-  }
+L.tileLayer('${tileUrl}',{
+  maxZoom:19,attribution:'${tileAttr}',
+  keepBuffer:4,subdomains:'abcd',crossOrigin:true,
+  updateWhenIdle:true,updateWhenZooming:false
+}).addTo(map);
+
+function checkZoom(){
+  var z=map.getZoom();
+  map.getContainer().classList[z>=14?'add':'remove']('show-labels');
 }
-map.on('zoomend', checkZoom);
+map.on('zoomend',checkZoom);
 checkZoom();
 
 var activePinEl=null;
 var markerLayer=L.layerGroup().addTo(map);
-// Diff-based marker cache: id → {marker, color, name}
 var markerCache={};
+var _rafId=null;
 
-function makeIcon(color, name){
-  var escapedName = name ? name.replace(/'/g, "\\'").replace(/"/g, '&quot;') : '';
+function makeIcon(color,name){
+  var n=name?name.replace(/'/g,"\\'").replace(/"/g,'&quot;'):'';
   return L.divIcon({
-    className: '',
-    html: '<div class="custom-marker-inner"><div class="custom-pin" style="background:'+color+'"></div><div class="pin-label">'+escapedName+'</div></div>',
-    iconSize: [28,28],
-    iconAnchor: [14,14]
+    className:'',
+    html:'<div class="custom-marker-inner"><div class="custom-pin" style="background:'+color+'"></div><div class="pin-label">'+n+'</div></div>',
+    iconSize:[28,28],iconAnchor:[14,14]
   });
 }
 
 function selectPin(el){
-  if(activePinEl) activePinEl.classList.remove('active');
-  if(el){el.classList.add('active');activePinEl=el;}
-  else{activePinEl=null;}
+  if(activePinEl)activePinEl.classList.remove('active');
+  if(el){el.classList.add('active');activePinEl=el;}else{activePinEl=null;}
+}
+
+function _doUpdateMarkers(places){
+  if(!places||!places.length){
+    Object.keys(markerCache).forEach(function(id){markerLayer.removeLayer(markerCache[id].marker);});
+    markerCache={};return;
+  }
+  var incoming={};
+  places.forEach(function(p){if(p.latitude!=null&&p.longitude!=null)incoming[p.id]=p;});
+  Object.keys(markerCache).forEach(function(id){
+    if(!incoming[id]){markerLayer.removeLayer(markerCache[id].marker);delete markerCache[id];}
+  });
+  var keys=Object.keys(incoming),idx=0,BATCH=40;
+  function addBatch(){
+    for(var end=Math.min(idx+BATCH,keys.length);idx<end;idx++){
+      var id=keys[idx],p=incoming[id],color=p.statusColor||'${accentColor}';
+      if(markerCache[id]){
+        if(markerCache[id].color!==color||markerCache[id].name!==p.name){
+          markerCache[id].marker.setIcon(makeIcon(color,p.name));
+          markerCache[id].color=color;markerCache[id].name=p.name;
+        }
+        continue;
+      }
+      (function(pp){
+        var m=L.marker([pp.latitude,pp.longitude],{icon:makeIcon(color,pp.name)})
+          .on('click',function(e){
+            selectPin(e.target.getElement().querySelector('.custom-pin'));
+            window.ReactNativeWebView.postMessage(JSON.stringify({type:'marker',id:pp.id}));
+          });
+        markerLayer.addLayer(m);
+        markerCache[pp.id]={marker:m,color:color,name:pp.name};
+      })(p);
+    }
+    if(idx<keys.length)requestAnimationFrame(addBatch);
+  }
+  requestAnimationFrame(addBatch);
 }
 
 function updateMarkers(places){
-  if(!places||!places.length){
-    // Tümünü temizle
-    Object.keys(markerCache).forEach(function(id){
-      markerLayer.removeLayer(markerCache[id].marker);
-    });
-    markerCache={};
-    return;
-  }
-  // Gelen ID seti
-  var incoming={};
-  places.forEach(function(p){
-    if(p.latitude==null||p.longitude==null)return;
-    incoming[p.id]=p;
-  });
-  // Artık görünmeyen marker'ları kaldır
-  Object.keys(markerCache).forEach(function(id){
-    if(!incoming[id]){
-      markerLayer.removeLayer(markerCache[id].marker);
-      delete markerCache[id];
-    }
-  });
-  // Yeni marker'ları ekle (renk değişimi dahil)
-  Object.keys(incoming).forEach(function(id){
-    var p=incoming[id];
-    var color=p.statusColor||'${accentColor}';
-    if(markerCache[id]){
-      // Renk veya isim değiştiyse ikonu güncelle
-      if(markerCache[id].color!==color || markerCache[id].name!==p.name){
-        markerCache[id].marker.setIcon(makeIcon(color, p.name));
-        markerCache[id].color=color;
-        markerCache[id].name=p.name;
-      }
-      return; // Zaten haritada, dokunma
-    }
-    var m=L.marker([p.latitude,p.longitude],{icon:makeIcon(color, p.name)})
-      .on('click',function(e){
-        selectPin(e.target.getElement().querySelector('.custom-pin'));
-        window.ReactNativeWebView.postMessage(JSON.stringify({type:'marker',id:p.id}));
-      });
-    markerLayer.addLayer(m);
-    markerCache[id]={marker:m,color:color,name:p.name};
-  });
+  if(_rafId)cancelAnimationFrame(_rafId);
+  _rafId=requestAnimationFrame(function(){_doUpdateMarkers(places);_rafId=null;});
 }
 
-function flyToInitial(lat,lng,zoom){
-  map.setView([lat,lng],zoom||13);
-}
+function flyToInitial(lat,lng,zoom){map.setView([lat,lng],zoom||13,{animate:false});}
 
 map.on('click',function(){
   selectPin(null);
   window.ReactNativeWebView.postMessage(JSON.stringify({type:'deselect'}));
 });
 
-function flyTo(lat,lng,zoom){map.flyTo([lat,lng],zoom||13)}
+function flyTo(lat,lng,zoom){map.setView([lat,lng],zoom||13,{animate:true,duration:0.35});}
 function setUserMarker(lat,lng){
-  if(window._userCircle) map.removeLayer(window._userCircle);
+  if(window._userCircle)map.removeLayer(window._userCircle);
   window._userCircle=L.circleMarker([lat,lng],{radius:8,fillColor:'#4285F4',color:'#fff',weight:3,fillOpacity:1}).addTo(map);
 }
 </script>
@@ -343,13 +306,24 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
   );
 
   // Haritaya gönderilecek mekanları statusColor ile zenginleştir
+  // now sabitleniyor — her render'da yeni Date() üretmeyi önlemek için
   const visiblePlacesWithStatus = useMemo(() => {
     const now = new Date();
     return visiblePlaces.map((p) => {
       const status = getPlaceStatus(p.opening_time, p.closing_time, now);
-      return { ...p, statusColor: status.color };
+      // Haritaya sadece gerekli alanları gönder (payload küçük olsun)
+      return {
+        id: p.id,
+        latitude: p.latitude,
+        longitude: p.longitude,
+        name: p.name,
+        statusColor: status.color,
+      };
     });
   }, [visiblePlaces]);
+
+  // Marker inject'i debounce ref ile throttle et
+  const injectTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     if (!mapReady || !webViewRef.current) return;
@@ -359,8 +333,13 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
       script.push(`setUserMarker(${userLocation.latitude},${userLocation.longitude})`);
       setDidAutoCenter(true);
     }
-    script.push(`updateMarkers(${JSON.stringify(visiblePlacesWithStatus)})`);
-    webViewRef.current.injectJavaScript(script.join(';') + ';true;');
+    const payload = JSON.stringify(visiblePlacesWithStatus);
+    script.push(`updateMarkers(${payload})`);
+    // Filtre/arama değişimlerini 120ms debounce ile gönder
+    if (injectTimerRef.current) clearTimeout(injectTimerRef.current);
+    injectTimerRef.current = setTimeout(() => {
+      webViewRef.current?.injectJavaScript(script.join(';') + ';true;');
+    }, 120);
   }, [mapReady, userLocation, visiblePlacesWithStatus, didAutoCenter]);
 
   const prevDistrictRef = useRef<AiSearchDistrict | null>(null);
@@ -507,8 +486,16 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
         javaScriptEnabled
         originWhitelist={['*']}
         cacheEnabled
-        {...(Platform.OS === 'android' && { cacheMode: 'LOAD_CACHE_ELSE_NETWORK' as const })}
-        androidLayerType="hardware"
+        domStorageEnabled
+        startInLoadingState={false}
+        setBuiltInZoomControls={false}
+        {...(Platform.OS === 'android' && {
+          cacheMode: 'LOAD_CACHE_ELSE_NETWORK' as const,
+          androidLayerType: 'hardware' as const,
+          mixedContentMode: 'always' as const,
+          thirdPartyCookiesEnabled: false,
+        })}
+        renderLoading={() => <></>}
       />
 
       <View

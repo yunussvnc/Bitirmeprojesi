@@ -180,15 +180,17 @@ export function Input({
           {...textInputProps}
         />
 
+
         {rightIcon && (
           <TouchableOpacity
             onPress={onRightIconPress}
             style={styles.rightIcon}
             accessibilityRole="button"
+            hitSlop={{ top: 8, bottom: 8, left: 8, right: 8 }}
           >
             <IconSymbol
               name={rightIcon}
-              size={20}
+              size={22}
               color={iconColor}
             />
           </TouchableOpacity>
@@ -229,23 +231,17 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     borderWidth: 1,
     minHeight: 48,
-    maxHeight: 52,
-  },
-  searchContainer: {
-    minHeight: 48,
-    maxHeight: 52,
-    height: 50,
   },
   input: {
     flex: 1,
-    paddingVertical: 0, // Remove default padding for exact 48px
+    paddingVertical: 0,
   },
   leftIcon: {
-    marginRight: 10, // Tighter spacing
+    marginRight: 10,
   },
   rightIcon: {
-    marginLeft: 10, // Tighter spacing
-    padding: 4,
+    marginLeft: 10,
+    padding: 8,
   },
   error: {
     marginTop: 4,
