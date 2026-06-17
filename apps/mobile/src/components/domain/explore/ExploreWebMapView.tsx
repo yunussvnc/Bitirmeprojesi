@@ -74,12 +74,14 @@ function buildMapHTML(accentColor: string, isDark: boolean) {
     border: none !important;
     overflow: visible !important;
   }
-  .custom-marker-container {
+  .custom-marker-inner {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     position: relative;
+    width: 28px;
+    height: 28px;
     overflow: visible !important;
   }
   .custom-pin{
@@ -158,8 +160,8 @@ var markerCache={};
 function makeIcon(color, name){
   var escapedName = name ? name.replace(/'/g, "\\'").replace(/"/g, '&quot;') : '';
   return L.divIcon({
-    className: 'custom-marker-container',
-    html: '<div class="custom-pin" style="background:'+color+'"></div><div class="pin-label">'+escapedName+'</div>',
+    className: '',
+    html: '<div class="custom-marker-inner"><div class="custom-pin" style="background:'+color+'"></div><div class="pin-label">'+escapedName+'</div></div>',
     iconSize: [28,28],
     iconAnchor: [14,14]
   });
