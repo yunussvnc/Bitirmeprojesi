@@ -1,4 +1,4 @@
-﻿/**
+/**
  * Premium Login Screen
  *
  * Arka planda mekan gÃ¶rselleri carousel, profesyonel tipografi,
@@ -195,9 +195,8 @@ export default function LoginScreen() {
             showsVerticalScrollIndicator={false}
           >
             <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-              <View style={{ flex: 1 }}>
-                <View style={styles.content} pointerEvents="box-none">
-                  <View style={styles.topBlock}>
+              <View style={styles.content} pointerEvents="box-none">
+                <View style={styles.topBlock}>
                     {/* Marka & slogan â€“ profesyonel tipografi */}
                     <View style={styles.header}>
                       <Text style={styles.brandTitle}>{t('auth.app_name')}</Text>
@@ -230,7 +229,8 @@ export default function LoginScreen() {
                       </TouchableOpacity>
                     </View>
 
-                    <BlurView intensity={90} tint="dark" style={styles.card}>
+                    <View style={styles.card}>
+                      <BlurView intensity={90} tint="dark" style={StyleSheet.absoluteFillObject} />
                       <View style={styles.cardInner}>
                         <Input
                           variant="onDark"
@@ -331,10 +331,9 @@ export default function LoginScreen() {
                         </TouchableOpacity>
 
                       </View>
-                    </BlurView>
+                    </View>
                   </View>
                 </View>
-              </View>
             </TouchableWithoutFeedback>
           </ScrollView>
 
@@ -364,13 +363,13 @@ const styles = StyleSheet.create({
     paddingBottom: 40,
   },
   content: {
-    flex: 1,
+    width: '100%',
     paddingHorizontal: 24,
     paddingTop: 32,
     paddingBottom: 24,
   },
   topBlock: {
-    flex: 1,
+    alignSelf: 'stretch',
   },
   backgroundImage: {
     // KullanÄ±lmÄ±yor â€” absoluteFillObject kullanÄ±lÄ±yor
@@ -418,7 +417,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 28,
   },
   card: {
-    width: '100%',
+    alignSelf: 'stretch',
     borderRadius: 28,
     overflow: 'hidden',
     marginTop: 20,

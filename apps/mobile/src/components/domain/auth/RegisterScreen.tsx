@@ -353,7 +353,8 @@ export default function RegisterScreen() {
                       </TouchableOpacity>
                     </View>
 
-                    <BlurView intensity={90} tint="dark" style={styles.card}>
+                    <View style={styles.card}>
+                      <BlurView intensity={90} tint="dark" style={StyleSheet.absoluteFillObject} />
                       <View style={styles.cardInner}>
                         {roleType === 'user' ? (
                           <Input
@@ -657,7 +658,7 @@ export default function RegisterScreen() {
                           <Text style={styles.footerLink}>{t('auth.login')}</Text>
                         </TouchableOpacity>
                       </View>
-                    </BlurView>
+                    </View>
                   </View>
                 </View>
           </ScrollView>
