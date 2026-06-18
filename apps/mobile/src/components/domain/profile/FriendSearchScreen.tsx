@@ -11,7 +11,7 @@ import {
   Animated,
   Keyboard,
 } from "react-native";
-import { useRouter, useLocalSearchParams } from "expo-router";
+import { useRouter, useLocalSearchParams, useFocusEffect } from "expo-router";
 import { Avatar } from "@/src/components/ui";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { useTheme } from "@/src/hooks/useTheme";
@@ -95,6 +95,15 @@ export default function FriendSearchScreen() {
       }
     },
     [authUser?.id]
+  );
+
+  useFocusEffect(
+    useCallback(() => {
+      if (searched && query.trim()) {
+        // Re-fetch silently when returning to this screen
+        doSearch(query);
+      }
+    }, [searched, query, doSearch])
   );
 
   const handleChangeText = (text: string) => {

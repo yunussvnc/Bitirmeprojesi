@@ -224,7 +224,7 @@ export default function NetworkScreen() {
     let textStyle: object;
 
     if (isFollowing) {
-      label = "Takip Ediliyor";
+      label = "Takipte";
       btnStyle = {
         backgroundColor: colors.surface.elevated,
         borderWidth: 1,
