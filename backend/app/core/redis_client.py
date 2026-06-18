@@ -23,7 +23,7 @@ async def connect_redis():
             redis_url,
             encoding="utf-8",
             decode_responses=True, # Verileri string olarak döndür (byte yerine)
-            max_connections=10,    # Bağlantı havuzu (Upstash free tier limitlerini aşmamak için düşürüldü)
+            max_connections=100,    # Bağlantı havuzu genişletildi (Too many connections hatasını önlemek için)
             health_check_interval=30, # Cloud Redis için bağlantı kopmasını engeller
             socket_keepalive=True,    # TCP seviyesinde canlı tutar
             socket_timeout=60.0       # Render/Upstash'in default 5sn soket okuma hatasını ezer
