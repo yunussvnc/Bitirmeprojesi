@@ -190,7 +190,7 @@ export default function RegisterScreen() {
     setPlaceSearchLoading(true);
     try {
       const { apiGet } = await import('@/src/utils/apiClient');
-      const res = await apiGet<any>(`/places/?q=${encodeURIComponent(q.trim())}&limit=10`, { skipAuth: true } as any);
+      const res = await apiGet<any>(`/places/search?q=${encodeURIComponent(q.trim())}&page_size=10`, { skipAuth: true } as any);
       const items = res?.items ?? res ?? [];
       setPlaceSearchResults(items.map((p: any) => ({ id: p.id, name: p.name, address: p.address, category: p.category })));
     } catch { setPlaceSearchResults([]); }

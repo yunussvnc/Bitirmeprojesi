@@ -39,7 +39,6 @@ import { useMessagesStore } from "@/src/store/useMessagesStore";
 import { useChatMessagesStore } from "@/src/store/useChatMessagesStore";
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
-import { revealProfile } from "@/src/services/matchService";
 import { toggleBlockUser, createReport } from "@/src/services/moderationService";
 import { getMessages as fetchBackendMessages, sendMessage as backendSendMessage, markMessagesRead, getConversationPermission, type ConversationPermission } from "@/src/services/messageService";
 import { useAuthStore } from "@/src/store/useAuthStore";
@@ -131,7 +130,7 @@ export default function ChatScreen() {
         // Bu yüzden animasyonu başlatıp, JS tarafında setTimeout ile kapatıyoruz.
         overlayOpacity.value = withTiming(0, { duration: 150 });
         imgScale.value = withTiming(0.9, { duration: 150 });
-        
+
         setTimeout(() => {
             setSelectedImageUri(null);
         }, 150);
@@ -341,7 +340,7 @@ export default function ChatScreen() {
         return () => {
             ws.close(1000, 'Screen unmounted');
         };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isBackendConv, numericConvId, accessToken]);
 
     // Backend'den mesaj geçmişini yükle ve 3 saniyede bir yeni mesajları kontrol et
@@ -458,7 +457,7 @@ export default function ChatScreen() {
                         }, 0);
                     }
                 }
-                
+
                 // Sadece karşı taraftan gelen ve henüz okunmamış mesaj varsa "okundu" bildirimi at.
                 // Polling'de sürekli boş yere POST atılmasını engeller.
                 const hasUnreadFromOther = res.items.some((m: any) => m.sender_id !== myId && !m.is_read);
@@ -496,7 +495,7 @@ export default function ChatScreen() {
         // İzin kontrolünü de agresif yapmaya gerek yok, 30 saniye iyidir.
         const permInterval = setInterval(loadPerm, 30000);
         return () => clearInterval(permInterval);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isBackendConv, numericConvId]);
 
     // Contact bilgisini öncelik sırasıyla belirle:
@@ -588,8 +587,8 @@ export default function ChatScreen() {
                 msgPermission.reason === "blocked"
                     ? blockedMsg
                     : msgPermission.reason === "awaiting_reply"
-                      ? t("chat.awaiting_reply")
-                      : t("chat.cannot_send");
+                        ? t("chat.awaiting_reply")
+                        : t("chat.cannot_send");
             Alert.alert(t("chat.restricted_title"), body);
             return;
         }
@@ -1178,8 +1177,8 @@ export default function ChatScreen() {
                     <IconSymbol name="chevron.left" size={26} color={colors.text.primary} />
                 </TouchableOpacity>
 
-                <TouchableOpacity 
-                    style={styles.headerProfile} 
+                <TouchableOpacity
+                    style={styles.headerProfile}
                     activeOpacity={0.8}
                     onPress={() => {
                         // Önce gerçek backend user ID'yi dene, yoksa mock data için fallback kullan
@@ -1238,8 +1237,8 @@ export default function ChatScreen() {
                         {msgPermission.awaiting_reply
                             ? t("chat.restriction_awaiting", "Cevap bekleniyor — yeni mesaj gönderilemez")
                             : msgPermission.reason === "private_account_no_mutual"
-                            ? t("chat.restriction_private", "Gizli hesap — mesaj göndermek için takipleşin")
-                            : t("chat.restriction_limited", "Kısıtlı mod — karşılıklı takipleşince kısıtlamalar kalkar")}
+                                ? t("chat.restriction_private", "Gizli hesap — mesaj göndermek için takipleşin")
+                                : t("chat.restriction_limited", "Kısıtlı mod — karşılıklı takipleşince kısıtlamalar kalkar")}
                     </Text>
                 </View>
             )}
