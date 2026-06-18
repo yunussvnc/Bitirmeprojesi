@@ -664,67 +664,114 @@ def delete_account(
 ):
     """Hesabı kalıcı olarak siler — tüm ilişkili veriler cascade ile temizlenir."""
     uid = current_user.id
-    # Tüm ilişkili verileri temizle (SQLite FK cascade güvenilir değil)
-    db.query(models.Notification).filter(
-        (models.Notification.user_id == uid) | (models.Notification.actor_id == uid)
-    ).delete(synchronize_session=False)
-    db.query(models.Report).filter(
-        (models.Report.reporter_id == uid) | 
-        ((models.Report.target_type == "user") & (models.Report.target_id == uid))
-    ).delete(synchronize_session=False)
-    db.query(models.UserBlock).filter(
-        (models.UserBlock.blocker_id == uid) | (models.UserBlock.blocked_id == uid)
-    ).delete(synchronize_session=False)
-    db.query(models.UserPreferences).filter(models.UserPreferences.user_id == uid).delete()
-    db.query(models.SavedPlace).filter(models.SavedPlace.user_id == uid).delete()
-    db.query(models.SavedPost).filter(models.SavedPost.user_id == uid).delete()
-    db.query(models.EmailVerification).filter(models.EmailVerification.user_id == uid).delete()
-    db.query(models.PasswordReset).filter(models.PasswordReset.user_id == uid).delete()
-    db.query(models.Follow).filter(
-        (models.Follow.follower_id == uid) | (models.Follow.following_id == uid)
-    ).delete(synchronize_session=False)
-    db.query(models.Story).filter(models.Story.user_id == uid).delete()
-    db.query(models.PostLike).filter(models.PostLike.user_id == uid).delete()
-    db.query(models.PostComment).filter(models.PostComment.user_id == uid).delete()
-    db.query(models.PlaceFollow).filter(models.PlaceFollow.user_id == uid).delete(synchronize_session=False)
-    db.query(models.PlaceInteraction).filter(models.PlaceInteraction.user_id == uid).delete(synchronize_session=False)
-    db.query(models.CommunityMember).filter(models.CommunityMember.user_id == uid).delete(synchronize_session=False)
-    db.query(models.CommunityMessage).filter(models.CommunityMessage.sender_id == uid).delete(synchronize_session=False)
-    db.query(models.StoryView).filter(models.StoryView.viewer_id == uid).delete(synchronize_session=False)
-    db.query(models.CommentLike).filter(models.CommentLike.user_id == uid).delete(synchronize_session=False)
-    # Postlar ve medya
-    for p in db.query(models.Post).filter(models.Post.user_id == uid).all():
-        db.query(models.PostMedia).filter(models.PostMedia.post_id == p.id).delete()
-        db.query(models.PostLike).filter(models.PostLike.post_id == p.id).delete()
-        db.query(models.PostComment).filter(models.PostComment.post_id == p.id).delete()
-        db.query(models.SavedPost).filter(models.SavedPost.post_id == p.id).delete()
-        db.delete(p)
-    # Reviewlar
-    for r in db.query(models.Review).filter(models.Review.user_id == uid).all():
-        db.query(models.ReviewMedia).filter(models.ReviewMedia.review_id == r.id).delete()
-        db.delete(r)
-    # Match
-    db.query(models.MatchLike).filter(
-        (models.MatchLike.from_user_id == uid) | (models.MatchLike.to_user_id == uid)
-    ).delete(synchronize_session=False)
-    for conv in db.query(models.Conversation).filter(
-        (models.Conversation.user1_id == uid) | (models.Conversation.user2_id == uid)
-    ).all():
-        db.query(models.Message).filter(models.Message.conversation_id == conv.id).delete()
-        db.delete(conv)
-    mp = db.query(models.MatchProfile).filter(models.MatchProfile.user_id == uid).first()
-    if mp:
-        db.delete(mp)
-    # PostTag temizliği (eksik cascade)
-    db.query(models.PostTag).filter(models.PostTag.user_id == uid).delete(synchronize_session=False)
-    # Kalan eksik PostgreSQL tablolarını temizle
-    db.query(models.CommunityRoom).filter(models.CommunityRoom.created_by == uid).delete(synchronize_session=False)
-    db.query(models.Place).filter(models.Place.owner_id == uid).delete(synchronize_session=False)
-    
-    db.commit()
-    db.delete(current_user)
-    db.commit()
-    return {"ok": True, "message": "Hesabınız kalıcı olarak silindi."}
+    try:
+        # ── 1. Bildirim & Raporlar ──
+        db.query(models.Notification).filter(
+            (models.Notification.user_id == uid) | (models.Notification.actor_id == uid)
+        ).delete(synchronize_session=False)
+        db.query(models.Report).filter(
+            (models.Report.reporter_id == uid) |
+            ((models.Report.target_type == "user") & (models.Report.target_id == uid))
+        ).delete(synchronize_session=False)
+
+        # ── 2. Blok & Gizleme ──
+        db.query(models.UserBlock).filter(
+            (models.UserBlock.blocker_id == uid) | (models.UserBlock.blocked_id == uid)
+        ).delete(synchronize_session=False)
+        db.query(models.StoryHiddenUser).filter(
+            (models.StoryHiddenUser.user_id == uid) | (models.StoryHiddenUser.hidden_user_id == uid)
+        ).delete(synchronize_session=False)
+
+        # ── 3. Tercihler & Kayıtlılar ──
+        db.query(models.UserPreferences).filter(models.UserPreferences.user_id == uid).delete()
+        db.query(models.SavedPlace).filter(models.SavedPlace.user_id == uid).delete()
+        db.query(models.SavedPost).filter(models.SavedPost.user_id == uid).delete()
+        db.query(models.EmailVerification).filter(models.EmailVerification.user_id == uid).delete()
+        db.query(models.PasswordReset).filter(models.PasswordReset.user_id == uid).delete()
+        db.query(models.DeviceToken).filter(models.DeviceToken.user_id == uid).delete(synchronize_session=False)
+
+        # ── 4. Takip & Etkileşim ──
+        db.query(models.Follow).filter(
+            (models.Follow.follower_id == uid) | (models.Follow.following_id == uid)
+        ).delete(synchronize_session=False)
+        db.query(models.PlaceFollow).filter(models.PlaceFollow.user_id == uid).delete(synchronize_session=False)
+        db.query(models.PlaceInteraction).filter(models.PlaceInteraction.user_id == uid).delete(synchronize_session=False)
+
+        # ── 5. Hikaye — önce reaction/view, sonra hikaye ──
+        db.query(models.StoryReaction).filter(models.StoryReaction.user_id == uid).delete(synchronize_session=False)
+        db.query(models.StoryView).filter(models.StoryView.viewer_id == uid).delete(synchronize_session=False)
+        # Kullanıcının kendi hikayelerinin reaction + view kayıtlarını sil
+        user_story_ids = [s.id for s in db.query(models.Story.id).filter(models.Story.user_id == uid).all()]
+        if user_story_ids:
+            db.query(models.StoryReaction).filter(models.StoryReaction.story_id.in_(user_story_ids)).delete(synchronize_session=False)
+            db.query(models.StoryView).filter(models.StoryView.story_id.in_(user_story_ids)).delete(synchronize_session=False)
+        db.query(models.Story).filter(models.Story.user_id == uid).delete()
+
+        # ── 6. Beğeni & Yorum ──
+        db.query(models.CommentLike).filter(models.CommentLike.user_id == uid).delete(synchronize_session=False)
+        db.query(models.PostLike).filter(models.PostLike.user_id == uid).delete()
+        db.query(models.PostComment).filter(models.PostComment.user_id == uid).delete()
+
+        # ── 7. Postlar ve medya (kullanıcının kendi postları) ──
+        db.query(models.PostTag).filter(models.PostTag.user_id == uid).delete(synchronize_session=False)
+        for p in db.query(models.Post).filter(models.Post.user_id == uid).all():
+            db.query(models.PostTag).filter(models.PostTag.post_id == p.id).delete(synchronize_session=False)
+            db.query(models.PostMedia).filter(models.PostMedia.post_id == p.id).delete()
+            db.query(models.PostLike).filter(models.PostLike.post_id == p.id).delete()
+            db.query(models.CommentLike).filter(
+                models.CommentLike.comment_id.in_(
+                    db.query(models.PostComment.id).filter(models.PostComment.post_id == p.id)
+                )
+            ).delete(synchronize_session=False)
+            db.query(models.PostComment).filter(models.PostComment.post_id == p.id).delete()
+            db.query(models.SavedPost).filter(models.SavedPost.post_id == p.id).delete()
+            db.delete(p)
+
+        # ── 8. Reviewlar ──
+        for r in db.query(models.Review).filter(models.Review.user_id == uid).all():
+            db.query(models.ReviewMedia).filter(models.ReviewMedia.review_id == r.id).delete()
+            db.delete(r)
+
+        # ── 9. Mesajlaşma (DM) ──
+        for conv in db.query(models.Conversation).filter(
+            (models.Conversation.user1_id == uid) | (models.Conversation.user2_id == uid)
+        ).all():
+            db.query(models.Message).filter(models.Message.conversation_id == conv.id).delete()
+            db.delete(conv)
+
+        # ── 10. Topluluk ──
+        db.query(models.CommunityMessage).filter(models.CommunityMessage.sender_id == uid).delete(synchronize_session=False)
+        db.query(models.CommunityMember).filter(models.CommunityMember.user_id == uid).delete(synchronize_session=False)
+        # Kullanıcının oluşturduğu topluluk odalarını temizle
+        for room in db.query(models.CommunityRoom).filter(models.CommunityRoom.created_by == uid).all():
+            db.query(models.CommunityMessage).filter(models.CommunityMessage.room_id == room.id).delete(synchronize_session=False)
+            db.query(models.CommunityMember).filter(models.CommunityMember.room_id == room.id).delete(synchronize_session=False)
+            db.delete(room)
+
+        # ── 11. Match ──
+        if hasattr(models, "MatchLike"):
+            db.query(models.MatchLike).filter(
+                (models.MatchLike.from_user_id == uid) | (models.MatchLike.to_user_id == uid)
+            ).delete(synchronize_session=False)
+        if hasattr(models, "MatchProfile"):
+            db.query(models.MatchProfile).filter(models.MatchProfile.user_id == uid).first() and \
+                db.query(models.MatchProfile).filter(models.MatchProfile.user_id == uid).delete(synchronize_session=False)
+
+        # ── 12. Mekan sahipliğini NULL yap (mekanı silme!) ──
+        db.query(models.Place).filter(models.Place.owner_id == uid).update(
+            {"owner_id": None}, synchronize_session=False
+        )
+
+        # ── 13. Kullanıcıyı sil ve tek commit ──
+        db.delete(current_user)
+        db.commit()
+        return {"ok": True, "message": "Hesabınız kalıcı olarak silindi."}
+
+    except Exception as e:
+        db.rollback()
+        import traceback
+        traceback.print_exc()
+        raise HTTPException(status_code=500, detail=f"Hesap silme sırasında bir hata oluştu: {str(e)}")
 
 
 @router.post("/deactivate")
