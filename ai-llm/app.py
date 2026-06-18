@@ -415,7 +415,7 @@ class RedisCacheManager:
         self.ttl = ttl_seconds
         self.hits = 0
         self.misses = 0
-        self.client: redis.Redis = redis.Redis.from_url(redis_url, decode_responses=True)
+        self.client: redis.Redis = redis.Redis.from_url(redis_url, decode_responses=True, max_connections=5)
         self.is_connected = False
         self._connect()
 
