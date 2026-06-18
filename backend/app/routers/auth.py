@@ -665,7 +665,7 @@ def delete_account(
     """Hesabı kalıcı olarak siler — tüm ilişkili veriler cascade ile temizlenir."""
     uid = current_user.id
     try:
-        # ── 1. Bildirim & Raporlar ──
+        # ── 1. Bildirim & Raporlar & Loglar ──
         db.query(models.Notification).filter(
             (models.Notification.user_id == uid) | (models.Notification.actor_id == uid)
         ).delete(synchronize_session=False)
@@ -673,6 +673,8 @@ def delete_account(
             (models.Report.reporter_id == uid) |
             ((models.Report.target_type == "user") & (models.Report.target_id == uid))
         ).delete(synchronize_session=False)
+        db.query(models.AdminAuditLog).filter(models.AdminAuditLog.admin_id == uid).delete(synchronize_session=False)
+        db.query(models.AIQueryLog).filter(models.AIQueryLog.user_id == uid).delete(synchronize_session=False)
 
         # ── 2. Blok & Gizleme ──
         db.query(models.UserBlock).filter(

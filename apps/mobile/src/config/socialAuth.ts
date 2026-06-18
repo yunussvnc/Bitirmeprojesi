@@ -39,9 +39,9 @@ export const GOOGLE_ANDROID_CLIENT_ID = process.env.EXPO_PUBLIC_GOOGLE_ANDROID_C
  * ama Expo Go ortamında çalışmadıkları için webClientId fallback olarak da kullanılır.
  */
 export const googleAuthRequestConfig = {
-  webClientId: GOOGLE_WEB_CLIENT_ID,
-  iosClientId: GOOGLE_IOS_CLIENT_ID || GOOGLE_WEB_CLIENT_ID,
-  androidClientId: GOOGLE_ANDROID_CLIENT_ID || GOOGLE_WEB_CLIENT_ID,
+  webClientId: GOOGLE_WEB_CLIENT_ID || 'unconfigured',
+  iosClientId: GOOGLE_IOS_CLIENT_ID || GOOGLE_WEB_CLIENT_ID || 'unconfigured',
+  androidClientId: GOOGLE_ANDROID_CLIENT_ID || GOOGLE_WEB_CLIENT_ID || 'unconfigured',
   scopes: ['openid', 'profile', 'email'] as const,
   redirectUri: getGoogleRedirectUri(),
 };
