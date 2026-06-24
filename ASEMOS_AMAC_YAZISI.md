@@ -27,6 +27,12 @@ Geliştirilen **AsEmOs** sisteminin amacı, doğal dil işleme ve semantik arama
 *   **Konumsal Eşleşme & Sosyal Akış:** Kullanıcıların yakınlık ve ilgi alanlarına göre anlık eşleşmesi; fotoğraf/video gönderileri, 24 saatlik hikayeler ve takipleşme altyapısı.
 *   **WebSocket Sohbet & optimistic Sync:** optimistic yerel mesaj yönetimi ve veritabanı ID eşleşmesi (`backendIdSet`) ile kesintisiz anlık mesajlaşma sağlar.
 
+### Gelecek Planları ve Yol Haritası
+AsEmOs platformunun gelecekteki gelişim süreçleri için şu yol haritası hedeflenmektedir:
+*   **Akıllı Eşleşme Motoru:** Mevcut ilgi alanı tabanlı eşleşme sistemini, derin öğrenme (Deep Learning) ve işbirlikçi filtreleme (Collaborative Filtering) modelleriyle entegre ederek profesyonel bir sosyal eşleştirme motoruna dönüştürmek.
+*   **Gelişmiş Öneri Algoritması:** Kullanıcıların kaydettiği (Saved Places), puanladığı veya ziyaret ettiği mekan verilerinden dinamik olarak öğrenen; kişisel profil vektörlerini kullanıcı alışkanlıklarına göre sürekli güncelleyen akıllı bir pekiştirmeli öğrenme (Reinforcement Learning) katmanı kurmak.
+*   **Sosyal Planlama Entegrasyonu:** Eşleşen kullanıcıların, kaydettikleri ortak mekanlara yönelik sohbet içinden takvimli ziyaret planları (Event Planner) oluşturabilmesini sağlamak.
+
 ### Sonuç, Mevcut Durum ve Ortak Vizyon
 An itibarıyla AsEmOs platformu, teorik bir tasarım olmanın ötesinde; tüm sunucu bileşenleri (FastAPI, AI-LLM, Qdrant, Redis, PostgreSQL) Dockerize edilerek bulut sunuculara (Render.com) başarıyla konuşlandırılmış ve canlıya alınmıştır. Expo tabanlı mobil uygulama, Next.js 15 admin yönetim paneli ve Vite tabanlı tanıtım web sitesi tüm temel fonksiyonlarıyla eksiksiz ve birbirleriyle entegre şekilde çalışmaktadır. Yapılan semantik doğruluk, performans ve kararlılık testleri başarıyla tamamlanmış olup platform, jüri sunumuna ve gerçek kullanıcı deneyimine hazır bir üretim (production) sürümü seviyesine ulaştırılmıştır.
 
