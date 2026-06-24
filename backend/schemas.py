@@ -423,6 +423,7 @@ class VerifyEmailRequest(BaseModel):
 class VerifyRegisterRequest(BaseModel):
     email: EmailStr
     code: str
+    registration_token: Optional[str] = None
 
 class ResendVerificationRequest(BaseModel):
     email: EmailStr

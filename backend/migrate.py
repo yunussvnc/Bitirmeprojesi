@@ -42,6 +42,8 @@ _SCHEMA_PATCHES = [
     ("pending_venues", "rejected_reason", "TEXT", "TEXT"),
     ("pending_venues", "reviewed_at", "TIMESTAMP WITH TIME ZONE", "DATETIME"),
     ("pending_venues", "reviewed_by_id", "INTEGER REFERENCES users(id) ON DELETE SET NULL", "INTEGER"),
+    # pending_users: bind email verification to the registration attempt that created the password
+    ("pending_users", "registration_token", "VARCHAR", "VARCHAR"),
     # user_preferences tablosu genişletme (Notification Preferences)
     ("user_preferences", "notify_likes", "BOOLEAN NOT NULL DEFAULT TRUE", "BOOLEAN NOT NULL DEFAULT 1"),
     ("user_preferences", "notify_comments", "BOOLEAN NOT NULL DEFAULT TRUE", "BOOLEAN NOT NULL DEFAULT 1"),

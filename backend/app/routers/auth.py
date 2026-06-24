@@ -59,6 +59,10 @@ def _generate_verification_code(length: int = 6) -> str:
     return "".join(secrets.choice(string.digits) for _ in range(length))
 
 
+def _generate_registration_token() -> str:
+    return secrets.token_urlsafe(32)
+
+
 def _verify_google_id_token(token: str) -> dict:
     """Google ID token veya access token doğrulaması; email_verified zorunlu."""
     settings_module = __import__("config", fromlist=["get_settings"]).get_settings()
@@ -144,9 +148,7 @@ def register_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
     
     now_utc = datetime.now(timezone.utc)
     
-    # Check if a valid (unexpired) pending user already exists for this email.
-    # If so, reuse the existing code to prevent retry/timeout race conditions
-    # where a new code is generated but the old code was already emailed.
+    registration_token = _generate_registration_token()
     db_pend = crud.get_pending_user_by_email(db, user.email)
     if db_pend:
         pend_expires = db_pend.expires_at
@@ -154,16 +156,25 @@ def register_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
             pend_expires = pend_expires.replace(tzinfo=timezone.utc)
         
         if pend_expires > now_utc:
-            # Pending user still valid — reuse existing code, don't regenerate
-            return {"ok": True, "message": "Doğrulama kodu e-postanıza gönderildi.", "email": user.email}
+            code = _generate_verification_code()
+            expires_at = now_utc + timedelta(minutes=15)
+            crud.update_pending_user_registration(
+                db,
+                db_pend,
+                user,
+                code,
+                expires_at,
+                registration_token,
+            )
         else:
             # Expired — delete and create fresh
             crud.delete_pending_user(db, user.email)
+            db_pend = None
     
-    code = _generate_verification_code()
-    expires_at = now_utc + timedelta(minutes=15)
-    
-    crud.create_pending_user(db, user, code, expires_at)
+    if not db_pend:
+        code = _generate_verification_code()
+        expires_at = now_utc + timedelta(minutes=15)
+        crud.create_pending_user(db, user, code, expires_at, registration_token)
     
     user_name = user.first_name or "Kullanıcı"
     subject = "AsEmOs — E-posta Doğrulama Kodu"
@@ -181,7 +192,12 @@ def register_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
             detail="E-posta gönderilemedi. Lütfen daha sonra tekrar deneyin.",
         )
         
-    return {"ok": True, "message": "Doğrulama kodu e-postanıza gönderildi.", "email": user.email}
+    return {
+        "ok": True,
+        "message": "Doğrulama kodu e-postanıza gönderildi.",
+        "email": user.email,
+        "registration_token": registration_token,
+    }
 
 @router.post("/venue-register", response_model=schemas.PendingVenueResponse)
 def venue_register(venue_data: schemas.VenueRegisterRequest, db: Session = Depends(get_db)):
@@ -354,6 +370,13 @@ def verify_register(body: schemas.VerifyRegisterRequest, db: Session = Depends(g
     
     if db_pend.verification_code.strip() != body.code.strip():
         raise HTTPException(status_code=400, detail="Doğrulama kodu hatalı.")
+
+    if db_pend.registration_token:
+        if not body.registration_token or not secrets.compare_digest(
+            db_pend.registration_token,
+            body.registration_token,
+        ):
+            raise HTTPException(status_code=400, detail="Kayıt oturumu geçersiz. Lütfen tekrar kayıt olun.")
         
     # Python 3.12 can compare aware with aware datetimes.
     now_utc = datetime.now(timezone.utc)
@@ -553,7 +576,9 @@ def resend_register_code(body: schemas.ResendVerificationRequest, db: Session = 
         raise HTTPException(status_code=429, detail=str(e))
         
     code = _generate_verification_code()
+    registration_token = _generate_registration_token()
     db_pend.verification_code = code
+    db_pend.registration_token = registration_token
     db_pend.expires_at = datetime.now(timezone.utc) + timedelta(minutes=15)
     db.commit()
     
@@ -570,7 +595,11 @@ def resend_register_code(body: schemas.ResendVerificationRequest, db: Session = 
             detail="E-posta gönderilemedi. Lütfen daha sonra tekrar deneyin.",
         )
         
-    return {"ok": True, "message": "Yeni doğrulama kodu gönderildi."}
+    return {
+        "ok": True,
+        "message": "Yeni doğrulama kodu gönderildi.",
+        "registration_token": registration_token,
+    }
 
 
 # --- ŞİFRE SIFIRLAMA (Forgot / Reset Password) ---

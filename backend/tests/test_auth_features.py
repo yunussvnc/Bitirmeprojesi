@@ -29,7 +29,7 @@ from database import Base
 from main import app
 from app.dependencies import get_db
 import models
-from crud import _hash_password
+from crud import _hash_password, _verify_password
 from auth import create_access_token
 
 # ---------------------------------------------------------------------------
@@ -90,6 +90,7 @@ def test_register_creates_pending_user(mock_send):
     data = response.json()
     assert data["ok"] is True
     assert data["email"] == "new@test.com"
+    assert data["registration_token"]
     assert "Doğrulama kodu" in data["message"]
 
     # PendingUser veritabanında mı?
@@ -141,16 +142,72 @@ def test_register_overwrites_expired_pending(mock_send):
 
 
 @patch("app.routers.auth._send_welcome_email")
+@patch("app.routers.auth._generate_verification_code", side_effect=["111111", "222222"])
+@patch("app.routers.auth.send_email")
+def test_repeat_register_rotates_attempt_and_uses_latest_password(mock_send, mock_code, mock_welcome):
+    """Tekrar kayıt, eski şifre/kod/token kombinasyonuyla hesap ele geçirmeyi engeller."""
+    first = client.post("/auth/register", json={
+        "email": "retry-secure@test.com",
+        "password": "AttackerPass123!",
+        "first_name": "Attacker",
+    })
+    assert first.status_code == 200
+    first_token = first.json()["registration_token"]
+
+    second = client.post("/auth/register", json={
+        "email": "retry-secure@test.com",
+        "password": "VictimPass123!",
+        "first_name": "Victim",
+        "last_name": "Owner",
+    })
+    assert second.status_code == 200
+    second_token = second.json()["registration_token"]
+    assert second_token != first_token
+
+    old_attempt = client.post("/auth/verify-register", json={
+        "email": "retry-secure@test.com",
+        "code": "111111",
+        "registration_token": first_token,
+    })
+    assert old_attempt.status_code == 400
+
+    wrong_token = client.post("/auth/verify-register", json={
+        "email": "retry-secure@test.com",
+        "code": "222222",
+        "registration_token": first_token,
+    })
+    assert wrong_token.status_code == 400
+    assert "Kayıt oturumu" in wrong_token.json()["detail"]
+
+    verified = client.post("/auth/verify-register", json={
+        "email": "retry-secure@test.com",
+        "code": "222222",
+        "registration_token": second_token,
+    })
+    assert verified.status_code == 200
+
+    db = TestingSessionLocal()
+    user = db.query(models.User).filter_by(email="retry-secure@test.com").first()
+    assert user is not None
+    assert user.first_name == "Victim"
+    assert user.last_name == "Owner"
+    assert _verify_password("VictimPass123!", user.password_hash) is True
+    assert _verify_password("AttackerPass123!", user.password_hash) is False
+    db.close()
+
+
+@patch("app.routers.auth._send_welcome_email")
 @patch("app.routers.auth.send_email")
 def test_verify_register_success(mock_send, mock_welcome):
     """Doğru kod ile verify-register → User oluşur, token döner."""
     # Önce kayıt
-    client.post("/auth/register", json={
+    register_response = client.post("/auth/register", json={
         "email": "verify@test.com",
         "password": "Pass1234!",
         "username": "verifyuser",
         "first_name": "Doğrula",
     })
+    registration_token = register_response.json()["registration_token"]
 
     # Kodu al
     db = TestingSessionLocal()
@@ -162,6 +219,7 @@ def test_verify_register_success(mock_send, mock_welcome):
     response = client.post("/auth/verify-register", json={
         "email": "verify@test.com",
         "code": code,
+        "registration_token": registration_token,
     })
     assert response.status_code == 200
     data = response.json()
@@ -272,10 +330,11 @@ def test_verify_register_wrong_code(mock_send):
 @patch("app.services.email_service.send_email")
 def test_verify_register_expired_code(mock_send):
     """Süresi dolmuş kod ile verify-register → 400."""
-    client.post("/auth/register", json={
+    register_response = client.post("/auth/register", json={
         "email": "expired@test.com",
         "password": "Pass1234!",
     })
+    registration_token = register_response.json()["registration_token"]
 
     # Kodu expire et
     db = TestingSessionLocal()
@@ -288,6 +347,7 @@ def test_verify_register_expired_code(mock_send):
     response = client.post("/auth/verify-register", json={
         "email": "expired@test.com",
         "code": code,
+        "registration_token": registration_token,
     })
     assert response.status_code == 400
     assert "süresi dolmuş" in response.json()["detail"]
@@ -314,6 +374,7 @@ def test_resend_register_code(mock_send):
     })
     assert response.status_code == 200
     assert response.json()["ok"] is True
+    assert response.json()["registration_token"]
 
     db = TestingSessionLocal()
     new_code = db.query(models.PendingUser).filter_by(email="resend@test.com").first().verification_code

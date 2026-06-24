@@ -31,6 +31,7 @@ class TestScenarioUserLifecycle:
         })
         assert reg_resp.status_code == 200
         assert reg_resp.json()["ok"] is True
+        registration_token = reg_resp.json()["registration_token"]
 
         # 2. Doğrulama kodu al
         db = TestingSessionLocal()
@@ -42,6 +43,7 @@ class TestScenarioUserLifecycle:
         verify_resp = client.post("/auth/verify-register", json={
             "email": "lifecycle@test.com",
             "code": code,
+            "registration_token": registration_token,
         })
         assert verify_resp.status_code == 200
         token = verify_resp.json()["access_token"]

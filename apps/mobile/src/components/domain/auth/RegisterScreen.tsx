@@ -248,14 +248,20 @@ export default function RegisterScreen() {
         const nameParts = fullName.trim().split(' ');
         const first_name = nameParts[0];
         const last_name = nameParts.slice(1).join(' ') || undefined;
-        await registerUser({
+        const registration = await registerUser({
           email: formattedEmail,
           password,
           first_name,
           last_name,
         });
         success();
-        router.replace({ pathname: '/verify-email', params: { email: encodeURIComponent(formattedEmail) } });
+        router.replace({
+          pathname: '/verify-email',
+          params: {
+            email: encodeURIComponent(formattedEmail),
+            registrationToken: registration.registration_token,
+          },
+        });
       } else {
         // Venue Registration — claimed_place_id zorunlu
         if (!selectedPlace) {
