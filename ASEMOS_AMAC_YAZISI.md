@@ -14,6 +14,13 @@ Deneyim ekonomisi yaklaşımları doğrultusunda kentsel mekanlar, mülkiyet ya 
 ### Mevcut Platformların Sınırları ve Semantik Çelişkiler
 Mevcut arama ve harita platformları (Google Maps, Foursquare vb.) tamamen anahtar kelime eşleşmesi ve reklam bütçelerine göre sıralama sunarak semantik çelişkilere yol açmaktadır. Örneğin, açıklamasında sadece "canlı müzik performansı öncesi akşam yemeği servisi sunuyoruz" yazan yüksek sesli bir konser/eğlence mekanı, gündüz saatlerinde sessizce ders çalışmak veya kitap okumak için sakin çalışma alanı arayan bir kullanıcının karşısına ilk sıralarda çıkabilmektedir. Sorun mekan eksikliği değil; kullanıcının doğal dil sorgusundaki gerçek niyeti ile mekanların semantik ruhunu buluşturacak akıllı bir kentsel ekosistemin olmayışıdır.
 
+### Projenin Kalbi: Yapay Zeka ve Katmanlı LLM (RAG) Mimarisi
+AsEmOs platformunun en ayırt edici ve merkezî bileşeni, karmaşık doğal dil sorgularını anlayıp anlamlandırabilen çok katmanlı yapay zeka motorudur. Sistem, geleneksel kelime eşleme sınırlarını aşmak için şu yapay zeka mimarisini kullanır:
+*   **Semantik Arama ve Vektör Veritabanı:** Kullanıcı sorguları çok dilli Sentence Transformers modelleriyle vektörleştirilerek Qdrant Vektör Veritabanındaki mekan özellikleri ve yorumlarıyla yüksek boyutlu benzerlik taramasına sokulur.
+*   **NLP Tabanlı Duygu Analizi (Sentiment Analysis):** Mekanlara yapılan binlerce kullanıcı yorumu duygu analizi süzgecinden geçirilerek mekanların gerçek atmosferi (sessiz, canlı, romantik vb.) sayısal ağırlıklara dönüştürülür.
+*   **Katmanlı LLM ve RAG Akışı:** Benzerlik taraması sonuçları Groq Cloud (Llama 3.1) ve yerel Gemma 2 modellerinden oluşan katmanlı bir LLM hattına gönderilir. Sistem, mekanların neden önerildiğini kullanıcıya doğal dilde açıklayan bir RAG (Retrieval-Augmented Generation) yapısı sunar.
+*   **Groq Niyet Sınıflandırıcı:** Kullanıcının sohbet amaçlı (chitchat) girdileri ile mekan arayışı sorguları Groq tarafından sınıflandırılarak akıllı diyalog yönlendirmesi sağlanır.
+
 ### Bireysel Boyut: Kent Yalnızlığı ve Güvenli Sosyalleşme
 Bireysel düzeyde bu sorunun somut yansıması, büyük şehirlerin kalabalığında yalnızlaşan ve kendi ilgi alanlarına uygun sosyal ortamlara erişemeyen modern kent insanıdır. Bireyler; yeni insanlar tanıma (takipleşme, konum ve ilgi alanı tabanlı eşleşme), dinamik anları paylaşma (post/hikaye gönderileri) ve özgün mekanlar keşfetme arzusuna sahip olsalar da, güvenlik endişeleri sebebiyle bunlardan uzak durmaktadır. Bu bariyeri aşmanın yolu; konum tabanlı harita, yapay zeka denetimli sosyal akış, semantik niyet analizi ve gerçek zamanlı güvenli mesajlaşma odalarıyla şeffaf ve güvenli bir dijital sosyal zemin sunmaktır.
 
