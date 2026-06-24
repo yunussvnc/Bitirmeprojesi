@@ -19,8 +19,8 @@ import models, crud
 class TestScenarioUserLifecycle:
     """Senaryo 1: Kayıt → Doğrulama → İlk Kurulum → Profil → Post."""
 
-    @patch("app.services.email_service._send_welcome_email")
-    @patch("app.services.email_service.send_email")
+    @patch("app.routers.auth._send_welcome_email")
+    @patch("app.routers.auth.send_email")
     def test_full_user_lifecycle(self, mock_send, mock_welcome, client):
         # 1. Kayıt
         reg_resp = client.post("/auth/register", json={

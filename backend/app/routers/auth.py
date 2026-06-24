@@ -156,16 +156,20 @@ def register_user(user: schemas.UserCreate, db: Session = Depends(get_db)):
             pend_expires = pend_expires.replace(tzinfo=timezone.utc)
         
         if pend_expires > now_utc:
-            code = _generate_verification_code()
-            expires_at = now_utc + timedelta(minutes=15)
             crud.update_pending_user_registration(
                 db,
                 db_pend,
                 user,
-                code,
-                expires_at,
+                db_pend.verification_code,
+                db_pend.expires_at,
                 registration_token,
             )
+            return {
+                "ok": True,
+                "message": "Doğrulama kodu e-postanıza gönderildi.",
+                "email": user.email,
+                "registration_token": registration_token,
+            }
         else:
             # Expired — delete and create fresh
             crud.delete_pending_user(db, user.email)

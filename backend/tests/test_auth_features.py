@@ -142,7 +142,7 @@ def test_register_overwrites_expired_pending(mock_send):
 
 
 @patch("app.routers.auth._send_welcome_email")
-@patch("app.routers.auth._generate_verification_code", side_effect=["111111", "222222"])
+@patch("app.routers.auth._generate_verification_code", return_value="111111")
 @patch("app.routers.auth.send_email")
 def test_repeat_register_rotates_attempt_and_uses_latest_password(mock_send, mock_code, mock_welcome):
     """Tekrar kayıt, eski şifre/kod/token kombinasyonuyla hesap ele geçirmeyi engeller."""
@@ -170,18 +170,18 @@ def test_repeat_register_rotates_attempt_and_uses_latest_password(mock_send, moc
         "registration_token": first_token,
     })
     assert old_attempt.status_code == 400
+    assert "Kayıt oturumu" in old_attempt.json()["detail"]
 
-    wrong_token = client.post("/auth/verify-register", json={
+    wrong_code = client.post("/auth/verify-register", json={
         "email": "retry-secure@test.com",
         "code": "222222",
-        "registration_token": first_token,
+        "registration_token": second_token,
     })
-    assert wrong_token.status_code == 400
-    assert "Kayıt oturumu" in wrong_token.json()["detail"]
+    assert wrong_code.status_code == 400
 
     verified = client.post("/auth/verify-register", json={
         "email": "retry-secure@test.com",
-        "code": "222222",
+        "code": "111111",
         "registration_token": second_token,
     })
     assert verified.status_code == 200
@@ -311,7 +311,7 @@ def test_apple_social_login_requires_email(mock_verify):
     assert "e-posta" in response.json()["detail"]
 
 
-@patch("app.services.email_service.send_email")
+@patch("app.routers.auth.send_email")
 def test_verify_register_wrong_code(mock_send):
     """Yanlış kod ile verify-register → 400."""
     client.post("/auth/register", json={
@@ -327,7 +327,7 @@ def test_verify_register_wrong_code(mock_send):
     assert "hatalı" in response.json()["detail"]
 
 
-@patch("app.services.email_service.send_email")
+@patch("app.routers.auth.send_email")
 def test_verify_register_expired_code(mock_send):
     """Süresi dolmuş kod ile verify-register → 400."""
     register_response = client.post("/auth/register", json={
