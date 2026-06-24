@@ -46,10 +46,10 @@ backend/
 ## 🛠️ Temel Sistem Bileşenleri & Gelişmiş Özellikler
 
 ### 1. Kategori Cezalandırma Sistemi (Semantik Doğruluk)
-Semantik arama modellerindeki en büyük problemlerden biri olan kavramsal sapmalar (örn: "kahvaltı" veya "kahve" aratıldığında, açıklamasında bu kelimeler geçen bir meyhane veya gece kulübünün üst sıralarda listelenmesi anomalisi) akıllı bir ceza mekanizması ile çözülmüştür:
-*   Kullanıcı sorgusunda gündüz aktivitesi belirten anahtar kelimeler (`kahvalti`, `kahve`, `kafe`, `tatli`, `calismak` vb.) tespit edilirse;
-*   Önerilen mekanın kategorisi gece hayatı veya alkollü mekan sınıfına (`bar`, `pub`, `meyhane`, `gece kulubu`, `club`) giriyorsa;
-*   İlgili mekanın semantik eşleşme skoruna **`-5.0` ceza puanı** uygulanır. Bu sayede gündüz aramasında alakasız gece mekanlarının zirveye yerleşmesi engellenmiş olur.
+Semantik arama modellerindeki en büyük problemlerden biri olan kavramsal sapmalar (örn: "ders çalışmak" veya "kitap okumak" aratıldığında, açıklamasında bu kelimeler geçen gürültülü bir konser/etkinlik salonunun veya yüksek sesli eğlence merkezinin üst sıralarda listelenmesi anomalisi) akıllı bir ceza mekanizması ile çözülmüştür:
+*   Kullanıcı sorgusunda sakin çalışma veya gündüz aktivitesi belirten anahtar kelimeler (`kahvalti`, `kahve`, `kafe`, `tatli`, `calismak` vb.) tespit edilirse;
+*   Önerilen mekanın kategorisi yüksek sesli eğlence veya hareketli etkinlik sınıfına giriyorsa;
+*   İlgili mekanın semantik eşleşme skoruna **`-5.0` ceza puanı** uygulanır. Bu sayede sakin aramalarda alakasız gürültülü mekanların zirveye yerleşmesi engellenmiş olur.
 
 ### 2. Groq Llama 3.1 Niyet Sınıflandırıcı & Sohbet (Chit-chat) Bypass
 Uygulamadaki yapay zeka arama çubuğunun sadece mekan aramalarında değil, genel sohbet sorgularında da doğru tepki vermesi sağlanmıştır:
