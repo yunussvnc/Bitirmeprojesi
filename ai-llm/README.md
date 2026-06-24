@@ -1,185 +1,132 @@
-# AI-LLM Place Discovery Service
+# AsEmOs — Yapay Zeka & Semantik Arama Servisi (AI-LLM)
 
-Semantic place search and recommendation service built for the `AsEmOs` graduation project. The repository combines a FastAPI service, a Qdrant-backed vector search layer, and an interactive CLI chatbot that understands natural-language venue requests in Turkish.
+İstanbul Yapay Zeka Destekli Mekan Öneri & Sosyal Platformu'nun (AsEmOs) doğal dil işleme, semantik arama ve LLM tabanlı akıllı öneri servisidir. FastAPI kullanılarak yüksek performanslı bir mikroservis olarak tasarlanmıştır.
 
-## Problem
+---
 
-Traditional location search is keyword-heavy and brittle. This project lets users describe intent in natural language, such as "sessiz wifi olan calisma mekani" or "deniz manzarali romantik aksam yemegi", then ranks venues by semantic similarity, nearby distance, and optional LLM reasoning.
+## 💡 Çözülen Problem ve Temel Amacı
 
-## What It Does
+Geleneksel arama motorları anahtar kelime eşleşmelerine dayalıdır ve kırılgandır. Örneğin, *"sessiz ve interneti hızlı ders çalışılacak kafe"* araması yapıldığında geleneksel motorlar içinde sadece "ders" veya "kafe" geçen yerleri ararken; AsEmOs yapay zeka servisi:
+*   Kullanıcının doğal dildeki niyetini ve ihtiyacını anlar.
+*   İstanbul'daki mekanların açıklamaları, özellikleri ve kullanıcı yorumları üzerinden çok dilli (multilingual) semantik benzerlik hesaplar.
+*   Coğrafi konum (GPS) mesafesini ve kullanıcı etkileşim geçmişini ağırlıklandırarak en uygun mekanları listeler ve bunları neden önerdiğini doğal dilde açıklar.
 
-- **Semantic Venue Search:** Natural language search with multilingual sentence embeddings.
-- **Location-Aware Ranking:** Distance calculations with automatic GPS coordination and district filters.
-- **Resilient Layered LLM Setup:** Groq Cloud (`llama-3.1-8b-instant`) with automatic fallback to local Gemma 2 or algorithmic scoring.
-- **Smart Content Filtering:** Multi-language (7 languages: TR, EN, DE, FR, ES, AR, RU) filters to detect and block inappropriate inputs (politics, religion, slang).
-- **Chit-chat Bypass:** Captures casual conversation queries (e.g., "naber", "hello") and responds with friendly, localized assistance instead of returning blank venue recommendations.
-- **Redis Response Caching:** Speeds up response times (down to 75ms) by caching queries and bypassing embedding calculations for duplicate prompts.
-- **Qdrant Vector Storage:** Auto-indexed and synced directly from the PostgreSQL backend database (with local JSON fallback).
+---
 
-## Architecture
+## ⚡ Öne Çıkan Gelişmiş Özellikler
 
-```text
-User query
-  -> Check multi-language content filters (inappropriate/slang detection)
-  -> Check chit-chat bypass (greeting/casual conversation detection)
-  -> Check Redis query cache (returns in 75ms if hit)
-  -> Calculate query embeddings (sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2)
-  -> Semantic retrieval from Qdrant vector database
-  -> Filter by district / location coordinates
-  -> Apply AI recommendation history scoring (penalize previously recommended venues)
-  -> Rank top-k candidates using similarity scores and distance weighting
-  -> Generate natural language explanation using Layered LLM (Groq -> Gemma fallback)
-```
+### 1. Bellek Optimizasyonları & OOM (Out Of Memory) Önleme
+Bulut ortamlarındaki (örneğin Render.com Free katmanı - 2GB RAM sınırı) kısıtlı bellek kaynaklarını aşmamak için özel optimizasyonlar uygulanmıştır:
+*   **PyTorch Thread Sınırlandırması:** PyTorch'un çoklu CPU çekirdeğinde kontrolsüz iş parçacığı (thread) açarak RAM'i tüketmesi engellenmiştir. Model yüklenirken `torch.set_num_threads(1)` ve `torch.set_num_interop_threads(1)` ayarlanarak bellek kullanımı sınırlandırılmıştır.
+*   **Singleton Tasarım Deseni:** `SentenceTransformer` gömme (embedding) modeli yalnızca bir kez, lazy loading (ihtiyaç anında yükleme) ve Singleton yapısıyla belleğe alınır.
+*   **Garbage Collector Tetikleme:** Model belleğe yüklendikten hemen sonra Python çöp toplayıcısı (`gc.collect()`) manuel tetiklenerek geçici yükleme artıkları RAM'den temizlenir. Bu sayede servis RAM kullanımı stabil bir şekilde **1.2GB - 1.4GB** bandında tutulur ve OOM kaynaklı çökmeler önlenir.
 
-## Results
+### 2. Katmanlı LLM (Groq & Gemma Fallback)
+Platform, kararlı ve kesintisiz hizmet sunabilmek için katmanlı bir LLM mimarisi kullanır:
+*   **Birincil Model (Groq Cloud):** İstekler son derece hızlı çalışan Groq Cloud (`llama-3.1-8b-instant`) servisi ile işlenir ve milisaniyeler içinde yanıtlanır.
+*   **İkincil Model (Yerel Gemma 2):** Bulut API'sinde bir kota aşımı, ağ kesintisi veya hata yaşanırsa, sistem otomatik olarak yerel olarak çalışan HuggingFace Gemma 2 modeline veya pure algoritmik skorlama motoruna düşer (fallback).
 
-Validated metrics from `docs/TEST_RESULTS.md`:
+### 3. Çok Dilli İçerik Filtresi (Content Moderation)
+Kullanıcıların yapay zekaya uygunsuz veya alakasız sorgular girmesini önlemek için 7 dilde (Türkçe, İngilizce, Almanca, Fransızca, İspanyolca, Rusça, Arapça) çalışan bir içerik filtresi bulunur:
+*   Siyaset, din, argo, küfür veya şiddet içerikli sorgular daha yapay zeka motoruna gitmeden elenir ve kullanıcıya uyarı dönülür.
 
-- 5/5 location-aware search tests passed
-- 22 venues returned across the test suite
-- 2.086 s average response time
-- 75 ms fastest response after warm-up
-- 10.033 s cold-start response on the first query
-- 0.548 average similarity score
-- 0.4 similarity threshold and top 5 result limit
+### 4. Redis Akıllı Önbellek (Cache)
+*   Sorguların ve semantik yanıtların çift yönlü Redis cache kaydı tutulur (TTL: 15 dakika).
+*   Aynı veya çok benzer bir arama tekrar yapıldığında, embedding hesaplama ve LLM açıklama üretme adımları atlanarak yanıt süresi **75 milisaniyeye** kadar düşürülür.
 
-Additional current system facts:
+### 5. Qdrant Vektör Veritabanı Entegrasyonu
+*   İstanbul'daki doğrulanmış 198 mekanın semantik vektörleri Qdrant üzerinde depolanır.
+*   PostgreSQL veritabanı ile otomatik senkronizasyon yeteneği mevcuttur. Çevrimdışı testler için yerel JSON dosyası (`data/loaded_places.json`) üzerinden in-memory Qdrant vektör tabanı oluşturma desteği de sağlanmıştır.
 
-- Qdrant collection stores 198 real Istanbul venues in the service flow
-- The interactive CLI supports popular preset locations such as Taksim, Kadikoy, Besiktas, Sultanahmet, and Nisantasi
-- The chatbot can fall back from live search to local vector retrieval when needed
+---
 
-## Data
-
-- `data/loaded_places.json`: loaded venue snapshot for local/vector-based testing
-- `data/google_maps_places.json`: raw place data gathered from external search sources
-- Source fields include venue name, category, address, coordinates, rating, and review count
-- On Render, RAG can auto-index `data/loaded_places.json` into Qdrant. If `QDRANT_URL` is empty, the service uses in-memory Qdrant and rebuilds the index after each restart.
-
-## Tech Stack
-
-- Python, FastAPI, Uvicorn
-- Qdrant, Redis
-- Sentence Transformers, Transformers, Torch
-- Groq Cloud and local HuggingFace Gemma fallback
-- SerpAPI / Google Maps data ingestion utilities
-
-## Project Structure
+## 📂 AI-LLM Dizin Yapısı
 
 ```text
 ai-llm/
-├── app.py
-├── chatbot_interaktif.py
-├── env.example
-├── requirements.txt
-├── data/
-├── docs/
-├── scripts/
+├── app.py                     # Ana FastAPI Servis Uygulaması (Port 8080)
+├── chatbot_interaktif.py      # CLI üzerinden çalışan etkileşimli deneme asistanı
+├── requirements.txt           # Python kütüphane bağımlılıkları listesi
+├── data/                      # Yerel mekan yedekleri ve test JSON verileri
+├── docs/                      # Performans test raporları ve metrikler
+├── scripts/                   # Vektör veritabanı hazırlama ve veri kazıma betikleri
 ├── src/
-│   ├── api/
-│   ├── models/
-│   ├── rag/
-│   ├── recommendation/
-│   └── vector_db/
-└── tests/
+│   ├── api/                   # API rotaları ve istek şemaları
+│   ├── models/                # Singleton Embedding ve LLM yükleyiciler
+│   ├── rag/                   # Qdrant arama ve RAG (Retrieval-Augmented Generation) akışı
+│   ├── recommendation/        # Yorum duygu analizi ve benzerlik skorlama
+│   └── vector_db/             # Vektör DB bağlantı yöneticisi
+└── tests/                     # Semantik doğruluk ve yük testleri
 ```
 
-## How To Run
+---
 
-### 1. Install dependencies
+## 📍 API Uç Noktaları (Endpoints)
 
+| Endpoint | Metot | Açıklama |
+|---|---|---|
+| `/health` | GET | Servis sağlık durumunu ve çalışma süresini (uptime) döner. |
+| `/api/info` | GET | Aktif embedding modeli, cihaz tipi ve Redis cache istatistiklerini gösterir. |
+| `/api/smart-search-v2` | POST | Doğal dildeki mekan arama sorgusunu semantik analiz edip öneri ve LLM açıklamalarıyla döner. |
+| `/api/rag-search` | POST | Doğrudan Qdrant vektör tabanından salt semantik mekan eşleşmeleri getirir. |
+| `/api/analyze-place-reviews` | POST | Belirli bir mekana ait yorumları NLP ile analiz edip güçlü/zayıf yön özetleri çıkarır. |
+
+---
+
+## ⚙️ Yerel Kurulum ve Çalıştırma
+
+### 1. Bağımlılıkların Kurulması
 ```bash
+cd ai-llm
+python -m venv .venv
+source .venv/bin/activate # Windows için: .venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-### 2. Configure environment variables
+### 2. Ortam Değişkenleri Yapılandırması
+`ai-llm/` dizininde bir `.env` dosyası oluşturun:
+```env
+EMBEDDING_MODEL=paraphrase-multilingual-MiniLM-L12-v2
+EMBEDDING_DEVICE=cpu # GPU varsa 'cuda' yazabilirsiniz
 
-```bash
-cp env.example .env
+# Qdrant Vektör DB
+QDRANT_URL=http://localhost:6333
+QDRANT_COLLECTION_NAME=mekan_embeddings
+RAG_AUTO_INDEX=true
+RAG_INDEX_ON_STARTUP=false
+
+# LLM ve API Anahtarları
+GROQ_API_KEY=gsk_...
+LLM_PROVIDER=groq
+LLM_ENABLED=true
+
+# Redis Cache
+REDIS_URL=redis://localhost:6379/0
 ```
 
-Required runtime values depend on the mode you use:
-
-- `QDRANT_URL`
-- `QDRANT_API_KEY` if using Qdrant Cloud
-- `RAG_AUTO_INDEX=true`
-- `RAG_INDEX_ON_STARTUP=false` for faster cold starts, or `true` to build the vector index during startup
-- `SERPAPI_KEY` for live place search
-- `GROQ_API_KEY` for the cloud LLM layer
-- `GOOGLE_MAPS_API_KEY` only if you use Google Maps based scripts
-
-### 3. Start the API service
-
+### 3. API Sunucusunun Başlatılması
 ```bash
 uvicorn app:app --reload --port 8080
 ```
+Servis `http://localhost:8080` portu üzerinde çalışmaya başlayacaktır.
 
-### 4. Run the interactive chatbot
+---
 
+## 💬 Etkileşimli CLI Test Asistanı (`chatbot_interaktif.py`)
+
+Servisi tarayıcı veya mobil olmadan doğrudan terminal üzerinden test etmek için etkileşimli bir sohbet aracı geliştirilmiştir:
 ```bash
 python chatbot_interaktif.py
 ```
 
-## Interactive CLI Commands
+### CLI Kontrol Komutları:
+*   `ornek` : Kullanabileceğiniz örnek doğal dil sorgularını listeler.
+*   `konum` : Simüle edilen mevcut GPS konumunuzu değiştirmenizi sağlar (örn: Kadıköy, Taksim, Beşiktaş vb.).
+*   `yardim` : Yardım menüsünü ekrana basar.
+*   `cikis` : Sohbet asistanından güvenli bir şekilde ayrılır.
 
-| Command | Description |
-| --- | --- |
-| Type any text | Search for a venue with natural language |
-| `ornek` | Show sample prompt categories |
-| `konum` | Change the current location |
-| `yardim` | Print the help menu |
-| `cikis` | Exit the chatbot |
-
-## Example Queries
-
-- `kahve icmek istiyorum`
-- `yorgunum sessiz dinlenmek istiyorum`
-- `ailecek gidebilecegimiz cocuk oyun alani olan`
-- `deniz manzarali romantik aksam yemegi`
-
-## API Endpoints
-
-| Endpoint | Method | Description |
-| --- | --- | --- |
-| `/health` | GET | Health check |
-| `/api/info` | GET | Service stats and configuration info |
-| `/api/smart-search-v2` | POST | Natural-language venue search |
-| `/api/rag-search` | POST | RAG-only semantic venue search from the vector database |
-| `/api/analyze-place-reviews` | POST | Review insight extraction |
-
-## Render RAG Setup
-
-For a persistent production RAG index, create a Qdrant Cloud cluster and set these Render environment variables:
-
-```bash
-QDRANT_URL=https://<cluster-url>
-QDRANT_API_KEY=<qdrant-api-key>
-QDRANT_COLLECTION_NAME=mekan_embeddings
-RAG_AUTO_INDEX=true
-RAG_INDEX_ON_STARTUP=false
-RAG_DATA_PATH=data/loaded_places.json
-```
-
-If `QDRANT_URL` is left empty, `/api/rag-search` still works in demo mode: the service creates an in-memory vector database and loads the JSON snapshot lazily on the first RAG request. This survives within the same process, but Render restarts rebuild it.
-
-To increase the local snapshot deliberately, run it only from a local environment that has `SERPAPI_KEY`:
-
-```bash
-python collect_400_places.py --target 600
-python scripts/prepare_vector_db.py --json data/loaded_places.json --force
-```
-
-**Auto Postgres sync:** `collect_400_places.py` upserts to `places` when `DATABASE_URL` is set (use `--no-sync-postgres` to skip); on Render, `PLACES_SYNC_ON_STARTUP=true` re-syncs `loaded_places.json` if the DB count falls below 95% of the JSON snapshot.
-
-## Demo Assets
-
-Add screenshots or terminal captures under `screenshots/`:
-
-- chatbot start screen
-- example query and ranked output
-
-## Notes
-
-- The first request can be slow because the embedding or LLM model loads lazily
-- The local CLI and the broader service share core retrieval pieces but support different operating modes
-- Secrets must stay in `.env`; do not hardcode API keys into source files
+### Örnek Test Arama Sorguları:
+*   *"Sessiz sakin ders çalışmalık bir yer arıyorum wifi olsun"*
+*   *"Kadıköy'de deniz manzaralı romantik akşam yemeği mekanları"*
+*   *"Çocuk oyun alanı olan aileyle gidilecek restorant"*
+*   *"Arkadaşlarla bira içip maç izleyeceğimiz pub"*

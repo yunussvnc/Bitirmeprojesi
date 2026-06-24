@@ -1,43 +1,43 @@
-# AsEmOs - Backend API Servisi
+# AsEmOs — Backend API Servisi
 
-İstanbul Yapay Zeka Destekli Mekan Öneri & Sosyal Platformu'nun (AsEmOs) merkezî backend API servisidir. FastAPI kullanılarak modüler, yüksek performanslı ve asenkron standartlara uygun şekilde geliştirilmiştir.
+İstanbul Yapay Zeka Destekli Mekan Öneri & Sosyal Platformu'nun (AsEmOs) merkezî backend API servisidir. FastAPI kullanılarak modüler, yüksek performanslı, asenkron ve ölçeklenebilir standartlara uygun şekilde geliştirilmiştir.
 
 ---
 
 ## 🚀 Teknolojik Mimari ve Altyapı
 
-*   **Framework:** Python 3.11 & FastAPI (Asenkron request handling).
-*   **İlişkisel Veritabanı:** PostgreSQL (Üretim ortamı) & SQLite (Geliştirme/test ortamı).
-*   **Veritabanı ORM & Göçler:** SQLAlchemy (2.0 tarzı sorgular) ve Alembic (Veritabanı göç yönetimi).
-*   **Önbellek & Pub/Sub:** Redis (API caching ve WebSocket mesaj dağıtımı).
-*   **Kimlik Doğrulama:** JWT (JSON Web Tokens) & Google OAuth 2.0 (Sosyal Giriş).
-*   **Medya Yönetimi:** Cloudinary CDN entegrasyonu & yerel medya yükleme fallback'i.
-*   **Hata İzleme & Loglama:** Sentry entegrasyonu ve yapılandırılmış istek/hata loglama middleware'leri.
-*   **Görsel Önizleme:** Blurhash kodlama (mobil tarafta anında bulanık önizleme sunmak için).
+*   **Çatı (Framework):** Python 3.11 & FastAPI (Asenkron istek işleme ve yüksek performans).
+*   **İlişkisel Veritabanı:** PostgreSQL (Production ortamı) & SQLite (Yerel geliştirme ve test suite fallback).
+*   **Veritabanı ORM & Göçler:** SQLAlchemy (2.0 tarzı modern asenkron sorgular) ve Alembic (Veritabanı şema göç yönetimi).
+*   **Önbellek & Pub/Sub:** Redis (API caching, rate limiting ve WebSocket mesaj dağıtımı).
+*   **Kimlik Doğrulama:** JWT (JSON Web Tokens) & Google OAuth 2.0 (Mobil standalone APK yönlendirmelerine uyumlu sosyal giriş).
+*   **Medya Yönetimi:** Cloudinary CDN entegrasyonu & yerel disk depolama fallback'i.
+*   **Hata İzleme & Loglama:** Yapılandırılmış istek/hata loglama middleware'leri ve özel log çıktıları.
+*   **Görsel Önizleme:** Blurhash kodlama (mobil tarafta resim yüklenene kadar anında bulanık önizleme sunmak için sunucuda üretilir).
 
 ---
 
-## 📂 Backend Dizin Yapısı
+## 📂 Dizin Yapısı
 
 ```text
 backend/
 ├── app/
-│   ├── core/                 # Redis client, JWT güvenlik, konfigürasyon (config.py)
-│   ├── middleware/           # Hata yakalama, rate limiting ve request loglama katmanları
-│   ├── repositories/         # Veritabanı veri erişim soyutlamaları (hazırlık)
-│   ├── routers/              # Modüler API endpoint'leri (13 Router)
-│   ├── services/             # Push bildirimleri, arka plan görevleri (scheduler)
-│   └── websocket/            # WebSocket bağlantı yöneticisi ve Redis Pub/Sub entegrasyonu
-├── db_revision_history/      # Alembic migration dosyaları ve DB şema geçmişi
-├── tests/                    # Entegrasyon, stres ve robustness test suite'i
+│   ├── core/                 # Redis istemcisi, JWT güvenlik ayarları, genel yapılandırma (config.py)
+│   ├── middleware/           # Hata yakalama, rate limiting ve detaylı istek günlüğü (request logging)
+│   ├── repositories/         # Veritabanı veri erişim soyutlamaları
+│   ├── routers/              # Modüler API uç noktaları (13 adet bağımsız router)
+│   ├── services/             # Push bildirimleri, asenkron arka plan işleri (scheduler, moderation)
+│   └── websocket/            # WebSocket bağlantı yöneticisi ve Redis Pub/Sub dağıtım katmanı
+├── db_revision_history/      # Alembic migrasyon dosyaları ve veritabanı şema geçmişi
+├── tests/                    # Entegrasyon, birim ve stres test suite'i
 ├── config.py                 # Pydantic tabanlı çevre değişkenleri yönetimi
-├── crud.py                   # SQLAlchemy ORM sorguları ve iş mantığı (cache invalidation, geofencing)
-├── database.py               # SQL bağlantı motoru ve session yapılandırması
-├── llm_client.py             # Groq/OpenAI bulut API'leri ve yerel model adaptörleri
-├── llm_recommend.py          # AI öneri ve sıralama mantığı (geçmiş puanlamalı)
+├── crud.py                   # SQLAlchemy ORM sorguları ve gelişmiş filtreleme/arama mantığı
+├── database.py               # SQL bağlantı motoru ve oturum (session) yapılandırması
+├── llm_client.py             # Groq/OpenAI bulut API'leri ve yerel model entegrasyon adaptörü
+├── llm_recommend.py          # Kategori cezaları, Groq niyet kontrolü ve konum ağırlıklı AI öneri motoru
 ├── main.py                   # FastAPI uygulaması başlangıç noktası (lifespan olayları)
-├── models.py                 # SQLAlchemy ORM modelleri (User, Place, Review, Story, Message vb.)
-├── schemas.py                # Veri doğrulama için kapsamlı Pydantic şemaları
+├── models.py                 # SQLAlchemy ORM modelleri (User, Place, Review, Story, Message, vb.)
+├── schemas.py                # Veri doğrulama ve serialization için Pydantic şemaları
 └── requirements.txt          # Python bağımlılık listesi
 ```
 
@@ -45,74 +45,81 @@ backend/
 
 ## 🛠️ Temel Sistem Bileşenleri & Gelişmiş Özellikler
 
-### 1. Redis Caching & Cache Invalidation (Mekan Sorguları)
-`/places/` endpoint'i üzerinden yapılan sayfalama (pagination) destekli mekan sorguları Redis üzerinde cache'lenir (15 dakika TTL).
-*   Milisaniyeler düzeyinde yanıt süresi sağlanır.
-*   Sisteme yeni bir mekan eklendiğinde (`POST /places/`), `BackgroundTasks` aracılığıyla asenkron olarak `invalidate_places_cache()` tetiklenir ve `cache:places:*` şablonundaki tüm Redis anahtarları temizlenerek veri tutarlılığı korunur.
+### 1. Kategori Cezalandırma Sistemi (Semantik Doğruluk)
+Semantik arama modellerindeki en büyük problemlerden biri olan kavramsal sapmalar (örn: "kahvaltı" veya "kahve" aratıldığında, açıklamasında bu kelimeler geçen bir meyhane veya gece kulübünün üst sıralarda listelenmesi anomalisi) akıllı bir ceza mekanizması ile çözülmüştür:
+*   Kullanıcı sorgusunda gündüz aktivitesi belirten anahtar kelimeler (`kahvalti`, `kahve`, `kafe`, `tatli`, `calismak` vb.) tespit edilirse;
+*   Önerilen mekanın kategorisi gece hayatı veya alkollü mekan sınıfına (`bar`, `pub`, `meyhane`, `gece kulubu`, `club`) giriyorsa;
+*   İlgili mekanın semantik eşleşme skoruna **`-5.0` ceza puanı** uygulanır. Bu sayede gündüz aramasında alakasız gece mekanlarının zirveye yerleşmesi engellenmiş olur.
 
-### 2. Hikaye (Stories) Sistemi ve Arka Plan Görev Zamanlayıcı
-Kullanıcıların fotoğraf veya video içeren 24 saat süreli hikayeler paylaşmasını sağlar.
-*   **Scheduler (`background_scheduler`):** FastAPI `startup` event'i ile başlatılan asenkron bir background görevi, her saat başı veritabanını tarayarak süresi 24 saati geçmiş hikayeleri (`created_at < now - 24 hours`) otomatik olarak siler.
+### 2. Groq Llama 3.1 Niyet Sınıflandırıcı & Sohbet (Chit-chat) Bypass
+Uygulamadaki yapay zeka arama çubuğunun sadece mekan aramalarında değil, genel sohbet sorgularında da doğru tepki vermesi sağlanmıştır:
+*   **Akıllı Yönlendirme:** Kullanıcı sorgusu alındığında, Groq (`llama-3.1-8b-instant`) modeli kullanılarak sorgunun bir mekan/yemek arayışı mı yoksa genel sohbet/soru (chit-chat) mu olduğu sınıflandırılır.
+*   **Sohbet Fallback'i:** Sorgu mekan dışı bir sohbet ise (`is_venue_related = false`), boş mekan listesi döndürmek yerine kullanıcıya samimi bir rehberlik mesajı (örneğin: *"Merhaba! Ben senin yapay zeka asistanınım. Beşiktaş'ta deniz manzaralı sakin bir kafe önerisi gibi mekan aramalarında yardımcı olabilirim..."*) sunulur.
+*   **Hızlı Fallback:** Groq API'sinde bir gecikme veya hata yaşanırsa, sistem otomatik olarak yerel Regex/kelime eşleme fallback kontrolüne geçerek kesintisiz yanıt garantisi sunar.
 
-### 3. Google Sign-In & JWT Entegrasyonu
-*   Google OAuth 2.0 API'leri kullanılarak sosyal giriş entegre edilmiştir.
-*   Özellikle mobil APK/AOT (standalone) derlemelerinde yaşanan yönlendirme (Redirect URI) hatalarını çözmek üzere optimize edilmiştir.
-*   Giriş sonrası güvenli, expire süreli JWT access token'lar üretilir ve istemciye teslim edilir.
+### 3. Redis Caching & Cache Invalidation (Mekan Keşfi)
+Keşfet ve mekan listeleme uç noktaları (`/places/`), sayfalama (pagination) ve filtre parametrelerini içeren benzersiz anahtarlar ile Redis üzerinde cache'lenir (15 dakika TTL).
+*   Mekan verileri doğrudan Redis'ten dönerek yanıt sürelerini milisaniyeler seviyesine indirir.
+*   Yönetici veya işletme sahibi yeni bir mekan eklediğinde (`POST /places/`), `BackgroundTasks` asenkron iş mantığı devreye girerek `invalidate_places_cache()` fonksiyonunu çalıştırır ve `cache:places:*` altındaki tüm cache anahtarlarını silerek anında veri tutarlılığı sağlar.
 
-### 4. PostGIS Geofence Fallback (Doğrulanmış Yorumlar)
-Kullanıcıların bir mekana yorum yaparken oraya gerçekten gidip gitmediklerini (verify) doğrulamak için konum kontrolü yapılır.
-*   **PostGIS Modu:** PostgreSQL üzerinde PostGIS uzantısı yüklüyse coğrafi fonksiyonlar (`ST_DWithin`, `ST_MakePoint`) kullanılır.
-*   **Fallback Modu:** PostGIS bulunmayan veritabanlarında (örneğin yerel SQLite), SQLAlchemy üzerinde matematiksel Haversine mesafe formülü (`sin`, `cos`, `acos`) kullanılarak 100 metrelik coğrafi sınır (geofence) doğrulaması başarıyla gerçekleştirilir.
+### 4. WebSocket Sohbet & Polling Mesaj Senkronizasyonu
+Kullanıcıların anlık mesajlaşmalarında (DM) hiçbir mesajın kaybolmaması veya mükerrer görünmemesi için hibrit bir senkronizasyon altyapısı kurulmuştur:
+*   Kullanıcı bir mesaj gönderdiğinde istemcide optimistic (geçici) bir yerel ID oluşturulur.
+*   Mesaj sunucuya ulaşıp veritabanına yazıldığında, üretilen kalıcı veritabanı ID'si (`id`) ve istemcinin geçici ID'si (`temporaryId`) WebSocket veya Polling HTTP yanıtı ile istemciye bildirilir.
+*   İstemci tarafında `backendIdSet` mekanizması kullanılarak geçici ID, gerçek sunucu ID'siyle güncellenir. Bu sayede mesajın mükerrer render edilmesi veya senkron dışı kalması engellenir.
+*   Çoklu sunucu mimarisinde WebSocket mesajlarının doğru kullanıcılara dağıtılması için Redis Pub/Sub mekanizması entegre edilmiştir.
 
-### 5. WebSocket Sohbet & Anlık Mesajlaşma (Redis Pub/Sub)
-Gerçek zamanlı birebir sohbet (chat) odaları WebSocket aracılığıyla yönetilir.
-*   Mesajlar veritabanına kaydedilirken aynı anda bağlı kullanıcılara anlık olarak ulaştırılır.
-*   Yatayda ölçeklenebilirlik için Redis Pub/Sub mekanizması entegre edilmiştir; böylece farklı sunucu örneklerindeki websocket bağlantıları birbirleriyle haberleşebilir.
+### 5. PostGIS Geofence Fallback (Doğrulanmış Yorumlar)
+Bir mekana yorum yapabilmek için kullanıcının o mekana fiziksel olarak gitmiş olması istenir.
+*   **PostGIS Desteği:** PostgreSQL üzerinde PostGIS uzantısı aktifse `ST_DWithin` ve `ST_MakePoint` uzantıları ile 100 metrelik bir coğrafi sınır (geofencing) sorgulanır.
+*   **Matematiksel Fallback:** SQLite veya PostGIS barındırmayan hafif veritabanı kurulumlarında, SQLAlchemy ORM katmanında Haversine mesafe formülü (`sin`, `cos`, `acos`) kullanılarak 100 metrelik sınır kontrolü matematiksel olarak simüle edilir ve sistemin kesintisiz çalışması korunur.
 
-### 6. Görsel Yükleme ve Blurhash Önizleme
-*   Profil fotoğrafları, postlar ve hikaye görselleri Cloudinary CDN servisi üzerinden asenkron olarak yüklenir.
-*   Görsel yüklenirken sunucu tarafında hızlıca bir **Blurhash** kodu üretilir ve veritabanına kaydedilir. Bu sayede mobil uygulama, asıl görsel internetten inene kadar ekranda estetik bir bulanık önizleme (placeholder) gösterebilir.
+### 6. Hikayeler (Stories) ve Asenkron Arka Plan Görevleri
+*   24 saatlik süre limiti bulunan görsel/video hikaye paylaşımları desteklenir.
+*   FastAPI lifespan olayları (`startup`) ile başlatılan asenkron bir `background_scheduler` görevi, her saat başı arka planda sessizce çalışarak süresi dolmuş hikayeleri veritabanından ve diskten temizler.
 
 ---
 
 ## 📍 Modüler API Router'ları (`app/routers/`)
 
-Backend API 13 farklı modüler router ile yönetilir:
+Sistem, sorumlulukların ayrılması prensibine uygun olarak 13 modüler router ile yönetilmektedir:
 
-1.  `auth.py`: Kayıt, JWT giriş, Google OAuth giriş ve şifre yenileme işlemleri.
-2.  `users.py`: Kullanıcı profil işlemleri, ayarlar, toplu profil sorgulama (batch query).
-3.  `places.py`: Mekan ekleme, detay sorgulama, ilçe filtreli keşfet listeleri ve Redis cache.
-4.  `reviews.py`: Mekana yorum yazma, doğrulanmış yorum (QR & Geofence) kontrolleri.
-5.  `feed.py`: Sosyal akış (postlar, beğeniler, cursor tabanlı pagination).
-6.  `stories.py`: Hikaye oluşturma, listeleme ve aktif hikayeleri getirme.
-7.  `notifications.py`: Kampanya bildirimleri, push bildirimleri ve WebSocket bildirim tetikleyicileri.
-8.  `match.py`: Kullanıcılar arası konum ve ilgi alanı tabanlı gerçek zamanlı eşleşme sistemi.
-9.  `upload.py`: Cloudinary tabanlı medya yükleme ve Blurhash üretim servisleri.
-10. `recommend.py`: llm_recommend entegrasyonu ile kişiselleştirilmiş AI önerileri.
-11. `messages.py`: WebSocket tabanlı anlık sohbet odaları ve mesaj geçmişi.
-12. `saved.py`: Kullanıcının kaydettiği mekan listeleri (Saved Places).
-13. `community.py`: Takipleşme (follow), kullanıcı engelleme (blocking), raporlama (reporting) ve kısıtlı hesaplar (restricted accounts) yönetimi.
+| Router | Dosya | Sorumluluk |
+|---|---|---|
+| **Kimlik Doğrulama** | `auth.py` | Standart kayıt, JWT giriş, Google OAuth 2.0 sosyal giriş ve şifre yenileme işlemleri. |
+| **Kullanıcı İşlemleri**| `users.py` | Profil güncelleme, kullanıcı ayarları ve toplu profil (batch) sorguları. |
+| **Mekan Yönetimi** | `places.py` | Mekan CRUD, ilçe/kategori filtreleri ve Redis cache entegrasyonu. |
+| **Yorum & Puan** | `reviews.py` | Mekan yorumları, konumsal doğrulama (Geofence) ve puanlama mekanizması. |
+| **Sosyal Akış** | `feed.py` | Kullanıcı postları, beğeniler, yorumlar ve cursor tabanlı akış sayfalama. |
+| **Hikayeler** | `stories.py` | 24 saatlik hikaye yükleme, listeleme ve görüntüleme. |
+| **Bildirimler** | `notifications.py`| Push bildirimleri, kampanya/etkinlik bildirimleri ve bildirim geçmişi. |
+| **Eşleşme Motoru** | `match.py` | Konum ve ortak ilgi alanlarına göre gerçek zamanlı kullanıcı eşleşme sistemi. |
+| **Medya Yükleme** | `upload.py` | Cloudinary CDN entegrasyonu ve sunucu taraflı Blurhash üretimi. |
+| **AI Önerileri** | `recommend.py` | `llm_recommend` katmanıyla kişiselleştirilmiş, akıllı semantik mekan önerileri. |
+| **Mesajlaşma** | `messages.py` | Birebir sohbet odaları, WebSocket yönetimi ve mesaj geçmişi. |
+| **Kaydedilenler** | `saved.py` | Kullanıcıların favori/kaydedilmiş mekan listelerinin yönetimi. |
+| **Topluluk Kontrolü**| `community.py` | Takip etme, engelleme, kısıtlama, raporlama ve içerik moderasyon altyapısı. |
 
 ---
 
-## 🛠️ Yerel Kurulum ve Çalıştırma
+## ⚙️ Yerel Kurulum ve Çalıştırma
 
-### 1. Çevre Değişkenleri
-`backend/.env` dosyasını oluşturun ve değişkenleri tanımlayın:
+### 1. Çevre Değişkenleri Yapılandırması
+`backend/` dizini altında bir `.env` dosyası oluşturun ve aşağıdaki değişkenleri tanımlayın:
 ```env
 DATABASE_URL=postgresql://user:pass@localhost:5432/asemos
-# Geliştirme için SQLite fallback: sqlite:///./sqlite.db
+# Geliştirme/Test için SQLite fallback: sqlite:///./sqlite.db
 
 REDIS_URL=redis://localhost:6379/0
 REDIS_TTL_SECONDS=900
 
-JWT_SECRET_KEY=your_super_secret_hex_key
+JWT_SECRET_KEY=kendi_guvenli_hex_anahtariniz
 JWT_ALGORITHM=HS256
 ACCESS_TOKEN_EXPIRE_MINUTES=115200
 
-CLOUDINARY_CLOUD_NAME=your_cloudinary_name
-CLOUDINARY_API_KEY=your_api_key
-CLOUDINARY_API_SECRET=your_api_secret
+CLOUDINARY_CLOUD_NAME=cloudinary_hesap_adiniz
+CLOUDINARY_API_KEY=cloudinary_api_anahtariniz
+CLOUDINARY_API_SECRET=cloudinary_api_sirriniz
 
 GROQ_API_KEY=gsk_...
 LLM_PROVIDER=groq
@@ -121,31 +128,30 @@ LLM_ENABLED=true
 PLACES_SYNC_ON_STARTUP=false
 ```
 
-### 2. Kurulum Adımları
+### 2. Bağımlılıkların Yüklenmesi & Göçler
 ```bash
-# Python sanal ortamını oluşturun ve aktif edin
+# Sanal ortam oluşturma ve aktif etme
 python -m venv .venv
-source .venv/bin/activate # Windows: .venv\Scripts\activate
+source .venv/bin/activate # Windows için: .venv\Scripts\activate
 
-# Bağımlılıkları yükleyin
+# Bağımlılıkları yükleme
 pip install -r requirements.txt
 
-# Alembic göçlerini (migrations) veritabanına uygulayın
+# Veritabanını güncel şemaya eşleme
 alembic upgrade head
-
-# Uygulamayı başlatın
-uvicorn main:app --reload --port 8000
 ```
 
-### 3. API Testleri
-Yazılan entegrasyon ve stres testlerini çalıştırmak için:
+### 3. API Servisini Çalıştırma
+```bash
+uvicorn main:app --reload --port 8000
+```
+API servisiniz `http://localhost:8000` adresinde çalışmaya başlayacaktır.
+
+*   **Swagger UI (Etkileşimli API Testi):** `http://localhost:8000/docs`
+*   **ReDoc (Detaylı API Şeması):** `http://localhost:8000/redoc`
+
+### 4. Testleri Çalıştırma
+Yazılmış olan entegrasyon ve birim testlerini koşturmak için pytest kullanabilirsiniz:
 ```bash
 pytest
 ```
-
----
-
-## 📖 Swagger API Dokümantasyonu
-Sunucu çalışırken interaktif dokümantasyona tarayıcınızdan erişebilirsiniz:
-*   **Swagger UI:** `http://localhost:8000/docs`
-*   **ReDoc:** `http://localhost:8000/redoc`

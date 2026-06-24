@@ -1,6 +1,6 @@
-# AsEmOs - Mobil Uygulama (Expo SDK 54)
+# AsEmOs — Mobil Uygulama (Expo SDK 54)
 
-İstanbul Yapay Zeka Destekli Mekan Öneri & Sosyal Platformu'nun (AsEmOs) mobil istemci uygulamasıdır. React Native ve Expo SDK 54 kullanılarak geliştirilmiştir.
+İstanbul Yapay Zeka Destekli Mekan Öneri & Sosyal Platformu'nun (AsEmOs) mobil istemci uygulamasıdır. React Native ve Expo SDK 54 kullanılarak modern, performans odaklı ve çapraz platform (Cross-platform) standartlarına uygun şekilde geliştirilmiştir.
 
 ---
 
@@ -8,16 +8,16 @@
 
 *   **Çatı (Framework):** React Native (Expo SDK 54, Expo Router v6).
 *   **Programlama Dili:** TypeScript.
-*   **Yönlendirme (Routing):** Dosya sistemi tabanlı **Expo Router** (App Router yapısı).
+*   **Yönlendirme (Routing):** Dosya sistemi tabanlı **Expo Router** (Tab ve Stack yapısı bir arada).
 *   **Durum Yönetimi (State):** **Zustand** (Hafif, modüler ve yüksek performanslı global state yönetimi).
-*   **Harita Entegrasyonu:** `react-native-maps` (Keşfet haritası ve özel marker tasarımları).
+*   **Harita Motoru:** **WebView + Leaflet JS** (Harici yerel modül gerektirmeyen, yüksek performanslı ve özelleştirilebilir interaktif harita altyapısı).
 *   **Yerelleştirme (Localization):** `i18next` & `react-i18next` (Türkçe ve İngilizce çoklu dil desteği).
-*   **Yerel Donanım:** `expo-camera` ve `expo-image-picker` (Profil resmi, post ve hikaye görsel yüklemeleri için).
-*   **Tasarım & İkonlar:** `lucide-react-native`, `tabler-icons-react-native` ve `expo-linear-gradient` (modern cam morfolojisi ve degrade renkler).
+*   **Donanım Entegrasyonları:** `expo-camera` ve `expo-image-picker` (Profil resmi, sosyal gönderi ve hikaye medya paylaşımları için yerel kamera erişimi).
+*   **Arayüz Tasarımı:** Modüler Vanilla CSS & Stylesheets, `expo-linear-gradient` ve `lucide-react-native` ikon seti (modern cam morfolojisi - glassmorphism ve degrade geçişler).
 
 ---
 
-## 📂 Mobil Uygulama Dizin Yapısı
+## 📂 Dizin Yapısı
 
 ```text
 mobile/
@@ -25,7 +25,7 @@ mobile/
 │   ├── (tabs)/               # Normal Kullanıcı Sekmeleri (Explore, Feed, Match, Messages, Saved, Profile)
 │   ├── (venue-tabs)/         # İşletme/Mekan Kullanıcı Sekmeleri
 │   ├── settings/             # Ayarlar, Engellenenler, Bildirim ve Gizlilik Ekranları
-│   ├── _layout.tsx           # Global Layout, JWT expire kontrolü ve Provider'lar
+│   ├── _layout.tsx           # Global Layout, JWT expire kontrolü ve Context Provider'lar
 │   ├── login.tsx             # Giriş Ekranı (Sosyal + Normal Giriş)
 │   ├── register.tsx          # Kayıt Ekranı
 │   ├── first-time-setup.tsx  # İlk Kayıt Sonrası Detay Belirleme Sihirbazı
@@ -33,15 +33,15 @@ mobile/
 │
 ├── src/
 │   ├── components/           # UI ve Domain Bileşenleri
-│   │   ├── domain/           # Domain bazlı ekran tasarımları (explore, feed, match, chat)
-│   │   └── ui/               # Yeniden kullanılabilir atomik arayüz bileşenleri
+│   │   ├── domain/           # Sektörel/Domain bazlı ekran tasarımları (explore, feed, match, chat)
+│   │   └── ui/               # Yeniden kullanılabilir atomik arayüz bileşenleri (Button, Input, Card vb.)
 │   ├── context/              # Tema (Karanlık/Aydınlık) Context'i
 │   ├── hooks/                # WebSocket bildirim ve ağ izleme hook'ları
 │   ├── locales/              # i18n Dil JSON dosyaları (tr.json, en.json)
 │   ├── providers/            # Push bildirim ve kütüphane sağlayıcıları
 │   ├── services/             # API ve AI servis bağlantı katmanı (Axios istemcileri)
 │   ├── store/                # Zustand Global Mağazaları (Zustand Stores)
-│   └── utils/                # JWT Interceptor'lar ve yardımcı fonksiyonlar
+│   └── utils/                # JWT Interceptor'lar ve yardımcı konumsal fonksiyonlar
 ├── app.json                  # Expo Konfigürasyon Dosyası
 ├── package.json              # Uygulama Bağımlılıkları
 └── tsconfig.json             # TypeScript Konfigürasyonu
@@ -49,54 +49,55 @@ mobile/
 
 ---
 
-## ✨ Öne Çıkan Arayüz Özellikleri ve Zustand Stores
+## ✨ Öne Çıkan Arayüz Özellikleri ve Çözülen Kritik Sorunlar
 
-### 1. Keşfet Ekranı ve İlçe Filtresi (`ExploreScreen`)
-*   Harita üzerinde İstanbul'un ilçelerine göre filtreleme imkanı sunar.
-*   Kullanıcı konumu alındığında harita otomatik olarak o noktaya odaklanır.
-*   Mekan detay parametreleri sayfalar arası taşınarak anında (instant) render edilir.
+### 1. WebView Tabanlı Gelişmiş Harita (Leaflet JS) Entegrasyonu
+Eski yerel `react-native-maps` kütüphanesinin simülatörlerde ve Expo Go üzerinde yarattığı bağımlılık sorunlarını aşmak amacıyla tamamen WebView tabanlı asenkron bir Leaflet harita motoru entegre edilmiştir:
+*   **Marker Drift (Pin Kayması) Çözümü:** Leaflet marker'larının flexbox stilleriyle çakışarak harita kaydırıldığında koordinatlardan sapması engellenmiştir. Leaflet wrapper sınıfı boş (`className: ''`) bırakılıp, stiller doğrudan alt `.custom-marker-inner` div yapısına aktarılarak pin kaymaları tamamen çözülmüştür.
+*   **Harita Kontrast ve Etiketleri (Dark Mode):** Harita karanlık modda iken sokak isimlerinin ve caddelerin görünürlüğünü kaybetmemesi amacıyla CartoDB'nin `dark_all` tile sunucuları entegre edilmiştir. Aydınlık modda ise `light_all` tile'ları kullanılır.
+*   **Zoom Duyarlı Etiketler:** Pinlerin altında yer alan mekan isim etiketlerinin yarattığı görsel karmaşayı önlemek için, isimler yalnızca harita zoom seviyesi **`>= 14`** olduğunda görünecek şekilde optimize edilmiştir.
+*   **Maksimum Harita Performansı:** Pin çizimleri `requestAnimationFrame` (`addBatch`) ile asenkron gruplandırılarak WebView'a aktarılan payload küçültülmüş ve harita hareket ederken pin güncellemeleri **120ms debounce** ile filtrelenerek donmalar engellenmiştir.
 
-### 2. Hikaye (Stories) Paylaşımı ve Gösterimi (`feedService` & `storyService`)
-*   Instagram stili üst hikaye halkaları (story ring) tasarımı.
-*   Kamera veya galeriden görsel seçerek açıklama ekleme ve hikaye olarak paylaşma ekranı.
-*   Arka planda hikayeler 24 saat sonra silinir.
+### 2. Android BlurView Kırpılma (Clipping) Sorunu Giderimi
+Giriş (`LoginScreen`) ve Kayıt (`RegisterScreen`) ekranlarında kullanılan estetik buzlu cam (`BlurView`) kartlarının Android işletim sisteminde köşe yuvarlama (`borderRadius`) ve kenarlık kesilmesi sorunları çözülmüştür:
+*   `BlurView` bileşeninin doğrudan stillendirilmesi yerine standart bir parent `View` içerisine absolute yerleşim yapılmış, `overflow: 'hidden'` katmanı dış kapsayıcıya verilerek her iki platformda da kusursuz pürüzsüz köşeler elde edilmiştir.
 
-### 3. Gelişmiş Medya Yükleme Hattı (`useUploadPipelineStore`)
-*   Büyük dosyaların yüklenmesi esnasında ekranda **UploadProgressBanner** gösterilerek kullanıcının yükleme yüzdesi ve durumu gerçek zamanlı olarak takip etmesi sağlanır.
-*   Yüklemeler esnasında **Blurhash** kodları üretilerek yavaş ağlarda görseller yüklenene kadar güzel bir arka plan placeholder'ı gösterilir.
+### 3. Şifre Giriş Alanı İyileştirmeleri
+Şifre giriş bileşenindeki (`Input.tsx`) göz ikonunun tıklama zorlukları ve metin kesilme hataları giderilmiştir:
+*   İkon boyutu `22`ye çıkarılmış, dikey metin kesilmelerini engellemek için dikey padding oranları dengelenmiştir.
+*   Kullanıcıların ikona dokunma hassasiyetini artırmak amacıyla göz ikonuna **`hitSlop={{ top: 12, bottom: 12, left: 12, right: 12 }}`** alanı tanımlanarak tıklama alanı genişletilmiştir.
 
-### 4. Çevrimdışı Önbellek Sistemi (`useOfflineCache`)
-*   Uygulamanın internet bağlantısı kesildiğinde, önceden yüklenmiş olan mekan listesi, kullanıcı profili ve geçmiş mesajlar çevrimdışı önbellekten okunarak uygulamanın kesintisiz çalışması sağlanır.
+### 4. Optimize Edilmiş Medya Yükleme Hattı (`useUploadPipelineStore`)
+*   Kullanıcıların profil resmi, post veya hikaye yüklerken yaşadığı belirsizlikleri ortadan kaldırmak için, arka plan yüklemelerini takip eden ve ekranın üstünde yer alan dinamik bir **UploadProgressBanner** geliştirilmiştir.
+*   Yüklemeler esnasında sunucuda üretilen **Blurhash** kodları sayesinde, resimlerin aslı yüklenene kadar arayüzde estetik bir bulanık placeholder render edilir.
 
-### 5. Kısıtlı Hesaplar ve Engelleme/Raporlama (`useSettingsStore`)
-*   Ayarlar ekranı üzerinden engellenen kullanıcılar, kısıtlanan hesaplar ve raporlanan içerikler dinamik olarak yönetilebilir.
-*   Engellenen kullanıcıların postları sosyal akıştan ve mesaj listelerinden otomatik olarak gizlenir.
+### 5. Çevrimdışı (Offline) Önbellek Sistemi (`useOfflineCache`)
+*   Uygulamanın internet bağlantısı kesildiğinde, Zustand store'larındaki son güncel veriler (Mekan listeleri, profil bilgileri, geçmiş mesajlar) yerel önbellek (AsyncStorage) üzerinden okunarak uygulamanın kesintisiz hizmet sunması sağlanır.
 
 ---
 
-## 🛠️ Yerel Kurulum ve Çalıştırma
+## ⚙️ Yerel Kurulum ve Çalıştırma
 
 ### 1. Bağımlılıkları Yükleme
-Mobil dizine geçerek gerekli paketleri yükleyin:
+Mobil dizine geçerek gerekli npm paketlerini yükleyin:
 ```bash
 cd apps/mobile
 npm install
 ```
 
-### 2. Çevre Değişkenleri Konfigürasyonu
-`apps/mobile/.env.local` dosyasını oluşturun:
+### 2. Çevre Değişkenleri Yapılandırması
+`apps/mobile/` dizini altında bir `.env.local` dosyası oluşturun ve backend/AI servislerinizin adreslerini tanımlayın:
 ```env
 EXPO_PUBLIC_API_URL=http://localhost:8000
 EXPO_PUBLIC_AI_URL=http://localhost:8080
 ```
-*Not: Gerçek cihazlarda test ederken `localhost` yerine bilgisayarınızın yerel IP adresini (örn: `http://192.168.1.X:8000`) yazmalısınız.*
+*Not: Fiziksel cihazlarda test ederken `localhost` yerine bilgisayarınızın yerel ağ IP adresini (örneğin: `http://192.168.1.50:8000`) girmelisiniz.*
 
 ### 3. Expo Geliştirme Sunucusunu Başlatma
 ```bash
-# Expo'yu başlatın
 npx expo start
 ```
-*   **Android için:** Konsolda `a` tuşuna basın veya fiziksel cihazınızdan QR kodu okutun.
-*   **iOS için:** Konsolda `i` tuşuna basın veya kameranızdan QR kodu okutun.
-*   **Web için:** `npm run web` komutu ile tarayıcıda çalıştırın.
-*   **Metro Cache Temizleme:** Eğer paketleme esnasında sorun yaşarsanız `npx expo start -c` ile cache temizleyerek başlatın.
+Terminalde karşınıza çıkan menüden:
+*   **Android için:** `a` tuşuna basın (emülatör yüklüyse) veya fiziksel cihazınızdan Expo Go uygulamasını açıp QR kodu okutun.
+*   **iOS için:** `i` tuşuna basın (Xcode Simulator yüklüyse) veya kameranızdan QR kodu okutun.
+*   **Metro Cache Temizleme:** Eğer paketleme esnasında sorun yaşarsanız `npx expo start -c` komutuyla cache temizleyerek başlatın.

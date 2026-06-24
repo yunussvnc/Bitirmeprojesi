@@ -20,8 +20,8 @@ try:
     else:
         print("User not found?")
     
-    # utku in case it was broken too
-    user2 = db.query(models.User).filter(models.User.email == "utku@mail.com").first()
+    # admin in case it was broken too
+    user2 = db.query(models.User).filter(models.User.email == "admin@mail.com").first()
     if user2:
         user2.password_hash = crud._hash_password("123456")
         db.commit()
