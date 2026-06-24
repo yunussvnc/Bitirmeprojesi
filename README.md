@@ -6,23 +6,29 @@ AsEmOs; kullanıcıların doğal dilde mekan arayabildiği, sosyal etkileşime g
 
 ---
 
-## 🚀 Öne Çıkan Yeni Özellikler & Son Güncellemeler
+## 🚀 Öne Çıkan Yeni Özellikler
 
-Projenin son geliştirme fazlarında sisteme entegre edilen modern ve performans odaklı özellikler ile kritik hata giderimleri:
+Projenin son fazında sisteme entegre edilen modern ve performans odaklı özellikler:
 
-*   **Vite + React Landing Page (`frontend/`):** 3D grafikler (React Three Fiber & Drei) ve Framer Motion animasyonları içeren modern web tanıtım sitesi sisteme eklenmiştir.
-*   **Görsel Sunum Slayt Oluşturucu (`generate_presentation.py`):** Projenin jüri ve tez sunumları için premium tasarımlı 17 slaytlık PowerPoint (`.pptx`) sunumunu programatik olarak üreten araç. Uygulama ekran görüntülerini (`screenshot_map.png`, `screenshot_ai.png` vb.) otomatik algılayıp ilgili slaytlara yerleştirir.
+*   **Hikayeler (Stories) Sistemi:** Kullanıcıların 24 saat süreli görsel/video hikayeler paylaşabilmesi. Backend'de çalışan asenkron arka plan görevleri (Scheduler) ile süresi dolan hikayelerin otomatik silinmesi ve mobil arayüz entegrasyonu.
+*   **Keşfet Haritası & İlçe Filtreleme:** Harita üzerinde İstanbul'un ilçelerine (Beşiktaş, Kadıköy vb.) göre filtreleme yapabilme, kullanıcının GPS konumuna göre otomatik odaklanma ve yüksek performanslı harita pinleri.
 *   **Dinamik WebView Haritası & Marker Çözümleri:**
     *   **Marker Drift Giderimi:** Leaflet marker'ının flexbox stilleriyle Leaflet absolute koordinat motorunu bozması engellenmiştir. Leaflet wrapper sınıfı boş bırakılıp alt `.custom-marker-inner` div yerleşimiyle marker kaymaları çözülmüştür.
     *   **Harita Kontrast ve Etiketleri:** Harita dark modda iken sokak isimlerinin görünmesi için CartoDB'nin `dark_all` tile sunucuları entegre edilmiştir.
     *   **Zoom Duyarlı Etiketler:** Pinlerin altında yer alan mekan isim etiketleri, harita zoom seviyesi `>= 14` olduğunda görünecek şekilde optimize edilmiştir.
     *   **Harita Performansı:** Pin çizimleri `requestAnimationFrame` (`addBatch`) ile asenkron gruplandırılmış, WebView'e aktarılan payload küçültülmüş ve pin güncellemeleri **120ms debounce** ile filtrelenmiştir.
+*   **Redis Caching (Performans):** Mekan listeleme ve arama sorgularının hızlandırılması amacıyla Redis önbelleği (15 dakika TTL). Yeni bir mekan eklendiğinde önbelleğin otomatik temizlenmesi (Cache Invalidation) mekanizması.
+*   **Akıllı AI İçerik Filtreleme & Çok Dilli Destek:** Groq ve yerel Gemma modelleri üzerinde çalışan, siyasi, dini veya saldırgan içerikleri engelleyen çok dilli içerik filtresi. Türkçe, İngilizce, Almanca, Fransızca, İspanyolca, Arapça ve Rusça (7 dil) desteği.
+*   **Sohbet Algılama (Chit-chat Bypass):** "Naber", "nasılsın" gibi sohbet sorgularında anlamsız mekan önermek yerine kullanıcıya dostane ve kendi dilinde sohbet yanıtı veren akıllı diyalog yönetimi.
+*   **AI Öneri Geçmişi Puanlaması:** Kullanıcıya yapılan mekan önerilerinde, kullanıcının daha önceki öneri ve etkileşim geçmişinin puanlanması (tekrarlayan önerileri azaltma ve çeşitliliği artırma algoritması).
 *   **Kategori Cezalandırma Sistemi (Semantik Doğruluk):** Gündüz aktiviteleri arandığında ('kahvaltı', 'kahve' vb.) gece mekanlarının ('bar', 'pub', 'meyhane', 'gece kulübü') arama sonuçlarında en üstte çıkması ("Meyhane Sofrası" anomalisi), bu kategorilere otomatik **`-5.0` ceza puanı** uygulanarak engellenmiştir.
 *   **Groq Llama 3.1 Niyet Sınıflandırıcı:** Kullanıcının sorgularının mekan arama veya yemekle ilgili olup olmadığını analiz eden, genel sohbet sorgularında rehberlik asistanı dönen Groq LLM katmanı eklenmiştir.
+*   **PostGIS Geofence Fallback:** Kullanıcıların mekan yorumlarının doğrulanabilmesi için coğrafi sınır (geofence) doğrulaması. PostGIS modülü bulunmayan ortamlarda matematiksel Haversine mesafe formülü ile sorunsuz çalışma.
+*   **Vite + React Landing Page (`frontend/`):** 3D grafikler (React Three Fiber & Drei) ve Framer Motion animasyonları içeren modern web tanıtım sitesi sisteme eklenmiştir.
+*   **Görsel Sunum Slayt Oluşturucu (`generate_presentation.py`):** Projenin jüri ve tez sunumları için premium tasarımlı 17 slaytlık PowerPoint (`.pptx`) sunumunu programatik olarak üreten araç. Uygulama ekran görüntülerini (`screenshot_map.png`, `screenshot_ai.png` vb.) otomatik algılayıp ilgili slaytlara yerleştirir.
 *   **Android Arayüz & BlurView Kırpılma Çözümü:** Giriş ve kayıt kartlarındaki `BlurView` bileşeninin Android'de köşe yuvarlama ve kenarlık kırpma sorunları, BlurView'ün standard bir `View` içine absolute yerleştirilmesiyle çözülmüştür.
 *   **Input Şifre Göz İkonu Tıklanma Revizyonu:** Şifre gizleme/gösterme ikonunun tıklama alanını genişletmek için `hitSlop` eklendi, boyutu `22`ye çıkarıldı ve dikey metin kesilmeleri engellendi.
 *   **Chat Senkronizasyonu & Görüldü Bildirimleri:** WebSocket ve polling üzerinden yürüyen DMs/sohbet ekranında optimistic (geçici ID'li) yerel kullanıcı mesajlarının kaybolması, `backendIdSet` polling entegrasyonuyla engellenmiştir.
-*   **Hikayeler (Stories) Sistemi:** Kullanıcıların 24 saat süreli görsel/video hikayeler paylaşabilmesi. Backend'de çalışan asenkron arka plan görevleri (Scheduler) ile süresi dolan hikayelerin otomatik silinmesi.
 
 ---
 
