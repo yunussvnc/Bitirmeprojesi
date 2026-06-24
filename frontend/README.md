@@ -37,7 +37,7 @@ frontend/
 1.  **Giriş (Hero Section):** Projenin sloganı, 3D etkileşimli arka plan ve mobil uygulamanın ekran görüntülerini içeren premium giriş alanı.
 2.  **Özellikler (Features):** Yapay zeka ile semantik mekan arama, doğrulanmış konum bazlı yorum yapma, gerçek zamanlı sosyal akış/hikayeler ve anlık mesajlaşma gibi projenin temel yeteneklerinin şık kartlarla sunumu.
 3.  **Proje Mimarisi:** FastAPI backend, AI-LLM servisi, Next.js admin paneli ve Expo mobil uygulamanın nasıl haberleştiğini gösteren şematik ve interaktif mimari şablonu.
-4.  **Ekran Görüntüleri & Sunum Alanı:** Programatik PowerPoint sunum üreticisi (`generate_presentation.py`) tarafından oluşturulmuş slaytların ve uygulamadan alınan canlı ekran görüntülerinin (harita, chat, yapay zeka arama) sergilendiği estetik galeri alanı.
+4.  **Uygulama Ekran Görüntüleri:** Uygulamadan alınan canlı ekran görüntülerinin (harita, chat, yapay zeka arama) sergilendiği estetik galeri alanı.
 5.  **Geliştirici & Jüri Bilgileri:** Bitirme projesinin künye ve geliştirici bilgileri alanı.
 
 ---
