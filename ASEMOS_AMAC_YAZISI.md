@@ -24,6 +24,7 @@ Toplumsal ölçekte ise kentsel hareketlilik popüler kültürün etkisiyle beli
 Geliştirilen **AsEmOs** sisteminin amacı, doğal dil işleme ve semantik arama teorilerini gündelik insanın şehir hayatında işlevsel kılmaktır. Sistem bileşenleri bu amaca yönelik olarak tasarlanmıştır:
 *   **Mobil İstemci & Harita (Expo SDK 54):** WebView tabanlı Leaflet JS entegrasyonuyla konumsal doğruluk ve zoom duyarlı etiketler sağlar.
 *   **Akıllı Yapay Zeka Servisi (FastAPI & Qdrant):** Sentence Transformers tabanlı vektör araması, mekan yorumları duygu analizi (sentiment analysis), Groq niyet analizi ve sakin aramada yüksek sesli mekanları filtreleyen `-5.0` kategori cezası sunar.
+*   **Çift Rol Desteği & Mekan Yönetimi:** Standart kullanıcıların yanı sıra işletme/mekan sahiplerinin de sisteme kayıt olup kendi mekan kartlarını (kategori, konum, çalışma saatleri vb.) oluşturabildiği ve yönetebildiği arayüz.
 *   **Konumsal Eşleşme & Sosyal Akış:** Kullanıcıların yakınlık ve ilgi alanlarına göre anlık eşleşmesi; fotoğraf/video gönderileri, 24 saatlik hikayeler ve takipleşme altyapısı.
 *   **WebSocket Sohbet & optimistic Sync:** optimistic yerel mesaj yönetimi ve veritabanı ID eşleşmesi (`backendIdSet`) ile kesintisiz anlık mesajlaşma sağlar.
 
