@@ -51,38 +51,68 @@ export interface ExploreWebMapViewProps {
 
 function buildMapHTML(accentColor: string, isDark: boolean) {
   const styleUrl = isDark
-    ? 'https://tiles.openfreemap.org/styles/dark'
-    : 'https://tiles.openfreemap.org/styles/liberty';
+    ? 'https://tiles.openfreemap.org/styles/dark/style.json'
+    : 'https://tiles.openfreemap.org/styles/liberty/style.json';
 
-  const mapBg = isDark ? '#1a1a1a' : '#e8e8e8';
+  const mapBg = isDark ? '#1a1a2e' : '#f0f0f0';
 
   return `<!DOCTYPE html>
 <html><head>
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css"/>
-<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"><\/script>
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
   html,body,#map{width:100%;height:100%;overflow:hidden;background:${mapBg}!important}
   .maplibregl-ctrl-attrib{display:none!important}
   .maplibregl-ctrl-logo{display:none!important}
   .maplibregl-canvas{outline:none!important}
+
+  /* Premium popup stili */
+  .maplibregl-popup{z-index:10!important}
   .maplibregl-popup-content{
-    background:rgba(20,20,20,0.92)!important;
-    color:#fff!important;
-    border-radius:10px!important;
-    padding:6px 10px!important;
-    font-size:12px!important;
-    font-weight:600!important;
-    box-shadow:0 4px 12px rgba(0,0,0,0.4)!important;
-    border:1px solid rgba(255,255,255,0.15)!important;
-    max-width:140px!important;
+    background:${isDark ? 'rgba(18,18,28,0.95)' : 'rgba(255,255,255,0.97)'}!important;
+    color:${isDark ? '#fff' : '#1a1a2e'}!important;
+    border-radius:12px!important;
+    padding:8px 14px!important;
+    font-size:13px!important;
+    font-weight:700!important;
+    letter-spacing:0.2px!important;
+    box-shadow:0 8px 32px rgba(0,0,0,${isDark ? '0.6' : '0.18'})!important;
+    border:1px solid ${isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.06)'}!important;
+    max-width:160px!important;
     white-space:nowrap!important;
     overflow:hidden!important;
     text-overflow:ellipsis!important;
+    backdrop-filter:blur(12px)!important;
+    -webkit-backdrop-filter:blur(12px)!important;
   }
-  .maplibregl-popup-tip{border-top-color:rgba(20,20,20,0.92)!important}
+  .maplibregl-popup-tip{
+    border-top-color:${isDark ? 'rgba(18,18,28,0.95)' : 'rgba(255,255,255,0.97)'}!important;
+  }
   .maplibregl-popup-close-button{display:none!important}
+
+  /* Premium marker pin stili */
+  .mk{
+    cursor:pointer;width:36px;height:44px;
+    display:flex;align-items:flex-start;justify-content:center;
+    filter:drop-shadow(0 3px 6px rgba(0,0,0,0.35));
+    transition:filter 0.25s ease;
+  }
+  .mk:hover{filter:drop-shadow(0 4px 10px rgba(0,0,0,0.5))}
+  .mk svg{transition:transform 0.25s cubic-bezier(0.34,1.56,0.64,1)}
+  .mk.active svg{transform:scale(1.35)}
+  .mk.active{filter:drop-shadow(0 6px 16px rgba(0,0,0,0.5))!important;z-index:5!important}
+
+  /* Kullanıcı konum pulse */
+  @keyframes pulse{
+    0%{transform:scale(1);opacity:0.6}
+    50%{transform:scale(2.5);opacity:0}
+    100%{transform:scale(1);opacity:0}
+  }
+  .user-loc{width:22px;height:22px;position:relative;display:flex;align-items:center;justify-content:center}
+  .user-pulse{position:absolute;width:22px;height:22px;border-radius:50%;background:rgba(66,133,244,0.25);animation:pulse 2s ease-out infinite}
+  .user-dot{width:13px;height:13px;border-radius:50%;background:#4285F4;border:2.5px solid #fff;box-shadow:0 2px 8px rgba(66,133,244,0.4);position:relative;z-index:2}
 </style>
 </head><body>
 <div id="map"></div>
@@ -93,7 +123,7 @@ var map = new maplibregl.Map({
   center:[${ISTANBUL_CENTER.longitude},${ISTANBUL_CENTER.latitude}],
   zoom:12,
   attributionControl:false,
-  maxZoom:18,
+  maxZoom:17.5,
   minZoom:5,
   pitchWithRotate:false,
   dragRotate:false
@@ -105,16 +135,28 @@ var _activeId = null;
 var _userMarker = null;
 
 map.on('load', function(){
-  // Harita yüklendi bilgisi gönder
   window.ReactNativeWebView.postMessage(JSON.stringify({type:'mapReady'}));
 });
 
+// Hata durumunda da mapReady gönder (stil yüklenemezse)
+map.on('error', function(e){
+  if(e && e.error && e.error.status === 404){
+    // Stil bulunamazsa yine de çalış
+  }
+});
+
+// Premium drop-pin SVG oluşturucu
+function pinSVG(color){
+  return '<svg width="28" height="36" viewBox="0 0 28 36" fill="none" xmlns="http://www.w3.org/2000/svg">'
+    +'<path d="M14 0C6.268 0 0 6.268 0 14c0 9.8 12.348 20.826 12.874 21.302a1.5 1.5 0 002.252 0C15.652 34.826 28 23.8 28 14 28 6.268 21.732 0 14 0z" fill="'+color+'"/>'
+    +'<circle cx="14" cy="13" r="5.5" fill="#fff" opacity="0.95"/>'
+    +'<circle cx="14" cy="13" r="3" fill="'+color+'" opacity="0.7"/>'
+    +'</svg>';
+}
+
 function updateMarkers(places){
   if(!places || !places.length){
-    // Tüm marker'ları temizle
-    Object.keys(_markers).forEach(function(id){
-      _markers[id].remove();
-    });
+    Object.keys(_markers).forEach(function(id){ _markers[id].remove(); });
     _markers = {};
     return;
   }
@@ -124,52 +166,39 @@ function updateMarkers(places){
     if(p.latitude!=null && p.longitude!=null) incoming[p.id] = p;
   });
 
-  // Kaldırılacak marker'ları sil
+  // Eski marker'ları temizle
   Object.keys(_markers).forEach(function(id){
-    if(!incoming[id]){
-      _markers[id].remove();
-      delete _markers[id];
-    }
+    if(!incoming[id]){ _markers[id].remove(); delete _markers[id]; }
   });
 
-  // Yeni marker'ları ekle veya güncelle
-  var keys = Object.keys(incoming);
-  var idx = 0;
-  var BATCH = 50;
+  // Yeni marker'ları batch olarak ekle
+  var keys = Object.keys(incoming), idx = 0, BATCH = 60;
 
   function addBatch(){
     for(var end = Math.min(idx+BATCH, keys.length); idx < end; idx++){
-      var id = keys[idx];
-      var p = incoming[id];
+      var id = keys[idx], p = incoming[id];
       var color = p.statusColor || '${accentColor}';
 
       if(_markers[id]){
-        // Renk değiştiyse güncelle
         if(_markers[id]._color !== color){
-          _markers[id].getElement().querySelector('.pin-dot').style.background = color;
+          _markers[id].getElement().querySelector('svg path').setAttribute('fill', color);
+          _markers[id].getElement().querySelectorAll('svg circle')[1].setAttribute('fill', color);
           _markers[id]._color = color;
         }
         continue;
       }
 
-      // Yeni marker oluştur
       var el = document.createElement('div');
-      el.className = 'marker-container';
-      el.style.cssText = 'cursor:pointer;width:30px;height:30px;display:flex;align-items:center;justify-content:center;';
+      el.className = 'mk';
+      el.innerHTML = pinSVG(color);
 
-      var dot = document.createElement('div');
-      dot.className = 'pin-dot';
-      dot.style.cssText = 'width:14px;height:14px;border-radius:50%;border:2.5px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,0.35);background:'+color+';transition:transform 0.2s ease,box-shadow 0.2s ease;';
-      el.appendChild(dot);
-
-      var marker = new maplibregl.Marker({element:el,anchor:'center'})
+      var marker = new maplibregl.Marker({element:el, anchor:'bottom'})
         .setLngLat([p.longitude, p.latitude])
         .addTo(map);
       marker._color = color;
       marker._name = p.name;
       marker._placeId = p.id;
 
-      // Tıklama
       (function(mk, pp){
         mk.getElement().addEventListener('click', function(e){
           e.stopPropagation();
@@ -186,29 +215,19 @@ function updateMarkers(places){
 }
 
 function selectMarker(id, name, lng, lat){
-  // Önceki seçimi temizle
+  // Önceki aktif marker'ı normale döndür
   if(_activeId && _markers[_activeId]){
-    var prevDot = _markers[_activeId].getElement().querySelector('.pin-dot');
-    if(prevDot){
-      prevDot.style.transform = 'scale(1)';
-      prevDot.style.boxShadow = '0 2px 6px rgba(0,0,0,0.35)';
-    }
+    _markers[_activeId].getElement().classList.remove('active');
   }
-  if(_activePopup){
-    _activePopup.remove();
-    _activePopup = null;
-  }
+  if(_activePopup){ _activePopup.remove(); _activePopup = null; }
 
   _activeId = id;
 
   if(id && _markers[id]){
-    var dot = _markers[id].getElement().querySelector('.pin-dot');
-    if(dot){
-      dot.style.transform = 'scale(1.6)';
-      dot.style.boxShadow = '0 0 0 6px rgba(255,255,255,0.25), 0 4px 12px rgba(0,0,0,0.4)';
-    }
+    _markers[id].getElement().classList.add('active');
+    // Sadece seçili mekanın ismini göster
     if(name && lng != null && lat != null){
-      _activePopup = new maplibregl.Popup({offset:18, closeOnClick:false})
+      _activePopup = new maplibregl.Popup({offset:[0,-40], closeOnClick:false})
         .setLngLat([lng, lat])
         .setHTML('<div>'+name.replace(/</g,'&lt;')+'</div>')
         .addTo(map);
@@ -221,12 +240,7 @@ function deselectAll(){
   window.ReactNativeWebView.postMessage(JSON.stringify({type:'deselect'}));
 }
 
-map.on('click', function(e){
-  // Marker'a tıklanmadıysa deselect
-  var features = map.queryRenderedFeatures(e.point);
-  var isMarker = false;
-  // DOM marker tıklaması event propagation ile yakalanıyor, 
-  // map click sadece boş alana basınca gelir
+map.on('click', function(){
   deselectAll();
 });
 
@@ -240,32 +254,14 @@ function flyToInitial(lat, lng, zoom){
 
 function setUserMarker(lat, lng){
   if(_userMarker) _userMarker.remove();
-
   var el = document.createElement('div');
-  el.style.cssText = 'width:20px;height:20px;display:flex;align-items:center;justify-content:center;';
-
-  var outer = document.createElement('div');
-  outer.style.cssText = 'position:absolute;width:20px;height:20px;border-radius:50%;background:rgba(66,133,244,0.2);animation:pulse 2s ease infinite;';
-
-  var inner = document.createElement('div');
-  inner.style.cssText = 'width:12px;height:12px;border-radius:50%;background:#4285F4;border:2.5px solid #fff;box-shadow:0 2px 6px rgba(0,0,0,0.3);position:relative;z-index:2;';
-
-  el.appendChild(outer);
-  el.appendChild(inner);
-
-  // Pulse animation
-  if(!document.getElementById('pulse-style')){
-    var style = document.createElement('style');
-    style.id = 'pulse-style';
-    style.textContent = '@keyframes pulse{0%{transform:scale(1);opacity:0.7}50%{transform:scale(2.2);opacity:0}100%{transform:scale(1);opacity:0}}';
-    document.head.appendChild(style);
-  }
-
+  el.className = 'user-loc';
+  el.innerHTML = '<div class="user-pulse"></div><div class="user-dot"></div>';
   _userMarker = new maplibregl.Marker({element:el, anchor:'center'})
     .setLngLat([lng, lat])
     .addTo(map);
 }
-</script>
+<\/script>
 </body></html>`;
 }
 
