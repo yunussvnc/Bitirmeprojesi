@@ -227,8 +227,9 @@ export default function PlaceDetailScreen({
   const [reviewGalleryData, setReviewGalleryData] = useState<{ reviews: Review[]; reviewIndex: number; imageIndex: number } | null>(null);
 
   // Takip & Sosyal İçerik
-  const [isFollowing, setIsFollowing] = useState(false);
-  const [followerCount, setFollowerCount] = useState(0);
+  // null = henüz API'den yüklenmedi → buton disabled görünür, "Takip Et" flash'ı önlenir
+  const [isFollowing, setIsFollowing] = useState<boolean | null>(null);
+  const [followerCount, setFollowerCount] = useState<number | null>(null);
   const [followLoading, setFollowLoading] = useState(false);
   const [placePosts, setPlacePosts] = useState<any[]>([]);
   const [placeStories, setPlaceStories] = useState<any[]>([]);
@@ -435,15 +436,15 @@ export default function PlaceDetailScreen({
   };
 
   const handleFollow = async () => {
-    if (followLoading) return;
+    if (followLoading || isFollowing === null) return;
 
     // ──── OPTİMİSTİK GÜNCELLEME ────
     // UI'ı hemen güncelle — API cevabı bekleme
     const prevFollowing = isFollowing;
-    const prevCount = followerCount;
+    const prevCount = followerCount ?? 0;
     const newFollowing = !isFollowing;
     setIsFollowing(newFollowing);
-    setFollowerCount(prev => newFollowing ? prev + 1 : Math.max(0, prev - 1));
+    setFollowerCount(prev => newFollowing ? (prev ?? 0) + 1 : Math.max(0, (prev ?? 0) - 1));
     lightImpact();
     if (newFollowing) success();
     // ──────────────────────────────
@@ -843,7 +844,7 @@ export default function PlaceDetailScreen({
           </View>
 
           {/* Takip Et Butonu + Takipçi Sayısı */}
-          {!isVenueDashboard && (
+          {!isVenueDashboard && isFollowing !== null && (
             <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 14, gap: 12 }}>
               <TouchableOpacity
                 onPress={handleFollow}
@@ -875,7 +876,7 @@ export default function PlaceDetailScreen({
                   {isFollowing ? 'Takiptesin' : 'Takip Et'}
                 </Text>
               </TouchableOpacity>
-              {followerCount > 0 && (
+              {followerCount != null && followerCount > 0 && (
                 <Text style={{ fontSize: 13, color: colors.text.secondary }}>
                   {followerCount >= 1000
                     ? `${(followerCount / 1000).toFixed(1)}B`

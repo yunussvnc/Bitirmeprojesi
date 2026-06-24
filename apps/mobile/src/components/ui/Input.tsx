@@ -154,7 +154,6 @@ export function Input({
             paddingHorizontal: spacing.base,
             paddingVertical: isSearch ? spacing.sm : spacing.base,
           },
-          isSearch && styles.searchContainer,
         ]}
       >
         {leftIcon && (
@@ -241,7 +240,8 @@ const styles = StyleSheet.create({
   },
   rightIcon: {
     marginLeft: 10,
-    padding: 8,
+    paddingHorizontal: 8,
+    paddingVertical: 4,
   },
   error: {
     marginTop: 4,
