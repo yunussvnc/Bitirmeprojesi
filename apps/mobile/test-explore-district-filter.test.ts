@@ -3,7 +3,8 @@ describe("ExploreWebMapView - District Filtering Logic", () => {
     {
       id: 1,
       name: "Beşiktaş Coffee",
-      city: "Beşiktaş",
+      address: "Cihannüma Mah. No:2, Beşiktaş/İstanbul",
+      city: "İstanbul",
       category: "cafe",
       latitude: 41.042,
       longitude: 29.007,
@@ -11,7 +12,8 @@ describe("ExploreWebMapView - District Filtering Logic", () => {
     {
       id: 2,
       name: "Kadıköy Bar",
-      city: "Kadıköy",
+      address: "Caferağa Mah. Moda Cd. No:102, Kadıköy",
+      city: "İstanbul",
       category: "bar",
       latitude: 40.982,
       longitude: 29.027,
@@ -19,7 +21,8 @@ describe("ExploreWebMapView - District Filtering Logic", () => {
     {
       id: 3,
       name: "Fatih Restaurant",
-      city: "Fatih",
+      address: "Hobyar Mah. Fatih",
+      city: "İstanbul",
       category: "restaurant",
       latitude: 41.019,
       longitude: 28.949,
@@ -34,13 +37,25 @@ describe("ExploreWebMapView - District Filtering Logic", () => {
 
   const normalizeText = (text) => {
     return text
-      .toLowerCase()
-      .replace(/ğ/g, 'g')
-      .replace(/ü/g, 'u')
-      .replace(/ş/g, 's')
-      .replace(/ı/g, 'i')
-      .replace(/ö/g, 'o')
-      .replace(/ç/g, 'c');
+      .toLocaleLowerCase('tr-TR')
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .replace(/ı/g, 'i');
+  };
+
+  const placeMatchesDistrict = (place, district) => {
+    const haystack = [
+      place.city,
+      place.address,
+      place.name,
+      place.subtitle,
+    ]
+      .filter(Boolean)
+      .join(' ');
+
+    return [district.apiLocation, ...district.aliases].some((term) =>
+      normalizeText(haystack).includes(normalizeText(term)),
+    );
   };
 
   const calculateDistance = (lat1, lon1, lat2, lon2) => {
@@ -88,7 +103,7 @@ describe("ExploreWebMapView - District Filtering Logic", () => {
       }
       // İlçe filtresi
       if (selectedDistrict) {
-        if (!p.city || normalizeText(p.city) !== normalizeText(selectedDistrict.apiLocation)) {
+        if (!placeMatchesDistrict(p, selectedDistrict)) {
           return false;
         }
       }
