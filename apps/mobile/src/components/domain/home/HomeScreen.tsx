@@ -41,11 +41,12 @@ import {
 import { usePreferences } from "@/src/store/preferences";
 import { getPlaceImageSource, hasPlaceImage } from "@/src/utils/placeImages";
 import { createTextStyle, s } from "@/src/constants/design";
-import { getAllPlaces } from "@/src/services/mekanService";
+import { getAllPlaces, getForYouPlaces, logInteraction } from "@/src/services/mekanService";
 import { recommendPlaces } from "@/src/services/api";
 import type { Place } from "@/src/services/mekanService";
 import type { RecommendItem, RecommendResponse } from "@/src/types/recommend";
 import { handleApiError } from "@/src/utils/errorHandler";
+import { getCurrentLocation } from "@/src/utils/location";
 import { lightImpact } from "@/src/utils/haptics";
 import { useAppStore } from "@/src/store/useAppStore";
 import { useTabBarVisibility } from "@/src/components/layout/TabBarVisibilityContext";
@@ -304,8 +305,16 @@ export default function HomeScreen() {
     try {
       setLoading(true);
       setError("");
-      const data = await getAllPlaces();
-      setAllPlaces(data);
+      
+      const loc = await getCurrentLocation().catch(() => null);
+      let lat, lng;
+      if (loc) {
+        lat = loc.latitude;
+        lng = loc.longitude;
+      }
+      
+      const paginatedData = await getForYouPlaces(lat, lng, 1, 12);
+      setAllPlaces(paginatedData.items);
     } catch (e: unknown) {
       const appError = handleApiError(e);
       setError(appError.userMessage);

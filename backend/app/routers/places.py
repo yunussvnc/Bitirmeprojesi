@@ -67,6 +67,42 @@ def get_popular_places(
     return schemas.PaginatedPlaces(items=items, total=total, page=page, page_size=page_size)
 
 
+@router.get("/places/foryou", response_model=schemas.PaginatedPlaces)
+def get_foryou_places_api(
+    lat: Optional[float] = Query(None, description="Kullanıcı enlemi"),
+    lng: Optional[float] = Query(None, description="Kullanıcı boylamı"),
+    page: int = 1,
+    page_size: int = 12,
+    db: Session = Depends(get_db),
+    current_user: Optional[models.User] = Depends(get_optional_user),
+):
+    """Kişiselleştirilmiş mekan önerileri (Uzaklık + Rating + Etkileşim)"""
+    user_id = current_user.id if current_user else None
+    # crud.get_foryou_places zaten limit(12) dönüyor.
+    # Eğer sayfalama istenirse crud fonksiyonunu limit yerine slice ile değiştirebiliriz.
+    items = crud.get_foryou_places(db, user_id, lat, lng, limit=page_size)
+    total = len(items)
+    return schemas.PaginatedPlaces(items=items, total=total, page=1, page_size=page_size)
+
+
+@router.post("/places/interactions", response_model=dict)
+def log_place_interaction(
+    payload: schemas.InteractionCreate,
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(get_current_user),
+):
+    """Kullanıcının mekanla olan etkileşimini (harita tıklaması, kart açma vs.) kaydeder."""
+    crud.log_interaction(
+        db=db,
+        user_id=current_user.id,
+        place_id=payload.place_id,
+        interaction_type=payload.interaction_type,
+        weight=payload.weight or 1
+    )
+    return {"status": "ok"}
+
+
+
 async def invalidate_places_cache():
     """Yeni mekan eklendiğinde önbellekteki mekan aramalarını temizler"""
     logger = logging.getLogger("asemos")

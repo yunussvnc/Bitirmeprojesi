@@ -34,7 +34,7 @@ import { lightImpact } from '@/src/utils/haptics';
 import { PlaceMediaPanel } from './PlaceMediaPanel';
 import { getPlaceStatus, type PlaceStatusType } from '@/src/utils/placeStatus';
 import { useAppStore } from '@/src/store/useAppStore';
-import type { Place } from '@/src/services/mekanService';
+import { Place, logInteraction } from '@/src/services/mekanService';
 import { useTranslation } from 'react-i18next';
 
 const ISTANBUL_CENTER = {
@@ -298,7 +298,9 @@ export function ExploreMapView({ places, loading, onLoadPlaces }: ExploreMapView
       <Map
         style={styles.map}
         mapStyle={styleURL}
-        onPress={() => {
+        onPress={(event) => {
+          console.log('[DEBUG] Map onPress fired. markerPressRef:', markerPressRef.current);
+          if (markerPressRef.current) return;
           setSelectedPlace(null);
           setShowResults(false);
           setShowFilter(false);
@@ -317,11 +319,25 @@ export function ExploreMapView({ places, loading, onLoadPlaces }: ExploreMapView
           id="placesSource"
           data={placesGeoJSON}
           onPress={(event: any) => {
-            if (markerPressRef.current) return;
-            const feature = event.features?.[0];
+            // event could have features directly, or inside nativeEvent.payload
+            let feature = event?.features?.[0];
+            if (!feature && event?.nativeEvent?.payload) {
+              feature = event.nativeEvent.payload;
+            }
+            if (!feature && event?.nativeEvent?.features) {
+              feature = event.nativeEvent.features[0];
+            }
+
+            console.log('[DEBUG] Found feature id:', feature?.properties?.id);
+
             if (feature?.properties?.id) {
-              const fullPlace = places.find((p) => p.id === feature.properties!.id);
-              if (fullPlace) handleSelectPlace(fullPlace);
+              const fullPlace = places.find((p) => String(p.id) === String(feature.properties.id));
+              if (fullPlace) {
+                console.log('[DEBUG] Executing handleSelectPlace for', fullPlace.name);
+                // Haritada tıklandı etkileşimini arka planda kaydet (Weight 2)
+                logInteraction(fullPlace.id, 'MAP_CLICK', 2).catch(() => {});
+                handleSelectPlace(fullPlace);
+              }
             }
           }}
         >

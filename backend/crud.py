@@ -2320,3 +2320,99 @@ def archive_expired_stories(db: Session, user_id: int | None = None) -> int:
     db.commit()
     return len(stories)
 
+
+# ── Foryou Algorithm / Recommendations ────────────────────────────────────────
+
+def log_interaction(db: Session, user_id: int, place_id: int, interaction_type: str, weight: int = 1):
+    """
+    Kullanıcının mekan etkileşimini (tıklama, kart açma vs.) kaydeder.
+    """
+    interaction = models.UserPlaceInteraction(
+        user_id=user_id,
+        place_id=place_id,
+        interaction_type=interaction_type,
+        weight=weight
+    )
+    db.add(interaction)
+    db.commit()
+    return interaction
+
+import math
+
+def haversine_distance(lat1, lon1, lat2, lon2):
+    """İki koordinat arasındaki mesafeyi kilometre cinsinden hesaplar."""
+    if lat1 is None or lon1 is None or lat2 is None or lon2 is None:
+        return 9999.0
+    R = 6371.0 # Dünya yarıçapı (km)
+    phi1 = math.radians(lat1)
+    phi2 = math.radians(lat2)
+    delta_phi = math.radians(lat2 - lat1)
+    delta_lambda = math.radians(lon2 - lon1)
+    a = math.sin(delta_phi / 2.0) ** 2 + math.cos(phi1) * math.cos(phi2) * math.sin(delta_lambda / 2.0) ** 2
+    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
+    return R * c
+
+def get_foryou_places(db: Session, user_id: int | None, lat: float | None, lng: float | None, limit: int = 12):
+    """
+    Kişiselleştirilmiş mekan önerme motoru.
+    Puanlama:
+    Base Score: Rating * 4 (Maks 20) + Like_Count (Maks 10)
+    Distance: <1km=40, <3km=30, <5km=20, <10km=10
+    Interaction: Belirli bir mekan için toplam ağırlık (Maks 30)
+    Category: (Şimdilik Interaction içine yedirilebilir veya ayrıca hesaplanabilir)
+    """
+    # 1. Tüm aktif mekanları çek (performans için sadece gerekli kolonlar)
+    places = db.query(models.Place).filter(models.Place.latitude.isnot(None)).all()
+
+    # 2. Etkileşim geçmişini çek (Eğer kullanıcı giriş yapmışsa)
+    user_interactions = {}
+    if user_id:
+        interactions = db.query(
+            models.UserPlaceInteraction.place_id, 
+            func.sum(models.UserPlaceInteraction.weight).label('total_weight')
+        ).filter(models.UserPlaceInteraction.user_id == user_id)\
+         .group_by(models.UserPlaceInteraction.place_id).all()
+        
+        for p_id, tw in interactions:
+            user_interactions[p_id] = min(tw or 0, 30) # Maks 30 puan
+
+    scored_places = []
+    for p in places:
+        score = 0.0
+        
+        # Base Score (Maks 30)
+        rating = p.average_rating or 3.0
+        score += (rating * 4)
+        # Popülerlik puanı
+        likes = len(p.saved_by) if hasattr(p, 'saved_by') else 0 # Veya yorum sayısı vb.
+        score += min(likes * 2, 10) 
+
+        # Distance Score (Maks 40)
+        if lat and lng and p.latitude and p.longitude:
+            dist = haversine_distance(lat, lng, p.latitude, p.longitude)
+            if dist <= 1.0:
+                score += 40
+            elif dist <= 3.0:
+                score += 30
+            elif dist <= 5.0:
+                score += 20
+            elif dist <= 10.0:
+                score += 10
+
+        # Interaction Score (Maks 30)
+        interaction_score = user_interactions.get(p.id, 0)
+        score += interaction_score
+
+        scored_places.append((score, p))
+
+    # Puana göre sırala (Büyükten küçüğe)
+    scored_places.sort(key=lambda x: x[0], reverse=True)
+    
+    # En iyi mekanları seç
+    top_places = [p for score, p in scored_places[:limit]]
+    
+    # Detayları (yorumlar, fotoğraflar vs) doldur
+    enriched = _enrich_places_with_stats(db, top_places)
+    return enriched
+
+

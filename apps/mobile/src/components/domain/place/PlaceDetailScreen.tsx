@@ -44,7 +44,7 @@ import { spacing, createTextStyle } from "@/src/constants/design";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { calculateDistance, getCurrentLocation, type PlaceLocation } from "@/src/utils/location";
-import { getPlaceById, getAllPlaces, togglePlaceFollow, getPlacePosts, getPlaceStories, recordPlaceInteraction } from "@/src/services/mekanService";
+import { getPlaceById, getAllPlaces, togglePlaceFollow, getPlacePosts, getPlaceStories, recordPlaceInteraction, logInteraction } from "@/src/services/mekanService";
 import { lightImpact, success, warning } from "@/src/utils/haptics";
 import { logger } from "@/src/utils/logger";
 import { apiGet, apiPost } from "@/src/utils/apiClient";
@@ -405,11 +405,11 @@ export default function PlaceDetailScreen({
         }
       }
       // Etkileşimi arka planda kaydet (algoritmik boost)
-      if (!cancelled.current) {
+        // Analitik ve Öneri Motoru için etkileşimi kaydet
         recordPlaceInteraction(id, 'view').catch(() => {});
-      }
-    } catch (error) {
-      if (!cancelled.current) logger.error("Error loading place:", error);
+        logInteraction(id, 'CARD_VIEW', 3).catch(() => {});
+      } catch (err) {
+        console.error("Error loading place detail:", err);
     }
   };
 

@@ -1020,6 +1020,14 @@ class AIQueryLogResponse(BaseModel):
     class Config:
         from_attributes = True
 
+# --- RECOMMENDATION INTERACTIONS ---
+
+class InteractionCreate(BaseModel):
+    place_id: int
+    interaction_type: str  # 'MAP_CLICK', 'CARD_VIEW', etc.
+    weight: Optional[int] = 1
+
+
 class PaginatedAIQueryLogs(BaseModel):
     items: List[AIQueryLogResponse]
     total: int

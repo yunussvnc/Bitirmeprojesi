@@ -784,3 +784,26 @@ class AIQueryLog(Base):
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
     user = relationship("User", foreign_keys=[user_id])
+
+
+class UserPlaceInteraction(Base):
+    """
+    Kullanıcının mekanlarla olan anlık etkileşimlerini (tıklama, arama, AI vs) tutar.
+    Öneri motoru (foryou algoritması) için kullanılır.
+    """
+    __tablename__ = "user_place_interactions"
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
+    place_id = Column(Integer, ForeignKey("places.id", ondelete="CASCADE"), nullable=False, index=True)
+    
+    # 'MAP_CLICK', 'CARD_VIEW', 'AI_SUGGESTION', 'SEARCH_CLICK'
+    interaction_type = Column(String(50), nullable=False)
+    
+    # Her etkileşim tipinin farklı ağırlığı olacak
+    weight = Column(Integer, nullable=False, default=1)
+    
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    user = relationship("User")
+    place = relationship("Place")
+
