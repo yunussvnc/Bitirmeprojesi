@@ -35,6 +35,7 @@ import { PlaceMediaPanel } from './PlaceMediaPanel';
 import { useAppStore } from '@/src/store/useAppStore';
 import { getPlaceStatus, type PlaceStatusType } from '@/src/utils/placeStatus';
 import { calculateDistance } from '@/src/utils/location';
+import { placeMatchesDistrict } from '@/src/utils/placeDistrictFilter';
 
 import { useTranslation } from 'react-i18next';
 
@@ -358,7 +359,7 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
       }
       // İlçe filtresi
       if (selectedDistrict) {
-        if (!p.city || normalizeText(p.city) !== normalizeText(selectedDistrict.apiLocation)) {
+        if (!placeMatchesDistrict(p, selectedDistrict)) {
           return false;
         }
       }

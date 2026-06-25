@@ -522,6 +522,60 @@ def test_venue_approval():
     db.close()
 
 
+def test_venue_approval_does_not_overwrite_existing_owner():
+    """İkinci bekleyen başvuru onaylanırsa mevcut owner_id değişmemeli."""
+    pid = create_test_place(name="Claimed Cafe")
+    first = client.post("/auth/venue-register", json={
+        "venue_name": "Claimed Cafe",
+        "email": "claim1@test.com",
+        "password": "Pass123!",
+        "claimed_place_id": pid,
+    })
+    second = client.post("/auth/venue-register", json={
+        "venue_name": "Claimed Cafe",
+        "email": "claim2@test.com",
+        "password": "Pass123!",
+        "claimed_place_id": pid,
+    })
+    assert first.status_code == 200
+    assert second.status_code == 200
+
+    db = TestingSessionLocal()
+    admin_user = models.User(
+        email="claim_admin@test.com",
+        password_hash=_hash_password("adminpass"),
+        username="claim_admin",
+        role="admin",
+        is_active=True,
+        is_email_verified=True,
+    )
+    db.add(admin_user)
+    db.commit()
+    db.refresh(admin_user)
+    admin_token = _get_token(admin_user.id)
+    db.close()
+
+    first_approval = client.post(
+        f"/auth/admin/approve-venue/{first.json()['id']}",
+        headers={"Authorization": f"Bearer {admin_token}"},
+    )
+    assert first_approval.status_code == 200
+    first_owner_id = first_approval.json()["user_id"]
+
+    second_approval = client.post(
+        f"/auth/admin/approve-venue/{second.json()['id']}",
+        headers={"Authorization": f"Bearer {admin_token}"},
+    )
+    assert second_approval.status_code == 400
+
+    db = TestingSessionLocal()
+    place = db.query(models.Place).filter_by(id=pid).first()
+    assert place.owner_id == first_owner_id
+    second_user = db.query(models.User).filter_by(email="claim2@test.com").first()
+    assert second_user is None
+    db.close()
+
+
 # ===========================================================================
 # 5. FORGOT PASSWORD & RESET PASSWORD
 # ===========================================================================

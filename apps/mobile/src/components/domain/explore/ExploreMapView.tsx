@@ -35,6 +35,7 @@ import { PlaceMediaPanel } from './PlaceMediaPanel';
 import { getPlaceStatus, type PlaceStatusType } from '@/src/utils/placeStatus';
 import { useAppStore } from '@/src/store/useAppStore';
 import { Place, logInteraction } from '@/src/services/mekanService';
+import { placeMatchesDistrict } from '@/src/utils/placeDistrictFilter';
 import { useTranslation } from 'react-i18next';
 
 const ISTANBUL_CENTER = {
@@ -147,7 +148,7 @@ export function ExploreMapView({ places, loading, onLoadPlaces }: ExploreMapView
       }
       // İlçe filtresi
       if (selectedDistrict) {
-        if (!p.city || normalizeText(p.city) !== normalizeText(selectedDistrict.apiLocation)) {
+        if (!placeMatchesDistrict(p, selectedDistrict)) {
           return false;
         }
       }

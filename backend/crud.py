@@ -237,6 +237,8 @@ def approve_pending_venue(db: Session, pending_id: int, admin_id: int | None = N
     place = db.query(models.Place).filter(models.Place.id == pending.claimed_place_id).first()
     if not place:
         return None
+    if place.owner_id is not None:
+        return None
 
     # Venue User hesabı oluştur
     username_base = pending.venue_name.lower().replace(" ", "_")[:30]
