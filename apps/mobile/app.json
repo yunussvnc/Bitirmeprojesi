@@ -39,7 +39,10 @@
         },
         "ITSAppUsesNonExemptEncryption": false
       },
-      "bundleIdentifier": "com.asemos.mobile"
+      "bundleIdentifier": "com.asemos.mobile",
+      "entitlements": {
+        "aps-environment": "development"
+      }
     },
     "android": {
       "versionCode": 1,
@@ -118,7 +121,10 @@
         }
       ],
       "expo-localization",
-      "expo-web-browser"
+      "expo-web-browser",
+      "@maplibre/maplibre-react-native",
+      "expo-build-properties",
+      "expo-font"
     ],
     "experiments": {
       "typedRoutes": true

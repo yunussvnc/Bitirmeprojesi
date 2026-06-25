@@ -51,8 +51,8 @@ export interface ExploreWebMapViewProps {
 
 function buildMapHTML(accentColor: string, isDark: boolean) {
   const styleUrl = isDark
-    ? 'https://tiles.openfreemap.org/styles/dark/style.json'
-    : 'https://tiles.openfreemap.org/styles/liberty/style.json';
+    ? 'https://tiles.openfreemap.org/styles/dark'
+    : 'https://tiles.openfreemap.org/styles/liberty';
 
   const mapBg = isDark ? '#1a1a2e' : '#f0f0f0';
 
@@ -60,7 +60,7 @@ function buildMapHTML(accentColor: string, isDark: boolean) {
 <html><head>
 <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
 <link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css"/>
-<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"><\/script>
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
   html,body,#map{width:100%;height:100%;overflow:hidden;background:${mapBg}!important}
@@ -261,7 +261,7 @@ function setUserMarker(lat, lng){
     .setLngLat([lng, lat])
     .addTo(map);
 }
-<\/script>
+</script>
 </body></html>`;
 }
 
