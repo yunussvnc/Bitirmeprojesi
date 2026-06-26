@@ -298,6 +298,7 @@ export function ExploreMapView({ places, loading, onLoadPlaces }: ExploreMapView
       <Map
         style={styles.map}
         mapStyle={styleURL}
+        androidView="texture"
         onPress={(event) => {
           console.log('[DEBUG] Map onPress fired. markerPressRef:', markerPressRef.current);
           if (markerPressRef.current) return;
