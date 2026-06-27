@@ -4,7 +4,7 @@
 
 import React, { useEffect, useState, useMemo } from "react";
 import { View, StyleSheet } from "react-native";
-import { ExploreMapView } from "@/src/components/domain/explore/ExploreMapView";
+import { ExploreWebMapView } from "@/src/components/domain/explore/ExploreWebMapView";
 import { getAllPlaces } from "@/src/services/mekanService";
 import type { Place } from "@/src/services/mekanService";
 
@@ -32,7 +32,7 @@ export default function ExploreScreen() {
 
   return (
     <View style={styles.container}>
-      <ExploreMapView places={placesWithCoords} loading={loading} onLoadPlaces={loadPlaces} />
+      <ExploreWebMapView places={placesWithCoords} loading={loading} onLoadPlaces={loadPlaces} />
     </View>
   );
 }
