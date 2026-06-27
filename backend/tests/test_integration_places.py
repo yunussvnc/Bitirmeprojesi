@@ -316,6 +316,17 @@ class TestPlaceInteract:
         assert response.status_code == 200
         assert response.json()["ok"] is True
 
+        db = TestingSessionLocal()
+        try:
+            interaction = db.query(models.PlaceInteraction).filter(
+                models.PlaceInteraction.user_id == uid,
+                models.PlaceInteraction.place_id == pid,
+            ).one()
+            assert interaction.score == 1
+            assert interaction.view_count == 1
+        finally:
+            db.close()
+
 
 class TestCampaignNotifications:
     """Mekan kampanya güncellemesi bildirim testleri."""

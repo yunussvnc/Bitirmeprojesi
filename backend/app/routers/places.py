@@ -23,8 +23,27 @@ import schemas, crud, models
 from app.dependencies import get_db, get_current_user, get_admin_user, get_optional_user
 from app.core.redis_client import get_redis
 from config import get_settings
+from database import SessionLocal
 
 router = APIRouter(tags=["Places"])
+logger = logging.getLogger("asemos")
+
+
+def _record_place_interaction_background(
+    user_id: int, place_id: int, interaction_type: str
+) -> None:
+    db = SessionLocal()
+    try:
+        crud.record_place_interaction(db, user_id, place_id, interaction_type)
+    except Exception:
+        logger.exception(
+            "Mekan etkilesimi kaydedilemedi: user_id=%s place_id=%s type=%s",
+            user_id,
+            place_id,
+            interaction_type,
+        )
+    finally:
+        db.close()
 
 
 @router.get("/places/search", response_model=schemas.PaginatedPlaces)
@@ -356,13 +375,15 @@ def record_interaction(
     place_id: int,
     interaction_type: str = Query("view", description="view | search | review | like"),
     background_tasks: BackgroundTasks = BackgroundTasks(),
-    db: Session = Depends(get_db),
     current_user: Optional[models.User] = Depends(get_optional_user),
 ):
     """Mekan etkileşim skoru kaydeder (arka planda). Frontend her kart açmada çağırır."""
     if current_user:
         background_tasks.add_task(
-            crud.record_place_interaction, db, current_user.id, place_id, interaction_type
+            _record_place_interaction_background,
+            current_user.id,
+            place_id,
+            interaction_type,
         )
     return {"ok": True}
 
