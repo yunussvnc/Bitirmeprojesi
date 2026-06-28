@@ -95,7 +95,7 @@ async function fetchWithRetry(
             } else {
               throw new Error("Refresh failed");
             }
-          } catch (e) {
+          } catch {
             if (!options.suppressUnauthorized) {
               _onUnauthorized?.();
             }
