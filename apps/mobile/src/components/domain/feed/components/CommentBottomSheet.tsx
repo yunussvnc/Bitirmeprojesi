@@ -185,10 +185,14 @@ export function CommentBottomSheet({ visible, onClose, postId, onCommentAdded }:
     setLoading(true);
     try {
       const res = await getComments(postId, 1, 50);
+      
+      // Handle different API paginated response structures securely.
+      const itemsList = Array.isArray(res) ? res : (Array.isArray(res?.items) ? res.items : []);
+      
       const hideOffensiveWords = useSettingsStore.getState().hideOffensiveWords;
       const filtered = hideOffensiveWords 
-        ? res.items.filter((c: PostComment) => !c.is_flagged)
-        : res.items;
+        ? itemsList.filter((c: PostComment) => !c.is_flagged)
+        : itemsList;
       setComments(filtered);
     } catch (e) {
       handleApiError(e);

@@ -16,14 +16,15 @@ import {
   ScrollView,
   NativeSyntheticEvent,
   NativeScrollEvent,
-  TouchableWithoutFeedback,
 } from "react-native";
+import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
   withSpring,
   withSequence,
   withTiming,
+  runOnJS,
 } from "react-native-reanimated";
 import { SnapbackZoom } from "react-native-zoom-toolkit";
 import { Image } from "expo-image";
@@ -96,28 +97,17 @@ export function FeedCard({
     [heartScale, heartOpacity]
   );
 
-  const handleImageTap = useCallback(
-    (x: number, y: number) => {
-      const now = Date.now();
-      const delta = now - lastTapRef.current;
-
-      if (delta < DOUBLE_TAP_DELAY && delta > 0) {
-        // Çift tıklama — önceki tek tıklama timer'ını iptal et
-        if (doubleTapTimerRef.current) {
-          clearTimeout(doubleTapTimerRef.current);
-          doubleTapTimerRef.current = null;
-        }
-        lastTapRef.current = 0;
-        triggerHeartBurst(x, y);
-        heavyImpact();
-        triggerReviewAction(); // Store review tetikleyici
-        onLike?.(); // Her zaman toggle et — parent state doğru yönetir
-      } else {
-        lastTapRef.current = now;
+  const doubleTapGesture = Gesture.Tap()
+    .numberOfTaps(2)
+    .maxDelay(250)
+    .onStart((e) => {
+      runOnJS(triggerHeartBurst)(e.x, e.y);
+      runOnJS(heavyImpact)();
+      runOnJS(triggerReviewAction)();
+      if (onLike && !post.is_liked) {
+        runOnJS(onLike)();
       }
-    },
-    [onLike, triggerHeartBurst, triggerReviewAction]
-  );
+    });
 
   const heartAnimStyle = useAnimatedStyle(() => ({
     transform: [{ scale: heartScale.value }],
@@ -218,13 +208,8 @@ export function FeedCard({
 
         {/* Görsel alanı — çift tıkla beğen */}
         <Animated.View style={[styles.imageContainer, { height: imageHeight }, imageContainerAnimStyle]}>
-          <TouchableWithoutFeedback
-            onPress={(e) => {
-              const { locationX, locationY } = e.nativeEvent;
-              handleImageTap(locationX, locationY);
-            }}
-          >
-            <View style={{ width: "100%", height: imageHeight }}>
+          <GestureDetector gesture={doubleTapGesture}>
+            <View style={{ width: "100%", height: imageHeight, backgroundColor: colors.background.secondary }}>
           {isCarousel ? (
             // ── Carousel mode ──────────────────────────────────────────
             <>
@@ -300,9 +285,9 @@ export function FeedCard({
             </>
           )}
             </View>
-          </TouchableWithoutFeedback>
+          </GestureDetector>
 
-          {/* Kalp burst animasyonu */}
+          {/* Animasyonlu Kalp İkonu (üst üste binecek) */}
           <Animated.View
             pointerEvents="none"
             style={[

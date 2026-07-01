@@ -245,7 +245,12 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
     });
   };
 
+  const pendingLikesRef = useRef<Set<number>>(new Set());
+
   const handleLike = useCallback(async (post: Post) => {
+    if (pendingLikesRef.current.has(post.id)) return;
+    pendingLikesRef.current.add(post.id);
+
     setPosts((prev) =>
       prev.map((p) =>
         p.id === post.id
@@ -269,6 +274,8 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
         prev.map((p) => (p.id === post.id ? { ...p, is_liked: post.is_liked, like_count: post.like_count } : p))
       );
       handleApiError(e);
+    } finally {
+      pendingLikesRef.current.delete(post.id);
     }
   }, []);
 

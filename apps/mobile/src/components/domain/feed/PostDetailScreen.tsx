@@ -72,8 +72,12 @@ export default function PostDetailScreen() {
   useEffect(() => {
     loadPosts();
   }, [loadPosts]);
+  const pendingLikesRef = useRef<Set<number>>(new Set());
 
   const handleLike = useCallback(async (likedPost: Post) => {
+    if (pendingLikesRef.current.has(likedPost.id)) return;
+    pendingLikesRef.current.add(likedPost.id);
+    
     lightImpact();
     // Optimistic update
     setPosts((prev) =>
@@ -84,16 +88,25 @@ export default function PostDetailScreen() {
       )
     );
     try {
-      await toggleLike(likedPost.id);
+      const res = await toggleLike(likedPost.id);
+      setPosts((prev) =>
+        prev.map((p) =>
+          p.id === likedPost.id
+            ? { ...p, is_liked: res.liked, like_count: res.like_count }
+            : p
+        )
+      );
     } catch {
       // Revert
       setPosts((prev) =>
         prev.map((p) =>
           p.id === likedPost.id
-            ? { ...p, is_liked: !p.is_liked, like_count: p.like_count + (p.is_liked ? -1 : 1) }
+            ? { ...p, is_liked: likedPost.is_liked, like_count: likedPost.like_count }
             : p
         )
       );
+    } finally {
+      pendingLikesRef.current.delete(likedPost.id);
     }
   }, []);
 

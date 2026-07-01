@@ -23,6 +23,7 @@ import * as MediaLibrary from 'expo-media-library';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 import { useTheme } from '@/src/hooks/useTheme';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
+import * as ImageManipulator from 'expo-image-manipulator';
 import { spacing } from '@/src/constants/design';
 import { lightImpact, mediumImpact } from '@/src/utils/haptics';
 import { useTranslation } from "react-i18next";
@@ -199,7 +200,13 @@ export function CustomGalleryGrid({
           let resolvedUri = first.uri;
           try {
             const info = await MediaLibrary.getAssetInfoAsync(first);
-            if (info?.localUri) resolvedUri = info.localUri;
+            if (info?.localUri) {
+              resolvedUri = info.localUri;
+            }
+            if (resolvedUri.startsWith('ph://') && first.mediaType === 'photo') {
+              const manip = await ImageManipulator.manipulateAsync(first.uri, []);
+              resolvedUri = manip.uri;
+            }
           } catch { /* fallback to asset.uri */ }
           const firstItem: MediaItem = {
             uri: resolvedUri,
@@ -261,6 +268,11 @@ export function CustomGalleryGrid({
         const assetInfo = await MediaLibrary.getAssetInfoAsync(asset);
         if (assetInfo?.localUri) {
           resolvedUri = assetInfo.localUri;
+        }
+        
+        if (resolvedUri.startsWith('ph://') && asset.mediaType === 'photo') {
+          const manip = await ImageManipulator.manipulateAsync(asset.uri, []);
+          resolvedUri = manip.uri;
         }
       } catch (e) {
         console.warn('[Gallery] getAssetInfoAsync failed, using asset.uri:', e);

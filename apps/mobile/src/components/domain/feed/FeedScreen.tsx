@@ -243,8 +243,12 @@ export default function FeedScreen() {
     if (loadingMore || !hasMore || isLoadingRef.current) return;
     loadFeed(false);
   }, [loadingMore, hasMore, loadFeed]);
+  const pendingLikesRef = useRef<Set<number>>(new Set());
 
   const handleLike = useCallback(async (post: Post) => {
+    if (pendingLikesRef.current.has(post.id)) return;
+    pendingLikesRef.current.add(post.id);
+
     setPosts((prev) =>
       prev.map((p) =>
         p.id === post.id
@@ -265,6 +269,8 @@ export default function FeedScreen() {
       setPosts((prev) =>
         prev.map((p) => (p.id === post.id ? { ...p, is_liked: post.is_liked, like_count: post.like_count } : p))
       );
+    } finally {
+      pendingLikesRef.current.delete(post.id);
     }
   }, []);
 
