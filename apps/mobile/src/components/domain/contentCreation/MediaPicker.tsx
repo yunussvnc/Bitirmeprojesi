@@ -17,7 +17,7 @@ import {
   StatusBar,
 } from 'react-native';
 import { Image as ExpoImage } from 'expo-image';
-import { Video, ResizeMode } from 'expo-av';
+import Video from 'react-native-video';
 import * as MediaLibrary from 'expo-media-library';
 import Animated, {
   FadeIn,
@@ -192,9 +192,10 @@ export function MediaPicker({
               <Video
                 source={{ uri: previewItem.uri }}
                 style={{ width: SCREEN_WIDTH, height: dynamicPreviewHeight }}
-                resizeMode={ResizeMode.COVER}
-                shouldPlay
-                isLooping
+                resizeMode="cover"
+                paused={false}
+                repeat={true}
+                muted={true}
               />
             ) : (
               <ExpoImage

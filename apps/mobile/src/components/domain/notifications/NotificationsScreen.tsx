@@ -23,7 +23,7 @@ import Animated, { FadeIn, FadeOut, SlideInRight } from 'react-native-reanimated
 import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
 import { useTheme } from '@/src/hooks/useTheme';
-import { Avatar } from '@/src/components/ui';
+import { Avatar, LottieEmptyState } from '@/src/components/ui';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
 import { Screen } from '@/src/components/layout';
 import { useNotificationStore } from '@/src/store/useNotificationStore';
@@ -347,17 +347,7 @@ export default function NotificationsScreen() {
               />
             }
             ListEmptyComponent={
-              <View style={styles.emptyState}>
-                <View style={[styles.emptyIcon, { backgroundColor: colors.surface.elevated }]}>
-                  <IconSymbol
-                    name={activeTab === 'requests' ? 'person.crop.circle.badge.questionmark' : 'bell.slash.fill'}
-                    size={36}
-                    color={colors.text.tertiary}
-                  />
-                </View>
-                <Text style={[styles.emptyTitle, { color: colors.text.primary }]}>{emptyTitle}</Text>
-                <Text style={[styles.emptyDesc, { color: colors.text.tertiary }]}>{emptyDesc}</Text>
-              </View>
+              <LottieEmptyState title={emptyTitle} description={emptyDesc} />
             }
           />
         )}

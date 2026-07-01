@@ -8,14 +8,14 @@ import {
   View,
   Text,
   StyleSheet,
-  FlatList,
   TouchableOpacity,
   Dimensions,
   RefreshControl,
   ViewToken,
   Platform,
 } from "react-native";
-import { Video, ResizeMode } from "expo-av";
+import { FlashList } from "@shopify/flash-list";
+import Video, { VideoRef } from "react-native-video";
 import { router } from "expo-router";
 import { useTheme } from "@/src/hooks/useTheme";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
@@ -50,17 +50,9 @@ function ReelCell({
   onComment: () => void;
 }) {
   const { colors } = useTheme();
-  const videoRef = useRef<Video>(null);
+  const videoRef = useRef<VideoRef>(null);
   const firstMedia = post.media[0];
   const videoUrl = firstMedia?.media_type === "video" ? firstMedia?.media_url : null;
-
-  React.useEffect(() => {
-    if (isActive && videoUrl) {
-      videoRef.current?.playAsync().catch(() => {});
-    } else {
-      videoRef.current?.pauseAsync().catch(() => {});
-    }
-  }, [isActive, videoUrl]);
 
   const username = post.author?.username || post.author?.first_name || `user_${post.user_id}`;
 
@@ -71,10 +63,11 @@ function ReelCell({
           ref={videoRef}
           source={{ uri: videoUrl }}
           style={styles.video}
-          resizeMode={ResizeMode.COVER}
-          shouldPlay={isActive}
-          isLooping
-          isMuted={false}
+          resizeMode="cover"
+          paused={!isActive}
+          repeat={true}
+          muted={false}
+          ignoreSilentSwitch="ignore"
         />
       ) : (
         <View style={[styles.placeholder, { backgroundColor: colors.surface.elevated }]}>
@@ -194,25 +187,23 @@ export function ReelsView({ posts, loading, refreshing, onRefresh, onLoadMore, o
   }
 
   return (
-    <FlatList
-      data={posts}
-      keyExtractor={(item) => String(item.id)}
-      renderItem={renderItem}
-      initialNumToRender={2}
-      maxToRenderPerBatch={2}
-      windowSize={3}
-      removeClippedSubviews={Platform.OS === "android"}
-      pagingEnabled
-      snapToInterval={SCREEN_HEIGHT}
-      snapToAlignment="start"
-      decelerationRate="fast"
-      showsVerticalScrollIndicator={false}
-      onViewableItemsChanged={onViewableItemsChanged}
-      viewabilityConfig={viewabilityConfig}
-      refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={colors.semantic.onDarkBackground} />}
-      onEndReached={onLoadMore}
-      onEndReachedThreshold={0.5}
-    />
+    <View style={{ flex: 1, width: SCREEN_WIDTH, height: SCREEN_HEIGHT }}>
+      <FlashList
+        data={posts}
+        keyExtractor={(item) => String(item.id)}
+        renderItem={renderItem}
+        pagingEnabled
+        snapToInterval={SCREEN_HEIGHT}
+        snapToAlignment="start"
+        decelerationRate="fast"
+        showsVerticalScrollIndicator={false}
+        onViewableItemsChanged={onViewableItemsChanged}
+        viewabilityConfig={viewabilityConfig}
+        refreshControl={<RefreshControl refreshing={refreshing} onRefresh={onRefresh} tintColor={colors.semantic.onDarkBackground} />}
+        onEndReached={onLoadMore}
+        onEndReachedThreshold={0.5}
+      />
+    </View>
   );
 }
 

@@ -22,7 +22,7 @@ import {
   Alert,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { FlatList } from "react-native-gesture-handler";
+import { FlashList, FlashListRef } from "@shopify/flash-list";
 import * as Location from "expo-location";
 import { useTheme } from "@/src/hooks/useTheme";
 import { Screen, type ScreenRef } from "@/src/components/shared/layout";
@@ -238,7 +238,7 @@ export default function HomeScreen() {
   const { t } = useTranslation();
   const navigation = useNavigation();
   const screenRef = useRef<ScreenRef>(null);
-  const flatListRef = useRef<FlatList>(null);
+  const flatListRef = useRef<FlashListRef<any>>(null);
   const { prefs, patchPrefs, resetPrefs } = usePreferences();
   const savedIds = useAppStore((s) => s.savedIds);
 
@@ -614,7 +614,7 @@ export default function HomeScreen() {
           onApply={handleApplyFilters}
         />
 
-        <FlatList
+        <FlashList
           ref={flatListRef}
           data={displayList}
           keyExtractor={(item) => String((item as PlaceLike).id)}
@@ -645,9 +645,6 @@ export default function HomeScreen() {
           }
           ListEmptyComponent={listEmpty}
           contentContainerStyle={displayList.length > 0 ? styles.listContent : styles.listContentEmpty}
-          initialNumToRender={8}
-          windowSize={5}
-          removeClippedSubviews={Platform.OS === "android"}
           onViewableItemsChanged={onViewableItemsChanged}
           viewabilityConfig={viewabilityConfig}
           refreshControl={

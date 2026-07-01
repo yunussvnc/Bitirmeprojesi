@@ -27,6 +27,8 @@ export type { ChatInputProps } from './ChatInput';
 export { EmptyState } from './EmptyState';
 export type { EmptyStateProps, EmptyStateVariant } from './EmptyState';
 
+export { LottieEmptyState } from './LottieEmptyState';
+
 export { LoadingState } from './LoadingState';
 export type { LoadingStateProps } from './LoadingState';
 
@@ -70,3 +72,6 @@ export type { EnhancedReviewItemProps } from './EnhancedReviewItem';
 
 export { FilterBottomSheet, getFilterSummaryChips, countActiveFilters } from './FilterBottomSheet';
 export type { FilterBottomSheetProps, FilterValues } from './FilterBottomSheet';
+
+export { GlassCard } from './GlassCard';
+export type { GlassCardProps } from './GlassCard';

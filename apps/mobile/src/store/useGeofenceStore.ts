@@ -7,7 +7,7 @@
  * @module store/useGeofenceStore
  */
 
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { mmkvStorage } from "@/src/utils/mmkvStorage";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
@@ -101,7 +101,7 @@ export const useGeofenceStore = create<GeofenceState>()(
     }),
     {
       name: "asemos-geofence",
-      storage: createJSONStorage(() => AsyncStorage),
+      storage: createJSONStorage(() => mmkvStorage),
       partialize: (state) => ({
         isGeofenceEnabled: state.isGeofenceEnabled,
         defaultRadiusMeters: state.defaultRadiusMeters,

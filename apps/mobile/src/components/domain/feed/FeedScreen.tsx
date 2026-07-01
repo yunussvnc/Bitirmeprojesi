@@ -17,7 +17,7 @@ import {
   Share,
   Platform,
 } from "react-native";
-import { FlatList } from "react-native-gesture-handler";
+import { FlashList, FlashListRef } from "@shopify/flash-list";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { router, useFocusEffect, useNavigation } from "expo-router";
 import { useTheme } from "@/src/hooks/useTheme";
@@ -74,7 +74,7 @@ export default function FeedScreen() {
   const chromeHiddenRef = useRef(false);
   const storyHiddenRef = useRef(false);
   const miniBarVisibleRef = useRef(false);
-  const flatListRef = useRef<FlatList>(null);
+  const flatListRef = useRef<FlashListRef<Post>>(null);
   // Ref olarak nextCursor — loadFeed'in dependency loop'unu önler
   const nextCursorRef = useRef<string | null>(null);
   // Eş zamanlı birden fazla isteği engeller
@@ -590,7 +590,7 @@ export default function FeedScreen() {
   return (
     <Screen scrollable={false} withTabBar contentContainerStyle={{ paddingHorizontal: 0 }}>
       <View style={styles.container}>
-        <FlatList
+        <FlashList
           ref={flatListRef}
           style={styles.list}
           data={visiblePosts}
@@ -599,10 +599,6 @@ export default function FeedScreen() {
           ListEmptyComponent={listEmpty}
           ListHeaderComponent={listHeader}
           contentContainerStyle={posts.length === 0 ? styles.listEmpty : styles.listContent}
-          initialNumToRender={6}
-          maxToRenderPerBatch={6}
-          windowSize={5}
-          removeClippedSubviews={Platform.OS === "android"}
           scrollEnabled={!isCardZooming}
           refreshControl={
             <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} tintColor={colors.accent.primary} />

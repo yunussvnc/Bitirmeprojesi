@@ -21,7 +21,7 @@ import {
   Keyboard,
 } from 'react-native';
 import { Image } from 'expo-image';
-import { Video, ResizeMode } from 'expo-av';
+import Video from 'react-native-video';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
 import { lightImpact, success } from '@/src/utils/haptics';
 import type { Story } from '@/src/services/storyService';
@@ -290,14 +290,10 @@ export function StoryViewerModal({
           <Video
             source={{ uri: story.media_url }}
             style={styles.media}
-            resizeMode={ResizeMode.CONTAIN}
-            shouldPlay={visible}
-            isLooping={false}
-            onPlaybackStatusUpdate={(status: { isLoaded?: boolean; didJustFinish?: boolean }) => {
-              if (status?.isLoaded && status?.didJustFinish) {
-                handleVideoEnd();
-              }
-            }}
+            resizeMode="contain"
+            paused={!visible}
+            repeat={false}
+            onEnd={handleVideoEnd}
           />
         ) : (
           <Image

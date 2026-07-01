@@ -25,9 +25,8 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
-import { BlurView } from 'expo-blur';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Button, Input } from '@/src/components/ui';
+import { Button, Input, GlassCard } from '@/src/components/ui';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
 import { useTranslation } from 'react-i18next';
 import { lightImpact, success } from '@/src/utils/haptics';
@@ -229,8 +228,7 @@ export default function LoginScreen() {
                       </TouchableOpacity>
                     </View>
 
-                    <View style={styles.card}>
-                      <BlurView intensity={90} tint="dark" style={StyleSheet.absoluteFillObject} />
+                    <GlassCard intensity={25} tint="dark" style={styles.card}>
                       <View style={styles.cardInner}>
                         <Input
                           variant="onDark"
@@ -331,7 +329,7 @@ export default function LoginScreen() {
                         </TouchableOpacity>
 
                       </View>
-                    </View>
+                    </GlassCard>
                   </View>
                 </View>
             </TouchableWithoutFeedback>

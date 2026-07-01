@@ -3,7 +3,7 @@
  * İl ve İlçe dropdown'ları ile konum bazlı filtreleme.
  */
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import {
   View,
   Text,
@@ -12,9 +12,8 @@ import {
   Modal,
   Pressable,
   ScrollView,
-  Animated,
-  PanResponder,
 } from 'react-native';
+import { BottomSheetModal, BottomSheetBackdrop, BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme } from '@/src/hooks/useTheme';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
@@ -231,57 +230,35 @@ export function FilterBottomSheet({
   values,
   onApply,
 }: FilterBottomSheetProps) {
-  const { colors } = useTheme();
+  const { colors, isDark } = useTheme();
   const insets = useSafeAreaInsets();
   const { t } = useTranslation();
   const [draft, setDraft] = useState<FilterValues>(values);
-  const [internalVisible, setInternalVisible] = useState(false);
-  const translateY = useRef(new Animated.Value(800)).current;
-  const scrollY = useRef(0);
+
+  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
+  const snapPoints = ['55%'];
 
   useEffect(() => {
     if (visible) {
       setDraft(values);
-      scrollY.current = 0;
-      setInternalVisible(true);
-      translateY.setValue(800);
-      Animated.spring(translateY, { toValue: 0, useNativeDriver: true, bounciness: 5, speed: 14 }).start();
+      bottomSheetModalRef.current?.present();
+    } else {
+      bottomSheetModalRef.current?.dismiss();
     }
-  }, [visible, values, translateY]);
+  }, [visible, values]);
 
-  const closeWithAnimation = () => {
-    Animated.timing(translateY, { toValue: 800, duration: 220, useNativeDriver: true }).start(() => {
-      setInternalVisible(false);
+  const handleSheetChanges = useCallback((index: number) => {
+    if (index === -1) {
       onClose();
-    });
-  };
-
-  const panResponder = useRef(
-    PanResponder.create({
-      onMoveShouldSetPanResponder: (_, gs) =>
-        scrollY.current <= 0 && gs.dy > 5 && Math.abs(gs.dy) > Math.abs(gs.dx),
-      onPanResponderMove: (_, gs) => {
-        if (scrollY.current <= 0 && gs.dy > 0) translateY.setValue(gs.dy);
-      },
-      onPanResponderRelease: (_, gs) => {
-        if (gs.dy > 120 || gs.vy > 0.5) {
-          Animated.timing(translateY, { toValue: 800, duration: 220, useNativeDriver: true }).start(() => {
-            setInternalVisible(false);
-            onClose();
-          });
-        } else {
-          Animated.spring(translateY, { toValue: 0, useNativeDriver: true, bounciness: 4 }).start();
-        }
-      },
-    })
-  ).current;
+    }
+  }, [onClose]);
 
   const districtOptions = draft.province ? (DISTRICT_MAP[draft.province] || []) : [];
 
   const handleApply = () => {
     lightImpact();
     onApply(draft);
-    closeWithAnimation();
+    bottomSheetModalRef.current?.dismiss();
   };
 
   const handleClear = () => {
@@ -289,82 +266,79 @@ export function FilterBottomSheet({
     const empty: FilterValues = { province: null, district: null };
     setDraft(empty);
     onApply(empty);
-    closeWithAnimation();
+    bottomSheetModalRef.current?.dismiss();
   };
 
+  const renderBackdrop = useCallback(
+    (props: any) => (
+      <BottomSheetBackdrop
+        {...props}
+        appearsOnIndex={0}
+        disappearsOnIndex={-1}
+        pressBehavior="close"
+        opacity={0.4}
+      />
+    ),
+    []
+  );
+
   return (
-    <Modal visible={internalVisible} transparent animationType="none" onRequestClose={closeWithAnimation}>
-      <Pressable style={styles.backdrop} onPress={closeWithAnimation}>
-        <Animated.View
-          style={[
-            styles.sheet,
-            {
-              backgroundColor: colors.background.primary,
-              paddingBottom: insets.bottom + 16,
-              transform: [{ translateY }],
-            },
-          ]}
-          {...panResponder.panHandlers}
-        >
-          <Pressable onPress={() => {}}>
-          {/* Handle */}
-          <View style={styles.handleRow} {...panResponder.panHandlers}>
-            <View style={[styles.handle, { backgroundColor: colors.surface.border }]} />
-          </View>
+    <BottomSheetModal
+      ref={bottomSheetModalRef}
+      index={0}
+      snapPoints={snapPoints}
+      onChange={handleSheetChanges}
+      backdropComponent={renderBackdrop}
+      handleIndicatorStyle={{ backgroundColor: colors.surface.border, width: 36 }}
+      backgroundStyle={{ backgroundColor: colors.background.primary }}
+    >
+      <View style={styles.titleRow}>
+        <View>
+          <Text style={[styles.title, { color: colors.text.primary }]}>Konum Seçimi</Text>
+          <Text style={[styles.subtitle, { color: colors.text.tertiary }]}>
+            Lütfen il ve ilçe seçiniz.
+          </Text>
+        </View>
+      </View>
 
-          {/* Title */}
-          <View style={styles.titleRow}>
-            <View>
-              <Text style={[styles.title, { color: colors.text.primary }]}>Konum Seçimi</Text>
-              <Text style={[styles.subtitle, { color: colors.text.tertiary }]}>
-                Lütfen il ve ilçe seçiniz.
-              </Text>
-            </View>
-          </View>
+      <BottomSheetScrollView
+        showsVerticalScrollIndicator={false}
+        contentContainerStyle={styles.body}
+      >
+        {/* İl Seçimi */}
+        <DropdownPicker
+          label="İL SEÇİMİ"
+          value={draft.province}
+          options={PROVINCES}
+          placeholder="İl seçiniz..."
+          onSelect={(v) => {
+            setDraft((d) => ({ province: v, district: null }));
+          }}
+        />
 
-          <ScrollView
-            showsVerticalScrollIndicator={false}
-            contentContainerStyle={styles.body}
-            onScroll={(e) => { scrollY.current = e.nativeEvent.contentOffset.y; }}
-            scrollEventThrottle={16}
-          >
-            {/* İl Seçimi */}
-            <DropdownPicker
-              label="İL SEÇİMİ"
-              value={draft.province}
-              options={PROVINCES}
-              placeholder="İl seçiniz..."
-              onSelect={(v) => {
-                setDraft((d) => ({ province: v, district: null }));
-              }}
-            />
+        {/* İlçe Seçimi */}
+        <DropdownPicker
+          label="İLÇE SEÇİMİ"
+          value={draft.district}
+          options={districtOptions}
+          placeholder="Önce il seçiniz..."
+          disabled={!draft.province}
+          onSelect={(v) => {
+            setDraft((d) => ({ ...d, district: v }));
+          }}
+        />
+      </BottomSheetScrollView>
 
-            {/* İlçe Seçimi */}
-            <DropdownPicker
-              label="İLÇE SEÇİMİ"
-              value={draft.district}
-              options={districtOptions}
-              placeholder="Önce il seçiniz..."
-              disabled={!draft.province}
-              onSelect={(v) => {
-                setDraft((d) => ({ ...d, district: v }));
-              }}
-            />
-          </ScrollView>
-
-          {/* Footer */}
-          <View style={[styles.footer, { paddingBottom: insets.bottom + 8, borderTopColor: colors.surface.border }]}>
-            <TouchableOpacity style={styles.clearBtn} onPress={handleClear} activeOpacity={0.7}>
-              <Text style={[styles.clearText, { color: colors.text.secondary }]}>Temizle</Text>
-            </TouchableOpacity>
-            <Button style={styles.applyBtn} onPress={handleApply}>
-              Uygula
-            </Button>
-          </View>
-          </Pressable>
-        </Animated.View>
-      </Pressable>
-    </Modal>
+      {/* Footer */}
+      <View style={[styles.footer, { paddingBottom: insets.bottom || 24, borderTopColor: colors.surface.border }]}>
+        <TouchableOpacity style={styles.clearBtn} onPress={handleClear} activeOpacity={0.7}>
+          <Text style={[styles.clearText, { color: colors.text.secondary }]}>Temizle</Text>
+        </TouchableOpacity>
+        <Button style={styles.applyBtn} onPress={handleApply}>
+          Uygula
+        </Button>
+      </View>
+    </BottomSheetModal>
   );
 }
 
@@ -384,26 +358,6 @@ export function countActiveFilters(v: FilterValues): number {
 /* ── Styles ── */
 
 const styles = StyleSheet.create({
-  backdrop: {
-    flex: 1,
-    backgroundColor: 'transparent',
-    justifyContent: 'flex-end',
-  },
-  sheet: {
-    borderTopLeftRadius: 24,
-    borderTopRightRadius: 24,
-    maxHeight: '80%',
-  },
-  handleRow: {
-    alignItems: 'center',
-    paddingTop: 12,
-    paddingBottom: 12,
-  },
-  handle: {
-    width: 36,
-    height: 4,
-    borderRadius: 2,
-  },
   titleRow: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -418,17 +372,23 @@ const styles = StyleSheet.create({
   clearText: { fontSize: 14, fontWeight: '600' },
   body: {
     paddingHorizontal: 20,
-    paddingBottom: 8,
+    paddingBottom: 24,
   },
   footer: {
     paddingHorizontal: 20,
     paddingTop: 12,
     borderTopWidth: StyleSheet.hairlineWidth,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   applyBtn: {
+    flex: 1,
+    marginLeft: 16,
     height: 48,
     borderRadius: 14,
     alignItems: 'center',
     justifyContent: 'center',
   },
 });
+

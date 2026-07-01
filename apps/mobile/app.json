@@ -30,6 +30,7 @@
         "NSLocationAlwaysAndWhenInUseUsageDescription": "Bu uygulama yakınınızdaki mekanları bildirebilmek için arka planda konum erişimine ihtiyaç duyar.",
         "NSPhotoLibraryUsageDescription": "Bu uygulama yorumlarınıza fotoğraf eklemeniz için galeri erişimine ihtiyaç duyar.",
         "NSCameraUsageDescription": "Bu uygulama yorumlarınıza fotoğraf çekmeniz için kamera erişimine ihtiyaç duyar.",
+        "NSMicrophoneUsageDescription": "Bu uygulama video kaydı sırasında ses kaydetmek için mikrofon erişimine ihtiyaç duyar.",
         "UIBackgroundModes": [
           "remote-notification",
           "remote-notification"
@@ -124,7 +125,8 @@
       "expo-web-browser",
       "@maplibre/maplibre-react-native",
       "expo-build-properties",
-      "expo-font"
+      "expo-font",
+      "react-native-video"
     ],
     "experiments": {
       "typedRoutes": true

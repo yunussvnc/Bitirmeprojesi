@@ -8,7 +8,7 @@
  * @module store/useOfflineCache
  */
 
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { mmkvStorage } from "@/src/utils/mmkvStorage";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import { logger } from "@/src/utils/logger";
@@ -231,7 +231,7 @@ export const useOfflineCache = create<OfflineCacheState>()(
     }),
     {
       name: "asemos-offline-cache",
-      storage: createJSONStorage(() => AsyncStorage),
+      storage: createJSONStorage(() => mmkvStorage),
       // Sadece veri alanlarını persist et (fonksiyonları değil)
       partialize: (state) => ({
         cachedNearbyPlaces: state.cachedNearbyPlaces,

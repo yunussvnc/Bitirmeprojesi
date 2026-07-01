@@ -1,4 +1,4 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { mmkvStorage } from "@/src/utils/mmkvStorage";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import { apiGet, apiPut } from "@/src/utils/apiClient";
@@ -332,7 +332,7 @@ export const useSettingsStore = create<SettingsState>()(
     }),
     {
       name: "asemos-settings",
-      storage: createJSONStorage(() => AsyncStorage),
+      storage: createJSONStorage(() => mmkvStorage),
       partialize: (state) => {
         // Fonksiyonları ve sync flag'ini persist etme
         const { syncWithBackend, pushToBackend, _isSyncing, ...rest } = state;

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Stack, useRouter, useSegments, useRootNavigationState } from "expo-router";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { PreferencesProvider } from "../src/store/preferences";
 import { ThemeProvider } from "../src/context/ThemeContext";
 import { ErrorBoundary } from "@/src/components/ui/ErrorBoundary";
@@ -150,36 +151,38 @@ export default function RootLayout() {
         <ErrorBoundary>
           <PushNotificationProvider>
             <PreferencesProvider>
-              <UploadProgressBanner />
-              <Stack
-                screenOptions={{
-                  headerShown: false,
-                  autoHideHomeIndicator: true,
-                }}
-              >
-                <Stack.Screen
-                  name="create-post"
-                  options={{
-                    gestureEnabled: true,
-                    animation: "slide_from_right",
+              <BottomSheetModalProvider>
+                <UploadProgressBanner />
+                <Stack
+                  screenOptions={{
+                    headerShown: false,
+                    autoHideHomeIndicator: true,
                   }}
-                />
-                <Stack.Screen
-                  name="create-story"
-                  options={{
-                    presentation: "modal",
-                    gestureEnabled: true,
-                  }}
-                />
+                >
+                  <Stack.Screen
+                    name="create-post"
+                    options={{
+                      gestureEnabled: true,
+                      animation: "slide_from_right",
+                    }}
+                  />
+                  <Stack.Screen
+                    name="create-story"
+                    options={{
+                      presentation: "modal",
+                      gestureEnabled: true,
+                    }}
+                  />
 
-                <Stack.Screen name="login" options={{ gestureEnabled: false }} />
-                <Stack.Screen name="register" options={{ gestureEnabled: false }} />
-                <Stack.Screen name="first-time-setup" options={{ gestureEnabled: false }} />
-                <Stack.Screen name="verify-email" options={{ gestureEnabled: false }} />
-                <Stack.Screen name="(tabs)" options={{ gestureEnabled: false }} />
-                <Stack.Screen name="(venue-tabs)" options={{ gestureEnabled: false }} />
-                <Stack.Screen name="saved" options={{ gestureEnabled: true, animation: "slide_from_right" }} />
-              </Stack>
+                  <Stack.Screen name="login" options={{ gestureEnabled: false }} />
+                  <Stack.Screen name="register" options={{ gestureEnabled: false }} />
+                  <Stack.Screen name="first-time-setup" options={{ gestureEnabled: false }} />
+                  <Stack.Screen name="verify-email" options={{ gestureEnabled: false }} />
+                  <Stack.Screen name="(tabs)" options={{ gestureEnabled: false }} />
+                  <Stack.Screen name="(venue-tabs)" options={{ gestureEnabled: false }} />
+                  <Stack.Screen name="saved" options={{ gestureEnabled: true, animation: "slide_from_right" }} />
+                </Stack>
+              </BottomSheetModalProvider>
             </PreferencesProvider>
           </PushNotificationProvider>
         </ErrorBoundary>
