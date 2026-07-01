@@ -3,8 +3,6 @@ import React, { useState, useRef, useCallback } from 'react';
 import {
   StyleSheet,
   View,
-  ScrollView,
-  KeyboardAvoidingView,
   Platform,
   Text,
   Keyboard,
@@ -12,6 +10,7 @@ import {
   Dimensions,
   Image,
 } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { BlurView } from 'expo-blur';
@@ -113,17 +112,13 @@ export default function FirstTimeSetupScreen() {
       />
 
       <SafeAreaView style={styles.safeArea} edges={['top', 'bottom']}>
-        <KeyboardAvoidingView
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        <KeyboardAwareScrollView
           style={styles.keyboardView}
-          keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}
+          contentContainerStyle={styles.scrollContent}
+          keyboardShouldPersistTaps="handled"
+          showsVerticalScrollIndicator={false}
+          bottomOffset={Platform.OS === 'ios' ? 0 : 20}
         >
-          <ScrollView
-            style={styles.scrollView}
-            contentContainerStyle={styles.scrollContent}
-            keyboardShouldPersistTaps="handled"
-            showsVerticalScrollIndicator={false}
-          >
             <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
               <View style={styles.contentContainer}>
                 
@@ -194,8 +189,7 @@ export default function FirstTimeSetupScreen() {
 
               </View>
             </TouchableWithoutFeedback>
-          </ScrollView>
-        </KeyboardAvoidingView>
+        </KeyboardAwareScrollView>
       </SafeAreaView>
     </View>
   );

@@ -21,13 +21,13 @@ import {
   TextInput,
   ScrollView,
   Alert,
-  KeyboardAvoidingView,
   Platform,
   BackHandler,
   Switch,
   FlatList,
 } from "react-native";
 import { Image as ExpoImage } from 'expo-image';
+import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { router, useLocalSearchParams } from "expo-router";
 import { useTheme } from "@/src/hooks/useTheme";

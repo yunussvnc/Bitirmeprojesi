@@ -5,6 +5,11 @@ import type { AuthUser } from "@/src/services/authService";
 import { useMessagesStore } from "./useMessagesStore";
 import { useChatMessagesStore } from "./useChatMessagesStore";
 import { useNotificationStore } from "./useNotificationStore";
+import {
+  saveTokens as secureSaveTokens,
+  getTokens as secureGetTokens,
+  clearTokens as secureClearTokens,
+} from "@/src/utils/secureStorage";
 
 type AuthState = {
   accessToken: string | null;
@@ -26,13 +31,18 @@ export const useAuthStore = create<AuthState>()(
       user: null,
       hydrated: false,
 
-      setTokens: (access, refresh) =>
-        set({ accessToken: access, refreshToken: refresh }),
+      setTokens: (access, refresh) => {
+        set({ accessToken: access, refreshToken: refresh });
+        // Token'ları Keychain/Keystore'a da kaydet
+        secureSaveTokens(access, refresh);
+      },
 
       setUser: (user) => set({ user }),
 
       logout: () => {
         set({ accessToken: null, refreshToken: null, user: null });
+        // Keychain/Keystore'dan token'ları sil
+        secureClearTokens();
         
         // Merkezi çıkış (logout) işleminde, eski verilerin diğer hesaplarda görünmesini
         // engellemek için yerel önbellekleri (store) temizle.
@@ -44,15 +54,25 @@ export const useAuthStore = create<AuthState>()(
       setHydrated: (v) => set({ hydrated: v }),
     }),
     {
-      name: "auth-store-v1",
+      name: "auth-store-v2",
       storage: createJSONStorage(() => mmkvStorage),
       partialize: (state) => ({
-        accessToken: state.accessToken,
-        refreshToken: state.refreshToken,
+        // Token'lar artık SecureStore'da — MMKV'de sadece user bilgisi
         user: state.user,
       }),
-      onRehydrateStorage: () => (state) => {
-        state?.setHydrated(true);
+      onRehydrateStorage: () => async (state) => {
+        if (state) {
+          // MMKV'den user geldi, şimdi SecureStore'dan token'ları al
+          try {
+            const { accessToken, refreshToken } = await secureGetTokens();
+            if (accessToken && refreshToken) {
+              state.setTokens(accessToken, refreshToken);
+            }
+          } catch {
+            // SecureStore okunamazsa sessizce devam et
+          }
+          state.setHydrated(true);
+        }
       },
     }
   )

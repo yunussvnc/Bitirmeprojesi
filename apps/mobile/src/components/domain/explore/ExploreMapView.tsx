@@ -318,7 +318,10 @@ export function ExploreMapView({ places, loading, onLoadPlaces }: ExploreMapView
         <GeoJSONSource
           id="placesSource"
           data={placesGeoJSON}
-          onPress={(event: any) => {
+          cluster={true}
+          clusterRadius={40}
+          clusterMaxZoom={14}
+          onPress={async (event: any) => {
             // event could have features directly, or inside nativeEvent.payload
             let feature = event?.features?.[0];
             if (!feature && event?.nativeEvent?.payload) {
@@ -326,6 +329,22 @@ export function ExploreMapView({ places, loading, onLoadPlaces }: ExploreMapView
             }
             if (!feature && event?.nativeEvent?.features) {
               feature = event.nativeEvent.features[0];
+            }
+
+            if (!feature) return;
+
+            if (feature.properties?.cluster) {
+              const coords = feature.geometry?.coordinates;
+              if (coords && cameraRef.current) {
+                // Mevcut zoom seviyesini alıp biraz daha yaklaştıralım, 
+                // ya da direkt 14 yapabiliriz (clusterMaxZoom 14 olduğu için dağılır)
+                cameraRef.current.flyTo({
+                  center: [coords[0], coords[1]],
+                  zoom: 14,
+                  duration: 500,
+                });
+              }
+              return;
             }
 
             console.log('[DEBUG] Found feature id:', feature?.properties?.id);
@@ -341,9 +360,44 @@ export function ExploreMapView({ places, loading, onLoadPlaces }: ExploreMapView
             }
           }}
         >
+          {/* Küme (Cluster) Katmanları */}
+          <Layer
+            id="clusters"
+            type="circle"
+            filter={['has', 'point_count']}
+            paint={{
+              'circle-color': colors.accent.primary,
+              'circle-radius': [
+                'step',
+                ['get', 'point_count'],
+                16,
+                10,
+                20,
+                50,
+                24,
+              ],
+              'circle-stroke-width': 2,
+              'circle-stroke-color': isDark ? '#1a1a1a' : '#ffffff',
+            }}
+          />
+          <Layer
+            id="cluster-count"
+            type="symbol"
+            filter={['has', 'point_count']}
+            layout={{
+              'text-field': '{point_count_abbreviated}',
+              'text-size': 13,
+            }}
+            paint={{
+              'text-color': '#ffffff',
+            }}
+          />
+
+          {/* Tekil Nokta (Mekan) Katmanları */}
           <Layer
             id="placesCircles"
             type="circle"
+            filter={['!', ['has', 'point_count']]}
             paint={{
               'circle-radius': 6,
               'circle-color': ['get', 'statusColor'],
@@ -355,6 +409,7 @@ export function ExploreMapView({ places, loading, onLoadPlaces }: ExploreMapView
             id="placesLabels"
             type="symbol"
             minzoom={13}
+            filter={['!', ['has', 'point_count']]}
             layout={{
               'text-field': ['get', 'name'],
               'text-size': 11,

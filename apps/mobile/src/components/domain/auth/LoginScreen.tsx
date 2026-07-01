@@ -13,7 +13,6 @@ import {
   StyleSheet,
   View,
   ScrollView,
-  KeyboardAvoidingView,
   Platform,
   Text,
   TouchableOpacity,
@@ -24,6 +23,7 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
 } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button, Input, GlassCard } from '@/src/components/ui';
@@ -182,19 +182,15 @@ export default function LoginScreen() {
       />
 
       <SafeAreaView style={styles.safeArea} edges={['top']}>
-        <KeyboardAvoidingView
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        <KeyboardAwareScrollView
           style={styles.keyboardView}
-          keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}
+          contentContainerStyle={styles.scrollContent}
+          keyboardShouldPersistTaps="handled"
+          showsVerticalScrollIndicator={false}
+          bottomOffset={Platform.OS === 'ios' ? 0 : 20}
         >
-          <ScrollView
-            style={styles.scrollView}
-            contentContainerStyle={styles.scrollContent}
-            keyboardShouldPersistTaps="handled"
-            showsVerticalScrollIndicator={false}
-          >
-            <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-              <View style={styles.content} pointerEvents="box-none">
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+            <View style={styles.content} pointerEvents="box-none">
                 <View style={styles.topBlock}>
                     {/* Marka & slogan â€“ profesyonel tipografi */}
                     <View style={styles.header}>
@@ -333,9 +329,7 @@ export default function LoginScreen() {
                   </View>
                 </View>
             </TouchableWithoutFeedback>
-          </ScrollView>
-
-        </KeyboardAvoidingView>
+        </KeyboardAwareScrollView>
       </SafeAreaView>
     </View>
 

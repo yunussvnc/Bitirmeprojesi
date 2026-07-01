@@ -12,7 +12,6 @@ import {
     FlatList,
     TouchableOpacity,
     TextInput,
-    KeyboardAvoidingView,
     Platform,
     Modal,
     TouchableWithoutFeedback,
@@ -20,6 +19,7 @@ import {
     Keyboard,
     Dimensions,
 } from "react-native";
+import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
 import Animated, {
     useSharedValue,
     useAnimatedStyle,

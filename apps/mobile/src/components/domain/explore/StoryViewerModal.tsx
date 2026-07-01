@@ -16,10 +16,10 @@ import {
   Animated,
   PanResponder,
   TextInput,
-  KeyboardAvoidingView,
   ActivityIndicator,
   Keyboard,
 } from 'react-native';
+import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
 import { Image } from 'expo-image';
 import Video from 'react-native-video';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';

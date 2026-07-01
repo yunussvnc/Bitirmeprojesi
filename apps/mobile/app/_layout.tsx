@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+import Toast from "react-native-toast-message";
 import { Stack, useRouter, useSegments, useRootNavigationState } from "expo-router";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { KeyboardProvider } from "react-native-keyboard-controller";
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { PreferencesProvider } from "../src/store/preferences";
 import { ThemeProvider } from "../src/context/ThemeContext";
@@ -10,6 +12,7 @@ import { useAppStore } from "@/src/store/useAppStore";
 import { useAuthStore } from "@/src/store/useAuthStore";
 import { setAuthInterceptors } from "@/src/utils/apiClient";
 import { UploadProgressBanner } from "@/src/components/ui/UploadProgressBanner";
+import { OfflineBanner } from "@/src/components/ui/OfflineBanner";
 import { useNotificationSocket } from "@/src/hooks/useNotificationSocket";
 import { PushNotificationProvider } from "@/src/providers/PushNotificationProvider";
 import "@/src/i18n"; // i18n initialization
@@ -147,12 +150,14 @@ export default function RootLayout() {
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
+      <KeyboardProvider>
       <ThemeProvider>
         <ErrorBoundary>
           <PushNotificationProvider>
             <PreferencesProvider>
               <BottomSheetModalProvider>
                 <UploadProgressBanner />
+                <OfflineBanner />
                 <Stack
                   screenOptions={{
                     headerShown: false,
@@ -182,11 +187,13 @@ export default function RootLayout() {
                   <Stack.Screen name="(venue-tabs)" options={{ gestureEnabled: false }} />
                   <Stack.Screen name="saved" options={{ gestureEnabled: true, animation: "slide_from_right" }} />
                 </Stack>
+                <Toast />
               </BottomSheetModalProvider>
             </PreferencesProvider>
           </PushNotificationProvider>
         </ErrorBoundary>
       </ThemeProvider>
+      </KeyboardProvider>
     </GestureHandlerRootView>
   );
 }

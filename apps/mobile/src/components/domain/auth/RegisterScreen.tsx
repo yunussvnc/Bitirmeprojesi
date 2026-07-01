@@ -12,7 +12,6 @@ import {
   StyleSheet,
   View,
   ScrollView,
-  KeyboardAvoidingView,
   Platform,
   Text,
   TouchableOpacity,
@@ -23,6 +22,7 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
 } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 import { LinearGradient } from 'expo-linear-gradient';
 import { BlurView } from 'expo-blur';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -311,17 +311,13 @@ export default function RegisterScreen() {
       />
 
       <SafeAreaView style={styles.safeArea} edges={['top']}>
-        <KeyboardAvoidingView
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        <KeyboardAwareScrollView
           style={styles.keyboardView}
-          keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}
+          contentContainerStyle={styles.scrollContent}
+          keyboardShouldPersistTaps="handled"
+          showsVerticalScrollIndicator={false}
+          bottomOffset={Platform.OS === 'ios' ? 0 : 20}
         >
-          <ScrollView
-            style={styles.scrollView}
-            contentContainerStyle={styles.scrollContent}
-            keyboardShouldPersistTaps="handled"
-            showsVerticalScrollIndicator={false}
-          >
             <View style={styles.content} pointerEvents="box-none">
               <View style={styles.topBlock}>
                     {/* Marka başlığı — login ekranıyla aynı konum ve boyut */}
@@ -661,14 +657,12 @@ export default function RegisterScreen() {
                     </View>
                   </View>
                 </View>
-          </ScrollView>
-
+          </KeyboardAwareScrollView>
           <LegalModal 
             visible={legalModalType !== null} 
             type={legalModalType} 
             onClose={() => setLegalModalType(null)} 
           />
-        </KeyboardAvoidingView>
       </SafeAreaView>
     </View>
   );
