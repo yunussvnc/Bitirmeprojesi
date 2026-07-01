@@ -411,16 +411,30 @@ def search_places(
     minimal: bool = False,
 ):
     """Mekan arama — isim, kategori, şehir filtreleri."""
+    from sqlalchemy import func
+    bind = db.get_bind()
     query = db.query(models.Place)
-    if q:
-        query = query.filter(models.Place.name.ilike(f"%{q}%"))
+    has_q = bool(q)
+    
+    if has_q:
+        if bind.dialect.name == "postgresql":
+            query = query.filter(func.similarity(models.Place.name, q) > 0.2)
+            query = query.order_by(func.similarity(models.Place.name, q).desc())
+        else:
+            query = query.filter(models.Place.name.ilike(f"%{q}%"))
+            
     if category:
         query = query.filter(models.Place.category == category)
     if city:
         query = query.filter(models.Place.city.ilike(f"%{city}%"))
+        
     total = query.count()
     offset = (page - 1) * page_size
-    items = query.order_by(models.Place.average_rating.desc()).offset(offset).limit(page_size).all()
+    
+    if not has_q or bind.dialect.name != "postgresql":
+        query = query.order_by(models.Place.average_rating.desc())
+        
+    items = query.offset(offset).limit(page_size).all()
     if not minimal:
         items = _enrich_places_with_stats(db, items)
     return items, total
@@ -2361,8 +2375,17 @@ def get_foryou_places(db: Session, user_id: int | None, lat: float | None, lng: 
     Interaction: Belirli bir mekan için toplam ağırlık (Maks 30)
     Category: (Şimdilik Interaction içine yedirilebilir veya ayrıca hesaplanabilir)
     """
-    # 1. Tüm aktif mekanları çek (performans için sadece gerekli kolonlar)
-    places = db.query(models.Place).filter(models.Place.latitude.isnot(None)).all()
+    # 1. Tüm aktif mekanları çekmek yerine en yüksek puanlı veya kullanıcıya en yakın 200 mekanı çekiyoruz (Performans optimizasyonu)
+    query = db.query(models.Place).filter(models.Place.latitude.isnot(None))
+    
+    if lat and lng:
+        # Eğer kullanıcının konumu varsa, kaba bir bounding box (yaklaşık 50km) ile filtreleyip 200 tane getirebiliriz. 
+        # Basitlik açısından en yüksek puanlı 200 mekan ile çalışıyoruz.
+        query = query.order_by(models.Place.average_rating.desc()).limit(200)
+    else:
+        query = query.order_by(models.Place.average_rating.desc()).limit(200)
+        
+    places = query.all()
 
     # 2. Etkileşim geçmişini çek (Eğer kullanıcı giriş yapmışsa)
     user_interactions = {}

@@ -111,9 +111,13 @@ export const useUploadPipelineStore = create<UploadPipelineState>((set, get) => 
       ? `video/${ext === 'mov' ? 'quicktime' : 'mp4'}`
       : `image/${ext}`;
 
-    console.log(`[UploadPipeline]   Uploading as ${mime}, filename: ${filename}`);
+    // Sıkıştırma (Compression) Adımı
+    const { compressMedia } = await import('../utils/mediaCompression');
+    const finalUri = await compressMedia(uri, item.type);
+
+    console.log(`[UploadPipeline]   Uploading as ${mime}, filename: ${filename}, Final URI: ${finalUri}`);
     const result = await uploadFn({
-      uri,
+      uri: finalUri,
       type: mime,
       name: filename,
     });

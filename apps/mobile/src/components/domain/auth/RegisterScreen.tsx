@@ -1,3 +1,4 @@
+import { showError, showSuccess } from "@/src/utils/toast";
 /**
  * Kayıt ekranı – Giriş ekranı ile aynı tasarım
  * Arka planda mekan carousel, koyu overlay, cam kart, onDark inputlar.

@@ -1,3 +1,4 @@
+import { showError, showSuccess } from "@/src/utils/toast";
 /**
  * Forgot Password Screen
  *
@@ -83,7 +84,7 @@ export default function ForgotPasswordScreen() {
             Alert.alert(t('forgot_password.code_sent'), t('forgot_password.check_email'));
         } catch (e: any) {
             const msg = e?.response?.data?.detail || e?.message || t('forgot_password.error');
-            Alert.alert(t('forgot_password.error_title'), msg);
+            showError(t('forgot_password.error_title'), msg);
         } finally {
             setLoading(false);
         }
@@ -127,7 +128,7 @@ export default function ForgotPasswordScreen() {
             );
         } catch (e: any) {
             const msg = e?.response?.data?.detail || e?.message || t('forgot_password.error');
-            Alert.alert(t('forgot_password.error_title'), msg);
+            showError(t('forgot_password.error_title'), msg);
         } finally {
             setLoading(false);
         }

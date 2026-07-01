@@ -1,3 +1,4 @@
+import { showError, showSuccess } from "@/src/utils/toast";
 import * as WebBrowser from 'expo-web-browser';
 import { useCallback, useEffect, useState } from 'react';
 
@@ -89,9 +90,8 @@ export function useSocialAuth(roleType: RoleType, context: SocialAuthContext = '
         finishSocialLogin(token);
       } else if (__DEV__) {
         console.warn('[GoogleAuth] Başarılı yanıt alındı ama token bulunamadı:', response);
-        Alert.alert(
-          t('auth.login_error_title'),
-          'Google giriş yanıtında token bulunamadı. Lütfen tekrar deneyin.',
+        showError(
+          t('auth.login_error_title'), 'Google giriş yanıtında token bulunamadı. Lütfen tekrar deneyin.',
         );
       }
       return;

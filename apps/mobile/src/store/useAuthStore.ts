@@ -54,24 +54,23 @@ export const useAuthStore = create<AuthState>()(
       setHydrated: (v) => set({ hydrated: v }),
     }),
     {
-      name: "auth-store-v2",
+      name: "auth-storage",
       storage: createJSONStorage(() => mmkvStorage),
       partialize: (state) => ({
-        // Token'lar artık SecureStore'da — MMKV'de sadece user bilgisi
         user: state.user,
+        hydrated: state.hydrated,
+        // accessToken ve refreshToken'ı MMKV'ye KESİNLİKLE yazma
+        // Bunlar sadece expo-secure-store (Keychain/Keystore) içinde durmalı
       }),
-      onRehydrateStorage: () => async (state) => {
+      onRehydrateStorage: () => (state) => {
         if (state) {
-          // MMKV'den user geldi, şimdi SecureStore'dan token'ları al
-          try {
-            const { accessToken, refreshToken } = await secureGetTokens();
-            if (accessToken && refreshToken) {
-              state.setTokens(accessToken, refreshToken);
+          // Rehydration sırasında secure store'dan tokenları yükle
+          secureGetTokens().then((tokens) => {
+            if (tokens.accessToken && tokens.refreshToken) {
+              state.setTokens(tokens.accessToken, tokens.refreshToken);
             }
-          } catch {
-            // SecureStore okunamazsa sessizce devam et
-          }
-          state.setHydrated(true);
+            state.setHydrated(true);
+          });
         }
       },
     }

@@ -38,6 +38,8 @@ import {
 } from 'react-native';
 import { Image } from 'expo-image';
 import * as ImageManipulator from 'expo-image-manipulator';
+import ViewShot from 'react-native-view-shot';
+import { DraggableText } from './DraggableText';
 import {
   Gesture,
   GestureDetector,
@@ -124,6 +126,10 @@ export function StoryMediaEditor({
   const savedTransY   = useSharedValue(0);
   const focalOffsetX  = useSharedValue(0);
   const focalOffsetY  = useSharedValue(0);
+
+  // ── Metin Eklentileri (Text Overlays) ─────────────────────────────────
+  const [texts, setTexts] = useState<string[]>([]);
+  const viewShotRef = useRef<ViewShot>(null);
 
   // ── Snapshot için ref (JS thread'den okumak için) ────────────────────
   const transformRef = useRef<StoryTransformData>({
@@ -245,6 +251,14 @@ export function StoryMediaEditor({
     setProcessing(true);
 
     try {
+      // Eğer ekranda yazı varsa ImageManipulator yerine ViewShot kullanarak tamamını kaydediyoruz
+      if (texts.length > 0 && viewShotRef.current?.capture) {
+        const snapshotUri = await viewShotRef.current.capture();
+        onConfirm(snapshotUri, transformRef.current);
+        setProcessing(false);
+        return;
+      }
+
       const td = transformRef.current;
       const actions: ImageManipulator.Action[] = [];
 
@@ -334,13 +348,18 @@ export function StoryMediaEditor({
   // ── Render ─────────────────────────────────────────────────────────────
   return (
     <GestureHandlerRootView style={styles.root}>
-      {/* Siyah tuval */}
-      <View style={styles.canvas}>
+      {/* Siyah tuval - ViewShot ile sarmalanmış */}
+      <ViewShot ref={viewShotRef} options={{ format: 'jpg', quality: 0.9 }} style={styles.canvas}>
         <GestureDetector gesture={composedGesture}>
           <Animated.View style={[styles.mediaWrapper, animatedStyle]}>
             <Image source={{ uri }} style={styles.media} contentFit="contain" />
           </Animated.View>
         </GestureDetector>
+        
+        {/* Metinler */}
+        {texts.map((t, i) => (
+          <DraggableText key={i} text={t} />
+        ))}
 
         {/* 3×3 kompozisyon kılavuz çizgileri */}
         <View style={styles.grid} pointerEvents="none">
@@ -351,7 +370,7 @@ export function StoryMediaEditor({
             <View key={`v${i}`} style={[styles.gridLine, styles.gridLineV, { left: `${(i / 3) * 100}%` as any }]} />
           ))}
         </View>
-      </View>
+      </ViewShot>
 
       {/* ── Üst bar ── */}
       <View style={[styles.topBar, { paddingTop: insets.top + 8 }]} pointerEvents="box-none">
@@ -366,6 +385,19 @@ export function StoryMediaEditor({
         </TouchableOpacity>
 
         <Text style={styles.title}>Düzenle</Text>
+
+        {/* Metin Ekle Butonu */}
+        <TouchableOpacity
+          style={styles.topBtn}
+          onPress={() => {
+            lightImpact();
+            setTexts([...texts, 'Yeni Yazı']);
+          }}
+          disabled={processing}
+          activeOpacity={0.75}
+        >
+          <IconSymbol name="textformat" size={20} color="#fff" />
+        </TouchableOpacity>
 
         <TouchableOpacity
           style={styles.topBtn}

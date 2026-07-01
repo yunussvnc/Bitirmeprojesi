@@ -1,3 +1,4 @@
+import { showError, showSuccess } from "@/src/utils/toast";
 /**
  * Premium Login Screen
  *
@@ -120,7 +121,7 @@ export default function LoginScreen() {
       }
 
       setErrors({ general: msg });
-      Alert.alert(t('auth.login_error_title'), msg);
+      showError(t('auth.login_error_title'), msg);
     } finally {
       isSubmittingRef.current = false;
       setLoading(false);
