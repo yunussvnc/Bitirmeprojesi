@@ -110,7 +110,8 @@ export default function MessagesScreen() {
                     }
                 }
             });
-        }).catch((e: any) => console.log("Failed to fetch DMs inbox", e));
+        }).catch((e: any) => console.log("Failed to fetch DMs inbox", e))
+          .finally(() => setLoading(false));
     }, [authUser]);
 
     const username = authUser?.username || authUser?.email || "Kullanıcı";

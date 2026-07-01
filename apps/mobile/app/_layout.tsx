@@ -130,7 +130,6 @@ function useProtectedRoute() {
   }, [accessToken, segments, hydrated, rootNavigationState?.key, router, isVerifying]);
 }
 
-import { requestTrackingPermissionsAsync } from 'expo-tracking-transparency';
 export default function RootLayout() {
   const setApiHealthy = useAppStore((s) => s.setApiHealthy);
   
@@ -154,14 +153,16 @@ export default function RootLayout() {
     // Check API health
     checkHealth().then(setApiHealthy);
     
-    // Request Tracking Transparency permission (required for iOS 14.5+)
-    (async () => {
-      try {
-        await requestTrackingPermissionsAsync();
-      } catch (error) {
-        // Ignored or handle specifically
-      }
-    })();
+    // NOT: App Store çıkışı öncesi (TestFlight / Build) bu kod aktif edilecek.
+    // Expo Go'da geliştirme yaparken çökmemesi için geçici olarak devre dışı bırakıldı.
+    // (async () => {
+    //   try {
+    //     const Tracking = require('expo-tracking-transparency');
+    //     await Tracking.requestTrackingPermissionsAsync();
+    //   } catch (error) {
+    //     console.warn("Tracking transparency ignored in dev");
+    //   }
+    // })();
   }, [setApiHealthy]);
 
   useProtectedRoute();
