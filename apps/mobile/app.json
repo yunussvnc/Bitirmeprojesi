@@ -133,7 +133,16 @@
         {
           "userTrackingPermission": "Size daha kişiselleştirilmiş mekan önerileri sunabilmek ve uygulama performansımızı analiz edebilmek için anonim kullanım verilerini topluyoruz."
         }
-      ]
+      ],
+      [
+        "@sentry/react-native/expo",
+        {
+          "url": "https://sentry.io/",
+          "project": "asemos-mobile",
+          "organization": "asemos-org"
+        }
+      ],
+      "@sentry/react-native"
     ],
     "experiments": {
       "typedRoutes": true

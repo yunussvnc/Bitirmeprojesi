@@ -29,7 +29,7 @@ import { useTheme } from '@/src/hooks/useTheme';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
 import { getPlacePosts, toggleLike, type Post } from '@/src/services/feedService';
 import { getPlaceStories, type Story } from '@/src/services/storyService';
-import { lightImpact } from '@/src/utils/haptics';
+import { lightImpact, heavyImpact, success } from '@/src/utils/haptics';
 import { handleApiError } from '@/src/utils/errorHandler';
 import type { Place } from '@/src/services/mekanService';
 import { getPlaceImageSource } from '@/src/utils/placeImages';
@@ -40,6 +40,7 @@ import { useAppStore } from '@/src/store/useAppStore';
 import { useAuthStore } from '@/src/store/useAuthStore';
 import { FeedCard, CommentBottomSheet, SharePostSheet } from '@/src/components/domain/feed';
 import { getPlaceStatus } from '@/src/utils/placeStatus';
+import { useStoreReview } from '@/src/hooks/useStoreReview';
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 const PANEL_HORIZ_MARGIN = 12;
@@ -87,6 +88,7 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
   const toggleSaved = useAppStore((s) => s.toggleSave);
   const saved = savedIds.includes(String(place.id));
   const currentUser = useAuthStore((s) => s.user);
+  const { triggerReviewAction } = useStoreReview();
 
   const [posts, setPosts] = useState<Post[]>([]);
   const [stories, setStories] = useState<Story[]>([]);
@@ -231,7 +233,8 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
   };
 
   const handleSave = () => {
-    lightImpact();
+    success();
+    triggerReviewAction(); // Store review tetikleyici
     toggleSaved({
       id: String(place.id),
       name: place.name || '',

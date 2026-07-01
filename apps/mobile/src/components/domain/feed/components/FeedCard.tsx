@@ -31,10 +31,11 @@ import { useTheme } from "@/src/hooks/useTheme";
 import { Avatar } from "@/src/components/ui";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { spacing, radius } from "@/src/constants/design";
-import { lightImpact, mediumImpact } from "@/src/utils/haptics";
+import { lightImpact, mediumImpact, heavyImpact } from "@/src/utils/haptics";
 import { timeAgo } from "@/src/utils/timeAgo";
 import type { Post } from "@/src/services/feedService";
 import { useTranslation } from "react-i18next";
+import { useStoreReview } from "@/src/hooks/useStoreReview";
 
 export interface FeedCardProps {
   post: Post;
@@ -62,6 +63,7 @@ export function FeedCard({
   const { colors, isDark } = useTheme();
   const { width: screenWidth } = useWindowDimensions();
   const { t } = useTranslation();
+  const { triggerReviewAction } = useStoreReview();
   const [expanded, setExpanded] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const likeScale = useSharedValue(1);
@@ -107,13 +109,14 @@ export function FeedCard({
         }
         lastTapRef.current = 0;
         triggerHeartBurst(x, y);
-        mediumImpact();
+        heavyImpact();
+        triggerReviewAction(); // Store review tetikleyici
         onLike?.(); // Her zaman toggle et — parent state doğru yönetir
       } else {
         lastTapRef.current = now;
       }
     },
-    [onLike, triggerHeartBurst]
+    [onLike, triggerHeartBurst, triggerReviewAction]
   );
 
   const heartAnimStyle = useAnimatedStyle(() => ({
@@ -139,8 +142,9 @@ export function FeedCard({
     likeScale.value = withSpring(1.35, { damping: 12 }, () => {
       likeScale.value = withSpring(1);
     });
+    triggerReviewAction(); // Store review tetikleyici
     onLike?.();
-  }, [onLike, likeScale]);
+  }, [onLike, likeScale, triggerReviewAction]);
 
   const likeAnimatedStyle = useAnimatedStyle(() => ({
     transform: [{ scale: likeScale.value }],

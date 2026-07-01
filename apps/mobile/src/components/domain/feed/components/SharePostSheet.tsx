@@ -190,9 +190,10 @@ export function SharePostSheet({ visible, onClose, post }: SharePostSheetProps) 
             post.author?.username || post.author?.first_name || `user_${post.user_id}`;
         const placeName = post.place?.name || "";
         const caption = post.caption || "";
-        const shareText = `📸 ${authorName}${placeName ? ` • ${placeName}` : ""}${caption ? `\n"${caption.slice(0, 120)}${caption.length > 120 ? "..." : ""}"` : ""}\n\nBu gönderiyi keşfet! 🔗`;
+        const postLink = `asemos://p/post/${post.id}`;
+        const shareText = `📸 ${authorName}${placeName ? ` • ${placeName}` : ""}${caption ? `\n"${caption.slice(0, 120)}${caption.length > 120 ? "..." : ""}"` : ""}\n\nBu gönderiyi AsEmOs'ta keşfet! 🔗 ${postLink}`;
         try {
-            await Share.share({ message: shareText });
+            await Share.share({ message: shareText, url: postLink });
         } catch {
             // kullanıcı iptal etti
         }

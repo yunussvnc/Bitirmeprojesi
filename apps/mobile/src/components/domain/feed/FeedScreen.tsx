@@ -19,6 +19,7 @@ import {
 } from "react-native";
 import Reanimated, { FadeInUp } from "react-native-reanimated";
 import { FlashList, FlashListRef } from "@shopify/flash-list";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { router, useFocusEffect, useNavigation } from "expo-router";
 import { useTheme } from "@/src/hooks/useTheme";
@@ -122,6 +123,21 @@ export default function FeedScreen() {
         if (refresh) {
           setLoading(true);
           nextCursorRef.current = null;
+          
+          if (filter === "all") {
+            try {
+              const cachedStr = await AsyncStorage.getItem("feed_cache_all");
+              if (cachedStr && posts.length === 0) {
+                const cachedPosts = JSON.parse(cachedStr);
+                if (Array.isArray(cachedPosts) && cachedPosts.length > 0) {
+                  setPosts(cachedPosts);
+                  setLoading(false); // Cache verisi varsa skeleton'ı kapat
+                }
+              }
+            } catch (e) {
+              console.log("Feed cache read error:", e);
+            }
+          }
         } else {
           setLoadingMore(true);
         }
@@ -145,7 +161,17 @@ export default function FeedScreen() {
         setHasMore(res.has_more);
 
         if (refresh) {
-          setPosts(dedupeById(res.items));
+          const newPosts = dedupeById(res.items);
+          setPosts(newPosts);
+          
+          if (filter === "all") {
+            try {
+              // Cache limit (max 15 posts)
+              await AsyncStorage.setItem("feed_cache_all", JSON.stringify(newPosts.slice(0, 15)));
+            } catch (e) {
+              console.log("Feed cache write error:", e);
+            }
+          }
         } else {
           setPosts((prev) => dedupeById([...prev, ...res.items]));
         }

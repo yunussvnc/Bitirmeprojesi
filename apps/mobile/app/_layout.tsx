@@ -15,8 +15,19 @@ import { UploadProgressBanner } from "@/src/components/ui/UploadProgressBanner";
 import { OfflineBanner } from "@/src/components/ui/OfflineBanner";
 import { useNotificationSocket } from "@/src/hooks/useNotificationSocket";
 import { PushNotificationProvider } from "@/src/providers/PushNotificationProvider";
+import { AnalyticsProvider } from "@/src/providers/AnalyticsProvider";
 import * as SplashScreen from "expo-splash-screen";
+import * as Sentry from "@sentry/react-native";
 import "@/src/i18n"; // i18n initialization
+
+// Sentry Init
+if (process.env.EXPO_PUBLIC_SENTRY_DSN) {
+  Sentry.init({
+    dsn: process.env.EXPO_PUBLIC_SENTRY_DSN,
+    debug: false,
+    tracesSampleRate: 1.0,
+  });
+}
 
 SplashScreen.preventAutoHideAsync();
 
@@ -172,48 +183,52 @@ export default function RootLayout() {
       <KeyboardProvider>
       <ThemeProvider>
         <ErrorBoundary>
-          <PushNotificationProvider>
-            <PreferencesProvider>
-              <BottomSheetModalProvider>
-                <UploadProgressBanner />
-                <OfflineBanner />
-                <Stack
-                  screenOptions={{
-                    headerShown: false,
-                    autoHideHomeIndicator: true,
-                    animation: "fade_from_bottom", // Premium fade-up effect for general routing
-                  }}
-                >
-                  <Stack.Screen
-                    name="create-post"
-                    options={{
-                      gestureEnabled: true,
-                      animation: "slide_from_right",
+          <AnalyticsProvider>
+            <PushNotificationProvider>
+              <PreferencesProvider>
+                <BottomSheetModalProvider>
+                  <UploadProgressBanner />
+                  <OfflineBanner />
+                  <Stack
+                    screenOptions={{
+                      headerShown: false,
+                      autoHideHomeIndicator: true,
+                      animation: "fade_from_bottom", // Premium fade-up effect for general routing
                     }}
-                  />
-                  <Stack.Screen
-                    name="create-story"
-                    options={{
-                      presentation: "modal",
-                      gestureEnabled: true,
-                    }}
-                  />
+                  >
+                    <Stack.Screen
+                      name="create-post"
+                      options={{
+                        gestureEnabled: true,
+                        animation: "slide_from_right",
+                      }}
+                    />
+                    <Stack.Screen
+                      name="create-story"
+                      options={{
+                        presentation: "modal",
+                        gestureEnabled: true,
+                      }}
+                    />
 
-                  <Stack.Screen name="login" options={{ gestureEnabled: false }} />
-                  <Stack.Screen name="register" options={{ gestureEnabled: false }} />
-                  <Stack.Screen name="first-time-setup" options={{ gestureEnabled: false }} />
-                  <Stack.Screen name="verify-email" options={{ gestureEnabled: false }} />
-                  <Stack.Screen name="(tabs)" options={{ gestureEnabled: false }} />
-                  <Stack.Screen name="(venue-tabs)" options={{ gestureEnabled: false }} />
-                  <Stack.Screen name="saved" options={{ gestureEnabled: true, animation: "slide_from_right" }} />
-                </Stack>
-                <Toast />
-              </BottomSheetModalProvider>
-            </PreferencesProvider>
-          </PushNotificationProvider>
+                    <Stack.Screen name="login" options={{ gestureEnabled: false }} />
+                    <Stack.Screen name="register" options={{ gestureEnabled: false }} />
+                    <Stack.Screen name="first-time-setup" options={{ gestureEnabled: false }} />
+                    <Stack.Screen name="verify-email" options={{ gestureEnabled: false }} />
+                    <Stack.Screen name="(tabs)" options={{ gestureEnabled: false }} />
+                    <Stack.Screen name="(venue-tabs)" options={{ gestureEnabled: false }} />
+                    <Stack.Screen name="saved" options={{ gestureEnabled: true, animation: "slide_from_right" }} />
+                  </Stack>
+                  <Toast />
+                </BottomSheetModalProvider>
+              </PreferencesProvider>
+            </PushNotificationProvider>
+          </AnalyticsProvider>
         </ErrorBoundary>
       </ThemeProvider>
       </KeyboardProvider>
     </GestureHandlerRootView>
   );
 }
+
+export { ErrorBoundary } from '@/src/components/layout/ErrorBoundary';
