@@ -8,8 +8,9 @@
  * - Auth durumu değişince otomatik bağlan/kopar
  * - App arka plana geçince kopar, öne gelince yeniden bağlan
  * - Foreground'a dönüşte unread count senkronize et
- * - Reconnect with exponential backoff
+ * - Reconnect with exponential backoff (max 10 deneme)
  * - Token expire olduğunda reconnect loop'u engelle
+ * - Periyodik ping ile bağlantıyı canlı tut (25 saniyede bir)
  */
 
 import { useEffect, useRef, useCallback } from 'react';
@@ -22,10 +23,17 @@ import { API_BASE_URL } from '@/src/constants/api';
 // WebSocket URL'sini HTTP URL'sinden üret (http:// -> ws://, https:// -> wss://)
 const WS_URL = API_BASE_URL.replace(/^http/, 'ws') + '/notifications/ws';
 
+// Sabitler
+const MAX_RECONNECT_ATTEMPTS = 10;
+const MIN_RECONNECT_DELAY = 5000;   // 5 saniye
+const MAX_RECONNECT_DELAY = 60000;  // 60 saniye
+const PING_INTERVAL = 25000;        // 25 saniyede bir ping (sunucu heartbeat 30s)
+
 export function useNotificationSocket() {
   const wsRef = useRef<WebSocket | null>(null);
   const reconnectTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const reconnectAttemptRef = useRef(0);
+  const pingIntervalRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const { accessToken, user } = useAuthStore();
   const isAuthenticated = !!user;
   const handleWebSocketMessage = useNotificationStore((s) => s.handleWebSocketMessage);
@@ -40,9 +48,37 @@ export function useNotificationSocket() {
     accessTokenRef.current = accessToken;
   }, [isAuthenticated, accessToken]);
 
+  // Ping interval'ı temizle
+  const clearPingInterval = useCallback(() => {
+    if (pingIntervalRef.current) {
+      clearInterval(pingIntervalRef.current);
+      pingIntervalRef.current = null;
+    }
+  }, []);
+
+  // Ping interval'ı başlat
+  const startPingInterval = useCallback(() => {
+    clearPingInterval();
+    pingIntervalRef.current = setInterval(() => {
+      if (wsRef.current && wsRef.current.readyState === WebSocket.OPEN) {
+        try {
+          wsRef.current.send(JSON.stringify({ type: 'ping' }));
+        } catch {
+          // Gönderilemezse bir sonraki denenecek
+        }
+      }
+    }, PING_INTERVAL);
+  }, [clearPingInterval]);
+
   const connect = useCallback(() => {
     // Guard: sadece auth durumu aktifse bağlan
     if (!isAuthenticatedRef.current || !accessTokenRef.current || isConnecting.current || wsRef.current) return;
+
+    // Max reconnect limiti aşıldıysa dur
+    if (reconnectAttemptRef.current >= MAX_RECONNECT_ATTEMPTS) {
+      console.warn(`🔌 Notification WebSocket: ${MAX_RECONNECT_ATTEMPTS} deneme sonra durdu. Uygulama ön plana gelince tekrar deneyecek.`);
+      return;
+    }
 
     isConnecting.current = true;
 
@@ -60,11 +96,20 @@ export function useNotificationSocket() {
         clearTimeout(reconnectTimeoutRef.current);
         reconnectTimeoutRef.current = null;
       }
+
+      // Ping interval başlat
+      startPingInterval();
     };
 
     ws.onmessage = (event) => {
       try {
         const data = JSON.parse(event.data);
+
+        // Sunucu ping'ine sessizce cevap ver (log spam'i önle)
+        if (data.type === 'ping' || data.type === 'pong') {
+          return;
+        }
+
         console.log('📬 Notification WS message received:', data.type);
 
         if (data.type === 'new_message') {
@@ -103,10 +148,6 @@ export function useNotificationSocket() {
             });
           }
 
-          // Sadece uygulamanın içinde dolaşıyorsak In-App Bildirim Gösterilmesi Expo'nun kendi Push handler'ı tarafından (PushNotificationProvider.tsx)
-          // otomatik olarak shouldShowAlert: true ile yönetiliyor. 
-          // Çift bildirim olmaması için burada manuel olarak scheduleNotificationAsync ÇAĞRILMAZ.
-
         } else {
           // Novu real-time: Store'a bildir — store unreadCount + notifications listesini günceller
           handleWebSocketMessage(data);
@@ -125,13 +166,22 @@ export function useNotificationSocket() {
       console.log(`🔌 Notification WebSocket closed. Code: ${event.code}`);
       isConnecting.current = false;
       wsRef.current = null;
+      clearPingInterval();
 
       // Kasıtlı kapanmamışsa VE hâlâ authenticate ise yeniden bağlanmayı dene
-      // isAuthenticatedRef.current kullanılıyor — stale closure'dan kaçınmak için
+      // 1000 = normal kapanma (kullanıcı kasıtlı kapattı)
+      // 4001 = geçersiz/expired token (yeniden bağlanma anlamsız)
       if (isAuthenticatedRef.current && event.code !== 1000 && event.code !== 4001) {
         const attempt = reconnectAttemptRef.current;
-        const delay = Math.min(3000 * Math.pow(1.5, attempt), 30000); // max 30s
+
+        if (attempt >= MAX_RECONNECT_ATTEMPTS) {
+          console.warn('🔌 Max reconnect denemesi aşıldı. Durduruluyor.');
+          return;
+        }
+
+        const delay = Math.min(MIN_RECONNECT_DELAY * Math.pow(1.5, attempt), MAX_RECONNECT_DELAY);
         reconnectAttemptRef.current = attempt + 1;
+        console.log(`🔌 Reconnect denemesi ${attempt + 1}/${MAX_RECONNECT_ATTEMPTS} — ${Math.round(delay / 1000)}s sonra...`);
         reconnectTimeoutRef.current = setTimeout(() => {
           // Reconnect sırasında auth durumunu bir kez daha kontrol et
           if (isAuthenticatedRef.current) {
@@ -142,20 +192,21 @@ export function useNotificationSocket() {
     };
 
     wsRef.current = ws;
-  }, [handleWebSocketMessage]);
+  }, [handleWebSocketMessage, startPingInterval, clearPingInterval]);
 
   const disconnect = useCallback(() => {
     if (reconnectTimeoutRef.current) {
       clearTimeout(reconnectTimeoutRef.current);
       reconnectTimeoutRef.current = null;
     }
+    clearPingInterval();
     if (wsRef.current) {
       wsRef.current.close(1000, "User disconnected");
       wsRef.current = null;
     }
     isConnecting.current = false;
     reconnectAttemptRef.current = 0;
-  }, []);
+  }, [clearPingInterval]);
 
   // Auth durumu değiştiğinde bağlan/kopar
   useEffect(() => {
@@ -173,6 +224,8 @@ export function useNotificationSocket() {
       if (nextAppState === 'active') {
         // Sadece auth durumu aktifse bağlan ve sync yap
         if (isAuthenticatedRef.current) {
+          // Uygulama öne geldiğinde reconnect sayacını sıfırla (kullanıcı aktif demektir)
+          reconnectAttemptRef.current = 0;
           connect();
           syncUnreadCount();
         }
