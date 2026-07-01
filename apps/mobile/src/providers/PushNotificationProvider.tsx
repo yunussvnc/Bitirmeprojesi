@@ -5,6 +5,7 @@ import * as Notifications from 'expo-notifications';
 import { useRouter } from 'expo-router';
 import { apiPost } from '@/src/utils/apiClient';
 import { useAuthStore } from '@/src/store/useAuthStore';
+import { startGeofencing, stopGeofencing } from '@/src/services/geofenceService';
 import Constants from 'expo-constants';
 
 Notifications.setNotificationHandler({
@@ -33,8 +34,12 @@ export const PushNotificationProvider: React.FC<{ children: React.ReactNode }> =
           }).catch((err: any) => console.log('Push token register error:', err));
         }
       });
+      // Ön plan bölgesel bildirim (geofencing) izlemesini başlat
+      startGeofencing().catch(err => console.log('Geofence start error:', err));
     } else {
       // Çıkış yapıldıysa token temizliği logout fonksiyonunda hallediliyor
+      // Bölgesel bildirimi durdur
+      stopGeofencing().catch(err => console.log('Geofence stop error:', err));
     }
 
     // Uygulama açıkken gelen bildirim (Foreground)
@@ -53,6 +58,12 @@ export const PushNotificationProvider: React.FC<{ children: React.ReactNode }> =
       } else if (data && (data.type === 'new_message' || data.type === 'message') && data.conversation_id) {
         // Mesaj bildirimine tıklandı → o sohbete git
         router.push(`/chat/${data.conversation_id}` as any);
+      } else if (data && data.type === 'geofence' && data.placeId) {
+        // Bölgesel bildirime (Mekan Yakınında) tıklandı → mekana git
+        router.push(`/place/${data.placeId}` as any);
+      } else if (data && data.type === 'new_follower' && data.actor_id) {
+        // Sosyal etkileşim: Takipçi
+        router.push(`/profile/${data.actor_id}` as any);
       }
     });
 

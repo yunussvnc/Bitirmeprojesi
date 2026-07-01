@@ -1,43 +1,30 @@
 /**
- * Geofence Service
+ * Geofence Service (Foreground Only)
  * 
- * expo-task-manager + expo-location ile pil dostu arka plan konum takibi.
- * Kullanıcı favori bir mekanın yakınına geldiğinde push notification tetikler.
+ * Uygulama açıkken (ön plandayken) konum takibi yapar.
+ * Kullanıcı favori bir mekanın yakınına geldiğinde in-app bildirim veya push notification tetikler.
  * 
- * Pil Optimizasyonu:
+ * Pil Optimizasyonu & App Store Uyumlu:
  * - distanceInterval: 100m (her 100m'de bir güncelleme)
- * - accuracy: Balanced (GPS + WiFi hibrit, pil dostu)
+ * - Sadece uygulama açıkken çalışır (Apple incelemesinde sorun yaratmaz)
  * - Gün içinde aynı mekan için max 1 bildirim (spam koruması)
  * 
  * @module services/geofenceService
  */
 
 import * as Location from "expo-location";
-import * as TaskManager from "expo-task-manager";
 import * as Notifications from "expo-notifications";
 import { useGeofenceStore } from "@/src/store/useGeofenceStore";
 import { useOfflineCache } from "@/src/store/useOfflineCache";
 import { calculateDistance } from "@/src/utils/location";
 import { logger } from "@/src/utils/logger";
 
-const BACKGROUND_LOCATION_TASK = "ASEMOS_GEOFENCE_TASK";
+let locationSubscription: Location.LocationSubscription | null = null;
 
 /**
- * Background Task: Konum güncellemelerini işler.
- * Bu fonksiyon app arka plandayken çalışır.
+ * Konum geldiğinde çalışacak ana iş mantığı
  */
-TaskManager.defineTask(BACKGROUND_LOCATION_TASK, async ({ data, error }) => {
-  if (error) {
-    logger.error("[Geofence] Background task hatası:", error);
-    return;
-  }
-
-  if (!data) return;
-
-  const { locations } = data as { locations: Location.LocationObject[] };
-  if (!locations || locations.length === 0) return;
-
-  const location = locations[locations.length - 1]; // En son konum
+const handleLocationUpdate = async (location: Location.LocationObject) => {
   const { latitude, longitude } = location.coords;
 
   // Offline cache'i güncelle (son bilinen konum)
@@ -67,7 +54,7 @@ TaskManager.defineTask(BACKGROUND_LOCATION_TASK, async ({ data, error }) => {
         `[Geofence] 📍 Mekan yakınında: ${place.name} (${Math.round(distance)}m)`
       );
 
-      // Push notification gönder
+      // Push notification (Local) gönder
       await Notifications.scheduleNotificationAsync({
         content: {
           title: "📍 Favori mekanınız yakında!",
@@ -84,63 +71,51 @@ TaskManager.defineTask(BACKGROUND_LOCATION_TASK, async ({ data, error }) => {
       markAsTriggered(place.id);
     }
   }
-});
+};
 
 /**
- * Arka plan konum takibini başlat
- * Pil dostu ayarlarla çalışır.
+ * Ön plan konum takibini başlat
+ * Sadece 'When In Use' iznine ihtiyaç duyar.
  */
 export async function startGeofencing(): Promise<boolean> {
   try {
-    // Arka plan konum izni iste
-    const { status: fgStatus } =
-      await Location.requestForegroundPermissionsAsync();
+    // Zaten çalışıyorsa tekrar başlatma
+    if (locationSubscription) {
+      logger.info("[Geofence] Zaten ön plan takibi çalışıyor");
+      return true;
+    }
+
+    // Ön plan konum izni iste
+    const { status: fgStatus } = await Location.requestForegroundPermissionsAsync();
     if (fgStatus !== "granted") {
       logger.warn("[Geofence] Foreground konum izni reddedildi");
       return false;
     }
 
-    const { status: bgStatus } =
-      await Location.requestBackgroundPermissionsAsync();
-    if (bgStatus !== "granted") {
-      logger.warn("[Geofence] Background konum izni reddedildi");
-      return false;
-    }
-
     // Bildirim izni
-    const { status: notifStatus } =
-      await Notifications.requestPermissionsAsync();
+    const { status: notifStatus } = await Notifications.requestPermissionsAsync();
     if (notifStatus !== "granted") {
       logger.warn("[Geofence] Bildirim izni reddedildi");
       return false;
     }
 
-    // Zaten çalışıyor mu?
-    const isRunning = await Location.hasStartedLocationUpdatesAsync(
-      BACKGROUND_LOCATION_TASK
-    );
-    if (isRunning) {
-      logger.info("[Geofence] Zaten çalışıyor");
-      return true;
-    }
-
-    // Arka plan konum takibini başlat
-    await Location.startLocationUpdatesAsync(BACKGROUND_LOCATION_TASK, {
-      accuracy: Location.Accuracy.Balanced, // GPS + WiFi hibrit (pil dostu)
-      distanceInterval: 100, // Her 100 metrede bir güncelleme
-      deferredUpdatesInterval: 60000, // Min 60 saniyede bir batch (ek pil tasarrufu)
-      showsBackgroundLocationIndicator: true, // iOS: Durum çubuğunda mavi ok
-      foregroundService: {
-        notificationTitle: "AsemOS",
-        notificationBody: "Yakındaki mekanlar izleniyor",
-        notificationColor: "#6C5CE7",
-      },
-    });
-
     // Bugünün süresi dolan trigger'larını temizle
     useGeofenceStore.getState().clearExpiredTriggers();
 
-    logger.info("[Geofence] ✅ Arka plan konum takibi başlatıldı");
+    // Ön plan izlemeyi başlat
+    locationSubscription = await Location.watchPositionAsync(
+      {
+        accuracy: Location.Accuracy.Balanced, // Pil dostu
+        distanceInterval: 100, // 100 metrede bir güncelleme
+      },
+      (location) => {
+        handleLocationUpdate(location).catch((err) =>
+          logger.error("[Geofence] Konum isleme hatasi:", err)
+        );
+      }
+    );
+
+    logger.info("[Geofence] ✅ Ön plan konum takibi başlatıldı");
     return true;
   } catch (error) {
     logger.error("[Geofence] Başlatma hatası:", error);
@@ -149,16 +124,14 @@ export async function startGeofencing(): Promise<boolean> {
 }
 
 /**
- * Arka plan konum takibini durdur
+ * Ön plan konum takibini durdur
  */
 export async function stopGeofencing(): Promise<void> {
   try {
-    const isRunning = await Location.hasStartedLocationUpdatesAsync(
-      BACKGROUND_LOCATION_TASK
-    );
-    if (isRunning) {
-      await Location.stopLocationUpdatesAsync(BACKGROUND_LOCATION_TASK);
-      logger.info("[Geofence] ⏹ Arka plan konum takibi durduruldu");
+    if (locationSubscription) {
+      locationSubscription.remove();
+      locationSubscription = null;
+      logger.info("[Geofence] ⏹ Ön plan konum takibi durduruldu");
     }
   } catch (error) {
     logger.error("[Geofence] Durdurma hatası:", error);
@@ -169,11 +142,5 @@ export async function stopGeofencing(): Promise<void> {
  * Geofence durumunu kontrol et
  */
 export async function isGeofencingActive(): Promise<boolean> {
-  try {
-    return await Location.hasStartedLocationUpdatesAsync(
-      BACKGROUND_LOCATION_TASK
-    );
-  } catch {
-    return false;
-  }
+  return locationSubscription !== null;
 }

@@ -17,6 +17,7 @@ import {
   Share,
   Platform,
 } from "react-native";
+import Reanimated, { FadeInUp } from "react-native-reanimated";
 import { FlashList, FlashListRef } from "@shopify/flash-list";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { router, useFocusEffect, useNavigation } from "expo-router";
@@ -322,18 +323,20 @@ export default function FeedScreen() {
   );
 
   const renderItem = useCallback(
-    ({ item }: { item: Post }) => (
-      <FeedCard
-        post={item}
-        onPress={() => item.place_id && router.push(`/place/${item.place_id}` as any)}
-        onAuthorPress={() => router.push(`/user/${item.user_id}` as any)}
-        onPlacePress={() => item.place_id && router.push(`/place/${item.place_id}` as any)}
-        onLike={() => handleLike(item)}
-        onComment={() => setCommentPostId(item.id)}
-        onShare={() => setSharePost(item)}
-        onOptionsPress={() => setOptionsPost(item)}
-        onZoomChange={setIsCardZooming}
-      />
+    ({ item, index }: { item: Post; index: number }) => (
+      <Reanimated.View entering={FadeInUp.delay(Math.min(index * 50, 500)).duration(400)}>
+        <FeedCard
+          post={item}
+          onPress={() => item.place_id && router.push(`/place/${item.place_id}` as any)}
+          onAuthorPress={() => router.push(`/user/${item.user_id}` as any)}
+          onPlacePress={() => item.place_id && router.push(`/place/${item.place_id}` as any)}
+          onLike={() => handleLike(item)}
+          onComment={() => setCommentPostId(item.id)}
+          onShare={() => setSharePost(item)}
+          onOptionsPress={() => setOptionsPost(item)}
+          onZoomChange={setIsCardZooming}
+        />
+      </Reanimated.View>
     ),
     [handleLike]
   );
