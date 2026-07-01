@@ -24,9 +24,11 @@ import { router, useFocusEffect, useNavigation } from "expo-router";
 import { useTheme } from "@/src/hooks/useTheme";
 import { Screen } from "@/src/components/layout";
 import { FeedCard } from "./components/FeedCard";
+import { PremiumRefreshControl } from "@/src/components/ui/PremiumRefreshControl";
 import { CommentBottomSheet } from "./components/CommentBottomSheet";
 import { SharePostSheet } from "./components/SharePostSheet";
-import { EmptyState, LoadingState } from "@/src/components/ui";
+import { EmptyState } from "@/src/components/ui";
+import { FeedCardSkeleton } from "./components/FeedCardSkeleton";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { CreateTypeSheet, type CreateType } from "./components/CreateTypeSheet";
 import { FeedStoriesRow } from "./components/FeedStoriesRow";
@@ -344,8 +346,8 @@ export default function FeedScreen() {
   const listEmpty = () => {
     if (loading) {
       return (
-        <View style={styles.center}>
-          <LoadingState message={t("feed.loading")} />
+        <View style={styles.listEmpty}>
+          <FeedCardSkeleton count={3} />
         </View>
       );
     }
@@ -604,7 +606,7 @@ export default function FeedScreen() {
           contentContainerStyle={posts.length === 0 ? styles.listEmpty : styles.listContent}
           scrollEnabled={!isCardZooming}
           refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} tintColor={colors.accent.primary} />
+            <PremiumRefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
           }
           onScroll={(e) => handleScroll(e.nativeEvent.contentOffset.y)}
           scrollEventThrottle={16}

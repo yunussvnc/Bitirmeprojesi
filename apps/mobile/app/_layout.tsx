@@ -15,7 +15,10 @@ import { UploadProgressBanner } from "@/src/components/ui/UploadProgressBanner";
 import { OfflineBanner } from "@/src/components/ui/OfflineBanner";
 import { useNotificationSocket } from "@/src/hooks/useNotificationSocket";
 import { PushNotificationProvider } from "@/src/providers/PushNotificationProvider";
+import * as SplashScreen from "expo-splash-screen";
 import "@/src/i18n"; // i18n initialization
+
+SplashScreen.preventAutoHideAsync();
 
 if (!__DEV__) {
   // Prevent console logs from leaking and consuming memory in production
@@ -118,11 +121,16 @@ function useProtectedRoute() {
     };
 
     // Defer navigation to next tick so Stack has time to mount
-    const id = setTimeout(navigate, 0);
+    const id = setTimeout(() => {
+      navigate();
+      // Hide splash screen once routing logic has fired
+      SplashScreen.hideAsync();
+    }, 0);
     return () => clearTimeout(id);
   }, [accessToken, segments, hydrated, rootNavigationState?.key, router, isVerifying]);
 }
 
+import { requestTrackingPermissionsAsync } from 'expo-tracking-transparency';
 export default function RootLayout() {
   const setApiHealthy = useAppStore((s) => s.setApiHealthy);
   
@@ -143,7 +151,17 @@ export default function RootLayout() {
   }, []);
 
   useEffect(() => {
+    // Check API health
     checkHealth().then(setApiHealthy);
+    
+    // Request Tracking Transparency permission (required for iOS 14.5+)
+    (async () => {
+      try {
+        await requestTrackingPermissionsAsync();
+      } catch (error) {
+        // Ignored or handle specifically
+      }
+    })();
   }, [setApiHealthy]);
 
   useProtectedRoute();
@@ -162,6 +180,7 @@ export default function RootLayout() {
                   screenOptions={{
                     headerShown: false,
                     autoHideHomeIndicator: true,
+                    animation: "fade_from_bottom", // Premium fade-up effect for general routing
                   }}
                 >
                   <Stack.Screen

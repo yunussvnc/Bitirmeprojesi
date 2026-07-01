@@ -4,7 +4,8 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useRouter, useNavigation, useFocusEffect } from "expo-router";
 import { API_BASE_URL } from "@/src/constants/api";
 import { Screen } from "@/src/components/layout/Screen";
-import { Avatar, LoadingState } from "@/src/components/ui";
+import { Avatar } from "@/src/components/ui";
+import { PremiumRefreshControl } from "@/src/components/ui/PremiumRefreshControl";
 import { useTheme } from "@/src/hooks/useTheme";
 import { lightImpact } from "@/src/utils/haptics";
 import { useAuthStore } from "@/src/store/useAuthStore";
@@ -14,6 +15,7 @@ import { handleApiError } from "@/src/utils/errorHandler";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { Image } from "expo-image";
 import { useTranslation } from "react-i18next";
+import { ProfileSkeleton } from "./components/ProfileSkeleton";
 
 const GRID_GAP = 14;
 const GRID_COLS = 2;
@@ -116,7 +118,7 @@ export default function ProfileScreen() {
   if (!authUser || initialLoading) {
     return (
       <Screen withTabBar>
-        <LoadingState message={t('profile.loading')} />
+        <ProfileSkeleton />
       </Screen>
     );
   }
@@ -171,7 +173,7 @@ export default function ProfileScreen() {
         showsVerticalScrollIndicator={false}
         contentContainerStyle={styles.contentScroll}
         refreshControl={
-          <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} tintColor={colors.accent.primary} />
+          <PremiumRefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
         }
       >
         {/* ── Hero Section (Avatar, Name, Bio) ── */}

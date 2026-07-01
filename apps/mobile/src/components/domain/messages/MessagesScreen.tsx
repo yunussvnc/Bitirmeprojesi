@@ -29,6 +29,7 @@ import { useAuthStore } from "@/src/store/useAuthStore";
 import { useMessagesStore, Conversation } from "@/src/store/useMessagesStore";
 import { Swipeable } from "react-native-gesture-handler";
 import { useTranslation } from "react-i18next";
+import { MessageListSkeleton } from "./components/MessageListSkeleton";
 
 
 
@@ -49,12 +50,14 @@ export default function MessagesScreen() {
     const [isEditMode, setIsEditMode] = useState(false);
     const [selectedIds, setSelectedIds] = useState<string[]>([]);
     const [viewMode, setViewMode] = useState<'chats'|'requests'>('chats');
+    const [loading, setLoading] = useState(true);
     const { t } = useTranslation();
     const { getConversations } = require("@/src/services/messageService");
 
     React.useEffect(() => {
         // Ekran her yüklendiğinde (veya authUser değiştiğinde) backend'den konuşma listesini çek
         if (!authUser) return;
+        setLoading(true);
         getConversations().then((backendConvs: any[]) => {
             const store = useMessagesStore.getState();
             backendConvs.forEach((bc) => {
@@ -451,19 +454,23 @@ export default function MessagesScreen() {
 
 
                 {/* ── List ── */}
-                <FlatList
-                    data={filteredConversations}
-                    keyExtractor={(item) => item.id}
-                    renderItem={renderConversation}
-                    ItemSeparatorComponent={renderSeparator}
-                    ListHeaderComponent={listHeader}
-                    ListEmptyComponent={listEmpty}
-                    contentContainerStyle={{
-                        paddingBottom: insets.bottom + (Platform.OS === "ios" ? 100 : 72),
-                    }}
-                    showsVerticalScrollIndicator={false}
-                    keyboardShouldPersistTaps="handled"
-                />
+                {loading ? (
+                    <MessageListSkeleton count={6} />
+                ) : (
+                    <FlatList
+                        data={filteredConversations}
+                        keyExtractor={(item) => item.id}
+                        renderItem={renderConversation}
+                        ItemSeparatorComponent={renderSeparator}
+                        ListHeaderComponent={listHeader}
+                        ListEmptyComponent={listEmpty}
+                        contentContainerStyle={{
+                            paddingBottom: insets.bottom + (Platform.OS === "ios" ? 100 : 72),
+                        }}
+                        showsVerticalScrollIndicator={false}
+                        keyboardShouldPersistTaps="handled"
+                    />
+                )}
 
                 {/* ── Floating Selection Actions ── */}
                 {isEditMode && selectedIds.length > 0 && (

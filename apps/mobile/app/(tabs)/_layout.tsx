@@ -78,6 +78,11 @@ export default function TabsLayout() {
           tabBarItemStyle: {
             paddingVertical: 4,
           },
+          sceneStyle: {
+            backgroundColor: colors.background.primary,
+          },
+          // React Navigation v7 / Expo Router v3 features:
+          animation: 'shift', // Provides a premium shifting/fade effect on tab change
         }}
       >
         <Tabs.Screen
