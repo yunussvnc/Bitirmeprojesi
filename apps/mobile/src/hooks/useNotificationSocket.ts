@@ -86,10 +86,15 @@ export function useNotificationSocket() {
     const wsUrl = `${WS_URL}?token=${accessTokenRef.current}`;
     const ws = new WebSocket(wsUrl);
 
+    // Timeout id for stable connection
+    let stableConnectionTimeout: ReturnType<typeof setTimeout> | null = null;
+
     ws.onopen = () => {
       console.log('✅ Notification WebSocket connected');
       isConnecting.current = false;
-      reconnectAttemptRef.current = 0; // Reset backoff
+      
+      // Ping interval başlat
+      startPingInterval();
 
       // Bağlantı başarılıysa, gecikmeli yeniden bağlanmayı temizle
       if (reconnectTimeoutRef.current) {
@@ -97,8 +102,13 @@ export function useNotificationSocket() {
         reconnectTimeoutRef.current = null;
       }
 
-      // Ping interval başlat
-      startPingInterval();
+      // Bağlantı hemen kapanıp 1001 döngüsüne girmemesi için 
+      // reconnect sayacını sıfırlamayı geciktir (Bağlantı 15sn stabil kalırsa sıfırla)
+      stableConnectionTimeout = setTimeout(() => {
+        if (wsRef.current?.readyState === WebSocket.OPEN) {
+            reconnectAttemptRef.current = 0; // Reset backoff
+        }
+      }, 15000);
     };
 
     ws.onmessage = (event) => {
@@ -167,6 +177,10 @@ export function useNotificationSocket() {
       isConnecting.current = false;
       wsRef.current = null;
       clearPingInterval();
+      if (stableConnectionTimeout) {
+        clearTimeout(stableConnectionTimeout);
+        stableConnectionTimeout = null;
+      }
 
       // Kasıtlı kapanmamışsa VE hâlâ authenticate ise yeniden bağlanmayı dene
       // 1000 = normal kapanma (kullanıcı kasıtlı kapattı)

@@ -319,7 +319,7 @@ export function ExploreMapView({ places, loading, onLoadPlaces }: ExploreMapView
           id="placesSource"
           data={placesGeoJSON}
           cluster={true}
-          clusterRadius={40}
+          clusterRadius={75} // Önceden 40'tı. 75 yaparak uzaktan daha az ve bölgesel küme çıkmasını sağladık
           clusterMaxZoom={14}
           onPress={async (event: any) => {
             // event could have features directly, or inside nativeEvent.payload
@@ -336,12 +336,11 @@ export function ExploreMapView({ places, loading, onLoadPlaces }: ExploreMapView
             if (feature.properties?.cluster) {
               const coords = feature.geometry?.coordinates;
               if (coords && cameraRef.current) {
-                // Mevcut zoom seviyesini alıp biraz daha yaklaştıralım, 
-                // ya da direkt 14 yapabiliriz (clusterMaxZoom 14 olduğu için dağılır)
+                // Kümeye tıklandığında iyice yakınlaşıp kümelerin mekanlara ayrılmasını sağla
                 cameraRef.current.flyTo({
                   center: [coords[0], coords[1]],
-                  zoom: 14,
-                  duration: 500,
+                  zoom: 15, // 14'tü 15 yaptık, daha net dağılım için
+                  duration: 600,
                 });
               }
               return;
@@ -360,24 +359,45 @@ export function ExploreMapView({ places, loading, onLoadPlaces }: ExploreMapView
             }
           }}
         >
-          {/* Küme (Cluster) Katmanları */}
+          {/* Küme (Cluster) Dış Hale (Glow/Soft Ring) */}
+          <Layer
+            id="clustersGlow"
+            type="circle"
+            filter={['has', 'point_count']}
+            paint={{
+              'circle-color': colors.accent.primary,
+              'circle-opacity': 0.3,
+              'circle-radius': [
+                'step',
+                ['get', 'point_count'],
+                24,
+                10,
+                32,
+                50,
+                40,
+              ],
+            }}
+          />
+
+          {/* Küme (Cluster) Katmanları (Ana İç Daire) */}
           <Layer
             id="clusters"
             type="circle"
             filter={['has', 'point_count']}
             paint={{
               'circle-color': colors.accent.primary,
+              'circle-opacity': 0.9,
               'circle-radius': [
                 'step',
                 ['get', 'point_count'],
                 16,
                 10,
-                20,
+                22,
                 50,
-                24,
+                28,
               ],
-              'circle-stroke-width': 2,
-              'circle-stroke-color': isDark ? '#1a1a1a' : '#ffffff',
+              'circle-stroke-width': 1.5,
+              'circle-stroke-color': isDark ? '#000000' : '#ffffff',
             }}
           />
           <Layer
@@ -408,7 +428,7 @@ export function ExploreMapView({ places, loading, onLoadPlaces }: ExploreMapView
           <Layer
             id="placesLabels"
             type="symbol"
-            minzoom={13}
+            minzoom={14} // 13'tü, çok fazla mekan isminin üst üste binmesini önlemek için 14 yaptık
             filter={['!', ['has', 'point_count']]}
             layout={{
               'text-field': ['get', 'name'],
