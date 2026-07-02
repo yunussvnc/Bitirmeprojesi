@@ -138,40 +138,58 @@ export default function LoginScreen() {
     setErrors((prev) => (prev[field] ? { ...prev, [field]: undefined } : prev));
   }, []);
 
-  // --- Arka plan gÃ¶rsel carousel ---
+  // --- Arka plan görsel carousel — kararma efektli geçiş ---
   const [imgIndex, setImgIndex] = useState(0);
-  const fadeAnim = useRef(new Animated.Value(1)).current;
+  const blackOverlay = useRef(new Animated.Value(0)).current; // 0 = görsel görünür, 1 = tamamen siyah
+  const transitioningRef = useRef(false);
+
+  const advanceCarousel = useCallback(() => {
+    if (transitioningRef.current) return;
+    transitioningRef.current = true;
+
+    // 1) Ekranı karart (siyaha fade)
+    Animated.timing(blackOverlay, {
+      toValue: 1,
+      duration: 1000,
+      useNativeDriver: true,
+    }).start(() => {
+      // 2) Ekran tamamen siyahken görseli değiştir
+      setImgIndex((prev) => (prev + 1) % FALLBACK_PLACE_IMAGES.length);
+
+      // 3) Kısa bir bekleme — yeni görsel render olsun
+      setTimeout(() => {
+        // 4) Siyahtan aç (yeni görsel görünsün)
+        Animated.timing(blackOverlay, {
+          toValue: 0,
+          duration: 1000,
+          useNativeDriver: true,
+        }).start(() => {
+          transitioningRef.current = false;
+        });
+      }, 200);
+    });
+  }, [blackOverlay]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      // Mevcut gÃ¶rseli fade-out yap
-      Animated.timing(fadeAnim, {
-        toValue: 0,
-        duration: 800,
-        useNativeDriver: true,
-      }).start(() => {
-        // Sonraki gÃ¶rsele geÃ§
-        setImgIndex((prev) => (prev + 1) % FALLBACK_PLACE_IMAGES.length);
-        // Yeni gÃ¶rseli fade-in yap
-        Animated.timing(fadeAnim, {
-          toValue: 1,
-          duration: 800,
-          useNativeDriver: true,
-        }).start();
-      });
-    }, CAROUSEL_INTERVAL_MS);
-
+    const interval = setInterval(advanceCarousel, CAROUSEL_INTERVAL_MS);
     return () => clearInterval(interval);
-  }, [fadeAnim]);
+  }, [advanceCarousel]);
 
   return (
     <View style={styles.container}>
-      {/* Arka plan gÃ¶rseli carousel â€” crossfade efekti */}
+      {/* Arka plan görseli */}
       <View style={StyleSheet.absoluteFill}>
-        <Animated.Image
+        <Image
           source={{ uri: FALLBACK_PLACE_IMAGES[imgIndex] }}
-          style={[StyleSheet.absoluteFillObject, { opacity: fadeAnim }]}
+          style={StyleSheet.absoluteFillObject}
           resizeMode="cover"
+        />
+        {/* Kararma overlay — geçiş sırasında siyaha dönüp tekrar açılır */}
+        <Animated.View
+          style={[
+            StyleSheet.absoluteFillObject,
+            { backgroundColor: '#000', opacity: blackOverlay },
+          ]}
         />
       </View>
 
