@@ -1,6 +1,8 @@
 /**
  * FilterBottomSheet – Konum Seçimi bottom sheet.
  * İl ve İlçe dropdown'ları ile konum bazlı filtreleme.
+ * 
+ * Modal tabanlı — her yerde güvenilir çalışır.
  */
 
 import React, { useState, useEffect, useRef, useCallback } from 'react';
@@ -12,14 +14,19 @@ import {
   Modal,
   Pressable,
   ScrollView,
+  Animated,
+  Dimensions,
+  PanResponder,
 } from 'react-native';
-import { BottomSheetModal, BottomSheetBackdrop, BottomSheetScrollView } from '@gorhom/bottom-sheet';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTheme } from '@/src/hooks/useTheme';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
 import { lightImpact } from '@/src/utils/haptics';
 import { Button } from "@/src/components/ui/Button";
 import { useTranslation } from "react-i18next";
+
+const { height: SCREEN_HEIGHT } = Dimensions.get('window');
+const SHEET_HEIGHT = SCREEN_HEIGHT * 0.42;
 
 /* ── Types ── */
 
@@ -230,35 +237,80 @@ export function FilterBottomSheet({
   values,
   onApply,
 }: FilterBottomSheetProps) {
-  const { colors, isDark } = useTheme();
+  const { colors } = useTheme();
   const insets = useSafeAreaInsets();
   const { t } = useTranslation();
   const [draft, setDraft] = useState<FilterValues>(values);
-
-  const bottomSheetModalRef = useRef<BottomSheetModal>(null);
-  const snapPoints = ['55%'];
+  const [modalVisible, setModalVisible] = useState(false);
+  const slideAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     if (visible) {
       setDraft(values);
-      bottomSheetModalRef.current?.present();
+      setModalVisible(true);
+      slideAnim.setValue(0);
+      Animated.spring(slideAnim, {
+        toValue: 1,
+        useNativeDriver: true,
+        damping: 20,
+        stiffness: 200,
+      }).start();
     } else {
-      bottomSheetModalRef.current?.dismiss();
+      Animated.timing(slideAnim, {
+        toValue: 0,
+        duration: 250,
+        useNativeDriver: true,
+      }).start(() => {
+        setModalVisible(false);
+      });
     }
-  }, [visible, values]);
+  }, [visible, values, slideAnim]);
 
-  const handleSheetChanges = useCallback((index: number) => {
-    if (index === -1) {
+  const handleClose = useCallback(() => {
+    Animated.timing(slideAnim, {
+      toValue: 0,
+      duration: 250,
+      useNativeDriver: true,
+    }).start(() => {
+      setModalVisible(false);
       onClose();
-    }
-  }, [onClose]);
+    });
+  }, [slideAnim, onClose]);
+
+  // Aşağı çekme ile kapatma
+  const panResponder = useRef(
+    PanResponder.create({
+      onStartShouldSetPanResponder: () => true,
+      onMoveShouldSetPanResponder: (_, g) => Math.abs(g.dy) > 8,
+      onPanResponderMove: (_, g) => {
+        if (g.dy > 0) {
+          // Sadece aşağı çekmeyi izle
+          slideAnim.setValue(1 - g.dy / SHEET_HEIGHT);
+        }
+      },
+      onPanResponderRelease: (_, g) => {
+        if (g.dy > 80 || g.vy > 0.5) {
+          // Yeterince çektiyse kapat
+          handleClose();
+        } else {
+          // Geri aç
+          Animated.spring(slideAnim, {
+            toValue: 1,
+            useNativeDriver: true,
+            damping: 20,
+            stiffness: 200,
+          }).start();
+        }
+      },
+    })
+  ).current;
 
   const districtOptions = draft.province ? (DISTRICT_MAP[draft.province] || []) : [];
 
   const handleApply = () => {
     lightImpact();
     onApply(draft);
-    bottomSheetModalRef.current?.dismiss();
+    handleClose();
   };
 
   const handleClear = () => {
@@ -266,79 +318,96 @@ export function FilterBottomSheet({
     const empty: FilterValues = { province: null, district: null };
     setDraft(empty);
     onApply(empty);
-    bottomSheetModalRef.current?.dismiss();
+    handleClose();
   };
 
-  const renderBackdrop = useCallback(
-    (props: any) => (
-      <BottomSheetBackdrop
-        {...props}
-        appearsOnIndex={0}
-        disappearsOnIndex={-1}
-        pressBehavior="close"
-        opacity={0.4}
-      />
-    ),
-    []
-  );
+  const translateY = slideAnim.interpolate({
+    inputRange: [0, 1],
+    outputRange: [SHEET_HEIGHT, 0],
+  });
+
+  const backdropOpacity = slideAnim.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, 0.45],
+  });
 
   return (
-    <BottomSheetModal
-      ref={bottomSheetModalRef}
-      index={0}
-      snapPoints={snapPoints}
-      onChange={handleSheetChanges}
-      backdropComponent={renderBackdrop}
-      handleIndicatorStyle={{ backgroundColor: colors.surface.border, width: 36 }}
-      backgroundStyle={{ backgroundColor: colors.background.primary }}
-    >
-      <View style={styles.titleRow}>
-        <View>
-          <Text style={[styles.title, { color: colors.text.primary }]}>Konum Seçimi</Text>
-          <Text style={[styles.subtitle, { color: colors.text.tertiary }]}>
-            Lütfen il ve ilçe seçiniz.
-          </Text>
-        </View>
-      </View>
+    <Modal visible={modalVisible} transparent animationType="none" onRequestClose={handleClose} statusBarTranslucent>
+      {/* Backdrop */}
+      <Pressable style={StyleSheet.absoluteFill} onPress={handleClose}>
+        <Animated.View style={[StyleSheet.absoluteFill, { backgroundColor: '#000', opacity: backdropOpacity }]} />
+      </Pressable>
 
-      <BottomSheetScrollView
-        showsVerticalScrollIndicator={false}
-        contentContainerStyle={styles.body}
+      {/* Sheet */}
+      <Animated.View
+        style={[
+          styles.sheet,
+          {
+            height: SHEET_HEIGHT,
+            backgroundColor: colors.background.primary,
+            transform: [{ translateY }],
+            paddingBottom: insets.bottom || 24,
+          },
+        ]}
       >
-        {/* İl Seçimi */}
-        <DropdownPicker
-          label="İL SEÇİMİ"
-          value={draft.province}
-          options={PROVINCES}
-          placeholder="İl seçiniz..."
-          onSelect={(v) => {
-            setDraft((d) => ({ province: v, district: null }));
-          }}
-        />
+        {/* Handle — aşağı çekince kapatır */}
+        <View style={styles.handleRow} {...panResponder.panHandlers}>
+          <View style={[styles.handle, { backgroundColor: colors.surface.border }]} />
+        </View>
 
-        {/* İlçe Seçimi */}
-        <DropdownPicker
-          label="İLÇE SEÇİMİ"
-          value={draft.district}
-          options={districtOptions}
-          placeholder="Önce il seçiniz..."
-          disabled={!draft.province}
-          onSelect={(v) => {
-            setDraft((d) => ({ ...d, district: v }));
-          }}
-        />
-      </BottomSheetScrollView>
+        {/* Header */}
+        <View style={styles.titleRow}>
+          <View>
+            <Text style={[styles.title, { color: colors.text.primary }]}>Konum Seçimi</Text>
+            <Text style={[styles.subtitle, { color: colors.text.tertiary }]}>
+              Lütfen il ve ilçe seçiniz.
+            </Text>
+          </View>
+          <TouchableOpacity onPress={handleClose} hitSlop={12} activeOpacity={0.7}>
+            <IconSymbol name="xmark.circle.fill" size={28} color={colors.text.tertiary} />
+          </TouchableOpacity>
+        </View>
 
-      {/* Footer */}
-      <View style={[styles.footer, { paddingBottom: insets.bottom || 24, borderTopColor: colors.surface.border }]}>
-        <TouchableOpacity style={styles.clearBtn} onPress={handleClear} activeOpacity={0.7}>
-          <Text style={[styles.clearText, { color: colors.text.secondary }]}>Temizle</Text>
-        </TouchableOpacity>
-        <Button style={styles.applyBtn} onPress={handleApply}>
-          Uygula
-        </Button>
-      </View>
-    </BottomSheetModal>
+        {/* Content */}
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.body}
+        >
+          {/* İl Seçimi */}
+          <DropdownPicker
+            label="İL SEÇİMİ"
+            value={draft.province}
+            options={PROVINCES}
+            placeholder="İl seçiniz..."
+            onSelect={(v) => {
+              setDraft(() => ({ province: v, district: null }));
+            }}
+          />
+
+          {/* İlçe Seçimi */}
+          <DropdownPicker
+            label="İLÇE SEÇİMİ"
+            value={draft.district}
+            options={districtOptions}
+            placeholder="Önce il seçiniz..."
+            disabled={!draft.province}
+            onSelect={(v) => {
+              setDraft((d) => ({ ...d, district: v }));
+            }}
+          />
+        </ScrollView>
+
+        {/* Footer */}
+        <View style={[styles.footer, { borderTopColor: colors.surface.border }]}>
+          <TouchableOpacity style={styles.clearBtn} onPress={handleClear} activeOpacity={0.7}>
+            <Text style={[styles.clearText, { color: colors.text.secondary }]}>Temizle</Text>
+          </TouchableOpacity>
+          <Button style={styles.applyBtn} onPress={handleApply}>
+            Uygula
+          </Button>
+        </View>
+      </Animated.View>
+    </Modal>
   );
 }
 
@@ -358,12 +427,31 @@ export function countActiveFilters(v: FilterValues): number {
 /* ── Styles ── */
 
 const styles = StyleSheet.create({
+  sheet: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    overflow: 'hidden',
+  },
+  handleRow: {
+    alignItems: 'center',
+    paddingTop: 12,
+    paddingBottom: 8,
+  },
+  handle: {
+    width: 36,
+    height: 4,
+    borderRadius: 2,
+  },
   titleRow: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: 20,
-    paddingTop: 8,
+    paddingTop: 4,
     paddingBottom: 12,
   },
   title: { fontSize: 18, fontWeight: '700' },
@@ -391,4 +479,3 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
-
