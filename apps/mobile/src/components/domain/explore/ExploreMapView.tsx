@@ -17,6 +17,7 @@ import {
   ScrollView,
   Alert,
   InteractionManager,
+  Pressable,
 } from 'react-native';
 import { Map, Camera, GeoJSONSource, Layer, UserLocation, type CameraRef } from '@maplibre/maplibre-react-native';
 import * as Location from 'expo-location';
@@ -298,6 +299,14 @@ export function ExploreMapView({ places, loading, onLoadPlaces }: ExploreMapView
       <Map
         style={styles.map}
         mapStyle={styleURL}
+        onRegionWillChange={(e: any) => {
+          const isUser = e?.properties?.isUserInteraction ?? e?.isUserInteraction ?? true;
+          if (isUser) {
+            setShowFilter(false);
+            setShowResults(false);
+            Keyboard.dismiss();
+          }
+        }}
         onPress={(event) => {
           console.log('[DEBUG] Map onPress fired. markerPressRef:', markerPressRef.current);
           if (markerPressRef.current) return;
@@ -413,16 +422,26 @@ export function ExploreMapView({ places, loading, onLoadPlaces }: ExploreMapView
             }}
           />
 
-          {/* Tekil Nokta (Mekan) Katmanları */}
+          {/* Tekil Nokta (Mekan) Katmanları - Dış Daire (Küme rengiyle aynı) */}
           <Layer
             id="placesCircles"
             type="circle"
             filter={['!', ['has', 'point_count']]}
             paint={{
-              'circle-radius': 6,
-              'circle-color': ['get', 'statusColor'],
+              'circle-radius': 9,
+              'circle-color': colors.accent.primary,
               'circle-stroke-width': 1.5,
               'circle-stroke-color': isDark ? '#1a1a1a' : '#fff',
+            }}
+          />
+          {/* Tekil Nokta (Mekan) Katmanları - İç Nokta (Durum rengi) */}
+          <Layer
+            id="placesCirclesInner"
+            type="circle"
+            filter={['!', ['has', 'point_count']]}
+            paint={{
+              'circle-radius': 4.5,
+              'circle-color': ['get', 'statusColor'],
             }}
           />
           <Layer
@@ -450,6 +469,14 @@ export function ExploreMapView({ places, loading, onLoadPlaces }: ExploreMapView
           <UserLocation />
         )}
       </Map>
+
+      {/* Filtre ve Arama Arka Planı (Tüm ekranı kaplar) */}
+      {showFilter && (
+        <Pressable
+          style={styles.filterBackdrop}
+          onPressIn={() => setShowFilter(false)}
+        />
+      )}
 
       <View
         style={[
@@ -565,9 +592,13 @@ export function ExploreMapView({ places, loading, onLoadPlaces }: ExploreMapView
 
         {/* Filtre Paneli */}
         {showFilter && (
-          <View style={[styles.filterPanel, { backgroundColor: colors.surface.elevated }]}>
-            {/* Kategori */}
-            <View style={styles.filterSection}>
+          <View 
+            style={[styles.filterPanel, { backgroundColor: colors.surface.elevated }]}
+            onStartShouldSetResponder={() => true}
+            onTouchEnd={(e) => e.stopPropagation()}
+          >
+              {/* Kategori */}
+              <View style={styles.filterSection}>
               <Text style={[styles.filterSectionTitle, { color: colors.text.secondary }]}>{t('explore.filter_category')}</Text>
               <View style={styles.chipRow}>
                 {CATEGORY_KEYS.map(({ value, tKey }) => {
@@ -1070,6 +1101,14 @@ const styles = StyleSheet.create({
   },
   clearDistrictBtn: {
     padding: 2,
+  },
+  filterBackdrop: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    zIndex: 40,
   },
 });
 

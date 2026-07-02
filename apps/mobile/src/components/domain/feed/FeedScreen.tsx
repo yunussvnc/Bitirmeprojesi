@@ -633,6 +633,7 @@ export default function FeedScreen() {
           data={visiblePosts}
           keyExtractor={(item) => String(item.id)}
           renderItem={renderItem}
+          ItemSeparatorComponent={() => <View style={{ height: spacing.sm }} />}
           ListEmptyComponent={listEmpty}
           ListHeaderComponent={listHeader}
           contentContainerStyle={posts.length === 0 ? styles.listEmpty : styles.listContent}

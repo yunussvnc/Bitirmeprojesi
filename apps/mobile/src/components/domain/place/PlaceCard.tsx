@@ -31,6 +31,7 @@ export interface PlaceCardProps {
   location?: string;
   explanation?: string;
   address?: string;
+  city?: string;
   distance_m?: number;
   isRecommended?: boolean;
   hasMenu?: boolean;
@@ -48,6 +49,7 @@ const PlaceCardComponent = function PlaceCard({
   location,
   explanation,
   address,
+  city,
   distance_m,
   isRecommended = false,
   hasMenu = false,
@@ -187,6 +189,13 @@ const PlaceCardComponent = function PlaceCard({
                 <Text style={styles.menuBadgeText}>{t('explore.menu')}</Text>
               </View>
             )}
+            {city ? (
+              <View style={[styles.categoryChip, { backgroundColor: colors.surface.elevated, borderColor: colors.surface.border, alignSelf: 'center' }]}>
+                <Text style={[styles.categoryChipText, { color: colors.text.secondary }]}>
+                  {city}
+                </Text>
+              </View>
+            ) : null}
           </View>
 
           {categoryLabel ? (

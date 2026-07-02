@@ -80,7 +80,7 @@ function queryContainsLocation(query: string): boolean {
 type DisplayMode = "browse" | "ai";
 
 /** Common shape for list items (RecommendItem | Place) */
-type PlaceLike = { id: number | string; name?: string; category?: string; photo_url?: string; description?: string; subtitle?: string; tags?: string[] };
+type PlaceLike = { id: number | string; name?: string; category?: string; city?: string; photo_url?: string; description?: string; subtitle?: string; tags?: string[] };
 
 /** Ayrı component – FlatList her query değişiminde header'ı remount etmez, klavye kapanmaz */
 function HomeListHeader({
@@ -525,6 +525,7 @@ export default function HomeScreen() {
           category={it.category ?? place?.category}
           location={loc}
           address={(place as any)?.address}
+          city={it.city ?? (place as any)?.city}
           explanation={isAi ? (item as RecommendItem).explanation : undefined}
           distance_m={isAi ? (item as RecommendItem).distance_m : undefined}
           isRecommended={isAi}
