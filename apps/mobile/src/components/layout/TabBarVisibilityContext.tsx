@@ -23,6 +23,9 @@ export function TabBarVisibilityProvider({ children }: { children: React.ReactNo
 
   const animate = useCallback(
     (hidden: boolean) => {
+      // Kullanıcının isteği üzerine sekme çubuğunun kaybolması iptal edildi
+      return;
+      /*
       if (isHidden.current === hidden) return;
       isHidden.current = hidden;
       const offset = Math.max(heightRef.current, 1);
@@ -32,6 +35,7 @@ export function TabBarVisibilityProvider({ children }: { children: React.ReactNo
         easing: Easing.out(Easing.cubic),
         useNativeDriver: true,
       }).start();
+      */
     },
     [translateY]
   );
