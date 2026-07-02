@@ -592,10 +592,9 @@ export function ExploreMapView({ places, loading, onLoadPlaces }: ExploreMapView
 
         {/* Filtre Paneli */}
         {showFilter && (
-          <View 
+          <Pressable 
             style={[styles.filterPanel, { backgroundColor: colors.surface.elevated }]}
-            onStartShouldSetResponder={() => true}
-            onTouchEnd={(e) => e.stopPropagation()}
+            onPress={() => {}} // Swallow touch
           >
               {/* Kategori */}
               <View style={styles.filterSection}>
@@ -676,7 +675,7 @@ export function ExploreMapView({ places, loading, onLoadPlaces }: ExploreMapView
                 <Text style={[styles.clearBtnText, { color: colors.accent.primary }]}>{t('explore.filter_clear')}</Text>
               </TouchableOpacity>
             )}
-          </View>
+          </Pressable>
         )}
         {showResults && query.trim().length > 0 && (
           <View style={[styles.resultsCard, { backgroundColor: colors.surface.elevated }]}>
@@ -879,6 +878,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0,
     shadowRadius: 0,
     elevation: 0,
+    zIndex: 50,
   },
   searchRow: {
     flexDirection: 'row',
