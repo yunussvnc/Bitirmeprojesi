@@ -644,6 +644,7 @@ export default function HomeScreen() {
             />
           }
           ListEmptyComponent={listEmpty}
+          ItemSeparatorComponent={() => <View style={{ height: 6 }} />}
           contentContainerStyle={displayList.length > 0 ? styles.listContent : styles.listContentEmpty}
           onViewableItemsChanged={onViewableItemsChanged}
           viewabilityConfig={viewabilityConfig}
