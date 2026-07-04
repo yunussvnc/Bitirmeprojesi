@@ -8,9 +8,10 @@
 
 import React, { useEffect, useRef } from 'react';
 import { View, StyleSheet, Dimensions, Text, Animated } from 'react-native';
-import LottieView from 'lottie-react-native';
+
 import { useTheme } from '../../hooks/useTheme';
 import { createTextStyle, spacing } from '@/src/constants/design';
+import { DotLoader } from './DotLoader';
 
 export interface LoadingStateProps {
   /**
@@ -71,12 +72,7 @@ export function LoadingState({
         },
       ]}
     >
-      <LottieView
-        source={require('../../../assets/animations/loading.json')}
-        autoPlay
-        loop
-        style={styles.spinner}
-      />
+      <DotLoader size={compact ? 8 : 12} />
       {message && (
         <Text style={[messageStyle, styles.message]}>
           {message}

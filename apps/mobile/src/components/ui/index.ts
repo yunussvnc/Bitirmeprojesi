@@ -29,6 +29,9 @@ export type { EmptyStateProps, EmptyStateVariant } from './EmptyState';
 
 export { LottieEmptyState } from './LottieEmptyState';
 
+export { DotLoader } from "./DotLoader";
+export type { DotLoaderProps } from "./DotLoader";
+
 export { LoadingState } from './LoadingState';
 export type { LoadingStateProps } from './LoadingState';
 

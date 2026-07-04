@@ -8,6 +8,7 @@ import {
   RefreshControl,
   Platform,
   Animated,
+  Dimensions,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useRouter, useLocalSearchParams, useFocusEffect } from "expo-router";
@@ -28,6 +29,7 @@ import { useAuthStore } from "@/src/store/useAuthStore";
 import { useAppStore } from "@/src/store/useAppStore";
 import { useTranslation } from "react-i18next";
 import debounce from "lodash/debounce";
+import PagerView from 'react-native-pager-view';
 
 type TabKey = "followers" | "following" | "friends";
 
@@ -37,17 +39,11 @@ const TABS: { key: TabKey; label: string }[] = [
   { key: "friends", label: "Arkadaşlar" },
 ];
 
-export default function NetworkScreen() {
+function NetworkTabContent({ tabKey, userId }: { tabKey: TabKey; userId: number }) {
   const { colors } = useTheme();
-  const insets = useSafeAreaInsets();
   const router = useRouter();
-  const { t } = useTranslation();
-  const params = useLocalSearchParams<{ id: string; type: TabKey }>();
   const authUser = useAuthStore((s) => s.user);
-
-  const initialTab: TabKey =
-    params.type === "following" || params.type === "friends" ? params.type : "followers";
-  const [activeTab, setActiveTab] = useState<TabKey>(initialTab);
+  const blockedIds = useAppStore((s: any) => s.blockedUserIds || []);
 
   const [users, setUsers] = useState<UserSummary[]>([]);
   const [loading, setLoading] = useState(true);
@@ -57,12 +53,6 @@ export default function NetworkScreen() {
   const [hasMore, setHasMore] = useState(true);
   const [privacyBlocked, setPrivacyBlocked] = useState(false);
 
-  // Tab indicator animation
-  const tabIndicatorX = useRef(new Animated.Value(0)).current;
-
-  const userId = Number(params.id);
-
-  const blockedIds = useAppStore((s: any) => s.blockedUserIds || []);
   const visibleUsers = users.filter((u) => !blockedIds.includes(u.id));
 
   const fetchUsers = useCallback(
@@ -87,7 +77,6 @@ export default function NetworkScreen() {
         else setUsers((prev) => [...prev, ...newItems]);
         setHasMore(newItems.length === 20);
       } catch (e: unknown) {
-        // 403 → gizli hesap
         const status = (e as { status?: number; code?: string })?.status;
         if (status === 403) {
           setPrivacyBlocked(true);
@@ -106,26 +95,14 @@ export default function NetworkScreen() {
 
   useFocusEffect(
     useCallback(() => {
-      fetchUsers(activeTab, true);
-      // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [activeTab, userId])
+      fetchUsers(tabKey, true);
+    }, [tabKey, userId])
   );
-
-  const switchTab = (tab: TabKey, index: number) => {
-    lightImpact();
-    setActiveTab(tab);
-    Animated.spring(tabIndicatorX, {
-      toValue: index,
-      useNativeDriver: false,
-      friction: 10,
-      tension: 80,
-    }).start();
-  };
 
   const handleRefresh = () => {
     lightImpact();
     setRefreshing(true);
-    fetchUsers(activeTab, true);
+    fetchUsers(tabKey, true);
   };
 
   const loadMore = () => {
@@ -136,23 +113,19 @@ export default function NetworkScreen() {
 
   useEffect(() => {
     if (page > 1) {
-      fetchUsers(activeTab);
+      fetchUsers(tabKey);
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [page]);
 
-  // Optimistic follow toggle with debounce
   const handleToggleFollow = useCallback(
     debounce(
       async (targetId: number, index: number) => {
         lightImpact();
         
-        // cur referansını dışarı alalım
         const currentUsers = users;
         const curUser = currentUsers[index];
         if (!curUser) return;
         
-        // Optimistic update
         setUsers((prev) => {
           const next = [...prev];
           const cur = next[index];
@@ -191,7 +164,6 @@ export default function NetworkScreen() {
             return next;
           });
         } catch (e) {
-          // Revert
           setUsers((prev) => {
             const next = [...prev];
             const cur = next[index];
@@ -209,7 +181,7 @@ export default function NetworkScreen() {
       500,
       { leading: true, trailing: false }
     ),
-    []
+    [users]
   );
 
   const renderFollowBtn = (item: UserSummary, index: number) => {
@@ -336,12 +308,89 @@ export default function NetworkScreen() {
         Bu hesap gizlidir
       </Text>
       <Text style={[styles.privacyDesc, { color: colors.text.secondary }]}>
-        Bu kullanıcının takipçi listesini görmek için takip etmeniz gerekiyor.
+        Bu kullanıcının listesini görmek için takip etmeniz gerekiyor.
       </Text>
     </View>
   );
 
-  const tabIndicatorWidth = `${100 / TABS.length}%`;
+  return (
+    <View style={[styles.container, { backgroundColor: colors.background.primary }]}>
+      {loading && page === 1 ? (
+        <LoadingState message="Yükleniyor..." />
+      ) : privacyBlocked ? (
+        renderPrivacyBlocked()
+      ) : (
+        <FlatList
+          data={visibleUsers}
+          keyExtractor={(item) => `${(item as any).item_type || "user"}-${item.id}`}
+          renderItem={renderItem as any}
+          contentContainerStyle={visibleUsers.length === 0 ? styles.empty : styles.list}
+          refreshControl={
+            <RefreshControl
+              refreshing={refreshing}
+              onRefresh={handleRefresh}
+              tintColor={colors.accent.primary}
+            />
+          }
+          onEndReached={loadMore}
+          onEndReachedThreshold={0.5}
+          showsVerticalScrollIndicator={false}
+          ListFooterComponent={
+            loadingMore ? (
+              <View style={{ paddingVertical: 20, alignItems: "center" }}>
+                <LoadingState message="" />
+              </View>
+            ) : null
+          }
+          ListEmptyComponent={
+            <EmptyState
+              icon={
+                tabKey === "friends"
+                  ? "person.2.fill"
+                  : tabKey === "followers"
+                  ? "person.crop.circle"
+                  : "person.badge.plus"
+              }
+              title={
+                tabKey === "friends"
+                  ? "Henüz arkadaşın yok"
+                  : tabKey === "followers"
+                  ? "Henüz takipçin yok"
+                  : "Henüz kimseyi takip etmiyorsun"
+              }
+              description={
+                tabKey === "friends"
+                  ? "Karşılıklı takipleştiğin kişiler burada görünür."
+                  : tabKey === "followers"
+                  ? "Seni takip eden kişiler burada görünecek."
+                  : "Takip ettiğin kişiler burada görünecek."
+              }
+            />
+          }
+        />
+      )}
+    </View>
+  );
+}
+
+export default function NetworkScreen() {
+  const { colors } = useTheme();
+  const insets = useSafeAreaInsets();
+  const router = useRouter();
+  const params = useLocalSearchParams<{ id: string; type: TabKey }>();
+
+  const initialTab: TabKey =
+    params.type === "following" || params.type === "friends" ? params.type : "followers";
+  
+  const initialIndex = TABS.findIndex(t => t.key === initialTab);
+  const [activeIndex, setActiveIndex] = useState(initialIndex >= 0 ? initialIndex : 1);
+  const pagerRef = useRef<FlatList>(null);
+
+  const switchTab = (index: number) => {
+    lightImpact();
+    setActiveIndex(index);
+    pagerRef.current?.scrollToIndex({ index, animated: true });
+  };
 
   return (
     <Screen 
@@ -358,7 +407,7 @@ export default function NetworkScreen() {
           <IconSymbol name="chevron.left" size={20} color={colors.text.primary} />
         </TouchableOpacity>
         <Text style={[styles.headerTitle, { color: colors.text.primary }]}>
-          {TABS.find((t) => t.key === activeTab)?.label ?? ""}
+          {TABS[activeIndex]?.label ?? ""}
         </Text>
         <View style={styles.headerBtn} />
       </View>
@@ -366,12 +415,12 @@ export default function NetworkScreen() {
       {/* Tab bar */}
       <View style={[styles.tabBar, { borderBottomColor: colors.surface.border }]}>
         {TABS.map((tab, i) => {
-          const isActive = tab.key === activeTab;
+          const isActive = i === activeIndex;
           return (
             <TouchableOpacity
               key={tab.key}
               style={styles.tabItem}
-              onPress={() => switchTab(tab.key, i)}
+              onPress={() => switchTab(i)}
               activeOpacity={0.7}
             >
               <Text
@@ -395,63 +444,55 @@ export default function NetworkScreen() {
         })}
       </View>
 
-      {/* Content */}
-      <View style={[styles.container, { backgroundColor: colors.background.primary }]}>
-        {loading && page === 1 ? (
-          <LoadingState message="Yükleniyor..." />
-        ) : privacyBlocked ? (
-          renderPrivacyBlocked()
-        ) : (
-          <FlatList
-            data={visibleUsers}
-            keyExtractor={(item) => `${(item as any).item_type || "user"}-${item.id}`}
-            renderItem={renderItem as any}
-            contentContainerStyle={visibleUsers.length === 0 ? styles.empty : styles.list}
-            refreshControl={
-              <RefreshControl
-                refreshing={refreshing}
-                onRefresh={handleRefresh}
-                tintColor={colors.accent.primary}
-              />
-            }
-            onEndReached={loadMore}
-            onEndReachedThreshold={0.5}
-            showsVerticalScrollIndicator={false}
-            ListFooterComponent={
-              loadingMore ? (
-                <View style={{ paddingVertical: 20, alignItems: "center" }}>
-                  <LoadingState message="" />
-                </View>
-              ) : null
-            }
-            ListEmptyComponent={
-              <EmptyState
-                icon={
-                  activeTab === "friends"
-                    ? "person.2.fill"
-                    : activeTab === "followers"
-                    ? "person.crop.circle"
-                    : "person.badge.plus"
-                }
-                title={
-                  activeTab === "friends"
-                    ? "Henüz arkadaşın yok"
-                    : activeTab === "followers"
-                    ? "Henüz takipçin yok"
-                    : "Henüz kimseyi takip etmiyorsun"
-                }
-                description={
-                  activeTab === "friends"
-                    ? "Karşılıklı takipleştiğin kişiler burada görünür."
-                    : activeTab === "followers"
-                    ? "Seni takip eden kişiler burada görünecek."
-                    : "Takip ettiğin kişiler burada görünecek."
-                }
-              />
-            }
-          />
+      {/* Edge Swipe Hitbox for Back Navigation */}
+      {activeIndex === 0 && (
+        <View
+          style={{
+            position: 'absolute',
+            left: 0,
+            top: 0,
+            bottom: 0,
+            width: 30,
+            zIndex: 999,
+          }}
+          pointerEvents="auto"
+        />
+      )}
+
+      {/* Pager */}
+      <FlatList
+        ref={pagerRef}
+        data={TABS}
+        keyExtractor={(item) => item.key}
+        horizontal
+        pagingEnabled
+        bounces={false}
+        showsHorizontalScrollIndicator={false}
+        initialScrollIndex={initialIndex >= 0 ? initialIndex : 1}
+        getItemLayout={(_, index) => ({
+          length: Dimensions.get('window').width,
+          offset: Dimensions.get('window').width * index,
+          index,
+        })}
+        onMomentumScrollEnd={(e) => {
+          const index = Math.round(e.nativeEvent.contentOffset.x / Dimensions.get("window").width);
+          if (index !== activeIndex && index >= 0 && index < TABS.length) {
+            setActiveIndex(index);
+          }
+        }}
+        onScroll={(e) => {
+          const index = Math.round(e.nativeEvent.contentOffset.x / Dimensions.get("window").width);
+          if (index !== activeIndex && index >= 0 && index < TABS.length) {
+            setActiveIndex(index);
+          }
+        }}
+        scrollEventThrottle={16}
+        renderItem={({ item }) => (
+          <View style={{ width: Dimensions.get("window").width }}>
+            <NetworkTabContent tabKey={item.key} userId={Number(params.id)} />
+          </View>
         )}
-      </View>
+      />
     </Screen>
   );
 }
