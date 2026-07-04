@@ -53,7 +53,8 @@ def search_users(
     base_query = db.query(models.User).filter(
         models.User.is_active == True,
         models.User.role != "venue",  # Venue hesaplarını hariç tut
-        ~models.User.email.startswith("serpapi_")  # Google'dan gelen sahte kullanıcıları (bot) gizle
+        ~models.User.email.startswith("serpapi_"),  # Google'dan gelen sahte kullanıcıları (bot) gizle
+        ~models.User.email.startswith("google_review_")  # Diğer Google review dummy kullanıcılarını gizle
     )
 
     # Kendi kendini aramayı hariç tut
