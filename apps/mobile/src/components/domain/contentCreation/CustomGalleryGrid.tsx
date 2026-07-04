@@ -17,6 +17,7 @@ import {
   Alert,
   Platform,
   ScrollView,
+  Image as RNImage,
 } from 'react-native';
 import { Image as ExpoImage } from 'expo-image';
 import * as MediaLibrary from 'expo-media-library';
@@ -74,6 +75,20 @@ const GalleryCell = memo(function GalleryCell({
   const secs = Math.floor(duration % 60);
   const durationLabel = `${mins}:${secs.toString().padStart(2, '0')}`;
 
+  const [imageUri, setImageUri] = useState(asset.uri);
+
+  useEffect(() => {
+    let isMounted = true;
+    if (Platform.OS === 'ios' && asset.uri.startsWith('ph://')) {
+      MediaLibrary.getAssetInfoAsync(asset).then((info) => {
+        if (isMounted && info?.localUri) {
+          setImageUri(info.localUri);
+        }
+      }).catch(() => {});
+    }
+    return () => { isMounted = false; };
+  }, [asset]);
+
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -81,11 +96,10 @@ const GalleryCell = memo(function GalleryCell({
       style={[styles.cell, { width: CELL_SIZE, height: CELL_SIZE }]}
     >
       <ExpoImage
-        source={{ uri: asset.uri }}
+        source={{ uri: imageUri }}
         style={StyleSheet.absoluteFill}
         contentFit="cover"
         recyclingKey={asset.id}
-        cachePolicy="memory-disk"
       />
 
       {/* Selection dim */}

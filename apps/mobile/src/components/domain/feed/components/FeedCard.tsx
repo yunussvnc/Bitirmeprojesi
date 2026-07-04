@@ -50,7 +50,7 @@ export interface FeedCardProps {
   onZoomChange?: (zooming: boolean) => void;
 }
 
-export function FeedCard({
+const FeedCardComponent = ({
   post,
   onPress,
   onAuthorPress,
@@ -60,7 +60,7 @@ export function FeedCard({
   onShare,
   onOptionsPress,
   onZoomChange,
-}: FeedCardProps) {
+}: FeedCardProps) => {
   const { colors, isDark } = useTheme();
   const { width: screenWidth } = useWindowDimensions();
   const { t } = useTranslation();
@@ -495,3 +495,12 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
 });
+
+export const FeedCard = React.memo(
+  FeedCardComponent,
+  (prevProps, nextProps) => 
+    prevProps.post.id === nextProps.post.id &&
+    prevProps.post.is_liked === nextProps.post.is_liked &&
+    prevProps.post.like_count === nextProps.post.like_count &&
+    prevProps.post.comment_count === nextProps.post.comment_count
+);

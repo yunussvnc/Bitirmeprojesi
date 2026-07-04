@@ -358,7 +358,7 @@ export default function FeedScreen() {
 
   const renderItem = useCallback(
     ({ item, index }: { item: Post; index: number }) => (
-      <Reanimated.View entering={FadeInUp.delay(Math.min(index * 50, 500)).duration(400)}>
+      <View style={{ overflow: "hidden" }}>
         <FeedCard
           post={item}
           onPress={() => item.place_id && router.push(`/place/${item.place_id}` as any)}
@@ -370,7 +370,7 @@ export default function FeedScreen() {
           onOptionsPress={() => setOptionsPost(item)}
           onZoomChange={setIsCardZooming}
         />
-      </Reanimated.View>
+      </View>
     ),
     [handleLike]
   );
@@ -646,6 +646,7 @@ export default function FeedScreen() {
           showsVerticalScrollIndicator={false}
           onEndReached={handleLoadMore}
           onEndReachedThreshold={0.3}
+          estimatedItemSize={500}
         />
 
         {/* Filter dropdown overlay — FlatList dışında, her zaman üstte */}

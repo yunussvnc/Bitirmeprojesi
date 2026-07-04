@@ -167,8 +167,8 @@ export function useNotificationSocket() {
       }
     };
 
-    ws.onerror = (error) => {
-      console.warn('❌ Notification WebSocket error:', error);
+    ws.onerror = (error: any) => {
+      console.warn('❌ Notification WebSocket error:', error?.message || "Connection failed (Backend might be sleeping or unreachable)");
       isConnecting.current = false;
     };
 
