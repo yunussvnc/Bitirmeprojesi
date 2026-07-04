@@ -659,7 +659,7 @@ def get_user_tagged_posts(
         following_query = db.query(models.Follow.following_id).filter(
             models.Follow.follower_id == current_uid,
             models.Follow.status == "accepted"
-        ).subquery()
+        )
 
         query = query.filter(
             or_(
