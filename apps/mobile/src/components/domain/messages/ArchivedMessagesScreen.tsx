@@ -208,36 +208,43 @@ export default function ArchivedMessagesScreen() {
                     },
                 ]}
             >
-                <TouchableOpacity
-                    style={styles.backBtn}
-                    hitSlop={12}
-                    activeOpacity={0.7}
-                    onPress={() => {
-                        lightImpact();
-                        router.push("/(tabs)/messages" as any);
-                    }}
-                >
-                    <IconSymbol name="chevron.left" size={26} color={colors.text.primary} />
-                </TouchableOpacity>
-
-                <Text style={[styles.headerTitle, { color: colors.text.primary }]} numberOfLines={1}>
-                    {t("messages.archived_title")}
-                </Text>
-
-                {/* Boş görünüm için veya Düzenle butonu */}
-                {!isEditMode && conversations.length > 0 && (
+                {/* Sol Alan (Geri Butonu) */}
+                <View style={{ flex: 1, alignItems: "flex-start" }}>
                     <TouchableOpacity
-                        style={styles.headerBtn}
-                        hitSlop={8}
+                        style={styles.backBtn}
+                        hitSlop={12}
                         activeOpacity={0.7}
-                        onPress={toggleEditMode}
+                        onPress={() => {
+                            lightImpact();
+                            router.push("/(tabs)/messages" as any);
+                        }}
                     >
-                        <Text style={{ color: colors.accent.primary, fontSize: 14, fontWeight: "600" }}>
-                            {t("messages.edit")}
-                        </Text>
+                        <IconSymbol name="chevron.left" size={26} color={colors.text.primary} />
                     </TouchableOpacity>
-                )}
-                {isEditMode && <View style={{ width: 60 }} />}
+                </View>
+
+                {/* Orta Alan (Başlık) */}
+                <View style={{ flex: 2, alignItems: "center" }}>
+                    <Text style={[styles.headerTitle, { color: colors.text.primary }]} numberOfLines={1}>
+                        {t("messages.archived_title")}
+                    </Text>
+                </View>
+
+                {/* Sağ Alan (Düzenle Butonu) */}
+                <View style={{ flex: 1, alignItems: "flex-end" }}>
+                    {!isEditMode && conversations.length > 0 && (
+                        <TouchableOpacity
+                            style={styles.headerBtn}
+                            hitSlop={8}
+                            activeOpacity={0.7}
+                            onPress={toggleEditMode}
+                        >
+                            <Text style={{ color: colors.accent.primary, fontSize: 14, fontWeight: "600" }}>
+                                {t("messages.edit")}
+                            </Text>
+                        </TouchableOpacity>
+                    )}
+                </View>
             </View>
 
             {/* ── Düzenleme Modu Araç Çubuğu ── */}
@@ -332,7 +339,6 @@ const styles = StyleSheet.create({
         fontWeight: "700",
         letterSpacing: -0.3,
         textAlign: "center",
-        flex: 1,
     },
     headerBtn: {
         padding: 4,

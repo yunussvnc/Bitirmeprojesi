@@ -257,9 +257,9 @@ export default function SavedScreen() {
             style={styles.backBtn}
             hitSlop={12}
           >
-            <IconSymbol name="chevron.left" size={24} color={colors.accent.primary} />
+            <IconSymbol name="chevron.left" size={26} color={colors.text.primary} />
           </TouchableOpacity>
-          <Text style={[titleStyle, styles.title]}>{t("saved.title")}</Text>
+          <Text style={[styles.title, { color: colors.text.primary }]}>{t("saved.title")}</Text>
           {((tab === "places" && items.length > 0) || (tab === "posts" && postItems.length > 0)) && (
             <View style={styles.headerRight}>
               <View style={[styles.countBadge, { backgroundColor: colors.surface.elevated }]}>
@@ -279,20 +279,34 @@ export default function SavedScreen() {
         </View>
         <View style={styles.tabRow}>
           <TouchableOpacity
-            style={[styles.tabPill, { backgroundColor: tab === "places" ? colors.accent.primary : colors.surface.elevated }]}
+            style={[
+              styles.tabPill,
+              {
+                backgroundColor: tab === "places" ? colors.text.primary : colors.surface.default,
+                borderColor: tab === "places" ? "transparent" : colors.surface.border,
+                borderWidth: tab === "places" ? 0 : 1,
+              },
+            ]}
             onPress={() => setTab("places")}
             activeOpacity={0.7}
           >
-            <Text style={[styles.tabText, { color: tab === "places" ? colors.accent.onPrimary : colors.text.secondary }]}>
+            <Text style={[styles.tabText, { color: tab === "places" ? colors.background.primary : colors.text.secondary }]}>
               {t("saved_extra.places")}
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={[styles.tabPill, { backgroundColor: tab === "posts" ? colors.accent.primary : colors.surface.elevated }]}
+            style={[
+              styles.tabPill,
+              {
+                backgroundColor: tab === "posts" ? colors.text.primary : colors.surface.default,
+                borderColor: tab === "posts" ? "transparent" : colors.surface.border,
+                borderWidth: tab === "posts" ? 0 : 1,
+              },
+            ]}
             onPress={() => setTab("posts")}
             activeOpacity={0.7}
           >
-            <Text style={[styles.tabText, { color: tab === "posts" ? colors.accent.onPrimary : colors.text.secondary }]}>
+            <Text style={[styles.tabText, { color: tab === "posts" ? colors.background.primary : colors.text.secondary }]}>
               {t("saved_extra.posts")}
             </Text>
           </TouchableOpacity>
@@ -314,92 +328,29 @@ export default function SavedScreen() {
     ]
   );
 
-  if (tab === "places" && items.length === 0) {
-    return (
-      <Screen onRefresh={handleRefresh} refreshing={refreshing}>
-        <View style={styles.header}>
-          <View style={styles.headerRow}>
-            <TouchableOpacity
-              onPress={() => {
-                lightImpact();
-                router.back();
-              }}
-              style={styles.backBtn}
-              hitSlop={12}
-            >
-              <IconSymbol name="chevron.left" size={24} color={colors.accent.primary} />
-            </TouchableOpacity>
-            <Text style={[titleStyle, styles.title]}>{t("saved.title")}</Text>
-          </View>
-          <View style={styles.tabRow}>
-            <TouchableOpacity style={[styles.tabPill, { backgroundColor: colors.accent.primary }]} onPress={() => setTab("places")} activeOpacity={0.7}>
-              <Text style={[styles.tabText, { color: colors.accent.onPrimary }]}>{t("saved_extra.places")}</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={[styles.tabPill, { backgroundColor: colors.surface.elevated }]}
-              onPress={() => setTab("posts")}
-              activeOpacity={0.7}
-            >
-              <Text style={[styles.tabText, { color: colors.text.secondary }]}>{t("saved_extra.posts")}</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-        <View style={styles.emptyContainer}>
-          <EmptyState
-            variant="saved"
-            title={t("saved_extra.empty_title")}
-            description={t("saved_extra.empty_places_desc")}
-            actionLabel={t("saved_extra.empty_places_action")}
-            onAction={() => router.push("/(tabs)/explore")}
-          />
-        </View>
-      </Screen>
-    );
-  }
+  const listEmptyPlaces = (
+    <View style={styles.emptyContainer}>
+      <EmptyState
+        variant="saved"
+        title={t("saved_extra.empty_title")}
+        description={t("saved_extra.empty_places_desc")}
+        actionLabel={t("saved_extra.empty_places_action")}
+        onAction={() => router.push("/(tabs)/explore")}
+      />
+    </View>
+  );
 
-  if (tab === "posts" && postItems.length === 0) {
-    return (
-      <Screen onRefresh={handleRefresh} refreshing={refreshing}>
-        <View style={styles.header}>
-          <View style={styles.headerRow}>
-            <TouchableOpacity
-              onPress={() => {
-                lightImpact();
-                router.back();
-              }}
-              style={styles.backBtn}
-              hitSlop={12}
-            >
-              <IconSymbol name="chevron.left" size={24} color={colors.accent.primary} />
-            </TouchableOpacity>
-            <Text style={[titleStyle, styles.title]}>{t("saved.title")}</Text>
-          </View>
-          <View style={styles.tabRow}>
-            <TouchableOpacity
-              style={[styles.tabPill, { backgroundColor: colors.surface.elevated }]}
-              onPress={() => setTab("places")}
-              activeOpacity={0.7}
-            >
-              <Text style={[styles.tabText, { color: colors.text.secondary }]}>{t("saved_extra.places")}</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={[styles.tabPill, { backgroundColor: colors.accent.primary }]} onPress={() => setTab("posts")} activeOpacity={0.7}>
-              <Text style={[styles.tabText, { color: colors.accent.onPrimary }]}>{t("saved_extra.posts")}</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-        <View style={styles.emptyContainer}>
-          <EmptyState
-            variant="saved"
-            title={t("saved_extra.empty_title")}
-            description={t("saved_extra.empty_posts_desc")}
-            actionLabel={t("saved_extra.empty_posts_action")}
-            onAction={() => router.push("/(tabs)/feed")}
-          />
-        </View>
-      </Screen>
-    );
-  }
-
+  const listEmptyPosts = (
+    <View style={styles.emptyContainer}>
+      <EmptyState
+        variant="saved"
+        title={t("saved_extra.empty_title")}
+        description={t("saved_extra.empty_posts_desc")}
+        actionLabel={t("saved_extra.empty_posts_action")}
+        onAction={() => router.push("/(tabs)/feed")}
+      />
+    </View>
+  );
   return (
     <Screen scrollable={false}>
       {tab === "places" ? (
@@ -410,7 +361,8 @@ export default function SavedScreen() {
           showsVerticalScrollIndicator={false}
           renderItem={renderPlaceItem}
           ListHeaderComponent={listHeader}
-          contentContainerStyle={styles.listContainer}
+          ListEmptyComponent={listEmptyPlaces}
+          contentContainerStyle={[styles.listContainer, items.length === 0 && { flex: 1 }]}
           initialNumToRender={10}
           maxToRenderPerBatch={10}
           windowSize={5}
@@ -436,7 +388,8 @@ export default function SavedScreen() {
             />
           )}
           ListHeaderComponent={listHeader}
-          contentContainerStyle={styles.listContainer}
+          ListEmptyComponent={listEmptyPosts}
+          contentContainerStyle={[styles.listContainer, postItems.length === 0 && { flex: 1 }]}
           initialNumToRender={6}
           maxToRenderPerBatch={6}
           windowSize={5}
@@ -471,8 +424,9 @@ const styles = StyleSheet.create({
   },
   title: {
     flex: 1,
-    fontSize: 28,
+    fontSize: 26,
     fontWeight: "700",
+    letterSpacing: -0.5,
   },
   tabRow: {
     flexDirection: "row",
@@ -480,13 +434,13 @@ const styles = StyleSheet.create({
     marginTop: designSpacing.base,
   },
   tabPill: {
-    paddingHorizontal: 14,
+    paddingHorizontal: 16,
     paddingVertical: 8,
-    borderRadius: 18,
+    borderRadius: 20,
   },
   tabText: {
-    fontSize: 13,
-    fontWeight: "700",
+    fontSize: 14,
+    fontWeight: "600",
   },
   headerRight: {
     flexDirection: "row",

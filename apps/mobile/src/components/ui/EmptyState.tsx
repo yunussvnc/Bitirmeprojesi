@@ -134,28 +134,38 @@ export function EmptyState({
         },
       ]}
     >
-      <View style={styles.lottieContainer}>
-        <LottieView
-          source={require('@/assets/animations/empty-box.json')}
-          autoPlay
-          loop
-          style={styles.lottie}
-          colorFilters={[
-            {
-              keypath: '**', // Boyanabilecek tüm katmanları accent renge çevirir
-              color: colors.accent.primary,
-            },
-          ]}
-        />
-      </View>
-      <Text style={[titleStyle, styles.title, { marginBottom: spacing.sm }]}>
-        {title}
-      </Text>
-      <Text style={[descriptionStyle, styles.description, { marginBottom: spacing.xl }]}>
-        {description}
-      </Text>
+      {variant !== 'saved' && (
+        <View style={styles.lottieContainer}>
+          <LottieView
+            source={require('@/assets/animations/empty-box.json')}
+            autoPlay
+            loop
+            style={styles.lottie}
+            colorFilters={[
+              {
+                keypath: '**', // Boyanabilecek tüm katmanları accent renge çevirir
+                color: colors.accent.primary,
+              },
+            ]}
+          />
+        </View>
+      )}
+      {!!title && (
+        <Text style={[titleStyle, styles.title, { marginBottom: spacing.sm }]}>
+          {title}
+        </Text>
+      )}
+      {!!description && (
+        <Text style={[descriptionStyle, styles.description, { marginBottom: spacing.xl }]}>
+          {description}
+        </Text>
+      )}
       {actionLabel && onAction && (
-        <Button variant="primary" onPress={onAction}>
+        <Button 
+          variant="primary" 
+          onPress={onAction}
+          style={variant === 'saved' ? { borderRadius: 30 } : undefined}
+        >
           {actionLabel}
         </Button>
       )}

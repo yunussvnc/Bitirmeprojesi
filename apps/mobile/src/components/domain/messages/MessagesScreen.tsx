@@ -321,7 +321,7 @@ export default function MessagesScreen() {
                     activeOpacity={0.7}
                     onPress={() => {
                         lightImpact();
-                        router.push("/(tabs)/messages/archive" as any);
+                        router.push("/messages-archive" as any);
                     }}
                 >
                     <Text style={[styles.requestsLink, { color: colors.accent.primary }]}>{t("messages.archive")}</Text>
@@ -759,20 +759,28 @@ const styles = StyleSheet.create({
         paddingHorizontal: 16,
         paddingTop: 12,
         paddingBottom: 8,
+        position: 'relative',
     },
     cancelEditBtn: {
         paddingVertical: 4,
+        zIndex: 1,
     },
     cancelEditText: {
         fontSize: 15,
         fontWeight: "500",
     },
     editModeTitle: {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        textAlign: 'center',
         fontSize: 15,
         fontWeight: "600",
+        zIndex: 0,
     },
     selectAllBtn: {
         paddingVertical: 4,
+        zIndex: 1,
     },
     selectAllText: {
         fontSize: 15,
