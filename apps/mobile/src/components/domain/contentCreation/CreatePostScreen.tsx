@@ -255,7 +255,7 @@ function PostShareStep({
       setTagSearching(true);
       try {
         const results = await apiGet<{ items: { id: number; username: string; avatar_url?: string }[] }>(
-          `/users/search?q=${encodeURIComponent(tagSearch.trim())}&page_size=10`
+          `/users/search?q=${encodeURIComponent(tagSearch.trim())}&page_size=20&for_tagging=true`
         );
         setTagResults(
           (results.items || []).map((u) => ({
@@ -442,7 +442,7 @@ function PostShareStep({
 
                 {/* Search Results */}
                 {tagResults.length > 0 && (
-                  <View style={styles.tagResultsList}>
+                  <ScrollView style={styles.tagResultsList} nestedScrollEnabled={true} keyboardShouldPersistTaps="handled">
                     {tagResults.map((user) => {
                       const isTagged = postMeta.taggedUsers.some((u) => u.id === user.id);
                       return (
@@ -461,7 +461,7 @@ function PostShareStep({
                         </TouchableOpacity>
                       );
                     })}
-                  </View>
+                  </ScrollView>
                 )}
               </View>
             )}
@@ -669,6 +669,7 @@ const styles = StyleSheet.create({
   },
   tagResultsList: {
     marginTop: 8,
+    maxHeight: 336, // 6 users * ~56px per row
   },
   tagResultRow: {
     flexDirection: 'row',

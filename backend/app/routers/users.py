@@ -21,6 +21,7 @@ def search_users(
     q: str = Query(..., min_length=1, max_length=100, description="Aranacak kullanıcı adı veya isim"),
     page: int = Query(1, ge=1),
     page_size: int = Query(20, ge=1, le=100),
+    for_tagging: bool = Query(False, description="Eğer true ise mekanlar da dahil edilir ve gizlilik/takip kuralları etiketleme önceliklerine göre işler."),
     db: Session = Depends(get_db),
     current_user: Optional[models.User] = Depends(get_optional_user),
 ):
@@ -52,12 +53,14 @@ def search_users(
     # ── 3. Temel sorgu: aktif + normal kullanıcılar ──
     base_query = db.query(models.User).filter(
         models.User.is_active == True,
-        models.User.role != "venue",  # Venue hesaplarını hariç tut
         ~models.User.email.startswith("serpapi_"),  # Google'dan gelen sahte kullanıcıları (bot) gizle
         ~models.User.email.startswith("google_review_"),  # Diğer Google review dummy kullanıcılarını gizle
         ~models.User.email.endswith("@reviews.placeholder"),
         ~models.User.email.endswith("@placeholder.com")
     )
+
+    if not for_tagging:
+        base_query = base_query.filter(models.User.role != "venue")
 
     # Kendi kendini aramayı hariç tut
     if current_user:
@@ -66,6 +69,37 @@ def search_users(
     # Engellenen kullanıcıları hariç tut
     if blocked_ids:
         base_query = base_query.filter(models.User.id.notin_(blocked_ids))
+
+    # For tagging: We need mutual followers for privacy and sorting
+    mutual_ids = set()
+    followed_by_me_ids = set()
+    if for_tagging and current_user:
+        following_me = db.query(models.Follow.follower_id).filter(
+            models.Follow.following_id == current_user.id,
+            models.Follow.status == "accepted"
+        ).all()
+        followed_by_me = db.query(models.Follow.following_id).filter(
+            models.Follow.follower_id == current_user.id,
+            models.Follow.status == "accepted"
+        ).all()
+        
+        following_me_set = {r[0] for r in following_me}
+        followed_by_me_ids = {r[0] for r in followed_by_me}
+        mutual_ids = following_me_set.intersection(followed_by_me_ids)
+
+        # Filter out private accounts if they are not mutual followers
+        from sqlalchemy import or_
+        base_query = base_query.outerjoin(models.UserPreferences, models.UserPreferences.user_id == models.User.id)
+        
+        # Kullanıcı mekan ise VEYA tercihleri yoksa (gizli değil) VEYA is_private_account=False ise VEYA karşılıklı takipleşiyorsak
+        base_query = base_query.filter(
+            or_(
+                models.User.role == "venue",
+                models.UserPreferences.is_private_account == False,
+                models.UserPreferences.is_private_account == None,
+                models.User.id.in_(mutual_ids) if mutual_ids else False
+            )
+        )
 
     # ── 4. İsim/kullanıcı adı filtresi ──
     base_query = base_query.filter(
@@ -93,9 +127,24 @@ def search_users(
         ),
         else_=2,
     )
+
+    if for_tagging and current_user:
+        # Önceliklendirme: 1. Karşılıklı takip (0), 2. Sadece takip edilen (1), 3. Diğer (2)
+        is_mutual_sort = case(
+            (models.User.id.in_(list(mutual_ids)), 0) if mutual_ids else [],
+            else_=1
+        )
+        is_followed_sort = case(
+            (models.User.id.in_(list(followed_by_me_ids)), 0) if followed_by_me_ids else [],
+            else_=1
+        )
+        order_clauses = [is_mutual_sort, is_followed_sort, relevance, models.User.username.asc()]
+    else:
+        order_clauses = [relevance, models.User.username.asc()]
+
     offset = (page - 1) * page_size
     paginated = (
-        base_query.order_by(relevance, models.User.username.asc())
+        base_query.order_by(*order_clauses)
         .offset(offset)
         .limit(page_size)
         .all()
@@ -600,7 +649,34 @@ def get_user_tagged_posts(
     query = db.query(models.Post).filter(
         models.Post.id.in_(post_ids)
     )
+
+    # ── Gönderi sahibinin gizlilik kontrolü ──
+    query = query.outerjoin(models.UserPreferences, models.UserPreferences.user_id == models.Post.user_id)
     
+    from sqlalchemy import or_, and_
+    if current_uid:
+        # Bakan kişi oturum açmışsa
+        following_query = db.query(models.Follow.following_id).filter(
+            models.Follow.follower_id == current_uid,
+            models.Follow.status == "accepted"
+        ).subquery()
+
+        query = query.filter(
+            or_(
+                models.UserPreferences.is_private_account == False,
+                models.UserPreferences.is_private_account == None,
+                models.Post.user_id == current_uid,
+                models.Post.user_id.in_(following_query)
+            )
+        )
+    else:
+        # Misafir kullanıcı
+        query = query.filter(
+            or_(
+                models.UserPreferences.is_private_account == False,
+                models.UserPreferences.is_private_account == None
+            )
+        )
     query = query.order_by(models.Post.created_at.desc())
     total = query.count()
     posts = query.offset((page - 1) * page_size).limit(page_size).all()
