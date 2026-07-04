@@ -894,6 +894,15 @@ def create_post(db: Session, user_id: int, data: schemas.PostCreate):
 
     db.commit()
     db.refresh(db_post)
+    
+    # Notify subscribers
+    subscribers = db.query(models.NotificationSubscription).filter(
+        models.NotificationSubscription.target_id == user_id,
+        models.NotificationSubscription.notify_posts == True
+    ).all()
+    for sub in subscribers:
+        create_notification(db, sub.subscriber_id, "new_post", user_id, post_id=db_post.id)
+        
     return db_post
 
 
@@ -1320,6 +1329,24 @@ def create_story(db: Session, user_id: int, data: schemas.StoryCreate):
     db.add(story)
     db.commit()
     db.refresh(story)
+    
+    # Notify subscribers
+    subscribers = db.query(models.NotificationSubscription).filter(
+        models.NotificationSubscription.target_id == user_id,
+        models.NotificationSubscription.notify_stories == True
+    ).all()
+    
+    # Hikaye close_friends'e özelse, sadece close friend olan abonelere bildirim gitmeli
+    # Ancak şu an basitçe herkese atıyoruz, çünkü close friend mantığı henüz bu fonksiyonda çok detaylı yok
+    for sub in subscribers:
+        # Eğer story 'close_friends' ise ve subscriber arkadaş değilse bildirimi atma
+        if privacy_type == "close_friends":
+            # Mutual friendship control
+            is_mutual = is_following(db, sub.subscriber_id, user_id) and is_following(db, user_id, sub.subscriber_id)
+            if not is_mutual:
+                continue
+        create_notification(db, sub.subscriber_id, "new_story", user_id)
+
     return story
 
 

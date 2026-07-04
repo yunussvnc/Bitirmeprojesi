@@ -623,6 +623,70 @@ def update_hidden_story_users(
     return {"hidden_users": items}
 
 
+@router.get("/users/{user_id}/notification-subscriptions", response_model=schemas.NotificationSubscriptionResponse)
+def get_notification_subscriptions(
+    user_id: int,
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(get_current_user),
+):
+    """Kullanıcının başka bir kullanıcı için bildirim zili ayarlarını getirir."""
+    target = crud.get_user_by_id(db, user_id)
+    if not target:
+        raise HTTPException(status_code=404, detail="Kullanıcı bulunamadı.")
+
+    sub = db.query(models.NotificationSubscription).filter(
+        models.NotificationSubscription.subscriber_id == current_user.id,
+        models.NotificationSubscription.target_id == user_id
+    ).first()
+
+    return {
+        "subscriber_id": current_user.id,
+        "target_id": user_id,
+        "notify_posts": sub.notify_posts if sub else False,
+        "notify_stories": sub.notify_stories if sub else False
+    }
+
+
+@router.put("/users/{user_id}/notification-subscriptions", response_model=schemas.NotificationSubscriptionResponse)
+def update_notification_subscriptions(
+    user_id: int,
+    data: schemas.NotificationSubscriptionUpdate,
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(get_current_user),
+):
+    """Kullanıcının başka bir kullanıcı için bildirim zili ayarlarını günceller."""
+    target = crud.get_user_by_id(db, user_id)
+    if not target:
+        raise HTTPException(status_code=404, detail="Kullanıcı bulunamadı.")
+        
+    if current_user.id == user_id:
+        raise HTTPException(status_code=400, detail="Kendinize abone olamazsınız.")
+
+    sub = db.query(models.NotificationSubscription).filter(
+        models.NotificationSubscription.subscriber_id == current_user.id,
+        models.NotificationSubscription.target_id == user_id
+    ).first()
+
+    if not sub:
+        sub = models.NotificationSubscription(
+            subscriber_id=current_user.id,
+            target_id=user_id,
+            notify_posts=data.notify_posts if data.notify_posts is not None else False,
+            notify_stories=data.notify_stories if data.notify_stories is not None else False
+        )
+        db.add(sub)
+    else:
+        if data.notify_posts is not None:
+            sub.notify_posts = data.notify_posts
+        if data.notify_stories is not None:
+            sub.notify_stories = data.notify_stories
+
+    db.commit()
+    db.refresh(sub)
+
+    return sub
+
+
 @router.get("/users/{user_id}/tagged-posts", response_model=schemas.PaginatedPosts)
 def get_user_tagged_posts(
     user_id: int,

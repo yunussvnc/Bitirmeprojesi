@@ -143,6 +143,14 @@ def notification_push_content(
             "title": "📢 Kampanya Güncellemesi",
             "body": extra.get("campaign_text", f"{actor_name} yeni bir kampanya paylaştı") if extra else f"{actor_name} yeni bir kampanya paylaştı",
         },
+        "new_post": {
+            "title": "📸 Yeni Gönderi",
+            "body": f"{actor_name} yeni bir gönderi paylaştı, ilk sen gör!",
+        },
+        "new_story": {
+            "title": "📖 Yeni Hikaye",
+            "body": f"{actor_name} yeni bir hikaye paylaştı, ilk sen gör!",
+        },
     }
 
 

@@ -112,6 +112,25 @@ class DeviceToken(Base):
     user = relationship("User", backref="device_tokens")
 
 
+class NotificationSubscription(Base):
+    """Kullanıcının başka bir kullanıcının gönderi ve hikayeleri için bildirim abonelikleri"""
+    __tablename__ = "notification_subscriptions"
+    id = Column(Integer, primary_key=True, index=True)
+    subscriber_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
+    target_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
+    
+    notify_posts = Column(Boolean, default=False)
+    notify_stories = Column(Boolean, default=False)
+    
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    subscriber = relationship("User", foreign_keys=[subscriber_id])
+    target = relationship("User", foreign_keys=[target_id])
+    __table_args__ = (
+        UniqueConstraint("subscriber_id", "target_id", name="uq_notification_subscription"),
+    )
+
+
 class PendingUser(Base):
     __tablename__ = "pending_users"
     id = Column(Integer, primary_key=True, index=True)

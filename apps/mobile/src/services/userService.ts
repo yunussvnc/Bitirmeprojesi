@@ -115,3 +115,23 @@ export async function getTaggedPosts(
 ): Promise<UserPostsResponse> {
   return apiGet<UserPostsResponse>(`/users/${userId}/tagged-posts?page=${page}&page_size=${pageSize}`);
 }
+
+export type NotificationSubscriptionResponse = {
+  notify_on_post: boolean;
+  notify_on_story: boolean;
+};
+
+export async function getNotificationSubscription(targetUserId: number): Promise<NotificationSubscriptionResponse> {
+  return apiGet<NotificationSubscriptionResponse>(`/users/${targetUserId}/notification-subscription`);
+}
+
+export async function updateNotificationSubscription(
+  targetUserId: number,
+  notifyOnPost: boolean,
+  notifyOnStory: boolean
+): Promise<NotificationSubscriptionResponse> {
+  return apiPost<NotificationSubscriptionResponse>(`/users/${targetUserId}/notification-subscription`, {
+    notify_on_post: notifyOnPost,
+    notify_on_story: notifyOnStory,
+  });
+}

@@ -40,6 +40,8 @@ import { openConversation } from '@/src/services/messageService';
 import { useAppStore } from '@/src/store/useAppStore';
 import { useTranslation } from 'react-i18next';
 import debounce from 'lodash/debounce';
+import { ProfileOptionsSheet } from "./components/ProfileOptionsSheet";
+import { NotificationSettingsSheet } from "./components/NotificationSettingsSheet";
 
 const GRID_GAP = 14;
 const GRID_COLS = 2;
@@ -59,6 +61,8 @@ export default function UserProfileScreen() {
   >([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
+  const [optionsSheetVisible, setOptionsSheetVisible] = useState(false);
+  const [notificationSheetVisible, setNotificationSheetVisible] = useState(false);
   const [followLoading, setFollowLoading] = useState(false);
   const [messageLoading, setMessageLoading] = useState(false);
   const [activeTab, setActiveTab] = useState<"posts" | "tagged">("posts");
@@ -232,6 +236,11 @@ export default function UserProfileScreen() {
     <View style={[styles.container, { backgroundColor: colors.background.primary }]}>
       {/* ── Modern Header ── */}
       <View style={styles.header}>
+        {/* Ortadaki Username (Absolute) */}
+        <View pointerEvents="none" style={[StyleSheet.absoluteFill, { alignItems: 'center', justifyContent: 'flex-end', paddingBottom: 26, zIndex: 0 }]}>
+          <Text style={{ color: colors.text.primary, fontSize: 16, fontWeight: "600" }}>{username}</Text>
+        </View>
+
         <TouchableOpacity
           onPress={() => {
             lightImpact();
@@ -245,42 +254,26 @@ export default function UserProfileScreen() {
         </TouchableOpacity>
 
         <View style={styles.headerRight}>
-          <TouchableOpacity style={[styles.headerBtn, { backgroundColor: colors.surface.elevated }]} activeOpacity={0.7}>
-            <IconSymbol name="bell.fill" size={18} color={colors.text.primary} />
-          </TouchableOpacity>
+          {/* Bell Icon (Only show if not own profile and they are a friend/following? For now show if not own profile) */}
+          {!isOwnProfile && (
+            <TouchableOpacity 
+              style={[styles.headerBtn, { backgroundColor: colors.surface.elevated }]} 
+              activeOpacity={0.7}
+              onPress={() => {
+                lightImpact();
+                setNotificationSheetVisible(true);
+              }}
+            >
+              <IconSymbol name="bell.fill" size={18} color={colors.text.primary} />
+            </TouchableOpacity>
+          )}
           <TouchableOpacity
             style={[styles.headerBtn, { backgroundColor: colors.surface.elevated }]}
             activeOpacity={0.7}
             onPress={() => {
               lightImpact();
               if (isOwnProfile) return;
-              Alert.alert(displayName, t("user_profile.report_reason"), [
-                { text: t("common.cancel"), style: "cancel" },
-                {
-                  text: t("user_profile.block"),
-                  style: "destructive",
-                  onPress: async () => {
-                    try {
-                      await toggleBlockUser(userId);
-                      useAppStore.getState().addBlockedUserId(userId);
-                      success();
-                      Alert.alert(t("user_profile.blocked") + " ✅", t("user_profile.blocked_with_name", { name: displayName }));
-                      router.back();
-                    } catch { Alert.alert(t("common.error"), t("user_profile.action_failed")); }
-                  },
-                },
-                {
-                  text: t("user_profile.report_title"),
-                  onPress: () => {
-                    Alert.alert(t("user_profile.report_title"), t("user_profile.report_reason"), [
-                      { text: t("common.cancel"), style: "cancel" },
-                      { text: t("user_profile.report_spam"), onPress: () => reportUser("spam") },
-                      { text: t("user_profile.report_inappropriate"), onPress: () => reportUser("inappropriate") },
-                      { text: t("user_profile.report_other"), onPress: () => reportUser("harassment") },
-                    ]);
-                  },
-                },
-              ]);
+              setOptionsSheetVisible(true);
             }}
           >
             <IconSymbol name="ellipsis" size={20} color={colors.text.primary} />
@@ -311,9 +304,6 @@ export default function UserProfileScreen() {
 
           <View style={styles.heroInfo}>
             <Text style={[styles.heroName, { color: colors.text.primary }]} numberOfLines={1}>{displayName}</Text>
-            <View style={[styles.usernamePill, { backgroundColor: colors.surface.elevated }]}>
-              <Text style={[styles.heroUsername, { color: colors.text.secondary }]}>@{username}</Text>
-            </View>
 
             {profile?.bio ? (
               <Text style={[styles.bioText, { color: colors.text.secondary }]}>{profile.bio}</Text>
@@ -503,6 +493,42 @@ export default function UserProfileScreen() {
         )}
 
       </ScrollView>
+
+      {/* Profile Options Sheet */}
+      <ProfileOptionsSheet
+        visible={optionsSheetVisible}
+        displayName={displayName}
+        onClose={() => setOptionsSheetVisible(false)}
+        onBlock={async () => {
+          try {
+            await toggleBlockUser(userId);
+            useAppStore.getState().addBlockedUserId(userId);
+            success();
+            Alert.alert(t("user_profile.blocked") + " ✅", t("user_profile.blocked_with_name", { name: displayName }));
+            router.back();
+          } catch { 
+            Alert.alert(t("common.error"), t("user_profile.action_failed")); 
+          }
+        }}
+        onReport={() => {
+          Alert.alert(t("user_profile.report_title"), t("user_profile.report_reason"), [
+            { text: t("common.cancel"), style: "cancel" },
+            { text: t("user_profile.report_spam"), onPress: () => reportUser("spam") },
+            { text: t("user_profile.report_inappropriate"), onPress: () => reportUser("inappropriate") },
+            { text: t("user_profile.report_other"), onPress: () => reportUser("harassment") },
+          ]);
+        }}
+      />
+
+      {/* Notification Settings Sheet */}
+      {!isOwnProfile && (
+        <NotificationSettingsSheet
+          visible={notificationSheetVisible}
+          onClose={() => setNotificationSheetVisible(false)}
+          targetUserId={userId}
+          targetUsername={username}
+        />
+      )}
     </View>
   );
 }
