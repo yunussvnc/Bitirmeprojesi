@@ -217,7 +217,11 @@ export default function RootLayout() {
                     <Stack.Screen name="verify-email" options={{ gestureEnabled: false }} />
                     <Stack.Screen name="(tabs)" options={{ gestureEnabled: false }} />
                     <Stack.Screen name="(venue-tabs)" options={{ gestureEnabled: false }} />
-                    <Stack.Screen name="saved" options={{ gestureEnabled: true, animation: "slide_from_right" }} />
+                    
+                    {/* Swipe-to-dismiss screens (full screen gesture) */}
+                    <Stack.Screen name="notifications" options={{ gestureEnabled: true, fullScreenGestureEnabled: true, animation: "slide_from_right" }} />
+                    <Stack.Screen name="p/post/[postId]" options={{ gestureEnabled: true, fullScreenGestureEnabled: true, animation: "slide_from_right" }} />
+                    <Stack.Screen name="saved" options={{ gestureEnabled: true, fullScreenGestureEnabled: true, animation: "slide_from_right" }} />
                   </Stack>
                   <Toast />
                 </BottomSheetModalProvider>

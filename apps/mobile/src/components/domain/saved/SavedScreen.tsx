@@ -217,6 +217,7 @@ export default function SavedScreen() {
         overshootRight={false}
         friction={2}
         rightThreshold={40}
+        failOffsetX={[-1000, 10]}
       >
         <AnimatedPlaceCard
           index={index}

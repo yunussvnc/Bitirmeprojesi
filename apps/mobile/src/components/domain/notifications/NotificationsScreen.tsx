@@ -363,8 +363,6 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingTop: 16,
     paddingBottom: 10,
     gap: 12,
   },
@@ -376,13 +374,12 @@ const styles = StyleSheet.create({
     marginLeft: -8, // biraz sola yasla
   },
   title: {
-    fontSize: 28,
-    fontWeight: '800',
+    fontSize: 26,
+    fontWeight: '700',
     letterSpacing: -0.5,
   },
   tabBar: {
     flexDirection: 'row',
-    paddingHorizontal: 20,
     gap: 10,
     marginBottom: 8,
   },
@@ -417,7 +414,6 @@ const styles = StyleSheet.create({
   notifRow: {
     flexDirection: 'row',
     alignItems: 'flex-start',
-    paddingHorizontal: 20,
     paddingVertical: 14,
     gap: 12,
   },

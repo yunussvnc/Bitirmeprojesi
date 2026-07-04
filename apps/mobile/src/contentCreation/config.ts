@@ -15,7 +15,7 @@ export const MAX_MEDIA_COUNT = {
 /** Maximum video duration in seconds */
 export const MAX_VIDEO_DURATION_SEC = {
   story: 15,
-  post: 60,
+  post: 120,
   reels: 90,
 } as const;
 

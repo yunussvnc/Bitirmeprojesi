@@ -214,7 +214,7 @@ export function CustomGalleryGrid({
             type: first.mediaType === 'video' ? 'video' : 'image',
             width: first.width,
             height: first.height,
-            duration: first.duration ? first.duration * 1000 : undefined,
+            duration: first.duration ?? undefined,
           };
           onPreviewChange(firstItem);
           // Also auto-select the first one for preview
@@ -284,7 +284,7 @@ export function CustomGalleryGrid({
         type: asset.mediaType === 'video' ? 'video' : 'image',
         width: asset.width,
         height: asset.height,
-        duration: asset.duration ? asset.duration * 1000 : undefined,
+        duration: asset.duration ?? undefined,
       };
 
       if (isSingle) {
