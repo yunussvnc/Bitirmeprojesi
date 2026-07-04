@@ -2,17 +2,21 @@
  * PlacePickerSheet – Mekan seçici bottom sheet
  */
 
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import {
   View,
   Text,
   StyleSheet,
-  Modal,
-  Pressable,
-  FlatList,
   TouchableOpacity,
   ActivityIndicator,
   Platform,
+  Keyboard,
+  Modal,
+  Pressable,
+  Animated,
+  PanResponder,
+  TextInput,
+  FlatList,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTheme } from "@/src/hooks/useTheme";
@@ -20,6 +24,8 @@ import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { lightImpact } from "@/src/utils/haptics";
 import { createTextStyle } from "@/src/constants/design";
 import { getPlaces, type Place } from "@/src/services/mekanService";
+import { searchPlaces, getNearbyPlaces } from "@/src/services/searchService";
+import { getCurrentLocation } from "@/src/utils/location";
 import { useTranslation } from "react-i18next";
 
 export interface PlacePickerSheetProps {
@@ -28,55 +34,253 @@ export interface PlacePickerSheetProps {
   onSelect: (place: Place) => void;
 }
 
+const PAGE_SIZE = 12;
+const MAX_HEIGHT = 570;
+const MIN_HEIGHT = 420;
+const HIDDEN_Y = MAX_HEIGHT;
+const MIN_Y = MAX_HEIGHT - MIN_HEIGHT; // 150
+const MAX_Y = 0; // 0 means fully expanded to 570
+
 export function PlacePickerSheet({ visible, onClose, onSelect }: PlacePickerSheetProps) {
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
-  const [places, setPlaces] = useState<Place[]>([]);
-  const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
 
+  const [places, setPlaces] = useState<Place[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [loadingMore, setLoadingMore] = useState(false);
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  
+  const [query, setQuery] = useState("");
+  const [debouncedQuery, setDebouncedQuery] = useState("");
+  
+  const [userLocation, setUserLocation] = useState<{ lat: number; lng: number } | null>(null);
+  const [locationLoaded, setLocationLoaded] = useState(false);
+  
+  const [modalVisible, setModalVisible] = useState(false);
+  const translateY = useRef(new Animated.Value(HIDDEN_Y)).current;
+
+  // Debounce search input
   useEffect(() => {
+    const timer = setTimeout(() => {
+      setDebouncedQuery(query.trim());
+    }, 500);
+    return () => clearTimeout(timer);
+  }, [query]);
+
+  // Load user location once when sheet becomes visible
+  useEffect(() => {
+    if (visible && !locationLoaded) {
+      getCurrentLocation()
+        .then((loc) => {
+          if (loc) setUserLocation({ lat: loc.latitude, lng: loc.longitude });
+        })
+        .catch(() => {})
+        .finally(() => {
+          setLocationLoaded(true);
+        });
+    }
+  }, [visible, locationLoaded]);
+
+  // Animation and Visibility Control
+  useEffect(() => {
+    if (visible) {
+      setModalVisible(true);
+      translateY.setValue(HIDDEN_Y);
+      Animated.spring(translateY, {
+        toValue: MIN_Y, // Snap to 420px height
+        useNativeDriver: true,
+        damping: 20,
+        stiffness: 200,
+      }).start();
+    } else {
+      Animated.timing(translateY, {
+        toValue: HIDDEN_Y,
+        duration: 250,
+        useNativeDriver: true,
+      }).start(() => {
+        setModalVisible(false);
+        Keyboard.dismiss();
+      });
+    }
+  }, [visible, translateY]);
+
+  const handleClose = useCallback(() => {
+    setQuery("");
+    setDebouncedQuery("");
+    Keyboard.dismiss();
+    Animated.timing(translateY, {
+      toValue: HIDDEN_Y,
+      duration: 250,
+      useNativeDriver: true,
+    }).start(() => {
+      setModalVisible(false);
+      onClose();
+    });
+  }, [translateY, onClose]);
+
+  // Pan Responder for Dragging
+  const panResponder = useRef(
+    PanResponder.create({
+      onStartShouldSetPanResponder: () => true,
+      onMoveShouldSetPanResponder: (_, g) => Math.abs(g.dy) > 10,
+      onPanResponderGrant: () => {
+        translateY.extractOffset();
+      },
+      onPanResponderMove: (_, g) => {
+        // Prevent dragging above MAX_HEIGHT (which is translateY = 0)
+        const offset = (translateY as any)._offset;
+        const currentY = offset + g.dy;
+        if (currentY < 0) {
+          translateY.setValue(-offset); // Clamp to 0
+        } else {
+          translateY.setValue(g.dy);
+        }
+      },
+      onPanResponderRelease: (_, g) => {
+        translateY.flattenOffset();
+        const currentY = (translateY as any)._value;
+        const velocityY = g.vy;
+
+        let targetY = MIN_Y; // Default to 420px
+
+        if (velocityY > 1.5 || currentY > MIN_Y + 100) {
+          // Dragged down hard or past threshold -> close
+          targetY = HIDDEN_Y;
+        } else if (velocityY < -0.5 || currentY < MIN_Y - 50) {
+          // Dragged up -> snap to max height (570px)
+          targetY = MAX_Y;
+        } else {
+          // Snap to min height (420px)
+          targetY = MIN_Y;
+        }
+
+        if (targetY === HIDDEN_Y) {
+          handleClose();
+        } else {
+          Animated.spring(translateY, {
+            toValue: targetY,
+            useNativeDriver: true,
+            damping: 20,
+            stiffness: 200,
+          }).start();
+        }
+      },
+    })
+  ).current;
+
+  // Fetch places
+  const fetchPlaces = useCallback(async (pageNum: number, isRefresh: boolean) => {
     if (!visible) return;
-    let cancelled = false;
-    setLoading(true);
-    getPlaces(1, 50)
-      .then((res) => { if (!cancelled) setPlaces(res.items); })
-      .catch(() => { if (!cancelled) setPlaces([]); })
-      .finally(() => { if (!cancelled) setLoading(false); });
-    return () => { cancelled = true; };
-  }, [visible]);
+    if (!debouncedQuery && !locationLoaded) return;
+
+    if (isRefresh) setLoading(true);
+    else setLoadingMore(true);
+
+    try {
+      let result;
+      if (debouncedQuery) {
+        result = await searchPlaces(debouncedQuery, undefined, undefined, pageNum, PAGE_SIZE);
+      } else if (userLocation) {
+        result = await getNearbyPlaces(userLocation.lat, userLocation.lng, 50, pageNum, PAGE_SIZE);
+      } else {
+        result = await getPlaces(pageNum, PAGE_SIZE);
+      }
+
+      setPlaces((prev) => (isRefresh ? result.items : [...prev, ...result.items]));
+      setHasMore(result.items.length === PAGE_SIZE);
+      setPage(pageNum);
+    } catch (error) {
+      console.error("[PlacePickerSheet] Fetch Error:", error);
+    } finally {
+      setLoading(false);
+      setLoadingMore(false);
+    }
+  }, [visible, debouncedQuery, userLocation, locationLoaded]);
+
+  useEffect(() => {
+    if (visible && locationLoaded) {
+      setPlaces([]);
+      fetchPlaces(1, true);
+    }
+  }, [visible, debouncedQuery, locationLoaded]);
 
   const handleSelect = useCallback(
     (place: Place) => {
       lightImpact();
       onSelect(place);
-      onClose();
+      handleClose();
     },
-    [onSelect, onClose]
+    [onSelect, handleClose]
   );
 
+  const handleEndReached = () => {
+    if (!loading && !loadingMore && hasMore && places.length > 0) {
+      fetchPlaces(page + 1, false);
+    }
+  };
+
+  const clampedTranslateY = translateY.interpolate({
+    inputRange: [0, 1000],
+    outputRange: [0, 1000],
+    extrapolateLeft: "clamp",
+  });
+
   return (
-    <Modal visible={visible} transparent animationType="slide">
-      <Pressable style={styles.overlay} onPress={onClose}>
-        <Pressable
+    <Modal visible={modalVisible} transparent animationType="none" onRequestClose={handleClose}>
+      <Pressable style={styles.overlay} onPress={handleClose}>
+        <Animated.View
           style={[
             styles.sheet,
             {
               backgroundColor: colors.background.primary,
-              paddingBottom: insets.bottom + 16,
+              paddingBottom: Math.max(insets.bottom, 24),
+              transform: [{ translateY: clampedTranslateY }],
             },
           ]}
-          onPress={(e) => e.stopPropagation()}
         >
-          <View style={[styles.handle, { backgroundColor: colors.text.tertiary }]} />
-          <View style={styles.header}>
-            <Text style={[createTextStyle("title", colors.text.primary), styles.title]}>
-              {t("content_creation.add_location")}
-            </Text>
-            <TouchableOpacity onPress={onClose} hitSlop={12}>
-              <Text style={[styles.cancelText, { color: colors.accent.primary }]}>{t("content_creation.cancel")}</Text>
-            </TouchableOpacity>
+          <Pressable style={StyleSheet.absoluteFill} onPress={(e: any) => e.stopPropagation()} />
+          {/* Drag Handle Area */}
+          <View {...panResponder.panHandlers} style={styles.dragArea}>
+            <View style={[styles.handle, { backgroundColor: colors.text.tertiary }]} />
+            <View style={styles.header}>
+              <Text style={[createTextStyle("title", colors.text.primary), styles.title]}>
+                {t("content_creation.add_location")}
+              </Text>
+              <TouchableOpacity onPress={handleClose} hitSlop={12}>
+                <Text style={[styles.cancelText, { color: colors.accent.primary }]}>{t("content_creation.cancel")}</Text>
+              </TouchableOpacity>
+            </View>
           </View>
+
+          {/* Search Bar */}
+          <View style={styles.searchContainer}>
+            <View style={[styles.searchInputWrapper, { backgroundColor: colors.surface.elevated }]}>
+              <IconSymbol name="magnifyingglass" size={18} color={colors.text.tertiary} style={styles.searchIcon} />
+              <TextInput
+                style={[styles.searchInput, { color: colors.text.primary }]}
+                placeholder="Mekan ara..."
+                placeholderTextColor={colors.text.tertiary}
+                value={query}
+                onChangeText={setQuery}
+                autoCorrect={false}
+                returnKeyType="search"
+                clearButtonMode="while-editing"
+                onFocus={() => {
+                  // Expand to max height when keyboard opens
+                  Animated.spring(translateY, {
+                    toValue: MAX_Y,
+                    useNativeDriver: true,
+                    damping: 20,
+                    stiffness: 200,
+                  }).start();
+                }}
+              />
+            </View>
+          </View>
+
+          {/* List */}
           {loading ? (
             <View style={styles.loadingWrap}>
               <ActivityIndicator size="small" color={colors.accent.primary} />
@@ -84,10 +288,11 @@ export function PlacePickerSheet({ visible, onClose, onSelect }: PlacePickerShee
           ) : (
             <FlatList
               data={places}
-              keyExtractor={(p) => String(p.id)}
+              keyExtractor={(p, i) => `${p.id}-${i}`}
               initialNumToRender={12}
               windowSize={5}
-              removeClippedSubviews={Platform.OS === "android"}
+              keyboardShouldPersistTaps="handled"
+              keyboardDismissMode="on-drag"
               renderItem={({ item }) => (
                 <TouchableOpacity
                   style={[styles.row, { borderBottomColor: colors.surface.border }]}
@@ -108,11 +313,25 @@ export function PlacePickerSheet({ visible, onClose, onSelect }: PlacePickerShee
                   <IconSymbol name="chevron.right" size={18} color={colors.text.tertiary} />
                 </TouchableOpacity>
               )}
-              style={styles.list}
-              contentContainerStyle={styles.listContent}
+              onEndReached={handleEndReached}
+              onEndReachedThreshold={0.5}
+              ListEmptyComponent={
+                !loading && query ? (
+                   <View style={styles.emptyWrap}>
+                     <Text style={{ color: colors.text.secondary }}>Sonuç bulunamadı.</Text>
+                   </View>
+                ) : null
+              }
+              ListFooterComponent={
+                loadingMore ? (
+                  <View style={{ paddingVertical: 16 }}>
+                    <ActivityIndicator size="small" color={colors.accent.primary} />
+                  </View>
+                ) : null
+              }
             />
           )}
-        </Pressable>
+        </Animated.View>
       </Pressable>
     </Modal>
   );
@@ -121,20 +340,24 @@ export function PlacePickerSheet({ visible, onClose, onSelect }: PlacePickerShee
 const styles = StyleSheet.create({
   overlay: {
     flex: 1,
-    backgroundColor: "rgba(0,0,0,0.5)",
-    justifyContent: "flex-end",
+    backgroundColor: "transparent",
+    justifyContent: "flex-end", // Align to bottom
   },
   sheet: {
+    height: MAX_HEIGHT,
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
-    maxHeight: "70%",
+    overflow: "hidden",
+  },
+  dragArea: {
+    width: "100%",
+    paddingTop: 12,
   },
   handle: {
     width: 36,
     height: 4,
     borderRadius: 2,
     alignSelf: "center",
-    marginTop: 12,
     marginBottom: 16,
   },
   header: {
@@ -142,22 +365,50 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-between",
     paddingHorizontal: 20,
-    marginBottom: 8,
+    marginBottom: 12,
+    marginTop: 8,
   },
   title: { fontSize: 18, fontWeight: "700" },
   cancelText: { fontSize: 16, fontWeight: "500" },
-  loadingWrap: { padding: 40, alignItems: "center" },
-  list: { maxHeight: 400 },
-  listContent: { paddingBottom: 20 },
+  searchContainer: {
+    paddingHorizontal: 20,
+    marginBottom: 12,
+  },
+  searchInputWrapper: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderRadius: 12,
+    paddingHorizontal: 12,
+    height: 40,
+  },
+  searchIcon: {
+    marginRight: 8,
+  },
+  searchInput: {
+    flex: 1,
+    height: 40,
+    fontSize: 16,
+  },
+  loadingWrap: { flex: 1, alignItems: "center", justifyContent: "center" },
+  emptyWrap: { padding: 40, alignItems: "center" },
   row: {
     flexDirection: "row",
     alignItems: "center",
     paddingVertical: 14,
     paddingHorizontal: 20,
     borderBottomWidth: StyleSheet.hairlineWidth,
-    gap: 12,
   },
-  rowText: { flex: 1, minWidth: 0 },
-  placeName: { fontSize: 16, fontWeight: "600" },
-  placeCategory: { fontSize: 13, marginTop: 2 },
+  rowText: {
+    flex: 1,
+    marginLeft: 12,
+    marginRight: 12,
+  },
+  placeName: {
+    fontSize: 16,
+    fontWeight: "600",
+    marginBottom: 2,
+  },
+  placeCategory: {
+    fontSize: 13,
+  },
 });
