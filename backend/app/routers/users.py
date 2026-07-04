@@ -54,7 +54,9 @@ def search_users(
         models.User.is_active == True,
         models.User.role != "venue",  # Venue hesaplarını hariç tut
         ~models.User.email.startswith("serpapi_"),  # Google'dan gelen sahte kullanıcıları (bot) gizle
-        ~models.User.email.startswith("google_review_")  # Diğer Google review dummy kullanıcılarını gizle
+        ~models.User.email.startswith("google_review_"),  # Diğer Google review dummy kullanıcılarını gizle
+        ~models.User.email.endswith("@reviews.placeholder"),
+        ~models.User.email.endswith("@placeholder.com")
     )
 
     # Kendi kendini aramayı hariç tut
