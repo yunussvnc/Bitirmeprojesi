@@ -29,7 +29,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { useRouter, useLocalSearchParams } from "expo-router";
+import { useRouter, useLocalSearchParams, Stack } from "expo-router";
 import { Image } from "expo-image";
 import { useTheme } from "@/src/hooks/useTheme";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
@@ -1154,6 +1154,13 @@ export default function ChatScreen() {
             behavior={Platform.OS === "ios" ? "padding" : undefined}
             keyboardVerticalOffset={0}
         >
+            <Stack.Screen 
+                options={{ 
+                    gestureEnabled: true, 
+                    fullScreenGestureEnabled: true,
+                    animation: "slide_from_right" 
+                }} 
+            />
             {/* ── Header ── */}
             <View
                 style={[

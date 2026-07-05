@@ -3,15 +3,15 @@ import {
   View,
   Text,
   StyleSheet,
-  FlatList,
   TouchableOpacity,
   RefreshControl,
   Platform,
-  Animated,
   Dimensions,
+  FlatList,
+  PanResponder,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { useRouter, useLocalSearchParams, useFocusEffect } from "expo-router";
+import { useRouter, useLocalSearchParams, useFocusEffect, Stack } from "expo-router";
 import { Screen } from "@/src/components/layout/Screen";
 import { Avatar, LoadingState, EmptyState } from "@/src/components/ui";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
@@ -385,9 +385,48 @@ export default function NetworkScreen() {
   const initialIndex = TABS.findIndex(t => t.key === initialTab);
   const [activeIndex, setActiveIndex] = useState(initialIndex >= 0 ? initialIndex : 1);
   const pagerRef = useRef<FlatList>(null);
+  
+  // Track if scroll was initiated by clicking a tab
+  const isProgrammaticScroll = useRef(false);
+
+  // Keep a ref of activeIndex to avoid stale closures in onScroll
+  const activeIndexRef = useRef(activeIndex);
+  useEffect(() => {
+    activeIndexRef.current = activeIndex;
+  }, [activeIndex]);
+
+  // Track if we are already going back to avoid multiple triggers
+  const isGoingBack = useRef(false);
+
+  const routerRef = useRef(router);
+  useEffect(() => {
+    routerRef.current = router;
+  }, [router]);
+
+  // Steal the right-swipe gesture during the capture phase so FlatList doesn't move at all!
+  const panResponder = useRef(
+    PanResponder.create({
+      onMoveShouldSetPanResponderCapture: (_, gestureState) => {
+        // Sadece Takip tabındayken, belirgin bir şekilde SAĞA kaydırma yapılıyorsa ele geçir
+        if (activeIndexRef.current === 0 && gestureState.dx > 15 && Math.abs(gestureState.dy) < 30) {
+          return true;
+        }
+        return false;
+      },
+      onPanResponderGrant: () => {
+        // Ele geçirdiğimiz an beklemeden geri çıkışı tetikliyoruz!
+        if (!isGoingBack.current) {
+          isGoingBack.current = true;
+          routerRef.current.back();
+        }
+      },
+    })
+  ).current;
 
   const switchTab = (index: number) => {
+    if (index === activeIndex) return;
     lightImpact();
+    isProgrammaticScroll.current = true;
     setActiveIndex(index);
     pagerRef.current?.scrollToIndex({ index, animated: true });
   };
@@ -397,6 +436,12 @@ export default function NetworkScreen() {
       scrollable={false} 
       contentContainerStyle={{ paddingHorizontal: 0, paddingTop: 0, paddingBottom: 0 }}
     >
+      <Stack.Screen 
+        options={{
+          fullScreenGestureEnabled: activeIndex === 0,
+          animation: 'slide_from_right' // Sohbet ekranıyla aynı animasyonu kullanıyoruz
+        }} 
+      />
       {/* Header */}
       <View style={[styles.header, { paddingTop: Platform.OS === "ios" ? insets.top + 8 : 16 }]}>
         <TouchableOpacity
@@ -444,55 +489,51 @@ export default function NetworkScreen() {
         })}
       </View>
 
-      {/* Edge Swipe Hitbox for Back Navigation */}
-      {activeIndex === 0 && (
-        <View
-          style={{
-            position: 'absolute',
-            left: 0,
-            top: 0,
-            bottom: 0,
-            width: 30,
-            zIndex: 999,
-          }}
-          pointerEvents="auto"
-        />
-      )}
-
       {/* Pager */}
-      <FlatList
-        ref={pagerRef}
-        data={TABS}
-        keyExtractor={(item) => item.key}
-        horizontal
-        pagingEnabled
-        bounces={false}
-        showsHorizontalScrollIndicator={false}
-        initialScrollIndex={initialIndex >= 0 ? initialIndex : 1}
-        getItemLayout={(_, index) => ({
-          length: Dimensions.get('window').width,
-          offset: Dimensions.get('window').width * index,
-          index,
-        })}
-        onMomentumScrollEnd={(e) => {
-          const index = Math.round(e.nativeEvent.contentOffset.x / Dimensions.get("window").width);
-          if (index !== activeIndex && index >= 0 && index < TABS.length) {
-            setActiveIndex(index);
-          }
-        }}
-        onScroll={(e) => {
-          const index = Math.round(e.nativeEvent.contentOffset.x / Dimensions.get("window").width);
-          if (index !== activeIndex && index >= 0 && index < TABS.length) {
-            setActiveIndex(index);
-          }
-        }}
-        scrollEventThrottle={16}
-        renderItem={({ item }) => (
-          <View style={{ width: Dimensions.get("window").width }}>
-            <NetworkTabContent tabKey={item.key} userId={Number(params.id)} />
-          </View>
-        )}
-      />
+      <View style={{ flex: 1 }} {...panResponder.panHandlers}>
+        <FlatList
+          ref={pagerRef}
+          data={TABS}
+          keyExtractor={(item) => item.key}
+          horizontal
+          pagingEnabled
+          bounces={false} // Kapattık ki sekme sallanmasın
+          showsHorizontalScrollIndicator={false}
+          initialScrollIndex={initialIndex >= 0 ? initialIndex : 1}
+          getItemLayout={(_, index) => ({
+            length: Dimensions.get('window').width,
+            offset: Dimensions.get('window').width * index,
+            index,
+          })}
+          onMomentumScrollEnd={(e) => {
+            isProgrammaticScroll.current = false;
+            const index = Math.round(e.nativeEvent.contentOffset.x / Dimensions.get("window").width);
+            if (index !== activeIndexRef.current && index >= 0 && index < TABS.length) {
+              setActiveIndex(index);
+            }
+          }}
+          onScrollAnimationEnd={() => {
+            isProgrammaticScroll.current = false;
+          }}
+          onScroll={(e) => {
+            const offsetX = e.nativeEvent.contentOffset.x;
+            
+            // Sync tab bar dynamically if user is swiping manually
+            if (!isProgrammaticScroll.current && offsetX >= 0) {
+              const newIndex = Math.round(offsetX / Dimensions.get("window").width);
+              if (newIndex !== activeIndexRef.current && newIndex >= 0 && newIndex < TABS.length) {
+                setActiveIndex(newIndex);
+              }
+            }
+          }}
+          scrollEventThrottle={16}
+          renderItem={({ item }) => (
+            <View style={{ width: Dimensions.get("window").width }}>
+              <NetworkTabContent tabKey={item.key} userId={Number(params.id)} />
+            </View>
+          )}
+        />
+      </View>
     </Screen>
   );
 }
