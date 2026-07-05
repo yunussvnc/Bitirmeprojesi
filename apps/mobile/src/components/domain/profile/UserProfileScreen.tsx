@@ -11,10 +11,11 @@ import {
   Modal,
   Pressable,
   ActivityIndicator,
-  Alert,
+  Share,
+  InteractionManager
 } from "react-native";
 import { Image } from "expo-image";
-import { useLocalSearchParams, useRouter, useFocusEffect } from "expo-router";
+import { useLocalSearchParams, useRouter, useFocusEffect, Stack } from "expo-router";
 import { API_BASE_URL } from "@/src/constants/api";
 import { Screen } from "@/src/components/layout";
 import { Avatar, LoadingState, ErrorState } from "@/src/components/ui";
@@ -42,6 +43,7 @@ import { useTranslation } from 'react-i18next';
 import debounce from 'lodash/debounce';
 import { ProfileOptionsSheet } from "./components/ProfileOptionsSheet";
 import { NotificationSettingsSheet } from "./components/NotificationSettingsSheet";
+import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 
 const GRID_GAP = 14;
 const GRID_COLS = 2;
@@ -109,7 +111,10 @@ export default function UserProfileScreen() {
   );
 
   useEffect(() => {
-    load();
+    const task = InteractionManager.runAfterInteractions(() => {
+      load();
+    });
+    return () => task.cancel();
   }, [load]);
 
   useFocusEffect(
@@ -234,6 +239,13 @@ export default function UserProfileScreen() {
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background.primary }]}>
+      <Stack.Screen 
+        options={{ 
+          gestureEnabled: true, 
+          fullScreenGestureEnabled: true,
+          animation: "slide_from_right" 
+        }} 
+      />
       {/* ── Modern Header ── */}
       <View style={styles.header}>
         {/* Ortadaki Username (Absolute) */}

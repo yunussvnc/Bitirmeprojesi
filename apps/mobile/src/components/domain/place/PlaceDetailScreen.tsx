@@ -6,7 +6,7 @@
  */
 
 import { getTranslatedCategory, normalizePlaceCategory } from '@/src/utils/categories';
-import { router, useLocalSearchParams } from "expo-router";
+import { router, useLocalSearchParams, Stack } from "expo-router";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   View,
@@ -15,7 +15,6 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
-  Alert,
   Linking,
   Modal,
   Pressable,
@@ -51,6 +50,7 @@ import { apiGet, apiPost } from "@/src/utils/apiClient";
 import { FlatList } from "react-native";
 import { StoryViewerModal } from "../explore/StoryViewerModal";
 import { ReviewCard, type ReviewItemType } from "./ReviewCard";
+import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 
 type Review = {
   id: number;
@@ -677,6 +677,13 @@ export default function PlaceDetailScreen({
 
   return (
     <Animated.View entering={FadeIn.duration(280)} style={{ flex: 1 }}>
+      <Stack.Screen 
+        options={{ 
+          gestureEnabled: true, 
+          fullScreenGestureEnabled: true,
+          animation: "slide_from_right" 
+        }} 
+      />
       <Screen ref={screenRef} scrollable withTabBar={isVenueDashboard}>
         {/* Header with Back and Save */}
         <View style={[styles.header, isVenueDashboard && { justifyContent: "space-between", paddingHorizontal: spacing.sm }]}>

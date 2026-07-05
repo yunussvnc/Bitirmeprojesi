@@ -19,7 +19,6 @@ import {
   Animated,
   Dimensions,
   Image,
-  Alert,
   Keyboard,
   TouchableWithoutFeedback,
 } from 'react-native';
@@ -42,6 +41,7 @@ import * as Google from 'expo-auth-session/providers/google';
 import { LegalModal } from '@/src/components/ui/LegalModal';
 import { googleAuthRequestConfig } from '@/src/config/socialAuth';
 import { validatePassword } from '@/src/utils/validators';
+import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 
 WebBrowser.maybeCompleteAuthSession();
 

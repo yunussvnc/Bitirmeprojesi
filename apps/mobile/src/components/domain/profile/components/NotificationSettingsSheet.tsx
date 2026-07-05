@@ -90,10 +90,12 @@ export function NotificationSettingsSheet({
   const fetchSettings = async () => {
     try {
       const res = await getNotificationSubscription(targetUserId);
-      setNotifyOnPost(res.notify_on_post);
-      setNotifyOnStory(res.notify_on_story);
-    } catch (err) {
-      console.error('Failed to fetch notification settings', err);
+      setNotifyOnPost(res.notify_posts);
+      setNotifyOnStory(res.notify_stories);
+    } catch (err: any) {
+      if (err?.code !== 'NOT_FOUND') {
+        console.warn('Failed to fetch notification settings', err);
+      }
     } finally {
       setLoading(false);
     }
@@ -182,7 +184,7 @@ export function NotificationSettingsSheet({
           style={[
             styles.sheet,
             {
-              backgroundColor: colors.background,
+              backgroundColor: colors.background.primary,
               paddingBottom: Math.max(insets.bottom, 24),
               transform: [{ translateY }],
             },
@@ -212,7 +214,7 @@ export function NotificationSettingsSheet({
                 <View style={[styles.optionRow, { borderBottomColor: colors.surface.border }]}>
                   <View style={styles.optionLeft}>
                     <View style={[styles.iconContainer, { backgroundColor: colors.surface.elevated }]}>
-                      <IconSymbol name="plus.square" size={24} color={colors.text} />
+                      <IconSymbol name="plus.square" size={24} color={colors.text.primary} />
                     </View>
                     <View style={styles.optionTexts}>
                       <Text style={[styles.optionTitle, { color: colors.text.primary }]}>Gönderiler</Text>
@@ -232,7 +234,7 @@ export function NotificationSettingsSheet({
                 <View style={[styles.optionRow, { borderBottomColor: colors.surface.border, borderBottomWidth: 0 }]}>
                   <View style={styles.optionLeft}>
                     <View style={[styles.iconContainer, { backgroundColor: colors.surface.elevated }]}>
-                      <IconSymbol name="play.circle" size={24} color={colors.text} />
+                      <IconSymbol name="play.circle" size={24} color={colors.text.primary} />
                     </View>
                     <View style={styles.optionTexts}>
                       <Text style={[styles.optionTitle, { color: colors.text.primary }]}>Hikayeler</Text>

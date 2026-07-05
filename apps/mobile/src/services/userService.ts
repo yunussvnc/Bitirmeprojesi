@@ -1,4 +1,4 @@
-import { apiGet, apiPost } from "@/src/utils/apiClient";
+import { apiGet, apiPost, apiPut } from "@/src/utils/apiClient";
 import type { Post } from "./feedService";
 
 export type UserStats = {
@@ -117,12 +117,12 @@ export async function getTaggedPosts(
 }
 
 export type NotificationSubscriptionResponse = {
-  notify_on_post: boolean;
-  notify_on_story: boolean;
+  notify_posts: boolean;
+  notify_stories: boolean;
 };
 
 export async function getNotificationSubscription(targetUserId: number): Promise<NotificationSubscriptionResponse> {
-  return apiGet<NotificationSubscriptionResponse>(`/users/${targetUserId}/notification-subscription`);
+  return apiGet<NotificationSubscriptionResponse>(`/users/${targetUserId}/notification-subscriptions`);
 }
 
 export async function updateNotificationSubscription(
@@ -130,8 +130,8 @@ export async function updateNotificationSubscription(
   notifyOnPost: boolean,
   notifyOnStory: boolean
 ): Promise<NotificationSubscriptionResponse> {
-  return apiPost<NotificationSubscriptionResponse>(`/users/${targetUserId}/notification-subscription`, {
-    notify_on_post: notifyOnPost,
-    notify_on_story: notifyOnStory,
+  return apiPut<NotificationSubscriptionResponse>(`/users/${targetUserId}/notification-subscriptions`, {
+    notify_posts: notifyOnPost,
+    notify_stories: notifyOnStory,
   });
 }

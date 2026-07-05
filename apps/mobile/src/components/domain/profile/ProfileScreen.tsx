@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Alert, Platform, useWindowDimensions, ScrollView, RefreshControl, Share } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, Alert, Platform, useWindowDimensions, ScrollView, RefreshControl, Share, InteractionManager } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useRouter, useNavigation, useFocusEffect } from "expo-router";
 import { API_BASE_URL } from "@/src/constants/api";
@@ -98,7 +98,10 @@ export default function ProfileScreen() {
       setActiveTab("posts");
       // İlk açılış: loading göster. Sonraki focus'lar: arka planda sessizce güncelle.
       const silent = hasLoadedOnce.current;
-      loadProfile(silent);
+      const task = InteractionManager.runAfterInteractions(() => {
+        loadProfile(silent);
+      });
+      return () => task.cancel();
     }, [loadProfile])
   );
 

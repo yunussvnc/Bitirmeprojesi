@@ -19,7 +19,6 @@ import {
   Animated,
   PanResponder,
   Dimensions,
-  Alert,
   Keyboard,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -36,6 +35,7 @@ import { useAuthStore } from "@/src/store/useAuthStore";
 import { useSettingsStore } from "@/src/store/useSettingsStore";
 import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
 import { useTranslation } from "react-i18next";
+import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 // Kısmi açık yükseklik: handle + başlık + input + ~2 yorum satırı

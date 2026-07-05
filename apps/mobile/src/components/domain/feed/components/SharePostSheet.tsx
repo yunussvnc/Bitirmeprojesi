@@ -26,6 +26,7 @@ import { useTheme } from "@/src/hooks/useTheme";
 import { lightImpact, mediumImpact } from "@/src/utils/haptics";
 import { useMessagesStore, type Conversation } from "@/src/store/useMessagesStore";
 import { useChatMessagesStore } from "@/src/store/useChatMessagesStore";
+import { useAppStore } from "@/src/store/useAppStore";
 import { sendMessage } from "@/src/services/messageService";
 import type { Post } from "@/src/services/feedService";
 import { spacing } from "@/src/constants/design";
@@ -54,11 +55,15 @@ export function SharePostSheet({ visible, onClose, post }: SharePostSheetProps) 
     onCloseRef.current = onClose;
 
     const conversations = useMessagesStore((s) => s.conversations);
+    const blockedUserIds = useAppStore((s) => s.blockedUserIds);
     const updateLastMessageAt = useMessagesStore((s) => s.updateLastMessageAt);
     const addMessage = useChatMessagesStore((s) => s.addMessage);
 
     const filteredConversations = useMemo(() => {
-        const active = conversations.filter((c) => !c.isArchived);
+        const active = conversations.filter((c) => 
+            !c.isArchived && 
+            (!c.targetUserId || !blockedUserIds.includes(c.targetUserId))
+        );
         if (!query.trim()) return active;
         const q = query.trim().toLowerCase();
         return active.filter(

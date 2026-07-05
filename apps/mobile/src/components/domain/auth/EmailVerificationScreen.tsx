@@ -13,7 +13,6 @@ import {
     TextInput,
     TouchableOpacity,
     Platform,
-    Alert,
     Keyboard,
     Animated,
     Dimensions,
@@ -27,6 +26,7 @@ import { lightImpact, success as successHaptic } from '@/src/utils/haptics';
 import { resendRegisterCode, verifyRegister } from '@/src/services/authService';
 import { useAuthStore } from '@/src/store/useAuthStore';
 import { useTranslation } from "react-i18next";
+import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 
 const { width } = Dimensions.get('window');
 const CODE_LENGTH = 6;

@@ -4,7 +4,7 @@
  */
 
 import React from "react";
-import { View, Text, StyleSheet, ScrollView, Alert, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 import { useTranslation } from "react-i18next";
@@ -16,6 +16,7 @@ import { SettingsRow } from "@/src/components/ui";
 import { BackButton } from "@/src/components/shared/navigation";
 import { useSettingsStore, type CameraToolbarSide } from "@/src/store/useSettingsStore";
 import { lightImpact, success } from "@/src/utils/haptics";
+import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 
 const getToolbarLabels = (t: any): Record<CameraToolbarSide, string> => ({
   left: t("settings_camera.left", "Sol Taraf"),

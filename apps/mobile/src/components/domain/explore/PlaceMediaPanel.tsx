@@ -15,7 +15,6 @@ import {
   ActivityIndicator,
   Platform,
   Linking,
-  Alert,
   Modal,
   Pressable,
   Animated,
@@ -41,6 +40,7 @@ import { useAuthStore } from '@/src/store/useAuthStore';
 import { FeedCard, CommentBottomSheet, SharePostSheet } from '@/src/components/domain/feed';
 import { getPlaceStatus } from '@/src/utils/placeStatus';
 import { useStoreReview } from '@/src/hooks/useStoreReview';
+import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 const PANEL_HORIZ_MARGIN = 12;

@@ -20,7 +20,7 @@ export function ProfileSkeleton() {
         </View>
 
         <View style={styles.heroInfo}>
-          <Skeleton width={140} height={20} borderRadius={4} />
+          <Skeleton width={140} height={24} borderRadius={4} />
           <Skeleton width={200} height={14} borderRadius={4} style={{ marginTop: 8 }} />
           <Skeleton width={160} height={14} borderRadius={4} style={{ marginTop: 4 }} />
         </View>
@@ -76,20 +76,26 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   heroSection: {
+    flexDirection: "row",
     alignItems: "center",
-    paddingTop: 16,
     paddingHorizontal: 20,
-    marginBottom: 20,
+    paddingTop: 10,
+    paddingBottom: 20,
   },
   avatarRing: {
-    marginBottom: 16,
+    padding: 3,
+    borderRadius: 50,
+    borderWidth: 2,
+    borderColor: 'transparent',
   },
   heroInfo: {
-    alignItems: "center",
+    flex: 1,
+    alignItems: "flex-start",
+    paddingLeft: 18,
   },
   actionRow: {
     flexDirection: "row",
-    paddingHorizontal: 16,
+    paddingHorizontal: 20,
     gap: 8,
     marginBottom: 24,
   },

@@ -15,7 +15,6 @@ import {
   ActivityIndicator,
   Modal,
   ScrollView,
-  Alert,
   InteractionManager,
   Pressable,
 } from 'react-native';
@@ -37,6 +36,7 @@ import { getPlaceStatus, type PlaceStatusType } from '@/src/utils/placeStatus';
 import { useAppStore } from '@/src/store/useAppStore';
 import { Place, logInteraction } from '@/src/services/mekanService';
 import { useTranslation } from 'react-i18next';
+import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 
 const ISTANBUL_CENTER = {
   latitude: 41.0082,

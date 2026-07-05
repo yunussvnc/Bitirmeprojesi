@@ -34,7 +34,6 @@ import {
   TouchableOpacity,
   Dimensions,
   ActivityIndicator,
-  Alert,
 } from 'react-native';
 import { Image } from 'expo-image';
 import * as ImageManipulator from 'expo-image-manipulator';
@@ -54,6 +53,7 @@ import Animated, {
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
 import { lightImpact, mediumImpact } from '@/src/utils/haptics';
+import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 
 const { width: SW, height: SH } = Dimensions.get('window');
 

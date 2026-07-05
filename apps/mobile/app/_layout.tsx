@@ -13,6 +13,7 @@ import { useAuthStore } from "@/src/store/useAuthStore";
 import { setAuthInterceptors } from "@/src/utils/apiClient";
 import { UploadProgressBanner } from "@/src/components/ui/UploadProgressBanner";
 import { OfflineBanner } from "@/src/components/ui/OfflineBanner";
+import { CustomAlertOverlay } from "@/src/components/ui/CustomAlertOverlay";
 import { useNotificationSocket } from "@/src/hooks/useNotificationSocket";
 import { PushNotificationProvider } from "@/src/providers/PushNotificationProvider";
 import { AnalyticsProvider } from "@/src/providers/AnalyticsProvider";
@@ -223,6 +224,7 @@ export default function RootLayout() {
                     <Stack.Screen name="p/post/[postId]" options={{ gestureEnabled: true, fullScreenGestureEnabled: true, animation: "slide_from_right" }} />
                     <Stack.Screen name="saved" options={{ gestureEnabled: true, fullScreenGestureEnabled: true, animation: "slide_from_right" }} />
                   </Stack>
+                  <CustomAlertOverlay />
                   <Toast />
                 </BottomSheetModalProvider>
               </PreferencesProvider>

@@ -20,7 +20,6 @@ import {
   Animated,
   Dimensions,
   Image,
-  Alert,
   Keyboard,
   TouchableWithoutFeedback,
 } from 'react-native';
@@ -34,6 +33,7 @@ import { lightImpact, success } from '@/src/utils/haptics';
 import { loginUser } from '@/src/services/authService';
 import { useAuthStore } from '@/src/store/useAuthStore';
 import { useSocialAuth } from '@/src/hooks/useSocialAuth';
+import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 
 const { width, height } = Dimensions.get('window');
 

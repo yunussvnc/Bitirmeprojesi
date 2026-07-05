@@ -15,7 +15,6 @@ import {
     Platform,
     Modal,
     TouchableWithoutFeedback,
-    Alert,
     Keyboard,
     Dimensions,
 } from "react-native";
@@ -45,6 +44,7 @@ import { useAuthStore } from "@/src/store/useAuthStore";
 import { logger } from "@/src/utils/logger";
 import { useTranslation } from "react-i18next";
 import { API_BASE_URL } from "@/src/constants/api";
+import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 
 /* ── Types ── */
 interface Message {
@@ -428,7 +428,7 @@ export default function ChatScreen() {
                                     avatar: contact.avatar || '',
                                     lastMessage: textToSave,
                                     lastMessageSender: sender as any,
-                                    timestamp: latestMsg.timestamp,
+                                    timestamp: new Date(latestMsg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
                                     unread: !latestMsg.isMine,
                                     isOnline: contact.isOnline || false,
                                     lastMessageAt: realTimestamp ?? Date.now(),
@@ -445,7 +445,7 @@ export default function ChatScreen() {
                                         useMessagesStore.getState().updateLastMessageAt(
                                             chatId,
                                             textToSave,
-                                            latestMsg.timestamp,
+                                            new Date(latestMsg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
                                             sender as any,
                                             undefined,
                                             realTimestamp,
@@ -631,13 +631,13 @@ export default function ChatScreen() {
                     avatar: contact.avatar || "",
                     lastMessage: newMsg.text,
                     lastMessageSender: "me",
-                    timestamp: newMsg.timestamp,
+                    timestamp: new Date(newMsg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
                     unread: false,
                     isOnline: contact.isOnline || false,
                     lastMessageAt: Date.now(),
                 });
             } else {
-                useMessagesStore.getState().updateLastMessageAt(chatId, newMsg.text, newMsg.timestamp, "me");
+                useMessagesStore.getState().updateLastMessageAt(chatId, newMsg.text, new Date(newMsg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }), "me");
                 const c = convs.find(c => c.id === chatId);
                 if (c?.isArchived) useMessagesStore.getState().unarchiveConversation(chatId);
             }
@@ -803,7 +803,7 @@ export default function ChatScreen() {
             // conversations store güncelle
             const textToSave = t('chat.photo', 'Fotoğraf 📷');
             setTimeout(() => {
-                useMessagesStore.getState().updateLastMessageAt(chatId, textToSave, optimisticMsg.timestamp, 'me');
+                useMessagesStore.getState().updateLastMessageAt(chatId, textToSave, new Date(optimisticMsg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }), 'me');
             }, 0);
         } catch (err) {
             logger.error('[sendImageMessage] Upload failed:', err);

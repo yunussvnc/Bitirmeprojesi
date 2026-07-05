@@ -19,7 +19,6 @@ import {
     TouchableOpacity,
     Animated,
     Dimensions,
-    Alert,
     Keyboard,
     TouchableWithoutFeedback,
 } from 'react-native';
@@ -35,6 +34,7 @@ import { forgotPassword, resetPassword, loginUser } from '@/src/services/authSer
 import { useAuthStore } from '@/src/store/useAuthStore';
 import { Ionicons } from '@expo/vector-icons';
 import { useTranslation } from "react-i18next";
+import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 
 const { width, height } = Dimensions.get('window');
 

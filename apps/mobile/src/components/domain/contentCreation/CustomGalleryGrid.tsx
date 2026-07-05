@@ -6,6 +6,7 @@
  */
 
 import React, { useState, useEffect, useCallback, useRef, memo } from 'react';
+import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 import {
   View,
   Text,
@@ -14,7 +15,6 @@ import {
   TouchableOpacity,
   Dimensions,
   ActivityIndicator,
-  Alert,
   Platform,
   ScrollView,
   Image as RNImage,

@@ -13,7 +13,6 @@ import {
   StyleSheet,
   TouchableOpacity,
   Dimensions,
-  Alert,
   ActivityIndicator,
 } from 'react-native';
 import { Camera, useCameraDevice, useCameraPermission, useMicrophonePermission } from 'react-native-vision-camera';
@@ -34,6 +33,7 @@ import { lightImpact, mediumImpact } from '@/src/utils/haptics';
 import type { MediaItem, ContentType } from '@/src/contentCreation/types';
 import { MAX_VIDEO_DURATION_SEC } from '@/src/contentCreation/config';
 import { LinearGradient } from 'expo-linear-gradient';
+import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 

@@ -4,7 +4,7 @@
  */
 
 import React, { useState } from "react";
-import { View, Text, StyleSheet, ScrollView, Alert, TextInput } from "react-native";
+import { View, Text, StyleSheet, ScrollView, TextInput } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 import { useTheme } from "@/src/hooks/useTheme";
@@ -21,6 +21,7 @@ import { useMessagesStore } from "@/src/store/useMessagesStore";
 import { useChatMessagesStore } from "@/src/store/useChatMessagesStore";
 import { useNotificationStore } from "@/src/store/useNotificationStore";
 import { useTranslation } from "react-i18next";
+import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 
 export default function SettingsIndexScreen() {
   const { colors, isDark, setThemeMode, themeMode } = useTheme();

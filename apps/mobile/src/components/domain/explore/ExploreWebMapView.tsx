@@ -12,7 +12,6 @@ import {
   TouchableOpacity,
   Platform,
   ActivityIndicator,
-  Alert,
   Keyboard,
   ScrollView,
   Modal,
@@ -37,6 +36,7 @@ import { getPlaceStatus, type PlaceStatusType } from '@/src/utils/placeStatus';
 import { calculateDistance } from '@/src/utils/location';
 
 import { useTranslation } from 'react-i18next';
+import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 
 /** Category keys matching backend data values + translation keys */
 

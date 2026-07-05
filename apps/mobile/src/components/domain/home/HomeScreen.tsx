@@ -19,7 +19,6 @@ import {
   Easing,
   Keyboard,
   TouchableWithoutFeedback,
-  Alert,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { FlashList, FlashListRef } from "@shopify/flash-list";
@@ -51,6 +50,7 @@ import { lightImpact } from "@/src/utils/haptics";
 import { useAppStore } from "@/src/store/useAppStore";
 import { useTabBarVisibility } from "@/src/components/layout/TabBarVisibilityContext";
 import { useTranslation } from "react-i18next";
+import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 
 /* ── İlçe algılama (prompt'ta il/ilçe var mı?) ── */
 const DISTRICTS = [

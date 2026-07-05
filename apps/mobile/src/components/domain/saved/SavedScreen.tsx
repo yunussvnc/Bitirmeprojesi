@@ -8,7 +8,7 @@
 import { router, useNavigation } from "expo-router";
 import { useMemo, useState, useEffect, useRef, useCallback } from "react";
 import {
-  Alert,
+  
   View,
   Text,
   StyleSheet,
@@ -38,6 +38,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { useTranslation } from "react-i18next";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useAuthStore } from "@/src/store/useAuthStore";
+import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 
 export default function SavedScreen() {
   const { colors } = useTheme();

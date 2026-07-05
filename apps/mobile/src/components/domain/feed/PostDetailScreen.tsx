@@ -10,7 +10,6 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  Alert,
   ActivityIndicator,
 } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
@@ -28,6 +27,7 @@ import { useAppStore } from "@/src/store/useAppStore";
 import { handleApiError } from "@/src/utils/errorHandler";
 import { lightImpact, success } from "@/src/utils/haptics";
 import { useTranslation } from "react-i18next";
+import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 
 export default function PostDetailScreen() {
   const { colors } = useTheme();

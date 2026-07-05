@@ -13,7 +13,6 @@ import {
   TouchableOpacity,
   Animated,
   Easing,
-  Alert,
   Share,
   Platform,
 } from "react-native";
@@ -46,6 +45,7 @@ import { useAppStore } from "@/src/store/useAppStore";
 import { createReport } from "@/src/services/moderationService";
 import { useTranslation } from "react-i18next";
 import { useUploadPipelineStore } from "@/src/store/useUploadPipelineStore";
+import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 
 export default function FeedScreen() {
   const { t } = useTranslation();
