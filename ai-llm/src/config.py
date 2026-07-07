@@ -56,6 +56,7 @@ class Settings(BaseSettings):
     RAG_INDEX_ON_STARTUP: bool = False
     RAG_FORCE_REINDEX: bool = False
     RAG_USE_LLM_GENERATOR: bool = False
+    RAG_USE_LLM_RERANK: bool = False  # Groq API çağrısı gerçek gecikme/maliyet ekler — varsayılan kapalı
 
     # Hybrid Search (BM25 + Dense) ve Query Rewriting Ayarları
     HYBRID_SEARCH_ENABLED: bool = False  # varsayılan kapalı — kademeli rollout.

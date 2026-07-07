@@ -24,13 +24,25 @@ class LLMWrapper(ABC):
     name: str = "base"
 
     @abstractmethod
-    def generate(self, prompt: str, context: Optional[List[str]] = None) -> str:
-        """Öneri metni üret (sync)"""
+    def generate(
+        self,
+        prompt: str,
+        context: Optional[List[str]] = None,
+        system_prompt: Optional[str] = None,
+        temperature: Optional[float] = None,
+    ) -> str:
+        """Öneri metni üret (sync). system_prompt/temperature None ise varsayılan davranış korunur."""
         pass
 
     @abstractmethod
-    async def generate_async(self, prompt: str, context: Optional[List[str]] = None) -> str:
-        """Öneri metni üret (async)"""
+    async def generate_async(
+        self,
+        prompt: str,
+        context: Optional[List[str]] = None,
+        system_prompt: Optional[str] = None,
+        temperature: Optional[float] = None,
+    ) -> str:
+        """Öneri metni üret (async). system_prompt/temperature None ise varsayılan davranış korunur."""
         pass
 
 
@@ -68,8 +80,13 @@ class GroqWrapper(LLMWrapper):
 
     # ---- iç yardımcı ----
 
-    def _build_messages(self, prompt: str, context: Optional[List[str]]) -> list:
-        system = (
+    def _build_messages(
+        self,
+        prompt: str,
+        context: Optional[List[str]],
+        system_prompt: Optional[str] = None,
+    ) -> list:
+        system = system_prompt or (
             "Sen AsEmOs adlı mekan öneri uygulamasının yapay zeka asistanısın. "
             "Türkçe, sıcak, samimi ve kısa cevaplar veriyorsun. "
             "Mekanları tanıtırken en çarpıcı özelliklerini vurguluyorsun. "
@@ -87,10 +104,16 @@ class GroqWrapper(LLMWrapper):
 
     # ---- sync ----
 
-    def generate(self, prompt: str, context: Optional[List[str]] = None) -> str:
+    def generate(
+        self,
+        prompt: str,
+        context: Optional[List[str]] = None,
+        system_prompt: Optional[str] = None,
+        temperature: Optional[float] = None,
+    ) -> str:
         import httpx
 
-        messages = self._build_messages(prompt, context)
+        messages = self._build_messages(prompt, context, system_prompt)
         with httpx.Client(timeout=self.timeout) as client:
             resp = client.post(
                 "https://api.groq.com/openai/v1/chat/completions",
@@ -102,7 +125,7 @@ class GroqWrapper(LLMWrapper):
                     "model": self.model,
                     "messages": messages,
                     "max_tokens": 250,
-                    "temperature": 0.7,
+                    "temperature": temperature if temperature is not None else 0.7,
                 },
             )
         if resp.status_code != 200:
@@ -114,10 +137,16 @@ class GroqWrapper(LLMWrapper):
 
     # ---- async ----
 
-    async def generate_async(self, prompt: str, context: Optional[List[str]] = None) -> str:
+    async def generate_async(
+        self,
+        prompt: str,
+        context: Optional[List[str]] = None,
+        system_prompt: Optional[str] = None,
+        temperature: Optional[float] = None,
+    ) -> str:
         import httpx
 
-        messages = self._build_messages(prompt, context)
+        messages = self._build_messages(prompt, context, system_prompt)
         async with httpx.AsyncClient(timeout=self.timeout) as client:
             resp = await client.post(
                 "https://api.groq.com/openai/v1/chat/completions",
@@ -129,7 +158,7 @@ class GroqWrapper(LLMWrapper):
                     "model": self.model,
                     "messages": messages,
                     "max_tokens": 250,
-                    "temperature": 0.7,
+                    "temperature": temperature if temperature is not None else 0.7,
                 },
             )
         if resp.status_code != 200:
@@ -202,8 +231,13 @@ class HuggingFaceWrapper(LLMWrapper):
                 "'pip install transformers accelerate' çalıştırın."
             )
 
-    def _format_prompt(self, prompt: str, context: Optional[List[str]]) -> str:
-        system = (
+    def _format_prompt(
+        self,
+        prompt: str,
+        context: Optional[List[str]],
+        system_prompt: Optional[str] = None,
+    ) -> str:
+        system = (system_prompt + "\n\n") if system_prompt else (
             "Sen bir mekan öneri asistanısın. Türkçe yanıt veriyorsun. "
             "Kısa, öz ve samimi bir dil kullan.\n\n"
         )
@@ -212,13 +246,19 @@ class HuggingFaceWrapper(LLMWrapper):
             return system + ctx + f"\n\nSoru: {prompt}\nCevap:"
         return system + f"Soru: {prompt}\nCevap:"
 
-    def generate(self, prompt: str, context: Optional[List[str]] = None) -> str:
+    def generate(
+        self,
+        prompt: str,
+        context: Optional[List[str]] = None,
+        system_prompt: Optional[str] = None,
+        temperature: Optional[float] = None,
+    ) -> str:
         self._load()
-        full_prompt = self._format_prompt(prompt, context)
+        full_prompt = self._format_prompt(prompt, context, system_prompt)
         outputs = self._pipeline(
             full_prompt,
             max_new_tokens=256,
-            temperature=0.7,
+            temperature=temperature if temperature is not None else 0.7,
             do_sample=True,
             num_return_sequences=1,
             truncation=True,
@@ -234,9 +274,17 @@ class HuggingFaceWrapper(LLMWrapper):
             answer = answer.split(eos)[0].strip()
         return answer or "Özür dilerim, yanıt oluşturulamadı."
 
-    async def generate_async(self, prompt: str, context: Optional[List[str]] = None) -> str:
+    async def generate_async(
+        self,
+        prompt: str,
+        context: Optional[List[str]] = None,
+        system_prompt: Optional[str] = None,
+        temperature: Optional[float] = None,
+    ) -> str:
         loop = asyncio.get_event_loop()
-        return await loop.run_in_executor(None, self.generate, prompt, context)
+        return await loop.run_in_executor(
+            None, lambda: self.generate(prompt, context, system_prompt, temperature)
+        )
 
 
 # ==================== KATMAN 3: LAYERED (Groq → Local) ====================
@@ -278,31 +326,43 @@ class LayeredLLMWrapper(LLMWrapper):
 
     # ---- sync ----
 
-    def generate(self, prompt: str, context: Optional[List[str]] = None) -> str:
+    def generate(
+        self,
+        prompt: str,
+        context: Optional[List[str]] = None,
+        system_prompt: Optional[str] = None,
+        temperature: Optional[float] = None,
+    ) -> str:
         if self._groq:
             try:
-                result = self._groq.generate(prompt, context)
+                result = self._groq.generate(prompt, context, system_prompt, temperature)
                 logger.info("[LayeredLLM] Yanıt: Groq OK")
                 return result
             except Exception as e:
                 logger.warning(f"[LayeredLLM] Groq başarısız -> Local fallback: {e}")
 
         logger.info("[LayeredLLM] Yanıt: Local HuggingFace")
-        return self._local.generate(prompt, context)
+        return self._local.generate(prompt, context, system_prompt, temperature)
 
     # ---- async ----
 
-    async def generate_async(self, prompt: str, context: Optional[List[str]] = None) -> str:
+    async def generate_async(
+        self,
+        prompt: str,
+        context: Optional[List[str]] = None,
+        system_prompt: Optional[str] = None,
+        temperature: Optional[float] = None,
+    ) -> str:
         if self._groq:
             try:
-                result = await self._groq.generate_async(prompt, context)
+                result = await self._groq.generate_async(prompt, context, system_prompt, temperature)
                 logger.info("[LayeredLLM] Async yanıt: Groq OK")
                 return result
             except Exception as e:
                 logger.warning(f"[LayeredLLM] Groq başarısız -> Local fallback: {e}")
 
         logger.info("[LayeredLLM] Async yanıt: Local HuggingFace")
-        return await self._local.generate_async(prompt, context)
+        return await self._local.generate_async(prompt, context, system_prompt, temperature)
 
     @property
     def active_provider(self) -> str:

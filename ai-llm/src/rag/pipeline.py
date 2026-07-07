@@ -5,15 +5,18 @@ RAG Pipeline - Retriever ve Generator'ı birleştirir
 from typing import Dict, Any, List
 from src.rag.retriever import RAGRetriever
 from src.rag.generator import RAGGenerator
+from src.rag.llm_reranker import LLMReranker
+from src.config import settings
 
 
 class RAGPipeline:
     """RAG sisteminin ana pipeline'ı"""
-    
+
     def __init__(self):
         """Pipeline'ı başlat"""
         self.retriever = RAGRetriever()
         self.generator = RAGGenerator()
+        self.llm_reranker = LLMReranker()
     
     def process(
         self,
@@ -49,7 +52,13 @@ class RAGPipeline:
                 "sorgu_analizi": "Aradığınız kriterlere uygun mekan bulunamadı.",
                 "oneriler": []
             }
-        
+
+        # 1.5 LLM Reranker: final aday listesini kullanıcı sorgusuna göre yeniden sırala (opsiyonel)
+        if settings.RAG_USE_LLM_RERANK:
+            retrieved_mekanlar = self.llm_reranker.rerank(
+                retrieved_mekanlar, user_query, llm=self.generator.llm
+            )
+
         # 2. Generator: LLM ile öneri metni üret
         recommendation = self.generator.generate_recommendation(
             user_query=user_query,
