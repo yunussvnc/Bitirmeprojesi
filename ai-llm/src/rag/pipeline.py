@@ -40,7 +40,8 @@ class RAGPipeline:
         retrieved_mekanlar = self.retriever.retrieve(
             query=user_query,
             location=location,
-            parsed_query=parsed_query
+            parsed_query=parsed_query,
+            user_id=kullanici_id
         )
         
         if not retrieved_mekanlar:

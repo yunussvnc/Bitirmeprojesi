@@ -66,6 +66,11 @@ class Settings(BaseSettings):
     QUERY_REWRITE_ENABLED: bool = True   # ek gecikme yok, güvenle varsayılan açık
     RRF_K: int = 60
 
+    # Kişiselleştirme (place_interactions tabanlı skor boost'u).
+    # Ayrı bir enable flag yok — SmartSearchRequest.user_id doluysa otomatik devreye girer.
+    PERSONALIZATION_BOOST_WEIGHT: float = 0.3
+    PERSONALIZATION_MAX_SCORE: float = 20.0
+
     # Postgres place sync (loaded_places.json -> places tablosu)
     PLACES_SYNC_ON_STARTUP: bool = False
     PLACES_SYNC_MIN_RATIO: float = 0.95

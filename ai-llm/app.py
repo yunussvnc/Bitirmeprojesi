@@ -1684,6 +1684,7 @@ async def _fetch_rag_results(
             location=location,
             language=response_language,
             parsed_query=parsed_query,
+            kullanici_id=request.user_id,
         )
     except Exception as e:
         print(f"[RAG] Arama hatası (atlanıyor): {e}")
@@ -2541,7 +2542,8 @@ async def rag_search(request: SmartSearchRequest):
                 "lat": request.user_lat,
                 "lng": request.user_lng
             } if request.user_lat and request.user_lng else None,
-            language=response_language
+            language=response_language,
+            kullanici_id=request.user_id,
         )
 
         if not result or not result.get("oneriler"):

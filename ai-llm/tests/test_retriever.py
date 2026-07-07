@@ -27,6 +27,7 @@ def retriever():
     r._embedding_model.encode_single.return_value = [0.1, 0.2, 0.3]
     r._vector_db = MagicMock()
     r._bm25_index = MagicMock()
+    r._personalization_scorer = MagicMock()
     return r
 
 
@@ -129,6 +130,47 @@ def test_query_rewrite_used_when_parsed_query_given(retriever):
 
     encode_call_arg = retriever._embedding_model.encode_single.call_args[0][0]
     assert encode_call_arg == "sessiz bir yer Kadıköy"
+
+
+def test_no_user_id_skips_personalization(retriever):
+    settings.HYBRID_SEARCH_ENABLED = False
+    retriever._vector_db.search_vectors.return_value = [
+        {"id": 1, "score": 0.9, "payload": {"id": 1, "ad": "Yer A"}},
+    ]
+
+    retriever.retrieve("sessiz kafe", top_k=1)
+
+    retriever._personalization_scorer.rerank.assert_not_called()
+
+
+def test_user_id_triggers_wide_pool_when_hybrid_disabled(retriever):
+    settings.HYBRID_SEARCH_ENABLED = False
+    retriever._vector_db.search_vectors.return_value = []
+    retriever._personalization_scorer.rerank.return_value = []
+
+    retriever.retrieve("sessiz kafe", top_k=2, user_id=42)
+
+    _, kwargs = retriever._vector_db.search_vectors.call_args
+    assert kwargs["top_k"] == 6  # top_k * 3
+
+
+def test_personalization_reranks_candidates(retriever):
+    settings.HYBRID_SEARCH_ENABLED = False
+    dense_results = [
+        {"id": 1, "score": 0.02, "payload": {"id": 1, "ad": "Yer A"}},
+        {"id": 2, "score": 0.01, "payload": {"id": 2, "ad": "Yer B"}},
+    ]
+    retriever._vector_db.search_vectors.return_value = dense_results
+    reranked = [dense_results[1], dense_results[0]]  # personalization sırayı tersine çevirdi
+    retriever._personalization_scorer.rerank.return_value = reranked
+
+    results = retriever.retrieve("sessiz kafe", top_k=2, user_id=42)
+
+    assert results == reranked
+    retriever._personalization_scorer.rerank.assert_called_once()
+    _, kwargs = retriever._personalization_scorer.rerank.call_args
+    assert kwargs["user_id"] == 42
+    assert kwargs["top_k"] == 2
 
 
 if __name__ == "__main__":

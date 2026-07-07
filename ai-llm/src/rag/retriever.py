@@ -7,6 +7,7 @@ from src.vector_db.qdrant_client import QdrantVectorDB
 from src.models.embeddings.embedding_model import EmbeddingModel
 from src.rag.query_rewriter import rewrite_query
 from src.rag.bm25_index import BM25Index
+from src.rag.personalization import PersonalizationScorer
 from src.config import settings
 import logging
 
@@ -21,6 +22,7 @@ class RAGRetriever:
         self._vector_db = None
         self._embedding_model = None
         self._bm25_index = None
+        self._personalization_scorer = None
 
     @property
     def vector_db(self) -> QdrantVectorDB:
@@ -43,12 +45,20 @@ class RAGRetriever:
             self._bm25_index = BM25Index()
         return self._bm25_index
 
+    @property
+    def personalization_scorer(self) -> PersonalizationScorer:
+        """Personalization scorer'ı lazy load et"""
+        if self._personalization_scorer is None:
+            self._personalization_scorer = PersonalizationScorer()
+        return self._personalization_scorer
+
     def retrieve(
         self,
         query: str,
         location: Dict[str, float] = None,
         top_k: int = None,
-        parsed_query: Dict = None
+        parsed_query: Dict = None,
+        user_id: int = None
     ) -> List[Dict[str, Any]]:
         """
         Kullanıcı sorgusuna göre ilgili mekanları bul
@@ -59,6 +69,8 @@ class RAGRetriever:
             top_k: Döndürülecek sonuç sayısı
             parsed_query: app.py::parse_natural_query() çıktısı (opsiyonel,
                 query rewriting için kullanılır)
+            user_id: Kullanıcı ID (opsiyonel, verilirse place_interactions
+                skoruna göre sonuçlar RRF sonrası yeniden ağırlıklandırılır)
 
         Returns:
             İlgili mekanlar ve benzerlik skorları
@@ -76,7 +88,9 @@ class RAGRetriever:
             pass
 
         hybrid_active = settings.HYBRID_SEARCH_ENABLED and self.bm25_index.ready
-        dense_top_k = top_k * 3 if hybrid_active else top_k
+        personalization_active = bool(user_id)
+        needs_wide_pool = hybrid_active or personalization_active
+        dense_top_k = top_k * 3 if needs_wide_pool else top_k
 
         # Sorguyu vektöre dönüştür ve vektör araması yap
         query_embedding = self.embedding_model.encode_single(embed_text)
@@ -86,21 +100,29 @@ class RAGRetriever:
             filter=filter_dict
         )
 
-        if not hybrid_active:
-            return dense_results[:top_k]
+        if hybrid_active:
+            bm25_results = self.bm25_index.search(embed_text, top_k=dense_top_k)
+            candidates = self._reciprocal_rank_fusion(dense_results, bm25_results, candidate_limit=dense_top_k)
+        else:
+            candidates = dense_results[:dense_top_k]
 
-        bm25_results = self.bm25_index.search(embed_text, top_k=dense_top_k)
-        return self._reciprocal_rank_fusion(dense_results, bm25_results, top_k)
+        if personalization_active:
+            return self.personalization_scorer.rerank(candidates, user_id=user_id, top_k=top_k)
+        return candidates[:top_k]
 
     def _reciprocal_rank_fusion(
         self,
         dense_results: List[Dict[str, Any]],
         bm25_results: List[tuple],
-        top_k: int,
+        candidate_limit: int,
     ) -> List[Dict[str, Any]]:
         """
         Dense vektör ve BM25 sonuçlarını RRF (1/(k+rank)) ile birleştirir.
         Anahtar: place_id (Qdrant payload["id"], Postgres places.id ile aynı).
+
+        candidate_limit: nihai top_k DEĞİL — personalization gibi sonraki
+        reranking adımlarının çalışabileceği aday havuzu boyutu. Gerçek top_k
+        kırpması retrieve() içinde, personalization'dan SONRA yapılır.
         """
         k = settings.RRF_K
         rrf_scores: Dict[int, float] = {}
@@ -123,7 +145,7 @@ class RAGRetriever:
                 # filtresi tarafından sessizce elenir.
                 payloads[place_id] = self.bm25_index.get_payload(place_id)
 
-        ranked_ids = sorted(rrf_scores.items(), key=lambda item: item[1], reverse=True)[:top_k]
+        ranked_ids = sorted(rrf_scores.items(), key=lambda item: item[1], reverse=True)[:candidate_limit]
 
         return [
             {
