@@ -939,9 +939,26 @@ async def lifespan(app: FastAPI):
         except Exception as exc:
             print(f"[PlacesSync] Startup sync basarisiz: {exc}")
 
-    asyncio.create_task(_sync_places_bg())
+    sync_places_task = asyncio.create_task(_sync_places_bg())
     if settings.PLACES_SYNC_ON_STARTUP:
         print("[Startup] Postgres place sync arka planda kontrol edilecek...")
+
+    # 5. BM25 Index (Hybrid Search) — ARKA PLANDA, places sync'ten sonra
+    async def _load_bm25_bg():
+        if not settings.HYBRID_SEARCH_ENABLED:
+            return
+        await sync_places_task
+        try:
+            rag = _get_rag_pipeline()
+            if rag:
+                await asyncio.to_thread(rag.retriever.bm25_index.build)
+                print("[BM25] Index arka planda kuruldu.")
+        except Exception as exc:
+            print(f"[BM25] Index kurulumu basarisiz: {exc}")
+
+    if settings.HYBRID_SEARCH_ENABLED:
+        asyncio.create_task(_load_bm25_bg())
+        print(f"[Startup] BM25 index arka planda baslatiliyor...")
 
     print(f"[Startup] Version: 2.1 (Performance Optimized + RAG)")
     print("="*60 + "\n")
@@ -1649,6 +1666,7 @@ async def _fetch_rag_results(
     response_language: str,
     rag_status: Dict[str, Union[str, int, bool, None]],
     limit: int,
+    parsed_query: Optional[Dict] = None,
 ) -> tuple[List[Dict], Optional[Dict], str]:
     """RAG pipeline ile öneri listesi döndür."""
     rag = _get_rag_pipeline()
@@ -1665,6 +1683,7 @@ async def _fetch_rag_results(
             user_query=query,
             location=location,
             language=response_language,
+            parsed_query=parsed_query,
         )
     except Exception as e:
         print(f"[RAG] Arama hatası (atlanıyor): {e}")
@@ -1951,6 +1970,7 @@ async def smart_search_v2(request: SmartSearchRequest, background_tasks: Backgro
                         response_language,
                         rag_status,
                         result_limit * 2,
+                        parsed_query=parsed,
                     )
 
                 place_ids_with_scores = []
@@ -2209,6 +2229,7 @@ async def smart_search_v2(request: SmartSearchRequest, background_tasks: Backgro
                 response_language,
                 rag_status,
                 result_limit,
+                parsed_query=parsed,
             )
 
             if rag_recommendations:

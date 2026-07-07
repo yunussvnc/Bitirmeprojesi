@@ -80,9 +80,32 @@ def test_smart_search_v2_rag_metadata(client):
             assert data["rag_context"].get("rag_enhanced") is True
 
 
+def test_smart_search_v2_with_hybrid_search_enabled(client):
+    """HYBRID_SEARCH_ENABLED=true iken yanıt şeması (match_score dahil) bozulmamalı.
+    BM25 indeksi bu testte kurulmamış olabilir; retriever bu durumda otomatik
+    dense-only'e düşer (bkz. RAGRetriever.retrieve) — burada asıl doğrulanan,
+    flag'in endpoint'i kırmadığıdır."""
+    from src.config import settings
+
+    original = settings.HYBRID_SEARCH_ENABLED
+    settings.HYBRID_SEARCH_ENABLED = True
+    try:
+        r = client.post("/api/smart-search-v2", json=SAMPLE_QUERY)
+        assert r.status_code == 200
+        data = r.json()
+        assert "recommendations" in data
+        assert "found" in data
+        if data.get("found", 0) > 0:
+            rec = data["recommendations"][0]
+            assert "match_score" in rec
+    finally:
+        settings.HYBRID_SEARCH_ENABLED = original
+
+
 if __name__ == "__main__":
     c = TestClient(app)
     test_health(c)
     test_rag_search_returns_structure(c)
     test_smart_search_v2_rag_metadata(c)
+    test_smart_search_v2_with_hybrid_search_enabled(c)
     print("OK: smart-search-v2 + rag-search integration tests passed")

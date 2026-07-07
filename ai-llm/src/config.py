@@ -57,6 +57,15 @@ class Settings(BaseSettings):
     RAG_FORCE_REINDEX: bool = False
     RAG_USE_LLM_GENERATOR: bool = False
 
+    # Hybrid Search (BM25 + Dense) ve Query Rewriting Ayarları
+    HYBRID_SEARCH_ENABLED: bool = False  # varsayılan kapalı — kademeli rollout.
+    # Not: BM25 indeksi Qdrant'ın aksine kalıcı değil (bellek içi) — bu yüzden
+    # ayrı bir "ON_STARTUP" flag'i yok; HYBRID_SEARCH_ENABLED açıkken indeks
+    # her process başlangıcında otomatik kurulur (aksi halde özellik hiç
+    # aktifleşmezdi).
+    QUERY_REWRITE_ENABLED: bool = True   # ek gecikme yok, güvenle varsayılan açık
+    RRF_K: int = 60
+
     # Postgres place sync (loaded_places.json -> places tablosu)
     PLACES_SYNC_ON_STARTUP: bool = False
     PLACES_SYNC_MIN_RATIO: float = 0.95

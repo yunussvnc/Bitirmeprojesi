@@ -20,23 +20,27 @@ class RAGPipeline:
         user_query: str,
         location: Dict[str, float] = None,
         kullanici_id: int = None,
-        language: str = "tr"
+        language: str = "tr",
+        parsed_query: Dict = None
     ) -> Dict[str, Any]:
         """
         Kullanıcı sorgusunu işle ve öneriler üret
-        
+
         Args:
             user_query: Kullanıcının doğal dil sorgusu
             location: Kullanıcı konumu (enlem, boylam)
             kullanici_id: Kullanıcı ID (kişiselleştirme için)
-        
+            parsed_query: app.py::parse_natural_query() çıktısı (opsiyonel,
+                query rewriting için retriever'a iletilir)
+
         Returns:
             Öneriler ve analiz
         """
         # 1. Retriever: İlgili mekanları bul
         retrieved_mekanlar = self.retriever.retrieve(
             query=user_query,
-            location=location
+            location=location,
+            parsed_query=parsed_query
         )
         
         if not retrieved_mekanlar:

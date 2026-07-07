@@ -5,6 +5,8 @@ RAG Retriever - Vektör araması ile ilgili mekanları bulur
 from typing import List, Dict, Any, Optional
 from src.vector_db.qdrant_client import QdrantVectorDB
 from src.models.embeddings.embedding_model import EmbeddingModel
+from src.rag.query_rewriter import rewrite_query
+from src.rag.bm25_index import BM25Index
 from src.config import settings
 import logging
 
@@ -13,60 +15,122 @@ logger = logging.getLogger(__name__)
 
 class RAGRetriever:
     """RAG sistemi için retriever"""
-    
+
     def __init__(self):
         """Retriever'ı başlat - Lazy loading ile"""
         self._vector_db = None
         self._embedding_model = None
-    
+        self._bm25_index = None
+
     @property
     def vector_db(self) -> QdrantVectorDB:
         """Vector DB'yi lazy load et"""
         if self._vector_db is None:
             self._vector_db = QdrantVectorDB()
         return self._vector_db
-    
+
     @property
     def embedding_model(self) -> EmbeddingModel:
         """Embedding model'i lazy load et"""
         if self._embedding_model is None:
             self._embedding_model = EmbeddingModel()
         return self._embedding_model
-    
+
+    @property
+    def bm25_index(self) -> BM25Index:
+        """BM25 index'i lazy load et (kurulumu ayrıca build() ile tetiklenir)"""
+        if self._bm25_index is None:
+            self._bm25_index = BM25Index()
+        return self._bm25_index
+
     def retrieve(
         self,
         query: str,
         location: Dict[str, float] = None,
-        top_k: int = None
+        top_k: int = None,
+        parsed_query: Dict = None
     ) -> List[Dict[str, Any]]:
         """
         Kullanıcı sorgusuna göre ilgili mekanları bul
-        
+
         Args:
             query: Kullanıcının doğal dil sorgusu
             location: Kullanıcı konumu (enlem, boylam)
             top_k: Döndürülecek sonuç sayısı
-        
+            parsed_query: app.py::parse_natural_query() çıktısı (opsiyonel,
+                query rewriting için kullanılır)
+
         Returns:
             İlgili mekanlar ve benzerlik skorları
         """
         top_k = top_k or settings.TOP_K_RESULTS
-        
-        # Sorguyu vektöre dönüştür
-        query_embedding = self.embedding_model.encode_single(query)
-        
+
+        embed_text = query
+        if parsed_query and settings.QUERY_REWRITE_ENABLED:
+            embed_text = rewrite_query(query, parsed_query)
+
         # Konum filtresi (opsiyonel)
         filter_dict = None
         if location:
             # Konum bazlı filtreleme eklenebilir
             pass
-        
-        # Vektör araması yap
-        results = self.vector_db.search_vectors(
+
+        hybrid_active = settings.HYBRID_SEARCH_ENABLED and self.bm25_index.ready
+        dense_top_k = top_k * 3 if hybrid_active else top_k
+
+        # Sorguyu vektöre dönüştür ve vektör araması yap
+        query_embedding = self.embedding_model.encode_single(embed_text)
+        dense_results = self.vector_db.search_vectors(
             query_vector=query_embedding,
-            top_k=top_k,
+            top_k=dense_top_k,
             filter=filter_dict
         )
-        
-        return results
+
+        if not hybrid_active:
+            return dense_results[:top_k]
+
+        bm25_results = self.bm25_index.search(embed_text, top_k=dense_top_k)
+        return self._reciprocal_rank_fusion(dense_results, bm25_results, top_k)
+
+    def _reciprocal_rank_fusion(
+        self,
+        dense_results: List[Dict[str, Any]],
+        bm25_results: List[tuple],
+        top_k: int,
+    ) -> List[Dict[str, Any]]:
+        """
+        Dense vektör ve BM25 sonuçlarını RRF (1/(k+rank)) ile birleştirir.
+        Anahtar: place_id (Qdrant payload["id"], Postgres places.id ile aynı).
+        """
+        k = settings.RRF_K
+        rrf_scores: Dict[int, float] = {}
+        payloads: Dict[int, Dict[str, Any]] = {}
+
+        for rank, item in enumerate(dense_results):
+            place_id = (item.get("payload") or {}).get("id", item.get("id"))
+            if place_id is None:
+                continue
+            place_id = int(place_id)
+            rrf_scores[place_id] = rrf_scores.get(place_id, 0.0) + 1.0 / (k + rank + 1)
+            payloads[place_id] = item.get("payload")
+
+        for rank, (place_id, _bm25_score) in enumerate(bm25_results):
+            rrf_scores[place_id] = rrf_scores.get(place_id, 0.0) + 1.0 / (k + rank + 1)
+            if not payloads.get(place_id):
+                # Dense sonuçlarında yoktu (BM25-only eşleşme) — payload'ı
+                # BM25Index'in belleğe aldığı Postgres satırından doldur.
+                # Aksi halde boş payload downstream _is_complete_recommendation
+                # filtresi tarafından sessizce elenir.
+                payloads[place_id] = self.bm25_index.get_payload(place_id)
+
+        ranked_ids = sorted(rrf_scores.items(), key=lambda item: item[1], reverse=True)[:top_k]
+
+        return [
+            {
+                "id": place_id,
+                "score": score,
+                "payload": payloads.get(place_id) or {},
+            }
+            for place_id, score in ranked_ids
+        ]
 

@@ -19,6 +19,9 @@ langchain-core>=0.1.0
 # Vector Database
 qdrant-client>=1.9.0
 
+# Hybrid Search (BM25 keyword arama)
+rank_bm25>=0.2.2
+
 # HTTP Client
 httpx==0.25.2
 requests==2.31.0
