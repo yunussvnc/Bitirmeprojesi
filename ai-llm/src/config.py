@@ -64,8 +64,8 @@ class Settings(BaseSettings):
     # Backend API URL (Mekan verilerini almak için)
     BACKEND_API_URL: str = "http://localhost:8000"
 
-    # PostgreSQL — Doğrudan DB bağlantısı
-    DATABASE_URL: str = "postgresql://postgres:123@localhost:5433/ai_mekan_oneri_db"
+    # PostgreSQL — Doğrudan DB bağlantısı (zorunlu, .env üzerinden sağlanmalı)
+    DATABASE_URL: str = ""
 
     @property
     def database_url_normalized(self) -> str:

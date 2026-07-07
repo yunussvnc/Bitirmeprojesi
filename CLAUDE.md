@@ -151,7 +151,7 @@ Claude ile tez hazırlığı veya jüri revizyonu yaparken `HOCA_SORULARI_VE_CEV
 
 *   Sosyal medya akışı için Cloudinary medya depolama altyapısı ve local fallback çalışır durumdadır.
 *   Otomatik hikaye silici zamanlayıcı arka planda FastAPI startup event'i olarak asenkron çalışır ve 24 saati dolan hikayeleri veri tabanından temizler.
-*   Projeye dair ek testler `ai-llm/test_phase1.py` ve `backend/tests/` dizini altında yer almaktadır.
+*   Projeye dair ek testler `ai-llm/tests/` ve `backend/tests/` dizini altında yer almaktadır.
 
 ## 🧭 Davranışsal Kodlama İlkeleri (Karpathy)
 

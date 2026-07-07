@@ -1970,14 +1970,14 @@ async def smart_search_v2(request: SmartSearchRequest, background_tasks: Backgro
                             where_clauses.append("(name LIKE %s OR category LIKE %s OR description LIKE %s)")
                             sql_params.extend([f"%{k}%", f"%{k}%", f"%{k}%"])
                         where_str = " OR ".join(where_clauses)
-                        sql = f"SELECT id FROM places WHERE {where_str} LIMIT {result_limit}"
-                        fallback_rows = execute_query(sql, tuple(sql_params))
+                        sql = f"SELECT id FROM places WHERE {where_str} LIMIT %s"
+                        fallback_rows = execute_query(sql, tuple(sql_params) + (result_limit,))
                         place_ids_with_scores = [(int(r["id"]), 1.0) for r in fallback_rows]
 
                 # Average rating fallback
                 if not place_ids_with_scores:
-                    sql = f"SELECT id FROM places ORDER BY average_rating DESC, user_ratings_total DESC LIMIT {result_limit}"
-                    fallback_rows = execute_query(sql)
+                    sql = "SELECT id FROM places ORDER BY average_rating DESC, user_ratings_total DESC LIMIT %s"
+                    fallback_rows = execute_query(sql, (result_limit,))
                     place_ids_with_scores = [(int(r["id"]), 0.5) for r in fallback_rows]
 
                 if place_ids_with_scores:
