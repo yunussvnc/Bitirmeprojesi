@@ -28,23 +28,43 @@ class ConnectionManager:
         
         # Redis PubSub listener task'ı
         self._listener_task = None
+        # Heartbeat task
+        self._heartbeat_task = None
 
     async def start_redis_listener(self):
         """Sunucu kalktığında Redis Pub/Sub kanalını dinlemeye başlar."""
         self._listener_task = asyncio.create_task(self._listen_loop())
 
+    async def start_heartbeat(self):
+        """Periyodik heartbeat görevini başlatır."""
+        self._heartbeat_task = asyncio.create_task(self._heartbeat_loop())
+
+    async def _heartbeat_loop(self):
+        """Her 30 saniyede bir tüm bağlı kullanıcılara ping gönderir ve Redis TTL'lerini uzatır."""
+        logger.info("💓 WebSocket Heartbeat başlatıldı (30s aralık)")
+        while True:
+            try:
+                await asyncio.sleep(30)
+                await self.heartbeat_global()
+            except asyncio.CancelledError:
+                logger.info("💓 WebSocket Heartbeat durduruldu")
+                break
+            except Exception as e:
+                logger.error("💓 Heartbeat hatası: %s", str(e))
+                await asyncio.sleep(5)
+
     async def _listen_loop(self):
         """Redis'ten gelen mesajları okuyup lokal WebSocket'lere dağıtır (Otomatik Reconnect ile)."""
-        from app.core.redis_client import get_redis
+        from app.core.redis_client import get_pubsub_redis
         
         MAX_CONSECUTIVE_FAILURES = 5
         consecutive_failures = 0
         
         while True:
             try:
-                redis = get_redis()
+                redis = get_pubsub_redis()
                 if not redis:
-                    logger.warning("Redis bağlantısı yok, Pub/Sub listener 10 saniye sonra tekrar deneyecek.")
+                    logger.warning("Redis Pub/Sub bağlantısı yok, 10 saniye sonra tekrar deneyecek.")
                     await asyncio.sleep(10)
                     continue
 
@@ -116,6 +136,8 @@ class ConnectionManager:
                 await redis.publish("ws:cluster:events", json.dumps(payload))
             except Exception as e:
                 logger.error("Redis publish hatası: %s", str(e))
+                # Fallback: Lokal olarak işle
+                await self._simulate_local_pubsub({"type": "message", "data": json.dumps(payload)})
         else:
             # Redis yoksa sadece lokalde çalıştır (Graceful degradation)
             msg = {"type": "message", "data": json.dumps(payload)}
@@ -145,7 +167,7 @@ class ConnectionManager:
             self._global_connections[user_id] = set()
         self._global_connections[user_id].add(websocket)
         logger.info("🔌 WS Global bağlandı: user=%d", user_id)
-        # Redis'te online işaretle
+        # Redis'te online işaretle (hata olursa WS düşmesin)
         await self._set_user_online(user_id)
 
     def disconnect_global(self, websocket: WebSocket, user_id: int):
@@ -154,7 +176,6 @@ class ConnectionManager:
             if not self._global_connections[user_id]:
                 del self._global_connections[user_id]
                 # Son bağlantı da kapandı → Redis'teki online durumunu temizle
-                import asyncio
                 asyncio.create_task(self._clear_user_online(user_id))
         logger.info("🔌 WS Global ayrıldı: user=%d", user_id)
 
@@ -177,16 +198,15 @@ class ConnectionManager:
         
         # Sonra: Lokal bağlantı yoksa Redis'e bak (multi-node / farklı sunucu durumu için)
         if not is_online:
-            from app.core.redis_client import get_redis
-            redis = get_redis()
-            if redis:
-                try:
-                    is_online = await redis.exists(f"online_user:{user_id}") > 0
-                except Exception:
-                    pass  # Redis erişilemezse push gönder (güvenli taraf)
+            is_online = await self._is_user_online_redis(user_id)
             
         if not is_online:
-            import asyncio
+            asyncio.create_task(self._send_push_notification(user_id, data))
+
+
+    async def _send_push_notification(self, user_id: int, data: dict):
+        """Push bildirimini güvenli şekilde gönderir."""
+        try:
             from app.services.push_provider import trigger_push_notification
             
             title = "Yeni Bildirim"
@@ -199,14 +219,9 @@ class ConnectionManager:
                 title = data.get("title", title)
                 body = data.get("message", body)
                 
-            task = trigger_push_notification(user_id, title, body, data)
-            try:
-                # If we are in the main loop, this is perfectly safe
-                loop = asyncio.get_running_loop()
-                loop.create_task(task)
-            except RuntimeError:
-                # If there's no running loop, just run it
-                asyncio.run(task)
+            await trigger_push_notification(user_id, title, body, data)
+        except Exception as e:
+            logger.error("Push notification hatası: %s", str(e))
 
 
     async def _local_send_global(self, user_id: int, data: dict):
@@ -261,14 +276,7 @@ class ConnectionManager:
         })
         
         # Kullanıcı Redis'te online ise True (Delivered), değilse False (Sent) döner
-        # NOT: Push notification bu fonksiyondan ATILMAZ — send_global_notification üstlenir.
-        from app.core.redis_client import get_redis
-        redis = get_redis()
-        is_online = False
-        if redis:
-            is_online = await redis.exists(f"online_user:{user_id}") > 0
-            
-        return is_online
+        return await self._is_user_online_redis(user_id)
 
     async def _local_send_to_user(self, conversation_id: str, user_id: int, data: dict):
         conv = self._conversations.get(conversation_id, {})
@@ -356,12 +364,16 @@ class ConnectionManager:
     # --- UTILS & ONLINE STATE (Redis) ---
 
     async def _set_user_online(self, user_id: int):
-        """Kullanıcının online durumunu Redis'e yazar (Distributed state)"""
+        """Kullanıcının online durumunu Redis'e yazar (Distributed state).
+        Hata olursa sessizce geçer — WebSocket bağlantısını düşürmez."""
         from app.core.redis_client import get_redis
         redis = get_redis()
         if redis:
-            # 60 saniye TTL. Frontend ping attıkça uzatılır.
-            await redis.setex(f"online_user:{user_id}", 60, "1")
+            try:
+                # 90 saniye TTL. Heartbeat her 30 saniyede uzatır.
+                await redis.setex(f"online_user:{user_id}", 90, "1")
+            except Exception as e:
+                logger.warning("Redis set_user_online hatası (user=%d): %s", user_id, str(e))
 
     async def _clear_user_online(self, user_id: int):
         """Kullanıcının online durumunu Redis'ten siler."""
@@ -373,6 +385,18 @@ class ConnectionManager:
             except Exception:
                 pass
 
+    async def _is_user_online_redis(self, user_id: int) -> bool:
+        """Redis'te kullanıcının online olup olmadığını kontrol eder.
+        Hata durumunda False döner (push gönderilsin, güvenli taraf)."""
+        from app.core.redis_client import get_redis
+        redis = get_redis()
+        if redis:
+            try:
+                return await redis.exists(f"online_user:{user_id}") > 0
+            except Exception:
+                pass
+        return False
+
     def get_room_online_count(self, room_id: str) -> int:
         """Lokal online sayısı. Cluster geneli için Redis kümeleri kullanılmalıdır."""
         room_key = f"room:{room_id}"
@@ -381,9 +405,10 @@ class ConnectionManager:
     async def heartbeat_global(self):
         """Tüm lokal global bağlantılara ping gönder ve Redis online süresini uzat."""
         disconnected_pairs = []
+        user_ids_to_refresh = []
+
         for user_id, ws_set in self._global_connections.items():
-            # Redis TTL uzat
-            await self._set_user_online(user_id)
+            user_ids_to_refresh.append(user_id)
             for ws in ws_set:
                 try:
                     await ws.send_json({"type": "ping"})
@@ -392,6 +417,19 @@ class ConnectionManager:
 
         for ws, uid in disconnected_pairs:
             self.disconnect_global(ws, uid)
+
+        # Redis TTL batch uzatma (tek tek değil, toplu olarak)
+        if user_ids_to_refresh:
+            from app.core.redis_client import get_redis
+            redis = get_redis()
+            if redis:
+                try:
+                    pipe = redis.pipeline(transaction=False)
+                    for uid in user_ids_to_refresh:
+                        pipe.setex(f"online_user:{uid}", 90, "1")
+                    await pipe.execute()
+                except Exception as e:
+                    logger.warning("Heartbeat Redis batch TTL hatası: %s", str(e))
 
 
 # Global singleton

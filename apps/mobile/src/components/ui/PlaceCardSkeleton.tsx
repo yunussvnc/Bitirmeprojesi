@@ -7,10 +7,11 @@
  * @module components/ui/PlaceCardSkeleton
  */
 
-import React, { useEffect, useRef } from 'react';
-import { View, StyleSheet, Animated } from 'react-native';
+import React from 'react';
+import { View, StyleSheet } from 'react-native';
 import { useTheme } from '@/src/hooks/useTheme';
 import { spacing } from '@/src/constants/design';
+import { Skeleton } from "./Skeleton";
 
 export interface PlaceCardSkeletonProps {
   /**
@@ -27,31 +28,6 @@ export interface PlaceCardSkeletonProps {
  */
 export function PlaceCardSkeleton({ count = 3 }: PlaceCardSkeletonProps) {
   const { colors } = useTheme();
-  const animatedValue = useRef(new Animated.Value(0)).current;
-
-  useEffect(() => {
-    const animation = Animated.loop(
-      Animated.sequence([
-        Animated.timing(animatedValue, {
-          toValue: 1,
-          duration: 1000,
-          useNativeDriver: true,
-        }),
-        Animated.timing(animatedValue, {
-          toValue: 0,
-          duration: 1000,
-          useNativeDriver: true,
-        }),
-      ])
-    );
-    animation.start();
-    return () => animation.stop();
-  }, [animatedValue]);
-
-  const opacity = animatedValue.interpolate({
-    inputRange: [0, 1],
-    outputRange: [0.3, 0.7],
-  });
 
   return (
     <>
@@ -67,54 +43,26 @@ export function PlaceCardSkeleton({ count = 3 }: PlaceCardSkeletonProps) {
           ]}
         >
           {/* Image skeleton */}
-          <Animated.View
-            style={[
-              styles.imageSkeleton,
-              {
-                backgroundColor: colors.surface.default,
-                opacity,
-              },
-            ]}
+          <Skeleton 
+            style={styles.imageSkeleton} 
+            borderRadius={12} 
           />
-
-          {/* Content skeleton */}
-          <View style={styles.content}>
-            {/* Title skeleton */}
-            <Animated.View
-              style={[
-                styles.titleSkeleton,
-                {
-                  backgroundColor: colors.surface.default,
-                  opacity,
-                },
-              ]}
-            />
+          
+          <View style={styles.contentContainer}>
+            {/* Header skeleton */}
+            <View style={styles.headerRow}>
+              <Skeleton width={120} height={24} borderRadius={4} />
+              <Skeleton width={48} height={24} borderRadius={12} />
+            </View>
 
             {/* Subtitle skeleton */}
-            <Animated.View
-              style={[
-                styles.subtitleSkeleton,
-                {
-                  backgroundColor: colors.surface.default,
-                  opacity,
-                },
-              ]}
-            />
+            <Skeleton width="60%" height={16} borderRadius={4} style={{ marginTop: 8 }} />
 
             {/* Tags skeleton */}
             <View style={styles.tagsSkeleton}>
-              {[1, 2, 3].map((i) => (
-                <Animated.View
-                  key={i}
-                  style={[
-                    styles.tagSkeleton,
-                    {
-                      backgroundColor: colors.surface.default,
-                      opacity,
-                    },
-                  ]}
-                />
-              ))}
+              <Skeleton width={80} height={24} borderRadius={12} />
+              <Skeleton width={60} height={24} borderRadius={12} />
+              <Skeleton width={100} height={24} borderRadius={12} />
             </View>
           </View>
         </View>
@@ -131,32 +79,22 @@ const styles = StyleSheet.create({
     borderWidth: 1,
   },
   imageSkeleton: {
-    width: '100%',
-    height: 200,
-    borderRadius: 12,
+    width: "100%",
+    height: 180,
+    borderTopLeftRadius: 16,
+    borderTopRightRadius: 16,
   },
-  content: {
-    padding: spacing.cardPadding,
+  contentContainer: {
+    padding: 16,
   },
-  titleSkeleton: {
-    height: 20,
-    width: '70%',
-    borderRadius: 4,
-    marginBottom: spacing.xs,
-  },
-  subtitleSkeleton: {
-    height: 16,
-    width: '90%',
-    borderRadius: 4,
-    marginBottom: spacing.sm,
+  headerRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
   },
   tagsSkeleton: {
-    flexDirection: 'row',
-    gap: spacing.xs,
-  },
-  tagSkeleton: {
-    height: 24,
-    width: 60,
-    borderRadius: 12,
+    flexDirection: "row",
+    gap: 8,
+    marginTop: 16,
   },
 });

@@ -867,10 +867,10 @@
     "clear_places_confirm": "Tüm kaydedilen mekanlar silinsin mi?",
     "clear_posts_confirm": "Tüm kaydedilen gönderiler silinsin mi?",
     "places": "Mekanlar",
-    "empty_title": "Henüz kayıt yok",
-    "empty_places_desc": "Beğendiğin mekanları kaydet",
+    "empty_title": "",
+    "empty_places_desc": "Henüz kaydettiğin mekan yok, beğendiğin mekanları kaydet",
     "empty_places_action": "Keşfet",
-    "empty_posts_desc": "Beğendiğin gönderileri arşive al",
+    "empty_posts_desc": "Henüz kaydettiğin gönderi yok, beğendiğin gönderileri kaydet",
     "empty_posts_action": "Akışa dön"
   },
   "trash": {

@@ -1,9 +1,11 @@
 /**
  * FilterBottomSheet – Konum Seçimi bottom sheet.
  * İl ve İlçe dropdown'ları ile konum bazlı filtreleme.
+ * 
+ * Modal tabanlı — her yerde güvenilir çalışır.
  */
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import {
   View,
   Text,
@@ -13,6 +15,7 @@ import {
   Pressable,
   ScrollView,
   Animated,
+  Dimensions,
   PanResponder,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -21,6 +24,9 @@ import { IconSymbol } from '@/src/components/ui/icon-symbol';
 import { lightImpact } from '@/src/utils/haptics';
 import { Button } from "@/src/components/ui/Button";
 import { useTranslation } from "react-i18next";
+
+const { height: SCREEN_HEIGHT } = Dimensions.get('window');
+const SHEET_HEIGHT = SCREEN_HEIGHT * 0.42;
 
 /* ── Types ── */
 
@@ -235,42 +241,65 @@ export function FilterBottomSheet({
   const insets = useSafeAreaInsets();
   const { t } = useTranslation();
   const [draft, setDraft] = useState<FilterValues>(values);
-  const [internalVisible, setInternalVisible] = useState(false);
-  const translateY = useRef(new Animated.Value(800)).current;
-  const scrollY = useRef(0);
+  const [modalVisible, setModalVisible] = useState(false);
+  const slideAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
     if (visible) {
       setDraft(values);
-      scrollY.current = 0;
-      setInternalVisible(true);
-      translateY.setValue(800);
-      Animated.spring(translateY, { toValue: 0, useNativeDriver: true, bounciness: 5, speed: 14 }).start();
+      setModalVisible(true);
+      slideAnim.setValue(0);
+      Animated.spring(slideAnim, {
+        toValue: 1,
+        useNativeDriver: true,
+        damping: 20,
+        stiffness: 200,
+      }).start();
+    } else {
+      Animated.timing(slideAnim, {
+        toValue: 0,
+        duration: 250,
+        useNativeDriver: true,
+      }).start(() => {
+        setModalVisible(false);
+      });
     }
-  }, [visible, values, translateY]);
+  }, [visible, values, slideAnim]);
 
-  const closeWithAnimation = () => {
-    Animated.timing(translateY, { toValue: 800, duration: 220, useNativeDriver: true }).start(() => {
-      setInternalVisible(false);
+  const handleClose = useCallback(() => {
+    Animated.timing(slideAnim, {
+      toValue: 0,
+      duration: 250,
+      useNativeDriver: true,
+    }).start(() => {
+      setModalVisible(false);
       onClose();
     });
-  };
+  }, [slideAnim, onClose]);
 
+  // Aşağı çekme ile kapatma
   const panResponder = useRef(
     PanResponder.create({
-      onMoveShouldSetPanResponder: (_, gs) =>
-        scrollY.current <= 0 && gs.dy > 5 && Math.abs(gs.dy) > Math.abs(gs.dx),
-      onPanResponderMove: (_, gs) => {
-        if (scrollY.current <= 0 && gs.dy > 0) translateY.setValue(gs.dy);
+      onStartShouldSetPanResponder: () => true,
+      onMoveShouldSetPanResponder: (_, g) => Math.abs(g.dy) > 8,
+      onPanResponderMove: (_, g) => {
+        if (g.dy > 0) {
+          // Sadece aşağı çekmeyi izle
+          slideAnim.setValue(1 - g.dy / SHEET_HEIGHT);
+        }
       },
-      onPanResponderRelease: (_, gs) => {
-        if (gs.dy > 120 || gs.vy > 0.5) {
-          Animated.timing(translateY, { toValue: 800, duration: 220, useNativeDriver: true }).start(() => {
-            setInternalVisible(false);
-            onClose();
-          });
+      onPanResponderRelease: (_, g) => {
+        if (g.dy > 80 || g.vy > 0.5) {
+          // Yeterince çektiyse kapat
+          handleClose();
         } else {
-          Animated.spring(translateY, { toValue: 0, useNativeDriver: true, bounciness: 4 }).start();
+          // Geri aç
+          Animated.spring(slideAnim, {
+            toValue: 1,
+            useNativeDriver: true,
+            damping: 20,
+            stiffness: 200,
+          }).start();
         }
       },
     })
@@ -281,7 +310,7 @@ export function FilterBottomSheet({
   const handleApply = () => {
     lightImpact();
     onApply(draft);
-    closeWithAnimation();
+    handleClose();
   };
 
   const handleClear = () => {
@@ -289,81 +318,95 @@ export function FilterBottomSheet({
     const empty: FilterValues = { province: null, district: null };
     setDraft(empty);
     onApply(empty);
-    closeWithAnimation();
+    handleClose();
   };
 
+  const translateY = slideAnim.interpolate({
+    inputRange: [0, 1],
+    outputRange: [SHEET_HEIGHT, 0],
+  });
+
+  const backdropOpacity = slideAnim.interpolate({
+    inputRange: [0, 1],
+    outputRange: [0, 0.45],
+  });
+
   return (
-    <Modal visible={internalVisible} transparent animationType="none" onRequestClose={closeWithAnimation}>
-      <Pressable style={styles.backdrop} onPress={closeWithAnimation}>
-        <Animated.View
-          style={[
-            styles.sheet,
-            {
-              backgroundColor: colors.background.primary,
-              paddingBottom: insets.bottom + 16,
-              transform: [{ translateY }],
-            },
-          ]}
-          {...panResponder.panHandlers}
-        >
-          <Pressable onPress={() => {}}>
-          {/* Handle */}
-          <View style={styles.handleRow} {...panResponder.panHandlers}>
-            <View style={[styles.handle, { backgroundColor: colors.surface.border }]} />
-          </View>
-
-          {/* Title */}
-          <View style={styles.titleRow}>
-            <View>
-              <Text style={[styles.title, { color: colors.text.primary }]}>Konum Seçimi</Text>
-              <Text style={[styles.subtitle, { color: colors.text.tertiary }]}>
-                Lütfen il ve ilçe seçiniz.
-              </Text>
-            </View>
-          </View>
-
-          <ScrollView
-            showsVerticalScrollIndicator={false}
-            contentContainerStyle={styles.body}
-            onScroll={(e) => { scrollY.current = e.nativeEvent.contentOffset.y; }}
-            scrollEventThrottle={16}
-          >
-            {/* İl Seçimi */}
-            <DropdownPicker
-              label="İL SEÇİMİ"
-              value={draft.province}
-              options={PROVINCES}
-              placeholder="İl seçiniz..."
-              onSelect={(v) => {
-                setDraft((d) => ({ province: v, district: null }));
-              }}
-            />
-
-            {/* İlçe Seçimi */}
-            <DropdownPicker
-              label="İLÇE SEÇİMİ"
-              value={draft.district}
-              options={districtOptions}
-              placeholder="Önce il seçiniz..."
-              disabled={!draft.province}
-              onSelect={(v) => {
-                setDraft((d) => ({ ...d, district: v }));
-              }}
-            />
-          </ScrollView>
-
-          {/* Footer */}
-          <View style={[styles.footer, { paddingBottom: insets.bottom + 8, borderTopColor: colors.surface.border }]}>
-            <TouchableOpacity style={styles.clearBtn} onPress={handleClear} activeOpacity={0.7}>
-              <Text style={[styles.clearText, { color: colors.text.secondary }]}>Temizle</Text>
-            </TouchableOpacity>
-            <Button style={styles.applyBtn} onPress={handleApply}>
-              Uygula
-            </Button>
-          </View>
-          </Pressable>
-        </Animated.View>
+    <Modal visible={modalVisible} transparent animationType="none" onRequestClose={handleClose} statusBarTranslucent>
+      {/* Backdrop */}
+      <Pressable style={StyleSheet.absoluteFill} onPress={handleClose}>
+        <Animated.View style={[StyleSheet.absoluteFill, { backgroundColor: '#000', opacity: backdropOpacity }]} />
       </Pressable>
+
+      {/* Sheet */}
+      <Animated.View
+        style={[
+          styles.sheet,
+          {
+            height: SHEET_HEIGHT,
+            backgroundColor: colors.background.primary,
+            transform: [{ translateY }],
+            paddingBottom: insets.bottom || 24,
+          },
+        ]}
+      >
+        {/* Handle — aşağı çekince kapatır */}
+        <View style={styles.handleRow} {...panResponder.panHandlers}>
+          <View style={[styles.handle, { backgroundColor: colors.surface.border }]} />
+        </View>
+
+        {/* Header */}
+        <View style={styles.titleRow}>
+          <View>
+            <Text style={[styles.title, { color: colors.text.primary }]}>Konum Seçimi</Text>
+            <Text style={[styles.subtitle, { color: colors.text.tertiary }]}>
+              Lütfen il ve ilçe seçiniz.
+            </Text>
+          </View>
+          <TouchableOpacity onPress={handleClose} hitSlop={12} activeOpacity={0.7}>
+            <IconSymbol name="xmark.circle.fill" size={28} color={colors.text.tertiary} />
+          </TouchableOpacity>
+        </View>
+
+        {/* Content */}
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          contentContainerStyle={styles.body}
+        >
+          {/* İl Seçimi */}
+          <DropdownPicker
+            label="İL SEÇİMİ"
+            value={draft.province}
+            options={PROVINCES}
+            placeholder="İl seçiniz..."
+            onSelect={(v) => {
+              setDraft(() => ({ province: v, district: null }));
+            }}
+          />
+
+          {/* İlçe Seçimi */}
+          <DropdownPicker
+            label="İLÇE SEÇİMİ"
+            value={draft.district}
+            options={districtOptions}
+            placeholder="Önce il seçiniz..."
+            disabled={!draft.province}
+            onSelect={(v) => {
+              setDraft((d) => ({ ...d, district: v }));
+            }}
+          />
+        </ScrollView>
+
+        {/* Footer */}
+        <View style={[styles.footer, { borderTopColor: colors.surface.border }]}>
+          <TouchableOpacity style={styles.clearBtn} onPress={handleClear} activeOpacity={0.7}>
+            <Text style={[styles.clearText, { color: colors.text.secondary }]}>Temizle</Text>
+          </TouchableOpacity>
+          <Button style={styles.applyBtn} onPress={handleApply}>
+            Uygula
+          </Button>
+        </View>
+      </Animated.View>
     </Modal>
   );
 }
@@ -384,20 +427,19 @@ export function countActiveFilters(v: FilterValues): number {
 /* ── Styles ── */
 
 const styles = StyleSheet.create({
-  backdrop: {
-    flex: 1,
-    backgroundColor: 'transparent',
-    justifyContent: 'flex-end',
-  },
   sheet: {
-    borderTopLeftRadius: 24,
-    borderTopRightRadius: 24,
-    maxHeight: '80%',
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
+    right: 0,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    overflow: 'hidden',
   },
   handleRow: {
     alignItems: 'center',
     paddingTop: 12,
-    paddingBottom: 12,
+    paddingBottom: 8,
   },
   handle: {
     width: 36,
@@ -409,7 +451,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
     paddingHorizontal: 20,
-    paddingTop: 8,
+    paddingTop: 4,
     paddingBottom: 12,
   },
   title: { fontSize: 18, fontWeight: '700' },
@@ -418,14 +460,19 @@ const styles = StyleSheet.create({
   clearText: { fontSize: 14, fontWeight: '600' },
   body: {
     paddingHorizontal: 20,
-    paddingBottom: 8,
+    paddingBottom: 24,
   },
   footer: {
     paddingHorizontal: 20,
     paddingTop: 12,
     borderTopWidth: StyleSheet.hairlineWidth,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
   },
   applyBtn: {
+    flex: 1,
+    marginLeft: 16,
     height: 48,
     borderRadius: 14,
     alignItems: 'center',

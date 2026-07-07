@@ -15,7 +15,6 @@ import {
   TextInput,
   TouchableOpacity,
   ScrollView,
-  Alert,
 } from 'react-native';
 import { useTheme } from '@/src/hooks/useTheme';
 import { Button } from '@/src/components/ui/Button';
@@ -24,6 +23,7 @@ import { IconSymbol } from '@/src/components/ui/icon-symbol';
 import { createTextStyle, spacing } from '@/src/constants/design';
 import { lightImpact, success } from '@/src/utils/haptics';
 import { useTranslation } from "react-i18next";
+import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 
 export interface EnhancedReviewData {
   rating: number;

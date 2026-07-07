@@ -6,7 +6,7 @@
  */
 
 import { getTranslatedCategory, normalizePlaceCategory } from '@/src/utils/categories';
-import { router, useLocalSearchParams } from "expo-router";
+import { router, useLocalSearchParams, Stack } from "expo-router";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import {
   View,
@@ -15,7 +15,6 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
-  Alert,
   Linking,
   Modal,
   Pressable,
@@ -44,13 +43,14 @@ import { spacing, createTextStyle } from "@/src/constants/design";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { calculateDistance, getCurrentLocation, type PlaceLocation } from "@/src/utils/location";
-import { getPlaceById, getAllPlaces, togglePlaceFollow, getPlacePosts, getPlaceStories, recordPlaceInteraction } from "@/src/services/mekanService";
+import { getPlaceById, getAllPlaces, togglePlaceFollow, getPlacePosts, getPlaceStories, recordPlaceInteraction, logInteraction } from "@/src/services/mekanService";
 import { lightImpact, success, warning } from "@/src/utils/haptics";
 import { logger } from "@/src/utils/logger";
 import { apiGet, apiPost } from "@/src/utils/apiClient";
 import { FlatList } from "react-native";
 import { StoryViewerModal } from "../explore/StoryViewerModal";
 import { ReviewCard, type ReviewItemType } from "./ReviewCard";
+import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 
 type Review = {
   id: number;
@@ -227,8 +227,9 @@ export default function PlaceDetailScreen({
   const [reviewGalleryData, setReviewGalleryData] = useState<{ reviews: Review[]; reviewIndex: number; imageIndex: number } | null>(null);
 
   // Takip & Sosyal İçerik
-  const [isFollowing, setIsFollowing] = useState(false);
-  const [followerCount, setFollowerCount] = useState(0);
+  // null = henüz API'den yüklenmedi → buton disabled görünür, "Takip Et" flash'ı önlenir
+  const [isFollowing, setIsFollowing] = useState<boolean | null>(null);
+  const [followerCount, setFollowerCount] = useState<number | null>(null);
   const [followLoading, setFollowLoading] = useState(false);
   const [placePosts, setPlacePosts] = useState<any[]>([]);
   const [placeStories, setPlaceStories] = useState<any[]>([]);
@@ -404,11 +405,11 @@ export default function PlaceDetailScreen({
         }
       }
       // Etkileşimi arka planda kaydet (algoritmik boost)
-      if (!cancelled.current) {
+        // Analitik ve Öneri Motoru için etkileşimi kaydet
         recordPlaceInteraction(id, 'view').catch(() => {});
-      }
-    } catch (error) {
-      if (!cancelled.current) logger.error("Error loading place:", error);
+        logInteraction(id, 'CARD_VIEW', 3).catch(() => {});
+      } catch (err) {
+        console.error("Error loading place detail:", err);
     }
   };
 
@@ -435,15 +436,15 @@ export default function PlaceDetailScreen({
   };
 
   const handleFollow = async () => {
-    if (followLoading) return;
+    if (followLoading || isFollowing === null) return;
 
     // ──── OPTİMİSTİK GÜNCELLEME ────
     // UI'ı hemen güncelle — API cevabı bekleme
     const prevFollowing = isFollowing;
-    const prevCount = followerCount;
+    const prevCount = followerCount ?? 0;
     const newFollowing = !isFollowing;
     setIsFollowing(newFollowing);
-    setFollowerCount(prev => newFollowing ? prev + 1 : Math.max(0, prev - 1));
+    setFollowerCount(prev => newFollowing ? (prev ?? 0) + 1 : Math.max(0, (prev ?? 0) - 1));
     lightImpact();
     if (newFollowing) success();
     // ──────────────────────────────
@@ -676,6 +677,13 @@ export default function PlaceDetailScreen({
 
   return (
     <Animated.View entering={FadeIn.duration(280)} style={{ flex: 1 }}>
+      <Stack.Screen 
+        options={{ 
+          gestureEnabled: true, 
+          fullScreenGestureEnabled: true,
+          animation: "slide_from_right" 
+        }} 
+      />
       <Screen ref={screenRef} scrollable withTabBar={isVenueDashboard}>
         {/* Header with Back and Save */}
         <View style={[styles.header, isVenueDashboard && { justifyContent: "space-between", paddingHorizontal: spacing.sm }]}>
@@ -843,7 +851,7 @@ export default function PlaceDetailScreen({
           </View>
 
           {/* Takip Et Butonu + Takipçi Sayısı */}
-          {!isVenueDashboard && (
+          {!isVenueDashboard && isFollowing !== null && (
             <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 14, gap: 12 }}>
               <TouchableOpacity
                 onPress={handleFollow}
@@ -875,7 +883,7 @@ export default function PlaceDetailScreen({
                   {isFollowing ? 'Takiptesin' : 'Takip Et'}
                 </Text>
               </TouchableOpacity>
-              {followerCount > 0 && (
+              {followerCount != null && followerCount > 0 && (
                 <Text style={{ fontSize: 13, color: colors.text.secondary }}>
                   {followerCount >= 1000
                     ? `${(followerCount / 1000).toFixed(1)}B`

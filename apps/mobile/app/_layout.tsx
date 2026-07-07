@@ -1,6 +1,9 @@
 import { useEffect, useState } from "react";
+import Toast from "react-native-toast-message";
 import { Stack, useRouter, useSegments, useRootNavigationState } from "expo-router";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { KeyboardProvider } from "react-native-keyboard-controller";
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import { PreferencesProvider } from "../src/store/preferences";
 import { ThemeProvider } from "../src/context/ThemeContext";
 import { ErrorBoundary } from "@/src/components/ui/ErrorBoundary";
@@ -9,9 +12,25 @@ import { useAppStore } from "@/src/store/useAppStore";
 import { useAuthStore } from "@/src/store/useAuthStore";
 import { setAuthInterceptors } from "@/src/utils/apiClient";
 import { UploadProgressBanner } from "@/src/components/ui/UploadProgressBanner";
+import { OfflineBanner } from "@/src/components/ui/OfflineBanner";
+import { CustomAlertOverlay } from "@/src/components/ui/CustomAlertOverlay";
 import { useNotificationSocket } from "@/src/hooks/useNotificationSocket";
 import { PushNotificationProvider } from "@/src/providers/PushNotificationProvider";
+import { AnalyticsProvider } from "@/src/providers/AnalyticsProvider";
+import * as SplashScreen from "expo-splash-screen";
+import * as Sentry from "@sentry/react-native";
 import "@/src/i18n"; // i18n initialization
+
+// Sentry Init
+if (process.env.EXPO_PUBLIC_SENTRY_DSN) {
+  Sentry.init({
+    dsn: process.env.EXPO_PUBLIC_SENTRY_DSN,
+    debug: false,
+    tracesSampleRate: 1.0,
+  });
+}
+
+SplashScreen.preventAutoHideAsync();
 
 if (!__DEV__) {
   // Prevent console logs from leaking and consuming memory in production
@@ -114,7 +133,11 @@ function useProtectedRoute() {
     };
 
     // Defer navigation to next tick so Stack has time to mount
-    const id = setTimeout(navigate, 0);
+    const id = setTimeout(() => {
+      navigate();
+      // Hide splash screen once routing logic has fired
+      SplashScreen.hideAsync();
+    }, 0);
     return () => clearTimeout(id);
   }, [accessToken, segments, hydrated, rootNavigationState?.key, router, isVerifying]);
 }
@@ -139,51 +162,79 @@ export default function RootLayout() {
   }, []);
 
   useEffect(() => {
+    // Check API health
     checkHealth().then(setApiHealthy);
+    
+    // NOT: App Store çıkışı öncesi (TestFlight / Build) bu kod aktif edilecek.
+    // Expo Go'da geliştirme yaparken çökmemesi için geçici olarak devre dışı bırakıldı.
+    // (async () => {
+    //   try {
+    //     const Tracking = require('expo-tracking-transparency');
+    //     await Tracking.requestTrackingPermissionsAsync();
+    //   } catch (error) {
+    //     console.warn("Tracking transparency ignored in dev");
+    //   }
+    // })();
   }, [setApiHealthy]);
 
   useProtectedRoute();
 
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
+      <KeyboardProvider>
       <ThemeProvider>
         <ErrorBoundary>
-          <PushNotificationProvider>
-            <PreferencesProvider>
-              <UploadProgressBanner />
-              <Stack
-                screenOptions={{
-                  headerShown: false,
-                  autoHideHomeIndicator: true,
-                }}
-              >
-                <Stack.Screen
-                  name="create-post"
-                  options={{
-                    gestureEnabled: true,
-                    animation: "slide_from_right",
-                  }}
-                />
-                <Stack.Screen
-                  name="create-story"
-                  options={{
-                    presentation: "modal",
-                    gestureEnabled: true,
-                  }}
-                />
+          <AnalyticsProvider>
+            <PushNotificationProvider>
+              <PreferencesProvider>
+                <BottomSheetModalProvider>
+                  <UploadProgressBanner />
+                  <OfflineBanner />
+                  <Stack
+                    screenOptions={{
+                      headerShown: false,
+                      autoHideHomeIndicator: true,
+                      animation: "fade_from_bottom", // Premium fade-up effect for general routing
+                    }}
+                  >
+                    <Stack.Screen
+                      name="create-post"
+                      options={{
+                        gestureEnabled: true,
+                        animation: "slide_from_right",
+                      }}
+                    />
+                    <Stack.Screen
+                      name="create-story"
+                      options={{
+                        presentation: "modal",
+                        gestureEnabled: true,
+                      }}
+                    />
 
-                <Stack.Screen name="login" options={{ gestureEnabled: false }} />
-                <Stack.Screen name="register" options={{ gestureEnabled: false }} />
-                <Stack.Screen name="first-time-setup" options={{ gestureEnabled: false }} />
-                <Stack.Screen name="verify-email" options={{ gestureEnabled: false }} />
-                <Stack.Screen name="(tabs)" options={{ gestureEnabled: false }} />
-                <Stack.Screen name="(venue-tabs)" options={{ gestureEnabled: false }} />
-                <Stack.Screen name="saved" options={{ gestureEnabled: true, animation: "slide_from_right" }} />
-              </Stack>
-            </PreferencesProvider>
-          </PushNotificationProvider>
+                    <Stack.Screen name="login" options={{ gestureEnabled: false }} />
+                    <Stack.Screen name="register" options={{ gestureEnabled: false }} />
+                    <Stack.Screen name="first-time-setup" options={{ gestureEnabled: false }} />
+                    <Stack.Screen name="verify-email" options={{ gestureEnabled: false }} />
+                    <Stack.Screen name="(tabs)" options={{ gestureEnabled: false }} />
+                    <Stack.Screen name="(venue-tabs)" options={{ gestureEnabled: false }} />
+                    
+                    {/* Swipe-to-dismiss screens (full screen gesture) */}
+                    <Stack.Screen name="notifications" options={{ gestureEnabled: true, fullScreenGestureEnabled: true, animation: "slide_from_right" }} />
+                    <Stack.Screen name="p/post/[postId]" options={{ gestureEnabled: true, fullScreenGestureEnabled: true, animation: "slide_from_right" }} />
+                    <Stack.Screen name="saved" options={{ gestureEnabled: true, fullScreenGestureEnabled: true, animation: "slide_from_right" }} />
+                  </Stack>
+                  <CustomAlertOverlay />
+                  <Toast />
+                </BottomSheetModalProvider>
+              </PreferencesProvider>
+            </PushNotificationProvider>
+          </AnalyticsProvider>
         </ErrorBoundary>
       </ThemeProvider>
+      </KeyboardProvider>
     </GestureHandlerRootView>
   );
 }
+
+export { ErrorBoundary } from '@/src/components/layout/ErrorBoundary';

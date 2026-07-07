@@ -16,14 +16,15 @@ import {
   ScrollView,
   NativeSyntheticEvent,
   NativeScrollEvent,
-  TouchableWithoutFeedback,
 } from "react-native";
+import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import Animated, {
   useSharedValue,
   useAnimatedStyle,
   withSpring,
   withSequence,
   withTiming,
+  runOnJS,
 } from "react-native-reanimated";
 import { SnapbackZoom } from "react-native-zoom-toolkit";
 import { Image } from "expo-image";
@@ -31,10 +32,11 @@ import { useTheme } from "@/src/hooks/useTheme";
 import { Avatar } from "@/src/components/ui";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { spacing, radius } from "@/src/constants/design";
-import { lightImpact, mediumImpact } from "@/src/utils/haptics";
+import { lightImpact, mediumImpact, heavyImpact } from "@/src/utils/haptics";
 import { timeAgo } from "@/src/utils/timeAgo";
 import type { Post } from "@/src/services/feedService";
 import { useTranslation } from "react-i18next";
+import { useStoreReview } from "@/src/hooks/useStoreReview";
 
 export interface FeedCardProps {
   post: Post;
@@ -48,7 +50,7 @@ export interface FeedCardProps {
   onZoomChange?: (zooming: boolean) => void;
 }
 
-export function FeedCard({
+const FeedCardComponent = ({
   post,
   onPress,
   onAuthorPress,
@@ -58,10 +60,11 @@ export function FeedCard({
   onShare,
   onOptionsPress,
   onZoomChange,
-}: FeedCardProps) {
+}: FeedCardProps) => {
   const { colors, isDark } = useTheme();
   const { width: screenWidth } = useWindowDimensions();
   const { t } = useTranslation();
+  const { triggerReviewAction } = useStoreReview();
   const [expanded, setExpanded] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
   const likeScale = useSharedValue(1);
@@ -94,27 +97,17 @@ export function FeedCard({
     [heartScale, heartOpacity]
   );
 
-  const handleImageTap = useCallback(
-    (x: number, y: number) => {
-      const now = Date.now();
-      const delta = now - lastTapRef.current;
-
-      if (delta < DOUBLE_TAP_DELAY && delta > 0) {
-        // Çift tıklama — önceki tek tıklama timer'ını iptal et
-        if (doubleTapTimerRef.current) {
-          clearTimeout(doubleTapTimerRef.current);
-          doubleTapTimerRef.current = null;
-        }
-        lastTapRef.current = 0;
-        triggerHeartBurst(x, y);
-        mediumImpact();
-        onLike?.(); // Her zaman toggle et — parent state doğru yönetir
-      } else {
-        lastTapRef.current = now;
+  const doubleTapGesture = Gesture.Tap()
+    .numberOfTaps(2)
+    .maxDelay(250)
+    .onStart((e) => {
+      runOnJS(triggerHeartBurst)(e.x, e.y);
+      runOnJS(heavyImpact)();
+      runOnJS(triggerReviewAction)();
+      if (onLike && !post.is_liked) {
+        runOnJS(onLike)();
       }
-    },
-    [onLike, triggerHeartBurst]
-  );
+    });
 
   const heartAnimStyle = useAnimatedStyle(() => ({
     transform: [{ scale: heartScale.value }],
@@ -139,8 +132,9 @@ export function FeedCard({
     likeScale.value = withSpring(1.35, { damping: 12 }, () => {
       likeScale.value = withSpring(1);
     });
+    triggerReviewAction(); // Store review tetikleyici
     onLike?.();
-  }, [onLike, likeScale]);
+  }, [onLike, likeScale, triggerReviewAction]);
 
   const likeAnimatedStyle = useAnimatedStyle(() => ({
     transform: [{ scale: likeScale.value }],
@@ -214,13 +208,8 @@ export function FeedCard({
 
         {/* Görsel alanı — çift tıkla beğen */}
         <Animated.View style={[styles.imageContainer, { height: imageHeight }, imageContainerAnimStyle]}>
-          <TouchableWithoutFeedback
-            onPress={(e) => {
-              const { locationX, locationY } = e.nativeEvent;
-              handleImageTap(locationX, locationY);
-            }}
-          >
-            <View style={{ width: "100%", height: imageHeight }}>
+          <GestureDetector gesture={doubleTapGesture}>
+            <View style={{ width: "100%", height: imageHeight, backgroundColor: colors.background.secondary }}>
           {isCarousel ? (
             // ── Carousel mode ──────────────────────────────────────────
             <>
@@ -296,9 +285,9 @@ export function FeedCard({
             </>
           )}
             </View>
-          </TouchableWithoutFeedback>
+          </GestureDetector>
 
-          {/* Kalp burst animasyonu */}
+          {/* Animasyonlu Kalp İkonu (üst üste binecek) */}
           <Animated.View
             pointerEvents="none"
             style={[
@@ -506,3 +495,12 @@ const styles = StyleSheet.create({
     marginTop: 4,
   },
 });
+
+export const FeedCard = React.memo(
+  FeedCardComponent,
+  (prevProps, nextProps) => 
+    prevProps.post.id === nextProps.post.id &&
+    prevProps.post.is_liked === nextProps.post.is_liked &&
+    prevProps.post.like_count === nextProps.post.like_count &&
+    prevProps.post.comment_count === nextProps.post.comment_count
+);

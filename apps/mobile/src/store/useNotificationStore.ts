@@ -61,6 +61,7 @@ export const useNotificationStore = create<NotificationStoreState>((set, get) =>
 
   // ── Tüm bildirimleri yükle ────────────────────────────
   async loadNotifications(page = 1) {
+    if (get().loading) return;
     set({ loading: true });
     try {
       const res = await getNotifications(page, 30);
@@ -86,6 +87,7 @@ export const useNotificationStore = create<NotificationStoreState>((set, get) =>
 
   // ── Takip isteklerini yükle (Novu ayrı kanal) ────────
   async loadFollowRequests(page = 1) {
+    if (get().followRequestsLoading) return;
     set({ followRequestsLoading: true });
     try {
       const res = await getFollowRequests(page, 30);

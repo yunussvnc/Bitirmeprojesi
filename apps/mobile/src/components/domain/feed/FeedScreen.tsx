@@ -13,19 +13,22 @@ import {
   TouchableOpacity,
   Animated,
   Easing,
-  Alert,
   Share,
   Platform,
 } from "react-native";
-import { FlatList } from "react-native-gesture-handler";
+import Reanimated, { FadeInUp } from "react-native-reanimated";
+import { FlashList, FlashListRef } from "@shopify/flash-list";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { router, useFocusEffect, useNavigation } from "expo-router";
 import { useTheme } from "@/src/hooks/useTheme";
 import { Screen } from "@/src/components/layout";
 import { FeedCard } from "./components/FeedCard";
+import { PremiumRefreshControl } from "@/src/components/ui/PremiumRefreshControl";
 import { CommentBottomSheet } from "./components/CommentBottomSheet";
 import { SharePostSheet } from "./components/SharePostSheet";
-import { EmptyState, LoadingState } from "@/src/components/ui";
+import { EmptyState } from "@/src/components/ui";
+import { FeedCardSkeleton } from "./components/FeedCardSkeleton";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { CreateTypeSheet, type CreateType } from "./components/CreateTypeSheet";
 import { FeedStoriesRow } from "./components/FeedStoriesRow";
@@ -42,6 +45,7 @@ import { useAppStore } from "@/src/store/useAppStore";
 import { createReport } from "@/src/services/moderationService";
 import { useTranslation } from "react-i18next";
 import { useUploadPipelineStore } from "@/src/store/useUploadPipelineStore";
+import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 
 export default function FeedScreen() {
   const { t } = useTranslation();
@@ -74,7 +78,7 @@ export default function FeedScreen() {
   const chromeHiddenRef = useRef(false);
   const storyHiddenRef = useRef(false);
   const miniBarVisibleRef = useRef(false);
-  const flatListRef = useRef<FlatList>(null);
+  const flatListRef = useRef<FlashListRef<Post>>(null);
   // Ref olarak nextCursor — loadFeed'in dependency loop'unu önler
   const nextCursorRef = useRef<string | null>(null);
   // Eş zamanlı birden fazla isteği engeller
@@ -119,6 +123,21 @@ export default function FeedScreen() {
         if (refresh) {
           setLoading(true);
           nextCursorRef.current = null;
+          
+          if (filter === "all") {
+            try {
+              const cachedStr = await AsyncStorage.getItem("feed_cache_all");
+              if (cachedStr && posts.length === 0) {
+                const cachedPosts = JSON.parse(cachedStr);
+                if (Array.isArray(cachedPosts) && cachedPosts.length > 0) {
+                  setPosts(cachedPosts);
+                  setLoading(false); // Cache verisi varsa skeleton'ı kapat
+                }
+              }
+            } catch (e) {
+              console.log("Feed cache read error:", e);
+            }
+          }
         } else {
           setLoadingMore(true);
         }
@@ -142,7 +161,17 @@ export default function FeedScreen() {
         setHasMore(res.has_more);
 
         if (refresh) {
-          setPosts(dedupeById(res.items));
+          const newPosts = dedupeById(res.items);
+          setPosts(newPosts);
+          
+          if (filter === "all") {
+            try {
+              // Cache limit (max 15 posts)
+              await AsyncStorage.setItem("feed_cache_all", JSON.stringify(newPosts.slice(0, 15)));
+            } catch (e) {
+              console.log("Feed cache write error:", e);
+            }
+          }
         } else {
           setPosts((prev) => dedupeById([...prev, ...res.items]));
         }
@@ -214,8 +243,12 @@ export default function FeedScreen() {
     if (loadingMore || !hasMore || isLoadingRef.current) return;
     loadFeed(false);
   }, [loadingMore, hasMore, loadFeed]);
+  const pendingLikesRef = useRef<Set<number>>(new Set());
 
   const handleLike = useCallback(async (post: Post) => {
+    if (pendingLikesRef.current.has(post.id)) return;
+    pendingLikesRef.current.add(post.id);
+
     setPosts((prev) =>
       prev.map((p) =>
         p.id === post.id
@@ -236,6 +269,8 @@ export default function FeedScreen() {
       setPosts((prev) =>
         prev.map((p) => (p.id === post.id ? { ...p, is_liked: post.is_liked, like_count: post.like_count } : p))
       );
+    } finally {
+      pendingLikesRef.current.delete(post.id);
     }
   }, []);
 
@@ -322,18 +357,20 @@ export default function FeedScreen() {
   );
 
   const renderItem = useCallback(
-    ({ item }: { item: Post }) => (
-      <FeedCard
-        post={item}
-        onPress={() => item.place_id && router.push(`/place/${item.place_id}` as any)}
-        onAuthorPress={() => router.push(`/user/${item.user_id}` as any)}
-        onPlacePress={() => item.place_id && router.push(`/place/${item.place_id}` as any)}
-        onLike={() => handleLike(item)}
-        onComment={() => setCommentPostId(item.id)}
-        onShare={() => setSharePost(item)}
-        onOptionsPress={() => setOptionsPost(item)}
-        onZoomChange={setIsCardZooming}
-      />
+    ({ item, index }: { item: Post; index: number }) => (
+      <View style={{ overflow: "hidden" }}>
+        <FeedCard
+          post={item}
+          onPress={() => item.place_id && router.push(`/place/${item.place_id}` as any)}
+          onAuthorPress={() => router.push(`/user/${item.user_id}` as any)}
+          onPlacePress={() => item.place_id && router.push(`/place/${item.place_id}` as any)}
+          onLike={() => handleLike(item)}
+          onComment={() => setCommentPostId(item.id)}
+          onShare={() => setSharePost(item)}
+          onOptionsPress={() => setOptionsPost(item)}
+          onZoomChange={setIsCardZooming}
+        />
+      </View>
     ),
     [handleLike]
   );
@@ -341,8 +378,8 @@ export default function FeedScreen() {
   const listEmpty = () => {
     if (loading) {
       return (
-        <View style={styles.center}>
-          <LoadingState message={t("feed.loading")} />
+        <View style={styles.listEmpty}>
+          <FeedCardSkeleton count={3} />
         </View>
       );
     }
@@ -590,28 +627,26 @@ export default function FeedScreen() {
   return (
     <Screen scrollable={false} withTabBar contentContainerStyle={{ paddingHorizontal: 0 }}>
       <View style={styles.container}>
-        <FlatList
+        <FlashList
           ref={flatListRef}
           style={styles.list}
           data={visiblePosts}
           keyExtractor={(item) => String(item.id)}
           renderItem={renderItem}
+          ItemSeparatorComponent={() => <View style={{ height: spacing.sm }} />}
           ListEmptyComponent={listEmpty}
           ListHeaderComponent={listHeader}
           contentContainerStyle={posts.length === 0 ? styles.listEmpty : styles.listContent}
-          initialNumToRender={6}
-          maxToRenderPerBatch={6}
-          windowSize={5}
-          removeClippedSubviews={Platform.OS === "android"}
           scrollEnabled={!isCardZooming}
           refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} tintColor={colors.accent.primary} />
+            <PremiumRefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
           }
           onScroll={(e) => handleScroll(e.nativeEvent.contentOffset.y)}
           scrollEventThrottle={16}
           showsVerticalScrollIndicator={false}
           onEndReached={handleLoadMore}
           onEndReachedThreshold={0.3}
+          estimatedItemSize={500}
         />
 
         {/* Filter dropdown overlay — FlatList dışında, her zaman üstte */}

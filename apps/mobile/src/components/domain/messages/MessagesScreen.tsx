@@ -29,6 +29,7 @@ import { useAuthStore } from "@/src/store/useAuthStore";
 import { useMessagesStore, Conversation } from "@/src/store/useMessagesStore";
 import { Swipeable } from "react-native-gesture-handler";
 import { useTranslation } from "react-i18next";
+import { MessageListSkeleton } from "./components/MessageListSkeleton";
 
 
 
@@ -49,12 +50,14 @@ export default function MessagesScreen() {
     const [isEditMode, setIsEditMode] = useState(false);
     const [selectedIds, setSelectedIds] = useState<string[]>([]);
     const [viewMode, setViewMode] = useState<'chats'|'requests'>('chats');
+    const [loading, setLoading] = useState(true);
     const { t } = useTranslation();
     const { getConversations } = require("@/src/services/messageService");
 
     React.useEffect(() => {
         // Ekran her yüklendiğinde (veya authUser değiştiğinde) backend'den konuşma listesini çek
         if (!authUser) return;
+        setLoading(true);
         getConversations().then((backendConvs: any[]) => {
             const store = useMessagesStore.getState();
             backendConvs.forEach((bc) => {
@@ -107,7 +110,8 @@ export default function MessagesScreen() {
                     }
                 }
             });
-        }).catch((e: any) => console.log("Failed to fetch DMs inbox", e));
+        }).catch((e: any) => console.log("Failed to fetch DMs inbox", e))
+          .finally(() => setLoading(false));
     }, [authUser]);
 
     const username = authUser?.username || authUser?.email || "Kullanıcı";
@@ -317,7 +321,7 @@ export default function MessagesScreen() {
                     activeOpacity={0.7}
                     onPress={() => {
                         lightImpact();
-                        router.push("/(tabs)/messages/archive" as any);
+                        router.push("/messages-archive" as any);
                     }}
                 >
                     <Text style={[styles.requestsLink, { color: colors.accent.primary }]}>{t("messages.archive")}</Text>
@@ -451,19 +455,23 @@ export default function MessagesScreen() {
 
 
                 {/* ── List ── */}
-                <FlatList
-                    data={filteredConversations}
-                    keyExtractor={(item) => item.id}
-                    renderItem={renderConversation}
-                    ItemSeparatorComponent={renderSeparator}
-                    ListHeaderComponent={listHeader}
-                    ListEmptyComponent={listEmpty}
-                    contentContainerStyle={{
-                        paddingBottom: insets.bottom + (Platform.OS === "ios" ? 100 : 72),
-                    }}
-                    showsVerticalScrollIndicator={false}
-                    keyboardShouldPersistTaps="handled"
-                />
+                {loading ? (
+                    <MessageListSkeleton count={6} />
+                ) : (
+                    <FlatList
+                        data={filteredConversations}
+                        keyExtractor={(item) => item.id}
+                        renderItem={renderConversation}
+                        ItemSeparatorComponent={renderSeparator}
+                        ListHeaderComponent={listHeader}
+                        ListEmptyComponent={listEmpty}
+                        contentContainerStyle={{
+                            paddingBottom: insets.bottom + (Platform.OS === "ios" ? 100 : 72),
+                        }}
+                        showsVerticalScrollIndicator={false}
+                        keyboardShouldPersistTaps="handled"
+                    />
+                )}
 
                 {/* ── Floating Selection Actions ── */}
                 {isEditMode && selectedIds.length > 0 && (
@@ -751,20 +759,28 @@ const styles = StyleSheet.create({
         paddingHorizontal: 16,
         paddingTop: 12,
         paddingBottom: 8,
+        position: 'relative',
     },
     cancelEditBtn: {
         paddingVertical: 4,
+        zIndex: 1,
     },
     cancelEditText: {
         fontSize: 15,
         fontWeight: "500",
     },
     editModeTitle: {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        textAlign: 'center',
         fontSize: 15,
         fontWeight: "600",
+        zIndex: 0,
     },
     selectAllBtn: {
         paddingVertical: 4,
+        zIndex: 1,
     },
     selectAllText: {
         fontSize: 15,

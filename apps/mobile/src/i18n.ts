@@ -1,32 +1,30 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import { getLocales } from 'expo-localization';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { mmkv } from '@/src/utils/mmkvStorage';
 
 import tr from './locales/tr.json';
 import en from './locales/en.json';
 
 const languageDetector = {
   type: 'languageDetector' as const,
-  async: true,
-  detect: async (callback: (lng: string | readonly string[] | undefined) => void) => {
+  async: false,
+  detect: () => {
     try {
-      const storedData = await AsyncStorage.getItem('asemos-settings');
+      const storedData = mmkv.getString('asemos-settings');
       if (storedData) {
         const parsed = JSON.parse(storedData);
         if (parsed?.state?.language) {
-          callback(parsed.state.language);
-          return;
+          return parsed.state.language;
         }
       }
     } catch (e) {
-      console.warn('Error reading language from AsyncStorage', e);
+      console.warn('Error reading language from MMKV', e);
     }
     
     // Fallback to system locale
     const systemCode = getLocales()[0]?.languageCode;
-    const initialLang = systemCode === 'tr' ? 'tr' : 'en';
-    callback(initialLang);
+    return systemCode === 'tr' ? 'tr' : 'en';
   },
   init: () => {},
   cacheUserLanguage: () => {}, // Managed by zustand persist store

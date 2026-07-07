@@ -6,6 +6,7 @@
  */
 
 import React, { useState, useEffect, useCallback, useRef, memo } from 'react';
+import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 import {
   View,
   Text,
@@ -14,15 +15,16 @@ import {
   TouchableOpacity,
   Dimensions,
   ActivityIndicator,
-  Alert,
   Platform,
   ScrollView,
+  Image as RNImage,
 } from 'react-native';
 import { Image as ExpoImage } from 'expo-image';
 import * as MediaLibrary from 'expo-media-library';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 import { useTheme } from '@/src/hooks/useTheme';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
+import * as ImageManipulator from 'expo-image-manipulator';
 import { spacing } from '@/src/constants/design';
 import { lightImpact, mediumImpact } from '@/src/utils/haptics';
 import { useTranslation } from "react-i18next";
@@ -73,6 +75,20 @@ const GalleryCell = memo(function GalleryCell({
   const secs = Math.floor(duration % 60);
   const durationLabel = `${mins}:${secs.toString().padStart(2, '0')}`;
 
+  const [imageUri, setImageUri] = useState(asset.uri);
+
+  useEffect(() => {
+    let isMounted = true;
+    if (Platform.OS === 'ios' && asset.uri.startsWith('ph://')) {
+      MediaLibrary.getAssetInfoAsync(asset).then((info) => {
+        if (isMounted && info?.localUri) {
+          setImageUri(info.localUri);
+        }
+      }).catch(() => {});
+    }
+    return () => { isMounted = false; };
+  }, [asset]);
+
   return (
     <TouchableOpacity
       onPress={onPress}
@@ -80,11 +96,10 @@ const GalleryCell = memo(function GalleryCell({
       style={[styles.cell, { width: CELL_SIZE, height: CELL_SIZE }]}
     >
       <ExpoImage
-        source={{ uri: asset.uri }}
+        source={{ uri: imageUri }}
         style={StyleSheet.absoluteFill}
         contentFit="cover"
         recyclingKey={asset.id}
-        cachePolicy="memory-disk"
       />
 
       {/* Selection dim */}
@@ -199,7 +214,13 @@ export function CustomGalleryGrid({
           let resolvedUri = first.uri;
           try {
             const info = await MediaLibrary.getAssetInfoAsync(first);
-            if (info?.localUri) resolvedUri = info.localUri;
+            if (info?.localUri) {
+              resolvedUri = info.localUri;
+            }
+            if (resolvedUri.startsWith('ph://') && first.mediaType === 'photo') {
+              const manip = await ImageManipulator.manipulateAsync(first.uri, []);
+              resolvedUri = manip.uri;
+            }
           } catch { /* fallback to asset.uri */ }
           const firstItem: MediaItem = {
             uri: resolvedUri,
@@ -207,7 +228,7 @@ export function CustomGalleryGrid({
             type: first.mediaType === 'video' ? 'video' : 'image',
             width: first.width,
             height: first.height,
-            duration: first.duration ? first.duration * 1000 : undefined,
+            duration: first.duration ?? undefined,
           };
           onPreviewChange(firstItem);
           // Also auto-select the first one for preview
@@ -262,6 +283,11 @@ export function CustomGalleryGrid({
         if (assetInfo?.localUri) {
           resolvedUri = assetInfo.localUri;
         }
+        
+        if (resolvedUri.startsWith('ph://') && asset.mediaType === 'photo') {
+          const manip = await ImageManipulator.manipulateAsync(asset.uri, []);
+          resolvedUri = manip.uri;
+        }
       } catch (e) {
         console.warn('[Gallery] getAssetInfoAsync failed, using asset.uri:', e);
       }
@@ -272,7 +298,7 @@ export function CustomGalleryGrid({
         type: asset.mediaType === 'video' ? 'video' : 'image',
         width: asset.width,
         height: asset.height,
-        duration: asset.duration ? asset.duration * 1000 : undefined,
+        duration: asset.duration ?? undefined,
       };
 
       if (isSingle) {

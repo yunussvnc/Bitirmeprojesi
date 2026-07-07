@@ -5,8 +5,8 @@
  * Glassmorphism bottom sheet with gradient icon backgrounds.
  */
 
-import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Modal, Pressable, Alert } from "react-native";
+import React, { useRef, useEffect } from "react";
+import { View, Text, StyleSheet, TouchableOpacity, Modal, Pressable, Animated, PanResponder, Dimensions } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTheme } from "@/src/hooks/useTheme";
 import { IconSymbol, type IconSymbolName } from "@/src/components/ui/icon-symbol";
@@ -14,6 +14,7 @@ import { lightImpact, mediumImpact } from "@/src/utils/haptics";
 import { spacing } from "@/src/constants/design";
 import { useTranslation } from "react-i18next";
 import { FEATURE_FLAGS } from "@/src/constants/featureFlags";
+import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 
 export type CreateType = "post" | "story";
 
@@ -26,6 +27,56 @@ export function CreateTypeSheet({ visible, onClose, onSelect }: CreateTypeSheetP
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
   const { t } = useTranslation();
+  
+  const panY = useRef(new Animated.Value(Dimensions.get("window").height)).current;
+  const isAnimating = useRef(false);
+
+  useEffect(() => {
+    if (visible) {
+      panY.setValue(Dimensions.get("window").height);
+      Animated.spring(panY, {
+        toValue: 0,
+        useNativeDriver: true,
+        bounciness: 4,
+      }).start();
+    }
+  }, [visible, panY]);
+
+  const panResponder = useRef(
+    PanResponder.create({
+      onStartShouldSetPanResponder: () => true,
+      onMoveShouldSetPanResponder: (_, gestureState) => Math.abs(gestureState.dy) > 10,
+      onPanResponderMove: (_, gestureState) => {
+        if (gestureState.dy > 0) {
+          panY.setValue(gestureState.dy);
+        }
+      },
+      onPanResponderRelease: (_, gestureState) => {
+        if (gestureState.dy > 100 || gestureState.vy > 1) {
+          handleClose();
+        } else {
+          Animated.spring(panY, {
+            toValue: 0,
+            useNativeDriver: true,
+            bounciness: 4,
+          }).start();
+        }
+      },
+    })
+  ).current;
+
+  const handleClose = () => {
+    if (isAnimating.current) return;
+    isAnimating.current = true;
+    Animated.timing(panY, {
+      toValue: Dimensions.get("window").height,
+      duration: 250,
+      useNativeDriver: true,
+    }).start(() => {
+      isAnimating.current = false;
+      onClose();
+    });
+  };
 
   const OPTIONS: {
     type: CreateType;
@@ -57,23 +108,24 @@ export function CreateTypeSheet({ visible, onClose, onSelect }: CreateTypeSheetP
       Alert.alert(t("create_sheet.coming_soon", "Yakında"), "Hikaye paylaşımı yakında aktif olacaktır.");
       return;
     }
-    onClose();
+    handleClose();
     onSelect(type);
   };
 
   return (
-    <Modal visible={visible} transparent animationType="slide" onRequestClose={onClose}>
-      <Pressable style={styles.overlay} onPress={onClose} android_disableSound>
-        <Pressable
+    <Modal visible={visible} transparent animationType="fade" onRequestClose={handleClose}>
+      <Pressable style={styles.overlay} onPress={handleClose} android_disableSound>
+        <Animated.View
+          {...panResponder.panHandlers}
           style={[
             styles.sheet,
             {
               backgroundColor: colors.surface.elevated,
               borderColor: colors.surface.border,
               paddingBottom: insets.bottom + 20,
+              transform: [{ translateY: panY }]
             },
           ]}
-          onPress={(e) => e.stopPropagation()}
         >
           {/* Handle */}
           <View style={[styles.handle, { backgroundColor: colors.text.tertiary + '40' }]} />
@@ -106,7 +158,7 @@ export function CreateTypeSheet({ visible, onClose, onSelect }: CreateTypeSheetP
               </TouchableOpacity>
             ))}
           </View>
-        </Pressable>
+        </Animated.View>
       </Pressable>
     </Modal>
   );
@@ -115,7 +167,7 @@ export function CreateTypeSheet({ visible, onClose, onSelect }: CreateTypeSheetP
 const styles = StyleSheet.create({
   overlay: {
     flex: 1,
-    backgroundColor: "rgba(0,0,0,0.55)",
+    backgroundColor: "transparent",
     justifyContent: "flex-end",
   },
   sheet: {

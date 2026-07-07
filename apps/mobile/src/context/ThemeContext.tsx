@@ -11,7 +11,7 @@
  */
 
 import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { mmkv } from '@/src/utils/mmkvStorage';
 import { useColorScheme } from 'react-native';
 import { logger } from '@/src/utils/logger';
 
@@ -44,13 +44,20 @@ interface ThemeProviderProps {
 
 export function ThemeProvider({ children }: ThemeProviderProps) {
   const systemTheme = useColorScheme();
-  const [themeMode, setThemeModeState] = useState<ThemeMode>('system');
-  const [isReady, setIsReady] = useState(false);
-
-  // Load saved theme preference
-  useEffect(() => {
-    loadThemePreference();
-  }, []);
+  
+  // MMKV senkron okuduğu için initialState'i doğrudan set edebiliyoruz — flaş yok!
+  const savedTheme = (() => {
+    try {
+      const saved = mmkv.getString(THEME_STORAGE_KEY);
+      if (saved && (saved === 'light' || saved === 'dark' || saved === 'system')) {
+        return saved as ThemeMode;
+      }
+    } catch {}
+    return 'system' as ThemeMode;
+  })();
+  
+  const [themeMode, setThemeModeState] = useState<ThemeMode>(savedTheme);
+  const [isReady] = useState(true); // MMKV senkron: baştan hazır
 
   // Calculate active theme based on mode
   const theme: 'light' | 'dark' = 
@@ -60,22 +67,9 @@ export function ThemeProvider({ children }: ThemeProviderProps) {
 
   const isDark = theme === 'dark';
 
-  const loadThemePreference = async () => {
+  const setThemeMode = (mode: ThemeMode) => {
     try {
-      const saved = await AsyncStorage.getItem(THEME_STORAGE_KEY);
-      if (saved && (saved === 'light' || saved === 'dark' || saved === 'system')) {
-        setThemeModeState(saved as ThemeMode);
-      }
-    } catch (error) {
-      logger.error('Error loading theme preference:', error);
-    } finally {
-      setIsReady(true);
-    }
-  };
-
-  const setThemeMode = async (mode: ThemeMode) => {
-    try {
-      await AsyncStorage.setItem(THEME_STORAGE_KEY, mode);
+      mmkv.set(THEME_STORAGE_KEY, mode);
       setThemeModeState(mode);
     } catch (error) {
       logger.error('Error saving theme preference:', error);

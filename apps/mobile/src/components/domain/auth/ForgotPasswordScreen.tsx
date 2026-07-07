@@ -1,3 +1,4 @@
+import { showError, showSuccess } from "@/src/utils/toast";
 /**
  * Forgot Password Screen
  *
@@ -13,16 +14,15 @@ import {
     StyleSheet,
     View,
     ScrollView,
-    KeyboardAvoidingView,
     Platform,
     Text,
     TouchableOpacity,
     Animated,
     Dimensions,
-    Alert,
     Keyboard,
     TouchableWithoutFeedback,
 } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 import { LinearGradient } from 'expo-linear-gradient';
 import { BlurView } from 'expo-blur';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -34,6 +34,7 @@ import { forgotPassword, resetPassword, loginUser } from '@/src/services/authSer
 import { useAuthStore } from '@/src/store/useAuthStore';
 import { Ionicons } from '@expo/vector-icons';
 import { useTranslation } from "react-i18next";
+import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 
 const { width, height } = Dimensions.get('window');
 
@@ -83,7 +84,7 @@ export default function ForgotPasswordScreen() {
             Alert.alert(t('forgot_password.code_sent'), t('forgot_password.check_email'));
         } catch (e: any) {
             const msg = e?.response?.data?.detail || e?.message || t('forgot_password.error');
-            Alert.alert(t('forgot_password.error_title'), msg);
+            showError(t('forgot_password.error_title'), msg);
         } finally {
             setLoading(false);
         }
@@ -127,7 +128,7 @@ export default function ForgotPasswordScreen() {
             );
         } catch (e: any) {
             const msg = e?.response?.data?.detail || e?.message || t('forgot_password.error');
-            Alert.alert(t('forgot_password.error_title'), msg);
+            showError(t('forgot_password.error_title'), msg);
         } finally {
             setLoading(false);
         }
@@ -148,16 +149,13 @@ export default function ForgotPasswordScreen() {
             />
 
             <SafeAreaView style={styles.safeArea}>
-                <KeyboardAvoidingView
+                <KeyboardAwareScrollView
                     style={styles.keyboardView}
-                    behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+                    contentContainerStyle={styles.scrollContent}
+                    showsVerticalScrollIndicator={false}
+                    keyboardShouldPersistTaps="handled"
+                    bottomOffset={Platform.OS === 'ios' ? 0 : 20}
                 >
-                    <ScrollView
-                        style={styles.scrollView}
-                        contentContainerStyle={styles.scrollContent}
-                        showsVerticalScrollIndicator={false}
-                        keyboardShouldPersistTaps="handled"
-                    >
                         <View style={{ flex: 1 }}>
                                 <View style={styles.content}>
                                     <View style={styles.header}>
@@ -299,13 +297,11 @@ export default function ForgotPasswordScreen() {
                                     </BlurView>
                                 </View>
                             </View>
-                    </ScrollView>
-
-                    <TouchableOpacity onPress={() => router.replace('/login')} style={styles.footer}>
-                        <Text style={styles.footerText}>{t("forgot_password.remember_password")} </Text>
-                        <Text style={styles.footerLink}>{t("forgot_password.login")}</Text>
-                    </TouchableOpacity>
-                </KeyboardAvoidingView>
+                </KeyboardAwareScrollView>
+                <TouchableOpacity onPress={() => router.replace('/login')} style={styles.footer}>
+                    <Text style={styles.footerText}>{t("forgot_password.remember_password")} </Text>
+                    <Text style={styles.footerLink}>{t("forgot_password.login")}</Text>
+                </TouchableOpacity>
             </SafeAreaView>
         </View >
     );

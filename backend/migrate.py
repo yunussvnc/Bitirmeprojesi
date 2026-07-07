@@ -135,6 +135,14 @@ def _apply_custom_ddl(conn) -> None:
                     UNIQUE(user_id, place_id)
                 );
             """))
+            # Bulanık arama (Fuzzy Search) için pg_trgm eklentisi ve indeksleri
+            logger.info("Şema: pg_trgm extension ve indeksleri kontrol ediliyor...")
+            try:
+                conn.execute(text("CREATE EXTENSION IF NOT EXISTS pg_trgm;"))
+                conn.execute(text("CREATE INDEX IF NOT EXISTS ix_places_name_trgm ON places USING gist (name gist_trgm_ops);"))
+                conn.execute(text("CREATE INDEX IF NOT EXISTS ix_places_category_trgm ON places USING gist (category gist_trgm_ops);"))
+            except Exception as e:
+                logger.error(f"pg_trgm indeks oluşturma hatası: {e}")
         else:
             conn.execute(text("""
                 CREATE TABLE IF NOT EXISTS user_visited_places (

@@ -198,7 +198,14 @@ async def websocket_notifications(
         while True:
             # Sadece ping/pong veya istemciden gelen basit mesajları dinle
             # Genelde sunucudan istemciye tek yönlü akış olur
-            await websocket.receive_text()
+            text_data = await websocket.receive_text()
+            try:
+                import json
+                data = json.loads(text_data)
+                if data.get("type") == "ping":
+                    await websocket.send_json({"type": "pong"})
+            except json.JSONDecodeError:
+                pass
     except WebSocketDisconnect:
         pass
     except Exception:

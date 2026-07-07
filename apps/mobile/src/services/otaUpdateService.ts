@@ -9,7 +9,8 @@
  */
 
 import { logger } from "@/src/utils/logger";
-import { Alert } from "react-native";
+import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
+
 
 let Updates: any = null;
 

@@ -15,12 +15,10 @@ import {
   TextInput,
   TouchableOpacity,
   ActivityIndicator,
-  KeyboardAvoidingView,
   Platform,
   Animated,
   PanResponder,
   Dimensions,
-  Alert,
   Keyboard,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -35,7 +33,9 @@ import { timeAgo } from "@/src/utils/timeAgo";
 import { deleteComment } from "@/src/services/moderationService";
 import { useAuthStore } from "@/src/store/useAuthStore";
 import { useSettingsStore } from "@/src/store/useSettingsStore";
+import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
 import { useTranslation } from "react-i18next";
+import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 
 const SCREEN_HEIGHT = Dimensions.get("window").height;
 // Kısmi açık yükseklik: handle + başlık + input + ~2 yorum satırı
@@ -185,10 +185,14 @@ export function CommentBottomSheet({ visible, onClose, postId, onCommentAdded }:
     setLoading(true);
     try {
       const res = await getComments(postId, 1, 50);
+      
+      // Handle different API paginated response structures securely.
+      const itemsList = Array.isArray(res) ? res : (Array.isArray(res?.items) ? res.items : []);
+      
       const hideOffensiveWords = useSettingsStore.getState().hideOffensiveWords;
       const filtered = hideOffensiveWords 
-        ? res.items.filter((c: PostComment) => !c.is_flagged)
-        : res.items;
+        ? itemsList.filter((c: PostComment) => !c.is_flagged)
+        : itemsList;
       setComments(filtered);
     } catch (e) {
       handleApiError(e);

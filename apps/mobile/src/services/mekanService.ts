@@ -284,3 +284,46 @@ export async function recordPlaceInteraction(
     // Sessizce başarısız ol — kritik değil
   }
 }
+
+// ── FORYOU ALGORTİMASI (ÖNERİ MOTORU) ──────────────────────────────────────
+
+export async function getForYouPlaces(
+  lat?: number,
+  lng?: number,
+  page = 1,
+  pageSize = 12
+): Promise<PaginatedPlaces> {
+  try {
+    let url = `/places/foryou?page=${page}&page_size=${pageSize}`;
+    if (lat && lng) {
+      url += `&lat=${lat}&lng=${lng}`;
+    }
+    const data = await apiGet<any>(url);
+    if (data && Array.isArray(data.items)) {
+      return {
+        ...data,
+        items: data.items.map(normalizePlace),
+      };
+    }
+    return { items: [], total: 0, page, page_size: pageSize };
+  } catch (error) {
+    logger.error("[getForYouPlaces] Error:", error);
+    return { items: [], total: 0, page, page_size: pageSize };
+  }
+}
+
+export async function logInteraction(
+  placeId: string | number,
+  interactionType: 'MAP_CLICK' | 'CARD_VIEW' | 'AI_SUGGESTION' | 'SEARCH_CLICK',
+  weight: number = 1
+): Promise<void> {
+  try {
+    await apiPost<any>('/places/interactions', {
+      place_id: Number(placeId),
+      interaction_type: interactionType,
+      weight,
+    });
+  } catch {
+    // Sessizce başarısız ol — kullanıcı deneyimini bozmamalı
+  }
+}

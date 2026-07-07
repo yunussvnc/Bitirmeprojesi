@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useMemo } from "react";
-import { View, Text, StyleSheet, TextInput, TouchableOpacity, Alert, ScrollView, Platform, Keyboard, TouchableWithoutFeedback } from "react-native";
+import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView, Platform, Keyboard, TouchableWithoutFeedback } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 import * as ImagePicker from "expo-image-picker";
@@ -14,6 +14,7 @@ import { lightImpact } from "@/src/utils/haptics";
 import { useTranslation } from "react-i18next";
 import { captureException } from "@/src/services/sentryService";
 import { validateUsername, validateName, validateBio, BIO_MAX_LENGTH } from "@/src/utils/validators";
+import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 
 export default function EditProfileScreen() {
   const { colors } = useTheme();

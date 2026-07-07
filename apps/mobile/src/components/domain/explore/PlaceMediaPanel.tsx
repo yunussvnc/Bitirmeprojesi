@@ -15,7 +15,6 @@ import {
   ActivityIndicator,
   Platform,
   Linking,
-  Alert,
   Modal,
   Pressable,
   Animated,
@@ -29,7 +28,7 @@ import { useTheme } from '@/src/hooks/useTheme';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
 import { getPlacePosts, toggleLike, type Post } from '@/src/services/feedService';
 import { getPlaceStories, type Story } from '@/src/services/storyService';
-import { lightImpact } from '@/src/utils/haptics';
+import { lightImpact, heavyImpact, success } from '@/src/utils/haptics';
 import { handleApiError } from '@/src/utils/errorHandler';
 import type { Place } from '@/src/services/mekanService';
 import { getPlaceImageSource } from '@/src/utils/placeImages';
@@ -40,6 +39,8 @@ import { useAppStore } from '@/src/store/useAppStore';
 import { useAuthStore } from '@/src/store/useAuthStore';
 import { FeedCard, CommentBottomSheet, SharePostSheet } from '@/src/components/domain/feed';
 import { getPlaceStatus } from '@/src/utils/placeStatus';
+import { useStoreReview } from '@/src/hooks/useStoreReview';
+import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 const PANEL_HORIZ_MARGIN = 12;
@@ -87,6 +88,7 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
   const toggleSaved = useAppStore((s) => s.toggleSave);
   const saved = savedIds.includes(String(place.id));
   const currentUser = useAuthStore((s) => s.user);
+  const { triggerReviewAction } = useStoreReview();
 
   const [posts, setPosts] = useState<Post[]>([]);
   const [stories, setStories] = useState<Story[]>([]);
@@ -231,7 +233,8 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
   };
 
   const handleSave = () => {
-    lightImpact();
+    success();
+    triggerReviewAction(); // Store review tetikleyici
     toggleSaved({
       id: String(place.id),
       name: place.name || '',
@@ -242,7 +245,12 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
     });
   };
 
+  const pendingLikesRef = useRef<Set<number>>(new Set());
+
   const handleLike = useCallback(async (post: Post) => {
+    if (pendingLikesRef.current.has(post.id)) return;
+    pendingLikesRef.current.add(post.id);
+
     setPosts((prev) =>
       prev.map((p) =>
         p.id === post.id
@@ -266,6 +274,8 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
         prev.map((p) => (p.id === post.id ? { ...p, is_liked: post.is_liked, like_count: post.like_count } : p))
       );
       handleApiError(e);
+    } finally {
+      pendingLikesRef.current.delete(post.id);
     }
   }, []);
 

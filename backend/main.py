@@ -3,6 +3,8 @@
 import os
 import logging
 from datetime import datetime
+from contextlib import asynccontextmanager
+import asyncio
 
 from fastapi import FastAPI, Depends
 from fastapi.middleware.cors import CORSMiddleware
@@ -40,12 +42,85 @@ settings = get_settings()
 migrate.run_migrations(engine)
 
 # ---------------------------------------------------------------------------
+# Lifespan — Modern FastAPI startup/shutdown
+# ---------------------------------------------------------------------------
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Modern lifespan context manager (on_event yerine)."""
+    logger.info("🚀 AsEmOs API v2.0 başlatılıyor...")
+    logger.info("📊 Veritabanı: %s", settings.DATABASE_URL.split("///")[-1])
+    logger.info("🤖 LLM: %s (%s)", settings.LLM_PROVIDER, "aktif" if settings.LLM_ENABLED else "devre dışı")
+    logger.info("☁️  Cloudinary: %s", "yapılandırılmış" if settings.CLOUDINARY_CLOUD_NAME else "yapılandırılmamış")
+    logger.info("🔒 Rate Limiting: aktif")
+
+    # Sentry başlat (DSN yoksa sessizce devre dışı kalır)
+    try:
+        from app.middleware.sentry_middleware import init_sentry
+        init_sentry(app)
+    except ImportError as exc:
+        logger.warning("Sentry middleware yuklenemedi (%s); Sentry atlandi.", exc)
+
+    # Güvenlik uyarıları
+    if settings.JWT_SECRET_KEY == "dev-secret-change-in-production":
+        logger.warning("⚠️  JWT_SECRET_KEY varsayılan değerde! Production'da mutlaka değiştirin!")
+    if settings.ALLOWED_ORIGINS == "*":
+        logger.warning("⚠️  ALLOWED_ORIGINS=* — Production'da spesifik origin'ler belirleyin!")
+
+    # Redis başlat
+    from app.core.redis_client import connect_redis
+    await connect_redis()
+
+    # WebSocket Redis Pub/Sub Listener başlat
+    from app.websocket.manager import manager
+    await manager.start_redis_listener()
+
+    # WebSocket Heartbeat başlat (her 30 saniyede ping + Redis TTL uzat)
+    await manager.start_heartbeat()
+
+    # Background scheduler başlat (Testlerde devre dışı bırak)
+    if os.getenv("TESTING") != "1":
+        from app.services.tasks import background_scheduler, cleanup_expired_stories
+        cleanup_expired_stories()  # İlk başlangıçta bir kez çalıştır
+        asyncio.create_task(background_scheduler())
+
+    # Explore harita pinleri: DB bos/eksikse loaded_places.json upsert
+    if os.getenv("TESTING") != "1" and settings.PLACES_SYNC_ON_STARTUP:
+        async def _sync_places_bg():
+            try:
+                from scripts.sync_loaded_places import maybe_sync_places_on_startup
+                json_path = settings.PLACES_JSON_PATH
+                if not os.path.isabs(json_path):
+                    json_path = os.path.join(os.path.dirname(__file__), json_path)
+                await asyncio.to_thread(
+                    maybe_sync_places_on_startup,
+                    settings.DATABASE_URL,
+                    json_path,
+                    settings.PLACES_SYNC_MIN_RATIO,
+                )
+            except Exception as exc:
+                logger.warning("Places sync basarisiz: %s", exc)
+
+        asyncio.create_task(_sync_places_bg())
+        logger.info("Postgres place sync arka planda kontrol edilecek...")
+
+    logger.info("✅ API hazır!")
+
+    yield  # Uygulama çalışıyor
+
+    # Shutdown
+    from app.core.redis_client import disconnect_redis
+    await disconnect_redis()
+    logger.info("🛑 API kapatılıyor...")
+
+
+# ---------------------------------------------------------------------------
 # FastAPI uygulaması
 # ---------------------------------------------------------------------------
 app = FastAPI(
     title="AsEmOs - Mekan Öneri Sistemi API",
     description="Mekan öneri, sosyal akış, eşleşme ve gerçek zamanlı mesajlaşma platformu",
     version="2.0.0",
+    lifespan=lifespan,
 )
 
 # ---------------------------------------------------------------------------
@@ -165,71 +240,3 @@ async def health_check():
         },
     }
 
-
-# ---------------------------------------------------------------------------
-# Startup event
-# ---------------------------------------------------------------------------
-@app.on_event("startup")
-async def startup_event():
-    import asyncio
-
-    logger.info("🚀 AsEmOs API v2.0 başlatılıyor...")
-    logger.info("📊 Veritabanı: %s", settings.DATABASE_URL.split("///")[-1])
-    logger.info("🤖 LLM: %s (%s)", settings.LLM_PROVIDER, "aktif" if settings.LLM_ENABLED else "devre dışı")
-    logger.info("☁️  Cloudinary: %s", "yapılandırılmış" if settings.CLOUDINARY_CLOUD_NAME else "yapılandırılmamış")
-    logger.info("🔒 Rate Limiting: aktif")
-
-    # Sentry başlat (DSN yoksa sessizce devre dışı kalır)
-    try:
-        from app.middleware.sentry_middleware import init_sentry
-        init_sentry(app)
-    except ImportError as exc:
-        logger.warning("Sentry middleware yuklenemedi (%s); Sentry atlandi.", exc)
-
-    # Güvenlik uyarıları
-    if settings.JWT_SECRET_KEY == "dev-secret-change-in-production":
-        logger.warning("⚠️  JWT_SECRET_KEY varsayılan değerde! Production'da mutlaka değiştirin!")
-    if settings.ALLOWED_ORIGINS == "*":
-        logger.warning("⚠️  ALLOWED_ORIGINS=* — Production'da spesifik origin'ler belirleyin!")
-
-    # Redis başlat
-    from app.core.redis_client import connect_redis
-    await connect_redis()
-
-    # WebSocket Redis Pub/Sub Listener başlat
-    from app.websocket.manager import manager
-    await manager.start_redis_listener()
-
-    # Background scheduler başlat (Testlerde devre dışı bırak)
-    if os.getenv("TESTING") != "1":
-        from app.services.tasks import background_scheduler, cleanup_expired_stories
-        cleanup_expired_stories()  # İlk başlangıçta bir kez çalıştır
-        asyncio.create_task(background_scheduler())
-
-    # Explore harita pinleri: DB bos/eksikse loaded_places.json upsert
-    if os.getenv("TESTING") != "1" and settings.PLACES_SYNC_ON_STARTUP:
-        async def _sync_places_bg():
-            try:
-                from scripts.sync_loaded_places import maybe_sync_places_on_startup
-                json_path = settings.PLACES_JSON_PATH
-                if not os.path.isabs(json_path):
-                    json_path = os.path.join(os.path.dirname(__file__), json_path)
-                await asyncio.to_thread(
-                    maybe_sync_places_on_startup,
-                    settings.DATABASE_URL,
-                    json_path,
-                    settings.PLACES_SYNC_MIN_RATIO,
-                )
-            except Exception as exc:
-                logger.warning("Places sync basarisiz: %s", exc)
-
-        asyncio.create_task(_sync_places_bg())
-        logger.info("Postgres place sync arka planda kontrol edilecek...")
-
-    logger.info("✅ API hazır!")
-
-@app.on_event("shutdown")
-async def shutdown_event():
-    from app.core.redis_client import disconnect_redis
-    await disconnect_redis()
-    logger.info("🛑 API kapatılıyor...")

@@ -1,3 +1,4 @@
+import { showError, showSuccess } from "@/src/utils/toast";
 /**
  * Premium Login Screen
  *
@@ -13,27 +14,26 @@ import {
   StyleSheet,
   View,
   ScrollView,
-  KeyboardAvoidingView,
   Platform,
   Text,
   TouchableOpacity,
   Animated,
   Dimensions,
   Image,
-  Alert,
   Keyboard,
   TouchableWithoutFeedback,
 } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 import { LinearGradient } from 'expo-linear-gradient';
-import { BlurView } from 'expo-blur';
 import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Button, Input } from '@/src/components/ui';
+import { Button, Input, GlassCard } from '@/src/components/ui';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
 import { useTranslation } from 'react-i18next';
 import { lightImpact, success } from '@/src/utils/haptics';
 import { loginUser } from '@/src/services/authService';
 import { useAuthStore } from '@/src/store/useAuthStore';
 import { useSocialAuth } from '@/src/hooks/useSocialAuth';
+import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 
 const { width, height } = Dimensions.get('window');
 
@@ -121,7 +121,7 @@ export default function LoginScreen() {
       }
 
       setErrors({ general: msg });
-      Alert.alert(t('auth.login_error_title'), msg);
+      showError(t('auth.login_error_title'), msg);
     } finally {
       isSubmittingRef.current = false;
       setLoading(false);
@@ -138,40 +138,58 @@ export default function LoginScreen() {
     setErrors((prev) => (prev[field] ? { ...prev, [field]: undefined } : prev));
   }, []);
 
-  // --- Arka plan gÃ¶rsel carousel ---
+  // --- Arka plan görsel carousel — kararma efektli geçiş ---
   const [imgIndex, setImgIndex] = useState(0);
-  const fadeAnim = useRef(new Animated.Value(1)).current;
+  const blackOverlay = useRef(new Animated.Value(0)).current; // 0 = görsel görünür, 1 = tamamen siyah
+  const transitioningRef = useRef(false);
+
+  const advanceCarousel = useCallback(() => {
+    if (transitioningRef.current) return;
+    transitioningRef.current = true;
+
+    // 1) Ekranı karart (siyaha fade)
+    Animated.timing(blackOverlay, {
+      toValue: 1,
+      duration: 1000,
+      useNativeDriver: true,
+    }).start(() => {
+      // 2) Ekran tamamen siyahken görseli değiştir
+      setImgIndex((prev) => (prev + 1) % FALLBACK_PLACE_IMAGES.length);
+
+      // 3) Kısa bir bekleme — yeni görsel render olsun
+      setTimeout(() => {
+        // 4) Siyahtan aç (yeni görsel görünsün)
+        Animated.timing(blackOverlay, {
+          toValue: 0,
+          duration: 1000,
+          useNativeDriver: true,
+        }).start(() => {
+          transitioningRef.current = false;
+        });
+      }, 200);
+    });
+  }, [blackOverlay]);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      // Mevcut gÃ¶rseli fade-out yap
-      Animated.timing(fadeAnim, {
-        toValue: 0,
-        duration: 800,
-        useNativeDriver: true,
-      }).start(() => {
-        // Sonraki gÃ¶rsele geÃ§
-        setImgIndex((prev) => (prev + 1) % FALLBACK_PLACE_IMAGES.length);
-        // Yeni gÃ¶rseli fade-in yap
-        Animated.timing(fadeAnim, {
-          toValue: 1,
-          duration: 800,
-          useNativeDriver: true,
-        }).start();
-      });
-    }, CAROUSEL_INTERVAL_MS);
-
+    const interval = setInterval(advanceCarousel, CAROUSEL_INTERVAL_MS);
     return () => clearInterval(interval);
-  }, [fadeAnim]);
+  }, [advanceCarousel]);
 
   return (
     <View style={styles.container}>
-      {/* Arka plan gÃ¶rseli carousel â€” crossfade efekti */}
+      {/* Arka plan görseli */}
       <View style={StyleSheet.absoluteFill}>
-        <Animated.Image
+        <Image
           source={{ uri: FALLBACK_PLACE_IMAGES[imgIndex] }}
-          style={[StyleSheet.absoluteFillObject, { opacity: fadeAnim }]}
+          style={StyleSheet.absoluteFillObject}
           resizeMode="cover"
+        />
+        {/* Kararma overlay — geçiş sırasında siyaha dönüp tekrar açılır */}
+        <Animated.View
+          style={[
+            StyleSheet.absoluteFillObject,
+            { backgroundColor: '#000', opacity: blackOverlay },
+          ]}
         />
       </View>
 
@@ -183,19 +201,15 @@ export default function LoginScreen() {
       />
 
       <SafeAreaView style={styles.safeArea} edges={['top']}>
-        <KeyboardAvoidingView
-          behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        <KeyboardAwareScrollView
           style={styles.keyboardView}
-          keyboardVerticalOffset={Platform.OS === 'ios' ? 0 : 20}
+          contentContainerStyle={styles.scrollContent}
+          keyboardShouldPersistTaps="handled"
+          showsVerticalScrollIndicator={false}
+          bottomOffset={Platform.OS === 'ios' ? 0 : 20}
         >
-          <ScrollView
-            style={styles.scrollView}
-            contentContainerStyle={styles.scrollContent}
-            keyboardShouldPersistTaps="handled"
-            showsVerticalScrollIndicator={false}
-          >
-            <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
-              <View style={styles.content} pointerEvents="box-none">
+          <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+            <View style={styles.content} pointerEvents="box-none">
                 <View style={styles.topBlock}>
                     {/* Marka & slogan â€“ profesyonel tipografi */}
                     <View style={styles.header}>
@@ -229,8 +243,7 @@ export default function LoginScreen() {
                       </TouchableOpacity>
                     </View>
 
-                    <View style={styles.card}>
-                      <BlurView intensity={90} tint="dark" style={StyleSheet.absoluteFillObject} />
+                    <GlassCard intensity={25} tint="dark" style={styles.card}>
                       <View style={styles.cardInner}>
                         <Input
                           variant="onDark"
@@ -331,13 +344,11 @@ export default function LoginScreen() {
                         </TouchableOpacity>
 
                       </View>
-                    </View>
+                    </GlassCard>
                   </View>
                 </View>
             </TouchableWithoutFeedback>
-          </ScrollView>
-
-        </KeyboardAvoidingView>
+        </KeyboardAwareScrollView>
       </SafeAreaView>
     </View>
 

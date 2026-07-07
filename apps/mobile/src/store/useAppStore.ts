@@ -1,4 +1,4 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { mmkvStorage } from "@/src/utils/mmkvStorage";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import type { Post } from "@/src/services/feedService";
@@ -238,7 +238,7 @@ export const useAppStore = create<AppState>()(
     }),
     {
       name: "app-store-v2",
-      storage: createJSONStorage(() => AsyncStorage),
+      storage: createJSONStorage(() => mmkvStorage),
       partialize: (state) => ({
         savedIds: state.savedIds,
         savedById: state.savedById,

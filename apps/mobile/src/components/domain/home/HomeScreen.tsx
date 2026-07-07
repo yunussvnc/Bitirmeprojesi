@@ -19,10 +19,9 @@ import {
   Easing,
   Keyboard,
   TouchableWithoutFeedback,
-  Alert,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { FlatList } from "react-native-gesture-handler";
+import { FlashList, FlashListRef } from "@shopify/flash-list";
 import * as Location from "expo-location";
 import { useTheme } from "@/src/hooks/useTheme";
 import { Screen, type ScreenRef } from "@/src/components/shared/layout";
@@ -41,15 +40,17 @@ import {
 import { usePreferences } from "@/src/store/preferences";
 import { getPlaceImageSource, hasPlaceImage } from "@/src/utils/placeImages";
 import { createTextStyle, s } from "@/src/constants/design";
-import { getAllPlaces } from "@/src/services/mekanService";
+import { getAllPlaces, getForYouPlaces, logInteraction } from "@/src/services/mekanService";
 import { recommendPlaces } from "@/src/services/api";
 import type { Place } from "@/src/services/mekanService";
 import type { RecommendItem, RecommendResponse } from "@/src/types/recommend";
 import { handleApiError } from "@/src/utils/errorHandler";
+import { getCurrentLocation } from "@/src/utils/location";
 import { lightImpact } from "@/src/utils/haptics";
 import { useAppStore } from "@/src/store/useAppStore";
 import { useTabBarVisibility } from "@/src/components/layout/TabBarVisibilityContext";
 import { useTranslation } from "react-i18next";
+import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 
 /* ── İlçe algılama (prompt'ta il/ilçe var mı?) ── */
 const DISTRICTS = [
@@ -79,7 +80,7 @@ function queryContainsLocation(query: string): boolean {
 type DisplayMode = "browse" | "ai";
 
 /** Common shape for list items (RecommendItem | Place) */
-type PlaceLike = { id: number | string; name?: string; category?: string; photo_url?: string; description?: string; subtitle?: string; tags?: string[] };
+type PlaceLike = { id: number | string; name?: string; category?: string; city?: string; photo_url?: string; description?: string; subtitle?: string; tags?: string[] };
 
 /** Ayrı component – FlatList her query değişiminde header'ı remount etmez, klavye kapanmaz */
 function HomeListHeader({
@@ -237,7 +238,7 @@ export default function HomeScreen() {
   const { t } = useTranslation();
   const navigation = useNavigation();
   const screenRef = useRef<ScreenRef>(null);
-  const flatListRef = useRef<FlatList>(null);
+  const flatListRef = useRef<FlashListRef<any>>(null);
   const { prefs, patchPrefs, resetPrefs } = usePreferences();
   const savedIds = useAppStore((s) => s.savedIds);
 
@@ -304,8 +305,16 @@ export default function HomeScreen() {
     try {
       setLoading(true);
       setError("");
-      const data = await getAllPlaces();
-      setAllPlaces(data);
+      
+      const loc = await getCurrentLocation().catch(() => null);
+      let lat, lng;
+      if (loc) {
+        lat = loc.latitude;
+        lng = loc.longitude;
+      }
+      
+      const paginatedData = await getForYouPlaces(lat, lng, 1, 12);
+      setAllPlaces(paginatedData.items);
     } catch (e: unknown) {
       const appError = handleApiError(e);
       setError(appError.userMessage);
@@ -516,6 +525,7 @@ export default function HomeScreen() {
           category={it.category ?? place?.category}
           location={loc}
           address={(place as any)?.address}
+          city={it.city ?? (place as any)?.city}
           explanation={isAi ? (item as RecommendItem).explanation : undefined}
           distance_m={isAi ? (item as RecommendItem).distance_m : undefined}
           isRecommended={isAi}
@@ -605,7 +615,7 @@ export default function HomeScreen() {
           onApply={handleApplyFilters}
         />
 
-        <FlatList
+        <FlashList
           ref={flatListRef}
           data={displayList}
           keyExtractor={(item) => String((item as PlaceLike).id)}
@@ -635,10 +645,8 @@ export default function HomeScreen() {
             />
           }
           ListEmptyComponent={listEmpty}
+          ItemSeparatorComponent={() => <View style={{ height: 6 }} />}
           contentContainerStyle={displayList.length > 0 ? styles.listContent : styles.listContentEmpty}
-          initialNumToRender={8}
-          windowSize={5}
-          removeClippedSubviews={Platform.OS === "android"}
           onViewableItemsChanged={onViewableItemsChanged}
           viewabilityConfig={viewabilityConfig}
           refreshControl={

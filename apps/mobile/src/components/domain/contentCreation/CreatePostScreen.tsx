@@ -21,13 +21,15 @@ import {
   TextInput,
   ScrollView,
   Alert,
-  KeyboardAvoidingView,
   Platform,
   BackHandler,
   Switch,
   FlatList,
+  Keyboard,
+  TouchableWithoutFeedback,
 } from "react-native";
 import { Image as ExpoImage } from 'expo-image';
+import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { router, useLocalSearchParams } from "expo-router";
 import { useTheme } from "@/src/hooks/useTheme";
@@ -42,6 +44,7 @@ import { sanitizeCaption } from "@/src/contentCreation/mediaValidation";
 import type { PostMeta, TaggedUser, MediaItem } from "@/src/contentCreation/types";
 import { apiGet } from "@/src/utils/apiClient";
 import { Avatar } from "@/src/components/ui/Avatar";
+import { ConfirmModal } from "@/src/components/ui/ConfirmModal";
 
 export default function CreatePostScreen() {
   const { colors } = useTheme();
@@ -59,13 +62,12 @@ export default function CreatePostScreen() {
   const uploadQuality = useSettingsStore((s) => s.uploadQuality);
   const enqueuePost = useUploadPipelineStore((s) => s.enqueuePost);
 
+  const [confirmVisible, setConfirmVisible] = useState(false);
+
   const handleClose = useCallback(() => {
     lightImpact();
-    Alert.alert(t("content_creation.cancel"), t("content_creation.cancel_post_desc"), [
-      { text: t("content_creation.give_up"), style: "cancel" },
-      { text: t("content_creation.exit"), style: "destructive", onPress: () => { lightImpact(); if (router.canGoBack()) { router.back(); } else { router.replace("/(tabs)/feed"); } } },
-    ]);
-  }, [t]);
+    setConfirmVisible(true);
+  }, []);
 
   useEffect(() => {
     const sub = BackHandler.addEventListener("hardwareBackPress", () => {
@@ -153,6 +155,24 @@ export default function CreatePostScreen() {
 
         <PlacePickerSheet visible={placePickerOpen} onClose={() => setPlacePickerOpen(false)} onSelect={(place) => setSelectedPlace(place)} />
       </KeyboardAvoidingView>
+      <ConfirmModal
+        visible={confirmVisible}
+        title={t("content_creation.cancel")}
+        description={t("content_creation.cancel_post_desc")}
+        cancelText={t("content_creation.give_up")}
+        confirmText={t("content_creation.exit")}
+        confirmStyle="destructive"
+        onCancel={() => setConfirmVisible(false)}
+        onConfirm={() => {
+          setConfirmVisible(false);
+          lightImpact();
+          if (router.canGoBack()) {
+            router.back();
+          } else {
+            router.replace("/(tabs)/feed");
+          }
+        }}
+      />
     </View>
   );
 }
@@ -235,7 +255,7 @@ function PostShareStep({
       setTagSearching(true);
       try {
         const results = await apiGet<{ items: { id: number; username: string; avatar_url?: string }[] }>(
-          `/users/search?q=${encodeURIComponent(tagSearch.trim())}&page_size=10`
+          `/users/search?q=${encodeURIComponent(tagSearch.trim())}&page_size=20&for_tagging=true`
         );
         setTagResults(
           (results.items || []).map((u) => ({
@@ -287,19 +307,19 @@ function PostShareStep({
   const titleStyle = createTextStyle("title", colors.text.primary);
 
   return (
-    <View style={[styles.flex, { backgroundColor: colors.background.primary }]}>
-      {/* Premium Header */}
-      <View style={[styles.header, { paddingTop: insets.top + spacing.md, borderBottomColor: colors.surface.border }]}>
-        <TouchableOpacity onPress={onBack} style={styles.headerBtn} hitSlop={12}>
-          <IconSymbol name="chevron.left" size={24} color={colors.text.primary} />
-        </TouchableOpacity>
-        <Text style={[titleStyle, styles.headerTitle]}>{t("content_creation.new_post")}</Text>
-        <View style={styles.headerBtn} />
-      </View>
+    <TouchableWithoutFeedback onPress={Keyboard.dismiss} accessible={false}>
+      <View style={[styles.flex, { backgroundColor: colors.background.primary }]}>
+        {/* Premium Header */}
+        <View style={[styles.header, { paddingTop: insets.top + spacing.md, borderBottomColor: colors.surface.border }]}>
+          <TouchableOpacity onPress={onBack} style={styles.headerBtn} hitSlop={12}>
+            <IconSymbol name="chevron.left" size={24} color={colors.text.primary} />
+          </TouchableOpacity>
+          <Text style={[titleStyle, styles.headerTitle]}>{t("content_creation.new_post")}</Text>
+          <View style={styles.headerBtn} />
+        </View>
 
       <KeyboardAvoidingView style={styles.flex} behavior={Platform.OS === "ios" ? "padding" : undefined}>
-        <ScrollView style={styles.flex} contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled">
-
+        <ScrollView style={styles.flex} contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false} keyboardShouldPersistTaps="handled" keyboardDismissMode="on-drag">
           {/* Caption & Thumbnail Row */}
           <View style={[styles.captionRow, { borderBottomColor: colors.surface.border }]}>
             {mediaItems && mediaItems.length > 1 ? (
@@ -422,7 +442,7 @@ function PostShareStep({
 
                 {/* Search Results */}
                 {tagResults.length > 0 && (
-                  <View style={styles.tagResultsList}>
+                  <ScrollView style={styles.tagResultsList} nestedScrollEnabled={true} keyboardShouldPersistTaps="handled">
                     {tagResults.map((user) => {
                       const isTagged = postMeta.taggedUsers.some((u) => u.id === user.id);
                       return (
@@ -441,7 +461,7 @@ function PostShareStep({
                         </TouchableOpacity>
                       );
                     })}
-                  </View>
+                  </ScrollView>
                 )}
               </View>
             )}
@@ -499,7 +519,9 @@ function PostShareStep({
           <Text style={styles.shareText}>{t("content_creation.share")}</Text>
         </TouchableOpacity>
       </View>
+
     </View>
+    </TouchableWithoutFeedback>
   );
 }
 
@@ -525,6 +547,7 @@ const styles = StyleSheet.create({
   },
   scrollContent: {
     paddingBottom: spacing.xl * 3,
+    flexGrow: 1,
   },
   captionRow: {
     flexDirection: "row",
@@ -646,6 +669,7 @@ const styles = StyleSheet.create({
   },
   tagResultsList: {
     marginTop: 8,
+    maxHeight: 336, // 6 users * ~56px per row
   },
   tagResultRow: {
     flexDirection: 'row',

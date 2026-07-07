@@ -10,7 +10,6 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  Alert,
   ActivityIndicator,
 } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
@@ -28,6 +27,7 @@ import { useAppStore } from "@/src/store/useAppStore";
 import { handleApiError } from "@/src/utils/errorHandler";
 import { lightImpact, success } from "@/src/utils/haptics";
 import { useTranslation } from "react-i18next";
+import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 
 export default function PostDetailScreen() {
   const { colors } = useTheme();
@@ -72,8 +72,12 @@ export default function PostDetailScreen() {
   useEffect(() => {
     loadPosts();
   }, [loadPosts]);
+  const pendingLikesRef = useRef<Set<number>>(new Set());
 
   const handleLike = useCallback(async (likedPost: Post) => {
+    if (pendingLikesRef.current.has(likedPost.id)) return;
+    pendingLikesRef.current.add(likedPost.id);
+    
     lightImpact();
     // Optimistic update
     setPosts((prev) =>
@@ -84,16 +88,25 @@ export default function PostDetailScreen() {
       )
     );
     try {
-      await toggleLike(likedPost.id);
+      const res = await toggleLike(likedPost.id);
+      setPosts((prev) =>
+        prev.map((p) =>
+          p.id === likedPost.id
+            ? { ...p, is_liked: res.liked, like_count: res.like_count }
+            : p
+        )
+      );
     } catch {
       // Revert
       setPosts((prev) =>
         prev.map((p) =>
           p.id === likedPost.id
-            ? { ...p, is_liked: !p.is_liked, like_count: p.like_count + (p.is_liked ? -1 : 1) }
+            ? { ...p, is_liked: likedPost.is_liked, like_count: likedPost.like_count }
             : p
         )
       );
+    } finally {
+      pendingLikesRef.current.delete(likedPost.id);
     }
   }, []);
 

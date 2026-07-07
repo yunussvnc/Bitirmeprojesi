@@ -1,7 +1,7 @@
 /**
  * EmbeddedCamera – Premium embedded full-screen camera
  *
- * expo-camera ile uygulamanın içinde gömülü kamera.
+ * react-native-vision-camera ile uygulamanın içinde gömülü kamera.
  * Fotoğraf çekme, video kayıt, ön/arka geçiş, flaş kontrolü.
  * Story & Reels modlarında tam ekran (9:16).
  */
@@ -13,10 +13,9 @@ import {
   StyleSheet,
   TouchableOpacity,
   Dimensions,
-  Alert,
   ActivityIndicator,
 } from 'react-native';
-import { CameraView, useCameraPermissions, useMicrophonePermissions, FlashMode } from 'expo-camera';
+import { Camera, useCameraDevice, useCameraPermission, useMicrophonePermission } from 'react-native-vision-camera';
 import { useTranslation } from 'react-i18next';
 import { Image as ExpoImage } from 'expo-image';
 import * as MediaLibrary from 'expo-media-library';
@@ -34,6 +33,7 @@ import { lightImpact, mediumImpact } from '@/src/utils/haptics';
 import type { MediaItem, ContentType } from '@/src/contentCreation/types';
 import { MAX_VIDEO_DURATION_SEC } from '@/src/contentCreation/config';
 import { LinearGradient } from 'expo-linear-gradient';
+import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 
@@ -53,8 +53,8 @@ export function EmbeddedCamera({
 }: EmbeddedCameraProps) {
   const { colors } = useTheme();
   const { t } = useTranslation();
-  const [permission, requestPermission] = useCameraPermissions();
-  const [micPermission, requestMicPermission] = useMicrophonePermissions();
+  const { hasPermission: hasCamPermission, requestPermission: requestCamPermission } = useCameraPermission();
+  const { hasPermission: hasMicPermission, requestPermission: requestMicPermission } = useMicrophonePermission();
   const [facing, setFacing] = useState<'front' | 'back'>('back');
   const [flash, setFlash] = useState<'off' | 'on' | 'auto'>('off');
   const [isRecording, setIsRecording] = useState(false);
@@ -62,10 +62,12 @@ export function EmbeddedCamera({
   const [capturing, setCapturing] = useState(false);
   // Kamera hazır olana kadar deklanşör devre dışı
   const [isCameraReady, setIsCameraReady] = useState(false);
-  const cameraRef = useRef<CameraView>(null);
+  const cameraRef = useRef<any>(null);
   const recordTimerRef = useRef<ReturnType<typeof setInterval> | null>(null);
   const isRecordingRef = useRef(false);
   const maxVideoSec = MAX_VIDEO_DURATION_SEC[contentType];
+
+  const device = useCameraDevice(facing);
 
   // Animations
   const shutterScale = useSharedValue(1);
@@ -74,13 +76,13 @@ export function EmbeddedCamera({
   const shutterRingProgress = useSharedValue(0);
 
   useEffect(() => {
-    if (!permission?.granted) {
-      requestPermission();
+    if (!hasCamPermission) {
+      requestCamPermission();
     }
-    if (contentType === 'story' && !micPermission?.granted) {
+    if (contentType === 'story' && !hasMicPermission) {
       requestMicPermission();
     }
-  }, [permission, micPermission, contentType]);
+  }, [hasCamPermission, hasMicPermission, contentType]);
 
   // Cleanup timer on unmount
   useEffect(() => {
@@ -121,7 +123,7 @@ export function EmbeddedCamera({
   }, []);
 
   const takePhoto = useCallback(async () => {
-    if (!cameraRef.current || capturing || !isCameraReady) return;
+    if (!cameraRef.current || capturing || !isCameraReady || !device) return;
     setCapturing(true);
     mediumImpact();
     shutterScale.value = withSequence(
@@ -130,14 +132,12 @@ export function EmbeddedCamera({
     );
 
     try {
-      // skipProcessing:false → iOS'ta EXIF rotasyonu otomatik düzeltilir
-      const photo = await cameraRef.current.takePictureAsync({
-        quality: 0.92,
-        skipProcessing: false,
+      const photo = await cameraRef.current.takePhoto({
+        flash: flash === 'auto' ? 'auto' : flash === 'on' ? 'on' : 'off',
       });
       if (photo) {
         onCapture({
-          uri: photo.uri,
+          uri: 'file://' + photo.path,
           type: 'image',
           width: photo.width,
           height: photo.height,
@@ -149,9 +149,9 @@ export function EmbeddedCamera({
     } finally {
       setCapturing(false);
     }
-  }, [capturing, isCameraReady, onCapture]);
+  }, [capturing, isCameraReady, onCapture, flash, device]);
 
-  const stopRecording = useCallback(() => {
+  const stopRecording = useCallback(async () => {
     if (recordTimerRef.current) {
       clearInterval(recordTimerRef.current);
       recordTimerRef.current = null;
@@ -160,14 +160,14 @@ export function EmbeddedCamera({
     setIsRecording(false);
     shutterRingProgress.value = withTiming(0, { duration: 200 });
     try {
-      cameraRef.current?.stopRecording();
+      await cameraRef.current?.stopRecording();
     } catch {
       // Camera may already have stopped
     }
   }, []);
 
   const startRecording = useCallback(async () => {
-    if (!cameraRef.current || isRecordingRef.current) return;
+    if (!cameraRef.current || isRecordingRef.current || !device) return;
     isRecordingRef.current = true;
     setIsRecording(true);
     mediumImpact();
@@ -189,23 +189,25 @@ export function EmbeddedCamera({
     }, 1000);
 
     try {
-      const video = await cameraRef.current.recordAsync({
-        maxDuration: maxVideoSec,
+      cameraRef.current.startRecording({
+        flash: flash === 'on' ? 'on' : 'off',
+        onRecordingFinished: (video: any) => {
+          onCapture({
+            uri: 'file://' + video.path,
+            type: 'video',
+            duration: video.duration * 1000,
+          });
+        },
+        onRecordingError: (error: any) => {
+          console.warn('Video record error:', error);
+        }
       });
-      if (video) {
-        onCapture({
-          uri: video.uri,
-          type: 'video',
-          duration: recordDuration * 1000,
-        });
-      }
     } catch (e) {
-      console.warn('Video record error:', e);
-    } finally {
+      console.warn('Video start error:', e);
       isRecordingRef.current = false;
       setIsRecording(false);
     }
-  }, [maxVideoSec, onCapture, stopRecording]);
+  }, [maxVideoSec, onCapture, stopRecording, flash, device]);
 
   // onPressIn → anlık fotoğraf çekimi (onPress'e kıyasla ~300ms daha hızlı)
   const handleShutterPressIn = useCallback(() => {
@@ -249,7 +251,7 @@ export function EmbeddedCamera({
   };
 
   // Permission not yet checked
-  if (!permission || (contentType === 'story' && !micPermission)) {
+  if (hasCamPermission === undefined || (contentType === 'story' && hasMicPermission === undefined)) {
     return (
       <View style={[styles.container, styles.centered, { backgroundColor: '#000' }]}>
         <ActivityIndicator size="large" color={colors.accent.primary} />
@@ -258,14 +260,14 @@ export function EmbeddedCamera({
   }
 
   // Permission denied
-  const isMicDenied = contentType === 'story' && (!micPermission || !micPermission.granted);
-  if (!permission.granted || isMicDenied) {
+  const isMicDenied = contentType === 'story' && !hasMicPermission;
+  if (!hasCamPermission || isMicDenied) {
     return (
       <View style={[styles.container, styles.centered, { backgroundColor: '#000' }]}>
         <View style={styles.permissionCard}>
           <IconSymbol name="camera.circle.fill" size={64} color="#667eea" />
           <Text style={styles.permissionTitle}>
-            {isMicDenied && !permission.granted 
+            {isMicDenied && !hasCamPermission 
               ? "Kamera ve Mikrofon Erişimi" 
               : isMicDenied 
                 ? "Mikrofon Erişimi" 
@@ -279,7 +281,7 @@ export function EmbeddedCamera({
           <TouchableOpacity
             style={[styles.permissionBtn, { backgroundColor: colors.accent.primary }]}
             onPress={async () => {
-              await requestPermission();
+              await requestCamPermission();
               if (contentType === 'story') {
                 await requestMicPermission();
               }
@@ -296,16 +298,25 @@ export function EmbeddedCamera({
   return (
     <View style={[styles.container, { backgroundColor: '#000' }]}>
       {/* Camera Preview */}
-      <CameraView
-        ref={cameraRef}
-        style={styles.camera}
-        facing={facing}
-        flash={flash as FlashMode}
-        onCameraReady={() => setIsCameraReady(true)}
-      />
+      {device ? (
+        <Camera
+          ref={cameraRef}
+          style={styles.camera}
+          device={device}
+          isActive={true}
+          photo={true}
+          video={contentType !== 'post'}
+          audio={contentType !== 'post'}
+          onInitialized={() => setIsCameraReady(true)}
+        />
+      ) : (
+        <View style={[styles.cameraLoadingOverlay, { backgroundColor: '#000' }]}>
+          <ActivityIndicator size="large" color="#fff" />
+        </View>
+      )}
 
       {/* Kamera hazırlanıyor overlay */}
-      {!isCameraReady && (
+      {!isCameraReady && device && (
         <View style={styles.cameraLoadingOverlay}>
           <ActivityIndicator size="large" color="#fff" />
         </View>
@@ -409,7 +420,7 @@ export function EmbeddedCamera({
       </View>
 
       {/* Capture mode hint */}
-      {!isRecording && !isCameraReady && (
+      {!isRecording && !isCameraReady && device && (
         <View style={styles.hintBar}>
           <Text style={styles.hintText}>Kamera hazırlanıyor...</Text>
         </View>

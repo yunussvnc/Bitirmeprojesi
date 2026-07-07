@@ -7,11 +7,12 @@
  */
 
 import React, { useEffect, useRef } from 'react';
-import { Text, StyleSheet, Animated } from 'react-native';
+import { Text, StyleSheet, Animated, View } from 'react-native';
 import { IconSymbol, type IconSymbolName } from './icon-symbol';
 import { useTheme } from '@/src/hooks/useTheme';
 import { Button } from './Button';
 import { createTextStyle, spacing, radius } from '@/src/constants/design';
+import LottieView from 'lottie-react-native';
 
 /** Preset variants for common empty states */
 export type EmptyStateVariant = 'feed' | 'saved' | 'reels' | 'notifications' | 'search' | 'places' | 'custom';
@@ -133,25 +134,38 @@ export function EmptyState({
         },
       ]}
     >
-      <Animated.View
-        style={[
-          styles.iconContainer,
-          {
-            backgroundColor: iconBgColor,
-            marginBottom: spacing.base,
-          },
-        ]}
-      >
-        <IconSymbol name={icon} size={48} color={iconColor} />
-      </Animated.View>
-      <Text style={[titleStyle, styles.title, { marginBottom: spacing.sm }]}>
-        {title}
-      </Text>
-      <Text style={[descriptionStyle, styles.description, { marginBottom: spacing.xl }]}>
-        {description}
-      </Text>
+      {variant !== 'saved' && (
+        <View style={styles.lottieContainer}>
+          <LottieView
+            source={require('@/assets/animations/empty-box.json')}
+            autoPlay
+            loop
+            style={styles.lottie}
+            colorFilters={[
+              {
+                keypath: '**', // Boyanabilecek tüm katmanları accent renge çevirir
+                color: colors.accent.primary,
+              },
+            ]}
+          />
+        </View>
+      )}
+      {!!title && (
+        <Text style={[titleStyle, styles.title, { marginBottom: spacing.sm }]}>
+          {title}
+        </Text>
+      )}
+      {!!description && (
+        <Text style={[descriptionStyle, styles.description, { marginBottom: spacing.xl }]}>
+          {description}
+        </Text>
+      )}
       {actionLabel && onAction && (
-        <Button variant="primary" onPress={onAction}>
+        <Button 
+          variant="primary" 
+          onPress={onAction}
+          style={variant === 'saved' ? { borderRadius: 30 } : undefined}
+        >
           {actionLabel}
         </Button>
       )}
@@ -166,12 +180,16 @@ const styles = StyleSheet.create({
     paddingVertical: spacing.xxxl,
     paddingHorizontal: spacing.xl,
   },
-  iconContainer: {
-    width: 72,
-    height: 72,
-    borderRadius: radius.xxl,
+  lottieContainer: {
+    width: 140,
+    height: 140,
+    marginBottom: spacing.base,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  lottie: {
+    width: '100%',
+    height: '100%',
   },
   title: {
     textAlign: 'center',

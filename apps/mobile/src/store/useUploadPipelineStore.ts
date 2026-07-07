@@ -111,9 +111,13 @@ export const useUploadPipelineStore = create<UploadPipelineState>((set, get) => 
       ? `video/${ext === 'mov' ? 'quicktime' : 'mp4'}`
       : `image/${ext}`;
 
-    console.log(`[UploadPipeline]   Uploading as ${mime}, filename: ${filename}`);
+    // Sıkıştırma (Compression) Adımı
+    const { compressMedia } = await import('../utils/mediaCompression');
+    const finalUri = await compressMedia(uri, item.type);
+
+    console.log(`[UploadPipeline]   Uploading as ${mime}, filename: ${filename}, Final URI: ${finalUri}`);
     const result = await uploadFn({
-      uri,
+      uri: finalUri,
       type: mime,
       name: filename,
     });
@@ -157,12 +161,44 @@ export const useUploadPipelineStore = create<UploadPipelineState>((set, get) => 
       const compressedItems: MediaItem[] = [];
       for (let i = 0; i < job.mediaItems.length; i++) {
         const item = job.mediaItems[i];
+        let currentUri = item.uri;
+
+        // ── Safety net: resolve ph:// URIs that CustomGalleryGrid missed ──
+        if (currentUri.startsWith('ph://') || currentUri.startsWith('ph-upload://')) {
+          console.warn(`[UploadPipeline] ph:// URI detected at Stage 2, resolving: ${currentUri.substring(0, 60)}`);
+          try {
+            const MediaLibrary = await import('expo-media-library');
+            // Extract asset ID from ph:// URI  (format: ph://ASSET-ID/...)
+            const assetId = currentUri.replace(/^ph(-upload)?:\/\//, '').split('/')[0];
+            if (assetId) {
+              const assetInfo = await MediaLibrary.getAssetInfoAsync(assetId);
+              if (assetInfo?.localUri) {
+                currentUri = assetInfo.localUri;
+                console.log(`[UploadPipeline]   Resolved via MediaLibrary → ${currentUri.substring(0, 80)}`);
+              }
+            }
+          } catch (e) {
+            console.warn(`[UploadPipeline]   MediaLibrary resolve failed:`, e);
+          }
+
+          // Still ph://? Try ImageManipulator as last resort
+          if (currentUri.startsWith('ph://') || currentUri.startsWith('ph-upload://')) {
+            try {
+              const manip = await ImageManipulator.manipulateAsync(item.uri, []);
+              currentUri = manip.uri;
+              console.log(`[UploadPipeline]   Resolved via ImageManipulator → ${currentUri.substring(0, 80)}`);
+            } catch (e) {
+              console.warn(`[UploadPipeline]   ImageManipulator resolve also failed:`, e);
+            }
+          }
+        }
+
         if (item.type === 'image') {
           try {
             // Empty action array [] + JPEG format bakes EXIF rotation into pixel data
             // This prevents images uploaded from camera roll from appearing sideways
             const manipResult = await ImageManipulator.manipulateAsync(
-              item.uri,
+              currentUri,
               [],
               { compress: 0.85, format: ImageManipulator.SaveFormat.JPEG }
             );
@@ -173,11 +209,11 @@ export const useUploadPipelineStore = create<UploadPipelineState>((set, get) => 
               height: manipResult.height,
             });
           } catch (err) {
-            console.warn(`[UploadPipeline] Image processing failed for item ${i}, using original:`, err);
-            compressedItems.push(item);
+            console.warn(`[UploadPipeline] Image processing failed for item ${i}, using resolved URI:`, err);
+            compressedItems.push({ ...item, uri: currentUri });
           }
         } else {
-          compressedItems.push(item);
+          compressedItems.push({ ...item, uri: currentUri });
         }
       }
       
@@ -286,7 +322,7 @@ export const useUploadPipelineStore = create<UploadPipelineState>((set, get) => 
         uploadedUrls: [],
         thumbnailUrls: [],
         payload,
-        contentType: input.mediaItems.some((m) => m.type === 'video') ? 'reels' : 'post',
+        contentType: 'post',
         retryCount: 0,
         createdAt: Date.now(),
       };

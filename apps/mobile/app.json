@@ -26,10 +26,11 @@
       "buildNumber": "1",
       "supportsTablet": true,
       "infoPlist": {
-        "NSLocationWhenInUseUsageDescription": "Bu uygulama mekanların yakınında olup olmadığınızı kontrol etmek için konum bilgisine ihtiyaç duyar.",
-        "NSLocationAlwaysAndWhenInUseUsageDescription": "Bu uygulama yakınınızdaki mekanları bildirebilmek için arka planda konum erişimine ihtiyaç duyar.",
-        "NSPhotoLibraryUsageDescription": "Bu uygulama yorumlarınıza fotoğraf eklemeniz için galeri erişimine ihtiyaç duyar.",
-        "NSCameraUsageDescription": "Bu uygulama yorumlarınıza fotoğraf çekmeniz için kamera erişimine ihtiyaç duyar.",
+        "NSLocationWhenInUseUsageDescription": "Size en yakın mekanları önermek, haritada bulunduğunuz konumu göstermek ve mekanlarda 'check-in' yapabilmenizi sağlamak için konum bilginize ihtiyaç duyuyoruz.",
+        "NSLocationAlwaysAndWhenInUseUsageDescription": "Siz hareket halindeyken veya uygulama arka plandayken yakınınızdaki ilginç mekanları size bildirebilmek için arka planda konum erişimine ihtiyaç duyuyoruz.",
+        "NSPhotoLibraryUsageDescription": "Profil fotoğrafınızı seçmek ve mekan değerlendirmelerinize veya hikayelerinize galerinizden fotoğraf ekleyebilmeniz için galeri erişimine ihtiyaç duyuyoruz.",
+        "NSCameraUsageDescription": "Anlık hikaye çekmek ve mekan değerlendirmelerinize canlı fotoğraf/video ekleyebilmeniz için kamera erişimine ihtiyaç duyuyoruz.",
+        "NSMicrophoneUsageDescription": "Hikaye veya değerlendirmeleriniz için video çekerken ortam seslerini kaydedebilmek için mikrofon erişimine ihtiyaç duyuyoruz.",
         "UIBackgroundModes": [
           "remote-notification",
           "remote-notification"
@@ -39,7 +40,10 @@
         },
         "ITSAppUsesNonExemptEncryption": false
       },
-      "bundleIdentifier": "com.asemos.mobile"
+      "bundleIdentifier": "com.asemos.mobile",
+      "entitlements": {
+        "aps-environment": "development"
+      }
     },
     "android": {
       "versionCode": 1,
@@ -118,7 +122,27 @@
         }
       ],
       "expo-localization",
-      "expo-web-browser"
+      "expo-web-browser",
+      "@maplibre/maplibre-react-native",
+      "expo-build-properties",
+      "expo-font",
+      "react-native-video",
+      "expo-secure-store",
+      [
+        "expo-tracking-transparency",
+        {
+          "userTrackingPermission": "Size daha kişiselleştirilmiş mekan önerileri sunabilmek ve uygulama performansımızı analiz edebilmek için anonim kullanım verilerini topluyoruz."
+        }
+      ],
+      [
+        "@sentry/react-native/expo",
+        {
+          "url": "https://sentry.io/",
+          "project": "asemos-mobile",
+          "organization": "asemos-org"
+        }
+      ],
+      "@sentry/react-native"
     ],
     "experiments": {
       "typedRoutes": true

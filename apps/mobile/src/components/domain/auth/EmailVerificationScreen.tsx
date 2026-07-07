@@ -12,14 +12,13 @@ import {
     Text,
     TextInput,
     TouchableOpacity,
-    KeyboardAvoidingView,
     Platform,
-    Alert,
     Keyboard,
     Animated,
     Dimensions,
     ScrollView,
 } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 import { LinearGradient } from 'expo-linear-gradient';
 import { BlurView } from 'expo-blur';
 import { SafeAreaView } from 'react-native-safe-area-context';
@@ -27,6 +26,7 @@ import { lightImpact, success as successHaptic } from '@/src/utils/haptics';
 import { resendRegisterCode, verifyRegister } from '@/src/services/authService';
 import { useAuthStore } from '@/src/store/useAuthStore';
 import { useTranslation } from "react-i18next";
+import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 
 const { width } = Dimensions.get('window');
 const CODE_LENGTH = 6;
@@ -164,11 +164,11 @@ export default function EmailVerificationScreen() {
             />
 
             <SafeAreaView style={styles.safeArea}>
-                <KeyboardAvoidingView
-                    behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+                <KeyboardAwareScrollView
                     style={styles.keyboardView}
+                    contentContainerStyle={styles.content}
+                    bottomOffset={Platform.OS === 'ios' ? 0 : 20}
                 >
-                    <ScrollView contentContainerStyle={styles.content}>
                         {/* Header */}
                         <View style={styles.headerSection}>
                             <View style={styles.iconWrap}>
@@ -250,8 +250,7 @@ export default function EmailVerificationScreen() {
                             </View>
                         </BlurView>
 
-                    </ScrollView>
-                </KeyboardAvoidingView>
+                    </KeyboardAwareScrollView>
             </SafeAreaView>
         </View>
     );

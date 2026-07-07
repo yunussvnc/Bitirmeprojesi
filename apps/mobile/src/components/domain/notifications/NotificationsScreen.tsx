@@ -23,7 +23,7 @@ import Animated, { FadeIn, FadeOut, SlideInRight } from 'react-native-reanimated
 import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
 import { useTheme } from '@/src/hooks/useTheme';
-import { Avatar } from '@/src/components/ui';
+import { Avatar, LottieEmptyState } from '@/src/components/ui';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
 import { Screen } from '@/src/components/layout';
 import { useNotificationStore } from '@/src/store/useNotificationStore';
@@ -347,17 +347,7 @@ export default function NotificationsScreen() {
               />
             }
             ListEmptyComponent={
-              <View style={styles.emptyState}>
-                <View style={[styles.emptyIcon, { backgroundColor: colors.surface.elevated }]}>
-                  <IconSymbol
-                    name={activeTab === 'requests' ? 'person.crop.circle.badge.questionmark' : 'bell.slash.fill'}
-                    size={36}
-                    color={colors.text.tertiary}
-                  />
-                </View>
-                <Text style={[styles.emptyTitle, { color: colors.text.primary }]}>{emptyTitle}</Text>
-                <Text style={[styles.emptyDesc, { color: colors.text.tertiary }]}>{emptyDesc}</Text>
-              </View>
+              <LottieEmptyState title={emptyTitle} description={emptyDesc} />
             }
           />
         )}
@@ -373,8 +363,6 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingTop: 16,
     paddingBottom: 10,
     gap: 12,
   },
@@ -386,13 +374,12 @@ const styles = StyleSheet.create({
     marginLeft: -8, // biraz sola yasla
   },
   title: {
-    fontSize: 28,
-    fontWeight: '800',
+    fontSize: 26,
+    fontWeight: '700',
     letterSpacing: -0.5,
   },
   tabBar: {
     flexDirection: 'row',
-    paddingHorizontal: 20,
     gap: 10,
     marginBottom: 8,
   },
@@ -427,7 +414,6 @@ const styles = StyleSheet.create({
   notifRow: {
     flexDirection: 'row',
     alignItems: 'flex-start',
-    paddingHorizontal: 20,
     paddingVertical: 14,
     gap: 12,
   },

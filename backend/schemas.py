@@ -975,6 +975,20 @@ class UserPreferencesResponse(BaseModel):
 
     class Config:
         from_attributes = True
+
+class NotificationSubscriptionUpdate(BaseModel):
+    notify_posts: Optional[bool] = None
+    notify_stories: Optional[bool] = None
+
+class NotificationSubscriptionResponse(BaseModel):
+    subscriber_id: int
+    target_id: int
+    notify_posts: bool
+    notify_stories: bool
+
+    class Config:
+        from_attributes = True
+
 Review.model_rebuild()
 
 # --- ADMIN PANEL SCHEMAS ---
@@ -1019,6 +1033,14 @@ class AIQueryLogResponse(BaseModel):
 
     class Config:
         from_attributes = True
+
+# --- RECOMMENDATION INTERACTIONS ---
+
+class InteractionCreate(BaseModel):
+    place_id: int
+    interaction_type: str  # 'MAP_CLICK', 'CARD_VIEW', etc.
+    weight: Optional[int] = 1
+
 
 class PaginatedAIQueryLogs(BaseModel):
     items: List[AIQueryLogResponse]

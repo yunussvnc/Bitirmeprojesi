@@ -112,6 +112,25 @@ class DeviceToken(Base):
     user = relationship("User", backref="device_tokens")
 
 
+class NotificationSubscription(Base):
+    """Kullanıcının başka bir kullanıcının gönderi ve hikayeleri için bildirim abonelikleri"""
+    __tablename__ = "notification_subscriptions"
+    id = Column(Integer, primary_key=True, index=True)
+    subscriber_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
+    target_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
+    
+    notify_posts = Column(Boolean, default=False)
+    notify_stories = Column(Boolean, default=False)
+    
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    subscriber = relationship("User", foreign_keys=[subscriber_id])
+    target = relationship("User", foreign_keys=[target_id])
+    __table_args__ = (
+        UniqueConstraint("subscriber_id", "target_id", name="uq_notification_subscription"),
+    )
+
+
 class PendingUser(Base):
     __tablename__ = "pending_users"
     id = Column(Integer, primary_key=True, index=True)
@@ -784,3 +803,26 @@ class AIQueryLog(Base):
     created_at = Column(DateTime(timezone=True), server_default=func.now())
 
     user = relationship("User", foreign_keys=[user_id])
+
+
+class UserPlaceInteraction(Base):
+    """
+    Kullanıcının mekanlarla olan anlık etkileşimlerini (tıklama, arama, AI vs) tutar.
+    Öneri motoru (foryou algoritması) için kullanılır.
+    """
+    __tablename__ = "user_place_interactions"
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
+    place_id = Column(Integer, ForeignKey("places.id", ondelete="CASCADE"), nullable=False, index=True)
+    
+    # 'MAP_CLICK', 'CARD_VIEW', 'AI_SUGGESTION', 'SEARCH_CLICK'
+    interaction_type = Column(String(50), nullable=False)
+    
+    # Her etkileşim tipinin farklı ağırlığı olacak
+    weight = Column(Integer, nullable=False, default=1)
+    
+    created_at = Column(DateTime(timezone=True), server_default=func.now())
+
+    user = relationship("User")
+    place = relationship("Place")
+

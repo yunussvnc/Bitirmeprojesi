@@ -1,5 +1,6 @@
 /**
- * WebView tabanlı harita görünümü – Leaflet + OpenStreetMap.
+ * WebView tabanlı harita görünümü – MapLibre GL JS + OpenFreeMap.
+ * WebGL ile hardware-accelerated vector tile rendering.
  * Expo Go, Simulator ve gerçek cihazda çalışır (native modül gerektirmez).
  */
 
@@ -11,7 +12,6 @@ import {
   TouchableOpacity,
   Platform,
   ActivityIndicator,
-  Alert,
   Keyboard,
   ScrollView,
   Modal,
@@ -36,6 +36,7 @@ import { getPlaceStatus, type PlaceStatusType } from '@/src/utils/placeStatus';
 import { calculateDistance } from '@/src/utils/location';
 
 import { useTranslation } from 'react-i18next';
+import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 
 /** Category keys matching backend data values + translation keys */
 
@@ -49,151 +50,216 @@ export interface ExploreWebMapViewProps {
 }
 
 function buildMapHTML(accentColor: string, isDark: boolean) {
-  const tileUrl = isDark
-    ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
-    : 'https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png';
+  const styleUrl = isDark
+    ? 'https://tiles.openfreemap.org/styles/dark'
+    : 'https://tiles.openfreemap.org/styles/liberty';
 
-  const tileAttr = '&copy; <a href="https://carto.com/">CARTO</a>';
-  const mapBg = isDark ? '#1a1a1a' : '#e0e0e0';
+  const mapBg = isDark ? '#1a1a2e' : '#f0f0f0';
 
   return `<!DOCTYPE html>
 <html><head>
-<meta name="viewport" content="width=device-width,initial-scale=1"/>
-<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
-<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
+<link rel="stylesheet" href="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.css"/>
+<script src="https://unpkg.com/maplibre-gl@4.7.1/dist/maplibre-gl.js"></script>
 <style>
   *{margin:0;padding:0;box-sizing:border-box}
   html,body,#map{width:100%;height:100%;overflow:hidden;background:${mapBg}!important}
-  .leaflet-container{background:${mapBg}!important}
-  .leaflet-tile-pane .leaflet-layer{background:${mapBg}}
-  .leaflet-tile{background:${mapBg}!important}
-  .leaflet-control-attribution{display:none!important}
-  .leaflet-div-icon{background:transparent!important;border:none!important;overflow:visible!important}
-  .custom-marker-inner{
-    display:flex;flex-direction:column;align-items:center;justify-content:center;
-    position:relative;width:28px;height:28px;overflow:visible!important;
-    will-change:transform;
+  .maplibregl-ctrl-attrib{display:none!important}
+  .maplibregl-ctrl-logo{display:none!important}
+  .maplibregl-canvas{outline:none!important}
+
+  /* Premium popup stili */
+  .maplibregl-popup{z-index:10!important}
+  .maplibregl-popup-content{
+    background:${isDark ? 'rgba(18,18,28,0.95)' : 'rgba(255,255,255,0.97)'}!important;
+    color:${isDark ? '#fff' : '#1a1a2e'}!important;
+    border-radius:12px!important;
+    padding:8px 14px!important;
+    font-size:13px!important;
+    font-weight:700!important;
+    letter-spacing:0.2px!important;
+    box-shadow:0 8px 32px rgba(0,0,0,${isDark ? '0.6' : '0.18'})!important;
+    border:1px solid ${isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.06)'}!important;
+    max-width:160px!important;
+    white-space:nowrap!important;
+    overflow:hidden!important;
+    text-overflow:ellipsis!important;
+    backdrop-filter:blur(12px)!important;
+    -webkit-backdrop-filter:blur(12px)!important;
   }
-  .custom-pin{
-    width:28px;height:28px;border-radius:50%;
-    border:3px solid #fff;
-    box-shadow:0 2px 6px rgba(0,0,0,0.35);
-    z-index:2;will-change:transform;
+  .maplibregl-popup-tip{
+    border-top-color:${isDark ? 'rgba(18,18,28,0.95)' : 'rgba(255,255,255,0.97)'}!important;
   }
-  .custom-pin.active{
-    transform:scale(1.45);
-    box-shadow:0 0 0 8px rgba(255,255,255,0.25),0 4px 12px rgba(0,0,0,0.4);
-    border-color:#fff;z-index:4;
+  .maplibregl-popup-close-button{display:none!important}
+
+  /* Premium marker pin stili */
+  .mk{
+    cursor:pointer;width:36px;height:44px;
+    display:flex;align-items:flex-start;justify-content:center;
+    filter:drop-shadow(0 3px 6px rgba(0,0,0,0.35));
+    transition:filter 0.25s ease;
   }
-  .pin-label{
-    position:absolute;top:32px;
-    background:rgba(20,20,20,0.88);color:#fff;
-    font-size:10px;font-weight:600;padding:3px 6px;
-    border-radius:6px;border:1px solid rgba(255,255,255,0.18);
-    white-space:nowrap;max-width:110px;overflow:hidden;text-overflow:ellipsis;
-    box-shadow:0 2px 5px rgba(0,0,0,0.4);
-    pointer-events:none;opacity:0;visibility:hidden;z-index:3;
+  .mk:hover{filter:drop-shadow(0 4px 10px rgba(0,0,0,0.5))}
+  .mk svg{transition:transform 0.25s cubic-bezier(0.34,1.56,0.64,1)}
+  .mk.active svg{transform:scale(1.35)}
+  .mk.active{filter:drop-shadow(0 6px 16px rgba(0,0,0,0.5))!important;z-index:5!important}
+
+  /* Kullanıcı konum pulse */
+  @keyframes pulse{
+    0%{transform:scale(1);opacity:0.6}
+    50%{transform:scale(2.5);opacity:0}
+    100%{transform:scale(1);opacity:0}
   }
-  .show-labels .pin-label{opacity:1;visibility:visible}
-  .custom-pin.active + .pin-label{
-    opacity:1!important;visibility:visible!important;
-    background:rgba(30,30,30,0.95)!important;
-    border-color:#fff!important;font-weight:700!important;
-    transform:scale(1.1);z-index:5;
-  }
+  .user-loc{width:22px;height:22px;position:relative;display:flex;align-items:center;justify-content:center}
+  .user-pulse{position:absolute;width:22px;height:22px;border-radius:50%;background:rgba(66,133,244,0.25);animation:pulse 2s ease-out infinite}
+  .user-dot{width:13px;height:13px;border-radius:50%;background:#4285F4;border:2.5px solid #fff;box-shadow:0 2px 8px rgba(66,133,244,0.4);position:relative;z-index:2}
 </style>
 </head><body>
 <div id="map"></div>
 <script>
-var map=L.map('map',{
-  zoomControl:false,touchZoom:true,doubleClickZoom:true,
-  scrollWheelZoom:true,boxZoom:true,preferCanvas:true
-}).setView([${ISTANBUL_CENTER.latitude},${ISTANBUL_CENTER.longitude}],13);
+var map = new maplibregl.Map({
+  container:'map',
+  style:'${styleUrl}',
+  center:[${ISTANBUL_CENTER.longitude},${ISTANBUL_CENTER.latitude}],
+  zoom:12,
+  attributionControl:false,
+  maxZoom:17.5,
+  minZoom:5,
+  pitchWithRotate:false,
+  dragRotate:false
+});
 
-L.tileLayer('${tileUrl}',{
-  maxZoom:19,attribution:'${tileAttr}',
-  keepBuffer:4,subdomains:'abcd',crossOrigin:true,
-  updateWhenIdle:true,updateWhenZooming:false
-}).addTo(map);
+var _markers = {};
+var _activePopup = null;
+var _activeId = null;
+var _userMarker = null;
 
-function checkZoom(){
-  var z=map.getZoom();
-  map.getContainer().classList[z>=14?'add':'remove']('show-labels');
-}
-map.on('zoomend',checkZoom);
-checkZoom();
+map.on('load', function(){
+  window.ReactNativeWebView.postMessage(JSON.stringify({type:'mapReady'}));
+});
 
-var activePinEl=null;
-var markerLayer=L.layerGroup().addTo(map);
-var markerCache={};
-var _rafId=null;
-
-function makeIcon(color,name){
-  var n=name?name.replace(/'/g,"\\'").replace(/"/g,'&quot;'):'';
-  return L.divIcon({
-    className:'',
-    html:'<div class="custom-marker-inner"><div class="custom-pin" style="background:'+color+'"></div><div class="pin-label">'+n+'</div></div>',
-    iconSize:[28,28],iconAnchor:[14,14]
-  });
-}
-
-function selectPin(el){
-  if(activePinEl)activePinEl.classList.remove('active');
-  if(el){el.classList.add('active');activePinEl=el;}else{activePinEl=null;}
-}
-
-function _doUpdateMarkers(places){
-  if(!places||!places.length){
-    Object.keys(markerCache).forEach(function(id){markerLayer.removeLayer(markerCache[id].marker);});
-    markerCache={};return;
+// Hata durumunda da mapReady gönder (stil yüklenemezse)
+map.on('error', function(e){
+  if(e && e.error && e.error.status === 404){
+    // Stil bulunamazsa yine de çalış
   }
-  var incoming={};
-  places.forEach(function(p){if(p.latitude!=null&&p.longitude!=null)incoming[p.id]=p;});
-  Object.keys(markerCache).forEach(function(id){
-    if(!incoming[id]){markerLayer.removeLayer(markerCache[id].marker);delete markerCache[id];}
+});
+
+// Premium drop-pin SVG oluşturucu
+function pinSVG(color){
+  return '<svg width="28" height="36" viewBox="0 0 28 36" fill="none" xmlns="http://www.w3.org/2000/svg">'
+    +'<path d="M14 0C6.268 0 0 6.268 0 14c0 9.8 12.348 20.826 12.874 21.302a1.5 1.5 0 002.252 0C15.652 34.826 28 23.8 28 14 28 6.268 21.732 0 14 0z" fill="'+color+'"/>'
+    +'<circle cx="14" cy="13" r="5.5" fill="#fff" opacity="0.95"/>'
+    +'<circle cx="14" cy="13" r="3" fill="'+color+'" opacity="0.7"/>'
+    +'</svg>';
+}
+
+function updateMarkers(places){
+  if(!places || !places.length){
+    Object.keys(_markers).forEach(function(id){ _markers[id].remove(); });
+    _markers = {};
+    return;
+  }
+
+  var incoming = {};
+  places.forEach(function(p){
+    if(p.latitude!=null && p.longitude!=null) incoming[p.id] = p;
   });
-  var keys=Object.keys(incoming),idx=0,BATCH=40;
+
+  // Eski marker'ları temizle
+  Object.keys(_markers).forEach(function(id){
+    if(!incoming[id]){ _markers[id].remove(); delete _markers[id]; }
+  });
+
+  // Yeni marker'ları batch olarak ekle
+  var keys = Object.keys(incoming), idx = 0, BATCH = 60;
+
   function addBatch(){
-    for(var end=Math.min(idx+BATCH,keys.length);idx<end;idx++){
-      var id=keys[idx],p=incoming[id],color=p.statusColor||'${accentColor}';
-      if(markerCache[id]){
-        if(markerCache[id].color!==color||markerCache[id].name!==p.name){
-          markerCache[id].marker.setIcon(makeIcon(color,p.name));
-          markerCache[id].color=color;markerCache[id].name=p.name;
+    for(var end = Math.min(idx+BATCH, keys.length); idx < end; idx++){
+      var id = keys[idx], p = incoming[id];
+      var color = p.statusColor || '${accentColor}';
+
+      if(_markers[id]){
+        if(_markers[id]._color !== color){
+          _markers[id].getElement().querySelector('svg path').setAttribute('fill', color);
+          _markers[id].getElement().querySelectorAll('svg circle')[1].setAttribute('fill', color);
+          _markers[id]._color = color;
         }
         continue;
       }
-      (function(pp){
-        var m=L.marker([pp.latitude,pp.longitude],{icon:makeIcon(color,pp.name)})
-          .on('click',function(e){
-            selectPin(e.target.getElement().querySelector('.custom-pin'));
-            window.ReactNativeWebView.postMessage(JSON.stringify({type:'marker',id:pp.id}));
-          });
-        markerLayer.addLayer(m);
-        markerCache[pp.id]={marker:m,color:color,name:pp.name};
-      })(p);
+
+      var el = document.createElement('div');
+      el.className = 'mk';
+      el.innerHTML = pinSVG(color);
+
+      var marker = new maplibregl.Marker({element:el, anchor:'bottom'})
+        .setLngLat([p.longitude, p.latitude])
+        .addTo(map);
+      marker._color = color;
+      marker._name = p.name;
+      marker._placeId = p.id;
+
+      (function(mk, pp){
+        mk.getElement().addEventListener('click', function(e){
+          e.stopPropagation();
+          selectMarker(pp.id, pp.name, pp.longitude, pp.latitude);
+          window.ReactNativeWebView.postMessage(JSON.stringify({type:'marker',id:pp.id}));
+        });
+      })(marker, p);
+
+      _markers[id] = marker;
     }
-    if(idx<keys.length)requestAnimationFrame(addBatch);
+    if(idx < keys.length) requestAnimationFrame(addBatch);
   }
   requestAnimationFrame(addBatch);
 }
 
-function updateMarkers(places){
-  if(_rafId)cancelAnimationFrame(_rafId);
-  _rafId=requestAnimationFrame(function(){_doUpdateMarkers(places);_rafId=null;});
+function selectMarker(id, name, lng, lat){
+  // Önceki aktif marker'ı normale döndür
+  if(_activeId && _markers[_activeId]){
+    _markers[_activeId].getElement().classList.remove('active');
+  }
+  if(_activePopup){ _activePopup.remove(); _activePopup = null; }
+
+  _activeId = id;
+
+  if(id && _markers[id]){
+    _markers[id].getElement().classList.add('active');
+    // Sadece seçili mekanın ismini göster
+    if(name && lng != null && lat != null){
+      _activePopup = new maplibregl.Popup({offset:[0,-40], closeOnClick:false})
+        .setLngLat([lng, lat])
+        .setHTML('<div>'+name.replace(/</g,'&lt;')+'</div>')
+        .addTo(map);
+    }
+  }
 }
 
-function flyToInitial(lat,lng,zoom){map.setView([lat,lng],zoom||13,{animate:false});}
-
-map.on('click',function(){
-  selectPin(null);
+function deselectAll(){
+  selectMarker(null);
   window.ReactNativeWebView.postMessage(JSON.stringify({type:'deselect'}));
+}
+
+map.on('click', function(){
+  deselectAll();
 });
 
-function flyTo(lat,lng,zoom){map.setView([lat,lng],zoom||13,{animate:true,duration:0.35});}
-function setUserMarker(lat,lng){
-  if(window._userCircle)map.removeLayer(window._userCircle);
-  window._userCircle=L.circleMarker([lat,lng],{radius:8,fillColor:'#4285F4',color:'#fff',weight:3,fillOpacity:1}).addTo(map);
+function flyTo(lat, lng, zoom){
+  map.flyTo({center:[lng,lat], zoom:zoom||13, duration:600, essential:true});
+}
+
+function flyToInitial(lat, lng, zoom){
+  map.jumpTo({center:[lng,lat], zoom:zoom||13});
+}
+
+function setUserMarker(lat, lng){
+  if(_userMarker) _userMarker.remove();
+  var el = document.createElement('div');
+  el.className = 'user-loc';
+  el.innerHTML = '<div class="user-pulse"></div><div class="user-dot"></div>';
+  _userMarker = new maplibregl.Marker({element:el, anchor:'center'})
+    .setLngLat([lng, lat])
+    .addTo(map);
 }
 </script>
 </body></html>`;
@@ -349,17 +415,17 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
       if (selectedDistrict) {
         setSelectedPlace(null);
         webViewRef.current.injectJavaScript(
-          `flyTo(${selectedDistrict.lat},${selectedDistrict.lng},14);selectPin(null);true;`,
+          `flyTo(${selectedDistrict.lat},${selectedDistrict.lng},14);selectMarker(null);true;`,
         );
       } else if (prevDistrictRef.current) {
         setSelectedPlace(null);
         if (userLocation) {
           webViewRef.current.injectJavaScript(
-            `flyTo(${userLocation.latitude},${userLocation.longitude},15);selectPin(null);true;`,
+            `flyTo(${userLocation.latitude},${userLocation.longitude},15);selectMarker(null);true;`,
           );
         } else {
           webViewRef.current.injectJavaScript(
-            `flyTo(${ISTANBUL_CENTER.latitude},${ISTANBUL_CENTER.longitude},13);selectPin(null);true;`,
+            `flyTo(${ISTANBUL_CENTER.latitude},${ISTANBUL_CENTER.longitude},13);selectMarker(null);true;`,
           );
         }
       }
@@ -377,6 +443,8 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
           setSelectedPlace(place ?? null);
         } else if (data.type === 'deselect') {
           setSelectedPlace(null);
+        } else if (data.type === 'mapReady') {
+          setMapReady(true);
         }
       } catch { }
     },
@@ -474,7 +542,6 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
         scrollEnabled
         bounces={false}
         overScrollMode="never"
-        onLoad={() => setMapReady(true)}
         onContentProcessDidTerminate={() => webViewRef.current?.reload()}
         onRenderProcessGone={() => webViewRef.current?.reload()}
         onMessage={handleMessage}
@@ -872,7 +939,7 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
           place={selectedPlace}
           onClose={() => {
             setSelectedPlace(null);
-            webViewRef.current?.injectJavaScript('selectPin(null);true;');
+            webViewRef.current?.injectJavaScript('selectMarker(null);true;');
           }}
         />
       )}

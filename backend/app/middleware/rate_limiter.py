@@ -88,35 +88,44 @@ class InMemoryRateLimitStore:
 class RateLimitStore:
     """Facade that uses Redis if available, otherwise falls back to in-memory store.
     Exposes _requests and _lockouts attributes for tests to clear.
+    Uses lazy Redis initialization to avoid startup race conditions.
     """
     def __init__(self):
+        self._inmemory = InMemoryRateLimitStore()
+        self._use_redis: bool | None = None  # None = not yet checked
+        self._redis_store = None
+        # expose attrs for tests
+        self._requests = self._inmemory._requests
+        self._lockouts = self._inmemory._lockouts
+
+    def _ensure_redis(self):
+        """Lazy Redis check — sadece ilk kullanımda kontrol eder."""
+        if self._use_redis is not None:
+            return
         from app.core.redis_client import get_redis
         redis = None
         try:
             redis = get_redis()
         except Exception:
             redis = None
-        self._inmemory = InMemoryRateLimitStore()
         self._use_redis = bool(redis)
-        self._redis_store = None
         if self._use_redis:
-            # lazily use RedisRateLimitStore implementation if needed
             self._redis_store = RedisRateLimitStore()
-        # expose attrs for tests
-        self._requests = self._inmemory._requests
-        self._lockouts = self._inmemory._lockouts
 
     async def is_locked_out(self, key: str) -> bool:
+        self._ensure_redis()
         if self._use_redis and self._redis_store:
             return await self._redis_store.is_locked_out(key)
         return await self._inmemory.is_locked_out(key)
 
     async def lock_out(self, key: str, duration_seconds: int = 900):
+        self._ensure_redis()
         if self._use_redis and self._redis_store:
             return await self._redis_store.lock_out(key, duration_seconds)
         return await self._inmemory.lock_out(key, duration_seconds)
 
     async def check_rate(self, key: str, max_requests: int, window_seconds: int) -> tuple[bool, int]:
+        self._ensure_redis()
         if self._use_redis and self._redis_store:
             return await self._redis_store.check_rate(key, max_requests, window_seconds)
         return await self._inmemory.check_rate(key, max_requests, window_seconds)

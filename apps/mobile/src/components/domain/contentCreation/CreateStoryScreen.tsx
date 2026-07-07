@@ -13,7 +13,6 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
-  Alert,
   BackHandler,
   ActivityIndicator,
   Dimensions,
@@ -33,6 +32,7 @@ import { Avatar } from "@/src/components/ui/Avatar";
 import { useAuthStore } from "@/src/store/useAuthStore";
 import { useTranslation } from "react-i18next";
 import type { MediaItem } from "@/src/contentCreation/types";
+import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get("window");
 

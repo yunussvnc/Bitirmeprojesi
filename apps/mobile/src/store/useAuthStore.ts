@@ -1,10 +1,15 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { mmkvStorage } from "@/src/utils/mmkvStorage";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import type { AuthUser } from "@/src/services/authService";
 import { useMessagesStore } from "./useMessagesStore";
 import { useChatMessagesStore } from "./useChatMessagesStore";
 import { useNotificationStore } from "./useNotificationStore";
+import {
+  saveTokens as secureSaveTokens,
+  getTokens as secureGetTokens,
+  clearTokens as secureClearTokens,
+} from "@/src/utils/secureStorage";
 
 type AuthState = {
   accessToken: string | null;
@@ -26,13 +31,18 @@ export const useAuthStore = create<AuthState>()(
       user: null,
       hydrated: false,
 
-      setTokens: (access, refresh) =>
-        set({ accessToken: access, refreshToken: refresh }),
+      setTokens: (access, refresh) => {
+        set({ accessToken: access, refreshToken: refresh });
+        // Token'ları Keychain/Keystore'a da kaydet
+        secureSaveTokens(access, refresh);
+      },
 
       setUser: (user) => set({ user }),
 
       logout: () => {
         set({ accessToken: null, refreshToken: null, user: null });
+        // Keychain/Keystore'dan token'ları sil
+        secureClearTokens();
         
         // Merkezi çıkış (logout) işleminde, eski verilerin diğer hesaplarda görünmesini
         // engellemek için yerel önbellekleri (store) temizle.
@@ -44,15 +54,24 @@ export const useAuthStore = create<AuthState>()(
       setHydrated: (v) => set({ hydrated: v }),
     }),
     {
-      name: "auth-store-v1",
-      storage: createJSONStorage(() => AsyncStorage),
+      name: "auth-storage",
+      storage: createJSONStorage(() => mmkvStorage),
       partialize: (state) => ({
-        accessToken: state.accessToken,
-        refreshToken: state.refreshToken,
         user: state.user,
+        hydrated: state.hydrated,
+        // accessToken ve refreshToken'ı MMKV'ye KESİNLİKLE yazma
+        // Bunlar sadece expo-secure-store (Keychain/Keystore) içinde durmalı
       }),
       onRehydrateStorage: () => (state) => {
-        state?.setHydrated(true);
+        if (state) {
+          // Rehydration sırasında secure store'dan tokenları yükle
+          secureGetTokens().then((tokens) => {
+            if (tokens.accessToken && tokens.refreshToken) {
+              state.setTokens(tokens.accessToken, tokens.refreshToken);
+            }
+            state.setHydrated(true);
+          });
+        }
       },
     }
   )

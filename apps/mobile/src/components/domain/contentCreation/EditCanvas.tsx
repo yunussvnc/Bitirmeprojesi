@@ -14,7 +14,7 @@ import {
   ActivityIndicator,
 } from 'react-native';
 import { Image as ExpoImage } from 'expo-image';
-import { Video, ResizeMode } from 'expo-av';
+import Video from 'react-native-video';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
 import { useTranslation } from "react-i18next";
@@ -108,9 +108,9 @@ export function EditCanvas({
               <Video
                 source={{ uri: baseUri }}
                 style={StyleSheet.absoluteFill}
-                resizeMode={ResizeMode.COVER}
-                shouldPlay
-                isLooping
+                resizeMode="cover"
+                paused={false}
+                repeat={true}
               />
               {filterOverlay && (
                 <View

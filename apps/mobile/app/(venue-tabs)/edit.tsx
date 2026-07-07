@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { View, Text, StyleSheet, ScrollView, Alert, ActivityIndicator, TouchableOpacity, Modal, Image, KeyboardAvoidingView, Platform, FlatList, Switch } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, Alert, ActivityIndicator, TouchableOpacity, Modal, Image, Platform, FlatList, Switch } from 'react-native';
+import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button, Input } from '@/src/components/ui';
 import { getMyVenue, updateMyVenue, Place } from '@/src/services/mekanService';

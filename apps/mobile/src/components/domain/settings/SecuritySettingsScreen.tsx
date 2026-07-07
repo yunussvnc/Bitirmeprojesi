@@ -9,7 +9,6 @@ import {
     Text,
     StyleSheet,
     ScrollView,
-    Alert,
     TextInput,
     TouchableOpacity,
     ActivityIndicator,
@@ -26,6 +25,7 @@ import { useTranslation } from "react-i18next";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { handleApiError } from "@/src/utils/errorHandler";
 import { validatePassword } from "@/src/utils/validators";
+import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 
 export default function SecuritySettingsScreen() {
     const { colors } = useTheme();

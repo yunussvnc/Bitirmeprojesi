@@ -7,21 +7,17 @@
  */
 
 import React, { useEffect, useRef } from 'react';
-import { Text, StyleSheet, Animated, ActivityIndicator } from 'react-native';
-import { useTheme } from '@/src/hooks/useTheme';
+import { View, StyleSheet, Dimensions, Text, Animated } from 'react-native';
+
+import { useTheme } from '../../hooks/useTheme';
 import { createTextStyle, spacing } from '@/src/constants/design';
+import { DotLoader } from './DotLoader';
 
 export interface LoadingStateProps {
   /**
    * Loading message (optional)
    */
   message?: string;
-  
-  /**
-   * Size of the spinner
-   * @default 'large'
-   */
-  size?: 'small' | 'large';
   
   /**
    * Compact mode (smaller padding)
@@ -42,7 +38,6 @@ export interface LoadingStateProps {
  */
 export function LoadingState({
   message = 'Yükleniyor...',
-  size = 'large',
   compact = false,
 }: LoadingStateProps) {
   const { colors } = useTheme();
@@ -77,11 +72,7 @@ export function LoadingState({
         },
       ]}
     >
-      <ActivityIndicator
-        size={size}
-        color={colors.accent.primary}
-        style={styles.spinner}
-      />
+      <DotLoader size={compact ? 8 : 12} />
       {message && (
         <Text style={[messageStyle, styles.message]}>
           {message}
@@ -90,6 +81,8 @@ export function LoadingState({
     </Animated.View>
   );
 }
+
+const { width } = Dimensions.get('window');
 
 const styles = StyleSheet.create({
   container: {
@@ -103,6 +96,8 @@ const styles = StyleSheet.create({
     paddingHorizontal: spacing.base,
   },
   spinner: {
+    width: width * 0.3,
+    height: width * 0.3,
     marginBottom: spacing.base,
   },
   message: {

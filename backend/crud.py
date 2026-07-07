@@ -411,16 +411,30 @@ def search_places(
     minimal: bool = False,
 ):
     """Mekan arama — isim, kategori, şehir filtreleri."""
+    from sqlalchemy import func
+    bind = db.get_bind()
     query = db.query(models.Place)
-    if q:
-        query = query.filter(models.Place.name.ilike(f"%{q}%"))
+    has_q = bool(q)
+    
+    if has_q:
+        if bind.dialect.name == "postgresql":
+            query = query.filter(func.similarity(models.Place.name, q) > 0.2)
+            query = query.order_by(func.similarity(models.Place.name, q).desc())
+        else:
+            query = query.filter(models.Place.name.ilike(f"%{q}%"))
+            
     if category:
         query = query.filter(models.Place.category == category)
     if city:
         query = query.filter(models.Place.city.ilike(f"%{city}%"))
+        
     total = query.count()
     offset = (page - 1) * page_size
-    items = query.order_by(models.Place.average_rating.desc()).offset(offset).limit(page_size).all()
+    
+    if not has_q or bind.dialect.name != "postgresql":
+        query = query.order_by(models.Place.average_rating.desc())
+        
+    items = query.offset(offset).limit(page_size).all()
     if not minimal:
         items = _enrich_places_with_stats(db, items)
     return items, total
@@ -880,6 +894,15 @@ def create_post(db: Session, user_id: int, data: schemas.PostCreate):
 
     db.commit()
     db.refresh(db_post)
+    
+    # Notify subscribers
+    subscribers = db.query(models.NotificationSubscription).filter(
+        models.NotificationSubscription.target_id == user_id,
+        models.NotificationSubscription.notify_posts == True
+    ).all()
+    for sub in subscribers:
+        create_notification(db, sub.subscriber_id, "new_post", user_id, post_id=db_post.id)
+        
     return db_post
 
 
@@ -1306,6 +1329,24 @@ def create_story(db: Session, user_id: int, data: schemas.StoryCreate):
     db.add(story)
     db.commit()
     db.refresh(story)
+    
+    # Notify subscribers
+    subscribers = db.query(models.NotificationSubscription).filter(
+        models.NotificationSubscription.target_id == user_id,
+        models.NotificationSubscription.notify_stories == True
+    ).all()
+    
+    # Hikaye close_friends'e özelse, sadece close friend olan abonelere bildirim gitmeli
+    # Ancak şu an basitçe herkese atıyoruz, çünkü close friend mantığı henüz bu fonksiyonda çok detaylı yok
+    for sub in subscribers:
+        # Eğer story 'close_friends' ise ve subscriber arkadaş değilse bildirimi atma
+        if privacy_type == "close_friends":
+            # Mutual friendship control
+            is_mutual = is_following(db, sub.subscriber_id, user_id) and is_following(db, user_id, sub.subscriber_id)
+            if not is_mutual:
+                continue
+        create_notification(db, sub.subscriber_id, "new_story", user_id)
+
     return story
 
 
@@ -2319,4 +2360,109 @@ def archive_expired_stories(db: Session, user_id: int | None = None) -> int:
         s.is_archived = True
     db.commit()
     return len(stories)
+
+
+# ── Foryou Algorithm / Recommendations ────────────────────────────────────────
+
+def log_interaction(db: Session, user_id: int, place_id: int, interaction_type: str, weight: int = 1):
+    """
+    Kullanıcının mekan etkileşimini (tıklama, kart açma vs.) kaydeder.
+    """
+    interaction = models.UserPlaceInteraction(
+        user_id=user_id,
+        place_id=place_id,
+        interaction_type=interaction_type,
+        weight=weight
+    )
+    db.add(interaction)
+    db.commit()
+    return interaction
+
+import math
+
+def haversine_distance(lat1, lon1, lat2, lon2):
+    """İki koordinat arasındaki mesafeyi kilometre cinsinden hesaplar."""
+    if lat1 is None or lon1 is None or lat2 is None or lon2 is None:
+        return 9999.0
+    R = 6371.0 # Dünya yarıçapı (km)
+    phi1 = math.radians(lat1)
+    phi2 = math.radians(lat2)
+    delta_phi = math.radians(lat2 - lat1)
+    delta_lambda = math.radians(lon2 - lon1)
+    a = math.sin(delta_phi / 2.0) ** 2 + math.cos(phi1) * math.cos(phi2) * math.sin(delta_lambda / 2.0) ** 2
+    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
+    return R * c
+
+def get_foryou_places(db: Session, user_id: int | None, lat: float | None, lng: float | None, limit: int = 12):
+    """
+    Kişiselleştirilmiş mekan önerme motoru.
+    Puanlama:
+    Base Score: Rating * 4 (Maks 20) + Like_Count (Maks 10)
+    Distance: <1km=40, <3km=30, <5km=20, <10km=10
+    Interaction: Belirli bir mekan için toplam ağırlık (Maks 30)
+    Category: (Şimdilik Interaction içine yedirilebilir veya ayrıca hesaplanabilir)
+    """
+    # 1. Tüm aktif mekanları çekmek yerine en yüksek puanlı veya kullanıcıya en yakın 200 mekanı çekiyoruz (Performans optimizasyonu)
+    query = db.query(models.Place).filter(models.Place.latitude.isnot(None))
+    
+    if lat and lng:
+        # Eğer kullanıcının konumu varsa, kaba bir bounding box (yaklaşık 50km) ile filtreleyip 200 tane getirebiliriz. 
+        # Basitlik açısından en yüksek puanlı 200 mekan ile çalışıyoruz.
+        query = query.order_by(models.Place.average_rating.desc()).limit(200)
+    else:
+        query = query.order_by(models.Place.average_rating.desc()).limit(200)
+        
+    places = query.all()
+
+    # 2. Etkileşim geçmişini çek (Eğer kullanıcı giriş yapmışsa)
+    user_interactions = {}
+    if user_id:
+        interactions = db.query(
+            models.UserPlaceInteraction.place_id, 
+            func.sum(models.UserPlaceInteraction.weight).label('total_weight')
+        ).filter(models.UserPlaceInteraction.user_id == user_id)\
+         .group_by(models.UserPlaceInteraction.place_id).all()
+        
+        for p_id, tw in interactions:
+            user_interactions[p_id] = min(tw or 0, 30) # Maks 30 puan
+
+    scored_places = []
+    for p in places:
+        score = 0.0
+        
+        # Base Score (Maks 30)
+        rating = p.average_rating or 3.0
+        score += (rating * 4)
+        # Popülerlik puanı
+        likes = len(p.saved_by) if hasattr(p, 'saved_by') else 0 # Veya yorum sayısı vb.
+        score += min(likes * 2, 10) 
+
+        # Distance Score (Maks 40)
+        if lat and lng and p.latitude and p.longitude:
+            dist = haversine_distance(lat, lng, p.latitude, p.longitude)
+            if dist <= 1.0:
+                score += 40
+            elif dist <= 3.0:
+                score += 30
+            elif dist <= 5.0:
+                score += 20
+            elif dist <= 10.0:
+                score += 10
+
+        # Interaction Score (Maks 30)
+        interaction_score = user_interactions.get(p.id, 0)
+        score += interaction_score
+
+        scored_places.append((score, p))
+
+    # Puana göre sırala (Büyükten küçüğe)
+    scored_places.sort(key=lambda x: x[0], reverse=True)
+    
+    # En iyi mekanları seç
+    top_places = [p for score, p in scored_places[:limit]]
+    
+    # Detayları (yorumlar, fotoğraflar vs) doldur
+    enriched = _enrich_places_with_stats(db, top_places)
+    return enriched
+
 

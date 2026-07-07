@@ -1,4 +1,4 @@
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { mmkv } from "@/src/utils/mmkvStorage";
 import { router, useLocalSearchParams } from "expo-router";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { StyleSheet, TextInput, TouchableOpacity, View } from "react-native";
@@ -33,13 +33,13 @@ function normalizePlaceId(raw: unknown): string | null {
 async function setActiveSession(placeId: string, hours = 2) {
   const activeUntil = Date.now() + hours * 60 * 60 * 1000;
   const session: ActiveSession = { placeId: String(placeId), activeUntil };
-  await AsyncStorage.setItem(ACTIVE_SESSION_KEY, JSON.stringify(session));
+  mmkv.set(ACTIVE_SESSION_KEY, JSON.stringify(session));
   return session;
 }
 
 async function readActiveSession(): Promise<ActiveSession | null> {
   try {
-    const raw = await AsyncStorage.getItem(ACTIVE_SESSION_KEY);
+    const raw = mmkv.getString(ACTIVE_SESSION_KEY);
     if (!raw) return null;
     const parsed = JSON.parse(raw) as Partial<ActiveSession>;
     if (!parsed.placeId || !parsed.activeUntil) return null;

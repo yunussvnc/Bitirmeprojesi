@@ -7,7 +7,6 @@ import {
   TouchableOpacity,
   ActivityIndicator,
   Image,
-  Alert,
   TextInput,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -20,6 +19,7 @@ import { useAuthStore } from "@/src/store/useAuthStore";
 import { getFollowers, getHiddenStoryUsers, updateHiddenStoryUsers, UserSummary } from "@/src/services/userService";
 import { useTranslation } from "react-i18next";
 import { debounce } from "lodash";
+import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 
 export default function HideStoryScreen() {
   const { colors } = useTheme();

@@ -1,5 +1,5 @@
 // Chat messages store – keeps messages per conversation (chatId)
-import AsyncStorage from "@react-native-async-storage/async-storage";
+import { mmkvStorage } from "@/src/utils/mmkvStorage";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
@@ -42,7 +42,7 @@ export const useChatMessagesStore = create<ChatMessagesState>()(
         }),
         {
             name: "chat-messages-store",
-            storage: createJSONStorage(() => AsyncStorage),
+            storage: createJSONStorage(() => mmkvStorage),
         }
     )
 );
