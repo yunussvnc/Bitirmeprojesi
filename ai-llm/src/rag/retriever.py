@@ -92,19 +92,48 @@ class RAGRetriever:
         needs_wide_pool = hybrid_active or personalization_active
         dense_top_k = top_k * 3 if needs_wide_pool else top_k
 
-        # Sorguyu vektöre dönüştür ve vektör araması yap
         query_embedding = self.embedding_model.encode_single(embed_text)
-        dense_results = self.vector_db.search_vectors(
-            query_vector=query_embedding,
-            top_k=dense_top_k,
-            filter=filter_dict
+
+        # İteratif retrieval: ilk denemede top_k'dan az sonuç gelirse,
+        # similarity threshold'u kademeli gevşetip tekrar dener (kapalıysa tek geçer).
+        candidates_by_id: Dict[int, Dict[str, Any]] = {}
+        threshold = settings.SIMILARITY_THRESHOLD
+        max_attempts = 1 + (
+            settings.ITERATIVE_RETRIEVAL_MAX_ATTEMPTS if settings.ITERATIVE_RETRIEVAL_ENABLED else 0
         )
 
-        if hybrid_active:
-            bm25_results = self.bm25_index.search(embed_text, top_k=dense_top_k)
-            candidates = self._reciprocal_rank_fusion(dense_results, bm25_results, candidate_limit=dense_top_k)
-        else:
-            candidates = dense_results[:dense_top_k]
+        for attempt in range(max_attempts):
+            dense_results = self.vector_db.search_vectors(
+                query_vector=query_embedding,
+                top_k=dense_top_k,
+                filter=filter_dict,
+                score_threshold=threshold,
+            )
+
+            if hybrid_active:
+                bm25_results = self.bm25_index.search(embed_text, top_k=dense_top_k)
+                batch = self._reciprocal_rank_fusion(dense_results, bm25_results, candidate_limit=dense_top_k)
+            else:
+                batch = dense_results[:dense_top_k]
+
+            for item in batch:
+                item_id = item["id"]
+                if item_id not in candidates_by_id or item["score"] > candidates_by_id[item_id]["score"]:
+                    candidates_by_id[item_id] = item
+
+            if len(candidates_by_id) >= top_k:
+                break
+            if attempt < max_attempts - 1:
+                threshold = max(
+                    threshold - settings.ITERATIVE_RETRIEVAL_THRESHOLD_STEP,
+                    settings.ITERATIVE_RETRIEVAL_MIN_THRESHOLD,
+                )
+                logger.info(
+                    f"Iterative retrieval: {len(candidates_by_id)}/{top_k} sonuç, "
+                    f"threshold={threshold} ile tekrar deneniyor"
+                )
+
+        candidates = sorted(candidates_by_id.values(), key=lambda c: c["score"], reverse=True)
 
         if personalization_active:
             return self.personalization_scorer.rerank(candidates, user_id=user_id, top_k=top_k)

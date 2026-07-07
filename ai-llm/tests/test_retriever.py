@@ -173,5 +173,85 @@ def test_personalization_reranks_candidates(retriever):
     assert kwargs["top_k"] == 2
 
 
+def test_iterative_retrieval_disabled_calls_search_vectors_once(retriever, monkeypatch):
+    settings.HYBRID_SEARCH_ENABLED = False
+    monkeypatch.setattr(settings, "ITERATIVE_RETRIEVAL_ENABLED", False)
+    retriever._vector_db.search_vectors.return_value = [
+        {"id": 1, "score": 0.9, "payload": {"id": 1, "ad": "Yer A"}},
+    ]
+
+    results = retriever.retrieve("sessiz kafe", top_k=5)
+
+    retriever._vector_db.search_vectors.assert_called_once()
+    assert len(results) == 1
+
+
+def test_iterative_retrieval_relaxes_threshold_and_merges(retriever, monkeypatch):
+    settings.HYBRID_SEARCH_ENABLED = False
+    monkeypatch.setattr(settings, "ITERATIVE_RETRIEVAL_ENABLED", True)
+    monkeypatch.setattr(settings, "ITERATIVE_RETRIEVAL_MAX_ATTEMPTS", 2)
+    monkeypatch.setattr(settings, "ITERATIVE_RETRIEVAL_THRESHOLD_STEP", 0.1)
+    monkeypatch.setattr(settings, "ITERATIVE_RETRIEVAL_MIN_THRESHOLD", 0.15)
+    monkeypatch.setattr(settings, "SIMILARITY_THRESHOLD", 0.4)
+
+    first_batch = [{"id": 1, "score": 0.9, "payload": {"id": 1, "ad": "Yer A"}}]
+    second_batch = [
+        {"id": 1, "score": 0.9, "payload": {"id": 1, "ad": "Yer A"}},
+        {"id": 2, "score": 0.5, "payload": {"id": 2, "ad": "Yer B"}},
+        {"id": 3, "score": 0.4, "payload": {"id": 3, "ad": "Yer C"}},
+    ]
+    retriever._vector_db.search_vectors.side_effect = [first_batch, second_batch]
+
+    results = retriever.retrieve("nadir bir sorgu", top_k=3)
+
+    assert retriever._vector_db.search_vectors.call_count == 2
+    first_kwargs = retriever._vector_db.search_vectors.call_args_list[0].kwargs
+    second_kwargs = retriever._vector_db.search_vectors.call_args_list[1].kwargs
+    assert first_kwargs["score_threshold"] == 0.4
+    assert second_kwargs["score_threshold"] == pytest.approx(0.3)
+
+    result_ids = {r["id"] for r in results}
+    assert result_ids == {1, 2, 3}
+
+
+def test_iterative_retrieval_exhausts_attempts_without_crash(retriever, monkeypatch):
+    settings.HYBRID_SEARCH_ENABLED = False
+    monkeypatch.setattr(settings, "ITERATIVE_RETRIEVAL_ENABLED", True)
+    monkeypatch.setattr(settings, "ITERATIVE_RETRIEVAL_MAX_ATTEMPTS", 2)
+    monkeypatch.setattr(settings, "ITERATIVE_RETRIEVAL_THRESHOLD_STEP", 0.1)
+    monkeypatch.setattr(settings, "ITERATIVE_RETRIEVAL_MIN_THRESHOLD", 0.15)
+    monkeypatch.setattr(settings, "SIMILARITY_THRESHOLD", 0.4)
+
+    retriever._vector_db.search_vectors.return_value = [
+        {"id": 1, "score": 0.9, "payload": {"id": 1, "ad": "Yer A"}},
+    ]
+
+    results = retriever.retrieve("çok nadir bir sorgu", top_k=5)
+
+    assert retriever._vector_db.search_vectors.call_count == 3  # 1 + max_attempts
+    assert len(results) == 1  # top_k'dan az ama crash yok
+
+
+def test_iterative_retrieval_min_threshold_respected(retriever, monkeypatch):
+    settings.HYBRID_SEARCH_ENABLED = False
+    monkeypatch.setattr(settings, "ITERATIVE_RETRIEVAL_ENABLED", True)
+    monkeypatch.setattr(settings, "ITERATIVE_RETRIEVAL_MAX_ATTEMPTS", 3)
+    monkeypatch.setattr(settings, "ITERATIVE_RETRIEVAL_THRESHOLD_STEP", 0.2)
+    monkeypatch.setattr(settings, "ITERATIVE_RETRIEVAL_MIN_THRESHOLD", 0.15)
+    monkeypatch.setattr(settings, "SIMILARITY_THRESHOLD", 0.4)
+
+    retriever._vector_db.search_vectors.return_value = []
+
+    retriever.retrieve("bulunamayan sorgu", top_k=5)
+
+    thresholds = [
+        call.kwargs["score_threshold"]
+        for call in retriever._vector_db.search_vectors.call_args_list
+    ]
+    # 0.4 -> 0.2 -> 0.15 (0.0 yerine min'de sabitlenir, 3. denemede tekrar 0.15'te kalır)
+    assert thresholds[0] == 0.4
+    assert all(t >= 0.15 for t in thresholds)
+
+
 if __name__ == "__main__":
     print("Bu dosya pytest fixture kullanıyor, `pytest tests/test_retriever.py -v` ile çalıştırın.")

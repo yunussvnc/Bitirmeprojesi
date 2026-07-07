@@ -72,6 +72,12 @@ class Settings(BaseSettings):
     PERSONALIZATION_BOOST_WEIGHT: float = 0.3
     PERSONALIZATION_MAX_SCORE: float = 20.0
 
+    # İteratif (çok adımlı) retrieval — az sonuçta similarity threshold gevşetme
+    ITERATIVE_RETRIEVAL_ENABLED: bool = False       # varsayılan kapalı
+    ITERATIVE_RETRIEVAL_MAX_ATTEMPTS: int = 2        # ilk deneme + en fazla 2 ek deneme
+    ITERATIVE_RETRIEVAL_THRESHOLD_STEP: float = 0.1  # her denemede threshold bu kadar düşer
+    ITERATIVE_RETRIEVAL_MIN_THRESHOLD: float = 0.15  # bu değerin altına inmez (gürültü koruması)
+
     # Postgres place sync (loaded_places.json -> places tablosu)
     PLACES_SYNC_ON_STARTUP: bool = False
     PLACES_SYNC_MIN_RATIO: float = 0.95
