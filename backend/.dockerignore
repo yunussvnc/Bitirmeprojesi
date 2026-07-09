@@ -1,0 +1,42 @@
+# Sanal ortam / bağımlılık klasörleri
+.venv/
+venv/
+__pycache__/
+*.pyc
+*.pyo
+
+# Test ve coverage
+tests/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Log dosyaları
+*.log
+logs/
+
+# Ortam ve secret dosyaları — imaja asla gömülmez, runtime'da env_file ile gelir
+.env
+.env.*
+!.env.example
+
+# Yerel geliştirme verisi / upload'lar (volume ile mount edilecek)
+uploads/
+
+# Git ve IDE
+.git/
+.gitignore
+.vscode/
+.idea/
+
+# Dokümantasyon (imaj boyutuna katkısı yok, gereksiz)
+*.md
+RENDER_*.md
+DEPLOYMENT_*.md
+QUICK_DEPLOY_STEPS.txt
+ENV_VARIABLES_CHECKLIST.md
+
+# Diğer
+docker-compose*.yml
+Dockerfile
+.dockerignore
