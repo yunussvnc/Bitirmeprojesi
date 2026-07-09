@@ -1,0 +1,400 @@
+# =============================================================================
+# AsEmOs — Production Core Infrastructure (Compose Specification)
+# =============================================================================
+# Bu dosya SADECE çekirdek altyapıyı içerir: postgres, redis, qdrant, migrate,
+# backend, ai-llm. nginx/certbot/frontend/admin/monitoring ayrı adımlarda
+# eklenecek (bu dosyaya sonradan merge edilecek).
+#
+# "version:" anahtarı bilinçli olarak yok — Compose Specification artık bunu
+# gerektirmiyor, Docker Compose v2 dosyayı otomatik en güncel spec olarak okur.
+# =============================================================================
+
+# -----------------------------------------------------------------------------
+# Ortak logging bloğu — her servis aynı json-file limitini tekrar yazmasın diye
+# YAML anchor kullanılıyor. Disk taşmasını engeller (log dosyası sonsuz büyümez).
+# -----------------------------------------------------------------------------
+x-logging-default: &logging-default
+  driver: json-file
+  options:
+    max-size: "10m"
+    max-file: "3"
+
+x-logging-light: &logging-light
+  driver: json-file
+  options:
+    max-size: "5m"
+    max-file: "2"
+
+services:
+
+  # ===========================================================================
+  # PostgreSQL — kalıcı veri deposu. SADECE backend_network'te, host'a HİÇBİR
+  # port map edilmiyor (dışarıdan veya diğer network'lerden erişilemez).
+  # ===========================================================================
+  postgres:
+    image: postgres:15
+    container_name: asemos_postgres
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    # Checkpoint + WAL flush için varsayılan 10s docker-stop süresi yetersiz
+    # kalabilir — büyük checkpoint sırasında SIGKILL yemesin diye uzatıldı.
+    stop_grace_period: 60s
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - backend_network
+    # $$ kullanılıyor: compose'un build-time'da değil, container'ın kendi
+    # runtime shell'inin bu değişkenleri (postgres image zaten env'den set eder)
+    # çözmesi isteniyor.
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 10s
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 1024M
+        reservations:
+          cpus: "0.5"
+          memory: 256M
+    logging: *logging-default
+
+  # ===========================================================================
+  # Redis — cache + WebSocket pub/sub + online-status. Şifre korumalı,
+  # SADECE backend_network'te, host'a port map edilmiyor.
+  # ===========================================================================
+  redis:
+    image: redis:7-alpine
+    container_name: asemos_redis
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    # AOF fsync'in yarım kalmaması için (appendonly yes) küçük bir pay.
+    stop_grace_period: 30s
+    command: >
+      redis-server
+      --requirepass ${REDIS_PASSWORD}
+      --appendonly yes
+      --maxmemory 200mb
+      --maxmemory-policy allkeys-lru
+    volumes:
+      - redis_data:/data
+    networks:
+      - backend_network
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli -a $$REDIS_PASSWORD ping | grep -q PONG"]
+      interval: 10s
+      timeout: 3s
+      retries: 5
+      start_period: 5s
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 256M
+        reservations:
+          cpus: "0.1"
+          memory: 64M
+    logging: *logging-light
+
+  # ===========================================================================
+  # Qdrant — vektör veritabanı, kalıcı depolama ile (prod'da :memory: DEĞİL).
+  # SADECE backend_network'te, host'a port map edilmiyor. API key zorunlu.
+  # ===========================================================================
+  qdrant:
+    image: qdrant/qdrant:latest
+    container_name: asemos_qdrant
+    restart: unless-stopped
+    security_opt:
+      - no-new-privileges:true
+    # Segment/WAL flush'ın tamamlanması için pay.
+    stop_grace_period: 30s
+    environment:
+      QDRANT__SERVICE__API_KEY: ${QDRANT_API_KEY}
+    volumes:
+      - qdrant_data:/qdrant/storage
+    networks:
+      - backend_network
+    # Qdrant image'inde curl/wget yok — bash'in dahili /dev/tcp özelliğiyle
+    # port açık mı diye bakıyoruz, ekstra paket kurmadan.
+    healthcheck:
+      test: ["CMD-SHELL", "bash -c 'exec 3<>/dev/tcp/127.0.0.1/6333' || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      # 10s'ten 20s'e çıkarıldı: qdrant_data volume büyüdükçe (index disk'ten
+      # yüklenirken) soğuk başlangıç 10s'i aşabilir, erken healthy sanılıp
+      # bağımlı servisler erken başlamasın diye.
+      start_period: 20s
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 768M
+        reservations:
+          cpus: "0.25"
+          memory: 256M
+    logging: *logging-default
+
+  # ===========================================================================
+  # Migrate — tek seferlik DB migration servisi. Backend ile AYNI image,
+  # farklı komut. Başarıyla biter (exit 0), backend ancak bundan sonra başlar.
+  # restart: "no" bilinçli — bu bir job, sonsuz döngüye girmemeli.
+  # ===========================================================================
+  migrate:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: asemos-backend:latest
+    container_name: asemos_migrate
+    restart: "no"
+    security_opt:
+      - no-new-privileges:true
+    command: ["python", "migrate.py"]
+    env_file:
+      - ./backend/.env
+    environment:
+      # Postgres kimlik bilgileri root .env'den, servis adı üzerinden Docker DNS.
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+    networks:
+      - backend_network
+    depends_on:
+      postgres:
+        condition: service_healthy
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 256M
+    logging: *logging-light
+
+  # ===========================================================================
+  # Backend — ana FastAPI servisi. Migration'ı KENDİSİ ÇALIŞTIRMAZ (main.py'deki
+  # otomatik migrate çağrısı kaldırılmış olmalı) — migrate servisinin başarıyla
+  # tamamlanmasını bekler. ai-llm'e SADECE Docker DNS (http://ai-llm:8080) ile
+  # konuşur, host portu yok.
+  # ===========================================================================
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: asemos-backend:latest
+    container_name: asemos_backend
+    restart: unless-stopped
+    # init:true → tini PID1 olarak devreye girer, uvicorn/SIGTERM sinyal
+    # yönetimini ve zombie process reap'ini düzgün yapar (uygulama container'ı
+    # için önerilen pratik, resmi DB image'lerinde zaten kendi entrypoint'leri var).
+    init: true
+    security_opt:
+      - no-new-privileges:true
+    # WebSocket bağlantıları + devam eden HTTP isteklerinin düzgün kapanması için.
+    stop_grace_period: 30s
+    env_file:
+      - ./backend/.env
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+      REDIS_URL: redis://:${REDIS_PASSWORD}@redis:6379/0
+      # ai-llm'e artık onrender.com değil, Docker service adıyla ulaşılıyor.
+      AI_URL: http://ai-llm:8080
+    volumes:
+      # Cloudinary yapılandırılmadığında local upload fallback'i için named
+      # volume — imaja bind mount YOK, kalıcı veri sadece bu volume üzerinden.
+      - uploads_data:/app/uploads
+    networks:
+      - backend_network
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      redis:
+        condition: service_healthy
+    # Dockerfile'da zaten HEALTHCHECK tanımlı (python urllib → /health),
+    # burada tekrar yazmıyoruz — image'in kendi healthcheck'i kullanılır.
+    deploy:
+      resources:
+        limits:
+          cpus: "1.5"
+          memory: 1024M
+        reservations:
+          cpus: "0.5"
+          memory: 256M
+    logging: *logging-default
+
+  # ===========================================================================
+  # ai-llm — RAG/arama servisi. Backend'den TAMAMEN izole (ayrı process, ayrı
+  # image), sadece Docker DNS üzerinden (http://backend:8000) konuşur. Host'a
+  # port map edilmiyor — nginx eklenene kadar dışarıdan hiç erişilemez.
+  # ===========================================================================
+  ai-llm:
+    build:
+      context: ./ai-llm
+      dockerfile: Dockerfile
+    image: asemos-ai-llm:latest
+    container_name: asemos_ai_llm
+    restart: unless-stopped
+    init: true
+    security_opt:
+      - no-new-privileges:true
+    # Devam eden embedding/rerank/LLM çağrılarının yarıda kesilmemesi için.
+    stop_grace_period: 30s
+    env_file:
+      - ./ai-llm/.env
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER}:${POSTGRES_PASSWORD}@postgres:5432/${POSTGRES_DB}
+      REDIS_URL: redis://:${REDIS_PASSWORD}@redis:6379/0
+      QDRANT_URL: http://qdrant:6333
+      QDRANT_API_KEY: ${QDRANT_API_KEY}
+      # backend'e artık onrender.com değil, Docker service adıyla ulaşılıyor.
+      BACKEND_API_URL: http://backend:8000
+    networks:
+      - backend_network
+    depends_on:
+      migrate:
+        condition: service_completed_successfully
+      redis:
+        condition: service_healthy
+      qdrant:
+        condition: service_healthy
+    # Dockerfile'da zaten HEALTHCHECK tanımlı (python urllib → /health).
+    deploy:
+      resources:
+        limits:
+          cpus: "2.0"
+          memory: 2560M
+        reservations:
+          cpus: "1.0"
+          memory: 1024M
+    logging: *logging-default
+
+  # ===========================================================================
+  # nginx — TEK public container. public_network (host'a 80/443 açık) ve
+  # backend_network (upstream'lere proxy) arasında köprü. Statik frontend
+  # dosyaları + Next.js admin + backend/ai-llm reverse proxy hedefleri
+  # infra/nginx/Dockerfile içinde (sonraki adımda yazılacak) multi-stage COPY
+  # ile bir araya getirilir — nginx.conf/vhost içerikleri BU adımın kapsamı
+  # dışında, sadece servis tanımı burada.
+  #
+  # NOT (bootstrap sırası uyarısı): nginx.conf'ta SSL sertifika path'leri
+  # certbot_data volume'üne işaret edecek. İlk deploy'da sertifikalar henüz
+  # yoksa nginx SSL server_block'larıyla başlayamaz (chicken-and-egg). Bu,
+  # nginx.conf adımında ele alınacak (örn. HTTP-only başlangıç config +
+  # sertifika alındıktan sonra reload).
+  # ===========================================================================
+  nginx:
+    build:
+      context: .
+      dockerfile: infra/nginx/Dockerfile
+    image: asemos-nginx:latest
+    container_name: asemos_nginx
+    restart: unless-stopped
+    init: true
+    security_opt:
+      - no-new-privileges:true
+    # Nginx kendi çalışma dosyalarını (pid, cache) yazabilmeli — root FS
+    # read-only, bu ikisi tmpfs (RAM, restart'ta sıfırlanır, kalıcı veri değil).
+    read_only: true
+    tmpfs:
+      - /var/cache/nginx
+      - /var/run
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - certbot_data:/etc/letsencrypt:ro
+      - certbot_www:/var/www/certbot:ro
+      - nginx_logs:/var/log/nginx
+    networks:
+      - public_network
+      - backend_network
+    depends_on:
+      backend:
+        condition: service_healthy
+      ai-llm:
+        condition: service_healthy
+      # admin: bu compose dosyasına henüz eklenmedi (web layer'ın sonraki
+      # parçası) — admin servisi tanımlandığında buraya service_healthy
+      # koşuluyla eklenmeli. frontend'in çalışan bir container'ı YOK (scratch
+      # artifact, nginx image'ine build-time'da gömülüyor), bu yüzden
+      # depends_on listesinde frontend hiç yer almıyor.
+    # nginx:alpine base image busybox wget içerir, ekstra paket kurmaya gerek yok.
+    healthcheck:
+      test: ["CMD-SHELL", "wget -q --spider http://localhost:80/ || exit 1"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 10s
+    stop_grace_period: 15s
+    logging: *logging-default
+
+  # ===========================================================================
+  # certbot — SADECE otomatik yenileme döngüsü. İlk sertifika alma komutu
+  # (certonly -d ... --email ...) bilinçli olarak burada YOK — bu, domain'ler
+  # DNS'e yönlendirildikten sonra bir kerelik elle/bootstrap script ile
+  # yapılacak manuel adım. Bu servis sadece var olan sertifikaları 12 saatte
+  # bir "renew" dener (süresi dolmayanlarda no-op, zararsız).
+  # ===========================================================================
+  certbot:
+    image: certbot/certbot:latest
+    container_name: asemos_certbot
+    restart: unless-stopped
+    init: true
+    security_opt:
+      - no-new-privileges:true
+    read_only: true
+    tmpfs:
+      - /tmp
+    volumes:
+      - certbot_data:/etc/letsencrypt
+      - certbot_www:/var/www/certbot
+    networks:
+      # Sadece Let's Encrypt'e giden internet çıkışı için — backend_network'e
+      # (postgres/redis/qdrant'a erişimi olan network) hiç ihtiyacı yok.
+      - public_network
+    entrypoint: >
+      sh -c "trap exit TERM; while :; do certbot renew --webroot -w /var/www/certbot --quiet; sleep 12h & wait; done"
+    healthcheck:
+      test: ["CMD-SHELL", "certbot certificates >/dev/null 2>&1 || exit 1"]
+      interval: 6h
+      timeout: 10s
+      retries: 2
+      start_period: 10s
+    stop_grace_period: 10s
+    logging: *logging-light
+
+# =============================================================================
+# Networks
+# =============================================================================
+networks:
+  backend_network:
+    driver: bridge
+    # internal:true KULLANILMIYOR bilinçli olarak: backend (Groq/Cloudinary/
+    # SerpAPI/Google OAuth/SMTP) ve ai-llm (Groq/HuggingFace/SerpAPI) dış
+    # internete çıkmak zorunda. Postgres/redis/qdrant'ın "public'e kapalı"
+    # olması zaten hiç `ports:` map edilmemesinden geliyor — internal:true
+    # bunu üstlerine binip backend/ai-llm'in internet erişimini de keserdi.
+    # nginx bu network'e dahil olup upstream'lere (backend/ai-llm) proxy yapar.
+  public_network:
+    driver: bridge
+    # internal DEĞİL — hem host'tan gelen 80/443 trafiğini taşımalı hem de
+    # certbot'un Let's Encrypt'e çıkabilmesi için internet erişimi gerekli.
+    # Bu network'te SADECE nginx ve certbot var; postgres/redis/qdrant/backend/
+    # ai-llm buraya asla eklenmez.
+
+# =============================================================================
+# Volumes — hepsi named volume, bind mount yok (kalıcılık Docker yönetiminde)
+# =============================================================================
+volumes:
+  postgres_data:
+  redis_data:
+  qdrant_data:
+  uploads_data:
+  nginx_logs:
+  certbot_data:
+  certbot_www:
