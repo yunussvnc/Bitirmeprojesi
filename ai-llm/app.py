@@ -14,7 +14,8 @@ os.environ["OPENBLAS_NUM_THREADS"] = "1"
 os.environ["VECLIB_MAXIMUM_THREADS"] = "1"
 os.environ["NUMEXPR_NUM_THREADS"] = "1"
 
-from fastapi import FastAPI, HTTPException, BackgroundTasks  # type: ignore[import]
+import uuid
+from fastapi import FastAPI, HTTPException, BackgroundTasks, Request  # type: ignore[import]
 from pydantic import BaseModel  # type: ignore[import]
 from typing import List, Optional, Dict, Union
 from contextlib import asynccontextmanager
@@ -969,21 +970,39 @@ async def lifespan(app: FastAPI):
     print("[Shutdown] Sistem kapatiliyor...")
 
 
+_docs_enabled = settings.ENVIRONMENT != "production"
+
 app = FastAPI(
     title="AI-LLM Demo Backend (FAZ 2)",
     version="2.1.0",
-    lifespan=lifespan
+    lifespan=lifespan,
+    docs_url="/docs" if _docs_enabled else None,
+    redoc_url="/redoc" if _docs_enabled else None,
+    openapi_url="/openapi.json" if _docs_enabled else None,
 )
 
 from fastapi.middleware.cors import CORSMiddleware
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # Her yerden erisime izin ver (Demo icin)
+    allow_origins=settings.cors_origins_list,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+
+@app.middleware("http")
+async def request_correlation_middleware(request: Request, call_next):
+    """
+    Backend'deki RequestLoggingMiddleware'in ai-llm karşılığı — inbound
+    X-Request-ID'yi (backend'den veya nginx'ten) kullanır, yoksa üretir,
+    response'a echo eder. Uçtan uca korelasyon zinciri için gerekli.
+    """
+    request_id = request.headers.get("X-Request-ID") or str(uuid.uuid4())[:8]
+    response = await call_next(request)
+    response.headers["X-Request-ID"] = request_id
+    return response
 
 
 # ==================== MODELS ====================

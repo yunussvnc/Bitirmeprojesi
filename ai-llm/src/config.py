@@ -12,6 +12,9 @@ class Settings(BaseSettings):
     # API Ayarları
     API_V1_STR: str = "/api/v1"
     PROJECT_NAME: str = "Mekan Öneri Platformu AI Service"
+
+    # development | staging | production — prod'da /docs, /redoc, /openapi.json kapatılır.
+    ENVIRONMENT: str = "development"
     
     # CORS Ayarları (comma separated string olarak gelir, parse edilir)
     CORS_ORIGINS: str = "http://localhost:8000,http://localhost:3000,http://localhost:8081"
