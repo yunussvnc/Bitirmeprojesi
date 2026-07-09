@@ -24,4 +24,4 @@ function resolveBaseUrl(): string {
 
 export const API_BASE_URL = resolveBaseUrl();
 
-export const API_V1 = API_BASE_URL;
+export const API_V1 = `${API_BASE_URL}/api/v1`;

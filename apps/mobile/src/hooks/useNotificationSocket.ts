@@ -21,7 +21,7 @@ import { useMessagesStore } from '@/src/store/useMessagesStore';
 import { API_BASE_URL } from '@/src/constants/api';
 
 // WebSocket URL'sini HTTP URL'sinden üret (http:// -> ws://, https:// -> wss://)
-const WS_URL = API_BASE_URL.replace(/^http/, 'ws') + '/notifications/ws';
+const WS_URL = API_BASE_URL.replace(/^http/, 'ws') + '/api/v1/notifications/ws';
 
 // Sabitler
 const MAX_RECONNECT_ATTEMPTS = 10;

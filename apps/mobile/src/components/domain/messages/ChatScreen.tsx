@@ -270,7 +270,7 @@ export default function ChatScreen() {
         if (!isBackendConv || !accessToken) return;
 
         const WS_BASE = API_BASE_URL.replace(/^http/, 'ws');
-        const wsUrl = `${WS_BASE}/ws/chat/${numericConvId}?token=${accessToken}`;
+        const wsUrl = `${WS_BASE}/api/v1/ws/chat/${numericConvId}?token=${accessToken}`;
         const ws = new WebSocket(wsUrl);
 
         ws.onopen = () => {

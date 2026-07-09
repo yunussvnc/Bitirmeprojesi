@@ -1,6 +1,29 @@
-import { API_BASE_URL } from '@/src/constants/api';
+import { Platform } from 'react-native';
+import * as Application from 'expo-application';
+import { API_V1 } from '@/src/constants/api';
 import { handleApiError } from './errorHandler';
 import { logger } from './logger';
+
+const APP_VERSION = Application.nativeApplicationVersion ?? 'unknown';
+const BUILD_NUMBER = Application.nativeBuildVersion ?? 'unknown';
+const APP_PLATFORM = Platform.OS;
+const USER_AGENT = `Asemos/${APP_VERSION} (${Platform.OS === 'ios' ? 'iOS' : 'Android'}; Build ${BUILD_NUMBER})`;
+
+function generateRequestId(): string {
+  // Korelasyon amaçlı — kriptografik güvenlik gerekmiyor, yeni bir bağımlılık
+  // eklemeden basit bir benzersiz kimlik üretir.
+  return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`;
+}
+
+function getCorrelationHeaders(): Record<string, string> {
+  return {
+    'X-Request-ID': generateRequestId(),
+    'X-App-Version': APP_VERSION,
+    'X-Build-Number': BUILD_NUMBER,
+    'X-App-Platform': APP_PLATFORM,
+    'User-Agent': USER_AGENT,
+  };
+}
 
 interface RequestOptions extends RequestInit {
   retries?: number;
@@ -57,6 +80,7 @@ async function fetchWithRetry(
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
+        ...getCorrelationHeaders(),
         ...authHeaders,
         ...options.headers,
       },
@@ -73,10 +97,10 @@ async function fetchWithRetry(
         if (!_isRefreshing) {
           _isRefreshing = true;
           try {
-            const refreshUrl = `${API_BASE_URL}/auth/refresh`;
+            const refreshUrl = `${API_V1}/auth/refresh`;
             const refreshRes = await fetch(refreshUrl, {
               method: 'POST',
-              headers: { 'Content-Type': 'application/json' },
+              headers: { 'Content-Type': 'application/json', ...getCorrelationHeaders() },
               body: JSON.stringify({ refresh_token: refreshToken })
             });
 
@@ -160,7 +184,7 @@ export async function apiClient<T>(
   endpoint: string,
   options: RequestOptions = {}
 ): Promise<T> {
-  const url = endpoint.startsWith('http') ? endpoint : `${API_BASE_URL}${endpoint}`;
+  const url = endpoint.startsWith('http') ? endpoint : `${API_V1}${endpoint}`;
 
   try {
     const response = await fetchWithRetry(url, options);
@@ -225,7 +249,7 @@ export async function apiUploadFile<T = { url: string }>(
   file: { uri: string; type?: string; name?: string },
   fieldName = "file"
 ): Promise<T> {
-  const url = endpoint.startsWith("http") ? endpoint : `${API_BASE_URL}${endpoint}`;
+  const url = endpoint.startsWith("http") ? endpoint : `${API_V1}${endpoint}`;
   const token = _getAccessToken?.();
   const formData = new FormData();
   formData.append(fieldName, {
@@ -233,7 +257,10 @@ export async function apiUploadFile<T = { url: string }>(
     type: file.type || "image/jpeg",
     name: file.name || "image.jpg",
   } as any);
-  const headers: Record<string, string> = token ? { Authorization: `Bearer ${token}` } : {};
+  const headers: Record<string, string> = {
+    ...getCorrelationHeaders(),
+    ...(token ? { Authorization: `Bearer ${token}` } : {}),
+  };
 
   try {
     const controller = new AbortController();
