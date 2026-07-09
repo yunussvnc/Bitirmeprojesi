@@ -69,10 +69,33 @@ def db():
         session.close()
 
 
+# Testler bare path kullanır (ör. "/auth/login") — router'lar main.py'de
+# /api/v1 altında mount edildiği için burada otomatik prefix ekleniyor.
+# Böylece onlarca test dosyasındaki path literal'lerine dokunmaya gerek kalmadı.
+_UNPREFIXED_PATHS = ("/", "/health", "/docs", "/openapi.json", "/redoc")
+_UNPREFIXED_STARTSWITH = ("/api/", "/health", "/uploads/")
+
+
+class _VersionedTestClient(TestClient):
+    def request(self, method, url, *args, **kwargs):
+        url_str = str(url)
+        if url_str not in _UNPREFIXED_PATHS and not url_str.startswith(_UNPREFIXED_STARTSWITH):
+            url_str = f"/api/v1{url_str}"
+        return super().request(method, url_str, *args, **kwargs)
+
+
+# Bazı test dosyaları (ör. test_auth_features.py) fixture kullanmadan modül
+# seviyesinde kendi `TestClient(app)` örneğini oluşturuyor — bu durumları da
+# kapsamak için `fastapi.testclient.TestClient` adını burada, conftest.py
+# tüm test modüllerinden önce import edildiği için, global olarak değiştiriyoruz.
+import fastapi.testclient
+fastapi.testclient.TestClient = _VersionedTestClient
+
+
 @pytest.fixture()
 def client():
-    """FastAPI TestClient — her testte kullanılır."""
-    return TestClient(app)
+    """FastAPI TestClient — her testte kullanılır. Bare path'leri otomatik /api/v1 ile prefixler."""
+    return _VersionedTestClient(app)
 
 
 @pytest.fixture(autouse=True)

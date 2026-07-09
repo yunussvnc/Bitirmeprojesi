@@ -36,11 +36,19 @@ class TestRootAndHealth:
         assert "mesaj" in data
 
     def test_health_returns_status(self, client):
+        """/health artık salt liveness — bağımlılık kontrolleri /health/ready'de."""
         response = client.get("/health")
         assert response.status_code == 200
         data = response.json()
         assert "status" in data
         assert "version" in data
+        assert "services" not in data
+
+    def test_health_ready_returns_service_statuses(self, client):
+        response = client.get("/health/ready")
+        assert response.status_code == 200
+        data = response.json()
+        assert "status" in data
         assert "services" in data
         assert "database" in data["services"]
 

@@ -5,6 +5,8 @@ from functools import lru_cache
 
 class Settings(BaseSettings):
     DATABASE_URL: str
+    # development | staging | production — prod'da /docs, /redoc, /openapi.json kapatılır.
+    ENVIRONMENT: str = "development"
     # Production (Render): ALLOWED_ORIGINS=https://asemos.app,https://admin.asemos.app
     # Mobile native apps: ALLOWED_ORIGINS=* (veya boş bırakmayın — aşağıdaki varsayılan *)
     ALLOWED_ORIGINS: str = "*"
@@ -47,6 +49,11 @@ class Settings(BaseSettings):
     PLACES_SYNC_ON_STARTUP: bool = True
     PLACES_SYNC_MIN_RATIO: float = 0.95
     PLACES_JSON_PATH: str = "data/loaded_places.json"
+
+    # /api/versions içinde döner — mobil app force-update/maintenance kill-switch'i
+    LATEST_MOBILE_VERSION: str = "1.0.0"
+    MAINTENANCE_MODE: bool = False
+    FORCE_UPDATE: bool = False
 
     model_config = {"env_file": ".env", "extra": "ignore"}
 

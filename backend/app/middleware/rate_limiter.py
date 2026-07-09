@@ -203,30 +203,31 @@ def get_client_ip(request: Request) -> str:
 
 
 # Rate limit kuralları: (path_prefix, max_requests, window_seconds)
+# NOT: path'ler /api/v1 altında — router'lar main.py'de bu prefix ile mount ediliyor.
 RATE_LIMIT_RULES = [
-    ("/auth/login", 50, 60),              # 50 req/dk (Geliştirme için artırıldı)
-    ("/auth/register", 30, 60),           # 30 req/dk
-    ("/auth/verify-register", 50, 300),   # 50 req/5 dk
-    ("/auth/resend-register-code", 30, 60),# 30 req/dk
-    ("/auth/forgot-password", 30, 60),    # 30 req/dk
-    ("/auth/reset-password", 50, 60),     # 50 req/dk
-    ("/auth/refresh", 15, 60),            # 15 req/dk
-    ("/upload/", 10, 60),                 # 10 req/dk
-    ("/recommend", 10, 60),               # 10 req/dk
+    ("/api/v1/auth/login", 50, 60),              # 50 req/dk (Geliştirme için artırıldı)
+    ("/api/v1/auth/register", 30, 60),           # 30 req/dk
+    ("/api/v1/auth/verify-register", 50, 300),   # 50 req/5 dk
+    ("/api/v1/auth/resend-register-code", 30, 60),# 30 req/dk
+    ("/api/v1/auth/forgot-password", 30, 60),    # 30 req/dk
+    ("/api/v1/auth/reset-password", 50, 60),     # 50 req/dk
+    ("/api/v1/auth/refresh", 15, 60),            # 15 req/dk
+    ("/api/v1/upload/", 10, 60),                 # 10 req/dk
+    ("/api/v1/recommend", 10, 60),               # 10 req/dk
 ]
 
 if os.getenv("TESTING") == "1":
     # In test mode use tighter limits for faster, deterministic tests
     RATE_LIMIT_RULES = [
-        ("/auth/login", 6, 60),
-        ("/auth/register", 4, 60),
-        ("/auth/verify-register", 50, 300),
-        ("/auth/resend-register-code", 30, 60),
-        ("/auth/forgot-password", 30, 60),
-        ("/auth/reset-password", 50, 60),
-        ("/auth/refresh", 15, 60),
-        ("/upload/", 10, 60),
-        ("/recommend", 10, 60),
+        ("/api/v1/auth/login", 6, 60),
+        ("/api/v1/auth/register", 4, 60),
+        ("/api/v1/auth/verify-register", 50, 300),
+        ("/api/v1/auth/resend-register-code", 30, 60),
+        ("/api/v1/auth/forgot-password", 30, 60),
+        ("/api/v1/auth/reset-password", 50, 60),
+        ("/api/v1/auth/refresh", 15, 60),
+        ("/api/v1/upload/", 10, 60),
+        ("/api/v1/recommend", 10, 60),
     ]
 
 # Genel limit
@@ -243,7 +244,7 @@ class RateLimiterMiddleware(BaseHTTPMiddleware):
     async def dispatch(self, request: Request, call_next):
         # GET /health, /docs gibi endpoint'leri atla
         path = request.url.path
-        if path in ("/health", "/", "/docs", "/openapi.json", "/redoc") or path.startswith("/uploads/"):
+        if path in ("/health", "/health/ready", "/", "/docs", "/openapi.json", "/redoc") or path.startswith("/uploads/"):
             return await call_next(request)
 
         ip = get_client_ip(request)
