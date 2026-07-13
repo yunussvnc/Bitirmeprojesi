@@ -52,7 +52,17 @@ ENV PATH="/opt/venv/bin:$PATH" \
     MKL_NUM_THREADS=1 \
     OPENBLAS_NUM_THREADS=1 \
     VECLIB_MAXIMUM_THREADS=1 \
-    NUMEXPR_NUM_THREADS=1
+    NUMEXPR_NUM_THREADS=1 \
+    # appuser'ın $HOME'u yok (--no-create-home) — sentence-transformers/
+    # huggingface_hub varsayılan olarak ~/.cache/huggingface'e model indirmeye
+    # çalışıyor, bu da "Permission denied: '/home/appuser'" ile patlıyordu
+    # (gerçek doğrulamada tespit edildi — embedding modeli hiç yüklenemiyordu).
+    # Cache'i appuser'ın zaten sahip olduğu /app altına yönlendiriyoruz.
+    HF_HOME=/app/.cache/huggingface \
+    TRANSFORMERS_CACHE=/app/.cache/huggingface \
+    SENTENCE_TRANSFORMERS_HOME=/app/.cache/huggingface
+
+RUN mkdir -p /app/.cache/huggingface && chown -R appuser:appuser /app/.cache
 
 COPY --chown=appuser:appuser . .
 

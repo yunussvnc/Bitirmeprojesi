@@ -25,7 +25,15 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-ENV NEXT_TELEMETRY_DISABLED=1
+# NEXT_PUBLIC_* değişkenleri Next.js tarafından CLIENT bundle'a build-time'da
+# gömülür — runtime'da `environment:` ile vermek client tarafında hiçbir işe
+# yaramaz (bundle zaten derlenmiş olur). Bu yüzden ARG olarak alınıp burada
+# ENV'e çevriliyor, docker-compose.prod.yml `build.args` ile besliyor.
+ARG NEXT_PUBLIC_API_URL
+ARG NEXT_PUBLIC_AI_URL
+ENV NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL} \
+    NEXT_PUBLIC_AI_URL=${NEXT_PUBLIC_AI_URL} \
+    NEXT_TELEMETRY_DISABLED=1
 RUN npm run build
 
 # ---------------------------------------------------------------------------
@@ -35,8 +43,11 @@ RUN npm run build
 # ---------------------------------------------------------------------------
 FROM node:22-slim AS runtime
 
-RUN groupadd --gid 1000 appuser \
-    && useradd --uid 1000 --gid appuser --shell /bin/false --no-create-home appuser
+# 1000 DEĞİL: node:22-slim image'i zaten GID/UID 1000'i "node" kullanıcısına
+# ayırmış — aynı ID'yi istemek `groupadd`'ı exit code 4 ile patlatıyor
+# (gerçek build hatası, bu turda tespit edildi). 1001 kullanılıyor.
+RUN groupadd --gid 1001 appuser \
+    && useradd --uid 1001 --gid appuser --shell /bin/false --no-create-home appuser
 
 WORKDIR /app
 

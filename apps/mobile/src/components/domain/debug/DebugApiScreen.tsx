@@ -5,7 +5,7 @@ import ParallaxScrollView from "@/src/components/parallax-scroll-view";
 import { ThemedText } from "@/src/components/themed-text";
 import { ThemedView } from "@/src/components/themed-view";
 
-import { API_BASE_URL } from "@/src/constants/api";
+import { API_V1 } from "@/src/constants/api";
 
 export default function DebugApiScreen() {
   const [out, setOut] = useState<string>("");
@@ -16,7 +16,7 @@ export default function DebugApiScreen() {
       setOut("");
       setLoading(true);
 
-      const res = await fetch(`${API_BASE_URL}/places/`, {
+      const res = await fetch(`${API_V1}/places/`, {
         method: "GET",
         headers: { Accept: "application/json" },
       });
@@ -40,10 +40,10 @@ export default function DebugApiScreen() {
 
         <View style={styles.card}>
           <ThemedText type="defaultSemiBold">Base URL</ThemedText>
-          <ThemedText style={{ opacity: 0.75, marginTop: 6 }}>{API_BASE_URL}</ThemedText>
+          <ThemedText style={{ opacity: 0.75, marginTop: 6 }}>{API_V1}</ThemedText>
 
           <TouchableOpacity activeOpacity={0.85} onPress={test} style={styles.btn} disabled={loading}>
-            <ThemedText type="defaultSemiBold">{loading ? "Test ediliyor..." : "GET /places/ test et"}</ThemedText>
+            <ThemedText type="defaultSemiBold">{loading ? "Test ediliyor..." : "GET /api/v1/places/ test et"}</ThemedText>
           </TouchableOpacity>
 
           {!!out && (

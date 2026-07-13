@@ -1,6 +1,6 @@
 import { apiGet, apiPost, apiPut } from "@/src/utils/apiClient";
 import { logger } from "@/src/utils/logger";
-import { API_BASE_URL } from "@/src/constants/api";
+import { API_V1 } from "@/src/constants/api";
 
 export type Place = {
   id: number | string;
@@ -113,7 +113,7 @@ function normalizePlace(p: any): Place {
   
   let photo_url = p?.photo_url || undefined;
   if (photo_url && photo_url.startsWith('google_photo_ref:')) {
-    photo_url = `${API_BASE_URL}/places/${id}/photo`;
+    photo_url = `${API_V1}/places/${id}/photo`;
   }
 
   let gallery_urls: string[] | undefined = undefined;

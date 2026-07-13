@@ -39,11 +39,11 @@ logger = logging.getLogger("asemos")
 settings = get_settings()
 
 # ---------------------------------------------------------------------------
-# Veritabanı tabloları
-# ---------------------------------------------------------------------------
-# Tabloları oluşturur (Zaten varsa atlar)
-migrate.run_migrations(engine)
-
+# NOT: Migration burada ÇALIŞTIRILMAZ. Ayrı bir "migrate" Docker servisi
+# (docker-compose.prod.yml) backend başlamadan önce `python migrate.py` ile
+# migration'ları uygular — backend bunu asla otomatik tetiklemez. `migrate`
+# modülü hâlâ import ediliyor çünkü /health/ready `migrate.schema_patch_status()`
+# çağırıyor.
 # ---------------------------------------------------------------------------
 # Lifespan — Modern FastAPI startup/shutdown
 # ---------------------------------------------------------------------------

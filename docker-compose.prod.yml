@@ -1,9 +1,10 @@
 # =============================================================================
 # AsEmOs — Production Core Infrastructure (Compose Specification)
 # =============================================================================
-# Bu dosya SADECE çekirdek altyapıyı içerir: postgres, redis, qdrant, migrate,
-# backend, ai-llm. nginx/certbot/frontend/admin/monitoring ayrı adımlarda
-# eklenecek (bu dosyaya sonradan merge edilecek).
+# Servisler: postgres, redis, qdrant, migrate, backend, ai-llm, admin, nginx,
+# certbot. Monitoring/backup/staging bu dosyanın kapsamı dışında (ayrı iş).
+# frontend'in çalışan bir container'ı yok — statik build, nginx image'ine
+# (infra/nginx/Dockerfile) gömülüyor.
 #
 # "version:" anahtarı bilinçli olarak yok — Compose Specification artık bunu
 # gerektirmiyor, Docker Compose v2 dosyayı otomatik en güncel spec olarak okur.
@@ -79,6 +80,14 @@ services:
       - no-new-privileges:true
     # AOF fsync'in yarım kalmaması için (appendonly yes) küçük bir pay.
     stop_grace_period: 30s
+    # DİKKAT: REDIS_PASSWORD sadece `command:` string'ine (compose-time
+    # interpolation) gömülüyorsa container'ın KENDİ runtime ortamında bu
+    # değişken hiç var olmuyor — healthcheck'in `$$REDIS_PASSWORD`'ü (runtime,
+    # container shell) boş string'e düşüp `-a ""` ile auth başarısız oluyordu
+    # (gerçek doğrulamada tespit edildi). environment: bloğu bunu container'ın
+    # kendi env'ine de yazıyor, postgres'teki pattern ile aynı.
+    environment:
+      REDIS_PASSWORD: ${REDIS_PASSWORD}
     command: >
       redis-server
       --requirepass ${REDIS_PASSWORD}
@@ -158,7 +167,12 @@ services:
     restart: "no"
     security_opt:
       - no-new-privileges:true
-    command: ["python", "migrate.py"]
+    # DİKKAT: backend/Dockerfile ENTRYPOINT+CMD ayrımı kullanıyor
+    # (ENTRYPOINT ["uvicorn",...], CMD ["--workers","4"]). Sadece `command:`
+    # vermek image'in CMD'sini ezer ama ENTRYPOINT'i EZMEZ — bu servis o zaman
+    # "uvicorn main:app ... python migrate.py" çalıştırmaya çalışıp patlardı.
+    # Bu yüzden `entrypoint:` de override ediliyor, `command:` gereksiz.
+    entrypoint: ["python", "migrate.py"]
     env_file:
       - ./backend/.env
     environment:
@@ -274,18 +288,53 @@ services:
     logging: *logging-default
 
   # ===========================================================================
+  # admin — Next.js standalone admin paneli. Sadece backend_network'te,
+  # host'a hiç port map edilmiyor — dışarıya SADECE nginx üzerinden açılır
+  # (admin.asemos.com). NEXT_PUBLIC_* değerleri Next.js'te CLIENT bundle'a
+  # BUILD-TIME'da gömülür — runtime `environment:` ile verilse client tarafı
+  # hiç görmez, bu yüzden `build.args` kullanılıyor (admin/Dockerfile bunları
+  # ARG olarak alıp ENV'e çeviriyor). Admin'e özel bir .env dosyası yok/gerekmiyor
+  # — bu 2 değer sabit public domain isimleri.
+  # ===========================================================================
+  admin:
+    build:
+      context: ./admin
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_API_URL: https://api.asemos.com
+        NEXT_PUBLIC_AI_URL: https://ai.asemos.com
+    image: asemos-admin:latest
+    container_name: asemos_admin
+    restart: unless-stopped
+    init: true
+    security_opt:
+      - no-new-privileges:true
+    stop_grace_period: 15s
+    networks:
+      - backend_network
+    # Dockerfile'da zaten HEALTHCHECK tanımlı (node http → :3000).
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 512M
+        reservations:
+          cpus: "0.25"
+          memory: 128M
+    logging: *logging-default
+
+  # ===========================================================================
   # nginx — TEK public container. public_network (host'a 80/443 açık) ve
   # backend_network (upstream'lere proxy) arasında köprü. Statik frontend
-  # dosyaları + Next.js admin + backend/ai-llm reverse proxy hedefleri
-  # infra/nginx/Dockerfile içinde (sonraki adımda yazılacak) multi-stage COPY
-  # ile bir araya getirilir — nginx.conf/vhost içerikleri BU adımın kapsamı
-  # dışında, sadece servis tanımı burada.
+  # dosyaları + brotli modülleri infra/nginx/Dockerfile'da multi-stage COPY
+  # ile bir araya getiriliyor; nginx.conf/conf.d/*.conf de aynı Dockerfile'da
+  # image'e gömülüyor.
   #
-  # NOT (bootstrap sırası uyarısı): nginx.conf'ta SSL sertifika path'leri
-  # certbot_data volume'üne işaret edecek. İlk deploy'da sertifikalar henüz
-  # yoksa nginx SSL server_block'larıyla başlayamaz (chicken-and-egg). Bu,
-  # nginx.conf adımında ele alınacak (örn. HTTP-only başlangıç config +
-  # sertifika alındıktan sonra reload).
+  # NOT (bootstrap sırası uyarısı, HÂLÂ AÇIK): ssl.conf'taki sertifika path'leri
+  # certbot_data volume'üne işaret ediyor. Gerçek sertifika ancak Cloudflare
+  # DNS-01 otomasyonuyla (ayrı, henüz yapılmamış bir iş) üretilir — o olmadan
+  # bu servis build olur ama container başlarken sertifika bulamayıp hata verir.
+  # Bilinçli, kapsam dışı bırakılmış bir sınır.
   # ===========================================================================
   nginx:
     build:
@@ -318,11 +367,10 @@ services:
         condition: service_healthy
       ai-llm:
         condition: service_healthy
-      # admin: bu compose dosyasına henüz eklenmedi (web layer'ın sonraki
-      # parçası) — admin servisi tanımlandığında buraya service_healthy
-      # koşuluyla eklenmeli. frontend'in çalışan bir container'ı YOK (scratch
-      # artifact, nginx image'ine build-time'da gömülüyor), bu yüzden
-      # depends_on listesinde frontend hiç yer almıyor.
+      admin:
+        condition: service_healthy
+      # frontend'in çalışan bir container'ı YOK (scratch artifact, nginx
+      # image'ine build-time'da gömülüyor) — depends_on'da hiç yer almıyor.
     # nginx:alpine base image busybox wget içerir, ekstra paket kurmaya gerek yok.
     healthcheck:
       test: ["CMD-SHELL", "wget -q --spider http://localhost:80/ || exit 1"]

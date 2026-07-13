@@ -1,5 +1,6 @@
 import { Platform } from 'react-native';
 import * as Application from 'expo-application';
+import * as Crypto from 'expo-crypto';
 import { API_V1 } from '@/src/constants/api';
 import { handleApiError } from './errorHandler';
 import { logger } from './logger';
@@ -10,9 +11,9 @@ const APP_PLATFORM = Platform.OS;
 const USER_AGENT = `Asemos/${APP_VERSION} (${Platform.OS === 'ios' ? 'iOS' : 'Android'}; Build ${BUILD_NUMBER})`;
 
 function generateRequestId(): string {
-  // Korelasyon amaçlı — kriptografik güvenlik gerekmiyor, yeni bir bağımlılık
-  // eklemeden basit bir benzersiz kimlik üretir.
-  return `${Date.now().toString(36)}-${Math.random().toString(36).slice(2, 10)}`;
+  // Gerçek UUID (RFC 4122) — mimari dokümanı uçtan uca korelasyon için UUID
+  // bekliyor, expo-crypto zaten bir bağımlılık (yeni paket eklenmedi).
+  return Crypto.randomUUID();
 }
 
 function getCorrelationHeaders(): Record<string, string> {
