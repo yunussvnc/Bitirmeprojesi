@@ -61,6 +61,29 @@ class BM25Index:
             "review_count": int(row.get("review_count") or row.get("user_ratings_total") or 0),
         }
 
+    def find_by_district(self, district: str, limit: int = 20) -> List[int]:
+        """
+        Adres alanında verilen semti geçen mekanların id listesini döner.
+        BM25'in kendi tokenizer'ı Türkçe hal eklerini ayıramadığı için
+        ("Bahçelievlerde" != "Bahçelievler" tokeni) sorgu metnine göre arama
+        bu eşleşmeyi bazen tamamen kaçırıyor — bu metod parse_natural_query()'nin
+        zaten normalize ettiği (ek'siz) semt adını doğrudan adres substring'i
+        olarak arar, tokenizasyondan bağımsız çalışır.
+        """
+        if not self.ready or not district:
+            return []
+        # Türkçe İ/I için .lower() tuzağı (retriever.py'deki _tr_lower ile aynı
+        # gerekçe) — modüller arası döngüsel import olmasın diye burada tekrarlanıyor.
+        def _tr_lower(s: str) -> str:
+            return (s or "").replace("İ", "i").replace("I", "ı").lower()
+
+        key = _tr_lower(district)
+        matches = [
+            place_id for place_id, row in self._place_rows.items()
+            if key in _tr_lower(str(row.get("address") or ""))
+        ]
+        return matches[:limit]
+
     def _fetch_places(self) -> List[dict]:
         db_url = settings.DATABASE_URL or ""
         if not db_url:

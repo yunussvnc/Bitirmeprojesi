@@ -14,6 +14,12 @@ import logging
 logger = logging.getLogger(__name__)
 
 
+def _tr_lower(text: str) -> str:
+    """Türkçe İ/I karakterlerini doğru küçük harfe çevirir (Python'un varsayılan
+    .lower()'ı 'İ' → 'i̇' [birleşik nokta] üretir, bu da düz 'i' ile eşleşmez)."""
+    return (text or "").replace("İ", "i").replace("I", "ı").lower()
+
+
 class RAGRetriever:
     """RAG sistemi için retriever"""
 
@@ -112,7 +118,17 @@ class RAGRetriever:
 
             if hybrid_active:
                 bm25_results = self.bm25_index.search(embed_text, top_k=dense_top_k)
-                batch = self._reciprocal_rank_fusion(dense_results, bm25_results, candidate_limit=dense_top_k)
+                # candidate_limit'i dense_top_k'ya SIKI kısıtlamıyoruz: sadece
+                # BM25'te (dense'te hiç yok) çok güçlü tek-sinyal eşleşen bir
+                # mekan, iki listede de vasat eşleşen ama toplamda daha yüksek
+                # RRF skoru toplayan alakasız mekanlar tarafından erken
+                # kırpılabiliyordu (district filter'a ulaşamadan elenmiş
+                # oluyordu — gerçek prod testinde tespit edildi: "Bahçelievler"
+                # sorgusunda BM25'in #1/#2'si RRF sonrası kayboluyordu). Union
+                # boyutunu kullanmak, aşağıdaki _apply_district_filter'ın tam
+                # havuzu görmesini sağlıyor; nihai top_k kırpması zaten sonda yapılıyor.
+                fusion_pool_size = len(dense_results) + len(bm25_results)
+                batch = self._reciprocal_rank_fusion(dense_results, bm25_results, candidate_limit=fusion_pool_size)
             else:
                 batch = dense_results[:dense_top_k]
 
@@ -134,10 +150,65 @@ class RAGRetriever:
                 )
 
         candidates = sorted(candidates_by_id.values(), key=lambda c: c["score"], reverse=True)
+        candidates = self._apply_district_filter(candidates, parsed_query, top_k)
 
         if personalization_active:
             return self.personalization_scorer.rerank(candidates, user_id=user_id, top_k=top_k)
         return candidates[:top_k]
+
+    def _apply_district_filter(
+        self,
+        candidates: List[Dict[str, Any]],
+        parsed_query: Optional[Dict],
+        top_k: int,
+    ) -> List[Dict[str, Any]]:
+        """
+        parse_natural_query()'nin çıkardığı 'district' güvenilir bir sinyal
+        (query_rewriter.py'deki yorum: eşleşme yoksa None döner). Ama şu ana
+        kadar sadece embed_text'e eklenip dense modele bırakılıyordu — dense
+        model semt isimlerini zayıf temsil ediyor (örn. "Bahçelievler" sorgusunda
+        BM25 doğru mekanları 1-2. sıraya koyarken dense tamamen alakasız
+        sonuçlar veriyordu). RRF'de bir mekan SADECE BM25'te (dense'te hiç yok)
+        güçlü eşleşirse, dense'te vasat ama İKİ listede de az puan toplayan
+        alakasız bir mekanın toplam RRF skoru onu geçebiliyordu.
+
+        Bu yüzden district varsa, adres alanında o semti geçen adaylara sert
+        filtre uyguluyoruz — RRF'nin skor birleştirme belirsizliğine güvenmek
+        yerine. Yeterli eşleşme yoksa (veri seyrekse) orijinal listeye geri
+        düşüyoruz, hiçbir zaman boş sonuç döndürmüyoruz.
+        """
+        district = (parsed_query or {}).get("district")
+        if not district:
+            return candidates
+
+        district_key = _tr_lower(district)
+        matched = [
+            c for c in candidates
+            if district_key in _tr_lower((c.get("payload") or {}).get("adres", ""))
+        ]
+
+        # Aday havuzunda yeterli semt eşleşmesi yoksa: bunun sebebi genelde
+        # sorgu metninin hal ekli olması ("Bahçelievlerde" gibi) — BM25/dense
+        # bu yüzden o semtteki mekanları hiç ADAY OLARAK bulamamış olabilir,
+        # aşağıdaki substring filtresi de boş bir listeyi filtreleyemez. Bu
+        # yüzden BM25Index'in ham adres verisinden DOĞRUDAN (tokenizasyondan
+        # bağımsız) bir semt araması yapıp eksik adayları takviye ediyoruz.
+        if len(matched) < min(top_k, 3):
+            existing_ids = {c["id"] for c in candidates}
+            fallback_score = min((c["score"] for c in candidates), default=0.01)
+            for pid in self.bm25_index.find_by_district(district, limit=top_k * 2):
+                if pid in existing_ids:
+                    continue
+                payload = self.bm25_index.get_payload(pid)
+                if not payload:
+                    continue
+                matched.append({"id": pid, "score": fallback_score, "payload": payload})
+                existing_ids.add(pid)
+
+        if len(matched) < min(top_k, 3):
+            return candidates
+
+        return matched
 
     def _reciprocal_rank_fusion(
         self,

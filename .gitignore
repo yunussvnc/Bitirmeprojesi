@@ -41,6 +41,10 @@ yarn-error.log
 */.env.local
 backend/.env
 ai-llm/.env
+*.env
+env/
+*.dump
+*.backup
 
 # Database
 *.db
