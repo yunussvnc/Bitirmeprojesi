@@ -24,8 +24,12 @@ import bcrypt
 DATABASE_URL = os.environ.get("DATABASE_URL")
 engine = create_engine(DATABASE_URL)
 
-EMAIL    = "ulascan1903@icloud.com"
-PASSWORD = "UcD.7491"
+EMAIL    = os.environ.get("ADMIN_EMAIL")
+PASSWORD = os.environ.get("ADMIN_PASSWORD")
+
+if not EMAIL or not PASSWORD:
+    print("❌ Lütfen ADMIN_EMAIL ve ADMIN_PASSWORD çevre değişkenlerini (.env) ayarlayın.")
+    sys.exit(1)
 
 def hash_password(plain: str) -> str:
     return bcrypt.hashpw(plain.encode(), bcrypt.gensalt()).decode()

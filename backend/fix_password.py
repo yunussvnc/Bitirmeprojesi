@@ -4,8 +4,14 @@ import bcrypt
 from database import SessionLocal
 from models import User
 
-NEW_PASSWORD = "Yunus1234!"
-EMAIL = "yunusemree.sevinc@gmail.com"
+import os
+
+NEW_PASSWORD = os.getenv("FIX_USER_PASSWORD")
+EMAIL = os.getenv("FIX_USER_EMAIL")
+
+if not EMAIL or not NEW_PASSWORD:
+    print("Lütfen FIX_USER_EMAIL ve FIX_USER_PASSWORD environment variable'larını ayarlayın.")
+    sys.exit(1)
 
 hashed = bcrypt.hashpw(NEW_PASSWORD.encode(), bcrypt.gensalt()).decode()
 print("Yeni hash:", hashed[:30], "...")

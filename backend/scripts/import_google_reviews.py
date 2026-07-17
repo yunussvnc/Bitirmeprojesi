@@ -34,7 +34,7 @@ from database import SessionLocal
 import models
 
 # ─── Konfig ──────────────────────────────────────────────────────────────────
-SERPAPI_KEY = "99b7cb1c1b82cba1244fda1aaf9fbc6e6615c3aac19dfb612a010f5f3224fc54"  # default, --api-key ile geçersiz kılınır
+SERPAPI_KEY = os.getenv("SERPAPI_KEY", "")  # default, --api-key ile geçersiz kılınır
 PLACEHOLDER_EMAIL_DOMAIN = "reviews.placeholder"
 REQUEST_DELAY = 1.2          # saniye — rate limit
 MAX_REVIEWS_PER_PLACE = 20   # hedef yorum sayısı
