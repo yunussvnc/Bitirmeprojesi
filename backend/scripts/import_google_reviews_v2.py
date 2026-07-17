@@ -24,7 +24,7 @@ from database import SessionLocal
 import models
 
 # ─── Konfig ──────────────────────────────────────────────────────────────────
-GOOGLE_API_KEY       = "AIzaSyBQY9P0Yywn15sfInnONao9SHCFcTcIR_w"
+GOOGLE_API_KEY       = os.getenv("GOOGLE_MAPS_API_KEY", "")
 PLACEHOLDER_DOMAIN   = "reviews.placeholder"
 STUB_PASSWORD_HASH   = "!SERPAPI_STUB_CANNOT_LOGIN_DO_NOT_USE"
 REQUEST_DELAY        = 0.15      # saniye (Google API rate limit: ~50 req/s)

@@ -24,7 +24,7 @@ import models
 import crud
 import schemas
 
-DEMO_PASSWORD = "demo123"
+DEMO_PASSWORD = os.getenv("DEMO_PASSWORD", "demo123")
 
 DEMO_USERS = [
     {"email": "demo1@asemos.app", "username": "ayse_gezgin", "first_name": "Ayşe"},
