@@ -41,6 +41,7 @@ RUN apk add --no-cache \
         zlib-dev \
         openssl-dev \
         linux-headers \
+        brotli-dev \
         git
 
 WORKDIR /usr/src
