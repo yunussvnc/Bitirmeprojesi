@@ -222,6 +222,10 @@ services:
       # Cloudinary yapılandırılmadığında local upload fallback'i için named
       # volume — imaja bind mount YOK, kalıcı veri sadece bu volume üzerinden.
       - uploads_data:/app/uploads
+    ports:
+      # GEÇICI: nginx/domain/SSL hazır olana kadar mobil app'in doğrudan
+      # erişebilmesi için host'a açıldı. nginx devreye girince kaldırılacak.
+      - "8000:8000"
     networks:
       - backend_network
     depends_on:
@@ -267,6 +271,10 @@ services:
       QDRANT_API_KEY: ${QDRANT_API_KEY}
       # backend'e artık onrender.com değil, Docker service adıyla ulaşılıyor.
       BACKEND_API_URL: http://backend:8000
+    ports:
+      # GEÇICI: nginx/domain/SSL hazır olana kadar mobil app'in doğrudan
+      # erişebilmesi için host'a açıldı. nginx devreye girince kaldırılacak.
+      - "8080:8080"
     networks:
       - backend_network
     depends_on:
