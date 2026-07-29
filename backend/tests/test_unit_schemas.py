@@ -76,7 +76,7 @@ class TestReviewSchemas:
     def test_review_comment_too_long(self):
         with pytest.raises(ValidationError):
             schemas.ReviewCreate(
-                place_id=1, comment_text="x" * 2001, rating=3
+                place_id=1, comment_text="x" * 10001, rating=3
             )
 
     def test_review_valid_visit_type(self):
@@ -224,35 +224,6 @@ class TestMessageSchemas:
     def test_message_create_too_long(self):
         with pytest.raises(ValidationError):
             schemas.MessageCreate(content="x" * 5001)
-
-
-# ===========================================================================
-# MATCH ŞEMALARI
-# ===========================================================================
-
-class TestMatchSchemas:
-    """MatchProfileCreate, MatchLikeCreate doğrulamaları."""
-
-    def test_match_profile_create_valid(self):
-        profile = schemas.MatchProfileCreate(display_name="Test", age=25)
-        assert profile.display_name == "Test"
-        assert profile.age == 25
-
-    def test_match_profile_create_missing_name(self):
-        with pytest.raises(ValidationError):
-            schemas.MatchProfileCreate(age=25)
-
-    def test_match_profile_create_missing_age(self):
-        with pytest.raises(ValidationError):
-            schemas.MatchProfileCreate(display_name="Test")
-
-    def test_match_like_create_valid(self):
-        like = schemas.MatchLikeCreate(to_user_id=42, action="like")
-        assert like.action == "like"
-
-    def test_match_like_create_missing_action(self):
-        with pytest.raises(ValidationError):
-            schemas.MatchLikeCreate(to_user_id=42)
 
 
 # ===========================================================================

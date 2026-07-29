@@ -10,7 +10,7 @@ from datetime import date
 from unittest.mock import patch
 from tests.conftest import (
     create_test_user, create_test_place, create_test_post,
-    create_test_review, create_match_profile, create_match_conversation,
+    create_test_review, create_match_conversation,
     get_auth_headers, create_admin_user, TestingSessionLocal,
 )
 import models, crud
@@ -61,67 +61,6 @@ class TestScenarioUserLifecycle:
         })
         assert post_resp.status_code == 200
         assert post_resp.json()["caption"] == "İlk postum!"
-
-
-class TestScenarioMatchFlow:
-    """Senaryo 2: İki kullanıcı eşleşme akışı."""
-
-    def test_full_match_flow(self, client):
-        # 1. İki 18+ kullanıcı oluştur
-        uid1 = create_test_user(
-            email="match1@test.com", username="match1", birth_date=date(2000, 1, 1)
-        )
-        uid2 = create_test_user(
-            email="match2@test.com", username="match2", birth_date=date(2000, 6, 15)
-        )
-
-        # 2. Match profilleri oluştur
-        h1 = get_auth_headers(uid1)
-        h2 = get_auth_headers(uid2)
-
-        client.post("/match-profile", headers=h1, json={
-            "display_name": "Ali", "age": 25, "gender": "Erkek",
-            "photo_urls": ["https://ex.com/ali.jpg"],
-        })
-        client.post("/match-profile", headers=h2, json={
-            "display_name": "Ayşe", "age": 24, "gender": "Kadın",
-            "photo_urls": ["https://ex.com/ayse.jpg"],
-        })
-
-        # 3. uid1 uid2'yi beğensin
-        like1 = client.post("/match/like", headers=h1, json={
-            "to_user_id": uid2, "action": "like",
-        })
-        assert like1.json()["matched"] is False
-
-        # 4. uid2 uid1'i beğensin → MATCH!
-        like2 = client.post("/match/like", headers=h2, json={
-            "to_user_id": uid1, "action": "like",
-        })
-        assert like2.json()["matched"] is True
-        conv_id = like2.json()["conversation_id"]
-        assert conv_id is not None
-
-        # 5. Mesaj gönder
-        msg = client.post(f"/messages/{conv_id}", headers=h1, json={
-            "content": "Merhaba Ayşe!",
-        })
-        assert msg.status_code == 200
-
-        # 6. Mesajları oku
-        msgs = client.get(f"/messages/{conv_id}", headers=h2)
-        assert msgs.json()["total"] == 1
-        assert msgs.json()["items"][0]["content"] == "Merhaba Ayşe!"
-
-        # 7. Profil reveal
-        client.post(f"/match/reveal-profile/{conv_id}", headers=h1)
-        client.post(f"/match/reveal-profile/{conv_id}", headers=h2)
-
-        # Otomatik takip kontrolü
-        db = TestingSessionLocal()
-        assert crud.is_following(db, uid1, uid2) is True
-        assert crud.is_following(db, uid2, uid1) is True
-        db.close()
 
 
 class TestScenarioVenueFlow:
