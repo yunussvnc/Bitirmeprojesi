@@ -28,6 +28,8 @@ class Settings(BaseSettings):
     CLOUDINARY_API_KEY: str = ""
     CLOUDINARY_API_SECRET: str = ""
     GOOGLE_MAPS_API_KEY: str = ""
+    # Places API (New) — sadece backend/scripts/ içe aktarma script'leri için (IP kısıtlamalı ayrı key)
+    GOOGLE_PLACES_API_KEY: str = ""
     SERPAPI_KEY: str = ""  # Google Maps yorumları (SerpAPI google_maps_reviews)
     # Social login token audiences. Use comma-separated values for *_ALLOWED_CLIENT_IDS.
     GOOGLE_CLIENT_ID: str = ""
