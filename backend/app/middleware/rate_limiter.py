@@ -168,42 +168,24 @@ async def _record_failed_login_async(ip: str):
 
 
 def record_failed_login(ip: str):
-    """Public helper: run failed login logic synchronously in a fire-and-forget thread 
-    to avoid asyncio loop mixing when called from sync endpoints.
+    """Public helper: run failed login logic synchronously from a sync endpoint
+    using anyio to avoid creating new Redis connections.
     """
-    import threading
+    from anyio.from_thread import run
+    import asyncio
     
-    def _worker():
-        from app.core.config import get_settings
-        settings = get_settings()
-        
-        if settings.REDIS_URL:
-            import redis
-            try:
-                # Use sync redis client
-                r = redis.Redis.from_url(settings.REDIS_URL, decode_responses=True)
-                fail_key = f"failed_login:{ip}"
-                count = r.incr(fail_key)
-                if count == 1:
-                    r.expire(fail_key, LOCKOUT_DURATION)
-                if count >= MAX_FAILED_LOGINS:
-                    r.setex(f"lockout:{ip}", LOCKOUT_DURATION, "1")
-                    r.delete(fail_key)
-                    logger.warning("🚨 Brute-force tespit edildi: %s — %d dk kilitlendi", ip, LOCKOUT_DURATION // 60)
-                r.close()
-                return
-            except Exception as e:
-                logger.error(f"Redis fallback _worker hatasi: {e}")
-        
-        # Fallback in-memory
-        cnt = _failed_logins.get(ip, 0) + 1
-        _failed_logins[ip] = cnt
-        if cnt >= MAX_FAILED_LOGINS:
-            # We don't have async access to _store here easily, so we just clear count.
-            # In a real scenario, we'd also lock it in the memory store.
-            _failed_logins.pop(ip, None)
-            
-    threading.Thread(target=_worker, daemon=True).start()
+    try:
+        # FastAPI calls sync endpoints in an AnyIO worker thread
+        run(_record_failed_login_async, ip)
+    except RuntimeError:
+        # Fallback if somehow called from a non-AnyIO thread
+        try:
+            loop = asyncio.get_running_loop()
+            loop.create_task(_record_failed_login_async(ip))
+        except RuntimeError:
+            asyncio.run(_record_failed_login_async(ip))
+    except Exception as e:
+        logger.error(f"record_failed_login error: {e}")
 
 async def reset_failed_logins(ip: str):
     """Başarılı login sonrası Redis'teki sayacı sıfırla veya in-memory temizle"""
