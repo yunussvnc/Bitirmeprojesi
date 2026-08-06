@@ -8,6 +8,7 @@ import {
   clearSavedPlacesApi as apiClearSavedPlaces,
   clearSavedPostsApi as apiClearSavedPosts,
 } from "@/src/services/savedService";
+import type { Place } from "@/src/services/mekanService";
 import { logger } from "@/src/utils/logger";
 
 export type SavedPlace = {
@@ -59,6 +60,9 @@ type AppState = {
   addUnreadNotificationCount: (count: number) => void;
   clearUnreadNotificationCount: () => void;
 
+  clusterPlaceIds: string[];
+  setClusterPlaceIds: (ids: string[]) => void;
+
   deletedPostIds: number[];
   addDeletedPostId: (id: number) => void;
   clearDeletedPostIds: () => void;
@@ -70,6 +74,11 @@ type AppState = {
   blockedUserIds: number[];
   addBlockedUserId: (id: number) => void;
   clearBlockedUserIds: () => void;
+
+  globalPlaces: Place[];
+  isGlobalPlacesLoading: boolean;
+  setGlobalPlaces: (places: Place[]) => void;
+  setIsGlobalPlacesLoading: (loading: boolean) => void;
 };
 
 const uniq = (arr: string[]) => Array.from(new Set(arr));
@@ -89,6 +98,12 @@ export const useAppStore = create<AppState>()(
       deletedPostIds: [],
       viewedStoryGroupKeys: [],
       blockedUserIds: [],
+      clusterPlaceIds: [],
+      globalPlaces: [],
+      isGlobalPlacesLoading: false,
+
+      setGlobalPlaces: (places) => set({ globalPlaces: places }),
+      setIsGlobalPlacesLoading: (loading) => set({ isGlobalPlacesLoading: loading }),
 
       isSaved: (id) => get().savedIds.includes(id),
 
@@ -214,6 +229,8 @@ export const useAppStore = create<AppState>()(
       clearUnreadNotificationCount: () => {
         set({ unreadNotificationCount: 0 });
       },
+
+      setClusterPlaceIds: (ids) => set({ clusterPlaceIds: ids }),
 
       addDeletedPostId: (id: number) => {
         set((state) => ({ deletedPostIds: uniq([...state.deletedPostIds.map(String), String(id)]).map(Number) }));
