@@ -66,3 +66,4 @@ data/
 metro_response.txt
 backend/get_reviews.py
 
+backend/scripts/import_istanbul_restaurants_progress.json
