@@ -36,14 +36,13 @@
           "remote-notification"
         ],
         "NSAppTransportSecurity": {
-          "NSAllowsLocalNetworking": true,
-          "NSAllowsArbitraryLoads": true
+          "NSAllowsLocalNetworking": true
         },
         "ITSAppUsesNonExemptEncryption": false
       },
       "bundleIdentifier": "com.asemos.mobile",
       "entitlements": {
-        "aps-environment": "development"
+        "aps-environment": "production"
       }
     },
     "android": {

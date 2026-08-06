@@ -39,7 +39,7 @@ function resolveAIBaseUrl(): string {
     // Fallback: .env'den veya local IP
     return `http://${process.env.EXPO_PUBLIC_DEV_API_HOST?.split(':')[0] ?? '192.168.1.36'}:8080`;
   }
-  return process.env.EXPO_PUBLIC_AI_URL ?? 'http://167.233.219.55:8080';
+  return process.env.EXPO_PUBLIC_AI_URL ?? 'https://ai.asemos.tr';
 }
 
 export const getAIBaseUrl = resolveAIBaseUrl;
