@@ -59,6 +59,24 @@ export default function SavedScreen() {
   const insets = useSafeAreaInsets();
   const { t } = useTranslation();
 
+  // Selection Mode States
+  const [isSelectionMode, setIsSelectionMode] = useState(false);
+  const [selectedIds, setSelectedIds] = useState<string[]>([]);
+
+  const toggleSelection = useCallback((id: string | number) => {
+    lightImpact();
+    const strId = String(id);
+    setSelectedIds((prev) =>
+      prev.includes(strId) ? prev.filter((i) => i !== strId) : [...prev, strId]
+    );
+  }, []);
+
+  // Reset selection when tab changes
+  useEffect(() => {
+    setIsSelectionMode(false);
+    setSelectedIds([]);
+  }, [tab]);
+
   // Listen for tab press to scroll to top
   useEffect(() => {
     const unsubscribe = navigation.addListener("tabPress" as any, () => {
@@ -220,39 +238,62 @@ export default function SavedScreen() {
   );
 
   const renderPlaceItem: ListRenderItem<SavedPlace> = useCallback(
-    ({ item, index }) => (
-      <Swipeable
-        key={item.id}
-        renderRightActions={(progress, dragX) => renderRightActions(progress, dragX, item.id)}
-        overshootRight={false}
-        friction={2}
-        rightThreshold={40}
-        failOffsetX={[-1000, 10]}
-      >
-        <AnimatedPlaceCard
-          index={index}
-          image={getPlaceImageSource(item)}
-          imagePlaceholder={!hasPlaceImage(item)}
-          title={item.name}
-          subtitle={item.subtitle}
-          tags={item.tags}
-          address={item.address}
-          onPress={() => router.push({
-            pathname: "/place/[id]",
-            params: {
-              id: String(item.id),
-              name: item.name || "",
-              subtitle: item.subtitle || "",
-              photo_url: item.photo_url || "",
-              category: item.category || "",
-              description: item.description || "",
-              address: item.address || "",
-            }
-          })}
-        />
-      </Swipeable>
-    ),
-    [renderRightActions]
+    ({ item, index }) => {
+      const isSelected = selectedIds.includes(String(item.id));
+      return (
+        <Swipeable
+          key={item.id}
+          enabled={!isSelectionMode}
+          renderRightActions={(progress, dragX) => renderRightActions(progress, dragX, item.id)}
+          overshootRight={false}
+          friction={2}
+          rightThreshold={40}
+          failOffsetX={[-1000, 10]}
+        >
+          <View style={{ flexDirection: "row", alignItems: "center" }}>
+            {isSelectionMode && (
+              <View style={{ paddingLeft: 16 }}>
+                <IconSymbol
+                  name={isSelected ? "checkmark.circle.fill" : "circle"}
+                  size={24}
+                  color={isSelected ? colors.accent.primary : colors.text.tertiary}
+                />
+              </View>
+            )}
+            <View style={{ flex: 1, pointerEvents: isSelectionMode ? 'none' : 'auto' }}>
+              <AnimatedPlaceCard
+                index={index}
+                image={getPlaceImageSource(item)}
+                imagePlaceholder={!hasPlaceImage(item)}
+                title={item.name}
+                subtitle={item.subtitle}
+                tags={item.tags}
+                address={item.address}
+                onPress={() => router.push({
+                  pathname: "/place/[id]",
+                  params: {
+                    id: String(item.id),
+                    name: item.name || "",
+                    subtitle: item.subtitle || "",
+                    photo_url: item.photo_url || "",
+                    category: item.category || "",
+                    description: item.description || "",
+                    address: item.address || "",
+                  }
+                })}
+              />
+            </View>
+            {isSelectionMode && (
+              <TouchableOpacity 
+                style={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0 }}
+                onPress={() => toggleSelection(item.id)}
+              />
+            )}
+          </View>
+        </Swipeable>
+      );
+    },
+    [renderRightActions, isSelectionMode, selectedIds, toggleSelection, colors]
   );
 
   const listHeader = useCallback(
@@ -278,11 +319,21 @@ export default function SavedScreen() {
                 </Text>
               </View>
               <TouchableOpacity
-                onPress={handleClear}
+                onPress={() => {
+                  lightImpact();
+                  if (isSelectionMode) {
+                    setIsSelectionMode(false);
+                    setSelectedIds([]);
+                  } else {
+                    setIsSelectionMode(true);
+                  }
+                }}
                 activeOpacity={0.8}
-                style={[styles.clearButton, { backgroundColor: colors.surface.elevated }]}
+                style={[styles.clearButton, { backgroundColor: colors.surface.elevated, paddingHorizontal: 12 }]}
               >
-                <IconSymbol name="trash" size={18} color={colors.text.tertiary} />
+                <Text style={{ color: isSelectionMode ? colors.semantic.error : colors.text.primary, fontSize: 14, fontWeight: "600" }}>
+                  {isSelectionMode ? t("common.cancel", "İptal") : t("common.select", "Seç")}
+                </Text>
               </TouchableOpacity>
             </View>
           )}
@@ -388,24 +439,47 @@ export default function SavedScreen() {
           data={postItems}
           keyExtractor={(item) => String(item.id)}
           showsVerticalScrollIndicator={false}
-          renderItem={({ item }) => (
-            <Swipeable
-              key={item.id}
-              renderRightActions={(progress, dragX) => renderRightActions(progress, dragX, item.id, true)}
-              overshootRight={false}
-              friction={2}
-              rightThreshold={40}
-              failOffsetX={[-1000, 10]}
-            >
-              <FeedCard
-                post={item}
-                onPress={() => item.place_id && router.push(`/place/${item.place_id}` as any)}
-                onAuthorPress={() => router.push(`/user/${item.user_id}` as any)}
-                onPlacePress={() => item.place_id && router.push(`/place/${item.place_id}` as any)}
-                onShare={() => setSharePost(item)}
-              />
-            </Swipeable>
-          )}
+          renderItem={({ item }) => {
+            const isSelected = selectedIds.includes(String(item.id));
+            return (
+              <Swipeable
+                key={item.id}
+                enabled={!isSelectionMode}
+                renderRightActions={(progress, dragX) => renderRightActions(progress, dragX, item.id, true)}
+                overshootRight={false}
+                friction={2}
+                rightThreshold={40}
+                failOffsetX={[-1000, 10]}
+              >
+                <View style={{ flexDirection: "row", alignItems: "center" }}>
+                  {isSelectionMode && (
+                    <View style={{ paddingLeft: 16 }}>
+                      <IconSymbol
+                        name={isSelected ? "checkmark.circle.fill" : "circle"}
+                        size={24}
+                        color={isSelected ? colors.accent.primary : colors.text.tertiary}
+                      />
+                    </View>
+                  )}
+                  <View style={{ flex: 1, pointerEvents: isSelectionMode ? 'none' : 'auto' }}>
+                    <FeedCard
+                      post={item}
+                      onPress={() => item.place_id && router.push(`/place/${item.place_id}` as any)}
+                      onAuthorPress={() => router.push(`/user/${item.user_id}` as any)}
+                      onPlacePress={() => item.place_id && router.push(`/place/${item.place_id}` as any)}
+                      onShare={() => setSharePost(item)}
+                    />
+                  </View>
+                  {isSelectionMode && (
+                    <TouchableOpacity 
+                      style={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0 }}
+                      onPress={() => toggleSelection(item.id)}
+                    />
+                  )}
+                </View>
+              </Swipeable>
+            );
+          }}
           ListHeaderComponent={listHeader}
           ListEmptyComponent={listEmptyPosts}
           contentContainerStyle={[styles.listContainer, postItems.length === 0 && { flex: 1 }]}
@@ -418,6 +492,37 @@ export default function SavedScreen() {
           }
           style={styles.flatList}
         />
+      )}
+
+      {isSelectionMode && selectedIds.length > 0 && (
+        <View style={[styles.bulkActionContainer, { paddingBottom: Math.max(insets.bottom, 16) }]}>
+          <TouchableOpacity
+            style={[styles.bulkDeleteButton, { backgroundColor: colors.semantic.error }]}
+            onPress={() => {
+              Alert.alert(t("common.delete"), `${selectedIds.length} öğeyi silmek istediğinize emin misiniz?`, [
+                { text: t("common.cancel"), style: "cancel" },
+                {
+                  text: t("common.delete"),
+                  style: "destructive",
+                  onPress: () => {
+                    lightImpact();
+                    selectedIds.forEach(id => {
+                      if (tab === "places") remove(id);
+                      else removePost(id);
+                    });
+                    setSelectedIds([]);
+                    setIsSelectionMode(false);
+                  }
+                }
+              ]);
+            }}
+          >
+            <IconSymbol name="trash.fill" size={20} color="#FFF" />
+            <Text style={styles.bulkDeleteText}>
+              {t("saved_extra.delete_selected", `Seçilenleri Sil (${selectedIds.length})`)}
+            </Text>
+          </TouchableOpacity>
+        </View>
       )}
 
       <SharePostSheet
@@ -489,7 +594,31 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    minHeight: 400,
+    paddingVertical: 60,
+  },
+  bulkActionContainer: {
+    position: "absolute",
+    bottom: 0,
+    left: 0,
+    right: 0,
+    paddingHorizontal: 16,
+    paddingTop: 16,
+    backgroundColor: "rgba(0,0,0,0.8)",
+    borderTopWidth: 1,
+    borderTopColor: "rgba(255,255,255,0.1)",
+  },
+  bulkDeleteButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: 14,
+    borderRadius: 12,
+    gap: 8,
+  },
+  bulkDeleteText: {
+    color: "#FFF",
+    fontSize: 16,
+    fontWeight: "600",
   },
   flatList: {
     flex: 1,

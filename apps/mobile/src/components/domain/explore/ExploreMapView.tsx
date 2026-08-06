@@ -554,58 +554,91 @@ export function ExploreMapView({ places, loading, onLoadPlaces }: ExploreMapView
           </TouchableOpacity>
         </View>
 
-        {/* İlçe Seçici */}
-        <TouchableOpacity
-          style={[
-            styles.districtSelector,
-            {
-              backgroundColor: selectedDistrict ? colors.accent.primary + '1A' : colors.surface.elevated,
-              borderColor: selectedDistrict ? colors.accent.primary : colors.surface.border,
-            },
-          ]}
-          onPress={() => {
-            lightImpact();
-            setDistrictModalOpen(true);
-          }}
-          activeOpacity={0.7}
-        >
-          <View style={styles.districtSelectorLeft}>
-            <IconSymbol
-              name="mappin.and.ellipse"
-              size={14}
-              color={selectedDistrict ? colors.accent.primary : colors.text.secondary}
-            />
-            <Text
-              style={[
-                styles.districtSelectorText,
-                { color: selectedDistrict ? colors.accent.primary : colors.text.primary },
-              ]}
-            >
-              {selectedDistrict 
-                ? `${t('explore.district_label', 'İlçe')}: ${selectedDistrict.apiLocation}` 
-                : t('explore.select_district', 'İlçe Seçin')}
-            </Text>
-          </View>
-          <View style={styles.districtSelectorRight}>
-            {selectedDistrict && (
-              <TouchableOpacity
-                onPress={(e) => {
-                  e.stopPropagation();
-                  lightImpact();
-                  setSelectedDistrict(null);
-                }}
-                style={styles.clearDistrictBtn}
+        {/* İlçe Seçici & Global Liste Butonu */}
+        <View style={{ flexDirection: 'row', gap: 10, marginTop: 10, alignItems: 'stretch' }}>
+          <TouchableOpacity
+            style={[
+              styles.districtSelector,
+              {
+                flex: 1,
+                marginTop: 0,
+                backgroundColor: selectedDistrict ? colors.accent.primary + '1A' : colors.surface.elevated,
+                borderColor: selectedDistrict ? colors.accent.primary : colors.surface.border,
+              },
+            ]}
+            onPress={() => {
+              lightImpact();
+              setDistrictModalOpen(true);
+            }}
+            activeOpacity={0.7}
+          >
+            <View style={styles.districtSelectorLeft}>
+              <IconSymbol
+                name="mappin.and.ellipse"
+                size={14}
+                color={selectedDistrict ? colors.accent.primary : colors.text.secondary}
+              />
+              <Text
+                style={[
+                  styles.districtSelectorText,
+                  { color: selectedDistrict ? colors.accent.primary : colors.text.primary },
+                ]}
               >
-                <IconSymbol name="xmark.circle.fill" size={16} color={colors.accent.primary} />
-              </TouchableOpacity>
-            )}
-            <IconSymbol
-              name="chevron.down"
-              size={12}
-              color={selectedDistrict ? colors.accent.primary : colors.text.secondary}
-            />
-          </View>
-        </TouchableOpacity>
+                {selectedDistrict 
+                  ? `${t('explore.district_label', 'İlçe')}: ${selectedDistrict.apiLocation}` 
+                  : t('explore.select_district', 'İlçe Seçin')}
+              </Text>
+            </View>
+            <View style={styles.districtSelectorRight}>
+              {selectedDistrict && (
+                <TouchableOpacity
+                  onPress={(e) => {
+                    e.stopPropagation();
+                    lightImpact();
+                    setSelectedDistrict(null);
+                  }}
+                  style={styles.clearDistrictBtn}
+                >
+                  <IconSymbol name="xmark.circle.fill" size={16} color={colors.accent.primary} />
+                </TouchableOpacity>
+              )}
+              <IconSymbol
+                name="chevron.down"
+                size={12}
+                color={selectedDistrict ? colors.accent.primary : colors.text.secondary}
+              />
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity
+            style={[
+              styles.districtSelector,
+              {
+                marginTop: 0,
+                width: 48,
+                justifyContent: 'center',
+                alignItems: 'center',
+                paddingHorizontal: 0,
+                backgroundColor: colors.surface.elevated,
+                borderColor: colors.surface.border,
+              },
+            ]}
+            onPress={() => {
+              lightImpact();
+              router.push({
+                pathname: '/cluster-places',
+                params: {
+                  isGlobal: "true",
+                  lat: userLocation?.latitude || 0,
+                  lng: userLocation?.longitude || 0,
+                }
+              });
+            }}
+            activeOpacity={0.7}
+          >
+            <IconSymbol name="list.bullet" size={18} color={colors.text.primary} />
+          </TouchableOpacity>
+        </View>
 
         {/* Filtre Paneli */}
         {showFilter && (

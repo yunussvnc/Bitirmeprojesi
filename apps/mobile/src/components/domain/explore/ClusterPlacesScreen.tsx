@@ -48,9 +48,11 @@ export default function ClusterPlacesScreen() {
     clusterCount: string;
     lat: string;
     lng: string;
+    isGlobal?: string;
   }>();
 
-  const clusterCount = parseInt(params.clusterCount || "0", 10) || 10;
+  const isGlobal = params.isGlobal === "true";
+  const clusterCount = isGlobal ? 999999 : (parseInt(params.clusterCount || "0", 10) || 10);
   const centerLat = parseFloat(params.lat || "0");
   const centerLng = parseFloat(params.lng || "0");
 
@@ -71,7 +73,8 @@ export default function ClusterPlacesScreen() {
 
   // Filter places that belong to this cluster (calculate nearest N places)
   const clusterPlaces = useMemo(() => {
-    if (allPlaces.length === 0 || clusterCount <= 0 || !centerLat || !centerLng) return [];
+    if (allPlaces.length === 0) return [];
+    if (!isGlobal && (clusterCount <= 0 || !centerLat || !centerLng)) return [];
     
     const normalizeText = (text: string) =>
       text
@@ -93,9 +96,13 @@ export default function ClusterPlacesScreen() {
       const pLng = p.longitude || 0;
       
       // 1. Proximity (Distance) - En yakın olana en yüksek puan
-      const dist = Math.pow(pLat - centerLat, 2) + Math.pow(pLng - centerLng, 2);
-      // dist is very small (e.g. 0.0001). Let's convert to a rough proximity score (max 30)
-      const proximityScore = Math.max(0, 30 - (dist * 1000000));
+      let proximityScore = 0;
+      let dist = 999999;
+      if (centerLat !== 0 && centerLng !== 0) {
+        dist = Math.pow(pLat - centerLat, 2) + Math.pow(pLng - centerLng, 2);
+        // dist is very small (e.g. 0.0001). Let's convert to a rough proximity score (max 30)
+        proximityScore = Math.max(0, 30 - (dist * 1000000));
+      }
       score += proximityScore;
       
       // 2. Average Rating - 4.5 ve üzerine 15 puan, 4.0 ve üzerine 10 puan
@@ -147,7 +154,7 @@ export default function ClusterPlacesScreen() {
     // Sadece en yakın 'clusterCount * 3' adayı alıp puanlarına göre sıralıyoruz.
     // Çok uzak olanları dahil etmemek için önce dist'e göre sırala:
     withScore.sort((a, b) => a.dist - b.dist);
-    const nearestCandidates = withScore.slice(0, Math.max(clusterCount * 3, 50));
+    const nearestCandidates = withScore.slice(0, isGlobal ? withScore.length : Math.max(clusterCount * 3, 50));
     
     // Sonra bu adayları puana göre yüksekten düşüğe sırala
     nearestCandidates.sort((a, b) => b.score - a.score);
@@ -283,7 +290,7 @@ export default function ClusterPlacesScreen() {
               style={[styles.title, { color: colors.text.primary }]}
               numberOfLines={1}
             >
-              {t("explore.places", "Mekanlar")}
+              {isGlobal ? t("explore.all_places", "Tüm Mekanlar") : t("explore.places", "Mekanlar")}
             </Text>
             {!isLoadingPlaces && (
               <View
