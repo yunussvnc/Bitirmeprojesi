@@ -441,19 +441,29 @@ def get_place_photo(place_id: int, max_width: int = 800, db: Session = Depends(g
         
     if place.photo_url.startswith("google_photo_ref:"):
         ref = place.photo_url.split("google_photo_ref:")[1]
-        api_key = get_settings().GOOGLE_MAPS_API_KEY
-        if not api_key:
-            raise HTTPException(status_code=500, detail="Google Maps API Key yapılandırılmamış.")
-            
-        google_url = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth={max_width}&photoreference={ref}&key={api_key}"
-        
+        settings = get_settings()
+
+        # Places API (New) ile içe aktarılan mekanların google_place_id'si "ChIJ..."
+        # ile başlar ve foto referansı da o API'nin media endpoint'ini gerektirir —
+        # eski (legacy) Photo API'nin photoreference formatıyla UYUMSUZ, 403 döner.
+        if (place.google_place_id or "").startswith("ChIJ") and settings.GOOGLE_PLACES_API_KEY:
+            google_url = (
+                f"https://places.googleapis.com/v1/places/{place.google_place_id}/photos/{ref}/media"
+                f"?maxWidthPx={max_width}&key={settings.GOOGLE_PLACES_API_KEY}"
+            )
+        else:
+            api_key = settings.GOOGLE_MAPS_API_KEY
+            if not api_key:
+                raise HTTPException(status_code=500, detail="Google Maps API Key yapılandırılmamış.")
+            google_url = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth={max_width}&photoreference={ref}&key={api_key}"
+
         try:
             response = requests.get(google_url, stream=True, timeout=10)
         except requests.exceptions.RequestException:
             raise HTTPException(status_code=504, detail="Google API'sine bağlanılamadı.")
         if response.status_code != 200:
             raise HTTPException(status_code=response.status_code, detail="Fotoğraf Google'dan alınamadı.")
-            
+
         return StreamingResponse(response.iter_content(chunk_size=8192), media_type=response.headers.get("content-type", "image/jpeg"))
 
     return RedirectResponse(url=place.photo_url)
