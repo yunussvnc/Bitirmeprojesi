@@ -2,37 +2,42 @@
  * Keşfet – Harita (WebView + Leaflet/OpenStreetMap)
  */
 
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useMemo } from "react";
 import { View, StyleSheet } from "react-native";
 import { ExploreMapView } from "@/src/components/domain/explore/ExploreMapView";
 import { getAllPlaces } from "@/src/services/mekanService";
-import type { Place } from "@/src/services/mekanService";
+import { useAppStore } from "@/src/store/useAppStore";
 
 export default function ExploreScreen() {
-  const [places, setPlaces] = useState<Place[]>([]);
-  const [loading, setLoading] = useState(true);
+  const globalPlaces = useAppStore((s) => s.globalPlaces);
+  const isGlobalPlacesLoading = useAppStore((s) => s.isGlobalPlacesLoading);
+  const setGlobalPlaces = useAppStore((s) => s.setGlobalPlaces);
+  const setIsGlobalPlacesLoading = useAppStore((s) => s.setIsGlobalPlacesLoading);
 
   const loadPlaces = async () => {
     try {
-      setLoading(true);
+      setIsGlobalPlacesLoading(true);
       const data = await getAllPlaces();
-      setPlaces(data);
+      setGlobalPlaces(data);
     } catch {
-      setPlaces([]);
+      setGlobalPlaces([]);
     } finally {
-      setLoading(false);
+      setIsGlobalPlacesLoading(false);
     }
   };
 
-  const placesWithCoords = useMemo(() => places.filter((p) => p.latitude != null && p.longitude != null), [places]);
+  const placesWithCoords = useMemo(() => globalPlaces.filter((p) => p.latitude != null && p.longitude != null), [globalPlaces]);
 
   useEffect(() => {
-    loadPlaces();
+    // Only load if we haven't loaded them yet
+    if (globalPlaces.length === 0) {
+      loadPlaces();
+    }
   }, []);
 
   return (
     <View style={styles.container}>
-      <ExploreMapView places={placesWithCoords} loading={loading} onLoadPlaces={loadPlaces} />
+      <ExploreMapView places={placesWithCoords} loading={isGlobalPlacesLoading} onLoadPlaces={loadPlaces} />
     </View>
   );
 }

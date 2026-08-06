@@ -18,7 +18,7 @@ import {
   InteractionManager,
   Pressable,
 } from 'react-native';
-import { Map, Camera, GeoJSONSource, Layer, UserLocation, type CameraRef } from '@maplibre/maplibre-react-native';
+import { Map, Camera, GeoJSONSource, Layer, UserLocation, type CameraRef, type GeoJSONSourceRef } from '@maplibre/maplibre-react-native';
 import * as Location from 'expo-location';
 import { router } from 'expo-router';
 import {
@@ -56,6 +56,7 @@ export function ExploreMapView({ places, loading, onLoadPlaces }: ExploreMapView
   const { colors, isDark } = useTheme();
   const { t } = useTranslation();
   const cameraRef = useRef<CameraRef>(null);
+  const geoJSONSourceRef = useRef<GeoJSONSourceRef>(null);
   
   const [userLocation, setUserLocation] = useState<{ latitude: number; longitude: number } | null>(null);
   const [selectedPlace, setSelectedPlace] = useState<Place | null>(null);
@@ -328,6 +329,7 @@ export function ExploreMapView({ places, loading, onLoadPlaces }: ExploreMapView
         />
 
         <GeoJSONSource
+          ref={geoJSONSourceRef}
           id="placesSource"
           data={placesGeoJSON}
           cluster={true}
@@ -347,13 +349,25 @@ export function ExploreMapView({ places, loading, onLoadPlaces }: ExploreMapView
 
             if (feature.properties?.cluster) {
               const coords = feature.geometry?.coordinates;
-              if (coords && cameraRef.current) {
-                // Kümeye tıklandığında iyice yakınlaşıp kümelerin mekanlara ayrılmasını sağla
-                cameraRef.current.flyTo({
-                  center: [coords[0], coords[1]],
-                  zoom: 15, // 14'tü 15 yaptık, daha net dağılım için
-                  duration: 600,
-                });
+              
+              if (coords) {
+                const clusterId = feature.properties.cluster_id;
+                const pointCount = feature.properties.point_count;
+                
+                if (clusterId) {
+                  try {
+                    router.push({
+                      pathname: '/cluster-places',
+                      params: {
+                        clusterCount: pointCount,
+                        lat: coords[1],
+                        lng: coords[0]
+                      }
+                    });
+                  } catch (e) {
+                    console.log('[DEBUG] Error navigating to cluster list:', e);
+                  }
+                }
               }
               return;
             }

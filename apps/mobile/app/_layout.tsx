@@ -223,6 +223,7 @@ export default function RootLayout() {
                     <Stack.Screen name="notifications" options={{ gestureEnabled: true, fullScreenGestureEnabled: true, animation: "slide_from_right" }} />
                     <Stack.Screen name="p/post/[postId]" options={{ gestureEnabled: true, fullScreenGestureEnabled: true, animation: "slide_from_right" }} />
                     <Stack.Screen name="saved" options={{ gestureEnabled: true, fullScreenGestureEnabled: true, animation: "slide_from_right" }} />
+                    <Stack.Screen name="cluster-places" options={{ gestureEnabled: true, fullScreenGestureEnabled: true, animation: "slide_from_right" }} />
                   </Stack>
                   <CustomAlertOverlay />
                   <Toast />

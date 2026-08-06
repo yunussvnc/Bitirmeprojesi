@@ -21,7 +21,8 @@ async def connect_redis():
     global redis_client, _pubsub_connection
 
     # Default olarak localhost:6379, canlıda .env'den gelir
-    redis_url = os.getenv("REDIS_URL", "redis://localhost:6379/0")
+    from config import get_settings
+    redis_url = get_settings().REDIS_URL
 
     # Retry stratejisi: Geçici ağ hatalarında otomatik yeniden dene
     retry = Retry(ExponentialBackoff(cap=10, base=0.5), retries=3)

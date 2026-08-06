@@ -49,6 +49,7 @@ export default function SavedScreen() {
   const byId = useAppStore((s) => s.savedById);
   const clear = useAppStore((s) => s.clearSaved);
   const remove = useAppStore((s) => s.removeSaved);
+  const removePost = useAppStore((s) => s.removeSavedPost);
   const postIds = useAppStore((s) => s.savedPostIds);
   const postsById = useAppStore((s) => s.savedPostsById);
   const clearSavedPosts = useAppStore((s) => s.clearSavedPosts);
@@ -179,6 +180,14 @@ export default function SavedScreen() {
     [remove]
   );
 
+  const handleRemovePost = useCallback(
+    (id: string | number) => {
+      lightImpact();
+      removePost(id);
+    },
+    [removePost]
+  );
+
   const handleRefresh = async () => {
     setRefreshing(true);
     lightImpact();
@@ -188,7 +197,7 @@ export default function SavedScreen() {
   };
 
   const renderRightActions = useCallback(
-    (progress: Animated.AnimatedInterpolation<number>, dragX: Animated.AnimatedInterpolation<number>, id: string | number) => {
+    (progress: Animated.AnimatedInterpolation<number>, dragX: Animated.AnimatedInterpolation<number>, id: string | number, isPost = false) => {
       const scale = dragX.interpolate({
         inputRange: [-80, 0],
         outputRange: [1, 0],
@@ -197,7 +206,7 @@ export default function SavedScreen() {
 
       return (
         <TouchableOpacity
-          onPress={() => handleRemove(id)}
+          onPress={() => (isPost ? handleRemovePost(id) : handleRemove(id))}
           style={[styles.deleteAction, { backgroundColor: colors.semantic.error }]}
           activeOpacity={0.8}
         >
@@ -207,7 +216,7 @@ export default function SavedScreen() {
         </TouchableOpacity>
       );
     },
-    [handleRemove, colors.semantic.error]
+    [handleRemove, handleRemovePost, colors.semantic.error]
   );
 
   const renderPlaceItem: ListRenderItem<SavedPlace> = useCallback(
@@ -380,13 +389,22 @@ export default function SavedScreen() {
           keyExtractor={(item) => String(item.id)}
           showsVerticalScrollIndicator={false}
           renderItem={({ item }) => (
-            <FeedCard
-              post={item}
-              onPress={() => item.place_id && router.push(`/place/${item.place_id}` as any)}
-              onAuthorPress={() => router.push(`/user/${item.user_id}` as any)}
-              onPlacePress={() => item.place_id && router.push(`/place/${item.place_id}` as any)}
-              onShare={() => setSharePost(item)}
-            />
+            <Swipeable
+              key={item.id}
+              renderRightActions={(progress, dragX) => renderRightActions(progress, dragX, item.id, true)}
+              overshootRight={false}
+              friction={2}
+              rightThreshold={40}
+              failOffsetX={[-1000, 10]}
+            >
+              <FeedCard
+                post={item}
+                onPress={() => item.place_id && router.push(`/place/${item.place_id}` as any)}
+                onAuthorPress={() => router.push(`/user/${item.user_id}` as any)}
+                onPlacePress={() => item.place_id && router.push(`/place/${item.place_id}` as any)}
+                onShare={() => setSharePost(item)}
+              />
+            </Swipeable>
           )}
           ListHeaderComponent={listHeader}
           ListEmptyComponent={listEmptyPosts}

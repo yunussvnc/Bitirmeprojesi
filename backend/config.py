@@ -5,6 +5,7 @@ from functools import lru_cache
 
 class Settings(BaseSettings):
     DATABASE_URL: str
+    REDIS_URL: str = "redis://localhost:6379/0"
     # development | staging | production — prod'da /docs, /redoc, /openapi.json kapatılır.
     ENVIRONMENT: str = "development"
     # Production (Render): ALLOWED_ORIGINS=https://asemos.app,https://admin.asemos.app
