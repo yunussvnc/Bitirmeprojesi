@@ -84,7 +84,7 @@ export default function HelpCenterScreen() {
 
           <TouchableOpacity
             style={[styles.contactCard, { backgroundColor: colors.surface.elevated, borderColor: colors.surface.border }]}
-            onPress={() => { lightImpact(); Linking.openURL("mailto:oneri@asemos.com"); }}
+            onPress={() => { lightImpact(); Linking.openURL("mailto:oneri@asemos.tr"); }}
             activeOpacity={0.7}
           >
             <View style={[styles.contactIcon, { backgroundColor: "#FFB347" }]}>
@@ -92,7 +92,7 @@ export default function HelpCenterScreen() {
             </View>
             <View style={styles.contactInfo}>
               <Text style={[styles.contactTitle, { color: colors.text.primary }]}>{t("settings_help.support", "Öneride Bulun")}</Text>
-              <Text style={[styles.contactDesc, { color: colors.text.tertiary }]}>oneri@asemos.com</Text>
+              <Text style={[styles.contactDesc, { color: colors.text.tertiary }]}>oneri@asemos.tr</Text>
             </View>
             <IconSymbol name="chevron.right" size={16} color={colors.text.tertiary} />
           </TouchableOpacity>

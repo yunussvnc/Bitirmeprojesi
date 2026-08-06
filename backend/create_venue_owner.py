@@ -9,7 +9,7 @@ from models import User, Place
 from crud import _hash_password
 
 db = SessionLocal()
-email = "mekan@asemos.com"
+email = "mekan@asemos.tr"
 password = "password123"
 
 existing = db.query(User).filter(User.email == email).first()

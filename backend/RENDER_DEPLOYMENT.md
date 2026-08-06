@@ -272,7 +272,7 @@ Render Dashboard → Service → Settings → "Auto-Deploy"
 ### Custom Domain (Opsiyonel)
 
 1. Settings → "Custom Domains"
-2. Kendi domain'inizi ekleyin (örn: `api.asemos.com`)
+2. Kendi domain'inizi ekleyin (örn: `api.asemos.tr`)
 3. DNS kayıtlarını yapılandırın
 4. SSL otomatik olarak sağlanır
 

@@ -298,7 +298,7 @@ services:
   # ===========================================================================
   # admin — Next.js standalone admin paneli. Sadece backend_network'te,
   # host'a hiç port map edilmiyor — dışarıya SADECE nginx üzerinden açılır
-  # (admin.asemos.com). NEXT_PUBLIC_* değerleri Next.js'te CLIENT bundle'a
+  # (admin.asemos.tr). NEXT_PUBLIC_* değerleri Next.js'te CLIENT bundle'a
   # BUILD-TIME'da gömülür — runtime `environment:` ile verilse client tarafı
   # hiç görmez, bu yüzden `build.args` kullanılıyor (admin/Dockerfile bunları
   # ARG olarak alıp ENV'e çeviriyor). Admin'e özel bir .env dosyası yok/gerekmiyor
@@ -309,8 +309,8 @@ services:
       context: ./admin
       dockerfile: Dockerfile
       args:
-        NEXT_PUBLIC_API_URL: https://api.asemos.com
-        NEXT_PUBLIC_AI_URL: https://ai.asemos.com
+        NEXT_PUBLIC_API_URL: https://api.asemos.tr
+        NEXT_PUBLIC_AI_URL: https://ai.asemos.tr
     image: asemos-admin:latest
     container_name: asemos_admin
     restart: unless-stopped

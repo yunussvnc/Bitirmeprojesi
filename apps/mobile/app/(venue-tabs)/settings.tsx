@@ -203,7 +203,7 @@ export default function VenueSettingsScreen() {
               icon="doc.text.fill" 
               iconColor="#94a3b8" 
               label={t('settings.terms_label')} 
-              onPress={() => WebBrowser.openBrowserAsync('https://asemos.com/terms')} 
+              onPress={() => WebBrowser.openBrowserAsync('https://asemos.tr/terms')} 
             />
           </BlurView>
         </View>
