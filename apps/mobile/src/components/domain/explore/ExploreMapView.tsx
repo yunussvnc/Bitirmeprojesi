@@ -299,6 +299,9 @@ export function ExploreMapView({ places, loading, onLoadPlaces }: ExploreMapView
       <Map
         style={styles.map}
         mapStyle={styleURL}
+        logo={false}
+        attribution={false}
+        compass={false}
         onRegionWillChange={(e: any) => {
           const isUser = e?.properties?.isUserInteraction ?? e?.isUserInteraction ?? true;
           if (isUser) {
