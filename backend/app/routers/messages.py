@@ -107,17 +107,24 @@ def _get_messaging_permission(
 
     mutual = a_follows_b and b_follows_a
 
+    # ── Alıcının tercihlerini oku ──────────────────────────────
+    receiver_prefs = receiver.preferences
+    receiver_is_private = bool(receiver_prefs and receiver_prefs.is_private_account)
+    # Kullanıcı read receipt'leri kapatmışsa, karşılıklı takipleşme olsa bile gizle
+    receiver_hides_read = bool(receiver_prefs and receiver_prefs.show_read_receipts is False)
+    # Kullanıcı tanımadığı kişilerden mesaj istemiyor mu?
+    receiver_blocks_unknown = bool(receiver_prefs and receiver_prefs.unknown_message_requests is False)
+
     # ── Kural 3: Karşılıklı takip → tam serbest ──────────────
     if mutual:
         return schemas.ConversationPermission(
             can_send=True,
             can_send_media=True,
-            hide_read_receipt=False,
+            hide_read_receipt=receiver_hides_read,
             reason="mutual_follow",
         )
 
     # ── Kural 1: B gizli hesap + takipleşme yok → tamamen engel ─
-    receiver_is_private = bool(receiver.preferences and receiver.preferences.is_private_account)
     if receiver_is_private:
         return schemas.ConversationPermission(
             can_send=False,
@@ -126,23 +133,42 @@ def _get_messaging_permission(
             reason="private_account_no_mutual",
         )
 
-    # ── Kural 2: B açık hesap, kısıtlı mod ───────────────────
-    # Göndericinin bu konuşmada gönderdiği toplam mesaj sayısı
-    sent_count = db.query(models.Message).filter(
-        models.Message.conversation_id == conversation_id,
-        models.Message.sender_id == sender_id,
-    ).count()
+    # ── Kural 1.5: B "tanımadığım kişilerden mesaj istemiyorum" açık ──
+    if receiver_blocks_unknown and not a_follows_b and not b_follows_a:
+        return schemas.ConversationPermission(
+            can_send=False,
+            can_send_media=False,
+            hide_read_receipt=True,
+            reason="unknown_messages_disabled",
+        )
 
-    # Alıcının bu konuşmada gönderdiği son mesaj (cevap verdi mi?)
+    # ── Kural 2: B açık hesap, kısıtlı mod (ping-pong) ───────
+    # B'nin en son gönderdiği mesajın zamanını bul
     last_receiver_msg = db.query(models.Message).filter(
         models.Message.conversation_id == conversation_id,
         models.Message.sender_id == receiver_id,
-    ).order_by(models.Message.created_at.desc()).first()
+    ).order_by(models.Message.created_at.desc(), models.Message.id.desc()).first()
 
-    awaiting_reply = last_receiver_msg is None  # B hiç cevap vermedi
+    if last_receiver_msg:
+        # B cevap vermiş → A'nın B'nin son mesajından SONRA gönderdiği sayı
+        # ID karşılaştırması kullanıyoruz çünkü created_at eşit olabilir (aynı saniye)
+        sent_after_reply = db.query(models.Message).filter(
+            models.Message.conversation_id == conversation_id,
+            models.Message.sender_id == sender_id,
+            models.Message.id > last_receiver_msg.id,
+        ).count()
+        awaiting_reply = sent_after_reply >= 1
+        sent_count = sent_after_reply
+    else:
+        # B hiç cevap vermedi → A'nın toplam mesaj sayısı
+        sent_count = db.query(models.Message).filter(
+            models.Message.conversation_id == conversation_id,
+            models.Message.sender_id == sender_id,
+        ).count()
+        awaiting_reply = sent_count >= 1
 
-    # Limit kontrolü: zaten 1 mesaj gönderilmişse ve B cevap vermediyse → engelle
-    if sent_count >= 1 and awaiting_reply:
+    # Limit kontrolü: 1 mesaj gönderilmişse ve B henüz cevap vermediyse → engelle
+    if awaiting_reply:
         return schemas.ConversationPermission(
             can_send=False,
             can_send_media=False,
@@ -159,7 +185,7 @@ def _get_messaging_permission(
         hide_read_receipt=True,
         reason="restricted_first_message",
         messages_sent_count=sent_count,
-        awaiting_reply=awaiting_reply,
+        awaiting_reply=False,
     )
 
 
@@ -250,9 +276,12 @@ def open_or_create_conversation(
 
     conv = existing_conv
     if not conv:
+        # Duplikat konuşma oluşmasını önlemek için user ID'leri sırala
+        u1 = min(current_user.id, other_user_id)
+        u2 = max(current_user.id, other_user_id)
         conv = models.Conversation(
-            user1_id=current_user.id,
-            user2_id=other_user_id,
+            user1_id=u1,
+            user2_id=u2,
             is_active=True,
         )
         db.add(conv)
