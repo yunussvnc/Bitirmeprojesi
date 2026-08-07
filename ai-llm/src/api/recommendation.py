@@ -2,13 +2,25 @@
 Öneri API Endpoints
 """
 
-from fastapi import APIRouter, HTTPException, status
+from fastapi import APIRouter, HTTPException, status, UploadFile, File, Form
 from pydantic import BaseModel
 from typing import Optional, List
 from src.recommendation.engine import RecommendationEngine
+from src.models.llm.llm_wrapper import LayeredLLMWrapper
+import logging
+
+logger = logging.getLogger(__name__)
 
 router = APIRouter()
 recommendation_engine = RecommendationEngine()
+_llm = None
+
+def get_llm():
+    global _llm
+    if _llm is None:
+        _llm = LayeredLLMWrapper()
+    return _llm
+
 
 
 class RecommendationRequest(BaseModel):
@@ -66,6 +78,22 @@ async def get_recommendations(request: RecommendationRequest):
     except Exception as e:
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=f"Öneri alınırken hata oluştu: {str(e)}"
+            detail=str(e)
         )
 
+@router.post("/transcribe")
+async def transcribe_audio(
+    file: UploadFile = File(...),
+    language: Optional[str] = Form("tr")
+):
+    """Gelen ses dosyasını Groq Whisper üzerinden metne çevirir."""
+    try:
+        audio_bytes = await file.read()
+        filename = file.filename or "audio.m4a"
+        llm = get_llm()
+        # LayeredLLMWrapper üzerinden asenkron transcribe çağır
+        text = await llm.transcribe_audio_async(audio_bytes, filename, language)
+        return {"text": text}
+    except Exception as e:
+        logger.error(f"[Transcribe] Hata: {str(e)}")
+        raise HTTPException(status_code=500, detail="Ses metne çevrilemedi")

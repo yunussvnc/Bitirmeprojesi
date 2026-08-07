@@ -263,6 +263,7 @@ export default function SavedScreen() {
             <View style={{ flex: 1, pointerEvents: isSelectionMode ? 'none' : 'auto' }}>
               <AnimatedPlaceCard
                 index={index}
+                placeId={item.id}
                 image={getPlaceImageSource(item)}
                 imagePlaceholder={!hasPlaceImage(item)}
                 title={item.name}
@@ -495,9 +496,9 @@ export default function SavedScreen() {
       )}
 
       {isSelectionMode && selectedIds.length > 0 && (
-        <View style={[styles.bulkActionContainer, { paddingBottom: Math.max(insets.bottom, 16) }]}>
+        <View style={[styles.bulkActionContainer, { paddingBottom: Math.max(insets.bottom, 16), flexDirection: 'row', gap: 12 }]}>
           <TouchableOpacity
-            style={[styles.bulkDeleteButton, { backgroundColor: colors.semantic.error }]}
+            style={[styles.bulkDeleteButton, { backgroundColor: colors.semantic.error, flex: 1 }]}
             onPress={() => {
               Alert.alert(t("common.delete"), `${selectedIds.length} öğeyi silmek istediğinize emin misiniz?`, [
                 { text: t("common.cancel"), style: "cancel" },
@@ -518,10 +519,25 @@ export default function SavedScreen() {
             }}
           >
             <IconSymbol name="trash.fill" size={20} color="#FFF" />
-            <Text style={styles.bulkDeleteText}>
-              {t("saved_extra.delete_selected", `Seçilenleri Sil (${selectedIds.length})`)}
-            </Text>
+            <Text style={styles.bulkDeleteText}>{t("common.delete")} ({selectedIds.length})</Text>
           </TouchableOpacity>
+
+          {tab === "places" && selectedIds.length === 2 && (
+            <TouchableOpacity
+              style={[styles.bulkDeleteButton, { backgroundColor: colors.accent.primary, flex: 1 }]}
+              onPress={() => {
+                lightImpact();
+                router.push(`/compare?ids=${selectedIds.join(',')}` as any);
+                setIsSelectionMode(false);
+                setSelectedIds([]);
+              }}
+            >
+              <IconSymbol name="arrow.left.arrow.right" size={20} color={colors.accent.onPrimary} />
+              <Text style={[styles.bulkDeleteText, { color: colors.accent.onPrimary }]}>
+                Karşılaştır
+              </Text>
+            </TouchableOpacity>
+          )}
         </View>
       )}
 

@@ -51,6 +51,9 @@ import { FlatList } from "react-native";
 import { StoryViewerModal } from "../explore/StoryViewerModal";
 import { ReviewCard, type ReviewItemType } from "./ReviewCard";
 import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
+import { HeroImageViewer } from './HeroImageViewer';
+import { ReviewGalleryModal } from './ReviewGalleryModal';
+import { PlaceDetailMenuSheet } from './PlaceDetailMenuSheet';
 
 type Review = {
   id: number;
@@ -86,87 +89,7 @@ function groupMenuByCategory(items: any[], t: any): { category: string; items: a
 }
 
 
-/** Swipe-down-to-close fullscreen image viewer */
-function HeroImageViewer({
-  heroSource, insetTop, onClose, screenWidth, screenHeight, t,
-}: {
-  heroSource: any;
-  insetTop: number;
-  onClose: () => void;
-  screenWidth: number;
-  screenHeight: number;
-  t: (key: string) => string;
-}) {
-  const translateY = useRef(new RNAnimated.Value(0)).current;
-  const opacity = useRef(new RNAnimated.Value(1)).current;
 
-  const panResponder = useRef(
-    PanResponder.create({
-      onStartShouldSetPanResponder: () => false,
-      onMoveShouldSetPanResponder: (_, g) => Math.abs(g.dy) > 10 && Math.abs(g.dy) > Math.abs(g.dx),
-      onPanResponderMove: (_, g) => {
-        if (g.dy > 0) {
-          translateY.setValue(g.dy);
-          opacity.setValue(Math.max(0.3, 1 - g.dy / 300));
-        }
-      },
-      onPanResponderRelease: (_, g) => {
-        if (g.dy > 80 || g.vy > 0.8) {
-          // Threshold aşıldı — kapat
-          RNAnimated.parallel([
-            RNAnimated.timing(translateY, { toValue: screenHeight, duration: 220, useNativeDriver: true }),
-            RNAnimated.timing(opacity, { toValue: 0, duration: 200, useNativeDriver: true }),
-          ]).start(() => onClose());
-        } else {
-          // Geri döndür
-          RNAnimated.parallel([
-            RNAnimated.spring(translateY, { toValue: 0, useNativeDriver: true }),
-            RNAnimated.spring(opacity, { toValue: 1, useNativeDriver: true }),
-          ]).start();
-        }
-      },
-    })
-  ).current;
-
-  return (
-    <RNAnimated.View
-      style={{ flex: 1, backgroundColor: "#000", justifyContent: "center", alignItems: "center", opacity }}
-      {...panResponder.panHandlers}
-    >
-      {/* Kapat butonu */}
-      <View style={{ flexDirection: "row", justifyContent: "flex-end", position: "absolute", top: insetTop, width: "100%", paddingHorizontal: 20, zIndex: 10 }}>
-        <TouchableOpacity onPress={onClose} style={{ flexDirection: "row", alignItems: "center", gap: 6, backgroundColor: "rgba(0,0,0,0.5)", paddingHorizontal: 12, paddingVertical: 8, borderRadius: 20 }}>
-          <IconSymbol name="xmark" size={18} color="#fff" />
-          <Text style={{ color: "#fff", fontSize: 14, fontWeight: "600" }}>{t('explore.close')}</Text>
-        </TouchableOpacity>
-      </View>
-
-      {/* Görsel + sürükleme geri bildirimi */}
-      <RNAnimated.View style={{ transform: [{ translateY }] }}>
-        <ScrollView
-          maximumZoomScale={4}
-          minimumZoomScale={1}
-          bouncesZoom
-          centerContent
-          showsHorizontalScrollIndicator={false}
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={{ flexGrow: 1, justifyContent: "center", alignItems: "center" }}
-          style={{ width: screenWidth, height: screenHeight }}
-        >
-          <Pressable>
-            <Image source={heroSource} style={{ width: screenWidth, height: screenHeight * 0.8 }} resizeMode="contain" />
-          </Pressable>
-        </ScrollView>
-      </RNAnimated.View>
-
-      {/* Swipe ipucu */}
-      <View style={{ position: "absolute", bottom: 40, alignItems: "center", gap: 4 }}>
-        <View style={{ width: 40, height: 4, borderRadius: 2, backgroundColor: "rgba(255,255,255,0.4)" }} />
-        <Text style={{ color: "rgba(255,255,255,0.5)", fontSize: 12 }}>Kapatmak için aşağı kaydırın</Text>
-      </View>
-    </RNAnimated.View>
-  );
-}
 
 export default function PlaceDetailScreen({
   providedId,
@@ -798,14 +721,19 @@ export default function PlaceDetailScreen({
           )}
         </View>
 
-        {/* Image */}
         <View style={styles.imageContainer}>
           {hasPlaceImage(place) ? (
             <Pressable onPress={() => {
               lightImpact();
               setShowHeroImage(true);
             }} style={[{ backgroundColor: colors.surface.elevated, flex: 1 }]}>
-              <Image source={heroSource} style={styles.placeImage} resizeMode="contain" />
+              <Animated.Image 
+                source={heroSource} 
+                style={styles.placeImage} 
+                resizeMode="cover" 
+                // @ts-ignore
+                sharedTransitionTag={`place-image-${place.id || id}`}
+              />
             </Pressable>
           ) : (
             <View style={[styles.imagePlaceholder, { backgroundColor: colors.surface.elevated }]}>
@@ -1182,6 +1110,7 @@ export default function PlaceDetailScreen({
                 {similarPlaces.map((similarPlace) => (
                   <View key={similarPlace.id} style={styles.similarCardWrapper}>
                     <PlaceCard
+                      placeId={similarPlace.id}
                       image={getPlaceImageSource(similarPlace)}
                       imagePlaceholder={!hasPlaceImage(similarPlace)}
                       title={similarPlace.name}
@@ -1371,131 +1300,13 @@ export default function PlaceDetailScreen({
                 </RNAnimated.View>
               </View>
             </View>
-            {/* Review Image Gallery Overlay */}
-            {reviewGalleryData &&
-              (() => {
-                const currentReview = reviewGalleryData.reviews[reviewGalleryData.reviewIndex];
-                const currentImages = currentReview.media_urls?.length ? currentReview.media_urls : [currentReview.media_url!];
-                const currentImageUrl = currentImages[reviewGalleryData.imageIndex];
-                const hasNextImage = reviewGalleryData.imageIndex < currentImages.length - 1;
-                const hasPrevImage = reviewGalleryData.imageIndex > 0;
-                const hasNextReview = reviewGalleryData.reviewIndex < reviewGalleryData.reviews.length - 1;
-                const hasPrevReview = reviewGalleryData.reviewIndex > 0;
-
-                return (
-                  <View style={styles.imageModalOverlay}>
-                    <Pressable style={styles.imageModalBackdrop} onPress={() => setReviewGalleryData(null)} />
-                    {/* Top bar: close + counter */}
-                    <View style={styles.galleryTopBar}>
-                      <TouchableOpacity
-                        onPress={() => {
-                          lightImpact();
-                          setReviewGalleryData(null);
-                        }}
-                        activeOpacity={0.8}
-                        hitSlop={12}
-                      >
-                        <IconSymbol name="xmark.circle.fill" size={32} color="#fff" />
-                      </TouchableOpacity>
-                      <Text style={styles.imageCounterText}>
-                        {reviewGalleryData.reviewIndex + 1} / {reviewGalleryData.reviews.length}
-                      </Text>
-                    </View>
-
-                    {/* Image area */}
-                    <View style={styles.galleryImageArea}>
-                      <Image source={{ uri: currentImageUrl }} style={styles.galleryImage} resizeMode="contain" />
-
-                      {/* Image left arrow */}
-                      {hasPrevImage && (
-                        <TouchableOpacity
-                          style={[styles.galleryArrow, styles.galleryArrowLeft]}
-                          onPress={() => {
-                            lightImpact();
-                            setReviewGalleryData((prev) => (prev ? { ...prev, imageIndex: prev.imageIndex - 1 } : null));
-                          }}
-                          activeOpacity={0.7}
-                        >
-                          <IconSymbol name="chevron.left" size={28} color="#fff" />
-                        </TouchableOpacity>
-                      )}
-
-                      {/* Image right arrow */}
-                      {hasNextImage && (
-                        <TouchableOpacity
-                          style={[styles.galleryArrow, styles.galleryArrowRight]}
-                          onPress={() => {
-                            lightImpact();
-                            setReviewGalleryData((prev) => (prev ? { ...prev, imageIndex: prev.imageIndex + 1 } : null));
-                          }}
-                          activeOpacity={0.7}
-                        >
-                          <IconSymbol name="chevron.right" size={28} color="#fff" />
-                        </TouchableOpacity>
-                      )}
-
-                      {/* Image dots */}
-                      {currentImages.length > 1 && (
-                        <View style={styles.imageDotsRow}>
-                          {currentImages.map((_, dIdx) => (
-                            <View
-                              key={dIdx}
-                              style={[styles.imageDot, dIdx === reviewGalleryData.imageIndex && styles.imageDotActive]}
-                            />
-                          ))}
-                        </View>
-                      )}
-                    </View>
-
-                    {/* Review info overlay */}
-                    <View style={styles.galleryReviewOverlay}>
-                      <View style={styles.galleryReviewHeader}>
-                        <Text style={styles.galleryReviewAuthor}>{t('explore.user_id', { id: currentReview.user_id })}</Text>
-                        {currentReview.is_verified && (
-                          <View style={styles.galleryVerifiedBadge}>
-                            <IconSymbol name="checkmark.seal.fill" size={12} color="#4ade80" />
-                            <Text style={styles.galleryVerifiedText}>{t('explore.verified')}</Text>
-                          </View>
-                        )}
-                        <View style={{ flex: 1 }} />
-                        <RatingStars value={currentReview.rating} disabled size={14} />
-                      </View>
-                      <Text style={styles.galleryReviewText} numberOfLines={3}>
-                        {currentReview.comment_text}
-                      </Text>
-
-                      {/* Review navigation */}
-                      <View style={styles.galleryReviewNav}>
-                        <TouchableOpacity
-                          onPress={() => {
-                            lightImpact();
-                            setReviewGalleryData((prev) => (prev ? { ...prev, reviewIndex: prev.reviewIndex - 1, imageIndex: 0 } : null));
-                          }}
-                          disabled={!hasPrevReview}
-                          style={[styles.galleryNavButton, !hasPrevReview && { opacity: 0.3 }]}
-                          activeOpacity={0.7}
-                        >
-                          <IconSymbol name="chevron.left" size={18} color="#fff" />
-                          <Text style={styles.galleryNavText}>{t('explore.prev_comment')}</Text>
-                        </TouchableOpacity>
-
-                        <TouchableOpacity
-                          onPress={() => {
-                            lightImpact();
-                            setReviewGalleryData((prev) => (prev ? { ...prev, reviewIndex: prev.reviewIndex + 1, imageIndex: 0 } : null));
-                          }}
-                          disabled={!hasNextReview}
-                          style={[styles.galleryNavButton, !hasNextReview && { opacity: 0.3 }]}
-                          activeOpacity={0.7}
-                        >
-                          <Text style={styles.galleryNavText}>{t('explore.next_comment')}</Text>
-                          <IconSymbol name="chevron.right" size={18} color="#fff" />
-                        </TouchableOpacity>
-                      </View>
-                    </View>
-                  </View>
-                );
-              })()}
+            {reviewGalleryData && (
+              <ReviewGalleryModal
+                reviewGalleryData={reviewGalleryData}
+                setReviewGalleryData={setReviewGalleryData}
+                t={t}
+              />
+            )}
           </>
         )}
       </Modal>
@@ -1563,133 +1374,17 @@ export default function PlaceDetailScreen({
                   </View>
                 </View>
 
-                <ScrollView
-                  contentContainerStyle={[styles.reviewScrollContent, { paddingHorizontal: spacing.sm }]}
-                  showsVerticalScrollIndicator={false}
-                >
-                  {place?.menu_items && place.menu_items.length > 0 ? (
-                    place.menu_items[0]?.type === 'image' ? (
-                      /* ===== IMAGE MENU ===== */
-                      <View style={{ gap: spacing.lg }}>
-                        {place.menu_items.map((imgItem: any, idx: number) => (
-                          <View key={idx} style={{
-                            width: SCREEN_WIDTH - 40,
-                            shadowColor: "#000",
-                            shadowOffset: { width: 0, height: 12 },
-                            shadowOpacity: 0.6,
-                            shadowRadius: 16,
-                            elevation: 12,
-                            borderRadius: 20,
-                            overflow: 'hidden',
-                            backgroundColor: colors.surface.elevated,
-                          }}>
-                            <Image
-                              source={{ uri: imgItem.uri }}
-                              style={{ width: '100%', height: (SCREEN_WIDTH - 40) * 1.4 }}
-                              resizeMode="cover"
-                            />
-                            <View style={{
-                              position: 'absolute', bottom: 0, left: 0, right: 0,
-                              paddingVertical: 10, paddingHorizontal: 16,
-                              backgroundColor: 'rgba(0,0,0,0.5)',
-                            }}>
-                              <Text style={{ color: '#fff', fontSize: 13, fontWeight: '600', textAlign: 'center' }}>
-                                {t('place_detail.page_x_of_y', { current: idx + 1, total: place.menu_items.length })}
-                              </Text>
-                            </View>
-                          </View>
-                        ))}
-                      </View>
-                    ) : (
-                      /* ===== TEXT MENU — PREMIUM CATEGORIZED ===== */
-                      <View style={{ paddingBottom: spacing.lg }}>
-                        {groupMenuByCategory(place.menu_items, t).map((group, gIdx) => (
-                          <View key={gIdx} style={{ marginBottom: spacing.xl }}>
-                            {/* Category Header */}
-                            <View style={{ 
-                              paddingVertical: 12, 
-                              borderBottomWidth: 2, borderBottomColor: '#10b98130',
-                              flexDirection: 'row', alignItems: 'center', marginBottom: 12 
-                            }}>
-                              <View style={{ width: 4, height: 22, borderRadius: 2, backgroundColor: '#10b981', marginRight: 10 }} />
-                              <Text style={[h2Style, { fontSize: 18, color: '#10b981', letterSpacing: 0.3 }]}>
-                                {group.category}
-                              </Text>
-                              <Text style={[captionStyle, { marginLeft: 8 }]}>{group.items.length} ürün</Text>
-                            </View>
-                            {/* Menu Items */}
-                            <View style={{ gap: 10 }}>
-                              {group.items.map((item: any, idx: number) => (
-                                <View
-                                  key={idx}
-                                  style={{
-                                    flexDirection: 'row',
-                                    alignItems: 'center',
-                                    backgroundColor: colors.surface.elevated,
-                                    padding: 14,
-                                    borderRadius: 18,
-                                    borderWidth: 0.5,
-                                    borderColor: colors.surface.border,
-                                  }}
-                                >
-                                  {item.img ? (
-                                    <Image
-                                      source={{ uri: item.img }}
-                                      style={{ width: 56, height: 56, borderRadius: 14, marginRight: 14, backgroundColor: colors.surface.default }}
-                                    />
-                                  ) : (
-                                    <View style={{
-                                      width: 56, height: 56, borderRadius: 14, marginRight: 14,
-                                      backgroundColor: colors.surface.default,
-                                      justifyContent: 'center', alignItems: 'center',
-                                    }}>
-                                      <IconSymbol name="fork.knife" size={22} color={colors.text.tertiary} />
-                                    </View>
-                                  )}
-                                  <View style={{ flex: 1 }}>
-                                    <Text style={[bodyStyle, { fontWeight: '700', fontSize: 16, marginBottom: 2 }]}
-                                      numberOfLines={1}
-                                    >
-                                      {item.name}
-                                    </Text>
-                                    {item.desc ? (
-                                      <Text style={{ fontSize: 13, color: colors.text.tertiary, lineHeight: 18 }} numberOfLines={2}>
-                                        {item.desc}
-                                      </Text>
-                                    ) : null}
-                                  </View>
-                                  {item.price ? (
-                                    <View style={{
-                                      backgroundColor: 'rgba(16, 185, 129, 0.12)',
-                                      paddingHorizontal: 14,
-                                      paddingVertical: 7,
-                                      borderRadius: 12,
-                                      marginLeft: 10,
-                                    }}>
-                                      {item.price && (
-                                        <Text style={{ fontWeight: '800', color: '#10b981', fontSize: 15 }}>
-                                          {item.price}
-                                        </Text>
-                                      )}
-                                    </View>
-                                  ) : null}
-                                </View>
-                              ))}
-                            </View>
-                          </View>
-                        ))}
-                      </View>
-                    )
-                  ) : (
-                    /* ===== EMPTY STATE ===== */
-                    <View style={{ alignItems: 'center', paddingVertical: 40 }}>
-                      <IconSymbol name="list.bullet.clipboard" size={48} color={colors.text.tertiary} />
-                      <Text style={[bodySmallStyle, { textAlign: 'center', marginTop: spacing.base }]}>
-                        {t("place_detail.no_menu", "Bu mekan henüz menü eklememiş.")}
-                      </Text>
-                    </View>
-                  )}
-                </ScrollView>
+                <PlaceDetailMenuSheet
+                  place={place}
+                  t={t}
+                  colors={colors}
+                  spacing={spacing}
+                  h2Style={h2Style}
+                  bodyStyle={bodyStyle}
+                  captionStyle={captionStyle}
+                  bodySmallStyle={bodySmallStyle}
+                  SCREEN_WIDTH={SCREEN_WIDTH}
+                />
               </RNAnimated.View>
             </View>
           </View>
@@ -1994,88 +1689,6 @@ const styles = StyleSheet.create({
   reviewImageBadgeText: {
     color: "#fff",
     fontSize: 10,
-    fontWeight: "700",
-  },
-  imageModalOverlay: {
-    ...StyleSheet.absoluteFillObject,
-    zIndex: 50,
-    elevation: 50,
-    backgroundColor: "#000",
-  },
-  imageModalBackdrop: {
-    ...StyleSheet.absoluteFillObject,
-  },
-  galleryTopBar: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    paddingTop: 60,
-    paddingHorizontal: 20,
-    paddingBottom: spacing.sm,
-    zIndex: 10,
-  },
-  galleryImageArea: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-  galleryImage: {
-    width: "100%",
-    height: "100%",
-  },
-  galleryArrow: {
-    position: "absolute",
-    top: "50%",
-    marginTop: -24,
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-    backgroundColor: "rgba(0,0,0,0.5)",
-    alignItems: "center",
-    justifyContent: "center",
-    zIndex: 10,
-  },
-  galleryArrowLeft: {
-    left: 12,
-  },
-  galleryArrowRight: {
-    right: 12,
-  },
-  imageDotsRow: {
-    flexDirection: "row",
-    justifyContent: "center",
-    gap: 6,
-    position: "absolute",
-    bottom: 12,
-    alignSelf: "center",
-  },
-  imageDot: {
-    width: 6,
-    height: 6,
-    borderRadius: 3,
-    backgroundColor: "rgba(255,255,255,0.4)",
-  },
-  imageDotActive: {
-    backgroundColor: "#fff",
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-  },
-  galleryReviewOverlay: {
-    paddingHorizontal: spacing.lg,
-    paddingTop: spacing.base,
-    paddingBottom: spacing.xl,
-    backgroundColor: "rgba(0,0,0,0.6)",
-  },
-  galleryReviewHeader: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: spacing.xs,
-    gap: spacing.xs,
-  },
-  galleryReviewAuthor: {
-    color: "#fff",
-    fontSize: 15,
     fontWeight: "700",
   },
   galleryVerifiedBadge: {

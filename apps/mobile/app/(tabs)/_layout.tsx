@@ -17,13 +17,15 @@ import { TabBarVisibilityProvider } from "@/src/components/layout/TabBarVisibili
 import { useTranslation } from "react-i18next";
 import { useMessagesStore } from "@/src/store/useMessagesStore";
 import { useRegisterPushToken } from "@/src/hooks/useRegisterPushToken";
+import Animated, { useAnimatedStyle, withSpring, useSharedValue, withSequence, withTiming } from 'react-native-reanimated';
+import { useEffect } from "react";
 
 const { Navigator } = createMaterialTopTabNavigator();
 
 // Create custom Expo Router Layout Context for Top Tabs
 const TopTabs = withLayoutContext<any, typeof Navigator, any, any>(Navigator);
 
-function TabIcon({ name, color }: { name: IconSymbolName; focused: boolean; color: string }) {
+function TabIcon({ name, color, focused }: { name: IconSymbolName; focused: boolean; color: string }) {
   return (
     <IconSymbol
       name={name}
@@ -107,7 +109,7 @@ export default function TabsLayout() {
           options={{
             title: t('tabs.messages'),
             tabBarIcon: ({ color, focused }: { color: string, focused: boolean }) => <TabIcon name="paperplane" focused={focused} color={color} />,
-            tabBarBadge: unreadMessagesCount > 0 ? () => <></> : undefined, // Badge rendering will be handled in custom tab bar if needed, or by default
+            tabBarBadge: unreadMessagesCount > 0 ? () => <></> : undefined,
           }}
         />
         <TopTabs.Screen

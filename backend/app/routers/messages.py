@@ -84,7 +84,7 @@ def _get_messaging_permission(
         )
 
     receiver = db.query(models.User).filter(models.User.id == receiver_id).first()
-    if not receiver:
+    if not receiver or not receiver.is_active:
         return schemas.ConversationPermission(
             can_send=False, can_send_media=False, hide_read_receipt=True,
             reason="receiver_not_found"
@@ -210,7 +210,7 @@ def open_or_create_conversation(
         raise HTTPException(status_code=400, detail="Kendinizle konuşamazsınız.")
 
     other_user = db.query(models.User).filter(models.User.id == other_user_id).first()
-    if not other_user:
+    if not other_user or not other_user.is_active:
         raise HTTPException(status_code=404, detail="Kullanıcı bulunamadı.")
 
     _raise_if_users_blocked(db, current_user.id, other_user_id)
@@ -285,8 +285,15 @@ def get_conversations(
     for conv in convs:
         other_user_id = conv.user2_id if conv.user1_id == current_user.id else conv.user1_id
         other_user = db.query(models.User).filter(models.User.id == other_user_id).first()
-        if not other_user:
-            continue
+        
+        display_name = "Kullanıcı bulunamadı"
+        avatar_url = None
+        
+        if other_user:
+            is_blocked = crud.users_block_each_other(db, current_user.id, other_user_id)
+            if not is_blocked and other_user.is_active:
+                display_name = other_user.first_name or other_user.username or "Kullanıcı"
+                avatar_url = other_user.avatar_url
 
         unread_count = db.query(models.Message).filter(
             models.Message.conversation_id == conv.id,
@@ -311,9 +318,9 @@ def get_conversations(
 
         result.append(schemas.ConversationResponse(
             id=conv.id,
-            other_user_display_name=other_user.first_name or other_user.username or "Kullanıcı",
-            other_user_photo=other_user.avatar_url,
-            other_user_id=other_user.id,
+            other_user_display_name=display_name,
+            other_user_photo=avatar_url,
+            other_user_id=other_user_id,
             place_name=conv.place_name,
             is_active=conv.is_active,
             created_at=conv.created_at,

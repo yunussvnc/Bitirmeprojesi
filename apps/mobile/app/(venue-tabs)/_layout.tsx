@@ -22,7 +22,7 @@ export default function VenueTabsLayout() {
   return (
     <TabBarVisibilityProvider>
       <Tabs
-        tabBar={(props) => <AnimatedTabBar {...props} />}
+        tabBar={(props: any) => <AnimatedTabBar {...props} />}
         screenOptions={{
           headerShown: false,
           tabBarPosition: "bottom",

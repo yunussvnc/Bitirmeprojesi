@@ -16,17 +16,20 @@ Notifications.setNotificationHandler({
   } as any),
 });
 
+import { getSavedPlaces } from '@/src/services/savedService';
+import { useGeofenceStore } from '@/src/store/useGeofenceStore';
+
 export const PushNotificationProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const user = useAuthStore(s => s.user);
   const router = useRouter();
   const notificationListener = useRef<Notifications.EventSubscription | null>(null);
   const responseListener = useRef<Notifications.EventSubscription | null>(null);
+  const setWatchedPlaces = useGeofenceStore(s => s.setWatchedPlaces);
 
   useEffect(() => {
     if (user) {
       registerForPushNotificationsAsync().then(token => {
         if (token) {
-          // Backend'e token'ı kaydet
           apiPost('/auth/device-token', {
             token: token,
             platform: Platform.OS,
@@ -34,11 +37,28 @@ export const PushNotificationProvider: React.FC<{ children: React.ReactNode }> =
           }).catch((err: any) => console.log('Push token register error:', err));
         }
       });
-      // Ön plan bölgesel bildirim (geofencing) izlemesini başlat
-      startGeofencing().catch(err => console.log('Geofence start error:', err));
+      
+      // Kaydedilmiş mekanları al ve Geofence izlemeye ekle
+      getSavedPlaces(1, 100)
+        .then((res) => {
+          const watched = res.items
+            .filter(p => p.latitude && p.longitude)
+            .map(p => ({
+              id: Number(p.id),
+              name: p.name,
+              latitude: p.latitude as number,
+              longitude: p.longitude as number,
+              radiusMeters: 500, // 500 metre varsayılan
+              campaignText: p.campaign_text
+            }));
+          setWatchedPlaces(watched);
+          // İzlemeyi başlat
+          startGeofencing().catch(err => console.log('Geofence start error:', err));
+        })
+        .catch(err => console.log('Geofence sync error:', err));
+
     } else {
-      // Çıkış yapıldıysa token temizliği logout fonksiyonunda hallediliyor
-      // Bölgesel bildirimi durdur
+      setWatchedPlaces([]);
       stopGeofencing().catch(err => console.log('Geofence stop error:', err));
     }
 

@@ -31,6 +31,7 @@
         "NSPhotoLibraryUsageDescription": "Profil fotoğrafınızı seçmek ve mekan değerlendirmelerinize veya hikayelerinize galerinizden fotoğraf ekleyebilmeniz için galeri erişimine ihtiyaç duyuyoruz.",
         "NSCameraUsageDescription": "Anlık hikaye çekmek ve mekan değerlendirmelerinize canlı fotoğraf/video ekleyebilmeniz için kamera erişimine ihtiyaç duyuyoruz.",
         "NSMicrophoneUsageDescription": "Hikaye veya değerlendirmeleriniz için video çekerken ortam seslerini kaydedebilmek için mikrofon erişimine ihtiyaç duyuyoruz.",
+        "NSSpeechRecognitionUsageDescription": "Sesli arama yapabilmeniz için konuşma tanıma özelliğine erişim gereklidir.",
         "UIBackgroundModes": [
           "remote-notification",
           "remote-notification"
@@ -142,7 +143,8 @@
           "organization": "asemos-org"
         }
       ],
-      "@sentry/react-native"
+      "@sentry/react-native",
+      "expo-speech-recognition"
     ],
     "experiments": {
       "typedRoutes": true

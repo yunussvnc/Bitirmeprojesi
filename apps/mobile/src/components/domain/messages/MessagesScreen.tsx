@@ -88,7 +88,7 @@ export default function MessagesScreen() {
                     // Mevcut konuşma — profil alanlarını (avatar, isim) her zaman güncelle,
                     // son mesaj ve okunmamış durumunu da senkronize et
                     store.updateConversationMeta(chatId, {
-                        avatar: freshAvatar ?? existing.avatar,
+                        avatar: bc.other_user_photo !== undefined ? (bc.other_user_photo || '') : existing.avatar,
                         name: bc.other_user_display_name || existing.name,
                         targetUserId: bc.other_user_id,
                     });

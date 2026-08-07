@@ -50,7 +50,7 @@ type GeofenceState = {
 export const useGeofenceStore = create<GeofenceState>()(
   persist(
     (set, get) => ({
-      isGeofenceEnabled: false,
+      isGeofenceEnabled: true,
       defaultRadiusMeters: 100,
       watchedPlaces: [],
       triggeredToday: {},

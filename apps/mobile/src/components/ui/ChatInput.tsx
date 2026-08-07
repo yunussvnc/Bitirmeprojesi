@@ -4,10 +4,13 @@
  * Kompakt çok satırlı metin + gönder butonu. Öneri listesi altta rahat görünsün diye
  * yükseklik sınırlı (max ~2 satır). LLM entegrasyonu sonrası aynı bileşen kullanılacak.
  *
+ * Sesli giriş: Apple SFSpeechRecognizer (cihaz üzerinde, backend gerektirmez).
+ * Native modül yoksa (eski build) mikrofon butonu otomatik gizlenir.
+ *
  * @module components/ui/ChatInput
  */
 
-import React from 'react';
+import React, { useRef, useState, useCallback, useEffect } from 'react';
 import {
   View,
   TextInput,
@@ -15,11 +18,33 @@ import {
   StyleSheet,
   ViewStyle,
   Keyboard,
+  TextInput as NativeTextInput,
 } from 'react-native';
+import Toast from 'react-native-toast-message';
 import { useTheme } from '@/src/hooks/useTheme';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
 import { radius } from '@/src/constants/design';
 import { lightImpact } from '@/src/utils/haptics';
+
+// ---------- Lazy / Safe import for expo-speech-recognition ----------
+// Native modül yoksa (eski build) uygulama çökmemeli.
+let SpeechModule: any = null;
+let useSpeechEvent: any = null;
+let speechAvailable = false;
+
+try {
+  const sr = require('expo-speech-recognition');
+  SpeechModule = sr.ExpoSpeechRecognitionModule;
+  useSpeechEvent = sr.useSpeechRecognitionEvent;
+  speechAvailable = !!SpeechModule;
+} catch {
+  // Native modül yok — sessizce devam et
+}
+
+// Stub hook: native modül yokken crash önler
+function useNoopSpeechEvent(_event: string, _handler: any) {
+  // intentionally empty
+}
 
 const MIN_HEIGHT = 64;
 const MAX_HEIGHT = 140;
@@ -53,6 +78,101 @@ export function ChatInput({
 }: ChatInputProps) {
   const { colors } = useTheme();
 
+  const inputRef = useRef<NativeTextInput>(null);
+  const [isListening, setIsListening] = useState(false);
+
+  // Use the real hook or the no-op stub
+  const useEvent = speechAvailable ? useSpeechEvent : useNoopSpeechEvent;
+
+  // ---------- Speech Recognition Events ----------
+
+  useEvent('start', () => {
+    setIsListening(true);
+  });
+
+  useEvent('end', () => {
+    setIsListening(false);
+  });
+
+  useEvent('result', (ev: any) => {
+    if (ev.results && ev.results.length > 0) {
+      const transcript = ev.results[0]?.transcript ?? '';
+      if (transcript) {
+        onChangeText(transcript);
+      }
+    }
+  });
+
+  useEvent('error', (ev: any) => {
+    console.error('[SpeechRecognition] Error:', ev.error, ev.message);
+    setIsListening(false);
+    Toast.show({
+      type: 'error',
+      text1: 'Ses tanıma hatası',
+      text2: ev.message || 'Lütfen tekrar deneyin.',
+      position: 'top',
+      topOffset: 60,
+    });
+  });
+
+  // ---------- Start / Stop ----------
+
+  const startListening = useCallback(async () => {
+    if (!speechAvailable || !SpeechModule) return;
+    try {
+      const result = await SpeechModule.requestPermissionsAsync();
+      if (!result.granted) {
+        Toast.show({
+          type: 'error',
+          text1: 'İzin gerekli',
+          text2: 'Mikrofon ve konuşma tanıma izni verilmedi.',
+          position: 'top',
+          topOffset: 60,
+        });
+        return;
+      }
+
+      lightImpact();
+
+      SpeechModule.start({
+        lang: 'tr-TR',
+        interimResults: true,
+        continuous: true,
+      });
+
+      Toast.show({
+        type: 'info',
+        text1: '🎙️ Dinliyorum...',
+        text2: 'Konuşmanız bittiğinde butona tekrar basın.',
+        position: 'top',
+        topOffset: 60,
+      });
+    } catch (err) {
+      console.error('[SpeechRecognition] Start error:', err);
+    }
+  }, []);
+
+  const stopListening = useCallback(() => {
+    if (!speechAvailable || !SpeechModule) return;
+    try {
+      SpeechModule.stop();
+      lightImpact();
+      Toast.hide();
+    } catch (err) {
+      console.error('[SpeechRecognition] Stop error:', err);
+    }
+  }, []);
+
+  const toggleListening = useCallback(() => {
+    if (isListening) {
+      stopListening();
+    } else {
+      startListening();
+    }
+  }, [isListening, startListening, stopListening]);
+
+  // ---------- Submit ----------
+
   const handleSubmit = () => {
     Keyboard.dismiss();
     const trimmed = value.trim();
@@ -80,6 +200,7 @@ export function ChatInput({
       ]}
     >
       <TextInput
+        ref={inputRef}
         value={value}
         onChangeText={onChangeText}
         placeholder={placeholder}
@@ -100,35 +221,68 @@ export function ChatInput({
           },
         ]}
       />
-      {loading && onStop ? (
-        <TouchableOpacity
-          onPress={handleStop}
-          style={[styles.submitBtn, { backgroundColor: colors.surface.elevated, borderColor: colors.surface.border }]}
-          activeOpacity={0.8}
-        >
-          <View style={[styles.stopIcon, { backgroundColor: colors.text.primary }]} />
-        </TouchableOpacity>
-      ) : (
-        <TouchableOpacity
-          onPress={handleSubmit}
-          disabled={!canSubmit}
-          style={[
-            styles.submitBtn,
-            {
-              backgroundColor: canSubmit ? colors.accent.primary : colors.surface.elevated,
-              borderColor: canSubmit ? colors.accent.primary : colors.surface.border,
-              opacity: canSubmit ? 1 : 0.7,
-            },
-          ]}
-          activeOpacity={0.8}
-        >
-          <IconSymbol
-            name="paperplane.fill"
-            size={18}
-            color={canSubmit ? colors.accent.onPrimary : colors.text.tertiary}
-          />
-        </TouchableOpacity>
-      )}
+
+      <View style={styles.rightActions}>
+        {/* Mikrofon butonu: sadece native modül varsa göster */}
+        {speechAvailable && !value.trim() && !loading && (
+          <TouchableOpacity
+            onPress={toggleListening}
+            activeOpacity={0.7}
+            style={[
+              styles.micButton,
+              isListening ? { backgroundColor: colors.accent.primary } : null,
+            ]}
+          >
+            <IconSymbol
+              name={isListening ? 'stop.fill' : 'mic.fill'}
+              size={20}
+              color={isListening ? colors.accent.onPrimary : colors.text.secondary}
+            />
+          </TouchableOpacity>
+        )}
+
+        {loading ? (
+          <TouchableOpacity
+            onPress={handleStop}
+            style={[
+              styles.actionBtn,
+              {
+                backgroundColor: colors.surface.elevated,
+                borderColor: colors.surface.border,
+              },
+            ]}
+            activeOpacity={0.8}
+          >
+            <View
+              style={[styles.stopIcon, { backgroundColor: colors.text.primary }]}
+            />
+          </TouchableOpacity>
+        ) : (
+          <TouchableOpacity
+            onPress={handleSubmit}
+            disabled={!canSubmit}
+            style={[
+              styles.actionBtn,
+              {
+                backgroundColor: canSubmit
+                  ? colors.accent.primary
+                  : colors.surface.elevated,
+                borderColor: canSubmit
+                  ? colors.accent.primary
+                  : colors.surface.border,
+                opacity: canSubmit ? 1 : 0.7,
+              },
+            ]}
+            activeOpacity={0.8}
+          >
+            <IconSymbol
+              name="paperplane.fill"
+              size={18}
+              color={canSubmit ? colors.accent.onPrimary : colors.text.tertiary}
+            />
+          </TouchableOpacity>
+        )}
+      </View>
     </View>
   );
 }
@@ -153,14 +307,25 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlignVertical: 'center',
   },
-  submitBtn: {
+  rightActions: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+  },
+  micButton: {
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  actionBtn: {
     width: 40,
     height: 40,
     borderRadius: 20,
     borderWidth: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    marginLeft: 8,
   },
   stopIcon: {
     width: 12,

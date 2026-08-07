@@ -23,7 +23,7 @@ run-backend: db
 	cd backend && source venv/bin/activate && python migrate.py && python seed_db.py && uvicorn main:app --reload --host 0.0.0.0 --port 8000
 
 run-ai: ai-db
-	cd ai-llm && source venv/bin/activate && uvicorn src.main:app --reload --port 8001
+	cd ai-llm && source venv/bin/activate && uvicorn src.main:app --reload --host 0.0.0.0 --port 8001
 
 run-mobile:
 	cd apps/mobile && npm start
@@ -47,9 +47,9 @@ stop-db:
 # Tüm projelerin bağımlılıklarını sıfırdan kurmak için
 install:
 	@echo "Backend gereksinimleri kuruluyor..."
-	cd backend && python3 -m venv venv && source venv/bin/activate && pip install -r requirements.txt
+	cd backend && python3.12 -m venv venv && source venv/bin/activate && uv pip install -r requirements.txt
 	@echo "AI-LLM gereksinimleri kuruluyor..."
-	cd ai-llm && python3 -m venv venv && source venv/bin/activate && pip install -r requirements.txt
+	cd ai-llm && python3.12 -m venv venv && source venv/bin/activate && uv pip install -r requirements.txt
 	@echo "Mobile gereksinimleri kuruluyor..."
 	cd apps/mobile && npm install
 	@echo "Kurulum tamamlandı!"

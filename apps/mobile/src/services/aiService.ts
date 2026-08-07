@@ -31,13 +31,12 @@ function resolveAIBaseUrl(): string {
   if (override && override.startsWith('http')) return override.replace(/\/$/, '');
 
   if (__DEV__) {
-    // iOS Simulator: localhost; physical device: expo hostUri or EXPO_PUBLIC_DEV_API_HOST
-    if (Platform.OS === 'web') return 'http://localhost:8080';
-    // Expo'nun bağlı olduğu host'u kullan (telefon + PC aynı Wi-Fi'da)
+    if (Platform.OS === 'web') return 'http://localhost:8001';
     const expoHost = Constants.expoConfig?.hostUri?.split(':')[0];
-    if (expoHost) return `http://${expoHost}:8080`;
-    // Fallback: .env'den veya local IP
-    return `http://${process.env.EXPO_PUBLIC_DEV_API_HOST?.split(':')[0] ?? '192.168.1.36'}:8080`;
+    // If expoHost is 127.0.0.1, it means we are using a local tunnel, we should use the actual local IP instead
+    if (expoHost && expoHost !== '127.0.0.1') return `http://${expoHost}:8001`;
+    // The user's Mac IP seems to be 192.168.1.4 based on Expo logs
+    return `http://${process.env.EXPO_PUBLIC_DEV_API_HOST?.split(':')[0] ?? '192.168.1.4'}:8001`;
   }
   return process.env.EXPO_PUBLIC_AI_URL ?? 'https://ai.asemos.tr';
 }
@@ -212,4 +211,39 @@ export async function imageSearch(
     logger.error('[aiService] imageSearch hatası:', error);
     throw error;
   }
+}
+/**
+ * Ses kaydını metne çevirmek için Whisper (Groq) API çağrısı
+ * @param uri Ses dosyasının yerel cihazdaki URI adresi (file://...)
+ */
+export async function transcribeAudio(uri: string, language: string = 'tr'): Promise<{ text: string }> {
+  const url = `${AI_BASE_URL}/api/v1/transcribe`;
+  const formData = new FormData();
+
+  formData.append('file', {
+    uri: uri,
+    type: uri.endsWith('.wav') ? 'audio/wav' : 'audio/m4a',
+    name: `audio.${uri.split('.').pop() || 'm4a'}`,
+  } as any);
+
+  formData.append('language', language);
+
+  logger.info(`[aiService] Ses transkripsiyonu başlatıldı: ${url}`);
+  
+  const res = await fetch(url, {
+    method: 'POST',
+    body: formData,
+    headers: {
+      Accept: 'application/json',
+      // FormData kendisi boundary ayarlar, Content-Type manuel ezilmemeli!
+    },
+  });
+
+  if (!res.ok) {
+    const text = await res.text();
+    logger.error(`[aiService] Transcribe hatası: ${res.status}`, text);
+    throw new Error(`Ses çevrilemedi: ${res.status}`);
+  }
+
+  return await res.json();
 }

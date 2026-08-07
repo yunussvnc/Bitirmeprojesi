@@ -46,6 +46,7 @@ import { createReport } from "@/src/services/moderationService";
 import { useTranslation } from "react-i18next";
 import { useUploadPipelineStore } from "@/src/store/useUploadPipelineStore";
 import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
+import { RadialMenu } from "@/src/components/ui/RadialMenu";
 
 export default function FeedScreen() {
   const { t } = useTranslation();
@@ -143,17 +144,6 @@ export default function FeedScreen() {
         }
 
         const res = await getFeed(activeCursor, PAGE_SIZE, filter);
-        const pendingSharedPostId = useAppStore.getState().pendingSharedPostId;
-
-        if (refresh && pendingSharedPostId) {
-          try {
-            const sharedPost = await getPost(pendingSharedPostId);
-            useAppStore.getState().clearPendingSharedPostId();
-            res.items = [sharedPost, ...res.items.filter((post) => post.id !== pendingSharedPostId)];
-          } catch (e) {
-            console.log("Paylaşılan gönderi bulunamadı veya hata:", e);
-          }
-        }
 
         // nextCursor'u hem state hem ref olarak sakla
         nextCursorRef.current = res.next_cursor;
@@ -228,6 +218,22 @@ export default function FeedScreen() {
   useFocusEffect(
     useCallback(() => {
       refreshUnread();
+      
+      const pendingSharedPostId = useAppStore.getState().pendingSharedPostId;
+      if (pendingSharedPostId) {
+        getPost(pendingSharedPostId).then(sharedPost => {
+          useAppStore.getState().clearPendingSharedPostId();
+          setPosts(prev => {
+            const exists = prev.some(p => p.id === sharedPost.id);
+            if (exists) return prev;
+            return [sharedPost, ...prev];
+          });
+          flatListRef.current?.scrollToOffset({ offset: 0, animated: true });
+        }).catch(e => {
+          console.log("Paylaşılan gönderi bulunamadı veya hata:", e);
+          useAppStore.getState().clearPendingSharedPostId();
+        });
+      }
     }, [refreshUnread])
   );
 
@@ -646,6 +652,7 @@ export default function FeedScreen() {
           showsVerticalScrollIndicator={false}
           onEndReached={handleLoadMore}
           onEndReachedThreshold={0.3}
+          // @ts-ignore: Typings mismatch
           estimatedItemSize={500}
         />
 
@@ -699,6 +706,7 @@ export default function FeedScreen() {
             refreshUnread();
           }}
         />
+
 
         <CommentBottomSheet
           visible={!!commentPostId}

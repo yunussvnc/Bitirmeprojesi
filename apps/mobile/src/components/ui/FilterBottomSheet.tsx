@@ -24,6 +24,7 @@ import { IconSymbol } from '@/src/components/ui/icon-symbol';
 import { lightImpact } from '@/src/utils/haptics';
 import { Button } from "@/src/components/ui/Button";
 import { useTranslation } from "react-i18next";
+import { GlassCard } from '@/src/components/ui/GlassCard';
 
 const { height: SCREEN_HEIGHT } = Dimensions.get('window');
 const SHEET_HEIGHT = SCREEN_HEIGHT * 0.42;
@@ -344,12 +345,13 @@ export function FilterBottomSheet({
           styles.sheet,
           {
             height: SHEET_HEIGHT,
-            backgroundColor: colors.background.primary,
+            backgroundColor: 'transparent',
             transform: [{ translateY }],
             paddingBottom: insets.bottom || 24,
           },
         ]}
       >
+        <GlassCard intensity={80} style={StyleSheet.absoluteFillObject} />
         {/* Handle — aşağı çekince kapatır */}
         <View style={styles.handleRow} {...panResponder.panHandlers}>
           <View style={[styles.handle, { backgroundColor: colors.surface.border }]} />

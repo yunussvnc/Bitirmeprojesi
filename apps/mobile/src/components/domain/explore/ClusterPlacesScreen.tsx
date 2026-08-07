@@ -27,7 +27,7 @@ import { router, useLocalSearchParams } from "expo-router";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTheme } from "@/src/hooks/useTheme";
 import { SearchInput } from "@/src/components/ui/Input";
-import { AnimatedPlaceCard } from "@/src/components/ui";
+import { AnimatedPlaceCard, PlaceCardSkeleton } from "@/src/components/ui";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { lightImpact } from "@/src/utils/haptics";
 import { getPlaceImageSource, hasPlaceImage } from "@/src/utils/placeImages";
@@ -228,6 +228,7 @@ export default function ClusterPlacesScreen() {
     ({ item, index }: ListRenderItemInfo<Place>) => (
       <AnimatedPlaceCard
         index={index}
+        placeId={item.id}
         image={getPlaceImageSource(item)}
         imagePlaceholder={!hasPlaceImage(item)}
         title={item.name}
@@ -438,11 +439,8 @@ export default function ClusterPlacesScreen() {
       {/* Place List */}
       <View style={{ flex: 1, width: "100%" }}>
         {isLoadingPlaces ? (
-          <View style={styles.loadingContainer}>
-            <ActivityIndicator size="large" color={colors.accent.primary} />
-            <Text style={[styles.loadingText, { color: colors.text.secondary }]}>
-              {t("explore.loading_places", "Mekanlar yükleniyor...")}
-            </Text>
+          <View style={{ padding: 16 }}>
+            <PlaceCardSkeleton count={4} />
           </View>
         ) : visiblePlaces.length === 0 ? (
           <View style={styles.emptyContainer}>

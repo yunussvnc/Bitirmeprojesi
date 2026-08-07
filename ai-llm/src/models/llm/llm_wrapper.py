@@ -168,6 +168,43 @@ class GroqWrapper(LLMWrapper):
         logger.info(f"[GroqWrapper] Async yanıt üretildi ({len(content)} karakter)")
         return content
 
+    # ---- audio (whisper) ----
+
+    async def transcribe_audio_async(
+        self,
+        audio_bytes: bytes,
+        filename: str = "audio.m4a",
+        language: Optional[str] = "tr"
+    ) -> str:
+        import httpx
+
+        files = {
+            "file": (filename, audio_bytes, "audio/mp4" if filename.endswith(".m4a") else "audio/wav")
+        }
+        data = {
+            "model": "whisper-large-v3",
+            "language": language,
+            "response_format": "json"
+        }
+
+        async with httpx.AsyncClient(timeout=15.0) as client:
+            resp = await client.post(
+                "https://api.groq.com/openai/v1/audio/transcriptions",
+                headers={
+                    "Authorization": f"Bearer {self.api_key}",
+                },
+                files=files,
+                data=data,
+            )
+
+        if resp.status_code != 200:
+            logger.error(f"[GroqWrapper] Audio Transcribe Error: {resp.status_code} - {resp.text}")
+            raise RuntimeError(f"Groq Audio API hatası: {resp.status_code}")
+
+        text = resp.json().get("text", "")
+        logger.info(f"[GroqWrapper] Ses metne çevrildi ({len(text)} karakter)")
+        return text
+
 
 # ==================== KATMAN 2: LOCAL HuggingFace ====================
 
@@ -353,16 +390,27 @@ class LayeredLLMWrapper(LLMWrapper):
         system_prompt: Optional[str] = None,
         temperature: Optional[float] = None,
     ) -> str:
-        if self._groq:
-            try:
-                result = await self._groq.generate_async(prompt, context, system_prompt, temperature)
-                logger.info("[LayeredLLM] Async yanıt: Groq OK")
-                return result
-            except Exception as e:
-                logger.warning(f"[LayeredLLM] Groq başarısız -> Local fallback: {e}")
+        """Asenkron çok katmanlı üretim"""
+        try:
+            return await self._groq.generate_async(prompt, context, system_prompt, temperature)
+        except Exception as e:
+            logger.warning(f"[LayeredLLM] Groq (async) çakıldı ({str(e)[:50]}). Fallback deneniyor...")
+            return await self._local.generate_async(prompt, context, system_prompt, temperature)
 
-        logger.info("[LayeredLLM] Async yanıt: Local HuggingFace")
-        return await self._local.generate_async(prompt, context, system_prompt, temperature)
+    async def transcribe_audio_async(
+        self,
+        audio_bytes: bytes,
+        filename: str = "audio.m4a",
+        language: Optional[str] = "tr"
+    ) -> str:
+        """Asenkron sesli çeviri (Şimdilik sadece Groq Whisper üzerinden)"""
+        if not self._groq:
+            raise RuntimeError("Ses metne çevrilemedi: Groq API yapılandırılmamış.")
+        try:
+            return await self._groq.transcribe_audio_async(audio_bytes, filename, language)
+        except Exception as e:
+            logger.error(f"[LayeredLLM] Groq Transcribe (async) çakıldı: {str(e)}")
+            raise RuntimeError("Ses metne çevrilemedi")
 
     @property
     def active_provider(self) -> str:

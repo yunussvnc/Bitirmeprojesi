@@ -296,7 +296,7 @@ const FeedCardComponent = ({
               heartAnimStyle,
             ]}
           >
-            <Text style={styles.heartEmoji}>❤️</Text>
+            <IconSymbol name="heart.fill" size={72} color="#ff375f" />
           </Animated.View>
         </Animated.View>
 

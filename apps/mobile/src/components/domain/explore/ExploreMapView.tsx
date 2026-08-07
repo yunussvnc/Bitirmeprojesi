@@ -18,9 +18,11 @@ import {
   InteractionManager,
   Pressable,
 } from 'react-native';
+import { FlashList, ListRenderItemInfo } from '@shopify/flash-list';
 import { Map, Camera, GeoJSONSource, Layer, UserLocation, type CameraRef, type GeoJSONSourceRef } from '@maplibre/maplibre-react-native';
 import * as Location from 'expo-location';
 import { router } from 'expo-router';
+import LottieView from 'lottie-react-native';
 import {
   ISTANBUL_AI_DISTRICTS,
   getIstanbulDistrictsForPicker,
@@ -30,6 +32,7 @@ import { CATEGORY_KEYS, STATUS_KEYS, getTranslatedCategory } from '@/src/utils/c
 import { useTheme } from '@/src/hooks/useTheme';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
 import { SearchInput } from '@/src/components/ui/Input';
+import { GlassCard } from '@/src/components/ui/GlassCard';
 import { lightImpact } from '@/src/utils/haptics';
 import { PlaceMediaPanel } from './PlaceMediaPanel';
 import { getPlaceStatus, type PlaceStatusType } from '@/src/utils/placeStatus';
@@ -37,6 +40,7 @@ import { useAppStore } from '@/src/store/useAppStore';
 import { Place, logInteraction } from '@/src/services/mekanService';
 import { useTranslation } from 'react-i18next';
 import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
+import { ARView } from './ARView';
 
 const ISTANBUL_CENTER = {
   latitude: 41.0082,
@@ -149,7 +153,12 @@ export function ExploreMapView({ places, loading, onLoadPlaces }: ExploreMapView
       }
       // İlçe filtresi
       if (selectedDistrict) {
-        if (!p.city || normalizeText(p.city) !== normalizeText(selectedDistrict.apiLocation)) {
+        const addressText = p.address ? normalizeText(p.address) : '';
+        const cityText = p.city ? normalizeText(p.city) : '';
+        const hasMatch = selectedDistrict.aliases.some(alias => 
+          addressText.includes(alias) || cityText.includes(alias)
+        );
+        if (!hasMatch) {
           return false;
         }
       }
@@ -385,8 +394,10 @@ export function ExploreMapView({ places, loading, onLoadPlaces }: ExploreMapView
             }
           }}
         >
+
           {/* Küme (Cluster) Dış Hale (Glow/Soft Ring) */}
           <Layer
+            key="clustersGlow"
             id="clustersGlow"
             type="circle"
             filter={['has', 'point_count']}
@@ -407,6 +418,7 @@ export function ExploreMapView({ places, loading, onLoadPlaces }: ExploreMapView
 
           {/* Küme (Cluster) Katmanları (Ana İç Daire) */}
           <Layer
+            key="clusters"
             id="clusters"
             type="circle"
             filter={['has', 'point_count']}
@@ -427,6 +439,7 @@ export function ExploreMapView({ places, loading, onLoadPlaces }: ExploreMapView
             }}
           />
           <Layer
+            key="cluster-count"
             id="cluster-count"
             type="symbol"
             filter={['has', 'point_count']}
@@ -441,6 +454,7 @@ export function ExploreMapView({ places, loading, onLoadPlaces }: ExploreMapView
 
           {/* Tekil Nokta (Mekan) Katmanları - Dış Daire (Küme rengiyle aynı) */}
           <Layer
+            key="placesCircles"
             id="placesCircles"
             type="circle"
             filter={['!', ['has', 'point_count']]}
@@ -453,6 +467,7 @@ export function ExploreMapView({ places, loading, onLoadPlaces }: ExploreMapView
           />
           {/* Tekil Nokta (Mekan) Katmanları - İç Nokta (Durum rengi) */}
           <Layer
+            key="placesCirclesInner"
             id="placesCirclesInner"
             type="circle"
             filter={['!', ['has', 'point_count']]}
@@ -462,6 +477,7 @@ export function ExploreMapView({ places, loading, onLoadPlaces }: ExploreMapView
             }}
           />
           <Layer
+            key="placesLabels"
             id="placesLabels"
             type="symbol"
             minzoom={14} // 13'tü, çok fazla mekan isminin üst üste binmesini önlemek için 14 yaptık
@@ -487,6 +503,26 @@ export function ExploreMapView({ places, loading, onLoadPlaces }: ExploreMapView
         )}
       </Map>
 
+      {/* ── Empty State ── */}
+      {visiblePlaces.length === 0 && !loading && (
+        <View style={styles.emptyStateContainer} pointerEvents="none">
+          <GlassCard intensity={80} tint={isDark ? "dark" : "light"} borderRadius={24} style={styles.emptyStateCard}>
+            <LottieView 
+              source={require('@/assets/animations/empty-box.json')}
+              autoPlay
+              loop
+              style={styles.emptyStateLottie}
+            />
+            <Text style={[styles.emptyStateTitle, { color: colors.text.primary }]}>
+              {t('explore.no_results', 'Sonuç Bulunamadı')}
+            </Text>
+            <Text style={[styles.emptyStateDesc, { color: colors.text.secondary }]}>
+              {t('explore.no_results_desc', 'Filtrelerinize uygun mekan bulamadık. Filtreleri temizlemeyi deneyin.')}
+            </Text>
+          </GlassCard>
+        </View>
+      )}
+
       {/* Filtre ve Arama Arka Planı (Tüm ekranı kaplar) */}
       {showFilter && (
         <Pressable
@@ -498,9 +534,15 @@ export function ExploreMapView({ places, loading, onLoadPlaces }: ExploreMapView
       <View
         style={[
           styles.searchWrap,
-          { backgroundColor: colors.background.secondary + 'CC' },
+          { backgroundColor: 'transparent' }, // GlassCard provides the background
         ]}
       >
+        <GlassCard
+          tint={isDark ? 'dark' : 'light'}
+          intensity={40}
+          borderRadius={0}
+          style={StyleSheet.absoluteFillObject}
+        />
         <View style={styles.searchRow}>
           <View style={styles.searchInputFlex}>
             <SearchInput
@@ -740,7 +782,7 @@ export function ExploreMapView({ places, loading, onLoadPlaces }: ExploreMapView
                 showsVerticalScrollIndicator={false}
                 keyboardShouldPersistTaps="handled"
               >
-                {filteredPlaces.map((place) => {
+                {filteredPlaces.slice(0, 50).map((place) => {
                   const placeStatus = getPlaceStatus(place.opening_time, place.closing_time);
                   return (
                     <TouchableOpacity
@@ -1150,7 +1192,36 @@ const styles = StyleSheet.create({
     gap: 6,
   },
   clearDistrictBtn: {
-    padding: 2,
+    padding: 4,
+  },
+  // ── Empty State Styles ──
+  emptyStateContainer: {
+    ...StyleSheet.absoluteFillObject,
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 10,
+  },
+  emptyStateCard: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: 24,
+    width: 260,
+  },
+  emptyStateLottie: {
+    width: 120,
+    height: 120,
+    marginBottom: 16,
+  },
+  emptyStateTitle: {
+    fontSize: 18,
+    fontWeight: '700',
+    marginBottom: 8,
+    textAlign: 'center',
+  },
+  emptyStateDesc: {
+    fontSize: 14,
+    textAlign: 'center',
+    lineHeight: 20,
   },
   filterBackdrop: {
     position: 'absolute',

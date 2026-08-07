@@ -15,7 +15,7 @@ os.environ["VECLIB_MAXIMUM_THREADS"] = "1"
 os.environ["NUMEXPR_NUM_THREADS"] = "1"
 
 import uuid
-from fastapi import FastAPI, HTTPException, BackgroundTasks, Request  # type: ignore[import]
+from fastapi import FastAPI, HTTPException, BackgroundTasks, Request, UploadFile, File, Form  # type: ignore[import]
 from pydantic import BaseModel  # type: ignore[import]
 from typing import List, Optional, Dict, Union
 from contextlib import asynccontextmanager
@@ -2713,6 +2713,23 @@ async def generate_review_analysis_llm(place_name: str, reviews: List[str], lang
         except Exception as fallback_e:
             print(f"[ReviewInsight] Fallback LLM also failed: {fallback_e}")
             return {}
+
+@app.post("/api/v1/transcribe")
+async def transcribe_audio(
+    file: UploadFile = File(...),
+    language: Optional[str] = Form("tr")
+):
+    """Gelen ses dosyasını Groq Whisper üzerinden metne çevirir."""
+    llm = _get_llm()
+    try:
+        audio_bytes = await file.read()
+        filename = file.filename or "audio.m4a"
+        # LayeredLLMWrapper üzerinden asenkron transcribe çağır
+        text = await llm.transcribe_audio_async(audio_bytes, filename, language)
+        return {"text": text}
+    except Exception as e:
+        logger.error(f"[Transcribe] Hata: {str(e)}")
+        raise HTTPException(status_code=500, detail="Ses metne çevrilemedi")
 
 
 @app.post("/api/analyze-place-reviews")

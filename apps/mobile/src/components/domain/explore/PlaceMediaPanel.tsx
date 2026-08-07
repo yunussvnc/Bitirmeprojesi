@@ -362,11 +362,12 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
             onPress={goToPlaceDetail}
             activeOpacity={0.9}
           >
-            <Image
-              source={heroImage}
+            <Animated.Image
+              source={heroImage as any}
               style={styles.heroImage}
-              contentFit="contain"
-              cachePolicy="memory-disk"
+              resizeMode="cover"
+              // @ts-ignore
+              sharedTransitionTag={`place-image-${place.id}`}
             />
             <LinearGradient
               colors={['transparent', 'rgba(0,0,0,0.7)']}

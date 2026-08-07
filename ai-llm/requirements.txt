@@ -1,11 +1,11 @@
 # FastAPI ve Web Framework
-fastapi==0.104.1
-uvicorn[standard]==0.24.0
+fastapi
+uvicorn[standard]
 pydantic>=2.12.0
 pydantic-settings>=2.2.0
 
 # Machine Learning ve NLP
-torch==2.12.0
+torch
 sentence-transformers>=2.7.0
 transformers>=4.40.0
 accelerate>=0.30.0  # HuggingFace model optimizasyonu için
@@ -46,3 +46,4 @@ peft>=0.8.0  # Parameter-Efficient Fine-Tuning (LoRA/QLoRA)
 scipy>=1.11.0  # Required by peft
 trl>=0.7.0  # Transformer Reinforcement Learning (opsiyonel)
 
+python-multipart

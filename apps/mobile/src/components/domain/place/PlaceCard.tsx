@@ -19,8 +19,10 @@ import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useTheme } from '@/src/hooks/useTheme';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
-import { mediumImpact } from '@/src/utils/haptics';
+import { mediumImpact, heavyImpact } from '@/src/utils/haptics';
 import { useTranslation } from 'react-i18next';
+import Animated from 'react-native-reanimated';
+import { usePreviewStore } from '@/src/store/usePreviewStore';
 
 export interface PlaceCardProps {
   image: ImageSourcePropType;
@@ -38,6 +40,7 @@ export interface PlaceCardProps {
   category?: string;
   onPress: () => void;
   testID?: string;
+  placeId?: string | number;
 }
 
 const PlaceCardComponent = function PlaceCard({
@@ -56,13 +59,29 @@ const PlaceCardComponent = function PlaceCard({
   category,
   onPress,
   testID,
+  placeId,
 }: PlaceCardProps) {
   const { colors } = useTheme();
   const { t } = useTranslation();
 
+  const setPreview = usePreviewStore(s => s.setPreview);
+  const clearPreview = usePreviewStore(s => s.clearPreview);
+
   const handlePress = () => {
     mediumImpact();
     onPress();
+  };
+
+  const handleLongPress = () => {
+    heavyImpact();
+    setPreview({
+      image, title, subtitle, tags, imagePlaceholder, location, explanation,
+      address, city, distance_m, isRecommended, hasMenu, category, onPress, testID, placeId
+    });
+  };
+
+  const handlePressOut = () => {
+    clearPreview();
   };
 
   // Category to display: prefer explicit prop, fall back to first tag
@@ -104,10 +123,13 @@ const PlaceCardComponent = function PlaceCard({
 
   return (
     <TouchableOpacity
-      onPress={handlePress}
-      activeOpacity={0.93}
-      style={[styles.card, { backgroundColor: colors.background.secondary }]}
       testID={testID}
+      style={[styles.card, { backgroundColor: colors.surface.elevated }]}
+      onPress={handlePress}
+      onLongPress={handleLongPress}
+      onPressOut={handlePressOut}
+      delayLongPress={350}
+      activeOpacity={0.9}
     >
       {/* ── Image section ── */}
       <View style={styles.imageContainer}>
@@ -120,12 +142,24 @@ const PlaceCardComponent = function PlaceCard({
           </View>
         ) : (
           <>
-            <Image
-              source={image as any}
-              style={styles.image}
-              contentFit="cover"
-              cachePolicy="memory-disk"
-            />
+            {placeId ? (
+              <Animated.Image
+                key={`anim-img-${placeId}`}
+                source={image as any}
+                style={styles.image}
+                resizeMode="cover"
+                // @ts-ignore: Reanimated v3 types might not include sharedTransitionTag on all components
+                sharedTransitionTag={`place-image-${placeId}`}
+              />
+            ) : (
+              <Image
+                key={typeof image === 'object' && 'uri' in (image as any) ? (image as any).uri : 'static-img'}
+                source={image as any}
+                style={styles.image}
+                contentFit="cover"
+                cachePolicy="memory-disk"
+              />
+            )}
             {/* Bottom gradient so location badge is readable */}
             <LinearGradient
               colors={['transparent', 'rgba(0,0,0,0.55)']}

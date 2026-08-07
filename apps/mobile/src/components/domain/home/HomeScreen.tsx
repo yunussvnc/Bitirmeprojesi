@@ -21,6 +21,7 @@ import {
   TouchableWithoutFeedback,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+import LottieView from "lottie-react-native";
 import { FlashList, FlashListRef } from "@shopify/flash-list";
 import * as Location from "expo-location";
 import { useTheme } from "@/src/hooks/useTheme";
@@ -517,6 +518,7 @@ export default function HomeScreen() {
         <AnimatedPlaceCard
           key={id}
           index={index}
+          placeId={id}
           image={getPlaceImageSource(merged)}
           imagePlaceholder={!hasPlaceImage(merged)}
           title={it.name ?? t('common.venue')}
@@ -608,6 +610,14 @@ export default function HomeScreen() {
   return (
     <Screen ref={screenRef} scrollable={false} onRefresh={handleRefresh} refreshing={refreshing} withTabBar>
       <View style={styles.screen}>
+        <View style={{ position: 'absolute', top: 60, left: 0, right: 0, alignItems: 'center', zIndex: -1 }}>
+          <LottieView
+            source={require('@/assets/animations/loading.json')}
+            autoPlay={refreshing}
+            loop={refreshing}
+            style={{ width: 80, height: 80 }}
+          />
+        </View>
         <FilterBottomSheet
           visible={filterSheetOpen}
           onClose={() => setFilterSheetOpen(false)}
@@ -650,7 +660,13 @@ export default function HomeScreen() {
           onViewableItemsChanged={onViewableItemsChanged}
           viewabilityConfig={viewabilityConfig}
           refreshControl={
-            <RefreshControl refreshing={refreshing} onRefresh={handleRefresh} tintColor={colors.accent.primary} />
+            <RefreshControl 
+              refreshing={refreshing} 
+              onRefresh={handleRefresh} 
+              tintColor="transparent" 
+              colors={['transparent']}
+              progressBackgroundColor="transparent"
+            />
           }
           showsVerticalScrollIndicator={false}
           keyboardDismissMode="on-drag"
