@@ -7,12 +7,18 @@ import { lightImpact } from "@/src/utils/haptics";
 import { useTheme } from "@/src/hooks/useTheme";
 
 export function AnimatedTabBar(props: MaterialTopTabBarProps) {
-  const { translateY, setHeight } = useTabBarVisibility();
+  const { translateY, opacity, setHeight, fadeIn } = useTabBarVisibility();
   const insets = useSafeAreaInsets();
   const { colors, isDark } = useTheme();
   
   // Adjusted bottom padding so it floats nicely
   const bottomPadding = Math.max(insets.bottom, Platform.OS === 'android' ? 16 : 10);
+
+  // Tab değiştiğinde tab bar'ı anında opak yap
+  const currentIndex = props.state.index;
+  React.useEffect(() => {
+    fadeIn();
+  }, [currentIndex, fadeIn]);
 
   return (
     <RNAnimated.View
@@ -21,9 +27,11 @@ export function AnimatedTabBar(props: MaterialTopTabBarProps) {
         { 
           transform: [{ translateY }],
           paddingBottom: bottomPadding,
+          opacity: opacity,
         }
       ]}
       onLayout={(e) => setHeight(e.nativeEvent.layout.height)}
+      pointerEvents="box-none"
     >
       <View style={[
         styles.tabBarContainer, 

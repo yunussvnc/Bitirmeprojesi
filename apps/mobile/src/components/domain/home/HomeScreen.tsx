@@ -261,7 +261,7 @@ export default function HomeScreen() {
   const lastToggleY = useRef(0);
   const lastDirection = useRef<"up" | "down" | null>(null);
   const miniBarVisibleRef = useRef(false);
-  const { hide: hideTabBar, show: showTabBar } = useTabBarVisibility();
+  const { hide: hideTabBar, show: showTabBar, fadeOut, fadeIn } = useTabBarVisibility();
   const insets = useSafeAreaInsets();
   const [filters, setFilters] = useState<FilterValues>({
     province: null,
@@ -410,7 +410,9 @@ export default function HomeScreen() {
 
       if (direction === "down") {
         if (miniBarVisibleRef.current) animateMiniBar(false);
+        fadeOut();
       } else {
+        fadeIn();
         if (!miniBarVisibleRef.current && y > 120 && lastToggleY.current - y >= 20) {
           animateMiniBar(true);
           lastToggleY.current = y;
@@ -672,6 +674,7 @@ export default function HomeScreen() {
           keyboardDismissMode="on-drag"
           keyboardShouldPersistTaps="handled"
           onScroll={(e) => handleScroll(e.nativeEvent.contentOffset.y)}
+          onScrollBeginDrag={() => fadeIn()}
           scrollEventThrottle={16}
         />
         <Animated.View

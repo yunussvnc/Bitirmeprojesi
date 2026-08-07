@@ -5,7 +5,7 @@
  * Özgün ASEMOS tasarım dili ile.
  */
 
-import React, { useState } from "react";
+import React, { useState, useRef, useCallback } from "react";
 import {
     View,
     Text,
@@ -30,6 +30,7 @@ import { useMessagesStore, Conversation } from "@/src/store/useMessagesStore";
 import { Swipeable } from "react-native-gesture-handler";
 import { useTranslation } from "react-i18next";
 import { MessageListSkeleton } from "./components/MessageListSkeleton";
+import { useTabBarVisibility } from "@/src/components/layout/TabBarVisibilityContext";
 
 
 
@@ -38,6 +39,8 @@ export default function MessagesScreen() {
     const insets = useSafeAreaInsets();
     const router = useRouter();
     const authUser = useAuthStore((s) => s.user);
+    const { fadeOut, fadeIn } = useTabBarVisibility();
+    const lastScrollY = useRef(0);
 
 
 
@@ -470,6 +473,15 @@ export default function MessagesScreen() {
                         }}
                         showsVerticalScrollIndicator={false}
                         keyboardShouldPersistTaps="handled"
+                        onScroll={(e) => {
+                            const y = e.nativeEvent.contentOffset.y;
+                            const dy = y - lastScrollY.current;
+                            lastScrollY.current = y;
+                            if (dy > 0 && y > 10) fadeOut();
+                            else if (dy < 0) fadeIn();
+                        }}
+                        onScrollBeginDrag={() => fadeIn()}
+                        scrollEventThrottle={16}
                     />
                 )}
 

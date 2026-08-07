@@ -16,6 +16,7 @@ import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { Image } from "expo-image";
 import { useTranslation } from "react-i18next";
 import { ProfileSkeleton } from "./components/ProfileSkeleton";
+import { useTabBarVisibility } from "@/src/components/layout/TabBarVisibilityContext";
 
 const GRID_GAP = 14;
 const GRID_COLS = 2;
@@ -29,6 +30,8 @@ export default function ProfileScreen() {
   const insets = useSafeAreaInsets();
   const authUser = useAuthStore((s) => s.user);
   const savedIds = useAppStore((s) => s.savedIds);
+  const { fadeOut, fadeIn } = useTabBarVisibility();
+  const lastScrollY = useRef(0);
 
   const [profile, setProfile] = useState<UserProfile | null>(null);
   const [stats, setStats] = useState<UserStats | null>(null);
@@ -178,6 +181,15 @@ export default function ProfileScreen() {
         refreshControl={
           <PremiumRefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
         }
+        onScroll={(e) => {
+          const y = e.nativeEvent.contentOffset.y;
+          const dy = y - lastScrollY.current;
+          lastScrollY.current = y;
+          if (dy > 0 && y > 10) fadeOut();
+          else if (dy < 0) fadeIn();
+        }}
+        onScrollBeginDrag={() => fadeIn()}
+        scrollEventThrottle={16}
       >
         {/* ── Hero Section (Avatar, Name, Bio) ── */}
         <View style={styles.heroSection}>

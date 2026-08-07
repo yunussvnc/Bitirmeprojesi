@@ -84,7 +84,7 @@ export default function FeedScreen() {
   const nextCursorRef = useRef<string | null>(null);
   // Eş zamanlı birden fazla isteği engeller
   const isLoadingRef = useRef(false);
-  const { hide: hideTabBar, show: showTabBar } = useTabBarVisibility();
+  const { hide: hideTabBar, show: showTabBar, fadeOut, fadeIn } = useTabBarVisibility();
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
   const PAGE_SIZE = 12;
@@ -504,6 +504,7 @@ export default function FeedScreen() {
         if (miniBarVisibleRef.current) {
           animateMiniBar(false);
         }
+        fadeOut();
         if (!chromeHiddenRef.current && y - lastToggleY.current >= headerThreshold && y > headerHeight * 0.6) {
           animateHeader(true);
           animateStory(true);
@@ -511,6 +512,7 @@ export default function FeedScreen() {
           lastToggleY.current = y;
         }
       } else {
+        fadeIn();
         if (chromeHiddenRef.current && lastToggleY.current - y >= miniThreshold) {
           animateMiniBar(true);
           lastToggleY.current = y;
@@ -648,6 +650,7 @@ export default function FeedScreen() {
             <PremiumRefreshControl refreshing={refreshing} onRefresh={handleRefresh} />
           }
           onScroll={(e) => handleScroll(e.nativeEvent.contentOffset.y)}
+          onScrollBeginDrag={() => fadeIn()}
           scrollEventThrottle={16}
           showsVerticalScrollIndicator={false}
           onEndReached={handleLoadMore}
