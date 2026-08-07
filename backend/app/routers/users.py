@@ -1,11 +1,16 @@
 # routers/users.py — Kullanıcı profil, takip ve arama endpoint'leri
 
+# pyrefly: ignore [missing-import]
 from typing import Optional
+# pyrefly: ignore [missing-import]
+from pydantic import BaseModel
 
 # pyrefly: ignore [missing-import]
 from fastapi import APIRouter, Depends, HTTPException, Query
 # pyrefly: ignore [missing-import]
-from sqlalchemy import case
+from fastapi.concurrency import run_in_threadpool
+# pyrefly: ignore [missing-import]
+from sqlalchemy import case, or_, and_
 # pyrefly: ignore [missing-import]
 from sqlalchemy.orm import Session
 
@@ -88,7 +93,6 @@ def search_users(
         mutual_ids = following_me_set.intersection(followed_by_me_ids)
 
         # Filter out private accounts if they are not mutual followers
-        from sqlalchemy import or_
         base_query = base_query.outerjoin(models.UserPreferences, models.UserPreferences.user_id == models.User.id)
         
         # Kullanıcı mekan ise VEYA tercihleri yoksa (gizli değil) VEYA is_private_account=False ise VEYA karşılıklı takipleşiyorsak
@@ -178,7 +182,6 @@ def search_users(
         items.append(item)
 
     return {"items": items, "total": total, "page": page, "page_size": page_size}
-from pydantic import BaseModel
 
 class UserBatchRequest(BaseModel):
     user_ids: list[int]
@@ -360,7 +363,6 @@ async def toggle_follow_user(
         raise HTTPException(status_code=400, detail="Kendinizi takip edemezsiniz.")
     
     # Run heavy toggle logic in a thread pool so it doesn't block asyncio
-    from fastapi.concurrency import run_in_threadpool
     is_following, was_created = await run_in_threadpool(crud.toggle_follow, db, current_user.id, user_id)
     
     # determine status string for notifications/UI
@@ -717,7 +719,6 @@ def get_user_tagged_posts(
     # ── Gönderi sahibinin gizlilik kontrolü ──
     query = query.outerjoin(models.UserPreferences, models.UserPreferences.user_id == models.Post.user_id)
     
-    from sqlalchemy import or_, and_
     if current_uid:
         # Bakan kişi oturum açmışsa
         following_query = db.query(models.Follow.following_id).filter(
