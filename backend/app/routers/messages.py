@@ -287,13 +287,13 @@ def get_conversations(
         other_user = db.query(models.User).filter(models.User.id == other_user_id).first()
         
         display_name = "Kullanıcı bulunamadı"
-        avatar_url = None
+        avatar_url = ""
         
         if other_user:
             is_blocked = crud.users_block_each_other(db, current_user.id, other_user_id)
             if not is_blocked and other_user.is_active:
                 display_name = other_user.first_name or other_user.username or "Kullanıcı"
-                avatar_url = other_user.avatar_url
+                avatar_url = other_user.avatar_url or ""
 
         unread_count = db.query(models.Message).filter(
             models.Message.conversation_id == conv.id,

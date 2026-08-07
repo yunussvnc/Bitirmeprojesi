@@ -244,7 +244,7 @@ def get_user_profile(
 ):
     """Kullanıcı profil detaylarını takipçi/takip sayılarıyla birlikte getirir."""
     user = crud.get_user_by_id(db, user_id)
-    if not user:
+    if not user or not user.is_active:
         raise HTTPException(status_code=404, detail="Kullanıcı bulunamadı.")
         
     if current_user:
