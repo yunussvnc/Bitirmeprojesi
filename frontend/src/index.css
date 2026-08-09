@@ -342,6 +342,12 @@ body::after{right:0;background:linear-gradient(270deg,rgba(16,185,129,0.03),tran
 }
 .venue-filter-btn.active .count{color:var(--primary)}
 
+.venue-map-loading{
+  height:600px;display:flex;align-items:center;justify-content:center;
+  border-radius:var(--radius-xl);border:1px solid var(--glass-border);
+  color:var(--text-muted);font-size:.9rem;
+}
+@media(max-width:768px){.venue-map-loading{height:420px}}
 .venue-map-wrap{
   position:relative;border-radius:var(--radius-xl);overflow:hidden;
   border:1px solid var(--glass-border);box-shadow:0 30px 80px rgba(0,0,0,.5);

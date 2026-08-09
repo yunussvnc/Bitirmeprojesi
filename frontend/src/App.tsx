@@ -1,17 +1,19 @@
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useRef, useState, Suspense, lazy } from 'react'
 import { motion, useScroll, useTransform, type Variants } from 'framer-motion'
 import {
   Users, MessageCircle, Brain,
   Heart, ArrowRight, Zap, Coffee,
   ChevronRight, Menu, Compass, Camera, Bell, Star, Bookmark, Route
 } from 'lucide-react'
-import ParticleBackground from './components/ParticleBackground'
-import RealIstanbulMap from './components/RealIstanbulMap'
-import VenueMapSection from './components/VenueMapSection'
 import PopularVenues from './components/PopularVenues'
 import DistrictDiscovery from './components/DistrictDiscovery'
 import { venues, districts, categories } from './data/venues'
 import './index.css'
+
+// three.js / maplibre-gl ağır — ilk render'ı bekletmesin diye ayrı chunk'a bölünüyor
+const ParticleBackground = lazy(() => import('./components/ParticleBackground'))
+const RealIstanbulMap = lazy(() => import('./components/RealIstanbulMap'))
+const VenueMapSection = lazy(() => import('./components/VenueMapSection'))
 
 const fade: Variants = { hidden:{opacity:0,y:40}, visible:{opacity:1,y:0,transition:{duration:.7,ease:[.25,.46,.45,.94]}} }
 const stagger: Variants = { hidden:{opacity:0}, visible:{opacity:1,transition:{staggerChildren:.12}} }
@@ -59,8 +61,10 @@ export default function App() {
         <span className="logo">As<em>Em</em>Os</span>
         <span className="status">İstanbul keşfediliyor<span className="dot" style={{ display: 'inline-block', marginLeft: 6 }} /></span>
       </div>
-      <RealIstanbulMap />
-      <ParticleBackground />
+      <Suspense fallback={null}>
+        <RealIstanbulMap />
+        <ParticleBackground />
+      </Suspense>
 
       {/* NAV */}
       <nav className="nav" ref={navRef}>
@@ -130,7 +134,9 @@ export default function App() {
       </section>
 
       {/* INTERACTIVE VENUE MAP */}
-      <VenueMapSection />
+      <Suspense fallback={<div className="venue-map-loading">Harita yükleniyor…</div>}>
+        <VenueMapSection />
+      </Suspense>
 
       {/* POPULAR VENUES */}
       <PopularVenues />
