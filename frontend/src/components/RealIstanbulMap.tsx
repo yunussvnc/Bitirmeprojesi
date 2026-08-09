@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import * as maplibregl from 'maplibre-gl'
 import 'maplibre-gl/dist/maplibre-gl.css'
-import { venues } from '../data/venues'
+import { useVenues } from '../hooks/useVenues'
 import { istanbulImages } from '../data/istanbul-images'
 
 // Bosphorus / Golden Horn view — recognizable Istanbul coastline + 3D building density
@@ -9,14 +9,14 @@ const CENTER: [number, number] = [28.9784, 41.0175]
 const BASE_BEARING = -17
 const BASE_PITCH = 55
 const BASE_ZOOM = 13.2
-
-const markerVenues = venues.filter((v) =>
-  ['v2', 'v14', 'v15', 'v22', 'v31', 'v44', 'v51', 'v59'].includes(v.id)
-)
+const HERO_PIN_COUNT = 8
 
 export default function RealIstanbulMap() {
+  const { venues } = useVenues()
   const containerRef = useRef<HTMLDivElement>(null)
   const mapRef = useRef<maplibregl.Map | null>(null)
+  const markersRef = useRef<maplibregl.Marker[]>([])
+  const [mapReady, setMapReady] = useState(false)
   const [isMobile] = useState(() => window.matchMedia('(max-width: 768px)').matches)
 
   useEffect(() => {
@@ -54,14 +54,7 @@ export default function RealIstanbulMap() {
         })
       }
 
-      markerVenues.forEach((v) => {
-        const el = document.createElement('div')
-        el.className = 'venue-pin'
-        el.title = v.name
-        new maplibregl.Marker({ element: el, anchor: 'bottom' })
-          .setLngLat([v.lng, v.lat])
-          .addTo(map)
-      })
+      setMapReady(true)
     })
 
     // Scroll-driven camera offset, RAF-throttled
@@ -109,6 +102,28 @@ export default function RealIstanbulMap() {
       mapRef.current = null
     }
   }, [])
+
+  useEffect(() => {
+    const map = mapRef.current
+    if (!map || !mapReady || venues.length === 0) return
+
+    markersRef.current.forEach((m) => m.remove())
+    markersRef.current = []
+
+    const topRated = [...venues]
+      .sort((a, b) => b.averageRating - a.averageRating)
+      .slice(0, HERO_PIN_COUNT)
+
+    topRated.forEach((v) => {
+      const el = document.createElement('div')
+      el.className = 'venue-pin'
+      el.title = v.name
+      const marker = new maplibregl.Marker({ element: el, anchor: 'bottom' })
+        .setLngLat([v.lng, v.lat])
+        .addTo(map)
+      markersRef.current.push(marker)
+    })
+  }, [venues, mapReady])
 
   if (isMobile) {
     // Mobilde ağır WebGL 3D sahne yerine gerçek statik fotoğraf — perf için (bkz. brief #13)

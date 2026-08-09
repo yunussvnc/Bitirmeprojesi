@@ -1,50 +1,84 @@
 import { useEffect, useRef, useState } from 'react'
 import * as maplibregl from 'maplibre-gl'
+import type { GeoJSONSource } from 'maplibre-gl'
+import type { FeatureCollection, Point } from 'geojson'
 import 'maplibre-gl/dist/maplibre-gl.css'
 import { motion } from 'framer-motion'
-import { Coffee, UtensilsCrossed, Martini, Wine, Disc3, Sandwich, Flame, MapPin, X } from 'lucide-react'
-import { venues, type Venue } from '../data/venues'
+import {
+  Coffee, Croissant, Martini, Wine, Disc3, Fish, Pizza, Beef, Egg,
+  IceCream, UtensilsCrossed, MapPin, X,
+} from 'lucide-react'
+import { useVenues, type Venue } from '../hooks/useVenues'
 
 const CATEGORY_META: Record<string, { icon: typeof Coffee; color: string }> = {
   Kafe: { icon: Coffee, color: '#d4a15a' },
-  Restoran: { icon: UtensilsCrossed, color: '#f87171' },
+  Fırın: { icon: Croissant, color: '#e0a458' },
   Bar: { icon: Martini, color: '#a78bfa' },
-  Meyhane: { icon: Wine, color: '#fb923c' },
   'Gece Kulübü': { icon: Disc3, color: '#f472b6' },
-  'Fast Food': { icon: Sandwich, color: '#facc15' },
-  'Nargile Cafe': { icon: Flame, color: '#34d399' },
+  Meyhane: { icon: Wine, color: '#fb923c' },
+  'Deniz Ürünleri': { icon: Fish, color: '#60a5fa' },
+  Pizza: { icon: Pizza, color: '#fb7185' },
+  Burger: { icon: Beef, color: '#f97316' },
+  Suşi: { icon: Fish, color: '#34d399' },
+  Steakhouse: { icon: Beef, color: '#dc2626' },
+  Kahvaltı: { icon: Egg, color: '#fbbf24' },
+  Tatlıcı: { icon: IceCream, color: '#f9a8d4' },
+  'Türk Mutfağı': { icon: UtensilsCrossed, color: '#ef4444' },
+  Restoran: { icon: UtensilsCrossed, color: '#f87171' },
 }
-
-const categoryOrder = Object.keys(CATEGORY_META).filter((c) => venues.some((v) => v.category === c))
+const DEFAULT_META = { icon: MapPin, color: '#10b981' }
 
 function priceLabel(n: number) {
-  return '₺'.repeat(n)
+  return '₺'.repeat(Math.max(1, Math.min(4, n)))
 }
 
 function popupHTML(v: Venue) {
-  const meta = CATEGORY_META[v.category]
+  const meta = CATEGORY_META[v.category] ?? DEFAULT_META
+  const rating = v.averageRating > 0 ? `★ ${v.averageRating.toFixed(1)} (${v.reviewCount})` : 'Henüz puan yok'
   return `
     <div class="venue-popup">
-      <img src="${v.photoUrl}" alt="${v.name}" loading="lazy" />
+      ${v.photoUrl ? `<img src="${v.photoUrl}" alt="${v.name}" loading="lazy" onerror="this.style.display='none'" />` : ''}
       <div class="venue-popup-body">
-        <span class="venue-popup-cat" style="color:${meta?.color ?? 'var(--primary)'}">${v.category} · ${v.district}</span>
+        <span class="venue-popup-cat" style="color:${meta.color}">${v.category} · ${v.district}</span>
         <h4>${v.name}</h4>
-        <p>${v.description}</p>
+        <p>${v.description || v.address}</p>
         <div class="venue-popup-meta">
           <span>${priceLabel(v.priceRange)}</span>
+          <span>${rating}</span>
         </div>
       </div>
     </div>
   `
 }
 
+function toGeoJSON(venues: Venue[]): FeatureCollection<Point> {
+  return {
+    type: 'FeatureCollection',
+    features: venues.map((v) => ({
+      type: 'Feature',
+      geometry: { type: 'Point', coordinates: [v.lng, v.lat] },
+      properties: {
+        id: v.id,
+        category: v.category,
+        color: (CATEGORY_META[v.category] ?? DEFAULT_META).color,
+      },
+    })),
+  }
+}
+
 export default function VenueMapSection() {
+  const { venues, districts, categories, loading } = useVenues()
   const containerRef = useRef<HTMLDivElement>(null)
   const mapRef = useRef<maplibregl.Map | null>(null)
-  const markersRef = useRef<{ venue: Venue; marker: maplibregl.Marker; el: HTMLDivElement }[]>([])
+  const venuesByIdRef = useRef<Map<string, Venue>>(new Map())
+  const popupRef = useRef<maplibregl.Popup | null>(null)
+  const [mapReady, setMapReady] = useState(false)
   const [activeCategory, setActiveCategory] = useState<string>('all')
   const [activeDistrict, setActiveDistrict] = useState<string | null>(null)
 
+  const categoryOrder = categories.filter((c) => c !== 'Diğer')
+
+  // Harita — bir kez kurulur
   useEffect(() => {
     if (!containerRef.current || mapRef.current) return
 
@@ -52,7 +86,7 @@ export default function VenueMapSection() {
       container: containerRef.current,
       style: 'https://tiles.openfreemap.org/styles/liberty',
       center: [28.99, 41.02],
-      zoom: 11.2,
+      zoom: 10.4,
       pitch: 0,
       attributionControl: false,
     })
@@ -61,44 +95,106 @@ export default function VenueMapSection() {
     map.scrollZoom.disable()
 
     map.on('load', () => {
-      venues.forEach((v) => {
-        const meta = CATEGORY_META[v.category]
-        const el = document.createElement('div')
-        el.className = 'venue-map-pin'
-        el.style.background = meta?.color ?? 'var(--primary)'
-        el.title = v.name
-
-        const popup = new maplibregl.Popup({ offset: 14, closeButton: false, maxWidth: '260px' }).setHTML(
-          popupHTML(v)
-        )
-        const marker = new maplibregl.Marker({ element: el, anchor: 'center' })
-          .setLngLat([v.lng, v.lat])
-          .setPopup(popup)
-          .addTo(map)
-
-        el.addEventListener('mouseenter', () => marker.togglePopup())
-        el.addEventListener('mouseleave', () => marker.togglePopup())
-        el.addEventListener('click', () => marker.togglePopup())
-
-        markersRef.current.push({ venue: v, marker, el })
+      map.addSource('venues', {
+        type: 'geojson',
+        data: { type: 'FeatureCollection', features: [] },
+        cluster: true,
+        clusterMaxZoom: 15,
+        clusterRadius: 45,
       })
+
+      map.addLayer({
+        id: 'clusters',
+        type: 'circle',
+        source: 'venues',
+        filter: ['has', 'point_count'],
+        paint: {
+          'circle-color': 'rgba(16,185,129,0.85)',
+          'circle-stroke-width': 2,
+          'circle-stroke-color': 'rgba(2,2,4,0.8)',
+          'circle-radius': ['step', ['get', 'point_count'], 16, 25, 20, 100, 26, 500, 34],
+        },
+      })
+      map.addLayer({
+        id: 'cluster-count',
+        type: 'symbol',
+        source: 'venues',
+        filter: ['has', 'point_count'],
+        layout: {
+          'text-field': ['get', 'point_count_abbreviated'],
+          'text-font': ['Noto Sans Bold'],
+          'text-size': 12,
+        },
+        paint: { 'text-color': '#020204' },
+      })
+      map.addLayer({
+        id: 'unclustered-point',
+        type: 'circle',
+        source: 'venues',
+        filter: ['!', ['has', 'point_count']],
+        paint: {
+          'circle-color': ['get', 'color'],
+          'circle-radius': 6,
+          'circle-stroke-width': 2,
+          'circle-stroke-color': 'rgba(2,2,4,0.8)',
+        },
+      })
+
+      map.on('click', 'clusters', (e) => {
+        const features = map.queryRenderedFeatures(e.point, { layers: ['clusters'] })
+        const clusterId = features[0]?.properties?.cluster_id
+        const source = map.getSource('venues') as GeoJSONSource
+        if (clusterId == null) return
+        source.getClusterExpansionZoom(clusterId).then((zoom) => {
+          const geom = features[0].geometry
+          if (geom.type !== 'Point') return
+          map.easeTo({ center: geom.coordinates as [number, number], zoom, duration: 600 })
+        })
+      })
+
+      map.on('click', 'unclustered-point', (e) => {
+        const feature = e.features?.[0]
+        const id = feature?.properties?.id
+        if (!id) return
+        const venue = venuesByIdRef.current.get(String(id))
+        if (!venue) return
+        popupRef.current?.remove()
+        popupRef.current = new maplibregl.Popup({ offset: 10, maxWidth: '260px' })
+          .setLngLat([venue.lng, venue.lat])
+          .setHTML(popupHTML(venue))
+          .addTo(map)
+      })
+
+      map.on('mouseenter', 'clusters', () => (map.getCanvas().style.cursor = 'pointer'))
+      map.on('mouseleave', 'clusters', () => (map.getCanvas().style.cursor = ''))
+      map.on('mouseenter', 'unclustered-point', () => (map.getCanvas().style.cursor = 'pointer'))
+      map.on('mouseleave', 'unclustered-point', () => (map.getCanvas().style.cursor = ''))
+
+      setMapReady(true)
     })
 
     return () => {
-      markersRef.current.forEach((m) => m.marker.remove())
-      markersRef.current = []
       map.remove()
       mapRef.current = null
     }
   }, [])
 
+  // Veri geldiğinde / filtre değiştiğinde source'u güncelle
   useEffect(() => {
-    markersRef.current.forEach(({ venue, el }) => {
-      const matchesCategory = activeCategory === 'all' || venue.category === activeCategory
-      const matchesDistrict = !activeDistrict || venue.district === activeDistrict
-      el.style.display = matchesCategory && matchesDistrict ? 'block' : 'none'
+    const map = mapRef.current
+    if (!map || !mapReady) return
+
+    venuesByIdRef.current = new Map(venues.map((v) => [v.id, v]))
+
+    const filtered = venues.filter((v) => {
+      const matchesCategory = activeCategory === 'all' || v.category === activeCategory
+      const matchesDistrict = !activeDistrict || v.district === activeDistrict
+      return matchesCategory && matchesDistrict
     })
-  }, [activeCategory, activeDistrict])
+
+    const source = map.getSource('venues') as GeoJSONSource | undefined
+    source?.setData(toGeoJSON(filtered))
+  }, [venues, activeCategory, activeDistrict, mapReady])
 
   useEffect(() => {
     const onDistrictSelect = (e: Event) => {
@@ -119,7 +215,7 @@ export default function VenueMapSection() {
     }
     window.addEventListener('district-select', onDistrictSelect)
     return () => window.removeEventListener('district-select', onDistrictSelect)
-  }, [])
+  }, [venues])
 
   const counts = categoryOrder.reduce<Record<string, number>>((acc, c) => {
     acc[c] = venues.filter((v) => v.category === c).length
@@ -140,7 +236,7 @@ export default function VenueMapSection() {
           <span className="section-label">Keşif</span>
           <h2 className="section-title">İstanbul'da <em>Nerede Ne Yenir?</em></h2>
           <p className="section-desc">
-            {venues.length} gerçek mekanı haritada keşfedin — kategoriye göre filtreleyin, üzerine gelin, detayları görün.
+            {loading ? 'Mekanlar yükleniyor…' : `${venues.length.toLocaleString('tr-TR')} gerçek mekanı haritada keşfedin — kategoriye göre filtreleyin, kümeleri açın, detayları görün.`}
           </p>
           {activeDistrict && (
             <button className="district-chip" onClick={() => setActiveDistrict(null)}>
@@ -149,31 +245,36 @@ export default function VenueMapSection() {
           )}
         </motion.div>
 
-        <div className="venue-filters">
-          <button
-            className={`venue-filter-btn${activeCategory === 'all' ? ' active' : ''}`}
-            onClick={() => setActiveCategory('all')}
-          >
-            <MapPin size={15} /> Tümü <span className="count">{venues.length}</span>
-          </button>
-          {categoryOrder.map((cat) => {
-            const meta = CATEGORY_META[cat]
-            const Icon = meta.icon
-            return (
-              <button
-                key={cat}
-                className={`venue-filter-btn${activeCategory === cat ? ' active' : ''}`}
-                style={activeCategory === cat ? { borderColor: meta.color, color: meta.color } : undefined}
-                onClick={() => setActiveCategory(cat)}
-              >
-                <Icon size={15} /> {cat} <span className="count">{counts[cat]}</span>
-              </button>
-            )
-          })}
-        </div>
+        {!loading && (
+          <div className="venue-filters">
+            <button
+              className={`venue-filter-btn${activeCategory === 'all' ? ' active' : ''}`}
+              onClick={() => setActiveCategory('all')}
+            >
+              <MapPin size={15} /> Tümü <span className="count">{venues.length}</span>
+            </button>
+            {categoryOrder.map((cat) => {
+              const meta = CATEGORY_META[cat] ?? DEFAULT_META
+              const Icon = meta.icon
+              return (
+                <button
+                  key={cat}
+                  className={`venue-filter-btn${activeCategory === cat ? ' active' : ''}`}
+                  style={activeCategory === cat ? { borderColor: meta.color, color: meta.color } : undefined}
+                  onClick={() => setActiveCategory(cat)}
+                >
+                  <Icon size={15} /> {cat} <span className="count">{counts[cat]}</span>
+                </button>
+              )
+            })}
+          </div>
+        )}
 
         <div className="venue-map-wrap">
           <div ref={containerRef} className="venue-map-canvas" />
+          {districts.length === 0 && !loading && (
+            <div className="venue-map-empty">Mekan verisi yüklenemedi.</div>
+          )}
         </div>
       </div>
     </section>

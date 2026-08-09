@@ -348,6 +348,10 @@ body::after{right:0;background:linear-gradient(270deg,rgba(16,185,129,0.03),tran
   color:var(--text-muted);font-size:.9rem;
 }
 @media(max-width:768px){.venue-map-loading{height:420px}}
+.venue-map-empty{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  background:rgba(2,2,4,.6);color:var(--text-muted);font-size:.85rem;
+}
 .venue-map-wrap{
   position:relative;border-radius:var(--radius-xl);overflow:hidden;
   border:1px solid var(--glass-border);box-shadow:0 30px 80px rgba(0,0,0,.5);
@@ -429,6 +433,23 @@ body::after{right:0;background:linear-gradient(270deg,rgba(16,185,129,0.03),tran
   font-size:.68rem;color:var(--text-muted);background:rgba(255,255,255,.05);
   border:1px solid var(--glass-border);padding:.2rem .55rem;border-radius:100px;text-transform:capitalize;
 }
+.venue-card-rating{display:inline-flex;align-items:center;gap:.3rem;color:var(--primary-light);border-color:rgba(16,185,129,.2)}
+
+.venue-image-fallback{
+  display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,rgba(16,185,129,.1),rgba(8,8,14,.9));
+  color:var(--text-muted);
+}
+
+.venue-card-skeleton{pointer-events:none}
+.skeleton-block{
+  background:linear-gradient(90deg,rgba(255,255,255,.04) 25%,rgba(255,255,255,.09) 50%,rgba(255,255,255,.04) 75%);
+  background-size:200% 100%;animation:skeleton-shimmer 1.6s ease-in-out infinite;border-radius:6px;
+}
+.venue-card-skeleton .venue-card-img-wrap{height:170px;border-radius:0}
+.skeleton-line{height:.8rem;margin-bottom:.6rem}
+@keyframes skeleton-shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+@media(prefers-reduced-motion:reduce){.skeleton-block{animation:none}}
 .venue-card-cta{
   display:inline-flex;align-items:center;gap:.4rem;font-size:.82rem;font-weight:700;color:var(--primary);
   transition:gap .3s;
@@ -475,6 +496,12 @@ body::after{right:0;background:linear-gradient(270deg,rgba(16,185,129,0.03),tran
 }
 .district-card-text h3{font-family:'Space Grotesk',sans-serif;font-size:1.1rem;font-weight:700;color:#fff;letter-spacing:-.3px}
 .district-card-text span{font-size:.72rem;color:var(--primary-light);font-weight:600}
+
+.district-card-plain{
+  background:linear-gradient(150deg,rgba(16,185,129,.14),rgba(8,8,14,.9) 60%);
+}
+.district-card-plain:hover{background:linear-gradient(150deg,rgba(16,185,129,.22),rgba(8,8,14,.92) 60%)}
+.district-card-icon{color:var(--primary);margin-bottom:.4rem}
 
 @media(max-width:768px){
   .district-grid{grid-template-columns:repeat(3,1fr)}

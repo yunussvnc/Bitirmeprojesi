@@ -7,7 +7,7 @@ import {
 } from 'lucide-react'
 import PopularVenues from './components/PopularVenues'
 import DistrictDiscovery from './components/DistrictDiscovery'
-import { venues, districts, categories } from './data/venues'
+import { useVenues } from './hooks/useVenues'
 import './index.css'
 
 // three.js / maplibre-gl ağır — ilk render'ı bekletmesin diye ayrı chunk'a bölünüyor
@@ -43,6 +43,7 @@ export default function App() {
   const { scrollY } = useScroll()
   const heroImgY = useTransform(scrollY, [0, 800], [0, -80])
   const [loading, setLoading] = useState(true)
+  const { venues, districts, categories, loading: venuesLoading } = useVenues()
 
   useEffect(() => {
     const handle = () => navRef.current?.classList.toggle('scrolled', window.scrollY > 60)
@@ -101,8 +102,8 @@ export default function App() {
               <button className="btn-ghost">Uygulamayı İndir <ChevronRight size={18}/></button>
             </motion.div>
             <motion.div variants={fade} className="hero-stats">
-              <div className="hero-stat"><h3>{venues.length}</h3><p>Gerçek Mekan</p></div>
-              <div className="hero-stat"><h3>{districts.length}</h3><p>İlçe</p></div>
+              <div className="hero-stat"><h3>{venuesLoading ? '…' : venues.length.toLocaleString('tr-TR')}</h3><p>Gerçek Mekan</p></div>
+              <div className="hero-stat"><h3>{venuesLoading ? '…' : districts.length}</h3><p>İlçe</p></div>
               <div className="hero-stat"><h3>AI</h3><p>Akıllı Öneriler</p></div>
             </motion.div>
           </motion.div>
@@ -234,8 +235,8 @@ export default function App() {
           </motion.div>
           <motion.div className="num-grid" initial="hidden" whileInView="visible" viewport={{once:true,amount:.2}} variants={stagger}>
             {[
-              {n:String(venues.length),l:'Gerçek Mekan'},{n:String(districts.length),l:'İlçe'},
-              {n:String(categories.length),l:'Kategori'},{n:'7/24',l:'AI Öneri Motoru'},
+              {n:venuesLoading?'…':venues.length.toLocaleString('tr-TR'),l:'Gerçek Mekan'},{n:venuesLoading?'…':String(districts.length),l:'İlçe'},
+              {n:venuesLoading?'…':String(categories.length),l:'Kategori'},{n:'7/24',l:'AI Öneri Motoru'},
             ].map((s,i)=>(
               <motion.div key={i} className="num-card" variants={fade}>
                 <h3>{s.n}</h3><p>{s.l}</p>
