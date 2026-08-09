@@ -1,11 +1,16 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion, useScroll, useTransform, type Variants } from 'framer-motion'
 import {
-  MapPin, Users, MessageCircle, Brain,
+  Users, MessageCircle, Brain,
   Heart, ArrowRight, Zap, Coffee,
   ChevronRight, Menu, Compass, Camera, Bell, Star, Bookmark, Route
 } from 'lucide-react'
 import ParticleBackground from './components/ParticleBackground'
+import RealIstanbulMap from './components/RealIstanbulMap'
+import VenueMapSection from './components/VenueMapSection'
+import PopularVenues from './components/PopularVenues'
+import DistrictDiscovery from './components/DistrictDiscovery'
+import { venues, districts, categories } from './data/venues'
 import './index.css'
 
 const fade: Variants = { hidden:{opacity:0,y:40}, visible:{opacity:1,y:0,transition:{duration:.7,ease:[.25,.46,.45,.94]}} }
@@ -35,6 +40,7 @@ export default function App() {
   const navRef = useRef<HTMLElement>(null)
   const { scrollY } = useScroll()
   const heroImgY = useTransform(scrollY, [0, 800], [0, -80])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const handle = () => navRef.current?.classList.toggle('scrolled', window.scrollY > 60)
@@ -42,8 +48,18 @@ export default function App() {
     return () => window.removeEventListener('scroll', handle)
   }, [])
 
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 1100)
+    return () => clearTimeout(timer)
+  }, [])
+
   return (
     <>
+      <div className={`loading-splash${loading ? '' : ' fade-out'}`} aria-hidden={!loading}>
+        <span className="logo">As<em>Em</em>Os</span>
+        <span className="status">İstanbul keşfediliyor<span className="dot" style={{ display: 'inline-block', marginLeft: 6 }} /></span>
+      </div>
+      <RealIstanbulMap />
       <ParticleBackground />
 
       {/* NAV */}
@@ -66,23 +82,23 @@ export default function App() {
         <div className="container hero-grid">
           <motion.div initial="hidden" animate="visible" variants={stagger}>
             <motion.div variants={fade} className="hero-badge">
-              <span className="pulse"/> Yeni Nesil Sosyal Platform
+              <span className="pulse"/> İstanbul'u Keşfet
             </motion.div>
             <motion.h1 variants={fade}>
-              Akıllı Sosyalleşme ve{' '}
-              <span className="gradient">Eğlenceli Mekan Öneri Sistemi</span>
+              İstanbul'un{' '}
+              <span className="gradient">Lezzetlerini ve Mekanlarını Keşfet</span>
             </motion.h1>
             <motion.p variants={fade} className="hero-sub">
-              AsEmOs ile sadece mekan bulmakla kalmayın — aynı zevklere sahip insanlarla tanışın,
-              yapay zeka destekli kişisel öneriler alın ve şehri yeniden keşfedin.
+              Şehrin en iyi kafe, restoran ve mekanlarını haritada incele, yapay zeka destekli
+              kişisel önerilerle bir sonraki durağını bul — İstanbul'u yeniden keşfet.
             </motion.p>
             <motion.div variants={fade} className="hero-actions">
-              <button className="btn-glow">Hemen İndir <ArrowRight size={18}/></button>
-              <a href="#ozellikler" className="btn-ghost">Keşfet <ChevronRight size={18}/></a>
+              <a href="#kesif" className="btn-glow">Mekanları Keşfet <ArrowRight size={18}/></a>
+              <button className="btn-ghost">Uygulamayı İndir <ChevronRight size={18}/></button>
             </motion.div>
             <motion.div variants={fade} className="hero-stats">
-              <div className="hero-stat"><h3>500+</h3><p>Kayıtlı Mekan</p></div>
-              <div className="hero-stat"><h3>%94</h3><p>Eşleşme Skoru</p></div>
+              <div className="hero-stat"><h3>{venues.length}</h3><p>Gerçek Mekan</p></div>
+              <div className="hero-stat"><h3>{districts.length}</h3><p>İlçe</p></div>
               <div className="hero-stat"><h3>AI</h3><p>Akıllı Öneriler</p></div>
             </motion.div>
           </motion.div>
@@ -113,32 +129,14 @@ export default function App() {
         </div>
       </section>
 
-      {/* SHOWCASE: DISCOVER */}
-      <section id="kesif" className="section">
-        <div className="container">
-          <motion.div className="showcase" initial="hidden" whileInView="visible" viewport={{once:true,amount:.25}} variants={stagger}>
-            <motion.div className="showcase-img-wrap" variants={scaleIn}>
-              <img src="/feature-discover.png" alt="Mekan Keşfi" className="showcase-img"/>
-            </motion.div>
-            <motion.div className="showcase-content" variants={stagger}>
-              <motion.h2 variants={fade}>Harita Üzerinde <em>Akıllı Keşif</em></motion.h2>
-              <motion.p variants={fade}>Çevrenizdeki mekanları interaktif harita üzerinde keşfedin. AI motoru geçmiş tercihlerinizi analiz ederek en uygun mekanları öne çıkarır.</motion.p>
-              <motion.ul className="check-list" variants={stagger}>
-                {[
-                  {t:'Konum Bazlı Filtreleme',d:'Mesafe, kategori ve puana göre anlık filtreleme.'},
-                  {t:'AI Uyumluluk Skoru',d:'Her mekan sizin profilinize göre kişisel skor alır.'},
-                  {t:'Canlı Hikayeler',d:'Mekanın anlık yoğunluk ve atmosferini hikayelerle görün.'},
-                ].map((item,i)=>(
-                  <motion.li key={i} className="check-item" variants={fade}>
-                    <span className="check-dot"><MapPin size={13}/></span>
-                    <div><h4>{item.t}</h4><p>{item.d}</p></div>
-                  </motion.li>
-                ))}
-              </motion.ul>
-            </motion.div>
-          </motion.div>
-        </div>
-      </section>
+      {/* INTERACTIVE VENUE MAP */}
+      <VenueMapSection />
+
+      {/* POPULAR VENUES */}
+      <PopularVenues />
+
+      {/* DISTRICT DISCOVERY */}
+      <DistrictDiscovery />
 
       {/* SHOWCASE: MATCHING */}
       <section id="eslesme" className="section section-dark">
@@ -230,8 +228,8 @@ export default function App() {
           </motion.div>
           <motion.div className="num-grid" initial="hidden" whileInView="visible" viewport={{once:true,amount:.2}} variants={stagger}>
             {[
-              {n:'500+',l:'Kayıtlı Mekan'},{n:'%94',l:'Eşleşme Doğruluğu'},
-              {n:'7/24',l:'AI Öneri Motoru'},{n:'∞',l:'Sosyal Bağlantı'},
+              {n:String(venues.length),l:'Gerçek Mekan'},{n:String(districts.length),l:'İlçe'},
+              {n:String(categories.length),l:'Kategori'},{n:'7/24',l:'AI Öneri Motoru'},
             ].map((s,i)=>(
               <motion.div key={i} className="num-card" variants={fade}>
                 <h3>{s.n}</h3><p>{s.l}</p>
@@ -245,9 +243,9 @@ export default function App() {
       <section className="cta-section">
         <div className="container">
           <motion.div className="cta-box" initial="hidden" whileInView="visible" viewport={{once:true}} variants={scaleIn}>
-            <h2>Şehri <em>Yeniden Keşfet</em></h2>
+            <h2>İstanbul'un <em>Bir Sonraki Lezzetini</em> Keşfet</h2>
             <p>AsEmOs'u indir, yapay zeka destekli mekan önerilerini al ve aynı zevklere sahip insanlarla tanış.</p>
-            <button className="btn-glow">Hemen Başla <ArrowRight size={18}/></button>
+            <a href="#kesif" className="btn-glow">Hemen Başla <ArrowRight size={18}/></a>
           </motion.div>
         </div>
       </section>

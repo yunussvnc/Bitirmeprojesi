@@ -60,7 +60,8 @@ htmlcov/
 # Agent & AI & Local Data
 .agents/
 skills-lock.json
-data/
+/data/
+!frontend/src/data/
 
 # Temporary / Test files
 metro_response.txt

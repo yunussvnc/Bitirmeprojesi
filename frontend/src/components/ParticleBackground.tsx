@@ -62,6 +62,12 @@ function FloatingOrb({ position, scale, speed }: { position: [number, number, nu
 }
 
 export default function ParticleBackground() {
+  const isMobile = typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches
+  const reduceMotion = typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
+
+  // Mobilde ağır WebGL sahnesi yerine sabit koyu arkaplan — perf için (bkz. brief #13)
+  if (isMobile || reduceMotion) return <div className="canvas-bg canvas-bg-static" />
+
   return (
     <div className="canvas-bg">
       <Canvas camera={{ position: [0, 0, 8], fov: 60 }} dpr={[1, 1.5]}>
