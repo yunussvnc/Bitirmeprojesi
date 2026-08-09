@@ -387,6 +387,27 @@ def get_places(db: Session, skip: int = 0, limit: int = 100):
     items = db.query(models.Place).order_by(models.Place.id.desc()).offset(skip).limit(limit).all()
     return _enrich_places_with_stats(db, items)
 
+def get_places_lite(db: Session, skip: int = 0, limit: int = 6000):
+    """Harita/liste görünümü için minimal kolon seçimi — gallery_urls, menu_items_json,
+    opening_hours_json, description gibi ağır alanları hiç DB'den çekmez, Review/SavedPlace/
+    PlaceFollow enrichment join'lerini atlar (user_ratings_total zaten Google'dan gelen kolon).
+    Büyük hacimli (binlerce kayıt) tam-liste isteklerinde payload/CPU maliyetini ciddi azaltır."""
+    cols = (
+        models.Place.id, models.Place.name, models.Place.address, models.Place.city,
+        models.Place.category, models.Place.latitude, models.Place.longitude,
+        models.Place.price_range, models.Place.photo_url, models.Place.average_rating,
+        models.Place.user_ratings_total,
+    )
+    rows = (
+        db.query(*cols)
+        .order_by(models.Place.id.desc())
+        .offset(skip)
+        .limit(limit)
+        .all()
+    )
+    total = db.query(func.count(models.Place.id)).scalar()
+    return rows, total
+
 def get_places_paginated(db: Session, page: int = 1, page_size: int = 20):
     total = db.query(models.Place).count()
     offset = (page - 1) * page_size

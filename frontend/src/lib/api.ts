@@ -14,12 +14,14 @@ export interface Venue {
   reviewCount: number
 }
 
+// /places/lite şemasına karşılık gelir — description ve diğer ağır alanlar
+// (gallery_urls, menu_items, opening_hours_json) yok, payload'ı küçük tutmak için
+// bilinçli olarak (bkz. backend/schemas.py PlaceLite).
 interface BackendPlace {
   id: number
   name: string
   address: string
   city: string
-  description: string | null
   price_range: number | null
   category: string | null
   latitude: number | null
@@ -81,7 +83,7 @@ function toVenue(p: BackendPlace): Venue | null {
     address: p.address,
     district: districtFromAddress(p.address, p.city),
     category: p.category || 'Diğer',
-    description: p.description || '',
+    description: '',
     lat: p.latitude,
     lng: p.longitude,
     priceRange: p.price_range ?? 2,
@@ -93,7 +95,7 @@ function toVenue(p: BackendPlace): Venue | null {
 }
 
 export async function fetchAllVenues(): Promise<Venue[]> {
-  const res = await fetch(`${API_URL}/places/?limit=5000`)
+  const res = await fetch(`${API_URL}/places/lite?limit=6000`)
   if (!res.ok) throw new Error(`Places API ${res.status}`)
   const data: PaginatedPlaces = await res.json()
   return data.items.map(toVenue).filter((v): v is Venue => v !== null)

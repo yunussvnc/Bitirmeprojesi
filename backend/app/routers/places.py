@@ -128,6 +128,51 @@ def create_new_place(
     return crud.create_place(db=db, place=place)
 
 
+@router.get("/places/lite", response_model=schemas.PaginatedPlacesLite)
+async def read_places_lite(
+    limit: int = 6000,
+    db: Session = Depends(get_db),
+):
+    """Harita/liste görünümü için minimal payload — tam Place şemasının
+    gallery_urls/menu_items/opening_hours_json gibi ağır alanlarını taşımaz.
+    Binlerce kayıtlık toplu istekler (örn. landing page interaktif haritası)
+    için /places/ yerine bu endpoint kullanılmalı."""
+    logger = logging.getLogger("asemos")
+    redis = get_redis()
+    cache_key = f"cache:places:lite:limit:{limit}"
+
+    if redis:
+        try:
+            cached_data = await redis.get(cache_key)
+            if cached_data:
+                logger.info(f"⚡ Places lite cache hit: {cache_key}")
+                return json.loads(cached_data)
+        except Exception as e:
+            logger.error(f"Places lite cache read error: {e}")
+
+    rows, total = await run_in_threadpool(crud.get_places_lite, db, skip=0, limit=limit)
+    items = [
+        schemas.PlaceLite(
+            id=r.id, name=r.name, address=r.address, city=r.city, category=r.category,
+            latitude=r.latitude, longitude=r.longitude, price_range=r.price_range,
+            photo_url=r.photo_url, average_rating=r.average_rating or 0.0,
+            review_count=r.user_ratings_total or 0,
+        )
+        for r in rows
+    ]
+    res = schemas.PaginatedPlacesLite(items=items, total=total)
+
+    if redis:
+        try:
+            res_json = json.dumps(jsonable_encoder(res))
+            await redis.set(cache_key, res_json, ex=900)
+            logger.info(f"💾 Places lite cached in Redis: {cache_key}")
+        except Exception as e:
+            logger.error(f"Places lite cache write error: {e}")
+
+    return res
+
+
 @router.get("/places/", response_model=schemas.PaginatedPlaces)
 async def read_places(
     page: int = 1,

@@ -1,5 +1,5 @@
 # pyrefly: ignore [missing-import]
-from pydantic import BaseModel, EmailStr, Field, model_validator, field_validator
+from pydantic import BaseModel, ConfigDict, EmailStr, Field, model_validator, field_validator
 import re
 import json as _json
 from datetime import datetime, date
@@ -749,6 +749,30 @@ class PaginatedPlaces(BaseModel):
     total: int
     page: int
     page_size: int
+
+
+class PlaceLite(BaseModel):
+    """Harita/liste görünümü için minimal alan seti — gallery_urls, menu_items,
+    opening_hours_json gibi ağır alanları hariç tutar. Tam Place şemasının
+    Place.model_validator'ının (JSON string parse) CPU maliyetini de taşımaz."""
+    model_config = ConfigDict(from_attributes=True)
+
+    id: int
+    name: str
+    address: str
+    city: str
+    category: Optional[str] = None
+    latitude: Optional[float] = None
+    longitude: Optional[float] = None
+    price_range: Optional[int] = None
+    photo_url: Optional[str] = None
+    average_rating: float = 0.0
+    review_count: Optional[int] = 0
+
+
+class PaginatedPlacesLite(BaseModel):
+    items: List[PlaceLite]
+    total: int
 
 
 # --- BİLDİRİM (Kademe 5) ---
