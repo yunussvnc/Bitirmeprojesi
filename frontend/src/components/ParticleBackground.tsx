@@ -13,7 +13,7 @@ async function initEngine(engine: Engine) {
   await loadSlim(engine)
 }
 
-function WarmParticles() {
+function WarmParticles({ reduceMotion }: { reduceMotion: boolean }) {
   const isMobile =
     typeof window !== 'undefined' && window.matchMedia('(max-width: 768px)').matches
 
@@ -27,15 +27,17 @@ function WarmParticles() {
         color: { value: WARM_COLORS },
         shape: { type: 'circle' },
         opacity: {
-          value: { min: 0.08, max: 0.35 },
-          animation: { enable: true, speed: 0.4, sync: false },
+          value: { min: 0.18, max: 0.45 },
+          animation: reduceMotion ? { enable: false } : { enable: true, speed: 0.4, sync: false },
         },
         size: {
           value: { min: 1, max: isMobile ? 5 : 9 },
         },
         blur: { enable: true },
         move: {
-          enable: true,
+          // prefers-reduced-motion: noktalar sabit kalır ama görünür olmaya devam eder
+          // (önceki soluk statik gradient neredeyse görünmezdi).
+          enable: !reduceMotion,
           speed: 0.35,
           direction: 'none',
           random: true,
@@ -46,7 +48,7 @@ function WarmParticles() {
       },
       detectRetina: true,
     }),
-    [isMobile],
+    [isMobile, reduceMotion],
   )
 
   const particlesLoaded = useCallback(async () => {}, [])
@@ -62,14 +64,9 @@ export default function ParticleBackground() {
   const reduceMotion =
     typeof window !== 'undefined' && window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-  // prefers-reduced-motion için sabit, hareketsiz sıcak glow
-  if (reduceMotion) {
-    return <div className="canvas-bg canvas-bg-static canvas-bg-warm" />
-  }
-
   return (
     <ParticlesProvider init={initEngine}>
-      <WarmParticles />
+      <WarmParticles reduceMotion={reduceMotion} />
     </ParticlesProvider>
   )
 }
