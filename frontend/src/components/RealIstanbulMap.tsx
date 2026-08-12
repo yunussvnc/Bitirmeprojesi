@@ -135,8 +135,12 @@ export default function RealIstanbulMap() {
     )
   }
 
+  // Masaüstünde de aynı tanınabilir gerçek fotoğraf temel katman olarak durur —
+  // canlı MapLibre sahnesi (koyu stil nedeniyle görünürlüğü zayıf) üstüne başarıyla
+  // yüklenirse görünür, yüklenemezse fotoğraf zaten görünür durumda kalır.
   return (
     <div className="istanbul-map-wrap" aria-hidden="true">
+      <img src={istanbulImages.skyline.src} alt="" className="istanbul-map-canvas istanbul-map-static-img" />
       <div ref={containerRef} className="istanbul-map-canvas" />
       <div className="istanbul-map-overlay" />
     </div>
