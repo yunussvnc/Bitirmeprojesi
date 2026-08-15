@@ -14,6 +14,7 @@ Branch / PR strategy: **[docs/KATKI_BRANCH_REHBERI.md](docs/KATKI_BRANCH_REHBERI
 - Set backend env: `GOOGLE_CLIENT_ID`, `GOOGLE_ALLOWED_CLIENT_IDS`, `APPLE_CLIENT_ID`, `APPLE_ALLOWED_CLIENT_IDS`.
 - Set mobile env / EAS secrets: `EXPO_PUBLIC_GOOGLE_*_CLIENT_ID` (never commit real values).
 - Test on device with a new native build (not Expo Go alone for Google).
+- Apple ilk girişten sonra email'i tekrar göndermeyebilir; backend email olmayan identity token'ı güvenli şekilde reddeder.
 
 Redirect URI is built in `apps/mobile/src/config/socialAuth.ts` via `getGoogleRedirectUri()`. Log it in dev if Google returns `redirect_uri_mismatch`.
 

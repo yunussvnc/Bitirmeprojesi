@@ -42,6 +42,7 @@
         "ITSAppUsesNonExemptEncryption": false
       },
       "bundleIdentifier": "com.asemos.mobile",
+      "usesAppleSignIn": true,
       "entitlements": {
         "aps-environment": "production"
       }

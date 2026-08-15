@@ -111,7 +111,7 @@ export default function RegisterScreen() {
     setLoading(true);
     try {
       const data = await googleLogin(token);
-      
+
       // Check role mismatch purely for UX
       if (roleType === 'venue' && data.user.role !== 'venue') {
         throw new Error('Mekan kayıtları sosyal medya ile yapılamaz. Lütfen başvuru formunu doldurun.');
@@ -216,13 +216,13 @@ export default function RegisterScreen() {
 
     if (!email.trim()) newErrors.email = t('auth.err_email_required');
     else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.trim())) newErrors.email = t('auth.err_email_invalid');
-    
+
     if (!password.trim()) newErrors.password = t('auth.err_password_required');
     else if (password.length < 8) newErrors.password = t('auth.err_password_short_8');
     else if (!/(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*([^\w\s]|_))/.test(password)) {
       newErrors.password = t('auth.err_password_weak');
     }
-    
+
     if (!confirmPassword.trim()) newErrors.confirmPassword = t('auth.err_confirm_required');
     else if (password !== confirmPassword) newErrors.confirmPassword = t('auth.err_passwords_mismatch');
 
@@ -233,12 +233,12 @@ export default function RegisterScreen() {
   const handleRegister = useCallback(async () => {
     if (isSubmittingRef.current) return;
     if (!validateForm()) return;
-    
+
     if (!termsAccepted) {
       Alert.alert(t('auth.terms_required_title'), t('auth.terms_required_body'), [{ text: t('explore.ok') }]);
       return;
     }
-    
+
     isSubmittingRef.current = true;
     lightImpact();
     setLoading(true);
@@ -328,7 +328,7 @@ export default function RegisterScreen() {
 
                     {/* Toggle Buttons (Kullanıcı / Mekan) */}
                     <View style={styles.toggleContainer}>
-                      <TouchableOpacity 
+                      <TouchableOpacity
                         style={[styles.toggleBtn, roleType === 'user' && styles.toggleBtnActive]}
                         onPress={() => {
                           setRoleType('user');
@@ -338,7 +338,7 @@ export default function RegisterScreen() {
                       >
                         <Text style={[styles.toggleTxt, roleType === 'user' && styles.toggleTxtActive]}>{t('auth.user')}</Text>
                       </TouchableOpacity>
-                      <TouchableOpacity 
+                      <TouchableOpacity
                         style={[styles.toggleBtn, roleType === 'venue' && styles.toggleBtnActive]}
                         onPress={() => {
                           setRoleType('venue');
@@ -659,10 +659,10 @@ export default function RegisterScreen() {
                   </View>
                 </View>
           </KeyboardAwareScrollView>
-          <LegalModal 
-            visible={legalModalType !== null} 
-            type={legalModalType} 
-            onClose={() => setLegalModalType(null)} 
+          <LegalModal
+            visible={legalModalType !== null}
+            type={legalModalType}
+            onClose={() => setLegalModalType(null)}
           />
       </SafeAreaView>
     </View>

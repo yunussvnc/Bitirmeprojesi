@@ -59,6 +59,7 @@ export default function LoginScreen() {
   const [showPassword, setShowPassword] = useState(false);
   const [errors, setErrors] = useState<Record<string, string | undefined>>({});
   const isSubmittingRef = useRef(false);
+  const [isAppleAvailable, setIsAppleAvailable] = useState(false);
 
   const { loading: socialLoading, promptGoogle, signInWithApple } = useSocialAuth(roleType, 'login');
   const formLoading = loading || socialLoading;
@@ -342,7 +343,6 @@ export default function LoginScreen() {
                           <Text style={styles.footerLabel}>{t('auth.no_account')}</Text>
                           <Text style={styles.footerLink}>{t('auth.register')}</Text>
                         </TouchableOpacity>
-
                       </View>
                     </GlassCard>
                   </View>

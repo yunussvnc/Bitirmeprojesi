@@ -41,10 +41,6 @@ from tests.conftest import TestingSessionLocal, create_test_place
 
 client = TestClient(app)
 
-# ---------------------------------------------------------------------------
-# Yardımcı fonksiyonlar
-# ---------------------------------------------------------------------------
-
 
 # ---------------------------------------------------------------------------
 # Yardımcı fonksiyonlar
