@@ -1,5 +1,6 @@
 import type { ImageSourcePropType } from "react-native";
 import type { Place } from "@/src/services/mekanService";
+import { API_BASE_URL } from "@/src/constants/api";
 
 const CATEGORY_PLACEHOLDERS: Record<string, string> = {
   kafe: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800",
@@ -20,7 +21,8 @@ export function getPlaceImageSource(
 ): ImageSourcePropType {
   if (typeof place === "object" && place !== null) {
     if ("photo_url" in place && place.photo_url) {
-      return { uri: place.photo_url };
+      const url = place.photo_url.startsWith('/') ? `${API_BASE_URL}${place.photo_url}` : place.photo_url;
+      return { uri: url };
     }
     if ("category" in place && place.category) {
       const key = place.category.toLowerCase().trim();
