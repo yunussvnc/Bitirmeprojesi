@@ -29,3 +29,25 @@ jobs:
 
       - name: Run tests
         run: pytest --maxfail=1 --disable-warnings -q
+
+  deploy:
+    # Sadece main'e gerçek push'ta çalışır — pull request'lerde deploy edilmez.
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: SSH deploy (git pull + docker compose rebuild)
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: 167.233.219.55
+          username: deploy
+          key: ${{ secrets.DEPLOY_SSH_KEY }}
+          timeout: 30s
+          command_timeout: 20m
+          script: |
+            set -e
+            cd /opt/asemos/app
+            git fetch origin main
+            git reset --hard origin/main
+            docker compose -f docker-compose.prod.yml up -d --build
+            docker image prune -f

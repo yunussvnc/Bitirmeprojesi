@@ -38,6 +38,10 @@ services:
     restart: unless-stopped
     security_opt:
       - no-new-privileges:true
+    # Sadece localhost'a bağlı — SSH tüneliyle takım üyelerinin DB'ye
+    # bağlanabilmesi için (dışarıya hiç açık değil, dış dünyadan erişilemez).
+    ports:
+      - "127.0.0.1:5432:5432"
     # Checkpoint + WAL flush için varsayılan 10s docker-stop süresi yetersiz
     # kalabilir — büyük checkpoint sırasında SIGKILL yemesin diye uzatıldı.
     stop_grace_period: 60s
@@ -78,6 +82,10 @@ services:
     restart: unless-stopped
     security_opt:
       - no-new-privileges:true
+    # Sadece localhost'a bağlı — SSH tüneliyle takım üyelerinin DB'ye
+    # bağlanabilmesi için (dışarıya hiç açık değil, dış dünyadan erişilemez).
+    ports:
+      - "127.0.0.1:6379:6379"
     # AOF fsync'in yarım kalmaması için (appendonly yes) küçük bir pay.
     stop_grace_period: 30s
     # DİKKAT: REDIS_PASSWORD sadece `command:` string'ine (compose-time
