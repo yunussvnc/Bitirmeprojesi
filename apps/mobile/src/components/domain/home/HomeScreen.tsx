@@ -667,10 +667,8 @@ export default function HomeScreen() {
           }
           ListEmptyComponent={listEmpty}
           ItemSeparatorComponent={ItemSeparator}
+          // @ts-ignore: estimatedItemSize is required for FlashList performance but type definitions in 2.0.2 might be missing it
           estimatedItemSize={CARD_HEIGHT}
-          overrideItemLayout={(layout, item, index) => {
-            layout.span = CARD_HEIGHT;
-          }}
           contentContainerStyle={displayList.length > 0 ? styles.listContent : styles.listContentEmpty}
           refreshControl={
             <RefreshControl 
