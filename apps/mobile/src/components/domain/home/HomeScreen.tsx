@@ -9,7 +9,7 @@ import { router, useNavigation } from "expo-router";
 import React, { useState, useEffect, useMemo, useCallback, useRef } from "react";
 import {
   View,
-  Text,
+  Text, Dimensions,
   StyleSheet,
   TouchableOpacity,
   Platform,
@@ -79,6 +79,9 @@ function queryContainsLocation(query: string): boolean {
 }
 
 type DisplayMode = "browse" | "ai";
+
+/** Stable separator to avoid re-renders in FlashList */
+const ItemSeparator = () => <View style={{ height: 6 }} />;
 
 /** Common shape for list items (RecommendItem | Place) */
 type PlaceLike = { id: number | string; name?: string; category?: string; city?: string; photo_url?: string; description?: string; subtitle?: string; tags?: string[] };
@@ -234,6 +237,10 @@ function HomeListHeader({
   );
 }
 
+const SCREEN_WIDTH = Dimensions.get('window').width;
+const ITEM_WIDTH = SCREEN_WIDTH - 32; // paddingHorizontal: 16
+const CARD_HEIGHT = (ITEM_WIDTH * (9 / 16)) + 145;
+
 export default function HomeScreen() {
   const { colors } = useTheme();
   const { t } = useTranslation();
@@ -285,8 +292,13 @@ export default function HomeScreen() {
     try {
       const { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== "granted") return;
-      const loc = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Balanced });
-      setUserLocation({ lat: loc.coords.latitude, lng: loc.coords.longitude });
+      let loc = await Location.getLastKnownPositionAsync();
+      if (!loc) {
+        loc = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Balanced });
+      }
+      if (loc) {
+        setUserLocation({ lat: loc.coords.latitude, lng: loc.coords.longitude });
+      }
     } catch {
       // Fallback: İstanbul merkez
     }
@@ -549,9 +561,6 @@ export default function HomeScreen() {
     [placesById, handlePlacePress, displayMode]
   );
 
-  const onViewableItemsChanged = useRef(({ viewableItems: v }: { viewableItems: ViewToken[] }) => { }).current;
-  const viewabilityConfig = useRef({ itemVisiblePercentThreshold: 50 }).current;
-
   const listEmpty = useCallback(() => {
     if (loading && allPlaces.length === 0) {
       return (
@@ -657,10 +666,12 @@ export default function HomeScreen() {
             />
           }
           ListEmptyComponent={listEmpty}
-          ItemSeparatorComponent={() => <View style={{ height: 6 }} />}
+          ItemSeparatorComponent={ItemSeparator}
+          estimatedItemSize={CARD_HEIGHT}
+          overrideItemLayout={(layout, item, index) => {
+            layout.span = CARD_HEIGHT;
+          }}
           contentContainerStyle={displayList.length > 0 ? styles.listContent : styles.listContentEmpty}
-          onViewableItemsChanged={onViewableItemsChanged}
-          viewabilityConfig={viewabilityConfig}
           refreshControl={
             <RefreshControl 
               refreshing={refreshing} 
@@ -674,8 +685,7 @@ export default function HomeScreen() {
           keyboardDismissMode="on-drag"
           keyboardShouldPersistTaps="handled"
           onScroll={(e) => handleScroll(e.nativeEvent.contentOffset.y)}
-          onScrollBeginDrag={() => fadeIn()}
-          scrollEventThrottle={16}
+          scrollEventThrottle={32}
         />
         <Animated.View
           style={[

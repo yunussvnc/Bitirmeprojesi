@@ -14,7 +14,7 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
-  Image,
+
   Linking,
   Modal,
   Pressable,
@@ -27,6 +27,7 @@ import {
 } from "react-native";
 import { useScrollToTop } from '@react-navigation/native';
 import Animated, { FadeIn } from "react-native-reanimated";
+import { Image as ExpoImage } from 'expo-image';
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTheme } from "@/src/hooks/useTheme";
 import { Screen, Section, type ScreenRef } from "@/src/components/layout";
@@ -447,11 +448,10 @@ export default function PlaceDetailScreen({
   useEffect(() => {
     if (!place?.category) return;
     const cancelled = { current: false };
-    // Benzer mekanları biraz geciktirerek yükle (ana veri yüklenmesin diye)
-    const timer = setTimeout(() => loadSimilarPlaces(cancelled), 300);
+    // Benzer mekanları hemen yükle (gecikme kaldırıldı — performans optimizasyonu)
+    loadSimilarPlaces(cancelled);
     return () => {
       cancelled.current = true;
-      clearTimeout(timer);
     };
   }, [place?.id, place?.category]); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -727,12 +727,13 @@ export default function PlaceDetailScreen({
               lightImpact();
               setShowHeroImage(true);
             }} style={[{ backgroundColor: colors.surface.elevated, flex: 1 }]}>
-              <Animated.Image 
+              <ExpoImage 
                 source={heroSource} 
                 style={styles.placeImage} 
-                resizeMode="cover" 
-                // @ts-ignore
-                sharedTransitionTag={`place-image-${place.id || id}`}
+                contentFit="cover"
+                cachePolicy="memory-disk"
+                priority="high"
+                transition={{ duration: 200 }}
               />
             </Pressable>
           ) : (
@@ -850,7 +851,7 @@ export default function PlaceDetailScreen({
                     alignItems: 'center',
                   }}>
                     {place?.photo_url ? (
-                      <Image source={{ uri: place.photo_url }} style={{ width: 60, height: 60, borderRadius: 30 }} />
+                      <ExpoImage source={{ uri: place.photo_url }} style={{ width: 60, height: 60, borderRadius: 30 }} cachePolicy="memory-disk" />
                     ) : (
                       <View style={{ width: 60, height: 60, borderRadius: 30, backgroundColor: colors.surface.elevated, justifyContent: 'center', alignItems: 'center' }}>
                         <IconSymbol name="camera.fill" size={24} color={colors.text.secondary} />
@@ -970,7 +971,7 @@ export default function PlaceDetailScreen({
                   }}
                 >
                   {item.img ? (
-                    <Image source={{ uri: item.img }} style={{ width: 48, height: 48, borderRadius: 12, marginRight: 12, backgroundColor: colors.surface.elevated }} />
+                    <ExpoImage source={{ uri: item.img }} style={{ width: 48, height: 48, borderRadius: 12, marginRight: 12, backgroundColor: colors.surface.elevated }} cachePolicy="memory-disk" />
                   ) : (
                     <View style={{ width: 48, height: 48, borderRadius: 12, marginRight: 12, backgroundColor: colors.surface.elevated, justifyContent: 'center', alignItems: 'center' }}>
                       <IconSymbol name="fork.knife" size={20} color={colors.text.tertiary} />
@@ -1013,7 +1014,7 @@ export default function PlaceDetailScreen({
                 </View>
               </View>
               <View style={{ borderRadius: 16, overflow: 'hidden', height: 180, backgroundColor: colors.surface.elevated }}>
-                <Image source={{ uri: place.menu_items[0].uri }} style={{ width: '100%', height: '100%' }} resizeMode="cover" />
+                <ExpoImage source={{ uri: place.menu_items[0].uri }} style={{ width: '100%', height: '100%' }} contentFit="cover" cachePolicy="memory-disk" />
                 <View style={{ ...StyleSheet.absoluteFillObject, backgroundColor: 'rgba(0,0,0,0.3)', justifyContent: 'center', alignItems: 'center' }}>
                   <IconSymbol name="doc.text.magnifyingglass" size={32} color="#fff" />
                   <Text style={{ color: '#fff', fontWeight: '700', fontSize: 15, marginTop: 8 }}>
@@ -1090,7 +1091,7 @@ export default function PlaceDetailScreen({
                       }}
                     >
                       {postImg ? (
-                        <Image source={{ uri: postImg }} style={{ width: '100%', height: '100%' }} resizeMode="cover" />
+                        <ExpoImage source={{ uri: postImg }} style={{ width: '100%', height: '100%' }} contentFit="cover" cachePolicy="memory-disk" />
                       ) : (
                         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                           <IconSymbol name="photo" size={24} color={colors.text.tertiary} />
@@ -1234,7 +1235,7 @@ export default function PlaceDetailScreen({
                               <View style={styles.reviewHeader}>
                                 <View style={[styles.reviewHeaderLeft, { alignItems: 'center' }]}>
                                   {review.user?.avatar_url ? (
-                                    <Image source={{ uri: review.user.avatar_url }} style={{ width: 32, height: 32, borderRadius: 16, marginRight: 8, backgroundColor: colors.surface.default }} />
+                                    <ExpoImage source={{ uri: review.user.avatar_url }} style={{ width: 32, height: 32, borderRadius: 16, marginRight: 8, backgroundColor: colors.surface.default }} cachePolicy="memory-disk" />
                                   ) : (
                                     <View style={{ width: 32, height: 32, borderRadius: 16, marginRight: 8, backgroundColor: colors.surface.default, justifyContent: 'center', alignItems: 'center' }}>
                                       <IconSymbol name="person.fill" size={16} color={colors.text.tertiary} />
@@ -1272,7 +1273,7 @@ export default function PlaceDetailScreen({
                                   hitSlop={8}
                                   style={({ pressed }) => [styles.reviewImageContainer, pressed && { opacity: 0.8 }]}
                                 >
-                                  <Image source={{ uri: review.media_url }} style={styles.reviewImage} resizeMode="cover" />
+                                  <ExpoImage source={{ uri: review.media_url }} style={styles.reviewImage} contentFit="cover" cachePolicy="memory-disk" />
                                   {(review.media_urls?.length ?? 0) > 1 && (
                                     <View style={styles.reviewImageBadge}>
                                       <Text style={styles.reviewImageBadgeText}>{review.media_urls!.length}</Text>

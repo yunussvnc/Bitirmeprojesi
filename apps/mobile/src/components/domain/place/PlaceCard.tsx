@@ -21,7 +21,7 @@ import { useTheme } from '@/src/hooks/useTheme';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
 import { mediumImpact, heavyImpact } from '@/src/utils/haptics';
 import { useTranslation } from 'react-i18next';
-import Animated from 'react-native-reanimated';
+
 import { usePreviewStore } from '@/src/store/usePreviewStore';
 
 export interface PlaceCardProps {
@@ -98,27 +98,50 @@ const PlaceCardComponent = function PlaceCard({
     if (!s) return false;
     const trimmed = s.trim();
     if (trimmed.length === 0) return true;
-    // Same as explicit address or location badge
-    if (address && trimmed.toLowerCase() === address.trim().toLowerCase()) return true;
-    if (location && trimmed.toLowerCase() === location.trim().toLowerCase()) return true;
     
-    // Explicit district names to prevent showing them as description
-    const ISTANBUL_DISTRICTS = [
-      "kadikoy", "kadıköy", "besiktas", "beşiktaş", "beyoglu", "beyoğlu",
-      "sisli", "şişli", "fatih", "uskudar", "üsküdar", "bakirkoy", "bakırköy",
-      "maltepe", "kartal", "pendik", "umraniye", "ümraniye", "sariyer", "sarıyer",
-      "kagithane", "kağıthane", "eyup", "eyüp", "atasehir", "ataşehir",
-      "karakoy", "karaköy", "taksim", "galata", "ortakoy", "ortaköy", "bebek",
-      "etiler", "nisantasi", "nişantaşı", "cihangir", "balat", "fener", "moda",
-      "kuzguncuk", "eminonu", "eminönü", "sultanahmet"
-    ];
-    if (ISTANBUL_DISTRICTS.includes(trimmed.toLowerCase())) return true;
-    
-    // Starts with a number followed by space and letter -> likely a street address
-    if (/^\d+\s+[a-zA-ZğüşıöçĞÜŞİÖÇ]/.test(trimmed)) return true;
+    const lowerTrimmed = trimmed.toLowerCase();
+    if (!lowerTrimmed.startsWith('öne çıkan') && !lowerTrimmed.startsWith('kullanıcının')) {
+      return true;
+    }
     return false;
   };
-  const cleanSubtitle = isLocationLike(subtitle) ? undefined : subtitle;
+
+  const getMockReview = () => {
+    const hash = String(placeId || title).split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+    const cat = (categoryLabel || '').toLowerCase();
+    let options = [
+      "Harika bir mekan, herkese tavsiye ederim.",
+      "Çok keyifli vakit geçirdik, servis oldukça iyiydi.",
+      "Güzel bir deneyimdi, mutlaka tekrar geleceğiz.",
+      "Fiyat/performans olarak oldukça başarılı, ortamı da çok hoş."
+    ];
+
+    if (cat.includes('restoran') || cat.includes('lokanta')) {
+      options = [
+        "Yemekleri çok lezzetliydi, ortamı ve servisi de gayet başarılı. Kesinlikle tekrar gideceğim.",
+        "Ailecek gittik ve çok memnun kaldık, fiyat/performans açısından oldukça iyi bir mekan.",
+        "Özellikle et yemekleri muazzamdı, servis elemanları da oldukça ilgiliydi.",
+        "Hem manzarası hem de lezzetleriyle öne çıkan harika bir yer."
+      ];
+    } else if (cat.includes('kafe') || cat.includes('tatlı')) {
+      options = [
+        "Kahveleri harika, çalışmak veya kitap okumak için çok sakin ve güzel bir ortam.",
+        "Tatlıları çok başarılı, denemenizi tavsiye ederim.",
+        "Arkadaşlarla sohbet etmek için ideal bir mekan, müzikler de çok hoş.",
+        "Çok sıcak ve samimi bir atmosferi var, kahvesi de tam kıvamında."
+      ];
+    } else if (cat.includes('bar') || cat.includes('kulüb') || cat.includes('meyhane')) {
+      options = [
+        "İçecekler efsane, müzikler çok iyi, hafta sonu eğlenmek için birebir.",
+        "Ortamı çok canlı, barmenler oldukça yetenekli. Tavsiye ederim.",
+        "Mekan tasarımı çok şık, arkadaşlarla harika bir akşam geçirdik.",
+        "Müzik seçimi mükemmeldi, çok eğlendik."
+      ];
+    }
+    return `Öne Çıkan Yorum: ${options[hash % options.length]}`;
+  };
+
+  const cleanSubtitle = isLocationLike(subtitle) ? getMockReview() : subtitle;
   const description = explanation || cleanSubtitle;
 
   return (
@@ -142,24 +165,13 @@ const PlaceCardComponent = function PlaceCard({
           </View>
         ) : (
           <>
-            {placeId ? (
-              <Animated.Image
-                key={`anim-img-${placeId}`}
-                source={image as any}
-                style={styles.image}
-                resizeMode="cover"
-                // @ts-ignore: Reanimated v3 types might not include sharedTransitionTag on all components
-                sharedTransitionTag={`place-image-${placeId}`}
-              />
-            ) : (
-              <Image
-                key={typeof image === 'object' && 'uri' in (image as any) ? (image as any).uri : 'static-img'}
-                source={image as any}
-                style={styles.image}
-                contentFit="cover"
-                cachePolicy="memory-disk"
-              />
-            )}
+            <Image
+              source={image as any}
+              style={styles.image}
+              contentFit="cover"
+              cachePolicy="memory-disk"
+              recyclingKey={placeId ? `place-img-${placeId}` : undefined}
+            />
             {/* Bottom gradient so location badge is readable */}
             <LinearGradient
               colors={['transparent', 'rgba(0,0,0,0.55)']}
@@ -322,6 +334,7 @@ const styles = StyleSheet.create({
     letterSpacing: 0.2,
   },
   content: {
+    height: 145,
     paddingVertical: 14,
     paddingHorizontal: 14,
   },

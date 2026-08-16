@@ -25,9 +25,9 @@ const WS_URL = API_BASE_URL.replace(/^http/, 'ws') + '/api/v1/notifications/ws';
 
 // Sabitler
 const MAX_RECONNECT_ATTEMPTS = 10;
-const MIN_RECONNECT_DELAY = 5000;   // 5 saniye
-const MAX_RECONNECT_DELAY = 60000;  // 60 saniye
-const PING_INTERVAL = 25000;        // 25 saniyede bir ping (sunucu heartbeat 30s)
+const MIN_RECONNECT_DELAY = 2000;
+const MAX_RECONNECT_DELAY = 30000;
+const PING_INTERVAL = 15000; // 15s (Sunucu kapanmasını engellemek için)
 
 export function useNotificationSocket() {
   const wsRef = useRef<WebSocket | null>(null);
@@ -108,7 +108,9 @@ export function useNotificationSocket() {
         if (wsRef.current?.readyState === WebSocket.OPEN) {
             reconnectAttemptRef.current = 0; // Reset backoff
         }
-      }, 15000);
+      }, 15000); // 15 saniye açık kalırsa stabil kabul et
+
+      syncUnreadCount();
     };
 
     ws.onmessage = (event) => {
@@ -168,12 +170,14 @@ export function useNotificationSocket() {
     };
 
     ws.onerror = (error: any) => {
-      console.warn('❌ Notification WebSocket error:', error?.message || "Connection failed (Backend might be sleeping or unreachable)");
+      // Avoid spamming terminal with generic connection dropped messages
       isConnecting.current = false;
     };
 
     ws.onclose = (event) => {
-      console.log(`🔌 Notification WebSocket closed. Code: ${event.code}`);
+      if (event.code !== 1006) {
+        console.log(`🔌 Notification WebSocket closed. Code: ${event.code}`);
+      }
       isConnecting.current = false;
       wsRef.current = null;
       clearPingInterval();

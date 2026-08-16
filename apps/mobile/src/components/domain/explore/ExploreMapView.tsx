@@ -99,15 +99,20 @@ export function ExploreMapView({ places, loading, onLoadPlaces }: ExploreMapView
       try {
         const { status } = await Location.requestForegroundPermissionsAsync();
         if (status === 'granted') {
-          const loc = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Balanced });
-          setUserLocation({ latitude: loc.coords.latitude, longitude: loc.coords.longitude });
-          // Sadece ilk seferinde konuma git
-          if (cameraRef.current) {
-            cameraRef.current.flyTo({
-              center: [loc.coords.longitude, loc.coords.latitude],
-              zoom: DEFAULT_ZOOM,
-              duration: 1000,
-            });
+          let loc = await Location.getLastKnownPositionAsync();
+          if (!loc) {
+            loc = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Balanced });
+          }
+          if (loc) {
+            setUserLocation({ latitude: loc.coords.latitude, longitude: loc.coords.longitude });
+            // Sadece ilk seferinde konuma git
+            if (cameraRef.current) {
+              cameraRef.current.flyTo({
+                center: [loc.coords.longitude, loc.coords.latitude],
+                zoom: DEFAULT_ZOOM,
+                duration: 1000,
+              });
+            }
           }
         }
       } catch { }
