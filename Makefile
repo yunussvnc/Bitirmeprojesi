@@ -14,7 +14,7 @@ run: clean db ai-db
 
 # Backend ve AI-LLM'i aynı terminalde birleştirir (Mobile hariç)
 run-services:
-	npx concurrently -n "BACKEND,AI-LLM" -c "bgBlue.bold,bgMagenta.bold" \
+	npx -y concurrently -n "BACKEND,AI-LLM" -c "bgBlue.bold,bgMagenta.bold" \
 		"make run-backend" \
 		"make run-ai"
 
