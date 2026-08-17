@@ -44,6 +44,70 @@ class TestPlaceList:
         assert len(data["items"]) == 2
 
 
+class TestForYouPlaces:
+    """GET /places/foryou — optional-auth personalization."""
+
+    def _seed_personalized_places(self, user_id: int) -> tuple[int, int]:
+        low_rated_id = create_test_place(name="Interacted Low Rating", category="Kafe")
+        high_rated_id = create_test_place(name="Anonymous High Rating", category="Kafe")
+
+        db = TestingSessionLocal()
+        low_rated = db.query(models.Place).filter(models.Place.id == low_rated_id).first()
+        high_rated = db.query(models.Place).filter(models.Place.id == high_rated_id).first()
+        low_rated.average_rating = 1.0
+        high_rated.average_rating = 5.0
+        db.add(models.UserPlaceInteraction(
+            user_id=user_id,
+            place_id=low_rated_id,
+            interaction_type="CARD_VIEW",
+            weight=100,
+        ))
+        db.commit()
+        db.close()
+        return low_rated_id, high_rated_id
+
+    def test_foryou_uses_valid_optional_user_personalization(self, client):
+        uid = create_test_user(email="foryou_valid@test.com", username="foryouvalid")
+        low_rated_id, _ = self._seed_personalized_places(uid)
+
+        response = client.get("/places/foryou", headers=get_auth_headers(uid))
+
+        assert response.status_code == 200
+        assert response.json()["items"][0]["id"] == low_rated_id
+
+    def test_foryou_ignores_revoked_optional_token(self, client):
+        uid = create_test_user(email="foryou_revoked@test.com", username="foryourevoked")
+        _, high_rated_id = self._seed_personalized_places(uid)
+        stale_headers = get_auth_headers(uid)
+
+        db = TestingSessionLocal()
+        user = db.query(models.User).filter(models.User.id == uid).first()
+        user.token_version = 1
+        db.commit()
+        db.close()
+
+        response = client.get("/places/foryou", headers=stale_headers)
+
+        assert response.status_code == 200
+        assert response.json()["items"][0]["id"] == high_rated_id
+
+    def test_foryou_ignores_inactive_optional_user(self, client):
+        uid = create_test_user(email="foryou_inactive@test.com", username="foryouinactive")
+        _, high_rated_id = self._seed_personalized_places(uid)
+        headers = get_auth_headers(uid)
+
+        db = TestingSessionLocal()
+        user = db.query(models.User).filter(models.User.id == uid).first()
+        user.is_active = False
+        db.commit()
+        db.close()
+
+        response = client.get("/places/foryou", headers=headers)
+
+        assert response.status_code == 200
+        assert response.json()["items"][0]["id"] == high_rated_id
+
+
 class TestPlaceDetail:
     """GET /places/{id} — Mekan detay."""
 
