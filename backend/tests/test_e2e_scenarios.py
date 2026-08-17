@@ -19,8 +19,8 @@ import models, crud
 class TestScenarioUserLifecycle:
     """Senaryo 1: Kayıt → Doğrulama → İlk Kurulum → Profil → Post."""
 
-    @patch("app.services.email_service._send_welcome_email")
-    @patch("app.services.email_service.send_email")
+    @patch("app.routers.auth._send_welcome_email")
+    @patch("app.routers.auth.send_email")
     def test_full_user_lifecycle(self, mock_send, mock_welcome, client):
         # 1. Kayıt
         reg_resp = client.post("/auth/register", json={
@@ -31,6 +31,7 @@ class TestScenarioUserLifecycle:
         })
         assert reg_resp.status_code == 200
         assert reg_resp.json()["ok"] is True
+        registration_token = reg_resp.json()["registration_token"]
 
         # 2. Doğrulama kodu al
         db = TestingSessionLocal()
@@ -42,6 +43,7 @@ class TestScenarioUserLifecycle:
         verify_resp = client.post("/auth/verify-register", json={
             "email": "lifecycle@test.com",
             "code": code,
+            "registration_token": registration_token,
         })
         assert verify_resp.status_code == 200
         token = verify_resp.json()["access_token"]

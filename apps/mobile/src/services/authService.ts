@@ -45,8 +45,8 @@ export type UpdateProfilePayload = {
   avatar_url?: string;
 };
 
-export async function registerUser(payload: RegisterPayload): Promise<{ ok: boolean; message: string; email: string }> {
-  return apiPost<{ ok: boolean; message: string; email: string }>("/auth/register", payload, { skipAuth: true });
+export async function registerUser(payload: RegisterPayload): Promise<{ ok: boolean; message: string; email: string; registration_token: string }> {
+  return apiPost<{ ok: boolean; message: string; email: string; registration_token: string }>("/auth/register", payload, { skipAuth: true });
 }
 
 export type RegisterVenuePayload = {
@@ -89,12 +89,16 @@ export async function resendVerification(): Promise<{ ok: boolean; message: stri
   return apiPost<{ ok: boolean; message: string }>("/auth/resend-verification", {});
 }
 
-export async function verifyRegister(email: string, code: string): Promise<AuthTokens> {
-  return apiPost<AuthTokens>("/auth/verify-register", { email, code }, { skipAuth: true });
+export async function verifyRegister(email: string, code: string, registrationToken?: string): Promise<AuthTokens> {
+  return apiPost<AuthTokens>(
+    "/auth/verify-register",
+    { email, code, registration_token: registrationToken },
+    { skipAuth: true },
+  );
 }
 
-export async function resendRegisterCode(email: string): Promise<{ ok: boolean; message: string }> {
-  return apiPost<{ ok: boolean; message: string }>("/auth/resend-register-code", { email }, { skipAuth: true });
+export async function resendRegisterCode(email: string): Promise<{ ok: boolean; message: string; registration_token: string }> {
+  return apiPost<{ ok: boolean; message: string; registration_token: string }>("/auth/resend-register-code", { email }, { skipAuth: true });
 }
 
 // --- Şifre & Hesap ---

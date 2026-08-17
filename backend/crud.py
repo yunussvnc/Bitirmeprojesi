@@ -78,12 +78,19 @@ def create_user(db: Session, user: schemas.UserCreate):
 def get_pending_user_by_email(db: Session, email: str):
     return db.query(models.PendingUser).filter(models.PendingUser.email == email).first()
 
-def create_pending_user(db: Session, user: schemas.UserCreate, verification_code: str, expires_at: datetime):
+def create_pending_user(
+    db: Session,
+    user: schemas.UserCreate,
+    verification_code: str,
+    expires_at: datetime,
+    registration_token: str | None = None,
+):
     hashed_password = _hash_password(user.password)
     db_pend = models.PendingUser(
         email=user.email,
         username=user.username,
         password_hash=hashed_password,
+        registration_token=registration_token,
         first_name=user.first_name,
         last_name=user.last_name,
         birth_date=user.birth_date,
@@ -94,6 +101,26 @@ def create_pending_user(db: Session, user: schemas.UserCreate, verification_code
     db.commit()
     db.refresh(db_pend)
     return db_pend
+
+def update_pending_user_registration(
+    db: Session,
+    pending: models.PendingUser,
+    user: schemas.UserCreate,
+    verification_code: str,
+    expires_at: datetime,
+    registration_token: str,
+):
+    pending.username = user.username
+    pending.password_hash = _hash_password(user.password)
+    pending.registration_token = registration_token
+    pending.first_name = user.first_name
+    pending.last_name = user.last_name
+    pending.birth_date = user.birth_date
+    pending.verification_code = verification_code
+    pending.expires_at = expires_at
+    db.commit()
+    db.refresh(pending)
+    return pending
 
 def delete_pending_user(db: Session, email: str):
     db_pend = get_pending_user_by_email(db, email)

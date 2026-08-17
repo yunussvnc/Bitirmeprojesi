@@ -32,13 +32,17 @@ const { width } = Dimensions.get('window');
 const CODE_LENGTH = 6;
 
 export default function EmailVerificationScreen() {
-    const { email: paramsEmailRaw } = useLocalSearchParams<{ email: string }>();
+    const { email: paramsEmailRaw, registrationToken: paramsRegistrationToken } = useLocalSearchParams<{
+        email: string;
+        registrationToken?: string;
+    }>();
     const paramsEmail = paramsEmailRaw ? decodeURIComponent(paramsEmailRaw) : undefined;
     const [code, setCode] = useState<string[]>(Array(CODE_LENGTH).fill(''));
     const [loading, setLoading] = useState(false);
     const [resendLoading, setResendLoading] = useState(false);
     const [resendCooldown, setResendCooldown] = useState(0);
     const [error, setError] = useState('');
+    const [registrationToken, setRegistrationToken] = useState(paramsRegistrationToken);
     const { t } = useTranslation();
     const inputRefs = useRef<(TextInput | null)[]>([]);
     const shakeAnim = useRef(new Animated.Value(0)).current;
@@ -114,7 +118,7 @@ export default function EmailVerificationScreen() {
             setError('');
 
             try {
-                const data = await verifyRegister(paramsEmail || '', codeStr);
+                const data = await verifyRegister(paramsEmail || '', codeStr, registrationToken);
                 successHaptic();
                 useAuthStore.getState().setTokens(data.access_token, data.refresh_token);
                 useAuthStore.getState().setUser(data.user);
@@ -133,7 +137,7 @@ export default function EmailVerificationScreen() {
                 setLoading(false);
             }
         },
-        [code, triggerShake, paramsEmail, t],
+        [code, triggerShake, paramsEmail, registrationToken, t],
     );
 
     const handleResend = useCallback(async () => {
@@ -141,7 +145,8 @@ export default function EmailVerificationScreen() {
         lightImpact();
         setResendLoading(true);
         try {
-            await resendRegisterCode(paramsEmail || '');
+            const response = await resendRegisterCode(paramsEmail || '');
+            setRegistrationToken(response.registration_token);
             setResendCooldown(60);
             Alert.alert(t('forgot_password.success'), t('forgot_password.code_resent'));
         } catch {
