@@ -9,6 +9,7 @@ from tests.conftest import (
     create_test_user, create_test_place, create_test_post,
     get_auth_headers, TestingSessionLocal,
 )
+from auth import create_access_token
 import models, crud
 
 
@@ -270,6 +271,28 @@ class TestUserAndPlacePosts:
         response = client.get(f"/users/{uid}/posts")
         assert response.status_code == 200
         assert response.json()["total"] == 2
+
+    def test_stale_optional_token_cannot_view_private_user_posts(self, client):
+        viewer_uid = create_test_user(email="staleviewer@test.com", username="staleviewer")
+        private_uid = create_test_user(email="privatefeed@test.com", username="privatefeed")
+        create_test_post(private_uid, caption="Private post")
+
+        stale_token = create_access_token(viewer_uid, token_version=0)
+
+        db = TestingSessionLocal()
+        db.add(models.UserPreferences(user_id=private_uid, is_private_account=True))
+        db.add(models.Follow(follower_id=viewer_uid, following_id=private_uid, status="accepted"))
+        viewer = db.query(models.User).filter(models.User.id == viewer_uid).first()
+        viewer.token_version = 1
+        db.commit()
+        db.close()
+
+        response = client.get(
+            f"/users/{private_uid}/posts",
+            headers={"Authorization": f"Bearer {stale_token}"},
+        )
+        assert response.status_code == 200
+        assert response.json()["total"] == 0
 
     def test_get_place_posts(self, client):
         uid = create_test_user(email="plcposts@test.com", username="plcposts")

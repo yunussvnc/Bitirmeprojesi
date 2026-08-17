@@ -52,7 +52,14 @@ def get_optional_user(
     user_id = payload.get("sub")
     if not user_id or payload.get("type") != "access":
         return None
-    return db.query(models.User).filter(models.User.id == int(user_id)).first()
+    user = db.query(models.User).filter(models.User.id == int(user_id)).first()
+    if not user or not user.is_active:
+        return None
+    token_ver = payload.get("ver", 0)
+    user_ver = user.token_version if user.token_version is not None else 0
+    if token_ver != user_ver:
+        return None
+    return user
 
 def get_admin_user(current_user: models.User = Depends(get_current_user)) -> models.User:
     if current_user.role != 'admin':
