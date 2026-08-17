@@ -130,16 +130,26 @@ export default function ProfileScreen() {
   }
 
   const fullName = [profile?.first_name || authUser.first_name, profile?.last_name || (authUser as any).last_name].filter(Boolean).join(" ");
-  const displayName = fullName || authUser.username || authUser.email || t('profile.user');
-  const username = authUser.username || authUser.email || "";
+  // Apple Private Relay e-postalarını asla kullanıcı adı olarak gösterme (gizlilik)
+  const isRelayEmail = authUser.email?.includes('@privaterelay.appleid.com');
+  const safeEmail = isRelayEmail ? null : authUser.email;
+  const displayName = fullName || authUser.username || safeEmail || t('profile.user');
+  const username = authUser.username || safeEmail || t('profile.user');
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background.primary }]}>
       {/* ── Moden Header ── */}
       <View style={[styles.header, { paddingTop: insets.top + 16 }]}>
-        {/* Ortadaki Username (Absolute) */}
-        <View pointerEvents="none" style={[StyleSheet.absoluteFill, { alignItems: 'center', justifyContent: 'flex-end', paddingBottom: 10, zIndex: 0 }]}>
-          <Text style={{ color: colors.text.primary, fontSize: 16, fontWeight: "600" }}>{username}</Text>
+       {/* Ortadaki Username (Absolute) */}
+        <View pointerEvents="none" style={[StyleSheet.absoluteFill, { alignItems: 'center', justifyContent: 'flex-end', paddingBottom: 10, paddingHorizontal: 80, zIndex: 0 }]}>
+          <Text
+            numberOfLines={1}
+            adjustsFontSizeToFit
+            minimumFontScale={0.7}
+            style={{ color: colors.text.primary, fontSize: username.length > 20 ? 13 : username.length > 14 ? 14 : 16, fontWeight: "600" }}
+          >
+            {username}
+          </Text>
         </View>
 
         <Text style={[styles.headerTitle, { color: colors.text.primary, zIndex: 1 }]}>{t('profile.title', 'Profil')}</Text>

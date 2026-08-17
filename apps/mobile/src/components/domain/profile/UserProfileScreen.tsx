@@ -216,9 +216,12 @@ export default function UserProfileScreen() {
     router.push(`/p/post/${postId}` as any);
   }, [router]);
 
+  // Apple Private Relay e-postalarını asla başka kullanıcıların profilinde gösterme
+  const isRelayEmail = profile?.email?.includes('@privaterelay.appleid.com');
+  const safeEmail = isRelayEmail ? null : profile?.email;
   const displayName =
-    profile?.first_name || profile?.username || profile?.email || t('profile.user');
-  const username = profile?.username || profile?.email || "";
+    profile?.first_name || profile?.username || safeEmail || t('profile.user');
+  const username = profile?.username || safeEmail || t('profile.user');
   const postCount = stats?.post_count ?? 0;
 
   if (loading && !profile) {

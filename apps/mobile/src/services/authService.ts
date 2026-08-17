@@ -124,6 +124,9 @@ export async function googleLogin(token: string): Promise<AuthTokens> {
   return apiPost<AuthTokens>("/auth/google", { token }, { skipAuth: true });
 }
 
-export async function appleLogin(token: string): Promise<AuthTokens> {
-  return apiPost<AuthTokens>("/auth/apple", { token }, { skipAuth: true });
+export async function appleLogin(
+  token: string,
+  fullName?: { firstName?: string; lastName?: string }
+): Promise<AuthTokens> {
+  return apiPost<AuthTokens>("/auth/apple", { token, full_name: fullName }, { skipAuth: true });
 }

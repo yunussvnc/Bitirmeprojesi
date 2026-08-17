@@ -476,15 +476,36 @@ def apple_login(
         if not email:
             # Apple bazen email göndermeyebilir (Private Email Relay), handle et.
             raise HTTPException(status_code=400, detail="Token içinde e-posta bulunamadı. Lütfen Apple kimliğinizle e-posta paylaşımını aktif edin.")
+        
+        # Apple Private Relay e-posta tespiti
+        is_private_relay = email.endswith("@privaterelay.appleid.com")
+        
+        # Apple ilk girişte fullName gönderir — bunu yakala
+        first_name = None
+        last_name = None
+        if body.full_name:
+            first_name = body.full_name.firstName or None
+            last_name = body.full_name.lastName or None
             
         user = crud.get_user_by_email(db, email)
+        is_new_user = user is None
+        
         if not user:
             user_data = schemas.UserCreate(
                 email=email, 
                 password="SocialLogin1!_" + str(uuid.uuid4()), 
-                username=None
+                username=None,
+                first_name=first_name,
+                last_name=last_name,
             )
             user = crud.create_user(db, user_data)
+        elif is_private_relay and (first_name or last_name):
+            # Mevcut kullanıcı, ama isim bilgisi yoksa güncelle
+            # (Apple fullName'i sadece ilk seferde gönderir)
+            if not user.first_name and first_name:
+                user.first_name = first_name
+            if not user.last_name and last_name:
+                user.last_name = last_name
         
         user.is_email_verified = True
         user.token_version = (user.token_version or 0) + 1
