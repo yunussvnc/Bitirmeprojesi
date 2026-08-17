@@ -30,6 +30,7 @@ interface RequestOptions extends RequestInit {
   retries?: number;
   retryDelay?: number;
   skipAuth?: boolean;
+  suppressUnauthorized?: boolean;
   /** Varsayılan 10000 ms; AI/öneri gibi yavaş endpoint'ler için artırın */
   timeoutMs?: number;
 }
@@ -119,8 +120,10 @@ async function fetchWithRetry(
             } else {
               throw new Error("Refresh failed");
             }
-          } catch (e) {
-            _onUnauthorized?.();
+          } catch {
+            if (!options.suppressUnauthorized) {
+              _onUnauthorized?.();
+            }
             throw new Error('Unauthorized');
           } finally {
             _isRefreshing = false;
@@ -138,7 +141,9 @@ async function fetchWithRetry(
           });
         }
       } else {
-        _onUnauthorized?.();
+        if (!options.suppressUnauthorized) {
+          _onUnauthorized?.();
+        }
         throw new Error('Unauthorized');
       }
     }

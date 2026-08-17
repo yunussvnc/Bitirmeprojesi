@@ -322,6 +322,8 @@ export async function logInteraction(
       place_id: Number(placeId),
       interaction_type: interactionType,
       weight,
+    }, {
+      suppressUnauthorized: true,
     });
   } catch {
     // Sessizce başarısız ol — kullanıcı deneyimini bozmamalı
