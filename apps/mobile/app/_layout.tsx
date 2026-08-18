@@ -92,14 +92,14 @@ function useProtectedRoute() {
     // isVerifying bitmeden routing yapma ki uygulamanın içine girmesin
     if (!hydrated || !rootNavigationState?.key || isVerifying) return;
 
+    const currentPath = segments.join('/');
     const isAuthScreen =
       segments[0] === "login" ||
       segments[0] === "register" ||
       segments[0] === "forgot-password" ||
       (segments.length === 1 && !segments[0]);
 
-    const isPublicScreen =
-      (segments[0] === "settings" && segments[1] === "legal-document");
+    const isPublicScreen = currentPath === "settings/legal-document";
 
     const isVerifyEmailScreen = segments[0] === "verify-email";
 

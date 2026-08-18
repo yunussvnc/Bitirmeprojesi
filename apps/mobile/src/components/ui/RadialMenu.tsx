@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
 import { View, StyleSheet, TouchableOpacity, ViewStyle } from 'react-native';
 import Animated, {
-  useSharedValue,
-  useAnimatedStyle,
-  withSpring,
-  interpolate,
   Extrapolation,
+  interpolate,
+  type SharedValue,
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
 } from 'react-native-reanimated';
 import { BlurView } from 'expo-blur';
-import { IconSymbol } from '@/src/components/ui/icon-symbol';
+import { IconSymbol, type IconSymbolName } from '@/src/components/ui/icon-symbol';
 import { useTheme } from '@/src/hooks/useTheme';
 import { lightImpact, mediumImpact } from '@/src/utils/haptics';
 
 interface RadialMenuItem {
-  icon: string;
+  icon: IconSymbolName;
   color?: string;
   onPress: () => void;
 }
@@ -21,17 +22,70 @@ interface RadialMenuItem {
 interface RadialMenuProps {
   items: RadialMenuItem[];
   style?: ViewStyle;
-  mainIcon?: string;
+  mainIcon?: IconSymbolName;
   bottomOffset?: number;
 }
 
-const RADIUS = 80; // Distance of items from center
+interface RadialMenuSubItemProps {
+  item: RadialMenuItem;
+  index: number;
+  total: number;
+  progress: SharedValue<number>;
+  isOpen: boolean;
+  fallbackColor: string;
+  onSelect: (item: RadialMenuItem) => void;
+}
 
-export function RadialMenu({ items, style, mainIcon = "plus", bottomOffset = 120 }: RadialMenuProps) {
+const RADIUS = 80;
+
+function RadialMenuSubItem({
+  item,
+  index,
+  total,
+  progress,
+  isOpen,
+  fallbackColor,
+  onSelect,
+}: RadialMenuSubItemProps) {
+  const animatedStyle = useAnimatedStyle(() => {
+    const arc = Math.PI / 2;
+    const startAngle = Math.PI;
+    const angle = total <= 1
+      ? startAngle + arc / 2
+      : startAngle + (arc / (total - 1)) * index;
+
+    const targetX = Math.cos(angle) * RADIUS;
+    const targetY = Math.sin(angle) * RADIUS;
+
+    return {
+      transform: [
+        { translateX: interpolate(progress.value, [0, 1], [0, targetX], Extrapolation.CLAMP) },
+        { translateY: interpolate(progress.value, [0, 1], [0, targetY], Extrapolation.CLAMP) },
+        { scale: interpolate(progress.value, [0, 0.5, 1], [0.3, 1.1, 1], Extrapolation.CLAMP) },
+      ],
+      opacity: interpolate(progress.value, [0, 0.5, 1], [0, 1, 1], Extrapolation.CLAMP),
+      position: 'absolute' as const,
+    };
+  });
+
+  return (
+    <Animated.View style={animatedStyle} pointerEvents={isOpen ? 'auto' : 'none'}>
+      <TouchableOpacity activeOpacity={0.8} onPress={() => onSelect(item)}>
+        <BlurView
+          intensity={60}
+          tint="dark"
+          style={[styles.subItem, { backgroundColor: item.color || fallbackColor }]}
+        >
+          <IconSymbol name={item.icon} size={20} color="#FFF" />
+        </BlurView>
+      </TouchableOpacity>
+    </Animated.View>
+  );
+}
+
+export function RadialMenu({ items, style, mainIcon = 'plus', bottomOffset = 120 }: RadialMenuProps) {
   const { colors } = useTheme();
   const [isOpen, setIsOpen] = useState(false);
-  
-  // 0 = closed, 1 = open
   const progress = useSharedValue(0);
 
   const toggleMenu = () => {
@@ -45,44 +99,18 @@ export function RadialMenu({ items, style, mainIcon = "plus", bottomOffset = 120
     }
   };
 
-  const mainButtonStyle = useAnimatedStyle(() => {
-    return {
-      transform: [
-        { rotate: `${progress.value * 45}deg` }, // Rotates main icon (e.g. plus turns into X)
-      ],
-    };
-  });
-
-  const getSubItemStyle = (index: number, total: number) => {
-    return useAnimatedStyle(() => {
-      // Calculate angle for a 90 degree arc (e.g. from top to left)
-      const arc = Math.PI / 2;
-      const startAngle = Math.PI; // 180 degrees (left)
-      const angle = startAngle + (arc / (total - 1)) * index; // distribute evenly
-
-      const targetX = Math.cos(angle) * RADIUS;
-      const targetY = Math.sin(angle) * RADIUS;
-
-      const translateX = interpolate(progress.value, [0, 1], [0, targetX], Extrapolation.CLAMP);
-      const translateY = interpolate(progress.value, [0, 1], [0, targetY], Extrapolation.CLAMP);
-      const scale = interpolate(progress.value, [0, 0.5, 1], [0.3, 1.1, 1], Extrapolation.CLAMP);
-      const opacity = interpolate(progress.value, [0, 0.5, 1], [0, 1, 1], Extrapolation.CLAMP);
-
-      return {
-        transform: [
-          { translateX },
-          { translateY },
-          { scale },
-        ],
-        opacity,
-        position: 'absolute',
-      };
-    });
+  const handleSelect = (item: RadialMenuItem) => {
+    mediumImpact();
+    toggleMenu();
+    item.onPress();
   };
+
+  const mainButtonStyle = useAnimatedStyle(() => ({
+    transform: [{ rotate: `${progress.value * 45}deg` }],
+  }));
 
   return (
     <View style={[styles.container, style]} pointerEvents="box-none">
-      {/* Backdrop to close when tapping outside */}
       {isOpen && (
         <TouchableOpacity
           style={styles.backdrop}
@@ -92,36 +120,29 @@ export function RadialMenu({ items, style, mainIcon = "plus", bottomOffset = 120
       )}
 
       <View style={[styles.menuContainer, { bottom: bottomOffset }]} pointerEvents="box-none">
-        {/* Render Sub Items */}
-        {items.map((item, index) => {
-          const itemStyle = getSubItemStyle(index, items.length);
-          
-          return (
-            <Animated.View key={`item-${index}`} style={itemStyle} pointerEvents={isOpen ? 'auto' : 'none'}>
-              <TouchableOpacity
-                activeOpacity={0.8}
-                onPress={() => {
-                  mediumImpact();
-                  toggleMenu();
-                  item.onPress();
-                }}
-              >
-                <BlurView intensity={60} tint="dark" style={[styles.subItem, { backgroundColor: item.color || colors.surface.elevated }]}>
-                  <IconSymbol name={item.icon as any} size={20} color="#FFF" />
-                </BlurView>
-              </TouchableOpacity>
-            </Animated.View>
-          );
-        })}
+        {items.map((item, index) => (
+          <RadialMenuSubItem
+            key={`item-${index}`}
+            item={item}
+            index={index}
+            total={items.length}
+            progress={progress}
+            isOpen={isOpen}
+            fallbackColor={colors.surface.elevated}
+            onSelect={handleSelect}
+          />
+        ))}
 
-        {/* Main Button */}
-        <Animated.View style={[mainButtonStyle]}>
+        <Animated.View style={mainButtonStyle}>
           <TouchableOpacity
             activeOpacity={0.8}
             onPress={toggleMenu}
-            style={[styles.mainButton, { backgroundColor: colors.accent.primary, shadowColor: colors.accent.primary }]}
+            style={[
+              styles.mainButton,
+              { backgroundColor: colors.accent.primary, shadowColor: colors.accent.primary },
+            ]}
           >
-            <IconSymbol name={mainIcon as any} size={28} color="#FFF" />
+            <IconSymbol name={mainIcon} size={28} color="#FFF" />
           </TouchableOpacity>
         </Animated.View>
       </View>
@@ -172,5 +193,5 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     borderWidth: 1,
     borderColor: 'rgba(255,255,255,0.2)',
-  }
+  },
 });

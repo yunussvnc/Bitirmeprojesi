@@ -4,6 +4,11 @@ import * as Crypto from 'expo-crypto';
 import { API_V1 } from '@/src/constants/api';
 import { handleApiError } from './errorHandler';
 import { logger } from './logger';
+import {
+  rejectTokenRefresh,
+  resolveTokenRefresh,
+  waitForTokenRefresh,
+} from './refreshQueue';
 
 const APP_VERSION = Application.nativeApplicationVersion ?? 'unknown';
 const BUILD_NUMBER = Application.nativeBuildVersion ?? 'unknown';
@@ -40,12 +45,6 @@ let _onTokenRefresh: ((access: string, refresh: string) => void) | null = null;
 let _onUnauthorized: (() => void) | null = null;
 
 let _isRefreshing = false;
-let _refreshSubscribers: ((token: string) => void)[] = [];
-
-function onRefreshed(token: string) {
-  _refreshSubscribers.forEach((cb) => cb(token));
-  _refreshSubscribers = [];
-}
 
 export function setAuthInterceptors(
   getToken: () => string | null,
@@ -108,7 +107,7 @@ async function fetchWithRetry(
             if (refreshRes.ok) {
               const data = await refreshRes.json();
               _onTokenRefresh?.(data.access_token, data.refresh_token);
-              onRefreshed(data.access_token);
+              resolveTokenRefresh(data.access_token);
               
               // Orijinal isteği yeni token ile tekrarla
               const newAuthHeaders = { Authorization: `Bearer ${data.access_token}` };
@@ -119,21 +118,21 @@ async function fetchWithRetry(
             } else {
               throw new Error("Refresh failed");
             }
-          } catch (e) {
+          } catch {
+            const unauthorizedError = new Error('Unauthorized');
+            rejectTokenRefresh(unauthorizedError);
             _onUnauthorized?.();
-            throw new Error('Unauthorized');
+            throw unauthorizedError;
           } finally {
             _isRefreshing = false;
           }
         } else {
           // Zaten yenileniyorsa, yenilenmesini bekle ve isteği tekrarla
-          return new Promise((resolve, reject) => {
-            _refreshSubscribers.push((newToken) => {
-              const newAuthHeaders = { Authorization: `Bearer ${newToken}` };
-              fetch(url, {
-                ...options,
-                headers: { ...options.headers, ...newAuthHeaders }
-              }).then(resolve).catch(reject);
+          return waitForTokenRefresh().then((newToken) => {
+            const newAuthHeaders = { Authorization: `Bearer ${newToken}` };
+            return fetch(url, {
+              ...options,
+              headers: { ...options.headers, ...newAuthHeaders }
             });
           });
         }
