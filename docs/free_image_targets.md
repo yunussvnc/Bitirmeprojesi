@@ -90,3 +90,7 @@ Bu partide Kadıköy Ciğercisi (718), Çanak Kebap & Katmer (721), Mantı House
 ## Dördüncü restoran doğrulama partisi
 
 Bu partide orōro Sushi Bar Moda (764), Saltator (771), Cunda Balık (772), Suadiye Balık (774), Nisan Balık (775), Şaşkın Balık Efkan’ın Yeri (777), Mezze House (779), Misina Balık Restaurant (780), Koço Restaurant (782) ve Kayıp Liman Balıkçısı (783) için doğrulanmış yerel görseller eklendi. Kaen Sushi, Ken Sushi, Sushimi, Konoha, Cibalikapı ve benzeri kayıtlar için eşleşmesi kesin olmayan görseller eklenmedi.
+
+## Beşinci burger ve sokak lezzeti doğrulama partisi
+
+Bu partide Basta! Street Food Bar (797), 3 Burger Kadıköy (798), 3 Monkey’s Burger (800) ve Getto Burger (802) için doğrulanmış yerel görseller eklendi. Calzone Burger ve Yesen Burger için adres/işletme eşleşmesi veya faal durum belirsiz olduğu için görsel eklenmedi.

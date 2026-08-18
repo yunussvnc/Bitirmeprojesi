@@ -73,6 +73,10 @@ const mezzeHouse = require("../../assets/places/mezze-house.jpg") as ImageSource
 const kayipLimanBalikcisi = require("../../assets/places/kayip-liman-balikcisi.jpg") as ImageSourcePropType;
 const kocoRestaurant = require("../../assets/places/koco-restaurant.jpg") as ImageSourcePropType;
 const misinaBalikRestaurant = require("../../assets/places/misina-balik-restaurant.jpg") as ImageSourcePropType;
+const bastaStreetFoodBar = require("../../assets/places/basta-street-food-bar.jpg") as ImageSourcePropType;
+const threeBurgerKadikoy = require("../../assets/places/three-burger-kadikoy.jpg") as ImageSourcePropType;
+const threeMonkeysBurger = require("../../assets/places/three-monkeys-burger.jpg") as ImageSourcePropType;
+const gettoBurger = require("../../assets/places/getto-burger.jpg") as ImageSourcePropType;
 
 const CATEGORY_PLACEHOLDERS: Record<string, string> = {
   kafe: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800",
@@ -159,6 +163,10 @@ const PLACE_IMAGE_OVERRIDES: Record<string, ImageSourcePropType> = {
   "783": kayipLimanBalikcisi,
   "782": kocoRestaurant,
   "780": misinaBalikRestaurant,
+  "797": bastaStreetFoodBar,
+  "798": threeBurgerKadikoy,
+  "800": threeMonkeysBurger,
+  "802": gettoBurger,
 };
 
 type PlaceLike = Place | { id?: string | number; name?: string; photo_url?: string; category?: string };

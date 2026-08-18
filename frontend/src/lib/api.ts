@@ -70,6 +70,10 @@ import mezzeHouse from '../assets/venues/mezze-house.jpg'
 import kayipLimanBalikcisi from '../assets/venues/kayip-liman-balikcisi.jpg'
 import kocoRestaurant from '../assets/venues/koco-restaurant.jpg'
 import misinaBalikRestaurant from '../assets/venues/misina-balik-restaurant.jpg'
+import bastaStreetFoodBar from '../assets/venues/basta-street-food-bar.jpg'
+import threeBurgerKadikoy from '../assets/venues/three-burger-kadikoy.jpg'
+import threeMonkeysBurger from '../assets/venues/three-monkeys-burger.jpg'
+import gettoBurger from '../assets/venues/getto-burger.jpg'
 
 export interface Venue {
   id: string
@@ -192,6 +196,10 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '783': kayipLimanBalikcisi,
   '782': kocoRestaurant,
   '780': misinaBalikRestaurant,
+  '797': bastaStreetFoodBar,
+  '798': threeBurgerKadikoy,
+  '800': threeMonkeysBurger,
+  '802': gettoBurger,
 }
 
 export function getFallbackVenueImage(category: string): string {

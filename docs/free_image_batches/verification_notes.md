@@ -254,3 +254,23 @@ Kayıp Liman Balıkçısı, canlı ID 783, Osmanağa Yasa Caddesi No:27/2. Yande
 Koço Restaurant, canlı ID 782, Caferağa Moda Caddesi No:171. Tripadvisor kaynağı KOCO işletmesini, deniz manzaralı restoran terasını ve Moda konumunu doğruluyor; görselde tabela görünmese de kaynak işletme eşleşmesi güçlü.
 
 Misina Balık Restaurant, canlı ID 780, Caddebostan Prof. Dr. Hulusi Behçet Caddesi No:10. Kaynak başlığı ve görsel kaydı aynı işletme/adres bilgisini taşıyor; restoran iç mekânı kaynak işletmesiyle uyumlu, güçlü eşleşme.
+
+Basta, 3 Burger ve Calzone incelemesi
+
+Basta Street Food Bar, canlı ID 797, Caferağa Sakız Sokak No:1. Tripadvisor görselinde BASTA! markası ve işletme mutfağı açıkça görülüyor; kaynak işletme adı canlı kayıtla uyumlu, adres ayrıca kaynak sayfasından kontrol edilecek.
+
+3 Burger Kadıköy, canlı ID 798, Rasimpaşa Beyciğim Sokak No:14/A. Yandex Maps başlığı aynı işletme ve adresi doğruluyor; dış cephe fotoğrafında 14 numarası ve burger işletmesi girişi görülüyor, güçlü eşleşme.
+
+Calzone Burger, canlı ID 799, Rasimpaşa Duatepe Sokak No:29–31/A. Bulunan ürün fotoğrafı işletme adı/tabela göstermiyor; kaynakta işletmenin artık faal olmadığı yazdığı için görselsiz bırakılacak.
+
+3 Monkey’s, Getto ve Yesen incelemesi
+
+3 Monkey’s Burger, canlı ID 800, Suadiye Hamiyet Yüceses Sokak Petek Apartmanı No:21/C. Kaynak görselde 3 MONKEY markalı ürün ambalajı görülüyor ve Corner kaydı canlı adresle aynı; işletme eşleşmesi güçlü.
+
+Getto Burger, canlı ID 802, Osmanağa Gençlik Sokak No:8/B. Yandex Maps başlığı aynı işletme ve Gençlik Sokak 8 adresini doğruluyor; dış cephede GETTO BURGER tabelası net, güçlü eşleşme.
+
+Yesen Burger Kadıköy, canlı ID 803, Osmanağa Söğütlüçeşme Caddesi No:18. Arama sonuçları başka bir Yesen şubesini, İstiklal 166B veya Söğütlüçeşme 16 adresini gösteriyor; canlı No:18 ile kesin eşleşmediği için kullanılmayacak.
+
+3 Burger Kadıköy, canlı ID 798, Rasimpaşa Beyciğim Sokak No:14/A. Dış cephe fotoğrafında 14 numarası ve burger dükkânı girişi görülüyor; Yandex, Tripadvisor ve sosyal kaynaklar aynı adresi doğruluyor.
+
+Basta Street Food Bar, canlı ID 797, Caferağa Sakız Sokak No:1. İç mekânda BASTA! markası net; Tripadvisor, Gault & Millau ve işletme kaynakları aynı Sakız Sokak 1 adresini doğruluyor.
