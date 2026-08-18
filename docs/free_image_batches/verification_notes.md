@@ -494,3 +494,12 @@ Per Noi Coffee Co. Ortaköy, canlı ID 968, Mecidiye Eski Bahçe Sk. No:11/B. Ar
 THE CO. COFFEE AKARETLER, canlı ID 969, Vişnezade Şair Nedim Cd. No:27/A. Yandex adayında hedef THE CO. COFFEE tabelası net değil ve cephede farklı/okunamayan işletme yazıları görülüyor; kullanılmayacak.
 Hygge Coffee Shop, canlı ID 970, Türkali Yeni Yol Sokak No:3. Yandex adayında COFFEETALKS tabelası görülüyor; Hygge ile eşleşmediği için yanlış görsel olarak reddedilecek.
 Bex Coffee, canlı ID 971, Yıldız Çırağan Cd. No:35/1. Yandex görselinde BEX COFFEE tabelası ve işletme girişi açıkça görülüyor; kaynak başlığı aynı Çırağan Cd. No:35 adresini taşıyor, güçlü eşleşme.
+Coffee Talks, canlı ID 972, Türkali Ihlamurdere Cd. No:80. Yandex görselinde COFFEETALKS tabelalı dış cephe açıkça görülüyor; kaynak başlığı aynı Ihlamurdere Cd. 80 adresini taşıyor, güçlü eşleşme.
+Dolphin Cafe, canlı ID 973, Yıldız Çırağan Cd. Osmanpaşa Mektebi Çıkmazı No:8. Arama sonuçları Ankara'daki farklı Dolphin Cafe'ye veya genel işletme içeriğine gidiyor; İstanbul hedef şubesi doğrulanamadı, kullanılmayacak.
+Pangea Roasting Co., canlı ID 974, Sinanpaşa Ihlamurdere Cd. No:22/B. Resmî site görselinde PANGEA ROASTING CO. tabelası net ancak kamuya açık kaynak sonucu adresi Ihlamurdere Cd. 24 olarak gösteriyor; canlı 22/B ile numara farkı nedeniyle eklenmeyecek.
+Coffee Public, canlı ID 975, Vişnezade Süleyman Seba Cd. No:77/D. Arama sonuçları hedef işletme yerine Süleyman Seba Cd. No:6 ve başka kahveleri gösteriyor; kullanılmayacak.
+Järn Coffee, canlı ID 976, Sinanpaşa Maşuklar Yokuşu No:2. JÄRN COFFEE tabelası net görülen aday bulundu ancak arama kaynağında hedef No:2 adresi ayrıca gösterilmedi; kaynak adresi doğrulanmadan eklenmeyecek.
+Shabby Cafe, canlı ID 977, Şair Nedim Cd./Köşeli Sk. No:13. Arama kaynağı adresi uyumlu olsa da incelenen görsel yalnızca tabelasız iç avlu/oturma alanı; kullanıcı kuralı nedeniyle kullanılmayacak.
+Sabba Coffee, canlı ID 978, Bebek Cevdet Paşa Cd. No:46/C. Yandex panorama görselinde SABBA COFFEE tabelalı dış cephe açıkça görülüyor; kaynak başlığı aynı 46C adresini taşıyor, güçlü eşleşme.
+Kaffee Schütz Beşiktaş, canlı ID 980, Cihannüma Akmaz Çeşme Sk. No:4. Yandex aday fotoğrafı yalnızca tabela/adres göstermeyen iç mekân; kullanıcı kuralı gereği kullanılmayacak.
+La Cafferia - Beşiktaş, canlı ID 981, Cihannüma Barbaros Blv. No:15/A. Görselde LA CAFFERIA Milano tabelalı dış cephe açıkça görülüyor; işletmenin resmî şubeler sayfası aynı adresi doğruluyor, güçlü eşleşme.
