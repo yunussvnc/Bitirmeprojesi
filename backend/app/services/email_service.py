@@ -355,6 +355,7 @@ def verify_password_reset(db: Session, user: models.User, code: str, new_passwor
 
     # Başarılı — şifreyi güncelle
     user.password_hash = new_password_hash
+    user.token_version = (user.token_version or 0) + 1
     db.delete(record)
     db.commit()
     logger.info("✅ Şifre sıfırlandı → user_id=%s, email=%s", user.id, user.email)
@@ -462,4 +463,3 @@ def _build_password_reset_html(user_name: str, code: str) -> str:
     </td></tr>
   </table>
 </body></html>"""
-

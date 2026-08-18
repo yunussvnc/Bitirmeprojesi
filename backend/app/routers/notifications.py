@@ -5,8 +5,8 @@ from fastapi import APIRouter, Depends, WebSocket, WebSocketDisconnect, Query, H
 from sqlalchemy.orm import Session
 
 import models, schemas, crud
-from auth import decode_token
 from app.dependencies import get_db, get_current_user
+from app.websocket.auth import authenticate_websocket_token, websocket_session_is_current
 from app.websocket.manager import manager
 
 router = APIRouter(prefix="/notifications", tags=["Notifications"])
@@ -179,26 +179,24 @@ async def websocket_notifications(
         await websocket.close(code=4001, reason="Token gerekli")
         return
 
-    try:
-        payload = decode_token(token)
-    except Exception:
+    principal = authenticate_websocket_token(token)
+    if not principal:
         await websocket.close(code=4001, reason="Geçersiz token")
         return
 
-    user_id = payload.get("sub")
-    if not user_id or payload.get("type") != "access":
-        await websocket.close(code=4001, reason="Geçersiz token")
+    user_id = principal.user_id
+
+    if not await manager.connect_global(websocket, principal):
         return
-
-    user_id = int(user_id)
-
-    await manager.connect_global(websocket, user_id)
 
     try:
         while True:
             # Sadece ping/pong veya istemciden gelen basit mesajları dinle
             # Genelde sunucudan istemciye tek yönlü akış olur
             text_data = await websocket.receive_text()
+            if not websocket_session_is_current(principal):
+                await websocket.close(code=4001, reason="Oturum geçersiz")
+                break
             try:
                 import json
                 data = json.loads(text_data)

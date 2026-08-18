@@ -20,6 +20,15 @@ async def connect_redis():
     """Uygulama başlarken Redis bağlantısını kurar."""
     global redis_client, _pubsub_connection
 
+    for existing in (_pubsub_connection, redis_client):
+        if existing:
+            try:
+                await existing.aclose()
+            except Exception:
+                pass
+    redis_client = None
+    _pubsub_connection = None
+
     # Default olarak localhost:6379, canlıda .env'den gelir
     from config import get_settings
     redis_url = get_settings().REDIS_URL

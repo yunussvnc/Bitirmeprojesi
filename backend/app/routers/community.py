@@ -9,8 +9,8 @@ from fastapi import APIRouter, Depends, HTTPException, WebSocket, WebSocketDisco
 from sqlalchemy.orm import Session, joinedload
 
 import models, schemas
-from auth import decode_token
 from app.dependencies import get_db, get_current_user, get_optional_user
+from app.websocket.auth import authenticate_websocket_token, websocket_session_is_current
 from app.websocket.manager import manager
 
 logger = logging.getLogger("asemos")
@@ -261,18 +261,12 @@ async def websocket_community(
         await websocket.close(code=4001, reason="Token gerekli")
         return
 
-    try:
-        payload = decode_token(token)
-    except Exception:
+    principal = authenticate_websocket_token(token)
+    if not principal:
         await websocket.close(code=4001, reason="Geçersiz token")
         return
 
-    user_id_str = payload.get("sub")
-    if not user_id_str or payload.get("type") != "access":
-        await websocket.close(code=4001, reason="Geçersiz token")
-        return
-
-    user_id = int(user_id_str)
+    user_id = principal.user_id
     room_id_str = str(room_id)
 
     # Üyelik kontrolü
@@ -289,7 +283,8 @@ async def websocket_community(
         db.close()
 
     # Odaya bağlan (socket.join(venue_id) mantığı)
-    await manager.connect_room(websocket, room_id_str, user_id)
+    if not await manager.connect_room(websocket, room_id_str, principal):
+        return
 
     # Odadaki herkese bildir
     await manager.broadcast_to_room(room_id_str, {
@@ -301,6 +296,9 @@ async def websocket_community(
     try:
         while True:
             raw = await websocket.receive_text()
+            if not websocket_session_is_current(principal):
+                await websocket.close(code=4001, reason="Oturum geçersiz")
+                break
             try:
                 data = json.loads(raw)
             except json.JSONDecodeError:
@@ -376,7 +374,7 @@ async def websocket_community(
     except Exception as e:
         logger.error("Community WebSocket hatası: %s", str(e))
     finally:
-        manager.disconnect_room(room_id_str, user_id)
+        manager.disconnect_room(websocket, room_id_str, user_id)
         try:
             await manager.broadcast_to_room(room_id_str, {
                 "type": "user_left",
