@@ -532,3 +532,5 @@ Elise Karadeniz Pide & Lahmacun, canlı ID 1003, Mecidiye Eski Bahçe Sk. No:4. 
 Nevale Mutfak, canlı ID 1004, Türkali Mecit Ali Sk. No:12/A. Arama sonuçları ürün/mezeler ve tabelasız yeşil tenteli dış cephe gösteriyor; Nevale adı/adres işareti görünmediği için kullanılmayacak.
 Dürümce Ortaköy, canlı ID 1005, Yıldız Çırağan Cd. No:50. Yandex görselinde DÜRÜMCE ve Adanalı Kebapçı tabelalı dış cephe net; kaynak başlığı aynı 50 adresini taşıyor, güçlü eşleşme.
 Elise Karadeniz Pide & Lahmacun, canlı ID 1003, Mecidiye Eski Bahçe Sk. No:4. Tripadvisor, işletmenin resmî sitesi ve Yandex aynı No:4 adresini doğruluyor; görselde ELISE KARADENİZ PİDE & LAHMACUN tabelalı dış cephe net, güçlü eşleşme.
+The Market at Bosphorus, canlı ID 1006, Kuruçeşme Kuruçeşme Arena No:56. Yandex/Tripadvisor/Yelp sonuçları aynı No:56 adresli The Market at Bosphorus kaydını gösteriyor; görselde binanın THE MARKET AT BOSPHORUS tabelası net, güçlü eşleşme.
+The Best Cafe, canlı ID 1007, Cihannüma Mazhar Reşit Paşa Sokak No:1/A. Yandex görselinde THE BEST tabelalı dış cephe ve canlı kayıttaki 1A adresli Cafe The Best kaydı eşleşiyor, güçlü eşleşme.
