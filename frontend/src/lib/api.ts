@@ -159,6 +159,8 @@ import theMarketAtBosphorus from '../assets/venues/the-market-at-bosphorus.jpg'
 import theBestCafe from '../assets/venues/the-best-cafe.jpg'
 import biKahvalti from '../assets/venues/bi-kahvalti.jpg'
 import mercanKebapBesiktas from '../assets/venues/mercan-kebap-besiktas.jpg'
+import adanaliKebapPideLahmacun from '../assets/venues/adanali-kebap-pide-lahmacun.jpg'
+import fistikKebapLahmacun from '../assets/venues/fistik-kebap-lahmacun.jpg'
 
 export interface Venue {
   id: string
@@ -370,6 +372,8 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '1007': theBestCafe,
   '1009': biKahvalti,
   '1015': mercanKebapBesiktas,
+  '1020': adanaliKebapPideLahmacun,
+  '1022': fistikKebapLahmacun,
 }
 
 export function getFallbackVenueImage(category: string): string {
