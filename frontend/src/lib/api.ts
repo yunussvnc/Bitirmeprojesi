@@ -134,6 +134,12 @@ import bellaBakeryCoffee from '../assets/venues/bella-bakery-coffee.jpg'
 import sourSweetArtisanBakery from '../assets/venues/sour-sweet-artisan-bakery.jpg'
 import tahanBakery from '../assets/venues/tahan-bakery.jpg'
 import nanAbPatisserie from '../assets/venues/nan-ab-patisserie.jpg'
+import baylanKadikoy from '../assets/venues/baylan-kadikoy.jpg'
+import lovellsPatisserie from '../assets/venues/lovells-patisserie.jpg'
+import beyazFirinKadikoy from '../assets/venues/beyaz-firin-kadikoy.jpg'
+import oCoffeeBesiktas from '../assets/venues/o-coffee-besiktas.jpg'
+import endCoffeeChocolate from '../assets/venues/end-coffee-chocolate.jpg'
+import sourSweetSuadiye from '../assets/venues/sour-sweet-suadiye.jpg'
 
 export interface Venue {
   id: string
@@ -320,6 +326,12 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '950': sourSweetArtisanBakery,
   '953': tahanBakery,
   '954': nanAbPatisserie,
+  '957': baylanKadikoy,
+  '959': lovellsPatisserie,
+  '961': beyazFirinKadikoy,
+  '963': sourSweetSuadiye,
+  '964': oCoffeeBesiktas,
+  '965': endCoffeeChocolate,
 }
 
 export function getFallbackVenueImage(category: string): string {

@@ -478,3 +478,13 @@ Joie Fresh On Bread, canlı ID 951, Caferağa Rızapaşa Sokak No:1/B. Bulunan g
 Nan Ab Patisserie, canlı ID 954, Zühtüpaşa Şehir Kahya Sokak No:9/B. Dış cephe fotoğrafında Nan-Ab Patisserie tabelası ve giriş açıkça görülüyor; Yandex kaydı aynı 9B adresini taşıyor, güçlü eşleşme.
 Tahan Bakery, canlı ID 953, Acıbadem Şemi Bey Sokak No:7/B. Fotoğrafta TAHAN Bakery tabelası ve aynı işletme girişi görülüyor; Yandex kaydı 7/A olarak harf farkıyla aynı yapı/şube, güçlü eşleşme.
 Polea Coffee & Bakery, canlı ID 952, Bostancı Bostan Tariki Sokak No:4/A. Bulunan arama görselleri işletme adresi/tabelası yerine genel iç mekân veya alakasız mimari gösteriyor; kullanılmayacak.
+
+Batch 011 taraması başladı.
+Baylan Kadıköy, canlı ID 957, Caferağa Muvakkıthane Cd. No:9/A. Tripadvisor sonucu aynı adresi başlıkta taşıyor ve görselde Baylan tabelalı dış cephe görülüyor; kabul edilebilir güçlü eşleşme.
+Chromia Patisserie By Furkan Yalçın, canlı ID 958, Şair Latifi Sk. No:15A. Arama sonucu işletme/adres kaydıyla eşleşiyor ancak incelenen fotoğraf yalnızca masa/ürün fotoğrafı, tabela veya dış cephe yok; kullanıcı kuralı nedeniyle reddedilecek. Dış cephe/tabela bulunursa yeniden değerlendirilecek.
+Beyaz Fırın Kadıköy, canlı ID 961, Caferağa/Yasa Cd. No:23. Tripadvisor sonucu aynı No:23 adresini taşıyor ve dış cephede Beyaz Fırın markası/tabelası görülüyor; güçlü eşleşme.
+Flân Bakery, canlı ID 960, Caddebostan Prof. Dr. Hulusi Behçet Cd. No:20/C. Yandex sonucu Flan Bakery & Coffee olarak 28B adresini gösteriyor; görsel işletme cephesini gösterse de canlı adresle numara uyuşmadığı için yanlış şube riskiyle reddedilecek.
+kubcakesbakery, canlı ID 962, İpekyolu Sokak/Kerim Apt. Arama görsellerindeki aday Yandex dış cephe fotoğrafı genel bina ve eczane tabelasını gösteriyor; kubcakesbakery adı/adres numarası görünmüyor, kullanılmayacak.
+O Coffee, canlı ID 964, Türkali Yeni Yol Sokak No:12/A. Yandex görselinde O Coffee tabelası ve dış cephe açıkça görülüyor; kaynak başlığı aynı 12A adresini taşıyor, güçlü eşleşme.
+End Coffee Chocolate, canlı ID 965, Türkali Yeni Yol Sokak 1A. Yandex panorama görselinde END COFFEE CHOCOLATE tabelası ve dış cephe açıkça görülüyor; kaynak başlığı 1/1A adresini taşıyor, güçlü eşleşme.
+Sour & Sweet Artisan Bakery Suadiye, canlı ID 963, Suadiye Kazım Özalp Sk. No:38. Corner/mesprestiges görselinde SOUR & SWEET ARTISAN BAKERY tabelalı dış cephe net; kaynak başlığı aynı Kazım Özalp Sk. No:38 adresini taşıyor, güçlü eşleşme. Aynı aramadaki iç mekân görseli kullanılmayacak.
