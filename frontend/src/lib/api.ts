@@ -1,4 +1,36 @@
 import nezahatNurettinEgeKosku from '../assets/venues/nezahat-nurettin-ege-kosku.jpg'
+import sushicoZorluCenter from '../assets/venues/sushico-zorlu-center.jpg'
+import limonluBahce from '../assets/venues/limonlu-bahce.jpg'
+import geceDonercisiKavacik from '../assets/venues/gece-donercisi-kavacik.jpg'
+import uweCoffeeRoasters from '../assets/venues/uwe-coffee-roasters.jpg'
+import merciBaku from '../assets/venues/merci-baku.jpg'
+import pizzalazzaBesiktas from '../assets/venues/pizzalazza-besiktas.jpg'
+import masterartBurger from '../assets/venues/masterart-burger.jpg'
+import besBicakSteak from '../assets/venues/bes-bicak-steak.jpg'
+import sarmasikCoffeeCo from '../assets/venues/sarmasik-coffee-co.jpg'
+import pizzaWichBesiktas from '../assets/venues/pizza-wich-besiktas.jpg'
+import isokyoZorluCenter from '../assets/venues/isokyo-zorlu-center.webp'
+import durumcuEsnafPasabahce from '../assets/venues/durumcu-esnaf-pasabahce.jpg'
+import coffeeBreakCocoBambu from '../assets/venues/coffee-break-coco-bambu.jpg'
+import koskaBeylikduzu from '../assets/venues/koska-beylikduzu.jpg'
+import kebabimBeylikduzu from '../assets/venues/kebabim-beylikduzu.jpg'
+import besiktastaBirMeyhane from '../assets/venues/besiktasta-bir-meyhane.jpg'
+import yuceFirin from '../assets/venues/yuce-firin.jpg'
+import pizzalazzaMigros from '../assets/venues/pizzalazza-migros.jpg'
+import haciUstaKebapHouse from '../assets/venues/haci-usta-kebap-house.jpg'
+import pidemideBeylikduzu from '../assets/venues/pidemide-beylikduzu.jpg'
+import pizzaKremaAkaretler from '../assets/venues/pizza-krema-akaretler.jpeg'
+import babelOcakbasiNevizade from '../assets/venues/babel-ocakbasi-nevizade.jpg'
+import senfoniRestoranCafe from '../assets/venues/senfoni-restoran-cafe.jpg'
+import ativaCoffee from '../assets/venues/ativa-coffee.jpg'
+import simirnaSogus from '../assets/venues/simirna-sogus.jpg'
+import pasamRomaDondurma from '../assets/venues/pasam-roma-dondurma.jpg'
+import alaRasiRestaurant from '../assets/venues/ala-rasi-restaurant.jpg'
+import anzorMeatDoner from '../assets/venues/anzor-meat-doner.jpg'
+import citirOcakbasi from '../assets/venues/citir-ocakbasi.jpg'
+import hisarBuselik from '../assets/venues/hisar-buselik.jpg'
+import ransserieCafeHouse from '../assets/venues/ransserie-cafe-house.jpg'
+import besiktasCitirPide from '../assets/venues/besiktas-citir-pide.jpeg'
 
 export interface Venue {
   id: string
@@ -49,6 +81,38 @@ const CATEGORY_FALLBACK_IMAGES: Record<string, string> = {
   Meyhane: 'https://images.unsplash.com/photo-1555244162-803834f70033?w=1200&auto=format&fit=crop',
 }
 const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
+  '7289': sushicoZorluCenter,
+  '7288': limonluBahce,
+  '7287': geceDonercisiKavacik,
+  '7285': uweCoffeeRoasters,
+  '7284': merciBaku,
+  '7282': pizzalazzaBesiktas,
+  '7281': masterartBurger,
+  '7280': besBicakSteak,
+  '7279': sarmasikCoffeeCo,
+  '7278': pizzaWichBesiktas,
+  '7277': isokyoZorluCenter,
+  '7276': durumcuEsnafPasabahce,
+  '7275': coffeeBreakCocoBambu,
+  '7274': koskaBeylikduzu,
+  '7273': kebabimBeylikduzu,
+  '7272': besiktastaBirMeyhane,
+  '7270': yuceFirin,
+  '7269': pizzalazzaMigros,
+  '7268': haciUstaKebapHouse,
+  '7267': pidemideBeylikduzu,
+  '7266': pizzaKremaAkaretler,
+  '7265': babelOcakbasiNevizade,
+  '7264': senfoniRestoranCafe,
+  '7262': ativaCoffee,
+  '7261': simirnaSogus,
+  '7260': pasamRomaDondurma,
+  '7256': alaRasiRestaurant,
+  '7255': anzorMeatDoner,
+  '7253': citirOcakbasi,
+  '7252': hisarBuselik,
+  '7251': ransserieCafeHouse,
+  '7249': besiktasCitirPide,
   '854': nezahatNurettinEgeKosku,
 }
 

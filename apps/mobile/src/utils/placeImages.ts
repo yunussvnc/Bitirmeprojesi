@@ -2,6 +2,38 @@ import type { ImageSourcePropType } from "react-native";
 import type { Place } from "@/src/services/mekanService";
 import { API_BASE_URL } from "@/src/constants/api";
 const nezahatNurettinEgeKosku = require("../../assets/places/nezahat-nurettin-ege-kosku.jpg") as ImageSourcePropType;
+const sushicoZorluCenter = require("../../assets/places/sushico-zorlu-center.jpg") as ImageSourcePropType;
+const limonluBahce = require("../../assets/places/limonlu-bahce.jpg") as ImageSourcePropType;
+const geceDonercisiKavacik = require("../../assets/places/gece-donercisi-kavacik.jpg") as ImageSourcePropType;
+const uweCoffeeRoasters = require("../../assets/places/uwe-coffee-roasters.jpg") as ImageSourcePropType;
+const merciBaku = require("../../assets/places/merci-baku.jpg") as ImageSourcePropType;
+const pizzalazzaBesiktas = require("../../assets/places/pizzalazza-besiktas.jpg") as ImageSourcePropType;
+const masterartBurger = require("../../assets/places/masterart-burger.jpg") as ImageSourcePropType;
+const besBicakSteak = require("../../assets/places/bes-bicak-steak.jpg") as ImageSourcePropType;
+const sarmasikCoffeeCo = require("../../assets/places/sarmasik-coffee-co.jpg") as ImageSourcePropType;
+const pizzaWichBesiktas = require("../../assets/places/pizza-wich-besiktas.jpg") as ImageSourcePropType;
+const isokyoZorluCenter = require("../../assets/places/isokyo-zorlu-center.webp") as ImageSourcePropType;
+const durumcuEsnafPasabahce = require("../../assets/places/durumcu-esnaf-pasabahce.jpg") as ImageSourcePropType;
+const coffeeBreakCocoBambu = require("../../assets/places/coffee-break-coco-bambu.jpg") as ImageSourcePropType;
+const koskaBeylikduzu = require("../../assets/places/koska-beylikduzu.jpg") as ImageSourcePropType;
+const kebabimBeylikduzu = require("../../assets/places/kebabim-beylikduzu.jpg") as ImageSourcePropType;
+const besiktastaBirMeyhane = require("../../assets/places/besiktasta-bir-meyhane.jpg") as ImageSourcePropType;
+const yuceFirin = require("../../assets/places/yuce-firin.jpg") as ImageSourcePropType;
+const pizzalazzaMigros = require("../../assets/places/pizzalazza-migros.jpg") as ImageSourcePropType;
+const haciUstaKebapHouse = require("../../assets/places/haci-usta-kebap-house.jpg") as ImageSourcePropType;
+const pidemideBeylikduzu = require("../../assets/places/pidemide-beylikduzu.jpg") as ImageSourcePropType;
+const pizzaKremaAkaretler = require("../../assets/places/pizza-krema-akaretler.jpeg") as ImageSourcePropType;
+const babelOcakbasiNevizade = require("../../assets/places/babel-ocakbasi-nevizade.jpg") as ImageSourcePropType;
+const senfoniRestoranCafe = require("../../assets/places/senfoni-restoran-cafe.jpg") as ImageSourcePropType;
+const ativaCoffee = require("../../assets/places/ativa-coffee.jpg") as ImageSourcePropType;
+const simirnaSogus = require("../../assets/places/simirna-sogus.jpg") as ImageSourcePropType;
+const pasamRomaDondurma = require("../../assets/places/pasam-roma-dondurma.jpg") as ImageSourcePropType;
+const alaRasiRestaurant = require("../../assets/places/ala-rasi-restaurant.jpg") as ImageSourcePropType;
+const anzorMeatDoner = require("../../assets/places/anzor-meat-doner.jpg") as ImageSourcePropType;
+const citirOcakbasi = require("../../assets/places/citir-ocakbasi.jpg") as ImageSourcePropType;
+const hisarBuselik = require("../../assets/places/hisar-buselik.jpg") as ImageSourcePropType;
+const ransserieCafeHouse = require("../../assets/places/ransserie-cafe-house.jpg") as ImageSourcePropType;
+const besiktasCitirPide = require("../../assets/places/besiktas-citir-pide.jpeg") as ImageSourcePropType;
 
 const CATEGORY_PLACEHOLDERS: Record<string, string> = {
   kafe: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800",
@@ -16,6 +48,38 @@ const CATEGORY_PLACEHOLDERS: Record<string, string> = {
 const DEFAULT_IMAGE = "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800";
 
 const PLACE_IMAGE_OVERRIDES: Record<string, ImageSourcePropType> = {
+  "7289": sushicoZorluCenter,
+  "7288": limonluBahce,
+  "7287": geceDonercisiKavacik,
+  "7285": uweCoffeeRoasters,
+  "7284": merciBaku,
+  "7282": pizzalazzaBesiktas,
+  "7281": masterartBurger,
+  "7280": besBicakSteak,
+  "7279": sarmasikCoffeeCo,
+  "7278": pizzaWichBesiktas,
+  "7277": isokyoZorluCenter,
+  "7276": durumcuEsnafPasabahce,
+  "7275": coffeeBreakCocoBambu,
+  "7274": koskaBeylikduzu,
+  "7273": kebabimBeylikduzu,
+  "7272": besiktastaBirMeyhane,
+  "7270": yuceFirin,
+  "7269": pizzalazzaMigros,
+  "7268": haciUstaKebapHouse,
+  "7267": pidemideBeylikduzu,
+  "7266": pizzaKremaAkaretler,
+  "7265": babelOcakbasiNevizade,
+  "7264": senfoniRestoranCafe,
+  "7262": ativaCoffee,
+  "7261": simirnaSogus,
+  "7260": pasamRomaDondurma,
+  "7256": alaRasiRestaurant,
+  "7255": anzorMeatDoner,
+  "7253": citirOcakbasi,
+  "7252": hisarBuselik,
+  "7251": ransserieCafeHouse,
+  "7249": besiktasCitirPide,
   "854": nezahatNurettinEgeKosku,
 };
 
