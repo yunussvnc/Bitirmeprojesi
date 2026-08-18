@@ -77,6 +77,17 @@ const bastaStreetFoodBar = require("../../assets/places/basta-street-food-bar.jp
 const threeBurgerKadikoy = require("../../assets/places/three-burger-kadikoy.jpg") as ImageSourcePropType;
 const threeMonkeysBurger = require("../../assets/places/three-monkeys-burger.jpg") as ImageSourcePropType;
 const gettoBurger = require("../../assets/places/getto-burger.jpg") as ImageSourcePropType;
+const rockPub = require("../../assets/places/rock-pub.jpg") as ImageSourcePropType;
+const belfastIrishPub = require("../../assets/places/belfast-irish-pub.jpg") as ImageSourcePropType;
+const londonPub = require("../../assets/places/london-pub.jpg") as ImageSourcePropType;
+const hicPub = require("../../assets/places/hic-pub.jpg") as ImageSourcePropType;
+const berlinPlatzPub = require("../../assets/places/berlin-platz-pub.jpg") as ImageSourcePropType;
+const oldEnglishPub = require("../../assets/places/old-english-pub.jpg") as ImageSourcePropType;
+const zurichPub = require("../../assets/places/zurich-pub.jpg") as ImageSourcePropType;
+const baykusPub = require("../../assets/places/baykus-pub.jpg") as ImageSourcePropType;
+const revoltePub = require("../../assets/places/revolte-pub.jpg") as ImageSourcePropType;
+const mirrorRestaurantBar = require("../../assets/places/mirror-restaurant-bar.jpg") as ImageSourcePropType;
+const theWallBar = require("../../assets/places/the-wall-bar.jpg") as ImageSourcePropType;
 
 const CATEGORY_PLACEHOLDERS: Record<string, string> = {
   kafe: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800",
@@ -167,6 +178,17 @@ const PLACE_IMAGE_OVERRIDES: Record<string, ImageSourcePropType> = {
   "798": threeBurgerKadikoy,
   "800": threeMonkeysBurger,
   "802": gettoBurger,
+  "828": rockPub,
+  "829": belfastIrishPub,
+  "831": londonPub,
+  "832": hicPub,
+  "835": berlinPlatzPub,
+  "833": oldEnglishPub,
+  "841": zurichPub,
+  "837": baykusPub,
+  "847": revoltePub,
+  "849": mirrorRestaurantBar,
+  "850": theWallBar,
 };
 
 type PlaceLike = Place | { id?: string | number; name?: string; photo_url?: string; category?: string };

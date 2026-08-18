@@ -274,3 +274,59 @@ Yesen Burger Kadıköy, canlı ID 803, Osmanağa Söğütlüçeşme Caddesi No:1
 3 Burger Kadıköy, canlı ID 798, Rasimpaşa Beyciğim Sokak No:14/A. Dış cephe fotoğrafında 14 numarası ve burger dükkânı girişi görülüyor; Yandex, Tripadvisor ve sosyal kaynaklar aynı adresi doğruluyor.
 
 Basta Street Food Bar, canlı ID 797, Caferağa Sakız Sokak No:1. İç mekânda BASTA! markası net; Tripadvisor, Gault & Millau ve işletme kaynakları aynı Sakız Sokak 1 adresini doğruluyor.
+
+
+Bar doğrulama notu
+
+Belfast Irish Pub, canlı ID 829, Caferağa Dr. Esat Işık Caddesi No:28/A. Yandex Maps görselinde BELFAST Irish Pub tabelası ve işletme girişi açıkça görülüyor; arama sonucu aynı işletme adı ve 28/A adresini taşıyor, güçlü eşleşme.
+
+Rock Pub ve Belfast kaynak doğrulaması
+
+Rock Pub, canlı ID 828, Caferağa Dr. Esat Işık Caddesi No:28. Görsel dosyası `/home/ubuntu/upload/search_images/ryVh9FWTeSje.jpg` (arama sonucu başlığı: Rock Pub Moda – All You SHOULD Know Before Going 2026) üzerinde ROCK PUB tabelası ve gece işletme cephesi açıkça görülüyor; hedef adresle marka eşleşmesi güçlü.
+
+Belfast Irish Pub için kullanılan dosya `/home/ubuntu/upload/search_images/z5SYBQJ6RdoB.jpg`; arama sonucu Yandex Maps başlığında Caferağa Dr. Esat Işık Caddesi 28/A ve görselde BELFAST Irish Pub tabelası bulunuyor.
+
+
+London, Hiç ve Out Pub incelemesi
+
+London Pub, canlı ID 831, Caferağa Piri Çavuş Sokak No:13. Yandex Maps görselinde London Pub tabelası ve aynı sokak/numara kaydı bulunuyor, güçlü eşleşme.
+
+Hiç Pub Kadıköy, canlı ID 832, Caferağa Sakız Gülü Sokak No:14. Dış cephede Kadıköy hi ç PUB & BAR tabelası ve kapıdaki 14 numarası açıkça görülüyor; kaynak başlığı aynı Sakız Gülü 14 adresini doğruluyor, güçlü eşleşme.
+
+Out Pub Kadıköy, canlı ID 830, Osmanağa Mimar Çıkmazı No:3. Arama sonucu Out Pub için Mimar Çıkmazı 5 veya Çıkmaz Meyhane 4A-B gösteriyor; canlı No:3 ile kesin eşleşmediği için kullanılmayacak.
+
+
+Old English, Berlin Platz ve Ada Bar incelemesi
+
+Old English Pub, canlı ID 833, Suadiye Kazım Özalp Sokak No:15/D. Yandex Maps görselinde OLD ENGLISH PUB tabelası ve işletme girişi açıkça görülüyor; kaynak başlığı aynı Kazım Özalp 15 adresini doğruluyor, güçlü eşleşme.
+
+Berlin Platz Pub, canlı ID 835, Caferağa Pavlonya Sokak No:22. Bulunan fotoğraf Berlin Platz kaydıyla ilişkili iç mekân görüntüsü; arama sonucu Berlin Platz markasıyla uyumlu, ancak adres numarası fotoğrafta görünmüyor. Kaynak işletme eşleşmesi doğrulanırsa kullanılabilir aday.
+
+Ada Bar Kadıköy, canlı ID 834, Osmanağa Leylak Sokak No:24/A. Arama sonuçları Ada Cafe 9/A veya genel sokak görüntüsü döndürüyor; Ada Bar 24/A işletme görseli kesinleşmediği için kullanılmayacak.
+
+Baykuş Pub, canlı ID 836, Osmanağa Ziyabey Sokak No:9. Yandex Maps dış cephe fotoğrafında baykuş tabelası ve yeşil baykuş markası açıkça görülüyor; kaynak başlığı aynı Ziyabey 9 adresini taşıyor, güçlü eşleşme.
+Pablo Pub, canlı ID 837, Osmanağa Pavlonya Sokak No:25/B. Yandex sonucu işletme ve adres başlığıyla eşleşiyor ancak seçilen Sn8SJekESHlO görseli yalnızca markasız bira şişeleri içeren iç mekân/ürün fotoğrafı; tabela veya adres doğrulaması olmadığı için kullanılmayacak. Dış cephe adayı ayrıca incelenecek.
+
+E5 Pub, canlı ID 839, Caferağa Sarraf Ali Sokak No:38/A. Yandex dış cephe fotoğrafında E5 Pub tabelası, işletme girişi ve E5 marka işaretleri açıkça görülüyor; kaynak başlığı aynı Sarraf Ali 38A adresini taşıyor, güçlü eşleşme.
+Wizard Pub Kadıköy, canlı ID 840, Caferağa Sakız Gülü Sokak No:19/A. Yandex arama sonucu işletme adı ve 19A adresiyle eşleşiyor; seçilen gBlwQ5h8nx6d görseli iç mekânı gösteriyor ancak tabela/adres görünmüyor, bu nedenle kullanılmayacak. Dış cephe adayı ayrıca değerlendirilecek.
+
+neXus Pub, batch kaydındaki Güneşlibahçe adresi. Yandex Maps dış cephe fotoğrafında neXus tabelası ve işletme girişi açıkça görülüyor; başlık aynı Güneşlibahçe 44A adresini taşıyor, güçlü aday.
+Tarantula Pub, batch kaydındaki Güneşlibahçe Sokak No:50/A. Yandex dış cephe fotoğrafında TARANTULA tabelası, işletme cephesi ve giriş açıkça görülüyor; kaynak başlığı aynı 50A adresini taşıyor, güçlü aday.
+Hood için bulunan Tripadvisor/The Rooftop Guide adayları ağırlıklı olarak genel iç veya rooftop fotoğrafları; işletme adı ve hedef adres birlikte görünmediği için henüz kullanılmayacak.
+
+Batch 006 ID/adres düzeltmesi
+Önceki notta Pablo ve Baykuş ID'leri ters yazılmıştı: canlı ID 836 Pablo Pub, canlı ID 837 Baykuş Pub'dır. Baykuş dış cephe görseli `7r6qmnRR0o9b.jpg` doğru ID 837'ye eklendi; Pablo ID 836 için görsel eklenmedi.
+İncir Pub canlı ID 838'in adresi canlı batch'te Kadife Sokak 20/A'dır; bulunan Yandex fotoğrafı Kadife Sokak 22/4 kaydına ait olduğundan görsel ve override geri alındı.
+E5 Pub canlı ID 839'un adresi canlı batch'te Güneşlibahçe Sokak 58/A'dır; bulunan fotoğraf Sarraf Ali Sokak 38/A kaydına ait olduğundan görsel ve override geri alındı.
+Önceki neXus ve Tarantula notları da canlı kayıtla uyuşmuyor: neXus ID 842 Misbah Muhayyeş Sokak 9/4, bulunan görsel Güneşlibahçe 44/A kaydına ait; Tarantula ID 844 Mühürdar Caddesi 49, bulunan görsel Güneşlibahçe 50/A kaydına ait. Her ikisi de projeye eklenmedi.
+
+Revolte Pub, canlı ID 847, Caferağa Arayıcıbaşı Sokak. Yandex dış cephe fotoğrafında REVOLTE PUB tabelası, adresi destekleyen işletme cephesi ve giriş açıkça görülüyor; arama başlığı Arayıcıbaşı Sokak 13 ile uyumlu, güçlü eşleşme.
+The Bank Roof Bar, canlı ID 846, Arap Cami Bankalar Caddesi No:5. Tripadvisor adayları yalnızca genel çatı manzarası/iç mekân gösteriyor; işletme adı veya No:5 adresi görünmediği için kullanılmayacak.
+Ouzo Roof Restaurant, canlı ID 845, Fener Kalamış Caddesi No:38. Bulunan adaylar deniz manzaralı genel restoran fotoğrafları; Ouzo adı ve No:38 şube kanıtı birlikte görünmediği için henüz kullanılmayacak.
+
+Mirror Restaurant & Bar, canlı ID 849, Bostancı Plaj Yolu Sokak No:18. Yandex dış cephe fotoğrafında MIRROR RESTAURANT tabelası açıkça görülüyor; kaynak başlığı aynı Plaj Yolu 18 adresini taşıyor, güçlü eşleşme.
+The Wall Bar, canlı ID 850, Caferağa Sarraf Ali Sokak No:33. Görselde THE WALL tabelası net; arama sonucu Sarraf Ali Sokak 33A olarak geçiyor ve canlı kayıt 33 olduğundan güçlü aday, kaynak adresi ayrıca kontrol edilecek.
+Hera Kadıköy, canlı ID 851, Caferağa Kadife Sokak No:10. Resmî Instagram ve bağımsız kaynaklar No:10 adresini doğruluyor; ancak bulunan görsel yalnızca isimsiz rooftop görünümü ve işletme adı/tabela/kapı numarası göstermiyor. Yanlış görsel riskinden dolayı projeye eklenmedi.
+
+6:45 Stereogun Kadıköy, canlı ID 848, Caferağa Kadife Sokak No:10 D:3. Yandex sonucu doğru işletme/adres başlığı taşıyor; incelenen iç mekân görsellerinde 6:45 tabelası veya adres numarası görünmediği için dış cephe teyidi olmadan kullanılmayacak.
+Hush Rooftop Bar, canlı ID 852, Caferağa Güneşlibahçe Sokak 50/B. Yandex arama sonucu açıkça “Artık faal değil” uyarısı taşıyor; kesinlikle görsel eklenmeyecek.

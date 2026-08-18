@@ -74,6 +74,17 @@ import bastaStreetFoodBar from '../assets/venues/basta-street-food-bar.jpg'
 import threeBurgerKadikoy from '../assets/venues/three-burger-kadikoy.jpg'
 import threeMonkeysBurger from '../assets/venues/three-monkeys-burger.jpg'
 import gettoBurger from '../assets/venues/getto-burger.jpg'
+import rockPub from '../assets/venues/rock-pub.jpg'
+import belfastIrishPub from '../assets/venues/belfast-irish-pub.jpg'
+import londonPub from '../assets/venues/london-pub.jpg'
+import hicPub from '../assets/venues/hic-pub.jpg'
+import berlinPlatzPub from '../assets/venues/berlin-platz-pub.jpg'
+import oldEnglishPub from '../assets/venues/old-english-pub.jpg'
+import zurichPub from '../assets/venues/zurich-pub.jpg'
+import baykusPub from '../assets/venues/baykus-pub.jpg'
+import revoltePub from '../assets/venues/revolte-pub.jpg'
+import mirrorRestaurantBar from '../assets/venues/mirror-restaurant-bar.jpg'
+import theWallBar from '../assets/venues/the-wall-bar.jpg'
 
 export interface Venue {
   id: string
@@ -200,6 +211,17 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '798': threeBurgerKadikoy,
   '800': threeMonkeysBurger,
   '802': gettoBurger,
+  '828': rockPub,
+  '829': belfastIrishPub,
+  '831': londonPub,
+  '832': hicPub,
+  '835': berlinPlatzPub,
+  '833': oldEnglishPub,
+  '841': zurichPub,
+  '837': baykusPub,
+  '847': revoltePub,
+  '849': mirrorRestaurantBar,
+  '850': theWallBar,
 }
 
 export function getFallbackVenueImage(category: string): string {
