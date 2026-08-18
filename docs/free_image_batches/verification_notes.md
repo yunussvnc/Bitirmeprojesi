@@ -511,3 +511,12 @@ Espressolab Beşiktaş Meydan, canlı ID 983, Sinanpaşa Beşiktaş Cd. No:35. E
 8to Octo Coffee, canlı ID 985, Sinanpaşa Hattat Tahsin Sk. 39/D. Arama sonucu aynı 39D adresinde Tony's Cafe'yi gösteriyor; hedef 8to Octo ile uyuşmadığı için kullanılmayacak.
 Pogelo Coffee & More, canlı ID 986, Sinanpaşa Köyiçi Mektep Sk. Arama/Yandex kaydı aynı sokakta 8A adresini ve POGELO tabelalı dış cepheyi gösteriyor; güçlü eşleşme.
 Glane Coffee, canlı ID 987, Sinanpaşa Şehit Dursun Bakan Sk. No:18. Yandex sonucu aynı No:18 adresini ve GLANE tabelalı dış cepheyi gösteriyor; güçlü eşleşme.
+The Nest Coffee (Peaberry), canlı ID 988, Sinanpaşa Alaybeyi Sk. No:11. Arama sonuçları yalnızca tabelasız iç mekân/ürün fotoğrafları; işletme adı ve dış cephe doğrulanmadı, kullanılmayacak.
+Ora Coffee, canlı ID 989, Mecidiye Eski Bahçe Sk. Apartman No:7/A. Yandex dış cephe adayı Cafe Mondo tabelasını gösteriyor; hedef ORA ile yanlış eşleşme, kullanılmayacak. ORA resmî site adayları ise yalnızca içecek/ürün görseli olduğu için mekan görseli olarak kullanılmayacak.
+WalkOn Coffee, canlı ID 990, Abbasağa Salnameci Sk. No:43/A. Yandex sonucu genel sokak görünümü; WALKON tabelası veya giriş işareti görünmüyor, kullanılmayacak.
+Cozy Brew - Beşiktaş, canlı ID 991, Türkali Yeniyol Sokak No:9. Arama sonucu dış cepheyi gösteriyor ancak işletme adı/tabelası okunmuyor ve adres numarası görünmüyor; kesin eşleşme olmadığı için kullanılmayacak.
+Cosy Living Room, canlı ID 992, Kültür Yaprak Sk. No:13/A. Yelp sonuçları işletme logolu ürün/iç mekân fotoğrafları; dış cephe ve adres işareti yok, kullanıcı kuralı nedeniyle kullanılmayacak.
+Manzara Restaurant, canlı ID 993, Cihannüma Saray Cd. No:5. Tripadvisor başlığı adresle uyumlu olsa da incelenen görseller yalnızca yemek/teras/pool ambiyansı; Manzara tabelası veya adres görünmüyor, kullanılmayacak.
+jojo Ocakbaşı meze, canlı ID 994, Şişli Eşref Efendi Sk. No:2–4. Tripadvisor görselinde JOJO OCAKBAŞI adı/tabelası açıkça görülüyor; canlı adresle kaynak adresi ayrıca eşleştirildikten sonra değerlendirilecek.
+Peymane Ocakbaşı Beşiktaş, canlı ID 995, Sinanpaşa Alaybeyi Sk. No:7/A. Tripadvisor görselleri iç mekânı gösteriyor ancak PEYMANE tabelası veya adres numarası görünmüyor; kullanılmayacak.
+jojo Ocakbaşı meze, canlı ID 994, Şişli Bozkurt Mah. Eşref Efendi Sk. No:2–4. Instagram işletme profili ve Tripadvisor aynı adresi doğruluyor; Tripadvisor görselinde JOJO OCAKBAŞI tabelası net, güçlü eşleşme.
