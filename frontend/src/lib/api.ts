@@ -50,6 +50,14 @@ import kadikoyMidyecisi from '../assets/venues/kadikoy-midyecisi.jpg'
 import adanaliUmitUsta from '../assets/venues/adanali-umit-usta.jpg'
 import theTownhouse from '../assets/venues/the-townhouse.jpg'
 import nohutFalafelHumus from '../assets/venues/nohut-falafel-humus.jpg'
+import kadikoyCigerci from '../assets/venues/kadikoy-cigerci.jpg'
+import canakKebapKatmer from '../assets/venues/canak-kebap-katmer.jpg'
+import mantiHouseKadikoy from '../assets/venues/manti-house-kadikoy.jpg'
+import semolinaItalianRestaurant from '../assets/venues/semolina-italian-restaurant.jpg'
+import aidaVinoECucina from '../assets/venues/aida-vino-e-cucina.jpg'
+import laPastaMamma from '../assets/venues/la-pasta-mamma.jpg'
+import nellosItalianRestaurantErenkoy from '../assets/venues/nellos-italian-restaurant-erenkoy.jpg'
+import ilBoccalino34 from '../assets/venues/il-boccalino-34.jpg'
 
 export interface Venue {
   id: string
@@ -152,6 +160,14 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '698': adanaliUmitUsta,
   '702': theTownhouse,
   '706': nohutFalafelHumus,
+  '718': kadikoyCigerci,
+  '721': canakKebapKatmer,
+  '726': mantiHouseKadikoy,
+  '731': semolinaItalianRestaurant,
+  '734': aidaVinoECucina,
+  '735': laPastaMamma,
+  '737': nellosItalianRestaurantErenkoy,
+  '743': ilBoccalino34,
 }
 
 export function getFallbackVenueImage(category: string): string {

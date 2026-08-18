@@ -82,3 +82,7 @@ Eklenen doğrulanmış kayıtlar: Torrefacto Coffee Roastery (661) ve Caffè Sem
 ## Eklenen restoran doğrulama partisi
 
 Bu partide Çiya Sofrası (687), Yanyalı Fehmi Lokantası (691), Müdavim Lokantası (695), Kadıköy Midyecisi (697), Adanalı Ümit Usta Ocakbaşı & Kebap (698), The Townhouse (702) ve Nohut Falafel & Humus (706) için doğrulanmış yerel web ve mobil görselleri eklendi. Balıkçı Lokantası, Cafe Neva Breakfast, Hasan Usta, Leylak Kitchen, Nazende Cadde, Adanalı Şehmuz Usta, Sofra Han ve Onur Kebap için görsel/adres eşleşmesi yeterli olmadığı için ekleme yapılmadı.
+
+## Üçüncü restoran doğrulama partisi
+
+Bu partide Kadıköy Ciğercisi (718), Çanak Kebap & Katmer (721), Mantı House Kadıköy (726), Semolina İtalyan Restoran (731), Aida Vino E Cucina (734), La Pasta Mamma (735), Nello’s Italian Restaurant Erenköy (737) ve Il Boccalino 34 (743) için doğrulanmış yerel görseller eklendi. İsim/adres/tabela kanıtı yetersiz kalan diğer kayıtlar bilinçli olarak eklenmedi.

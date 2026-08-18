@@ -126,3 +126,71 @@ Adanalı Şehmuz Usta, canlı ID 708, Osmanağa Kuşdili Caddesi. Arama sonucu P
 Sofra Han, canlı ID 709, Osmanağa Çuhadarağa Sokak Şahinağa İş Merkezi. Görselde Sofra Han tabelası görünmüyor; yalnızca iç mekân fotoğrafı olduğu için kullanılmayacak.
 
 Onur Kebap Terminal Kadıköy, canlı ID 710, Kurbağalıdere Caddesi terminal bölgesi. Görselde Onur Kebap tabelası veya terminal adresi görünmüyor; kullanılmayacak.
+
+Kadıköy Ciğercisi, Nakkaş ve Altın Cağ incelemesi
+
+Kadıköy Ciğercisi, canlı ID 718, Feneryolu Fahrettin Kerim Gökay Caddesi No:56. Dış cephe fotoğrafında KADIKÖY CİĞERCİSİ tabelası açıkça görülüyor; arama başlığı 56A, canlı kayıt 56 ile güçlü uyum gösteriyor.
+
+Nakkaş Kebap Feneryolu, canlı ID 719, Feneryolu Boztepe Sokak No:2. Görselde işletme tabelası/adres işareti görünmüyor; arama sonucu yalnızca restoran iç/dış mekânı gösteriyor, kullanılmayacak.
+
+Altın Cağ Restorant, canlı ID 720, Rasimpaşa Siftah Sokak No:15. Arama sonuçları marka/adres işaretini yeterince göstermiyor; kullanılmayacak.
+
+Çanak, Nur Kebap ve Kardeşim incelemesi
+
+Çanak Kebap ve Katmer, canlı ID 721, Acıbadem Caddesi No:115. Dış cephe fotoğrafında ÇANAK KEBAP & KATMER tabelası açıkça görülüyor; arama başlığı aynı Acıbadem Caddesi 115 adresini doğruluyor, güçlü eşleşme.
+
+Nur Kebap Lahmacun Pide Salonu, canlı ID 722, Zühtüpaşa Bağdat Caddesi No:51. Arama görsellerinden biri NUR KEBAP tabelası taşıyor ancak hedef Bağdat Caddesi 51 şubesine ait olduğu kaynak adresiyle kesinleşmedi; eklenmeyecek.
+
+Kardeşim Kebap, canlı ID 723, Koşuyolu Caddesi No:63. Arama başlığı doğru adı/adresi taşısa da seçilen görsel yalnızca yemek fotoğrafı ve tabela/adres göstermiyor; dış cephe bulunana kadar eklenmeyecek.
+
+Tarihi Saray, Hoş Sefa ve Mantı House incelemesi
+
+Tarihi Kadıköy Saray Lokantası, canlı ID 724, Osmanağa Tayyareci Sami Sokak No:1 D:1. Görselde SARAY LOKANTASI adı görünse de kaynak şube/numara bilgisi canlı kayıtla kesinleştirilmedi; kullanılmayacak.
+
+Hoş Sefa Lokantası, canlı ID 725, Rasimpaşa Karakolhane Caddesi No:20/A. Bulunan görselde Hoş Sefa tabelası yok; çevrede farklı işletmeler görünüyor, kullanılmayacak.
+
+Mantı House Kadıköy, canlı ID 726, Rasimpaşa Halitağa Caddesi No:55/B. Dış cephe fotoğrafında MANTI HOUSE ve Özbek & Türkmen Restaurant yazıları açıkça görülüyor; Yandex başlığı Halitağa Caddesi 55 adresini doğruluyor, güçlü eşleşme.
+
+Serçini, Ali Baba ve Kadıköy Lokantası incelemesi
+
+Serçini Special Lokantası, canlı ID 727, Osmanağa Şemsitap Sokak No:14. Arama başlığı doğru ad/adres taşısa da görselde SERÇİNİ tabelası kısmen görünmesine rağmen kapı numarası ve cephe eşleşmesi net değil; daha güçlü kaynak bulunana kadar kullanılmayacak.
+
+Ali Baba Restaurant Kadıköy 1974, canlı ID 728, Osmanağa Serasker Caddesi No:7. Görsel iç mekânı gösteriyor, ALİ BABA adı veya adres işareti görünmüyor; kullanılmayacak.
+
+Kadıköy Lokantası, canlı ID 729, Osmanağa Şemsitap Sokak No:22. Arama sonuçları Kadi Lokantası, Şemsitap Sokak 20A olarak farklı isim/numara gösteriyor; canlı kayıtla eşleşmediği için kullanılmayacak.
+
+Dieci, Semolina ve Il Padrino incelemesi
+
+Dieci Moda, canlı ID 730, Osmanağa Yoğurtçu Parkı Caddesi No:70–72/A. Bulunan sonuçta Dieci logosu görünse de seçilen fotoğraf iç mekân vitrinini gösteriyor ve adres kanıtı yok; dış cephe/adres kaynağı bulunana kadar kullanılmayacak.
+
+Semolina İtalyan Restoran, canlı ID 731, Caferağa Ressam Şeref Akdik Sokak No:7. Dış cephe fotoğrafında Semolina Italian Food & Wine tabelası ve kapı girişi açıkça görülüyor; Yandex başlığı aynı Ressam Şeref Akdik Sokak 7 adresini doğruluyor, güçlü eşleşme.
+
+Il Padrino Ristorante, canlı ID 732, Caddebostan İskele Sokak No:8 D:C. Arama sonucu işletme adını taşısa da hedef şube adresi ve dış cephe işareti seçilen görselde doğrulanmadı; kullanılmayacak.
+
+Il Sud Giardino, Aida ve La Pasta Mamma incelemesi
+
+Il Sud Giardino, canlı ID 733, Caddebostan Agah Efendi Sokak No:7. Arama sonuçları işletme adı ve sokakla uyumlu; ancak seçilen adaylardan biri dış cephe, diğeri bahçe görünümü olduğu için kaynak adresi ayrıca kontrol edilmeden kullanılmayacak.
+
+Aida Vino E Cucina, canlı ID 734, Caferağa Ressam Şeref Akdik Sokak No:10. Dış cephede AIDA VINO E CUCINA tabelası ve 10 numarası açıkça görülüyor; kaynak başlığı aynı adresi doğruluyor, güçlü eşleşme.
+
+La Pasta Mamma, canlı ID 735, Yeldeğirmeni Karakolhane Caddesi No:29/A. Dış cephede La Pasta mamma tabelası net; Yandex başlığı aynı Karakolhane Caddesi 29 adresini veriyor, güçlü eşleşme.
+
+Zoppo, Nello’s ve il Sud Moda incelemesi
+
+Zoppo Chef, canlı ID 736, Feneryolu Cömert Sokak No:5/A. Arama sonucu yalnızca logo/marka görseli; şube adresi ve gerçek mekân cephesi doğrulanmadı, kullanılmayacak.
+
+Nello’s Italian Restaurant – Erenköy, canlı ID 737, Ethemefendi Caddesi No:26. Dış cephede Nello’s Italian food & bar tabelası ve restoran girişi açıkça görülüyor; arama başlığı Erenköy şubesini doğruluyor, güçlü eşleşme.
+
+il Sud Moda, canlı ID 738, Caferağa Sarraf Ali Sokak No:15. Bulunan fotoğraf iç mekânı gösteriyor fakat il Sud tabelası veya adres işareti görünmüyor; kullanılmayacak.
+
+Fesleğen, Pomodori ve Lasagne incelemesi
+
+Fesleğen Makarna Kadıköy, canlı ID 740, Hasanpaşa Fahrettin Kerim Gökay Caddesi No:9. Arama sonucu Güler Osmanlı Mutfağı tabelasını gösteriyor; hedef mekanla açıkça farklı, kullanılmayacak.
+
+Pomodori, canlı ID 741, Göztepe Pınar Sokak No:38. Arama sonucu Pınar Sokak 20A adresindeki farklı/başka Pomodori kaydını gösteriyor; canlı kayıtla eşleşmediği için kullanılmayacak.
+
+Lasagne Corner, canlı ID 742, Caddebostan Bağdat Caddesi No:292 D:19. Görsel yalnızca ürün fotoğrafı; işletme adı ve şube adresi görünmüyor, kullanılmayacak.
+
+Il Boccalino 34 kaynak doğrulaması
+
+Il Boccalino 34, canlı ID 743, Fenerbahçe Operatör Cemil Topuzlu Caddesi No:35. Tripadvisor, Instagram @ilboccalino34 ve diğer bağımsız kaynaklar aynı adresi doğruluyor; bulunan görselde Il Boccalino tabelası net. Yandex’teki eski Mahur Sokak 1/A kaydı farklı/eskimiş göründüğü için resmî Instagram ve Tripadvisor adresi esas alındı; güçlü eşleşme.
