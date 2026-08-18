@@ -143,6 +143,9 @@ const beyazFirinKadikoy = require("../../assets/places/beyaz-firin-kadikoy.jpg")
 const oCoffeeBesiktas = require("../../assets/places/o-coffee-besiktas.jpg") as ImageSourcePropType;
 const endCoffeeChocolate = require("../../assets/places/end-coffee-chocolate.jpg") as ImageSourcePropType;
 const sourSweetSuadiye = require("../../assets/places/sour-sweet-suadiye.jpg") as ImageSourcePropType;
+const dealCoffee = require("../../assets/places/deal-coffee.jpg") as ImageSourcePropType;
+const perNoiCoffeeOrtakoy = require("../../assets/places/per-noi-coffee-ortakoy.webp") as ImageSourcePropType;
+const bexCoffee = require("../../assets/places/bex-coffee.jpg") as ImageSourcePropType;
 
 const CATEGORY_PLACEHOLDERS: Record<string, string> = {
   kafe: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800",
@@ -299,6 +302,9 @@ const PLACE_IMAGE_OVERRIDES: Record<string, ImageSourcePropType> = {
   "963": sourSweetSuadiye,
   "964": oCoffeeBesiktas,
   "965": endCoffeeChocolate,
+  "966": dealCoffee,
+  "968": perNoiCoffeeOrtakoy,
+  "971": bexCoffee,
 };
 
 type PlaceLike = Place | { id?: string | number; name?: string; photo_url?: string; category?: string };

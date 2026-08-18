@@ -488,3 +488,9 @@ kubcakesbakery, canlı ID 962, İpekyolu Sokak/Kerim Apt. Arama görsellerindeki
 O Coffee, canlı ID 964, Türkali Yeni Yol Sokak No:12/A. Yandex görselinde O Coffee tabelası ve dış cephe açıkça görülüyor; kaynak başlığı aynı 12A adresini taşıyor, güçlü eşleşme.
 End Coffee Chocolate, canlı ID 965, Türkali Yeni Yol Sokak 1A. Yandex panorama görselinde END COFFEE CHOCOLATE tabelası ve dış cephe açıkça görülüyor; kaynak başlığı 1/1A adresini taşıyor, güçlü eşleşme.
 Sour & Sweet Artisan Bakery Suadiye, canlı ID 963, Suadiye Kazım Özalp Sk. No:38. Corner/mesprestiges görselinde SOUR & SWEET ARTISAN BAKERY tabelalı dış cephe net; kaynak başlığı aynı Kazım Özalp Sk. No:38 adresini taşıyor, güçlü eşleşme. Aynı aramadaki iç mekân görseli kullanılmayacak.
+Deal Coffee, canlı ID 966, Cihannüma Yıldız Cd. No:53/A. Yandex görselinde DEAL COFFEE tabelalı dış cephe ve aynı bina çevresi görülüyor; kaynak başlığı 53A adresini taşıyor, güçlü eşleşme.
+Coffers Coffee, canlı ID 967, Yıldız Asariye Cd. No:19. Corner aday görselinde COFFERS COFFEE yerine Kemeraltı tabelası/başka işletme görülüyor; yanlış eşleşme riski nedeniyle kullanılmayacak.
+Per Noi Coffee Co. Ortaköy, canlı ID 968, Mecidiye Eski Bahçe Sk. No:11/B. Arama sonucu adresi taşıyan Per Noi kaydında dış cephe ve işletme logosu görülüyor; güçlü adres/marka eşleşmesi, kullanılabilir.
+THE CO. COFFEE AKARETLER, canlı ID 969, Vişnezade Şair Nedim Cd. No:27/A. Yandex adayında hedef THE CO. COFFEE tabelası net değil ve cephede farklı/okunamayan işletme yazıları görülüyor; kullanılmayacak.
+Hygge Coffee Shop, canlı ID 970, Türkali Yeni Yol Sokak No:3. Yandex adayında COFFEETALKS tabelası görülüyor; Hygge ile eşleşmediği için yanlış görsel olarak reddedilecek.
+Bex Coffee, canlı ID 971, Yıldız Çırağan Cd. No:35/1. Yandex görselinde BEX COFFEE tabelası ve işletme girişi açıkça görülüyor; kaynak başlığı aynı Çırağan Cd. No:35 adresini taşıyor, güçlü eşleşme.
