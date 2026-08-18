@@ -168,6 +168,7 @@ import eldeBorek from '../assets/venues/elde-borek.jpg'
 import yallaFalafel from '../assets/venues/yalla-falafel.jpg'
 import renkliLimon from '../assets/venues/renkli-limon.jpg'
 import cakmakKahvaltiSalonu from '../assets/venues/cakmak-kahvalti-salonu.jpg'
+import trattoriaCarbonara from '../assets/venues/trattoria-carbonara.jpg'
 
 export interface Venue {
   id: string
@@ -388,6 +389,7 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '1032': yallaFalafel,
   '1033': renkliLimon,
   '1035': cakmakKahvaltiSalonu,
+  '1036': trattoriaCarbonara,
 }
 
 export function getFallbackVenueImage(category: string): string {
