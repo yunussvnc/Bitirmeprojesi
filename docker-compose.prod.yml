@@ -218,6 +218,8 @@ services:
       REDIS_URL: redis://:${REDIS_PASSWORD}@redis:6379/0
       # ai-llm'e artık onrender.com değil, Docker service adıyla ulaşılıyor.
       AI_URL: http://ai-llm:8080
+      # Backend forwarded IP header'larını yalnız bu doğrudan proxy ağlarından kabul eder.
+      TRUSTED_PROXY_NETWORKS: "172.28.0.10/32"
     volumes:
       # Cloudinary yapılandırılmadığında local upload fallback'i için named
       # volume — imaja bind mount YOK, kalıcı veri sadece bu volume üzerinden.
@@ -360,8 +362,9 @@ services:
       - certbot_www:/var/www/certbot:ro
       - nginx_logs:/var/log/nginx
     networks:
-      - public_network
-      - backend_network
+      public_network:
+      backend_network:
+        ipv4_address: 172.28.0.10
     depends_on:
       backend:
         condition: service_healthy
@@ -422,6 +425,9 @@ services:
 networks:
   backend_network:
     driver: bridge
+    ipam:
+      config:
+        - subnet: 172.28.0.0/24
     # internal:true KULLANILMIYOR bilinçli olarak: backend (Groq/Cloudinary/
     # SerpAPI/Google OAuth/SMTP) ve ai-llm (Groq/HuggingFace/SerpAPI) dış
     # internete çıkmak zorunda. Postgres/redis/qdrant'ın "public'e kapalı"

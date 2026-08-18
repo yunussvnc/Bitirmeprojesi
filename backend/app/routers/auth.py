@@ -12,7 +12,7 @@ import requests as req_lib
 from datetime import date, datetime, timedelta, timezone
 
 # pyrefly: ignore [missing-import]
-from fastapi import APIRouter, Depends, HTTPException, Request
+from fastapi import APIRouter, BackgroundTasks, Depends, HTTPException, Request
 # pyrefly: ignore [missing-import]
 from sqlalchemy.exc import IntegrityError
 # pyrefly: ignore [missing-import]
@@ -28,9 +28,11 @@ from crud import _hash_password, _verify_password
 from app.dependencies import get_db, get_current_user, get_admin_user
 from app.middleware.rate_limiter import (
     get_client_ip,
+    is_login_locked,
     record_failed_login,
     reset_failed_logins,
 )
+from app.websocket.manager import manager
 from app.services.email_service import (
     create_verification_code, verify_code,
     create_password_reset_code, verify_password_reset,
@@ -386,9 +388,15 @@ def verify_register(body: schemas.VerifyRegisterRequest, db: Session = Depends(g
 def login(
     user_data: schemas.UserLogin,
     request: Request,
+    background_tasks: BackgroundTasks,
     db: Session = Depends(get_db),
 ):
     ip = get_client_ip(request)
+    if is_login_locked(ip, user_data.email):
+        raise HTTPException(
+            status_code=429,
+            detail="Çok fazla başarısız deneme. Lütfen daha sonra tekrar deneyin.",
+        )
 
     db_user = crud.get_user_by_email(db, user_data.email)
     if not db_user:
@@ -397,12 +405,12 @@ def login(
                 status_code=403, 
                 detail="pending_verification: Lütfen önce e-posta adresinize gönderilen kod ile hesabınızı doğrulayın."
             )
-        record_failed_login(ip)
+        record_failed_login(ip, user_data.email)
         raise HTTPException(status_code=404, detail="Bu e-posta adresine ait kullanıcı bulunamadı.")
 
     user = crud.authenticate_user(db, user_data.email, user_data.password)
     if not user:
-        record_failed_login(ip)
+        record_failed_login(ip, user_data.email)
         raise HTTPException(status_code=401, detail="Şifre hatalı.")
 
     if not user.is_active:
@@ -410,6 +418,13 @@ def login(
 
     user.token_version = (user.token_version or 0) + 1
     db.commit()
+    reset_failed_logins(ip, user_data.email)
+    background_tasks.add_task(
+        manager.close_user_connections,
+        user.id,
+        "Yeni oturum açıldı",
+        user.token_version - 1,
+    )
 
     tv = user.token_version
     return schemas.Token(
@@ -424,6 +439,7 @@ def login(
 @router.post("/google", response_model=schemas.Token)
 def google_login(
     body: schemas.SocialLoginRequest,
+    background_tasks: BackgroundTasks,
     db: Session = Depends(get_db)
 ):
     try:
@@ -451,6 +467,12 @@ def google_login(
         user.is_email_verified = True
         user.token_version = (user.token_version or 0) + 1
         db.commit()
+        background_tasks.add_task(
+            manager.close_user_connections,
+            user.id,
+            "Yeni oturum açıldı",
+            user.token_version - 1,
+        )
 
         tv = user.token_version
         return schemas.Token(
@@ -467,6 +489,7 @@ def google_login(
 @router.post("/apple", response_model=schemas.Token)
 def apple_login(
     body: schemas.SocialLoginRequest,
+    background_tasks: BackgroundTasks,
     db: Session = Depends(get_db)
 ):
     try:
@@ -510,6 +533,12 @@ def apple_login(
         user.is_email_verified = True
         user.token_version = (user.token_version or 0) + 1
         db.commit()
+        background_tasks.add_task(
+            manager.close_user_connections,
+            user.id,
+            "Yeni oturum açıldı",
+            user.token_version - 1,
+        )
 
         tv = user.token_version
         return schemas.Token(
@@ -620,6 +649,7 @@ def forgot_password(
 @router.post("/reset-password")
 def reset_password(
     body: schemas.ResetPasswordRequest,
+    background_tasks: BackgroundTasks,
     db: Session = Depends(get_db),
 ):
     """Sıfırlama kodu + yeni şifre ile şifreyi günceller."""
@@ -648,12 +678,19 @@ def reset_password(
             detail="Sıfırlama kodu hatalı, süresi dolmuş veya çok fazla yanlış deneme yapıldı.",
         )
 
+    background_tasks.add_task(
+        manager.close_user_connections,
+        user.id,
+        "Şifre sıfırlandı",
+        user.token_version - 1,
+    )
     return {"ok": True, "message": "Şifreniz başarıyla güncellendi. Yeni şifrenizle giriş yapabilirsiniz."}
 
 
 @router.put("/change-password")
 def change_password(
     body: schemas.ChangePasswordRequest,
+    background_tasks: BackgroundTasks,
     current_user: models.User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
@@ -674,12 +711,23 @@ def change_password(
         )
 
     current_user.password_hash = _hash_password(body.new_password)
+    current_user.token_version = (current_user.token_version or 0) + 1
     db.commit()
-    return {"ok": True, "message": "Şifreniz başarıyla değiştirildi."}
+    background_tasks.add_task(
+        manager.close_user_connections,
+        current_user.id,
+        "Şifre değiştirildi",
+        current_user.token_version - 1,
+    )
+    return {
+        "ok": True,
+        "message": "Şifreniz değiştirildi. Lütfen yeni şifrenizle tekrar giriş yapın.",
+    }
 
 
 @router.delete("/me")
 def delete_account(
+    background_tasks: BackgroundTasks,
     current_user: models.User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
@@ -788,6 +836,7 @@ def delete_account(
         # ── 13. Kullanıcıyı sil ve tek commit ──
         db.delete(current_user)
         db.commit()
+        background_tasks.add_task(manager.close_user_connections, uid, "Hesap silindi")
         return {"ok": True, "message": "Hesabınız kalıcı olarak silindi."}
 
     except Exception as e:
@@ -799,6 +848,7 @@ def delete_account(
 
 @router.post("/deactivate")
 def deactivate_account(
+    background_tasks: BackgroundTasks,
     current_user: models.User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
@@ -810,6 +860,11 @@ def deactivate_account(
     # Token version'ı artır — tüm mevcut token'lar geçersiz olur
     current_user.token_version = (current_user.token_version or 0) + 1
     db.commit()
+    background_tasks.add_task(
+        manager.close_user_connections,
+        current_user.id,
+        "Hesap devre dışı bırakıldı",
+    )
     return {"ok": True, "message": "Hesabınız devre dışı bırakıldı. 30 gün içinde giriş yaparak yeniden aktif edebilirsiniz."}
 
 @router.post("/refresh", response_model=schemas.Token)
@@ -836,6 +891,7 @@ def refresh_token(body: schemas.RefreshRequest, db: Session = Depends(get_db)):
 
 @router.post("/logout-all")
 def logout_all_sessions(
+    background_tasks: BackgroundTasks,
     current_user: models.User = Depends(get_current_user),
     db: Session = Depends(get_db),
 ):
@@ -848,6 +904,12 @@ def logout_all_sessions(
     # Push token'ları temizle
     db.query(models.DeviceToken).filter(models.DeviceToken.user_id == current_user.id).delete()
     db.commit()
+    background_tasks.add_task(
+        manager.close_user_connections,
+        current_user.id,
+        "Tüm oturumlar sonlandırıldı",
+        current_user.token_version - 1,
+    )
     # Yeni token'lar üret (mevcut cihaz hâlâ giriş yapılı kalır)
     tv = current_user.token_version
     return {
@@ -1117,5 +1179,3 @@ def delete_push_token(
     current_user.push_token_updated_at = None
     db.commit()
     return {"ok": True}
-
-
