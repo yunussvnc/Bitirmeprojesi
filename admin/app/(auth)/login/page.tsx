@@ -1,12 +1,13 @@
 'use client';
 
+import axios from 'axios';
 import { useState, Suspense } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { useAuthStore } from '@/store/authStore';
-import { api } from '@/lib/api';
+import { getSafeRedirectPath } from '@/lib/safe-redirect';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from '@/components/ui/card';
@@ -23,7 +24,7 @@ type LoginFields = z.infer<typeof loginSchema>;
 function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const setToken = useAuthStore((state) => state.setToken);
+  const setUser = useAuthStore((state) => state.setUser);
   const [loading, setLoading] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -38,31 +39,24 @@ function LoginForm() {
   const onSubmit = async (data: LoginFields) => {
     setLoading(true);
     try {
-      const response = await api.post('/auth/login', {
+      const response = await axios.post('/api/auth/login', {
         email: data.email,
         password: data.password,
       });
 
-      const { access_token, user } = response.data;
-
-      if (user.role !== 'admin' && user.role !== 'venue') {
-        toast.error('Yetkisiz Erişim', {
-          description: 'Bu yönetim paneline yalnızca admin ve mekan sahibi hesapları giriş yapabilir.',
-        });
-        setLoading(false);
-        return;
-      }
-
-      setToken(access_token);
+      const { user } = response.data;
+      setUser(user);
       toast.success('Giriş Başarılı', {
         description: 'Yönetim paneline yönlendiriliyorsunuz...',
       });
 
-      const redirect = searchParams.get('redirect') || '/';
+      const redirect = getSafeRedirectPath(searchParams.get('redirect'));
       router.push(redirect);
-    } catch (error: any) {
+    } catch (error) {
       console.error('Login error:', error);
-      const detail = error.response?.data?.detail || 'Giriş yapılırken bir hata oluştu.';
+      const detail = axios.isAxiosError<{ detail?: string }>(error)
+        ? error.response?.data?.detail || 'Giriş yapılırken bir hata oluştu.'
+        : 'Giriş yapılırken bir hata oluştu.';
       toast.error('Giriş Başarısız', {
         description: detail,
       });
