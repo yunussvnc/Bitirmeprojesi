@@ -86,3 +86,7 @@ Bu partide Çiya Sofrası (687), Yanyalı Fehmi Lokantası (691), Müdavim Lokan
 ## Üçüncü restoran doğrulama partisi
 
 Bu partide Kadıköy Ciğercisi (718), Çanak Kebap & Katmer (721), Mantı House Kadıköy (726), Semolina İtalyan Restoran (731), Aida Vino E Cucina (734), La Pasta Mamma (735), Nello’s Italian Restaurant Erenköy (737) ve Il Boccalino 34 (743) için doğrulanmış yerel görseller eklendi. İsim/adres/tabela kanıtı yetersiz kalan diğer kayıtlar bilinçli olarak eklenmedi.
+
+## Dördüncü restoran doğrulama partisi
+
+Bu partide orōro Sushi Bar Moda (764), Saltator (771), Cunda Balık (772), Suadiye Balık (774), Nisan Balık (775), Şaşkın Balık Efkan’ın Yeri (777), Mezze House (779), Misina Balık Restaurant (780), Koço Restaurant (782) ve Kayıp Liman Balıkçısı (783) için doğrulanmış yerel görseller eklendi. Kaen Sushi, Ken Sushi, Sushimi, Konoha, Cibalikapı ve benzeri kayıtlar için eşleşmesi kesin olmayan görseller eklenmedi.

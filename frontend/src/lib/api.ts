@@ -58,6 +58,18 @@ import aidaVinoECucina from '../assets/venues/aida-vino-e-cucina.jpg'
 import laPastaMamma from '../assets/venues/la-pasta-mamma.jpg'
 import nellosItalianRestaurantErenkoy from '../assets/venues/nellos-italian-restaurant-erenkoy.jpg'
 import ilBoccalino34 from '../assets/venues/il-boccalino-34.jpg'
+import yamoSushiCaddebostan from '../assets/venues/yamo-sushi-caddebostan.jpg'
+import misoRamenModa from '../assets/venues/miso-ramen-moda.jpg'
+import ororoSushiBarModa from '../assets/venues/ororo-sushi-bar-moda.jpg'
+import saltator from '../assets/venues/saltator.jpg'
+import cundaBalik from '../assets/venues/cunda-balik.jpg'
+import suadiyeBalik from '../assets/venues/suadiye-balik.jpg'
+import nisanBalik from '../assets/venues/nisan-balik.jpg'
+import saskinBalikEfkan from '../assets/venues/saskin-balik-efkan.jpg'
+import mezzeHouse from '../assets/venues/mezze-house.jpg'
+import kayipLimanBalikcisi from '../assets/venues/kayip-liman-balikcisi.jpg'
+import kocoRestaurant from '../assets/venues/koco-restaurant.jpg'
+import misinaBalikRestaurant from '../assets/venues/misina-balik-restaurant.jpg'
 
 export interface Venue {
   id: string
@@ -168,6 +180,18 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '735': laPastaMamma,
   '737': nellosItalianRestaurantErenkoy,
   '743': ilBoccalino34,
+  '756': yamoSushiCaddebostan,
+  '761': misoRamenModa,
+  '764': ororoSushiBarModa,
+  '771': saltator,
+  '772': cundaBalik,
+  '774': suadiyeBalik,
+  '775': nisanBalik,
+  '777': saskinBalikEfkan,
+  '779': mezzeHouse,
+  '783': kayipLimanBalikcisi,
+  '782': kocoRestaurant,
+  '780': misinaBalikRestaurant,
 }
 
 export function getFallbackVenueImage(category: string): string {

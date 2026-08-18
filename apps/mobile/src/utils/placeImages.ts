@@ -61,6 +61,18 @@ const aidaVinoECucina = require("../../assets/places/aida-vino-e-cucina.jpg") as
 const laPastaMamma = require("../../assets/places/la-pasta-mamma.jpg") as ImageSourcePropType;
 const nellosItalianRestaurantErenkoy = require("../../assets/places/nellos-italian-restaurant-erenkoy.jpg") as ImageSourcePropType;
 const ilBoccalino34 = require("../../assets/places/il-boccalino-34.jpg") as ImageSourcePropType;
+const yamoSushiCaddebostan = require("../../assets/places/yamo-sushi-caddebostan.jpg") as ImageSourcePropType;
+const misoRamenModa = require("../../assets/places/miso-ramen-moda.jpg") as ImageSourcePropType;
+const ororoSushiBarModa = require("../../assets/places/ororo-sushi-bar-moda.jpg") as ImageSourcePropType;
+const saltator = require("../../assets/places/saltator.jpg") as ImageSourcePropType;
+const cundaBalik = require("../../assets/places/cunda-balik.jpg") as ImageSourcePropType;
+const suadiyeBalik = require("../../assets/places/suadiye-balik.jpg") as ImageSourcePropType;
+const nisanBalik = require("../../assets/places/nisan-balik.jpg") as ImageSourcePropType;
+const saskinBalikEfkan = require("../../assets/places/saskin-balik-efkan.jpg") as ImageSourcePropType;
+const mezzeHouse = require("../../assets/places/mezze-house.jpg") as ImageSourcePropType;
+const kayipLimanBalikcisi = require("../../assets/places/kayip-liman-balikcisi.jpg") as ImageSourcePropType;
+const kocoRestaurant = require("../../assets/places/koco-restaurant.jpg") as ImageSourcePropType;
+const misinaBalikRestaurant = require("../../assets/places/misina-balik-restaurant.jpg") as ImageSourcePropType;
 
 const CATEGORY_PLACEHOLDERS: Record<string, string> = {
   kafe: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800",
@@ -135,6 +147,18 @@ const PLACE_IMAGE_OVERRIDES: Record<string, ImageSourcePropType> = {
   "735": laPastaMamma,
   "737": nellosItalianRestaurantErenkoy,
   "743": ilBoccalino34,
+  "756": yamoSushiCaddebostan,
+  "761": misoRamenModa,
+  "764": ororoSushiBarModa,
+  "771": saltator,
+  "772": cundaBalik,
+  "774": suadiyeBalik,
+  "775": nisanBalik,
+  "777": saskinBalikEfkan,
+  "779": mezzeHouse,
+  "783": kayipLimanBalikcisi,
+  "782": kocoRestaurant,
+  "780": misinaBalikRestaurant,
 };
 
 type PlaceLike = Place | { id?: string | number; name?: string; photo_url?: string; category?: string };

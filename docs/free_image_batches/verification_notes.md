@@ -194,3 +194,63 @@ Lasagne Corner, canlı ID 742, Caddebostan Bağdat Caddesi No:292 D:19. Görsel 
 Il Boccalino 34 kaynak doğrulaması
 
 Il Boccalino 34, canlı ID 743, Fenerbahçe Operatör Cemil Topuzlu Caddesi No:35. Tripadvisor, Instagram @ilboccalino34 ve diğer bağımsız kaynaklar aynı adresi doğruluyor; bulunan görselde Il Boccalino tabelası net. Yandex’teki eski Mahur Sokak 1/A kaydı farklı/eskimiş göründüğü için resmî Instagram ve Tripadvisor adresi esas alındı; güçlü eşleşme.
+
+Kaen Sushi, Ken Sushi ve Sushimi incelemesi
+
+Kaen Sushi, canlı ID 753, Koşuyolu Asmadalı Sokak No:6. Arama görsellerinde işletme tabelası/adres işareti net değil; kullanılmayacak.
+
+Ken Sushi & More, canlı ID 754, Suadiye Kazım Özalp Sokak No:60/C. Bulunan görsel yalnızca yemek fotoğrafı, işletme adı ve adres kanıtı yok; kullanılmayacak.
+
+Sushimi Kadıköy, canlı ID 755, 19 Mayıs Mercan Sokak No:8 D:A. Dış cephede SushiMi logosu ve giriş görünse de adres numarası/tabela metni yeterince seçilmiyor; daha güçlü doğrulama olmadan kullanılmayacak.
+
+Yamo, Konoha ve MACHI incelemesi
+
+Yamo Sushi Caddebostan, canlı ID 756, Haldun Taner Sokak No:12. Dış cephede YAMO SUSHI tabelası, turuncu logo ve giriş görünür; Yandex başlığı aynı Haldun Taner Sokak 12 adresini doğruluyor, güçlü eşleşme.
+
+Konoha Suadiye, canlı ID 757, Bağdat Caddesi No:474/A. Arama görselleri Konoha markalı mekânı gösteriyor ancak hedef şube numarası ve adres işareti görsellerde doğrulanmadı; kullanılmayacak.
+
+MACHI, canlı ID 758, Suadiye Müzeyyen Sokak No:2. Görsel yalnızca sushi ürünü; işletme adı/adres/tabela kanıtı yok, kullanılmayacak.
+
+orōro, Miso Ramen ve The Wokshop incelemesi
+
+orōro Japanese Eatery Erenköy, canlı ID 760, Caddebostan Yener Sokak No:5/B. Bulunan iç mekân görselinde işletme adı/tabela yok; yanlış şube riski nedeniyle kullanılmayacak.
+
+Miso Ramen Moda, canlı ID 761, Caferağa Şair Latifi Sokak No:41/A. Dış cephede MISO RAMEN tabelası, Japonca logo ve işletme girişi açıkça görülüyor; kaynak başlığı aynı Şair Latifi 41/A adresini doğruluyor, güçlü eşleşme.
+
+The Wokshop, canlı ID 762, Osmanağa Yoğurtçu Şükrü Sokak No:3/A. Arama sonucu işletme adı/adresi taşısa da seçilen adaylarda tabela ve numara yeterince görünmüyor; kullanılmayacak.
+
+orōro Moda, SushiCo ve Jogs incelemesi
+
+orōro Sushi Bar Moda, canlı ID 764, Caferağa Fırıldak Sokak No:17. Dış cephede orōro SUSHI BAR tabelası ve işletme girişi açıkça görülüyor; Tripadvisor arama sonucu doğru Moda şubesini doğruluyor, güçlü eşleşme.
+
+SushiCo Suadiye, canlı ID 765, Akın Sokak No:5/A Şaşkınbakkal. Arama sonucu SushiCo markası taşısa da başlık Bağdat Caddesi 466/2 adresindeki farklı şubeyi gösteriyor; canlı kayıtla eşleşmediği için kullanılmayacak.
+
+Jogs Rolls & Noodles, canlı ID 766, Osmanağa Karadut Sokak No:5. Arama sonucu tamamen alakasız deniz/göl fotoğrafı ve farklı bir Yandex kaydı döndürüyor; kullanılmayacak.
+
+Saltator kaynak doğrulaması
+
+Saltator, canlı ID 771, Suadiye Plaj Yolu Sokak Suadiye Park A Blok No:18 Kat:3. Resmî site https://saltatorbalik.com/ aynı adresi ve Saltator Meze·Balık işletmesini doğruluyor; sitede restoran iç/dış mekânı ve ürün görselleri bulunuyor. Kaynak görsel seçiminde marka ve restoran mekânı görünen görsel kullanılacak.
+
+Cunda, Suadiye Balık ve Nisan Balık incelemesi
+
+Cunda Balık Restaurant, canlı ID 772, Bostancı Koy Yolu Sokak No:6. Arama sonucu Cunda Balık işletmesini ve Köy Yolu Sokak No:6/1 adresini doğruluyor; seçilen iç mekân fotoğrafı kaynak sayfasında bu işletmeye ait, güçlü eşleşme.
+
+Suadiye Balık, canlı ID 774, Suadiye Plaj Yolu Sokak No:23/B. Dış cephede SUADİYE BALIK tabelası ve balık logosu net; görselde kapı yanında 23 numarası görülüyor, Yandex başlığı aynı Plaj Yolu 23 adresini veriyor, güçlü eşleşme.
+
+Nisan Balık Restaurant, canlı ID 775, Osmanağa Yasa Caddesi No:54. Dış cephede NİSAN BALIK ve NİSAN BALIK RESTAURANT tabelaları açıkça görülüyor; Yandex başlığı aynı Yasa Caddesi 54 adresini taşıyor, güçlü eşleşme. Kaynakta işletmenin artık faal olmadığı belirtilse de canlı kayda ait doğru tarihsel görsel olarak ekleniyor.
+
+Mezze House ve Şaşkın Balık incelemesi
+
+Mezze House, canlı ID 779, Fenerbahçe Yoğurtçubaşı Sokak No:2. Yandex Maps, Tripadvisor ve işletmenin Instagram hesabı aynı adresi doğruluyor; Yandex kaydındaki bahçe görselinde Mezze House işletmesine ait restoran atmosferi görülüyor, güçlü eşleşme.
+
+Şaşkın Balık Efkan’ın Yeri, canlı ID 777, Suadiye Noter Sokak No:8. Yandex Maps, Tripadvisor ve resmî site https://saskinbalik.com/ aynı işletmeyi doğruluyor; görselde Şaşkın Balık tabelası ve restoran cephesi görülüyor, güçlü eşleşme.
+
+Cibalikapı Balıkçısı Moda, canlı ID 776, Caferağa Moda Caddesi No:163. Arama görseli Oldest Ethnic Ottomare adlı farklı işletmeye ait; kesinlikle kullanılmayacak.
+
+Kayıp Liman, Koço ve Misina incelemesi
+
+Kayıp Liman Balıkçısı, canlı ID 783, Osmanağa Yasa Caddesi No:27/2. Yandex Maps başlığı aynı işletme adını ve Yasa Caddesi 27 adresini taşıyor; dış cephe ve deniz ürünleri restoranı görünümü kaynak işletmesiyle uyumlu, güçlü eşleşme.
+
+Koço Restaurant, canlı ID 782, Caferağa Moda Caddesi No:171. Tripadvisor kaynağı KOCO işletmesini, deniz manzaralı restoran terasını ve Moda konumunu doğruluyor; görselde tabela görünmese de kaynak işletme eşleşmesi güçlü.
+
+Misina Balık Restaurant, canlı ID 780, Caddebostan Prof. Dr. Hulusi Behçet Caddesi No:10. Kaynak başlığı ve görsel kaydı aynı işletme/adres bilgisini taşıyor; restoran iç mekânı kaynak işletmesiyle uyumlu, güçlü eşleşme.
