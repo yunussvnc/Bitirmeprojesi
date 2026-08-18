@@ -41,6 +41,8 @@ import sevenSpecialtyCoffee from '../assets/venues/seven-specialty-coffee.jpg'
 import vCoffeeKadikoy from '../assets/venues/v-coffee-kadikoy.webp'
 import theCoffeeFactoryKadikoy from '../assets/venues/the-coffee-factory-kadikoy.jpg'
 import storyCoffeeRoastery from '../assets/venues/story-coffee-roastery.jpg'
+import torrefactoCoffeeRoastery from '../assets/venues/torrefacto-coffee-roastery.jpg'
+import caffeSemplice from '../assets/venues/caffe-semplice.jpg'
 
 export interface Venue {
   id: string
@@ -134,6 +136,8 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '658': vCoffeeKadikoy,
   '659': theCoffeeFactoryKadikoy,
   '660': storyCoffeeRoastery,
+  '661': torrefactoCoffeeRoastery,
+  '665': caffeSemplice,
 }
 
 export function getFallbackVenueImage(category: string): string {

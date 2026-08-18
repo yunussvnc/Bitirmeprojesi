@@ -56,3 +56,15 @@ The Coffee Factory kaynakları: resmî mağazalar sayfası https://thecoffeefact
 Story Coffee kaynakları: Yandex Maps https://yandex.com.tr/maps/org/story_coffee_roastery/95320023184/ ve resmî site https://storyroasters.com/pages/ofis-toplanti-etkinlik-alanlari. Resmî site adresi Rasimpaşa Mah. Halitağa Cad. No:61/A; canlı kayıt No:61 ile aynı işletme/şube olarak güçlü uyum gösteriyor.
 
 V Coffee kaynakları: resmî site https://vcoffee.com.tr/ ve resmî Instagram https://www.instagram.com/vcoffeeroaster/. Her iki kaynak da Rasimpaşa/Yeldeğirmeni İzzettin Sokak No:44/B adresini doğruluyor; Yandex’teki 44/A bilgisinden daha güvenilir olan resmî adres esas alınacak.
+
+Torrefacto ve Village incelemesi
+
+Torrefacto Coffee Roastery, canlı ID 661, Erenköy Eralp Sokak No:9. Yandex Maps başlığı aynı işletme adı ve aynı Eralp Sokak 9 adresini gösteriyor; görselde kafe cephesi ve marka işareti seçiliyor, güçlü eşleşme.
+
+Village Coffee + Eatery, canlı ID 664, Rasimpaşa Recaizade Sokak No:54/A. Görselde VILLAGE COFFEE + EATERY tabelası ve iç mekânı net; ancak kaynak arama başlığı Recaizade Sokak 52A gösteriyor. Adres numarası farkı nedeniyle aynı şube olduğu ayrıca doğrulanmadan kullanılmayacak.
+
+Caffè Semplice ve Central Point incelemesi
+
+Caffè Semplice, canlı ID 665, Suadiye Tüccar Katibi Sokak No:6/A. Görselde CAFFE SEMPLICE tabelası ve kafenin dış cephesi açıkça görülüyor; Yandex başlığındaki Tüccar Katibi Sokak 6 ile güçlü eşleşme.
+
+Central Point, canlı ID 668, Caferağa Miralay Nazım Sokak No:27/A. Görsel iç mekânı gösteriyor ancak Central Point adı, tabela veya adres işareti görünmüyor; yanlış eşleşme riskinden dolayı kullanılmayacak.
