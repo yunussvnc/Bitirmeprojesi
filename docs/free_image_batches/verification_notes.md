@@ -528,3 +528,7 @@ IST TOO, canlı ID 999, Sinanpaşa Hayrettin İskelesi Sk. No:1. Tripadvisor gö
 Kardeş Payı Kahvaltı Cafe, canlı ID 1000, Sinanpaşa Çelebioğlu Sk. No:5. Görselde KARDES PAYI tabelalı dış cephe açıkça görülüyor; kaynak adresinin canlı No:5 ile eşleştirilmesi sonrası kullanılabilir.
 Siyah Cafe Kahvaltı, canlı ID 1002, Sinanpaşa Çelebioğlu Sk. Mete Apt No:31/2. Tripadvisor sonuçları ürün fotoğrafları ve tabelasız iç mekân; adres/cephe doğrulanmadı, kullanılmayacak.
 Kardeş Payı Kahvaltı Cafe, canlı ID 1000, Sinanpaşa Çelebioğlu Sokak No:5. Instagram, Yandex ve işletmenin resmî sayfası No:5/5A adresini doğruluyor; görselde KARDES PAYI tabelalı dış cephe net, güçlü eşleşme.
+Elise Karadeniz Pide & Lahmacun, canlı ID 1003, Mecidiye Eski Bahçe Sk. No:4. Görselde ELISE KARADENİZ PİDE & LAHMACUN tabelası ve işletme cephesi net; canlı adresle kaynak adresi ayrıca eşleştirildikten sonra kullanılabilir.
+Nevale Mutfak, canlı ID 1004, Türkali Mecit Ali Sk. No:12/A. Arama sonuçları ürün/mezeler ve tabelasız yeşil tenteli dış cephe gösteriyor; Nevale adı/adres işareti görünmediği için kullanılmayacak.
+Dürümce Ortaköy, canlı ID 1005, Yıldız Çırağan Cd. No:50. Yandex görselinde DÜRÜMCE ve Adanalı Kebapçı tabelalı dış cephe net; kaynak başlığı aynı 50 adresini taşıyor, güçlü eşleşme.
+Elise Karadeniz Pide & Lahmacun, canlı ID 1003, Mecidiye Eski Bahçe Sk. No:4. Tripadvisor, işletmenin resmî sitesi ve Yandex aynı No:4 adresini doğruluyor; görselde ELISE KARADENİZ PİDE & LAHMACUN tabelalı dış cephe net, güçlü eşleşme.
