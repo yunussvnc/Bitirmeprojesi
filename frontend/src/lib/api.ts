@@ -145,6 +145,8 @@ import perNoiCoffeeOrtakoy from '../assets/venues/per-noi-coffee-ortakoy.webp'
 import bexCoffee from '../assets/venues/bex-coffee.jpg'
 import sabbaCoffee from '../assets/venues/sabba-coffee.jpg'
 import laCafferiaBesiktas from '../assets/venues/la-cafferia-besiktas.jpg'
+import uWeCoffeeRoasters from '../assets/venues/u-we-coffee-roasters.jpg'
+import espressolabBesiktasMeydan from '../assets/venues/espressolab-besiktas-meydan.jpg'
 
 export interface Venue {
   id: string
@@ -342,6 +344,8 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '971': bexCoffee,
   '978': sabbaCoffee,
   '981': laCafferiaBesiktas,
+  '982': uWeCoffeeRoasters,
+  '983': espressolabBesiktasMeydan,
 }
 
 export function getFallbackVenueImage(category: string): string {

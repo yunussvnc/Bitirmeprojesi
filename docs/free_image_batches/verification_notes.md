@@ -503,3 +503,8 @@ Shabby Cafe, canlı ID 977, Şair Nedim Cd./Köşeli Sk. No:13. Arama kaynağı 
 Sabba Coffee, canlı ID 978, Bebek Cevdet Paşa Cd. No:46/C. Yandex panorama görselinde SABBA COFFEE tabelalı dış cephe açıkça görülüyor; kaynak başlığı aynı 46C adresini taşıyor, güçlü eşleşme.
 Kaffee Schütz Beşiktaş, canlı ID 980, Cihannüma Akmaz Çeşme Sk. No:4. Yandex aday fotoğrafı yalnızca tabela/adres göstermeyen iç mekân; kullanıcı kuralı gereği kullanılmayacak.
 La Cafferia - Beşiktaş, canlı ID 981, Cihannüma Barbaros Blv. No:15/A. Görselde LA CAFFERIA Milano tabelalı dış cephe açıkça görülüyor; işletmenin resmî şubeler sayfası aynı adresi doğruluyor, güçlü eşleşme.
+Batch 012 taraması başladı.
+U/We Coffee Roasters, canlı ID 982, Yıldız Çırağan Cd. No:6/A. Yandex görseli aynı 6A adresli işletme kaydından geliyor; U/We markası/işletme girişi görülüyor, güçlü eşleşme.
+Espressolab Beşiktaş Meydan, canlı ID 983, Sinanpaşa Beşiktaş Cd. No:35. Espressolab tabelalı dış cephe görseli bulundu ancak incelenen sonuçta adres numarası görünmüyor; kaynak adresi ayrıca doğrulanmadan kullanılmayacak.
+Coffeemania Next Beşiktaş, canlı ID 984, Türkali Ihlamurdere Cd. No:34. Arama sonucu Ankara/Keçiören Gazze Cd. 21B adresli farklı şubeyi gösteriyor; kullanılmayacak.
+Espressolab Beşiktaş Meydan, canlı ID 983, Sinanpaşa Beşiktaş Cd. No:35. Espressolab'ın resmî mağaza sayfası aynı No:35 adresini doğruluyor; incelenen dış cephe fotoğrafında Espressolab tabelası net, güçlü eşleşme.
