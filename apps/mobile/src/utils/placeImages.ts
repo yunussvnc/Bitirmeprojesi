@@ -160,6 +160,7 @@ const eliseKaradenizPide = require("../../assets/places/elise-karadeniz-pide.jpg
 const durumceOrtakoy = require("../../assets/places/durumce-ortakoy.jpg") as ImageSourcePropType;
 const theMarketAtBosphorus = require("../../assets/places/the-market-at-bosphorus.jpg") as ImageSourcePropType;
 const theBestCafe = require("../../assets/places/the-best-cafe.jpg") as ImageSourcePropType;
+const biKahvalti = require("../../assets/places/bi-kahvalti.jpg") as ImageSourcePropType;
 
 const CATEGORY_PLACEHOLDERS: Record<string, string> = {
   kafe: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800",
@@ -333,6 +334,7 @@ const PLACE_IMAGE_OVERRIDES: Record<string, ImageSourcePropType> = {
   "1005": durumceOrtakoy,
   "1006": theMarketAtBosphorus,
   "1007": theBestCafe,
+  "1009": biKahvalti,
 };
 
 type PlaceLike = Place | { id?: string | number; name?: string; photo_url?: string; category?: string };

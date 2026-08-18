@@ -534,3 +534,9 @@ Dürümce Ortaköy, canlı ID 1005, Yıldız Çırağan Cd. No:50. Yandex görse
 Elise Karadeniz Pide & Lahmacun, canlı ID 1003, Mecidiye Eski Bahçe Sk. No:4. Tripadvisor, işletmenin resmî sitesi ve Yandex aynı No:4 adresini doğruluyor; görselde ELISE KARADENİZ PİDE & LAHMACUN tabelalı dış cephe net, güçlü eşleşme.
 The Market at Bosphorus, canlı ID 1006, Kuruçeşme Kuruçeşme Arena No:56. Yandex/Tripadvisor/Yelp sonuçları aynı No:56 adresli The Market at Bosphorus kaydını gösteriyor; görselde binanın THE MARKET AT BOSPHORUS tabelası net, güçlü eşleşme.
 The Best Cafe, canlı ID 1007, Cihannüma Mazhar Reşit Paşa Sokak No:1/A. Yandex görselinde THE BEST tabelalı dış cephe ve canlı kayıttaki 1A adresli Cafe The Best kaydı eşleşiyor, güçlü eşleşme.
+Batch 013 taraması başladı.
+Balkan Lokantası, canlı ID 1008, Cihannüma Akmaz Çeşme Sk. No:8. Tripadvisor sonucu aynı adresi taşısa da incelenen görsel yalnızca tabelasız bahçe/teras; işletme adı veya adres işareti yok, kullanılmayacak.
+Bi Kahvaltı, canlı ID 1009, Sinanpaşa Ihlamurdere Cd. Çelebioğlu Sk. No:21–23/B. Görselde bi kahvaltı tabelalı dış cephe ve giriş net; kaynak adresi canlı kayıtla ayrıca doğrulanacak.
+Bymuzaffer Beşiktaş, canlı ID 1010, Cihannüma Salihefendi Sk. No:2. Görselde by muzaffer Beşiktaş markası net ancak adres numarası görünmüyor; adres doğrulanmadan kullanılmayacak.
+Bi Kahvaltı, canlı ID 1009, Sinanpaşa Ihlamurdere Cd. Çelebioğlu Sk. No:21–23/B. Tripadvisor, Yandex, Waze ve Apple Maps aynı 21–23/B adresini doğruluyor; görselde bi kahvaltı tabelalı dış cephe net, güçlü eşleşme.
+Bymuzaffer Beşiktaş, canlı ID 1010, Cihannüma Salihefendi Sk. No:2. Kaynaklarda No:2/A, No:4A ve canlı kayıtta No:2 farklılıkları bulunuyor; görsel marka işareti taşısa da şube adresi kesinleşmediği için kullanılmayacak.
