@@ -161,6 +161,8 @@ import biKahvalti from '../assets/venues/bi-kahvalti.jpg'
 import mercanKebapBesiktas from '../assets/venues/mercan-kebap-besiktas.jpg'
 import adanaliKebapPideLahmacun from '../assets/venues/adanali-kebap-pide-lahmacun.jpg'
 import fistikKebapLahmacun from '../assets/venues/fistik-kebap-lahmacun.jpg'
+import adanaTiryakiOcakbasi from '../assets/venues/adana-tiryaki-ocakbasi.jpg'
+import citirOcakbasiGayrettepe from '../assets/venues/citir-ocakbasi-gayrettepe.jpg'
 
 export interface Venue {
   id: string
@@ -374,6 +376,8 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '1015': mercanKebapBesiktas,
   '1020': adanaliKebapPideLahmacun,
   '1022': fistikKebapLahmacun,
+  '1024': adanaTiryakiOcakbasi,
+  '1025': citirOcakbasiGayrettepe,
 }
 
 export function getFallbackVenueImage(category: string): string {

@@ -554,3 +554,6 @@ Bilezzet Kebap, canlı ID 1019, Sinanpaşa Şht. Asım Cd. No:31/A. Görselde Bi
 Adanalı Kebap Pide Lahmacun Beşiktaş, canlı ID 1020, Dikilitaş Emirhan Cd. 2/B. Yandex sonucu aynı Emirhan Cd. 2B adresini ve Adanalı Kebap/Lahmacun tabelalı dış cepheyi gösteriyor, güçlü eşleşme.
 Qöz Dürüm Beşiktaş, canlı ID 1021, Sinanpaşa Köyiçi Cd. 16/A. Yandex adayı 16/D çevresinde genel sokak/optik dükkânı gösteriyor; Qöz tabelası veya canlı 16/A girişi görünmüyor, kullanılmayacak.
 Fıstık Kebap Lahmacun, canlı ID 1022, Mecidiye/Ortaköy. Görselde FISTIK KEBAP & LAHMACUN tabelalı dış cephe net; Yandex kaydı aynı Mecidiye mahallesinde Büyükşekerci Sokak No:2 adresini taşıyor. Canlı kayıtta sokak/numara eksik olsa da mahalle ve işletme eşleşmesi güçlü; kabul edilebilir.
+Çağdaş Urfa Kebap, canlı ID 1023, Dikilitaş Emirhan Cd. No:60 D:B. Arama sonuçları aynı marka adında farklı şehir/şubeler ve iç mekân görselleri gösteriyor; canlı 60 D:B dış cephe eşleşmesi doğrulanmadı, kullanılmayacak.
+Adana Tiryaki Ocakbaşı, canlı ID 1024, Kuruçeşme Yeşilpınar Sk. No:6. Yandex sonucu aynı No:6 adresli mekânı ve girişte ADANA TİRYAKİ tabelasını gösteriyor; güçlü eşleşme.
+Çıtır Ocakbaşı, canlı ID 1025, Gayrettepe Fahri Gizden Sokak Petek Sitesi D:9. Yandex sonucu aynı Fahri Gizden Sokak No:9 kaydını ve ÇITIR OCAKBAŞI tabelalı dış cepheyi gösteriyor; güçlü eşleşme.
