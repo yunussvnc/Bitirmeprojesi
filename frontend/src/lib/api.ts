@@ -1,3 +1,5 @@
+import nezahatNurettinEgeKosku from '../assets/venues/nezahat-nurettin-ege-kosku.jpg'
+
 export interface Venue {
   id: string
   name: string
@@ -39,6 +41,21 @@ interface PaginatedPlaces {
 const API_ORIGIN = import.meta.env.VITE_API_URL as string
 const API_URL = `${API_ORIGIN}/api/v1`
 
+export const DEFAULT_VENUE_IMAGE = 'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1200&auto=format&fit=crop'
+const CATEGORY_FALLBACK_IMAGES: Record<string, string> = {
+  Kafe: 'https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=1200&auto=format&fit=crop',
+  Restoran: DEFAULT_VENUE_IMAGE,
+  Bar: 'https://images.unsplash.com/photo-1514933651103-005eec06c04b?w=1200&auto=format&fit=crop',
+  Meyhane: 'https://images.unsplash.com/photo-1555244162-803834f70033?w=1200&auto=format&fit=crop',
+}
+const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
+  '854': nezahatNurettinEgeKosku,
+}
+
+export function getFallbackVenueImage(category: string): string {
+  return CATEGORY_FALLBACK_IMAGES[category] ?? DEFAULT_VENUE_IMAGE
+}
+
 // İstanbul'un 39 ilçesi — adres string'inden eşleşme için, en spesifikten genele sıralı değil,
 // eşleşme uzunluğuna göre sıralanıyor ki "Büyükçekmece" "Çekmece" gibi alt string'lere yanlış düşmesin.
 const ISTANBUL_DISTRICTS = [
@@ -59,7 +76,12 @@ function districtFromAddress(address: string, city: string): string {
 }
 
 function resolvePhotoUrl(place: BackendPlace): string {
-  if (!place.photo_url) return ''
+  const override = PLACE_IMAGE_OVERRIDES[String(place.id)]
+  if (override) return override
+
+  if (!place.photo_url) {
+    return getFallbackVenueImage(place.category ?? '')
+  }
   if (place.photo_url.startsWith('google_photo_ref:')) {
     return `${API_URL}/places/${place.id}/photo`
   }
@@ -71,7 +93,7 @@ function resolvePhotoUrl(place: BackendPlace): string {
 // (server-side API key ile stream edilir) ve diğer harici URL'ler (örn. Unsplash) güvenilir.
 function isReliablePhoto(url: string): boolean {
   if (!url) return false
-  return !url.includes('googleusercontent.com')
+  return !url.includes('googleusercontent.com') && !url.includes('/places/')
 }
 
 function toVenue(p: BackendPlace): Venue | null {

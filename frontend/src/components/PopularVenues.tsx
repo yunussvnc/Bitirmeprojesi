@@ -1,6 +1,7 @@
 import { motion } from 'framer-motion'
 import { MapPin, ArrowRight, Star } from 'lucide-react'
 import { useVenues } from '../hooks/useVenues'
+import { getFallbackVenueImage } from '../lib/api'
 import VenueImage from './VenueImage'
 
 const FEATURED_COUNT = 9
@@ -14,7 +15,7 @@ export default function PopularVenues() {
   const { venues, loading } = useVenues()
 
   const featured = [...venues]
-    .filter((v) => v.photoUrl && v.reviewCount >= MIN_REVIEWS)
+    .filter((v) => v.reviewCount >= MIN_REVIEWS)
     .sort((a, b) => {
       if (a.photoReliable !== b.photoReliable) return a.photoReliable ? -1 : 1
       return b.averageRating - a.averageRating || b.reviewCount - a.reviewCount
@@ -63,7 +64,12 @@ export default function PopularVenues() {
               transition={{ duration: 0.5, delay: (i % 4) * 0.08 }}
             >
               <div className="venue-card-img-wrap">
-                <VenueImage src={v.photoUrl} alt={v.name} className="venue-card-img" />
+                <VenueImage
+                  src={v.photoUrl}
+                  fallbackSrc={getFallbackVenueImage(v.category)}
+                  alt={v.name}
+                  className="venue-card-img"
+                />
                 <span className="venue-card-price">{priceLabel(v.priceRange)}</span>
               </div>
               <div className="venue-card-body">

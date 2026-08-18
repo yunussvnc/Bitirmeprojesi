@@ -489,27 +489,47 @@ def get_place_photo(place_id: int, max_width: int = 800, db: Session = Depends(g
         settings = get_settings()
 
         # Places API (New) ile içe aktarılan mekanların google_place_id'si "ChIJ..."
-        # ile başlar ve foto referansı da o API'nin media endpoint'ini gerektirir —
-        # eski (legacy) Photo API'nin photoreference formatıyla UYUMSUZ, 403 döner.
-        if (place.google_place_id or "").startswith("ChIJ") and settings.GOOGLE_PLACES_API_KEY:
-            google_url = (
-                f"https://places.googleapis.com/v1/places/{place.google_place_id}/photos/{ref}/media"
-                f"?maxWidthPx={max_width}&key={settings.GOOGLE_PLACES_API_KEY}"
+        # ile başlar. Bazı Render kurulumlarında GOOGLE_PLACES_API_KEY eski veya
+        # yetkisiz olabilir; ikinci anahtarı da denemek 3.500+ referanslı kaydı
+        # topluca yeniden veri çekmeden kurtarabilir.
+        candidate_urls = []
+        is_places_v1 = (place.google_place_id or "").startswith("ChIJ")
+        if is_places_v1:
+            seen_keys = set()
+            for api_key in (settings.GOOGLE_PLACES_API_KEY, settings.GOOGLE_MAPS_API_KEY):
+                if not api_key or api_key in seen_keys:
+                    continue
+                seen_keys.add(api_key)
+                candidate_urls.append(
+                    f"https://places.googleapis.com/v1/places/{place.google_place_id}/photos/{ref}/media"
+                    f"?maxWidthPx={max_width}&key={api_key}"
+                )
+        elif settings.GOOGLE_MAPS_API_KEY:
+            candidate_urls.append(
+                f"https://maps.googleapis.com/maps/api/place/photo?maxwidth={max_width}"
+                f"&photoreference={ref}&key={settings.GOOGLE_MAPS_API_KEY}"
             )
-        else:
-            api_key = settings.GOOGLE_MAPS_API_KEY
-            if not api_key:
-                raise HTTPException(status_code=500, detail="Google Maps API Key yapılandırılmamış.")
-            google_url = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth={max_width}&photoreference={ref}&key={api_key}"
 
+        if not candidate_urls:
+            raise HTTPException(status_code=500, detail="Google Maps API Key yapılandırılmamış.")
+
+        last_status = 502
         try:
-            response = requests.get(google_url, stream=True, timeout=10)
+            for google_url in candidate_urls:
+                response = requests.get(google_url, stream=True, timeout=10)
+                if response.status_code == 200:
+                    return StreamingResponse(
+                        response.iter_content(chunk_size=8192),
+                        media_type=response.headers.get("content-type", "image/jpeg"),
+                    )
+                last_status = response.status_code
+                response.close()
+                if response.status_code not in (401, 403, 429):
+                    break
         except requests.exceptions.RequestException:
             raise HTTPException(status_code=504, detail="Google API'sine bağlanılamadı.")
-        if response.status_code != 200:
-            raise HTTPException(status_code=response.status_code, detail="Fotoğraf Google'dan alınamadı.")
 
-        return StreamingResponse(response.iter_content(chunk_size=8192), media_type=response.headers.get("content-type", "image/jpeg"))
+        raise HTTPException(status_code=last_status, detail="Fotoğraf Google'dan alınamadı.")
 
     return RedirectResponse(url=place.photo_url)
 

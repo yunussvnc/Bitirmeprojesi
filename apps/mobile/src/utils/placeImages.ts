@@ -1,6 +1,7 @@
 import type { ImageSourcePropType } from "react-native";
 import type { Place } from "@/src/services/mekanService";
 import { API_BASE_URL } from "@/src/constants/api";
+const nezahatNurettinEgeKosku = require("../../assets/places/nezahat-nurettin-ege-kosku.jpg") as ImageSourcePropType;
 
 const CATEGORY_PLACEHOLDERS: Record<string, string> = {
   kafe: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800",
@@ -14,12 +15,24 @@ const CATEGORY_PLACEHOLDERS: Record<string, string> = {
 
 const DEFAULT_IMAGE = "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=800";
 
-type PlaceLike = Place | { name?: string; photo_url?: string; category?: string };
+const PLACE_IMAGE_OVERRIDES: Record<string, ImageSourcePropType> = {
+  "854": nezahatNurettinEgeKosku,
+};
+
+type PlaceLike = Place | { id?: string | number; name?: string; photo_url?: string; category?: string };
+
+function getPlaceOverride(place: PlaceLike): ImageSourcePropType | null {
+  const id = "id" in place && place.id != null ? String(place.id) : "";
+  return PLACE_IMAGE_OVERRIDES[id] ?? null;
+}
 
 export function getPlaceImageSource(
   place: PlaceLike | string | number
 ): ImageSourcePropType {
   if (typeof place === "object" && place !== null) {
+    const override = getPlaceOverride(place);
+    if (override) return override;
+
     if ("photo_url" in place && place.photo_url) {
       const url = place.photo_url.startsWith('/') ? `${API_BASE_URL}${place.photo_url}` : place.photo_url;
       return { uri: url };
@@ -37,6 +50,7 @@ export function hasPlaceImage(
   place: PlaceLike | null | undefined
 ): boolean {
   if (!place || typeof place !== "object") return false;
+  if (getPlaceOverride(place)) return true;
   if ("photo_url" in place && place.photo_url) return true;
   if ("category" in place && place.category) {
     const key = place.category.toLowerCase().trim();

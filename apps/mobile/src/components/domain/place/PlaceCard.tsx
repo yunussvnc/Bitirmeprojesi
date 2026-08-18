@@ -21,6 +21,7 @@ import { useTheme } from '@/src/hooks/useTheme';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
 import { mediumImpact, heavyImpact } from '@/src/utils/haptics';
 import { useTranslation } from 'react-i18next';
+import { getPlaceImageSource } from '@/src/utils/placeImages';
 
 import { usePreviewStore } from '@/src/store/usePreviewStore';
 
@@ -63,6 +64,9 @@ const PlaceCardComponent = function PlaceCard({
 }: PlaceCardProps) {
   const { colors } = useTheme();
   const { t } = useTranslation();
+  const [imageFailed, setImageFailed] = React.useState(false);
+  const [fallbackImageFailed, setFallbackImageFailed] = React.useState(false);
+  const fallbackImage = getPlaceImageSource({ id: placeId, category });
 
   const setPreview = usePreviewStore(s => s.setPreview);
   const clearPreview = usePreviewStore(s => s.clearPreview);
@@ -156,7 +160,23 @@ const PlaceCardComponent = function PlaceCard({
     >
       {/* ── Image section ── */}
       <View style={styles.imageContainer}>
-        {imagePlaceholder ? (
+        {(imagePlaceholder || imageFailed) && !fallbackImageFailed ? (
+          <>
+            <Image
+              source={fallbackImage as any}
+              style={styles.image}
+              contentFit="cover"
+              cachePolicy="memory-disk"
+              recyclingKey={placeId ? `place-fallback-${placeId}` : undefined}
+              onError={() => setFallbackImageFailed(true)}
+            />
+            <LinearGradient
+              colors={['transparent', 'rgba(0,0,0,0.55)']}
+              locations={[0.5, 1]}
+              style={styles.gradient}
+            />
+          </>
+        ) : imagePlaceholder || imageFailed ? (
           <View style={[styles.imagePlaceholder, { backgroundColor: colors.surface.elevated }]}>
             <IconSymbol name="mappin.and.ellipse" size={32} color={colors.text.tertiary} />
             <Text style={[styles.placeholderLabel, { color: colors.text.tertiary }]} numberOfLines={1}>
@@ -171,8 +191,8 @@ const PlaceCardComponent = function PlaceCard({
               contentFit="cover"
               cachePolicy="memory-disk"
               recyclingKey={placeId ? `place-img-${placeId}` : undefined}
+              onError={() => setImageFailed(true)}
             />
-            {/* Bottom gradient so location badge is readable */}
             <LinearGradient
               colors={['transparent', 'rgba(0,0,0,0.55)']}
               locations={[0.5, 1]}

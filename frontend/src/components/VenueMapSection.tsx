@@ -9,6 +9,7 @@ import {
   IceCream, UtensilsCrossed, MapPin, X,
 } from 'lucide-react'
 import { useVenues, type Venue } from '../hooks/useVenues'
+import { getFallbackVenueImage } from '../lib/api'
 import { getAllowedVenueImageUrl } from '../lib/safeVenueImageUrl'
 
 const CATEGORY_META: Record<string, { icon: typeof Coffee; color: string }> = {
@@ -40,7 +41,10 @@ function createPopupContent(v: Venue): HTMLElement {
   const popup = document.createElement('div')
   popup.className = 'venue-popup'
 
-  const imageUrl = getAllowedVenueImageUrl(v.photoUrl, window.location.origin)
+  const imageUrl = getAllowedVenueImageUrl(
+    v.photoReliable ? v.photoUrl : getFallbackVenueImage(v.category),
+    window.location.origin,
+  )
   if (imageUrl) {
     const image = document.createElement('img')
     image.src = imageUrl
