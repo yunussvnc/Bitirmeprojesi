@@ -68,3 +68,61 @@ Caffè Semplice ve Central Point incelemesi
 Caffè Semplice, canlı ID 665, Suadiye Tüccar Katibi Sokak No:6/A. Görselde CAFFE SEMPLICE tabelası ve kafenin dış cephesi açıkça görülüyor; Yandex başlığındaki Tüccar Katibi Sokak 6 ile güçlü eşleşme.
 
 Central Point, canlı ID 668, Caferağa Miralay Nazım Sokak No:27/A. Görsel iç mekânı gösteriyor ancak Central Point adı, tabela veya adres işareti görünmüyor; yanlış eşleşme riskinden dolayı kullanılmayacak.
+
+Aziz Cafe ve Çiya Sofrası incelemesi
+
+Aziz Cafe, canlı ID 686, Kozyatağı Değirmen Sokak Şaşmaz 17/B C Blok. Yandex sonucu aynı adrese yakın bir dış görünüm taşısa da görselde Aziz tabelası veya açık işletme işareti görünmüyor; kullanılmayacak.
+
+Çiya Sofrası, canlı ID 687, Caferağa Güneşlibahçe Sokak. Görselde ÇİYA SOFRASI tabelası ve 43 numarası açıkça görülüyor; Yandex/Tripadvisor sonucu hedef işletme adını ve Kadıköy şubesini doğruluyor. Canlı kayıtta kapı numarası eksik olsa da mekan adı, sokak ve görsel tabelası güçlü eşleşme.
+
+Hane, Balıkçı Lokantası ve Yanyalı Fehmi incelemesi
+
+Hane Kadıköy için bulunan Tripadvisor iç mekân görseli Hane tabelası taşıyor; adres kaydı Osmanağa Mimar Çıkmazı No:7 ile ayrıca doğrulanmadan kullanılmayacak.
+
+Balıkçı Lokantası, canlı ID 690, Rasimpaşa Tayyareci Sami Sokak No:20 D:B. Görselde BALIKÇI LOKANTASI yazısı görünse de dış cephede başka bir işletme olan Ortaköy İstakoz tabelası bulunuyor; kesinlikle kullanılmayacak.
+
+Yanyalı Fehmi Lokantası, canlı ID 691, Osmanağa Yağlıkçı İsmail Sokak No:1. Görselde YANYALI FEHMİ LOKANTASI tabelası, logo ve işletme cephesi açıkça görülüyor; güçlü eşleşme.
+
+Sayla Mantı, Çilingir Sofrası ve A.Ç.T incelemesi
+
+Sayla Mantı, canlı ID 692, Bahariye Caddesi Nail Bey Sokak No:32. Menü görselinde SAYLA MANTI markası açıkça görülüyor ve arama sonucu aynı adresi veriyor; mekan görseli yerine menü fotoğrafı olduğu için kullanılabilirlik düşük, dış cephe görseli bulunana kadar eklenmeyecek.
+
+Çilingir Sofrası Cadde, canlı ID 693, Beyaz Akasya Sokak No:1/D. Yemek görseli işletme adı/tabela göstermiyor; yanlış eşleşme riskinden dolayı kullanılmayacak.
+
+A.Ç.T Dürüm ve Meze, canlı ID 694, Rasimpaşa Yurttaş Sokak No:2. Arama görselleri ürün fotoğrafı olsa da işletme tabelası ve adres kanıtı görünmediği için henüz kullanılmayacak.
+
+Kadıköy Midyecisi ve Müdavim incelemesi
+
+Kadıköy Midyecisi, canlı ID 697, Caferağa Sarraf Ali Sokak No:22/B. Görselde KADIKÖY MİDYECİSİ tabelası, ürün arabası ve işletme cephesi açıkça görülüyor; Tripadvisor başlığındaki No:22 ve canlı adresteki 22/B ile güçlü eşleşme.
+
+Müdavim Lokantası, canlı ID 695, Rasimpaşa Uzun Hafız Sokak No:104/A. Görselde MÜDAVİM tabelası ve işletme cephesi net; arama başlığı aynı ad ve 104A adresini taşıyor, güçlü eşleşme.
+
+Adanalı Ümit Usta, Cafe Neva ve Leylak incelemesi
+
+Adanalı Ümit Usta Ocakbaşı & Kebap, canlı ID 698, Kozyatağı Şakacı Sokak No:28. Görselde ÜMİT USTA OCAKBAŞI tabelası ve işletme cephesi açıkça görülüyor; Yandex başlığı aynı Şakacı Sokak No:28 adresini doğruluyor, güçlü eşleşme.
+
+Cafe Neva Breakfast, canlı ID 699, Rasimpaşa Nüshetefendi Sokak No:56/C. Arama görselinde CAFE ÇAKMAK BREAKFAST tabelası görünüyor; işletme adı canlı kayıttaki Cafe Neva ile eşleşmediği için kullanılmayacak.
+
+Leylak Kitchen, canlı ID 700, Rasimpaşa Karakolhane Caddesi No:32/A. Sonuç yalnızca yemek fotoğrafı, işletme adı/tabela/adres işareti yok; yanlış eşleşme riskinden dolayı kullanılmayacak.
+
+The Townhouse ve Ethem Efendi incelemesi
+
+The Townhouse, canlı ID 702, Suadiye Plaj Yolu Sokak No:13. Görsel, The Townhouse markalı iç mekânı gösteriyor; arama başlığı ve kaynak görsel hedef Plaj Yolu 13 şubesiyle uyumlu, güçlü aday.
+
+Ethem Efendi Kahvaltı Bağdat Caddesi, canlı ID 703, Göztepe Tütüncü Mehmet Efendi Caddesi No:1/1. Görseller ürün/sofra fotoğrafı; işletme tabelası ve adres işareti görünmediği için kullanılmayacak.
+
+Nazende, Nohut ve Hasan Usta incelemesi
+
+Hasan Usta Kebap, canlı ID 707, Koşuyolu Dr. Eyüp Aksoy Caddesi No:29. Resmî şubeler görseli Hasan Usta tabelası taşısa da İstanbul/Kadıköy No:29 şubesini kesin olarak göstermiyor ve farklı lokasyon/tesis görünümü içeriyor; kullanılmayacak.
+
+Nohut Falafel & Humus, canlı ID 706, Osmanağa Sakız Sokak No:22/C. Dış cephe fotoğrafında NOHUT FALAFEL & HUMUS tabelası, vegan/glutensiz metni ve kapıdaki 22 numarası açıkça görülüyor; güçlü eşleşme.
+
+Nazende Cadde, canlı ID 704, Bağdat Caddesi Kınayman B Blok No:345A. Arama görselleri işletme tabelası/adres işareti göstermediği için kullanılmayacak.
+
+Adanalı Şehmuz, Sofra Han ve Onur incelemesi
+
+Adanalı Şehmuz Usta, canlı ID 708, Osmanağa Kuşdili Caddesi. Arama sonucu Pazar Yolu Sokak No:2 adresindeki farklı/başka şube kaydını gösteriyor; canlı kayıtla adres eşleşmediği için kullanılmayacak.
+
+Sofra Han, canlı ID 709, Osmanağa Çuhadarağa Sokak Şahinağa İş Merkezi. Görselde Sofra Han tabelası görünmüyor; yalnızca iç mekân fotoğrafı olduğu için kullanılmayacak.
+
+Onur Kebap Terminal Kadıköy, canlı ID 710, Kurbağalıdere Caddesi terminal bölgesi. Görselde Onur Kebap tabelası veya terminal adresi görünmüyor; kullanılmayacak.

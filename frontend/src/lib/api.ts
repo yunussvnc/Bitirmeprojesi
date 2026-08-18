@@ -43,6 +43,13 @@ import theCoffeeFactoryKadikoy from '../assets/venues/the-coffee-factory-kadikoy
 import storyCoffeeRoastery from '../assets/venues/story-coffee-roastery.jpg'
 import torrefactoCoffeeRoastery from '../assets/venues/torrefacto-coffee-roastery.jpg'
 import caffeSemplice from '../assets/venues/caffe-semplice.jpg'
+import ciyaSofrasi from '../assets/venues/ciya-sofrasi.jpg'
+import yanyaliFehmiLokantasi from '../assets/venues/yanyali-fehmi-lokantasi.jpg'
+import mudavimLokantasi from '../assets/venues/mudavim-lokantasi.jpg'
+import kadikoyMidyecisi from '../assets/venues/kadikoy-midyecisi.jpg'
+import adanaliUmitUsta from '../assets/venues/adanali-umit-usta.jpg'
+import theTownhouse from '../assets/venues/the-townhouse.jpg'
+import nohutFalafelHumus from '../assets/venues/nohut-falafel-humus.jpg'
 
 export interface Venue {
   id: string
@@ -138,6 +145,13 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '660': storyCoffeeRoastery,
   '661': torrefactoCoffeeRoastery,
   '665': caffeSemplice,
+  '687': ciyaSofrasi,
+  '691': yanyaliFehmiLokantasi,
+  '695': mudavimLokantasi,
+  '697': kadikoyMidyecisi,
+  '698': adanaliUmitUsta,
+  '702': theTownhouse,
+  '706': nohutFalafelHumus,
 }
 
 export function getFallbackVenueImage(category: string): string {

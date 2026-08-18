@@ -78,3 +78,7 @@ Aşağıdaki canlı mekan kayıtlarına, ad–adres–işletme tabelası veya re
 Kamuya açık kaynak sayfaları ve adres doğrulama notları `docs/free_image_batches/verification_notes.md` dosyasına kaydedildi. Klar Coffee Roastery, VAU Coffee, Remedy Coffee House, İkarus Coffee House ve 23 Society Espresso Bar için şube/adres veya görsel eşleşmesi kesinleşmediğinden görsel eklenmedi.
 
 Eklenen doğrulanmış kayıtlar: Torrefacto Coffee Roastery (661) ve Caffè Semplice (665). Her ikisi için de kaynak sayfası, adres ve görsel üzerindeki işletme işareti kontrol edildi; ayrıntılar `docs/free_image_batches/verification_notes.md` dosyasındadır.
+
+## Eklenen restoran doğrulama partisi
+
+Bu partide Çiya Sofrası (687), Yanyalı Fehmi Lokantası (691), Müdavim Lokantası (695), Kadıköy Midyecisi (697), Adanalı Ümit Usta Ocakbaşı & Kebap (698), The Townhouse (702) ve Nohut Falafel & Humus (706) için doğrulanmış yerel web ve mobil görselleri eklendi. Balıkçı Lokantası, Cafe Neva Breakfast, Hasan Usta, Leylak Kitchen, Nazende Cadde, Adanalı Şehmuz Usta, Sofra Han ve Onur Kebap için görsel/adres eşleşmesi yeterli olmadığı için ekleme yapılmadı.
