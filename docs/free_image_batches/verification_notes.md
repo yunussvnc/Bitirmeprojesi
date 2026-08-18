@@ -557,3 +557,9 @@ Fıstık Kebap Lahmacun, canlı ID 1022, Mecidiye/Ortaköy. Görselde FISTIK KEB
 Çağdaş Urfa Kebap, canlı ID 1023, Dikilitaş Emirhan Cd. No:60 D:B. Arama sonuçları aynı marka adında farklı şehir/şubeler ve iç mekân görselleri gösteriyor; canlı 60 D:B dış cephe eşleşmesi doğrulanmadı, kullanılmayacak.
 Adana Tiryaki Ocakbaşı, canlı ID 1024, Kuruçeşme Yeşilpınar Sk. No:6. Yandex sonucu aynı No:6 adresli mekânı ve girişte ADANA TİRYAKİ tabelasını gösteriyor; güçlü eşleşme.
 Çıtır Ocakbaşı, canlı ID 1025, Gayrettepe Fahri Gizden Sokak Petek Sitesi D:9. Yandex sonucu aynı Fahri Gizden Sokak No:9 kaydını ve ÇITIR OCAKBAŞI tabelalı dış cepheyi gösteriyor; güçlü eşleşme.
+Namlı Kebap, canlı ID 1026, Levent Gonca Sk. No:3. Tripadvisor sonucu doğru adresi taşısa da incelenen görsel tabelasız iç mekân/cephe girişi; NAMLI tabelası veya adres numarası görünmüyor, kullanılmayacak.
+Etiler Kebapçı, canlı ID 1027, Etiler Nisbetiye Cd. No:76. Yandex sonucu aynı adres çevresinde genel bina görünümü; KEBAPÇI ETİLER tabelası/giriş işareti görünmüyor, kullanılmayacak.
+orta bahce gozleme evi, canlı ID 1028, Sinanpaşa Ortabahçe Cd. No:21. Yandex sonucu Orta Bahçe Mahal kaydını “Permanently closed” olarak gösteriyor; görsel eklenmeyecek.
+Dürümcü Enişte, canlı ID 1029, Mecidiye Teyyareci Fevzi Sk. Arama/Yandex kaydı aynı sokakta No:6 adresini ve DÜRÜMCÜ ENİŞTE tabelalı dış cepheyi gösteriyor; canlı kayıtta numara eksik ancak sokak/işletme eşleşmesi güçlü, kabul edilebilir.
+TABLACI SOKAK LEZZETLERİ ARNAVUTKÖY, canlı ID 1030, Arnavutköy Beyazgül Sk. No:8. Arama sonuçlarında yalnızca TABLACI logosu ve ürün/marka görseli bulundu; dış cephe ve adres numarası doğrulanmadı, kullanılmayacak.
+Elde Börek, canlı ID 1031, Sinanpaşa Ihlamurdere Cd. 23/A. Yandex görselinde ELDE BÖREK tabelası ve kapıdaki 23/A numarası açıkça görülüyor; güçlü eşleşme.

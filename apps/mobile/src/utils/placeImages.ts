@@ -166,6 +166,8 @@ const adanaliKebapPideLahmacun = require("../../assets/places/adanali-kebap-pide
 const fistikKebapLahmacun = require("../../assets/places/fistik-kebap-lahmacun.jpg") as ImageSourcePropType;
 const adanaTiryakiOcakbasi = require("../../assets/places/adana-tiryaki-ocakbasi.jpg") as ImageSourcePropType;
 const citirOcakbasiGayrettepe = require("../../assets/places/citir-ocakbasi-gayrettepe.jpg") as ImageSourcePropType;
+const durumcuEniste = require("../../assets/places/durumcu-eniste.jpg") as ImageSourcePropType;
+const eldeBorek = require("../../assets/places/elde-borek.jpg") as ImageSourcePropType;
 
 const CATEGORY_PLACEHOLDERS: Record<string, string> = {
   kafe: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800",
@@ -345,6 +347,8 @@ const PLACE_IMAGE_OVERRIDES: Record<string, ImageSourcePropType> = {
   "1022": fistikKebapLahmacun,
   "1024": adanaTiryakiOcakbasi,
   "1025": citirOcakbasiGayrettepe,
+  "1029": durumcuEniste,
+  "1031": eldeBorek,
 };
 
 type PlaceLike = Place | { id?: string | number; name?: string; photo_url?: string; category?: string };
