@@ -106,6 +106,17 @@ const kazimKarabekirPasaMuzesi = require("../../assets/places/kazim-karabekir-pa
 const iklimMuzesi = require("../../assets/places/iklim-muzesi.jpg") as ImageSourcePropType;
 const haldunTanerMuzeEvi = require("../../assets/places/haldun-taner-muze-evi.jpg") as ImageSourcePropType;
 const osmanHamdiBeyHeykeli = require("../../assets/places/osman-hamdi-bey-heykeli.jpg") as ImageSourcePropType;
+const cadde160ArtGallery = require("../../assets/places/cadde160-art-gallery.jpg") as ImageSourcePropType;
+const redArtIstanbul = require("../../assets/places/red-art-istanbul.jpg") as ImageSourcePropType;
+const duendeKalamis = require("../../assets/places/duende-kalamis.jpg") as ImageSourcePropType;
+const chiArtGallery = require("../../assets/places/chi-art-gallery.jpg") as ImageSourcePropType;
+const venusSanatGalerisi = require("../../assets/places/venus-sanat-galerisi.jpg") as ImageSourcePropType;
+const decollageArtSpace = require("../../assets/places/decollage-art-space.jpg") as ImageSourcePropType;
+const artSanatsalKadikoy = require("../../assets/places/art-sanatsal-kadikoy.jpeg") as ImageSourcePropType;
+const brekkieBreakfastClub = require("../../assets/places/brekkie-breakfast-club.jpg") as ImageSourcePropType;
+const mixBreakfastYeldegirmeni = require("../../assets/places/mix-breakfast-yeldegirmeni.jpg") as ImageSourcePropType;
+const fabescoRestaurantCafe = require("../../assets/places/fabesco-restaurant-cafe.jpg") as ImageSourcePropType;
+const rucioBreakfastYeldegirmeni = require("../../assets/places/rucio-breakfast-yeldegirmeni.jpg") as ImageSourcePropType;
 
 const CATEGORY_PLACEHOLDERS: Record<string, string> = {
   kafe: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800",
@@ -225,6 +236,17 @@ const PLACE_IMAGE_OVERRIDES: Record<string, ImageSourcePropType> = {
   "877": iklimMuzesi,
   "878": haldunTanerMuzeEvi,
   "879": osmanHamdiBeyHeykeli,
+  "881": cadde160ArtGallery,
+  "885": redArtIstanbul,
+  "886": duendeKalamis,
+  "888": chiArtGallery,
+  "891": venusSanatGalerisi,
+  "892": decollageArtSpace,
+  "894": artSanatsalKadikoy,
+  "901": brekkieBreakfastClub,
+  "902": mixBreakfastYeldegirmeni,
+  "903": fabescoRestaurantCafe,
+  "905": rucioBreakfastYeldegirmeni,
 };
 
 type PlaceLike = Place | { id?: string | number; name?: string; photo_url?: string; category?: string };

@@ -369,3 +369,45 @@ Haldun Taner Müze Evi, canlı ID 878, Fenerbahçe Dr. Faruk Ayanoğlu Caddesi. 
 İklim Müzesi, canlı ID 877, Hasanpaşa İkbaliye Sokak No:10. Görselde İKLİM MÜZESİ yazısı, Gazhane'nin karakteristik yapısı ve sergi binası açıkça görülüyor; Müze Gazhane yerleşkesiyle güçlü eşleşme.
 
 Osman Hamdi Bey Heykeli, canlı ID 879, Kalamış Atatürk Parkı. Görselde heykelin kaidesindeki OSMAN HAMDI BEY yazısı açıkça görülüyor; kaynak başlığı heykelin Kalamış Parkı'ndaki konumunu doğruluyor, güçlü eşleşme.
+
+
+Batch 008 başlangıcı
+Cadde160 Art Gallery, canlı ID 881, Fikirtepe Volkan Sokak/Pırlanta Göztepe Sitesi. Resmî iletişim sayfası görselinde girişte CADDE 160 logosu açıkça görülüyor; adres kaynağı ayrıca teyit edilecek, güçlü aday.
+Kültür Art Gallery, canlı ID 882, Acıbadem Gömeç Sokak Akgün Plaza. Yandex sonucu Kültür Art Gallery başlığı taşısa da görselde DILİCE adlı farklı bina/işletme görülüyor; yanlış eşleşme nedeniyle kullanılmayacak.
+
+Cadde160 adres doğrulaması: resmî iletişim sayfası ve Instagram, Hızırbey Cad. Volkan Sok. Pırlanta Göztepe Sitesi Alt Meydan Alanı 1-D, Fikirtepe adresini doğruluyor.
+Bakraç Sanat Galerisi, canlı ID 883, 19 Mayıs/Sinan Ercan Caddesi Öztor Sitesi No:38. Resmî kaynaklar adresi güçlü biçimde doğrulasa da seçilen görsel yalnızca isimsiz galeri iç mekânı; tabela veya kapı numarası görünmediğinden katı doğrulama kuralıyla eklenmedi.
+
+Red Art İstanbul, canlı ID 885, Fenerbahçe Hacı Mehmet Efendi Sokak No:12. Yandex dış cephe görselinde RED art İstanbul tabelası ve galeri girişi açıkça görülüyor; başlık aynı Hacı Mehmetefendi Sokak 12 adresini taşıyor, güçlü eşleşme.
+Hush Gallery, canlı ID 884, Rasimpaşa İskele Sokak 46/1. Yandex görsel kaydı İskele Sokak 48A adresini taşıyor; adres farkı nedeniyle, girişte Hush tabelası bulunan adaylar olsa da canlı No:46/1 ile kesin eşleşmediği için kullanılmayacak.
+Duende Kalamış / Art Gallery, canlı ID 886, Fenerbahçe Itridede Sokak No:17. Yandex görsel başlığı aynı Itridede 17 adresini taşıyor; dış cephede ART GALLERY & BISTRO işletme işareti görülüyor. Resmî site ve Instagram aynı Duende Kalamış/Art Gallery adresini doğruluyor, güçlü eşleşme.
+
+Chi Art Gallery, canlı ID 888, Fenerbahçe Operatör Cemil Topuzlu Caddesi No:39. Yandex dış cephe fotoğrafında CHI ART GALLERY tabelası ve galeri girişi açıkça görülüyor; kaynak başlığı No:39D olarak aynı yapı/şube ile uyumlu, güçlü eşleşme.
+Kaş Sanat Galerisi, canlı ID 887, Fenerbahçe Fener Kalamış Caddesi No:53/B. Arama sonucu Btz Galeri Kaş adresini doğrulasa da seçilen görsel yalnızca sanat eseri, galeri adı veya cephe göstermiyor; kullanılmayacak.
+
+Galeri FE, canlı ID 889, Çiftehavuzlar Operatör Cemil Topuzlu Caddesi Deniz Apt. No:66/2. Arama kaynaklarının bir bölümü Galeri FE'yi doğru No:66/2 ile doğruluyor; ancak bulunan Yandex görseli Galerife/Kutmen Apt. No:60/2 kaydına ait. Görsel ve canlı adres farklı olduğundan kullanılmayacak.
+
+Venüs Sanat Galerisi, canlı ID 891, Göztepe Pınar Sokak No:10. Yandex dış cephe fotoğrafında VENÜS SANAT tabelası ve galeri girişi açıkça görülüyor; kaynak başlığı 10A olarak aynı yapı/şube ile uyumlu, güçlü eşleşme.
+Decollage Art Space, canlı ID 892, Suadiye Müzeyyen Sokak No:4/1. Yandex fotoğrafında DECOLLAGE tabelası, galeri binası ve giriş açıkça görülüyor; kaynak başlığı aynı Müzeyyen 4/1 adresini taşıyor, güçlü eşleşme.
+Kızıltoprak Sanat Galerisi, canlı ID 890, Fenerbahçe Rüştiye Sokak No:47/1. Yandex kaydı açıkça “Artık faal değil” uyarısı taşıyor; görsel eklenmeyecek.
+
+Seven Sanat Galerisi, canlı ID 893, Moda Caddesi No:42/A. Bulunan Tripadvisor görseli galeri iç mekânını gösteriyor, ancak dış cephe/tabela görünmüyor; işletme kaynağı doğru olsa da katı görsel doğrulaması eksik olduğu için henüz kullanılmayacak.
+Art Sanatsal Kadıköy, canlı ID 894, Caferağa Nailbey Sokak No:48. Resmî mağaza görselinde ARTSANATSAL tabelası ve web adresi açıkça görülüyor; görselde komşu kapı işaretinde No:48 okunuyor, güçlü eşleşme.
+
+Mine Sanat Galerisi, canlı ID 895, Göztepe Bahariyeli Sokak No:37. Resmî site ve sosyal kaynaklar aynı Toprak Apt. No:37 adresini doğruluyor; bulunan Mine Sanat Galerisi tabelalı dış cephe fotoğrafı eski arşiv görüntüsü olsa da işletme adı net. Güncel şube görseli bulunamadığından, faal durum ve tarih belirsizliği nedeniyle henüz projeye eklenmedi.
+
+Chi Art Gallery için kullanılan kaynak görsel: `/home/ubuntu/upload/search_images/VHdGvJxlgsto.jpg`; Venüs için `/home/ubuntu/upload/search_images/G154RvZiIGr5.jpg`; Decollage için `/home/ubuntu/upload/search_images/EEevr2UjIgLN.jpg`; Art Sanatsal için `/home/ubuntu/upload/search_images/95r7I6o7Ez2p.jpeg`.
+
+Hasan Sarıtaş Gallery, canlı ID 896, Caferağa Gen. Asım Gündüz Caddesi No:63. Bulunan görsel galeri içindeki sanat eserini gösteriyor; Hasan Sarıtaş adı veya No:63 görünmüyor, bu nedenle kullanılmayacak.
+Museo, canlı ID 899, Caferağa Damacı Sokak No:1. Yandex kaydı Museo adı ve Damacı 1 adresini taşısa da görselde DESIGN STORE adlı farklı işletme görülüyor; yanlış görsel nedeniyle kullanılmayacak.
+Galleria Mavist, canlı ID 898, Rasimpaşa Uzun Hafız Sokak No:73. Bulunan görseller Mari's Chocolate/L'Atelier du Chocolat No:69–71 adreslerine ait; Galleria Mavist No:73 ile kesin eşleşmediği için kullanılmayacak.
+
+Flake Breakfast & More, canlı ID 900, Rasimpaşa Recaizade Sokak No:50/A. Bulunan görsel yalnızca markasız iç mekân gösteriyor; işletme adı veya adres görünmüyor, bu nedenle kullanılmayacak.
+Brekkie Breakfast Club, canlı ID 901, Osmanağa Yoğurtçu Parkı Caddesi No:24/1. Yandex dış cephe fotoğrafında BREKKIE tabelası ve işletme girişi açıkça görülüyor; kaynak başlığı aynı Yoğurtçu Parkı 24 adresini taşıyor, güçlü eşleşme.
+
+Mix Breakfast & Kitchen - Yeldeğirmeni, canlı ID 902, Rasimpaşa Duatepe Sokak No:26. Dış cephe fotoğrafında MIX BREAKFAST tabelası, işletme girişi ve çevre cephe açıkça görülüyor; Yandex başlığı aynı Duatepe 26 adresini taşıyor, güçlü eşleşme.
+
+FABESCO Restaurant & Café, canlı ID 903, Osmanağa Leylak Sokak No:26/A. Dış cephe fotoğrafında FABESCO tabelası ve işletme girişi açıkça görülüyor; hedef kayıtla işletme adı/tabela eşleşmesi güçlü, adres kaynakta ayrıca teyit edilecek.
+Rucio Breakfast Yeldeğirmeni, canlı ID 905, Rasimpaşa Duatepe Sokak No:10/A. Fotoğrafta girişte 10A kapı numarası ve Rucio kahvaltı işletmesinin karakteristik iç/dış cephesi görülüyor; Yandex sonucu Rucio Cafe, Duatepe 8A gösterdiği için canlı 10/A ile numara farkı ayrıca doğrulanmadan kullanılmayacak.
+Deniz Nadide Duru Breakfast Moda, canlı ID 904, Caferağa Gürbüztürk Sokak No:29/B. Bulunan görseller yalnızca kahvaltı/ürün sofraları, işletme adı veya adres göstermiyor; kullanılmayacak.
+Rucio adres doğrulaması: işletmenin resmî Instagram profili Duatepe Sokak No:10 adresini, bağımsız kaynak ise Duatepe Sokak No:10/A adresini veriyor. Görselde kapıdaki 10A numarası görüldüğü için canlı ID 905 ile güçlü eşleşme kabul edildi.

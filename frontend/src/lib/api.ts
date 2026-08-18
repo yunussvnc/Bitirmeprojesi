@@ -103,6 +103,17 @@ import kazimKarabekirPasaMuzesi from '../assets/venues/kazim-karabekir-pasa-muze
 import iklimMuzesi from '../assets/venues/iklim-muzesi.jpg'
 import haldunTanerMuzeEvi from '../assets/venues/haldun-taner-muze-evi.jpg'
 import osmanHamdiBeyHeykeli from '../assets/venues/osman-hamdi-bey-heykeli.jpg'
+import cadde160ArtGallery from '../assets/venues/cadde160-art-gallery.jpg'
+import redArtIstanbul from '../assets/venues/red-art-istanbul.jpg'
+import duendeKalamis from '../assets/venues/duende-kalamis.jpg'
+import chiArtGallery from '../assets/venues/chi-art-gallery.jpg'
+import venusSanatGalerisi from '../assets/venues/venus-sanat-galerisi.jpg'
+import decollageArtSpace from '../assets/venues/decollage-art-space.jpg'
+import artSanatsalKadikoy from '../assets/venues/art-sanatsal-kadikoy.jpeg'
+import brekkieBreakfastClub from '../assets/venues/brekkie-breakfast-club.jpg'
+import mixBreakfastYeldegirmeni from '../assets/venues/mix-breakfast-yeldegirmeni.jpg'
+import fabescoRestaurantCafe from '../assets/venues/fabesco-restaurant-cafe.jpg'
+import rucioBreakfastYeldegirmeni from '../assets/venues/rucio-breakfast-yeldegirmeni.jpg'
 
 export interface Venue {
   id: string
@@ -258,6 +269,17 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '877': iklimMuzesi,
   '878': haldunTanerMuzeEvi,
   '879': osmanHamdiBeyHeykeli,
+  '881': cadde160ArtGallery,
+  '885': redArtIstanbul,
+  '886': duendeKalamis,
+  '888': chiArtGallery,
+  '891': venusSanatGalerisi,
+  '892': decollageArtSpace,
+  '894': artSanatsalKadikoy,
+  '901': brekkieBreakfastClub,
+  '902': mixBreakfastYeldegirmeni,
+  '903': fabescoRestaurantCafe,
+  '905': rucioBreakfastYeldegirmeni,
 }
 
 export function getFallbackVenueImage(category: string): string {
