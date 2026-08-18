@@ -9,6 +9,7 @@ import {
   IceCream, UtensilsCrossed, MapPin, X,
 } from 'lucide-react'
 import { useVenues, type Venue } from '../hooks/useVenues'
+import { getAllowedVenueImageUrl } from '../lib/safeVenueImageUrl'
 
 const CATEGORY_META: Record<string, { icon: typeof Coffee; color: string }> = {
   Kafe: { icon: Coffee, color: '#d4a15a' },
@@ -32,23 +33,48 @@ function priceLabel(n: number) {
   return '₺'.repeat(Math.max(1, Math.min(4, n)))
 }
 
-function popupHTML(v: Venue) {
+function createPopupContent(v: Venue): HTMLElement {
   const meta = CATEGORY_META[v.category] ?? DEFAULT_META
   const rating = v.averageRating > 0 ? `★ ${v.averageRating.toFixed(1)} (${v.reviewCount})` : 'Henüz puan yok'
-  return `
-    <div class="venue-popup">
-      ${v.photoUrl ? `<img src="${v.photoUrl}" alt="${v.name}" loading="lazy" onerror="this.style.display='none'" />` : ''}
-      <div class="venue-popup-body">
-        <span class="venue-popup-cat" style="color:${meta.color}">${v.category} · ${v.district}</span>
-        <h4>${v.name}</h4>
-        <p>${v.description || v.address}</p>
-        <div class="venue-popup-meta">
-          <span>${priceLabel(v.priceRange)}</span>
-          <span>${rating}</span>
-        </div>
-      </div>
-    </div>
-  `
+
+  const popup = document.createElement('div')
+  popup.className = 'venue-popup'
+
+  const imageUrl = getAllowedVenueImageUrl(v.photoUrl, window.location.origin)
+  if (imageUrl) {
+    const image = document.createElement('img')
+    image.src = imageUrl
+    image.alt = v.name
+    image.loading = 'lazy'
+    image.addEventListener('error', () => image.remove(), { once: true })
+    popup.append(image)
+  }
+
+  const body = document.createElement('div')
+  body.className = 'venue-popup-body'
+
+  const category = document.createElement('span')
+  category.className = 'venue-popup-cat'
+  category.style.color = meta.color
+  category.textContent = `${v.category} · ${v.district}`
+
+  const title = document.createElement('h4')
+  title.textContent = v.name
+
+  const description = document.createElement('p')
+  description.textContent = v.description || v.address
+
+  const metadata = document.createElement('div')
+  metadata.className = 'venue-popup-meta'
+  const price = document.createElement('span')
+  price.textContent = priceLabel(v.priceRange)
+  const ratingText = document.createElement('span')
+  ratingText.textContent = rating
+  metadata.append(price, ratingText)
+
+  body.append(category, title, description, metadata)
+  popup.append(body)
+  return popup
 }
 
 function toGeoJSON(venues: Venue[]): FeatureCollection<Point> {
@@ -161,7 +187,7 @@ export default function VenueMapSection() {
         popupRef.current?.remove()
         popupRef.current = new maplibregl.Popup({ offset: 10, maxWidth: '260px' })
           .setLngLat([venue.lng, venue.lat])
-          .setHTML(popupHTML(venue))
+          .setDOMContent(createPopupContent(venue))
           .addTo(map)
       })
 
