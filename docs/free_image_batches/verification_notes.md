@@ -446,3 +446,35 @@ Vegan Kasap, canlı ID 929, Caferağa Rızapaşa Sokak No:27/A. Kaynak görsel L
 Vega Vegan Büfe, canlı ID 925, Rasimpaşa İzzettin Sokak No:44/A. HappyCow ve bağımsız kaynaklar No:44/A adresini doğruluyor; Yandex kaydı No:42 olarak farklı. Görsel adres/tabela eşleşmesi ayrıca kontrol edilecek.
 Vega Vegan Büfe, canlı ID 925, Rasimpaşa İzzettin Sokak No:44/A. Bulunan tek fotoğraf isimsiz iç mekân kapısı; tabela veya kapı numarası görünmüyor ve Yandex adresi 42 olarak farklı. Kullanılmayacak.
 Vatka Burger Co., canlı ID 930, Caferağa İleri Sokak No:10/A. Bulunan dış cephe görselinde VATKA Burger tabelası görülüyor ancak Yandex kaynak başlığı İleri Sokak No:4 olarak farklı; canlı No:10/A ile adres kesinleşmediği için kullanılmayacak.
+
+
+Batch 010 başlangıcı
+FIT HOUSE, canlı ID 934, Caddebostan Ogün Sokak No:3/B. Fotoğrafta FIT HOUSE logolu dış cephe, yeşil tabela ve giriş açıkça görülüyor; güçlü eşleşme.
+Green Generation, canlı ID 933, Caferağa Ahter Sokak No:2/A. İncelenen görsel yalnızca dürüm/ürün fotoğrafı, işletme adı veya adres göstermiyor; kullanılmayacak.
+Fit mill, canlı ID 932, Rasimpaşa Duatepe Sokak No:34/A. Arama sonuçlarında adres kaydı doğru olsa da incelenen adaylar ürün/iç mekân ağırlıklı; tabela ve kapı numarası doğrulaması henüz yok.
+Vegan Bakkal Moda, canlı ID 935, Caferağa Bademaltı Sokak No:38/C. Dış cephede GO VEGAN/VEGAN ORGANİK tabelası ve kapı üstündeki 38/C numarası açıkça görülüyor; Yandex başlığındaki 38D ifadesi aynı giriş için harf farkı, canlı adres ve işletme kimliğiyle güçlü eşleşme.
+
+Croi Bakery & Pastry, canlı ID 937, Göztepe Dr. Zeki Zeren Sokak No:4/A. Resmî Instagram/Facebook ve Yandex kaynakları aynı 4/A adresini doğruluyor; uygun tabela/dış cephe görseli ayrıca aranacak.
+Bread House home baked, canlı ID 939, Suadiye Halay Sokak No:13. Yandex adresi 13A, resmî Instagram 13B olarak geçiyor; bulunan fotoğrafta BREAD HOUSE tabelası ve aynı Halay Sokak şubesi açıkça görülüyor, ancak kapı numarası görünmediği için adres ek teyidiyle değerlendirilecek.
+Ramda Bakery & Coffee, canlı ID 938, Erenköy Hatboyu Sokak No:40/A. Resmî sosyal kaynaklar 40/A'yı doğruluyor, ancak bulunan Yandex panoramaları 40D ve farklı cepheler gösteriyor; kesin şube/görsel eşleşmesi kurulamadığı için kullanılmayacak.
+Croi Bakery & Pastry, canlı ID 937, Göztepe Dr. Zeki Zeren Sokak No:4/A. Bulunan Croi görseli yalnızca ürün/vitrin fotoğrafı; işletme girişi veya adres göstermiyor, kullanılmayacak.
+Bread House home baked, canlı ID 939, Suadiye Halay Sokak No:13. Tabelalı dış cephe fotoğrafı BREAD HOUSE adını açıkça gösteriyor; Yandex 13A, resmî Instagram 13B ve canlı kayıt No:13 aynı bina/şube için harf eki farklılıklarıdır. Güçlü eşleşme olarak kabul edildi.
+
+Pikta Bakery and Cafe, canlı ID 940, Osmanağa Kuşdili Caddesi No:61/A. Dış cephe fotoğrafında PIKTA BAKERY & CAFE tabelası ve ürün vitrini açıkça görülüyor; Yandex kaydı aynı 61A adresini taşıyor, güçlü eşleşme.
+Merveilleux Patisserie, canlı ID 942, Feneryolu Hamdibey Sokak 16/2A. Bulunan görsel şık iç mekânı gösteriyor ancak işletme adı veya adres görünmüyor; kullanılmayacak.
+
+Ira Bakery Erenköy, canlı ID 943, Erenköy Ethemefendi Caddesi No:58/B. Dış cephe fotoğrafında Ira Artisan Bakery tabelası, geniş giriş ve işletme kimliği açıkça görülüyor; güçlü eşleşme.
+Kukumav Bakery & Coffee Erenköy Şubesi, canlı ID 944, Erenköy Kaşaneler Sokak No:20/D. Dış cephe fotoğrafında KUKUMAV tabelası ve şube girişi açıkça görülüyor; kaynak başlığı 20C olarak aynı yapı/şube ile uyumlu, canlı 20/D ile güçlü eşleşme.
+Eksihane Artisan Bakery, canlı ID 945, Suadiye Tarlacık Sokak No:5/A. Bulunan görsel iç mekânda EKSİHANE ürün tezgâhını gösteriyor ancak dış cephe/adres görünmüyor; katı doğrulama kuralıyla kullanılmayacak.
+
+Moa Coffee Bakery, canlı ID 946, Kozyatağı Şemsettin Günaltay Caddesi No:70–72/B. Dış cephe fotoğrafında M.O.A. COFFEE-BAKERY-FOOD tabelası ve giriş açıkça görülüyor; güçlü işletme eşleşmesi, adres kaynağı ayrıca teyit edilecek.
+Alâ Bakery, canlı ID 947, Dumlupınar Özen Sokak Nuhoğlu Yenitepe Sitesi No:48. Uygun tabela/adres görseli bulunamadı; eklenmeyecek.
+St. Bakery, canlı ID 948, Bostancı Gümüşçü Sokak No:9/D. Arama sonucu yalnızca ürün fotoğrafı, işletme adı veya adres göstermiyor; kullanılmayacak.
+
+Sour & Sweet Artisan Bakery, canlı ID 950, Caddebostan Plajyolu Sokak No:8/A. Dış cephede SOUR & SWEET ARTISAN BAKERY tabelası ve sol cephede PLAJYOLU APT No:8 işareti açıkça görülüyor; güçlü eşleşme.
+Bella Bakery & Coffee, canlı ID 949, Suadiye Noter Sokak No:1/C. Dış mekânda Bella logosu ve mağaza cephesi görülüyor; kaynak başlığı aynı Noter 1/C adresini taşıyor, ancak kapı numarası görünmediği için adres kaynağıyla birlikte güçlü eşleşme.
+Joie Fresh On Bread, canlı ID 951, Caferağa Rızapaşa Sokak No:1/B. Bulunan görseller ürün ve isimsiz iç mekân ağırlıklı; işletme adı/adres görünmediği için kullanılmayacak.
+
+Nan Ab Patisserie, canlı ID 954, Zühtüpaşa Şehir Kahya Sokak No:9/B. Dış cephe fotoğrafında Nan-Ab Patisserie tabelası ve giriş açıkça görülüyor; Yandex kaydı aynı 9B adresini taşıyor, güçlü eşleşme.
+Tahan Bakery, canlı ID 953, Acıbadem Şemi Bey Sokak No:7/B. Fotoğrafta TAHAN Bakery tabelası ve aynı işletme girişi görülüyor; Yandex kaydı 7/A olarak harf farkıyla aynı yapı/şube, güçlü eşleşme.
+Polea Coffee & Bakery, canlı ID 952, Bostancı Bostan Tariki Sokak No:4/A. Bulunan arama görselleri işletme adresi/tabelası yerine genel iç mekân veya alakasız mimari gösteriyor; kullanılmayacak.

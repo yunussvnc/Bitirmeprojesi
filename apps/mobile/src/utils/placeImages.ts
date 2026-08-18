@@ -125,6 +125,18 @@ const bbsKadikoy = require("../../assets/places/bbs-kadikoy.jpg") as ImageSource
 const fernMediterraneanEatery = require("../../assets/places/fern-mediterranean-eatery.jpg") as ImageSourcePropType;
 const gringoVeganStreetFood = require("../../assets/places/gringo-vegan-street-food.jpeg") as ImageSourcePropType;
 const ruloEzberbozanLezzetler = require("../../assets/places/rulo-ezberbozan-lezzetler.jpg") as ImageSourcePropType;
+const fitMill = require("../../assets/places/fit-mill.jpg") as ImageSourcePropType;
+const fitHouse = require("../../assets/places/fit-house.jpg") as ImageSourcePropType;
+const veganBakkalModa = require("../../assets/places/vegan-bakkal-moda.jpg") as ImageSourcePropType;
+const breadHouseHomeBaked = require("../../assets/places/bread-house-home-baked.jpg") as ImageSourcePropType;
+const piktaBakery = require("../../assets/places/pikta-bakery.jpg") as ImageSourcePropType;
+const iraBakeryErenkoy = require("../../assets/places/ira-bakery-erenkoy.webp") as ImageSourcePropType;
+const kukumavBakeryErenkoy = require("../../assets/places/kukumav-bakery-erenkoy.jpg") as ImageSourcePropType;
+const moaCoffeeBakery = require("../../assets/places/moa-coffee-bakery.jpg") as ImageSourcePropType;
+const bellaBakeryCoffee = require("../../assets/places/bella-bakery-coffee.jpg") as ImageSourcePropType;
+const sourSweetArtisanBakery = require("../../assets/places/sour-sweet-artisan-bakery.jpg") as ImageSourcePropType;
+const tahanBakery = require("../../assets/places/tahan-bakery.jpg") as ImageSourcePropType;
+const nanAbPatisserie = require("../../assets/places/nan-ab-patisserie.jpg") as ImageSourcePropType;
 
 const CATEGORY_PLACEHOLDERS: Record<string, string> = {
   kafe: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800",
@@ -263,6 +275,18 @@ const PLACE_IMAGE_OVERRIDES: Record<string, ImageSourcePropType> = {
   "921": veganMasa,
   "923": gringoVeganStreetFood,
   "928": ruloEzberbozanLezzetler,
+  "932": fitMill,
+  "934": fitHouse,
+  "935": veganBakkalModa,
+  "939": breadHouseHomeBaked,
+  "940": piktaBakery,
+  "943": iraBakeryErenkoy,
+  "944": kukumavBakeryErenkoy,
+  "946": moaCoffeeBakery,
+  "949": bellaBakeryCoffee,
+  "950": sourSweetArtisanBakery,
+  "953": tahanBakery,
+  "954": nanAbPatisserie,
 };
 
 type PlaceLike = Place | { id?: string | number; name?: string; photo_url?: string; category?: string };

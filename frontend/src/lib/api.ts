@@ -122,6 +122,18 @@ import bbsKadikoy from '../assets/venues/bbs-kadikoy.jpg'
 import fernMediterraneanEatery from '../assets/venues/fern-mediterranean-eatery.jpg'
 import gringoVeganStreetFood from '../assets/venues/gringo-vegan-street-food.jpeg'
 import ruloEzberbozanLezzetler from '../assets/venues/rulo-ezberbozan-lezzetler.jpg'
+import fitMill from '../assets/venues/fit-mill.jpg'
+import fitHouse from '../assets/venues/fit-house.jpg'
+import veganBakkalModa from '../assets/venues/vegan-bakkal-moda.jpg'
+import breadHouseHomeBaked from '../assets/venues/bread-house-home-baked.jpg'
+import piktaBakery from '../assets/venues/pikta-bakery.jpg'
+import iraBakeryErenkoy from '../assets/venues/ira-bakery-erenkoy.webp'
+import kukumavBakeryErenkoy from '../assets/venues/kukumav-bakery-erenkoy.jpg'
+import moaCoffeeBakery from '../assets/venues/moa-coffee-bakery.jpg'
+import bellaBakeryCoffee from '../assets/venues/bella-bakery-coffee.jpg'
+import sourSweetArtisanBakery from '../assets/venues/sour-sweet-artisan-bakery.jpg'
+import tahanBakery from '../assets/venues/tahan-bakery.jpg'
+import nanAbPatisserie from '../assets/venues/nan-ab-patisserie.jpg'
 
 export interface Venue {
   id: string
@@ -296,6 +308,18 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '921': veganMasa,
   '923': gringoVeganStreetFood,
   '928': ruloEzberbozanLezzetler,
+  '932': fitMill,
+  '934': fitHouse,
+  '935': veganBakkalModa,
+  '939': breadHouseHomeBaked,
+  '940': piktaBakery,
+  '943': iraBakeryErenkoy,
+  '944': kukumavBakeryErenkoy,
+  '946': moaCoffeeBakery,
+  '949': bellaBakeryCoffee,
+  '950': sourSweetArtisanBakery,
+  '953': tahanBakery,
+  '954': nanAbPatisserie,
 }
 
 export function getFallbackVenueImage(category: string): string {
