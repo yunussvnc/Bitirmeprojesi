@@ -117,6 +117,14 @@ const brekkieBreakfastClub = require("../../assets/places/brekkie-breakfast-club
 const mixBreakfastYeldegirmeni = require("../../assets/places/mix-breakfast-yeldegirmeni.jpg") as ImageSourcePropType;
 const fabescoRestaurantCafe = require("../../assets/places/fabesco-restaurant-cafe.jpg") as ImageSourcePropType;
 const rucioBreakfastYeldegirmeni = require("../../assets/places/rucio-breakfast-yeldegirmeni.jpg") as ImageSourcePropType;
+const lilBakeModa = require("../../assets/places/lil-bake-moda.jpg") as ImageSourcePropType;
+const turpVegan = require("../../assets/places/turp-vegan.jpg") as ImageSourcePropType;
+const veganMasa = require("../../assets/places/vegan-masa.jpg") as ImageSourcePropType;
+const millBakery = require("../../assets/places/mill-bakery.jpg") as ImageSourcePropType;
+const bbsKadikoy = require("../../assets/places/bbs-kadikoy.jpg") as ImageSourcePropType;
+const fernMediterraneanEatery = require("../../assets/places/fern-mediterranean-eatery.jpg") as ImageSourcePropType;
+const gringoVeganStreetFood = require("../../assets/places/gringo-vegan-street-food.jpeg") as ImageSourcePropType;
+const ruloEzberbozanLezzetler = require("../../assets/places/rulo-ezberbozan-lezzetler.jpg") as ImageSourcePropType;
 
 const CATEGORY_PLACEHOLDERS: Record<string, string> = {
   kafe: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800",
@@ -247,6 +255,14 @@ const PLACE_IMAGE_OVERRIDES: Record<string, ImageSourcePropType> = {
   "902": mixBreakfastYeldegirmeni,
   "903": fabescoRestaurantCafe,
   "905": rucioBreakfastYeldegirmeni,
+  "907": lilBakeModa,
+  "913": millBakery,
+  "914": bbsKadikoy,
+  "915": fernMediterraneanEatery,
+  "920": turpVegan,
+  "921": veganMasa,
+  "923": gringoVeganStreetFood,
+  "928": ruloEzberbozanLezzetler,
 };
 
 type PlaceLike = Place | { id?: string | number; name?: string; photo_url?: string; category?: string };

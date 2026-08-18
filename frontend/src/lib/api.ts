@@ -114,6 +114,14 @@ import brekkieBreakfastClub from '../assets/venues/brekkie-breakfast-club.jpg'
 import mixBreakfastYeldegirmeni from '../assets/venues/mix-breakfast-yeldegirmeni.jpg'
 import fabescoRestaurantCafe from '../assets/venues/fabesco-restaurant-cafe.jpg'
 import rucioBreakfastYeldegirmeni from '../assets/venues/rucio-breakfast-yeldegirmeni.jpg'
+import lilBakeModa from '../assets/venues/lil-bake-moda.jpg'
+import turpVegan from '../assets/venues/turp-vegan.jpg'
+import veganMasa from '../assets/venues/vegan-masa.jpg'
+import millBakery from '../assets/venues/mill-bakery.jpg'
+import bbsKadikoy from '../assets/venues/bbs-kadikoy.jpg'
+import fernMediterraneanEatery from '../assets/venues/fern-mediterranean-eatery.jpg'
+import gringoVeganStreetFood from '../assets/venues/gringo-vegan-street-food.jpeg'
+import ruloEzberbozanLezzetler from '../assets/venues/rulo-ezberbozan-lezzetler.jpg'
 
 export interface Venue {
   id: string
@@ -280,6 +288,14 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '902': mixBreakfastYeldegirmeni,
   '903': fabescoRestaurantCafe,
   '905': rucioBreakfastYeldegirmeni,
+  '907': lilBakeModa,
+  '913': millBakery,
+  '914': bbsKadikoy,
+  '915': fernMediterraneanEatery,
+  '920': turpVegan,
+  '921': veganMasa,
+  '923': gringoVeganStreetFood,
+  '928': ruloEzberbozanLezzetler,
 }
 
 export function getFallbackVenueImage(category: string): string {

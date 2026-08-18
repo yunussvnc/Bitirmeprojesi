@@ -411,3 +411,38 @@ FABESCO Restaurant & Café, canlı ID 903, Osmanağa Leylak Sokak No:26/A. Dış
 Rucio Breakfast Yeldeğirmeni, canlı ID 905, Rasimpaşa Duatepe Sokak No:10/A. Fotoğrafta girişte 10A kapı numarası ve Rucio kahvaltı işletmesinin karakteristik iç/dış cephesi görülüyor; Yandex sonucu Rucio Cafe, Duatepe 8A gösterdiği için canlı 10/A ile numara farkı ayrıca doğrulanmadan kullanılmayacak.
 Deniz Nadide Duru Breakfast Moda, canlı ID 904, Caferağa Gürbüztürk Sokak No:29/B. Bulunan görseller yalnızca kahvaltı/ürün sofraları, işletme adı veya adres göstermiyor; kullanılmayacak.
 Rucio adres doğrulaması: işletmenin resmî Instagram profili Duatepe Sokak No:10 adresini, bağımsız kaynak ise Duatepe Sokak No:10/A adresini veriyor. Görselde kapıdaki 10A numarası görüldüğü için canlı ID 905 ile güçlü eşleşme kabul edildi.
+
+
+Batch 009 başlangıcı
+Lil Bake Moda, canlı ID 907, Osmanağa Hasırcıbaşı Caddesi No:36/A. Dış cephe fotoğrafında lil bake tabelası, işletme girişi ve yan cephede 36 numarası açıkça görülüyor; güçlü eşleşme.
+Pişi Mutfak Moda, canlı ID 909, Caferağa Ağabey Sokak No:3/A. Yandex sonucu doğru işletme/adres başlığını taşıyor ancak seçilen fotoğraf yalnızca isimsiz cephe ve iç mekân gösteriyor; tabela/adres görünmediği için kullanılmayacak.
+Morn Kadıköy, canlı ID 908, Osmanağa Yoğurtçu Parkı Caddesi No:62/A. Yandex dış cephe fotoğrafı doğru işletme/adres kaydıyla ilişkili olsa da ağaçlar ve uzak cephe nedeniyle MORN tabelası okunmuyor; ürün fotoğrafı da işletme kimliği göstermiyor. Katı görsel doğrulaması sağlanamadığı için kullanılmayacak.
+
+Babil Kadıköy, canlı ID 910, Osmanağa Piri Çavuş Sokak No:33/A. Kaynak işletme ve adresle ilişkili fotoğraflar Babil'in avlu atmosferini gösteriyor ancak işletme adı/tabela veya kapı numarası görünmüyor; katı doğrulama nedeniyle kullanılmayacak.
+Shabby Waffle Kadıköy, canlı ID 911, Halitağa Caddesi No:12/A. Yandex görseli Halitağa No:10/C'deki LÖNÇİ ve SEÇ-AL adlı farklı işletmeleri gösteriyor; canlı kayıtla uyuşmadığı için kullanılmayacak.
+EGGY, canlı ID 912, Rasimpaşa Yeşilay Sokak No:2/B. Yandex kaydı açıkça “Artık faal değil” uyarısı taşıyor; görsel eklenmeyecek.
+
+Mill Bakery, canlı ID 913, Rasimpaşa Yeşilay Sokak No:2/C. Yandex dış cephe fotoğrafında MILL BAKERY tabelası ve işletme girişi açıkça görülüyor; kaynak başlığı aynı Yeşilay 2/C adresini taşıyor, güçlü eşleşme.
+BBS Kadıköy, canlı ID 914, Caferağa İleri Sokak No:1/D. Yandex dış cephe fotoğrafında BBS tabelası ve işletme girişi açıkça görülüyor; kaynak başlığı 1/E olarak aynı yapı/şube ile uyumlu, güçlü aday.
+Fern Mediterranean Eatery, canlı ID 915, Fenerbahçe Lalezar Sokak No:14. Dış cephede FERN tabelası ve işletme girişi açıkça görülüyor; resmî site ile bağımsız kaynaklar aynı Lalezar 14/14A adresini doğruluyor, güçlü eşleşme.
+
+Küff Yeldeğirmeni, canlı ID 916, Rasimpaşa Karakolhane Caddesi No:54. Arama sonuçlarında işletme ve adres başlığı doğru olsa da incelenen fotoğraf yalnızca kahvaltı/ürün sofrası, tabela veya adres göstermiyor; kullanılmayacak.
+Cafe Rea, canlı ID 917, Caferağa Hacı Şükrü Sokak No:28/A. Yandex dış cephe görselinde AYKAR adlı farklı işletme ve komşu cephe görülüyor; Cafe Rea ile eşleşmediği için kesinlikle kullanılmayacak.
+
+Turp Vegan Sokak Lezzetleri, canlı ID 920, Caferağa Mühürdar Karakolu Sokak No:12/B. Dış cephe fotoğrafında TURP tabelası, turuncu tente ve işletme girişi açıkça görülüyor; güçlü eşleşme.
+Veganarsist Kadıköy, canlı ID 919, Osmanağa Canan Sokak No:20/A. İncelenen görsel ürün/lahmacun fotoğrafı, işletme adı veya adres göstermiyor; dış cephe adayı bulunana kadar kullanılmayacak.
+Vegan Masa, canlı ID 921, Osmanağa Vahapbey Sokak No:18/A. Dış cephede VEGAN MASA tabelası ve işletme girişi, ayrıca cephedeki 18 numarası açıkça görülüyor; resmî site ve bağımsız kaynaklar aynı No:18/A adresini doğruluyor, güçlü eşleşme.
+
+GRINGO Vegan Street Food, canlı ID 923, Caferağa Hünkar Sokak No:8/A. Dış cephe fotoğrafında GRINGO/STREET FOOD işletme tabelası ve giriş açıkça görülüyor; Corner başlığı aynı Hünkar 8/A adresini taşıyor, güçlü eşleşme.
+KEM KÜM Egyptian Vegan Restaurant, canlı ID 924, Osmanağa Pavlonya Sokak No:9. Bulunan fotoğraflar yalnızca ürün/sofra görüntüsü, işletme adı veya adres göstermiyor; kullanılmayacak.
+Salve Cafe, canlı ID 922, Osmanağa Piri Çavuş Sokak No:4. Bulunan görsel yalnızca burger ürün fotoğrafı, Salve tabelası veya adres göstermiyor; kullanılmayacak.
+
+Ethique Patisserie & Boulangerie, canlı ID 926, Fikirtepe Volkan Sokak Pırlanta Sitesi 1/1D. Bulunan görseller yalnızca pastane vitrini/iç mekân; Ethique tabelası veya adres görünmüyor, kullanılmayacak.
+Ayrışım Kitabevi Kafe, canlı ID 927, Rasimpaşa Beydağı Sokak No:54/A. Yandex dış cephe başlığı No:56 gösteriyor ve fotoğrafta işletme tabelası okunmuyor; canlı No:54/A ile kesin eşleşme kurulamadığı için kullanılmayacak.
+
+Rulo Ezberbozan Lezzetler, canlı ID 928, Caferağa Nail Bey Sokak No:15. Dış cephe fotoğrafında RULO EZBERBOZAN LEZZETLER tabelası, işletme girişi ve kapıdaki 15 numarası açıkça görülüyor; güçlü eşleşme.
+
+Vegan Kasap, canlı ID 929, Caferağa Rızapaşa Sokak No:27/A. Kaynak görsel Limonita Vegan Kasap'a ait ve adres/işletme eşleşmesi güçlü; ancak HappyCow kaydı işletmeyi “CLOSED” olarak belirtiyor. Faal olmayan işletmeye görsel eklenmeyecek.
+Vega Vegan Büfe, canlı ID 925, Rasimpaşa İzzettin Sokak No:44/A. HappyCow ve bağımsız kaynaklar No:44/A adresini doğruluyor; Yandex kaydı No:42 olarak farklı. Görsel adres/tabela eşleşmesi ayrıca kontrol edilecek.
+Vega Vegan Büfe, canlı ID 925, Rasimpaşa İzzettin Sokak No:44/A. Bulunan tek fotoğraf isimsiz iç mekân kapısı; tabela veya kapı numarası görünmüyor ve Yandex adresi 42 olarak farklı. Kullanılmayacak.
+Vatka Burger Co., canlı ID 930, Caferağa İleri Sokak No:10/A. Bulunan dış cephe görselinde VATKA Burger tabelası görülüyor ancak Yandex kaynak başlığı İleri Sokak No:4 olarak farklı; canlı No:10/A ile adres kesinleşmediği için kullanılmayacak.
