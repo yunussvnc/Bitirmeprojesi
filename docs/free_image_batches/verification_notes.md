@@ -520,3 +520,7 @@ Manzara Restaurant, canlı ID 993, Cihannüma Saray Cd. No:5. Tripadvisor başl�
 jojo Ocakbaşı meze, canlı ID 994, Şişli Eşref Efendi Sk. No:2–4. Tripadvisor görselinde JOJO OCAKBAŞI adı/tabelası açıkça görülüyor; canlı adresle kaynak adresi ayrıca eşleştirildikten sonra değerlendirilecek.
 Peymane Ocakbaşı Beşiktaş, canlı ID 995, Sinanpaşa Alaybeyi Sk. No:7/A. Tripadvisor görselleri iç mekânı gösteriyor ancak PEYMANE tabelası veya adres numarası görünmüyor; kullanılmayacak.
 jojo Ocakbaşı meze, canlı ID 994, Şişli Bozkurt Mah. Eşref Efendi Sk. No:2–4. Instagram işletme profili ve Tripadvisor aynı adresi doğruluyor; Tripadvisor görselinde JOJO OCAKBAŞI tabelası net, güçlü eşleşme.
+Rüya İstanbul, canlı ID 996, Çırağan Palace Kempinski Çırağan Cd. No:32. Resmî/Tripadvisor sonuçlarında şık iç mekân ve teras görselleri var ancak RÜYA tabelası veya adres işareti görünmüyor; kullanıcı kuralı nedeniyle kullanılmayacak.
+Kebapçı Memet, canlı ID 997, Ortaköy Dereboyu Cd. No:149/A. Yandex görselinde KEBAPÇI MEMET tabelalı dış cephe ve işletme girişi net; kaynak başlığı aynı 149A adresini taşıyor, güçlü eşleşme.
+Semt Ocakbaşı, canlı ID 998, Sinanpaşa Alaybeyi Sk. No:18. Görselde SEMT tabelası ve işletme cephesi net ancak seçilen kaynakta No:18 adresi görünmüyor; adres doğrulaması tamamlanmadan kullanılmayacak.
+Semt Ocakbaşı, canlı ID 998, Sinanpaşa Alaybeyi Sk. No:18. Yandex/iyifirma/house kayıtları No:18 adresini doğruluyor; görselde SEMT tabelası ve cephe net, güçlü eşleşme.
