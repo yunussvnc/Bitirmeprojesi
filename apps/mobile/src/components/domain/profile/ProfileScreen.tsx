@@ -17,6 +17,11 @@ import { Image } from "expo-image";
 import { useTranslation } from "react-i18next";
 import { ProfileSkeleton } from "./components/ProfileSkeleton";
 import { useTabBarVisibility } from "@/src/components/layout/TabBarVisibilityContext";
+import { getUserStories, type Story } from "@/src/services/storyService";
+import { StoryViewerModal } from "@/src/components/domain/explore/StoryViewerModal";
+import { LinearGradient } from "expo-linear-gradient";
+
+const STORY_GRADIENT: [string, string, ...string[]] = ["#4ade80", "#22c55e", "#16a34a", "#15803d"];
 
 const GRID_GAP = 14;
 const GRID_COLS = 2;
@@ -37,6 +42,8 @@ export default function ProfileScreen() {
   const [stats, setStats] = useState<UserStats | null>(null);
   const [posts, setPosts] = useState<{ id: number; place_id?: number; thumbnail?: string; media_type?: string }[]>([]);
   const [taggedPosts, setTaggedPosts] = useState<{ id: number; place_id?: number; thumbnail?: string; media_type?: string }[]>([]);
+  const [stories, setStories] = useState<Story[]>([]);
+  const [storyViewerVisible, setStoryViewerVisible] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
   const [activeTab, setActiveTab] = useState<"posts" | "tagged">("posts");
   const deletedPostIds = useAppStore((s) => s.deletedPostIds);
@@ -54,11 +61,12 @@ export default function ProfileScreen() {
   const loadProfile = useCallback(async (silent = false) => {
     if (!authUser) return;
     try {
-      const [p, s, postsRes, taggedRes] = await Promise.all([
+      const [p, s, postsRes, taggedRes, storiesRes] = await Promise.all([
         getUserProfile(authUser.id),
         getUserStats(authUser.id),
         getUserPosts(authUser.id, 1, 30),
-        import('@/src/services/userService').then(m => m.getTaggedPosts(authUser.id, 1, 30))
+        import('@/src/services/userService').then(m => m.getTaggedPosts(authUser.id, 1, 30)),
+        getUserStories(authUser.id, 1, 15)
       ]);
       setProfile(p);
       setStats(s);
@@ -78,6 +86,7 @@ export default function ProfileScreen() {
       
       setPosts(postsRes.items.map(formatPostThumb));
       setTaggedPosts(taggedRes.items.map(formatPostThumb));
+      setStories(storiesRes.items);
     } catch (e) {
       if (!silent) handleApiError(e);
     } finally {
@@ -203,13 +212,40 @@ export default function ProfileScreen() {
       >
         {/* ── Hero Section (Avatar, Name, Bio) ── */}
         <View style={styles.heroSection}>
-          <View style={[styles.avatarRing, { borderColor: colors.surface.border }]}>
-            <Avatar
-              source={authUser.avatar_url ? { uri: authUser.avatar_url } : undefined}
-              name={displayName}
-              size={86}
-            />
-          </View>
+          <TouchableOpacity 
+            activeOpacity={0.8}
+            onPress={() => {
+              lightImpact();
+              if (stories.length > 0) {
+                setStoryViewerVisible(true);
+              } else {
+                router.push('/create-story' as any);
+              }
+            }}
+          >
+            {stories.length > 0 ? (
+              <LinearGradient colors={STORY_GRADIENT} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={styles.gradientRing}>
+                <View style={[styles.ringGap, { backgroundColor: colors.background.primary }]}>
+                  <Avatar
+                    source={authUser.avatar_url ? { uri: authUser.avatar_url } : undefined}
+                    name={displayName}
+                    size={80}
+                  />
+                </View>
+              </LinearGradient>
+            ) : (
+              <View style={[styles.avatarRing, { borderColor: colors.surface.border }]}>
+                <Avatar
+                  source={authUser.avatar_url ? { uri: authUser.avatar_url } : undefined}
+                  name={displayName}
+                  size={86}
+                />
+                <View style={[styles.miniAddIcon, { backgroundColor: colors.accent.primary, borderColor: colors.background.primary }]}>
+                  <IconSymbol name="plus" size={12} color="#fff" />
+                </View>
+              </View>
+            )}
+          </TouchableOpacity>
 
           <View style={styles.heroInfo}>
             <Text style={[styles.heroName, { color: colors.text.primary }]}>{displayName}</Text>
@@ -527,6 +563,29 @@ const styles = StyleSheet.create({
     color: "#fff",
     fontSize: 14,
     fontWeight: "600",
+  },
+  gradientRing: {
+    width: 92,
+    height: 92,
+    borderRadius: 46,
+    padding: 2,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  ringGap: {
+    padding: 3,
+    borderRadius: 46,
+  },
+  miniAddIcon: {
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+    width: 24,
+    height: 24,
+    borderRadius: 12,
+    borderWidth: 2,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   secondaryBtn: {
     width: 40,

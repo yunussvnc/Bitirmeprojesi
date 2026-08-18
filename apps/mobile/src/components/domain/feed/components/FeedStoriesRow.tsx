@@ -19,6 +19,7 @@ import { useTranslation } from "react-i18next";
 import { useUploadPipelineStore } from "@/src/store/useUploadPipelineStore";
 import { useAuthStore } from "@/src/store/useAuthStore";
 import { useAppStore } from "@/src/store/useAppStore";
+import { Avatar } from "@/src/components/ui/Avatar";
 
 const STORY_RING_SIZE = 82;
 const STORY_GRADIENT: [string, string, ...string[]] = ["#4ade80", "#22c55e", "#16a34a", "#15803d"];
@@ -199,8 +200,14 @@ export function FeedStoriesRow({ filter }: FeedStoriesRowProps) {
           {/* Hikaye Ekle butonu */}
           <TouchableOpacity style={styles.ringWrap} onPress={() => { lightImpact(); router.push('/create-story' as any); }} activeOpacity={0.8}>
             <View style={[styles.addRing, { borderColor: colors.surface.border, backgroundColor: colors.background.secondary }]}>
-              <View style={[styles.addIconWrap, { backgroundColor: colors.accent.primary }]}>
-                <IconSymbol name="plus" size={18} color="#fff" />
+              {currentUser?.avatar_url ? (
+                <Image source={{ uri: currentUser.avatar_url }} style={styles.ringInner} contentFit="cover" />
+              ) : (
+                <Avatar name={currentUser?.first_name || currentUser?.username || 'U'} size={STORY_RING_SIZE - 6} />
+              )}
+              {/* Küçük + ikonu */}
+              <View style={[styles.miniAddIcon, { backgroundColor: colors.accent.primary, borderColor: colors.background.primary }]}>
+                <IconSymbol name="plus" size={12} color="#fff" />
               </View>
             </View>
             <Text style={[styles.placeLabel, { color: colors.text.secondary }]} numberOfLines={1}>
@@ -338,13 +345,19 @@ const styles = StyleSheet.create({
     borderWidth: 1.5,
     alignItems: "center",
     justifyContent: "center",
+    position: 'relative',
   },
-  addIconWrap: {
-    width: 28,
-    height: 28,
-    borderRadius: 14,
-    alignItems: "center",
-    justifyContent: "center",
+  miniAddIcon: {
+    position: 'absolute',
+    bottom: 2,
+    right: 2,
+    width: 22,
+    height: 22,
+    borderRadius: 11,
+    borderWidth: 2,
+    alignItems: 'center',
+    justifyContent: 'center',
+    zIndex: 2,
   },
   loadingOverlay: {
     backgroundColor: "rgba(0,0,0,0.5)",

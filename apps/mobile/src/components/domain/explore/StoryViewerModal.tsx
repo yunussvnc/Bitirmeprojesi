@@ -18,6 +18,7 @@ import {
   ActivityIndicator,
   Keyboard,
   useWindowDimensions,
+  ScrollView,
 } from 'react-native';
 import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
 import { Image } from 'expo-image';
@@ -26,7 +27,7 @@ import { IconSymbol } from '@/src/components/ui/icon-symbol';
 import { Avatar } from '@/src/components/ui/Avatar';
 import { lightImpact, success } from '@/src/utils/haptics';
 import type { Story } from '@/src/services/storyService';
-import { replyToStory, reactToStory, updateStoryViewAnalytics, recordStoryView, STORY_EMOJIS, type StoryEmoji } from '@/src/services/storyService';
+import { replyToStory, reactToStory, updateStoryViewAnalytics, recordStoryView, getStoryViewers, STORY_EMOJIS, type StoryEmoji, type StoryViewerItem } from '@/src/services/storyService';
 import { router } from 'expo-router';
 
 const STORY_DURATION_MS = 5000;
@@ -74,6 +75,10 @@ export function StoryViewerModal({
   const openedAtRef = useRef<number>(Date.now());
   const progressAnim = useRef(new Animated.Value(0)).current;
   const { t } = useTranslation();
+
+  const [viewersModalVisible, setViewersModalVisible] = useState(false);
+  const [viewers, setViewers] = useState<StoryViewerItem[]>([]);
+  const [viewersLoading, setViewersLoading] = useState(false);
 
   // initialIndex veya stories değiştiğinde index'i sıfırla
   useEffect(() => {
@@ -185,6 +190,20 @@ export function StoryViewerModal({
     startProgress(progressValueRef.current);
   }, [startProgress]);
 
+  const resumeProgress = useCallback(() => {
+    if (!story || viewersModalVisible) return;
+    const remaining = Math.max(0, STORY_DURATION_MS - progressValueRef.current);
+    Animated.timing(progressAnim, {
+      toValue: STORY_DURATION_MS,
+      duration: remaining,
+      useNativeDriver: false,
+    }).start(({ finished }) => {
+      if (finished) {
+        goNext();
+      }
+    });
+  }, [story, progressAnim, goNext, viewersModalVisible]);
+
   // Image hikaye: progress başlat
   useEffect(() => {
     if (!story || !isImage || !visible) return;
@@ -224,15 +243,14 @@ export function StoryViewerModal({
   }, [goNext]);
 
   const handlePressIn = useCallback(() => {
+    if (viewersModalVisible) return;
     longPressTimerRef.current = setTimeout(() => {
-      isPausedRef.current = true;
-      setVideoPaused(true); // Fix #2
-      if (isImage) {
-        progressAnim.stopAnimation();
-      }
       setUiVisible(false);
+      setVideoPaused(true);
+      isPausedRef.current = true;
+      progressAnim.stopAnimation();
     }, LONG_PRESS_DELAY);
-  }, [isImage, progressAnim]);
+  }, [progressAnim, viewersModalVisible]);
 
   const handlePressOut = useCallback(() => {
     if (longPressTimerRef.current) {
@@ -363,6 +381,30 @@ export function StoryViewerModal({
   // Başkasının hikayesinde mi?
   const isOwnStory = story?.user_id != null && currentUserId != null && story.user_id === currentUserId;
   const showReplyBar = !isOwnStory;
+
+  const openViewersList = useCallback(async () => {
+    if (!story) return;
+    setVideoPaused(true);
+    isPausedRef.current = true;
+    progressAnim.stopAnimation();
+    setViewersModalVisible(true);
+    setViewersLoading(true);
+    try {
+      const res = await getStoryViewers(story.id);
+      setViewers(res.items || []);
+    } catch (e) {
+      console.warn('Failed to load viewers', e);
+    } finally {
+      setViewersLoading(false);
+    }
+  }, [story, progressAnim]);
+
+  const closeViewersList = useCallback(() => {
+    setViewersModalVisible(false);
+    setVideoPaused(false);
+    isPausedRef.current = false;
+    resumeProgress();
+  }, [resumeProgress]);
 
   if (!story) return null;
 
@@ -573,7 +615,59 @@ export function StoryViewerModal({
             </View>
           </Animated.View>
         )}
+
+        {/* ── İzleyenler Butonu (Sadece Kendi Hikayesinde) ── */}
+        {isOwnStory && uiVisible && (
+          <Animated.View style={[styles.viewersBtnWrap, { bottom: Animated.add(Platform.OS === 'ios' ? 36 : 20, animKeyboard) }]} pointerEvents="box-none">
+            <TouchableOpacity style={styles.viewersBtn} onPress={openViewersList} activeOpacity={0.8}>
+              <IconSymbol name="eye" size={16} color="#fff" />
+              <Text style={styles.viewersBtnText}>
+                {t('story.viewers', { defaultValue: 'İzleyenleri Gör' })}
+              </Text>
+            </TouchableOpacity>
+          </Animated.View>
+        )}
       </Animated.View>
+
+      {/* ── Viewers List Modal ── */}
+      <Modal
+        visible={viewersModalVisible}
+        transparent
+        animationType="slide"
+        onRequestClose={closeViewersList}
+      >
+        <TouchableOpacity style={styles.viewersModalOverlay} activeOpacity={1} onPress={closeViewersList}>
+          <TouchableOpacity style={styles.viewersModalContent} activeOpacity={1}>
+            <View style={styles.viewersHeader}>
+              <Text style={styles.viewersTitle}>{t('story.viewers_title', { defaultValue: 'Görüntüleyenler' })}</Text>
+              <TouchableOpacity onPress={closeViewersList} style={styles.viewersCloseBtn}>
+                <IconSymbol name="xmark" size={20} color="#fff" />
+              </TouchableOpacity>
+            </View>
+            {viewersLoading ? (
+              <View style={styles.viewersLoading}>
+                <ActivityIndicator size="small" color="#fff" />
+              </View>
+            ) : viewers.length > 0 ? (
+              <ScrollView style={styles.viewersList} contentContainerStyle={{ paddingBottom: 40 }}>
+                {viewers.map((v, i) => (
+                  <View key={i} style={styles.viewerItem}>
+                    <Avatar source={v.user.avatar_url ? { uri: v.user.avatar_url } : undefined} name={v.user.first_name || v.user.username || 'U'} size={40} />
+                    <View style={styles.viewerInfo}>
+                      <Text style={styles.viewerName}>{v.user.first_name || v.user.username || 'U'}</Text>
+                      <Text style={styles.viewerTime}>{timeAgo(v.viewed_at)}</Text>
+                    </View>
+                  </View>
+                ))}
+              </ScrollView>
+            ) : (
+              <View style={styles.viewersEmpty}>
+                <Text style={styles.viewersEmptyText}>{t('story.no_viewers', { defaultValue: 'Henüz görüntüleyen yok' })}</Text>
+              </View>
+            )}
+          </TouchableOpacity>
+        </TouchableOpacity>
+      </Modal>
     </Modal>
   );
 }
@@ -765,5 +859,94 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: '#000',
     maxWidth: 200,
+  },
+  // Viewers Modal Styles
+  viewersBtnWrap: {
+    position: 'absolute',
+    left: 0,
+    right: 0,
+    alignItems: 'center',
+    zIndex: 3,
+  },
+  viewersBtn: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0,0,0,0.6)',
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+    borderRadius: 20,
+    gap: 8,
+  },
+  viewersBtnText: {
+    color: '#fff',
+    fontSize: 14,
+    fontWeight: '600',
+  },
+  viewersModalOverlay: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    backgroundColor: 'rgba(0,0,0,0.5)',
+  },
+  viewersModalContent: {
+    backgroundColor: '#1a1a1a',
+    borderTopLeftRadius: 16,
+    borderTopRightRadius: 16,
+    height: '60%',
+    paddingHorizontal: 16,
+    paddingTop: 16,
+  },
+  viewersHeader: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingBottom: 16,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: '#333',
+  },
+  viewersTitle: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '700',
+  },
+  viewersCloseBtn: {
+    padding: 4,
+  },
+  viewersLoading: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  viewersList: {
+    flex: 1,
+    paddingTop: 12,
+  },
+  viewerItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 10,
+    gap: 12,
+  },
+  viewerInfo: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  viewerName: {
+    color: '#fff',
+    fontSize: 15,
+    fontWeight: '600',
+    marginBottom: 2,
+  },
+  viewerTime: {
+    color: 'rgba(255,255,255,0.6)',
+    fontSize: 12,
+  },
+  viewersEmpty: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  viewersEmptyText: {
+    color: 'rgba(255,255,255,0.6)',
+    fontSize: 14,
   },
 });
