@@ -152,6 +152,7 @@ import glaneCoffee from '../assets/venues/glane-coffee.jpg'
 import jojoOcakbasiMeze from '../assets/venues/jojo-ocakbasi-meze.jpg'
 import kebapciMemet from '../assets/venues/kebapci-memet.jpg'
 import semtOcakbasi from '../assets/venues/semt-ocakbasi.jpg'
+import kardesPayiKahvalti from '../assets/venues/kardes-payi-kahvalti.jpg'
 
 export interface Venue {
   id: string
@@ -356,6 +357,7 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '994': jojoOcakbasiMeze,
   '997': kebapciMemet,
   '998': semtOcakbasi,
+  '1000': kardesPayiKahvalti,
 }
 
 export function getFallbackVenueImage(category: string): string {

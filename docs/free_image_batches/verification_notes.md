@@ -524,3 +524,7 @@ Rüya İstanbul, canlı ID 996, Çırağan Palace Kempinski Çırağan Cd. No:32
 Kebapçı Memet, canlı ID 997, Ortaköy Dereboyu Cd. No:149/A. Yandex görselinde KEBAPÇI MEMET tabelalı dış cephe ve işletme girişi net; kaynak başlığı aynı 149A adresini taşıyor, güçlü eşleşme.
 Semt Ocakbaşı, canlı ID 998, Sinanpaşa Alaybeyi Sk. No:18. Görselde SEMT tabelası ve işletme cephesi net ancak seçilen kaynakta No:18 adresi görünmüyor; adres doğrulaması tamamlanmadan kullanılmayacak.
 Semt Ocakbaşı, canlı ID 998, Sinanpaşa Alaybeyi Sk. No:18. Yandex/iyifirma/house kayıtları No:18 adresini doğruluyor; görselde SEMT tabelası ve cephe net, güçlü eşleşme.
+IST TOO, canlı ID 999, Sinanpaşa Hayrettin İskelesi Sk. No:1. Tripadvisor görselleri yüksek kaliteli iç mekânı gösteriyor ancak IST TOO adı/tabelası veya adres işareti görünmüyor; kullanılmayacak.
+Kardeş Payı Kahvaltı Cafe, canlı ID 1000, Sinanpaşa Çelebioğlu Sk. No:5. Görselde KARDES PAYI tabelalı dış cephe açıkça görülüyor; kaynak adresinin canlı No:5 ile eşleştirilmesi sonrası kullanılabilir.
+Siyah Cafe Kahvaltı, canlı ID 1002, Sinanpaşa Çelebioğlu Sk. Mete Apt No:31/2. Tripadvisor sonuçları ürün fotoğrafları ve tabelasız iç mekân; adres/cephe doğrulanmadı, kullanılmayacak.
+Kardeş Payı Kahvaltı Cafe, canlı ID 1000, Sinanpaşa Çelebioğlu Sokak No:5. Instagram, Yandex ve işletmenin resmî sayfası No:5/5A adresini doğruluyor; görselde KARDES PAYI tabelalı dış cephe net, güçlü eşleşme.
