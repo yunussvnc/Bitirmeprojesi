@@ -540,3 +540,11 @@ Bi Kahvaltı, canlı ID 1009, Sinanpaşa Ihlamurdere Cd. Çelebioğlu Sk. No:21�
 Bymuzaffer Beşiktaş, canlı ID 1010, Cihannüma Salihefendi Sk. No:2. Görselde by muzaffer Beşiktaş markası net ancak adres numarası görünmüyor; adres doğrulanmadan kullanılmayacak.
 Bi Kahvaltı, canlı ID 1009, Sinanpaşa Ihlamurdere Cd. Çelebioğlu Sk. No:21–23/B. Tripadvisor, Yandex, Waze ve Apple Maps aynı 21–23/B adresini doğruluyor; görselde bi kahvaltı tabelalı dış cephe net, güçlü eşleşme.
 Bymuzaffer Beşiktaş, canlı ID 1010, Cihannüma Salihefendi Sk. No:2. Kaynaklarda No:2/A, No:4A ve canlı kayıtta No:2 farklılıkları bulunuyor; görsel marka işareti taşısa da şube adresi kesinleşmediği için kullanılmayacak.
+İSKENDER Kuruluş 1867, canlı ID 1011, Sinanpaşa Süleyman Seba Cd. No:10. Arama görselleri aynı adrese yakın farklı/okunaksız cepheler gösteriyor; kesin İSKENDER tabelası ve giriş eşleşmesi bulunmadı, kullanılmayacak.
+HuQQa Kuruçeşme, canlı ID 1012, Kuruçeşme Muallim Naci Cd. No:56. Yandex görselinde HUQQA yapısı kısmen görülse de aynı cephede Qurabye tabelası baskın ve hedef işletme girişi net değil; yanlış eşleşme riskinden dolayı kullanılmayacak.
+Suk19 Kebap, canlı ID 1013, Sinanpaşa Şehit Asım Cd. No:37. Görselde SUK19 KEBAP tabelalı dış cephe açıkça görülüyor; kaynak adresi canlı No:37 ile ayrıca doğrulanacak.
+Atalay Kebap, canlı ID 1014, Türkali Mecit Ali Sk. 19/B. Arama görselleri farklı işletme/Oldest Restaurant veya tabelasız iç mekân gösteriyor; kullanılmayacak.
+MERCAN KEBAP BEŞİKTAŞ, canlı ID 1015, Vişnezade Şair Nedim Cd. 65/A. Görselde MERCAN KEBAP tabelalı dış cephe net; kaynak sonuçları aynı Şair Nedim Cd. 65–69 aralığını gösteriyor, canlı 65/A ile adres doğrulaması tamamlanınca değerlendirilecek.
+Beşiktaş Cağ Kebap, canlı ID 1016, Sinanpaşa Ortabahçe Cd. 21/A. Arama adayı “Gerçek Mucize” tabelalı farklı işletmeyi gösteriyor; kullanılmayacak.
+MERCAN KEBAP BEŞİKTAŞ, canlı ID 1015, Vişnezade Şair Nedim Cd. 65/A. Waze, Instagram, Bulurum ve Restoranim kayıtları aynı 65/A adresini doğruluyor; görselde MERCAN KEBAP tabelalı dış cephe net, güçlü eşleşme.
+Suk19 Kebap, canlı ID 1013, Sinanpaşa Şht. Asım Cd. No:37. Resmî Instagram/Facebook No:37 adresini doğrularken Yandex eski/alternatif Şehit Dursun Bakan Sk. 2A adresini gösteriyor; kaynak çelişkisi nedeniyle görsel projeye eklenmeyecek.
