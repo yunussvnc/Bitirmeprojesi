@@ -508,3 +508,6 @@ U/We Coffee Roasters, canlı ID 982, Yıldız Çırağan Cd. No:6/A. Yandex gör
 Espressolab Beşiktaş Meydan, canlı ID 983, Sinanpaşa Beşiktaş Cd. No:35. Espressolab tabelalı dış cephe görseli bulundu ancak incelenen sonuçta adres numarası görünmüyor; kaynak adresi ayrıca doğrulanmadan kullanılmayacak.
 Coffeemania Next Beşiktaş, canlı ID 984, Türkali Ihlamurdere Cd. No:34. Arama sonucu Ankara/Keçiören Gazze Cd. 21B adresli farklı şubeyi gösteriyor; kullanılmayacak.
 Espressolab Beşiktaş Meydan, canlı ID 983, Sinanpaşa Beşiktaş Cd. No:35. Espressolab'ın resmî mağaza sayfası aynı No:35 adresini doğruluyor; incelenen dış cephe fotoğrafında Espressolab tabelası net, güçlü eşleşme.
+8to Octo Coffee, canlı ID 985, Sinanpaşa Hattat Tahsin Sk. 39/D. Arama sonucu aynı 39D adresinde Tony's Cafe'yi gösteriyor; hedef 8to Octo ile uyuşmadığı için kullanılmayacak.
+Pogelo Coffee & More, canlı ID 986, Sinanpaşa Köyiçi Mektep Sk. Arama/Yandex kaydı aynı sokakta 8A adresini ve POGELO tabelalı dış cepheyi gösteriyor; güçlü eşleşme.
+Glane Coffee, canlı ID 987, Sinanpaşa Şehit Dursun Bakan Sk. No:18. Yandex sonucu aynı No:18 adresini ve GLANE tabelalı dış cepheyi gösteriyor; güçlü eşleşme.
