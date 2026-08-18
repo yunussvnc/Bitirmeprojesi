@@ -1,8 +1,8 @@
 // lib/api.ts
 
-import axios from 'axios';
+import axios, { AxiosError, InternalAxiosRequestConfig } from 'axios';
+import { API_BASE_URL } from './api-base';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'https://asemos-backend.onrender.com';
 const AI_BASE_URL = process.env.NEXT_PUBLIC_AI_URL || 'https://asemos-ai.onrender.com';
 
 export const api = axios.create({
@@ -20,7 +20,7 @@ export const aiApi = axios.create({
 });
 
 // Helper to attach authorization header
-const attachTokenInterceptor = (config: any) => {
+const attachTokenInterceptor = (config: InternalAxiosRequestConfig) => {
   if (typeof window !== 'undefined') {
     const token = localStorage.getItem('admin_token');
     if (token) {
@@ -34,7 +34,7 @@ api.interceptors.request.use(attachTokenInterceptor);
 aiApi.interceptors.request.use(attachTokenInterceptor);
 
 // Helper to handle unauthorized responses
-const handleUnauthorizedInterceptor = (error: any) => {
+const handleUnauthorizedInterceptor = (error: AxiosError) => {
   if (error.response?.status === 401) {
     if (typeof window !== 'undefined') {
       localStorage.removeItem('admin_token');
