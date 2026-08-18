@@ -166,6 +166,8 @@ import citirOcakbasiGayrettepe from '../assets/venues/citir-ocakbasi-gayrettepe.
 import durumcuEniste from '../assets/venues/durumcu-eniste.jpg'
 import eldeBorek from '../assets/venues/elde-borek.jpg'
 import yallaFalafel from '../assets/venues/yalla-falafel.jpg'
+import renkliLimon from '../assets/venues/renkli-limon.jpg'
+import cakmakKahvaltiSalonu from '../assets/venues/cakmak-kahvalti-salonu.jpg'
 
 export interface Venue {
   id: string
@@ -384,6 +386,8 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '1029': durumcuEniste,
   '1031': eldeBorek,
   '1032': yallaFalafel,
+  '1033': renkliLimon,
+  '1035': cakmakKahvaltiSalonu,
 }
 
 export function getFallbackVenueImage(category: string): string {

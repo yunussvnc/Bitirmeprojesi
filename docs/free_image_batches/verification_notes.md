@@ -564,3 +564,8 @@ Dürümcü Enişte, canlı ID 1029, Mecidiye Teyyareci Fevzi Sk. Arama/Yandex ka
 TABLACI SOKAK LEZZETLERİ ARNAVUTKÖY, canlı ID 1030, Arnavutköy Beyazgül Sk. No:8. Arama sonuçlarında yalnızca TABLACI logosu ve ürün/marka görseli bulundu; dış cephe ve adres numarası doğrulanmadı, kullanılmayacak.
 Elde Börek, canlı ID 1031, Sinanpaşa Ihlamurdere Cd. 23/A. Yandex görselinde ELDE BÖREK tabelası ve kapıdaki 23/A numarası açıkça görülüyor; güçlü eşleşme.
 YALLA FALAFEL, canlı ID 1032, Cihannüma Serencebey Yokuşu Fırat İş Merkezi No:1/B. Tripadvisor, Corner, Culinary Backstreets ve HappyCow aynı No:1/B adresini doğruluyor; görselde YALLA FALAFEL tabelalı dış cephe net. Yandex’teki Eskiyıldız Cd. 2A kaydı farklı/alternatif adres olarak görünüyor; hedef canlı adresi için daha doğrudan kaynaklar esas alındı, güçlü eşleşme.
+Batch 014 taraması başladı.
+Renkli Limon, canlı ID 1033, Sinanpaşa Ihlamurdere Cd. Alaybeyi Sk. No:20. Görselde RENKLİ LİMON yazısı ve mekan cephesi net; kaynak başlığı aynı Alaybeyi Sokak No:20 adresini taşıyor, güçlü eşleşme.
+Feriye, canlı ID 1034, Yıldız Çırağan Cd. No:44. Feriye Palace fotoğrafı doğru tesis binasını gösterse de FERIYE tabelası veya No:44 işareti görünmüyor; kullanıcı kuralı nedeniyle kullanılmayacak.
+Çakmak Kahvaltı Salonu, canlı ID 1035, Sinanpaşa Çelebioğlu Sk. No:6. Arama görsellerinde tabelalı dış cephe adayı bulundu; kaynak adresi doğrulandıktan sonra değerlendirilecek.
+Çakmak Kahvaltı Salonu, canlı ID 1035, Sinanpaşa Çelebioğlu Sk. No:6. Culinary Backstreets, Corner ve Wanderlog aynı No:6 adresini doğruluyor; Tripadvisor/Yelp’te No:8 gibi alternatif kayıtlar ve Yandex’te hatalı No:68/A bulunuyor. Canlı kayda doğrudan uyan kaynaklar ve tabelalı dış cephe görseli nedeniyle kabul edildi.
