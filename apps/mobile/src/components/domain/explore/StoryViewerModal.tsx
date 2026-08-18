@@ -11,25 +11,27 @@ import {
   Pressable,
   TouchableOpacity,
   StyleSheet,
-  Dimensions,
   Platform,
   Animated,
   PanResponder,
   TextInput,
   ActivityIndicator,
   Keyboard,
+  useWindowDimensions,
 } from 'react-native';
 import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
 import { Image } from 'expo-image';
 import Video from 'react-native-video';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
+import { Avatar } from '@/src/components/ui/Avatar';
 import { lightImpact, success } from '@/src/utils/haptics';
 import type { Story } from '@/src/services/storyService';
-import { replyToStory, reactToStory, updateStoryViewAnalytics, STORY_EMOJIS, type StoryEmoji } from '@/src/services/storyService';
+import { replyToStory, reactToStory, updateStoryViewAnalytics, recordStoryView, STORY_EMOJIS, type StoryEmoji } from '@/src/services/storyService';
 import { router } from 'expo-router';
 
-const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 const STORY_DURATION_MS = 5000;
+const LONG_PRESS_DELAY = 200;
+const TOP_INSET = Platform.OS === 'ios' ? 54 : 40;
 
 import { timeAgo } from '@/src/utils/timeAgo';
 import { useTranslation } from 'react-i18next';
@@ -56,12 +58,19 @@ export function StoryViewerModal({
   onPlaceNavigate,
   currentUserId,
 }: StoryViewerModalProps) {
+  const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = useWindowDimensions();
   const [index, setIndex] = useState(initialIndex);
   const [replyText, setReplyText] = useState('');
   const [replySending, setReplySending] = useState(false);
   const [showEmojiTray, setShowEmojiTray] = useState(false);
   const [myReaction, setMyReaction] = useState<string | null>(null);
   const [reactionSending, setReactionSending] = useState(false);
+  const [uiVisible, setUiVisible] = useState(true);
+  const [videoPaused, setVideoPaused] = useState(false); // Fix #2: ayrı state for Video pause
+  const isPausedRef = useRef(false);
+  const progressValueRef = useRef(0);
+  const longPressTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const keyboardVisibleRef = useRef(false);
   const openedAtRef = useRef<number>(Date.now());
   const progressAnim = useRef(new Animated.Value(0)).current;
   const { t } = useTranslation();
@@ -78,22 +87,46 @@ export function StoryViewerModal({
     setMyReaction(s?.my_reaction ?? null);
     openedAtRef.current = Date.now();
   }, [index, stories]);
-  const timerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+
   const dragY = useRef(new Animated.Value(0)).current;
   const animKeyboard = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
+    progressAnim.addListener(({ value }) => {
+      progressValueRef.current = value;
+    });
+    return () => progressAnim.removeAllListeners();
+  }, [progressAnim]);
+
+  // Fix #4: Keyboard açılınca hikaye progress durdur
+  useEffect(() => {
     const showSub = Keyboard.addListener(Platform.OS === 'ios' ? 'keyboardWillShow' : 'keyboardDidShow', (e) => {
+      keyboardVisibleRef.current = true;
       Animated.timing(animKeyboard, { toValue: e.endCoordinates.height, duration: 250, useNativeDriver: false }).start();
+      // Keyboard açılınca progress durdur
+      isPausedRef.current = true;
+      setVideoPaused(true);
+      if (isImageRef.current) {
+        progressAnim.stopAnimation();
+      }
     });
     const hideSub = Keyboard.addListener(Platform.OS === 'ios' ? 'keyboardWillHide' : 'keyboardDidHide', () => {
+      keyboardVisibleRef.current = false;
       Animated.timing(animKeyboard, { toValue: 0, duration: 250, useNativeDriver: false }).start();
+      // Keyboard kapanınca progress devam
+      isPausedRef.current = false;
+      setVideoPaused(false);
+      if (isImageRef.current) {
+        startProgressFromCurrent();
+      }
     });
     return () => { showSub.remove(); hideSub.remove(); };
-  }, [animKeyboard]);
+  }, [animKeyboard, progressAnim]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const story = stories[index];
   const isImage = story?.media_type !== 'video';
+  const isImageRef = useRef(isImage);
+  isImageRef.current = isImage;
 
   const goNext = useCallback(() => {
     if (index < stories.length - 1) {
@@ -112,7 +145,11 @@ export function StoryViewerModal({
   }, [index, onClose]);
 
   useEffect(() => {
-    if (story) onStoryViewed?.(story.id);
+    if (story) {
+      onStoryViewed?.(story.id);
+      // Backend'e görüntüleme kaydı gönder
+      recordStoryView(story.id, 'feed').catch(() => {});
+    }
   }, [index, story?.id]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Analitik: hikayeyi kapat veya bir sonrakine geçerken izleme süresini gönder
@@ -127,49 +164,110 @@ export function StoryViewerModal({
     }).catch(() => {});
   }, [stories, index]);
 
+  // İmage progress: zamana dayalı animasyon
+  const startProgress = useCallback((fromValue = 0) => {
+    if (!isImage) return;
+    const remainingDuration = STORY_DURATION_MS * (1 - fromValue);
+    progressAnim.setValue(fromValue);
+    Animated.timing(progressAnim, {
+      toValue: 1,
+      duration: remainingDuration,
+      useNativeDriver: false,
+    }).start(({ finished }) => {
+      if (finished && visible && !isPausedRef.current) {
+        goNext();
+      }
+    });
+  }, [isImage, progressAnim, visible, goNext]);
+
+  // Resume helper (keyboard hide'dan erişilebilmeli)
+  const startProgressFromCurrent = useCallback(() => {
+    startProgress(progressValueRef.current);
+  }, [startProgress]);
+
+  // Image hikaye: progress başlat
   useEffect(() => {
     if (!story || !isImage || !visible) return;
-    progressAnim.setValue(0);
-    const anim = Animated.timing(progressAnim, {
-      toValue: 1,
-      duration: STORY_DURATION_MS,
-      useNativeDriver: false,
-    });
-    anim.start();
-    timerRef.current = setTimeout(goNext, STORY_DURATION_MS);
+    progressValueRef.current = 0;
+    startProgress(0);
     return () => {
-      anim.stop();
-      if (timerRef.current) clearTimeout(timerRef.current);
+      progressAnim.stopAnimation();
     };
-  }, [index, story?.id, isImage, visible, goNext, progressAnim]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [index, story?.id, isImage, visible, startProgress, progressAnim]);
 
+  // Video hikaye: progress sıfırla (onProgress callback ile dolacak)
   useEffect(() => {
-    if (!isImage) progressAnim.setValue(0);
+    if (!isImage) {
+      progressAnim.stopAnimation();
+      progressAnim.setValue(0);
+      progressValueRef.current = 0;
+    }
   }, [index, isImage, progressAnim]);
 
   useEffect(() => {
     if (!visible) dragY.setValue(0);
   }, [visible, dragY]);
 
+  // Fix #1: Video progress — react-native-video onProgress callback
+  const handleVideoProgress = useCallback(({ currentTime, seekableDuration }: { currentTime: number; seekableDuration: number }) => {
+    if (seekableDuration > 0) {
+      const fraction = currentTime / seekableDuration;
+      progressAnim.setValue(fraction);
+      progressValueRef.current = fraction;
+    }
+  }, [progressAnim]);
+
   const handleVideoEnd = useCallback(() => {
-    goNext();
+    if (!isPausedRef.current) {
+      goNext();
+    }
   }, [goNext]);
 
-  const closeWithReset = useCallback(() => {
-    sendAnalytics();
-    dragY.setValue(0);
-    onClose();
-  }, [dragY, onClose, sendAnalytics]);
+  const handlePressIn = useCallback(() => {
+    longPressTimerRef.current = setTimeout(() => {
+      isPausedRef.current = true;
+      setVideoPaused(true); // Fix #2
+      if (isImage) {
+        progressAnim.stopAnimation();
+      }
+      setUiVisible(false);
+    }, LONG_PRESS_DELAY);
+  }, [isImage, progressAnim]);
 
+  const handlePressOut = useCallback(() => {
+    if (longPressTimerRef.current) {
+      clearTimeout(longPressTimerRef.current);
+      longPressTimerRef.current = null;
+    }
+    if (isPausedRef.current) {
+      isPausedRef.current = false;
+      setVideoPaused(false); // Fix #2
+      setUiVisible(true);
+      if (isImage) {
+        startProgress(progressValueRef.current);
+      }
+    }
+  }, [isImage, startProgress]);
+
+  // Fix #3: animateClose artık analitik gönderiyor
   const animateClose = useCallback(() => {
+    sendAnalytics();
     Animated.timing(dragY, {
       toValue: SCREEN_HEIGHT,
       duration: 180,
       useNativeDriver: true,
     }).start(() => {
+      dragY.setValue(0);
       onClose();
     });
-  }, [dragY, onClose]);
+  }, [dragY, onClose, sendAnalytics, SCREEN_HEIGHT]);
+
+  // Fix #7: Swipe-down sırasında arka plan şeffaflaşması
+  const overlayOpacity = dragY.interpolate({
+    inputRange: [0, SCREEN_HEIGHT * 0.4],
+    outputRange: [1, 0.3],
+    extrapolate: 'clamp',
+  });
 
   const panResponder = useMemo(
     () =>
@@ -199,7 +297,7 @@ export function StoryViewerModal({
           }).start();
         },
       }),
-    [dragY, closeWithReset]
+    [dragY, animateClose]
   );
 
   const handleAuthorPress = useCallback(() => {
@@ -276,10 +374,11 @@ export function StoryViewerModal({
       onRequestClose={onClose}
       statusBarTranslucent
     >
-      <View style={{ flex: 1 }}>
+      {/* Fix #7: Swipe-down sırasında arka planın şeffaflaşması */}
+      <Animated.View style={[{ flex: 1, backgroundColor: '#000' }, { opacity: overlayOpacity }]} />
       <Animated.View
         style={[
-          styles.overlay,
+          StyleSheet.absoluteFillObject,
           {
             transform: [{ translateY: dragY }],
           },
@@ -289,34 +388,28 @@ export function StoryViewerModal({
         {story.media_type === 'video' ? (
           <Video
             source={{ uri: story.media_url }}
-            style={styles.media}
+            style={{ width: SCREEN_WIDTH, height: SCREEN_HEIGHT }}
             resizeMode="contain"
-            paused={!visible}
+            paused={!visible || videoPaused}
             repeat={false}
+            onProgress={handleVideoProgress}
             onEnd={handleVideoEnd}
           />
         ) : (
           <Image
             source={{ uri: story.media_url }}
-            style={styles.media}
+            style={{ width: SCREEN_WIDTH, height: SCREEN_HEIGHT }}
             contentFit="contain"
           />
         )}
 
         <View style={styles.tapZones} pointerEvents="box-none">
-          <Pressable style={styles.tapLeft} onPress={goPrev} />
-          <Pressable style={styles.tapRight} onPress={goNext} />
+          <Pressable style={styles.tapLeft} onPress={goPrev} onPressIn={handlePressIn} onPressOut={handlePressOut} />
+          <Pressable style={styles.tapRight} onPress={goNext} onPressIn={handlePressIn} onPressOut={handlePressOut} />
         </View>
 
-        <TouchableOpacity
-          style={[styles.closeBtn, { backgroundColor: 'rgba(0,0,0,0.4)' }]}
-          onPress={onClose}
-          activeOpacity={0.7}
-        >
-          <IconSymbol name="xmark" size={22} color="#fff" />
-        </TouchableOpacity>
-
-        {stories.length > 1 && (
+        {/* ── Progress Bar (her zaman en üstte) ── */}
+        {uiVisible && (
           <View style={styles.progressRow}>
             {stories.map((_, i) => {
               const isCompleted = i < index;
@@ -346,52 +439,64 @@ export function StoryViewerModal({
           </View>
         )}
 
-        <View style={[styles.authorBar, { backgroundColor: 'rgba(0,0,0,0.4)' }]}>
-          {onAuthorNavigate ? (
-            <TouchableOpacity onPress={handleAuthorPress} activeOpacity={0.7}>
-              <IconSymbol name="person.circle.fill" size={20} color="#fff" />
-            </TouchableOpacity>
-          ) : (
-            <IconSymbol name="person.circle.fill" size={20} color="#fff" />
-          )}
-          <View style={styles.authorText}>
+        {/* Fix #5: Author bar üstte (Instagram tarzı) — progress bar'ın hemen altında */}
+        {uiVisible && (
+          <View style={styles.authorBar}>
             {onAuthorNavigate ? (
               <TouchableOpacity onPress={handleAuthorPress} activeOpacity={0.7}>
+                <Avatar source={story.author?.avatar_url ? { uri: story.author.avatar_url } : undefined} name={story.author?.first_name || story.author?.username || t('profile.user')} size={36} />
+              </TouchableOpacity>
+            ) : (
+              <Avatar source={story.author?.avatar_url ? { uri: story.author.avatar_url } : undefined} name={story.author?.first_name || story.author?.username || t('profile.user')} size={36} />
+            )}
+            <View style={styles.authorText}>
+              {onAuthorNavigate ? (
+                <TouchableOpacity onPress={handleAuthorPress} activeOpacity={0.7}>
+                  <View style={styles.authorNameRow}>
+                    <Text style={styles.authorName}>
+                      {story.author?.first_name || story.author?.username || t('profile.user')}
+                    </Text>
+                    <Text style={styles.timeAgo}>{timeAgo(story.created_at)}</Text>
+                  </View>
+                </TouchableOpacity>
+              ) : (
                 <View style={styles.authorNameRow}>
                   <Text style={styles.authorName}>
                     {story.author?.first_name || story.author?.username || t('profile.user')}
                   </Text>
                   <Text style={styles.timeAgo}>{timeAgo(story.created_at)}</Text>
                 </View>
-              </TouchableOpacity>
-            ) : (
-              <View style={styles.authorNameRow}>
-                <Text style={styles.authorName}>
-                  {story.author?.first_name || story.author?.username || t('profile.user')}
-                </Text>
-                <Text style={styles.timeAgo}>{timeAgo(story.created_at)}</Text>
-              </View>
-            )}
-            {story.place && (
-              onPlaceNavigate ? (
-                <TouchableOpacity onPress={handlePlacePress} activeOpacity={0.7}>
+              )}
+              {story.place && (
+                onPlaceNavigate ? (
+                  <TouchableOpacity onPress={handlePlacePress} activeOpacity={0.7}>
+                    <View style={styles.placeRow}>
+                      <IconSymbol name="mappin" size={11} color="rgba(255,255,255,0.8)" />
+                      <Text style={styles.placeName}>{story.place.name}</Text>
+                    </View>
+                  </TouchableOpacity>
+                ) : (
                   <View style={styles.placeRow}>
                     <IconSymbol name="mappin" size={11} color="rgba(255,255,255,0.8)" />
                     <Text style={styles.placeName}>{story.place.name}</Text>
                   </View>
-                </TouchableOpacity>
-              ) : (
-                <View style={styles.placeRow}>
-                  <IconSymbol name="mappin" size={11} color="rgba(255,255,255,0.8)" />
-                  <Text style={styles.placeName}>{story.place.name}</Text>
-                </View>
-              )
-            )}
+                )
+              )}
+            </View>
+
+            {/* Fix #6: Close butonu — author bar'ın sağ tarafında */}
+            <TouchableOpacity
+              style={styles.closeBtn}
+              onPress={onClose}
+              activeOpacity={0.7}
+            >
+              <IconSymbol name="xmark" size={20} color="#fff" />
+            </TouchableOpacity>
           </View>
-        </View>
+        )}
 
         {/* ── Link Sticker (varsa) ── */}
-        {story.link_type && story.link_id && (
+        {story.link_type && story.link_id && uiVisible && (
           <TouchableOpacity
             style={styles.linkSticker}
             onPress={handleLinkSticker}
@@ -405,7 +510,7 @@ export function StoryViewerModal({
         )}
 
         {/* ── Yanıt Kutusu + Emoji Tray (sadece başkasının hikayesinde) ── */}
-        {showReplyBar && (
+        {showReplyBar && uiVisible && (
           <Animated.View style={[styles.replyBar, { bottom: Animated.add(Platform.OS === 'ios' ? 36 : 20, animKeyboard) }]} pointerEvents="box-none">
             {/* Emoji Tepki Tray */}
             {showEmojiTray && (
@@ -469,16 +574,11 @@ export function StoryViewerModal({
           </Animated.View>
         )}
       </Animated.View>
-      </View>
     </Modal>
   );
 }
 
 const styles = StyleSheet.create({
-  overlay: {
-    flex: 1,
-    backgroundColor: '#000',
-  },
   tapZones: {
     ...StyleSheet.absoluteFillObject,
     flexDirection: 'row',
@@ -490,32 +590,28 @@ const styles = StyleSheet.create({
   tapRight: {
     flex: 1,
   },
-  closeBtn: {
-    position: 'absolute',
-    top: Platform.OS === 'ios' ? 54 : 40,
-    right: 16,
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    alignItems: 'center',
-    justifyContent: 'center',
-    zIndex: 10,
-  },
-  media: {
-    width: SCREEN_WIDTH,
-    height: SCREEN_HEIGHT,
-  },
+  // Fix #5: Author bar artık üstte, progress bar'ın hemen altında
   authorBar: {
     position: 'absolute',
-    bottom: 120,
-    left: 16,
-    right: 16,
+    top: TOP_INSET + 14,
+    left: 12,
+    right: 12,
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 12,
+    paddingVertical: 6,
+    paddingHorizontal: 8,
     borderRadius: 12,
     gap: 10,
     zIndex: 10,
+  },
+  // Fix #6: Close butonu — author bar sağ kenarında
+  closeBtn: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    backgroundColor: 'rgba(0,0,0,0.4)',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   authorText: { flex: 1 },
   authorNameRow: {
@@ -524,8 +620,8 @@ const styles = StyleSheet.create({
     gap: 8,
   },
   authorName: {
-    fontSize: 15,
-    fontWeight: '600',
+    fontSize: 14,
+    fontWeight: '700',
     color: '#fff',
   },
   timeAgo: {
@@ -536,7 +632,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 4,
-    marginTop: 4,
+    marginTop: 2,
   },
   placeName: {
     fontSize: 12,
@@ -544,16 +640,16 @@ const styles = StyleSheet.create({
   },
   progressRow: {
     position: 'absolute',
-    top: Platform.OS === 'ios' ? 54 : 40,
+    top: TOP_INSET,
     left: 12,
     right: 12,
     flexDirection: 'row',
-    gap: 4,
-    zIndex: 5,
+    gap: 3,
+    zIndex: 15,
   },
   progressSegment: {
-    height: 3,
-    borderRadius: 2,
+    height: 2.5,
+    borderRadius: 1.5,
     overflow: 'hidden',
   },
   progressBg: {

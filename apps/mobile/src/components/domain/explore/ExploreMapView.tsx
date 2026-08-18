@@ -326,7 +326,6 @@ export function ExploreMapView({ places, loading, onLoadPlaces }: ExploreMapView
           }
         }}
         onPress={(event) => {
-          console.log('[DEBUG] Map onPress fired. markerPressRef:', markerPressRef.current);
           if (markerPressRef.current) return;
           setSelectedPlace(null);
           setShowResults(false);
@@ -378,20 +377,16 @@ export function ExploreMapView({ places, loading, onLoadPlaces }: ExploreMapView
                         lng: coords[0]
                       }
                     });
-                  } catch (e) {
-                    console.log('[DEBUG] Error navigating to cluster list:', e);
+                  } catch {
                   }
                 }
               }
               return;
             }
 
-            console.log('[DEBUG] Found feature id:', feature?.properties?.id);
-
             if (feature?.properties?.id) {
               const fullPlace = places.find((p) => String(p.id) === String(feature.properties.id));
               if (fullPlace) {
-                console.log('[DEBUG] Executing handleSelectPlace for', fullPlace.name);
                 // Haritada tıklandı etkileşimini arka planda kaydet (Weight 2)
                 logInteraction(fullPlace.id, 'MAP_CLICK', 2).catch(() => {});
                 handleSelectPlace(fullPlace);

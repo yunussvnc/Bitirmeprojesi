@@ -114,7 +114,7 @@ export function ARView({ places, userLocation, onClose, onPlaceSelect }: ARViewP
     Magnetometer.setUpdateInterval(50);
     Accelerometer.setUpdateInterval(50);
 
-    magSubscription = Magnetometer.addListener((data) => {
+    magSubscription = Magnetometer.addListener((data: { x: number; y: number; z: number }) => {
       // Calculate heading from x, y
       let angle = Math.atan2(data.y, data.x) * (180 / Math.PI);
       
@@ -124,7 +124,7 @@ export function ARView({ places, userLocation, onClose, onPlaceSelect }: ARViewP
       setHeading(angle);
     });
 
-    accSubscription = Accelerometer.addListener((data) => {
+    accSubscription = Accelerometer.addListener((data: { x: number; y: number; z: number }) => {
       // Very basic pitch calculation (0 is flat, 90 is upright)
       // data.y is roughly 1 when upright in portrait, 0 when flat
       const p = Math.atan2(data.y, data.z) * (180 / Math.PI);

@@ -26,7 +26,7 @@ import { router } from "expo-router";
 import { useTheme } from "@/src/hooks/useTheme";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { createTextStyle, spacing } from "@/src/constants/design";
-import { getComments, addComment, type PostComment } from "@/src/services/feedService";
+import { getComments, addComment, toggleCommentLike, type PostComment } from "@/src/services/feedService";
 import { handleApiError } from "@/src/utils/errorHandler";
 import { lightImpact, success } from "@/src/utils/haptics";
 import { timeAgo } from "@/src/utils/timeAgo";
@@ -256,9 +256,7 @@ export function CommentBottomSheet({ visible, onClose, postId, onCommentAdded }:
         : c
     ));
     try {
-      // Import toggleCommentLike from feedService if we have it, else use mock.
-      // Here we assume it's just a mock update.
-      // await toggleCommentLike(comment.id);
+      await toggleCommentLike(postId, comment.id);
     } catch {
       // Revert on error
       setComments((prev) => prev.map((c) =>
@@ -267,7 +265,7 @@ export function CommentBottomSheet({ visible, onClose, postId, onCommentAdded }:
           : c
       ));
     }
-  }, []);
+  }, [postId]);
 
   const renderItem = ({ item }: { item: PostComment }) => {
     const isOwn = currentUser?.id === item.user_id;

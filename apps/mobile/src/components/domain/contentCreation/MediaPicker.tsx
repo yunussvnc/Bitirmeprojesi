@@ -16,6 +16,7 @@ import {
   Dimensions,
   StatusBar,
 } from 'react-native';
+import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 import { Image as ExpoImage } from 'expo-image';
 import Video from 'react-native-video';
 import * as MediaLibrary from 'expo-media-library';
@@ -333,7 +334,7 @@ export function MediaPicker({
           {mode === 'camera' && (
             <TouchableOpacity
               style={styles.floatingIconBtn}
-              onPress={() => { lightImpact(); }}
+              onPress={() => { lightImpact(); Alert.alert('Yakında', 'Efekt ve filtre özelliği yakında aktif olacaktır.'); }}
               activeOpacity={0.7}
             >
               <IconSymbol name="sparkles" size={18} color="#fff" />

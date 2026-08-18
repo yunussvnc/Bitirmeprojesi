@@ -196,6 +196,18 @@ export function FeedStoriesRow({ filter }: FeedStoriesRowProps) {
     <>
       <View style={[styles.wrap, { borderBottomColor: colors.surface.border }]}>
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.row}>
+          {/* Hikaye Ekle butonu */}
+          <TouchableOpacity style={styles.ringWrap} onPress={() => { lightImpact(); router.push('/create-story' as any); }} activeOpacity={0.8}>
+            <View style={[styles.addRing, { borderColor: colors.surface.border, backgroundColor: colors.background.secondary }]}>
+              <View style={[styles.addIconWrap, { backgroundColor: colors.accent.primary }]}>
+                <IconSymbol name="plus" size={18} color="#fff" />
+              </View>
+            </View>
+            <Text style={[styles.placeLabel, { color: colors.text.secondary }]} numberOfLines={1}>
+              {t('feed.add_story', { defaultValue: 'Hikaye Ekle' })}
+            </Text>
+          </TouchableOpacity>
+
           {sortedGroups.map((g, idx) => {
             const seen = viewedGroupKeys.includes(g.groupKey);
             return (
@@ -318,6 +330,21 @@ const styles = StyleSheet.create({
     fontSize: 11,
     maxWidth: STORY_RING_SIZE + 20,
     textAlign: "center",
+  },
+  addRing: {
+    width: STORY_RING_SIZE + 3,
+    height: STORY_RING_SIZE + 3,
+    borderRadius: (STORY_RING_SIZE + 3) / 2,
+    borderWidth: 1.5,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  addIconWrap: {
+    width: 28,
+    height: 28,
+    borderRadius: 14,
+    alignItems: "center",
+    justifyContent: "center",
   },
   loadingOverlay: {
     backgroundColor: "rgba(0,0,0,0.5)",

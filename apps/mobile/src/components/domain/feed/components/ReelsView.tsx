@@ -13,6 +13,7 @@ import {
   RefreshControl,
   ViewToken,
   Platform,
+  Share,
 } from "react-native";
 import { FlashList } from "@shopify/flash-list";
 import Video, { VideoRef } from "react-native-video";
@@ -132,7 +133,11 @@ function ReelCell({
           <IconSymbol name="bubble.right" size={28} color={colors.semantic.onDarkBackground} />
           <Text style={[styles.actionLabel, { color: colors.semantic.onDarkBackground }]}>{post.comment_count}</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.actionItem} onPress={() => lightImpact()} activeOpacity={0.7}>
+        <TouchableOpacity style={styles.actionItem} onPress={async () => {
+          lightImpact();
+          const label = post.author?.username || post.author?.first_name || 'gönderi';
+          try { await Share.share({ message: `${label} paylaşımına göz at!` }); } catch {}
+        }} activeOpacity={0.7}>
           <IconSymbol name="paperplane" size={26} color={colors.semantic.onDarkBackground} />
         </TouchableOpacity>
         {post.place_id && (

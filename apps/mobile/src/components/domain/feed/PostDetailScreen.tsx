@@ -11,6 +11,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   ActivityIndicator,
+  Share,
 } from "react-native";
 import { FlatList } from "react-native-gesture-handler";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -46,6 +47,8 @@ export default function PostDetailScreen() {
 
   const flatListRef = useRef<FlatList>(null);
   const deletedPostIds = useAppStore((s) => s.deletedPostIds);
+  const toggleSavePost = useAppStore((s) => s.toggleSavePost);
+  const isPostSaved = useAppStore((s) => s.isPostSaved);
   const visiblePosts = React.useMemo(() => posts.filter((p) => !deletedPostIds.includes(p.id)), [posts, deletedPostIds]);
 
   const initialIndex = React.useMemo(() => {
@@ -226,10 +229,22 @@ export default function PostDetailScreen() {
             <View style={{ marginBottom: 16 }}>
               <FeedCard
                 post={item}
+                isSaved={isPostSaved(item.id)}
+                onSave={() => {
+                  const wasSaved = isPostSaved(item.id);
+                  toggleSavePost(item);
+                  lightImpact();
+                }}
                 onLike={() => handleLike(item)}
                 onComment={() => {
                   setCommentPostId(item.id);
                   setCommentOpen(true);
+                }}
+                onShare={async () => {
+                  try {
+                    const label = item.place?.name || item.author?.username || item.author?.first_name || 'gönderi';
+                    await Share.share({ message: `${label} paylaşımına göz at!` });
+                  } catch {}
                 }}
                 onOptionsPress={() => {
                   if (isOwnPost) {

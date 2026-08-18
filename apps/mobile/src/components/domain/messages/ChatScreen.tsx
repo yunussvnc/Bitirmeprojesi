@@ -275,21 +275,18 @@ export default function ChatScreen() {
         const ws = new WebSocket(wsUrl);
 
         ws.onopen = () => {
-            console.log(`✅ Chat WS connected to: ${wsUrl}`);
         };
 
         ws.onerror = (e) => {
             console.warn(`❌ Chat WS error:`, e);
         };
 
-        ws.onclose = (e) => {
-            console.log(`🔌 Chat WS closed. Code: ${e.code}, Reason: ${e.reason}`);
+        ws.onclose = () => {
         };
 
         ws.onmessage = (event) => {
             try {
                 const data = JSON.parse(event.data);
-                console.log(`📬 Chat WS message received:`, data.type);
 
                 if (data.type === 'message:status') {
                     // Karşı taraf mesajları okudu → anlık olarak status'ü "read" yap

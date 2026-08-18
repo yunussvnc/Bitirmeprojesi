@@ -467,7 +467,7 @@ function PostShareStep({
             )}
 
             {/* Music */}
-            <TouchableOpacity style={[styles.actionRow, { borderBottomColor: colors.surface.border }]} onPress={() => lightImpact()} activeOpacity={0.7}>
+            <TouchableOpacity style={[styles.actionRow, { borderBottomColor: colors.surface.border }]} onPress={() => { lightImpact(); Alert.alert(t("content_creation.coming_soon", "Yakında"), t("content_creation.music_coming_soon", "Müzik ekleme özelliği yakında aktif olacaktır.")); }} activeOpacity={0.7}>
               <View style={styles.actionIconWrap}>
                 <IconSymbol name="music.note" size={22} color={colors.text.secondary} />
               </View>
