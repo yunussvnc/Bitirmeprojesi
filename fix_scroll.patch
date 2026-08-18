@@ -1,0 +1,10 @@
+--- apps/mobile/src/components/domain/place/PlaceCard.tsx
++++ apps/mobile/src/components/domain/place/PlaceCard.tsx
+@@ -311,6 +311,7 @@
+     letterSpacing: 0.2,
+   },
+   content: {
++    height: 145,
+     paddingVertical: 14,
+     paddingHorizontal: 14,
+   },

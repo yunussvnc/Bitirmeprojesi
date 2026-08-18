@@ -13,8 +13,8 @@ run: clean db ai-db
 	@echo "================================================================="
 
 # Backend ve AI-LLM'i aynı terminalde birleştirir (Mobile hariç)
-run-services:
-	npx concurrently -n "BACKEND,AI-LLM" -c "bgBlue.bold,bgMagenta.bold" \
+run-services: stop
+	npx -y concurrently -n "BACKEND,AI-LLM" -c "bgBlue.bold,bgMagenta.bold" \
 		"make run-backend" \
 		"make run-ai"
 
@@ -57,9 +57,11 @@ install:
 # Arka planda takılı kalan portları temizlemek için yardımcı komut
 stop:
 	@echo "Açık olan Uvicorn ve Expo servisleri zorla durduruluyor..."
-	-pkill -f "uvicorn main:app"
-	-pkill -f "uvicorn src.main:app"
-	-pkill -f "expo start"
+	-lsof -ti :8000 | xargs kill -9 2>/dev/null || true
+	-lsof -ti :8001 | xargs kill -9 2>/dev/null || true
+	-pkill -f "uvicorn main:app" || true
+	-pkill -f "uvicorn src.main:app" || true
+	-pkill -f "expo start" || true
 
 # Her şeyi sıfırlamak için (Veritabanları, arka plan servisleri ve kalıntılar)
 clean: stop

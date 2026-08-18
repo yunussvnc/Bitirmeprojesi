@@ -6,7 +6,11 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test:api-base": "node --experimental-strip-types --test tests/api-base.test.ts",
+    "test:auth-security": "node --experimental-strip-types --test tests/auth-security.test.ts",
+    "test:bff-path": "node --experimental-strip-types --test tests/bff-path.test.ts",
+    "smoke:api-contract": "node scripts/smoke-api-contract.mjs"
   },
   "dependencies": {
     "@base-ui/react": "^1.5.0",

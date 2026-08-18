@@ -11,13 +11,23 @@ import {
 import { Camera, useCameraDevice, useCameraPermission } from 'react-native-vision-camera';
 // import { Magnetometer, Accelerometer } from 'expo-sensors';
 // Geçici olarak expo-sensors'ü mock'luyoruz (Expo Go veya Pedometer hatası veren ortamlarda crash olmaması için)
+interface SensorData {
+  x: number;
+  y: number;
+  z: number;
+}
+
+interface SensorSubscription {
+  remove: () => void;
+}
+
 const Magnetometer = {
-  setUpdateInterval: (i: number) => {},
-  addListener: (cb: any) => ({ remove: () => {} }),
+  setUpdateInterval: (_interval: number) => undefined,
+  addListener: (_callback: (data: SensorData) => void): SensorSubscription => ({ remove: () => undefined }),
 };
 const Accelerometer = {
-  setUpdateInterval: (i: number) => {},
-  addListener: (cb: any) => ({ remove: () => {} }),
+  setUpdateInterval: (_interval: number) => undefined,
+  addListener: (_callback: (data: SensorData) => void): SensorSubscription => ({ remove: () => undefined }),
 };
 import Animated, {
   useSharedValue,
@@ -97,14 +107,14 @@ export function ARView({ places, userLocation, onClose, onPlaceSelect }: ARViewP
   }, [hasPermission]);
 
   useEffect(() => {
-    let magSubscription: any;
-    let accSubscription: any;
+    let magSubscription: SensorSubscription;
+    let accSubscription: SensorSubscription;
 
     // Update interval (fast for smooth AR)
     Magnetometer.setUpdateInterval(50);
     Accelerometer.setUpdateInterval(50);
 
-    magSubscription = Magnetometer.addListener((data) => {
+    magSubscription = Magnetometer.addListener((data: { x: number; y: number; z: number }) => {
       // Calculate heading from x, y
       let angle = Math.atan2(data.y, data.x) * (180 / Math.PI);
       
@@ -114,7 +124,7 @@ export function ARView({ places, userLocation, onClose, onPlaceSelect }: ARViewP
       setHeading(angle);
     });
 
-    accSubscription = Accelerometer.addListener((data) => {
+    accSubscription = Accelerometer.addListener((data: { x: number; y: number; z: number }) => {
       // Very basic pitch calculation (0 is flat, 90 is upright)
       // data.y is roughly 1 when upright in portrait, 0 when flat
       const p = Math.atan2(data.y, data.z) * (180 / Math.PI);

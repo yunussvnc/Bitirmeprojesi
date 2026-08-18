@@ -96,7 +96,7 @@ export default function WeeklyReportScreen() {
           <View style={styles.badgeInfo}>
             <Text style={[styles.badgeTitle, { color: colors.text.primary }]}>Haftanın Gurmesi</Text>
             <Text style={[styles.badgeDesc, { color: colors.text.secondary }]}>
-              Şehrin %4'lük dilimine girerek en çok gezenlerden biri oldun!
+              {"Şehrin %4'lük dilimine girerek en çok gezenlerden biri oldun!"}
             </Text>
           </View>
         </Animated.View>

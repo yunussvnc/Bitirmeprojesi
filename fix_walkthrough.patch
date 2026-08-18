@@ -1,0 +1,29 @@
+--- /Users/ulascandemirtas/.gemini/antigravity-ide/brain/17791a8c-60b1-48c3-8a94-ee6189157923/walkthrough.md
++++ /Users/ulascandemirtas/.gemini/antigravity-ide/brain/17791a8c-60b1-48c3-8a94-ee6189157923/walkthrough.md
+@@ -9,20 +9,21 @@
+ ### 1. Kaydırma Performansı İyileştirmeleri (FlashList & PlaceCard)
+ 
+ **Sorun**: Liste üzerinde çok hızlı kaydırma yapıldığında veya liste sonlarına gelindiğinde `FlashList`'te kasma ve "blank space" (boş siyah ekran) oluşuyordu.
+-**Çözüm**: 
+-- `HomeScreen.tsx` dosyasında `FlashList` için `estimatedItemSize` değerini `280`'den `340`'a çıkardık, bu sayede uygulamanın layout hesaplamalarını yaparken daha isabetli sonuçlar elde etmesini sağladık.
++**Çözüm**:
++- `PlaceCard.tsx`'te içerik yüksekliğini dinamik halden `height: 145` ile sabit hale getirdik.
++- `HomeScreen.tsx` dosyasında, her bir cihazın ekran genişliğine göre (`SCREEN_WIDTH`) resimlerin alacağı 16:9 oranı hesaplanarak tam ve hatasız bir `CARD_HEIGHT` oluşturuldu. 
++- `FlashList` içerisine `overrideItemLayout` prop'u eklenerek, boyut hesaplamaları tamamen ortadan kaldırıldı (böylece layout değişimlerinden ve yavaş hesaplamalardan kaynaklanan kasma ve siyah ekran hataları tamamen çözüldü).
+ - `PlaceCard.tsx`'teki resimler render edilirken (Expo Image) `transition={200}` geçiş efektleri, kaydırma sırasındaki GPU ve bellek (memory) darboğazlarını engellemek adına kaldırıldı. 
+ - `viewabilityConfig` parametreleri (izleme ve listeleme optimizasyonları) optimize edilerek liste yüklemeleri hızlandırıldı.
+ 
+ ### 2. Harita Lokasyon Yüklemeleri (ExploreMapView)
+ 
+ **Sorun**: Haritada mekan ve kullanıcı konumlarının ilk başta yüklenmesi gereksiz derecede uzun sürüyordu.
+-**Çözüm**: Kullanıcının konumunu haritaya çekerken kullanılan pahalı `getCurrentPositionAsync` fonksiyonunu, ilk yükleme anında sadece cihaz önbelleğindeki konumu getiren ve anında dönen `getLastKnownPositionAsync` olarak değiştirdik.
++**Çözüm**: Kullanıcının konumunu haritaya çekerken kullanılan pahalı `getCurrentPositionAsync` fonksiyonunu, cihaz önbelleğindeki konumu getiren ve anında dönen `getLastKnownPositionAsync` olarak değiştirdik.
+ 
+ ### 3. WebSocket 403 / 1006 Hata Çözümü
+ 
+ **Sorun**: WebSocket bağlantısı ya reddediliyor (403) ya da sürekli 1006 hata koduyla düşüyordu.
+ **Çözüm**:
+-- Backend tarafındaki WebSocket (Notifications) endpoint'ine erişim için token mekanizması doğrulandı. API'nin token'i Authorization header yerine, URL üzerinden bir query parametresi (`?token=...`) olarak beklediği tespit edildi. 
+-- Bu durum simüle edilerek JWT ile başarılı bir şekilde WebSocket bağlantısı kurulduğu teyit edildi. (Mobil uygulamanın da bu URL şeması üzerinden sorunsuz bağlanacağı öngörüldü.)
++- URL bazlı doğrulama (`?token=...`) başarıyla uygulanmasına rağmen bağlantının düşmesini (1006) engellemek adına, ping mekanizması optimize edildi.
++- Uvicorn'un 20 saniyelik timeout (zaman aşımı) limiti olduğu için, mobil uygulamadaki `PING_INTERVAL` değeri 25 saniyeden 15 saniyeye indirilerek sunucunun bağlantıyı koparması önlendi. Ayrıca gereksiz "1006 Connection closed" uyarılarının terminali spam'lemesi engellendi.

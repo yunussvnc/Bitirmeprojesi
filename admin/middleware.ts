@@ -1,12 +1,28 @@
 import { NextResponse } from 'next/server';
 import type { NextRequest } from 'next/server';
 
+const ACCESS_COOKIE = 'asemos_admin_access';
+const REFRESH_COOKIE = 'asemos_admin_refresh';
+
+function clearSession(response: NextResponse) {
+  response.cookies.delete(ACCESS_COOKIE);
+  response.cookies.delete(REFRESH_COOKIE);
+  return response;
+}
+
+function continueWithRefresh() {
+  const response = NextResponse.next();
+  response.cookies.delete(ACCESS_COOKIE);
+  return response;
+}
+
 export function middleware(request: NextRequest) {
-  const token = request.cookies.get('admin_token')?.value;
+  const token = request.cookies.get(ACCESS_COOKIE)?.value;
+  const refreshToken = request.cookies.get(REFRESH_COOKIE)?.value;
   const isLoginPage = request.nextUrl.pathname === '/login';
 
   if (!token) {
-    if (!isLoginPage) {
+    if (!refreshToken && !isLoginPage) {
       const url = request.nextUrl.clone();
       url.pathname = '/login';
       url.searchParams.set('redirect', request.nextUrl.pathname);
@@ -25,11 +41,13 @@ export function middleware(request: NextRequest) {
       const isExpired = decoded.exp * 1000 < Date.now();
       const isAuthorized = decoded.role === 'admin' || decoded.role === 'venue';
 
+      if (isExpired && refreshToken && !isLoginPage) {
+        return continueWithRefresh();
+      }
+
       if (isExpired || !isAuthorized) {
         if (!isLoginPage) {
-          const response = NextResponse.redirect(new URL('/login', request.url));
-          response.cookies.delete('admin_token');
-          return response;
+          return clearSession(NextResponse.redirect(new URL('/login', request.url)));
         }
       } else {
         if (isLoginPage) {
@@ -38,16 +56,16 @@ export function middleware(request: NextRequest) {
       }
     } else {
       if (!isLoginPage) {
-        const response = NextResponse.redirect(new URL('/login', request.url));
-        response.cookies.delete('admin_token');
-        return response;
+        return refreshToken
+          ? continueWithRefresh()
+          : clearSession(NextResponse.redirect(new URL('/login', request.url)));
       }
     }
-  } catch (e) {
+  } catch {
     if (!isLoginPage) {
-      const response = NextResponse.redirect(new URL('/login', request.url));
-      response.cookies.delete('admin_token');
-      return response;
+      return refreshToken
+        ? continueWithRefresh()
+        : clearSession(NextResponse.redirect(new URL('/login', request.url)));
     }
   }
 

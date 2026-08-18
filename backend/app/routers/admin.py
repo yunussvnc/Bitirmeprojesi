@@ -16,6 +16,7 @@ import crud
 from database import engine
 from app.dependencies import get_db, get_admin_user, get_admin_or_venue_user
 from app.core.redis_client import get_redis
+from app.websocket.manager import manager
 
 router = APIRouter(prefix="/admin", tags=["Admin"])
 logger = logging.getLogger("asemos.admin")
@@ -217,6 +218,7 @@ def update_user_profile(
 def ban_user(
     id: int,
     payload: Dict[str, str],
+    background_tasks: BackgroundTasks,
     db: Session = Depends(get_db),
     admin: models.User = Depends(get_admin_user),
 ):
@@ -229,6 +231,7 @@ def ban_user(
     # Terminate user sessions by incrementing token version
     user.token_version = (user.token_version or 0) + 1
     db.commit()
+    background_tasks.add_task(manager.close_user_connections, user.id, "Hesap askıya alındı")
 
     log_admin_action(db, admin.id, "ban_user", "user", user.id, {"reason": reason})
     return {"message": "Kullanıcı askıya alındı.", "is_active": False}
@@ -277,6 +280,7 @@ def update_user_role(
 @router.delete("/users/{id}")
 def delete_user(
     id: int,
+    background_tasks: BackgroundTasks,
     db: Session = Depends(get_db),
     admin: models.User = Depends(get_admin_user),
 ):
@@ -293,6 +297,7 @@ def delete_user(
     user.avatar_url = None
     user.token_version = (user.token_version or 0) + 1
     db.commit()
+    background_tasks.add_task(manager.close_user_connections, user.id, "Hesap silindi")
 
     log_admin_action(db, admin.id, "delete_user", "user", user.id)
     return {"message": "Kullanıcı başarıyla silindi (soft-deleted)."}

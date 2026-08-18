@@ -4,7 +4,7 @@
  * Sosyal akış - mekan deneyimi paylaşımları.
  */
 
-import React, { useState, useEffect, useCallback, useRef } from "react";
+import React, { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import {
   View,
   Text,
@@ -91,8 +91,15 @@ export default function FeedScreen() {
   const toggleSavePost = useAppStore((s) => s.toggleSavePost);
   const isPostSaved = useAppStore((s) => s.isPostSaved);
   const deletedPostIds = useAppStore((s) => s.deletedPostIds);
+  const [viewableIds, setViewableIds] = useState<Set<number>>(new Set());
 
   const visiblePosts = React.useMemo(() => posts.filter((p) => !deletedPostIds.includes(p.id)), [posts, deletedPostIds]);
+
+  /** FlashList viewability callback — sadece görünen kartlardaki videolar oynatılır */
+  const onViewableItemsChanged = useRef(({ viewableItems }: { viewableItems: Array<{ item: Post }> }) => {
+    setViewableIds(new Set(viewableItems.map((v) => v.item.id)));
+  }).current;
+  const viewabilityConfig = useMemo(() => ({ itemVisiblePercentThreshold: 50 }), []);
 
   const handleCreateSelect = useCallback((type: CreateType) => {
     if (type === "post") {
@@ -229,8 +236,7 @@ export default function FeedScreen() {
             return [sharedPost, ...prev];
           });
           flatListRef.current?.scrollToOffset({ offset: 0, animated: true });
-        }).catch(e => {
-          console.log("Paylaşılan gönderi bulunamadı veya hata:", e);
+        }).catch(() => {
           useAppStore.getState().clearPendingSharedPostId();
         });
       }
@@ -319,8 +325,15 @@ export default function FeedScreen() {
   }, [t]);
 
   const handleMuteAuthor = useCallback(() => {
+    if (!optionsPost) return;
+    const authorId = optionsPost.user_id;
+    setPosts((prev) => {
+      const toHide = prev.filter((p) => p.user_id === authorId);
+      toHide.forEach((p) => useAppStore.getState().addDeletedPostId(p.id));
+      return prev.filter((p) => p.user_id !== authorId);
+    });
     Alert.alert(t("feed.muted_title"), t("feed.muted_desc"));
-  }, [t]);
+  }, [optionsPost, t]);
 
   const handleSavePost = useCallback(
     (post: Post) => {
@@ -367,6 +380,9 @@ export default function FeedScreen() {
       <View style={{ overflow: "hidden" }}>
         <FeedCard
           post={item}
+          isSaved={isPostSaved(item.id)}
+          isViewable={viewableIds.has(item.id)}
+          onSave={() => handleSavePost(item)}
           onPress={() => item.place_id && router.push(`/place/${item.place_id}` as any)}
           onAuthorPress={() => router.push(`/user/${item.user_id}` as any)}
           onPlacePress={() => item.place_id && router.push(`/place/${item.place_id}` as any)}
@@ -378,7 +394,7 @@ export default function FeedScreen() {
         />
       </View>
     ),
-    [handleLike]
+    [handleLike, handleSavePost, isPostSaved, viewableIds]
   );
 
   const listEmpty = () => {
@@ -655,6 +671,8 @@ export default function FeedScreen() {
           showsVerticalScrollIndicator={false}
           onEndReached={handleLoadMore}
           onEndReachedThreshold={0.3}
+          onViewableItemsChanged={onViewableItemsChanged}
+          viewabilityConfig={viewabilityConfig}
           // @ts-ignore: Typings mismatch
           estimatedItemSize={500}
         />

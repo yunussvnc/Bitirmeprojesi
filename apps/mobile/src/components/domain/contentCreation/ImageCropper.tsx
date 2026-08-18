@@ -296,6 +296,8 @@ export const ImageCropper = React.forwardRef<ImageCropperRef, ImageCropperProps>
   );
 });
 
+ImageCropper.displayName = 'ImageCropper';
+
 const styles = StyleSheet.create({
   container: {
     width: SCREEN_WIDTH,

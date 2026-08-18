@@ -13,8 +13,8 @@ from sqlalchemy.orm import Session
 
 import models, schemas
 import crud
-from auth import decode_token
 from app.dependencies import get_db, get_current_user
+from app.websocket.auth import authenticate_websocket_token, websocket_session_is_current
 from app.websocket.manager import manager
 
 logger = logging.getLogger("asemos")
@@ -633,18 +633,12 @@ async def websocket_chat(
         await websocket.close(code=4001, reason="Token gerekli")
         return
 
-    try:
-        payload = decode_token(token)
-    except Exception:
+    principal = authenticate_websocket_token(token)
+    if not principal:
         await websocket.close(code=4001, reason="Geçersiz token")
         return
 
-    user_id = payload.get("sub")
-    if not user_id or payload.get("type") != "access":
-        await websocket.close(code=4001, reason="Geçersiz token")
-        return
-
-    user_id = int(user_id)
+    user_id = principal.user_id
     other_user_id = None
 
     db = next(get_db())
@@ -660,7 +654,8 @@ async def websocket_chat(
     finally:
         db.close()
 
-    await manager.connect(websocket, conversation_id, user_id)
+    if not await manager.connect(websocket, conversation_id, principal):
+        return
 
     await manager.send_to_user(conversation_id, other_user_id, {
         "type": "user_online",
@@ -670,6 +665,9 @@ async def websocket_chat(
     try:
         while True:
             raw = await websocket.receive_text()
+            if not websocket_session_is_current(principal):
+                await websocket.close(code=4001, reason="Oturum geçersiz")
+                break
             try:
                 data = json.loads(raw)
             except json.JSONDecodeError:
@@ -840,7 +838,7 @@ async def websocket_chat(
     except Exception as e:
         logger.error("WebSocket hatası: %s", str(e))
     finally:
-        manager.disconnect(conversation_id, user_id)
+        manager.disconnect(websocket, conversation_id, user_id)
         if other_user_id is not None:
             try:
                 await manager.send_to_user(conversation_id, other_user_id, {

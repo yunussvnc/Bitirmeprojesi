@@ -47,10 +47,10 @@ def seed_database():
 
         # 2. Create Places
         places_data = [
-            {"id": 1, "name": "Sortie - Kuruçeşme", "address": "Kuruçeşme, İstanbul", "photo_url": "https://picsum.photos/400/200?random=42", "category": "Gece Kulübü"},
-            {"id": 2, "name": "Fakülte Teras - Beyoğlu", "address": "Beyoğlu, İstanbul", "photo_url": "https://picsum.photos/400/200?random=88", "category": "Bar"},
-            {"id": 3, "name": "Kastel - Beyoğlu", "address": "Beyoğlu, İstanbul", "photo_url": "https://picsum.photos/400/200?random=55", "category": "Gece Kulübü"},
-            {"id": 4, "name": "Oligark - Kuruçeşme", "address": "Kuruçeşme, İstanbul", "photo_url": "https://picsum.photos/400/200?random=77", "category": "Restoran"},
+            {"id": 1, "name": "Sortie - Kuruçeşme", "address": "Kuruçeşme, İstanbul", "photo_url": None, "category": "Gece Kulübü"},
+            {"id": 2, "name": "Fakülte Teras - Beyoğlu", "address": "Beyoğlu, İstanbul", "photo_url": None, "category": "Bar"},
+            {"id": 3, "name": "Kastel - Beyoğlu", "address": "Beyoğlu, İstanbul", "photo_url": None, "category": "Gece Kulübü"},
+            {"id": 4, "name": "Oligark - Kuruçeşme", "address": "Kuruçeşme, İstanbul", "photo_url": None, "category": "Restoran"},
         ]
         
         place_objects = []

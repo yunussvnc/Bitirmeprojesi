@@ -152,13 +152,27 @@ export default function PersonalDetailsScreen() {
           </View>
 
           <Section title={t("personal_details.contact_info")}>
-            <SettingsRow
-              label={t("personal_details.email")}
-              value={profile?.email || t("personal_details.not_registered")}
-              showArrow
-              icon="envelope"
-              onPress={() => openEdit("email", profile?.email || "")}
-            />
+            {profile?.email?.includes('@privaterelay.appleid.com') ? (
+              <View>
+                <SettingsRow
+                  label={t("personal_details.email")}
+                  value={`🍎 ${t("personal_details.apple_private_email", "Apple Gizli E-posta")}`}
+                  icon="envelope"
+                  showArrow={false}
+                />
+                <Text style={[styles.hint, { color: colors.text.tertiary, paddingHorizontal: 16, marginTop: -4, marginBottom: 8 }]}>
+                  {t("personal_details.apple_relay_info", "Bu e-posta Apple tarafından gizlilik için oluşturulmuştur. Değiştirilemez.")}
+                </Text>
+              </View>
+            ) : (
+              <SettingsRow
+                label={t("personal_details.email")}
+                value={profile?.email || t("personal_details.not_registered")}
+                showArrow
+                icon="envelope"
+                onPress={() => openEdit("email", profile?.email || "")}
+              />
+            )}
             <SettingsRow
               label={t("personal_details.phone")}
               value={profile?.phone_number || t("personal_details.not_registered")}

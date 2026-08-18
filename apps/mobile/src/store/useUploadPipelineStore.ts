@@ -171,7 +171,7 @@ export const useUploadPipelineStore = create<UploadPipelineState>((set, get) => 
             // Extract asset ID from ph:// URI  (format: ph://ASSET-ID/...)
             const assetId = currentUri.replace(/^ph(-upload)?:\/\//, '').split('/')[0];
             if (assetId) {
-              const assetInfo = await MediaLibrary.getAssetInfoAsync(assetId);
+              const assetInfo = await MediaLibrary.getAssetInfoAsync(assetId, { shouldDownloadFromNetwork: true });
               if (assetInfo?.localUri) {
                 currentUri = assetInfo.localUri;
                 console.log(`[UploadPipeline]   Resolved via MediaLibrary → ${currentUri.substring(0, 80)}`);

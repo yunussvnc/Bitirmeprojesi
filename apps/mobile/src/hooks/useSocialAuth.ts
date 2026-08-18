@@ -153,8 +153,15 @@ export function useSocialAuth(roleType: RoleType, context: SocialAuthContext = '
         Alert.alert(t('auth.login_error_title'), t('auth.apple_login_failed'));
         return;
       }
+      
+      // Apple fullName'i sadece ilk girişte gönderir — burada yakala
+      const fullName = credential.fullName ? {
+        firstName: credential.fullName.givenName || undefined,
+        lastName: credential.fullName.familyName || undefined,
+      } : undefined;
+      
       setLoading(true);
-      const data = await appleLogin(credential.identityToken);
+      const data = await appleLogin(credential.identityToken, fullName);
       assertRoleMatch(data, roleType, context);
       useAuthStore.getState().setTokens(data.access_token, data.refresh_token);
       useAuthStore.getState().setUser(data.user);

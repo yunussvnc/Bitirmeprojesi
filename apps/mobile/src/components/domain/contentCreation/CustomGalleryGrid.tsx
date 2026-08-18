@@ -80,7 +80,7 @@ const GalleryCell = memo(function GalleryCell({
   useEffect(() => {
     let isMounted = true;
     if (Platform.OS === 'ios' && asset.uri.startsWith('ph://')) {
-      MediaLibrary.getAssetInfoAsync(asset).then((info) => {
+      MediaLibrary.getAssetInfoAsync(asset, { shouldDownloadFromNetwork: true }).then((info) => {
         if (isMounted && info?.localUri) {
           setImageUri(info.localUri);
         }
@@ -213,7 +213,7 @@ export function CustomGalleryGrid({
           // iOS'ta ph:// URI'leri upload'da çalışmaz — localUri al
           let resolvedUri = first.uri;
           try {
-            const info = await MediaLibrary.getAssetInfoAsync(first);
+            const info = await MediaLibrary.getAssetInfoAsync(first, { shouldDownloadFromNetwork: true });
             if (info?.localUri) {
               resolvedUri = info.localUri;
             }
@@ -279,7 +279,7 @@ export function CustomGalleryGrid({
       // Asset objesinden localUri (file://) al.
       let resolvedUri = asset.uri;
       try {
-        const assetInfo = await MediaLibrary.getAssetInfoAsync(asset);
+        const assetInfo = await MediaLibrary.getAssetInfoAsync(asset, { shouldDownloadFromNetwork: true });
         if (assetInfo?.localUri) {
           resolvedUri = assetInfo.localUri;
         }

@@ -17,6 +17,7 @@ import {
   NativeSyntheticEvent,
   NativeScrollEvent,
 } from "react-native";
+import Video from 'react-native-video';
 import { Gesture, GestureDetector } from "react-native-gesture-handler";
 import Animated, {
   useSharedValue,
@@ -46,6 +47,10 @@ export interface FeedCardProps {
   onLike?: () => void;
   onComment?: () => void;
   onShare?: () => void;
+  onSave?: () => void;
+  isSaved?: boolean;
+  /** Video kartları sadece ekranda görünürken oynatılır (performans) */
+  isViewable?: boolean;
   onOptionsPress?: () => void;
   onZoomChange?: (zooming: boolean) => void;
 }
@@ -58,6 +63,9 @@ const FeedCardComponent = ({
   onLike,
   onComment,
   onShare,
+  onSave,
+  isSaved = false,
+  isViewable = true,
   onOptionsPress,
   onZoomChange,
 }: FeedCardProps) => {
@@ -67,6 +75,7 @@ const FeedCardComponent = ({
   const { triggerReviewAction } = useStoreReview();
   const [expanded, setExpanded] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isMuted, setIsMuted] = useState(true);
   const likeScale = useSharedValue(1);
   const zoomScale = useSharedValue(1);
 
@@ -222,14 +231,26 @@ const FeedCardComponent = ({
                 style={{ width: imageWidth, height: imageHeight }}
               >
                 {mediaList.map((media, idx) => {
+                  const isVid = media.media_type === "video";
                   return (
                     <View key={idx} style={{ width: imageWidth, height: imageHeight, alignItems: "center", justifyContent: "center" }}>
-                      <Image
-                        source={{ uri: media.media_url }}
-                        style={{ width: imageWidth, height: imageHeight }}
-                        contentFit="cover"
-                        cachePolicy="memory-disk"
-                      />
+                      {isVid ? (
+                        <Video
+                          source={{ uri: media.media_url }}
+                          style={{ width: imageWidth, height: imageHeight }}
+                          resizeMode="cover"
+                          repeat={true}
+                          muted={isMuted}
+                          paused={!isViewable}
+                        />
+                      ) : (
+                        <Image
+                          source={{ uri: media.media_url }}
+                          style={{ width: imageWidth, height: imageHeight }}
+                          contentFit="cover"
+                          cachePolicy="memory-disk"
+                        />
+                      )}
                     </View>
                   );
                 })}
@@ -270,18 +291,24 @@ const FeedCardComponent = ({
                 }}
               >
                 {displayUrl ? (
-                  <Image source={{ uri: displayUrl }} style={{ width: imageWidth, height: imageHeight }} contentFit="cover" cachePolicy="memory-disk" />
+                  isVideo ? (
+                    <Video
+                      source={{ uri: displayUrl }}
+                      style={{ width: imageWidth, height: imageHeight }}
+                      resizeMode="cover"
+                      repeat={true}
+                      muted={isMuted}
+                      paused={!isViewable}
+                    />
+                  ) : (
+                    <Image source={{ uri: displayUrl }} style={{ width: imageWidth, height: imageHeight }} contentFit="cover" cachePolicy="memory-disk" />
+                  )
                 ) : (
                   <View style={[{ width: imageWidth, height: imageHeight }, styles.imagePlaceholder, { backgroundColor: colors.surface.elevated }]}>
                     <IconSymbol name="photo" size={40} color={colors.text.tertiary} />
                   </View>
                 )}
               </SnapbackZoom>
-              {isVideo && (
-                <View style={styles.videoBadge}>
-                  <IconSymbol name="play.circle.fill" size={30} color="rgba(255,255,255,0.9)" />
-                </View>
-              )}
             </>
           )}
             </View>
@@ -298,37 +325,65 @@ const FeedCardComponent = ({
           >
             <IconSymbol name="heart.fill" size={72} color="#ff375f" />
           </Animated.View>
+
+          {/* Video mute/unmute butonu */}
+          {(isVideo || mediaList.some(m => m.media_type === 'video')) && isViewable && (
+            <TouchableOpacity
+              style={styles.muteBtn}
+              onPress={() => {
+                lightImpact();
+                setIsMuted(prev => !prev);
+              }}
+              activeOpacity={0.7}
+            >
+              <IconSymbol name={isMuted ? "speaker.slash.fill" : "speaker.wave.2.fill"} size={16} color="#fff" />
+            </TouchableOpacity>
+          )}
         </Animated.View>
 
         {/* İçerik alanı */}
         <View style={[styles.content, { backgroundColor: colors.background.secondary }]}>
           <View style={styles.actions}>
-            <TouchableOpacity style={styles.actionBtn} onPress={handleLike} activeOpacity={0.7}>
-              <Animated.View style={[styles.actionInner, likeAnimatedStyle]}>
-                <IconSymbol name={post.is_liked ? "heart.fill" : "heart"} size={22} color={post.is_liked ? "#ff375f" : colors.text.secondary} />
-                <Text style={[styles.actionCount, { color: colors.text.secondary }]}>{post.like_count}</Text>
-              </Animated.View>
-            </TouchableOpacity>
+            <View style={styles.actionsLeft}>
+              <TouchableOpacity style={styles.actionBtn} onPress={handleLike} activeOpacity={0.7}>
+                <Animated.View style={[styles.actionInner, likeAnimatedStyle]}>
+                  <IconSymbol name={post.is_liked ? "heart.fill" : "heart"} size={24} color={post.is_liked ? "#ff375f" : colors.text.secondary} />
+                  <Text style={[styles.actionCount, { color: colors.text.secondary }]}>{post.like_count}</Text>
+                </Animated.View>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.actionBtn}
+                onPress={() => {
+                  lightImpact();
+                  onComment?.();
+                }}
+                activeOpacity={0.7}
+              >
+                <IconSymbol name="bubble.right" size={22} color={colors.text.secondary} />
+                <Text style={[styles.actionCount, { color: colors.text.secondary }]}>{post.comment_count}</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.actionBtn}
+                onPress={() => {
+                  lightImpact();
+                  onShare?.();
+                }}
+                activeOpacity={0.7}
+              >
+                <IconSymbol name="paperplane" size={22} color={colors.text.secondary} />
+              </TouchableOpacity>
+            </View>
+
+            {/* Kaydet (Bookmark) Butonu */}
             <TouchableOpacity
-              style={styles.actionBtn}
+              style={styles.actionBtnSave}
               onPress={() => {
                 lightImpact();
-                onComment?.();
+                onSave?.();
               }}
               activeOpacity={0.7}
             >
-              <IconSymbol name="bubble.right" size={20} color={colors.text.secondary} />
-              <Text style={[styles.actionCount, { color: colors.text.secondary }]}>{post.comment_count}</Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={styles.actionBtn}
-              onPress={() => {
-                lightImpact();
-                onShare?.();
-              }}
-              activeOpacity={0.7}
-            >
-              <IconSymbol name="paperplane" size={20} color={colors.text.secondary} />
+              <IconSymbol name={isSaved ? "bookmark.fill" : "bookmark"} size={22} color={isSaved ? colors.text.primary : colors.text.secondary} />
             </TouchableOpacity>
           </View>
 
@@ -419,6 +474,18 @@ const styles = StyleSheet.create({
     bottom: spacing.md,
     right: spacing.md,
   },
+  muteBtn: {
+    position: "absolute",
+    bottom: 12,
+    right: 12,
+    width: 32,
+    height: 32,
+    borderRadius: 16,
+    backgroundColor: "rgba(0,0,0,0.55)",
+    alignItems: "center",
+    justifyContent: "center",
+    zIndex: 10,
+  },
   // ── Carousel ──
   carouselBadge: {
     position: "absolute",
@@ -461,13 +528,21 @@ const styles = StyleSheet.create({
   actions: {
     flexDirection: "row",
     alignItems: "center",
-    gap: spacing.xl,
+    justifyContent: "space-between",
     marginBottom: spacing.md,
+  },
+  actionsLeft: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: spacing.xl,
   },
   actionBtn: {
     flexDirection: "row",
     alignItems: "center",
     gap: 7,
+  },
+  actionBtnSave: {
+    padding: 4,
   },
   actionInner: {
     flexDirection: "row",
@@ -502,5 +577,7 @@ export const FeedCard = React.memo(
     prevProps.post.id === nextProps.post.id &&
     prevProps.post.is_liked === nextProps.post.is_liked &&
     prevProps.post.like_count === nextProps.post.like_count &&
-    prevProps.post.comment_count === nextProps.post.comment_count
+    prevProps.post.comment_count === nextProps.post.comment_count &&
+    prevProps.isSaved === nextProps.isSaved &&
+    prevProps.isViewable === nextProps.isViewable
 );

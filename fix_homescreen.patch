@@ -1,0 +1,31 @@
+--- apps/mobile/src/components/domain/home/HomeScreen.tsx
++++ apps/mobile/src/components/domain/home/HomeScreen.tsx
+@@ -4,7 +4,7 @@
+ import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
+ import {
+   View,
+-  Text,
++  Text, Dimensions,
+   StyleSheet,
+   TouchableOpacity,
+   Platform,
+@@ -237,6 +237,10 @@
+   );
+ }
+ 
++const SCREEN_WIDTH = Dimensions.get('window').width;
++const ITEM_WIDTH = SCREEN_WIDTH - 32; // paddingHorizontal: 16
++const CARD_HEIGHT = (ITEM_WIDTH * (9 / 16)) + 145;
++
+ export default function HomeScreen() {
+   const { colors } = useTheme();
+   const { t } = useTranslation();
+@@ -665,7 +669,7 @@
+           ItemSeparatorComponent={ItemSeparator}
+           estimatedItemSize={CARD_HEIGHT}
+           overrideItemLayout={(layout, item, index) => {
+-            layout.size = CARD_HEIGHT;
++            layout.span = CARD_HEIGHT;
+           }}
+           contentContainerStyle={displayList.length > 0 ? styles.listContent : styles.listContentEmpty}
+           refreshControl={

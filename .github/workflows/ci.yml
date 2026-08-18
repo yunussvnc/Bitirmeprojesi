@@ -2,38 +2,209 @@ name: CI
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
-  test:
+  changes:
+    name: Detect changed components
     runs-on: ubuntu-latest
+    outputs:
+      admin: ${{ steps.filter.outputs.admin }}
+      mobile: ${{ steps.filter.outputs.mobile }}
+      frontend: ${{ steps.filter.outputs.frontend }}
+      backend: ${{ steps.filter.outputs.backend }}
+      ai: ${{ steps.filter.outputs.ai }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dorny/paths-filter@v3
+        id: filter
+        with:
+          filters: |
+            admin:
+              - 'admin/**'
+            mobile:
+              - 'apps/mobile/**'
+            frontend:
+              - 'frontend/**'
+              - 'infra/nginx/**'
+            backend:
+              - 'backend/**'
+            ai:
+              - 'ai-llm/**'
+
+  node-quality:
+    name: ${{ matrix.name }} quality
+    needs: changes
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - name: Admin
+            filter: admin
+            directory: admin
+            lockfile: admin/package-lock.json
+            typecheck: npx tsc --noEmit
+            build: npm run build
+          - name: Mobile
+            filter: mobile
+            directory: apps/mobile
+            lockfile: apps/mobile/package-lock.json
+            typecheck: npx tsc --noEmit
+            build: CI=1 npx expo export --platform android --output-dir dist-ci
+          - name: Frontend
+            filter: frontend
+            directory: frontend
+            lockfile: frontend/package-lock.json
+            typecheck: npx tsc --noEmit
+            build: npm run build
+    steps:
+      - name: Check whether component changed
+        id: changed
+        env:
+          COMPONENT_CHANGED: ${{ needs.changes.outputs[matrix.filter] }}
+        run: echo "run=$COMPONENT_CHANGED" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/checkout@v4
+        if: steps.changed.outputs.run == 'true'
+
+      - uses: actions/setup-node@v4
+        if: steps.changed.outputs.run == 'true'
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: ${{ matrix.lockfile }}
+
+      - name: Install dependencies
+        if: steps.changed.outputs.run == 'true'
+        working-directory: ${{ matrix.directory }}
+        run: npm ci --no-audit --no-fund
+
+      - name: Lint
+        if: steps.changed.outputs.run == 'true'
+        working-directory: ${{ matrix.directory }}
+        run: npm run lint
+
+      - name: Typecheck
+        if: steps.changed.outputs.run == 'true'
+        working-directory: ${{ matrix.directory }}
+        run: ${{ matrix.typecheck }}
+
+      - name: Build
+        if: steps.changed.outputs.run == 'true'
+        working-directory: ${{ matrix.directory }}
+        run: ${{ matrix.build }}
+
+  backend:
+    name: Backend tests and PostgreSQL migration
+    needs: changes
+    if: needs.changes.outputs.backend == 'true'
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16-alpine
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_DB: asemos_ci
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d asemos_ci"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      DATABASE_URL: postgresql://postgres:postgres@localhost:5432/asemos_ci
+      JWT_SECRET_KEY: ci-only-jwt-secret-not-for-production
+      REDIS_URL: redis://localhost:6379/0
     defaults:
       run:
         working-directory: backend
     steps:
       - uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-          cache: 'pip'
+          cache: pip
           cache-dependency-path: backend/requirements.txt
-
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-
-      - name: Run tests
+      - name: Verify PostgreSQL migration is idempotent
+        run: |
+          python migrate.py
+          python migrate.py
+          python scripts/check_postgres_migration.py
+      - name: Run backend tests
         run: pytest --maxfail=1 --disable-warnings -q
 
+  ai:
+    name: AI lint and unit tests
+    needs: changes
+    if: needs.changes.outputs.ai == 'true'
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ai-llm
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: ai-llm/requirements.txt
+      - name: Install CI dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest ruff pydantic-settings python-dotenv rank-bm25 qdrant-client sentence-transformers
+      - name: Lint critical Python errors
+        run: ruff check src tests scripts --select E9,F63,F7,F82
+      - name: Run deterministic AI unit tests
+        env:
+          QDRANT_URL: ':memory:'
+          RAG_INDEX_ON_STARTUP: 'false'
+        run: >-
+          pytest -q
+          tests/test_bm25_index.py
+          tests/test_personalization.py
+          tests/test_llm_reranker.py
+          tests/test_pipeline.py
+          tests/test_query_rewriter.py
+          tests/test_retriever.py
+
+  secrets:
+    name: Gitleaks secret scanning
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITLEAKS_ENABLE_SUMMARY: 'true'
+
   deploy:
+    name: SSH deploy to server
     # Sadece main'e gerçek push'ta çalışır — pull request'lerde deploy edilmez.
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
-    needs: test
+    # backend job path-filter yüzünden atlanmış olabilir (skipped); bu durumda da deploy devam eder.
+    if: |
+      always() &&
+      github.event_name == 'push' && github.ref == 'refs/heads/main' &&
+      (needs.backend.result == 'success' || needs.backend.result == 'skipped')
+    needs: [changes, backend]
     runs-on: ubuntu-latest
     steps:
       - name: SSH deploy (git pull + docker compose rebuild)
@@ -51,3 +222,30 @@ jobs:
             git reset --hard origin/main
             docker compose -f docker-compose.prod.yml up -d --build
             docker image prune -f
+
+  mobile-build:
+    name: EAS iOS build + TestFlight auto-submit
+    # Sadece main'e push'ta ve apps/mobile içinde değişiklik varsa çalışır.
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && needs.changes.outputs.mobile == 'true'
+    needs: changes
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: apps/mobile
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: apps/mobile/package-lock.json
+
+      - name: Install dependencies
+        run: npm ci --no-audit --no-fund
+
+      - name: EAS Build (iOS) — arka planda başlat, TestFlight'a otomatik gönder
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN }}
+        run: npx eas-cli build --platform ios --profile production --non-interactive --no-wait --auto-submit

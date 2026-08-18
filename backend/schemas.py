@@ -125,8 +125,14 @@ class UserUpdate(BaseModel):
                 raise ValueError('Doğum yılı 1940-2006 arasında olmalıdır (18 yaş altı kayıt olamaz).')
         return v
 
+class AppleFullName(BaseModel):
+    """Apple Sign-In ile gelen isim bilgisi (sadece ilk girişte gelir)."""
+    firstName: Optional[str] = None
+    lastName: Optional[str] = None
+
 class SocialLoginRequest(BaseModel):
     token: str
+    full_name: Optional[AppleFullName] = None
 
 class User(UserBase):
     id: int

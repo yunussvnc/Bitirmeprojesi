@@ -358,7 +358,7 @@ export function EmbeddedCamera({
         {/* Timer (future feature) */}
         <TouchableOpacity
           style={styles.controlBtn}
-          onPress={() => lightImpact()}
+          onPress={() => { lightImpact(); Alert.alert('Yak\u0131nda', 'Zamanlay\u0131c\u0131 \u00f6zelli\u011fi yak\u0131nda aktif olacakt\u0131r.'); }}
           activeOpacity={0.7}
         >
           <IconSymbol name="timer" size={20} color="#fff" />
@@ -490,7 +490,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderWidth: 1,
     borderColor: 'rgba(255,255,255,0.1)',
-    backdropFilter: 'blur(10px)',
   },
   controlBtnLarge: {
     width: 52,

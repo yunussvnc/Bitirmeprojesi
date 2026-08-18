@@ -314,6 +314,11 @@ def get_user_profile(
         follow_status=follow_status,
     )
     
+    # Apple Private Relay e-postalarını başka kullanıcılardan gizle (sunucu tarafı gizlilik)
+    is_own_profile = current_user and current_user.id == user_id
+    if not is_own_profile and profile.email and profile.email.endswith("@privaterelay.appleid.com"):
+        profile.email = None
+    
     # Gizli profil & takipçi değilse → post/istatistik gizlenir
     if not can_view:
         return PrivacyGuard.filter_profile_for_non_follower(profile.model_dump())
