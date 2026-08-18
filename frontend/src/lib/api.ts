@@ -85,6 +85,24 @@ import baykusPub from '../assets/venues/baykus-pub.jpg'
 import revoltePub from '../assets/venues/revolte-pub.jpg'
 import mirrorRestaurantBar from '../assets/venues/mirror-restaurant-bar.jpg'
 import theWallBar from '../assets/venues/the-wall-bar.jpg'
+import tarihiSakizAgaci from '../assets/venues/tarihi-sakiz-agaci.jpg'
+import inciburnuFeneri from '../assets/venues/inciburnu-feneri.jpg'
+import bostanciTarihiCesme from '../assets/venues/bostanci-tarihi-cesme.jpg'
+import ayrilikCesmesi from '../assets/venues/ayrilik-cesmesi.jpg'
+import haydarpasaMendiregi from '../assets/venues/haydarpasa-mendiregi.jpg'
+import tarihiYeldegirmeniSokak from '../assets/venues/tarihi-yeldegirmeni-sokak.jpg'
+import kadikoyBogaHeykeli from '../assets/venues/kadikoy-boga-heykeli.jpg'
+import filiziKosk from '../assets/venues/filizi-kosk.jpg'
+import arifHikmetPasaKosk from '../assets/venues/arif-hikmet-pasa-kosku.jpg'
+import sadunOdaBoroHeykeli from '../assets/venues/sadun-oda-boro-heykeli.jpg'
+import tevhideHanimKosk from '../assets/venues/tevhide-hanim-kosku.jpg'
+import istanbulOyuncakMuzesi from '../assets/venues/istanbul-oyuncak-muzesi.jpg'
+import barisMancoEvi from '../assets/venues/baris-manco-evi.jpg'
+import muzeGazhane from '../assets/venues/muze-gazhane.jpg'
+import kazimKarabekirPasaMuzesi from '../assets/venues/kazim-karabekir-pasa-muzesi.webp'
+import iklimMuzesi from '../assets/venues/iklim-muzesi.jpg'
+import haldunTanerMuzeEvi from '../assets/venues/haldun-taner-muze-evi.jpg'
+import osmanHamdiBeyHeykeli from '../assets/venues/osman-hamdi-bey-heykeli.jpg'
 
 export interface Venue {
   id: string
@@ -222,6 +240,24 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '847': revoltePub,
   '849': mirrorRestaurantBar,
   '850': theWallBar,
+  '855': tarihiSakizAgaci,
+  '856': inciburnuFeneri,
+  '857': bostanciTarihiCesme,
+  '859': ayrilikCesmesi,
+  '860': haydarpasaMendiregi,
+  '861': tarihiYeldegirmeniSokak,
+  '862': kadikoyBogaHeykeli,
+  '864': filiziKosk,
+  '869': arifHikmetPasaKosk,
+  '870': sadunOdaBoroHeykeli,
+  '871': tevhideHanimKosk,
+  '873': istanbulOyuncakMuzesi,
+  '874': barisMancoEvi,
+  '875': muzeGazhane,
+  '876': kazimKarabekirPasaMuzesi,
+  '877': iklimMuzesi,
+  '878': haldunTanerMuzeEvi,
+  '879': osmanHamdiBeyHeykeli,
 }
 
 export function getFallbackVenueImage(category: string): string {

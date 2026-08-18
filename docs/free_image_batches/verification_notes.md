@@ -330,3 +330,42 @@ Hera Kadıköy, canlı ID 851, Caferağa Kadife Sokak No:10. Resmî Instagram ve
 
 6:45 Stereogun Kadıköy, canlı ID 848, Caferağa Kadife Sokak No:10 D:3. Yandex sonucu doğru işletme/adres başlığı taşıyor; incelenen iç mekân görsellerinde 6:45 tabelası veya adres numarası görünmediği için dış cephe teyidi olmadan kullanılmayacak.
 Hush Rooftop Bar, canlı ID 852, Caferağa Güneşlibahçe Sokak 50/B. Yandex arama sonucu açıkça “Artık faal değil” uyarısı taşıyor; kesinlikle görsel eklenmeyecek.
+
+
+Batch 007 başlangıcı
+Tarihi Sakız Ağacı, canlı ID 855, Fenerbahçe Fener Kalamış Yolu. Kaynak başlığı Fenerbahçe Kadıköy'deki anıt sakız ağacını açıkça tanımlıyor; görselde anıt ağacın kendisi ve park konumu görülüyor, güçlü konum eşleşmesi.
+İnciburnu Feneri, canlı ID 856, Caferağa Kadıköy Feneri. Görselde deniz üzerindeki Kadıköy feneri dış görünümü açıkça görülüyor; kaynak başlığı Kadıköy İnciburnu Feneri, güçlü eşleşme.
+Bostancı Tarihi Çeşme, canlı ID 857, Bostancı Mahallesi. Görselde tarihi çeşmenin kitabesi ve Bostancı çevresi açıkça görülüyor; Gazete Kadıköy ve Yandex kaynakları Bostancıbaşı Derbendi Çeşmesi olarak aynı Bostancı konumunu doğruluyor, güçlü eşleşme.
+
+Ayrılık Çeşmesi, canlı ID 859, Rasimpaşa Ayrılıkçeşme Sokak. Yandex görselinde tarihi çeşmenin özgün taş cephesi ve aynı sokak bağlamı açıkça görülüyor; güçlü eşleşme.
+Haydarpaşa Mendireği, canlı ID 860, Kadıköy X2V9+P9. Kaynak başlığı Haydarpaşa Dalgakıranı/Mendireği; görselde mendireğin taş yapısı ve deniz feneri açıkça görülüyor, güçlü eşleşme.
+Tıbbiye Caddesi Tarihi Çeşme, canlı ID 858. Arama sonuçlarında ya Sultanahmet'teki Tarihi Çeşme Restaurant ya da adresi doğrulanmayan genel çeşme fotoğrafları çıktı; kesin eşleşme bulunmadığı için eklenmeyecek.
+
+Tarihi Yeldeğirmeni Sokak, canlı ID 861, Rasimpaşa Yeldeğirmeni Sokak 24–36. Görselde Yeldeğirmeni'nin karakteristik tarihi sokak dokusu açıkça görülüyor; kaynak başlığı Yeldeğirmeni Mahallesi'ni doğruluyor, güçlü bölge eşleşmesi.
+Kadıköy Boğa Heykeli, canlı ID 862, Altıyol Meydanı/Söğütlüçeşme Caddesi. Görselde Kadıköy Altıyol Boğa Heykeli ve çevredeki Altıyol ticari doku açıkça görülüyor; güçlü eşleşme.
+
+Kalamış Tarihi Köşk, canlı ID 863, Fener Kalamış Caddesi No:102. Yandex kaydı Münir Nurettin Selçuk Caddesi No:3, arama görselleri ise farklı Kalamış köşklerini gösteriyor; canlı adresle kesin eşleşme kurulamadığı için eklenmeyecek.
+
+Filizi Köşk (TBMM), canlı ID 864, Göztepe Mustafa Mazhar Bey Sokak. Görselde Filizi Köşk'ün özgün yeşil ahşap dış cephesi ve TBMM yerleşimine uygun bayraklı bahçe açıkça görülüyor; kaynak başlığı Göztepe Filizi Köşk'ü doğruluyor, güçlü eşleşme.
+Cavit Paşa Köşkü, canlı ID 865, Bostancı Bağdat Caddesi No:493. Arama sonucu başlığı doğru adı/adresi taşısa da seçilen görselde Cavit Paşa Köşkü yerine başka bir kale yapısı görünüyor; kesinlikle kullanılmayacak. Doğru dış cephe adayı ayrıca aranacak.
+
+Filizi Köşk adres doğrulaması: Yandex ve bağımsız kaynaklar Mustafa Mazharbey Sokak 14/4, Göztepe adresini veriyor; canlı kayıt Göztepe/Mustafa Mazhar Bey Sokak ile güçlü uyumlu.
+Sürmeneli Ali Paşa Çeşmesi, canlı ID 866, Caferağa Yasa Caddesi No:48. Kaynaklar çeşmenin Kadıköy kimliğini doğruluyor ancak arama görseli/Yandex kaydı canlı No:48'i kesin göstermiyor; farklı Yasa numarası riski nedeniyle eklenmedi.
+
+Sadun ve Oda Boro Heykeli, canlı ID 870, Fenerbahçe Münir Nurettin Selçuk Caddesi. Yandex dış mekân görselinde heykelin kaidesindeki SADUN ODA BORO yazısı ve denizcilik temalı heykel açıkça görülüyor; güçlü eşleşme.
+Arif Hikmet Paşa Köşkü, canlı ID 869, Erenköy Bahariyeli Sokak No:67. Kaynak başlığı Erenköy Arif Hikmet Paşa Köşkü; görselde özgün ahşap köşk dış cephesi açıkça görülüyor, güçlü yapı eşleşmesi.
+Famous Romario Sari Kosk, canlı ID 868, Caferağa Fazılpaşa Sokak No:14. Bulunan görseller işletme/konum adını doğrulamıyor ve kayıt adı belirsiz/typo içeriyor; kesin eşleşme bulunmadığı için eklenmeyecek.
+
+Tevhide Hanım Köşkü, canlı ID 871, Caddebostan. Yandex görsel başlığı Tevhide Hanım Köşkü'nü ve Operatör Cemil Topuzlu Caddesi No:106 kaydını açıkça taşıyor; canlı Caddebostan kaydıyla aynı landmark eşleşmesi, güçlü aday.
+İstanbul Oyuncak Müzesi, canlı ID 873, Göztepe Dr. Zeki Zeren Sokak No:15. Yandex dış cephe görselinde müzenin ahşap köşkü ve girişindeki oyuncak müzesi tabelası açıkça görülüyor; kaynak başlığı aynı No:15 adresini taşıyor, güçlü eşleşme.
+Caner Tutkun Kayası, canlı ID 872, Suadiye. Arama sonuçları hedef kaya oluşumunu veya kesin Suadiye konumunu göstermedi; görsel eklenmeyecek.
+
+Barış Manço Evi, canlı ID 874, Caferağa Yusuf Kamilpaşa Sokak No:5. Yandex görselinde Barış Manço Moda 81300 kaydı ve müze köşkü ile adres eşleşmesi açık; güçlü eşleşme.
+Müze Gazhane, canlı ID 875, Hasanpaşa Kurbağalıdere Caddesi No:125. İKSV kaynağındaki görselde Gazhane'nin karakteristik endüstriyel yapıları açıkça görülüyor; kaynak işletme/alan adıyla güçlü eşleşme.
+
+Kazım Karabekir Paşa Müzesi, canlı ID 876, Erenköy Kazım Karabekirpaşa Sokak No:4. Vakıf ve bağımsız kaynaklar aynı No:4/2 adresini doğruluyor; görselde müzenin özgün ahşap köşk cephesi ve müze etkinlik afişi görülüyor, güçlü eşleşme.
+
+Haldun Taner Müze Evi, canlı ID 878, Fenerbahçe Dr. Faruk Ayanoğlu Caddesi. Yandex görselinde girişte HALDUN TANER MÜZE EVİ tabelası ve bina cephesi açıkça görülüyor; kaynak başlığı aynı caddeyi doğruluyor, güçlü eşleşme.
+İklim Müzesi, canlı ID 877, Hasanpaşa İkbaliye Sokak No:10. Görselde İKLİM MÜZESİ yazısı, Gazhane'nin karakteristik yapısı ve sergi binası açıkça görülüyor; Müze Gazhane yerleşkesiyle güçlü eşleşme.
+
+Osman Hamdi Bey Heykeli, canlı ID 879, Kalamış Atatürk Parkı. Görselde heykelin kaidesindeki OSMAN HAMDI BEY yazısı açıkça görülüyor; kaynak başlığı heykelin Kalamış Parkı'ndaki konumunu doğruluyor, güçlü eşleşme.

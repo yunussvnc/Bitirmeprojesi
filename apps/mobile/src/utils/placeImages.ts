@@ -88,6 +88,24 @@ const baykusPub = require("../../assets/places/baykus-pub.jpg") as ImageSourcePr
 const revoltePub = require("../../assets/places/revolte-pub.jpg") as ImageSourcePropType;
 const mirrorRestaurantBar = require("../../assets/places/mirror-restaurant-bar.jpg") as ImageSourcePropType;
 const theWallBar = require("../../assets/places/the-wall-bar.jpg") as ImageSourcePropType;
+const tarihiSakizAgaci = require("../../assets/places/tarihi-sakiz-agaci.jpg") as ImageSourcePropType;
+const inciburnuFeneri = require("../../assets/places/inciburnu-feneri.jpg") as ImageSourcePropType;
+const bostanciTarihiCesme = require("../../assets/places/bostanci-tarihi-cesme.jpg") as ImageSourcePropType;
+const ayrilikCesmesi = require("../../assets/places/ayrilik-cesmesi.jpg") as ImageSourcePropType;
+const haydarpasaMendiregi = require("../../assets/places/haydarpasa-mendiregi.jpg") as ImageSourcePropType;
+const tarihiYeldegirmeniSokak = require("../../assets/places/tarihi-yeldegirmeni-sokak.jpg") as ImageSourcePropType;
+const kadikoyBogaHeykeli = require("../../assets/places/kadikoy-boga-heykeli.jpg") as ImageSourcePropType;
+const filiziKosk = require("../../assets/places/filizi-kosk.jpg") as ImageSourcePropType;
+const arifHikmetPasaKosk = require("../../assets/places/arif-hikmet-pasa-kosku.jpg") as ImageSourcePropType;
+const sadunOdaBoroHeykeli = require("../../assets/places/sadun-oda-boro-heykeli.jpg") as ImageSourcePropType;
+const tevhideHanimKosk = require("../../assets/places/tevhide-hanim-kosku.jpg") as ImageSourcePropType;
+const istanbulOyuncakMuzesi = require("../../assets/places/istanbul-oyuncak-muzesi.jpg") as ImageSourcePropType;
+const barisMancoEvi = require("../../assets/places/baris-manco-evi.jpg") as ImageSourcePropType;
+const muzeGazhane = require("../../assets/places/muze-gazhane.jpg") as ImageSourcePropType;
+const kazimKarabekirPasaMuzesi = require("../../assets/places/kazim-karabekir-pasa-muzesi.webp") as ImageSourcePropType;
+const iklimMuzesi = require("../../assets/places/iklim-muzesi.jpg") as ImageSourcePropType;
+const haldunTanerMuzeEvi = require("../../assets/places/haldun-taner-muze-evi.jpg") as ImageSourcePropType;
+const osmanHamdiBeyHeykeli = require("../../assets/places/osman-hamdi-bey-heykeli.jpg") as ImageSourcePropType;
 
 const CATEGORY_PLACEHOLDERS: Record<string, string> = {
   kafe: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800",
@@ -189,6 +207,24 @@ const PLACE_IMAGE_OVERRIDES: Record<string, ImageSourcePropType> = {
   "847": revoltePub,
   "849": mirrorRestaurantBar,
   "850": theWallBar,
+  "855": tarihiSakizAgaci,
+  "856": inciburnuFeneri,
+  "857": bostanciTarihiCesme,
+  "859": ayrilikCesmesi,
+  "860": haydarpasaMendiregi,
+  "861": tarihiYeldegirmeniSokak,
+  "862": kadikoyBogaHeykeli,
+  "864": filiziKosk,
+  "869": arifHikmetPasaKosk,
+  "870": sadunOdaBoroHeykeli,
+  "871": tevhideHanimKosk,
+  "873": istanbulOyuncakMuzesi,
+  "874": barisMancoEvi,
+  "875": muzeGazhane,
+  "876": kazimKarabekirPasaMuzesi,
+  "877": iklimMuzesi,
+  "878": haldunTanerMuzeEvi,
+  "879": osmanHamdiBeyHeykeli,
 };
 
 type PlaceLike = Place | { id?: string | number; name?: string; photo_url?: string; category?: string };
