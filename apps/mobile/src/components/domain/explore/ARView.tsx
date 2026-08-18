@@ -11,13 +11,23 @@ import {
 import { Camera, useCameraDevice, useCameraPermission } from 'react-native-vision-camera';
 // import { Magnetometer, Accelerometer } from 'expo-sensors';
 // Geçici olarak expo-sensors'ü mock'luyoruz (Expo Go veya Pedometer hatası veren ortamlarda crash olmaması için)
+interface SensorData {
+  x: number;
+  y: number;
+  z: number;
+}
+
+interface SensorSubscription {
+  remove: () => void;
+}
+
 const Magnetometer = {
-  setUpdateInterval: (i: number) => {},
-  addListener: (cb: any) => ({ remove: () => {} }),
+  setUpdateInterval: (_interval: number) => undefined,
+  addListener: (_callback: (data: SensorData) => void): SensorSubscription => ({ remove: () => undefined }),
 };
 const Accelerometer = {
-  setUpdateInterval: (i: number) => {},
-  addListener: (cb: any) => ({ remove: () => {} }),
+  setUpdateInterval: (_interval: number) => undefined,
+  addListener: (_callback: (data: SensorData) => void): SensorSubscription => ({ remove: () => undefined }),
 };
 import Animated, {
   useSharedValue,
@@ -97,8 +107,8 @@ export function ARView({ places, userLocation, onClose, onPlaceSelect }: ARViewP
   }, [hasPermission]);
 
   useEffect(() => {
-    let magSubscription: any;
-    let accSubscription: any;
+    let magSubscription: SensorSubscription;
+    let accSubscription: SensorSubscription;
 
     // Update interval (fast for smooth AR)
     Magnetometer.setUpdateInterval(50);

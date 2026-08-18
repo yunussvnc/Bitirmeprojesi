@@ -490,7 +490,6 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     borderWidth: 1,
     borderColor: 'rgba(255,255,255,0.1)',
-    backdropFilter: 'blur(10px)',
   },
   controlBtnLarge: {
     width: 52,
