@@ -20,6 +20,7 @@ import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 import { Image as ExpoImage } from 'expo-image';
 import Video from 'react-native-video';
 import * as MediaLibrary from 'expo-media-library';
+import * as ImagePicker from 'expo-image-picker';
 import Animated, {
   FadeIn,
   useSharedValue,
@@ -48,7 +49,7 @@ export interface MediaPickerProps {
   contentType: ContentType;
   selected: MediaItem[];
   onSelect: (items: MediaItem[]) => void;
-  onNext: () => void;
+  onNext: (items?: MediaItem[]) => void;
   onClose: () => void;
   quality?: number;
 }
@@ -119,7 +120,8 @@ export function MediaPicker({
 
   const handleSingleSelect = useCallback((item: MediaItem) => {
     onSelect([item]);
-    setTimeout(() => onNext(), 150);
+    // Story/Reels modunda seçilen medyayı doğrudan onNext'e aktar
+    setTimeout(() => onNext([item]), 150);
   }, [onSelect, onNext]);
 
   const handleNext = useCallback(async () => {
@@ -356,14 +358,47 @@ export function MediaPicker({
           {/* Gallery Header */}
           <View style={[styles.storyGalleryHeader, { paddingTop: insets.top + 56 }]}>
             <Text style={styles.storyGalleryTitle}>{t("content_creation.gallery")}</Text>
-            <TouchableOpacity
-              style={[styles.cameraSwitchBtn, { backgroundColor: colors.accent.primary }]}
-              onPress={() => { lightImpact(); setMode('camera'); }}
-              activeOpacity={0.8}
-            >
-              <IconSymbol name="camera.fill" size={16} color="#000" />
-              <Text style={styles.cameraSwitchText}>{t("content_creation.camera")}</Text>
-            </TouchableOpacity>
+            <View style={{ flexDirection: 'row', gap: 8 }}>
+              {/* Native galeri butonu */}
+              <TouchableOpacity
+                style={[styles.cameraSwitchBtn, { backgroundColor: 'rgba(255,255,255,0.15)' }]}
+                onPress={async () => {
+                  lightImpact();
+                  try {
+                    const result = await ImagePicker.launchImageLibraryAsync({
+                      mediaTypes: ['images', 'videos'],
+                      quality: quality,
+                      allowsEditing: false,
+                    });
+                    if (!result.canceled && result.assets.length > 0) {
+                      const asset = result.assets[0];
+                      const item: MediaItem = {
+                        uri: asset.uri,
+                        type: asset.type === 'video' ? 'video' : 'image',
+                        width: asset.width ?? undefined,
+                        height: asset.height ?? undefined,
+                        duration: asset.duration ? asset.duration * 1000 : undefined,
+                      };
+                      onSelect([item]);
+                      onNext([item]);
+                    }
+                  } catch (e) {
+                    console.warn('Native picker error:', e);
+                  }
+                }}
+                activeOpacity={0.8}
+              >
+                <IconSymbol name="photo.on.rectangle.angled" size={16} color="#fff" />
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={[styles.cameraSwitchBtn, { backgroundColor: colors.accent.primary }]}
+                onPress={() => { lightImpact(); setMode('camera'); }}
+                activeOpacity={0.8}
+              >
+                <IconSymbol name="camera.fill" size={16} color="#000" />
+                <Text style={styles.cameraSwitchText}>{t("content_creation.camera")}</Text>
+              </TouchableOpacity>
+            </View>
           </View>
 
           <CustomGalleryGrid

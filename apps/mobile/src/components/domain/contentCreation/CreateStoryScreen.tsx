@@ -53,22 +53,12 @@ export default function CreateStoryScreen() {
 
   const handleClose = useCallback(() => {
     lightImpact();
-    Alert.alert(t("content_creation.cancel"), t("content_creation.cancel_desc"), [
-      { text: t("content_creation.give_up"), style: "cancel" },
-      {
-        text: t("content_creation.exit"),
-        style: "destructive",
-        onPress: () => {
-          lightImpact();
-          if (router.canGoBack()) {
-            router.back();
-          } else {
-            router.replace("/(tabs)/feed");
-          }
-        },
-      },
-    ]);
-  }, [t]);
+    if (router.canGoBack()) {
+      router.back();
+    } else {
+      router.replace("/(tabs)/feed");
+    }
+  }, []);
 
   useEffect(() => {
     const sub = BackHandler.addEventListener("hardwareBackPress", () => {

@@ -60,6 +60,7 @@ export function EmbeddedCamera({
   const [isRecording, setIsRecording] = useState(false);
   const [recordDuration, setRecordDuration] = useState(0);
   const [capturing, setCapturing] = useState(false);
+  const capturingRef = useRef(false);
   // Kamera hazır olana kadar deklanşör devre dışı
   const [isCameraReady, setIsCameraReady] = useState(false);
   const cameraRef = useRef<any>(null);
@@ -123,7 +124,8 @@ export function EmbeddedCamera({
   }, []);
 
   const takePhoto = useCallback(async () => {
-    if (!cameraRef.current || capturing || !isCameraReady || !device) return;
+    if (!cameraRef.current || capturingRef.current || !isCameraReady || !device) return;
+    capturingRef.current = true;
     setCapturing(true);
     mediumImpact();
     shutterScale.value = withSequence(
@@ -147,9 +149,10 @@ export function EmbeddedCamera({
       console.warn('Photo capture error:', e);
       Alert.alert(t('home.error_title'), t('creation.capture_failed'));
     } finally {
+      capturingRef.current = false;
       setCapturing(false);
     }
-  }, [capturing, isCameraReady, onCapture, flash, device]);
+  }, [isCameraReady, onCapture, flash, device]);
 
   const stopRecording = useCallback(async () => {
     if (recordTimerRef.current) {
@@ -209,8 +212,8 @@ export function EmbeddedCamera({
     }
   }, [maxVideoSec, onCapture, stopRecording, flash, device]);
 
-  // onPressIn → anlık fotoğraf çekimi (onPress'e kıyasla ~300ms daha hızlı)
-  const handleShutterPressIn = useCallback(() => {
+  // onPress ile fotoğraf çekimi (onPressIn çift tetiklenme sorununa yol açıyordu)
+  const handleShutterPress = useCallback(() => {
     if (!isRecordingRef.current) {
       takePhoto();
     }
@@ -392,7 +395,7 @@ export function EmbeddedCamera({
               styles.shutterOuter,
               isRecording && { borderColor: '#FF3B30' },
             ]}
-            onPressIn={handleShutterPressIn}
+            onPress={handleShutterPress}
             onLongPress={handleShutterLongPress}
             onPressOut={handleShutterRelease}
             delayLongPress={400}

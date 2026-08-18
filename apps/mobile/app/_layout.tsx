@@ -209,8 +209,9 @@ export default function RootLayout() {
                     <Stack.Screen
                       name="create-story"
                       options={{
-                        presentation: "modal",
-                        gestureEnabled: true,
+                        presentation: "fullScreenModal",
+                        gestureEnabled: false,
+                        animation: "slide_from_bottom",
                       }}
                     />
 
