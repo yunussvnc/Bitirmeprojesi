@@ -70,3 +70,9 @@ Coffe Street (7271), Mart Coffee Co. (7250), Ottoman Kitchen Sea Food & Kebap Re
 - Paşam Roma Dondurma arama kaydı: https://www.yandex.com.tr/maps/
 - Ransserie resmi site: https://www.ransseriecakes.com/
 - Beşiktaş Çıtır resmi site: https://besiktascitir.com/
+
+## Eklenen ikinci doğrulama partisi
+
+Aşağıdaki canlı mekan kayıtlarına, ad–adres–işletme tabelası veya resmî kaynak birlikte kontrol edilerek yerel web ve mobil görselleri eklendi: Walter's Coffee Roastery (638), Books & Coffee Yeldeğirmeni (639), Meet Lab Coffee (644), Tilki Coffee (648), E’Lane Coffee Shop & Bakery (652), Les Câlins Compagnie de Café (653), Seven Specialty Coffee (657), V Coffee Kadıköy (658), The Coffee Factory Kadıköy Kızıltoprak (659) ve Story Coffee & Roastery (660).
+
+Kamuya açık kaynak sayfaları ve adres doğrulama notları `docs/free_image_batches/verification_notes.md` dosyasına kaydedildi. Klar Coffee Roastery, VAU Coffee, Remedy Coffee House, İkarus Coffee House ve 23 Society Espresso Bar için şube/adres veya görsel eşleşmesi kesinleşmediğinden görsel eklenmedi.

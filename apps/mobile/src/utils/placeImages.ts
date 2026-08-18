@@ -34,6 +34,16 @@ const citirOcakbasi = require("../../assets/places/citir-ocakbasi.jpg") as Image
 const hisarBuselik = require("../../assets/places/hisar-buselik.jpg") as ImageSourcePropType;
 const ransserieCafeHouse = require("../../assets/places/ransserie-cafe-house.jpg") as ImageSourcePropType;
 const besiktasCitirPide = require("../../assets/places/besiktas-citir-pide.jpeg") as ImageSourcePropType;
+const waltersCoffeeRoastery = require("../../assets/places/walters-coffee-roastery.jpg") as ImageSourcePropType;
+const booksCoffeeYeldegirmeni = require("../../assets/places/books-coffee-yeldegirmeni.jpg") as ImageSourcePropType;
+const meetLabCoffee = require("../../assets/places/meet-lab-coffee.jpg") as ImageSourcePropType;
+const tilkiCoffee = require("../../assets/places/tilki-coffee.jpg") as ImageSourcePropType;
+const elaneCoffeeShop = require("../../assets/places/elane-coffee-shop.jpg") as ImageSourcePropType;
+const lesCalinsCompagnieDeCafe = require("../../assets/places/les-calins-compagnie-de-cafe.jpg") as ImageSourcePropType;
+const sevenSpecialtyCoffee = require("../../assets/places/seven-specialty-coffee.jpg") as ImageSourcePropType;
+const vCoffeeKadikoy = require("../../assets/places/v-coffee-kadikoy.webp") as ImageSourcePropType;
+const theCoffeeFactoryKadikoy = require("../../assets/places/the-coffee-factory-kadikoy.jpg") as ImageSourcePropType;
+const storyCoffeeRoastery = require("../../assets/places/story-coffee-roastery.jpg") as ImageSourcePropType;
 
 const CATEGORY_PLACEHOLDERS: Record<string, string> = {
   kafe: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800",
@@ -81,6 +91,16 @@ const PLACE_IMAGE_OVERRIDES: Record<string, ImageSourcePropType> = {
   "7251": ransserieCafeHouse,
   "7249": besiktasCitirPide,
   "854": nezahatNurettinEgeKosku,
+  "639": booksCoffeeYeldegirmeni,
+  "638": waltersCoffeeRoastery,
+  "644": meetLabCoffee,
+  "648": tilkiCoffee,
+  "652": elaneCoffeeShop,
+  "653": lesCalinsCompagnieDeCafe,
+  "657": sevenSpecialtyCoffee,
+  "658": vCoffeeKadikoy,
+  "659": theCoffeeFactoryKadikoy,
+  "660": storyCoffeeRoastery,
 };
 
 type PlaceLike = Place | { id?: string | number; name?: string; photo_url?: string; category?: string };
