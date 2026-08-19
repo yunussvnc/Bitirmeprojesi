@@ -351,6 +351,19 @@ import streetPub from '../assets/venues/street-pub.jpg'
 import u2IstanbulIrishPub from '../assets/venues/u2-istanbul-irish-pub.jpg'
 import redfoxPub from '../assets/venues/redfox-pub.jpg'
 import finnegansIrishPub from '../assets/venues/finnegans-irish-pub.jpg'
+import kebapciAskerUstaUmraniye from '../assets/venues/kebapci-asker-usta-umraniye.jpg'
+import laLunePatisserieUmraniye from '../assets/venues/la-lune-patisserie-umraniye.jpg'
+import bagdatOcakbasiUmraniye from '../assets/venues/bagdat-ocakbasi-umraniye.jpg'
+import ibbUmraniyeKentLokantasi from '../assets/venues/ibb-umraniye-kent-lokantasi.jpg'
+import meceBalikUmraniye from '../assets/venues/mece-balik-umraniye.jpg'
+import mentaCafeUmraniye from '../assets/venues/menta-cafe-umraniye.jpg'
+import ardenCafeEsenevler from '../assets/venues/arden-cafe-esenevler.jpg'
+import byCopsis from '../assets/venues/by-copsis.jpg'
+import antebimUmraniye from '../assets/venues/antebim-umraniye.jpg'
+import coffyUmraniyeMerkez from '../assets/venues/coffy-umraniye-merkez.jpg'
+import kaforaCoffeeUmraniye from '../assets/venues/kafora-coffee-umraniye.jpg'
+import yaliKanatKebapSteak from '../assets/venues/yali-kanat-kebap-steak.jpg'
+import cemilustaAkcaabatKofte from '../assets/venues/cemilusta-akcaabat-kofte.jpg'
 
 export interface Venue {
   id: string
@@ -754,6 +767,19 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '1445': u2IstanbulIrishPub,
   '1446': redfoxPub,
   '1447': finnegansIrishPub,
+  '2261': kebapciAskerUstaUmraniye,
+  '2263': laLunePatisserieUmraniye,
+  '2265': bagdatOcakbasiUmraniye,
+  '2266': ibbUmraniyeKentLokantasi,
+  '2267': meceBalikUmraniye,
+  '2270': mentaCafeUmraniye,
+  '2271': ardenCafeEsenevler,
+  '2272': byCopsis,
+  '2273': antebimUmraniye,
+  '2274': coffyUmraniyeMerkez,
+  '2275': kaforaCoffeeUmraniye,
+  '2276': yaliKanatKebapSteak,
+  '2277': cemilustaAkcaabatKofte,
 }
 
 export function getFallbackVenueImage(category: string): string {

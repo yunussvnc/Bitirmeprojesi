@@ -354,6 +354,19 @@ const streetPub = require("../../assets/places/street-pub.jpg") as ImageSourcePr
 const u2IstanbulIrishPub = require("../../assets/places/u2-istanbul-irish-pub.jpg") as ImageSourcePropType;
 const redfoxPub = require("../../assets/places/redfox-pub.jpg") as ImageSourcePropType;
 const finnegansIrishPub = require("../../assets/places/finnegans-irish-pub.jpg") as ImageSourcePropType;
+const kebapciAskerUstaUmraniye = require("../../assets/places/kebapci-asker-usta-umraniye.jpg") as ImageSourcePropType;
+const laLunePatisserieUmraniye = require("../../assets/places/la-lune-patisserie-umraniye.jpg") as ImageSourcePropType;
+const bagdatOcakbasiUmraniye = require("../../assets/places/bagdat-ocakbasi-umraniye.jpg") as ImageSourcePropType;
+const ibbUmraniyeKentLokantasi = require("../../assets/places/ibb-umraniye-kent-lokantasi.jpg") as ImageSourcePropType;
+const meceBalikUmraniye = require("../../assets/places/mece-balik-umraniye.jpg") as ImageSourcePropType;
+const mentaCafeUmraniye = require("../../assets/places/menta-cafe-umraniye.jpg") as ImageSourcePropType;
+const ardenCafeEsenevler = require("../../assets/places/arden-cafe-esenevler.jpg") as ImageSourcePropType;
+const byCopsis = require("../../assets/places/by-copsis.jpg") as ImageSourcePropType;
+const antebimUmraniye = require("../../assets/places/antebim-umraniye.jpg") as ImageSourcePropType;
+const coffyUmraniyeMerkez = require("../../assets/places/coffy-umraniye-merkez.jpg") as ImageSourcePropType;
+const kaforaCoffeeUmraniye = require("../../assets/places/kafora-coffee-umraniye.jpg") as ImageSourcePropType;
+const yaliKanatKebapSteak = require("../../assets/places/yali-kanat-kebap-steak.jpg") as ImageSourcePropType;
+const cemilustaAkcaabatKofte = require("../../assets/places/cemilusta-akcaabat-kofte.jpg") as ImageSourcePropType;
 
 const CATEGORY_PLACEHOLDERS: Record<string, string> = {
   kafe: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800",
@@ -721,6 +734,19 @@ const PLACE_IMAGE_OVERRIDES: Record<string, ImageSourcePropType> = {
   "1445": u2IstanbulIrishPub,
   "1446": redfoxPub,
   "1447": finnegansIrishPub,
+  "2261": kebapciAskerUstaUmraniye,
+  "2263": laLunePatisserieUmraniye,
+  "2265": bagdatOcakbasiUmraniye,
+  "2266": ibbUmraniyeKentLokantasi,
+  "2267": meceBalikUmraniye,
+  "2270": mentaCafeUmraniye,
+  "2271": ardenCafeEsenevler,
+  "2272": byCopsis,
+  "2273": antebimUmraniye,
+  "2274": coffyUmraniyeMerkez,
+  "2275": kaforaCoffeeUmraniye,
+  "2276": yaliKanatKebapSteak,
+  "2277": cemilustaAkcaabatKofte,
 };
 
 type PlaceLike = Place | { id?: string | number; name?: string; photo_url?: string; category?: string };
