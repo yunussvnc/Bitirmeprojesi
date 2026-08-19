@@ -685,3 +685,8 @@ MissisiPi Pub, canlı ID 1132, Cihannüma Barbaros Blv. 55A. Yandex başlığı 
 Çıtır pub, canlı ID 1133, Sinanpaşa Hasfırın Cd. No:2. Yelp/Restoranim adaylarında ÇITIR cafe & pub tabelası, dış cephe ve No:2 bağlamı net; hedef işletme ve adresle güçlü eşleşme.
 The United Pub, canlı ID 1134, Şht. Asım Cd. No:26. Yandex sonucu açıkça “Permanently closed” bildiriyor; kullanıcı kuralı gereği görsel eklenmeyecek.
 Beer Plus, canlı ID 1135, Şht. Asım Cd. No:27 D:B. Bu taramada hedef isim/adresle doğrulanabilir görsel bulunamadı; kullanılmayacak.
+Batch 018 başlangıcı.
+Elma Pub, canlı ID 1136, Sinanpaşa Köyiçi Leşker Sk. No:1. Yelp başlığı hedef adresi taşıyor; bulunan görsel menü/kolaj niteliğinde, Elma Pub fotoğrafları küçük ve tam dış cephe doğrulaması zayıf. Doğrudan tabela/dış cephe adayı bulunana kadar kullanılmayacak.
+BeerHall, canlı ID 1137, Vişnezade Süleyman Seba Cd. No:46. Resmî BeerHall görsellerinde BeerHall markası görülse de hedef No:46 şube adresi aynı görselde doğrulanmadı; kullanılmayacak.
+Chops Cafe & Pub, canlı ID 1138, Cihannüma Barbaros Blv. No:67. Tripadvisor görselinde CHOPS CAFE & PUB neon tabelası ve işletme girişi net; işletme kimliği güçlü, adres çapraz doğrulamasıyla değerlendirilecek.
+Kaynak çapraz doğrulaması Batch 018: Chops Cafe & Pub için Tripadvisor/Yelp kayıtları Cihannüma Mah. Barbaros Blv. No:67/A, Restoranim/Meyhankoli No:67 adresini veriyor; Yandex Maps aynı işletmeyi Barbaros Bul. 65A olarak listeliyor. İşletme adı/tabela görüntüsü net ve canlı 1138 kaydı No:67 ile aynı adres kümesinde; güçlü eşleşme kabul edildi.

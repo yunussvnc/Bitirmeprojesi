@@ -209,6 +209,7 @@ import kilitBarBesiktas from '../assets/venues/kilit-bar-besiktas.jpg'
 import jokerNo19Besiktas from '../assets/venues/joker-no19-besiktas.jpg'
 import missisipiPubBesiktas from '../assets/venues/missisipi-pub-besiktas.jpg'
 import citirPubBesiktas from '../assets/venues/citir-pub-besiktas.jpg'
+import chopsCafePubBesiktas from '../assets/venues/chops-cafe-pub-besiktas.jpg'
 
 export interface Venue {
   id: string
@@ -470,6 +471,7 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '1129': jokerNo19Besiktas,
   '1132': missisipiPubBesiktas,
   '1133': citirPubBesiktas,
+  '1138': chopsCafePubBesiktas,
 }
 
 export function getFallbackVenueImage(category: string): string {
