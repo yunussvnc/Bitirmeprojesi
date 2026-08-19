@@ -1,102 +1,108 @@
 import io
 import logging
-from PIL import Image
+
+from PIL import Image, ImageOps
 
 logger = logging.getLogger("asemos")
 
+
 class MediaProcessor:
-    """
-    Yüklenen medyaları CDN (Bulut) yüklemesi öncesi optimize eder.
-    Büyük (10MB+) fotoğrafları WebP formatında, belirlenen kalite ve
-    boyutlara (thumbnail, medium) göre küçültür.
-    """
-    
+    """Doğrulanmış görselleri metadata içermeyen WebP varyantlarına dönüştürür."""
+
+    @staticmethod
+    def _open_rgb(file_bytes: bytes) -> Image.Image:
+        with Image.open(io.BytesIO(file_bytes)) as source:
+            source.seek(0)
+            image = ImageOps.exif_transpose(source)
+            if image.mode != "RGB":
+                image = image.convert("RGB")
+            else:
+                image = image.copy()
+        return image
+
+    @staticmethod
+    def _encode_webp(image: Image.Image, quality: int) -> bytes:
+        output = io.BytesIO()
+        image.save(
+            output,
+            format="WEBP",
+            quality=quality,
+            method=6,
+            exif=b"",
+            icc_profile=None,
+        )
+        return output.getvalue()
+
     @staticmethod
     def compress_image(file_bytes: bytes, max_width: int = 1200, quality: int = 80) -> bytes:
+        image = MediaProcessor._open_rgb(file_bytes)
+        resized: Image.Image | None = None
         try:
-            with Image.open(io.BytesIO(file_bytes)) as img:
-                # Renk profilini RGB'ye çevir (RGBA veya CMYK ise)
-                if img.mode != "RGB":
-                    img = img.convert("RGB")
-                
-                # Boyutlandırma (Genişlik sınırını aşıyorsa)
-                if img.width > max_width:
-                    ratio = max_width / float(img.width)
-                    new_height = int(float(img.height) * float(ratio))
-                    img = img.resize((max_width, new_height), Image.Resampling.LANCZOS)
-
-                # WebP olarak belleğe yaz
-                output = io.BytesIO()
-                img.save(output, format="WEBP", quality=quality)
-                return output.getvalue()
-        except Exception as e:
-            logger.error(f"Görsel sıkıştırma hatası: {e}")
-            return file_bytes  # Hata durumunda orijinal dosyayı dön
+            if image.width > max_width:
+                ratio = max_width / float(image.width)
+                resized = image.resize(
+                    (max_width, max(1, int(image.height * ratio))),
+                    Image.Resampling.LANCZOS,
+                )
+            return MediaProcessor._encode_webp(resized or image, quality)
+        finally:
+            if resized is not None:
+                resized.close()
+            image.close()
 
     @staticmethod
-    def generate_thumbnail(file_bytes: bytes, size: tuple = (300, 300), quality: int = 70) -> bytes:
+    def generate_thumbnail(
+        file_bytes: bytes,
+        size: tuple[int, int] = (300, 300),
+        quality: int = 70,
+    ) -> bytes:
+        image = MediaProcessor._open_rgb(file_bytes)
         try:
-            with Image.open(io.BytesIO(file_bytes)) as img:
-                if img.mode != "RGB":
-                    img = img.convert("RGB")
-                
-                # Kare thumbnail için resmi ortadan kırparak küçült (thumbnail fonksiyonu in-place çalışır)
-                img.thumbnail(size, Image.Resampling.LANCZOS)
-                
-                output = io.BytesIO()
-                img.save(output, format="WEBP", quality=quality)
-                return output.getvalue()
-        except Exception as e:
-            logger.error(f"Thumbnail oluşturma hatası: {e}")
-            return file_bytes
+            image.thumbnail(size, Image.Resampling.LANCZOS)
+            return MediaProcessor._encode_webp(image, quality)
+        finally:
+            image.close()
 
     @staticmethod
     def generate_blurhash(file_bytes: bytes) -> str | None:
-        """Küçük bir versiyonunu alıp blurhash string'i üretir."""
+        image: Image.Image | None = None
         try:
             import blurhash
-            with Image.open(io.BytesIO(file_bytes)) as img:
-                if img.mode != "RGB":
-                    img = img.convert("RGB")
-                # Blurhash hesabı için resmi çok küçültmek hızı artırır (ör: 32x32)
-                img.thumbnail((32, 32), Image.Resampling.LANCZOS)
-                return blurhash.encode(img, x_components=4, y_components=3)
-        except Exception as e:
-            logger.error(f"Blurhash oluşturma hatası: {e}")
+
+            image = MediaProcessor._open_rgb(file_bytes)
+            image.thumbnail((32, 32), Image.Resampling.LANCZOS)
+            return blurhash.encode(image, x_components=4, y_components=3)
+        except (ImportError, OSError, TypeError, ValueError) as exc:
+            logger.warning("Blurhash oluşturulamadı: %s", exc)
             return None
+        finally:
+            if image is not None:
+                image.close()
 
     @staticmethod
     def process_variants(file_bytes: bytes) -> dict:
-        """
-        Gelen ham görselden 3 varyant (thumbnail, medium, full) ve blurhash üretir.
-        Döndürdüğü dict:
-        {
-            "thumbnail_bytes": bytes,
-            "medium_bytes": bytes,
-            "full_bytes": bytes,
-            "blurhash": str
-        }
-        """
-        variants = {}
-        variants["blurhash"] = MediaProcessor.generate_blurhash(file_bytes)
-        
-        # Thumbnail (150x150)
-        variants["thumbnail_bytes"] = MediaProcessor.generate_thumbnail(file_bytes, size=(150, 150), quality=70)
-        
-        # Medium (600x600 - aspect ratio korunarak)
+        """Üç güvenli WebP varyantı üretir; decode/encode hatasında başarısız olur."""
+        image = MediaProcessor._open_rgb(file_bytes)
+        full: Image.Image | None = None
+        medium: Image.Image | None = None
+        thumbnail: Image.Image | None = None
         try:
-            with Image.open(io.BytesIO(file_bytes)) as img:
-                if img.mode != "RGB":
-                    img = img.convert("RGB")
-                img.thumbnail((600, 600), Image.Resampling.LANCZOS)
-                output = io.BytesIO()
-                img.save(output, format="WEBP", quality=80)
-                variants["medium_bytes"] = output.getvalue()
-        except Exception as e:
-            logger.error(f"Medium varyant hatası: {e}")
-            variants["medium_bytes"] = file_bytes
-            
-        # Full (max 1200px)
-        variants["full_bytes"] = MediaProcessor.compress_image(file_bytes, max_width=1200, quality=85)
-        
-        return variants
+            full = image.copy()
+            full.thumbnail((1200, 1200), Image.Resampling.LANCZOS)
+
+            medium = image.copy()
+            medium.thumbnail((600, 600), Image.Resampling.LANCZOS)
+
+            thumbnail = image.copy()
+            thumbnail.thumbnail((150, 150), Image.Resampling.LANCZOS)
+
+            return {
+                "thumbnail_bytes": MediaProcessor._encode_webp(thumbnail, 70),
+                "medium_bytes": MediaProcessor._encode_webp(medium, 80),
+                "full_bytes": MediaProcessor._encode_webp(full, 85),
+                "blurhash": MediaProcessor.generate_blurhash(file_bytes),
+            }
+        finally:
+            for variant in (thumbnail, medium, full, image):
+                if variant is not None:
+                    variant.close()

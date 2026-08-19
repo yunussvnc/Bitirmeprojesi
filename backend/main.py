@@ -20,6 +20,7 @@ from config import get_settings
 from app.middleware.error_handler import ErrorHandlerMiddleware
 from app.middleware.logging import RequestLoggingMiddleware
 from app.middleware.rate_limiter import RateLimiterMiddleware
+from app.middleware.upload_size import UploadContentLengthMiddleware
 
 from app.routers import auth, users, places, reviews, feed, stories, notifications, upload, recommend, messages, saved, community, admin
 
@@ -137,6 +138,7 @@ app = FastAPI(
 app.add_middleware(ErrorHandlerMiddleware)
 app.add_middleware(RateLimiterMiddleware)
 app.add_middleware(RequestLoggingMiddleware)
+app.add_middleware(UploadContentLengthMiddleware)
 
 origins = settings.ALLOWED_ORIGINS.split(",") if settings.ALLOWED_ORIGINS != "*" else ["*"]
 app.add_middleware(
@@ -314,4 +316,3 @@ async def api_version_aware_404_handler(request: Request, exc: StarletteHTTPExce
             },
         )
     return await http_exception_handler(request, exc)
-

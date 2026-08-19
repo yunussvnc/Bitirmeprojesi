@@ -147,10 +147,18 @@ export async function addComment(postId: number, text: string): Promise<PostComm
   return apiPost<PostComment>(`/posts/${postId}/comments`, { text });
 }
 
-export async function uploadImage(file: { uri: string; type?: string; name?: string }): Promise<{ url: string }> {
-  return apiUploadFile<{ url: string }>("/upload/image", file, "file");
+export type UploadPurpose = 'post' | 'story' | 'message' | 'avatar' | 'review' | 'venue';
+
+export async function uploadImage(
+  file: { uri: string; type?: string; name?: string },
+  purpose: UploadPurpose = 'post'
+): Promise<{ url: string }> {
+  return apiUploadFile<{ url: string }>(`/upload/image?purpose=${purpose}`, file, "file");
 }
 
-export async function uploadVideo(file: { uri: string; type?: string; name?: string }): Promise<{ url: string }> {
-  return apiUploadFile<{ url: string }>("/upload/video", file, "file");
+export async function uploadVideo(
+  file: { uri: string; type?: string; name?: string },
+  purpose: UploadPurpose = 'post'
+): Promise<{ url: string }> {
+  return apiUploadFile<{ url: string }>(`/upload/video?purpose=${purpose}`, file, "file");
 }
