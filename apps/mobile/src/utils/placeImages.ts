@@ -543,6 +543,16 @@ const heepsCoffeeUskudar = require("../../assets/places/heeps-coffee-uskudar.jpg
 const bastetCoffeeKuzguncuk = require("../../assets/places/bastet-coffee-kuzguncuk.jpg") as ImageSourcePropType;
 const hemhalCafeUskudar = require("../../assets/places/hemhal-cafe-uskudar.jpg") as ImageSourcePropType;
 const mihrimahKahveUskudar = require("../../assets/places/mihrimah-kahve-uskudar.jpg") as ImageSourcePropType;
+const caykovskiCafeSisli = require("../../assets/places/caykovski-cafe-sisli.jpg") as ImageSourcePropType;
+const shishlyCafeBistro = require("../../assets/places/shishly-cafe-bistro.jpg") as ImageSourcePropType;
+const downCafeSisli = require("../../assets/places/down-cafe-sisli.jpg") as ImageSourcePropType;
+const susluKahveLoungeSisli = require("../../assets/places/suslu-kahve-lounge-sisli.jpg") as ImageSourcePropType;
+const dualCoffeeShopSisli = require("../../assets/places/dual-coffee-shop-sisli.jpg") as ImageSourcePropType;
+const kozmosSisli = require("../../assets/places/kozmos-sisli.jpg") as ImageSourcePropType;
+const tasCafeMecidiyekoy = require("../../assets/places/tas-cafe-mecidiyekoy.jpg") as ImageSourcePropType;
+const nostaljiKitapCafeSisli = require("../../assets/places/nostalji-kitap-cafe-sisli.jpg") as ImageSourcePropType;
+const luwinCoffeeBakirkoy = require("../../assets/places/luwin-coffee-bakirkoy.jpg") as ImageSourcePropType;
+const espressolabBakirkoyIncirli = require("../../assets/places/espressolab-bakirkoy-incirli.jpg") as ImageSourcePropType;
 
 const CATEGORY_PLACEHOLDERS: Record<string, string> = {
   kafe: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800",
@@ -1099,6 +1109,16 @@ const PLACE_IMAGE_OVERRIDES: Record<string, ImageSourcePropType> = {
   "3712": bastetCoffeeKuzguncuk,
   "3714": hemhalCafeUskudar,
   "3716": mihrimahKahveUskudar,
+  "3719": caykovskiCafeSisli,
+  "3724": shishlyCafeBistro,
+  "3725": downCafeSisli,
+  "3726": susluKahveLoungeSisli,
+  "3727": dualCoffeeShopSisli,
+  "3729": kozmosSisli,
+  "3732": tasCafeMecidiyekoy,
+  "3733": nostaljiKitapCafeSisli,
+  "3734": luwinCoffeeBakirkoy,
+  "3737": espressolabBakirkoyIncirli,
 };
 
 type PlaceLike = Place | { id?: string | number; name?: string; photo_url?: string; category?: string };
