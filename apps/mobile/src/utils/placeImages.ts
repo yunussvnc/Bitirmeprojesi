@@ -424,6 +424,18 @@ const kartalSahilBalik = require("../../assets/places/kartal-sahil-balik.jpg") a
 const korogluKofteciKartal = require("../../assets/places/koroglu-kofteci-kartal.jpg") as ImageSourcePropType;
 const cappelloCaffeKartal = require("../../assets/places/cappello-caffe-kartal.jpg") as ImageSourcePropType;
 const tasKavurmaKartal = require("../../assets/places/tas-kavurma-kartal.jpg") as ImageSourcePropType;
+const monicaKitchenPendik = require("../../assets/places/monica-kitchen-pendik.jpg") as ImageSourcePropType;
+const balkanikaPendik = require("../../assets/places/balkanika-pendik.jpg") as ImageSourcePropType;
+const cantineDelFrida = require("../../assets/places/cantine-del-frida.jpg") as ImageSourcePropType;
+const sandzakBalkanPendik = require("../../assets/places/sandzak-balkan-pendik.jpg") as ImageSourcePropType;
+const tarihiErzurumKebapcisi = require("../../assets/places/tarihi-erzurum-kebapcisi.jpg") as ImageSourcePropType;
+const nebrasPendik = require("../../assets/places/nebras-pendik.jpg") as ImageSourcePropType;
+const meselaNostaljiKafe = require("../../assets/places/mesela-nostalji-kafe.jpg") as ImageSourcePropType;
+const iremLokantasiPendik = require("../../assets/places/irem-lokantasi-pendik.jpg") as ImageSourcePropType;
+const jujiLounge = require("../../assets/places/juji-lounge.jpg") as ImageSourcePropType;
+const cookingHousePendik = require("../../assets/places/cooking-house-pendik.jpg") as ImageSourcePropType;
+const kazan1971Sariyer = require("../../assets/places/kazan-1971-sariyer.jpg") as ImageSourcePropType;
+const setBalikSariyer = require("../../assets/places/set-balik-sariyer.jpg") as ImageSourcePropType;
 
 const CATEGORY_PLACEHOLDERS: Record<string, string> = {
   kafe: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800",
@@ -861,6 +873,18 @@ const PLACE_IMAGE_OVERRIDES: Record<string, ImageSourcePropType> = {
   "2374": korogluKofteciKartal,
   "2375": cappelloCaffeKartal,
   "2377": tasKavurmaKartal,
+  "2381": monicaKitchenPendik,
+  "2382": balkanikaPendik,
+  "2383": cantineDelFrida,
+  "2385": sandzakBalkanPendik,
+  "2386": tarihiErzurumKebapcisi,
+  "2389": nebrasPendik,
+  "2390": meselaNostaljiKafe,
+  "2392": iremLokantasiPendik,
+  "2393": jujiLounge,
+  "2394": cookingHousePendik,
+  "2396": kazan1971Sariyer,
+  "2399": setBalikSariyer,
 };
 
 type PlaceLike = Place | { id?: string | number; name?: string; photo_url?: string; category?: string };

@@ -421,6 +421,18 @@ import kartalSahilBalik from '../assets/venues/kartal-sahil-balik.jpg'
 import korogluKofteciKartal from '../assets/venues/koroglu-kofteci-kartal.jpg'
 import cappelloCaffeKartal from '../assets/venues/cappello-caffe-kartal.jpg'
 import tasKavurmaKartal from '../assets/venues/tas-kavurma-kartal.jpg'
+import monicaKitchenPendik from '../assets/venues/monica-kitchen-pendik.jpg'
+import balkanikaPendik from '../assets/venues/balkanika-pendik.jpg'
+import cantineDelFrida from '../assets/venues/cantine-del-frida.jpg'
+import sandzakBalkanPendik from '../assets/venues/sandzak-balkan-pendik.jpg'
+import tarihiErzurumKebapcisi from '../assets/venues/tarihi-erzurum-kebapcisi.jpg'
+import nebrasPendik from '../assets/venues/nebras-pendik.jpg'
+import meselaNostaljiKafe from '../assets/venues/mesela-nostalji-kafe.jpg'
+import iremLokantasiPendik from '../assets/venues/irem-lokantasi-pendik.jpg'
+import jujiLounge from '../assets/venues/juji-lounge.jpg'
+import cookingHousePendik from '../assets/venues/cooking-house-pendik.jpg'
+import kazan1971Sariyer from '../assets/venues/kazan-1971-sariyer.jpg'
+import setBalikSariyer from '../assets/venues/set-balik-sariyer.jpg'
 
 export interface Venue {
   id: string
@@ -894,6 +906,18 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '2374': korogluKofteciKartal,
   '2375': cappelloCaffeKartal,
   '2377': tasKavurmaKartal,
+  '2381': monicaKitchenPendik,
+  '2382': balkanikaPendik,
+  '2383': cantineDelFrida,
+  '2385': sandzakBalkanPendik,
+  '2386': tarihiErzurumKebapcisi,
+  '2389': nebrasPendik,
+  '2390': meselaNostaljiKafe,
+  '2392': iremLokantasiPendik,
+  '2393': jujiLounge,
+  '2394': cookingHousePendik,
+  '2396': kazan1971Sariyer,
+  '2399': setBalikSariyer,
 }
 
 export function getFallbackVenueImage(category: string): string {
