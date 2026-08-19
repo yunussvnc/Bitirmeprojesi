@@ -641,3 +641,7 @@ Kaynak çapraz doğrulaması Batch 016: Galata Sanat’ın resmî sitesi https:/
 The Smashy, canlı ID 1095, Sinanpaşa Şair Nedim Cd. No:44. Yandex başlığı hedef adresi taşıyor; görselde “Smashy” tabelası, kapıdaki 44 numarası ve dış cephe net, güçlü eşleşme.
 Fres Burger Akaretler, canlı ID 1094, Şair Nedim Cd. No:46 D:b. Corner sonuç başlığı hedef adresi taşısa da incelenen fotoğrafın tabelasında House of B yazıyor; farklı işletme olduğu için reddedildi.
 beyefendi burger, canlı ID 1093, Şht. Asım Cd. 48A. Bu aramada hedef işletme ve adresiyle doğrulanabilir dış cephe/tabela görseli bulunamadı; kullanılmayacak.
+Biber Burger, canlı ID 1099, Yıldız Çırağan Cd. No:11. Yandex başlığı hedef Çırağan Cad. 11 adresini taşıyor; görselde BiberBurger tabelası, dış cephe ve giriş net, güçlü eşleşme.
+Betro Burger Beşiktaş, canlı ID 1098, Şair Nedim Cd. No:26 A. Tripadvisor başlığı hedef adresi taşıyor; görselde BETROLANDIA/Betro Burger marka tabelası net. İç mekân fotoğrafı olsa da işletme kimliği ve kaynak adresi eşleşiyor; kabul edilebilir doğrulama.
+Burger Beşiktaş, canlı ID 1097, Kazan Sk. No:5/A. Bu taramada hedef isim ve No:5/A ile doğrulanabilir işletme tabelası bulunamadı; kullanılmayacak. Kazan Sok. No:1 görseli farklı adres olduğu için reddedildi.
+House of B, canlı ID 1100, Şair Nedim Cd. No:14. Bu aramada hedef işletme adı ve adresiyle doğrulanabilir görsel bulunamadı; kullanılmayacak. Fres Burger sonucundaki House of B fotoğrafı farklı ID/işletme için kullanılmayacak.

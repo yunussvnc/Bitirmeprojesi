@@ -196,6 +196,8 @@ import arnavutkoyBalikcisi from '../assets/venues/arnavutkoy-balikcisi.jpg'
 import galataSanatRestaurant from '../assets/venues/galata-sanat-restaurant.jpg'
 import kurucesmeBalik from '../assets/venues/kurucesme-balik.jpg'
 import theSmashyBesiktas from '../assets/venues/the-smashy-besiktas.jpg'
+import biberBurgerBesiktas from '../assets/venues/biber-burger-besiktas.jpg'
+import betroBurgerBesiktas from '../assets/venues/betro-burger-besiktas.jpg'
 
 export interface Venue {
   id: string
@@ -444,6 +446,8 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '1088': galataSanatRestaurant,
   '1089': kurucesmeBalik,
   '1095': theSmashyBesiktas,
+  '1098': betroBurgerBesiktas,
+  '1099': biberBurgerBesiktas,
 }
 
 export function getFallbackVenueImage(category: string): string {
