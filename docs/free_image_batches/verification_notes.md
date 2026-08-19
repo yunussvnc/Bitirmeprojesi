@@ -736,3 +736,6 @@ Tarihi Rum Okulu, canlı ID 1176, Sinanpaşa Köyiçi Meydanı Sk. No:33. Yandex
 Patikanın yanındaki tarihi levha, canlı ID 1177, Abbasağa Cami Sk. No:6. Arama sonuçları Abbasağa Camii’ne ait; hedef tarihî levha doğrulanmadı, kullanılmayacak.
 Colorful wooden houses, canlı ID 1178, Arnavutköy Bebek-Arnavutköy Cd. Arnavutköy gezi kaynağındaki görselde Boğaz kıyısındaki özgün ahşap evler, balkonlar ve sıra yapı dokusu net; hedef alanla güçlü eşleşme.
 Palanga Caddesi Çeşmesi, canlı ID 1179, Yıldız Palanga Cd. No:1. Bu taramada hedef çeşme ve No:1 ile doğrulanabilir görsel bulunamadı; kullanılmayacak.
+Barbaros Meydanı, canlı ID 1181, Sinanpaşa Barbaros Blv. No:16. Arama sonucu eski Barbaros Bulvarı/şehir panoraması; meydanın kendisi ve No:16 ile kesin eşleşme görselde net değil, kullanılmayacak.
+Deniz Müzesi, canlı ID 1183, Sinanpaşa Beşiktaş Cd. No:6 D:1. Görselde DENİZ MÜZESİ / NAVAL MUSEUM tabelası ve müze girişindeki denizcilik objeleri net; hedef müze kimliği güçlü.
+Yıldız Sarayı, canlı ID 1184, Yıldız Şale Köşkü. Görselde Yıldız Şale Köşkü’nün ayırt edici sarı dış cephesi, bahçesi ve giriş yapısı net; Yıldız Sarayı kompleksindeki hedef alanla güçlü eşleşme.

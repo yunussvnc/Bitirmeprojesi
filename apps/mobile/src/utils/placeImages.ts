@@ -225,6 +225,8 @@ const akaretSiraevler = require("../../assets/places/akaret-siraevler.jpg") as I
 const besiktasMeydan = require("../../assets/places/besiktas-meydan.jpg") as ImageSourcePropType;
 const dolmabahceSaatKulesi = require("../../assets/places/dolmabahce-saat-kulesi.jpg") as ImageSourcePropType;
 const arnavutkoyColorfulHouses = require("../../assets/places/arnavutkoy-colorful-houses.jpg") as ImageSourcePropType;
+const istanbulDenizMuzesi = require("../../assets/places/istanbul-deniz-muzesi.jpg") as ImageSourcePropType;
+const yildizSarayiSaleKosku = require("../../assets/places/yildiz-sarayi-sale-kosku.jpg") as ImageSourcePropType;
 
 const CATEGORY_PLACEHOLDERS: Record<string, string> = {
   kafe: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800",
@@ -463,6 +465,8 @@ const PLACE_IMAGE_OVERRIDES: Record<string, ImageSourcePropType> = {
   "1172": besiktasMeydan,
   "1173": dolmabahceSaatKulesi,
   "1178": arnavutkoyColorfulHouses,
+  "1183": istanbulDenizMuzesi,
+  "1184": yildizSarayiSaleKosku,
 };
 
 type PlaceLike = Place | { id?: string | number; name?: string; photo_url?: string; category?: string };
