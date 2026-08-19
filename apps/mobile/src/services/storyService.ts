@@ -26,6 +26,8 @@ export type Story = {
     id: number;
     name: string;
     category?: string;
+    thumbnail_url?: string;
+    hero_image_url?: string;
   };
   view_count?: number;
   is_viewed?: boolean;
@@ -66,6 +68,7 @@ export type StoryViewerItem = {
   did_visit_profile: boolean;
   did_visit_place: boolean;
   source?: string | null;
+  reaction?: string | null;
 };
 
 export type StoryViewerList = {

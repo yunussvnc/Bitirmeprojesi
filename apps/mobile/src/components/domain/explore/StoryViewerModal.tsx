@@ -391,7 +391,16 @@ export function StoryViewerModal({
     setViewersLoading(true);
     try {
       const res = await getStoryViewers(story.id);
-      setViewers(res.items || []);
+      const sorted = (res.items || []).sort((a, b) => {
+        const aHasHeart = a.reaction === '❤️';
+        const bHasHeart = b.reaction === '❤️';
+        if (aHasHeart && !bHasHeart) return -1;
+        if (!aHasHeart && bHasHeart) return 1;
+        const aTime = new Date(a.viewed_at).getTime();
+        const bTime = new Date(b.viewed_at).getTime();
+        return bTime - aTime;
+      });
+      setViewers(sorted);
     } catch (e) {
       console.warn('Failed to load viewers', e);
     } finally {
@@ -597,21 +606,32 @@ export function StoryViewerModal({
                 onSubmitEditing={handleSendReply}
                 editable={!replySending}
               />
-              <TouchableOpacity
-                style={[
-                  styles.replySendBtn,
-                  replyText.trim() ? styles.replySendBtnActive : null,
-                ]}
-                onPress={handleSendReply}
-                disabled={!replyText.trim() || replySending}
-                activeOpacity={0.75}
-              >
-                {replySending ? (
+              
+              {!replyText.trim() ? (
+                <TouchableOpacity
+                  style={styles.likeBtn}
+                  onPress={() => handleReaction('❤️')}
+                  disabled={reactionSending}
+                >
+                  <IconSymbol name={myReaction === '❤️' ? "heart.fill" : "heart"} size={26} color={myReaction === '❤️' ? "#ef4444" : "#fff"} />
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity
+                  style={[
+                    styles.replySendBtn,
+                    replyText.trim() ? styles.replySendBtnActive : null,
+                  ]}
+                  onPress={handleSendReply}
+                  disabled={!replyText.trim() || replySending}
+                  activeOpacity={0.75}
+                >
+                  {replySending ? (
                   <ActivityIndicator size="small" color="#fff" />
                 ) : (
                   <IconSymbol name="paperplane.fill" size={18} color="#fff" />
                 )}
               </TouchableOpacity>
+              )}
             </View>
           </Animated.View>
         )}
@@ -654,7 +674,10 @@ export function StoryViewerModal({
                   <View key={i} style={styles.viewerItem}>
                     <Avatar source={v.user.avatar_url ? { uri: v.user.avatar_url } : undefined} name={v.user.first_name || v.user.username || 'U'} size={40} />
                     <View style={styles.viewerInfo}>
-                      <Text style={styles.viewerName}>{v.user.first_name || v.user.username || 'U'}</Text>
+                      <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
+                        <Text style={styles.viewerName}>{v.user.first_name || v.user.username || 'U'}</Text>
+                        {v.reaction === '❤️' && <IconSymbol name="heart.fill" size={14} color="#ef4444" />}
+                      </View>
                       <Text style={styles.viewerTime}>{timeAgo(v.viewed_at)}</Text>
                     </View>
                   </View>
@@ -796,6 +819,11 @@ const styles = StyleSheet.create({
   },
   replySendBtnActive: {
     backgroundColor: '#4ade80',
+  },
+  likeBtn: {
+    padding: 4,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   // ── Emoji Reaction Tray ──
   emojiTray: {

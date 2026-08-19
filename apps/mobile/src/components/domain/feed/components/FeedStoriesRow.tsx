@@ -27,7 +27,8 @@ const STORY_GRADIENT: [string, string, ...string[]] = ["#4ade80", "#22c55e", "#1
 type StoryGroup = {
   groupKey: string;
   label?: string;
-  thumbnailUrl: string;
+  thumbnailUrl?: string;
+  avatarUrl?: string;
   isVideo: boolean;
   storyIds: number[];
 };
@@ -141,10 +142,20 @@ export function FeedStoriesRow({ filter }: FeedStoriesRowProps) {
           .map((st) => st.id)
           .reverse();
         
+        let avatarUrl: string | null | undefined;
+        if (s.place) {
+          avatarUrl = s.place.thumbnail_url || s.place.hero_image_url;
+        } else if (s.author) {
+          avatarUrl = s.author.avatar_url;
+        } else if (s.user_id === useAuthStore.getState().user?.id) {
+          avatarUrl = useAuthStore.getState().user?.avatar_url;
+        }
+
         groups.push({
           groupKey: key,
           label: s.place?.name || s.author?.first_name || s.author?.username,
           thumbnailUrl: s.media_type === "video" ? s.thumbnail_url || s.media_url : s.media_url,
+          avatarUrl: avatarUrl || undefined,
           isVideo: s.media_type === "video",
           storyIds: groupStoryIds,
         });
@@ -222,11 +233,10 @@ export function FeedStoriesRow({ filter }: FeedStoriesRowProps) {
                 {seen ? (
                   <View style={[styles.ringSeen, { borderColor: colors.surface.border }]}>
                     <View style={styles.ringInner}>
-                      <Image source={{ uri: g.thumbnailUrl }} style={StyleSheet.absoluteFill} contentFit="cover" />
-                      {g.isVideo && (
-                        <View style={styles.videoIcon}>
-                          <IconSymbol name="play.fill" size={10} color="#fff" />
-                        </View>
+                      {g.avatarUrl ? (
+                        <Image source={{ uri: g.avatarUrl }} style={StyleSheet.absoluteFill} contentFit="cover" />
+                      ) : (
+                        <Avatar name={g.label || 'U'} size={STORY_RING_SIZE - 6} />
                       )}
                     </View>
                   </View>
@@ -234,11 +244,10 @@ export function FeedStoriesRow({ filter }: FeedStoriesRowProps) {
                   <LinearGradient colors={STORY_GRADIENT} start={{ x: 0, y: 0 }} end={{ x: 1, y: 1 }} style={styles.gradientRing}>
                     <View style={[styles.ringGap, { backgroundColor: colors.background.primary }]}>
                       <View style={styles.ringInner}>
-                        <Image source={{ uri: g.thumbnailUrl }} style={StyleSheet.absoluteFill} contentFit="cover" />
-                        {g.isVideo && (
-                          <View style={styles.videoIcon}>
-                            <IconSymbol name="play.fill" size={10} color="#fff" />
-                          </View>
+                        {g.avatarUrl ? (
+                          <Image source={{ uri: g.avatarUrl }} style={StyleSheet.absoluteFill} contentFit="cover" />
+                        ) : (
+                          <Avatar name={g.label || 'U'} size={STORY_RING_SIZE - 6} />
                         )}
                       </View>
                     </View>
@@ -260,7 +269,7 @@ export function FeedStoriesRow({ filter }: FeedStoriesRowProps) {
           visible={storyVisible}
           onClose={() => {
             setStoryViewerIndex(null);
-            setStoryVisible(true);
+            setStoryVisible(false);
           }}
           onStoryViewed={handleStoryViewed}
           onAuthorNavigate={handleStoryNavigateRequest}

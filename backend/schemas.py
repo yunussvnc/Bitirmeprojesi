@@ -589,6 +589,8 @@ class PlaceSummary(BaseModel):
     id: int
     name: str
     category: Optional[str] = None
+    thumbnail_url: Optional[str] = None
+    hero_image_url: Optional[str] = None
 
     class Config:
         from_attributes = True
@@ -703,6 +705,7 @@ class StoryViewerItem(BaseModel):
     did_visit_profile: bool = False
     did_visit_place: bool = False
     source: Optional[str] = None
+    reaction: Optional[str] = None
 
     class Config:
         from_attributes = True

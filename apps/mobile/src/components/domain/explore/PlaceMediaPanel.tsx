@@ -564,7 +564,7 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
             stories={viewerStoriesRef.current}
             initialIndex={storyViewerIndex}
             visible={storyVisible}
-            onClose={() => { setStoryViewerIndex(null); setStoryVisible(true); }}
+            onClose={() => { setStoryViewerIndex(null); setStoryVisible(false); }}
             onStoryViewed={(id) => setViewedStoryIds((prev) => new Set(prev).add(id))}
             onPlaceNavigate={handleStoryNavigateRequest}
             onAuthorNavigate={posts.length > 0 ? handleStoryNavigateRequest : undefined}

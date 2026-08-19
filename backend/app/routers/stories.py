@@ -255,14 +255,20 @@ def get_story_viewers_endpoint(
             is_private=is_private,
         )
 
+        reaction_row = db.query(models.StoryReaction).filter(
+            models.StoryReaction.story_id == story_id,
+            models.StoryReaction.user_id == u.id
+        ).first()
+        reaction_emoji = reaction_row.emoji if reaction_row else None
+
         items.append(schemas.StoryViewerItem(
             user=user_summary,
             viewed_at=v.created_at,
-            # Analitik veriler sadece mekan hesabına tam gösterilir
             watch_duration_seconds=v.watch_duration_seconds if is_venue else 0,
             did_visit_profile=v.did_visit_profile if is_venue else False,
             did_visit_place=v.did_visit_place if is_venue else False,
             source=v.source if is_venue else None,
+            reaction=reaction_emoji,
         ))
 
         if is_venue:

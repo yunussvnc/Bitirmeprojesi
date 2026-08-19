@@ -2182,12 +2182,17 @@ def is_comment_liked_by_user(db: Session, comment_id: int, user_id: int) -> bool
 
 
 def record_story_view(db: Session, story_id: int, viewer_id: int, source: str | None = None) -> bool:
-    """Hikaye izlenme kaydı oluştur. Daha önce izlediyse False döndür."""
+    """Hikaye izlenme kaydı oluştur veya güncelle. Daha önce izlediyse süreyi/tarihi günceller."""
     exists = db.query(models.StoryView).filter(
         models.StoryView.story_id == story_id,
         models.StoryView.viewer_id == viewer_id
     ).first()
     if exists:
+        from sqlalchemy.sql import func
+        exists.created_at = func.now()
+        if source:
+            exists.source = source
+        db.commit()
         return False
     view = models.StoryView(
         story_id=story_id,
