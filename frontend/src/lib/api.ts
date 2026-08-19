@@ -170,6 +170,8 @@ import renkliLimon from '../assets/venues/renkli-limon.jpg'
 import cakmakKahvaltiSalonu from '../assets/venues/cakmak-kahvalti-salonu.jpg'
 import trattoriaCarbonara from '../assets/venues/trattoria-carbonara.jpg'
 import daMarioRistorante from '../assets/venues/da-mario-ristorante.jpg'
+import emporioRistoranteAkaretler from '../assets/venues/emporio-ristorante-akaretler.jpg'
+import pastaToGoAkaretler from '../assets/venues/pasta-to-go-akaretler.jpg'
 
 export interface Venue {
   id: string
@@ -392,6 +394,8 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '1035': cakmakKahvaltiSalonu,
   '1036': trattoriaCarbonara,
   '1041': daMarioRistorante,
+  '1042': emporioRistoranteAkaretler,
+  '1044': pastaToGoAkaretler,
 }
 
 export function getFallbackVenueImage(category: string): string {

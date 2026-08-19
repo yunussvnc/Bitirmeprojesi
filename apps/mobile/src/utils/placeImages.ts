@@ -173,6 +173,8 @@ const renkliLimon = require("../../assets/places/renkli-limon.jpg") as ImageSour
 const cakmakKahvaltiSalonu = require("../../assets/places/cakmak-kahvalti-salonu.jpg") as ImageSourcePropType;
 const trattoriaCarbonara = require("../../assets/places/trattoria-carbonara.jpg") as ImageSourcePropType;
 const daMarioRistorante = require("../../assets/places/da-mario-ristorante.jpg") as ImageSourcePropType;
+const emporioRistoranteAkaretler = require("../../assets/places/emporio-ristorante-akaretler.jpg") as ImageSourcePropType;
+const pastaToGoAkaretler = require("../../assets/places/pasta-to-go-akaretler.jpg") as ImageSourcePropType;
 
 const CATEGORY_PLACEHOLDERS: Record<string, string> = {
   kafe: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800",
@@ -359,6 +361,8 @@ const PLACE_IMAGE_OVERRIDES: Record<string, ImageSourcePropType> = {
   "1035": cakmakKahvaltiSalonu,
   "1036": trattoriaCarbonara,
   "1041": daMarioRistorante,
+  "1042": emporioRistoranteAkaretler,
+  "1044": pastaToGoAkaretler,
 };
 
 type PlaceLike = Place | { id?: string | number; name?: string; photo_url?: string; category?: string };

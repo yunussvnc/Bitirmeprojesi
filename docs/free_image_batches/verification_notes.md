@@ -576,3 +576,7 @@ Trattoria Carbonara, canlı ID 1036, Gayrettepe Vefabey Sokak Say Apt. No:25/C. 
 Eataly, canlı ID 1039, Levazım Zorlu Center Koru Sk. No:2. Arama görsellerinde Zorlu Center iç mekânı var ancak incelenen karede EATALY tabela/markası veya adres işareti görünmüyor; kullanıcı kuralı nedeniyle kullanılmayacak.
 Terrazza Italia, canlı ID 1040, Zorlu Center Koru Sk. No:2. Arama görselleri iç mekân/teras ambiyansı; TERRAZZA ITALIA tabelası ve şube/adres işareti doğrulanmadı, kullanılmayacak.
 Da Mario Ristorante & Pizzeria, canlı ID 1041, Etiler Dilhayat Sk. No:7. Yandex görselinde DA MARIO tabelalı dış cephe ve tesis girişi net; kaynak başlığı aynı Dilhayat Sokak No:7 adresini taşıyor, güçlü eşleşme.
+Emporio Ristorante Akaretler Sıraevler, canlı ID 1042, Vişnezade Şair Nedim Cd. No:3. Yandex görselinde EMPORIO RISTORANTE / PIZZERIA ITALIANO tabelalı dış cephe net; kaynak başlığı aynı Şair Nedim Cd. No:3 adresini taşıyor, güçlü eşleşme.
+Pasta to Go Akaretler, canlı ID 1044, Vişnezade Şair Nedim Cd. No:47/B. İncelenen arama görseli yalnızca ürün fotoğrafı; dış cephe/tabela görünmediği için kullanılmayacak. Ayrı dış cephe adayı bulunursa yeniden değerlendirilecek.
+Paper Moon, canlı ID 1043, Etiler Ahmet Adnan Saygun Cd. Arama sonuçları iç mekân/ambiyans görselleri; PAPER MOON dış tabela veya adres işareti net değil, kullanılmayacak.
+Pasta to Go Akaretler, canlı ID 1044, Vişnezade Şair Nedim Cd. No:47/B. Corner, Yandex, Instagram ve Yemeksepeti kayıtları aynı 47/B adresini doğruluyor; görselde PASTA TO GO tabelalı dış cephe ve giriş net, güçlü eşleşme.
