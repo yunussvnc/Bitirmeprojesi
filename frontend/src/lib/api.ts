@@ -501,6 +501,21 @@ import sandzakBalkanTuzla from '../assets/venues/sandzak-balkan-tuzla.jpg'
 import kiracaBalikTuzla from '../assets/venues/kiraca-balik-tuzla.jpg'
 import zahterTuzla from '../assets/venues/zahter-tuzla.jpg'
 import filizlerKofteTuzla from '../assets/venues/filizler-kofte-tuzla.jpeg'
+import fasuliGardenCekmekoy from '../assets/venues/fasuli-garden-cekmekoy.jpg'
+import civarCekmekoy from '../assets/venues/civar-cekmekoy.jpg'
+import biyerEtKebapCekmekoy from '../assets/venues/biyer-et-kebap-cekmekoy.jpg'
+import parkAdanaCekmekoy from '../assets/venues/park-adana-cekmekoy.jpg'
+import pidedenCekmekoy from '../assets/venues/pideden-cekmekoy.jpg'
+import guaCekmekoy from '../assets/venues/gua-cekmekoy.jpg'
+import foxCoffeeCekmekoy from '../assets/venues/fox-coffee-cekmekoy.jpg'
+import hungerKiyiBuyukcekmece from '../assets/venues/hunger-kiyi-buyukcekmece.jpg'
+import geppettoBuyukcekmece from '../assets/venues/geppetto-buyukcekmece.jpg'
+import iskeleRestaurantBuyukcekmece from '../assets/venues/iskele-restaurant-buyukcekmece.jpg'
+import balikosmanBuyukcekmece from '../assets/venues/balikosman-buyukcekmece.jpg'
+import ekmekiciKofteBuyukcekmece from '../assets/venues/ekmekici-kofte-buyukcekmece.jpg'
+import kaburgaciZiyafettinBuyukcekmece from '../assets/venues/kaburgaci-ziyafettin-buyukcekmece.jpg'
+import theMareBuyukcekmece from '../assets/venues/the-mare-buyukcekmece.jpg'
+import gasikKonyaBuyukcekmece from '../assets/venues/gasik-konya-buyukcekmece.jpg'
 
 export interface Venue {
   id: string
@@ -1054,6 +1069,21 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '2526': kiracaBalikTuzla,
   '2527': zahterTuzla,
   '2528': filizlerKofteTuzla,
+  '2530': fasuliGardenCekmekoy,
+  '2532': civarCekmekoy,
+  '2537': biyerEtKebapCekmekoy,
+  '2538': parkAdanaCekmekoy,
+  '2540': pidedenCekmekoy,
+  '2541': guaCekmekoy,
+  '2542': foxCoffeeCekmekoy,
+  '2544': hungerKiyiBuyukcekmece,
+  '2545': geppettoBuyukcekmece,
+  '2547': iskeleRestaurantBuyukcekmece,
+  '2549': balikosmanBuyukcekmece,
+  '2550': ekmekiciKofteBuyukcekmece,
+  '2551': kaburgaciZiyafettinBuyukcekmece,
+  '2552': theMareBuyukcekmece,
+  '2554': gasikKonyaBuyukcekmece,
 }
 
 export function getFallbackVenueImage(category: string): string {

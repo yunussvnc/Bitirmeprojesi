@@ -504,6 +504,21 @@ const sandzakBalkanTuzla = require("../../assets/places/sandzak-balkan-tuzla.jpg
 const kiracaBalikTuzla = require("../../assets/places/kiraca-balik-tuzla.jpg") as ImageSourcePropType;
 const zahterTuzla = require("../../assets/places/zahter-tuzla.jpg") as ImageSourcePropType;
 const filizlerKofteTuzla = require("../../assets/places/filizler-kofte-tuzla.jpeg") as ImageSourcePropType;
+const fasuliGardenCekmekoy = require("../../assets/places/fasuli-garden-cekmekoy.jpg") as ImageSourcePropType;
+const civarCekmekoy = require("../../assets/places/civar-cekmekoy.jpg") as ImageSourcePropType;
+const biyerEtKebapCekmekoy = require("../../assets/places/biyer-et-kebap-cekmekoy.jpg") as ImageSourcePropType;
+const parkAdanaCekmekoy = require("../../assets/places/park-adana-cekmekoy.jpg") as ImageSourcePropType;
+const pidedenCekmekoy = require("../../assets/places/pideden-cekmekoy.jpg") as ImageSourcePropType;
+const guaCekmekoy = require("../../assets/places/gua-cekmekoy.jpg") as ImageSourcePropType;
+const foxCoffeeCekmekoy = require("../../assets/places/fox-coffee-cekmekoy.jpg") as ImageSourcePropType;
+const hungerKiyiBuyukcekmece = require("../../assets/places/hunger-kiyi-buyukcekmece.jpg") as ImageSourcePropType;
+const geppettoBuyukcekmece = require("../../assets/places/geppetto-buyukcekmece.jpg") as ImageSourcePropType;
+const iskeleRestaurantBuyukcekmece = require("../../assets/places/iskele-restaurant-buyukcekmece.jpg") as ImageSourcePropType;
+const balikosmanBuyukcekmece = require("../../assets/places/balikosman-buyukcekmece.jpg") as ImageSourcePropType;
+const ekmekiciKofteBuyukcekmece = require("../../assets/places/ekmekici-kofte-buyukcekmece.jpg") as ImageSourcePropType;
+const kaburgaciZiyafettinBuyukcekmece = require("../../assets/places/kaburgaci-ziyafettin-buyukcekmece.jpg") as ImageSourcePropType;
+const theMareBuyukcekmece = require("../../assets/places/the-mare-buyukcekmece.jpg") as ImageSourcePropType;
+const gasikKonyaBuyukcekmece = require("../../assets/places/gasik-konya-buyukcekmece.jpg") as ImageSourcePropType;
 
 const CATEGORY_PLACEHOLDERS: Record<string, string> = {
   kafe: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800",
@@ -1021,6 +1036,21 @@ const PLACE_IMAGE_OVERRIDES: Record<string, ImageSourcePropType> = {
   "2526": kiracaBalikTuzla,
   "2527": zahterTuzla,
   "2528": filizlerKofteTuzla,
+  "2530": fasuliGardenCekmekoy,
+  "2532": civarCekmekoy,
+  "2537": biyerEtKebapCekmekoy,
+  "2538": parkAdanaCekmekoy,
+  "2540": pidedenCekmekoy,
+  "2541": guaCekmekoy,
+  "2542": foxCoffeeCekmekoy,
+  "2544": hungerKiyiBuyukcekmece,
+  "2545": geppettoBuyukcekmece,
+  "2547": iskeleRestaurantBuyukcekmece,
+  "2549": balikosmanBuyukcekmece,
+  "2550": ekmekiciKofteBuyukcekmece,
+  "2551": kaburgaciZiyafettinBuyukcekmece,
+  "2552": theMareBuyukcekmece,
+  "2554": gasikKonyaBuyukcekmece,
 };
 
 type PlaceLike = Place | { id?: string | number; name?: string; photo_url?: string; category?: string };
