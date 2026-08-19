@@ -188,6 +188,8 @@ import maderiaSushiBar from '../assets/venues/maderia-sushi-bar.jpg'
 import ademBabaArnavutkoy from '../assets/venues/adem-baba-arnavutkoy.jpg'
 import midyeciAhmetBesiktas from '../assets/venues/midyeci-ahmet-besiktas.jpg'
 import maviBalikBesiktas from '../assets/venues/mavi-balik-besiktas.jpg'
+import carsiBalikBesiktas from '../assets/venues/carsi-balik-besiktas.jpg'
+import istakoziSeaFastFood from '../assets/venues/istakozi-sea-fast-food.jpg'
 
 export interface Venue {
   id: string
@@ -428,6 +430,8 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '1075': ademBabaArnavutkoy,
   '1077': midyeciAhmetBesiktas,
   '1079': maviBalikBesiktas,
+  '1082': carsiBalikBesiktas,
+  '1083': istakoziSeaFastFood,
 }
 
 export function getFallbackVenueImage(category: string): string {

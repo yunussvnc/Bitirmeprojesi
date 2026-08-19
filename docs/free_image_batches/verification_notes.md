@@ -623,3 +623,6 @@ Midyeci Ahmet, canlı ID 1077, Çırağan Cd. No:37. Yandex başlığı aynı Ç
 Manidar Balık Restoran, canlı ID 1078, Salihefendi Sk. 4/A. Yandex arama sonucu açıkça “Artık faal değil” uyarısı taşıyor; kullanıcı kuralı gereği görsel eklenmeyecek.
 Mavi Balık, canlı ID 1079, Muallim Naci Cd. 64/A. Tripadvisor başlığı aynı Muallim Naci Cad. No:64/A adresini taşıyor; görselde mavi balık tabelası ve deniz kenarı dış cephesi net, güçlü eşleşme. Aynı aramadaki “Revma” görseli farklı işletme olduğu için reddedildi.
 Beşiktaş Olta Balık, canlı ID 1080, Köyiçi Mektep Sk. No:14/A. Bu taramada hedef isim/adresle doğrulanabilir tabela ve dış cephe görseli bulunamadı; kullanılmayacak.
+Ahtapot Restaurant, canlı ID 1081, Köyiçi Cad. Kilise Meydanı 2/B. Tripadvisor sonuçları restoranı Beşiktaş olarak gösterse de incelenen görseller iç mekân/ürün ağırlıklı ve hedef adres/tabela görünmüyor; doğrulanabilir dış cephe bulunana kadar kullanılmayacak.
+Çarşı Balık Restoran, canlı ID 1082, Leşker Sk. No:4. Tripadvisor başlığı Beşiktaş Çarşı Balık Restaurant; görselde BEŞİKTAŞ ÇARŞI BALIK tabelası ve kapı yanında 4? numara net, hedef No:4 ile güçlü eşleşme.
+İSTAKOZİ SEA FAST FOOD, canlı ID 1083, Osmanzade Sk. No:6. Corner başlığı hedef Osmanzade Sk. no:6 adresini taşıyor; dış cephede Ortaköy ve İSTAKOZİ tabelaları net, güçlü eşleşme.
