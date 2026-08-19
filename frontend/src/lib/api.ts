@@ -203,6 +203,7 @@ import beltasBurgerBesiktas from '../assets/venues/beltas-burger-besiktas.jpg'
 import ilPolloDelCapoBesiktas from '../assets/venues/il-pollo-del-capo-besiktas.jpg'
 import whiteBurgerBesiktas from '../assets/venues/white-burger-besiktas.png'
 import bcanteBesiktas from '../assets/venues/bcante-besiktas.jpg'
+import missionStreetFood from '../assets/venues/mission-street-food.jpg'
 
 export interface Venue {
   id: string
@@ -458,6 +459,7 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '1106': ilPolloDelCapoBesiktas,
   '1107': whiteBurgerBesiktas,
   '1108': bcanteBesiktas,
+  '1110': missionStreetFood,
 }
 
 export function getFallbackVenueImage(category: string): string {
