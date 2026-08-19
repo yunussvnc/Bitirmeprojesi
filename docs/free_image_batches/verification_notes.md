@@ -727,3 +727,8 @@ Tarihi Çeşme (Historical Fountain), canlı ID 1169, Türkali Asmalı Kahve Sk.
 Tarihi Akaret Sıraevler Caddesi, canlı ID 1170, Vişnezade Süleyman Seba Cd. 26A. Yandex başlığı hedef 26A adresini taşıyor; görselde Akaret Sıraevler’in özgün sıra bina dokusu ve sokak perspektifi net, güçlü eşleşme.
 Yıldız Saat Kulesi, canlı ID 1171, Yıldız Cd. No:50. Bu taramada saat kulesi ve hedef No:50 ile doğrulanabilir görsel bulunamadı; kullanılmayacak.
 Kaynak çapraz doğrulaması Batch 019: Millî Saraylar Yıldız Sarayı sayfası https://www.millisaraylar.gov.tr/Lokasyon/5/Yildiz-Sarayi sarayın dış bahçesinin Yıldız Parkı olduğunu ve Hasbahçe’nin saray alanında yer aldığını doğruluyor. Hasbahçe havuz/bahçe görseli canlı 1168 için kabul edildi.
+Yıldız Saat Kulesi, canlı ID 1171, Yıldız Cd. No:50. Dolmabahçe Saat Kulesi adıyla yayınlanan görselde kule mimarisi ve saat yüzleri net; ancak kayıt hedefi Yıldız Saat Kulesi olduğundan bu Dolmabahçe kulesi görseli yanlış olur, kullanılmayacak.
+Beşiktaş Meydan, canlı ID 1172, Cihannüma Beşiktaş Cd. Beşiktaş Meydanı açılış kaynağındaki havadan görselde meydanın deniz kıyısı, düzeni ve tarihî yapıları net; hedef alanla güçlü eşleşme.
+Dolmabahçe Saat Kulesi, canlı ID 1173, Vişnezade Meclis-i Mebusan Cd. 38A. Görselde ayırt edici saat kulesi, saat yüzü ve çevresindeki cami/park bağlamı net; hedef alanla güçlü eşleşme.
+Tarihi Çeşme, canlı ID 1174, Mecidiye Mecidiye Köprüsü Sk. No:20. Arama sonucu farklı Beltaş Rest Cafe panoraması veya adresi belirsiz çeşme görselleri; hedef No:20 çeşmeyle kesin eşleşme yok, kullanılmayacak.
+Hamidiye Çeşmesi, canlı ID 1175, Yıldız Eğriçınar Sk. No:3. Bu taramada hedef çeşme ve adresle doğrulanabilir görsel bulunamadı; kullanılmayacak.
