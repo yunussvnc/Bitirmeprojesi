@@ -469,6 +469,22 @@ const gardenMezzeFatih = require("../../assets/places/garden-mezze-fatih.jpg") a
 const restoLordomBomonti = require("../../assets/places/resto-lordom-bomonti.jpg") as ImageSourcePropType;
 const restohanKebapBomonti = require("../../assets/places/restohan-kebap-bomonti.jpg") as ImageSourcePropType;
 const mahirLokantasiSisli = require("../../assets/places/mahir-lokantasi-sisli.jpg") as ImageSourcePropType;
+const develiNisantasi = require("../../assets/places/develi-nisantasi.jpg") as ImageSourcePropType;
+const junoHarbiye = require("../../assets/places/juno-harbiye.jpg") as ImageSourcePropType;
+const griffinBomonti = require("../../assets/places/griffin-bomonti.jpg") as ImageSourcePropType;
+const haydinIstanbul = require("../../assets/places/haydin-istanbul.jpg") as ImageSourcePropType;
+const paludeRestaurantZeytinburnu = require("../../assets/places/palude-restaurant-zeytinburnu.png") as ImageSourcePropType;
+const ehliCigerZeytinburnu = require("../../assets/places/ehli-ciger-zeytinburnu.jpg") as ImageSourcePropType;
+const hungerFisekhane = require("../../assets/places/hunger-fisekhane.jpg") as ImageSourcePropType;
+const gastoFisekhane = require("../../assets/places/gasto-fisekhane.jpeg") as ImageSourcePropType;
+const lavmacunZeytinburnu = require("../../assets/places/lavmacun-zeytinburnu.jpg") as ImageSourcePropType;
+const tepsiEtZeytinburnu = require("../../assets/places/tepsi-et-zeytinburnu.jpg") as ImageSourcePropType;
+const joiiLoungeZeytinburnu = require("../../assets/places/joii-lounge-zeytinburnu.jpg") as ImageSourcePropType;
+const afghanPamirZeytinburnu = require("../../assets/places/afghan-pamir-zeytinburnu.jpg") as ImageSourcePropType;
+const sarrafSofrasiBagcilar = require("../../assets/places/sarraf-sofrasi-bagcilar.jpg") as ImageSourcePropType;
+const kirvemEtBagcilar = require("../../assets/places/kirvem-et-bagcilar.jpg") as ImageSourcePropType;
+const serafMahmutbey = require("../../assets/places/seraf-mahmutbey.jpg") as ImageSourcePropType;
+const karadenizSofrasiBagcilar = require("../../assets/places/karadeniz-sofrasi-bagcilar.jpg") as ImageSourcePropType;
 
 const CATEGORY_PLACEHOLDERS: Record<string, string> = {
   kafe: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800",
@@ -951,6 +967,22 @@ const PLACE_IMAGE_OVERRIDES: Record<string, ImageSourcePropType> = {
   "2470": restoLordomBomonti,
   "2471": restohanKebapBomonti,
   "2476": mahirLokantasiSisli,
+  "2480": develiNisantasi,
+  "2481": junoHarbiye,
+  "2482": griffinBomonti,
+  "2484": haydinIstanbul,
+  "2487": paludeRestaurantZeytinburnu,
+  "2489": ehliCigerZeytinburnu,
+  "2490": hungerFisekhane,
+  "2492": gastoFisekhane,
+  "2493": lavmacunZeytinburnu,
+  "2494": tepsiEtZeytinburnu,
+  "2495": joiiLoungeZeytinburnu,
+  "2496": afghanPamirZeytinburnu,
+  "2499": sarrafSofrasiBagcilar,
+  "2500": kirvemEtBagcilar,
+  "2501": serafMahmutbey,
+  "2502": karadenizSofrasiBagcilar,
 };
 
 type PlaceLike = Place | { id?: string | number; name?: string; photo_url?: string; category?: string };

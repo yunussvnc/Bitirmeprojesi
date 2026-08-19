@@ -466,6 +466,22 @@ import gardenMezzeFatih from '../assets/venues/garden-mezze-fatih.jpg'
 import restoLordomBomonti from '../assets/venues/resto-lordom-bomonti.jpg'
 import restohanKebapBomonti from '../assets/venues/restohan-kebap-bomonti.jpg'
 import mahirLokantasiSisli from '../assets/venues/mahir-lokantasi-sisli.jpg'
+import develiNisantasi from '../assets/venues/develi-nisantasi.jpg'
+import junoHarbiye from '../assets/venues/juno-harbiye.jpg'
+import griffinBomonti from '../assets/venues/griffin-bomonti.jpg'
+import haydinIstanbul from '../assets/venues/haydin-istanbul.jpg'
+import paludeRestaurantZeytinburnu from '../assets/venues/palude-restaurant-zeytinburnu.png'
+import ehliCigerZeytinburnu from '../assets/venues/ehli-ciger-zeytinburnu.jpg'
+import hungerFisekhane from '../assets/venues/hunger-fisekhane.jpg'
+import gastoFisekhane from '../assets/venues/gasto-fisekhane.jpeg'
+import lavmacunZeytinburnu from '../assets/venues/lavmacun-zeytinburnu.jpg'
+import tepsiEtZeytinburnu from '../assets/venues/tepsi-et-zeytinburnu.jpg'
+import joiiLoungeZeytinburnu from '../assets/venues/joii-lounge-zeytinburnu.jpg'
+import afghanPamirZeytinburnu from '../assets/venues/afghan-pamir-zeytinburnu.jpg'
+import sarrafSofrasiBagcilar from '../assets/venues/sarraf-sofrasi-bagcilar.jpg'
+import kirvemEtBagcilar from '../assets/venues/kirvem-et-bagcilar.jpg'
+import serafMahmutbey from '../assets/venues/seraf-mahmutbey.jpg'
+import karadenizSofrasiBagcilar from '../assets/venues/karadeniz-sofrasi-bagcilar.jpg'
 
 export interface Venue {
   id: string
@@ -984,6 +1000,22 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '2470': restoLordomBomonti,
   '2471': restohanKebapBomonti,
   '2476': mahirLokantasiSisli,
+  '2480': develiNisantasi,
+  '2481': junoHarbiye,
+  '2482': griffinBomonti,
+  '2484': haydinIstanbul,
+  '2487': paludeRestaurantZeytinburnu,
+  '2489': ehliCigerZeytinburnu,
+  '2490': hungerFisekhane,
+  '2492': gastoFisekhane,
+  '2493': lavmacunZeytinburnu,
+  '2494': tepsiEtZeytinburnu,
+  '2495': joiiLoungeZeytinburnu,
+  '2496': afghanPamirZeytinburnu,
+  '2499': sarrafSofrasiBagcilar,
+  '2500': kirvemEtBagcilar,
+  '2501': serafMahmutbey,
+  '2502': karadenizSofrasiBagcilar,
 }
 
 export function getFallbackVenueImage(category: string): string {
