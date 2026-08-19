@@ -283,6 +283,22 @@ const taksimBahcivan = require("../../assets/places/taksim-bahcivan.jpg") as Ima
 const guneyRestaurant1964 = require("../../assets/places/guney-restaurant-1964.jpg") as ImageSourcePropType;
 const peraIstanbulRestaurant = require("../../assets/places/pera-istanbul-restaurant.jpg") as ImageSourcePropType;
 const novasHagiasophiaRestaurant = require("../../assets/places/novas-hagiasophia-restaurant.jpg") as ImageSourcePropType;
+const anatoliaSeafoodSteakKebap = require("../../assets/places/anatolia-seafood-steak-kebap.jpg") as ImageSourcePropType;
+const nomadsTaksim = require("../../assets/places/nomads-taksim.jpg") as ImageSourcePropType;
+const fbCulture = require("../../assets/places/fb-culture.jpg") as ImageSourcePropType;
+const antakyaKebapAsmali = require("../../assets/places/antakya-kebap-asmali.jpg") as ImageSourcePropType;
+const tarihiDegustasyonOcakbasi = require("../../assets/places/tarihi-degustasyon-ocakbasi.jpg") as ImageSourcePropType;
+const sifirBirAdanaKebapTaksim = require("../../assets/places/sifir-bir-adana-kebap-taksim.jpg") as ImageSourcePropType;
+const ottomanKitchen = require("../../assets/places/ottoman-kitchen.jpg") as ImageSourcePropType;
+const durumcuMehmetUsta = require("../../assets/places/durumcu-mehmet-usta.jpg") as ImageSourcePropType;
+const haciUstaKebap = require("../../assets/places/haci-usta-kebap.jpg") as ImageSourcePropType;
+const dilmanKebap = require("../../assets/places/dilman-kebap.jpg") as ImageSourcePropType;
+const sanliKebap = require("../../assets/places/sanli-kebap.jpg") as ImageSourcePropType;
+const meleklerOcakbasi = require("../../assets/places/melekler-ocakbasi.jpg") as ImageSourcePropType;
+const sultanKebapFish = require("../../assets/places/sultan-kebap-fish.jpg") as ImageSourcePropType;
+const biliceKebap = require("../../assets/places/bilice-kebap.jpg") as ImageSourcePropType;
+const kervanKebabGrill = require("../../assets/places/kervan-kebab-grill.jpg") as ImageSourcePropType;
+const beyogluEsnafLokantasi = require("../../assets/places/beyoglu-esnaf-lokantasi.jpg") as ImageSourcePropType;
 
 const CATEGORY_PLACEHOLDERS: Record<string, string> = {
   kafe: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800",
@@ -579,6 +595,22 @@ const PLACE_IMAGE_OVERRIDES: Record<string, ImageSourcePropType> = {
   "1307": guneyRestaurant1964,
   "1311": peraIstanbulRestaurant,
   "1312": novasHagiasophiaRestaurant,
+  "1313": anatoliaSeafoodSteakKebap,
+  "1315": nomadsTaksim,
+  "1318": fbCulture,
+  "1319": antakyaKebapAsmali,
+  "1321": tarihiDegustasyonOcakbasi,
+  "1323": sifirBirAdanaKebapTaksim,
+  "1325": ottomanKitchen,
+  "1327": durumcuMehmetUsta,
+  "1328": haciUstaKebap,
+  "1329": dilmanKebap,
+  "1330": sanliKebap,
+  "1331": meleklerOcakbasi,
+  "1332": sultanKebapFish,
+  "1334": biliceKebap,
+  "1335": kervanKebabGrill,
+  "1337": beyogluEsnafLokantasi,
 };
 
 type PlaceLike = Place | { id?: string | number; name?: string; photo_url?: string; category?: string };

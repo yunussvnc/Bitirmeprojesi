@@ -280,6 +280,22 @@ import taksimBahcivan from '../assets/venues/taksim-bahcivan.jpg'
 import guneyRestaurant1964 from '../assets/venues/guney-restaurant-1964.jpg'
 import peraIstanbulRestaurant from '../assets/venues/pera-istanbul-restaurant.jpg'
 import novasHagiasophiaRestaurant from '../assets/venues/novas-hagiasophia-restaurant.jpg'
+import anatoliaSeafoodSteakKebap from '../assets/venues/anatolia-seafood-steak-kebap.jpg'
+import nomadsTaksim from '../assets/venues/nomads-taksim.jpg'
+import fbCulture from '../assets/venues/fb-culture.jpg'
+import antakyaKebapAsmali from '../assets/venues/antakya-kebap-asmali.jpg'
+import tarihiDegustasyonOcakbasi from '../assets/venues/tarihi-degustasyon-ocakbasi.jpg'
+import sifirBirAdanaKebapTaksim from '../assets/venues/sifir-bir-adana-kebap-taksim.jpg'
+import ottomanKitchen from '../assets/venues/ottoman-kitchen.jpg'
+import durumcuMehmetUsta from '../assets/venues/durumcu-mehmet-usta.jpg'
+import haciUstaKebap from '../assets/venues/haci-usta-kebap.jpg'
+import dilmanKebap from '../assets/venues/dilman-kebap.jpg'
+import sanliKebap from '../assets/venues/sanli-kebap.jpg'
+import meleklerOcakbasi from '../assets/venues/melekler-ocakbasi.jpg'
+import sultanKebapFish from '../assets/venues/sultan-kebap-fish.jpg'
+import biliceKebap from '../assets/venues/bilice-kebap.jpg'
+import kervanKebabGrill from '../assets/venues/kervan-kebab-grill.jpg'
+import beyogluEsnafLokantasi from '../assets/venues/beyoglu-esnaf-lokantasi.jpg'
 
 export interface Venue {
   id: string
@@ -612,6 +628,22 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '1307': guneyRestaurant1964,
   '1311': peraIstanbulRestaurant,
   '1312': novasHagiasophiaRestaurant,
+  '1313': anatoliaSeafoodSteakKebap,
+  '1315': nomadsTaksim,
+  '1318': fbCulture,
+  '1319': antakyaKebapAsmali,
+  '1321': tarihiDegustasyonOcakbasi,
+  '1323': sifirBirAdanaKebapTaksim,
+  '1325': ottomanKitchen,
+  '1327': durumcuMehmetUsta,
+  '1328': haciUstaKebap,
+  '1329': dilmanKebap,
+  '1330': sanliKebap,
+  '1331': meleklerOcakbasi,
+  '1332': sultanKebapFish,
+  '1334': biliceKebap,
+  '1335': kervanKebabGrill,
+  '1337': beyogluEsnafLokantasi,
 }
 
 export function getFallbackVenueImage(category: string): string {
