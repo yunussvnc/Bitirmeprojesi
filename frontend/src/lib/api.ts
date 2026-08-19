@@ -179,6 +179,8 @@ import antiquePizzeriaBeyoglu from '../assets/venues/antique-pizzeria-beyoglu.jp
 import sushiLabBesiktas from '../assets/venues/sushi-lab-besiktas.jpg'
 import miyabiSushiAkat from '../assets/venues/miyabi-sushi-akat.jpg'
 import wingsMatchaOrtakoy from '../assets/venues/wings-matcha-ortakoy.jpg'
+import sushiSpiceAkaretler from '../assets/venues/sushi-spice-akaretler.jpg'
+import inariOmakaseKurucesme from '../assets/venues/inari-omakase-kurucesme.webp'
 
 export interface Venue {
   id: string
@@ -410,6 +412,8 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '1057': sushiLabBesiktas,
   '1060': miyabiSushiAkat,
   '1062': wingsMatchaOrtakoy,
+  '1064': sushiSpiceAkaretler,
+  '1066': inariOmakaseKurucesme,
 }
 
 export function getFallbackVenueImage(category: string): string {

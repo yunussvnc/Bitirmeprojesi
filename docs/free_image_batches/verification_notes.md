@@ -601,3 +601,8 @@ Miyabi Sushi & Japanese Grill Bar, canlı ID 1060, Zeytinoğlu Cd. Akat Yaren Sk
 Isokyo, canlı ID 1061, Zorlu Center Vadi Caddesi. Arama sonuçları Zorlu Center genel mimari fotoğrafları ve tabelasız iç mekân; ISOKYO şube tabelası/adres işareti doğrulanmadı, kullanılmayacak.
 Wings Matcha, canlı ID 1062, Mecidiye Eski Bahçe Sk. No:19. Yandex sonucu aynı Eski Bahçe Sokak No:19A kaydını ve WINGS MATCHA tabelalı dış cephe/girişi gösteriyor; canlı kayıt No:19 ile güçlü eşleşme.
 Alina Cafe Beşiktaş, canlı ID 1063, Sinanpaşa Altıntaş Sk. No:23/A. Arama sonuçlarında hedef işletme adı ve adresiyle doğrulanabilir dış cephe/tabela görseli bulunamadı; kullanılmayacak.
+Sushi&Spice Akaretler, canlı ID 1064, Sinanpaşa Şair Nedim Cd. No:10. Yandex sonucu aynı Şair Nedim Cd. No:10 adresini ve SUSHI&SPICE tabelalı dış cepheyi gösteriyor; güçlü eşleşme.
+inari Omakase Kuruçeşme, canlı ID 1066, Kuruçeşme Cd. No:11. İncelenen arama görseli yalnızca tabelasız iç bar; dış cephe/tabela veya No:11 işareti görünmediği için kullanılmayacak. Ayrı dış cephe adayı bulunursa yeniden değerlendirilecek.
+Sushi&Spice Akmerkez, canlı ID 1067, Akmerkez AVM Nisbetiye Cd. No:56. Mevcut sonuçlar Akaretler şubesine ait; Akmerkez şubesiyle karıştırılmaması için kullanılmayacak.
+Itsumi, canlı ID 1068, Levent İş Kuleleri Kule 2 D:43. Bu taramada hedef şube adı ve adresiyle doğrulanabilir dış cephe/tabela görseli bulunamadı; kullanılmayacak.
+inari Omakase Kuruçeşme, canlı ID 1066, Kuruçeşme Cd. No:11. İnari’nin dış cephe görselinde inari PIKU / SUSHI-LOUNGE-BAR tabelası ve giriş net; arama başlığı aynı Kuruçeşme Cd. No:11 adresini taşıyor, güçlü eşleşme.
