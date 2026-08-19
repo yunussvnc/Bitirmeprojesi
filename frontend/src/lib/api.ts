@@ -446,6 +446,18 @@ import ersinKebapKagithane from '../assets/venues/ersin-kebap-kagithane.jpg'
 import lezzetDiyariKagithane from '../assets/venues/lezzet-diyari-kagithane.jpg'
 import obaLokantasiKagithane from '../assets/venues/oba-lokantasi-kagithane.jpg'
 import krorenLevent from '../assets/venues/kroren-levent.jpg'
+import saraykapiEsenyurt from '../assets/venues/saraykapi-esenyurt.jpg'
+import chefKebapEsenyurt from '../assets/venues/chef-kebap-esenyurt.jpg'
+import pasaPizzeriaEsenyurt from '../assets/venues/pasa-pizzeria-esenyurt.jpg'
+import phuketGardenEsenyurt from '../assets/venues/phuket-garden-esenyurt.jpg'
+import cigerciBahattinEsenyurt from '../assets/venues/cigerci-bahattin-esenyurt.jpg'
+import aksoylarTandirEsenyurt from '../assets/venues/aksoylar-tandir-esenyurt.jpg'
+import etYiyelimAvcilar from '../assets/venues/et-yiyelim-avcilar.jpg'
+import majesticRestaurantAvcilar from '../assets/venues/majestic-restaurant-avcilar.jpg'
+import tropicanoMangalAvcilar from '../assets/venues/tropicano-mangal-avcilar.jpg'
+import kutmanMangalbasiAvcilar from '../assets/venues/kutman-mangalbasi-avcilar.jpg'
+import bigetAvcilar from '../assets/venues/biget-avcilar.jpg'
+import evitaMangalbasiAvcilar from '../assets/venues/evita-mangalbasi-avcilar.jpg'
 
 export interface Venue {
   id: string
@@ -944,6 +956,18 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '2421': lezzetDiyariKagithane,
   '2422': obaLokantasiKagithane,
   '2423': krorenLevent,
+  '2429': saraykapiEsenyurt,
+  '2433': chefKebapEsenyurt,
+  '2435': pasaPizzeriaEsenyurt,
+  '2437': phuketGardenEsenyurt,
+  '2439': cigerciBahattinEsenyurt,
+  '2440': aksoylarTandirEsenyurt,
+  '2441': etYiyelimAvcilar,
+  '2442': majesticRestaurantAvcilar,
+  '2447': tropicanoMangalAvcilar,
+  '2450': kutmanMangalbasiAvcilar,
+  '2451': bigetAvcilar,
+  '2452': evitaMangalbasiAvcilar,
 }
 
 export function getFallbackVenueImage(category: string): string {

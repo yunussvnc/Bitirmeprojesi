@@ -449,6 +449,18 @@ const ersinKebapKagithane = require("../../assets/places/ersin-kebap-kagithane.j
 const lezzetDiyariKagithane = require("../../assets/places/lezzet-diyari-kagithane.jpg") as ImageSourcePropType;
 const obaLokantasiKagithane = require("../../assets/places/oba-lokantasi-kagithane.jpg") as ImageSourcePropType;
 const krorenLevent = require("../../assets/places/kroren-levent.jpg") as ImageSourcePropType;
+const saraykapiEsenyurt = require("../../assets/places/saraykapi-esenyurt.jpg") as ImageSourcePropType;
+const chefKebapEsenyurt = require("../../assets/places/chef-kebap-esenyurt.jpg") as ImageSourcePropType;
+const pasaPizzeriaEsenyurt = require("../../assets/places/pasa-pizzeria-esenyurt.jpg") as ImageSourcePropType;
+const phuketGardenEsenyurt = require("../../assets/places/phuket-garden-esenyurt.jpg") as ImageSourcePropType;
+const cigerciBahattinEsenyurt = require("../../assets/places/cigerci-bahattin-esenyurt.jpg") as ImageSourcePropType;
+const aksoylarTandirEsenyurt = require("../../assets/places/aksoylar-tandir-esenyurt.jpg") as ImageSourcePropType;
+const etYiyelimAvcilar = require("../../assets/places/et-yiyelim-avcilar.jpg") as ImageSourcePropType;
+const majesticRestaurantAvcilar = require("../../assets/places/majestic-restaurant-avcilar.jpg") as ImageSourcePropType;
+const tropicanoMangalAvcilar = require("../../assets/places/tropicano-mangal-avcilar.jpg") as ImageSourcePropType;
+const kutmanMangalbasiAvcilar = require("../../assets/places/kutman-mangalbasi-avcilar.jpg") as ImageSourcePropType;
+const bigetAvcilar = require("../../assets/places/biget-avcilar.jpg") as ImageSourcePropType;
+const evitaMangalbasiAvcilar = require("../../assets/places/evita-mangalbasi-avcilar.jpg") as ImageSourcePropType;
 
 const CATEGORY_PLACEHOLDERS: Record<string, string> = {
   kafe: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800",
@@ -911,6 +923,18 @@ const PLACE_IMAGE_OVERRIDES: Record<string, ImageSourcePropType> = {
   "2421": lezzetDiyariKagithane,
   "2422": obaLokantasiKagithane,
   "2423": krorenLevent,
+  "2429": saraykapiEsenyurt,
+  "2433": chefKebapEsenyurt,
+  "2435": pasaPizzeriaEsenyurt,
+  "2437": phuketGardenEsenyurt,
+  "2439": cigerciBahattinEsenyurt,
+  "2440": aksoylarTandirEsenyurt,
+  "2441": etYiyelimAvcilar,
+  "2442": majesticRestaurantAvcilar,
+  "2447": tropicanoMangalAvcilar,
+  "2450": kutmanMangalbasiAvcilar,
+  "2451": bigetAvcilar,
+  "2452": evitaMangalbasiAvcilar,
 };
 
 type PlaceLike = Place | { id?: string | number; name?: string; photo_url?: string; category?: string };
