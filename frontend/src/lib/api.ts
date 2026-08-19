@@ -389,6 +389,21 @@ import spadaDiNapoliBakirkoy from '../assets/venues/spada-di-napoli-bakirkoy.jpg
 import abdulkadirRestaurantBakirkoy from '../assets/venues/abdulkadir-restaurant-bakirkoy.jpg'
 import casnigirLezzetcibasiBakirkoy from '../assets/venues/casnigir-lezzetcibasi-bakirkoy.jpg'
 import tarihiIstanbulSofrasi from '../assets/venues/tarihi-istanbul-sofrasi.jpg'
+import bakirkoyAileOcakbasi from '../assets/venues/bakirkoy-aile-ocakbasi.jpg'
+import bakirkoyMeyhanesi from '../assets/venues/bakirkoy-meyhanesi.jpg'
+import osmanIzmirKokorec from '../assets/venues/osman-izmir-kokorec.jpg'
+import sirnazOcakbasi from '../assets/venues/sirnaz-ocakbasi.jpg'
+import mykRestoranWow from '../assets/venues/myk-restoran-wow.jpg'
+import kudusHanUskudar from '../assets/venues/kudus-han-uskudar.jpg'
+import katibimUskudar from '../assets/venues/katibim-uskudar.jpg'
+import emiceninYeri from '../assets/venues/emicenin-yeri.jpg'
+import ozBoluLokantasi from '../assets/venues/oz-bolu-lokantasi.jpg'
+import gulfemHatunKonagi from '../assets/venues/gulfem-hatun-konagi.jpg'
+import adileSultanUskudar from '../assets/venues/adile-sultan-uskudar.jpg'
+import ismetBabaUskudar from '../assets/venues/ismet-baba-uskudar.jpg'
+import payedarKahve from '../assets/venues/payedar-kahve.jpg'
+import sanatOcakbasi from '../assets/venues/sanat-ocakbasi.jpg'
+import lolivettoAtasehir from '../assets/venues/lolivetto-atasehir.jpg'
 
 export interface Venue {
   id: string
@@ -830,6 +845,21 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '2323': abdulkadirRestaurantBakirkoy,
   '2325': casnigirLezzetcibasiBakirkoy,
   '2327': tarihiIstanbulSofrasi,
+  '2329': bakirkoyAileOcakbasi,
+  '2330': bakirkoyMeyhanesi,
+  '2331': osmanIzmirKokorec,
+  '2332': sirnazOcakbasi,
+  '2335': mykRestoranWow,
+  '2336': kudusHanUskudar,
+  '2338': katibimUskudar,
+  '2341': emiceninYeri,
+  '2344': ozBoluLokantasi,
+  '2345': gulfemHatunKonagi,
+  '2347': adileSultanUskudar,
+  '2349': ismetBabaUskudar,
+  '2350': payedarKahve,
+  '2351': sanatOcakbasi,
+  '2352': lolivettoAtasehir,
 }
 
 export function getFallbackVenueImage(category: string): string {
