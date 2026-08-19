@@ -700,3 +700,17 @@ Kaynak çapraz doğrulaması Batch 018: Kiez Pub resmî sitesi https://kiezpub.c
 Beer House Beşiktaş, canlı ID 1144, Şht. Asım Cd. No:27 D:19. Arama sonucu hedef adresi taşıyan bir menü fotoğrafı olsa da bu bir mekan görseli değil; dış cephe/tabela doğrulaması bulunmadığı için kullanılmayacak.
 Aylak Bar Beşiktaş, canlı ID 1145, Leşker Sk. No:9. Bulunan Yandex adayı Köyiçi Meydan Sok. No:10A şubesine ait; hedef Leşker Sk. No:9 ile karıştırılmaması için kullanılmayacak.
 Kosmos, canlı ID 1147, Sinanpaşa Beşiktaş Cd. No:19A. Yandex panorama başlığı hedef adresi taşıyor; görselde KOSMOS tabelası, giriş ve komşu Joker No:19 bağlamı net, güçlü eşleşme.
+16 Roof Bar & Restaurant - Swissôtel The Bosphorus, canlı ID 1148, Vişnezade Acısu Sk. No:19. Swissôtel resmî görseli rooftop manzarası gösteriyor ancak 16 Roof tabelası/kapı numarası görünmüyor; yalnızca iç/teras görseli olduğu için kullanılmayacak.
+Sky Bar, canlı ID 1149, Balmumcu Barbaros Blv. No:165. Yelp başlığı adresi taşısa da incelenen görsel yalnızca çevre bina/şehir görünümü, Sky Bar tabelası yok; kullanılmayacak.
+Terrace Bosphorus-Hokkah Lounge, canlı ID 1150, Sinanpaşa Hasfırın Cd. No:3 Kat:5. WanderBoat başlığı adresi taşıyor ancak görsel isimsiz iç mekân/manzara; tabela veya kapı numarası görünmediği için kullanılmayacak.
+Roofstar Bosphorus Lounge Restaurant, canlı ID 1151, Mercan Fuatpaşa Cd. No:10. Bu taramada işletme adı ve hedef adresi aynı görselde doğrulanamadı; kullanılmayacak.
+The Roof at The Ritz-Carlton, Istanbul, canlı ID 1152, Suzer Plaza Askerocağı Cd. No:6. Rooftop Guide görseli yalnızca teras mobilyası/manzara gösteriyor; The Roof tabelası veya adres işareti görünmediği için kullanılmayacak.
+Sky Rooftop Restaurant, canlı ID 1153, Hacımimi Necatibey Cd. No:97. Arama görsellerinden biri Root adlı farklı işletmeye ait, diğerleri isimsiz manzara/iç mekân; yanlış eşleşme nedeniyle kullanılmayacak.
+Luco Restaurant Rooftop Sirkeci, canlı ID 1154, Hoca Paşa Ebussuud Cd. No:21. Quandoo/Tripadvisor başlıkları hedef işletmeyi taşısa da görsel isimsiz teras; Luco tabelası/kapı numarası görünmediği için kullanılmayacak.
+Sunset Grill&Bar, canlı ID 1155, Kuruçeşme Ulus Park Yol Sk. No:2. Bu taramada hedef isim ve adresle doğrulanabilir tabela/dış cephe görseli bulunamadı; kullanılmayacak.
+Ritim Roof (Teras), canlı ID 1157, Hüseyinağa Sahne Sk. No:20. VenueWise görselinde RİTİM ROOF tabelası ve giriş net; adres başlığı aynı Sahne Sk. No:20 bağlamını taşıyor, güçlü eşleşme.
+Pisiklet Teras Restaurant, canlı ID 1156, Sinanpaşa Çelebi Oğlu Sk. No:5. Meyhankoli görselleri iç mekân/teras ve bisiklet dekoru gösteriyor ancak Pisiklet adı veya kapı numarası görünmüyor; kullanılmayacak.
+Swissôtel The Bosphorus - İstanbul, canlı ID 1158, Vişnezade Acısu Sk. No:19. Arama sonuçlarında otel adı görünür dış cephe/kuşbakışı adayları var; otel tabelası ve adres kaynağı ayrıca doğrulanacak.
+GRACE Rooftop Restaurant, canlı ID 1159, Binbirdirek Terzihane Sk. No:15. Bu aramada hedef isim/adresle doğrulanabilir görsel bulunamadı; kullanılmayacak.
+Béatrice Rooftop, Restaurant, canlı ID 1160, Asmalı Mescit General Yazgan Sk. No:14. Bu aramada hedef isim/adresle doğrulanabilir görsel bulunamadı; kullanılmayacak.
+Kaynak çapraz doğrulaması Batch 018: Swissôtel The Bosphorus resmî iletişim içeriği https://www.swissotelthebosphorus.com/tr/bize-ulasin/ “Visnezade Mah. Acisu Sok. N. 19, 34357 Macka Besiktas, Istanbul” adresini veriyor; arama görselinde binanın cephesinde SWISSÔTEL THE BOSPHORUS adı okunur. Canlı 1158 eşleşmesi doğrulandı.
