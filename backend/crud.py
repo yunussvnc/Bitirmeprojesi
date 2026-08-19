@@ -1443,26 +1443,59 @@ def get_feed_stories(
             )
         )
 
-        # Kullanıcının kendisinden hikayesini gizlediği kişilerin listesi
+        # Engellenen kullanıcılar
+        blocked_by_me_sq = (
+            db.query(models.UserBlock.blocked_id)
+            .filter(models.UserBlock.blocker_id == current_user_id)
+        )
+        blocked_me_sq = (
+            db.query(models.UserBlock.blocker_id)
+            .filter(models.UserBlock.blocked_id == current_user_id)
+        )
+
+        # Gizli (Hide from) Kontrolü
         # (Eğer hikaye sahibi beni gizli listesine eklediyse, o hikayeyi göremem)
         hidden_by_sq = (
             db.query(models.StoryHiddenUser.user_id)
             .filter(models.StoryHiddenUser.hidden_user_id == current_user_id)
         )
 
-        base = db.query(models.Story).filter(
-            models.Story.expires_at > now,
-            privacy_filter,
-            ~models.Story.user_id.in_(hidden_by_sq),
+        # TODO (Scenario 5): İleride "Kullanıcıyı Sessize Al (Mute)" özelliği eklendiğinde,
+        # akışa düşmesini istemediğimiz kullanıcıları filtreleyen "muted_users_sq" buraya eklenecektir.
+
+        base = (
+            db.query(models.Story)
+            .outerjoin(models.UserPreferences, models.UserPreferences.user_id == models.Story.user_id)
+            .filter(
+                models.Story.expires_at > now,
+                privacy_filter,
+                ~models.Story.user_id.in_(hidden_by_sq),
+                ~models.Story.user_id.in_(blocked_by_me_sq),
+                ~models.Story.user_id.in_(blocked_me_sq),
+                or_(
+                    models.UserPreferences.is_private_account == False,
+                    models.UserPreferences.is_private_account == None,
+                    models.Story.user_id.in_(following_ids_sq),
+                    models.Story.user_id == current_user_id
+                )
+            )
         )
 
         if filter_mode == "following":
             base = base.filter(models.Story.user_id.in_(following_ids_sq))
     else:
         # Giriş yapmamış kullanıcı: sadece public hikayeler
-        base = db.query(models.Story).filter(
-            models.Story.expires_at > now,
-            models.Story.privacy_type == "public",
+        base = (
+            db.query(models.Story)
+            .outerjoin(models.UserPreferences, models.UserPreferences.user_id == models.Story.user_id)
+            .filter(
+                models.Story.expires_at > now,
+                models.Story.privacy_type == "public",
+                or_(
+                    models.UserPreferences.is_private_account == False,
+                    models.UserPreferences.is_private_account == None
+                )
+            )
         )
 
     total = base.count()
@@ -2382,10 +2415,24 @@ def archive_expired_stories(db: Session, user_id: int | None = None) -> int:
     if user_id is not None:
         q = q.filter(models.Story.user_id == user_id)
     stories = q.all()
+    if not stories:
+        return 0
+
+    user_ids = {s.user_id for s in stories}
+    prefs = db.query(models.UserPreferences).filter(models.UserPreferences.user_id.in_(user_ids)).all()
+    archive_pref_map = {p.user_id: p.story_save_to_archive for p in prefs}
+
+    archived_count = 0
     for s in stories:
-        s.is_archived = True
+        save_to_archive = archive_pref_map.get(s.user_id, True)
+        if save_to_archive:
+            s.is_archived = True
+            archived_count += 1
+        else:
+            db.delete(s)
+
     db.commit()
-    return len(stories)
+    return archived_count
 
 
 # ── Foryou Algorithm / Recommendations ────────────────────────────────────────

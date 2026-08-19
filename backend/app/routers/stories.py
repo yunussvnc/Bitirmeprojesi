@@ -167,6 +167,51 @@ def get_user_stories(
 
 # ─── Görüntüleme (View) ─────────────────────────────────────────────────────
 
+def check_story_view_access(db: Session, story: models.Story, viewer_id: int):
+    """Kullanıcının hikayeyi görüntüleme yetkisi (Gizlilik, Engel vb.) olup olmadığını kontrol eder."""
+    if story.user_id == viewer_id:
+        return
+
+    # Engel Kontrolü
+    is_blocked = db.query(models.UserBlock).filter(
+        (
+            (models.UserBlock.blocker_id == story.user_id) & (models.UserBlock.blocked_id == viewer_id)
+        ) | (
+            (models.UserBlock.blocker_id == viewer_id) & (models.UserBlock.blocked_id == story.user_id)
+        )
+    ).first()
+    if is_blocked:
+        raise HTTPException(status_code=403, detail="Bu hikayeyi görüntüleme yetkiniz yok.")
+
+    # Gizli Hesap Kontrolü
+    prefs = db.query(models.UserPreferences).filter(models.UserPreferences.user_id == story.user_id).first()
+    is_private = prefs.is_private_account if prefs else False
+    is_follower = db.query(models.Follow).filter(
+        models.Follow.follower_id == viewer_id,
+        models.Follow.following_id == story.user_id
+    ).first() is not None
+
+    if is_private and not is_follower:
+        raise HTTPException(status_code=403, detail="Gizli hesapların hikayelerini sadece takipçileri görebilir.")
+
+    # Yakın Arkadaş Kontrolü (Mevcut mantıkta mutual follow)
+    if story.privacy_type == "close_friends":
+        is_mutual = db.query(models.Follow).filter(
+            models.Follow.follower_id == story.user_id,
+            models.Follow.following_id == viewer_id
+        ).first() is not None
+        if not is_mutual:
+            raise HTTPException(status_code=403, detail="Bu hikaye sadece Yakın Arkadaşlara özeldir.")
+
+    # Gizli (Hide from) Kontrolü
+    is_hidden = db.query(models.StoryHiddenUser).filter(
+        models.StoryHiddenUser.user_id == story.user_id,
+        models.StoryHiddenUser.hidden_user_id == viewer_id
+    ).first()
+    if is_hidden:
+        raise HTTPException(status_code=403, detail="Bu hikaye sizden gizlenmiş.")
+
+
 @router.post("/stories/{story_id}/view")
 def record_story_view_endpoint(
     story_id: int,
@@ -175,6 +220,11 @@ def record_story_view_endpoint(
     current_user: models.User = Depends(get_current_user),
 ):
     """Hikaye açıldığında ilk görüntüleme kaydı oluşturur."""
+    story = db.query(models.Story).filter(models.Story.id == story_id).first()
+    if not story:
+        raise HTTPException(status_code=404, detail="Hikaye bulunamadı.")
+    
+    check_story_view_access(db, story, current_user.id)
     recorded = crud.record_story_view(db, story_id, current_user.id, source=source)
     return {"ok": True, "recorded": recorded}
 
@@ -190,6 +240,11 @@ def update_story_view_analytics_endpoint(
     Hikaye kapatıldığında izleme süresi ve etkileşim analitiklerini günceller.
     Frontend hikayeyi kapattığında çağırmalı.
     """
+    story = db.query(models.Story).filter(models.Story.id == story_id).first()
+    if not story:
+        raise HTTPException(status_code=404, detail="Hikaye bulunamadı.")
+        
+    check_story_view_access(db, story, current_user.id)
     crud.update_story_view_analytics(
         db,
         story_id=story_id,
@@ -216,7 +271,8 @@ def get_story_viewers_endpoint(
     if not story:
         raise HTTPException(status_code=404, detail="Hikaye bulunamadı.")
     if story.user_id != current_user.id:
-        raise HTTPException(status_code=403, detail="Sadece kendi hikayelerinizin izleyicilerini görebilirsiniz.")
+        if not (story.place_id and current_user.claimed_place_id == story.place_id):
+            raise HTTPException(status_code=403, detail="Sadece kendi hikayelerinizin veya mekanınızın izleyicilerini görebilirsiniz.")
 
     is_venue = current_user.role in ("venue_owner", "admin")
 
@@ -316,6 +372,19 @@ async def react_to_story(
         raise HTTPException(status_code=410, detail="Bu hikayenin süresi dolmuş.")
     if story.user_id == current_user.id:
         raise HTTPException(status_code=400, detail="Kendi hikayenize tepki veremezsiniz.")
+
+    # Senaryo 3 ve 4: Yanıt Kısıtlama Kontrolü
+    prefs = db.query(models.UserPreferences).filter(models.UserPreferences.user_id == story.user_id).first()
+    if prefs:
+        if prefs.story_reply_audience == "off":
+            raise HTTPException(status_code=403, detail="Bu hikaye tepkilere/yanıtlara kapalıdır.")
+        elif prefs.story_reply_audience == "followers":
+            is_follower = db.query(models.Follow).filter(
+                models.Follow.follower_id == current_user.id,
+                models.Follow.following_id == story.user_id
+            ).first()
+            if not is_follower:
+                raise HTTPException(status_code=403, detail="Bu hikayeye sadece takipçiler tepki/yanıt verebilir.")
 
     # Toggle: aynı emoji zaten varsa sil
     existing = db.query(models.StoryReaction).filter(
@@ -431,6 +500,19 @@ async def reply_to_story(
         raise HTTPException(status_code=410, detail="Bu hikayenin süresi dolmuş.")
     if story.user_id == current_user.id:
         raise HTTPException(status_code=400, detail="Kendi hikayenize yanıt veremezsiniz.")
+
+    # Senaryo 3 ve 4: Yanıt Kısıtlama Kontrolü
+    prefs = db.query(models.UserPreferences).filter(models.UserPreferences.user_id == story.user_id).first()
+    if prefs:
+        if prefs.story_reply_audience == "off":
+            raise HTTPException(status_code=403, detail="Bu hikaye tepkilere/yanıtlara kapalıdır.")
+        elif prefs.story_reply_audience == "followers":
+            is_follower = db.query(models.Follow).filter(
+                models.Follow.follower_id == current_user.id,
+                models.Follow.following_id == story.user_id
+            ).first()
+            if not is_follower:
+                raise HTTPException(status_code=403, detail="Bu hikayeye sadece takipçiler tepki/yanıt verebilir.")
 
     story_owner_id = story.user_id
     conv = db.query(models.Conversation).filter(
