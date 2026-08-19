@@ -305,6 +305,14 @@ import oleaOsteriaItaliana from '../assets/venues/olea-osteria-italiana.jpg'
 import cecconisRestaurant from '../assets/venues/cecconis-restaurant.jpg'
 import farosKarakoy from '../assets/venues/faros-karakoy.jpg'
 import moltoBeneGalata from '../assets/venues/molto-bene-galata.jpg'
+import farosIstanbul from '../assets/venues/faros-istanbul.jpg'
+import hrItalyEminonu from '../assets/venues/hr-italy-eminonu.jpg'
+import esmerCafe from '../assets/venues/esmer-cafe.jpg'
+import nappoTrattoria from '../assets/venues/nappo-trattoria.jpg'
+import hrItalyKarakoy from '../assets/venues/hr-italy-karakoy.jpg'
+import pizzeriaPera from '../assets/venues/pizzeria-pera.jpg'
+import wamasBeyoglu from '../assets/venues/wamas-beyoglu.jpg'
+import kumikoSushiMore from '../assets/venues/kumiko-sushi-more.jpg'
 
 export interface Venue {
   id: string
@@ -662,6 +670,14 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '1349': cecconisRestaurant,
   '1350': farosKarakoy,
   '1351': moltoBeneGalata,
+  '1353': farosIstanbul,
+  '1354': hrItalyEminonu,
+  '1356': esmerCafe,
+  '1357': nappoTrattoria,
+  '1358': hrItalyKarakoy,
+  '1360': pizzeriaPera,
+  '1361': wamasBeyoglu,
+  '1363': kumikoSushiMore,
 }
 
 export function getFallbackVenueImage(category: string): string {

@@ -308,6 +308,14 @@ const oleaOsteriaItaliana = require("../../assets/places/olea-osteria-italiana.j
 const cecconisRestaurant = require("../../assets/places/cecconis-restaurant.jpg") as ImageSourcePropType;
 const farosKarakoy = require("../../assets/places/faros-karakoy.jpg") as ImageSourcePropType;
 const moltoBeneGalata = require("../../assets/places/molto-bene-galata.jpg") as ImageSourcePropType;
+const farosIstanbul = require("../../assets/places/faros-istanbul.jpg") as ImageSourcePropType;
+const hrItalyEminonu = require("../../assets/places/hr-italy-eminonu.jpg") as ImageSourcePropType;
+const esmerCafe = require("../../assets/places/esmer-cafe.jpg") as ImageSourcePropType;
+const nappoTrattoria = require("../../assets/places/nappo-trattoria.jpg") as ImageSourcePropType;
+const hrItalyKarakoy = require("../../assets/places/hr-italy-karakoy.jpg") as ImageSourcePropType;
+const pizzeriaPera = require("../../assets/places/pizzeria-pera.jpg") as ImageSourcePropType;
+const wamasBeyoglu = require("../../assets/places/wamas-beyoglu.jpg") as ImageSourcePropType;
+const kumikoSushiMore = require("../../assets/places/kumiko-sushi-more.jpg") as ImageSourcePropType;
 
 const CATEGORY_PLACEHOLDERS: Record<string, string> = {
   kafe: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800",
@@ -629,6 +637,14 @@ const PLACE_IMAGE_OVERRIDES: Record<string, ImageSourcePropType> = {
   "1349": cecconisRestaurant,
   "1350": farosKarakoy,
   "1351": moltoBeneGalata,
+  "1353": farosIstanbul,
+  "1354": hrItalyEminonu,
+  "1356": esmerCafe,
+  "1357": nappoTrattoria,
+  "1358": hrItalyKarakoy,
+  "1360": pizzeriaPera,
+  "1361": wamasBeyoglu,
+  "1363": kumikoSushiMore,
 };
 
 type PlaceLike = Place | { id?: string | number; name?: string; photo_url?: string; category?: string };
