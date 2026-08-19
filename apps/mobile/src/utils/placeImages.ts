@@ -236,6 +236,20 @@ const visionArtPlatform = require("../../assets/places/vision-art-platform.jpg")
 const girginPiyanoSanatGalerisi = require("../../assets/places/girgin-piyano-sanat-galerisi.jpg") as ImageSourcePropType;
 const galeriKambur = require("../../assets/places/galeri-kambur.jpg") as ImageSourcePropType;
 const galeri310 = require("../../assets/places/galeri-310.jpg") as ImageSourcePropType;
+const limosKahvalti = require("../../assets/places/limos-kahvalti.jpg") as ImageSourcePropType;
+const fourSeasonsCafeBistro = require("../../assets/places/four-seasons-cafe-bistro.jpg") as ImageSourcePropType;
+const carmentaKahvalti = require("../../assets/places/carmenta-kahvalti.jpg") as ImageSourcePropType;
+const cafeFigu = require("../../assets/places/cafe-figu.jpg") as ImageSourcePropType;
+const balkonCafeKahvalti = require("../../assets/places/balkon-cafe-kahvalti.jpg") as ImageSourcePropType;
+const hungry = require("../../assets/places/hungry.jpg") as ImageSourcePropType;
+const canCafeKahvalti = require("../../assets/places/can-cafe-kahvalti.jpg") as ImageSourcePropType;
+const ortakoyCafeKahvalti = require("../../assets/places/ortakoy-cafe-kahvalti.jpg") as ImageSourcePropType;
+const veganMasaBesiktas = require("../../assets/places/vegan-masa.jpg") as ImageSourcePropType;
+const biNeviDeli = require("../../assets/places/bi-nevi-deli.jpg") as ImageSourcePropType;
+const veganIstanbul = require("../../assets/places/vegan-istanbul.jpg") as ImageSourcePropType;
+const mamamanti = require("../../assets/places/mamamanti.jpg") as ImageSourcePropType;
+const veganDukkanLokanta = require("../../assets/places/vegan-dukkan-lokanta.jpg") as ImageSourcePropType;
+const nutcase = require("../../assets/places/nutcase.jpg") as ImageSourcePropType;
 
 const CATEGORY_PLACEHOLDERS: Record<string, string> = {
   kafe: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800",
@@ -485,6 +499,20 @@ const PLACE_IMAGE_OVERRIDES: Record<string, ImageSourcePropType> = {
   "1209": girginPiyanoSanatGalerisi,
   "1210": galeriKambur,
   "1211": galeri310,
+  "1213": limosKahvalti,
+  "1215": fourSeasonsCafeBistro,
+  "1217": carmentaKahvalti,
+  "1218": cafeFigu,
+  "1222": balkonCafeKahvalti,
+  "1224": hungry,
+  "1226": canCafeKahvalti,
+  "1228": ortakoyCafeKahvalti,
+  "1230": veganMasaBesiktas,
+  "1232": biNeviDeli,
+  "1233": veganIstanbul,
+  "1234": mamamanti,
+  "1235": veganDukkanLokanta,
+  "1237": nutcase,
 };
 
 type PlaceLike = Place | { id?: string | number; name?: string; photo_url?: string; category?: string };

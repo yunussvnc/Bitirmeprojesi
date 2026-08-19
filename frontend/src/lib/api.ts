@@ -233,6 +233,20 @@ import visionArtPlatform from '../assets/venues/vision-art-platform.jpg'
 import girginPiyanoSanatGalerisi from '../assets/venues/girgin-piyano-sanat-galerisi.jpg'
 import galeriKambur from '../assets/venues/galeri-kambur.jpg'
 import galeri310 from '../assets/venues/galeri-310.jpg'
+import limosKahvalti from '../assets/venues/limos-kahvalti.jpg'
+import fourSeasonsCafeBistro from '../assets/venues/four-seasons-cafe-bistro.jpg'
+import carmentaKahvalti from '../assets/venues/carmenta-kahvalti.jpg'
+import cafeFigu from '../assets/venues/cafe-figu.jpg'
+import balkonCafeKahvalti from '../assets/venues/balkon-cafe-kahvalti.jpg'
+import hungry from '../assets/venues/hungry.jpg'
+import canCafeKahvalti from '../assets/venues/can-cafe-kahvalti.jpg'
+import ortakoyCafeKahvalti from '../assets/venues/ortakoy-cafe-kahvalti.jpg'
+import veganMasa from '../assets/venues/vegan-masa.jpg'
+import biNeviDeli from '../assets/venues/bi-nevi-deli.jpg'
+import veganIstanbul from '../assets/venues/vegan-istanbul.jpg'
+import mamamanti from '../assets/venues/mamamanti.jpg'
+import veganDukkanLokanta from '../assets/venues/vegan-dukkan-lokanta.jpg'
+import nutcase from '../assets/venues/nutcase.jpg'
 
 export interface Venue {
   id: string
@@ -518,6 +532,20 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '1209': girginPiyanoSanatGalerisi,
   '1210': galeriKambur,
   '1211': galeri310,
+  '1213': limosKahvalti,
+  '1215': fourSeasonsCafeBistro,
+  '1217': carmentaKahvalti,
+  '1218': cafeFigu,
+  '1222': balkonCafeKahvalti,
+  '1224': hungry,
+  '1226': canCafeKahvalti,
+  '1228': ortakoyCafeKahvalti,
+  '1230': veganMasa,
+  '1232': biNeviDeli,
+  '1233': veganIstanbul,
+  '1234': mamamanti,
+  '1235': veganDukkanLokanta,
+  '1237': nutcase,
 }
 
 export function getFallbackVenueImage(category: string): string {

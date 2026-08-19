@@ -769,3 +769,36 @@ Galeri Kambur, canlı ID 1210, Bebek Küçük Bebek Cd. Berkman Apt. D:1/A. Yand
 Galeri 310, canlı ID 1211, Ortaköy Dereboyu Cd. 114/A. Yandex adayı Galeri 310 adını ve Dereboyu Avenue 114 adresini taşıyor; görselde tabela net, No:114/A ayrıntısı ayrıca kontrol edilecek.
 Galeri 310, canlı ID 1211, Ortaköy Dereboyu Cd. 114/A. Yandex başlığındaki adres Dereboyu Avenue 114; görselde “Galeri 310” tabelası ve girişte “114/A” kapı plakası net, güçlü eşleşme.
 Good Morning Breakfast, canlı ID 1212, Gayrettepe Ayazmaderesi Cd. No:1/B. Resmî Instagram/Facebook kaynakları işletme adını ve No:1/B adresini doğruluyor; ancak bulunan görseller yalnızca ürün/masa fotoğrafları veya başka şehirlerdeki yanlış işletmeler. Tabela, dış cephe ya da işletme logosu ile kesin görsel eşleşmesi bulunamadığından kullanılmayacak.
+Limos Kahvaltı, canlı ID 1213, Sinanpaşa Çelebi Oğlu Sk. No:11. Tripadvisor görselinde “Limos Cafe” ve @limosbesiktas markası net; görsel işletme adını doğruluyor, hedef adres ayrıca teyit edilecek.
+Lumi&co., canlı ID 1214, Yeşil Han Çelebi Oğlu Sk. No:21-23A. Yandex adayları “Artık faal değil” ve 14-16B numarasını gösteriyor; hedef adres/aktiflik uyuşmadığı için kullanılmayacak.
+Four Seasons Cafe Bistro, canlı ID 1215, Vişnezade Süleyman Seba Cd. No:65A. Görselde “FOUR SEASONS Cafe Bistro” cephe tabelası ve işletme girişi net; güçlü eşleşme.
+Limos Kahvaltı, canlı ID 1213, Sinanpaşa Çelebi Oğlu Sk. No:11. Resmî Instagram/Facebook ve harita kaynaklarında No:11 veya 9/11 aynı Kahvaltıcılar Sokağı kaydıyla doğrulanıyor; Limos tabelalı/markalı görsel kabul edilebilir.
+Menemen Beşiktaş, canlı ID 1216, Şair Veysi Sk. No:31/A. Yandex başlığı adresi taşısa da incelenen cephede Menemen tabelası veya 31/A numarası görünmüyor; kullanılmayacak.
+Carmenta Kahvaltı, canlı ID 1217, Çelebi Oğlu Sk. No:12. Yelp/Tripadvisor adaylarında “CARMеNTA” tabelası ve kafe girişi net, kaynak başlığı No:12; güçlü eşleşme.
+Cafe Figu, canlı ID 1218, Hüsrev Gerede Cd. No:17. Resmî markalı görselde “cafe figu” adı, cafefigu.com ve “Vişnezade Mah. Hüsrev gerede Cad. no 17” adresi aynı görselde net; güçlü eşleşme.
+Şilan Cafe&Kahvaltı, canlı ID 1219, Çelebi Oğlu Sk. No:14 D:B. Bu taramada Şilan adı ve hedef adresle doğrulanabilir görsel bulunamadı; kullanılmayacak.
+Peynir Ekmek Cafe&Kahvaltı, canlı ID 1220, Çelebi Oğlu Sk. No:14. Arama görseli açıkça “CARMENTA KAHVALTI” tabelasını gösteriyor; yanlış işletme olduğu için kullanılmayacak.
+Beşiktaş Zeytindalı Kahvaltı, canlı ID 1221, Çelebi Oğlu Sk. Bu Yandex adayı 21-23B adresini taşıyor ancak incelenen cephede Zeytindalı adı veya hedef kayda ait net numara görünmüyor; kullanılmayacak.
+Balkon Cafe & Kahvaltı, canlı ID 1222, Çelebi Oğlu Sk. No:18. Yandex başlığı hedef No:18’i taşıyor; görselde “BALKON Cafe & Kahvaltı” tabelası ve kapıdaki No:18 net, güçlü eşleşme.
+Sahil Rest Cafe, canlı ID 1223, Yıldız Yalı Sk. 62/65. Tripadvisor adayında “Sahil Cafe” tabelası ve sahil mekânı net; hedef adresle aynı işletme olduğu ayrıca teyit edilecek.
+Hungry, canlı ID 1224, Vişnezade Abacı Latif Sk. No:4/A. Tripadvisor kaydı başlıkta hedef No:4/A adresini taşıyor; görselde “HUNGRY” dış cephe tabelası net, güçlü eşleşme.
+Beşiktaş Cafe & Kahvaltı, canlı ID 1225, Şair Veysi Sk. No:35. Arama adayları “Beşiktaş Kahvaltıcısı” veya başka işletmeler; hedef işletme adı ve No:35 birlikte doğrulanamadı, kullanılmayacak.
+Can Cafe Kahvaltı, canlı ID 1226, Çelebi Oğlu Sk. D:27-29. Tripadvisor/Restoranim görselinde “CAN CAFE KAHVALTI Breakfast” tabelası ve işletme girişi net; hedef Çelebioğlu kaydıyla güçlü ad eşleşmesi, kabul edilebilir.
+Minoa, canlı ID 1227, Vişnezade Süleyman Seba Cd. No:52/A. Minoa aramasındaki dış cephe görseli açıkça “Şiir Kahvesi” tabelasını gösteriyor; yanlış işletme olduğu için kullanılmayacak.
+Ortaköy Cafe Kahvaltı, canlı ID 1228, Mecidiye Eski Bahçe Sk. No:31 D:33. Arama adayında “ORTAKÖY CAFE KAHVALTI” tabelası bulunan dış cephe mevcut; hedef D:33 adresi ayrıca doğrulanacak.
+Cafe Faruk Kahvaltı, canlı ID 1229, Şair Veysi Sk. 4/E. Yandex adayı “Faruk Kahvaltı Salonu” ve 4F adresini taşıyor; canlı hedef 4/E ile numara/harf uyuşmazlığı bulunduğu için kullanılmayacak.
+Vegan Masa (Beşiktaş), canlı ID 1230, Mısırlıbahçe Sok. No:8/A. HappyCow görselinde “VEGAN MASA” tabelası ve kırmızı 8A kapı plakası aynı karede net; güçlü eşleşme.
+Vegan Food Cartel by Veganzza, canlı ID 1231, Şair Veysi Sk. No:9 D:11A. Sonuçlarda marka adı/adres ve dış cepheyi aynı karede kesin doğrulayan görsel bulunamadı; kullanılmayacak.
+Bi Nevi Deli, canlı ID 1232, Etiler Dilhayat Sk. No:10/1. Yelp ve resmî site görselinde “BI NEVI DELI” dış cephe markası net; hedef adresle aynı şubenin resmî adresi ayrıca teyit edilecek.
+Vegan İstanbul, canlı ID 1233, Firuzağa Türkgücü Cd. No:51A. Tripadvisor görselinde “Vegan İstanbul” dış cephe tabelası net; hedef adresle aynı kaydın adresi ayrıca teyit edilecek.
+Bi Nevi Deli, canlı ID 1232, Etiler Dilhayat Sk. No:10/1. Resmî site ve Gault&Millau/Yelp kaynakları No:10/1 adresini birebir doğruluyor; “BI NEVI DELI” dış cephe tabelalı görsel kabul edildi.
+Vegan İstanbul, canlı ID 1233, Firuzağa Türkgücü Cd. No:51A. Tripadvisor, Yelp, Facebook ve VGN Social kaynakları No:51/A adresini doğruluyor; “Vegan İstanbul” dış cephe tabelalı görsel kabul edildi.
+MAMAMANTI, canlı ID 1234, Vişnezade Maçka Meydanı Sk. No:24/A. Yandex başlığı “Mama Mantı” ve No:24A adresini taşıyor; görselde “mamamanti” tabelası net, isim yazımı farkına rağmen güçlü eşleşme.
+Vegan Dükkan Lokanta, canlı ID 1235, Cihangir Sıraselviler Cd. Soğancı Sk. Bu taramada Vegan Dükkan tabelası ve vegan dükkan web adresi görünen dış cephe görseli bulundu; hedef adresle aynı şube ayrıca teyit edilecek.
+Vegan Community Kitchen Restaurant, canlı ID 1236, Hacımimi Serdar-ı Ekrem Cd. No:38/A. Corner başlığı hedef adresi taşısa da incelenen adayda yalnızca “Vegan” yazısı ve komşu dükkân vitrini görülüyor; Community Kitchen adı/numara net değil, kullanılmayacak.
+Sahil Rest Cafe, canlı ID 1223, Yıldız Yalı Sk. 62/65. Yelp kaydı No:62/35, Tripadvisor ve Facebook yalnızca Yalı Sokak veriyor; canlı kaydın 62/65 numarasıyla kesin eşleşme sağlanamadığı için kullanılmayacak.
+Ortaköy Cafe Kahvaltı, canlı ID 1228, Mecidiye Eski Bahçe Sk. No:31 D:33. Waze ve Wanderlog hedef No:31 D:33 adresini doğruluyor; Yelp dış cephe görselinde “ORTAKÖY CAFE KAHVALTI” tabelası net, kabul edildi.
+Vegan Dükkan Lokanta, canlı ID 1235, Cihangir Sıraselviler Cd. Soğancı Sk. Resmî site No:8/No:8D adresini doğruluyor; dış cephede vegan dükkan web adresi ve “ALL DAY VEGAN EATERY” markası net, kabul edildi.
+Nutcase, canlı ID 1237, Gayrettepe Süleymanbey Sk. Ulug Apt. No:10C. Yandex başlığı hedef No:10C’yi taşıyor; görselde “nutcase RAW VEGAN HEALTHY” tabelası ve yan kapıda “ULUG APT. NO:10” işareti net, güçlü eşleşme.
+Carmenta Kahvaltı, canlı ID 1217, Çelebi Oğlu Sk. No:12. Seçilen görselde “CARMENTA” tabelası ve giriş net; Yelp kaydı başlıkta Çelebioğlu Sok. No:12 ile adresi doğruluyor.
+Ortaköy Cafe Kahvaltı, canlı ID 1228, Mecidiye Eski Bahçe Sk. No:31 D:33. Seçilen görselde “ORTAKÖY CAFE KAHVALTI” tabelası ve dış cephe net; Waze/Wanderlog adresi No:31 D:33 ile doğruluyor.
