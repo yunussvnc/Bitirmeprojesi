@@ -227,6 +227,10 @@ const dolmabahceSaatKulesi = require("../../assets/places/dolmabahce-saat-kulesi
 const arnavutkoyColorfulHouses = require("../../assets/places/arnavutkoy-colorful-houses.jpg") as ImageSourcePropType;
 const istanbulDenizMuzesi = require("../../assets/places/istanbul-deniz-muzesi.jpg") as ImageSourcePropType;
 const yildizSarayiSaleKosku = require("../../assets/places/yildiz-sarayi-sale-kosku.jpg") as ImageSourcePropType;
+const istanbulResimHeykelMuzesi = require("../../assets/places/istanbul-resim-heykel-muzesi.jpg") as ImageSourcePropType;
+const ibbItfaiyeMuzesi = require("../../assets/places/ibb-itfaiye-muzesi.jpg") as ImageSourcePropType;
+const ihlamurKasri = require("../../assets/places/ihlamur-kasri.jpg") as ImageSourcePropType;
+const arnavutkoyArtGallery = require("../../assets/places/arnavutkoy-art-gallery.jpg") as ImageSourcePropType;
 
 const CATEGORY_PLACEHOLDERS: Record<string, string> = {
   kafe: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800",
@@ -467,6 +471,10 @@ const PLACE_IMAGE_OVERRIDES: Record<string, ImageSourcePropType> = {
   "1178": arnavutkoyColorfulHouses,
   "1183": istanbulDenizMuzesi,
   "1184": yildizSarayiSaleKosku,
+  "1189": istanbulResimHeykelMuzesi,
+  "1190": ibbItfaiyeMuzesi,
+  "1191": ihlamurKasri,
+  "1197": arnavutkoyArtGallery,
 };
 
 type PlaceLike = Place | { id?: string | number; name?: string; photo_url?: string; category?: string };

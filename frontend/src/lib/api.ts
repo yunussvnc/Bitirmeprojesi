@@ -224,6 +224,10 @@ import dolmabahceSaatKulesi from '../assets/venues/dolmabahce-saat-kulesi.jpg'
 import arnavutkoyColorfulHouses from '../assets/venues/arnavutkoy-colorful-houses.jpg'
 import istanbulDenizMuzesi from '../assets/venues/istanbul-deniz-muzesi.jpg'
 import yildizSarayiSaleKosku from '../assets/venues/yildiz-sarayi-sale-kosku.jpg'
+import istanbulResimHeykelMuzesi from '../assets/venues/istanbul-resim-heykel-muzesi.jpg'
+import ibbItfaiyeMuzesi from '../assets/venues/ibb-itfaiye-muzesi.jpg'
+import ihlamurKasri from '../assets/venues/ihlamur-kasri.jpg'
+import arnavutkoyArtGallery from '../assets/venues/arnavutkoy-art-gallery.jpg'
 
 export interface Venue {
   id: string
@@ -500,6 +504,10 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '1178': arnavutkoyColorfulHouses,
   '1183': istanbulDenizMuzesi,
   '1184': yildizSarayiSaleKosku,
+  '1189': istanbulResimHeykelMuzesi,
+  '1190': ibbItfaiyeMuzesi,
+  '1191': ihlamurKasri,
+  '1197': arnavutkoyArtGallery,
 }
 
 export function getFallbackVenueImage(category: string): string {

@@ -739,3 +739,18 @@ Palanga Caddesi Çeşmesi, canlı ID 1179, Yıldız Palanga Cd. No:1. Bu taramad
 Barbaros Meydanı, canlı ID 1181, Sinanpaşa Barbaros Blv. No:16. Arama sonucu eski Barbaros Bulvarı/şehir panoraması; meydanın kendisi ve No:16 ile kesin eşleşme görselde net değil, kullanılmayacak.
 Deniz Müzesi, canlı ID 1183, Sinanpaşa Beşiktaş Cd. No:6 D:1. Görselde DENİZ MÜZESİ / NAVAL MUSEUM tabelası ve müze girişindeki denizcilik objeleri net; hedef müze kimliği güçlü.
 Yıldız Sarayı, canlı ID 1184, Yıldız Şale Köşkü. Görselde Yıldız Şale Köşkü’nün ayırt edici sarı dış cephesi, bahçesi ve giriş yapısı net; Yıldız Sarayı kompleksindeki hedef alanla güçlü eşleşme.
+Batch 020 başlangıcı.
+Dolmabahçe Sanat Galerisi, canlı ID 1188, Vişnezade Dolmabahçe Cd. Arama görselleri Dolmabahçe Sarayı kapısı/cephelerini gösteriyor ancak sanat galerisi adı veya galeriye özgü giriş görünmüyor; Dolmabahçe Sarayı görseliyle karıştırılmaması için kullanılmayacak.
+IRHM (İstanbul Resim ve Heykel Müzesi), canlı ID 1189, Kılıçali Paşa Meclis-i Mebusan Cd. No:6. Yandex başlığı hedef No:6 adresini taşıyor; görselde müzenin ayırt edici tarihî cephesi ve kuğu çeşmesi net, güçlü eşleşme.
+İBB İtfaiye Müzesi, canlı ID 1190, Yıldız Çitlembik Yokuşu Horoz Sk. No:1. Görselde girişte “İSTANBUL BÜYÜKŞEHİR BELEDİYESİ İTFAİYE MÜZESİ” tabelası ve kapı numarası 1 net, güçlü eşleşme.
+Ihlamur Kasrı, canlı ID 1191, Teşvikiye Ihlamur Yolu Sk. Bu taramada hedef kasırla doğrulanabilir görsel bulunamadı; ayrıca taranacak.
+Ihlamur Kasrı, canlı ID 1191, Teşvikiye Nişantaşı Ihlamur Yolu Sk. Ihlamur Kasrı başlıklı görselde kasrın ayırt edici taş cephesi, süslemeleri ve bahçesi net; tarihî alanla güçlü eşleşme.
+Akaretler Mustafa Kemal Müzesi, canlı ID 1192, Vişnezade Süleyman Seba Cd. No:36. Arama görseli Akaretler sıraevler sokak dokusunu gösteriyor ancak Mustafa Kemal Müzesi adı/levhası veya No:36 görünmüyor; Akaretler Sıraevler kaydıyla karıştırılmaması için kullanılmayacak.
+EVİN | Sanat Galerisi, canlı ID 1193, Bebek Büyük Bebekderesi Sok. No:13. Arama sonucu EVİN logosu ve galeri markasını gösteriyor; dış cephe/adres eşleşmesi ayrıca doğrulanacak.
+EVİN | Sanat Galerisi, canlı ID 1193, Bebek Büyük Bebekderesi Sok. No:13. Sonuçlar EVİN logosu veya isimsiz galeri içi sanat fotoğrafı; dış cephe, kapı numarası ve hedef adres aynı görselde görünmediği için kullanılmayacak.
+Gallery Crystal, canlı ID 1194, Türkali Ihlamurdere Cd. 83A. Yandex adayları Gallery Crystal tabelasını gösterse de başlıkta No:87 bulunuyor; canlı hedef 83A ile şube/numara uyuşmazlığı olduğu için kullanılmayacak.
+EArt Galeri İstanbul, canlı ID 1195, Vişnezade Süleyman Seba Cd. No:47. Resmî EArt görseli aynı mimari hattı gösteriyor ancak EArt tabelası veya No:47 görünmüyor; isim/adres kesinliği sağlanamadığı için kullanılmayacak.
+Galerie D’art La Visione, canlı ID 1196, Vişnezade Süleyman Seba Cd. 58/1. Yandex başlığı hedef caddeyi taşısa da incelenen görselde La Visione tabelası veya galeri girişi görünmüyor; kullanılmayacak.
+Arnavutköy Art Gallery, canlı ID 1197, Arnavutköy Bebek-Arnavutköy Cd. No:75. Yandex başlığı hedef No:75 adresini taşıyor; görselde binanın girişinde “art gallery” tabelası net, güçlü eşleşme.
+Sevil Dolmacı Gallery, canlı ID 1198, Cihannüma Çömezler Sk. No:16. Yandex adayında galeri çevresi görülse de Sevil Dolmacı adı/tabelası ve No:16 net değil; kullanılmayacak.
+Loft Art, canlı ID 1199, Nisbetiye Aytar Cd. No:107. Bu taramada hedef galeri adı/adresiyle doğrulanabilir görsel bulunamadı; kullanılmayacak.
