@@ -407,6 +407,23 @@ const ismetBabaUskudar = require("../../assets/places/ismet-baba-uskudar.jpg") a
 const payedarKahve = require("../../assets/places/payedar-kahve.jpg") as ImageSourcePropType;
 const sanatOcakbasi = require("../../assets/places/sanat-ocakbasi.jpg") as ImageSourcePropType;
 const lolivettoAtasehir = require("../../assets/places/lolivetto-atasehir.jpg") as ImageSourcePropType;
+const molaAtasehir = require("../../assets/places/mola-atasehir.jpg") as ImageSourcePropType;
+const sacaOcakbasiAtasehir = require("../../assets/places/saca-ocakbasi-atasehir.jpg") as ImageSourcePropType;
+const hatayGurmeAtasehir = require("../../assets/places/hatay-gurme-atasehir.jpg") as ImageSourcePropType;
+const theHungerMetropol = require("../../assets/places/the-hunger-metropol.jpg") as ImageSourcePropType;
+const develi1912Atasehir = require("../../assets/places/develi1912-atasehir.jpg") as ImageSourcePropType;
+const ustadlarOcakbasi = require("../../assets/places/ustadlar-ocakbasi.jpg") as ImageSourcePropType;
+const grillPrimePalladium = require("../../assets/places/grill-prime-palladium.jpg") as ImageSourcePropType;
+const theHungerBulvar216 = require("../../assets/places/the-hunger-bulvar-216.jpg") as ImageSourcePropType;
+const lipaKofteCevapi = require("../../assets/places/lipa-kofte-cevapi.jpg") as ImageSourcePropType;
+const kumlukRestaurantKartal = require("../../assets/places/kumluk-restaurant-kartal.jpg") as ImageSourcePropType;
+const unluerGurmeKartal = require("../../assets/places/unluer-gurme-kartal.jpg") as ImageSourcePropType;
+const kozKanatKartal = require("../../assets/places/koz-kanat-kartal.jpg") as ImageSourcePropType;
+const sefErdalSularoglu = require("../../assets/places/sef-erdal-sularoglu.jpg") as ImageSourcePropType;
+const kartalSahilBalik = require("../../assets/places/kartal-sahil-balik.jpg") as ImageSourcePropType;
+const korogluKofteciKartal = require("../../assets/places/koroglu-kofteci-kartal.jpg") as ImageSourcePropType;
+const cappelloCaffeKartal = require("../../assets/places/cappello-caffe-kartal.jpg") as ImageSourcePropType;
+const tasKavurmaKartal = require("../../assets/places/tas-kavurma-kartal.jpg") as ImageSourcePropType;
 
 const CATEGORY_PLACEHOLDERS: Record<string, string> = {
   kafe: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800",
@@ -827,6 +844,23 @@ const PLACE_IMAGE_OVERRIDES: Record<string, ImageSourcePropType> = {
   "2350": payedarKahve,
   "2351": sanatOcakbasi,
   "2352": lolivettoAtasehir,
+  "2354": molaAtasehir,
+  "2355": sacaOcakbasiAtasehir,
+  "2356": hatayGurmeAtasehir,
+  "2359": theHungerMetropol,
+  "2361": develi1912Atasehir,
+  "2362": ustadlarOcakbasi,
+  "2364": grillPrimePalladium,
+  "2365": theHungerBulvar216,
+  "2367": lipaKofteCevapi,
+  "2368": kumlukRestaurantKartal,
+  "2369": unluerGurmeKartal,
+  "2370": kozKanatKartal,
+  "2371": sefErdalSularoglu,
+  "2373": kartalSahilBalik,
+  "2374": korogluKofteciKartal,
+  "2375": cappelloCaffeKartal,
+  "2377": tasKavurmaKartal,
 };
 
 type PlaceLike = Place | { id?: string | number; name?: string; photo_url?: string; category?: string };

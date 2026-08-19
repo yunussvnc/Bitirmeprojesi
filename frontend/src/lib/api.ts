@@ -404,6 +404,23 @@ import ismetBabaUskudar from '../assets/venues/ismet-baba-uskudar.jpg'
 import payedarKahve from '../assets/venues/payedar-kahve.jpg'
 import sanatOcakbasi from '../assets/venues/sanat-ocakbasi.jpg'
 import lolivettoAtasehir from '../assets/venues/lolivetto-atasehir.jpg'
+import molaAtasehir from '../assets/venues/mola-atasehir.jpg'
+import sacaOcakbasiAtasehir from '../assets/venues/saca-ocakbasi-atasehir.jpg'
+import hatayGurmeAtasehir from '../assets/venues/hatay-gurme-atasehir.jpg'
+import theHungerMetropol from '../assets/venues/the-hunger-metropol.jpg'
+import develi1912Atasehir from '../assets/venues/develi1912-atasehir.jpg'
+import ustadlarOcakbasi from '../assets/venues/ustadlar-ocakbasi.jpg'
+import grillPrimePalladium from '../assets/venues/grill-prime-palladium.jpg'
+import theHungerBulvar216 from '../assets/venues/the-hunger-bulvar-216.jpg'
+import lipaKofteCevapi from '../assets/venues/lipa-kofte-cevapi.jpg'
+import kumlukRestaurantKartal from '../assets/venues/kumluk-restaurant-kartal.jpg'
+import unluerGurmeKartal from '../assets/venues/unluer-gurme-kartal.jpg'
+import kozKanatKartal from '../assets/venues/koz-kanat-kartal.jpg'
+import sefErdalSularoglu from '../assets/venues/sef-erdal-sularoglu.jpg'
+import kartalSahilBalik from '../assets/venues/kartal-sahil-balik.jpg'
+import korogluKofteciKartal from '../assets/venues/koroglu-kofteci-kartal.jpg'
+import cappelloCaffeKartal from '../assets/venues/cappello-caffe-kartal.jpg'
+import tasKavurmaKartal from '../assets/venues/tas-kavurma-kartal.jpg'
 
 export interface Venue {
   id: string
@@ -860,6 +877,23 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '2350': payedarKahve,
   '2351': sanatOcakbasi,
   '2352': lolivettoAtasehir,
+  '2354': molaAtasehir,
+  '2355': sacaOcakbasiAtasehir,
+  '2356': hatayGurmeAtasehir,
+  '2359': theHungerMetropol,
+  '2361': develi1912Atasehir,
+  '2362': ustadlarOcakbasi,
+  '2364': grillPrimePalladium,
+  '2365': theHungerBulvar216,
+  '2367': lipaKofteCevapi,
+  '2368': kumlukRestaurantKartal,
+  '2369': unluerGurmeKartal,
+  '2370': kozKanatKartal,
+  '2371': sefErdalSularoglu,
+  '2373': kartalSahilBalik,
+  '2374': korogluKofteciKartal,
+  '2375': cappelloCaffeKartal,
+  '2377': tasKavurmaKartal,
 }
 
 export function getFallbackVenueImage(category: string): string {
