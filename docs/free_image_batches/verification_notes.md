@@ -802,3 +802,35 @@ Vegan Dükkan Lokanta, canlı ID 1235, Cihangir Sıraselviler Cd. Soğancı Sk. 
 Nutcase, canlı ID 1237, Gayrettepe Süleymanbey Sk. Ulug Apt. No:10C. Yandex başlığı hedef No:10C’yi taşıyor; görselde “nutcase RAW VEGAN HEALTHY” tabelası ve yan kapıda “ULUG APT. NO:10” işareti net, güçlü eşleşme.
 Carmenta Kahvaltı, canlı ID 1217, Çelebi Oğlu Sk. No:12. Seçilen görselde “CARMENTA” tabelası ve giriş net; Yelp kaydı başlıkta Çelebioğlu Sok. No:12 ile adresi doğruluyor.
 Ortaköy Cafe Kahvaltı, canlı ID 1228, Mecidiye Eski Bahçe Sk. No:31 D:33. Seçilen görselde “ORTAKÖY CAFE KAHVALTI” tabelası ve dış cephe net; Waze/Wanderlog adresi No:31 D:33 ile doğruluyor.
+Vacilando, canlı ID 1238, Hacımimi Dibek Sok. 17/A. Yandex başlığı hedef 17A adresini taşıyor; görselde “Vacilando” dış cephe tabelası net, güçlü eşleşme.
+Govinda Istanbul, canlı ID 1239, Büyükdere Cd. Naci Kasım Sk. No:6B, Goranga Yoga içerisinde. Tripadvisor görselinde aynı cephede “goranga yoga” ve “govinda vedik hint mutfağı” tabelaları birlikte net; hedef işletme/ortak mekân güçlü eşleşmesi, 6B adresi ayrıca teyit edilecek.
+No 19 Dining, canlı ID 1240, Kuloğlu Faik Paşa Cd. No:6. Tripadvisor dış cephe adayında “NO 19 DINING” tabelası ve 6 numaralı kapı plakası görülüyor; kabul için yüksek çözünürlükte kontrol edilecek.
+Abu Gosh Filistin Künefesi, canlı ID 1241, Yıldız Serencebey Ykş. 14B. Görselde “ABU GHOUSH”, Arapça marka ve “Asıl Filistin Künefesi” tabelası net; hedef dükkân adıyla güçlü eşleşme, No:14B ayrıca teyit edilecek.
+Bakery box, canlı ID 1242, Ortaköy Değirmen Sk. No:3. Yandex adayları hedef çevrede Bakery Box kaydını gösterse de biri 3A olarak listeleniyor; görselde marka/numara kesinliği ayrıca kontrol edilecek.
+GÜN BAKERY, canlı ID 1243, Sinanpaşa Şair Nedim Cd. No:34. Görselde “GÜN BAKERY”, “NO.34” ve kapıdaki 34 numarası aynı karede net; güçlü eşleşme.
+B.BLOK Bakery - Akaretler, canlı ID 1244, Vişnezade Refik Osman Top Sk. No:13. “B Blok Bakery Akaretler” iç mekân görselinde B BLOK logosu net; Akaretler şubesi olduğu doğrulanıyor, No:13 adresi ayrıca teyit edilecek.
+B.BLOK Bakery, canlı ID 1245, Vişnezade Şair Nedim Cd. 35A D:1. Yandex başlığı hedef 35A adresini taşıyor; dış cephede B.BLOK tabelası net, güçlü eşleşme.
+Sour & Sweet Artisan Bakery Akaretler, canlı ID 1246, Vişnezade Şair Nedim Cd. No:1. Bulunan dış cephe sonuçları Sour & Sweet’in Kadıköy/Caddebostan şubesine ait; Akaretler hedefiyle uyuşmadığı için kullanılmayacak.
+Bakery box, canlı ID 1242, Ortaköy Değirmen Sk. No:3. Yandex/Instagram/Waze metinleri No:3 veya 3A adresini doğrulasa da incelenen görsel yalnızca ürün fotoğrafı; işletme tabelası veya kapı numarası görünmediği için kullanılmayacak.
+No 19 Dining, canlı ID 1240, Kuloğlu Faik Paşa Cd. No:6. İncelenen görselde kapı plakası 6A ve tabelada farklı/eksik “LOKA… DIN…” yazısı görünüyor; canlı No:6 ve “No 19 Dining” kimliğiyle kesin görsel eşleşmesi sağlanamadığı için kullanılmayacak.
+B.BLOK Bakery - Akaretler, canlı ID 1244, Vişnezade Refik Osman Top Sk. No:13. Wanderlog, Corner ve Waze adresi No:13’ü birebir doğruluyor; B BLOK logolu Akaretler iç mekân görseli kabul edildi.
+Abu Gosh Filistin Künefesi, canlı ID 1241, Yıldız Serencebey Ykş. 14B. Mindtrip/Maptons/Wanderboat adresleri 14B’yi doğruluyor; ABU GHOUSH tabelalı görsel kabul edildi.
+Pite Bakery & Kruvasan ve Kahvaltı, canlı ID 1247, Vidin İş Merkezi Hasfırın Cd. D:3. Yandex görselinde Pite tabelası net ancak kaynak adresi 3G, canlı kayıt D:3; birim/numara uyuşmazlığı kesin eşleşmeyi engellediği için kullanılmayacak.
+Zeron Bakery, canlı ID 1248, Yıldız Asariye Cd. 11/D. Resmî sonuçlarda Zeron logosu ve ürün görselleri var; dış cephe/11D adresi aynı görselde doğrulanamadı, kullanılmayacak.
+Mendel’s Bakery, canlı ID 1249, Şair Nedim Cd. No:18/B. Yandex kaydı Mendel’s’i 18A olarak gösteriyor; canlı 18B ile numara uyuşmazlığı bulunduğu için kullanılmayacak.
+Bagetta mix Fırın & Cafe, canlı ID 1250, Abbasağa Yıldız Cd. No:53. Görselde “Bagetta Mix” işletme adı net ancak Yandex kaydı No:51, canlı hedef No:53; numara uyuşmazlığı nedeniyle kullanılmayacak.
+Flân Bakery Akaretler, canlı ID 1251, Vişnezade Süleyman Seba Cd. No:32/1. Bulunan Flan sonuçları Kadıköy Caddebostan 28B şubesine ait; Akaretler hedefiyle uyuşmadığı için kullanılmayacak.
+Amour Bakery, canlı ID 1252, Levent Gonca Sk. No:17/A. Görseller Greenwich/ABD’deki Amour Bakery’ye ait; İstanbul hedefiyle uyuşmadığı için kullanılmayacak.
+Mon Bakehouse, canlı ID 1253, Nisbetiye Gümüş Sk. Özlem Apt No:1/C. Yandex başlığı hedef No:1C’yi taşıyor; vitrin üzerinde “MON BAKEHOUSE” tabelası net, güçlü eşleşme.
+Como Bakery, canlı ID 1254, Sinanpaşa Köşeli Sk. No:15. Görselde “como bakery” tabelası ve kapıdaki 15B plakası net; canlı hedef No:15 ile B alt birimi farkı bulunduğu için kullanılmayacak.
+Tarihi Oktay Kurabiye Fırını, canlı ID 1255, Türkali Yaverağa Sk. 1/A. Corner görseli “Hakkı Zade 1864” adlı farklı işletmeyi gösteriyor, Tripadvisor adayı ise ürün fotoğrafı; kullanılmayacak.
+Tarhun Fırın, canlı ID 1256, Yıldız/Gayrettepe Jandarma Mektebi Sk. No:7. Resmî sonuçta yalnızca Tarhun logosu var; dış cephe ve No:7 görseli bulunamadı, kullanılmayacak.
+7-8 Hasanpaşa Fırını, canlı ID 1257, Sinanpaşa Şht. Asım Cd. No:8. Tripadvisor görselinde “Yedi-Sekiz Hasanpaşa Kuru Pasta Fırını” tabelası ve kapıdaki 8 plakası net; güçlü eşleşme.
+Bi Dost Coffee&Chocolate-Donuts, canlı ID 1258, Muradiye Nüzhetiye Cd. 3/A. Görselde “Bİ DOST Coffee & Chocolate” tabelası net; hedef adresle aynı şube ayrıca teyit edilecek.
+Pelin'in Ekmeği, canlı ID 1259, Kültür Suna Sk. No:56. Yandex başlığında hedef adres bulunsa da incelenen görsel yalnızca ekmek ürünü; tabela/kapı numarası görünmediği için kullanılmayacak.
+SEASON Artisan Bakery, canlı ID 1260, Bebek Küçük Bebek Cd. No:15-17. Corner başlığı hedef 15-17 adresini taşıyor; görselde “SEASON ARTISAN BAKERY” dış cephe tabelası net, güçlü eşleşme.
+Supper Bakery, canlı ID 1261, Muradiye Nüzhetiye Cd. No:1. Corner dış cephe adayı “Supper Bakery” tabelasını taşıyor; görsel ayrıntısı ayrıca kontrol edilecek.
+Bi Dost Coffee&Chocolate-Donuts, canlı ID 1258, Muradiye Nüzhetiye Cd. 3/A. Yandex ve Instagram/Facebook kaynakları Nüzhetiye Cd. 3/A adresini birebir doğruluyor; Bİ DOST tabelalı görsel kabul edildi.
+Supper Bakery, canlı ID 1261, Muradiye Nüzhetiye Cd. No:1. Apple Maps/Corner adresi No:1’i doğruluyor; “SUPPER coffee • bakery” dış cephe tabelası net, güçlü eşleşme.
+Cookie Me | Akaretler, canlı ID 1262, Sinanpaşa Şair Nedim Cd. No:18. Resmî kaynaklarda yalnızca logo ve ürün fotoğrafları bulundu; Akaretler dış cephe/No:18 görseli bulunamadığı için kullanılmayacak.
+Govinda Istanbul, canlı ID 1239, Büyükdere Cd. Naci Kasım Sk. No:6B. Govinda’nın resmî iletişim/menü sayfaları ve Goranga Yoga iletişim kaydı No:6B, Goranga Yoga içerisini birebir doğruluyor; “govinda vedik hint mutfağı” + “goranga yoga” tabelalı görsel kabul edildi.

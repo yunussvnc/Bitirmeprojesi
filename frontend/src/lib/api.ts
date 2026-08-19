@@ -247,6 +247,17 @@ import veganIstanbul from '../assets/venues/vegan-istanbul.jpg'
 import mamamanti from '../assets/venues/mamamanti.jpg'
 import veganDukkanLokanta from '../assets/venues/vegan-dukkan-lokanta.jpg'
 import nutcase from '../assets/venues/nutcase.jpg'
+import vacilando from '../assets/venues/vacilando.jpg'
+import govindaIstanbul from '../assets/venues/govinda-istanbul.jpg'
+import abuGoshFilistinKunefesi from '../assets/venues/abu-gosh-filistin-kunefesi.jpg'
+import gunBakery from '../assets/venues/gun-bakery.jpg'
+import bblokBakeryAkaretler from '../assets/venues/bblok-bakery-akaretler.jpg'
+import bblokBakery35a from '../assets/venues/bblok-bakery-35a.jpg'
+import monBakehouse from '../assets/venues/mon-bakehouse.jpg'
+import yediSekizHasanpasaFirini from '../assets/venues/yedi-sekiz-hasanpasa-firini.jpg'
+import biDostCoffeeChocolate from '../assets/venues/bi-dost-coffee-chocolate.jpg'
+import seasonArtisanBakery from '../assets/venues/season-artisan-bakery.jpg'
+import supperBakery from '../assets/venues/supper-bakery.jpg'
 
 export interface Venue {
   id: string
@@ -546,6 +557,17 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '1234': mamamanti,
   '1235': veganDukkanLokanta,
   '1237': nutcase,
+  '1238': vacilando,
+  '1239': govindaIstanbul,
+  '1241': abuGoshFilistinKunefesi,
+  '1243': gunBakery,
+  '1244': bblokBakeryAkaretler,
+  '1245': bblokBakery35a,
+  '1253': monBakehouse,
+  '1257': yediSekizHasanpasaFirini,
+  '1258': biDostCoffeeChocolate,
+  '1260': seasonArtisanBakery,
+  '1261': supperBakery,
 }
 
 export function getFallbackVenueImage(category: string): string {

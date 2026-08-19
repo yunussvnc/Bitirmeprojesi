@@ -250,6 +250,17 @@ const veganIstanbul = require("../../assets/places/vegan-istanbul.jpg") as Image
 const mamamanti = require("../../assets/places/mamamanti.jpg") as ImageSourcePropType;
 const veganDukkanLokanta = require("../../assets/places/vegan-dukkan-lokanta.jpg") as ImageSourcePropType;
 const nutcase = require("../../assets/places/nutcase.jpg") as ImageSourcePropType;
+const vacilando = require("../../assets/places/vacilando.jpg") as ImageSourcePropType;
+const govindaIstanbul = require("../../assets/places/govinda-istanbul.jpg") as ImageSourcePropType;
+const abuGoshFilistinKunefesi = require("../../assets/places/abu-gosh-filistin-kunefesi.jpg") as ImageSourcePropType;
+const gunBakery = require("../../assets/places/gun-bakery.jpg") as ImageSourcePropType;
+const bblokBakeryAkaretler = require("../../assets/places/bblok-bakery-akaretler.jpg") as ImageSourcePropType;
+const bblokBakery35a = require("../../assets/places/bblok-bakery-35a.jpg") as ImageSourcePropType;
+const monBakehouse = require("../../assets/places/mon-bakehouse.jpg") as ImageSourcePropType;
+const yediSekizHasanpasaFirini = require("../../assets/places/yedi-sekiz-hasanpasa-firini.jpg") as ImageSourcePropType;
+const biDostCoffeeChocolate = require("../../assets/places/bi-dost-coffee-chocolate.jpg") as ImageSourcePropType;
+const seasonArtisanBakery = require("../../assets/places/season-artisan-bakery.jpg") as ImageSourcePropType;
+const supperBakery = require("../../assets/places/supper-bakery.jpg") as ImageSourcePropType;
 
 const CATEGORY_PLACEHOLDERS: Record<string, string> = {
   kafe: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800",
@@ -513,6 +524,17 @@ const PLACE_IMAGE_OVERRIDES: Record<string, ImageSourcePropType> = {
   "1234": mamamanti,
   "1235": veganDukkanLokanta,
   "1237": nutcase,
+  "1238": vacilando,
+  "1239": govindaIstanbul,
+  "1241": abuGoshFilistinKunefesi,
+  "1243": gunBakery,
+  "1244": bblokBakeryAkaretler,
+  "1245": bblokBakery35a,
+  "1253": monBakehouse,
+  "1257": yediSekizHasanpasaFirini,
+  "1258": biDostCoffeeChocolate,
+  "1260": seasonArtisanBakery,
+  "1261": supperBakery,
 };
 
 type PlaceLike = Place | { id?: string | number; name?: string; photo_url?: string; category?: string };
