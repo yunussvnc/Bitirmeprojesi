@@ -696,3 +696,7 @@ Holy Pub, canlı ID 1141, Sinanpaşa Alaybeyi Sk. No:12. Görselde HOLY PUB tabe
 No 24 Pub Beşiktaş, canlı ID 1142, Sinanpaşa Alaybeyi Sk. No:24. Bu taramada hedef işletme adı ve No:24 ile doğrulanabilir görsel bulunamadı; kullanılmayacak.
 Eureka pub bjk, canlı ID 1143, Cihannüma Akmaz Çeşme Sk. 20/A. Bu taramada hedef isim/adresle doğrulanabilir görsel bulunamadı; kullanılmayacak.
 Kaynak çapraz doğrulaması Batch 018: Kiez Pub resmî sitesi https://kiezpub.com.tr/ adresi “Türkali, Nüzhetiye Cd. No:30, 34357 Beşiktaş/İstanbul” olarak veriyor; Tripadvisor/Yelp/Yandex kayıtları 30A olarak aynı giriş/şube kümesini destekliyor. Görselde Kiez PUB tabelası ve giriş net; canlı 1139 eşleşmesi doğrulandı.
+1 Numara Pub Beşiktaş, canlı ID 1146, Sinanpaşa Akmaz Çeşme Sk. No:15/B. Yandex başlığı No:15A olarak aynı adres kümesini veriyor; görselde 1 NUMARA PUB tabelası ve dış cephe net, güçlü eşleşme.
+Beer House Beşiktaş, canlı ID 1144, Şht. Asım Cd. No:27 D:19. Arama sonucu hedef adresi taşıyan bir menü fotoğrafı olsa da bu bir mekan görseli değil; dış cephe/tabela doğrulaması bulunmadığı için kullanılmayacak.
+Aylak Bar Beşiktaş, canlı ID 1145, Leşker Sk. No:9. Bulunan Yandex adayı Köyiçi Meydan Sok. No:10A şubesine ait; hedef Leşker Sk. No:9 ile karıştırılmaması için kullanılmayacak.
+Kosmos, canlı ID 1147, Sinanpaşa Beşiktaş Cd. No:19A. Yandex panorama başlığı hedef adresi taşıyor; görselde KOSMOS tabelası, giriş ve komşu Joker No:19 bağlamı net, güçlü eşleşme.
