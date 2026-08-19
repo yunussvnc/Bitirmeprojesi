@@ -270,6 +270,19 @@ const cafeDaGiovanni = require("../../assets/places/cafe-da-giovanni.jpg") as Im
 const gramajCoffee = require("../../assets/places/gramaj-coffee.jpg") as ImageSourcePropType;
 const xyzCihangir = require("../../assets/places/xyz-cihangir.jpg") as ImageSourcePropType;
 const mundoNovoCoffeePatisserie = require("../../assets/places/mundo-novo-coffee-patisserie.jpg") as ImageSourcePropType;
+const booksCoffeeKarakoy = require("../../assets/places/books-coffee-karakoy.jpg") as ImageSourcePropType;
+const saelCoffee = require("../../assets/places/sael-coffee.jpg") as ImageSourcePropType;
+const roastoryCoffee = require("../../assets/places/roastory-coffee.jpg") as ImageSourcePropType;
+const muusCoffee = require("../../assets/places/muus-coffee.jpg") as ImageSourcePropType;
+const coffeeSapiens = require("../../assets/places/coffee-sapiens.jpg") as ImageSourcePropType;
+const cozyCupCoffee = require("../../assets/places/cozy-cup-coffee.jpg") as ImageSourcePropType;
+const cozyGardenFishMeat = require("../../assets/places/cozy-garden-fish-meat.jpg") as ImageSourcePropType;
+const beyogluCafe = require("../../assets/places/beyoglu-cafe.jpg") as ImageSourcePropType;
+const beyogluOcakbasi = require("../../assets/places/beyoglu-ocakbasi.jpg") as ImageSourcePropType;
+const taksimBahcivan = require("../../assets/places/taksim-bahcivan.jpg") as ImageSourcePropType;
+const guneyRestaurant1964 = require("../../assets/places/guney-restaurant-1964.jpg") as ImageSourcePropType;
+const peraIstanbulRestaurant = require("../../assets/places/pera-istanbul-restaurant.jpg") as ImageSourcePropType;
+const novasHagiasophiaRestaurant = require("../../assets/places/novas-hagiasophia-restaurant.jpg") as ImageSourcePropType;
 
 const CATEGORY_PLACEHOLDERS: Record<string, string> = {
   kafe: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800",
@@ -553,6 +566,19 @@ const PLACE_IMAGE_OVERRIDES: Record<string, ImageSourcePropType> = {
   "1278": gramajCoffee,
   "1280": xyzCihangir,
   "1287": mundoNovoCoffeePatisserie,
+  "1288": booksCoffeeKarakoy,
+  "1290": saelCoffee,
+  "1291": roastoryCoffee,
+  "1292": muusCoffee,
+  "1293": coffeeSapiens,
+  "1296": cozyCupCoffee,
+  "1299": cozyGardenFishMeat,
+  "1300": beyogluCafe,
+  "1303": beyogluOcakbasi,
+  "1304": taksimBahcivan,
+  "1307": guneyRestaurant1964,
+  "1311": peraIstanbulRestaurant,
+  "1312": novasHagiasophiaRestaurant,
 };
 
 type PlaceLike = Place | { id?: string | number; name?: string; photo_url?: string; category?: string };

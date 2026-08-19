@@ -869,3 +869,38 @@ Noir Pit Coffee Co. Pera, canlı ID 1285, Asmalı Mescit General Yazgan Sk. 109/
 Latte Concept Cafe, canlı ID 1270, Katip Mustafa Çelebi Billurcu Sk. No:5A. Seçilen görselde “LATTE CONCEPT CAFE” tabelası ve giriş net; işletme kimliği kesin, adres kaydı ayrıca mevcut hedefle eşleşiyor.
 VAA Coffee Galata, canlı ID 1273, Bereketzade Büyük Hendek Cd. Seçilen görselde “VAA COFFEE” dış cephe tabelası net; Tripadvisor ve Instagram aynı Galata/Büyük Hendek şubesini doğruluyor.
 XYZ Cihangir - the Coffee Guru, canlı ID 1280, Kılıçali Paşa Anahtar Sk. No:3/A. Seçilen görselde “XYZ CİHANGİR / the COFFEE GURU” tabelası net; Corner adresi No:3/A ile aynı şube doğrulanıyor.
+Books & Coffee Karaköy, canlı ID 1288, Arap Cami Teğmen Hüseyin Sofu Sk. No:13. Corner başlığı hedef No:13 adresini taşıyor; seçilen iç mekân görselinde BOOKS & COFFEE logosu ve kitap-kafe kimliği net, kabul edildi.
+Old Java Coffee Roasters, canlı ID 1289, Müeyyetzade Tatar Beyi Sk. No:8. Arama sonuçlarında OLD JAVA COFFEE ROASTERS tabelalı cephe var; hedef adresle aynı şube ayrıca teyit edilecek.
+Sael Coffee, canlı ID 1290, Firuzağa Defterdar Yokuşu Sk. No:1A. Corner görselinde “sael” tabelası ve kapıdaki 1A numarası net, güçlü eşleşme.
+Roastory Coffee Co İstiklal Caddesi, canlı ID 1291, Katip Mustafa Çelebi İstiklal Cd. No:87. Görselde ROASTORY COFFEE tabelası ve İstiklal mağaza cephesi net; hedef No:87 şubesi ayrıca teyit edilecek.
+Muus Coffee, canlı ID 1292, Cihangir Oba Sk. No:2 D:B. Yandex görselinde “MÜÜS COFFEE” dış cephe tabelası net; hedef Oba Sk. No:2 şubesi ayrıca teyit edilecek.
+Coffee Sapiens, canlı ID 1293, Kemankeş Karamustafa Paşa Kılıç Ali Paşa Mescidi Sk. No:10 D:C. Tripadvisor sonuçlarında COFFEE SAPIENS tabelalı cephe mevcut; hedef şube ayrıca teyit edilecek.
+Wuux Coffee, canlı ID 1294, Bereketzade Büyük Hendek Cd. No:27/A. Tripadvisor görsellerinde yalnızca personel tişörtündeki WUUX logosu görülüyor; dış cephe/27A adresi doğrulanamadığı için kullanılmayacak.
+YOİ COFFEE, canlı ID 1295, Emekyemez Tersane Cd. Demirtaş İş Hanı No:98/A. Yandex başlığı 98A olsa da incelenen cephede YOİ tabelası görünmüyor; farklı/uygunsuz cephe olduğu için kullanılmayacak.
+Cozy Cup Coffee, canlı ID 1296, Camikebir Kasap Zekeriya Sk. No:3. Görselde “Cozy Cup” dış cephe tabelası net; hedef adresle aynı şube ayrıca teyit edilecek.
+Cozy Corner, canlı ID 1297, Firuzaga Kadirler Ykş. Kalkan Sk. No:1. Bu aramada hedef işletme adı ve No:1 ile doğrulanabilir görsel bulunamadı; kullanılmayacak.
+Private Foxes, canlı ID 1298, Küçük Piyale Kızılay Meydanı Cd. No:12A. Bu aramada hedef işletme adı ve No:12A ile doğrulanabilir görsel bulunamadı; kullanılmayacak.
+Cozy Garden Fish And Meat Restaurant, canlı ID 1299, Hocapaşa Hüdavendigar Cd. Serdar Sk. No:2. Tripadvisor görselinde COZY GARDEN RESTAURANT & CAFE tabelası net; hedef adresle aynı şube ayrıca teyit edilecek.
+Beyoğlu Cafe, canlı ID 1300, Şehit Muhtar Mis Sk. No:7. Yandex başlığı hedef No:7’yi taşıyor; görselde BEYOĞLU CAFE tabelası ve cephe net, güçlü eşleşme.
+Yahya Bey Cafe-Restaurant, canlı ID 1301, Emekyemez Refik Saydam Cd. No:45. Yandex adayı 47B adresini taşıyor; canlı No:45 ile numara uyuşmazlığı nedeniyle kullanılmayacak.
+Cafe Berry, canlı ID 1302, Kalyoncu Kulluğu Ömer Hayyam Cd. No:22/A. İncelenen sonuç açıkça “BERRY LIFE PERA EMLAK” tabelasını gösteriyor; hedef Cafe Berry olmadığı için kullanılmayacak.
+Beyoğlu Ocakbaşı, canlı ID 1303, Şehit Muhtar Bekar Sk. No:20. Yelp/Tripadvisor görselinde “BEYOĞLU OCAKBAŞI” tabelası ve işletme girişi net; kaynak başlığı hedef No:20’yi doğruluyor, güçlü eşleşme.
+Taksim Bahçıvan, canlı ID 1304, Şehit Muhtar Süslü Saksı Sk. No:27. Yandex/Tripadvisor görsellerinde “TAKSİM BAHÇIVAN” tabelası net; hedef adresle aynı şube ayrıca teyit edilecek.
+Dürümzade, canlı ID 1305, Hüseyinağa Kamer Hatun Cd. 26/A. Yandex kaydı 26A olsa da incelenen görsel yalnızca ürün/masa ve sokak görüntüsü; Dürümzade tabelası veya kapı numarası görünmediği için kullanılmayacak.
+Pera Antakya, canlı ID 1306, Asmalı Mescit Balyoz Sk. No:14. Yandex başlığı hedef No:14’ü taşısa da incelenen görsel yalnızca restoran içi; Pera Antakya adı/tabelası veya kapı numarası görünmediği için kullanılmayacak.
+Güney Restaurant 1964 - Kuledibi, canlı ID 1307, Şahkulu Şahkapısı Sk. No:2 D:B. Resmî adayda GÜNEY 1964 logosu bulunuyor; dış cephe/tabela görseli ayrıca kontrol edilecek.
+Yeni Lokanta, canlı ID 1308, Tomtom Kumbaracı Yokuşu Sk. No:66/B. Yandex dış cephe adayı “Mr Hair & Beauty” adlı farklı işletmeyi gösteriyor; kullanılmayacak.
+Hasan Ustam Ocakbaşı restaurant, canlı ID 1309, Şehit Muhtar İmam Adnan Sk. No:16. Yandex/Tripadvisor görsellerinde “HASAN USTAM” ocakbaşı tabelası net; kaynak adresi İmam Adnan Sk. No:16, güçlü eşleşme.
+Kanatci Dayim, canlı ID 1310, Hacımimi Karabaş Cd. No:1. Yandex adayı Karabaş Mektebi Sok. No:1 ve fotoğrafta farklı “kahvaltı/kanat” cepheleri; canlı Karabaş Cd. kaydıyla kesin eşleşme yok, kullanılmayacak.
+Pera İstanbul Restaurant, canlı ID 1311, Asmalı Mescit Cd. No:21. Yandex kaydı 21A, Tripadvisor dış cephe fotoğrafında “PERA İSTANBUL RESTAURANT” tabelası net; hedef No:21 ile güçlü eşleşme.
+Cozy Cup Coffee, canlı ID 1296, Camikebir Kasap Zekeriya Sk. No:3. Görselde COZY CUP tabelası net; adres ayrıca teyit edilecek.
+Cozy Garden Fish And Meat Restaurant, canlı ID 1299, Hocapaşa Hüdavendigar Cd. Serdar Sk. No:2. Yandex/Dineluup kaynakları No:2’yi doğruluyor; dış cephede COZY GARDEN RESTAURANT & CAFE tabelası net, kabul edildi.
+Beyoğlu Cafe, canlı ID 1300, Şehit Muhtar Mis Sk. No:7. Yandex hedef No:7 ve BEYOĞLU CAFE tabelalı dış cepheyi doğruluyor; kabul edildi.
+Güney Restaurant 1964 - Kuledibi, canlı ID 1307, Şahkulu Şahkapısı Sk. No:2 D:B. Resmî kaynak No:2B adresini doğruluyor; dış cephede “1964 GÜNEY RESTAURANT” tabelalı aday kabul edildi.
+Taksim Bahçıvan, canlı ID 1304, Şehit Muhtar Süslü Saksı Sk. No:27. Yandex/Tripadvisor adresi No:27’yi ve seçilen görselde TAKSİM BAHÇIVAN tabelasını doğruluyor; kabul edildi.
+Novas Hagiasophia Restaurant, canlı ID 1312, Katip Mustafa Çelebi Sıraselviler Cd. Otopark No:1. Tripadvisor/Corner/Instagram kaynakları Otopark No:1’i doğruluyor; “Novas hagiasophia cafe & restaurant” dış cephe tabelalı görsel kabul edildi.
+Roastory Coffee Co İstiklal Caddesi, canlı ID 1291, Katip Mustafa Çelebi İstiklal Cd. No:87. Corner/Mindtrip/Instagram kaynakları No:87 adresini birebir doğruluyor; ROASTORY COFFEE tabelalı görsel kabul edildi.
+Muus Coffee, canlı ID 1292, Cihangir Oba Sk. No:2 D:B. Muus’un resmî sitesi ve Corner kaydı Oba Sk. No:2/B adresini birebir doğruluyor; MÜÜS COFFEE tabelalı görsel kabul edildi.
+Coffee Sapiens, canlı ID 1293, Kemankeş Karamustafa Paşa Kılıç Ali Paşa Mescidi Sk. No:10 D:C. Coffee Sapiens resmî sitesi No:10/C Karaköy adresini doğruluyor; COFFEE SAPIENS tabelalı görsel kabul edildi.
+Coffee Sapiens, canlı ID 1293, Kemankeş Karamustafa Paşa Kılıç Ali Paşa Mescidi Sk. No:10 D:C. Seçilen görselde COFFEE SAPIENS tabelası ve girişteki kırmızı 10C kapı plakası aynı karede net; güçlü eşleşme.
+Güney Restaurant 1964 - Kuledibi, canlı ID 1307, Şahkulu Şahkapısı Sk. No:2 D:B. Seçilen dış cephede “1964 GÜNEY RESTAURANT” tabelası ve GÜNEY girişi net; resmî No:2B adresiyle güçlü eşleşme.

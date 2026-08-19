@@ -267,6 +267,19 @@ import cafeDaGiovanni from '../assets/venues/cafe-da-giovanni.jpg'
 import gramajCoffee from '../assets/venues/gramaj-coffee.jpg'
 import xyzCihangir from '../assets/venues/xyz-cihangir.jpg'
 import mundoNovoCoffeePatisserie from '../assets/venues/mundo-novo-coffee-patisserie.jpg'
+import booksCoffeeKarakoy from '../assets/venues/books-coffee-karakoy.jpg'
+import saelCoffee from '../assets/venues/sael-coffee.jpg'
+import roastoryCoffee from '../assets/venues/roastory-coffee.jpg'
+import muusCoffee from '../assets/venues/muus-coffee.jpg'
+import coffeeSapiens from '../assets/venues/coffee-sapiens.jpg'
+import cozyCupCoffee from '../assets/venues/cozy-cup-coffee.jpg'
+import cozyGardenFishMeat from '../assets/venues/cozy-garden-fish-meat.jpg'
+import beyogluCafe from '../assets/venues/beyoglu-cafe.jpg'
+import beyogluOcakbasi from '../assets/venues/beyoglu-ocakbasi.jpg'
+import taksimBahcivan from '../assets/venues/taksim-bahcivan.jpg'
+import guneyRestaurant1964 from '../assets/venues/guney-restaurant-1964.jpg'
+import peraIstanbulRestaurant from '../assets/venues/pera-istanbul-restaurant.jpg'
+import novasHagiasophiaRestaurant from '../assets/venues/novas-hagiasophia-restaurant.jpg'
 
 export interface Venue {
   id: string
@@ -586,6 +599,19 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '1278': gramajCoffee,
   '1280': xyzCihangir,
   '1287': mundoNovoCoffeePatisserie,
+  '1288': booksCoffeeKarakoy,
+  '1290': saelCoffee,
+  '1291': roastoryCoffee,
+  '1292': muusCoffee,
+  '1293': coffeeSapiens,
+  '1296': cozyCupCoffee,
+  '1299': cozyGardenFishMeat,
+  '1300': beyogluCafe,
+  '1303': beyogluOcakbasi,
+  '1304': taksimBahcivan,
+  '1307': guneyRestaurant1964,
+  '1311': peraIstanbulRestaurant,
+  '1312': novasHagiasophiaRestaurant,
 }
 
 export function getFallbackVenueImage(category: string): string {
