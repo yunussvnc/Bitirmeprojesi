@@ -364,6 +364,16 @@ import coffyUmraniyeMerkez from '../assets/venues/coffy-umraniye-merkez.jpg'
 import kaforaCoffeeUmraniye from '../assets/venues/kafora-coffee-umraniye.jpg'
 import yaliKanatKebapSteak from '../assets/venues/yali-kanat-kebap-steak.jpg'
 import cemilustaAkcaabatKofte from '../assets/venues/cemilusta-akcaabat-kofte.jpg'
+import umusIstanbul from '../assets/venues/umus-istanbul.jpg'
+import hmbrgrMaltepePark from '../assets/venues/hmbrgr-maltepe-park.jpg'
+import kosorMaltepeCagKebap from '../assets/venues/kosor-maltepe-cag-kebap.jpg'
+import farikaRestaurantMaltepe from '../assets/venues/farika-restaurant-maltepe.jpg'
+import mardinMutfagiMaltepe from '../assets/venues/mardin-mutfagi-maltepe.jpg'
+import mezzeEtKebapMaltepe from '../assets/venues/mezze-et-kebap-maltepe.jpg'
+import bistBahceIstanbul from '../assets/venues/bist-bahce-istanbul.jpg'
+import birBakanMeyhanesi from '../assets/venues/bir-bakan-meyhanesi.jpg'
+import focaBalikKucukyali from '../assets/venues/foca-balik-kucukyali.jpg'
+import calipsoFish from '../assets/venues/calipso-fish.jpg'
 
 export interface Venue {
   id: string
@@ -780,6 +790,16 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '2275': kaforaCoffeeUmraniye,
   '2276': yaliKanatKebapSteak,
   '2277': cemilustaAkcaabatKofte,
+  '2279': umusIstanbul,
+  '2280': hmbrgrMaltepePark,
+  '2281': kosorMaltepeCagKebap,
+  '2282': farikaRestaurantMaltepe,
+  '2283': mardinMutfagiMaltepe,
+  '2285': mezzeEtKebapMaltepe,
+  '2286': bistBahceIstanbul,
+  '2287': calipsoFish,
+  '2288': focaBalikKucukyali,
+  '2289': birBakanMeyhanesi,
 }
 
 export function getFallbackVenueImage(category: string): string {

@@ -367,6 +367,16 @@ const coffyUmraniyeMerkez = require("../../assets/places/coffy-umraniye-merkez.j
 const kaforaCoffeeUmraniye = require("../../assets/places/kafora-coffee-umraniye.jpg") as ImageSourcePropType;
 const yaliKanatKebapSteak = require("../../assets/places/yali-kanat-kebap-steak.jpg") as ImageSourcePropType;
 const cemilustaAkcaabatKofte = require("../../assets/places/cemilusta-akcaabat-kofte.jpg") as ImageSourcePropType;
+const umusIstanbul = require("../../assets/places/umus-istanbul.jpg") as ImageSourcePropType;
+const hmbrgrMaltepePark = require("../../assets/places/hmbrgr-maltepe-park.jpg") as ImageSourcePropType;
+const kosorMaltepeCagKebap = require("../../assets/places/kosor-maltepe-cag-kebap.jpg") as ImageSourcePropType;
+const farikaRestaurantMaltepe = require("../../assets/places/farika-restaurant-maltepe.jpg") as ImageSourcePropType;
+const mardinMutfagiMaltepe = require("../../assets/places/mardin-mutfagi-maltepe.jpg") as ImageSourcePropType;
+const mezzeEtKebapMaltepe = require("../../assets/places/mezze-et-kebap-maltepe.jpg") as ImageSourcePropType;
+const bistBahceIstanbul = require("../../assets/places/bist-bahce-istanbul.jpg") as ImageSourcePropType;
+const birBakanMeyhanesi = require("../../assets/places/bir-bakan-meyhanesi.jpg") as ImageSourcePropType;
+const focaBalikKucukyali = require("../../assets/places/foca-balik-kucukyali.jpg") as ImageSourcePropType;
+const calipsoFish = require("../../assets/places/calipso-fish.jpg") as ImageSourcePropType;
 
 const CATEGORY_PLACEHOLDERS: Record<string, string> = {
   kafe: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800",
@@ -747,6 +757,16 @@ const PLACE_IMAGE_OVERRIDES: Record<string, ImageSourcePropType> = {
   "2275": kaforaCoffeeUmraniye,
   "2276": yaliKanatKebapSteak,
   "2277": cemilustaAkcaabatKofte,
+  "2279": umusIstanbul,
+  "2280": hmbrgrMaltepePark,
+  "2281": kosorMaltepeCagKebap,
+  "2282": farikaRestaurantMaltepe,
+  "2283": mardinMutfagiMaltepe,
+  "2285": mezzeEtKebapMaltepe,
+  "2286": bistBahceIstanbul,
+  "2287": calipsoFish,
+  "2288": focaBalikKucukyali,
+  "2289": birBakanMeyhanesi,
 };
 
 type PlaceLike = Place | { id?: string | number; name?: string; photo_url?: string; category?: string };
