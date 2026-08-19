@@ -580,3 +580,6 @@ Emporio Ristorante Akaretler Sıraevler, canlı ID 1042, Vişnezade Şair Nedim 
 Pasta to Go Akaretler, canlı ID 1044, Vişnezade Şair Nedim Cd. No:47/B. İncelenen arama görseli yalnızca ürün fotoğrafı; dış cephe/tabela görünmediği için kullanılmayacak. Ayrı dış cephe adayı bulunursa yeniden değerlendirilecek.
 Paper Moon, canlı ID 1043, Etiler Ahmet Adnan Saygun Cd. Arama sonuçları iç mekân/ambiyans görselleri; PAPER MOON dış tabela veya adres işareti net değil, kullanılmayacak.
 Pasta to Go Akaretler, canlı ID 1044, Vişnezade Şair Nedim Cd. No:47/B. Corner, Yandex, Instagram ve Yemeksepeti kayıtları aynı 47/B adresini doğruluyor; görselde PASTA TO GO tabelalı dış cephe ve giriş net, güçlü eşleşme.
+Pasta vera Beşiktaş, canlı ID 1045, Sinanpaşa Şht. Dursun Bakan Sk. 25/A. Yandex görselinde PASTA VERA tabelalı dış cephe ve giriş net; kaynak başlığı aynı 25A adresini taşıyor, güçlü eşleşme.
+Zeffirino Istanbul, canlı ID 1046, Yıldız Ortaköy Salhanesi Sk. No:7. Yandex dış cephe adayında ZEFFIRINO yerine farklı bir işletme tabelası görülüyor; hedef şubeyle eşleşmediği için kullanılmayacak.
+OTTO makarna, canlı ID 1047, Türkali Yaverağa Sk. 7/A. Arama sonucu yalnızca OTTO MAKARNA logosu; dış cephe ve adres işareti yok, kullanıcı kuralı nedeniyle kullanılmayacak.
