@@ -33,9 +33,11 @@ RUN --mount=type=cache,target=/root/.cache/pip \
 FROM python:3.11-slim AS runtime
 
 # libpq5: psycopg2'nin runtime'da ihtiyaç duyduğu paylaşımlı kütüphane
+# ffmpeg: upload doğrulamasında ffprobe ile gerçek video stream/format/süre kontrolü.
 # (libpq-dev'in derleme başlıkları değil, sadece .so dosyaları).
 # curl YOK: HEALTHCHECK Python stdlib (urllib) ile yapılıyor, ekstra paket gerekmiyor.
 RUN apt-get update && apt-get install -y --no-install-recommends \
+        ffmpeg \
         libpq5 \
     && rm -rf /var/lib/apt/lists/* \
     && groupadd --gid 1000 appuser \

@@ -30,6 +30,7 @@ import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useRouter, useLocalSearchParams, Stack } from "expo-router";
 import { Image } from "expo-image";
+import * as ImageManipulator from 'expo-image-manipulator';
 import { useTheme } from "@/src/hooks/useTheme";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { MessageBubble } from "./MessageBubble";
@@ -102,7 +103,12 @@ export default function ChatScreen() {
     // Image viewer
     const [selectedImageUri, setSelectedImageUri] = useState<string | null>(null);
     // Preview modal: URI seçildi, gönderilmedi — kullanıcı onaylasın
-    const [previewUri, setPreviewUri] = useState<string | null>(null);
+    const [pendingImage, setPendingImage] = useState<{
+        uri: string;
+        fileName: string;
+        mimeType: 'image/jpeg';
+    } | null>(null);
+    const previewUri = pendingImage?.uri ?? null;
     const flatListRef = useRef<FlatList>(null);
     const didInitialScrollRef = useRef(false);
 
@@ -669,6 +675,19 @@ export default function ChatScreen() {
         setInputText("");
     };
 
+    const prepareImagePreview = async (asset: ImagePicker.ImagePickerAsset) => {
+        const normalized = await ImageManipulator.manipulateAsync(
+            asset.uri,
+            [],
+            { compress: 0.8, format: ImageManipulator.SaveFormat.JPEG }
+        );
+        setPendingImage({
+            uri: normalized.uri,
+            fileName: 'message.jpg',
+            mimeType: 'image/jpeg',
+        });
+    };
+
     const handleCameraPress = () => {
         // 🔐 Medya izni kontrolü
         if (msgPermission && !msgPermission.can_send_media) {
@@ -697,7 +716,7 @@ export default function ChatScreen() {
                             });
                             if (!result.canceled && result.assets && result.assets.length > 0) {
                                 // Önizleme göster — kullanıcı onaylasın
-                                setPreviewUri(result.assets[0].uri);
+                                await prepareImagePreview(result.assets[0]);
                             }
                         } catch (error) {
                             Alert.alert(t("common.error"), t("chat.camera_err"));
@@ -719,7 +738,7 @@ export default function ChatScreen() {
                             });
                             if (!result.canceled && result.assets && result.assets.length > 0) {
                                 // Önizleme göster — kullanıcı onaylasın
-                                setPreviewUri(result.assets[0].uri);
+                                await prepareImagePreview(result.assets[0]);
                             }
                         } catch (error) {
                             Alert.alert(t("common.error"), t("chat.gallery_err"));
@@ -738,7 +757,8 @@ export default function ChatScreen() {
         if (!isBackendConv) return;
 
         // Önizleme modalını kapat
-        setPreviewUri(null);
+        const uploadFile = pendingImage;
+        setPendingImage(null);
 
         // Fotoğrafla birlikte yazı gönderilmişse al
         const captionText = inputText.trim();
@@ -771,12 +791,11 @@ export default function ChatScreen() {
 
         try {
             // 1. Görseli backend'e upload et
-            const filename = uri.split('/').pop() || 'photo.jpg';
-            const match = /\.([^.]+)$/.exec(filename);
-            const type = match ? `image/${match[1].toLowerCase().replace('jpg', 'jpeg')}` : 'image/jpeg';
+            const filename = uploadFile?.fileName || 'message.jpg';
+            const type = uploadFile?.mimeType || 'image/jpeg';
 
             const { apiUploadFile } = await import('@/src/utils/apiClient');
-            const uploadResult = await apiUploadFile('/upload/image', { uri, name: filename, type });
+            const uploadResult = await apiUploadFile('/upload/image?purpose=message', { uri, name: filename, type });
             const mediaUrl: string = uploadResult.url;
 
             // 2. Backend'e mesaj olarak gönder
@@ -1125,13 +1144,13 @@ export default function ChatScreen() {
                 visible={!!previewUri}
                 transparent
                 animationType="slide"
-                onRequestClose={() => setPreviewUri(null)}
+                onRequestClose={() => setPendingImage(null)}
             >
                 <View style={styles.previewModalOverlay}>
                     <View style={styles.previewModalContent}>
                         {/* Üst bar */}
                         <View style={styles.previewTopBar}>
-                            <TouchableOpacity onPress={() => setPreviewUri(null)} hitSlop={12}>
+                            <TouchableOpacity onPress={() => setPendingImage(null)} hitSlop={12}>
                                 <Text style={styles.previewCancel}>İptal</Text>
                             </TouchableOpacity>
                             <Text style={styles.previewTitle}>Fotoğraf Gönder</Text>

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from "react";
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, ScrollView, Platform, Keyboard, TouchableWithoutFeedback } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
+import * as ImageManipulator from "expo-image-manipulator";
 import * as ImagePicker from "expo-image-picker";
 import { Avatar } from "@/src/components/ui";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
@@ -89,7 +90,12 @@ export default function EditProfileScreen() {
           Alert.alert(t("edit_profile.error", "Hata"), "Dosya boyutu 5MB'dan küçük olmalıdır.");
           return;
         }
-        setAvatarUri(asset.uri);
+        const normalized = await ImageManipulator.manipulateAsync(
+          asset.uri,
+          [],
+          { compress: 0.8, format: ImageManipulator.SaveFormat.JPEG }
+        );
+        setAvatarUri(normalized.uri);
         setAvatarSize(asset.fileSize || null);
       }
     } catch (e) {
@@ -119,7 +125,7 @@ export default function EditProfileScreen() {
             uri: avatarUri,
             type: "image/jpeg",
             name: "avatar.jpg",
-          });
+          }, "avatar");
         } catch (uploadError: any) {
           captureException(uploadError, {
             userId: authUser?.id,

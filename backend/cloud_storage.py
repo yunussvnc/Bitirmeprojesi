@@ -9,11 +9,16 @@ Kullanım:
      CLOUDINARY_API_SECRET=xxx
 """
 
+import logging
+import uuid
+
 import cloudinary
 import cloudinary.uploader
+
 from config import get_settings
 
 settings = get_settings()
+logger = logging.getLogger("asemos.cloud_storage")
 
 _configured = False
 
@@ -67,33 +72,44 @@ def upload_image_variants(variants: dict, folder: str = "asemos/posts") -> dict:
     agresif cache sisteminde (Munia style) daha performanslıdır.
     """
     _ensure_configured()
-    
-    import uuid
     base_id = uuid.uuid4().hex
-    
-    # Full (Master) upload
-    res_full = cloudinary.uploader.upload(
-        variants["full_bytes"],
-        folder=folder,
-        public_id=f"{base_id}_full",
-        resource_type="image"
-    )
-    
-    # Medium upload
-    res_med = cloudinary.uploader.upload(
-        variants["medium_bytes"],
-        folder=folder,
-        public_id=f"{base_id}_medium",
-        resource_type="image"
-    )
-    
-    # Thumbnail upload
-    res_thumb = cloudinary.uploader.upload(
-        variants["thumbnail_bytes"],
-        folder=folder,
-        public_id=f"{base_id}_thumb",
-        resource_type="image"
-    )
+    uploaded_public_ids: list[str] = []
+
+    try:
+        res_full = cloudinary.uploader.upload(
+            variants["full_bytes"],
+            folder=folder,
+            public_id=f"{base_id}_full",
+            resource_type="image",
+        )
+        uploaded_public_ids.append(res_full["public_id"])
+
+        res_med = cloudinary.uploader.upload(
+            variants["medium_bytes"],
+            folder=folder,
+            public_id=f"{base_id}_medium",
+            resource_type="image",
+        )
+        uploaded_public_ids.append(res_med["public_id"])
+
+        res_thumb = cloudinary.uploader.upload(
+            variants["thumbnail_bytes"],
+            folder=folder,
+            public_id=f"{base_id}_thumb",
+            resource_type="image",
+        )
+        uploaded_public_ids.append(res_thumb["public_id"])
+    except Exception:
+        for public_id in reversed(uploaded_public_ids):
+            try:
+                cloudinary.uploader.destroy(
+                    public_id,
+                    resource_type="image",
+                    invalidate=True,
+                )
+            except Exception:
+                logger.error("Cloudinary rollback failed (public_id=%s)", public_id)
+        raise
     
     return {
         "url": res_full["secure_url"],
@@ -102,14 +118,14 @@ def upload_image_variants(variants: dict, folder: str = "asemos/posts") -> dict:
         "public_id": res_full["public_id"],
         "width": res_full.get("width"),
         "height": res_full.get("height"),
-        "blurhash": variants.get("blurhash")
+        "blurhash": variants.get("blurhash"),
     }
 
 
-def upload_video(file_bytes: bytes, folder: str = "asemos/videos") -> dict:
+def upload_video(file_source: bytes | str, folder: str = "asemos/videos") -> dict:
     _ensure_configured()
     result = cloudinary.uploader.upload(
-        file_bytes,
+        file_source,
         folder=folder,
         resource_type="video",
     )

@@ -17,7 +17,6 @@ import { create } from 'zustand';
 import * as ImageManipulator from 'expo-image-manipulator';
 import type {
   UploadJob,
-  UploadStage,
   MediaItem,
   SanitizedPostPayload,
   SanitizedStoryPayload,
@@ -85,7 +84,8 @@ export const useUploadPipelineStore = create<UploadPipelineState>((set, get) => 
     item: MediaItem,
     jobId: string,
     index: number,
-    total: number
+    total: number,
+    purpose: 'post' | 'story'
   ): Promise<string> {
     const baseProgress = Math.round((index / total) * 100);
     updateJob(jobId, { progress: baseProgress });
@@ -101,26 +101,35 @@ export const useUploadPipelineStore = create<UploadPipelineState>((set, get) => 
     }
 
     const uploadFn = item.type === 'video' ? uploadVideo : uploadImage;
-    const filename = uri.split('/').pop() || `media_${index}.jpg`;
-    const match = /\.([^.]+)$/.exec(filename);
-    
-    let ext = match ? match[1].toLowerCase() : 'jpg';
-    if (ext === 'jpg') ext = 'jpeg';
-    
-    const mime = item.type === 'video' 
-      ? `video/${ext === 'mov' ? 'quicktime' : 'mp4'}`
-      : `image/${ext}`;
+    let finalUri = uri;
+    let filename = `media_${index}.jpg`;
+    let mime = 'image/jpeg';
 
-    // Sıkıştırma (Compression) Adımı
-    const { compressMedia } = await import('../utils/mediaCompression');
-    const finalUri = await compressMedia(uri, item.type);
+    if (item.type === 'video') {
+      const { compressMedia } = await import('../utils/mediaCompression');
+      finalUri = await compressMedia(uri, item.type);
+      const sourceFilename = finalUri.split('/').pop() || uri.split('/').pop() || `media_${index}.mp4`;
+      const match = /\.([^.?#]+)(?:[?#]|$)/.exec(sourceFilename);
+      const extension = match?.[1].toLowerCase() || 'mp4';
+      const videoTypes: Record<string, string> = {
+        avi: 'video/x-msvideo',
+        m4v: 'video/x-m4v',
+        mkv: 'video/x-matroska',
+        mov: 'video/quicktime',
+        mp4: 'video/mp4',
+        webm: 'video/webm',
+      };
+      const safeExtension = videoTypes[extension] ? extension : 'mp4';
+      filename = `media_${index}.${safeExtension}`;
+      mime = videoTypes[safeExtension];
+    }
 
     console.log(`[UploadPipeline]   Uploading as ${mime}, filename: ${filename}, Final URI: ${finalUri}`);
     const result = await uploadFn({
       uri: finalUri,
       type: mime,
       name: filename,
-    });
+    }, purpose);
     console.log(`[UploadPipeline]   Upload result:`, JSON.stringify(result));
 
     if (!result?.url) {
@@ -209,8 +218,8 @@ export const useUploadPipelineStore = create<UploadPipelineState>((set, get) => 
               height: manipResult.height,
             });
           } catch (err) {
-            console.warn(`[UploadPipeline] Image processing failed for item ${i}, using resolved URI:`, err);
-            compressedItems.push({ ...item, uri: currentUri });
+            console.warn(`[UploadPipeline] Image processing failed for item ${i}:`, err);
+            throw new Error('Görsel güvenli JPEG biçimine dönüştürülemedi.');
           }
         } else {
           compressedItems.push({ ...item, uri: currentUri });
@@ -232,7 +241,8 @@ export const useUploadPipelineStore = create<UploadPipelineState>((set, get) => 
           job.mediaItems[i],
           jobId,
           i,
-          job.mediaItems.length
+          job.mediaItems.length,
+          job.contentType === 'story' ? 'story' : 'post'
         );
         console.log(`[UploadPipeline]   ✓ Uploaded → ${url.substring(0, 80)}...`);
         uploadedUrls.push(url);
