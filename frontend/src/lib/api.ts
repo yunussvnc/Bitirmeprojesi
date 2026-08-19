@@ -433,6 +433,19 @@ import jujiLounge from '../assets/venues/juji-lounge.jpg'
 import cookingHousePendik from '../assets/venues/cooking-house-pendik.jpg'
 import kazan1971Sariyer from '../assets/venues/kazan-1971-sariyer.jpg'
 import setBalikSariyer from '../assets/venues/set-balik-sariyer.jpg'
+import barbaStreetFood from '../assets/venues/barba-street-food.jpg'
+import limandaBalikSariyer from '../assets/venues/limanda-balik-sariyer.jpg'
+import tombulunMeyhanesi from '../assets/venues/tombulun-meyhanesi.jpg'
+import sinasMutfak from '../assets/venues/sinas-mutfak.jpg'
+import bogaztepeSariyer from '../assets/venues/bogaztepe-sariyer.jpg'
+import mutlununMutfagi from '../assets/venues/mutlunun-mutfagi.jpg'
+import route95Kagithane from '../assets/venues/route95-kagithane.jpg'
+import bogaSteakhouseKagithane from '../assets/venues/boga-steakhouse-kagithane.jpg'
+import adileSultanKagithane from '../assets/venues/adile-sultan-kagithane.jpg'
+import ersinKebapKagithane from '../assets/venues/ersin-kebap-kagithane.jpg'
+import lezzetDiyariKagithane from '../assets/venues/lezzet-diyari-kagithane.jpg'
+import obaLokantasiKagithane from '../assets/venues/oba-lokantasi-kagithane.jpg'
+import krorenLevent from '../assets/venues/kroren-levent.jpg'
 
 export interface Venue {
   id: string
@@ -918,6 +931,19 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '2394': cookingHousePendik,
   '2396': kazan1971Sariyer,
   '2399': setBalikSariyer,
+  '2403': barbaStreetFood,
+  '2404': limandaBalikSariyer,
+  '2407': tombulunMeyhanesi,
+  '2409': sinasMutfak,
+  '2410': bogaztepeSariyer,
+  '2411': mutlununMutfagi,
+  '2413': route95Kagithane,
+  '2414': bogaSteakhouseKagithane,
+  '2415': adileSultanKagithane,
+  '2417': ersinKebapKagithane,
+  '2421': lezzetDiyariKagithane,
+  '2422': obaLokantasiKagithane,
+  '2423': krorenLevent,
 }
 
 export function getFallbackVenueImage(category: string): string {

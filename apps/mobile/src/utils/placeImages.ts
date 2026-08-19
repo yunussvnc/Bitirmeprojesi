@@ -436,6 +436,19 @@ const jujiLounge = require("../../assets/places/juji-lounge.jpg") as ImageSource
 const cookingHousePendik = require("../../assets/places/cooking-house-pendik.jpg") as ImageSourcePropType;
 const kazan1971Sariyer = require("../../assets/places/kazan-1971-sariyer.jpg") as ImageSourcePropType;
 const setBalikSariyer = require("../../assets/places/set-balik-sariyer.jpg") as ImageSourcePropType;
+const barbaStreetFood = require("../../assets/places/barba-street-food.jpg") as ImageSourcePropType;
+const limandaBalikSariyer = require("../../assets/places/limanda-balik-sariyer.jpg") as ImageSourcePropType;
+const tombulunMeyhanesi = require("../../assets/places/tombulun-meyhanesi.jpg") as ImageSourcePropType;
+const sinasMutfak = require("../../assets/places/sinas-mutfak.jpg") as ImageSourcePropType;
+const bogaztepeSariyer = require("../../assets/places/bogaztepe-sariyer.jpg") as ImageSourcePropType;
+const mutlununMutfagi = require("../../assets/places/mutlunun-mutfagi.jpg") as ImageSourcePropType;
+const route95Kagithane = require("../../assets/places/route95-kagithane.jpg") as ImageSourcePropType;
+const bogaSteakhouseKagithane = require("../../assets/places/boga-steakhouse-kagithane.jpg") as ImageSourcePropType;
+const adileSultanKagithane = require("../../assets/places/adile-sultan-kagithane.jpg") as ImageSourcePropType;
+const ersinKebapKagithane = require("../../assets/places/ersin-kebap-kagithane.jpg") as ImageSourcePropType;
+const lezzetDiyariKagithane = require("../../assets/places/lezzet-diyari-kagithane.jpg") as ImageSourcePropType;
+const obaLokantasiKagithane = require("../../assets/places/oba-lokantasi-kagithane.jpg") as ImageSourcePropType;
+const krorenLevent = require("../../assets/places/kroren-levent.jpg") as ImageSourcePropType;
 
 const CATEGORY_PLACEHOLDERS: Record<string, string> = {
   kafe: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800",
@@ -885,6 +898,19 @@ const PLACE_IMAGE_OVERRIDES: Record<string, ImageSourcePropType> = {
   "2394": cookingHousePendik,
   "2396": kazan1971Sariyer,
   "2399": setBalikSariyer,
+  "2403": barbaStreetFood,
+  "2404": limandaBalikSariyer,
+  "2407": tombulunMeyhanesi,
+  "2409": sinasMutfak,
+  "2410": bogaztepeSariyer,
+  "2411": mutlununMutfagi,
+  "2413": route95Kagithane,
+  "2414": bogaSteakhouseKagithane,
+  "2415": adileSultanKagithane,
+  "2417": ersinKebapKagithane,
+  "2421": lezzetDiyariKagithane,
+  "2422": obaLokantasiKagithane,
+  "2423": krorenLevent,
 };
 
 type PlaceLike = Place | { id?: string | number; name?: string; photo_url?: string; category?: string };
