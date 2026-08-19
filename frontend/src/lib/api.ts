@@ -215,6 +215,7 @@ import oneNumaraPubBesiktas from '../assets/venues/1-numara-pub-besiktas.jpg'
 import kosmosBesiktas from '../assets/venues/kosmos-besiktas.jpg'
 import ritimRoofBeyoglu from '../assets/venues/ritim-roof-beyoglu.jpg'
 import swissotelTheBosphorus from '../assets/venues/swissotel-the-bosphorus.jpg'
+import mostHookahOrtakoy from '../assets/venues/most-hookah-ortakoy.jpg'
 
 export interface Venue {
   id: string
@@ -482,6 +483,7 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '1147': kosmosBesiktas,
   '1157': ritimRoofBeyoglu,
   '1158': swissotelTheBosphorus,
+  '1161': mostHookahOrtakoy,
 }
 
 export function getFallbackVenueImage(category: string): string {

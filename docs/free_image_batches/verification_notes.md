@@ -714,3 +714,7 @@ Swissôtel The Bosphorus - İstanbul, canlı ID 1158, Vişnezade Acısu Sk. No:1
 GRACE Rooftop Restaurant, canlı ID 1159, Binbirdirek Terzihane Sk. No:15. Bu aramada hedef isim/adresle doğrulanabilir görsel bulunamadı; kullanılmayacak.
 Béatrice Rooftop, Restaurant, canlı ID 1160, Asmalı Mescit General Yazgan Sk. No:14. Bu aramada hedef isim/adresle doğrulanabilir görsel bulunamadı; kullanılmayacak.
 Kaynak çapraz doğrulaması Batch 018: Swissôtel The Bosphorus resmî iletişim içeriği https://www.swissotelthebosphorus.com/tr/bize-ulasin/ “Visnezade Mah. Acisu Sok. N. 19, 34357 Macka Besiktas, Istanbul” adresini veriyor; arama görselinde binanın cephesinde SWISSÔTEL THE BOSPHORUS adı okunur. Canlı 1158 eşleşmesi doğrulandı.
+Batch 019 başlangıcı.
+Most Hookah, canlı ID 1161, Ortaköy Muallim Naci Cd. No:41/4. Resmî site https://mosthooqah.com/ adresi No:41/4’ü veriyor; Yandex görsel başlığı No:41A olarak aynı şube kümesini destekliyor. Görselde MOST ve Most Hookah tabelası, Ortaköy terası net; güçlü eşleşme.
+Conrad Panoramic Terrace, canlı ID 1162, Yıldız Barbaros Blv. Conrad Tripadvisor görselinde gerçek Conrad terası/manzarası bulunuyor ancak işletme adı/kapı numarası görselde yok; kullanıcı doğrulama kuralı gereği kullanılmayacak.
+Beşiktaş İskele, canlı ID 1163, Yıldız. Arama sonuçları genel sahil/şehir veya sanat görseli; iskele adı ve hedef alan aynı görselde doğrulanmadı, kullanılmayacak.
