@@ -533,6 +533,16 @@ const cupOfLoveBesiktas = require("../../assets/places/cup-of-love-besiktas.jpg"
 const blumCoffeeBesiktas = require("../../assets/places/blum-coffee-besiktas.jpg") as ImageSourcePropType;
 const kafeAraBeyoglu = require("../../assets/places/kafe-ara-beyoglu.jpeg") as ImageSourcePropType;
 const cafe1983BeyogluKucukcekmece = require("../../assets/places/1983-beyoglu-kucukcekmece.png") as ImageSourcePropType;
+const cafeBeybunBeyoglu = require("../../assets/places/cafe-beybun-beyoglu.jpg") as ImageSourcePropType;
+const mawaaBeyoglu = require("../../assets/places/mawaa-beyoglu.jpg") as ImageSourcePropType;
+const nuuvaCoffeeUskudar = require("../../assets/places/nuuva-coffee-uskudar.jpg") as ImageSourcePropType;
+const fabrikafaUskudar = require("../../assets/places/fabrikafa-uskudar.jpg") as ImageSourcePropType;
+const espressolabUskudarGastronomi = require("../../assets/places/espressolab-uskudar-gastronomi.jpg") as ImageSourcePropType;
+const sevenKCoffeeWorkshopUskudar = require("../../assets/places/7k-coffee-workshop-uskudar.jpeg") as ImageSourcePropType;
+const heepsCoffeeUskudar = require("../../assets/places/heeps-coffee-uskudar.jpg") as ImageSourcePropType;
+const bastetCoffeeKuzguncuk = require("../../assets/places/bastet-coffee-kuzguncuk.jpg") as ImageSourcePropType;
+const hemhalCafeUskudar = require("../../assets/places/hemhal-cafe-uskudar.jpg") as ImageSourcePropType;
+const mihrimahKahveUskudar = require("../../assets/places/mihrimah-kahve-uskudar.jpg") as ImageSourcePropType;
 
 const CATEGORY_PLACEHOLDERS: Record<string, string> = {
   kafe: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800",
@@ -1079,6 +1089,16 @@ const PLACE_IMAGE_OVERRIDES: Record<string, ImageSourcePropType> = {
   "3685": blumCoffeeBesiktas,
   "3688": kafeAraBeyoglu,
   "3689": cafe1983BeyogluKucukcekmece,
+  "3695": cafeBeybunBeyoglu,
+  "3696": mawaaBeyoglu,
+  "3702": nuuvaCoffeeUskudar,
+  "3703": fabrikafaUskudar,
+  "3709": espressolabUskudarGastronomi,
+  "3710": sevenKCoffeeWorkshopUskudar,
+  "3711": heepsCoffeeUskudar,
+  "3712": bastetCoffeeKuzguncuk,
+  "3714": hemhalCafeUskudar,
+  "3716": mihrimahKahveUskudar,
 };
 
 type PlaceLike = Place | { id?: string | number; name?: string; photo_url?: string; category?: string };
