@@ -732,3 +732,7 @@ Beşiktaş Meydan, canlı ID 1172, Cihannüma Beşiktaş Cd. Beşiktaş Meydanı
 Dolmabahçe Saat Kulesi, canlı ID 1173, Vişnezade Meclis-i Mebusan Cd. 38A. Görselde ayırt edici saat kulesi, saat yüzü ve çevresindeki cami/park bağlamı net; hedef alanla güçlü eşleşme.
 Tarihi Çeşme, canlı ID 1174, Mecidiye Mecidiye Köprüsü Sk. No:20. Arama sonucu farklı Beltaş Rest Cafe panoraması veya adresi belirsiz çeşme görselleri; hedef No:20 çeşmeyle kesin eşleşme yok, kullanılmayacak.
 Hamidiye Çeşmesi, canlı ID 1175, Yıldız Eğriçınar Sk. No:3. Bu taramada hedef çeşme ve adresle doğrulanabilir görsel bulunamadı; kullanılmayacak.
+Tarihi Rum Okulu, canlı ID 1176, Sinanpaşa Köyiçi Meydanı Sk. No:33. Yandex adayı Köyiçi Cad. 13A çevresini gösteriyor ancak görselde okul yapısı/levhası yok, yalnızca mağaza cephesi; kullanılmayacak.
+Patikanın yanındaki tarihi levha, canlı ID 1177, Abbasağa Cami Sk. No:6. Arama sonuçları Abbasağa Camii’ne ait; hedef tarihî levha doğrulanmadı, kullanılmayacak.
+Colorful wooden houses, canlı ID 1178, Arnavutköy Bebek-Arnavutköy Cd. Arnavutköy gezi kaynağındaki görselde Boğaz kıyısındaki özgün ahşap evler, balkonlar ve sıra yapı dokusu net; hedef alanla güçlü eşleşme.
+Palanga Caddesi Çeşmesi, canlı ID 1179, Yıldız Palanga Cd. No:1. Bu taramada hedef çeşme ve No:1 ile doğrulanabilir görsel bulunamadı; kullanılmayacak.
