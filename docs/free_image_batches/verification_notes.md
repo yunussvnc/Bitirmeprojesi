@@ -589,3 +589,6 @@ Napoli Gourmet, canlı ID 1050, Vişnezade Çatalmektep Sk. 2/A. Görselde NAPOL
 Scarpetta, canlı ID 1051, Etiler Dilhayat Sk. No:16. Tripadvisor görselinde LA SCARPETTA tabelası ve kapıdaki kırmızı 16 numarası açıkça görülüyor; canlı adresle kesin eşleşme, güçlü kabul.
 Faribo Focaccia & Schiacciata Sandviç, canlı ID 1052, Türkali Şair Nedim Cd. No:66/A. Arama görsellerinde ürün/iç mekân ve tabelasız bina cephesi bulunuyor; FARIBO tabelası veya 66/A işletme girişi net değil, kullanılmayacak.
 Visorante Kitchen & Bar Ortaköy, canlı ID 1053, Ortaköy Dereboyu Cd. No:10. Arama görselleri iç mekân/ambiyans ve genel yapı gösteriyor; VISORANTE tabelası veya No:10 işareti doğrulanmadı, kullanılmayacak.
+Antique Pizzeria, canlı ID 1054, Beyoğlu Hüseyinağa Sahne Sk. No:22. Tripadvisor/Yandex görselinde ANTIQUE PIZZERIA tabelalı dış cephe ve Sahne Sokak atmosferi net; kaynak başlığı aynı No:22 adresini taşıyor, güçlü eşleşme.
+Ravenna Akaretler, canlı ID 1055, Vişnezade Süleyman Seba Cd. 69/A. Yandex kaydı “Artık faal değil” uyarısı taşıyor; görsel eklenmeyecek.
+Kaizen Ramen - Beşiktaş, canlı ID 1056, Vişnezade Özgür Sk. No:2/A. Yandex görselinde kaizen tabelası/logo ve giriş cephesi görülüyor ancak kaynak kaydı 2/B, canlı kayıt 2/A; adres numarası çelişkisi nedeniyle şimdilik kullanılmayacak.

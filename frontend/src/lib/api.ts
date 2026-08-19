@@ -175,6 +175,7 @@ import pastaToGoAkaretler from '../assets/venues/pasta-to-go-akaretler.jpg'
 import pastaVeraBesiktas from '../assets/venues/pasta-vera-besiktas.jpg'
 import anticaLocanda from '../assets/venues/antica-locanda.jpg'
 import scarpettaEtiler from '../assets/venues/scarpetta-etiler.jpg'
+import antiquePizzeriaBeyoglu from '../assets/venues/antique-pizzeria-beyoglu.jpg'
 
 export interface Venue {
   id: string
@@ -402,6 +403,7 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '1045': pastaVeraBesiktas,
   '1048': anticaLocanda,
   '1051': scarpettaEtiler,
+  '1054': antiquePizzeriaBeyoglu,
 }
 
 export function getFallbackVenueImage(category: string): string {
