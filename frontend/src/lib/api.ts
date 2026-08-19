@@ -550,6 +550,11 @@ import tasCafeMecidiyekoy from '../assets/venues/tas-cafe-mecidiyekoy.jpg'
 import nostaljiKitapCafeSisli from '../assets/venues/nostalji-kitap-cafe-sisli.jpg'
 import luwinCoffeeBakirkoy from '../assets/venues/luwin-coffee-bakirkoy.jpg'
 import espressolabBakirkoyIncirli from '../assets/venues/espressolab-bakirkoy-incirli.jpg'
+import no34CoffeeShopBakirkoy from '../assets/venues/no34-coffee-shop-bakirkoy.jpg'
+import lePetitMoulinBakirkoy from '../assets/venues/le-petit-moulin-bakirkoy.jpg'
+import espressolabBakirkoyCevizlik from '../assets/venues/espressolab-bakirkoy-cevizlik.webp'
+import lostCafeBakirkoy from '../assets/venues/lost-cafe-bakirkoy.jpg'
+import waffleWorksBakirkoy from '../assets/venues/waffle-works-bakirkoy.jpg'
 
 export interface Venue {
   id: string
@@ -1152,6 +1157,11 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '3733': nostaljiKitapCafeSisli,
   '3734': luwinCoffeeBakirkoy,
   '3737': espressolabBakirkoyIncirli,
+  '3742': no34CoffeeShopBakirkoy,
+  '3743': lePetitMoulinBakirkoy,
+  '3745': espressolabBakirkoyCevizlik,
+  '3746': lostCafeBakirkoy,
+  '3749': waffleWorksBakirkoy,
 }
 
 export function getFallbackVenueImage(category: string): string {
