@@ -519,6 +519,20 @@ const ekmekiciKofteBuyukcekmece = require("../../assets/places/ekmekici-kofte-bu
 const kaburgaciZiyafettinBuyukcekmece = require("../../assets/places/kaburgaci-ziyafettin-buyukcekmece.jpg") as ImageSourcePropType;
 const theMareBuyukcekmece = require("../../assets/places/the-mare-buyukcekmece.jpg") as ImageSourcePropType;
 const gasikKonyaBuyukcekmece = require("../../assets/places/gasik-konya-buyukcekmece.jpg") as ImageSourcePropType;
+const mazzayaLoungeBuyukcekmece = require("../../assets/places/mazzaya-lounge-buyukcekmece.jpg") as ImageSourcePropType;
+const mastikaBalikBuyukcekmece = require("../../assets/places/mastika-balik-buyukcekmece.jpg") as ImageSourcePropType;
+const floridaCoffeeKadikoy = require("../../assets/places/florida-coffee-kadikoy.jpg") as ImageSourcePropType;
+const flareModa = require("../../assets/places/flare-moda.jpg") as ImageSourcePropType;
+const madnessCoffeeKadikoy = require("../../assets/places/madness-coffee-kadikoy.jpg") as ImageSourcePropType;
+const hodlModa = require("../../assets/places/hodl-moda.jpg") as ImageSourcePropType;
+const swivelCafeKadikoy = require("../../assets/places/swivel-cafe-kadikoy.jpg") as ImageSourcePropType;
+const wakecupCoffeeBesiktas = require("../../assets/places/wakecup-coffee-besiktas.jpg") as ImageSourcePropType;
+const sairlerKahvesiAkaretler = require("../../assets/places/sairler-kahvesi-akaretler.jpg") as ImageSourcePropType;
+const ransserieCafeBesiktas = require("../../assets/places/ransserie-cafe-besiktas.jpg") as ImageSourcePropType;
+const cupOfLoveBesiktas = require("../../assets/places/cup-of-love-besiktas.jpg") as ImageSourcePropType;
+const blumCoffeeBesiktas = require("../../assets/places/blum-coffee-besiktas.jpg") as ImageSourcePropType;
+const kafeAraBeyoglu = require("../../assets/places/kafe-ara-beyoglu.jpeg") as ImageSourcePropType;
+const cafe1983BeyogluKucukcekmece = require("../../assets/places/1983-beyoglu-kucukcekmece.png") as ImageSourcePropType;
 
 const CATEGORY_PLACEHOLDERS: Record<string, string> = {
   kafe: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800",
@@ -1051,6 +1065,20 @@ const PLACE_IMAGE_OVERRIDES: Record<string, ImageSourcePropType> = {
   "2551": kaburgaciZiyafettinBuyukcekmece,
   "2552": theMareBuyukcekmece,
   "2554": gasikKonyaBuyukcekmece,
+  "2557": mazzayaLoungeBuyukcekmece,
+  "2558": mastikaBalikBuyukcekmece,
+  "3669": floridaCoffeeKadikoy,
+  "3670": flareModa,
+  "3671": madnessCoffeeKadikoy,
+  "3673": hodlModa,
+  "3675": swivelCafeKadikoy,
+  "3679": wakecupCoffeeBesiktas,
+  "3680": sairlerKahvesiAkaretler,
+  "3682": ransserieCafeBesiktas,
+  "3683": cupOfLoveBesiktas,
+  "3685": blumCoffeeBesiktas,
+  "3688": kafeAraBeyoglu,
+  "3689": cafe1983BeyogluKucukcekmece,
 };
 
 type PlaceLike = Place | { id?: string | number; name?: string; photo_url?: string; category?: string };

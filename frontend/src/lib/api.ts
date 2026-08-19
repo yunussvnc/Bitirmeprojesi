@@ -516,6 +516,20 @@ import ekmekiciKofteBuyukcekmece from '../assets/venues/ekmekici-kofte-buyukcekm
 import kaburgaciZiyafettinBuyukcekmece from '../assets/venues/kaburgaci-ziyafettin-buyukcekmece.jpg'
 import theMareBuyukcekmece from '../assets/venues/the-mare-buyukcekmece.jpg'
 import gasikKonyaBuyukcekmece from '../assets/venues/gasik-konya-buyukcekmece.jpg'
+import mazzayaLoungeBuyukcekmece from '../assets/venues/mazzaya-lounge-buyukcekmece.jpg'
+import mastikaBalikBuyukcekmece from '../assets/venues/mastika-balik-buyukcekmece.jpg'
+import floridaCoffeeKadikoy from '../assets/venues/florida-coffee-kadikoy.jpg'
+import flareModa from '../assets/venues/flare-moda.jpg'
+import madnessCoffeeKadikoy from '../assets/venues/madness-coffee-kadikoy.jpg'
+import hodlModa from '../assets/venues/hodl-moda.jpg'
+import swivelCafeKadikoy from '../assets/venues/swivel-cafe-kadikoy.jpg'
+import wakecupCoffeeBesiktas from '../assets/venues/wakecup-coffee-besiktas.jpg'
+import sairlerKahvesiAkaretler from '../assets/venues/sairler-kahvesi-akaretler.jpg'
+import ransserieCafeBesiktas from '../assets/venues/ransserie-cafe-besiktas.jpg'
+import cupOfLoveBesiktas from '../assets/venues/cup-of-love-besiktas.jpg'
+import blumCoffeeBesiktas from '../assets/venues/blum-coffee-besiktas.jpg'
+import kafeAraBeyoglu from '../assets/venues/kafe-ara-beyoglu.jpeg'
+import cafe1983BeyogluKucukcekmece from '../assets/venues/1983-beyoglu-kucukcekmece.png'
 
 export interface Venue {
   id: string
@@ -1084,6 +1098,20 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '2551': kaburgaciZiyafettinBuyukcekmece,
   '2552': theMareBuyukcekmece,
   '2554': gasikKonyaBuyukcekmece,
+  '2557': mazzayaLoungeBuyukcekmece,
+  '2558': mastikaBalikBuyukcekmece,
+  '3669': floridaCoffeeKadikoy,
+  '3670': flareModa,
+  '3671': madnessCoffeeKadikoy,
+  '3673': hodlModa,
+  '3675': swivelCafeKadikoy,
+  '3679': wakecupCoffeeBesiktas,
+  '3680': sairlerKahvesiAkaretler,
+  '3682': ransserieCafeBesiktas,
+  '3683': cupOfLoveBesiktas,
+  '3685': blumCoffeeBesiktas,
+  '3688': kafeAraBeyoglu,
+  '3689': cafe1983BeyogluKucukcekmece,
 }
 
 export function getFallbackVenueImage(category: string): string {
