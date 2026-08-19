@@ -186,6 +186,8 @@ import noodleHouseBesiktas from '../assets/venues/noodle-house-besiktas.jpg'
 import sushicoBebek from '../assets/venues/sushico-bebek.jpg'
 import maderiaSushiBar from '../assets/venues/maderia-sushi-bar.jpg'
 import ademBabaArnavutkoy from '../assets/venues/adem-baba-arnavutkoy.jpg'
+import midyeciAhmetBesiktas from '../assets/venues/midyeci-ahmet-besiktas.jpg'
+import maviBalikBesiktas from '../assets/venues/mavi-balik-besiktas.jpg'
 
 export interface Venue {
   id: string
@@ -424,6 +426,8 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '1072': sushicoBebek,
   '1073': maderiaSushiBar,
   '1075': ademBabaArnavutkoy,
+  '1077': midyeciAhmetBesiktas,
+  '1079': maviBalikBesiktas,
 }
 
 export function getFallbackVenueImage(category: string): string {
