@@ -583,3 +583,6 @@ Pasta to Go Akaretler, canlı ID 1044, Vişnezade Şair Nedim Cd. No:47/B. Corne
 Pasta vera Beşiktaş, canlı ID 1045, Sinanpaşa Şht. Dursun Bakan Sk. 25/A. Yandex görselinde PASTA VERA tabelalı dış cephe ve giriş net; kaynak başlığı aynı 25A adresini taşıyor, güçlü eşleşme.
 Zeffirino Istanbul, canlı ID 1046, Yıldız Ortaköy Salhanesi Sk. No:7. Yandex dış cephe adayında ZEFFIRINO yerine farklı bir işletme tabelası görülüyor; hedef şubeyle eşleşmediği için kullanılmayacak.
 OTTO makarna, canlı ID 1047, Türkali Yaverağa Sk. 7/A. Arama sonucu yalnızca OTTO MAKARNA logosu; dış cephe ve adres işareti yok, kullanıcı kuralı nedeniyle kullanılmayacak.
+Antica Locanda, canlı ID 1048, Arnavutköy Satışmeydanı Sok. No:12. Tripadvisor görselinde ANTICA LOCANDA tabelalı dış cephe/giriş net; arama başlığı aynı Satış Meydanı Sok. No:12 adresini taşıyor, güçlü eşleşme.
+MORINI, canlı ID 1049, Levazım Zorlu Center Koru Sk. No:2. İncelenen MORINI görseli tabelasız iç mekân/bar; Zorlu Center şube veya adres işareti görünmüyor, kullanılmayacak.
+Napoli Gourmet, canlı ID 1050, Vişnezade Çatalmektep Sk. 2/A. Görselde NAPOLI GOURMET tabelası net olsa da kaynak araması Nişantaşı şubesini gösteriyor; canlı Beşiktaş şubesiyle farklı şube riski nedeniyle kullanılmayacak.
