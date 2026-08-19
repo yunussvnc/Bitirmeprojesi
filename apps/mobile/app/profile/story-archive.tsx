@@ -2,15 +2,16 @@
  * /app/profile/story-archive.tsx
  * Kullanıcının arşivlenmiş hikayelerini grid biçiminde gösterir.
  * Profil ekranından "Hikaye Arşivi" butonuyla açılır.
+ * Arşivdeki hikayeler silinebilir — uzun basarak silme, liste anında güncellenir.
  */
 import React, { useEffect, useState, useCallback } from 'react';
 import {
   View, Text, StyleSheet, FlatList, ActivityIndicator,
-  TouchableOpacity, Dimensions, Platform, RefreshControl,
+  TouchableOpacity, Dimensions, RefreshControl, Alert,
 } from 'react-native';
 import { Image } from 'expo-image';
-import { Stack, router } from 'expo-router';
-import { getMyStoryArchive, type Story } from '@/src/services/storyService';
+import { Stack } from 'expo-router';
+import { getMyStoryArchive, deleteStory, type Story } from '@/src/services/storyService';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
 import { StoryViewerModal } from '@/src/components/domain/explore/StoryViewerModal';
 import { useAuthStore } from '@/src/store/useAuthStore';
@@ -58,12 +59,43 @@ export default function StoryArchiveScreen() {
     if (!loading && hasMore) load(page + 1);
   }, [loading, hasMore, page, load]);
 
+  /** Hikaye silindiğinde hem listeden kaldır hem viewer'ı kapat */
+  const handleStoryDeleted = useCallback((deletedId: number) => {
+    setStories((prev) => prev.filter((s) => s.id !== deletedId));
+    setViewerIndex(null);
+  }, []);
+
+  /** Long press ile arşivdeki hikayeyi kalıcı sil */
+  const handleLongPress = useCallback((item: Story) => {
+    Alert.alert(
+      'Hikayeyi Sil',
+      'Bu hikayeyi arşivden kalıcı olarak silmek istiyor musunuz?',
+      [
+        { text: 'Vazgeç', style: 'cancel' },
+        {
+          text: 'Sil',
+          style: 'destructive',
+          onPress: async () => {
+            try {
+              await deleteStory(item.id);
+              handleStoryDeleted(item.id);
+            } catch (e: any) {
+              Alert.alert('Hata', e?.response?.data?.detail || 'Silinemedi.');
+            }
+          },
+        },
+      ]
+    );
+  }, [handleStoryDeleted]);
+
   const renderItem = ({ item, index }: { item: Story; index: number }) => {
     const thumb = item.thumbnail_url || item.media_url;
     return (
       <TouchableOpacity
         style={styles.gridItem}
         onPress={() => setViewerIndex(index)}
+        onLongPress={() => handleLongPress(item)}
+        delayLongPress={400}
         activeOpacity={0.85}
       >
         <Image
@@ -109,32 +141,35 @@ export default function StoryArchiveScreen() {
             <IconSymbol name="archivebox" size={48} color="rgba(255,255,255,0.3)" />
             <Text style={styles.emptyTitle}>Arşiv Boş</Text>
             <Text style={styles.emptySubtitle}>
-              Süresi dolan hikayeleriniz burada görünür.
+              Süresi dolan hikayeleriniz burada görünür.{'\n'}Uzun basarak herhangi bir hikayeyi silebilirsiniz.
             </Text>
           </View>
         ) : (
-          <FlatList
-            data={stories}
-            numColumns={COLUMN}
-            keyExtractor={(item) => item.id.toString()}
-            renderItem={renderItem}
-            onEndReached={onEndReached}
-            onEndReachedThreshold={0.5}
-            refreshControl={
-              <RefreshControl
-                refreshing={refreshing}
-                onRefresh={onRefresh}
-                tintColor="#a78bfa"
-              />
-            }
-            ListFooterComponent={
-              hasMore && !loading ? (
-                <ActivityIndicator style={{ marginVertical: 16 }} color="#a78bfa" />
-              ) : null
-            }
-            contentContainerStyle={styles.grid}
-            ItemSeparatorComponent={() => <View style={{ height: 2 }} />}
-          />
+          <>
+            <Text style={styles.hintText}>Silmek için hikayeye uzun basın</Text>
+            <FlatList
+              data={stories}
+              numColumns={COLUMN}
+              keyExtractor={(item) => item.id.toString()}
+              renderItem={renderItem}
+              onEndReached={onEndReached}
+              onEndReachedThreshold={0.5}
+              refreshControl={
+                <RefreshControl
+                  refreshing={refreshing}
+                  onRefresh={onRefresh}
+                  tintColor="#a78bfa"
+                />
+              }
+              ListFooterComponent={
+                hasMore && !loading ? (
+                  <ActivityIndicator style={{ marginVertical: 16 }} color="#a78bfa" />
+                ) : null
+              }
+              contentContainerStyle={styles.grid}
+              ItemSeparatorComponent={() => <View style={{ height: 2 }} />}
+            />
+          </>
         )}
       </View>
 
@@ -145,6 +180,7 @@ export default function StoryArchiveScreen() {
           visible
           onClose={() => setViewerIndex(null)}
           currentUserId={currentUser?.id}
+          onStoryDeleted={handleStoryDeleted}
         />
       )}
     </>
@@ -173,6 +209,12 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: 'rgba(255,255,255,0.5)',
     textAlign: 'center',
+  },
+  hintText: {
+    fontSize: 12,
+    color: 'rgba(255,255,255,0.35)',
+    textAlign: 'center',
+    paddingVertical: 6,
   },
   grid: {
     paddingBottom: 40,

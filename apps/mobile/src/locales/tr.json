@@ -323,6 +323,7 @@
     "follow_request_msg": "{{user}} seni takip etmek istiyor",
     "follow_accepted_msg": "{{user}} takip isteğini kabul etti",
     "tag": "{{user}} seni bir gönderide etiketledi",
+    "story_reaction": "{{user}} hikayene {{emoji}} tepki verdi",
     "campaign": "{{user}} yeni bir kampanya paylaştı: \"{{campaign_text}}\"",
     "default": "{{user}} bir etkileşimde bulundu",
     "someone": "Birisi",

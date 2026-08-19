@@ -212,14 +212,23 @@ export const useNotificationStore = create<NotificationStoreState>((set, get) =>
         group_count: 0,
       };
 
-      // Payload'dan zengin alanları parse et
+      // Payload'dan zeṅin alanları parse et
       if (parsed.payload) {
         try {
           const p = typeof parsed.payload === 'string' ? JSON.parse(parsed.payload) : parsed.payload;
           newNotif.actor_username = p.actor_username;
           newNotif.actor_avatar = p.actor_avatar;
-          newNotif.post_thumbnail = p.post_thumbnail;
+          newNotif.post_thumbnail = p.post_thumbnail || p.media_url;
         } catch { /* ignore */ }
+      }
+
+      // story_reaction tipinde: backend WS payloadı root level'da actor_name ve actor_avatar gönderir
+      // Bu değerleri varsa direkt kullan (payload içinde yoksa)
+      if (!newNotif.actor_username && parsed.actor_name) {
+        newNotif.actor_username = parsed.actor_name;
+      }
+      if (!newNotif.actor_avatar && parsed.actor_avatar) {
+        newNotif.actor_avatar = parsed.actor_avatar;
       }
 
       // Deduplicate by id — prevent double-add from WS + HTTP fetch

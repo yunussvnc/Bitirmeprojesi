@@ -42,6 +42,7 @@ import {
   type StoryViewerItem,
   type StoryReportReason,
 } from '@/src/services/storyService';
+import { ShareStorySheet } from '@/src/components/domain/stories/ShareStorySheet';
 import { router } from 'expo-router';
 
 const STORY_DURATION_MS = 5000;
@@ -96,6 +97,7 @@ export function StoryViewerModal({
   const [viewersModalVisible, setViewersModalVisible] = useState(false);
   const [viewers, setViewers] = useState<StoryViewerItem[]>([]);
   const [viewersLoading, setViewersLoading] = useState(false);
+  const [shareSheetVisible, setShareSheetVisible] = useState(false);
 
   // Menü state'leri
   const [showOwnMenu, setShowOwnMenu] = useState(false);
@@ -451,30 +453,22 @@ export function StoryViewerModal({
     }
   }, [story, isImage, startProgress]);
 
-  // ── Paylaş (basit — ileride kullanıcı seçim ekranı eklenebilir) ──
+  // ── Paylaş — ShareStorySheet aç ──
   const handleSharePress = useCallback(() => {
     if (!story) return;
     lightImpact();
-    // Basit bir prompt ile user ID sor (ileride tam arayüz eklenecek)
-    Alert.prompt?.(
-      'Hikayeyi Paylaş',
-      'Göndermek istediğiniz kişinin kullanıcı ID\'sini girin:',
-      async (text) => {
-        const uid = parseInt(text, 10);
-        if (!uid || isNaN(uid)) return;
-        try {
-          const { shareStoryViaDM } = await import('@/src/services/storyService');
-          await shareStoryViaDM(story.id, uid);
-          success();
-          Alert.alert('Başarılı', 'Hikaye DM olarak gönderildi.');
-        } catch (e: any) {
-          const detail = e?.response?.data?.detail || 'Gönderilemedi.';
-          Alert.alert('Hata', detail);
-        }
-      },
-      'plain-text'
-    );
-  }, [story]);
+    isPausedRef.current = true;
+    setVideoPaused(true);
+    progressAnim.stopAnimation();
+    setShareSheetVisible(true);
+  }, [story, progressAnim]);
+
+  const handleShareSheetClose = useCallback(() => {
+    setShareSheetVisible(false);
+    isPausedRef.current = false;
+    setVideoPaused(false);
+    if (isImage) startProgress(progressValueRef.current);
+  }, [isImage, startProgress]);
 
   // ── Menü Açma/Kapama ──
   const openOwnMenu = useCallback(() => {
@@ -922,6 +916,11 @@ export function StoryViewerModal({
           </View>
         </TouchableOpacity>
       </Modal>
+      <ShareStorySheet
+        visible={shareSheetVisible}
+        onClose={handleShareSheetClose}
+        story={story}
+      />
     </Modal>
   );
 }

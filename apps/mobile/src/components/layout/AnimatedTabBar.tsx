@@ -5,6 +5,7 @@ import { useTabBarVisibility } from "@/src/components/layout/TabBarVisibilityCon
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { lightImpact } from "@/src/utils/haptics";
 import { useTheme } from "@/src/hooks/useTheme";
+import { BlurView } from "expo-blur";
 
 export function AnimatedTabBar(props: MaterialTopTabBarProps) {
   const { translateY, opacity, setHeight, fadeIn } = useTabBarVisibility();
@@ -12,7 +13,7 @@ export function AnimatedTabBar(props: MaterialTopTabBarProps) {
   const { colors, isDark } = useTheme();
   
   // Adjusted bottom padding so it floats nicely
-  const bottomPadding = Math.max(insets.bottom, Platform.OS === 'android' ? 16 : 10);
+  const bottomPadding = Math.max(insets.bottom, Platform.OS === 'android' ? 12 : 8);
 
   // Tab değiştiğinde tab bar'ı anında opak yap
   const currentIndex = props.state.index;
@@ -33,13 +34,17 @@ export function AnimatedTabBar(props: MaterialTopTabBarProps) {
       onLayout={(e) => setHeight(e.nativeEvent.layout.height)}
       pointerEvents="box-none"
     >
-      <View style={[
-        styles.tabBarContainer, 
-        { 
-          backgroundColor: isDark ? '#1C1C1E' : '#FFFFFF',
-          borderColor: isDark ? 'rgba(255,255,255,0.08)' : 'rgba(0,0,0,0.05)'
-        }
-      ]}>
+      <BlurView
+        intensity={isDark ? 60 : 80}
+        tint={isDark ? "dark" : "light"}
+        style={[
+          styles.tabBarContainer, 
+          { 
+            backgroundColor: isDark ? 'rgba(28,28,30,0.5)' : 'rgba(255,255,255,0.6)',
+            borderColor: isDark ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.08)'
+          }
+        ]}
+      >
         {props.state.routes.map((route, index) => {
           const { options } = props.descriptors[route.key];
           const isFocused = props.state.index === index;
@@ -71,7 +76,7 @@ export function AnimatedTabBar(props: MaterialTopTabBarProps) {
             />
           );
         })}
-      </View>
+      </BlurView>
     </RNAnimated.View>
   );
 }
@@ -117,7 +122,7 @@ function TabItem({
           StyleSheet.absoluteFillObject, 
           styles.activePill, 
           { 
-            backgroundColor: isDark ? 'rgba(255,255,255,0.1)' : 'rgba(0,0,0,0.05)',
+            backgroundColor: isDark ? 'rgba(255,255,255,0.12)' : 'rgba(0,0,0,0.06)',
             opacity: opacity
           }
         ]} 
@@ -145,30 +150,31 @@ const styles = StyleSheet.create({
   },
   tabBarContainer: {
     flexDirection: 'row',
-    borderRadius: 40, // Highly rounded capsule
-    paddingHorizontal: 8,
-    paddingVertical: 8,
+    borderRadius: 30, // Yüksekliği azalttığımız için radyusu da kıstık
+    paddingHorizontal: 6,
+    paddingVertical: 6,
     marginHorizontal: 16,
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 8 },
-    shadowOpacity: 0.15,
+    shadowOpacity: 0.1,
     shadowRadius: 16,
     elevation: 15, // Android shadow
     alignItems: 'center',
     justifyContent: 'space-between',
-    width: Dimensions.get('window').width - 32, // Screen width minus margins
-    borderWidth: 1,
+    width: Dimensions.get('window').width - 48, // Biraz daha dar bir kapsül
+    borderWidth: StyleSheet.hairlineWidth,
+    overflow: 'hidden',
   },
   tabItem: {
     flex: 1,
-    height: 48, // Icon height
+    height: 42, // Icon height slightly reduced from 48
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 24,
+    borderRadius: 21,
   },
   activePill: {
-    borderRadius: 24,
-    marginHorizontal: 8,
+    borderRadius: 21,
+    marginHorizontal: 4,
   },
   iconContainer: {
     zIndex: 1,

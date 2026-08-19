@@ -130,6 +130,10 @@ def get_feed_stories(
     current_user: Optional[models.User] = Depends(get_optional_user),
 ):
     """Akış (feed) için hikayeler – Herkes veya Takip Ettiklerim."""
+    # Süresi dolan hikayeleri arşivle — feed yüklenince tüm sistem için tetiklenir
+    if current_user:
+        crud.archive_expired_stories(db)
+
     filter_mode = "following" if filter == "following" else "all"
     stories, total = crud.get_feed_stories(
         db,
@@ -151,17 +155,68 @@ def get_user_stories(
     db: Session = Depends(get_db),
     current_user: Optional[models.User] = Depends(get_optional_user),
 ):
-    """Belirli bir kullanıcının aktif hikayelerini getirir."""
+    """Belirli bir kullanıcının aktif hikayelerini getirir.
+    Gizlilik, engel ve gizle (hide-story) kontrolleri uygulanır.
+    """
     from datetime import datetime, timezone
-    query = db.query(models.Story).filter(
+
+    viewer_id = current_user.id if current_user else None
+
+    # ── Kendi profili değilse güvenlik kontrolleri ──────────────────────────
+    if viewer_id and viewer_id != user_id:
+        # Engel kontrolü (her iki yön)
+        is_blocked = db.query(models.UserBlock).filter(
+            (
+                (models.UserBlock.blocker_id == user_id) & (models.UserBlock.blocked_id == viewer_id)
+            ) | (
+                (models.UserBlock.blocker_id == viewer_id) & (models.UserBlock.blocked_id == user_id)
+            )
+        ).first()
+        if is_blocked:
+            return schemas.PaginatedStories(items=[], total=0, page=page, page_size=page_size)
+
+        # Gizli hesap kontrolü
+        prefs = db.query(models.UserPreferences).filter(models.UserPreferences.user_id == user_id).first()
+        is_private = prefs.is_private_account if prefs else False
+        is_follower = db.query(models.Follow).filter(
+            models.Follow.follower_id == viewer_id,
+            models.Follow.following_id == user_id,
+        ).first() is not None
+
+        if is_private and not is_follower:
+            return schemas.PaginatedStories(items=[], total=0, page=page, page_size=page_size)
+
+        # "Bu kullanıcıdan hikayemi gizle" kontrolü
+        is_hidden = db.query(models.StoryHiddenUser).filter(
+            models.StoryHiddenUser.user_id == user_id,
+            models.StoryHiddenUser.hidden_user_id == viewer_id,
+        ).first()
+        if is_hidden:
+            return schemas.PaginatedStories(items=[], total=0, page=page, page_size=page_size)
+
+    # ── Temel sorgu ────────────────────────────────────────────────────────
+    base_q = db.query(models.Story).filter(
         models.Story.user_id == user_id,
         models.Story.expires_at > datetime.now(timezone.utc),
         models.Story.is_archived == False,
-    ).order_by(models.Story.created_at.desc())
-    total = query.count()
-    stories = query.offset((page - 1) * page_size).limit(page_size).all()
-    uid = current_user.id if current_user else None
-    items = [_story_to_schema(s, db, uid) for s in stories]
+    )
+
+    # Yakın arkadaşlar hikayelerini filtrele (viewer yakın arkadaş değilse gösterme)
+    if viewer_id and viewer_id != user_id:
+        is_mutual = db.query(models.Follow).filter(
+            models.Follow.follower_id == user_id,
+            models.Follow.following_id == viewer_id,
+        ).first() is not None
+        if not is_mutual:
+            base_q = base_q.filter(models.Story.privacy_type != "close_friends")
+    elif not viewer_id:
+        # Giriş yapmamış kullanıcılar close_friends göremez
+        base_q = base_q.filter(models.Story.privacy_type != "close_friends")
+
+    base_q = base_q.order_by(models.Story.created_at.desc())
+    total = base_q.count()
+    stories = base_q.offset((page - 1) * page_size).limit(page_size).all()
+    items = [_story_to_schema(s, db, viewer_id) for s in stories]
     return schemas.PaginatedStories(items=items, total=total, page=page, page_size=page_size)
 
 
@@ -276,6 +331,12 @@ def get_story_viewers_endpoint(
 
     is_venue = current_user.role in ("venue_owner", "admin")
 
+    # 48 saat kuralı: Hikaye paylaşılalı 48 saat geçmişse (yani expires_at + 24s), 
+    # sadece hikayeye reaksiyon verenleri göster (kalp/beğeni atanlar).
+    from datetime import datetime, timezone, timedelta
+    now_utc = datetime.now(timezone.utc)
+    is_over_48_hours = now_utc >= story.expires_at + timedelta(hours=24)
+
     views = crud.get_story_viewers_with_analytics(db, story_id)
     items = []
     total_watch = 0
@@ -283,6 +344,16 @@ def get_story_viewers_endpoint(
     place_visits = 0
 
     for v in views:
+        reaction_row = db.query(models.StoryReaction).filter(
+            models.StoryReaction.story_id == story_id,
+            models.StoryReaction.user_id == v.viewer_id
+        ).first()
+        reaction_emoji = reaction_row.emoji if reaction_row else None
+
+        # Eğer 48 saati geçtiyse ve kullanıcı tepki vermediyse listeye ekleme
+        if is_over_48_hours and not reaction_emoji:
+            continue
+
         u = v.viewer
         if not u:
             continue
@@ -310,12 +381,6 @@ def get_story_viewers_endpoint(
             follow_status=follow_status,
             is_private=is_private,
         )
-
-        reaction_row = db.query(models.StoryReaction).filter(
-            models.StoryReaction.story_id == story_id,
-            models.StoryReaction.user_id == u.id
-        ).first()
-        reaction_emoji = reaction_row.emoji if reaction_row else None
 
         items.append(schemas.StoryViewerItem(
             user=user_summary,
@@ -372,6 +437,17 @@ async def react_to_story(
         raise HTTPException(status_code=410, detail="Bu hikayenin süresi dolmuş.")
     if story.user_id == current_user.id:
         raise HTTPException(status_code=400, detail="Kendi hikayenize tepki veremezsiniz.")
+
+    # Engel kontrolü
+    is_blocked = db.query(models.UserBlock).filter(
+        (
+            (models.UserBlock.blocker_id == story.user_id) & (models.UserBlock.blocked_id == current_user.id)
+        ) | (
+            (models.UserBlock.blocker_id == current_user.id) & (models.UserBlock.blocked_id == story.user_id)
+        )
+    ).first()
+    if is_blocked:
+        raise HTTPException(status_code=403, detail="Bu kullanıcıyla etkileşim kuramazsınız.")
 
     # Senaryo 3 ve 4: Yanıt Kısıtlama Kontrolü
     prefs = db.query(models.UserPreferences).filter(models.UserPreferences.user_id == story.user_id).first()

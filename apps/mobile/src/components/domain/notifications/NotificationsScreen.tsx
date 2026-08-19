@@ -59,6 +59,7 @@ function getNotifIcon(type: string): { name: string; color: string } {
     case 'tag': return { name: 'at', color: '#AF52DE' };
     case 'mention': return { name: 'at', color: '#5856D6' };
     case 'campaign': return { name: 'megaphone.fill', color: '#FF9500' };
+    case 'story_reaction': return { name: 'heart.fill', color: '#FF6B9D' };
     default: return { name: 'bell.fill', color: '#999' };
   }
 }
@@ -80,6 +81,16 @@ function getNotifMessage(n: Notification, t: any): string {
     case 'follow_request': return t('notifications.follow_request_msg', { user });
     case 'follow_accepted': return t('notifications.follow_accepted_msg', { user });
     case 'tag': return t('notifications.tag', { user });
+    case 'story_reaction': {
+      try {
+        if (n.payload) {
+          const p = typeof n.payload === 'string' ? JSON.parse(n.payload) : n.payload;
+          const emoji = p.emoji || '❤️';
+          return t('notifications.story_reaction', { user, emoji, defaultValue: `${user} hikayene ${emoji} tepki verdi` });
+        }
+      } catch { /* ignore */ }
+      return t('notifications.story_reaction', { user, emoji: '❤️', defaultValue: `${user} hikayene tepki verdi` });
+    }
     case 'campaign': {
       let campaign_text = '';
       try {
@@ -137,6 +148,17 @@ export default function NotificationsScreen() {
 
   const handleNotifPress = useCallback((n: Notification) => {
     lightImpact();
+    // story_reaction → hikaye izleyicileri ekranına git
+    if (n.type === 'story_reaction') {
+      try {
+        const p = n.payload ? (typeof n.payload === 'string' ? JSON.parse(n.payload) : n.payload) : {};
+        if (p.story_id) {
+          // Kullanıcının kendi hikayesindeki izleyen listesini aç
+          router.push(`/story-viewers/${p.story_id}` as any);
+          return;
+        }
+      } catch { /* ignore */ }
+    }
     // Navigate based on notification type
     if (n.post_id && (n.type === 'like' || n.type === 'comment' || n.type === 'tag')) {
       // Could navigate to post detail — for now navigate to actor profile
