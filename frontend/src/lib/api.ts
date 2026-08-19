@@ -325,6 +325,18 @@ import popinaRestaurant from '../assets/venues/popina-restaurant.jpg'
 import sarmarineKarakoy from '../assets/venues/sarmarine-karakoy.jpg'
 import baracudaKarakoyTerrace from '../assets/venues/baracuda-karakoy-terrace.jpg'
 import galataSunset from '../assets/venues/galata-sunset.jpg'
+import rotaDurumBalik from '../assets/venues/rota-durum-balik.jpg'
+import badBurger from '../assets/venues/bad-burger.jpg'
+import betroBurgerTaksim from '../assets/venues/betro-burger-taksim.jpg'
+import bnfBurgerFries from '../assets/venues/bnf-burger-fries.jpg'
+import routeBurgerHouseKarakoy from '../assets/venues/route-burger-house-karakoy.jpg'
+import chuckBurger from '../assets/venues/chuck-burger.jpg'
+import burgerlabKarakoy from '../assets/venues/burgerlab-karakoy.jpg'
+import taksimDonerBurger from '../assets/venues/taksim-doner-burger.jpg'
+import monoBurger from '../assets/venues/mono-burger.jpg'
+import momSteakBurger from '../assets/venues/mom-steak-burger.jpg'
+import justeFriedChicken from '../assets/venues/juste-fried-chicken.jpg'
+import grabsStreetFood from '../assets/venues/grabs-street-food.jpg'
 
 export interface Venue {
   id: string
@@ -702,6 +714,18 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '1382': sarmarineKarakoy,
   '1384': baracudaKarakoyTerrace,
   '1386': galataSunset,
+  '1391': rotaDurumBalik,
+  '1394': badBurger,
+  '1395': betroBurgerTaksim,
+  '1396': bnfBurgerFries,
+  '1398': routeBurgerHouseKarakoy,
+  '1399': chuckBurger,
+  '1400': burgerlabKarakoy,
+  '1402': taksimDonerBurger,
+  '1403': monoBurger,
+  '1404': momSteakBurger,
+  '1405': justeFriedChicken,
+  '1408': grabsStreetFood,
 }
 
 export function getFallbackVenueImage(category: string): string {

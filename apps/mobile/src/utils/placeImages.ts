@@ -328,6 +328,18 @@ const popinaRestaurant = require("../../assets/places/popina-restaurant.jpg") as
 const sarmarineKarakoy = require("../../assets/places/sarmarine-karakoy.jpg") as ImageSourcePropType;
 const baracudaKarakoyTerrace = require("../../assets/places/baracuda-karakoy-terrace.jpg") as ImageSourcePropType;
 const galataSunset = require("../../assets/places/galata-sunset.jpg") as ImageSourcePropType;
+const rotaDurumBalik = require("../../assets/places/rota-durum-balik.jpg") as ImageSourcePropType;
+const badBurger = require("../../assets/places/bad-burger.jpg") as ImageSourcePropType;
+const betroBurgerTaksim = require("../../assets/places/betro-burger-taksim.jpg") as ImageSourcePropType;
+const bnfBurgerFries = require("../../assets/places/bnf-burger-fries.jpg") as ImageSourcePropType;
+const routeBurgerHouseKarakoy = require("../../assets/places/route-burger-house-karakoy.jpg") as ImageSourcePropType;
+const chuckBurger = require("../../assets/places/chuck-burger.jpg") as ImageSourcePropType;
+const burgerlabKarakoy = require("../../assets/places/burgerlab-karakoy.jpg") as ImageSourcePropType;
+const taksimDonerBurger = require("../../assets/places/taksim-doner-burger.jpg") as ImageSourcePropType;
+const monoBurger = require("../../assets/places/mono-burger.jpg") as ImageSourcePropType;
+const momSteakBurger = require("../../assets/places/mom-steak-burger.jpg") as ImageSourcePropType;
+const justeFriedChicken = require("../../assets/places/juste-fried-chicken.jpg") as ImageSourcePropType;
+const grabsStreetFood = require("../../assets/places/grabs-street-food.jpg") as ImageSourcePropType;
 
 const CATEGORY_PLACEHOLDERS: Record<string, string> = {
   kafe: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800",
@@ -669,6 +681,18 @@ const PLACE_IMAGE_OVERRIDES: Record<string, ImageSourcePropType> = {
   "1382": sarmarineKarakoy,
   "1384": baracudaKarakoyTerrace,
   "1386": galataSunset,
+  "1391": rotaDurumBalik,
+  "1394": badBurger,
+  "1395": betroBurgerTaksim,
+  "1396": bnfBurgerFries,
+  "1398": routeBurgerHouseKarakoy,
+  "1399": chuckBurger,
+  "1400": burgerlabKarakoy,
+  "1402": taksimDonerBurger,
+  "1403": monoBurger,
+  "1404": momSteakBurger,
+  "1405": justeFriedChicken,
+  "1408": grabsStreetFood,
 };
 
 type PlaceLike = Place | { id?: string | number; name?: string; photo_url?: string; category?: string };
