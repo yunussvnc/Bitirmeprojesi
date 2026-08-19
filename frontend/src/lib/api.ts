@@ -337,6 +337,15 @@ import monoBurger from '../assets/venues/mono-burger.jpg'
 import momSteakBurger from '../assets/venues/mom-steak-burger.jpg'
 import justeFriedChicken from '../assets/venues/juste-fried-chicken.jpg'
 import grabsStreetFood from '../assets/venues/grabs-street-food.jpg'
+import raskolIstanbul from '../assets/venues/raskol-istanbul.jpg'
+import moretendersCocktailCrib from '../assets/venues/moretenders-cocktail-crib.jpg'
+import perriKarakoy from '../assets/venues/perri-karakoy.jpg'
+import thePubBeyoglu from '../assets/venues/the-pub-beyoglu.jpg'
+import dublinIrishPub from '../assets/venues/dublin-irish-pub.jpg'
+import edinburghPub from '../assets/venues/edinburgh-pub.jpg'
+import cornerIrishPub from '../assets/venues/corner-irish-pub.jpg'
+import celticIrishPub from '../assets/venues/celtic-irish-pub.jpg'
+import jamesJoyceIrishPub from '../assets/venues/james-joyce-irish-pub.jpg'
 
 export interface Venue {
   id: string
@@ -726,6 +735,15 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '1404': momSteakBurger,
   '1405': justeFriedChicken,
   '1408': grabsStreetFood,
+  '1414': raskolIstanbul,
+  '1418': moretendersCocktailCrib,
+  '1427': perriKarakoy,
+  '1430': thePubBeyoglu,
+  '1431': dublinIrishPub,
+  '1432': edinburghPub,
+  '1433': cornerIrishPub,
+  '1434': celticIrishPub,
+  '1437': jamesJoyceIrishPub,
 }
 
 export function getFallbackVenueImage(category: string): string {
