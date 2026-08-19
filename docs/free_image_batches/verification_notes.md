@@ -593,3 +593,8 @@ Antique Pizzeria, canlı ID 1054, Beyoğlu Hüseyinağa Sahne Sk. No:22. Tripadv
 Ravenna Akaretler, canlı ID 1055, Vişnezade Süleyman Seba Cd. 69/A. Yandex kaydı “Artık faal değil” uyarısı taşıyor; görsel eklenmeyecek.
 Kaizen Ramen - Beşiktaş, canlı ID 1056, Vişnezade Özgür Sk. No:2/A. Yandex görselinde kaizen tabelası/logo ve giriş cephesi görülüyor ancak kaynak kaydı 2/B, canlı kayıt 2/A; adres numarası çelişkisi nedeniyle şimdilik kullanılmayacak.
 Sushi LAB, canlı ID 1057, Vişnezade Şair Nedim Cd. Çatlak Çeşme Sk. No:2/A. Tripadvisor sonucu aynı Çatlak Çeşme Sk. No:2A adresini taşıyor; görselde SUSHI LAB tabelası ve giriş net, güçlü eşleşme.
+Batch 015 taraması başladı.
+Konoha Akaretler, canlı ID 1058, Sinanpaşa Köprüsü Sk. No:10. Yandex görselinde KONOHA SUSHI & CHEESE tabelalı dış cephe net; kaynak kaydı No:10E, canlı kayıt No:10 ile aynı şube/giriş eşleşmesi güçlü, kabul edilebilir.
+Konoha Etiler, canlı ID 1059, Nisbetiye Başa Sk. 4/A. Yandex görseli genel sokak görünümü; KONOHA tabelası veya 4/A giriş işareti okunmuyor, kullanılmayacak.
+Miyabi Sushi & Japanese Grill Bar, canlı ID 1060, Akat Yaren Sk. No:6 D:14–15. Aramada restoran dış cephe ve MIYABI tabelası görülen aday bulundu; adres doğrulaması tamamlanacak.
+Miyabi Sushi & Japanese Grill Bar, canlı ID 1060, Zeytinoğlu Cd. Akat Yaren Sk. No:6 D:14–15. Resmî Miyabi sitesi No:6/14, Corner/Instagram/Tripadvisor No:6 D:14–15 adreslerini doğruluyor; görselde MIYABI SUSHI & JAPANESE GRILL BAR tabelalı dış cephe net, güçlü eşleşme.
