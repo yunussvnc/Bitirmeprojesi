@@ -350,6 +350,10 @@ const cornerIrishPub = require("../../assets/places/corner-irish-pub.jpg") as Im
 const celticIrishPub = require("../../assets/places/celtic-irish-pub.jpg") as ImageSourcePropType;
 const jamesJoyceIrishPub = require("../../assets/places/james-joyce-irish-pub.jpg") as ImageSourcePropType;
 const dabPubPera = require("../../assets/places/dab-pub-pera.jpg") as ImageSourcePropType;
+const streetPub = require("../../assets/places/street-pub.jpg") as ImageSourcePropType;
+const u2IstanbulIrishPub = require("../../assets/places/u2-istanbul-irish-pub.jpg") as ImageSourcePropType;
+const redfoxPub = require("../../assets/places/redfox-pub.jpg") as ImageSourcePropType;
+const finnegansIrishPub = require("../../assets/places/finnegans-irish-pub.jpg") as ImageSourcePropType;
 
 const CATEGORY_PLACEHOLDERS: Record<string, string> = {
   kafe: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800",
@@ -713,6 +717,10 @@ const PLACE_IMAGE_OVERRIDES: Record<string, ImageSourcePropType> = {
   "1434": celticIrishPub,
   "1437": jamesJoyceIrishPub,
   "1440": dabPubPera,
+  "1443": streetPub,
+  "1445": u2IstanbulIrishPub,
+  "1446": redfoxPub,
+  "1447": finnegansIrishPub,
 };
 
 type PlaceLike = Place | { id?: string | number; name?: string; photo_url?: string; category?: string };
