@@ -606,3 +606,10 @@ inari Omakase Kuruçeşme, canlı ID 1066, Kuruçeşme Cd. No:11. İncelenen ara
 Sushi&Spice Akmerkez, canlı ID 1067, Akmerkez AVM Nisbetiye Cd. No:56. Mevcut sonuçlar Akaretler şubesine ait; Akmerkez şubesiyle karıştırılmaması için kullanılmayacak.
 Itsumi, canlı ID 1068, Levent İş Kuleleri Kule 2 D:43. Bu taramada hedef şube adı ve adresiyle doğrulanabilir dış cephe/tabela görseli bulunamadı; kullanılmayacak.
 inari Omakase Kuruçeşme, canlı ID 1066, Kuruçeşme Cd. No:11. İnari’nin dış cephe görselinde inari PIKU / SUSHI-LOUNGE-BAR tabelası ve giriş net; arama başlığı aynı Kuruçeşme Cd. No:11 adresini taşıyor, güçlü eşleşme.
+Sushi&Spice Akmerkez, canlı ID 1067. İncelenen sonuçlar Akaretler şubesine ait (Sushi&Spice tabelası ve adres No:10); Akmerkez AVM şubesiyle eşleşmediği için kullanılmayacak.
+Itsumi, canlı ID 1068. İncelenen Tripadvisor ve resmî site görselleri iç mekân/ürün ağırlıklı; İş Kuleleri Kule 2 şubesi için adres veya dış tabela doğrulaması görülmediği için kullanılmayacak.
+İoki Nau Karaköy, canlı ID 1069, JW Marriott Bosphorus / Kemankeş Cd. n:49/1. Corner kaynağı başlığı hedef adresi taşırken dış cephe fotoğrafında İOKİ NAU tabelası ve menü panosu net; güçlü eşleşme. Aynı aramada çıkan C7J0oUkXHSv6.jpeg görseli İoki değil Sushi&Spice olduğu için reddedildi.
+Sushi İstanbul, canlı ID 1070, Okul Sk. No:9/D. Bu taramada hedef isim ve adresiyle doğrulanabilir tabela/dış cephe görseli bulunamadı; kullanılmayacak.
+Noodle House, canlı ID 1071, Akdoğan Sk. No:35. Resmî Noodle House kaynağındaki görselde büyük NOODLE HOUSE tabelası ve giriş net; hedef şube olarak ayrıca adres başlığı taşıyan adayla çapraz kontrol edilecek.
+SushiCo Bebek, canlı ID 1072, Cevdet Paşa Cd. No:69. Yandex başlığı Bebek Mah. Cevdetpaşa Cad. No:69/B ile eşleşiyor; dış cephede sushiCo tabelası net ve güçlü şube eşleşmesi.
+Noodle House, canlı ID 1071, Cihannüma Mah. Barbaros Bulv. Akdoğan Sok. No:35/A. Tripadvisor başlığı bu adresi taşıyor; görselde büyük NOODLE HOUSE tabelası, giriş ve kapı üstündeki 40? numara/işletme cephesi net; hedef şubeyle güçlü eşleşme.
