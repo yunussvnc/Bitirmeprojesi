@@ -586,3 +586,6 @@ OTTO makarna, canlı ID 1047, Türkali Yaverağa Sk. 7/A. Arama sonucu yalnızca
 Antica Locanda, canlı ID 1048, Arnavutköy Satışmeydanı Sok. No:12. Tripadvisor görselinde ANTICA LOCANDA tabelalı dış cephe/giriş net; arama başlığı aynı Satış Meydanı Sok. No:12 adresini taşıyor, güçlü eşleşme.
 MORINI, canlı ID 1049, Levazım Zorlu Center Koru Sk. No:2. İncelenen MORINI görseli tabelasız iç mekân/bar; Zorlu Center şube veya adres işareti görünmüyor, kullanılmayacak.
 Napoli Gourmet, canlı ID 1050, Vişnezade Çatalmektep Sk. 2/A. Görselde NAPOLI GOURMET tabelası net olsa da kaynak araması Nişantaşı şubesini gösteriyor; canlı Beşiktaş şubesiyle farklı şube riski nedeniyle kullanılmayacak.
+Scarpetta, canlı ID 1051, Etiler Dilhayat Sk. No:16. Tripadvisor görselinde LA SCARPETTA tabelası ve kapıdaki kırmızı 16 numarası açıkça görülüyor; canlı adresle kesin eşleşme, güçlü kabul.
+Faribo Focaccia & Schiacciata Sandviç, canlı ID 1052, Türkali Şair Nedim Cd. No:66/A. Arama görsellerinde ürün/iç mekân ve tabelasız bina cephesi bulunuyor; FARIBO tabelası veya 66/A işletme girişi net değil, kullanılmayacak.
+Visorante Kitchen & Bar Ortaköy, canlı ID 1053, Ortaköy Dereboyu Cd. No:10. Arama görselleri iç mekân/ambiyans ve genel yapı gösteriyor; VISORANTE tabelası veya No:10 işareti doğrulanmadı, kullanılmayacak.
