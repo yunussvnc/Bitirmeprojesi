@@ -485,6 +485,25 @@ const sarrafSofrasiBagcilar = require("../../assets/places/sarraf-sofrasi-bagcil
 const kirvemEtBagcilar = require("../../assets/places/kirvem-et-bagcilar.jpg") as ImageSourcePropType;
 const serafMahmutbey = require("../../assets/places/seraf-mahmutbey.jpg") as ImageSourcePropType;
 const karadenizSofrasiBagcilar = require("../../assets/places/karadeniz-sofrasi-bagcilar.jpg") as ImageSourcePropType;
+const cakirRestaurantBagcilar = require("../../assets/places/cakir-restaurant-bagcilar.jpeg") as ImageSourcePropType;
+const naliaGunesli = require("../../assets/places/nalia-gunesli.jpg") as ImageSourcePropType;
+const sempatiEtBagcilar = require("../../assets/places/sempati-et-bagcilar.jpg") as ImageSourcePropType;
+const sofaErzurumCagBagcilar = require("../../assets/places/sofa-erzurum-cag-bagcilar.jpg") as ImageSourcePropType;
+const halamogluEtMangal = require("../../assets/places/halamoglu-et-mangal.jpg") as ImageSourcePropType;
+const galloRossoBagcilar = require("../../assets/places/gallo-rosso-bagcilar.jpg") as ImageSourcePropType;
+const tuzlaBalikcisi = require("../../assets/places/tuzla-balikcisi.jpg") as ImageSourcePropType;
+const zeytinTuzla = require("../../assets/places/zeytin-tuzla.jpg") as ImageSourcePropType;
+const cigerKonagiTuzla = require("../../assets/places/ciger-konagi-tuzla.jpg") as ImageSourcePropType;
+const karacabeyKebapTuzla = require("../../assets/places/karacabey-kebap-tuzla.jpg") as ImageSourcePropType;
+const hungerTuzlaViaport = require("../../assets/places/hunger-tuzla-viaport.jpeg") as ImageSourcePropType;
+const tuzlaLagosBalik = require("../../assets/places/tuzla-lagos-balik.jpg") as ImageSourcePropType;
+const balKesTuzla = require("../../assets/places/bal-kes-tuzla.jpg") as ImageSourcePropType;
+const cevizTuzla = require("../../assets/places/ceviz-tuzla.jpg") as ImageSourcePropType;
+const salmanEtTuzla = require("../../assets/places/salman-et-tuzla.jpg") as ImageSourcePropType;
+const sandzakBalkanTuzla = require("../../assets/places/sandzak-balkan-tuzla.jpg") as ImageSourcePropType;
+const kiracaBalikTuzla = require("../../assets/places/kiraca-balik-tuzla.jpg") as ImageSourcePropType;
+const zahterTuzla = require("../../assets/places/zahter-tuzla.jpg") as ImageSourcePropType;
+const filizlerKofteTuzla = require("../../assets/places/filizler-kofte-tuzla.jpeg") as ImageSourcePropType;
 
 const CATEGORY_PLACEHOLDERS: Record<string, string> = {
   kafe: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800",
@@ -983,6 +1002,25 @@ const PLACE_IMAGE_OVERRIDES: Record<string, ImageSourcePropType> = {
   "2500": kirvemEtBagcilar,
   "2501": serafMahmutbey,
   "2502": karadenizSofrasiBagcilar,
+  "2504": cakirRestaurantBagcilar,
+  "2506": naliaGunesli,
+  "2508": sempatiEtBagcilar,
+  "2510": sofaErzurumCagBagcilar,
+  "2511": halamogluEtMangal,
+  "2513": galloRossoBagcilar,
+  "2514": tuzlaBalikcisi,
+  "2515": zeytinTuzla,
+  "2516": cigerKonagiTuzla,
+  "2517": karacabeyKebapTuzla,
+  "2518": hungerTuzlaViaport,
+  "2520": tuzlaLagosBalik,
+  "2522": balKesTuzla,
+  "2523": cevizTuzla,
+  "2524": salmanEtTuzla,
+  "2525": sandzakBalkanTuzla,
+  "2526": kiracaBalikTuzla,
+  "2527": zahterTuzla,
+  "2528": filizlerKofteTuzla,
 };
 
 type PlaceLike = Place | { id?: string | number; name?: string; photo_url?: string; category?: string };

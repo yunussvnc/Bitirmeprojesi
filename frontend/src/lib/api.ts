@@ -482,6 +482,25 @@ import sarrafSofrasiBagcilar from '../assets/venues/sarraf-sofrasi-bagcilar.jpg'
 import kirvemEtBagcilar from '../assets/venues/kirvem-et-bagcilar.jpg'
 import serafMahmutbey from '../assets/venues/seraf-mahmutbey.jpg'
 import karadenizSofrasiBagcilar from '../assets/venues/karadeniz-sofrasi-bagcilar.jpg'
+import cakirRestaurantBagcilar from '../assets/venues/cakir-restaurant-bagcilar.jpeg'
+import naliaGunesli from '../assets/venues/nalia-gunesli.jpg'
+import sempatiEtBagcilar from '../assets/venues/sempati-et-bagcilar.jpg'
+import sofaErzurumCagBagcilar from '../assets/venues/sofa-erzurum-cag-bagcilar.jpg'
+import halamogluEtMangal from '../assets/venues/halamoglu-et-mangal.jpg'
+import galloRossoBagcilar from '../assets/venues/gallo-rosso-bagcilar.jpg'
+import tuzlaBalikcisi from '../assets/venues/tuzla-balikcisi.jpg'
+import zeytinTuzla from '../assets/venues/zeytin-tuzla.jpg'
+import cigerKonagiTuzla from '../assets/venues/ciger-konagi-tuzla.jpg'
+import karacabeyKebapTuzla from '../assets/venues/karacabey-kebap-tuzla.jpg'
+import hungerTuzlaViaport from '../assets/venues/hunger-tuzla-viaport.jpeg'
+import tuzlaLagosBalik from '../assets/venues/tuzla-lagos-balik.jpg'
+import balKesTuzla from '../assets/venues/bal-kes-tuzla.jpg'
+import cevizTuzla from '../assets/venues/ceviz-tuzla.jpg'
+import salmanEtTuzla from '../assets/venues/salman-et-tuzla.jpg'
+import sandzakBalkanTuzla from '../assets/venues/sandzak-balkan-tuzla.jpg'
+import kiracaBalikTuzla from '../assets/venues/kiraca-balik-tuzla.jpg'
+import zahterTuzla from '../assets/venues/zahter-tuzla.jpg'
+import filizlerKofteTuzla from '../assets/venues/filizler-kofte-tuzla.jpeg'
 
 export interface Venue {
   id: string
@@ -1016,6 +1035,25 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '2500': kirvemEtBagcilar,
   '2501': serafMahmutbey,
   '2502': karadenizSofrasiBagcilar,
+  '2504': cakirRestaurantBagcilar,
+  '2506': naliaGunesli,
+  '2508': sempatiEtBagcilar,
+  '2510': sofaErzurumCagBagcilar,
+  '2511': halamogluEtMangal,
+  '2513': galloRossoBagcilar,
+  '2514': tuzlaBalikcisi,
+  '2515': zeytinTuzla,
+  '2516': cigerKonagiTuzla,
+  '2517': karacabeyKebapTuzla,
+  '2518': hungerTuzlaViaport,
+  '2520': tuzlaLagosBalik,
+  '2522': balKesTuzla,
+  '2523': cevizTuzla,
+  '2524': salmanEtTuzla,
+  '2525': sandzakBalkanTuzla,
+  '2526': kiracaBalikTuzla,
+  '2527': zahterTuzla,
+  '2528': filizlerKofteTuzla,
 }
 
 export function getFallbackVenueImage(category: string): string {
