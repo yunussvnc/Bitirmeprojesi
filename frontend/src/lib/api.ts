@@ -384,6 +384,11 @@ import niyoBahcelievler from '../assets/venues/niyo-bahcelievler.jpg'
 import sostaMangalbasi from '../assets/venues/sosta-mangalbasi.jpg'
 import gurmeMardin from '../assets/venues/gurme-mardin.jpg'
 import gurmeBafraPidesi from '../assets/venues/gurme-bafra-pidesi.jpg'
+import etciMehmetBakirkoy from '../assets/venues/etci-mehmet-bakirkoy.jpg'
+import spadaDiNapoliBakirkoy from '../assets/venues/spada-di-napoli-bakirkoy.jpg'
+import abdulkadirRestaurantBakirkoy from '../assets/venues/abdulkadir-restaurant-bakirkoy.jpg'
+import casnigirLezzetcibasiBakirkoy from '../assets/venues/casnigir-lezzetcibasi-bakirkoy.jpg'
+import tarihiIstanbulSofrasi from '../assets/venues/tarihi-istanbul-sofrasi.jpg'
 
 export interface Venue {
   id: string
@@ -820,6 +825,11 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '2315': sostaMangalbasi,
   '2316': gurmeMardin,
   '2317': gurmeBafraPidesi,
+  '2321': etciMehmetBakirkoy,
+  '2322': spadaDiNapoliBakirkoy,
+  '2323': abdulkadirRestaurantBakirkoy,
+  '2325': casnigirLezzetcibasiBakirkoy,
+  '2327': tarihiIstanbulSofrasi,
 }
 
 export function getFallbackVenueImage(category: string): string {

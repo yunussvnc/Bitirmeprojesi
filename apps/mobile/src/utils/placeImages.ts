@@ -387,6 +387,11 @@ const niyoBahcelievler = require("../../assets/places/niyo-bahcelievler.jpg") as
 const sostaMangalbasi = require("../../assets/places/sosta-mangalbasi.jpg") as ImageSourcePropType;
 const gurmeMardin = require("../../assets/places/gurme-mardin.jpg") as ImageSourcePropType;
 const gurmeBafraPidesi = require("../../assets/places/gurme-bafra-pidesi.jpg") as ImageSourcePropType;
+const etciMehmetBakirkoy = require("../../assets/places/etci-mehmet-bakirkoy.jpg") as ImageSourcePropType;
+const spadaDiNapoliBakirkoy = require("../../assets/places/spada-di-napoli-bakirkoy.jpg") as ImageSourcePropType;
+const abdulkadirRestaurantBakirkoy = require("../../assets/places/abdulkadir-restaurant-bakirkoy.jpg") as ImageSourcePropType;
+const casnigirLezzetcibasiBakirkoy = require("../../assets/places/casnigir-lezzetcibasi-bakirkoy.jpg") as ImageSourcePropType;
+const tarihiIstanbulSofrasi = require("../../assets/places/tarihi-istanbul-sofrasi.jpg") as ImageSourcePropType;
 
 const CATEGORY_PLACEHOLDERS: Record<string, string> = {
   kafe: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800",
@@ -787,6 +792,11 @@ const PLACE_IMAGE_OVERRIDES: Record<string, ImageSourcePropType> = {
   "2315": sostaMangalbasi,
   "2316": gurmeMardin,
   "2317": gurmeBafraPidesi,
+  "2321": etciMehmetBakirkoy,
+  "2322": spadaDiNapoliBakirkoy,
+  "2323": abdulkadirRestaurantBakirkoy,
+  "2325": casnigirLezzetcibasiBakirkoy,
+  "2327": tarihiIstanbulSofrasi,
 };
 
 type PlaceLike = Place | { id?: string | number; name?: string; photo_url?: string; category?: string };
