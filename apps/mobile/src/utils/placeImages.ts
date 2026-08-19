@@ -181,6 +181,7 @@ const scarpettaEtiler = require("../../assets/places/scarpetta-etiler.jpg") as I
 const antiquePizzeriaBeyoglu = require("../../assets/places/antique-pizzeria-beyoglu.jpg") as ImageSourcePropType;
 const sushiLabBesiktas = require("../../assets/places/sushi-lab-besiktas.jpg") as ImageSourcePropType;
 const miyabiSushiAkat = require("../../assets/places/miyabi-sushi-akat.jpg") as ImageSourcePropType;
+const wingsMatchaOrtakoy = require("../../assets/places/wings-matcha-ortakoy.jpg") as ImageSourcePropType;
 
 const CATEGORY_PLACEHOLDERS: Record<string, string> = {
   kafe: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800",
@@ -375,6 +376,7 @@ const PLACE_IMAGE_OVERRIDES: Record<string, ImageSourcePropType> = {
   "1054": antiquePizzeriaBeyoglu,
   "1057": sushiLabBesiktas,
   "1060": miyabiSushiAkat,
+  "1062": wingsMatchaOrtakoy,
 };
 
 type PlaceLike = Place | { id?: string | number; name?: string; photo_url?: string; category?: string };

@@ -598,3 +598,6 @@ Konoha Akaretler, canlı ID 1058, Sinanpaşa Köprüsü Sk. No:10. Yandex görse
 Konoha Etiler, canlı ID 1059, Nisbetiye Başa Sk. 4/A. Yandex görseli genel sokak görünümü; KONOHA tabelası veya 4/A giriş işareti okunmuyor, kullanılmayacak.
 Miyabi Sushi & Japanese Grill Bar, canlı ID 1060, Akat Yaren Sk. No:6 D:14–15. Aramada restoran dış cephe ve MIYABI tabelası görülen aday bulundu; adres doğrulaması tamamlanacak.
 Miyabi Sushi & Japanese Grill Bar, canlı ID 1060, Zeytinoğlu Cd. Akat Yaren Sk. No:6 D:14–15. Resmî Miyabi sitesi No:6/14, Corner/Instagram/Tripadvisor No:6 D:14–15 adreslerini doğruluyor; görselde MIYABI SUSHI & JAPANESE GRILL BAR tabelalı dış cephe net, güçlü eşleşme.
+Isokyo, canlı ID 1061, Zorlu Center Vadi Caddesi. Arama sonuçları Zorlu Center genel mimari fotoğrafları ve tabelasız iç mekân; ISOKYO şube tabelası/adres işareti doğrulanmadı, kullanılmayacak.
+Wings Matcha, canlı ID 1062, Mecidiye Eski Bahçe Sk. No:19. Yandex sonucu aynı Eski Bahçe Sokak No:19A kaydını ve WINGS MATCHA tabelalı dış cephe/girişi gösteriyor; canlı kayıt No:19 ile güçlü eşleşme.
+Alina Cafe Beşiktaş, canlı ID 1063, Sinanpaşa Altıntaş Sk. No:23/A. Arama sonuçlarında hedef işletme adı ve adresiyle doğrulanabilir dış cephe/tabela görseli bulunamadı; kullanılmayacak.
