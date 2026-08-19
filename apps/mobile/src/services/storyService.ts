@@ -8,6 +8,7 @@ export type Story = {
   media_type: string;
   media_url: string;
   thumbnail_url?: string;
+  privacy_type?: string; // 'public' | 'close_friends'
   is_close_friends: boolean;
   is_archived: boolean;
   mentioned_user_ids?: number[] | null;
@@ -177,4 +178,36 @@ export async function replyToStory(
   text: string
 ): Promise<{ ok: boolean; conversation_id: number; message_id: number }> {
   return apiPost(`/stories/${storyId}/reply`, { text });
+}
+
+// ── Delete ────────────────────────────────────────────────────────────────
+
+/** Kendi hikayesini sil */
+export async function deleteStory(
+  storyId: number
+): Promise<{ ok: boolean; deleted_id: number }> {
+  return apiDelete<{ ok: boolean; deleted_id: number }>(`/stories/${storyId}`);
+}
+
+// ── Share (DM Forward) ───────────────────────────────────────────────────
+
+/** Bir hikayeyi DM üzerinden başka kullanıcıya paylaş */
+export async function shareStoryViaDM(
+  storyId: number,
+  targetUserId: number
+): Promise<{ ok: boolean; conversation_id: number; message_id: number }> {
+  return apiPost(`/stories/${storyId}/share`, { target_user_id: targetUserId });
+}
+
+// ── Report ────────────────────────────────────────────────────────────────
+
+export type StoryReportReason = 'spam' | 'inappropriate' | 'violence' | 'harassment' | 'other';
+
+/** Bir hikayeyi şikayet et */
+export async function reportStory(
+  storyId: number,
+  reason: StoryReportReason,
+  description?: string
+): Promise<{ ok: boolean; report_id: number }> {
+  return apiPost(`/stories/${storyId}/report`, { reason, description });
 }

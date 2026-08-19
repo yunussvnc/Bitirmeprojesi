@@ -1,6 +1,7 @@
 /**
  * StoryViewerModal – Hikaye fullscreen izleyici
  * Instagram tarzı: otomatik geçiş, animasyonlu progress bar, tap ile önceki/sonraki
+ * Share, Delete, Report, Close Friends indicator dahil.
  */
 
 import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
@@ -19,6 +20,7 @@ import {
   Keyboard,
   useWindowDimensions,
   ScrollView,
+  Alert,
 } from 'react-native';
 import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
 import { Image } from 'expo-image';
@@ -27,7 +29,19 @@ import { IconSymbol } from '@/src/components/ui/icon-symbol';
 import { Avatar } from '@/src/components/ui/Avatar';
 import { lightImpact, success } from '@/src/utils/haptics';
 import type { Story } from '@/src/services/storyService';
-import { replyToStory, reactToStory, updateStoryViewAnalytics, recordStoryView, getStoryViewers, STORY_EMOJIS, type StoryEmoji, type StoryViewerItem } from '@/src/services/storyService';
+import {
+  replyToStory,
+  reactToStory,
+  updateStoryViewAnalytics,
+  recordStoryView,
+  getStoryViewers,
+  deleteStory,
+  reportStory,
+  STORY_EMOJIS,
+  type StoryEmoji,
+  type StoryViewerItem,
+  type StoryReportReason,
+} from '@/src/services/storyService';
 import { router } from 'expo-router';
 
 const STORY_DURATION_MS = 5000;
@@ -47,6 +61,8 @@ export interface StoryViewerModalProps {
   onPlaceNavigate?: (route: string, currentIndex: number) => void;
   /** Aktif kullanıcının ID'si — kendi hikayelerinde yanıt kutusu gizlenir */
   currentUserId?: number;
+  /** Hikaye silindikten sonra parent'a bilgi vermek için */
+  onStoryDeleted?: (storyId: number) => void;
 }
 
 export function StoryViewerModal({
@@ -58,6 +74,7 @@ export function StoryViewerModal({
   onAuthorNavigate,
   onPlaceNavigate,
   currentUserId,
+  onStoryDeleted,
 }: StoryViewerModalProps) {
   const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = useWindowDimensions();
   const [index, setIndex] = useState(initialIndex);
@@ -67,7 +84,7 @@ export function StoryViewerModal({
   const [myReaction, setMyReaction] = useState<string | null>(null);
   const [reactionSending, setReactionSending] = useState(false);
   const [uiVisible, setUiVisible] = useState(true);
-  const [videoPaused, setVideoPaused] = useState(false); // Fix #2: ayrı state for Video pause
+  const [videoPaused, setVideoPaused] = useState(false);
   const isPausedRef = useRef(false);
   const progressValueRef = useRef(0);
   const longPressTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
@@ -79,6 +96,11 @@ export function StoryViewerModal({
   const [viewersModalVisible, setViewersModalVisible] = useState(false);
   const [viewers, setViewers] = useState<StoryViewerItem[]>([]);
   const [viewersLoading, setViewersLoading] = useState(false);
+
+  // Menü state'leri
+  const [showOwnMenu, setShowOwnMenu] = useState(false);
+  const [showOtherMenu, setShowOtherMenu] = useState(false);
+  const [showReportMenu, setShowReportMenu] = useState(false);
 
   // initialIndex veya stories değiştiğinde index'i sıfırla
   useEffect(() => {
@@ -108,7 +130,6 @@ export function StoryViewerModal({
     const showSub = Keyboard.addListener(Platform.OS === 'ios' ? 'keyboardWillShow' : 'keyboardDidShow', (e) => {
       keyboardVisibleRef.current = true;
       Animated.timing(animKeyboard, { toValue: e.endCoordinates.height, duration: 250, useNativeDriver: false }).start();
-      // Keyboard açılınca progress durdur
       isPausedRef.current = true;
       setVideoPaused(true);
       if (isImageRef.current) {
@@ -118,7 +139,6 @@ export function StoryViewerModal({
     const hideSub = Keyboard.addListener(Platform.OS === 'ios' ? 'keyboardWillHide' : 'keyboardDidHide', () => {
       keyboardVisibleRef.current = false;
       Animated.timing(animKeyboard, { toValue: 0, duration: 250, useNativeDriver: false }).start();
-      // Keyboard kapanınca progress devam
       isPausedRef.current = false;
       setVideoPaused(false);
       if (isImageRef.current) {
@@ -132,6 +152,7 @@ export function StoryViewerModal({
   const isImage = story?.media_type !== 'video';
   const isImageRef = useRef(isImage);
   isImageRef.current = isImage;
+  const isCloseFriends = story?.privacy_type === 'close_friends' || story?.is_close_friends;
 
   const goNext = useCallback(() => {
     if (index < stories.length - 1) {
@@ -152,12 +173,11 @@ export function StoryViewerModal({
   useEffect(() => {
     if (story) {
       onStoryViewed?.(story.id);
-      // Backend'e görüntüleme kaydı gönder
       recordStoryView(story.id, 'feed').catch(() => {});
     }
   }, [index, story?.id]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  // Analitik: hikayeyi kapat veya bir sonrakine geçerken izleme süresini gönder
+  // Analitik
   const sendAnalytics = useCallback((opts?: { visitedProfile?: boolean; visitedPlace?: boolean }) => {
     const s = stories[index];
     if (!s) return;
@@ -169,7 +189,7 @@ export function StoryViewerModal({
     }).catch(() => {});
   }, [stories, index]);
 
-  // İmage progress: zamana dayalı animasyon
+  // İmage progress
   const startProgress = useCallback((fromValue = 0) => {
     if (!isImage) return;
     const remainingDuration = STORY_DURATION_MS * (1 - fromValue);
@@ -185,7 +205,6 @@ export function StoryViewerModal({
     });
   }, [isImage, progressAnim, visible, goNext]);
 
-  // Resume helper (keyboard hide'dan erişilebilmeli)
   const startProgressFromCurrent = useCallback(() => {
     startProgress(progressValueRef.current);
   }, [startProgress]);
@@ -204,7 +223,6 @@ export function StoryViewerModal({
     });
   }, [story, progressAnim, goNext, viewersModalVisible]);
 
-  // Image hikaye: progress başlat
   useEffect(() => {
     if (!story || !isImage || !visible) return;
     progressValueRef.current = 0;
@@ -214,7 +232,6 @@ export function StoryViewerModal({
     };
   }, [index, story?.id, isImage, visible, startProgress, progressAnim]);
 
-  // Video hikaye: progress sıfırla (onProgress callback ile dolacak)
   useEffect(() => {
     if (!isImage) {
       progressAnim.stopAnimation();
@@ -227,7 +244,6 @@ export function StoryViewerModal({
     if (!visible) dragY.setValue(0);
   }, [visible, dragY]);
 
-  // Fix #1: Video progress — react-native-video onProgress callback
   const handleVideoProgress = useCallback(({ currentTime, seekableDuration }: { currentTime: number; seekableDuration: number }) => {
     if (seekableDuration > 0) {
       const fraction = currentTime / seekableDuration;
@@ -243,14 +259,14 @@ export function StoryViewerModal({
   }, [goNext]);
 
   const handlePressIn = useCallback(() => {
-    if (viewersModalVisible) return;
+    if (viewersModalVisible || showOwnMenu || showOtherMenu || showReportMenu) return;
     longPressTimerRef.current = setTimeout(() => {
       setUiVisible(false);
       setVideoPaused(true);
       isPausedRef.current = true;
       progressAnim.stopAnimation();
     }, LONG_PRESS_DELAY);
-  }, [progressAnim, viewersModalVisible]);
+  }, [progressAnim, viewersModalVisible, showOwnMenu, showOtherMenu, showReportMenu]);
 
   const handlePressOut = useCallback(() => {
     if (longPressTimerRef.current) {
@@ -259,7 +275,7 @@ export function StoryViewerModal({
     }
     if (isPausedRef.current) {
       isPausedRef.current = false;
-      setVideoPaused(false); // Fix #2
+      setVideoPaused(false);
       setUiVisible(true);
       if (isImage) {
         startProgress(progressValueRef.current);
@@ -267,7 +283,6 @@ export function StoryViewerModal({
     }
   }, [isImage, startProgress]);
 
-  // Fix #3: animateClose artık analitik gönderiyor
   const animateClose = useCallback(() => {
     sendAnalytics();
     Animated.timing(dragY, {
@@ -280,7 +295,6 @@ export function StoryViewerModal({
     });
   }, [dragY, onClose, sendAnalytics, SCREEN_HEIGHT]);
 
-  // Fix #7: Swipe-down sırasında arka plan şeffaflaşması
   const overlayOpacity = dragY.interpolate({
     inputRange: [0, SCREEN_HEIGHT * 0.4],
     outputRange: [1, 0.3],
@@ -341,8 +355,9 @@ export function StoryViewerModal({
       success();
       setReplyText('');
       setShowEmojiTray(false);
-    } catch (e) {
-      console.warn('[StoryViewer] Reply failed:', e);
+    } catch (e: any) {
+      const detail = e?.response?.data?.detail || e?.message || 'Yanıt gönderilemedi.';
+      Alert.alert('Hata', detail);
     } finally {
       setReplySending(false);
     }
@@ -360,8 +375,9 @@ export function StoryViewerModal({
         setMyReaction(emoji);
       }
       setShowEmojiTray(false);
-    } catch (e) {
-      console.warn('[StoryViewer] Reaction failed:', e);
+    } catch (e: any) {
+      const detail = e?.response?.data?.detail || e?.message || 'Tepki gönderilemedi.';
+      Alert.alert('Hata', detail);
     } finally {
       setReactionSending(false);
     }
@@ -381,6 +397,113 @@ export function StoryViewerModal({
   // Başkasının hikayesinde mi?
   const isOwnStory = story?.user_id != null && currentUserId != null && story.user_id === currentUserId;
   const showReplyBar = !isOwnStory;
+  const canShare = !isCloseFriends;
+
+  // ── Silme ──
+  const handleDeleteStory = useCallback(async () => {
+    if (!story) return;
+    setShowOwnMenu(false);
+    Alert.alert(
+      'Hikayeyi Sil',
+      'Bu hikaye kalıcı olarak silinecek. Emin misiniz?',
+      [
+        { text: 'İptal', style: 'cancel', onPress: () => {
+          isPausedRef.current = false;
+          setVideoPaused(false);
+          if (isImage) startProgress(progressValueRef.current);
+        }},
+        {
+          text: 'Sil',
+          style: 'destructive',
+          onPress: async () => {
+            try {
+              await deleteStory(story.id);
+              success();
+              onStoryDeleted?.(story.id);
+              goNext();
+            } catch (e) {
+              Alert.alert('Hata', 'Hikaye silinemedi.');
+              isPausedRef.current = false;
+              setVideoPaused(false);
+              if (isImage) startProgress(progressValueRef.current);
+            }
+          },
+        },
+      ]
+    );
+  }, [story, goNext, onStoryDeleted, isImage, startProgress]);
+
+  // ── Şikayet ──
+  const handleReport = useCallback(async (reason: StoryReportReason) => {
+    if (!story) return;
+    setShowReportMenu(false);
+    try {
+      await reportStory(story.id, reason);
+      success();
+      Alert.alert('Teşekkürler', 'Şikayetiniz incelenmek üzere alındı.');
+    } catch (e: any) {
+      const detail = e?.response?.data?.detail || 'Şikayet gönderilemedi.';
+      Alert.alert('Hata', detail);
+    } finally {
+      isPausedRef.current = false;
+      setVideoPaused(false);
+      if (isImage) startProgress(progressValueRef.current);
+    }
+  }, [story, isImage, startProgress]);
+
+  // ── Paylaş (basit — ileride kullanıcı seçim ekranı eklenebilir) ──
+  const handleSharePress = useCallback(() => {
+    if (!story) return;
+    lightImpact();
+    // Basit bir prompt ile user ID sor (ileride tam arayüz eklenecek)
+    Alert.prompt?.(
+      'Hikayeyi Paylaş',
+      'Göndermek istediğiniz kişinin kullanıcı ID\'sini girin:',
+      async (text) => {
+        const uid = parseInt(text, 10);
+        if (!uid || isNaN(uid)) return;
+        try {
+          const { shareStoryViaDM } = await import('@/src/services/storyService');
+          await shareStoryViaDM(story.id, uid);
+          success();
+          Alert.alert('Başarılı', 'Hikaye DM olarak gönderildi.');
+        } catch (e: any) {
+          const detail = e?.response?.data?.detail || 'Gönderilemedi.';
+          Alert.alert('Hata', detail);
+        }
+      },
+      'plain-text'
+    );
+  }, [story]);
+
+  // ── Menü Açma/Kapama ──
+  const openOwnMenu = useCallback(() => {
+    isPausedRef.current = true;
+    setVideoPaused(true);
+    progressAnim.stopAnimation();
+    setShowOwnMenu(true);
+  }, [progressAnim]);
+
+  const closeOwnMenu = useCallback(() => {
+    setShowOwnMenu(false);
+    isPausedRef.current = false;
+    setVideoPaused(false);
+    if (isImage) startProgress(progressValueRef.current);
+  }, [isImage, startProgress]);
+
+  const openOtherMenu = useCallback(() => {
+    isPausedRef.current = true;
+    setVideoPaused(true);
+    progressAnim.stopAnimation();
+    setShowOtherMenu(true);
+  }, [progressAnim]);
+
+  const closeOtherMenu = useCallback(() => {
+    setShowOtherMenu(false);
+    isPausedRef.current = false;
+    setVideoPaused(false);
+    if (isImage) startProgress(progressValueRef.current);
+  }, [isImage, startProgress]);
 
   const openViewersList = useCallback(async () => {
     if (!story) return;
@@ -417,6 +540,9 @@ export function StoryViewerModal({
 
   if (!story) return null;
 
+  // Progress bar renkleri
+  const progressFillColor = isCloseFriends ? 'rgba(74,222,128,0.9)' : 'rgba(255,255,255,0.9)';
+
   return (
     <Modal
       visible={visible}
@@ -425,7 +551,6 @@ export function StoryViewerModal({
       onRequestClose={onClose}
       statusBarTranslucent
     >
-      {/* Fix #7: Swipe-down sırasında arka planın şeffaflaşması */}
       <Animated.View style={[{ flex: 1, backgroundColor: '#000' }, { opacity: overlayOpacity }]} />
       <Animated.View
         style={[
@@ -440,7 +565,7 @@ export function StoryViewerModal({
           <Video
             source={{ uri: story.media_url }}
             style={{ width: SCREEN_WIDTH, height: SCREEN_HEIGHT }}
-            resizeMode="contain"
+            resizeMode="cover"
             paused={!visible || videoPaused}
             repeat={false}
             onProgress={handleVideoProgress}
@@ -450,7 +575,7 @@ export function StoryViewerModal({
           <Image
             source={{ uri: story.media_url }}
             style={{ width: SCREEN_WIDTH, height: SCREEN_HEIGHT }}
-            contentFit="contain"
+            contentFit="cover"
           />
         )}
 
@@ -459,7 +584,7 @@ export function StoryViewerModal({
           <Pressable style={styles.tapRight} onPress={goNext} onPressIn={handlePressIn} onPressOut={handlePressOut} />
         </View>
 
-        {/* ── Progress Bar (her zaman en üstte) ── */}
+        {/* ── Progress Bar ── */}
         {uiVisible && (
           <View style={styles.progressRow}>
             {stories.map((_, i) => {
@@ -468,11 +593,11 @@ export function StoryViewerModal({
               return (
                 <View key={i} style={[styles.progressSegment, { flex: 1 }]}>
                   <View style={styles.progressBg} />
-                  {isCompleted && <View style={styles.progressFillCompleted} />}
+                  {isCompleted && <View style={[styles.progressFillCompleted, { backgroundColor: progressFillColor }]} />}
                   {isActive && (
                     <View style={styles.progressActiveWrap}>
                       <Animated.View
-                        style={[styles.progressFillActive, { flex: progressAnim }]}
+                        style={[styles.progressFillActive, { flex: progressAnim, backgroundColor: progressFillColor }]}
                       />
                       <Animated.View
                         style={{
@@ -490,7 +615,7 @@ export function StoryViewerModal({
           </View>
         )}
 
-        {/* Fix #5: Author bar üstte (Instagram tarzı) — progress bar'ın hemen altında */}
+        {/* ── Author Bar ── */}
         {uiVisible && (
           <View style={styles.authorBar}>
             {onAuthorNavigate ? (
@@ -508,6 +633,7 @@ export function StoryViewerModal({
                       {story.author?.first_name || story.author?.username || t('profile.user')}
                     </Text>
                     <Text style={styles.timeAgo}>{timeAgo(story.created_at)}</Text>
+                    {isCloseFriends && <Text style={styles.closeFriendsBadge}>★</Text>}
                   </View>
                 </TouchableOpacity>
               ) : (
@@ -516,6 +642,7 @@ export function StoryViewerModal({
                     {story.author?.first_name || story.author?.username || t('profile.user')}
                   </Text>
                   <Text style={styles.timeAgo}>{timeAgo(story.created_at)}</Text>
+                  {isCloseFriends && <Text style={styles.closeFriendsBadge}>★</Text>}
                 </View>
               )}
               {story.place && (
@@ -535,7 +662,16 @@ export function StoryViewerModal({
               )}
             </View>
 
-            {/* Fix #6: Close butonu — author bar'ın sağ tarafında */}
+            {/* 3-Nokta Menü Butonu */}
+            <TouchableOpacity
+              style={styles.moreBtn}
+              onPress={isOwnStory ? openOwnMenu : openOtherMenu}
+              activeOpacity={0.7}
+            >
+              <IconSymbol name="ellipsis" size={20} color="#fff" />
+            </TouchableOpacity>
+
+            {/* Close butonu */}
             <TouchableOpacity
               style={styles.closeBtn}
               onPress={onClose}
@@ -546,7 +682,7 @@ export function StoryViewerModal({
           </View>
         )}
 
-        {/* ── Link Sticker (varsa) ── */}
+        {/* ── Link Sticker ── */}
         {story.link_type && story.link_id && uiVisible && (
           <TouchableOpacity
             style={styles.linkSticker}
@@ -560,7 +696,7 @@ export function StoryViewerModal({
           </TouchableOpacity>
         )}
 
-        {/* ── Yanıt Kutusu + Emoji Tray (sadece başkasının hikayesinde) ── */}
+        {/* ── Yanıt Kutusu + Emoji Tray + Share (başkasının hikayesinde) ── */}
         {showReplyBar && uiVisible && (
           <Animated.View style={[styles.replyBar, { bottom: Animated.add(Platform.OS === 'ios' ? 36 : 20, animKeyboard) }]} pointerEvents="box-none">
             {/* Emoji Tepki Tray */}
@@ -608,13 +744,25 @@ export function StoryViewerModal({
               />
               
               {!replyText.trim() ? (
-                <TouchableOpacity
-                  style={styles.likeBtn}
-                  onPress={() => handleReaction('❤️')}
-                  disabled={reactionSending}
-                >
-                  <IconSymbol name={myReaction === '❤️' ? "heart.fill" : "heart"} size={26} color={myReaction === '❤️' ? "#ef4444" : "#fff"} />
-                </TouchableOpacity>
+                <>
+                  <TouchableOpacity
+                    style={styles.likeBtn}
+                    onPress={() => handleReaction('❤️')}
+                    disabled={reactionSending}
+                  >
+                    <IconSymbol name={myReaction === '❤️' ? "heart.fill" : "heart"} size={26} color={myReaction === '❤️' ? "#ef4444" : "#fff"} />
+                  </TouchableOpacity>
+                  {/* Paylaş butonu */}
+                  {canShare && (
+                    <TouchableOpacity
+                      style={styles.shareBtn}
+                      onPress={handleSharePress}
+                      activeOpacity={0.7}
+                    >
+                      <IconSymbol name="paperplane" size={22} color="#fff" />
+                    </TouchableOpacity>
+                  )}
+                </>
               ) : (
                 <TouchableOpacity
                   style={[
@@ -636,13 +784,15 @@ export function StoryViewerModal({
           </Animated.View>
         )}
 
-        {/* ── İzleyenler Butonu (Sadece Kendi Hikayesinde) ── */}
+        {/* ── İzleyenler Butonu (Kendi Hikayesinde) — Sayı ile birlikte ── */}
         {isOwnStory && uiVisible && (
           <Animated.View style={[styles.viewersBtnWrap, { bottom: Animated.add(Platform.OS === 'ios' ? 36 : 20, animKeyboard) }]} pointerEvents="box-none">
             <TouchableOpacity style={styles.viewersBtn} onPress={openViewersList} activeOpacity={0.8}>
               <IconSymbol name="eye" size={16} color="#fff" />
               <Text style={styles.viewersBtnText}>
-                {t('story.viewers', { defaultValue: 'İzleyenleri Gör' })}
+                {story.view_count != null && story.view_count > 0
+                  ? `${story.view_count} Görüntülenme`
+                  : t('story.viewers', { defaultValue: 'İzleyenleri Gör' })}
               </Text>
             </TouchableOpacity>
           </Animated.View>
@@ -691,6 +841,87 @@ export function StoryViewerModal({
           </TouchableOpacity>
         </TouchableOpacity>
       </Modal>
+
+      {/* ── Kendi Hikayem — 3-Nokta Menü ── */}
+      <Modal
+        visible={showOwnMenu}
+        transparent
+        animationType="fade"
+        onRequestClose={closeOwnMenu}
+      >
+        <TouchableOpacity style={styles.menuOverlay} activeOpacity={1} onPress={closeOwnMenu}>
+          <View style={styles.menuContent}>
+            <TouchableOpacity style={styles.menuItem} onPress={handleDeleteStory}>
+              <IconSymbol name="trash" size={20} color="#ef4444" />
+              <Text style={[styles.menuItemText, { color: '#ef4444' }]}>Hikayeyi Sil</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.menuItem} onPress={closeOwnMenu}>
+              <IconSymbol name="xmark" size={20} color="#fff" />
+              <Text style={styles.menuItemText}>İptal</Text>
+            </TouchableOpacity>
+          </View>
+        </TouchableOpacity>
+      </Modal>
+
+      {/* ── Başkasının Hikayesi — 3-Nokta Menü ── */}
+      <Modal
+        visible={showOtherMenu}
+        transparent
+        animationType="fade"
+        onRequestClose={closeOtherMenu}
+      >
+        <TouchableOpacity style={styles.menuOverlay} activeOpacity={1} onPress={closeOtherMenu}>
+          <View style={styles.menuContent}>
+            <TouchableOpacity style={styles.menuItem} onPress={() => {
+              setShowOtherMenu(false);
+              setShowReportMenu(true);
+            }}>
+              <IconSymbol name="exclamationmark.triangle" size={20} color="#f59e0b" />
+              <Text style={styles.menuItemText}>Şikayet Et</Text>
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.menuItem} onPress={closeOtherMenu}>
+              <IconSymbol name="xmark" size={20} color="#fff" />
+              <Text style={styles.menuItemText}>İptal</Text>
+            </TouchableOpacity>
+          </View>
+        </TouchableOpacity>
+      </Modal>
+
+      {/* ── Şikayet Nedeni Seçimi ── */}
+      <Modal
+        visible={showReportMenu}
+        transparent
+        animationType="fade"
+        onRequestClose={() => {
+          setShowReportMenu(false);
+          isPausedRef.current = false;
+          setVideoPaused(false);
+          if (isImage) startProgress(progressValueRef.current);
+        }}
+      >
+        <TouchableOpacity style={styles.menuOverlay} activeOpacity={1} onPress={() => {
+          setShowReportMenu(false);
+          isPausedRef.current = false;
+          setVideoPaused(false);
+          if (isImage) startProgress(progressValueRef.current);
+        }}>
+          <View style={styles.menuContent}>
+            <Text style={styles.menuTitle}>Şikayet Nedeni</Text>
+            {[
+              { key: 'spam' as StoryReportReason, label: 'Spam', icon: 'envelope.badge' },
+              { key: 'inappropriate' as StoryReportReason, label: 'Uygunsuz İçerik', icon: 'eye.slash' },
+              { key: 'violence' as StoryReportReason, label: 'Şiddet', icon: 'exclamationmark.shield' },
+              { key: 'harassment' as StoryReportReason, label: 'Taciz', icon: 'person.crop.circle.badge.exclamationmark' },
+              { key: 'other' as StoryReportReason, label: 'Diğer', icon: 'questionmark.circle' },
+            ].map((r) => (
+              <TouchableOpacity key={r.key} style={styles.menuItem} onPress={() => handleReport(r.key)}>
+                <IconSymbol name={r.icon as any} size={18} color="#fff" />
+                <Text style={styles.menuItemText}>{r.label}</Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        </TouchableOpacity>
+      </Modal>
     </Modal>
   );
 }
@@ -707,7 +938,6 @@ const styles = StyleSheet.create({
   tapRight: {
     flex: 1,
   },
-  // Fix #5: Author bar artık üstte, progress bar'ın hemen altında
   authorBar: {
     position: 'absolute',
     top: TOP_INSET + 14,
@@ -721,8 +951,15 @@ const styles = StyleSheet.create({
     gap: 10,
     zIndex: 10,
   },
-  // Fix #6: Close butonu — author bar sağ kenarında
   closeBtn: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    backgroundColor: 'rgba(0,0,0,0.4)',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  moreBtn: {
     width: 36,
     height: 36,
     borderRadius: 18,
@@ -744,6 +981,11 @@ const styles = StyleSheet.create({
   timeAgo: {
     fontSize: 12,
     color: 'rgba(255,255,255,0.6)',
+  },
+  closeFriendsBadge: {
+    fontSize: 12,
+    color: '#4ade80',
+    fontWeight: '700',
   },
   placeRow: {
     flexDirection: 'row',
@@ -821,6 +1063,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#4ade80',
   },
   likeBtn: {
+    padding: 4,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  shareBtn: {
     padding: 4,
     alignItems: 'center',
     justifyContent: 'center',
@@ -976,5 +1223,39 @@ const styles = StyleSheet.create({
   viewersEmptyText: {
     color: 'rgba(255,255,255,0.6)',
     fontSize: 14,
+  },
+  // ── Menü Modal Styles ──
+  menuOverlay: {
+    flex: 1,
+    justifyContent: 'flex-end',
+    backgroundColor: 'rgba(0,0,0,0.6)',
+  },
+  menuContent: {
+    backgroundColor: '#1a1a1a',
+    borderTopLeftRadius: 16,
+    borderTopRightRadius: 16,
+    paddingHorizontal: 20,
+    paddingTop: 20,
+    paddingBottom: Platform.OS === 'ios' ? 40 : 24,
+  },
+  menuTitle: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '700',
+    marginBottom: 16,
+    textAlign: 'center',
+  },
+  menuItem: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 14,
+    paddingVertical: 14,
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: '#333',
+  },
+  menuItemText: {
+    color: '#fff',
+    fontSize: 16,
+    fontWeight: '500',
   },
 });

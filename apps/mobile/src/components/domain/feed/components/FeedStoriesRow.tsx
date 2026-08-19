@@ -195,6 +195,25 @@ export function FeedStoriesRow({ filter }: FeedStoriesRowProps) {
     [stories, getGroupKey, addViewedGroupKey]
   );
 
+  const handleStoryDeleted = useCallback((storyId: number) => {
+    // Listeden sil
+    const updated = viewerStoriesRef.current.filter((s) => s.id !== storyId);
+    viewerStoriesRef.current = updated;
+    if (updated.length === 0) {
+      setStoryViewerIndex(null);
+      setStoryVisible(false);
+    }
+    // Hikayeleri yeniden yükle
+    loadStories();
+  }, [loadStories]);
+
+  const handleViewerClose = useCallback(() => {
+    setStoryViewerIndex(null);
+    setStoryVisible(true); // reset for next open
+  }, []);
+
+  // ...
+
   if (loading && stories.length === 0) {
     return (
       <View style={[styles.wrap, styles.loadingWrap]}>
@@ -267,14 +286,12 @@ export function FeedStoriesRow({ filter }: FeedStoriesRowProps) {
           stories={viewerStoriesRef.current}
           initialIndex={storyViewerIndex}
           visible={storyVisible}
-          onClose={() => {
-            setStoryViewerIndex(null);
-            setStoryVisible(false);
-          }}
+          onClose={handleViewerClose}
           onStoryViewed={handleStoryViewed}
           onAuthorNavigate={handleStoryNavigateRequest}
           onPlaceNavigate={handleStoryNavigateRequest}
           currentUserId={currentUser?.id}
+          onStoryDeleted={handleStoryDeleted}
         />
       )}
     </>
