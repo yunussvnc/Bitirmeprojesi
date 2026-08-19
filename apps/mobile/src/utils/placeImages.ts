@@ -377,6 +377,16 @@ const bistBahceIstanbul = require("../../assets/places/bist-bahce-istanbul.jpg")
 const birBakanMeyhanesi = require("../../assets/places/bir-bakan-meyhanesi.jpg") as ImageSourcePropType;
 const focaBalikKucukyali = require("../../assets/places/foca-balik-kucukyali.jpg") as ImageSourcePropType;
 const calipsoFish = require("../../assets/places/calipso-fish.jpg") as ImageSourcePropType;
+const lunchillBeylikduzu = require("../../assets/places/lunchill-beylikduzu.jpg") as ImageSourcePropType;
+const mossLoungeBahcelievler = require("../../assets/places/moss-lounge-bahcelievler.jpg") as ImageSourcePropType;
+const ashgabatRestaurantBahcelievler = require("../../assets/places/ashgabat-restaurant-bahcelievler.jpg") as ImageSourcePropType;
+const aliHaydarUstaBahcelievler = require("../../assets/places/ali-haydar-usta-bahcelievler.jpg") as ImageSourcePropType;
+const karsIgdirLokantasi = require("../../assets/places/kars-igdir-lokantasi.jpg") as ImageSourcePropType;
+const hayelaBahcelievler = require("../../assets/places/hayela-bahcelievler.jpg") as ImageSourcePropType;
+const niyoBahcelievler = require("../../assets/places/niyo-bahcelievler.jpg") as ImageSourcePropType;
+const sostaMangalbasi = require("../../assets/places/sosta-mangalbasi.jpg") as ImageSourcePropType;
+const gurmeMardin = require("../../assets/places/gurme-mardin.jpg") as ImageSourcePropType;
+const gurmeBafraPidesi = require("../../assets/places/gurme-bafra-pidesi.jpg") as ImageSourcePropType;
 
 const CATEGORY_PLACEHOLDERS: Record<string, string> = {
   kafe: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800",
@@ -767,6 +777,16 @@ const PLACE_IMAGE_OVERRIDES: Record<string, ImageSourcePropType> = {
   "2287": calipsoFish,
   "2288": focaBalikKucukyali,
   "2289": birBakanMeyhanesi,
+  "2304": lunchillBeylikduzu,
+  "2306": mossLoungeBahcelievler,
+  "2307": ashgabatRestaurantBahcelievler,
+  "2308": aliHaydarUstaBahcelievler,
+  "2309": karsIgdirLokantasi,
+  "2312": hayelaBahcelievler,
+  "2314": niyoBahcelievler,
+  "2315": sostaMangalbasi,
+  "2316": gurmeMardin,
+  "2317": gurmeBafraPidesi,
 };
 
 type PlaceLike = Place | { id?: string | number; name?: string; photo_url?: string; category?: string };

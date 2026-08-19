@@ -374,6 +374,16 @@ import bistBahceIstanbul from '../assets/venues/bist-bahce-istanbul.jpg'
 import birBakanMeyhanesi from '../assets/venues/bir-bakan-meyhanesi.jpg'
 import focaBalikKucukyali from '../assets/venues/foca-balik-kucukyali.jpg'
 import calipsoFish from '../assets/venues/calipso-fish.jpg'
+import lunchillBeylikduzu from '../assets/venues/lunchill-beylikduzu.jpg'
+import mossLoungeBahcelievler from '../assets/venues/moss-lounge-bahcelievler.jpg'
+import ashgabatRestaurantBahcelievler from '../assets/venues/ashgabat-restaurant-bahcelievler.jpg'
+import aliHaydarUstaBahcelievler from '../assets/venues/ali-haydar-usta-bahcelievler.jpg'
+import karsIgdirLokantasi from '../assets/venues/kars-igdir-lokantasi.jpg'
+import hayelaBahcelievler from '../assets/venues/hayela-bahcelievler.jpg'
+import niyoBahcelievler from '../assets/venues/niyo-bahcelievler.jpg'
+import sostaMangalbasi from '../assets/venues/sosta-mangalbasi.jpg'
+import gurmeMardin from '../assets/venues/gurme-mardin.jpg'
+import gurmeBafraPidesi from '../assets/venues/gurme-bafra-pidesi.jpg'
 
 export interface Venue {
   id: string
@@ -800,6 +810,16 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '2287': calipsoFish,
   '2288': focaBalikKucukyali,
   '2289': birBakanMeyhanesi,
+  '2304': lunchillBeylikduzu,
+  '2306': mossLoungeBahcelievler,
+  '2307': ashgabatRestaurantBahcelievler,
+  '2308': aliHaydarUstaBahcelievler,
+  '2309': karsIgdirLokantasi,
+  '2312': hayelaBahcelievler,
+  '2314': niyoBahcelievler,
+  '2315': sostaMangalbasi,
+  '2316': gurmeMardin,
+  '2317': gurmeBafraPidesi,
 }
 
 export function getFallbackVenueImage(category: string): string {
