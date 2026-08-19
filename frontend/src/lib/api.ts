@@ -346,6 +346,7 @@ import edinburghPub from '../assets/venues/edinburgh-pub.jpg'
 import cornerIrishPub from '../assets/venues/corner-irish-pub.jpg'
 import celticIrishPub from '../assets/venues/celtic-irish-pub.jpg'
 import jamesJoyceIrishPub from '../assets/venues/james-joyce-irish-pub.jpg'
+import dabPubPera from '../assets/venues/dab-pub-pera.jpg'
 
 export interface Venue {
   id: string
@@ -744,6 +745,7 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '1433': cornerIrishPub,
   '1434': celticIrishPub,
   '1437': jamesJoyceIrishPub,
+  '1440': dabPubPera,
 }
 
 export function getFallbackVenueImage(category: string): string {
