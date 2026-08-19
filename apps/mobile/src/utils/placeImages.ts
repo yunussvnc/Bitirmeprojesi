@@ -261,6 +261,15 @@ const yediSekizHasanpasaFirini = require("../../assets/places/yedi-sekiz-hasanpa
 const biDostCoffeeChocolate = require("../../assets/places/bi-dost-coffee-chocolate.jpg") as ImageSourcePropType;
 const seasonArtisanBakery = require("../../assets/places/season-artisan-bakery.jpg") as ImageSourcePropType;
 const supperBakery = require("../../assets/places/supper-bakery.jpg") as ImageSourcePropType;
+const latteConceptCafe = require("../../assets/places/latte-concept-cafe.jpg") as ImageSourcePropType;
+const worldHouseCoffee = require("../../assets/places/world-house-coffee.jpg") as ImageSourcePropType;
+const artsCoffeeKarakoy = require("../../assets/places/arts-coffee-karakoy.jpg") as ImageSourcePropType;
+const vaaCoffeeGalata = require("../../assets/places/vaa-coffee-galata.jpg") as ImageSourcePropType;
+const bravoCoffeeRoastery = require("../../assets/places/bravo-coffee-roastery.jpg") as ImageSourcePropType;
+const cafeDaGiovanni = require("../../assets/places/cafe-da-giovanni.jpg") as ImageSourcePropType;
+const gramajCoffee = require("../../assets/places/gramaj-coffee.jpg") as ImageSourcePropType;
+const xyzCihangir = require("../../assets/places/xyz-cihangir.jpg") as ImageSourcePropType;
+const mundoNovoCoffeePatisserie = require("../../assets/places/mundo-novo-coffee-patisserie.jpg") as ImageSourcePropType;
 
 const CATEGORY_PLACEHOLDERS: Record<string, string> = {
   kafe: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800",
@@ -535,6 +544,15 @@ const PLACE_IMAGE_OVERRIDES: Record<string, ImageSourcePropType> = {
   "1258": biDostCoffeeChocolate,
   "1260": seasonArtisanBakery,
   "1261": supperBakery,
+  "1270": latteConceptCafe,
+  "1271": worldHouseCoffee,
+  "1272": artsCoffeeKarakoy,
+  "1273": vaaCoffeeGalata,
+  "1274": bravoCoffeeRoastery,
+  "1275": cafeDaGiovanni,
+  "1278": gramajCoffee,
+  "1280": xyzCihangir,
+  "1287": mundoNovoCoffeePatisserie,
 };
 
 type PlaceLike = Place | { id?: string | number; name?: string; photo_url?: string; category?: string };

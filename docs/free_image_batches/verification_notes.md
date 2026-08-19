@@ -834,3 +834,38 @@ Bi Dost Coffee&Chocolate-Donuts, canlı ID 1258, Muradiye Nüzhetiye Cd. 3/A. Ya
 Supper Bakery, canlı ID 1261, Muradiye Nüzhetiye Cd. No:1. Apple Maps/Corner adresi No:1’i doğruluyor; “SUPPER coffee • bakery” dış cephe tabelası net, güçlü eşleşme.
 Cookie Me | Akaretler, canlı ID 1262, Sinanpaşa Şair Nedim Cd. No:18. Resmî kaynaklarda yalnızca logo ve ürün fotoğrafları bulundu; Akaretler dış cephe/No:18 görseli bulunamadığı için kullanılmayacak.
 Govinda Istanbul, canlı ID 1239, Büyükdere Cd. Naci Kasım Sk. No:6B. Govinda’nın resmî iletişim/menü sayfaları ve Goranga Yoga iletişim kaydı No:6B, Goranga Yoga içerisini birebir doğruluyor; “govinda vedik hint mutfağı” + “goranga yoga” tabelalı görsel kabul edildi.
+Sweet Steps Cake, canlı ID 1263, Mecidiye Büyük Kuyu Sk. No:23B. Bu aramada hedef işletme adı ve adresle doğrulanabilir görsel bulunamadı; kullanılmayacak.
+Moda da Nata, canlı ID 1264, Yıldız Çırağan Cd. No:27/1. Yandex adayı 27A başlıklı olsa da incelenen görüntüde Moda da Nata tabelası görünmüyor; cephede BAU/üniversite yazıları ve yan taraf şantiye var, yanlış/uygunsuz görsel olduğu için kullanılmayacak.
+Ophelia Patisserie Beşiktaş, canlı ID 1265, Türkali Ihlamurdere Cd. Arama kaydı 123C başlıklı olsa da incelenen dış cephede Ophelia adı net okunmuyor; kesin tabela/numara eşleşmesi bulunmadığı için kullanılmayacak.
+Madame Kuki Patisserie & Cafe, canlı ID 1266, Vişnezade Aktarlar Sk. No:14/1. Resmî Madame Kuki görselinde “MADAME KUKİ PATISSERIE” tabelası net; hedef adres/şube ayrıca teyit edilecek.
+Sütory, canlı ID 1267, Türkali Ihlamurdere Cd. No:130. Bu taramada hedef işletme adı ve No:130 ile doğrulanabilir görsel bulunamadı; kullanılmayacak.
+Viyana Kahvesi Beşiktaş, canlı ID 1268, Sinanpaşa Yeni Hamam Sk. No:4. Yandex adayında “VİYANA KAHVESİ” tabelası net ancak kaynak adresi No:2; canlı No:4 ile şube/numara uyuşmazlığı nedeniyle kullanılmayacak.
+La Vie Praline, canlı ID 1269, Türkali Hattat Tahsin Sk. No:48A. Yandex adayı 50-52, Tripadvisor/diğer görsellerde mağaza tabelası net olsa da canlı No:48A ile kaynak numarası uyuşmuyor; kullanılmayacak.
+Latte Concept Cafe, canlı ID 1270, Katip Mustafa Çelebi Billurcu Sk. No:5A. Görsellerde “LATTE CONCEPT CAFE” tabelası net; hedef 5A adresi ayrıca teyit edilecek.
+World House Coffee Co., canlı ID 1271, Şahkulu Galip Dede Cd. No:85/A. Tripadvisor/World House kaynaklı görselde “World House Coffee Co.” dış cephe tabelası net; hedef adresle aynı şube ayrıca teyit edilecek.
+Art’s Coffee Karaköy, canlı ID 1272, Arap Cami Perşembe Pazarı Cd. No:23. Görselde “ART’S COFFEE” tabelası net; hedef adresle aynı şube ayrıca teyit edilecek.
+VAA Coffee Galata, canlı ID 1273, Bereketzade Büyük Hendek Cd. Görsellerde “VAA COFFEE” tabelası net; hedef Büyük Hendek Caddesi şubesi ayrıca teyit edilecek.
+Bravo Coffee Roastery, canlı ID 1274, Katip Mustafa Çelebi Meşelik Sk. No:8. Görselde “BRAVO COFFEE ROASTERY” tabelası ve giriş net; hedef No:8 adresi ayrıca teyit edilecek.
+Art’s Coffee Karaköy, canlı ID 1272, Arap Cami Perşembe Pazarı Cd. No:23. Instagram/Restoranim/Yandex kaynakları 23 veya 23/A adresini doğruluyor; ART’S COFFEE tabelalı görsel kabul edildi.
+VAA Coffee Galata, canlı ID 1273, Bereketzade Büyük Hendek Cd. Resmî Instagram/Tripadvisor kayıtları Büyük Hendek Cd. şubesini doğruluyor; VAA tabelalı görsel kabul edilebilir.
+Bravo Coffee Roastery, canlı ID 1274, Katip Mustafa Çelebi Meşelik Sk. No:8. Resmî site adresi No:8’i birebir doğruluyor; BRAVO COFFEE ROASTERY tabelalı görsel kabul edildi.
+Cafe da Giovanni, canlı ID 1275, Kuloğlu Yeni Çarşı Cd. No:11/A. Corner kaydı hedef No:11/A adresini taşıyor; dış cephede CAFE DA GIOVANNI tabelası net, güçlü eşleşme.
+HUB962 Coffee Karaköy, canlı ID 1276, Müeyyetzade Kemeraltı Cd. No:11 D:J. Resmî görselde HUB 962 tabelası net ancak Yandex kaydı 11I, canlı kayıt D:J; birim farkı nedeniyle kullanılmayacak.
+Small Turkish Coffee Breakfast, canlı ID 1277, Kocatepe Şht. Muhtar Bey Cd. No:59. Adaylar kahvaltı/ürün fotoğrafı veya isimsiz cephe; hedef işletme adı ve No:59 aynı görselde doğrulanamadı, kullanılmayacak.
+World House Coffee Co., canlı ID 1271, Şahkulu Galip Dede Cd. No:85/A. Instagram/Tripadvisor kayıtları hedef Galip Dede Cd. No:85 veya 85/A’yı doğruluyor; tabelalı görsel kabul edildi.
+Gramaj Coffee • Roastery • Food • Chill, canlı ID 1278, Kuloğlu Cihangir Turnacıbaşı Cd. No:44/A. Görselde GRAMAJ COFFEE markalı tabela net; hedef adresle aynı işletme ayrıca teyit edilecek.
+Parsa Coffee Roasters, canlı ID 1279, Kemankeş Karamustafa Paşa Hoca Tahsin Sk. No:6. Görselde PARSA COFFEE ROASTERS tabelası net ancak Yandex kaydı Gümüş Halka Sok. 6A, canlı hedef Hoca Tahsin Sk. No:6; adres/numara uyuşmazlığı nedeniyle kullanılmayacak.
+XYZ Cihangir - the Coffee Guru, canlı ID 1280, Kılıçali Paşa Anahtar Sk. No:3/A. Görsellerde XYZ CİHANGİR / the COFFEE GURU tabelası net; hedef adresle aynı şube ayrıca teyit edilecek.
+Egono Galata, canlı ID 1281, Şahkulu Şahkapısı Sk. No:2/C. Tripadvisor adayı açıkça “Port Lounge” tabelasını gösteriyor; Egono adı görünmediği için yanlış işletme olarak kullanılmayacak.
+Bond Coffee Co. Piyalepaşa, canlı ID 1282, İstiklal Piyalepaşa Blv. No:32 B-10. Yandex adayı 24G, diğer görselde farklı Bond cepheleri; canlı hedef 32 B-10 ile kesin şube eşleşmesi yok, kullanılmayacak.
+Coffee Milano Beans, canlı ID 1283, Şehit Muhtar Tarlabaşı Blv. No:100-112B. Yandex adayı Milano Beans’i No:98 olarak gösteriyor; canlı hedef numara aralığıyla uyuşmadığı için kullanılmayacak.
+Brew Lab, canlı ID 1284, Kuloğlu Yeni Çarşı Cd. No:5 D:B. Yandex adayı 5C ve görselde Brew Lab tabelası net; canlı kayıt D:B ile birim farkı bulunduğu için kullanılmayacak.
+Noir Pit Coffee Co. Pera, canlı ID 1285, Asmalı Mescit General Yazgan Sk. 109/A. Tripadvisor görselinde “NOIR PIT COFFEE CO.” tabelası ve Pera sokak cephesi net; hedef Pera şubesiyle güçlü eşleşme, adres ayrıca teyit edilecek.
+Espo Coffee Roastery, canlı ID 1286, Evliya Çelebi Kıblelizade Sk. No:14/A. Tripadvisor sonuçları Espo’yu Beşiktaş şubesi olarak gösteriyor; Beyoğlu hedefiyle uyuşmadığı için kullanılmayacak.
+Mundo Novo Coffee & Patisserie, canlı ID 1287, Müeyyedzade Şahkulu Serdar-ı Ekrem Cd. No:1. Trip.com/GlutoApp/Atly kaynakları No:1 adresini doğruluyor; MUNDO NOVO tabelalı dış cephe görseli kabul edildi.
+Gramaj Coffee • Roastery • Food • Chill, canlı ID 1278, Kuloğlu Cihangir Turnacıbaşı Cd. No:44/A. Resmî Gramaj FAQ, Corner ve Tripadvisor kaynakları No:44/A adresini doğruluyor; GRAMAJ tabelalı görsel kabul edildi.
+XYZ Cihangir - the Coffee Guru, canlı ID 1280, Kılıçali Paşa Anahtar Sk. No:3/A. Corner kaydı No:3/A, Tripadvisor Anahtar Sokak 3 adresini doğruluyor; XYZ tabelalı görsel kabul edildi.
+Noir Pit Coffee Co. Pera, canlı ID 1285, Asmalı Mescit General Yazgan Sk. 109/A. Apple Maps kaydı Mesrutiyet Cd. 109A, görsel Pera şubesini doğrulasa da canlı kaydın sokak bilgisiyle birebir uyuşmuyor; yanlış bina riskinden dolayı kullanılmayacak.
+Latte Concept Cafe, canlı ID 1270, Katip Mustafa Çelebi Billurcu Sk. No:5A. Seçilen görselde “LATTE CONCEPT CAFE” tabelası ve giriş net; işletme kimliği kesin, adres kaydı ayrıca mevcut hedefle eşleşiyor.
+VAA Coffee Galata, canlı ID 1273, Bereketzade Büyük Hendek Cd. Seçilen görselde “VAA COFFEE” dış cephe tabelası net; Tripadvisor ve Instagram aynı Galata/Büyük Hendek şubesini doğruluyor.
+XYZ Cihangir - the Coffee Guru, canlı ID 1280, Kılıçali Paşa Anahtar Sk. No:3/A. Seçilen görselde “XYZ CİHANGİR / the COFFEE GURU” tabelası net; Corner adresi No:3/A ile aynı şube doğrulanıyor.

@@ -258,6 +258,15 @@ import yediSekizHasanpasaFirini from '../assets/venues/yedi-sekiz-hasanpasa-firi
 import biDostCoffeeChocolate from '../assets/venues/bi-dost-coffee-chocolate.jpg'
 import seasonArtisanBakery from '../assets/venues/season-artisan-bakery.jpg'
 import supperBakery from '../assets/venues/supper-bakery.jpg'
+import latteConceptCafe from '../assets/venues/latte-concept-cafe.jpg'
+import worldHouseCoffee from '../assets/venues/world-house-coffee.jpg'
+import artsCoffeeKarakoy from '../assets/venues/arts-coffee-karakoy.jpg'
+import vaaCoffeeGalata from '../assets/venues/vaa-coffee-galata.jpg'
+import bravoCoffeeRoastery from '../assets/venues/bravo-coffee-roastery.jpg'
+import cafeDaGiovanni from '../assets/venues/cafe-da-giovanni.jpg'
+import gramajCoffee from '../assets/venues/gramaj-coffee.jpg'
+import xyzCihangir from '../assets/venues/xyz-cihangir.jpg'
+import mundoNovoCoffeePatisserie from '../assets/venues/mundo-novo-coffee-patisserie.jpg'
 
 export interface Venue {
   id: string
@@ -568,6 +577,15 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '1258': biDostCoffeeChocolate,
   '1260': seasonArtisanBakery,
   '1261': supperBakery,
+  '1270': latteConceptCafe,
+  '1271': worldHouseCoffee,
+  '1272': artsCoffeeKarakoy,
+  '1273': vaaCoffeeGalata,
+  '1274': bravoCoffeeRoastery,
+  '1275': cafeDaGiovanni,
+  '1278': gramajCoffee,
+  '1280': xyzCihangir,
+  '1287': mundoNovoCoffeePatisserie,
 }
 
 export function getFallbackVenueImage(category: string): string {
