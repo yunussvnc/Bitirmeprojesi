@@ -69,6 +69,7 @@ _SCHEMA_PATCHES = [
     # stories privacy and location data
     ("stories", "privacy_type", "VARCHAR(50) NOT NULL DEFAULT 'public'", "VARCHAR(50) NOT NULL DEFAULT 'public'"),
     ("stories", "location_data", "TEXT", "TEXT"),
+    ("interview_questions", "evaluation_count", "INTEGER NOT NULL DEFAULT 0", "INTEGER NOT NULL DEFAULT 0"),
 ]
 
 

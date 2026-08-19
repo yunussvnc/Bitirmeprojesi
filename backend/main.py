@@ -21,7 +21,7 @@ from app.middleware.error_handler import ErrorHandlerMiddleware
 from app.middleware.logging import RequestLoggingMiddleware
 from app.middleware.rate_limiter import RateLimiterMiddleware
 
-from app.routers import auth, users, places, reviews, feed, stories, notifications, upload, recommend, messages, saved, community, admin
+from app.routers import auth, users, places, reviews, feed, stories, notifications, upload, recommend, messages, saved, community, admin, interview_coach
 
 # ---------------------------------------------------------------------------
 # Logging konfigürasyonu
@@ -174,6 +174,7 @@ app.include_router(messages.router, prefix=API_V1_PREFIX)
 app.include_router(saved.router, prefix=API_V1_PREFIX)
 app.include_router(community.router, prefix=API_V1_PREFIX)
 app.include_router(admin.router, prefix=API_V1_PREFIX)
+app.include_router(interview_coach.router, prefix=API_V1_PREFIX)
 
 
 # ---------------------------------------------------------------------------
@@ -314,4 +315,3 @@ async def api_version_aware_404_handler(request: Request, exc: StarletteHTTPExce
             },
         )
     return await http_exception_handler(request, exc)
-

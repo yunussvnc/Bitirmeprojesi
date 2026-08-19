@@ -369,6 +369,7 @@ RATE_LIMIT_RULES = [
     ("/api/v1/auth/refresh", 15, 60),            # 15 req/dk
     ("/api/v1/upload/", 10, 60),                 # 10 req/dk
     ("/api/v1/recommend", 10, 60),               # 10 req/dk
+    ("/api/v1/interview-coach/", 15, 60),         # Belge/LLM işlemleri: 15 req/dk/IP
 ]
 
 if os.getenv("TESTING") == "1":
@@ -383,6 +384,7 @@ if os.getenv("TESTING") == "1":
         ("/api/v1/auth/refresh", 15, 60),
         ("/api/v1/upload/", 10, 60),
         ("/api/v1/recommend", 10, 60),
+        ("/api/v1/interview-coach/", 50, 60),
     ]
 
 # Genel limit
