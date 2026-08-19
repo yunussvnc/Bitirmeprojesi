@@ -461,6 +461,14 @@ const tropicanoMangalAvcilar = require("../../assets/places/tropicano-mangal-avc
 const kutmanMangalbasiAvcilar = require("../../assets/places/kutman-mangalbasi-avcilar.jpg") as ImageSourcePropType;
 const bigetAvcilar = require("../../assets/places/biget-avcilar.jpg") as ImageSourcePropType;
 const evitaMangalbasiAvcilar = require("../../assets/places/evita-mangalbasi-avcilar.jpg") as ImageSourcePropType;
+const orkundanMazronaAvcilar = require("../../assets/places/orkundan-mazrona-avcilar.jpg") as ImageSourcePropType;
+const fulaneRestaurantFatih = require("../../assets/places/fulane-restaurant-fatih.jpg") as ImageSourcePropType;
+const byChefRestaurantFatih = require("../../assets/places/by-chef-restaurant-fatih.jpg") as ImageSourcePropType;
+const antakyaRestaurantFatih = require("../../assets/places/antakya-restaurant-fatih.jpg") as ImageSourcePropType;
+const gardenMezzeFatih = require("../../assets/places/garden-mezze-fatih.jpg") as ImageSourcePropType;
+const restoLordomBomonti = require("../../assets/places/resto-lordom-bomonti.jpg") as ImageSourcePropType;
+const restohanKebapBomonti = require("../../assets/places/restohan-kebap-bomonti.jpg") as ImageSourcePropType;
+const mahirLokantasiSisli = require("../../assets/places/mahir-lokantasi-sisli.jpg") as ImageSourcePropType;
 
 const CATEGORY_PLACEHOLDERS: Record<string, string> = {
   kafe: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800",
@@ -935,6 +943,14 @@ const PLACE_IMAGE_OVERRIDES: Record<string, ImageSourcePropType> = {
   "2450": kutmanMangalbasiAvcilar,
   "2451": bigetAvcilar,
   "2452": evitaMangalbasiAvcilar,
+  "2455": orkundanMazronaAvcilar,
+  "2458": fulaneRestaurantFatih,
+  "2461": byChefRestaurantFatih,
+  "2464": antakyaRestaurantFatih,
+  "2469": gardenMezzeFatih,
+  "2470": restoLordomBomonti,
+  "2471": restohanKebapBomonti,
+  "2476": mahirLokantasiSisli,
 };
 
 type PlaceLike = Place | { id?: string | number; name?: string; photo_url?: string; category?: string };

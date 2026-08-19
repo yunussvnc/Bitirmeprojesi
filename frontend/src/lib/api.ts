@@ -458,6 +458,14 @@ import tropicanoMangalAvcilar from '../assets/venues/tropicano-mangal-avcilar.jp
 import kutmanMangalbasiAvcilar from '../assets/venues/kutman-mangalbasi-avcilar.jpg'
 import bigetAvcilar from '../assets/venues/biget-avcilar.jpg'
 import evitaMangalbasiAvcilar from '../assets/venues/evita-mangalbasi-avcilar.jpg'
+import orkundanMazronaAvcilar from '../assets/venues/orkundan-mazrona-avcilar.jpg'
+import fulaneRestaurantFatih from '../assets/venues/fulane-restaurant-fatih.jpg'
+import byChefRestaurantFatih from '../assets/venues/by-chef-restaurant-fatih.jpg'
+import antakyaRestaurantFatih from '../assets/venues/antakya-restaurant-fatih.jpg'
+import gardenMezzeFatih from '../assets/venues/garden-mezze-fatih.jpg'
+import restoLordomBomonti from '../assets/venues/resto-lordom-bomonti.jpg'
+import restohanKebapBomonti from '../assets/venues/restohan-kebap-bomonti.jpg'
+import mahirLokantasiSisli from '../assets/venues/mahir-lokantasi-sisli.jpg'
 
 export interface Venue {
   id: string
@@ -968,6 +976,14 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '2450': kutmanMangalbasiAvcilar,
   '2451': bigetAvcilar,
   '2452': evitaMangalbasiAvcilar,
+  '2455': orkundanMazronaAvcilar,
+  '2458': fulaneRestaurantFatih,
+  '2461': byChefRestaurantFatih,
+  '2464': antakyaRestaurantFatih,
+  '2469': gardenMezzeFatih,
+  '2470': restoLordomBomonti,
+  '2471': restohanKebapBomonti,
+  '2476': mahirLokantasiSisli,
 }
 
 export function getFallbackVenueImage(category: string): string {
