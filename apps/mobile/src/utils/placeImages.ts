@@ -210,6 +210,8 @@ const missionStreetFood = require("../../assets/places/mission-street-food.jpg")
 const theTempestSocialHouse = require("../../assets/places/the-tempest-social-house.jpg") as ImageSourcePropType;
 const kilitBarBesiktas = require("../../assets/places/kilit-bar-besiktas.jpg") as ImageSourcePropType;
 const jokerNo19Besiktas = require("../../assets/places/joker-no19-besiktas.jpg") as ImageSourcePropType;
+const missisipiPubBesiktas = require("../../assets/places/missisipi-pub-besiktas.jpg") as ImageSourcePropType;
+const citirPubBesiktas = require("../../assets/places/citir-pub-besiktas.jpg") as ImageSourcePropType;
 
 const CATEGORY_PLACEHOLDERS: Record<string, string> = {
   kafe: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800",
@@ -433,6 +435,8 @@ const PLACE_IMAGE_OVERRIDES: Record<string, ImageSourcePropType> = {
   "1114": theTempestSocialHouse,
   "1117": kilitBarBesiktas,
   "1129": jokerNo19Besiktas,
+  "1132": missisipiPubBesiktas,
+  "1133": citirPubBesiktas,
 };
 
 type PlaceLike = Place | { id?: string | number; name?: string; photo_url?: string; category?: string };

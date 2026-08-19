@@ -681,3 +681,7 @@ Olea & Bar, canlı ID 1127, Kuruçeşme Muallim Naci Cd. No:62. Bu taramada hede
 Joker No.19, canlı ID 1129, Sinanpaşa Beşiktaş Cd. No:19. Yandex başlığı hedef adresi taşıyor; görselde JOKER No:19 tabelası, giriş ve çevre işletmeleri net, güçlü eşleşme.
 Dirty Hands, canlı ID 1128, Akat Zeytinoğlu Cd. No:7. Tripadvisor görseli dış oturma alanı gösteriyor fakat Dirty Hands tabelası veya kapı numarası görünmüyor; kullanılmayacak.
 Bar 212, canlı ID 1130, Renaissance İstanbul Bosphorus Hotel, Barbaros Blv. No:145. Arama sonuçları otel veya isimsiz bar iç mekânı; Bar 212 adı ve hedef otel adresi aynı görselde doğrulanmadı, kullanılmayacak.
+MissisiPi Pub, canlı ID 1132, Cihannüma Barbaros Blv. 55A. Yandex başlığı hedef Barbaros Boulevard 55A adresini taşıyor; görselde MissisiPi Pub tabelası, giriş ve dış cephe net, güçlü eşleşme.
+Çıtır pub, canlı ID 1133, Sinanpaşa Hasfırın Cd. No:2. Yelp/Restoranim adaylarında ÇITIR cafe & pub tabelası, dış cephe ve No:2 bağlamı net; hedef işletme ve adresle güçlü eşleşme.
+The United Pub, canlı ID 1134, Şht. Asım Cd. No:26. Yandex sonucu açıkça “Permanently closed” bildiriyor; kullanıcı kuralı gereği görsel eklenmeyecek.
+Beer Plus, canlı ID 1135, Şht. Asım Cd. No:27 D:B. Bu taramada hedef isim/adresle doğrulanabilir görsel bulunamadı; kullanılmayacak.
