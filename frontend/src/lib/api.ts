@@ -313,6 +313,18 @@ import hrItalyKarakoy from '../assets/venues/hr-italy-karakoy.jpg'
 import pizzeriaPera from '../assets/venues/pizzeria-pera.jpg'
 import wamasBeyoglu from '../assets/venues/wamas-beyoglu.jpg'
 import kumikoSushiMore from '../assets/venues/kumiko-sushi-more.jpg'
+import rokaIstanbul from '../assets/venues/roka-istanbul.jpg'
+import shanghaiRestaurant from '../assets/venues/shanghai-restaurant.jpg'
+import toganooTeaHouse from '../assets/venues/toganoo-tea-house.jpg'
+import chineseSushiExpress from '../assets/venues/chinese-sushi-express.jpg'
+import asakaSushiChinese from '../assets/venues/asaka-sushi-chinese.jpg'
+import gyutoSushiChinese from '../assets/venues/gyuto-sushi-chinese.jpg'
+import astralFishHouse from '../assets/venues/astral-fish-house.jpg'
+import askorozBalikci from '../assets/venues/askoroz-balikci.jpg'
+import popinaRestaurant from '../assets/venues/popina-restaurant.jpg'
+import sarmarineKarakoy from '../assets/venues/sarmarine-karakoy.jpg'
+import baracudaKarakoyTerrace from '../assets/venues/baracuda-karakoy-terrace.jpg'
+import galataSunset from '../assets/venues/galata-sunset.jpg'
 
 export interface Venue {
   id: string
@@ -678,6 +690,18 @@ const PLACE_IMAGE_OVERRIDES: Record<string, string> = {
   '1360': pizzeriaPera,
   '1361': wamasBeyoglu,
   '1363': kumikoSushiMore,
+  '1368': rokaIstanbul,
+  '1370': shanghaiRestaurant,
+  '1371': toganooTeaHouse,
+  '1375': chineseSushiExpress,
+  '1376': asakaSushiChinese,
+  '1377': gyutoSushiChinese,
+  '1379': astralFishHouse,
+  '1380': askorozBalikci,
+  '1381': popinaRestaurant,
+  '1382': sarmarineKarakoy,
+  '1384': baracudaKarakoyTerrace,
+  '1386': galataSunset,
 }
 
 export function getFallbackVenueImage(category: string): string {

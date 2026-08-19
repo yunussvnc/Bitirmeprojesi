@@ -316,6 +316,18 @@ const hrItalyKarakoy = require("../../assets/places/hr-italy-karakoy.jpg") as Im
 const pizzeriaPera = require("../../assets/places/pizzeria-pera.jpg") as ImageSourcePropType;
 const wamasBeyoglu = require("../../assets/places/wamas-beyoglu.jpg") as ImageSourcePropType;
 const kumikoSushiMore = require("../../assets/places/kumiko-sushi-more.jpg") as ImageSourcePropType;
+const rokaIstanbul = require("../../assets/places/roka-istanbul.jpg") as ImageSourcePropType;
+const shanghaiRestaurant = require("../../assets/places/shanghai-restaurant.jpg") as ImageSourcePropType;
+const toganooTeaHouse = require("../../assets/places/toganoo-tea-house.jpg") as ImageSourcePropType;
+const chineseSushiExpress = require("../../assets/places/chinese-sushi-express.jpg") as ImageSourcePropType;
+const asakaSushiChinese = require("../../assets/places/asaka-sushi-chinese.jpg") as ImageSourcePropType;
+const gyutoSushiChinese = require("../../assets/places/gyuto-sushi-chinese.jpg") as ImageSourcePropType;
+const astralFishHouse = require("../../assets/places/astral-fish-house.jpg") as ImageSourcePropType;
+const askorozBalikci = require("../../assets/places/askoroz-balikci.jpg") as ImageSourcePropType;
+const popinaRestaurant = require("../../assets/places/popina-restaurant.jpg") as ImageSourcePropType;
+const sarmarineKarakoy = require("../../assets/places/sarmarine-karakoy.jpg") as ImageSourcePropType;
+const baracudaKarakoyTerrace = require("../../assets/places/baracuda-karakoy-terrace.jpg") as ImageSourcePropType;
+const galataSunset = require("../../assets/places/galata-sunset.jpg") as ImageSourcePropType;
 
 const CATEGORY_PLACEHOLDERS: Record<string, string> = {
   kafe: "https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?w=800",
@@ -645,6 +657,18 @@ const PLACE_IMAGE_OVERRIDES: Record<string, ImageSourcePropType> = {
   "1360": pizzeriaPera,
   "1361": wamasBeyoglu,
   "1363": kumikoSushiMore,
+  "1368": rokaIstanbul,
+  "1370": shanghaiRestaurant,
+  "1371": toganooTeaHouse,
+  "1375": chineseSushiExpress,
+  "1376": asakaSushiChinese,
+  "1377": gyutoSushiChinese,
+  "1379": astralFishHouse,
+  "1380": askorozBalikci,
+  "1381": popinaRestaurant,
+  "1382": sarmarineKarakoy,
+  "1384": baracudaKarakoyTerrace,
+  "1386": galataSunset,
 };
 
 type PlaceLike = Place | { id?: string | number; name?: string; photo_url?: string; category?: string };
