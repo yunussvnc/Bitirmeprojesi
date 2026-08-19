@@ -718,3 +718,7 @@ Batch 019 başlangıcı.
 Most Hookah, canlı ID 1161, Ortaköy Muallim Naci Cd. No:41/4. Resmî site https://mosthooqah.com/ adresi No:41/4’ü veriyor; Yandex görsel başlığı No:41A olarak aynı şube kümesini destekliyor. Görselde MOST ve Most Hookah tabelası, Ortaköy terası net; güçlü eşleşme.
 Conrad Panoramic Terrace, canlı ID 1162, Yıldız Barbaros Blv. Conrad Tripadvisor görselinde gerçek Conrad terası/manzarası bulunuyor ancak işletme adı/kapı numarası görselde yok; kullanıcı doğrulama kuralı gereği kullanılmayacak.
 Beşiktaş İskele, canlı ID 1163, Yıldız. Arama sonuçları genel sahil/şehir veya sanat görseli; iskele adı ve hedef alan aynı görselde doğrulanmadı, kullanılmayacak.
+Tarihi Su Kuyusu, canlı ID 1164, Sinanpaşa. Arama sonuçlarındaki “Tarihi Su Kuyusu” görselleri restoran iç mekânlarına ait; tarihî kuyu/alanla eşleşmiyor, kullanılmayacak.
+Beşiktaşlı Şeyh Yahya Efendi Hazretleri, canlı ID 1165, Yıldız Mah. Çırağan Cd. Yahya Efendi Sk. No:6. Bu taramada dergâh/türbe kimliği ve hedef adresle doğrulanabilir görsel bulunamadı; kullanılmayacak.
+Dolmabahçe Sarayı, canlı ID 1166, Vişnezade Dolmabahçe Cd. Millî Saraylar resmî sayfası https://www.millisaraylar.gov.tr/Lokasyon/3/Dolmabahce-Sarayi adresi doğruluyor; Yandex başlığı No:2 olarak aynı saray girişini veriyor. Görselde Dolmabahçe’nin ayırt edici kapısı ve bahçesi net, güçlü eşleşme.
+Beşiktaş Su Haznesi, canlı ID 1167, Yıldız Yalı Sk. No:1. Bu taramada hedef tarihî su haznesiyle doğrulanabilir görsel bulunamadı; kullanılmayacak.
