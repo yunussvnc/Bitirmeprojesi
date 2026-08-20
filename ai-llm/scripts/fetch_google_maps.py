@@ -167,13 +167,11 @@ def normalize_place(p: dict) -> dict:
             open_time = f"{o['hour']:02d}:{o.get('minute',0):02d}"
             close_time = f"{c['hour']:02d}:{c.get('minute',0):02d}" if c else None
 
-    # Fotograf URL'i (Places API photo reference)
+    # Fotoğraf kaynak adı saklanır; API anahtarı veri dosyasına yazılmaz.
     photos = p.get("photos", [])
-    photo_url = None
+    photo_name = ""
     if photos:
         photo_name = photos[0].get("name", "")
-        if photo_name:
-            photo_url = f"https://places.googleapis.com/v1/{photo_name}/media?maxHeightPx=800&key={settings.GOOGLE_MAPS_API_KEY}"
 
     # Kategori
     primary_type = p.get("primaryTypeDisplayName", {}).get("text", "")
@@ -200,7 +198,8 @@ def normalize_place(p: dict) -> dict:
         "puan":         float(p.get("rating", 0)),
         "yorum_sayisi": int(p.get("userRatingCount", 0)),
         "price_level":  PRICE_MAP.get(p.get("priceLevel", ""), 2),
-        "foto":         photo_url,
+        "foto":         "",
+        "google_photo_name": photo_name,
         "website":      p.get("websiteUri", ""),
         "telefon":      p.get("nationalPhoneNumber", ""),
         "google_url":   p.get("googleMapsUri", ""),

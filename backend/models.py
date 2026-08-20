@@ -46,6 +46,7 @@ class User(Base):
     preferences = relationship("UserPreferences", back_populates="user", uselist=False, cascade="all, delete-orphan")
     comment_likes = relationship("CommentLike", back_populates="user", cascade="all, delete-orphan")
     story_views = relationship("StoryView", foreign_keys="StoryView.viewer_id", back_populates="viewer", cascade="all, delete-orphan")
+    interview_plans = relationship("InterviewPlan", back_populates="user", cascade="all, delete-orphan")
 
 
 class UserPreferences(Base):
@@ -826,3 +827,51 @@ class UserPlaceInteraction(Base):
     user = relationship("User")
     place = relationship("Place")
 
+
+class InterviewPlan(Base):
+    """Kullanıcının CV ve iş ilanına özel mülakat hazırlık planı."""
+    __tablename__ = "interview_plans"
+
+    id = Column(Integer, primary_key=True, index=True)
+    user_id = Column(Integer, ForeignKey("users.id", ondelete="CASCADE"), nullable=False, index=True)
+    role_title = Column(String(150), nullable=False)
+    company_name = Column(String(150), nullable=False)
+    interview_language = Column(String(5), nullable=False, default="tr")
+    status = Column(String(30), nullable=False, default="ready", index=True)
+    analysis = Column(JSON, nullable=False, default=dict)
+    match_score = Column(Integer, nullable=False, default=0)
+    readiness_score = Column(Integer, nullable=False, default=0)
+    generation_mode = Column(String(30), nullable=False, default="rule_based")
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    updated_at = Column(DateTime(timezone=True), server_default=func.now(), onupdate=func.now())
+
+    user = relationship("User", back_populates="interview_plans")
+    questions = relationship(
+        "InterviewQuestion",
+        back_populates="plan",
+        cascade="all, delete-orphan",
+        order_by="InterviewQuestion.order_index",
+    )
+
+
+class InterviewQuestion(Base):
+    """Hazırlık planındaki kişiselleştirilmiş soru, puan ve türetilmiş geri bildirim."""
+    __tablename__ = "interview_questions"
+
+    id = Column(Integer, primary_key=True, index=True)
+    plan_id = Column(Integer, ForeignKey("interview_plans.id", ondelete="CASCADE"), nullable=False, index=True)
+    category = Column(String(50), nullable=False)
+    difficulty = Column(String(20), nullable=False, default="orta")
+    question = Column(Text, nullable=False)
+    rationale = Column(Text, nullable=False)
+    answer_framework = Column(JSON, nullable=False, default=list)
+    evaluation_criteria = Column(JSON, nullable=False, default=list)
+    order_index = Column(Integer, nullable=False, default=0)
+    feedback = Column(JSON, nullable=True)
+    score = Column(Integer, nullable=True)
+    evaluation_mode = Column(String(30), nullable=True)
+    evaluation_count = Column(Integer, nullable=False, default=0)
+    answered_at = Column(DateTime(timezone=True), nullable=True)
+    created_at = Column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+
+    plan = relationship("InterviewPlan", back_populates="questions")

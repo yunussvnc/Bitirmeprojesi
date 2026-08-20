@@ -16,6 +16,7 @@ Projenin son fazında sisteme entegre edilen modern ve performans odaklı özell
 *   **Redis Caching (Performans):** İstek yanıt sürelerini milisaniyeler düzeyine indiren Redis önbellekleme ve otomatik cache invalidation.
 *   **WebSocket Tabanlı Anlık Sohbet:** Çift yönlü veri senkronizasyonu ve mesaj teslimat güvencesi sunan birebir chat odaları.
 *   **Çok Dilli İçerik Moderasyonu:** Groq ve yerel modeller üzerinde çalışan 7 dilde akıllı içerik filtreleme altyapısı.
+*   **CV + İş İlanı Odaklı Mülakat Koçu:** PDF/DOCX/TXT CV analizi, ilana göre yetkinlik eşleştirmesi, şirkete özel soru üretimi, cevap puanlama ve kişisel 5 günlük hazırlık planı.
 *   **Modüler Mimari:** Expo mobil uygulama, Vite 3D landing page, Next.js yönetim paneli ve FastAPI backend servisleri.
 
 ---
@@ -118,9 +119,9 @@ BitirmeProjesi/
 Kök dizindeki `.env.example` dosyasını `.env` olarak kopyalayın ve gerekli API anahtarlarını doldurun.
 
 ### 2. Docker Konteynerlerini Başlatın
-PostgreSQL, Qdrant vektör veritabanı ve Redis servislerini Docker üzerinde ayağa kaldırın:
+Mülakat Koçu için gerekli PostgreSQL ve Redis servislerini Docker üzerinde ayağa kaldırın:
 ```bash
-docker compose up -d postgres qdrant redis
+docker compose up -d db redis
 ```
 
 ### 3. Backend API'yi Çalıştırın
@@ -164,3 +165,5 @@ npm run dev
 2.  **AI Servisi & RAG Yapısı:** [ai-llm/README.md](file:///d:/BitirmeProjesi/ai-llm/README.md)
 3.  **Mobil Uygulama Kurulumu:** [apps/mobile/README.md](file:///d:/BitirmeProjesi/apps/mobile/README.md)
 4.  **Web Tanıtım Sitesi:** [frontend/README.md](file:///d:/BitirmeProjesi/frontend/README.md)
+5.  **Mülakat Koçu Mimarisi ve API:** [docs/MULAKAT_KOCU.md](docs/MULAKAT_KOCU.md)
+6.  **Mülakat Koçu Windows Yerel Kurulum ve Test:** [docs/LOCAL_MULAKAT_KOCU_KURULUM.md](docs/LOCAL_MULAKAT_KOCU_KURULUM.md)

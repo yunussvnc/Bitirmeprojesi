@@ -42,26 +42,31 @@ def _http_post_json(url: str, payload: dict, headers: dict, timeout: int = 15) -
         return {}
 
 
-def ollama_generate(prompt: str) -> str:
+def ollama_generate(prompt: str, max_tokens: int = 1200, temperature: float = 0.4) -> str:
     base_url = settings.OLLAMA_BASE_URL.rstrip("/")
-    payload = {"model": settings.OLLAMA_MODEL, "prompt": prompt, "stream": False}
+    payload = {
+        "model": settings.OLLAMA_MODEL,
+        "prompt": prompt,
+        "stream": False,
+        "options": {"num_predict": max_tokens, "temperature": temperature},
+    }
     data = _http_post_json(
         f"{base_url}/api/generate",
         payload,
         {"Content-Type": "application/json"},
-        timeout=30,
+        timeout=45,
     )
     return (data.get("response") or "").strip()
 
 
-def openai_generate(prompt: str) -> str:
+def openai_generate(prompt: str, max_tokens: int = 1200, temperature: float = 0.4) -> str:
     if not settings.OPENAI_API_KEY:
         return ""
     payload = {
         "model": settings.OPENAI_MODEL,
         "messages": [{"role": "user", "content": prompt}],
-        "temperature": 0.4,
-        "max_tokens": 1200,
+        "temperature": temperature,
+        "max_tokens": max_tokens,
     }
     data = _http_post_json(
         "https://api.openai.com/v1/chat/completions",
@@ -70,7 +75,7 @@ def openai_generate(prompt: str) -> str:
             "Content-Type": "application/json",
             "Authorization": f"Bearer {settings.OPENAI_API_KEY}",
         },
-        timeout=20,
+        timeout=45,
     )
     choices = data.get("choices", [])
     if choices:
@@ -78,14 +83,14 @@ def openai_generate(prompt: str) -> str:
     return ""
 
 
-def groq_generate(prompt: str) -> str:
+def groq_generate(prompt: str, max_tokens: int = 1200, temperature: float = 0.4) -> str:
     if not settings.GROQ_API_KEY:
         return ""
     payload = {
         "model": settings.GROQ_MODEL,
         "messages": [{"role": "user", "content": prompt}],
-        "temperature": 0.4,
-        "max_tokens": 1200,
+        "temperature": temperature,
+        "max_tokens": max_tokens,
     }
     data = _http_post_json(
         "https://api.groq.com/openai/v1/chat/completions",
@@ -94,7 +99,7 @@ def groq_generate(prompt: str) -> str:
             "Content-Type": "application/json",
             "Authorization": f"Bearer {settings.GROQ_API_KEY}",
         },
-        timeout=15,
+        timeout=45,
     )
     choices = data.get("choices", [])
     if choices:
@@ -102,13 +107,15 @@ def groq_generate(prompt: str) -> str:
     return ""
 
 
-def llm_generate(prompt: str) -> str:
+def llm_generate(prompt: str, max_tokens: int = 1200, temperature: float = 0.4) -> str:
+    if not settings.LLM_ENABLED:
+        return ""
     provider = settings.LLM_PROVIDER.lower()
     if provider == "openai":
-        return openai_generate(prompt)
+        return openai_generate(prompt, max_tokens=max_tokens, temperature=temperature)
     if provider == "groq":
-        return groq_generate(prompt)
-    return ollama_generate(prompt)
+        return groq_generate(prompt, max_tokens=max_tokens, temperature=temperature)
+    return ollama_generate(prompt, max_tokens=max_tokens, temperature=temperature)
 
 
 def build_recommend_prompt(

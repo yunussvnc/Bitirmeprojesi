@@ -166,6 +166,32 @@ function HomeListHeader({
           />
         </View>
 
+        <TouchableOpacity
+          style={[
+            styles.interviewCoachCard,
+            { backgroundColor: colors.accent.primary + "10", borderColor: colors.accent.primary + "30" },
+          ]}
+          activeOpacity={0.75}
+          onPress={() => {
+            lightImpact();
+            router.push("/interview-coach" as any);
+          }}
+        >
+          <View style={[styles.interviewCoachIcon, { backgroundColor: colors.accent.primary + "1C" }]}>
+            <IconSymbol name="graduationcap.fill" size={22} color={colors.accent.primary} />
+          </View>
+          <View style={styles.interviewCoachContent}>
+            <Text style={[styles.interviewCoachTitle, { color: colors.text.primary }]}>Mülakat Koçu</Text>
+            <Text style={[styles.interviewCoachText, { color: colors.text.secondary }]} numberOfLines={2}>
+              {"CV'ni iş ilanıyla eşleştir, şirkete özel sorularla prova yap."}
+            </Text>
+          </View>
+          <View style={[styles.interviewCoachBadge, { backgroundColor: colors.accent.primary }]}>
+            <Text style={[styles.interviewCoachBadgeText, { color: colors.accent.onPrimary }]}>AI</Text>
+          </View>
+          <IconSymbol name="chevron.right" size={18} color={colors.text.tertiary} />
+        </TouchableOpacity>
+
         <View style={styles.filterSummaryRow}>
           <TouchableOpacity
             onPress={() => {
@@ -773,6 +799,28 @@ const styles = StyleSheet.create({
   },
   searchWrap: { marginBottom: s(3), minHeight: 72 },
   chatInput: { alignSelf: "stretch", minHeight: 64 },
+  interviewCoachCard: {
+    minHeight: 76,
+    borderRadius: 18,
+    borderWidth: 1,
+    paddingHorizontal: 14,
+    marginBottom: 12,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 11,
+  },
+  interviewCoachIcon: {
+    width: 44,
+    height: 44,
+    borderRadius: 14,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  interviewCoachContent: { flex: 1 },
+  interviewCoachTitle: { fontSize: 15, fontWeight: "800" },
+  interviewCoachText: { fontSize: 11.5, lineHeight: 16, marginTop: 3 },
+  interviewCoachBadge: { paddingHorizontal: 7, paddingVertical: 4, borderRadius: 8 },
+  interviewCoachBadgeText: { fontSize: 9, fontWeight: "900" },
   filterSummaryRow: {
     flexDirection: "row",
     alignItems: "center",
