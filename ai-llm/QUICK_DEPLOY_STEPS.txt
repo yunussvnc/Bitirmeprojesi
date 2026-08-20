@@ -44,9 +44,9 @@
 
    🔴 KRİTİK (mevcut .env'den kopyala):
    ────────────────────────────────────────
-   GROQ_API_KEY               ← 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
-   SERPAPI_KEY               ← 7611394bab18f12168e1aa91e034263a4ebdc2cb61fb2d28456027171c5aa887
-   GOOGLE_MAPS_API_KEY       ← AIzaSyBQY9P0Yywn15sfInnONao9SHCFcTcIR_w
+   GROQ_API_KEY               ← GROQ_API_KEY_PLACEHOLDER
+   SERPAPI_KEY               ← SERPAPI_KEY_PLACEHOLDER
+   GOOGLE_MAPS_API_KEY       ← GOOGLE_MAPS_API_KEY_PLACEHOLDER
    DATABASE_URL              ← Backend ile AYNI database URL (asemos-db'den)
 
    🟡 BACKEND İLETİŞİMİ:
