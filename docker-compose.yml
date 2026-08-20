@@ -18,6 +18,20 @@ services:
       timeout: 5s
       retries: 5
 
+  redis:
+    image: redis:7-alpine
+    container_name: asemos_redis_local
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
   # Geliştirme: PostgreSQL GUI + AI SQL (http://localhost:10824)
   # Docker içinden bağlantı: host=db, port=5432, user=postgres, pass=123, db=ai_mekan_oneri_db
   chat2db:
@@ -35,3 +49,4 @@ services:
 volumes:
   postgres_data:
   chat2db_data:
+  redis_data:

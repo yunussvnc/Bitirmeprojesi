@@ -265,6 +265,21 @@ def test_large_txt_extraction_does_not_deadlock():
     assert len(result) == 80_000
 
 
+def test_windows_document_limits_fallback_is_noop():
+    from app.services import document_extract
+
+    with patch.object(document_extract, "_resource", None):
+        document_extract._set_worker_limits()
+
+
+def test_llm_enabled_false_skips_provider_call():
+    from llm_client import llm_generate, settings
+
+    with patch.object(settings, "LLM_ENABLED", False), patch("llm_client.groq_generate") as provider:
+        assert llm_generate("test prompt") == ""
+    provider.assert_not_called()
+
+
 @patch("app.routers.interview_coach.build_interview_plan", return_value=(ANALYSIS, QUESTIONS, "rule_based"))
 def test_daily_plan_quota_stops_before_extra_generation(build_mock, client):
     user_id = create_test_user(email="quota@test.com", username="quota")

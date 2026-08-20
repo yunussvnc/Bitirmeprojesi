@@ -82,7 +82,7 @@ Prompt injection riskini azaltmak için CV, ilan ve aday cevabı yalnızca veri 
 
 ## Dosya Güvenliği
 
-CV yükleme endpointi yalnızca `.pdf`, `.docx` ve `.txt` uzantılarını kabul eder. MIME türü doğrulanır, dosya boyutu 5 MB ile sınırlandırılır ve çıkarılan metin 80.000 karakterde kesilir. PDF dosyaları en fazla 40 sayfa olabilir. DOCX arşivlerinde dosya sayısı, toplam açılmış boyut, şifreleme ve sıkıştırma oranı kontrol edilerek ZIP bombası riski sınırlandırılır. PDF/DOCX ayrıştırma ana API sürecinden ayrı bir işçi süreçte; 256 MB adres alanı, 6 saniye CPU ve 10 saniye duvar saati sınırlarıyla çalışır. Her uygulama worker'ında aynı anda en fazla iki belge ayrıştırılır; kapasite dolduğunda istek hızlı bir `503` yanıtıyla geri çevrilir. Böylece sıkıştırılmış belge akışlarının API sürecinde sınırsız bellek veya CPU tüketmesi engellenir. Metin çıkarımı başarısız veya yetersizse kullanıcıya taranmış PDF yerine metin tabanlı belge kullanması söylenir.
+CV yükleme endpointi yalnızca `.pdf`, `.docx` ve `.txt` uzantılarını kabul eder. MIME türü doğrulanır, dosya boyutu 5 MB ile sınırlandırılır ve çıkarılan metin 80.000 karakterde kesilir. PDF dosyaları en fazla 40 sayfa olabilir. DOCX arşivlerinde dosya sayısı, toplam açılmış boyut, şifreleme ve sıkıştırma oranı kontrol edilerek ZIP bombası riski sınırlandırılır. PDF/DOCX ayrıştırma ana API sürecinden ayrı bir işçi süreçte çalışır. Linux/POSIX üretim ortamında 256 MB adres alanı, 6 saniye CPU ve 10 saniye duvar saati sınırları uygulanır. Windows geliştirme ortamında POSIX `resource` sınırları bulunmadığından süreç izolasyonu, 10 saniye duvar saati, dosya/sayfa/çıktı sınırları ve eşzamanlılık kotası uygulanmaya devam eder. Her uygulama worker'ında aynı anda en fazla iki belge ayrıştırılır; kapasite dolduğunda istek hızlı bir `503` yanıtıyla geri çevrilir. Böylece sıkıştırılmış belge akışlarının API sürecinde sınırsız kaynak tüketimi sınırlandırılır. Metin çıkarımı başarısız veya yetersizse kullanıcıya taranmış PDF yerine metin tabanlı belge kullanması söylenir.
 
 AI ve belge endpointleri IP bazlı özel rate limit ile korunur. Kullanıcı başına en fazla 20 saklanan plan, günde en fazla 5 yeni plan ve soru başına en fazla 5 değerlendirme uygulanır. Plan kotası kullanıcı satırı kilidi ve önce rezervasyon, değerlendirme kotası ise koşullu atomik sayaç güncellemesiyle çoklu worker yarışlarına karşı korunur. Aynı backend sürecindeki pahalı AI çağrıları eşzamanlılık semaforuyla sınırlandırılır.
 
@@ -97,6 +97,8 @@ AI ve belge endpointleri IP bazlı özel rate limit ile korunur. Kullanıcı ba�
 Mobil ekran; önceki plan listesi, belge seçici, çok satırlı ilan/CV girişleri, analiz skoru, güçlü yön ve açık kartları, soru navigasyonu, cevap değerlendirmesi ve beş günlük zaman çizelgesini içerir. Uzun AI çağrıları için standart API timeout değerinden bağımsız 60–90 saniyelik kontrollü timeout kullanılır.
 
 ## Kurulum
+
+Windows üzerinde adım adım Docker, PowerShell, mobil uygulama ve API testi için [`LOCAL_MULAKAT_KOCU_KURULUM.md`](LOCAL_MULAKAT_KOCU_KURULUM.md) rehberini izleyin.
 
 Backend bağımlılıklarını güncelleyin:
 

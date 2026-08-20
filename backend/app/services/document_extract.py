@@ -1,8 +1,12 @@
 import io
 import multiprocessing as mp
-import resource
 import zipfile
 from typing import Any
+
+try:
+    import resource as _resource
+except ImportError:  # Windows'ta resource modülü bulunmaz; süreç/zaman sınırları yine uygulanır.
+    _resource = None
 
 MAX_EXTRACTED_TEXT = 80_000
 MAX_DOCX_UNCOMPRESSED = 20 * 1024 * 1024
@@ -18,10 +22,12 @@ class DocumentExtractionError(ValueError):
 
 
 def _set_worker_limits() -> None:
-    """Belge ayrıştırıcısını CPU ve adres alanı sınırları içinde tutar."""
-    resource.setrlimit(resource.RLIMIT_AS, (WORKER_MEMORY_BYTES, WORKER_MEMORY_BYTES))
-    resource.setrlimit(resource.RLIMIT_CPU, (WORKER_CPU_SECONDS, WORKER_CPU_SECONDS + 1))
-    resource.setrlimit(resource.RLIMIT_FSIZE, (1024 * 1024, 1024 * 1024))
+    """POSIX sistemlerde belge ayrıştırıcısını CPU ve adres alanı sınırları içinde tutar."""
+    if _resource is None:
+        return
+    _resource.setrlimit(_resource.RLIMIT_AS, (WORKER_MEMORY_BYTES, WORKER_MEMORY_BYTES))
+    _resource.setrlimit(_resource.RLIMIT_CPU, (WORKER_CPU_SECONDS, WORKER_CPU_SECONDS + 1))
+    _resource.setrlimit(_resource.RLIMIT_FSIZE, (1024 * 1024, 1024 * 1024))
 
 
 def _extract_txt(contents: bytes) -> str:

@@ -108,6 +108,8 @@ def groq_generate(prompt: str, max_tokens: int = 1200, temperature: float = 0.4)
 
 
 def llm_generate(prompt: str, max_tokens: int = 1200, temperature: float = 0.4) -> str:
+    if not settings.LLM_ENABLED:
+        return ""
     provider = settings.LLM_PROVIDER.lower()
     if provider == "openai":
         return openai_generate(prompt, max_tokens=max_tokens, temperature=temperature)
