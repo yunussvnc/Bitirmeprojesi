@@ -35,7 +35,7 @@ export type CachedPost = {
   content?: string;
   post_type?: string;
   created_at?: string;
-  media?: Array<{ media_url: string; media_type: string }>;
+  media?: { media_url: string; media_type: string }[];
   user?: { id: number; username?: string; avatar_url?: string };
 };
 

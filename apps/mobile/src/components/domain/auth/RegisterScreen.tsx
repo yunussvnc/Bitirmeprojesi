@@ -89,7 +89,7 @@ export default function RegisterScreen() {
   // venueStep: 'place-search' (1. adım) | 'account' (2. adım)
   const [venueStep, setVenueStep] = useState<'place-search' | 'account'>('place-search');
   const [placeSearchQuery, setPlaceSearchQuery] = useState('');
-  const [placeSearchResults, setPlaceSearchResults] = useState<Array<{id: number; name: string; address: string; category: string}>>([]);
+  const [placeSearchResults, setPlaceSearchResults] = useState<{id: number; name: string; address: string; category: string}[]>([]);
   const [selectedPlace, setSelectedPlace] = useState<{id: number; name: string; address: string} | null>(null);
   const [placeSearchLoading, setPlaceSearchLoading] = useState(false);
   const placeSearchTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);

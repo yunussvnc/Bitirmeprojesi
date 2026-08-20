@@ -8,6 +8,9 @@ import { useAuthStore } from '@/src/store/useAuthStore';
 import { startGeofencing, stopGeofencing } from '@/src/services/geofenceService';
 import Constants from 'expo-constants';
 
+import { getSavedPlaces } from '@/src/services/savedService';
+import { useGeofenceStore } from '@/src/store/useGeofenceStore';
+
 Notifications.setNotificationHandler({
   handleNotification: async () => ({
     shouldShowAlert: true,
@@ -15,9 +18,6 @@ Notifications.setNotificationHandler({
     shouldSetBadge: false,
   } as any),
 });
-
-import { getSavedPlaces } from '@/src/services/savedService';
-import { useGeofenceStore } from '@/src/store/useGeofenceStore';
 
 export const PushNotificationProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const user = useAuthStore(s => s.user);

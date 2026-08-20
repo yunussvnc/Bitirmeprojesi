@@ -96,7 +96,7 @@ export default function FeedScreen() {
   const visiblePosts = React.useMemo(() => posts.filter((p) => !deletedPostIds.includes(p.id)), [posts, deletedPostIds]);
 
   /** FlashList viewability callback — sadece görünen kartlardaki videolar oynatılır */
-  const onViewableItemsChanged = useRef(({ viewableItems }: { viewableItems: Array<{ item: Post }> }) => {
+  const onViewableItemsChanged = useRef(({ viewableItems }: { viewableItems: { item: Post }[] }) => {
     setViewableIds(new Set(viewableItems.map((v) => v.item.id)));
   }).current;
   const viewabilityConfig = useMemo(() => ({ itemVisiblePercentThreshold: 50 }), []);

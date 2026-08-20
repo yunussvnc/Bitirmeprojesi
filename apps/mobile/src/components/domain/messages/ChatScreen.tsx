@@ -503,7 +503,7 @@ export default function ChatScreen() {
         // İzin kontrolünü de agresif yapmaya gerek yok, 30 saniye iyidir.
         const permInterval = setInterval(loadPerm, 30000);
         return () => clearInterval(permInterval);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
+
     }, [isBackendConv, numericConvId]);
 
     // Contact bilgisini öncelik sırasıyla belirle:

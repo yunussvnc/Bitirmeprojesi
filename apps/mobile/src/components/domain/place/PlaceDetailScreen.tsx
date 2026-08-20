@@ -24,7 +24,7 @@ import {
   Animated as RNAnimated,
   Share,
   ActivityIndicator,
-} from "react-native";
+ FlatList } from "react-native";
 import { useScrollToTop } from '@react-navigation/native';
 import Animated, { FadeIn } from "react-native-reanimated";
 import { Image as ExpoImage } from 'expo-image';
@@ -48,7 +48,6 @@ import { getPlaceById, getAllPlaces, togglePlaceFollow, getPlacePosts, getPlaceS
 import { lightImpact, success, warning } from "@/src/utils/haptics";
 import { logger } from "@/src/utils/logger";
 import { apiGet, apiPost } from "@/src/utils/apiClient";
-import { FlatList } from "react-native";
 import { StoryViewerModal } from "../explore/StoryViewerModal";
 import { ReviewCard, type ReviewItemType } from "./ReviewCard";
 import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
@@ -285,10 +284,6 @@ export default function PlaceDetailScreen({
       reviewStartHeightRef.current = REVIEW_SHEET_COLLAPSED;
     }
   }, [showReviews, reviewSheetHeight]);
-
-  useEffect(() => {
-    if (!showReviews || !id) return;
-  }, [showReviews, id]); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
     if (showMenu) {

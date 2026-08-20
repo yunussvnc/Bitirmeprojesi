@@ -28,7 +28,6 @@ import Video from 'react-native-video';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
 import { Avatar } from '@/src/components/ui/Avatar';
 import { lightImpact, success } from '@/src/utils/haptics';
-import type { Story } from '@/src/services/storyService';
 import {
   replyToStory,
   reactToStory,
@@ -38,6 +37,7 @@ import {
   deleteStory,
   reportStory,
   STORY_EMOJIS,
+  type Story,
   type StoryEmoji,
   type StoryViewerItem,
   type StoryReportReason,
@@ -45,12 +45,12 @@ import {
 import { ShareStorySheet } from '@/src/components/domain/stories/ShareStorySheet';
 import { router } from 'expo-router';
 
+import { timeAgo } from '@/src/utils/timeAgo';
+import { useTranslation } from 'react-i18next';
+
 const STORY_DURATION_MS = 5000;
 const LONG_PRESS_DELAY = 200;
 const TOP_INSET = Platform.OS === 'ios' ? 54 : 40;
-
-import { timeAgo } from '@/src/utils/timeAgo';
-import { useTranslation } from 'react-i18next';
 
 export interface StoryViewerModalProps {
   stories: Story[];
