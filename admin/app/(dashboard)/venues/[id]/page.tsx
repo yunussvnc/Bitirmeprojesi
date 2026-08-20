@@ -1,11 +1,12 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useRouter, useParams } from 'next/navigation';
-import { useForm } from 'react-hook-form';
+import { useParams } from 'next/navigation';
+import { useForm, useWatch } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
 import { api } from '@/lib/api';
+import { getApiErrorMessage } from '@/lib/api-error';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription, CardFooter } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
@@ -16,7 +17,7 @@ import {
   SelectTrigger, 
   SelectValue 
 } from '@/components/ui/select';
-import { ArrowLeft, Loader2, Save, Database, Sparkles } from 'lucide-react';
+import { ArrowLeft, Loader2, Save, Database } from 'lucide-react';
 import { Skeleton } from '@/components/ui/skeleton';
 import Link from 'next/link';
 import { toast } from 'sonner';
@@ -40,7 +41,6 @@ const venueSchema = z.object({
 type VenueFields = z.infer<typeof venueSchema>;
 
 export default function EditVenuePage() {
-  const router = useRouter();
   const { id } = useParams();
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -51,7 +51,7 @@ export default function EditVenuePage() {
     register,
     handleSubmit,
     setValue,
-    watch,
+    control,
     reset,
     formState: { errors },
   } = useForm<VenueFields>({
@@ -80,8 +80,7 @@ export default function EditVenuePage() {
           phone_number: data.phone_number || '',
         });
         setHasVector(!!data.vector_id);
-      } catch (err: any) {
-        console.error(err);
+      } catch {
         toast.error('Mekan detayları yüklenemedi.');
       } finally {
         setLoading(false);
@@ -106,9 +105,9 @@ export default function EditVenuePage() {
       toast.success('Değişiklikler Kaydedildi', {
         description: 'Mekan bilgileri başarıyla güncellendi.',
       });
-    } catch (err: any) {
+    } catch (error: unknown) {
       toast.error('Mekan güncellenirken hata oluştu', {
-        description: err.response?.data?.detail || 'Lütfen girilen bilgileri kontrol edin.',
+        description: getApiErrorMessage(error, 'Lütfen girilen bilgileri kontrol edin.'),
       });
     } finally {
       setSaving(false);
@@ -118,22 +117,22 @@ export default function EditVenuePage() {
   const handleIndexSingle = async () => {
     setIndexing(true);
     try {
-      const response = await api.post(`/admin/venues/${id}/index`);
+      await api.post(`/admin/venues/${id}/index`);
       setHasVector(true);
       toast.success('Dizin Güncellendi', {
         description: 'Mekan başarıyla Qdrant semantik arama dizinine eklendi/güncellendi.',
       });
-    } catch (err: any) {
+    } catch (error: unknown) {
       toast.error('Vektörleştirme hatası', {
-        description: err.response?.data?.detail || 'AI servisi ile bağlantı kurulamadı.',
+        description: getApiErrorMessage(error, 'AI servisi ile bağlantı kurulamadı.'),
       });
     } finally {
       setIndexing(false);
     }
   };
 
-  const selectedCategory = watch('category');
-  const selectedDistrict = watch('city');
+  const selectedCategory = useWatch({ control, name: 'category' });
+  const selectedDistrict = useWatch({ control, name: 'city' });
 
   if (loading) {
     return (

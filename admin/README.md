@@ -1,16 +1,16 @@
-# AsEmOs — Yönetim Paneli (Next.js 15 Admin Dashboard)
+# AsEmOs — Yönetim Paneli (Next.js 16 Admin Dashboard)
 
-İstanbul Yapay Zeka Destekli Mekan Öneri & Sosyal Platformu'nun (AsEmOs) web tabanlı yönetim ve denetim panelidir. Next.js 15, TailwindCSS, TypeScript ve Shadcn UI kütüphaneleri kullanılarak geliştirilmiş, modern ve premium bir arayüze sahiptir.
+İstanbul Yapay Zeka Destekli Mekan Öneri & Sosyal Platformu'nun (AsEmOs) web tabanlı yönetim ve denetim panelidir. Next.js 16, TailwindCSS, TypeScript ve Shadcn UI kütüphaneleri kullanılarak geliştirilmiş, modern ve premium bir arayüze sahiptir.
 
 ---
 
 ## 🚀 Teknolojik Mimari ve Altyapı
 
-*   **Çatı (Framework):** Next.js 15 (App Router mimarisi).
+*   **Çatı (Framework):** Next.js 16 (App Router mimarisi).
 *   **Programlama Dili:** TypeScript.
 *   **Stil Kütüphanesi:** TailwindCSS & Shadcn UI (Aesthetic dark mode, modern grid yerleşimleri).
 *   **Durum Yönetimi:** Zustand & React Context.
-*   **Kimlik Doğrulama:** JWT tabanlı güvenli oturum yönetimi (Yalnızca `ADMIN` rolündeki kullanıcıların erişimine izin veren `middleware.ts` koruması).
+*   **Kimlik Doğrulama:** HttpOnly cookie ve BFF tabanlı güvenli oturum yönetimi. `proxy.ts` yalnız navigasyonu yönlendirir; token doğrulama ve rol yetkilendirmesi backend tarafından yapılır.
 
 ---
 
@@ -33,7 +33,7 @@ admin/
 │   └── layout.tsx             # Global HTML yapısı ve Root Provider'lar
 ├── components/                # Yeniden kullanılabilir arayüz bileşenleri (Modals, Charts, Tables vb.)
 ├── lib/                       # API istemcisi, yardımcı fonksiyonlar ve utils
-├── middleware.ts              # ADMIN rolü yetkilendirme katmanı (Auth guard)
+├── proxy.ts                   # Cookie varlığına dayalı navigasyon yönlendirmesi
 ├── store/                     # Zustand Admin global store'ları
 └── tsconfig.json              # TypeScript yapılandırması
 ```
@@ -92,4 +92,4 @@ NEXT_PUBLIC_API_URL=http://localhost:8000
 npm run dev
 ```
 Yönetici paneli `http://localhost:3000` adresinde çalışmaya başlayacaktır.
-Yönetici paneline giriş yapabilmek için sisteme kayıtlı ve veritabanında `role = 'ADMIN'` olarak tanımlanmış bir kullanıcı hesabı gerekmektedir.
+Panele giriş yapabilmek için backend tarafından doğrulanan `admin` veya `venue` rolüne sahip bir kullanıcı hesabı gerekmektedir.

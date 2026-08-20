@@ -1,9 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { api } from '@/lib/api';
 import { AIQueryLog } from '@/types';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { 
   Table, 
   TableBody, 
@@ -12,7 +12,6 @@ import {
   TableHeader, 
   TableRow 
 } from '@/components/ui/table';
-import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { 
@@ -24,11 +23,9 @@ import {
 } from '@/components/ui/select';
 import { Skeleton } from '@/components/ui/skeleton';
 import { 
-  Search, 
   BrainCircuit, 
   Cpu, 
   Clock, 
-  AlertOctagon,
   ChevronLeft,
   ChevronRight,
   ShieldAlert
@@ -51,11 +48,11 @@ export default function AILogsPage() {
   const [avgResponseTime, setAvgResponseTime] = useState(0);
   const [successRate, setSuccessRate] = useState(100);
 
-  const fetchLogs = async () => {
+  const fetchLogs = useCallback(async () => {
     setLoading(true);
     try {
       let endpoint = '/admin/ai/logs';
-      const params: any = {
+      const params: Record<string, string | number | boolean> = {
         page,
         limit,
       };
@@ -80,17 +77,17 @@ export default function AILogsPage() {
         const errors = response.data.items.filter((l: AIQueryLog) => l.status === 'error').length;
         setSuccessRate(Math.round(((response.data.items.length - errors) / response.data.items.length) * 100));
       }
-    } catch (err: any) {
-      console.error(err);
+    } catch {
       toast.error('AI logları yüklenirken hata oluştu.');
     } finally {
       setLoading(false);
     }
-  };
+  }, [blockedOnly, limit, page, queryTypeFilter, statusFilter]);
 
   useEffect(() => {
-    fetchLogs();
-  }, [page, queryTypeFilter, statusFilter, blockedOnly]);
+    const timer = setTimeout(() => void fetchLogs(), 0);
+    return () => clearTimeout(timer);
+  }, [fetchLogs]);
 
   const totalPages = Math.ceil(total / limit);
 

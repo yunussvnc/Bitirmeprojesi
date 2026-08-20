@@ -1,9 +1,10 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import Image from 'next/image';
 import { api } from '@/lib/api';
 import { Post, Story, Report } from '@/types';
-import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { Card, CardContent } from '@/components/ui/card';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { 
   Table, 
@@ -22,10 +23,8 @@ import {
   Trash2, 
   Eye, 
   AlertTriangle,
-  Flame,
   MessageSquare,
   Clock,
-  ExternalLink
 } from 'lucide-react';
 import { toast } from 'sonner';
 
@@ -39,67 +38,67 @@ export default function ModerationHub() {
   const [stories, setStories] = useState<Story[]>([]);
   const [reports, setReports] = useState<Report[]>([]);
 
-  const fetchPosts = async () => {
+  const fetchPosts = useCallback(async () => {
     setLoading(true);
     try {
       const response = await api.get('/admin/posts', {
         params: { status: postsStatus, limit: 30 }
       });
       setPosts(response.data.items);
-    } catch (err: any) {
-      console.error(err);
+    } catch {
       toast.error('Gönderiler yüklenemedi.');
     } finally {
       setLoading(false);
     }
-  };
+  }, [postsStatus]);
 
-  const fetchStories = async () => {
+  const fetchStories = useCallback(async () => {
     setLoading(true);
     try {
       const response = await api.get('/admin/stories', {
         params: { limit: 30 }
       });
       setStories(response.data.items);
-    } catch (err: any) {
-      console.error(err);
+    } catch {
       toast.error('Hikayeler yüklenemedi.');
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
-  const fetchReports = async () => {
+  const fetchReports = useCallback(async () => {
     setLoading(true);
     try {
       const response = await api.get('/admin/reports', {
         params: { status: 'pending' }
       });
       setReports(response.data);
-    } catch (err: any) {
-      console.error(err);
+    } catch {
       toast.error('Bildirim raporları yüklenemedi.');
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
-    if (activeTab === 'posts') {
-      fetchPosts();
-    } else if (activeTab === 'stories') {
-      fetchStories();
-    } else if (activeTab === 'reports') {
-      fetchReports();
-    }
-  }, [activeTab, postsStatus]);
+    const timer = setTimeout(() => {
+      if (activeTab === 'posts') {
+        void fetchPosts();
+      } else if (activeTab === 'stories') {
+        void fetchStories();
+      } else if (activeTab === 'reports') {
+        void fetchReports();
+      }
+    }, 0);
+    return () => clearTimeout(timer);
+  }, [activeTab, fetchPosts, fetchReports, fetchStories]);
 
   const handlePostStatus = async (postId: number, newStatus: 'approved' | 'rejected') => {
     try {
       await api.patch(`/admin/posts/${postId}/status`, { status: newStatus });
       toast.success(newStatus === 'approved' ? 'Gönderi Onaylandı' : 'Gönderi Reddedildi');
       fetchPosts();
-    } catch (err: any) {
+    } catch {
       toast.error('İşlem başarısız oldu.');
     }
   };
@@ -110,7 +109,7 @@ export default function ModerationHub() {
       await api.delete(`/admin/posts/${postId}`);
       toast.success('Gönderi Silindi');
       fetchPosts();
-    } catch (err: any) {
+    } catch {
       toast.error('Gönderi silinemedi.');
     }
   };
@@ -121,7 +120,7 @@ export default function ModerationHub() {
       await api.delete(`/admin/stories/${storyId}`);
       toast.success('Hikaye Silindi');
       fetchStories();
-    } catch (err: any) {
+    } catch {
       toast.error('Hikaye silinemedi.');
     }
   };
@@ -131,7 +130,7 @@ export default function ModerationHub() {
       await api.patch(`/admin/reports/${reportId}/resolve`, { status });
       toast.success(status === 'reviewed' ? 'Rapor İncelendi Olarak İşaretlendi' : 'Rapor Reddedildi');
       fetchReports();
-    } catch (err: any) {
+    } catch {
       toast.error('İşlem başarısız oldu.');
     }
   };
@@ -217,9 +216,12 @@ export default function ModerationHub() {
                         <TableCell>
                           {post.media && post.media.length > 0 ? (
                             <div className="flex items-center gap-2">
-                              <img
+                              <Image
                                 src={post.media[0].media_url}
                                 alt="Post media"
+                                width={64}
+                                height={48}
+                                unoptimized
                                 className="h-12 w-16 rounded-lg object-cover border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm"
                               />
                               {post.media.length > 1 && (
@@ -325,9 +327,12 @@ export default function ModerationHub() {
                     stories.map((story) => (
                       <TableRow key={story.id} className="border-b border-zinc-200/60 dark:border-zinc-800/60 hover:bg-zinc-50/50 dark:hover:bg-zinc-900/20">
                         <TableCell>
-                          <img
+                          <Image
                             src={story.media_url}
                             alt="Story thumbnail"
+                            width={48}
+                            height={64}
+                            unoptimized
                             className="h-16 w-12 rounded-lg object-cover border border-zinc-200/80 dark:border-zinc-800/80 shadow-sm"
                           />
                         </TableCell>
