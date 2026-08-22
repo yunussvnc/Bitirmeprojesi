@@ -11353,5 +11353,271 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
         "category": "Menü Paketleri"
       }
     ]
+  },
+  "7196": {
+    "name": "Efes Döner İstanbul",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/akwt/efes-doner-istanbul",
+    "sourceName": "Yemeksepeti Efes Döner İstanbul canlı menüsü (Türkali/Ihlamurdere No:82 şube doğrulaması)",
+    "verifiedAt": "2026-08-23",
+    "items": [
+      {
+        "name": "Et iskenderun dürüm menü",
+        "price": "750 TL",
+        "desc": "Et dürüm soğan maydonoz ve domatesli yanında patates ve küçük ayran",
+        "category": "1 Kişilik Menüler"
+      },
+      {
+        "name": "Et Antakya Dürüm Menü",
+        "price": "750 TL",
+        "desc": "Et dürüm ve patates küçük ayran",
+        "category": "1 Kişilik Menüler"
+      },
+      {
+        "name": "Tavuk Antakya (75 gr.)",
+        "price": "220 TL",
+        "desc": "Hatay Antakya usulü özel soslu döner; kızarmış ekmek, patates kızartması, turşu, domates, sarımsaklı mayonez",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Tavuk Efes Özel (150 gr.)",
+        "price": "370 TL",
+        "desc": "Efes spesiyal usulü özel döner; kızarmış ekmek, özel soslu döner, patates kızartması, sarımsaklı mayo, soğan, maydanoz, domates, turşu ile",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Tavuk Hatay (100 gr.)",
+        "price": "270 TL",
+        "desc": "Hatay Antakya usulü özel soslu döner; kızarmış ekmekle, patates, turşu, domates ve sarımsaklı mayonez ile",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Hatay Usulü Tavuk Döner Dürüm (150 gr.)",
+        "price": "370 TL",
+        "desc": "Hatay Antakya usulü özel soslu tavuk döner, kızarmış ekmek, patates kızartması, turşu, domates, sarımsaklı mayonez",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "İskenderun Usulü Tavuk Döner Dürüm (100 gr.)",
+        "price": "270 TL",
+        "desc": "İskenderun usulü özel soslu tavuk döner, soğan, maydanoz, domates",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Hatay Usulü Tavuk Döner Dürüm (75 gr.)",
+        "price": "220 TL",
+        "desc": "Hatay Antakya usulü özel soslu tavuk döner, kızarmış ekmek, patates kızartması, turşu, domates, sarımsaklı mayonez",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Efes Özel Double Tavuk Döner Dürüm",
+        "price": "520 TL",
+        "desc": "Kızarmış ekmek, özel soslu tavuk döner, patates kızartması, sarımsaklı mayonez, soğan, maydanoz, domates, turşu",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "İskenderun Usulü Tavuk Döner Dürüm (75 gr.)",
+        "price": "240 TL",
+        "desc": "İskenderun usulü özel soslu tavuk döner, soğan, maydanoz, domates",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "İskenderun Usulü Tavuk Döner Dürüm (150 gr.)",
+        "price": "400 TL",
+        "desc": "İskenderun usulü özel soslu tavuk döner, soğan, maydanoz, domates",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Double Hatay Usulü Tavuk Döner Dürüm",
+        "price": "600 TL",
+        "desc": "Hatay Antakya usulü özel soslu tavuk döner, patates kızartması, turşu, domates, sarımsaklı mayonez",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "İskender (Tavuk Dönerden)",
+        "price": "450 TL",
+        "desc": "Kızarmış ekmek üzerine; özel soslu tavuk döner, tereyağı, yoğurt, domates sos",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Tavuk Döner Porsiyon",
+        "price": "380 TL",
+        "desc": "tavuk döner , kızarmış ekmek, turşu, domates ile",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "İskenderun Usulü Double Tavuk Döner Dürüm",
+        "price": "520 TL",
+        "desc": "İskenderun usulü özel soslu döner, soğan, maydanoz, domates",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Efes Özel Tavuk Döner Dürüm (75 gr.)",
+        "price": "220 TL",
+        "desc": "Kızarmış ekmeğe; özel soslu tavuk döner, patates kızartması, sarımsaklı mayonez, soğan, maydanoz, domates, turşu",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Tavuk Efes Özel (100 gr.)",
+        "price": "270 TL",
+        "desc": "Efes Spesiyal usulü özel döner; Kızarmış ekmekte özel soslu döner, patates, sarımsaklı mayo, soğan, maydanoz, domates ve turşuyla efsane birleşim",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Tombik Ekmek Arası İskenderun Usulü Tavuk Döner (100 gr.)",
+        "price": "320 TL",
+        "desc": "Soğan, maydanoz, domates",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Tombik Ekmek Arası Antakya Usulü Tavuk Döner (100 gr.)",
+        "price": "320 TL",
+        "desc": "Patates kızartması, turşu, mayonez",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Double Antakya Et dürüm",
+        "price": "999 TL",
+        "desc": "Antakya usulü patates , turşu , el yapımı sarımsaklı mayonez ve özel sos ile servis edilir.",
+        "category": "Et Dönerler"
+      },
+      {
+        "name": "1.5 Kişilik Et dürüm Antakya",
+        "price": "749 TL",
+        "desc": "Antakya usulü patates , turşu , el yapımı sarımsaklı mayonez ve özel sos ile servis edilir.",
+        "category": "Et Dönerler"
+      },
+      {
+        "name": "1 Kişilik Et dürüm Antakya",
+        "price": "439 TL",
+        "desc": "Antakya usulü patates , turşu , el yapımı sarımsaklı mayonez ve özel sos ile servis edilir.",
+        "category": "Et Dönerler"
+      },
+      {
+        "name": "1.5 Kişilik Et dürüm İskenderun",
+        "price": "749 TL",
+        "desc": "İskenderun Usulü soğan maydonoz domates ve özel sos ile servis edilir.",
+        "category": "Et Dönerler"
+      },
+      {
+        "name": "1 Kişilik Et dürüm İskenderun",
+        "price": "439 TL",
+        "desc": "İskenderun usulü Et dürüm Soğan Maydonoz Domates ve sos ile servis edilir.",
+        "category": "Et Dönerler"
+      },
+      {
+        "name": "Double İskenderun Et dürüm",
+        "price": "999 TL",
+        "desc": "İskenderun Usulü soğan maydonoz domates ve özel sos ile servis edilir.",
+        "category": "Et Dönerler"
+      },
+      {
+        "name": "Et Beyti",
+        "price": "749 TL",
+        "desc": "Özel baharatlı döner, lavaşa sarılır; yoğurt ve domates sos ile tereyağ",
+        "category": "Et Dönerler"
+      },
+      {
+        "name": "Pilav Üstü Et Döner",
+        "price": "849 TL",
+        "desc": "Turşu, közlenmiş biber ile",
+        "category": "Et Dönerler"
+      },
+      {
+        "name": "İskender (Et Dönerden)",
+        "price": "749 TL",
+        "desc": "Yoğurt, domates sos ile",
+        "category": "Et Dönerler"
+      },
+      {
+        "name": "Tombik Ekmek Arası Antakya Usulü Et Döner (100 gr.)",
+        "price": "749 TL",
+        "desc": "Patates kızartması, turşu, mayonez",
+        "category": "Et Dönerler"
+      },
+      {
+        "name": "Et Döner",
+        "price": "699 TL",
+        "desc": "Patates kızartması, turşu, domates ile",
+        "category": "Et Dönerler"
+      },
+      {
+        "name": "Tombik Ekmek Arası İskenderun Usulü Et Döner (100 gr.)",
+        "price": "749 TL",
+        "desc": "Soğan, maydanoz, domates",
+        "category": "Et Dönerler"
+      },
+      {
+        "name": "Patates Kızartması",
+        "price": "100 TL",
+        "desc": "Tek kişilik",
+        "category": "Ara Sıcaklar"
+      },
+      {
+        "name": "Patates Kızartması (Double)",
+        "price": "180 TL",
+        "desc": "Büyük boy",
+        "category": "Ara Sıcaklar"
+      },
+      {
+        "name": "Ev Yapımı Sarımsaklı Mayonez",
+        "price": "30 TL",
+        "desc": "Adet olarak servis edilmektedir.",
+        "category": "Ara Sıcaklar"
+      },
+      {
+        "name": "Pepsi (33 cl.)",
+        "price": "80 TL",
+        "desc": "Kutu içecek",
+        "category": "içecekler"
+      },
+      {
+        "name": "Eker Ayran (30 cl.)",
+        "price": "70 TL",
+        "desc": "Büyük boy",
+        "category": "içecekler"
+      },
+      {
+        "name": "Pepsi Max (33 cl.)",
+        "price": "80 TL",
+        "desc": "Kutu içecek",
+        "category": "içecekler"
+      },
+      {
+        "name": "7up (33 cl.)",
+        "price": "80 TL",
+        "desc": "Kutu içecek",
+        "category": "içecekler"
+      },
+      {
+        "name": "Yedigün (33 cl.)",
+        "price": "80 TL",
+        "desc": "Kutu içecek",
+        "category": "içecekler"
+      },
+      {
+        "name": "Lipton Ice Tea Şeftali (33 cl.)",
+        "price": "80 TL",
+        "desc": "Kutu içecek",
+        "category": "içecekler"
+      },
+      {
+        "name": "Lipton Ice Tea Limon (33 cl.)",
+        "price": "80 TL",
+        "desc": "Kutu içecek",
+        "category": "içecekler"
+      },
+      {
+        "name": "Doğanay Gurme Acılı Suyu (30 cl.)",
+        "price": "75 TL",
+        "desc": "Pet şişe",
+        "category": "içecekler"
+      },
+      {
+        "name": "Doğanay Gurme Acısız Şalgam Suyu (30 cl.)",
+        "price": "75 TL",
+        "desc": "Pet şişe",
+        "category": "içecekler"
+      }
+    ]
   }
 };
