@@ -12203,5 +12203,235 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
         "category": "Soslar"
       }
     ]
+  },
+  "7199": {
+    "name": "Menemen Beşiktaş",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/f02k/menemen",
+    "sourceName": "Yemeksepeti Menemen Beşiktaş canlı menüsü (Sinanpaşa–Şair Veysi No:31/A şube doğrulaması)",
+    "verifiedAt": "2026-08-23",
+    "items": [
+      {
+        "name": "Breakfast Plate (for 2 people)",
+        "price": "1.795 TL",
+        "desc": "Black olives, green olives, white cheese, Kars kashar cheese, Çamlıdağ string cheese, honey, clotted cream, Nutella, pickled peppers, 2 types of jam of the day, acuka, pastrami or kavurma, scrambled eggs",
+        "category": "Breakfast items"
+      },
+      {
+        "name": "Cheese Plate",
+        "price": "555 TL",
+        "desc": "Special Edirne white cheese, Kars Boğatepe Dairy kashar cheese, Kars Boğatepe Dairy aged kashar cheese, Çamlıdağ string cheese",
+        "category": "Breakfast items"
+      },
+      {
+        "name": "Cold Cuts Platter",
+        "price": "295 TL",
+        "desc": "Tomato, cucumber, green pepper, parsley, olive oil",
+        "category": "Breakfast items"
+      },
+      {
+        "name": "Fried Sausage Platter",
+        "price": "695 TL",
+        "desc": "Tokat bez sucuk. With olives, white cheese, pickles, and bread.",
+        "category": "Breakfast items"
+      },
+      {
+        "name": "Dessert Plate",
+        "price": "495 TL",
+        "desc": "Hazelnut paste with hazelnut pieces, Nutella, honey, clotted cream, 2 types of jam",
+        "category": "Breakfast items"
+      },
+      {
+        "name": "Cheese Eggs",
+        "price": "595 TL",
+        "desc": "Prepared with special Edirne white cheese and parmesan. Served with olives, white cheese, and pickles.",
+        "category": "Eggs"
+      },
+      {
+        "name": "Eggs with Sausage",
+        "price": "695 TL",
+        "desc": "Tokat bez sucuk, olives, white cheese, pickles",
+        "category": "Eggs"
+      },
+      {
+        "name": "Fried Eggs",
+        "price": "695 TL",
+        "desc": "With olives, white cheese, pickles",
+        "category": "Eggs"
+      },
+      {
+        "name": "Eggs with Bacon",
+        "price": "795 TL",
+        "desc": "With pastrami, village eggs, olives, cheese, and pickles",
+        "category": "Eggs"
+      },
+      {
+        "name": "Classic Jackal Menemen",
+        "price": "595 TL",
+        "desc": "Special white cheese, Katırlı village black olives, pickles, milk jam, bread",
+        "category": "Menemen"
+      },
+      {
+        "name": "Menemen with Sausage and Cakal",
+        "price": "695 TL",
+        "desc": "Tokat bez sucuk, Edirne white cheese, black olives, pickles, milk jam, bread",
+        "category": "Menemen"
+      },
+      {
+        "name": "Menemen with Kavurma and Cakal",
+        "price": "695 TL",
+        "desc": "Samsun Kavurma. White cheese, black olives, pickles, milk jam, bread",
+        "category": "Menemen"
+      },
+      {
+        "name": "Pastrami and Cakalli Menemen",
+        "price": "755 TL",
+        "desc": "Prepared with Kastamonu Tabakoğlu pastrami. Served with white cheese, olives, pickles, milk jam, and bread.",
+        "category": "Menemen"
+      },
+      {
+        "name": "Cheese Toast",
+        "price": "455 TL",
+        "desc": "With pickles and olives",
+        "category": "Toasts"
+      },
+      {
+        "name": "Sucuk and Cheese Toast",
+        "price": "595 TL",
+        "desc": "With Tokat sausage, pickles, black olives",
+        "category": "Toasts"
+      },
+      {
+        "name": "Roasted Meat and Cheese Toast",
+        "price": "595 TL",
+        "desc": "With pickles and black olives",
+        "category": "Toasts"
+      },
+      {
+        "name": "White Cheese and Tomato Toast",
+        "price": "455 TL",
+        "desc": "White cheese, tomatoes, pickles, olives",
+        "category": "Toasts"
+      },
+      {
+        "name": "Edirne White Cheese",
+        "price": "225 TL",
+        "desc": "Single",
+        "category": "By-products"
+      },
+      {
+        "name": "Kars Aged Kashar",
+        "price": "225 TL",
+        "desc": "It is served in pieces.",
+        "category": "By-products"
+      },
+      {
+        "name": "Kars Kashar Cheese",
+        "price": "225 TL",
+        "desc": "It is served as a package.",
+        "category": "By-products"
+      },
+      {
+        "name": "Boğatepe Kars Honey",
+        "price": "225 TL",
+        "desc": "Single",
+        "category": "By-products"
+      },
+      {
+        "name": "Butter",
+        "price": "195 TL",
+        "desc": "Single",
+        "category": "By-products"
+      },
+      {
+        "name": "Ayvalık Green Olives",
+        "price": "195 TL",
+        "desc": "Single",
+        "category": "By-products"
+      },
+      {
+        "name": "Katırlıköyü Black Olives",
+        "price": "195 TL",
+        "desc": "Single",
+        "category": "By-products"
+      },
+      {
+        "name": "Milk Jam",
+        "price": "175 TL",
+        "desc": "It is served in pieces.",
+        "category": "By-products"
+      },
+      {
+        "name": "Acuka",
+        "price": "155 TL",
+        "desc": "Single",
+        "category": "By-products"
+      },
+      {
+        "name": "Sour Cherry Jam",
+        "price": "175 TL",
+        "desc": "Single",
+        "category": "By-products"
+      },
+      {
+        "name": "Cream",
+        "price": "175 TL",
+        "desc": "1 person",
+        "category": "By-products"
+      },
+      {
+        "name": "Homemade Hazelnut Paste",
+        "price": "225 TL",
+        "desc": "Homemade",
+        "category": "By-products"
+      },
+      {
+        "name": "Arslan Ayran (30 cl.)",
+        "price": "95 TL",
+        "desc": "Large size",
+        "category": "Drinks"
+      },
+      {
+        "name": "Coca-Cola (33 cl.)",
+        "price": "120 TL",
+        "desc": "Canned drinks",
+        "category": "Drinks"
+      },
+      {
+        "name": "Sprite (33 cl.)",
+        "price": "120 TL",
+        "desc": "Canned drinks",
+        "category": "Drinks"
+      },
+      {
+        "name": "Fuse Tea (33 cl.)",
+        "price": "120 TL",
+        "desc": "Canned drinks",
+        "category": "Drinks"
+      },
+      {
+        "name": "Fanta (33 cl.)",
+        "price": "120 TL",
+        "desc": "Canned drinks",
+        "category": "Drinks"
+      },
+      {
+        "name": "Soda (20 cl.)",
+        "price": "95 TL",
+        "desc": "glass bottle",
+        "category": "Drinks"
+      },
+      {
+        "name": "Freshly Squeezed Orange Juice",
+        "price": "255 TL",
+        "desc": "It is served cold.",
+        "category": "Drinks"
+      },
+      {
+        "name": "Water (33 cl.)",
+        "price": "75 TL",
+        "desc": "glass bottle",
+        "category": "Drinks"
+      }
+    ]
   }
 };
