@@ -13301,5 +13301,85 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
         "category": "Yan ürünler"
       }
     ]
+  },
+  "7212": {
+    "name": "Pixie Waffle",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/e9xf/pixie-waffle",
+    "sourceName": "Yemeksepeti Pixie Waffle canlı menüsü (Bayrampaşa Vatan Mah. Emek Sok. No:21/A şube doğrulaması)",
+    "verifiedAt": "2026-08-23",
+    "items": [
+      {
+        "name": "Pixie Waffle (Double)",
+        "price": "339,91 TL",
+        "desc": "Beyaz çikolata, sütlü çikolata, muz, çilek, fındık ve fıstık. Size özel ve taze hazırlanır.",
+        "category": "Waffles"
+      },
+      {
+        "name": "Süper Pixie Waffle (Double)",
+        "price": "407,91 TL",
+        "desc": "Beyaz çikolata, sütlü çikolata, muz, çilek, Frambuaz, Böğürtlen, Yaban Mersini, fındık ve fıstık.",
+        "category": "Waffles"
+      },
+      {
+        "name": "Fıstık Rüyası Waffle (Double)",
+        "price": "365,49 TL",
+        "desc": "Antep fıstığı çikolatası, sütlü & beyaz çikolata, muz, çilek, fındık",
+        "category": "Waffles"
+      },
+      {
+        "name": "Pixie Özel Karamel Waffle (Double)",
+        "price": "339,91 TL",
+        "desc": "Karamel çikolata, sütlü çikolata, muz, çilek, fındık",
+        "category": "Waffles"
+      },
+      {
+        "name": "Beyaz Çikolatalı Waffle (Double)",
+        "price": "339,91 TL",
+        "desc": "Özel Belçika hamuru, özel beyaz çikolata, muz, çilek, fındık",
+        "category": "Waffles"
+      },
+      {
+        "name": "Pixie Bitter Çikolatalı Waffle (Double)",
+        "price": "339,91 TL",
+        "desc": "Özel Belçika hamuru, bitter çikolata, muz, çilek, fındık",
+        "category": "Waffles"
+      },
+      {
+        "name": "Pixie Special Waffle (Double)",
+        "price": "407,91 TL",
+        "desc": "Beyaz çikolata, sütlü çikolata, Antep fıstığı çikolatası, muz, çilek, frambuaz, böğürtlen, yaban mersini, fındık, fıstık",
+        "category": "Waffles"
+      },
+      {
+        "name": "Pixie Muzlu Waffle (Double)",
+        "price": "339,91 TL",
+        "desc": "Özel Belçika waffle hamuru, sütlü çikolata sosu, beyaz çikolata sosu, muz, fındık, fıstık",
+        "category": "Waffles"
+      },
+      {
+        "name": "Pixie Çilekli Waffle (Double)",
+        "price": "339,91 TL",
+        "desc": "Özel Belçika waffle hamuru, sütlü çikolata sosu, beyaz çikolata sosu, çilek, fındık, fıstık",
+        "category": "Waffles"
+      },
+      {
+        "name": "Pixie Waffle Bowl (Double)",
+        "price": "320,88 TL",
+        "desc": "Beyaz çikolata, sütlü çikolata, muz, çilek, fındık, fıstık",
+        "category": "Waffle Bowl's"
+      },
+      {
+        "name": "Pixie Special Waffle Bowl (Double)",
+        "price": "424,91 TL",
+        "desc": "Beyaz çikolata, sütlü çikolata, Antep fıstığı çikolatası, muz, çilek, frambuaz, böğürtlen, yaban mersini, fındık, fıstık",
+        "category": "Waffle Bowl's"
+      },
+      {
+        "name": "Pixie Super Waffle Bowl (Double)",
+        "price": "416,41 TL",
+        "desc": "Beyaz çikolata, sütlü çikolata, muz, çilek, frambuaz, böğürtlen, yaban mersini, fındık, fıstık",
+        "category": "Waffle Bowl's"
+      }
+    ]
   }
 };
