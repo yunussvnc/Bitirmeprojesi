@@ -12433,5 +12433,505 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
         "category": "Drinks"
       }
     ]
+  },
+  "7200": {
+    "name": "Rome Food & Coffee",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/vgup/rome-food-and-coffee",
+    "sourceName": "Yemeksepeti Rome Food & Coffee canlı menüsü (Beylikdüzü Barış Mah. Samsun Cd. 14/5 şube doğrulaması)",
+    "verifiedAt": "2026-08-23",
+    "items": [
+      {
+        "name": "Rome Burger",
+        "price": "560 TL",
+        "desc": "140 gr. burger köftesi, burger sos, cheddar peyniri, karamelize soğan. Patates kızartması ile",
+        "category": "Burgerler"
+      },
+      {
+        "name": "Trüf Burger",
+        "price": "590 TL",
+        "desc": "140 gr. burger köftesi, trüflü burger sos, cheddar peyniri, karamelize soğan. Patates kızartması ile",
+        "category": "Burgerler"
+      },
+      {
+        "name": "Rosario Burger",
+        "price": "590 TL",
+        "desc": "140 gr. burger köftesi, acılı Meksika sos, karamelize soğan, pastırma, cheddar peyniri. Patates kızartması ile",
+        "category": "Burgerler"
+      },
+      {
+        "name": "Chicken Burger",
+        "price": "520 TL",
+        "desc": "Çıtır tavuk, yeşillik, burger sos, cheddar peyniri, patates kızartması ile",
+        "category": "Burgerler"
+      },
+      {
+        "name": "Hot Korean Chicken Burger",
+        "price": "520 TL",
+        "desc": "Acılı çıtır tavuk, coleslaw, burger sos, cheddar peyniri, patates kızartması ile",
+        "category": "Burgerler"
+      },
+      {
+        "name": "BBQ Burger",
+        "price": "590 TL",
+        "desc": "140 gram lezzetli burger köftesi barbekü soslu karamelize soğan cheddar peyniri dana jambon ve patates ile hazırlanan enfes bir burger",
+        "category": "Burgerler"
+      },
+      {
+        "name": "Tavuklu Wrap",
+        "price": "480 TL",
+        "desc": "Yumuşak tortilla içinde ızgara tavuk eti taze sebzeler ve lezzetli soslarla hazırlanan pratik ve doyurucu bir wrap seçeneği",
+        "category": "Wrap"
+      },
+      {
+        "name": "Trüflü Avakadolu Çıtır Wrap",
+        "price": "510 TL",
+        "desc": "Çıtır wrap içerisinde pane tavuk parçaları taze yeşillik avokado dilimleri trüflü mayonez lezzetli burger peyniri ve yanında kızarmış patates ile hazırlanmıştır",
+        "category": "Wrap"
+      },
+      {
+        "name": "Et Wrap",
+        "price": "580 TL",
+        "desc": "Yumuşak wrap içerisinde dana antrikot renkli biber karamelize soğan taze mantar ve soya sos ile hazırlanan lezzetli bir kombinasyon. Krema ile zenginleştirilmiş ve yanında çıtır patates servis edilir.",
+        "category": "Wrap"
+      },
+      {
+        "name": "Fettuccine Alfredo",
+        "price": "450 TL",
+        "desc": "Yumuşak fettuccine pastaları zengin krema sosu ve taze parmesan peyniri ile kaplanmış tavuk parçaları eşliğinde sunulur Geleneksel İtalyan lezzeti ile hazırlanmış leziz bir makarna yemeği",
+        "category": "Makarnalar"
+      },
+      {
+        "name": "Fettuccine Chicken Al Pesto",
+        "price": "450 TL",
+        "desc": "Yumuşak fettuccine pastaları kremalı pesto sosu ile kaplanmış taze mantar parçaları ve ızgara tavuk göğsü parçaları üzerine taze parmesan peyniri rendelenerek servis edilir",
+        "category": "Makarnalar"
+      },
+      {
+        "name": "Chicken Penne",
+        "price": "450 TL",
+        "desc": "Yumuşak tavuk parçaları ve taze mantarlarla hazırlanan kremalı sos içinde pişirilen penne makarnası. Üzerine bol parmesan peyniri serpilerek servis edilir.",
+        "category": "Makarnalar"
+      },
+      {
+        "name": "Arabiata Penne",
+        "price": "450 TL",
+        "desc": "Penne makarnası, sarımsaklı domates sosunda pişirilmiş, taze parmesan peyniri ile servis edilir. Klasik İtalyan lezzeti ile hazırlanmış bu yemek, basit fakat nefis bir seçimdir.",
+        "category": "Makarnalar"
+      },
+      {
+        "name": "Penne Ala Norme",
+        "price": "450 TL",
+        "desc": "Taze patlıcan ve kekikli domates sosuyla hazırlanan geleneksel Sicilyan makarnası. Üzerine rendelenmiş parmesan peyniri serpilir ve zeytinyağı ile tamamlanır.",
+        "category": "Makarnalar"
+      },
+      {
+        "name": "Köri Soslu Penne",
+        "price": "450 TL",
+        "desc": "Penne makarnası köri sosunda tavuk parçaları ve taze mantar ile hazırlanmış üzeri parmesan peyniri ile servis edilir",
+        "category": "Makarnalar"
+      },
+      {
+        "name": "Hellim Salata",
+        "price": "450 TL",
+        "desc": "Akdeniz yeşilliği, mısır, kuru domates, cherry domates, fındık parçaları, hardal sos",
+        "category": "Salatalar"
+      },
+      {
+        "name": "Çıtır Tavuk Salata",
+        "price": "480 TL",
+        "desc": "Akdeniz yeşilliği, cherry domates, çıtır tavuk, mısır, salatalık, hardal sos",
+        "category": "Salatalar"
+      },
+      {
+        "name": "Sezar Salata",
+        "price": "480 TL",
+        "desc": "Izgara tavuk, göbek marul yaprakları, kruton ekmek, sezar sos, parmesan sos",
+        "category": "Salatalar"
+      },
+      {
+        "name": "Izgara Tavuk Salata",
+        "price": "490 TL",
+        "desc": "Akdeniz yeşilliği, cherry domates, salatalık, siyah zeytin, ızgara tavuk, zeytinyağlı limonlu sos",
+        "category": "Salatalar"
+      },
+      {
+        "name": "Akdeniz Salata",
+        "price": "450 TL",
+        "desc": "Akdeniz yeşilliği, cherry domates, salatalık, mısır, ceviz, zeytinyağlı sos",
+        "category": "Salatalar"
+      },
+      {
+        "name": "Chili Marin",
+        "price": "620 TL",
+        "desc": "Asya sos ile marine edilmiş tavuk, limon soslu yoğurt, patates kızartması",
+        "category": "Ana Yemekler"
+      },
+      {
+        "name": "Köri Soslu Tavuk",
+        "price": "600 TL",
+        "desc": "Tavuk, mantar, körili krema sos, patates kızartması",
+        "category": "Ana Yemekler"
+      },
+      {
+        "name": "Milano Usulü Şinitzel",
+        "price": "500 TL",
+        "desc": "Kremalı mantar sos, eritilmiş kaşar peyniri, patates kızartması, yeşillik ile",
+        "category": "Ana Yemekler"
+      },
+      {
+        "name": "Et Sote",
+        "price": "800 TL",
+        "desc": "Yumuşak dana antrikot parçaları soğan biber domates ile sotelenip ve pilav ile servis edilir",
+        "category": "Ana Yemekler"
+      },
+      {
+        "name": "Kekikli Tavuk Izgara",
+        "price": "620 TL",
+        "desc": "Marine edilmiş ızgara tavuk, yeşillik, sebze sote ile",
+        "category": "Ana Yemekler"
+      },
+      {
+        "name": "Mantar Soslu Tavuk Izgara",
+        "price": "620 TL",
+        "desc": "Izgara tavuk, kremalı mantar sos, sotelenmiş sebze, pilav ile",
+        "category": "Ana Yemekler"
+      },
+      {
+        "name": "Arizona Chicken",
+        "price": "620 TL",
+        "desc": "Sweet chili sos ile marine edilmiş tavuk, patates kızartması ile",
+        "category": "Ana Yemekler"
+      },
+      {
+        "name": "Asya Usulü Et",
+        "price": "800 TL",
+        "desc": "Dana antrikot parçaları, renkli biber, soğan, asya sos, patates kızartması, ile",
+        "category": "Ana Yemekler"
+      },
+      {
+        "name": "Fesleğenli Tavuk",
+        "price": "620 TL",
+        "desc": "Fesleğenli tavuk parçaları pesto soslu krema ve parmesan peyniri ile hazırlanmış yanında patates",
+        "category": "Ana Yemekler"
+      },
+      {
+        "name": "Kaşar Peynirli Tost",
+        "price": "350 TL",
+        "desc": "Kaşar peyniri",
+        "category": "Tostlar"
+      },
+      {
+        "name": "Karışık Tost",
+        "price": "375 TL",
+        "desc": "Sucuk, kaşar peyniri",
+        "category": "Tostlar"
+      },
+      {
+        "name": "Rome Tost",
+        "price": "375 TL",
+        "desc": "Kaşar peyniri, cheddar peyniri, domates, pesto sosu",
+        "category": "Tostlar"
+      },
+      {
+        "name": "Yengen",
+        "price": "380 TL",
+        "desc": "Lezzetli kaşar peyniri sucuk domates turşu ketçap ve mayonez ile hazırlanan enfes bir tost. Taze malzemelerle yapılan bu tost tam bir tat şöleni sunmaktadır.",
+        "category": "Tostlar"
+      },
+      {
+        "name": "Pesto Sandviç",
+        "price": "430 TL",
+        "desc": "Taze domates dilimler, yumuşak beyaz peynir ve aromalı pesto sosuyla hazırlanan lezzetli sandviç. Çıtır ekmek üzerine servis edilir.",
+        "category": "Sandviçler"
+      },
+      {
+        "name": "Kaşar Peynirli Tavuklu Sandviç",
+        "price": "460 TL",
+        "desc": "Izgara tavuk, kaşar peyniri, domates, göbek marul ve pesto rosso sos ile hazırlanan lezzetli sandviç",
+        "category": "Sandviçler"
+      },
+      {
+        "name": "Sezar Sandviç",
+        "price": "460 TL",
+        "desc": "Çıtır tavuk, taze göbek marul, lezzetli sezar sosu ve parmesan peyniri ile hazırlanan nefis sandviç",
+        "category": "Sandviçler"
+      },
+      {
+        "name": "Sigara Böreği",
+        "price": "350 TL",
+        "desc": "Salatalık, domates ile",
+        "category": "Atıştırmalıklar"
+      },
+      {
+        "name": "Sosis Tabağı",
+        "price": "350 TL",
+        "desc": "Patates kızartması, sos",
+        "category": "Atıştırmalıklar"
+      },
+      {
+        "name": "Combo Tabağı",
+        "price": "550 TL",
+        "desc": "Sigara böreği, sosis, soğan halkası, çıtır tavuk, peynir çubukları, patates kızartması",
+        "category": "Atıştırmalıklar"
+      },
+      {
+        "name": "Patates Tabağı",
+        "price": "350 TL",
+        "desc": "Ketçap, mayonez ile",
+        "category": "Atıştırmalıklar"
+      },
+      {
+        "name": "Çıtır Tavuk",
+        "price": "400 TL",
+        "desc": "Patates kızartması, sos ile",
+        "category": "Atıştırmalıklar"
+      },
+      {
+        "name": "Trüflü Parmesanlı Patates",
+        "price": "420 TL",
+        "desc": "Taze parmesan, trüf yağı, patates",
+        "category": "Atıştırmalıklar"
+      },
+      {
+        "name": "Soğan Halkası",
+        "price": "350 TL",
+        "desc": "Patates kızartması, sos ile",
+        "category": "Atıştırmalıklar"
+      },
+      {
+        "name": "Frambuazlı Cheesecake",
+        "price": "450 TL",
+        "desc": "Dilim olarak servis edilir.",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Rome Roll",
+        "price": "600 TL",
+        "desc": "Krep, çilek, muz, Belçika çikolatası, muhallebi, toz Antep fıstığı",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Limonlu Cheesecake",
+        "price": "450 TL",
+        "desc": "Dilim olarak servis edilir.",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Beyaz Çikolatalı Brownie",
+        "price": "480 TL",
+        "desc": "(Dilim olarak servis edilmektedir.)",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Lotuslu Cheesecake",
+        "price": "450 TL",
+        "desc": "Dilim olarak servis edilir.",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Çikolatalı Cheesecake",
+        "price": "450 TL",
+        "desc": "Dilim olarak servis edilir.",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Çikolatalı Mag",
+        "price": "520 TL",
+        "desc": "Çilek, muz, krep kırığı, Belçika çikolatası",
+        "category": "Kupa Tatlılar"
+      },
+      {
+        "name": "Brownie Mug",
+        "price": "520 TL",
+        "desc": "Yumuşak kek tabakası üzerine kremsi muhallebi ve zengin Belçika çikolatası ile hazırlanan lezzetli bir kupa tatlısı",
+        "category": "Kupa Tatlılar"
+      },
+      {
+        "name": "Çilekli Kremalı Mag",
+        "price": "450 TL",
+        "desc": "Çilek, muhallebi, bisküvi",
+        "category": "Kupa Tatlılar"
+      },
+      {
+        "name": "Muzlu Kremalı Mag",
+        "price": "450 TL",
+        "desc": "Rome muhallebisi, muz, bisküvi",
+        "category": "Kupa Tatlılar"
+      },
+      {
+        "name": "Çikolatalı Dondurmalı Mag",
+        "price": "470 TL",
+        "desc": "Vanilyalı dondurma, Belçika çikolatası, bisküvi, muz, çilek",
+        "category": "Kupa Tatlılar"
+      },
+      {
+        "name": "Coca-Cola Zero Sugar (33 cl.)",
+        "price": "120 TL",
+        "desc": "Kutu içecek",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Coca-Cola (33 cl.)",
+        "price": "120 TL",
+        "desc": "Kutu içecek",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Fanta (33 cl.)",
+        "price": "120 TL",
+        "desc": "Kutu içecek",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Sprite (33 cl.)",
+        "price": "120 TL",
+        "desc": "Kutu içecek",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Cappy (33 cl.)",
+        "price": "120 TL",
+        "desc": "Kutu içecek",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Fuse Tea Şeftali (33 cl.)",
+        "price": "120 TL",
+        "desc": "Kutu içecek",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Fuse Tea Limon (33 cl.)",
+        "price": "120 TL",
+        "desc": "Kutu içecek",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Fuse Tea Mango (33 cl.)",
+        "price": "120 TL",
+        "desc": "Kutu içecek",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Ayran (27 cl.)",
+        "price": "90 TL",
+        "desc": "Büyük boy",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Soda (20 cl.)",
+        "price": "70 TL",
+        "desc": "Cam şişe",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Su (50 cl.)",
+        "price": "70 TL",
+        "desc": "Cam şişe",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Iced Filtre Kahve",
+        "price": "180 TL",
+        "desc": "(Soğuk servis edilir.)",
+        "category": "Soğuk Kahveler"
+      },
+      {
+        "name": "Iced Cappuccino",
+        "price": "220 TL",
+        "desc": "Soğuk servis edilir.",
+        "category": "Soğuk Kahveler"
+      },
+      {
+        "name": "Iced Americano",
+        "price": "190 TL",
+        "desc": "Soğuk servis edilir.",
+        "category": "Soğuk Kahveler"
+      },
+      {
+        "name": "Iced Latte",
+        "price": "220 TL",
+        "desc": "Soğuk kahve",
+        "category": "Soğuk Kahveler"
+      },
+      {
+        "name": "Iced White Mocha",
+        "price": "230 TL",
+        "desc": "(Soğuk servis edilir.)",
+        "category": "Soğuk Kahveler"
+      },
+      {
+        "name": "Iced Dark Mocha",
+        "price": "230 TL",
+        "desc": "Soğuk servis edilir.",
+        "category": "Soğuk Kahveler"
+      },
+      {
+        "name": "Berry Hibiscus",
+        "price": "220 TL",
+        "desc": "Soğuk servis edilir.",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Böğürtlenli Limonata",
+        "price": "220 TL",
+        "desc": "Soğuk servis edilir.",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Çilekli Limonata",
+        "price": "220 TL",
+        "desc": "Soğuk servis edilmektedir.",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Karpuzlu Naneli Limonata",
+        "price": "220 TL",
+        "desc": "Soğuk servis edilmektedir.",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Cool Lime",
+        "price": "220 TL",
+        "desc": "(Soğuk servis edilir.)",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Limonata",
+        "price": "200 TL",
+        "desc": "(Soğuk servis edilir.)",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Orange Mango",
+        "price": "220 TL",
+        "desc": "Soğuk servis edilmektedir.",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Muzlu Milkshake",
+        "price": "260 TL",
+        "desc": "Soğuk servis edilmektedir.",
+        "category": "Milkshakes"
+      },
+      {
+        "name": "Vanilyalı Milkshake",
+        "price": "260 TL",
+        "desc": "Soğuk servis edilir.",
+        "category": "Milkshakes"
+      },
+      {
+        "name": "Çikolatalı Milkshake",
+        "price": "260 TL",
+        "desc": "(Soğuk servis edilir.)",
+        "category": "Milkshakes"
+      },
+      {
+        "name": "Çilekli Milkshake",
+        "price": "260 TL",
+        "desc": "(Soğuk servis edilir.)",
+        "category": "Milkshakes"
+      }
+    ]
   }
 };
