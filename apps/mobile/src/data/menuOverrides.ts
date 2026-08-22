@@ -13947,5 +13947,475 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
         "category": "Desserts"
       }
     ]
-  }
+  },
+  "7224": {
+  "name": "Olta Balık Evi",
+  "sourceUrl": "https://oltabalik.co/",
+  "sourceName": "Olta Balık Restaurant resmi menüsü",
+  "verifiedAt": "2026-08-23",
+  "items": [
+    {
+      "name": "Izgara halili",
+      "price": "1.600,00 TL",
+      "desc": "Akdeniz sularının en lezzetli balıklarından biri olan Halili'nin, hafif zeytinyağı ve yöresel otlarla marine edilip ızgara ateşinde dışı çıtır, içi sulu kalacak şekilde \r\npişirildiği spesiyalimiz.\r\nYaklaşık 1000-1300  kalori içerir",
+      "category": "Balıklar"
+    },
+    {
+      "name": "Karavida",
+      "price": "3.000,00 TL",
+      "desc": "",
+      "category": "Spesiyaller"
+    },
+    {
+      "name": "Deniz ürünlü spagetti",
+      "price": "800,00 TL",
+      "desc": "Taze karides, kalamar ve midye gibi deniz ürünlerinin şefin özel domates sosu ve taze baharatlarla spagettiyle buluştuğu, deniz kokulu bir İtalyan klasiği.",
+      "category": "Deniz Ürünleri Tabakları"
+    },
+    {
+      "name": "Ahtapot + Somon Şiş",
+      "price": "1.200,00 TL",
+      "desc": "Izgarada tütsülenerek yumuşacık kıvama getirilmiş enfes ahtapot kolu ile lokum gibi somon şişin tek tabakta buluştuğu, deniz ürünleri tutkunlarına özel premium bir ziyafet.",
+      "category": "Deniz Ürünleri Tabakları"
+    },
+    {
+      "name": "Somon Şiş + Izgara Mantar",
+      "price": "600,00 TL",
+      "desc": "Özel sosla marine edilip şişte kızartılmış ağızda dağılan yağlı somon küplerinin, suyunu içine hapsetmiş taze ızgara mantarlarla harmanlandığı oldukça sağlıklı ve doyurucu bir ikili.",
+      "category": "Deniz Ürünleri Tabakları"
+    },
+    {
+      "name": "Seafood tabağı",
+      "price": "1.500,00 TL",
+      "desc": "Ahtapot bacağı , karides şiş , baby kalamar , levrek simit",
+      "category": "Deniz Ürünleri Tabakları"
+    },
+    {
+      "name": "Lakerda",
+      "price": "500,00 TL",
+      "desc": "Torik balığından yapılmaktadır 3 gün boyunca buzlu suda bekletip kanı iyice akıtılıp sonrasında 14 gün tuzda bekletilip sonrasında tekrar 3 gün boyunca buzlu suda hergün değişirerek fazla tuzu akıtılır ve servise hazırdır. Sunum olarak mor soğan üzerine dilimlenerek zeytinyağ ve limon suyu gezdirilerek yemeye hazır hale getirilir. Afiyet olsun",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Levrek",
+      "price": "650,00 TL",
+      "desc": "Denizlerin en sevilen lezzetlerinden biri olan levrek, az kılçıklı yapısı ve lokum gibi dağılan hafif beyaz etiyle hem ızgarada hem de fırında eşsiz bir tat sunar.\r\nYaklaşık 300-350  Kalori içerir",
+      "category": "Balıklar"
+    },
+    {
+      "name": "Ahtapot Kol",
+      "price": "200,00 TL",
+      "desc": "Fiyat Aralığı: 200 - 800 TL",
+      "category": "Ara sıcaklar"
+    },
+    {
+      "name": "Roka salata",
+      "price": "200,00 TL",
+      "desc": "Taze roka yaprakları, sızma zeytinyağı ve limon sosuyla harmanlanmış, balıkların yanına çok yakışan hafif bir lezzet.",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Tahin teratör",
+      "price": "200,00 TL",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Sarı Zeybek Üçmeşe 20 cl",
+      "price": "1.350,00 TL",
+      "desc": "Üç farklı meşe fıçıda dinlendirilmiş, yumuşak içimli premium Türk rakısı.",
+      "category": "Alkollü İçecekler"
+    },
+    {
+      "name": "Çipura",
+      "price": "600,00 TL",
+      "desc": "Kendine has aroması, sulu ve sıkı et yapısıyla deniz ürünleri sevenlerin vazgeçilmezi olan çipura, ızgara ateşinde piştiğinde lezzetini zirveye taşır.\r\nYaklaşık 290-390 kalori içerir",
+      "category": "Balıklar"
+    },
+    {
+      "name": "Mütebbel",
+      "price": "200,00 TL",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Peynirli Roka salata",
+      "price": "250,00 TL",
+      "desc": "Taze roka yapraklarının üzerine serpiştirilmiş lezzetli beyaz peynir parçaları ve özel zeytinyağlı sos ile zenginleştirilmiş bir başlangıç.",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Sarı Zeybek Üçmeşe 35 cl",
+      "price": "1.950,00 TL",
+      "desc": "Üç farklı meşe fıçıda dinlendirilmiş, yumuşak içimli premium Türk rakısı.",
+      "category": "Alkollü İçecekler"
+    },
+    {
+      "name": "Çıtır Balık",
+      "price": "500,00 TL",
+      "desc": "Özenle fileto edilmiş taze balık parçalarının özel bir harçla kaplanarak altın sarısı olana dek kızartıldığı, dışı çıtır çıtır, içi ise yumuşacık ve pratik bir lezzet.",
+      "category": "Balıklar"
+    },
+    {
+      "name": "Ahtapot Güveç",
+      "price": "1.000,00 TL",
+      "desc": "",
+      "category": "Ara sıcaklar"
+    },
+    {
+      "name": "Köz patlıcan",
+      "price": "200,00 TL",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Çoban salata",
+      "price": "0,00 TL",
+      "desc": "İnce doğranmış domates, salatalık, biber, soğan ve maydanozun zeytinyağı ve taze sıkılmış limonla buluştuğu geleneksel bir klasik.",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Sarı Zeybek Üçmeşe 50 cl",
+      "price": "2.500,00 TL",
+      "desc": "Üç farklı meşe fıçıda dinlendirilmiş, yumuşak içimli premium Türk rakısı.",
+      "category": "Alkollü İçecekler"
+    },
+    {
+      "name": "Barbun",
+      "price": "900,00 TL",
+      "desc": "Denizlerin kırmızı incisi olarak bilinen barbun, hafif tatlımsı ve kendine has yoğun aromasıyla özellikle tavada çıtır çıtır pişirildiğinde damak çatlatır. (Fiyat belirtilmemiş)",
+      "category": "Balıklar"
+    },
+    {
+      "name": "Kuşkonmaz",
+      "price": "300,00 TL",
+      "desc": "",
+      "category": "Ara sıcaklar"
+    },
+    {
+      "name": "Ege karması",
+      "price": "250,00 TL",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Balık salata",
+      "price": "200,00 TL",
+      "desc": "Mevsim yeşillikleri üzerine eklenmiş taze haşlanmış veya ızgara balık parçalarıyla hazırlanan, hem hafif hem de oldukça doyurucu bir alternatif.",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Sarı Zeybek Üçmeşe 70 cl",
+      "price": "3.000,00 TL",
+      "desc": "Üç farklı meşe fıçıda dinlendirilmiş, yumuşak içimli premium Türk rakısı.",
+      "category": "Alkollü İçecekler"
+    },
+    {
+      "name": "Çinekop",
+      "price": "550,00 TL",
+      "desc": "Lüfer ailesinin en lezzetli üyelerinden biri olan çinekop, yağlı yapısı ve karakteristik deniz kokusuyla ızgara ateşinde veya tavada mükemmel bir ziyafet sunar. (Fiyat belirtilmemiş)",
+      "category": "Balıklar"
+    },
+    {
+      "name": "Karides Güveç",
+      "price": "750,00 TL",
+      "desc": "330-550 kalori içerir.\r\nİçerisinde tereyağ  sarımsak mantar kuru domates ve toz biber tuz içerir.",
+      "category": "Ara sıcaklar"
+    },
+    {
+      "name": "Meyhani",
+      "price": "250,00 TL",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Mevsim salata",
+      "price": "200,00 TL",
+      "desc": "Mevsimin en taze yeşillikleri, havuç, kırmızı lahana ve zeytinyağlı özel sosuyla hazırlanan renkli ve vitamin deposu bir salata.",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Beylerbeyi Göbek 20 cl",
+      "price": "1.300,00 TL",
+      "desc": "Sadece anasonun göbek kısmından üç kez damıtılarak üretilen, şeker ilavesiz premium rakı.",
+      "category": "Alkollü İçecekler"
+    },
+    {
+      "name": "Sardalya",
+      "price": "400,00 TL",
+      "desc": "Besin değeri oldukça yüksek, tam bir Omega-3 deposu olan sardalya; kendine has doyurucu yağı ve eşsiz lezzetiyle özellikle mevsiminde ızgaranın yıldızıdır.",
+      "category": "Balıklar"
+    },
+    {
+      "name": "Köylü Patatesi",
+      "price": "200,00 TL",
+      "desc": "",
+      "category": "Ara sıcaklar"
+    },
+    {
+      "name": "Avakado mezesi",
+      "price": "250,00 TL",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Yeşil salata",
+      "price": "200,00 TL",
+      "desc": "Çeşitli taze yeşilliklerin sadece sızma zeytinyağı ve limonla tatlandırıldığı, ana yemekleri dengeleyen en doğal ve sade seçenek.",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Beylerbeyi Göbek 35 cl",
+      "price": "1.900,00 TL",
+      "desc": "Sadece anasonun göbek kısmından üç kez damıtılarak üretilen, şeker ilavesiz premium rakı.",
+      "category": "Alkollü İçecekler"
+    },
+    {
+      "name": "Dil Balığı",
+      "price": "650,00 TL",
+      "desc": "Kılçıksız ve yassı yapısıyla yemesi en kolay balıklardan biri olan dil balığı, tereyağlı tavada hafifçe pişirildiğinde ortaya çıkan ipeksi dokusuyla öne çıkar. (Fiyat belirtilmemiş)",
+      "category": "Balıklar"
+    },
+    {
+      "name": "Karides Şiş",
+      "price": "200,00 TL",
+      "desc": "Fiyat Aralığı: 180 - 200 TL",
+      "category": "Ara sıcaklar"
+    },
+    {
+      "name": "Pancar",
+      "price": "250,00 TL",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Gavurdağı salata",
+      "price": "250,00 TL",
+      "desc": "İnce kıyım domates, soğan ve bol cevizin nar ekşisiyle harmanlandığı, kaşıkla yenen zengin aromalı nefis bir yöresel lezzet.",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Beylerbeyi Göbek 50 cl",
+      "price": "2.400,00 TL",
+      "desc": "Sadece anasonun göbek kısmından üç kez damıtılarak üretilen, şeker ilavesiz premium rakı.",
+      "category": "Alkollü İçecekler"
+    },
+    {
+      "name": "Mezgit",
+      "price": "650,00 TL",
+      "desc": "Pamuk gibi yumuşak beyaz eti ve son derece hafif tadıyla deniz ürünlerine yeni başlayanların bile severek tükettiği, mısır unuyla tavası meşhur narin bir lezzet.",
+      "category": "Balıklar"
+    },
+    {
+      "name": "Baby Kalamar",
+      "price": "150,00 TL",
+      "desc": "",
+      "category": "Ara sıcaklar"
+    },
+    {
+      "name": "Deniz börülcesi",
+      "price": "250,00 TL",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Kaşık salata",
+      "price": "200,00 TL",
+      "desc": "Domates, salatalık, biber ve soğanın suyu içinde kalacak şekilde çok ince doğranarak nar ekşisi ve zeytinyağı ile servis edildiği ferahlatıcı bir tat.",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Beylerbeyi Göbek 70 cl",
+      "price": "2.900,00 TL",
+      "desc": "Sadece anasonun göbek kısmından üç kez damıtılarak üretilen, şeker ilavesiz premium rakı.",
+      "category": "Alkollü İçecekler"
+    },
+    {
+      "name": "KG Levrek",
+      "price": "1.600,00 TL",
+      "desc": "Kalabalık masalar ve aile yemekleri için ideal olan, bütün olarak özenle pişirilen ve kiloyla servis edilen gösterişli, doyurucu ve büyük boy deniz levreği.",
+      "category": "Balıklar"
+    },
+    {
+      "name": "Kalamar Tava",
+      "price": "700,00 TL",
+      "desc": "",
+      "category": "Ara sıcaklar"
+    },
+    {
+      "name": "Kaya koruğu",
+      "price": "250,00 TL",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Rokalı çoban salata",
+      "price": "0,00 TL",
+      "desc": "Klasik çoban salatası malzemelerinin, ince kıyılmış taze roka yapraklarıyla zenginleştirilmiş çok daha aromatik ve iştah açıcı hali.",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Efe Gold 20 cl",
+      "price": "1.250,00 TL",
+      "desc": "Meşe fıçılarda dinlendirilmiş, altın sarısı rengi ve özgün aromasıyla premium rakı.",
+      "category": "Alkollü İçecekler"
+    },
+    {
+      "name": "KG Halili",
+      "price": "1.600,00 TL",
+      "desc": "Yöresel suların en doyurucu lezzetlerinden biri olan Halili balığı, bereketli porsiyonuyla kalabalık sofralara hitap eden, kiloyla sunulan özel bir seçenektir.",
+      "category": "Balıklar"
+    },
+    {
+      "name": "Kalamar Dolma",
+      "price": "100,00 TL",
+      "desc": "Fiyat Aralığı: 100 - 150 TL",
+      "category": "Ara sıcaklar"
+    },
+    {
+      "name": "Kabak şayan",
+      "price": "250,00 TL",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Rokalı mevsim salata",
+      "price": "250,00 TL",
+      "desc": "Taze mevsim sebzelerinin karakteristik roka tadıyla harmanlanarak daha keskin bir lezzet profiline ulaştığı ferah bir tabak.",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Efe Gold 35 cl",
+      "price": "1.750,00 TL",
+      "desc": "Meşe fıçılarda dinlendirilmiş, altın sarısı rengi ve özgün aromasıyla premium rakı.",
+      "category": "Alkollü İçecekler"
+    },
+    {
+      "name": "Lagos",
+      "price": "2.000,00 TL",
+      "desc": "Denizlerin en değerli ve prestijli balıklarından biri kabul edilen Lagos, iri yapısı, kılçıksız beyaz eti ve ister şiş ister ızgara olsun sunduğu muazzam lezzet şöleniyle başroldedir. (Fiyat Aralığı: 2000 - 2200 TL)",
+      "category": "Balıklar"
+    },
+    {
+      "name": "Kalamar Izgara",
+      "price": "200,00 TL",
+      "desc": "Fiyat Aralığı: 200 - 800 TL",
+      "category": "Ara sıcaklar"
+    },
+    {
+      "name": "Semizotlu kuru cacık",
+      "price": "250,00 TL",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Mozarella peynirli Domates  söğüş",
+      "price": "250,00 TL",
+      "desc": "İri doğranmış, kabukları soyulmuş taze taze domates ve salatalıkların en yalın haliyle, yanında biraz tuz ve zeytinyağı ile sunumu.",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Efe Gold 50 cl",
+      "price": "2.250,00 TL",
+      "desc": "Meşe fıçılarda dinlendirilmiş, altın sarısı rengi ve özgün aromasıyla premium rakı.",
+      "category": "Alkollü İçecekler"
+    },
+    {
+      "name": "Izgara Mantar",
+      "price": "400,00 TL",
+      "desc": "",
+      "category": "Ara sıcaklar"
+    },
+    {
+      "name": "Ahtapot carpaccıo",
+      "price": "400,00 TL",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Marul salata",
+      "price": "200,00 TL",
+      "desc": "Çıtır marul yapraklarının zeytinyağı, limon ve ince kıyım yeşil soğanla buluştuğu çıtır çıtır ve hafif bir klasik.",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Efe Gold 70 cl",
+      "price": "2.750,00 TL",
+      "desc": "Meşe fıçılarda dinlendirilmiş, altın sarısı rengi ve özgün aromasıyla premium rakı.",
+      "category": "Alkollü İçecekler"
+    },
+    {
+      "name": "Levrek marin",
+      "price": "250,00 TL",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Karides söğüş",
+      "price": "500,00 TL",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Mantarlı adalı",
+      "price": "250,00 TL",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "4 peynirli Girit mezesi",
+      "price": "250,00 TL",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Acılı atom",
+      "price": "250,00 TL",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Yoğurtlu kereviz",
+      "price": "250,00 TL",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Fava",
+      "price": "250,00 TL",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Zeytinyağlı enginar",
+      "price": "250,00 TL",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Köpoğlu",
+      "price": "250,00 TL",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Brokoli karnıbahar",
+      "price": "250,00 TL",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Ezine peyniri",
+      "price": "250,00 TL",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Tulum peyniri",
+      "price": "250,00 TL",
+      "desc": "",
+      "category": "Mezeler"
+    }
+  ]
+}
 };
