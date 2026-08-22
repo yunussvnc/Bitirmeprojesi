@@ -7257,5 +7257,985 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
         "category": "DAMSO ARİJİNAL SOJU"
       }
     ]
+  },
+  "7198": {
+    "name": "Papa John's Pizza Beşiktaş",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/byjp/papa-johns-pizza-byjp",
+    "sourceName": "Yemeksepeti / Papa John's Beşiktaş",
+    "verifiedAt": "2026-08-23",
+    "items": [
+      {
+        "name": "Algidalı Büyük Boy Menü",
+        "price": "654,49 TL769,99 TL",
+        "desc": "Valid for vegetarian pizzas. Special pizzas can be purchased for 44 TL, World pizzas for 54 TL, Classic pizzas for 74 TL.",
+        "category": "Algida Special Menu Category"
+      },
+      {
+        "name": "Algidalı Orta Boy Menü",
+        "price": "569,49 TL669,99 TL",
+        "desc": "Vejetaryen pizzalar için geçerlidir. Özel pizzalar 34 TL, Dünya pizzalar 44 TL, Klasik pizzalar 64 TL farkla alınabilir",
+        "category": "Algida Special Menu Category"
+      },
+      {
+        "name": "Love-Filled Menu",
+        "price": "790,49 TL929,99 TL",
+        "desc": "Enjoy the taste of love with a Heart-Shaped Pepperoni Pizza specially made for Valentine’s Day, 2 delicious soufflés, and 1 L drink",
+        "category": "Deals of the Month"
+      },
+      {
+        "name": "Big Size Pepperoni Deal",
+        "price": "518,49 TL609,99 TL",
+        "desc": "1 Large Pepperoni Pizza",
+        "category": "Deals of the Month"
+      },
+      {
+        "name": "Single Medium Pizza",
+        "price": "424,99 TL499,99 TL",
+        "desc": "Valid for vegetarian pizzas. Specialty pizzas can be selected for an additional 34 TL, World pizzas for 44 TL, and Classic pizzas for 64 TL",
+        "category": "Deals of the Month"
+      },
+      {
+        "name": "Single Large Pizza",
+        "price": "543,99 TL639,99 TL",
+        "desc": "Valid for vegetarian pizzas. Specialty pizzas can be selected for an additional 44 TL, World pizzas for 54 TL, and Classic pizzas for 74 TL",
+        "category": "Deals of the Month"
+      },
+      {
+        "name": "Large Spinach Alfredo Deal",
+        "price": "535,49 TL629,99 TL",
+        "desc": "A delicious pizza made with rich Alfredo sauce and mozzarella cheese",
+        "category": "Deals of the Month"
+      },
+      {
+        "name": "Large Garlic Basil Cheddar Cheese Pizza Deal",
+        "price": "535,49 TL629,99 TL",
+        "desc": "Garlic, basil, cheddar cheese, mozzarella cheese",
+        "category": "Deals of the Month"
+      },
+      {
+        "name": "Large Mixed Papa Menu",
+        "price": "679,99 TL799,99 TL",
+        "desc": "Mixed Papa Pizza (Large) + Drink of Your Choice (1 L) + Sauce",
+        "category": "Deals of the Month"
+      },
+      {
+        "name": "Large Pepperoni Pizza + 2 Garlic Sauce",
+        "price": "560,99 TL659,99 TL",
+        "desc": "Large Pepperoni Pizza + 2 Pieces Garlic Sauce",
+        "category": "Deals of the Month"
+      },
+      {
+        "name": "Large Pepperoni Pizza – Lipton Sparkling",
+        "price": "552,49 TL649,99 TL",
+        "desc": "Büyük Boy Pepperoni Pizza + Elma Dilim Patates + Sarımsak Sos + Lipton Ice Tea Sparkling",
+        "category": "Deals of the Month"
+      },
+      {
+        "name": "2-Piece Callzone Menu",
+        "price": "744,57 TL875,96 TL",
+        "desc": "Choose 2 Callzones",
+        "category": "Deals of the Month"
+      },
+      {
+        "name": "Callzone Menü",
+        "price": "470,02 TL552,97 TL",
+        "desc": "Choose your Callzone Apple Slice Potato Drink (33 cl.)",
+        "category": "Deals of the Month"
+      },
+      {
+        "name": "Medium Pizza & Canned Drink & Garlic Sauce",
+        "price": "492,99 TL579,99 TL",
+        "desc": "Your choice of Medium Pizza + Garlic Sauce + Canned Drink",
+        "category": "Legendary Menus"
+      },
+      {
+        "name": "Medium Pepperoni Pizza & Garlic Sauce",
+        "price": "424,99 TL499,99 TL",
+        "desc": "Medium Pepperoni Pizza + Garlic Sauce",
+        "category": "Legendary Menus"
+      },
+      {
+        "name": "2 Medium Pizzas + 1 Liter Drink",
+        "price": "764,99 TL899,99 TL",
+        "desc": "Your choice of 2 Medium Pizzas + 1 Liter Drink",
+        "category": "Legendary Menus"
+      },
+      {
+        "name": "Medium Spinach Alfredo Pizza Deal",
+        "price": "416,49 TL489,99 TL",
+        "desc": "Spinach Alfredo Pizza (Medium)",
+        "category": "Legendary Menus"
+      },
+      {
+        "name": "Medium Garlic Basil Cheddar Cheese Pizza Deal",
+        "price": "416,49 TL489,99 TL",
+        "desc": "Garlic Basil Cheddar Cheese Pizza (Medium)",
+        "category": "Legendary Menus"
+      },
+      {
+        "name": "Red Bull Menu (Large)",
+        "price": "722,49 TL849,99 TL",
+        "desc": "Valid for vegetarian pizzas. Specialty pizzas can be selected for an additional 44 TL, World pizzas for 54 TL, and Classic pizzas for 74 TL",
+        "category": "Special Offers Menus"
+      },
+      {
+        "name": "3 Medium Pizzas",
+        "price": "1.019,99 TL1.199,99 TL",
+        "desc": "Valid for vegetarian pizzas. Specialty pizzas can be selected for an additional 34 TL, World pizzas for 44 TL, and Classic pizzas for 64 TL",
+        "category": "Special Offers Menus"
+      },
+      {
+        "name": "Party Menu",
+        "price": "1.036,99 TL1.219,99 TL",
+        "desc": "2 Large Pizzas + 1 Liter Drink + Free Lipton (1 L.) (Valid for vegetarian pizzas. Specialty pizzas can be selected for an additional 44 TL, World pizzas for 54 TL, and Classic pizzas for 74 TL)",
+        "category": "Special Offers Menus"
+      },
+      {
+        "name": "Large Duo Menu",
+        "price": "960,49 TL1.129,99 TL",
+        "desc": "2 Large Pizzas (Valid for vegetarian pizzas. Specialty pizzas can be selected for an additional 44 TL, World pizzas for 54 TL, and Classic pizzas for 74 TL)",
+        "category": "Special Offers Menus"
+      },
+      {
+        "name": "Mega Filler Menu",
+        "price": "2.719,99 TL3.199,99 TL",
+        "desc": "Pepperoni Pizza (Large) + Meatball Pizza (Large) + Doner Pizza (Large) + 2 Potato Wedges + 2 Chocolate Soufflés + 2 Liter Drinks",
+        "category": "Special Offers Menus"
+      },
+      {
+        "name": "Medium Duo Menu",
+        "price": "722,49 TL849,99 TL",
+        "desc": "2 Medium Pizzas (Valid for vegetarian pizzas. Specialty pizzas can be selected for an additional 34 TL, World pizzas for 44 TL, and Classic pizzas for 64 TL)",
+        "category": "Match Menus"
+      },
+      {
+        "name": "Medium Pizza with Garlic Dip Sauce",
+        "price": "441,99 TL519,99 TL",
+        "desc": "Valid for vegetarian pizzas. Specialty pizzas can be selected for an additional 34 TL, World pizzas for 44 TL, and Classic pizzas for 64 TL",
+        "category": "Garlic Flavors"
+      },
+      {
+        "name": "Large Pizza with Garlic Dip Sauce",
+        "price": "552,49 TL649,99 TL",
+        "desc": "Valid for vegetarian pizzas. Specialty pizzas can be selected for an additional 34 TL, World pizzas for 54 TL, and Classic pizzas for 74 TL",
+        "category": "Garlic Flavors"
+      },
+      {
+        "name": "Papa's Rolls",
+        "price": "203,99 TL239,99 TL",
+        "desc": "Flavor of your choice on Ranch Sauce",
+        "category": "Starters"
+      },
+      {
+        "name": "Pepperoni Roll",
+        "price": "216,74 TL254,99 TL",
+        "desc": "Pepperoni and mozzarella cheese on ranch sauce (8 Roll pieces)",
+        "category": "Starters"
+      },
+      {
+        "name": "Classic Breadstick",
+        "price": "148,74 TL174,99 TL",
+        "desc": "6 oven-baked sticks. Served with pizza sauce and special garlic sauce.",
+        "category": "Starters"
+      },
+      {
+        "name": "Apple Sliced Fries",
+        "price": "110,49 TL129,99 TL",
+        "desc": "200g of wedge-cut potatoes, oven-baked until golden. Served with BBQ dipping sauce.",
+        "category": "Starters"
+      },
+      {
+        "name": "Pickled Peppers (4 pcs)",
+        "price": "25,49 TL29,99 TL",
+        "desc": "4 pieces",
+        "category": "Starters"
+      },
+      {
+        "name": "Pickled Peppers (6 pcs)",
+        "price": "35,69 TL41,99 TL",
+        "desc": "6 pieces",
+        "category": "Starters"
+      },
+      {
+        "name": "Pickled Peppers (20 pcs)",
+        "price": "84,99 TL99,99 TL",
+        "desc": "20 pieces",
+        "category": "Starters"
+      },
+      {
+        "name": "Chicken Poppers",
+        "price": "314,49 TL369,99 TL",
+        "desc": "10 chicken nuggets. Served with BBQ dipping sauce.",
+        "category": "Starters"
+      },
+      {
+        "name": "Classic Breadsticks with Special Garlic Parmesan Sauce",
+        "price": "169,99 TL199,99 TL",
+        "desc": "6 oven-baked sticks, special garlic sauce, parmesan cheese. Served with pizza sauce.",
+        "category": "Starters"
+      },
+      {
+        "name": "Cheese Breadstick",
+        "price": "356,99 TL419,99 TL",
+        "desc": "Papa John’s fresh dough, special garlic sauce, mozzarella cheese. Served with pizza sauce.",
+        "category": "Starters"
+      },
+      {
+        "name": "Papa’s Feast Platter",
+        "price": "424,99 TL499,99 TL",
+        "desc": "4 chicken wings, 200g of wedge-cut potatoes, 4 chicken poppers. Served with hot sauce and BBQ dipping sauce.",
+        "category": "Starters"
+      },
+      {
+        "name": "Chicken Wings (8 pcs)",
+        "price": "424,99 TL499,99 TL",
+        "desc": "Served with BBQ dipping sauce.",
+        "category": "Starters"
+      },
+      {
+        "name": "Cheese Croissant",
+        "price": "254,99 TL299,99 TL",
+        "desc": "8 delicious Papa John’s style cheesy croissants.",
+        "category": "Starters"
+      },
+      {
+        "name": "Callzone with Spicy Sausage",
+        "price": "249,04 TL292,99 TL",
+        "desc": "Mozzarella cheese, diced sausage, jalapeno peppers, garlic sauce",
+        "category": "Starters"
+      },
+      {
+        "name": "Hidden Mediterranean Callzone",
+        "price": "249,04 TL292,99 TL",
+        "desc": "Mozzarella cheese, feta cheese, tomatoes, black olives, garlic sauce",
+        "category": "Starters"
+      },
+      {
+        "name": "Callzone with Plenty of Cheese",
+        "price": "249,04 TL292,99 TL",
+        "desc": "Mozzarella cheese, halloumi cheese, cheddar cheese, parmesan cheese, garlic sauce",
+        "category": "Starters"
+      },
+      {
+        "name": "Create Your Own Pizza (Medium)",
+        "price": "467,49 TL549,99 TL",
+        "desc": "With pizza sauce, mozzarella cheese and toppings of your choice",
+        "category": "Medium Pizzas (Serves 2)"
+      },
+      {
+        "name": "Bodrum Pizza (Medium)",
+        "price": "467,49 TL549,99 TL",
+        "desc": "Pizza sauce, mozzarella cheese, sliced tomatoes",
+        "category": "Medium Pizzas (Serves 2)"
+      },
+      {
+        "name": "Margherita Pizza (Medium)",
+        "price": "467,49 TL549,99 TL",
+        "desc": "Pizza sauce, mozzarella cheese",
+        "category": "Medium Pizzas (Serves 2)"
+      },
+      {
+        "name": "Mediterranean Pizza (Medium)",
+        "price": "467,49 TL549,99 TL",
+        "desc": "Mozzarella cheese, white onion, tomato, black olives, white cheese",
+        "category": "Medium Pizzas (Serves 2)"
+      },
+      {
+        "name": "Garden Delight Pizza (Medium)",
+        "price": "467,49 TL549,99 TL",
+        "desc": "Mozzarella cheese, sliced fresh tomatoes, fresh mushrooms, white onion, green pepper, black olives, corn",
+        "category": "Medium Pizzas (Serves 2)"
+      },
+      {
+        "name": "Pepperoni Pizza (Medium)",
+        "price": "488,74 TL574,99 TL",
+        "desc": "Mozzarella cheese, extra pepperoni, pizza sauce",
+        "category": "Medium Pizzas (Serves 2)"
+      },
+      {
+        "name": "Favorite Pizza (Medium)",
+        "price": "488,74 TL574,99 TL",
+        "desc": "Mozzarella cheese, pepperoni, mushroom, corn",
+        "category": "Medium Pizzas (Serves 2)"
+      },
+      {
+        "name": "BBQ Chicken Pizza (Medium)",
+        "price": "488,74 TL574,99 TL",
+        "desc": "Mozzarella cheese, grilled chicken, white onion, fresh mushrooms, barbecue sauce",
+        "category": "Medium Pizzas (Serves 2)"
+      },
+      {
+        "name": "Buddy Pizza (Medium)",
+        "price": "488,74 TL574,99 TL",
+        "desc": "Mozzarella cheese, sausage, mushrooms, onion, green pepper, ham (halal)",
+        "category": "Medium Pizzas (Serves 2)"
+      },
+      {
+        "name": "Carnival Pizza (Medium)",
+        "price": "488,74 TL574,99 TL",
+        "desc": "Mozzarella cheese, pizza sauce, pepperoni, mushrooms, black olives",
+        "category": "Medium Pizzas (Serves 2)"
+      },
+      {
+        "name": "BBQ Blaze Pizza (Medium)",
+        "price": "488,74 TL574,99 TL",
+        "desc": "BBQ sauce on top; mozzarella cheese, meatballs, pepperoni, mushrooms, jalapeno pepper",
+        "category": "Medium Pizzas (Serves 2)"
+      },
+      {
+        "name": "Mexican Wave Pizza (Medium)",
+        "price": "509,99 TL599,99 TL",
+        "desc": "Mozzarella cheese, grilled chicken, sliced fresh tomatoes, white onion, green pepper, jalapeno pepper, corn",
+        "category": "Medium Pizzas (Serves 2)"
+      },
+      {
+        "name": "Pera Pizza (Medium)",
+        "price": "509,99 TL599,99 TL",
+        "desc": "Mozzarella cheese, pizza sauce, grilled chicken, mushrooms, roasted red peppers, jalapeno peppers",
+        "category": "Medium Pizzas (Serves 2)"
+      },
+      {
+        "name": "Fiery Red Pizza (Medium)",
+        "price": "509,99 TL599,99 TL",
+        "desc": "Mozzarella cheese, sausage, red pepper, mushroom, black olives",
+        "category": "Medium Pizzas (Serves 2)"
+      },
+      {
+        "name": "Quattro Formaggi Pizza (Medium)",
+        "price": "509,99 TL599,99 TL",
+        "desc": "Mozzarella cheese, halloumi cheese, fresh kashar cheese, parmesan cheese",
+        "category": "Medium Pizzas (Serves 2)"
+      },
+      {
+        "name": "Hawaiian Pizza (Medium)",
+        "price": "509,99 TL599,99 TL",
+        "desc": "Mozzarella cheese, ham (halal), pineapple, extra cheese",
+        "category": "Medium Pizzas (Serves 2)"
+      },
+      {
+        "name": "Mixed Papa Pizza (Medium)",
+        "price": "509,99 TL599,99 TL",
+        "desc": "Mozzarella cheese, sausage, mushrooms, corn, black olives, Turkish sausage (sucuk)",
+        "category": "Medium Pizzas (Serves 2)"
+      },
+      {
+        "name": "Sailor’s Pizza (Medium)",
+        "price": "509,99 TL599,99 TL",
+        "desc": "Mozzarella cheese, corn, tuna, onion, tomato",
+        "category": "Medium Pizzas (Serves 2)"
+      },
+      {
+        "name": "Roast Meat Pizza (Medium)",
+        "price": "552,49 TL649,99 TL",
+        "desc": "Green pepper, onion, braised beef, roasted red peppers",
+        "category": "Medium Pizzas (Serves 2)"
+      },
+      {
+        "name": "Fresh Mozzarella Pizza (Medium)",
+        "price": "552,49 TL649,99 TL",
+        "desc": "Fresh mozzarella in brine, green pepper, tomato, roasted red peppers",
+        "category": "Medium Pizzas (Serves 2)"
+      },
+      {
+        "name": "Meat Lover’s Pizza (Medium)",
+        "price": "552,49 TL649,99 TL",
+        "desc": "Diced Turkish sausage (sucuk), pepperoni, ham (halal)",
+        "category": "Medium Pizzas (Serves 2)"
+      },
+      {
+        "name": "Carnivore Pizza (Medium)",
+        "price": "552,49 TL649,99 TL",
+        "desc": "Mozzarella cheese, pepperoni, Italian meatballs, special ground meat, ham (halal)",
+        "category": "Medium Pizzas (Serves 2)"
+      },
+      {
+        "name": "Ottoman Pizza (Medium)",
+        "price": "552,49 TL649,99 TL",
+        "desc": "Mozzarella cheese, Turkish sausage (sucuk), pastirma, feta cheese, green pepper, black olives",
+        "category": "Medium Pizzas (Serves 2)"
+      },
+      {
+        "name": "Little Italy Pizza (Medium)",
+        "price": "552,49 TL649,99 TL",
+        "desc": "Mozzarella cheese, pepperoni, Italian meatballs, mushrooms, black olives, oregano",
+        "category": "Medium Pizzas (Serves 2)"
+      },
+      {
+        "name": "Super Papa’s Pizza (Medium)",
+        "price": "552,49 TL649,99 TL",
+        "desc": "Mozzarella cheese, pepperoni, Italian meatballs, ham (halal), fresh mushrooms, white onion, green pepper, black olives",
+        "category": "Medium Pizzas (Serves 2)"
+      },
+      {
+        "name": "Vegan Pizza (Large)",
+        "price": "467,49 TL549,99 TL",
+        "desc": "Pizza sauce, tomato, mushrooms, onion, green pepper, olives, corn (Contains no animal products or cheese.)",
+        "category": "Large Pizzas (Serves 3–4)"
+      },
+      {
+        "name": "Create Your Own Pizza (Large)",
+        "price": "552,49 TL649,99 TL",
+        "desc": "Pizza sauce, mozzarella cheese, and your choice of toppings",
+        "category": "Large Pizzas (Serves 3–4)"
+      },
+      {
+        "name": "Bodrum Pizza (Large)",
+        "price": "552,49 TL649,99 TL",
+        "desc": "Pizza sauce, mozzarella cheese, sliced tomatoes",
+        "category": "Large Pizzas (Serves 3–4)"
+      },
+      {
+        "name": "Garden Delight Pizza (Large)",
+        "price": "552,49 TL649,99 TL",
+        "desc": "Mozzarella cheese, sliced fresh tomatoes, fresh mushrooms, white onion, green pepper, black olives, corn",
+        "category": "Large Pizzas (Serves 3–4)"
+      },
+      {
+        "name": "Mediterranean Pizza (Large)",
+        "price": "552,49 TL649,99 TL",
+        "desc": "Mozzarella cheese, white onion, tomato, black olives, feta cheese",
+        "category": "Large Pizzas (Serves 3–4)"
+      },
+      {
+        "name": "Margherita Pizza (Large)",
+        "price": "552,49 TL649,99 TL",
+        "desc": "Pizza sauce, mozzarella cheese",
+        "category": "Large Pizzas (Serves 3–4)"
+      },
+      {
+        "name": "BBQ Chicken Pizza (Large)",
+        "price": "573,74 TL674,99 TL",
+        "desc": "Mozzarella cheese, grilled chicken, white onion, fresh mushrooms, barbecue sauce",
+        "category": "Large Pizzas (Serves 3–4)"
+      },
+      {
+        "name": "Pepperoni Pizza (Large)",
+        "price": "573,74 TL674,99 TL",
+        "desc": "Mozzarella cheese, extra pepperoni, pizza sauce",
+        "category": "Large Pizzas (Serves 3–4)"
+      },
+      {
+        "name": "Buddy Pizza (Large)",
+        "price": "573,74 TL674,99 TL",
+        "desc": "Mozzarella cheese, sausage, mushroom, onion, green pepper, ham (halal)",
+        "category": "Large Pizzas (Serves 3–4)"
+      },
+      {
+        "name": "Favorite Pizza (Large)",
+        "price": "573,74 TL674,99 TL",
+        "desc": "Mozzarella cheese, pepperoni, mushroom, corn",
+        "category": "Large Pizzas (Serves 3–4)"
+      },
+      {
+        "name": "Carnival Pizza (Large)",
+        "price": "573,74 TL674,99 TL",
+        "desc": "Mozzarella cheese, pizza sauce, pepperoni, mushroom, black olives",
+        "category": "Large Pizzas (Serves 3–4)"
+      },
+      {
+        "name": "Pera Pizza (Large)",
+        "price": "594,99 TL699,99 TL",
+        "desc": "Mozzarella cheese, pizza sauce, grilled chicken, mushroom, roasted red pepper, jalapeno pepper",
+        "category": "Large Pizzas (Serves 3–4)"
+      },
+      {
+        "name": "Fiery Red Pizza (Large)",
+        "price": "594,99 TL699,99 TL",
+        "desc": "Mozzarella cheese, Turkish sausage (sucuk), red roasted pepper, mushroom, black olives",
+        "category": "Large Pizzas (Serves 3–4)"
+      },
+      {
+        "name": "Hawaiian Pizza (Large)",
+        "price": "594,99 TL699,99 TL",
+        "desc": "Mozzarella cheese, ham (halal), pineapple, extra cheese",
+        "category": "Large Pizzas (Serves 3–4)"
+      },
+      {
+        "name": "BBQ Blaze Pizza (Large)",
+        "price": "573,74 TL674,99 TL",
+        "desc": "On BBQ sauce; mozzarella cheese, meatballs, pepperoni, mushroom, jalapeno pepper",
+        "category": "Large Pizzas (Serves 3–4)"
+      },
+      {
+        "name": "Mexican Wave Pizza (Large)",
+        "price": "594,99 TL699,99 TL",
+        "desc": "Mozzarella cheese, grilled chicken, sliced fresh tomatoes, white onion, green pepper, jalapeno pepper, corn",
+        "category": "Large Pizzas (Serves 3–4)"
+      },
+      {
+        "name": "Sailor’s Pizza (Large)",
+        "price": "594,99 TL699,99 TL",
+        "desc": "Mozzarella cheese, corn, tuna, onion, tomato",
+        "category": "Large Pizzas (Serves 3–4)"
+      },
+      {
+        "name": "Quattro Formaggi Pizza (Large)",
+        "price": "594,99 TL699,99 TL",
+        "desc": "Mozzarella cheese, halloumi cheese, fresh kashar cheese, parmesan cheese",
+        "category": "Large Pizzas (Serves 3–4)"
+      },
+      {
+        "name": "Roast Meat Pizza (Large)",
+        "price": "679,99 TL799,99 TL",
+        "desc": "Green pepper, onion, braised meat, roasted red pepper",
+        "category": "Large Pizzas (Serves 3–4)"
+      },
+      {
+        "name": "Fresh Mozzarella Pizza (Large)",
+        "price": "679,99 TL799,99 TL",
+        "desc": "Fresh mozzarella in water, green pepper, tomato, roasted red pepper",
+        "category": "Large Pizzas (Serves 3–4)"
+      },
+      {
+        "name": "Meat Lover’s Pizza (Large)",
+        "price": "573,74 TL674,99 TL",
+        "desc": "Cubed Turkish sausage (sucuk), pepperoni, ham (halal)",
+        "category": "Large Pizzas (Serves 3–4)"
+      },
+      {
+        "name": "Super Papa’s Pizza (Large)",
+        "price": "679,99 TL799,99 TL",
+        "desc": "Mozzarella cheese, pepperoni, Italian meatballs, ham (halal), fresh mushroom, white onion, green pepper, black olives",
+        "category": "Large Pizzas (Serves 3–4)"
+      },
+      {
+        "name": "Carnivore Pizza (Large)",
+        "price": "679,99 TL799,99 TL",
+        "desc": "Mozzarella cheese, pepperoni, Italian meatballs, special minced meat, ham (halal)",
+        "category": "Large Pizzas (Serves 3–4)"
+      },
+      {
+        "name": "Little Italy Pizza (Large)",
+        "price": "679,99 TL799,99 TL",
+        "desc": "Mozzarella cheese, pepperoni, Italian meatballs, mushroom, black olives, oregano",
+        "category": "Large Pizzas (Serves 3–4)"
+      },
+      {
+        "name": "Ottoman Pizza (Large)",
+        "price": "679,99 TL799,99 TL",
+        "desc": "Mozzarella cheese, Turkish sausage (sucuk), pastrami, white cheese, green pepper, black olives",
+        "category": "Large Pizzas (Serves 3–4)"
+      },
+      {
+        "name": "Mixed Papa Pizza (Large)",
+        "price": "594,99 TL699,99 TL",
+        "desc": "Mozzarella cheese, sausage, mushroom, corn, black olives, Turkish sausage (sucuk)",
+        "category": "Large Pizzas (Serves 3–4)"
+      },
+      {
+        "name": "Vegan Pizza (Small)",
+        "price": "244,79 TL287,99 TL",
+        "desc": "Pizza sauce, tomato, mushroom, onion, green pepper, olives, corn (Does not contain animal products or cheese.)",
+        "category": "Small Pizzas (Serves 1)"
+      },
+      {
+        "name": "Create Your Own Pizza (Small)",
+        "price": "297,49 TL349,99 TL",
+        "desc": "Pizza sauce, mozzarella cheese and ingredients of your choice",
+        "category": "Small Pizzas (Serves 1)"
+      },
+      {
+        "name": "Bodrum Pizza (Small)",
+        "price": "297,49 TL349,99 TL",
+        "desc": "Pizza sauce, mozzarella cheese, sliced tomato",
+        "category": "Small Pizzas (Serves 1)"
+      },
+      {
+        "name": "Mediterranean Pizza (Small)",
+        "price": "339,99 TL399,99 TL",
+        "desc": "Mozzarella cheese, white onion, tomato, black olives, white cheese",
+        "category": "Small Pizzas (Serves 1)"
+      },
+      {
+        "name": "Garden Delight Pizza (Small)",
+        "price": "297,49 TL349,99 TL",
+        "desc": "Mozzarella cheese, sliced fresh tomato, fresh mushroom, white onion, green pepper, black olives, corn",
+        "category": "Small Pizzas (Serves 1)"
+      },
+      {
+        "name": "Margherita Pizza (Small)",
+        "price": "297,49 TL349,99 TL",
+        "desc": "Pizza sauce, mozzarella cheese",
+        "category": "Small Pizzas (Serves 1)"
+      },
+      {
+        "name": "Pepperoni Pizza (Small)",
+        "price": "314,49 TL369,99 TL",
+        "desc": "Mozzarella cheese, extra pepperoni, pizza sauce",
+        "category": "Small Pizzas (Serves 1)"
+      },
+      {
+        "name": "BBQ Chicken Pizza (Small)",
+        "price": "314,49 TL369,99 TL",
+        "desc": "Mozzarella cheese, grilled chicken, white onion, fresh mushroom, barbecue sauce",
+        "category": "Small Pizzas (Serves 1)"
+      },
+      {
+        "name": "Buddy Pizza (Small)",
+        "price": "314,49 TL369,99 TL",
+        "desc": "Mozzarella cheese, sausage, mushroom, onion, green pepper, ham (halal)",
+        "category": "Small Pizzas (Serves 1)"
+      },
+      {
+        "name": "Carnival Pizza (Small)",
+        "price": "314,49 TL369,99 TL",
+        "desc": "Mozzarella cheese, pizza sauce, pepperoni, mushroom, black olives",
+        "category": "Small Pizzas (Serves 1)"
+      },
+      {
+        "name": "Favorite Pizza (Small)",
+        "price": "314,49 TL369,99 TL",
+        "desc": "Mozzarella cheese, pepperoni, mushroom, corn",
+        "category": "Small Pizzas (Serves 1)"
+      },
+      {
+        "name": "Quattro Formaggi Pizza (Small)",
+        "price": "339,99 TL399,99 TL",
+        "desc": "Mozzarella cheese, halloumi cheese, fresh kashar cheese, parmesan cheese",
+        "category": "Small Pizzas (Serves 1)"
+      },
+      {
+        "name": "Mexican Wave Pizza (Small)",
+        "price": "339,99 TL399,99 TL",
+        "desc": "Mozzarella cheese, grilled chicken, sliced fresh tomato, white onion, green pepper, jalapeno pepper, corn",
+        "category": "Small Pizzas (Serves 1)"
+      },
+      {
+        "name": "Pera Pizza (Small)",
+        "price": "339,99 TL399,99 TL",
+        "desc": "Mozzarella cheese, pizza sauce, grilled chicken, mushroom, roasted red pepper, jalapeno pepper",
+        "category": "Small Pizzas (Serves 1)"
+      },
+      {
+        "name": "Fiery Red Pizza (Small)",
+        "price": "339,99 TL399,99 TL",
+        "desc": "Mozzarella cheese, Turkish sausage (sucuk), red roasted pepper, mushroom, black olives",
+        "category": "Small Pizzas (Serves 1)"
+      },
+      {
+        "name": "Hawaiian Pizza (Small)",
+        "price": "339,99 TL399,99 TL",
+        "desc": "Mozzarella cheese, ham (halal), pineapple, extra cheese",
+        "category": "Small Pizzas (Serves 1)"
+      },
+      {
+        "name": "BBQ Blaze Pizza (Small)",
+        "price": "339,99 TL399,99 TL",
+        "desc": "On BBQ sauce; mozzarella cheese, meatballs, pepperoni, mushroom, jalapeno pepper",
+        "category": "Small Pizzas (Serves 1)"
+      },
+      {
+        "name": "Mixed Papa Pizza (Small)",
+        "price": "339,99 TL399,99 TL",
+        "desc": "Mozzarella cheese, sausage, mushroom, corn, black olives, Turkish sausage (sucuk)",
+        "category": "Small Pizzas (Serves 1)"
+      },
+      {
+        "name": "Sailor’s Pizza (Small)",
+        "price": "339,99 TL399,99 TL",
+        "desc": "Mozzarella cheese, corn, tuna, onion, tomato",
+        "category": "Small Pizzas (Serves 1)"
+      },
+      {
+        "name": "Roast Meat Pizza (Small)",
+        "price": "382,49 TL449,99 TL",
+        "desc": "Green pepper, onion, braised meat, roasted red pepper",
+        "category": "Small Pizzas (Serves 1)"
+      },
+      {
+        "name": "Meat Lover’s Pizza (Small)",
+        "price": "314,49 TL369,99 TL",
+        "desc": "Cubed Turkish sausage (sucuk), pepperoni, ham (halal)",
+        "category": "Small Pizzas (Serves 1)"
+      },
+      {
+        "name": "Fresh Mozzarella Pizza (Small)",
+        "price": "382,49 TL449,99 TL",
+        "desc": "Fresh mozzarella in water, green pepper, tomato, roasted red pepper",
+        "category": "Small Pizzas (Serves 1)"
+      },
+      {
+        "name": "Carnivore Pizza (Small)",
+        "price": "382,49 TL449,99 TL",
+        "desc": "Mozzarella cheese, pepperoni, Italian meatballs, special minced meat, ham (halal)",
+        "category": "Small Pizzas (Serves 1)"
+      },
+      {
+        "name": "Ottoman Pizza (Small)",
+        "price": "382,49 TL449,99 TL",
+        "desc": "Mozzarella cheese, Turkish sausage (sucuk), pastrami, white cheese, green pepper, black olives",
+        "category": "Small Pizzas (Serves 1)"
+      },
+      {
+        "name": "Super Papa’s Pizza (Small)",
+        "price": "382,49 TL449,99 TL",
+        "desc": "Mozzarella cheese, pepperoni, Italian meatballs, ham (halal), fresh mushroom, white onion, green pepper, black olives",
+        "category": "Small Pizzas (Serves 1)"
+      },
+      {
+        "name": "Little Italy Pizza (Small)",
+        "price": "382,49 TL449,99 TL",
+        "desc": "Mozzarella cheese, pepperoni, Italian meatballs, mushroom, black olives, oregano",
+        "category": "Small Pizzas (Serves 1)"
+      },
+      {
+        "name": "Algida Maraş Cup (105 ml)",
+        "price": "84,99 TL99,99 TL",
+        "desc": "(105 ml.)",
+        "category": "Ice Creams"
+      },
+      {
+        "name": "Algida Carte d'Or Chocolate Dream (110 ml)",
+        "price": "101,99 TL119,99 TL",
+        "desc": "100 ml.",
+        "category": "Ice Creams"
+      },
+      {
+        "name": "Carte D'or Fruit Dream Cup (110 ml)",
+        "price": "101,99 TL119,99 TL",
+        "desc": "110 ml.",
+        "category": "Ice Creams"
+      },
+      {
+        "name": "Magnum Mini Sandwich Almond",
+        "price": "101,99 TL119,99 TL",
+        "desc": "Package",
+        "category": "Ice Creams"
+      },
+      {
+        "name": "Dövme Kaymaklı",
+        "price": "38,24 TL44,99 TL",
+        "desc": "Package",
+        "category": "Ice Creams"
+      },
+      {
+        "name": "Carte d'Or Petite Bar",
+        "price": "59,49 TL69,99 TL",
+        "desc": "Package",
+        "category": "Ice Creams"
+      },
+      {
+        "name": "Chocolate Soufflé",
+        "price": "144,49 TL169,99 TL",
+        "desc": "Chocolate flavored",
+        "category": "Desserts"
+      },
+      {
+        "name": "Double Chocolate Soufflé",
+        "price": "229,49 TL269,99 TL",
+        "desc": "2 pieces",
+        "category": "Desserts"
+      },
+      {
+        "name": "Chocolate Rolls",
+        "price": "178,49 TL209,99 TL",
+        "desc": "8 pieces",
+        "category": "Desserts"
+      },
+      {
+        "name": "Pepsi (33 cl.)",
+        "price": "110,49 TL129,99 TL",
+        "desc": "Canned beverage",
+        "category": "Drinks"
+      },
+      {
+        "name": "Pepsi Zero Sugar (33 cl.)",
+        "price": "110,49 TL129,99 TL",
+        "desc": "Canned beverage",
+        "category": "Drinks"
+      },
+      {
+        "name": "Yedigün (33 cl.)",
+        "price": "110,49 TL129,99 TL",
+        "desc": "Canned beverage",
+        "category": "Drinks"
+      },
+      {
+        "name": "Lipton Ice Tea Peach (33 cl)",
+        "price": "110,49 TL129,99 TL",
+        "desc": "Canned beverage",
+        "category": "Drinks"
+      },
+      {
+        "name": "Lipton Ice Tea Mango (33 cl)",
+        "price": "110,49 TL129,99 TL",
+        "desc": "Canned beverage",
+        "category": "Drinks"
+      },
+      {
+        "name": "Lipton Ice Tea Lemon (33 cl)",
+        "price": "110,49 TL129,99 TL",
+        "desc": "Canned beverage",
+        "category": "Drinks"
+      },
+      {
+        "name": "Fruko Cool Lime (33 cl.)",
+        "price": "110,49 TL129,99 TL",
+        "desc": "Canned beverage",
+        "category": "Drinks"
+      },
+      {
+        "name": "Sütaş Ayran (20 cl.)",
+        "price": "67,99 TL79,99 TL",
+        "desc": "Canned beverage",
+        "category": "Drinks"
+      },
+      {
+        "name": "Uludağ Premium Water (40 cl)",
+        "price": "42,49 TL49,99 TL",
+        "desc": "Plastic bottle",
+        "category": "Drinks"
+      },
+      {
+        "name": "Uludağ Sparkling Mineral Water (20 cl)",
+        "price": "59,49 TL69,99 TL",
+        "desc": "Glass bottle",
+        "category": "Drinks"
+      },
+      {
+        "name": "Uludağ Fruity Mineral Water Lemon (20 cl)",
+        "price": "63,74 TL74,99 TL",
+        "desc": "Glass bottle",
+        "category": "Drinks"
+      },
+      {
+        "name": "Uludağ Fruity Mineral Water Apple (20 cl)",
+        "price": "63,74 TL74,99 TL",
+        "desc": "Glass bottle",
+        "category": "Drinks"
+      },
+      {
+        "name": "Pepsi (1 L.)",
+        "price": "135,99 TL159,99 TL",
+        "desc": "Plastic bottle",
+        "category": "Drinks"
+      },
+      {
+        "name": "Pepsi Zero Sugar (1 L.)",
+        "price": "135,99 TL159,99 TL",
+        "desc": "Plastic bottle",
+        "category": "Drinks"
+      },
+      {
+        "name": "Yedigün Orange (1 L)",
+        "price": "135,99 TL159,99 TL",
+        "desc": "Plastic bottle",
+        "category": "Drinks"
+      },
+      {
+        "name": "Yedigün Tangerine (1 L)",
+        "price": "135,99 TL159,99 TL",
+        "desc": "Plastic bottle",
+        "category": "Drinks"
+      },
+      {
+        "name": "Lipton Ice Tea Peach (1 L)",
+        "price": "135,99 TL159,99 TL",
+        "desc": "Plastic bottle",
+        "category": "Drinks"
+      },
+      {
+        "name": "Lipton Ice Tea Lemon (1 L)",
+        "price": "135,99 TL159,99 TL",
+        "desc": "Plastic bottle",
+        "category": "Drinks"
+      },
+      {
+        "name": "Fruko Cool Lime (1 L.)",
+        "price": "135,99 TL159,99 TL",
+        "desc": "Plastic bottle",
+        "category": "Drinks"
+      },
+      {
+        "name": "Sütaş Ayran (1 L.)",
+        "price": "127,49 TL149,99 TL",
+        "desc": "Plastic bottle",
+        "category": "Drinks"
+      },
+      {
+        "name": "Lipton Ice Tea Sparkling Tropical (1 L.)",
+        "price": "135,99 TL159,99 TL",
+        "desc": "Pet şişe",
+        "category": "Drinks"
+      },
+      {
+        "name": "Lipton Ice Tea Sparkling Lemon Yuzu (1 L.)",
+        "price": "135,99 TL159,99 TL",
+        "desc": "Pet şişe",
+        "category": "Drinks"
+      },
+      {
+        "name": "Red Bull (25 cl.)",
+        "price": "110,49 TL129,99 TL",
+        "desc": "Canned beverage",
+        "category": "Drinks"
+      },
+      {
+        "name": "Red Bull Sugarfree (25 cl.)",
+        "price": "110,49 TL129,99 TL",
+        "desc": "Canned beverage",
+        "category": "Drinks"
+      },
+      {
+        "name": "Ketchup",
+        "price": "12,74 TL14,99 TL",
+        "desc": "Pack",
+        "category": "Sauces"
+      },
+      {
+        "name": "Mayonnaise",
+        "price": "12,74 TL14,99 TL",
+        "desc": "Pack",
+        "category": "Sauces"
+      },
+      {
+        "name": "Ranch Sauce",
+        "price": "25,49 TL29,99 TL",
+        "desc": "Pack",
+        "category": "Sauces"
+      },
+      {
+        "name": "Hot Sauce",
+        "price": "21,24 TL24,99 TL",
+        "desc": "Pack",
+        "category": "Sauces"
+      },
+      {
+        "name": "Honey Mustard Sauce",
+        "price": "21,24 TL24,99 TL",
+        "desc": "Pack",
+        "category": "Sauces"
+      },
+      {
+        "name": "BBQ Crust Sauce",
+        "price": "21,24 TL24,99 TL",
+        "desc": "Pack",
+        "category": "Sauces"
+      },
+      {
+        "name": "Special Pizza Sauce",
+        "price": "21,24 TL24,99 TL",
+        "desc": "Pack",
+        "category": "Sauces"
+      },
+      {
+        "name": "Garlic Sauce",
+        "price": "22,94 TL26,99 TL",
+        "desc": "Pack",
+        "category": "Sauces"
+      },
+      {
+        "name": "Colorado Ranch Sauce",
+        "price": "424,99 TL499,99 TL",
+        "desc": "510 gr.",
+        "category": "Sauces"
+      },
+      {
+        "name": "Plastic Bag",
+        "price": "1 TL",
+        "desc": "It's compulsory to purchase plastic bags for fixed price 1 TL according to the amendments on Environment Law by the Ministry of Environment, Urbanization and Climate Change. If you require a plastic bag, you should add it to your basket. The amount will be charged to you for each plastic bag.",
+        "category": "Carrier bag"
+      }
+    ]
   }
 };
