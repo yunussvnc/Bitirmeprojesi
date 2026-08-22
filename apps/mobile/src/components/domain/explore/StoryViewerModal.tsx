@@ -19,7 +19,6 @@ import {
   ActivityIndicator,
   Keyboard,
   useWindowDimensions,
-  ScrollView,
   Alert,
 } from 'react-native';
 import { Image } from 'expo-image';
@@ -41,13 +40,13 @@ import {
   type StoryViewerItem,
   type StoryReportReason,
 } from '@/src/services/storyService';
-import { ShareStorySheet } from '@/src/components/domain/stories/ShareStorySheet';
 import { timeAgo } from '@/src/utils/timeAgo';
 import { useTranslation } from 'react-i18next';
+import { styles } from './story-viewer/styles';
+import { StoryViewerOverlays } from './story-viewer/StoryViewerOverlays';
 
 const STORY_DURATION_MS = 5000;
 const LONG_PRESS_DELAY = 200;
-const TOP_INSET = Platform.OS === 'ios' ? 54 : 40;
 
 export interface StoryViewerModalProps {
   stories: Story[];
@@ -496,6 +495,18 @@ export function StoryViewerModal({
     if (isImage) startProgress(progressValueRef.current);
   }, [isImage, startProgress]);
 
+  const openReportMenu = useCallback(() => {
+    setShowOtherMenu(false);
+    setShowReportMenu(true);
+  }, []);
+
+  const closeReportMenu = useCallback(() => {
+    setShowReportMenu(false);
+    isPausedRef.current = false;
+    setVideoPaused(false);
+    if (isImage) startProgress(progressValueRef.current);
+  }, [isImage, startProgress]);
+
   const openViewersList = useCallback(async () => {
     if (!story) return;
     setVideoPaused(true);
@@ -790,468 +801,24 @@ export function StoryViewerModal({
         )}
       </Animated.View>
 
-      {/* ── Viewers List Modal ── */}
-      <Modal
-        visible={viewersModalVisible}
-        transparent
-        animationType="slide"
-        onRequestClose={closeViewersList}
-      >
-        <TouchableOpacity style={styles.viewersModalOverlay} activeOpacity={1} onPress={closeViewersList}>
-          <TouchableOpacity style={styles.viewersModalContent} activeOpacity={1}>
-            <View style={styles.viewersHeader}>
-              <Text style={styles.viewersTitle}>{t('story.viewers_title', { defaultValue: 'Görüntüleyenler' })}</Text>
-              <TouchableOpacity onPress={closeViewersList} style={styles.viewersCloseBtn}>
-                <IconSymbol name="xmark" size={20} color="#fff" />
-              </TouchableOpacity>
-            </View>
-            {viewersLoading ? (
-              <View style={styles.viewersLoading}>
-                <ActivityIndicator size="small" color="#fff" />
-              </View>
-            ) : viewers.length > 0 ? (
-              <ScrollView style={styles.viewersList} contentContainerStyle={{ paddingBottom: 40 }}>
-                {viewers.map((v, i) => (
-                  <View key={i} style={styles.viewerItem}>
-                    <Avatar source={v.user.avatar_url ? { uri: v.user.avatar_url } : undefined} name={v.user.first_name || v.user.username || 'U'} size={40} />
-                    <View style={styles.viewerInfo}>
-                      <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
-                        <Text style={styles.viewerName}>{v.user.first_name || v.user.username || 'U'}</Text>
-                        {v.reaction === '❤️' && <IconSymbol name="heart.fill" size={14} color="#ef4444" />}
-                      </View>
-                      <Text style={styles.viewerTime}>{timeAgo(v.viewed_at)}</Text>
-                    </View>
-                  </View>
-                ))}
-              </ScrollView>
-            ) : (
-              <View style={styles.viewersEmpty}>
-                <Text style={styles.viewersEmptyText}>{t('story.no_viewers', { defaultValue: 'Henüz görüntüleyen yok' })}</Text>
-              </View>
-            )}
-          </TouchableOpacity>
-        </TouchableOpacity>
-      </Modal>
-
-      {/* ── Kendi Hikayem — 3-Nokta Menü ── */}
-      <Modal
-        visible={showOwnMenu}
-        transparent
-        animationType="fade"
-        onRequestClose={closeOwnMenu}
-      >
-        <TouchableOpacity style={styles.menuOverlay} activeOpacity={1} onPress={closeOwnMenu}>
-          <View style={styles.menuContent}>
-            <TouchableOpacity style={styles.menuItem} onPress={handleDeleteStory}>
-              <IconSymbol name="trash" size={20} color="#ef4444" />
-              <Text style={[styles.menuItemText, { color: '#ef4444' }]}>Hikayeyi Sil</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.menuItem} onPress={closeOwnMenu}>
-              <IconSymbol name="xmark" size={20} color="#fff" />
-              <Text style={styles.menuItemText}>İptal</Text>
-            </TouchableOpacity>
-          </View>
-        </TouchableOpacity>
-      </Modal>
-
-      {/* ── Başkasının Hikayesi — 3-Nokta Menü ── */}
-      <Modal
-        visible={showOtherMenu}
-        transparent
-        animationType="fade"
-        onRequestClose={closeOtherMenu}
-      >
-        <TouchableOpacity style={styles.menuOverlay} activeOpacity={1} onPress={closeOtherMenu}>
-          <View style={styles.menuContent}>
-            <TouchableOpacity style={styles.menuItem} onPress={() => {
-              setShowOtherMenu(false);
-              setShowReportMenu(true);
-            }}>
-              <IconSymbol name="exclamationmark.triangle" size={20} color="#f59e0b" />
-              <Text style={styles.menuItemText}>Şikayet Et</Text>
-            </TouchableOpacity>
-            <TouchableOpacity style={styles.menuItem} onPress={closeOtherMenu}>
-              <IconSymbol name="xmark" size={20} color="#fff" />
-              <Text style={styles.menuItemText}>İptal</Text>
-            </TouchableOpacity>
-          </View>
-        </TouchableOpacity>
-      </Modal>
-
-      {/* ── Şikayet Nedeni Seçimi ── */}
-      <Modal
-        visible={showReportMenu}
-        transparent
-        animationType="fade"
-        onRequestClose={() => {
-          setShowReportMenu(false);
-          isPausedRef.current = false;
-          setVideoPaused(false);
-          if (isImage) startProgress(progressValueRef.current);
-        }}
-      >
-        <TouchableOpacity style={styles.menuOverlay} activeOpacity={1} onPress={() => {
-          setShowReportMenu(false);
-          isPausedRef.current = false;
-          setVideoPaused(false);
-          if (isImage) startProgress(progressValueRef.current);
-        }}>
-          <View style={styles.menuContent}>
-            <Text style={styles.menuTitle}>Şikayet Nedeni</Text>
-            {[
-              { key: 'spam' as StoryReportReason, label: 'Spam', icon: 'envelope.badge' },
-              { key: 'inappropriate' as StoryReportReason, label: 'Uygunsuz İçerik', icon: 'eye.slash' },
-              { key: 'violence' as StoryReportReason, label: 'Şiddet', icon: 'exclamationmark.shield' },
-              { key: 'harassment' as StoryReportReason, label: 'Taciz', icon: 'person.crop.circle.badge.exclamationmark' },
-              { key: 'other' as StoryReportReason, label: 'Diğer', icon: 'questionmark.circle' },
-            ].map((r) => (
-              <TouchableOpacity key={r.key} style={styles.menuItem} onPress={() => handleReport(r.key)}>
-                <IconSymbol name={r.icon as any} size={18} color="#fff" />
-                <Text style={styles.menuItemText}>{r.label}</Text>
-              </TouchableOpacity>
-            ))}
-          </View>
-        </TouchableOpacity>
-      </Modal>
-      <ShareStorySheet
-        visible={shareSheetVisible}
-        onClose={handleShareSheetClose}
+      <StoryViewerOverlays
         story={story}
+        viewersModalVisible={viewersModalVisible}
+        viewers={viewers}
+        viewersLoading={viewersLoading}
+        onCloseViewers={closeViewersList}
+        showOwnMenu={showOwnMenu}
+        onCloseOwnMenu={closeOwnMenu}
+        onDeleteStory={handleDeleteStory}
+        showOtherMenu={showOtherMenu}
+        onCloseOtherMenu={closeOtherMenu}
+        onOpenReportMenu={openReportMenu}
+        showReportMenu={showReportMenu}
+        onCloseReportMenu={closeReportMenu}
+        onReport={handleReport}
+        shareSheetVisible={shareSheetVisible}
+        onCloseShareSheet={handleShareSheetClose}
       />
     </Modal>
   );
 }
-
-const styles = StyleSheet.create({
-  tapZones: {
-    ...StyleSheet.absoluteFillObject,
-    flexDirection: 'row',
-    zIndex: 1,
-  },
-  tapLeft: {
-    flex: 1,
-  },
-  tapRight: {
-    flex: 1,
-  },
-  authorBar: {
-    position: 'absolute',
-    top: TOP_INSET + 14,
-    left: 12,
-    right: 12,
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 6,
-    paddingHorizontal: 8,
-    borderRadius: 12,
-    gap: 10,
-    zIndex: 10,
-  },
-  closeBtn: {
-    width: 36,
-    height: 36,
-    borderRadius: 18,
-    backgroundColor: 'rgba(0,0,0,0.4)',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  moreBtn: {
-    width: 36,
-    height: 36,
-    borderRadius: 18,
-    backgroundColor: 'rgba(0,0,0,0.4)',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  authorText: { flex: 1 },
-  authorNameRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  authorName: {
-    fontSize: 14,
-    fontWeight: '700',
-    color: '#fff',
-  },
-  timeAgo: {
-    fontSize: 12,
-    color: 'rgba(255,255,255,0.6)',
-  },
-  closeFriendsBadge: {
-    fontSize: 12,
-    color: '#4ade80',
-    fontWeight: '700',
-  },
-  placeRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 4,
-    marginTop: 2,
-  },
-  placeName: {
-    fontSize: 12,
-    color: 'rgba(255,255,255,0.8)',
-  },
-  progressRow: {
-    position: 'absolute',
-    top: TOP_INSET,
-    left: 12,
-    right: 12,
-    flexDirection: 'row',
-    gap: 3,
-    zIndex: 15,
-  },
-  progressSegment: {
-    height: 2.5,
-    borderRadius: 1.5,
-    overflow: 'hidden',
-  },
-  progressBg: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(255,255,255,0.3)',
-  },
-  progressFillCompleted: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(255,255,255,0.9)',
-  },
-  progressFillActive: {
-    backgroundColor: 'rgba(255,255,255,0.9)',
-  },
-  progressActiveWrap: {
-    ...StyleSheet.absoluteFillObject,
-    flexDirection: 'row',
-  },
-  // ── Reply Bar ──
-  replyBar: {
-    position: 'absolute',
-    left: 16,
-    right: 16,
-    zIndex: 20,
-  },
-  replyInputRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 10,
-    backgroundColor: 'rgba(255,255,255,0.15)',
-    borderRadius: 28,
-    borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.3)',
-    paddingHorizontal: 16,
-    paddingVertical: 6,
-  },
-  replyInput: {
-    flex: 1,
-    color: '#fff',
-    fontSize: 15,
-    paddingVertical: 6,
-    minHeight: 36,
-  },
-  replySendBtn: {
-    width: 36,
-    height: 36,
-    borderRadius: 18,
-    backgroundColor: 'rgba(255,255,255,0.2)',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  replySendBtnActive: {
-    backgroundColor: '#4ade80',
-  },
-  likeBtn: {
-    padding: 4,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  shareBtn: {
-    padding: 4,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  // ── Emoji Reaction Tray ──
-  emojiTray: {
-    flexDirection: 'row',
-    justifyContent: 'center',
-    gap: 8,
-    marginBottom: 10,
-    backgroundColor: 'rgba(0,0,0,0.5)',
-    borderRadius: 32,
-    paddingHorizontal: 12,
-    paddingVertical: 8,
-    alignSelf: 'center',
-  },
-  emojiBtn: {
-    width: 44,
-    height: 44,
-    borderRadius: 22,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'rgba(255,255,255,0.08)',
-  },
-  emojiBtnActive: {
-    backgroundColor: 'rgba(255,255,255,0.28)',
-    transform: [{ scale: 1.15 }],
-  },
-  emojiText: {
-    fontSize: 22,
-  },
-  emojiToggleBtn: {
-    width: 36,
-    height: 36,
-    borderRadius: 18,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: 'rgba(255,255,255,0.15)',
-  },
-  emojiToggleText: {
-    fontSize: 18,
-  },
-  // ── Link Sticker ──
-  linkSticker: {
-    position: 'absolute',
-    bottom: 190,
-    alignSelf: 'center',
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 6,
-    backgroundColor: '#fff',
-    paddingHorizontal: 16,
-    paddingVertical: 10,
-    borderRadius: 24,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.3,
-    shadowRadius: 8,
-    elevation: 6,
-    zIndex: 15,
-  },
-  linkStickerText: {
-    fontSize: 14,
-    fontWeight: '700',
-    color: '#000',
-    maxWidth: 200,
-  },
-  // Viewers Modal Styles
-  viewersBtnWrap: {
-    position: 'absolute',
-    left: 0,
-    right: 0,
-    alignItems: 'center',
-    zIndex: 3,
-  },
-  viewersBtn: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0,0,0,0.6)',
-    paddingHorizontal: 16,
-    paddingVertical: 10,
-    borderRadius: 20,
-    gap: 8,
-  },
-  viewersBtnText: {
-    color: '#fff',
-    fontSize: 14,
-    fontWeight: '600',
-  },
-  viewersModalOverlay: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    backgroundColor: 'rgba(0,0,0,0.5)',
-  },
-  viewersModalContent: {
-    backgroundColor: '#1a1a1a',
-    borderTopLeftRadius: 16,
-    borderTopRightRadius: 16,
-    height: '60%',
-    paddingHorizontal: 16,
-    paddingTop: 16,
-  },
-  viewersHeader: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingBottom: 16,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: '#333',
-  },
-  viewersTitle: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: '700',
-  },
-  viewersCloseBtn: {
-    padding: 4,
-  },
-  viewersLoading: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  viewersList: {
-    flex: 1,
-    paddingTop: 12,
-  },
-  viewerItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: 10,
-    gap: 12,
-  },
-  viewerInfo: {
-    flex: 1,
-    justifyContent: 'center',
-  },
-  viewerName: {
-    color: '#fff',
-    fontSize: 15,
-    fontWeight: '600',
-    marginBottom: 2,
-  },
-  viewerTime: {
-    color: 'rgba(255,255,255,0.6)',
-    fontSize: 12,
-  },
-  viewersEmpty: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  viewersEmptyText: {
-    color: 'rgba(255,255,255,0.6)',
-    fontSize: 14,
-  },
-  // ── Menü Modal Styles ──
-  menuOverlay: {
-    flex: 1,
-    justifyContent: 'flex-end',
-    backgroundColor: 'rgba(0,0,0,0.6)',
-  },
-  menuContent: {
-    backgroundColor: '#1a1a1a',
-    borderTopLeftRadius: 16,
-    borderTopRightRadius: 16,
-    paddingHorizontal: 20,
-    paddingTop: 20,
-    paddingBottom: Platform.OS === 'ios' ? 40 : 24,
-  },
-  menuTitle: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: '700',
-    marginBottom: 16,
-    textAlign: 'center',
-  },
-  menuItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 14,
-    paddingVertical: 14,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: '#333',
-  },
-  menuItemText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: '500',
-  },
-});
