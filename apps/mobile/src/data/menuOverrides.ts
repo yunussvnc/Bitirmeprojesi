@@ -10761,5 +10761,493 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
         "category": "Croissant Sandwich Menus"
       }
     ]
+  },
+  "7185": {
+    "name": "KEBO BEYLİKDÜZÜ",
+    "sourceUrl": "https://www.migros.com.tr/yemek/kebo-beylikduzu-cumhuriyet-mah-st-2d263",
+    "sourceName": "Migros Yemek Kebo Beylikdüzü (Cumhuriyet Mah.) canlı menüsü (resmi KEBO/Instagram/Yandex şube doğrulaması)",
+    "verifiedAt": "2026-08-23",
+    "items": [
+      {
+        "name": "Coca Cola&çuros (1 Kişilik) Menü",
+        "price": "459,00 TL",
+        "desc": "1 adet dilediğiniz 90 gr dürüm (kebo, green, kebabi, patron, atom), 1 adet coca cola ve 2 adet churros",
+        "category": "Coca-Cola Lezzetli Menüler"
+      },
+      {
+        "name": "Coca Cola Menü (2 Kişilik)",
+        "price": "980,00 TL",
+        "desc": "2 adet dilediğiniz 90 gr dürüm (Kebo, Green, Kebabi, Patron, Atom), 2 adet coca cola ve patates kızartması (200 g)",
+        "category": "Coca-Cola Lezzetli Menüler"
+      },
+      {
+        "name": "Coca Cola Menü (3 Kişilik)",
+        "price": "1.365,00 TL",
+        "desc": "3 adet dilediğiniz 90 gr dürüm (Kebo, Green, Kebabi, Patron, Atom), 3 adet coca cola ve patates kızartması (300 g)",
+        "category": "Coca-Cola Lezzetli Menüler"
+      },
+      {
+        "name": "Kebo Dürüm (Klasik Efsane) Menü Yap",
+        "price": "360,00 TL",
+        "desc": "Kebo dürüm (Klasik Efsane) (90 gr) yanına avantajlı olarak içecek, çıtır veya sos ekleyerek menünü kendi damak zevkine göre tamamla.",
+        "category": "Avantajlı Menü Oluştur"
+      },
+      {
+        "name": "Green Dürüm (Bol Yeşillik) Menü Yap",
+        "price": "350,00 TL",
+        "desc": "Green Dürüm (Bol Yeşillik) + Seçeceğiniz Çıtır + Seçeceğiniz Sos + İçecek",
+        "category": "Avantajlı Menü Oluştur"
+      },
+      {
+        "name": "Kebabi Dürüm (Soğan Sevenlere) Menü Yap",
+        "price": "350,00 TL",
+        "desc": "Kebabi Dürüm (Soğan Sevenlere) yanına avantajlı olarak içecek, çıtır veya sos ekleyerek menünü kendi damak zevkine göre tamamla.",
+        "category": "Avantajlı Menü Oluştur"
+      },
+      {
+        "name": "Patron Dürüm (Mayonez Sevenlere) Menü Yap",
+        "price": "330,00 TL",
+        "desc": "Patron Dürüm (Mayonez Sevenlere) + Seçeceğiniz Çıtır + Seçeceğiniz Sos + İçecek",
+        "category": "Avantajlı Menü Oluştur"
+      },
+      {
+        "name": "Atom Dürüm (Bol Çeşit) Menü Yap",
+        "price": "410,00 TL",
+        "desc": "Atom Dürüm (Bol Çeşit) yanına avantajlı olarak içecek, çıtır veya sos ekleyerek menünü kendi damak zevkine göre tamamla.",
+        "category": "Avantajlı Menü Oluştur"
+      },
+      {
+        "name": "Combo Menü Xl (2 Kişilik)",
+        "price": "890,00 TL",
+        "desc": "Seçeceğiniz 2 Adet Dürüm + Patates Kızartması (200 gr.) + 2 Adet Kutu İçecek",
+        "category": "2-3-4 Kişilik Menüler"
+      },
+      {
+        "name": "Coca Cola Menü (2 Kişilik)",
+        "price": "980,00 TL",
+        "desc": "2 adet dilediğiniz 90 gr dürüm (Kebo, Green, Kebabi, Patron, Atom), 2 adet coca cola ve patates kızartması (200 g)",
+        "category": "2-3-4 Kişilik Menüler"
+      },
+      {
+        "name": "Trio Menü Xl (3 Kişilik)",
+        "price": "1.230,00 TL",
+        "desc": "Seçeceğiniz 3 Adet Dürüm + Patates Kızartması (300 gr.) + 3 Adet Kutu İçecek",
+        "category": "2-3-4 Kişilik Menüler"
+      },
+      {
+        "name": "Coca Cola Menü (3 Kişilik)",
+        "price": "1.365,00 TL",
+        "desc": "3 adet dilediğiniz 90 gr dürüm (Kebo, Green, Kebabi, Patron, Atom), 3 adet coca cola ve patates kızartması (300 g)",
+        "category": "2-3-4 Kişilik Menüler"
+      },
+      {
+        "name": "Yummy Menü (2 Kişilik)",
+        "price": "580,00 TL",
+        "desc": "Soslu Çıtır Lavaş Ekmeği İçerisinde 100 Gr Schinitzel, Yummy Sos, Patates Kızartması, Yeşil Salata,Turşu Ve İsteğe Bağlı Acı Biber",
+        "category": "2-3-4 Kişilik Menüler"
+      },
+      {
+        "name": "Tenders Dürüm Menü (2 Kişilik)",
+        "price": "740,00 TL",
+        "desc": "Mayonezli Çıtır Lavaş Ekmeği İçerisinde 120 Gr Tenders, Kebo Mayonez, Yeşil Salata Karışımı, Turşu Ve İsteğe Bağlı Acı Biber",
+        "category": "2-3-4 Kişilik Menüler"
+      },
+      {
+        "name": "Yummy Dürüm&içecek",
+        "price": "350,00 TL",
+        "desc": "Soslu Çıtır Lavaş Ekmeği İçerisinde 100 Gr Schinitzel, Yummy Sos, Patates Kızartması, Yeşil Salata, Turşu Ve İsteğe Bağlı Acı Biber",
+        "category": "Ekonomik Menüler"
+      },
+      {
+        "name": "Tenders Dürüm&içecek",
+        "price": "410,00 TL",
+        "desc": "Mayonezli Çıtır Lavaş Ekmeği İçerisinde 120 Gr Tenders, Kebo Mayonez, Yeşil Salata Karışımı, Turşu Ve İsteğe Bağlı Acı Biber",
+        "category": "Ekonomik Menüler"
+      },
+      {
+        "name": "Çuros (3 Adet)",
+        "price": "100,00 TL",
+        "desc": "Altın renginde kızartılmış, dışı çıtır içi yumuşacık enfes churros, üzerine serpiştirilen tarçın ve şeker ile lezzeti katlanarak yanında özel çikolata sos ile servis edilir.",
+        "category": "Çıtırlar"
+      },
+      {
+        "name": "Patates Kızartması (80 Gr)",
+        "price": "100,00 TL",
+        "desc": "Patates Kızartması (80 Gr)",
+        "category": "Çıtırlar"
+      },
+      {
+        "name": "Patates Kızartması (100 Gr)",
+        "price": "120,00 TL",
+        "desc": "Patates Kızartması (100 Gr)",
+        "category": "Çıtırlar"
+      },
+      {
+        "name": "Jumbo Patates K. (140 Gr)",
+        "price": "150,00 TL",
+        "desc": "Jumbo Patates K. (140 Gr)",
+        "category": "Çıtırlar"
+      },
+      {
+        "name": "3'Lü Nugget",
+        "price": "80,00 TL",
+        "desc": "3 Adet",
+        "category": "Çıtırlar"
+      },
+      {
+        "name": "6'Lı Nugget",
+        "price": "140,00 TL",
+        "desc": "6 Adet",
+        "category": "Çıtırlar"
+      },
+      {
+        "name": "9'Lu Nugget",
+        "price": "200,00 TL",
+        "desc": "9 Adet",
+        "category": "Çıtırlar"
+      },
+      {
+        "name": "6'Lı Soğan Halkası",
+        "price": "80,00 TL",
+        "desc": "6'Lı Soğan Halkası",
+        "category": "Çıtırlar"
+      },
+      {
+        "name": "9'Lu Soğan Halkası",
+        "price": "110,00 TL",
+        "desc": "9'Lu Soğan Halkası",
+        "category": "Çıtırlar"
+      },
+      {
+        "name": "12'Li Soğan Halkası",
+        "price": "135,00 TL",
+        "desc": "12'Li Soğan Halkası",
+        "category": "Çıtırlar"
+      },
+      {
+        "name": "6'Lı Tavuk Topu",
+        "price": "90,00 TL",
+        "desc": "6'Lı Tavuk Topu",
+        "category": "Çıtırlar"
+      },
+      {
+        "name": "8'Li Tavuk Topu",
+        "price": "120,00 TL",
+        "desc": "8'Li Tavuk Topu",
+        "category": "Çıtırlar"
+      },
+      {
+        "name": "10'Lu Tavuk Topu",
+        "price": "150,00 TL",
+        "desc": "10'Lu Tavuk Topu",
+        "category": "Çıtırlar"
+      },
+      {
+        "name": "12'Li Tavuk Topu",
+        "price": "180,00 TL",
+        "desc": "12'Li Tavuk Topu",
+        "category": "Çıtırlar"
+      },
+      {
+        "name": "90 Gr Çıtır Bonfile",
+        "price": "180,00 TL",
+        "desc": "90 Gr Çıtır Bonfile",
+        "category": "Çıtırlar"
+      },
+      {
+        "name": "120 Gr Çıtır Bonfile",
+        "price": "240,00 TL",
+        "desc": "120 Gr Çıtır Bonfile",
+        "category": "Çıtırlar"
+      },
+      {
+        "name": "150 Gr Çıtır Bonfile",
+        "price": "300,00 TL",
+        "desc": "150 Gr Çıtır Bonfile",
+        "category": "Çıtırlar"
+      },
+      {
+        "name": "180 Gr Çıtır Bonfile",
+        "price": "360,00 TL",
+        "desc": "180 Gr Çıtır Bonfile",
+        "category": "Çıtırlar"
+      },
+      {
+        "name": "210 Gr Çıtır Bonfile",
+        "price": "420,00 TL",
+        "desc": "210 Gr Çıtır Bonfile",
+        "category": "Çıtırlar"
+      },
+      {
+        "name": "300 Gr Çıtır Bonfile",
+        "price": "499,00 TL",
+        "desc": "300 Gr Çıtır Bonfile",
+        "category": "Çıtırlar"
+      },
+      {
+        "name": "Patates K.+2'li Nugget",
+        "price": "120,00 TL",
+        "desc": "Patates K.+2'Li Nugget",
+        "category": "Çıtırlar"
+      },
+      {
+        "name": "Patates K.+4'lü Soğan H.",
+        "price": "120,00 TL",
+        "desc": "Patates K.+4'Lü Soğan H.",
+        "category": "Çıtırlar"
+      },
+      {
+        "name": "Patates K.+4'lü Tavuk T.",
+        "price": "120,00 TL",
+        "desc": "Patates K.+4'Lü Tavuk T.",
+        "category": "Çıtırlar"
+      },
+      {
+        "name": "Ranch Sos",
+        "price": "20,00 TL",
+        "desc": "Paket olarak servis edilmektedir.",
+        "category": "Soslar"
+      },
+      {
+        "name": "Barbekü Sos",
+        "price": "20,00 TL",
+        "desc": "Paket olarak servis edilmektedir.",
+        "category": "Soslar"
+      },
+      {
+        "name": "Acı Sos",
+        "price": "20,00 TL",
+        "desc": "Paket olarak servis edilmektedir.",
+        "category": "Soslar"
+      },
+      {
+        "name": "Ballı Hardal Sos",
+        "price": "20,00 TL",
+        "desc": "Ballı Hardal Sos",
+        "category": "Soslar"
+      },
+      {
+        "name": "Sarımsaklı Mayonez",
+        "price": "20,00 TL",
+        "desc": "Paket olarak servis edilmektedir.",
+        "category": "Soslar"
+      },
+      {
+        "name": "Çuros (3 Adet)",
+        "price": "100,00 TL",
+        "desc": "Altın renginde kızartılmış, dışı çıtır içi yumuşacık enfes churros, üzerine serpiştirilen tarçın ve şeker ile lezzeti katlanarak yanında özel çikolata sos ile servis edilir.",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Sütaş Tatlım Puding Kakaolu",
+        "price": "50,00 TL",
+        "desc": "Çikolatalı",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Sütaş Tatlım Puding Muzlu",
+        "price": "50,00 TL",
+        "desc": "Muzlu",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Sütaş Kutu Ayran 275 Ml.",
+        "price": "60,00 TL",
+        "desc": "Sütaş Kutu Ayran 275 Ml.",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Coca Cola 330 Ml.",
+        "price": "110,00 TL",
+        "desc": "Coca Cola 330 Ml.",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Coca Cola Zero 330 Ml.",
+        "price": "110,00 TL",
+        "desc": "Coca Cola Zero 330 Ml.",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Coca Cola Light 330 Ml",
+        "price": "110,00 TL",
+        "desc": "Coca Cola Light 330 Ml",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Fanta 330 Ml.",
+        "price": "110,00 TL",
+        "desc": "Fanta 330 Ml.",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Sprıte 330 Ml.",
+        "price": "110,00 TL",
+        "desc": "Sprıte 330 Ml.",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Fusetea Şeftali 330 Ml.",
+        "price": "110,00 TL",
+        "desc": "Kutu içecek",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Fusetea Limon 330 Ml.",
+        "price": "110,00 TL",
+        "desc": "Kutu içecek",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Fusetea Mango 330 Ml.",
+        "price": "110,00 TL",
+        "desc": "Kutu içecek",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Fusetea Karpuz 330 Ml.",
+        "price": "110,00 TL",
+        "desc": "Fusetea Karpuz 330 Ml.",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Fusetea Kavun Çilek 330 Ml.",
+        "price": "110,00 TL",
+        "desc": "Fusetea Karpuz Çilek 330 Ml.",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Cappy Şeftali 330 Ml.",
+        "price": "110,00 TL",
+        "desc": "Kutu içecek",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Cappy Vişne 330 Ml.",
+        "price": "110,00 TL",
+        "desc": "Kutu içecek",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Cappy Karışık 330 Ml.",
+        "price": "110,00 TL",
+        "desc": "Kutu içecek",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Şalgam Acılı",
+        "price": "110,00 TL",
+        "desc": "Şalgam Acılı",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Şalgam Acısız",
+        "price": "110,00 TL",
+        "desc": "Şalgam Acısız",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Coca Cola 1 L.",
+        "price": "165,00 TL",
+        "desc": "Coca Cola 1 L.",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Coca Cola Zero 1 L.",
+        "price": "165,00 TL",
+        "desc": "Coca Cola Zero 1 L.",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Coca Cola Light 1 L.",
+        "price": "165,00 TL",
+        "desc": "Coca Cola Light 1 L.",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Fanta 1 L.",
+        "price": "165,00 TL",
+        "desc": "Fanta 1 L.",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Sprıte 1 L.",
+        "price": "165,00 TL",
+        "desc": "Sprıte 1 L.",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Kebo Dürüm (Klasik Efsane)",
+        "price": "360,00 TL",
+        "desc": "Soslu çıtır lavaş ekmeği içerisinde; 90 gr. Kebo tavuk döner, Kebo sos, Kebo mayonezi, patates kızartması, turşu, isteğe bağlı acı biber",
+        "category": "Dürümler"
+      },
+      {
+        "name": "Green Dürüm (Bol Yeşillik)",
+        "price": "350,00 TL",
+        "desc": "Green Dürüm (Bol Yeşillik) yanına avantajlı olarak içecek, çıtır veya sos ekleyerek menünü kendi damak zevkine göre tamamla.",
+        "category": "Dürümler"
+      },
+      {
+        "name": "Kebabi Dürüm (Soğan Sevenlere)",
+        "price": "350,00 TL",
+        "desc": "Soslu çıtır lavaş ekmeği içerisinde; 90 gr. Kebo tavuk döneri, Kebo sos, soğan, isteğe bağlı acı biber",
+        "category": "Dürümler"
+      },
+      {
+        "name": "Patron Dürüm (Mayonez Sevenlere)",
+        "price": "330,00 TL",
+        "desc": "Patron Dürüm (Mayonez Sevenlere) yanına avantajlı olarak içecek, çıtır veya sos ekleyerek menünü kendi damak zevkine göre tamamla.",
+        "category": "Dürümler"
+      },
+      {
+        "name": "Atom Dürüm (Bol Çeşit)",
+        "price": "410,00 TL",
+        "desc": "Soslu çıtır lavaş ekmeği içerisinde; 90 gr. Kebo tavuk döneri, Kebo sos, Kebo mayonezi, patates kızarması, turşu, yeşil salata, soğan, isteğe bağlı acı biber",
+        "category": "Dürümler"
+      },
+      {
+        "name": "Yummy Dürüm (Çıtır Sevenlere)",
+        "price": "300,00 TL",
+        "desc": "Yummy Dürüm (Çıtır Sevenlere) yanına avantajlı olarak içecek, çıtır veya sos ekleyerek menünü kendi damak zevkine göre tamamla.",
+        "category": "Dürümler"
+      },
+      {
+        "name": "Tenders Dürüm (Tenders Sevenlere)",
+        "price": "360,00 TL",
+        "desc": "Mayonezli çıtır lavaş ekmeği içerisinde; 120 gr. tenders, Kebo mayonez, turşu, yeşil salata, isteğe bağlı acı biber",
+        "category": "Dürümler"
+      },
+      {
+        "name": "Kebo Dürüm (Junior)",
+        "price": "330,00 TL",
+        "desc": "Soslu çıtır lavaş ekmeği içerisinde; 60 gr. Kebo tavuk döner, Kebo mayonez, Kebo sos, patates kızartması, turşu, isteğe bağlı acı biber",
+        "category": "Junior Dürümler"
+      },
+      {
+        "name": "Green Dürüm (Junior)",
+        "price": "320,00 TL",
+        "desc": "Mayonezli çıtır lavaş ekmeği içerisinde; 60 gr. Kebo tavuk döner, Kebo mayonez, yeşil salata, isteğe bağlı acı biber",
+        "category": "Junior Dürümler"
+      },
+      {
+        "name": "Kebabi Dürüm (Junior)",
+        "price": "320,00 TL",
+        "desc": "Soslu çıtır lavaş ekmeği içerisinde; 60 gr. Kebo tavuk döneri, Kebo sos, soğan, isteğe bağlı acı biber",
+        "category": "Junior Dürümler"
+      },
+      {
+        "name": "Patron Dürüm (Junior)",
+        "price": "300,00 TL",
+        "desc": "Mayonezli çıtır lavaş ekmeği içerisinde; 60 gr. Kebo tavuk döneri, Kebo mayonezi, isteğe bağlı acı biber",
+        "category": "Junior Dürümler"
+      },
+      {
+        "name": "Atom Dürüm (Junior)",
+        "price": "380,00 TL",
+        "desc": "Soslu çıtır lavaş ekmeği içerisinde; 60 gr. Kebo tavuk döneri, Kebo sos, Kebo mayonezi, patates kızarması, turşu, yeşil salata, soğan, isteğe bağlı acı biber",
+        "category": "Junior Dürümler"
+      }
+    ]
   }
 };
