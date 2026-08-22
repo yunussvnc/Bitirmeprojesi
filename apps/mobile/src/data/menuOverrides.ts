@@ -11249,5 +11249,109 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
         "category": "Junior Dürümler"
       }
     ]
+  },
+  "7193": {
+    "name": "Habil Pizza",
+    "sourceUrl": "https://www.habilpizza.com/",
+    "sourceName": "Habil Pizza resmi sitesi — 22/08/2026 Günün Menüsü",
+    "verifiedAt": "2026-08-23",
+    "items": [
+      {
+        "name": "Süzme Mercimek Çorba",
+        "price": "",
+        "desc": "",
+        "category": "Günün Menüsü 22/08/2026 / Çorbalar"
+      },
+      {
+        "name": "Soğuk Ayran Çorba",
+        "price": "",
+        "desc": "",
+        "category": "Günün Menüsü 22/08/2026 / Çorbalar"
+      },
+      {
+        "name": "Kıymalı Fırın Patates",
+        "price": "",
+        "desc": "",
+        "category": "Günün Menüsü 22/08/2026 / Ana Yemekler"
+      },
+      {
+        "name": "Piliç Pane",
+        "price": "",
+        "desc": "",
+        "category": "Günün Menüsü 22/08/2026 / Ana Yemekler"
+      },
+      {
+        "name": "Ispanak Sufle",
+        "price": "",
+        "desc": "",
+        "category": "Günün Menüsü 22/08/2026 / Ana Yemekler"
+      },
+      {
+        "name": "Kuru Fasulye",
+        "price": "",
+        "desc": "",
+        "category": "Günün Menüsü 22/08/2026 / Ana Yemekler"
+      },
+      {
+        "name": "Pirinç Pilavı",
+        "price": "",
+        "desc": "",
+        "category": "Günün Menüsü 22/08/2026 / Yardımcı Yemekler"
+      },
+      {
+        "name": "Salçalı Makarna",
+        "price": "",
+        "desc": "",
+        "category": "Günün Menüsü 22/08/2026 / Yardımcı Yemekler"
+      },
+      {
+        "name": "Salata",
+        "price": "",
+        "desc": "",
+        "category": "Günün Menüsü 22/08/2026 / Salata / Tatlı / İçecek"
+      },
+      {
+        "name": "Ayran",
+        "price": "",
+        "desc": "",
+        "category": "Günün Menüsü 22/08/2026 / Salata / Tatlı / İçecek"
+      },
+      {
+        "name": "Etli Menü 4'lü",
+        "price": "380 TL",
+        "desc": "Tek menü siparişi yoktur.",
+        "category": "Menü Paketleri"
+      },
+      {
+        "name": "Etli Menü 3'lü",
+        "price": "360 TL",
+        "desc": "Tek menü siparişi yoktur.",
+        "category": "Menü Paketleri"
+      },
+      {
+        "name": "Etli Menü 2'li",
+        "price": "340 TL",
+        "desc": "Tek menü siparişi yoktur.",
+        "category": "Menü Paketleri"
+      },
+      {
+        "name": "Tavuklu Sebzeli Menü 4'lü",
+        "price": "360 TL",
+        "desc": "Tek menü siparişi yoktur.",
+        "category": "Menü Paketleri"
+      },
+      {
+        "name": "Tavuklu Sebzeli Menü 3'lü",
+        "price": "340 TL",
+        "desc": "Tek menü siparişi yoktur.",
+        "category": "Menü Paketleri"
+      },
+      {
+        "name": "Tavuklu Sebzeli Menü 2'li",
+        "price": "320 TL",
+        "desc": "Tek menü siparişi yoktur.",
+        "category": "Menü Paketleri"
+      }
+    ]
   }
 };
