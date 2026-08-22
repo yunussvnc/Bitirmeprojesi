@@ -4451,5 +4451,203 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
         "category": "U/WE Coffee menüsü"
       }
     ]
+  },
+  "7276": {
+    "name": "Dürümcü Esnaf Paşabahçe - Beykoz",
+    "sourceUrl": "https://durumcuesnaf.com/menu/",
+    "sourceName": "Dürümcü Esnaf resmi menüsü",
+    "verifiedAt": "2026-08-23",
+    "items": [
+      {
+        "name": "Adana Tava (180g)",
+        "desc": "Adana Tava, Çiğ Köfte, Halka Tatlı, Ayran",
+        "category": "Dürümcü Esnaf resmi menüsü"
+      },
+      {
+        "name": "Urfa Tava (180g)",
+        "desc": "Urfa Tava, Çiğ Köfte, Halka Tatlı, Ayran",
+        "category": "Dürümcü Esnaf resmi menüsü"
+      },
+      {
+        "name": "Kilis Tava (180g)",
+        "desc": "Kilis Tava, Çiğ Köfte, Halka Tatlı, Ayran",
+        "category": "Dürümcü Esnaf resmi menüsü"
+      },
+      {
+        "name": "Adana Dürüm Menü(120g)",
+        "desc": "Adana Dürüm, Çiğ Köfte, Halka Tatlı, Ayran",
+        "category": "Dürümcü Esnaf resmi menüsü"
+      },
+      {
+        "name": "Urfa Dürüm Menü(120g)",
+        "desc": "Urfa Dürüm, Çiğ Köfte, Halka Tatlı, Ayran",
+        "category": "Dürümcü Esnaf resmi menüsü"
+      },
+      {
+        "name": "Sucuk Kebap Dürüm Menü(120g)",
+        "desc": "Sucuk Dürüm, Çiğ Köfte, Halka Tatlı, Ayran",
+        "category": "Dürümcü Esnaf resmi menüsü"
+      },
+      {
+        "name": "Kuzu Şiş Dürüm Menü (120g)",
+        "desc": "Kuzu Şiş Dürüm, Çiğ Köfte, Halka Tatlı, Ayran",
+        "category": "Dürümcü Esnaf resmi menüsü"
+      },
+      {
+        "name": "Tavuk Şiş Dürüm Menü (120g)",
+        "desc": "Tavuk Şiş Dürüm, Çiğ Köfte, Halka Tatlı, Ayran",
+        "category": "Dürümcü Esnaf resmi menüsü"
+      },
+      {
+        "name": "Tavuk Kanat Menü (280g)",
+        "desc": "Tavuk Kanat Çiğ Köfte, Halka Tatlı, Ayran",
+        "category": "Dürümcü Esnaf resmi menüsü"
+      },
+      {
+        "name": "Ciğer Kavurma Dürüm Menü(120g)",
+        "desc": "Ciğer Kavurma Dürüm, Çiğ Köfte, Halka Tatlı, Ayran",
+        "category": "Dürümcü Esnaf resmi menüsü"
+      },
+      {
+        "name": "Çorba",
+        "desc": "",
+        "category": "Dürümcü Esnaf resmi menüsü"
+      },
+      {
+        "name": "Çiğ Köfte",
+        "desc": "200gr Çiğ Köfte",
+        "category": "Dürümcü Esnaf resmi menüsü"
+      },
+      {
+        "name": "Halka Tatlı",
+        "desc": "",
+        "category": "Dürümcü Esnaf resmi menüsü"
+      },
+      {
+        "name": "Açık Ayran",
+        "desc": "",
+        "category": "Dürümcü Esnaf resmi menüsü"
+      },
+      {
+        "name": "Su",
+        "desc": "",
+        "category": "Dürümcü Esnaf resmi menüsü"
+      },
+      {
+        "name": "Pepsi Kola",
+        "desc": "",
+        "category": "Dürümcü Esnaf resmi menüsü"
+      },
+      {
+        "name": "Soda",
+        "desc": "",
+        "category": "Dürümcü Esnaf resmi menüsü"
+      },
+      {
+        "name": "1,5 LT Pepsi",
+        "desc": "",
+        "category": "Dürümcü Esnaf resmi menüsü"
+      },
+      {
+        "name": "Eker Ayran",
+        "desc": "",
+        "category": "Dürümcü Esnaf resmi menüsü"
+      },
+      {
+        "name": "Cheddar Peynirli Adana Dürüm (120gr.)+ Pepsi (250 ml)",
+        "desc": "Cheddar Peynirli Adana Dürüm + Pepsi",
+        "category": "Dürümcü Esnaf resmi menüsü"
+      },
+      {
+        "name": "Köz Patlıcanlı Adana Dürüm(120GR.) + Pepsi (250 ML)",
+        "desc": "Köz Patlıcanlı Adana Dürüm(120GR.) + Pepsi (250 ML) Köz Patlıcanlı Adana Dürüm(120GR.) + Pepsi (250 ML)",
+        "category": "Dürümcü Esnaf resmi menüsü"
+      },
+      {
+        "name": "Cheddar Peynirli Tavuk Şiş Dürüm (120GR.) + Pepsi (250 ML)",
+        "desc": "Cheddar Peynirli Tavuk Şiş Dürüm (120GR.) + Pepsi (250 ML) Cheddar Peynirli Tavuk Şiş Dürüm (120GR.) + Pepsi (250 ML)",
+        "category": "Dürümcü Esnaf resmi menüsü"
+      },
+      {
+        "name": "Urfa Dürüm (120GR.) + Pepsi (250 ML) Menü",
+        "desc": "Urfa Dürüm (120GR.) + Pepsi (250 ML) Menü Urfa Dürüm (120GR.) + Pepsi (250 ML) Menü",
+        "category": "Dürümcü Esnaf resmi menüsü"
+      },
+      {
+        "name": "Adana Dürüm (120GR.) + Pepsi (250ML) Menü",
+        "desc": "Adana Dürüm (120GR.) + Pepsi (250ML) Menü Adana Dürüm (120GR.) + Pepsi (250ML) Menü",
+        "category": "Dürümcü Esnaf resmi menüsü"
+      },
+      {
+        "name": "Tavuk Şiş Dürüm (120GR.) + Pepsi (250ML) Menü",
+        "desc": "Tavuk Şiş Dürüm (120GR.) + Pepsi (250ML) Menü Tavuk Şiş Dürüm (120GR.) + Pepsi (250ML) Menü",
+        "category": "Dürümcü Esnaf resmi menüsü"
+      },
+      {
+        "name": "Sucuk Kebap Dürüm (120gr.) + Pepsi (250ml) Menü",
+        "desc": "Sucuk Kebap Dürüm (120gr.) + Pepsi (250ml) Menü Sucuk Kebap Dürüm (120gr.) + Pepsi (250ml) Menü",
+        "category": "Dürümcü Esnaf resmi menüsü"
+      },
+      {
+        "name": "Ciğer Kavurma Dürüm (120gr.) + Pepsi (250ml) Menü",
+        "desc": "Ciğer Kavurma Dürüm (120gr.) + Pepsi (250ml) Menü Ciğer Kavurma Dürüm (120gr.) + Pepsi (250ml) Menü",
+        "category": "Dürümcü Esnaf resmi menüsü"
+      },
+      {
+        "name": "Patates (90 gr.)",
+        "desc": "Patates (90 gr.) Patates (90 gr.)",
+        "category": "Dürümcü Esnaf resmi menüsü"
+      },
+      {
+        "name": "Patates (180 Gr)",
+        "desc": "Patates (180 Gr) Patates (180 Gr)",
+        "category": "Dürümcü Esnaf resmi menüsü"
+      },
+      {
+        "name": "Bulgur Pilavı (150 Gr)",
+        "desc": "Bulgur Pilavı (150 Gr) Bulgur Pilavı (150 Gr)",
+        "category": "Dürümcü Esnaf resmi menüsü"
+      },
+      {
+        "name": "Humus (150 Gr)",
+        "desc": "Humus (150 Gr) Humus (150 Gr)",
+        "category": "Dürümcü Esnaf resmi menüsü"
+      },
+      {
+        "name": "İçli Köfte",
+        "desc": "İçli Köfte İçli Köfte",
+        "category": "Dürümcü Esnaf resmi menüsü"
+      },
+      {
+        "name": "Köz Patlıcan (150 Gr)",
+        "desc": "Köz Patlıcan (150 Gr) Köz Patlıcan (150 Gr)",
+        "category": "Dürümcü Esnaf resmi menüsü"
+      },
+      {
+        "name": "Kuru Patlıcan Dolma",
+        "desc": "Kuru Patlıcan Dolma Kuru Patlıcan Dolma",
+        "category": "Dürümcü Esnaf resmi menüsü"
+      },
+      {
+        "name": "Hızlı Erişim",
+        "desc": "Ana Sayfa Hikayemiz Menü Franchise İletişim",
+        "category": "Dürümcü Esnaf resmi menüsü"
+      },
+      {
+        "name": "İletişim",
+        "desc": "Cevizli Mah. Mustafa Kemal Cad. Hukukçular Towers Sitesi A Blok No: 66A / 111 0532 705 61 63 info@durumcuesnaf.com",
+        "category": "Dürümcü Esnaf resmi menüsü"
+      },
+      {
+        "name": "Çalışma Saatleri",
+        "desc": "Pazartesi - Pazar: 11:00 - 02:00 * Çalışma saatleri şubelere göre değişiklik gösterebilir.",
+        "category": "Dürümcü Esnaf resmi menüsü"
+      },
+      {
+        "name": "Çerez Tercihleri",
+        "desc": "Sitemizde deneyiminizi geliştirmek, trafiği analiz etmek ve kişiselleştirilmiş içerik sunmak için çerezler kullanıyoruz. Zorunlu çerezler her zaman etkindir. Diğer çerez kategorileri için tercihlerinizi belirleyebilirsiniz. Daha fazla bilgi için Çerez Politikamızı inceleyebilirsiniz.",
+        "category": "Dürümcü Esnaf resmi menüsü"
+      }
+    ]
   }
 };
