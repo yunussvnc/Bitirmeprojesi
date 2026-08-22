@@ -4389,5 +4389,67 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
         "category": "DAMSO ARİJİNAL SOJU"
       }
     ]
+  },
+  "7285": {
+    "name": "U/We Coffee Roasters",
+    "sourceUrl": "https://uwecoffee.com/",
+    "sourceName": "U/WE Coffee Roastery resmi sitesi",
+    "verifiedAt": "2026-08-23",
+    "items": [
+      {
+        "name": "Cool Lime",
+        "price": "₺200",
+        "desc": "",
+        "category": "U/WE Coffee menüsü"
+      },
+      {
+        "name": "Berry Hibiscus",
+        "price": "₺200",
+        "desc": "",
+        "category": "U/WE Coffee menüsü"
+      },
+      {
+        "name": "Buzlu Matcha Latte",
+        "price": "₺230",
+        "desc": "",
+        "category": "U/WE Coffee menüsü"
+      },
+      {
+        "name": "Buzlu Chai Tea Latte",
+        "price": "₺230",
+        "desc": "",
+        "category": "U/WE Coffee menüsü"
+      },
+      {
+        "name": "Buzlu Çay",
+        "price": "₺200+",
+        "desc": "",
+        "category": "U/WE Coffee menüsü"
+      },
+      {
+        "name": "Milkshake",
+        "price": "₺220",
+        "desc": "",
+        "category": "U/WE Coffee menüsü"
+      },
+      {
+        "name": "Smoothie",
+        "price": "₺230",
+        "desc": "",
+        "category": "U/WE Coffee menüsü"
+      },
+      {
+        "name": "Frappuccino",
+        "price": "₺230",
+        "desc": "",
+        "category": "U/WE Coffee menüsü"
+      },
+      {
+        "name": "Ube latte",
+        "price": "₺230",
+        "desc": "",
+        "category": "U/WE Coffee menüsü"
+      }
+    ]
   }
 };
