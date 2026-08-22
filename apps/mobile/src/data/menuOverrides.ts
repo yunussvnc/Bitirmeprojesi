@@ -14784,4 +14784,517 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     }
   ]
 }
+,
+  "7227": {
+  "name": "Erdem Kebap",
+  "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/gaut/erdem-kebap",
+  "sourceName": "Yemeksepeti canlı Erdem Kebap menüsü",
+  "verifiedAt": "2026-08-23",
+  "items": [
+    {
+      "name": "Menemen",
+      "price": "320 TL",
+      "desc": "Yumurtalı",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Sucuklu Yumurta",
+      "price": "350 TL",
+      "desc": "Yumurta, sucuk",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Beyaz Peynirli Sandviç",
+      "price": "230 TL",
+      "desc": "Beyaz peynir, salatalık, yeşillik",
+      "category": "Soğuk Sandviçler"
+    },
+    {
+      "name": "Kaşarlı Sandviç",
+      "price": "230 TL",
+      "desc": "Kaşar peyniri, salatalık, yeşillik",
+      "category": "Soğuk Sandviçler"
+    },
+    {
+      "name": "Salamlı Sandviç",
+      "price": "230 TL",
+      "desc": "Salam, salatalık, yeşillik",
+      "category": "Soğuk Sandviçler"
+    },
+    {
+      "name": "Karışık Sandviç",
+      "price": "270 TL",
+      "desc": "Kavurma, kaşar peyniri, domates, salatalık",
+      "category": "Soğuk Sandviçler"
+    },
+    {
+      "name": "Ton Balıklı Sandviç",
+      "price": "270 TL",
+      "desc": "Ton balığı, yeşillik, mısır",
+      "category": "Soğuk Sandviçler"
+    },
+    {
+      "name": "Günün Çorbası",
+      "price": "110 TL",
+      "desc": "Ekmek ile",
+      "category": "Başlangıçlar"
+    },
+    {
+      "name": "Patates Kızartması",
+      "price": "210 TL",
+      "desc": "Parmak dilim",
+      "category": "Başlangıçlar"
+    },
+    {
+      "name": "Adana Kebap (120 gr.)",
+      "price": "420 TL",
+      "desc": "Kıvırcık marul, közde domates, biber, bulgur pilavı ile",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Urfa Kebap",
+      "price": "420 TL",
+      "desc": "Kıvırcık marul, közde domates, biber, bulgur pilavı ile",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Yoğurtlu Kebap",
+      "price": "550 TL",
+      "desc": "Kıvırcık marul, közde domates, biber ile",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Domatesli Kebap",
+      "price": "630 TL",
+      "desc": "Kıvırcık marul, közde domates, biber, bulgur pilavı ile",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Patlıcanlı Kebap",
+      "price": "630 TL",
+      "desc": "Kıvırcık marul, közde domates, biber, bulgur pilavı ile",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Sarma Beyti",
+      "price": "570 TL",
+      "desc": "Yoğurtlu, soslu, lavaşa sarılı. Kıvırcık marul, közde domates, biber, bulgur pilavı, yoğurt",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Alinazik Kebap (Kuzu Şişten)",
+      "price": "650 TL",
+      "desc": "Kıvırcık marul, közde domates, biber, bulgur pilavı ile",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Ezmeli Kebap (Kuzu Şişten)",
+      "price": "650 TL",
+      "desc": "Kıvırcık marul, közde domates, biber, bulgur pilavı ile",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Erdem Kebap",
+      "price": "1.150 TL",
+      "desc": "Tavuk şiş, kuzu şiş, ızgara köfte, kanat ızgara, Adana kebap, Fındık lahmacun, fındık pide. Lavaş, pilav, yeşillik, domates, biber ile",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Tavuk Şiş",
+      "price": "420 TL",
+      "desc": "Kıvırcık marul, közde domates, biber, bulgur pilavı ile",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "Kanat Şiş",
+      "price": "420 TL",
+      "desc": "Kıvırcık marul, közde domates, biber, bulgur pilavı ile",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "Tavuk Izgara",
+      "price": "420 TL",
+      "desc": "Kıvırcık marul, közde domates, biber, bulgur pilavı ile",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "Izgara Köfte",
+      "price": "420 TL",
+      "desc": "Kıvırcık marul, közde domates, biber, bulgur pilavı ile",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "Çöp Şiş",
+      "price": "620 TL",
+      "desc": "Kıvırcık marul, közde domates, biber, bulgur pilavı ile",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "Kuzu Şiş",
+      "price": "620 TL",
+      "desc": "Kıvırcık marul, közde domates, biber, bulgur pilavı ile",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "Tavuk Pirzola",
+      "price": "420 TL",
+      "desc": "Kıvırcık marul, közde domates, biber, bulgur pilavı ile",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "Fındık Lahmacun",
+      "price": "100 TL",
+      "desc": "Baharatlı kıyma harcının ince hamur üzerine yayılarak hazırlandığı küçük bir lahmacun çeşididir.",
+      "category": "Fırın Ürünleri"
+    },
+    {
+      "name": "Lahmacun",
+      "price": "165 TL",
+      "desc": "Baharatlı kıyma harcının ince hamur üzerine yayılarak hazırlandığı bir yemektir.",
+      "category": "Fırın Ürünleri"
+    },
+    {
+      "name": "Kaşarlı Lahmacun",
+      "price": "240 TL",
+      "desc": "Kaşar peyniri",
+      "category": "Fırın Ürünleri"
+    },
+    {
+      "name": "Kaşarlı Pide",
+      "price": "360 TL",
+      "desc": "Kaşar peyniri",
+      "category": "Fırın Ürünleri"
+    },
+    {
+      "name": "Kıymalı Pide (Açık)",
+      "price": "390 TL",
+      "desc": "Kıyma",
+      "category": "Fırın Ürünleri"
+    },
+    {
+      "name": "Tavuklu Kaşarlı Pide",
+      "price": "390 TL",
+      "desc": "Tavuk, kaşar peyniri",
+      "category": "Fırın Ürünleri"
+    },
+    {
+      "name": "Sebzeli Pide",
+      "price": "400 TL",
+      "desc": "Domates, kaşar peyniri, biber, zeytin, mısır, mantar",
+      "category": "Fırın Ürünleri"
+    },
+    {
+      "name": "Beyaz Peynirli Pide",
+      "price": "410 TL",
+      "desc": "Beyaz peynir",
+      "category": "Fırın Ürünleri"
+    },
+    {
+      "name": "Kıymalı Kaşarlı Pide (Açık)",
+      "price": "410 TL",
+      "desc": "Kıyma, kaşar peyniri",
+      "category": "Fırın Ürünleri"
+    },
+    {
+      "name": "Sucuklu Kaşarlı Pide",
+      "price": "410 TL",
+      "desc": "Sucuk, kaşar peyniri",
+      "category": "Fırın Ürünleri"
+    },
+    {
+      "name": "Sucuklu Pide",
+      "price": "410 TL",
+      "desc": "Sucuk",
+      "category": "Fırın Ürünleri"
+    },
+    {
+      "name": "Kuşbaşılı Pide (Açık)",
+      "price": "410 TL",
+      "desc": "Kuşbaşı et",
+      "category": "Fırın Ürünleri"
+    },
+    {
+      "name": "Kavurmalı Kaşarlı Pide",
+      "price": "420 TL",
+      "desc": "Kavurma, kaşar peyniri",
+      "category": "Fırın Ürünleri"
+    },
+    {
+      "name": "Pastırmalı Pide",
+      "price": "420 TL",
+      "desc": "Pastırma",
+      "category": "Fırın Ürünleri"
+    },
+    {
+      "name": "Pastırmalı Kaşarlı Pide",
+      "price": "420 TL",
+      "desc": "Pastırma, kaşar peyniri",
+      "category": "Fırın Ürünleri"
+    },
+    {
+      "name": "Kavurmalı Pide",
+      "price": "420 TL",
+      "desc": "Kavurma",
+      "category": "Fırın Ürünleri"
+    },
+    {
+      "name": "Karışık Pide",
+      "price": "420 TL",
+      "desc": "Kavurma, sucuk, salam, kaşar peyniri, mantar, domates, biber, zeytin",
+      "category": "Fırın Ürünleri"
+    },
+    {
+      "name": "Karışık Özel Pide",
+      "price": "420 TL",
+      "desc": "Kavurma, kaşar peyniri, sucuk",
+      "category": "Fırın Ürünleri"
+    },
+    {
+      "name": "Karışık Pizza",
+      "price": "460 TL",
+      "desc": "Sucuk, salam, kavurma, kaşar peyniri, domates, biber, zeytin, mantar",
+      "category": "Fırın Ürünleri"
+    },
+    {
+      "name": "Yarım Ekmek Arası Köfte",
+      "price": "250 TL",
+      "desc": "Kıvırcık marul, domates, isteğe göre soğan",
+      "category": "Dürümler & Ekmek Arası Ürünler"
+    },
+    {
+      "name": "3/4 Ekmek Arası Izgara Köfte",
+      "price": "400 TL",
+      "desc": "Kıvırcık marul, domates, isteğe göre soğan",
+      "category": "Dürümler & Ekmek Arası Ürünler"
+    },
+    {
+      "name": "Köfte Dürüm",
+      "price": "375 TL",
+      "desc": "Kıvırcık marul, domates, isteğe göre soğan",
+      "category": "Dürümler & Ekmek Arası Ürünler"
+    },
+    {
+      "name": "Tavuk Şiş Dürüm",
+      "price": "375 TL",
+      "desc": "Kıvırcık marul, domates, isteğe göre soğan",
+      "category": "Dürümler & Ekmek Arası Ürünler"
+    },
+    {
+      "name": "Adana Dürüm",
+      "price": "375 TL",
+      "desc": "120 gr. Adana kebap, kıvırcık marul, domates, isteğe göre soğan",
+      "category": "Dürümler & Ekmek Arası Ürünler"
+    },
+    {
+      "name": "Urfa Dürüm",
+      "price": "375 TL",
+      "desc": "120 gr. Urfa kebap, kıvırcık marul, domates, isteğe göre soğan",
+      "category": "Dürümler & Ekmek Arası Ürünler"
+    },
+    {
+      "name": "Çöp Şiş Dürüm",
+      "price": "480 TL",
+      "desc": "Kıvırcık marul, domates, isteğe göre soğan",
+      "category": "Dürümler & Ekmek Arası Ürünler"
+    },
+    {
+      "name": "Kuzu Şiş Dürüm",
+      "price": "480 TL",
+      "desc": "Kıvırcık marul, domates, isteğe göre soğan",
+      "category": "Dürümler & Ekmek Arası Ürünler"
+    },
+    {
+      "name": "Yoğurt",
+      "price": "150 TL",
+      "desc": "Adet olarak servis edilmektedir.",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Cacık",
+      "price": "150 TL",
+      "desc": "Yoğurdun içerisine doğranmış salatalık, nane, sarımsak ve tuz eklenerek yapılan meze çeşididir.",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Turşu",
+      "price": "150 TL",
+      "desc": "Adet olarak servis edilmektedir.",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Salatalık & Biber Turşusu",
+      "price": "150 TL",
+      "desc": "Salatalık, biber",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Mevsim Salata",
+      "price": "230 TL",
+      "desc": "Mevsim yeşillikleri",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Çoban Salata",
+      "price": "230 TL",
+      "desc": "Domates, salatalık, biber, isteğe göre soğan",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Göbek Salata",
+      "price": "230 TL",
+      "desc": "Göbek marul ile hazırlanan bir salata çeşididir.",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Ton Balıklı Salata",
+      "price": "350 TL",
+      "desc": "Ton balığı, kırmızılahana, havuç, kıvırcık marul, salatalık, domates, mısır, zeytinyağı, limon",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Tavuklu Salata",
+      "price": "350 TL",
+      "desc": "Terbiyeli tavuk, kırmızılahana, havuç, kıvırcık marul, salatalık, domates, mısır, sos, zeytinyağı, limon",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Tavuklu Diyet Salata",
+      "price": "350 TL",
+      "desc": "Tavuk, kırmızılahana, havuç, kıvırcık marul, salatalık, domates, mısır",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Peynirli Salata",
+      "price": "350 TL",
+      "desc": "Beyaz peynir, kırmızılahana, havuç, kıvırcık marul, salatalık, domates, mısır, zeytinyağı, limon",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Peynirli Diyet Salata",
+      "price": "350 TL",
+      "desc": "Beyaz peynir, kırmızılahana, havuç, kıvırcık marul, salatalık, mısır, domates",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Fırında Sütlaç",
+      "price": "140 TL",
+      "desc": "Pirinç, süt, şeker gibi malzemelerin birleşimiyle yapılan hafif puding kıvamında bir tatlıdır.",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Künefe",
+      "price": "230 TL",
+      "desc": "1 kişilik",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Algida Maraş Usulü Cup Dondurma (100 ml.)",
+      "price": "55 TL",
+      "desc": "Paket dondurma",
+      "category": "Dondurmalar"
+    },
+    {
+      "name": "Cartedor Meyve Rüyası (100 ml.)",
+      "price": "60 TL",
+      "desc": "Paket dondurma",
+      "category": "Dondurmalar"
+    },
+    {
+      "name": "Carte d'Or Çikolata Rüyası (110 ml.)",
+      "price": "60 TL",
+      "desc": "Paket dondurma",
+      "category": "Dondurmalar"
+    },
+    {
+      "name": "Coca-Cola (33 cl.)",
+      "price": "85 TL",
+      "desc": "Kutu içecek",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Coca-Cola Light (33 cl.)",
+      "price": "85 TL",
+      "desc": "Kutu içecek",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Sprite (33 cl.)",
+      "price": "85 TL",
+      "desc": "Kutu içecek",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Fanta (33 cl.)",
+      "price": "85 TL",
+      "desc": "Kutu içecek",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Cappy (33 cl.)",
+      "price": "85 TL",
+      "desc": "Kutu içecek",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Sütaş Ayran (30 cl.)",
+      "price": "60 TL",
+      "desc": "Büyük",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Şalgam Suyu (25 cl.) (Acılı)",
+      "price": "70 TL",
+      "desc": "İçecek",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Soda (20 cl.)",
+      "price": "60 TL",
+      "desc": "Cam şişe",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Su (50 cl.)",
+      "price": "30 TL",
+      "desc": "Pet şişe",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Coca-Cola (1 L.)",
+      "price": "180 TL",
+      "desc": "Pet şişe",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Coca-Cola Şekersiz (1 L.)",
+      "price": "180 TL",
+      "desc": "Pet şişe",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Coca-Cola Zero Sugar (1 L.)",
+      "price": "180 TL",
+      "desc": "Pet şişe",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Fanta (1 L.)",
+      "price": "180 TL",
+      "desc": "Pet şişe",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Sütaş Ayran (1 L.)",
+      "price": "180 TL",
+      "desc": "Pet şişe",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Coca-Cola (2,5 L.)",
+      "price": "220 TL",
+      "desc": "Pet şişe",
+      "category": "İçecekler"
+    }
+  ]
+}
 };
