@@ -215,12 +215,15 @@ function PostShareStep({
   const insets = useSafeAreaInsets();
   const { t } = useTranslation();
 
+  const defaultCommentsDisabled = useSettingsStore(s => s.defaultCommentsDisabled);
+  const includeLocationInPosts = useSettingsStore(s => s.includeLocationInPosts);
+
   // Dummygram-inspired: Single state object for all post metadata
   const [postMeta, setPostMeta] = useState<PostMeta>({
     caption: '',
     place: selectedPlace ? { id: Number(selectedPlace.id), name: selectedPlace.name } : null,
     taggedUsers: [],
-    commentsDisabled: false,
+    commentsDisabled: defaultCommentsDisabled,
     likesHidden: false,
   });
 
@@ -351,30 +354,31 @@ function PostShareStep({
             />
           </View>
 
-          {/* Action Rows */}
           <View style={styles.actionGroup}>
-            {/* Location */}
-            <TouchableOpacity
-              style={[styles.actionRow, { borderBottomColor: colors.surface.border }]}
-              onPress={() => { lightImpact(); onPlacePickerOpen(); }}
-              activeOpacity={0.7}
-            >
-              <View style={styles.actionIconWrap}>
-                <IconSymbol name="mappin.circle.fill" size={24} color={selectedPlace ? colors.accent.primary : colors.text.secondary} />
-              </View>
-              <View style={styles.actionTextWrap}>
-                <Text style={[styles.actionLabel, { color: selectedPlace ? colors.text.primary : colors.text.secondary }]}>
-                  {selectedPlace?.name || t("content_creation.add_location")}
-                </Text>
-              </View>
-              {selectedPlace ? (
-                <TouchableOpacity onPress={() => { lightImpact(); onPlaceChange(null); }} hitSlop={12}>
-                  <IconSymbol name="xmark.circle.fill" size={20} color={colors.text.tertiary} />
-                </TouchableOpacity>
-              ) : (
-                <IconSymbol name="chevron.right" size={18} color={colors.text.tertiary} />
-              )}
-            </TouchableOpacity>
+            {/* Location (Conditionally Rendered based on settings) */}
+            {includeLocationInPosts && (
+              <TouchableOpacity
+                style={[styles.actionRow, { borderBottomColor: colors.surface.border }]}
+                onPress={() => { lightImpact(); onPlacePickerOpen(); }}
+                activeOpacity={0.7}
+              >
+                <View style={styles.actionIconWrap}>
+                  <IconSymbol name="mappin.circle.fill" size={24} color={selectedPlace ? colors.accent.primary : colors.text.secondary} />
+                </View>
+                <View style={styles.actionTextWrap}>
+                  <Text style={[styles.actionLabel, { color: selectedPlace ? colors.text.primary : colors.text.secondary }]}>
+                    {selectedPlace?.name || t("content_creation.add_location")}
+                  </Text>
+                </View>
+                {selectedPlace ? (
+                  <TouchableOpacity onPress={() => { lightImpact(); onPlaceChange(null); }} hitSlop={12}>
+                    <IconSymbol name="xmark.circle.fill" size={20} color={colors.text.tertiary} />
+                  </TouchableOpacity>
+                ) : (
+                  <IconSymbol name="chevron.right" size={18} color={colors.text.tertiary} />
+                )}
+              </TouchableOpacity>
+            )}
 
             {/* Tag People */}
             <TouchableOpacity

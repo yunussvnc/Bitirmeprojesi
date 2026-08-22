@@ -45,6 +45,8 @@ export interface EmbeddedCameraProps {
   lastPhotoUri?: string | null;
 }
 
+import { useSettingsStore } from '@/src/store/useSettingsStore';
+
 export function EmbeddedCamera({
   contentType,
   onCapture,
@@ -55,7 +57,9 @@ export function EmbeddedCamera({
   const { t } = useTranslation();
   const { hasPermission: hasCamPermission, requestPermission: requestCamPermission } = useCameraPermission();
   const { hasPermission: hasMicPermission, requestPermission: requestMicPermission } = useMicrophonePermission();
-  const [facing, setFacing] = useState<'front' | 'back'>('back');
+  const cameraDefaultFront = useSettingsStore(s => s.cameraDefaultFront);
+  const cameraToolbarSide = useSettingsStore(s => s.cameraToolbarSide);
+  const [facing, setFacing] = useState<'front' | 'back'>(cameraDefaultFront ? 'front' : 'back');
   const [flash, setFlash] = useState<'off' | 'on' | 'auto'>('off');
   const [isRecording, setIsRecording] = useState(false);
   const [recordDuration, setRecordDuration] = useState(0);
@@ -348,7 +352,7 @@ export function EmbeddedCamera({
       )}
 
       {/* Top Controls */}
-      <View style={styles.topControls}>
+      <View style={[styles.topControls, cameraToolbarSide === 'left' ? { left: 16, right: undefined } : { right: 16 }]}>
         {/* Flash */}
         <TouchableOpacity
           style={styles.controlBtn}

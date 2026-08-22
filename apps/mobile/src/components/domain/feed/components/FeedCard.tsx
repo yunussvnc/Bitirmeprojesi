@@ -38,6 +38,7 @@ import { timeAgo } from "@/src/utils/timeAgo";
 import type { Post } from "@/src/services/feedService";
 import { useTranslation } from "react-i18next";
 import { useStoreReview } from "@/src/hooks/useStoreReview";
+import { useSettingsStore } from "@/src/store/useSettingsStore";
 
 export interface FeedCardProps {
   post: Post;
@@ -78,6 +79,8 @@ const FeedCardComponent = ({
   const [isMuted, setIsMuted] = useState(true);
   const likeScale = useSharedValue(1);
   const zoomScale = useSharedValue(1);
+  const videoAutoplay = useSettingsStore((s) => s.videoAutoplay);
+  const [isManuallyPaused, setIsManuallyPaused] = useState(!videoAutoplay);
 
   // Double-tap kalp animasyonu — lastTap ref ile
   const heartScale = useSharedValue(0);
@@ -117,6 +120,15 @@ const FeedCardComponent = ({
         runOnJS(onLike)();
       }
     });
+
+  const singleTapGesture = Gesture.Tap()
+    .numberOfTaps(1)
+    .onStart(() => {
+      // Toggle play/pause for video only
+      runOnJS(setIsManuallyPaused)(!isManuallyPaused);
+    });
+
+  const gesture = Gesture.Exclusive(doubleTapGesture, singleTapGesture);
 
   const heartAnimStyle = useAnimatedStyle(() => ({
     transform: [{ scale: heartScale.value }],
@@ -217,7 +229,7 @@ const FeedCardComponent = ({
 
         {/* Görsel alanı — çift tıkla beğen */}
         <Animated.View style={[styles.imageContainer, { height: imageHeight }, imageContainerAnimStyle]}>
-          <GestureDetector gesture={doubleTapGesture}>
+          <GestureDetector gesture={gesture}>
             <View style={{ width: "100%", height: imageHeight, backgroundColor: colors.background.secondary }}>
           {isCarousel ? (
             // ── Carousel mode ──────────────────────────────────────────
@@ -241,7 +253,7 @@ const FeedCardComponent = ({
                           resizeMode="cover"
                           repeat={true}
                           muted={isMuted}
-                          paused={!isViewable}
+                          paused={!isViewable || isManuallyPaused}
                         />
                       ) : (
                         <Image
@@ -298,7 +310,7 @@ const FeedCardComponent = ({
                       resizeMode="cover"
                       repeat={true}
                       muted={isMuted}
-                      paused={!isViewable}
+                      paused={!isViewable || isManuallyPaused}
                     />
                   ) : (
                     <Image source={{ uri: displayUrl }} style={{ width: imageWidth, height: imageHeight }} contentFit="cover" cachePolicy="memory-disk" />
