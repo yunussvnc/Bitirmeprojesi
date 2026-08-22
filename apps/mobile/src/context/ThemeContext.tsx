@@ -10,7 +10,7 @@
  * @module context/ThemeContext
  */
 
-import React, { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import React, { createContext, useContext, useState, ReactNode } from 'react';
 import { mmkv } from '@/src/utils/mmkvStorage';
 import { useColorScheme } from 'react-native';
 import { logger } from '@/src/utils/logger';

@@ -37,7 +37,6 @@ import { lightImpact, success } from "@/src/utils/haptics";
 import { useAppStore } from "@/src/store/useAppStore";
 import { useMessagesStore } from "@/src/store/useMessagesStore";
 import { useChatMessagesStore } from "@/src/store/useChatMessagesStore";
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import * as ImagePicker from 'expo-image-picker';
 import { toggleBlockUser, createReport } from "@/src/services/moderationService";
 import { getMessages as fetchBackendMessages, sendMessage as backendSendMessage, markMessagesRead, getConversationPermission, type ConversationPermission } from "@/src/services/messageService";
@@ -46,6 +45,7 @@ import { logger } from "@/src/utils/logger";
 import { useTranslation } from "react-i18next";
 import { API_BASE_URL } from "@/src/constants/api";
 import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
+import { useIslandStore } from '@/src/store/useIslandStore';
 
 /* ── Types ── */
 interface Message {
@@ -91,7 +91,7 @@ export default function ChatScreen() {
     const { colors } = useTheme();
     const insets = useSafeAreaInsets();
     const router = useRouter();
-    const { chatId, name: nameParam, avatar: avatarParam, targetUserId: targetUserIdParam, viewDeleted } = useLocalSearchParams<{ chatId: string; name?: string; avatar?: string; targetUserId?: string; viewDeleted?: string }>();
+    const { chatId, name: nameParam, avatar: avatarParam, targetUserId: targetUserIdParam } = useLocalSearchParams<{ chatId: string; name?: string; avatar?: string; targetUserId?: string }>();
     const [inputText, setInputText] = useState("");
     const [lastSeenId, setLastSeenId] = useState<string | null>(null);
     const [isOptionsVisible, setIsOptionsVisible] = useState(false);
@@ -104,7 +104,6 @@ export default function ChatScreen() {
     // Preview modal: URI seçildi, gönderilmedi — kullanıcı onaylasın
     const [previewUri, setPreviewUri] = useState<string | null>(null);
     const flatListRef = useRef<FlatList>(null);
-    const didInitialScrollRef = useRef(false);
 
     // ── Image Viewer Animations ──
     const imgScale = useSharedValue(1);
@@ -124,7 +123,7 @@ export default function ChatScreen() {
         savedTranslateY.value = 0;
         overlayOpacity.value = withTiming(1, { duration: 150 });
         setSelectedImageUri(uri);
-    }, []);
+    }, [imgScale, imgTranslateX, imgTranslateY, overlayOpacity, savedScale, savedTranslateX, savedTranslateY]);
 
     const closeImageViewer = useCallback(() => {
         // Reanimated callback'leri bazen RN JS thread'inde gecikmeye (4-5 sn) yol açar.
@@ -135,7 +134,7 @@ export default function ChatScreen() {
         setTimeout(() => {
             setSelectedImageUri(null);
         }, 150);
-    }, []);
+    }, [imgScale, overlayOpacity]);
 
     const pinchGesture = Gesture.Pinch()
         .onUpdate((e) => {
@@ -221,7 +220,6 @@ export default function ChatScreen() {
     // Sayısal ID'ler artık her zaman backend conversation ID'si olarak işlenir.
     const numericConvId = parseInt(resolvedChatId, 10);
     const isNumeric = !isNaN(numericConvId) && resolvedChatId === String(numericConvId);
-    const isDummyConversation = !isNumeric && !resolvedChatId.startsWith("match_");
     const isBackendConv = isNumeric;
 
     // Store'dan mesajları mount anında bir kere oku (subscribe etme — hydration loop'u önler)
@@ -242,7 +240,7 @@ export default function ChatScreen() {
                             try {
                                 const d = new Date(m.timestamp);
                                 return d.toLocaleTimeString(currentLocale, { hour: "2-digit", minute: "2-digit" });
-                            } catch (_e) { return m.timestamp; }
+                            } catch { return m.timestamp; }
                         })(),
                         imageUri: m.imageUri,
                         status: m.status,
@@ -250,11 +248,29 @@ export default function ChatScreen() {
                     }));
                 return [...initial, ...newFromStore];
             }
-        } catch (_e) { /* ignore */ }
+        } catch { /* ignore */ }
         return initial;
     });
 
     const storeConversation = useMessagesStore((state) => state.conversations.find(c => c.id === resolvedChatId));
+
+    // Contact bilgisini store veya navigasyon parametrelerinden kararlı biçimde türet.
+    const contact = React.useMemo(() => storeConversation ? {
+        name: storeConversation.name,
+        avatar: storeConversation.avatar,
+        isOnline: storeConversation.isOnline,
+        targetUserId: storeConversation.targetUserId,
+    } : nameParam ? {
+        name: decodeURIComponent(nameParam),
+        avatar: avatarParam ? decodeURIComponent(avatarParam) : `https://ui-avatars.com/api/?name=${encodeURIComponent(nameParam)}&background=random`,
+        isOnline: false,
+        targetUserId: targetUserIdParam ? parseInt(targetUserIdParam, 10) : undefined,
+    } : {
+        name: "Kullanıcı",
+        avatar: "https://ui-avatars.com/api/?name=K&background=random",
+        isOnline: false,
+        targetUserId: undefined,
+    }, [avatarParam, nameParam, storeConversation, targetUserIdParam]);
 
     // Tüm mesajlar görünür (soft-delete kaldırıldı)
     const visibleMessages = messages;
@@ -320,11 +336,10 @@ export default function ChatScreen() {
                         });
                         
                         // Gerçek bir mesaj geldiğinde Dynamic Island tetikle!
-                        const { useIslandStore } = require("@/src/store/useIslandStore");
                         useIslandStore.getState().showIsland({
                             title: contact?.name || "Kullanıcı",
                             subtitle: msg.content || "Yeni mesaj",
-                            icon: contact?.avatar ? { uri: contact.avatar } : "message",
+                            icon: (contact.avatar ? { uri: contact.avatar } : "message") as any,
                             color: "#00C6FF",
                             duration: 4000
                         });
@@ -348,8 +363,7 @@ export default function ChatScreen() {
         return () => {
             ws.close(1000, 'Screen unmounted');
         };
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isBackendConv, numericConvId, accessToken]);
+    }, [accessToken, contact.avatar, contact.name, currentLocale, currentUser?.id, isBackendConv, numericConvId]);
 
     // Backend'den mesaj geçmişini yükle ve 3 saniyede bir yeni mesajları kontrol et
     useEffect(() => {
@@ -472,7 +486,7 @@ export default function ChatScreen() {
                 if (hasUnreadFromOther) {
                     markMessagesRead(numericConvId).catch(() => { });
                 }
-            } catch (e) {
+            } catch {
                 if (__DEV__) logger.warn("[ChatScreen] Could not load messages for conv", numericConvId);
             }
         };
@@ -485,8 +499,7 @@ export default function ChatScreen() {
         const pollInterval = setInterval(loadMessages, 30000);
 
         return () => clearInterval(pollInterval);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [isBackendConv, numericConvId]);
+    }, [chatId, contact.avatar, contact.isOnline, contact.name, currentLocale, currentUser?.id, isBackendConv, numericConvId, t]);
 
     // 🔐 Mesajlaşma iznini yükle (konuşma açılınca + her 10 saniyede bir yenile)
     useEffect(() => {
@@ -506,33 +519,12 @@ export default function ChatScreen() {
 
     }, [isBackendConv, numericConvId]);
 
-    // Contact bilgisini öncelik sırasıyla belirle:
-    // 1. Store'daki konuşma (önceden yüklenmiş)
-    // 2. Navigation param'ları (openConversation'dan gelenler) ← YENİ
-    // 3. Boş fallback
-    const contact = storeConversation ? {
-        name: storeConversation.name,
-        avatar: storeConversation.avatar,
-        isOnline: storeConversation.isOnline,
-        targetUserId: storeConversation.targetUserId,
-    } : nameParam ? {
-        name: decodeURIComponent(nameParam),
-        avatar: avatarParam ? decodeURIComponent(avatarParam) : `https://ui-avatars.com/api/?name=${encodeURIComponent(nameParam)}&background=random`,
-        isOnline: false,
-        targetUserId: targetUserIdParam ? parseInt(targetUserIdParam, 10) : undefined,
-    } : {
-        name: "Kullanıcı",
-        avatar: "https://ui-avatars.com/api/?name=K&background=random",
-        isOnline: false,
-        targetUserId: undefined,
-    };
-
-
+    const initialMessagesRef = useRef(messages);
     useEffect(() => {
-        if (messages.length > 0) {
-            setLastSeenId(messages[messages.length - 1].id);
+        const initialMessages = initialMessagesRef.current;
+        if (initialMessages.length > 0) {
+            setLastSeenId(initialMessages[initialMessages.length - 1].id);
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
 
     const handleBlock = async () => {
@@ -699,7 +691,7 @@ export default function ChatScreen() {
                                 // Önizleme göster — kullanıcı onaylasın
                                 setPreviewUri(result.assets[0].uri);
                             }
-                        } catch (error) {
+                        } catch {
                             Alert.alert(t("common.error"), t("chat.camera_err"));
                         }
                     }
@@ -721,7 +713,7 @@ export default function ChatScreen() {
                                 // Önizleme göster — kullanıcı onaylasın
                                 setPreviewUri(result.assets[0].uri);
                             }
-                        } catch (error) {
+                        } catch {
                             Alert.alert(t("common.error"), t("chat.gallery_err"));
                         }
                     }

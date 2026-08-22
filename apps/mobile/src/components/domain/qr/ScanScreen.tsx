@@ -1,6 +1,6 @@
 import { mmkv } from "@/src/utils/mmkvStorage";
 import { router, useLocalSearchParams } from "expo-router";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { StyleSheet, TextInput, TouchableOpacity, View } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { BlurView } from "expo-blur";
@@ -68,12 +68,12 @@ export default function ScanScreen() {
 
   const handlingRef = useRef(false);
 
-  async function refreshStatus() {
+  const refreshStatus = useCallback(async () => {
     const s = await readActiveSession();
     setStatus(formatActiveText(s, t));
-  }
+  }, [t]);
 
-  async function activateAndGo(placeId: string) {
+  const activateAndGo = useCallback(async (placeId: string) => {
     if (handlingRef.current) return;
     handlingRef.current = true;
     try {
@@ -101,7 +101,7 @@ export default function ScanScreen() {
     } finally {
       handlingRef.current = false;
     }
-  }
+  }, [t]);
 
   // ✅ Deep link ile geldiyse: hiç UI göstermeden akışı çalıştır
   useEffect(() => {
@@ -110,7 +110,7 @@ export default function ScanScreen() {
       return;
     }
     activateAndGo(placeIdParam);
-  }, [placeIdParam]);
+  }, [placeIdParam, refreshStatus, activateAndGo]);
 
   return (
     <ParallaxScrollView

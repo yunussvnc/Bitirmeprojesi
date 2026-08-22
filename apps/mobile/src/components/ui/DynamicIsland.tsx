@@ -7,8 +7,6 @@ import Animated, {
   withTiming,
   interpolate,
   Extrapolation,
-  withSequence,
-  withDelay,
 } from 'react-native-reanimated';
 import { BlurView } from 'expo-blur';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
@@ -33,7 +31,7 @@ export function DynamicIsland() {
     } else {
       progress.value = withTiming(0, { duration: 300 });
     }
-  }, [isVisible]);
+  }, [isVisible, progress]);
 
   const animatedStyle = useAnimatedStyle(() => {
     // Width expands from notch size (~120) to full island (~340)

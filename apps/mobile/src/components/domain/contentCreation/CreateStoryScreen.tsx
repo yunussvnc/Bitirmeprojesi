@@ -15,7 +15,6 @@ import {
   TouchableOpacity,
   BackHandler,
   ActivityIndicator,
-  Dimensions,
 } from "react-native";
 import { Image as ExpoImage } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -23,7 +22,6 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { router, useLocalSearchParams } from "expo-router";
 import { useTheme } from "@/src/hooks/useTheme";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
-import { spacing, radius } from "@/src/constants/design";
 import { ContentCreationFlow } from "@/src/components/domain/contentCreation";
 import { useSettingsStore } from "@/src/store/useSettingsStore";
 import { useUploadPipelineStore } from "@/src/store/useUploadPipelineStore";
@@ -34,12 +32,10 @@ import { useTranslation } from "react-i18next";
 import type { MediaItem } from "@/src/contentCreation/types";
 import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 
-const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get("window");
 
 export default function CreateStoryScreen() {
   const { colors } = useTheme();
   const params = useLocalSearchParams<{ placeId?: string; placeName?: string }>();
-  const { t } = useTranslation();
   const [selectedPlace, setSelectedPlace] = useState<Place | null>(() => {
     if (params.placeId != null && params.placeName != null) {
       return { id: parseInt(String(params.placeId), 10), name: params.placeName } as Place;

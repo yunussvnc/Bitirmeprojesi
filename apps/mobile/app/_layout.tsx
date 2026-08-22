@@ -14,7 +14,6 @@ import { setAuthInterceptors } from "@/src/utils/apiClient";
 import { UploadProgressBanner } from "@/src/components/ui/UploadProgressBanner";
 import { OfflineBanner } from "@/src/components/ui/OfflineBanner";
 import { CustomAlertOverlay } from "@/src/components/ui/CustomAlertOverlay";
-import { PeekAndPopOverlay } from "@/src/components/ui/PeekAndPopOverlay";
 import { DynamicIsland } from "@/src/components/ui/DynamicIsland";
 import { useNotificationSocket } from "@/src/hooks/useNotificationSocket";
 import { PushNotificationProvider } from "@/src/providers/PushNotificationProvider";
@@ -86,7 +85,7 @@ function useProtectedRoute() {
       }
     }
     setIsVerifying(false);
-  }, [hydrated, accessToken]);
+  }, [hydrated, accessToken, logout]);
 
   useEffect(() => {
     // isVerifying bitmeden routing yapma ki uygulamanın içine girmesin

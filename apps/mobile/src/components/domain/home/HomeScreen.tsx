@@ -12,15 +12,10 @@ import {
   Text, Dimensions,
   StyleSheet,
   TouchableOpacity,
-  Platform,
   RefreshControl,
-  ViewToken,
   Animated,
   Easing,
-  Keyboard,
-  TouchableWithoutFeedback,
 } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import LottieView from "lottie-react-native";
 import { FlashList, FlashListRef } from "@shopify/flash-list";
 import * as Location from "expo-location";
@@ -41,7 +36,7 @@ import {
 import { usePreferences } from "@/src/store/preferences";
 import { getPlaceImageSource, hasPlaceImage } from "@/src/utils/placeImages";
 import { createTextStyle, s } from "@/src/constants/design";
-import { getAllPlaces, getForYouPlaces, logInteraction } from "@/src/services/mekanService";
+import { getForYouPlaces } from "@/src/services/mekanService";
 import { recommendPlaces } from "@/src/services/api";
 import type { Place } from "@/src/services/mekanService";
 import type { RecommendItem, RecommendResponse } from "@/src/types/recommend";
@@ -247,7 +242,7 @@ export default function HomeScreen() {
   const navigation = useNavigation();
   const screenRef = useRef<ScreenRef>(null);
   const flatListRef = useRef<FlashListRef<any>>(null);
-  const { prefs, patchPrefs, resetPrefs } = usePreferences();
+  const { prefs, resetPrefs } = usePreferences();
   const savedIds = useAppStore((s) => s.savedIds);
 
   const [query, setQuery] = useState("");
@@ -269,7 +264,6 @@ export default function HomeScreen() {
   const lastDirection = useRef<"up" | "down" | null>(null);
   const miniBarVisibleRef = useRef(false);
   const { hide: hideTabBar, show: showTabBar, fadeOut, fadeIn } = useTabBarVisibility();
-  const insets = useSafeAreaInsets();
   const [filters, setFilters] = useState<FilterValues>({
     province: null,
     district: null,
@@ -431,7 +425,7 @@ export default function HomeScreen() {
         }
       }
     },
-    [animateMiniBar]
+    [animateMiniBar, fadeIn, fadeOut]
   );
 
   const miniBarOpacity = miniBarAnim.interpolate({ inputRange: [0, 1], outputRange: [0, 1] });
@@ -558,7 +552,7 @@ export default function HomeScreen() {
         />
       );
     },
-    [placesById, handlePlacePress, displayMode]
+    [placesById, handlePlacePress, displayMode, t]
   );
 
   const listEmpty = useCallback(() => {
@@ -613,6 +607,7 @@ export default function HomeScreen() {
     filteredPlaces.length,
     hasActiveFilters,
     clearAll,
+    t,
   ]);
 
   const hasAnyFilter = hasActiveFilters || query.trim();

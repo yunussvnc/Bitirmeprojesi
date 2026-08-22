@@ -24,7 +24,6 @@ import {
   Platform,
   BackHandler,
   Switch,
-  FlatList,
   Keyboard,
   TouchableWithoutFeedback,
 } from "react-native";
@@ -34,11 +33,11 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { router, useLocalSearchParams } from "expo-router";
 import { useTheme } from "@/src/hooks/useTheme";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
-import { createTextStyle, spacing, radius } from "@/src/constants/design";
+import { createTextStyle, spacing } from "@/src/constants/design";
 import { ContentCreationFlow } from "@/src/components/domain/contentCreation";
 import { useSettingsStore } from "@/src/store/useSettingsStore";
 import { useUploadPipelineStore } from "@/src/store/useUploadPipelineStore";
-import { lightImpact, mediumImpact, success } from "@/src/utils/haptics";
+import { lightImpact, success } from "@/src/utils/haptics";
 import { useTranslation } from "react-i18next";
 import { sanitizeCaption } from "@/src/contentCreation/mediaValidation";
 import type { PostMeta, TaggedUser, MediaItem } from "@/src/contentCreation/types";
@@ -48,7 +47,6 @@ import { ConfirmModal } from "@/src/components/ui/ConfirmModal";
 
 export default function CreatePostScreen() {
   const { colors } = useTheme();
-  const insets = useSafeAreaInsets();
   const params = useLocalSearchParams<{ placeId?: string; placeName?: string; preSelect?: string }>();
   const { t } = useTranslation();
 
@@ -233,7 +231,6 @@ function PostShareStep({
   const [showTagPicker, setShowTagPicker] = useState(false);
   const [tagSearch, setTagSearch] = useState('');
   const [tagResults, setTagResults] = useState<TaggedUser[]>([]);
-  const [tagSearching, setTagSearching] = useState(false);
 
   // Sync place changes
   useEffect(() => {
@@ -252,7 +249,6 @@ function PostShareStep({
     }
 
     const timer = setTimeout(async () => {
-      setTagSearching(true);
       try {
         const results = await apiGet<{ items: { id: number; username: string; avatar_url?: string }[] }>(
           `/users/search?q=${encodeURIComponent(tagSearch.trim())}&page_size=20&for_tagging=true`
@@ -266,8 +262,6 @@ function PostShareStep({
         );
       } catch {
         setTagResults([]);
-      } finally {
-        setTagSearching(false);
       }
     }, 400);
 

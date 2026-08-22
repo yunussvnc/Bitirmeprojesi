@@ -1,7 +1,7 @@
-import { showError, showSuccess } from "@/src/utils/toast";
+import { showError } from "@/src/utils/toast";
 import * as WebBrowser from 'expo-web-browser';
 import { useCallback, useEffect, useState } from 'react';
-import {  Platform } from 'react-native';
+import { Platform } from 'react-native';
 import * as AppleAuthentication from 'expo-apple-authentication';
 import * as Google from 'expo-auth-session/providers/google';
 import { useTranslation } from 'react-i18next';

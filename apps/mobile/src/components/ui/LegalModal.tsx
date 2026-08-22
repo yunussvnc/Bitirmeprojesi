@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, Modal, TouchableOpacity, ScrollView, SafeAreaView, Platform } from 'react-native';
+import { View, Text, StyleSheet, Modal, TouchableOpacity, ScrollView, SafeAreaView } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { useTheme } from '@/src/hooks/useTheme';
 import { IconSymbol } from './icon-symbol';

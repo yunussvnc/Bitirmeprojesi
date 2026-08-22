@@ -6,12 +6,8 @@
  */
 
 import React, { useState, useCallback, useMemo } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { StyleSheet } from 'react-native';
 import Animated, {
-  FadeInRight,
-  FadeOutLeft,
-  FadeInLeft,
-  FadeOutRight,
   SlideInRight,
   SlideOutLeft,
   SlideInLeft,
@@ -149,13 +145,6 @@ export function ContentCreationFlow({
     },
     [currentMedia, selected, onShare, initialPlaceId, initialPlaceName]
   );
-
-  const entering = direction === 'forward'
-    ? SlideInRight.duration(TRANSITION_DURATION)
-    : SlideInLeft.duration(TRANSITION_DURATION);
-  const exiting = direction === 'forward'
-    ? SlideOutLeft.duration(TRANSITION_DURATION)
-    : SlideOutRight.duration(TRANSITION_DURATION);
 
   if (step === 'pick') {
     return (

@@ -2,10 +2,8 @@ import React from 'react';
 import {
   View,
   Text,
-  TouchableOpacity,
   Image,
   ScrollView,
-  Animated as RNAnimated,
   StyleSheet,
 } from 'react-native';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';

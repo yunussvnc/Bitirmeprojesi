@@ -22,7 +22,7 @@ const getAudienceLabels = (t: any): Record<Audience, string> => ({
 });
 
 export default function CommentsSettingsScreen() {
-  const { colors, isDark } = useTheme();
+  const { colors } = useTheme();
   const { t } = useTranslation();
   const router = useRouter();
   const insets = useSafeAreaInsets();

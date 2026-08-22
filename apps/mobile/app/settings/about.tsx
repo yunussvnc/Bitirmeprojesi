@@ -3,7 +3,7 @@
  */
 
 import React from "react";
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Linking, Image } from "react-native";
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 import { useTheme } from "@/src/hooks/useTheme";

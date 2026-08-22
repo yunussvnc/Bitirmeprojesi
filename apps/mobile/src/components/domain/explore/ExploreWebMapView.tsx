@@ -19,11 +19,10 @@ import {
 import { WebView } from 'react-native-webview';
 import type { WebViewMessageEvent } from 'react-native-webview';
 import {
-  ISTANBUL_AI_DISTRICTS,
   getIstanbulDistrictsForPicker,
   type AiSearchDistrict,
 } from '@/src/constants/aiDistricts';
-import { CATEGORY_KEYS, STATUS_KEYS, getTranslatedCategory } from '@/src/utils/categories';
+import { CATEGORY_KEYS, STATUS_KEYS } from '@/src/utils/categories';
 import * as Location from 'expo-location';
 import { useTheme } from '@/src/hooks/useTheme';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
@@ -33,7 +32,6 @@ import { lightImpact } from '@/src/utils/haptics';
 import { PlaceMediaPanel } from './PlaceMediaPanel';
 import { useAppStore } from '@/src/store/useAppStore';
 import { getPlaceStatus, type PlaceStatusType } from '@/src/utils/placeStatus';
-import { calculateDistance } from '@/src/utils/location';
 
 import { useTranslation } from 'react-i18next';
 import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
@@ -364,7 +362,7 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
       }
       return true;
     });
-  }, [places, query, selectedCategories, selectedStatuses, userLocation, selectedDistrict]);
+  }, [places, query, selectedCategories, selectedStatuses, selectedDistrict]);
 
   const visiblePlaces = useMemo(
     () => filteredPlaces.filter((p) => p.latitude != null && p.longitude != null),
@@ -464,7 +462,7 @@ export function ExploreWebMapView({ places, loading, onLoadPlaces }: ExploreWebM
         [{ text: t('explore.ok') }],
       );
     }
-  }, [userLocation]);
+  }, [userLocation, t]);
 
   const goToIstanbul = useCallback(() => {
     lightImpact();

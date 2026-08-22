@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Animated as RNAnimated, StyleSheet, View, TouchableOpacity, Dimensions, Platform } from "react-native";
 import { type MaterialTopTabBarProps } from "@react-navigation/material-top-tabs";
 import { useTabBarVisibility } from "@/src/components/layout/TabBarVisibilityContext";

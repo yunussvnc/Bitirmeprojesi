@@ -24,7 +24,7 @@ const { width, height } = Dimensions.get('window');
 const BG_IMAGE = 'https://images.unsplash.com/photo-1559329007-40df8a9345d8?w=1200'; // Sleek dark/moody cafe background
 
 export default function FirstTimeSetupScreen() {
-  const { user, setUser } = useAuthStore();
+  const setUser = useAuthStore((state) => state.setUser);
   const { t } = useTranslation();
   const [username, setUsername] = useState('');
   const [birthDate, setBirthDate] = useState('');
@@ -97,7 +97,7 @@ export default function FirstTimeSetupScreen() {
       isSubmittingRef.current = false;
       setLoading(false);
     }
-  }, [validateForm, username, birthDate, setUser, t]);
+  }, [validateForm, username, birthDate, setUser]);
 
   return (
     <View style={styles.container}>

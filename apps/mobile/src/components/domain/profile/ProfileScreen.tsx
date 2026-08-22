@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback } from "react";
-import { View, Text, StyleSheet, TouchableOpacity, Alert, Platform, useWindowDimensions, ScrollView, RefreshControl, Share, InteractionManager } from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity, useWindowDimensions, ScrollView, Share, InteractionManager } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useRouter, useNavigation, useFocusEffect } from "expo-router";
 import { API_BASE_URL } from "@/src/constants/api";
@@ -34,7 +34,6 @@ export default function ProfileScreen() {
   const scrollViewRef = useRef<ScrollView>(null);
   const insets = useSafeAreaInsets();
   const authUser = useAuthStore((s) => s.user);
-  const savedIds = useAppStore((s) => s.savedIds);
   const { fadeOut, fadeIn } = useTabBarVisibility();
   const lastScrollY = useRef(0);
 
@@ -95,7 +94,7 @@ export default function ProfileScreen() {
         setInitialLoading(false);
       }
     }
-  }, [authUser?.id]);
+  }, [authUser]);
 
   useEffect(() => {
     const unsubscribe = navigation.addListener("tabPress" as any, (e: any) => {
@@ -439,6 +438,18 @@ export default function ProfileScreen() {
         })()}
 
       </ScrollView>
+
+      {storyViewerVisible && stories.length > 0 && (
+        <StoryViewerModal
+          stories={stories}
+          visible
+          onClose={() => setStoryViewerVisible(false)}
+          currentUserId={authUser.id}
+          onStoryDeleted={(storyId) => {
+            setStories((currentStories) => currentStories.filter((story) => story.id !== storyId));
+          }}
+        />
+      )}
     </View>
   );
 }

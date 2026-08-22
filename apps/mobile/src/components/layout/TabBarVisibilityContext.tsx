@@ -20,20 +20,14 @@ export function TabBarVisibilityProvider({ children }: { children: React.ReactNo
   const translateY = useRef(new Animated.Value(0)).current;
   const opacity = useRef(new Animated.Value(1)).current;
   const heightRef = useRef(0);
-  const isHidden = useRef(false);
   const isFaded = useRef(false);
 
   const setHeight = useCallback((height: number) => {
     if (height > 0) heightRef.current = height;
   }, []);
 
-  const animate = useCallback(
-    (hidden: boolean) => {
-      // Tab bar gizleme (translateY) devre dışı — kullanıcı isteği
-      return;
-    },
-    [translateY]
-  );
+  // Tab bar gizleme (translateY) devre dışı — kullanıcı isteği
+  const animate = useCallback((_hidden: boolean) => {}, []);
 
   const fadeOut = useCallback(() => {
     if (isFaded.current) return;

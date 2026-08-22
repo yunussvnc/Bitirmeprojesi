@@ -6,7 +6,7 @@ import { spacing, radius } from '@/src/constants/design';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
 
 export function ErrorBoundary({ error, retry }: { error: Error; retry: () => void }) {
-  const { colors, isDark } = useTheme();
+  const { colors } = useTheme();
 
   return (
     <View style={[styles.container, { backgroundColor: colors.background.primary }]}>

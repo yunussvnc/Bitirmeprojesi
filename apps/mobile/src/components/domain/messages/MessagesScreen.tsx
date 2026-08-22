@@ -5,7 +5,7 @@
  * Özgün ASEMOS tasarım dili ile.
  */
 
-import React, { useState, useRef, useCallback } from "react";
+import React, { useState, useRef } from "react";
 import {
     View,
     Text,
@@ -14,16 +14,12 @@ import {
     TouchableOpacity,
     TextInput,
     Platform,
-    TouchableWithoutFeedback,
-    Keyboard,
-    Alert,
 } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useRouter } from "expo-router";
 import { Image } from "expo-image";
 import { useTheme } from "@/src/hooks/useTheme";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
-import { spacing } from "@/src/constants/design";
 import { lightImpact } from "@/src/utils/haptics";
 import { useAuthStore } from "@/src/store/useAuthStore";
 import { useMessagesStore, Conversation } from "@/src/store/useMessagesStore";
@@ -31,6 +27,7 @@ import { Swipeable } from "react-native-gesture-handler";
 import { useTranslation } from "react-i18next";
 import { MessageListSkeleton } from "./components/MessageListSkeleton";
 import { useTabBarVisibility } from "@/src/components/layout/TabBarVisibilityContext";
+import { getConversations } from "@/src/services/messageService";
 
 
 
@@ -55,7 +52,6 @@ export default function MessagesScreen() {
     const [viewMode, setViewMode] = useState<'chats'|'requests'>('chats');
     const [loading, setLoading] = useState(true);
     const { t } = useTranslation();
-    const { getConversations } = require("@/src/services/messageService");
 
     React.useEffect(() => {
         // Ekran her yüklendiğinde (veya authUser değiştiğinde) backend'den konuşma listesini çek
@@ -159,7 +155,7 @@ export default function MessagesScreen() {
 
 
 
-    const renderRightActions = (id: string) => {
+    const renderRightActions = React.useCallback((id: string) => {
         return (
             <View style={styles.swipeActionsContainer}>
                 <TouchableOpacity
@@ -186,7 +182,7 @@ export default function MessagesScreen() {
                 </TouchableOpacity>
             </View>
         );
-    };
+    }, [archiveConversation, colors.accent.primary, colors.semantic.error, deleteConversation, t]);
 
     const renderSeparator = React.useCallback(() => (
         <View style={styles.separator}>
@@ -303,7 +299,7 @@ export default function MessagesScreen() {
                 {content}
             </Swipeable>
         );
-    }, [colors, router, isEditMode, selectedIds]);
+    }, [colors, isEditMode, markAsRead, renderRightActions, router, selectedIds, t]);
 
     const listHeader = React.useMemo(() => (
         <View style={styles.sectionHeader}>

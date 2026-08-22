@@ -11,14 +11,11 @@ import { useTheme } from "@/src/hooks/useTheme";
 import { IconSymbol, type IconSymbolName } from "@/src/components/ui/icon-symbol";
 import { StyleSheet, Platform } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import { selection } from "@/src/utils/haptics";
 import { AnimatedTabBar } from "@/src/components/layout/AnimatedTabBar";
 import { TabBarVisibilityProvider } from "@/src/components/layout/TabBarVisibilityContext";
 import { useTranslation } from "react-i18next";
 import { useMessagesStore } from "@/src/store/useMessagesStore";
 import { useRegisterPushToken } from "@/src/hooks/useRegisterPushToken";
-import Animated, { useAnimatedStyle, withSpring, useSharedValue, withSequence, withTiming } from 'react-native-reanimated';
-import { useEffect } from "react";
 
 const { Navigator } = createMaterialTopTabNavigator();
 

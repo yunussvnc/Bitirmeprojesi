@@ -10,9 +10,7 @@
 import React, { useMemo, useEffect } from 'react';
 import {
   View,
-  Text,
   StyleSheet,
-  TouchableOpacity,
   Dimensions,
 } from 'react-native';
 import { Image as ExpoImage } from 'expo-image';
@@ -26,11 +24,7 @@ import Animated, {
   useAnimatedStyle,
   withSpring,
 } from 'react-native-reanimated';
-import { useTheme } from '@/src/hooks/useTheme';
-import { IconSymbol } from '@/src/components/ui/icon-symbol';
-import { lightImpact, mediumImpact } from '@/src/utils/haptics';
 import type { AspectRatioOption } from '@/src/contentCreation/types';
-import { POST_ASPECT_RATIOS } from '@/src/contentCreation/config';
 
 const { width: SCREEN_WIDTH } = Dimensions.get('window');
 
@@ -70,8 +64,6 @@ export const ImageCropper = React.forwardRef<ImageCropperRef, ImageCropperProps>
   filterOverlay,
   initialCropState,
 }, ref) => {
-  const { colors } = useTheme();
-
   const aspectRatio = FIXED_ASPECT_RATIO;
 
   // Gesture values
@@ -145,7 +137,17 @@ export const ImageCropper = React.forwardRef<ImageCropperRef, ImageCropperProps>
       savedTranslateX.value = 0;
       savedTranslateY.value = 0;
     }
-  }, [aspectRatio, imageUri, initialCropState]);
+  }, [
+    aspectRatio,
+    imageUri,
+    initialCropState,
+    savedScale,
+    savedTranslateX,
+    savedTranslateY,
+    scale,
+    translateX,
+    translateY,
+  ]);
 
   // Image display dimensions (computed once for reuse)
   const imageDisplayStyle = useMemo(() => {

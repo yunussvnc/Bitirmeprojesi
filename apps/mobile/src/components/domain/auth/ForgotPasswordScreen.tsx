@@ -1,4 +1,4 @@
-import { showError, showSuccess } from "@/src/utils/toast";
+import { showError } from "@/src/utils/toast";
 /**
  * Forgot Password Screen
  *
@@ -13,26 +13,23 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import {
     StyleSheet,
     View,
-    ScrollView,
     Platform,
     Text,
     TouchableOpacity,
     Animated,
     Dimensions,
     Keyboard,
-    TouchableWithoutFeedback,
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 import { LinearGradient } from 'expo-linear-gradient';
 import { BlurView } from 'expo-blur';
-import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { router } from 'expo-router';
 import { Button, Input } from '@/src/components/ui';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
 import { lightImpact, success } from '@/src/utils/haptics';
 import { forgotPassword, resetPassword, loginUser } from '@/src/services/authService';
 import { useAuthStore } from '@/src/store/useAuthStore';
-import { Ionicons } from '@expo/vector-icons';
 import { useTranslation } from "react-i18next";
 import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 
@@ -43,7 +40,6 @@ const BG_IMAGE = 'https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=12
 type Step = 'email' | 'reset';
 
 export default function ForgotPasswordScreen() {
-    const insets = useSafeAreaInsets();
     const [step, setStep] = useState<Step>('email');
     const [email, setEmail] = useState('');
     const [code, setCode] = useState('');

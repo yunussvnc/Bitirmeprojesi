@@ -16,7 +16,6 @@ import {
     Keyboard,
     Animated,
     Dimensions,
-    ScrollView,
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -67,26 +66,6 @@ export default function EmailVerificationScreen() {
         ]).start();
     }, [shakeAnim]);
 
-    const handleCodeChange = useCallback(
-        (text: string, index: number) => {
-            const digit = text.replace(/[^0-9]/g, '').slice(-1);
-            const newCode = [...code];
-            newCode[index] = digit;
-            setCode(newCode);
-            setError('');
-
-            if (digit && index < CODE_LENGTH - 1) {
-                inputRefs.current[index + 1]?.focus();
-            }
-
-            // Auto-submit when all digits filled
-            if (digit && index === CODE_LENGTH - 1 && newCode.every((d) => d !== '')) {
-                handleVerify(newCode.join(''));
-            }
-        },
-        [code],
-    );
-
     const handleKeyPress = useCallback(
         (key: string, index: number) => {
             if (key === 'Backspace' && !code[index] && index > 0) {
@@ -136,8 +115,28 @@ export default function EmailVerificationScreen() {
         [code, triggerShake, paramsEmail, t],
     );
 
+    const handleCodeChange = useCallback(
+        (text: string, index: number) => {
+            const digit = text.replace(/[^0-9]/g, '').slice(-1);
+            const newCode = [...code];
+            newCode[index] = digit;
+            setCode(newCode);
+            setError('');
+
+            if (digit && index < CODE_LENGTH - 1) {
+                inputRefs.current[index + 1]?.focus();
+            }
+
+            // Auto-submit when all digits filled
+            if (digit && index === CODE_LENGTH - 1 && newCode.every((d) => d !== '')) {
+                handleVerify(newCode.join(''));
+            }
+        },
+        [code, handleVerify],
+    );
+
     const handleResend = useCallback(async () => {
-        if (resendCooldown > 0) return;
+        if (resendCooldown > 0 || resendLoading) return;
         lightImpact();
         setResendLoading(true);
         try {
@@ -149,7 +148,7 @@ export default function EmailVerificationScreen() {
         } finally {
             setResendLoading(false);
         }
-    }, [resendCooldown, paramsEmail, t]);
+    }, [resendCooldown, resendLoading, paramsEmail, t]);
 
     const targetEmail = paramsEmail || user?.email;
     const maskedEmail = targetEmail
@@ -233,7 +232,7 @@ export default function EmailVerificationScreen() {
                                     <Text style={styles.resendLabel}>{t("forgot_password.didnt_receive")} </Text>
                                     <TouchableOpacity
                                         onPress={handleResend}
-                                        disabled={resendCooldown > 0}
+                                        disabled={resendCooldown > 0 || resendLoading}
                                     >
                                         <Text
                                             style={[

@@ -9,14 +9,11 @@ import {
   View,
   Text,
   StyleSheet,
-  RefreshControl,
   TouchableOpacity,
   Animated,
   Easing,
   Share,
-  Platform,
 } from "react-native";
-import Reanimated, { FadeInUp } from "react-native-reanimated";
 import { FlashList, FlashListRef } from "@shopify/flash-list";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -46,7 +43,6 @@ import { createReport } from "@/src/services/moderationService";
 import { useTranslation } from "react-i18next";
 import { useUploadPipelineStore } from "@/src/store/useUploadPipelineStore";
 import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
-import { RadialMenu } from "@/src/components/ui/RadialMenu";
 
 export default function FeedScreen() {
   const { t } = useTranslation();
@@ -54,7 +50,6 @@ export default function FeedScreen() {
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
-  const [nextCursor, setNextCursor] = useState<string | null>(null);
   const [hasMore, setHasMore] = useState(true);
   const [loadingMore, setLoadingMore] = useState(false);
   const [filter, setFilter] = useState<FeedFilter>("all");
@@ -152,9 +147,8 @@ export default function FeedScreen() {
 
         const res = await getFeed(activeCursor, PAGE_SIZE, filter);
 
-        // nextCursor'u hem state hem ref olarak sakla
+        // Cursor ref üzerinden tutulur; böylece pagination callback'i yeniden oluşturulmaz.
         nextCursorRef.current = res.next_cursor;
-        setNextCursor(res.next_cursor);
         setHasMore(res.has_more);
 
         if (refresh) {
@@ -188,7 +182,6 @@ export default function FeedScreen() {
 
   useEffect(() => {
     // Filtre değişince baştan başla
-    setNextCursor(null);
     setHasMore(true);
     loadFeed(true);
     flatListRef.current?.scrollToOffset({ offset: 0, animated: false });
@@ -246,7 +239,6 @@ export default function FeedScreen() {
   const handleRefresh = useCallback(() => {
     lightImpact();
     setRefreshing(true);
-    setNextCursor(null);
     setHasMore(true);
     loadFeed(true);
   }, [loadFeed]);
@@ -304,6 +296,15 @@ export default function FeedScreen() {
     }
   }, []);
 
+  const submitReport = useCallback(async (postId: number, reason: "spam" | "inappropriate" | "harassment" | "other") => {
+    try {
+      await createReport({ target_type: "post", target_id: postId, reason });
+      Alert.alert(t("feed.reported"), t("feed.reported_desc"));
+    } catch {
+      Alert.alert(t("feed.report_title"), t("feed.reported_desc"));
+    }
+  }, [t]);
+
   const handleReportPost = useCallback(() => {
     if (!optionsPost) return;
     const postId = optionsPost.id;
@@ -313,16 +314,7 @@ export default function FeedScreen() {
       { text: t("feed.inappropriate"), onPress: () => submitReport(postId, "inappropriate") },
       { text: t("feed.harassment"), onPress: () => submitReport(postId, "harassment") },
     ]);
-  }, [optionsPost, t]);
-
-  const submitReport = useCallback(async (postId: number, reason: "spam" | "inappropriate" | "harassment" | "other") => {
-    try {
-      await createReport({ target_type: "post", target_id: postId, reason });
-      Alert.alert(t("feed.reported"), t("feed.reported_desc"));
-    } catch {
-      Alert.alert(t("feed.report_title"), t("feed.reported_desc"));
-    }
-  }, [t]);
+  }, [optionsPost, submitReport, t]);
 
   const handleMuteAuthor = useCallback(() => {
     if (!optionsPost) return;
@@ -535,7 +527,7 @@ export default function FeedScreen() {
         }
       }
     },
-    [animateHeader, animateMiniBar, animateStory, headerHeight, storyHeight]
+    [animateHeader, animateMiniBar, animateStory, fadeIn, fadeOut, headerHeight, storyHeight]
   );
 
   const titleStyle = createTextStyle("title", colors.text.primary);

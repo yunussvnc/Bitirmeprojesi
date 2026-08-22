@@ -9,7 +9,7 @@
  *  - Full i18n localization
  */
 
-import React, { useEffect, useState, useCallback, useMemo } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import {
   View,
   Text,
@@ -19,7 +19,7 @@ import {
   RefreshControl,
   ActivityIndicator,
 } from 'react-native';
-import Animated, { FadeIn, FadeOut, SlideInRight } from 'react-native-reanimated';
+import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 import { Image } from 'expo-image';
 import { useRouter } from 'expo-router';
 import { useTheme } from '@/src/hooks/useTheme';
@@ -137,7 +137,7 @@ export default function NotificationsScreen() {
   useEffect(() => {
     loadNotifications();
     loadFollowRequests();
-  }, []);
+  }, [loadNotifications, loadFollowRequests]);
 
   const onRefresh = useCallback(async () => {
     lightImpact();

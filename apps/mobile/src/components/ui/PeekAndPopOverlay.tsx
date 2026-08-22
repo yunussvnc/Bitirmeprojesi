@@ -6,7 +6,7 @@ import { usePreviewStore } from '@/src/store/usePreviewStore';
 import { PlaceCard } from '@/src/components/domain/place/PlaceCard';
 import { useTheme } from '@/src/hooks/useTheme';
 
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 
 export const PeekAndPopOverlay = () => {
   const { previewedPlace } = usePreviewStore();

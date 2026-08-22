@@ -14,7 +14,6 @@ import {
   StyleSheet,
   ScrollView,
   TouchableOpacity,
-
   Linking,
   Modal,
   Pressable,
@@ -24,7 +23,7 @@ import {
   Animated as RNAnimated,
   Share,
   ActivityIndicator,
- FlatList } from "react-native";
+} from "react-native";
 import { useScrollToTop } from '@react-navigation/native';
 import Animated, { FadeIn } from "react-native-reanimated";
 import { Image as ExpoImage } from 'expo-image';
@@ -32,9 +31,7 @@ import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTheme } from "@/src/hooks/useTheme";
 import { Screen, Section, type ScreenRef } from "@/src/components/layout";
 import { PlaceCard } from "@/src/components/domain/place/PlaceCard";
-import { Button, Card, ReviewForm, RatingStars } from "@/src/components/ui";
-
-import { handleApiError } from '@/src/utils/errorHandler';
+import { Button, Card, RatingStars } from "@/src/components/ui";
 import { useTranslation } from 'react-i18next';
 import { useAppStore } from "@/src/store/useAppStore";
 import { useSettingsStore } from "@/src/store/useSettingsStore";
@@ -43,13 +40,11 @@ import { getPlaceImageSource, hasPlaceImage } from "@/src/utils/placeImages";
 import { spacing, createTextStyle } from "@/src/constants/design";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
-import { calculateDistance, getCurrentLocation, type PlaceLocation } from "@/src/utils/location";
-import { getPlaceById, getAllPlaces, togglePlaceFollow, getPlacePosts, getPlaceStories, recordPlaceInteraction, logInteraction } from "@/src/services/mekanService";
-import { lightImpact, success, warning } from "@/src/utils/haptics";
+import { getPlaceById, togglePlaceFollow, getPlacePosts, getPlaceStories, recordPlaceInteraction, logInteraction } from "@/src/services/mekanService";
+import { lightImpact, success } from "@/src/utils/haptics";
 import { logger } from "@/src/utils/logger";
-import { apiGet, apiPost } from "@/src/utils/apiClient";
+import { apiGet } from "@/src/utils/apiClient";
 import { StoryViewerModal } from "../explore/StoryViewerModal";
-import { ReviewCard, type ReviewItemType } from "./ReviewCard";
 import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 import { HeroImageViewer } from './HeroImageViewer';
 import { ReviewGalleryModal } from './ReviewGalleryModal';
@@ -75,21 +70,6 @@ type Review = {
 const { height: SCREEN_HEIGHT, width: SCREEN_WIDTH } = Dimensions.get("window");
 const REVIEW_SHEET_COLLAPSED = Math.min(SCREEN_HEIGHT * 0.55, 520);
 const REVIEW_SHEET_EXPANDED = SCREEN_HEIGHT * 0.72;
-
-/** Menü öğelerini kategoriye göre gruplar */
-function groupMenuByCategory(items: any[], t: any): { category: string; items: any[] }[] {
-  const map = new Map<string, any[]>();
-  for (const item of items) {
-    if (item.type === 'image') continue; // image tipli öğeleri atla
-    const cat = getTranslatedCategory(item.category, t) || t("place_detail.menu");
-    if (!map.has(cat)) map.set(cat, []);
-    map.get(cat)!.push(item);
-  }
-  return Array.from(map.entries()).map(([category, catItems]) => ({ category, items: catItems }));
-}
-
-
-
 
 export default function PlaceDetailScreen({
   providedId,
@@ -130,21 +110,14 @@ export default function PlaceDetailScreen({
     }
     return null;
   });
-  const [userLocation, setUserLocation] = useState<PlaceLocation | null>(null);
-  const [isNearby, setIsNearby] = useState(false);
-  const [checkingLocation, setCheckingLocation] = useState(false);
-  const [showReviewForm, setShowReviewForm] = useState(false);
-  const [submittingReview, setSubmittingReview] = useState(false);
   const [showHeroImage, setShowHeroImage] = useState(false);
 
-  const [activeTab, setActiveTab] = useState<'info' | 'menu' | 'reviews'>('info');
   const [reviews, setReviews] = useState<Review[]>([]);
   const [reviewsLoading, setReviewsLoading] = useState(false);
   const [reviewsError, setReviewsError] = useState<string | null>(null);
   const [reviewsPage, setReviewsPage] = useState(1);
   const [hasMoreReviews, setHasMoreReviews] = useState(true);
   const [reviewsLoadingMore, setReviewsLoadingMore] = useState(false);
-  const [lastDistance, setLastDistance] = useState<number | null>(null);
   const [similarPlaces, setSimilarPlaces] = useState<any[]>([]);
   const [showReviews, setShowReviews] = useState(false);
   const [reviewGalleryData, setReviewGalleryData] = useState<{ reviews: Review[]; reviewIndex: number; imageIndex: number } | null>(null);
@@ -156,8 +129,6 @@ export default function PlaceDetailScreen({
   const [followLoading, setFollowLoading] = useState(false);
   const [placePosts, setPlacePosts] = useState<any[]>([]);
   const [placeStories, setPlaceStories] = useState<any[]>([]);
-  const [socialLoading, setSocialLoading] = useState(false);
-  const [showPostsSection, setShowPostsSection] = useState(false);
   const [selectedStoryIndex, setSelectedStoryIndex] = useState(0);
   const [showStoriesModal, setShowStoriesModal] = useState(false);
 
@@ -171,7 +142,7 @@ export default function PlaceDetailScreen({
     navGuard.current = true;
     router.push({ pathname: "/place/[id]", params: placeData } as any);
     setTimeout(() => { navGuard.current = false; }, 600);
-  }, [router]);
+  }, []);
 
   const reviewSheetHeight = useRef(new RNAnimated.Value(REVIEW_SHEET_COLLAPSED)).current;
   const reviewStartHeightRef = useRef(REVIEW_SHEET_COLLAPSED);
@@ -334,7 +305,6 @@ export default function PlaceDetailScreen({
 
   const loadSocialContent = async (cancelled: { current: boolean } = { current: false }) => {
     if (!id) return;
-    setSocialLoading(true);
     try {
       const [postsData, storiesData] = await Promise.all([
         getPlacePosts(id, 1, 18),
@@ -343,14 +313,9 @@ export default function PlaceDetailScreen({
       if (!cancelled.current) {
         setPlacePosts(postsData?.items || []);
         setPlaceStories(storiesData?.items || []);
-        if ((postsData?.items?.length || 0) > 0 || (storiesData?.items?.length || 0) > 0) {
-          setShowPostsSection(true);
-        }
       }
     } catch (error) {
       if (!cancelled.current) logger.error("Error loading social content:", error);
-    } finally {
-      if (!cancelled.current) setSocialLoading(false);
     }
   };
 
@@ -450,73 +415,6 @@ export default function PlaceDetailScreen({
     };
   }, [place?.id, place?.category]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const checkUserLocation = async () => {
-    if (!place?.latitude || !place?.longitude) return;
-
-    setCheckingLocation(true);
-    try {
-      const location = await getCurrentLocation();
-      if (!location) {
-        Alert.alert(t("place_extra.location_perm_title"), t("place_extra.location_perm_desc"), [{ text: t("common.ok") }]);
-        return;
-      }
-
-      setUserLocation(location);
-
-      const distance = calculateDistance(location.latitude, location.longitude, place.latitude, place.longitude);
-      setLastDistance(distance);
-
-      const unlockRadius = 100;
-      const relockRadius = 120;
-
-      let nearby = isNearby;
-      if (!isNearby) {
-        nearby = distance <= unlockRadius;
-      } else {
-        nearby = distance <= relockRadius;
-      }
-
-      setIsNearby(nearby);
-      if (nearby) {
-        success();
-      } else {
-        warning();
-      }
-    } catch (error) {
-      logger.error("Error checking location:", error);
-      Alert.alert(t("common.error"), t("place_extra.location_check_err"));
-    } finally {
-      setCheckingLocation(false);
-    }
-  };
-
-  const handleSubmitReview = async (rating: number, comment: string) => {
-    if (!isNearby) {
-      Alert.alert(t("review.warning"), t("place_extra.not_nearby"));
-      return;
-    }
-
-    setSubmittingReview(true);
-    try {
-      await apiPost("/reviews/", {
-        place_id: Number(id),
-        comment_text: comment || "Yorum yapılmadı",
-        rating: rating,
-        user_lat: userLocation?.latitude,
-        user_lng: userLocation?.longitude,
-      });
-
-      Alert.alert(t("common.success"), t("place_extra.review_sent"), [{ text: t("common.ok"), onPress: () => setShowReviewForm(false) }]);
-
-      await loadReviews();
-    } catch (error) {
-      Alert.alert(t("common.error"), t("place_extra.review_submit_err"));
-      logger.error("Error submitting review:", error);
-    } finally {
-      setSubmittingReview(false);
-    }
-  };
-
   const handleNavigate = () => {
     if (place?.latitude != null && place?.longitude != null) {
       const lat = place.latitude;
@@ -556,11 +454,6 @@ export default function PlaceDetailScreen({
     return getPlaceImageSource(place || id);
   }, [place, id]);
 
-  const menuGroups = useMemo(() => {
-    if (!place?.menu_items) return [];
-    return groupMenuByCategory(place.menu_items, t);
-  }, [place?.menu_items, t]);
-
   const averageRating = useMemo(() => {
     if (!reviews.length) return null;
     const sum = reviews.reduce((acc, r) => acc + (r.rating || 0), 0);
@@ -568,15 +461,6 @@ export default function PlaceDetailScreen({
   }, [reviews]);
 
   const totalReviewCount = reviews.length;
-
-  const distanceText = useMemo(() => {
-    if (!userLocation || !place?.latitude || !place?.longitude) return null;
-    const dist = calculateDistance(userLocation.latitude, userLocation.longitude, place.latitude, place.longitude);
-    if (dist < 1000) {
-      return `${Math.round(dist)} m uzakta`;
-    }
-    return `${(dist / 1000).toFixed(1)} km uzakta`;
-  }, [userLocation, place]);
 
   // Typography styles - inline to avoid type issues
   const h1Style = { fontSize: 24, fontWeight: "700" as const, color: colors.text.primary };
@@ -860,14 +744,7 @@ export default function PlaceDetailScreen({
           )}
           {/* Place Meta Section */}
           <View style={styles.placeMetaSection}>
-            <View style={styles.placeMetaRow}>
-              {distanceText && (
-                <View style={styles.distanceContainer}>
-                  <IconSymbol name="location.fill" size={18} color={colors.text.secondary} />
-                  <Text style={[bodySmallStyle, { marginLeft: 4 }]}>{distanceText}</Text>
-                </View>
-              )}
-            </View>
+            <View style={styles.placeMetaRow} />
           </View>
 
           {place?.campaign_text && (

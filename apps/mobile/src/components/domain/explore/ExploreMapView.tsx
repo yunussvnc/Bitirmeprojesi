@@ -15,20 +15,17 @@ import {
   ActivityIndicator,
   Modal,
   ScrollView,
-  InteractionManager,
   Pressable,
 } from 'react-native';
-import { FlashList, ListRenderItemInfo } from '@shopify/flash-list';
 import { Map, Camera, GeoJSONSource, Layer, UserLocation, type CameraRef, type GeoJSONSourceRef } from '@maplibre/maplibre-react-native';
 import * as Location from 'expo-location';
 import { router } from 'expo-router';
 import LottieView from 'lottie-react-native';
 import {
-  ISTANBUL_AI_DISTRICTS,
   getIstanbulDistrictsForPicker,
   type AiSearchDistrict,
 } from '@/src/constants/aiDistricts';
-import { CATEGORY_KEYS, STATUS_KEYS, getTranslatedCategory } from '@/src/utils/categories';
+import { CATEGORY_KEYS, STATUS_KEYS } from '@/src/utils/categories';
 import { useTheme } from '@/src/hooks/useTheme';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
 import { SearchInput } from '@/src/components/ui/Input';
@@ -40,7 +37,6 @@ import { useAppStore } from '@/src/store/useAppStore';
 import { Place, logInteraction } from '@/src/services/mekanService';
 import { useTranslation } from 'react-i18next';
 import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
-import { ARView } from './ARView';
 
 const ISTANBUL_CENTER = {
   latitude: 41.0082,
@@ -169,7 +165,7 @@ export function ExploreMapView({ places, loading, onLoadPlaces }: ExploreMapView
       }
       return true;
     });
-  }, [places, query, selectedCategories, selectedStatuses, userLocation, selectedDistrict]);
+  }, [places, query, selectedCategories, selectedStatuses, selectedDistrict]);
 
   const visiblePlaces = useMemo(
     () => filteredPlaces.filter((p) => p.latitude != null && p.longitude != null),
@@ -229,7 +225,7 @@ export function ExploreMapView({ places, loading, onLoadPlaces }: ExploreMapView
         [{ text: t('explore.ok') }],
       );
     }
-  }, [userLocation]);
+  }, [userLocation, t]);
 
   const goToIstanbul = useCallback(() => {
     lightImpact();
@@ -1230,38 +1226,5 @@ const styles = StyleSheet.create({
     right: 0,
     bottom: 0,
     zIndex: 40,
-  },
-});
-
-const markerStyles = StyleSheet.create({
-  container: {
-    alignItems: 'center',
-    maxWidth: 80,
-  },
-  dot: {
-    width: 14,
-    height: 14,
-    borderRadius: 7,
-    borderWidth: 2,
-    borderColor: '#fff',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.3,
-    shadowRadius: 2,
-    elevation: 3,
-  },
-  label: {
-    fontSize: 8,
-    fontWeight: '700',
-    marginTop: 1,
-    textAlign: 'center',
-    color: '#1a1a1a',
-    textShadowColor: 'rgba(255,255,255,0.95)',
-    textShadowOffset: { width: 0, height: 0 },
-    textShadowRadius: 3,
-  },
-  labelDark: {
-    color: '#fff',
-    textShadowColor: 'rgba(0,0,0,0.95)',
   },
 });

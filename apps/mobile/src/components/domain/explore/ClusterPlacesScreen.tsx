@@ -12,14 +12,13 @@
  * - Geri ok tuşuyla bu listeye dönüş
  */
 
-import React, { useState, useMemo, useCallback, useRef, useEffect } from "react";
+import React, { useState, useMemo, useCallback, useRef } from "react";
 import {
   View,
   Text,
   StyleSheet,
   TouchableOpacity,
   ActivityIndicator,
-  ListRenderItem,
   ScrollView,
 } from "react-native";
 import { FlashList, ListRenderItemInfo } from "@shopify/flash-list";
@@ -34,14 +33,13 @@ import { getPlaceImageSource, hasPlaceImage } from "@/src/utils/placeImages";
 import { getPlaceStatus, type PlaceStatusType } from "@/src/utils/placeStatus";
 import { CATEGORY_KEYS, STATUS_KEYS } from "@/src/utils/categories";
 import { useAppStore } from "@/src/store/useAppStore";
-import { getAllPlaces, type Place } from "@/src/services/mekanService";
+import type { Place } from "@/src/services/mekanService";
 import { useTranslation } from "react-i18next";
-import { spacing as designSpacing } from "@/src/constants/design";
 
 const PAGE_SIZE = 12;
 
 export default function ClusterPlacesScreen() {
-  const { colors, isDark } = useTheme();
+  const { colors } = useTheme();
   const insets = useSafeAreaInsets();
   const { t } = useTranslation();
   const params = useLocalSearchParams<{
@@ -160,7 +158,7 @@ export default function ClusterPlacesScreen() {
     nearestCandidates.sort((a, b) => b.score - a.score);
     
     return nearestCandidates.slice(0, clusterCount).map(w => w.place);
-  }, [allPlaces, clusterCount, centerLat, centerLng, query, savedIds]);
+  }, [allPlaces, clusterCount, centerLat, centerLng, query, savedIds, isGlobal]);
 
   const toggleCategory = useCallback((cat: string) => {
     setSelectedCategories((prev) =>

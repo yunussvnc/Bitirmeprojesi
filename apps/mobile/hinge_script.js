@@ -176,7 +176,6 @@ const newCardStyle = `card: {
 fileContent = fileContent.substring(0, cardStyleStart) + newCardStyle + fileContent.substring(cardStyleEnd + 2);
 
 // 3. Add Hinge Styles
-const stylesEndMatcher = '});\n';
 const hingeStyles = `
   hingeContainer: {
     padding: 16,

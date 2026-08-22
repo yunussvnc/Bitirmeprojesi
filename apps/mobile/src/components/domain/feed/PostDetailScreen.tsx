@@ -231,7 +231,6 @@ export default function PostDetailScreen() {
                 post={item}
                 isSaved={isPostSaved(item.id)}
                 onSave={() => {
-                  const wasSaved = isPostSaved(item.id);
                   toggleSavePost(item);
                   lightImpact();
                 }}

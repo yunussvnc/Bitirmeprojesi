@@ -14,7 +14,7 @@ import { createTextStyle, spacing } from "@/src/constants/design";
 import { lightImpact, success } from "@/src/utils/haptics";
 import { useSettingsStore } from "@/src/store/useSettingsStore";
 import { useTranslation } from "react-i18next";
-import { apiGet, apiPost } from "@/src/utils/apiClient";
+import { apiPost } from "@/src/utils/apiClient";
 
 export default function RestrictedAccountsScreen() {
   const { colors, isDark } = useTheme();

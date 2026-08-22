@@ -13,11 +13,7 @@ import Animated, {
   useSharedValue,
   useAnimatedStyle,
   withSpring,
-  withTiming,
-  withDelay,
-  runOnJS,
   FadeIn,
-  FadeOut,
   SlideInUp,
   SlideOutUp,
 } from 'react-native-reanimated';
@@ -97,7 +93,7 @@ export function UploadProgressBanner() {
     } else {
       progressWidth.value = 0;
     }
-  }, [currentJob?.progress, currentJob?.stage]);
+  }, [currentJob, progressWidth]);
 
   const progressStyle = useAnimatedStyle(() => ({
     width: `${Math.round(progressWidth.value * 100)}%`,

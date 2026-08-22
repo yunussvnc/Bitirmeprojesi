@@ -210,7 +210,7 @@ export function useNotificationSocket() {
     };
 
     wsRef.current = ws;
-  }, [handleWebSocketMessage, startPingInterval, clearPingInterval]);
+  }, [handleWebSocketMessage, startPingInterval, clearPingInterval, syncUnreadCount]);
 
   const disconnect = useCallback(() => {
     if (reconnectTimeoutRef.current) {

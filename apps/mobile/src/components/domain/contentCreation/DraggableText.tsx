@@ -13,7 +13,7 @@ interface DraggableTextProps {
   fontSize?: number;
 }
 
-const { width: SW, height: SH } = Dimensions.get('window');
+const { height: SH } = Dimensions.get('window');
 
 export function DraggableText({ text, color = '#FFFFFF', fontSize = 32 }: DraggableTextProps) {
   const isPressed = useSharedValue(false);

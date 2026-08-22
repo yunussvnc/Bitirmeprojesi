@@ -8,10 +8,6 @@ import {
   TouchableOpacity,
   Platform,
   useWindowDimensions,
-  Modal,
-  Pressable,
-  ActivityIndicator,
-  Share,
   InteractionManager
 } from "react-native";
 import { Image } from "expo-image";
@@ -21,8 +17,6 @@ import { Screen } from "@/src/components/layout";
 import { Avatar, LoadingState, ErrorState } from "@/src/components/ui";
 import { useTheme } from "@/src/hooks/useTheme";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
-import { FeedCard, CommentBottomSheet, SharePostSheet } from "@/src/components/domain/feed";
-import { getPost, toggleLike, type Post } from "@/src/services/feedService";
 import {
   getUserProfile,
   getUserPosts,
@@ -36,11 +30,9 @@ import { useNotificationStore } from "@/src/store/useNotificationStore";
 import { handleApiError } from "@/src/utils/errorHandler";
 import { lightImpact, success } from "@/src/utils/haptics";
 import { toggleBlockUser, createReport } from "@/src/services/moderationService";
-import { acceptFollowRequest, rejectFollowRequest } from '@/src/services/userService';
 import { openConversation } from '@/src/services/messageService';
 import { useAppStore } from '@/src/store/useAppStore';
 import { useTranslation } from 'react-i18next';
-import debounce from 'lodash/debounce';
 import { ProfileOptionsSheet } from "./components/ProfileOptionsSheet";
 import { NotificationSettingsSheet } from "./components/NotificationSettingsSheet";
 import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
@@ -65,7 +57,6 @@ export default function UserProfileScreen() {
   const [refreshing, setRefreshing] = useState(false);
   const [optionsSheetVisible, setOptionsSheetVisible] = useState(false);
   const [notificationSheetVisible, setNotificationSheetVisible] = useState(false);
-  const [followLoading, setFollowLoading] = useState(false);
   const [messageLoading, setMessageLoading] = useState(false);
   const [activeTab, setActiveTab] = useState<"posts" | "tagged">("posts");
 
@@ -173,7 +164,7 @@ export default function UserProfileScreen() {
             setTimeout(() => {
               store.loadNotifications(1);
             }, 500);
-          } catch (e) {
+          } catch {
             // Silently fail — notifications are nice-to-have
           }
         }
@@ -181,8 +172,6 @@ export default function UserProfileScreen() {
         // Revert on error
         setProfile(prevProfile);
         handleApiError(e);
-      } finally {
-        setFollowLoading(false);
       }
   }, [currentUser]);
 
@@ -193,7 +182,7 @@ export default function UserProfileScreen() {
     } catch {
       Alert.alert(t("user_profile.reported"), t("user_profile.report_saved"));
     }
-  }, [userId]);
+  }, [t, userId]);
 
   const handleMessagePress = useCallback(async () => {
     if (!profile) return;

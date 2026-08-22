@@ -1,18 +1,14 @@
-import React, { useState, useEffect, useMemo, useRef } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 import {
   View,
   Text,
   StyleSheet,
   TouchableOpacity,
   Dimensions,
-  Platform,
   ActivityIndicator,
 } from 'react-native';
 import { Camera, useCameraDevice, useCameraPermission } from 'react-native-vision-camera';
 import Animated, {
-  useSharedValue,
-  useAnimatedStyle,
-  withSpring,
   interpolate,
   Extrapolation,
   FadeIn,
@@ -104,7 +100,7 @@ export function ARView({ places, userLocation, onClose, onPlaceSelect }: ARViewP
     if (!hasPermission) {
       requestPermission();
     }
-  }, [hasPermission]);
+  }, [hasPermission, requestPermission]);
 
   useEffect(() => {
     let magSubscription: SensorSubscription;

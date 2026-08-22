@@ -18,7 +18,6 @@ import { lightImpact, success } from "@/src/utils/haptics";
 import { useAuthStore } from "@/src/store/useAuthStore";
 import { getFollowers, getHiddenStoryUsers, updateHiddenStoryUsers, UserSummary } from "@/src/services/userService";
 import { useTranslation } from "react-i18next";
-import { debounce } from "lodash";
 import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 
 export default function HideStoryScreen() {
@@ -87,7 +86,7 @@ export default function HideStoryScreen() {
       success();
       setOriginalHiddenIds(new Set(hiddenIds));
       router.back();
-    } catch (e) {
+    } catch {
       Alert.alert(t("settings_extra.error_title", "Hata"), t("settings_extra.error_save", "Kaydedilirken bir hata oluştu."));
     } finally {
       setSaving(false);

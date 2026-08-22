@@ -22,7 +22,6 @@ import {
   ScrollView,
   Alert,
 } from 'react-native';
-import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
 import { Image } from 'expo-image';
 import Video from 'react-native-video';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
@@ -43,8 +42,6 @@ import {
   type StoryReportReason,
 } from '@/src/services/storyService';
 import { ShareStorySheet } from '@/src/components/domain/stories/ShareStorySheet';
-import { router } from 'expo-router';
-
 import { timeAgo } from '@/src/utils/timeAgo';
 import { useTranslation } from 'react-i18next';
 
@@ -232,7 +229,7 @@ export function StoryViewerModal({
     return () => {
       progressAnim.stopAnimation();
     };
-  }, [index, story?.id, isImage, visible, startProgress, progressAnim]);
+  }, [story, isImage, visible, startProgress, progressAnim]);
 
   useEffect(() => {
     if (!isImage) {
@@ -423,7 +420,7 @@ export function StoryViewerModal({
               success();
               onStoryDeleted?.(story.id);
               goNext();
-            } catch (e) {
+            } catch {
               Alert.alert('Hata', 'Hikaye silinemedi.');
               isPausedRef.current = false;
               setVideoPaused(false);

@@ -14,7 +14,6 @@ import {
   Dimensions,
   ActivityIndicator,
   Platform,
-  Linking,
   Modal,
   Pressable,
   Animated,
@@ -28,7 +27,7 @@ import { useTheme } from '@/src/hooks/useTheme';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
 import { getPlacePosts, toggleLike, type Post } from '@/src/services/feedService';
 import { getPlaceStories, type Story } from '@/src/services/storyService';
-import { lightImpact, heavyImpact, success } from '@/src/utils/haptics';
+import { lightImpact, success } from '@/src/utils/haptics';
 import { handleApiError } from '@/src/utils/errorHandler';
 import type { Place } from '@/src/services/mekanService';
 import { getPlaceImageSource } from '@/src/utils/placeImages';
@@ -40,7 +39,6 @@ import { useAuthStore } from '@/src/store/useAuthStore';
 import { FeedCard, CommentBottomSheet, SharePostSheet } from '@/src/components/domain/feed';
 import { getPlaceStatus } from '@/src/utils/placeStatus';
 import { useStoreReview } from '@/src/hooks/useStoreReview';
-import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 
 const { width: SCREEN_WIDTH, height: SCREEN_HEIGHT } = Dimensions.get('window');
 const PANEL_HORIZ_MARGIN = 12;
@@ -52,7 +50,6 @@ const CELL_SIZE = (PANEL_CONTENT_WIDTH - PADDING * 2 - (GRID_COLS - 1) * GAP) / 
 const PANEL_COLLAPSED = Math.min(SCREEN_HEIGHT * 0.62, 520);
 const PANEL_EXPANDED = SCREEN_HEIGHT * 0.72;
 const HERO_HEIGHT = 140;
-const STRIP_ITEM_SIZE = 88;
 const STORY_RING_SIZE = 64;
 const PLACE_STORY_SIZE = 82;
 
@@ -217,21 +214,6 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
     setTimeout(() => { navigatingRef.current = false; }, 1000);
   };
 
-  const handleDirections = () => {
-    if (place?.latitude != null && place?.longitude != null) {
-      lightImpact();
-      const lat = place.latitude;
-      const lng = place.longitude;
-      const url =
-        Platform.OS === 'ios'
-          ? `maps://maps.apple.com/?daddr=${lat},${lng}`
-          : `https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}`;
-      Linking.openURL(url).catch(() => {
-        Alert.alert(t('home.error_title'), t('explore.map_error'));
-      });
-    }
-  };
-
   const handleSave = () => {
     success();
     triggerReviewAction(); // Store review tetikleyici
@@ -289,10 +271,6 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
     setSelectedPostId(null);
     setCommentPostId(null);
   }, []);
-
-  const hasContent = (mapShowStories && stories.length > 0) || (mapShowPosts && mediaItems.length > 0);
-  const isEmpty = !loading && !hasContent;
-  const showPreferencesHint = !mapShowStories && !mapShowPosts;
 
   const panelHeight = useRef(new Animated.Value(PANEL_COLLAPSED)).current;
   const dismissTranslateY = useRef(new Animated.Value(0)).current;

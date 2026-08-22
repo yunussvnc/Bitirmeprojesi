@@ -17,7 +17,6 @@ import {
   ActivityIndicator,
   Platform,
   ScrollView,
-  Image as RNImage,
 } from 'react-native';
 import { Image as ExpoImage } from 'expo-image';
 import * as MediaLibrary from 'expo-media-library';
@@ -28,7 +27,6 @@ import * as ImageManipulator from 'expo-image-manipulator';
 import { spacing } from '@/src/constants/design';
 import { lightImpact, mediumImpact } from '@/src/utils/haptics';
 import { useTranslation } from "react-i18next";
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import type { MediaItem, ContentType } from '@/src/contentCreation/types';
 import {
   GALLERY_COLUMNS,
@@ -154,36 +152,18 @@ export function CustomGalleryGrid({
   const [albums, setAlbums] = useState<MediaLibrary.Album[]>([]);
   const [selectedAlbum, setSelectedAlbum] = useState<MediaLibrary.Album | null>(null);
   const [showAlbumPicker, setShowAlbumPicker] = useState(false);
+  const [galleryReady, setGalleryReady] = useState(false);
   const endCursorRef = useRef<string | undefined>(undefined);
   const loadingMoreRef = useRef(false);
-  const initialLoadDone = useRef(false);
+  const selectedRef = useRef(selected);
+  const onSelectRef = useRef(onSelect);
+  const onPreviewChangeRef = useRef(onPreviewChange);
+  selectedRef.current = selected;
+  onSelectRef.current = onSelect;
+  onPreviewChangeRef.current = onPreviewChange;
   const maxCount = MAX_MEDIA_COUNT[contentType];
   const isSingle = contentType === 'story' || contentType === 'reels' || !multiSelectMode;
   const maxVideoSec = MAX_VIDEO_DURATION_SEC[contentType];
-
-  // Request permissions & initial load
-  useEffect(() => {
-    (async () => {
-      const { status } = await MediaLibrary.requestPermissionsAsync();
-      if (status !== 'granted') {
-        Alert.alert(t('creation.gallery_permission_title'), t('creation.gallery_permission_message'));
-        setLoading(false);
-        return;
-      }
-      // Load albums
-      const albumList = await MediaLibrary.getAlbumsAsync({ includeSmartAlbums: true });
-      setAlbums(albumList);
-      await loadAssets(true);
-      initialLoadDone.current = true;
-    })();
-  }, []);
-
-  // Reload when album changes (but not on initial mount)
-  useEffect(() => {
-    if (initialLoadDone.current) {
-      loadAssets(true);
-    }
-  }, [selectedAlbum]);
 
   const loadAssets = useCallback(async (reset = false) => {
     if (loadingMoreRef.current && !reset) return;
@@ -208,7 +188,7 @@ export function CustomGalleryGrid({
       if (reset) {
         setAssets(result.assets);
         // Auto-preview first asset
-        if (result.assets.length > 0 && onPreviewChange) {
+        if (result.assets.length > 0 && onPreviewChangeRef.current) {
           const first = result.assets[0];
           // iOS'ta ph:// URI'leri upload'da çalışmaz — localUri al
           let resolvedUri = first.uri;
@@ -230,10 +210,10 @@ export function CustomGalleryGrid({
             height: first.height,
             duration: first.duration ?? undefined,
           };
-          onPreviewChange(firstItem);
+          onPreviewChangeRef.current(firstItem);
           // Also auto-select the first one for preview
-          if (selected.length === 0) {
-            onSelect([firstItem]);
+          if (selectedRef.current.length === 0) {
+            onSelectRef.current([firstItem]);
           }
         }
       } else {
@@ -245,7 +225,37 @@ export function CustomGalleryGrid({
       setLoading(false);
       loadingMoreRef.current = false;
     }
-  }, [selectedAlbum, onPreviewChange, selected.length, onSelect]);
+  }, [selectedAlbum]);
+
+  // Request permission and album metadata with cancellation on unmount.
+  useEffect(() => {
+    let cancelled = false;
+
+    (async () => {
+      const { status } = await MediaLibrary.requestPermissionsAsync();
+      if (cancelled) return;
+      if (status !== 'granted') {
+        Alert.alert(t('creation.gallery_permission_title'), t('creation.gallery_permission_message'));
+        setLoading(false);
+        return;
+      }
+      const albumList = await MediaLibrary.getAlbumsAsync({ includeSmartAlbums: true });
+      if (cancelled) return;
+      setAlbums(albumList);
+      setGalleryReady(true);
+    })();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [t]);
+
+  // Load initially after permission, then reload for each selected album.
+  useEffect(() => {
+    if (galleryReady) {
+      void loadAssets(true);
+    }
+  }, [galleryReady, loadAssets]);
 
   const handleLoadMore = useCallback(() => {
     if (hasMore && !loadingMoreRef.current) {

@@ -1,10 +1,8 @@
 import React, { useRef, useEffect } from "react";
 import { View, Text, StyleSheet, TouchableOpacity, Modal, Pressable, Animated, Dimensions } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTheme } from "@/src/hooks/useTheme";
 import { IconSymbol, type IconSymbolName } from "@/src/components/ui/icon-symbol";
 import { lightImpact, mediumImpact } from "@/src/utils/haptics";
-import { spacing } from "@/src/constants/design";
 import { useTranslation } from "react-i18next";
 import { FEATURE_FLAGS } from "@/src/constants/featureFlags";
 import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';

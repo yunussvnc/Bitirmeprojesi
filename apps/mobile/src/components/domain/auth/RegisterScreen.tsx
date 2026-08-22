@@ -1,4 +1,3 @@
-import { showError, showSuccess } from "@/src/utils/toast";
 /**
  * Kayıt ekranı – Giriş ekranı ile aynı tasarım
  * Arka planda mekan carousel, koyu overlay, cam kart, onDark inputlar.
@@ -12,29 +11,22 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import {
   StyleSheet,
   View,
-  ScrollView,
   Platform,
   Text,
   TouchableOpacity,
-  Animated,
-  Dimensions,
   Image,
   Keyboard,
-  TouchableWithoutFeedback,
 } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-controller';
 import { LinearGradient } from 'expo-linear-gradient';
 import { BlurView } from 'expo-blur';
-import { SafeAreaView, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { SafeAreaView } from 'react-native-safe-area-context';
 import { Button, Input } from '@/src/components/ui';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
-import { handleApiError } from '@/src/utils/errorHandler';
 import { useTranslation } from 'react-i18next';
 import { lightImpact, success } from '@/src/utils/haptics';
-import { getAllPlaces } from '@/src/services/mekanService';
 import { registerUser, registerVenue, googleLogin, appleLogin } from '@/src/services/authService';
 import { useAuthStore } from '@/src/store/useAuthStore';
-import { API_BASE_URL } from '@/src/constants/api';
 import * as AppleAuthentication from 'expo-apple-authentication';
 import * as WebBrowser from 'expo-web-browser';
 import * as Google from 'expo-auth-session/providers/google';
@@ -45,8 +37,6 @@ import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 
 WebBrowser.maybeCompleteAuthSession();
 
-const { width, height } = Dimensions.get('window');
-
 const FALLBACK_PLACE_IMAGES = [
   'https://images.unsplash.com/photo-1554118811-1e0d58224f24?w=1200',
   'https://images.unsplash.com/photo-1497935586351-b67a49e012bf?w=1200', // Aydınlık kahveci
@@ -56,10 +46,7 @@ const FALLBACK_PLACE_IMAGES = [
   'https://images.unsplash.com/photo-1521017430209-a6cb9156a64b?w=1200', // Işıklı iç mekan
 ];
 
-const CAROUSEL_INTERVAL_MS = 4500;
-
 export default function RegisterScreen() {
-  const insets = useSafeAreaInsets();
   const { t } = useTranslation();
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
@@ -93,20 +80,15 @@ export default function RegisterScreen() {
   const [selectedPlace, setSelectedPlace] = useState<{id: number; name: string; address: string} | null>(null);
   const [placeSearchLoading, setPlaceSearchLoading] = useState(false);
   const placeSearchTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const handledGoogleTokenRef = useRef<string | null>(null);
 
   // Google Auth Setup
-  const [request, response, promptAsync] = Google.useAuthRequest({
+  const [, response, promptAsync] = Google.useAuthRequest({
     ...googleAuthRequestConfig,
     scopes: [...googleAuthRequestConfig.scopes],
   });
 
-  useEffect(() => {
-    if (response?.type === 'success' && response.authentication) {
-      handleGoogleSuccess(response.authentication.idToken || response.authentication.accessToken);
-    }
-  }, [response]);
-
-  const handleGoogleSuccess = async (token: string) => {
+  const handleGoogleSuccess = useCallback(async (token: string) => {
     if (!token) return;
     setLoading(true);
     try {
@@ -137,9 +119,18 @@ export default function RegisterScreen() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [roleType, t]);
 
-  const signInWithApple = async () => {
+  useEffect(() => {
+    if (response?.type === 'success' && response.authentication) {
+      const token = response.authentication.idToken || response.authentication.accessToken;
+      if (!token || handledGoogleTokenRef.current === token) return;
+      handledGoogleTokenRef.current = token;
+      void handleGoogleSuccess(token);
+    }
+  }, [response, handleGoogleSuccess]);
+
+  const signInWithApple = useCallback(async () => {
     try {
       const credential = await AppleAuthentication.signInAsync({
         requestedScopes: [
@@ -181,7 +172,7 @@ export default function RegisterScreen() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [roleType, t]);
 
 
 
@@ -283,7 +274,7 @@ export default function RegisterScreen() {
       isSubmittingRef.current = false;
       setLoading(false);
     }
-  }, [validateForm, fullName, venueName, email, password, roleType, termsAccepted]);
+  }, [validateForm, fullName, venueName, email, password, roleType, termsAccepted, selectedPlace, t]);
 
   const handleSocialRegister = useCallback((provider: string) => {
     lightImpact();
@@ -292,7 +283,7 @@ export default function RegisterScreen() {
     } else if (provider === 'Google') {
       promptAsync();
     }
-  }, [promptAsync]);
+  }, [promptAsync, signInWithApple]);
 
   const clearFieldError = useCallback((field: keyof typeof errors) => {
     setErrors((prev) => (prev[field] ? { ...prev, [field]: undefined } : prev));

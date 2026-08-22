@@ -12,14 +12,8 @@ import { SettingsRow } from "@/src/components/ui";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { createTextStyle, spacing } from "@/src/constants/design";
 import { lightImpact, success } from "@/src/utils/haptics";
-import { useSettingsStore, type Audience } from "@/src/store/useSettingsStore";
+import { useSettingsStore } from "@/src/store/useSettingsStore";
 import { useTranslation } from "react-i18next";
-
-const getAudienceLabels = (t: any): Record<Audience, string> => ({
-  everyone: t("settings_messages.everyone", "Herkes"),
-  followers: t("settings_messages.followers", "Takipçiler"),
-  off: t("settings_messages.nobody", "Kapalı"),
-});
 
 export default function MessagesSettingsScreen() {
   const { colors } = useTheme();
@@ -28,15 +22,9 @@ export default function MessagesSettingsScreen() {
   const insets = useSafeAreaInsets();
 
   const unknownRequests = useSettingsStore((s) => s.unknownMessageRequests);
-  const storyReply = useSettingsStore((s) => s.storyReplyAudience);
   const readReceipts = useSettingsStore((s) => s.showReadReceipts);
-  const allowGroupAdd = useSettingsStore((s) => s.allowGroupAdd);
   const setUnknownRequests = useSettingsStore((s) => s.setUnknownMessageRequests);
-  const setStoryReply = useSettingsStore((s) => s.setStoryReplyAudience);
   const setReadReceipts = useSettingsStore((s) => s.setShowReadReceipts);
-  const setAllowGroupAdd = useSettingsStore((s) => s.setAllowGroupAdd);
-
-  const audienceOptions: Audience[] = ["everyone", "followers", "off"];
 
   return (
     <View style={[styles.wrapper, { backgroundColor: colors.background.primary }]}>

@@ -21,7 +21,7 @@ import { Avatar } from "@/src/components/ui";
 import { SearchInput } from "@/src/components/ui/Input";
 import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { useTheme } from "@/src/hooks/useTheme";
-import { lightImpact, mediumImpact, success } from "@/src/utils/haptics";
+import { mediumImpact, success } from "@/src/utils/haptics";
 import { useMessagesStore, type Conversation } from "@/src/store/useMessagesStore";
 import { useAppStore } from "@/src/store/useAppStore";
 import { shareStoryViaDM, type Story } from "@/src/services/storyService";

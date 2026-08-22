@@ -12,8 +12,6 @@
  * @module services/analyticsService
  */
 
-import { logger } from "@/src/utils/logger";
-
 // --- Event Tipleri ---
 export type AnalyticsEvent = {
   event: string;
@@ -61,7 +59,7 @@ async function flush(): Promise<void> {
 
   try {
     await sendToProvider(batch);
-  } catch (error) {
+  } catch {
     // Gönderilemezse kuyruğa geri koy (max size kontrolüyle)
     eventQueue = [...batch, ...eventQueue].slice(0, MAX_QUEUE_SIZE);
     if (__DEV__) {

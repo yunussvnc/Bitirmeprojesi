@@ -59,7 +59,7 @@ export default function EditProfileScreen() {
       setBio(authUser.bio || "");
       setAvatarUri(authUser.avatar_url || null);
     }
-  }, [authUser?.id]);
+  }, [authUser]);
 
   const pickAvatar = async () => {
     try {

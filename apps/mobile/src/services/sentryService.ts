@@ -11,10 +11,9 @@
  * @module services/sentryService
  */
 
-import { logger } from "@/src/utils/logger";
+import * as Sentry from "@sentry/react-native";
 
-// Sentry SDK — opsiyonel import (kurulu değilse hata vermez)
-let Sentry: any = null;
+// Sentry SDK is bundled with the app and enabled only when a DSN is configured.
 let isSentryEnabled = false;
 
 /**
@@ -31,9 +30,6 @@ export function initSentry(): void {
   }
 
   try {
-    // Dynamic import — @sentry/react-native kurulu değilse hata yakalanır
-    Sentry = require("@sentry/react-native");
-
     Sentry.init({
       dsn,
       debug: __DEV__,
@@ -57,9 +53,9 @@ export function initSentry(): void {
       console.log("[Sentry] ✅ Başlatıldı");
     }
   } catch (error) {
-    // @sentry/react-native kurulu değilse sessizce geç
+    // Initialization failure must not interrupt application startup.
     if (__DEV__) {
-      console.log("[Sentry] SDK bulunamadı, devre dışı kalacak:", error);
+      console.log("[Sentry] Başlatılamadı, devre dışı kalacak:", error);
     }
   }
 }
@@ -71,7 +67,7 @@ export function captureException(
   error: Error | unknown,
   context?: Record<string, any>
 ): void {
-  if (!isSentryEnabled || !Sentry) {
+  if (!isSentryEnabled) {
     // Sentry yoksa en azından console'a logla
     if (__DEV__) {
       console.error("[Sentry:Fallback]", error, context);
@@ -102,7 +98,7 @@ export function captureMessage(
   message: string,
   level: "info" | "warning" | "error" = "info"
 ): void {
-  if (!isSentryEnabled || !Sentry) return;
+  if (!isSentryEnabled) return;
   try {
     Sentry.captureMessage(message, level);
   } catch {
@@ -118,7 +114,7 @@ export function setUser(user: {
   username?: string;
   email?: string;
 } | null): void {
-  if (!isSentryEnabled || !Sentry) return;
+  if (!isSentryEnabled) return;
   try {
     Sentry.setUser(
       user
@@ -142,7 +138,7 @@ export function addBreadcrumb(
   message: string,
   data?: Record<string, any>
 ): void {
-  if (!isSentryEnabled || !Sentry) return;
+  if (!isSentryEnabled) return;
   try {
     Sentry.addBreadcrumb({
       category,
