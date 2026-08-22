@@ -13381,5 +13381,571 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
         "category": "Waffle Bowl's"
       }
     ]
+  },
+  "7223": {
+    "name": "GALAKTION",
+    "sourceUrl": "https://www.cafegalaktion.com/",
+    "sourceName": "GALAKTION resmi canlı menüsü (Asmalı Mescit–Şehbender Sok. şube doğrulaması)",
+    "verifiedAt": "2026-08-23",
+    "items": [
+      {
+        "name": "Supkharcho · Beef Soup",
+        "price": "410",
+        "desc": "Seçenekler mevcut",
+        "category": "Soups"
+      },
+      {
+        "name": "Vegetable Soup",
+        "price": "320",
+        "desc": "Seçenekler mevcut",
+        "category": "Soups"
+      },
+      {
+        "name": "Salad Assortment",
+        "price": "830",
+        "desc": "",
+        "category": "Salads"
+      },
+      {
+        "name": "Pkhali Assortment · Georgian Vegan Appetizers",
+        "price": "480",
+        "desc": "",
+        "category": "Salads"
+      },
+      {
+        "name": "Eggplant with Walnuts",
+        "price": "420",
+        "desc": "",
+        "category": "Salads"
+      },
+      {
+        "name": "Glekhuri · Georgian Walnut Salad",
+        "price": "430",
+        "desc": "",
+        "category": "Salads"
+      },
+      {
+        "name": "Special Salad \"Mary\"",
+        "price": "450",
+        "desc": "",
+        "category": "Salads"
+      },
+      {
+        "name": "Chicken Salad",
+        "price": "400",
+        "desc": "",
+        "category": "Salads"
+      },
+      {
+        "name": "Beets with Plum Sauce",
+        "price": "375",
+        "desc": "",
+        "category": "Salads"
+      },
+      {
+        "name": "Beans Salad",
+        "price": "375",
+        "desc": "",
+        "category": "Salads"
+      },
+      {
+        "name": "Mushroom Salad",
+        "price": "375",
+        "desc": "",
+        "category": "Salads"
+      },
+      {
+        "name": "Imeruli Khachapuri",
+        "price": "725",
+        "desc": "",
+        "category": "Bakery"
+      },
+      {
+        "name": "Megruli Khachapuri",
+        "price": "745",
+        "desc": "",
+        "category": "Bakery"
+      },
+      {
+        "name": "Lobiani · Georgian Bean-Stuffed Bread",
+        "price": "675",
+        "desc": "",
+        "category": "Bakery"
+      },
+      {
+        "name": "Acharuli Khachapuri",
+        "price": "745",
+        "desc": "Seçenekler mevcut",
+        "category": "Bakery"
+      },
+      {
+        "name": "Penovani · Layered Cheese Bread",
+        "price": "520",
+        "desc": "",
+        "category": "Bakery"
+      },
+      {
+        "name": "Mchadi · Georgian Cornbread",
+        "price": "350",
+        "desc": "",
+        "category": "Bakery"
+      },
+      {
+        "name": "Chvishtari · Cornbread with Cheese",
+        "price": "400",
+        "desc": "",
+        "category": "Bakery"
+      },
+      {
+        "name": "Pancakes · Meat or Cheese",
+        "price": "425",
+        "desc": "Seçenekler mevcut",
+        "category": "Bakery"
+      },
+      {
+        "name": "Khinkali · Beef",
+        "price": "150 /pcs",
+        "desc": "MIN. 4 PCS",
+        "category": "Main Dishes"
+      },
+      {
+        "name": "Khinkali · Cheese",
+        "price": "145 /pcs",
+        "desc": "MIN. 4 PCS",
+        "category": "Main Dishes"
+      },
+      {
+        "name": "Khinkali · Mushroom",
+        "price": "145 /pcs",
+        "desc": "MIN. 4 PCS",
+        "category": "Main Dishes"
+      },
+      {
+        "name": "Fried Khinkali · Beef",
+        "price": "155 /pcs",
+        "desc": "MIN. 4 PCS",
+        "category": "Main Dishes"
+      },
+      {
+        "name": "Fried Khinkali · Cheese",
+        "price": "150 /pcs",
+        "desc": "MIN. 4 PCS",
+        "category": "Main Dishes"
+      },
+      {
+        "name": "Small Khinkali · Beef · 16 Pieces",
+        "price": "680",
+        "desc": "",
+        "category": "Main Dishes"
+      },
+      {
+        "name": "Small Khinkali · Cheese · 16 Pieces",
+        "price": "680",
+        "desc": "",
+        "category": "Main Dishes"
+      },
+      {
+        "name": "Small Khinkali · Mixed · 16 Pieces",
+        "price": "680",
+        "desc": "",
+        "category": "Main Dishes"
+      },
+      {
+        "name": "Lobio · Bean Stew",
+        "price": "485",
+        "desc": "",
+        "category": "Main Dishes"
+      },
+      {
+        "name": "Lobio with Meat",
+        "price": "750",
+        "desc": "",
+        "category": "Main Dishes"
+      },
+      {
+        "name": "Ajapsandali · Eggplant Stew",
+        "price": "485",
+        "desc": "",
+        "category": "Main Dishes"
+      },
+      {
+        "name": "Ajapsandali With Meat",
+        "price": "750",
+        "desc": "",
+        "category": "Main Dishes"
+      },
+      {
+        "name": "Chicken in Plum Sauce",
+        "price": "750",
+        "desc": "",
+        "category": "Main Dishes"
+      },
+      {
+        "name": "Shkmeruli · Chicken in Garlic Cream Sauce",
+        "price": "730",
+        "desc": "",
+        "category": "Main Dishes"
+      },
+      {
+        "name": "Baje · Chicken in Walnut Sauce",
+        "price": "750",
+        "desc": "",
+        "category": "Main Dishes"
+      },
+      {
+        "name": "Chakhokhbili · Chicken Stew",
+        "price": "730",
+        "desc": "",
+        "category": "Main Dishes"
+      },
+      {
+        "name": "Chicken with Pomegranate",
+        "price": "730",
+        "desc": "",
+        "category": "Main Dishes"
+      },
+      {
+        "name": "Chicken Livers with Pomegranate",
+        "price": "550",
+        "desc": "",
+        "category": "Main Dishes"
+      },
+      {
+        "name": "Chashushuli · Beef Stew",
+        "price": "825",
+        "desc": "",
+        "category": "Main Dishes"
+      },
+      {
+        "name": "Kharcho · Beef Stew with Walnuts",
+        "price": "825",
+        "desc": "",
+        "category": "Main Dishes"
+      },
+      {
+        "name": "Chef's Special \"Galaktion\"",
+        "price": "850",
+        "desc": "",
+        "category": "Main Dishes"
+      },
+      {
+        "name": "Fish in Walnut Sauce",
+        "price": "800",
+        "desc": "",
+        "category": "Main Dishes"
+      },
+      {
+        "name": "Fish in Plum Sauce",
+        "price": "800",
+        "desc": "",
+        "category": "Main Dishes"
+      },
+      {
+        "name": "Fish in Vinegar and Coriander Sauce",
+        "price": "800",
+        "desc": "",
+        "category": "Main Dishes"
+      },
+      {
+        "name": "Borano · Melted Cheese",
+        "price": "475",
+        "desc": "",
+        "category": "Main Dishes"
+      },
+      {
+        "name": "Georgian Kebab",
+        "price": "800",
+        "desc": "",
+        "category": "Main Dishes"
+      },
+      {
+        "name": "Stuffed Mushrooms with Cheese",
+        "price": "475",
+        "desc": "",
+        "category": "Main Dishes"
+      },
+      {
+        "name": "Ojakhuri with Beef · Georgian-style potatoes and onions",
+        "price": "800",
+        "desc": "",
+        "category": "Main Dishes"
+      },
+      {
+        "name": "Ojakhuri with Mushrooms · Georgian-style potatoes and onions",
+        "price": "650",
+        "desc": "",
+        "category": "Main Dishes"
+      },
+      {
+        "name": "Ojakhuri with Chicken · Georgian-style potatoes and onions",
+        "price": "730",
+        "desc": "",
+        "category": "Main Dishes"
+      },
+      {
+        "name": "French Fries",
+        "price": "400",
+        "desc": "",
+        "category": "Appetizer"
+      },
+      {
+        "name": "Pickles",
+        "price": "385",
+        "desc": "",
+        "category": "Appetizer"
+      },
+      {
+        "name": "Georgian Cheese Assortment",
+        "price": "625",
+        "desc": "",
+        "category": "Appetizer"
+      },
+      {
+        "name": "Ajika",
+        "price": "95",
+        "desc": "",
+        "category": "Sauces"
+      },
+      {
+        "name": "Satsebeli · Georgian Tomato Sauce",
+        "price": "95",
+        "desc": "",
+        "category": "Sauces"
+      },
+      {
+        "name": "Tkemali",
+        "price": "95",
+        "desc": "",
+        "category": "Sauces"
+      },
+      {
+        "name": "Sour Cream",
+        "price": "85",
+        "desc": "",
+        "category": "Sauces"
+      },
+      {
+        "name": "Sour Cream with Garlic",
+        "price": "95",
+        "desc": "",
+        "category": "Sauces"
+      },
+      {
+        "name": "Turkish Coffee",
+        "price": "195",
+        "desc": "",
+        "category": "Hot Drinks"
+      },
+      {
+        "name": "Coffee from Batumi",
+        "price": "195",
+        "desc": "",
+        "category": "Hot Drinks"
+      },
+      {
+        "name": "Espresso",
+        "price": "200",
+        "desc": "",
+        "category": "Hot Drinks"
+      },
+      {
+        "name": "Americano",
+        "price": "220",
+        "desc": "",
+        "category": "Hot Drinks"
+      },
+      {
+        "name": "Tea",
+        "price": "75",
+        "desc": "",
+        "category": "Hot Drinks"
+      },
+      {
+        "name": "Georgian Lemonade · 330 ml",
+        "price": "220",
+        "desc": "",
+        "category": "Cold Drinks"
+      },
+      {
+        "name": "Nabeghlavi · Georgian Mineral Water · 500 ml",
+        "price": "240",
+        "desc": "",
+        "category": "Cold Drinks"
+      },
+      {
+        "name": "Fruit Juice",
+        "price": "180",
+        "desc": "",
+        "category": "Cold Drinks"
+      },
+      {
+        "name": "Coca-Cola",
+        "price": "140",
+        "desc": "",
+        "category": "Cold Drinks"
+      },
+      {
+        "name": "Ayran",
+        "price": "140",
+        "desc": "",
+        "category": "Cold Drinks"
+      },
+      {
+        "name": "Water · 330 ml",
+        "price": "95",
+        "desc": "",
+        "category": "Cold Drinks"
+      },
+      {
+        "name": "Water · 750 ml",
+        "price": "170",
+        "desc": "",
+        "category": "Cold Drinks"
+      },
+      {
+        "name": "Brandy",
+        "price": "3.250",
+        "desc": "Seçenekler mevcut",
+        "category": "Cognac & Vodka"
+      },
+      {
+        "name": "Georgian Vodka",
+        "price": "1.250",
+        "desc": "Seçenekler mevcut",
+        "category": "Cognac & Vodka"
+      },
+      {
+        "name": "Khvanchkara · Semi-sweet",
+        "price": "3.550",
+        "desc": "",
+        "category": "Red Wines"
+      },
+      {
+        "name": "Kindzmarauli · Semi-sweet",
+        "price": "3.000",
+        "desc": "",
+        "category": "Red Wines"
+      },
+      {
+        "name": "Alazani Valley · Semi-sweet",
+        "price": "2.750",
+        "desc": "Seçenekler mevcut",
+        "category": "Red Wines"
+      },
+      {
+        "name": "Saperavi · Dry",
+        "price": "2.800",
+        "desc": "Seçenekler mevcut",
+        "category": "Red Wines"
+      },
+      {
+        "name": "Mukuzani · Dry",
+        "price": "3.000",
+        "desc": "",
+        "category": "Red Wines"
+      },
+      {
+        "name": "House Selection · Dry",
+        "price": "1.800",
+        "desc": "Seçenekler mevcut",
+        "category": "Red Wines"
+      },
+      {
+        "name": "House Selection · Semi-sweet",
+        "price": "1.800",
+        "desc": "Seçenekler mevcut",
+        "category": "Red Wines"
+      },
+      {
+        "name": "Kisi Qvevri · Dry",
+        "price": "3.250",
+        "desc": "",
+        "category": "White Wines"
+      },
+      {
+        "name": "Kakhuri · Dry",
+        "price": "2.750",
+        "desc": "Seçenekler mevcut",
+        "category": "White Wines"
+      },
+      {
+        "name": "Tsinandali · Dry",
+        "price": "3.000",
+        "desc": "",
+        "category": "White Wines"
+      },
+      {
+        "name": "Rkatsiteli · Dry",
+        "price": "2.750",
+        "desc": "Seçenekler mevcut",
+        "category": "White Wines"
+      },
+      {
+        "name": "Alazani Valley · Semi-sweet",
+        "price": "2.750",
+        "desc": "Seçenekler mevcut",
+        "category": "White Wines"
+      },
+      {
+        "name": "Ranina Rose · Semi-sweet",
+        "price": "2.750",
+        "desc": "Seçenekler mevcut",
+        "category": "White Wines"
+      },
+      {
+        "name": "House Selection · Dry",
+        "price": "1.800",
+        "desc": "Seçenekler mevcut",
+        "category": "White Wines"
+      },
+      {
+        "name": "Amsterdam · 500 ml",
+        "price": "400",
+        "desc": "",
+        "category": "Beers"
+      },
+      {
+        "name": "Beck's · 500 ml",
+        "price": "375",
+        "desc": "",
+        "category": "Beers"
+      },
+      {
+        "name": "Bomonti · 500 ml",
+        "price": "375",
+        "desc": "",
+        "category": "Beers"
+      },
+      {
+        "name": "Efes · 500 ml",
+        "price": "350",
+        "desc": "",
+        "category": "Beers"
+      },
+      {
+        "name": "Napoleon",
+        "price": "420",
+        "desc": "",
+        "category": "Desserts"
+      },
+      {
+        "name": "Frida",
+        "price": "385",
+        "desc": "",
+        "category": "Desserts"
+      },
+      {
+        "name": "Medovik",
+        "price": "380",
+        "desc": "",
+        "category": "Desserts"
+      },
+      {
+        "name": "Ponchik",
+        "price": "300",
+        "desc": "",
+        "category": "Desserts"
+      }
+    ]
   }
 };
