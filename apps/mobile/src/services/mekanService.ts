@@ -181,7 +181,7 @@ export async function getPlaces(page = 1, pageSize = 20): Promise<PaginatedPlace
 
 export async function getAllPlaces(): Promise<Place[]> {
   try {
-    const data = await apiGet<any>('/places/?page=1&page_size=10000');
+    const data = await apiGet<any>('/places/lite?limit=6000');
     const arr = Array.isArray(data?.items) ? data.items : Array.isArray(data) ? data : [];
     logger.log(`[getAllPlaces] Loaded ${arr.length} places`);
     return arr.map(normalizePlace);

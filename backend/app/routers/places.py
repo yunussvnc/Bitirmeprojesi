@@ -479,7 +479,7 @@ def read_place(
 
 
 @router.get("/places/{place_id}/photo")
-def get_place_photo(place_id: int, max_width: int = 800, db: Session = Depends(get_db)):
+async def get_place_photo(place_id: int, max_width: int = 800, db: Session = Depends(get_db)):
     """Mekanın Google fotoğrafını güvenli bir şekilde sunar (API anahtarını gizler)."""
     place = db.query(models.Place).filter(models.Place.id == place_id).first()
     if not place or not place.photo_url:
@@ -504,16 +504,29 @@ def get_place_photo(place_id: int, max_width: int = 800, db: Session = Depends(g
                 raise HTTPException(status_code=500, detail="Google Maps API Key yapılandırılmamış.")
             google_url = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth={max_width}&photoreference={ref}&key={api_key}"
 
-        try:
-            response = requests.get(google_url, stream=True, timeout=10)
-        except requests.exceptions.RequestException:
-            raise HTTPException(status_code=504, detail="Google API'sine bağlanılamadı.")
-        if response.status_code != 200:
-            raise HTTPException(status_code=response.status_code, detail="Fotoğraf Google'dan alınamadı.")
+        import httpx
 
-        return StreamingResponse(response.iter_content(chunk_size=8192), media_type=response.headers.get("content-type", "image/jpeg"))
+        async def stream_generator(url: str):
+            async with httpx.AsyncClient() as client:
+                try:
+                    async with client.stream("GET", url, timeout=10) as response:
+                        if response.status_code != 200:
+                            raise HTTPException(status_code=response.status_code, detail="Fotoğraf Google'dan alınamadı.")
+                        async for chunk in response.aiter_bytes(chunk_size=8192):
+                            yield chunk
+                except httpx.RequestError:
+                    raise HTTPException(status_code=504, detail="Google API'sine bağlanılamadı.")
 
-    return RedirectResponse(url=place.photo_url)
+        # Client ilk isteği yapar ki headers okuyabilelim (content-type)
+        # Ancak generator içinde bunu yapamayız, o yüzden önce HEAD isteği atıp type alabiliriz
+        # Ya da stream başlatıp Response dönmek FastAPI'de biraz tricky.
+        # Basitçe image/jpeg diyelim ve streaming response dönelim:
+        headers = {
+            "Cache-Control": "public, max-age=31536000, immutable"
+        }
+        return StreamingResponse(stream_generator(google_url), media_type="image/jpeg", headers=headers)
+
+    return RedirectResponse(url=place.photo_url, headers={"Cache-Control": "public, max-age=31536000, immutable"})
 
 
 @router.put("/places/{place_id}", response_model=schemas.Place)
