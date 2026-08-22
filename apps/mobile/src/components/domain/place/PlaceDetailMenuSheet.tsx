@@ -49,6 +49,26 @@ export function PlaceDetailMenuSheet({
       contentContainerStyle={[styles.reviewScrollContent, { paddingHorizontal: spacing.sm }]}
       showsVerticalScrollIndicator={false}
     >
+      {place?.menu_source_name ? (
+        <View style={{
+          marginBottom: spacing.base,
+          paddingHorizontal: 12,
+          paddingVertical: 10,
+          borderRadius: 12,
+          backgroundColor: 'rgba(16, 185, 129, 0.08)',
+          borderWidth: 0.5,
+          borderColor: 'rgba(16, 185, 129, 0.24)',
+        }}>
+          <Text style={{ color: '#10b981', fontSize: 12, fontWeight: '700' }}>
+            Menü kaynağı: {place.menu_source_name}
+          </Text>
+          {place.menu_verified_at ? (
+            <Text style={{ color: colors.text.tertiary, fontSize: 11, marginTop: 3 }}>
+              Son doğrulama: {place.menu_verified_at}
+            </Text>
+          ) : null}
+        </View>
+      ) : null}
       {place?.menu_items && place.menu_items.length > 0 ? (
         place.menu_items[0]?.type === 'image' ? (
           /* ===== IMAGE MENU ===== */

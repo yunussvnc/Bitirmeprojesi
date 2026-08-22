@@ -1,6 +1,7 @@
 import { apiGet, apiPost, apiPut } from "@/src/utils/apiClient";
 import { logger } from "@/src/utils/logger";
 import { API_V1 } from "@/src/constants/api";
+import { MENU_OVERRIDES } from "@/src/data/menuOverrides";
 
 export type Place = {
   id: number | string;
@@ -26,6 +27,9 @@ export type Place = {
   saved_count?: number;
   popularity_score?: number;
   menu_items?: any[];
+  menu_source_url?: string;
+  menu_source_name?: string;
+  menu_verified_at?: string;
   // Takip sistemi
   follower_count?: number;
   is_following?: boolean;
@@ -139,6 +143,10 @@ function normalizePlace(p: any): Place {
   const is_following = typeof p?.is_following === 'boolean' ? p.is_following : false;
   
   let menu_items: any[] | undefined = undefined;
+  let menu_source_url: string | undefined = undefined;
+  let menu_source_name: string | undefined = undefined;
+  let menu_verified_at: string | undefined = undefined;
+  const localMenu = MENU_OVERRIDES[String(id)];
   const rawMenu = p?.menu_items ?? p?.menu_items_json;
   if (rawMenu) {
     try {
@@ -148,8 +156,15 @@ function normalizePlace(p: any): Place {
       menu_items = undefined;
     }
   }
+  // Publicly verified local menus take precedence over empty/stale server data.
+  if (localMenu?.items?.length) {
+    menu_items = localMenu.items;
+    menu_source_url = localMenu.sourceUrl;
+    menu_source_name = localMenu.sourceName;
+    menu_verified_at = localMenu.verifiedAt;
+  }
 
-  return { id, name, subtitle, description, campaign_text, tags, category, address, city, latitude, longitude, photo_url, gallery_urls, video_url, average_rating, price_range, features, opening_time, closing_time, review_count, saved_count, popularity_score, menu_items, follower_count, is_following };
+  return { id, name, subtitle, description, campaign_text, tags, category, address, city, latitude, longitude, photo_url, gallery_urls, video_url, average_rating, price_range, features, opening_time, closing_time, review_count, saved_count, popularity_score, menu_items, menu_source_url, menu_source_name, menu_verified_at, follower_count, is_following };
 }
 
 export async function getPlaces(page = 1, pageSize = 20): Promise<PaginatedPlaces> {
