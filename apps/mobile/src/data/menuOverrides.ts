@@ -14529,4 +14529,259 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     }
   ]
 }
+,
+  "7226": {
+  "name": "Gaziantep’li Baklavaci Bey Kavacik",
+  "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/o792/gaziantepli-baklavaci-bey-o792",
+  "sourceName": "Yemeksepeti canlı Gaziantepli Baklavacı Bey menüsü",
+  "verifiedAt": "2026-08-23",
+  "items": [
+    {
+      "name": "Fıstıklı Şöbiyet (500 gr.)",
+      "price": "1.200 TL",
+      "desc": "Özel tereyağ (sade yağ), pancar şekeri (toz şeker), içme suyu, buğday unu, kaymak, Antep fıstık içi",
+      "category": "Tatlılar (500 gr.)"
+    },
+    {
+      "name": "Fıstıklı Ankara (500 gr.)",
+      "price": "1.050 TL",
+      "desc": "Özel tereyağ (sade yağ), ince hamur, pancar şekeri (toz şeker), içme suyu, buğday unu, buğday nişastası, yumurta, sofra tuzu, Antep fıstık içi",
+      "category": "Tatlılar (500 gr.)"
+    },
+    {
+      "name": "Fıstıklı Midye (500 gr.)",
+      "price": "1.200 TL",
+      "desc": "Özel tereyağ (sade yağ), ince hamur, pancar şekeri (toz şeker), içme suyu, buğday unu, buğday nişastası, yumurta, sofra tuzu, kaymak, Antep fıstık içi",
+      "category": "Tatlılar (500 gr.)"
+    },
+    {
+      "name": "Soğuk Baklava (500 gr.)",
+      "price": "1.050 TL",
+      "desc": "Özel tereyağ (sade yağ), ince hamur, pancar şekeri (toz şeker), içme suyu, buğday unu, buğday nişastası, yumurta, sofra tuzu, süt, özel çikolata, Antep fıstık içi",
+      "category": "Tatlılar (500 gr.)"
+    },
+    {
+      "name": "Sütlü Nuriye (500 gr.)",
+      "price": "890 TL",
+      "desc": "Özel tereyağ (sade yağ), ince hamur, pancar şekeri (toz şeker), içme suyu, buğday unu, buğday nişastası, yumurta, sofra tuzu, tuz, süt, fındık",
+      "category": "Tatlılar (500 gr.)"
+    },
+    {
+      "name": "Kare Klasik Baklava (500 gr.)",
+      "price": "1.050 TL",
+      "desc": "Özel tereyağ (sade yağ), ince hamur, pancar şekeri (toz şeker), içme suyu, buğday unu, buğday nişastası, yumurta, sofra tuzu, Antep fıstık içi",
+      "category": "Tatlılar (500 gr.)"
+    },
+    {
+      "name": "Havuç Dilim Baklava (500 gr.)",
+      "price": "1.050 TL",
+      "desc": "Özel tereyağ (sade yağ), ince hamur, pancar şekeri (toz şeker), içme suyu, buğday unu, buğday nişastası, yumurta, sofra tuzu, Antep fıstık içi",
+      "category": "Tatlılar (500 gr.)"
+    },
+    {
+      "name": "Fıstıklı Tel Kadayıf (500 gr.)",
+      "price": "1.050 TL",
+      "desc": "Özel tereyağ (sade yağ), pancar şekeri (toz şeker), içme suyu, buğday unu, Antep fıstık içi",
+      "category": "Tatlılar (500 gr.)"
+    },
+    {
+      "name": "Fıstıklı Özel Baklava (500 gr.)",
+      "price": "1.050 TL",
+      "desc": "Özel tereyağ (sade yağ), ince hamur, pancar şekeri (toz şeker), içme suyu, buğday unu, buğday nişastası, yumurta, sofra tuzu, Antep fıstık içi",
+      "category": "Tatlılar (500 gr.)"
+    },
+    {
+      "name": "Cevizli Özel Baklava (500 gr.)",
+      "price": "890 TL",
+      "desc": "Özel tereyağ (sade yağ), ince hamur, pancar şekeri (toz şeker), içme suyu, buğday unu, buğday nişastası, yumurta, sofra tuzu, ceviz",
+      "category": "Tatlılar (500 gr.)"
+    },
+    {
+      "name": "Fıstıklı Sarma Dürüm (500 gr.)",
+      "price": "1.500 TL",
+      "desc": "500 gr. olarak servis edilmektedir.",
+      "category": "Tatlılar (500 gr.)"
+    },
+    {
+      "name": "Kuru Baklava (500 gr.)",
+      "price": "1.050 TL",
+      "desc": "Özel tereyağ (sade yağ), pancar şekeri (toz şeker), içme suyu, buğday unu, Antep fıstık içi",
+      "category": "Tatlılar (500 gr.)"
+    },
+    {
+      "name": "Burma (500 gr.)",
+      "price": "1.050 TL",
+      "desc": "Özel tereyağ (sade yağ), pancar şekeri (toz şeker), içme suyu, buğday unu, Antep fıstık içi",
+      "category": "Tatlılar (500 gr.)"
+    },
+    {
+      "name": "Cevizli Ev Baklavası (500 gr.)",
+      "price": "890 TL",
+      "desc": "Özel tereyağ (sade yağ), ince hamur, pancar şekeri (toz şeker), içme suyu, buğday unu, buğday nişastası, yumurta, sofra tuzu, ceviz",
+      "category": "Tatlılar (500 gr.)"
+    },
+    {
+      "name": "Fındıklı Güllaç (500 gr.)",
+      "price": "700 TL",
+      "desc": "500 gr.",
+      "category": "Tatlılar (500 gr.)"
+    },
+    {
+      "name": "Fıstıklı Güllaç (500 gr.)",
+      "price": "800 TL",
+      "desc": "500 gr.",
+      "category": "Tatlılar (500 gr.)"
+    },
+    {
+      "name": "Kare Klasik Baklava (1 kg.)",
+      "price": "1.990 TL",
+      "desc": "Özel tereyağ (sade yağ), ince hamur, pancar şekeri (toz şeker), içme suyu, buğday unu, buğday nişastası, yumurta, sofra tuzu, Antep fıstık içi",
+      "category": "Tatlılar (1 kg.)"
+    },
+    {
+      "name": "Fıstıklı Şöbiyet (1 kg.)",
+      "price": "2.300 TL",
+      "desc": "Özel tereyağ (sade yağ), pancar şekeri (toz şeker), içme suyu, buğday unu, kaymak, Antep fıstık içi",
+      "category": "Tatlılar (1 kg.)"
+    },
+    {
+      "name": "Kuru Baklava (1 kg.)",
+      "price": "2.050 TL",
+      "desc": "Özel tereyağ (sade yağ), pancar şekeri (toz şeker), içme suyu, buğday unu, Antep fıstık içi",
+      "category": "Tatlılar (1 kg.)"
+    },
+    {
+      "name": "Fıstıklı Tel Kadayıf (1 kg.)",
+      "price": "1.990 TL",
+      "desc": "Özel tereyağ (sade yağ), pancar şekeri (toz şeker), içme suyu, buğday unu, Antep fıstık içi",
+      "category": "Tatlılar (1 kg.)"
+    },
+    {
+      "name": "Cevizli Ev Baklavası (1 kg.)",
+      "price": "1.750 TL",
+      "desc": "Özel tereyağ (sade yağ), ince hamur, pancar şekeri (toz şeker), içme suyu, buğday unu, buğday nişastası, yumurta, sofra tuzu, ceviz",
+      "category": "Tatlılar (1 kg.)"
+    },
+    {
+      "name": "Sütlü Nuriye (1 kg.)",
+      "price": "1.750 TL",
+      "desc": "Özel tereyağ (sade yağ), ince hamur, pancar şekeri (toz şeker), içme suyu, buğday unu, buğday nişastası, yumurta, sofra tuzu, tuz, süt, fındık",
+      "category": "Tatlılar (1 kg.)"
+    },
+    {
+      "name": "Soğuk Baklava (1 kg.)",
+      "price": "1.990 TL",
+      "desc": "Özel tereyağ (sade yağ), ince hamur, pancar şekeri (toz şeker), içme suyu, buğday unu, buğday nişastası, yumurta, sofra tuzu, süt, özel çikolata, Antep fıstık içi",
+      "category": "Tatlılar (1 kg.)"
+    },
+    {
+      "name": "Fıstıklı Sarma Dürüm (1 kg.)",
+      "price": "2.990 TL",
+      "desc": "1 kg. olarak servis edilmektedir.",
+      "category": "Tatlılar (1 kg.)"
+    },
+    {
+      "name": "Burma (1 kg.)",
+      "price": "1.990 TL",
+      "desc": "Özel tereyağ (sade yağ), pancar şekeri (toz şeker), içme suyu, buğday unu, Antep fıstık içi",
+      "category": "Tatlılar (1 kg.)"
+    },
+    {
+      "name": "Fıstıklı Midye (1 kg.)",
+      "price": "2.300 TL",
+      "desc": "Özel tereyağ (sade yağ), ince hamur, pancar şekeri (toz şeker), içme suyu, buğday unu, buğday nişastası, yumurta, sofra tuzu, kaymak, Antep fıstık içi",
+      "category": "Tatlılar (1 kg.)"
+    },
+    {
+      "name": "Fıstıklı Özel Baklava (1 kg.)",
+      "price": "1.990 TL",
+      "desc": "Özel tereyağ (sade yağ), ince hamur, pancar şekeri (toz şeker), içme suyu, buğday unu, buğday nişastası, yumurta, sofra tuzu, Antep fıstık içi",
+      "category": "Tatlılar (1 kg.)"
+    },
+    {
+      "name": "Havuç Dilim Baklava (1 kg.)",
+      "price": "2.050 TL",
+      "desc": "Özel tereyağ (sade yağ), ince hamur, pancar şekeri (toz şeker), içme suyu, buğday unu, buğday nişastası, yumurta, sofra tuzu, Antep fıstık içi",
+      "category": "Tatlılar (1 kg.)"
+    },
+    {
+      "name": "Cevizli Özel Baklava (1 kg.)",
+      "price": "1.750 TL",
+      "desc": "Özel tereyağ (sade yağ), ince hamur, pancar şekeri (toz şeker), içme suyu, buğday unu, buğday nişastası, yumurta, sofra tuzu, ceviz",
+      "category": "Tatlılar (1 kg.)"
+    },
+    {
+      "name": "Ramazan Menüsü (Fındıklı Güllaç (1 kg.))",
+      "price": "1.200 TL",
+      "desc": "1 kg. olarak servis edilir.",
+      "category": "Tatlılar (1 kg.)"
+    },
+    {
+      "name": "Fıstıklı Güllaç (1 kg.)",
+      "price": "1.300 TL",
+      "desc": "Sütlü tatlı",
+      "category": "Tatlılar (1 kg.)"
+    },
+    {
+      "name": "Fıstıklı Baklava (3.7 kg.) (Tepsi)",
+      "price": "7.000 TL",
+      "desc": "Tepsi fiyatı depozitoya dahildir",
+      "category": "Tatlılar (1 kg.)"
+    },
+    {
+      "name": "Fıstıklı Ankara (1 kg.)",
+      "price": "1.990 TL",
+      "desc": "Özel tereyağ (sade yağ), ince hamur, pancar şekeri (toz şeker), içme suyu, buğday unu, buğday nişastası, yumurta, sofra tuzu, Antep fıstık içi",
+      "category": "Tatlılar (1 kg.)"
+    },
+    {
+      "name": "Çilekli Dondurma (500 gr.)",
+      "price": "500 TL",
+      "desc": "Paketli ürün",
+      "category": "Dondurmalar"
+    },
+    {
+      "name": "Limonlu Dondurma (500 gr.)",
+      "price": "500 TL",
+      "desc": "Paketli ürün",
+      "category": "Dondurmalar"
+    },
+    {
+      "name": "Kakaolu Dondurma (500 gr.)",
+      "price": "500 TL",
+      "desc": "Paketli ürün",
+      "category": "Dondurmalar"
+    },
+    {
+      "name": "Maraş Usulü Kesme Dondurma (500 gr.)",
+      "price": "500 TL",
+      "desc": "Paketli ürün",
+      "category": "Dondurmalar"
+    },
+    {
+      "name": "Çilekli Dondurma (1 kg.)",
+      "price": "1.000 TL",
+      "desc": "Paketli ürün",
+      "category": "Dondurmalar"
+    },
+    {
+      "name": "Limonlu Dondurma (1 kg.)",
+      "price": "1.000 TL",
+      "desc": "Paketli ürün",
+      "category": "Dondurmalar"
+    },
+    {
+      "name": "Kakaolu Dondurma (1 kg.)",
+      "price": "1.000 TL",
+      "desc": "Paketli ürün",
+      "category": "Dondurmalar"
+    },
+    {
+      "name": "Maraş Usulü Kesme Dondurma (1 kg.)",
+      "price": "1.000 TL",
+      "desc": "Paketli ürün",
+      "category": "Dondurmalar"
+    }
+  ]
+}
 };
