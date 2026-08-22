@@ -9507,5 +9507,265 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
         "category": "Kahve"
       }
     ]
+  },
+  "7204": {
+    "name": "Kesbi Döner & Piliç Çevirme",
+    "sourceUrl": "https://www.migros.com.tr/yemek/kesbi-doner-beylikduzu-buyuksehir-mah-st-23c40",
+    "sourceName": "Migros Yemek Kesbi Döner menüsü (Beylikdüzü Büyükşehir/Atrium Çarşı)",
+    "verifiedAt": "2026-08-23",
+    "items": [
+      {
+        "name": "Tavuk Döner Dürüm Menü",
+        "price": "330,00 TL",
+        "desc": "Tavuk Döner Dürüm + Patates Kızartması + Coca-Cola (25 cl.)",
+        "category": "Menüler"
+      },
+      {
+        "name": "Yarım Ekmek Arası Tavuk Döner Menü",
+        "price": "325,00 TL",
+        "desc": "Yarım Ekmek Arası Tavuk Döner + Patates Kızartması + Coca-Cola (25 cl.)",
+        "category": "Menüler"
+      },
+      {
+        "name": "Tombik Ekmek Arası Tavuk Döner Menü",
+        "price": "325,00 TL",
+        "desc": "Tombik Ekmek Arası Tavuk Döner + Patates Kızartması + Coca-Cola (25 cl.)",
+        "category": "Menüler"
+      },
+      {
+        "name": "Karışık Menü (2 Kişilik)",
+        "price": "800,00 TL",
+        "desc": "Tavuk Çevirme (Yarım) + Kanat (8 Adet) + Pirinç Pilavı + Yeşillik + Lavaş (2 Adet) + İçecek (1 L.)",
+        "category": "Menüler"
+      },
+      {
+        "name": "Tavuk Çevirme (2 Kişilik) Menü",
+        "price": "700,00 TL",
+        "desc": "Tavuk Çevirme (Bütün) + Pirinç Pilavı + Yeşillik + Lavaş (2 Adet) + Ayran (1 L.)",
+        "category": "Menüler"
+      },
+      {
+        "name": "Bol Menü (4 Kişilik)",
+        "price": "1.200,00 TL",
+        "desc": "Tavuk Çevirme (Bütün) + Tavuk Kanat (1 kg.) (Pişirilmiş) + Pirinç Pilavı + Yeşillik + Lavaş (4 Adet) + İçecek (1 L.) + Ayran (1 L.) (Gramaj bilgisi ürünün çiğ halinin gramajıdır.)",
+        "category": "Menüler"
+      },
+      {
+        "name": "Patso Sandviç",
+        "price": "130,00 TL",
+        "desc": "Patates kızartması, turşu, ketçap",
+        "category": "Patsolar"
+      },
+      {
+        "name": "Patso Dürüm",
+        "price": "150,00 TL",
+        "desc": "Patates kızartması, turşu, ketçap",
+        "category": "Patsolar"
+      },
+      {
+        "name": "Pilav Üstü Tavuk Döner",
+        "price": "400,00 TL",
+        "desc": "Pirinç pilavı. Yeşillik, turşu, lavaş ile",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Soslu Tavuk Döner Dürüm",
+        "price": "210,00 TL",
+        "desc": "Yeşillik, turşu, patates kızartması",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Special Kesbi Dürüm",
+        "price": "245,00 TL",
+        "desc": "Kaşar peyniri, turşu, yeşillik, patates kızartması, sos, tavuk döner",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Kaşarlı Tavuk Döner Dürüm",
+        "price": "255,00 TL",
+        "desc": "Yeşillik, turşu, patates kızartması",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Tavuk Döner Sandviç",
+        "price": "140,00 TL",
+        "desc": "Yeşillik, turşu, patates kızartması",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Tombik Ekmek Arası Tavuk Döner",
+        "price": "140,00 TL",
+        "desc": "Yeşillik, turşu, patates kızartması",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Yarım Ekmek Arası Tavuk Döner",
+        "price": "140,00 TL",
+        "desc": "Yeşillik, turşu, patates kızartması",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Tam Ekmek Arası Tavuk Döner",
+        "price": "230,00 TL",
+        "desc": "Yeşillik, turşu, patates kızartması",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Tavuk Çevirme (Yarım)",
+        "price": "400,00 TL",
+        "desc": "Pirinç pilavı, patates kızartması, yeşillik, turşu, lavaş ile",
+        "category": "Tavuklar"
+      },
+      {
+        "name": "Tavuk Çevirme (Bütün) (Çiğ 1500 Gr.)",
+        "price": "400,00 TL",
+        "desc": "Baharatlar ile (Belirtilen gramaj bilgisi ürünlerin çiğ halinin gramajıdır.)",
+        "category": "Tavuklar"
+      },
+      {
+        "name": "Tavuk Kanat",
+        "price": "400,00 TL",
+        "desc": "Pirinç pilavı, yeşillik, patates kızartması, turşu, lavaş ile",
+        "category": "Tavuklar"
+      },
+      {
+        "name": "Arnavutciğeri",
+        "price": "400,00 TL",
+        "desc": "Pirinç pilavı, yeşillik, soğan, turşu, lavaş ile",
+        "category": "Ciğerler"
+      },
+      {
+        "name": "Arnavutciğeri Dürüm",
+        "price": "185,00 TL",
+        "desc": "Arnavutciğeri, soğan",
+        "category": "Ciğerler"
+      },
+      {
+        "name": "Yarım Ekmek Arası Arnavutciğeri",
+        "price": "160,00 TL",
+        "desc": "Arnavutciğeri, soğan",
+        "category": "Ciğerler"
+      },
+      {
+        "name": "Ekmek",
+        "price": "40,00 TL",
+        "desc": "Adet olarak servis edilmektedir.",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Lavaş",
+        "price": "35,00 TL",
+        "desc": "Adet olarak servis edilmektedir.",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Coca-cola Zero Sugar (33 Cl.)",
+        "price": "100,00 TL",
+        "desc": "Kutu içecek",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Coca-cola (33 Cl.)",
+        "price": "100,00 TL",
+        "desc": "Kutu içecek",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Coca-cola Light (33 Cl.)",
+        "price": "100,00 TL",
+        "desc": "Kutu içecek",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Coca-cola Şekersiz (33 Cl.)",
+        "price": "100,00 TL",
+        "desc": "Kutu içecek",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Fanta (33 Cl.)",
+        "price": "100,00 TL",
+        "desc": "Kutu",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Sprite (33 Cl.)",
+        "price": "100,00 TL",
+        "desc": "Kutu içecek",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Cappy (33 Cl.)",
+        "price": "100,00 TL",
+        "desc": "Kutu",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Şalgam Suyu (30 Cl.)",
+        "price": "80,00 TL",
+        "desc": "Pet şişe",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Ayran (17 Cl.)",
+        "price": "45,00 TL",
+        "desc": "Küçük",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Meyveli Soda (20 Cl.)",
+        "price": "45,00 TL",
+        "desc": "Cam şişe",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Soda (20 Cl.)",
+        "price": "35,00 TL",
+        "desc": "Cam şişe",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Su (50 Cl.)",
+        "price": "30,00 TL",
+        "desc": "Pet şişe",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Coca-cola (1 L.)",
+        "price": "140,00 TL",
+        "desc": "Pet şişe",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Coca-cola Şekersiz (1 L.)",
+        "price": "140,00 TL",
+        "desc": "Pet şişe",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Coca-cola Zero Sugar (1 L.)",
+        "price": "140,00 TL",
+        "desc": "Pet şişe",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Fanta (1 L.)",
+        "price": "80,00 TL",
+        "desc": "Pet şişe",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Sprite (1 L.)",
+        "price": "140,00 TL",
+        "desc": "Pet şişe",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Tavuk Kanat (1 Kg.)",
+        "price": "700,00 TL",
+        "desc": "Pirinç pilavı, yeşillik ile",
+        "category": "Kiloluk Ürünler (Pişirilmiş)"
+      }
+    ]
   }
 };
