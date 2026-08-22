@@ -30,7 +30,7 @@ export function PlaceCardSkeleton({ count = 3 }: PlaceCardSkeletonProps) {
   const { colors } = useTheme();
 
   return (
-    <>
+    <View style={{ gap: 16, width: '100%' }}>
       {Array.from({ length: count }).map((_, index) => (
         <View
           key={index}
@@ -67,15 +67,15 @@ export function PlaceCardSkeleton({ count = 3 }: PlaceCardSkeletonProps) {
           </View>
         </View>
       ))}
-    </>
+    </View>
   );
 }
 
 const styles = StyleSheet.create({
   card: {
+    width: '100%',
     borderRadius: 12,
     overflow: 'hidden',
-    marginBottom: spacing.base,
     borderWidth: 1,
   },
   imageSkeleton: {

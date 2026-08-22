@@ -475,6 +475,7 @@ export default function ClusterPlacesScreen() {
             estimatedItemSize={280}
             showsVerticalScrollIndicator={false}
             contentContainerStyle={styles.listContent}
+            ItemSeparatorComponent={() => <View style={{ height: 16 }} />}
             onEndReached={loadMore}
             onEndReachedThreshold={0.5}
             ListFooterComponent={renderFooter}
