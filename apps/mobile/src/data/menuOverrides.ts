@@ -11619,5 +11619,589 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
         "category": "içecekler"
       }
     ]
+  },
+  "7197": {
+    "name": "Burger Yiyelim",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/i4bn/burger-yiyelim-i4bn",
+    "sourceName": "Yemeksepeti Burger Yiyelim Ortaköy canlı menüsü (Muallim Naci–Canfener No:8/12 şube doğrulaması)",
+    "verifiedAt": "2026-08-23",
+    "items": [
+      {
+        "name": "Coca-Cola Offer (Offer for Two)",
+        "price": "770 TL",
+        "desc": "2 Medium Burgers + Large Fries + 4 Onion Rings + 1 Liter Drink + 4 Sauces",
+        "category": "Coca-Cola Special Offer Menus"
+      },
+      {
+        "name": "Yemeksepeti Menu for Two",
+        "price": "790,00 TL",
+        "desc": "Medium Cheese Burger + Legendary Chicken Burger + Large French Fries + 6 Onion Rings + 1 Liter Drink + 4 Sauces",
+        "category": "Yemeksepeti Özel"
+      },
+      {
+        "name": "Yemeksepeti Special Double Menu",
+        "price": "675,00 TL",
+        "desc": "2 Medium Cheeseburgers + 2 Drinks",
+        "category": "Yemeksepeti Özel"
+      },
+      {
+        "name": "Smash Burger Menu",
+        "price": "510 TL",
+        "desc": "Smash Burger + French Fries + Canned Drink + 2 Sauces",
+        "category": "Smash Burger Menüleri"
+      },
+      {
+        "name": "Dublex Smash Burger Menu",
+        "price": "620 TL",
+        "desc": "Dublex Smash Burger + French Fries + 2 Sauces + Canned Drink",
+        "category": "Smash Burger Menüleri"
+      },
+      {
+        "name": "Triplex Smash Burger Menu",
+        "price": "760 TL",
+        "desc": "Triplex Smash Burger + French Fries + 2 Sauces + Canned Drink",
+        "category": "Smash Burger Menüleri"
+      },
+      {
+        "name": "Cherry Smash Burger Menu",
+        "price": "520 TL",
+        "desc": "Cherry Smash Burger, French Fries, 2 Sauces, Canned Drink",
+        "category": "Smash Burger Menüleri"
+      },
+      {
+        "name": "Duplex Cherry Smash Burger Menu",
+        "price": "640 TL",
+        "desc": "Dublex Cherry Smash Burger, French Fries, 2 Sauces, Canned Drink",
+        "category": "Smash Burger Menüleri"
+      },
+      {
+        "name": "Triplex Cherry Smash Burger Menu",
+        "price": "780 TL",
+        "desc": "Triplex Cherry Smash Burger, French Fries, 2 Sauces, Canned Drink",
+        "category": "Smash Burger Menüleri"
+      },
+      {
+        "name": "Truffle Smash Burger Menu",
+        "price": "520 TL",
+        "desc": "Truff Smash Burger, French Fries, Canned Drink, 2 Sauces",
+        "category": "Smash Burger Menüleri"
+      },
+      {
+        "name": "Dublex Truff Smash Burger Menü",
+        "price": "640 TL",
+        "desc": "Dublex Truff Smash Burger + French Fries + 2 Sauces + Canned Drink",
+        "category": "Smash Burger Menüleri"
+      },
+      {
+        "name": "Triplex Truff Smash Burger Menü",
+        "price": "780 TL",
+        "desc": "Triplex Truff Smash Burger + French Fries + 2 Sauces + Canned Drink",
+        "category": "Smash Burger Menüleri"
+      },
+      {
+        "name": "Medium Burger Menu",
+        "price": "470 TL",
+        "desc": "Medium Burger + French Fries + Canned Drink + 2 Sauces",
+        "category": "Burger Menüleri"
+      },
+      {
+        "name": "Medium Cheese Burger Menu",
+        "price": "490 TL",
+        "desc": "Medium Cheese Burger + French Fries + Canned Drink + 2 Sauces",
+        "category": "Burger Menüleri"
+      },
+      {
+        "name": "Medium Butcher Burger Menu",
+        "price": "510 TL",
+        "desc": "Medium Butcher Burger + French Fries + Boxed Drink + 2 Sauces",
+        "category": "Burger Menüleri"
+      },
+      {
+        "name": "Medium Mexicano Burger Menu",
+        "price": "510 TL",
+        "desc": "Medium Mexicano Burger + French Fries + Canned Drink + 2 Sauces",
+        "category": "Burger Menüleri"
+      },
+      {
+        "name": "Gourmet BBQ Burger Menu",
+        "price": "560 TL",
+        "desc": "Gourmet BBQ Burger + French Fries + Boxed Drink + 2 Sauces",
+        "category": "Burger Menüleri"
+      },
+      {
+        "name": "Cheese Burger Menu",
+        "price": "560 TL",
+        "desc": "Cheese Burger + French Fries + Canned Drink + 2 Sauces",
+        "category": "Burger Menüleri"
+      },
+      {
+        "name": "Butcher Burger Menu",
+        "price": "580 TL",
+        "desc": "Butcher Burger + French Fries + Boxed Drink + 2 Sauces",
+        "category": "Burger Menüleri"
+      },
+      {
+        "name": "Mexicano Burger Menu",
+        "price": "580 TL",
+        "desc": "Mexicano Burger + French Fries + Canned Drink + 2 Sauces",
+        "category": "Burger Menüleri"
+      },
+      {
+        "name": "Burger Yiyelim Menü",
+        "price": "580 TL",
+        "desc": "Burger Yiyelim Burger + French Fries + Canned Drink + 2 Sauces",
+        "category": "Burger Menüleri"
+      },
+      {
+        "name": "Steak Burger Menu",
+        "price": "690 TL",
+        "desc": "Steak Burger + French Fries + Canned Drink + 2 Sauces",
+        "category": "Burger Menüleri"
+      },
+      {
+        "name": "Lokum Burger Menu",
+        "price": "695 TL",
+        "desc": "Lokum Burger + French Fries + Boxed Drink + 2 Sauces",
+        "category": "Burger Menüleri"
+      },
+      {
+        "name": "Dublex Burger Menu",
+        "price": "670 TL",
+        "desc": "Dublex Burger + French Fries + Boxed Drink + 2 Sauces",
+        "category": "Burger Menüleri"
+      },
+      {
+        "name": "Triplex Burger Menu",
+        "price": "815 TL",
+        "desc": "Triplex Burger + French Fries + Boxed Drink + 2 Sauces",
+        "category": "Burger Menüleri"
+      },
+      {
+        "name": "Legendary Chicken Burger Menu",
+        "price": "470 TL",
+        "desc": "Legendary Chicken Burger + French Fries + Canned Drink + 2 Sauces",
+        "category": "Tavuk Burger Menüleri"
+      },
+      {
+        "name": "Smash Burger",
+        "price": "370 TL",
+        "desc": "70 gr. beef, burger cheese, caramelized onions, greens, pickles",
+        "category": "Smash Burgerler"
+      },
+      {
+        "name": "Dublex Smash Burger",
+        "price": "480 TL",
+        "desc": "140 gr. beef, burger cheese, caramelized onions, greens, pickles",
+        "category": "Smash Burgerler"
+      },
+      {
+        "name": "Triplex Smash Burger",
+        "price": "620 TL",
+        "desc": "210 gr. beef, 3 burger cheese slices, caramelized onions, greens, pickles",
+        "category": "Smash Burgerler"
+      },
+      {
+        "name": "Cherry Smash Burger",
+        "price": "380 TL",
+        "desc": "70 gr. Beef (with Burger Cheese, Caramelized Onions, Greens, Pickles, Cherry Sauce)",
+        "category": "Smash Burgerler"
+      },
+      {
+        "name": "Dublex Cherry Smash Burger",
+        "price": "500 TL",
+        "desc": "140 gr Beef (Double Burger Cheese, Caramelized Onions, Cherry Sauce)",
+        "category": "Smash Burgerler"
+      },
+      {
+        "name": "Triplex Truff Smash Burger",
+        "price": "640 TL",
+        "desc": "210g Beef (3 Layers Burger Cheese, Caramelized Onions, Truffle Sauce)",
+        "category": "Smash Burgerler"
+      },
+      {
+        "name": "Truff Smash Burger",
+        "price": "380 TL",
+        "desc": "70 gr. Beef (with Burger Cheese, Caramelized Onions, Greens, Pickles, Truffle Sauce)",
+        "category": "Smash Burgerler"
+      },
+      {
+        "name": "Dublex Truff Smash Burger",
+        "price": "500 TL",
+        "desc": "140 gr. Beef (Double Burger Cheese, Caramelized Onions, Truffle Sauce)",
+        "category": "Smash Burgerler"
+      },
+      {
+        "name": "Triplex Cherry Smash Burger",
+        "price": "640 TL",
+        "desc": "210 gr. Beef (3 Layers of Burger Cheese, Caramelized Onions, Cherry Sauce)",
+        "category": "Smash Burgerler"
+      },
+      {
+        "name": "Medium Burger",
+        "price": "330 TL",
+        "desc": "90 gr. beef, caramelized onions, pickles, greens",
+        "category": "Burgerler"
+      },
+      {
+        "name": "Medium Cheeseburger",
+        "price": "350 TL",
+        "desc": "90 gr. beef, cheddar cheese, caramelized onions, pickles, greens",
+        "category": "Burgerler"
+      },
+      {
+        "name": "Medium Butcher Burger",
+        "price": "370 TL",
+        "desc": "90 gr. beef, smoked beef, caramelized onion, greens, cheddar cheese",
+        "category": "Burgerler"
+      },
+      {
+        "name": "Medium Mexicano Burger",
+        "price": "370 TL",
+        "desc": "90 gr. beef, louisiana sauce, greens, pickles, caramelized onions, jalapeno peppers, roasted peppers, cheddar cheese",
+        "category": "Burgerler"
+      },
+      {
+        "name": "Gourmet BBQ Burger",
+        "price": "420 TL",
+        "desc": "130 gr. beef, cheddar cheese, onion rings, pickle barbecue sauce",
+        "category": "Burgerler"
+      },
+      {
+        "name": "Cheeseburger",
+        "price": "420 TL",
+        "desc": "130 gr. beef, cheddar cheese, caramelized onion, pickles, greens",
+        "category": "Burgerler"
+      },
+      {
+        "name": "Butcher Burger",
+        "price": "440 TL",
+        "desc": "130 gr. beef, smoked beef, caramelized onion, greens, cheddar cheese",
+        "category": "Burgerler"
+      },
+      {
+        "name": "Mexicano Burger",
+        "price": "440 TL",
+        "desc": "130 gr. beef, louisiana sauce, greens, pickles, caramelized onions, jalapeno peppers, roasted red peppers, cheddar cheese",
+        "category": "Burgerler"
+      },
+      {
+        "name": "Let&#39;s Eat Burgers",
+        "price": "440 TL",
+        "desc": "130 gr. beef, greens, caramelized onions, pickles, mushrooms, cheddar cheese",
+        "category": "Burgerler"
+      },
+      {
+        "name": "Steak Burger",
+        "price": "550 TL",
+        "desc": "220 gr. beef, double cheddar cheese, caramelized onions",
+        "category": "Burgerler"
+      },
+      {
+        "name": "Lokum Burger",
+        "price": "555 TL",
+        "desc": "120 gr. beef tenderloin, caramelized onion, pickles, greens, cheddar cheese",
+        "category": "Burgerler"
+      },
+      {
+        "name": "Dublex Burger",
+        "price": "530 TL",
+        "desc": "180 gr. beef, double smoked, double cheddar cheese, caramelized onion",
+        "category": "Burgerler"
+      },
+      {
+        "name": "Triplex Burger",
+        "price": "675 TL",
+        "desc": "270 gr. beef, 3 layers of cheddar cheese, caramelized onions",
+        "category": "Burgerler"
+      },
+      {
+        "name": "Legendary Chicken Burger",
+        "price": "330 TL",
+        "desc": "130 gr. chicken meat, mayonnaise, pickles, greens",
+        "category": "Tavuk Burgerler"
+      },
+      {
+        "name": "Potato Bomb",
+        "price": "160 TL",
+        "desc": "French fries, mushrooms, 2 onion rings, caramelized onions, cheddar sauce, barbecue sauce",
+        "category": "Bowls"
+      },
+      {
+        "name": "Nugget Bomb",
+        "price": "185 TL",
+        "desc": "French fries, 4 chicken nuggets, caramelized onions, mushrooms, parsley, cheddar sauce, barbecue sauce",
+        "category": "Bowls"
+      },
+      {
+        "name": "Chips",
+        "price": "120 TL",
+        "desc": "French fries (200 gr.)",
+        "category": "Atıştırmalıklar"
+      },
+      {
+        "name": "Fried Potatoes",
+        "price": "160 TL",
+        "desc": "Fried potatoes (300 gr.)",
+        "category": "Atıştırmalıklar"
+      },
+      {
+        "name": "6 Onion Rings",
+        "price": "115 TL",
+        "desc": "6 adet soğan halkası (90 gr.)",
+        "category": "Atıştırmalıklar"
+      },
+      {
+        "name": "9 Onion Rings",
+        "price": "135 TL",
+        "desc": "9 onion rings (135 g)",
+        "category": "Atıştırmalıklar"
+      },
+      {
+        "name": "12 Onion Rings",
+        "price": "150 TL",
+        "desc": "12 onion rings (180 g)",
+        "category": "Atıştırmalıklar"
+      },
+      {
+        "name": "4 Pack Crispy Cheese",
+        "price": "135 TL",
+        "desc": "4 pieces of crispy cheese",
+        "category": "Atıştırmalıklar"
+      },
+      {
+        "name": "6 Pack Crispy Cheese",
+        "price": "170 TL",
+        "desc": "6 pieces of crispy cheese",
+        "category": "Atıştırmalıklar"
+      },
+      {
+        "name": "4 Nuggets",
+        "price": "120 TL",
+        "desc": "4 nuggets",
+        "category": "Atıştırmalıklar"
+      },
+      {
+        "name": "6 Nuggets",
+        "price": "140 TL",
+        "desc": "6 nuggets",
+        "category": "Atıştırmalıklar"
+      },
+      {
+        "name": "4'lü Ispanak Topu",
+        "price": "130 TL",
+        "desc": "(96 gr.) 4 adet olarak servis edilir.",
+        "category": "Atıştırmalıklar"
+      },
+      {
+        "name": "Ortaya Çıtır",
+        "price": "290 TL",
+        "desc": "2'li çıtır peynir, 2'li soğan halkası, 2'li ispanak topu, 2'li acı patates topu, 2'li Mac'n'cheese topu, 200 gr. patates kızartması",
+        "category": "Atıştırmalıklar"
+      },
+      {
+        "name": "4'lü Acı Patates Topu",
+        "price": "130 TL",
+        "desc": "(80 gr.) 4 adet olarak servis edilir.",
+        "category": "Atıştırmalıklar"
+      },
+      {
+        "name": "4'lü Mac & Cheese Topu",
+        "price": "140 TL",
+        "desc": "(96 gr.) 4 adet olarak servis edilir.",
+        "category": "Atıştırmalıklar"
+      },
+      {
+        "name": "Chocolate Churros",
+        "price": "125 TL",
+        "desc": "Chocolate",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Pistachio Cups",
+        "price": "95 TL",
+        "desc": "Pistachio",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Chocolate Cups",
+        "price": "95 TL",
+        "desc": "Chocolate",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Lotus Cups",
+        "price": "95 TL",
+        "desc": "Lotus",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Sütaş Ayran (28 cl.)",
+        "price": "80 TL",
+        "desc": "Pet bottle",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Coca Cola (33 cl.)",
+        "price": "95 TL",
+        "desc": "Canned drinks",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Coca Cola Zero (33 cl.)",
+        "price": "95 TL",
+        "desc": "Canned drinks",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Fanta (33 cl.)",
+        "price": "95 TL",
+        "desc": "Canned drinks",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Sprite (33 cl.)",
+        "price": "95 TL",
+        "desc": "Canned drinks",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Sprite Cool Mint (33 cl.)",
+        "price": "95 TL",
+        "desc": "Canned drinks",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Fuse Tea Peach (33 cl.)",
+        "price": "95 TL",
+        "desc": "Canned drinks",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Fuse Tea Mango & Pineapple (33 cl.)",
+        "price": "95 TL",
+        "desc": "Canned drinks",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Fuse Tea Lemon (33 cl.)",
+        "price": "95 TL",
+        "desc": "Canned drinks",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Cappy Mixed (33 cl.)",
+        "price": "95 TL",
+        "desc": "Canned drinks",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Cappy Peach (33 cl.)",
+        "price": "95 TL",
+        "desc": "Canned drinks",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Coca Cola (1 L.)",
+        "price": "140 TL",
+        "desc": "PET bottle",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Coca Cola Zero (1 L.)",
+        "price": "140 TL",
+        "desc": "PET bottle",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Damla Water (50 cl.)",
+        "price": "35 TL",
+        "desc": "Pet bottle",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Damla Soda (20 cl.)",
+        "price": "70 TL",
+        "desc": "Glass bottle",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Lemon Drop Soda (20 cl.)",
+        "price": "70 TL",
+        "desc": "Glass bottle",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Ketchup",
+        "price": "15 TL",
+        "desc": "It is served in packaged form.",
+        "category": "Soslar"
+      },
+      {
+        "name": "Mayonnaise",
+        "price": "15 TL",
+        "desc": "It is served in packaged form.",
+        "category": "Soslar"
+      },
+      {
+        "name": "BBQ Sauce",
+        "price": "15 TL",
+        "desc": "It is served in packaged form.",
+        "category": "Soslar"
+      },
+      {
+        "name": "Mustard Sauce",
+        "price": "15 TL",
+        "desc": "It is served in packaged form.",
+        "category": "Soslar"
+      },
+      {
+        "name": "Sriracha Sauce",
+        "price": "15 TL",
+        "desc": "It is served in packaged form.",
+        "category": "Soslar"
+      },
+      {
+        "name": "Ranch Sauce",
+        "price": "20 TL",
+        "desc": "It is served in packaged form.",
+        "category": "Soslar"
+      },
+      {
+        "name": "Sweet Chili Sosu",
+        "price": "20 TL",
+        "desc": "Paketli ürün",
+        "category": "Soslar"
+      },
+      {
+        "name": "Buffalo Sauce",
+        "price": "20 TL",
+        "desc": "It is served in packaged form.",
+        "category": "Soslar"
+      },
+      {
+        "name": "Honey Mustard",
+        "price": "20 TL",
+        "desc": "It is served in packaged form.",
+        "category": "Soslar"
+      },
+      {
+        "name": "Garlic Mayonnaise",
+        "price": "20 TL",
+        "desc": "It is served in packaged form.",
+        "category": "Soslar"
+      },
+      {
+        "name": "Roasted Pepper Mayonnaise",
+        "price": "20 TL",
+        "desc": "It is served in packaged form.",
+        "category": "Soslar"
+      },
+      {
+        "name": "Cheddar Sauce",
+        "price": "50 TL",
+        "desc": "It is served individually.",
+        "category": "Soslar"
+      }
+    ]
   }
 };
