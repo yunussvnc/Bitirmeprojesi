@@ -9433,5 +9433,79 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
         "category": "Poşet"
       }
     ]
+  },
+  "7214": {
+    "name": "Via Dolci",
+    "sourceUrl": "https://www.viadolci.com/",
+    "sourceName": "Via Dolci resmi menüsü (Samsun Cd. B4 Blok No:14, Beylikdüzü)",
+    "verifiedAt": "2026-08-23",
+    "items": [
+      {
+        "name": "Espresso",
+        "price": "",
+        "desc": "Ustalıkla kavrulmuş çekirdeklerden, her yudumda derinlik sunan imza espressomuz.",
+        "category": "Kahve"
+      },
+      {
+        "name": "Americano",
+        "price": "",
+        "desc": "Özenle demlenmiş sıcak su üzerine eklenen çift shot espresso ile yumuşak içimli ama güçlü bir Americano.",
+        "category": "Kahve"
+      },
+      {
+        "name": "Cappuccino",
+        "price": "",
+        "desc": "Yoğun espresso üzerine buharda ısıtılmış süt ve mikro köpük, üstünde hafif çikolata dokunuşu.",
+        "category": "Kahve"
+      },
+      {
+        "name": "Latte",
+        "price": "",
+        "desc": "Espresso üzerine eklenen buharda ısıtılmış süt ve hafif köpükle yumuşak içimli bir klasik.",
+        "category": "Kahve"
+      },
+      {
+        "name": "Cortado",
+        "price": "",
+        "desc": "İki ölçü espresso, bir ölçü buharda ısıtılmış süt ve ince mikro köpükle.",
+        "category": "Kahve"
+      },
+      {
+        "name": "Macchiatto",
+        "price": "",
+        "desc": "İmza espressomuz, hafif bir süt köpüğü dokunuşuyla.",
+        "category": "Kahve"
+      },
+      {
+        "name": "Lungo",
+        "price": "",
+        "desc": "Yavaş ve uzun çekimle elde edilen, daha açık ama derin karakterli espresso.",
+        "category": "Kahve"
+      },
+      {
+        "name": "Flat White",
+        "price": "",
+        "desc": "Yoğun ristretto, ipeksi tam yağlı sütle buluşur; güçlü ama yumuşak.",
+        "category": "Kahve"
+      },
+      {
+        "name": "Mocha",
+        "price": "",
+        "desc": "İmza espressomuz, ipeksi süt ve çikolata notalarıyla derinleşir.",
+        "category": "Kahve"
+      },
+      {
+        "name": "White Chocolate Mocha",
+        "price": "",
+        "desc": "Yoğun espresso, ipeksi süt ve beyaz çikolata ile hazırlanan yumuşak ve zengin bir lezzet.",
+        "category": "Kahve"
+      },
+      {
+        "name": "Espresso Macchiatto",
+        "price": "",
+        "desc": "Karakterli espresso, küçük bir süt köpüğüyle yumuşatılır.",
+        "category": "Kahve"
+      }
+    ]
   }
 };
