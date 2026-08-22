@@ -8,27 +8,19 @@ import React, { useState, useMemo, useEffect, useRef, useCallback } from 'react'
 import {
   View,
   Text,
-  StyleSheet,
   TouchableOpacity,
   Keyboard,
-  Platform,
   ActivityIndicator,
-  Modal,
-  ScrollView,
-  Pressable,
 } from 'react-native';
 import { Map, Camera, GeoJSONSource, Layer, UserLocation, type CameraRef, type GeoJSONSourceRef } from '@maplibre/maplibre-react-native';
 import * as Location from 'expo-location';
 import { router } from 'expo-router';
 import LottieView from 'lottie-react-native';
 import {
-  getIstanbulDistrictsForPicker,
   type AiSearchDistrict,
 } from '@/src/constants/aiDistricts';
-import { CATEGORY_KEYS, STATUS_KEYS } from '@/src/utils/categories';
 import { useTheme } from '@/src/hooks/useTheme';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
-import { SearchInput } from '@/src/components/ui/Input';
 import { GlassCard } from '@/src/components/ui/GlassCard';
 import { lightImpact } from '@/src/utils/haptics';
 import { PlaceMediaPanel } from './PlaceMediaPanel';
@@ -37,6 +29,8 @@ import { useAppStore } from '@/src/store/useAppStore';
 import { Place, logInteraction } from '@/src/services/mekanService';
 import { useTranslation } from 'react-i18next';
 import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
+import { ExploreMapControls } from './explore-map/ExploreMapControls';
+import { styles } from './explore-map/styles';
 
 const ISTANBUL_CENTER = {
   latitude: 41.0082,
@@ -519,295 +513,53 @@ export function ExploreMapView({ places, loading, onLoadPlaces }: ExploreMapView
         </View>
       )}
 
-      {/* Filtre ve Arama Arka Planı (Tüm ekranı kaplar) */}
-      {showFilter && (
-        <Pressable
-          style={styles.filterBackdrop}
-          onPressIn={() => setShowFilter(false)}
-        />
-      )}
-
-      <View
-        style={[
-          styles.searchWrap,
-          { backgroundColor: 'transparent' }, // GlassCard provides the background
-        ]}
-      >
-        <GlassCard
-          tint={isDark ? 'dark' : 'light'}
-          intensity={40}
-          borderRadius={0}
-          style={StyleSheet.absoluteFillObject}
-        />
-        <View style={styles.searchRow}>
-          <View style={styles.searchInputFlex}>
-            <SearchInput
-              placeholder={t('explore.search_placeholder')}
-              value={query}
-              onChangeText={(text) => {
-                setQuery(text);
-                setShowResults(true);
-                setSelectedPlace(null);
-              }}
-              onFocus={() => {
-                setShowResults(true);
-                setSelectedPlace(null);
-              }}
-              onBlur={() => setShowResults(false)}
-              autoCorrect={false}
-              autoCapitalize="none"
-              returnKeyType="search"
-              rightIcon={query ? 'xmark' : undefined}
-              onRightIconPress={() => {
-                setQuery('');
-                setShowResults(false);
-              }}
-              containerStyle={styles.searchContainer}
-            />
-          </View>
-          <TouchableOpacity
-            onPress={() => {
-              lightImpact();
-              setShowFilter((v) => !v);
-              Keyboard.dismiss();
-            }}
-            style={[
-              styles.filterBtn,
-              {
-                backgroundColor: activeFilterCount > 0 ? colors.accent.primary : colors.surface.elevated,
-              },
-            ]}
-            activeOpacity={0.7}
-          >
-            <IconSymbol
-              name="line.3.horizontal.decrease.circle"
-              size={20}
-              color={activeFilterCount > 0 ? '#fff' : colors.text.secondary}
-            />
-            {activeFilterCount > 0 && (
-              <View style={styles.filterBadge}>
-                <Text style={styles.filterBadgeText}>{activeFilterCount}</Text>
-              </View>
-            )}
-          </TouchableOpacity>
-        </View>
-
-        {/* İlçe Seçici & Global Liste Butonu */}
-        <View style={{ flexDirection: 'row', gap: 10, marginTop: 10, alignItems: 'stretch' }}>
-          <TouchableOpacity
-            style={[
-              styles.districtSelector,
-              {
-                flex: 1,
-                marginTop: 0,
-                backgroundColor: selectedDistrict ? colors.accent.primary + '1A' : colors.surface.elevated,
-                borderColor: selectedDistrict ? colors.accent.primary : colors.surface.border,
-              },
-            ]}
-            onPress={() => {
-              lightImpact();
-              setDistrictModalOpen(true);
-            }}
-            activeOpacity={0.7}
-          >
-            <View style={styles.districtSelectorLeft}>
-              <IconSymbol
-                name="mappin.and.ellipse"
-                size={14}
-                color={selectedDistrict ? colors.accent.primary : colors.text.secondary}
-              />
-              <Text
-                style={[
-                  styles.districtSelectorText,
-                  { color: selectedDistrict ? colors.accent.primary : colors.text.primary },
-                ]}
-              >
-                {selectedDistrict 
-                  ? `${t('explore.district_label', 'İlçe')}: ${selectedDistrict.apiLocation}` 
-                  : t('explore.select_district', 'İlçe Seçin')}
-              </Text>
-            </View>
-            <View style={styles.districtSelectorRight}>
-              {selectedDistrict && (
-                <TouchableOpacity
-                  onPress={(e) => {
-                    e.stopPropagation();
-                    lightImpact();
-                    setSelectedDistrict(null);
-                  }}
-                  style={styles.clearDistrictBtn}
-                >
-                  <IconSymbol name="xmark.circle.fill" size={16} color={colors.accent.primary} />
-                </TouchableOpacity>
-              )}
-              <IconSymbol
-                name="chevron.down"
-                size={12}
-                color={selectedDistrict ? colors.accent.primary : colors.text.secondary}
-              />
-            </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={[
-              styles.districtSelector,
-              {
-                marginTop: 0,
-                width: 48,
-                justifyContent: 'center',
-                alignItems: 'center',
-                paddingHorizontal: 0,
-                backgroundColor: colors.surface.elevated,
-                borderColor: colors.surface.border,
-              },
-            ]}
-            onPress={() => {
-              lightImpact();
-              router.push({
-                pathname: '/cluster-places',
-                params: {
-                  isGlobal: "true",
-                  lat: userLocation?.latitude || 0,
-                  lng: userLocation?.longitude || 0,
-                }
-              });
-            }}
-            activeOpacity={0.7}
-          >
-            <IconSymbol name="list.bullet" size={18} color={colors.text.primary} />
-          </TouchableOpacity>
-        </View>
-
-        {/* Filtre Paneli */}
-        {showFilter && (
-          <Pressable 
-            style={[styles.filterPanel, { backgroundColor: colors.surface.elevated }]}
-            onPress={() => {}} // Swallow touch
-          >
-              {/* Kategori */}
-              <View style={styles.filterSection}>
-              <Text style={[styles.filterSectionTitle, { color: colors.text.secondary }]}>{t('explore.filter_category')}</Text>
-              <View style={styles.chipRow}>
-                {CATEGORY_KEYS.map(({ value, tKey }) => {
-                  const active = selectedCategories.includes(value);
-                  return (
-                    <TouchableOpacity
-                      key={value}
-                      style={[
-                        styles.chip,
-                        {
-                          backgroundColor: active ? colors.accent.primary : colors.background.secondary,
-                          borderColor: active ? colors.accent.primary : colors.surface.border,
-                        },
-                      ]}
-                      onPress={() => toggleCategory(value)}
-                      activeOpacity={0.7}
-                    >
-                      <Text
-                        style={[
-                          styles.chipText,
-                          { color: active ? '#fff' : colors.text.primary },
-                        ]}
-                      >
-                        {t(tKey)}
-                      </Text>
-                    </TouchableOpacity>
-                  );
-                })}
-              </View>
-            </View>
-
-            {/* Durum */}
-            <View style={styles.filterSection}>
-              <Text style={[styles.filterSectionTitle, { color: colors.text.secondary }]}>{t('explore.filter_status')}</Text>
-              <View style={styles.chipRow}>
-                {STATUS_KEYS.map((s) => {
-                  const active = selectedStatuses.includes(s.key);
-                  return (
-                    <TouchableOpacity
-                      key={s.key}
-                      style={[
-                        styles.chip,
-                        {
-                          backgroundColor: active ? s.color : colors.background.secondary,
-                          borderColor: active ? s.color : colors.surface.border,
-                        },
-                      ]}
-                      onPress={() => toggleStatus(s.key)}
-                      activeOpacity={0.7}
-                    >
-                      <View style={[styles.chipDot, { backgroundColor: active ? '#fff' : s.color }]} />
-                      <Text
-                        style={[
-                          styles.chipText,
-                          { color: active ? '#fff' : colors.text.primary },
-                        ]}
-                      >
-                        {t(s.tKey)}
-                      </Text>
-                    </TouchableOpacity>
-                  );
-                })}
-              </View>
-            </View>
-
-
-
-            {/* Temizle */}
-            {activeFilterCount > 0 && (
-              <TouchableOpacity
-                onPress={clearFilters}
-                style={styles.clearBtn}
-                activeOpacity={0.7}
-              >
-                <Text style={[styles.clearBtnText, { color: colors.accent.primary }]}>{t('explore.filter_clear')}</Text>
-              </TouchableOpacity>
-            )}
-          </Pressable>
-        )}
-        {showResults && query.trim().length > 0 && (
-          <View style={[styles.resultsCard, { backgroundColor: colors.surface.elevated }]}>
-            {filteredPlaces.length === 0 ? (
-              <Text style={[styles.emptyText, { color: colors.text.tertiary }]}>
-                {t('explore.no_results')}
-              </Text>
-            ) : (
-              <ScrollView
-                style={styles.resultsScroll}
-                contentContainerStyle={styles.resultsScrollContent}
-                showsVerticalScrollIndicator={false}
-                keyboardShouldPersistTaps="handled"
-              >
-                {filteredPlaces.slice(0, 50).map((place) => {
-                  const placeStatus = getPlaceStatus(place.opening_time, place.closing_time);
-                  return (
-                    <TouchableOpacity
-                      key={String(place.id)}
-                      style={styles.resultRow}
-                      onPress={() => handleSelectPlace(place)}
-                      activeOpacity={0.8}
-                    >
-                      <View style={[styles.statusDot, { backgroundColor: placeStatus.color }]} />
-                      <View style={styles.resultText}>
-                        <Text style={[styles.resultTitle, { color: colors.text.primary }]} numberOfLines={1}>
-                          {place.name}
-                        </Text>
-                        {!!(place.category || place.city) && (
-                          <Text style={[styles.resultMeta, { color: colors.text.tertiary }]} numberOfLines={1}>
-                            {[place.category, place.city].filter(Boolean).join(' • ')}
-                            {placeStatus.hoursText ? ` · ${placeStatus.label}` : ''}
-                          </Text>
-                        )}
-                      </View>
-                      <IconSymbol name="chevron.right" size={18} color={colors.text.tertiary} />
-                    </TouchableOpacity>
-                  );
-                })}
-              </ScrollView>
-            )}
-          </View>
-        )}
-      </View>
+      <ExploreMapControls
+        query={query}
+        onQueryChange={(text) => {
+          setQuery(text);
+          setShowResults(true);
+          setSelectedPlace(null);
+        }}
+        onSearchFocus={() => {
+          setShowResults(true);
+          setSelectedPlace(null);
+        }}
+        onSearchBlur={() => setShowResults(false)}
+        onClearQuery={() => {
+          setQuery('');
+          setShowResults(false);
+        }}
+        showFilter={showFilter}
+        onCloseFilter={() => setShowFilter(false)}
+        onToggleFilter={() => {
+          lightImpact();
+          setShowFilter((visible) => !visible);
+          Keyboard.dismiss();
+        }}
+        activeFilterCount={activeFilterCount}
+        selectedCategories={selectedCategories}
+        onToggleCategory={toggleCategory}
+        selectedStatuses={selectedStatuses}
+        onToggleStatus={toggleStatus}
+        onClearFilters={clearFilters}
+        selectedDistrict={selectedDistrict}
+        onClearDistrict={() => setSelectedDistrict(null)}
+        districtModalOpen={districtModalOpen}
+        onOpenDistrictModal={() => {
+          lightImpact();
+          setDistrictModalOpen(true);
+        }}
+        onCloseDistrictModal={() => setDistrictModalOpen(false)}
+        onSelectDistrict={(district) => {
+          lightImpact();
+          setSelectedDistrict(district);
+          setDistrictModalOpen(false);
+        }}
+        showResults={showResults}
+        filteredPlaces={filteredPlaces}
+        onSelectPlace={handleSelectPlace}
+        userLocation={userLocation}
+      />
 
       <View style={styles.controls}>
         <TouchableOpacity
@@ -835,109 +587,6 @@ export function ExploreMapView({ places, loading, onLoadPlaces }: ExploreMapView
         </View>
       )}
 
-      <Modal
-        visible={districtModalOpen}
-        animationType="slide"
-        transparent={true}
-        onRequestClose={() => setDistrictModalOpen(false)}
-      >
-        <View style={styles.modalBackdrop}>
-          <TouchableOpacity
-            style={styles.modalDismissArea}
-            activeOpacity={1}
-            onPress={() => setDistrictModalOpen(false)}
-          />
-          <View style={[styles.modalContent, { backgroundColor: colors.surface.elevated }]}>
-            <View style={styles.modalHeader}>
-              <Text style={[styles.modalTitle, { color: colors.text.primary }]}>
-                {t('explore.select_district_title', 'İlçe Seçin')}
-              </Text>
-              <TouchableOpacity
-                onPress={() => {
-                  lightImpact();
-                  setDistrictModalOpen(false);
-                }}
-                style={styles.modalCloseBtn}
-              >
-                <IconSymbol name="xmark.circle.fill" size={24} color={colors.text.secondary} />
-              </TouchableOpacity>
-            </View>
-
-            <ScrollView
-              style={styles.modalScroll}
-              contentContainerStyle={styles.modalScrollContent}
-              showsVerticalScrollIndicator={false}
-            >
-              {/* "Tümü" seçeneği */}
-              <TouchableOpacity
-                style={[
-                  styles.districtItem,
-                  !selectedDistrict && [
-                    styles.districtItemActive,
-                    { backgroundColor: colors.accent.primary + '1F' }
-                  ],
-                  { borderBottomColor: colors.surface.border }
-                ]}
-                onPress={() => {
-                  lightImpact();
-                  setSelectedDistrict(null);
-                  setDistrictModalOpen(false);
-                }}
-              >
-                <Text
-                  style={[
-                    styles.districtItemText,
-                    { color: !selectedDistrict ? colors.accent.primary : colors.text.primary },
-                    !selectedDistrict && styles.districtItemTextActive
-                  ]}
-                >
-                  {t('explore.all_districts', 'Tüm İlçeler')}
-                </Text>
-                {!selectedDistrict && (
-                  <IconSymbol name="checkmark" size={18} color={colors.accent.primary} />
-                )}
-              </TouchableOpacity>
-
-              {/* İlçeler listesi */}
-              {getIstanbulDistrictsForPicker().map((district) => {
-                const isActive = selectedDistrict?.id === district.id;
-                return (
-                  <TouchableOpacity
-                    key={district.id}
-                    style={[
-                      styles.districtItem,
-                      isActive && [
-                        styles.districtItemActive,
-                        { backgroundColor: colors.accent.primary + '1F' }
-                      ],
-                      { borderBottomColor: colors.surface.border }
-                    ]}
-                    onPress={() => {
-                      lightImpact();
-                      setSelectedDistrict(district);
-                      setDistrictModalOpen(false);
-                    }}
-                  >
-                    <Text
-                      style={[
-                        styles.districtItemText,
-                        { color: isActive ? colors.accent.primary : colors.text.primary },
-                        isActive && styles.districtItemTextActive
-                      ]}
-                    >
-                      {district.apiLocation}
-                    </Text>
-                    {isActive && (
-                      <IconSymbol name="checkmark" size={18} color={colors.accent.primary} />
-                    )}
-                  </TouchableOpacity>
-                );
-              })}
-            </ScrollView>
-          </View>
-        </View>
-      </Modal>
-
       {selectedPlace && (
         <PlaceMediaPanel
           place={selectedPlace}
@@ -950,281 +599,3 @@ export function ExploreMapView({ places, loading, onLoadPlaces }: ExploreMapView
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  container: { flex: 1 },
-  map: { ...StyleSheet.absoluteFillObject },
-  searchWrap: {
-    position: 'absolute',
-    top: Platform.OS === 'ios' ? 54 : 16,
-    left: 16,
-    right: 16,
-    padding: 12,
-    borderRadius: 16,
-    shadowColor: 'transparent',
-    shadowOffset: { width: 0, height: 0 },
-    shadowOpacity: 0,
-    shadowRadius: 0,
-    elevation: 0,
-    zIndex: 50,
-  },
-  searchRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  searchInputFlex: {
-    flex: 1,
-  },
-  searchContainer: {
-    marginBottom: 0,
-  },
-  filterBtn: {
-    width: 40,
-    height: 40,
-    borderRadius: 12,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  filterBadge: {
-    position: 'absolute',
-    top: -4,
-    right: -4,
-    minWidth: 18,
-    height: 18,
-    borderRadius: 9,
-    backgroundColor: '#F44336',
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingHorizontal: 4,
-  },
-  filterBadgeText: {
-    color: '#fff',
-    fontSize: 10,
-    fontWeight: '800',
-  },
-  filterPanel: {
-    marginTop: 10,
-    borderRadius: 14,
-    padding: 14,
-  },
-  filterSection: {
-    marginBottom: 12,
-  },
-  filterSectionTitle: {
-    fontSize: 12,
-    fontWeight: '700',
-    textTransform: 'uppercase',
-    letterSpacing: 0.5,
-    marginBottom: 8,
-  },
-  chipRow: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: 8,
-  },
-  chip: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 12,
-    paddingVertical: 7,
-    borderRadius: 20,
-    borderWidth: 1,
-    gap: 5,
-  },
-  chipText: {
-    fontSize: 13,
-    fontWeight: '600',
-  },
-  chipDot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-  },
-  clearBtn: {
-    alignItems: 'center',
-    paddingVertical: 8,
-  },
-  clearBtnText: {
-    fontSize: 13,
-    fontWeight: '600',
-  },
-  resultsCard: {
-    marginTop: 8,
-    borderRadius: 12,
-    paddingVertical: 6,
-    overflow: 'hidden',
-  },
-  resultsScroll: { maxHeight: 220 },
-  resultsScrollContent: { paddingVertical: 2 },
-  resultRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 12,
-    paddingVertical: 10,
-    gap: 8,
-  },
-  resultText: { flex: 1 },
-  resultTitle: { fontSize: 14, fontWeight: '600' },
-  resultMeta: { fontSize: 12, marginTop: 2 },
-  statusDot: { width: 10, height: 10, borderRadius: 5 },
-  emptyText: { paddingHorizontal: 12, paddingVertical: 10, fontSize: 13 },
-  header: {
-    position: 'absolute',
-    top: Platform.OS === 'ios' ? 54 : 16,
-    left: 16,
-    right: 16,
-    paddingVertical: 12,
-    paddingHorizontal: 16,
-    borderRadius: 16,
-  },
-  title: { fontSize: 22, fontWeight: '700' },
-  subtitle: { fontSize: 13, marginTop: 2 },
-  controls: { position: 'absolute', right: 16, bottom: Platform.OS === 'ios' ? 120 : 104, gap: 10 },
-  controlBtn: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-    alignItems: 'center',
-    justifyContent: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.2,
-    shadowRadius: 4,
-    elevation: 4,
-  },
-  loadingOverlay: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0,0,0,0.3)',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  loadingText: { marginTop: 12, fontSize: 14 },
-  badge: {
-    position: 'absolute',
-    bottom: Platform.OS === 'ios' ? 100 : 84,
-    left: 16,
-    paddingVertical: 8,
-    paddingHorizontal: 12,
-    borderRadius: 10,
-  },
-  badgeText: { fontSize: 13 },
-  modalBackdrop: {
-    flex: 1,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    justifyContent: 'flex-end',
-  },
-  modalDismissArea: {
-    flex: 1,
-  },
-  modalContent: {
-    borderTopLeftRadius: 24,
-    borderTopRightRadius: 24,
-    maxHeight: '70%',
-    paddingBottom: Platform.OS === 'ios' ? 34 : 24,
-  },
-  modalHeader: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 20,
-    paddingVertical: 16,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-    borderBottomColor: 'rgba(0, 0, 0, 0.1)',
-  },
-  modalTitle: {
-    fontSize: 18,
-    fontWeight: '700',
-  },
-  modalCloseBtn: {
-    padding: 4,
-  },
-  modalScroll: {
-    paddingHorizontal: 16,
-  },
-  modalScrollContent: {
-    paddingVertical: 8,
-  },
-  districtItem: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingVertical: 14,
-    paddingHorizontal: 16,
-    borderBottomWidth: StyleSheet.hairlineWidth,
-  },
-  districtItemActive: {
-    borderRadius: 12,
-  },
-  districtItemText: {
-    fontSize: 16,
-    fontWeight: '500',
-  },
-  districtItemTextActive: {
-    fontWeight: '700',
-  },
-  districtSelector: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-    paddingHorizontal: 14,
-    paddingVertical: 10,
-    borderRadius: 12,
-    marginTop: 10,
-    borderWidth: 1,
-  },
-  districtSelectorLeft: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 8,
-  },
-  districtSelectorText: {
-    fontSize: 14,
-    fontWeight: '600',
-  },
-  districtSelectorRight: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: 6,
-  },
-  clearDistrictBtn: {
-    padding: 4,
-  },
-  // ── Empty State Styles ──
-  emptyStateContainer: {
-    ...StyleSheet.absoluteFillObject,
-    justifyContent: 'center',
-    alignItems: 'center',
-    zIndex: 10,
-  },
-  emptyStateCard: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: 24,
-    width: 260,
-  },
-  emptyStateLottie: {
-    width: 120,
-    height: 120,
-    marginBottom: 16,
-  },
-  emptyStateTitle: {
-    fontSize: 18,
-    fontWeight: '700',
-    marginBottom: 8,
-    textAlign: 'center',
-  },
-  emptyStateDesc: {
-    fontSize: 14,
-    textAlign: 'center',
-    lineHeight: 20,
-  },
-  filterBackdrop: {
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    right: 0,
-    bottom: 0,
-    zIndex: 40,
-  },
-});

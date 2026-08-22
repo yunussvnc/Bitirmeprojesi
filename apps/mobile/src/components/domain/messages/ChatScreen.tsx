@@ -8,25 +8,13 @@ import React, { useState, useRef, useEffect, useCallback } from "react";
 import {
     View,
     Text,
-    StyleSheet,
     FlatList,
     TouchableOpacity,
     TextInput,
     Platform,
-    Modal,
-    TouchableWithoutFeedback,
     Keyboard,
-    Dimensions,
 } from "react-native";
 import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
-import Animated, {
-    useSharedValue,
-    useAnimatedStyle,
-    withSpring,
-    withTiming,
-    runOnJS,
-} from 'react-native-reanimated';
-import { Gesture, GestureDetector } from 'react-native-gesture-handler';
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useRouter, useLocalSearchParams, Stack } from "expo-router";
 import { Image } from "expo-image";
@@ -46,6 +34,9 @@ import { useTranslation } from "react-i18next";
 import { API_BASE_URL } from "@/src/constants/api";
 import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 import { useIslandStore } from '@/src/store/useIslandStore';
+import { ChatActionModals } from './chat-screen/ChatActionModals';
+import { ChatImageViewerModal } from './chat-screen/ChatImageViewerModal';
+import { styles } from './chat-screen/styles';
 
 /* ── Types ── */
 interface Message {
@@ -105,108 +96,9 @@ export default function ChatScreen() {
     const [previewUri, setPreviewUri] = useState<string | null>(null);
     const flatListRef = useRef<FlatList>(null);
 
-    // ── Image Viewer Animations ──
-    const imgScale = useSharedValue(1);
-    const imgTranslateX = useSharedValue(0);
-    const imgTranslateY = useSharedValue(0);
-    const savedScale = useSharedValue(1);
-    const savedTranslateX = useSharedValue(0);
-    const savedTranslateY = useSharedValue(0);
-    const overlayOpacity = useSharedValue(0);
-
     const openImageViewer = useCallback((uri: string) => {
-        imgScale.value = 1;
-        imgTranslateX.value = 0;
-        imgTranslateY.value = 0;
-        savedScale.value = 1;
-        savedTranslateX.value = 0;
-        savedTranslateY.value = 0;
-        overlayOpacity.value = withTiming(1, { duration: 150 });
         setSelectedImageUri(uri);
-    }, [imgScale, imgTranslateX, imgTranslateY, overlayOpacity, savedScale, savedTranslateX, savedTranslateY]);
-
-    const closeImageViewer = useCallback(() => {
-        // Reanimated callback'leri bazen RN JS thread'inde gecikmeye (4-5 sn) yol açar.
-        // Bu yüzden animasyonu başlatıp, JS tarafında setTimeout ile kapatıyoruz.
-        overlayOpacity.value = withTiming(0, { duration: 150 });
-        imgScale.value = withTiming(0.9, { duration: 150 });
-
-        setTimeout(() => {
-            setSelectedImageUri(null);
-        }, 150);
-    }, [imgScale, overlayOpacity]);
-
-    const pinchGesture = Gesture.Pinch()
-        .onUpdate((e) => {
-            imgScale.value = Math.max(0.5, Math.min(savedScale.value * e.scale, 6));
-        })
-        .onEnd(() => {
-            if (imgScale.value < 1) {
-                imgScale.value = withSpring(1);
-                imgTranslateX.value = withSpring(0);
-                imgTranslateY.value = withSpring(0);
-                savedScale.value = 1;
-                savedTranslateX.value = 0;
-                savedTranslateY.value = 0;
-            } else {
-                savedScale.value = imgScale.value;
-            }
-        });
-
-    const panGesture = Gesture.Pan()
-        .onUpdate((e) => {
-            if (savedScale.value > 1) {
-                imgTranslateX.value = savedTranslateX.value + e.translationX;
-                imgTranslateY.value = savedTranslateY.value + e.translationY;
-            } else {
-                imgTranslateY.value = e.translationY;
-                overlayOpacity.value = Math.max(0, 1 - Math.abs(e.translationY) / 400);
-            }
-        })
-        .onEnd((e) => {
-            if (savedScale.value <= 1 && Math.abs(e.translationY) > 80) {
-                // Kapatırken görselin ekrandan uçup gitmesi için (flash olmaması için)
-                imgTranslateY.value = withTiming(e.translationY + Math.sign(e.translationY) * 500, { duration: 150 });
-                runOnJS(closeImageViewer)();
-            } else if (savedScale.value <= 1) {
-                imgTranslateY.value = withSpring(0);
-                overlayOpacity.value = withTiming(1);
-            } else {
-                savedTranslateX.value = imgTranslateX.value;
-                savedTranslateY.value = imgTranslateY.value;
-            }
-        });
-
-    const doubleTapGesture = Gesture.Tap()
-        .numberOfTaps(2)
-        .onEnd(() => {
-            if (imgScale.value > 1) {
-                imgScale.value = withSpring(1);
-                imgTranslateX.value = withSpring(0);
-                imgTranslateY.value = withSpring(0);
-                savedScale.value = 1;
-                savedTranslateX.value = 0;
-                savedTranslateY.value = 0;
-            } else {
-                imgScale.value = withSpring(2.5);
-                savedScale.value = 2.5;
-            }
-        });
-
-    const combinedGesture = Gesture.Simultaneous(pinchGesture, panGesture);
-    const allGestures = Gesture.Race(doubleTapGesture, combinedGesture);
-
-    const animatedImageStyle = useAnimatedStyle(() => ({
-        transform: [
-            { scale: imgScale.value },
-            { translateX: imgTranslateX.value },
-            { translateY: imgTranslateY.value },
-        ],
-    }));
-
-    const animatedOverlayStyle = useAnimatedStyle(() => ({
-        opacity: overlayOpacity.value,
-    }));
+    }, []);
 
     const resolvedChatId = chatId || "1";
     const currentUser = useAuthStore((s) => s.user);
@@ -1019,476 +911,34 @@ export default function ChatScreen() {
                 ) : null}
             </View>
 
-            {/* ── Options Modal ── */}
-            <Modal
-                visible={isOptionsVisible}
-                transparent
-                animationType="fade"
-                onRequestClose={() => setIsOptionsVisible(false)}
-            >
-                <TouchableWithoutFeedback onPress={() => setIsOptionsVisible(false)}>
-                    <View style={styles.modalOverlay}>
-                        <TouchableWithoutFeedback>
-                            <View style={[styles.optionsModal, { backgroundColor: colors.surface.elevated }]}>
-                                <TouchableOpacity style={styles.optionBtn} onPress={handleBlock}>
-                                    <Text style={[styles.optionText, { color: "#e74c3c" }]}>{t("chat.block")}</Text>
-                                </TouchableOpacity>
-                                <View style={[styles.separator, { backgroundColor: colors.surface.border }]} />
-                                <TouchableOpacity
-                                    style={styles.optionBtn}
-                                    onPress={() => {
-                                        setIsOptionsVisible(false);
-                                        setTimeout(() => setIsReportVisible(true), 300);
-                                    }}
-                                >
-                                    <Text style={[styles.optionText, { color: "#e74c3c" }]}>{t("chat.report")}</Text>
-                                </TouchableOpacity>
-                                <View style={[styles.separator, { backgroundColor: colors.surface.border }]} />
-                                <TouchableOpacity style={styles.optionBtn} onPress={() => setIsOptionsVisible(false)}>
-                                    <Text style={[styles.optionText, { color: colors.text.primary, fontWeight: "500" }]}>{t("chat.cancel")}</Text>
-                                </TouchableOpacity>
-                            </View>
-                        </TouchableWithoutFeedback>
-                    </View>
-                </TouchableWithoutFeedback>
-            </Modal>
-
-            {/* ── Report Modal ── */}
-            <Modal
-                visible={isReportVisible}
-                transparent
-                animationType="slide"
-                onRequestClose={() => {
-                    setIsReportVisible(false);
-                    setReportText("");
+            <ChatActionModals
+                contactName={contact.name}
+                optionsVisible={isOptionsVisible}
+                onCloseOptions={() => setIsOptionsVisible(false)}
+                onBlock={handleBlock}
+                onOpenReport={() => {
+                    setIsOptionsVisible(false);
+                    setTimeout(() => setIsReportVisible(true), 300);
                 }}
-            >
-                <KeyboardAvoidingView
-                    style={{ flex: 1 }}
-                    behavior={Platform.OS === "ios" ? "padding" : undefined}
-                >
-                    <View style={styles.reportModalContainer}>
-                        <View style={[styles.reportModalContent, { backgroundColor: colors.surface.elevated }]}>
-                            <View style={[styles.reportHeader, { borderBottomColor: colors.surface.border }]}>
-                                <Text style={[styles.reportTitle, { color: colors.text.primary }]}>{t("chat.report_user")}</Text>
-                                <TouchableOpacity onPress={() => {
-                                    setIsReportVisible(false);
-                                    setReportText("");
-                                }}>
-                                    <IconSymbol name="xmark" size={24} color={colors.text.tertiary} />
-                                </TouchableOpacity>
-                            </View>
-                            <Text style={[styles.reportDesc, { color: colors.text.secondary }]}>
-                                {t("chat.report_desc", { name: contact.name })}
-                            </Text>
-                            <View style={[styles.reportInputWrapper, { borderColor: colors.surface.border, backgroundColor: colors.background.primary }]}>
-                                <TextInput
-                                    style={[styles.reportInput, { backgroundColor: colors.background.secondary, color: colors.text.primary }]}
-                                    placeholder={t("chat.report_ph")}
-                                    placeholderTextColor={colors.text.tertiary}
-                                    multiline
-                                    value={reportText}
-                                    onChangeText={handleReportTextChange}
-                                    textAlignVertical="top"
-                                    cursorColor={colors.accent.primary}
-                                />
-                            </View>
-                            <Text style={[styles.wordCount, { color: reportText.length > 500 ? colors.semantic.error : colors.text.tertiary }]}>
-                                {t("chat.char_left")} {500 - reportText.length}
-                            </Text>
+                reportVisible={isReportVisible}
+                onCloseReport={() => {
+                    setIsReportVisible(false);
+                    setReportText('');
+                }}
+                reportText={reportText}
+                onReportTextChange={handleReportTextChange}
+                onSubmitReport={handleReport}
+                previewUri={previewUri}
+                onClosePreview={() => setPreviewUri(null)}
+                onSendPreview={sendImageMessage}
+                caption={inputText}
+                onCaptionChange={setInputText}
+            />
 
-                            <TouchableOpacity
-                                style={[styles.submitReportBtn, { backgroundColor: reportText.trim().length === 0 ? colors.surface.border : colors.accent.primary }]}
-                                activeOpacity={0.8}
-                                onPress={handleReport}
-                                disabled={reportText.trim().length === 0}
-                            >
-                                <Text style={[styles.submitReportText, { color: reportText.trim().length === 0 ? colors.text.tertiary : "#FFFFFF" }]}>
-                                    {t("chat.send")}
-                                </Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
-                </KeyboardAvoidingView>
-            </Modal>
-
-            {/* ── Fotoğraf Önizleme Modalı (gönderilmeden önce) ── */}
-            <Modal
-                visible={!!previewUri}
-                transparent
-                animationType="slide"
-                onRequestClose={() => setPreviewUri(null)}
-            >
-                <View style={styles.previewModalOverlay}>
-                    <View style={styles.previewModalContent}>
-                        {/* Üst bar */}
-                        <View style={styles.previewTopBar}>
-                            <TouchableOpacity onPress={() => setPreviewUri(null)} hitSlop={12}>
-                                <Text style={styles.previewCancel}>İptal</Text>
-                            </TouchableOpacity>
-                            <Text style={styles.previewTitle}>Fotoğraf Gönder</Text>
-                            <TouchableOpacity
-                                onPress={() => previewUri && sendImageMessage(previewUri)}
-                                hitSlop={12}
-                                style={styles.previewSendBtn}
-                            >
-                                <Text style={styles.previewSendText}>Gönder</Text>
-                            </TouchableOpacity>
-                        </View>
-
-                        {/* Önizleme Görseli */}
-                        {previewUri && (
-                            <Image
-                                source={{ uri: previewUri }}
-                                style={styles.previewImage}
-                                contentFit="contain"
-                            />
-                        )}
-
-                        {/* Caption alanı */}
-                        <View style={[styles.previewCaptionBar, { backgroundColor: colors.surface.elevated, borderTopColor: colors.surface.border }]}>
-                            <TextInput
-                                style={[styles.previewCaptionInput, { color: colors.text.primary }]}
-                                placeholder="Açıklama ekle..."
-                                placeholderTextColor={colors.text.tertiary}
-                                value={inputText}
-                                onChangeText={setInputText}
-                                multiline
-                                maxLength={500}
-                                cursorColor={colors.accent.primary}
-                            />
-                        </View>
-                    </View>
-                </View>
-            </Modal>
-
-            {/* ── Tam Ekran Görsel Görüntüleyici ── */}
-            <Modal
-                visible={!!selectedImageUri}
-                transparent={true}
-                animationType="none"
-                statusBarTranslucent
-                onRequestClose={closeImageViewer}
-            >
-                <Animated.View style={[styles.imageViewerOverlay, animatedOverlayStyle]}>
-                    {/* Kapatma Butonu */}
-                    <TouchableOpacity
-                        style={styles.imageViewerCloseBtn}
-                        onPress={closeImageViewer}
-                        activeOpacity={0.7}
-                        hitSlop={16}
-                    >
-                        <View style={styles.imageViewerCloseBtnInner}>
-                            <Text style={styles.imageViewerCloseX}>✕</Text>
-                        </View>
-                    </TouchableOpacity>
-
-                    {/* Pinch/Pan/DoubleTap Gesture Alanı */}
-                    <GestureDetector gesture={allGestures}>
-                        <Animated.View style={[styles.imageViewerContainer, animatedImageStyle]}>
-                            {selectedImageUri && (
-                                <Image
-                                    source={{ uri: selectedImageUri }}
-                                    style={styles.imageViewerImage}
-                                    contentFit="contain"
-                                />
-                            )}
-                        </Animated.View>
-                    </GestureDetector>
-
-                    {/* Alt ipucu */}
-                    <View style={styles.imageViewerHint}>
-                        <Text style={styles.imageViewerHintText}>Aşağı kaydır: kapat  ·  Kıstır: yakınlaştır  ·  Çift dokun: 2.5×</Text>
-                    </View>
-                </Animated.View>
-            </Modal>
+            <ChatImageViewerModal
+                imageUri={selectedImageUri}
+                onDismiss={() => setSelectedImageUri(null)}
+            />
         </KeyboardAvoidingView>
     );
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-    },
-
-    /* Header */
-    header: {
-        flexDirection: "row",
-        alignItems: "center",
-        paddingHorizontal: 12,
-        paddingBottom: 10,
-        borderBottomWidth: StyleSheet.hairlineWidth,
-    },
-    backBtn: {
-        paddingRight: 8,
-    },
-    headerProfile: {
-        flex: 1,
-        flexDirection: "row",
-        alignItems: "center",
-    },
-    headerAvatar: {
-        width: 36,
-        height: 36,
-        borderRadius: 18,
-        marginRight: 10,
-    },
-    headerName: {
-        fontSize: 16,
-        fontWeight: "700",
-    },
-    headerStatus: {
-        fontSize: 12,
-        fontWeight: "400",
-        marginTop: 1,
-    },
-    headerActions: {
-        flexDirection: "row",
-        alignItems: "center",
-    },
-
-    /* Messages */
-    messageList: {
-        paddingHorizontal: 12,
-        paddingTop: 12,
-        paddingBottom: 8,
-    },
-
-
-    /* Input Bar */
-    inputBar: {
-        flexDirection: "row",
-        alignItems: "flex-end",
-        paddingHorizontal: 10,
-        paddingTop: 10,
-        borderTopWidth: StyleSheet.hairlineWidth,
-        gap: 6,
-    },
-    inputContainer: {
-        flex: 1,
-        flexDirection: "row",
-        alignItems: "flex-end",
-        borderRadius: 24,
-        borderWidth: 1,
-        paddingRight: 6,
-        paddingVertical: 4,
-        minHeight: 46,
-        maxHeight: 120,
-    },
-    cameraBtn: {
-        padding: 10,
-        paddingRight: 4,
-    },
-    textInput: {
-        flex: 1,
-        fontSize: 16,
-        paddingHorizontal: 8,
-        paddingTop: Platform.OS === "ios" ? 10 : 8,
-        paddingBottom: Platform.OS === "ios" ? 10 : 8,
-        maxHeight: 100,
-    },
-    sendButton: {
-        padding: 10,
-        marginBottom: 1,
-    },
-
-    /* Modals */
-    modalOverlay: {
-        flex: 1,
-        backgroundColor: "rgba(0,0,0,0.5)",
-        justifyContent: "flex-end",
-        paddingHorizontal: 16,
-        paddingBottom: 40,
-    },
-    optionsModal: {
-        borderRadius: 16,
-        overflow: "hidden",
-    },
-    optionBtn: {
-        paddingVertical: 18,
-        alignItems: "center",
-        justifyContent: "center",
-    },
-    optionText: {
-        fontSize: 17,
-        fontWeight: "400",
-    },
-    separator: {
-        height: StyleSheet.hairlineWidth,
-        width: "100%",
-    },
-
-    /* Report Modal */
-    reportModalContainer: {
-        flex: 1,
-        backgroundColor: "rgba(0,0,0,0.5)",
-        justifyContent: "center",
-        padding: 20,
-    },
-    reportModalContent: {
-        borderRadius: 16,
-        padding: 20,
-        width: "100%",
-    },
-    reportHeader: {
-        flexDirection: "row",
-        justifyContent: "space-between",
-        alignItems: "center",
-        marginBottom: 12,
-    },
-    reportTitle: {
-        fontSize: 18,
-        fontWeight: "700",
-    },
-    reportDesc: {
-        fontSize: 14,
-        marginBottom: 16,
-        lineHeight: 20,
-    },
-    reportInputWrapper: {
-        borderWidth: 1,
-        borderRadius: 12,
-        height: 150,
-        marginBottom: 8,
-        padding: 12,
-    },
-    reportInput: {
-        flex: 1,
-        fontSize: 15,
-        lineHeight: 22,
-    },
-    wordCount: {
-        fontSize: 12,
-        alignSelf: "flex-end",
-        marginBottom: 20,
-    },
-    submitReportBtn: {
-        borderRadius: 12,
-        paddingVertical: 14,
-        alignItems: "center",
-    },
-    submitReportText: {
-        color: "#fff",
-        fontSize: 16,
-        fontWeight: "600",
-    },
-
-
-    // ── Preview Modal ──
-    previewModalOverlay: {
-        flex: 1,
-        backgroundColor: 'rgba(0,0,0,0.92)',
-        justifyContent: 'flex-end',
-    },
-    previewModalContent: {
-        flex: 1,
-        backgroundColor: '#000',
-    },
-    previewTopBar: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        paddingHorizontal: 16,
-        paddingTop: 56,
-        paddingBottom: 12,
-        backgroundColor: 'rgba(0,0,0,0.7)',
-    },
-    previewCancel: {
-        color: 'rgba(255,255,255,0.8)',
-        fontSize: 16,
-        fontWeight: '500',
-    },
-    previewTitle: {
-        color: '#fff',
-        fontSize: 16,
-        fontWeight: '700',
-    },
-    previewSendBtn: {
-        backgroundColor: '#2ecc71',
-        paddingHorizontal: 16,
-        paddingVertical: 8,
-        borderRadius: 20,
-    },
-    previewSendText: {
-        color: '#fff',
-        fontSize: 15,
-        fontWeight: '700',
-    },
-    previewImage: {
-        flex: 1,
-        width: '100%',
-    },
-    previewCaptionBar: {
-        paddingHorizontal: 16,
-        paddingVertical: 10,
-        borderTopWidth: StyleSheet.hairlineWidth,
-    },
-    previewCaptionInput: {
-        fontSize: 15,
-        minHeight: 40,
-        maxHeight: 100,
-    },
-
-    // ── Image Viewer ──
-    imageViewerOverlay: {
-        flex: 1,
-        backgroundColor: '#000',
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    imageViewerContainer: {
-        width: Dimensions.get('window').width,
-        height: Dimensions.get('window').height,
-        justifyContent: 'center',
-        alignItems: 'center',
-    },
-    imageViewerImage: {
-        width: Dimensions.get('window').width,
-        height: Dimensions.get('window').height,
-    },
-    imageViewerCloseBtn: {
-        position: 'absolute',
-        top: 52,
-        right: 20,
-        zIndex: 100,
-    },
-    imageViewerCloseBtnInner: {
-        width: 36,
-        height: 36,
-        borderRadius: 18,
-        backgroundColor: 'rgba(255,255,255,0.18)',
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderWidth: 1,
-        borderColor: 'rgba(255,255,255,0.25)',
-    },
-    imageViewerCloseX: {
-        color: '#fff',
-        fontSize: 16,
-        fontWeight: '600',
-        lineHeight: 18,
-    },
-    imageViewerHint: {
-        position: 'absolute',
-        bottom: 36,
-        alignSelf: 'center',
-    },
-    imageViewerHintText: {
-        color: 'rgba(255,255,255,0.35)',
-        fontSize: 12,
-        textAlign: 'center',
-    },
-    restrictionBanner: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        gap: 6,
-        paddingHorizontal: 16,
-        paddingVertical: 7,
-        borderTopWidth: StyleSheet.hairlineWidth,
-    },
-    restrictionText: {
-        fontSize: 12,
-        fontWeight: '500',
-        flex: 1,
-    },
-});

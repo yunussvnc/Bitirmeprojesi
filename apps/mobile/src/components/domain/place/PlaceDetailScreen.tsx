@@ -15,7 +15,6 @@ import {
   ScrollView,
   TouchableOpacity,
   Linking,
-  Modal,
   Pressable,
   Platform,
   Dimensions,
@@ -27,11 +26,10 @@ import {
 import { useScrollToTop } from '@react-navigation/native';
 import Animated, { FadeIn } from "react-native-reanimated";
 import { Image as ExpoImage } from 'expo-image';
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useTheme } from "@/src/hooks/useTheme";
 import { Screen, Section, type ScreenRef } from "@/src/components/layout";
 import { PlaceCard } from "@/src/components/domain/place/PlaceCard";
-import { Button, Card, RatingStars } from "@/src/components/ui";
+import { Button, Card } from "@/src/components/ui";
 import { useTranslation } from 'react-i18next';
 import { useAppStore } from "@/src/store/useAppStore";
 import { useSettingsStore } from "@/src/store/useSettingsStore";
@@ -44,28 +42,9 @@ import { getPlaceById, togglePlaceFollow, getPlacePosts, getPlaceStories, record
 import { lightImpact, success } from "@/src/utils/haptics";
 import { logger } from "@/src/utils/logger";
 import { apiGet } from "@/src/utils/apiClient";
-import { StoryViewerModal } from "../explore/StoryViewerModal";
 import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
-import { HeroImageViewer } from './HeroImageViewer';
-import { ReviewGalleryModal } from './ReviewGalleryModal';
-import { PlaceDetailMenuSheet } from './PlaceDetailMenuSheet';
-
-type Review = {
-  id: number;
-  user_id: number;
-  place_id: number;
-  comment_text: string;
-  rating: number;
-  is_verified: boolean;
-  created_at: string;
-  media_url?: string;
-  media_urls?: string[];
-  user?: {
-    username?: string;
-    first_name?: string;
-    avatar_url?: string;
-  };
-};
+import { PlaceDetailOverlays, type Review, type ReviewGalleryData } from './place-detail/PlaceDetailOverlays';
+import { styles } from './place-detail/styles';
 
 const { height: SCREEN_HEIGHT, width: SCREEN_WIDTH } = Dimensions.get("window");
 const REVIEW_SHEET_COLLAPSED = Math.min(SCREEN_HEIGHT * 0.55, 520);
@@ -79,7 +58,6 @@ export default function PlaceDetailScreen({
   isVenueDashboard?: boolean
 } = {}) {
   const { colors } = useTheme();
-  const insets = useSafeAreaInsets();
   const params = useLocalSearchParams();
   const id = providedId || String(params?.id ?? "");
   const { t } = useTranslation();
@@ -120,7 +98,7 @@ export default function PlaceDetailScreen({
   const [reviewsLoadingMore, setReviewsLoadingMore] = useState(false);
   const [similarPlaces, setSimilarPlaces] = useState<any[]>([]);
   const [showReviews, setShowReviews] = useState(false);
-  const [reviewGalleryData, setReviewGalleryData] = useState<{ reviews: Review[]; reviewIndex: number; imageIndex: number } | null>(null);
+  const [reviewGalleryData, setReviewGalleryData] = useState<ReviewGalleryData | null>(null);
 
   // Takip & Sosyal İçerik
   // null = henüz API'den yüklenmedi → buton disabled görünür, "Takip Et" flash'ı önlenir
@@ -459,8 +437,6 @@ export default function PlaceDetailScreen({
     const sum = reviews.reduce((acc, r) => acc + (r.rating || 0), 0);
     return (sum / reviews.length).toFixed(1);
   }, [reviews]);
-
-  const totalReviewCount = reviews.length;
 
   // Typography styles - inline to avoid type issues
   const h1Style = { fontSize: 24, fontWeight: "700" as const, color: colors.text.primary };
@@ -1008,635 +984,37 @@ export default function PlaceDetailScreen({
           )}
         </View>
       </Screen>
-      <Modal
-        visible={showReviews}
-        transparent
-        animationType="none"
-        onRequestClose={() => setShowReviews(false)}
-        statusBarTranslucent
-      >
-        {showReviews && (
-          <>
-            <View style={styles.reviewBackdrop}>
-              <Pressable
-                style={[styles.reviewBackdropPressable, { backgroundColor: colors.overlay.medium }]}
-                onPress={() => setShowReviews(false)}
-              />
-              <View style={{ width: "100%" }}>
-                <RNAnimated.View
-                  style={[
-                    styles.reviewSheet,
-                    {
-                      backgroundColor: colors.background.primary,
-                      paddingBottom: insets.bottom || spacing.base,
-                      height: reviewSheetHeight,
-                    },
-                  ]}
-                >
-                  <View>
-                    <View style={styles.reviewDragArea} {...handleAreaPanResponder.panHandlers}>
-                      <View style={styles.reviewHandleRow}>
-                        <View style={[styles.reviewHandle, { backgroundColor: colors.surface.border }]} />
-                      </View>
-                      <View style={styles.reviewHeaderRow}>
-                        <Text style={[h2Style, { fontSize: 20 }]}>{t("place_detail.reviews")}</Text>
-                        <TouchableOpacity
-                          onPress={() => {
-                            lightImpact();
-                            setShowReviews(false);
-                          }}
-                          activeOpacity={0.7}
-                        >
-                          <IconSymbol name="xmark.circle.fill" size={28} color={colors.text.tertiary} />
-                        </TouchableOpacity>
-                      </View>
-                    </View>
-                  </View>
-
-                  <ScrollView
-                    contentContainerStyle={styles.reviewScrollContent}
-                    showsVerticalScrollIndicator={false}
-                    onScroll={(e) => {
-                      reviewScrollOffsetRef.current = e.nativeEvent.contentOffset.y;
-                    }}
-                    scrollEventThrottle={16}
-                  >
-                    {reviewsLoading ? (
-                      <Text style={[bodySmallStyle]}>{t('place_detail.reviews_loading')}</Text>
-                    ) : reviewsError ? (
-                      <Text style={[bodySmallStyle]}>{reviewsError}</Text>
-                    ) : !reviews.length ? (
-                      <Text style={[bodySmallStyle]}>
-                        {t('place_detail.reviews_empty')}
-                      </Text>
-                    ) : (
-                      <>
-                        {averageRating && (
-                        <View style={[styles.reviewsSummaryCard, { borderColor: colors.surface.border }]}>
-                          <View style={[styles.ratingBadge, { backgroundColor: colors.accent.primary }]}>
-                            <IconSymbol name="star.fill" size={18} color={colors.accent.onPrimary} />
-                            <Text style={[styles.ratingBadgeText, { color: colors.accent.onPrimary }]}>{averageRating}</Text>
-                          </View>
-                          <View style={styles.ratingDetails}>
-                            {[{ label: t('explore.rating_service') }, { label: t('explore.rating_taste') }, { label: t('explore.rating_ambiance') }].map((item) => (
-                              <View key={item.label} style={styles.ratingRow}>
-                                <Text style={[bodySmallStyle, { width: 70 }]}>{item.label}:</Text>
-                                <RatingStars value={Number(averageRating)} disabled size={14} />
-                                <Text style={[bodySmallStyle, { marginLeft: spacing.xs }]}>{averageRating}</Text>
-                              </View>
-                            ))}
-                          </View>
-                        </View>
-                        )}
-
-                        <View style={{ marginTop: spacing.lg }}>
-                          <View style={styles.reviewsMetaRow}>
-                            <View style={styles.reviewsMetaItem}>
-                              <IconSymbol name="star.fill" size={16} color={colors.text.tertiary} />
-                              <Text style={[bodySmallStyle, { marginLeft: 6 }]}>{t('explore.rating_count', { count: totalReviewCount })}</Text>
-                            </View>
-                            <View style={styles.reviewsMetaDivider} />
-                            <View style={styles.reviewsMetaItem}>
-                              <IconSymbol name="text.bubble.fill" size={16} color={colors.text.tertiary} />
-                              <Text style={[bodySmallStyle, { marginLeft: 6 }]}>{t('explore.comment_count', { count: totalReviewCount })}</Text>
-                            </View>
-                          </View>
-
-                          {reviews.map((review) => (
-                            <View key={review.id} style={[styles.reviewItem, { borderBottomColor: colors.surface.border }]}>
-                              <View style={styles.reviewHeader}>
-                                <View style={[styles.reviewHeaderLeft, { alignItems: 'center' }]}>
-                                  {review.user?.avatar_url ? (
-                                    <ExpoImage source={{ uri: review.user.avatar_url }} style={{ width: 32, height: 32, borderRadius: 16, marginRight: 8, backgroundColor: colors.surface.default }} cachePolicy="memory-disk" />
-                                  ) : (
-                                    <View style={{ width: 32, height: 32, borderRadius: 16, marginRight: 8, backgroundColor: colors.surface.default, justifyContent: 'center', alignItems: 'center' }}>
-                                      <IconSymbol name="person.fill" size={16} color={colors.text.tertiary} />
-                                    </View>
-                                  )}
-                                  <Text style={[bodyStyle, { fontWeight: "600" }]}>{review.user?.username || review.user?.first_name || t('explore.user_id', { id: review.user_id })}</Text>
-                                  {review.is_verified && (
-                                    <View
-                                      style={[
-                                        styles.verifiedBadge,
-                                        {
-                                          borderColor: colors.accent.primary,
-                                          backgroundColor: colors.accent.primary + "22",
-                                        },
-                                      ]}
-                                    >
-                                      <IconSymbol name="checkmark.seal.fill" size={12} color={colors.accent.primary} />
-                                      <Text style={[styles.verifiedBadgeText, { color: colors.accent.primary }]}>
-                                        {t('explore.verified')}
-                                      </Text>
-                                    </View>
-                                  )}
-                                </View>
-                                <RatingStars value={review.rating} disabled size={16} />
-                              </View>
-                              <Text style={[bodySmallStyle, { marginTop: 8, lineHeight: 20 }]}>{review.comment_text}</Text>
-                              {review.media_url && (
-                                <Pressable
-                                  onPress={() => {
-                                    lightImpact();
-                                    const mediaReviews = reviews.filter((r) => r.media_url);
-                                    const rIdx = mediaReviews.findIndex((r) => r.id === review.id);
-                                    setReviewGalleryData({ reviews: mediaReviews, reviewIndex: rIdx, imageIndex: 0 });
-                                  }}
-                                  hitSlop={8}
-                                  style={({ pressed }) => [styles.reviewImageContainer, pressed && { opacity: 0.8 }]}
-                                >
-                                  <ExpoImage source={{ uri: review.media_url }} style={styles.reviewImage} contentFit="cover" cachePolicy="memory-disk" />
-                                  {(review.media_urls?.length ?? 0) > 1 && (
-                                    <View style={styles.reviewImageBadge}>
-                                      <Text style={styles.reviewImageBadgeText}>{review.media_urls!.length}</Text>
-                                    </View>
-                                  )}
-                                </Pressable>
-                              )}
-                            </View>
-                          ))}
-                          {hasMoreReviews && reviews.length > 0 && (
-                            <TouchableOpacity
-                              style={{ paddingVertical: 16, alignItems: 'center', marginTop: 8 }}
-                              onPress={() => loadReviews(reviewsPage + 1, true)}
-                              disabled={reviewsLoadingMore}
-                            >
-                              <Text style={[bodyStyle, { color: colors.accent.primary, fontWeight: '600' }]}>
-                                {reviewsLoadingMore ? t('place_detail.loading', { defaultValue: 'Yükleniyor...' }) : "Daha Fazla Yükle"}
-                              </Text>
-                            </TouchableOpacity>
-                          )}
-                        </View>
-                      </>
-                    )}
-                  </ScrollView>
-                </RNAnimated.View>
-              </View>
-            </View>
-            {reviewGalleryData && (
-              <ReviewGalleryModal
-                reviewGalleryData={reviewGalleryData}
-                setReviewGalleryData={setReviewGalleryData}
-                t={t}
-              />
-            )}
-          </>
-        )}
-      </Modal>
-
-      {/* Hero Image Fullscreen Modal — swipe down to close */}
-      <Modal
-        visible={showHeroImage}
-        transparent
-        animationType="fade"
-        onRequestClose={() => setShowHeroImage(false)}
-        statusBarTranslucent
-      >
-        <HeroImageViewer
-          heroSource={heroSource}
-          insetTop={insets.top || 44}
-          onClose={() => setShowHeroImage(false)}
-          screenWidth={SCREEN_WIDTH}
-          screenHeight={SCREEN_HEIGHT}
-          t={t}
-        />
-      </Modal>
-
-      {/* Menu Modal */}
-      <Modal
-        visible={showMenu}
-        transparent
-        animationType="none"
-        onRequestClose={() => setShowMenu(false)}
-        statusBarTranslucent
-      >
-        {showMenu && (
-          <View style={styles.reviewBackdrop}>
-            <Pressable
-              style={[styles.reviewBackdropPressable, { backgroundColor: colors.overlay.medium }]}
-              onPress={() => setShowMenu(false)}
-            />
-            <View style={{ width: "100%" }}>
-              <RNAnimated.View
-                style={[
-                  styles.reviewSheet,
-                  {
-                    backgroundColor: colors.background.primary,
-                    paddingBottom: insets.bottom || spacing.base,
-                    height: menuSheetHeight,
-                  },
-                ]}
-              >
-                <View>
-                  <View style={styles.reviewDragArea} {...handleMenuPanResponder.panHandlers}>
-                    <View style={styles.reviewHandleRow}>
-                      <View style={[styles.reviewHandle, { backgroundColor: colors.surface.border }]} />
-                    </View>
-                    <View style={styles.reviewHeaderRow}>
-                      <Text style={[h2Style, { fontSize: 20 }]}>{t('explore.menu')}</Text>
-                      <TouchableOpacity
-                        onPress={() => {
-                          lightImpact();
-                          setShowMenu(false);
-                        }}
-                        activeOpacity={0.7}
-                      >
-                        <IconSymbol name="xmark.circle.fill" size={28} color={colors.text.tertiary} />
-                      </TouchableOpacity>
-                    </View>
-                  </View>
-                </View>
-
-                <PlaceDetailMenuSheet
-                  place={place}
-                  t={t}
-                  colors={colors}
-                  spacing={spacing}
-                  h2Style={h2Style}
-                  bodyStyle={bodyStyle}
-                  captionStyle={captionStyle}
-                  bodySmallStyle={bodySmallStyle}
-                  SCREEN_WIDTH={SCREEN_WIDTH}
-                />
-              </RNAnimated.View>
-            </View>
-          </View>
-        )}
-      </Modal>
-
-      {/* Story Viewer Modal */}
-      {placeStories && placeStories.length > 0 && (
-        <StoryViewerModal
-          stories={placeStories}
-          initialIndex={selectedStoryIndex}
-          visible={showStoriesModal}
-          onClose={() => setShowStoriesModal(false)}
-          currentUserId={currentUser?.id}
-        />
-      )}
+      <PlaceDetailOverlays
+        showReviews={showReviews}
+        onCloseReviews={() => setShowReviews(false)}
+        reviewSheetHeight={reviewSheetHeight}
+        reviewPanHandlers={handleAreaPanResponder.panHandlers}
+        reviewScrollOffsetRef={reviewScrollOffsetRef}
+        reviews={reviews}
+        reviewsLoading={reviewsLoading}
+        reviewsError={reviewsError}
+        averageRating={averageRating}
+        hasMoreReviews={hasMoreReviews}
+        reviewsLoadingMore={reviewsLoadingMore}
+        onLoadMoreReviews={() => loadReviews(reviewsPage + 1, true)}
+        reviewGalleryData={reviewGalleryData}
+        setReviewGalleryData={setReviewGalleryData}
+        showHeroImage={showHeroImage}
+        heroSource={heroSource}
+        onCloseHeroImage={() => setShowHeroImage(false)}
+        screenWidth={SCREEN_WIDTH}
+        screenHeight={SCREEN_HEIGHT}
+        showMenu={showMenu}
+        onCloseMenu={() => setShowMenu(false)}
+        menuSheetHeight={menuSheetHeight}
+        menuPanHandlers={handleMenuPanResponder.panHandlers}
+        place={place}
+        placeStories={placeStories}
+        selectedStoryIndex={selectedStoryIndex}
+        showStoriesModal={showStoriesModal}
+        onCloseStories={() => setShowStoriesModal(false)}
+        currentUserId={currentUser?.id}
+      />
     </Animated.View>
   );
 }
-
-const styles = StyleSheet.create({
-  header: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: spacing.base,
-  },
-  headerRightButtons: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  headerButton: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  imageContainer: {
-    width: "100%",
-    aspectRatio: 16 / 9,
-    borderRadius: 12,
-    overflow: "hidden",
-    marginBottom: spacing.lg,
-  },
-  placeImage: {
-    width: "100%",
-    height: "100%",
-  },
-  imagePlaceholder: {
-    width: "100%",
-    height: "100%",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  titleSection: {
-    marginBottom: spacing.base,
-  },
-  titleRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: spacing.sm,
-  },
-  reviewButton: {
-    paddingHorizontal: spacing.sm,
-    paddingVertical: spacing.xs,
-    borderRadius: 999,
-    borderWidth: 1,
-    alignSelf: "flex-end",
-  },
-  reviewBackdrop: {
-    flex: 1,
-    justifyContent: "flex-end",
-  },
-  reviewBackdropPressable: {
-    ...StyleSheet.absoluteFillObject,
-  },
-  reviewSheet: {
-    width: "100%",
-    alignSelf: "stretch",
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
-    paddingTop: spacing.sm,
-    paddingHorizontal: spacing.base,
-    overflow: "hidden",
-  },
-  reviewHandleRow: {
-    alignItems: "center",
-    paddingVertical: spacing.xs,
-  },
-  reviewDragArea: {
-    paddingVertical: spacing.sm,
-    paddingHorizontal: spacing.base,
-  },
-  reviewHandle: {
-    width: 44,
-    height: 4,
-    borderRadius: 999,
-  },
-  reviewHeaderRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginTop: spacing.xs,
-    marginBottom: spacing.base,
-  },
-  reviewsMetaRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
-    marginBottom: spacing.base,
-  },
-  reviewsMetaItem: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  reviewsMetaDivider: {
-    width: 1,
-    height: 16,
-    backgroundColor: "#00000022",
-    marginHorizontal: spacing.base,
-  },
-  reviewScrollContent: {
-    paddingBottom: spacing.lg,
-  },
-  metaRow: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  tagsRow: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-    gap: 8,
-  },
-  content: {
-    paddingTop: spacing.base,
-  },
-  placeMetaSection: {
-    marginBottom: spacing.md,
-  },
-  placeMetaRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "flex-start",
-  },
-  ratingContainer: {
-    flex: 1,
-  },
-  distanceContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  badgesContainer: {
-    flexDirection: "row",
-    flexWrap: "wrap",
-  },
-  sectionCard: {
-    marginBottom: spacing.xl,
-  },
-  campaignCard: {
-    marginBottom: spacing.lg,
-  },
-  campaignHeader: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginBottom: spacing.sm,
-  },
-  atmosphereTags: {
-    flexDirection: "row",
-    gap: spacing.base,
-    marginTop: spacing.base,
-  },
-  atmosphereTag: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: spacing.sm,
-    paddingVertical: spacing.xs,
-    borderRadius: 12,
-  },
-  highlightsGrid: {
-    flexDirection: "row",
-    flexWrap: "nowrap",
-    justifyContent: "space-between",
-    alignItems: "center",
-    gap: 0,
-  },
-  highlightItem: {
-    flex: 1,
-    minWidth: 0,
-    maxWidth: "25%",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: spacing.xs,
-    paddingHorizontal: spacing.xs,
-  },
-  highlightItemLowered: {
-    marginTop: spacing.lg,
-  },
-  locationPreview: {
-    // Spacing handled by children
-  },
-  locationAddress: {
-    flexDirection: "row",
-    alignItems: "flex-start",
-  },
-  locationButtons: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: spacing.base,
-  },
-  callButton: {
-    width: 48,
-    height: 48,
-    borderRadius: 12,
-    borderWidth: 1,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  reviewsSummaryCard: {
-    flexDirection: "row",
-    alignItems: "center",
-    padding: spacing.base,
-    borderRadius: 16,
-    borderWidth: 1,
-    marginBottom: spacing.lg,
-    gap: spacing.base,
-  },
-  ratingBadge: {
-    minWidth: 84,
-    paddingVertical: spacing.sm,
-    paddingHorizontal: spacing.base,
-    borderRadius: 14,
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    gap: spacing.xs,
-  },
-  ratingBadgeText: {
-    fontSize: 20,
-    fontWeight: "700",
-  },
-  ratingDetails: {
-    flex: 1,
-    gap: spacing.xs,
-  },
-  ratingRow: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-  reviewItem: {
-    marginBottom: spacing.lg,
-    paddingBottom: spacing.lg,
-    borderBottomWidth: 1,
-  },
-  reviewHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-  },
-  reviewHeaderLeft: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: spacing.xs,
-  },
-  verifiedBadge: {
-    flexDirection: "row",
-    alignItems: "center",
-    paddingHorizontal: 6,
-    paddingVertical: 2,
-    borderRadius: 999,
-    borderWidth: 1,
-    marginLeft: spacing.xs,
-    gap: 4,
-  },
-  verifiedBadgeText: {
-    fontSize: 10,
-    fontWeight: "600",
-  },
-  reviewImageContainer: {
-    marginTop: spacing.sm,
-    borderRadius: 12,
-    overflow: "hidden",
-    width: 200,
-    height: 150,
-  },
-  reviewImage: {
-    width: "100%",
-    height: "100%",
-    borderRadius: 12,
-  },
-  reviewImageBadge: {
-    position: "absolute",
-    top: 6,
-    right: 6,
-    backgroundColor: "rgba(0,0,0,0.6)",
-    borderRadius: 10,
-    width: 20,
-    height: 20,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  reviewImageBadgeText: {
-    color: "#fff",
-    fontSize: 10,
-    fontWeight: "700",
-  },
-  galleryVerifiedBadge: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 3,
-  },
-  galleryVerifiedText: {
-    color: "#4ade80",
-    fontSize: 11,
-    fontWeight: "600",
-  },
-  galleryReviewText: {
-    color: "rgba(255,255,255,0.9)",
-    fontSize: 14,
-    lineHeight: 20,
-  },
-  galleryReviewNav: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginTop: spacing.base,
-  },
-  galleryNavButton: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 4,
-    paddingVertical: spacing.xs,
-    paddingHorizontal: spacing.sm,
-    borderRadius: 999,
-    backgroundColor: "rgba(255,255,255,0.15)",
-  },
-  galleryNavText: {
-    color: "#fff",
-    fontSize: 13,
-    fontWeight: "600",
-  },
-  imageCounterText: {
-    color: "#fff",
-    fontSize: 14,
-    fontWeight: "600",
-  },
-  similarScrollContent: {
-    paddingRight: spacing.screenPadding,
-  },
-  similarCardWrapper: {
-    width: 280,
-    marginRight: spacing.base,
-  },
-  sectionHeaderRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    marginBottom: spacing.base,
-  },
-  reviewIconContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  sectionBox: {
-    backgroundColor: "rgba(0, 0, 0, 0.05)",
-    borderRadius: 16,
-    padding: spacing.base,
-  },
-  menuItemRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    paddingVertical: 12,
-    borderBottomWidth: 1,
-  },
-  moreItemsText: {
-    marginTop: 8,
-    textAlign: "center",
-    fontWeight: "500",
-  },
-});
