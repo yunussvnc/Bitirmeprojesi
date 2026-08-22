@@ -10537,5 +10537,229 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
         "category": "Nuts"
       }
     ]
+  },
+  "7188": {
+    "name": "Peak Belgian Waffle's",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/gsbm/peak-belgian-waffles",
+    "sourceName": "Yemeksepeti Peak Belgian Waffles & Croissants (Yandex ile Beylikdüzü Kavaklı şube doğrulaması)",
+    "verifiedAt": "2026-08-23",
+    "items": [
+      {
+        "name": "Special One Cup Waffle",
+        "price": "629,99 TL",
+        "desc": "Belçika usulü küp mini waffle hamurları, seçeceğiniz çikolata, orman meyveleri",
+        "category": "Cup Waffles"
+      },
+      {
+        "name": "Muzlu Çikolatalı Cup Waffle",
+        "price": "593,74 TL",
+        "desc": "Belçika usülü küp dilimlenmiş mini waffle hamuru, muz, seçeceğiniz çikolata",
+        "category": "Cup Waffles"
+      },
+      {
+        "name": "Dubai Chocolate Cup Waffle",
+        "price": "629,99 TL",
+        "desc": "Belçika usülü dilimlenmiş mini waffle hamuru, Dubai çikolatası, seçeceğiniz çikolata, seçeceğiniz meyve",
+        "category": "Cup Waffles"
+      },
+      {
+        "name": "Pistachio Croissant",
+        "price": "787,49 TL",
+        "desc": "Fransız usulüyle hazırlanmış kruvasan hamuru, Antep fıstıklı cream patisserie, muz, Antep fıstığı sos, file Antep fıstığı",
+        "category": "Croissants"
+      },
+      {
+        "name": "Peak Of The Croissant",
+        "price": "787,49 TL",
+        "desc": "Fransız usulü kruvasan hamuru, sütlü çikolata, muz, çilek, fındık",
+        "category": "Croissants"
+      },
+      {
+        "name": "Biscoff Lotus Croissant",
+        "price": "849,99 TL",
+        "desc": "Fransız usulü kruvasan hamuruna; muz, krema, lotus bisküvisi",
+        "category": "Croissants"
+      },
+      {
+        "name": "Tropeak Croissant",
+        "price": "787,49 TL",
+        "desc": "Fransız usulü kruvasan hamuruna; krema, sütlü çikolata, orman meyveleri, file badem",
+        "category": "Croissants"
+      },
+      {
+        "name": "New York Roll Croissant",
+        "price": "737,49 TL",
+        "desc": "Roll kruvasan hamuru içerisine, sütlü çikolata i̇ç dolgusu, beyaz sütlü çikolata sos, orman meyveleri, Antep fıstığı tozu",
+        "category": "Croissants"
+      },
+      {
+        "name": "Dubai Croissant",
+        "price": "849,99 TL",
+        "desc": "Fransız usulü kruvasan hamuru arasına; Antep fıstığı sos, kadayıf, karamel sos",
+        "category": "Croissants"
+      },
+      {
+        "name": "Paris Ekler Crush",
+        "price": "687,49 TL",
+        "desc": "Fransız usulü Paris ekler hamuru, patisserie, çikolata",
+        "category": "Croissants"
+      },
+      {
+        "name": "Exotic Waffle (Orta)",
+        "price": "737,49 TL",
+        "desc": "Özel Belçika hamuru, sütlü çikolata, çilek, ormen meyveleri, fındık, Antep fıstığı, file badem, beyaz çikolata sos",
+        "category": "Waffles"
+      },
+      {
+        "name": "Exotic Waffle (Büyük)",
+        "price": "799,99 TL",
+        "desc": "Özel Belçika hamuru, sütlü çikolata, çilek, orman meyveleri, fındık, Antep fıstığı, file badem, beyaz çikolata sos",
+        "category": "Waffles"
+      },
+      {
+        "name": "Choco Dream Waffle (Orta)",
+        "price": "737,49 TL",
+        "desc": "Özel Belçika hamuru, bitter çikolata, çilek, muz, orman meyveleri, yer fıstığı, file badem, beyaz çikolata sos",
+        "category": "Waffles"
+      },
+      {
+        "name": "Choco Dream Waffle (Büyük)",
+        "price": "799,99 TL",
+        "desc": "Özel Belçika hamuru, bitter çikolata, çilek, muz, orman meyveleri, yer fıstığı, file badem, beyaz çikolata sos",
+        "category": "Waffles"
+      },
+      {
+        "name": "White Love Waffle (Orta)",
+        "price": "737,49 TL",
+        "desc": "Özel Belçika hamuru, beyaz çikolata, çilek, muz, fındık, Antep fıstığı, toz Antep fıstığı, karamel sos",
+        "category": "Waffles"
+      },
+      {
+        "name": "White Love Waffle (Büyük)",
+        "price": "799,99 TL",
+        "desc": "Özel Belçika hamuru, beyaz çikolata, çilek, muz, fındık, Antep fıstığı, toz Antep fıstığı, karamel sos",
+        "category": "Waffles"
+      },
+      {
+        "name": "Peak Belgian Special Waffle (Orta)",
+        "price": "737,49 TL",
+        "desc": "Özel Belçika hamuru, sütlü çikolata, beyaz çikolata, çilek, muz, orman meyveleri, fındık, Antep fıstığı, toz Antep fıstığı, yer fıstığı, Antep fıstığı sos",
+        "category": "Waffles"
+      },
+      {
+        "name": "Peak Belgian Special Waffle (Büyük)",
+        "price": "799,99 TL",
+        "desc": "Özel Belçika hamuru, sütlü çikolata, beyaz çikolata, çilek, muz, orman meyveleri, fındık, Antep fıstığı, toz Antep fıstığı, yer fıstığı, Antep fıstığı sosu",
+        "category": "Waffles"
+      },
+      {
+        "name": "Double Chocolate Waffle (Orta)",
+        "price": "737,49 TL",
+        "desc": "Özel Belçika hamuru, sütlü çikolata, bitter çikolata, muz, orman meyveleri, fındık, file badem, beyaz çikolata sos",
+        "category": "Waffles"
+      },
+      {
+        "name": "Double Chocolate Waffle (Büyük)",
+        "price": "799,99 TL",
+        "desc": "Özel Belçika hamuru, sütlü çikolata, bitter çikolata, muz, orman meyveleri, fındık, file badem, beyaz çikolata sos",
+        "category": "Waffles"
+      },
+      {
+        "name": "Kova Waffle Bowl İkili Menü",
+        "price": "1.398 TL",
+        "desc": "Süt, gül suyunda dinlendirilmiş, arasında ceviz, üzerinde toz Antep fıstığı, frambuaz, böğürtlen",
+        "category": "Kova Waffles"
+      },
+      {
+        "name": "Peak Choco Mix (500 ml)",
+        "price": "799 TL",
+        "desc": "Çikolata severler için 500 ml'lik lezzetli karışım. Belçika waffle parçaları, sütlü ve beyaz çikolata, Kit Kat parçaları ile pirinç fındık. Çıtır waffle dokusuyla kaşık kaşık çikolata keyfi yaşayın.",
+        "category": "Kova Waffles"
+      },
+      {
+        "name": "Peak Lotus Berry",
+        "price": "799 TL",
+        "desc": "Lotus + çilek... Bu ikili gereğinden fazla iyi oldu. Belçika waffle parçaları, beyaz çikolata, taze çilek ve bol Lotus Biscoff parçaları. Meyvemsi, karamelsi ve çıtır tatları aynı kaşıkta buluşturan Peak yorumu.",
+        "category": "Kova Waffles"
+      },
+      {
+        "name": "Peak Bueno Duo (500 ml)",
+        "price": "799 TL",
+        "desc": "Buenonun birini seçemedik, ikisini de koyduk! Belçika waffle parçaları, sütlü ve beyaz çikolata, Kinder Bueno & Kinder Bueno White ve bol muz. Bueno sevenler için 500 mllik tam bir mutluluk kovası.",
+        "category": "Kova Waffles"
+      },
+      {
+        "name": "Peak Choco Crunch",
+        "price": "799 TL",
+        "desc": "Çıtırtısını ilk kaşıkta duyacaksın! Altın renginde waffle parçaları, bol sütlü Belçika çikolatası ve kakaolu Nestlé Crunch gevrekleriyle hazırlanan Peak Choco Crunch, her lokmada yoğun çikolata ve karşı konulmaz bir çıtırlık sunar.",
+        "category": "Kova Waffles"
+      },
+      {
+        "name": "Peak Dubai Pistachio Bueno Kova Waffle",
+        "price": "849,99 TL",
+        "desc": "Belçika waffle parçaları, Antep fıstığı kreması, Kinder Bueno, çıtır kadayıf, Antep fıstığı",
+        "category": "Kova Waffles"
+      },
+      {
+        "name": "Peak After Dark (500 ml)",
+        "price": "849,99 TL",
+        "desc": "Çikolatanın karanlık tarafına geç. Altın renkli çıtır Belçika waffle parçaları, yoğun bitter çikolata, ETİ Karam Gurme gofret, taze çilek, muz ve bol pirinç fındık. Fazla tatlıdan hoşlanmayan, yoğun çikolata karakteri ve çıtırlık arayanlara özel 500 ml-lik Peak deneyimi.",
+        "category": "Kova Waffles"
+      },
+      {
+        "name": "İtalyan Gelato Dondurma (6 Paket)",
+        "price": "870 TL",
+        "desc": "6 adet olarak servis edilir.",
+        "category": "İtalyan Gelato Dondurmalar"
+      },
+      {
+        "name": "İtalyan Gelato Dondurma (8 Adet)",
+        "price": "1.160 TL",
+        "desc": "Seçeceğiniz 8 adet dondurma ile",
+        "category": "İtalyan Gelato Dondurmalar"
+      },
+      {
+        "name": "Italian Gelato Dondurma (10 Adet)",
+        "price": "1.450 TL",
+        "desc": "Seçeceğiniz 10 çeşit dondurma",
+        "category": "İtalyan Gelato Dondurmalar"
+      },
+      {
+        "name": "İtalyan Gelato Dondurma (12 Adet)",
+        "price": "1.755 TL",
+        "desc": "Seçeceğiniz 12 adet dondurma",
+        "category": "İtalyan Gelato Dondurmalar"
+      },
+      {
+        "name": "Honey Smoke Croissant Sandwich + Berry Hibiscus Limonata (220 ML)",
+        "price": "835 TL",
+        "desc": "Fransız usulü hazırlanmış taze kruvasan hamuru içerisinde kıvırcık, dilimlenmiş köy domatesi, cheddar peyniri ve hindi füme dilimleri ballı hardal sos ile sunulur. Ilık servis edilir. Hibiskus ve kırmızı meyve notalarının uyumuyla hazırlanan ferahlatıcı premium limonata 220 ml ile birlikte gelir.",
+        "category": "Croissant Sandwich Menus"
+      },
+      {
+        "name": "Italıan Touch Croissant Sandwich + Taze Limonata (220 ML)",
+        "price": "835 TL",
+        "desc": "Fransız Usülü Hazırlanmış Taze Kruvasan Hamuruna İç katman olarak, Taze Dilimlenmiş Çeçil Peynir parçaları, Dilimlenmiş Köy Domatesi, Taze Ayıklanmış Roka Parçaları arasına Italıan Son Dokunuş olarak Pesto Sos ile Hazırlanır. (Ilık Servis Edilir.) + Günlük sıkım limonlarla hazırlanan, buz gibi ferahlatıcı ve %100 doğal lezzet deneyimi",
+        "category": "Croissant Sandwich Menus"
+      },
+      {
+        "name": "Truffle House Croissant Sandwich + Berry Hibiscus Limonata (220 ML)",
+        "price": "835 TL",
+        "desc": "Fransız usulü hazırlanmış taze kruvasan hamuru, taze ayıklanmış kıvırcık, eski kaşar dilimleri, dana jambon dilimleri, trüf sos ile hazırlanır. (ılık servis edilir.) + hibiskus ve kırmızı meyve notalarının eşsiz uyumuyla hazırlanan, fresh ve ferahlatıcı premium limonata deneyimi",
+        "category": "Croissant Sandwich Menus"
+      },
+      {
+        "name": "Fresh Club Croissant Sandwich + Berry Hibiscus Limonata (220 ML)",
+        "price": "835 TL",
+        "desc": "Fransız usulü hazırlanmış taze kruvasan hamuru, taze ayıklanmış kıvırcık, dilimlenmiş köy domatesi, dilimlenmiş çengelköy salatalık, ezine peyniri dilimleri (ılık servis edilir.) + hibiskus ve kırmızı meyve notalarının eşsiz uyumuyla hazırlanan, fresh ve ferahlatıcı premium limonata deneyimi (220 ml)",
+        "category": "Croissant Sandwich Menus"
+      },
+      {
+        "name": "Tuna Verde Croissant Sandwich + Berry Hibiscus Limonata (220 ML)",
+        "price": "835 TL",
+        "desc": "Fransız usulü hazırlanmış taze kruvasan hamuru, taze kıvırcık dilimleri, ton balığı, taze maydanoz, mayonez ve ceviz karışımıyla hazırlanmış harç ile hazırlanır (Ilık servis edilir.) + Hibiskus ve kırmızı meyve notalarının eşsiz uyumuyla hazırlanan, fresh ve ferahlatıcı premium limonata deneyimi",
+        "category": "Croissant Sandwich Menus"
+      }
+    ]
   }
 };
