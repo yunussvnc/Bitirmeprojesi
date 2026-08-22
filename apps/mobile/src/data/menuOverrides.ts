@@ -9767,5 +9767,775 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
         "category": "Kiloluk Ürünler (Pişirilmiş)"
       }
     ]
+  },
+  "7216": {
+    "name": "Totem Performans",
+    "sourceUrl": "https://webmenu.pardonapp.co/en/totem-pub-performans",
+    "sourceName": "Pardon AI Totem Pub - Performans Sahne menüsü (Salih Efendi Sk. No:6, Beşiktaş sosyal adres doğrulaması)",
+    "verifiedAt": "2026-08-23",
+    "items": [
+      {
+        "name": "Water",
+        "price": "50₺",
+        "desc": "",
+        "category": "Cold Drinks"
+      },
+      {
+        "name": "Mineral Water",
+        "price": "150₺",
+        "desc": "",
+        "category": "Cold Drinks"
+      },
+      {
+        "name": "Fruit Juice",
+        "price": "220₺",
+        "desc": "",
+        "category": "Cold Drinks"
+      },
+      {
+        "name": "Coca Cola",
+        "price": "220₺",
+        "desc": "",
+        "category": "Cold Drinks"
+      },
+      {
+        "name": "Turnip Juice",
+        "price": "100₺",
+        "desc": "",
+        "category": "Cold Drinks"
+      },
+      {
+        "name": "Churchill",
+        "price": "180₺",
+        "desc": "",
+        "category": "Cold Drinks"
+      },
+      {
+        "name": "Energy Drink",
+        "price": "270₺",
+        "desc": "",
+        "category": "Cold Drinks"
+      },
+      {
+        "name": "Non-Alcoholic Fruit Cocktail",
+        "price": "320₺",
+        "desc": "",
+        "category": "Cold Drinks"
+      },
+      {
+        "name": "Sex On The Beach",
+        "price": "450₺",
+        "desc": "Vodka, Archers, Tequila, Grenadine, Orange Juice",
+        "category": "Cocktails"
+      },
+      {
+        "name": "Margarita",
+        "price": "450₺",
+        "desc": "Tequila, Cointreau, Fresh Lime, Salt",
+        "category": "Cocktails"
+      },
+      {
+        "name": "Long Island Iced Tea",
+        "price": "550₺",
+        "desc": "Tequila, Gin, Rum, Vodka, Cointreau, Cola, Sweet and Sour",
+        "category": "Cocktails"
+      },
+      {
+        "name": "Gin Fizz",
+        "price": "450₺",
+        "desc": "Gordon's Gin, Soda, Fresh Lime, Powdered Sugar",
+        "category": "Cocktails"
+      },
+      {
+        "name": "Mojito",
+        "price": "500₺",
+        "desc": "Captain Morgan, Lime, Mint, Brown Sugar, Soda Served With Crushed Ice",
+        "category": "Cocktails"
+      },
+      {
+        "name": "Lynchburg Lemonade",
+        "price": "500₺",
+        "desc": "Jack Daniel's Whiskey, Cointreau, Sweet And Sour, Sprite Or Soda",
+        "category": "Cocktails"
+      },
+      {
+        "name": "Pina Colada",
+        "price": "450₺",
+        "desc": "Rum, Malibu, Coconut Syrup, Milk And Pineapple Juice",
+        "category": "Cocktails"
+      },
+      {
+        "name": "White Russian",
+        "price": "450₺",
+        "desc": "Vodka, Coffee Liqueur, Cream",
+        "category": "Cocktails"
+      },
+      {
+        "name": "Jagerbomb",
+        "price": "500₺",
+        "desc": "Jagermeister, Redbull",
+        "category": "Cocktails"
+      },
+      {
+        "name": "Tequila Sunrise",
+        "price": "450₺",
+        "desc": "Tequila, Cointreau, Grenadine, Orange Juice",
+        "category": "Cocktails"
+      },
+      {
+        "name": "Black Russian",
+        "price": "450₺",
+        "desc": "Vodka, Coffee Liqueur",
+        "category": "Cocktails"
+      },
+      {
+        "name": "Sorrel",
+        "price": "500₺",
+        "desc": "Gin, vodka, lemon juice, sugar",
+        "category": "Cocktails"
+      },
+      {
+        "name": "Martini",
+        "price": "450₺",
+        "desc": "Beefeater, vermouth",
+        "category": "Cocktails"
+      },
+      {
+        "name": "Apple Mojito",
+        "price": "450₺",
+        "desc": "Havana Club, brown sugar, lime, mint, green apple",
+        "category": "Cocktails"
+      },
+      {
+        "name": "Apple Martini",
+        "price": "450₺",
+        "desc": "Absolut, green apple, orange juice, apple juice",
+        "category": "Cocktails"
+      },
+      {
+        "name": "Strawberry Mojito",
+        "price": "450₺",
+        "desc": "Havana Club, mint, lime, brown sugar, Sprite, strawberry",
+        "category": "Cocktails"
+      },
+      {
+        "name": "Cinbull",
+        "price": "450₺",
+        "desc": "Beefeater, Red Bull Yellow, lime, mint",
+        "category": "Cocktails"
+      },
+      {
+        "name": "Negroni",
+        "price": "500₺",
+        "desc": "Beefeater, martini rosso, campari",
+        "category": "Cocktails"
+      },
+      {
+        "name": "Aperol Spritz",
+        "price": "500₺",
+        "desc": "Aperol, Prosecco, wine, soda",
+        "category": "Cocktails"
+      },
+      {
+        "name": "Whiskey Sour",
+        "price": "500₺",
+        "desc": "Bourbon whiskey, lemon juice, orange juice, sugar",
+        "category": "Cocktails"
+      },
+      {
+        "name": "Cuba Libre",
+        "price": "450₺",
+        "desc": "Havana Club, lime, Coca-Cola",
+        "category": "Cocktails"
+      },
+      {
+        "name": "Efes 50cl",
+        "price": "310₺",
+        "desc": "",
+        "category": "Beers / Draft Beers"
+      },
+      {
+        "name": "Efes 33cl",
+        "price": "290₺",
+        "desc": "",
+        "category": "Beers / Draft Beers"
+      },
+      {
+        "name": "Mexicano 50cl",
+        "price": "320₺",
+        "desc": "",
+        "category": "Beers / Draft Beers"
+      },
+      {
+        "name": "Mexicano 33cl",
+        "price": "300₺",
+        "desc": "",
+        "category": "Beers / Draft Beers"
+      },
+      {
+        "name": "Efes Bottle 50cl",
+        "price": "330₺",
+        "desc": "",
+        "category": "Beers / Bottled Beers"
+      },
+      {
+        "name": "Efes Malt 50cl",
+        "price": "330₺",
+        "desc": "",
+        "category": "Beers / Bottled Beers"
+      },
+      {
+        "name": "Efes Özel Seri 50cl",
+        "price": "330₺",
+        "desc": "",
+        "category": "Beers / Bottled Beers"
+      },
+      {
+        "name": "Bomonti Filtresiz 50cl",
+        "price": "330₺",
+        "desc": "",
+        "category": "Beers / Bottled Beers"
+      },
+      {
+        "name": "Glutensiz Efes 50cl",
+        "price": "350₺",
+        "desc": "",
+        "category": "Beers / Bottled Beers"
+      },
+      {
+        "name": "Beck's 50cl",
+        "price": "350₺",
+        "desc": "",
+        "category": "Beers / Bottled Beers"
+      },
+      {
+        "name": "Bud 50cl",
+        "price": "350₺",
+        "desc": "",
+        "category": "Beers / Bottled Beers"
+      },
+      {
+        "name": "Belfast 50cl",
+        "price": "330₺",
+        "desc": "",
+        "category": "Beers / Bottled Beers"
+      },
+      {
+        "name": "Miller 50cl",
+        "price": "350₺",
+        "desc": "",
+        "category": "Beers / Bottled Beers"
+      },
+      {
+        "name": "Corona 33cl",
+        "price": "330₺",
+        "desc": "",
+        "category": "Beers / Bottled Beers"
+      },
+      {
+        "name": "Amsterdam 50cl",
+        "price": "430₺",
+        "desc": "",
+        "category": "Beers / Bottled Beers"
+      },
+      {
+        "name": "Stella Artois 50cl",
+        "price": "330₺",
+        "desc": "",
+        "category": "Beers / Bottled Beers"
+      },
+      {
+        "name": "Beer Bucket Mix",
+        "price": "3100₺",
+        "desc": "Beer + Chips + Corn",
+        "category": "Beers / Bottled Beers"
+      },
+      {
+        "name": "Vodka",
+        "price": "180₺",
+        "desc": "",
+        "category": "Shots"
+      },
+      {
+        "name": "Gin",
+        "price": "180₺",
+        "desc": "",
+        "category": "Shots"
+      },
+      {
+        "name": "Tequila",
+        "price": "220₺",
+        "desc": "",
+        "category": "Shots"
+      },
+      {
+        "name": "Jägermeister",
+        "price": "240₺",
+        "desc": "",
+        "category": "Shots"
+      },
+      {
+        "name": "5+1 Tequila Shot",
+        "price": "1120₺",
+        "desc": "",
+        "category": "Shots"
+      },
+      {
+        "name": "5+1 Jagermeister",
+        "price": "1240₺",
+        "desc": "",
+        "category": "Shots"
+      },
+      {
+        "name": "Vodka & Juice",
+        "price": "420₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks"
+      },
+      {
+        "name": "Vodka Redbull",
+        "price": "450₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks"
+      },
+      {
+        "name": "Smirnoff Vodka Single",
+        "price": "420₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks"
+      },
+      {
+        "name": "Smirnoff Votka Double",
+        "price": "600₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks"
+      },
+      {
+        "name": "Smirnoff Vodka 35 CL",
+        "price": "2750₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks"
+      },
+      {
+        "name": "Smirnoff Vodka 50 CL",
+        "price": "3500₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks"
+      },
+      {
+        "name": "Smirnoff Vodka 70 CL",
+        "price": "5000₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks"
+      },
+      {
+        "name": "Absolut Vodka Glass",
+        "price": "450₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks"
+      },
+      {
+        "name": "Absolut Votka Double",
+        "price": "650₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks"
+      },
+      {
+        "name": "Absolut Vodka 35 CL",
+        "price": "2900₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks"
+      },
+      {
+        "name": "Absolut Vodka 50 CL",
+        "price": "3700₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks"
+      },
+      {
+        "name": "Absolut Vodka 70 CL",
+        "price": "5500₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks"
+      },
+      {
+        "name": "Gordon’s Cin Gin Glass",
+        "price": "420₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks"
+      },
+      {
+        "name": "Gordon's Gin Double",
+        "price": "600₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks"
+      },
+      {
+        "name": "Gordon’s Cin Gin 35 CL",
+        "price": "2750₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks"
+      },
+      {
+        "name": "Gordon’s Cin Gin 50 CL",
+        "price": "3500₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks"
+      },
+      {
+        "name": "Gordon’s Cin Gin 70 CL",
+        "price": "5000₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks"
+      },
+      {
+        "name": "Jagermeister Redbull Single",
+        "price": "550₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks"
+      },
+      {
+        "name": "Jagermeister Redbull Double",
+        "price": "750₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks"
+      },
+      {
+        "name": "Baileys",
+        "price": "420₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks"
+      },
+      {
+        "name": "Malibu",
+        "price": "420₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks"
+      },
+      {
+        "name": "Bacardi",
+        "price": "500₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks"
+      },
+      {
+        "name": "Red Label Single",
+        "price": "450₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks / Whiskey"
+      },
+      {
+        "name": "Red Label Double",
+        "price": "650₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks / Whiskey"
+      },
+      {
+        "name": "Red Label 35 CL",
+        "price": "2900₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks / Whiskey"
+      },
+      {
+        "name": "Red Label 50 CL",
+        "price": "3800₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks / Whiskey"
+      },
+      {
+        "name": "Red Label 70 CL",
+        "price": "5250₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks / Whiskey"
+      },
+      {
+        "name": "Black Label Single",
+        "price": "470₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks / Whiskey"
+      },
+      {
+        "name": "Black Label Double",
+        "price": "680₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks / Whiskey"
+      },
+      {
+        "name": "Black Label 35 CL",
+        "price": "3000₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks / Whiskey"
+      },
+      {
+        "name": "Black Label 50 CL",
+        "price": "3900₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks / Whiskey"
+      },
+      {
+        "name": "Black Label 70 CL",
+        "price": "5500₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks / Whiskey"
+      },
+      {
+        "name": "Chivas Regal Single",
+        "price": "500₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks / Whiskey"
+      },
+      {
+        "name": "Chivas Regal Double",
+        "price": "700₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks / Whiskey"
+      },
+      {
+        "name": "Chivas Regal 35 CL",
+        "price": "3250₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks / Whiskey"
+      },
+      {
+        "name": "Chivas Regal 50 CL",
+        "price": "4200₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks / Whiskey"
+      },
+      {
+        "name": "Chivas Regal 70 CL",
+        "price": "6000₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks / Whiskey"
+      },
+      {
+        "name": "Jack Daniel’s Single",
+        "price": "500₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks / Whiskey"
+      },
+      {
+        "name": "Jack Daniel's Double",
+        "price": "700₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks / Whiskey"
+      },
+      {
+        "name": "Jack Daniel’s 35 CL",
+        "price": "3250₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks / Whiskey"
+      },
+      {
+        "name": "Jack Daniel’s 50 CL",
+        "price": "4200₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks / Whiskey"
+      },
+      {
+        "name": "Jack Daniels 70 CL",
+        "price": "6000₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks / Whiskey"
+      },
+      {
+        "name": "Yeni Rakı Single",
+        "price": "300₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks / Rakı"
+      },
+      {
+        "name": "Yeni Rakı Double",
+        "price": "550₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks / Rakı"
+      },
+      {
+        "name": "Yeni Rakı 35 CL",
+        "price": "2200₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks / Rakı"
+      },
+      {
+        "name": "Yeni Rakı 50 CL",
+        "price": "3000₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks / Rakı"
+      },
+      {
+        "name": "Yeni Rakı 70 CL",
+        "price": "4200₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks / Rakı"
+      },
+      {
+        "name": "Yeni Rakı Yeni Seri Single",
+        "price": "300₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks / Rakı"
+      },
+      {
+        "name": "Yeni Rakı Yeni Seri Double",
+        "price": "550₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks / Rakı"
+      },
+      {
+        "name": "Yeni Rakı Yeni Seri 35cl",
+        "price": "2200₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks / Rakı"
+      },
+      {
+        "name": "Yeni Rakı Yeni Seri 50cl",
+        "price": "3000₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks / Rakı"
+      },
+      {
+        "name": "Yeni Rakı Yeni Seri 70cl",
+        "price": "4200₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks / Rakı"
+      },
+      {
+        "name": "Tekirdağ Altın Serisi Single",
+        "price": "330₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks / Rakı"
+      },
+      {
+        "name": "Tekirdağ Altın Serisi Double",
+        "price": "600₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks / Rakı"
+      },
+      {
+        "name": "Tekirdağ Altın Serisi 35cl",
+        "price": "2400₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks / Rakı"
+      },
+      {
+        "name": "Tekirdağ Altın Serisi 50cl",
+        "price": "3200₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks / Rakı"
+      },
+      {
+        "name": "Tekirdağ Altın Serisi 70cl",
+        "price": "4400₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks / Rakı"
+      },
+      {
+        "name": "Red Wine Glass",
+        "price": "420₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks / Wines"
+      },
+      {
+        "name": "Red Wine Bottle",
+        "price": "2000₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks / Wines"
+      },
+      {
+        "name": "White Wine Glass",
+        "price": "420₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks / Wines"
+      },
+      {
+        "name": "White Wine Bottle",
+        "price": "2000₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks / Wines"
+      },
+      {
+        "name": "Rose Wine Glass",
+        "price": "450₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks / Wines"
+      },
+      {
+        "name": "Rose Wine Bottle",
+        "price": "2200₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks / Wines"
+      },
+      {
+        "name": "Blush Wine Glass",
+        "price": "450₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks / Wines"
+      },
+      {
+        "name": "Blush Wine Bottle",
+        "price": "2200₺",
+        "desc": "",
+        "category": "Local & Foreign Drinks / Wines"
+      },
+      {
+        "name": "Mixed Nuts",
+        "price": "180₺",
+        "desc": "",
+        "category": "Nuts"
+      },
+      {
+        "name": "Salted Peanuts",
+        "price": "150₺",
+        "desc": "",
+        "category": "Nuts"
+      },
+      {
+        "name": "Chips",
+        "price": "120₺",
+        "desc": "",
+        "category": "Nuts"
+      },
+      {
+        "name": "Popcorn",
+        "price": "120₺",
+        "desc": "",
+        "category": "Nuts"
+      },
+      {
+        "name": "Chocolate",
+        "price": "200₺",
+        "desc": "",
+        "category": "Nuts"
+      },
+      {
+        "name": "Pistachio",
+        "price": "350₺",
+        "desc": "",
+        "category": "Nuts"
+      },
+      {
+        "name": "White Cheese",
+        "price": "250₺",
+        "desc": "",
+        "category": "Nuts"
+      },
+      {
+        "name": "Pickles",
+        "price": "150₺",
+        "desc": "",
+        "category": "Nuts"
+      },
+      {
+        "name": "Cold vegetable platter",
+        "price": "150₺",
+        "desc": "",
+        "category": "Nuts"
+      },
+      {
+        "name": "Fruit Platter",
+        "price": "400₺",
+        "desc": "",
+        "category": "Nuts"
+      }
+    ]
   }
 };
