@@ -9093,5 +9093,121 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
         "category": ""
       }
     ]
+  },
+  "7194": {
+    "name": "Deep Blue Fish & Chips Beşiktaş",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/ifct/deep-blue-fish-and-chips-ifct",
+    "sourceName": "Yemeksepeti / Deep Blue Fish & Chips Beşiktaş",
+    "verifiedAt": "2026-08-23",
+    "items": [
+      {
+        "name": "Kalamar Sandviç",
+        "price": "460 TL",
+        "desc": "Tarator sos, soğan",
+        "category": ""
+      },
+      {
+        "name": "Çıtır Mezgit Sandviç",
+        "price": "460 TL",
+        "desc": "Soğan, yeşillik, özel sos",
+        "category": ""
+      },
+      {
+        "name": "Kari̇des Kızartması",
+        "price": "570 TL",
+        "desc": "Tek kişilik",
+        "category": ""
+      },
+      {
+        "name": "Kalamar Tava",
+        "price": "460 TL",
+        "desc": "Tarator sos ile",
+        "category": ""
+      },
+      {
+        "name": "Çıtır Mezgit",
+        "price": "595 TL",
+        "desc": "Patates kızartması ile",
+        "category": ""
+      },
+      {
+        "name": "Çıtır Levrek Fileto",
+        "price": "695 TL",
+        "desc": "Patates kızartması ile",
+        "category": ""
+      },
+      {
+        "name": "Patates Kızartması (150 gr.)",
+        "price": "195 TL",
+        "desc": "Özel sos ile",
+        "category": ""
+      },
+      {
+        "name": "Patates Kızartması (200 gr.)",
+        "price": "230 TL",
+        "desc": "Özel sos ile",
+        "category": ""
+      },
+      {
+        "name": "Fuse Tea Şeftali (33 cl.)",
+        "price": "95 TL",
+        "desc": "Kutu içecek",
+        "category": ""
+      },
+      {
+        "name": "Coca-Cola (33 cl.)",
+        "price": "95 TL",
+        "desc": "Kutu içecek",
+        "category": ""
+      },
+      {
+        "name": "Su (50 cl.)",
+        "price": "45 TL",
+        "desc": "Pet şişe",
+        "category": ""
+      },
+      {
+        "name": "Soda (20 cl.)",
+        "price": "60 TL",
+        "desc": "Cam şişe",
+        "category": ""
+      },
+      {
+        "name": "Ketçap",
+        "price": "60 TL",
+        "desc": "Paketli ürün",
+        "category": ""
+      },
+      {
+        "name": "Bezelye Püresi",
+        "price": "70 TL",
+        "desc": "Paketli ürün",
+        "category": ""
+      },
+      {
+        "name": "Pancar Sos",
+        "price": "60 TL",
+        "desc": "Paketli ürün",
+        "category": ""
+      },
+      {
+        "name": "Tarator Sos",
+        "price": "60 TL",
+        "desc": "Paketli ürün",
+        "category": ""
+      },
+      {
+        "name": "Rokalina",
+        "price": "60 TL",
+        "desc": "Paketli ürün",
+        "category": ""
+      },
+      {
+        "name": "Poşet",
+        "price": "1 TL",
+        "desc": "It's compulsory to purchase plastic bags for fixed price 1 TL according to the amendments on Environment Law by the Ministry of Environment, Urbanization and Climate Change. If you require a plastic bag, you should add it to your basket. The amount will be charged to you for each plastic bag.",
+        "category": ""
+      }
+    ]
   }
 };
