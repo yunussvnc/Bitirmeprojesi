@@ -8237,5 +8237,529 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
         "category": "Carrier bag"
       }
     ]
+  },
+  "7211": {
+    "name": "The Coffee Factory Beylikdüzü Makyol",
+    "sourceUrl": "https://thecoffeefactory.com/menu",
+    "sourceName": "The Coffee Factory resmi menüsü",
+    "verifiedAt": "2026-08-23",
+    "items": [
+      {
+        "name": "BERRY LATTE",
+        "price": "",
+        "desc": "Çilek aroması, espresso ve süt ile hazırlanır; tatlı ve meyvemsi bir içim sunar.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "CAFFE AMERICANO",
+        "price": "",
+        "desc": "Yoğun espresso, sıcak suyla dengelenerek daha uzun içime uygun, hafif ama aromatik bir yapı kazanır. Lezzet profilini korurken keyfi katlar.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "CAFFE LATTE",
+        "price": "",
+        "desc": "Espresso ve süt karışımının, üzerindeki ipeksi süt kremasıyla dengelendiği zamansız bir klasik.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "CAFFE MOCHA",
+        "price": "",
+        "desc": "Klasik çikolata aroması, espresso ve süt ile hazırlanır; çikolatamsı notalarla zenginleştirilir Krema ile de tercih edilebilir.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "CAPPUCCINO",
+        "price": "",
+        "desc": "Sıcak süt,süt köpüğü ve espresso birleşimi, 2–2.5 cm süt köpüğüyle tamamlanarak sunulur.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "CARAMEL MACCHIATO",
+        "price": "",
+        "desc": "Vanilya aroması, süt ve espresso buluşur; üzerine karamel aroması ile sunulur.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "COCONUT MOCHA",
+        "price": "",
+        "desc": "Hindistan cevizi aroması, hindistan cevizi kırıntıları, süt ve espressoyla hazırlanan, tropikal dokunuşlu bir lezzet.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "CORTADO",
+        "price": "",
+        "desc": "Yoğun espresso, sıcak sütle eşit ölçüde buluşur; güçlü ama yumuşak içimli bir denge sunar.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "ESPRESSO",
+        "price": "",
+        "desc": "Yoğun gövdeli yapısı ve dengeli asiditesiyle, sade kahve deneyiminin en rafine hali.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "ESPRESSO MACCHIATO",
+        "price": "",
+        "desc": "Espresso’nun üzerine eklenen süt kremasıyla dengelenmiş yoğun bir lezzet.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "FLAT WHITE",
+        "price": "",
+        "desc": "Yoğun double shot espresso, ipeksi mikro süt köpüğüyle dengelenir.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "MINT MOCHA",
+        "price": "",
+        "desc": "Nane aroması ve çikolata sosuyla hazırlanan mocha, ipeksi kremayla servis edilen ferahlatıcı ve tatlı bir lezzet sunar.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "SALTED CARAMEL LATTE",
+        "price": "",
+        "desc": "Tuzlu karamel aromasının süt ve espressoyla dengelendiği, tatlı-tuzlu bir içecek.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "SPANISH LATTE",
+        "price": "",
+        "desc": "Zengin Spanish sos, espresso ve süt ile hazırlanır; tatlı ve yoğun aromasıyla öne çıkar.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "TOFFEE NUT LATTE",
+        "price": "",
+        "desc": "Fındık ve karamel aromalarıyla zenginleşen espresso ve süt karışımı; yumuşak ve aromatik bir seçenek.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "WHITE CHOCOLATE MOCHA",
+        "price": "",
+        "desc": "Beyaz çikolata aroması, espresso ve süt ile hazırlanır; kremsi dokusu ve tatlı karakteriyle stilize bir tercih sunar.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "ICED BERRY LATTE",
+        "price": "",
+        "desc": "Çilek aroması, espresso ve süt ile hazırlanan meyveli latte; tatlı ve aromatik bir alternatif arayanlara özel.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "ICED CAFFE AMERICANO",
+        "price": "",
+        "desc": "Espresso ve soğuk suyun buzla harmanlandığı, sade ve güçlü bir lezzet.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "ICED CAFFE LATTE",
+        "price": "",
+        "desc": "Espresso ve sütün buzla bir araya geldiği klasik ama vazgeçilmez bir soğuk kahve alternatifi.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "ICED CARAMEL MACCHIATO",
+        "price": "",
+        "desc": "Vanilya ve karamel aromalarının süt ve espressoyla buluştuğu, klasik bir yaz favorisi.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "ICED FILTER COFFEE",
+        "price": "",
+        "desc": "Filtre kahvenin buzla buluştuğu sade ve ferahlatıcı bir lezzet.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "ICED MINT MOCHA",
+        "price": "",
+        "desc": "Çikolata ve nane aromalarının espresso ve sütle birleştiği serinletici ve enerjik bir seçenek.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "ICED MOCHA",
+        "price": "",
+        "desc": "Yoğun çikolata sosunun espressoyla buluştuğu bu klasik tat, buzla serinlerken sütle yumuşar; tatlı ve enerjik bir lezzet arayanların favorisi.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "ICED SALTED CARAMEL LATTE",
+        "price": "",
+        "desc": "Tuzlu karamel sosu ve espresso ile hazırlanan, tatlı-tuzlu uyumunu sütle dengeleyen özgün bir latte alternatifi.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "ICED SPANISH LATTE",
+        "price": "",
+        "desc": "Spanish sos, espresso ve sütün buzla birleşimiyle ortaya çıkan tatlı, zengin ve yoğun aromalı bir lezzet.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "ICED TOFFEE NUT LATTE",
+        "price": "",
+        "desc": "Yumuşak içimli süt, güçlü espresso, karamel ve fındık aromasıyla lezzet uyumu… Soğuk kahvenin sofistike haliyle tanışın.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "ICED WHITE MOCHA",
+        "price": "",
+        "desc": "Beyaz çikolata sosu ve espresso ile hazırlanan, sütle yumuşatılmış tatlı ve dengeli bir lezzet.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "ACAI BERRY REFRESHER",
+        "price": "",
+        "desc": "Yoğun kırmızı meyve püresi ve sodanın buluştuğu, kuru çileklerle süslenen meyve aromalı serinletici bir alternatif.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "LIME REFRESHER",
+        "price": "",
+        "desc": "Soda ve lime aromasının canlı uyumuyla hazırlanan, lime kurusu ile tamamlanan serinletici bir seçenek.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "MANGO REFRESHER",
+        "price": "",
+        "desc": "Tropikal mango püresi ve sodanın buluştuğu, hafif limonata ile dengelenen ferahlatıcı bir yaz içeceği.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "VERY BERRY REFRESHER",
+        "price": "",
+        "desc": "Böğürtlen ve frambuaz püresinin soda ile birleştiği, kuru meyve taneleriyle zenginleştirilmiş meyve dolu ferahlatıcı bir içecek.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "CARAMEL WAFFLE CREAM",
+        "price": "",
+        "desc": "Süt, karamel ve waffle uyumunun damakta bıraktığı zengin tat, yumuşacık kremayla birleşerek her yudumda tatlı bir kaçamağa dönüşüyor.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "CHOCOLATE CREAM",
+        "price": "",
+        "desc": "Yoğun çikolata sosu ve süt ile hazırlanan, üzerinde çikolata sos ve krema ile sunulan serinletici bir lezzet şöleni.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "COCONUT CREAM",
+        "price": "",
+        "desc": "Hindistan cevizi aroması ve sütle hazırlanır, hindistan cevizi tozu ve krema ile tamamlanarak dengeli bir lezzet sunar.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "NUT CREAM",
+        "price": "",
+        "desc": "Fındık kremasının aromatik yoğunluğu, süt, krema ve fındık parçalarıyla uyum içinde; yeni sezona özel, rafine ve dengeli bir lezzet.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "PISTACHIO CREAM",
+        "price": "",
+        "desc": "Yüksek aromasıyla öne çıkan yeni lezzet şöleni, Antep fıstığı kreması, süt, krema ve fıstık sosunun dengeli birleşimiyle hazırlanır.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "STRAWBERRY CHOCOLATE CREAM",
+        "price": "",
+        "desc": "Ruby çikolatasının doğal meyvemsi aroması, çilek püresiyle birleşir. Krema ile zenginleşen bu içecek, zarif ve tatlı bir serinlik sunar.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "MANGO FROZEN",
+        "price": "",
+        "desc": "Yoğun mango püresiyle hazırlanan, meyveli ve serinletici bir yaz klasiği. Hafif tatlı dokusuyla öne çıkar.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "MANGO SMOOTHIE",
+        "price": "",
+        "desc": "Mango püresinden gelen tropikal esintili bu lezzet, yağsız sütün etkisiyle için non-fat olarak öne çıkar.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "RED BERRY FROZEN",
+        "price": "",
+        "desc": "Kırmızı orman meyvelerinden elde edilen püreyle hazırlanan Red Berry Frozen, ekşi-tatlı dengesi ve serinletici yapısıyla yazın favori lezzeti olmaya aday.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "RED BERRY SMOOTHIE",
+        "price": "",
+        "desc": "Kırmızı meyve püresi ve yağsız sütle hazırlanır. Hafif yapısı sayesinde non-fat bir alternatif sunan bu smoothie, meyvenin doğal lezzetini ferahlatıcı bir içimle buluşturur.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "STRAWBERRY FROZEN",
+        "price": "",
+        "desc": "Doğal çilek püresiyle hazırlanan bu içecek, meyvenin ferahlatıcı tatlılığıyla öne çıkar. Hafif yapısının yanında serinletici bir içim sunar.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "STRAWBERRY SMOOTHIE",
+        "price": "",
+        "desc": "Doğal çilek püresiyle hazırlanan bu smoothie, yağsız süt içeriği sayesinde non-fat bir alternatif. Ferahlatıcı yapısı ve hafif dokusuyla günün her anında keyifle tüketilebilir.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "HİBİSKUS",
+        "price": "",
+        "desc": "Hibiskus çiçeğinin kurutulmuş taç yapraklarından demlenir. Rubin kırmızısı rengi, canlandırıcı ekşiliği ve floral asiditesiyle öne çıkar.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "IHLAMUR",
+        "price": "",
+        "desc": "Çiçekli ıhlamur yaprağının sade ve nostaljik aroması.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "KIŞ ÇAYI",
+        "price": "",
+        "desc": "Doğanın şifalı notalarından oluşan çok katmanlı bir karışım: zencefil, adaçayı, kuşburnu, ıhlamur ve narenciye kabuklarıyla kışa özel derin ve dengeli lezzet şöleni.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "NANE-LİMON",
+        "price": "",
+        "desc": "Taze limon kabuğunun narenciye tonları, yaprak nanenin ferahlatıcı etkisiyle buluşuyor.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "ORMAN MEYVELERİ",
+        "price": "",
+        "desc": "Dağ çileği, böğürtlen, kuşburnu, hibisküs, karadut, limon ve portakal kabuklarıyla hazırlanan meyveli bir senfoni. Tatlı ve ekşi notalar arasında bir lezzet şöleni.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "YEŞİL ÇAY",
+        "price": "",
+        "desc": "Saf yeşil çay yapraklarının nazikçe demlenmesiyle hazırlanır. Yumuşak bitkisel aroması ve açık sarı tonuyla bilinir.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "BRAZILIAN LEMONADE",
+        "price": "",
+        "desc": "Limonata, spanish sos ve hindistan cevizi aromasının özgün uyumuyla hazırlanan bu tropik tat, yaz menümüzün en yeni ve en iddialı lezzetlerinden biri.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "LEMONADE (CLASSIC)",
+        "price": "",
+        "desc": "Limon suyu ile hazırlanan klasik lezzet; ferahlatıcı, dengeli ve doğal bir serinlik sunar.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "MANGO LEMONADE",
+        "price": "",
+        "desc": "Limonata ve mango püresinin tropik uyumu, yaz aylarında enerji veren canlı ve meyvemsi bir tat sunar.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "STRAWBERRY LEMONADE",
+        "price": "",
+        "desc": "Çilek püresiyle zenginleştirilmiş limonata, hafif ekşi ve meyvemsi notalarla canlandırıcı bir seçenek.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "BLACK TEA",
+        "price": "",
+        "desc": "Geleneksel yöntemle demlenen, yoğun aromalı ve berrak içimli siyah çay. Her yudumunda dinginlik, her fincanda tanıdık bir sıcaklık.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "CHAI TEA LATTE",
+        "price": "",
+        "desc": "Tarçın, zencefil ve karanfilin öne çıktığı baharatlı siyah çay bazı, sıcak sütle birleşerek yumuşak ama belirgin bir lezzet profili sunar.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "HOT CHOCOLATE",
+        "price": "",
+        "desc": "Yoğun çikolata sosu, sıcak sütle birleşerek zengin bir lezzet sunar. Krema ile de tercih edilebilir.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "ICED CHAI TEA LATTE",
+        "price": "",
+        "desc": "Baharatlı chai tea karışımı ve sütle hazırlanan, serinletici egzotik bir lezzet.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "TURKISH COFFEE",
+        "price": "",
+        "desc": "İnce çekilmiş Türk kahvesi ile geleneksel yöntemle pişirilerek hazırlanır.",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "COOKIE",
+        "price": "",
+        "desc": "Klasik cookie hamuruyla hazırlanan bu lezzet, çikolata parçacıklarıyla zenginleşerek her lokmada dengeli bir tatlı keyfi sunuyor.",
+        "category": "Atıştırmalıklar"
+      },
+      {
+        "name": "DEREOTLU PEYNİRLİ POĞAÇA",
+        "price": "",
+        "desc": "Dereotu ve beyaz peynirle hazırlanan iç harcı, yumuşak dokulu hamurla birleşir; üzerindeki haşhaş sayesinde aromatik bir dokunuş kazanır.",
+        "category": "Atıştırmalıklar"
+      },
+      {
+        "name": "KAKAOLU KEK",
+        "price": "",
+        "desc": "Kakaolu ve sade kek karışımıyla hazırlanan bu nostaljik lezzet, her lokmada ev yapımı hissi uyandırır.",
+        "category": "Atıştırmalıklar"
+      },
+      {
+        "name": "LİMONLU KEK",
+        "price": "",
+        "desc": "Ferahlık veren limon aroması ve mavi haşhaşla zenginleştirilmiş, yumuşak dokulu enfes lezzet.",
+        "category": "Atıştırmalıklar"
+      },
+      {
+        "name": "PATATESLİ ÖRGÜLÜ AÇMA",
+        "price": "",
+        "desc": "Patates ve beyaz peynirle hazırlanan iç harç, yumuşak açma hamuruyla birleşir; üzerine serpiştirilen haşhaş tohumu ile tat dengesi sağlanır.",
+        "category": "Atıştırmalıklar"
+      },
+      {
+        "name": "SİYEZ UNLU PEYNİRLİ POĞAÇA",
+        "price": "",
+        "desc": "Yüksek lif oranına sahip siyez unuyla hazırlanan bu poğaça, beyaz peynir dolgusu sayesinde dengeli bir kahvaltı alternatifidir.",
+        "category": "Atıştırmalıklar"
+      },
+      {
+        "name": "TEREYAĞLI KRUVASAN",
+        "price": "",
+        "desc": "Tereyağının verdiği aroma ve kat kat dokusuyla öne çıkan bu kruvasan, sadeliğin en lezzetli hali.",
+        "category": "Atıştırmalıklar"
+      },
+      {
+        "name": "VİŞNELİ MUFFIN",
+        "price": "",
+        "desc": "Vişne ile hazırlanan bu muffin, meyveli ve hafif kıtır dokusuyla dengeli bir tatlı alternatifi sunar.",
+        "category": "Atıştırmalıklar"
+      },
+      {
+        "name": "ZEYTİNLİ AÇMA",
+        "price": "",
+        "desc": "Zeytin dolgusu ve üzerindeki haşhaş tohumu ile zenginleşen bu klasik poğaça, dışı hafif kıtır, içi ise yumuşak yapısıyla dengeli bir lezzet deneyimi sunar.",
+        "category": "Atıştırmalıklar"
+      },
+      {
+        "name": "ZEYTİNLİ POĞAÇA",
+        "price": "",
+        "desc": "Zeytin dolgusu ve üzerindeki haşhaş tohumu ile zenginleşen bu klasik poğaça, dışı hafif kıtır, içi ise yumuşak yapısıyla dengeli bir lezzet deneyimi sunar.",
+        "category": "Atıştırmalıklar"
+      },
+      {
+        "name": "ÇİKOLATALI COOKIE",
+        "price": "",
+        "desc": "Dışı kıtır, içi yumuşak çikolata dolgulu bu cookie; bol çikolata parçacıklarıyla tatlı krizlerine enfes bir çözüm sunar.",
+        "category": "Atıştırmalıklar"
+      },
+      {
+        "name": "ÇİKOLATALI MUFFIN",
+        "price": "",
+        "desc": "İçindeki çikolata parçacıklarıyla zenginleştirilen bu muffin, yumuşak yapısı ve dolu dolu aromasıyla tatlı molalarının favorisidir.",
+        "category": "Atıştırmalıklar"
+      },
+      {
+        "name": "AY ÇEKİRDEKLİ BEYAZ PEYNİRLİ SANDVİÇ",
+        "price": "",
+        "desc": "Ay çekirdekli ciabatta ekmeğinde sunulan bu beyaz peynirli sandviç, zeytin ve biberle zenginleştirilir, pesto sosla lezzeti tamamlanır.",
+        "category": "Sandviçler"
+      },
+      {
+        "name": "CHEDDARLI KAŞARLI KRUVASAN",
+        "price": "",
+        "desc": "Tereyağlı kruvasan arasında eriyen kaşar ve cheddar peyniriyle hazırlanan bu lezzet rafine bir sandviç deneyimi sunar.",
+        "category": "Sandviçler"
+      },
+      {
+        "name": "DANA JAMBON ARTİZAN SANDVİÇ",
+        "price": "",
+        "desc": "Sade artizan sandviç ekmeğiyle hazırlanan bu sandviçte, dana jambon, mozzarella ve cheddar peyniri ile buluşur.",
+        "category": "Sandviçler"
+      },
+      {
+        "name": "HAŞHAŞLI DÖRT PEYNİRLİ SANDVİÇ",
+        "price": "",
+        "desc": "Haşhaşlı ciabatta ekmeği arasında dört çeşit peynirin dengeli birleşimiyle hazırlanan bu sandviç, doyurucu ve yumuşak bir tat profili sunar.",
+        "category": "Sandviçler"
+      },
+      {
+        "name": "HİNDİ JAMBONLU SANDVİÇ",
+        "price": "",
+        "desc": "Hindi jambonun yumuşaklığı, cheddar peyniriyle buluşuyor; sotelenmiş kapya biber ve mantar ile lezzeti zenginleşen bu sandviç, çavdarlı baget ekmeğiyle tamamlanıyor.",
+        "category": "Sandviçler"
+      },
+      {
+        "name": "JAMBONLU PEYNİRLİ KRUVASAN",
+        "price": "",
+        "desc": "Kruvasanın arasına jambon, kaşar ve cheddar peyniri eklenerek hazırlanan bu sandviç; sıcak ve doyurucu bir lezzet alternatifi sunar.",
+        "category": "Sandviçler"
+      },
+      {
+        "name": "TAHILLI ÜÇ PEYNİRLİ TOST",
+        "price": "",
+        "desc": "Tahıllı ekmek arasında beyaz peynir, kaşar ve cheddarın uyumuyla hazırlanan bu tost, lezzetini ceviz ve domates sosun hafif dokunuşuyla tamamlar.",
+        "category": "Sandviçler"
+      },
+      {
+        "name": "İTALYAN SANDVİÇ",
+        "price": "",
+        "desc": "Susamlı ciabatta ekmeği arasında kaşar, cheddar, parmesan peynirleriyle birlikte dana salam ve sucuk; pesto ve İtalyan sosla lezzetini buluyor. Her lokmada damağa dolgun ve dengeli bir tat bırakıyor.",
+        "category": "Sandviçler"
+      },
+      {
+        "name": "BEYAZ ÇİKOLATALI BROWNIE",
+        "price": "",
+        "desc": "Beyaz çikolatanın yoğunluğunu, kakao ve kremanın yumuşak dokusuyla dengeleyen bu tatlı; çikolata tutkunları için unutulmaz bir lezzet sunar.",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "ANTEP FISTIKLI PASTA",
+        "price": "",
+        "desc": "Antep fıstığı kreması, bitter çikolata ve kremanın katmanlı uyumu. Her lokmada yoğun, dokulu ve özel bir lezzet şöleni sunar.",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "BELÇİKA ÇİKOLATALI PASTA",
+        "price": "",
+        "desc": "Yoğun Belçika çikolatası, krema ve kakao ile hazırlanan bu yumuşak dokulu pasta, krem şantiyle tamamlanarak rafine bir tatlı deneyimi sunar.",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "FRAMBUAZLI CHEESECAKE",
+        "price": "",
+        "desc": "Yumuşak peynir dolgusu, frambuaz sosu ve bisküvi tabanıyla hazırlanan bu cheesecake, tatlı ve meyvemsi lezzetleri dengeli şekilde bir araya getirir.",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "KREMALI HAVUÇLU PASTA",
+        "price": "",
+        "desc": "Baharatlarla zenginleştirilmiş cevizli havuçlu kek, yumuşak dokusu ve üzerindeki krema ile dengeli bir lezzet sunar.",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "MOZAİK PASTA",
+        "price": "",
+        "desc": "Bisküvi, süt ve bitter çikolatanın buluştuğu klasik mozaik pasta; yoğun lezzeti ve nostaljik dokusuyla tatlı molalarının vazgeçilmezi.",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "SAN SEBASTİAN CHEESECAKE",
+        "price": "",
+        "desc": "Karamelize üst katmanı ve yoğun iç dokusuyla öne çıkan San Sebastian Cheesecake, yumuşak yapısıyla her lokmada dengeli bir tatlı keyfi sunar.",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "TİRAMİSU",
+        "price": "",
+        "desc": "Krema, kahve ve kakao ile hazırlanan bu klasik lezzet; yumuşak dokusu ve dengeli aromasıyla tatlı molalarına eşlik eder.",
+        "category": "Tatlılar"
+      }
+    ]
   }
 };
