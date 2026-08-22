@@ -12933,5 +12933,373 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
         "category": "Milkshakes"
       }
     ]
+  },
+  "7209": {
+    "name": "Beşiktaş Dondurmacısı",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/imis/besiktas-dondurmacisi-imis",
+    "sourceName": "Yemeksepeti Beşiktaş Dondurmacısı canlı menüsü (Sinanpaşa–Hattat Tahsin No:39/A şube doğrulaması)",
+    "verifiedAt": "2026-08-23",
+    "items": [
+      {
+        "name": "Muzlu Çilekli Çikolatalı Bowl Waffle",
+        "price": "445 TL",
+        "desc": "Çıtır Belçika waffle üzerine; günlük taze çilek, muz, sütlü & bitter çikolata",
+        "category": "Belçika Waffles"
+      },
+      {
+        "name": "Kremalı Belçika Waffle",
+        "price": "195 TL",
+        "desc": "Orjinal Belçika waffle üzerine; eser kıvamda pudra şekeri, krem şanti",
+        "category": "Belçika Waffles"
+      },
+      {
+        "name": "Dondurmalı Karamel Soslu Waffle",
+        "price": "325 TL",
+        "desc": "Çıtır Belçika waffle üzerine; 1 top dondurma, sos",
+        "category": "Belçika Waffles"
+      },
+      {
+        "name": "Çilekli Çikolatalı Waffle",
+        "price": "355 TL",
+        "desc": "Belçika waffle üzerine; sütlü çikolata veya bitter çikolata, çilek",
+        "category": "Belçika Waffles"
+      },
+      {
+        "name": "Mualla (Muzlu Çikolatalı Waffle)",
+        "price": "455 TL",
+        "desc": "Çıtır Belçika waffle, muz, sütlü çikolata veya bitter çikolata üzerine; beyaz çikolata, fıstıklı çikolata sosu, kızartılmış kırık fıstık parçaları",
+        "category": "Belçika Waffles"
+      },
+      {
+        "name": "Muzlu Çilekli Çikolatalı Waffle",
+        "price": "445 TL",
+        "desc": "Çıtır Belçika waffle üzerine; isteğe göre sütlü veya bitter çikolata, muz, çilek",
+        "category": "Belçika Waffles"
+      },
+      {
+        "name": "Çikolatalı Belçika Waffle",
+        "price": "250 TL",
+        "desc": "Çıtır Belçika waffle üzerine; sütlü veya bitter çikolata",
+        "category": "Belçika Waffles"
+      },
+      {
+        "name": "Meyveli & Dondurmalı Waffle",
+        "price": "575 TL",
+        "desc": "Çıtır Belçika waffle üzerine; sütlü veya bitter çikolata, çilek, muz, seçeceğiniz 1 top dondurma, seçeceğiniz çikolata sosu",
+        "category": "Belçika Waffles"
+      },
+      {
+        "name": "2 Top Dondurmalı Meyveli Waffle",
+        "price": "655 TL",
+        "desc": "Çıtır Belçika waffle üzerine; sütlü veya bitter çikolata, çilek, muz, seçeceğiniz 2 top dondurma, isteğe göre çikolata sosu ile",
+        "category": "Belçika Waffles"
+      },
+      {
+        "name": "Bardakta Dondurmalı Meyveli Waffle",
+        "price": "495 TL",
+        "desc": "Waffle, sütlü veya bitter çikolata, muz, çilek, seçeceğiniz 1 top dondurma",
+        "category": "Belçika Waffles"
+      },
+      {
+        "name": "Bardakta Çikolatalı Meyve",
+        "price": "475 TL",
+        "desc": "Günlük taze çilek, muz, sütlü veya bitter çikolata, Lotus bisküvisi",
+        "category": "Belçika Waffles"
+      },
+      {
+        "name": "Bardakta Meyveli Waffle",
+        "price": "425 TL",
+        "desc": "Waffle, muz, çilek, sütlü veya bitter çikolata",
+        "category": "Belçika Waffles"
+      },
+      {
+        "name": "Meyveli & 2 Çikolatalı Bowl Waffle",
+        "price": "455 TL",
+        "desc": "Çıtır Belçika waffle üzerine; günlük taze çilek, muz, seçeceğiniz 2 çikolata sosu",
+        "category": "Belçika Waffles"
+      },
+      {
+        "name": "Meyveli & Dondurmalı Bowl Waffle",
+        "price": "525 TL",
+        "desc": "Çıtır Belçika waffle üzerine; günlük taze çilek, muz, seçeceğiniz çikolatalar, 1 top dondurma",
+        "category": "Belçika Waffles"
+      },
+      {
+        "name": "Meyveli & 3 Çikolatalı Bowl Waffle",
+        "price": "465 TL",
+        "desc": "Çilek, muz, 3 çikolata seçeneği ile",
+        "category": "Belçika Waffles"
+      },
+      {
+        "name": "Tiramisulu Dondurma (1 Top)",
+        "price": "185 TL",
+        "desc": "Bisküvi, kakao, süt. Kase olarak servis edilir.",
+        "category": "Dondurmalar"
+      },
+      {
+        "name": "Mangolu Dondurma (1 Top)",
+        "price": "185 TL",
+        "desc": "Mango meyvesi, süt. Kase olarak servis edilir.",
+        "category": "Dondurmalar"
+      },
+      {
+        "name": "Naneli Dondurma (1 Top)",
+        "price": "185 TL",
+        "desc": "Nane, süt. Kase olarak servis edilir.",
+        "category": "Dondurmalar"
+      },
+      {
+        "name": "Karamelli Dondurma (1 Top)",
+        "price": "185 TL",
+        "desc": "Karamel, süt. Kase olarak servis edilir.",
+        "category": "Dondurmalar"
+      },
+      {
+        "name": "Limonlu Dondurma (1 Top)",
+        "price": "185 TL",
+        "desc": "1 top olarak servis edilir.",
+        "category": "Dondurmalar"
+      },
+      {
+        "name": "Sade Sütlü Dondurma (1 Top)",
+        "price": "185 TL",
+        "desc": "Süt, sahlep. Kase olarak servis edilir.",
+        "category": "Dondurmalar"
+      },
+      {
+        "name": "Antep Fıstıklı Dondurma (1 Top)",
+        "price": "195 TL",
+        "desc": "Antep Fıstığı, süt. Kase olarak servis edilir.",
+        "category": "Dondurmalar"
+      },
+      {
+        "name": "Muzlu Dondurma (1 Top)",
+        "price": "185 TL",
+        "desc": "Muz, çikolata, süt. Kase olarak servis edilir.",
+        "category": "Dondurmalar"
+      },
+      {
+        "name": "Çilekli Dondurma (1 Top)",
+        "price": "185 TL",
+        "desc": "Çilek, süt. Kase olarak servis edilir.",
+        "category": "Dondurmalar"
+      },
+      {
+        "name": "Çikolatalı Dondurma (1 Top)",
+        "price": "185 TL",
+        "desc": "Belçika çikolatası, süt",
+        "category": "Dondurmalar"
+      },
+      {
+        "name": "Ekşi Böğürtlenli Dondurma (1 Top)",
+        "price": "185 TL",
+        "desc": "Ekşi böğürtlen, süt. Kase olarak servis edilir.",
+        "category": "Dondurmalar"
+      },
+      {
+        "name": "Dubai Çikolatalı Dondurma (1 Top)",
+        "price": "185 TL",
+        "desc": "Antep fıstığı, kakao, çikolata, süt. Kase olarak servis edilir.",
+        "category": "Dondurmalar"
+      },
+      {
+        "name": "Oreolu Dondurma (1 Top)",
+        "price": "185 TL",
+        "desc": "Oreo bisküvisi, süt. Kase olarak servis edilir.",
+        "category": "Dondurmalar"
+      },
+      {
+        "name": "Ejder Meyveli Dondurma (1 Top)",
+        "price": "185 TL",
+        "desc": "Ejder meyvesi, süt. Kase olarak servis edilir.",
+        "category": "Dondurmalar"
+      },
+      {
+        "name": "Tahinli Dondurma (1 Top)",
+        "price": "185 TL",
+        "desc": "Tahin, süt. (Eser miktarda susam içerir.) Kase olarak servis edilir.",
+        "category": "Dondurmalar"
+      },
+      {
+        "name": "Cheesecakeli Dondurma (1 Top)",
+        "price": "185 TL",
+        "desc": "Frambuaz, bisküvi, süt. Kase olarak servis edilir.",
+        "category": "Dondurmalar"
+      },
+      {
+        "name": "Tutti Frutti (1 Top)",
+        "price": "185 TL",
+        "desc": "Karışık meyveler",
+        "category": "Dondurmalar"
+      },
+      {
+        "name": "İtalyan Karameli Dondurma (1 Top)",
+        "price": "185 TL",
+        "desc": "İtalyan karameli",
+        "category": "Dondurmalar"
+      },
+      {
+        "name": "Hindistan Cevizli Dondurma (1 Top)",
+        "price": "185 TL",
+        "desc": "Hindistan cevizi, süt",
+        "category": "Dondurmalar"
+      },
+      {
+        "name": "Lotus Bisküvili Dondurma (1 Top)",
+        "price": "185 TL",
+        "desc": "Lotus bisküvisi, karamel, süt",
+        "category": "Dondurmalar"
+      },
+      {
+        "name": "Snickers Dondurma (1 Top)",
+        "price": "185 TL",
+        "desc": "Yer fıstığı, karamel, çikolata parçacıklı",
+        "category": "Dondurmalar"
+      },
+      {
+        "name": "Tatlı Böğürtlenli Dondurma (1 Top)",
+        "price": "185 TL",
+        "desc": "Tatlı böğürtlen, süt",
+        "category": "Dondurmalar"
+      },
+      {
+        "name": "Damla Sakızlı Dondurma (1 Top)",
+        "price": "185 TL",
+        "desc": "Damla sakızı, süt",
+        "category": "Dondurmalar"
+      },
+      {
+        "name": "Nutellalı Dondurma (1 Top)",
+        "price": "185 TL",
+        "desc": "Nutella çikolatası, kakao, süt",
+        "category": "Dondurmalar"
+      },
+      {
+        "name": "Vişneli Dondurma (1 Top)",
+        "price": "185 TL",
+        "desc": "Vişne, süt",
+        "category": "Dondurmalar"
+      },
+      {
+        "name": "Şeftalili Dondurma (Top)",
+        "price": "185 TL",
+        "desc": "Şeftalili sorbe",
+        "category": "Dondurmalar"
+      },
+      {
+        "name": "Super Crunchy Belçika Patates (Külah)",
+        "price": "225 TL",
+        "desc": "Parmak dilim",
+        "category": "Belçika usülü Patates Kızartması"
+      },
+      {
+        "name": "Super Crunchy Belçika Patatesi (Kutu)",
+        "price": "255 TL",
+        "desc": "İsteğe göre sos ile",
+        "category": "Belçika usülü Patates Kızartması"
+      },
+      {
+        "name": "Karışık Dondurma (500 gr.)",
+        "price": "995 TL",
+        "desc": "Seçeceğiniz 6 çeşit dondurma ile",
+        "category": "Günlük Dondurmalar"
+      },
+      {
+        "name": "Çikolatalı Dondurma (1 kg.)",
+        "price": "1.850 TL",
+        "desc": "1 kg. olarak servis edilir.",
+        "category": "Günlük Dondurmalar"
+      },
+      {
+        "name": "Çikolatalı Dondurma (500 gr.)",
+        "price": "995 TL",
+        "desc": "500 gr. olarak servis edilir.",
+        "category": "Günlük Dondurmalar"
+      },
+      {
+        "name": "Sade Sütlü Dondurma (1 kg.)",
+        "price": "1.850 TL",
+        "desc": "1 kg. olarak servis edilir.",
+        "category": "Günlük Dondurmalar"
+      },
+      {
+        "name": "Sütlü Sade Dondurma (500 gr.)",
+        "price": "995 TL",
+        "desc": "500 gr. olarak servis edilir.",
+        "category": "Günlük Dondurmalar"
+      },
+      {
+        "name": "Efsane 6'lı Karışık Dondurma (500 gr.)",
+        "price": "1.850 TL",
+        "desc": "500 gr. olarak servis edilir.",
+        "category": "Günlük Dondurmalar"
+      },
+      {
+        "name": "Karışık Dondurma (1 kg.)",
+        "price": "1.850 TL",
+        "desc": "Seçeceğiniz 8 çeşit dondurma",
+        "category": "Günlük Dondurmalar"
+      },
+      {
+        "name": "Ev Yapımı Limonata (25 cl.)",
+        "price": "80 TL",
+        "desc": "Soğuk servis edilir.",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Su ( 40 cl.)",
+        "price": "45 TL",
+        "desc": "Pet şişe",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Karışık Taze Sıkma Meyve Suyu (20 cl.)",
+        "price": "225 TL",
+        "desc": "Portakal, nar, yeşil elma, havuç",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Taze Sıkma Portakal Suyu (20 cl.)",
+        "price": "200 TL",
+        "desc": "Bardak",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Taze Sıkma Nar Suyu (20 cl.)",
+        "price": "275 TL",
+        "desc": "Bardak",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Kornet",
+        "price": "12 TL",
+        "desc": "Adet olarak servis edilir.",
+        "category": "Yan ürünler"
+      },
+      {
+        "name": "Kağıt Helva (Küçük)",
+        "price": "40 TL",
+        "desc": "Adet olarak servis edilir.",
+        "category": "Yan ürünler"
+      },
+      {
+        "name": "Kağıt Helva (Orta)",
+        "price": "50 TL",
+        "desc": "Adet olarak servis edilir.",
+        "category": "Yan ürünler"
+      },
+      {
+        "name": "Çikolata Sos (15 gr.)",
+        "price": "25 TL",
+        "desc": "(Sıcak servis edilir.)",
+        "category": "Yan ürünler"
+      },
+      {
+        "name": "Kavrulmuş Yer Fıstığı (15 gr.)",
+        "price": "20 TL",
+        "desc": "Kavrulmuş kırık yer fıstığı",
+        "category": "Yan ürünler"
+      }
+    ]
   }
 };
