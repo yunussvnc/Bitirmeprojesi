@@ -155,7 +155,8 @@ async def read_places_lite(
         schemas.PlaceLite(
             id=r.id, name=r.name, address=r.address, city=r.city, category=r.category,
             latitude=r.latitude, longitude=r.longitude, price_range=r.price_range,
-            photo_url=r.photo_url, average_rating=r.average_rating or 0.0,
+            photo_url=f"/api/v1/places/{r.id}/photo" if r.photo_url and r.photo_url.startswith("google_photo_ref:") else r.photo_url,
+            average_rating=r.average_rating or 0.0,
             review_count=r.user_ratings_total or 0,
         )
         for r in rows
@@ -480,7 +481,7 @@ def read_place(
 @router.get("/places/{place_id}/photo")
 def get_place_photo(place_id: int, max_width: int = 800, db: Session = Depends(get_db)):
     """Mekanın Google fotoğrafını güvenli bir şekilde sunar (API anahtarını gizler)."""
-    place = crud.get_place_by_id(db, place_id=place_id)
+    place = db.query(models.Place).filter(models.Place.id == place_id).first()
     if not place or not place.photo_url:
         raise HTTPException(status_code=404, detail="Mekan veya fotoğraf bulunamadı.")
         
@@ -491,9 +492,10 @@ def get_place_photo(place_id: int, max_width: int = 800, db: Session = Depends(g
         # Places API (New) ile içe aktarılan mekanların google_place_id'si "ChIJ..."
         # ile başlar ve foto referansı da o API'nin media endpoint'ini gerektirir —
         # eski (legacy) Photo API'nin photoreference formatıyla UYUMSUZ, 403 döner.
-        if (place.google_place_id or "").startswith("ChIJ") and settings.GOOGLE_PLACES_API_KEY:
+        actual_google_id = place.google_place_id or place.vector_id
+        if (actual_google_id or "").startswith("ChIJ") and settings.GOOGLE_PLACES_API_KEY:
             google_url = (
-                f"https://places.googleapis.com/v1/places/{place.google_place_id}/photos/{ref}/media"
+                f"https://places.googleapis.com/v1/places/{actual_google_id}/photos/{ref}/media"
                 f"?maxWidthPx={max_width}&key={settings.GOOGLE_PLACES_API_KEY}"
             )
         else:

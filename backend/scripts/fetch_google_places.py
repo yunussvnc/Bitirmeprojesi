@@ -139,7 +139,8 @@ def save_places_to_db(db, places, city, category_name):
                 average_rating=float(p.get("rating", 0.0)),
                 photo_url=photo_url,
                 price_range=price_level,
-                vector_id=google_place_id
+                vector_id=google_place_id,
+                google_place_id=google_place_id
             )
             db.add(new_place)
             added_count += 1

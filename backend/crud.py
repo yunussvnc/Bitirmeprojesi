@@ -379,6 +379,10 @@ def _enrich_places_with_stats(db: Session, places, current_user_id: int | None =
         except Exception:
             pass  # leave as-is
 
+        # Eğer photo_url google_photo_ref: ise proxy URL'e çevir (mobil uygulamanın render edebilmesi için)
+        if getattr(p, "photo_url", None) and p.photo_url.startswith("google_photo_ref:"):
+            p.photo_url = f"/api/v1/places/{p.id}/photo"
+
     return places
 
 
