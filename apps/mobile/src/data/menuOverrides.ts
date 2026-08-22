@@ -14418,4 +14418,115 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     }
   ]
 }
+,
+  "7225": {
+  "name": "Söz Berlin Döner",
+  "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/svol/soz-berlin-doner",
+  "sourceName": "Yemeksepeti canlı Söz Berlin Döner menüsü",
+  "verifiedAt": "2026-08-23",
+  "items": [
+    {
+      "name": "Alman Usulü Tavuk Döner (100 gr.)",
+      "price": "300 TL",
+      "desc": "Ekmek ya da lavaş arasına; tavuk döner, isteğe göre salata, garnitür, sos",
+      "category": "Tavuk Dönerler"
+    },
+    {
+      "name": "Alman Usulü Tavuk Döner (120 gr.)",
+      "price": "328 TL",
+      "desc": "Ekmek ya da lavaş arasına; tavuk döner, isteğe göre salata, garnitür, sos",
+      "category": "Tavuk Dönerler"
+    },
+    {
+      "name": "Alman Usulü Tavuk Döner (150 gr.)",
+      "price": "372 TL",
+      "desc": "Ekmek ya da lavaş arasına; tavuk döner, isteğe göre salata, garnitür, sos",
+      "category": "Tavuk Dönerler"
+    },
+    {
+      "name": "Tavuk Döner Box (100 gr.)",
+      "price": "328 TL",
+      "desc": "Tavuk döner, patates kızartması, isteğe göre salata, garnitür, sos",
+      "category": "Tavuk Döner Boxes"
+    },
+    {
+      "name": "Tavuk Döner Box (120 gr.)",
+      "price": "348 TL",
+      "desc": "Tavuk döner, patates kızartması, isteğe göre salata, garnitür, sos",
+      "category": "Tavuk Döner Boxes"
+    },
+    {
+      "name": "Tavuk Döner Box (150 gr.)",
+      "price": "388 TL",
+      "desc": "Tavuk döner, patates kızartması, isteğe göre salata, garnitür, sos",
+      "category": "Tavuk Döner Boxes"
+    },
+    {
+      "name": "Patates Kızartması",
+      "price": "104 TL",
+      "desc": "Parmak dilim",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Coca-Cola (33 cl.)",
+      "price": "84 TL",
+      "desc": "Kutu içecek",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Fanta (33 cl.)",
+      "price": "84 TL",
+      "desc": "Kutu içecek",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Lipton Ice Tea Şeftali (33 cl.)",
+      "price": "84 TL",
+      "desc": "Kutu içecek",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Lipton Ice Tea Limon (33 cl.)",
+      "price": "84 TL",
+      "desc": "Kutu içecek",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Sarıyer Kola (33 cl.)",
+      "price": "68 TL",
+      "desc": "Kutu içecek",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Sarıyer Portakal (33 cl.)",
+      "price": "68 TL",
+      "desc": "Kutu içecek",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Ayran (27 cl.)",
+      "price": "56 TL",
+      "desc": "Büyük boy",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Su (50 cl.)",
+      "price": "16 TL",
+      "desc": "Pet şişe",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Cola Turka (33 cl.)",
+      "price": "64 TL",
+      "desc": "Kutu içecek",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Uludağ Gazoz (33 cl.)",
+      "price": "64 TL",
+      "desc": "Kutu içecek",
+      "category": "İçecekler"
+    }
+  ]
+}
 };
