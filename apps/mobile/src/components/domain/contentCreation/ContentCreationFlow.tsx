@@ -94,7 +94,7 @@ export function ContentCreationFlow({
     // Editleden gelen URI'yi mevcut media'ya yaz
     setSelected((prev) => prev.map((m, i) => i === editIndex ? { ...m, uri: editedUri } : m));
     setDirection('forward');
-    setStep('edit');
+    setStep('share');
   }, [editIndex]);
 
   const handleEditorCancel = useCallback(() => {

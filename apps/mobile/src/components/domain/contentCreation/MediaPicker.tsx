@@ -115,7 +115,7 @@ export function MediaPicker({
 
   const handleCameraCapture = useCallback((item: MediaItem) => {
     onSelect([item]);
-    onNext();
+    onNext([item]);
   }, [onSelect, onNext]);
 
   const handleSingleSelect = useCallback((item: MediaItem) => {
