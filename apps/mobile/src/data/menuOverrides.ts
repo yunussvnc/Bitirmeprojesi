@@ -9209,5 +9209,229 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
         "category": ""
       }
     ]
+  },
+  "7213": {
+    "name": "City Burger",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/uja1/city-burger",
+    "sourceName": "Yemeksepeti City Burger menüsü (Çelebioğlu Sok. No:15/2, Beşiktaş)",
+    "verifiedAt": "2026-08-23",
+    "items": [
+      {
+        "name": "Burger Menü (200 gr.)",
+        "price": "669,75 TL",
+        "desc": "Seçeceğiniz Burger + Patates Kızartması + Kutu İçecek",
+        "category": "Menüler"
+      },
+      {
+        "name": "Burger Menü (130 gr.)",
+        "price": "569,75 TL",
+        "desc": "Seçeceğiniz Burger + Patates Kızartması + Kutu İçecek",
+        "category": "Menüler"
+      },
+      {
+        "name": "Double Chef Quad Cheese Burger (260 gr.) Menü",
+        "price": "719,75 TL",
+        "desc": "Double Chef Quad Cheese Burger (260 gr.) + Patates Kızartması + Kutu İçecek",
+        "category": "Menüler"
+      },
+      {
+        "name": "New York City Menü",
+        "price": "599,75 TL",
+        "desc": "New York City Bacon + Patates Kızartması + Kutu İçecek",
+        "category": "Menüler"
+      },
+      {
+        "name": "City Burger With Cheese (130 gr.)",
+        "price": "469,5 TL",
+        "desc": "City sos, karamelize soğan, domates, marul, turşu, cheddar peyniri",
+        "category": "Burgerler (130 gr.)"
+      },
+      {
+        "name": "City Chef's Special (130 gr.)",
+        "price": "469,5 TL",
+        "desc": "City sos, tereyağı, cheddar peyniri, karamelize soğan",
+        "category": "Burgerler (130 gr.)"
+      },
+      {
+        "name": "Jail Burger (130 gr.)",
+        "price": "479,5 TL",
+        "desc": "City sos, karamelize soğan, domates, marul, turşu, patlıcan, közlenmiş kırmızıbiber, cheddar peyniri",
+        "category": "Burgerler (130 gr.)"
+      },
+      {
+        "name": "London City Blue Cheese (130 gr.)",
+        "price": "489,5 TL",
+        "desc": "City sos, karamelize soğan, domates, marul, rokfor sos",
+        "category": "Burgerler (130 gr.)"
+      },
+      {
+        "name": "Magic City Mushroom (130 gr.)",
+        "price": "479,5 TL",
+        "desc": "City sos, karamelize soğan, domates, marul, turşu, fesleğen soslu mantar",
+        "category": "Burgerler (130 gr.)"
+      },
+      {
+        "name": "Mexico City Hot (130 gr.)",
+        "price": "479,5 TL",
+        "desc": "City sos, karamelize soğan, domates, marul, turşu, jalapeno sos, cheddar peyniri",
+        "category": "Burgerler (130 gr.)"
+      },
+      {
+        "name": "New York City Bacon (130 gr.)",
+        "price": "499,5 TL",
+        "desc": "Özel barbekü sosu, karamelize soğan, dana füme, cheddar peyniri",
+        "category": "Burgerler (130 gr.)"
+      },
+      {
+        "name": "City Burger With Cheese (200 gr.)",
+        "price": "549,75 TL",
+        "desc": "City sos, karamelize soğan, domates, marul, turşu, cheddar peyniri",
+        "category": "Burgerler (200 gr.)"
+      },
+      {
+        "name": "City Chef's Special (200 gr.)",
+        "price": "549,75 TL",
+        "desc": "City sos, tereyağı, cheddar peyniri, karamelize soğan",
+        "category": "Burgerler (200 gr.)"
+      },
+      {
+        "name": "Jail Burger (200 gr.)",
+        "price": "559,75 TL",
+        "desc": "City sos, karamelize soğan, domates, marul, turşu, patlıcan, közlenmiş kırmızıbiber, cheddar peyniri",
+        "category": "Burgerler (200 gr.)"
+      },
+      {
+        "name": "London City Blue Cheese (200 gr.)",
+        "price": "569,75 TL",
+        "desc": "City sos, karamelize soğan, domates, marul, rokfor sos",
+        "category": "Burgerler (200 gr.)"
+      },
+      {
+        "name": "Magic City Mushroom (200 gr.)",
+        "price": "559,75 TL",
+        "desc": "City sos, karamelize soğan, domates, marul, turşu, fesleğen soslu mantar",
+        "category": "Burgerler (200 gr.)"
+      },
+      {
+        "name": "Mexico City Hot (200 gr.)",
+        "price": "559,75 TL",
+        "desc": "City sos, karamelize soğan, domates, marul, turşu, jalapeno sos, cheddar peyniri",
+        "category": "Burgerler (200 gr.)"
+      },
+      {
+        "name": "New York City Bacon (200 gr.)",
+        "price": "579,75 TL",
+        "desc": "Özel barbekü sosu, karamelize soğan, dana füme, cheddar peyniri",
+        "category": "Burgerler (200 gr.)"
+      },
+      {
+        "name": "Double Chef Quad Cheese Burger (260 gr.)",
+        "price": "619,75 TL",
+        "desc": "2 adet 130 gr. dana eti, 4 kat cheddar peyniri, City sos, karamelize soğan, tereyağı",
+        "category": "Double Burgerler"
+      },
+      {
+        "name": "Soğan Halkası (6 Adet)",
+        "price": "129,5 TL",
+        "desc": "İnce dilimlenmiş soğanların kızartılarak çıtır hale getirildiği bir atıştırmalıktır.",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Baharatlı Parmak Patates Kızartması",
+        "price": "129,5 TL",
+        "desc": "Dilimlenmiş patateslerin kızartılıp baharatlandırılarak servis edildiği bir atıştırmalıktır.",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Parmak Patates Kızartması",
+        "price": "129,5 TL",
+        "desc": "Dilimlenmiş patateslerin kızartılarak servis edildiği bir atıştırmalıktır.",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Coca-Cola Zero Sugar (33 cl.)",
+        "price": "70 TL",
+        "desc": "Kutu içecek",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Coca-Cola (33 cl.)",
+        "price": "70 TL",
+        "desc": "Kutu içecek",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Coca-Cola Şekersiz (33 cl.)",
+        "price": "70 TL",
+        "desc": "Kutu içecek",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Fanta (33 cl.)",
+        "price": "70 TL",
+        "desc": "Kutu içecek",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Sprite (33 cl.)",
+        "price": "70 TL",
+        "desc": "Kutu içecek",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Fuse Tea (33 cl.)",
+        "price": "70 TL",
+        "desc": "Kutu içecek",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Lipton Ice Tea (33 cl.)",
+        "price": "70 TL",
+        "desc": "Kutu içecek",
+        "category": "İçecekler"
+      },
+      {
+        "name": "El Yapımı Limonata (30 cl.)",
+        "price": "69 TL",
+        "desc": "Bardak",
+        "category": "İçecekler"
+      },
+      {
+        "name": "El Yapımı Otlu Ayran (30 cl.)",
+        "price": "65 TL",
+        "desc": "Bardak",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Su (33 cl.)",
+        "price": "19 TL",
+        "desc": "İçecek",
+        "category": "İçecekler"
+      },
+      {
+        "name": "BBQ Sos",
+        "price": "16,5 TL",
+        "desc": "50 gr.",
+        "category": "Soslar"
+      },
+      {
+        "name": "Hardal Sos (Heinz)",
+        "price": "16,5 TL",
+        "desc": "50 gr.",
+        "category": "Soslar"
+      },
+      {
+        "name": "Acı Sos (Sriracha)",
+        "price": "19,5 TL",
+        "desc": "50 gr.",
+        "category": "Soslar"
+      },
+      {
+        "name": "Plastic Bag",
+        "price": "1 TL",
+        "desc": "It's compulsory to purchase plastic bags for fixed price 1 TL according to the amendments on Environment Law by the Ministry of Environment, Urbanization and Climate Change. If you require a plastic bag, you should add it to your basket. The amount will be charged to you for each plastic bag.",
+        "category": "Poşet"
+      }
+    ]
   }
 };
