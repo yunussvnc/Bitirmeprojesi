@@ -8,7 +8,7 @@ import logging
 # pyrefly: ignore [missing-import]
 from fastapi import APIRouter, Depends, HTTPException, Query, BackgroundTasks
 # pyrefly: ignore [missing-import]
-from fastapi.responses import StreamingResponse, RedirectResponse
+from fastapi.responses import RedirectResponse
 # pyrefly: ignore [missing-import]
 from fastapi.concurrency import run_in_threadpool
 # pyrefly: ignore [missing-import]
@@ -481,10 +481,13 @@ def read_place(
 @router.get("/places/{place_id}/photo")
 async def get_place_photo(place_id: int, max_width: int = 800, db: Session = Depends(get_db)):
     """Mekanın Google fotoğrafını güvenli bir şekilde sunar (API anahtarını gizler)."""
+    from fastapi.responses import Response
+    import httpx
+
     place = db.query(models.Place).filter(models.Place.id == place_id).first()
     if not place or not place.photo_url:
         raise HTTPException(status_code=404, detail="Mekan veya fotoğraf bulunamadı.")
-        
+
     if place.photo_url.startswith("google_photo_ref:"):
         ref = place.photo_url.split("google_photo_ref:")[1]
         settings = get_settings()
@@ -504,30 +507,101 @@ async def get_place_photo(place_id: int, max_width: int = 800, db: Session = Dep
                 raise HTTPException(status_code=500, detail="Google Maps API Key yapılandırılmamış.")
             google_url = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth={max_width}&photoreference={ref}&key={api_key}"
 
-        import httpx
+        try:
+            async with httpx.AsyncClient(follow_redirects=True, timeout=15) as client:
+                resp = await client.get(google_url)
 
-        async def stream_generator(url: str):
-            async with httpx.AsyncClient() as client:
-                try:
-                    async with client.stream("GET", url, timeout=10) as response:
-                        if response.status_code != 200:
-                            raise HTTPException(status_code=response.status_code, detail="Fotoğraf Google'dan alınamadı.")
-                        async for chunk in response.aiter_bytes(chunk_size=8192):
-                            yield chunk
-                except httpx.RequestError:
-                    raise HTTPException(status_code=504, detail="Google API'sine bağlanılamadı.")
+                if resp.status_code != 200:
+                    logging.warning(
+                        f"[photo_proxy] Google API {resp.status_code} for place {place_id}: "
+                        f"url={google_url[:120]}... body={resp.text[:200]}"
+                    )
+                    raise HTTPException(
+                        status_code=resp.status_code,
+                        detail=f"Fotoğraf Google'dan alınamadı (HTTP {resp.status_code})."
+                    )
 
-        # Client ilk isteği yapar ki headers okuyabilelim (content-type)
-        # Ancak generator içinde bunu yapamayız, o yüzden önce HEAD isteği atıp type alabiliriz
-        # Ya da stream başlatıp Response dönmek FastAPI'de biraz tricky.
-        # Basitçe image/jpeg diyelim ve streaming response dönelim:
-        headers = {
-            "Cache-Control": "public, max-age=31536000, immutable"
-        }
-        return StreamingResponse(stream_generator(google_url), media_type="image/jpeg", headers=headers)
+                content_type = resp.headers.get("content-type", "image/jpeg")
+                return Response(
+                    content=resp.content,
+                    media_type=content_type,
+                    headers={"Cache-Control": "public, max-age=31536000, immutable"},
+                )
+        except httpx.RequestError as exc:
+            logging.error(f"[photo_proxy] Google API connection error for place {place_id}: {exc}")
+            raise HTTPException(status_code=504, detail="Google API'sine bağlanılamadı.")
 
     return RedirectResponse(url=place.photo_url, headers={"Cache-Control": "public, max-age=31536000, immutable"})
 
+
+@router.get("/places/{place_id}/gallery/{photo_index}")
+async def get_place_gallery_photo(place_id: int, photo_index: int, max_width: int = 800, db: Session = Depends(get_db)):
+    """Mekanın galeri fotoğrafını proxy üzerinden sunar (Google API anahtarını gizler)."""
+    from fastapi.responses import Response
+    import httpx
+    import json as _json
+
+    place = db.query(models.Place).filter(models.Place.id == place_id).first()
+    if not place:
+        raise HTTPException(status_code=404, detail="Mekan bulunamadı.")
+
+    # gallery_urls JSON string olabilir — parse et
+    raw_gallery = place.gallery_urls
+    if isinstance(raw_gallery, str):
+        try:
+            raw_gallery = _json.loads(raw_gallery)
+        except Exception:
+            raw_gallery = []
+
+    if not isinstance(raw_gallery, list) or photo_index < 0 or photo_index >= len(raw_gallery):
+        raise HTTPException(status_code=404, detail="Galeri fotoğrafı bulunamadı.")
+
+    gallery_url = raw_gallery[photo_index]
+    if not isinstance(gallery_url, str):
+        raise HTTPException(status_code=404, detail="Geçersiz galeri URL'i.")
+
+    # google_photo_ref: olmayan URL'ler için redirect
+    if not gallery_url.startswith("google_photo_ref:"):
+        return RedirectResponse(url=gallery_url, headers={"Cache-Control": "public, max-age=31536000, immutable"})
+
+    ref = gallery_url.split("google_photo_ref:")[1]
+    settings = get_settings()
+
+    actual_google_id = place.google_place_id or place.vector_id
+    if (actual_google_id or "").startswith("ChIJ") and settings.GOOGLE_PLACES_API_KEY:
+        google_url = (
+            f"https://places.googleapis.com/v1/places/{actual_google_id}/photos/{ref}/media"
+            f"?maxWidthPx={max_width}&key={settings.GOOGLE_PLACES_API_KEY}"
+        )
+    else:
+        api_key = settings.GOOGLE_MAPS_API_KEY
+        if not api_key:
+            raise HTTPException(status_code=500, detail="Google Maps API Key yapılandırılmamış.")
+        google_url = f"https://maps.googleapis.com/maps/api/place/photo?maxwidth={max_width}&photoreference={ref}&key={api_key}"
+
+    try:
+        async with httpx.AsyncClient(follow_redirects=True, timeout=15) as client:
+            resp = await client.get(google_url)
+
+            if resp.status_code != 200:
+                logging.warning(
+                    f"[gallery_proxy] Google API {resp.status_code} for place {place_id} gallery {photo_index}: "
+                    f"body={resp.text[:200]}"
+                )
+                raise HTTPException(
+                    status_code=resp.status_code,
+                    detail=f"Galeri fotoğrafı Google'dan alınamadı (HTTP {resp.status_code})."
+                )
+
+            content_type = resp.headers.get("content-type", "image/jpeg")
+            return Response(
+                content=resp.content,
+                media_type=content_type,
+                headers={"Cache-Control": "public, max-age=31536000, immutable"},
+            )
+    except httpx.RequestError as exc:
+        logging.error(f"[gallery_proxy] Google API connection error for place {place_id} gallery {photo_index}: {exc}")
+        raise HTTPException(status_code=504, detail="Google API'sine bağlanılamadı.")
 
 @router.put("/places/{place_id}", response_model=schemas.Place)
 def update_place(

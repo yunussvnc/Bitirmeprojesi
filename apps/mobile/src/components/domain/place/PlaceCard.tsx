@@ -6,7 +6,7 @@
  * title + short description below, category chip bottom-right of content.
  */
 
-import React from 'react';
+import React, { useState, useCallback } from 'react';
 import { getTranslatedCategory } from '@/src/utils/categories';
 import {
   TouchableOpacity,
@@ -23,6 +23,7 @@ import { mediumImpact, heavyImpact } from '@/src/utils/haptics';
 import { useTranslation } from 'react-i18next';
 
 import { usePreviewStore } from '@/src/store/usePreviewStore';
+import { getCategoryFallbackUrl } from '@/src/utils/placeImages';
 
 export interface PlaceCardProps {
   image: ImageSourcePropType;
@@ -63,6 +64,8 @@ const PlaceCardComponent = function PlaceCard({
 }: PlaceCardProps) {
   const { colors } = useTheme();
   const { t } = useTranslation();
+  const [imgError, setImgError] = useState(false);
+  const handleImageError = useCallback(() => setImgError(true), []);
 
   const setPreview = usePreviewStore(s => s.setPreview);
   const clearPreview = usePreviewStore(s => s.clearPreview);
@@ -166,11 +169,12 @@ const PlaceCardComponent = function PlaceCard({
         ) : (
           <>
             <Image
-              source={image as any}
+              source={imgError ? { uri: getCategoryFallbackUrl(category) } : (image as any)}
               style={styles.image}
               contentFit="cover"
               cachePolicy="memory-disk"
               recyclingKey={placeId ? `place-img-${placeId}` : undefined}
+              onError={handleImageError}
             />
             {/* Bottom gradient so location badge is readable */}
             <LinearGradient

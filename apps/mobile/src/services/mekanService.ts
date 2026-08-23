@@ -118,9 +118,9 @@ function normalizePlace(p: any): Place {
 
   let gallery_urls: string[] | undefined = undefined;
   if (Array.isArray(p?.gallery_urls)) {
-    gallery_urls = p.gallery_urls.map((url: string) => {
+    gallery_urls = p.gallery_urls.map((url: string, idx: number) => {
       if (typeof url === 'string' && url.startsWith('google_photo_ref:')) {
-         return url;
+         return `${API_V1}/places/${id}/gallery/${idx}`;
       }
       return url;
     });

@@ -8,6 +8,7 @@ from sqlalchemy.orm import Session, joinedload
 import bcrypt
 import models, schemas
 from app.services.moderator import AIModerator
+from config import get_settings
 
 _logger = logging.getLogger("asemos.crud")
 _posts_is_flagged_available: bool | None = None
@@ -379,9 +380,29 @@ def _enrich_places_with_stats(db: Session, places, current_user_id: int | None =
         except Exception:
             pass  # leave as-is
 
-        # Eğer photo_url google_photo_ref: ise proxy URL'e çevir (mobil uygulamanın render edebilmesi için)
+        # Eğer photo_url google_photo_ref: ise → Google API key varsa proxy URL'e çevir,
+        # yoksa None yap ki frontend kategori placeholder'ına düşsün.
         if getattr(p, "photo_url", None) and p.photo_url.startswith("google_photo_ref:"):
-            p.photo_url = f"/api/v1/places/{p.id}/photo"
+            settings = get_settings()
+            has_key = bool(settings.GOOGLE_PLACES_API_KEY or settings.GOOGLE_MAPS_API_KEY)
+            if has_key:
+                p.photo_url = f"/api/v1/places/{p.id}/photo"
+            else:
+                p.photo_url = None  # type: ignore
+
+        # gallery_urls içindeki google_photo_ref:'leri de proxy URL'e çevir (veya temizle)
+        if hasattr(p, "gallery_urls") and isinstance(p.gallery_urls, list):
+            settings = get_settings()
+            has_key = bool(settings.GOOGLE_PLACES_API_KEY or settings.GOOGLE_MAPS_API_KEY)
+            converted = []
+            for idx, url in enumerate(p.gallery_urls):
+                if isinstance(url, str) and url.startswith("google_photo_ref:"):
+                    if has_key:
+                        converted.append(f"/api/v1/places/{p.id}/gallery/{idx}")
+                    # key yoksa bu URL'i atla (listeye ekleme)
+                else:
+                    converted.append(url)
+            p.gallery_urls = converted  # type: ignore
 
     return places
 
