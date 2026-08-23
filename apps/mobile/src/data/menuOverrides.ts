@@ -17577,4 +17577,169 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     }
   ]
 }
+,
+  "7238": {
+  "name": "Waffle Check",
+  "sourceUrl": "https://www.migros.com.tr/yemek/waffle-check-besiktas-sinanpasa-mah-st-20eb3",
+  "sourceName": "Migros Yemek canlı Waffle Check menüsü",
+  "verifiedAt": "2026-08-23",
+  "items": [
+    {
+      "name": "Açık Waffle",
+      "price": "350,00 TL",
+      "desc": "Muz, çilek, kivi, çikolata",
+      "category": "WAFFLE'S"
+    },
+    {
+      "name": "Waffle Bowl | Çilek&browni",
+      "price": "350,00 TL",
+      "desc": "Özel Waffle Hamuru parçaları Üzerine : Çilek ,Sütlü Çikolata , Beyaz Çikolata , Çilek Çikolata Sosu , Antep Fıstığı Toz , Pirinç Patlakları, Browni ve Gofret Parçacıkları.",
+      "category": "WAFFLE'S"
+    },
+    {
+      "name": "Waffle Bowl | Beyaz Kriz",
+      "price": "350,00 TL",
+      "desc": "Özel Waffle Hamuru parçaları Üzerine : Muz , Çilek , Beyaz Çikolata , Pirinç Fındık , Pirinç Patlakları , Gofret Parçacıkları.",
+      "category": "WAFFLE'S"
+    },
+    {
+      "name": "Muz&çilek Atomix Waffle",
+      "price": "350,00 TL",
+      "desc": "Özel Waffle Hamuru Üzerine : Muz , Çilek , Sütlü Çikolata , Beyaz Çikolata , Antep Fıstığı Toz, Lotus Bisküvi Parçaları , Pirinç Fındık , Pirinç Patlakları.",
+      "category": "WAFFLE'S"
+    },
+    {
+      "name": "Waffle Check Special Large",
+      "price": "599,00 TL",
+      "desc": "Belçika waffle hamuru üzerine: muz, çilek, sütlü çikolata, beyaz çikolata, antep fıstığı tozu, fındık, sütlü ve beyaz damla çikolataları, gofret parçacıkları, rulokat, çilek krep kırığı parçaları.",
+      "category": "WAFFLE'S"
+    },
+    {
+      "name": "2 Waffle Ve 2 Limonata Menü",
+      "price": "800,00 TL",
+      "desc": "2 adet klasik Waffle ve 2 adet Limonata",
+      "category": "Menüler"
+    },
+    {
+      "name": "Waffle & Filtre Kahve Menü",
+      "price": "400,00 TL",
+      "desc": "Klasik Waffle + Filtre Kahve",
+      "category": "Menüler"
+    },
+    {
+      "name": "4'Lü Ice Latte Fırsat Menü",
+      "price": "600,00 TL",
+      "desc": "4 adet Ice Latte",
+      "category": "Menüler"
+    },
+    {
+      "name": "Muzlu Waffle & Latte Menü",
+      "price": "450,00 TL",
+      "desc": "Muzlu Waffle + Latte",
+      "category": "Menüler"
+    },
+    {
+      "name": "2 Klasik Waffle 2 Ice Latte Menü",
+      "price": "1.000,00 TL",
+      "desc": "2 adet waffle ve 2 adet buz gibi soğuk Latte",
+      "category": "Menüler"
+    },
+    {
+      "name": "Waffle Bowl | Mix",
+      "price": "350,00 TL",
+      "desc": "Özel Waffle Hamuru parçaları Üzerine : Muz , Çilek , Kivi ,Sütlü Çikolata , Beyaz Çikolata , Bitter Çikolata , Antep Fıstığı Toz, Pirinç Fındık , Pirinç Patlakları , Rulo kat , Browni .",
+      "category": "Menüler"
+    },
+    {
+      "name": "Muz Mix Waffle",
+      "price": "350,00 TL",
+      "desc": "Özel Waffle Hamuru Üzerine : Muz , Sütlü Çikolata , Beyaz Çikolata , Bitter Çikolata , Antep Fıstığı Toz, Pirinç Fındık , Pirinç Patlakları , Rulo kat , Browni . Gofret Parçacıkları.",
+      "category": "Menüler"
+    },
+    {
+      "name": "Iced Filtre Kahve",
+      "price": "250,00 TL",
+      "desc": "Soğuk servis edilir.",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Iced Americano",
+      "price": "250,00 TL",
+      "desc": "Soğuk servis edilir.",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Iced Latte",
+      "price": "250,00 TL",
+      "desc": "Soğuk servis edilir.",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Iced Mocha",
+      "price": "250,00 TL",
+      "desc": "Soğuk servis edilir.",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Buzlu Türk Kahvesi",
+      "price": "250,00 TL",
+      "desc": "Soğuk servis edilir.",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Chocobomba",
+      "price": "200,00 TL",
+      "desc": "Bardak",
+      "category": "Chocoffee Specials"
+    },
+    {
+      "name": "Choco Peanut Milkshake",
+      "price": "250,00 TL",
+      "desc": "Yer fıstığı, dondurma (Kafeinsiz)",
+      "category": "Milkshakes"
+    },
+    {
+      "name": "Chocolate Milkshake",
+      "price": "250,00 TL",
+      "desc": "Çikolata, dondurma",
+      "category": "Milkshakes"
+    },
+    {
+      "name": "Strawberry Milkshake",
+      "price": "250,00 TL",
+      "desc": "Çilek, dondurma",
+      "category": "Milkshakes"
+    },
+    {
+      "name": "Espresso Milkshake",
+      "price": "250,00 TL",
+      "desc": "Espresso, dondurma",
+      "category": "Milkshakes"
+    },
+    {
+      "name": "Banana Milkshake",
+      "price": "250,00 TL",
+      "desc": "Muz, dondurma",
+      "category": "Milkshakes"
+    },
+    {
+      "name": "Limonata",
+      "price": "150,00 TL",
+      "desc": "Bardak",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Churchill",
+      "price": "150,00 TL",
+      "desc": "Soda, tuz, limon karışımı (Soğuk servis edilir.)",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Su (50 Cl.)",
+      "price": "50,00 TL",
+      "desc": "Pet şişe",
+      "category": "Soğuk İçecekler"
+    }
+  ]
+}
 };
