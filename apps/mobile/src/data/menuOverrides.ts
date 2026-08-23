@@ -27507,6 +27507,266 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       "desc": "",
       "category": "Tatlılar"
     }
-  ]
-}
+  ],
+  },
+  "3": {
+    "name": "Kastel - Beyoğlu",
+    "sourceUrl": "https://kastel.com.tr/menu",
+    "sourceName": "Kastel resmi menüsü (exact Hüseyinağa, Kamer Hatun Cd. No:10)",
+    "verifiedAt": "2026-08-23",
+    "items": [
+      {
+        "name": "Red Label",
+        "price": "600",
+        "desc": "",
+        "category": "Alkollü İçecekler"
+      },
+      {
+        "name": "Red Label Double",
+        "price": "950",
+        "desc": "",
+        "category": "Alkollü İçecekler"
+      },
+      {
+        "name": "Black Label",
+        "price": "650",
+        "desc": "",
+        "category": "Alkollü İçecekler"
+      },
+      {
+        "name": "Black Label Double",
+        "price": "1000",
+        "desc": "",
+        "category": "Alkollü İçecekler"
+      },
+      {
+        "name": "Chivas",
+        "price": "700",
+        "desc": "",
+        "category": "Alkollü İçecekler"
+      },
+      {
+        "name": "Chivas Double",
+        "price": "1200",
+        "desc": "",
+        "category": "Alkollü İçecekler"
+      },
+      {
+        "name": "Belvedere",
+        "price": "700",
+        "desc": "",
+        "category": "Alkollü İçecekler"
+      },
+      {
+        "name": "Smirnoff",
+        "price": "600",
+        "desc": "",
+        "category": "Alkollü İçecekler"
+      },
+      {
+        "name": "Absolut",
+        "price": "650",
+        "desc": "",
+        "category": "Alkollü İçecekler"
+      },
+      {
+        "name": "Gordon Tonic",
+        "price": "600",
+        "desc": "",
+        "category": "Alkollü İçecekler"
+      },
+      {
+        "name": "Tanquery",
+        "price": "650",
+        "desc": "",
+        "category": "Alkollü İçecekler"
+      },
+      {
+        "name": "Tuborg Gold",
+        "price": "300",
+        "desc": "",
+        "category": "Biralar"
+      },
+      {
+        "name": "Carlsberg",
+        "price": "300",
+        "desc": "",
+        "category": "Biralar"
+      },
+      {
+        "name": "Shotlar",
+        "price": "300",
+        "desc": "",
+        "category": "Shotlar"
+      },
+      {
+        "name": "Su",
+        "price": "80",
+        "desc": "",
+        "category": "Soft İçecekler"
+      },
+      {
+        "name": "Soda",
+        "price": "100",
+        "desc": "",
+        "category": "Soft İçecekler"
+      },
+      {
+        "name": "Cola",
+        "price": "100",
+        "desc": "",
+        "category": "Soft İçecekler"
+      },
+      {
+        "name": "Redbull",
+        "price": "200",
+        "desc": "",
+        "category": "Soft İçecekler"
+      },
+      {
+        "name": "Meyve Suyu",
+        "price": "100",
+        "desc": "",
+        "category": "Soft İçecekler"
+      },
+      {
+        "name": "Churcill",
+        "price": "130",
+        "desc": "",
+        "category": "Soft İçecekler"
+      },
+      {
+        "name": "Meyve Tabağı",
+        "price": "",
+        "desc": "",
+        "category": "Atıştırmalıklar"
+      },
+      {
+        "name": "Çerez",
+        "price": "",
+        "desc": "",
+        "category": "Atıştırmalıklar"
+      },
+      {
+        "name": "Mojito",
+        "price": "650",
+        "desc": "",
+        "category": "Kokteyller"
+      },
+      {
+        "name": "Lyncburg Lemonade",
+        "price": "650",
+        "desc": "",
+        "category": "Kokteyller"
+      },
+      {
+        "name": "Negroni",
+        "price": "650",
+        "desc": "",
+        "category": "Kokteyller"
+      },
+      {
+        "name": "Martini",
+        "price": "650",
+        "desc": "",
+        "category": "Kokteyller"
+      },
+      {
+        "name": "Whiskey Sour",
+        "price": "650",
+        "desc": "",
+        "category": "Kokteyller"
+      },
+      {
+        "name": "Margarita",
+        "price": "650",
+        "desc": "",
+        "category": "Kokteyller"
+      },
+      {
+        "name": "Espresso Martini",
+        "price": "650",
+        "desc": "",
+        "category": "Kokteyller"
+      },
+      {
+        "name": "Espresso Martini Shaker",
+        "price": "1200",
+        "desc": "",
+        "category": "Kokteyller"
+      },
+      {
+        "name": "Gin Fizz",
+        "price": "650",
+        "desc": "",
+        "category": "Kokteyller"
+      },
+      {
+        "name": "Long Island",
+        "price": "700",
+        "desc": "",
+        "category": "Kokteyller"
+      },
+      {
+        "name": "Hendriks",
+        "price": "700",
+        "desc": "",
+        "category": "Kokteyller"
+      },
+      {
+        "name": "Jager Redbull",
+        "price": "650",
+        "desc": "",
+        "category": "Kokteyller"
+      },
+      {
+        "name": "K 1",
+        "price": "650",
+        "desc": "Gordon, Cucumber, Basil, Ginger, Lime",
+        "category": "Kastel Special Kokteyl"
+      },
+      {
+        "name": "GARVAS",
+        "price": "650",
+        "desc": "Gordon, Archers, Aperol, Orange Liqueur, Peach, Lime",
+        "category": "Kastel Special Kokteyl"
+      },
+      {
+        "name": "NORTHSTAR",
+        "price": "650",
+        "desc": "Smirnoff, Smirnoff North, Strawberry, Basil, Citrus Blend",
+        "category": "Kastel Special Kokteyl"
+      },
+      {
+        "name": "KÖROĞLU",
+        "price": "650",
+        "desc": "Jagermeister, Malibu, Orange Liqueur, Red Forest Fruits",
+        "category": "Kastel Special Kokteyl"
+      },
+      {
+        "name": "CHILLBABY",
+        "price": "650",
+        "desc": "Olmeca Blanco, Aperol, Orange Liqueur, Passion Fruit, Pepper, Lime",
+        "category": "Kastel Special Kokteyl"
+      },
+      {
+        "name": "BOL AHENK",
+        "price": "650",
+        "desc": "Gin, Orange Liquer, Ginger, Lime",
+        "category": "Kastel Special Kokteyl"
+      },
+      {
+        "name": "ABİDE",
+        "price": "650",
+        "desc": "Whiskey, Vodka Apple, Apple Puree, Lime",
+        "category": "Kastel Special Kokteyl"
+      },
+      {
+        "name": "FENDER BENDER",
+        "price": "650",
+        "desc": "Jagermeister, Rum, Citrus, Red Forest Berries",
+        "category": "Kastel Special Kokteyl"
+      }
+    ]
+  }
 };
