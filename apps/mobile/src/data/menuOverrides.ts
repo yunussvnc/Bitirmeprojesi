@@ -24618,4 +24618,19 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     }
   ]
 }
+,
+  "7257": {
+  "name": "Trois Coffee",
+  "sourceUrl": "https://www.instagram.com/p/DaFcBe_MXd1/",
+  "sourceName": "Trois Coffee resmi doğrulanmış Instagram içeriği (fiyat yayınlanmamış)",
+  "verifiedAt": "2026-08-23",
+  "items": [
+    {
+      "name": "Lotus Sundae",
+      "price": "",
+      "desc": "",
+      "category": "Sundae"
+    }
+  ]
+}
 };
