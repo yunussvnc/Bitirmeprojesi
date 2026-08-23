@@ -35022,6 +35022,144 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       }
     ]
   },
+  "7281": {
+    "name": "Masterart Burger",
+    "sourceUrl": "https://www.masterartburger.com/",
+    "sourceName": "MasterArt Burger resmi site menüsü; Google Maps exact Hentzer şubesi (Adnan Kahveci, Alemdağ Cd. No:2 D:1 A blok No:79) ile aynı resmi web sitesine bağlanıyor; fiyatlar resmi sayfada görünmüyor",
+    "verifiedAt": "2026-08-24",
+    "items": [
+      {
+        "name": "Chicken Burger",
+        "desc": "110 Gr. Şinitzel, Yeşillik, Turşu, Çıtır Soğan, Patates Kızartması",
+        "category": "Tavuk Burgerler"
+      },
+      {
+        "name": "Chicken Rings",
+        "desc": "110 Gr. Viyana Usulü Şinitzel, 3 Ad. Soğan Halkası, MA Burger Sos, Yeşillik, Turşu, Patates Kızartması",
+        "category": "Tavuk Burgerler"
+      },
+      {
+        "name": "Trüf Mayonezli Chicken Burger",
+        "desc": "110 Gr. Viyana Usulü Şinitzel, Burger içi Trüf Mayonez, MA Burger Sos, Yeşillik, Turşu, Çıtır Soğan, Patates Kızartması",
+        "category": "Tavuk Burgerler"
+      },
+      {
+        "name": "Köri Soslu Bonfile Burger",
+        "desc": "100 Gr. Tavuk Bonfile, Kremalı Köri, MA Burger Sos, Yeşillik, Turşu, Çıtır Soğan, Patates Kızartması",
+        "category": "Tavuk Burgerler"
+      },
+      {
+        "name": "Sriracha Soslu Bonfile Burger",
+        "desc": "100 Gr. Tavuk Bonfile, Sriracha Sos, MA Burger Sos, Yeşillik, Turşu, Çıtır Soğan, Patates Kızartması",
+        "category": "Tavuk Burgerler"
+      },
+      {
+        "name": "Chicken Meksika",
+        "desc": "110 Gr. Şinitzel, Jalapeno Biber, Acı Sos, Özel Burger Sos, Yeşillik, Turşu, Çıtır Soğan, Patates Kızartması",
+        "category": "Tavuk Burgerler"
+      },
+      {
+        "name": "Chicken American",
+        "desc": "110 Gr. Şinitzel, Özel Burger Sos, Yeşillik, Turşu, Çıtır Soğan, Patates Kızartması",
+        "category": "Tavuk Burgerler"
+      },
+      {
+        "name": "Double Chicken Burger",
+        "desc": "200 Gr. Şinitzel, Özel Burger Sos, Yeşillik, Turşu, Çıtır Soğan, Patates Kızartması",
+        "category": "Tavuk Burgerler"
+      },
+      {
+        "name": "Ballı Hardallı Bonfile Burger",
+        "desc": "100 Gr. Tavuk Bonfile, Ballı Hardal, MA Burger Sos, Yeşillik, Turşu, Çıtır Soğan, Patates Kızartması",
+        "category": "Tavuk Burgerler"
+      },
+      {
+        "name": "Trüf Mayonezli Bonfile Burger",
+        "desc": "100 Gr. Tavuk Bonfile, Burger içi Trüf Mayonez, MA Burger Sos, Yeşillik, Turşu, Çıtır Soğan, Patates Kızartması",
+        "category": "Tavuk Burgerler"
+      },
+      {
+        "name": "Bonfile Burger",
+        "desc": "Çıtır tavuk göğsü, cheddar peyniri, marul ve domates",
+        "category": "Tavuk Burgerler"
+      },
+      {
+        "name": "Et Burger",
+        "desc": "125 Gr. Et, Özel Burger Sos, Yeşillik, Turşu, Çıtır Soğan, Patates Kızartması",
+        "category": "Et Burgerler"
+      },
+      {
+        "name": "Cheese Burger",
+        "desc": "125 Gr. Et, Cheddar Peyniri, Özel Burger Sos, Yeşillik, Turşu, Çıtır Soğan, Patates Kızartması",
+        "category": "Et Burgerler"
+      },
+      {
+        "name": "King of the Burger",
+        "desc": "250 Gr. Et, Pastırma, Karabiberli Dana Füme Et, Cheddar Peyniri, Domates, Taze Soğan, Yeşillik, Turşu, MA Burger Sos, Patates Kızartması",
+        "category": "Et Burgerler"
+      },
+      {
+        "name": "Trüf Mayonezli Et Burger",
+        "desc": "125 Gr. Et, Burger içinde Trüf Mayonez, Yeşillik, Turşu, Çıtır Soğan, Patates Kızartması ile",
+        "category": "Et Burgerler"
+      },
+      {
+        "name": "Double Burger",
+        "desc": "250 Gr. Et, Cheddar Peyniri, Özel Burger Sos, Yeşillik, Turşu, Çıtır Soğan, Patates Kızartması",
+        "category": "Et Burgerler"
+      },
+      {
+        "name": "Double Cheeseburger",
+        "desc": "250 Gr. Et, 2 Kat Cheddar Peyniri, Turşu, Yeşillik, Çıtır Soğan, Patates Kızartması ile",
+        "category": "Et Burgerler"
+      },
+      {
+        "name": "M.A Et Burger",
+        "desc": "125 Gr. Et, Yeşillik, Taze Soğan, Domates, Turşu, Patates Kızartması ile",
+        "category": "Et Burgerler"
+      },
+      {
+        "name": "M.A Double Burger",
+        "desc": "250 Gr. Et, Cheddar Peyniri, Taze Soğan, Domates, Turşu, Yeşillik, Çıtır Soğan, Patates Kızartması",
+        "category": "Et Burgerler"
+      },
+      {
+        "name": "Meksika Burger",
+        "desc": "125 Gr. Et, Jalapeno Biber, Acı Sos, Özel Burger Sos, Yeşillik, Turşu, Çıtır Soğan, Patates Kızartması",
+        "category": "Et Burgerler"
+      },
+      {
+        "name": "Barbekü Burger",
+        "desc": "125 Gr. Et, Barbekü Sos, Özel Burger Sos, Yeşillik, Turşu, Çıtır Soğan, Patates Kızartması",
+        "category": "Et Burgerler"
+      },
+      {
+        "name": "Amerikan Burger",
+        "desc": "125 Gr. Et, Amerikan Salatası, Özel Burger Sos, Turşu, Çıtır Soğan, Patates Kızartması",
+        "category": "Et Burgerler"
+      },
+      {
+        "name": "Rings Et Burger",
+        "desc": "125 Gr. Et, 3 Ad. Soğan Halkası, Özel Burger Sos, Yeşillik, Turşu, Çıtır Soğan, Patates Kızartması",
+        "category": "Et Burgerler"
+      },
+      {
+        "name": "Masterart Burger",
+        "desc": "125 Gr. Et, Cheddar Peyniri, Pastırma, Karabiberli Dana Füme Et, Özel Burger Sos, Yeşillik, Turşu, Çıtır Soğan, Patates Kızartması",
+        "category": "Et Burgerler"
+      },
+      {
+        "name": "Tek Kişilik Et Menü",
+        "desc": "Et Burger, Patates Kızartması, 3 Nugget, 3 Soğan Halkası, 330 Ml İçecek",
+        "category": "Menüler"
+      },
+      {
+        "name": "Tek Kişilik Chicken Burger",
+        "desc": "Chicken Burger, Patates Kızartması, 3 Nugget, 3 Soğan Halkası, 330 Ml İçecek",
+        "category": "Menüler"
+      }
+    ]
+  },
   "7182": {
   "name": "Siftah Kebap Karaköy",
   "sourceUrl": "https://siftahkebap.dinosoft.com.tr/menu",
