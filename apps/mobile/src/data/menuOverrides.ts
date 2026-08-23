@@ -17883,4 +17883,523 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     }
   ]
 }
+,
+  "7240": {
+  "name": "Kasap Lahmacun Kebap Plus",
+  "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/p41d/kasap-lahmacun",
+  "sourceName": "Yemeksepeti canlı Kasap Lahmacun menüsü",
+  "verifiedAt": "2026-08-23",
+  "items": [
+    {
+      "name": "Mercimek Çorbası",
+      "price": "157,50 TL",
+      "desc": "",
+      "category": "Çorbalar"
+    },
+    {
+      "name": "Kuzu Lokum (Yağlı Kara)",
+      "price": "630 TL",
+      "desc": "",
+      "category": "IZGARALAR"
+    },
+    {
+      "name": "Patlıcanlı Kebap",
+      "price": "630 TL",
+      "desc": "",
+      "category": "IZGARALAR"
+    },
+    {
+      "name": "Kuzu Pirzola",
+      "price": "900 TL",
+      "desc": "",
+      "category": "IZGARALAR"
+    },
+    {
+      "name": "Alinazik",
+      "price": "675 TL",
+      "desc": "",
+      "category": "IZGARALAR"
+    },
+    {
+      "name": "Özel Yaprak Kanat",
+      "price": "495 TL",
+      "desc": "",
+      "category": "IZGARALAR"
+    },
+    {
+      "name": "Ciğer Şiş (Kuzu)",
+      "price": "585 TL",
+      "desc": "",
+      "category": "IZGARALAR"
+    },
+    {
+      "name": "Mardin Zırh Kebap",
+      "price": "540 TL",
+      "desc": "",
+      "category": "IZGARALAR"
+    },
+    {
+      "name": "Beyti",
+      "price": "540 TL",
+      "desc": "",
+      "category": "IZGARALAR"
+    },
+    {
+      "name": "Urfa Zırh Kebap",
+      "price": "495 TL",
+      "desc": "",
+      "category": "IZGARALAR"
+    },
+    {
+      "name": "Kuzu Şiş",
+      "price": "630 TL",
+      "desc": "",
+      "category": "IZGARALAR"
+    },
+    {
+      "name": "Çöp Şiş",
+      "price": "585 TL",
+      "desc": "",
+      "category": "IZGARALAR"
+    },
+    {
+      "name": "Adana Zırh Kebap",
+      "price": "495 TL",
+      "desc": "",
+      "category": "IZGARALAR"
+    },
+    {
+      "name": "Tavuk Şiş",
+      "price": "405 TL",
+      "desc": "",
+      "category": "IZGARALAR"
+    },
+    {
+      "name": "Kasap Köfte",
+      "price": "450 TL",
+      "desc": "",
+      "category": "IZGARALAR"
+    },
+    {
+      "name": "Karışık Izgara (Tek Kişilik)",
+      "price": "990 TL",
+      "desc": "",
+      "category": "IZGARALAR"
+    },
+    {
+      "name": "Kasap Karışık (Tek Kişilik)",
+      "price": "1.575 TL",
+      "desc": "",
+      "category": "IZGARALAR"
+    },
+    {
+      "name": "Tavuk Şiş Dürüm",
+      "price": "315 TL",
+      "desc": "",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Urfa Dürüm",
+      "price": "360 TL",
+      "desc": "",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Lahmacun Arası Kebap",
+      "price": "450 TL",
+      "desc": "",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Kuzu Ciğer Dürüm",
+      "price": "405 TL",
+      "desc": "",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Çöp Şiş Dürüm",
+      "price": "405 TL",
+      "desc": "",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Adana Dürüm",
+      "price": "360 TL",
+      "desc": "",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Kuzu Şiş Dürüm",
+      "price": "405 TL",
+      "desc": "",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Fındık Lahmacun",
+      "price": "144 TL",
+      "desc": "",
+      "category": "Lahmacunlar"
+    },
+    {
+      "name": "Lahmacun",
+      "price": "180 TL",
+      "desc": "",
+      "category": "Lahmacunlar"
+    },
+    {
+      "name": "Nar Ekşili Kasap Lahmacun",
+      "price": "189 TL",
+      "desc": "",
+      "category": "Lahmacunlar"
+    },
+    {
+      "name": "Patlıcanlı Lahmacun",
+      "price": "202,50 TL",
+      "desc": "",
+      "category": "Lahmacunlar"
+    },
+    {
+      "name": "Sarımsaklı Lahmacun",
+      "price": "202,50 TL",
+      "desc": "",
+      "category": "Lahmacunlar"
+    },
+    {
+      "name": "Yumurtalı Kasap Lahmacun",
+      "price": "198 TL",
+      "desc": "",
+      "category": "Lahmacunlar"
+    },
+    {
+      "name": "Kaşarlı Lahmacun",
+      "price": "207 TL",
+      "desc": "",
+      "category": "Lahmacunlar"
+    },
+    {
+      "name": "Cevizli Lahmacun",
+      "price": "207 TL",
+      "desc": "",
+      "category": "Lahmacunlar"
+    },
+    {
+      "name": "Mantarlı Kaşarlı Kasap Lahmacun",
+      "price": "216 TL",
+      "desc": "",
+      "category": "Lahmacunlar"
+    },
+    {
+      "name": "Karışık Lahmacun",
+      "price": "216 TL",
+      "desc": "",
+      "category": "Lahmacunlar"
+    },
+    {
+      "name": "Sembusek (Kapalı Mardin Lahmacunu)",
+      "price": "180 TL",
+      "desc": "",
+      "category": "Lahmacunlar"
+    },
+    {
+      "name": "Cevizli Nar Ekşili Lahmacun",
+      "price": "207 TL",
+      "desc": "",
+      "category": "Lahmacunlar"
+    },
+    {
+      "name": "Pastırmalı Kaşarlı Pide",
+      "price": "427,50 TL",
+      "desc": "",
+      "category": "Pideler"
+    },
+    {
+      "name": "Tavuklu Pide",
+      "price": "337,50 TL",
+      "desc": "",
+      "category": "Pideler"
+    },
+    {
+      "name": "Tavuklu Kaşarlı Pide",
+      "price": "360 TL",
+      "desc": "",
+      "category": "Pideler"
+    },
+    {
+      "name": "Pizza Pide",
+      "price": "450 TL",
+      "desc": "",
+      "category": "Pideler"
+    },
+    {
+      "name": "Köfteli Pide",
+      "price": "427,50 TL",
+      "desc": "",
+      "category": "Pideler"
+    },
+    {
+      "name": "Kaşar Peynirli Pide",
+      "price": "297 TL",
+      "desc": "",
+      "category": "Pideler"
+    },
+    {
+      "name": "Karışık Pide",
+      "price": "450 TL",
+      "desc": "",
+      "category": "Pideler"
+    },
+    {
+      "name": "Kuşbaşılı Pide",
+      "price": "405 TL",
+      "desc": "",
+      "category": "Pideler"
+    },
+    {
+      "name": "Kıymalı Kaşarlı Pide",
+      "price": "337,50 TL",
+      "desc": "",
+      "category": "Pideler"
+    },
+    {
+      "name": "Kavurmalı Kaşarlı Pide",
+      "price": "427,50 TL",
+      "desc": "",
+      "category": "Pideler"
+    },
+    {
+      "name": "Sebzeli Pide",
+      "price": "360 TL",
+      "desc": "",
+      "category": "Pideler"
+    },
+    {
+      "name": "Kaşarlı Sucuklu Pide",
+      "price": "387 TL",
+      "desc": "",
+      "category": "Pideler"
+    },
+    {
+      "name": "Kaşarlı Mantarlı Pide",
+      "price": "360 TL",
+      "desc": "",
+      "category": "Pideler"
+    },
+    {
+      "name": "Kuşbaşılı Kaşarlı Pide",
+      "price": "427,50 TL",
+      "desc": "",
+      "category": "Pideler"
+    },
+    {
+      "name": "Pastırmalı Cheddar Peynirli Pide",
+      "price": "450 TL",
+      "desc": "",
+      "category": "Pideler"
+    },
+    {
+      "name": "Kuşbaşılı Kaşarlı Cheddar Peynirli Pide",
+      "price": "450 TL",
+      "desc": "",
+      "category": "Pideler"
+    },
+    {
+      "name": "Kıymalı Pide",
+      "price": "315 TL",
+      "desc": "",
+      "category": "Pideler"
+    },
+    {
+      "name": "Kavurmalı Cheddar Peynirli Pide",
+      "price": "450 TL",
+      "desc": "",
+      "category": "Pideler"
+    },
+    {
+      "name": "Tavuk Sote Güveç",
+      "price": "405 TL",
+      "desc": "",
+      "category": "Tava Ürünleri"
+    },
+    {
+      "name": "Güveçte Sucuk",
+      "price": "405 TL",
+      "desc": "",
+      "category": "Tava Ürünleri"
+    },
+    {
+      "name": "Güveçte Kaşarlı Köfte",
+      "price": "405 TL",
+      "desc": "",
+      "category": "Tava Ürünleri"
+    },
+    {
+      "name": "Kuzu Güveç",
+      "price": "630 TL",
+      "desc": "",
+      "category": "Tava Ürünleri"
+    },
+    {
+      "name": "Dana Güveç",
+      "price": "630 TL",
+      "desc": "",
+      "category": "Tava Ürünleri"
+    },
+    {
+      "name": "Sütlü Soğuk Kadayıf",
+      "price": "211,50 TL",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Nutellalı Pide",
+      "price": "450 TL",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Simit Katmer (2-3 Kişilik)",
+      "price": "585 TL",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Özel Fırın Sütlaç",
+      "price": "180 TL",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Supangele",
+      "price": "211,50 TL",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Özel Kazandibi",
+      "price": "180 TL",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "El Yapımı Profiterol",
+      "price": "211,50 TL",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Özel Yaprak Katmer",
+      "price": "585 TL",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Coca-Cola (33 cl.)",
+      "price": "76,50 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Coca-Cola Light (33 cl.)",
+      "price": "76,50 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Coca-Cola Şekersiz (33 cl.)",
+      "price": "76,50 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Fanta (33 cl.)",
+      "price": "76,50 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Sprite (33 cl.)",
+      "price": "76,50 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Cappy (33 cl.)",
+      "price": "76,50 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Fuse Tea (33 cl.)",
+      "price": "76,50 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Lipton Ice Tea (33 cl.)",
+      "price": "76,50 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Özerhisar Ayran (33 cl.)",
+      "price": "76,50 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Limonlu Soda (20 cl.)",
+      "price": "54 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Soda (20 cl.)",
+      "price": "45 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Su (33 cl.)",
+      "price": "36 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Coca-Cola (1 L.)",
+      "price": "108 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Coca-Cola Şekersiz (1 L.)",
+      "price": "85,50 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Coca-Cola Zero Sugar (1 L.)",
+      "price": "108 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Sprite (1 L.)",
+      "price": "108 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Şalgam Suyu (1 L.)",
+      "price": "108 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Özerhisar Ayran (1 L.)",
+      "price": "153 TL",
+      "desc": "",
+      "category": "İçecekler"
+    }
+  ]
+}
 };
