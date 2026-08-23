@@ -36506,5 +36506,178 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       "category": "SOĞUK KAHVELER"
     }
   ]
+},
+  "7268": {
+  "name": "Hacı usta kebap house",
+  "sourceUrl": "https://restaurantguru.com/Haci-Kebap-Salonu-and-Durumcu-Istanbul/menu",
+  "sourceName": "RestaurantGuru kullanıcı menü görselleri (en güncel görünür görsel 7 ay önce; exact telefon/geo eşleşmesi)",
+  "verifiedAt": "2026-08-23",
+  "items": [
+    {
+      "name": "Karışık Kebap",
+      "price": "950",
+      "category": "Kebaplar ve Izgaralar"
+    },
+    {
+      "name": "Kuzu Ciğer",
+      "price": "380",
+      "category": "Kebaplar ve Izgaralar"
+    },
+    {
+      "name": "Çöp Şiş",
+      "price": "360",
+      "category": "Kebaplar ve Izgaralar"
+    },
+    {
+      "name": "Kuzu Şiş",
+      "price": "350",
+      "category": "Kebaplar ve Izgaralar"
+    },
+    {
+      "name": "Tavuk Pirzola",
+      "price": "300",
+      "category": "Kebaplar ve Izgaralar"
+    },
+    {
+      "name": "Kuzu Pirzola",
+      "price": "900",
+      "category": "Kebaplar ve Izgaralar"
+    },
+    {
+      "name": "Kuzu Külbastı",
+      "price": "800",
+      "category": "Kebaplar ve Izgaralar"
+    },
+    {
+      "name": "Tavuk Şiş",
+      "price": "280",
+      "category": "Kebaplar ve Izgaralar"
+    },
+    {
+      "name": "Domatesli Kebap",
+      "price": "450",
+      "category": "Kebaplar ve Izgaralar"
+    },
+    {
+      "name": "Patlıcanlı Kebap",
+      "price": "450",
+      "category": "Kebaplar ve Izgaralar"
+    },
+    {
+      "name": "Hacı Usta Özel Karışık Kebap",
+      "price": "2950",
+      "category": "Kebaplar ve Izgaralar"
+    },
+    {
+      "name": "Adana Kebap",
+      "price": "300",
+      "category": "Kebaplar ve Izgaralar"
+    },
+    {
+      "name": "Urfa Kebap",
+      "price": "300",
+      "category": "Kebaplar ve Izgaralar"
+    },
+    {
+      "name": "Tavuk Kanat",
+      "price": "290",
+      "category": "Kebaplar ve Izgaralar"
+    },
+    {
+      "name": "Beyti Sarma",
+      "price": "450",
+      "category": "Kebaplar ve Izgaralar"
+    },
+    {
+      "name": "Kuzu Ciğer Şiş Dürüm",
+      "price": "320",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Tavuk Şiş Dürüm",
+      "price": "220",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Adana - Urfa Dürüm",
+      "price": "180",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Çöp Şiş Dürüm",
+      "price": "220",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Mercimek Çorbası",
+      "price": "90",
+      "category": "Çorba ve Salatalar"
+    },
+    {
+      "name": "Çoban Salata",
+      "price": "70",
+      "category": "Çorba ve Salatalar"
+    },
+    {
+      "name": "Ezme",
+      "price": "70",
+      "category": "Çorba ve Salatalar"
+    },
+    {
+      "name": "Kutu Kola",
+      "price": "50",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Fanta",
+      "price": "50",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Şişe Kola",
+      "price": "75",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Büyük Ayran",
+      "price": "65",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Türk Kahvesi",
+      "price": "50",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Çay",
+      "price": "25",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Sprite",
+      "price": "50",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Şalgam",
+      "price": "45",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Soda",
+      "price": "40",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Su",
+      "price": "25",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Gazoz",
+      "price": "45",
+      "category": "İçecekler"
+    }
+  ]
 }
 };
