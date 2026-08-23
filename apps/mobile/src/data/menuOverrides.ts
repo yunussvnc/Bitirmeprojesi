@@ -26192,5 +26192,103 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       "category": "İçecekler"
     }
   ]
+},
+  "7267": {
+  "name": "Pidemide Beylikdüzü",
+  "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/xlct/pidemide-xlct",
+  "sourceName": "Pidemide Beylikdüzü canlı Yemeksepeti menüsü (exact Adnan Kahveci Davutpaşa Cd. No:10/2 İç Kapı No:24 adresi)",
+  "verifiedAt": "2026-08-23",
+  "items": [
+    {
+      "name": "Lahmacun",
+      "price": "150",
+      "desc": "Yeşillik, limon, domates ile.",
+      "category": "Fırın Ürünleri"
+    },
+    {
+      "name": "Kaşarlı Pide",
+      "price": "275",
+      "desc": "Turşu, ezme ile.",
+      "category": "Fırın Ürünleri"
+    },
+    {
+      "name": "Kıymalı Pide",
+      "price": "275",
+      "desc": "Turşu, ezme ile.",
+      "category": "Fırın Ürünleri"
+    },
+    {
+      "name": "Kıymalı Kaşarlı Pide",
+      "price": "300",
+      "desc": "Turşu, ezme ile servis edilir.",
+      "category": "Fırın Ürünleri"
+    },
+    {
+      "name": "Tavuklu Kaşarlı Pide",
+      "price": "300",
+      "desc": "Turşu, ezme ile.",
+      "category": "Fırın Ürünleri"
+    },
+    {
+      "name": "Sebzeli Kaşarlı Pide",
+      "price": "300",
+      "desc": "Mevsim sebzeleri, kaşar peyniri. Turşu, ezme ile.",
+      "category": "Fırın Ürünleri"
+    },
+    {
+      "name": "Mantarlı Kaşarlı Pide",
+      "price": "300",
+      "desc": "Turşu, ezme ile.",
+      "category": "Fırın Ürünleri"
+    },
+    {
+      "name": "Kaşarlı Sucuklu Pide",
+      "price": "330",
+      "desc": "Turşu, ezme ile.",
+      "category": "Fırın Ürünleri"
+    },
+    {
+      "name": "Kavurmalı Kaşarlı Pide",
+      "price": "390",
+      "desc": "Turşu, ezme ile.",
+      "category": "Fırın Ürünleri"
+    },
+    {
+      "name": "Pastırmalı Kaşarlı Pide",
+      "price": "420",
+      "desc": "Turşu, ezme ile.",
+      "category": "Fırın Ürünleri"
+    },
+    {
+      "name": "Karışık Pide",
+      "price": "350",
+      "desc": "Sucuk, kaşar peyniri, kıyma, kuşbaşı eti. Turşu, ezme ile.",
+      "category": "Fırın Ürünleri"
+    },
+    {
+      "name": "Coca-Cola (33 cl.)",
+      "price": "110",
+      "desc": "Kutu içecek.",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Fanta (33 cl.)",
+      "price": "110",
+      "desc": "Kutu içecek.",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Sprite (33 cl.)",
+      "price": "110",
+      "desc": "Kutu içecek.",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Özerhisar Ayran (30 cl.)",
+      "price": "90",
+      "desc": "Büyük boy.",
+      "category": "İçecekler"
+    }
+  ]
 }
 };
