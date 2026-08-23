@@ -21840,4 +21840,841 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     }
   ]
 }
+,
+  "7247": {
+  "name": "Kanlıca Paysage Restaurant",
+  "sourceUrl": "https://kanlicapaysage.menudgtl.com/",
+  "sourceName": "Paysage resmi Instagram bağlantılı QR menüsü",
+  "verifiedAt": "2026-08-23",
+  "items": [
+    {
+      "name": "Beyaz Peynir",
+      "price": "230 TL",
+      "desc": "Ezine",
+      "category": "Soğuk Mezeler"
+    },
+    {
+      "name": "Girit Ezmesi",
+      "price": "410 TL",
+      "desc": "",
+      "category": "Soğuk Mezeler"
+    },
+    {
+      "name": "Karpuz",
+      "price": "300 TL",
+      "desc": "",
+      "category": "Soğuk Mezeler"
+    },
+    {
+      "name": "Kavun",
+      "price": "300 TL",
+      "desc": "",
+      "category": "Soğuk Mezeler"
+    },
+    {
+      "name": "Köz Biber",
+      "price": "400 TL",
+      "desc": "",
+      "category": "Soğuk Mezeler"
+    },
+    {
+      "name": "Köpoğlu",
+      "price": "400 TL",
+      "desc": "",
+      "category": "Soğuk Mezeler"
+    },
+    {
+      "name": "Levrek Marin",
+      "price": "510 TL",
+      "desc": "",
+      "category": "Soğuk Mezeler"
+    },
+    {
+      "name": "MARGARİTA",
+      "price": "800 TL",
+      "desc": "Tekila , Portakaal likörü , limon suyu , özel sos",
+      "category": "Koktyl"
+    },
+    {
+      "name": "Ordövr Tabağı",
+      "price": "1450 TL",
+      "desc": "9 Çeşit Soğuk Meze",
+      "category": "Soğuk Mezeler"
+    },
+    {
+      "name": "STRAWBERY MARGARİTA",
+      "price": "800 TL",
+      "desc": "Tekila , portakal likörü , çilek püresi , limon suyu , özel sos",
+      "category": "Koktyl"
+    },
+    {
+      "name": "Acılı Ezme",
+      "price": "400 TL",
+      "desc": "",
+      "category": "Soğuk Mezeler"
+    },
+    {
+      "name": "PASIHON MARTİNİ",
+      "price": "800 TL",
+      "desc": "Proseco şampanya, vodka, vanilya likörü, çarkıfelek püresi",
+      "category": "Koktyl"
+    },
+    {
+      "name": "Atom Biberi",
+      "price": "380 TL",
+      "desc": "",
+      "category": "Soğuk Mezeler"
+    },
+    {
+      "name": "LYN",
+      "price": "850 TL",
+      "desc": "Jack danel, portakal likörü, özel sos, sprite",
+      "category": "Koktyl"
+    },
+    {
+      "name": "Fava",
+      "price": "400 TL",
+      "desc": "",
+      "category": "Soğuk Mezeler"
+    },
+    {
+      "name": "COSMOPOLİTAN",
+      "price": "800 TL",
+      "desc": "Limonlu vodka, portakal likörü, kızılcık şurubu, limon suyu",
+      "category": "Koktyl"
+    },
+    {
+      "name": "Antibiyotik",
+      "price": "430 TL",
+      "desc": "Soğan Sarmısak Susamlı",
+      "category": "Soğuk Mezeler"
+    },
+    {
+      "name": "Gordon gin",
+      "price": "700 TL",
+      "desc": "",
+      "category": "Koktyl"
+    },
+    {
+      "name": "Humus",
+      "price": "500 TL",
+      "desc": "",
+      "category": "Soğuk Mezeler"
+    },
+    {
+      "name": "GİNN FİZZ",
+      "price": "700 TL",
+      "desc": "",
+      "category": "Koktyl"
+    },
+    {
+      "name": "Karışık Deniz Mahsülleri",
+      "price": "1650 TL",
+      "desc": "",
+      "category": "Soğuk Mezeler"
+    },
+    {
+      "name": "Avakado cacık",
+      "price": "450 TL",
+      "desc": "",
+      "category": "Soğuk Mezeler"
+    },
+    {
+      "name": "Ahtapot Izgara",
+      "price": "1350 TL",
+      "desc": "Adet",
+      "category": "Ara Sıcaklar"
+    },
+    {
+      "name": "Ahtapot Kavurma",
+      "price": "1350 TL",
+      "desc": "Porsiyon",
+      "category": "Ara Sıcaklar"
+    },
+    {
+      "name": "Kalamar Izgara",
+      "price": "950 TL",
+      "desc": "",
+      "category": "Ara Sıcaklar"
+    },
+    {
+      "name": "Kalamar Tava",
+      "price": "950 TL",
+      "desc": "",
+      "category": "Ara Sıcaklar"
+    },
+    {
+      "name": "Karides Güveç",
+      "price": "1000 TL",
+      "desc": "",
+      "category": "Ara Sıcaklar"
+    },
+    {
+      "name": "Patates Tava",
+      "price": "400 TL",
+      "desc": "",
+      "category": "Ara Sıcaklar"
+    },
+    {
+      "name": "Tereyağında Karides",
+      "price": "900 TL",
+      "desc": "",
+      "category": "Ara Sıcaklar"
+    },
+    {
+      "name": "Jumbo karides",
+      "price": "1500 TL",
+      "desc": "",
+      "category": "Specialler"
+    },
+    {
+      "name": "Avakodolu Karides",
+      "price": "950 TL",
+      "desc": "",
+      "category": "Specialler"
+    },
+    {
+      "name": "Roka Salatası Cevizli",
+      "price": "400 TL",
+      "desc": "",
+      "category": "Salatalar"
+    },
+    {
+      "name": "İnce Kıyım Salata",
+      "price": "300 TL",
+      "desc": "",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Paysage Özel Salata",
+      "price": "400 TL",
+      "desc": "",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Roka Salatası",
+      "price": "300 TL",
+      "desc": "",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Sezar Salata",
+      "price": "580 TL",
+      "desc": "Tavuklu",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Söğüş Tabağı",
+      "price": "350 TL",
+      "desc": "Roka Domates Maydanoz Domates Salatalık Havuç",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Çoban Salata",
+      "price": "400 TL",
+      "desc": "",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Mevsim Salata",
+      "price": "400 TL",
+      "desc": "",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Jülyen Salata",
+      "price": "450 TL",
+      "desc": "",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Roka Domates Peynirli Salata",
+      "price": "450 TL",
+      "desc": "",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Serpme Kahvaltı",
+      "price": "1500 TL",
+      "desc": "Zengin İçerik Sınırsız Çay",
+      "category": "Kahvaltı"
+    },
+    {
+      "name": "Suçuklu menemen",
+      "price": "500 TL",
+      "desc": "",
+      "category": "Kahvaltı"
+    },
+    {
+      "name": "Menemen",
+      "price": "400 TL",
+      "desc": "sade",
+      "category": "Kahvaltı"
+    },
+    {
+      "name": "Barbun",
+      "price": "4100 TL",
+      "desc": "Porsiyon",
+      "category": "Balık"
+    },
+    {
+      "name": "Deniz Çipurası",
+      "price": "1800 TL",
+      "desc": "KG",
+      "category": "Balık"
+    },
+    {
+      "name": "İspendek Levrek",
+      "price": "1000 TL",
+      "desc": "",
+      "category": "Balık"
+    },
+    {
+      "name": "Kalkan Balığı",
+      "price": "1500 TL",
+      "desc": "Porsiyon",
+      "category": "Balık"
+    },
+    {
+      "name": "Kalkan Balığı",
+      "price": "3000 TL",
+      "desc": "KG",
+      "category": "Balık"
+    },
+    {
+      "name": "Deniz Levreği",
+      "price": "2500 TL",
+      "desc": "",
+      "category": "Balık"
+    },
+    {
+      "name": "Köfte",
+      "price": "950 TL",
+      "desc": "Porsiyon",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Antrikot şiş",
+      "price": "1100 TL",
+      "desc": "Porsiyon",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Tavuk Pirzola",
+      "price": "750 TL",
+      "desc": "Porsiyon",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Dana kaburga",
+      "price": "1300 TL",
+      "desc": "porsiyon",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Oğlak tandır",
+      "price": "1250 TL",
+      "desc": "porsiyon",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Sakız kabağında sarılı levrek",
+      "price": "1200 TL",
+      "desc": "",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Deniz Mahsülleri Orzo",
+      "price": "1600 TL",
+      "desc": "porsiyon",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Dondurmalı İrmik",
+      "price": "450 TL",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Karışık Tatlı Tabağı",
+      "price": "1000 TL",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Küp Dondurma",
+      "price": "400 TL",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Meyve Tabağı",
+      "price": "800 TL",
+      "desc": "Mevsim Meyveleri",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Çerez Karışık",
+      "price": "600 TL",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Peynir Tabağı",
+      "price": "2200 TL",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Volkanik Sufle",
+      "price": "600 TL",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Serpme Mevsim Meyveleri",
+      "price": "800 TL",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Fine sütlaç",
+      "price": "550 TL",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Şalgam",
+      "price": "220 TL",
+      "desc": "Bardak",
+      "category": "Soft Soğuk İçecek"
+    },
+    {
+      "name": "Cola",
+      "price": "220 TL",
+      "desc": "",
+      "category": "Soft Soğuk İçecek"
+    },
+    {
+      "name": "Fanta",
+      "price": "220 TL",
+      "desc": "",
+      "category": "Soft Soğuk İçecek"
+    },
+    {
+      "name": "I Tea (Soğuk Çay)",
+      "price": "220 TL",
+      "desc": "",
+      "category": "Soft Soğuk İçecek"
+    },
+    {
+      "name": "Meyve Suyu Çeşitleri",
+      "price": "220 TL",
+      "desc": "Bardak",
+      "category": "Soft Soğuk İçecek"
+    },
+    {
+      "name": "Soda",
+      "price": "160 TL",
+      "desc": "",
+      "category": "Soft Soğuk İçecek"
+    },
+    {
+      "name": "Şalgam",
+      "price": "300 TL",
+      "desc": "1 kg",
+      "category": "Soft Soğuk İçecek"
+    },
+    {
+      "name": "Portakal Suyu",
+      "price": "450 TL",
+      "desc": "Taze Sıkılmış",
+      "category": "Soft Soğuk İçecek"
+    },
+    {
+      "name": "Nar Suyu",
+      "price": "450 TL",
+      "desc": "Taze Sıkılmış",
+      "category": "Soft Soğuk İçecek"
+    },
+    {
+      "name": "Çay",
+      "price": "180 TL",
+      "desc": "Fincan",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Nescafe",
+      "price": "200 TL",
+      "desc": "Fincan",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Türk Kahvesi",
+      "price": "200 TL",
+      "desc": "Fincan",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Türk Kahvesi",
+      "price": "260 TL",
+      "desc": "DOUBLE",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Çay",
+      "price": "150 TL",
+      "desc": "Küçük",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "YENİ RAKI",
+      "price": "3900 TL",
+      "desc": "Adet 70 LİK",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Yeni Rakı 50 CL",
+      "price": "",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Yeni Rakı 35 CL",
+      "price": "2900 TL",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Beylerbeyi Göbek 70 CL",
+      "price": "4500 TL",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Beylerbeyi Göbek 50 CL",
+      "price": "3800 TL",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Beylerbeyi Göbek 35 CL",
+      "price": "3000 TL",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Tekirdağ Altın Seri 70 CL",
+      "price": "4800 TL",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Tekirdağ Altın Seri 50 CL",
+      "price": "3800 TL",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Tekirdağ Altın Seri 35 CL",
+      "price": "3200 TL",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Beylerbeyi Göbek 20 CL",
+      "price": "1650 TL",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Yeni Rakı 20 CL",
+      "price": "1400 TL",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Tekirdağ Altın Seri 20 CL",
+      "price": "1650 TL",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Yeni Rakı",
+      "price": "700 TL",
+      "desc": "Kadeh",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Beylerbeyi Göbek",
+      "price": "800 TL",
+      "desc": "Kadeh",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Tekirdağ Altın Seri",
+      "price": "800 TL",
+      "desc": "Kadeh",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Tekirdağ Gold 70 CL",
+      "price": "4800 TL",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Tekirdağ Gold 50 CL",
+      "price": "3800 TL",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Tekirdağ Gold 35 CL",
+      "price": "3200 TL",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Tekirdağ Gold",
+      "price": "800 TL",
+      "desc": "Kadeh",
+      "category": "Rakılar"
+    },
+    {
+      "name": "KULUP RAKI 70 LİK",
+      "price": "3800 TL",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "YENİ SERİ 20 CL",
+      "price": "1500 TL",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "YENİ SERİ 35 LİK",
+      "price": "3300 TL",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "YENİ SERİ 70 LİK RAKI",
+      "price": "4000 TL",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "TEKİRDAĞ 50 LİK",
+      "price": "3800 TL",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "TEKİRDAĞ GOLD 20 LİK",
+      "price": "1600 TL",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "RAKI USTALARIN KARIŞIMI DUBLE",
+      "price": "",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "RAKI USTALARIN KARIŞIMI 70 LİK",
+      "price": "4100 TL",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "SARAFİN SEVİNYON 75 LİK",
+      "price": "4500 TL",
+      "desc": "",
+      "category": "Şarap"
+    },
+    {
+      "name": "BUZBAĞ 70 LİK",
+      "price": "3000 TL",
+      "desc": "",
+      "category": "Şarap"
+    },
+    {
+      "name": "SARAFİN FÜME BLANC BEYAZ 75 LİK",
+      "price": "4500 TL",
+      "desc": "",
+      "category": "Şarap"
+    },
+    {
+      "name": "SARAFİN S BLANC 75 LİK",
+      "price": "4500 TL",
+      "desc": "",
+      "category": "Şarap"
+    },
+    {
+      "name": "SARAFİN CHARDONAY 75 LİK",
+      "price": "4500 TL",
+      "desc": "",
+      "category": "Şarap"
+    },
+    {
+      "name": "İSA BEY",
+      "price": "3200 TL",
+      "desc": "",
+      "category": "Şarap"
+    },
+    {
+      "name": "ŞARAP KADEH",
+      "price": "800 TL",
+      "desc": "",
+      "category": "Şarap"
+    },
+    {
+      "name": "ABSOLUT KADEH",
+      "price": "800 TL",
+      "desc": "",
+      "category": "Votka"
+    },
+    {
+      "name": "BELVEDERE ŞİŞE",
+      "price": "8000 TL",
+      "desc": "",
+      "category": "Votka"
+    },
+    {
+      "name": "ABSOLUT ŞİŞE 70 LİK",
+      "price": "3800 TL",
+      "desc": "",
+      "category": "Votka"
+    },
+    {
+      "name": "BAİLEYS KADEH",
+      "price": "300 TL",
+      "desc": "",
+      "category": "Votka"
+    },
+    {
+      "name": "SMİRNOF VOTKA 70 LİK",
+      "price": "3800 TL",
+      "desc": "",
+      "category": "Votka"
+    },
+    {
+      "name": "CHİVAS REGAL ŞİŞE",
+      "price": "6500 TL",
+      "desc": "",
+      "category": "Viski"
+    },
+    {
+      "name": "BLACK LABEL KADEH",
+      "price": "750 TL",
+      "desc": "",
+      "category": "Viski"
+    },
+    {
+      "name": "JACK DANİELS KADEH",
+      "price": "750 TL",
+      "desc": "",
+      "category": "Viski"
+    },
+    {
+      "name": "CİHİVAS REGAL KADEH",
+      "price": "750 TL",
+      "desc": "",
+      "category": "Viski"
+    },
+    {
+      "name": "JB KADEH",
+      "price": "750 TL",
+      "desc": "",
+      "category": "Viski"
+    },
+    {
+      "name": "MARTİNİ KADEH",
+      "price": "700 TL",
+      "desc": "",
+      "category": "Gin"
+    },
+    {
+      "name": "Gordon gin 70 cl",
+      "price": "4000 TL",
+      "desc": "",
+      "category": "Gin"
+    },
+    {
+      "name": "BİRA EFES 50 LİK",
+      "price": "600 TL",
+      "desc": "",
+      "category": "Bira"
+    },
+    {
+      "name": "EFES DARK 33 LÜK",
+      "price": "450 TL",
+      "desc": "",
+      "category": "Bira"
+    },
+    {
+      "name": "EFES LİGHT 33 LUK",
+      "price": "450 TL",
+      "desc": "",
+      "category": "Bira"
+    },
+    {
+      "name": "EFES ŞİŞE 33 LUK",
+      "price": "450 TL",
+      "desc": "",
+      "category": "Bira"
+    },
+    {
+      "name": "Sangria",
+      "price": "800 TL",
+      "desc": "Kırmızı şarap,meyve likörü,elma suyu,sprite,meyve parçaları",
+      "category": "Koktyl"
+    },
+    {
+      "name": "paysage sour",
+      "price": "850 TL",
+      "desc": "whiskey,sweet sour,kırmızı şarap",
+      "category": "Koktyl"
+    },
+    {
+      "name": "BMW",
+      "price": "800 TL",
+      "desc": "Bailes,Malibu,Whiskey,Kahve likörü",
+      "category": "Koktyl"
+    },
+    {
+      "name": "Aperol Spritz",
+      "price": "700 TL",
+      "desc": "Aperol.Proseco,Soda",
+      "category": "Koktyl"
+    },
+    {
+      "name": "Negroni",
+      "price": "700 TL",
+      "desc": "Campari,Gordon gin,Martini",
+      "category": "Koktyl"
+    },
+    {
+      "name": "White Russian",
+      "price": "700 TL",
+      "desc": "Vodka,Kahlua,süt",
+      "category": "Koktyl"
+    },
+    {
+      "name": "Whiski sour",
+      "price": "750 TL",
+      "desc": "",
+      "category": "Koktyl"
+    },
+    {
+      "name": "Kuzu kulağı",
+      "price": "800 TL",
+      "desc": "",
+      "category": "Koktyl"
+    }
+  ]
+}
 };
