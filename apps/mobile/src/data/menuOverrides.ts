@@ -24423,4 +24423,199 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     }
   ]
 }
+,
+  "7256": {
+  "name": "Ala Rasi Restaurant",
+  "sourceUrl": "https://www.yemeksepeti.com/restaurant/nqx3/ala-rasi-restaurant",
+  "sourceName": "Yemeksepeti canlı menüsü (Ala Rasi Sıraselviler)",
+  "verifiedAt": "2026-08-23",
+  "items": [
+    {
+      "name": "Mercimek Çorbası / Lentıl Soup",
+      "price": "250 TL",
+      "desc": "Karamelize sebzeler ve baharatlar mix ile pişirilir.",
+      "category": "Çorbalar / Soups"
+    },
+    {
+      "name": "Kemik Suyu Çorbası / Bone Broth Soup",
+      "price": "245 TL",
+      "desc": "Aromatik baharatlar, sebzeler ve taze otlar ile tatlandırılmış, ağır ateşte kaynatılmıştır.",
+      "category": "Çorbalar / Soups"
+    },
+    {
+      "name": "Tavuk Şiş",
+      "price": "740 TL",
+      "desc": "Narenciye, sarımsak, baharatlar ve yoğurt marine edilmiş tavuk şiş. Salata, pide ile",
+      "category": "Ana Yemekler / Main Dishes"
+    },
+    {
+      "name": "Tavuk Malai Şiş",
+      "price": "740 TL",
+      "desc": "Limon, yeşil biber, krem ile marine edilmiş tavuk but, mevsim salata, pilav ile",
+      "category": "Ana Yemekler / Main Dishes"
+    },
+    {
+      "name": "Kuzu Yağlı Kara",
+      "price": "1130 TL",
+      "desc": "Baharat, tuz ve biberle marine edilmiş, yumuşak kuzu eti. Salata, ızgara patates ile",
+      "category": "Ana Yemekler / Main Dishes"
+    },
+    {
+      "name": "Reşmi Kebap",
+      "price": "730 TL",
+      "desc": "Paprika biberle tatlandırılmış hafif baharatlı tavuk kebabı. Mevsim salata, aromalı pilav ile",
+      "category": "Ana Yemekler / Main Dishes"
+    },
+    {
+      "name": "Acılı Paşa Kebap",
+      "price": "730 TL",
+      "desc": "Özel baharatlarla marine edilmiş acılı tavuk kebabı. Salata, aromalı pilav ile",
+      "category": "Ana Yemekler / Main Dishes"
+    },
+    {
+      "name": "Kajulu Dana Kebap - Beef Cashew Kebab",
+      "price": "890 TL",
+      "desc": "Özel sos, soğan, maydanozla marine edilmiş dana eti kebap. Salata, aromalı pilav ile",
+      "category": "Ana Yemekler / Main Dishes"
+    },
+    {
+      "name": "Kuzu Kebap",
+      "price": "870 TL",
+      "desc": "Hafif aromalı kuzu eti kebabı. Salata, aromalı pilav ile",
+      "category": "Ana Yemekler / Main Dishes"
+    },
+    {
+      "name": "Kuzu Pirzola (220 gr.)",
+      "price": "1310 TL",
+      "desc": "Mevsim sebzeleri ile",
+      "category": "Ana Yemekler / Main Dishes"
+    },
+    {
+      "name": "Afgan Dana Şiş / Afghan Beef Botı",
+      "price": "1130 TL",
+      "desc": "Karabiber, tuz, özel baharatlarla marine edilmiş dana eti, kuzu kuyruk yağ. Salata, aromalı pilav ile",
+      "category": "Ana Yemekler / Main Dishes"
+    },
+    {
+      "name": "Tavuk Kanat",
+      "price": "780 TL",
+      "desc": "Özel sos ile marine edilmiş tavuk kanat. Salata, patates kızartması ile",
+      "category": "Ana Yemekler / Main Dishes"
+    },
+    {
+      "name": "Tavuk Biryani / Chicken Biryani",
+      "price": "810 TL",
+      "desc": "Marine edilimiş tavuk, basmati pirinç, baharatlar, safran ile hazırlanan geleneksel tavuk biryani",
+      "category": "Özelliklerimiz / Our Specialities"
+    },
+    {
+      "name": "Kuzu Biryani / Lamb Biryani",
+      "price": "1160 TL",
+      "desc": "Marine kuzu eti, basmati pirinç, baharatlı safran ile hazırlanan geleneksel kuzu biryani",
+      "category": "Özelliklerimiz / Our Specialities"
+    },
+    {
+      "name": "Tavuk Afgan Pilav / Chicken Afghani Pilaf",
+      "price": "810 TL",
+      "desc": "Özel sos ile marine edilmiş ızgara tavuk. Afgan pilavı ile",
+      "category": "Özelliklerimiz / Our Specialities"
+    },
+    {
+      "name": "Kuzu Afgan Pilav / Lamb Afghanı Pılaf",
+      "price": "1160 TL",
+      "desc": "Yumuşak kuzu eti. Afgan pilavı ile",
+      "category": "Özelliklerimiz / Our Specialities"
+    },
+    {
+      "name": "Tavuklu Kepse Pilav / Chicken Kebsa",
+      "price": "830 TL",
+      "desc": "Izgara tavuk, kişniş, tarçın, zerdeçal, kakule, basmati pirinç, özel sos",
+      "category": "Özelliklerimiz / Our Specialities"
+    },
+    {
+      "name": "Kuzu Kepse Pilav / Lamb Kebsa",
+      "price": "1240 TL",
+      "desc": "Yumuşak kuzu eti, kakule, kişniş, tarçın ve zerdeçal ile tatlandırılmış kepse pilav ve özel kepse sos ile",
+      "category": "Özelliklerimiz / Our Specialities"
+    },
+    {
+      "name": "Ala Kiev Kebap - Kebab Ala Kiev",
+      "price": "880 TL",
+      "desc": "Otlar, peynir sosuyla doldurulmuş tavuk kebabı. Turşu, sebze, humus ile",
+      "category": "Özelliklerimiz / Our Specialities"
+    },
+    {
+      "name": "Tereyağı Soslu Tavuk",
+      "price": "725 TL",
+      "desc": "Tereyağı sosunda özel baharatlarla pişirilmiş kemiksiz tavuk but",
+      "category": "Özelliklerimiz / Our Specialities"
+    },
+    {
+      "name": "Peynir Reşmi Güveç / Paneer Reshmi",
+      "price": "725 TL",
+      "desc": "Krema, peynir sosunda pişirilmiş, karabiberle hafif tatlandırılmış Pakistan usulü tavuk güveç",
+      "category": "Özelliklerimiz / Our Specialities"
+    },
+    {
+      "name": "Pakistan Usulü Tavuk Sac Tava",
+      "price": "710 TL",
+      "desc": "Taze yeşil biber, sarımsak ve kişniş içeren domates ve zencefil bazlı sos ile pişirilen kemiksiz tavuk.",
+      "category": "Özelliklerimiz / Our Specialities"
+    },
+    {
+      "name": "Pakistan Usulü Kuzu Sac Tava",
+      "price": "1050 TL",
+      "desc": "Yaze yeşil biber, sarımsak ve kişniş içeren domates ve zencefil bazlı sos ile pişirilen yumuşak kuzu eti.",
+      "category": "Özelliklerimiz / Our Specialities"
+    },
+    {
+      "name": "Fattoush Salata",
+      "price": "430 TL",
+      "desc": "Özel fattoush sos, mevsim yeşillikleri, salatalık, soğan, zeytin, domates",
+      "category": "Salatalar / Salads"
+    },
+    {
+      "name": "Sezar Salata",
+      "price": "530 TL",
+      "desc": "Limon suyu, zeytinyağı, hardal sosu ile tatlandırılmış marul, çeri domates, özel Sezar sos ile",
+      "category": "Salatalar / Salads"
+    },
+    {
+      "name": "Humus",
+      "price": "295 TL",
+      "desc": "Nohut, tahin, zeytinyağı, limon suyu, sarımsak",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Ezme",
+      "price": "280 TL",
+      "desc": "Domates salçası, nar ekşisi, sarımsak, zeytinyağı, baharatlar, ceviz",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Mütebbel",
+      "price": "295 TL",
+      "desc": "Közlenmiş patlıcan, zeytinyağı, tahin, sarımsak",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Atom",
+      "price": "295 TL",
+      "desc": "Süzme yoğurt, kuru acı biber, sarımsak, tereyağı",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Ala Meze Tabağı",
+      "price": "895 TL",
+      "desc": "Ezme, humus, mütebbel, şakşuka, ala gurme",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Katmer",
+      "price": "380 TL",
+      "desc": "Antep usulü, kaymaklı, fıstıklı el yufkası. İsteğe göre dondurma veya kaymak ile",
+      "category": "Tatlılar / Desserts"
+    }
+  ]
+}
 };
