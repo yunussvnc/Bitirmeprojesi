@@ -36679,5 +36679,37 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       "category": "İçecekler"
     }
   ]
+},
+  "7273": {
+  "name": "Kebabım Beylikdüzü",
+  "sourceUrl": "https://restoranim.net/istanbul/istanbul/kebapci/kebabim-beylikduzu",
+  "sourceName": "Restoranim.net kullanıcı menü posteri (22.06.2026 gallery kaydı; görsel üzeri exact adres/telefon eşleşmesi)",
+  "verifiedAt": "2026-08-23",
+  "items": [
+    {
+      "name": "Menü 1 - Adana - Urfa Dürüm (100 gr.)",
+      "price": "250",
+      "desc": "Çorba (Ezogelin-Mercimek); İçecek (Kola-Ayran-Şalgam); Çiğ köfte ve Yoğurt (1 ikram)",
+      "category": "Menüler"
+    },
+    {
+      "name": "Menü 2 - Tavuk Şiş Dürüm (100 gr.)",
+      "price": "230",
+      "desc": "Çorba (Ezogelin-Mercimek); İçecek (Kola-Ayran-Şalgam); Çiğ köfte ve Yoğurt (1 ikram)",
+      "category": "Menüler"
+    },
+    {
+      "name": "Menü 3 - Köfte Ekmek (100 gr.)",
+      "price": "270",
+      "desc": "Çorba (Ezogelin-Mercimek); İçecek (Kola-Ayran-Şalgam); Çiğ köfte ve Yoğurt (1 ikram)",
+      "category": "Menüler"
+    },
+    {
+      "name": "Menü 4 - Köfte Porsiyon (100 gr.)",
+      "price": "330",
+      "desc": "Çorba (Ezogelin-Mercimek); İçecek (Kola-Ayran-Şalgam); Salata, Çiğ köfte ve Yoğurt",
+      "category": "Menüler"
+    }
+  ]
 }
 };
