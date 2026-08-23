@@ -25114,5 +25114,997 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       "category": "Eşlikçiler"
     }
   ]
+},
+  "7265": {
+  "name": "Babel Ocakbaşı Nevizade",
+  "sourceUrl": "https://babelocakbasi.com/menu.html",
+  "sourceName": "Babel Ocakbaşı resmi web menüsü (exact Hüseyinağa Kameriye Sk. No:5 adresi; fiyat yayınlanmamış)",
+  "verifiedAt": "2026-08-23",
+  "items": [
+    {
+      "name": "Adana Kebap",
+      "price": "",
+      "desc": "",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Ali Nazik Kebap",
+      "price": "",
+      "desc": "",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Beyti",
+      "price": "",
+      "desc": "",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Böbrek",
+      "price": "",
+      "desc": "",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Karides",
+      "price": "",
+      "desc": "",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Ciğer 10 Şiş",
+      "price": "",
+      "desc": "",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Ciğer 5 Şiş",
+      "price": "",
+      "desc": "",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Çöp Şiş 10",
+      "price": "",
+      "desc": "",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Çöp Şiş 5",
+      "price": "",
+      "desc": "",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Domatesli Kebap",
+      "price": "",
+      "desc": "",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Dürüm",
+      "price": "",
+      "desc": "",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Et Sote",
+      "price": "",
+      "desc": "",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Ezme",
+      "price": "",
+      "desc": "",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Fileto Şiş",
+      "price": "",
+      "desc": "",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Kaburga",
+      "price": "",
+      "desc": "",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Kanat",
+      "price": "",
+      "desc": "",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Karışık Kebap",
+      "price": "",
+      "desc": "",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Tablacı salata",
+      "price": "",
+      "desc": "",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Fıstıklı kebap",
+      "price": "",
+      "desc": "",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Kuzu Şiş",
+      "price": "",
+      "desc": "",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Lokum",
+      "price": "",
+      "desc": "",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Patlıcan Söğürtme",
+      "price": "",
+      "desc": "",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Patlıcanlı Kebap",
+      "price": "",
+      "desc": "",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Pirzola",
+      "price": "",
+      "desc": "",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Taraklık",
+      "price": "",
+      "desc": "",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Tavuk şiş",
+      "price": "",
+      "desc": "",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Urfa Kebap",
+      "price": "",
+      "desc": "",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Uykuluk 10 Şiş",
+      "price": "",
+      "desc": "",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Uykuluk 5 Şiş",
+      "price": "",
+      "desc": "",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Ekmek su",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Atom",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Balon Pide",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Beyaz Peynir",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Börülce",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Cacık",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Çalı Fasülyesi",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Çiğ Köfte",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Enginar",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Fava",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Fındık Lahmacun",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Girit Ezme",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Havuç Tarator",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Haydari",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Humus",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Çorba",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Karpuz",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Kaşarlı Mantar",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Kaşarlı Pazı",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Kavun",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Babel Special",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Köpeoğlu",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Köz Sarımsak",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Közde Patlıcan",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Közde Soğan",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Lahmacun",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Meze",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Pancar Turşu",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Pastırmalı Humus",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Patates Tava",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Patlıcan Soslu",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Pazı Kavurma",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Pilaki",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Semizotu",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Süzme Yoğurt",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Tereyağlı Tulum",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Turşu",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Bakla",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Tekmili Fava",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Cacık Sarımsaklı",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Zeytin",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Yeni Rakı 100cl.",
+      "price": "",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Yeni Rakı 20cl.",
+      "price": "",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Yeni Rakı 35cl.",
+      "price": "",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Yeni Rakı 50cl.",
+      "price": "",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Yeni Rakı 70cl.",
+      "price": "",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Yeni Seri 100cl.",
+      "price": "",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Yeni Seri 20cl.",
+      "price": "",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Yeni Seri 35cl.",
+      "price": "",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Yeni Seri 50cl.",
+      "price": "",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Yeni Seri 70cl.",
+      "price": "",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Yeşil Efe 100cl.",
+      "price": "",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Yeşil Efe 20cl.",
+      "price": "",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Yeşil Efe 35cl.",
+      "price": "",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Yeşil Efe 50cl.",
+      "price": "",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Yeşil Efe 70cl.",
+      "price": "",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Göbek 35cl.",
+      "price": "",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Göbek 70cl.",
+      "price": "",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Göbek rakı 20cl.",
+      "price": "",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Beylerbeyi Klasik 50cl.",
+      "price": "",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Beylerbeyi Klasik 70cl.",
+      "price": "",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Tekirdağ Rakısı 100cl.",
+      "price": "",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Tekirdağ Rakısı 20cl.",
+      "price": "",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Tekirdağ Rakısı 35cl.",
+      "price": "",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Tekirdağ Rakısı 50cl.",
+      "price": "",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Tekirdağ Rakısı 70cl.",
+      "price": "",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Tekirdağ Gold 100cl.",
+      "price": "",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Tekirdağ Gold 20cl.",
+      "price": "",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Tekirdağ Gold 35cl.",
+      "price": "",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Tekirdağ Gold 50cl.",
+      "price": "",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Tekirdağ Gold 70cl.",
+      "price": "",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Efe Gold 100cl.",
+      "price": "",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Efe Gold 20cl.",
+      "price": "",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Efe Gold 35cl.",
+      "price": "",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Efe Gold 50cl.",
+      "price": "",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Efe Gold 70cl.",
+      "price": "",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Duble rakı",
+      "price": "",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Tek rakı",
+      "price": "",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Sarı zeybek 35cl.",
+      "price": "",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Sarı zeybek 70cl.",
+      "price": "",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Sarı zeybek 100c.l",
+      "price": "",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Sarı zeybek 50cl.",
+      "price": "",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Göbek rakı 100cl.",
+      "price": "",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Göbek 50",
+      "price": "",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Duble altın göbek",
+      "price": "",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Mercan 100cl.",
+      "price": "",
+      "desc": "",
+      "category": "Rakılar"
+    },
+    {
+      "name": "Asitli İçecekler",
+      "price": "",
+      "desc": "",
+      "category": "Alkolsüz İçecekler"
+    },
+    {
+      "name": "Ayran",
+      "price": "",
+      "desc": "",
+      "category": "Alkolsüz İçecekler"
+    },
+    {
+      "name": "Meyve Suları",
+      "price": "",
+      "desc": "",
+      "category": "Alkolsüz İçecekler"
+    },
+    {
+      "name": "Red Bull",
+      "price": "",
+      "desc": "",
+      "category": "Alkolsüz İçecekler"
+    },
+    {
+      "name": "Şalgam Suyu (Büyük)",
+      "price": "",
+      "desc": "",
+      "category": "Alkolsüz İçecekler"
+    },
+    {
+      "name": "Şalgam Suyu (Küçük)",
+      "price": "",
+      "desc": "",
+      "category": "Alkolsüz İçecekler"
+    },
+    {
+      "name": "Soda",
+      "price": "",
+      "desc": "",
+      "category": "Alkolsüz İçecekler"
+    },
+    {
+      "name": "Ballı Muzlu",
+      "price": "",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Kabak Tatlısı",
+      "price": "",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Karışık Meyve",
+      "price": "",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Fırın Helva",
+      "price": "",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Künefe",
+      "price": "",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Künefe Kaymaklı",
+      "price": "",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Dondurmalı Katmer",
+      "price": "",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Çoban Salata",
+      "price": "",
+      "desc": "",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Gavurdağı",
+      "price": "",
+      "desc": "",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Göbek Salata",
+      "price": "",
+      "desc": "",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Mevsim Salata",
+      "price": "",
+      "desc": "",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Roka Domates",
+      "price": "",
+      "desc": "",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Söğüş Salata",
+      "price": "",
+      "desc": "",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Yeşil Salata",
+      "price": "",
+      "desc": "",
+      "category": "Salatalar"
+    },
+    {
+      "name": "(KŞ) Buzbağ Klasik Öküzgözü - Boğazkere",
+      "price": "",
+      "desc": "",
+      "category": "Şaraplar"
+    },
+    {
+      "name": "(KŞ) Kayra Vintage Merlot",
+      "price": "",
+      "desc": "",
+      "category": "Şaraplar"
+    },
+    {
+      "name": "(KŞ) Kırmızı Şarap 35cc",
+      "price": "",
+      "desc": "",
+      "category": "Şaraplar"
+    },
+    {
+      "name": "(KŞ) Leona Cabernet Sauvignon",
+      "price": "",
+      "desc": "",
+      "category": "Şaraplar"
+    },
+    {
+      "name": "(KŞ) Terra Cabernet Sauvignon - Merlot",
+      "price": "",
+      "desc": "",
+      "category": "Şaraplar"
+    },
+    {
+      "name": "(KŞ) Terra Öküzgözü",
+      "price": "",
+      "desc": "",
+      "category": "Şaraplar"
+    },
+    {
+      "name": "(BŞ) Allure Sauvignon Blanc",
+      "price": "",
+      "desc": "",
+      "category": "Şaraplar"
+    },
+    {
+      "name": "(BŞ) Beyaz Şarap 35cc",
+      "price": "",
+      "desc": "",
+      "category": "Şaraplar"
+    },
+    {
+      "name": "(BŞ) Buzbağ Emir - Narince",
+      "price": "",
+      "desc": "",
+      "category": "Şaraplar"
+    },
+    {
+      "name": "Sarafin Beyaz şarap",
+      "price": "",
+      "desc": "",
+      "category": "Şaraplar"
+    },
+    {
+      "name": "(BŞ) Leona Sauvignon Blanc",
+      "price": "",
+      "desc": "",
+      "category": "Şaraplar"
+    },
+    {
+      "name": "(BŞ) Terra White Breeze",
+      "price": "",
+      "desc": "",
+      "category": "Şaraplar"
+    },
+    {
+      "name": "Kadeh Beyaz Şarap",
+      "price": "",
+      "desc": "",
+      "category": "Şaraplar"
+    },
+    {
+      "name": "Kadeh Kırmızı Şarap",
+      "price": "",
+      "desc": "",
+      "category": "Şaraplar"
+    },
+    {
+      "name": "Viski 100cl.",
+      "price": "",
+      "desc": "",
+      "category": "Cin-Votka-Viski"
+    },
+    {
+      "name": "Viski 35 cl.",
+      "price": "",
+      "desc": "",
+      "category": "Cin-Votka-Viski"
+    },
+    {
+      "name": "Votka 35cl.",
+      "price": "",
+      "desc": "",
+      "category": "Cin-Votka-Viski"
+    },
+    {
+      "name": "Votka 70cl.",
+      "price": "",
+      "desc": "",
+      "category": "Cin-Votka-Viski"
+    },
+    {
+      "name": "Votka Kadeh Duble",
+      "price": "",
+      "desc": "",
+      "category": "Cin-Votka-Viski"
+    },
+    {
+      "name": "Votka Kadeh Tek",
+      "price": "",
+      "desc": "",
+      "category": "Cin-Votka-Viski"
+    },
+    {
+      "name": "Cin 50cl.",
+      "price": "",
+      "desc": "",
+      "category": "Cin-Votka-Viski"
+    },
+    {
+      "name": "Cin 70cl.",
+      "price": "",
+      "desc": "",
+      "category": "Cin-Votka-Viski"
+    },
+    {
+      "name": "Cin Kadeh Duble",
+      "price": "",
+      "desc": "",
+      "category": "Cin-Votka-Viski"
+    },
+    {
+      "name": "Cin Kadeh Tek",
+      "price": "",
+      "desc": "",
+      "category": "Cin-Votka-Viski"
+    },
+    {
+      "name": "Viski 35cl.",
+      "price": "",
+      "desc": "",
+      "category": "Cin-Votka-Viski"
+    },
+    {
+      "name": "Viski 50cl.",
+      "price": "",
+      "desc": "",
+      "category": "Cin-Votka-Viski"
+    },
+    {
+      "name": "Viski Kadeh Duble",
+      "price": "",
+      "desc": "",
+      "category": "Cin-Votka-Viski"
+    },
+    {
+      "name": "Viski Kadeh Tek",
+      "price": "",
+      "desc": "",
+      "category": "Cin-Votka-Viski"
+    }
+  ]
 }
 };
