@@ -33391,5 +33391,589 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
           "category": "Et"
         }
       ]
+    },
+    "6782": {
+      "name": "Sezen Meyhane",
+      "sourceUrl": "https://qr.finedinemenu.com/sezen-meyhane/menu/65d89086e4e2aa0015516057",
+      "sourceName": "Finedine QR menüsü/API (exact Türkali, Altıntaş Sk. 30/A; active shop)",
+      "verifiedAt": "2026-08-23",
+      "items": [
+        {
+          "name": "Fix Menü 1",
+          "price": "3000",
+          "desc": "Seçeceğiniz 6 meze 2 ara sıcak Salata Karışık ızgara (kişi sayısına göre) Yeşil Efe (2 kişi için 35cl, 3 kişi için 50cl ve 4 kişi için 70cl) *Fiyatlar kişi başıdır.",
+          "category": "Fix Menüler"
+        },
+        {
+          "name": "Fix Menü 2",
+          "price": "2500",
+          "desc": "Seçeceğiniz 6 meze 2 ara sıcak Salata Yeşil Efe (2 kişi için 35cl, 3 kişi için 50cl ve 4 kişi için 70cl) *Fiyatlar kişi başıdır.",
+          "category": "Fix Menüler"
+        },
+        {
+          "name": "Mum Işığında Rakı Gecesi",
+          "price": "3000",
+          "desc": "Seçeceğiniz 6 Meze Roka Salatası Ara Sıcak: Çıtır Fava, İçli Köfte Ana Yemek: Ortaya Adana ve Tavuk Şiş, Kişi Başı Kuzu Kaburga İki Kişiye 35'lik Yeşil Efe *Fiyatlarımız kişi başıdır.",
+          "category": "Fix Menüler"
+        },
+        {
+          "name": "Yaz Menüsü",
+          "price": "1500",
+          "desc": "Seçeceğiniz 3 Meze, Roka Salatası, Karpuz, Beyaz Leblebi, Yeşil Efe Rakı (2 kişi için 35cl ve 3 Meze, 3 kişi için 50cl ve 5 Meze, 4 kişi için 70cl ve 6 Meze) *Fiyatlar kişi başıdır.",
+          "category": "Fix Menüler"
+        },
+        {
+          "name": "Küşleme",
+          "price": "1145",
+          "desc": "Izgara Biber, Izgara Domates, Izgara Soğan, Lavaş ile",
+          "category": "Ana Yemekler"
+        },
+        {
+          "name": "Yağlıkara",
+          "price": "1155",
+          "desc": "Izgara Biber, Izgara Domates, Izgara Soğan, Lavaş ile",
+          "category": "Ana Yemekler"
+        },
+        {
+          "name": "Soğanlı Kebap",
+          "price": "870",
+          "desc": "Izgara Biber, Izgara Domates, Izgara Soğan, Lavaş ile",
+          "category": "Ana Yemekler"
+        },
+        {
+          "name": "Domatesli Kebap",
+          "price": "870",
+          "desc": "Izgara Biber, Izgara Domates, Izgara Soğan, Lavaş ile",
+          "category": "Ana Yemekler"
+        },
+        {
+          "name": "Adana Kebap",
+          "price": "840",
+          "desc": "Izgara Biber, Izgara Domates, Izgara Soğan, Lavaş ile",
+          "category": "Ana Yemekler"
+        },
+        {
+          "name": "Urfa Kebap",
+          "price": "840",
+          "desc": "Izgara Biber, Izgara Domates, Izgara Soğan, Lavaş ile",
+          "category": "Ana Yemekler"
+        },
+        {
+          "name": "Beyti",
+          "price": "1145",
+          "desc": "İnce Lavaşa sarılmış Adana Şiş, yoğurt ve özel domates sos ile",
+          "category": "Ana Yemekler"
+        },
+        {
+          "name": "Pirzola",
+          "price": "1145",
+          "desc": "Izgara Biber, Izgara Domates, Izgara Soğan, Lavaş ile",
+          "category": "Ana Yemekler"
+        },
+        {
+          "name": "Kaburga",
+          "price": "1155",
+          "desc": "Izgara Biber, Izgara Domates, Izgara Soğan, Lavaş ile",
+          "category": "Ana Yemekler"
+        },
+        {
+          "name": "Şaşlık",
+          "price": "1155",
+          "desc": "Özel marinasyon ile kırmızı soğan ve kuzu, Izgara Biber, Izgara Domates, Izgara Soğan, Lavaş ile",
+          "category": "Ana Yemekler"
+        },
+        {
+          "name": "Ali Nazik Et",
+          "price": "1155",
+          "desc": "Yoğurtlu Patlıcan ile",
+          "category": "Ana Yemekler"
+        },
+        {
+          "name": "Ali Nazik Kebap",
+          "price": "1045",
+          "desc": "",
+          "category": "Ana Yemekler"
+        },
+        {
+          "name": "Patlıcan Kebabı",
+          "price": "900",
+          "desc": "Bilecik Patlıcan ile",
+          "category": "Ana Yemekler"
+        },
+        {
+          "name": "Tavuk Şiş",
+          "price": "770",
+          "desc": "Izgara Biber, Izgara Domates, Izgara Soğan, Lavaş ile",
+          "category": "Ana Yemekler"
+        },
+        {
+          "name": "Kuzu Şiş",
+          "price": "1125",
+          "desc": "Izgara Biber, Izgara Domates, Izgara Soğan, Lavaş ile",
+          "category": "Ana Yemekler"
+        },
+        {
+          "name": "Çöp Şiş",
+          "price": "1125",
+          "desc": "Izgara Biber, Izgara Domates, Izgara Soğan, Lavaş ile",
+          "category": "Ana Yemekler"
+        },
+        {
+          "name": "Kanat",
+          "price": "770",
+          "desc": "Izgara Biber, Izgara Domates, Izgara Soğan, Lavaş ile",
+          "category": "Ana Yemekler"
+        },
+        {
+          "name": "Çoban Kavurma",
+          "price": "1125",
+          "desc": "Kuzu But Etiyle Kavrulmuş Sebzeler",
+          "category": "Ana Yemekler"
+        },
+        {
+          "name": "Sezen Usulü Yaprak Ciğer",
+          "price": "840",
+          "desc": "Tereyağlı, kapya biber ve dereotu ile",
+          "category": "Ara Sıcaklar"
+        },
+        {
+          "name": "Tulum Peynirli Bostan Patlıcan",
+          "price": "700",
+          "desc": "Köz bostan patlıcan, zeytinyağı, dinlendirilmiş İzmir Tulum Peyniri",
+          "category": "Ara Sıcaklar"
+        },
+        {
+          "name": "İçli Köfte",
+          "price": "240",
+          "desc": "Geleneksel içli köfte kaburga kıyma, ceviz ve Antep salçası ile",
+          "category": "Ara Sıcaklar"
+        },
+        {
+          "name": "İstiridye Mantar",
+          "price": "460",
+          "desc": "Mevsim mantarları",
+          "category": "Ara Sıcaklar"
+        },
+        {
+          "name": "Pastırmalı Humus",
+          "price": "670",
+          "desc": "Geleneksel Humus üstü tereyağında pastırma ile",
+          "category": "Ara Sıcaklar"
+        },
+        {
+          "name": "Izgara Kıymalı Börek",
+          "price": "240",
+          "desc": "Yoğurtlu acı biber sos ile",
+          "category": "Ara Sıcaklar"
+        },
+        {
+          "name": "Paçanga Böreği",
+          "price": "265",
+          "desc": "Domates, Biber, Pastırma ve Kaşar, Acı Soslu Yoğurt ile sunulur",
+          "category": "Ara Sıcaklar"
+        },
+        {
+          "name": "Terağlı Dana Dil",
+          "price": "570",
+          "desc": "",
+          "category": "Ara Sıcaklar"
+        },
+        {
+          "name": "Çıtır Fava",
+          "price": "500",
+          "desc": "",
+          "category": "Ara Sıcaklar"
+        },
+        {
+          "name": "Pancar",
+          "price": "440",
+          "desc": "",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Pazı",
+          "price": "420",
+          "desc": "",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Antibiyotik",
+          "price": "420",
+          "desc": "Çırpılmış Süzme Yoğurt Üstü Köz Arpacık Soğan ve Köz Sarımsak",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Sezen Patı",
+          "price": "420",
+          "desc": "Çırpılmış Süzme Yoğurt, Beyaz Lahana, Havuç, Elma",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Közlenmiş Yoğurtlu Patlıcan",
+          "price": "440",
+          "desc": "",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Kesme Fava",
+          "price": "420",
+          "desc": "Geleneksel Kesme Bakla Fava Üstü Karamelize Soğan ve Dereotu",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Zeytin Salata",
+          "price": "440",
+          "desc": "Ayvalık Yeşil Zeytin, Domates, Nane, Maydanos, Nar Ekşisi ile",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Etli Çiğ Köfte",
+          "price": "585",
+          "desc": "",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Beyaz Peynir",
+          "price": "190",
+          "desc": "",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Atom",
+          "price": "400",
+          "desc": "Çırpılmış Süzme Yoğurt, Antep Acı Biberi",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Şakşuka",
+          "price": "400",
+          "desc": "",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Tahinli Köz Biber",
+          "price": "420",
+          "desc": "Çifte Kavrulmuş Mut Tahin, Kapya Biber",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Humus",
+          "price": "410",
+          "desc": "Çifte Kavrulmuş Mut Tahin, Nohut, Zeytinyağı",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Fesleğenli Girit Ezme",
+          "price": "565",
+          "desc": "",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Kabak Şayan",
+          "price": "420",
+          "desc": "Rendelenmiş Kabak Zeytinyağında Çırpılmış Süzme Yoğurt Üstü Kavrulmuş Ceviz",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Yoğurtlu Semizotu",
+          "price": "400",
+          "desc": "",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Babagannuş",
+          "price": "420",
+          "desc": "",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Ermeni Pilaki",
+          "price": "380",
+          "desc": "",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Kavun",
+          "price": "285",
+          "desc": "",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Kuzu Kulaklı Kuru Cacık",
+          "price": "420",
+          "desc": "",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Fındık Pancar Turşusu",
+          "price": "420",
+          "desc": "",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Aşk Acısıü",
+          "price": "420",
+          "desc": "",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Portakal Soslu Kereviz",
+          "price": "420",
+          "desc": "Nane, Reyhan, Dereotu, Zeytinyağı, Limon ve Portakal ile Çiğ Kereviz",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Çoban Salata",
+          "price": "460",
+          "desc": "",
+          "category": "Salatalar"
+        },
+        {
+          "name": "Duble Çoban Salata",
+          "price": "570",
+          "desc": "",
+          "category": "Salatalar"
+        },
+        {
+          "name": "Gavurdağı Salata",
+          "price": "530",
+          "desc": "",
+          "category": "Salatalar"
+        },
+        {
+          "name": "Duble Gavurdağı Salata",
+          "price": "640",
+          "desc": "",
+          "category": "Salatalar"
+        },
+        {
+          "name": "Roka Salata",
+          "price": "440",
+          "desc": "",
+          "category": "Salatalar"
+        },
+        {
+          "name": "Duble Roka Salata",
+          "price": "560",
+          "desc": "",
+          "category": "Salatalar"
+        },
+        {
+          "name": "Peynirli Roka Salatası",
+          "price": "520",
+          "desc": "",
+          "category": "Salatalar"
+        },
+        {
+          "name": "Duble Peynirli Roka Salatası",
+          "price": "580",
+          "desc": "",
+          "category": "Salatalar"
+        },
+        {
+          "name": "Hayrabolu",
+          "price": "420",
+          "desc": "Geleneksel Tekirdağ Tatlısı Tahin ile",
+          "category": "Tatlılar"
+        },
+        {
+          "name": "Kabak Tatlısı",
+          "price": "495",
+          "desc": "Ege Balkabağı Tahin ile",
+          "category": "Tatlılar"
+        },
+        {
+          "name": "Meyve Tabağı",
+          "price": "420",
+          "desc": "",
+          "category": "Tatlılar"
+        },
+        {
+          "name": "Meşrubatlar",
+          "price": "170",
+          "desc": "Cola, Fanta, Sprite, Ice Tea",
+          "category": "Soğuk İçecekler"
+        },
+        {
+          "name": "Şalgam",
+          "price": "170",
+          "desc": "",
+          "category": "Soğuk İçecekler"
+        },
+        {
+          "name": "Soda",
+          "price": "145",
+          "desc": "",
+          "category": "Soğuk İçecekler"
+        },
+        {
+          "name": "Sarı Zeybek 20cl",
+          "price": "1650",
+          "desc": "",
+          "category": "Rakı"
+        },
+        {
+          "name": "Sarı Zeybek 35cl",
+          "price": "2600",
+          "desc": "",
+          "category": "Rakı"
+        },
+        {
+          "name": "Sarı Zeybek 50 cl",
+          "price": "3300",
+          "desc": "",
+          "category": "Rakı"
+        },
+        {
+          "name": "Sarı Zeybek 70cl",
+          "price": "4750",
+          "desc": "",
+          "category": "Rakı"
+        },
+        {
+          "name": "Efe Göbek 70cl",
+          "price": "4350",
+          "desc": "",
+          "category": "Rakı"
+        },
+        {
+          "name": "Efe Göbek 50cl",
+          "price": "3050",
+          "desc": "",
+          "category": "Rakı"
+        },
+        {
+          "name": "Efe Göbek 35cl",
+          "price": "2650",
+          "desc": "",
+          "category": "Rakı"
+        },
+        {
+          "name": "Yeşil Efe 70cl",
+          "price": "3200",
+          "desc": "",
+          "category": "Rakı"
+        },
+        {
+          "name": "Yeşil Efe 50cl",
+          "price": "2450",
+          "desc": "",
+          "category": "Rakı"
+        },
+        {
+          "name": "Yeşil Efe 35cl",
+          "price": "1800",
+          "desc": "",
+          "category": "Rakı"
+        },
+        {
+          "name": "Efe Gold 70cl",
+          "price": "4300",
+          "desc": "",
+          "category": "Rakı"
+        },
+        {
+          "name": "Efe Gold 50cl",
+          "price": "3050",
+          "desc": "",
+          "category": "Rakı"
+        },
+        {
+          "name": "Efe Gold 35cl",
+          "price": "2050",
+          "desc": "",
+          "category": "Rakı"
+        },
+        {
+          "name": "Duble Rakı Kadeh Göbek",
+          "price": "555",
+          "desc": "",
+          "category": "Rakı"
+        },
+        {
+          "name": "Tek Rakı Kadeh Göbek",
+          "price": "550",
+          "desc": "",
+          "category": "Rakı"
+        },
+        {
+          "name": "Duble Rakı Kadeh",
+          "price": "560",
+          "desc": "",
+          "category": "Rakı"
+        },
+        {
+          "name": "Tek Rakı",
+          "price": "480",
+          "desc": "",
+          "category": "Rakı"
+        },
+        {
+          "name": "Beylerbeyi Göbek 70 cl",
+          "price": "4750",
+          "desc": "",
+          "category": "Rakı"
+        },
+        {
+          "name": "Beylerbeyi Tera gold 70cl",
+          "price": "4300",
+          "desc": "",
+          "category": "Rakı"
+        },
+        {
+          "name": "Kavaklıdere La Folie",
+          "price": "2750",
+          "desc": "",
+          "category": "Kırmızı Şaraplar"
+        },
+        {
+          "name": "Pearly L'amore Shiraz",
+          "price": "2200",
+          "desc": "",
+          "category": "Kırmızı Şaraplar"
+        },
+        {
+          "name": "Pearly Merlot",
+          "price": "2200",
+          "desc": "",
+          "category": "Kırmızı Şaraplar"
+        },
+        {
+          "name": "Prarly Öküzgözü Boğazkere",
+          "price": "2200",
+          "desc": "",
+          "category": "Kırmızı Şaraplar"
+        },
+        {
+          "name": "Kadeh Şarap",
+          "price": "605",
+          "desc": "",
+          "category": "Kırmızı Şaraplar"
+        },
+        {
+          "name": "Datça Vinyard Chardonnay",
+          "price": "2750",
+          "desc": "",
+          "category": "Beyaz Şaraplar"
+        },
+        {
+          "name": "Umurbey Rose",
+          "price": "2200",
+          "desc": "",
+          "category": "Beyaz Şaraplar"
+        },
+        {
+          "name": "Kadeh Şarap",
+          "price": "605",
+          "desc": "",
+          "category": "Beyaz Şaraplar"
+        },
+        {
+          "name": "Serçe - Efes 33 cl Şise",
+          "price": "345",
+          "desc": "",
+          "category": "Biralar"
+        }
+      ]
     }
 };
