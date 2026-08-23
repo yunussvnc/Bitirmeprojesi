@@ -8221,7 +8221,7 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
   "7211": {
     "name": "The Coffee Factory Beylikdüzü Makyol",
     "sourceUrl": "https://thecoffeefactory.com/menu",
-    "sourceName": "The Coffee Factory resmi menüsü",
+    "sourceName": "The Coffee Factory resmi canlı menüsü (Beylikdüzü Makyol exact mağaza/telefon doğrulaması; fiyatlar kaynakta görünmüyor)",
     "verifiedAt": "2026-08-23",
     "items": [
       {
@@ -8324,253 +8324,253 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
         "name": "ICED BERRY LATTE",
         "price": "",
         "desc": "Çilek aroması, espresso ve süt ile hazırlanan meyveli latte; tatlı ve aromatik bir alternatif arayanlara özel.",
-        "category": "Espresso Beverage"
+        "category": "Iced Espresso Beverage"
       },
       {
         "name": "ICED CAFFE AMERICANO",
         "price": "",
         "desc": "Espresso ve soğuk suyun buzla harmanlandığı, sade ve güçlü bir lezzet.",
-        "category": "Espresso Beverage"
+        "category": "Iced Espresso Beverage"
       },
       {
         "name": "ICED CAFFE LATTE",
         "price": "",
         "desc": "Espresso ve sütün buzla bir araya geldiği klasik ama vazgeçilmez bir soğuk kahve alternatifi.",
-        "category": "Espresso Beverage"
+        "category": "Iced Espresso Beverage"
       },
       {
         "name": "ICED CARAMEL MACCHIATO",
         "price": "",
         "desc": "Vanilya ve karamel aromalarının süt ve espressoyla buluştuğu, klasik bir yaz favorisi.",
-        "category": "Espresso Beverage"
+        "category": "Iced Espresso Beverage"
       },
       {
         "name": "ICED FILTER COFFEE",
         "price": "",
         "desc": "Filtre kahvenin buzla buluştuğu sade ve ferahlatıcı bir lezzet.",
-        "category": "Espresso Beverage"
+        "category": "Iced Espresso Beverage"
       },
       {
         "name": "ICED MINT MOCHA",
         "price": "",
         "desc": "Çikolata ve nane aromalarının espresso ve sütle birleştiği serinletici ve enerjik bir seçenek.",
-        "category": "Espresso Beverage"
+        "category": "Iced Espresso Beverage"
       },
       {
         "name": "ICED MOCHA",
         "price": "",
         "desc": "Yoğun çikolata sosunun espressoyla buluştuğu bu klasik tat, buzla serinlerken sütle yumuşar; tatlı ve enerjik bir lezzet arayanların favorisi.",
-        "category": "Espresso Beverage"
+        "category": "Iced Espresso Beverage"
       },
       {
         "name": "ICED SALTED CARAMEL LATTE",
         "price": "",
         "desc": "Tuzlu karamel sosu ve espresso ile hazırlanan, tatlı-tuzlu uyumunu sütle dengeleyen özgün bir latte alternatifi.",
-        "category": "Espresso Beverage"
+        "category": "Iced Espresso Beverage"
       },
       {
         "name": "ICED SPANISH LATTE",
         "price": "",
         "desc": "Spanish sos, espresso ve sütün buzla birleşimiyle ortaya çıkan tatlı, zengin ve yoğun aromalı bir lezzet.",
-        "category": "Espresso Beverage"
+        "category": "Iced Espresso Beverage"
       },
       {
         "name": "ICED TOFFEE NUT LATTE",
         "price": "",
         "desc": "Yumuşak içimli süt, güçlü espresso, karamel ve fındık aromasıyla lezzet uyumu… Soğuk kahvenin sofistike haliyle tanışın.",
-        "category": "Espresso Beverage"
+        "category": "Iced Espresso Beverage"
       },
       {
         "name": "ICED WHITE MOCHA",
         "price": "",
         "desc": "Beyaz çikolata sosu ve espresso ile hazırlanan, sütle yumuşatılmış tatlı ve dengeli bir lezzet.",
-        "category": "Espresso Beverage"
+        "category": "Iced Espresso Beverage"
       },
       {
         "name": "ACAI BERRY REFRESHER",
         "price": "",
         "desc": "Yoğun kırmızı meyve püresi ve sodanın buluştuğu, kuru çileklerle süslenen meyve aromalı serinletici bir alternatif.",
-        "category": "Espresso Beverage"
+        "category": "Refreshers"
       },
       {
         "name": "LIME REFRESHER",
         "price": "",
         "desc": "Soda ve lime aromasının canlı uyumuyla hazırlanan, lime kurusu ile tamamlanan serinletici bir seçenek.",
-        "category": "Espresso Beverage"
+        "category": "Refreshers"
       },
       {
         "name": "MANGO REFRESHER",
         "price": "",
         "desc": "Tropikal mango püresi ve sodanın buluştuğu, hafif limonata ile dengelenen ferahlatıcı bir yaz içeceği.",
-        "category": "Espresso Beverage"
+        "category": "Refreshers"
       },
       {
         "name": "VERY BERRY REFRESHER",
         "price": "",
         "desc": "Böğürtlen ve frambuaz püresinin soda ile birleştiği, kuru meyve taneleriyle zenginleştirilmiş meyve dolu ferahlatıcı bir içecek.",
-        "category": "Espresso Beverage"
+        "category": "Refreshers"
       },
       {
         "name": "CARAMEL WAFFLE CREAM",
         "price": "",
         "desc": "Süt, karamel ve waffle uyumunun damakta bıraktığı zengin tat, yumuşacık kremayla birleşerek her yudumda tatlı bir kaçamağa dönüşüyor.",
-        "category": "Espresso Beverage"
+        "category": "Fruit& Cream"
       },
       {
         "name": "CHOCOLATE CREAM",
         "price": "",
         "desc": "Yoğun çikolata sosu ve süt ile hazırlanan, üzerinde çikolata sos ve krema ile sunulan serinletici bir lezzet şöleni.",
-        "category": "Espresso Beverage"
+        "category": "Fruit& Cream"
       },
       {
         "name": "COCONUT CREAM",
         "price": "",
         "desc": "Hindistan cevizi aroması ve sütle hazırlanır, hindistan cevizi tozu ve krema ile tamamlanarak dengeli bir lezzet sunar.",
-        "category": "Espresso Beverage"
+        "category": "Fruit& Cream"
       },
       {
         "name": "NUT CREAM",
         "price": "",
         "desc": "Fındık kremasının aromatik yoğunluğu, süt, krema ve fındık parçalarıyla uyum içinde; yeni sezona özel, rafine ve dengeli bir lezzet.",
-        "category": "Espresso Beverage"
+        "category": "Fruit& Cream"
       },
       {
         "name": "PISTACHIO CREAM",
         "price": "",
         "desc": "Yüksek aromasıyla öne çıkan yeni lezzet şöleni, Antep fıstığı kreması, süt, krema ve fıstık sosunun dengeli birleşimiyle hazırlanır.",
-        "category": "Espresso Beverage"
+        "category": "Fruit& Cream"
       },
       {
         "name": "STRAWBERRY CHOCOLATE CREAM",
         "price": "",
         "desc": "Ruby çikolatasının doğal meyvemsi aroması, çilek püresiyle birleşir. Krema ile zenginleşen bu içecek, zarif ve tatlı bir serinlik sunar.",
-        "category": "Espresso Beverage"
+        "category": "Fruit& Cream"
       },
       {
         "name": "MANGO FROZEN",
         "price": "",
         "desc": "Yoğun mango püresiyle hazırlanan, meyveli ve serinletici bir yaz klasiği. Hafif tatlı dokusuyla öne çıkar.",
-        "category": "Espresso Beverage"
+        "category": "Frozens Smoothies"
       },
       {
         "name": "MANGO SMOOTHIE",
         "price": "",
         "desc": "Mango püresinden gelen tropikal esintili bu lezzet, yağsız sütün etkisiyle için non-fat olarak öne çıkar.",
-        "category": "Espresso Beverage"
+        "category": "Frozens Smoothies"
       },
       {
         "name": "RED BERRY FROZEN",
         "price": "",
         "desc": "Kırmızı orman meyvelerinden elde edilen püreyle hazırlanan Red Berry Frozen, ekşi-tatlı dengesi ve serinletici yapısıyla yazın favori lezzeti olmaya aday.",
-        "category": "Espresso Beverage"
+        "category": "Frozens Smoothies"
       },
       {
         "name": "RED BERRY SMOOTHIE",
         "price": "",
         "desc": "Kırmızı meyve püresi ve yağsız sütle hazırlanır. Hafif yapısı sayesinde non-fat bir alternatif sunan bu smoothie, meyvenin doğal lezzetini ferahlatıcı bir içimle buluşturur.",
-        "category": "Espresso Beverage"
+        "category": "Frozens Smoothies"
       },
       {
         "name": "STRAWBERRY FROZEN",
         "price": "",
         "desc": "Doğal çilek püresiyle hazırlanan bu içecek, meyvenin ferahlatıcı tatlılığıyla öne çıkar. Hafif yapısının yanında serinletici bir içim sunar.",
-        "category": "Espresso Beverage"
+        "category": "Frozens Smoothies"
       },
       {
         "name": "STRAWBERRY SMOOTHIE",
         "price": "",
         "desc": "Doğal çilek püresiyle hazırlanan bu smoothie, yağsız süt içeriği sayesinde non-fat bir alternatif. Ferahlatıcı yapısı ve hafif dokusuyla günün her anında keyifle tüketilebilir.",
-        "category": "Espresso Beverage"
+        "category": "Frozens Smoothies"
       },
       {
         "name": "HİBİSKUS",
         "price": "",
         "desc": "Hibiskus çiçeğinin kurutulmuş taç yapraklarından demlenir. Rubin kırmızısı rengi, canlandırıcı ekşiliği ve floral asiditesiyle öne çıkar.",
-        "category": "Espresso Beverage"
+        "category": "Bitki Çayları"
       },
       {
         "name": "IHLAMUR",
         "price": "",
         "desc": "Çiçekli ıhlamur yaprağının sade ve nostaljik aroması.",
-        "category": "Espresso Beverage"
+        "category": "Bitki Çayları"
       },
       {
         "name": "KIŞ ÇAYI",
         "price": "",
         "desc": "Doğanın şifalı notalarından oluşan çok katmanlı bir karışım: zencefil, adaçayı, kuşburnu, ıhlamur ve narenciye kabuklarıyla kışa özel derin ve dengeli lezzet şöleni.",
-        "category": "Espresso Beverage"
+        "category": "Bitki Çayları"
       },
       {
         "name": "NANE-LİMON",
         "price": "",
         "desc": "Taze limon kabuğunun narenciye tonları, yaprak nanenin ferahlatıcı etkisiyle buluşuyor.",
-        "category": "Espresso Beverage"
+        "category": "Bitki Çayları"
       },
       {
         "name": "ORMAN MEYVELERİ",
         "price": "",
         "desc": "Dağ çileği, böğürtlen, kuşburnu, hibisküs, karadut, limon ve portakal kabuklarıyla hazırlanan meyveli bir senfoni. Tatlı ve ekşi notalar arasında bir lezzet şöleni.",
-        "category": "Espresso Beverage"
+        "category": "Bitki Çayları"
       },
       {
         "name": "YEŞİL ÇAY",
         "price": "",
         "desc": "Saf yeşil çay yapraklarının nazikçe demlenmesiyle hazırlanır. Yumuşak bitkisel aroması ve açık sarı tonuyla bilinir.",
-        "category": "Espresso Beverage"
+        "category": "Bitki Çayları"
       },
       {
         "name": "BRAZILIAN LEMONADE",
         "price": "",
         "desc": "Limonata, spanish sos ve hindistan cevizi aromasının özgün uyumuyla hazırlanan bu tropik tat, yaz menümüzün en yeni ve en iddialı lezzetlerinden biri.",
-        "category": "Espresso Beverage"
+        "category": "Limonatalar"
       },
       {
         "name": "LEMONADE (CLASSIC)",
         "price": "",
         "desc": "Limon suyu ile hazırlanan klasik lezzet; ferahlatıcı, dengeli ve doğal bir serinlik sunar.",
-        "category": "Espresso Beverage"
+        "category": "Limonatalar"
       },
       {
         "name": "MANGO LEMONADE",
         "price": "",
         "desc": "Limonata ve mango püresinin tropik uyumu, yaz aylarında enerji veren canlı ve meyvemsi bir tat sunar.",
-        "category": "Espresso Beverage"
+        "category": "Limonatalar"
       },
       {
         "name": "STRAWBERRY LEMONADE",
         "price": "",
         "desc": "Çilek püresiyle zenginleştirilmiş limonata, hafif ekşi ve meyvemsi notalarla canlandırıcı bir seçenek.",
-        "category": "Espresso Beverage"
+        "category": "Limonatalar"
       },
       {
         "name": "BLACK TEA",
         "price": "",
         "desc": "Geleneksel yöntemle demlenen, yoğun aromalı ve berrak içimli siyah çay. Her yudumunda dinginlik, her fincanda tanıdık bir sıcaklık.",
-        "category": "Espresso Beverage"
+        "category": "Diğer İçecekler"
       },
       {
         "name": "CHAI TEA LATTE",
         "price": "",
         "desc": "Tarçın, zencefil ve karanfilin öne çıktığı baharatlı siyah çay bazı, sıcak sütle birleşerek yumuşak ama belirgin bir lezzet profili sunar.",
-        "category": "Espresso Beverage"
+        "category": "Diğer İçecekler"
       },
       {
         "name": "HOT CHOCOLATE",
         "price": "",
         "desc": "Yoğun çikolata sosu, sıcak sütle birleşerek zengin bir lezzet sunar. Krema ile de tercih edilebilir.",
-        "category": "Espresso Beverage"
+        "category": "Diğer İçecekler"
       },
       {
         "name": "ICED CHAI TEA LATTE",
         "price": "",
         "desc": "Baharatlı chai tea karışımı ve sütle hazırlanan, serinletici egzotik bir lezzet.",
-        "category": "Espresso Beverage"
+        "category": "Diğer İçecekler"
       },
       {
         "name": "TURKISH COFFEE",
         "price": "",
         "desc": "İnce çekilmiş Türk kahvesi ile geleneksel yöntemle pişirilerek hazırlanır.",
-        "category": "Espresso Beverage"
+        "category": "Diğer İçecekler"
       },
       {
         "name": "COOKIE",
