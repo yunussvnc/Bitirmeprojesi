@@ -36939,5 +36939,163 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       "category": "Fırın & Tatlılar"
     }
   ]
+},
+  "7274": {
+  "name": "Koska",
+  "sourceUrl": "https://qrdos.tr/koska",
+  "sourceName": "QRDOS public Koska menüsü (Yandex/QRDOS exact Beylikdüzü Erenler Cd. 11F/18-19 şube ve telefon doğrulaması; kaynakta fiyat görünmüyor)",
+  "verifiedAt": "2026-08-23",
+  "items": [
+    {
+      "name": "Meyveli Pasta (No.0)",
+      "desc": "Meyveli, meyve parçacıklı",
+      "category": "Pastalar"
+    },
+    {
+      "name": "Meyveli Pasta (No.1)",
+      "desc": "Meyveli, meyve parçacıklı",
+      "category": "Pastalar"
+    },
+    {
+      "name": "Meyveli Pasta (No.2)",
+      "desc": "Meyveli, meyve parçacıklı",
+      "category": "Pastalar"
+    },
+    {
+      "name": "Meyveli Pasta (No.3)",
+      "desc": "Meyve parçacıklı",
+      "category": "Pastalar"
+    },
+    {
+      "name": "Kakaolu Pasta (No.0)",
+      "desc": "Çikolata, fıstık",
+      "category": "Pastalar"
+    },
+    {
+      "name": "Kakaolu Pasta (No.1)",
+      "desc": "Çikolata, fıstık",
+      "category": "Pastalar"
+    },
+    {
+      "name": "Kakaolu Pasta (No.2)",
+      "desc": "Çikolata, fıstık",
+      "category": "Pastalar"
+    },
+    {
+      "name": "Kakaolu Pasta (No.3)",
+      "desc": "Çikolata, fıstık",
+      "category": "Pastalar"
+    },
+    {
+      "name": "Parça Çikolatalı Pasta (No.1)",
+      "desc": "Çikolata parçaları",
+      "category": "Pastalar"
+    },
+    {
+      "name": "Krokantlı Pasta (No.2)",
+      "desc": "Krokant",
+      "category": "Pastalar"
+    },
+    {
+      "name": "Krokantlı Pasta (No.3)",
+      "desc": "Krokan",
+      "category": "Pastalar"
+    },
+    {
+      "name": "Parça Çikolatalı Pasta (No.3)",
+      "desc": "Çikolata parçaları",
+      "category": "Pastalar"
+    },
+    {
+      "name": "Parça Çikolatalı Pasta (No.2)",
+      "desc": "Çikolata parçaları",
+      "category": "Pastalar"
+    },
+    {
+      "name": "Parça Çikolatalı Pasta (No.0)",
+      "desc": "Çikolata parça",
+      "category": "Pastalar"
+    },
+    {
+      "name": "Krokanlı Pasta (No.1)",
+      "desc": "Krokan parçaları",
+      "category": "Pastalar"
+    },
+    {
+      "name": "Krokanlı Pasta (No.0)",
+      "desc": "Krokan parçaları",
+      "category": "Pastalar"
+    },
+    {
+      "name": "Cevizli Ev Baklavası (1 kg.)",
+      "desc": "1 kg.",
+      "category": "Kiloluk Baklavalar"
+    },
+    {
+      "name": "Kuru Baklava (1 kg.)",
+      "desc": "1 kg.",
+      "category": "Kiloluk Baklavalar"
+    },
+    {
+      "name": "Tahinli Kurabiye",
+      "desc": "1 kg.",
+      "category": "Kiloluk Baklavalar"
+    },
+    {
+      "name": "Sade Helva (200 gr.)",
+      "desc": "Paket",
+      "category": "Paketli Helvalar"
+    },
+    {
+      "name": "Kakaolu Helva (200 gr.)",
+      "desc": "Paket",
+      "category": "Paketli Helvalar"
+    },
+    {
+      "name": "Fıstıklı Helva (200 gr.)",
+      "desc": "Paket",
+      "category": "Paketli Helvalar"
+    },
+    {
+      "name": "Sade Helva (500 gr.)",
+      "desc": "Paket",
+      "category": "Paketli Helvalar"
+    },
+    {
+      "name": "Kakaolu Helva (500 gr.)",
+      "desc": "Paket",
+      "category": "Paketli Helvalar"
+    },
+    {
+      "name": "Fıstıklı Helva (500 gr.)",
+      "desc": "Paket",
+      "category": "Paketli Helvalar"
+    },
+    {
+      "name": "Cuma Helvası",
+      "desc": "450 gr.",
+      "category": "Paketli Helvalar"
+    },
+    {
+      "name": "Meyveli Lokum (400 gr.)",
+      "desc": "Paket",
+      "category": "Paketli Ürünler"
+    },
+    {
+      "name": "Fındıklı Lokum (400 gr.)",
+      "desc": "Paket",
+      "category": "Paketli Ürünler"
+    },
+    {
+      "name": "Karışık Lokum (400 gr.)",
+      "desc": "Paket",
+      "category": "Paketli Ürünler"
+    },
+    {
+      "name": "Fıstıklı Lokum (400 gr.)",
+      "desc": "Paket",
+      "category": "Paketli Ürünler"
+    }
+  ]
 }
 };
