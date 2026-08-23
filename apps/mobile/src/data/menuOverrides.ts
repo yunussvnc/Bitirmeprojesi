@@ -35160,6 +35160,202 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       }
     ]
   },
+  "7219": {
+    "name": "Baba Restaurant",
+    "sourceUrl": "http://www.kavakbaba.net/",
+    "sourceName": "Baba Restaurant resmi kavakbaba.net menüsü; Google Maps exact Hentzer kaydı (Anadolu Kavağı, Macar Tabya Cd. 3/A; +90 532 411 89 16) ile resmi site köprüsü ve Restoranim exact adres kaydı doğrulandı; fiyatlar resmi sayfada görünmüyor",
+    "verifiedAt": "2026-08-24",
+    "items": [
+      {
+        "name": "Karides Güveç",
+        "category": "Sıcak Mezeler"
+      },
+      {
+        "name": "Tereyağında Karides",
+        "category": "Sıcak Mezeler"
+      },
+      {
+        "name": "Deniz Ürünleri Güveç",
+        "category": "Sıcak Mezeler"
+      },
+      {
+        "name": "Kalamar",
+        "category": "Sıcak Mezeler"
+      },
+      {
+        "name": "Midye Tava",
+        "category": "Sıcak Mezeler"
+      },
+      {
+        "name": "Midye Izgara",
+        "category": "Sıcak Mezeler"
+      },
+      {
+        "name": "Patates Tava",
+        "category": "Sıcak Mezeler"
+      },
+      {
+        "name": "Sigara Böreği",
+        "category": "Sıcak Mezeler"
+      },
+      {
+        "name": "Karides Söğüş",
+        "category": "Soğuk Mezeler"
+      },
+      {
+        "name": "Patlıcan Soslu",
+        "category": "Soğuk Mezeler"
+      },
+      {
+        "name": "Haydari",
+        "category": "Soğuk Mezeler"
+      },
+      {
+        "name": "Patlıcan Salatası",
+        "category": "Soğuk Mezeler"
+      },
+      {
+        "name": "Pilaki",
+        "category": "Soğuk Mezeler"
+      },
+      {
+        "name": "Deniz Börülcesi",
+        "category": "Soğuk Mezeler"
+      },
+      {
+        "name": "Midye Dolma",
+        "category": "Soğuk Mezeler"
+      },
+      {
+        "name": "Semizotu",
+        "category": "Soğuk Mezeler"
+      },
+      {
+        "name": "Lekarda",
+        "category": "Soğuk Mezeler"
+      },
+      {
+        "name": "Beyaz Peynir",
+        "category": "Soğuk Mezeler"
+      },
+      {
+        "name": "Acılı Ezme",
+        "category": "Soğuk Mezeler"
+      },
+      {
+        "name": "Ahtapot Salatası",
+        "category": "Soğuk Mezeler"
+      },
+      {
+        "name": "Çoban Salatası",
+        "category": "Salatalar"
+      },
+      {
+        "name": "Mevsim Salatası",
+        "category": "Salatalar"
+      },
+      {
+        "name": "Roka Salatası",
+        "category": "Salatalar"
+      },
+      {
+        "name": "Palamut",
+        "category": "Balıklar"
+      },
+      {
+        "name": "Levrek",
+        "category": "Balıklar"
+      },
+      {
+        "name": "Çipura",
+        "category": "Balıklar"
+      },
+      {
+        "name": "Çinekop",
+        "category": "Balıklar"
+      },
+      {
+        "name": "Lüfer",
+        "category": "Balıklar"
+      },
+      {
+        "name": "Jumbo Karides",
+        "category": "Balıklar"
+      },
+      {
+        "name": "Tekir",
+        "category": "Balıklar"
+      },
+      {
+        "name": "Hamsi",
+        "category": "Balıklar"
+      },
+      {
+        "name": "Barbun",
+        "category": "Balıklar"
+      },
+      {
+        "name": "İstavrit",
+        "category": "Balıklar"
+      },
+      {
+        "name": "Kalkan",
+        "category": "Balıklar"
+      },
+      {
+        "name": "Dil Şiş",
+        "category": "Balıklar"
+      },
+      {
+        "name": "Deniz Çipurası",
+        "category": "Balıklar"
+      },
+      {
+        "name": "Deniz Levreği",
+        "category": "Balıklar"
+      },
+      {
+        "name": "Mezgit",
+        "category": "Balıklar"
+      },
+      {
+        "name": "Kılıç Şiş",
+        "category": "Balıklar"
+      },
+      {
+        "name": "İskorpit Güveç",
+        "category": "Balıklar"
+      },
+      {
+        "name": "Fener Şiş",
+        "category": "Balıklar"
+      },
+      {
+        "name": "Balık Çorbası",
+        "category": "Balıklar"
+      },
+      {
+        "name": "Izgara Köfte",
+        "category": "Izgaralar"
+      },
+      {
+        "name": "Karışık Izgara",
+        "category": "Izgaralar"
+      },
+      {
+        "name": "Tavuk Şiş",
+        "category": "Izgaralar"
+      },
+      {
+        "name": "Fırında Tahin Helvası",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Kabak Tatlısı",
+        "category": "Tatlılar"
+      }
+    ]
+  },
   "7182": {
   "name": "Siftah Kebap Karaköy",
   "sourceUrl": "https://siftahkebap.dinosoft.com.tr/menu",
