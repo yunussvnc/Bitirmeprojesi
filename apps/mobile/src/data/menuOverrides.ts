@@ -38178,5 +38178,103 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       "category": "İçecekler"
     }
   ]
+},
+  "7220": {
+  "name": "Beşiktaş Zeytindalı Kahvaltı",
+  "sourceUrl": "https://restoranim.net/istanbul/besiktas/kahvaltici/besiktas-zeytindali-kahvalti",
+  "sourceName": "Restoranim.net görsel menüsü (Beşiktaş Zeytindalı Kahvaltı; exact Sinanpaşa Çelebi Oğlu Sk. şube eşleşmesi; photo4 menüsünde net okunan kalemler aktarılıp okunamayan/kesik satırlar dışarıda bırakıldı)",
+  "verifiedAt": "2026-08-23",
+  "items": [
+    {
+      "name": "Serpme Kahvaltı (2 Kişilik)",
+      "price": "750",
+      "category": "Kahvaltı Menüleri"
+    },
+    {
+      "name": "Full Serpme Kahvaltı (2 Kişilik)",
+      "price": "950",
+      "category": "Kahvaltı Menüleri"
+    },
+    {
+      "name": "Zeytindalı Special (3 Kişilik)",
+      "price": "1400",
+      "category": "Kahvaltı Menüleri"
+    },
+    {
+      "name": "Tereyağında Kasap Sucuk",
+      "price": "220",
+      "category": "Ekstralar"
+    },
+    {
+      "name": "Muhlama (Kuymak)",
+      "price": "220",
+      "category": "Ekstralar"
+    },
+    {
+      "name": "Patates Tava (Ev Yapımı)",
+      "price": "140",
+      "category": "Ekstralar"
+    },
+    {
+      "name": "Sade Pişi (4 Adet)",
+      "price": "140",
+      "category": "Ekstralar"
+    },
+    {
+      "name": "Kaşarlı Pişi (4 Adet)",
+      "price": "160",
+      "category": "Ekstralar"
+    },
+    {
+      "name": "Beyaz Peynirli Pişi (4 Adet)",
+      "price": "160",
+      "category": "Ekstralar"
+    },
+    {
+      "name": "Portakal Suyu (Taze Sıkılmış)",
+      "price": "100",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Ayran",
+      "price": "55",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Soda",
+      "price": "30",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Churchill",
+      "price": "60",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Kola",
+      "price": "60",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Fanta",
+      "price": "60",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Ice Tea",
+      "price": "60",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Cappy Çeşitleri",
+      "price": "60",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Su",
+      "price": "20",
+      "category": "İçecekler"
+    }
+  ]
 }
 };
