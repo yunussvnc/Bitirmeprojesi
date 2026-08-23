@@ -37097,5 +37097,649 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       "category": "Paketli Ürünler"
     }
   ]
+},
+  "7222": {
+  "name": "Van Kahvaltı Lounge Beylikdüzü",
+  "sourceUrl": "https://vankahvaltikonagi.lavinsoft.com/",
+  "sourceName": "Lavinsoft canlı menüsü (Van Kahvaltı Konağı; vankahvaltilounge resmi Instagram menü bağlantısı desteği; Menu-TR exact Sağlam Residence No:20D ve 0530 899 93 73 şube doğrulaması; kaynakta görünmeyen fiyatlar eklenmedi, trendde görünür 4 fiyat korundu)",
+  "verifiedAt": "2026-08-23",
+  "items": [
+    {
+      "name": "Tek Kişilik Kahvaltı( Tavasız)",
+      "category": "Kahvaltılar"
+    },
+    {
+      "name": "2 Kişilik Yöresel Köy Kahvaltısı",
+      "category": "Kahvaltılar"
+    },
+    {
+      "name": "Tek Kişilik Kahvaltı",
+      "category": "Kahvaltılar",
+      "price": "700"
+    },
+    {
+      "name": "3 Kişilik Yöresel Köy Kahvaltısı",
+      "category": "Kahvaltılar"
+    },
+    {
+      "name": "2 Kişilik Kahvaltı",
+      "category": "Kahvaltılar",
+      "price": "1200"
+    },
+    {
+      "name": "4 Kişilik Yöresel Köy Kahvaltısı",
+      "category": "Kahvaltılar"
+    },
+    {
+      "name": "3 Kişilik Kahvaltı",
+      "category": "Kahvaltılar",
+      "price": "1800"
+    },
+    {
+      "name": "4 Kişilik Kahvaltı",
+      "category": "Kahvaltılar",
+      "price": "2400"
+    },
+    {
+      "name": "5 Kişilik Kahvaltı",
+      "category": "Kahvaltılar"
+    },
+    {
+      "name": "Karışık",
+      "category": "Dondurmalar"
+    },
+    {
+      "name": "Sade",
+      "category": "Dondurmalar"
+    },
+    {
+      "name": "Fıstıklı",
+      "category": "Dondurmalar"
+    },
+    {
+      "name": "Bluesky",
+      "category": "Dondurmalar"
+    },
+    {
+      "name": "Limonlu",
+      "category": "Dondurmalar"
+    },
+    {
+      "name": "Vişneli",
+      "category": "Dondurmalar"
+    },
+    {
+      "name": "Kaymaklı",
+      "category": "Dondurmalar"
+    },
+    {
+      "name": "Ahududu",
+      "category": "Dondurmalar"
+    },
+    {
+      "name": "Çikolatalı",
+      "category": "Milkshake"
+    },
+    {
+      "name": "Muzlu",
+      "category": "Milkshake"
+    },
+    {
+      "name": "Çilekli",
+      "category": "Milkshake"
+    },
+    {
+      "name": "Vanilyalı",
+      "category": "Milkshake"
+    },
+    {
+      "name": "Sıkma Nar",
+      "category": "Fresh"
+    },
+    {
+      "name": "Sıkma Portakal",
+      "category": "Fresh"
+    },
+    {
+      "name": "Karışık Sıkma",
+      "category": "Fresh"
+    },
+    {
+      "name": "Muzlu",
+      "category": "Frozen"
+    },
+    {
+      "name": "Çilekli",
+      "category": "Frozen"
+    },
+    {
+      "name": "Vanilyalı",
+      "category": "Frozen"
+    },
+    {
+      "name": "Karpuz FROZEN",
+      "category": "Frozen"
+    },
+    {
+      "name": "Kavunlu FROZEN",
+      "category": "Frozen"
+    },
+    {
+      "name": "Meyve Tabağı",
+      "category": "Çerezler"
+    },
+    {
+      "name": "Lokum",
+      "category": "Çerezler"
+    },
+    {
+      "name": "Kabak Çekirdeği",
+      "category": "Çerezler"
+    },
+    {
+      "name": "Ay Çekirdeği",
+      "category": "Çerezler"
+    },
+    {
+      "name": "fındık tabağı",
+      "category": "Çerezler"
+    },
+    {
+      "name": "Badem Tabağı",
+      "category": "Çerezler"
+    },
+    {
+      "name": "Antep Fıstığı",
+      "category": "Çerezler"
+    },
+    {
+      "name": "Kaju",
+      "category": "Çerezler"
+    },
+    {
+      "name": "Karışık Çerez Tabağı",
+      "category": "Çerezler"
+    },
+    {
+      "name": "Kaymak Bal Cevizli+Çay",
+      "category": "Kahvaltı Çeşitleri"
+    },
+    {
+      "name": "Kaymak Bal Cevizsiz+Çay",
+      "category": "Kahvaltı Çeşitleri"
+    },
+    {
+      "name": "Terayağı Bal Cevizli+ Çay",
+      "category": "Kahvaltı Çeşitleri"
+    },
+    {
+      "name": "Terayağı Bal Cevizsiz+ Çay",
+      "category": "Kahvaltı Çeşitleri"
+    },
+    {
+      "name": "Tereyağı Cacık+Çay",
+      "category": "Kahvaltı Çeşitleri"
+    },
+    {
+      "name": "Otlu Peynir + Çay",
+      "category": "Kahvaltı Çeşitleri"
+    },
+    {
+      "name": "Zeytin + Çay",
+      "category": "Kahvaltı Çeşitleri"
+    },
+    {
+      "name": "Kaşar+ Beyaz Peynir+Çay",
+      "category": "Kahvaltı Çeşitleri"
+    },
+    {
+      "name": "Sade Cacık+ Çay",
+      "category": "Kahvaltı Çeşitleri"
+    },
+    {
+      "name": "Otlu Peynir + Yağda Yumurta+ Çay",
+      "category": "Kahvaltı Çeşitleri"
+    },
+    {
+      "name": "Kaymak Bal Cevizli+ Yağda Yumurta+ Çay",
+      "category": "Kahvaltı Çeşitleri"
+    },
+    {
+      "name": "Kaymak Bal Cevizsiz+ Yağda Yumurta+ Çay",
+      "category": "Kahvaltı Çeşitleri"
+    },
+    {
+      "name": "Terayağı Bal Cevizli+ Yağda Yumurta+ Çay",
+      "category": "Kahvaltı Çeşitleri"
+    },
+    {
+      "name": "Terayağı Bal Cevizsiz+ Yağda Yumurta+ Çay",
+      "category": "Kahvaltı Çeşitleri"
+    },
+    {
+      "name": "Terayağı Cacık+ Yağda Yumurta+ Çay",
+      "category": "Kahvaltı Çeşitleri"
+    },
+    {
+      "name": "Kaymak Bal Cevizli+ Kavurmalı Yumurta+Çay",
+      "category": "Kahvaltı Çeşitleri"
+    },
+    {
+      "name": "Kaymak Bal Cevizsiz+ Kavurmalı Yumurta+Çay",
+      "category": "Kahvaltı Çeşitleri"
+    },
+    {
+      "name": "Kaymak Bal Cevizli+ Menemen+Çay",
+      "category": "Kahvaltı Çeşitleri"
+    },
+    {
+      "name": "Kaymak Bal Cevizsiz+ Menemen+Çay",
+      "category": "Kahvaltı Çeşitleri"
+    },
+    {
+      "name": "Kaymak Bal Cevizli+ Sucuklu Yumurta+Çay",
+      "category": "Kahvaltı Çeşitleri"
+    },
+    {
+      "name": "Kaymak Bal Cevizsiz+ Sucuklu Yumurta+Çay",
+      "category": "Kahvaltı Çeşitleri"
+    },
+    {
+      "name": "Tahin Pekmez+ Çay",
+      "category": "Kahvaltı Çeşitleri"
+    },
+    {
+      "name": "Tahin Pekmez+Otlu Peynir + Çay",
+      "category": "Kahvaltı Çeşitleri"
+    },
+    {
+      "name": "Kaymak Bal Cevizsiz+Otlu Peynir+Çay",
+      "category": "Kahvaltı Çeşitleri"
+    },
+    {
+      "name": "Haşlanmış Yumurta +Çay",
+      "category": "Kahvaltı Çeşitleri"
+    },
+    {
+      "name": "Haşlanmış Yumurta + Otlu Peynir + Çay",
+      "category": "Kahvaltı Çeşitleri"
+    },
+    {
+      "name": "Kavurmalı Yumurta + Otlu Peynir+ Çay",
+      "category": "Kahvaltı Çeşitleri"
+    },
+    {
+      "name": "Sucuklu Yumurta + Otlu Peynir+ Çay",
+      "category": "Kahvaltı Çeşitleri"
+    },
+    {
+      "name": "Yağda Yumurta + Otlu Peynir+ Çay",
+      "category": "Kahvaltı Çeşitleri"
+    },
+    {
+      "name": "Menemen + Otlu Peynir+ Çay",
+      "category": "Kahvaltı Çeşitleri"
+    },
+    {
+      "name": "Kavurmalı Yumurta +Beyaz Peynir + Çay",
+      "category": "Kahvaltı Çeşitleri"
+    },
+    {
+      "name": "Pastırmalı Yumurta +Beyaz Peynir + Çay",
+      "category": "Kahvaltı Çeşitleri"
+    },
+    {
+      "name": "Menemen +Beyaz Peynir + Çay",
+      "category": "Kahvaltı Çeşitleri"
+    },
+    {
+      "name": "Yağda Yumurta +Beyaz Peynir + Çay",
+      "category": "Kahvaltı Çeşitleri"
+    },
+    {
+      "name": "Pastırmalı Yumurta +Otlu Peynir + Çay",
+      "category": "Kahvaltı Çeşitleri"
+    },
+    {
+      "name": "Pastırmalı Yumurta +Kaymak Bal Cevizli + Çay",
+      "category": "Kahvaltı Çeşitleri"
+    },
+    {
+      "name": "Pastırmalı Yumurta +Kaymak Bal Cevizsiz + Çay",
+      "category": "Kahvaltı Çeşitleri"
+    },
+    {
+      "name": "Kavurmalı Yumurta",
+      "category": "Sıcaklar"
+    },
+    {
+      "name": "Kavurmalı Kaşarlı Yumurta",
+      "category": "Sıcaklar"
+    },
+    {
+      "name": "Sade Kavurma",
+      "category": "Sıcaklar"
+    },
+    {
+      "name": "Sucuklu Yumurta",
+      "category": "Sıcaklar"
+    },
+    {
+      "name": "Sucuklu Kaşarlı Yumurta",
+      "category": "Sıcaklar"
+    },
+    {
+      "name": "Sade Sucuk",
+      "category": "Sıcaklar"
+    },
+    {
+      "name": "Menemen",
+      "category": "Sıcaklar"
+    },
+    {
+      "name": "Kaşarlı Menemen",
+      "category": "Sıcaklar"
+    },
+    {
+      "name": "Kavurmalı Menemen",
+      "category": "Sıcaklar"
+    },
+    {
+      "name": "Sucuklu Menemen",
+      "category": "Sıcaklar"
+    },
+    {
+      "name": "Karışık Menemen ( Sucuklu)",
+      "category": "Sıcaklar"
+    },
+    {
+      "name": "Karışık Menemen ( Kavurmalı)",
+      "category": "Sıcaklar"
+    },
+    {
+      "name": "Omlet",
+      "category": "Sıcaklar"
+    },
+    {
+      "name": "Kaşarlı Omlet",
+      "category": "Sıcaklar"
+    },
+    {
+      "name": "Karışık Omlet",
+      "category": "Sıcaklar"
+    },
+    {
+      "name": "Sahanda Yumurta",
+      "category": "Sıcaklar"
+    },
+    {
+      "name": "Sahanda Yumurta 2 Tek",
+      "category": "Sıcaklar"
+    },
+    {
+      "name": "Sahanda Yumurta 3 Tek",
+      "category": "Sıcaklar"
+    },
+    {
+      "name": "Sahanda Yumurta 4 Tek",
+      "category": "Sıcaklar"
+    },
+    {
+      "name": "Pastırmalı Yumurta",
+      "category": "Sıcaklar"
+    },
+    {
+      "name": "Pastırmalı Kaşarlı Yumurta",
+      "category": "Sıcaklar"
+    },
+    {
+      "name": "Zıvırçe",
+      "category": "Sıcaklar"
+    },
+    {
+      "name": "Muhlama(Kuymak) Tek",
+      "category": "Sıcaklar"
+    },
+    {
+      "name": "Muhlama(Kuymak) İki Kişilik",
+      "category": "Sıcaklar"
+    },
+    {
+      "name": "Muhlama Üç Kişilik",
+      "category": "Sıcaklar"
+    },
+    {
+      "name": "Muhlama  4 Kişilik",
+      "category": "Sıcaklar"
+    },
+    {
+      "name": "Muhlama(Kuymak) 5 Kişilik",
+      "category": "Sıcaklar"
+    },
+    {
+      "name": "Çay",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Çay ( Duble)",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Türk Kahvesi",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Sütlü Türk Kahvesi",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Nescafe",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Süt",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Fincan Çay",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Ballı Süt",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "İkisi Bir Arada",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Nescafe (Üçü Bir Arada)",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Damla Sakızlı Türk Kahvesi",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Dibek Kahvesi",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Menengiç Kahvesi",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "FİLTRE KAHVE",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Salep",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Kış Çayları",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Mocha",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "mocha white",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Latte",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Americano",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Cappuccino",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Espresso",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Semaver Tek Kişilik Çay",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Semaver iki Kişilik Çay",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Semaver Üç Kişilik Çay",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Semaver Dört Kişilik Çay",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Caramel Macihhiato",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Fıstık Dünyası",
+      "category": "Pastalar"
+    },
+    {
+      "name": "Orman Meyveli",
+      "category": "Pastalar"
+    },
+    {
+      "name": "Tramisu",
+      "category": "Pastalar"
+    },
+    {
+      "name": "Suffle",
+      "category": "Pastalar"
+    },
+    {
+      "name": "çikolatalı cheesecake",
+      "category": "Pastalar"
+    },
+    {
+      "name": "Karışık Tost",
+      "category": "Tostlar"
+    },
+    {
+      "name": "Kaşarlı Tost",
+      "category": "Tostlar"
+    },
+    {
+      "name": "Sucuklu Tost",
+      "category": "Tostlar"
+    },
+    {
+      "name": "Kavurmalı Kaşarlı Tost",
+      "category": "Tostlar"
+    },
+    {
+      "name": "Otlu Peynirli Tost",
+      "category": "Tostlar"
+    },
+    {
+      "name": "Beyaz Peynirli Tost",
+      "category": "Tostlar"
+    },
+    {
+      "name": "Pastırmalı Kaşarlı Tost",
+      "category": "Tostlar"
+    },
+    {
+      "name": "Pastırmalı  Tost",
+      "category": "Tostlar"
+    },
+    {
+      "name": "Kavurmalı Tost",
+      "category": "Tostlar"
+    },
+    {
+      "name": "Kaşarlı Yumurtalı Sucuklu Tost",
+      "category": "Tostlar"
+    },
+    {
+      "name": "Kaşarlı Yumurtalı Tost",
+      "category": "Tostlar"
+    },
+    {
+      "name": "Sucuklu Yumurtalı Tost",
+      "category": "Tostlar"
+    },
+    {
+      "name": "Kavurmalı Gözleme",
+      "category": "Gözlemeler"
+    },
+    {
+      "name": "Karışık Gözleme",
+      "category": "Gözlemeler"
+    },
+    {
+      "name": "Kaşarlı Gözleme",
+      "category": "Gözlemeler"
+    },
+    {
+      "name": "Patatesli Gözleme",
+      "category": "Gözlemeler"
+    },
+    {
+      "name": "Kavurmalı Kaşarlı Gözleme",
+      "category": "Gözlemeler"
+    },
+    {
+      "name": "Beyaz Peynirli Gözleme",
+      "category": "Gözlemeler"
+    },
+    {
+      "name": "Otlu Peynirli Gözleme",
+      "category": "Gözlemeler"
+    },
+    {
+      "name": "Sucuklu Gözleme",
+      "category": "Gözlemeler"
+    },
+    {
+      "name": "Pastırmalı Gözleme",
+      "category": "Gözlemeler"
+    },
+    {
+      "name": "Kaşarlı Yumurtalı Sucuklu Gözleme",
+      "category": "Gözlemeler"
+    },
+    {
+      "name": "Kaşarlı Yumurtalı Gözleme",
+      "category": "Gözlemeler"
+    },
+    {
+      "name": "Sucuklu Yumurtalı Gözleme",
+      "category": "Gözlemeler"
+    }
+  ]
 }
 };
