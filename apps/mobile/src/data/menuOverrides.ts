@@ -24648,4 +24648,289 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     }
   ]
 }
+,
+  "7259": {
+  "name": "Limon Cafe",
+  "sourceUrl": "https://www.yemeksepeti.com/restaurant/xibg/limon-cafe-xibg",
+  "sourceName": "Yemeksepeti canlı menüsü (Limon Cafe Kadıköy)",
+  "verifiedAt": "2026-08-23",
+  "items": [
+    {
+      "name": "Bazlama Tost",
+      "price": "250 TL",
+      "desc": "Bazlama ekmeği, sucuk, kaşar, isteğe bağlı soslar ile",
+      "category": "Tostlar"
+    },
+    {
+      "name": "Sucuklu Kaşarlı Tost",
+      "price": "200 TL",
+      "desc": "Sucuk, kaşar peyniri, isteğe göre ketçap, mayonez",
+      "category": "Tostlar"
+    },
+    {
+      "name": "Ayvalık Tostu",
+      "price": "280 TL",
+      "desc": "Salatalık turşusu, sucuk, sosis, salam, ketçap, mayonez,",
+      "category": "Tostlar"
+    },
+    {
+      "name": "Sosisli Patso Sandviç",
+      "price": "200 TL",
+      "desc": "Patates kızartması, ketçap, mayonez, sosis",
+      "category": "Sandviçler"
+    },
+    {
+      "name": "Sosisli Sandviç",
+      "price": "175 TL",
+      "desc": "Sosis, salatalık turşusu",
+      "category": "Sandviçler"
+    },
+    {
+      "name": "Patso Sandviç",
+      "price": "160 TL",
+      "desc": "Patates kızartması, ketçap, mayonez",
+      "category": "Sandviçler"
+    },
+    {
+      "name": "Patates Kızartması",
+      "price": "215 TL",
+      "desc": "Parmak dilim",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Karışık sepet",
+      "price": "315 TL",
+      "desc": "Patates kızartması, soğan halkası, çıtır tavuk, sosisli, dilediğiniz 2 sos ile servis edilir.",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Çilek Sever Waffle",
+      "price": "420 TL",
+      "desc": "Waffle hamur üzerine; beyaz taban çikolata, çilek, frambuaz, beyaz sos, file badem, fambuazlı damla çikolata, sütlü pirinç patlağı",
+      "category": "Waffles"
+    },
+    {
+      "name": "Double Muzlu Waffle",
+      "price": "420 TL",
+      "desc": "Waffle hamur üzerine; sütlü taban sos, muz, çilek, seçeceğiniz soslar, süslemeler",
+      "category": "Waffles"
+    },
+    {
+      "name": "Antep Fıstıklı Waffle",
+      "price": "375 TL",
+      "desc": "Waffle hamur üzerine; beyaz çikolata, muz, Antep fıstığı, beyaz çikolata, sütlü çikolata sos",
+      "category": "Waffles"
+    },
+    {
+      "name": "Bowl Waffle",
+      "price": "500 TL",
+      "desc": "Tek kişilik",
+      "category": "Waffles"
+    },
+    {
+      "name": "Double Waffle",
+      "price": "500 TL",
+      "desc": "2 kat hamur, meyve",
+      "category": "Waffles"
+    },
+    {
+      "name": "Klasik Waffle",
+      "price": "375 TL",
+      "desc": "Muz, çilek, özel sos, çikolata sosu",
+      "category": "Waffles"
+    },
+    {
+      "name": "Coca-Cola (25 cl.)",
+      "price": "94 TL",
+      "desc": "Kutu içecek",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Fanta (25 cl.)",
+      "price": "94 TL",
+      "desc": "Kutu içecek",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Sprite (25 cl.)",
+      "price": "94 TL",
+      "desc": "Kutu içecek",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Lipton Ice Tea Şeftali (33 cl.)",
+      "price": "94 TL",
+      "desc": "Kutu içecek",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Lipton Ice Tea Mango (33 cl.)",
+      "price": "94 TL",
+      "desc": "Kutu içecek",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Lipton Ice Tea Kırmızı Meyveli (33 cl.)",
+      "price": "94 TL",
+      "desc": "Kutu içecek",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Ayran (17 cl.)",
+      "price": "50 TL",
+      "desc": "Küçük boy",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Limonlu Soda (20 cl.)",
+      "price": "60 TL",
+      "desc": "Cam şişe",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Elmalı Soda (20 cl.)",
+      "price": "60 TL",
+      "desc": "Cam şişe",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Frenk Üzümlü Soda (20 cl.)",
+      "price": "60 TL",
+      "desc": "Cam şişe",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Mandalinalı Soda (20 cl.)",
+      "price": "60 TL",
+      "desc": "Cam şişe",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Soda (20 cl.)",
+      "price": "50 TL",
+      "desc": "Cam şişe",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Su (50 cl.)",
+      "price": "25 TL",
+      "desc": "Pet şişe",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Bardak Çay",
+      "price": "45 TL",
+      "desc": "Sıcak servis edilir.",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Latte",
+      "price": "190 TL",
+      "desc": "Sıcak servis edilir.",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Mocha",
+      "price": "225 TL",
+      "desc": "Sıcak servis edilir.",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Macchiato",
+      "price": "190 TL",
+      "desc": "Sıcak servis edilir.",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Flat White",
+      "price": "140 TL",
+      "desc": "Sıcak servis edilir.",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Ketçap",
+      "price": "10 TL",
+      "desc": "Adet olarak servis edilir.",
+      "category": "Soslar"
+    },
+    {
+      "name": "Mayonez",
+      "price": "10 TL",
+      "desc": "Adet olarak servis edilir.",
+      "category": "Soslar"
+    },
+    {
+      "name": "BBQ Sos",
+      "price": "10 TL",
+      "desc": "Adet olarak servis edilir.",
+      "category": "Soslar"
+    },
+    {
+      "name": "Ranch Sos",
+      "price": "10 TL",
+      "desc": "Adet olarak servis edilir.",
+      "category": "Soslar"
+    },
+    {
+      "name": "Buzlu Caffe Latte",
+      "price": "190 TL",
+      "desc": "Espresso, süt, buz, köpüklü süt",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Buzlu Vanilya Latte",
+      "price": "210 TL",
+      "desc": "Espresso, süt, vanilya aroması, buz, köpüklü süt",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Buzlu Caramel Latte",
+      "price": "210 TL",
+      "desc": "Espresso, süt, karamel şurubu, buz, süt köpüğü",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Buzlu Caffè Americano",
+      "price": "180 TL",
+      "desc": "Espresso, su, buz",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Buzlu Blonde Latte",
+      "price": "180 TL",
+      "desc": "Blonde espresso, süt, buz",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Iced Caramel Macchiato",
+      "price": "210 TL",
+      "desc": "Espresso, süt, karamel sosu, krema, buz",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Buzlu Beyaz Çikolatalı Mocha",
+      "price": "210 TL",
+      "desc": "Espresso, beyaz çikolata kreması, süt, buz",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Iced Pistachio Latte",
+      "price": "210 TL",
+      "desc": "Espresso, süt, Antep fıstığı aroması, buz",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Iced Strawberry Latte",
+      "price": "210 TL",
+      "desc": "Çilek aroması, espresso",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Iced Raspberry Latte",
+      "price": "210 TL",
+      "desc": "Frambuaz aroması, ahududu, yoğun espresso, süt",
+      "category": "Soğuk Kahveler"
+    }
+  ]
+}
 };
