@@ -5,1642 +5,1648 @@ export type MenuOverride = { name: string; sourceUrl: string; sourceName: string
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
   "7288": {
-    "name": "Limonlu Bahçe",
+    "name": "Limonlu Bahçe Beyoğlu",
     "sourceUrl": "https://www.limonlubahcebeyoglu.com/qrmenu.php",
-    "sourceName": "Limonlu Bahçe resmi QR menüsü",
+    "sourceName": "Limonlu Bahçe Beyoğlu resmi QR menüsü (exact Tomtom Yeni Çarşı Cd. No:74)",
     "verifiedAt": "2026-08-23",
     "items": [
       {
         "name": "İSTANBUL KAHVALTI (2 KİŞİLİK)",
-        "price": "1650 TL",
+        "price": "1650",
         "desc": "beyaz peynir, kars kaşarı, zeytin, tereyağı, zeytinyağı sosunda çörek otlu kaymak lor, ince pekmezli tahin sos, marmelat, bal, kuru ve taze meyveli süzme yoğurt, baharatlı acuka, mini domates, salatalık, sosunda taze otlar, yumurtalı ekmek, kızarmış yumurta, bahçenin ekmeği, simit, 3 çay veya filtre kahve / White cheese, Kars kasar cheese, olives, butter, black seed in olive oil sauce, clotted cream curd cheese, tahini with light molasses sauce, jam, honey, strained yogurt with dried and fresh fruits, spicy acuka, cherry tomatoes, cucumber with fresh herbs in sauce, eggy bread, fried eggs, garden bread, simit, 3 cups of tea or filter coffee.",
-        "category": "KAHVALTILAR | BREAKFAST"
+        "category": "Kahvaltılar"
       },
       {
-        "name": "KAHVALTI EKİ",
-        "price": "375 TL",
+        "name": "KAHVALTI EKİ (Tavada sucuk (4 dilim))",
+        "price": "375",
         "desc": "Tavada sucuk (4 dilim) / Pan-fried sausage (4 slices)",
-        "category": "KAHVALTILAR | BREAKFAST"
+        "category": "Kahvaltılar"
       },
       {
-        "name": "KAHVALTI EKİ",
-        "price": "230 TL",
+        "name": "KAHVALTI EKİ (Sigara böreği (4 adet))",
+        "price": "230",
         "desc": "Sigara böreği (4 adet) / Fried chee se rolls (4 Pieces)",
-        "category": "KAHVALTILAR | BREAKFAST"
+        "category": "Kahvaltılar"
       },
       {
         "name": "VEGAN KAHVALTI",
-        "price": "750 TL",
+        "price": "750",
         "desc": "3 sebzeli börek, acuka ezmeli gevrek, söğüşler, vegan peynir rende, tahin soslu meyve, 3 çay veya filtre kahve / 3 Vegetable pastries, crisp with acuka spread, sliced fresh vegetables, grated vegan cheese, fruit with tahini sauce, 3 teas or filter coffee.",
-        "category": "KAHVALTILAR | BREAKFAST"
+        "category": "Kahvaltılar"
       },
       {
         "name": "Mini Kahvaltı",
-        "price": "690 TL",
+        "price": "690",
         "desc": "Beyaz peynir, trakya kaşarı, çeri domates, salatalık, yeşil biber, zeytin, tereyağı, bal, kızarmış yumurta, 3 çay veya filtre kahve / Feta cheese, mini cheese, tomatoes, cucumber, butter, olive, honey, fried eggs, 3 cup of tea or filter coffee",
-        "category": "KAHVALTILAR | BREAKFAST"
+        "category": "Kahvaltılar"
       },
       {
-        "name": "KAHVALTI 3'LEMELERI",
-        "price": "790 TL",
+        "name": "KAHVALTI 3'LEMELERI (Kızarmış dana sosis, kızarmış)",
+        "price": "790",
         "desc": "Kızarmış dana sosis, kızarmış yumurta, zeytinyağı sosunda acuka, 3 çay veya filtre kahve / Fried beef sausage, fried eggs, acuka in olive oil sauce, 3 cups of tea or filter coffee",
-        "category": "KAHVALTILAR | BREAKFAST"
+        "category": "Kahvaltılar"
       },
       {
-        "name": "KAHVALTI 3' LEMELERİ",
-        "price": "625 TL",
+        "name": "KAHVALTI 3' LEMELERİ (4 sigara böreği, 2 yumurtalı ekmek,)",
+        "price": "625",
         "desc": "4 sigara böreği, 2 yumurtalı ekmek, tereyağı, kaymak-lor, bal, 3 çay veya filtre kahve / 4 spring rolls (fried pastry rolls), 2 eggy breads, butter, clotted cream and curd cheese, honey, 3 cups of tea or filter coffee",
-        "category": "KAHVALTILAR | BREAKFAST"
+        "category": "Kahvaltılar"
       },
       {
-        "name": "KAHVALTI 3' LEMELERİ",
-        "price": "640 TL",
+        "name": "KAHVALTI 3' LEMELERİ (Limon usulü Fransız tost, yumurtalı)",
+        "price": "640",
         "desc": "Limon usulü Fransız tost, yumurtalı ekmek, tahinli sos, tarçın, taze ve kuru meyve, 3 çay veya filtre kahve / Lemon-style French toast, eggy bread, tahini sauce, cinnamon, fresh and dried fruits, 3 cups of tea or filter coffee",
-        "category": "KAHVALTILAR | BREAKFAST"
+        "category": "Kahvaltılar"
       },
       {
-        "name": "KAHVALTI 3'LEMELERİ",
-        "price": "640 TL",
+        "name": "KAHVALTI 3'LEMELERİ (kızarmış sucuklu yumurta, zeytinyağı)",
+        "price": "640",
         "desc": "kızarmış sucuklu yumurta, zeytinyağı sosunda acuka, mini domates, 3 çay veya filtre / Fried eggs with sucuk, acuka in olive oil sauce, cherry tomatoes, 3 cups of tea or filter coffee",
-        "category": "KAHVALTILAR | BREAKFAST"
+        "category": "Kahvaltılar"
       },
       {
         "name": "VEGAN OMLET",
-        "price": "330 TL",
+        "price": "330",
         "desc": "taze soğan, patates, kuru domates, yulaf, keten tohumu, susam, ince maydanoz, çeri domates / fresh spring onion, potato, sun-dried tomato, oat, flaxseed, sesame, finely chopped parsley, cherry tomato fresh vegetables",
-        "category": "KAHVALTILAR | BREAKFAST"
+        "category": "Kahvaltılar"
       },
       {
         "name": "YULAFLI OMLET",
-        "price": "375 TL",
+        "price": "375",
         "desc": "Süzme peynir, ince maydanoz, ince kuru domates / Cottage cheese, fine parsley, fine dried tomatoes",
-        "category": "KAHVALTILAR | BREAKFAST"
+        "category": "Kahvaltılar"
       },
       {
         "name": "Mantar ve Peynirli Omlet",
-        "price": "450 TL",
+        "price": "450",
         "desc": "Mushrooms and cheese",
-        "category": "KAHVALTILAR | BREAKFAST"
+        "category": "Kahvaltılar"
       },
       {
         "name": "AKDENİZ OMLET",
-        "price": "475 TL",
+        "price": "475",
         "desc": "Karamelize soğan, kuru domates, yeşil zeytin dilimleri, rendelenmiş parmesan / Caramelized onions, sun- dried tomatoes, sliced green olives, grated Parmesan",
-        "category": "KAHVALTILAR | BREAKFAST"
+        "category": "Kahvaltılar"
       },
       {
         "name": "Peynirli Omlet",
-        "price": "375 TL",
+        "price": "375",
         "desc": "Cheese Omlette",
-        "category": "KAHVALTILAR | BREAKFAST"
+        "category": "Kahvaltılar"
       },
       {
         "name": "SOSİSLİ + PATATESLİ OMLET",
-        "price": "575 TL",
+        "price": "575",
         "desc": "Sausage & Fries",
-        "category": "KAHVALTILAR | BREAKFAST"
+        "category": "Kahvaltılar"
       },
       {
         "name": "Kızarmış Sosis + Sucuk",
-        "price": "825 TL",
+        "price": "825",
         "desc": "Izgara çeri domates, biber / Fried frankfurter, cherry tomatoes, pepper",
-        "category": "KAHVALTILAR | BREAKFAST"
+        "category": "Kahvaltılar"
       },
       {
         "name": "Sucuklu Yumurta",
-        "price": "490 TL",
+        "price": "490",
         "desc": "Egg with sausages",
-        "category": "KAHVALTILAR | BREAKFAST"
+        "category": "Kahvaltılar"
       },
       {
         "name": "Menemen",
-        "price": "330 TL",
+        "price": "330",
         "desc": "Scrambled eggs with tomatoes, pepper",
-        "category": "KAHVALTILAR | BREAKFAST"
+        "category": "Kahvaltılar"
       },
       {
         "name": "SÜZME YOĞURT + TAZE ve KURU MEYVELER (TERCİHEN YULAF)",
-        "price": "350 TL",
+        "price": "350",
         "desc": "Strained yogurt + fresh and dried fruits (PREFERABLY OATS)",
-        "category": "KAHVALTILAR | BREAKFAST"
+        "category": "Kahvaltılar"
       },
       {
         "name": "Sigara Böreği + Kiraz Domates",
-        "price": "425 TL",
+        "price": "425",
         "desc": "Cherry tomatoes + fried patty",
-        "category": "KAHVALTILAR | BREAKFAST"
+        "category": "Kahvaltılar"
       },
       {
         "name": "ÇITIR PİLİÇ BURGER",
-        "price": "650 TL",
+        "price": "650",
         "desc": "çıtır kızarmış piliç, ranch sos, turşu dilimi, karamelize soğan, marul dilimi, baharatlı patates kızartması / crispy fried chicken, ranch sauce, pickle slices, caramelized onion, lettuce, seasoned french fries",
-        "category": "LİMON FEST"
+        "category": "Limon Fest"
       },
       {
         "name": "İKİZ VEGAN BURGER",
-        "price": "800 TL",
+        "price": "800",
         "desc": "Bitki bazlı (bezelye) veggy marka vegan köfte,taze yeşillik,domates dilim,salatalık turşu,karamelize soğan,barbekü+hardal sos, baharatlı patates kızartması / Plant-based (pea) Veggy brand vegan meatball, fresh greens, tomato slice, pickled cucumber, caramelized onion, barbecue + mustard sauce, spiced french fries",
-        "category": "LİMON FEST"
+        "category": "Limon Fest"
       },
       {
         "name": "İKİZ BURGER / BURGER PATTIES (120GR)",
-        "price": "790 TL",
+        "price": "790",
         "desc": "Burger köfte, domates, karamalize soğan, turşu, baharatlı patates kızartması / Burger patties, special sauce, tomatoes, caramelize onions, pickles and spicy french fries",
-        "category": "LİMON FEST"
+        "category": "Limon Fest"
       },
       {
         "name": "HAMBURGER ( 120 GR KOFTE)",
-        "price": "790 TL",
+        "price": "790",
         "desc": "burger köfte, taze yeşillik, salatalık turşusu, karamalize soğan, domates dilim, burger sos, baharatlı patates kızartması / burger meatballs, pickled cucumber, caramelized onions, tomato slice, pickled , burger sauce, french fries",
-        "category": "LİMON FEST"
+        "category": "Limon Fest"
       },
       {
         "name": "CHEESEBURGER ( 120 GR KÖFTE)",
-        "price": "820 TL",
+        "price": "820",
         "desc": "burger köftesi, taze yeşillik, cheddar peynir, karamelize soğan, domates dilim, salatalık tursusu, burger sos, baharatlı patates kızartması / burger meatballs, fresh greens, cheddar cheese, caramelized onion, tomato slices, cucumber pickles, burger sauce, spicy potatoes.",
-        "category": "LİMON FEST"
+        "category": "Limon Fest"
       },
       {
         "name": "DOUBLE CHEESEBURGER ( 240 GR KOFTE )",
-        "price": "1450 TL",
+        "price": "1450",
         "desc": "burger köfte, taze yeşillik, cheddar peynir, karamelize soğan, domates dilim, salatalık turşusu, burger sos, baharatlı patates kızartması / burger meatballs, fresh greens, cheddar cheese, caramelized onions, tomato slices, cucumber pickles, burger sauce, spicy potatoes",
-        "category": "LİMON FEST"
+        "category": "Limon Fest"
       },
       {
         "name": "SEBZELİ ACIK DÜRÜM (vegan)",
-        "price": "475 TL",
+        "price": "475",
         "desc": "lavaş ekmeği, lezzetlendirilmiş ince mevsim sebzeleri, kızarmış taze patates / whole wheat lavash bread, flovored thinseasonal vegetables, fried fresh potatoes",
-        "category": "LİMON FEST"
+        "category": "Limon Fest"
       },
       {
         "name": "SEZAR DÜRÜM",
-        "price": "660 TL",
+        "price": "660",
         "desc": "Ançuez ve parmesan katkılı sezar sos, ızgara piliç dilimleri, taze marul, salatalık dilim, turşu dilim, baharatlı patates kızartması / Caesar sauce with anchovies and parmesan, grilled chicken slices, fresh lettuce, cucumber slice, pickle slice, spicy french fries",
-        "category": "LİMON FEST"
+        "category": "Limon Fest"
       },
       {
         "name": "ETLİ DÜRÜM (KEBAP KÖFTESİ) / RED MEAT WRAP",
-        "price": "800 TL",
+        "price": "800",
         "desc": "Izgara kebap köftesi, acuka sosu, sumaklı ince doğranmış kırmızı soğan, közlenmiş biber dilimleri, ince kıyılmış maydanoz, baharatlı patates kızartması / Grilled kebab meatballs, acuka sauce, thinly sliced red onion with sumac, roasted pepper slices, finely chopped parsley, spiced french fries",
-        "category": "LİMON FEST"
+        "category": "Limon Fest"
       },
       {
         "name": "KIZARMIŞ DANA SOSİS + BAHARATLI PATATES KIZARTMASI",
-        "price": "825 TL",
+        "price": "825",
         "desc": "Fried beef sausage + fried potatoes",
-        "category": "LİMON FEST"
+        "category": "Limon Fest"
       },
       {
         "name": "BAHARATLI PATATES KIZARTMASI",
-        "price": "330 TL",
+        "price": "330",
         "desc": "Spicy french fries",
-        "category": "LİMON FEST"
+        "category": "Limon Fest"
       },
       {
         "name": "MEVSİMSEL ÇORBA / SOUP OF THE SEASON",
-        "price": "220 TL",
+        "price": "220",
         "desc": "Baharatlı gevrek ekmek / With spicy crisp croutons",
-        "category": "BAŞLANGIÇLAR | STARTERS"
+        "category": "Başlangıçlar"
       },
       {
         "name": "2 PEYNİR / 2 CHEESE",
-        "price": "590 TL",
+        "price": "590",
         "desc": "Trakya kaşarı, kimyonlu goudo, kuru meyve, çörek otlu zeytinyağı / Thracian cheddar, goudo with cumin, dried fruit, nigella seed olive oil",
-        "category": "BAŞLANGIÇLAR | STARTERS"
+        "category": "Başlangıçlar"
       },
       {
         "name": "4 PEYNİR / 4 CHEESE (2 kişi icin tavsiye edilir)",
-        "price": "995 TL",
+        "price": "995",
         "desc": "kimyonlu gouda, bergama tulum, trakya kaşarı, gravyer peyniri, kuru dut, kuru erik, gevrek, çörek otlu zeytinyağı/ cumin gouda, bergama tulum cheese, trakya kashar cheese, gruyere cheese, dried mulberries, dried prunes, crispy bread, nigella seed olive oil",
-        "category": "BAŞLANGIÇLAR | STARTERS"
+        "category": "Başlangıçlar"
       },
       {
         "name": "MİNİ DOMATESİ + PEYNİR KREMASI",
-        "price": "390 TL",
+        "price": "390",
         "desc": "Taze fesleğen katkılı sos ile lezzetlendirilmiş 2 renkli çeri domates, 2 çeşit peynir ile hazırladığımız peynir ezmesi / two-colored cherry tomatoes flavored with a fresh basil-infused sauce, cheese spread prepared with two types of cheese",
-        "category": "BAŞLANGIÇLAR | STARTERS"
+        "category": "Başlangıçlar"
       },
       {
         "name": "3'LÜ MEZE",
-        "price": "700 TL",
+        "price": "700",
         "desc": "Üç adet meze / mezze trio",
-        "category": "BAŞLANGIÇLAR | STARTERS"
+        "category": "Başlangıçlar"
       },
       {
         "name": "LİMON KARIŞIK / LEMON MIXED",
-        "price": "995 TL",
+        "price": "995",
         "desc": "çıtır patates, çıtır piliç dilimleri, kızarmış dana sosis, sigara böreği, 2 dip sos / crispy fries, crispy chicken strips, fried beef sausage, turkish spring rolls, 2 dipping sauce",
-        "category": "BAŞLANGIÇLAR | STARTERS"
+        "category": "Başlangıçlar"
       },
       {
         "name": "SOMON FÜME (80 GR.)",
-        "price": "695 TL",
+        "price": "695",
         "desc": "kuzu kulağı, kuru domates, ince parmesan, nar ekşili zeytinyağı / smoked salmon, lamb’s lettuce, sun- dried tomatoes, shaved parmesan, pomegranate molasses olive oil",
-        "category": "BAŞLANGIÇLAR | STARTERS"
+        "category": "Başlangıçlar"
       },
       {
         "name": "ÇEREZ KITIR / SNACK KITIR",
-        "price": "540 TL",
+        "price": "540",
         "desc": "baharatlı patates kızartması, çıtır piliç dilimleri, 2 dip sos/ revised / spicy french fries, crispy chicken strips, 2 dipping sauces",
-        "category": "BAŞLANGIÇLAR | STARTERS"
+        "category": "Başlangıçlar"
       },
       {
         "name": "Bruschetta - 2 dilim (SEÇİM 1)",
-        "price": "440 TL",
+        "price": "440",
         "desc": "fesleğen soslu domates dilimi, ince peynir kreması + köz patlıcan / tomato with basil sauce, fine cheese cream + roasted eggplant",
-        "category": "BAŞLANGIÇLAR | STARTERS"
+        "category": "Başlangıçlar"
       },
       {
         "name": "Bruschetta - 2 dilim (SEÇİM 2)",
-        "price": "495 TL",
+        "price": "495",
         "desc": "peynir kreması + somon füme (ince salatalık), fesleğen soslu domates dilimi / cheese cream + smoked salmon (thin cucumber), tomato with basil sauce",
-        "category": "BAŞLANGIÇLAR | STARTERS"
+        "category": "Başlangıçlar"
       },
       {
         "name": "MELİMELO",
-        "price": "425 TL",
+        "price": "425",
         "desc": "ince turp, ince yeşil elma, kuzu kulağı, ince zencefil, yeşil zeytin, ince kuru domates, kuru dut, peynir soslu gevrekler, fresh sos / thinly sliced radish, thinly sliced green apple, sorrel, thinly sliced ginger, green olives, thinly sliced sun-dried tomatoes, dried mulberries, cheese-coated crisps, fresh dressing",
-        "category": "SALATALAR | SALADS"
+        "category": "Salatalar"
       },
       {
-        "name": "EGE SALATA / EGE  SALAD",
-        "price": "400 TL",
+        "name": "EGE SALATA / EGE SALAD",
+        "price": "400",
         "desc": "marul, kuzu kulağı, taze nane, ince dilim turp, yeşil zeytin, ince dilim kuru domates, kuru erik, süzme peynir, nar ekşili zeytinyağı/ lettuce, lamb’s lettuce, fresh mint, thin sliced radish, green olives, thin sliced sun-dried tomatoes, dried prunes, strained cheese, pomegranate molasses olive oil",
-        "category": "SALATALAR | SALADS"
+        "category": "Salatalar"
       },
       {
         "name": "VEGAN EGE",
-        "price": "470 TL",
+        "price": "470",
         "desc": "marul, kuzu kulağı ve taze nane, ince dilim turp, yeşil zeytin, ince dilim kuru domates, kuru erik, vegan bitkisel peynir rendesi, nar ekşili zeytinyağı / lettuce, lamb’s lettuce, fresh mint, radish, green olives, sun-dried tomatoes, dried prunes, grated vegan cheese, pomegranate molasses olive oil",
-        "category": "SALATALAR | SALADS"
+        "category": "Salatalar"
       },
       {
         "name": "SOMON FÜMELİ (80 GR. SOMON)",
-        "price": "695 TL",
+        "price": "695",
         "desc": "ince turp, ince yeşil elma, kuzu kulağı, taze zencefil, yeşil zeytin, kuru domates, kuru dut, gevrek, fresh sos / smoked salmon, thinly sliced radish, thinly sliced green apple, sorrel, fresh ginger, green olives, sun-dried tomatoes, dried mulberries, crisps, fresh dressing",
-        "category": "SALATALAR | SALADS"
+        "category": "Salatalar"
       },
       {
         "name": "ETLİ SALATA (100 GR. BONFİLE) / STEAK SALAD",
-        "price": "995 TL",
+        "price": "995",
         "desc": "marul dilimi, salatalık, turp, ince dilim kuru domates, parmesan rendesi, kişnişli limon sos / lettuce wedge, cucumber, radish, sun-dried tomatoes, grated parmesan, lemon & coriander dressing",
-        "category": "SALATALAR | SALADS"
+        "category": "Salatalar"
       },
       {
         "name": "IZGARA PİLİÇ SALATASI (140 GR PİLİÇ)",
-        "price": "420 TL",
+        "price": "420",
         "desc": "Taze marul dilimleri, kuru üzüm, ince yeşil elma dilim, ızgara baharatlı piliç dilimleri, fresh sos / Fresh lettuce slices, raisins, thinly sliced green apple, grilled spiced chicken slices, fresh dressing",
-        "category": "SALATALAR | SALADS"
+        "category": "Salatalar"
       },
       {
         "name": "SEZAR SALATA",
-        "price": "640 TL",
+        "price": "640",
         "desc": "Marul, ızgara piliç, parmesan, sezar sos, krotan ekmek / Caeser salad, green salad, grilled chicken, parmesan with caesar sauce,croutons bread",
-        "category": "SALATALAR | SALADS"
+        "category": "Salatalar"
       },
       {
         "name": "ÇITIR PİLİÇ / CHICKEN TENDERS (140 GR)",
-        "price": "440 TL",
+        "price": "440",
         "desc": "taze yeşillik, yeşil elma, kuru dut, kuru üzüm, mini domates, fresh sos / fresh greens, green apple, dried mulberries, raisins, cherry tomatoes, house dressing",
-        "category": "SALATALAR | SALADS"
+        "category": "Salatalar"
       },
       {
         "name": "MEYVELİ PİRİNÇ SALATASI",
-        "price": "425 TL",
+        "price": "425",
         "desc": "Siyah pirinç,küp elma dilim, ince zencefil, taze otlar, ince turp, kuru erik, kuru üzüm, fresh sos / black rice, cubed apple slices,thinly sliced ginger, fresh herbs, thinly sliced radish, dried plums, raisins, fresh dressing",
-        "category": "SALATALAR | SALADS"
+        "category": "Salatalar"
       },
       {
         "name": "MEVSİM SALATASI",
-        "price": "375 TL",
+        "price": "375",
         "desc": "Lifli 3 çeşit rendelenmiş mevsim sebzesi, taze frenk maydanoz, ekşili sos / Three types of shredded seasonal vegetables, fresh chervil, tangy dressing",
-        "category": "SALATALAR | SALADS"
+        "category": "Salatalar"
       },
       {
         "name": "PENNE ARABIATTA (tercİhen glutensİz spagettİ İle uygulanır)",
-        "price": "460 TL",
+        "price": "460",
         "desc": "İnce sarımsaklı acılı taze domates sos, zeytin dilim, parmesan peynir / Tomatoes sauce with chili and garlic, olive, parmesan",
-        "category": "MAKARNALAR | PASTAS"
+        "category": "Makarnalar"
       },
       {
         "name": "LINGUINI PİLİÇLİ / CHICKEN LINGUINI",
-        "price": "540 TL",
+        "price": "540",
         "desc": "İnce sarımsaklı, zerdaçallı ince krema, parmesan / Light garlic and turmeric cream sauce with parmesan",
-        "category": "MAKARNALAR | PASTAS"
+        "category": "Makarnalar"
       },
       {
         "name": "LINGUINI MANTARLI / MUSHROOM LINGUINI",
-        "price": "525 TL",
+        "price": "525",
         "desc": "İnce sarımsak, kültür mantarı, ince krema, parmesan / Light garlic, button mushrooms, light cream, and parmesan",
-        "category": "MAKARNALAR | PASTAS"
+        "category": "Makarnalar"
       },
       {
-        "name": "RAVIOLI ETLİ  /  RAVIOLI WİHT MEAT",
-        "price": "880 TL",
+        "name": "RAVIOLI ETLİ / RAVIOLI WİHT MEAT",
+        "price": "880",
         "desc": "İnceltilmiş süzme yoğurt, ince zeytinyağı sosu/ meat ravioli, thinned strained yogurt, light olive oil dressing",
-        "category": "MAKARNALAR | PASTAS"
+        "category": "Makarnalar"
       },
       {
-        "name": "ERİŞTE  NATUREL",
-        "price": "460 TL",
+        "name": "ERİŞTE NATUREL",
+        "price": "460",
         "desc": "kızarmış ince ceviz, kuru dut, ince sarımsak, sebze baharatı, karamelize ince soğan/ toasted sliced walnuts, dried mulberries, thinly sliced garlic, vegetable seasoning, caramelized thinly sliced onions",
-        "category": "MAKARNALAR | PASTAS"
+        "category": "Makarnalar"
       },
       {
         "name": "ERİŞTE SEBZELİ (VEGAN)",
-        "price": "490 TL",
+        "price": "490",
         "desc": "Özel yapım erişte, İnce soya soslu mevsim sebze, rende vegan peynir / Handmade noodles with seasonal vegetables in light soy sauce, topped with grated vegan cheese",
-        "category": "MAKARNALAR | PASTAS"
+        "category": "Makarnalar"
       },
       {
         "name": "RIGATONI PEYNIR KREMALI",
-        "price": "620 TL",
+        "price": "620",
         "desc": "Karamelize soğan, cherry domates, taze fesleğen, peynir katkılı ince krema, parmesan / Caramelized onion, cherry tomato, fresh basil, thin cream with cheese, parmesan",
-        "category": "MAKARNALAR | PASTAS"
+        "category": "Makarnalar"
       },
       {
         "name": "RIGATONİ SOMON FÜME",
-        "price": "900 TL",
+        "price": "900",
         "desc": "fırınlanmış domates, ince kapari ezmeli krema sos, ince sarımsak, ince taze soğan / smoked salmon, roasted tomatoes, creamy sauce with fine caper paste, thinly sliced garlic, thinly sliced spring onions",
-        "category": "MAKARNALAR | PASTAS"
+        "category": "Makarnalar"
       },
       {
         "name": "SPAGETTİ FESLEĞEN SOS",
-        "price": "560 TL",
+        "price": "560",
         "desc": "ince kuru domates, ince kavrulmuş ceviz, ince sarımsak, ince fesleğenli krema sos / thin sun-dried tomatoes, finely roested walnuts, fine garlic, thin basil cream sauce",
-        "category": "MAKARNALAR | PASTAS"
+        "category": "Makarnalar"
       },
       {
         "name": "TORTELLINI PORCİNİ MANTARLI",
-        "price": "840 TL",
+        "price": "840",
         "desc": "Parmesanlı krema sos / tortellini with porcini mushrooms, parmesan cream sauce",
-        "category": "MAKARNALAR | PASTAS"
+        "category": "Makarnalar"
       },
       {
         "name": "SPAGETTİ NAPOLITEN",
-        "price": "420 TL",
+        "price": "420",
         "desc": "İnce sarımsak lezzetli domates sos / Light garlic-flavored tomato sauce",
-        "category": "MAKARNALAR | PASTAS"
+        "category": "Makarnalar"
       },
       {
-        "name": "SPAGETTİ BOLONEZ / SPAGHETTI BOLOGNESE  (tercihen glutensiz spagetti ile uygulanır)",
-        "price": "800 TL",
+        "name": "SPAGETTİ BOLONEZ / SPAGHETTI BOLOGNESE (tercihen glutensiz spagetti ile uygulanır)",
+        "price": "800",
         "desc": "İnce sarımsak ve etli bolenez sos / Light garlic and meaty Bolognese sauce",
-        "category": "MAKARNALAR | PASTAS"
+        "category": "Makarnalar"
       },
       {
         "name": "TAVADA VEGAN KÖFTE",
-        "price": "820 TL",
+        "price": "820",
         "desc": "Bitki bazlı (bezelye) veggy marka vegan köfte, mini taze salata, ızgara domates, halka çıtır patates / Plant-based (pea) veggy brand vegan meatballs, mini fresh salad, grilled tomato, crispy potato rings",
-        "category": "ANA YEMEKLER | MAIN COURSES"
+        "category": "Ana Yemekler"
       },
       {
         "name": "IZGARA SEBZE / GRILLED VEGETABLES",
-        "price": "550 TL",
+        "price": "550",
         "desc": "Izgara mevsim sebzeleri & peynir kreması, ince fesleğen sos / Grilled seasonal vegetables & cheese cream, thin basil sauce",
-        "category": "ANA YEMEKLER | MAIN COURSES"
+        "category": "Ana Yemekler"
       },
       {
         "name": "BEYTİ KEBAP (160 GR. KEBAP KÖFTESİ) LİMONLU BAHÇE SUNUMU İLE",
-        "price": "995 TL",
+        "price": "995",
         "desc": "süzme yoğurtlu közlenmiş patlıcan, hafif acılı domates sosu, ızgara kebap köftesi, köz mini domates / roasted eggplant with strained yogurt, mildly spicy tomato sauce, grilled kebab meatballs, roasted cherry tomatoes",
-        "category": "ANA YEMEKLER | MAIN COURSES"
+        "category": "Ana Yemekler"
       },
       {
         "name": "İSTANBUL KEBAP / İSTANBUL KEBAB (160 GR. KEBAP KÖFTESİ)",
-        "price": "995 TL",
+        "price": "995",
         "desc": "ızgara kebap köftesi ve tortilla ekmek, köz mini domates, kebap salatası (ince kırmızı soğan, köz biber, maydanoz, sumak, zeytinyağı, nar ekşisi) / grilled kebab meatballs with tortilla, roasted cherry tomatoes, kebab salad with red onion, roasted pepper, parsley, sumac, olive oil and pomegranate molasses",
-        "category": "ANA YEMEKLER | MAIN COURSES"
+        "category": "Ana Yemekler"
       },
       {
         "name": "FIRINDA KUZU İNCİK (450 GR) / BAKED LAMB SHANK",
-        "price": "1.995 TL",
+        "price": "1995",
         "desc": "karamelize soğan, ince kremalı taze patates / caramelized onions, baby potatoes with light cream sauce",
-        "category": "ANA YEMEKLER | MAIN COURSES"
+        "category": "Ana Yemekler"
       },
       {
-        "name": "FESLEĞEN SOSLU IZGARA  KÖFTE",
-        "price": "895 TL",
+        "name": "FESLEĞEN SOSLU IZGARA KÖFTE",
+        "price": "895",
         "desc": "Peynir kremalı fesleğen sosunda ızgara köfte, çıtır patates / Grilled meatballs with basil cream cheese sauce, accompanied by crispy potato",
-        "category": "ANA YEMEKLER | MAIN COURSES"
+        "category": "Ana Yemekler"
       },
       {
         "name": "KÖFTE IZGARA (180 GR) / GRILLED MEATBALL",
-        "price": "900 TL",
+        "price": "900",
         "desc": "halka çıtır patates, köz domates, köz biber, acuka ezme / crispy potato rings, roasted tomatoes, roasted peppers, acuka dip",
-        "category": "ANA YEMEKLER | MAIN COURSES"
+        "category": "Ana Yemekler"
       },
       {
         "name": "ETLİ DOLMA (SÜZME YOĞURT EŞLİĞİNDE)",
-        "price": "660 TL",
+        "price": "660",
         "desc": "pazı, lahana veya yaprak / stuffed chard, cabbage or vine leaves with minced meat, served with strained yogurt",
-        "category": "ANA YEMEKLER | MAIN COURSES"
+        "category": "Ana Yemekler"
       },
       {
-        "name": "BONFİLE IZGARA (200 GR) /  FILLET STEAK",
-        "price": "1.750 TL",
+        "name": "BONFİLE IZGARA (200 GR) / FILLET STEAK",
+        "price": "1750",
         "desc": "ince kremalı, karamelize soğanlı taze patates, mini sebzeler / baby potatoes with creamy caramelized onions, seasonal mini vegetables",
-        "category": "ANA YEMEKLER | MAIN COURSES"
+        "category": "Ana Yemekler"
       },
       {
         "name": "BONFİLE BİBERLİ (200 GR) / PEPPER FILLET",
-        "price": "1.750 TL",
+        "price": "1750",
         "desc": "Tane karabiberli krema sos, baharatlı taze patates /cream sauce with whole black peppercorns, crispy fries",
-        "category": "ANA YEMEKLER | MAIN COURSES"
+        "category": "Ana Yemekler"
       },
       {
         "name": "BONFİLE ŞİNİTZEL (110 GR.)",
-        "price": "1.150 TL",
+        "price": "1150",
         "desc": "kızarmış pane bonfile dilim, çıtır patates / breaded fried beef tenderloin slices, crispy fries",
-        "category": "ANA YEMEKLER | MAIN COURSES"
+        "category": "Ana Yemekler"
       },
       {
         "name": "BONFİLE FAJİTA (200 GR)",
-        "price": "1.750 TL",
+        "price": "1750",
         "desc": "ince kırmızı soğan, kırmızı biber, havuç dilimleri, acı-tatlı sos, soya sosu ve worcester sos, çıtır patates / thin sliced red onion, red pepper, carrot slices, sweet chili sauce, soy sauce and worcestershire sauce, crispy fries",
-        "category": "ANA YEMEKLER | MAIN COURSES"
+        "category": "Ana Yemekler"
       },
       {
         "name": "FIRIN SOMON (220 GR.)",
-        "price": "975 TL",
+        "price": "975",
         "desc": "natürel kemikli / natural bone-in",
-        "category": "ANA YEMEKLER | MAIN COURSES"
+        "category": "Ana Yemekler"
       },
       {
-        "name": "PİLİÇ ŞİNİTZEL (150 GR)  / FRİED CHİCKEN",
-        "price": "475 TL",
+        "name": "PİLİÇ ŞİNİTZEL (150 GR) / FRİED CHİCKEN",
+        "price": "475",
         "desc": "Kızarmış pane piliç göğüs, çıtır patates / Fried chicken breast, crispy potatoes",
-        "category": "ANA YEMEKLER | MAIN COURSES"
+        "category": "Ana Yemekler"
       },
       {
         "name": "PİLİÇ MEKSİKA (200 GR) / CHICKEN MEXICAN",
-        "price": "650 TL",
+        "price": "650",
         "desc": "Taze soğan, kırmızı ve yeşil biber, acılı krema sos, çıtır patates / Chicken Mexican, green onion, red and green pepper, hot cream sauce, crispy potatoes",
-        "category": "ANA YEMEKLER | MAIN COURSES"
+        "category": "Ana Yemekler"
       },
       {
-        "name": "PİLİÇ MANTAR  (200 GR) / CHICKEN WITH MUSHROOMS",
-        "price": "650 TL",
+        "name": "PİLİÇ MANTAR (200 GR) / CHICKEN WITH MUSHROOMS",
+        "price": "650",
         "desc": "Kültür mantarı, ince krema sos, çıtır patates / Chicken with mushrooms, cream sauce and crispy potatoes",
-        "category": "ANA YEMEKLER | MAIN COURSES"
+        "category": "Ana Yemekler"
       },
       {
         "name": "PİLİÇ ZERDECAL (200 GR)",
-        "price": "650 TL",
+        "price": "650",
         "desc": "Kuru dut, kuru üzüm, taze soğan, ince sarımsak, zerdeçallı krema sos, çıtır patates / Dried mulberries, raisins, spring onions, light garlic, turmeric cream sauce and crispy potatoes",
-        "category": "ANA YEMEKLER | MAIN COURSES"
+        "category": "Ana Yemekler"
       },
       {
         "name": "ÇÖKERTME (LİMONLU BAHÇE SUNUMU)",
-        "price": "1.350 TL",
+        "price": "1350",
         "desc": "Izgara julyen bonfile dilim, ızgara köfte, süzme yoğurt, çıtır kibrit patates / Grilled julienne beef tenderloin slice, grilled meatball, strained yogurt, crispy shoestring potatoes",
-        "category": "ANA YEMEKLER | MAIN COURSES"
+        "category": "Ana Yemekler"
       },
       {
         "name": "VİŞNELİ+PEYNİR KREMALI PİRİNÇ",
-        "price": "690 TL",
+        "price": "690",
         "desc": "Risotto usulü siyah pirinç, sotelenmiş ince mantar, peynir kreması, vişne, parmesan/ Risotto- style black rice with sautéed mushrooms, cheese cream, cherry, and Parmesan",
-        "category": "ANA YEMEKLER | MAIN COURSES"
+        "category": "Ana Yemekler"
       },
       {
         "name": "BROWNI",
-        "price": "450 TL",
+        "price": "450",
         "desc": "Dondurma eşliğinde / with ıce cream",
-        "category": "TATLILAR | DESSERTS"
+        "category": "Tatlılar"
       },
       {
         "name": "DONDURMALI PROFİTEROL",
-        "price": "440 TL",
+        "price": "440",
         "desc": "(1 top dondurma) Profiterole with Chocolate Sauce and Ice Cream",
-        "category": "TATLILAR | DESSERTS"
+        "category": "Tatlılar"
       },
       {
         "name": "TAHİN SOSLU PROFİTEROL (3 TOP)",
-        "price": "420 TL",
+        "price": "420",
         "desc": "(1 top dondurma) Profiterole with Tahin Sauce and Ice Cream",
-        "category": "TATLILAR | DESSERTS"
+        "category": "Tatlılar"
       },
       {
         "name": "TAHİN SOSLU PROFİTEROL (2TOP)",
-        "price": "350 TL",
+        "price": "350",
         "desc": "profiterole with tahin sauce",
-        "category": "TATLILAR | DESSERTS"
+        "category": "Tatlılar"
       },
       {
         "name": "ÇİKOLATALI PROFİTEROL (3 TOP)",
-        "price": "370 TL",
+        "price": "370",
         "desc": "profiterole with chocolate sauce",
-        "category": "TATLILAR | DESSERTS"
+        "category": "Tatlılar"
       },
       {
         "name": "ÇİKOLATALI PROFİTEROL (2 top)",
-        "price": "350 TL",
+        "price": "350",
         "desc": "Profiterole with Chocolate Sauce",
-        "category": "TATLILAR | DESSERTS"
+        "category": "Tatlılar"
       },
       {
         "name": "SAN SEBASTIAN CHEESECAKE",
-        "price": "400 TL",
+        "price": "400",
         "desc": "Limon, Çikolata veya Frambuaz Püresi Lemon, Chocolate or Raspberry Sauce",
-        "category": "TATLILAR | DESSERTS"
+        "category": "Tatlılar"
       },
       {
         "name": "LİMON MUHALLEBİ",
-        "price": "350 TL",
+        "price": "350",
         "desc": "tercihen çikolata veya franbuaz veya tahin sos / chocolete mus with preferably chocolate or raspberry or tahini sauce.",
-        "category": "TATLILAR | DESSERTS"
+        "category": "Tatlılar"
       },
       {
         "name": "DONDURMA",
-        "price": "440 TL",
+        "price": "440",
         "desc": "ICE CREAM",
-        "category": "TATLILAR | DESSERTS"
+        "category": "Tatlılar"
       },
       {
         "name": "MEVSİM MEYVESİ",
-        "price": "350 TL",
+        "price": "350",
         "desc": "Seasonal Fruits",
-        "category": "TATLILAR | DESSERTS"
+        "category": "Tatlılar"
       },
       {
         "name": "BİTKİ ÇAYI / HERBAL TEA",
-        "price": "290 TL",
+        "price": "290",
         "desc": "Elma, Kuşburnu, Adaçayı, Ihlamur, Yeşil Çay / Apple, Rosehip, Sage, Linden, Green Tea",
-        "category": "SICAK İÇEÇEKLER | HOT BEVERAGES"
+        "category": "Sıcak İçecekler"
       },
       {
         "name": "KIŞ CAYI",
-        "price": "300 TL",
+        "price": "300",
         "desc": "Karışık bitki otları, taze limon suyu, taze zencefil, taze meyveler / Mixed herbs, fresh lemon juice, fresh ginger, fresh berries",
-        "category": "SICAK İÇEÇEKLER | HOT BEVERAGES"
+        "category": "Sıcak İçecekler"
       },
       {
         "name": "LATTE - CAPPUCCINO",
-        "price": "250 TL",
+        "price": "250",
         "desc": "...",
-        "category": "SICAK İÇEÇEKLER | HOT BEVERAGES"
+        "category": "Sıcak İçecekler"
       },
       {
         "name": "DOUBLE ESPRESSO",
-        "price": "250 TL",
+        "price": "250",
         "desc": ".....",
-        "category": "SICAK İÇEÇEKLER | HOT BEVERAGES"
+        "category": "Sıcak İçecekler"
       },
       {
         "name": "DOUBLE TÜRK KAHVESİ",
-        "price": "240 TL",
+        "price": "240",
         "desc": "TÜRK KAHVESİ",
-        "category": "SICAK İÇEÇEKLER | HOT BEVERAGES"
+        "category": "Sıcak İçecekler"
       },
       {
         "name": "ESPRESSO - AMERICANO",
-        "price": "180 TL",
+        "price": "180",
         "desc": "...",
-        "category": "SICAK İÇEÇEKLER | HOT BEVERAGES"
+        "category": "Sıcak İçecekler"
       },
       {
         "name": "DEMLEME ÇAY / TEA",
-        "price": "100 TL",
+        "price": "100",
         "desc": "Organik Organic",
-        "category": "SICAK İÇEÇEKLER | HOT BEVERAGES"
+        "category": "Sıcak İçecekler"
       },
       {
         "name": "TÜRK KAHVESİ / TURKISH COFFEE",
-        "price": "175 TL",
+        "price": "175",
         "desc": "...",
-        "category": "SICAK İÇEÇEKLER | HOT BEVERAGES"
+        "category": "Sıcak İçecekler"
       },
       {
         "name": "FİLTRE KAHVE / FILTER COFFEE",
-        "price": "220 TL",
+        "price": "220",
         "desc": "...",
-        "category": "SICAK İÇEÇEKLER | HOT BEVERAGES"
+        "category": "Sıcak İçecekler"
       },
       {
         "name": "ROMLU BİTKİ ÇAYLARI / HERBAL TEA WITH RUM",
-        "price": "490 TL",
+        "price": "490",
         "desc": "Elma, Kuşburnu, Adaçayı, Ihlamur, Yeşil Çay Apple, Rosehip, Sage, Linden, Green Tea",
-        "category": "SICAK İÇEÇEKLER | HOT BEVERAGES"
+        "category": "Sıcak İçecekler"
       },
       {
         "name": "KAHVE & KONYAK / COFFEE & COGNAC",
-        "price": "390 TL",
+        "price": "390",
         "desc": "Türk Kahvesi veya Espresso + Remy Martin Konyak 3 cl",
-        "category": "SICAK İÇEÇEKLER | HOT BEVERAGES"
+        "category": "Sıcak İçecekler"
       },
       {
         "name": "KAHVE & VİSKİ / COFFEE & WHISKEY",
-        "price": "400 TL",
+        "price": "400",
         "desc": "Türk Kahvesi veya Espresso + Jameson Viski 3 cl",
-        "category": "SICAK İÇEÇEKLER | HOT BEVERAGES"
+        "category": "Sıcak İçecekler"
       },
       {
         "name": "BAILEY'S CAFE",
-        "price": "390 TL",
+        "price": "390",
         "desc": "...",
-        "category": "SICAK İÇEÇEKLER | HOT BEVERAGES"
+        "category": "Sıcak İçecekler"
       },
       {
         "name": "LİMONSOFT",
-        "price": "375 TL",
+        "price": "375",
         "desc": "Limonata, çilek püresi, Sprite Mix Lemonade, strawberry puree, Sprite",
-        "category": "SOĞUK İÇECEKLER | COLD BEVERAGES"
+        "category": "Soğuk İçecekler"
       },
       {
         "name": "LİMONATA / LEMONADE",
-        "price": "275 TL",
+        "price": "275",
         "desc": "...",
-        "category": "SOĞUK İÇECEKLER | COLD BEVERAGES"
+        "category": "Soğuk İçecekler"
       },
       {
         "name": "FROZEN ÇİLEK",
-        "price": "375 TL",
+        "price": "375",
         "desc": "Frozen çilek veya Frambuaz",
-        "category": "SOĞUK İÇECEKLER | COLD BEVERAGES"
+        "category": "Soğuk İçecekler"
       },
       {
         "name": "LİMON VİTAMİN / LEMON VITAMINE",
-        "price": "350 TL",
+        "price": "350",
         "desc": "Limonata, fesleğen, zencefil, elma dilim mix Lemonade, basil, fresh ginger, apple slice",
-        "category": "SOĞUK İÇECEKLER | COLD BEVERAGES"
+        "category": "Soğuk İçecekler"
       },
       {
         "name": "LİMONBELLA",
-        "price": "290 TL",
+        "price": "290",
         "desc": "Ananas suyu, elma ve çilek püresi mix Pineapple juice, apple and strawberry mix",
-        "category": "SOĞUK İÇECEKLER | COLD BEVERAGES"
+        "category": "Soğuk İçecekler"
       },
       {
         "name": "LİMON KEYFİ",
-        "price": "350 TL",
+        "price": "350",
         "desc": "Lavanta ve hindistan cevizi şurubu, limonata , taze nane Lavender and coconut syrup, lemonade, fresh mint",
-        "category": "SOĞUK İÇECEKLER | COLD BEVERAGES"
+        "category": "Soğuk İçecekler"
       },
       {
         "name": "MOJİTO (ALKOLSÜZ)",
-        "price": "340 TL",
+        "price": "340",
         "desc": "Majito alkolsüz",
-        "category": "SOĞUK İÇECEKLER | COLD BEVERAGES"
+        "category": "Soğuk İçecekler"
       },
       {
-        "name": "SIKMA PORTAKAL SUYU /  FRESH ORANGE JUİCE",
-        "price": "290 TL",
+        "name": "SIKMA PORTAKAL SUYU / FRESH ORANGE JUİCE",
+        "price": "290",
         "desc": "...",
-        "category": "SOĞUK İÇECEKLER | COLD BEVERAGES"
+        "category": "Soğuk İçecekler"
       },
       {
         "name": "CARAMEL FRAPPE",
-        "price": "300 TL",
+        "price": "300",
         "desc": "Frape",
-        "category": "SOĞUK İÇECEKLER | COLD BEVERAGES"
+        "category": "Soğuk İçecekler"
       },
       {
         "name": "KLASİK FRAPPE",
-        "price": "340 TL",
+        "price": "340",
         "desc": "double espresso, 1 top kaymak dondurma",
-        "category": "SOĞUK İÇECEKLER | COLD BEVERAGES"
+        "category": "Soğuk İçecekler"
       },
       {
-        "name": "BAILEY'S  FRAPPE",
-        "price": "400 TL",
+        "name": "BAILEY'S FRAPPE",
+        "price": "400",
         "desc": "....",
-        "category": "SOĞUK İÇECEKLER | COLD BEVERAGES"
+        "category": "Soğuk İçecekler"
       },
       {
         "name": "DOMATES SUYU",
-        "price": "220 TL",
+        "price": "220",
         "desc": "Çubuk salatalık, taze nane / Cucumber sticks, fresh mint",
-        "category": "SOĞUK İÇECEKLER | COLD BEVERAGES"
+        "category": "Soğuk İçecekler"
       },
       {
         "name": "AYRAN",
-        "price": "200 TL",
+        "price": "200",
         "desc": "Salatalık, nane Drink made with yoghurt, cucumber, mint",
-        "category": "SOĞUK İÇECEKLER | COLD BEVERAGES"
+        "category": "Soğuk İçecekler"
       },
       {
         "name": "ICE AMERICANO",
-        "price": "200 TL",
+        "price": "200",
         "desc": "americano, filter, coffe",
-        "category": "SOĞUK İÇECEKLER | COLD BEVERAGES"
+        "category": "Soğuk İçecekler"
       },
       {
         "name": "ICE LATTE",
-        "price": "260 TL",
+        "price": "260",
         "desc": "ice latte",
-        "category": "SOĞUK İÇECEKLER | COLD BEVERAGES"
+        "category": "Soğuk İçecekler"
       },
       {
         "name": "SCHWEPPES",
-        "price": "225 TL",
+        "price": "225",
         "desc": "Mandalina",
-        "category": "SOĞUK İÇECEKLER | COLD BEVERAGES"
+        "category": "Soğuk İçecekler"
       },
       {
         "name": "MEŞRUBATLAR / SOFT DRINKS",
-        "price": "225 TL",
+        "price": "225",
         "desc": "Cola, Zero Cola, Sprite, Ice tea",
-        "category": "SOĞUK İÇECEKLER | COLD BEVERAGES"
+        "category": "Soğuk İçecekler"
       },
       {
         "name": "MEYVE SULARI / FRUIT JUICES",
-        "price": "225 TL",
+        "price": "225",
         "desc": "Vişne, şeftali , kayısı , elma Cherry, Peach, Apricot, Apple",
-        "category": "SOĞUK İÇECEKLER | COLD BEVERAGES"
+        "category": "Soğuk İçecekler"
       },
       {
         "name": "ENERGY",
-        "price": "275 TL",
+        "price": "275",
         "desc": "...",
-        "category": "SOĞUK İÇECEKLER | COLD BEVERAGES"
+        "category": "Soğuk İçecekler"
       },
       {
         "name": "ULUDAG PREMIUM",
-        "price": "340 TL",
+        "price": "340",
         "desc": "75 cl",
-        "category": "SOĞUK İÇECEKLER | COLD BEVERAGES"
+        "category": "Soğuk İçecekler"
       },
       {
         "name": "SODA / MINERAL WATER",
-        "price": "140 TL",
+        "price": "140",
         "desc": "...",
-        "category": "SOĞUK İÇECEKLER | COLD BEVERAGES"
+        "category": "Soğuk İçecekler"
       },
       {
-        "name": "SU / WATER",
-        "price": "125 TL",
+        "name": "SU / WATER (33 cl)",
+        "price": "125",
         "desc": "33 cl",
-        "category": "SOĞUK İÇECEKLER | COLD BEVERAGES"
+        "category": "Soğuk İçecekler"
       },
       {
-        "name": "SU / WATER",
-        "price": "240 TL",
+        "name": "SU / WATER (75 cl)",
+        "price": "240",
         "desc": "75 cl",
-        "category": "SOĞUK İÇECEKLER | COLD BEVERAGES"
+        "category": "Soğuk İçecekler"
       },
       {
         "name": "BUZZ BEYAZ",
-        "price": "720 TL",
+        "price": "720",
         "desc": "Beyaz şarap,votka,p.likör,cin,sprite,lime,nane / White wine,orange liquer,gin,sprite,lime,fresh mint",
-        "category": "KOKTEYLLER | COCKTAILS"
+        "category": "Kokteyller"
       },
       {
         "name": "BUZZ ROZE",
-        "price": "720 TL",
+        "price": "720",
         "desc": "Blush sarap,votka,sprite,lime,çilek,nane Blush,vodka,sprite,lime,strawberry,fresh mint.",
-        "category": "KOKTEYLLER | COCKTAILS"
+        "category": "Kokteyller"
       },
       {
-        "name": "BAHÇE LİMONATASI / GARDEN LEMONADE",
-        "price": "660 TL",
+        "name": "BAHÇE LİMONATASI / GARDEN LEMONADE (Misket limon aromalı smirnoff,)",
+        "price": "660",
         "desc": "Misket limon aromalı smirnoff, Limonata / Lime vodka , lemonade",
-        "category": "KOKTEYLLER | COCKTAILS"
+        "category": "Kokteyller"
       },
       {
         "name": "CİN VİTAMİN",
-        "price": "660 TL",
+        "price": "660",
         "desc": "Gordon cin, fesleğen ve zencefilli limonata / Gordon gin, basil and ginger lemonade",
-        "category": "KOKTEYLLER | COCKTAILS"
+        "category": "Kokteyller"
       },
       {
         "name": "KUZU KULAKLI CİN",
-        "price": "680 TL",
+        "price": "680",
         "desc": "cin, ekşi elma ve taze limon suyu, şeker şurubu, kuzu kulağı püresi / gin, sour apple and fresh lemon juice, sugar syrup, sorrel puree",
-        "category": "KOKTEYLLER | COCKTAILS"
+        "category": "Kokteyller"
       },
       {
         "name": "LİMON MİMOSA",
-        "price": "700 TL",
+        "price": "700",
         "desc": "beyaz şarap, fresh portakal suyu,soda,limonlu dondurma / white wine, fresh orange juice, soda water, lemon ice cream",
-        "category": "KOKTEYLLER | COCKTAILS"
+        "category": "Kokteyller"
       },
       {
         "name": "BAHÇE SOUR",
-        "price": "760 TL",
+        "price": "760",
         "desc": "konyak, amaretto, şeker suyu / şurubu, taze limon sugar cognac, amaretto, syrup, fresh lemon juice",
-        "category": "KOKTEYLLER | COCKTAILS"
+        "category": "Kokteyller"
       },
       {
-        "name": "BAHÇE SANGRIA  - DONKİŞOT",
-        "price": "760 TL",
+        "name": "BAHÇE SANGRIA - DONKİŞOT",
+        "price": "760",
         "desc": "Kırmızı şarap, Gordon Cin, portakal ve vişne suyu , esmer şeker / Red wine, gordon gin, orange and sour cherry juice, brown sugar",
-        "category": "KOKTEYLLER | COCKTAILS"
+        "category": "Kokteyller"
       },
       {
         "name": "MOJITO",
-        "price": "680 TL",
+        "price": "680",
         "desc": "Rom, misket limon, taze nane / Rum, lime, fresh peppermint",
-        "category": "KOKTEYLLER | COCKTAILS"
+        "category": "Kokteyller"
       },
       {
         "name": "MOJITO ÇİLEKLİ - KIRMIZI RÜYA",
-        "price": "680 TL",
+        "price": "680",
         "desc": "Rom, misket limonu, çilek püresi , taze nane / Rum, lime, strawberry puree, fresh peppermint",
-        "category": "KOKTEYLLER | COCKTAILS"
+        "category": "Kokteyller"
       },
       {
-        "name": "LYNCHBURG LEMONADE",
-        "price": "690 TL",
+        "name": "LYNCHBURG LEMONADE (Jack's daniel's , Cointreau, Sprite,)",
+        "price": "690",
         "desc": "Jack's daniel's , Cointreau, Sprite, taze limon suyu / Jack daniel’s, Cointreau, Sprite, fresh lemon juice",
-        "category": "KOKTEYLLER | COCKTAILS"
+        "category": "Kokteyller"
       },
       {
         "name": "ESPRESSO MARTINI",
-        "price": "650 TL",
+        "price": "650",
         "desc": "Espresso kahve, votka, kahlua, kokteyl surubu / espresso coffee , vodka, kahlua, cocktail syrup",
-        "category": "KOKTEYLLER | COCKTAILS"
+        "category": "Kokteyller"
       },
       {
-        "name": "LONG ISLAND ICE TEA  - AŞK VE GURUR",
-        "price": "825 TL",
+        "name": "LONG ISLAND ICE TEA - AŞK VE GURUR",
+        "price": "825",
         "desc": "Rom, tequila, gordon gin, cointreau, smirnoff, cola, limon suyu / Rum, tequila, gordon gin, cointreau, smirnoff, cola, lemon juice",
-        "category": "KOKTEYLLER | COCKTAILS"
+        "category": "Kokteyller"
       },
       {
         "name": "WHISKEY SOUR",
-        "price": "660 TL",
+        "price": "660",
         "desc": "Vıskı, taze limonsuyu,şeker şurubu Wıskey, fresh lemon , juıce , şugar syrup",
-        "category": "KOKTEYLLER | COCKTAILS"
+        "category": "Kokteyller"
       },
       {
         "name": "LİMONELLA",
-        "price": "660 TL",
+        "price": "660",
         "desc": "Gordon Cin, Kavun likörü, Sprite, çilek püresi / Gordon Gin , melon liquer , Sprite, strawberry puree",
-        "category": "KOKTEYLLER | COCKTAILS"
+        "category": "Kokteyller"
       },
       {
-        "name": "KIRMIZI LİMON",
-        "price": "660 TL",
+        "name": "KIRMIZI LİMON (Misket limon aromalı Smirnoff,)",
+        "price": "660",
         "desc": "Misket limon aromalı Smirnoff, Limonata, çilek püresi / Lime Vodka, lemonade, strawberry puree",
-        "category": "KOKTEYLLER | COCKTAILS"
+        "category": "Kokteyller"
       },
       {
         "name": "KEYF'E KEDER",
-        "price": "660 TL",
+        "price": "660",
         "desc": "Cointreau, Smirnoff, vişne suyu, fgrambuaz püresi, taze meyveler / Smirnoff, cointreau, cherry juice, raspberry puree, fresh fruits",
-        "category": "KOKTEYLLER | COCKTAILS"
+        "category": "Kokteyller"
       },
       {
-        "name": "LİMON LAVANTA  - MADAME BOVARY",
-        "price": "660 TL",
+        "name": "LİMON LAVANTA - MADAME BOVARY",
+        "price": "660",
         "desc": "limon mamülü lavanta şurubu, Gordon Cin, fresh limon suyu / Lavender syrup, gordon gin, fresh lemon juice",
-        "category": "KOKTEYLLER | COCKTAILS"
+        "category": "Kokteyller"
       },
       {
-        "name": "MARGARITA",
-        "price": "695 TL",
+        "name": "MARGARITA (Tequilla, cointreau, taze limon suyu)",
+        "price": "695",
         "desc": "Tequilla, cointreau, taze limon suyu / Tequilla, cointreau, fresh lemon juice",
-        "category": "KOKTEYLLER | COCKTAILS"
+        "category": "Kokteyller"
       },
       {
         "name": "MARGARITA ÇİLEK - JULYET",
-        "price": "740 TL",
+        "price": "740",
         "desc": "Tequilla, cointreau, taze limon suyu, çilek püresi / Tequilla, cointreau, fresh lemon juice, strawberry puree",
-        "category": "KOKTEYLLER | COCKTAILS"
+        "category": "Kokteyller"
       },
       {
         "name": "LİMON FRESH",
-        "price": "660 TL",
+        "price": "660",
         "desc": "Gordon cin , limon aromalı lavanta, Hindistan cevizi şurubu, limonata, ekşi elma suyu / gorson’s cin lemon-infused lavander. Coconut syrup, lemonade, sour Apple juice",
-        "category": "KOKTEYLLER | COCKTAILS"
+        "category": "Kokteyller"
       },
       {
         "name": "VOTKA MARTINI",
-        "price": "645 TL",
+        "price": "645",
         "desc": "Votka martını",
-        "category": "KOKTEYLLER | COCKTAILS"
+        "category": "Kokteyller"
       },
       {
         "name": "CIN MARTINI",
-        "price": "645 TL",
+        "price": "645",
         "desc": "cin martini",
-        "category": "KOKTEYLLER | COCKTAILS"
+        "category": "Kokteyller"
       },
       {
         "name": "NEGRONI",
-        "price": "780 TL",
+        "price": "780",
         "desc": "Martini rosso , cin, campari, soda / martini rosso , gin, campari, soda",
-        "category": "KOKTEYLLER | COCKTAILS"
+        "category": "Kokteyller"
       },
       {
         "name": "BLOODY MARY - KUZULARIN SESİZLİGİ",
-        "price": "650 TL",
+        "price": "650",
         "desc": "Smirnoff, domates suyu, acı sos, kereviz sosu, karabiber, limon suyu / Smirnoff, tomato juice, hot sauce, celeriac powder, black pepper, lemon juice",
-        "category": "KOKTEYLLER | COCKTAILS"
+        "category": "Kokteyller"
       },
       {
         "name": "CUBA LIBRE",
-        "price": "600 TL",
+        "price": "600",
         "desc": "Rom, cola, taze limon suyu / Rum cola, fresh lemon juice",
-        "category": "KOKTEYLLER | COCKTAILS"
+        "category": "Kokteyller"
       },
       {
         "name": "APPLE MARTINI - YEŞİL YOL",
-        "price": "600 TL",
+        "price": "600",
         "desc": "Yeşil elma aromalı Smirnoff, elma suyu / Smirnoff green apple, apple juice",
-        "category": "KOKTEYLLER | COCKTAILS"
+        "category": "Kokteyller"
       },
       {
         "name": "PINA COLADA",
-        "price": "660 TL",
+        "price": "660",
         "desc": "Rom, Malibu, ananas suyu, süt / Rum, malibu, pineapple juice, milk",
-        "category": "KOKTEYLLER | COCKTAILS"
+        "category": "Kokteyller"
       },
       {
         "name": "BLACK RUSSIAN - KOYU GECELER",
-        "price": "640 TL",
+        "price": "640",
         "desc": "Kahlua, Smirnoff / Kahlua, smirnoff",
-        "category": "KOKTEYLLER | COCKTAILS"
+        "category": "Kokteyller"
       },
       {
         "name": "LONG ISLAND ICE TEA",
-        "price": "2.200 TL",
+        "price": "2200",
         "desc": "KOKTEYL SÜRAHİ / COCKTAIL CARAFE",
-        "category": "KOKTEYLLER | COCKTAILS"
+        "category": "Kokteyller"
       },
       {
         "name": "BAHÇE SANGRIA",
-        "price": "1.950 TL",
+        "price": "1950",
         "desc": "KOKTEYL SÜRAHİ / COCKTAIL CARAFE ...",
-        "category": "KOKTEYLLER | COCKTAILS"
+        "category": "Kokteyller"
       },
       {
-        "name": "BAHÇE LİMONATASI / GARDEN LEMONADE",
-        "price": "1.900 TL",
+        "name": "BAHÇE LİMONATASI / GARDEN LEMONADE (KOKTEYL SÜRAHİ)",
+        "price": "1900",
         "desc": "KOKTEYL SÜRAHİ / COCKTAIL CARAFE ...",
-        "category": "KOKTEYLLER | COCKTAILS"
+        "category": "Kokteyller"
       },
       {
-        "name": "LYNCHBURG LEMONADE",
-        "price": "1.950 TL",
+        "name": "LYNCHBURG LEMONADE (KOKTEYL SÜRAHİ)",
+        "price": "1950",
         "desc": "KOKTEYL SÜRAHİ / COCKTAIL CARAFE ...",
-        "category": "KOKTEYLLER | COCKTAILS"
+        "category": "Kokteyller"
       },
       {
-        "name": "KIRMIZI LİMON",
-        "price": "1.950 TL",
+        "name": "KIRMIZI LİMON (KOKTEYL SÜRAHİ)",
+        "price": "1950",
         "desc": "KOKTEYL SÜRAHİ / COCKTAIL CARAFE ...",
-        "category": "KOKTEYLLER | COCKTAILS"
+        "category": "Kokteyller"
       },
       {
         "name": "SMIRNOFF VODKA COCKTAİL",
-        "price": "690 TL",
+        "price": "690",
         "desc": "KOKTEYL FROZEN / FROZEN WİTH ALCOHOL Çilek , limon, greyfurt, portakal, donuk frambuaz / strawberry, lemon, grapefruit, orange, frozen raspberry",
-        "category": "KOKTEYLLER | COCKTAILS"
+        "category": "Kokteyller"
       },
       {
         "name": "ROM COCKTAIL",
-        "price": "670 TL",
+        "price": "670",
         "desc": "KOKTEYL FROZEN/ FROZEN WİTH ALCOHOL Çilek , limon, greyfurt, portakal, donuk frambuaz / strawberry, lemon, grapefruit, orange, frozen raspberry",
-        "category": "KOKTEYLLER | COCKTAILS"
+        "category": "Kokteyller"
       },
       {
-        "name": "MARGARITA",
-        "price": "695 TL",
+        "name": "MARGARITA (KOKTEYL FROZEN)",
+        "price": "695",
         "desc": "KOKTEYL FROZEN / FROZEN WİTH ALCOHOL Çilek , limon, greyfurt, portakal, donuk frambuaz / strawberry, lemon, grapefruit, orange, frozen raspberry",
-        "category": "KOKTEYLLER | COCKTAILS"
+        "category": "Kokteyller"
       },
       {
         "name": "EFES BİRA şişe 33 cl",
-        "price": "245 TL",
+        "price": "245",
         "desc": "",
-        "category": "BİRALAR | BEERS"
+        "category": "Biralar"
       },
       {
         "name": "EFES BİRA şişe 50 cl",
-        "price": "295 TL",
+        "price": "295",
         "desc": "",
-        "category": "BİRALAR | BEERS"
+        "category": "Biralar"
       },
       {
         "name": "EFES BİRA / EFES BEER Fıçı 33 cl",
-        "price": "225 TL",
+        "price": "225",
         "desc": "",
-        "category": "BİRALAR | BEERS"
+        "category": "Biralar"
       },
       {
         "name": "EFES BİRA / EFES BEER Fıçı 50 cl",
-        "price": "285 TL",
+        "price": "285",
         "desc": "",
-        "category": "BİRALAR | BEERS"
+        "category": "Biralar"
       },
       {
         "name": "EFES MALT BİRA / EFES MALT BEER Şişe 50 cl",
-        "price": "335 TL",
+        "price": "335",
         "desc": "",
-        "category": "BİRALAR | BEERS"
+        "category": "Biralar"
       },
       {
         "name": "EFES BİRA / EFES BEER efes özel seri Şişe 50 cl",
-        "price": "335 TL",
+        "price": "335",
         "desc": "",
-        "category": "BİRALAR | BEERS"
+        "category": "Biralar"
       },
       {
         "name": "EFES BİRA glutensiz 50 cl",
-        "price": "450 TL",
+        "price": "450",
         "desc": "",
-        "category": "BİRALAR | BEERS"
+        "category": "Biralar"
       },
       {
         "name": "BOMONTİ FİLTRESİZ BİRA / BOMONTİ FİLTRESİZ BEER Şişe 50 cl",
-        "price": "335 TL",
+        "price": "335",
         "desc": "",
-        "category": "BİRALAR | BEERS"
+        "category": "Biralar"
       },
       {
         "name": "MİLLER Şişe 33 cl",
-        "price": "360 TL",
+        "price": "360",
         "desc": "",
-        "category": "BİRALAR | BEERS"
+        "category": "Biralar"
       },
       {
         "name": "MİLLER Şişe 50 cl",
-        "price": "400 TL",
+        "price": "400",
         "desc": "",
-        "category": "BİRALAR | BEERS"
+        "category": "Biralar"
       },
       {
         "name": "BECKS Şişe 50 cl",
-        "price": "375 TL",
+        "price": "375",
         "desc": "",
-        "category": "BİRALAR | BEERS"
+        "category": "Biralar"
       },
       {
         "name": "BECKS şişe 33 cl",
-        "price": "335 TL",
+        "price": "335",
         "desc": "",
-        "category": "BİRALAR | BEERS"
+        "category": "Biralar"
       },
       {
         "name": "BECKS Fıçı 50 cl",
-        "price": "345 TL",
+        "price": "345",
         "desc": "",
-        "category": "BİRALAR | BEERS"
+        "category": "Biralar"
       },
       {
         "name": "BECKS Fıçı 33 cl",
-        "price": "300 TL",
+        "price": "300",
         "desc": "",
-        "category": "BİRALAR | BEERS"
+        "category": "Biralar"
       },
       {
         "name": "BELFAST şişe 50 cl",
-        "price": "335 TL",
+        "price": "335",
         "desc": "",
-        "category": "BİRALAR | BEERS"
+        "category": "Biralar"
       },
       {
         "name": "BUD Şişe 33 cl",
-        "price": "375 TL",
+        "price": "375",
         "desc": "",
-        "category": "BİRALAR | BEERS"
+        "category": "Biralar"
       },
       {
         "name": "AMSTERDAM Şişe 50 cl",
-        "price": "550 TL",
+        "price": "550",
         "desc": "",
-        "category": "BİRALAR | BEERS"
+        "category": "Biralar"
       },
       {
         "name": "DUVEL Şişe 33 cl",
-        "price": "675 TL",
+        "price": "675",
         "desc": "",
-        "category": "BİRALAR | BEERS"
+        "category": "Biralar"
       },
       {
         "name": "ERDINGER Şişe 33 cl",
-        "price": "550 TL",
+        "price": "550",
         "desc": "",
-        "category": "BİRALAR | BEERS"
+        "category": "Biralar"
       },
       {
         "name": "CORONA Şişe 33 cl",
-        "price": "475 TL",
+        "price": "475",
         "desc": "",
-        "category": "BİRALAR | BEERS"
+        "category": "Biralar"
       },
       {
         "name": "LEFFE BLONDE Şişe 33 cl",
-        "price": "525 TL",
+        "price": "525",
         "desc": "",
-        "category": "BİRALAR | BEERS"
+        "category": "Biralar"
       },
       {
         "name": "RAKI / RAKİ Rakı Tek",
-        "price": "290 TL",
-        "desc": "Extra dry, Bianco, Rosso",
-        "category": "ALKOLLÜ İÇECEKLER | ALCOHOLIC BEVERAGES"
+        "price": "290",
+        "desc": "",
+        "category": "Alkollü İçecekler"
       },
       {
         "name": "RAKI / RAKİ RAKİ DOUBLE",
-        "price": "450 TL",
-        "desc": "Extra dry, Bianco, Rosso",
-        "category": "ALKOLLÜ İÇECEKLER | ALCOHOLIC BEVERAGES"
+        "price": "450",
+        "desc": "",
+        "category": "Alkollü İçecekler"
       },
       {
         "name": "TEQUILA SHOT",
-        "price": "270 TL",
-        "desc": "Extra dry, Bianco, Rosso",
-        "category": "ALKOLLÜ İÇECEKLER | ALCOHOLIC BEVERAGES"
+        "price": "270",
+        "desc": "",
+        "category": "Alkollü İçecekler"
       },
       {
         "name": "BOMBAY SAPPHIRE SHOT",
-        "price": "325 TL",
-        "desc": "Extra dry, Bianco, Rosso",
-        "category": "ALKOLLÜ İÇECEKLER | ALCOHOLIC BEVERAGES"
+        "price": "325",
+        "desc": "",
+        "category": "Alkollü İçecekler"
       },
       {
         "name": "JACK DANIEL'S SHOT",
-        "price": "290 TL",
-        "desc": "Extra dry, Bianco, Rosso",
-        "category": "ALKOLLÜ İÇECEKLER | ALCOHOLIC BEVERAGES"
+        "price": "290",
+        "desc": "",
+        "category": "Alkollü İçecekler"
       },
       {
         "name": "JAMESON SHOT",
-        "price": "290 TL",
-        "desc": "Extra dry, Bianco, Rosso",
-        "category": "ALKOLLÜ İÇECEKLER | ALCOHOLIC BEVERAGES"
+        "price": "290",
+        "desc": "",
+        "category": "Alkollü İçecekler"
       },
       {
         "name": "JACK DANIEL'S HONEY SHOT",
-        "price": "290 TL",
-        "desc": "Extra dry, Bianco, Rosso",
-        "category": "ALKOLLÜ İÇECEKLER | ALCOHOLIC BEVERAGES"
+        "price": "290",
+        "desc": "",
+        "category": "Alkollü İçecekler"
       },
       {
         "name": "CAPTAN MORGAN BLACK SHOT",
-        "price": "300 TL",
-        "desc": "Extra dry, Bianco, Rosso",
-        "category": "ALKOLLÜ İÇECEKLER | ALCOHOLIC BEVERAGES"
+        "price": "300",
+        "desc": "",
+        "category": "Alkollü İçecekler"
       },
       {
         "name": "JAGERMAISTER SHOT",
-        "price": "270 TL",
-        "desc": "Extra dry, Bianco, Rosso",
-        "category": "ALKOLLÜ İÇECEKLER | ALCOHOLIC BEVERAGES"
+        "price": "270",
+        "desc": "",
+        "category": "Alkollü İçecekler"
       },
       {
         "name": "COURVOISIER KONYAK / COGNAC",
-        "price": "695 TL",
-        "desc": "Extra dry, Bianco, Rosso",
-        "category": "ALKOLLÜ İÇECEKLER | ALCOHOLIC BEVERAGES"
+        "price": "695",
+        "desc": "",
+        "category": "Alkollü İçecekler"
       },
       {
         "name": "J.W RED LABEL SCOTCH WHISKEY",
-        "price": "375 TL",
-        "desc": "Extra dry, Bianco, Rosso",
-        "category": "ALKOLLÜ İÇECEKLER | ALCOHOLIC BEVERAGES"
+        "price": "375",
+        "desc": "",
+        "category": "Alkollü İçecekler"
       },
       {
         "name": "J&B SCOTCH WHISKEY",
-        "price": "350 TL",
-        "desc": "Extra dry, Bianco, Rosso",
-        "category": "ALKOLLÜ İÇECEKLER | ALCOHOLIC BEVERAGES"
+        "price": "350",
+        "desc": "",
+        "category": "Alkollü İçecekler"
       },
       {
         "name": "J.W BLACK LABEL SCOTCH WHISKEY",
-        "price": "490 TL",
-        "desc": "Extra dry, Bianco, Rosso",
-        "category": "ALKOLLÜ İÇECEKLER | ALCOHOLIC BEVERAGES"
+        "price": "490",
+        "desc": "",
+        "category": "Alkollü İçecekler"
       },
       {
         "name": "J.W DOUBLE BLACK SCOTCH WHISKEY",
-        "price": "560 TL",
-        "desc": "Extra dry, Bianco, Rosso",
-        "category": "ALKOLLÜ İÇECEKLER | ALCOHOLIC BEVERAGES"
+        "price": "560",
+        "desc": "",
+        "category": "Alkollü İçecekler"
       },
       {
         "name": "DIMPLE SCOTCH WHISKEY",
-        "price": "550 TL",
-        "desc": "Extra dry, Bianco, Rosso",
-        "category": "ALKOLLÜ İÇECEKLER | ALCOHOLIC BEVERAGES"
+        "price": "550",
+        "desc": "",
+        "category": "Alkollü İçecekler"
       },
       {
         "name": "CHIVAS SCOTCH WHISKEY",
-        "price": "560 TL",
-        "desc": "Extra dry, Bianco, Rosso",
-        "category": "ALKOLLÜ İÇECEKLER | ALCOHOLIC BEVERAGES"
+        "price": "560",
+        "desc": "",
+        "category": "Alkollü İçecekler"
       },
       {
         "name": "JACK DANIEL'S AMERICAN WHISKEY",
-        "price": "460 TL",
-        "desc": "Extra dry, Bianco, Rosso",
-        "category": "ALKOLLÜ İÇECEKLER | ALCOHOLIC BEVERAGES"
+        "price": "460",
+        "desc": "",
+        "category": "Alkollü İçecekler"
       },
       {
-        "name": "JACK DANIEL'S  + ENERGY AMERICAN WHISKEY",
-        "price": "790 TL",
-        "desc": "Extra dry, Bianco, Rosso",
-        "category": "ALKOLLÜ İÇECEKLER | ALCOHOLIC BEVERAGES"
+        "name": "JACK DANIEL'S + ENERGY AMERICAN WHISKEY",
+        "price": "790",
+        "desc": "",
+        "category": "Alkollü İçecekler"
       },
       {
         "name": "JACK DANIEL'S HONEY AMERICAN WHISKEY",
-        "price": "525 TL",
-        "desc": "Extra dry, Bianco, Rosso",
-        "category": "ALKOLLÜ İÇECEKLER | ALCOHOLIC BEVERAGES"
+        "price": "525",
+        "desc": "",
+        "category": "Alkollü İçecekler"
       },
       {
         "name": "GENTLEMAN JACK AMERICAN WHISKEY",
-        "price": "525 TL",
-        "desc": "Extra dry, Bianco, Rosso",
-        "category": "ALKOLLÜ İÇECEKLER | ALCOHOLIC BEVERAGES"
+        "price": "525",
+        "desc": "",
+        "category": "Alkollü İçecekler"
       },
       {
         "name": "JIM BEAM AMERICAN WHISKEY",
-        "price": "420 TL",
-        "desc": "Extra dry, Bianco, Rosso",
-        "category": "ALKOLLÜ İÇECEKLER | ALCOHOLIC BEVERAGES"
+        "price": "420",
+        "desc": "",
+        "category": "Alkollü İçecekler"
       },
       {
         "name": "TALISKER MALT WHISKEY",
-        "price": "800 TL",
-        "desc": "Extra dry, Bianco, Rosso",
-        "category": "ALKOLLÜ İÇECEKLER | ALCOHOLIC BEVERAGES"
+        "price": "800",
+        "desc": "",
+        "category": "Alkollü İçecekler"
       },
       {
         "name": "GLENFIDDICH 12 YEARS OLD MALT WHISKEY",
-        "price": "800 TL",
-        "desc": "Extra dry, Bianco, Rosso",
-        "category": "ALKOLLÜ İÇECEKLER | ALCOHOLIC BEVERAGES"
+        "price": "800",
+        "desc": "",
+        "category": "Alkollü İçecekler"
       },
       {
         "name": "GLENLIVET MALT WHISKEY",
-        "price": "800 TL",
-        "desc": "Extra dry, Bianco, Rosso",
-        "category": "ALKOLLÜ İÇECEKLER | ALCOHOLIC BEVERAGES"
+        "price": "800",
+        "desc": "",
+        "category": "Alkollü İçecekler"
       },
       {
         "name": "JAMESON IRISH WHISKEY",
-        "price": "460 TL",
-        "desc": "Extra dry, Bianco, Rosso",
-        "category": "ALKOLLÜ İÇECEKLER | ALCOHOLIC BEVERAGES"
+        "price": "460",
+        "desc": "",
+        "category": "Alkollü İçecekler"
       },
       {
         "name": "ABSOLUT VOTKA & CİN / VODKA & GIN",
-        "price": "480 TL",
-        "desc": "Extra dry, Bianco, Rosso",
-        "category": "ALKOLLÜ İÇECEKLER | ALCOHOLIC BEVERAGES"
+        "price": "480",
+        "desc": "",
+        "category": "Alkollü İçecekler"
       },
       {
         "name": "SMIRNOFF VOTKA & CİN / VODKA & GIN",
-        "price": "480 TL",
-        "desc": "Extra dry, Bianco, Rosso",
-        "category": "ALKOLLÜ İÇECEKLER | ALCOHOLIC BEVERAGES"
+        "price": "480",
+        "desc": "",
+        "category": "Alkollü İçecekler"
       },
       {
         "name": "STOLICHNAYA VOTKA & CİN / VODKA & GIN",
-        "price": "480 TL",
-        "desc": "Extra dry, Bianco, Rosso",
-        "category": "ALKOLLÜ İÇECEKLER | ALCOHOLIC BEVERAGES"
+        "price": "480",
+        "desc": "",
+        "category": "Alkollü İçecekler"
       },
       {
         "name": "SMIRNOFF+ENERGY VOTKA & CİN / VODKA & GIN",
-        "price": "660 TL",
-        "desc": "Extra dry, Bianco, Rosso",
-        "category": "ALKOLLÜ İÇECEKLER | ALCOHOLIC BEVERAGES"
+        "price": "660",
+        "desc": "",
+        "category": "Alkollü İçecekler"
       },
       {
         "name": "GORDON'S CİN VOTKA & CİN / VODKA & GIN",
-        "price": "500 TL",
-        "desc": "Extra dry, Bianco, Rosso",
-        "category": "ALKOLLÜ İÇECEKLER | ALCOHOLIC BEVERAGES"
+        "price": "500",
+        "desc": "",
+        "category": "Alkollü İçecekler"
       },
       {
         "name": "BEEFEATER VOTKA & CİN / VODKA & GIN",
-        "price": "580 TL",
-        "desc": "Extra dry, Bianco, Rosso",
-        "category": "ALKOLLÜ İÇECEKLER | ALCOHOLIC BEVERAGES"
+        "price": "580",
+        "desc": "",
+        "category": "Alkollü İçecekler"
       },
       {
         "name": "BOMBAY SAPPHIRE VOTKA & CİN / VODKA & GIN",
-        "price": "670 TL",
-        "desc": "Extra dry, Bianco, Rosso",
-        "category": "ALKOLLÜ İÇECEKLER | ALCOHOLIC BEVERAGES"
+        "price": "670",
+        "desc": "",
+        "category": "Alkollü İçecekler"
       },
       {
         "name": "BACARDİ ROM & VERMUT / RUM & VERMUT",
-        "price": "480 TL",
-        "desc": "Extra dry, Bianco, Rosso",
-        "category": "ALKOLLÜ İÇECEKLER | ALCOHOLIC BEVERAGES"
+        "price": "480",
+        "desc": "",
+        "category": "Alkollü İçecekler"
       },
       {
         "name": "CAPTAN MORGAN BLACK ROM & VERMUT / RUM & VERMUT",
-        "price": "550 TL",
-        "desc": "Extra dry, Bianco, Rosso",
-        "category": "ALKOLLÜ İÇECEKLER | ALCOHOLIC BEVERAGES"
+        "price": "550",
+        "desc": "",
+        "category": "Alkollü İçecekler"
       },
       {
         "name": "CAMPARI ROM & VERMUT / RUM & VERMUT",
-        "price": "480 TL",
-        "desc": "Extra dry, Bianco, Rosso",
-        "category": "ALKOLLÜ İÇECEKLER | ALCOHOLIC BEVERAGES"
+        "price": "480",
+        "desc": "",
+        "category": "Alkollü İçecekler"
       },
       {
         "name": "MARTINI ROM & VERMUT / RUM & VERMUT",
-        "price": "450 TL",
+        "price": "450",
         "desc": "Extra dry, Bianco, Rosso",
-        "category": "ALKOLLÜ İÇECEKLER | ALCOHOLIC BEVERAGES"
+        "category": "Alkollü İçecekler"
       },
       {
         "name": "BAILEY'S LİKÖR / LIQUER",
-        "price": "420 TL",
+        "price": "420",
         "desc": "",
-        "category": "ALKOLLÜ İÇECEKLER | ALCOHOLIC BEVERAGES"
+        "category": "Alkollü İçecekler"
       },
       {
         "name": "SMIRNOFF NORTH LİKÖR / LIQUER",
-        "price": "420 TL",
+        "price": "420",
         "desc": "",
-        "category": "ALKOLLÜ İÇECEKLER | ALCOHOLIC BEVERAGES"
+        "category": "Alkollü İçecekler"
       },
       {
         "name": "KAHLUA LİKÖR / LIQUER",
-        "price": "450 TL",
+        "price": "450",
         "desc": "",
-        "category": "ALKOLLÜ İÇECEKLER | ALCOHOLIC BEVERAGES"
+        "category": "Alkollü İçecekler"
       },
       {
         "name": "MALIBU LİKÖR / LIQUER",
-        "price": "450 TL",
+        "price": "450",
         "desc": "",
-        "category": "ALKOLLÜ İÇECEKLER | ALCOHOLIC BEVERAGES"
+        "category": "Alkollü İçecekler"
       },
       {
         "name": "DISARONNO AMERETTO LİKÖR / LIQUER",
-        "price": "450 TL",
+        "price": "450",
         "desc": "",
-        "category": "ALKOLLÜ İÇECEKLER | ALCOHOLIC BEVERAGES"
+        "category": "Alkollü İçecekler"
       },
       {
         "name": "APEROL LİKÖR / LIQUER",
-        "price": "490 TL",
+        "price": "490",
         "desc": "",
-        "category": "ALKOLLÜ İÇECEKLER | ALCOHOLIC BEVERAGES"
+        "category": "Alkollü İçecekler"
       },
       {
         "name": "JAGER MEISTER LİKÖR / LIQUER",
-        "price": "480 TL",
+        "price": "480",
         "desc": "",
-        "category": "ALKOLLÜ İÇECEKLER | ALCOHOLIC BEVERAGES"
+        "category": "Alkollü İçecekler"
       },
       {
         "name": "JAGER + ENERGY LİKÖR / LIQUER",
-        "price": "700 TL",
+        "price": "700",
         "desc": "",
-        "category": "ALKOLLÜ İÇECEKLER | ALCOHOLIC BEVERAGES"
+        "category": "Alkollü İçecekler"
       },
       {
         "name": "CARDINAL MELON LİKÖR / LIQUER",
-        "price": "480 TL",
+        "price": "480",
         "desc": "",
-        "category": "ALKOLLÜ İÇECEKLER | ALCOHOLIC BEVERAGES"
+        "category": "Alkollü İçecekler"
       },
       {
         "name": "ANCYRA (KALECİK KARASI) kadeh / glass",
-        "price": "470 TL",
-        "desc": "Kış Aylarında servis edilir. / Only In Winter Season",
-        "category": "KIRMIZI ŞARAP | RED WINES"
+        "price": "470",
+        "desc": "",
+        "category": "Kırmızı Şarap"
       },
       {
         "name": "ANCYRA (KALECİK KARASI) 75 cl",
-        "price": "2200 TL",
-        "desc": "Kış Aylarında servis edilir. / Only In Winter Season",
-        "category": "KIRMIZI ŞARAP | RED WINES"
+        "price": "2200",
+        "desc": "",
+        "category": "Kırmızı Şarap"
       },
       {
         "name": "ANCYRA (ÖKÜZGÖZÜ) kadeh / glass",
-        "price": "470 TL",
-        "desc": "Kış Aylarında servis edilir. / Only In Winter Season",
-        "category": "KIRMIZI ŞARAP | RED WINES"
+        "price": "470",
+        "desc": "",
+        "category": "Kırmızı Şarap"
       },
       {
         "name": "ANCYRA (ÖKÜZGÖZÜ) 75 cl",
-        "price": "2200 TL",
-        "desc": "Kış Aylarında servis edilir. / Only In Winter Season",
-        "category": "KIRMIZI ŞARAP | RED WINES"
+        "price": "2200",
+        "desc": "",
+        "category": "Kırmızı Şarap"
       },
       {
         "name": "ANCYRA (BOĞAZKERE) kadeh / glass",
-        "price": "470 TL",
-        "desc": "Kış Aylarında servis edilir. / Only In Winter Season",
-        "category": "KIRMIZI ŞARAP | RED WINES"
+        "price": "470",
+        "desc": "",
+        "category": "Kırmızı Şarap"
       },
       {
         "name": "ANCYRA (BOĞAZKERE) 75 cl",
-        "price": "2200 TL",
-        "desc": "Kış Aylarında servis edilir. / Only In Winter Season",
-        "category": "KIRMIZI ŞARAP | RED WINES"
+        "price": "2200",
+        "desc": "",
+        "category": "Kırmızı Şarap"
       },
       {
         "name": "ANCYRA (MERLOT) kadeh / glass",
-        "price": "470 TL",
-        "desc": "Kış Aylarında servis edilir. / Only In Winter Season",
-        "category": "KIRMIZI ŞARAP | RED WINES"
+        "price": "470",
+        "desc": "",
+        "category": "Kırmızı Şarap"
       },
       {
         "name": "ANCYRA (MERLOT) 75 cl",
-        "price": "2200 TL",
-        "desc": "Kış Aylarında servis edilir. / Only In Winter Season",
-        "category": "KIRMIZI ŞARAP | RED WINES"
+        "price": "2200",
+        "desc": "",
+        "category": "Kırmızı Şarap"
       },
       {
         "name": "ANCYRA (CABARENET - SYRAH) kadeh / glass",
-        "price": "470 TL",
-        "desc": "Kış Aylarında servis edilir. / Only In Winter Season",
-        "category": "KIRMIZI ŞARAP | RED WINES"
+        "price": "470",
+        "desc": "",
+        "category": "Kırmızı Şarap"
       },
       {
         "name": "ANCYRA (CABARENET - SYRAH) 75 cl",
-        "price": "2200 TL",
-        "desc": "Kış Aylarında servis edilir. / Only In Winter Season",
-        "category": "KIRMIZI ŞARAP | RED WINES"
+        "price": "2200",
+        "desc": "",
+        "category": "Kırmızı Şarap"
       },
       {
         "name": "EGEO (CABERNET - SAUVIGNON) 75 cl",
-        "price": "3900 TL",
-        "desc": "Kış Aylarında servis edilir. / Only In Winter Season",
-        "category": "KIRMIZI ŞARAP | RED WINES"
+        "price": "3900",
+        "desc": "",
+        "category": "Kırmızı Şarap"
       },
       {
         "name": "SELECTION (ÖKÜZGÖZÜ - BOĞAZKERE) 75 cl",
-        "price": "3900 TL",
-        "desc": "Kış Aylarında servis edilir. / Only In Winter Season",
-        "category": "KIRMIZI ŞARAP | RED WINES"
+        "price": "3900",
+        "desc": "",
+        "category": "Kırmızı Şarap"
       },
       {
         "name": "PRESTIGE (KALECİK KARASI) 75 cl",
-        "price": "4250 TL",
-        "desc": "Kış Aylarında servis edilir. / Only In Winter Season",
-        "category": "KIRMIZI ŞARAP | RED WINES"
+        "price": "4250",
+        "desc": "",
+        "category": "Kırmızı Şarap"
       },
       {
         "name": "PRESTIGE (ÖKÜZGÖZÜ) 75 cl",
-        "price": "4250 TL",
-        "desc": "Kış Aylarında servis edilir. / Only In Winter Season",
-        "category": "KIRMIZI ŞARAP | RED WINES"
+        "price": "4250",
+        "desc": "",
+        "category": "Kırmızı Şarap"
       },
       {
         "name": "PRESTIGE (BOĞAZKERE) 75 cl",
-        "price": "4250 TL",
-        "desc": "Kış Aylarında servis edilir. / Only In Winter Season",
-        "category": "KIRMIZI ŞARAP | RED WINES"
+        "price": "4250",
+        "desc": "",
+        "category": "Kırmızı Şarap"
       },
       {
-        "name": "MAISON  (KAVAKLIDERE) LA CROIX LARTIGUE / FRANSA",
-        "price": "4500 TL",
-        "desc": "Kış Aylarında servis edilir. / Only In Winter Season",
-        "category": "KIRMIZI ŞARAP | RED WINES"
+        "name": "MAISON (KAVAKLIDERE) LA CROIX LARTIGUE / FRANSA",
+        "price": "4500",
+        "desc": "",
+        "category": "Kırmızı Şarap"
       },
       {
         "name": "MAISON (KAVAKLIDERE) CHATEAU CLAUD BELLEVUE / FRANSA",
-        "price": "3300 TL",
-        "desc": "Kış Aylarında servis edilir. / Only In Winter Season",
-        "category": "KIRMIZI ŞARAP | RED WINES"
+        "price": "3300",
+        "desc": "",
+        "category": "Kırmızı Şarap"
       },
       {
         "name": "MAISON (KAVAKLIDERE) LA FOLIE / FRANSA",
-        "price": "2800 TL",
+        "price": "2800",
+        "desc": "",
+        "category": "Kırmızı Şarap"
+      },
+      {
+        "name": "SICAK ŞARAP / MULLED WINES",
+        "price": "",
         "desc": "Kış Aylarında servis edilir. / Only In Winter Season",
-        "category": "KIRMIZI ŞARAP | RED WINES"
+        "category": "Kırmızı Şarap"
       },
       {
         "name": "KAVAKLIDERE MİSKET ( BORNOVA MİSKET ÜZÜMÜ) kadeh / glass",
-        "price": "690 TL",
+        "price": "690",
         "desc": "",
-        "category": "BEYAZ ŞARAP | WHITE WINES"
+        "category": "Beyaz Şarap"
       },
       {
         "name": "KAVAKLIDERE MİSKET ( BORNOVA MİSKET ÜZÜMÜ) 75 cl",
-        "price": "3350 TL",
+        "price": "3350",
         "desc": "",
-        "category": "BEYAZ ŞARAP | WHITE WINES"
+        "category": "Beyaz Şarap"
       },
       {
         "name": "ANCYRA (NARİNCE) kadeh / glass",
-        "price": "470 TL",
+        "price": "470",
         "desc": "",
-        "category": "BEYAZ ŞARAP | WHITE WINES"
+        "category": "Beyaz Şarap"
       },
       {
         "name": "ANCYRA (NARİNCE) 75 cl",
-        "price": "2200 TL",
+        "price": "2200",
         "desc": "",
-        "category": "BEYAZ ŞARAP | WHITE WINES"
+        "category": "Beyaz Şarap"
       },
       {
         "name": "EGEO (SAUVIGNON BLANC) 75 cl",
-        "price": "3750 TL",
+        "price": "3750",
         "desc": "",
-        "category": "BEYAZ ŞARAP | WHITE WINES"
+        "category": "Beyaz Şarap"
       },
       {
         "name": "SULTANİYE (YARI TATLI ) 75 cl",
-        "price": "2490 TL",
+        "price": "2490",
         "desc": "",
-        "category": "BEYAZ ŞARAP | WHITE WINES"
+        "category": "Beyaz Şarap"
       },
       {
         "name": "SELECTION (NARİNCE - EMİR) 75 cl",
-        "price": "3750 TL",
+        "price": "3750",
         "desc": "",
-        "category": "BEYAZ ŞARAP | WHITE WINES"
+        "category": "Beyaz Şarap"
       },
       {
         "name": "COTES D'AVANOS (NARİNCE - CHARDONNAY) 75 cl",
-        "price": "4250 TL",
+        "price": "4250",
         "desc": "",
-        "category": "BEYAZ ŞARAP | WHITE WINES"
+        "category": "Beyaz Şarap"
       },
       {
         "name": "LAL kadeh / glass",
-        "price": "470 TL",
+        "price": "470",
         "desc": "",
-        "category": "ROSE ŞARAP | ROSE WINES"
+        "category": "Rose Şarap"
       },
       {
         "name": "LAL 75 cl",
-        "price": "2200 TL",
+        "price": "2200",
         "desc": "",
-        "category": "ROSE ŞARAP | ROSE WINES"
+        "category": "Rose Şarap"
       },
       {
         "name": "ANCRYRA (BLUSH) kadeh / glass",
-        "price": "470 TL",
+        "price": "470",
         "desc": "",
-        "category": "ROSE ŞARAP | ROSE WINES"
+        "category": "Rose Şarap"
       },
       {
         "name": "ANCRYRA (BLUSH) 75 cl",
-        "price": "2200 TL",
+        "price": "2200",
         "desc": "",
-        "category": "ROSE ŞARAP | ROSE WINES"
+        "category": "Rose Şarap"
       },
       {
         "name": "ANCYRA (BLUSH BUZLU) - TAZE MEVSİM MEYVELERİ kadeh / glass",
-        "price": "495 TL",
+        "price": "495",
         "desc": "",
-        "category": "ROSE ŞARAP | ROSE WINES"
+        "category": "Rose Şarap"
       },
       {
         "name": "EGEO ROSE 75 cl",
-        "price": "3750 TL",
+        "price": "3750",
         "desc": "",
-        "category": "ROSE ŞARAP | ROSE WINES"
+        "category": "Rose Şarap"
       },
       {
         "name": "PEMBE KÖPÜK ROSE",
-        "price": "2800 TL",
+        "price": "2800",
         "desc": "",
-        "category": "KÖPÜKLÜ ŞARAP | SPARKLING WINES"
+        "category": "Köpüklü Şarap"
       },
       {
         "name": "ALTINKÖPÜK (NATURAL SPARKLING)",
-        "price": "4900 TL",
+        "price": "4900",
         "desc": "",
-        "category": "KÖPÜKLÜ ŞARAP | SPARKLING WINES"
+        "category": "Köpüklü Şarap"
       },
       {
         "name": "İNCİ DAMLASI",
-        "price": "2800 TL",
+        "price": "2800",
         "desc": "",
-        "category": "KÖPÜKLÜ ŞARAP | SPARKLING WINES"
+        "category": "Köpüklü Şarap"
       },
       {
         "name": "SELECTION (ÖKÜZGÖZÜ) 75 cl - kırmızı şarap / red wines",
-        "price": "3900 TL",
+        "price": "3900",
         "desc": "",
-        "category": "AYIN İNDİRİMLİ (% 25) ŞARAPLARI | MONTHLY WINE SPECIALS (% 25 OFF)"
+        "category": "Ayın İndirimli (%25) Şarapları"
       },
       {
         "name": "PRESTIGE (KALECİK KARASI) 75 cl - kırmızı şarap / red wines",
-        "price": "4250 TL",
+        "price": "4250",
         "desc": "",
-        "category": "AYIN İNDİRİMLİ (% 25) ŞARAPLARI | MONTHLY WINE SPECIALS (% 25 OFF)"
+        "category": "Ayın İndirimli (%25) Şarapları"
       },
       {
         "name": "PRESTIGE (ÖKÜZGÖZÜ) 75 cl - kırmızı şarap / red wines",
-        "price": "4250 TL",
+        "price": "4250",
         "desc": "",
-        "category": "AYIN İNDİRİMLİ (% 25) ŞARAPLARI | MONTHLY WINE SPECIALS (% 25 OFF)"
+        "category": "Ayın İndirimli (%25) Şarapları"
       },
       {
         "name": "EGEO (SAUVIGNON BLANC) 75 cl - beyaz şarap / white wines",
-        "price": "3750 TL",
+        "price": "3750",
         "desc": "",
-        "category": "AYIN İNDİRİMLİ (% 25) ŞARAPLARI | MONTHLY WINE SPECIALS (% 25 OFF)"
+        "category": "Ayın İndirimli (%25) Şarapları"
       },
       {
-        "name": "SELECTION (NARİNCE - EMİR) 75 cl  - beyaz şarap / white wines",
-        "price": "3750 TL",
+        "name": "SELECTION (NARİNCE - EMİR) 75 cl - beyaz şarap / white wines",
+        "price": "3750",
         "desc": "",
-        "category": "AYIN İNDİRİMLİ (% 25) ŞARAPLARI | MONTHLY WINE SPECIALS (% 25 OFF)"
+        "category": "Ayın İndirimli (%25) Şarapları"
       },
       {
         "name": "EGEO ROSE 75 cl - rose şarap / rose wines",
-        "price": "3750 TL",
+        "price": "3750",
         "desc": "",
-        "category": "AYIN İNDİRİMLİ (% 25) ŞARAPLARI | MONTHLY WINE SPECIALS (% 25 OFF)"
+        "category": "Ayın İndirimli (%25) Şarapları"
       }
     ]
   },
