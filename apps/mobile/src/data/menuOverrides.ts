@@ -24123,4 +24123,199 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     }
   ]
 }
+,
+  "7254": {
+  "name": "The Crust",
+  "sourceUrl": "https://www.migros.com.tr/yemek/the-crust-beylikduzu-baris-mah-st-235e0",
+  "sourceName": "Migros Yemek canlı menüsü (The Crust Beylikdüzü Barış Mah.)",
+  "verifiedAt": "2026-08-23",
+  "items": [
+    {
+      "name": "Chef Burger & Patates Kızartması",
+      "price": "260 TL",
+      "desc": "Köfte (130 g), cheddar peyniri, burger sos, turşu ve patates kızartması ile",
+      "category": "Burger"
+    },
+    {
+      "name": "Double Chef Burger Ve Patates Kızartması",
+      "price": "290 TL",
+      "desc": "Köfte (100 g) (2 adet), cheddar peynir (2 adet), burger sos, turşu ve patates kızartması ile",
+      "category": "Burger"
+    },
+    {
+      "name": "Tavuk Burger",
+      "price": "200 TL",
+      "desc": "Kızarmış tavuk, özel sos ve patates kızartması ile",
+      "category": "Burger"
+    },
+    {
+      "name": "Kaburga Burger",
+      "price": "250 TL",
+      "desc": "Cheddar peynir, burger sos, turşu ve patates kızartması ile",
+      "category": "Burger"
+    },
+    {
+      "name": "Margarita Pizza",
+      "price": "210 TL",
+      "desc": "Ev yapımı domates sos, mozarella peynir",
+      "category": "Pizza"
+    },
+    {
+      "name": "Karışık Pizza",
+      "price": "240 TL",
+      "desc": "Sucuk, hindi füme, mantar, biber, mısır, siyah zeytin",
+      "category": "Pizza"
+    },
+    {
+      "name": "Peperoni Pizza",
+      "price": "240 TL",
+      "desc": "Pepperoni, jalepeno biber, karamelize soğan, oregano",
+      "category": "Pizza"
+    },
+    {
+      "name": "Vejeteryan Pizza",
+      "price": "230 TL",
+      "desc": "Mantar, biber, mısır, domates, soğan, roka, ızgara kabak, patlıcan",
+      "category": "Pizza"
+    },
+    {
+      "name": "Capricioso Pizza",
+      "price": "240 TL",
+      "desc": "Hindi füme, mantar, mısır, siyah zeytin",
+      "category": "Pizza"
+    },
+    {
+      "name": "Sucuk Pizza",
+      "price": "230 TL",
+      "desc": "Sucuk, mozarella peynir, oregano",
+      "category": "Pizza"
+    },
+    {
+      "name": "Mamma Mia Pizza",
+      "price": "230 TL",
+      "desc": "Domates sos, permasan peynir, marine edilmiş domates",
+      "category": "Pizza"
+    },
+    {
+      "name": "Dana Etli Pizza",
+      "price": "250 TL",
+      "desc": "Dana et, mantar, soğan, yeşil biber",
+      "category": "Pizza"
+    },
+    {
+      "name": "Funghi Pizza",
+      "price": "220 TL",
+      "desc": "Mantar, maydanoz",
+      "category": "Pizza"
+    },
+    {
+      "name": "Kaburga Pizza",
+      "price": "250 TL",
+      "desc": "Dana kaburga, karamelize soğan",
+      "category": "Pizza"
+    },
+    {
+      "name": "Vegan Pizza",
+      "price": "220 TL",
+      "desc": "Somates sos, mantar, sogan, marine edilmiş domates, mantar, roka",
+      "category": "Pizza"
+    },
+    {
+      "name": "Tagliatelle Alfredo",
+      "price": "200 TL",
+      "desc": "Tavuk, kremalı mantar sos",
+      "category": "Makarna"
+    },
+    {
+      "name": "Penne Arrabbiata",
+      "price": "200 TL",
+      "desc": "Acılı domates sos, parmesan peynir",
+      "category": "Makarna"
+    },
+    {
+      "name": "Spaghetti Bolognese",
+      "price": "200 TL",
+      "desc": "Kıymalı bolonez sos, parmesan peynir",
+      "category": "Makarna"
+    },
+    {
+      "name": "Sticky Chicken",
+      "price": "140 TL",
+      "desc": "Kızarmış tavuk, sticky sos",
+      "category": "Yan Lezzet"
+    },
+    {
+      "name": "Dinamit Tavuk",
+      "price": "140 TL",
+      "desc": "Kızarmış tavuk, dinamit sos",
+      "category": "Yan Lezzet"
+    },
+    {
+      "name": "Dinamit Patates",
+      "price": "140 TL",
+      "desc": "Jalaoeno biber, mozzarella peynir, dinamit sos",
+      "category": "Yan Lezzet"
+    },
+    {
+      "name": "Trüfle Patates",
+      "price": "160 TL",
+      "desc": "Trüf sos, parmesan peynir",
+      "category": "Yan Lezzet"
+    },
+    {
+      "name": "Susamlı Tavuk Salata",
+      "price": "200 TL",
+      "desc": "Izgara tavuk, marul, özel susamlı sos",
+      "category": "Salata"
+    },
+    {
+      "name": "Sezar Salata",
+      "price": "200 TL",
+      "desc": "Marul, çeri domates, ızgara tavuk, sezar sos, kruton ve parmesan peynir",
+      "category": "Salata"
+    },
+    {
+      "name": "Coca Cola (330 Ml)",
+      "price": "50 TL",
+      "desc": "",
+      "category": "İçecek"
+    },
+    {
+      "name": "Coca Cola Zero Sugar (330 Ml)",
+      "price": "50 TL",
+      "desc": "",
+      "category": "İçecek"
+    },
+    {
+      "name": "Fuse Tea (330 Ml)",
+      "price": "50 TL",
+      "desc": "",
+      "category": "İçecek"
+    },
+    {
+      "name": "Ayran (285 Ml)",
+      "price": "50 TL",
+      "desc": "",
+      "category": "İçecek"
+    },
+    {
+      "name": "Soda (200 Ml)",
+      "price": "35 TL",
+      "desc": "",
+      "category": "İçecek"
+    },
+    {
+      "name": "Su (500 Ml)",
+      "price": "20 TL",
+      "desc": "",
+      "category": "İçecek"
+    },
+    {
+      "name": "Coca Cola (1 L)",
+      "price": "110 TL",
+      "desc": "",
+      "category": "İçecek"
+    }
+  ]
+}
 };
