@@ -23715,4 +23715,397 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     }
   ]
 }
+,
+  "7252": {
+  "name": "Hisar Buselik",
+  "sourceUrl": "https://buselikmeyhane.com/",
+  "sourceName": "Buselik resmi marka menüsü (Hisar Buselik şubesi)",
+  "verifiedAt": "2026-08-23",
+  "items": [
+    {
+      "name": "EZİNE BEYAZ PEYNİR",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "KAVUN",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "DOMATES & SALATALIK SÖĞÜŞ",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "ANKARA ÇUBUK TURŞUSU, ERİK TURŞUSU, BAMYA TURŞUSU VE BİBER TURŞUSU",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "KÖZ PATLICANLI ATOM",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "REYHANLI HAYDARİ",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "BADEMLİ KURU CACIK",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "AVOKADOLU BALLI HARDALLI KARİDES",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "KÖZ PATLICAN; SARIMSAKLI KONFİT DOMATES",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "FAVA",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "VİŞNELİ PANCAR, CEVİZ VE KAYMAK",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "FİRİKLİ ANTAKYA KIRMA ZEYTİN SALATASI, KURU DOMATES, KÖZ BİBER, NAR EKŞİSİ",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "MUHAMMARA",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "MARİNE LEVREK",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "BADEM VE FISTIKLI GİRİT EZMESİ",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "KÖZ SARIMSAK VE ARPACIK SOĞAN",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "TAZE DOMATES VE SARIMSAKLI DENİZ BÖRÜLCESİ",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "VİŞNELİ YAPRAK SARMA",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "FASULYE PİLAKİ",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "MUTABBEL",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "MARİKA",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "FESLEĞENLİ VE KIRMIZI SOĞANLI LEVREK MARİN",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "NARENCİYE SOSLU IZGARA ENGİNAR KALBİ",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "SEMİZOTLU MASTABE",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "SEMİZOTU MASTABE SÜZME YOĞURT VE BADEM İLE",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "ZEYTİNYAĞLI ENGİNAR",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "HAVUÇ TARATOR, ÇITIR HAVUÇ VE KAVRULMUŞ CEVİZ İLE",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "KÖPOĞLU, KİBRİT PATATES, AY ÇEKİRDEĞİ İLE",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "FÜME EKŞİLİ SOYA SOSLU USKUMRU",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "ARNAVUT CİĞERİ",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "BİBER BORANİ, KAVRULMUŞ FISTIK",
+      "price": "",
+      "desc": "",
+      "category": "Mezeler"
+    },
+    {
+      "name": "İNCE KIYIM ROKA SALATASI",
+      "price": "",
+      "desc": "",
+      "category": "Salatalar"
+    },
+    {
+      "name": "GAVURDAĞI SALATASI",
+      "price": "",
+      "desc": "",
+      "category": "Salatalar"
+    },
+    {
+      "name": "DOMATES SALATASI, KIRMIZI SOĞAN VE İZMİR TULUMU İLE",
+      "price": "",
+      "desc": "",
+      "category": "Salatalar"
+    },
+    {
+      "name": "VİŞNELİ YEŞİLLİK SALATASI",
+      "price": "",
+      "desc": "",
+      "category": "Salatalar"
+    },
+    {
+      "name": "TAHİN TARATORLU İNCE KIYIM YEŞİL SALATA, NAR, CEVİZ İLE",
+      "price": "",
+      "desc": "",
+      "category": "Salatalar"
+    },
+    {
+      "name": "BAKLAVA HAMURUNA SARILI SAGANAKİ, SUSAMLI VE BALLI",
+      "price": "",
+      "desc": "",
+      "category": "Ara Sıcaklar"
+    },
+    {
+      "name": "ÇITIR KABAK KIZARTMA",
+      "price": "",
+      "desc": "",
+      "category": "Ara Sıcaklar"
+    },
+    {
+      "name": "SUCUKLU KAŞARLI SICAK HUMUS",
+      "price": "",
+      "desc": "",
+      "category": "Ara Sıcaklar"
+    },
+    {
+      "name": "PAÇANGA BÖREĞİ",
+      "price": "",
+      "desc": "",
+      "category": "Ara Sıcaklar"
+    },
+    {
+      "name": "PASTIRMALI SICAK HUMUS",
+      "price": "",
+      "desc": "",
+      "category": "Ara Sıcaklar"
+    },
+    {
+      "name": "GÜVEÇTE YAPRAK CİĞER",
+      "price": "",
+      "desc": "",
+      "category": "Ara Sıcaklar"
+    },
+    {
+      "name": "KALAMAR TAVA",
+      "price": "",
+      "desc": "",
+      "category": "Ara Sıcaklar"
+    },
+    {
+      "name": "TEREYAĞLI VE SARIMSAKLI KARİDES",
+      "price": "",
+      "desc": "",
+      "category": "Ara Sıcaklar"
+    },
+    {
+      "name": "GÜVEÇTE KOKOREÇ",
+      "price": "",
+      "desc": "",
+      "category": "Ara Sıcaklar"
+    },
+    {
+      "name": "DANA DİL",
+      "price": "",
+      "desc": "",
+      "category": "Ara Sıcaklar"
+    },
+    {
+      "name": "MÜCVER, OTLU YOĞURT SOS",
+      "price": "",
+      "desc": "",
+      "category": "Ara Sıcaklar"
+    },
+    {
+      "name": "IZGARA İSTİRİDYE MANTARI, SARIMSAKLI ACILI TEREYAĞI",
+      "price": "",
+      "desc": "",
+      "category": "Ara Sıcaklar"
+    },
+    {
+      "name": "MEVSİM OTU KAVURMASI VE YOĞURT",
+      "price": "",
+      "desc": "",
+      "category": "Ara Sıcaklar"
+    },
+    {
+      "name": "EV USULÜ KIZARMIŞ PATATES YOĞURT, DOMATES SOS",
+      "price": "",
+      "desc": "",
+      "category": "Ara Sıcaklar"
+    },
+    {
+      "name": "FIRINDA TAHİN HELVASI VE VANİLYALI DONDURMA",
+      "price": "",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "PEYNİR HELVASI",
+      "price": "",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "MEVSİM MEYVELERİ",
+      "price": "",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "FISTIKLI ÇITIR BAKLAVA",
+      "price": "",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "ÇITIR KABAK TATLISI",
+      "price": "",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "SOĞUK SÜTLÜ ILIK İRMİK HELVASI",
+      "price": "",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "ÇITIR BAKLAVA YUFKASINDA ÇİKOLATALI SUFLE",
+      "price": "",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "MEVSİM BALIĞI KIZARTMA YA DA IZGARA",
+      "price": "",
+      "desc": "",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "SACDA TANTUNİ",
+      "price": "",
+      "desc": "",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "OTLU IZGARA LEVREK",
+      "price": "",
+      "desc": "",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "KUZU SAÇ KAVURMA, KIZARMIŞ BAZLAMA İLE",
+      "price": "",
+      "desc": "",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "MAYDANOZLU KÖFTE",
+      "price": "",
+      "desc": "",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "IZGARA LOKUM BONFİLE",
+      "price": "",
+      "desc": "",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "KAĞITTA LEVREK",
+      "price": "",
+      "desc": "",
+      "category": "Ana Yemekler"
+    }
+  ]
+}
 };
