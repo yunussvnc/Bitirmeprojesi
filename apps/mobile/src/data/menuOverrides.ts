@@ -24633,4 +24633,19 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     }
   ]
 }
+,
+  "7258": {
+  "name": "Pera Nova Coffee",
+  "sourceUrl": "https://www.instagram.com/reel/DYWyPqKNkaU/",
+  "sourceName": "Pera Nova Coffee resmi Instagram içeriği (fiyat yayınlanmamış)",
+  "verifiedAt": "2026-08-23",
+  "items": [
+    {
+      "name": "Pera Crown",
+      "price": "",
+      "desc": "",
+      "category": "Özel İçecekler"
+    }
+  ]
+}
 };
