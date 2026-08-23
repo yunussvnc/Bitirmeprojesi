@@ -9076,121 +9076,97 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
 },
 
   "7194": {
-    "name": "Deep Blue Fish & Chips Beşiktaş",
-    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/ifct/deep-blue-fish-and-chips-ifct",
-    "sourceName": "Yemeksepeti / Deep Blue Fish & Chips Beşiktaş",
-    "verifiedAt": "2026-08-23",
-    "items": [
-      {
-        "name": "Kalamar Sandviç",
-        "price": "460 TL",
-        "desc": "Tarator sos, soğan",
-        "category": ""
-      },
-      {
-        "name": "Çıtır Mezgit Sandviç",
-        "price": "460 TL",
-        "desc": "Soğan, yeşillik, özel sos",
-        "category": ""
-      },
-      {
-        "name": "Kari̇des Kızartması",
-        "price": "570 TL",
-        "desc": "Tek kişilik",
-        "category": ""
-      },
-      {
-        "name": "Kalamar Tava",
-        "price": "460 TL",
-        "desc": "Tarator sos ile",
-        "category": ""
-      },
-      {
-        "name": "Çıtır Mezgit",
-        "price": "595 TL",
-        "desc": "Patates kızartması ile",
-        "category": ""
-      },
-      {
-        "name": "Çıtır Levrek Fileto",
-        "price": "695 TL",
-        "desc": "Patates kızartması ile",
-        "category": ""
-      },
-      {
-        "name": "Patates Kızartması (150 gr.)",
-        "price": "195 TL",
-        "desc": "Özel sos ile",
-        "category": ""
-      },
-      {
-        "name": "Patates Kızartması (200 gr.)",
-        "price": "230 TL",
-        "desc": "Özel sos ile",
-        "category": ""
-      },
-      {
-        "name": "Fuse Tea Şeftali (33 cl.)",
-        "price": "95 TL",
-        "desc": "Kutu içecek",
-        "category": ""
-      },
-      {
-        "name": "Coca-Cola (33 cl.)",
-        "price": "95 TL",
-        "desc": "Kutu içecek",
-        "category": ""
-      },
-      {
-        "name": "Su (50 cl.)",
-        "price": "45 TL",
-        "desc": "Pet şişe",
-        "category": ""
-      },
-      {
-        "name": "Soda (20 cl.)",
-        "price": "60 TL",
-        "desc": "Cam şişe",
-        "category": ""
-      },
-      {
-        "name": "Ketçap",
-        "price": "60 TL",
-        "desc": "Paketli ürün",
-        "category": ""
-      },
-      {
-        "name": "Bezelye Püresi",
-        "price": "70 TL",
-        "desc": "Paketli ürün",
-        "category": ""
-      },
-      {
-        "name": "Pancar Sos",
-        "price": "60 TL",
-        "desc": "Paketli ürün",
-        "category": ""
-      },
-      {
-        "name": "Tarator Sos",
-        "price": "60 TL",
-        "desc": "Paketli ürün",
-        "category": ""
-      },
-      {
-        "name": "Rokalina",
-        "price": "60 TL",
-        "desc": "Paketli ürün",
-        "category": ""
-      },
-      {
-        "name": "Poşet",
-        "price": "1 TL",
-        "desc": "It's compulsory to purchase plastic bags for fixed price 1 TL according to the amendments on Environment Law by the Ministry of Environment, Urbanization and Climate Change. If you require a plastic bag, you should add it to your basket. The amount will be charged to you for each plastic bag.",
-        "category": ""
-      }
-    ]
-  },
+  "name": "Deep Blue Fish & Chips",
+  "sourceUrl": "https://www.yemeksepeti.com/restaurant/ifct/deep-blue-fish-and-chips-ifct",
+  "sourceName": "Yemeksepeti canlı menüsü (Deep Blue Fish & Chips; Hentzer exact Sinanpaşa Yenilik Sk. 25/A Beşiktaş kaydı + @deepblue.balik Beşiktaş işletme kimliği eşleşmesi; Poşet çıkarıldı)",
+  "verifiedAt": "2026-08-23",
+  "items": [
+    {
+      "name": "Kalamar Sandviç",
+      "price": "460",
+      "category": "Sandviçler",
+      "desc": "Tarator sos, soğan"
+    },
+    {
+      "name": "Çıtır Mezgit Sandviç",
+      "price": "460",
+      "category": "Sandviçler",
+      "desc": "Soğan, yeşillik, özel sos"
+    },
+    {
+      "name": "Kari̇des Kızartması",
+      "price": "570",
+      "category": "Diğer Lezzetler",
+      "desc": "Tek kişilik"
+    },
+    {
+      "name": "Kalamar Tava",
+      "price": "460",
+      "category": "Diğer Lezzetler",
+      "desc": "Tarator sos ile"
+    },
+    {
+      "name": "Çıtır Mezgit",
+      "price": "595",
+      "category": "Diğer Lezzetler",
+      "desc": "Patates kızartması ile"
+    },
+    {
+      "name": "Çıtır Levrek Fileto",
+      "price": "695",
+      "category": "Diğer Lezzetler",
+      "desc": "Patates kızartması ile"
+    },
+    {
+      "name": "Patates Kızartması (150 gr.)",
+      "price": "195",
+      "category": "Yan Ürünler",
+      "desc": "Özel sos ile"
+    },
+    {
+      "name": "Patates Kızartması (200 gr.)",
+      "price": "230",
+      "category": "Yan Ürünler",
+      "desc": "Özel sos ile"
+    },
+    {
+      "name": "Fuse Tea Şeftali (33 cl.)",
+      "price": "95",
+      "category": "İçecekler",
+      "desc": "Kutu içecek"
+    },
+    {
+      "name": "Coca-Cola (33 cl.)",
+      "price": "95",
+      "category": "İçecekler",
+      "desc": "Kutu içecek"
+    },
+    {
+      "name": "Su (50 cl.)",
+      "price": "45",
+      "category": "İçecekler",
+      "desc": "Pet şişe"
+    },
+    {
+      "name": "Soda (20 cl.)",
+      "price": "60",
+      "category": "İçecekler",
+      "desc": "Cam şişe"
+    },
+    {
+      "name": "Bezelye Püresi",
+      "price": "70",
+      "category": "Soslar",
+      "desc": "Paketli ürün"
+    },
+    {
+      "name": "Tarator Sos",
+      "price": "60",
+      "category": "Soslar",
+      "desc": "Paketli ürün"
+    }
+  ]
+},
   "7213": {
   "name": "City Burger",
   "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/uja1/city-burger",
