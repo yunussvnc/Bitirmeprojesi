@@ -23505,4 +23505,43 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     }
   ]
 }
+,
+  "7250": {
+  "name": "Mart Coffee Co.",
+  "sourceUrl": "https://www.instagram.com/martcoffeeco/",
+  "sourceName": "Mart Coffee Co. resmi Instagram içerikleri (fiyat yayınlanmamış)",
+  "verifiedAt": "2026-08-23",
+  "items": [
+    {
+      "name": "Americano",
+      "price": "",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Latte",
+      "price": "",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Matcha",
+      "price": "",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Fettucine",
+      "price": "",
+      "desc": "",
+      "category": "Yemekler"
+    },
+    {
+      "name": "El Yapımı Magnolya",
+      "price": "",
+      "desc": "",
+      "category": "Tatlılar"
+    }
+  ]
+}
 };
