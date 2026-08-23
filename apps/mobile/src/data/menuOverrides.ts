@@ -1955,7 +1955,7 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
   "7289": {
     "name": "SushiCo Zorlu Center",
     "sourceUrl": "https://zorlu-center-sushico.arimenu.com/",
-    "sourceName": "SushiCo Zorlu Center QR menüsü (mobil görünüm)",
+    "sourceName": "SushiCo Zorlu Center QR menüsü (exact Zorlu Center AVM Levazım Mah. Koru Sokak No:2)",
     "verifiedAt": "2026-08-23",
     "items": [
       {
