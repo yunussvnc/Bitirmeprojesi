@@ -33975,5 +33975,265 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
           "category": "Biralar"
         }
       ]
+    },
+    "970": {
+      "name": "Hygge Coffee Shop",
+      "sourceUrl": "https://hyggecoffeeshop.menudgtl.com/",
+      "sourceName": "Hygge Coffee Shop public menudgtl menüsü (exact Türkali Mahallesi/Ihlamurdere Cd./Yeniyol Sk. No:3; 3 kategori incelendi)",
+      "verifiedAt": "2026-08-23",
+      "items": [
+        {
+          "name": "Belçika Waffle",
+          "price": "425",
+          "desc": "Çilek, muz, ve Belçika çikolatası",
+          "category": "Tatlılar"
+        },
+        {
+          "name": "Lotus Kremalı Cup",
+          "price": "380",
+          "desc": "Belçika çikolatası ile servis edilir.",
+          "category": "Tatlılar"
+        },
+        {
+          "name": "Hygge Cookie",
+          "price": "350",
+          "desc": "damla çikolatalı kurabiye- belçika çikolatasıyla servis edilir.",
+          "category": "Tatlılar"
+        },
+        {
+          "name": "Meyveli Cookie",
+          "price": "420",
+          "desc": "Çilek, muz, ve Belçika çikolatası ile servis edilir.",
+          "category": "Tatlılar"
+        },
+        {
+          "name": "Dondurmalı Hygge Cookie",
+          "price": "420",
+          "desc": "",
+          "category": "Tatlılar"
+        },
+        {
+          "name": "Beyaz Çikolatalı Browni",
+          "price": "400",
+          "desc": "Belçika çikolatası eşliğinde servis edilir.",
+          "category": "Tatlılar"
+        },
+        {
+          "name": "Dondurmalı Beyaz Çikolatalı Brownie",
+          "price": "455",
+          "desc": "Beyaz Çikolatalı Brownie üzerine dondurma ile servis edilir.",
+          "category": "Tatlılar"
+        },
+        {
+          "name": "Hygge’s Sebastian",
+          "price": "400",
+          "desc": "",
+          "category": "Tatlılar"
+        },
+        {
+          "name": "Hygge Fondü",
+          "price": "475",
+          "desc": "Belçika Çikolatası, Çilek, Muz ve Çıtır Waffle",
+          "category": "Tatlılar"
+        },
+        {
+          "name": "Magnolia",
+          "price": "380",
+          "desc": "Muz, çilek, oreo bisküvisi ve Belçika çikolatası ile servis edilir.",
+          "category": "Tatlılar"
+        },
+        {
+          "name": "Banana Split",
+          "price": "380",
+          "desc": "muz, dondurma ,krema ve belçika çikolatası",
+          "category": "Tatlılar"
+        },
+        {
+          "name": "Dondurmalı Belçika Waffle",
+          "price": "500",
+          "desc": "belçika waffle üzerine dondurma ile servis edilir.",
+          "category": "Tatlılar"
+        },
+        {
+          "name": "Straberry Split",
+          "price": "400",
+          "desc": "çilek, krema, dondurma ve belçika çikolatası",
+          "category": "Tatlılar"
+        },
+        {
+          "name": "Dondurma Cup",
+          "price": "350",
+          "desc": "dondurma ve belçika çikolatası",
+          "category": "Tatlılar"
+        },
+        {
+          "name": "Espresso (Single)",
+          "price": "180",
+          "desc": "",
+          "category": "Espresso Brews"
+        },
+        {
+          "name": "Espresso (Double)",
+          "price": "190",
+          "desc": "",
+          "category": "Espresso Brews"
+        },
+        {
+          "name": "Americano (Sade)",
+          "price": "190",
+          "desc": "",
+          "category": "Espresso Brews"
+        },
+        {
+          "name": "Americano (Sütlü)",
+          "price": "200",
+          "desc": "",
+          "category": "Espresso Brews"
+        },
+        {
+          "name": "Latte",
+          "price": "210",
+          "desc": "",
+          "category": "Espresso Brews"
+        },
+        {
+          "name": "Flat White",
+          "price": "220",
+          "desc": "",
+          "category": "Espresso Brews"
+        },
+        {
+          "name": "Cappuccino",
+          "price": "220",
+          "desc": "",
+          "category": "Espresso Brews"
+        },
+        {
+          "name": "Cortado",
+          "price": "220",
+          "desc": "",
+          "category": "Espresso Brews"
+        },
+        {
+          "name": "Affogato",
+          "price": "275",
+          "desc": "Espresso, Dondurma",
+          "category": "Espresso Brews"
+        },
+        {
+          "name": "Mocha (Chocolate)",
+          "price": "230",
+          "desc": "",
+          "category": "Espresso Brews"
+        },
+        {
+          "name": "Mocha (Karamel, Vanilya, Beyaz Çikolata, Hindistan cevizi)",
+          "price": "240",
+          "desc": "",
+          "category": "Espresso Brews"
+        },
+        {
+          "name": "Macchiato",
+          "price": "220",
+          "desc": "",
+          "category": "Espresso Brews"
+        },
+        {
+          "name": "Chai Tea Latte",
+          "price": "220",
+          "desc": "",
+          "category": "Espresso Brews"
+        },
+        {
+          "name": "Caramel Latte",
+          "price": "230",
+          "desc": "",
+          "category": "Espresso Brews"
+        },
+        {
+          "name": "Vanilya Latte",
+          "price": "230",
+          "desc": "",
+          "category": "Espresso Brews"
+        },
+        {
+          "name": "Latte (Ballı veya Tarçınlı)",
+          "price": "230",
+          "desc": "",
+          "category": "Espresso Brews"
+        },
+        {
+          "name": "Türk kahvesi (Single)",
+          "price": "170",
+          "desc": "",
+          "category": "Espresso Brews"
+        },
+        {
+          "name": "Türk kahvesi (Sütlü)",
+          "price": "200",
+          "desc": "",
+          "category": "Espresso Brews"
+        },
+        {
+          "name": "Türk kahvesi (Double)",
+          "price": "200",
+          "desc": "",
+          "category": "Espresso Brews"
+        },
+        {
+          "name": "Türk kahvesi (Double sütlü)",
+          "price": "230",
+          "desc": "",
+          "category": "Espresso Brews"
+        },
+        {
+          "name": "Filtre Kahve (Sade)",
+          "price": "180",
+          "desc": "",
+          "category": "Espresso Brews"
+        },
+        {
+          "name": "Filtre Kahve (Sütlü)",
+          "price": "190",
+          "desc": "",
+          "category": "Espresso Brews"
+        },
+        {
+          "name": "Süt çeşitleri (laktozsuz)",
+          "price": "15",
+          "desc": "",
+          "category": "Espresso Brews"
+        },
+        {
+          "name": "Süt çeşitleri (yulaf sütü)",
+          "price": "80",
+          "desc": "",
+          "category": "Espresso Brews"
+        },
+        {
+          "name": "Süt çeşitleri (badem sütü)",
+          "price": "80",
+          "desc": "",
+          "category": "Espresso Brews"
+        },
+        {
+          "name": "Sade Kruvasan",
+          "price": "350",
+          "desc": "taze pişirilerek hazırlanır",
+          "category": "Kruvasan"
+        },
+        {
+          "name": "Meyveli Kruvasan",
+          "price": "450",
+          "desc": "Çilek,Muz,Hygge Beyaz Çikolatalı Krema ve Belçika Çikolatası ile taze pişirilerek servis edilir.",
+          "category": "Kruvasan"
+        },
+        {
+          "name": "Lotus Kremalı Kruvasan",
+          "price": "450",
+          "desc": "Lotus Kreması, Çilek, Muz ve Belçika Çikolatası ile taze pişirilerek servis edilir.",
+          "category": "Kruvasan"
+        }
+      ]
     }
 };
