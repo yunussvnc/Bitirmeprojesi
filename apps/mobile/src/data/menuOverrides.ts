@@ -32589,5 +32589,487 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
           "category": "Prosecco"
         }
       ]
+    },
+    "4572": {
+      "name": "Zehra Heybeliada Restaurant",
+      "sourceUrl": "https://restaurantguru.com/Zehra-Heybeliada-Heybeliada-Mahallesi/menu",
+      "sourceName": "RestaurantGuru kullanıcı yüklemeli menü görseli (exact Heybeliada, Ayyıldız Cd. 24/A; görselde fiyat güncelleme tarihi 10.07.2026)",
+      "verifiedAt": "2026-08-23",
+      "items": [
+        {
+          "name": "Ada Güzeli",
+          "price": "330",
+          "desc": "",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Atom",
+          "price": "350",
+          "desc": "",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Girit Ezme",
+          "price": "430",
+          "desc": "",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Kuru Cacık",
+          "price": "400",
+          "desc": "",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Taze Börülce",
+          "price": "",
+          "desc": "",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Görümcem (Kuru Börülce)",
+          "price": "",
+          "desc": "",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Köz Tabağı",
+          "price": "500",
+          "desc": "",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Humus",
+          "price": "400",
+          "desc": "",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Cevizli Zeytin",
+          "price": "350",
+          "desc": "",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Cibes",
+          "price": "",
+          "desc": "",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Ege Otları",
+          "price": "450",
+          "desc": "",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Fava",
+          "price": "330",
+          "desc": "",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Kınalı Bamya",
+          "price": "430",
+          "desc": "",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Kabak Sıyırtma",
+          "price": "300",
+          "desc": "",
+          "category": "Mezeler"
+        },
+        {
+          "name": "İzmir Güzeli",
+          "price": "375",
+          "desc": "",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Köz Biberi",
+          "price": "300",
+          "desc": "",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Köz Patlıcan",
+          "price": "380",
+          "desc": "",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Kuru Domates",
+          "price": "350",
+          "desc": "",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Köpoğlu",
+          "price": "360",
+          "desc": "",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Pilaki",
+          "price": "400",
+          "desc": "",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Midye Pilaki",
+          "price": "380",
+          "desc": "",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Turşu",
+          "price": "250",
+          "desc": "",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Enginar Dolma",
+          "price": "430",
+          "desc": "",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Enginar Z. Yağlı",
+          "price": "400",
+          "desc": "",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Beyaz Peynir",
+          "price": "100",
+          "desc": "",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Kavun",
+          "price": "110",
+          "desc": "",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Hamsi Special",
+          "price": "",
+          "desc": "",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Deniz Börülce",
+          "price": "350",
+          "desc": "",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Sardalya Tuzlama",
+          "price": "350",
+          "desc": "",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Tarama",
+          "price": "500",
+          "desc": "",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Uskumru Çiroz",
+          "price": "450",
+          "desc": "",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Levrek Marin",
+          "price": "490",
+          "desc": "",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Girit Sübye",
+          "price": "500",
+          "desc": "",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Lakerda",
+          "price": "900",
+          "desc": "",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Balık Pastırma",
+          "price": "850",
+          "desc": "",
+          "category": "Mezeler"
+        },
+        {
+          "name": "Muska Böreği (adet)",
+          "price": "125",
+          "desc": "",
+          "category": "Ara Sıcaklar"
+        },
+        {
+          "name": "Çıtır Patates",
+          "price": "350",
+          "desc": "",
+          "category": "Ara Sıcaklar"
+        },
+        {
+          "name": "Patates Tava",
+          "price": "300",
+          "desc": "",
+          "category": "Ara Sıcaklar"
+        },
+        {
+          "name": "Peynir Kroket",
+          "price": "500",
+          "desc": "",
+          "category": "Ara Sıcaklar"
+        },
+        {
+          "name": "Sıcak Ot Tabağı",
+          "price": "450",
+          "desc": "",
+          "category": "Ara Sıcaklar"
+        },
+        {
+          "name": "Sigara Böreği",
+          "price": "350",
+          "desc": "",
+          "category": "Ara Sıcaklar"
+        },
+        {
+          "name": "Paçanga",
+          "price": "430",
+          "desc": "",
+          "category": "Ara Sıcaklar"
+        },
+        {
+          "name": "Ahtapot Izgara",
+          "price": "1500/2000",
+          "desc": "",
+          "category": "Ara Sıcaklar"
+        },
+        {
+          "name": "Kalamar Tava",
+          "price": "1100",
+          "desc": "",
+          "category": "Ara Sıcaklar"
+        },
+        {
+          "name": "Kalamar Izgara",
+          "price": "1250",
+          "desc": "",
+          "category": "Ara Sıcaklar"
+        },
+        {
+          "name": "Pazılı Levrek",
+          "price": "1000",
+          "desc": "",
+          "category": "Ara Sıcaklar"
+        },
+        {
+          "name": "J. Karides Tereyağlı",
+          "price": "950",
+          "desc": "",
+          "category": "Ara Sıcaklar"
+        },
+        {
+          "name": "J. Karides Söğüş",
+          "price": "900",
+          "desc": "",
+          "category": "Ara Sıcaklar"
+        },
+        {
+          "name": "Ahtapot Bebek",
+          "price": "1000",
+          "desc": "",
+          "category": "Ara Sıcaklar"
+        },
+        {
+          "name": "Beyin Söğüş",
+          "price": "350",
+          "desc": "",
+          "category": "Ara Sıcaklar"
+        },
+        {
+          "name": "Yaprak Ciğer",
+          "price": "800",
+          "desc": "",
+          "category": "Ara Sıcaklar"
+        },
+        {
+          "name": "Söğüş Tabağı",
+          "price": "400",
+          "desc": "",
+          "category": "Salatalar"
+        },
+        {
+          "name": "Çoban",
+          "price": "400",
+          "desc": "",
+          "category": "Salatalar"
+        },
+        {
+          "name": "Mevsim",
+          "price": "400",
+          "desc": "",
+          "category": "Salatalar"
+        },
+        {
+          "name": "Roka",
+          "price": "400",
+          "desc": "",
+          "category": "Salatalar"
+        },
+        {
+          "name": "+ İlave Peynir",
+          "price": "100",
+          "desc": "",
+          "category": "Salatalar"
+        },
+        {
+          "name": "Izgara Köfte (170gr)",
+          "price": "850",
+          "desc": "",
+          "category": "Ana Yemek"
+        },
+        {
+          "name": "Antrikot (240gr)",
+          "price": "1400",
+          "desc": "",
+          "category": "Ana Yemek"
+        },
+        {
+          "name": "Kuzu Pirzola (300gr)",
+          "price": "1500",
+          "desc": "Patates, domates, biber eşliğinde servis edilir.",
+          "category": "Ana Yemek"
+        },
+        {
+          "name": "İskorpit Kavurma",
+          "price": "1200",
+          "desc": "",
+          "category": "Balıklar"
+        },
+        {
+          "name": "Fener Kavurma",
+          "price": "1400",
+          "desc": "",
+          "category": "Balıklar"
+        },
+        {
+          "name": "Levrek Şiş",
+          "price": "1250",
+          "desc": "",
+          "category": "Balıklar"
+        },
+        {
+          "name": "Sardalya Izgara",
+          "price": "",
+          "desc": "",
+          "category": "Balıklar"
+        },
+        {
+          "name": "Dil Şiş",
+          "price": "1500",
+          "desc": "(Balık fiyatlarımız günlük alış fiyatlarımıza göre değişmektedir.)",
+          "category": "Balıklar"
+        },
+        {
+          "name": "Efes 50 cl",
+          "price": "250",
+          "desc": "",
+          "category": "Biralar"
+        },
+        {
+          "name": "Tuborg 50 cl",
+          "price": "250",
+          "desc": "",
+          "category": "Biralar"
+        },
+        {
+          "name": "Bomonti 50 cl",
+          "price": "270",
+          "desc": "",
+          "category": "Biralar"
+        },
+        {
+          "name": "Miller 33 cl",
+          "price": "250",
+          "desc": "",
+          "category": "Biralar"
+        },
+        {
+          "name": "Soft İçecekler",
+          "price": "150",
+          "desc": "",
+          "category": "Meşrubatlar"
+        },
+        {
+          "name": "Soda",
+          "price": "75",
+          "desc": "",
+          "category": "Meşrubatlar"
+        },
+        {
+          "name": "Şalgam (330ml)",
+          "price": "120",
+          "desc": "",
+          "category": "Meşrubatlar"
+        },
+        {
+          "name": "Özel Şalgam (1000ml)",
+          "price": "350",
+          "desc": "",
+          "category": "Meşrubatlar"
+        },
+        {
+          "name": "Beylerbeyi Göbek",
+          "price": "1450/4700",
+          "desc": "",
+          "category": "Rakı"
+        },
+        {
+          "name": "Yeni Rakı",
+          "price": "1250/4200",
+          "desc": "",
+          "category": "Rakı"
+        },
+        {
+          "name": "Tekirdağ Gold",
+          "price": "1350/4350",
+          "desc": "",
+          "category": "Rakı"
+        },
+        {
+          "name": "Kavaklıdere 70 cl",
+          "price": "1500",
+          "desc": "Kırmızı / Beyaz / Roze",
+          "category": "Şarap"
+        },
+        {
+          "name": "Meyve Tabağı",
+          "price": "400",
+          "desc": "",
+          "category": "Tatlı & Meyve"
+        },
+        {
+          "name": "Sakızlı Muhallebi",
+          "price": "350",
+          "desc": "",
+          "category": "Tatlı & Meyve"
+        },
+        {
+          "name": "Sıcak Helva",
+          "price": "300",
+          "desc": "",
+          "category": "Tatlı & Meyve"
+        }
+      ]
     }
 };
