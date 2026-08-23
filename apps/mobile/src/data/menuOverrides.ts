@@ -37793,5 +37793,74 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       "category": "Soft Drinks"
     }
   ]
+},
+  "7217": {
+  "name": "ADA SOKAĞI",
+  "sourceUrl": "https://www.quandoo.com.tr/en/place/ada-sokagi-8726/menu",
+  "sourceName": "Quandoo canlı menüsü (menü geçerliliği 30.09.2026’ya kadar; Facebook exact Abbasağa Mah. Ihlamur Yıldız Cd. No:11 Beşiktaş ve +90 532 735 58 28 şube doğrulaması; bireysel fiyat görünmeyen kalemlerde fiyat eklenmedi)",
+  "verifiedAt": "2026-08-23",
+  "items": [
+    {
+      "name": "Fava",
+      "category": "Starters"
+    },
+    {
+      "name": "Ezme",
+      "category": "Starters"
+    },
+    {
+      "name": "Şakşuka",
+      "category": "Starters"
+    },
+    {
+      "name": "Atom",
+      "category": "Starters"
+    },
+    {
+      "name": "Havuç Tarama",
+      "category": "Starters"
+    },
+    {
+      "name": "Haydari",
+      "category": "Starters"
+    },
+    {
+      "name": "Cacık",
+      "category": "Starters"
+    },
+    {
+      "name": "Fix Menü",
+      "category": "Mains",
+      "desc": "10 Çeşit Meze, 2 Çeşit Ara Sıcak, Ana Yemek (sütte balık), Meyve, Sınırsız Yerli İçki; iki fiyat var 2.300₺-2.500₺"
+    },
+    {
+      "name": "Sütte Balık",
+      "category": "Mains"
+    },
+    {
+      "name": "Et",
+      "category": "Mains"
+    },
+    {
+      "name": "Tavuk",
+      "category": "Mains"
+    },
+    {
+      "name": "Paçanga Böreği",
+      "category": "All you can eat"
+    },
+    {
+      "name": "Sigara Böreği",
+      "category": "All you can eat"
+    },
+    {
+      "name": "Rakı",
+      "category": "Beverages"
+    },
+    {
+      "name": "Şarap",
+      "category": "Beverages"
+    }
+  ]
 }
 };
