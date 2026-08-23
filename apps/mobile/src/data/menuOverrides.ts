@@ -17742,4 +17742,145 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     }
   ]
 }
+,
+  "7239": {
+  "name": "Luglio Italian",
+  "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/ab7k/luglio-italian-makarna-ab7k",
+  "sourceName": "Yemeksepeti canlı Luglio Italian Makarna menüsü",
+  "verifiedAt": "2026-08-23",
+  "items": [
+    {
+      "name": "Pesto Soslu Penne",
+      "price": "324 TL",
+      "desc": "",
+      "category": "Soslu Makarnalar"
+    },
+    {
+      "name": "4 Peynirli Penne",
+      "price": "336 TL",
+      "desc": "",
+      "category": "Soslu Makarnalar"
+    },
+    {
+      "name": "Kıymalı Mac And Cheese",
+      "price": "352 TL",
+      "desc": "",
+      "category": "Soslu Makarnalar"
+    },
+    {
+      "name": "Mac And Cheese",
+      "price": "324 TL",
+      "desc": "",
+      "category": "Soslu Makarnalar"
+    },
+    {
+      "name": "Spagetti Bolonez",
+      "price": "352 TL",
+      "desc": "",
+      "category": "Soslu Makarnalar"
+    },
+    {
+      "name": "Tavuklu Mantarlı Penne",
+      "price": "344 TL",
+      "desc": "",
+      "category": "Soslu Makarnalar"
+    },
+    {
+      "name": "Domates Soslu Penne",
+      "price": "324 TL",
+      "desc": "",
+      "category": "Soslu Makarnalar"
+    },
+    {
+      "name": "Salçalı Spaghetti",
+      "price": "324 TL",
+      "desc": "",
+      "category": "Soslu Makarnalar"
+    },
+    {
+      "name": "Paris Soslu Tavuklu Penne",
+      "price": "336 TL",
+      "desc": "",
+      "category": "Soslu Makarnalar"
+    },
+    {
+      "name": "El Yapımı Fettuccine Alfredo (550 gr.)",
+      "price": "368 TL",
+      "desc": "",
+      "category": "El Yapımı Fettuccine Makarnalar"
+    },
+    {
+      "name": "El yapımı Fettuccine Bolonez (450 gr.)",
+      "price": "380 TL",
+      "desc": "",
+      "category": "El Yapımı Fettuccine Makarnalar"
+    },
+    {
+      "name": "El Yapımı Fettuccine Pomodoro (330 gr.)",
+      "price": "352 TL",
+      "desc": "",
+      "category": "El Yapımı Fettuccine Makarnalar"
+    },
+    {
+      "name": "El Yapımı Fettuccine Pesto (330 gr.)",
+      "price": "352 TL",
+      "desc": "",
+      "category": "El Yapımı Fettuccine Makarnalar"
+    },
+    {
+      "name": "Luglio Dağ Kekikli Tavuk",
+      "price": "408 TL",
+      "desc": "",
+      "category": "Tavuklar"
+    },
+    {
+      "name": "Sweet Chili Soslu Tavuk",
+      "price": "408 TL",
+      "desc": "",
+      "category": "Tavuklar"
+    },
+    {
+      "name": "Köri Soslu Mantarlı Tavuk",
+      "price": "408 TL",
+      "desc": "",
+      "category": "Tavuklar"
+    },
+    {
+      "name": "BBQ Soslu Mantarlı Biberli Tavuk",
+      "price": "408 TL",
+      "desc": "",
+      "category": "Tavuklar"
+    },
+    {
+      "name": "Soya Soslu Mantarlı Tavuk",
+      "price": "408 TL",
+      "desc": "",
+      "category": "Tavuklar"
+    },
+    {
+      "name": "Mantar Soslu Izgara Tavuk",
+      "price": "408 TL",
+      "desc": "",
+      "category": "Tavuklar"
+    },
+    {
+      "name": "Cafe de Paris Soslu Tavuk",
+      "price": "408 TL",
+      "desc": "",
+      "category": "Tavuklar"
+    },
+    {
+      "name": "Cheddar Soslu Tavuk",
+      "price": "408 TL",
+      "desc": "",
+      "category": "Tavuklar"
+    },
+    {
+      "name": "Meksika Soslu Tavuk(Acılı)",
+      "price": "408 TL",
+      "desc": "",
+      "category": "Tavuklar"
+    }
+  ]
+}
 };
