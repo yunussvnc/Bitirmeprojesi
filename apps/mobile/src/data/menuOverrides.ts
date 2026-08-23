@@ -36717,8 +36717,8 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
   "7286": {
   "name": "Gönül Bahçesi Cafe & Restaurant",
   "sourceUrl": "https://menum.co/gonul-bahcesi",
-  "sourceName": "Gönül Bahçesi Menum.co public canlı menüsü (sayfa adı/adres/telefon/@gonulbahcesibeylikduzu eşleşmesi)",
-  "verifiedAt": "2026-08-23",
+  "sourceName": "Gönül Bahçesi Menum.co canlı public menüsü; exact Dalyan Caddesi No:10 ve 0212 880 17 17, Instagram @gonulbahcesibeylikduzu bağlantısı ve Hentzer kaydıyla doğrulandı",
+  "verifiedAt": "2026-08-24",
   "items": [
     {
       "name": "Serpme Kahvaltı (2 Kişilik)",
