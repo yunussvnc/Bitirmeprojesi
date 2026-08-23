@@ -16323,4 +16323,79 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     }
   ]
 }
+,
+  "7233": {
+  "name": "KÜNEFEDEYİZ BEYLİKDÜZÜ",
+  "sourceUrl": "https://kunefedeyiz.com/urunler/",
+  "sourceName": "KÜNEFEDEYİZ resmi ürünler sayfası (fiyat yayınlanmıyor)",
+  "verifiedAt": "2026-08-23",
+  "items": [
+    {
+      "name": "SADE KÜNEFE",
+      "price": "",
+      "desc": "",
+      "category": "Künefe ve Tatlılar"
+    },
+    {
+      "name": "KAYMAKLI KÜNEFE",
+      "price": "",
+      "desc": "",
+      "category": "Künefe ve Tatlılar"
+    },
+    {
+      "name": "MUZLU KÜNEFE",
+      "price": "",
+      "desc": "",
+      "category": "Künefe ve Tatlılar"
+    },
+    {
+      "name": "DONDURMALI KÜNEFE",
+      "price": "",
+      "desc": "",
+      "category": "Künefe ve Tatlılar"
+    },
+    {
+      "name": "FISTIKLI KÜNEFE",
+      "price": "",
+      "desc": "",
+      "category": "Künefe ve Tatlılar"
+    },
+    {
+      "name": "CENNET ÇAMURU",
+      "price": "",
+      "desc": "",
+      "category": "Künefe ve Tatlılar"
+    },
+    {
+      "name": "ANTEP KADAYIFI",
+      "price": "",
+      "desc": "",
+      "category": "Künefe ve Tatlılar"
+    },
+    {
+      "name": "BİLLURİYE TATLISI",
+      "price": "",
+      "desc": "",
+      "category": "Künefe ve Tatlılar"
+    },
+    {
+      "name": "DÖRDÜ BİR ARADA",
+      "price": "",
+      "desc": "",
+      "category": "Künefe ve Tatlılar"
+    },
+    {
+      "name": "FISTIKZADE",
+      "price": "",
+      "desc": "",
+      "category": "Künefe ve Tatlılar"
+    },
+    {
+      "name": "HASIR KADAYIF",
+      "price": "",
+      "desc": "",
+      "category": "Künefe ve Tatlılar"
+    }
+  ]
+}
 };
