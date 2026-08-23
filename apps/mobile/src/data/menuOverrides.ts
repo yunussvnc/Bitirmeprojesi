@@ -16044,4 +16044,283 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     }
   ]
 }
+,
+  "7232": {
+  "name": "Mon Bakehouse",
+  "sourceUrl": "https://www.migros.com.tr/yemek/mon-bakehouse-besiktas-nisbetiye-mah-st-1e110",
+  "sourceName": "Migros Yemek canlı Mon Bakehouse menüsü",
+  "verifiedAt": "2026-08-23",
+  "items": [
+    {
+      "name": "Dinkelberger Ekmeği",
+      "price": "730,00 TL",
+      "desc": "",
+      "category": "Ekmekler"
+    },
+    {
+      "name": "Glultensiz Ispanaklı Kiş (Adet)",
+      "price": "670,00 TL",
+      "desc": "Karabuğday unlu",
+      "category": "Simitler & Poğaçalar & Kişler"
+    },
+    {
+      "name": "Glutensiz Kabaklı Kiş (Adet)",
+      "price": "670,00 TL",
+      "desc": "Karabuğday unlu",
+      "category": "Simitler & Poğaçalar & Kişler"
+    },
+    {
+      "name": "Çatal (Siyez Unlu)",
+      "price": "140,00 TL",
+      "desc": "50 gr",
+      "category": "Simitler & Poğaçalar & Kişler"
+    },
+    {
+      "name": "Vegan Hurmalı Cevizli (250 Gr.)",
+      "price": "650,00 TL",
+      "desc": "Şekersiz, glutensiz, vegan",
+      "category": "Kiloluk Ürünler"
+    },
+    {
+      "name": "Çörekotlu Karabuğday Plaka (250 Gr.)",
+      "price": "500,00 TL",
+      "desc": "(Gluten içermez, karabuğday unu ile hazırlanır.)",
+      "category": "Kiloluk Ürünler"
+    },
+    {
+      "name": "Haşhaşlı Karabuğday Plaka (250 Gr.)",
+      "price": "500,00 TL",
+      "desc": "(Gluten içermez, karabuğday unu ile hazırlanır.)",
+      "category": "Kiloluk Ürünler"
+    },
+    {
+      "name": "Susamlı Karabuğday Plaka (250 Gr.)",
+      "price": "500,00 TL",
+      "desc": "Glutensiz,  karabuğday unu ile hazırlanır.",
+      "category": "Kiloluk Ürünler"
+    },
+    {
+      "name": "Siyez Unlu Ay Çekirdekli Çubuk (250 Gr.)",
+      "price": "450,00 TL",
+      "desc": "Siyez unu, ay çekirdeği",
+      "category": "Kiloluk Ürünler"
+    },
+    {
+      "name": "Siyez Unlu Susamlı Çubuk (250 Gr.)",
+      "price": "450,00 TL",
+      "desc": "Siyez unu, susam",
+      "category": "Kiloluk Ürünler"
+    },
+    {
+      "name": "Peynirli Karabuğday Plaka",
+      "price": "500,00 TL",
+      "desc": "",
+      "category": "Kiloluk Ürünler"
+    },
+    {
+      "name": "Ayçekirdekli Karabuğday Plaka ( 250 Gr.)",
+      "price": "500,00 TL",
+      "desc": "",
+      "category": "Kiloluk Ürünler"
+    },
+    {
+      "name": "Kavulca Çubuk",
+      "price": "500,00 TL",
+      "desc": "Günlük hazırlanır.",
+      "category": "Kiloluk Ürünler"
+    },
+    {
+      "name": "Mini Tahinli Çörek",
+      "price": "150,00 TL",
+      "desc": "Tahin",
+      "category": "Kurabiyeler & Çörekler"
+    },
+    {
+      "name": "Acı Badem Kurabiyesi",
+      "price": "480,00 TL",
+      "desc": "Glutensiz",
+      "category": "Kurabiyeler & Çörekler"
+    },
+    {
+      "name": "Chocolate Chip Kurabiye",
+      "price": "190,00 TL",
+      "desc": "Çikolata",
+      "category": "Kurabiyeler & Çörekler"
+    },
+    {
+      "name": "Badem Unlu Hurmalı Kurabiye (250 Gr.)",
+      "price": "650,00 TL",
+      "desc": "Glutensiz, rafine şekersiz",
+      "category": "Kurabiyeler & Çörekler"
+    },
+    {
+      "name": "Portakallı Belçika Çikolatalı Kurabiye (250 Gr.)",
+      "price": "750,00 TL",
+      "desc": "Glutensizdir.",
+      "category": "Kurabiyeler & Çörekler"
+    },
+    {
+      "name": "Fındıklı & Çikolatalı Kurabiye (250 Gr.) (Glütensiz )",
+      "price": "750,00 TL",
+      "desc": "Fındık unu, fındık parçacıkları ve çikolatalı pralin ile glütensiz olarak hazırlanır.",
+      "category": "Kurabiyeler & Çörekler"
+    },
+    {
+      "name": "Meyve Püreli Kurabiye (250 Gr.) (Glütensizdir)",
+      "price": "750,00 TL",
+      "desc": "Meyve püresi",
+      "category": "Kurabiyeler & Çörekler"
+    },
+    {
+      "name": "Büyük Tahinli Çörek",
+      "price": "520,00 TL",
+      "desc": "",
+      "category": "Kurabiyeler & Çörekler"
+    },
+    {
+      "name": "Orman Meyveli Mini Tart",
+      "price": "750,00 TL",
+      "desc": "glutensiz badem kremalı tart",
+      "category": "Kurabiyeler & Çörekler"
+    },
+    {
+      "name": "Glutensiz Selanik Gevreği (250 Gr.)",
+      "price": "750,00 TL",
+      "desc": "",
+      "category": "Kurabiyeler & Çörekler"
+    },
+    {
+      "name": "Beyaz Çikolatalı Brownie",
+      "price": "640,00 TL",
+      "desc": "Beyaz çikolata",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Mozaik Pasta",
+      "price": "640,00 TL",
+      "desc": "Dilim",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Unsuz Çikolatalı Kek (Dilim)",
+      "price": "780,00 TL",
+      "desc": "Çikolata",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Glütensiz Unsuz Çikolatalı Kek (4-6 Kişilik)",
+      "price": "3.200,00 TL",
+      "desc": "Badem unlu",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Limonlu Cheesecake",
+      "price": "700,00 TL",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Yaban Mersinli Tart (4-6 Kişilik)",
+      "price": "3.900,00 TL",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Granola (300 Gr.)",
+      "price": "385,00 TL",
+      "desc": "300 gr.",
+      "category": "Kavanoz & Paket Ürünler"
+    },
+    {
+      "name": "Karabuğdaylı Granola (300 Gr.)",
+      "price": "440,00 TL",
+      "desc": "300 gr.",
+      "category": "Kavanoz & Paket Ürünler"
+    },
+    {
+      "name": "Julius Meinl Filtre (1 Kg.)",
+      "price": "2.600,00 TL",
+      "desc": "1 kg.",
+      "category": "Kavanoz & Paket Ürünler"
+    },
+    {
+      "name": "Fethiye Çam Balı",
+      "price": "720,00 TL",
+      "desc": "",
+      "category": "Kavanoz & Paket Ürünler"
+    },
+    {
+      "name": "Julius Meinl Çekirdek ( 1Kg)",
+      "price": "3.150,00 TL",
+      "desc": "",
+      "category": "Kavanoz & Paket Ürünler"
+    },
+    {
+      "name": "Dondurma (500 Gr.)",
+      "price": "1.000,00 TL",
+      "desc": "Karışık",
+      "category": "Dondurma"
+    },
+    {
+      "name": "Dondurma (1 Kg.)",
+      "price": "2.000,00 TL",
+      "desc": "",
+      "category": "Dondurma"
+    },
+    {
+      "name": "Espresso",
+      "price": "140,00 TL",
+      "desc": "Sıcak servis edilir.",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Double Espresso",
+      "price": "170,00 TL",
+      "desc": "Sıcak servis edilir.",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Macchiato",
+      "price": "200,00 TL",
+      "desc": "Sıcak servis edilir.",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Cappuccino",
+      "price": "225,00 TL",
+      "desc": "Sıcak servis edilir.",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Latte",
+      "price": "225,00 TL",
+      "desc": "Sıcak servis edilir.",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Mocha",
+      "price": "260,00 TL",
+      "desc": "Sıcak servis edilir.",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Flat White",
+      "price": "260,00 TL",
+      "desc": "Sıcak servis edilir.",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Cortado",
+      "price": "250,00 TL",
+      "desc": "Sıcak servis edilir.",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Ice Matcha Latte",
+      "price": "280,00 TL",
+      "desc": "",
+      "category": "Soğuk İçecekler"
+    }
+  ]
+}
 };
