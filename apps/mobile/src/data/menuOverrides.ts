@@ -19758,4 +19758,1765 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     }
   ]
 }
+,
+  "7245": {
+  "name": "Balkon Cafe Etiler Marina",
+  "sourceUrl": "https://balkoncafe.dslink.co/yemek-menu",
+  "sourceName": "Balkon Cafe resmi QR menüsü",
+  "verifiedAt": "2026-08-23",
+  "items": [
+    {
+      "name": "Balkon Kahvaltı",
+      "price": "700 TL",
+      "desc": "",
+      "category": "KAHVALTI"
+    },
+    {
+      "name": "GÜNÜN ÇORBASI",
+      "price": "220 TL",
+      "desc": "",
+      "category": "BAŞLANGIÇLAR"
+    },
+    {
+      "name": "PARMAK PATATES",
+      "price": "405 TL",
+      "desc": "",
+      "category": "BAŞLANGIÇLAR"
+    },
+    {
+      "name": "ELMA DİLİM PATATES",
+      "price": "420 TL",
+      "desc": "",
+      "category": "BAŞLANGIÇLAR"
+    },
+    {
+      "name": "SOĞAN HALKASI",
+      "price": "420 TL",
+      "desc": "",
+      "category": "BAŞLANGIÇLAR"
+    },
+    {
+      "name": "SİGARA BÖREĞİ",
+      "price": "420 TL",
+      "desc": "",
+      "category": "BAŞLANGIÇLAR"
+    },
+    {
+      "name": "MOZZARELLA STICKS",
+      "price": "420 TL",
+      "desc": "",
+      "category": "BAŞLANGIÇLAR"
+    },
+    {
+      "name": "PAÇANGA BÖREĞİ",
+      "price": "470 TL",
+      "desc": "",
+      "category": "BAŞLANGIÇLAR"
+    },
+    {
+      "name": "ÇILGIN SOSİS TABAĞİ",
+      "price": "470 TL",
+      "desc": "",
+      "category": "BAŞLANGIÇLAR"
+    },
+    {
+      "name": "CAJUN CHİCKEN FİNGERS",
+      "price": "510 TL",
+      "desc": "",
+      "category": "BAŞLANGIÇLAR"
+    },
+    {
+      "name": "ATIŞTIRMA TABAĞI",
+      "price": "560 TL",
+      "desc": "",
+      "category": "BAŞLANGIÇLAR"
+    },
+    {
+      "name": "KAŞARLI TOST",
+      "price": "405 TL",
+      "desc": "",
+      "category": "TOSTLAR"
+    },
+    {
+      "name": "EGE TOST",
+      "price": "415 TL",
+      "desc": "",
+      "category": "TOSTLAR"
+    },
+    {
+      "name": "KAVURMALI TOST",
+      "price": "525 TL",
+      "desc": "",
+      "category": "TOSTLAR"
+    },
+    {
+      "name": "SUCUKLU KAŞARLI TOST",
+      "price": "470 TL",
+      "desc": "",
+      "category": "TOSTLAR"
+    },
+    {
+      "name": "SPECIAL TOST",
+      "price": "490 TL",
+      "desc": "",
+      "category": "TOSTLAR"
+    },
+    {
+      "name": "BEYAZ PEYNİRLİ OMLET",
+      "price": "405 TL",
+      "desc": "",
+      "category": "OMLET ÇEŞITLERI"
+    },
+    {
+      "name": "OTTOMON OMLET",
+      "price": "530 TL",
+      "desc": "",
+      "category": "OMLET ÇEŞITLERI"
+    },
+    {
+      "name": "SEBZELİ OMLET",
+      "price": "405 TL",
+      "desc": "",
+      "category": "OMLET ÇEŞITLERI"
+    },
+    {
+      "name": "MANTARLI OMLET",
+      "price": "440 TL",
+      "desc": "",
+      "category": "OMLET ÇEŞITLERI"
+    },
+    {
+      "name": "SADE OMLET",
+      "price": "350 TL",
+      "desc": "",
+      "category": "OMLET ÇEŞITLERI"
+    },
+    {
+      "name": "TEREYAĞLI GÖZ YUMURTA",
+      "price": "350 TL",
+      "desc": "",
+      "category": "SAHANDA ÜRÜNLER"
+    },
+    {
+      "name": "SUCUKLU GÖZ YUMURTA",
+      "price": "420 TL",
+      "desc": "",
+      "category": "SAHANDA ÜRÜNLER"
+    },
+    {
+      "name": "KAVURMALI GÖZ YUMURTA",
+      "price": "490 TL",
+      "desc": "",
+      "category": "SAHANDA ÜRÜNLER"
+    },
+    {
+      "name": "PASTIRMALI GÖZ YUMURTA",
+      "price": "490 TL",
+      "desc": "",
+      "category": "SAHANDA ÜRÜNLER"
+    },
+    {
+      "name": "MENEMEN",
+      "price": "405 TL",
+      "desc": "",
+      "category": "SAHANDA ÜRÜNLER"
+    },
+    {
+      "name": "IZGARA KÖFTE",
+      "price": "830 TL",
+      "desc": "",
+      "category": "KIRMIZI ET YEMEKLERİ"
+    },
+    {
+      "name": "BALKON KÖFTE",
+      "price": "875 TL",
+      "desc": "",
+      "category": "KIRMIZI ET YEMEKLERİ"
+    },
+    {
+      "name": "LOKUM BONFİLE",
+      "price": "1380 TL",
+      "desc": "",
+      "category": "KIRMIZI ET YEMEKLERİ"
+    },
+    {
+      "name": "MUSHROOM STEAK",
+      "price": "1410 TL",
+      "desc": "",
+      "category": "KIRMIZI ET YEMEKLERİ"
+    },
+    {
+      "name": "ÇOBAN KAVURMA",
+      "price": "1335 TL",
+      "desc": "",
+      "category": "KIRMIZI ET YEMEKLERİ"
+    },
+    {
+      "name": "MEXICAN BONFİLE",
+      "price": "1410 TL",
+      "desc": "",
+      "category": "KIRMIZI ET YEMEKLERİ"
+    },
+    {
+      "name": "IZGARA ANTRİKOT",
+      "price": "1310 TL",
+      "desc": "",
+      "category": "KIRMIZI ET YEMEKLERİ"
+    },
+    {
+      "name": "ÇÖKERTME KEBABI",
+      "price": "1365 TL",
+      "desc": "",
+      "category": "KIRMIZI ET YEMEKLERİ"
+    },
+    {
+      "name": "SAÇ KAVURMA",
+      "price": "1335 TL",
+      "desc": "",
+      "category": "KIRMIZI ET YEMEKLERİ"
+    },
+    {
+      "name": "SULU KAVURMA",
+      "price": "1335 TL",
+      "desc": "",
+      "category": "KIRMIZI ET YEMEKLERİ"
+    },
+    {
+      "name": "KUZU PİRZOLA",
+      "price": "1510 TL",
+      "desc": "",
+      "category": "KIRMIZI ET YEMEKLERİ"
+    },
+    {
+      "name": "BALKON IZGARA",
+      "price": "1845 TL",
+      "desc": "",
+      "category": "KIRMIZI ET YEMEKLERİ"
+    },
+    {
+      "name": "QUASADILLA ETLİ",
+      "price": "865 TL",
+      "desc": "",
+      "category": "KIRMIZI ET YEMEKLERİ"
+    },
+    {
+      "name": "T BONE STEAK",
+      "price": "1590 TL",
+      "desc": "",
+      "category": "KIRMIZI ET YEMEKLERİ"
+    },
+    {
+      "name": "DANA DALLAS",
+      "price": "1590 TL",
+      "desc": "",
+      "category": "KIRMIZI ET YEMEKLERİ"
+    },
+    {
+      "name": "ETLİ FAJİTA",
+      "price": "1310 TL",
+      "desc": "",
+      "category": "KIRMIZI ET YEMEKLERİ"
+    },
+    {
+      "name": "BALKON ŞATO TAVUK",
+      "price": "760 TL",
+      "desc": "",
+      "category": "BEYAZ ET YEMEKLERİ"
+    },
+    {
+      "name": "TAVUK ŞİŞ",
+      "price": "740 TL",
+      "desc": "",
+      "category": "BEYAZ ET YEMEKLERİ"
+    },
+    {
+      "name": "IZGARA TAVUK GÖĞSÜ",
+      "price": "670 TL",
+      "desc": "",
+      "category": "BEYAZ ET YEMEKLERİ"
+    },
+    {
+      "name": "QUASADILLA TAVUKLU",
+      "price": "650 TL",
+      "desc": "",
+      "category": "BEYAZ ET YEMEKLERİ"
+    },
+    {
+      "name": "TAVUK PİRZOLA",
+      "price": "715 TL",
+      "desc": "",
+      "category": "BEYAZ ET YEMEKLERİ"
+    },
+    {
+      "name": "KÖRİ SOSLU TAVUK",
+      "price": "695 TL",
+      "desc": "",
+      "category": "BEYAZ ET YEMEKLERİ"
+    },
+    {
+      "name": "MANTAR SOSLU TAVUK",
+      "price": "715 TL",
+      "desc": "",
+      "category": "BEYAZ ET YEMEKLERİ"
+    },
+    {
+      "name": "BBQ SOSLU TAVUK",
+      "price": "695 TL",
+      "desc": "",
+      "category": "BEYAZ ET YEMEKLERİ"
+    },
+    {
+      "name": "MEXICAN TAVUK",
+      "price": "715 TL",
+      "desc": "",
+      "category": "BEYAZ ET YEMEKLERİ"
+    },
+    {
+      "name": "TAVUK GÜVEÇ",
+      "price": "715 TL",
+      "desc": "",
+      "category": "BEYAZ ET YEMEKLERİ"
+    },
+    {
+      "name": "TAVUK SCHNITZEL",
+      "price": "695 TL",
+      "desc": "",
+      "category": "BEYAZ ET YEMEKLERİ"
+    },
+    {
+      "name": "TAVUKLU FAJİTA",
+      "price": "795 TL",
+      "desc": "",
+      "category": "BEYAZ ET YEMEKLERİ"
+    },
+    {
+      "name": "ÇUPRA",
+      "price": "1280 TL",
+      "desc": "",
+      "category": "BALIKLAR"
+    },
+    {
+      "name": "SOMON",
+      "price": "1290 TL",
+      "desc": "",
+      "category": "BALIKLAR"
+    },
+    {
+      "name": "LEVREK",
+      "price": "1280 TL",
+      "desc": "",
+      "category": "BALIKLAR"
+    },
+    {
+      "name": "HELLİM SALATA",
+      "price": "505 TL",
+      "desc": "",
+      "category": "SALATALAR"
+    },
+    {
+      "name": "TON BALIKLI SALATA",
+      "price": "550 TL",
+      "desc": "",
+      "category": "SALATALAR"
+    },
+    {
+      "name": "TAVUKLU SEZAR SALATA",
+      "price": "520 TL",
+      "desc": "",
+      "category": "SALATALAR"
+    },
+    {
+      "name": "BEEF SALATA",
+      "price": "730 TL",
+      "desc": "",
+      "category": "SALATALAR"
+    },
+    {
+      "name": "ÇITIR TAVUK SALATA",
+      "price": "520 TL",
+      "desc": "",
+      "category": "SALATALAR"
+    },
+    {
+      "name": "ROKA SALATASI",
+      "price": "505 TL",
+      "desc": "",
+      "category": "SALATALAR"
+    },
+    {
+      "name": "ÇOBAN SALATA",
+      "price": "440 TL",
+      "desc": "",
+      "category": "SALATALAR"
+    },
+    {
+      "name": "EGE SALATA",
+      "price": "480 TL",
+      "desc": "",
+      "category": "SALATALAR"
+    },
+    {
+      "name": "BUHARDA HAŞLANMIŞ SEBZE",
+      "price": "460 TL",
+      "desc": "",
+      "category": "SALATALAR"
+    },
+    {
+      "name": "EGE SANDVİÇ",
+      "price": "470 TL",
+      "desc": "",
+      "category": "SANDVICLER"
+    },
+    {
+      "name": "TON BALIKLI SANDVİÇ",
+      "price": "560 TL",
+      "desc": "",
+      "category": "SANDVICLER"
+    },
+    {
+      "name": "BEEF SANDVİÇ",
+      "price": "660 TL",
+      "desc": "",
+      "category": "SANDVICLER"
+    },
+    {
+      "name": "TAVUKLU SANDVİÇ",
+      "price": "510 TL",
+      "desc": "",
+      "category": "SANDVICLER"
+    },
+    {
+      "name": "HAMBURGER",
+      "price": "660 TL",
+      "desc": "",
+      "category": "BURGERLER"
+    },
+    {
+      "name": "CHEESEBURGER",
+      "price": "700 TL",
+      "desc": "",
+      "category": "BURGERLER"
+    },
+    {
+      "name": "MEXICAN BURGER",
+      "price": "700 TL",
+      "desc": "",
+      "category": "BURGERLER"
+    },
+    {
+      "name": "LOKUM BURGER",
+      "price": "770 TL",
+      "desc": "",
+      "category": "BURGERLER"
+    },
+    {
+      "name": "CHICKEN BURGER",
+      "price": "525 TL",
+      "desc": "",
+      "category": "BURGERLER"
+    },
+    {
+      "name": "FETTUCINI ALFREDO",
+      "price": "600 TL",
+      "desc": "",
+      "category": "MAKARNALAR VE RİSOTTALAR"
+    },
+    {
+      "name": "PENNE ALL ARABIATTA",
+      "price": "585 TL",
+      "desc": "",
+      "category": "MAKARNALAR VE RİSOTTALAR"
+    },
+    {
+      "name": "BOLONEZ SOSLU SPAGETTI",
+      "price": "600 TL",
+      "desc": "",
+      "category": "MAKARNALAR VE RİSOTTALAR"
+    },
+    {
+      "name": "BEEF PENNE",
+      "price": "740 TL",
+      "desc": "",
+      "category": "MAKARNALAR VE RİSOTTALAR"
+    },
+    {
+      "name": "MANTI",
+      "price": "645 TL",
+      "desc": "",
+      "category": "MAKARNALAR VE RİSOTTALAR"
+    },
+    {
+      "name": "ÇITIR MANTI",
+      "price": "645 TL",
+      "desc": "",
+      "category": "MAKARNALAR VE RİSOTTALAR"
+    },
+    {
+      "name": "MARGARİTTA PİZZA",
+      "price": "600 TL",
+      "desc": "",
+      "category": "PİZZALAR"
+    },
+    {
+      "name": "KARNAVAL PİZZA",
+      "price": "700 TL",
+      "desc": "",
+      "category": "PİZZALAR"
+    },
+    {
+      "name": "BONFİLE DİLİMLİ PİZZA",
+      "price": "910 TL",
+      "desc": "",
+      "category": "PİZZALAR"
+    },
+    {
+      "name": "TONBALIKLI PİZZA",
+      "price": "755 TL",
+      "desc": "",
+      "category": "PİZZALAR"
+    },
+    {
+      "name": "BALKON MİX PİZZA",
+      "price": "730 TL",
+      "desc": "",
+      "category": "PİZZALAR"
+    },
+    {
+      "name": "VEGETERIAN PİZZA",
+      "price": "685 TL",
+      "desc": "",
+      "category": "PİZZALAR"
+    },
+    {
+      "name": "KAVURMALI PİZZA",
+      "price": "910 TL",
+      "desc": "",
+      "category": "PİZZALAR"
+    },
+    {
+      "name": "FUNGİ PİZZA",
+      "price": "645 TL",
+      "desc": "",
+      "category": "PİZZALAR"
+    },
+    {
+      "name": "ET DÜRÜM",
+      "price": "805 TL",
+      "desc": "",
+      "category": "DÜRÜMLER"
+    },
+    {
+      "name": "TAVUK DÜRÜM",
+      "price": "605 TL",
+      "desc": "",
+      "category": "DÜRÜMLER"
+    },
+    {
+      "name": "MEXİCAN DÜRÜM",
+      "price": "830 TL",
+      "desc": "",
+      "category": "DÜRÜMLER"
+    },
+    {
+      "name": "KÖFTE DÜRÜM",
+      "price": "750 TL",
+      "desc": "",
+      "category": "DÜRÜMLER"
+    },
+    {
+      "name": "KAŞARLI PİDE",
+      "price": "650 TL",
+      "desc": "",
+      "category": "PİDELER"
+    },
+    {
+      "name": "KUŞBAŞILI PİDE",
+      "price": "950 TL",
+      "desc": "",
+      "category": "PİDELER"
+    },
+    {
+      "name": "KIYMALI PİDE",
+      "price": "830 TL",
+      "desc": "",
+      "category": "PİDELER"
+    },
+    {
+      "name": "SU",
+      "price": "75 TL",
+      "desc": "",
+      "category": "SOFT İÇECEKLER"
+    },
+    {
+      "name": "COCA COLA",
+      "price": "240 TL",
+      "desc": "",
+      "category": "SOFT İÇECEKLER"
+    },
+    {
+      "name": "COCA COLA ZERO",
+      "price": "240 TL",
+      "desc": "",
+      "category": "SOFT İÇECEKLER"
+    },
+    {
+      "name": "COCA COLA LIGHT",
+      "price": "240 TL",
+      "desc": "",
+      "category": "SOFT İÇECEKLER"
+    },
+    {
+      "name": "FANTA",
+      "price": "240 TL",
+      "desc": "",
+      "category": "SOFT İÇECEKLER"
+    },
+    {
+      "name": "SPRİTE",
+      "price": "240 TL",
+      "desc": "",
+      "category": "SOFT İÇECEKLER"
+    },
+    {
+      "name": "ICE TEA (LIMON / ŞEFTALİ/ MANGO)",
+      "price": "240 TL",
+      "desc": "",
+      "category": "SOFT İÇECEKLER"
+    },
+    {
+      "name": "CAPPY (ŞEFTALİ / KAYISI/ VİŞNE/ MIX)",
+      "price": "240 TL",
+      "desc": "",
+      "category": "SOFT İÇECEKLER"
+    },
+    {
+      "name": "REDBULL",
+      "price": "360 TL",
+      "desc": "",
+      "category": "SOFT İÇECEKLER"
+    },
+    {
+      "name": "SODA",
+      "price": "195 TL",
+      "desc": "",
+      "category": "SOFT İÇECEKLER"
+    },
+    {
+      "name": "MEYVELİ SODA",
+      "price": "215 TL",
+      "desc": "",
+      "category": "SOFT İÇECEKLER"
+    },
+    {
+      "name": "CHURCHILL",
+      "price": "225 TL",
+      "desc": "",
+      "category": "SOFT İÇECEKLER"
+    },
+    {
+      "name": "SCHWEPPES",
+      "price": "245 TL",
+      "desc": "",
+      "category": "SOFT İÇECEKLER"
+    },
+    {
+      "name": "AYRAN",
+      "price": "185 TL",
+      "desc": "",
+      "category": "SOFT İÇECEKLER"
+    },
+    {
+      "name": "NANELİ AYRAN",
+      "price": "185 TL",
+      "desc": "",
+      "category": "SOFT İÇECEKLER"
+    },
+    {
+      "name": "FESLEĞENLİ AYRAN",
+      "price": "185 TL",
+      "desc": "",
+      "category": "SOFT İÇECEKLER"
+    },
+    {
+      "name": "REDBULL SUGARFREE",
+      "price": "360 TL",
+      "desc": "",
+      "category": "SOFT İÇECEKLER"
+    },
+    {
+      "name": "REDBULL YELLOW EDITION",
+      "price": "360 TL",
+      "desc": "",
+      "category": "SOFT İÇECEKLER"
+    },
+    {
+      "name": "ÇAY",
+      "price": "70 TL",
+      "desc": "",
+      "category": "ORGANİK ÇAYLAR"
+    },
+    {
+      "name": "FİNCAN ÇAY",
+      "price": "110 TL",
+      "desc": "",
+      "category": "ORGANİK ÇAYLAR"
+    },
+    {
+      "name": "ADA ÇAYI",
+      "price": "300 TL",
+      "desc": "",
+      "category": "ORGANİK ÇAYLAR"
+    },
+    {
+      "name": "IHLAMUR ÇAYI",
+      "price": "300 TL",
+      "desc": "",
+      "category": "ORGANİK ÇAYLAR"
+    },
+    {
+      "name": "KUŞBURNU ÇAYI",
+      "price": "300 TL",
+      "desc": "",
+      "category": "ORGANİK ÇAYLAR"
+    },
+    {
+      "name": "PAPATYA ÇAYI",
+      "price": "300 TL",
+      "desc": "",
+      "category": "ORGANİK ÇAYLAR"
+    },
+    {
+      "name": "KIŞ ÇAYI",
+      "price": "300 TL",
+      "desc": "",
+      "category": "ORGANİK ÇAYLAR"
+    },
+    {
+      "name": "AŞK ÇAYI",
+      "price": "300 TL",
+      "desc": "",
+      "category": "ORGANİK ÇAYLAR"
+    },
+    {
+      "name": "YEŞİL ÇAYI",
+      "price": "300 TL",
+      "desc": "",
+      "category": "ORGANİK ÇAYLAR"
+    },
+    {
+      "name": "LİMONLU YEŞİL ÇAYI",
+      "price": "300 TL",
+      "desc": "",
+      "category": "ORGANİK ÇAYLAR"
+    },
+    {
+      "name": "NANE LİMON ÇAYI",
+      "price": "300 TL",
+      "desc": "",
+      "category": "ORGANİK ÇAYLAR"
+    },
+    {
+      "name": "PORTAKAL ÇAYI",
+      "price": "300 TL",
+      "desc": "",
+      "category": "ORGANİK ÇAYLAR"
+    },
+    {
+      "name": "NAR ÇAYI",
+      "price": "300 TL",
+      "desc": "",
+      "category": "ORGANİK ÇAYLAR"
+    },
+    {
+      "name": "ELMA ÇAYI",
+      "price": "300 TL",
+      "desc": "",
+      "category": "ORGANİK ÇAYLAR"
+    },
+    {
+      "name": "REZENE ÇAYI",
+      "price": "300 TL",
+      "desc": "",
+      "category": "ORGANİK ÇAYLAR"
+    },
+    {
+      "name": "EARL GREY",
+      "price": "300 TL",
+      "desc": "",
+      "category": "ORGANİK ÇAYLAR"
+    },
+    {
+      "name": "MACCHIATO",
+      "price": "260 TL",
+      "desc": "",
+      "category": "SPECIAL KAHVELER"
+    },
+    {
+      "name": "ESPRESSO SINGLE",
+      "price": "240 TL",
+      "desc": "",
+      "category": "SPECIAL KAHVELER"
+    },
+    {
+      "name": "ESPRESSO DOUBLE",
+      "price": "255 TL",
+      "desc": "",
+      "category": "SPECIAL KAHVELER"
+    },
+    {
+      "name": "AMERICANO",
+      "price": "270 TL",
+      "desc": "",
+      "category": "SPECIAL KAHVELER"
+    },
+    {
+      "name": "COFFEE LATTE",
+      "price": "295 TL",
+      "desc": "",
+      "category": "SPECIAL KAHVELER"
+    },
+    {
+      "name": "COFFEE MOCHA",
+      "price": "290 TL",
+      "desc": "",
+      "category": "SPECIAL KAHVELER"
+    },
+    {
+      "name": "COFFEE WHITE MOCHA",
+      "price": "295 TL",
+      "desc": "",
+      "category": "SPECIAL KAHVELER"
+    },
+    {
+      "name": "NESCAFE",
+      "price": "260 TL",
+      "desc": "",
+      "category": "SPECIAL KAHVELER"
+    },
+    {
+      "name": "SÜTLÜ NESCAFE",
+      "price": "270 TL",
+      "desc": "",
+      "category": "SPECIAL KAHVELER"
+    },
+    {
+      "name": "CREAM DE LATTE OREO",
+      "price": "295 TL",
+      "desc": "",
+      "category": "SPECIAL KAHVELER"
+    },
+    {
+      "name": "CAPPUCCİNO",
+      "price": "290 TL",
+      "desc": "",
+      "category": "SPECIAL KAHVELER"
+    },
+    {
+      "name": "CAPPUCCİNO AROMALI",
+      "price": "295 TL",
+      "desc": "",
+      "category": "SPECIAL KAHVELER"
+    },
+    {
+      "name": "LATTE MACCHİATO",
+      "price": "290 TL",
+      "desc": "",
+      "category": "SPECIAL KAHVELER"
+    },
+    {
+      "name": "SADE FİLTRE",
+      "price": "290 TL",
+      "desc": "",
+      "category": "YÖRESEL FİLTRE KAHVELER"
+    },
+    {
+      "name": "COLOMBİA",
+      "price": "300 TL",
+      "desc": "",
+      "category": "YÖRESEL FİLTRE KAHVELER"
+    },
+    {
+      "name": "ETHİOPİA",
+      "price": "300 TL",
+      "desc": "",
+      "category": "YÖRESEL FİLTRE KAHVELER"
+    },
+    {
+      "name": "BRASİLİAN SANTOS",
+      "price": "300 TL",
+      "desc": "",
+      "category": "YÖRESEL FİLTRE KAHVELER"
+    },
+    {
+      "name": "COSTARİCA",
+      "price": "300 TL",
+      "desc": "",
+      "category": "YÖRESEL FİLTRE KAHVELER"
+    },
+    {
+      "name": "GUATEMALA",
+      "price": "300 TL",
+      "desc": "",
+      "category": "YÖRESEL FİLTRE KAHVELER"
+    },
+    {
+      "name": "KENYA A.A.",
+      "price": "300 TL",
+      "desc": "",
+      "category": "YÖRESEL FİLTRE KAHVELER"
+    },
+    {
+      "name": "TÜRK KAHVESİ",
+      "price": "255 TL",
+      "desc": "",
+      "category": "TÜRK KAHVELERİ"
+    },
+    {
+      "name": "DAMLA",
+      "price": "260 TL",
+      "desc": "",
+      "category": "TÜRK KAHVELERİ"
+    },
+    {
+      "name": "MENENGİÇ",
+      "price": "255 TL",
+      "desc": "",
+      "category": "TÜRK KAHVELERİ"
+    },
+    {
+      "name": "DİBEK",
+      "price": "260 TL",
+      "desc": "",
+      "category": "TÜRK KAHVELERİ"
+    },
+    {
+      "name": "SÜTLÜ",
+      "price": "260 TL",
+      "desc": "",
+      "category": "TÜRK KAHVELERİ"
+    },
+    {
+      "name": "SICAK ÇİKOLATA",
+      "price": "300 TL",
+      "desc": "",
+      "category": "SICAK ÇİKOLATA"
+    },
+    {
+      "name": "BEYAZ SICAK ÇİKOLATA",
+      "price": "300 TL",
+      "desc": "",
+      "category": "SICAK ÇİKOLATA"
+    },
+    {
+      "name": "ÇİLEK SICAK ÇİKOLATA",
+      "price": "300 TL",
+      "desc": "",
+      "category": "SICAK ÇİKOLATA"
+    },
+    {
+      "name": "FINDIK SICAK ÇİKOLATA",
+      "price": "300 TL",
+      "desc": "",
+      "category": "SICAK ÇİKOLATA"
+    },
+    {
+      "name": "MUZ SICAK ÇİKOLATA",
+      "price": "300 TL",
+      "desc": "",
+      "category": "SICAK ÇİKOLATA"
+    },
+    {
+      "name": "KARAMEL SICAK ÇİKOLATA",
+      "price": "300 TL",
+      "desc": "",
+      "category": "SICAK ÇİKOLATA"
+    },
+    {
+      "name": "SAHLEP SADE",
+      "price": "290 TL",
+      "desc": "",
+      "category": "SAHLEPLER"
+    },
+    {
+      "name": "DAMLA SAKIZLI SAHLEP",
+      "price": "300 TL",
+      "desc": "",
+      "category": "SAHLEPLER"
+    },
+    {
+      "name": "ÇİLEKLİ SAHLEP",
+      "price": "300 TL",
+      "desc": "",
+      "category": "SAHLEPLER"
+    },
+    {
+      "name": "FINDIKLI SAHLEP",
+      "price": "300 TL",
+      "desc": "",
+      "category": "SAHLEPLER"
+    },
+    {
+      "name": "KAHVELİ SAHLEP",
+      "price": "300 TL",
+      "desc": "",
+      "category": "SAHLEPLER"
+    },
+    {
+      "name": "ICE MOCHA FRAPPE",
+      "price": "310 TL",
+      "desc": "",
+      "category": "SOĞUK KAHVELER"
+    },
+    {
+      "name": "ICE LATTE FRAPPE",
+      "price": "310 TL",
+      "desc": "",
+      "category": "SOĞUK KAHVELER"
+    },
+    {
+      "name": "ICE LATTE",
+      "price": "310 TL",
+      "desc": "",
+      "category": "SOĞUK KAHVELER"
+    },
+    {
+      "name": "ICE AMERİCANO",
+      "price": "310 TL",
+      "desc": "",
+      "category": "SOĞUK KAHVELER"
+    },
+    {
+      "name": "ICE MOCHA",
+      "price": "310 TL",
+      "desc": "",
+      "category": "SOĞUK KAHVELER"
+    },
+    {
+      "name": "ICE WHİTE MOCHA",
+      "price": "310 TL",
+      "desc": "",
+      "category": "SOĞUK KAHVELER"
+    },
+    {
+      "name": "ICE IRİSH NUT CREAM",
+      "price": "310 TL",
+      "desc": "",
+      "category": "SOĞUK KAHVELER"
+    },
+    {
+      "name": "ICE CHAİ LATTE",
+      "price": "310 TL",
+      "desc": "",
+      "category": "SOĞUK KAHVELER"
+    },
+    {
+      "name": "ICE CHOCOLATE MILKSHAKE",
+      "price": "310 TL",
+      "desc": "",
+      "category": "MILKSHAKE"
+    },
+    {
+      "name": "ICE WHİTE CHOCOLATE MILKSHAKE",
+      "price": "310 TL",
+      "desc": "",
+      "category": "MILKSHAKE"
+    },
+    {
+      "name": "ÇİLEK MILKSHAKE",
+      "price": "310 TL",
+      "desc": "",
+      "category": "MILKSHAKE"
+    },
+    {
+      "name": "VANİLYA MILKSHAKE",
+      "price": "310 TL",
+      "desc": "",
+      "category": "MILKSHAKE"
+    },
+    {
+      "name": "MUZ MILKSHAKE",
+      "price": "310 TL",
+      "desc": "",
+      "category": "MILKSHAKE"
+    },
+    {
+      "name": "KARAMEL MILKSHAKE",
+      "price": "310 TL",
+      "desc": "",
+      "category": "MILKSHAKE"
+    },
+    {
+      "name": "KARPUZ MILKSHAKE",
+      "price": "310 TL",
+      "desc": "",
+      "category": "MILKSHAKE"
+    },
+    {
+      "name": "HİNDİSTAN CEVİZLİ",
+      "price": "310 TL",
+      "desc": "",
+      "category": "MILKSHAKE"
+    },
+    {
+      "name": "KİVİ MILKSHAKE",
+      "price": "310 TL",
+      "desc": "",
+      "category": "MILKSHAKE"
+    },
+    {
+      "name": "KIRMIZI ORMAN MEYVELERİ MILKSHAKE",
+      "price": "310 TL",
+      "desc": "",
+      "category": "MILKSHAKE"
+    },
+    {
+      "name": "KAVUN MILKSHAKE",
+      "price": "310 TL",
+      "desc": "",
+      "category": "MILKSHAKE"
+    },
+    {
+      "name": "MANGO MILKSHAKE",
+      "price": "310 TL",
+      "desc": "",
+      "category": "MILKSHAKE"
+    },
+    {
+      "name": "ŞEFTALİ MILKSHAKE",
+      "price": "310 TL",
+      "desc": "",
+      "category": "MILKSHAKE"
+    },
+    {
+      "name": "BÖĞÜRTLEN MILKSHAKE",
+      "price": "310 TL",
+      "desc": "",
+      "category": "MILKSHAKE"
+    },
+    {
+      "name": "MUZLU MILKSHAKE",
+      "price": "310 TL",
+      "desc": "",
+      "category": "MILKSHAKE"
+    },
+    {
+      "name": "ÇİLEK FROZEN",
+      "price": "320 TL",
+      "desc": "",
+      "category": "FROZEN"
+    },
+    {
+      "name": "YEŞİL ELMA FROZEN",
+      "price": "320 TL",
+      "desc": "",
+      "category": "FROZEN"
+    },
+    {
+      "name": "BLACKBERRY FROZEN",
+      "price": "320 TL",
+      "desc": "",
+      "category": "FROZEN"
+    },
+    {
+      "name": "PİNE APPLE FROZEN",
+      "price": "320 TL",
+      "desc": "",
+      "category": "FROZEN"
+    },
+    {
+      "name": "MUZ FROZEN",
+      "price": "320 TL",
+      "desc": "",
+      "category": "FROZEN"
+    },
+    {
+      "name": "MANGO FROZEN",
+      "price": "320 TL",
+      "desc": "",
+      "category": "FROZEN"
+    },
+    {
+      "name": "NANE LİMON FROZEN",
+      "price": "320 TL",
+      "desc": "",
+      "category": "FROZEN"
+    },
+    {
+      "name": "PASSİON FRUİT FROZEN",
+      "price": "320 TL",
+      "desc": "",
+      "category": "FROZEN"
+    },
+    {
+      "name": "KARPUZ FROZEN",
+      "price": "320 TL",
+      "desc": "",
+      "category": "FROZEN"
+    },
+    {
+      "name": "WILD BERRIES FROZEN",
+      "price": "320 TL",
+      "desc": "",
+      "category": "FROZEN"
+    },
+    {
+      "name": "RASPERRY FROZEN",
+      "price": "320 TL",
+      "desc": "",
+      "category": "FROZEN"
+    },
+    {
+      "name": "KAVUN FROZEN",
+      "price": "320 TL",
+      "desc": "",
+      "category": "FROZEN"
+    },
+    {
+      "name": "LEMON FROZEN",
+      "price": "320 TL",
+      "desc": "",
+      "category": "FROZEN"
+    },
+    {
+      "name": "BLACK MULBERRY FROZEN",
+      "price": "320 TL",
+      "desc": "",
+      "category": "FROZEN"
+    },
+    {
+      "name": "KİVİ FROZEN",
+      "price": "320 TL",
+      "desc": "",
+      "category": "FROZEN"
+    },
+    {
+      "name": "LUVIA",
+      "price": "370 TL",
+      "desc": "",
+      "category": "ALKOLSÜZ KOKTEYL"
+    },
+    {
+      "name": "KIZIL ATEŞ",
+      "price": "370 TL",
+      "desc": "",
+      "category": "ALKOLSÜZ KOKTEYL"
+    },
+    {
+      "name": "BRONZ",
+      "price": "360 TL",
+      "desc": "",
+      "category": "ALKOLSÜZ KOKTEYL"
+    },
+    {
+      "name": "RED LİNE",
+      "price": "345 TL",
+      "desc": "",
+      "category": "ALKOLSÜZ KOKTEYL"
+    },
+    {
+      "name": "BALKON MİX",
+      "price": "320 TL",
+      "desc": "",
+      "category": "ALKOLSÜZ KOKTEYL"
+    },
+    {
+      "name": "OREO",
+      "price": "320 TL",
+      "desc": "",
+      "category": "ALKOLSÜZ KOKTEYL"
+    },
+    {
+      "name": "MOJİTO",
+      "price": "310 TL",
+      "desc": "",
+      "category": "ALKOLSÜZ KOKTEYL"
+    },
+    {
+      "name": "MOJİTA STRAWBERRY",
+      "price": "320 TL",
+      "desc": "",
+      "category": "ALKOLSÜZ KOKTEYL"
+    },
+    {
+      "name": "MOJİTO MİNT",
+      "price": "320 TL",
+      "desc": "",
+      "category": "ALKOLSÜZ KOKTEYL"
+    },
+    {
+      "name": "HULK",
+      "price": "320 TL",
+      "desc": "",
+      "category": "ALKOLSÜZ KOKTEYL"
+    },
+    {
+      "name": "BLUE WORLD",
+      "price": "345 TL",
+      "desc": "",
+      "category": "ALKOLSÜZ KOKTEYL"
+    },
+    {
+      "name": "GOLDEN ISLAND",
+      "price": "320 TL",
+      "desc": "",
+      "category": "ALKOLSÜZ KOKTEYL"
+    },
+    {
+      "name": "KLASİK",
+      "price": "250 TL",
+      "desc": "",
+      "category": "LİMONATA"
+    },
+    {
+      "name": "NANE",
+      "price": "255 TL",
+      "desc": "",
+      "category": "LİMONATA"
+    },
+    {
+      "name": "ÇİLEK",
+      "price": "255 TL",
+      "desc": "",
+      "category": "LİMONATA"
+    },
+    {
+      "name": "KARADUT",
+      "price": "255 TL",
+      "desc": "",
+      "category": "LİMONATA"
+    },
+    {
+      "name": "BÖĞÜRTLEN",
+      "price": "255 TL",
+      "desc": "",
+      "category": "LİMONATA"
+    },
+    {
+      "name": "PORTAKAL SUYU",
+      "price": "320 TL",
+      "desc": "",
+      "category": "VİTAMİN BAR"
+    },
+    {
+      "name": "NAR / PORTAKAL",
+      "price": "390 TL",
+      "desc": "",
+      "category": "VİTAMİN BAR"
+    },
+    {
+      "name": "ELMA",
+      "price": "300 TL",
+      "desc": "",
+      "category": "VİTAMİN BAR"
+    },
+    {
+      "name": "HAVUÇ",
+      "price": "300 TL",
+      "desc": "",
+      "category": "VİTAMİN BAR"
+    },
+    {
+      "name": "FINDIKLI NAR",
+      "price": "350 TL",
+      "desc": "",
+      "category": "VİTAMİN BAR"
+    },
+    {
+      "name": "FINDIKLI PORTAKAL",
+      "price": "350 TL",
+      "desc": "",
+      "category": "VİTAMİN BAR"
+    },
+    {
+      "name": "NAR SUYU",
+      "price": "340 TL",
+      "desc": "",
+      "category": "VİTAMİN BAR"
+    },
+    {
+      "name": "TIRAMISU",
+      "price": "470 TL",
+      "desc": "",
+      "category": "TATLILAR"
+    },
+    {
+      "name": "FRAMBUAZLI CHEESECAKE",
+      "price": "470 TL",
+      "desc": "",
+      "category": "TATLILAR"
+    },
+    {
+      "name": "LİMONLU CHEESECAKE",
+      "price": "470 TL",
+      "desc": "",
+      "category": "TATLILAR"
+    },
+    {
+      "name": "MOZAİK PASTA",
+      "price": "470 TL",
+      "desc": "",
+      "category": "TATLILAR"
+    },
+    {
+      "name": "SUFLE",
+      "price": "570 TL",
+      "desc": "",
+      "category": "TATLILAR"
+    },
+    {
+      "name": "BROWNIE",
+      "price": "470 TL",
+      "desc": "",
+      "category": "TATLILAR"
+    },
+    {
+      "name": "KIZARMIŞ DONDURMA",
+      "price": "565 TL",
+      "desc": "",
+      "category": "TATLILAR"
+    },
+    {
+      "name": "TRİLEÇE",
+      "price": "470 TL",
+      "desc": "",
+      "category": "TATLILAR"
+    },
+    {
+      "name": "FONDÜ",
+      "price": "570 TL",
+      "desc": "",
+      "category": "TATLILAR"
+    },
+    {
+      "name": "WAFFLE",
+      "price": "570 TL",
+      "desc": "",
+      "category": "TATLILAR"
+    },
+    {
+      "name": "DONDURMA",
+      "price": "470 TL",
+      "desc": "",
+      "category": "TATLILAR"
+    },
+    {
+      "name": "FISTIK RÜYASI",
+      "price": "470 TL",
+      "desc": "",
+      "category": "TATLILAR"
+    },
+    {
+      "name": "MARLENKA",
+      "price": "470 TL",
+      "desc": "",
+      "category": "TATLILAR"
+    },
+    {
+      "name": "MAGNOLIA MUZLU",
+      "price": "470 TL",
+      "desc": "",
+      "category": "TATLILAR"
+    },
+    {
+      "name": "MAGNOLIA ÇİLEKLİ",
+      "price": "470 TL",
+      "desc": "",
+      "category": "TATLILAR"
+    },
+    {
+      "name": "MAGNOLIA OREOLU",
+      "price": "470 TL",
+      "desc": "",
+      "category": "TATLILAR"
+    },
+    {
+      "name": "SAN SEBASTIAN CHEESECAKE",
+      "price": "565 TL",
+      "desc": "",
+      "category": "TATLILAR"
+    },
+    {
+      "name": "Baklava Porsiyon",
+      "price": "470 TL",
+      "desc": "",
+      "category": "TATLILAR"
+    },
+    {
+      "name": "Kadayıf Porsiyon",
+      "price": "470 TL",
+      "desc": "",
+      "category": "TATLILAR"
+    },
+    {
+      "name": "MEYVE TABAĞI",
+      "price": "720 TL",
+      "desc": "",
+      "category": "MEYVELER"
+    },
+    {
+      "name": "DOUBLE MEYVE TABAĞI",
+      "price": "1295 TL",
+      "desc": "",
+      "category": "MEYVELER"
+    },
+    {
+      "name": "MEYVE ŞÖLENİ",
+      "price": "2205 TL",
+      "desc": "",
+      "category": "MEYVELER"
+    },
+    {
+      "name": "ÇEREZ TABAĞI",
+      "price": "445 TL",
+      "desc": "",
+      "category": "ÇEREZLER"
+    },
+    {
+      "name": "ANANAS",
+      "price": "1110 TL",
+      "desc": "",
+      "category": "NATUREL GRUBU ÇEŞİTLERİ"
+    },
+    {
+      "name": "ANASON ÇİFT ELMA",
+      "price": "635 TL",
+      "desc": "",
+      "category": "Balkon Special"
+    },
+    {
+      "name": "ÜZÜM",
+      "price": "635 TL",
+      "desc": "",
+      "category": "Balkon Special"
+    },
+    {
+      "name": "DAMLA SAKIZI",
+      "price": "635 TL",
+      "desc": "",
+      "category": "Balkon Special"
+    },
+    {
+      "name": "VİVİDENT",
+      "price": "635 TL",
+      "desc": "",
+      "category": "Balkon Special"
+    },
+    {
+      "name": "YABAN MERSİNİ",
+      "price": "635 TL",
+      "desc": "",
+      "category": "Balkon Special"
+    },
+    {
+      "name": "CAPPUCCINO",
+      "price": "635 TL",
+      "desc": "",
+      "category": "Balkon Special"
+    },
+    {
+      "name": "OKYANUS",
+      "price": "635 TL",
+      "desc": "",
+      "category": "Balkon Special"
+    },
+    {
+      "name": "KARPUZ",
+      "price": "635 TL",
+      "desc": "",
+      "category": "Balkon Special"
+    },
+    {
+      "name": "LİMON NANE",
+      "price": "635 TL",
+      "desc": "",
+      "category": "Balkon Special"
+    },
+    {
+      "name": "RICHY RICH",
+      "price": "635 TL",
+      "desc": "",
+      "category": "NARGİLE KARIŞIMLARI"
+    },
+    {
+      "name": "OREON",
+      "price": "635 TL",
+      "desc": "",
+      "category": "NARGİLE KARIŞIMLARI"
+    },
+    {
+      "name": "PİŞMİŞ ŞEFTALİ",
+      "price": "635 TL",
+      "desc": "",
+      "category": "NARGİLE KARIŞIMLARI"
+    },
+    {
+      "name": "MOSCOW ICE CREAM",
+      "price": "635 TL",
+      "desc": "",
+      "category": "NARGİLE KARIŞIMLARI"
+    },
+    {
+      "name": "MAAGNUM",
+      "price": "635 TL",
+      "desc": "",
+      "category": "NARGİLE KARIŞIMLARI"
+    },
+    {
+      "name": "LEMON CHILL",
+      "price": "635 TL",
+      "desc": "",
+      "category": "NARGİLE KARIŞIMLARI"
+    },
+    {
+      "name": "LADY FINGER",
+      "price": "635 TL",
+      "desc": "",
+      "category": "NARGİLE KARIŞIMLARI"
+    },
+    {
+      "name": "GUM",
+      "price": "635 TL",
+      "desc": "",
+      "category": "NARGİLE KARIŞIMLARI"
+    },
+    {
+      "name": "CREAM ORANGE",
+      "price": "635 TL",
+      "desc": "",
+      "category": "NARGİLE KARIŞIMLARI"
+    },
+    {
+      "name": "KİRAZ",
+      "price": "635 TL",
+      "desc": "",
+      "category": "NARGİLE KARIŞIMLARI"
+    },
+    {
+      "name": "MAVİ MUFFIN",
+      "price": "635 TL",
+      "desc": "",
+      "category": "NARGİLE KARIŞIMLARI"
+    },
+    {
+      "name": "LOVE",
+      "price": "635 TL",
+      "desc": "",
+      "category": "NARGİLE KARIŞIMLARI"
+    },
+    {
+      "name": "LADY KILLER",
+      "price": "635 TL",
+      "desc": "",
+      "category": "NARGİLE KARIŞIMLARI"
+    },
+    {
+      "name": "ICE COOKIE",
+      "price": "635 TL",
+      "desc": "",
+      "category": "NARGİLE KARIŞIMLARI"
+    },
+    {
+      "name": "BERRY CHERRY LIME",
+      "price": "635 TL",
+      "desc": "",
+      "category": "NARGİLE KARIŞIMLARI"
+    },
+    {
+      "name": "ICE BERRY",
+      "price": "635 TL",
+      "desc": "",
+      "category": "ŞERBETLİ"
+    },
+    {
+      "name": "BODRUM MANDALİNA",
+      "price": "635 TL",
+      "desc": "",
+      "category": "ŞERBETLİ"
+    },
+    {
+      "name": "CHEESECAKE LİMON",
+      "price": "635 TL",
+      "desc": "",
+      "category": "ŞERBETLİ"
+    },
+    {
+      "name": "ICE BOOM BOOM",
+      "price": "635 TL",
+      "desc": "",
+      "category": "ŞERBETLİ"
+    },
+    {
+      "name": "LAV 66",
+      "price": "635 TL",
+      "desc": "",
+      "category": "ADALYA"
+    },
+    {
+      "name": "ICE BOOM",
+      "price": "635 TL",
+      "desc": "",
+      "category": "ADALYA"
+    },
+    {
+      "name": "ANASON NAKLA ELMA",
+      "price": "635 TL",
+      "desc": "",
+      "category": "NAKHLA"
+    },
+    {
+      "name": "NAKLA ŞEFTALİ",
+      "price": "635 TL",
+      "desc": "",
+      "category": "NAKHLA"
+    },
+    {
+      "name": "STARBUZZ ÇEŞİTLERİ",
+      "price": "635 TL",
+      "desc": "",
+      "category": "STARBUZZ ÇEŞİTLERİ"
+    },
+    {
+      "name": "Akbar Cuce",
+      "price": "1000 TL",
+      "desc": "",
+      "category": "İRAN MUTFAĞI"
+    },
+    {
+      "name": "Khorme sebzi",
+      "price": "750 TL",
+      "desc": "",
+      "category": "İRAN MUTFAĞI"
+    },
+    {
+      "name": "Gheyme",
+      "price": "750 TL",
+      "desc": "",
+      "category": "İRAN MUTFAĞI"
+    },
+    {
+      "name": "Fesençun",
+      "price": "1000 TL",
+      "desc": "",
+      "category": "İRAN MUTFAĞI"
+    },
+    {
+      "name": "Zereşk polo morgh",
+      "price": "750 TL",
+      "desc": "",
+      "category": "İRAN MUTFAĞI"
+    },
+    {
+      "name": "Mirza ghasemi",
+      "price": "500 TL",
+      "desc": "",
+      "category": "İRAN MUTFAĞI"
+    },
+    {
+      "name": "Ghabali polo",
+      "price": "1200 TL",
+      "desc": "",
+      "category": "İRAN MUTFAĞI"
+    }
+  ]
+}
 };
