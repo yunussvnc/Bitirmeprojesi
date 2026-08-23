@@ -33071,5 +33071,325 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
           "category": "Tatlı & Meyve"
         }
       ]
+    },
+    "2451": {
+      "name": "Biget Avcılar - İskender Kebap Restorant",
+      "sourceUrl": "https://tr.restaurantguru.com/Bigetiskender-Istanbul/menu",
+      "sourceName": "RestaurantGuru kullanıcı yüklemeli menü görseli (Biget Avcılar; exact Hentzer koordinatıyla 0 m eşleşme; görsel 3 ay önce yüklenmiş)",
+      "verifiedAt": "2026-08-23",
+      "items": [
+        {
+          "name": "Çorba",
+          "price": "275",
+          "desc": "Tereyağlı süzme mercimek",
+          "category": "Başlangıç ve Ara Sıcak"
+        },
+        {
+          "name": "Izgara İstiridye Mantarı",
+          "price": "795",
+          "desc": "",
+          "category": "Başlangıç ve Ara Sıcak"
+        },
+        {
+          "name": "Cheddar Peynirli Sıcak Füme",
+          "price": "795",
+          "desc": "200 gr konfit etli",
+          "category": "Başlangıç ve Ara Sıcak"
+        },
+        {
+          "name": "Közlenmiş Patlıcan",
+          "price": "345",
+          "desc": "",
+          "category": "Başlangıç ve Ara Sıcak"
+        },
+        {
+          "name": "İçli Köfte",
+          "price": "295",
+          "desc": "30 gr dana kıyma",
+          "category": "Başlangıç ve Ara Sıcak"
+        },
+        {
+          "name": "Çiğ Köfte",
+          "price": "475",
+          "desc": "",
+          "category": "Başlangıç ve Ara Sıcak"
+        },
+        {
+          "name": "Perde Pilavı",
+          "price": "795",
+          "desc": "",
+          "category": "Başlangıç ve Ara Sıcak"
+        },
+        {
+          "name": "Fırında Kaşarlı Mantar",
+          "price": "795",
+          "desc": "",
+          "category": "Başlangıç ve Ara Sıcak"
+        },
+        {
+          "name": "Tereyağ, Tulum Peyniri, Sıcak Lavaş",
+          "price": "245",
+          "desc": "",
+          "category": "Başlangıç ve Ara Sıcak"
+        },
+        {
+          "name": "Fındık Lahmacun",
+          "price": "145",
+          "desc": "",
+          "category": "Başlangıç ve Ara Sıcak"
+        },
+        {
+          "name": "Patates Kızartması",
+          "price": "345",
+          "desc": "",
+          "category": "Başlangıç ve Ara Sıcak"
+        },
+        {
+          "name": "Turşu",
+          "price": "295",
+          "desc": "",
+          "category": "Başlangıç ve Ara Sıcak"
+        },
+        {
+          "name": "Cacık",
+          "price": "295",
+          "desc": "",
+          "category": "Başlangıç ve Ara Sıcak"
+        },
+        {
+          "name": "Yoğurt",
+          "price": "275",
+          "desc": "",
+          "category": "Başlangıç ve Ara Sıcak"
+        },
+        {
+          "name": "Serpme Pazar Kahvaltısı",
+          "price": "895",
+          "desc": "0–6 yaş ücretsiz / 6–12 yaş %50",
+          "category": "Başlangıç ve Ara Sıcak"
+        },
+        {
+          "name": "Tulum Peynirli Yeşil Salata",
+          "price": "695",
+          "desc": "Karışık Akdeniz yeşillikleri, tulum peyniri, nar ve ceviz eşliğinde",
+          "category": "Salata"
+        },
+        {
+          "name": "Murat Bey Salatası",
+          "price": "695",
+          "desc": "Taze mevsim yeşillikleri ve özel sos eşliğinde harmanlanmış bir lezzet",
+          "category": "Salata"
+        },
+        {
+          "name": "Domates Salatası",
+          "price": "595",
+          "desc": "Taze domates, kırmızı soğan, salatalık, yeşil biber eşliğinde",
+          "category": "Salata"
+        },
+        {
+          "name": "Gavurdağı Salatası",
+          "price": "545",
+          "desc": "",
+          "category": "Salata"
+        },
+        {
+          "name": "Çoban Salata",
+          "price": "475",
+          "desc": "",
+          "category": "Salata"
+        },
+        {
+          "name": "Göbek Salata",
+          "price": "475",
+          "desc": "",
+          "category": "Salata"
+        },
+        {
+          "name": "Tavuklu Sezar Salatası",
+          "price": "795",
+          "desc": "150 gr piliç eti",
+          "category": "Salata"
+        },
+        {
+          "name": "Mevsim Salata",
+          "price": "475",
+          "desc": "",
+          "category": "Salata"
+        },
+        {
+          "name": "Etli Akdeniz Salatası",
+          "price": "895",
+          "desc": "100 gr bonfile eti",
+          "category": "Salata"
+        },
+        {
+          "name": "Döner Pors.",
+          "price": "750",
+          "desc": "100 gr döner yanında patates kızartması ve turşu eşliğinde servis edilir",
+          "category": "Biget'ten"
+        },
+        {
+          "name": "Pilav Üstü Döner 100 gr",
+          "price": "750",
+          "desc": "",
+          "category": "Biget'ten"
+        },
+        {
+          "name": "Dürüm Döner 100 gr",
+          "price": "650",
+          "desc": "",
+          "category": "Biget'ten"
+        },
+        {
+          "name": "Sandviç Döner 100 gr",
+          "price": "650",
+          "desc": "",
+          "category": "Biget'ten"
+        },
+        {
+          "name": "İskender",
+          "price": "895",
+          "desc": "80 gr döner eti",
+          "category": "Biget'ten"
+        },
+        {
+          "name": "İskender 1,5",
+          "price": "995",
+          "desc": "120 gr döner eti",
+          "category": "Biget'ten"
+        },
+        {
+          "name": "İskender Duble",
+          "price": "1195",
+          "desc": "160 gr döner eti",
+          "category": "Biget'ten"
+        },
+        {
+          "name": "Patlıcanlı İskender",
+          "price": "895",
+          "desc": "80 gr döner eti",
+          "category": "Biget'ten"
+        },
+        {
+          "name": "Köfteli İskender",
+          "price": "1195",
+          "desc": "80 gr döner + 80 gr köfte",
+          "category": "Biget'ten"
+        },
+        {
+          "name": "Filetolu İskender",
+          "price": "1295",
+          "desc": "80 gr döner + 80 gr bonfile eti",
+          "category": "Biget'ten"
+        },
+        {
+          "name": "Biget İskender",
+          "price": "1395",
+          "desc": "80 gr döner + 80 gr köfte + 80 gr bonfile eti",
+          "category": "Biget'ten"
+        },
+        {
+          "name": "Acılı Adana Kebabı",
+          "price": "975",
+          "desc": "180–200 gr",
+          "category": "Kebap Çeşitleri"
+        },
+        {
+          "name": "Acısız Urfa Kebabı",
+          "price": "975",
+          "desc": "180–200 gr",
+          "category": "Kebap Çeşitleri"
+        },
+        {
+          "name": "Tarsus Kebabı",
+          "price": "975",
+          "desc": "180–200 gr",
+          "category": "Kebap Çeşitleri"
+        },
+        {
+          "name": "Sarma Beyti",
+          "price": "995",
+          "desc": "180–200 gr",
+          "category": "Kebap Çeşitleri"
+        },
+        {
+          "name": "Fıstıklı Kebap",
+          "price": "995",
+          "desc": "180–200 gr",
+          "category": "Kebap Çeşitleri"
+        },
+        {
+          "name": "Kebaptan Ali Nazik",
+          "price": "975",
+          "desc": "180–200 gr",
+          "category": "Kebap Çeşitleri"
+        },
+        {
+          "name": "Domatesli Kebap",
+          "price": "995",
+          "desc": "180–200 gr",
+          "category": "Kebap Çeşitleri"
+        },
+        {
+          "name": "Patlıcanlı Kebap",
+          "price": "975",
+          "desc": "180–200 gr",
+          "category": "Kebap Çeşitleri"
+        },
+        {
+          "name": "Şişten Ali Nazik",
+          "price": "995",
+          "desc": "180–200 gr",
+          "category": "Kebap Çeşitleri"
+        },
+        {
+          "name": "Karışık Kebap",
+          "price": "1475",
+          "desc": "350 gr",
+          "category": "Kebap Çeşitleri"
+        },
+        {
+          "name": "Dana Lokum",
+          "price": "1995",
+          "desc": "200–220 gr",
+          "category": "Et"
+        },
+        {
+          "name": "Dana Fileto Porsiyon",
+          "price": "1395",
+          "desc": "200 gr",
+          "category": "Et"
+        },
+        {
+          "name": "Kuzu Şiş",
+          "price": "1075",
+          "desc": "180–200 gr",
+          "category": "Et"
+        },
+        {
+          "name": "Atom Bonfile",
+          "price": "1995",
+          "desc": "200–220 gr (99 baharatlı)",
+          "category": "Et"
+        },
+        {
+          "name": "Karışık Izgara",
+          "price": "1975",
+          "desc": "350–360 gr",
+          "category": "Et"
+        },
+        {
+          "name": "Kuzu Pirzola",
+          "price": "1695",
+          "desc": "3 kalem – 300 gr",
+          "category": "Et"
+        },
+        {
+          "name": "Akoz Bonfile",
+          "price": "1995",
+          "desc": "",
+          "category": "Et"
+        }
+      ]
     }
 };
