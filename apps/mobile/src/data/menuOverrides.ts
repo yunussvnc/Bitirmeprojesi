@@ -18402,4 +18402,745 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     }
   ]
 }
+,
+  "7241": {
+  "name": "WAMA’S",
+  "sourceUrl": "https://qr.finedinemenu.com/wama-s-beyoglu/menu/668931c8090c66ed86d3882c",
+  "sourceName": "FineDine resmi WAMA’S Beyoğlu QR menüsü",
+  "verifiedAt": "2026-08-23",
+  "items": [
+    {
+      "name": "Sharing Breakfast (FOR 2 PEOPLE)",
+      "price": "1480 TL",
+      "desc": "“Ezine” White Cheese, Trakya  Aged Kashkaval Cheese, Knitted  Cheese, Curd Cheese, Gemlik Black Olives, Edremit  Green Olives, Black Mullberry  Jam, Ajvar, Muhammara, Honey, Butter, Tomatoes, Cucumber,  Nutella, Tahini-Grape Molasses,  Green Pepper, Pan-fried Eggs, Grilled Soujouk, Grilled Sausage,  Grilled Halloumi Cheese, Spring  Roll, Baby Potatoes, Turkish Sesam Bagel, with Unlimited Tea",
+      "category": "BREAKFAST & EGGS & TOASTS"
+    },
+    {
+      "name": "Village Breakfast",
+      "price": "795 TL",
+      "desc": "Pan-fried Soujouk, Beef Sausage,  Spring Roll, Grilled Halloumi Cheese, Cherry Tomatoes, Fried Egg On Sourdough Bread, Roasted Baby Potatoes, a Glass of Turkish Tea",
+      "category": "BREAKFAST & EGGS & TOASTS"
+    },
+    {
+      "name": "Simit Breakfast",
+      "price": "415 TL",
+      "desc": "“Simit” with Melted Cheese,  Fried Egg, Gemlik Black  Olives, Cherry Tomatoes,  Cucumber, a Glass of  Turkish Tea",
+      "category": "BREAKFAST & EGGS & TOASTS"
+    },
+    {
+      "name": "Pancakes",
+      "price": "495 TL",
+      "desc": "3 Pieces Pancake, Honey,  Nutella, Seasonal Fruits, a Glass of Turkish Tea",
+      "category": "BREAKFAST & EGGS & TOASTS"
+    },
+    {
+      "name": "\"Menemen\" Scrambled Eggs",
+      "price": "375 TL",
+      "desc": "Tomato, Egg, Green Pepper",
+      "category": "BREAKFAST & EGGS & TOASTS"
+    },
+    {
+      "name": "Omelette with Cheese",
+      "price": "365 TL",
+      "desc": "Feta Cheese, Cherry  Tomatoes, Cucumber and Mix Greens",
+      "category": "BREAKFAST & EGGS & TOASTS"
+    },
+    {
+      "name": "Omelette with Vegetables",
+      "price": "365 TL",
+      "desc": "Broccoli, Colorful Peppers,  Mushrooms, Cherry Tomatoes, Cucumbers,  Carrots and Mixed Greens",
+      "category": "BREAKFAST & EGGS & TOASTS"
+    },
+    {
+      "name": "Omelette with Mushrooms",
+      "price": "365 TL",
+      "desc": "Cultivated Mushrooms, Cherry Tomatoes, Cucumbers  and Mixed Greens",
+      "category": "BREAKFAST & EGGS & TOASTS"
+    },
+    {
+      "name": "Eggs and Soujouk Toast in Village Bread",
+      "price": "575 TL",
+      "desc": "Ajvar, French Fries  and Pickles",
+      "category": "BREAKFAST & EGGS & TOASTS"
+    },
+    {
+      "name": "Mixed Toast",
+      "price": "395 TL",
+      "desc": "Kashkaval Cheese, Soujouk, Tomatoes,  Cucumber and Mix Greens",
+      "category": "BREAKFAST & EGGS & TOASTS"
+    },
+    {
+      "name": "Toast with Cheese",
+      "price": "375 TL",
+      "desc": "Kashkaval Cheese,  Tomatoes,  Cucumber and Mix  Greens",
+      "category": "BREAKFAST & EGGS & TOASTS"
+    },
+    {
+      "name": "Traditional \"Lebeniye Soup\"",
+      "price": "395 TL",
+      "desc": "Traditional Soup with Mini Meatballs, Fresh Mint and Yoghurt",
+      "category": "SOUP & STARTERS"
+    },
+    {
+      "name": "Soup of the Day",
+      "price": "255 TL",
+      "desc": "Please ask to the waiter",
+      "category": "SOUP & STARTERS"
+    },
+    {
+      "name": "French Fries",
+      "price": "345 TL",
+      "desc": "Hot Coctail Sauce  and Yoghurt Dip",
+      "category": "SOUP & STARTERS"
+    },
+    {
+      "name": "French Fries with Melted Cheese",
+      "price": "375 TL",
+      "desc": "French Fries with Mozzarella, Cheddar Cheese",
+      "category": "SOUP & STARTERS"
+    },
+    {
+      "name": "Crispy Chicken",
+      "price": "545 TL",
+      "desc": "Fried Crispy Chicken with Spicy French Fries, Yoghurt Dip and Sweet Chili Sauce",
+      "category": "SOUP & STARTERS"
+    },
+    {
+      "name": "Mezze Tray (For 2 People)",
+      "price": "775 TL",
+      "desc": "Hummus, Babaganoush, Muhammara, Haydari, Olive Oil  Braised Grape Vine Leaves, Ajvar, Fried Tortilla",
+      "category": "SOUP & STARTERS"
+    },
+    {
+      "name": "Mediterranean Salad",
+      "price": "485 TL",
+      "desc": "Mix Greens, Rocket Leaves, Sweet Corn, Black Olives, White Cheese, Cherry Tomatoes, Cucumber,  Dried Tomatoes, Walnut, Beet, with Olive Oil and Lemon Dressing",
+      "category": "SALADS & BOWLS"
+    },
+    {
+      "name": "Caesar's Salad (with chicken)",
+      "price": "605 TL",
+      "desc": "Lettuce, Caesar Sauce, Parmesan Cheese, Cherry Tomatoes, Croutons",
+      "category": "SALADS & BOWLS"
+    },
+    {
+      "name": "Caesar's Salad (Plain)",
+      "price": "425 TL",
+      "desc": "Lettuce, Caesar Sauce,  Parmesan Cheese, Cherry  Tomatoes, Croutons",
+      "category": "SALADS & BOWLS"
+    },
+    {
+      "name": "Falafel Salad",
+      "price": "645 TL",
+      "desc": "Mediterranean Greens, Falafel,  Cucumber, Cherry Tomatoes,  Olive Oil Lemon Sauce Akdeniz Yeşillikleri, Falafel, Salatalık, Çeri Domates, Zeytinyağlı Limon Sos ile",
+      "category": "SALADS & BOWLS"
+    },
+    {
+      "name": "Halloumi Salad",
+      "price": "580 TL",
+      "desc": "Mediterranean Greens, Cyprus  Halloumi Cheese, Fried Tortilla,  Capia Pepper, Green Pepper,  Orange, Cherry Tomatoes, Beet with  Olive Oil Lemon Sauce",
+      "category": "SALADS & BOWLS"
+    },
+    {
+      "name": "Crispy Chicken Salad",
+      "price": "610 TL",
+      "desc": "Mediterranean Greens, Crispy Chicken, Green Apple,  Beet, Cherry Tomatoes, Olive Oil Lemon Sauce and with Honey Mustard e",
+      "category": "SALADS & BOWLS"
+    },
+    {
+      "name": "Siyez Bulghur and Mung Beans Salad with Tulum Cheese",
+      "price": "595 TL",
+      "desc": "Mix Greens, “Siyez” Bulghur, Mung Beans, Walnut, Dried  Tomatoes, Parsley, Beet, Cherry  Tomatoes, Olive Oil & Lemon  Dressing and “Tulum” Cheese Brule",
+      "category": "SALADS & BOWLS"
+    },
+    {
+      "name": "Chia&Quinoa Salad with Gravlax Salmon",
+      "price": "795 TL",
+      "desc": "Mix Greens, Quinoa, Chia, Fresh  Mint, Green Onion, Dill, Cherry Tomatoes, Fried Tortilla, Sour Pomegranate, Capers with Olive Oil Lemon Sauce",
+      "category": "SALADS & BOWLS"
+    },
+    {
+      "name": "Tandoori Chicken Salad",
+      "price": "635 TL",
+      "desc": "Mix Greens, Tandoori Sauce Marinated Chicken  Skewers, Baby Potatoes, Cherry Tomatoes,  Mushrooms, Roasted Red Peppers, Beet with  Pomegranate Sauce",
+      "category": "SALADS & BOWLS"
+    },
+    {
+      "name": "Beef Bowl",
+      "price": "945 TL",
+      "desc": "Grilled Tender Beef, “Siyez” Couscous,  Greens, Broccoli, Hummus, Bell  Peppers, Mushroom, Sesame and  Olive Oil & Lemon Dressing",
+      "category": "SALADS & BOWLS"
+    },
+    {
+      "name": "Chicken Bowl",
+      "price": "785 TL",
+      "desc": "Grilled Chicken Cutlet, “Siyez” Couscous, Greens, Avocado,  Bell Peppers, Tomatoes, Mung  Beans, Cucumber with Olive  Oil and Lemon Dressing",
+      "category": "SALADS & BOWLS"
+    },
+    {
+      "name": "Grilled Seabass Bowl",
+      "price": "925 TL",
+      "desc": "Grilled Sea Bass Fillet, “Siyez” Couscous, Greens, Broccoli,  Brussel Sprouts, Avocado, Mung Beans, Edamame,  Artichoke, Cherry Tomatoes, Parsley, Basil Dressing",
+      "category": "SALADS & BOWLS"
+    },
+    {
+      "name": "Braised Beef Taco",
+      "price": "995 TL",
+      "desc": "Taco with Braised Beef, Tomatoes, Onion, Green Peppers and Cheddar Cheese, Served With Sour  Cream, Avocado Dip, Salsa Dip and French Fries",
+      "category": "TACO & QUESADILLA"
+    },
+    {
+      "name": "Chicken Quesadilla",
+      "price": "875 TL",
+      "desc": "Chicken and Sauted Vegetables  Quesadilla, Served with Jalapeno Pepper, Mozzarella  Cheese, Caramelized Onion,  Yogurt Dip, Avocado Dip, Salsa Dip, French Fries and Mix Greens",
+      "category": "TACO & QUESADILLA"
+    },
+    {
+      "name": "Beef Quesadilla",
+      "price": "975 TL",
+      "desc": "Taco with Braised Meat, Jalapeno  Pepper, Sauted Vegetables,  Mexican Beans, Mozzarella  Cheese, Caramelized Onion,  Yogurt Dip, Avocado Dip, Salsa  Dip French Fries and Mix Greens",
+      "category": "TACO & QUESADILLA"
+    },
+    {
+      "name": "Fettuccine con Pollo",
+      "price": "595 TL",
+      "desc": "Fettucine with Chicken Slices, Mushroom, Bell Peppers, Parmesan Cheese and Creamy Sauce",
+      "category": "PASTA & RISOTTO & NOODLE"
+    },
+    {
+      "name": "Penne all'Arrabbiata",
+      "price": "485 TL",
+      "desc": "Penne with Spicy Tomato Sauce",
+      "category": "PASTA & RISOTTO & NOODLE"
+    },
+    {
+      "name": "Spaghetti Bolognese",
+      "price": "615 TL",
+      "desc": "Spaghetti with Bolognese Sauce,  Parmesan Cheese",
+      "category": "PASTA & RISOTTO & NOODLE"
+    },
+    {
+      "name": "Seafood Linguine",
+      "price": "825 TL",
+      "desc": "Linguine with Shrimp, Mussels,  Vongole, Dill, Garlic and Light Tomatos Sauce",
+      "category": "PASTA & RISOTTO & NOODLE"
+    },
+    {
+      "name": "Fettuccine al Salmone",
+      "price": "770 TL",
+      "desc": "Fettucine with Salmon Pieces, Capers, Garlic, Dill, Rocket  Leaves and Light Cream Sauce",
+      "category": "PASTA & RISOTTO & NOODLE"
+    },
+    {
+      "name": "Beef Penne",
+      "price": "840 TL",
+      "desc": "Penne with Beef Pieces,  Tomatos Sauce, Creamy  Sauce, Pesto Sauce And  Parmesan Cheese",
+      "category": "PASTA & RISOTTO & NOODLE"
+    },
+    {
+      "name": "Rigatoni con Pollo",
+      "price": "745 TL",
+      "desc": "Chicken Slices, Cheddar Cheese, Mozzarella Cheese,  Parmesan Cheese and Baked Rigatoni with Pesto Sauce",
+      "category": "PASTA & RISOTTO & NOODLE"
+    },
+    {
+      "name": "Lasagna",
+      "price": "685 TL",
+      "desc": "Lasagna with Bolognese Sauce,  Béchamel, Mozzarella Cheese,  Parmesan Cheese with Pesto Sauce",
+      "category": "PASTA & RISOTTO & NOODLE"
+    },
+    {
+      "name": "Ravioli Mamma",
+      "price": "675 TL",
+      "desc": "3 Cheese Ravioli, Tomato Sauce, Cream,  Pesto, Parmesan with Cherry  Tomatoes and Basil",
+      "category": "PASTA & RISOTTO & NOODLE"
+    },
+    {
+      "name": "Mantı",
+      "price": "695 TL",
+      "desc": "“Manti” with  Yoghurt and Light  Tomato Sauce",
+      "category": "PASTA & RISOTTO & NOODLE"
+    },
+    {
+      "name": "Tortellini Funghi",
+      "price": "585 TL",
+      "desc": "Cream, Mushroom, Garlic,  Olive Oil, Parmesan Cheese  with Green Leaves",
+      "category": "PASTA & RISOTTO & NOODLE"
+    },
+    {
+      "name": "Fusulli (Gluten Free)",
+      "price": "470 TL",
+      "desc": "Capia Pepper, Cherry Tomatoes, Sliced Olives with Tomato Sauce",
+      "category": "PASTA & RISOTTO & NOODLE"
+    },
+    {
+      "name": "Mushroom Risotto",
+      "price": "665 TL",
+      "desc": "Risotto, Cultivated Mushrooms, Parmesan Cheese, Cherry Tomatoes, with Garlic Sauce",
+      "category": "PASTA & RISOTTO & NOODLE"
+    },
+    {
+      "name": "Seafood Risotto",
+      "price": "825 TL",
+      "desc": "Risotto, Saffron, Calamari, Shrimp,  Stuffed Mussel, Vongole, Cherry  Tomatoes with Garlic Sauce",
+      "category": "PASTA & RISOTTO & NOODLE"
+    },
+    {
+      "name": "Vegetables Noodle",
+      "price": "550 TL",
+      "desc": "Julienne Vegetables, Soy  Sprout, Green Onion, Sesame, Soy Sauce, Oyster  Sauce, Sweet Chili Dip",
+      "category": "PASTA & RISOTTO & NOODLE"
+    },
+    {
+      "name": "Chicken Noodle",
+      "price": "655 TL",
+      "desc": "Chicken Slices, Julienne  Vegetables, Soy Sprout,  Green Onion, Sesame, Soy Sauce, Oyster Sauce,  Sweet Chili Dip",
+      "category": "PASTA & RISOTTO & NOODLE"
+    },
+    {
+      "name": "Margherita Pizza",
+      "price": "525 TL",
+      "desc": "Tomato Sauce, Mozzarella Cheese, Cherry Tomatoes, Rocket Leaves, Parmesan Cheese, Pesto Sauce",
+      "category": "PIZZA"
+    },
+    {
+      "name": "Chicken Pizza",
+      "price": "695 TL",
+      "desc": "Tomato Sauce, Mozzarella,  Caramelised Onion, Chicken  Slices, Sweet Corn, Green  Olives, Roasted Peppers,  Fresh Thyme, Parmesan  Cheese, Rocket Leaves with BBQ Sauce",
+      "category": "PIZZA"
+    },
+    {
+      "name": "Pepperoni Pizza",
+      "price": "755 TL",
+      "desc": "Tomato Sauce, Mozzarella Cheese, Beef Pepperoni, Roasted  Peppers, Olive, Tomatoes,  Fresh Thyme, Rocket  Leaves, Parmesan Cheese",
+      "category": "PIZZA"
+    },
+    {
+      "name": "4 Cheese Pizza",
+      "price": "745 TL",
+      "desc": "Mozzarella Cheese, Rokfor Cheese,  Chedar Cheese, Mini Mozzarella,  Dryed Tomatoes, Rocket Leaves,  Parmesan Cheese",
+      "category": "PIZZA"
+    },
+    {
+      "name": "Alla Turca Pizza",
+      "price": "775 TL",
+      "desc": "Tomato Sauce, Mozzarella Cheese, Soujouk,  Salami, Sausage, Mushroom, Sweet Corn, Sliced Olives, Roasted Capia Pepper, Fresh Tyhme, Rocket Leaves, Parmesan Cheese",
+      "category": "PIZZA"
+    },
+    {
+      "name": "Cheeseburger",
+      "price": "755 TL",
+      "desc": "165 gr Burger Meat, Cheddar Cheese, Lettuce, Tomatoes, Cornichons, Caramelised Onion, Coleslaw, Salsa Sauce and French Fries",
+      "category": "BURGERS"
+    },
+    {
+      "name": "Double Wama's Burger",
+      "price": "1180 TL",
+      "desc": "330 gr Burger Meat,  Cheddar Cheese, Lettuce, Tomatoes,  Cornichons, Caramelised Onions, Coleslaw, Salsa Sauce and French Fries",
+      "category": "BURGERS"
+    },
+    {
+      "name": "Hamburger",
+      "price": "705 TL",
+      "desc": "165 gr Burger Meat,  Lettuce, Tomatoes,  Cornichons, Grilled Onion,  Coleslaw, Salsa Sauce and French Fries",
+      "category": "BURGERS"
+    },
+    {
+      "name": "Chicken Caesar's Burger",
+      "price": "695 TL",
+      "desc": "200 gr Grilled Chicken Breast,  Caesar’s Salad, Coleslaw,  Parmesan Cheese Burger with  Salsa Sauce and French Fries",
+      "category": "BURGERS"
+    },
+    {
+      "name": "Delux Burger",
+      "price": "845 TL",
+      "desc": "165 gr Burger Meat, Cheddar Chesee, Beef  Bacon, Lettuce, Tomatoes, Cornichon,  Caramelised Onion, Crispy Potato,  Coleslaw, Salsa Sauce and French Fries",
+      "category": "BURGERS"
+    },
+    {
+      "name": "Chicken in Curry Sauce",
+      "price": "545 TL",
+      "desc": "Chicken Slices 180 gr with Julienne Vegetables, Broccoli and Creamy Curry Sauce Served with Saffron Rice",
+      "category": "WHITE MEAT"
+    },
+    {
+      "name": "Sweet & Sour Chicken",
+      "price": "655 TL",
+      "desc": "Chicken Slices 200 gr with Julienne Vegetables, Sesame and Sweet & Sour Sauce, Served with Saffron Rice",
+      "category": "WHITE MEAT"
+    },
+    {
+      "name": "Chicken Schnitzel",
+      "price": "715 TL",
+      "desc": "Chicken Schnitzel 220. gr with French Fries, Rocket Leaves",
+      "category": "WHITE MEAT"
+    },
+    {
+      "name": "Chicken Cutlet",
+      "price": "725 TL",
+      "desc": "Grilled Chicken Breast Cutlets 200 gr with Grilled Vegetables and Saffron Rice",
+      "category": "WHITE MEAT"
+    },
+    {
+      "name": "Grilled Chicken Chops",
+      "price": "735 TL",
+      "desc": "Grilled Chicken Thigh Chops 350 gr with Saffron Rice, Grilled Tomatoes, Green Pepper, Grilled Onion with Sourdough Village Bread",
+      "category": "WHITE MEAT"
+    },
+    {
+      "name": "Lamb Chops with Eggplant Purée (260 gr)",
+      "price": "1360 TL",
+      "desc": "260 gr Grilled Lamb Chops with Saffron Rice, Eggplant Purée, Grilled Tomatoes and Green Pepper",
+      "category": "RED MEAT"
+    },
+    {
+      "name": "Grilled Koftah (200 gr)",
+      "price": "785 TL",
+      "desc": "Grilled Meatballs 200 gr with French Fries, Yoghurt, Muhammara, Hummus, Grilled Tomatoes and Green Pepper",
+      "category": "RED MEAT"
+    },
+    {
+      "name": "Koftah with Yoghurt & Tomato Sauce (200 gr)",
+      "price": "825 TL",
+      "desc": "Grilled Meatballs on Buttered Pita with Tomato Sauce, Yoghurt, Grilled Tomatoes, Green Peppers and Crispy Potatoes",
+      "category": "RED MEAT"
+    },
+    {
+      "name": "Mix Grill Plate (2 people)",
+      "price": "1980 TL",
+      "desc": "Chicken Chops 350 gr, Tandoori Chicken Skewers 140 gr, Meatballs,80 gr Beef Medallions100 gr, Lamb Chops 130 gr, Saffron Rice, Spicy Lavash, Tomatoes, Green Pepper, Grilled Onion, Roasted Potatoes",
+      "category": "RED MEAT"
+    },
+    {
+      "name": "Kebab with Yoghurt (250 gr)",
+      "price": "1280 TL",
+      "desc": "Tenderloin, Meatballs, Green Pepper, Tomatoes,  Butter, Pita, Yogurt and İskender Sauce",
+      "category": "RED MEAT"
+    },
+    {
+      "name": "Beef with Teriyaki Sauce",
+      "price": "1055 TL",
+      "desc": "Sauted Beef Slices 200 gr, Julienne Vegetables, Sesame and Teriyaki Sauce, Served with Saffron Rice",
+      "category": "RED MEAT"
+    },
+    {
+      "name": "Grilled Beef Madalions (200 gr)",
+      "price": "1190 TL",
+      "desc": "Grilled Beef Medallions, Tomatoes, Rocket Leaves, Parmesan Cheese, Dryed  Tomatos with Balsamic  Glaze Sauce",
+      "category": "RED MEAT"
+    },
+    {
+      "name": "Beef Tenderloin with Mushroom Sauce",
+      "price": "1180 TL",
+      "desc": "Grilled Beef Tenderloin 200 gr with Roasted Potatoes, Grillled Cultivated Mushroom, Sauted Vegetables with Demi Glace and Mushroom Sauce",
+      "category": "RED MEAT"
+    },
+    {
+      "name": "Buttered Shrimps",
+      "price": "1150 TL",
+      "desc": "Sauted Shrimps 200 gr with Mushroom, Garlic, Green Pepper, Shallot and Butter",
+      "category": "SEAFOOD"
+    },
+    {
+      "name": "Grilled Seabass (240 gr)",
+      "price": "1045 TL",
+      "desc": "Grilled Sea Bass 240 gr Fillets with Roasted Potatoes, Sauted Vegetables, Rocket Leaves and Yogurt Dip Sauce",
+      "category": "SEAFOOD"
+    },
+    {
+      "name": "Grilled Salmon (200 gr)",
+      "price": "1055 TL",
+      "desc": "Grilled Salmon Fillet 200 gr with Vegetables “Siyez” Couscous, Sauted Spinach, Rocket Leaves, Potatoes, and Grilled Lemon",
+      "category": "SEAFOOD"
+    },
+    {
+      "name": "Hot Chocolate Baklava",
+      "price": "455 TL",
+      "desc": "Warm Chocolate in Baklava with Vanilla Ice Cream",
+      "category": "DESSERTS"
+    },
+    {
+      "name": "Carrot Shaped Baklava with Pistacchio (Plain or Icecream)",
+      "price": "525 TL Dondurmalı",
+      "desc": "",
+      "category": "DESSERTS"
+    },
+    {
+      "name": "Kunafah",
+      "price": "505 TL",
+      "desc": "",
+      "category": "DESSERTS"
+    },
+    {
+      "name": "Ice-cream(3 scoops)",
+      "price": "390 TL",
+      "desc": "Strawberry, Vanilla, Chocolate",
+      "category": "DESSERTS"
+    },
+    {
+      "name": "Apple Crumble",
+      "price": "425 TL",
+      "desc": "",
+      "category": "DESSERTS"
+    },
+    {
+      "name": "San Sebastian Cheesecake",
+      "price": "435 TL",
+      "desc": "",
+      "category": "DESSERTS"
+    },
+    {
+      "name": "Espresso 80cc",
+      "price": "155 TL",
+      "desc": "",
+      "category": "COFFEE"
+    },
+    {
+      "name": "Duble Espresso 200 cc",
+      "price": "220 TL",
+      "desc": "",
+      "category": "COFFEE"
+    },
+    {
+      "name": "Turkish Coffee 80 cc",
+      "price": "170 TL",
+      "desc": "",
+      "category": "COFFEE"
+    },
+    {
+      "name": "Ottoman Coffee 80 cc",
+      "price": "170 TL",
+      "desc": "",
+      "category": "COFFEE"
+    },
+    {
+      "name": "Menengic Coffee 80 cc",
+      "price": "170 TL",
+      "desc": "",
+      "category": "COFFEE"
+    },
+    {
+      "name": "Americano 280 cc",
+      "price": "235 TL",
+      "desc": "",
+      "category": "COFFEE"
+    },
+    {
+      "name": "Macchiato 280 cc",
+      "price": "235 TL",
+      "desc": "",
+      "category": "COFFEE"
+    },
+    {
+      "name": "Cappuccino 280 cc",
+      "price": "235 TL",
+      "desc": "",
+      "category": "COFFEE"
+    },
+    {
+      "name": "Mocha 280 cc",
+      "price": "235 TL",
+      "desc": "",
+      "category": "COFFEE"
+    },
+    {
+      "name": "Latte 280 cc",
+      "price": "235 TL",
+      "desc": "",
+      "category": "COFFEE"
+    },
+    {
+      "name": "Ice Latte 280 cc",
+      "price": "240 TL",
+      "desc": "",
+      "category": "COFFEE"
+    },
+    {
+      "name": "Ice Americano 280 cc",
+      "price": "240 TL",
+      "desc": "",
+      "category": "COFFEE"
+    },
+    {
+      "name": "Ice Mocha 280 cc",
+      "price": "240 TL",
+      "desc": "",
+      "category": "COFFEE"
+    },
+    {
+      "name": "Fresh Apple Juice 350 cc",
+      "price": "265 TL",
+      "desc": "",
+      "category": "COLD DRINKS"
+    },
+    {
+      "name": "Fresh Carrot Juice",
+      "price": "265 TL",
+      "desc": "",
+      "category": "COLD DRINKS"
+    },
+    {
+      "name": "Fresh Orange Juice 350 cc",
+      "price": "265 TL",
+      "desc": "",
+      "category": "COLD DRINKS"
+    },
+    {
+      "name": "Fresh Pomegranate Juice 350 cc",
+      "price": "265 TL",
+      "desc": "",
+      "category": "COLD DRINKS"
+    },
+    {
+      "name": "Detox 350 cc",
+      "price": "275 TL",
+      "desc": "Ginger, Cucumber, Parsley, Apple",
+      "category": "COLD DRINKS"
+    },
+    {
+      "name": "Fresh Energy 350 cc",
+      "price": "275 TL",
+      "desc": "Orange, Strawberry, Banana",
+      "category": "COLD DRINKS"
+    },
+    {
+      "name": "Vitamin C 350 cc",
+      "price": "275 TL",
+      "desc": "Orange, Lemon, Mint",
+      "category": "COLD DRINKS"
+    },
+    {
+      "name": "Milkshake 460 cc",
+      "price": "285 TL",
+      "desc": "Çikolatalı/Vanilyalı/Çilekli",
+      "category": "COLD DRINKS"
+    },
+    {
+      "name": "Frozen 460 cc",
+      "price": "290 TL",
+      "desc": "Limon/Çilek/Karpuz/Kavun/Şeftali/Orman Meyvesi/Hindistan Cevizi/Mango",
+      "category": "COLD DRINKS"
+    },
+    {
+      "name": "Lemonade 350 cc",
+      "price": "235 TL",
+      "desc": "Lemon/ Strawberry/ Mint/ Ginger/ Berries/ Green Apple",
+      "category": "COLD DRINKS"
+    },
+    {
+      "name": "Glass of Turkish Tea 160 cc",
+      "price": "89 TL",
+      "desc": "",
+      "category": "TEA"
+    },
+    {
+      "name": "Cup of Turkish Tea 200 cc",
+      "price": "145 TL",
+      "desc": "",
+      "category": "TEA"
+    },
+    {
+      "name": "Earl Grey 400 cc",
+      "price": "210 TL",
+      "desc": "",
+      "category": "TEA"
+    },
+    {
+      "name": "Fruit & Herbal Tea 400 cc",
+      "price": "210 TL",
+      "desc": "Apple/ Rosehip/ Sage/ Rose/ Green Tea/ Jasmine/ Linden",
+      "category": "TEA"
+    },
+    {
+      "name": "Water 330 mL",
+      "price": "98 TL",
+      "desc": "",
+      "category": "BEVERAGES"
+    },
+    {
+      "name": "Water 750 mL",
+      "price": "155 TL",
+      "desc": "",
+      "category": "BEVERAGES"
+    },
+    {
+      "name": "Ayran 200 cc",
+      "price": "145 TL",
+      "desc": "",
+      "category": "BEVERAGES"
+    },
+    {
+      "name": "Mineral Water 330 cc",
+      "price": "155 TL",
+      "desc": "",
+      "category": "BEVERAGES"
+    },
+    {
+      "name": "Mineral Water with Fruit 200cc",
+      "price": "155 TL",
+      "desc": "Lemon / Apple",
+      "category": "BEVERAGES"
+    },
+    {
+      "name": "Ayran with Basil 200cc",
+      "price": "145 TL",
+      "desc": "",
+      "category": "BEVERAGES"
+    },
+    {
+      "name": "Ayran with Mint 200 cc",
+      "price": "145 TL",
+      "desc": "",
+      "category": "BEVERAGES"
+    },
+    {
+      "name": "Cappy 250 cc",
+      "price": "155 TL",
+      "desc": "Portakal / Vişne / Kayısı / Şeftali",
+      "category": "BEVERAGES"
+    },
+    {
+      "name": "Coca Cola 300 cc",
+      "price": "155 TL",
+      "desc": "Portakal / Vişne / Kayısı / Şeftali",
+      "category": "BEVERAGES"
+    },
+    {
+      "name": "Fanta 300 cc",
+      "price": "155 TL",
+      "desc": "Portakal / Vişne / Kayısı / Şeftali",
+      "category": "BEVERAGES"
+    },
+    {
+      "name": "Sprite 300 cc",
+      "price": "155 TL",
+      "desc": "",
+      "category": "BEVERAGES"
+    },
+    {
+      "name": "Schweppes 250 cc",
+      "price": "155 TL",
+      "desc": "Mandalina / Limon",
+      "category": "BEVERAGES"
+    },
+    {
+      "name": "Fuse Tea 250 cc",
+      "price": "155 TL",
+      "desc": "Şeftali / Limon",
+      "category": "BEVERAGES"
+    },
+    {
+      "name": "San Pellegrino 250 mL",
+      "price": "285 TL",
+      "desc": "",
+      "category": "BEVERAGES"
+    },
+    {
+      "name": "San Pellegrino 750 mL",
+      "price": "395 TL",
+      "desc": "",
+      "category": "BEVERAGES"
+    }
+  ]
+}
 };
