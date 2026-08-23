@@ -12912,7 +12912,7 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
   "7209": {
     "name": "Beşiktaş Dondurmacısı",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/imis/besiktas-dondurmacisi-imis",
-    "sourceName": "Yemeksepeti Beşiktaş Dondurmacısı canlı menüsü (Sinanpaşa–Hattat Tahsin No:39/A şube doğrulaması)",
+    "sourceName": "Yemeksepeti Beşiktaş Dondurmacısı canlı menüsü (Hentzer/Instagram/Yandex exact Sinanpaşa–Hattat Tahsin No:39A şube doğrulaması; Plastic Bag çıkarıldı)",
     "verifiedAt": "2026-08-23",
     "items": [
       {
