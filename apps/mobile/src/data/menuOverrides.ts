@@ -24318,4 +24318,109 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     }
   ]
 }
+,
+  "7255": {
+  "name": "Anzer Döner",
+  "sourceUrl": "https://www.yemeksepeti.com/restaurant/t031/anzer-doner",
+  "sourceName": "Yemeksepeti canlı menüsü (Anzer Döner No:87)",
+  "verifiedAt": "2026-08-23",
+  "items": [
+    {
+      "name": "Et Döner",
+      "price": "462 TL",
+      "desc": "Soğan, domates, yeşil biber ile",
+      "category": "Et Dönerler"
+    },
+    {
+      "name": "Pilav Üstü Et Döner",
+      "price": "582 TL",
+      "desc": "Pirinç pilavı, et döner. Soğan, domates, yeşil biber, ekmek ile",
+      "category": "Et Dönerler"
+    },
+    {
+      "name": "Et Döner Dürüm",
+      "price": "378 TL",
+      "desc": "Et döner, soğan, domates, yeşil biber",
+      "category": "Et Dönerler"
+    },
+    {
+      "name": "Tombik Ekmek Arası Et Döner",
+      "price": "378 TL",
+      "desc": "Et döner, soğan, domates, yeşil biber",
+      "category": "Et Dönerler"
+    },
+    {
+      "name": "Yarım Ekmek Arası Et Döner",
+      "price": "378 TL",
+      "desc": "Et döner, soğan, domates, yeşil biber",
+      "category": "Et Dönerler"
+    },
+    {
+      "name": "Tırnak Pide (Adet)",
+      "price": "36 TL",
+      "desc": "Adet olarak servis edilir.",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Tombik Ekmek (Adet)",
+      "price": "36 TL",
+      "desc": "Adet olarak servis edilir.",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Lavaş (Adet)",
+      "price": "36 TL",
+      "desc": "Adet olarak servis edilir.",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Ekmek (Adet)",
+      "price": "36 TL",
+      "desc": "Adet olarak servis edilir.",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Şalgam Suyu (30 cl.)",
+      "price": "72 TL",
+      "desc": "Pet şişe",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Ayran (30 cl.)",
+      "price": "72 TL",
+      "desc": "Büyük boy",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Ayran (17 cl.)",
+      "price": "60 TL",
+      "desc": "Küçük boy",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Limonlu Soda (20 cl.)",
+      "price": "60 TL",
+      "desc": "Cam şişe",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Soda (20 cl.)",
+      "price": "60 TL",
+      "desc": "Cam şişe",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Su (50 cl.)",
+      "price": "30 TL",
+      "desc": "Pet şişe",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Et Döner (500 gr.) (Pişirilmiş)",
+      "price": "2220 TL",
+      "desc": "Soğan, domates, yeşil biber, ekmek ile",
+      "category": "Kiloluk Et Dönerler (Pişirilmiş)"
+    }
+  ]
+}
 };
