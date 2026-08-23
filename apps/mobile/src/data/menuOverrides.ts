@@ -19143,4 +19143,619 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     }
   ]
 }
+,
+  "7244": {
+  "name": "Namlı Kebap",
+  "sourceUrl": "https://siparis.namlikebap.com.tr/Product",
+  "sourceName": "Namlı Kebap resmi sipariş menüsü",
+  "verifiedAt": "2026-08-23",
+  "items": [
+    {
+      "name": "Bonfile İskender",
+      "price": "1630 TL",
+      "desc": "",
+      "category": "Dönerler"
+    },
+    {
+      "name": "Bulgur Pilav Üstü Döner",
+      "price": "820 TL",
+      "desc": "",
+      "category": "Dönerler"
+    },
+    {
+      "name": "Döner 120gr",
+      "price": "790 TL",
+      "desc": "",
+      "category": "Dönerler"
+    },
+    {
+      "name": "Döner 150Gr",
+      "price": "980 TL",
+      "desc": "",
+      "category": "Dönerler"
+    },
+    {
+      "name": "İskender",
+      "price": "860 TL",
+      "desc": "",
+      "category": "Dönerler"
+    },
+    {
+      "name": "Karışık İskender",
+      "price": "1420 TL",
+      "desc": "",
+      "category": "Dönerler"
+    },
+    {
+      "name": "Pirinç Pilav Üstü Döner",
+      "price": "820 TL",
+      "desc": "",
+      "category": "Dönerler"
+    },
+    {
+      "name": "Fırın Sütlaç",
+      "price": "310 TL",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "İrmik Helvası",
+      "price": "340 TL",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "KREM KRAMEL",
+      "price": "330 TL",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Adana Dürüm",
+      "price": "760 TL",
+      "desc": "",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Çöp Şiş Dürüm",
+      "price": "1010 TL",
+      "desc": "",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Döner Dürüm",
+      "price": "730 TL",
+      "desc": "",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Şiş Dürüm",
+      "price": "1010 TL",
+      "desc": "",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Tavuk Şiş Dürüm",
+      "price": "690 TL",
+      "desc": "",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Urfa Dürüm",
+      "price": "760 TL",
+      "desc": "",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Biftek",
+      "price": "1240 TL",
+      "desc": "",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "Bonfile",
+      "price": "1580 TL",
+      "desc": "",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "Çöp Şiş",
+      "price": "1130 TL",
+      "desc": "",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "Külbastı",
+      "price": "1150 TL",
+      "desc": "",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "Izgara Köfte",
+      "price": "820 TL",
+      "desc": "",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "KABURGA",
+      "price": "1050 TL",
+      "desc": "",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "Karışık Et Özel",
+      "price": "1750 TL",
+      "desc": "",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "Karışık Izgara",
+      "price": "1850 TL",
+      "desc": "",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "Küşleme",
+      "price": "1680 TL",
+      "desc": "",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "LOKUM",
+      "price": "1550 TL",
+      "desc": "",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "Pirzola",
+      "price": "1570 TL",
+      "desc": "",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "Şiş Kebap",
+      "price": "1130 TL",
+      "desc": "",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "TAVUK IZGARA BUT",
+      "price": "760 TL",
+      "desc": "",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "TAVUK IZGARA GOGUS",
+      "price": "760 TL",
+      "desc": "",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "TAVUK KANAT",
+      "price": "790 TL",
+      "desc": "",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "Tavuk Şiş",
+      "price": "760 TL",
+      "desc": "",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "Terbiyeli Şiş",
+      "price": "1130 TL",
+      "desc": "",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "LAHMACUN",
+      "price": "250 TL",
+      "desc": "",
+      "category": "Lahmacunlar"
+    },
+    {
+      "name": "ACILI LAHMACUN",
+      "price": "250 TL",
+      "desc": "",
+      "category": "Lahmacunlar"
+    },
+    {
+      "name": "5 Çayı Lahmacun",
+      "price": "170 TL",
+      "desc": "",
+      "category": "Lahmacunlar"
+    },
+    {
+      "name": "FINDIK LAHMACUN",
+      "price": "90 TL",
+      "desc": "",
+      "category": "Lahmacunlar"
+    },
+    {
+      "name": "5 Çayı Antep Lahmacun",
+      "price": "180 TL",
+      "desc": "",
+      "category": "Lahmacunlar"
+    },
+    {
+      "name": "ANTEP LAHMACUN",
+      "price": "280 TL",
+      "desc": "",
+      "category": "Lahmacunlar"
+    },
+    {
+      "name": "FINDIK ANTEP LAHMACUN",
+      "price": "100 TL",
+      "desc": "",
+      "category": "Lahmacunlar"
+    },
+    {
+      "name": "ADANA KEBAP",
+      "price": "810 TL",
+      "desc": "",
+      "category": "Lahmacunlar"
+    },
+    {
+      "name": "Alinazik",
+      "price": "1100 TL",
+      "desc": "",
+      "category": "Lahmacunlar"
+    },
+    {
+      "name": "Beğendili Kebap",
+      "price": "1220 TL",
+      "desc": "",
+      "category": "Lahmacunlar"
+    },
+    {
+      "name": "Beyti Kebap Acılı",
+      "price": "1010 TL",
+      "desc": "",
+      "category": "Lahmacunlar"
+    },
+    {
+      "name": "Beyti Kebap Acısız",
+      "price": "1010 TL",
+      "desc": "",
+      "category": "Lahmacunlar"
+    },
+    {
+      "name": "Beyti Sarma Acılı",
+      "price": "1010 TL",
+      "desc": "",
+      "category": "Lahmacunlar"
+    },
+    {
+      "name": "Beyti Sarma Acısız",
+      "price": "1010 TL",
+      "desc": "",
+      "category": "Lahmacunlar"
+    },
+    {
+      "name": "Bolu Abant Yayla Kebap",
+      "price": "1420 TL",
+      "desc": "",
+      "category": "Lahmacunlar"
+    },
+    {
+      "name": "Domatesli Kebap",
+      "price": "900 TL",
+      "desc": "",
+      "category": "Lahmacunlar"
+    },
+    {
+      "name": "FISTIKLI KEBAP",
+      "price": "1160 TL",
+      "desc": "",
+      "category": "Lahmacunlar"
+    },
+    {
+      "name": "NAMLI KEBAP",
+      "price": "1550 TL",
+      "desc": "",
+      "category": "Lahmacunlar"
+    },
+    {
+      "name": "PATLICANLI KEBAP",
+      "price": "1200 TL",
+      "desc": "",
+      "category": "Lahmacunlar"
+    },
+    {
+      "name": "URFA KEBAP",
+      "price": "810 TL",
+      "desc": "",
+      "category": "Lahmacunlar"
+    },
+    {
+      "name": "Biber Dolma",
+      "price": "380 TL",
+      "desc": "",
+      "category": "Zeytin Yağlılar"
+    },
+    {
+      "name": "Bom Fasulye Piyaz",
+      "price": "360 TL",
+      "desc": "",
+      "category": "Zeytin Yağlılar"
+    },
+    {
+      "name": "Çerkez Tavuğu",
+      "price": "400 TL",
+      "desc": "",
+      "category": "Zeytin Yağlılar"
+    },
+    {
+      "name": "FAVA",
+      "price": "360 TL",
+      "desc": "",
+      "category": "Zeytin Yağlılar"
+    },
+    {
+      "name": "Kabak Nurani",
+      "price": "360 TL",
+      "desc": "",
+      "category": "Zeytin Yağlılar"
+    },
+    {
+      "name": "KURUTMA PATLICAN DOLMA",
+      "price": "380 TL",
+      "desc": "",
+      "category": "Zeytin Yağlılar"
+    },
+    {
+      "name": "PATLICAN    SALATA",
+      "price": "360 TL",
+      "desc": "",
+      "category": "Zeytin Yağlılar"
+    },
+    {
+      "name": "PATLICAN  SOSLU",
+      "price": "360 TL",
+      "desc": "",
+      "category": "Zeytin Yağlılar"
+    },
+    {
+      "name": "Şakşuka",
+      "price": "360 TL",
+      "desc": "",
+      "category": "Zeytin Yağlılar"
+    },
+    {
+      "name": "YAPRAK   SARMA",
+      "price": "390 TL",
+      "desc": "",
+      "category": "Zeytin Yağlılar"
+    },
+    {
+      "name": "Acı Biber Turşusu",
+      "price": "210 TL",
+      "desc": "",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Akdeniz Salata",
+      "price": "450 TL",
+      "desc": "",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Çoban Salata",
+      "price": "420 TL",
+      "desc": "",
+      "category": "Salatalar"
+    },
+    {
+      "name": "EZME SALATA",
+      "price": "380 TL",
+      "desc": "",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Bahçıvan Salata",
+      "price": "480 TL",
+      "desc": "",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Göbek Salata",
+      "price": "400 TL",
+      "desc": "",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Havuç Salata",
+      "price": "400 TL",
+      "desc": "",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Mevsim Salata",
+      "price": "440 TL",
+      "desc": "",
+      "category": "Salatalar"
+    },
+    {
+      "name": "NAMLI SALATA",
+      "price": "480 TL",
+      "desc": "",
+      "category": "Salatalar"
+    },
+    {
+      "name": "ROKA SALATA",
+      "price": "380 TL",
+      "desc": "",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Salatalık Turşu",
+      "price": "200 TL",
+      "desc": "",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Söğüş Salata",
+      "price": "380 TL",
+      "desc": "",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Süzme Yoğurt",
+      "price": "220 TL",
+      "desc": "",
+      "category": "Salatalar"
+    },
+    {
+      "name": "TAVUK SALATA",
+      "price": "750 TL",
+      "desc": "",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Bulgur Pilavı",
+      "price": "230 TL",
+      "desc": "",
+      "category": "Sıcaklar"
+    },
+    {
+      "name": "Ezo Gelin",
+      "price": "200 TL",
+      "desc": "",
+      "category": "Sıcaklar"
+    },
+    {
+      "name": "İçli Köfte",
+      "price": "240 TL",
+      "desc": "",
+      "category": "Sıcaklar"
+    },
+    {
+      "name": "Közde Domates",
+      "price": "210 TL",
+      "desc": "",
+      "category": "Sıcaklar"
+    },
+    {
+      "name": "Közde Yeşil Biber",
+      "price": "210 TL",
+      "desc": "",
+      "category": "Sıcaklar"
+    },
+    {
+      "name": "PATATES TAVA",
+      "price": "230 TL",
+      "desc": "",
+      "category": "Sıcaklar"
+    },
+    {
+      "name": "Pirinç Pilavı",
+      "price": "230 TL",
+      "desc": "",
+      "category": "Sıcaklar"
+    },
+    {
+      "name": "CACIK",
+      "price": "250 TL",
+      "desc": "",
+      "category": "Soğuklar"
+    },
+    {
+      "name": "ÇİĞ KÖFTE    15:00 - 19:00 ARASI MEVCUT",
+      "price": "520 TL",
+      "desc": "",
+      "category": "Soğuklar"
+    },
+    {
+      "name": "Haydari",
+      "price": "340 TL",
+      "desc": "",
+      "category": "Soğuklar"
+    },
+    {
+      "name": "Yoğurt",
+      "price": "210 TL",
+      "desc": "",
+      "category": "Soğuklar"
+    },
+    {
+      "name": "AYRAN",
+      "price": "90 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "COLA",
+      "price": "110 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Cola Diet",
+      "price": "110 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "FANTA",
+      "price": "110 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Fuse Tea Limon",
+      "price": "110 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Fuse Tea Şeftali",
+      "price": "110 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "KAYISI SUYU",
+      "price": "110 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Litrelik Ayran",
+      "price": "180 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Şalgam Acılı",
+      "price": "100 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Şalgam Acısız",
+      "price": "100 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Şeftali Suyu",
+      "price": "110 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "SODA",
+      "price": "60 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Vişne Suyu",
+      "price": "110 TL",
+      "desc": "",
+      "category": "İçecekler"
+    }
+  ]
+}
 };
