@@ -4,6 +4,36 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "7191": {
+    "name": "Balıkçı Kenan",
+    "sourceUrl": "https://www.menu-tr.com/balikci-kenan",
+    "sourceName": "Balıkçı Kenan Menu-TR QR menüsü; exact Adnan Kahveci Mah. Buse Sk. ve Google place ID ChIJpaA2169ftRQRPRvGu6Mo0P8 Hentzer ID 7191 ile eşleşti; Menu-TR telefonu 0212 880 95 03, Hentzer kaydı +90 212 880 95 02",
+    "verifiedAt": "2026-08-24",
+    "items": [
+      {"name": "Hamsi", "price": "350", "desc": "Bir kilogram", "category": "Mevsim Balıkları"},
+      {"name": "Türk Somon", "price": "1000", "desc": "Bir kilogram", "category": "Mevsim Balıkları"},
+      {"name": "Çipura", "price": "750", "desc": "Bir kilogram", "category": "Mevsim Balıkları"},
+      {"name": "Mezgit", "price": "1000", "desc": "Bir kilogram", "category": "Mevsim Balıkları"},
+      {"name": "Palamut", "price": "1000", "desc": "Bir kilogram, tane 600-700 gr", "category": "Mevsim Balıkları"},
+      {"name": "Mırlan İri", "price": "1000", "desc": "Bir kilogram", "category": "Mevsim Balıkları"},
+      {"name": "İstavrit", "price": "1000", "desc": "Bir kilogram", "category": "Mevsim Balıkları"},
+      {"name": "Hamsi", "price": "249", "desc": "Kg fiyatıdır.", "category": "Günün Balığı"},
+      {"name": "Karides", "price": "790", "desc": "Kg fiyatıdır.", "category": "Günün Balığı"},
+      {"name": "Hamsi Tava", "price": "450", "desc": "1 kg fiyatıdır.", "category": "Pişirilmiş Balık"},
+      {"name": "Levrek Izgara", "price": "1000", "desc": "1 porsiyon", "category": "Pişirilmiş Balık"},
+      {"name": "Palamut", "price": "1000", "desc": "1 porsiyon", "category": "Pişirilmiş Balık"},
+      {"name": "Çoban Salata", "price": "380", "category": "Sıcaklar - Salatalar"},
+      {"name": "Karides", "price": "1000", "desc": "Kg fiyatıdır.", "category": "Deniz Ürünleri"},
+      {"name": "Kalamar", "price": "1000", "desc": "Kg fiyatıdır. 1. Kalite İthal İspanya", "category": "Deniz Ürünleri"},
+      {"name": "Ahtapot", "price": "1000", "desc": "Kg fiyatıdır.", "category": "Deniz Ürünleri"},
+      {"name": "Dondurma İrmik Tatlısı", "price": "350", "category": "Tatlılar"},
+      {"name": "Coco Cola", "price": "200", "category": "İçecekler"},
+      {"name": "Fanta", "price": "200", "category": "İçecekler"},
+      {"name": "FuseTea", "price": "200", "category": "İçecekler"},
+      {"name": "Şalgam", "price": "200", "category": "İçecekler"},
+      {"name": "Çay", "price": "50", "category": "İçecekler"}
+    ]
+  },
   "7288": {
     "name": "Limonlu Bahçe Beyoğlu",
     "sourceUrl": "https://www.limonlubahcebeyoglu.com/qrmenu.php",
