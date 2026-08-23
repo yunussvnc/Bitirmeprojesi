@@ -24990,4 +24990,31 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     }
   ]
 }
+,
+  "7262": {
+  "name": "Ativa Coffee",
+  "sourceUrl": "https://www.instagram.com/ativacoffeeco/",
+  "sourceName": "Ativa Coffee resmi Instagram içerikleri (fiyat yayınlanmamış)",
+  "verifiedAt": "2026-08-23",
+  "items": [
+    {
+      "name": "Matcha",
+      "price": "",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Thai Pina Colada",
+      "price": "",
+      "desc": "",
+      "category": "Kokteyller"
+    },
+    {
+      "name": "Latte",
+      "price": "",
+      "desc": "",
+      "category": "Kahveler"
+    }
+  ]
+}
 };
