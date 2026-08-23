@@ -8743,337 +8743,338 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     ]
   },
   "7203": {
-    "name": "Wingo Fried Chicken Akaretler",
-    "sourceUrl": "https://qr.finedinemenu.com/wingo-akaretler/menu/62d6a6c953d6320015fde149?sectionId=62d6a6fd44562600158b9af2",
-    "sourceName": "FineDine / Wingo Akaretler",
-    "verifiedAt": "2026-08-23",
-    "items": [
-      {
-        "name": "Oregon Burger ve Patates Kızartması(YENİ!!)",
-        "price": "₺395.00",
-        "desc": "Trüflü Chipotle Mayonez, Roka, Kıtır Soğan, Cheddar peyniri, Marine edilmiş kızarmış tavuk ve Patates kızartması       Extra Cheddar + 30₺    Extra Tavuk + 135₺",
-        "category": ""
-      },
-      {
-        "name": "One Love Burger ve Patates Kızartması",
-        "price": "₺395.00",
-        "desc": "One Love Sos, Soslu Mor Lahana, Alman Turşusu, Cheddar Peyniri, Marine Edilmiş Kızarmış Tavuk ve Patates Kızartması      Extra Cheddar + 30₺   Extra Tavuk + 135₺",
-        "category": ""
-      },
-      {
-        "name": "Mango Chutney Burger ve Patates Kızartması",
-        "price": "₺395.00",
-        "desc": "Mango Chutney sos, Ev yapımı ballı hardal, Soslu mor lahana, Alman turşusu, Cheddar Peyniri, Marine edilmiş kızarmış tavuk ve Patates kızartması       Extra Cheddar +30₺   Extra Tavuk + 135₺",
-        "category": ""
-      },
-      {
-        "name": "Bronco BBQ Burger ve Patates Kızartması",
-        "price": "₺440.00",
-        "desc": "Çıtır soğan, Sweet BBQ, Füme, Cheddar peyniri, Marine edilmiş kızarmış tavuk ve Patates kızartması         Extra Cheddar + 30₺   Extra Tavuk + 135₺",
-        "category": ""
-      },
-      {
-        "name": "Space Burger ve Patates Kızartması",
-        "price": "₺395.00",
-        "desc": "Space sos, Chipotle mayonez, Iceberg marul, Cheddar peyniri, Marine edilmiş kızarmış tavuk ve Patates kızartması        Extra Cheddar + 30₺   Extra Tavuk + 135₺",
-        "category": ""
-      },
-      {
-        "name": "White Burger ve Patates Kızartması",
-        "price": "₺395.00",
-        "desc": "White sos, Soslu beyaz lahana, Alman turşusu, Cheddar peyniri,  Marine edilmiş kızarmış tavuk ve Patates kızartması         Extra Cheddar + 30₺   Extra Tavuk + 135₺",
-        "category": ""
-      },
-      {
-        "name": "Mexican Burger ve Patates Kızartması",
-        "price": "₺395.00",
-        "desc": "Guacamole sos, Kuru domatesli cheddar sos, Jalapeno turşu, Sriracha, Cheddar peyniri,  Marine edilmiş kızarmış tavuk ve Patates kızartması        Extra Cheddar + 30₺   Extra Tavuk + 135₺",
-        "category": ""
-      },
-      {
-        "name": "Sweet BBQ Et Burger ve Patates Kızartması",
-        "price": "₺480.00",
-        "desc": "Çıtır soğan, Sweet BBQ, Füme, Cheddar peyniri ve Patates Kızartması     Extra Cheddar + 30₺   Extra Et + 190₺",
-        "category": ""
-      },
-      {
-        "name": "Big Burger Menü",
-        "price": "₺685.00",
-        "desc": "Seçeceğiniz 1 adet burger, 3 adet Tenders, 4 adet Cheddar Bites,  Patates kızartması ile servis edilir      Bronco Burger seçimlerinde + 45₺ ilave edilir    Sweet BBQ Burger seçimlerinde + 85₺ ilave edilir   Extra Cheddar + 30₺   Extra Tavuk + 135₺",
-        "category": ""
-      },
-      {
-        "name": "Cosmos Menü",
-        "price": "₺460.00",
-        "desc": "BBQ, One Love Sos, Coleslaw, Cheddar Peyniri, Alman Turşusu Marine Edilmiş Kızarmış Tavuk + Patates+ İçecek     Extra Cheddar + 30₺   Extra Tavuk + 135₺",
-        "category": ""
-      },
-      {
-        "name": "Wonder Menü",
-        "price": "₺1,080.00",
-        "desc": "Seçeceğiniz 2 adet burger, Cheddar bites, Patates kızartması ile servis edilir     Bronco Burger seçimlerinde + 45₺ ilave edilir    Sweet BBQ Burger seçimlerinde + 85₺ ilave edilir   Extra Cheddar + 30₺   Extra Tavuk + 135₺",
-        "category": ""
-      },
-      {
-        "name": "Burger & Wings Menü",
-        "price": "₺600.00",
-        "desc": "Seçeceğiniz 1 adet burger, 3 adet Basic Wings,  Patates kızartması ile servis edilir.     Bronco Burger seçimlerinde + 45₺ ilave edilir    Sweet BBQ Burger seçimlerinde + 85₺ ilave edilir   Extra Cheddar + 30₺   Extra Tavuk + 135₺",
-        "category": ""
-      },
-      {
-        "name": "Tenders & Wings Menü",
-        "price": "₺460.00",
-        "desc": "3 adet Tenders, 3 adet Basic Wings,  Patates kızartması ile servis edilir.",
-        "category": ""
-      },
-      {
-        "name": "Tenders 5'li -  9'lu",
-        "price": "₺650.00",
-        "desc": "Wingo Chrispy Chicken Tenders, Patates kızartması ile servis edilir -",
-        "category": ""
-      },
-      {
-        "name": "Cheddar ve Garlic Parmesan Bites 10'lu",
-        "price": "₺430.00",
-        "desc": "Soslu tavuk parçaları, Patates kızarması ile servis edilir",
-        "category": ""
-      },
-      {
-        "name": "Cheddar Bites 10'lu",
-        "price": "₺430.00",
-        "desc": "Soslu tavuk parçaları, Patates kızarması ile servis edilir",
-        "category": ""
-      },
-      {
-        "name": "Garlic Parmesan Bites 10'lu",
-        "price": "₺430.00",
-        "desc": "Soslu tavuk parçaları, Patates kızarması ile servis edilir",
-        "category": ""
-      },
-      {
-        "name": "Honey Mustard Bites 10'lu",
-        "price": "₺430.00",
-        "desc": "Soslu tavuk parçaları, Patates kızarması ile servis edilir",
-        "category": ""
-      },
-      {
-        "name": "Spicy Garlic Hot Bites 10'lu",
-        "price": "₺430.00",
-        "desc": "Soslu tavuk parçaları, Patates kızarması ile servis edilir",
-        "category": ""
-      },
-      {
-        "name": "Mango Chutney Bites 10'lu",
-        "price": "₺430.00",
-        "desc": "Soslu tavuk parçaları, Patates kızarması ile servis edilir",
-        "category": ""
-      },
-      {
-        "name": "BBQ Bites 10'lu",
-        "price": "₺430.00",
-        "desc": "Soslu tavuk parçaları, Patates kızarması ile servis edilir",
-        "category": ""
-      },
-      {
-        "name": "Sweet Chili Bites 10'lu",
-        "price": "₺430.00",
-        "desc": "Soslu tavuk parçaları, Patates kızarması ile servis edilir",
-        "category": ""
-      },
-      {
-        "name": "Basic Wings 6'lı - 9'lu",
-        "price": "₺625.00",
-        "desc": "6'lı veya 9'lu olarak, patates kızartması ile servis edilir -",
-        "category": ""
-      },
-      {
-        "name": "Buffalo Wings  6'lı - 9'lu",
-        "price": "₺650.00",
-        "desc": "6'lı veya 9'lu olarak, patates kızartması ile servis edilir -",
-        "category": ""
-      },
-      {
-        "name": "Garlic Parmesan Wings  6'lı - 9'lu",
-        "price": "₺650.00",
-        "desc": "6'lı veya 9'lu olarak, patates kızartması ile servis edilir -",
-        "category": ""
-      },
-      {
-        "name": "Mango Chutney Wings  6'lı - 9'lu",
-        "price": "₺650.00",
-        "desc": "6'lı veya 9'lu olarak, patates kızartması ile servis edilir -",
-        "category": ""
-      },
-      {
-        "name": "Cheddar Wings  6'lı - 9'lu",
-        "price": "₺650.00",
-        "desc": "6'lı veya 9'lu olarak, patates kızartması ile servis edilir -",
-        "category": ""
-      },
-      {
-        "name": "BBQ Wings  6'lı - 9'lu",
-        "price": "₺650.00",
-        "desc": "6'lı veya 9'lu olarak, patates kızartması ile servis edilir -",
-        "category": ""
-      },
-      {
-        "name": "Honey Mustard Wings  6'lı - 9'lu",
-        "price": "₺650.00",
-        "desc": "6'lı veya 9'lu olarak, patates kızartması ile servis edilir -",
-        "category": ""
-      },
-      {
-        "name": "Spicy Garlic Hot Wings  6'lı - 9'lu",
-        "price": "₺650.00",
-        "desc": "6'lı veya 9'lu olarak, patates kızartması ile servis edilir -",
-        "category": ""
-      },
-      {
-        "name": "Extra Hot Wings  6'lı - 9'lu",
-        "price": "₺650.00",
-        "desc": "6'lı veya 9'lu olarak, patates kızartması ile servis edilir -",
-        "category": ""
-      },
-      {
-        "name": "Cheddar Sos",
-        "price": "₺30.00",
-        "desc": "",
-        "category": ""
-      },
-      {
-        "name": "Spicy Garlic Hot Sos",
-        "price": "₺30.00",
-        "desc": "",
-        "category": ""
-      },
-      {
-        "name": "Honey Mustard Sos",
-        "price": "₺30.00",
-        "desc": "",
-        "category": ""
-      },
-      {
-        "name": "White Sos",
-        "price": "₺30.00",
-        "desc": "",
-        "category": ""
-      },
-      {
-        "name": "Buffalo Sos",
-        "price": "₺40.00",
-        "desc": "",
-        "category": ""
-      },
-      {
-        "name": "Space Sos",
-        "price": "₺30.00",
-        "desc": "",
-        "category": ""
-      },
-      {
-        "name": "Mango Chutney Sos",
-        "price": "₺30.00",
-        "desc": "",
-        "category": ""
-      },
-      {
-        "name": "Sweet Chili Sos",
-        "price": "₺30.00",
-        "desc": "",
-        "category": ""
-      },
-      {
-        "name": "Chipotle Mayonez Sos",
-        "price": "₺20.00",
-        "desc": "",
-        "category": ""
-      },
-      {
-        "name": "Garlic Sos",
-        "price": "₺30.00",
-        "desc": "",
-        "category": ""
-      },
-      {
-        "name": "Ranch Sos",
-        "price": "₺30.00",
-        "desc": "",
-        "category": ""
-      },
-      {
-        "name": "Patates Kızartması",
-        "price": "₺165.00",
-        "desc": "",
-        "category": ""
-      },
-      {
-        "name": "Parmesan Sarımsaklı Patates Kızartması",
-        "price": "₺195.00",
-        "desc": "",
-        "category": ""
-      },
-      {
-        "name": "Adet Spicy Tender",
-        "price": "₺80.00",
-        "desc": "",
-        "category": ""
-      },
-      {
-        "name": "Adet Basic Wing",
-        "price": "₺80.00",
-        "desc": "",
-        "category": ""
-      },
-      {
-        "name": "Coca Cola / Cola Turka",
-        "price": "₺80.00",
-        "desc": "",
-        "category": ""
-      },
-      {
-        "name": "Sprite",
-        "price": "₺80.00",
-        "desc": "",
-        "category": ""
-      },
-      {
-        "name": "Niğde Gazozu",
-        "price": "₺70.00",
-        "desc": "",
-        "category": ""
-      },
-      {
-        "name": "Özer Hisar Ayran",
-        "price": "₺80.00",
-        "desc": "",
-        "category": ""
-      },
-      {
-        "name": "Fuse Tea Şeftali / Limon /  Mango ve Ananas",
-        "price": "₺80.00",
-        "desc": "",
-        "category": ""
-      },
-      {
-        "name": "Fanta",
-        "price": "₺80.00",
-        "desc": "",
-        "category": ""
-      },
-      {
-        "name": "Su",
-        "price": "₺40.00",
-        "desc": "",
-        "category": ""
-      },
-      {
-        "name": "Soda",
-        "price": "₺50.00",
-        "desc": "",
-        "category": ""
-      }
-    ]
-  },
+  "name": "Wingo Fried Chicken Akaretler",
+  "sourceUrl": "https://qr.finedinemenu.com/wingo-akaretler/menu/62d6a6c953d6320015fde149?sectionId=62d6a6fd44562600158b9af2",
+  "sourceName": "FineDine public menüsü / Wingo Akaretler (browser HTML başlığıyla exact şube doğrulaması; 23.08.2026 erişim)",
+  "verifiedAt": "2026-08-23",
+  "items": [
+    {
+      "name": "Oregon Burger ve Patates Kızartması(YENİ!!)",
+      "price": "₺395.00",
+      "desc": "Trüflü Chipotle Mayonez, Roka, Kıtır Soğan, Cheddar peyniri, Marine edilmiş kızarmış tavuk ve Patates kızartması       Extra Cheddar + 30₺    Extra Tavuk + 135₺",
+      "category": "Burgerler"
+    },
+    {
+      "name": "One Love Burger ve Patates Kızartması",
+      "price": "₺395.00",
+      "desc": "One Love Sos, Soslu Mor Lahana, Alman Turşusu, Cheddar Peyniri, Marine Edilmiş Kızarmış Tavuk ve Patates Kızartması      Extra Cheddar + 30₺   Extra Tavuk + 135₺",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Mango Chutney Burger ve Patates Kızartması",
+      "price": "₺395.00",
+      "desc": "Mango Chutney sos, Ev yapımı ballı hardal, Soslu mor lahana, Alman turşusu, Cheddar Peyniri, Marine edilmiş kızarmış tavuk ve Patates kızartması       Extra Cheddar +30₺   Extra Tavuk + 135₺",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Bronco BBQ Burger ve Patates Kızartması",
+      "price": "₺440.00",
+      "desc": "Çıtır soğan, Sweet BBQ, Füme, Cheddar peyniri, Marine edilmiş kızarmış tavuk ve Patates kızartması         Extra Cheddar + 30₺   Extra Tavuk + 135₺",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Space Burger ve Patates Kızartması",
+      "price": "₺395.00",
+      "desc": "Space sos, Chipotle mayonez, Iceberg marul, Cheddar peyniri, Marine edilmiş kızarmış tavuk ve Patates kızartması        Extra Cheddar + 30₺   Extra Tavuk + 135₺",
+      "category": "Burgerler"
+    },
+    {
+      "name": "White Burger ve Patates Kızartması",
+      "price": "₺395.00",
+      "desc": "White sos, Soslu beyaz lahana, Alman turşusu, Cheddar peyniri,  Marine edilmiş kızarmış tavuk ve Patates kızartması         Extra Cheddar + 30₺   Extra Tavuk + 135₺",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Mexican Burger ve Patates Kızartması",
+      "price": "₺395.00",
+      "desc": "Guacamole sos, Kuru domatesli cheddar sos, Jalapeno turşu, Sriracha, Cheddar peyniri,  Marine edilmiş kızarmış tavuk ve Patates kızartması        Extra Cheddar + 30₺   Extra Tavuk + 135₺",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Sweet BBQ Et Burger ve Patates Kızartması",
+      "price": "₺480.00",
+      "desc": "Çıtır soğan, Sweet BBQ, Füme, Cheddar peyniri ve Patates Kızartması     Extra Cheddar + 30₺   Extra Et + 190₺",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Big Burger Menü",
+      "price": "₺685.00",
+      "desc": "Seçeceğiniz 1 adet burger, 3 adet Tenders, 4 adet Cheddar Bites,  Patates kızartması ile servis edilir      Bronco Burger seçimlerinde + 45₺ ilave edilir    Sweet BBQ Burger seçimlerinde + 85₺ ilave edilir   Extra Cheddar + 30₺   Extra Tavuk + 135₺",
+      "category": "Menüler"
+    },
+    {
+      "name": "Cosmos Menü",
+      "price": "₺460.00",
+      "desc": "BBQ, One Love Sos, Coleslaw, Cheddar Peyniri, Alman Turşusu Marine Edilmiş Kızarmış Tavuk + Patates+ İçecek     Extra Cheddar + 30₺   Extra Tavuk + 135₺",
+      "category": "Menüler"
+    },
+    {
+      "name": "Wonder Menü",
+      "price": "₺1,080.00",
+      "desc": "Seçeceğiniz 2 adet burger, Cheddar bites, Patates kızartması ile servis edilir     Bronco Burger seçimlerinde + 45₺ ilave edilir    Sweet BBQ Burger seçimlerinde + 85₺ ilave edilir   Extra Cheddar + 30₺   Extra Tavuk + 135₺",
+      "category": "Menüler"
+    },
+    {
+      "name": "Burger & Wings Menü",
+      "price": "₺600.00",
+      "desc": "Seçeceğiniz 1 adet burger, 3 adet Basic Wings,  Patates kızartması ile servis edilir.     Bronco Burger seçimlerinde + 45₺ ilave edilir    Sweet BBQ Burger seçimlerinde + 85₺ ilave edilir   Extra Cheddar + 30₺   Extra Tavuk + 135₺",
+      "category": "Menüler"
+    },
+    {
+      "name": "Tenders & Wings Menü",
+      "price": "₺460.00",
+      "desc": "3 adet Tenders, 3 adet Basic Wings,  Patates kızartması ile servis edilir.",
+      "category": "Menüler"
+    },
+    {
+      "name": "Tenders 5'li -  9'lu",
+      "price": "₺650.00",
+      "desc": "Wingo Chrispy Chicken Tenders, Patates kızartması ile servis edilir -",
+      "category": "Bites ve Tenders"
+    },
+    {
+      "name": "Cheddar ve Garlic Parmesan Bites 10'lu",
+      "price": "₺430.00",
+      "desc": "Soslu tavuk parçaları, Patates kızarması ile servis edilir",
+      "category": "Bites ve Tenders"
+    },
+    {
+      "name": "Cheddar Bites 10'lu",
+      "price": "₺430.00",
+      "desc": "Soslu tavuk parçaları, Patates kızarması ile servis edilir",
+      "category": "Bites ve Tenders"
+    },
+    {
+      "name": "Garlic Parmesan Bites 10'lu",
+      "price": "₺430.00",
+      "desc": "Soslu tavuk parçaları, Patates kızarması ile servis edilir",
+      "category": "Bites ve Tenders"
+    },
+    {
+      "name": "Honey Mustard Bites 10'lu",
+      "price": "₺430.00",
+      "desc": "Soslu tavuk parçaları, Patates kızarması ile servis edilir",
+      "category": "Bites ve Tenders"
+    },
+    {
+      "name": "Spicy Garlic Hot Bites 10'lu",
+      "price": "₺430.00",
+      "desc": "Soslu tavuk parçaları, Patates kızarması ile servis edilir",
+      "category": "Bites ve Tenders"
+    },
+    {
+      "name": "Mango Chutney Bites 10'lu",
+      "price": "₺430.00",
+      "desc": "Soslu tavuk parçaları, Patates kızarması ile servis edilir",
+      "category": "Bites ve Tenders"
+    },
+    {
+      "name": "BBQ Bites 10'lu",
+      "price": "₺430.00",
+      "desc": "Soslu tavuk parçaları, Patates kızarması ile servis edilir",
+      "category": "Bites ve Tenders"
+    },
+    {
+      "name": "Sweet Chili Bites 10'lu",
+      "price": "₺430.00",
+      "desc": "Soslu tavuk parçaları, Patates kızarması ile servis edilir",
+      "category": "Bites ve Tenders"
+    },
+    {
+      "name": "Basic Wings 6'lı - 9'lu",
+      "price": "₺625.00",
+      "desc": "6'lı veya 9'lu olarak, patates kızartması ile servis edilir -",
+      "category": "Wings"
+    },
+    {
+      "name": "Buffalo Wings  6'lı - 9'lu",
+      "price": "₺650.00",
+      "desc": "6'lı veya 9'lu olarak, patates kızartması ile servis edilir -",
+      "category": "Wings"
+    },
+    {
+      "name": "Garlic Parmesan Wings  6'lı - 9'lu",
+      "price": "₺650.00",
+      "desc": "6'lı veya 9'lu olarak, patates kızartması ile servis edilir -",
+      "category": "Wings"
+    },
+    {
+      "name": "Mango Chutney Wings  6'lı - 9'lu",
+      "price": "₺650.00",
+      "desc": "6'lı veya 9'lu olarak, patates kızartması ile servis edilir -",
+      "category": "Wings"
+    },
+    {
+      "name": "Cheddar Wings  6'lı - 9'lu",
+      "price": "₺650.00",
+      "desc": "6'lı veya 9'lu olarak, patates kızartması ile servis edilir -",
+      "category": "Wings"
+    },
+    {
+      "name": "BBQ Wings  6'lı - 9'lu",
+      "price": "₺650.00",
+      "desc": "6'lı veya 9'lu olarak, patates kızartması ile servis edilir -",
+      "category": "Wings"
+    },
+    {
+      "name": "Honey Mustard Wings  6'lı - 9'lu",
+      "price": "₺650.00",
+      "desc": "6'lı veya 9'lu olarak, patates kızartması ile servis edilir -",
+      "category": "Wings"
+    },
+    {
+      "name": "Spicy Garlic Hot Wings  6'lı - 9'lu",
+      "price": "₺650.00",
+      "desc": "6'lı veya 9'lu olarak, patates kızartması ile servis edilir -",
+      "category": "Wings"
+    },
+    {
+      "name": "Extra Hot Wings  6'lı - 9'lu",
+      "price": "₺650.00",
+      "desc": "6'lı veya 9'lu olarak, patates kızartması ile servis edilir -",
+      "category": "Wings"
+    },
+    {
+      "name": "Cheddar Sos",
+      "price": "₺30.00",
+      "desc": "",
+      "category": "Soslar"
+    },
+    {
+      "name": "Spicy Garlic Hot Sos",
+      "price": "₺30.00",
+      "desc": "",
+      "category": "Soslar"
+    },
+    {
+      "name": "Honey Mustard Sos",
+      "price": "₺30.00",
+      "desc": "",
+      "category": "Soslar"
+    },
+    {
+      "name": "White Sos",
+      "price": "₺30.00",
+      "desc": "",
+      "category": "Soslar"
+    },
+    {
+      "name": "Buffalo Sos",
+      "price": "₺40.00",
+      "desc": "",
+      "category": "Soslar"
+    },
+    {
+      "name": "Space Sos",
+      "price": "₺30.00",
+      "desc": "",
+      "category": "Soslar"
+    },
+    {
+      "name": "Mango Chutney Sos",
+      "price": "₺30.00",
+      "desc": "",
+      "category": "Soslar"
+    },
+    {
+      "name": "Sweet Chili Sos",
+      "price": "₺30.00",
+      "desc": "",
+      "category": "Soslar"
+    },
+    {
+      "name": "Chipotle Mayonez Sos",
+      "price": "₺20.00",
+      "desc": "",
+      "category": "Soslar"
+    },
+    {
+      "name": "Garlic Sos",
+      "price": "₺30.00",
+      "desc": "",
+      "category": "Soslar"
+    },
+    {
+      "name": "Ranch Sos",
+      "price": "₺30.00",
+      "desc": "",
+      "category": "Soslar"
+    },
+    {
+      "name": "Patates Kızartması",
+      "price": "₺165.00",
+      "desc": "",
+      "category": "Extralar"
+    },
+    {
+      "name": "Parmesan Sarımsaklı Patates Kızartması",
+      "price": "₺195.00",
+      "desc": "",
+      "category": "Extralar"
+    },
+    {
+      "name": "Adet Spicy Tender",
+      "price": "₺80.00",
+      "desc": "",
+      "category": "Extralar"
+    },
+    {
+      "name": "Adet Basic Wing",
+      "price": "₺80.00",
+      "desc": "",
+      "category": "Extralar"
+    },
+    {
+      "name": "Coca Cola / Cola Turka",
+      "price": "₺80.00",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Sprite",
+      "price": "₺80.00",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Niğde Gazozu",
+      "price": "₺70.00",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Özer Hisar Ayran",
+      "price": "₺80.00",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Fuse Tea Şeftali / Limon /  Mango ve Ananas",
+      "price": "₺80.00",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Fanta",
+      "price": "₺80.00",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Su",
+      "price": "₺40.00",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Soda",
+      "price": "₺50.00",
+      "desc": "",
+      "category": "İçecekler"
+    }
+  ]
+},
+
   "7194": {
     "name": "Deep Blue Fish & Chips Beşiktaş",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/ifct/deep-blue-fish-and-chips-ifct",
