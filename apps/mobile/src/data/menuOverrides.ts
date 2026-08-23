@@ -16833,4 +16833,487 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     }
   ]
 }
+,
+  "7235": {
+  "name": "Tatlı Cafe Ekler & Profiterol",
+  "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/w8a5/tatli-cafe-ekler-and-profiterol",
+  "sourceName": "Yemeksepeti canlı Tatlı Cafe Ekler & Profiterol menüsü",
+  "verifiedAt": "2026-08-23",
+  "items": [
+    {
+      "name": "Aşure",
+      "price": "318,75 TL",
+      "desc": "",
+      "category": "Tatlı Cafe Special Tatlılar"
+    },
+    {
+      "name": "Çikolata Soslu Bask Cheesecake (Dilim)",
+      "price": "333,75 TL",
+      "desc": "",
+      "category": "Tatlı Cafe Special Tatlılar"
+    },
+    {
+      "name": "Ev Yapımı Frambuaz Soslu Bask Cheesecake (Dilim)",
+      "price": "333,75 TL",
+      "desc": "",
+      "category": "Tatlı Cafe Special Tatlılar"
+    },
+    {
+      "name": "Ev Yapımı Hayrabolu Peynir Tatlısı (3 Adet)",
+      "price": "405 TL",
+      "desc": "",
+      "category": "Tatlı Cafe Special Tatlılar"
+    },
+    {
+      "name": "İrmikli Şam Tatlısı (4 Adet)",
+      "price": "206,25 TL",
+      "desc": "",
+      "category": "Tatlı Cafe Special Tatlılar"
+    },
+    {
+      "name": "Ev Yapımı Kaymaklı Fıstıklı Şambali (2 Dilim)",
+      "price": "165 TL",
+      "desc": "",
+      "category": "Tatlı Cafe Special Tatlılar"
+    },
+    {
+      "name": "Hayrabolu Peynir Tatlısı (6 Adet)",
+      "price": "742,50 TL",
+      "desc": "",
+      "category": "Tatlı Cafe Special Tatlılar"
+    },
+    {
+      "name": "Ev Yapımı Kaymaklı Hayrabolu Tatlısı (3 Adet)",
+      "price": "487,50 TL",
+      "desc": "",
+      "category": "Tatlı Cafe Special Tatlılar"
+    },
+    {
+      "name": "Ev Yapımı Hayrabolu Peynir Tatlısı (Adet)",
+      "price": "135 TL",
+      "desc": "",
+      "category": "Tatlı Cafe Special Tatlılar"
+    },
+    {
+      "name": "Ev Yapımı Revani (Dilim)",
+      "price": "210 TL",
+      "desc": "",
+      "category": "Tatlı Cafe Special Tatlılar"
+    },
+    {
+      "name": "Vişneli Ev Yapımı Revani dilim",
+      "price": "285 TL",
+      "desc": "",
+      "category": "Tatlı Cafe Special Tatlılar"
+    },
+    {
+      "name": "Biscoff Spoonful cup",
+      "price": "311,25 TL",
+      "desc": "",
+      "category": "Sütlü Çikolatalı Tatlılar"
+    },
+    {
+      "name": "Nutella Cream Puff Paris Ekler (6 Adet)",
+      "price": "311,25 TL",
+      "desc": "",
+      "category": "Sütlü Çikolatalı Tatlılar"
+    },
+    {
+      "name": "Sütlaç",
+      "price": "311,25 TL",
+      "desc": "",
+      "category": "Sütlü Çikolatalı Tatlılar"
+    },
+    {
+      "name": "Tavukgöğsü Tatlısı",
+      "price": "300 TL",
+      "desc": "",
+      "category": "Sütlü Çikolatalı Tatlılar"
+    },
+    {
+      "name": "Bademli Keşkül",
+      "price": "300 TL",
+      "desc": "",
+      "category": "Sütlü Çikolatalı Tatlılar"
+    },
+    {
+      "name": "Çilekli Tiramisu Cup",
+      "price": "318,75 TL",
+      "desc": "",
+      "category": "Sütlü Çikolatalı Tatlılar"
+    },
+    {
+      "name": "Oreolu Tiramisu Cup",
+      "price": "318,75 TL",
+      "desc": "",
+      "category": "Sütlü Çikolatalı Tatlılar"
+    },
+    {
+      "name": "Yaban Mersinli Çilekli Tiramisu Cup",
+      "price": "318,75 TL",
+      "desc": "",
+      "category": "Sütlü Çikolatalı Tatlılar"
+    },
+    {
+      "name": "Klasik Tiramisu Cup",
+      "price": "300 TL",
+      "desc": "",
+      "category": "Sütlü Çikolatalı Tatlılar"
+    },
+    {
+      "name": "Kazandibi",
+      "price": "300 TL",
+      "desc": "",
+      "category": "Sütlü Çikolatalı Tatlılar"
+    },
+    {
+      "name": "Muzlu Mini Rulo Pasta (3 Adet)",
+      "price": "262,50 TL",
+      "desc": "",
+      "category": "Sütlü Çikolatalı Tatlılar"
+    },
+    {
+      "name": "Çömlekte Fındıklı Fırın Sütlaç",
+      "price": "296,25 TL",
+      "desc": "",
+      "category": "Sütlü Çikolatalı Tatlılar"
+    },
+    {
+      "name": "Çikolatalı Çiçekli Mini Rulo Pasta (3 Adet)",
+      "price": "300 TL",
+      "desc": "",
+      "category": "Sütlü Çikolatalı Tatlılar"
+    },
+    {
+      "name": "6'lı Makaron",
+      "price": "224,25 TL",
+      "desc": "",
+      "category": "Sütlü Çikolatalı Tatlılar"
+    },
+    {
+      "name": "Karamelli Trileçe",
+      "price": "300 TL",
+      "desc": "",
+      "category": "Sütlü Çikolatalı Tatlılar"
+    },
+    {
+      "name": "Frambuazlı Trileçe",
+      "price": "300 TL",
+      "desc": "",
+      "category": "Sütlü Çikolatalı Tatlılar"
+    },
+    {
+      "name": "Çikolatalı Supangle",
+      "price": "311,25 TL",
+      "desc": "",
+      "category": "Sütlü Çikolatalı Tatlılar"
+    },
+    {
+      "name": "Çikolatalı Profiterol (Cam Kavanoz)",
+      "price": "311,25 TL",
+      "desc": "",
+      "category": "Sütlü Çikolatalı Tatlılar"
+    },
+    {
+      "name": "Spoonful Cup",
+      "price": "311,25 TL",
+      "desc": "",
+      "category": "Sütlü Çikolatalı Tatlılar"
+    },
+    {
+      "name": "Meyveli Spoonful",
+      "price": "330 TL",
+      "desc": "",
+      "category": "Sütlü Çikolatalı Tatlılar"
+    },
+    {
+      "name": "Ruby Çikolatalı Spoonful",
+      "price": "300 TL",
+      "desc": "",
+      "category": "Sütlü Çikolatalı Tatlılar"
+    },
+    {
+      "name": "Kitkat Sarma Rulo Pasta (3 Adet)",
+      "price": "311,25 TL",
+      "desc": "",
+      "category": "Sütlü Çikolatalı Tatlılar"
+    },
+    {
+      "name": "Karışık Ekler (8 Adet)",
+      "price": "307,50 TL",
+      "desc": "",
+      "category": "Eklerler"
+    },
+    {
+      "name": "Orman Meyveli Mini Ekler Pasta (8 Adet)",
+      "price": "307,50 TL",
+      "desc": "",
+      "category": "Eklerler"
+    },
+    {
+      "name": "Belçika Çikolatalı Mini Ekler Pasta (7 Adet)",
+      "price": "307,50 TL",
+      "desc": "",
+      "category": "Eklerler"
+    },
+    {
+      "name": "Lotuslu Ekler (7 Adet)",
+      "price": "307,50 TL",
+      "desc": "",
+      "category": "Eklerler"
+    },
+    {
+      "name": "Beyaz Çikolata Dolgulu Belçika Çikolatalı Ekler (7 Adet)",
+      "price": "307,50 TL",
+      "desc": "",
+      "category": "Eklerler"
+    },
+    {
+      "name": "Cream Puff Paris Ekler (6 Adet)",
+      "price": "307,50 TL",
+      "desc": "",
+      "category": "Eklerler"
+    },
+    {
+      "name": "Limonlu Ekler 7 adet",
+      "price": "307,50 TL",
+      "desc": "",
+      "category": "Eklerler"
+    },
+    {
+      "name": "Kakaolu Klasik Şirin",
+      "price": "90 TL",
+      "desc": "",
+      "category": "İzmir Bombalar"
+    },
+    {
+      "name": "Çilekli Mag",
+      "price": "300 TL",
+      "desc": "",
+      "category": "Mags"
+    },
+    {
+      "name": "Muzlu Mag",
+      "price": "300 TL",
+      "desc": "",
+      "category": "Mags"
+    },
+    {
+      "name": "Oreolu Mag",
+      "price": "300 TL",
+      "desc": "",
+      "category": "Mags"
+    },
+    {
+      "name": "Oreolu Muzlu Mag",
+      "price": "300 TL",
+      "desc": "",
+      "category": "Mags"
+    },
+    {
+      "name": "Oreolu Çilekli Cup",
+      "price": "300 TL",
+      "desc": "",
+      "category": "Mags"
+    },
+    {
+      "name": "Kadayıflı Muhallebi",
+      "price": "300 TL",
+      "desc": "",
+      "category": "Mags"
+    },
+    {
+      "name": "Oreolu & Meyveli Mag",
+      "price": "300 TL",
+      "desc": "",
+      "category": "Mags"
+    },
+    {
+      "name": "Krep Kırıklı Çilekli Mag",
+      "price": "300 TL",
+      "desc": "",
+      "category": "Mags"
+    },
+    {
+      "name": "Lotuslu Çilekli Mag",
+      "price": "318,75 TL",
+      "desc": "",
+      "category": "Mags"
+    },
+    {
+      "name": "Antep Fıstıklı Soğuk Kadayıf",
+      "price": "285 TL",
+      "desc": "",
+      "category": "Baklavalar"
+    },
+    {
+      "name": "Soğuk Baklava 4 Dilim",
+      "price": "300 TL",
+      "desc": "",
+      "category": "Baklavalar"
+    },
+    {
+      "name": "Alpedo Süt Damlası Sade Dondurma (500 gr.)",
+      "price": "367,50 TL",
+      "desc": "",
+      "category": "Dondurmalar"
+    },
+    {
+      "name": "Kesme Dondurma (70 gr.)",
+      "price": "90 TL",
+      "desc": "",
+      "category": "Dondurmalar"
+    },
+    {
+      "name": "Alpedo Kol Dondurma 900 gr",
+      "price": "637,50 TL",
+      "desc": "",
+      "category": "Dondurmalar"
+    },
+    {
+      "name": "Niğde Gazozu (25 cl.)",
+      "price": "90 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Limonlu Soda (20 cl.)",
+      "price": "60 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Su (33 cl.)",
+      "price": "30 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Lipton Ice Tea Şeftali (25 cl.)",
+      "price": "90 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Coca-Cola (25 cl.)",
+      "price": "90 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Soda (20 cl.)",
+      "price": "60 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Sütlü Çikolatalı Antep Fıstıklı Soğuk Baklava (16 Dilim)",
+      "price": "1.143,75 TL",
+      "desc": "",
+      "category": "Şerbetli Tatlılar & Soğuk Baklavalar & Kadayıflar"
+    },
+    {
+      "name": "Sütlü Çikolatalı Antep Fıstıklı Soğuk Baklava (8 Dilim)",
+      "price": "592,50 TL",
+      "desc": "",
+      "category": "Şerbetli Tatlılar & Soğuk Baklavalar & Kadayıflar"
+    },
+    {
+      "name": "Antep Fıstıklı Sütlü Soğuk Kadayıf (2,5 Dilim)",
+      "price": "592,50 TL",
+      "desc": "",
+      "category": "Şerbetli Tatlılar & Soğuk Baklavalar & Kadayıflar"
+    },
+    {
+      "name": "İrmikli Şambali Tatlısı (500 gr.)",
+      "price": "431,25 TL",
+      "desc": "",
+      "category": "Şerbetli Tatlılar & Soğuk Baklavalar & Kadayıflar"
+    },
+    {
+      "name": "Revani Ev Yapımı 500 gr",
+      "price": "442,50 TL",
+      "desc": "",
+      "category": "Şerbetli Tatlılar & Soğuk Baklavalar & Kadayıflar"
+    },
+    {
+      "name": "Nutella Kremalı Paris Ekler (12 Adet)",
+      "price": "562,50 TL",
+      "desc": "",
+      "category": "Kiloluk Ekler & Profiteroller"
+    },
+    {
+      "name": "Ekstra Profiterol (500 gr.)",
+      "price": "577,50 TL",
+      "desc": "",
+      "category": "Kiloluk Ekler & Profiteroller"
+    },
+    {
+      "name": "Belçika Çikolatalı Mini Ekler Pasta (13 Adet)",
+      "price": "562,50 TL",
+      "desc": "",
+      "category": "Kiloluk Ekler & Profiteroller"
+    },
+    {
+      "name": "Beyaz Çikolata Dolgulu Belçika Çikolatalı Mini Ekler Pasta (1 kg.)",
+      "price": "937,50 TL",
+      "desc": "",
+      "category": "Kiloluk Ekler & Profiteroller"
+    },
+    {
+      "name": "Profiterol (1 kg.)",
+      "price": "937,50 TL",
+      "desc": "",
+      "category": "Kiloluk Ekler & Profiteroller"
+    },
+    {
+      "name": "Beyaz Çikolata Dolgulu Belçika Çikolatalı Ekler (13 Adet",
+      "price": "562,50 TL",
+      "desc": "",
+      "category": "Kiloluk Ekler & Profiteroller"
+    },
+    {
+      "name": "Karışık Ekler (13 Adet)",
+      "price": "562,50 TL",
+      "desc": "",
+      "category": "Kiloluk Ekler & Profiteroller"
+    },
+    {
+      "name": "Karışık Mini Ekler Pasta (1 kg.)",
+      "price": "937,50 TL",
+      "desc": "",
+      "category": "Kiloluk Ekler & Profiteroller"
+    },
+    {
+      "name": "Mini Ekler Pasta (1 kg.)",
+      "price": "937,50 TL",
+      "desc": "",
+      "category": "Kiloluk Ekler & Profiteroller"
+    },
+    {
+      "name": "Karışık Ekler & Mini Rulo Pasta (7 Ekler 3 Rulo pasta)",
+      "price": "562,50 TL",
+      "desc": "",
+      "category": "Kiloluk Ekler & Profiteroller"
+    },
+    {
+      "name": "Çikolatalı & Çilekli Mini Rulo Pasta (500 gr.)",
+      "price": "562,50 TL",
+      "desc": "",
+      "category": "Kiloluk Ekler & Profiteroller"
+    },
+    {
+      "name": "Kokteyl Kazandibi (500 gr.)",
+      "price": "592,50 TL",
+      "desc": "",
+      "category": "Kiloluk Ekler & Profiteroller"
+    },
+    {
+      "name": "Kitkat Sarma Mini Rulo 500 gr",
+      "price": "562,50 TL",
+      "desc": "",
+      "category": "Kiloluk Ekler & Profiteroller"
+    }
+  ]
+}
 };
