@@ -37675,5 +37675,123 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       "category": "Gözlemeler"
     }
   ]
+},
+  "7208": {
+  "name": "Kaizen Ramen Bar Beşiktaş",
+  "sourceUrl": "https://www.migros.com.tr/yemek/kaizen-ramen-bar-besiktas-visnezade-mah-st-26505",
+  "sourceName": "Migros Yemek canlı menüsü (sayfa başlığı: Kaizen Ramen Bar, Beşiktaş (Vişnezade Mah.); resmi Kaizen exact Vişnezade Özgür Sokağı No:2/A şube eşleşmesi)",
+  "verifiedAt": "2026-08-23",
+  "items": [
+    {
+      "name": "Edamame",
+      "price": "159",
+      "category": "Hot Starters"
+    },
+    {
+      "name": "Japanese Gyoza",
+      "price": "190",
+      "category": "Hot Starters"
+    },
+    {
+      "name": "Chicken Karaage",
+      "price": "214",
+      "category": "Hot Starters"
+    },
+    {
+      "name": "Kimchi",
+      "price": "105",
+      "category": "Cold Starters"
+    },
+    {
+      "name": "Enoki Mushroom",
+      "price": "169",
+      "category": "Cold Starters"
+    },
+    {
+      "name": "Miso Ramen",
+      "price": "303",
+      "category": "House Of Ramen"
+    },
+    {
+      "name": "Chicken Tartare Ramen",
+      "price": "315",
+      "category": "House Of Ramen"
+    },
+    {
+      "name": "Tantanmen Ramen",
+      "price": "326",
+      "category": "House Of Ramen"
+    },
+    {
+      "name": "Chicken Shio Ramen",
+      "price": "334",
+      "category": "House Of Ramen"
+    },
+    {
+      "name": "Beef Shoyu Ramen",
+      "price": "416",
+      "category": "House Of Ramen"
+    },
+    {
+      "name": "Duck Shoyu Ramen",
+      "price": "433",
+      "category": "House Of Ramen"
+    },
+    {
+      "name": "Tonkotsu Ramen",
+      "price": "457",
+      "category": "House Of Ramen"
+    },
+    {
+      "name": "Coconut Mochi (1 Adet)",
+      "price": "82",
+      "category": "Desserts"
+    },
+    {
+      "name": "Matcha Mochi (1 Adet)",
+      "price": "86",
+      "category": "Desserts"
+    },
+    {
+      "name": "Su (25 Cl)",
+      "price": "33",
+      "category": "Soft Drinks"
+    },
+    {
+      "name": "Su (75 Cl)",
+      "price": "66",
+      "category": "Soft Drinks"
+    },
+    {
+      "name": "Uludağ Premium Soda (25 Cl)",
+      "price": "55",
+      "category": "Soft Drinks"
+    },
+    {
+      "name": "Uludağ Premium Soda (75 Cl)",
+      "price": "100",
+      "category": "Soft Drinks"
+    },
+    {
+      "name": "Beyoğlu Zencefilli Gazoz",
+      "price": "66",
+      "category": "Soft Drinks"
+    },
+    {
+      "name": "Fuse Tea",
+      "price": "70",
+      "category": "Soft Drinks"
+    },
+    {
+      "name": "Green Tea Lemonade",
+      "price": "130",
+      "category": "Soft Drinks"
+    },
+    {
+      "name": "Matcha Lemonade",
+      "price": "140",
+      "category": "Soft Drinks"
+    }
+  ]
 }
 };
