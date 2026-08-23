@@ -22677,4 +22677,325 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     }
   ]
 }
+,
+  "7248": {
+  "name": "Araki İstanbul",
+  "sourceUrl": "https://www.arakiistanbulocakbasi.com/menu",
+  "sourceName": "Araki İstanbul resmi menüsü",
+  "verifiedAt": "2026-08-23",
+  "items": [
+    {
+      "name": "Çiğ Köfte",
+      "price": "",
+      "desc": "",
+      "category": "Soğuk Meze Çeşitleri"
+    },
+    {
+      "name": "Şakşuka",
+      "price": "",
+      "desc": "",
+      "category": "Soğuk Meze Çeşitleri"
+    },
+    {
+      "name": "Köpeoğlu",
+      "price": "",
+      "desc": "",
+      "category": "Soğuk Meze Çeşitleri"
+    },
+    {
+      "name": "Albiber",
+      "price": "",
+      "desc": "",
+      "category": "Soğuk Meze Çeşitleri"
+    },
+    {
+      "name": "Atom",
+      "price": "",
+      "desc": "",
+      "category": "Soğuk Meze Çeşitleri"
+    },
+    {
+      "name": "Fava",
+      "price": "",
+      "desc": "",
+      "category": "Soğuk Meze Çeşitleri"
+    },
+    {
+      "name": "Pancar Turşusu",
+      "price": "",
+      "desc": "",
+      "category": "Soğuk Meze Çeşitleri"
+    },
+    {
+      "name": "Haydari",
+      "price": "",
+      "desc": "",
+      "category": "Soğuk Meze Çeşitleri"
+    },
+    {
+      "name": "Semiz Otu",
+      "price": "",
+      "desc": "",
+      "category": "Soğuk Meze Çeşitleri"
+    },
+    {
+      "name": "Girit Ezme",
+      "price": "",
+      "desc": "",
+      "category": "Soğuk Meze Çeşitleri"
+    },
+    {
+      "name": "Pilaki",
+      "price": "",
+      "desc": "",
+      "category": "Soğuk Meze Çeşitleri"
+    },
+    {
+      "name": "Acılı Ezme",
+      "price": "",
+      "desc": "",
+      "category": "Soğuk Meze Çeşitleri"
+    },
+    {
+      "name": "Pazı",
+      "price": "",
+      "desc": "",
+      "category": "Soğuk Meze Çeşitleri"
+    },
+    {
+      "name": "Narlı Maydonoz Salatası",
+      "price": "",
+      "desc": "",
+      "category": "Soğuk Meze Çeşitleri"
+    },
+    {
+      "name": "Enginar",
+      "price": "",
+      "desc": "",
+      "category": "Soğuk Meze Çeşitleri"
+    },
+    {
+      "name": "Zeytinyağlı Yaprak Sarma",
+      "price": "",
+      "desc": "",
+      "category": "Soğuk Meze Çeşitleri"
+    },
+    {
+      "name": "Havuç Tarator",
+      "price": "",
+      "desc": "",
+      "category": "Soğuk Meze Çeşitleri"
+    },
+    {
+      "name": "Süzme Yoğurt",
+      "price": "",
+      "desc": "",
+      "category": "Soğuk Meze Çeşitleri"
+    },
+    {
+      "name": "Beyaz Peynir",
+      "price": "",
+      "desc": "",
+      "category": "Soğuk Meze Çeşitleri"
+    },
+    {
+      "name": "Kavun & Karpuz",
+      "price": "",
+      "desc": "",
+      "category": "Soğuk Meze Çeşitleri"
+    },
+    {
+      "name": "Adana Kebap",
+      "price": "",
+      "desc": "",
+      "category": "Kebap & Et"
+    },
+    {
+      "name": "Urfa Kebap",
+      "price": "",
+      "desc": "",
+      "category": "Kebap & Et"
+    },
+    {
+      "name": "Araki Beyti",
+      "price": "",
+      "desc": "",
+      "category": "Kebap & Et"
+    },
+    {
+      "name": "Zırh Kebap",
+      "price": "",
+      "desc": "",
+      "category": "Kebap & Et"
+    },
+    {
+      "name": "Domatesli Kebap",
+      "price": "",
+      "desc": "",
+      "category": "Kebap & Et"
+    },
+    {
+      "name": "Patlıcanlı Kebap",
+      "price": "",
+      "desc": "",
+      "category": "Kebap & Et"
+    },
+    {
+      "name": "Fıstıklı Kebap",
+      "price": "",
+      "desc": "",
+      "category": "Kebap & Et"
+    },
+    {
+      "name": "Cevizli Kebap",
+      "price": "",
+      "desc": "",
+      "category": "Kebap & Et"
+    },
+    {
+      "name": "Altı Ezme Kuzu Kebap",
+      "price": "",
+      "desc": "",
+      "category": "Kebap & Et"
+    },
+    {
+      "name": "Çökertme Kebap",
+      "price": "",
+      "desc": "",
+      "category": "Kebap & Et"
+    },
+    {
+      "name": "Beyti Sarma",
+      "price": "",
+      "desc": "",
+      "category": "Kebap & Et"
+    },
+    {
+      "name": "Ali Nazik",
+      "price": "",
+      "desc": "",
+      "category": "Kebap & Et"
+    },
+    {
+      "name": "Kuzu Şiş",
+      "price": "",
+      "desc": "",
+      "category": "Kebap & Et"
+    },
+    {
+      "name": "Çöp Şiş",
+      "price": "",
+      "desc": "",
+      "category": "Kebap & Et"
+    },
+    {
+      "name": "Kuzu Pirzola",
+      "price": "",
+      "desc": "",
+      "category": "Kebap & Et"
+    },
+    {
+      "name": "Yağlı Kara",
+      "price": "",
+      "desc": "",
+      "category": "Kebap & Et"
+    },
+    {
+      "name": "Kuzu Lokum",
+      "price": "",
+      "desc": "",
+      "category": "Kebap & Et"
+    },
+    {
+      "name": "Saç Kavurma",
+      "price": "",
+      "desc": "",
+      "category": "Kebap & Et"
+    },
+    {
+      "name": "Çoban Kavurma",
+      "price": "",
+      "desc": "",
+      "category": "Kebap & Et"
+    },
+    {
+      "name": "Ciğer Şiş",
+      "price": "",
+      "desc": "",
+      "category": "Kebap & Et"
+    },
+    {
+      "name": "Tavuk Şiş",
+      "price": "",
+      "desc": "",
+      "category": "Kebap & Et"
+    },
+    {
+      "name": "Özel Soslu Kanat",
+      "price": "",
+      "desc": "",
+      "category": "Kebap & Et"
+    },
+    {
+      "name": "Araki Köfte",
+      "price": "",
+      "desc": "",
+      "category": "Kebap & Et"
+    },
+    {
+      "name": "İçli Köfte",
+      "price": "",
+      "desc": "",
+      "category": "Ara Sıcak Çeşitleri"
+    },
+    {
+      "name": "Kremalı İstiridye Mantarı",
+      "price": "",
+      "desc": "",
+      "category": "Ara Sıcak Çeşitleri"
+    },
+    {
+      "name": "Fırın Mantar",
+      "price": "",
+      "desc": "",
+      "category": "Ara Sıcak Çeşitleri"
+    },
+    {
+      "name": "Yaprak Ciğer",
+      "price": "",
+      "desc": "",
+      "category": "Ara Sıcak Çeşitleri"
+    },
+    {
+      "name": "Karides Güveç",
+      "price": "",
+      "desc": "",
+      "category": "Ara Sıcak Çeşitleri"
+    },
+    {
+      "name": "Tereyağlı Karides",
+      "price": "",
+      "desc": "",
+      "category": "Ara Sıcak Çeşitleri"
+    },
+    {
+      "name": "Patlıcanlı Söğürme",
+      "price": "",
+      "desc": "",
+      "category": "Ara Sıcak Çeşitleri"
+    },
+    {
+      "name": "Pastırmalı Humus",
+      "price": "",
+      "desc": "",
+      "category": "Ara Sıcak Çeşitleri"
+    },
+    {
+      "name": "Süzme Yoğurtlu Pazı Kavurması",
+      "price": "",
+      "desc": "",
+      "category": "Ara Sıcak Çeşitleri"
+    }
+  ]
+}
 };
