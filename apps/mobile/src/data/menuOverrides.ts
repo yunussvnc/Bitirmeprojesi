@@ -24933,4 +24933,61 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     }
   ]
 }
+,
+  "7261": {
+  "name": "Simirna Söğüş",
+  "sourceUrl": "https://www.yemeksepeti.com/restaurant/zf38/simirna-sogus",
+  "sourceName": "Yemeksepeti canlı menüsü (Simirna Söğüş Beylikdüzü)",
+  "verifiedAt": "2026-08-23",
+  "items": [
+    {
+      "name": "İzmir Usulü Kelle Söğüş (1 Kişilik)",
+      "price": "550 TL",
+      "desc": "Haşlanmış kuzu kelle. Mor soğan, ince doğranmış maydanoz, kabuksuz domates, özel baharat ile",
+      "category": "Kelle Söğüşler"
+    },
+    {
+      "name": "İzmir Usulü Kelle Söğüş Dürüm",
+      "price": "480 TL",
+      "desc": "Haşlanmış kuzu kelle, mor soğan, ince doğranmış maydanoz, kabuksuz domates, özel baharat",
+      "category": "Kelle Söğüşler"
+    },
+    {
+      "name": "Coca-Cola (33 cl.)",
+      "price": "90 TL",
+      "desc": "Kutu içecek",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Şalgam Suyu (33 cl.)",
+      "price": "90 TL",
+      "desc": "Pet şişe",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Ayran (17 cl.)",
+      "price": "70 TL",
+      "desc": "Küçük boy",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Su (50 cl.)",
+      "price": "50 TL",
+      "desc": "Pet şişe",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Soda (20 cl.)",
+      "price": "30 TL",
+      "desc": "Cam şişe",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Fanta (33 cl.)",
+      "price": "50 TL",
+      "desc": "Kutu içecek",
+      "category": "İçecekler"
+    }
+  ]
+}
 };
