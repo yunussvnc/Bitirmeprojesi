@@ -37862,5 +37862,133 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       "category": "Beverages"
     }
   ]
+},
+  "637": {
+  "name": "Good Coffee Roasting Co.",
+  "sourceUrl": "https://www.yemeksepeti.com/restaurant/v5vs/good-coffee-roasting",
+  "sourceName": "Yemeksepeti canlı menüsü (Good Coffee Roasting; resmi Good Coffee exact 19 Mayıs Mah. Okur Sk. No:16A Kadıköy şube eşleşmesi; Popüler tekrarları ve Poşet çıkarıldı)",
+  "verifiedAt": "2026-08-23",
+  "items": [
+    {
+      "name": "Brasil Jaguara Natural Anaerobic",
+      "price": "750",
+      "category": "Çekirdek Kahveler"
+    },
+    {
+      "name": "Rwanda Akagera Anaerobic Natural",
+      "price": "990",
+      "category": "Çekirdek Kahveler"
+    },
+    {
+      "name": "Uyan Kahve",
+      "price": "600",
+      "category": "Çekirdek Kahveler"
+    },
+    {
+      "name": "Colombia Santa Maria Geisha Washed",
+      "price": "1300",
+      "category": "Çekirdek Kahveler"
+    },
+    {
+      "name": "Brasil Karma Fruta",
+      "price": "650",
+      "category": "Çekirdek Kahveler"
+    },
+    {
+      "name": "Ethiopia Biloya Red Natural",
+      "price": "990",
+      "category": "Çekirdek Kahveler"
+    },
+    {
+      "name": "Iced Latte",
+      "price": "290",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Iced Mocha",
+      "price": "300",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Cold Brew",
+      "price": "270",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Iced Americano",
+      "price": "270",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Cookie",
+      "price": "300",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Good Brownie",
+      "price": "300",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Vegan Lemon Cake",
+      "price": "280",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Vegan Good Bites",
+      "price": "180",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Yaban Mersinli Tart",
+      "price": "320",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Banana Bread",
+      "price": "290",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Americano (Küçük)",
+      "price": "240",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Americano (Büyük)",
+      "price": "270",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Latte (Küçük)",
+      "price": "260",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Latte (Büyük)",
+      "price": "280",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Filtre Kahve (Küçük)",
+      "price": "240",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Filtre Kahve (Büyük)",
+      "price": "260",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Mocha",
+      "price": "280",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Bergamotlu Siyah Çay",
+      "price": "100",
+      "category": "Sıcak İçecekler"
+    }
+  ]
 }
 };
