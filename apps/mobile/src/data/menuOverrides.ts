@@ -25016,5 +25016,103 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       "category": "Kahveler"
     }
   ]
+},
+  "7264": {
+  "name": "Senfoni Restoran & Cafe",
+  "sourceUrl": "https://www.menum.co/restoran-senfoni",
+  "sourceName": "Menüm.co QR menüsü (exact Adnan Kahveci Kışla Cd. No:36 adresi)",
+  "verifiedAt": "2026-08-23",
+  "items": [
+    {
+      "name": "Patates Kızartması",
+      "price": "150",
+      "desc": "",
+      "category": "Atıştırmalıklar"
+    },
+    {
+      "name": "Paylaşım Sepeti",
+      "price": "350",
+      "desc": "Sigara Böreği, Sosis, Soğan Halkası, Mozzarella Stick, Patates Kızartması.",
+      "category": "Atıştırmalıklar"
+    },
+    {
+      "name": "Sigara Böreği (Patates ile)",
+      "price": "120",
+      "desc": "4 adet; patates ile.",
+      "category": "Atıştırmalıklar"
+    },
+    {
+      "name": "Nachos Peynirli",
+      "price": "250",
+      "desc": "Sıcak peynirli, guacamole sos ve nachos cips.",
+      "category": "Atıştırmalıklar"
+    },
+    {
+      "name": "Nachos Tavuk",
+      "price": "310",
+      "desc": "Tavuk parçaları, sıcak peynirli, guacamole sos ve nachos cips.",
+      "category": "Atıştırmalıklar"
+    },
+    {
+      "name": "Kiremitte Yaprak Ciğer",
+      "price": "320",
+      "desc": "",
+      "category": "Ara Sıcaklar"
+    },
+    {
+      "name": "Sigara Böreği (4 Adet)",
+      "price": "80",
+      "desc": "4 adet.",
+      "category": "Ara Sıcaklar"
+    },
+    {
+      "name": "Günün Çorbası",
+      "price": "120",
+      "desc": "Her güne özel Senfoni çorbası.",
+      "category": "Ara Sıcaklar"
+    },
+    {
+      "name": "Karides Güveç",
+      "price": "550",
+      "desc": "",
+      "category": "Ara Sıcaklar"
+    },
+    {
+      "name": "Paçanga Böreği",
+      "price": "190",
+      "desc": "Pastırma, yeşilbiber, taze kaşar dolgulu börek, salsa sos.",
+      "category": "Ara Sıcaklar"
+    },
+    {
+      "name": "Meyve Yabağı",
+      "price": "350",
+      "desc": "Kaynakta bu şekilde yazılmıştır.",
+      "category": "Eşlikçiler"
+    },
+    {
+      "name": "Mezeler",
+      "price": "120",
+      "desc": "Mezelerimiz günlük olarak değişmektedir. Lütfen servis personelinize danışınız.",
+      "category": "Eşlikçiler"
+    },
+    {
+      "name": "Karpuz",
+      "price": "150",
+      "desc": "",
+      "category": "Eşlikçiler"
+    },
+    {
+      "name": "Kavun",
+      "price": "150",
+      "desc": "",
+      "category": "Eşlikçiler"
+    },
+    {
+      "name": "Beyaz Peynir",
+      "price": "400",
+      "desc": "",
+      "category": "Eşlikçiler"
+    }
+  ]
 }
 };
