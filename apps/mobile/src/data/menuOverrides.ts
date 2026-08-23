@@ -17316,4 +17316,265 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     }
   ]
 }
+,
+  "7236": {
+  "name": "Rakun B. Burger Cafe",
+  "sourceUrl": "https://www.migros.com.tr/yemek/rakun-b-burger-cafe-besiktas-turkali-mah-st-2fc91",
+  "sourceName": "Migros Yemek canlı Rakun B. Burger Cafe menüsü",
+  "verifiedAt": "2026-08-23",
+  "items": [
+    {
+      "name": "2'Li Cheesburger Menü",
+      "price": "990,00 TL",
+      "desc": "2 Adet Cheeseburger + 2 Adet Patates Kızartması + Coca-Cola (1 L.)",
+      "category": "Menüler"
+    },
+    {
+      "name": "2'Li Tavuk Burger Menü",
+      "price": "860,00 TL",
+      "desc": "2 Adet Chicken Burger + 2 Adet Patates Kızartması + Coca-Cola (1 L.)",
+      "category": "Menüler"
+    },
+    {
+      "name": "Tavuk Burger & Cheeseburger Menü",
+      "price": "925,00 TL",
+      "desc": "Chips Chicken + Cheeseburger + 2 Adet Patates Kızartması + Coca-Cola (1 L.)",
+      "category": "Menüler"
+    },
+    {
+      "name": "Orijinal Cheeseburger",
+      "price": "495,00 TL",
+      "desc": "150 gr. dana burger köftesi, karamelize soğan, double cheddar peyniri. Rakun B. sos. Patates kızartması ile",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Barbekü Burger",
+      "price": "505,00 TL",
+      "desc": "150 gr. dana burger köftesi, cheddar peyniri, ev yapımı mor lahana turşusu, karamelize soğan, barbekü sos. Patates kızartması ile",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Şitaki Burger",
+      "price": "580,00 TL",
+      "desc": "150 gr. dana burger köftesi, parmesan frico, şitaki mantarı, kurutulmuş domates, karamelize soğan. Patates kızartması ile",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Mantar Burger",
+      "price": "555,00 TL",
+      "desc": "150 gr. dana burger köftesi, edam peyniri, dana jambon, trüflü B sos, tereyağlı mantar. Ev yapımı patates kızartması",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Saint Jean Burger",
+      "price": "560,00 TL",
+      "desc": "150 gr. dana burger köftesi, kolot peyniri, kızarmış yumurta, tereyağlı mantar, ev yapımı mor lahana turşusu, jean sos. Patates kızartması ile",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Rakun Burger",
+      "price": "770,00 TL",
+      "desc": "300 gr. double dana burger köftesi, cheddar peyniri, füme peyniri, füme dana kaburga, dana jambon, pastırma, karamelize soğan, közlenmiş kapya biber, B. sos. Patates kızartması ile",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Kızgın Rakun Burger",
+      "price": "505,00 TL",
+      "desc": "150 gr. dana burger köftesi, cheddar peyniri, jalapeno biberi, karamelize soğan, kızgın Rakun sos. Patates kızartması ile",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Rokfor Burger",
+      "price": "560,00 TL",
+      "desc": "150 gr. dana burger köftesi, rokfor peyniri, füme dana kaburga, Rakun B. sos. Patates kızartması ile",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Smash Rakun Burger",
+      "price": "560,00 TL",
+      "desc": "130 gr. dana smash köftesi, double cheddar peyniri, çemensiz pastırma. Patates kızartması ile",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Orjinal Smash",
+      "price": "510,00 TL",
+      "desc": "130 gr. smash burger köftesi, double cheddar peyniri, Alman turşusu, Alman turşusu, hardal, ketçap, patates kızartması",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Chips Chicken Burger",
+      "price": "430,00 TL",
+      "desc": "Panelenmiş tavuk but, cheddar peyniri, Alman turşusu, rakun sos. Patates kızartması ile servis edilir.",
+      "category": "Tavuk Burgerler"
+    },
+    {
+      "name": "Hot Chicken Burger",
+      "price": "440,00 TL",
+      "desc": "Panelenmiş tavuk but ızgara, cheddar peyniri, jalapeno biber turşusu, acı sos. Patates kızartması ile",
+      "category": "Tavuk Burgerler"
+    },
+    {
+      "name": "Barbekü Tavuk Burger",
+      "price": "440,00 TL",
+      "desc": "Panelenmiş çıtır but ızgara, cheddar peyniri, mor lahana turşusu, barbekü sos. Patates kızartması ile servis edilir.",
+      "category": "Tavuk Burgerler"
+    },
+    {
+      "name": "Jungle Vegan Burger",
+      "price": "525,00 TL",
+      "desc": "(Klasik burger şeklinde sunulmamaktadır.) Vegan burger köftesi, vegan tortilla ekmeği, marul, domates, humus, ev yapımı mor lahana turşusu, ızgara havuç, ev yapımı patates kızartması",
+      "category": "Vegan Burgerler"
+    },
+    {
+      "name": "Loris Vegan Burger",
+      "price": "540,00 TL",
+      "desc": "(Klasik burger şeklinde sunulmamaktadır.) Vegan schnitzel, vegan tortilla ekmeği, marul, salatalık turşusu, humus, kibrit patates, ızgara havuç, ev yapımı patates kızartması",
+      "category": "Vegan Burgerler"
+    },
+    {
+      "name": "Çıtır Vejiburger",
+      "price": "515,00 TL",
+      "desc": "Vejeteryan schinitzel, kızarmış kaşar peyniri, kibrit patates kızartması, salatalık turşusu, mayonez, marul. Patates kızartması ile",
+      "category": "Vejetaryen Burgerler"
+    },
+    {
+      "name": "Vejiburger",
+      "price": "505,00 TL",
+      "desc": "Vejeteryan burger köftesi, cheddar peyniri, karamelize soğan, sotelenmiş mantar, marul. Patates kızartması ile",
+      "category": "Vejetaryen Burgerler"
+    },
+    {
+      "name": "Patates Kızartması",
+      "price": "180,00 TL",
+      "desc": "",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Baharatlı Patates Kızartması",
+      "price": "185,00 TL",
+      "desc": "",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Parmesanlı Patates Kızartması",
+      "price": "220,00 TL",
+      "desc": "",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Soğan Halkası (6 Adet)",
+      "price": "280,00 TL",
+      "desc": "Çıtır soğan halkası",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Mozzarella Sticks (6 Adet)",
+      "price": "300,00 TL",
+      "desc": "",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Ortaya Karışık",
+      "price": "300,00 TL",
+      "desc": "Patates kızartması, 6 adet soğan halkası, 4 adet mozzarella sticks",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Coca-Cola Zero Sugar (33 cl.)",
+      "price": "90,00 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Coca-Cola (33 cl.)",
+      "price": "90,00 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Coca-Cola Şekersiz (33 cl.)",
+      "price": "90,00 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Sprite (33 cl.)",
+      "price": "90,00 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Fanta (33 cl.)",
+      "price": "90,00 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Lipton IceTea (33 cl.)",
+      "price": "90,00 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Arslan Ayran (25 Cl.)",
+      "price": "80,00 TL",
+      "desc": "Cam şişe",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Soda (20 Cl.)",
+      "price": "55,00 TL",
+      "desc": "Cam şişe",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Su (33 cl.)",
+      "price": "45,00 TL",
+      "desc": "Cam şişe",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Hardal",
+      "price": "20,00 TL",
+      "desc": "",
+      "category": "Soslar"
+    },
+    {
+      "name": "Acı Sos",
+      "price": "20,00 TL",
+      "desc": "",
+      "category": "Soslar"
+    },
+    {
+      "name": "Rakun B. Sos",
+      "price": "20,00 TL",
+      "desc": "",
+      "category": "Soslar"
+    },
+    {
+      "name": "Mayonez",
+      "price": "15,00 TL",
+      "desc": "",
+      "category": "Soslar"
+    },
+    {
+      "name": "Meat Sos",
+      "price": "20,00 TL",
+      "desc": "",
+      "category": "Soslar"
+    },
+    {
+      "name": "Barbekü Sos",
+      "price": "20,00 TL",
+      "desc": "",
+      "category": "Soslar"
+    },
+    {
+      "name": "Ketçap",
+      "price": "15,00 TL",
+      "desc": "",
+      "category": "Soslar"
+    }
+  ]
+}
 };
