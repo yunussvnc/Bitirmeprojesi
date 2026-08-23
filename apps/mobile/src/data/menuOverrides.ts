@@ -16398,4 +16398,439 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     }
   ]
 }
+,
+  "7234": {
+  "name": "Soriso Pizza and Pasta",
+  "sourceUrl": "https://www.migros.com.tr/yemek/soriso-pizza-and-pasta-beylikduzu-baris-mah-st-19b82",
+  "sourceName": "Migros Yemek canlı Soriso Pizza and Pasta menüsü",
+  "verifiedAt": "2026-08-23",
+  "items": [
+    {
+      "name": "Antipasti Pizza (30 Cm.)",
+      "price": "187,00 TL",
+      "desc": "Domates sosu, mozarella peyniri, İtalyan usulü zeytinyağında terbiyelenmiş patlıcan, kabak, kırmızı soğan, istiridye mantarı, küf mantarı, renkli biberler, çeri domates, pesto sos",
+      "category": "Orta Boy Pizzalar (30 Cm.)"
+    },
+    {
+      "name": "Mostarda Pizza (Küçük) (30 Cm.)",
+      "price": "179,00 TL",
+      "desc": "Domates sos, mozzarella peyniri, hardallı barbekü soslu sosis dilimleri, mantar, mısır",
+      "category": "Orta Boy Pizzalar (30 Cm.)"
+    },
+    {
+      "name": "Arrosto Di Manzo Pizza (30 Cm.)",
+      "price": "250,00 TL",
+      "desc": "Domates sosu, mozarella peyniri ev yapımı roast beef dilimleri, mantar çeşitleri, pesto sos, soğan, renkli biberler",
+      "category": "Orta Boy Pizzalar (30 Cm.)"
+    },
+    {
+      "name": "Bascaiola Pizza (30 Cm.)",
+      "price": "175,00 TL",
+      "desc": "Domates sosu, mozarella peyniri, hindi jambon, pesto ile sotelenmiş istiridye, kültür mantarı, renkli biberler",
+      "category": "Orta Boy Pizzalar (30 Cm.)"
+    },
+    {
+      "name": "Bufalina Pizza (30 Cm.)",
+      "price": "195,00 TL",
+      "desc": "Domates sosu, suda taze mozarella peyniri, çeri domates, pesto sos",
+      "category": "Orta Boy Pizzalar (30 Cm.)"
+    },
+    {
+      "name": "Con Pollo Barbeque Pizza (30 Cm.)",
+      "price": "180,00 TL",
+      "desc": "Domates sosu, mozarella peyniri, kızarmış tavuk dilimleri, ev yapımı barbekü sos, mantar, mısır, renkli biberler",
+      "category": "Orta Boy Pizzalar (30 Cm.)"
+    },
+    {
+      "name": "Della Casa Pizza (30 Cm.)",
+      "price": "195,00 TL",
+      "desc": "Domates sosu, mozarella peyniri, bolognese kıyma sosu, sucuk, mısır, acılı sarımsaklı sos, parmesan peyniri",
+      "category": "Orta Boy Pizzalar (30 Cm.)"
+    },
+    {
+      "name": "Diavolo Pizza (30 Cm.)",
+      "price": "195,00 TL",
+      "desc": "Domates sosu, mozarella peyniri, ev yapımı acılı sarımsak sosunda yoğurulmuş kangal sucuk dilimleri, mantar çeşitleri, kırmızı soğan",
+      "category": "Orta Boy Pizzalar (30 Cm.)"
+    },
+    {
+      "name": "El Tocino Pizza (30 Cm.)",
+      "price": "210,00 TL",
+      "desc": "Domates sosu, mozarella peyniri, pastırma, sucuk, hindi jambon, sosis, mantar çeşitleri, pesto sos",
+      "category": "Orta Boy Pizzalar (30 Cm.)"
+    },
+    {
+      "name": "Frutti Di Mare Pizza (30 Cm.)",
+      "price": "225,00 TL",
+      "desc": "Domates sosu, mozarella peyniri, tavada sotelenmiş deniz ürünleri, kırmızı soğan, mısır, sarımsaklı pesto sos, dereotu",
+      "category": "Orta Boy Pizzalar (30 Cm.)"
+    },
+    {
+      "name": "Quattro Formaggi Pizza (30 Cm.)",
+      "price": "195,00 TL",
+      "desc": "Domates sosu, mozarella peyniri, beyaz peynir, parmesan peyniri, zeytin dilimleri, pasto sos",
+      "category": "Orta Boy Pizzalar (30 Cm.)"
+    },
+    {
+      "name": "Margaritha Pizza (30 Cm.)",
+      "price": "165,00 TL",
+      "desc": "Domates sosu, mozarella peyniri, çeri domates",
+      "category": "Orta Boy Pizzalar (30 Cm.)"
+    },
+    {
+      "name": "Ortalana Pizza (30 Cm.)",
+      "price": "290,00 TL",
+      "desc": "Domates sosu, mozarella peyniri, pastırma dilimleri, mantar çeşitleri, kırmızı soğan, acılı sarımsaklı sos",
+      "category": "Orta Boy Pizzalar (30 Cm.)"
+    },
+    {
+      "name": "Panne All Aglio Pizza (30 Cm.)",
+      "price": "95,00 TL",
+      "desc": "Domates sosu, mozarella peyniri, sarımsak, pesto soslu pizza ekmeği",
+      "category": "Orta Boy Pizzalar (30 Cm.)"
+    },
+    {
+      "name": "Salsiccia Pizza (30 Cm.)",
+      "price": "189,00 TL",
+      "desc": "Domates sosu, mozzarella peyniri, sucuk, sosis, mısır",
+      "category": "Orta Boy Pizzalar (30 Cm.)"
+    },
+    {
+      "name": "Soriso Speciale Pizza (30 Cm.)",
+      "price": "300,00 TL",
+      "desc": "Domates sosu, mozarella peyniri, kızarmış dana bonfile dilimleri, pesto sosunda yoğurulmuş, istiridye mantarı, küf mantarı, kırmızı soğan, renkli biberler, roka, parmesan peyniri",
+      "category": "Orta Boy Pizzalar (30 Cm.)"
+    },
+    {
+      "name": "Spinaci Pizza (30 Cm.)",
+      "price": "182,00 TL",
+      "desc": "Domates sosu, mozarella peyniri, tavada ıspanak, kırmızı soğan, sarımsak, beyaz peynir, mısır",
+      "category": "Orta Boy Pizzalar (30 Cm.)"
+    },
+    {
+      "name": "Tonna E'cipolla Pizza (30 Cm.)",
+      "price": "195,00 TL",
+      "desc": "Domates sosu, mozarella peyniri, ton balığı, kırmızı soğan, mısır, renkli biberler, sarımsaklı pesto sos, dereotu",
+      "category": "Orta Boy Pizzalar (30 Cm.)"
+    },
+    {
+      "name": "Costola Pizza (30 Cm.)",
+      "price": "255,00 TL",
+      "desc": "Domates sosu, mozzarella peyniri, dana kaburga eti, soğan, mantar",
+      "category": "Orta Boy Pizzalar (30 Cm.)"
+    },
+    {
+      "name": "Funghi Pizza (30 Cm.)",
+      "price": "185,00 TL",
+      "desc": "Domates sos, mozzarella peyniri, mantar, pesto sos",
+      "category": "Orta Boy Pizzalar (30 Cm.)"
+    },
+    {
+      "name": "Antipasti Pizza (35 Cm.)",
+      "price": "285,00 TL",
+      "desc": "Domates sosu, mozarella peyniri, İtalyan usulü zeytinyağında terbiyelenmiş patlıcan, kabak, kırmızı soğan, istiridye mantarı, küf mantarı, renkli biberler, çeri domates, pesto sos",
+      "category": "Büyük Boy Pizzalar (35 Cm.)"
+    },
+    {
+      "name": "Mostarda Pizza (35 Cm.)",
+      "price": "280,00 TL",
+      "desc": "Domates sos, mozzarella peyniri, hardallı ve barbekü soslu sosis dilimleri, mantar, mısır",
+      "category": "Büyük Boy Pizzalar (35 Cm.)"
+    },
+    {
+      "name": "Arrosto Di Manzo Pizza (35 Cm.)",
+      "price": "385,00 TL",
+      "desc": "Domates sosu, mozarella peyniri ev yapımı roast beef dilimleri, mantar çeşitleri, pesto sos, soğan, renkli biberler",
+      "category": "Büyük Boy Pizzalar (35 Cm.)"
+    },
+    {
+      "name": "Bascaiola Pizza (35 Cm.)",
+      "price": "270,00 TL",
+      "desc": "Domates sosu, mozarella peyniri, hindi jambon, pesto ile sotelenmiş istiridye, kültür mantarı, renkli biberler",
+      "category": "Büyük Boy Pizzalar (35 Cm.)"
+    },
+    {
+      "name": "Bufalina Pizza (35 Cm.)",
+      "price": "300,00 TL",
+      "desc": "Domates sosu, suda taze mozarella peyniri, çeri domates, pesto sos",
+      "category": "Büyük Boy Pizzalar (35 Cm.)"
+    },
+    {
+      "name": "Con Pollo Barbeque Pizza (35 Cm.)",
+      "price": "280,00 TL",
+      "desc": "Domates sosu, mozarella peyniri, kızarmış tavuk dilimleri, ev yapımı barbekü sos, mantar, mısır, renkli biberler",
+      "category": "Büyük Boy Pizzalar (35 Cm.)"
+    },
+    {
+      "name": "Della Casa Pizza (35 Cm.)",
+      "price": "304,00 TL",
+      "desc": "Domates sosu, mozarella peyniri, bolognese kıyma sosu, sucuk, mısır, acılı sarımsaklı sos, parmesan peyniri",
+      "category": "Büyük Boy Pizzalar (35 Cm.)"
+    },
+    {
+      "name": "Diavolo Pizza (35 Cm.)",
+      "price": "304,00 TL",
+      "desc": "Domates sosu, mozarella peyniri, ev yapımı acılı sarımsak sosunda yoğurulmuş kangal sucuk dilimleri, mantar çeşitleri, kırmızı soğan",
+      "category": "Büyük Boy Pizzalar (35 Cm.)"
+    },
+    {
+      "name": "El Tocino Pizza (35 Cm.)",
+      "price": "325,00 TL",
+      "desc": "Domates sosu, mozarella peyniri, pastırma, sucuk, hindi jambon, sosis, mantar çeşitleri, pesto sos",
+      "category": "Büyük Boy Pizzalar (35 Cm.)"
+    },
+    {
+      "name": "Frutti Di Mare Pizza (35 Cm.)",
+      "price": "348,00 TL",
+      "desc": "Domates sosu, mozarella peyniri, tavada sotelenmiş deniz ürünleri, kırmızı soğan, mısır, sarımsaklı pesto sos, dereotu",
+      "category": "Büyük Boy Pizzalar (35 Cm.)"
+    },
+    {
+      "name": "Quattro Formaggi Pizza (35 Cm.)",
+      "price": "300,00 TL",
+      "desc": "Domates sosu, mozarella peyniri, beyaz peynir, parmesan peyniri, zeytin dilimleri, pasto sos",
+      "category": "Büyük Boy Pizzalar (35 Cm.)"
+    },
+    {
+      "name": "Margaritha Pizza (35 Cm.)",
+      "price": "253,00 TL",
+      "desc": "Domates sosu, mozarella peyniri, çeri domates",
+      "category": "Büyük Boy Pizzalar (35 Cm.)"
+    },
+    {
+      "name": "Ortalana Pizza (35 Cm.)",
+      "price": "450,00 TL",
+      "desc": "Domates sosu, mozarella peyniri, pastırma dilimleri, mantar çeşitleri, kırmızı soğan, acılı sarımsaklı sos",
+      "category": "Büyük Boy Pizzalar (35 Cm.)"
+    },
+    {
+      "name": "Salsiccia Pizza (35 Cm.)",
+      "price": "290,00 TL",
+      "desc": "Domates sosu, mozzarella peyniri, sucuk, sosis, mısır",
+      "category": "Büyük Boy Pizzalar (35 Cm.)"
+    },
+    {
+      "name": "Soriso Speciale Pizza (35 Cm.)",
+      "price": "460,00 TL",
+      "desc": "Domates sosu, mozarella peyniri, kızarmış dana bonfile dilimleri, pesto sosunda yoğurulmuş, istiridye mantarı, küf mantarı, kırmızı soğan, renkli biberler, roka, parmesan peyniri",
+      "category": "Büyük Boy Pizzalar (35 Cm.)"
+    },
+    {
+      "name": "Spinaci Pizza (35 Cm.)",
+      "price": "280,00 TL",
+      "desc": "Domates sosu, mozarella peyniri, tavada ıspanak, kırmızı soğan, sarımsak, beyaz peynir, mısır",
+      "category": "Büyük Boy Pizzalar (35 Cm.)"
+    },
+    {
+      "name": "Tonna E'cipolla Pizza (35 Cm.)",
+      "price": "300,00 TL",
+      "desc": "Domates sosu, mozarella peyniri, ton balığı, kırmızı soğan, mısır, renkli biberler, sarımsaklı pesto sos, dereotu",
+      "category": "Büyük Boy Pizzalar (35 Cm.)"
+    },
+    {
+      "name": "Costola Pizza (36 Cm.)",
+      "price": "395,00 TL",
+      "desc": "Domates sosu, mozzarella peyniri, dana kaburga eti, soğan, mantar",
+      "category": "Büyük Boy Pizzalar (35 Cm.)"
+    },
+    {
+      "name": "Funghi Pizza (35 Cm.)",
+      "price": "273,00 TL",
+      "desc": "Domates sos, mozzarella peyniri, mantar, pesto sos",
+      "category": "Büyük Boy Pizzalar (35 Cm.)"
+    },
+    {
+      "name": "All Arrabbiata",
+      "price": "145,00 TL",
+      "desc": "Chili domates sosu, renkli biberler, kırmızı soğan, siyah zeytin, dilimleri, çeri domates, sarımsak, parmesan peyniri, taze fesleğen",
+      "category": "Makarnalar"
+    },
+    {
+      "name": "Bolognese",
+      "price": "167,00 TL",
+      "desc": "",
+      "category": "Makarnalar"
+    },
+    {
+      "name": "Con Pollo Efunghi",
+      "price": "161,00 TL",
+      "desc": "Kremalı mantar sosu, tavuk dilimleri, renkli biberler, parmesan peyniri, taze fesleğen",
+      "category": "Makarnalar"
+    },
+    {
+      "name": "Fileto Di Manzo",
+      "price": "195,00 TL",
+      "desc": "Kremalı ıspanaklı istiridye, mantar sosu, kızarmış dana bonfile dilimleri, parmesan peyniri, taze fesleğen",
+      "category": "Makarnalar"
+    },
+    {
+      "name": "Frutti Di Mare",
+      "price": "180,00 TL",
+      "desc": "Dereotlu sarımsaklı domates sosunda karışık deniz ürünleri, çeri domates, parmesan peyniri, taze fesleğen",
+      "category": "Makarnalar"
+    },
+    {
+      "name": "Lasagne Al Forno",
+      "price": "220,00 TL",
+      "desc": "",
+      "category": "Makarnalar"
+    },
+    {
+      "name": "Napolitana",
+      "price": "141,00 TL",
+      "desc": "",
+      "category": "Makarnalar"
+    },
+    {
+      "name": "Tonno E'cipolla",
+      "price": "161,00 TL",
+      "desc": "Sarımsaklı kırmızı soğanlı siyah zeytin, dilimli domates sosu, ton balığı, parmesan peyniri, taze fesleğen",
+      "category": "Makarnalar"
+    },
+    {
+      "name": "Lasagne Spinaci",
+      "price": "165,00 TL",
+      "desc": "Ev yapımı ıspanaklı kremalı lazanya, mozzarella peyniri, parmesan peyniri, fesleğen",
+      "category": "Makarnalar"
+    },
+    {
+      "name": "Tortelini Quatro",
+      "price": "161,00 TL",
+      "desc": "Parmesan peyniri, rokfor peyniri, ricotta peyniri, emmantel peyniri",
+      "category": "Makarnalar"
+    },
+    {
+      "name": "Ravioli",
+      "price": "161,00 TL",
+      "desc": "Közlenmiş patlıcan, mozzarella peyniri",
+      "category": "Makarnalar"
+    },
+    {
+      "name": "Minestrone Çorbası",
+      "price": "55,00 TL",
+      "desc": "Karışık sebze",
+      "category": "Çorbalar"
+    },
+    {
+      "name": "Köz Domates Çorbası",
+      "price": "55,00 TL",
+      "desc": "Közlenmiş domates, mozzarella peyniri",
+      "category": "Çorbalar"
+    },
+    {
+      "name": "Caprese",
+      "price": "126,00 TL",
+      "desc": "Pesto sosu ile harmanlanmış suda taze mozarella peyniri, çeri domates dilimleri, roka, taze fesleğen",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Ton Balıklı Salata",
+      "price": "130,00 TL",
+      "desc": "Ton balığı, taze yeşillikler, çeri domates, salatalık, mısır, zetin dilimleri, kırmızı soğan",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Akdeniz Salatası",
+      "price": "113,00 TL",
+      "desc": "Mevsimlik taze yeşillikler, roka, çeri domates, salatalık",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Con Pollo Salata",
+      "price": "105,00 TL",
+      "desc": "Tavuk, badem, taze yeşillikler, domates, salatalık, soğan",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Roka Salatası",
+      "price": "123,00 TL",
+      "desc": "Taze roka, çeri domates, parmesan peyniri, pestolu balzamik sos",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Tiramisu",
+      "price": "100,00 TL",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Coca-cola Zero Sugar (33 Cl.)",
+      "price": "35,00 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Coca-cola (33 Cl.)",
+      "price": "35,00 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Coca-cola Şekersiz (33 Cl.)",
+      "price": "35,00 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Fanta (33 Cl.)",
+      "price": "35,00 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Sprite (33 Cl.)",
+      "price": "35,00 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Fuse Tea (33 Cl.)",
+      "price": "35,00 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Ayran (30 Cl.)",
+      "price": "24,00 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Soda (20 Cl.)",
+      "price": "25,00 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Su (50 Cl.)",
+      "price": "15,00 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Pesto Sos (190 Cc.)",
+      "price": "85,00 TL",
+      "desc": "",
+      "category": "Soslar"
+    },
+    {
+      "name": "Acı Sos (190 Cc.)",
+      "price": "85,00 TL",
+      "desc": "",
+      "category": "Soslar"
+    },
+    {
+      "name": "Ballı Hardal Sos (190 Cc.)",
+      "price": "65,00 TL",
+      "desc": "",
+      "category": "Soslar"
+    },
+    {
+      "name": "Barbekü Sos (190 Cc.)",
+      "price": "65,00 TL",
+      "desc": "",
+      "category": "Soslar"
+    }
+  ]
+}
 };
