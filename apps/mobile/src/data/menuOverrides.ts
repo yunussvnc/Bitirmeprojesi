@@ -23544,4 +23544,175 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     }
   ]
 }
+,
+  "7251": {
+  "name": "Ransserie Cafe House",
+  "sourceUrl": "https://ransserie.wixsite.com/cafe/menu",
+  "sourceName": "Ransserie resmi Wix menüsü",
+  "verifiedAt": "2026-08-23",
+  "items": [
+    {
+      "name": "Lime Mint",
+      "price": "70 TL",
+      "desc": "Cooler Lime + Naneli patlayan boba!",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Pink Pitaya",
+      "price": "70 TL",
+      "desc": "Pink Pitaya + Yaban Mersinli patlayan boba!",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Mango Yo",
+      "price": "80 TL",
+      "desc": "Mangolu yoğurt + Limonlu Patlayan Boba!",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Red Berries Yo",
+      "price": "80 TL",
+      "desc": "Orman Meyveli yoğurt + Yaban Mersinli Patlayan Boba!",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Melon Yo",
+      "price": "80 TL",
+      "desc": "Kavunlu yoğurt + Kavunlu Patlayan Boba!",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Hazelnut Choco",
+      "price": "85 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Chocolate",
+      "price": "76 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Banana Caramel",
+      "price": "76 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Milk Tea",
+      "price": "65 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Hazelnut Milk Tea",
+      "price": "76 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Caffee Latte",
+      "price": "81 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Green Tea",
+      "price": "76 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Caffe Latte",
+      "price": "59 TL",
+      "desc": "",
+      "category": "HOT COFFEE"
+    },
+    {
+      "name": "Cappuccino",
+      "price": "59 TL",
+      "desc": "",
+      "category": "HOT COFFEE"
+    },
+    {
+      "name": "Americano",
+      "price": "54 TL",
+      "desc": "",
+      "category": "HOT COFFEE"
+    },
+    {
+      "name": "Filtre Kahve",
+      "price": "54 TL",
+      "desc": "",
+      "category": "HOT COFFEE"
+    },
+    {
+      "name": "Espresso",
+      "price": "37 TL",
+      "desc": "",
+      "category": "HOT COFFEE"
+    },
+    {
+      "name": "Macchiato",
+      "price": "40 TL",
+      "desc": "",
+      "category": "HOT COFFEE"
+    },
+    {
+      "name": "Ice Caffe Latte",
+      "price": "65 TL",
+      "desc": "",
+      "category": "ICE COFFEE"
+    },
+    {
+      "name": "Ice Cappuccino",
+      "price": "65 TL",
+      "desc": "",
+      "category": "ICE COFFEE"
+    },
+    {
+      "name": "Ice Americano",
+      "price": "59 TL",
+      "desc": "",
+      "category": "ICE COFFEE"
+    },
+    {
+      "name": "Extra Boba",
+      "price": "15 TL",
+      "desc": "",
+      "category": "EXTRA"
+    },
+    {
+      "name": "Extra Shot",
+      "price": "15 TL",
+      "desc": "",
+      "category": "EXTRA"
+    },
+    {
+      "name": "Caramel",
+      "price": "15 TL",
+      "desc": "",
+      "category": "EXTRA"
+    },
+    {
+      "name": "White Choco",
+      "price": "15 TL",
+      "desc": "",
+      "category": "EXTRA"
+    },
+    {
+      "name": "Chocolate",
+      "price": "15 TL",
+      "desc": "",
+      "category": "EXTRA"
+    },
+    {
+      "name": "Hazelnut",
+      "price": "15 TL",
+      "desc": "",
+      "category": "EXTRA"
+    }
+  ]
+}
 };
