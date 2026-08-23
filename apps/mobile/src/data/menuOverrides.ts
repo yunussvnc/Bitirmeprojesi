@@ -4,6 +4,54 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6163": {
+    "name": "Sunset Grill & Bar",
+    "sourceUrl": "https://www.sunsetgrillbar.com/assets/yemek.pdf",
+    "sourceName": "Sunset Grill & Bar resmi Menu 2026 yemek PDF’si; page1 fiyatları 14 Mayıs 2026’dan itibaren geçerli; resmi iletişimde exact Kuruçeşme Mah. Yol Sok. No:2 Ulus Park ve 0212 287 03 57, Hentzer ID 6163 ile eşleşti",
+    "verifiedAt": "2026-08-24",
+    "items": [
+      {
+        "name": "Yengeç Tartar, Avokado, Tobiko, Yuzu Sos ve Trüf Yağı ile",
+        "price": "1.400",
+        "category": "Soğuk Başlangıçlar"
+      },
+      {
+        "name": "Ton Balığı Tataki, Soya ve Misket Limonu Sosu, Zencefil ve Çıtır Patates ile",
+        "price": "1.980",
+        "category": "Soğuk Başlangıçlar"
+      },
+      {
+        "name": "Deniz Levreği Sashimi Yuzu Sos ve Susam ile",
+        "price": "1.850",
+        "category": "Soğuk Başlangıçlar"
+      },
+      {
+        "name": "Somon Tataki, Miso ve Soya Sos, Taze Trüf Mantarı ile",
+        "price": "1.980",
+        "category": "Soğuk Başlangıçlar"
+      },
+      {
+        "name": "Zeytinyağlı Ege Enginar, Fava ve Domates Chutney ile",
+        "price": "1.300",
+        "category": "Başlangıçlar"
+      },
+      {
+        "name": "Imperial Ossetra Havyar, Blini ve Crème Fraiche ile (30 gr)",
+        "price": "5.600",
+        "category": "Başlangıçlar"
+      },
+      {
+        "name": "Gillardeau İstiridye No:2, Mignonette (Üzüm Sirkesi, Tane Karabiber ve Kekik) ile",
+        "price": "3.400",
+        "category": "Başlangıçlar"
+      },
+      {
+        "name": "Steak Tartar, Tütsülenmiş Yoğurt, Dolmalık Biber ve Kızarmış Ekmek ile",
+        "price": "1.970",
+        "category": "Başlangıçlar"
+      }
+    ]
+  },
   "6245": {
     "name": "The House Cafe",
     "sourceUrl": "https://webmenu.pardonapp.co/en/the-house-cafe-ortakoy",
