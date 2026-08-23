@@ -4,6 +4,309 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6245": {
+    "name": "The House Cafe",
+    "sourceUrl": "https://webmenu.pardonapp.co/en/the-house-cafe-ortakoy",
+    "sourceName": "The House Cafe Ortaköy Pardon exact-şube menüsü; tüm fiyatlar 20 Ağustos 2026 itibarıyla geçerli; resmi The House Cafe sitesi Ortaköy şubesini listeliyor; Hentzer ID 6245 exact Yıldız, Ortaköy Salhanesi Sk. No:1, 34349 Beşiktaş/İstanbul ve +90 212 227 26 99 ile eşleşti",
+    "verifiedAt": "2026-08-24",
+    "items": [
+      {
+        "name": "Simple Breakfast Platter",
+        "price": "795",
+        "category": "Breakfast"
+      },
+      {
+        "name": "Breakfast Bowl",
+        "price": "950",
+        "category": "Breakfast"
+      },
+      {
+        "name": "Crushed Avocado & Poached Egg & Sourdough Bread",
+        "price": "850",
+        "category": "Breakfast"
+      },
+      {
+        "name": "Scrambled Eggs With Avocado & Mushroom",
+        "price": "850",
+        "category": "Breakfast"
+      },
+      {
+        "name": "Smoked Salmon & Avocado Poached Eggs & Sourdough Bread",
+        "price": "975",
+        "category": "Breakfast"
+      },
+      {
+        "name": "The House Breakfast Platter (For 2 People)",
+        "price": "2950",
+        "category": "Breakfast"
+      },
+      {
+        "name": "Mini Breakfast Platter",
+        "price": "1650",
+        "category": "Breakfast"
+      },
+      {
+        "name": "Turkish Braised Beef & Eggs",
+        "price": "795",
+        "category": "Breakfast"
+      },
+      {
+        "name": "Savoury Mince & Eggs",
+        "price": "850",
+        "category": "Breakfast"
+      },
+      {
+        "name": "Menemen",
+        "price": "595",
+        "category": "Breakfast"
+      },
+      {
+        "name": "Forest Berry Pancakes",
+        "price": "750",
+        "category": "Breakfast"
+      },
+      {
+        "name": "Fried Eggs",
+        "price": "450",
+        "category": "Breakfast"
+      },
+      {
+        "name": "Omelette",
+        "price": "525",
+        "category": "Breakfast"
+      },
+      {
+        "name": "Potato & Goat Cheese Omelette",
+        "price": "750",
+        "category": "Breakfast"
+      },
+      {
+        "name": "The House Granola Bowl",
+        "price": "795",
+        "category": "Breakfast"
+      },
+      {
+        "name": "Köy Gözlemesi with Herbs & Local Mixed Cheese",
+        "price": "650",
+        "category": "Breakfast"
+      },
+      {
+        "name": "Köy Gözlemesi with Mozzarella, Potato & Herbs",
+        "price": "650",
+        "category": "Breakfast"
+      },
+      {
+        "name": "The House Benedict- Smoked Salmon",
+        "price": "975",
+        "category": "Breakfast"
+      },
+      {
+        "name": "The House Benedict - Sautéed Spinach",
+        "price": "750",
+        "category": "Breakfast"
+      },
+      {
+        "name": "Aegean Omelette",
+        "price": "595",
+        "category": "Breakfast"
+      },
+      {
+        "name": "Croissant",
+        "price": "395",
+        "category": "Croissant"
+      },
+      {
+        "name": "Strawberry & Banana & Nutella Croissant",
+        "price": "795",
+        "category": "Croissant"
+      },
+      {
+        "name": "Smoked Salmon & Scrambled Eggs Croissant",
+        "price": "895",
+        "category": "Croissant"
+      },
+      {
+        "name": "Smoked Salmon, Guacamole & Poached Egg Croissant",
+        "price": "895",
+        "category": "Croissant"
+      },
+      {
+        "name": "Smoked Turkey, Beef Ham & Fried Eggs Croissant",
+        "price": "895",
+        "category": "Croissant"
+      },
+      {
+        "name": "Croissant Sandwich",
+        "price": "895",
+        "category": "Croissant"
+      },
+      {
+        "name": "Smoked Turkey & Scrambled Eggs Croissant",
+        "price": "895",
+        "category": "Croissant"
+      },
+      {
+        "name": "Burrata & Pepperoni Sandwich with Pesto",
+        "price": "950",
+        "category": "Toast & Sandwich"
+      },
+      {
+        "name": "Kavurma’ Grilled Cheese Toast",
+        "price": "850",
+        "category": "Toast & Sandwich"
+      },
+      {
+        "name": "Classic Cheese Toast",
+        "price": "650",
+        "category": "Toast & Sandwich"
+      },
+      {
+        "name": "Vegan Toast With Mozzarella & Cheddar Cheese",
+        "price": "650",
+        "category": "Toast & Sandwich"
+      },
+      {
+        "name": "Sucuk & Bazlama Toast",
+        "price": "895",
+        "category": "Toast & Sandwich"
+      },
+      {
+        "name": "Smash Mexican Burger",
+        "price": "1450",
+        "category": "Burger"
+      },
+      {
+        "name": "Rib & Cheddar Burger",
+        "price": "1450",
+        "category": "Burger"
+      },
+      {
+        "name": "Roqueforte Burger",
+        "price": "1450",
+        "category": "Burger"
+      },
+      {
+        "name": "The House Burger",
+        "price": "1250",
+        "category": "Burger"
+      },
+      {
+        "name": "Crispy Chicken Burger",
+        "price": "1150",
+        "category": "Burger"
+      },
+      {
+        "name": "Cheeseburger",
+        "price": "1250",
+        "category": "Burger"
+      },
+      {
+        "name": "Vegan Cheeseburger",
+        "price": "995",
+        "category": "Burger"
+      },
+      {
+        "name": "Lahmacun Pizza",
+        "price": "1350",
+        "category": "Pizza"
+      },
+      {
+        "name": "Burrata & Pepperoni Pizza",
+        "price": "1495",
+        "category": "Pizza"
+      },
+      {
+        "name": "Margherita Pizza",
+        "price": "995",
+        "category": "Pizza"
+      },
+      {
+        "name": "Beef Rib Pizza",
+        "price": "1495",
+        "category": "Pizza"
+      },
+      {
+        "name": "Wild Mushroom Pizza",
+        "price": "1350",
+        "category": "Pizza"
+      },
+      {
+        "name": "4 Cheese Pizza",
+        "price": "1350",
+        "category": "Pizza"
+      },
+      {
+        "name": "Classic Pizza",
+        "price": "1400",
+        "category": "Pizza"
+      },
+      {
+        "name": "Shrimp Caesar Salad",
+        "price": "1400",
+        "category": "Salad"
+      },
+      {
+        "name": "Smoked Salmon Salad",
+        "price": "1450",
+        "category": "Salad"
+      },
+      {
+        "name": "Salad Bowl",
+        "price": "995",
+        "category": "Salad"
+      },
+      {
+        "name": "Falafel Bowl",
+        "price": "850",
+        "category": "Salad"
+      },
+      {
+        "name": "Garden Salad With Marinated Chicken",
+        "price": "1100",
+        "category": "Salad"
+      },
+      {
+        "name": "Chicken Caesar Salad",
+        "price": "995",
+        "category": "Salad"
+      },
+      {
+        "name": "Rocket Salad With Warm Goat Cheese",
+        "price": "995",
+        "category": "Salad"
+      },
+      {
+        "name": "Vegetable Salad with Quinoa",
+        "price": "995",
+        "category": "Salad"
+      },
+      {
+        "name": "Walnut & Avocado Chicken Salad",
+        "price": "1100",
+        "category": "Salad"
+      },
+      {
+        "name": "Avocado & Tulum Cheese Salad",
+        "price": "995",
+        "category": "Salad"
+      },
+      {
+        "name": "Vegan Meatlessball Salad",
+        "price": "850",
+        "category": "Salad"
+      },
+      {
+        "name": "Salmon Salad With Mustard Sauce",
+        "price": "1350",
+        "category": "Salad"
+      },
+      {
+        "name": "Grilled Beef Salad",
+        "price": "1400",
+        "category": "Salad"
+      }
+    ]
+  },
   "6149": {
     "name": "Feriye Lokantasi",
     "sourceUrl": "https://feriye.com/wp-content/uploads/2026/07/ANA_MENU_TR_22.06.26-FIYATSIZ_WEB.pdf",
