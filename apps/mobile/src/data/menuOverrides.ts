@@ -34418,5 +34418,251 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       "category": "Tatlılar"
     }
   ]
+},
+  "7184": {
+  "name": "Biber Burger",
+  "sourceUrl": "https://qrco.de/bcvXzx",
+  "sourceName": "Biber Burger public QR menü görseli (Hentzer Yıldız şubesinin resmi Şubelerimiz sayfasıyla exact adres/telefon eşleşmesi)",
+  "verifiedAt": "2026-08-23",
+  "items": [
+    {
+      "name": "Louis",
+      "price": "538",
+      "category": "Burgerler",
+      "desc": "Cheddar peyniri, karamelize soğan, Louis sos, BBQ sos; patates dahil. Double +240; Triple +420."
+    },
+    {
+      "name": "Amarillo",
+      "price": "536",
+      "category": "Burgerler",
+      "desc": "Cheddar peyniri, karamelize soğan, Amarillo sos, BBQ sos; patates dahil. Double +240; Triple +420."
+    },
+    {
+      "name": "Jetlag Buster",
+      "price": "598",
+      "category": "Burgerler",
+      "desc": "Triple cheddar peyniri, karamelize soğan, tiftik et, Louis sos, BBQ sos; patates dahil. Double +240; Triple +420."
+    },
+    {
+      "name": "Fried Egg Special",
+      "price": "602",
+      "category": "Burgerler",
+      "desc": "Double cheddar peyniri, poşe yumurta, dana bacon, Louis sos; patates dahil. Double +240; Triple +420."
+    },
+    {
+      "name": "Imperial",
+      "price": "610",
+      "category": "Burgerler",
+      "desc": "Double cheddar peyniri, dana bacon, kırmızı soğan turşusu, Louis sos; patates dahil. Double +240; Triple +420."
+    },
+    {
+      "name": "Relishious Truffle",
+      "price": "592",
+      "category": "Burgerler",
+      "desc": "Cheddar peyniri, dana bacon, relish sos, trüf mayonez; patates dahil. Double +240; Triple +420."
+    },
+    {
+      "name": "Aubergine",
+      "price": "542",
+      "category": "Burgerler",
+      "desc": "Cheddar peyniri, közlenmiş patlıcan, közlenmiş biber, mayonez; patates dahil. Double +240; Triple +420."
+    },
+    {
+      "name": "Cherry Bomb",
+      "price": "546",
+      "category": "Burgerler",
+      "desc": "Vişne reçeli, cheddar peyniri, fıstık ezmesi; patates dahil. Double +240; Triple +420."
+    },
+    {
+      "name": "Vegetarian",
+      "price": "510",
+      "category": "Burgerler",
+      "desc": "Sebzeli köfte, cheddar peyniri, Louis sos, kestane mantarı, coleslaw; patates dahil. Double +240; Triple +420."
+    },
+    {
+      "name": "Corned Beef (150 gr.)",
+      "price": "630",
+      "category": "Burgerler",
+      "desc": "Tereyağlı tost ekmeği arasına Corned Beef, Cheezwhiz, Russian dressing, hardal, turşu; patates dahil. 250 gr. +250; 400 gr. +450."
+    },
+    {
+      "name": "Fried Chicken",
+      "price": "514",
+      "category": "Fried Chicken",
+      "desc": "Tavuk kızartma, coleslaw, cheddar peyniri, BBQ sos; patates dahil."
+    },
+    {
+      "name": "Aubergine Chicken",
+      "price": "526",
+      "category": "Fried Chicken",
+      "desc": "Tavuk kızartma, cheddar peyniri, közlenmiş biber, közlenmiş patlıcan, mayonez; patates dahil."
+    },
+    {
+      "name": "Honey & BBQ Chicken",
+      "price": "518",
+      "category": "Fried Chicken",
+      "desc": "Tavuk kızartma, cheddar peyniri, honey&BBQ sos, coleslaw; patates dahil."
+    },
+    {
+      "name": "Cheddar Peyniri",
+      "price": "55",
+      "category": "Burgerine Ekle"
+    },
+    {
+      "name": "Kestane Mantarı",
+      "price": "60",
+      "category": "Burgerine Ekle"
+    },
+    {
+      "name": "Kayseri Pastırması",
+      "price": "75",
+      "category": "Burgerine Ekle"
+    },
+    {
+      "name": "Dana Bacon",
+      "price": "85",
+      "category": "Burgerine Ekle"
+    },
+    {
+      "name": "Tiftik Et",
+      "price": "95",
+      "category": "Burgerine Ekle"
+    },
+    {
+      "name": "Göz Yumurta",
+      "price": "45",
+      "category": "Burgerine Ekle"
+    },
+    {
+      "name": "Sade Patates / Baharatlı Patates",
+      "price": "165",
+      "category": "Aperatifler"
+    },
+    {
+      "name": "Mc Cain Kaşık Patates",
+      "price": "190",
+      "category": "Aperatifler"
+    },
+    {
+      "name": "Cheez Whiz Patates",
+      "price": "205",
+      "category": "Aperatifler"
+    },
+    {
+      "name": "Ev Yapımı Soğan Halkası (5-6 ad.)",
+      "price": "240",
+      "category": "Aperatifler"
+    },
+    {
+      "name": "House Special Cheese Fries",
+      "price": "395",
+      "category": "Aperatifler"
+    },
+    {
+      "name": "Chicken Wings (5 ad.)",
+      "price": "315",
+      "category": "Aperatifler"
+    },
+    {
+      "name": "Buffalo Wings (5 ad.)",
+      "price": "325",
+      "category": "Aperatifler"
+    },
+    {
+      "name": "Chicken Tenders (3 ad.)",
+      "price": "320",
+      "category": "Aperatifler"
+    },
+    {
+      "name": "Coca-Cola / Zero / Light",
+      "price": "120",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Fanta / Sprite",
+      "price": "120",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Fuse Tea Şeftali / Limon",
+      "price": "120",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Yabanmersini Limonata",
+      "price": "175",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Frambuaz Limonata",
+      "price": "175",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Özerhisar Ayran",
+      "price": "130",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Soda",
+      "price": "80",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Su",
+      "price": "50",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Septuple Brownie",
+      "price": "180",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Cherry Brownie",
+      "price": "190",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Chocolate Chip Cookie",
+      "price": "150",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Rokfor Sos",
+      "price": "55",
+      "category": "Soslar"
+    },
+    {
+      "name": "Ranch Sos",
+      "price": "45",
+      "category": "Soslar"
+    },
+    {
+      "name": "Ballı Hardal",
+      "price": "45",
+      "category": "Soslar"
+    },
+    {
+      "name": "Trüf Mayonez",
+      "price": "55",
+      "category": "Soslar"
+    },
+    {
+      "name": "Cheez Whiz",
+      "price": "65",
+      "category": "Soslar"
+    },
+    {
+      "name": "Sarımsaklı Mayonez",
+      "price": "45",
+      "category": "Soslar"
+    },
+    {
+      "name": "Chipotle Mayonez",
+      "price": "45",
+      "category": "Soslar"
+    }
+  ]
 }
 };
