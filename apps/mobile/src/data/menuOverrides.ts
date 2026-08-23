@@ -24108,4 +24108,19 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     }
   ]
 }
+,
+  "7253": {
+  "name": "Çıtır Ocakbaşı",
+  "sourceUrl": "https://www.instagram.com/citirocakbasii/",
+  "sourceName": "Çıtır Ocakbaşı resmi Instagram içeriği (fiyat yayınlanmamış)",
+  "verifiedAt": "2026-08-23",
+  "items": [
+    {
+      "name": "Pastırmalı Humus",
+      "price": "",
+      "desc": "Yumuşacık humus, köz aromasının sıcaklığı ve pastırma.",
+      "category": "Mezeler"
+    }
+  ]
+}
 };
