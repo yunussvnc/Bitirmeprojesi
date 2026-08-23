@@ -27768,5 +27768,225 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
         "category": "Kastel Special Kokteyl"
       }
     ]
+  },
+
+  "638": {
+    "name": "Walter's Coffee Roastery - Moda",
+    "sourceUrl": "https://restaurantguru.com/Walters-Coffee-Roastery-Istanbul/menu",
+    "sourceName": "RestaurantGuru kullanıcı menü görselleri (exact Walter's Moda, Bademaltı Sk. No:21; görseller 2–3 ay önce yüklenmiş)",
+    "verifiedAt": "2026-08-23",
+    "items": [
+      {
+        "name": "Orman Meyveli Granola",
+        "price": "285",
+        "desc": "",
+        "category": "Kahvaltılar"
+      },
+      {
+        "name": "Yer Fıstıklı Muzlu Granola",
+        "price": "285",
+        "desc": "",
+        "category": "Kahvaltılar"
+      },
+      {
+        "name": "Caprese Tartini",
+        "price": "355",
+        "desc": "",
+        "category": "Kahvaltılar"
+      },
+      {
+        "name": "Scramble Egg Tartini",
+        "price": "375",
+        "desc": "",
+        "category": "Kahvaltılar"
+      },
+      {
+        "name": "Frankfurter Kahvaltı Tabağı",
+        "price": "430",
+        "desc": "",
+        "category": "Kahvaltılar"
+      },
+      {
+        "name": "Scramble Egg Kahvaltı Tabağı",
+        "price": "390",
+        "desc": "",
+        "category": "Kahvaltılar"
+      },
+      {
+        "name": "Espresso",
+        "price": "180",
+        "desc": "",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Filter Coffee",
+        "price": "195",
+        "desc": "",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Dirty Chai",
+        "price": "285",
+        "desc": "",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Americano",
+        "price": "210",
+        "desc": "",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Black Eye",
+        "price": "245",
+        "desc": "",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Flat White",
+        "price": "245",
+        "desc": "",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Latte",
+        "price": "260",
+        "desc": "",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Mocha",
+        "price": "260",
+        "desc": "",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Affogato",
+        "price": "325",
+        "desc": "",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Chemex",
+        "price": "260",
+        "desc": "",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Aeropress",
+        "price": "260",
+        "desc": "",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Specially Tea",
+        "price": "210",
+        "desc": "",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Cortado",
+        "price": "220",
+        "desc": "",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "V60",
+        "price": "260",
+        "desc": "",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Iced Dirty Chai",
+        "price": "310",
+        "desc": "",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Iced Americano",
+        "price": "230",
+        "desc": "",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Iced Chai Tea Latte",
+        "price": "285",
+        "desc": "",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Chai Tea Latte",
+        "price": "260",
+        "desc": "",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Iced Latte",
+        "price": "285",
+        "desc": "",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Japanese Cold Brew",
+        "price": "265",
+        "desc": "",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Iced Tea",
+        "price": "250",
+        "desc": "",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Lemon Brew",
+        "price": "265",
+        "desc": "",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Lemonade",
+        "price": "265",
+        "desc": "",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Water",
+        "price": "55",
+        "desc": "",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Juice",
+        "price": "150",
+        "desc": "",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Mineral Water",
+        "price": "95",
+        "desc": "",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Plant Milk",
+        "price": "+55",
+        "desc": "",
+        "category": "Ekstralar"
+      },
+      {
+        "name": "Extra Shot",
+        "price": "+45",
+        "desc": "",
+        "category": "Ekstralar"
+      },
+      {
+        "name": "Flavor",
+        "price": "+45",
+        "desc": "",
+        "category": "Ekstralar"
+      }
+    ]
   }
+
 };
