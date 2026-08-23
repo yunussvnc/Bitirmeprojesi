@@ -1646,309 +1646,303 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
   },
   "7287": {
     "name": "BEYKOZ/KAVACIK GECE DÖNERCİSİ",
-    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/gho2/kavacik-gece-donercisi-mahir-usta",
-    "sourceName": "Yemeksepeti",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/gho2/kavacik-gece-donercisi-mahir-usta",
+    "sourceName": "Kavacık Gece Dönercisi Mahir Usta canlı Yemeksepeti menüsü (exact Çubuklu Boğaziçi Cd. No:2/A; %15 indirimli güncel fiyatlar)",
     "verifiedAt": "2026-08-23",
     "items": [
       {
         "name": "Yarım Ekmek Arası Kuzu Et Döner (80 gr.)",
-        "price": "500 TL",
+        "price": "425",
         "desc": "Domates, soğan, turşu, patates kızartması",
         "category": "Et Dönerler"
       },
       {
         "name": "Yarım Ekmek Arası Kuzu Et Döner (100 gr.)",
-        "price": "590 TL",
+        "price": "501.50",
         "desc": "Domates, soğan, turşu, patates kızartması",
         "category": "Et Dönerler"
       },
       {
         "name": "Yarım Ekmek Arası Kuzu Et Döner (120 gr.)",
-        "price": "690 TL",
+        "price": "586.50",
         "desc": "Domates, soğan, turşu, patates kızartması,YANINA TURŞU BİBER",
         "category": "Et Dönerler"
       },
       {
         "name": "Yarım Ekmek Arası Kuzu Et Döner (150 gr.)",
-        "price": "800 TL",
+        "price": "680",
         "desc": "Domates, soğan, turşu, patates kızartması, et döner,YANINA TURŞU BİBER",
         "category": "Et Dönerler"
       },
       {
         "name": "Yarım Ekmek Arası Kuzu Et Döner (180 gr.)",
-        "price": "1.000 TL",
+        "price": "850",
         "desc": "Domates, soğan, turşu, patates kızartması,YANINA TURŞU BİBER",
         "category": "Et Dönerler"
       },
       {
         "name": "Yarım Ekmek Arası Kuzu Et Döner (200 gr.)",
-        "price": "1.100 TL",
+        "price": "935",
         "desc": "Domates, soğan, turşu, patates kızartması,YANINA TURŞU BİBER",
         "category": "Et Dönerler"
       },
       {
         "name": "Kuzu Et Döner Dürüm (100 gr.)",
-        "price": "590 TL",
+        "price": "501.50",
         "desc": "Domates, soğan, turşu, patates kızartması",
         "category": "Et Dönerler"
       },
       {
         "name": "Kuzu Et Döner Dürüm (120 gr.)",
-        "price": "650 TL",
+        "price": "552.50",
         "desc": "Domates, soğan, turşu, patates kızartması,YANINA TURŞU BİBER",
         "category": "Et Dönerler"
       },
       {
         "name": "Kuzu Et Döner Dürüm (150 gr.)",
-        "price": "800 TL",
+        "price": "680",
         "desc": "Domates, soğan, turşu, patates kızartması, et döner,YANINA TURŞU BİBER",
         "category": "Et Dönerler"
       },
       {
         "name": "Kuzu Et Döner Dürüm (180 gr.)",
-        "price": "1.000 TL",
+        "price": "850",
         "desc": "Domates, soğan, turşu, patates,YANINA TURŞU BİBER",
         "category": "Et Dönerler"
       },
       {
         "name": "Kuzu Et Döner Dürüm (200 gr.)",
-        "price": "1.100 TL",
+        "price": "935",
         "desc": "Domates, soğan, turşu, patates kızartması,YANINA TURŞU BİBER",
         "category": "Et Dönerler"
       },
       {
         "name": "Kuzu Et Döner Dürüm (250 gr.)",
-        "price": "1.300 TL",
+        "price": "1105",
         "desc": "Domates, soğan, turşu, patates kızartması,YANINA TURŞU BİBER",
         "category": "Et Dönerler"
       },
       {
         "name": "Tombik Ekmek Arası Kuzu Et Döner (100 gr.)",
-        "price": "550 TL",
+        "price": "467.50",
         "desc": "Domates, soğan, turşu, patates kızartması,YANINA TURŞU BİBER",
         "category": "Et Dönerler"
       },
       {
         "name": "Tombik Ekmek Arası Kuzu Et Döner (120 gr.)",
-        "price": "650 TL",
+        "price": "552.50",
         "desc": "Domates, soğan, turşu, patates kızartması,YANINA TURŞU BİBER",
         "category": "Et Dönerler"
       },
       {
         "name": "Tombik Ekmek Arası Kuzu Et Döner (150 gr.)",
-        "price": "800 TL",
+        "price": "680",
         "desc": "Domates, soğan, turşu, patates kızartması,YANINA TURŞU BİBER",
         "category": "Et Dönerler"
       },
       {
         "name": "Tombik Ekmek Arası Kuzu Et Döner (180 gr.)",
-        "price": "1.000 TL",
+        "price": "850",
         "desc": "Domates, soğan, turşu, patates kızartması,YANINA TURŞU BİBER",
         "category": "Et Dönerler"
       },
       {
         "name": "Tombik Ekmek Arası Kuzu Et Döner (250 gr.)",
-        "price": "1.300 TL",
+        "price": "1105",
         "desc": "Domates, soğan, turşu, patates kızartması,YANINA TURŞU BİBER",
         "category": "Et Dönerler"
       },
       {
         "name": "Tombik Ekmek Arası Kuzu Et Döner (200 gr.)",
-        "price": "1.100 TL",
+        "price": "935",
         "desc": "Domates, soğan, turşu, patates kızartması,YANINA TURŞU BİBER",
         "category": "Et Dönerler"
       },
       {
         "name": "Kuzu Et Döner (120 gr.)",
-        "price": "700 TL",
+        "price": "595",
         "desc": "120 gr. kuzu et döner. Soğan, domates, turşu, patates kızartması, tandır lavaşı ile,YANINA TURŞU BİBER",
         "category": "Et Dönerler"
       },
       {
         "name": "Kuzu Döner (150 gr.)",
-        "price": "850 TL",
+        "price": "722.50",
         "desc": "Soğan, domates, turşu, patates kızartması, tandır ekmek ile,YANINA TURŞU BİBER",
         "category": "Et Dönerler"
       },
       {
         "name": "Kuzu Döner (200 gr.)",
-        "price": "1.150 TL",
+        "price": "977.50",
         "desc": "Soğan, domates, turşu, patates kızartması ile,YANINA TURŞU BİBER",
         "category": "Et Dönerler"
       },
       {
         "name": "Tam Ekmek Arası Kuzu Et Döner (150 gr.)",
-        "price": "800 TL",
+        "price": "680",
         "desc": "Soğan, domates, turşu, patates kızartması,YANINA TURŞU BİBER",
         "category": "Et Dönerler"
       },
       {
         "name": "Tam Ekmek Arası Kuzu Et Döner (180 gr.)",
-        "price": "1.000 TL",
+        "price": "850",
         "desc": "Soğan, domates, turşu, patates kızartması,YANINA TURŞU BİBER",
         "category": "Et Dönerler"
       },
       {
         "name": "Tam Ekmek Arası Kuzu Et Döner (200 gr.)",
-        "price": "1.100 TL",
+        "price": "935",
         "desc": "Soğan, domates, turşu,patates,YANINA TURŞU BİBER",
         "category": "Et Dönerler"
       },
       {
         "name": "Tam Ekmek Arası Et Döner (250 gr.)",
-        "price": "1.300 TL",
+        "price": "1105",
         "desc": "Soğan, domates, turşu, patates kızartması,YANINA TURŞU BİBER",
         "category": "Et Dönerler"
       },
       {
         "name": "3/4 Ekmek Arası Et Döner (150 gr.)",
-        "price": "800 TL",
+        "price": "680",
         "desc": "150 gr. et döner, soğan, domates, turşu, patates kızartması,YANINA TURŞU BİBER",
         "category": "Et Dönerler"
       },
       {
         "name": "3/4 Ekmek Arası Et Döner (180 gr.)",
-        "price": "1.000 TL",
+        "price": "850",
         "desc": "180 gr. et döner, soğan, domates, turşu, patates kızartması,YANINA TURŞU BİBER",
         "category": "Et Dönerler"
       },
       {
         "name": "3/4 Ekmek Arası Et Döner (200 gr.)",
-        "price": "1.100 TL",
+        "price": "935",
         "desc": "200 gr. et döner, soğan, domates, turşu, patates,YANINA TURŞU BİBER",
         "category": "Et Dönerler"
       },
       {
         "name": "3/4 Ekmek Arası Et Döner (250 gr.)",
-        "price": "1.300 TL",
+        "price": "1105",
         "desc": "250 gr. et döner, soğan, domates, turşu,patates,YANINA TURŞU BİBER",
         "category": "Et Dönerler"
       },
       {
         "name": "Pilav Üstü Kuzu Döner (120 gr.)",
-        "price": "750 TL",
+        "price": "637.50",
         "desc": "Soğan, domates, turşu, patates kızartması, tandır ekmeği, biber turşusu ile",
         "category": "Et Dönerler"
       },
       {
         "name": "Pilav Üstü Kuzu Döner (150 gr.)",
-        "price": "900 TL",
+        "price": "765",
         "desc": "Soğan, domates, turşu, patates kızartması ile",
         "category": "Et Dönerler"
       },
       {
         "name": "Pilav Üstü Et Döner (200 gr.)",
-        "price": "1.200 TL",
+        "price": "1020",
         "desc": "200 gr. kuzu döner. Soğan, domates, turşu, patates kızartması, tandır lavaş ile",
         "category": "Et Dönerler"
       },
       {
         "name": "Kuzu Döner (250 gr.)",
-        "price": "1.350 TL",
+        "price": "1147.50",
         "desc": "Tandır lavaşı, patates kızartması, soğan, domates, turşu ile,YANINA TURŞU BİBER",
         "category": "Et Dönerler"
       },
       {
         "name": "Kuzu Döner (500 gr.)",
-        "price": "2.600 TL",
+        "price": "2210",
         "desc": "Tandır lavaşı, patates kızartması, soğan, domates, turşu ile,YANINA TURŞU BİBER",
         "category": "Et Dönerler"
       },
       {
         "name": "Kuzu Döner (750 gr.)",
-        "price": "3.900 TL",
+        "price": "3315",
         "desc": "Tandır lavaşı, patates kızartması, soğan, domates, turşu ile,YANINA TURŞU BİBER",
         "category": "Et Dönerler"
       },
       {
         "name": "Kuzu Döner (1 kg.)",
-        "price": "5.400 TL",
+        "price": "4590",
         "desc": "Tandır lavaşı, patates kızartması, soğan, domates, turşu ile,YANINA TURŞU BİBER",
         "category": "Et Dönerler"
       },
       {
         "name": "Hamsiköy Sütlacı",
-        "price": "250 TL",
+        "price": "212.50",
         "desc": "Tek kişilik",
         "category": "Tatlılar"
       },
       {
         "name": "Pepsi (33 cl.)",
-        "price": "90 TL",
+        "price": "76.50",
         "desc": "Kutu içecek",
         "category": "İçecekler"
       },
       {
         "name": "Pepsi Max (33 cl.)",
-        "price": "90 TL",
+        "price": "76.50",
         "desc": "Kutu içecek",
         "category": "İçecekler"
       },
       {
         "name": "Tropicana Karışık (33 cl.)",
-        "price": "90 TL",
+        "price": "76.50",
         "desc": "Kutu içecek",
         "category": "İçecekler"
       },
       {
         "name": "Lipton Ice Tea Limon (33 cl.)",
-        "price": "90 TL",
+        "price": "76.50",
         "desc": "Kutu içecek",
         "category": "İçecekler"
       },
       {
         "name": "7UP (33 cl.)",
-        "price": "90 TL",
+        "price": "76.50",
         "desc": "Kutu içecek",
         "category": "İçecekler"
       },
       {
         "name": "Ekşili Yayık Ayranı (27 cl.)",
-        "price": "70 TL",
+        "price": "59.50",
         "desc": "Pet şişe",
         "category": "İçecekler"
       },
       {
         "name": "Acılı Ayran (27 cl.)",
-        "price": "70 TL",
+        "price": "59.50",
         "desc": "Serinletici acılı ayran içeceği pratik pet şişe ambalajında sunulur. Geleneksel lezzet ve modern kolaylığın mükemmel birleşimi.",
         "category": "İçecekler"
       },
       {
         "name": "Özerhisar Ayran (24,5 cl.)",
-        "price": "90 TL",
+        "price": "76.50",
         "desc": "Geleneksel yöntemle fermente edilen Özerhisar ayranı. Taze ve besleyici içeriğiyle serinletici bir içecek.",
         "category": "İçecekler"
       },
       {
         "name": "Soda (20 cl.)",
-        "price": "50 TL",
+        "price": "42.50",
         "desc": "Ferah ve serinletici soda içeceği 20 cl cam şişede sunulmaktadır. Buzlu olarak servis edilir.",
         "category": "İçecekler"
       },
       {
         "name": "Su (50 cl.)",
-        "price": "30 TL",
+        "price": "25.50",
         "desc": "Pet şişe",
         "category": "İçecekler"
       },
       {
         "name": "Coca-Cola (1 L.)",
-        "price": "170 TL",
+        "price": "144.50",
         "desc": "Pet şişe",
         "category": "İçecekler"
       },
       {
         "name": "SEK BÜYÜK AYRAN",
-        "price": "60 TL",
+        "price": "51",
         "desc": "Serinletici ve besleyici 285 ml büyük ayran. Geleneksel yoğurt içeceği tuz ve su ile hazırlanmış. Soğuk servis edilir.",
         "category": "İçecekler"
-      },
-      {
-        "name": "Plastic Bag",
-        "price": "1 TL",
-        "desc": "It's compulsory to purchase plastic bags for fixed price 1 TL according to the amendments on Environment Law by the Ministry of Environment, Urbanization and Climate Change. If you require a plastic bag, you should add it to your basket. The amount will be charged to you for each plastic bag.",
-        "category": "Poşet"
       }
     ]
   },
