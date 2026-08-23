@@ -34235,5 +34235,188 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
           "category": "Kruvasan"
         }
       ]
+    },
+  "7182": {
+  "name": "Siftah Kebap Karaköy",
+  "sourceUrl": "https://siftahkebap.dinosoft.com.tr/menu",
+  "sourceName": "Dinosoft public QR menüsü (Siftah Karaköy; exact Beyoğlu şubesi Instagram ve MenuHaritasi ile doğrulandı)",
+  "verifiedAt": "2026-08-23",
+  "items": [
+    {
+      "name": "Közlenmiş Soğan Sarımsak",
+      "price": "350,00",
+      "category": "Başlangıçlar"
+    },
+    {
+      "name": "Günün Çorbası",
+      "price": "190,00",
+      "category": "Başlangıçlar"
+    },
+    {
+      "name": "İçli Köfte",
+      "price": "220,00",
+      "category": "Başlangıçlar"
+    },
+    {
+      "name": "Kesik Ciğer Kavurma",
+      "price": "200,00",
+      "category": "Başlangıçlar"
+    },
+    {
+      "name": "Patates",
+      "price": "350,00",
+      "category": "Başlangıçlar"
+    },
+    {
+      "name": "Ciğer Kavurma Dürüm 150Gr",
+      "price": "400,00",
+      "category": "Başlangıçlar"
+    },
+    {
+      "name": "Ciğer Kavurma Porsiyon 300Gr",
+      "price": "800,00",
+      "category": "Başlangıçlar"
+    },
+    {
+      "name": "Iced Tea 330 mL",
+      "price": "110,00",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Ayran 245mL",
+      "price": "90,00",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Şalgam 330 mL",
+      "price": "90,00",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Kola 330 mL",
+      "price": "110,00",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Sprite 330 mL",
+      "price": "110,00",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Fanta 330 mL",
+      "price": "110,00",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Su 500 mL",
+      "price": "50,00",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Soda Sade 250 mL",
+      "price": "60,00",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Zırh Kıyma Sade Dürüm 150Gr",
+      "price": "490,00",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Zırh Kıyma Acılı Dürüm 150Gr",
+      "price": "490,00",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Zırh Kıyma Sebzeli Dürüm 150Gr",
+      "price": "490,00",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Tavuk Şiş Dürüm 150Gr",
+      "price": "490,00",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Tavuk Sarma Dürüm 150Gr",
+      "price": "490,00",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Kuşbaşı Dürüm 150Gr",
+      "price": "550,00",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Kuzu Ciğer Dürüm 150Gr",
+      "price": "550,00",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Biber Kebabı",
+      "price": "1.050,00",
+      "category": "Kebaplar ve Izgaralar"
+    },
+    {
+      "name": "Tavuk Kanat",
+      "price": "1.050,00",
+      "category": "Kebaplar ve Izgaralar"
+    },
+    {
+      "name": "Domatesli Kebap",
+      "price": "1.050,00",
+      "category": "Kebaplar ve Izgaralar"
+    },
+    {
+      "name": "Patlıcanlı Kebap",
+      "price": "1.050,00",
+      "category": "Kebaplar ve Izgaralar"
+    },
+    {
+      "name": "Zırh Kıyma Sade Porsiyon 300Gr",
+      "price": "980,00",
+      "category": "Kebaplar ve Izgaralar"
+    },
+    {
+      "name": "Zırh Kıyma Acılı Porsiyon 300Gr",
+      "price": "980,00",
+      "category": "Kebaplar ve Izgaralar"
+    },
+    {
+      "name": "Zırh Kıyma Sebzeli Porsiyon 300Gr",
+      "price": "980,00",
+      "category": "Kebaplar ve Izgaralar"
+    },
+    {
+      "name": "Tavuk Şiş Porsiyon 300Gr",
+      "price": "980,00",
+      "category": "Kebaplar ve Izgaralar"
+    },
+    {
+      "name": "Tavuk Sarma Porsiyon 300Gr",
+      "price": "980,00",
+      "category": "Kebaplar ve Izgaralar"
+    },
+    {
+      "name": "Kuşbaşı Porsiyon 300Gr",
+      "price": "1.100,00",
+      "category": "Kebaplar ve Izgaralar"
+    },
+    {
+      "name": "Kuzu Ciğer Porsiyon 300Gr",
+      "price": "1.100,00",
+      "category": "Kebaplar ve Izgaralar"
+    },
+    {
+      "name": "Siftah Karışık Kebap",
+      "price": "2.800,00",
+      "category": "Özel Kebaplar"
+    },
+    {
+      "name": "Şam Tatlısı",
+      "price": "300,00",
+      "category": "Tatlılar"
     }
+  ]
+}
 };
