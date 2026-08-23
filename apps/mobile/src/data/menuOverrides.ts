@@ -4393,62 +4393,203 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
   "7285": {
     "name": "U/We Coffee Roasters",
     "sourceUrl": "https://uwecoffee.com/",
-    "sourceName": "U/WE Coffee Roastery resmi sitesi",
-    "verifiedAt": "2026-08-23",
+    "sourceName": "U/WE Coffee Roastery resmi sitesi; exact Yıldız, Çırağan Cd. No:6/A şubesi Restoranim kaydıyla ve resmi iletişim adresiyle doğrulandı; ürün/fiyat kartları Sadakio görsel tarih damgaları taşıyor",
+    "verifiedAt": "2026-08-24",
     "items": [
       {
         "name": "Cool Lime",
         "price": "₺200",
-        "desc": "",
-        "category": "U/WE Coffee menüsü"
+        "category": "Soğuk Kahvesiz"
       },
       {
         "name": "Berry Hibiscus",
         "price": "₺200",
-        "desc": "",
-        "category": "U/WE Coffee menüsü"
+        "category": "Soğuk Kahvesiz"
       },
       {
         "name": "Buzlu Matcha Latte",
         "price": "₺230",
-        "desc": "",
-        "category": "U/WE Coffee menüsü"
+        "category": "Soğuk Kahvesiz"
       },
       {
         "name": "Buzlu Chai Tea Latte",
         "price": "₺230",
-        "desc": "",
-        "category": "U/WE Coffee menüsü"
+        "category": "Soğuk Kahvesiz"
       },
       {
         "name": "Buzlu Çay",
         "price": "₺200+",
-        "desc": "",
-        "category": "U/WE Coffee menüsü"
+        "category": "Soğuk Kahvesiz"
       },
       {
         "name": "Milkshake",
         "price": "₺220",
-        "desc": "",
-        "category": "U/WE Coffee menüsü"
+        "category": "Soğuk Kahvesiz"
       },
       {
         "name": "Smoothie",
         "price": "₺230",
-        "desc": "",
-        "category": "U/WE Coffee menüsü"
+        "category": "Soğuk Kahvesiz"
       },
       {
         "name": "Frappuccino",
         "price": "₺230",
-        "desc": "",
-        "category": "U/WE Coffee menüsü"
+        "category": "Soğuk Kahvesiz"
       },
       {
         "name": "Ube latte",
         "price": "₺230",
-        "desc": "",
-        "category": "U/WE Coffee menüsü"
+        "category": "Soğuk Kahvesiz"
+      },
+      {
+        "name": "Espresso",
+        "price": "₺140",
+        "category": "Espresso İçecekler"
+      },
+      {
+        "name": "Americano",
+        "price": "₺170+",
+        "category": "Espresso İçecekler"
+      },
+      {
+        "name": "Latte",
+        "price": "₺180+",
+        "category": "Espresso İçecekler"
+      },
+      {
+        "name": "Cappuccino",
+        "price": "₺180+",
+        "category": "Espresso İçecekler"
+      },
+      {
+        "name": "Flat White",
+        "price": "₺190",
+        "category": "Espresso İçecekler"
+      },
+      {
+        "name": "Cortado",
+        "price": "₺190",
+        "category": "Espresso İçecekler"
+      },
+      {
+        "name": "Siyah Çay",
+        "price": "₺80+",
+        "category": "Diğer İçecekler"
+      },
+      {
+        "name": "Bitki Çayı",
+        "price": "₺140",
+        "category": "Diğer İçecekler"
+      },
+      {
+        "name": "Chai Tea Latte",
+        "price": "₺180+",
+        "category": "Diğer İçecekler"
+      },
+      {
+        "name": "Matcha Latte",
+        "price": "₺200+",
+        "category": "Diğer İçecekler"
+      },
+      {
+        "name": "Sıcak Çikolata",
+        "price": "₺220+",
+        "category": "Diğer İçecekler"
+      },
+      {
+        "name": "Salep",
+        "price": "₺180+",
+        "category": "Diğer İçecekler"
+      },
+      {
+        "name": "Mocha",
+        "price": "₺200+",
+        "category": "Tatlı İçecekler"
+      },
+      {
+        "name": "Beyaz Çikolata Mocha",
+        "price": "₺200+",
+        "category": "Tatlı İçecekler"
+      },
+      {
+        "name": "Yer Fıstıklı Mocha",
+        "price": "₺200+",
+        "category": "Tatlı İçecekler"
+      },
+      {
+        "name": "Hindistan Cevizli Mocha",
+        "price": "₺200+",
+        "category": "Tatlı İçecekler"
+      },
+      {
+        "name": "Vanilya Latte",
+        "price": "₺200+",
+        "category": "Tatlı İçecekler"
+      },
+      {
+        "name": "Fındıklı Latte",
+        "price": "₺200+",
+        "category": "Tatlı İçecekler"
+      },
+      {
+        "name": "Lotus Latte",
+        "price": "₺210+",
+        "category": "Tatlı İçecekler"
+      },
+      {
+        "name": "Karamel Latte",
+        "price": "₺200+",
+        "category": "Tatlı İçecekler"
+      },
+      {
+        "name": "Spanish Latte",
+        "price": "₺210+",
+        "category": "Tatlı İçecekler"
+      },
+      {
+        "name": "Balkabaklı Latte",
+        "price": "₺200+",
+        "category": "Tatlı İçecekler"
+      },
+      {
+        "name": "Hindistan Cevizli Latte",
+        "price": "₺200+",
+        "category": "Tatlı İçecekler"
+      },
+      {
+        "name": "Tuzlu Karamelli Latte",
+        "price": "₺200+",
+        "category": "Tatlı İçecekler"
+      },
+      {
+        "name": "Filtre Kahve",
+        "price": "₺140+",
+        "category": "Demlemeler"
+      },
+      {
+        "name": "Türk Kahvesi",
+        "price": "₺140+",
+        "category": "Demlemeler"
+      },
+      {
+        "name": "V60",
+        "price": "₺260",
+        "category": "Demlemeler"
+      },
+      {
+        "name": "Chemex",
+        "price": "₺260",
+        "category": "Demlemeler"
+      },
+      {
+        "name": "Cold Brew",
+        "price": "₺260",
+        "category": "Demlemeler"
+      },
+      {
+        "name": "Buzlu Japanese V60",
+        "price": "₺260",
+        "category": "Demlemeler"
       }
     ]
   },
