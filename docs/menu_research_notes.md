@@ -414,3 +414,6 @@ DDG Lite’ın son 42 mekanlık turda yanıt vermemesi üzerine aynı adaylar Bi
 ### Üsküp Simit Poğaça ID 7180 resmi fiyat kaynağı (23 Ağustos 2026)
 
 ID 7180 için resmi `uskupsimitpogaca.com` sitesi Hentzer adresi `Yenidoğan mah. Atışalanı cad. No:6, Bayrampaşa/İstanbul` ve telefon 0212 577 01 13 ile eşleşti. Public WordPress REST kaydında Fiyatlarımız sayfasının güncelleme tarihi 29.07.2025, fiyat görseli yüklemesi 24.07.2025 olarak görünüyor. Ürün/fiyat sayfası doğru şubeye ait olsa da 23.08.2026 itibarıyla bir yıldan eski olduğu için kullanıcı güncellik standardını geçmedi; override’a aktarılmadı ve fiyat uydurulmadı.
+### Dalyan Balık ID 7181 kaynak kararı (23 Ağustos 2026)
+
+ID 7181’in Hentzer şubesi Yalıköy, Ahmet Mithat Cd. No:2, Beykoz/İstanbul olarak kayıtlıdır. Aramada bulunan eatbu kaynağı Orta İskele 1, 34570 İstanbul adresini gösterdiğinden exact Beykoz şubesine aktarılmadı. Mekanlar.com sayfası yalnız ürün adlarını listeliyor, fiyat ve güncellik kanıtı sağlamıyor; Yemeksepeti sonuçları ise Ankara ve diğer şubelere ait. Instagram fiyat snippet’i de kaynak/şube doğrulaması olmadan kullanılmadı. Bu nedenle ID 7181 için override oluşturulmadı ve fiyat uydurulmadı.
