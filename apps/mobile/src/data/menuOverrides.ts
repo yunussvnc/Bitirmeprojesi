@@ -4,6 +4,194 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6149": {
+    "name": "Feriye Lokantasi",
+    "sourceUrl": "https://feriye.com/wp-content/uploads/2026/07/ANA_MENU_TR_22.06.26-FIYATSIZ_WEB.pdf",
+    "sourceName": "Feriye resmi 22.06.2026 menü değişim tarihli fiyat içermeyen ana menü PDF'si; exact Çırağan Caddesi No:44, 34347 Ortaköy/İstanbul ve +90 212 227 22 17, Hentzer ID 6149 ile eşleşti",
+    "verifiedAt": "2026-08-24",
+    "items": [
+      {
+        "name": "Balık Çorbası",
+        "category": "Çorbalar"
+      },
+      {
+        "name": "İsli Uskumru",
+        "category": "Ortadan / Feriye Mezeleri"
+      },
+      {
+        "name": "Bodrum “Gambilya” Fava",
+        "category": "Ortadan / Feriye Mezeleri"
+      },
+      {
+        "name": "Acı Yoğurt",
+        "category": "Ortadan / Feriye Mezeleri"
+      },
+      {
+        "name": "Karadutlu Köz Patlıcan",
+        "category": "Ortadan / Feriye Mezeleri"
+      },
+      {
+        "name": "Kabak Çiçeği Dolma",
+        "category": "Ortadan / Feriye Mezeleri"
+      },
+      {
+        "name": "Etli Mercimek Köfte",
+        "category": "Ortadan / Feriye Mezeleri"
+      },
+      {
+        "name": "Karidesli Fasulye Piyazı",
+        "category": "Ortadan / Feriye Mezeleri"
+      },
+      {
+        "name": "Fırın Enginar",
+        "category": "Ortadan / Feriye Mezeleri"
+      },
+      {
+        "name": "Tarama",
+        "category": "Ortadan / Feriye Mezeleri"
+      },
+      {
+        "name": "Bamyali Çipura",
+        "category": "Ortadan / Feriye Mezeleri"
+      },
+      {
+        "name": "Deniz Börülcesi",
+        "category": "Ortadan / Feriye Mezeleri"
+      },
+      {
+        "name": "Yöresel Peynir Tabağı",
+        "category": "Ortadan / Yöresel Peynir Tabağı"
+      },
+      {
+        "name": "Domates Salatası",
+        "category": "Başlangıçlar"
+      },
+      {
+        "name": "Avokadolu Bahçe Otları Salata",
+        "category": "Başlangıçlar"
+      },
+      {
+        "name": "Karpuzlu Semizotu Salata",
+        "category": "Başlangıçlar"
+      },
+      {
+        "name": "Izgara Levrek Salata",
+        "category": "Başlangıçlar"
+      },
+      {
+        "name": "Marine Edilmiş Levrek",
+        "category": "Başlangıçlar"
+      },
+      {
+        "name": "Kızarmış Çerkez Tavuğu",
+        "category": "Başlangıçlar"
+      },
+      {
+        "name": "Pazar Otları Böreği",
+        "category": "Başlangıçlar"
+      },
+      {
+        "name": "Sote Yaban Mantarlı Erişte",
+        "category": "Başlangıçlar"
+      },
+      {
+        "name": "Köz Patlıcanlı “Hıngel” Mantısı",
+        "category": "Başlangıçlar"
+      },
+      {
+        "name": "Ödemiş Patates Cips",
+        "category": "Başlangıçlar"
+      },
+      {
+        "name": "İdil Olta Kalamar Tava",
+        "category": "Başlangıçlar"
+      },
+      {
+        "name": "Ahtapot Izgara",
+        "category": "Başlangıçlar"
+      },
+      {
+        "name": "Tereyağlı Kırmızı Kanlı Karides",
+        "category": "Başlangıçlar"
+      },
+      {
+        "name": "Arnavut Ciğeri",
+        "category": "Başlangıçlar"
+      },
+      {
+        "name": "Kokoreç",
+        "category": "Başlangıçlar"
+      },
+      {
+        "name": "İskenderun Karides",
+        "category": "Ana Yemek"
+      },
+      {
+        "name": "Izgara Deniz Levreği",
+        "category": "Ana Yemek"
+      },
+      {
+        "name": "Fırında Çıtır Lagos",
+        "category": "Ana Yemek"
+      },
+      {
+        "name": "Denizden Arpa Şehriye Pilavı",
+        "category": "Ana Yemek"
+      },
+      {
+        "name": "Dana Pirzola",
+        "category": "Ana Yemek"
+      },
+      {
+        "name": "Kuzu Sırtı",
+        "category": "Ana Yemek"
+      },
+      {
+        "name": "Bonfile Dilimleri",
+        "category": "Ana Yemek"
+      },
+      {
+        "name": "Fırında Dana Kaburga",
+        "category": "Ana Yemek"
+      },
+      {
+        "name": "Küşleme",
+        "category": "Ana Yemek"
+      },
+      {
+        "name": "Pideli Köfte",
+        "category": "Ana Yemek"
+      },
+      {
+        "name": "Köz Ateşinde Tavuk Şiş",
+        "category": "Ana Yemek"
+      },
+      {
+        "name": "Ördek But Tandir",
+        "category": "Ana Yemek"
+      },
+      {
+        "name": "Levrek",
+        "category": "Paylaşımlıklar (2 Kişilik)"
+      },
+      {
+        "name": "Bonfile Dilimleri",
+        "category": "Paylaşımlıklar (2 Kişilik)"
+      },
+      {
+        "name": "Trakya Kıvırcık Kuzu Tandir (2-3 Kişilik)",
+        "category": "Paylaşımlıklar (2 Kişilik)"
+      },
+      {
+        "name": "Dana Kavurma",
+        "category": "Paylaşımlıklar (2 Kişilik)"
+      },
+      {
+        "name": "Fırında Deniz Mahsulleri",
+        "category": "Paylaşımlıklar (2 Kişilik)"
+      }
+    ]
+  },
   "7191": {
     "name": "Balıkçı Kenan",
     "sourceUrl": "https://www.menu-tr.com/balikci-kenan",
