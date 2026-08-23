@@ -27987,6 +27987,4607 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
         "category": "Ekstralar"
       }
     ]
-  }
-
+  },
+    "900": {
+      "name": "Flake Breakfast & More",
+      "sourceUrl": "https://qr.finedinemenu.com/flake-breakfast/menu/667a873d07c1c746408d7ad3",
+      "sourceName": "Finedine kullanıcı QR menüsü/API; exact shop: Flake Breakfast; kaynak adresi: Rasimpaşa Mah. Recaizade Sok. No:50/A Kadıköy/İstanbul  kadıköy istanbul",
+      "verifiedAt": "2026-08-23",
+      "items": [
+        {
+          "name": "1 Gün",
+          "price": "405",
+          "desc": "Sade kruvasan, cherry domates, salatalık, salsa sos, vişne reçeli, ezine peyniri. ",
+          "category": "Kruvasan"
+        },
+        {
+          "name": "Salı",
+          "price": "465",
+          "desc": "Flat kruvasan üzerine haşlanmış yumurta, labne, süzme yoğurt, avokado püresi, dereotu, acı yağ yanında domates, salatalık ve haşlanmış soslu patates ile servis edilir. ",
+          "category": "Kruvasan"
+        },
+        {
+          "name": "Çarşamba",
+          "price": "465",
+          "desc": "Flat kruvasan üzerine ton balığı, mısır, kornişon turşu, nar ekşisi, marul, roka, kuzukulağı, labne, cherry domates yanında salatalık, soslu zeytin ve haşlanmış soslu patates ile servis edilir. ",
+          "category": "Kruvasan"
+        },
+        {
+          "name": "Perşembe",
+          "price": "480",
+          "desc": "Flat kruvasan üzerine ricotto peyniri, krema, ananas, ceviz yanında muz, çilek ve bal ile servis edilir. ",
+          "category": "Kruvasan"
+        },
+        {
+          "name": "Cuma",
+          "price": "550",
+          "desc": "Flat kruvasan üzerine bbq sos ile marine edilmiş dana bacon, roka, kuru domates, ceviz, nar ekşisi, çırpılmış yumurta, parmesan peyniri,labne yanında salatalık, soslu zeytin ve haşlanmış soslu patates ile servis edilir. ",
+          "category": "Kruvasan"
+        },
+        {
+          "name": "Cumartesi",
+          "price": "530",
+          "desc": "Flat kruvasan üzerine hindi füme, roka, kuzukulağı, kapya biber, çırpılmış yumurta yanında salatalık, soslu zeytin ve haşlanmış soslu patates ile servis edilir. ",
+          "category": "Kruvasan"
+        },
+        {
+          "name": "Pazar",
+          "price": "515",
+          "desc": "Flat kruvasan üzerine mozzarella, domates, pesto sos, parmesan yanında salatalık, soslu zeytin ve haşlanmış soslu patates ile servis edilir. ",
+          "category": "Kruvasan"
+        },
+        {
+          "name": "Ekinoks",
+          "price": "435",
+          "desc": "Ekşi mayalı cevizli ekmek üzerine Avokado püresi, Pancar, Tofu peyniri, Havuç slice, Şifonat sebze, Nohut, Konserve Mısır, Kornişon turşu, Çilek vinegrett. Yanında cherry domates, salatalık, soslu zeytin ve akdeniz salatası ile servis edilir. ",
+          "category": "Ekmek Üstü "
+        },
+        {
+          "name": "Ocak \\\"menemen tadında\\\"",
+          "price": "470",
+          "desc": "Ekşi mayalı cevizli ekmek üzerine, haşlanmış yumurta, labne peyniri, salsa sos, cherry domates, kaşar peyniri ve dereotu. Yanında cherry domates, salatalık, soslu zeytin, haşlanmış soslu patates ve akdeniz salatası ile servis edilir. ",
+          "category": "Ekmek Üstü "
+        },
+        {
+          "name": "Şubat",
+          "price": "495",
+          "desc": "Ekşi mayalı cevizli ekmek üzerine ricotto ve pesto sos, çırpılmış yumurta, dana bacon ve frenk soğanı. Yanında cherry domates, salatalık, soslu zeytin, haşlanmış soslu patates ve akdeniz salatası ile servis edilir. ",
+          "category": "Ekmek Üstü "
+        },
+        {
+          "name": "Mart",
+          "price": "540",
+          "desc": "Ekşi mayalı cevizli ekmek üzerine fesleğenli patates,susam, sweet chili aromalı frankfurter sosis yanında salatalık, akdeniz yeşillik, cherry domates, zeytin salatası, salsa sos ile servis edilir. ",
+          "category": "Ekmek Üstü "
+        },
+        {
+          "name": "Mayıs",
+          "price": "465",
+          "desc": "Ekşi mayalı cevizli ekmek üzerine domates, taze mozzarella peyniri, toz parmesan, pesto sos. Yanında cherry domates, salatalık, soslu zeytin, haşlanmış soslu patates ve akdeniz salatası ile servis edilir. ",
+          "category": "Ekmek Üstü "
+        },
+        {
+          "name": "Haziran",
+          "price": "495",
+          "desc": "Ekşi mayalı cevizli ekmek üzerine labne peyniri, çırpılmış yumurta ve avokado dilimleri. Yanında cherry domates, salatalık, soslu zeytin, haşlanmış soslu patates ve akdeniz salatası ile servis edilir. ",
+          "category": "Ekmek Üstü "
+        },
+        {
+          "name": "Ağustos",
+          "price": "430",
+          "desc": "Ekşi mayalı cevizli ekmek üzerine domates, ezine peyniri, ceviz, kuru domates, nar ekşisi ve nane. Yanında cherry domates, salatalık, soslu zeytin, haşlanmış soslu patates ve akdeniz salatası ile servis edilir. ",
+          "category": "Ekmek Üstü "
+        },
+        {
+          "name": "Kasım",
+          "price": "540",
+          "desc": "Ekşi mayalı cevizli ekmek üzerine çırpılmış yumurta ve frankfurter sosis. Yanında cherry domates, salatalık, soslu zeytin, haşlanmış soslu patates ve akdeniz salatası ile servis edilir. ",
+          "category": "Ekmek Üstü "
+        },
+        {
+          "name": "Aralık",
+          "price": "465",
+          "desc": "Ekşi mayalı cevizli ekmek üzerine hindi füme, salsa sos, göz yumurta ve kaşar peyniri. Yanında cherry domates, salatalık, soslu zeytin, haşlanmış soslu patates ve akdeniz salatası ile servis edilir. ",
+          "category": "Ekmek Üstü "
+        },
+        {
+          "name": "Sabah",
+          "price": "305",
+          "desc": "Sade omlet yanına cherry domates, salatalık, soslu zeytin ve yeşillik ile servis edilir. ",
+          "category": "Omlet"
+        },
+        {
+          "name": "Öğle",
+          "price": "345",
+          "desc": "Hindi fümeli ve kaşarlı omlet yanına cherry domates, salatalık, soslu zeytin ve yeşillik ile servis edilir. ",
+          "category": "Omlet"
+        },
+        {
+          "name": "Akşam",
+          "price": "345",
+          "desc": "Mantarlı ve peynirli omlet yanına cherry domates, salatalık, soslu zeytin ve yeşillik ile servis edilir. ",
+          "category": "Omlet"
+        },
+        {
+          "name": "Yılın En İyisi",
+          "price": "595",
+          "desc": "Göz yumurta, avokado dilimleri, frankfurter sosis, cherry domates, zeytin salatası, salatalık, ricotto ve vişne reçeli, akdeniz yeşillikleri ve ekşi mayalı cevizli ekmek ile servis edilir. ",
+          "category": "Kahvaltı Tabağı"
+        },
+        {
+          "name": "Her Zaman",
+          "price": "510",
+          "desc": "Hindi füme, göz yumurta, ezine peynir, salsa sos, vişne reçeli, soslu zeytin, cherry domates, salatalık, akdeniz salata, ceviz, haşlanmış soslu patates, ekşi mayalı cevizli ekmek ile servis edilir. ",
+          "category": "Kahvaltı Tabağı"
+        },
+        {
+          "name": "4 Mevsim",
+          "price": "595",
+          "desc": "Hellim peyniri,  lutenissa,  avokado, lolorosso, domates, salatalık, labne, lutenissa, ricotto bar ve patatesli yumurta ile servis edilir. ",
+          "category": "Kahvaltı Tabağı"
+        },
+        {
+          "name": "Annemin Günü ",
+          "price": "255",
+          "desc": "2 adet mücver, 4 adet zeytinyağlı yaprak sarması, kısır, süzme yoğurt. ",
+          "category": "Komşuda Pişer"
+        },
+        {
+          "name": "Salçalı Sosis",
+          "price": "255",
+          "desc": "",
+          "category": "Komşuda Pişer"
+        },
+        {
+          "name": "Yumurtalı Ekmek",
+          "price": "235",
+          "desc": "Kızarmış 3 dilim ekmek, yanında vişne reçeli ile servis edilir. ",
+          "category": "Komşuda Pişer"
+        },
+        {
+          "name": "Patatesli Yumurta",
+          "price": "255",
+          "desc": "Patatesli yumurta üzerine kırmızı toz biber ile servis edilir. ",
+          "category": "Komşuda Pişer"
+        },
+        {
+          "name": "Beyaz Belçika Çikolatası",
+          "price": "395",
+          "desc": "Flat kruvasan üzerine beyaz ya da bitter çikolata seçimi yapabilirsiniz. Üzerine süsleme seçenekleri arasından 2 tane seçip eklemeyi unutmayın. ",
+          "category": "Make Choice"
+        },
+        {
+          "name": "Bitter Belçika Çikolatası",
+          "price": "395",
+          "desc": "Flat kruvasan üzerine beyaz ya da sütlü çikolata seçimi yapabilirsiniz. Üzerine süsleme seçenekleri arasından 2 tane seçip eklemeyi unutmayın. ",
+          "category": "Make Choice"
+        },
+        {
+          "name": "Ahududu Sorbe & Limon",
+          "price": "445",
+          "desc": "",
+          "category": "Magnum Croissant"
+        },
+        {
+          "name": "Karadut & Böğürtlen",
+          "price": "445",
+          "desc": "",
+          "category": "Magnum Croissant"
+        },
+        {
+          "name": "Beyaz",
+          "price": "445",
+          "desc": "",
+          "category": "Magnum Croissant"
+        },
+        {
+          "name": "Badem",
+          "price": "445",
+          "desc": "",
+          "category": "Magnum Croissant"
+        },
+        {
+          "name": "Double Çikolata",
+          "price": "445",
+          "desc": "",
+          "category": "Magnum Croissant"
+        },
+        {
+          "name": "Cookie",
+          "price": "445",
+          "desc": "",
+          "category": "Magnum Croissant"
+        },
+        {
+          "name": "Popstraw",
+          "price": "275",
+          "desc": "Çilekli, patlayan şekerli milkshake ➡️ Sanki ağızda festival var! İsmi de tıpkı tadı gibi çıtır çıtır.  ",
+          "category": "Shake It Milkshake"
+        },
+        {
+          "name": "Jelibuz",
+          "price": "275",
+          "desc": "Karpuzlu, jelibonlu milkshake ➡️ Jelibonlar denizde yüzüyor, karpuz ise güneşleniyor… yaz kokulu bir hayal!    ",
+          "category": "Shake It Milkshake"
+        },
+        {
+          "name": "Biskotti",
+          "price": "275",
+          "desc": "Karamelli, Lotus Biscoff milkshake ➡️ İsmiyle tutkulu, tadıyla yumuşacık… Lotus’un tarçınlı öpücüğü damağında kalacak. ",
+          "category": "Shake It Milkshake"
+        },
+        {
+          "name": "Chocokat",
+          "price": "275",
+          "desc": "Çikolatalı, Rulokatlı milkshake ➡️ Rulokat içine daldı, çikolata da peşinden atladı—birlikte shake oldular!    ",
+          "category": "Shake It Milkshake"
+        },
+        {
+          "name": "Cicimuz",
+          "price": "275",
+          "desc": "Muzlu, ballı, cicibebeli milkshake ➡️ İsmiyle nostalji, tadıyla çocukluk… CiciBebeyle büyüyenlere selam! ",
+          "category": "Shake It Milkshake"
+        },
+        {
+          "name": "Boniboni",
+          "price": "275",
+          "desc": "Vanilyalı, bonibonlu milkshake ➡️ Renkleriyle gözünü, vanilyasıyla kalbini çalar. İçindeki çocuğa bir yudum selam!  ",
+          "category": "Shake It Milkshake"
+        },
+        {
+          "name": "Apple Joy",
+          "price": "245",
+          "desc": "",
+          "category": "Flake Like Us"
+        },
+        {
+          "name": "Ballı Süt",
+          "price": "195",
+          "desc": "",
+          "category": "Flake Like Us"
+        },
+        {
+          "name": "Like Purple",
+          "price": "245",
+          "desc": "",
+          "category": "Flake Like Us"
+        },
+        {
+          "name": "Matcha Chill",
+          "price": "280",
+          "desc": "",
+          "category": "Flake Like Us"
+        },
+        {
+          "name": "Salep",
+          "price": "225",
+          "desc": "",
+          "category": "Flake Like Us"
+        },
+        {
+          "name": "Straw Flat",
+          "price": "245",
+          "desc": "",
+          "category": "Flake Like Us"
+        },
+        {
+          "name": "Sıcak Çikolata",
+          "price": "235",
+          "desc": "Bitter belçika çikolatası eritilerek yapılır. ",
+          "category": "Flake Like Us"
+        },
+        {
+          "name": "Teabiscus",
+          "price": "220",
+          "desc": "",
+          "category": "Flake Like Us"
+        },
+        {
+          "name": "Teamango",
+          "price": "220",
+          "desc": "",
+          "category": "Flake Like Us"
+        },
+        {
+          "name": "Ice Americano",
+          "price": "235",
+          "desc": "",
+          "category": "Soğuk Kahveler"
+        },
+        {
+          "name": "Ice Cappuccino",
+          "price": "245",
+          "desc": "",
+          "category": "Soğuk Kahveler"
+        },
+        {
+          "name": "Ice Filter Coffee",
+          "price": "220",
+          "desc": "",
+          "category": "Soğuk Kahveler"
+        },
+        {
+          "name": "Ice Latte",
+          "price": "245",
+          "desc": "",
+          "category": "Soğuk Kahveler"
+        },
+        {
+          "name": "Affogato",
+          "price": "240",
+          "desc": "",
+          "category": "Sıcak Kahveler"
+        },
+        {
+          "name": "Americano",
+          "price": "205",
+          "desc": "",
+          "category": "Sıcak Kahveler"
+        },
+        {
+          "name": "Cappuccino",
+          "price": "225",
+          "desc": "",
+          "category": "Sıcak Kahveler"
+        },
+        {
+          "name": "Chai Tea Latte",
+          "price": "240",
+          "desc": "",
+          "category": "Sıcak Kahveler"
+        },
+        {
+          "name": "Cortado",
+          "price": "200",
+          "desc": "",
+          "category": "Sıcak Kahveler"
+        },
+        {
+          "name": "Espresso",
+          "price": "135",
+          "desc": "",
+          "category": "Sıcak Kahveler"
+        },
+        {
+          "name": "Filtre Kahve",
+          "price": "205",
+          "desc": "",
+          "category": "Sıcak Kahveler"
+        },
+        {
+          "name": "Flat White",
+          "price": "220",
+          "desc": "",
+          "category": "Sıcak Kahveler"
+        },
+        {
+          "name": "Latte",
+          "price": "225",
+          "desc": "",
+          "category": "Sıcak Kahveler"
+        },
+        {
+          "name": "Türk Kahvesi",
+          "price": "145",
+          "desc": "",
+          "category": "Sıcak Kahveler"
+        },
+        {
+          "name": "Yeşil Çay",
+          "price": "230",
+          "desc": "",
+          "category": "Bitki Çayları"
+        },
+        {
+          "name": "Hibiscus Çayı",
+          "price": "230",
+          "desc": "",
+          "category": "Bitki Çayları"
+        },
+        {
+          "name": "Ada Çayı",
+          "price": "230",
+          "desc": "",
+          "category": "Bitki Çayları"
+        },
+        {
+          "name": "Kış Çayı",
+          "price": "230",
+          "desc": "",
+          "category": "Bitki Çayları"
+        },
+        {
+          "name": "Ihlamur",
+          "price": "230",
+          "desc": "",
+          "category": "Bitki Çayları"
+        },
+        {
+          "name": "Elma & Tarçın Çayı",
+          "price": "230",
+          "desc": "",
+          "category": "Bitki Çayları"
+        },
+        {
+          "name": "Melisa Çayı",
+          "price": "230",
+          "desc": "",
+          "category": "Bitki Çayları"
+        },
+        {
+          "name": "Su",
+          "price": "55",
+          "desc": "",
+          "category": "İçecekler"
+        },
+        {
+          "name": "Soda",
+          "price": "80",
+          "desc": "",
+          "category": "İçecekler"
+        },
+        {
+          "name": "Çay",
+          "price": "65",
+          "desc": "",
+          "category": "İçecekler"
+        },
+        {
+          "name": "Fincan Çay",
+          "price": "85",
+          "desc": "",
+          "category": "İçecekler"
+        },
+        {
+          "name": "Churchill",
+          "price": "95",
+          "desc": "",
+          "category": "İçecekler"
+        },
+        {
+          "name": "Limonata",
+          "price": "260",
+          "desc": "",
+          "category": "İçecekler"
+        },
+        {
+          "name": "Taze Sıkılmış Portakal Suyu",
+          "price": "260",
+          "desc": "",
+          "category": "İçecekler"
+        },
+        {
+          "name": "Hindi Füme",
+          "price": "115",
+          "desc": "",
+          "category": "Ekstralar"
+        },
+        {
+          "name": "Kruvasan Sade",
+          "price": "195",
+          "desc": "",
+          "category": "Ekstralar"
+        },
+        {
+          "name": "Dana Bacon",
+          "price": "135",
+          "desc": "",
+          "category": "Ekstralar"
+        },
+        {
+          "name": "Avokado",
+          "price": "95",
+          "desc": "",
+          "category": "Ekstralar"
+        },
+        {
+          "name": "Yumurta",
+          "price": "45",
+          "desc": "",
+          "category": "Ekstralar"
+        },
+        {
+          "name": "Dana Sosis",
+          "price": "160",
+          "desc": "",
+          "category": "Ekstralar"
+        },
+        {
+          "name": "Şurup",
+          "price": "45",
+          "desc": "",
+          "category": "Ekstralar"
+        },
+        {
+          "name": "Yulaf Sütü",
+          "price": "45",
+          "desc": "",
+          "category": "Ekstralar"
+        },
+        {
+          "name": "Badem Sütü",
+          "price": "45",
+          "desc": "",
+          "category": "Ekstralar"
+        }
+      ]
+    },
+    "1072": {
+      "name": "SushiCo",
+      "sourceUrl": "https://www.migros.com.tr/yemek/sushico-besiktas-bebek-mah-st-20765",
+      "sourceName": "Migros Yemek canlı menüsü (exact vendor: SushiCo, Beşiktaş (Bebek Mah.); Hentzer kaydıyla aynı mahalle)",
+      "verifiedAt": "2026-08-23",
+      "items": [
+        {
+          "name": "Trio Bento 5",
+          "price": "30",
+          "desc": "Sebzeli Egg Noodle 1/2 pors, Acı Lahana Salatası 1/2 pors, seçeceğiniz bir Cooked Roll (unagi içren ürünler için 30 TL eklenir)",
+          "category": "Bento Menüler"
+        }
+      ]
+    },
+    "1095": {
+      "name": "The Smashy",
+      "sourceUrl": "https://www.migros.com.tr/yemek/the-smashy-burger-besiktas-sinanpasa-mah-st-23006",
+      "sourceName": "Migros Yemek canlı menüsü (exact vendor: The Smashy Burger, Beşiktaş (Sinanpaşa Mah.); Hentzer kaydıyla aynı mahalle)",
+      "verifiedAt": "2026-08-23",
+      "items": [
+        {
+          "name": "Mushboom Burger",
+          "price": "75",
+          "desc": "150gr burger köftesi (ilave köfte 75 gr. + 75TL), ragu mantar, trüf mayonez, 2 dilim cheddar peyniri, alman turşusu, patates kızartması ile.",
+          "category": "Et Burgerler"
+        }
+      ]
+    },
+    "1246": {
+      "name": "Sour & Sweet Artisan Bakery Akaretler",
+      "sourceUrl": "https://qr.finedinemenu.com/sour-and-sweet-artisan-bakery-akaretler/menu/68d5427d315381aa9bcfc17f",
+      "sourceName": "Finedine kullanıcı QR menüsü/API; exact shop: Sour & Sweet Artisan Bakery Akaretler; Hentzer koordinatına uzaklık: 10.3 m",
+      "verifiedAt": "2026-08-23",
+      "items": [
+        {
+          "name": "Beyaz Çikolatalı Brownie",
+          "price": "390",
+          "desc": "",
+          "category": "Tatlılar"
+        },
+        {
+          "name": "Çilekli Pasta",
+          "price": "390",
+          "desc": "",
+          "category": "Tatlılar"
+        },
+        {
+          "name": "Choco Crunch Praline",
+          "price": "390",
+          "desc": "",
+          "category": "Tatlılar"
+        },
+        {
+          "name": "Hindistan Cevizli Brulee",
+          "price": "370",
+          "desc": "",
+          "category": "Tatlılar"
+        },
+        {
+          "name": "Profiterol",
+          "price": "390",
+          "desc": "",
+          "category": "Tatlılar"
+        },
+        {
+          "name": "San Sebastian Cheesecake",
+          "price": "390",
+          "desc": "",
+          "category": "Tatlılar"
+        },
+        {
+          "name": "Cherry Mastic Cheseecake",
+          "price": "410",
+          "desc": "",
+          "category": "Tatlılar"
+        },
+        {
+          "name": "Şeftalili Pasta",
+          "price": "390",
+          "desc": "",
+          "category": "Tatlılar"
+        },
+        {
+          "name": "Kayısı Marmelatlı Muhallebi",
+          "price": "300",
+          "desc": "",
+          "category": "Tatlılar"
+        },
+        {
+          "name": "Çikolatalı Pasta",
+          "price": "330",
+          "desc": "",
+          "category": "Tatlılar"
+        },
+        {
+          "name": "Sufle",
+          "price": "390",
+          "desc": "bitter çikolatalı. 1 top vanilya dondurma ile servis edilir. ",
+          "category": "Tatlılar"
+        },
+        {
+          "name": "Frambuazlı Pasta",
+          "price": "330",
+          "desc": "",
+          "category": "Tatlılar"
+        },
+        {
+          "name": "Limonlu Cheesecake",
+          "price": "260",
+          "desc": " ",
+          "category": "Tatlılar"
+        },
+        {
+          "name": "Kırmızı Meyveli Cheseecake",
+          "price": "260",
+          "desc": "orman meyveleri ",
+          "category": "Tatlılar"
+        },
+        {
+          "name": "Çikolatalı Islak Kek",
+          "price": "260",
+          "desc": "",
+          "category": "Kekler / Kurabiyeler ve Poğaçalar"
+        },
+        {
+          "name": "Cevizli Havuçlu Kek",
+          "price": "260",
+          "desc": "",
+          "category": "Kekler / Kurabiyeler ve Poğaçalar"
+        },
+        {
+          "name": "Mozaik Kek",
+          "price": "230",
+          "desc": "",
+          "category": "Kekler / Kurabiyeler ve Poğaçalar"
+        },
+        {
+          "name": "Fındıklı Çikolatalı Cookie",
+          "price": "180",
+          "desc": "",
+          "category": "Kekler / Kurabiyeler ve Poğaçalar"
+        },
+        {
+          "name": "Cookie Pay",
+          "price": "260",
+          "desc": "çikolatalı karamelli ",
+          "category": "Kekler / Kurabiyeler ve Poğaçalar"
+        },
+        {
+          "name": "Mozzarella Sandviç",
+          "price": "450",
+          "desc": "Burrata Kreması, Pesto Sos, Domates Reçeli, Trüf Bal, Suda Mozzarella, Domates ",
+          "category": "Sandviçler"
+        },
+        {
+          "name": "Hindi Fümeli Sandviç",
+          "price": "500",
+          "desc": "Yeşillik, Parmesan, Roka, Domates, Hindi Füme, Göbek, Sezar Sos ",
+          "category": "Sandviçler"
+        },
+        {
+          "name": "Füme Et Sandviç",
+          "price": "550",
+          "desc": "Chili Sos, Roka, Domates, Turşu, Slize Parmesan, Füme Kaburga ",
+          "category": "Sandviçler"
+        },
+        {
+          "name": "Somonlu Sandviç",
+          "price": "600",
+          "desc": "Yeşillikler, Parmesan, Roka, Capari, Füme Somon, Kırmızı Soğan ",
+          "category": "Sandviçler"
+        },
+        {
+          "name": "200 gr",
+          "price": "850",
+          "desc": "tam buğday ekmeği ile servis edilir. eritme peynir ekstra 150 tl ",
+          "category": "Pastrami"
+        },
+        {
+          "name": "300 gr",
+          "price": "1200",
+          "desc": "tam buğday ekmeği ile servis edilir. eritme peynir ekstra 150 tl ",
+          "category": "Pastrami"
+        },
+        {
+          "name": "Sade Patates",
+          "price": "390",
+          "desc": " ",
+          "category": "Burgerler"
+        },
+        {
+          "name": "Trüflü ve Parmesanlı Patates",
+          "price": "430",
+          "desc": "Trüf ve parmesanlı  ",
+          "category": "Burgerler"
+        },
+        {
+          "name": "S&S Burger",
+          "price": "690",
+          "desc": "160 gr burger köftesi, s&s sos, çedar peyniri, karamelize soğan, dana bacon, patates kızartması ile servis edilir. ",
+          "category": "Burgerler"
+        },
+        {
+          "name": "Cheeseburger",
+          "price": "590",
+          "desc": "160 gr dana burger köftesi, s&s sos, göbek marul, domates, çedar peyniri, patates kızartması ile servis edilir. ",
+          "category": "Burgerler"
+        },
+        {
+          "name": "Tavuk Burger",
+          "price": "530",
+          "desc": "panelenmiş tavuk, burger sosu, iceberg marul, domates ",
+          "category": "Burgerler"
+        },
+        {
+          "name": "Trüf Burger",
+          "price": "710",
+          "desc": "160 gr dana burger köftesi, çedar peyniri, trüf mayonez, iceberg marul, sote mantar. trüf patates ile servis edilir. ",
+          "category": "Burgerler"
+        },
+        {
+          "name": "Tavuklu Sezar Salata",
+          "price": "620",
+          "desc": "Izgara tavuk göğsü, göbek, kruton ekmek, parmesan, sezar sos ",
+          "category": "Mevsim Salataları"
+        },
+        {
+          "name": "Caprese",
+          "price": "760",
+          "desc": "Taze mozzarella, domates, akdeniz yeşillikleri, citronette sos, pesto sos ",
+          "category": "Mevsim Salataları"
+        },
+        {
+          "name": "Roka Parmesan Salatası",
+          "price": "560",
+          "desc": "Roka, çeri domates, parmesan, citronette sos, balzamik ",
+          "category": "Mevsim Salataları"
+        },
+        {
+          "name": "Greek Salata",
+          "price": "560",
+          "desc": "Çeri domates, salatalık, renkli biber, kırmızı soğan, taze nane, beyaz peynir, citronette sos ",
+          "category": "Mevsim Salataları"
+        },
+        {
+          "name": "Avokado Salatası ",
+          "price": "630",
+          "desc": "Akdeniz yeşillikleri, avokado, enginar kalbi, çeri  domates, baby turp, parmesan, citronette sos ",
+          "category": "Mevsim Salataları"
+        },
+        {
+          "name": "Somon Salatası",
+          "price": "790",
+          "desc": "füme somon, kapari, akdeniz yeşillikleri, kırmızı soğan, pesto sos ",
+          "category": "Mevsim Salataları"
+        },
+        {
+          "name": "1 TOP",
+          "price": "180",
+          "desc": "",
+          "category": "Dondurma"
+        },
+        {
+          "name": "Çoçuk Top",
+          "price": "140",
+          "desc": "",
+          "category": "Dondurma"
+        },
+        {
+          "name": "1 KG (5-6 çeşit)",
+          "price": "1950",
+          "desc": "",
+          "category": "Dondurma"
+        },
+        {
+          "name": "750 GR (4-5 Çeşit)",
+          "price": "15000",
+          "desc": "",
+          "category": "Dondurma"
+        },
+        {
+          "name": "Yarım Kg (3-4 çeşit)",
+          "price": "1100",
+          "desc": "",
+          "category": "Dondurma"
+        },
+        {
+          "name": "Vanilyalı",
+          "price": "180",
+          "desc": "",
+          "category": "Dondurma"
+        },
+        {
+          "name": "Limon Sorbe",
+          "price": "180",
+          "desc": "",
+          "category": "Dondurma"
+        },
+        {
+          "name": "Antep Fıstıklı",
+          "price": "180",
+          "desc": "",
+          "category": "Dondurma"
+        },
+        {
+          "name": "Ricottalı Portakal",
+          "price": "180",
+          "desc": "",
+          "category": "Dondurma"
+        },
+        {
+          "name": "Cici Bebeli",
+          "price": "180",
+          "desc": "",
+          "category": "Dondurma"
+        },
+        {
+          "name": "Bitter Sorbe (rafine şekersiz)",
+          "price": "180",
+          "desc": "",
+          "category": "Dondurma"
+        },
+        {
+          "name": "Çilek Sorbe",
+          "price": "180",
+          "desc": "",
+          "category": "Dondurma"
+        },
+        {
+          "name": "Lotus Bisküvi",
+          "price": "180",
+          "desc": "",
+          "category": "Dondurma"
+        },
+        {
+          "name": "Tiramisulu",
+          "price": "180",
+          "desc": "",
+          "category": "Dondurma"
+        },
+        {
+          "name": "Tuzlu Karamelli ",
+          "price": "180",
+          "desc": "",
+          "category": "Dondurma"
+        },
+        {
+          "name": "Mango Sorbe",
+          "price": "180",
+          "desc": "",
+          "category": "Dondurma"
+        },
+        {
+          "name": "Vişne Yoğurt",
+          "price": "180",
+          "desc": "",
+          "category": "Dondurma"
+        },
+        {
+          "name": "Hindistan Cevizli",
+          "price": "180",
+          "desc": "",
+          "category": "Dondurma"
+        },
+        {
+          "name": "Nutella Fındık",
+          "price": "180",
+          "desc": "",
+          "category": "Dondurma"
+        },
+        {
+          "name": "Lavanta Yaban Mersini Cheesecake",
+          "price": "180",
+          "desc": "",
+          "category": "Dondurma"
+        },
+        {
+          "name": "Sütlü Belçika Çikolata",
+          "price": "180",
+          "desc": "",
+          "category": "Dondurma"
+        },
+        {
+          "name": "Vişne Brownie Çikolata",
+          "price": "180",
+          "desc": "",
+          "category": "Dondurma"
+        },
+        {
+          "name": "Homemade Ice Tea’s",
+          "price": "230",
+          "desc": "Şeftali-Karpuz--Limon-Passion-Orman Meyveli-Mango-Ananas seçenekleri ile mevcuttur. ",
+          "category": "Soft"
+        },
+        {
+          "name": "Sıkma Portakal Suyu",
+          "price": "250",
+          "desc": " ",
+          "category": "Soft"
+        },
+        {
+          "name": "Churchill",
+          "price": "150",
+          "desc": " ",
+          "category": "Soft"
+        },
+        {
+          "name": "Uludağ Premium Su (75cl)",
+          "price": "140",
+          "desc": "",
+          "category": "Soft"
+        },
+        {
+          "name": "Uludağ Premium Soda",
+          "price": "120",
+          "desc": "",
+          "category": "Soft"
+        },
+        {
+          "name": "Coca-Cola / Zero",
+          "price": "140",
+          "desc": "",
+          "category": "Soft"
+        },
+        {
+          "name": "Sprite",
+          "price": "140",
+          "desc": "",
+          "category": "Soft"
+        },
+        {
+          "name": "Uludağ Premium Su (33cl)",
+          "price": "90",
+          "desc": "",
+          "category": "Soft"
+        },
+        {
+          "name": "Sıkma Elma Suyu",
+          "price": "250",
+          "desc": "",
+          "category": "Soft"
+        },
+        {
+          "name": "Detox Lemonade",
+          "price": "280",
+          "desc": "Yeşil Elma, Maydanoz ve Salatalık. ",
+          "category": "Limonata"
+        },
+        {
+          "name": "Limonata",
+          "price": "230",
+          "desc": " ",
+          "category": "Limonata"
+        },
+        {
+          "name": "Çilekli Limonata",
+          "price": "280",
+          "desc": "Çilek, limonata. ",
+          "category": "Limonata"
+        },
+        {
+          "name": "Passion Limonata",
+          "price": "280",
+          "desc": "Passion fruit, limonata. ",
+          "category": "Limonata"
+        },
+        {
+          "name": "Naneli Limonata",
+          "price": "280",
+          "desc": "Nane, limonata. ",
+          "category": "Limonata"
+        },
+        {
+          "name": "Matcha Smoothie",
+          "price": "400",
+          "desc": "Avokado dilimleri, muz, çilek ve matcha çayı. ",
+          "category": "Smoothie"
+        },
+        {
+          "name": "Kırmızı Smoothie",
+          "price": "390",
+          "desc": "Çilek, yaban mersini.  ",
+          "category": "Smoothie"
+        },
+        {
+          "name": "Sarı Smoothie",
+          "price": "390",
+          "desc": "Muz, ananas, mango, avokado, nane ve limon. ",
+          "category": "Smoothie"
+        },
+        {
+          "name": "Sunshine Mix",
+          "price": "400",
+          "desc": "Muz, mango ve portakal suyu. ",
+          "category": "Smoothie"
+        },
+        {
+          "name": "Iced Matcha",
+          "price": "340",
+          "desc": "(BİTKİSEL SÜTLER ÜCRETE TABİİDİR)  ",
+          "category": "Ice Matcha's"
+        },
+        {
+          "name": "Mango",
+          "price": "370",
+          "desc": "(BİTKİSEL SÜTLER ÜCRETE TABİİDİR)  ",
+          "category": "Ice Matcha's"
+        },
+        {
+          "name": "Strawberry",
+          "price": "370",
+          "desc": "(BİTKİSEL SÜTLER ÜCRETE TABİİDİR)  ",
+          "category": "Ice Matcha's"
+        },
+        {
+          "name": "Passion",
+          "price": "370",
+          "desc": "(BİTKİSEL SÜTLER ÜCRETE TABİİDİR)  ",
+          "category": "Ice Matcha's"
+        },
+        {
+          "name": "Blueberry",
+          "price": "370",
+          "desc": "(BİTKİSEL SÜTLER ÜCRETE TABİİDİR)  ",
+          "category": "Ice Matcha's"
+        },
+        {
+          "name": "Peach",
+          "price": "370",
+          "desc": "(BİTKİSEL SÜTLER ÜCRETE TABİİDİR)  ",
+          "category": "Ice Matcha's"
+        },
+        {
+          "name": "Mojito",
+          "price": "320",
+          "desc": "Sprite, Nane, Buz ve Limon Suyu içeriğine sahiptir. ",
+          "category": "Moctail's"
+        },
+        {
+          "name": "Black Tea Lemonade",
+          "price": "320",
+          "desc": "Limonata ve soğuk siyah çay.  ",
+          "category": "Moctail's"
+        },
+        {
+          "name": "Blue Summer ",
+          "price": "320",
+          "desc": "Curaçao blue ve sprite. ",
+          "category": "Moctail's"
+        },
+        {
+          "name": "S&S Hibiscus",
+          "price": "320",
+          "desc": " ",
+          "category": "Moctail's"
+        },
+        {
+          "name": "Angel Mojito",
+          "price": "320",
+          "desc": "Sprite, Nane, Çilek, Buz ve Limon Suyu içeriğine sahiptir.  ",
+          "category": "Moctail's"
+        },
+        {
+          "name": "Cool Lime",
+          "price": "320",
+          "desc": " ",
+          "category": "Moctail's"
+        },
+        {
+          "name": "Iced Latte",
+          "price": "300",
+          "desc": " ",
+          "category": "Iced Latte"
+        },
+        {
+          "name": " Ice Caramel Latte",
+          "price": "320",
+          "desc": "Barista süt, laktozsuz süt, yulaf sütü veya badem sütü seçenekleriyle  (BİTKİSEL SÜTLER ÜCRETE TABİİDİR)  ",
+          "category": "Iced Latte"
+        },
+        {
+          "name": "Ice Mocha",
+          "price": "320",
+          "desc": "Barista süt, laktozsuz süt, yulaf sütü veya badem sütü seçenekleriyle (BİTKİSEL SÜTLER ÜCRETE TABİİDİR)  ",
+          "category": "Iced Latte"
+        },
+        {
+          "name": "Ice White Mocha",
+          "price": "320",
+          "desc": "Barista süt, laktozsuz süt, yulaf  sütü veya badem sütü seçenekleriyle (BİTKİSEL SÜTLER ÜCRETE TABİİDİR)  ",
+          "category": "Iced Latte"
+        },
+        {
+          "name": "Ice Vanilla Latte",
+          "price": "320",
+          "desc": "Barista süt, laktozsuz süt, yulaf sütü veya badem sütü seçenekleriyle  (BİTKİSEL SÜTLER ÜCRETE TABİİDİR)  ",
+          "category": "Iced Latte"
+        },
+        {
+          "name": "Ice Cinnamon Latte",
+          "price": "320",
+          "desc": "Barista süt, laktozsuz süt,yulaf sütü veya badem sütü seçenekleriyle  (BİTKİSEL SÜTLER ÜCRETE TABİİDİR)  ",
+          "category": "Iced Latte"
+        },
+        {
+          "name": " Ice Hazelnut Latte",
+          "price": "320",
+          "desc": "Barista süt, laktozsuz süt, yulaf sütü veya badem sütü seçenekleriyle  (BİTKİSEL SÜTLER ÜCRETE TABİİDİR)  ",
+          "category": "Iced Latte"
+        },
+        {
+          "name": "Ice Salted Caramel Latte",
+          "price": "320",
+          "desc": "Barista süt, laktozsuz süt, yulaf sütü veya badem sütü seçenekleriyle  (BİTKİSEL SÜTLER ÜCRETE TABİİDİR)  ",
+          "category": "Iced Latte"
+        },
+        {
+          "name": "Iced Americano",
+          "price": "270",
+          "desc": "(BİTKİSEL SÜTLER ÜCRETE TABİİDİR)  ",
+          "category": "Iced Coffee "
+        },
+        {
+          "name": "Affogato",
+          "price": "320",
+          "desc": "Single Espresso ve Vanilyalı Dondurma. (BİTKİSEL SÜTLER ÜCRETE TABİİDİR)  ",
+          "category": "Iced Coffee "
+        },
+        {
+          "name": "Çilekli Milkshake",
+          "price": "330",
+          "desc": "",
+          "category": "Milkshake"
+        },
+        {
+          "name": "Caramel Milkshake",
+          "price": "330",
+          "desc": "",
+          "category": "Milkshake"
+        },
+        {
+          "name": "Çikolata Milkshake",
+          "price": "330",
+          "desc": "",
+          "category": "Milkshake"
+        },
+        {
+          "name": "Vanilyalı Milkshake",
+          "price": "330",
+          "desc": " ",
+          "category": "Milkshake"
+        },
+        {
+          "name": "Orman Meyveli",
+          "price": "330",
+          "desc": " ",
+          "category": "Frozen"
+        },
+        {
+          "name": "Çilekli",
+          "price": "330",
+          "desc": "",
+          "category": "Frozen"
+        },
+        {
+          "name": "Karadut",
+          "price": "330",
+          "desc": "",
+          "category": "Frozen"
+        },
+        {
+          "name": "Karpuz",
+          "price": "330",
+          "desc": "",
+          "category": "Frozen"
+        },
+        {
+          "name": "Yaban Mersini",
+          "price": "330",
+          "desc": "",
+          "category": "Frozen"
+        },
+        {
+          "name": "Mango",
+          "price": "330",
+          "desc": "",
+          "category": "Frozen"
+        },
+        {
+          "name": "Espresso",
+          "price": "200",
+          "desc": "",
+          "category": "Sıcak Bar"
+        },
+        {
+          "name": "Espresso Macchiato",
+          "price": "220",
+          "desc": "",
+          "category": "Sıcak Bar"
+        },
+        {
+          "name": "Americano",
+          "price": "250",
+          "desc": "",
+          "category": "Sıcak Bar"
+        },
+        {
+          "name": "Cappucino",
+          "price": "275",
+          "desc": "Barista süt, laktozsuz süt, yulaf sütü veya badem sütü seçenekleriyle (BİTKİSEL SÜTLER ÜCRETE TABİİDİR) ",
+          "category": "Sıcak Bar"
+        },
+        {
+          "name": "Flat White",
+          "price": "275",
+          "desc": "Barista süt, laktozsuz süt, yulaf sütü veya badem sütü seçenekleriyle (BİTKİSEL SÜTLER ÜCRETE TABİİDİR)  ",
+          "category": "Sıcak Bar"
+        },
+        {
+          "name": "Cortado",
+          "price": "260",
+          "desc": "Barista süt, laktozsuz süt, yulaf sütü veya badem sütü seçenekleriyle (BİTKİSEL SÜTLER ÜCRETE TABİİDİR)  ",
+          "category": "Sıcak Bar"
+        },
+        {
+          "name": "Türk Kahvesi",
+          "price": "200",
+          "desc": "",
+          "category": "Sıcak Bar"
+        },
+        {
+          "name": "Double Türk Kahvesi",
+          "price": "240",
+          "desc": "",
+          "category": "Sıcak Bar"
+        },
+        {
+          "name": "Filtre Kahve ",
+          "price": "240",
+          "desc": "(BİTKİSEL SÜTLER ÜCRETE TABİİDİR)  ",
+          "category": "Sıcak Bar"
+        },
+        {
+          "name": "Double Espresso",
+          "price": "240",
+          "desc": " ",
+          "category": "Sıcak Bar"
+        },
+        {
+          "name": "Red Eye",
+          "price": "330",
+          "desc": " Filtre Kahvenin üzerine çekilmiş Double Espresso. ",
+          "category": "Sıcak Bar"
+        },
+        {
+          "name": "Matcha Latte",
+          "price": "340",
+          "desc": "Normal süt,laktozsuz süt,yulaf sütü ve badem sütü seçenekleriyle. ",
+          "category": "Matcha"
+        },
+        {
+          "name": "Caramel Matcha Latte",
+          "price": "360",
+          "desc": "Normal süt,laktozsuz süt,yulaf sütü ve badem sütü seçenekleriyle.  ",
+          "category": "Matcha"
+        },
+        {
+          "name": "Vanilla Matcha Latte",
+          "price": "360",
+          "desc": "Normal süt,laktozsuz süt,yulaf sütü ve badem sütü seçenekleriyle.  ",
+          "category": "Matcha"
+        },
+        {
+          "name": "White Chocolate Matcha Latte",
+          "price": "360",
+          "desc": "Normal süt,laktozsuz süt,yulaf sütü ve badem sütü seçenekleriyle.  ",
+          "category": "Matcha"
+        },
+        {
+          "name": "Latte",
+          "price": "275",
+          "desc": "Barista süt, laktozsuz süt,yulaf sütü veya badem sütü seçenekleriyle (BİTKİSEL SÜTLER ÜCRETE TABİİDİR)  ",
+          "category": "Coffee Latte"
+        },
+        {
+          "name": "Hazelnut Latte",
+          "price": "300",
+          "desc": "Espresso, fındık ve süt.Yulaf,badem ve laktozsuz süt seçenekleriyle. (BİTKİSEL SÜTLER ÜCRETE TABİİDİR)  ",
+          "category": "Coffee Latte"
+        },
+        {
+          "name": "Salted Caramel Latte",
+          "price": "300",
+          "desc": "Espresso, tuzlu karamel ve süt.Yulaf,badem ve laktozsuz süt seçenekleriyle. (BİTKİSEL SÜTLER ÜCRETE TABİİDİR)  ",
+          "category": "Coffee Latte"
+        },
+        {
+          "name": "Caramel Latte ",
+          "price": "300",
+          "desc": "Espresso, karamel ve süt. Yulaf,badem ve laktozsuz süt seçenekleriyle.(BİTKİSEL SÜTLER ÜCRETE TABİİDİR)  ",
+          "category": "Coffee Latte"
+        },
+        {
+          "name": "Vanilla Latte",
+          "price": "300",
+          "desc": "Espresso, vanilya ve süt.Yulaf,badem ve laktozsuz süt seçenekleriyle. (BİTKİSEL SÜTLER ÜCRETE TABİİDİR)  ",
+          "category": "Coffee Latte"
+        },
+        {
+          "name": "Mocha",
+          "price": "300",
+          "desc": "Barista süt, laktozsuz süt, yulaf  sütü veya badem sütü seçenekleriyle (BİTKİSEL SÜTLER ÜCRETE TABİİDİR)  ",
+          "category": "Coffee Latte"
+        },
+        {
+          "name": "White Mocha",
+          "price": "300",
+          "desc": "Barista süt, laktozsuz süt, yulaf sütü veya badem sütü seçenekleriyle (BİTKİSEL SÜTLER ÜCRETE TABİİDİR)  ",
+          "category": "Coffee Latte"
+        },
+        {
+          "name": "Latte Macchiato",
+          "price": "290",
+          "desc": "Kadifemsi süt ve Espresso birleşimi.  Yulaf,badem ve laktozsuz süt seçenekleriyle.( (BİTKİSEL SÜTLER ÜCRETE TABİİDİR)  ",
+          "category": "Coffee Latte"
+        },
+        {
+          "name": "Chai Tea Latte",
+          "price": "290",
+          "desc": "",
+          "category": "Coffee Latte"
+        },
+        {
+          "name": "Salep",
+          "price": "290",
+          "desc": "",
+          "category": "Hot Chocolate & Others"
+        },
+        {
+          "name": "Hot Chocolate",
+          "price": "290",
+          "desc": "",
+          "category": "Hot Chocolate & Others"
+        },
+        {
+          "name": "White Hot Chocolate",
+          "price": "290",
+          "desc": "",
+          "category": "Hot Chocolate & Others"
+        },
+        {
+          "name": "Yulaf Sütü",
+          "price": "80",
+          "desc": "",
+          "category": "SÜTLER"
+        },
+        {
+          "name": "Badem Sütü",
+          "price": "80",
+          "desc": "",
+          "category": "SÜTLER"
+        },
+        {
+          "name": "Demleme Çay",
+          "price": "105",
+          "desc": " ",
+          "category": "Çaylar"
+        },
+        {
+          "name": "Demleme Çay (Fincan)",
+          "price": "150",
+          "desc": "",
+          "category": "Çaylar"
+        },
+        {
+          "name": "Yoga",
+          "price": "280",
+          "desc": "Zencefil, rooibos, limon çimi, elma, yeşil çay, karanfil, tarçın ve pembe karabiber. ",
+          "category": "Çaylar"
+        },
+        {
+          "name": "Rooibos Chai",
+          "price": "280",
+          "desc": "Rooibos, zencefil, tarçın, elma, portakal kabuğu ve kırmızı karabiber. ",
+          "category": "Çaylar"
+        },
+        {
+          "name": "Summer Sun",
+          "price": "280",
+          "desc": "Elma, limon çimi, hibiscus, ananas, kuş üzümü ve portakal kabuğu. ",
+          "category": "Çaylar"
+        },
+        {
+          "name": "Detox",
+          "price": "280",
+          "desc": "Yeşil çay, portakal kabuğu, limon çimi ve ananas. ",
+          "category": "Çaylar"
+        },
+        {
+          "name": "Therapie",
+          "price": "280",
+          "desc": "Beyaz çay, yeşil çay, Isparta gülü, çilek ve elma. ",
+          "category": "Çaylar"
+        },
+        {
+          "name": "Chai Masala",
+          "price": "280",
+          "desc": "Tarçın, zencefil, portakal kabuğu ve siyah çay  ",
+          "category": "Çaylar"
+        },
+        {
+          "name": "Winter Fell",
+          "price": "280",
+          "desc": "Zencefilli kış çayı, elma, tarçın, portakal ve karanfil ",
+          "category": "Çaylar"
+        },
+        {
+          "name": "Jasmine",
+          "price": "280",
+          "desc": "Yaseminli yeşil çay  ",
+          "category": "Çaylar"
+        },
+        {
+          "name": "All Seasons",
+          "price": "280",
+          "desc": "Hibiskuslu bitki çayı, portakal, nane, zencefil, gül yaprağı ve hibiscus ",
+          "category": "Çaylar"
+        },
+        {
+          "name": "Wake Up Tea",
+          "price": "280",
+          "desc": "elma, portakal, kahve çekirdeği, bergamot ",
+          "category": "Çaylar"
+        },
+        {
+          "name": "English Breakfast Tea",
+          "price": "280",
+          "desc": "saf seylan çayı,saf assam çayı. ",
+          "category": "Çaylar"
+        },
+        {
+          "name": "Rooibos Vanilla Tea",
+          "price": "280",
+          "desc": "rooibos,vanilya. ",
+          "category": "Çaylar"
+        },
+        {
+          "name": "Hibiscus Tea",
+          "price": "280",
+          "desc": "saf hibiskus çayı. ",
+          "category": "Çaylar"
+        },
+        {
+          "name": "Good Night Tea",
+          "price": "280",
+          "desc": "melisa,elma,limon çimi,basra limonu,şeftali,frenk üzümü. ",
+          "category": "Çaylar"
+        },
+        {
+          "name": "Blue Butterfly Tea",
+          "price": "280",
+          "desc": "mavi sarmaşık çiçeği,mango,ananas,elma,papaya. ",
+          "category": "Çaylar"
+        },
+        {
+          "name": "Yoga Tea",
+          "price": "280",
+          "desc": "rooibos,zencefil,limon çimi,elma,yeşil çay,karanfil,tarçın,pembe karabiber. ",
+          "category": "Çaylar"
+        },
+        {
+          "name": "Green (yeşil) Tea",
+          "price": "280",
+          "desc": "",
+          "category": "Çaylar"
+        },
+        {
+          "name": "Ihlamur Çayı",
+          "price": "280",
+          "desc": "",
+          "category": "Çaylar"
+        }
+      ]
+    },
+    "1275": {
+      "name": "Cafe da Giovanni",
+      "sourceUrl": "https://qr.finedinemenu.com/cafe-da-giovanni/menu/64d3aa37383c760014b9e38d",
+      "sourceName": "Finedine kullanıcı QR menüsü/API; exact shop: Cafe Da Giovanni ; kaynak adresi: Kuloğlu Mahallesi Yeni Çarşı Caddesi No: 11/A\nBeyoğlu/İstanbul 34433 Beyoğlu İstanbul",
+      "verifiedAt": "2026-08-23",
+      "items": [
+        {
+          "name": "Füme Antrikot Karışık Omlet",
+          "price": "560",
+          "desc": "Dana antrikot, domates, kaşar peynir (isteğe göre salata ve kızarmış ekşi mayalı ekmek dilimi ile servis edilir)  ",
+          "category": "KAHVALTI"
+        },
+        {
+          "name": "Domuz Jambon Karışık Omlet",
+          "price": "660",
+          "desc": "Fransız domuz jambon, domates, kaşar peynir (İsteğe göre salata ve kızarmış ekşi mayalı ekmek dilimi ile servis edilir.)Glütensiz ev yapamı 100% karabuğday ekmek : ₺75 ",
+          "category": "KAHVALTI"
+        },
+        {
+          "name": "Sebzeli Omlet",
+          "price": "470",
+          "desc": "Domates, mantar, peynir, dereotu, maydanoz (İsteğe göre salata ve kızarmış ekşi mayalı ekmek dilimi ile servis edilir) Glütensiz ev yapamı 100% karabuğday ekmek : ₺75 ",
+          "category": "KAHVALTI"
+        },
+        {
+          "name": "Çırpılmış Yumurta ",
+          "price": "450",
+          "desc": " Süt ve yumurta - Isteğe göre salata ve kızarmış ekşi mayalı ekmek dilimi ile servis edilir Glütensiz ev yapamı 100% karabuğday ekmek : ₺75 ",
+          "category": "KAHVALTI"
+        },
+        {
+          "name": "Glütensiz Karabuğday Ekmek",
+          "price": "150",
+          "desc": "2 dilim - Ev Yapımı 100% Karabuğday ",
+          "category": "KAHVALTI"
+        },
+        {
+          "name": "Croque Monsieur",
+          "price": "790",
+          "desc": "Ekşi mayalı ekmek arasında dijon hardallı beşamel sos, Fransız emmental peynir, vinaigrette, domuz jambon, rendelenmiş Fransız Comté ve Emmental peyniri. Isteğe göre salata ile servis edilir. Fırında kızarmış olarak servis edilir. (15dak bekleme süresi)",
+          "category": "KAHVALTI"
+        },
+        {
+          "name": "Croque Madame",
+          "price": "800",
+          "desc": "Ekşi mayalı ekmek arasında; Dijon hardallı beşamel sos, Fransız emmental peynir, vinaigrette, Fransız domuz jambon, rendelenmiş Fransız Comté ve Emmental peyniri. Isteğe göre salata ile servis edilir (15dak bekleme süresi) ",
+          "category": "KAHVALTI"
+        },
+        {
+          "name": "Croque Efendi",
+          "price": "650",
+          "desc": "Ekşi mayalı ekmek arasında dijon hardallı beşamel sos, kaşar peynir, füme dana antrikot, rendelenmiş fransız Comté ve Emmental peyniri, isteğe göre salata ile servis edilir. Fırında kızarmış servis edilir. (15dak bekleme süresi)",
+          "category": "KAHVALTI"
+        },
+        {
+          "name": "Croque Hanım",
+          "price": "660",
+          "desc": "Ekşi mayalı ekmek arasında dijon hardallı beşamel sos, kaşar peynir, füme dana antrikot,  rendelenmiş fransız Comté ve Emmental peyniri, göz yumurta ve  isteğe göre salata ile servis edilir. (15dak bekleme süresi) ",
+          "category": "KAHVALTI"
+        },
+        {
+          "name": "Croque Forrestiere (Vejetaryen)",
+          "price": "590",
+          "desc": "Ekşi mayalı ekmek arasında dijon hardallı beşamel sos, kaşar peynir, sızma zeytin yağda kavrulmuş sarımsaklı maydanozlu mantar sote, rendelenmiş fransız Comté ve Emmental peyniri - isteğe göre salata ile servis edilir (15dak bekleme süresi)  (Ekstra göz yumurta eklenebilir.) Fırında kızarmış servis edilir (15dak bekleme süresi)",
+          "category": "KAHVALTI"
+        },
+        {
+          "name": "Giovanni'nin Meyveli Granolası",
+          "price": "500",
+          "desc": "Süzme yoğurt, ev yapımı granola ve şefimizin özel karaorman meyve püresi ve taze meyveler ",
+          "category": "KAHVALTI"
+        },
+        {
+          "name": "French Toast - Salty ",
+          "price": "590",
+          "desc": "",
+          "category": "KAHVALTI"
+        },
+        {
+          "name": "French Toast - Sweety",
+          "price": "590",
+          "desc": "",
+          "category": "KAHVALTI"
+        },
+        {
+          "name": "Sade Kruvasan ",
+          "price": "260",
+          "desc": "",
+          "category": "KRUVASAN"
+        },
+        {
+          "name": "Kruvasan & Reçel ",
+          "price": "300",
+          "desc": "Ev yapımı Giovanni reçelimizle servis edilir. ",
+          "category": "KRUVASAN"
+        },
+        {
+          "name": "Pain au Chocolat",
+          "price": "300",
+          "desc": "Tereyağlı çikolatalı kruvasan ",
+          "category": "KRUVASAN"
+        },
+        {
+          "name": "Peynirli Kruvasan",
+          "price": "450",
+          "desc": "Tereyağlı kruvasan, Fransız Emmental ve kaşar Peyniri  Fırında ısıtılmış servis edilir",
+          "category": "KRUVASAN"
+        },
+        {
+          "name": "Füme Antrikotlu & Yumurtalı Kruvasan ",
+          "price": "490",
+          "desc": "Kaşar, füme antrikot dilimleri. Fırında ısıtılmış servis edilir.",
+          "category": "KRUVASAN"
+        },
+        {
+          "name": "Jambonlu & Emmental Peynirli & Yumurtalı Kruvasan   ",
+          "price": "670",
+          "desc": "Fransız domuz jambon ve fransız emmental peynir. Fırında ısıtılmış servis edilir.",
+          "category": "KRUVASAN"
+        },
+        {
+          "name": "Bagel Hindi Füme",
+          "price": "450",
+          "desc": "Ev yapımı bagel ekmeği ile özel pesto sos, domates, hindi füme, çedar peyniri, maydanoz, kornişon turşusu Fırında ısıtılmış servis edilir",
+          "category": "BAGEL"
+        },
+        {
+          "name": "Bagel Füme Antrikot",
+          "price": "490",
+          "desc": "Ev yapımı bagel ekmeği füme antrikot dilimleri, ev yapımı tartar sosu, gouda peyniri, pembe turp ve roka salatası. ",
+          "category": "BAGEL"
+        },
+        {
+          "name": "Bagel Vejeteryan",
+          "price": "450",
+          "desc": "Ev yapımı bagel ekmeği ile özel pesto sos, domates, kaşar, çedar peyniri, maydanoz, salatalık turşusu. ",
+          "category": "BAGEL"
+        },
+        {
+          "name": "Bagel Vegan",
+          "price": "440",
+          "desc": "Ev yapımı vegan bagel ekmeği üzerine ev yapamı merçimek humus, domates, zahter, salatalık turşusu ve roka. ",
+          "category": "BAGEL"
+        },
+        {
+          "name": "Mozzarella Pesto",
+          "price": "440",
+          "desc": " ",
+          "category": "BAGEL"
+        },
+        {
+          "name": "Pırasalı Kiş",
+          "price": "440",
+          "desc": "Fırında ısıtılarak isteğe göre salata ile beraber servis edilir.",
+          "category": "FRANSIZ KİŞLER"
+        },
+        {
+          "name": "Mantarlı Kiş",
+          "price": "440",
+          "desc": "Fırında ısıtılarak isteğe göre salata ile beraber servis edilir. ",
+          "category": "FRANSIZ KİŞLER"
+        },
+        {
+          "name": "Kuru Domatesli Kiş",
+          "price": "480",
+          "desc": "Fırında ısıtılarak isteğe göre salata ile beraber servis edilir. ",
+          "category": "FRANSIZ KİŞLER"
+        },
+        {
+          "name": "\"Chèvre Chaud\" Sıcak Ballı Keçi Peynir Salata ",
+          "price": "560",
+          "desc": "Akdeniz yeşilliği, roka pancar ve armut dilimleri, kıtır ekşi maya ekmek üzerinde ballı keçi peynir rondel, ceviz ve balzamik vinegret. Merçimek humus ile vegan opsyon mevcut Glütensiz ev yapamı 100% karabuğday ekmek : ₺75",
+          "category": "SALATALAR"
+        },
+        {
+          "name": "Fransız Domuz Jambon Emmental Salata",
+          "price": "760",
+          "desc": "Akdeniz yeşilliği, domuz jambon dilimleri ile emmental peynirli, kornişon turşu ve kapari Glütensiz ev yapamı 100% karabuğday ekmek : ₺75 ",
+          "category": "SALATALAR"
+        },
+        {
+          "name": "Mevsimlik Portakallı Avokadolu Kereviz Salata",
+          "price": "540",
+          "desc": "Karabuğday, akdeniz yeşilliği üzerine taze portakal ve kereviz sapları, avokado ve fesleğen yaprakları, antep fıstığı ve hardal balzamik vinegret Glütensiz ev yapamı 100% karabuğday ekmek : ₺75 ",
+          "category": "SALATALAR"
+        },
+        {
+          "name": "Glütensiz Karabuğday Ekmek",
+          "price": "135",
+          "desc": "2 dilim - Ev Yapımı 100% Karabuğday ",
+          "category": "SALATALAR"
+        },
+        {
+          "name": "Çilekli Tart ",
+          "price": "340",
+          "desc": "Pastacı kreması ile klasikler arasında ",
+          "category": "TATLILAR"
+        },
+        {
+          "name": "Meyveli Tart ",
+          "price": "340",
+          "desc": "Mevsim meyveli - garsona sorunuz. ",
+          "category": "TATLILAR"
+        },
+        {
+          "name": "Paris-Brest ",
+          "price": "410",
+          "desc": "\"Choux\" hamuru arasında fransız praline ve fındık crokan. ",
+          "category": "TATLILAR"
+        },
+        {
+          "name": "Limonlu Mereng Tart",
+          "price": "340",
+          "desc": "Limon \"curd\" kreması ile fransız mereng. ",
+          "category": "TATLILAR"
+        },
+        {
+          "name": "Çikolatalı Tart",
+          "price": "340",
+          "desc": "Belçika çikolatalı ",
+          "category": "TATLILAR"
+        },
+        {
+          "name": "Kara Orman Tart",
+          "price": "340",
+          "desc": "Çikolata tart tabanı, karaorman meyveli jöle ve ev yapamı şanti krema ",
+          "category": "TATLILAR"
+        },
+        {
+          "name": "San Sebastian ",
+          "price": "370",
+          "desc": " ",
+          "category": "TATLILAR"
+        },
+        {
+          "name": "Flan Parisien",
+          "price": "410",
+          "desc": "Fransız klasikler arasında krema tart, orijinal Madagaskar vanilyalı ",
+          "category": "TATLILAR"
+        },
+        {
+          "name": "Glutensiz Muffin (Peynir&Zeytin) ( Peynir ve Ispanaklı )",
+          "price": "210",
+          "desc": "",
+          "category": "TATLILAR"
+        },
+        {
+          "name": "Kanele",
+          "price": "170",
+          "desc": "Fransız mutfağına ait özel içi yumuşak ve kremsi, dışı ise karamelize ve çıtır bir kabukla kaplıdır, original Madagaskar vanilya içerir ",
+          "category": "KURU TATLILAR"
+        },
+        {
+          "name": "Madlen ",
+          "price": "160",
+          "desc": "Deniz kabuğu şekli yumuşak kek ",
+          "category": "KURU TATLILAR"
+        },
+        {
+          "name": "Mekik ",
+          "price": "165",
+          "desc": "Badem unlu ve vişneli - glütensiz (1 adet)",
+          "category": "KURU TATLILAR"
+        },
+        {
+          "name": "Vegan Havuçlu Kek ",
+          "price": "280",
+          "desc": "Çevizli yumuşak vegan kek",
+          "category": "KURU TATLILAR"
+        },
+        {
+          "name": "Vegan Banana Bread ",
+          "price": "300",
+          "desc": "Agave şurubu ile",
+          "category": "KURU TATLILAR"
+        },
+        {
+          "name": "Çikolatalı Babka ",
+          "price": "300",
+          "desc": "",
+          "category": "KURU TATLILAR"
+        },
+        {
+          "name": "Çikolata Cookie",
+          "price": "200",
+          "desc": "",
+          "category": "KURU TATLILAR"
+        },
+        {
+          "name": "Mini Cannelé paket",
+          "price": "450",
+          "desc": "100g mini Cannelé Fransız mutfağına ait özel içi yumuşak ve kremsi, dışı ise karamelize ve çıtır bir kabukla kaplıdır, original Madagaskar vanilya içerir",
+          "category": "KURU TATLILAR"
+        },
+        {
+          "name": "Mini Madlen paket",
+          "price": "450",
+          "desc": "Deniz kabuğu şekli yumuşak kek  - 80g ",
+          "category": "KURU TATLILAR"
+        },
+        {
+          "name": "Glutensiz Karaorman Meyveli Brownie",
+          "price": "340",
+          "desc": " ",
+          "category": "KURU TATLILAR"
+        },
+        {
+          "name": "Taşkesti Su ",
+          "price": "80",
+          "desc": "33cl veya 75cl",
+          "category": "SOFT İÇECEKLER"
+        },
+        {
+          "name": "Pellegrino Soda 0.25",
+          "price": "195",
+          "desc": "33cl",
+          "category": "SOFT İÇECEKLER"
+        },
+        {
+          "name": "Pellegrino Soda 0.75",
+          "price": "395",
+          "desc": "33cl",
+          "category": "SOFT İÇECEKLER"
+        },
+        {
+          "name": "Ev Yapımı Limonata ",
+          "price": "250",
+          "desc": " ",
+          "category": "SOFT İÇECEKLER"
+        },
+        {
+          "name": "Taze Portakal Suyu ",
+          "price": "250",
+          "desc": "Taze sıkılmış",
+          "category": "SOFT İÇECEKLER"
+        },
+        {
+          "name": "Detox Taze Meyve Suyu ",
+          "price": "300",
+          "desc": "Armut, ıspanak, yeşil elma, salatalık, zencefil, limon ",
+          "category": "SOFT İÇECEKLER"
+        },
+        {
+          "name": "Booster Taze Meyve Suyu ",
+          "price": "300",
+          "desc": "Havuç, portakal, zençefil, limon, zerdeçal ",
+          "category": "SOFT İÇECEKLER"
+        },
+        {
+          "name": "Espresso ",
+          "price": "190",
+          "desc": "",
+          "category": "KAHVELER"
+        },
+        {
+          "name": "Double Espresso ",
+          "price": "200",
+          "desc": "",
+          "category": "KAHVELER"
+        },
+        {
+          "name": "Espresso Macchiato",
+          "price": "220",
+          "desc": "",
+          "category": "KAHVELER"
+        },
+        {
+          "name": "Sunrise Americano",
+          "price": "370",
+          "desc": "",
+          "category": "KAHVELER"
+        },
+        {
+          "name": "Americano ",
+          "price": "220",
+          "desc": "",
+          "category": "KAHVELER"
+        },
+        {
+          "name": "Filtre kahve",
+          "price": "210",
+          "desc": "",
+          "category": "KAHVELER"
+        },
+        {
+          "name": "Cortado ",
+          "price": "230",
+          "desc": "",
+          "category": "KAHVELER"
+        },
+        {
+          "name": "Latte ",
+          "price": "240",
+          "desc": "",
+          "category": "KAHVELER"
+        },
+        {
+          "name": "Cappuccino ",
+          "price": "240",
+          "desc": "",
+          "category": "KAHVELER"
+        },
+        {
+          "name": "Flat White ",
+          "price": "270",
+          "desc": "",
+          "category": "KAHVELER"
+        },
+        {
+          "name": "Chai Latte ",
+          "price": "300",
+          "desc": "",
+          "category": "KAHVELER"
+        },
+        {
+          "name": "100% Pure Hot Chocolate ",
+          "price": "270",
+          "desc": "",
+          "category": "KAHVELER"
+        },
+        {
+          "name": "Türk Kahvesi",
+          "price": "190",
+          "desc": "Ask with sugar or not",
+          "category": "KAHVELER"
+        },
+        {
+          "name": "Double Türk Kahvesi  ",
+          "price": "210",
+          "desc": "Ask with sugar or not",
+          "category": "KAHVELER"
+        },
+        {
+          "name": "Karamel Latte ",
+          "price": "280",
+          "desc": "",
+          "category": "KAHVELER"
+        },
+        {
+          "name": "Vanilya Latte ",
+          "price": "280",
+          "desc": "Monin Syrup - Madagascar Vanilya",
+          "category": "KAHVELER"
+        },
+        {
+          "name": "Mocha ",
+          "price": "280",
+          "desc": "Monin Syrup  ",
+          "category": "KAHVELER"
+        },
+        {
+          "name": "White Mocha ",
+          "price": "280",
+          "desc": "Monin Syrup ",
+          "category": "KAHVELER"
+        },
+        {
+          "name": "Decaf kahve bulunur",
+          "price": "0",
+          "desc": "",
+          "category": "KAHVELER"
+        },
+        {
+          "name": "Iced Americano ",
+          "price": "240",
+          "desc": "",
+          "category": "SOĞUK KAHVELER"
+        },
+        {
+          "name": "Iced Latte",
+          "price": "260",
+          "desc": "",
+          "category": "SOĞUK KAHVELER"
+        },
+        {
+          "name": "Iced Filtre Kahve",
+          "price": "230",
+          "desc": "",
+          "category": "SOĞUK KAHVELER"
+        },
+        {
+          "name": "Iced Cappucino",
+          "price": "260",
+          "desc": "",
+          "category": "SOĞUK KAHVELER"
+        },
+        {
+          "name": "Iced Flat White",
+          "price": "290",
+          "desc": "Double Shot ",
+          "category": "SOĞUK KAHVELER"
+        },
+        {
+          "name": "Iced Matcha Latte",
+          "price": "390",
+          "desc": "",
+          "category": "SOĞUK KAHVELER"
+        },
+        {
+          "name": "Iced Chai Latte",
+          "price": "320",
+          "desc": "",
+          "category": "SOĞUK KAHVELER"
+        },
+        {
+          "name": "Iced White Mocha ",
+          "price": "300",
+          "desc": "Monin Syrup ",
+          "category": "SOĞUK KAHVELER"
+        },
+        {
+          "name": "Iced Vanilya Latte",
+          "price": "300",
+          "desc": "Monin Syrup - Madagascar Vanilya ",
+          "category": "SOĞUK KAHVELER"
+        },
+        {
+          "name": "Iced Mocha ",
+          "price": "300",
+          "desc": "Monin Syrup ",
+          "category": "SOĞUK KAHVELER"
+        },
+        {
+          "name": "Iced Milk Chocolate",
+          "price": "290",
+          "desc": "",
+          "category": "SOĞUK KAHVELER"
+        },
+        {
+          "name": "Iced Caramel Latte ",
+          "price": "300",
+          "desc": "",
+          "category": "SOĞUK KAHVELER"
+        },
+        {
+          "name": "Iced Decaf Americano",
+          "price": "240",
+          "desc": "",
+          "category": "SOĞUK KAHVELER"
+        },
+        {
+          "name": "Çay ",
+          "price": "100",
+          "desc": "",
+          "category": "ÇAYLAR"
+        },
+        {
+          "name": "Çay Fincan ",
+          "price": "130",
+          "desc": "(large cup)",
+          "category": "ÇAYLAR"
+        },
+        {
+          "name": "French Tea Selection",
+          "price": "275",
+          "desc": "Mariages Frères Marco PoloRussian BreakfastDestress Green TeaNil Noir",
+          "category": "ÇAYLAR"
+        },
+        {
+          "name": "Chai Tea (Orijinal)",
+          "price": "300",
+          "desc": "",
+          "category": "ÇAYLAR"
+        },
+        {
+          "name": "Organik Matcha Latte",
+          "price": "360",
+          "desc": "Premium organik matcha ",
+          "category": "ÇAYLAR"
+        },
+        {
+          "name": "Meyveli Tart",
+          "price": "1500",
+          "desc": "Çilekli veya karışık meyveli ",
+          "category": "BÜTÜN TATLI SİPARİŞ"
+        },
+        {
+          "name": "Limonlu Mereng Tart",
+          "price": "1500",
+          "desc": " ",
+          "category": "BÜTÜN TATLI SİPARİŞ"
+        },
+        {
+          "name": "Kara Orman Tart",
+          "price": "1500",
+          "desc": " ",
+          "category": "BÜTÜN TATLI SİPARİŞ"
+        },
+        {
+          "name": "San Sebastien",
+          "price": "3100",
+          "desc": " ",
+          "category": "BÜTÜN TATLI SİPARİŞ"
+        }
+      ]
+    },
+    "1434": {
+      "name": "Celtic Irish Pub Istanbul",
+      "sourceUrl": "https://qr.finedinemenu.com/celtic-irish-pub/menu/64b5302f92222f0014b21619",
+      "sourceName": "Finedine kullanıcı QR menüsü/API; exact shop: Celtic Irish Pub; kaynak adresi: Asmalı Mescit Mah. İstiklal Cad. NO 180/4A Narmanlı Han Beyoğlu İstanbul  Beyoğlu İstanbul",
+      "verifiedAt": "2026-08-23",
+      "items": [
+        {
+          "name": "Tuborg 25 CL ",
+          "price": "99",
+          "desc": " ",
+          "category": "Beer Happy Hour"
+        },
+        {
+          "name": "Carlsberg 25 CL",
+          "price": "145",
+          "desc": "",
+          "category": "Beer Happy Hour"
+        },
+        {
+          "name": "Kronenbourg Blanc 25 CL",
+          "price": "145",
+          "desc": " ",
+          "category": "Beer Happy Hour"
+        },
+        {
+          "name": "Weihenstephan 25 CL",
+          "price": "169",
+          "desc": "",
+          "category": "Beer Happy Hour"
+        },
+        {
+          "name": "Guinness 25 CL",
+          "price": "169",
+          "desc": "",
+          "category": "Beer Happy Hour"
+        },
+        {
+          "name": "Kilkenny 25 CL",
+          "price": "169",
+          "desc": " ",
+          "category": "Beer Happy Hour"
+        },
+        {
+          "name": "Tadım Seti",
+          "price": "599",
+          "desc": "Guinness, Weihenstephaner, Blanc, Carlsberg Luna, Kilkenny (5x15 CL) ",
+          "category": "Fıçı Biralar"
+        },
+        {
+          "name": "Tuborg 50 CL",
+          "price": "319",
+          "desc": "Danimarka - alc %5 vol. ",
+          "category": "Fıçı Biralar"
+        },
+        {
+          "name": "Tuborg 33 CL",
+          "price": "255",
+          "desc": "Danimarka - alc %5 vol. ",
+          "category": "Fıçı Biralar"
+        },
+        {
+          "name": "Carlsberg 50 CL",
+          "price": "355",
+          "desc": "Danimarka - alc %5 vol ",
+          "category": "Fıçı Biralar"
+        },
+        {
+          "name": "Carlsberg 33 CL",
+          "price": "285",
+          "desc": "Danimarka - alc %5 vol ",
+          "category": "Fıçı Biralar"
+        },
+        {
+          "name": "Carlsberg Luna 50 CL",
+          "price": "365",
+          "desc": "Türkiye - alc %5 vol ",
+          "category": "Fıçı Biralar"
+        },
+        {
+          "name": "Carlsberg Luna 33 CL",
+          "price": "275",
+          "desc": "Türkiye - alc %5 vol  ",
+          "category": "Fıçı Biralar"
+        },
+        {
+          "name": "Weihenstephaner 50 CL",
+          "price": "469",
+          "desc": "Almanya - alc. %5,4 vol ",
+          "category": "Fıçı Biralar"
+        },
+        {
+          "name": "Weihenstephaner 33 CL",
+          "price": "365",
+          "desc": "Almanya - alc. %5,4 vol ",
+          "category": "Fıçı Biralar"
+        },
+        {
+          "name": "Kronenbourg Blanc 50 CL",
+          "price": "390",
+          "desc": "Fransa - alc %5 vol ",
+          "category": "Fıçı Biralar"
+        },
+        {
+          "name": "Kronenbourg Blanc 33 CL",
+          "price": "305",
+          "desc": "Fransa - alc %5 vol  ",
+          "category": "Fıçı Biralar"
+        },
+        {
+          "name": "Guinness 50 CL",
+          "price": "469",
+          "desc": "İrlanda - alc %4,2 vol",
+          "category": "Fıçı Biralar"
+        },
+        {
+          "name": "Guinness 25 CL",
+          "price": "300",
+          "desc": "İrlanda - alc %4,2 vol ",
+          "category": "Fıçı Biralar"
+        },
+        {
+          "name": "Kilkenny 50 CL",
+          "price": "469",
+          "desc": "İrlanda - alc %4,3 vol ",
+          "category": "Fıçı Biralar"
+        },
+        {
+          "name": "Kilkenny 25 CL",
+          "price": "300",
+          "desc": "İrlanda - alc %4,3 vol ",
+          "category": "Fıçı Biralar"
+        },
+        {
+          "name": "Tuborg Gold 33 CL",
+          "price": "319",
+          "desc": "Danimarka - alc %5 vol ",
+          "category": "Şişe Biralar"
+        },
+        {
+          "name": "Tuborg Smooth 33 CL",
+          "price": "330",
+          "desc": "Türkiye - alc %5.4 vol ",
+          "category": "Şişe Biralar"
+        },
+        {
+          "name": "Tuborg Filtresiz 50 CL",
+          "price": "390",
+          "desc": "Türkiye - alc %4.8 vol ",
+          "category": "Şişe Biralar"
+        },
+        {
+          "name": "Carlsberg 33 CL",
+          "price": "355",
+          "desc": "Danimarka - alc %5 vol ",
+          "category": "Şişe Biralar"
+        },
+        {
+          "name": "Carlsberg Luna 50 CL",
+          "price": "390",
+          "desc": "Danimarka - %5 alc vol ",
+          "category": "Şişe Biralar"
+        },
+        {
+          "name": "Frederik Wheat IPA 35 CL",
+          "price": "385",
+          "desc": "Türkiye - alc %5.4 vol ",
+          "category": "Şişe Biralar"
+        },
+        {
+          "name": "Frederik Marzen Lager 35 CL",
+          "price": "385",
+          "desc": "Türkiye - alc %5.7 vol ",
+          "category": "Şişe Biralar"
+        },
+        {
+          "name": "Frederik Brown Ale 35 CL",
+          "price": "385",
+          "desc": "Türkiye - alc %5.8 vol ",
+          "category": "Şişe Biralar"
+        },
+        {
+          "name": "Frederik IPA 35 CL",
+          "price": "385",
+          "desc": "Türkiye - alc %5.2 vol ",
+          "category": "Şişe Biralar"
+        },
+        {
+          "name": "Frederik Yakima IPA 35 CL",
+          "price": "385",
+          "desc": "Türkiye - alc %6.4 vol ",
+          "category": "Şişe Biralar"
+        },
+        {
+          "name": "Frederik Neipa 33 CL",
+          "price": "385",
+          "desc": "",
+          "category": "Şişe Biralar"
+        },
+        {
+          "name": "Frederik Tropic 33 CL",
+          "price": "385",
+          "desc": "",
+          "category": "Şişe Biralar"
+        },
+        {
+          "name": "Sol 33 CL",
+          "price": "395",
+          "desc": "Meksika - alc %4.5 vol ",
+          "category": "Şişe Biralar"
+        },
+        {
+          "name": "Desperados 33 CL",
+          "price": "435",
+          "desc": "Hollanda - alc %5.9 vol ",
+          "category": "Şişe Biralar"
+        },
+        {
+          "name": "Weihenstephaner 33 CL",
+          "price": "440",
+          "desc": "Almanya - alc %5,4 vol  ",
+          "category": "Şişe Biralar"
+        },
+        {
+          "name": "Weihenstephaner Vitus 33 CL",
+          "price": "465",
+          "desc": "Almanya - alc. %7.7 vol.  ",
+          "category": "Şişe Biralar"
+        },
+        {
+          "name": "Kronenbourg Blanc 33 CL",
+          "price": "375",
+          "desc": "Fransa - alc %5 vol ",
+          "category": "Şişe Biralar"
+        },
+        {
+          "name": "Budweiser Budvar 33 CL",
+          "price": "415",
+          "desc": "Çekya - alc %5 vol  ",
+          "category": "Şişe Biralar"
+        },
+        {
+          "name": "Torch IPA 33 CL",
+          "price": "435",
+          "desc": "Türkiye - alc %5,8 vol ",
+          "category": "Şişe Biralar"
+        },
+        {
+          "name": "Torch Duman 33 CL",
+          "price": "435",
+          "desc": "",
+          "category": "Şişe Biralar"
+        },
+        {
+          "name": "Torch Tokyo Zen 33 CL",
+          "price": "435",
+          "desc": "Türkiye - alc %4 vol ",
+          "category": "Şişe Biralar"
+        },
+        {
+          "name": "Torch Honey Pepper 33 CL",
+          "price": "435",
+          "desc": "Türkiye alc %6,5 vol ",
+          "category": "Şişe Biralar"
+        },
+        {
+          "name": "Knidos Buğday 33 CL",
+          "price": "435",
+          "desc": "Türkiye - alc %5 vol ",
+          "category": "Şişe Biralar"
+        },
+        {
+          "name": "Knidos Tutti Brutti 33 CL",
+          "price": "435",
+          "desc": "Türkiye alc %5 vol",
+          "category": "Şişe Biralar"
+        },
+        {
+          "name": "Knidos Pilsner 33 CL",
+          "price": "435",
+          "desc": "Türkiye - alc %5 vol ",
+          "category": "Şişe Biralar"
+        },
+        {
+          "name": "Knidos Tank Lager 33 CL",
+          "price": "435",
+          "desc": "Türkiye alc %5 vol",
+          "category": "Şişe Biralar"
+        },
+        {
+          "name": "Knidos Route 333 33 CL",
+          "price": "435",
+          "desc": "Türkiye alc %5 vol",
+          "category": "Şişe Biralar"
+        },
+        {
+          "name": "Knidos Salonikator 33 CL",
+          "price": "495",
+          "desc": "Türkiye - alc %8,4 vol ",
+          "category": "Şişe Biralar"
+        },
+        {
+          "name": "Kubau IPA 33 CL",
+          "price": "435",
+          "desc": "Çanakkale Evreşe - 5.4 Abv ",
+          "category": "Şişe Biralar"
+        },
+        {
+          "name": "Kubau Kölsch 33 CL",
+          "price": "435",
+          "desc": "Çanakkale Evreşe - %5 Abv ",
+          "category": "Şişe Biralar"
+        },
+        {
+          "name": "Kubau Pale Ale 33 CL",
+          "price": "435",
+          "desc": "Çanakkale Evreşe - %5 Abv ",
+          "category": "Şişe Biralar"
+        },
+        {
+          "name": "Heineken 33 CL",
+          "price": "415",
+          "desc": "Hollanda - alc %5 vol ",
+          "category": "Şişe Biralar"
+        },
+        {
+          "name": "Paulaner Hefe Weissbier 33 CL",
+          "price": "415",
+          "desc": "Almanya - alc %5,5 vol ",
+          "category": "Şişe Biralar"
+        },
+        {
+          "name": "Paulaner Munchner 33 CL",
+          "price": "415",
+          "desc": "Almanya - alc %4,9 vol",
+          "category": "Şişe Biralar"
+        },
+        {
+          "name": "Paulaner Salvator 33 CL",
+          "price": "465",
+          "desc": "Almanya - alc %7,9 vol ",
+          "category": "Şişe Biralar"
+        },
+        {
+          "name": "Sevilen Cider Çilek",
+          "price": "465",
+          "desc": " ",
+          "category": "Şişe Biralar"
+        },
+        {
+          "name": "Sevilen Cider Apple",
+          "price": "465",
+          "desc": "",
+          "category": "Şişe Biralar"
+        },
+        {
+          "name": "Strongbow Apple Cider 33 CL",
+          "price": "490",
+          "desc": " ",
+          "category": "Şişe Biralar"
+        },
+        {
+          "name": "Blue Moon 33 CL",
+          "price": "415",
+          "desc": "Çekya - alc %5,4 vol ",
+          "category": "Şişe Biralar"
+        },
+        {
+          "name": "Daura Glutensiz 33 CL",
+          "price": "415",
+          "desc": "İspanya - alc %5,4 vol  ",
+          "category": "Şişe Biralar"
+        },
+        {
+          "name": "Estrella 33 CL",
+          "price": "415",
+          "desc": "İspanya - alc %4,6 vol  ",
+          "category": "Şişe Biralar"
+        },
+        {
+          "name": "Halic Alkolsüz",
+          "price": "250",
+          "desc": "",
+          "category": "Şişe Biralar"
+        },
+        {
+          "name": "A Sante New Zealand Pilsner",
+          "price": "435",
+          "desc": "Adana Türkiye - vol %5 ",
+          "category": "Şişe Biralar"
+        },
+        {
+          "name": "A Sante Belgian Strong",
+          "price": "445",
+          "desc": "Adana, Türkiye - vol %8 ",
+          "category": "Şişe Biralar"
+        },
+        {
+          "name": "A Sante Cold IPA",
+          "price": "435",
+          "desc": "Adana, Türkiye - vol %7 ",
+          "category": "Şişe Biralar"
+        },
+        {
+          "name": "Lucky Buddha 33 CL",
+          "price": "415",
+          "desc": " ",
+          "category": "Şişe Biralar"
+        },
+        {
+          "name": "Pilsner Urquell",
+          "price": "415",
+          "desc": "",
+          "category": "Şişe Biralar"
+        },
+        {
+          "name": "Petrus Dubbel",
+          "price": "445",
+          "desc": "",
+          "category": "Şişe Biralar"
+        },
+        {
+          "name": "Schofferhofer",
+          "price": "415",
+          "desc": "",
+          "category": "Şişe Biralar"
+        },
+        {
+          "name": "Celtic Combo",
+          "price": "760",
+          "desc": "2 adet domates soslu mini burger(50grx2), Cajun baharatlı tavuk parçaları, Baharatlı Patates Kızartması ve Ballı Hardal ",
+          "category": "Yiyecekler"
+        },
+        {
+          "name": "Karışık Çerez ve Turşu Tabağı",
+          "price": "299",
+          "desc": "",
+          "category": "Yiyecekler"
+        },
+        {
+          "name": "Patates Kızartması",
+          "price": "340",
+          "desc": "Sade / Baharatlı - 300 gr patates kızartması ",
+          "category": "Yiyecekler"
+        },
+        {
+          "name": "Queso Cheddar Patates",
+          "price": "420",
+          "desc": "Cheddar Soslu 300 gr Patates Kızartması  ",
+          "category": "Yiyecekler"
+        },
+        {
+          "name": "Çıtır Zeytin",
+          "price": "325",
+          "desc": "Paneli çıtır zeytin(100gr) ve krema soğan sos ",
+          "category": "Yiyecekler"
+        },
+        {
+          "name": "Cajun Chicken Basket",
+          "price": "560",
+          "desc": "Cajun baharatıyla panelenmiş tavuk parçaları (130gr), baharatlı patates kızartması ve ballı hardal sos ",
+          "category": "Yiyecekler"
+        },
+        {
+          "name": "Celtic Platter",
+          "price": "840",
+          "desc": "Jalapeno cheddarlı dana sosis, mac and cheese topları, mozzarella sticks , kızarmış zeytin, jalapeno poppers, falafel, baharatlı patates kızartması, sweet chilli ve kremalı soğan sos ",
+          "category": "Yiyecekler"
+        },
+        {
+          "name": "Jalapeno Poppers",
+          "price": "510",
+          "desc": "Labne peyniri ile doldurulmuş jalapeno biberi ve kremalı soğan sos ",
+          "category": "Yiyecekler"
+        },
+        {
+          "name": "Mozarella Sticks",
+          "price": "510",
+          "desc": "Panelenmiş mozzarella peyniri, sweet chilli sosve baharatlı patates kızartması ",
+          "category": "Yiyecekler"
+        },
+        {
+          "name": "Kalamar",
+          "price": "730",
+          "desc": "Kalamar (200gr), Tarator Sos (40gr) ",
+          "category": "Yiyecekler"
+        },
+        {
+          "name": "Fish and Chips",
+          "price": "785",
+          "desc": "Kızarmış özel paneli mezgit fileto (170gr) , sade patates kızartması, frenk soğanı, limon ve tartar sos.  Dikkat! Kılçık çıkabilir. ",
+          "category": "Yiyecekler"
+        },
+        {
+          "name": "Buffalo Wings",
+          "price": "705",
+          "desc": "Kızarmış acı tavuk kanatları(8 adet), rokfor sos(50gr) ve kereviz sapı ",
+          "category": "Yiyecekler"
+        },
+        {
+          "name": "Frankfurter Sosis",
+          "price": "615",
+          "desc": "Özel ekmeği içerisine Dana Frankfurter sosis(90gr), trüflü mayo, cheddar sos, veggie mix ",
+          "category": "Yiyecekler"
+        },
+        {
+          "name": "Frankfurter Sosis Menü",
+          "price": "715",
+          "desc": "Özel ekmeği içerisine Dana Frankfurter sosis(90gr), trüflü mayo, cheddar sos, veggie mix ve baharatlı patates kızartması ",
+          "category": "Yiyecekler"
+        },
+        {
+          "name": "Sosis Tabağı",
+          "price": "820",
+          "desc": "Jalapeno cheddar sosis(70gr), Dana Frankfurter sosis(80gr), baharatlı patates kızartması, karamelize soğan, kornişon turşu, ballı hardal sos ",
+          "category": "Yiyecekler"
+        },
+        {
+          "name": "Domuz Sosis Tabağı",
+          "price": "820",
+          "desc": "Domuz Sosis(175gr), baharatlı patates kızartması, karamelize soğan, kornişon turşu, ballı hardal sos (50)gr ",
+          "category": "Yiyecekler"
+        },
+        {
+          "name": "Corn Dog",
+          "price": "550",
+          "desc": "Mısır Unu ile panelenmiş Frankfurter Sosis(90 gr), Baharatlı Patates Kızartması ve Ballı Hardal Sos ",
+          "category": "Yiyecekler"
+        },
+        {
+          "name": "Peynirli Nachos",
+          "price": "560",
+          "desc": " ",
+          "category": "Yiyecekler"
+        },
+        {
+          "name": "Tavuklu Nachos",
+          "price": "620",
+          "desc": "",
+          "category": "Yiyecekler"
+        },
+        {
+          "name": "Etli Nachos",
+          "price": "730",
+          "desc": "",
+          "category": "Yiyecekler"
+        },
+        {
+          "name": "Tavuklu Taco",
+          "price": "620",
+          "desc": "3 adet mısır unlu taco cips içerisine salsa sos, acılı tavuk parçaları, cheddar sos, avokado püresi ve Meksika salatası ",
+          "category": "Yiyecekler"
+        },
+        {
+          "name": "Etli Taco",
+          "price": "730",
+          "desc": "3 adet mısır unlu taco cips içerisine salsa sos, acılı sote biftek parçaları(180gr), cheddar sos, avokado püresi ve Meksika salatası ",
+          "category": "Yiyecekler"
+        },
+        {
+          "name": "Cheeseburger 180gr",
+          "price": "710",
+          "desc": "180 gr. burger köftesi, cheddar peyniri, trüflü mayo sos, karamelize soğan, sweet chilli ",
+          "category": "Yiyecekler"
+        },
+        {
+          "name": "Cheeseburger 180gr Menü",
+          "price": "825",
+          "desc": "180 gr. burger köftesi, cheddar peyniri, trüflü mayo sos, karamelize soğan, sweet chilli ve baharatlı patates kızartması ",
+          "category": "Yiyecekler"
+        },
+        {
+          "name": "Cheeseburger 150gr",
+          "price": "630",
+          "desc": "150 gr. burger köftesi, cheddar peyniri, trüflü mayo sos, karamelize soğan, sweet chilli ",
+          "category": "Yiyecekler"
+        },
+        {
+          "name": "Cheeseburger 150gr Menü",
+          "price": "730",
+          "desc": "150 gr. burger köftesi, cheddar peyniri, trüflü mayo sos, karamelize soğan, sweet chilli ve baharatlı patates kızartması ",
+          "category": "Yiyecekler"
+        },
+        {
+          "name": "Celtic Jack Daniels Burger",
+          "price": "745",
+          "desc": "Burger köftesi (180 gr), cheddar peyniri, istridye mantarı, kızarmış dana bacon, çıtır soğan, Jack Daniel's sos ",
+          "category": "Yiyecekler"
+        },
+        {
+          "name": "Celtic Jack Daniels Burger Menü",
+          "price": "860",
+          "desc": "Burger köftesi (180 gr), cheddar peyniri, istridye mantarı, kızarmış dana bacon, çıtır soğan, Jack Daniel's sos ve baharatlı patates kızartması ",
+          "category": "Yiyecekler"
+        },
+        {
+          "name": "3'lü Mini Burger Menü",
+          "price": "780",
+          "desc": "3 Adet Mini Burger (3x50gr burger köftesi), domates sos, Baharatlı Patates Kızartması ",
+          "category": "Yiyecekler"
+        },
+        {
+          "name": "Kids Burger",
+          "price": "520",
+          "desc": "2 adet mini burger (2x50gr burger köftesi) ve sade patates kızartması ",
+          "category": "Yiyecekler"
+        },
+        {
+          "name": "Tavuk Schnitzel",
+          "price": "715",
+          "desc": "Panelenmiş Tavuk Göğüs(180gr), Patates Salatası, Baharatlı tereyağ, Limon ",
+          "category": "Yiyecekler"
+        },
+        {
+          "name": "Falafel Burger Menü",
+          "price": "540",
+          "desc": "Kızarmış falafel, cheddar sos, avokado püresi ve baharatlı patates kızartması ",
+          "category": "Yiyecekler"
+        },
+        {
+          "name": "Bamya - Salatalık Turşusu",
+          "price": "255",
+          "desc": "",
+          "category": "Yiyecekler"
+        },
+        {
+          "name": "Karışık Çerez",
+          "price": "255",
+          "desc": "",
+          "category": "Yiyecekler"
+        },
+        {
+          "name": "Tuzlu Yer Fıstığı",
+          "price": "150",
+          "desc": "",
+          "category": "Yiyecekler"
+        },
+        {
+          "name": "Harvest Reserve",
+          "price": "775",
+          "desc": "Ketel One Vodka, Cinnamon, Local White Wine, Homemade Honey and Sage Liqueur ",
+          "category": "İmza Kokteyller"
+        },
+        {
+          "name": "Ash & Peat",
+          "price": "775",
+          "desc": "JW Black Ruby, Archers, Citrus Blend, Peach Cordial, Smoky Parfume ",
+          "category": "İmza Kokteyller"
+        },
+        {
+          "name": "La Roja",
+          "price": "775",
+          "desc": "Casamigos Blanco, Tanqueray Sevilla, Citrus Cordial, Lemon ",
+          "category": "İmza Kokteyller"
+        },
+        {
+          "name": "Damascena",
+          "price": "775",
+          "desc": "Grapefruit & Rose infused Ketel One Vodka, Safari, Lemon Juice ",
+          "category": "İmza Kokteyller"
+        },
+        {
+          "name": "Granny's Apple",
+          "price": "775",
+          "desc": "Green Apple infused Bulliet Bourbon, Elderflower Liqueur, Pomegranate Juice ",
+          "category": "İmza Kokteyller"
+        },
+        {
+          "name": "Campari +39",
+          "price": "775",
+          "desc": "Disaronno, Campari, Cranberry, Prosecco ",
+          "category": "İmza Kokteyller"
+        },
+        {
+          "name": "7th Avenue",
+          "price": "775",
+          "desc": "Bulliet Bourbon, Dark Chocolate Tequila, Maraschino Cherry Liqueur, Angostura Bitter ",
+          "category": "İmza Kokteyller"
+        },
+        {
+          "name": "Limoncello Spritz",
+          "price": "775",
+          "desc": "Limoncello, Italicus Bergamotto, Prosecco, Fizzy Water ",
+          "category": "İmza Kokteyller"
+        },
+        {
+          "name": "Saltbite Fizz",
+          "price": "775",
+          "desc": "Stolichnaya Salted Caramel, Ananas, Tatlı Ekşi Sos, Lime, Şeker Şurubu, Zencefilli Gazoz ",
+          "category": "İmza Kokteyller"
+        },
+        {
+          "name": "Tina",
+          "price": "775",
+          "desc": "Tanqueray, Bols Elderflower, Citrus Blend, Lemon Grass, Cucumber juice ",
+          "category": "İmza Kokteyller"
+        },
+        {
+          "name": "Chilly Billy",
+          "price": "775",
+          "desc": "Ketel One Infused, Aperol, Elma Suyu, Citrus, Passion Fruit ",
+          "category": "İmza Kokteyller"
+        },
+        {
+          "name": "Blood & Thunder",
+          "price": "775",
+          "desc": "Tanqueray, Sambuca, Ananas Suyu, Tarçın, S&S Mix  ",
+          "category": "İmza Kokteyller"
+        },
+        {
+          "name": "Rising Generation",
+          "price": "775",
+          "desc": "Tanqueray, Jagermeister, Maraschino Liqueur, Lavender tentür, Limon Suyu  ",
+          "category": "İmza Kokteyller"
+        },
+        {
+          "name": "Take",
+          "price": "775",
+          "desc": "Bulliet Bourbon, Elma Suyu, Limon Suyu, Tarçın, Angostura Bitter  ",
+          "category": "İmza Kokteyller"
+        },
+        {
+          "name": "Celtic's Mascot",
+          "price": "775",
+          "desc": "Tanqueray, Lime, Garrone Bitter, Limon Suyu, Zencefil, Tarçın  ",
+          "category": "İmza Kokteyller"
+        },
+        {
+          "name": "White Russian",
+          "price": "750",
+          "desc": "Ketel One, Kahlua, Süt  ",
+          "category": "Uluslararası Kokteyller"
+        },
+        {
+          "name": "Godfather",
+          "price": "750",
+          "desc": "Ballantines, Ameretto  ",
+          "category": "Uluslararası Kokteyller"
+        },
+        {
+          "name": "Martinez",
+          "price": "750",
+          "desc": "Tanqueray, Garrone Rosso, Marashino Liquer, Angastura Bitter  ",
+          "category": "Uluslararası Kokteyller"
+        },
+        {
+          "name": "Negroni",
+          "price": "750",
+          "desc": "Tanqueray, Martini Rosso, Campari  ",
+          "category": "Uluslararası Kokteyller"
+        },
+        {
+          "name": "French 75",
+          "price": "750",
+          "desc": "Tanqueray, Lime, Şeker Şurubu, Prosecco   ",
+          "category": "Uluslararası Kokteyller"
+        },
+        {
+          "name": "Moscow Mule",
+          "price": "750",
+          "desc": "Ketel One, Lime, Zencefilli Gazoz  ",
+          "category": "Uluslararası Kokteyller"
+        },
+        {
+          "name": "Margarita",
+          "price": "750",
+          "desc": "Casamigos Blanco, Lime, Garrone Triple Sec  ",
+          "category": "Uluslararası Kokteyller"
+        },
+        {
+          "name": "Paloma",
+          "price": "750",
+          "desc": "Casamigos Blanco, Lime Suyu, Greyfurt Suyu, Maden suyu  ",
+          "category": "Uluslararası Kokteyller"
+        },
+        {
+          "name": "Tommy's Margarita",
+          "price": "750",
+          "desc": "Casamigos Blanco, Lime Juice, Agave Şurubu  ",
+          "category": "Uluslararası Kokteyller"
+        },
+        {
+          "name": "Cuba Libre",
+          "price": "750",
+          "desc": "Captain Morgan, Lime, Cola  ",
+          "category": "Uluslararası Kokteyller"
+        },
+        {
+          "name": "Daiquiri",
+          "price": "750",
+          "desc": "Captain Morgan, Lime Suyu, Şeker Şurubu  ",
+          "category": "Uluslararası Kokteyller"
+        },
+        {
+          "name": "Pina Colada",
+          "price": "750",
+          "desc": "Captain Morgan, Malibu, Ananas Suyu, Süt  ",
+          "category": "Uluslararası Kokteyller"
+        },
+        {
+          "name": "Whisky Sour",
+          "price": "750",
+          "desc": "Bulliet Bourbon, Lime, Şeker Şurubu, Foamer, Angostura Bitter  ",
+          "category": "Uluslararası Kokteyller"
+        },
+        {
+          "name": "Caipirinha",
+          "price": "750",
+          "desc": "Janerio Cachaca, Lime, Şeker ",
+          "category": "Uluslararası Kokteyller"
+        },
+        {
+          "name": "Gin Martini",
+          "price": "750",
+          "desc": "Tanqueray, Martini Extra Dry, Zeytin  ",
+          "category": "Uluslararası Kokteyller"
+        },
+        {
+          "name": "Vodka Martini",
+          "price": "750",
+          "desc": "Ketel One, Martini Extra Dry, Zeytin  ",
+          "category": "Uluslararası Kokteyller"
+        },
+        {
+          "name": "Bloody Mary",
+          "price": "750",
+          "desc": "Ketel One, Celtic's Special Mix  ",
+          "category": "Uluslararası Kokteyller"
+        },
+        {
+          "name": "Old Fashioned",
+          "price": "750",
+          "desc": "Bulliet Bourbon, Şeker Şurubu, Angostura Bitter  ",
+          "category": "Uluslararası Kokteyller"
+        },
+        {
+          "name": "Manhattan",
+          "price": "750",
+          "desc": "Bulliet Bourbon, Sweet Vermouth, Angostura Bitter  ",
+          "category": "Uluslararası Kokteyller"
+        },
+        {
+          "name": "Bellini",
+          "price": "750",
+          "desc": "Archers, Beyaz Şeftali Püresi, Prosecco ",
+          "category": "Uluslararası Kokteyller"
+        },
+        {
+          "name": "Bramble",
+          "price": "750",
+          "desc": "Tanqueray, Lime, Şeker Şurubu, Böğürtlen Likörü, Böğürtlen Şurubu  ",
+          "category": "Uluslararası Kokteyller"
+        },
+        {
+          "name": "Sangria / Blush Sangria",
+          "price": "750",
+          "desc": "Captain Morgan, Martini Rosso, Garrone Triple Sec, Kırmızı Şarap, Portakal, Elma  ",
+          "category": "Uluslararası Kokteyller"
+        },
+        {
+          "name": "Clover Club",
+          "price": "750",
+          "desc": "Tanqueray, Chambord, Böğürtlen Şurubu, Limon Şurubu, Foamer  ",
+          "category": "Uluslararası Kokteyller"
+        },
+        {
+          "name": "The Irish Car Bomb",
+          "price": "640",
+          "desc": "Guinness, Jameson, Bailey’s ",
+          "category": "Uluslararası Kokteyller"
+        },
+        {
+          "name": "Lynchburg Lemonade",
+          "price": "750",
+          "desc": "Jack Daniel's, Garrone Triple Sec, S&S Mix, Sprite ",
+          "category": "Uluslararası Kokteyller"
+        },
+        {
+          "name": "Long Island Iced Tea",
+          "price": "950",
+          "desc": "Ketel One, Tanqueray, Captain Morgan, Garrone Triple Sec, Casamigos Blanco, S&S Mix, Coca Cola   ",
+          "category": "Uluslararası Kokteyller"
+        },
+        {
+          "name": "Rusty Nail",
+          "price": "750",
+          "desc": "Black Label, Drambuie   ",
+          "category": "Uluslararası Kokteyller"
+        },
+        {
+          "name": "Espresso Martini",
+          "price": "750",
+          "desc": "Ketel One, Kahlua, Espresso, Bal  ",
+          "category": "Uluslararası Kokteyller"
+        },
+        {
+          "name": "Bloody Maria",
+          "price": "750",
+          "desc": "Casamigos Blanco, Celtic's Special Mix  ",
+          "category": "Uluslararası Kokteyller"
+        },
+        {
+          "name": "Amaretto Sour",
+          "price": "750",
+          "desc": "Bols Amaretto, Lime, Şeker Şurubu, Foamer, Portakal bitter  ",
+          "category": "Uluslararası Kokteyller"
+        },
+        {
+          "name": "Black Russian",
+          "price": "750",
+          "desc": "Ketel One, Kahlua  ",
+          "category": "Uluslararası Kokteyller"
+        },
+        {
+          "name": "Gimlet",
+          "price": "750",
+          "desc": "Tanqueray, Limon Suyu, Şeker Şurubu  ",
+          "category": "Uluslararası Kokteyller"
+        },
+        {
+          "name": "Godmother",
+          "price": "750",
+          "desc": "Ketel One, Amaretto  ",
+          "category": "Uluslararası Kokteyller"
+        },
+        {
+          "name": "Boulevardier",
+          "price": "750",
+          "desc": "Bulliet Bourbon, Campari, Martini Rosso  ",
+          "category": "Uluslararası Kokteyller"
+        },
+        {
+          "name": "Gin Fizz",
+          "price": "750",
+          "desc": "Tanqueray, Pudra Şekeri, Maden Suyu, Foamer, Limon Suyu  ",
+          "category": "Uluslararası Kokteyller"
+        },
+        {
+          "name": "Casamigos  Blanco",
+          "price": "295",
+          "desc": "",
+          "category": "Shot"
+        },
+        {
+          "name": "JW Ruby",
+          "price": "295",
+          "desc": " ",
+          "category": "Shot"
+        },
+        {
+          "name": "Jameson",
+          "price": "315",
+          "desc": "",
+          "category": "Shot"
+        },
+        {
+          "name": "Shanky's Whip",
+          "price": "315",
+          "desc": "",
+          "category": "Shot"
+        },
+        {
+          "name": "Havana 3 Anos",
+          "price": "315",
+          "desc": "",
+          "category": "Shot"
+        },
+        {
+          "name": "Jameson Black Barrel",
+          "price": "275",
+          "desc": "",
+          "category": "Shot"
+        },
+        {
+          "name": "Jagermeister",
+          "price": "315",
+          "desc": " ",
+          "category": "Shot"
+        },
+        {
+          "name": "Jagermeister Cold Brew",
+          "price": "315",
+          "desc": "",
+          "category": "Shot"
+        },
+        {
+          "name": "Jagermeister Manifest",
+          "price": "345",
+          "desc": "",
+          "category": "Shot"
+        },
+        {
+          "name": "Baileys",
+          "price": "275",
+          "desc": "",
+          "category": "Shot"
+        },
+        {
+          "name": "Limoncello",
+          "price": "315",
+          "desc": "",
+          "category": "Shot"
+        },
+        {
+          "name": "Galliano Espresso",
+          "price": "315",
+          "desc": "",
+          "category": "Shot"
+        },
+        {
+          "name": "Sierra Mango Chili Tequila",
+          "price": "315",
+          "desc": "",
+          "category": "Shot"
+        },
+        {
+          "name": "Kahlua",
+          "price": "315",
+          "desc": "",
+          "category": "Shot"
+        },
+        {
+          "name": "St. Germain",
+          "price": "345",
+          "desc": " ",
+          "category": "Shot"
+        },
+        {
+          "name": "Chios",
+          "price": "275",
+          "desc": "",
+          "category": "Shot"
+        },
+        {
+          "name": "Jim Beam White",
+          "price": "315",
+          "desc": " ",
+          "category": "Shot"
+        },
+        {
+          "name": "Tullamore Dew",
+          "price": "315",
+          "desc": "",
+          "category": "Shot"
+        },
+        {
+          "name": "Avion Silver",
+          "price": "375",
+          "desc": "",
+          "category": "Shot"
+        },
+        {
+          "name": "Patron Anejo",
+          "price": "450",
+          "desc": "",
+          "category": "Shot"
+        },
+        {
+          "name": "Patron Silver",
+          "price": "450",
+          "desc": "",
+          "category": "Shot"
+        },
+        {
+          "name": "Ojo Mescal",
+          "price": "375",
+          "desc": "",
+          "category": "Shot"
+        },
+        {
+          "name": "Sambuca",
+          "price": "315",
+          "desc": "",
+          "category": "Shot"
+        },
+        {
+          "name": "Grappa",
+          "price": "315",
+          "desc": " ",
+          "category": "Shot"
+        },
+        {
+          "name": "Absinthe",
+          "price": "450",
+          "desc": "",
+          "category": "Shot"
+        },
+        {
+          "name": "Archer's",
+          "price": "275",
+          "desc": "",
+          "category": "Shot"
+        },
+        {
+          "name": "Don Julio Repesado",
+          "price": "375",
+          "desc": "",
+          "category": "Shot"
+        },
+        {
+          "name": "Don Julio Anejo",
+          "price": "375",
+          "desc": "",
+          "category": "Shot"
+        },
+        {
+          "name": "Casamigos Mescal",
+          "price": "325",
+          "desc": "",
+          "category": "Shot"
+        },
+        {
+          "name": "Casamigos Anejo",
+          "price": "325",
+          "desc": "",
+          "category": "Shot"
+        },
+        {
+          "name": "Jagermeister Orange",
+          "price": "315",
+          "desc": "",
+          "category": "Shot"
+        },
+        {
+          "name": "Tanqueray",
+          "price": "525",
+          "desc": "",
+          "category": "Cin"
+        },
+        {
+          "name": "Tanqueray Sevilla",
+          "price": "525",
+          "desc": " ",
+          "category": "Cin"
+        },
+        {
+          "name": "Tanqueray No 10",
+          "price": "630",
+          "desc": " ",
+          "category": "Cin"
+        },
+        {
+          "name": "Malfy",
+          "price": "550",
+          "desc": "Classic, Limon, Greyfurt (Rosa)",
+          "category": "Cin"
+        },
+        {
+          "name": "Kinobi Gin",
+          "price": "615",
+          "desc": "",
+          "category": "Cin"
+        },
+        {
+          "name": "Bombay Sapphire",
+          "price": "550",
+          "desc": " ",
+          "category": "Cin"
+        },
+        {
+          "name": "Star of Bombay",
+          "price": "650",
+          "desc": "",
+          "category": "Cin"
+        },
+        {
+          "name": "Illusionist Gin",
+          "price": "595",
+          "desc": "",
+          "category": "Cin"
+        },
+        {
+          "name": "Hendricks",
+          "price": "690",
+          "desc": " ",
+          "category": "Cin"
+        },
+        {
+          "name": "Hendricks Orbium",
+          "price": "750",
+          "desc": "",
+          "category": "Cin"
+        },
+        {
+          "name": "Hendricks Lunar",
+          "price": "750",
+          "desc": "",
+          "category": "Cin"
+        },
+        {
+          "name": "Hendricks Neptunia",
+          "price": "750",
+          "desc": "",
+          "category": "Cin"
+        },
+        {
+          "name": "Roku",
+          "price": "575",
+          "desc": "",
+          "category": "Cin"
+        },
+        {
+          "name": "Bulldog",
+          "price": "550",
+          "desc": " ",
+          "category": "Cin"
+        },
+        {
+          "name": "Larios 12",
+          "price": "445",
+          "desc": "",
+          "category": "Cin"
+        },
+        {
+          "name": "Fords Gin",
+          "price": "550",
+          "desc": "",
+          "category": "Cin"
+        },
+        {
+          "name": "Sipsmith",
+          "price": "650",
+          "desc": "",
+          "category": "Cin"
+        },
+        {
+          "name": "Smirnoff ",
+          "price": "525",
+          "desc": "Red- North ",
+          "category": "Vodka"
+        },
+        {
+          "name": "Ketel One",
+          "price": "575",
+          "desc": "",
+          "category": "Vodka"
+        },
+        {
+          "name": "Absolut Elyx",
+          "price": "600",
+          "desc": " ",
+          "category": "Vodka"
+        },
+        {
+          "name": "Keglevich",
+          "price": "425",
+          "desc": "Melon, Pesca, Fragola, Mela Verde ",
+          "category": "Vodka"
+        },
+        {
+          "name": "Belvedere",
+          "price": "695",
+          "desc": "",
+          "category": "Vodka"
+        },
+        {
+          "name": "Kauffman Soft",
+          "price": "695",
+          "desc": "",
+          "category": "Vodka"
+        },
+        {
+          "name": "Beluga",
+          "price": "695",
+          "desc": "",
+          "category": "Vodka"
+        },
+        {
+          "name": "Russian Standart",
+          "price": "495",
+          "desc": "",
+          "category": "Vodka"
+        },
+        {
+          "name": "Grey Goose",
+          "price": "695",
+          "desc": " ",
+          "category": "Vodka"
+        },
+        {
+          "name": "Tito's",
+          "price": "595",
+          "desc": "",
+          "category": "Vodka"
+        },
+        {
+          "name": "Stolichnaya",
+          "price": "495",
+          "desc": " ",
+          "category": "Vodka"
+        },
+        {
+          "name": "Finlandia Vodka",
+          "price": "495",
+          "desc": "",
+          "category": "Vodka"
+        },
+        {
+          "name": "Stolichnaya Elit",
+          "price": "625",
+          "desc": "",
+          "category": "Vodka"
+        },
+        {
+          "name": "Ciroc ",
+          "price": "595",
+          "desc": "",
+          "category": "Vodka"
+        },
+        {
+          "name": "Haku Vodka",
+          "price": "675",
+          "desc": "",
+          "category": "Vodka"
+        },
+        {
+          "name": "Captain Morgan",
+          "price": "525",
+          "desc": "White, Spice, Dark ",
+          "category": "Rom"
+        },
+        {
+          "name": "Zacapa 23 Y.O",
+          "price": "625",
+          "desc": "",
+          "category": "Rom"
+        },
+        {
+          "name": "Havana 7 Anos",
+          "price": "575",
+          "desc": "",
+          "category": "Rom"
+        },
+        {
+          "name": "Havana Seleccion",
+          "price": "625",
+          "desc": "",
+          "category": "Rom"
+        },
+        {
+          "name": "Bacardi White",
+          "price": "515",
+          "desc": "",
+          "category": "Rom"
+        },
+        {
+          "name": "Bacardi Black",
+          "price": "515",
+          "desc": "",
+          "category": "Rom"
+        },
+        {
+          "name": "Bacardi Gold",
+          "price": "515",
+          "desc": "",
+          "category": "Rom"
+        },
+        {
+          "name": "Janerio Cachaca",
+          "price": "525",
+          "desc": "",
+          "category": "Rom"
+        },
+        {
+          "name": "Casamigos Blanco",
+          "price": "525",
+          "desc": "",
+          "category": "Tekila - Mescal"
+        },
+        {
+          "name": "Don Julio Blanco",
+          "price": "575",
+          "desc": "",
+          "category": "Tekila - Mescal"
+        },
+        {
+          "name": "Olmeca Dark Chocolate",
+          "price": "550",
+          "desc": "",
+          "category": "Tekila - Mescal"
+        },
+        {
+          "name": "Olmeca Gold",
+          "price": "550",
+          "desc": "",
+          "category": "Tekila - Mescal"
+        },
+        {
+          "name": "Avion Silver",
+          "price": "600",
+          "desc": "",
+          "category": "Tekila - Mescal"
+        },
+        {
+          "name": "Herradura",
+          "price": "575",
+          "desc": "",
+          "category": "Tekila - Mescal"
+        },
+        {
+          "name": "Sierra Mango Chili Tequila",
+          "price": "525",
+          "desc": "",
+          "category": "Tekila - Mescal"
+        },
+        {
+          "name": "Don Julio 1942 ",
+          "price": "1950",
+          "desc": "",
+          "category": "Tekila - Mescal"
+        },
+        {
+          "name": "Don Julio Repesado",
+          "price": "575",
+          "desc": "",
+          "category": "Tekila - Mescal"
+        },
+        {
+          "name": "Don Julio Anejo",
+          "price": "575",
+          "desc": "",
+          "category": "Tekila - Mescal"
+        },
+        {
+          "name": "Casamigos Mescal",
+          "price": "550",
+          "desc": "",
+          "category": "Tekila - Mescal"
+        },
+        {
+          "name": "Casamigos Anejo",
+          "price": "550",
+          "desc": "",
+          "category": "Tekila - Mescal"
+        },
+        {
+          "name": "Espolon Blanco",
+          "price": "550",
+          "desc": "",
+          "category": "Tekila - Mescal"
+        },
+        {
+          "name": "Espolon Repesado",
+          "price": "600",
+          "desc": "",
+          "category": "Tekila - Mescal"
+        },
+        {
+          "name": "Aperol Spritz",
+          "price": "750",
+          "desc": "Aperol, Cinzano Prosecco, Soda ",
+          "category": "Aperitifler"
+        },
+        {
+          "name": "Campari Spritz",
+          "price": "750",
+          "desc": "Campari, Cinzano Prosecco, Soda ",
+          "category": "Aperitifler"
+        },
+        {
+          "name": "Negroni",
+          "price": "750",
+          "desc": "Campari, Tanqeray, Martini Rosso  ",
+          "category": "Aperitifler"
+        },
+        {
+          "name": "Campari Americano",
+          "price": "750",
+          "desc": "Campari, Martini Rosso, Soda  ",
+          "category": "Aperitifler"
+        },
+        {
+          "name": "Campari Tonic",
+          "price": "750",
+          "desc": "Campari, Tonic ",
+          "category": "Aperitifler"
+        },
+        {
+          "name": "Lillet Spritz",
+          "price": "750",
+          "desc": " ",
+          "category": "Aperitifler"
+        },
+        {
+          "name": "Kahlua",
+          "price": "425",
+          "desc": "",
+          "category": "Likör"
+        },
+        {
+          "name": "Malibu",
+          "price": "395",
+          "desc": "",
+          "category": "Likör"
+        },
+        {
+          "name": "Jagermeister",
+          "price": "425",
+          "desc": "",
+          "category": "Likör"
+        },
+        {
+          "name": "Baileys",
+          "price": "425",
+          "desc": "",
+          "category": "Likör"
+        },
+        {
+          "name": "Maraschino",
+          "price": "425",
+          "desc": "",
+          "category": "Likör"
+        },
+        {
+          "name": "Italicus Bergamotto",
+          "price": "495",
+          "desc": "",
+          "category": "Likör"
+        },
+        {
+          "name": "Skinos / Chios",
+          "price": "395",
+          "desc": "",
+          "category": "Likör"
+        },
+        {
+          "name": "Pisang",
+          "price": "395",
+          "desc": "",
+          "category": "Likör"
+        },
+        {
+          "name": "Sambuca",
+          "price": "425",
+          "desc": "",
+          "category": "Likör"
+        },
+        {
+          "name": "Drambuie",
+          "price": "425",
+          "desc": "",
+          "category": "Likör"
+        },
+        {
+          "name": "Shanky's Whip",
+          "price": "425",
+          "desc": "",
+          "category": "Likör"
+        },
+        {
+          "name": "Grappa",
+          "price": "425",
+          "desc": "",
+          "category": "Likör"
+        },
+        {
+          "name": "Absinthe",
+          "price": "595",
+          "desc": "",
+          "category": "Likör"
+        },
+        {
+          "name": "Fernet Branca",
+          "price": "425",
+          "desc": "",
+          "category": "Likör"
+        },
+        {
+          "name": "Archer's",
+          "price": "395",
+          "desc": "",
+          "category": "Likör"
+        },
+        {
+          "name": "Cardinal Melon",
+          "price": "395",
+          "desc": "",
+          "category": "Likör"
+        },
+        {
+          "name": "Safari",
+          "price": "395",
+          "desc": "",
+          "category": "Likör"
+        },
+        {
+          "name": "Creme De Cassis",
+          "price": "425",
+          "desc": "",
+          "category": "Likör"
+        },
+        {
+          "name": "Amaretto",
+          "price": "425",
+          "desc": "",
+          "category": "Likör"
+        },
+        {
+          "name": "Bols Peppermint",
+          "price": "425",
+          "desc": "",
+          "category": "Likör"
+        },
+        {
+          "name": "Cynar",
+          "price": "395",
+          "desc": "",
+          "category": "Likör"
+        },
+        {
+          "name": "St. Germain",
+          "price": "475",
+          "desc": "",
+          "category": "Likör"
+        },
+        {
+          "name": "Jagermeister Orange",
+          "price": "425",
+          "desc": "",
+          "category": "Likör"
+        },
+        {
+          "name": "Grand Marnier",
+          "price": "485",
+          "desc": "",
+          "category": "Likör"
+        },
+        {
+          "name": "Jameson",
+          "price": "550",
+          "desc": "",
+          "category": "Irlanda Viskisi"
+        },
+        {
+          "name": "Jameson Black Barrel",
+          "price": "700",
+          "desc": "",
+          "category": "Irlanda Viskisi"
+        },
+        {
+          "name": "Jameson Stout Edition",
+          "price": "575",
+          "desc": "",
+          "category": "Irlanda Viskisi"
+        },
+        {
+          "name": "Jameson Caskmates IPA",
+          "price": "575",
+          "desc": "",
+          "category": "Irlanda Viskisi"
+        },
+        {
+          "name": "Tullamore Dew",
+          "price": "550",
+          "desc": "",
+          "category": "Irlanda Viskisi"
+        },
+        {
+          "name": "Dead Rabbit",
+          "price": "595",
+          "desc": "",
+          "category": "Irlanda Viskisi"
+        },
+        {
+          "name": "Dubliner's",
+          "price": "595",
+          "desc": "",
+          "category": "Irlanda Viskisi"
+        },
+        {
+          "name": "Connemara",
+          "price": "595",
+          "desc": "",
+          "category": "Irlanda Viskisi"
+        },
+        {
+          "name": "Bushmill Original",
+          "price": "525",
+          "desc": "",
+          "category": "Irlanda Viskisi"
+        },
+        {
+          "name": "Bushmill Single Malt",
+          "price": "625",
+          "desc": "",
+          "category": "Irlanda Viskisi"
+        },
+        {
+          "name": "Bushmill Black",
+          "price": "575",
+          "desc": "",
+          "category": "Irlanda Viskisi"
+        },
+        {
+          "name": "Teeling Small Batch",
+          "price": "550",
+          "desc": "",
+          "category": "Irlanda Viskisi"
+        },
+        {
+          "name": "Teeling Single Malt",
+          "price": "600",
+          "desc": "",
+          "category": "Irlanda Viskisi"
+        },
+        {
+          "name": "Singleton 12 YO",
+          "price": "575",
+          "desc": "",
+          "category": "Single Malt Viski"
+        },
+        {
+          "name": "Talisker 10 YO",
+          "price": "600",
+          "desc": "",
+          "category": "Single Malt Viski"
+        },
+        {
+          "name": "Caol ILA",
+          "price": "650",
+          "desc": "",
+          "category": "Single Malt Viski"
+        },
+        {
+          "name": "Glenlivet Founder's Reserve",
+          "price": "625",
+          "desc": "",
+          "category": "Single Malt Viski"
+        },
+        {
+          "name": "Glenlivet 15",
+          "price": "900",
+          "desc": "",
+          "category": "Single Malt Viski"
+        },
+        {
+          "name": "Glenlivet 18",
+          "price": "1400",
+          "desc": "",
+          "category": "Single Malt Viski"
+        },
+        {
+          "name": "Aberlour 12",
+          "price": "800",
+          "desc": "",
+          "category": "Single Malt Viski"
+        },
+        {
+          "name": "Aberlour A Bunadh",
+          "price": "1600",
+          "desc": "",
+          "category": "Single Malt Viski"
+        },
+        {
+          "name": "Aberlour 16",
+          "price": "1600",
+          "desc": "",
+          "category": "Single Malt Viski"
+        },
+        {
+          "name": "Scapa",
+          "price": "800",
+          "desc": "",
+          "category": "Single Malt Viski"
+        },
+        {
+          "name": "Glenfiddich 12 YO",
+          "price": "700",
+          "desc": "",
+          "category": "Single Malt Viski"
+        },
+        {
+          "name": "Glenfiddich XX GB",
+          "price": "750",
+          "desc": "",
+          "category": "Single Malt Viski"
+        },
+        {
+          "name": "Laphroaig 10 YO",
+          "price": "650",
+          "desc": "",
+          "category": "Single Malt Viski"
+        },
+        {
+          "name": "The Glenrothes 10 YO",
+          "price": "600",
+          "desc": "",
+          "category": "Single Malt Viski"
+        },
+        {
+          "name": "The Glenrothes 12 YO",
+          "price": "675",
+          "desc": "",
+          "category": "Single Malt Viski"
+        },
+        {
+          "name": "Cardhu 12 YO",
+          "price": "600",
+          "desc": "",
+          "category": "Single Malt Viski"
+        },
+        {
+          "name": "Glenkinchie 12 YO",
+          "price": "600",
+          "desc": "",
+          "category": "Single Malt Viski"
+        },
+        {
+          "name": "Macallan 12 YO",
+          "price": "925",
+          "desc": "",
+          "category": "Single Malt Viski"
+        },
+        {
+          "name": "Macallan 15 YO",
+          "price": "1350",
+          "desc": "",
+          "category": "Single Malt Viski"
+        },
+        {
+          "name": "Kavalan",
+          "price": "950",
+          "desc": "",
+          "category": "Single Malt Viski"
+        },
+        {
+          "name": "Bowmore 12 Y.O",
+          "price": "575",
+          "desc": "",
+          "category": "Single Malt Viski"
+        },
+        {
+          "name": "Bowmore 15 YO",
+          "price": "750",
+          "desc": "",
+          "category": "Single Malt Viski"
+        },
+        {
+          "name": "Auchentoshan American OAK",
+          "price": "495",
+          "desc": "",
+          "category": "Single Malt Viski"
+        },
+        {
+          "name": "Amrut India",
+          "price": "595",
+          "desc": "",
+          "category": "Single Malt Viski"
+        },
+        {
+          "name": "Balvenie 12 YO",
+          "price": "795",
+          "desc": "",
+          "category": "Single Malt Viski"
+        },
+        {
+          "name": "Hibiki Japanese",
+          "price": "1750",
+          "desc": "",
+          "category": "Single Malt Viski"
+        },
+        {
+          "name": "Chita Japanese",
+          "price": "895",
+          "desc": "",
+          "category": "Single Malt Viski"
+        },
+        {
+          "name": "Lagavulin 8 Y.O",
+          "price": "675",
+          "desc": "",
+          "category": "Single Malt Viski"
+        },
+        {
+          "name": "Glen Grant 12",
+          "price": "600",
+          "desc": "",
+          "category": "Single Malt Viski"
+        },
+        {
+          "name": "Lagavulin 12 YO",
+          "price": "995",
+          "desc": "",
+          "category": "Single Malt Viski"
+        },
+        {
+          "name": "Lagavulin 16 YO",
+          "price": "1195",
+          "desc": "",
+          "category": "Single Malt Viski"
+        },
+        {
+          "name": "Lagavulin Distillers Edition",
+          "price": "1050",
+          "desc": "",
+          "category": "Single Malt Viski"
+        },
+        {
+          "name": "Oban ",
+          "price": "1100",
+          "desc": "",
+          "category": "Single Malt Viski"
+        },
+        {
+          "name": "Talisker 11 Y.O",
+          "price": "795",
+          "desc": " ",
+          "category": "Single Malt Viski"
+        },
+        {
+          "name": "Glen Grant 10",
+          "price": "550",
+          "desc": "",
+          "category": "Single Malt Viski"
+        },
+        {
+          "name": "Bulliet Bourbon",
+          "price": "525",
+          "desc": "",
+          "category": "Bourbon Viski"
+        },
+        {
+          "name": "Ballantines Bourbon Finish 7 YO",
+          "price": "550",
+          "desc": "",
+          "category": "Bourbon Viski"
+        },
+        {
+          "name": "Jim Beam White",
+          "price": "550",
+          "desc": "",
+          "category": "Bourbon Viski"
+        },
+        {
+          "name": "Jim Beam Signature Craft",
+          "price": "575",
+          "desc": "",
+          "category": "Bourbon Viski"
+        },
+        {
+          "name": "Jim Beam Single Barrel",
+          "price": "700",
+          "desc": "",
+          "category": "Bourbon Viski"
+        },
+        {
+          "name": "Jack Daniels",
+          "price": "550",
+          "desc": "",
+          "category": "Bourbon Viski"
+        },
+        {
+          "name": "Jack Daniels Honey",
+          "price": "550",
+          "desc": "",
+          "category": "Bourbon Viski"
+        },
+        {
+          "name": "Jack Daniels Apple",
+          "price": "550",
+          "desc": "",
+          "category": "Bourbon Viski"
+        },
+        {
+          "name": "Jack Daniels Single Barrel",
+          "price": "895",
+          "desc": "",
+          "category": "Bourbon Viski"
+        },
+        {
+          "name": "Jack Daniels Fire",
+          "price": "525",
+          "desc": "",
+          "category": "Bourbon Viski"
+        },
+        {
+          "name": "Jack Daniels Bonded ",
+          "price": "595",
+          "desc": " ",
+          "category": "Bourbon Viski"
+        },
+        {
+          "name": "Jack Daniels Bonded Rye",
+          "price": "595",
+          "desc": "",
+          "category": "Bourbon Viski"
+        },
+        {
+          "name": "Gentleman Jack",
+          "price": "625",
+          "desc": "",
+          "category": "Bourbon Viski"
+        },
+        {
+          "name": "Woodford Reserve",
+          "price": "595",
+          "desc": "",
+          "category": "Bourbon Viski"
+        },
+        {
+          "name": "Knob Creek",
+          "price": "645",
+          "desc": "",
+          "category": "Bourbon Viski"
+        },
+        {
+          "name": "Maker's Mark",
+          "price": "595",
+          "desc": "",
+          "category": "Bourbon Viski"
+        },
+        {
+          "name": "Lot 40",
+          "price": "550",
+          "desc": "Canadian Whisky ",
+          "category": "Bourbon Viski"
+        },
+        {
+          "name": "Pike Creek",
+          "price": "550",
+          "desc": "Canadian Whisky ",
+          "category": "Bourbon Viski"
+        },
+        {
+          "name": "Basil Hayden",
+          "price": "775",
+          "desc": "",
+          "category": "Bourbon Viski"
+        },
+        {
+          "name": "JW Red Label",
+          "price": "475",
+          "desc": "",
+          "category": "İskoç Viskisi"
+        },
+        {
+          "name": "JW Black Label",
+          "price": "495",
+          "desc": "",
+          "category": "İskoç Viskisi"
+        },
+        {
+          "name": "JW Ruby",
+          "price": "495",
+          "desc": "",
+          "category": "İskoç Viskisi"
+        },
+        {
+          "name": "JW Gold Label",
+          "price": "620",
+          "desc": "",
+          "category": "İskoç Viskisi"
+        },
+        {
+          "name": "JW Double Black",
+          "price": "560",
+          "desc": "",
+          "category": "İskoç Viskisi"
+        },
+        {
+          "name": "JW 18 Y.O",
+          "price": "715",
+          "desc": "",
+          "category": "İskoç Viskisi"
+        },
+        {
+          "name": "JW Green Label",
+          "price": "695",
+          "desc": "",
+          "category": "İskoç Viskisi"
+        },
+        {
+          "name": "JW Blue Label",
+          "price": "1750",
+          "desc": "",
+          "category": "İskoç Viskisi"
+        },
+        {
+          "name": "Chivas Regal 12 YO",
+          "price": "575",
+          "desc": "",
+          "category": "İskoç Viskisi"
+        },
+        {
+          "name": "Chivas Regal 13 Y.O Smooth & Smoky",
+          "price": "595",
+          "desc": "",
+          "category": "İskoç Viskisi"
+        },
+        {
+          "name": "Chivas Regal 13 YO - Extra",
+          "price": "595",
+          "desc": "",
+          "category": "İskoç Viskisi"
+        },
+        {
+          "name": "Chivas Regal Mizunara",
+          "price": "685",
+          "desc": "",
+          "category": "İskoç Viskisi"
+        },
+        {
+          "name": "Chivas Regal 15 YO",
+          "price": "675",
+          "desc": "",
+          "category": "İskoç Viskisi"
+        },
+        {
+          "name": "Chivas Regal 18 YO",
+          "price": "835",
+          "desc": "",
+          "category": "İskoç Viskisi"
+        },
+        {
+          "name": "Ballantines",
+          "price": "495",
+          "desc": "",
+          "category": "İskoç Viskisi"
+        },
+        {
+          "name": "Ballantines 12 YO",
+          "price": "575",
+          "desc": "",
+          "category": "İskoç Viskisi"
+        },
+        {
+          "name": "Monkey Shoulder",
+          "price": "550",
+          "desc": "",
+          "category": "İskoç Viskisi"
+        },
+        {
+          "name": "Dimple",
+          "price": "495",
+          "desc": "",
+          "category": "İskoç Viskisi"
+        },
+        {
+          "name": "Cutty Sark Original",
+          "price": "425",
+          "desc": "",
+          "category": "İskoç Viskisi"
+        },
+        {
+          "name": "Cutty Sark 12 YO",
+          "price": "495",
+          "desc": "",
+          "category": "İskoç Viskisi"
+        },
+        {
+          "name": "Cutty Sark 18 YO",
+          "price": "550",
+          "desc": "",
+          "category": "İskoç Viskisi"
+        },
+        {
+          "name": "The Famous Grouse",
+          "price": "450",
+          "desc": "",
+          "category": "İskoç Viskisi"
+        },
+        {
+          "name": "The Famous Grouse S.B",
+          "price": "475",
+          "desc": "",
+          "category": "İskoç Viskisi"
+        },
+        {
+          "name": "Teachers",
+          "price": "475",
+          "desc": "",
+          "category": "İskoç Viskisi"
+        },
+        {
+          "name": "JW Blue Label Cny Snake",
+          "price": "2500",
+          "desc": "",
+          "category": "İskoç Viskisi"
+        },
+        {
+          "name": "Martell VS",
+          "price": "625",
+          "desc": "",
+          "category": "Konyak"
+        },
+        {
+          "name": "Martell VSOP",
+          "price": "795",
+          "desc": "",
+          "category": "Konyak"
+        },
+        {
+          "name": "Martell XO",
+          "price": "2250",
+          "desc": "",
+          "category": "Konyak"
+        },
+        {
+          "name": "Remy Martin VSOP",
+          "price": "795",
+          "desc": "",
+          "category": "Konyak"
+        },
+        {
+          "name": "Remy Martin XO",
+          "price": "2250",
+          "desc": "",
+          "category": "Konyak"
+        },
+        {
+          "name": "Hennessy VS",
+          "price": "625",
+          "desc": " ",
+          "category": "Konyak"
+        },
+        {
+          "name": "Hennessy VSOP",
+          "price": "795",
+          "desc": "",
+          "category": "Konyak"
+        },
+        {
+          "name": "Garrone",
+          "price": "475",
+          "desc": "Extra Dry, Rosso, Bianco",
+          "category": "Vermut"
+        },
+        {
+          "name": "Martini",
+          "price": "475",
+          "desc": "Extra Dry, Rosso, Bianco",
+          "category": "Vermut"
+        },
+        {
+          "name": "Aperol",
+          "price": "575",
+          "desc": " ",
+          "category": "Vermut"
+        },
+        {
+          "name": "Campari ",
+          "price": "600",
+          "desc": " ",
+          "category": "Vermut"
+        },
+        {
+          "name": "Ancyra Blush",
+          "price": "2250",
+          "desc": "",
+          "category": "Roze"
+        },
+        {
+          "name": "Egeo Roze",
+          "price": "3000",
+          "desc": "",
+          "category": "Roze"
+        },
+        {
+          "name": "Ancyra Kalecik Karası",
+          "price": "2250",
+          "desc": " ",
+          "category": "Kırmızı"
+        },
+        {
+          "name": "Ancyra Cabernet Sauvignon & Syrah",
+          "price": "2250",
+          "desc": " ",
+          "category": "Kırmızı"
+        },
+        {
+          "name": "Ancyra Merlot",
+          "price": "2250",
+          "desc": " ",
+          "category": "Kırmızı"
+        },
+        {
+          "name": "Vin Art Kalecik Karası & Syrah",
+          "price": "2500",
+          "desc": " ",
+          "category": "Kırmızı"
+        },
+        {
+          "name": "Vin Art Sauvignon Blanc",
+          "price": "2450",
+          "desc": " ",
+          "category": "Beyaz"
+        },
+        {
+          "name": "Egeo Sauvignon Blanc",
+          "price": "3000",
+          "desc": "",
+          "category": "Beyaz"
+        },
+        {
+          "name": "Myrina Kırmızı",
+          "price": "395",
+          "desc": " ",
+          "category": "Kadeh"
+        },
+        {
+          "name": "Myrina Beyaz",
+          "price": "395",
+          "desc": " ",
+          "category": "Kadeh"
+        },
+        {
+          "name": "Myrina Rose",
+          "price": "395",
+          "desc": "",
+          "category": "Kadeh"
+        },
+        {
+          "name": "Sıcak Şarap",
+          "price": "450",
+          "desc": "Şarap, Rom ve Celtic Mix (baharat ve meyve) ",
+          "category": "Kadeh"
+        },
+        {
+          "name": "Irish Coffee",
+          "price": "490",
+          "desc": " ",
+          "category": "Alkollü Kahveler"
+        },
+        {
+          "name": "Irish Cream",
+          "price": "490",
+          "desc": " ",
+          "category": "Alkollü Kahveler"
+        },
+        {
+          "name": "Celtic Coffee",
+          "price": "490",
+          "desc": "",
+          "category": "Alkollü Kahveler"
+        },
+        {
+          "name": "Espresso",
+          "price": "165",
+          "desc": " ",
+          "category": "Kahveler"
+        },
+        {
+          "name": "Espresso Double",
+          "price": "220",
+          "desc": " ",
+          "category": "Kahveler"
+        },
+        {
+          "name": "Americano",
+          "price": "220",
+          "desc": " ",
+          "category": "Kahveler"
+        },
+        {
+          "name": "Latte",
+          "price": "240",
+          "desc": " ",
+          "category": "Kahveler"
+        },
+        {
+          "name": "Iced Latte",
+          "price": "260",
+          "desc": " ",
+          "category": "Kahveler"
+        },
+        {
+          "name": "Iced Americano",
+          "price": "240",
+          "desc": " ",
+          "category": "Kahveler"
+        },
+        {
+          "name": "Uludağ Su 330 ml",
+          "price": "95",
+          "desc": " ",
+          "category": "Soft İçecekler"
+        },
+        {
+          "name": "Uludağ Premium Maden Suyu 250 ml",
+          "price": "140",
+          "desc": " ",
+          "category": "Soft İçecekler"
+        },
+        {
+          "name": "Kuzeyden %100 Meyve Suyu",
+          "price": "195",
+          "desc": "Kırmızı Elma, Yeşil Elma, Nar, Portakal, Üzüm ",
+          "category": "Soft İçecekler"
+        },
+        {
+          "name": "Coca Cola",
+          "price": "195",
+          "desc": "Original, Zero, Light",
+          "category": "Soft İçecekler"
+        },
+        {
+          "name": "Fanta",
+          "price": "195",
+          "desc": " ",
+          "category": "Soft İçecekler"
+        },
+        {
+          "name": "Sprite",
+          "price": "195",
+          "desc": " ",
+          "category": "Soft İçecekler"
+        },
+        {
+          "name": "Uludağ Tonic Sıfır Şeker",
+          "price": "195",
+          "desc": " ",
+          "category": "Soft İçecekler"
+        },
+        {
+          "name": "Schweppes",
+          "price": "195",
+          "desc": "Tonic, Mandrin, Ginger",
+          "category": "Soft İçecekler"
+        },
+        {
+          "name": "Oz Tonic",
+          "price": "195",
+          "desc": "Original, Şekersiz, Greyfurt, Zencefil, Spritz ",
+          "category": "Soft İçecekler"
+        },
+        {
+          "name": "San Pellegrino 250 ml",
+          "price": "260",
+          "desc": " ",
+          "category": "Soft İçecekler"
+        },
+        {
+          "name": "Limonata",
+          "price": "295",
+          "desc": " ",
+          "category": "Soft İçecekler"
+        },
+        {
+          "name": "Fuse Tea",
+          "price": "195",
+          "desc": "Şeftali, Limon",
+          "category": "Soft İçecekler"
+        },
+        {
+          "name": "Cappy",
+          "price": "195",
+          "desc": "Vişne, Portakal, Elma",
+          "category": "Soft İçecekler"
+        },
+        {
+          "name": "Taze Sıkılmış Portakal Suyu",
+          "price": "270",
+          "desc": " ",
+          "category": "Soft İçecekler"
+        },
+        {
+          "name": "Red Bull Energy Drink",
+          "price": "270",
+          "desc": "Classic, Sugarfree, Blue, Yellow, White, Peach Editions",
+          "category": "Soft İçecekler"
+        },
+        {
+          "name": "Kış Çayı",
+          "price": "195",
+          "desc": " ",
+          "category": "Çaylar"
+        },
+        {
+          "name": "Hibiscus",
+          "price": "195",
+          "desc": " ",
+          "category": "Çaylar"
+        },
+        {
+          "name": "Yeşil Çay",
+          "price": "195",
+          "desc": " ",
+          "category": "Çaylar"
+        },
+        {
+          "name": "Adaçayı",
+          "price": "195",
+          "desc": " ",
+          "category": "Çaylar"
+        },
+        {
+          "name": "Ihlamur",
+          "price": "195",
+          "desc": " ",
+          "category": "Çaylar"
+        },
+        {
+          "name": "Cinzano Prosecco",
+          "price": "4750",
+          "desc": "",
+          "category": "Prosecco"
+        }
+      ]
+    }
 };
