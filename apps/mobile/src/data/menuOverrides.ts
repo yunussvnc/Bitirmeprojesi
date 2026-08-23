@@ -15297,4 +15297,751 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     }
   ]
 }
+,
+  "7231": {
+  "name": "Chick & Go",
+  "sourceUrl": "https://chickgo.menudgtl.com/",
+  "sourceName": "Chick & Go resmi dijital menüsü",
+  "verifiedAt": "2026-08-23",
+  "items": [
+    {
+      "name": "MUHTEŞEM ÜÇLÜ MENÜ",
+      "price": "420 TL",
+      "desc": "1 çıtır tavuk but, 2 çıtır tavuk kanat, 2 kemiksiz çıtır tavuk, 1 küçük boy patates",
+      "category": "TEK KİŞİLİK MENÜLER"
+    },
+    {
+      "name": "KEMİKSİZ ÇITIR MENÜ",
+      "price": "330 TL",
+      "desc": "(4 kemiksiz çıtır, 1 küçük boy patates)",
+      "category": "TEK KİŞİLİK MENÜLER"
+    },
+    {
+      "name": "SÜPER İKİLİ MENÜ",
+      "price": "350 TL",
+      "desc": "(2 Kanat, 2 Kemiksiz Çıtır, 1 Küçük Boy Patates)",
+      "category": "TEK KİŞİLİK MENÜLER"
+    },
+    {
+      "name": "10'LU KEMİKSİZ ÇITIR MENÜ",
+      "price": "635 TL",
+      "desc": "10 Kemiksiz Çıtır, Patates Kızartması",
+      "category": "ADETLİ TAVUKLAR"
+    },
+    {
+      "name": "BUT MENÜ",
+      "price": "375 TL",
+      "desc": "(4 But, 1 Küçük Boy Patates)",
+      "category": "TEK KİŞİLİK MENÜLER"
+    },
+    {
+      "name": "NAGGET MENÜ",
+      "price": "265 TL",
+      "desc": "(10 Nugget, 1 Küçük Boy Patates)",
+      "category": "TEK KİŞİLİK MENÜLER"
+    },
+    {
+      "name": "4'LÜ ÇITIR KANAT MENÜ",
+      "price": "380 TL",
+      "desc": "(4 Çıtır Kanat, 1 Küçük Boy Patates)",
+      "category": "KANAT MENÜLER"
+    },
+    {
+      "name": "8'Lİ ÇITIR KANAT MENÜ",
+      "price": "650 TL",
+      "desc": "(8 Çıtır Kanat, 1 Küçük Boy Patates)",
+      "category": "KANAT MENÜLER"
+    },
+    {
+      "name": "16'LI ÇITIR KANAT MENÜ",
+      "price": "1260 TL",
+      "desc": "(16 Çıtır Kanat, 1 Büyük Boy Patates)",
+      "category": "KANAT MENÜLER"
+    },
+    {
+      "name": "MIX TWISTER MENÜ",
+      "price": "420 TL",
+      "desc": "Twister Dürüm + 2 Çıtır Kanat + Küçük Patates",
+      "category": "MİX MENÜLER"
+    },
+    {
+      "name": "MIX BURGER MENÜ",
+      "price": "470 TL",
+      "desc": "Zinger Burger + 2 Çıtır Kanat + Küçük Patates",
+      "category": "MİX MENÜLER"
+    },
+    {
+      "name": "ZINGER BURGER MENÜ",
+      "price": "350 TL",
+      "desc": "Zinger Burger + Küçük Patates",
+      "category": "BURGER VE SANDVİÇ MENÜLER"
+    },
+    {
+      "name": "İKİLİ BURGER MENÜ",
+      "price": "620 TL",
+      "desc": "(2 Yuvarlak Zinger, 1 Küçük Boy Patates)",
+      "category": "BURGER VE SANDVİÇ MENÜLER"
+    },
+    {
+      "name": "UZUN ZİNGER MENÜ",
+      "price": "350 TL",
+      "desc": "(Uzun sandviç ekmeğine; 2 Kemiksiz Çıtır, Füme hindi, Kaşar, Jalapeno, Marul, Spesiyal mayonez ve 1 Küçük Boy Patates)",
+      "category": "BURGER VE SANDVİÇ MENÜLER"
+    },
+    {
+      "name": "ÇOCUK BURGER MENÜ",
+      "price": "210 TL",
+      "desc": "(Yuvarlak sandviç ekmeğine; 2 Baby parmak çıtır, marul, spesiyal mayonez, 1 çocuk patates, 1 meyve suyu 200 ml)",
+      "category": "ÇOCUK MENÜLER"
+    },
+    {
+      "name": "ÇOCUK KEMİKSİZ ÇITIR MENÜ",
+      "price": "315 TL",
+      "desc": "(3 Baby parmak çıtır, 1 çocuk patates, 1 Meyve suyu (200 ml)",
+      "category": "ÇOCUK MENÜLER"
+    },
+    {
+      "name": "ÇOCUK NUGGET MENÜ",
+      "price": "230 TL",
+      "desc": "(6 Nugget 1 çocuk patates, 1 Meyve suyu 200 ml)",
+      "category": "ÇOCUK MENÜLER"
+    },
+    {
+      "name": "ARKADAŞ MENÜSÜ",
+      "price": "990 TL",
+      "desc": "(6 Kemiksiz Çıtır, 6 Çıtır Kanat, 1 Büyük Boy Patates, 1L. İçecek)",
+      "category": "AİLE MENÜLERİ"
+    },
+    {
+      "name": "MAÇ MENÜSÜ",
+      "price": "990 TL",
+      "desc": "(8 Kemiksiz Çıtır, 2 Twister Dürüm, 1 Büyük Boy Patates, 1L. İçecek)",
+      "category": "AİLE MENÜLERİ"
+    },
+    {
+      "name": "AKŞAM MENÜSÜ",
+      "price": "1090 TL",
+      "desc": "4 Kemiksiz Çıtır, 4 Çıtır Kanat, 2 Twister Dürüm, 1 Büyük Boy Patates, 1L. İçecek)",
+      "category": "AİLE MENÜLERİ"
+    },
+    {
+      "name": "EKONOMİK MENÜ",
+      "price": "1235 TL",
+      "desc": "(8 Kemiksiz Çıtır, 8 Çıtır Kanat, 1 Büyük Boy Patates, 1L. İçecek)",
+      "category": "AİLE MENÜLERİ"
+    },
+    {
+      "name": "PARTİ MENÜ",
+      "price": "1290 TL",
+      "desc": "(4 But, 6 Kemiksiz Çıtır, 6 Çıtır Kanat, 1 Büyük Boy Patates, 1L. İçecek )",
+      "category": "AİLE MENÜLERİ"
+    },
+    {
+      "name": "ZİNGER BURGER",
+      "price": "285 TL",
+      "desc": "(Yuvarlak burger ekmeğine; 1 Kemiksiz Göğüs, Marul, Speciyal mayonez)",
+      "category": "BURGER VE SANDVİÇLER"
+    },
+    {
+      "name": "UZUN ZİNGER",
+      "price": "290 TL",
+      "desc": "(Uzun sandviç ekmeğine; 2 Kemiksiz Çıtır, Füme hindi, Kaşar peyniri, Jalapeno, Marul, Spesiyal mayonez)",
+      "category": "BURGER VE SANDVİÇLER"
+    },
+    {
+      "name": "GO ZİNGER BURGER",
+      "price": "300 TL",
+      "desc": "(Yuvarlak burger ekmeğine; 1 Kemiksiz Göğüs, Cheddar, Marul, Speciyal mayonez)",
+      "category": "BURGER VE SANDVİÇLER"
+    },
+    {
+      "name": "DOUBLE GO ZINGER BURGER",
+      "price": "520 TL",
+      "desc": "(Yuvarlak burger ekmeğine; 2 Kemiksiz Bonfile, 2 Cheddar, Marul, Specsiyal mayonez)",
+      "category": "BURGER VE SANDVİÇLER"
+    },
+    {
+      "name": "TRUFFLE & CHEESE SUPREME",
+      "price": "365 TL",
+      "desc": "Yuvarlak burger ekmeğine; Kemiksiz Bonfile (140gr), Üç Peynirli Sos, Marul, Trüf Aioli Sos, Balzamik glaze",
+      "category": "BURGER VE SANDVİÇLER"
+    },
+    {
+      "name": "SWEET & SMOKY BLAZE",
+      "price": "330 TL",
+      "desc": "Yuvarlak burger ekmeğine; Chili Honey BBQ Soslu Kemiksiz Bonfile (140 gr), Marul, Sweet Mayo",
+      "category": "BURGER VE SANDVİÇLER"
+    },
+    {
+      "name": "GOLD & SLAW BITE",
+      "price": "330 TL",
+      "desc": "Yuvarlak burger ekmeğine; Kemiksiz Bonfile (140gr), Garlic Sos, Mor Lahana, Ballı Hardal Sos, Chili Honey BBQ",
+      "category": "BURGER VE SANDVİÇLER"
+    },
+    {
+      "name": "NASHVİLLE BURGER",
+      "price": "330 TL",
+      "desc": "Yuvarlak burger ekmeğine; Nashville Baharatlı Kemiksiz Bonfile (140 gr), Marul, Garlic Sos, Acı Ballı Sos",
+      "category": "BURGER VE SANDVİÇLER"
+    },
+    {
+      "name": "DYNAMITE BURGER",
+      "price": "330 TL",
+      "desc": "Yuvarlak burger ekmeğine; Kemiksiz Bonfile (140 gr), Marul, Sweet Mayo, Dynamite Sos",
+      "category": "BURGER VE SANDVİÇLER"
+    },
+    {
+      "name": "TWİSTER DÜRÜM",
+      "price": "240 TL",
+      "desc": "(Tortilla lavaşına; 2 Kemiksiz Çıtır, Domates, Marul, Spesiyal mayonez )",
+      "category": "DÜRÜMLER"
+    },
+    {
+      "name": "TWİSTER DÜRÜM MENÜ",
+      "price": "295 TL",
+      "desc": "(Tortilla lavaşına; 2 Kemiksiz Çıtır, Domates, Marul, Spesiyal mayonez ve 1 Küçük Boy Patates)",
+      "category": "DÜRÜM MENÜLER"
+    },
+    {
+      "name": "İKİLİ TWİSTER MENÜ",
+      "price": "530 TL",
+      "desc": "(İkili Twister Dürüm, 1 Küçük Boy Patates)",
+      "category": "DÜRÜM MENÜLER"
+    },
+    {
+      "name": "8'Lİ BUT",
+      "price": "665 TL",
+      "desc": "8'li but",
+      "category": "ADETLİ TAVUKLAR"
+    },
+    {
+      "name": "15'Lİ KEMİKSİZ ÇITIR",
+      "price": "835 TL",
+      "desc": "15 Kemiksiz Çıtır",
+      "category": "ADETLİ TAVUKLAR"
+    },
+    {
+      "name": "20'Lİ ÇITIR KANAT",
+      "price": "1510 TL",
+      "desc": "20'li çıtır kanat",
+      "category": "ADETLİ TAVUKLAR"
+    },
+    {
+      "name": "KÜÇÜK BOY PATATES KIZARTMASI",
+      "price": "100 TL",
+      "desc": "Küçük Boy Patates Kızartması",
+      "category": "YAN ÜRÜNLER"
+    },
+    {
+      "name": "BÜYÜK BOY PATATES KIZARTMASI",
+      "price": "160 TL",
+      "desc": "Büyük boy patates kızartması",
+      "category": "YAN ÜRÜNLER"
+    },
+    {
+      "name": "8'Lİ SOĞAN HALKASI",
+      "price": "120 TL",
+      "desc": "8'Li Soğan halkası",
+      "category": "YAN ÜRÜNLER"
+    },
+    {
+      "name": "16'LI SOĞAN HALKASI",
+      "price": "190 TL",
+      "desc": "16'Lı Soğan halkası",
+      "category": "YAN ÜRÜNLER"
+    },
+    {
+      "name": "ÇITIR SEPETİ",
+      "price": "395 TL",
+      "desc": "(2 Mozzarella sticks, 2 Nugget, 2 Kemiksiz çıtır, 2 Soğan halkası, 4 Çıtır shots, 1 büyük patates kızartması)",
+      "category": "YAN ÜRÜNLER"
+    },
+    {
+      "name": "COLESLAW KÜÇÜK",
+      "price": "60 TL",
+      "desc": "",
+      "category": "YAN ÜRÜNLER"
+    },
+    {
+      "name": "COLESLAW BÜYÜK",
+      "price": "90 TL",
+      "desc": "",
+      "category": "YAN ÜRÜNLER"
+    },
+    {
+      "name": "BÜYÜK BOY PATATES KIZARTMASI (BAHARATLI)",
+      "price": "170 TL",
+      "desc": "",
+      "category": "YAN ÜRÜNLER"
+    },
+    {
+      "name": "ORTA BOY PATATES KIZARTMASI (BAHARATLI)",
+      "price": "130 TL",
+      "desc": "",
+      "category": "YAN ÜRÜNLER"
+    },
+    {
+      "name": "ORTA BOY PATATES KIZARTMASI",
+      "price": "120 TL",
+      "desc": "",
+      "category": "YAN ÜRÜNLER"
+    },
+    {
+      "name": "KÜÇÜK BOY PATATES KIZARTMASI  (BAHARATLI)",
+      "price": "110 TL",
+      "desc": "",
+      "category": "YAN ÜRÜNLER"
+    },
+    {
+      "name": "PATATES PÜRESİ 230 GR",
+      "price": "130 TL",
+      "desc": "",
+      "category": "YAN ÜRÜNLER"
+    },
+    {
+      "name": "LOADED FRIES",
+      "price": "375 TL",
+      "desc": "Çıtır Lokum, Jalapeno, Special Mayonez, Ranch sos, Büyük Patates Kızartması, Susam",
+      "category": "YAN ÜRÜNLER"
+    },
+    {
+      "name": "4'LÜ ÇITIR LOKUM",
+      "price": "85 TL",
+      "desc": "",
+      "category": "YAN ÜRÜNLER"
+    },
+    {
+      "name": "8'Lİ ÇITIR LOKUM",
+      "price": "160 TL",
+      "desc": "",
+      "category": "YAN ÜRÜNLER"
+    },
+    {
+      "name": "12'Lİ ÇITIR LOKUM",
+      "price": "210 TL",
+      "desc": "",
+      "category": "YAN ÜRÜNLER"
+    },
+    {
+      "name": "20'Lİ ÇITIR LOKUM",
+      "price": "385 TL",
+      "desc": "",
+      "category": "YAN ÜRÜNLER"
+    },
+    {
+      "name": "DİNAMİT SOSLU ÇITIR LOKUM",
+      "price": "335 TL",
+      "desc": "250 GR",
+      "category": "YAN ÜRÜNLER"
+    },
+    {
+      "name": "CHILI HONEY BBQ SOSLU ÇITIR LOKUM",
+      "price": "350 TL",
+      "desc": "250 GR",
+      "category": "YAN ÜRÜNLER"
+    },
+    {
+      "name": "BUT (ADET)",
+      "price": "110 TL",
+      "desc": "But (Adet)",
+      "category": "İLAVELER"
+    },
+    {
+      "name": "ÇITIR KANAT (ADET)",
+      "price": "115 TL",
+      "desc": "Çıtır Kanat (Adet)",
+      "category": "İLAVELER"
+    },
+    {
+      "name": "KEMİKSİZ ÇITIR (ADET)",
+      "price": "100 TL",
+      "desc": "Kemiksiz Çıtır (Adet)",
+      "category": "İLAVELER"
+    },
+    {
+      "name": "NUGGET (ADET)",
+      "price": "35 TL",
+      "desc": "Nugget (Adet)",
+      "category": "İLAVELER"
+    },
+    {
+      "name": "KEMİKLİ GÖĞÜS",
+      "price": "105 TL",
+      "desc": "",
+      "category": "İLAVELER"
+    },
+    {
+      "name": "KEMİKLİ BACAK",
+      "price": "105 TL",
+      "desc": "",
+      "category": "İLAVELER"
+    },
+    {
+      "name": "BÜTÜN KANAT",
+      "price": "105 TL",
+      "desc": "",
+      "category": "İLAVELER"
+    },
+    {
+      "name": "BARBEKÜ SOS",
+      "price": "25 TL",
+      "desc": "Barbekü Sos",
+      "category": "SOSLAR"
+    },
+    {
+      "name": "RANCH SOS",
+      "price": "25 TL",
+      "desc": "Ranch Sos",
+      "category": "SOSLAR"
+    },
+    {
+      "name": "SARIMSAKLI SOS",
+      "price": "25 TL",
+      "desc": "Sarımsaklı Sos",
+      "category": "SOSLAR"
+    },
+    {
+      "name": "BALLI HARDAL SOS",
+      "price": "25 TL",
+      "desc": "Ballı Hardal Sos",
+      "category": "SOSLAR"
+    },
+    {
+      "name": "ACILI SPESİYAL MAYONEZ",
+      "price": "35 TL",
+      "desc": "Acılı Spesiyal Mayonez",
+      "category": "SOSLAR"
+    },
+    {
+      "name": "SPESİYAL MAYONEZ",
+      "price": "35 TL",
+      "desc": "Spesiyal Mayonez",
+      "category": "SOSLAR"
+    },
+    {
+      "name": "ACI SOS",
+      "price": "20 TL",
+      "desc": "Acı Sos",
+      "category": "SOSLAR"
+    },
+    {
+      "name": "KETÇAP",
+      "price": "10 TL",
+      "desc": "Ketçap",
+      "category": "SOSLAR"
+    },
+    {
+      "name": "MAYONEZ",
+      "price": "10 TL",
+      "desc": "Mayonez",
+      "category": "SOSLAR"
+    },
+    {
+      "name": "GUACAMOLE SOS",
+      "price": "38 TL",
+      "desc": "",
+      "category": "SOSLAR"
+    },
+    {
+      "name": "TRÜF MAYO SOS",
+      "price": "45 TL",
+      "desc": "",
+      "category": "SOSLAR"
+    },
+    {
+      "name": "SRİRACHA SOS",
+      "price": "35 TL",
+      "desc": "",
+      "category": "SOSLAR"
+    },
+    {
+      "name": "BALLI BARBEKÜ SOS",
+      "price": "35 TL",
+      "desc": "",
+      "category": "SOSLAR"
+    },
+    {
+      "name": "SWEET CHİLİ SOS",
+      "price": "35 TL",
+      "desc": "",
+      "category": "SOSLAR"
+    },
+    {
+      "name": "CHEDDAR SOS",
+      "price": "45 TL",
+      "desc": "",
+      "category": "SOSLAR"
+    },
+    {
+      "name": "PERİ PERİ SOS",
+      "price": "35 TL",
+      "desc": "",
+      "category": "SOSLAR"
+    },
+    {
+      "name": "DİNAMİT SOS",
+      "price": "35 TL",
+      "desc": "",
+      "category": "SOSLAR"
+    },
+    {
+      "name": "COCA COLA (330 ML)",
+      "price": "80 TL",
+      "desc": "",
+      "category": "İÇECEKLER"
+    },
+    {
+      "name": "COCA COLA ŞEKERSİZ (330 ML)",
+      "price": "80 TL",
+      "desc": "Coca Cola Şekersiz (330 ml)",
+      "category": "İÇECEKLER"
+    },
+    {
+      "name": "FANTA (330 ML)",
+      "price": "80 TL",
+      "desc": "",
+      "category": "İÇECEKLER"
+    },
+    {
+      "name": "SPRİTE (330 ML)",
+      "price": "80 TL",
+      "desc": "",
+      "category": "İÇECEKLER"
+    },
+    {
+      "name": "FUSE TEA ŞEFTALİ (330 ML)",
+      "price": "80 TL",
+      "desc": "",
+      "category": "İÇECEKLER"
+    },
+    {
+      "name": "FUSE TEA LİMON (330 ML)",
+      "price": "80 TL",
+      "desc": "",
+      "category": "İÇECEKLER"
+    },
+    {
+      "name": "COCA COLA (1 LT)",
+      "price": "110 TL",
+      "desc": "",
+      "category": "İÇECEKLER"
+    },
+    {
+      "name": "COCA COLA ŞEKERSİZ (1 LT)",
+      "price": "110 TL",
+      "desc": "",
+      "category": "İÇECEKLER"
+    },
+    {
+      "name": "FANTA (1 LT)",
+      "price": "110 TL",
+      "desc": "",
+      "category": "İÇECEKLER"
+    },
+    {
+      "name": "SPRİTE (1 LT)",
+      "price": "110 TL",
+      "desc": "",
+      "category": "İÇECEKLER"
+    },
+    {
+      "name": "FUSE TEA ŞEFTALİ (1 LT)",
+      "price": "110 TL",
+      "desc": "",
+      "category": "İÇECEKLER"
+    },
+    {
+      "name": "FUSE TEA LİMON (1 LT)",
+      "price": "110 TL",
+      "desc": "",
+      "category": "İÇECEKLER"
+    },
+    {
+      "name": "MEYVE SUYU (200 ML)",
+      "price": "45 TL",
+      "desc": "",
+      "category": "İÇECEKLER"
+    },
+    {
+      "name": "MADEN SUYU",
+      "price": "50 TL",
+      "desc": "",
+      "category": "İÇECEKLER"
+    },
+    {
+      "name": "SU",
+      "price": "30 TL",
+      "desc": "",
+      "category": "İÇECEKLER"
+    },
+    {
+      "name": "AYRAN",
+      "price": "45 TL",
+      "desc": "",
+      "category": "İÇECEKLER"
+    },
+    {
+      "name": "PEPSİ (330 ML)",
+      "price": "80 TL",
+      "desc": "",
+      "category": "İÇECEKLER"
+    },
+    {
+      "name": "SARIYER KOLA (1 LT)",
+      "price": "100 TL",
+      "desc": "",
+      "category": "İÇECEKLER"
+    },
+    {
+      "name": "SARIYER GAZOZ (1 LT)",
+      "price": "100 TL",
+      "desc": "",
+      "category": "İÇECEKLER"
+    },
+    {
+      "name": "SARIYER PORTAKAL (1 LT)",
+      "price": "100 TL",
+      "desc": "",
+      "category": "İÇECEKLER"
+    },
+    {
+      "name": "ÇAMLICA GAZOZ (1 LT)",
+      "price": "100 TL",
+      "desc": "",
+      "category": "İÇECEKLER"
+    },
+    {
+      "name": "SARIYER KOLA (330 ML)",
+      "price": "75 TL",
+      "desc": "",
+      "category": "İÇECEKLER"
+    },
+    {
+      "name": "SARIYER GAZOZ (330 ML)",
+      "price": "75 TL",
+      "desc": "",
+      "category": "İÇECEKLER"
+    },
+    {
+      "name": "SARIYER PORTAKAL (330 ML)",
+      "price": "75 TL",
+      "desc": "",
+      "category": "İÇECEKLER"
+    },
+    {
+      "name": "PEPSİ (1 LT)",
+      "price": "110 TL",
+      "desc": "",
+      "category": "İÇECEKLER"
+    },
+    {
+      "name": "COCA COLA (250 ML.)",
+      "price": "70 TL",
+      "desc": "",
+      "category": "İÇECEKLER"
+    },
+    {
+      "name": "SARIYER LİMONATA (1 LT)",
+      "price": "100 TL",
+      "desc": "",
+      "category": "İÇECEKLER"
+    },
+    {
+      "name": "PEPSİ MAX ZERO (330 ML)",
+      "price": "80 TL",
+      "desc": "",
+      "category": "İÇECEKLER"
+    },
+    {
+      "name": "LIPTON ICE TEA MANGO (330 ML)",
+      "price": "80 TL",
+      "desc": "",
+      "category": "İÇECEKLER"
+    },
+    {
+      "name": "LIPTON ICE TEA ŞEFTALİ (330 ML)",
+      "price": "80 TL",
+      "desc": "",
+      "category": "İÇECEKLER"
+    },
+    {
+      "name": "LIPTON ICE TEA LİMON (330 ML)",
+      "price": "80 TL",
+      "desc": "",
+      "category": "İÇECEKLER"
+    },
+    {
+      "name": "PEPSİ MAX ZERO (1 LT)",
+      "price": "110 TL",
+      "desc": "",
+      "category": "İÇECEKLER"
+    },
+    {
+      "name": "ULUDAĞ LİMONATA ŞEKERSİZ (1 LT)",
+      "price": "110 TL",
+      "desc": "",
+      "category": "İÇECEKLER"
+    },
+    {
+      "name": "ULUDAĞ LİMONATA (1 LT)",
+      "price": "110 TL",
+      "desc": "",
+      "category": "İÇECEKLER"
+    },
+    {
+      "name": "6'LI CHILI HONEY BBQ SOSLU ÇİFT KEMİKLİ KANAT",
+      "price": "540 TL",
+      "desc": "",
+      "category": "SOSLU KANATLAR"
+    },
+    {
+      "name": "12'Lİ CHILI HONEY BBQ SOSLU ÇİFT KEMİKLİ KANAT",
+      "price": "1050 TL",
+      "desc": "",
+      "category": "SOSLU KANATLAR"
+    },
+    {
+      "name": "CHILI HONEY BBQ SOSLU ÇİFT KEMİKLİ KANAT (ADET)",
+      "price": "125 TL",
+      "desc": "",
+      "category": "SOSLU KANATLAR"
+    },
+    {
+      "name": "4 PARÇA KEMİKLİ TAVUK",
+      "price": "319 TL",
+      "desc": "3 Parça Tavuk (1 Göğüs, 1 Kanat, 1 But), 1 Küçük Boy Patates Kızartması",
+      "category": "KEMİKLİ TAVUK MENÜLER"
+    },
+    {
+      "name": "5 PARÇA KEMİKLİ TAVUK",
+      "price": "379 TL",
+      "desc": "5 Parça Tavuk (2 Göğüs, 1 Kanat, 1 Kalça, 1 But), 1 Küçük Boy Patates Kızartması",
+      "category": "KEMİKLİ TAVUK MENÜLER"
+    },
+    {
+      "name": "8 PARÇA KEMİKLİ TAVUK MENÜ",
+      "price": "729 TL",
+      "desc": "8 Parça Tavuk (2 Göğüs, 2 Kalça, 2 But, 2 Kanat), 1 Büyük Boy Patates, 1 lt İçecek",
+      "category": "KEMİKLİ TAVUK MENÜLER"
+    },
+    {
+      "name": "10 PARÇA KEMİKLİ TAVUK MENÜ",
+      "price": "819 TL",
+      "desc": "10 Parça Tavuk (3 Göğüs, 2 Kalça, 3 But, 2 Kanat), 1 Büyük Boy Patates, 1 lt İçecek",
+      "category": "KEMİKLİ TAVUK MENÜLER"
+    },
+    {
+      "name": "EKOMIX MENÜ",
+      "price": "410 TL",
+      "desc": "Zinger Burger + 4 Çıtır Lokum + 2 Soğan Halkası + Küçük Boy Patates Kızartması + Seçeceğin 1 Sos + Pepsi Kola 330 ml",
+      "category": "AVANTAJLI MENÜLER"
+    },
+    {
+      "name": "COMBO MIX MENÜ",
+      "price": "970 TL",
+      "desc": "Zinger Burger + Twister Dürüm + 4 Çıtır Lokum + 2 Kemiksiz Çıtır Tavuk + 2 Soslu Çıtır Kanat + 4 Soğan Halkası + 2 Küçük Coleslaw + Büyük Patates + 2 Sos + 1 Lt İçecek",
+      "category": "AVANTAJLI MENÜLER"
+    }
+  ]
+}
 };
