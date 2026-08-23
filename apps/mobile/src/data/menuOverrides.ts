@@ -27321,102 +27321,47 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
   ]
 },
   "7283": {
-  "name": "CENEVİZ BALIK",
-  "sourceUrl": "https://restaurantguru.com/Ceneviz-Cafe-and-Restaurant-Istanbul/menu",
-  "sourceName": "CENEVİZ BALIK exact Anadolu Kavağı menüsü (RestaurantGuru kullanıcı menü görselleri)",
-  "verifiedAt": "2026-08-23",
-  "items": [
-    {
-      "name": "Balık Ekmek",
-      "price": "280",
-      "desc": "",
-      "category": "Sandviçler"
-    },
-    {
-      "name": "Midye Ekmek",
-      "price": "280",
-      "desc": "",
-      "category": "Sandviçler"
-    },
-    {
-      "name": "Köfte Ekmek",
-      "price": "390",
-      "desc": "",
-      "category": "Sandviçler"
-    },
-    {
-      "name": "Balık Dürüm",
-      "price": "360",
-      "desc": "",
-      "category": "Sandviçler"
-    },
-    {
-      "name": "Uskumru",
-      "price": "600",
-      "desc": "",
-      "category": "Balıklar"
-    },
-    {
-      "name": "Levrek",
-      "price": "650",
-      "desc": "",
-      "category": "Balıklar"
-    },
-    {
-      "name": "Çupra Izgara",
-      "price": "650",
-      "desc": "",
-      "category": "Balıklar"
-    },
-    {
-      "name": "Hamsi Tava",
-      "price": "490",
-      "desc": "",
-      "category": "Balıklar"
-    },
-    {
-      "name": "İstavrit",
-      "price": "490",
-      "desc": "",
-      "category": "Balıklar"
-    },
-    {
-      "name": "Midye Tava",
-      "price": "350",
-      "desc": "",
-      "category": "Deniz Ürünleri"
-    },
-    {
-      "name": "Kalamar",
-      "price": "650",
-      "desc": "",
-      "category": "Deniz Ürünleri"
-    },
-    {
-      "name": "Pescadilla",
-      "price": "690",
-      "desc": "",
-      "category": "Deniz Ürünleri"
-    },
-    {
-      "name": "Köfte Izgara",
-      "price": "600",
-      "desc": "",
-      "category": "Izgaralar"
-    },
-    {
-      "name": "Tavuk Izgara",
-      "price": "480",
-      "desc": "",
-      "category": "Izgaralar"
-    },
-    {
-      "name": "Helva",
-      "price": "200",
-      "desc": "",
-      "category": "Tatlılar"
-    }
-  ],
+    "name": "CENEVİZ BALIK",
+    "sourceUrl": "https://restaurantguru.com/Ceneviz-Cafe-and-Restaurant-Istanbul/menu",
+    "sourceName": "CENEVİZ BALIK exact Anadolu Kavağı menüsü; RestaurantGuru kullanıcı yüklemesi, 21 gün önce eklenen görsel",
+    "verifiedAt": "2026-08-24",
+    "items": [
+      {
+        "name": "Balık Ekmek",
+        "price": "280",
+        "category": "Sandviçler"
+      },
+      {
+        "name": "Midye Ekmek",
+        "price": "280",
+        "category": "Sandviçler"
+      },
+      {
+        "name": "Köfte Ekmek",
+        "price": "390",
+        "category": "Sandviçler"
+      },
+      {
+        "name": "Uskumru",
+        "price": "600",
+        "category": "Balıklar"
+      },
+      {
+        "name": "Levrek",
+        "price": "650",
+        "category": "Balıklar"
+      },
+      {
+        "name": "Midye Tava",
+        "price": "350",
+        "category": "Deniz Ürünleri"
+      },
+      {
+        "name": "Kalamar",
+        "price": "650",
+        "category": "Deniz Ürünleri"
+      }
+    ]
   },
   "3": {
     "name": "Kastel - Beyoğlu",
