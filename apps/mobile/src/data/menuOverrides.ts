@@ -37990,5 +37990,193 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       "category": "Sıcak İçecekler"
     }
   ]
+},
+  "7190": {
+  "name": "Avlu Et Döner",
+  "sourceUrl": "https://www.yemeksepeti.com/restaurant/wb3r/avlu-et-doner",
+  "sourceName": "Yemeksepeti canlı menüsü (Avlu Et Döner; resmi işletme kaydı/Hentzer exact Yıldırım Şht. Kamil Balkan Cd. No:34/A Bayrampaşa şube eşleşmesi; Popüler tekrarları, referans fiyatlar ve Poşet çıkarıldı)",
+  "verifiedAt": "2026-08-23",
+  "items": [
+    {
+      "name": "Et Döner Dürüm (100 gr.)",
+      "price": "365.50",
+      "category": "Avlu Dürümler"
+    },
+    {
+      "name": "Et Döner Dürüm (120 gr.)",
+      "price": "437.75",
+      "category": "Avlu Dürümler"
+    },
+    {
+      "name": "Et Döner Dürüm (150 gr.)",
+      "price": "552.50",
+      "category": "Avlu Dürümler"
+    },
+    {
+      "name": "Et Döner Dürüm (180 gr.)",
+      "price": "667.25",
+      "category": "Avlu Dürümler"
+    },
+    {
+      "name": "Et Döner Dürüm (200 gr.)",
+      "price": "743.75",
+      "category": "Avlu Dürümler"
+    },
+    {
+      "name": "Tombik Ekmek Arası Et Döner (100 gr.)",
+      "price": "365.50",
+      "category": "Avlu Tombik Ekmek Arası Dönerler"
+    },
+    {
+      "name": "Tombik Ekmek Arası Et Döner (120 gr.)",
+      "price": "437.75",
+      "category": "Avlu Tombik Ekmek Arası Dönerler"
+    },
+    {
+      "name": "Tombik Ekmek Arası Et Döner (150 gr.)",
+      "price": "552.50",
+      "category": "Avlu Tombik Ekmek Arası Dönerler"
+    },
+    {
+      "name": "Tombik Ekmek Arası Et Döner (180 gr.)",
+      "price": "667.25",
+      "category": "Avlu Tombik Ekmek Arası Dönerler"
+    },
+    {
+      "name": "Tombik Ekmek Arası Et Döner (200 gr.)",
+      "price": "743.75",
+      "category": "Avlu Tombik Ekmek Arası Dönerler"
+    },
+    {
+      "name": "Yarım Ekmek Arası Et Döner (100 gr.)",
+      "price": "365.50",
+      "category": "Avlu Ekmek Arası"
+    },
+    {
+      "name": "Yarım Ekmek Arası Et Döner (120 gr.)",
+      "price": "437.75",
+      "category": "Avlu Ekmek Arası"
+    },
+    {
+      "name": "Yarım Ekmek Arası Et Döner (150 gr.)",
+      "price": "552.50",
+      "category": "Avlu Ekmek Arası"
+    },
+    {
+      "name": "Yarım Ekmek Arası Et Döner (180 gr.)",
+      "price": "667.25",
+      "category": "Avlu Ekmek Arası"
+    },
+    {
+      "name": "Yarım Ekmek Arası Et Döner (200 gr.)",
+      "price": "743.75",
+      "category": "Avlu Ekmek Arası"
+    },
+    {
+      "name": "Pilav Üstü Et Döner (100 gr.)",
+      "price": "446.25",
+      "category": "Avlu Pilav Üstü Lezzetler"
+    },
+    {
+      "name": "Pilav Üstü Et Döner (120 gr.)",
+      "price": "539.75",
+      "category": "Avlu Pilav Üstü Lezzetler"
+    },
+    {
+      "name": "Pilav Üstü Et Döner (150 gr.)",
+      "price": "671.50",
+      "category": "Avlu Pilav Üstü Lezzetler"
+    },
+    {
+      "name": "Pilav Üstü Et Döner (180 gr.)",
+      "price": "782",
+      "category": "Avlu Pilav Üstü Lezzetler"
+    },
+    {
+      "name": "Pilav Üstü Et Döner (200 gr.)",
+      "price": "824.50",
+      "category": "Avlu Pilav Üstü Lezzetler"
+    },
+    {
+      "name": "İskender (Et Dönerden)",
+      "price": "595",
+      "category": "Et Dönerler"
+    },
+    {
+      "name": "Et Döner (100 gr.)",
+      "price": "374",
+      "category": "Et Dönerler"
+    },
+    {
+      "name": "Et Döner (120 gr.)",
+      "price": "450.50",
+      "category": "Et Dönerler"
+    },
+    {
+      "name": "Et Döner (150 gr.)",
+      "price": "569.50",
+      "category": "Et Dönerler"
+    },
+    {
+      "name": "Et Döner (180 gr.)",
+      "price": "680",
+      "category": "Et Dönerler"
+    },
+    {
+      "name": "Et Döner (200 gr.)",
+      "price": "756.50",
+      "category": "Et Dönerler"
+    },
+    {
+      "name": "Coca-Cola Zero Sugar (33 cl.)",
+      "price": "68",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Coca-Cola (33 cl.)",
+      "price": "68",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Coca-Cola (20 cl.)",
+      "price": "51",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Fanta (33 cl.)",
+      "price": "68",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Sprite (33 cl.)",
+      "price": "68",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Lipton Ice Tea Şeftali (33 cl.)",
+      "price": "68",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Eker Ayran (30 cl.)",
+      "price": "59.50",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Özerhisar Ayran (24,5 cl.)",
+      "price": "63.75",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Sütaş Ayran (1 L.)",
+      "price": "127.50",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Özerhisar Ayran (1 L.)",
+      "price": "119",
+      "category": "İçecekler"
+    }
+  ]
 }
 };
