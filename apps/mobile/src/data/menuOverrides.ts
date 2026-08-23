@@ -27084,5 +27084,331 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       "category": "İçecekler"
     }
   ]
+},
+  "7270": {
+  "name": "Yüce Fırın",
+  "sourceUrl": "https://yuceekmek.com.tr/",
+  "sourceName": "Yüce Fırın resmi ürün kataloğu (exact Altıntepsi Altıntepe Sok. 36/A adresi; fiyat yayınlanmamış)",
+  "verifiedAt": "2026-08-23",
+  "items": [
+    {
+      "name": "Beyaz Ekmek",
+      "price": "",
+      "desc": "",
+      "category": "Ekmekler"
+    },
+    {
+      "name": "Buğday Ekmek",
+      "price": "",
+      "desc": "",
+      "category": "Ekmekler"
+    },
+    {
+      "name": "Çiçek Ekmek",
+      "price": "",
+      "desc": "",
+      "category": "Ekmekler"
+    },
+    {
+      "name": "Ekşi Maya Ekmek",
+      "price": "",
+      "desc": "",
+      "category": "Ekmekler"
+    },
+    {
+      "name": "Harman Ekmek",
+      "price": "",
+      "desc": "",
+      "category": "Ekmekler"
+    },
+    {
+      "name": "Kepek Ekmek",
+      "price": "",
+      "desc": "",
+      "category": "Ekmekler"
+    },
+    {
+      "name": "Osmanlı Ekmek",
+      "price": "",
+      "desc": "",
+      "category": "Ekmekler"
+    },
+    {
+      "name": "Tahıllı Ekmek",
+      "price": "",
+      "desc": "",
+      "category": "Ekmekler"
+    },
+    {
+      "name": "Tandır Ekmek",
+      "price": "",
+      "desc": "",
+      "category": "Ekmekler"
+    },
+    {
+      "name": "Tost Ekmek",
+      "price": "",
+      "desc": "",
+      "category": "Ekmekler"
+    },
+    {
+      "name": "Trabzon Ekmek",
+      "price": "",
+      "desc": "",
+      "category": "Ekmekler"
+    },
+    {
+      "name": "Yuvarlak Beyaz Ekmek",
+      "price": "",
+      "desc": "",
+      "category": "Ekmekler"
+    },
+    {
+      "name": "Bademli Kurabiye",
+      "price": "",
+      "desc": "",
+      "category": "Tezgahtan"
+    },
+    {
+      "name": "Çekirdekli Kurabiye",
+      "price": "",
+      "desc": "",
+      "category": "Tezgahtan"
+    },
+    {
+      "name": "Çekirdekli Mini Galeta",
+      "price": "",
+      "desc": "",
+      "category": "Tezgahtan"
+    },
+    {
+      "name": "Cevizli Kurabiye",
+      "price": "",
+      "desc": "",
+      "category": "Tezgahtan"
+    },
+    {
+      "name": "Çikolata Parçacıklı Kurabiye",
+      "price": "",
+      "desc": "",
+      "category": "Tezgahtan"
+    },
+    {
+      "name": "Çikolatalı Ay Kurabiye",
+      "price": "",
+      "desc": "",
+      "category": "Tezgahtan"
+    },
+    {
+      "name": "Çikolatalı Fındıklı Kurabiye",
+      "price": "",
+      "desc": "",
+      "category": "Tezgahtan"
+    },
+    {
+      "name": "Çörekotlu Kurabiye",
+      "price": "",
+      "desc": "",
+      "category": "Tezgahtan"
+    },
+    {
+      "name": "Desenli Kurabiye",
+      "price": "",
+      "desc": "",
+      "category": "Tezgahtan"
+    },
+    {
+      "name": "Fındıklı Ay Kurabiye",
+      "price": "",
+      "desc": "",
+      "category": "Tezgahtan"
+    },
+    {
+      "name": "Fındıklı Mini Kurabiye",
+      "price": "",
+      "desc": "",
+      "category": "Tezgahtan"
+    },
+    {
+      "name": "Hindistan Cevizli Kurabiye",
+      "price": "",
+      "desc": "",
+      "category": "Tezgahtan"
+    },
+    {
+      "name": "Kakaolu Kurabiye",
+      "price": "",
+      "desc": "",
+      "category": "Tezgahtan"
+    },
+    {
+      "name": "Kakaolu Mozaik Kurabiye",
+      "price": "",
+      "desc": "",
+      "category": "Tezgahtan"
+    },
+    {
+      "name": "Karışık Tuzlu Kurabiyeler",
+      "price": "",
+      "desc": "",
+      "category": "Tezgahtan"
+    },
+    {
+      "name": "Mavi Kurabiye",
+      "price": "",
+      "desc": "",
+      "category": "Tezgahtan"
+    },
+    {
+      "name": "Mini Muffin Kek",
+      "price": "",
+      "desc": "",
+      "category": "Tezgahtan"
+    },
+    {
+      "name": "Mini Unlu Kurabiye",
+      "price": "",
+      "desc": "",
+      "category": "Tezgahtan"
+    },
+    {
+      "name": "Pembe Kurabiye",
+      "price": "",
+      "desc": "",
+      "category": "Tezgahtan"
+    },
+    {
+      "name": "Sade Galeta",
+      "price": "",
+      "desc": "",
+      "category": "Tezgahtan"
+    },
+    {
+      "name": "Susamlı Galeta",
+      "price": "",
+      "desc": "",
+      "category": "Tezgahtan"
+    },
+    {
+      "name": "Susamlı Kurabiye",
+      "price": "",
+      "desc": "",
+      "category": "Tezgahtan"
+    },
+    {
+      "name": "Tahinli Çörek",
+      "price": "",
+      "desc": "",
+      "category": "Tezgahtan"
+    },
+    {
+      "name": "Tuzlu Çatal Kurabiye",
+      "price": "",
+      "desc": "",
+      "category": "Tezgahtan"
+    },
+    {
+      "name": "Unlu Kurabiye",
+      "price": "",
+      "desc": "",
+      "category": "Tezgahtan"
+    },
+    {
+      "name": "Üzümlü Kurabiye",
+      "price": "",
+      "desc": "",
+      "category": "Tezgahtan"
+    },
+    {
+      "name": "Atom Pasta",
+      "price": "",
+      "desc": "",
+      "category": "Pastalar"
+    },
+    {
+      "name": "Beyaz Çikolatalı Pasta",
+      "price": "",
+      "desc": "",
+      "category": "Pastalar"
+    },
+    {
+      "name": "Çikolatalı Pasta",
+      "price": "",
+      "desc": "",
+      "category": "Pastalar"
+    },
+    {
+      "name": "Çikolatalı Tek Pasta",
+      "price": "",
+      "desc": "",
+      "category": "Pastalar"
+    },
+    {
+      "name": "Kestaneli Pasta",
+      "price": "",
+      "desc": "",
+      "category": "Pastalar"
+    },
+    {
+      "name": "Meyveli Tek Pasta",
+      "price": "",
+      "desc": "",
+      "category": "Pastalar"
+    },
+    {
+      "name": "Vişneli Pasta",
+      "price": "",
+      "desc": "",
+      "category": "Pastalar"
+    },
+    {
+      "name": "Cevizli Baklava",
+      "price": "",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Ekler",
+      "price": "",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Fıstıklı Baklava",
+      "price": "",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Güllaç",
+      "price": "",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Soğuk Baklava",
+      "price": "",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Sütlaç",
+      "price": "",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Tartolet",
+      "price": "",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Bal",
+      "price": "",
+      "desc": "",
+      "category": "Yüce Bal"
+    }
+  ]
 }
 };
