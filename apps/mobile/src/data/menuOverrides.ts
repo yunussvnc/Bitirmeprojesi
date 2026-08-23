@@ -36686,5 +36686,258 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       "category": "Menüler"
     }
   ]
+},
+  "7228": {
+  "name": "Acme Coffee Club Beşiktaş",
+  "sourceUrl": "https://www.acmecoffeeclub.com/menu/",
+  "sourceName": "Acme Coffee Club resmi canlı menüsü (Beşiktaş Şube resmi Google Maps exact Türkali No:1 eşleşmesi; fiyatlar kaynakta görünmüyor)",
+  "verifiedAt": "2026-08-23",
+  "items": [
+    {
+      "name": "ESPRESSO",
+      "desc": "YOĞUN AROMALI VE ALTIN RENKLİ KREMALI KLASİK EKSTRAKSİYON.",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "AMERİCANO",
+      "desc": "SICAK SU İLE İNCELTİLMİŞ ZENGİN DOUBLE SHOT ESPRESSO.",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "V60 (POUR OVER)",
+      "desc": "HARİO V60 İLE ELLE TEK TEK DEMLENEN PARLAK ASİDİTELİ MİKRO-LOT KAHVE.",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "LATTE",
+      "desc": "İPEKSİ MİKRO KÖPÜKLÜ SÜT VE DENGELİ ESPRESSO UYUMU.",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "TÜRK KAHVESİ",
+      "desc": "GELENEKSEL CEZVEDE AĞIR ATEŞTE PİŞİRİLEN BOL KÖPÜKLÜ TÜRK KAHVESİ.",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "FİLTRE KAHVE",
+      "desc": "GÜNLÜK TAZE KAVRULMUŞ SEÇKİ ÇEKİRDEKLERLE DEMLENEN BERRAK FİNCAN.",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "FLAT WHİTE",
+      "desc": "ÇİFT SHOT RİSTRETTO VE KADİFEMSİ İNCE SÜT KÖPÜĞÜ.",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "CORTADO",
+      "desc": "EŞİT ORANDA ESPRESSO VE ILIK SÜTÜN KUSURSUZ DENGESİ.",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "CAPPUCCİNO",
+      "desc": "YOĞUN ESPRESSO VE KALIN HAVALI SÜT KÖPÜĞÜ KATMANI.",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "MOCHA",
+      "desc": "ESPRESSO, KALİTELİ ERİTİLMİŞ ÇİKOLATA VE BUHARDA ISITILMIŞ SÜT.",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "WHİTE MOCHA",
+      "desc": "BEYAZ ÇİKOLATA SOSU, ESPRESSO VE KREMSİ SÜT.",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "CARAMEL LATTE",
+      "desc": "KARAMEL AROMASI, ESPRESSO VE KADİFEMSİ SÜT.",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "VANİLLA LATTE",
+      "desc": "DOĞAL VANİLYA AROMASI İLE TATLANDIRILMIŞ LATTE.",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "HAZELNUT LATTE",
+      "desc": "KAVRULMUŞ FINDIK AROMASI VE ESPRESSO.",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "TOFFEE NUT LATTE",
+      "desc": "TEREYAĞLI KARAMEL VE KAVRUK FINDIK NOTALARI.",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "COOKİE LATTE",
+      "desc": "FIRIN KURABİYESİ AROMASI VE SÜTLÜ ESPRESSO KEYFİ.",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "COCONUT LATTE",
+      "desc": "TROPİKAL HİNDİSTAN CEVİZİ AROMALI ÖZEL LATTE.",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "CHAİ TEA LATTE",
+      "desc": "BAHARATLI SİYAH ÇAY HARMANI VE BUHARDA ISITILMIŞ SÜT.",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "ICED AMERİCANO",
+      "desc": "BUZ VE SOĞUK SU ÜZERİNE TAZE ÇEKİLMİŞ DOUBLE SHOT ESPRESSO.",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "ICED LATTE",
+      "desc": "SOĞUK SÜT, BUZ VE YOĞUN ESPRESSO KATMANLARI.",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "COLD BREW",
+      "desc": "18 SAAT SOĞUK SUDA DEMLENMİŞ İPEKSİ VE DÜŞÜK ASİDİTELİ KAHVE.",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "ICED V60",
+      "desc": "BUZ ÜZERİNE ANLIK DEMLENEN MEYVEMSİ VE FERAHLATICI POUR OVER.",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "ICED MOCHA",
+      "desc": "BUZ, ÇİKOLATA SOSU, SOĞUK SÜT VE ESPRESSO.",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "ICED WHİTE MOCHA",
+      "desc": "BEYAZ ÇİKOLATA VE SOĞUK SÜTÜN ESPRESSO İLE FERAHLATICI BULUŞMASI.",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "ICED CARAMEL MOCHA",
+      "desc": "KARAMEL VE ÇİKOLATANIN SOĞUK KAHVEYLE UYUMU.",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "ICED VANİLLA LATTE",
+      "desc": "VANİLYA AROMALI FERAHLATICI SOĞUK LATTE.",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "ICED TOFFEE NUT LATTE",
+      "desc": "FINDIK VE KARAMEL LEZZETİ BUZLU LATTE İLE BULUŞUYOR.",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "ICED COOKİE LATTE",
+      "desc": "KURABİYE AROMALI BUZLU LATTE LEZZETİ.",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "ICED COCONUT LATTE",
+      "desc": "TROPİKAL HİNDİSTAN CEVİZİ AROMASIYLA SERİNLETİCİ LEZZET.",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "STRAWBERRY HİBİSCUS",
+      "desc": "EBEGÜMECİ ÇİÇEĞİ, ÇİLEK VE BUZLA HAZIRLANAN FERAHLATICI YAZ İÇECEĞİ.",
+      "category": "Özel İçecekler & Çaylar"
+    },
+    {
+      "name": "ORANGE MANGO",
+      "desc": "TAZE PORTAKAL VE TROPİKAL MANGO DENGESİYLE SERİNLETİCİ İÇECEK.",
+      "category": "Özel İçecekler & Çaylar"
+    },
+    {
+      "name": "RASPBERRY ACAİ",
+      "desc": "ANTİOKSİDAN ZENGİNİ AÇAİ VE TAZE AHUDUDU FERAHLIĞI.",
+      "category": "Özel İçecekler & Çaylar"
+    },
+    {
+      "name": "FİNCAN ÇAY",
+      "desc": "ÖZEL HARMAN TAZE DEMLENMİŞ FİNCAN YAPRAK ÇAY.",
+      "category": "Özel İçecekler & Çaylar"
+    },
+    {
+      "name": "HOT CHOCOLATE",
+      "desc": "YOĞUN BELÇİKA ÇİKOLATASI VE KREMSİ SICAK SÜT.",
+      "category": "Özel İçecekler & Çaylar"
+    },
+    {
+      "name": "SALEP",
+      "desc": "GELENEKSEL HAKİKİ ORKİDE YUMRUSU SALEBİ VE TOZ TARÇIN.",
+      "category": "Özel İçecekler & Çaylar"
+    },
+    {
+      "name": "COOKİE PİE",
+      "desc": "FIRINDAN YENİ ÇIKMIŞ, İÇİ AKIŞKAN ÇİKOLATALI DEV KURABİYE TURTASI.",
+      "category": "Fırın & Tatlılar"
+    },
+    {
+      "name": "ÇİKOLATALI COOKİE",
+      "desc": "TEREYAĞLI, İRİ ÇİKOLATA PARÇACIKLI EL YAPIMI NEFİS KURABİYE.",
+      "category": "Fırın & Tatlılar"
+    },
+    {
+      "name": "SAN SEBASTİAN CHEESECAKE",
+      "desc": "KARAMELİZE YANIK DIŞ KABUK VE KREMSİ AKIŞKAN İÇ DOKU.",
+      "category": "Fırın & Tatlılar"
+    },
+    {
+      "name": "ORMAN MEYVELİ BROWNİE",
+      "desc": "YOĞUN BİTTER ÇİKOLATA VE TAZE ORMAN MEYVELERİ UYUMU.",
+      "category": "Fırın & Tatlılar"
+    },
+    {
+      "name": "VANİLYALI KRUVASAN",
+      "desc": "KAT KAT TEREYAĞLI ÇITIR KRUVASAN VE İPEKSİ VANİLYA KREMASI.",
+      "category": "Fırın & Tatlılar"
+    },
+    {
+      "name": "ANTEP FISTIKLI - ÇİLEKLİ KRUVASAN",
+      "desc": "HAKİKİ ANTEP FISTIĞI EZMESİ VE TAZE ÇİLEK DOLGULU ÇITIR KRUVASAN.",
+      "category": "Fırın & Tatlılar"
+    },
+    {
+      "name": "BEYAZ ÇİKOLATALI - ÇİLEKLİ KRUVASAN",
+      "desc": "BEYAZ BELÇİKA ÇİKOLATASI KREMASI VE TAZE ÇİLEKLER.",
+      "category": "Fırın & Tatlılar"
+    },
+    {
+      "name": "TİRAMİSU",
+      "desc": "ACME ESPRESSO İLE ISLATILMIŞ SAVOİARDİ VE MASCARPONE KREMASI.",
+      "category": "Fırın & Tatlılar"
+    },
+    {
+      "name": "SPOONFULL",
+      "desc": "KAŞIK KAŞIK YENEN SICAK ÇİKOLATALI VE KEKLİ TATLI KASESİ.",
+      "category": "Fırın & Tatlılar"
+    },
+    {
+      "name": "PROFİTEROL",
+      "desc": "ÖZEL KREMA DOLGULU ŞU HAMURLARI ÜZERİNDE AKIŞKAN ÇİKOLATA SOSU.",
+      "category": "Fırın & Tatlılar"
+    },
+    {
+      "name": "EKLER",
+      "desc": "ÖZEL PASTACI KREMASI DOLGULU ÇITIR EKLER HAMURU.",
+      "category": "Fırın & Tatlılar"
+    },
+    {
+      "name": "MERMER KEK",
+      "desc": "KAKAOLU VE VANİLYALI GELENEKSEL MERMER DİLİM KEK.",
+      "category": "Fırın & Tatlılar"
+    },
+    {
+      "name": "CREAM PUFF",
+      "desc": "İPEKSİ VANİLYALI KREMA DOLGULU ÇITIR PROFİTEROL TOPLARI.",
+      "category": "Fırın & Tatlılar"
+    },
+    {
+      "name": "MUFFİN",
+      "desc": "FIRINDAN TAZE ÇIKMIŞ YUMUŞACIK ÇİKOLATALI MUFFİN.",
+      "category": "Fırın & Tatlılar"
+    }
+  ]
 }
 };
