@@ -53143,4 +53143,547 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       },
     ]
   },
+  "3780": {
+    "name": "Maydonoz Döner Başakşehir 1. Etap",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/hopn/maydonoz-doner-hopn",
+    "sourceName": "Yemeksepeti exact-address canlı menüsü; official Maydonoz şube dizini ile Başakşehir 1. Etap Arterium 4. Kısım No:9-11C eşleşmesi",
+    "verifiedAt": "2026-08-24",
+    "items": [
+      {
+        "name": "Algida Menüsü (Tavuk Döner Small Dürüm)",
+        "price": "415 TL",
+        "category": "Avantajlı Algida Menüleri"
+      },
+      {
+        "name": "Tavuk Döner Small Dürüm + Carte D'or Mini Premium Meyve Rüyası (110 ml.) + Pepsi Zero Sugar (33 cl.)",
+        "price": "505 TL",
+        "category": "Avantajlı Algida Menüleri"
+      },
+      {
+        "name": "Tavuk Döner Large Dürüm (45 cm.) + Algida Maraş Usulü Cup Dondurma (100 ml.) + Pepsi Max (33 cl.)",
+        "price": "530 TL",
+        "category": "Avantajlı Algida Menüleri"
+      },
+      {
+        "name": "2 Adet Doritos'lu Maytako (Tavuk Dönerden) + Magnum Mini Badem (60 gr.) + Pepsi Zero Sugar (33 cl.)",
+        "price": "690 TL",
+        "category": "Avantajlı Algida Menüleri"
+      },
+      {
+        "name": "2 Adet Doritos'lu Maytako (Et Dönerden) + Magnum Mini Cookie (60 gr.) + Pepsi Zero Sugar (33 cl.)",
+        "price": "270 TL",
+        "category": "Avantajlı Algida Menüleri"
+      },
+      {
+        "name": "Kankamla Menü",
+        "price": "840 TL",
+        "category": "İndirimli Menüler"
+      },
+      {
+        "name": "2 Adet Tavuk Döner Medium Dürüm + 2'li Külah Patates Kızartması + 2 Adet Kutu İçecek",
+        "price": "990 TL",
+        "category": "İndirimli Menüler"
+      },
+      {
+        "name": "2 Adet Tavuk Döner Medium Dürüm + Small Tavuk Döner Dürüm + 2'li Külah Patates Kızartması + İçecek (1 L.)",
+        "price": "365 TL",
+        "category": "İndirimli Menüler"
+      },
+      {
+        "name": "Medium Tavuk Döner Dürüm + Pepsi Zero Sugar (33 cl.)",
+        "price": "415 TL",
+        "category": "İndirimli Menüler"
+      },
+      {
+        "name": "Large Tavuk Döner Dürüm (45 cm.) + Pepsi Zero Sugar (33 cl.)",
+        "price": "465 TL",
+        "category": "İndirimli Menüler"
+      },
+      {
+        "name": "XLarge Tavuk Döner Dürüm (45 cm.) + Pepsi (33 cl.)",
+        "price": "475 TL",
+        "category": "İndirimli Menüler"
+      },
+      {
+        "name": "Medium Et Döner Dürüm + Pepsi Zero Sugar (33 cl.)",
+        "price": "545 TL",
+        "category": "İndirimli Menüler"
+      },
+      {
+        "name": "Large Et Döner Dürüm (45 cm.) + Pepsi Zero Sugar (33 cl.)",
+        "price": "615 TL",
+        "category": "İndirimli Menüler"
+      },
+      {
+        "name": "Doritos'lu Maytako (Tavuk Dönerden) (2 Adet)",
+        "price": "360 TL",
+        "category": "Maytako Menüler"
+      },
+      {
+        "name": "2 Adet Doritos'lu Maytako Tavuk Döner",
+        "price": "520 TL",
+        "category": "Maytako Menüler"
+      },
+      {
+        "name": "2 Adet Doritos'lu Maytako Et Döner",
+        "price": "440 TL",
+        "category": "Maytako Menüler"
+      },
+      {
+        "name": "2 Adet Doritos'lu Maytako Tavuk Döner + Külah Patates Kızartması + Pepsi Pet (25 cl.)",
+        "price": "595 TL",
+        "category": "Maytako Menüler"
+      },
+      {
+        "name": "2 Adet Doritos'lu Maytako Et Döner + Külah Patates Kızartması + Pepsi Pet (25 cl.)",
+        "price": "895 TL",
+        "category": "Maytako Menüler"
+      },
+      {
+        "name": "4 Adet Doritos'lu Maytako Tavuk Döner + 2'li Külah Patates Kızartması + Pepsi Zero Sugar (1 L.)",
+        "price": "1.185 TL",
+        "category": "Maytako Menüler"
+      },
+      {
+        "name": "4 Adet Doritos'lu Maytako Et Döner + 2'li Külah Patates Kızartması + Pepsi Zero Sugar (1 L.)",
+        "price": "440 TL",
+        "category": "Maytako Menüler"
+      },
+      {
+        "name": "Doritos'lu Maytako Et Döner + Doritos'lu Maytako Tavuk Döner",
+        "price": "205 TL",
+        "category": "Maytako Menüler"
+      },
+      {
+        "name": "50 gr. chicken doner, cheddar cheese, pickled cucumber, onion, spicy garlic mayonnaise sauce, Doritos (20 gr.)",
+        "price": "310 TL",
+        "category": "Maytako Menüler"
+      },
+      {
+        "name": "50 gr. doner kebab meat, cheddar cheese, pickled cucumber, onion, spicy garlic mayonnaise sauce, Doritos (20 gr.)",
+        "price": "310 TL",
+        "category": "Maytako Menüler"
+      },
+      {
+        "name": "Doritos'lu Maytako Tavuk Döner + Külah Patates Kızartması + Pepsi Pet (25 cl.)",
+        "price": "400 TL",
+        "category": "Maytako Menüler"
+      },
+      {
+        "name": "Doritos'lu Maytako Et Döner + Külah Patates Kızartması + Pepsi Pet (25 cl.)",
+        "price": "550 TL",
+        "category": "Maytako Menüler"
+      },
+      {
+        "name": "Tavuk Döner Medium Dürüm Menü",
+        "price": "325 TL",
+        "category": "1 Kişilik Menüler"
+      },
+      {
+        "name": "Medium Tavuk Döner Dürüm + Ayran (17 cl.)",
+        "price": "430 TL",
+        "category": "1 Kişilik Menüler"
+      },
+      {
+        "name": "XLarge Tavuk Döner Dürüm (45 cm.) + Ayran (27 cl.)",
+        "price": "395 TL",
+        "category": "1 Kişilik Menüler"
+      },
+      {
+        "name": "Medium Tavuk Döner Dürüm + Külah Patates Kızartması + Ayran (17 cl.)",
+        "price": "495 TL",
+        "category": "1 Kişilik Menüler"
+      },
+      {
+        "name": "XLarge Tavuk Döner Dürüm (45 cm.) + Külah Patates Kızartması + Ayran (27 cl.)",
+        "price": "435 TL",
+        "category": "1 Kişilik Menüler"
+      },
+      {
+        "name": "Medium Et Döner Dürüm + Ayran (17 cl.)",
+        "price": "510 TL",
+        "category": "1 Kişilik Menüler"
+      },
+      {
+        "name": "Large Et Döner Dürüm (45 cm.) + Ayran (27 cl.)",
+        "price": "580 TL",
+        "category": "1 Kişilik Menüler"
+      },
+      {
+        "name": "XLarge Et Döner Dürüm (45 cm.) + Ayran (27 cl.)",
+        "price": "505 TL",
+        "category": "1 Kişilik Menüler"
+      },
+      {
+        "name": "Medium Et Döner Dürüm + Külah Patates Kızartması + Ayran (17 cl.)",
+        "price": "580 TL",
+        "category": "1 Kişilik Menüler"
+      },
+      {
+        "name": "Large Et Döner Dürüm (45 cm.) + Külah Patates Kızartması + Ayran (27 cl.)",
+        "price": "650 TL",
+        "category": "1 Kişilik Menüler"
+      },
+      {
+        "name": "XLarge Et Döner Dürüm (45 cm.) + Külah Patates Kızartması + Ayran (27 cl.)",
+        "price": "380 TL",
+        "category": "1 Kişilik Menüler"
+      },
+      {
+        "name": "Large Tavuk Döner Dürüm (45 cm.) + Ayran (27 cl.)",
+        "price": "450 TL",
+        "category": "1 Kişilik Menüler"
+      },
+      {
+        "name": "Tavuk Döner Burger",
+        "price": "295 TL",
+        "category": "Burger Ailesi"
+      },
+      {
+        "name": "Burger ekmeği, 75 gr. tavuk döner, mayonez, domates, iceberg marul, turşu",
+        "price": "405 TL",
+        "category": "Burger Ailesi"
+      },
+      {
+        "name": "Burger ekmeği, 75 gr. et döner, mayonez, domates, iceberg marul, turşu",
+        "price": "295 TL",
+        "category": "Burger Ailesi"
+      },
+      {
+        "name": "Burger ekmeği, 90 gr. tavuk burger, iceberg marul, turşu, cheddar peyniri, meat sos",
+        "price": "435 TL",
+        "category": "Burger Ailesi"
+      },
+      {
+        "name": "Tavuk Döner Burger + Patates Kızartması + Pepsi (33 cl.)",
+        "price": "545 TL",
+        "category": "Burger Ailesi"
+      },
+      {
+        "name": "Et Döner Burger + Patates Kızartması + Pepsi (33 cl.)",
+        "price": "435 TL",
+        "category": "Burger Ailesi"
+      },
+      {
+        "name": "2'li Tavuk Döner Medium Dürüm Menü",
+        "price": "840 TL",
+        "category": "2 Kişilik Menüler"
+      },
+      {
+        "name": "2 Adet Tavuk Döner Medium Dürüm + 2'li Külah Patates Kızartması + 2 Adet Kutu İçecek",
+        "price": "930 TL",
+        "category": "2 Kişilik Menüler"
+      },
+      {
+        "name": "2 Adet Tavuk Döner Large Dürüm (45 cm.) + 2'li Külah Patates Kızartması + 2 Adet Kutu İçecek",
+        "price": "1.070 TL",
+        "category": "2 Kişilik Menüler"
+      },
+      {
+        "name": "2 Adet Et Döner Medium Dürüm + 2'li Külah Patates Kızartması + 2 Adet Kutu İçecek",
+        "price": "1.250 TL",
+        "category": "2 Kişilik Menüler"
+      },
+      {
+        "name": "3'lü Tavuk Döner Medium Dürüm Menü",
+        "price": "855 TL",
+        "category": "3 Kişilik Menüler"
+      },
+      {
+        "name": "3 Adet Tavuk Döner Medium Dürüm + İçecek (1 L.)",
+        "price": "995 TL",
+        "category": "3 Kişilik Menüler"
+      },
+      {
+        "name": "3 Adet Tavuk Döner Large Dürüm (45 cm.) + İçecek (1 L.)",
+        "price": "1.195 TL",
+        "category": "3 Kişilik Menüler"
+      },
+      {
+        "name": "3 Adet Et Döner Medium Dürüm + İçecek (1 L.)",
+        "price": "1.460 TL",
+        "category": "3 Kişilik Menüler"
+      },
+      {
+        "name": "Chicken Doner Sandwich",
+        "price": "245 TL",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "50 gr. chicken doner kebab, pickled cucumber, french fries, onion (optional), garlic mayonnaise sauce. Served with chili peppers.",
+        "price": "245 TL",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Special oven-baked flatbread; 50 gr. chicken doner kebab, french fries, pickled cucumbers, special sauce, onion (optional), garlic mayonnaise sauce. Served with chili peppers.",
+        "price": "295 TL",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Special oven-baked flatbread; 75 gr. chicken doner, pickled cucumber, french fries, special sauce, onion (optional), garlic mayonnaise sauce. Served with chili peppers.",
+        "price": "345 TL",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "1.5 pieces of special oven-baked flatbread; 100 gr. chicken doner, french fries, pickled cucumbers, special sauce, onion (optional), garlic mayonnaise sauce. Served with chili peppers.",
+        "price": "395 TL",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Two special oven-baked flatbreads; 125 gr. chicken doner kebab, french fries, pickled cucumbers, special sauce, onion (optional), garlic mayonnaise sauce. Served with chili peppers.",
+        "price": "365 TL",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Served with french fries, pickled cucumbers, special thin oven-baked flatbread, and chili peppers (optional).",
+        "price": "385 TL",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Special sauce, with chili peppers optional.",
+        "price": "395 TL",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Thick Bread with Meat Doner",
+        "price": "335 TL",
+        "category": "Et Dönerler"
+      },
+      {
+        "name": "50 gr. doner kebab meat, pickled cucumber, french fries, onion (optional), garlic mayonnaise sauce. Served with chili peppers.",
+        "price": "335 TL",
+        "category": "Et Dönerler"
+      },
+      {
+        "name": "50 gr. meat döner, pickled cucumber, french fries, onion (optional), garlic mayonnaise sauce. With hot peppers",
+        "price": "335 TL",
+        "category": "Et Dönerler"
+      },
+      {
+        "name": "Served in a special oven-baked flatbread; 50g of doner kebab meat, french fries, pickled cucumbers, special sauce, onions (optional), garlic mayonnaise sauce. With chili peppers.",
+        "price": "405 TL",
+        "category": "Et Dönerler"
+      },
+      {
+        "name": "Served in a special oven-baked flatbread; 75 gr. doner kebab meat, french fries, pickled cucumbers, special sauce, onion (optional), garlic mayonnaise sauce. With chili peppers.",
+        "price": "495 TL",
+        "category": "Et Dönerler"
+      },
+      {
+        "name": "1.5 pieces of special oven-baked flatbread; 100 gr. doner kebab meat, french fries, pickled cucumbers, special sauce, onion (optional), garlic mayonnaise sauce. Served with chili peppers.",
+        "price": "570 TL",
+        "category": "Et Dönerler"
+      },
+      {
+        "name": "Two special oven-baked flatbreads; 125 gr. doner kebab meat, french fries, pickled cucumbers, special sauce, onion (optional), garlic mayonnaise sauce. Served with chili peppers.",
+        "price": "530 TL",
+        "category": "Et Dönerler"
+      },
+      {
+        "name": "Served with french fries, pickled cucumbers, special thin oven-baked flatbread, and chili peppers (optional).",
+        "price": "580 TL",
+        "category": "Et Dönerler"
+      },
+      {
+        "name": "Special sauce, with chili peppers optional.",
+        "price": "550 TL",
+        "category": "Et Dönerler"
+      },
+      {
+        "name": "Lentil Soup",
+        "price": "130 TL",
+        "category": "Çorbalar"
+      },
+      {
+        "name": "Kaşarlı Patso Sandviç",
+        "price": "250 TL",
+        "category": "Sandviçler"
+      },
+      {
+        "name": "It is a type of sandwich prepared by placing cheddar cheese and french fries between slices of bread.",
+        "price": "195 TL",
+        "category": "Sandviçler"
+      },
+      {
+        "name": "Chili Pepper",
+        "price": "10 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Pickled hot peppers",
+        "price": "170 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "It is a snack consisting of sliced potatoes that are fried and served in a cone-shaped cardboard container.",
+        "price": "20 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "1 piece",
+        "price": "110 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "It is a snack made by frying thinly sliced onions until they become crispy.",
+        "price": "75 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Onion rings (4 pieces), mozzarella sticks (2 pieces), baked potato balls (2 pieces), mac&#39;n cheese (2 pieces), cylindrical croquettes (2 pieces) and french fries (110 gr.).",
+        "price": "60 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "2 pieces",
+        "price": "100 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "4 pieces",
+        "price": "60 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "5 Pieces",
+        "price": "105 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Katmer Dessert",
+        "price": "200 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "1 person",
+        "price": "160 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Raspberry fruit cup cake",
+        "price": "160 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Caramel-filled cupcakes",
+        "price": "160 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Cupcakes with pistachios",
+        "price": "160 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Chocolate-filled cupcakes",
+        "price": "160 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Algida Maraş Usulü Dilim Dondurma (82 ml.)",
+        "price": "70 TL",
+        "category": "Dondurmalar"
+      },
+      {
+        "name": "Packaged ice cream",
+        "price": "65 TL",
+        "category": "Dondurmalar"
+      },
+      {
+        "name": "Paket dondurma",
+        "price": "75 TL",
+        "category": "Dondurmalar"
+      },
+      {
+        "name": "Pepsi (33 cl.)",
+        "price": "95 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Canned drinks",
+        "price": "95 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Big",
+        "price": "55 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Small",
+        "price": "55 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Glass bottle",
+        "price": "50 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Pet bottle",
+        "price": "120 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Pet şişe",
+        "price": "120 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Ketçap",
+        "price": "10 TL",
+        "category": "Soslar"
+      },
+      {
+        "name": "18 gr.",
+        "price": "10 TL",
+        "category": "Soslar"
+      },
+      {
+        "name": "Packaged",
+        "price": "15 TL",
+        "category": "Soslar"
+      },
+      {
+        "name": "Tavuk Döner (250 gr.)",
+        "price": "375 TL",
+        "category": "Kiloluk Tavuk Dönerler (Pişirilmiş)"
+      },
+      {
+        "name": "With 2 flatbreads",
+        "price": "635 TL",
+        "category": "Kiloluk Tavuk Dönerler (Pişirilmiş)"
+      },
+      {
+        "name": "With 4 flatbreads",
+        "price": "870 TL",
+        "category": "Kiloluk Tavuk Dönerler (Pişirilmiş)"
+      },
+      {
+        "name": "With 6 flatbreads",
+        "price": "1.065 TL",
+        "category": "Kiloluk Tavuk Dönerler (Pişirilmiş)"
+      },
+      {
+        "name": "Et Döner (250 gr.)",
+        "price": "795 TL",
+        "category": "Kiloluk Et Dönerler (Pişirilmiş)"
+      },
+      {
+        "name": "With 2 flatbreads",
+        "price": "1.410 TL",
+        "category": "Kiloluk Et Dönerler (Pişirilmiş)"
+      },
+      {
+        "name": "With 4 flatbreads",
+        "price": "1.945 TL",
+        "category": "Kiloluk Et Dönerler (Pişirilmiş)"
+      },
+      {
+        "name": "With 6 flatbreads",
+        "price": "2.395 TL",
+        "category": "Kiloluk Et Dönerler (Pişirilmiş)"
+      },
+    ]
+  },
 };
