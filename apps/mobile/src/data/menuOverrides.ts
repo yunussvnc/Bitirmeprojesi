@@ -65057,4 +65057,317 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       }
     ],
   },
+
+  "7090": {
+    "name": "Pogelo Coffee & More",
+    "sourceUrl": "https://www.migros.com.tr/yemek/pogelo-coffee-besiktas-sinanpasa-mah-st-3555c",
+    "sourceName": "Migros Yemek branch-labeled `Pogelo Coffee, Beşiktaş (Sinanpaşa Mah.)` live menu; exact Yandex bridge: Sinanpaşa Mah. Köyiçi Mektep Sok. 8A, Beşiktaş",
+    "verifiedAt": "2026-08-24",
+    "items": [
+      {
+        "name": "Bowl Waffle",
+        "price": "455,00 TL",
+        "category": "Waffle",
+        "desc": "Kendi hamurumuz ile yaptığımız hafif brüksel waffle parçalarına çikolata sos ve meyvelerle tatlı bir dokunuş"
+      },
+      {
+        "name": "Çikolata Soslu Kruvasan",
+        "price": "435,00 TL",
+        "category": "Waffle",
+        "desc": "%100 tereyağlı çıtır dev kruvasan arasına gerçek nutella, çikolata, çilek, muz eşlik eder. Üzerine tekrar nutella gezdirilir."
+      },
+      {
+        "name": "Pankek",
+        "price": "435,00 TL",
+        "category": "Waffle",
+        "desc": "Anne pankeki sadece nutella ve meyvelerle tatlı bir dokunuş"
+      },
+      {
+        "name": "Brüksel Waffle",
+        "price": "435,00 TL",
+        "category": "Waffle",
+        "desc": "Kendi hamurumuz ile yaptığımız hafif çıtır brüksel waffle parçalarına çikolata sosu ve meyvelerle tatlı bir dokunuş"
+      },
+      {
+        "name": "Bardak Waffle",
+        "price": "299,00 TL",
+        "category": "Waffle",
+        "desc": "Kendi yapımımız bubble waffle parçaları muz, çilek, nutella, beyaz çikolata sos ile servis edilir."
+      },
+      {
+        "name": "Cappuccino + Brüksel Waffle",
+        "price": "555,00 TL",
+        "category": "Waffle",
+        "desc": "Brüksel waffle ve taze çekilmiş espresso kahve çekirdekleri ile yapılmış cappuccino ile"
+      },
+      {
+        "name": "Brüksel Waffle + Latte",
+        "price": "555,00 TL",
+        "category": "Waffle",
+        "desc": "Çıtır brüksel waffle yanına taze çekilmiş espresso çekirdeği ile lezzetli latte uyumu. Brüksel waffle yerine pankek seçebilir, istediğiniz kahve seçeneğini not olarak belirtebilirsiniz."
+      },
+      {
+        "name": "Pankek + İstediğin Bir Kahve",
+        "price": "555,00 TL",
+        "category": "Waffle",
+        "desc": "Ev yapımı pankek nutella sosu ve taze meyveler"
+      },
+      {
+        "name": "Espresso",
+        "price": "160,00 TL",
+        "category": "Kahve",
+        "desc": "Taze çekilmiş kahve çekirdeği ile"
+      },
+      {
+        "name": "Cappuccino",
+        "price": "185,00 TL",
+        "category": "Kahve",
+        "desc": "Taze çekilmiş kahve çekirdeği ile köpüklü sütün buluşması"
+      },
+      {
+        "name": "Latte",
+        "price": "185,00 TL",
+        "category": "Kahve",
+        "desc": "Taze çekilmiş kahve çekirdeği ile sütün buluşması"
+      },
+      {
+        "name": "Americano",
+        "price": "165,00 TL",
+        "category": "Kahve",
+        "desc": "Taze çekilmiş kahve çekirdeği ile içimi rahat kıvam"
+      },
+      {
+        "name": "Mocha",
+        "price": "185,00 TL",
+        "category": "Kahve"
+      },
+      {
+        "name": "Flat White",
+        "price": "170,00 TL",
+        "category": "Kahve"
+      },
+      {
+        "name": "Caramel Macchiato",
+        "price": "185,00 TL",
+        "category": "Kahve"
+      },
+      {
+        "name": "Filtre Kahve",
+        "price": "80,00 TL",
+        "category": "Kahve"
+      },
+      {
+        "name": "Kapuçino",
+        "price": "185,00 TL",
+        "category": "Kahve",
+        "desc": "Espresso bazlı sütlü kahve"
+      },
+      {
+        "name": "Cappuccino + Brüksel Waffle",
+        "price": "555,00 TL",
+        "category": "Kahve",
+        "desc": "Brüksel waffle ve taze çekilmiş espresso kahve çekirdekleri ile yapılmış cappuccino ile"
+      },
+      {
+        "name": "Brüksel Waffle + Latte",
+        "price": "555,00 TL",
+        "category": "Kahve",
+        "desc": "Çıtır brüksel waffle yanına taze çekilmiş espresso çekirdeği ile lezzetli latte uyumu. Brüksel waffle yerine pankek seçebilir, istediğiniz kahve seçeneğini not olarak belirtebilirsiniz."
+      },
+      {
+        "name": "Pankek + İstediğin Bir Kahve",
+        "price": "555,00 TL",
+        "category": "Kahve",
+        "desc": "Ev yapımı pankek nutella sosu ve taze meyveler"
+      },
+      {
+        "name": "Ice Americano",
+        "price": "180,00 TL",
+        "category": "Kahve"
+      },
+      {
+        "name": "Ice Latte",
+        "price": "185,00 TL",
+        "category": "Kahve"
+      },
+      {
+        "name": "Irish Cream Latte",
+        "price": "185,00 TL",
+        "category": "Kahve"
+      },
+      {
+        "name": "Çay",
+        "price": "75,00 TL",
+        "category": "Çaylar"
+      },
+      {
+        "name": "Elma Çayı",
+        "price": "95,00 TL",
+        "category": "Çaylar"
+      },
+      {
+        "name": "Bitki Çayları",
+        "price": "85,00 TL",
+        "category": "Çaylar"
+      },
+      {
+        "name": "Cola Zero",
+        "price": "95,00 TL",
+        "category": "Soft İçecekler",
+        "desc": "Şekersiz cola zero 200 ml"
+      },
+      {
+        "name": "Su",
+        "price": "55,00 TL",
+        "category": "Soft İçecekler",
+        "desc": "400 ml su"
+      },
+      {
+        "name": "Coca Cola",
+        "price": "95,00 TL",
+        "category": "Soft İçecekler",
+        "desc": "200 ml kutu"
+      },
+      {
+        "name": "Beypazarı Maden Suyu",
+        "price": "75,00 TL",
+        "category": "Soft İçecekler",
+        "desc": "200 ml sade maden suyu"
+      },
+      {
+        "name": "Fuse Tea Şeftali 330 Ml",
+        "price": "95,00 TL",
+        "category": "Soft İçecekler"
+      },
+      {
+        "name": "Red Bull 250 Ml",
+        "price": "120,00 TL",
+        "category": "Soft İçecekler",
+        "desc": "250 ml red bull"
+      },
+      {
+        "name": "Fuse Tea Şeftali (330 Ml)",
+        "price": "95,00 TL",
+        "category": "Soft İçecekler"
+      },
+      {
+        "name": "Limonata",
+        "price": "75,00 TL",
+        "category": "Soft İçecekler"
+      },
+      {
+        "name": "Ev Yapımı Cool Lime",
+        "price": "235,00 TL",
+        "category": "Soft İçecekler",
+        "desc": "Tamamen doğal karışımla yapılan buz gibi bir lezzet"
+      },
+      {
+        "name": "Çikolatalı Meyveli Kruvasan",
+        "price": "435,00 TL",
+        "category": "Kruvasan",
+        "desc": "Tereyağlı çıtır fransız kruvasan arasında çikolata, pastacı kreması, muz ve taze çilek dilimleri"
+      },
+      {
+        "name": "Çikolata Soslu Kruvasan",
+        "price": "435,00 TL",
+        "category": "Kruvasan",
+        "desc": "%100 tereyağlı çıtır dev kruvasan arasına gerçek nutella, çikolata, çilek, muz eşlik eder. Üzerine tekrar nutella gezdirilir."
+      },
+      {
+        "name": "Pankek + İstediğin Bir Kahve",
+        "price": "555,00 TL",
+        "category": "Ev Yapımı Ürünler",
+        "desc": "Ev yapımı pankek nutella sosu ve taze meyveler"
+      },
+      {
+        "name": "Ev Yapımı Elmalı Turta",
+        "price": "119,00 TL",
+        "category": "Ev Yapımı Ürünler",
+        "desc": "Ev yapımı cevizli tarçınlı elmalı tart"
+      },
+      {
+        "name": "Çilekli Smoothie",
+        "price": "220,00 TL",
+        "category": "Ev Yapımı Ürünler",
+        "desc": "Taze çilekli smoothie"
+      },
+      {
+        "name": "Pogelo Mix",
+        "price": "180,00 TL",
+        "category": "Ev Yapımı Ürünler",
+        "desc": "Doğal meyve ve bitki aromalarının ferahlatıcı uyumu bir araya getiren pogelo mix, hibisküsün canlı rengi ve nar çayının meyvemsi lezzetiyle hazırlanmıştır. Nane, tarçın ve limonun dengeli dokunuşuyla serinletici aromatik bir içim sunar. Soğuk servis edilir."
+      },
+      {
+        "name": "Cappuccino + Brüksel Waffle",
+        "price": "555,00 TL",
+        "category": "Kahveli Menüler",
+        "desc": "Brüksel waffle ve taze çekilmiş espresso kahve çekirdekleri ile yapılmış cappuccino ile"
+      },
+      {
+        "name": "Brüksel Waffle + Latte",
+        "price": "555,00 TL",
+        "category": "Kahveli Menüler",
+        "desc": "Çıtır brüksel waffle yanına taze çekilmiş espresso çekirdeği ile lezzetli latte uyumu. Brüksel waffle yerine pankek seçebilir, istediğiniz kahve seçeneğini not olarak belirtebilirsiniz."
+      },
+      {
+        "name": "Pankek + İstediğin Bir Kahve",
+        "price": "555,00 TL",
+        "category": "Kahveli Menüler",
+        "desc": "Ev yapımı pankek nutella sosu ve taze meyveler"
+      },
+      {
+        "name": "Nutellalı Dev Kruvasan + Filtre Kahve",
+        "price": "349,00 TL",
+        "category": "Kahveli Menüler",
+        "desc": "%100 Tereyağlı dev kruvasan arası nutella ve muz çilek"
+      },
+      {
+        "name": "Ice Latte",
+        "price": "185,00 TL",
+        "category": "Soğuk Kahveler"
+      },
+      {
+        "name": "Ice Americano",
+        "price": "180,00 TL",
+        "category": "Soğuk Kahveler"
+      },
+      {
+        "name": "Ice Mocha",
+        "price": "185,00 TL",
+        "category": "Soğuk Kahveler"
+      },
+      {
+        "name": "Ice White Mocha",
+        "price": "220,00 TL",
+        "category": "Soğuk Kahveler"
+      },
+      {
+        "name": "Ice Irish Cream Latte",
+        "price": "220,00 TL",
+        "category": "Soğuk Kahveler"
+      },
+      {
+        "name": "Ice Vanilla Latte",
+        "price": "220,00 TL",
+        "category": "Soğuk Kahveler"
+      },
+      {
+        "name": "Ice Filtre",
+        "price": "180,00 TL",
+        "category": "Soğuk Kahveler"
+      },
+      {
+        "name": "Pogelo Mix",
+        "price": "180,00 TL",
+        "category": "Soğuk Kahveler",
+        "desc": "Doğal meyve ve bitki aromalarının ferahlatıcı uyumu bir araya getiren pogelo mix, hibisküsün canlı rengi ve nar çayının meyvemsi lezzetiyle hazırlanmıştır. Nane, tarçın ve limonun dengeli dokunuşuyla serinletici aromatik bir içim sunar. Soğuk servis edilir."
+      },
+      {
+        "name": "Pogelo Purple Dream",
+        "price": "185,00 TL",
+        "category": "Soğuk Kahveler",
+        "desc": "Pogelo purple dream, mor kelebek bitki çayının eşsiz aroması ile limonun ferahlatıcı dokunuşuyla bir araya getiren özel bir soğuk çay karışımıdır. Nane ve tarçın ile zenginleştirilen özel bir karışım. Dengeli tatlılığı ve göz alıcı rengiyle günün her anında keyifli bir içim sunar. Soğuk servis edilir."
+      }
+    ],
+  },
 };
