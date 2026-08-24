@@ -53686,4 +53686,657 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       },
     ]
   },
+  "3884": {
+    "name": "PizzaLazza Kocatepe Bayrampaşa",
+    "sourceUrl": "https://www.migros.com.tr/yemek/pizza-lazza-bayrampasa-kocatepe-mah-st-1be67",
+    "sourceName": "Migros Yemek branch-labeled canlı menüsü; official PizzaLazza Kocatepe exact 50. Yıl Cd. No:71A ve Yandex/YS köprüsüyle eşleştirildi",
+    "verifiedAt": "2026-08-24",
+    "items": [
+      {
+        "name": "2 Adet Orta Boy Pizza + Pepsi Zero Sugar (1 L.)",
+        "price": "800,00 TL",
+        "category": "Migros Yemek Özel Menü"
+      },
+      {
+        "name": "Algida Keyif Menüsü",
+        "price": "620,00 TL",
+        "category": "Avantajlı Algida Menüleri"
+      },
+      {
+        "name": "Orta Boy Pizza + Lazza Menü",
+        "price": "400,00 TL",
+        "category": "Buram Buram Fırsatlar"
+      },
+      {
+        "name": "Büyük Boy Pizza + Lazza Menü",
+        "price": "500,00 TL",
+        "category": "Buram Buram Fırsatlar"
+      },
+      {
+        "name": "Ruffles Özel Menü",
+        "price": "340,00 TL",
+        "category": "Buram Buram Fırsatlar"
+      },
+      {
+        "name": "Orta Boy Bol Bol Pizza Fırsatı + Sos",
+        "price": "435,00 TL",
+        "category": "Buram Buram Fırsatlar"
+      },
+      {
+        "name": "Büyük Boy Bol Bol Pizza Fırsatı + 2 Adet Sos",
+        "price": "535,00 TL",
+        "category": "Buram Buram Fırsatlar"
+      },
+      {
+        "name": "Dilediğin Orta Boy Gurme Pizza + Sos",
+        "price": "510,00 TL",
+        "category": "Buram Buram Fırsatlar"
+      },
+      {
+        "name": "Dilediğin Büyük Boy Gurme Pizza + 2 Adet Sos",
+        "price": "610,00 TL",
+        "category": "Buram Buram Fırsatlar"
+      },
+      {
+        "name": "Küçük Boy Pizza + Dilediğin Yan Ürün + Pepsi Zero Sugar (330 Ml.)",
+        "price": "410,00 TL",
+        "category": "Buram Buram Fırsatlar"
+      },
+      {
+        "name": "Lipton Ice Tea Sparkling Özel Menü 1",
+        "price": "575,00 TL",
+        "category": "Buram Buram Fırsatlar"
+      },
+      {
+        "name": "Lipton Ice Tea Sparkling Özel Menü 2",
+        "price": "775,00 TL",
+        "category": "Buram Buram Fırsatlar"
+      },
+      {
+        "name": "Red Bull Özel Menü",
+        "price": "400,00 TL",
+        "category": "Buram Buram Fırsatlar"
+      },
+      {
+        "name": "Dilediğin Fırından Lezzetler",
+        "price": "90,00 TL",
+        "category": "Buram Buram Fırsatlar"
+      },
+      {
+        "name": "Ortaya Bi’lazza",
+        "price": "255,00 TL",
+        "category": "Buram Buram Fırsatlar"
+      },
+      {
+        "name": "Lazza Menü",
+        "price": "370,00 TL",
+        "category": "Buram Buram Fırsatlar"
+      },
+      {
+        "name": "Dilediğin Çikolatalı Lazza",
+        "price": "215,00 TL",
+        "category": "Buram Buram Fırsatlar"
+      },
+      {
+        "name": "3’Lü Sos Paketi",
+        "price": "90,00 TL",
+        "category": "Buram Buram Fırsatlar"
+      },
+      {
+        "name": "Parmak Patates (200 Gr.)",
+        "price": "100,00 TL",
+        "category": "Fırından Lezzetler"
+      },
+      {
+        "name": "Soğan Halkası (8 Adet)",
+        "price": "100,00 TL",
+        "category": "Fırından Lezzetler"
+      },
+      {
+        "name": "Çıtır Tavuk Topları (10 Adet)",
+        "price": "100,00 TL",
+        "category": "Fırından Lezzetler"
+      },
+      {
+        "name": "Sarımsaklı Peynirli Ekmek",
+        "price": "210,00 TL",
+        "category": "Fırından Lezzetler"
+      },
+      {
+        "name": "Doritos Taco",
+        "price": "30,00 TL",
+        "category": "Fırından Lezzetler"
+      },
+      {
+        "name": "Ruffles Originals",
+        "price": "30,00 TL",
+        "category": "Fırından Lezzetler"
+      },
+      {
+        "name": "Orta Boy Pizza",
+        "price": "410,00 TL",
+        "category": "Orta Boy Kampanyalar"
+      },
+      {
+        "name": "Orta Boy Pizza + Pepsi Zero Sugar (1 L.)",
+        "price": "510,00 TL",
+        "category": "Orta Boy Kampanyalar"
+      },
+      {
+        "name": "2 Adet Orta Boy Pizza + Pepsi Zero Sugar (1 L.)",
+        "price": "800,00 TL",
+        "category": "Orta Boy Kampanyalar"
+      },
+      {
+        "name": "3 Adet Orta Boy Pizza",
+        "price": "1.020,00 TL",
+        "category": "Orta Boy Kampanyalar"
+      },
+      {
+        "name": "3 Adet Orta Boy Pizza + Pepsi Zero Sugar (1 L.)",
+        "price": "1.105,00 TL",
+        "category": "Orta Boy Kampanyalar"
+      },
+      {
+        "name": "Büyük Boy Pizza",
+        "price": "510,00 TL",
+        "category": "Büyük Boy Kampanyalar"
+      },
+      {
+        "name": "2 Adet Büyük Boy Pizza",
+        "price": "940,00 TL",
+        "category": "Büyük Boy Kampanyalar"
+      },
+      {
+        "name": "2 Adet Büyük Boy Pizza + Pepsi Zero Sugar (1 L.)",
+        "price": "1.025,00 TL",
+        "category": "Büyük Boy Kampanyalar"
+      },
+      {
+        "name": "Pizzanı Tasarla (1 Et - 1 Sebze) (Küçük)",
+        "price": "310,00 TL",
+        "category": "Küçük Boy Pizzalar (4 Dilim)"
+      },
+      {
+        "name": "Favori Üçlü Pizza (Küçük)",
+        "price": "310,00 TL",
+        "category": "Küçük Boy Pizzalar (4 Dilim)"
+      },
+      {
+        "name": "Kampüs Pizza (Küçük)",
+        "price": "310,00 TL",
+        "category": "Küçük Boy Pizzalar (4 Dilim)"
+      },
+      {
+        "name": "Margarita Pizza (Küçük)",
+        "price": "310,00 TL",
+        "category": "Küçük Boy Pizzalar (4 Dilim)"
+      },
+      {
+        "name": "Sucuk Mısır Partisi (Küçük)",
+        "price": "310,00 TL",
+        "category": "Küçük Boy Pizzalar (4 Dilim)"
+      },
+      {
+        "name": "Bol Bol Pizza (Küçük)",
+        "price": "335,00 TL",
+        "category": "Küçük Boy Pizzalar (4 Dilim)"
+      },
+      {
+        "name": "Doyuran Üçlü Pizza (Küçük)",
+        "price": "335,00 TL",
+        "category": "Küçük Boy Pizzalar (4 Dilim)"
+      },
+      {
+        "name": "Egeli Pizza (Küçük)",
+        "price": "335,00 TL",
+        "category": "Küçük Boy Pizzalar (4 Dilim)"
+      },
+      {
+        "name": "Lezzet Küpü Pizza (Küçük)",
+        "price": "335,00 TL",
+        "category": "Küçük Boy Pizzalar (4 Dilim)"
+      },
+      {
+        "name": "Sucuk Zengini Pizza (Küçük)",
+        "price": "335,00 TL",
+        "category": "Küçük Boy Pizzalar (4 Dilim)"
+      },
+      {
+        "name": "Efsane Sucuklu Pizza (Küçük)",
+        "price": "360,00 TL",
+        "category": "Küçük Boy Pizzalar (4 Dilim)"
+      },
+      {
+        "name": "İtalyalı Pizza (Küçük)",
+        "price": "360,00 TL",
+        "category": "Küçük Boy Pizzalar (4 Dilim)"
+      },
+      {
+        "name": "Keyfim Pizza (Küçük)",
+        "price": "360,00 TL",
+        "category": "Küçük Boy Pizzalar (4 Dilim)"
+      },
+      {
+        "name": "Süper Karışık Pizza (Küçük)",
+        "price": "360,00 TL",
+        "category": "Küçük Boy Pizzalar (4 Dilim)"
+      },
+      {
+        "name": "Tavuklu Pizza (Küçük)",
+        "price": "360,00 TL",
+        "category": "Küçük Boy Pizzalar (4 Dilim)"
+      },
+      {
+        "name": "Dört Peynirli Pizza (Küçük)",
+        "price": "410,00 TL",
+        "category": "Küçük Boy Pizzalar (4 Dilim)"
+      },
+      {
+        "name": "Et Budur Pizza (Küçük)",
+        "price": "410,00 TL",
+        "category": "Küçük Boy Pizzalar (4 Dilim)"
+      },
+      {
+        "name": "Etzza Pizza (Küçük)",
+        "price": "410,00 TL",
+        "category": "Küçük Boy Pizzalar (4 Dilim)"
+      },
+      {
+        "name": "Kavurma Zengini Pizza (Küçük)",
+        "price": "410,00 TL",
+        "category": "Küçük Boy Pizzalar (4 Dilim)"
+      },
+      {
+        "name": "Ton Ton (Küçük)",
+        "price": "410,00 TL",
+        "category": "Küçük Boy Pizzalar (4 Dilim)"
+      },
+      {
+        "name": "Pizzanı Tasarla (1 Et - 1 Sebze) (Orta)",
+        "price": "430,00 TL",
+        "category": "Orta Boy Pizzalar (6 Dilim)"
+      },
+      {
+        "name": "Favori Üçlü (Orta)",
+        "price": "430,00 TL",
+        "category": "Orta Boy Pizzalar (6 Dilim)"
+      },
+      {
+        "name": "Kampüs Pizza (Orta)",
+        "price": "430,00 TL",
+        "category": "Orta Boy Pizzalar (6 Dilim)"
+      },
+      {
+        "name": "Margarita Pizza (Orta)",
+        "price": "430,00 TL",
+        "category": "Orta Boy Pizzalar (6 Dilim)"
+      },
+      {
+        "name": "Sucuk Mısır Partisi (Orta)",
+        "price": "430,00 TL",
+        "category": "Orta Boy Pizzalar (6 Dilim)"
+      },
+      {
+        "name": "Bol Bol Pizza (Orta)",
+        "price": "455,00 TL",
+        "category": "Orta Boy Pizzalar (6 Dilim)"
+      },
+      {
+        "name": "Doyuran Üçlü Pizza (Orta)",
+        "price": "455,00 TL",
+        "category": "Orta Boy Pizzalar (6 Dilim)"
+      },
+      {
+        "name": "Egeli Pizza (Orta)",
+        "price": "455,00 TL",
+        "category": "Orta Boy Pizzalar (6 Dilim)"
+      },
+      {
+        "name": "Lezzet Küpü Pizza (Orta)",
+        "price": "455,00 TL",
+        "category": "Orta Boy Pizzalar (6 Dilim)"
+      },
+      {
+        "name": "Sucuk Zengini Pizza (Orta)",
+        "price": "455,00 TL",
+        "category": "Orta Boy Pizzalar (6 Dilim)"
+      },
+      {
+        "name": "Efsane Sucuklu Pizza (Orta)",
+        "price": "480,00 TL",
+        "category": "Orta Boy Pizzalar (6 Dilim)"
+      },
+      {
+        "name": "İtalyalı Pizza (Orta)",
+        "price": "480,00 TL",
+        "category": "Orta Boy Pizzalar (6 Dilim)"
+      },
+      {
+        "name": "Keyfim Pizza (Orta)",
+        "price": "480,00 TL",
+        "category": "Orta Boy Pizzalar (6 Dilim)"
+      },
+      {
+        "name": "Süper Karışık Pizza (Orta)",
+        "price": "480,00 TL",
+        "category": "Orta Boy Pizzalar (6 Dilim)"
+      },
+      {
+        "name": "Tavuklu Pizza (Orta)",
+        "price": "480,00 TL",
+        "category": "Orta Boy Pizzalar (6 Dilim)"
+      },
+      {
+        "name": "Dört Peynirli Pizza (Orta)",
+        "price": "530,00 TL",
+        "category": "Orta Boy Pizzalar (6 Dilim)"
+      },
+      {
+        "name": "Et Budur Pizza (Orta)",
+        "price": "530,00 TL",
+        "category": "Orta Boy Pizzalar (6 Dilim)"
+      },
+      {
+        "name": "Etzza Pizza (Orta)",
+        "price": "530,00 TL",
+        "category": "Orta Boy Pizzalar (6 Dilim)"
+      },
+      {
+        "name": "Kavurma Zengini Pizza (Orta)",
+        "price": "530,00 TL",
+        "category": "Orta Boy Pizzalar (6 Dilim)"
+      },
+      {
+        "name": "Ton Ton (Orta)",
+        "price": "530,00 TL",
+        "category": "Orta Boy Pizzalar (6 Dilim)"
+      },
+      {
+        "name": "Pizzanı Tasarla (1 Et - 1 Sebze) (Büyük)",
+        "price": "530,00 TL",
+        "category": "Büyük Boy Pizzalar (8 Dilim)"
+      },
+      {
+        "name": "Favori Üçlü Pizza (Büyük)",
+        "price": "530,00 TL",
+        "category": "Büyük Boy Pizzalar (8 Dilim)"
+      },
+      {
+        "name": "Kampüs Pizza (Büyük)",
+        "price": "530,00 TL",
+        "category": "Büyük Boy Pizzalar (8 Dilim)"
+      },
+      {
+        "name": "Margarita Pizza (Büyük)",
+        "price": "530,00 TL",
+        "category": "Büyük Boy Pizzalar (8 Dilim)"
+      },
+      {
+        "name": "Sucuk Mısır Partisi (Büyük)",
+        "price": "530,00 TL",
+        "category": "Büyük Boy Pizzalar (8 Dilim)"
+      },
+      {
+        "name": "Bol Bol Pizza (Büyük)",
+        "price": "555,00 TL",
+        "category": "Büyük Boy Pizzalar (8 Dilim)"
+      },
+      {
+        "name": "Doyuran Üçlü Pizza (Büyük)",
+        "price": "555,00 TL",
+        "category": "Büyük Boy Pizzalar (8 Dilim)"
+      },
+      {
+        "name": "Egeli Pizza (Büyük)",
+        "price": "555,00 TL",
+        "category": "Büyük Boy Pizzalar (8 Dilim)"
+      },
+      {
+        "name": "Lezzet Küpü Pizza (Büyük)",
+        "price": "555,00 TL",
+        "category": "Büyük Boy Pizzalar (8 Dilim)"
+      },
+      {
+        "name": "Sucuk Zengini Pizza (Büyük)",
+        "price": "555,00 TL",
+        "category": "Büyük Boy Pizzalar (8 Dilim)"
+      },
+      {
+        "name": "Efsane Sucuklu Pizza (Büyük)",
+        "price": "580,00 TL",
+        "category": "Büyük Boy Pizzalar (8 Dilim)"
+      },
+      {
+        "name": "İtalyalı Pizza (Büyük)",
+        "price": "580,00 TL",
+        "category": "Büyük Boy Pizzalar (8 Dilim)"
+      },
+      {
+        "name": "Keyfim Pizza (Büyük)",
+        "price": "580,00 TL",
+        "category": "Büyük Boy Pizzalar (8 Dilim)"
+      },
+      {
+        "name": "Süper Karışık Pizza (Büyük)",
+        "price": "580,00 TL",
+        "category": "Büyük Boy Pizzalar (8 Dilim)"
+      },
+      {
+        "name": "Tavuklu Pizza (Büyük)",
+        "price": "580,00 TL",
+        "category": "Büyük Boy Pizzalar (8 Dilim)"
+      },
+      {
+        "name": "Dört Peynirli Pizza (Büyük)",
+        "price": "630,00 TL",
+        "category": "Büyük Boy Pizzalar (8 Dilim)"
+      },
+      {
+        "name": "Et Budur Pizza (Büyük)",
+        "price": "630,00 TL",
+        "category": "Büyük Boy Pizzalar (8 Dilim)"
+      },
+      {
+        "name": "Etzza Pizza (Büyük)",
+        "price": "630,00 TL",
+        "category": "Büyük Boy Pizzalar (8 Dilim)"
+      },
+      {
+        "name": "Kavurma Zengini Pizza (Büyük)",
+        "price": "630,00 TL",
+        "category": "Büyük Boy Pizzalar (8 Dilim)"
+      },
+      {
+        "name": "Ton Ton (Büyük)",
+        "price": "630,00 TL",
+        "category": "Büyük Boy Pizzalar (8 Dilim)"
+      },
+      {
+        "name": "Sucuklu Lazza (1 Kişilik)",
+        "price": "270,00 TL",
+        "category": "Lazzalar"
+      },
+      {
+        "name": "Tavuklu Lazza (1 Kişilik)",
+        "price": "300,00 TL",
+        "category": "Lazzalar"
+      },
+      {
+        "name": "Pastırmalı Lazza (1 Kişilik)",
+        "price": "330,00 TL",
+        "category": "Lazzalar"
+      },
+      {
+        "name": "Kavurmalı Lazza (1 Kişilik)",
+        "price": "360,00 TL",
+        "category": "Lazzalar"
+      },
+      {
+        "name": "Yoğurtlu Sos",
+        "price": "35,00 TL",
+        "category": "Soslar"
+      },
+      {
+        "name": "Lazza Sos",
+        "price": "35,00 TL",
+        "category": "Soslar"
+      },
+      {
+        "name": "Binada Sos",
+        "price": "35,00 TL",
+        "category": "Soslar"
+      },
+      {
+        "name": "Creamy Jalapeno Sos",
+        "price": "35,00 TL",
+        "category": "Soslar"
+      },
+      {
+        "name": "Ketçap",
+        "price": "10,00 TL",
+        "category": "Soslar"
+      },
+      {
+        "name": "Mayonez",
+        "price": "10,00 TL",
+        "category": "Soslar"
+      },
+      {
+        "name": "Çikolatalı Sufle",
+        "price": "150,00 TL",
+        "category": "Tatlılar & Dondurmalar"
+      },
+      {
+        "name": "Çikolatalı Lazza",
+        "price": "225,00 TL",
+        "category": "Tatlılar & Dondurmalar"
+      },
+      {
+        "name": "Vişneli Çikolatalı Lazza",
+        "price": "225,00 TL",
+        "category": "Tatlılar & Dondurmalar"
+      },
+      {
+        "name": "Algida Maraş Usulü Cup Dondurma",
+        "price": "75,00 TL",
+        "category": "Tatlılar & Dondurmalar"
+      },
+      {
+        "name": "Pepsi Zero Sugar (330 Ml.)",
+        "price": "100,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Pepsi (330 Ml.)",
+        "price": "100,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Yedigün (330 Ml.)",
+        "price": "100,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Fruko (330 Ml.)",
+        "price": "100,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Lipton Ice Tea Sparkling Limon Yuzu (330 Ml.)",
+        "price": "100,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Lipton Ice Tea Sparkling Tropikal (330 Ml.)",
+        "price": "100,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Lipton Ice Tea Şeftali (330 Ml.)",
+        "price": "100,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Lipton Ice Tea Limon (330 Ml.)",
+        "price": "100,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "İtimat Ayran ( 280 Ml.)",
+        "price": "50,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Su (500 Ml.)",
+        "price": "35,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Soda (200 Ml.)",
+        "price": "40,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Redbull (250 Ml.)",
+        "price": "120,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Redbull Sugarfree (250 Ml.)",
+        "price": "120,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Pepsi Zero Sugar (1 L.)",
+        "price": "125,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Pepsi (1 L.)",
+        "price": "125,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Pepsi Twist (1 L.)",
+        "price": "125,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Yedigün (1 L.)",
+        "price": "125,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "7Up (1 L.)",
+        "price": "125,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Lipton Ice Tea Sparkling Limon Yuzu (1 L.)",
+        "price": "125,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Lipton Ice Tea Sparkling Tropikal (1L.)",
+        "price": "125,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Lipton Ice Tea Şeftali (1 L.)",
+        "price": "125,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Lipton Ice Tea Limon (1 L.)",
+        "price": "125,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "İtimat Ayran (1 L.)",
+        "price": "135,00 TL",
+        "category": "İçecekler"
+      },
+    ]
+  },
 };
