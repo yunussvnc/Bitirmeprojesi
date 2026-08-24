@@ -47,6 +47,8 @@ import { useTranslation } from "react-i18next";
 import { useUploadPipelineStore } from "@/src/store/useUploadPipelineStore";
 import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 import { RadialMenu } from "@/src/components/ui/RadialMenu";
+import { SuggestedUsersCarousel } from '../explore/SuggestedUsersCarousel';
+import { ContactSyncPromptCard } from '../explore/ContactSyncPromptCard';
 
 export default function FeedScreen() {
   const { t } = useTranslation();
@@ -89,7 +91,7 @@ export default function FeedScreen() {
   const insets = useSafeAreaInsets();
   const PAGE_SIZE = 12;
   const toggleSavePost = useAppStore((s) => s.toggleSavePost);
-  const isPostSaved = useAppStore((s) => s.isPostSaved);
+  const savedPostIds = useAppStore((s) => s.savedPostIds);
   const deletedPostIds = useAppStore((s) => s.deletedPostIds);
   const [viewableIds, setViewableIds] = useState<Set<number>>(new Set());
 
@@ -170,7 +172,11 @@ export default function FeedScreen() {
             }
           }
         } else {
-          setPosts((prev) => dedupeById([...prev, ...res.items]));
+          setPosts((prev) => {
+            const next = dedupeById([...prev, ...res.items]);
+            // Bellek şişmesini önle — max 60 post tut (kullanıcı çok aşağı inerse eski postları kaldır)
+            return next.length > 60 ? next.slice(-60) : next;
+          });
         }
       } catch (e) {
         handleApiError(e);
@@ -295,13 +301,8 @@ export default function FeedScreen() {
     useAppStore.getState().addDeletedPostId(postId);
   }, []);
 
-  const handleSharePost = useCallback(async (post: Post) => {
-    try {
-      const label = post.place?.name || post.author?.username || post.author?.first_name || "gönderi";
-      await Share.share({ message: `${label} paylaşımına göz at!` });
-    } catch {
-      // ignore
-    }
+  const handleSharePost = useCallback((post: Post) => {
+    setSharePost(post);
   }, []);
 
   const handleReportPost = useCallback(() => {
@@ -337,14 +338,10 @@ export default function FeedScreen() {
 
   const handleSavePost = useCallback(
     (post: Post) => {
-      const wasSaved = isPostSaved(post.id);
+      lightImpact();
       toggleSavePost(post);
-      Alert.alert(
-        wasSaved ? t("feed.saved_false") : t("feed.saved_true"),
-        wasSaved ? t("feed.saved_false_desc") : t("feed.saved_true_desc")
-      );
     },
-    [isPostSaved, toggleSavePost, t]
+    [toggleSavePost]
   );
 
   const handleToggleFollow = useCallback(async (post: Post) => {
@@ -380,7 +377,7 @@ export default function FeedScreen() {
       <View style={{ overflow: "hidden" }}>
         <FeedCard
           post={item}
-          isSaved={isPostSaved(item.id)}
+          isSaved={savedPostIds.includes(String(item.id))}
           isViewable={viewableIds.has(item.id)}
           onSave={() => handleSavePost(item)}
           onPress={() => item.place_id && router.push(`/place/${item.place_id}` as any)}
@@ -392,9 +389,15 @@ export default function FeedScreen() {
           onOptionsPress={() => setOptionsPost(item)}
           onZoomChange={setIsCardZooming}
         />
+        {index === 0 && (
+          <>
+            <ContactSyncPromptCard />
+            <SuggestedUsersCarousel />
+          </>
+        )}
       </View>
     ),
-    [handleLike, handleSavePost, isPostSaved, viewableIds]
+    [handleLike, handleSavePost, savedPostIds, viewableIds]
   );
 
   const listEmpty = () => {
@@ -655,6 +658,7 @@ export default function FeedScreen() {
           ref={flatListRef}
           style={styles.list}
           data={visiblePosts}
+          extraData={[savedPostIds, viewableIds]}
           keyExtractor={(item) => String(item.id)}
           renderItem={renderItem}
           ItemSeparatorComponent={() => <View style={{ height: spacing.sm }} />}

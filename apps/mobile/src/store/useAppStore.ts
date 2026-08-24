@@ -240,7 +240,11 @@ export const useAppStore = create<AppState>()(
       },
 
       addViewedStoryGroupKey: (key: string) => {
-        set((state) => ({ viewedStoryGroupKeys: uniq([...state.viewedStoryGroupKeys, key]) }));
+        set((state) => {
+          const next = uniq([...state.viewedStoryGroupKeys, key]);
+          // Bellek + MMKV serialize taşmasını önle — max 200 key tut
+          return { viewedStoryGroupKeys: next.length > 200 ? next.slice(-200) : next };
+        });
       },
       clearViewedStoryGroupKeys: () => {
         set({ viewedStoryGroupKeys: [] });

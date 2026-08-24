@@ -10,7 +10,7 @@ import {
   TouchableOpacity, Dimensions, RefreshControl, Alert,
 } from 'react-native';
 import { Image } from 'expo-image';
-import { Stack } from 'expo-router';
+import { Stack, useRouter } from 'expo-router';
 import { getMyStoryArchive, deleteStory, type Story } from '@/src/services/storyService';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
 import { StoryViewerModal } from '@/src/components/domain/explore/StoryViewerModal';
@@ -22,6 +22,7 @@ const COLUMN = 3;
 const ITEM_SIZE = Math.floor((SCREEN_WIDTH - 4) / COLUMN);
 
 export default function StoryArchiveScreen() {
+  const router = useRouter();
   const [stories, setStories] = useState<Story[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
@@ -129,6 +130,12 @@ export default function StoryArchiveScreen() {
           headerStyle: { backgroundColor: '#0a0a0a' },
           headerTintColor: '#fff',
           headerTitleStyle: { fontWeight: '700' },
+          headerShown: true,
+          headerLeft: () => (
+            <TouchableOpacity onPress={() => router.back()} style={{ marginRight: 16 }}>
+              <IconSymbol name="chevron.left" size={24} color="#fff" />
+            </TouchableOpacity>
+          ),
         }}
       />
       <View style={styles.container}>

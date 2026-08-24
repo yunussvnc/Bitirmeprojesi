@@ -11,6 +11,7 @@ export type AuthUser = {
   role: string;
   is_active: boolean;
   is_email_verified: boolean;
+  has_synced_contacts?: boolean;
   created_at: string;
   birth_date: string | null;
   venue_name?: string | null;

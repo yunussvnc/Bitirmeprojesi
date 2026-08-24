@@ -380,6 +380,29 @@ export default function ChatScreen() {
                         parentStoryId: m.parent_story_id ?? undefined,
                     }));
                     setMessages((prev) => {
+                        // Bellek Optimizasyonu (Erken Çıkış): 30 saniyelik polling'lerde gereksiz array/object allocation'ı önler.
+                        // Geçici mesajları (temp_) filtrele, geriye kalanları backend'den gelenle karşılaştır.
+                        const prevNonTemp = prev.filter(m => !m.id.startsWith('temp_') && Number(m.id) < 1_700_000_000_000);
+                        let isIdentical = prevNonTemp.length === backendMsgs.length;
+                        if (isIdentical) {
+                            for (let i = 0; i < backendMsgs.length; i++) {
+                                const oMsg = prevNonTemp[i];
+                                const nMsg = backendMsgs[i];
+                                // Eski mesaj 'delivered' ise ve backend 'sent' döndüyse (backend henüz read yapmamış), bunu değişiklik sayma
+                                const isStatusSame = oMsg.status === nMsg.status || (oMsg.status === 'delivered' && nMsg.status === 'sent');
+                                if (oMsg.id !== nMsg.id || !isStatusSame) {
+                                    isIdentical = false;
+                                    break;
+                                }
+                            }
+                        }
+                        
+                        // Eğer backend'den gelen veri ile elimizdeki onaylı veri tıpatıp aynıysa, state'i hiç ellemeyerek 
+                        // re-render ve GC baskısını (garbage collection) sıfıra indiriyoruz.
+                        if (isIdentical) {
+                            return prev;
+                        }
+
                         // Backend verisini önceki mesajlarla birleştir (delivered statüsünü korumak için)
                         const backendIdSet = new Set(backendMsgs.map(m => m.id));
 
@@ -395,26 +418,16 @@ export default function ChatScreen() {
                         });
 
                         // Henüz backend'de olmayan optimistic (geçici ID'li) mesajları koru.
-                        // Bu mesajlar Date.now() ile oluşturulduğundan sayısal ama çok büyük ID'ye sahiptir.
-                        // Backend'den onay gelene kadar (polling) bu mesajlar ekrandan kaybolmamalı.
                         const pendingOptimistic = prev.filter(m => {
                             if (backendIdSet.has(m.id)) return false; // Backend zaten biliyor
                             if (!m.isMine) return false;              // Sadece kendi mesajlarımız
-                            // Geçici ID kontrolü: "temp_" prefix'i veya çok büyük sayısal ID (Date.now())
                             const isTemp = m.id.startsWith('temp_') || (Number(m.id) > 1_700_000_000_000);
                             return isTemp && m.status === 'sent';
                         });
 
-                        const finalMsgs = pendingOptimistic.length > 0
+                        return pendingOptimistic.length > 0
                             ? [...mergedMsgs, ...pendingOptimistic]
                             : mergedMsgs;
-
-                        // Liste uzunlukları veya statüleri değişmişse listeyi güncelle
-                        const isSame = prev.length === finalMsgs.length && prev.every((m, i) =>
-                            m.id === finalMsgs[i].id && m.status === finalMsgs[i].status
-                        );
-
-                        return isSame ? prev : finalMsgs;
                     });
 
                     // Store'u render sonrasında güncelle (render sırasında state güncelleme hatasını önler)

@@ -41,6 +41,7 @@ export default function FriendSearchScreen() {
 
   // Animated glow for the search bar
   const glowAnim = useRef(new Animated.Value(0)).current;
+  const isNavigating = useRef(false);
 
   // Cleanup debounce timer on unmount
   useEffect(() => {
@@ -182,6 +183,9 @@ export default function FriendSearchScreen() {
   const { mode } = useLocalSearchParams<{ mode?: string }>();
 
   const navigateToProfile = async (user: UserSummary) => {
+    if (isNavigating.current) return;
+    isNavigating.current = true;
+    
     lightImpact();
     Keyboard.dismiss();
     
@@ -193,8 +197,11 @@ export default function FriendSearchScreen() {
           : user.username || `User ${user.id}`;
           
         router.push(`/chat/${res.conversation_id}?name=${encodeURIComponent(displayName)}&avatar=${encodeURIComponent(user.avatar_url || "")}&targetUserId=${user.id}` as any);
+        
+        setTimeout(() => { isNavigating.current = false; }, 1000);
       } catch (e) {
         handleApiError(e);
+        isNavigating.current = false;
       }
       return;
     }
@@ -204,6 +211,8 @@ export default function FriendSearchScreen() {
     } else {
       router.push(`/user/${user.id}` as any);
     }
+    
+    setTimeout(() => { isNavigating.current = false; }, 1000);
   };
 
   const renderItem = ({ item, index }: { item: UserSummary; index: number }) => {

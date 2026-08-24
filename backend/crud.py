@@ -769,7 +769,7 @@ def get_followed_place_ids(db: Session, user_id: int) -> list[int]:
     """Kullanıcının takip ettiği mekan ID'lerini döner (feed için)."""
     rows = db.query(models.PlaceFollow.place_id).filter(
         models.PlaceFollow.user_id == user_id
-    ).all()
+    ).order_by(models.PlaceFollow.created_at.desc()).all()
     return [r[0] for r in rows]
 
 
@@ -1631,17 +1631,23 @@ def is_following(db: Session, follower_id: int, following_id: int) -> bool:
 
 
 def get_follower_ids(db: Session, user_id: int) -> list[int]:
-    return [r[0] for r in db.query(models.Follow.follower_id).filter(
+    return [r[0] for r in db.query(models.Follow.follower_id).join(
+        models.User, models.User.id == models.Follow.follower_id
+    ).filter(
         models.Follow.following_id == user_id,
-        models.Follow.status == "accepted"
-    ).all()]
+        models.Follow.status == "accepted",
+        models.User.is_active == True
+    ).order_by(models.Follow.created_at.desc()).all()]
 
 
 def get_following_ids(db: Session, user_id: int) -> list[int]:
-    return [r[0] for r in db.query(models.Follow.following_id).filter(
+    return [r[0] for r in db.query(models.Follow.following_id).join(
+        models.User, models.User.id == models.Follow.following_id
+    ).filter(
         models.Follow.follower_id == user_id,
-        models.Follow.status == "accepted"
-    ).all()]
+        models.Follow.status == "accepted",
+        models.User.is_active == True
+    ).order_by(models.Follow.created_at.desc()).all()]
 
 
 def get_mutual_friend_ids(db: Session, user_id: int) -> list[int]:
@@ -2025,6 +2031,58 @@ def toggle_block_user(db: Session, blocker_id: int, blocked_id: int) -> bool:
             (models.Follow.follower_id == blocked_id) & 
             (models.Follow.following_id == blocker_id)
         )
+    ).delete(synchronize_session=False)
+
+    # Bildirimlerin silinmesi (Her iki yönde)
+    db.query(models.Notification).filter(
+        (
+            (models.Notification.user_id == blocker_id) & 
+            (models.Notification.actor_id == blocked_id)
+        ) | (
+            (models.Notification.user_id == blocked_id) & 
+            (models.Notification.actor_id == blocker_id)
+        )
+    ).delete(synchronize_session=False)
+
+    # Blocker'ın Blocked'a ait postlardaki beğenilerini sil
+    blocker_likes_on_blocked = db.query(models.PostLike.post_id).filter(
+        models.PostLike.user_id == blocker_id,
+        models.PostLike.post_id.in_(db.query(models.Post.id).filter(models.Post.user_id == blocked_id))
+    ).all()
+    post_ids_1 = [r[0] for r in blocker_likes_on_blocked]
+    if post_ids_1:
+        db.query(models.PostLike).filter(
+            models.PostLike.user_id == blocker_id,
+            models.PostLike.post_id.in_(post_ids_1)
+        ).delete(synchronize_session=False)
+        db.query(models.Post).filter(models.Post.id.in_(post_ids_1)).update(
+            {"like_count": models.Post.like_count - 1}, synchronize_session=False
+        )
+
+    # Blocked'ın Blocker'a ait postlardaki beğenilerini sil
+    blocked_likes_on_blocker = db.query(models.PostLike.post_id).filter(
+        models.PostLike.user_id == blocked_id,
+        models.PostLike.post_id.in_(db.query(models.Post.id).filter(models.Post.user_id == blocker_id))
+    ).all()
+    post_ids_2 = [r[0] for r in blocked_likes_on_blocker]
+    if post_ids_2:
+        db.query(models.PostLike).filter(
+            models.PostLike.user_id == blocked_id,
+            models.PostLike.post_id.in_(post_ids_2)
+        ).delete(synchronize_session=False)
+        db.query(models.Post).filter(models.Post.id.in_(post_ids_2)).update(
+            {"like_count": models.Post.like_count - 1}, synchronize_session=False
+        )
+
+    # Hikaye reaksiyonlarının silinmesi (Her iki yönde)
+    db.query(models.StoryReaction).filter(
+        models.StoryReaction.user_id == blocker_id,
+        models.StoryReaction.story_id.in_(db.query(models.Story.id).filter(models.Story.user_id == blocked_id))
+    ).delete(synchronize_session=False)
+    
+    db.query(models.StoryReaction).filter(
+        models.StoryReaction.user_id == blocked_id,
+        models.StoryReaction.story_id.in_(db.query(models.Story.id).filter(models.Story.user_id == blocker_id))
     ).delete(synchronize_session=False)
 
     db.commit()
@@ -2564,3 +2622,22 @@ def get_foryou_places(db: Session, user_id: int | None, lat: float | None, lng: 
     return enriched
 
 
+
+def limit_user_notifications(db: Session, user_id: int):
+    """Kullanıcının bildirim sayısını en fazla 50'da tutar, eskileri siler."""
+    total_count = db.query(models.Notification).filter(models.Notification.user_id == user_id).count()
+    if total_count > 50:
+        excess = total_count - 50
+        oldest_notifications = (
+            db.query(models.Notification.id)
+            .filter(models.Notification.user_id == user_id)
+            .order_by(models.Notification.created_at.asc())
+            .limit(excess)
+            .all()
+        )
+        oldest_ids = [notif[0] for notif in oldest_notifications]
+        if oldest_ids:
+            db.query(models.Notification).filter(
+                models.Notification.id.in_(oldest_ids)
+            ).delete(synchronize_session=False)
+            db.commit()

@@ -285,24 +285,8 @@ export default function HomeScreen() {
 
   useEffect(() => {
     loadPlaces();
-    requestLocation();
   }, []);
 
-  const requestLocation = async () => {
-    try {
-      const { status } = await Location.requestForegroundPermissionsAsync();
-      if (status !== "granted") return;
-      let loc = await Location.getLastKnownPositionAsync();
-      if (!loc) {
-        loc = await Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Balanced });
-      }
-      if (loc) {
-        setUserLocation({ lat: loc.coords.latitude, lng: loc.coords.longitude });
-      }
-    } catch {
-      // Fallback: İstanbul merkez
-    }
-  };
 
   useEffect(() => {
     if (allPlaces.length > 0) {
@@ -324,6 +308,7 @@ export default function HomeScreen() {
       if (loc) {
         lat = loc.latitude;
         lng = loc.longitude;
+        setUserLocation({ lat, lng });
       }
       
       const paginatedData = await getForYouPlaces(lat, lng, 1, 12);
@@ -827,7 +812,7 @@ const styles = StyleSheet.create({
   listContent: { gap: 12, paddingBottom: s(8) },
   listContentEmpty: { flexGrow: 1 },
   centerWrap: { minHeight: 320, justifyContent: "center" },
-  skeletonWrap: { paddingBottom: 24, gap: 12 },
+  skeletonWrap: { paddingBottom: 24, gap: 12, paddingTop: 12 },
   miniBar: {
     position: "absolute",
     left: 0,

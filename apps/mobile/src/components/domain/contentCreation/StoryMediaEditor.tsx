@@ -34,6 +34,7 @@ import {
   TouchableOpacity,
   Dimensions,
   ActivityIndicator,
+  Platform,
 } from 'react-native';
 import { Image } from 'expo-image';
 import * as ImageManipulator from 'expo-image-manipulator';
@@ -113,6 +114,7 @@ export function StoryMediaEditor({
   onCancel,
 }: StoryMediaEditorProps) {
   const insets = useSafeAreaInsets();
+  const safeTop = Math.max(insets.top, Platform.OS === 'ios' ? 50 : 24);
   const [processing, setProcessing] = useState(false);
 
   // ── Shared Values (UI thread) ────────────────────────────────────────
@@ -373,41 +375,51 @@ export function StoryMediaEditor({
       </ViewShot>
 
       {/* ── Üst bar ── */}
-      <View style={[styles.topBar, { paddingTop: insets.top + 8 }]} pointerEvents="box-none">
-        <TouchableOpacity
-          style={styles.topBtn}
-          onPress={onCancel}
-          disabled={processing}
-          activeOpacity={0.75}
-          hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-        >
-          <IconSymbol name="xmark" size={20} color="#fff" />
-        </TouchableOpacity>
+      <View style={[styles.topBar, { paddingTop: safeTop + 8 }]} pointerEvents="box-none">
+        
+        {/* Sol: İptal */}
+        <View style={{ flex: 1, alignItems: 'flex-start' }} pointerEvents="box-none">
+          <TouchableOpacity
+            style={styles.topBtn}
+            onPress={onCancel}
+            disabled={processing}
+            activeOpacity={0.75}
+            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+          >
+            <IconSymbol name="xmark" size={20} color="#fff" />
+          </TouchableOpacity>
+        </View>
 
-        <Text style={styles.title}>Düzenle</Text>
+        {/* Orta: Başlık */}
+        <View style={{ flex: 1, alignItems: 'center' }} pointerEvents="none">
+          <Text style={styles.title}>Düzenle</Text>
+        </View>
 
-        {/* Metin Ekle Butonu */}
-        <TouchableOpacity
-          style={styles.topBtn}
-          onPress={() => {
-            lightImpact();
-            setTexts([...texts, 'Yeni Yazı']);
-          }}
-          disabled={processing}
-          activeOpacity={0.75}
-        >
-          <IconSymbol name="textformat" size={20} color="#fff" />
-        </TouchableOpacity>
+        {/* Sağ: Araçlar */}
+        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'flex-end', gap: 12 }} pointerEvents="box-none">
+          <TouchableOpacity
+            style={styles.topBtn}
+            onPress={() => {
+              lightImpact();
+              setTexts([...texts, 'Yeni Yazı']);
+            }}
+            disabled={processing}
+            activeOpacity={0.75}
+            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+          >
+            <IconSymbol name="textformat" size={20} color="#fff" />
+          </TouchableOpacity>
 
-        <TouchableOpacity
-          style={styles.topBtn}
-          onPress={handleReset}
-          disabled={processing}
-          activeOpacity={0.75}
-          hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
-        >
-          <IconSymbol name="arrow.counterclockwise" size={20} color="#fff" />
-        </TouchableOpacity>
+          <TouchableOpacity
+            style={styles.topBtn}
+            onPress={handleReset}
+            disabled={processing}
+            activeOpacity={0.75}
+            hitSlop={{ top: 10, bottom: 10, left: 10, right: 10 }}
+          >
+            <IconSymbol name="arrow.counterclockwise" size={20} color="#fff" />
+          </TouchableOpacity>
+        </View>
       </View>
 
       {/* ── Alt bar ── */}

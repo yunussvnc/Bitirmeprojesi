@@ -23,6 +23,9 @@ import {
   Alert,
 } from 'react-native';
 import { KeyboardAvoidingView } from 'react-native-keyboard-controller';
+import { Gesture, GestureDetector } from "react-native-gesture-handler";
+import { runOnJS } from "react-native-reanimated";
+import { SnapbackZoom } from "react-native-zoom-toolkit";
 import { Image } from 'expo-image';
 import Video from 'react-native-video';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
@@ -87,6 +90,7 @@ export function StoryViewerModal({
   const [uiVisible, setUiVisible] = useState(true);
   const [videoPaused, setVideoPaused] = useState(false);
   const isPausedRef = useRef(false);
+  const isPinchedRef = useRef(false);
   const progressValueRef = useRef(0);
   const longPressTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const keyboardVisibleRef = useRef(false);
@@ -275,7 +279,7 @@ export function StoryViewerModal({
       clearTimeout(longPressTimerRef.current);
       longPressTimerRef.current = null;
     }
-    if (isPausedRef.current) {
+    if (isPausedRef.current && !isPinchedRef.current) {
       isPausedRef.current = false;
       setVideoPaused(false);
       setUiVisible(true);
@@ -509,10 +513,10 @@ export function StoryViewerModal({
     try {
       const res = await getStoryViewers(story.id);
       const sorted = (res.items || []).sort((a, b) => {
-        const aHasHeart = a.reaction === '❤️';
-        const bHasHeart = b.reaction === '❤️';
-        if (aHasHeart && !bHasHeart) return -1;
-        if (!aHasHeart && bHasHeart) return 1;
+        const aHasReaction = !!a.reaction;
+        const bHasReaction = !!b.reaction;
+        if (aHasReaction && !bHasReaction) return -1;
+        if (!aHasReaction && bHasReaction) return 1;
         const aTime = new Date(a.viewed_at).getTime();
         const bTime = new Date(b.viewed_at).getTime();
         return bTime - aTime;
@@ -537,6 +541,35 @@ export function StoryViewerModal({
   // Progress bar renkleri
   const progressFillColor = isCloseFriends ? 'rgba(74,222,128,0.9)' : 'rgba(255,255,255,0.9)';
 
+  const singleTap = useMemo(() => {
+    return Gesture.Tap().onEnd((e) => {
+      if (viewersModalVisible || showOwnMenu || showOtherMenu || showReportMenu) return;
+      if (e.x < SCREEN_WIDTH * 0.3) {
+        runOnJS(goPrev)();
+      } else {
+        runOnJS(goNext)();
+      }
+    });
+  }, [goPrev, goNext, viewersModalVisible, showOwnMenu, showOtherMenu, showReportMenu, SCREEN_WIDTH]);
+
+  const longPress = useMemo(() => {
+    return Gesture.LongPress()
+      .minDuration(250)
+      .onStart(() => {
+        runOnJS(handlePressIn)();
+      })
+      .onEnd(() => {
+        runOnJS(handlePressOut)();
+      })
+      .onTouchesCancelled(() => {
+        runOnJS(handlePressOut)();
+      });
+  }, [handlePressIn, handlePressOut]);
+
+  const composedGestures = useMemo(() => {
+    return Gesture.Exclusive(longPress, singleTap);
+  }, [longPress, singleTap]);
+
   return (
     <Modal
       visible={visible}
@@ -555,28 +588,39 @@ export function StoryViewerModal({
         ]}
         {...panResponder.panHandlers}
       >
-        {story.media_type === 'video' ? (
-          <Video
-            source={{ uri: story.media_url }}
-            style={{ width: SCREEN_WIDTH, height: SCREEN_HEIGHT }}
-            resizeMode="cover"
-            paused={!visible || videoPaused}
-            repeat={false}
-            onProgress={handleVideoProgress}
-            onEnd={handleVideoEnd}
-          />
-        ) : (
-          <Image
-            source={{ uri: story.media_url }}
-            style={{ width: SCREEN_WIDTH, height: SCREEN_HEIGHT }}
-            contentFit="cover"
-          />
-        )}
-
-        <View style={styles.tapZones} pointerEvents="box-none">
-          <Pressable style={styles.tapLeft} onPress={goPrev} onPressIn={handlePressIn} onPressOut={handlePressOut} />
-          <Pressable style={styles.tapRight} onPress={goNext} onPressIn={handlePressIn} onPressOut={handlePressOut} />
-        </View>
+        <GestureDetector gesture={composedGestures}>
+          <View style={StyleSheet.absoluteFillObject} pointerEvents="auto">
+            <SnapbackZoom
+              timingConfig={{ duration: 200 }}
+              onPinchStart={() => { 
+                isPinchedRef.current = true;
+                runOnJS(handlePressIn)(); 
+              }}
+              onGestureEnd={() => { 
+                isPinchedRef.current = false;
+                runOnJS(handlePressOut)(); 
+              }}
+            >
+              {story.media_type === 'video' ? (
+                <Video
+                  source={{ uri: story.media_url }}
+                  style={{ width: SCREEN_WIDTH, height: SCREEN_HEIGHT }}
+                  resizeMode="cover"
+                  paused={!visible || videoPaused}
+                  repeat={false}
+                  onProgress={handleVideoProgress}
+                  onEnd={handleVideoEnd}
+                />
+              ) : (
+                <Image
+                  source={{ uri: story.media_url }}
+                  style={{ width: SCREEN_WIDTH, height: SCREEN_HEIGHT }}
+                  contentFit="cover"
+                />
+              )}
+            </SnapbackZoom>
+          </View>
+        </GestureDetector>
 
         {/* ── Progress Bar ── */}
         {uiVisible && (
@@ -820,10 +864,17 @@ export function StoryViewerModal({
                     <View style={styles.viewerInfo}>
                       <View style={{ flexDirection: 'row', alignItems: 'center', gap: 6 }}>
                         <Text style={styles.viewerName}>{v.user.first_name || v.user.username || 'U'}</Text>
-                        {v.reaction === '❤️' && <IconSymbol name="heart.fill" size={14} color="#ef4444" />}
                       </View>
-                      <Text style={styles.viewerTime}>{timeAgo(v.viewed_at)}</Text>
                     </View>
+                    {!!v.reaction && (
+                      <View style={styles.viewerReactionWrap}>
+                        {v.reaction === '❤️' ? (
+                          <IconSymbol name="heart.fill" size={20} color="#ef4444" />
+                        ) : (
+                          <Text style={{ fontSize: 20 }}>{v.reaction}</Text>
+                        )}
+                      </View>
+                    )}
                   </View>
                 ))}
               </ScrollView>
@@ -1159,7 +1210,7 @@ const styles = StyleSheet.create({
   viewersModalOverlay: {
     flex: 1,
     justifyContent: 'flex-end',
-    backgroundColor: 'rgba(0,0,0,0.5)',
+    backgroundColor: 'transparent',
   },
   viewersModalContent: {
     backgroundColor: '#1a1a1a',
@@ -1209,6 +1260,10 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: '600',
     marginBottom: 2,
+  },
+  viewerReactionWrap: {
+    marginLeft: 'auto',
+    paddingLeft: 12,
   },
   viewerTime: {
     color: 'rgba(255,255,255,0.6)',

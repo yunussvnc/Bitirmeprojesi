@@ -4,6 +4,8 @@ from typing import Optional
 from datetime import datetime, timedelta, timezone
 import json
 import logging
+import time
+from collections import OrderedDict
 
 # pyrefly: ignore [missing-import]
 from fastapi import APIRouter, Depends, HTTPException, Query, BackgroundTasks
@@ -25,6 +27,32 @@ from app.core.redis_client import get_redis
 from config import get_settings
 
 router = APIRouter(tags=["Places"])
+
+# ── In-memory LRU cache for Google photo proxy ──
+# Her yeniden istek yerine bellekten sunar; max 150 görsel, 1 saat TTL.
+_PHOTO_CACHE_MAX = 150
+_PHOTO_CACHE_TTL = 3600  # saniye
+_photo_cache: OrderedDict[str, tuple[bytes, str, float]] = OrderedDict()  # key -> (content, content_type, timestamp)
+
+def _photo_cache_get(key: str) -> tuple[bytes, str] | None:
+    """Cache'den oku, TTL geçmişse sil."""
+    entry = _photo_cache.get(key)
+    if entry is None:
+        return None
+    content, ct, ts = entry
+    if time.time() - ts > _PHOTO_CACHE_TTL:
+        _photo_cache.pop(key, None)
+        return None
+    # LRU: en son kullanılanı sona taşı
+    _photo_cache.move_to_end(key)
+    return (content, ct)
+
+def _photo_cache_put(key: str, content: bytes, content_type: str) -> None:
+    """Cache'e yaz, limit aşılırsa en eski kaydı sil."""
+    _photo_cache[key] = (content, content_type, time.time())
+    _photo_cache.move_to_end(key)
+    while len(_photo_cache) > _PHOTO_CACHE_MAX:
+        _photo_cache.popitem(last=False)
 
 
 @router.get("/places/search", response_model=schemas.PaginatedPlaces)
@@ -480,7 +508,8 @@ def read_place(
 
 @router.get("/places/{place_id}/photo")
 async def get_place_photo(place_id: int, max_width: int = 800, db: Session = Depends(get_db)):
-    """Mekanın Google fotoğrafını güvenli bir şekilde sunar (API anahtarını gizler)."""
+    """Mekanın Google fotoğrafını güvenli bir şekilde sunar (API anahtarını gizler).
+    In-memory LRU cache ile aynı fotoğraf tekrar Google'dan çekilmez."""
     from fastapi.responses import Response
     import httpx
 
@@ -490,11 +519,19 @@ async def get_place_photo(place_id: int, max_width: int = 800, db: Session = Dep
 
     if place.photo_url.startswith("google_photo_ref:"):
         ref = place.photo_url.split("google_photo_ref:")[1]
+        cache_key = f"photo:{place_id}:{max_width}"
+
+        # ── Cache hit? ──
+        cached = _photo_cache_get(cache_key)
+        if cached:
+            return Response(
+                content=cached[0],
+                media_type=cached[1],
+                headers={"Cache-Control": "public, max-age=31536000, immutable"},
+            )
+
         settings = get_settings()
 
-        # Places API (New) ile içe aktarılan mekanların google_place_id'si "ChIJ..."
-        # ile başlar ve foto referansı da o API'nin media endpoint'ini gerektirir —
-        # eski (legacy) Photo API'nin photoreference formatıyla UYUMSUZ, 403 döner.
         actual_google_id = place.google_place_id or place.vector_id
         if (actual_google_id or "").startswith("ChIJ") and settings.GOOGLE_PLACES_API_KEY:
             google_url = (
@@ -522,6 +559,10 @@ async def get_place_photo(place_id: int, max_width: int = 800, db: Session = Dep
                     )
 
                 content_type = resp.headers.get("content-type", "image/jpeg")
+
+                # ── Cache'e kaydet ──
+                _photo_cache_put(cache_key, resp.content, content_type)
+
                 return Response(
                     content=resp.content,
                     media_type=content_type,

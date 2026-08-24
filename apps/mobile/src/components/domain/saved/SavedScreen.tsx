@@ -18,7 +18,9 @@ import {
   ListRenderItem,
   RefreshControl,
   Platform,
+  Dimensions,
 } from "react-native";
+import { Image } from "expo-image";
 import { Swipeable } from "react-native-gesture-handler";
 import { useTheme } from "@/src/hooks/useTheme";
 import { Screen } from "@/src/components/layout";
@@ -36,8 +38,14 @@ import type { Post } from "@/src/services/feedService";
 import { getSavedPlaces, getSavedPosts } from "@/src/services/savedService";
 import { LinearGradient } from "expo-linear-gradient";
 import { useTranslation } from "react-i18next";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import { useAuthStore } from "@/src/store/useAuthStore";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
+import { API_BASE_URL } from "@/src/constants/api";
+
+const GRID_COLS = 3;
+const GRID_GAP = 2;
+const SCREEN_WIDTH = Dimensions.get("window").width;
+const gridWidth = (SCREEN_WIDTH - GRID_GAP * (GRID_COLS - 1)) / GRID_COLS;
 import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 
 export default function SavedScreen() {
@@ -50,6 +58,7 @@ export default function SavedScreen() {
   const clear = useAppStore((s) => s.clearSaved);
   const remove = useAppStore((s) => s.removeSaved);
   const removePost = useAppStore((s) => s.removeSavedPost);
+  const toggleSavePost = useAppStore((s) => s.toggleSavePost);
   const postIds = useAppStore((s) => s.savedPostIds);
   const postsById = useAppStore((s) => s.savedPostsById);
   const clearSavedPosts = useAppStore((s) => s.clearSavedPosts);
@@ -440,45 +449,67 @@ export default function SavedScreen() {
           data={postItems}
           keyExtractor={(item) => String(item.id)}
           showsVerticalScrollIndicator={false}
-          renderItem={({ item }) => {
+          numColumns={GRID_COLS}
+          columnWrapperStyle={{ gap: GRID_GAP, paddingHorizontal: 0 }}
+          renderItem={({ item, index }) => {
             const isSelected = selectedIds.includes(String(item.id));
             return (
-              <Swipeable
-                key={item.id}
-                enabled={!isSelectionMode}
-                renderRightActions={(progress, dragX) => renderRightActions(progress, dragX, item.id, true)}
-                overshootRight={false}
-                friction={2}
-                rightThreshold={40}
-                failOffsetX={[-1000, 10]}
+              <TouchableOpacity
+                style={[
+                  styles.gridCell,
+                  {
+                    width: gridWidth,
+                    height: gridWidth,
+                    marginBottom: GRID_GAP,
+                    backgroundColor: colors.surface.elevated
+                  },
+                ]}
+                onPress={() => {
+                  if (isSelectionMode) {
+                    toggleSelection(item.id);
+                  } else {
+                    lightImpact();
+                    router.push(`/p/post/${item.id}?source=saved` as any);
+                  }
+                }}
+                onLongPress={() => {
+                  lightImpact();
+                  setIsSelectionMode(true);
+                  toggleSelection(item.id);
+                }}
+                activeOpacity={0.9}
               >
-                <View style={{ flexDirection: "row", alignItems: "center" }}>
-                  {isSelectionMode && (
-                    <View style={{ paddingLeft: 16 }}>
-                      <IconSymbol
-                        name={isSelected ? "checkmark.circle.fill" : "circle"}
-                        size={24}
-                        color={isSelected ? colors.accent.primary : colors.text.tertiary}
-                      />
-                    </View>
-                  )}
-                  <View style={{ flex: 1, pointerEvents: isSelectionMode ? 'none' : 'auto' }}>
-                    <FeedCard
-                      post={item}
-                      onPress={() => item.place_id && router.push(`/place/${item.place_id}` as any)}
-                      onAuthorPress={() => router.push(`/user/${item.user_id}` as any)}
-                      onPlacePress={() => item.place_id && router.push(`/place/${item.place_id}` as any)}
-                      onShare={() => setSharePost(item)}
+                {item.thumbnail ? (
+                  <Image
+                    source={{ uri: item.thumbnail.startsWith('/') ? `${API_BASE_URL}${item.thumbnail}` : item.thumbnail }}
+                    style={StyleSheet.absoluteFill}
+                    contentFit="cover"
+                    cachePolicy="memory-disk"
+                  />
+                ) : (
+                  <View style={styles.gridPlaceholder}>
+                    <IconSymbol
+                      name={item.media_type === "video" ? "play.fill" : "photo.fill"}
+                      size={28}
+                      color={colors.text.tertiary}
                     />
                   </View>
-                  {isSelectionMode && (
-                    <TouchableOpacity 
-                      style={{ position: 'absolute', top: 0, bottom: 0, left: 0, right: 0 }}
-                      onPress={() => toggleSelection(item.id)}
+                )}
+                {item.media_type === "video" && item.thumbnail && (
+                  <View style={styles.videoBadge}>
+                    <IconSymbol name="play.fill" size={12} color="#fff" />
+                  </View>
+                )}
+                {isSelectionMode && (
+                  <View style={[StyleSheet.absoluteFill, { backgroundColor: 'rgba(0,0,0,0.3)', justifyContent: 'center', alignItems: 'center' }]}>
+                    <IconSymbol
+                      name={isSelected ? "checkmark.circle.fill" : "circle"}
+                      size={32}
+                      color={isSelected ? colors.accent.primary : "rgba(255,255,255,0.7)"}
                     />
-                  )}
-                </View>
-              </Swipeable>
+                  </View>
+                )}
+              </TouchableOpacity>
             );
           }}
           ListHeaderComponent={listHeader}
@@ -594,13 +625,14 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     paddingHorizontal: 10,
+    marginTop: designSpacing.xl,
   },
   countText: {
     fontSize: 14,
     fontWeight: "600",
   },
   clearButton: {
-    width: 40,
+    minWidth: 40,
     height: 40,
     borderRadius: 20,
     alignItems: "center",
@@ -650,5 +682,21 @@ const styles = StyleSheet.create({
     height: "100%",
     borderRadius: 12,
     marginLeft: designSpacing.sm,
+  },
+  gridCell: {
+    overflow: "hidden",
+  },
+  gridPlaceholder: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  videoBadge: {
+    position: "absolute",
+    top: 8,
+    right: 8,
+    padding: 4,
+    borderRadius: 8,
+    backgroundColor: "rgba(0,0,0,0.5)",
   },
 });

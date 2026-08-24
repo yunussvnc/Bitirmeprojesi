@@ -179,18 +179,27 @@ export function PlacePickerSheet({ visible, onClose, onSelect }: PlacePickerShee
     else setLoadingMore(true);
 
     try {
-      let result;
       if (debouncedQuery) {
-        result = await searchPlaces(debouncedQuery, undefined, undefined, pageNum, PAGE_SIZE);
+        const result = await searchPlaces(debouncedQuery, undefined, undefined, pageNum, PAGE_SIZE);
+        setPlaces((prev) => (isRefresh ? result.items : [...prev, ...result.items]));
+        setHasMore(result.items.length === PAGE_SIZE);
+        setPage(pageNum);
       } else if (userLocation) {
-        result = await getNearbyPlaces(userLocation.lat, userLocation.lng, 50, pageNum, PAGE_SIZE);
+        const resp = await getNearbyPlaces(userLocation.lat, userLocation.lng, 50, pageNum, PAGE_SIZE);
+        if (resp && resp.items) {
+          setPlaces((prev) => (isRefresh ? resp.items : [...prev, ...resp.items]));
+          setHasMore(resp.items.length === PAGE_SIZE);
+          setPage(pageNum);
+        }
       } else {
-        result = await getPlaces(pageNum, PAGE_SIZE);
+        // Konum yoksa ve arama yoksa varsayılan popüler mekanları getir
+        const resp = await getPlaces(pageNum, PAGE_SIZE);
+        if (resp && resp.items) {
+          setPlaces((prev) => (isRefresh ? resp.items : [...prev, ...resp.items]));
+          setHasMore(resp.items.length === PAGE_SIZE);
+          setPage(pageNum);
+        }
       }
-
-      setPlaces((prev) => (isRefresh ? result.items : [...prev, ...result.items]));
-      setHasMore(result.items.length === PAGE_SIZE);
-      setPage(pageNum);
     } catch (error) {
       console.error("[PlacePickerSheet] Fetch Error:", error);
     } finally {

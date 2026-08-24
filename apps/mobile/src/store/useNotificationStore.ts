@@ -1,3 +1,4 @@
+
 /**
  * Notification Store (Novu Provider Pattern)
  *
@@ -30,9 +31,11 @@ type NotificationStoreState = {
   unreadCount: number;
   loading: boolean;
   followRequestsLoading: boolean;
+  hasMore: boolean;
 
   // Actions
   loadNotifications: (page?: number) => Promise<void>;
+  loadMoreNotifications: () => Promise<void>;
   loadFollowRequests: (page?: number) => Promise<void>;
   syncUnreadCount: () => Promise<void>;
   markAllRead: () => Promise<void>;
@@ -58,6 +61,7 @@ export const useNotificationStore = create<NotificationStoreState>((set, get) =>
   unreadCount: 0,
   loading: false,
   followRequestsLoading: false,
+  hasMore: false,
 
   // ── Tüm bildirimleri yükle ────────────────────────────
   async loadNotifications(page = 1) {
@@ -72,7 +76,7 @@ export const useNotificationStore = create<NotificationStoreState>((set, get) =>
         seen.add(n.id);
         return true;
       });
-      set({ notifications: unique });
+      set({ notifications: unique, hasMore: unique.length === 30 });
       // Mark all read on open
       if (unique.length > 0) {
         await markNotificationsRead();
@@ -86,6 +90,27 @@ export const useNotificationStore = create<NotificationStoreState>((set, get) =>
   },
 
   // ── Takip isteklerini yükle (Novu ayrı kanal) ────────
+
+  async loadMoreNotifications() {
+    if (get().loading || !get().hasMore) return;
+    set({ loading: true });
+    try {
+      const current = get().notifications;
+      const res = await getNotifications(2, 20); // page 2, 20 items (to reach 50)
+      const seen = new Set<number>(current.map(n => n.id));
+      const newItems = res.items.filter(n => {
+        if (seen.has(n.id)) return false;
+        seen.add(n.id);
+        return true;
+      });
+      set({ notifications: [...current, ...newItems], hasMore: false }); // max is 50 anyway
+    } catch (e) {
+      console.error('[NotificationStore] loadMoreNotifications failed:', e);
+    } finally {
+      set({ loading: false });
+    }
+  },
+
   async loadFollowRequests(page = 1) {
     if (get().followRequestsLoading) return;
     set({ followRequestsLoading: true });
@@ -231,18 +256,22 @@ export const useNotificationStore = create<NotificationStoreState>((set, get) =>
         newNotif.actor_avatar = parsed.actor_avatar;
       }
 
-      // Deduplicate by id — prevent double-add from WS + HTTP fetch
       set((s) => {
         const alreadyExists = s.notifications.some((n) => n.id === newNotif.id);
         if (alreadyExists) return {}; // no-op
+
+        // Bellek şişmesini önle — max 50 bildirim tut
+        const nextNotifs = [newNotif, ...s.notifications];
+        const trimmedNotifs = nextNotifs.length > 50 ? nextNotifs.slice(0, 50) : nextNotifs;
+
         return {
-          notifications: [newNotif, ...s.notifications],
+          notifications: trimmedNotifs,
           unreadCount: s.unreadCount + 1,
           // Follow request → also add to followRequests list (deduplicated)
           followRequests: parsed.type === 'follow_request'
             ? (s.followRequests.some((n) => n.id === newNotif.id)
-                ? s.followRequests
-                : [newNotif, ...s.followRequests])
+              ? s.followRequests
+              : [newNotif, ...s.followRequests])
             : s.followRequests,
         };
       });
@@ -259,6 +288,7 @@ export const useNotificationStore = create<NotificationStoreState>((set, get) =>
       unreadCount: 0,
       loading: false,
       followRequestsLoading: false,
+      hasMore: false,
     });
   },
 }));

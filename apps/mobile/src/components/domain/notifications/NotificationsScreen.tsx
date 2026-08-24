@@ -14,17 +14,18 @@ import {
   View,
   Text,
   StyleSheet,
-  FlatList,
   TouchableOpacity,
   RefreshControl,
   ActivityIndicator,
 } from 'react-native';
+import { Swipeable, FlatList } from 'react-native-gesture-handler';
 import Animated, { FadeIn, FadeOut, SlideInRight } from 'react-native-reanimated';
 import { Image } from 'expo-image';
-import { useRouter } from 'expo-router';
+import { useRouter, useFocusEffect } from 'expo-router';
 import { useTheme } from '@/src/hooks/useTheme';
 import { Avatar, LottieEmptyState } from '@/src/components/ui';
 import { IconSymbol } from '@/src/components/ui/icon-symbol';
+import { SuggestedUsersCarousel } from '../explore/SuggestedUsersCarousel';
 import { Screen } from '@/src/components/layout';
 import { useNotificationStore } from '@/src/store/useNotificationStore';
 import { useTranslation } from 'react-i18next';
@@ -128,16 +129,20 @@ export default function NotificationsScreen() {
     loadFollowRequests,
     acceptRequest,
     rejectRequest,
+    hasMore,
+    loadMoreNotifications
   } = useNotificationStore();
 
   const [activeTab, setActiveTab] = useState<TabId>('all');
   const [refreshing, setRefreshing] = useState(false);
 
-  // Load data on mount
-  useEffect(() => {
-    loadNotifications();
-    loadFollowRequests();
-  }, []);
+  // Load data on mount / focus
+  useFocusEffect(
+    useCallback(() => {
+      loadNotifications();
+      loadFollowRequests();
+    }, [loadNotifications, loadFollowRequests])
+  );
 
   const onRefresh = useCallback(async () => {
     lightImpact();
@@ -371,6 +376,22 @@ export default function NotificationsScreen() {
             ListEmptyComponent={
               <LottieEmptyState title={emptyTitle} description={emptyDesc} />
             }
+            ListFooterComponent={
+              <View>
+                {hasMore && (
+                  <TouchableOpacity 
+                    style={styles.loadMoreBtn} 
+                    onPress={loadMoreNotifications}
+                    disabled={loading}
+                  >
+                    <Text style={[styles.loadMoreText, { color: colors.text.primary }]}>
+                      {loading ? 'Yükleniyor...' : 'Devamını gör...'}
+                    </Text>
+                  </TouchableOpacity>
+                )}
+                <SuggestedUsersCarousel />
+              </View>
+            }
           />
         )}
       </View>
@@ -394,6 +415,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginLeft: -8, // biraz sola yasla
+  },
+  loadMoreBtn: {
+    paddingVertical: 16,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  loadMoreText: {
+    fontSize: 14,
+    fontWeight: '600',
   },
   title: {
     fontSize: 26,

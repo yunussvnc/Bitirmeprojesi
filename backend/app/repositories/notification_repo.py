@@ -89,10 +89,46 @@ class PostgresNotificationRepository(BaseNotificationRepository):
         self.db.add(n)
         self.db.commit()
         self.db.refresh(n)
+        
+        # En fazla 30 bildirim tut (eski bildirimleri sil)
+        total_count = self.db.query(models.Notification).filter(models.Notification.user_id == user_id).count()
+        if total_count > 50:
+            excess = total_count - 50
+            oldest_notifications = (
+                self.db.query(models.Notification.id)
+                .filter(models.Notification.user_id == user_id)
+                .order_by(models.Notification.created_at.asc())
+                .limit(excess)
+                .all()
+            )
+            oldest_ids = [notif[0] for notif in oldest_notifications]
+            if oldest_ids:
+                self.db.query(models.Notification).filter(
+                    models.Notification.id.in_(oldest_ids)
+                ).delete(synchronize_session=False)
+                self.db.commit()
+
         return n
 
     def get_paginated(self, user_id: int, page: int = 1, page_size: int = 20) -> Tuple[List[models.Notification], int]:
-        base = self.db.query(models.Notification).filter(models.Notification.user_id == user_id)
+        # Engellenen kullanıcıların bildirimlerini gizle (Geçmişe dönük temizlik yapılmamış olanlar için)
+        blocked_by_me = {r[0] for r in self.db.query(models.UserBlock.blocked_id).filter(models.UserBlock.blocker_id == user_id).all()}
+        blocked_me = {r[0] for r in self.db.query(models.UserBlock.blocker_id).filter(models.UserBlock.blocked_id == user_id).all()}
+        exclude_actor_ids = blocked_by_me | blocked_me
+
+        # actor_id null olabilir (sistem bildirimi). Değilse, actor is_active=True olmak zorunda.
+        base = self.db.query(models.Notification).join(
+            models.User, models.Notification.actor_id == models.User.id, isouter=True
+        ).filter(
+            models.Notification.user_id == user_id,
+            (models.Notification.actor_id == None) | (models.User.is_active == True)
+        )
+
+        if exclude_actor_ids:
+            base = base.filter(
+                (models.Notification.actor_id == None) | (~models.Notification.actor_id.in_(exclude_actor_ids))
+            )
+
         total = base.count()
         offset = (page - 1) * page_size
         items = base.order_by(models.Notification.created_at.desc()).offset(offset).limit(page_size).all()
@@ -109,10 +145,13 @@ class PostgresNotificationRepository(BaseNotificationRepository):
             )
             .subquery()
         )
-        base = self.db.query(models.Notification).filter(
+        base = self.db.query(models.Notification).join(
+            models.User, models.Notification.actor_id == models.User.id, isouter=True
+        ).filter(
             models.Notification.user_id == user_id,
             models.Notification.type == "follow_request",
             models.Notification.actor_id.in_(pending_follower_ids),
+            (models.Notification.actor_id == None) | (models.User.is_active == True)
         )
         total = base.count()
         offset = (page - 1) * page_size
@@ -163,7 +202,21 @@ class PostgresNotificationRepository(BaseNotificationRepository):
         return False
 
     def get_unread_count(self, user_id: int) -> int:
-        return self.db.query(models.Notification).filter(
+        blocked_by_me = {r[0] for r in self.db.query(models.UserBlock.blocked_id).filter(models.UserBlock.blocker_id == user_id).all()}
+        blocked_me = {r[0] for r in self.db.query(models.UserBlock.blocker_id).filter(models.UserBlock.blocked_id == user_id).all()}
+        exclude_actor_ids = blocked_by_me | blocked_me
+
+        base = self.db.query(models.Notification).join(
+            models.User, models.Notification.actor_id == models.User.id, isouter=True
+        ).filter(
             models.Notification.user_id == user_id,
             models.Notification.is_read == False,
-        ).count()
+            (models.Notification.actor_id == None) | (models.User.is_active == True)
+        )
+        
+        if exclude_actor_ids:
+            base = base.filter(
+                (models.Notification.actor_id == None) | (~models.Notification.actor_id.in_(exclude_actor_ids))
+            )
+            
+        return base.count()

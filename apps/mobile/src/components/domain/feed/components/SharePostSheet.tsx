@@ -46,6 +46,7 @@ export function SharePostSheet({ visible, onClose, post }: SharePostSheetProps) 
     const insets = useSafeAreaInsets();
     const [query, setQuery] = useState("");
     const [sentTo, setSentTo] = useState<Set<string>>(new Set());
+    const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
     const [modalVisible, setModalVisible] = useState(false);
     const { t } = useTranslation();
 
@@ -105,6 +106,7 @@ export function SharePostSheet({ visible, onClose, post }: SharePostSheetProps) 
             closingRef.current = false;
             setQuery("");
             setSentTo(new Set());
+            setSelectedIds(new Set());
         }
     }, [visible]);
 
@@ -207,11 +209,20 @@ export function SharePostSheet({ visible, onClose, post }: SharePostSheetProps) 
     const renderItem = useCallback(
         ({ item }: { item: Conversation }) => {
             const isSent = sentTo.has(item.id);
+            const isSelected = selectedIds.has(item.id);
             return (
                 <TouchableOpacity
                     style={styles.personRow}
                     onPress={() => {
-                        if (!isSent) handleSend(item);
+                        if (!isSent) {
+                            lightImpact();
+                            setSelectedIds(prev => {
+                                const next = new Set(prev);
+                                if (next.has(item.id)) next.delete(item.id);
+                                else next.add(item.id);
+                                return next;
+                            });
+                        }
                     }}
                     activeOpacity={isSent ? 1 : 0.7}
                 >
@@ -240,18 +251,18 @@ export function SharePostSheet({ visible, onClose, post }: SharePostSheetProps) 
                             <Text style={[styles.sentText, { color: "#4CAF50" }]}>{t('feed.sent_badge')}</Text>
                         </View>
                     ) : (
-                        <TouchableOpacity
-                            style={[styles.sendBtn, { backgroundColor: colors.accent.primary }]}
-                            onPress={() => handleSend(item)}
-                            activeOpacity={0.7}
-                        >
-                            <Text style={styles.sendBtnText}>{t('feed.send_btn')}</Text>
-                        </TouchableOpacity>
+                        <View style={{ paddingLeft: 16 }}>
+                            <IconSymbol
+                                name={isSelected ? "checkmark.circle.fill" : "circle"}
+                                size={26}
+                                color={isSelected ? colors.accent.primary : colors.text.tertiary}
+                            />
+                        </View>
                     )}
                 </TouchableOpacity>
             );
         },
-        [colors, sentTo, handleSend]
+        [colors, sentTo, selectedIds, handleSend]
     );
 
     return (
@@ -332,6 +343,28 @@ export function SharePostSheet({ visible, onClose, post }: SharePostSheetProps) 
                         </Text>
                     }
                 />
+
+                {/* Alt Kısım: Toplu Gönder Butonu */}
+                {selectedIds.size > 0 && (
+                    <View style={[styles.bottomBar, { paddingBottom: Math.max(insets.bottom, 16), backgroundColor: colors.background.primary, borderTopColor: colors.surface.border }]}>
+                        <TouchableOpacity
+                            style={[styles.mainSendBtn, { backgroundColor: colors.accent.primary }]}
+                            activeOpacity={0.8}
+                            onPress={() => {
+                                Array.from(selectedIds).forEach(id => {
+                                    const conv = conversations.find(c => c.id === id);
+                                    if (conv) handleSend(conv);
+                                });
+                                setSelectedIds(new Set());
+                                setTimeout(() => snapTo("closed"), 800);
+                            }}
+                        >
+                            <Text style={styles.mainSendBtnText}>
+                                {t('feed.send_btn', 'Gönder')} ({selectedIds.size})
+                            </Text>
+                        </TouchableOpacity>
+                    </View>
+                )}
             </Animated.View>
         </Modal>
     );
@@ -448,5 +481,26 @@ const styles = StyleSheet.create({
         textAlign: "center",
         paddingVertical: 24,
         fontSize: 14,
+    },
+    bottomBar: {
+        position: 'absolute',
+        bottom: 0,
+        left: 0,
+        right: 0,
+        paddingHorizontal: spacing.lg,
+        paddingTop: 16,
+        borderTopWidth: 1,
+    },
+    mainSendBtn: {
+        width: '100%',
+        paddingVertical: 14,
+        borderRadius: 12,
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    mainSendBtnText: {
+        color: '#FFF',
+        fontSize: 16,
+        fontWeight: '700',
     },
 });

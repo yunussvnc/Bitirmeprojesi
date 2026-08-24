@@ -31,21 +31,41 @@ export function getCategoryFallbackUrl(category?: string): string {
   return CATEGORY_PLACEHOLDERS[key] ?? DEFAULT_IMAGE;
 }
 
+/**
+ * Internal cache: aynı URI için aynı nesne referansı döndürür.
+ * Bu, React.memo karşılaştırmalarında gereksiz re-render'ı önler.
+ */
+const _imageSourceCache = new Map<string, { uri: string }>();
+
+function _cachedSource(url: string): { uri: string } {
+  let cached = _imageSourceCache.get(url);
+  if (!cached) {
+    cached = { uri: url };
+    _imageSourceCache.set(url, cached);
+    // Bellek taşmasını önle — max 500 giriş
+    if (_imageSourceCache.size > 500) {
+      const firstKey = _imageSourceCache.keys().next().value;
+      if (firstKey !== undefined) _imageSourceCache.delete(firstKey);
+    }
+  }
+  return cached;
+}
+
 export function getPlaceImageSource(
   place: PlaceLike | string | number
 ): ImageSourcePropType {
   if (typeof place === "object" && place !== null) {
     if ("photo_url" in place && place.photo_url) {
       const url = place.photo_url.startsWith('/') ? `${API_BASE_URL}${place.photo_url}` : place.photo_url;
-      return { uri: url };
+      return _cachedSource(url);
     }
     if ("category" in place && place.category) {
       const key = place.category.toLowerCase().trim();
       const url = CATEGORY_PLACEHOLDERS[key];
-      if (url) return { uri: url };
+      if (url) return _cachedSource(url);
     }
   }
-  return { uri: DEFAULT_IMAGE };
+  return _cachedSource(DEFAULT_IMAGE);
 }
 
 export function hasPlaceImage(

@@ -14,7 +14,9 @@ import {
   TouchableOpacity,
   Dimensions,
   ActivityIndicator,
+  Platform,
 } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Camera, useCameraDevice, useCameraPermission, useMicrophonePermission } from 'react-native-vision-camera';
 import { useTranslation } from 'react-i18next';
 import { Image as ExpoImage } from 'expo-image';
@@ -54,6 +56,8 @@ export function EmbeddedCamera({
   lastPhotoUri,
 }: EmbeddedCameraProps) {
   const { colors } = useTheme();
+  const insets = useSafeAreaInsets();
+  const safeTop = Math.max(insets.top, Platform.OS === 'ios' ? 50 : 24);
   const { t } = useTranslation();
   const { hasPermission: hasCamPermission, requestPermission: requestCamPermission } = useCameraPermission();
   const { hasPermission: hasMicPermission, requestPermission: requestMicPermission } = useMicrophonePermission();
@@ -352,10 +356,19 @@ export function EmbeddedCamera({
       )}
 
       {/* Top Controls */}
-      <View style={[styles.topControls, cameraToolbarSide === 'left' ? { left: 16, right: undefined } : { right: 16 }]}>
+      <View style={[styles.topControls, cameraToolbarSide === 'left' ? { left: 16, right: undefined } : { right: 16 }, { top: safeTop + 8 }]}>
+        {/* Effects / Filter (future feature) */}
+        <TouchableOpacity
+          style={[styles.controlBtn, { marginBottom: 12 }]}
+          onPress={() => { lightImpact(); Alert.alert('Yakında', 'Efekt ve filtre özelliği yakında aktif olacaktır.'); }}
+          activeOpacity={0.7}
+        >
+          <IconSymbol name="sparkles" size={20} color="#fff" />
+        </TouchableOpacity>
+
         {/* Flash */}
         <TouchableOpacity
-          style={styles.controlBtn}
+          style={[styles.controlBtn, { marginBottom: 12 }]}
           onPress={handleFlashToggle}
           activeOpacity={0.7}
         >
@@ -365,7 +378,7 @@ export function EmbeddedCamera({
         {/* Timer (future feature) */}
         <TouchableOpacity
           style={styles.controlBtn}
-          onPress={() => { lightImpact(); Alert.alert('Yak\u0131nda', 'Zamanlay\u0131c\u0131 \u00f6zelli\u011fi yak\u0131nda aktif olacakt\u0131r.'); }}
+          onPress={() => { lightImpact(); Alert.alert('Yakında', 'Zamanlayıcı özelliği yakında aktif olacaktır.'); }}
           activeOpacity={0.7}
         >
           <IconSymbol name="timer" size={20} color="#fff" />
@@ -485,7 +498,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 16,
     right: 16,
-    gap: 12,
     zIndex: 10,
   },
   controlBtn: {

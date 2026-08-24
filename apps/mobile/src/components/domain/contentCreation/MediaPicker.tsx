@@ -323,7 +323,7 @@ export function MediaPicker({
       <StatusBar barStyle="light-content" />
 
       {/* Close button (floating) */}
-      <View style={[styles.storyTopBar, { paddingTop: insets.top + 8 }]}>
+      <View style={[styles.storyTopBar, { paddingTop: insets.top + 8 }]} pointerEvents="box-none">
         <TouchableOpacity
           style={styles.floatingCloseBtn}
           onPress={onClose}
@@ -331,18 +331,6 @@ export function MediaPicker({
         >
           <IconSymbol name="xmark" size={20} color="#fff" />
         </TouchableOpacity>
-
-        <View style={styles.storyTopRight}>
-          {mode === 'camera' && (
-            <TouchableOpacity
-              style={styles.floatingIconBtn}
-              onPress={() => { lightImpact(); Alert.alert('Yakında', 'Efekt ve filtre özelliği yakında aktif olacaktır.'); }}
-              activeOpacity={0.7}
-            >
-              <IconSymbol name="sparkles" size={18} color="#fff" />
-            </TouchableOpacity>
-          )}
-        </View>
       </View>
 
       {/* Main Content */}

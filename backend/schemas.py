@@ -1102,3 +1102,19 @@ class SystemHealthResponse(BaseModel):
     status: str
     services: Dict[str, SystemHealthItem]
 
+
+# --- KİŞİ ÖNERİLERİ & REHBER ---
+
+class ContactItem(BaseModel):
+    name: Optional[str] = None
+    phone: str
+
+class ContactSyncRequest(BaseModel):
+    contacts: List[ContactItem]
+
+class RecommendedUser(UserSummary):
+    recommendation_reason: str
+
+class RecommendationResponse(BaseModel):
+    items: List[RecommendedUser]
+

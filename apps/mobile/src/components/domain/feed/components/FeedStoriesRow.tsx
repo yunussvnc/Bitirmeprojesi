@@ -174,10 +174,18 @@ export function FeedStoriesRow({ filter }: FeedStoriesRowProps) {
     (groupKey: string, tapIndex: number) => {
       lightImpact();
       const groupsFromTap = sortedGroups.slice(tapIndex);
-      const groupKeysFromTap = new Set(groupsFromTap.map((g) => g.groupKey));
-      const filtered = stories.filter((s) => groupKeysFromTap.has(getGroupKey(s)));
-      if (filtered.length > 0) {
-        viewerStoriesRef.current = filtered;
+      
+      const newFiltered: Story[] = [];
+      for (const group of groupsFromTap) {
+        // stories might be unsorted or desc. We sort it so it plays chronologically (oldest first).
+        const groupStories = stories
+          .filter((s) => getGroupKey(s) === group.groupKey)
+          .sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime());
+        newFiltered.push(...groupStories);
+      }
+      
+      if (newFiltered.length > 0) {
+        viewerStoriesRef.current = newFiltered;
         setStoryViewerIndex(0);
       }
     },

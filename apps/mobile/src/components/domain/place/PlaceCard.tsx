@@ -158,7 +158,7 @@ const PlaceCardComponent = function PlaceCard({
       activeOpacity={0.9}
     >
       {/* ── Image section ── */}
-      <View style={styles.imageContainer}>
+      <View style={[styles.imageContainer, { backgroundColor: colors.surface.elevated }]}>
         {imagePlaceholder ? (
           <View style={[styles.imagePlaceholder, { backgroundColor: colors.surface.elevated }]}>
             <IconSymbol name="mappin.and.ellipse" size={32} color={colors.text.tertiary} />
@@ -174,6 +174,9 @@ const PlaceCardComponent = function PlaceCard({
               contentFit="cover"
               cachePolicy="memory-disk"
               recyclingKey={placeId ? `place-img-${placeId}` : undefined}
+              transition={300}
+              placeholder={{ uri: undefined }}
+              placeholderContentFit="cover"
               onError={handleImageError}
             />
             {/* Bottom gradient so location badge is readable */}
@@ -261,7 +264,17 @@ const PlaceCardComponent = function PlaceCard({
   );
 };
 
-export const PlaceCard = React.memo(PlaceCardComponent);
+export const PlaceCard = React.memo(PlaceCardComponent, (prev, next) =>
+  prev.placeId === next.placeId &&
+  prev.title === next.title &&
+  prev.subtitle === next.subtitle &&
+  prev.category === next.category &&
+  prev.imagePlaceholder === next.imagePlaceholder &&
+  prev.isRecommended === next.isRecommended &&
+  prev.hasMenu === next.hasMenu &&
+  prev.image === next.image &&
+  prev.distance_m === next.distance_m
+);
 
 const styles = StyleSheet.create({
   card: {

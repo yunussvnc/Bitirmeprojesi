@@ -70,10 +70,18 @@ export async function getCurrentLocation(): Promise<PlaceLocation | null> {
       return null;
     }
 
-    // Get current location
-    const location = await Location.getCurrentPositionAsync({
-      accuracy: Location.Accuracy.Balanced,
-    });
+    // First try to get last known location for speed
+    let location = await Location.getLastKnownPositionAsync();
+    
+    // If no last known location, request current with a timeout
+    if (!location) {
+      location = await Promise.race([
+        Location.getCurrentPositionAsync({ accuracy: Location.Accuracy.Balanced }),
+        new Promise<null>((resolve) => setTimeout(() => resolve(null), 3000))
+      ]);
+    }
+
+    if (!location) return null;
 
     return {
       latitude: location.coords.latitude,

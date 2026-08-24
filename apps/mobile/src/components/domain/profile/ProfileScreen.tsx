@@ -20,6 +20,8 @@ import { useTabBarVisibility } from "@/src/components/layout/TabBarVisibilityCon
 import { getUserStories, type Story } from "@/src/services/storyService";
 import { StoryViewerModal } from "@/src/components/domain/explore/StoryViewerModal";
 import { LinearGradient } from "expo-linear-gradient";
+import { useUploadPipelineStore } from "@/src/store/useUploadPipelineStore";
+import { CustomAlert as CustomAlertComponent } from '@/src/components/ui/CustomAlert';
 
 const STORY_GRADIENT: [string, string, ...string[]] = ["#4ade80", "#22c55e", "#16a34a", "#15803d"];
 
@@ -49,6 +51,13 @@ export default function ProfileScreen() {
   const deletedPostIds = useAppStore((s) => s.deletedPostIds);
   const visiblePosts = React.useMemo(() => posts.filter((p) => !deletedPostIds.includes(p.id)), [posts, deletedPostIds]);
   const visibleTaggedPosts = React.useMemo(() => taggedPosts.filter((p) => !deletedPostIds.includes(p.id)), [taggedPosts, deletedPostIds]);
+  const sortedStories = React.useMemo(() => {
+    return [...stories].sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime());
+  }, [stories]);
+
+  const isUploadingStory = useUploadPipelineStore((s) => 
+    s.jobs.some((j) => j.contentType === 'story' && j.stage !== 'done' && j.stage !== 'error')
+  );
 
   // initialLoading sadece ilk açılışta true — sonraki focus'larda UI gizlenmez
   const hasLoadedOnce = useRef(false);
@@ -116,6 +125,16 @@ export default function ProfileScreen() {
       return () => task.cancel();
     }, [loadProfile])
   );
+
+  // Hikaye yükleme pipeline tamamlanınca otomatik yenile
+  useEffect(() => {
+    const unsub = useUploadPipelineStore.getState().onUploadDone((contentType) => {
+      if (contentType === 'story') {
+        setTimeout(() => loadProfile(true), 1000);
+      }
+    });
+    return unsub;
+  }, [loadProfile]);
 
   const handleRefresh = useCallback(() => {
     lightImpact();
@@ -218,6 +237,8 @@ export default function ProfileScreen() {
               lightImpact();
               if (stories.length > 0) {
                 setStoryViewerVisible(true);
+              } else if (isUploadingStory) {
+                Alert.alert(t('profile.uploading', 'Yükleniyor'), t('profile.uploading_desc', 'Hikayeniz şu anda yükleniyor, lütfen bekleyin.'));
               } else {
                 router.push('/create-story' as any);
               }
@@ -439,6 +460,16 @@ export default function ProfileScreen() {
         })()}
 
       </ScrollView>
+
+      {storyViewerVisible && (
+        <StoryViewerModal
+          stories={sortedStories}
+          initialIndex={0}
+          visible={storyViewerVisible}
+          onClose={() => setStoryViewerVisible(false)}
+          currentUserId={authUser?.id}
+        />
+      )}
     </View>
   );
 }

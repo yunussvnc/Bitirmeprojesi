@@ -98,6 +98,9 @@ def create_story(
                     }),
                 )
                 db.add(notif)
+                db.commit()
+                db.refresh(notif)
+                crud.limit_user_notifications(db, uid)
         db.commit()
 
     return _story_to_schema(story, db, current_user.id)
@@ -279,6 +282,9 @@ def record_story_view_endpoint(
     if not story:
         raise HTTPException(status_code=404, detail="Hikaye bulunamadı.")
     
+    if story.user_id == current_user.id:
+        return {"ok": True, "recorded": False}
+    
     check_story_view_access(db, story, current_user.id)
     recorded = crud.record_story_view(db, story_id, current_user.id, source=source)
     return {"ok": True, "recorded": recorded}
@@ -344,6 +350,9 @@ def get_story_viewers_endpoint(
     place_visits = 0
 
     for v in views:
+        if v.viewer_id == story.user_id:
+            continue
+        
         reaction_row = db.query(models.StoryReaction).filter(
             models.StoryReaction.story_id == story_id,
             models.StoryReaction.user_id == v.viewer_id
@@ -489,6 +498,8 @@ async def react_to_story(
     )
     db.add(notif)
     db.commit()
+    db.refresh(notif)
+    crud.limit_user_notifications(db, story.user_id)
 
     # WebSocket ile anlık bildirim
     from app.websocket.manager import manager

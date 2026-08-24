@@ -37,8 +37,13 @@ import { useAppStore } from "@/src/store/useAppStore";
 import { getAllPlaces, type Place } from "@/src/services/mekanService";
 import { useTranslation } from "react-i18next";
 import { spacing as designSpacing } from "@/src/constants/design";
+import { Dimensions } from "react-native";
 
 const PAGE_SIZE = 12;
+
+const SCREEN_WIDTH = Dimensions.get('window').width;
+const ITEM_WIDTH = SCREEN_WIDTH - 32; // paddingHorizontal: 16
+const CARD_HEIGHT = (ITEM_WIDTH * (9 / 16)) + 145;
 
 export default function ClusterPlacesScreen() {
   const { colors, isDark } = useTheme();
@@ -70,6 +75,7 @@ export default function ClusterPlacesScreen() {
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
   const [selectedStatuses, setSelectedStatuses] = useState<PlaceStatusType[]>([]);
   const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
+  const [isFetchingMore, setIsFetchingMore] = useState(false);
 
   // Filter places that belong to this cluster (calculate nearest N places)
   const clusterPlaces = useMemo(() => {
@@ -203,10 +209,14 @@ export default function ClusterPlacesScreen() {
   const hasMore = visibleCount < filteredPlaces.length;
 
   const loadMore = useCallback(() => {
-    if (hasMore) {
-      setVisibleCount((prev) => prev + PAGE_SIZE);
+    if (hasMore && !isFetchingMore) {
+      setIsFetchingMore(true);
+      setTimeout(() => {
+        setVisibleCount((prev) => prev + PAGE_SIZE);
+        setIsFetchingMore(false);
+      }, 500); // 500ms artificial delay for smoother UX
     }
-  }, [hasMore]);
+  }, [hasMore, isFetchingMore]);
 
   const handlePlacePress = useCallback((place: Place) => {
     lightImpact();
@@ -244,13 +254,13 @@ export default function ClusterPlacesScreen() {
   );
 
   const renderFooter = useCallback(() => {
-    if (!hasMore) return null;
+    if (!hasMore || !isFetchingMore) return null;
     return (
       <View style={styles.footer}>
         <ActivityIndicator size="small" color={colors.accent.primary} />
       </View>
     );
-  }, [hasMore, colors.accent.primary]);
+  }, [hasMore, isFetchingMore, colors.accent.primary]);
 
   // Available categories from cluster places
   const availableCategories = useMemo(() => {
@@ -472,7 +482,7 @@ export default function ClusterPlacesScreen() {
             keyExtractor={(item) => String(item.id)}
             renderItem={renderItem}
             // @ts-ignore
-            estimatedItemSize={280}
+            estimatedItemSize={CARD_HEIGHT}
             showsVerticalScrollIndicator={false}
             contentContainerStyle={styles.listContent}
             ItemSeparatorComponent={() => <View style={{ height: 16 }} />}

@@ -21,6 +21,7 @@ import { IconSymbol } from "@/src/components/ui/icon-symbol";
 import { FeedCard } from "./components/FeedCard";
 import { CommentBottomSheet } from "./components/CommentBottomSheet";
 import { PostOptionsSheet } from "./components/PostOptionsSheet";
+import { SharePostSheet } from "./components/SharePostSheet";
 import { getPost, deletePost, toggleLike, type Post } from "@/src/services/feedService";
 import { getUserPosts } from "@/src/services/userService";
 import { useAuthStore } from "@/src/store/useAuthStore";
@@ -33,7 +34,7 @@ import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
 export default function PostDetailScreen() {
   const { colors } = useTheme();
   const insets = useSafeAreaInsets();
-  const { postId } = useLocalSearchParams<{ postId: string }>();
+  const { postId, source } = useLocalSearchParams<{ postId: string; source?: string }>();
   const { t } = useTranslation();
   const authUser = useAuthStore((s) => s.user);
 
@@ -43,12 +44,13 @@ export default function PostDetailScreen() {
   const [optionsOpen, setOptionsOpen] = useState(false);
   const [commentPostId, setCommentPostId] = useState<number | null>(null);
   const [optionsPost, setOptionsPost] = useState<Post | null>(null);
+  const [sharePost, setSharePost] = useState<Post | null>(null);
   const [listReady, setListReady] = useState(false);
 
   const flatListRef = useRef<FlatList>(null);
   const deletedPostIds = useAppStore((s) => s.deletedPostIds);
   const toggleSavePost = useAppStore((s) => s.toggleSavePost);
-  const isPostSaved = useAppStore((s) => s.isPostSaved);
+  const savedPostIds = useAppStore((s) => s.savedPostIds);
   const visiblePosts = React.useMemo(() => posts.filter((p) => !deletedPostIds.includes(p.id)), [posts, deletedPostIds]);
 
   const initialIndex = React.useMemo(() => {
@@ -61,6 +63,14 @@ export default function PostDetailScreen() {
     if (!postId) return;
     setLoading(true);
     try {
+      if (source === "saved") {
+        const savedPostsObj = useAppStore.getState().savedPostsById;
+        const savedArray = Object.values(savedPostsObj) as Post[];
+        // Kaydedilenleri ters çeviriyoruz ki en son kaydedilen en üstte görünsün
+        setPosts(savedArray.reverse());
+        return;
+      }
+
       const currentPost = await getPost(parseInt(postId, 10));
       // Tıklanan postun sahibinin son 50 gönderisini getir (akış şeklinde görebilmesi için)
       const userPostsData = await getUserPosts(currentPost.user_id, 1, 50);
@@ -70,7 +80,7 @@ export default function PostDetailScreen() {
     } finally {
       setLoading(false);
     }
-  }, [postId]);
+  }, [postId, source]);
 
   useEffect(() => {
     loadPosts();
@@ -201,6 +211,7 @@ export default function PostDetailScreen() {
       <FlatList
         ref={flatListRef}
         data={visiblePosts}
+        extraData={[savedPostIds]}
         keyExtractor={(item) => item.id.toString()}
         // initialScrollIndex kaldırıldı, çünkü dinamik yüksekliklerde hatalı scroll'a neden oluyor.
         // Bunun yerine manuel scroll yapıyoruz (viewPosition: 0 = en tepeye hizala)
@@ -226,12 +237,11 @@ export default function PostDetailScreen() {
         renderItem={({ item }) => {
           const isOwnPost = item.user_id === authUser?.id;
           return (
-            <View style={{ marginBottom: 16 }}>
+            <View style={{ marginBottom: 48 }}>
               <FeedCard
                 post={item}
-                isSaved={isPostSaved(item.id)}
+                isSaved={savedPostIds.includes(String(item.id))}
                 onSave={() => {
-                  const wasSaved = isPostSaved(item.id);
                   toggleSavePost(item);
                   lightImpact();
                 }}
@@ -240,12 +250,7 @@ export default function PostDetailScreen() {
                   setCommentPostId(item.id);
                   setCommentOpen(true);
                 }}
-                onShare={async () => {
-                  try {
-                    const label = item.place?.name || item.author?.username || item.author?.first_name || 'gönderi';
-                    await Share.share({ message: `${label} paylaşımına göz at!` });
-                  } catch {}
-                }}
+                onShare={() => setSharePost(item)}
                 onOptionsPress={() => {
                   if (isOwnPost) {
                     handleDelete(item);
@@ -289,6 +294,12 @@ export default function PostDetailScreen() {
         visible={optionsOpen}
         onClose={() => setOptionsOpen(false)}
         onSelect={handleOptionsSelect as any}
+      />
+
+      <SharePostSheet
+        visible={!!sharePost}
+        onClose={() => setSharePost(null)}
+        post={sharePost}
       />
     </View>
   );

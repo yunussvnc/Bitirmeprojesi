@@ -10,7 +10,7 @@ from fastapi import APIRouter, Depends, HTTPException, Query
 # pyrefly: ignore [missing-import]
 from fastapi.concurrency import run_in_threadpool
 # pyrefly: ignore [missing-import]
-from sqlalchemy import case, or_, and_
+from sqlalchemy import case, or_, and_, func, desc
 # pyrefly: ignore [missing-import]
 from sqlalchemy.orm import Session
 
@@ -58,8 +58,9 @@ def search_users(
     # ── 3. Temel sorgu: aktif + normal kullanıcılar ──
     base_query = db.query(models.User).filter(
         models.User.is_active == True,
-        ~models.User.email.startswith("serpapi_"),  # Google'dan gelen sahte kullanıcıları (bot) gizle
-        ~models.User.email.startswith("google_review_"),  # Diğer Google review dummy kullanıcılarını gizle
+        models.User.password_hash.startswith("$2"),  # Yalnızca geçerli bcrypt şifresi olan GERÇEK kullanıcıları göster (tüm fake/stub kullanıcıları filtreler)
+        ~models.User.email.startswith("serpapi_"),  # Ekstra güvenlik
+        ~models.User.email.startswith("google_review_"),
         ~models.User.email.endswith("@reviews.placeholder"),
         ~models.User.email.endswith("@placeholder.com")
     )
@@ -264,23 +265,35 @@ def get_user_profile(
         if block_exists:
             raise HTTPException(status_code=404, detail="Kullanıcı bulunamadı.")
             
-    followers_count = db.query(models.Follow).filter(
-        models.Follow.following_id == user_id,
-        models.Follow.status == "accepted"
-    ).count()
-    following_count = db.query(models.Follow).filter(
-        models.Follow.follower_id == user_id,
-        models.Follow.status == "accepted"
-    ).count()
-    # Karşılıklı takip (arkadaş) sayısı: subquery ile tam SQL'de hesaplanır
-    following_ids_subq = db.query(models.Follow.following_id).filter(
-        models.Follow.follower_id == user_id,
-        models.Follow.status == "accepted"
-    ).subquery()
-    friends_count = db.query(models.Follow).filter(
+    followers_count = db.query(models.Follow).join(
+        models.User, models.User.id == models.Follow.follower_id
+    ).filter(
         models.Follow.following_id == user_id,
         models.Follow.status == "accepted",
-        models.Follow.follower_id.in_(following_ids_subq)
+        models.User.is_active == True
+    ).count()
+    following_count = db.query(models.Follow).join(
+        models.User, models.User.id == models.Follow.following_id
+    ).filter(
+        models.Follow.follower_id == user_id,
+        models.Follow.status == "accepted",
+        models.User.is_active == True
+    ).count()
+    # Karşılıklı takip (arkadaş) sayısı: subquery ile tam SQL'de hesaplanır
+    following_ids_subq = db.query(models.Follow.following_id).join(
+        models.User, models.User.id == models.Follow.following_id
+    ).filter(
+        models.Follow.follower_id == user_id,
+        models.Follow.status == "accepted",
+        models.User.is_active == True
+    ).subquery()
+    friends_count = db.query(models.Follow).join(
+        models.User, models.User.id == models.Follow.follower_id
+    ).filter(
+        models.Follow.following_id == user_id,
+        models.Follow.status == "accepted",
+        models.Follow.follower_id.in_(following_ids_subq),
+        models.User.is_active == True
     ).count()
     place_follow_count = db.query(models.PlaceFollow).filter(
         models.PlaceFollow.user_id == user_id
@@ -757,3 +770,137 @@ def get_user_tagged_posts(
         items.append(_post_to_schema(p, db, current_uid))
         
     return {"items": items, "total": total, "page": page, "page_size": page_size}
+
+# --- CONTACT SYNC & RECOMMENDATIONS ---
+
+import hashlib
+
+def _hash_phone(phone: str) -> str:
+    # Normalize by removing non-digits
+    import re
+    digits = re.sub(r'\D', '', phone)
+    if not digits:
+        return ""
+    # Simple SHA-256 hash of the digits
+    return hashlib.sha256(digits.encode('utf-8')).hexdigest()
+
+
+@router.post("/me/contacts/sync")
+def sync_contacts(
+    req: schemas.ContactSyncRequest,
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(get_current_user),
+):
+    """Rehber eşitleme. Telefon numaralarını hash'leyerek DB'ye kaydeder ve eşleşen kullanıcıları günceller."""
+    # Tüm kayıtlı kullanıcıların hashlenmiş telefon numaralarını bir kerede çekebiliriz
+    # Veya direkt her biri için eşleşme arayabiliriz.
+    
+    # 1. Kullanıcının mevcut kişilerini sil (temiz sync)
+    db.query(models.UserContact).filter(models.UserContact.user_id == current_user.id).delete()
+    
+    contacts_to_insert = []
+    
+    # Tüm kayıtlı telefon numaralarını map olarak çekelim
+    all_users_with_phone = db.query(models.User.id, models.User.phone_number).filter(models.User.phone_number != None).all()
+    phone_to_user_id = {}
+    for uid, phone in all_users_with_phone:
+        hashed = _hash_phone(phone)
+        if hashed:
+            phone_to_user_id[hashed] = uid
+
+    added_hashes = set()
+    for item in req.contacts:
+        p_hash = _hash_phone(item.phone)
+        if not p_hash or p_hash in added_hashes:
+            continue
+        added_hashes.add(p_hash)
+        
+        matched_id = phone_to_user_id.get(p_hash)
+        
+        contact = models.UserContact(
+            user_id=current_user.id,
+            contact_name=item.name,
+            phone_hash=p_hash,
+            matched_user_id=matched_id if matched_id != current_user.id else None
+        )
+        contacts_to_insert.append(contact)
+        
+    db.add_all(contacts_to_insert)
+    
+    # Kullanıcının flag'ini güncelle
+    current_user.has_synced_contacts = True
+    db.commit()
+    return {"message": "Contacts synced successfully", "count": len(contacts_to_insert)}
+
+
+@router.get("/me/recommendations", response_model=schemas.RecommendationResponse)
+def get_friend_recommendations(
+    db: Session = Depends(get_db),
+    current_user: models.User = Depends(get_current_user),
+):
+    """Kullanıcıya rehberinden ve ortak arkadaşlardan kişi önerir."""
+    recommended = []
+    seen_ids = set([current_user.id])
+    
+    # Takip ettiklerini listele (onları önermeyelim)
+    following_ids = [
+        f.following_id for f in 
+        db.query(models.Follow.following_id).filter(models.Follow.follower_id == current_user.id).all()
+    ]
+    seen_ids.update(following_ids)
+    
+    # 1. Rehber eşleşmeleri
+    contact_matches = db.query(models.UserContact).filter(
+        models.UserContact.user_id == current_user.id,
+        models.UserContact.matched_user_id != None
+    ).all()
+    
+    for c in contact_matches:
+        if c.matched_user_id not in seen_ids:
+            u = db.query(models.User).filter(models.User.id == c.matched_user_id).first()
+            if u:
+                recommended.append({
+                    "user": u,
+                    "reason": "Rehberinizde ekli"
+                })
+                seen_ids.add(u.id)
+                
+    # 2. Ortak arkadaşlar (Takip ettiklerinin takip ettikleri)
+    if following_ids:
+        # Ortak arkadaş sayısına göre grupla
+        mutuals = db.query(models.Follow.following_id, func.count(models.Follow.following_id).label("c")).filter(
+            models.Follow.follower_id.in_(following_ids),
+            ~models.Follow.following_id.in_(seen_ids)
+        ).group_by(models.Follow.following_id).order_by(desc("c")).limit(10).all()
+        
+        for mutual_id, count in mutuals:
+            u = db.query(models.User).filter(models.User.id == mutual_id).first()
+            if u:
+                recommended.append({
+                    "user": u,
+                    "reason": f"{count} ortak arkadaşınız var"
+                })
+                seen_ids.add(u.id)
+                
+    # Model dönüşümü
+    items = []
+    for r in recommended:
+        u = r["user"]
+        # Takip durumu (0: takip etmiyor, çünkü yukarıda eledik)
+        prefs = db.query(models.UserPreferences).filter(models.UserPreferences.user_id == u.id).first()
+        is_private = prefs.is_private_account if prefs else False
+        
+        item = schemas.RecommendedUser(
+            id=u.id,
+            username=u.username,
+            first_name=u.first_name,
+            last_name=u.last_name,
+            avatar_url=u.avatar_url,
+            is_following=False,
+            follow_status=None,
+            is_private=is_private,
+            recommendation_reason=r["reason"]
+        )
+        items.append(item)
+        
+    return schemas.RecommendationResponse(items=items)

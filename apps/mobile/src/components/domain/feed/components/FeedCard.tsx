@@ -247,14 +247,23 @@ const FeedCardComponent = ({
                   return (
                     <View key={idx} style={{ width: imageWidth, height: imageHeight, alignItems: "center", justifyContent: "center" }}>
                       {isVid ? (
-                        <Video
-                          source={{ uri: media.media_url }}
-                          style={{ width: imageWidth, height: imageHeight }}
-                          resizeMode="cover"
-                          repeat={true}
-                          muted={isMuted}
-                          paused={!isViewable || isManuallyPaused}
-                        />
+                        isViewable ? (
+                          <Video
+                            source={{ uri: media.media_url }}
+                            style={{ width: imageWidth, height: imageHeight }}
+                            resizeMode="cover"
+                            repeat={true}
+                            muted={isMuted}
+                            paused={isManuallyPaused}
+                          />
+                        ) : (
+                          <Image
+                            source={{ uri: media.thumbnail_url || media.media_url }}
+                            style={{ width: imageWidth, height: imageHeight }}
+                            contentFit="cover"
+                            cachePolicy="memory-disk"
+                          />
+                        )
                       ) : (
                         <Image
                           source={{ uri: media.media_url }}
@@ -304,14 +313,18 @@ const FeedCardComponent = ({
               >
                 {displayUrl ? (
                   isVideo ? (
-                    <Video
-                      source={{ uri: displayUrl }}
-                      style={{ width: imageWidth, height: imageHeight }}
-                      resizeMode="cover"
-                      repeat={true}
-                      muted={isMuted}
-                      paused={!isViewable || isManuallyPaused}
-                    />
+                    isViewable ? (
+                      <Video
+                        source={{ uri: displayUrl }}
+                        style={{ width: imageWidth, height: imageHeight }}
+                        resizeMode="cover"
+                        repeat={true}
+                        muted={isMuted}
+                        paused={isManuallyPaused}
+                      />
+                    ) : (
+                      <Image source={{ uri: firstMedia?.thumbnail_url || displayUrl }} style={{ width: imageWidth, height: imageHeight }} contentFit="cover" cachePolicy="memory-disk" />
+                    )
                   ) : (
                     <Image source={{ uri: displayUrl }} style={{ width: imageWidth, height: imageHeight }} contentFit="cover" cachePolicy="memory-disk" />
                   )

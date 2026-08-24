@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect, useCallback, useRef } from "react";
 import {
   View,
   Text,
@@ -12,7 +12,8 @@ import {
   Pressable,
   ActivityIndicator,
   Share,
-  InteractionManager
+  InteractionManager,
+  Dimensions
 } from "react-native";
 import { Image } from "expo-image";
 import { useLocalSearchParams, useRouter, useFocusEffect, Stack } from "expo-router";
@@ -44,9 +45,12 @@ import debounce from 'lodash/debounce';
 import { ProfileOptionsSheet } from "./components/ProfileOptionsSheet";
 import { NotificationSettingsSheet } from "./components/NotificationSettingsSheet";
 import { CustomAlert as Alert } from '@/src/components/ui/CustomAlert';
+import { LottieEmptyState } from "@/src/components/ui/LottieEmptyState";
+import { ContactSyncPromptCard } from '../explore/ContactSyncPromptCard';
 
 const GRID_GAP = 14;
 const GRID_COLS = 2;
+const { width: SCREEN_WIDTH } = Dimensions.get("window");
 
 export default function UserProfileScreen() {
   const { id } = useLocalSearchParams<{ id: string }>();
@@ -63,6 +67,8 @@ export default function UserProfileScreen() {
   >([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
+  
+  const isNavigating = useRef(false);
   const [optionsSheetVisible, setOptionsSheetVisible] = useState(false);
   const [notificationSheetVisible, setNotificationSheetVisible] = useState(false);
   const [followLoading, setFollowLoading] = useState(false);
@@ -197,6 +203,9 @@ export default function UserProfileScreen() {
 
   const handleMessagePress = useCallback(async () => {
     if (!profile) return;
+    if (isNavigating.current) return;
+    isNavigating.current = true;
+    
     lightImpact();
     setMessageLoading(true);
     try {
@@ -204,8 +213,13 @@ export default function UserProfileScreen() {
       const name = encodeURIComponent(res.name);
       const avatar = encodeURIComponent(res.avatar_url || '');
       router.push(`/chat/${res.conversation_id}?name=${name}&avatar=${avatar}&targetUserId=${profile.id}` as any);
+      
+      setTimeout(() => {
+        isNavigating.current = false;
+      }, 1000);
     } catch (e) {
       handleApiError(e);
+      isNavigating.current = false;
     } finally {
       setMessageLoading(false);
     }
@@ -372,6 +386,8 @@ export default function UserProfileScreen() {
             </TouchableOpacity>
           </View>
         )}
+
+        <ContactSyncPromptCard />
 
         {/* ── Stats Card ── */}
         <View style={[styles.statsContainer, { backgroundColor: colors.surface.elevated, shadowColor: colors.text.primary }]}>

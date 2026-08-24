@@ -161,6 +161,9 @@ export default function PlaceDetailScreen({
   const [showPostsSection, setShowPostsSection] = useState(false);
   const [selectedStoryIndex, setSelectedStoryIndex] = useState(0);
   const [showStoriesModal, setShowStoriesModal] = useState(false);
+  const sortedStories = useMemo(() => {
+    return [...(placeStories || [])].sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime());
+  }, [placeStories]);
 
   const screenRef = useRef<ScreenRef>(null);
   useScrollToTop(screenRef as any);
@@ -1395,8 +1398,8 @@ export default function PlaceDetailScreen({
       {/* Story Viewer Modal */}
       {placeStories && placeStories.length > 0 && (
         <StoryViewerModal
-          stories={placeStories}
-          initialIndex={selectedStoryIndex}
+          stories={sortedStories}
+          initialIndex={0}
           visible={showStoriesModal}
           onClose={() => setShowStoriesModal(false)}
           currentUserId={currentUser?.id}

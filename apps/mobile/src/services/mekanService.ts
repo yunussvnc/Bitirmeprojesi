@@ -181,7 +181,8 @@ export async function getPlaces(page = 1, pageSize = 20): Promise<PaginatedPlace
 
 export async function getAllPlaces(): Promise<Place[]> {
   try {
-    const data = await apiGet<any>('/places/lite?limit=6000');
+    // 6000 -> 500'e düşürüldü. Çok fazla mekanın bellekte tutulması uygulamanın donmasına yol açıyordu.
+    const data = await apiGet<any>('/places/lite?limit=500');
     const arr = Array.isArray(data?.items) ? data.items : Array.isArray(data) ? data : [];
     logger.log(`[getAllPlaces] Loaded ${arr.length} places`);
     return arr.map(normalizePlace);

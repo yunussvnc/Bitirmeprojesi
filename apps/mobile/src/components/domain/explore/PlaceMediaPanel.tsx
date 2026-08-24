@@ -449,8 +449,11 @@ export function PlaceMediaPanel({ place, onClose }: PlaceMediaPanelProps) {
                     style={styles.placeStoryItem}
                     onPress={() => {
                       lightImpact();
-                      viewerStoriesRef.current = sortedStories.slice(idx);
-                      setStoryViewerIndex(0);
+                      // Sort chronologically (oldest first)
+                      viewerStoriesRef.current = sortedStories
+                        .slice(0, idx + 1)
+                        .sort((a, b) => new Date(a.created_at).getTime() - new Date(b.created_at).getTime());
+                      setStoryViewerIndex(viewerStoriesRef.current.length - 1);
                     }}
                     activeOpacity={0.85}
                   >
