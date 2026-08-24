@@ -565,3 +565,12 @@ Kaynakta görünür menü yayın tarihi bulunmadı; `verifiedAt` 24 Ağustos 202
 Hentzer ID 796 `NOM BURGER`, `Caferağa, Leylek Sok. No:15/B, 34710 Kadıköy/İstanbul`; Google place ID `0x14cab93d112c5aa3:0x8c1c5d7a7cf0d521`. Menu-TR kaydı `https://www.menu-tr.com/istanbul/kadikoy/hamburger-restorani/nom-burger` aynı exact adresi, `(0216) 784 70 07` telefonunu, resmi Instagram `@nomburgermoda` bağlantısını ve aynı Google Maps kimliğini yayımlıyor.
 
 Yemeksepeti `l2z2` canlı menüsü `https://www.yemeksepeti.com/en/restaurant/l2z2/nom-burger-l2z2` Burgers, Side Dishes, Sauces ve Beverages kategorilerinde 30 benzersiz fiyatlı kalem gösteriyor. Popular carousel tekrarları ana kategorilerden yeniden eklenmedi. `Plastic Bag` 1 TL ambalaj kalemi dışlandı. Kaynakta görünür yayın tarihi yok; `verifiedAt` 24 Ağustos 2026 canlı erişim/doğrulama tarihidir. Değişiklik yalnız local `MENU_OVERRIDES` ve bu araştırma günlüğündedir; backend/API/DB değiştirilmedi.
+
+
+## Fresh Pizza Corner — Hentzer ID 7107
+
+Hentzer exact kaydı `Fresh Pizza Corner`, `Sinanpaşa, Şht. Dursun Bakan Sk. No:18, 34000 Beşiktaş/İstanbul`; Google place ID `ChIJ_5iquAO3yhQRUI1vfY1KANY`. Resmi Instagram hesabı `@freshpizza.corner` 2 Temmuz 2026 tarihli menü paylaşımında aynı No:18 adresini gösteriyor. Yemeksepeti `kvqf` canlı menüsünün More info paneli vendor adresini `Şehit Dursun Bakan Sokak 18` olarak doğruladı; böylece resmi sosyal hesap, Hentzer exact kayıt ve fiyatlı vendor arasında şube köprüsü kuruldu.
+
+YS menüsündeki 8 Özel Menüler, 8 Pizzalar (Orta Boy), 1 Tatlılar ve 2 İçecekler kaleminden toplam 19 ürün eklendi. YS sayfasında kampanyalı/orijinal çift fiyat zaman zaman birlikte görünse de doğrulama anındaki liste fiyatları kullanıldı: menüler 500 TL, Margarita Pizza 400 TL, Pocket/Ananas pizzalar 450 TL, Tiramisu 200 TL, Su 40 TL ve Coca-Cola 70 TL. Poşet, ambalaj veya servis kalemi yoktu; carousel/popüler tekrarları eklenmedi. Kaynakta görünür yayın tarihi ürün menüsü için belirtilmemiş, `verifiedAt` yalnızca erişim/doğrulama tarihi olarak tutuldu.
+
+Kaynaklar: [Yemeksepeti kvqf](https://www.yemeksepeti.com/en/restaurant/kvqf/fresh-pizza-corner), [resmi Instagram menü paylaşımı](https://www.instagram.com/reel/DaTGC25tZy7/).
