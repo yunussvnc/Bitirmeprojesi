@@ -551,3 +551,11 @@ No6 Coffee Co. Hentzer ID 7149 kaydı `Yıldırım, Ali Fuat Başgil Cd. No:120A
 Taffee Coffee Co - Parkada Hentzer ID 7163 kaydı `Yıldırım, Şehit Kamil Balkan Cd., Bayrampaşa` adresindedir. Resmi `https://taffeecoffee.com/` sitesi exact olarak `Yıldırım Mahallesi Şehit Kamil Balkan Caddesi No:130-136B, Bayrampaşa` ve `+90 539 859 07 28` bilgilerini yayımlıyor; resmi menü sayfalarından Yiyecekler, Soğuk İçecekler, Bitki Çayları ve Sıcak İçecekler kategorilerinde 58 fiyatlı ürün aktarıldı. Tatlılar sayfası erişilebilir ürün/fiyat göstermediği için eklenmedi. Kaynak: https://taffeecoffee.com/Menu
 
 Üç kaynakta da görünür menü yayın tarihi bulunmadı; `verifiedAt` 24 Ağustos 2026 canlı erişim/doğrulama tarihidir. Fiyatlar kaynaktaki gösterimle korundu. Poşet/ambalaj/servis kalemleri dışlandı; başka şube fiyatı aktarılmadı. Değişiklik yalnız local `MENU_OVERRIDES` ve bu araştırma günlüğündedir; backend/API/DB değiştirilmedi.
+
+### Menü araştırma batch’i — Always Waffle Bayrampaşa (24 Ağustos 2026)
+
+Hentzer ID 6953 `Always Waffle Bayrampaşa` kaydı `Yenidoğan, Atışalanı Cd. 16/A, 34035 Bayrampaşa/İstanbul`; Google place ID `ChIJk3YfkU-7yhQR75COZG8OMgw`. Resmi Always Waffle şube sayfası aynı adresi ve `0538 047 30 66` telefonunu yayımlıyor: https://www.alwayswaffle.com/sube-bayrampasa-80.
+
+Yemeksepeti `yri1` canlı vendor metadata’sı `YENIDOGAN MAH. ATISALANI CAD. NO:16 A BAYRAMPAŞA` exact adresini veriyor ve 24 Waffles, 5 Bowls, 2 BOX, 3 Croissants, 5 Cups, 6 Drinks kategorilerinde 45 fiyatlı kalem gösteriyor: https://www.yemeksepeti.com/restaurant/yri1/always-waffle-yri1. Popular carousel tekrarları ve 1 TL `Plastic Bag` kalemi dışlandı. Mevcut fiyatlar kaynaktaki gösterimle korundu; üstü çizili eski fiyat aktarılmadı.
+
+Kaynakta görünür menü yayın tarihi bulunmadı; `verifiedAt` 24 Ağustos 2026 canlı erişim/doğrulama tarihidir. Değişiklik yalnız local `MENU_OVERRIDES` ve bu araştırma günlüğündedir; backend/API/DB değiştirilmedi.

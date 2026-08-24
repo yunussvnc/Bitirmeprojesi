@@ -4,6 +4,239 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6953": {
+    "name": "Always Waffle Bayrampaşa",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/yri1/always-waffle-yri1",
+    "sourceName": "Always Waffle resmi Bayrampaşa şube sayfası (Yenidoğan, Atışalanı Cd. 16/A) + Yemeksepeti yri1 canlı menüsü; YS exact adresi ve Hentzer Google place ID ChIJk3YfkU-7yhQR75COZG8OMgw ile eşleştirildi",
+    "verifiedAt": "2026-08-24",
+    "items": [
+      {
+        "name": "Always Waffle",
+        "price": "329,90 TL",
+        "category": "Waffles"
+      },
+      {
+        "name": "Always Waffle (2 Kişilik)",
+        "price": "349,90 TL",
+        "category": "Waffles"
+      },
+      {
+        "name": "Süper Waffle",
+        "price": "349,90 TL",
+        "category": "Waffles"
+      },
+      {
+        "name": "Süper Waffle (2 Kişililk)",
+        "price": "369,90 TL",
+        "category": "Waffles"
+      },
+      {
+        "name": "Special Waffle",
+        "price": "359,90 TL",
+        "category": "Waffles"
+      },
+      {
+        "name": "Special Waffle (2 Kişilik)",
+        "price": "379,90 TL",
+        "category": "Waffles"
+      },
+      {
+        "name": "Always World Special Waffle",
+        "price": "369,90 TL",
+        "category": "Waffles"
+      },
+      {
+        "name": "Always Word Special Waffle (2 Kişilik)",
+        "price": "389,90 TL",
+        "category": "Waffles"
+      },
+      {
+        "name": "Fıstık Şöleni Waffle",
+        "price": "349,90 TL",
+        "category": "Waffles"
+      },
+      {
+        "name": "Fıstık Şöleni Waffle (2 Kişilik)",
+        "price": "369,90 TL",
+        "category": "Waffles"
+      },
+      {
+        "name": "Sütlü Çikolatalı & Muzlu & Çilekli Waffle",
+        "price": "329,90 TL",
+        "category": "Waffles"
+      },
+      {
+        "name": "Sütlü Çikolatalı & Muzlu & Çilekli Waffle (2 Kişilik)",
+        "price": "349,90 TL",
+        "category": "Waffles"
+      },
+      {
+        "name": "Beyaz Çikolatalı & Muzlu & Çilekli Waffle",
+        "price": "329,90 TL",
+        "category": "Waffles"
+      },
+      {
+        "name": "Beyaz Çikolatalı Muzlu & Çilekli Waffle (2 Kişilik)",
+        "price": "349,90 TL",
+        "category": "Waffles"
+      },
+      {
+        "name": "Bitter Çikolatalı Waffle",
+        "price": "329,90 TL",
+        "category": "Waffles"
+      },
+      {
+        "name": "Bitter Çikolatalı Waffle (2 Kişilik)",
+        "price": "349,90 TL",
+        "category": "Waffles"
+      },
+      {
+        "name": "Frambuazlı Waffle",
+        "price": "329,90 TL",
+        "category": "Waffles"
+      },
+      {
+        "name": "Frambuazlı Waffle (2 Kişilik)",
+        "price": "349,90 TL",
+        "category": "Waffles"
+      },
+      {
+        "name": "Karamelli Waffle",
+        "price": "329,90 TL",
+        "category": "Waffles"
+      },
+      {
+        "name": "Karamelli Waffle (2 Kişilik)",
+        "price": "349,90 TL",
+        "category": "Waffles"
+      },
+      {
+        "name": "Çilek Festivali Waffle",
+        "price": "329,90 TL",
+        "category": "Waffles"
+      },
+      {
+        "name": "Çilek Festivali (2 Kişilik)",
+        "price": "349,90 TL",
+        "category": "Waffles"
+      },
+      {
+        "name": "Lotus Rüyası Waffle",
+        "price": "329,90 TL",
+        "category": "Waffles"
+      },
+      {
+        "name": "Lotus Rüyası Waffle (2 Kişilik)",
+        "price": "349,90 TL",
+        "category": "Waffles"
+      },
+      {
+        "name": "Always Bowl",
+        "price": "329,90 TL",
+        "category": "Bowls"
+      },
+      {
+        "name": "Süper Bowl",
+        "price": "339,90 TL",
+        "category": "Bowls"
+      },
+      {
+        "name": "Special Bowl",
+        "price": "349,90 TL",
+        "category": "Bowls"
+      },
+      {
+        "name": "Lotus Rüyası Bowl",
+        "price": "329,90 TL",
+        "category": "Bowls"
+      },
+      {
+        "name": "Oreo Bowl",
+        "price": "329,90 TL",
+        "category": "Bowls"
+      },
+      {
+        "name": "Always Box (2-3 Kişilik)",
+        "price": "990 TL",
+        "category": "BOX"
+      },
+      {
+        "name": "Brownie Box (2-3 Kişilik)",
+        "price": "990 TL",
+        "category": "BOX"
+      },
+      {
+        "name": "Paris Kruvasan",
+        "price": "369,90 TL",
+        "category": "Croissants"
+      },
+      {
+        "name": "Loire Kruvasan",
+        "price": "389,90 TL",
+        "category": "Croissants"
+      },
+      {
+        "name": "Special Kruvasan",
+        "price": "399,90 TL",
+        "category": "Croissants"
+      },
+      {
+        "name": "Belgium Cup",
+        "price": "219,90 TL",
+        "category": "Cups"
+      },
+      {
+        "name": "Always Cup",
+        "price": "219,90 TL",
+        "category": "Cups"
+      },
+      {
+        "name": "Süper Cup",
+        "price": "229,90 TL",
+        "category": "Cups"
+      },
+      {
+        "name": "Special Cup",
+        "price": "239,90 TL",
+        "category": "Cups"
+      },
+      {
+        "name": "Lotus Rüyası Cup",
+        "price": "219,90 TL",
+        "category": "Cups"
+      },
+      {
+        "name": "Pepsi Zero Sugar (33 cl.)",
+        "price": "79,90 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Pepsi (33 cl.)",
+        "price": "79,90 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Yedigün (33 cl.)",
+        "price": "79,90 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Tropicana (33 cl.)",
+        "price": "79,90 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Soda (20 cl.)",
+        "price": "29,90 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Su (50 cl.)",
+        "price": "29,90 TL",
+        "category": "İçecekler"
+      }
+    ]
+  },
   "7141": {
     "name": "Tophane Dürümcüsü",
     "sourceUrl": "https://www.yemeksepeti.com/restaurant/jyso/tophane-durumcusu",
