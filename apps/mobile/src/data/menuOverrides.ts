@@ -59367,4 +59367,202 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       },
     ]
   },
+  "2440": {
+    "name": "Aksoylar Tandır Et Döner",
+    "sourceUrl": "https://www.migros.com.tr/yemek/tandir-et-doner-esenyurt-cumhuriyet-mah-st-2cf82",
+    "sourceName": "Migros Yemek branch-labeled `Tandır Et Döner, Esenyurt (Cumhuriyet Mah.)` menüsü; Yandex exact Aksoylar Tandır Et Döner Şehitler Cad. 16 ve official Esenyurt/Beylikdüzü kayıtlarıyla eşleştirildi",
+    "verifiedAt": "2026-08-24",
+    "items": [
+      {
+        "name": "110 Gr Dürüm Döner",
+        "price": "465,00 TL",
+        "category": "Döner Dürüm"
+      },
+      {
+        "name": "110 Gr Döner Ekmek",
+        "price": "465,00 TL",
+        "category": "Döner Ekmek"
+      },
+      {
+        "name": "80 Gr Dürüm Döner",
+        "price": "390,00 TL",
+        "category": "Döner Dürüm"
+      },
+      {
+        "name": "110 Gr Porsiyon",
+        "price": "465,00 TL",
+        "category": "Porsiyon Et Döner"
+      },
+      {
+        "name": "150 Gr Porsiyon",
+        "price": "630,00 TL",
+        "category": "Porsiyon Et Döner"
+      },
+      {
+        "name": "200 Gr Porsiyon",
+        "price": "840,00 TL",
+        "category": "Porsiyon Et Döner"
+      },
+      {
+        "name": "500 Gr",
+        "price": "2.000,00 TL",
+        "category": "Porsiyon Et Döner"
+      },
+      {
+        "name": "1000 Gr",
+        "price": "3.900,00 TL",
+        "category": "Porsiyon Et Döner"
+      },
+      {
+        "name": "80 Gr Pilav Üstü",
+        "price": "450,00 TL",
+        "category": "Pilav Üstü"
+      },
+      {
+        "name": "110 Gr Pilav Üstü",
+        "price": "525,00 TL",
+        "category": "Pilav Üstü"
+      },
+      {
+        "name": "200 Gr Pilav Üstü",
+        "price": "900,00 TL",
+        "category": "Pilav Üstü"
+      },
+      {
+        "name": "110 Gr (Porsiyon) İskender",
+        "price": "615,00 TL",
+        "category": "İskender Porsiyon"
+      },
+      {
+        "name": "150 Gr (1.5 Porsiyon) İskender",
+        "price": "780,00 TL",
+        "category": "İskender Porsiyon"
+      },
+      {
+        "name": "200 Gr (Duble) İskender",
+        "price": "990,00 TL",
+        "category": "İskender Porsiyon"
+      },
+      {
+        "name": "110 Gr Beyti",
+        "price": "615,00 TL",
+        "category": "Beyti Döner"
+      },
+      {
+        "name": "150 Gr Beyti",
+        "price": "780,00 TL",
+        "category": "Beyti Döner"
+      },
+      {
+        "name": "200 Gr Beyti",
+        "price": "990,00 TL",
+        "category": "Beyti Döner"
+      },
+      {
+        "name": "80 Gr Döner Ekmek",
+        "price": "390,00 TL",
+        "category": "Döner Ekmek"
+      },
+      {
+        "name": "150 Gr Döner Ekmek",
+        "price": "630,00 TL",
+        "category": "Döner Ekmek"
+      },
+      {
+        "name": "200 Gr Döner Ekmek",
+        "price": "840,00 TL",
+        "category": "Döner Ekmek"
+      },
+      {
+        "name": "80 Gr Tombik Döner",
+        "price": "390,00 TL",
+        "category": "Döner Tombik"
+      },
+      {
+        "name": "110 Gr Tombik Döner",
+        "price": "465,00 TL",
+        "category": "Döner Tombik"
+      },
+      {
+        "name": "150 Gr Tombik Döner",
+        "price": "630,00 TL",
+        "category": "Döner Tombik"
+      },
+      {
+        "name": "200 Gr Tombik Döner",
+        "price": "840,00 TL",
+        "category": "Döner Tombik"
+      },
+      {
+        "name": "150 Gr Dürüm Döner",
+        "price": "630,00 TL",
+        "category": "Döner Dürüm"
+      },
+      {
+        "name": "200 Gr Dürüm Döner",
+        "price": "840,00 TL",
+        "category": "Döner Dürüm"
+      },
+      {
+        "name": "Tereyağlı Mercimek Çorbası",
+        "price": "150,00 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Tereyağlı Pilav",
+        "price": "100,00 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Patates Kızartması",
+        "price": "120,00 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Yayık Ayran",
+        "price": "80,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Kutu Ayran",
+        "price": "60,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Şalgam Acılı",
+        "price": "60,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Soda",
+        "price": "40,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Su",
+        "price": "30,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Kola",
+        "price": "80,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Fanta",
+        "price": "80,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Sprite",
+        "price": "80,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Şalgam Acısız",
+        "price": "60,00 TL",
+        "category": "İçecekler"
+      },
+    ]
+  },
 };
