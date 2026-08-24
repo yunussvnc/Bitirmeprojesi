@@ -59289,4 +59289,82 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       },
     ]
   },
+  "2416": {
+    "name": "Kağıthane Gece Dönercisi",
+    "sourceUrl": "https://www.kagithanegecedonercisi.com/menu/",
+    "sourceName": "Kağıthane Gece Dönercisi resmi branch menüsü; resmi iletişim sayfası Merkez Mah, Cendere Cd, Yurdagül Sk. No:2 ve +90 501 651 0651 ile Yandex exact kaydıyla eşleştirildi",
+    "verifiedAt": "2026-08-24",
+    "items": [
+      {
+        "name": "Et Döner 200gr",
+        "price": "855.00₺",
+        "category": "Et Döner"
+      },
+      {
+        "name": "Et Döner 150gr",
+        "price": "675.00₺",
+        "category": "Et Döner"
+      },
+      {
+        "name": "Et Döner 125gr",
+        "price": "575.00₺",
+        "category": "Et Döner"
+      },
+      {
+        "name": "Et Döner 100gr",
+        "price": "470.00₺",
+        "category": "Et Döner"
+      },
+      {
+        "name": "Su",
+        "price": "20.00₺",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Soda",
+        "price": "30.00₺",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Acı Ayran",
+        "price": "70.00₺",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Naneli Ayran",
+        "price": "70.00₺",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Yayık Ayran",
+        "price": "70.00₺",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Silivri Arslan Ayran",
+        "price": "100.00₺",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Fuse Tea Limon",
+        "price": "100.00₺",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Fuse Tea Mango",
+        "price": "100.00₺",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Fuse Tea Ananas",
+        "price": "100.00₺",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Fuse Tea Şeftali",
+        "price": "100.00₺",
+        "category": "İçecekler"
+      },
+    ]
+  },
 };
