@@ -58938,4 +58938,112 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       },
     ]
   },
+  "1394": {
+    "name": "B.A.D Burger Basic And Delicious Cihangir",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/o5ae/bad-burger-basic-and-delicious",
+    "sourceName": "Yemeksepeti aktif `Bad Burger Basic And Delicious` vendoru; Hakkında panelindeki Bakraç Sk. No:15 exact şube adresi, Menu-tr/Apple Maps kayıtları ve resmi B.A.D Instagram ile eşleştirildi",
+    "verifiedAt": "2026-08-24",
+    "items": [
+      {
+        "name": "Double Cheese Burger (150gr)",
+        "price": "690 TL",
+        "category": "Burgerler"
+      },
+      {
+        "name": "Truffle Burger (150 gr.)",
+        "price": "690 TL",
+        "category": "Burgerler"
+      },
+      {
+        "name": "Smash Burger (150 gr.)",
+        "price": "680 TL",
+        "category": "Burgerler"
+      },
+      {
+        "name": "Garlic Burger (150 gr.)",
+        "price": "690 TL",
+        "category": "Burgerler"
+      },
+      {
+        "name": "Triple Smash Burger (225 gr.)",
+        "price": "860 TL",
+        "category": "Burgerler"
+      },
+      {
+        "name": "Spicy Burger (150 gr.)",
+        "price": "690 TL",
+        "category": "Burgerler"
+      },
+      {
+        "name": "Patates Kızartması (200 gr.)",
+        "price": "170 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Ev Yapımı Tatlı Ekşi Turşu (75 gr.)",
+        "price": "100 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Trüflü Parmesanlı Patates Kızartması (200 gr.)",
+        "price": "350 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Baharatlı Patates Kızartması (200 gr.)",
+        "price": "180 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Trüflü Mayonez (40 gr.)",
+        "price": "70 TL",
+        "category": "Soslar"
+      },
+      {
+        "name": "Özel Burger Sosu (40 gr.)",
+        "price": "70 TL",
+        "category": "Soslar"
+      },
+      {
+        "name": "Japon Mayonez (40 gr.)",
+        "price": "70 TL",
+        "category": "Soslar"
+      },
+      {
+        "name": "Acılı Japon Mayonezi (40 gr.)",
+        "price": "70 TL",
+        "category": "Soslar"
+      },
+      {
+        "name": "Coca-Cola Zero Sugar (33 cl.)",
+        "price": "100 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Coca-Cola (33 cl.)",
+        "price": "100 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Coca-Cola Light (33 cl.)",
+        "price": "100 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Fanta (33 cl.)",
+        "price": "100 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Sprite (33 cl.)",
+        "price": "100 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Damla Soda (20 cl.)",
+        "price": "80 TL",
+        "category": "İçecekler"
+      },
+    ]
+  },
 };
