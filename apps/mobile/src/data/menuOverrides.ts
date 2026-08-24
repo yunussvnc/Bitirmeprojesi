@@ -57939,4 +57939,287 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       },
     ]
   },
+  "790": {
+    "name": "Burger Zoom Kadıköy",
+    "sourceUrl": "https://view.qrall.co/tr/menu?tenantId=3a17e814-d9ff-279b-dd92-1f08b866d4da&channelId=3a17e814-db9b-af66-c5ea-373ca619242e&menu=3a17e814-e587-42bc-334c-2cc5f8fbab34&category=3a17e814-e58f-8eea-eb40-b444bbbd5ea8",
+    "sourceName": "BurgerZoom resmi Kadıköy şube sayfasından bağlı branch-specific QRall menüsü; Dumlupınar, Özen Sk. No:48/D exact adres ve telefon köprüsüyle eşleştirildi",
+    "verifiedAt": "2026-08-24",
+    "items": [
+      {
+        "name": "Klasik Burger",
+        "price": "551 TL",
+        "category": "Burgerler"
+      },
+      {
+        "name": "Zoom Burger",
+        "price": "711 TL",
+        "category": "Burgerler"
+      },
+      {
+        "name": "Füme Burger",
+        "price": "702 TL",
+        "category": "Burgerler"
+      },
+      {
+        "name": "Barbekü Burger",
+        "price": "584 TL",
+        "category": "Burgerler"
+      },
+      {
+        "name": "Trüf Burger",
+        "price": "563 TL",
+        "category": "Burgerler"
+      },
+      {
+        "name": "Mantar Burger",
+        "price": "593 TL",
+        "category": "Burgerler"
+      },
+      {
+        "name": "Acılı Burger",
+        "price": "562 TL",
+        "category": "Burgerler"
+      },
+      {
+        "name": "Tavuk Burger",
+        "price": "441 TL",
+        "category": "Burgerler"
+      },
+      {
+        "name": "Acılı Tavuk Burger",
+        "price": "449 TL",
+        "category": "Burgerler"
+      },
+      {
+        "name": "Trüflü Tavuk Burger",
+        "price": "453 TL",
+        "category": "Burgerler"
+      },
+      {
+        "name": "Falafel (Vejetaryen) Burger",
+        "price": "399 TL",
+        "category": "Burgerler"
+      },
+      {
+        "name": "Smash Trüf Burger",
+        "price": "637 TL",
+        "category": "Smash Burgerler"
+      },
+      {
+        "name": "Smash Mac Burger",
+        "price": "612 TL",
+        "category": "Smash Burgerler"
+      },
+      {
+        "name": "Smash Acı&Tatlı Burger",
+        "price": "619 TL",
+        "category": "Smash Burgerler"
+      },
+      {
+        "name": "Yalın Klasik Burger",
+        "price": "470 TL",
+        "category": "Yalın Burgerler"
+      },
+      {
+        "name": "Yalın Zoom Burger",
+        "price": "638 TL",
+        "category": "Yalın Burgerler"
+      },
+      {
+        "name": "Yalın Füme Burger",
+        "price": "629 TL",
+        "category": "Yalın Burgerler"
+      },
+      {
+        "name": "Yalın Barbekü Burger",
+        "price": "505 TL",
+        "category": "Yalın Burgerler"
+      },
+      {
+        "name": "Yalın Trüf Burger",
+        "price": "483 TL",
+        "category": "Yalın Burgerler"
+      },
+      {
+        "name": "Yalın Mantar Burger",
+        "price": "515 TL",
+        "category": "Yalın Burgerler"
+      },
+      {
+        "name": "Yalın Acılı Burger",
+        "price": "482 TL",
+        "category": "Yalın Burgerler"
+      },
+      {
+        "name": "Yalın Tavuk Burger",
+        "price": "355 TL",
+        "category": "Yalın Burgerler"
+      },
+      {
+        "name": "Yalın Acılı Tavuk Burger",
+        "price": "363 TL",
+        "category": "Yalın Burgerler"
+      },
+      {
+        "name": "Yalın Trüflü Tavuk Burger",
+        "price": "368 TL",
+        "category": "Yalın Burgerler"
+      },
+      {
+        "name": "Yalın Falafel (Vejetaryen) Burger",
+        "price": "312 TL",
+        "category": "Yalın Burgerler"
+      },
+      {
+        "name": "Tavuk Parçaları",
+        "price": "335 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Mix Tabağı",
+        "price": "368 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "XL Mix Tabağı",
+        "price": "624 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Baharatlı Patates Kızartması",
+        "price": "163 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Cheddarlı Baharatlı Patates Kızartması",
+        "price": "319 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Trüflü Patates Kızartması",
+        "price": "343 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "8' li Soğan Halkası",
+        "price": "102 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "8' li Peynir Çubuğu",
+        "price": "254 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "4'lü Peynir Çubuğu",
+        "price": "138 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "4' lü Soğan Halkası",
+        "price": "62 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Zoom Sos",
+        "price": "35 TL",
+        "category": "Soslar"
+      },
+      {
+        "name": "Ranch Sos",
+        "price": "35 TL",
+        "category": "Soslar"
+      },
+      {
+        "name": "Acı Sos",
+        "price": "35 TL",
+        "category": "Soslar"
+      },
+      {
+        "name": "Barbekü Sos",
+        "price": "55 TL",
+        "category": "Soslar"
+      },
+      {
+        "name": "Acı Tatlı Sos",
+        "price": "35 TL",
+        "category": "Soslar"
+      },
+      {
+        "name": "Cheddar Sos",
+        "price": "67 TL",
+        "category": "Soslar"
+      },
+      {
+        "name": "Trüflü Mayonez Sos",
+        "price": "53 TL",
+        "category": "Soslar"
+      },
+      {
+        "name": "Hardal Sos",
+        "price": "64 TL",
+        "category": "Soslar"
+      },
+      {
+        "name": "Ketçap",
+        "price": "13 TL",
+        "category": "Soslar"
+      },
+      {
+        "name": "Mayonez",
+        "price": "13 TL",
+        "category": "Soslar"
+      },
+      {
+        "name": "Lotus Magnolia",
+        "price": "341 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Beyaz Çikolatalı Brownie",
+        "price": "341 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Özerhisar Ayran",
+        "price": "79 TL",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Pepsi",
+        "price": "79 TL",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Pepsi Max",
+        "price": "79 TL",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Yedigün",
+        "price": "79 TL",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "7up",
+        "price": "79 TL",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Lipton Ice Tea",
+        "price": "79 TL",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Tropicana",
+        "price": "79 TL",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Sade/Limonlu Soda",
+        "price": "51 TL",
+        "category": "Soğuk İçecekler"
+      },
+    ]
+  },
 };
