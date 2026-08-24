@@ -63331,4 +63331,511 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     ],
   },
 
+  "3728": {
+    name: "But First Coffee",
+    sourceUrl: "https://www.migros.com.tr/yemek/but-first-coffee-sisli-cumhuriyet-mah-st-34e9d",
+    sourceName: "Migros Yemek — But First Coffee Şişli (Cumhuriyet Mah.) branch menüsü",
+    verifiedAt: "2026-08-24",
+    items: [
+      {
+        name: "Americano",
+        price: "253,50 TL",
+        category: "Sıcak Kahveler"
+      },
+      {
+        name: "Cappuccino",
+        price: "292,50 TL",
+        desc: "Sıcak servis edilir.",
+        category: "Sıcak Kahveler"
+      },
+      {
+        name: "Espresso",
+        price: "188,50 TL",
+        desc: "Sıcak servis edilir.",
+        category: "Sıcak Kahveler"
+      },
+      {
+        name: "Espresso Macchiato",
+        price: "227,50 TL",
+        desc: "Sıcak servis edilir.",
+        category: "Sıcak Kahveler"
+      },
+      {
+        name: "Flat White",
+        price: "312,00 TL",
+        desc: "Sıcak servis edilir.",
+        category: "Sıcak Kahveler"
+      },
+      {
+        name: "Latte",
+        price: "292,50 TL",
+        desc: "Sıcak servis edilir.",
+        category: "Sıcak Kahveler"
+      },
+      {
+        name: "Karamel Latte",
+        price: "357,50 TL",
+        desc: "Sıcak servis edilir.",
+        category: "Sıcak Kahveler"
+      },
+      {
+        name: "Mocha",
+        price: "357,50 TL",
+        desc: "Sıcak servis edilir.",
+        category: "Sıcak Kahveler"
+      },
+      {
+        name: "White Mocha",
+        price: "357,50 TL",
+        desc: "Sıcak servis edilir.",
+        category: "Sıcak Kahveler"
+      },
+      {
+        name: "Vanilya Latte",
+        price: "357,50 TL",
+        desc: "Sıcak servis edilir.",
+        category: "Sıcak Kahveler"
+      },
+      {
+        name: "V-60 Demleme",
+        price: "364,00 TL",
+        desc: "Sıcak servis edilir.",
+        category: "Sıcak Kahveler"
+      },
+      {
+        name: "Filtre Kahve",
+        price: "234,00 TL",
+        desc: "Sıcak servis edilir.",
+        category: "Sıcak Kahveler"
+      },
+      {
+        name: "Türk Kahvesi",
+        price: "214,50 TL",
+        desc: "Sıcak servis edilir.",
+        category: "Sıcak Kahveler"
+      },
+      {
+        name: "Sütlü Türk Kahvesi",
+        price: "260,00 TL",
+        desc: "Sıcak servis edilir.",
+        category: "Sıcak Kahveler"
+      },
+      {
+        name: "Double Türk Kahvesi",
+        price: "260,00 TL",
+        desc: "Sıcak servis edilir.",
+        category: "Sıcak Kahveler"
+      },
+      {
+        name: "İced Cappuccino",
+        price: "312,00 TL",
+        desc: "Soğuk servis edilir.",
+        category: "Soğuk Kahveler"
+      },
+      {
+        name: "İced Flat White",
+        price: "312,00 TL",
+        desc: "Soğuk servis edilir.",
+        category: "Soğuk Kahveler"
+      },
+      {
+        name: "İced Latte",
+        price: "312,00 TL",
+        desc: "Soğuk servis edilir.",
+        category: "Soğuk Kahveler"
+      },
+      {
+        name: "İced Mocha",
+        price: "362,50 TL",
+        desc: "Soğuk servis edilir.",
+        category: "Soğuk Kahveler"
+      },
+      {
+        name: "İced White Mocha",
+        price: "362,50 TL",
+        desc: "Soğuk servis edilir.",
+        category: "Soğuk Kahveler"
+      },
+      {
+        name: "İced Caramel Latte",
+        price: "362,50 TL",
+        desc: "Soğuk servis edilir.",
+        category: "Soğuk Kahveler"
+      },
+      {
+        name: "İced Vanilya Latte",
+        price: "362,50 TL",
+        desc: "Soğuk servis edilir.",
+        category: "Soğuk Kahveler"
+      },
+      {
+        name: "İced Filtre Kahve",
+        price: "253,50 TL",
+        desc: "Soğuk servis edilir.",
+        category: "Soğuk Kahveler"
+      },
+      {
+        name: "İced V-60",
+        price: "364,00 TL",
+        desc: "Soğuk servis edilir.",
+        category: "Soğuk Kahveler"
+      },
+      {
+        name: "İced Chemex",
+        price: "364,00 TL",
+        desc: "Soğuk servis edilir.",
+        category: "Soğuk Kahveler"
+      },
+      {
+        name: "White Mocha Frappe",
+        price: "384,00 TL",
+        desc: "Soğuk servis edilir.",
+        category: "Frappe Çeşitleri"
+      },
+      {
+        name: "Mocha Frappe",
+        price: "384,00 TL",
+        desc: "Soğuk servis edilir.",
+        category: "Frappe Çeşitleri"
+      },
+      {
+        name: "Espresso Frappe",
+        price: "384,00 TL",
+        desc: "Soğuk servis edilir.",
+        category: "Frappe Çeşitleri"
+      },
+      {
+        name: "Vanilya Frappe",
+        price: "384,00 TL",
+        desc: "Soğuk servis edilir.",
+        category: "Frappe Çeşitleri"
+      },
+      {
+        name: "Caramel Frappe",
+        price: "384,00 TL",
+        desc: "Soğuk servis edilir.",
+        category: "Frappe Çeşitleri"
+      },
+      {
+        name: "Mango Frozen",
+        price: "384,00 TL",
+        desc: "Soğuk servis edilir.",
+        category: "Frozen Çeşitleri"
+      },
+      {
+        name: "Passion Frozen",
+        price: "384,00 TL",
+        desc: "Soğuk servis edilir.",
+        category: "Frozen Çeşitleri"
+      },
+      {
+        name: "Çilek Frozen",
+        price: "384,00 TL",
+        desc: "Soğuk servis edilir.",
+        category: "Frozen Çeşitleri"
+      },
+      {
+        name: "Çilek & Mango Frozen",
+        price: "384,00 TL",
+        desc: "Soğuk servis edilir.",
+        category: "Frozen Çeşitleri"
+      },
+      {
+        name: "Orman Meyveli Cheesecake",
+        price: "490,00 TL",
+        category: "Tatlı Çeşitleri"
+      },
+      {
+        name: "Limonlu Cheesecake",
+        price: "490,00 TL",
+        category: "Tatlı Çeşitleri"
+      },
+      {
+        name: "Belçika Çikolatalı Cookie",
+        price: "378,00 TL",
+        category: "Tatlı Çeşitleri"
+      },
+      {
+        name: "Beyaz Çikolatalı Brownie",
+        price: "420,00 TL",
+        category: "Tatlı Çeşitleri"
+      },
+      {
+        name: "San Sebastian Cheesecake",
+        price: "490,00 TL",
+        category: "Tatlı Çeşitleri"
+      },
+      {
+        name: "Çikolatalı Marlenka",
+        price: "490,00 TL",
+        desc: "Bal, Ceviz ve Kakao",
+        category: "Tatlı Çeşitleri"
+      },
+      {
+        name: "Mozaik Pasta",
+        price: "420,00 TL",
+        category: "Tatlı Çeşitleri"
+      },
+      {
+        name: "Yaban Mersinli Pasta",
+        price: "434,00 TL",
+        category: "Tatlı Çeşitleri"
+      },
+      {
+        name: "Lotus Pasta",
+        price: "420,00 TL",
+        category: "Tatlı Çeşitleri"
+      },
+      {
+        name: "Klasik Marlenka",
+        price: "490,00 TL",
+        category: "Tatlı Çeşitleri"
+      },
+      {
+        name: "Berry Hibiscus Cake",
+        price: "420,00 TL",
+        category: "Tatlı Çeşitleri"
+      },
+      {
+        name: "Çilekli Limonata",
+        price: "312,00 TL",
+        category: "Soğuk İçecekler"
+      },
+      {
+        name: "Cool Lime",
+        price: "312,00 TL",
+        category: "Soğuk İçecekler"
+      },
+      {
+        name: "İced Matcha Latte",
+        price: "435,00 TL",
+        category: "Soğuk İçecekler"
+      },
+      {
+        name: "Limonata",
+        price: "260,00 TL",
+        category: "Soğuk İçecekler"
+      },
+      {
+        name: "İced Çilekli Matcha Latte",
+        price: "468,00 TL",
+        category: "Soğuk İçecekler"
+      },
+      {
+        name: "İced Mango Matcha Latte",
+        price: "468,00 TL",
+        category: "Soğuk İçecekler"
+      },
+      {
+        name: "İced Vanilyalı Matcha Latte",
+        price: "468,00 TL",
+        category: "Soğuk İçecekler"
+      },
+      {
+        name: "İced Karamel Matcha Latte",
+        price: "468,00 TL",
+        category: "Soğuk İçecekler"
+      },
+      {
+        name: "Mango Limonata",
+        price: "312,00 TL",
+        category: "Soğuk İçecekler"
+      },
+      {
+        name: "Passion Limonata",
+        price: "312,00 TL",
+        category: "Soğuk İçecekler"
+      },
+      {
+        name: "Hindi Fümeli Ciabata Sandviç",
+        price: "490,00 TL",
+        desc: "Hindi füme, kaşar peyniri, cheddar peyniri, pesto sos",
+        category: "Sandviç ve Kahvaltılıklar"
+      },
+      {
+        name: "Hindi Fümeli Bazlama",
+        price: "490,00 TL",
+        desc: "Hindi füme, kaşar peyniri, cheddar peyniri, pesto sos",
+        category: "Sandviç ve Kahvaltılıklar"
+      },
+      {
+        name: "Dana Roastbeef Sandviç",
+        price: "420,00 TL",
+        desc: "Roastbeef, kaşar peyniri, turşu, domates kurusu",
+        category: "Sandviç ve Kahvaltılıklar"
+      },
+      {
+        name: "Üç Peynirli Haşaşlı Sandviç",
+        price: "434,00 TL",
+        desc: "Cheddar peyniri, kaşar peyniri, labne peyniri",
+        category: "Sandviç ve Kahvaltılıklar"
+      },
+      {
+        name: "Panini Mozarella Sandviç",
+        price: "490,00 TL",
+        desc: "Mozarella peyniri, kurutulmuş domates",
+        category: "Sandviç ve Kahvaltılıklar"
+      },
+      {
+        name: "Tereyağlı Kruvasan",
+        price: "325,00 TL",
+        category: "Sandviç ve Kahvaltılıklar"
+      },
+      {
+        name: "Cam Şişe Su",
+        price: "110,00 TL",
+        category: "Şişelenmiş Ürünler"
+      },
+      {
+        name: "Pet Şişe Su",
+        price: "78,00 TL",
+        category: "Şişelenmiş Ürünler"
+      },
+      {
+        name: "Pin Strawberry Vanilya",
+        price: "247,00 TL",
+        category: "Şişelenmiş Ürünler"
+      },
+      {
+        name: "Pin Beyaz Şeftali",
+        price: "247,00 TL",
+        category: "Şişelenmiş Ürünler"
+      },
+      {
+        name: "Pin Cool Lime",
+        price: "247,00 TL",
+        category: "Şişelenmiş Ürünler"
+      },
+      {
+        name: "Pin Şeftalili Soğuk Çay",
+        price: "247,00 TL",
+        category: "Şişelenmiş Ürünler"
+      },
+      {
+        name: "Pin Hibiscus Tea",
+        price: "247,00 TL",
+        category: "Şişelenmiş Ürünler"
+      },
+      {
+        name: "San Pellegrino Aranciata",
+        price: "286,00 TL",
+        category: "Şişelenmiş Ürünler"
+      },
+      {
+        name: "San Pellegrino Sade",
+        price: "286,00 TL",
+        category: "Şişelenmiş Ürünler"
+      },
+      {
+        name: "San Pellegrico Aranciata Rossa",
+        price: "286,00 TL",
+        category: "Şişelenmiş Ürünler"
+      },
+      {
+        name: "Kombucha Sade",
+        price: "338,00 TL",
+        category: "Şişelenmiş Ürünler"
+      },
+      {
+        name: "Soda",
+        price: "143,00 TL",
+        category: "Şişelenmiş Ürünler"
+      },
+      {
+        name: "Kombucha Lavanta",
+        price: "338,00 TL",
+        category: "Şişelenmiş Ürünler"
+      },
+      {
+        name: "Kombucha Zencefil",
+        price: "338,00 TL",
+        category: "Şişelenmiş Ürünler"
+      },
+      {
+        name: "Kombucha Şeftali & Gül",
+        price: "338,00 TL",
+        category: "Şişelenmiş Ürünler"
+      },
+      {
+        name: "Kombucha Lime & Nane",
+        price: "338,00 TL",
+        category: "Şişelenmiş Ürünler"
+      },
+      {
+        name: "Kombucha Ananas & Hiibiscus",
+        price: "338,00 TL",
+        category: "Şişelenmiş Ürünler"
+      },
+      {
+        name: "Matea Çayı",
+        price: "286,00 TL",
+        category: "Şişelenmiş Ürünler"
+      },
+      {
+        name: "Kenya Nyeri 250 Gr",
+        price: "854,00 TL",
+        desc: "250 gr. kahve çekirdeği",
+        category: "Paket Kahveler"
+      },
+      {
+        name: "Colombia 250 Gr.",
+        price: "700,00 TL",
+        desc: "250 gr. kahve çekirdeği",
+        category: "Paket Kahveler"
+      },
+      {
+        name: "Kolombia 1 Kg.",
+        price: "2.800,00 TL",
+        desc: "1 kilo kahve çekirdeği",
+        category: "Paket Kahveler"
+      },
+      {
+        name: "Kenya Nyeri 1 Kg.",
+        price: "3.150,00 TL",
+        desc: "1 kilo kahve çekirdeği",
+        category: "Paket Kahveler"
+      },
+      {
+        name: "Yeşil Çay",
+        price: "253,50 TL",
+        category: "Sıcak İçecekler"
+      },
+      {
+        name: "Siyah Çay",
+        price: "123,50 TL",
+        category: "Sıcak İçecekler"
+      },
+      {
+        name: "Ada Çayı",
+        price: "253,50 TL",
+        category: "Sıcak İçecekler"
+      },
+      {
+        name: "Sıcak Çikolata",
+        price: "292,50 TL",
+        category: "Sıcak İçecekler"
+      },
+      {
+        name: "Strawberry Matcha Latte",
+        price: "468,00 TL",
+        category: "Sıcak İçecekler"
+      },
+      {
+        name: "Mango Matcha Latte",
+        price: "468,00 TL",
+        category: "Sıcak İçecekler"
+      },
+      {
+        name: "Vanilyalı Matcha Latte",
+        price: "468,00 TL",
+        category: "Sıcak İçecekler"
+      },
+      {
+        name: "Karamelli Matcha Latte",
+        price: "468,00 TL",
+        category: "Sıcak İçecekler"
+      }
+    ],
+  },
+
 };
