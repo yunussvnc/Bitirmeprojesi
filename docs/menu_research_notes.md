@@ -583,3 +583,12 @@ Hentzer exact kayıt `Desigram Coffee Co. Makyol`, `Makyol Yaşam, Barış, Sams
 YS menüsündeki 11 Sandviçler & Tostlar, 19 Tatlılar, 4 Karma Desigrams, 5 İçecekler, 2 Sıcak İçecekler, 9 Espresso Bazlı Soğuk Kahveler, 13 Espresso Bazlı Sıcak Kahveler, 7 Moctails ve 8 Sıcak Çaylar bölümünden toplam **78 Poşet dışı fiyatlı kalem** eklendi. `Poşet` altındaki 1 `Plastic Bag` kalemi dışarıda bırakıldı; popüler/carousel tekrarı bulunmadı. Ürün açıklamalarındaki sıcak/soğuk servis ve tek kişilik ifadeleri ürün adlarına taşınmadı. Kaynakta görünür yayın tarihi yok; `verifiedAt` yalnızca 24 Ağustos 2026 erişim/doğrulama tarihidir.
 
 Kaynaklar: [Yemeksepeti k79c](https://www.yemeksepeti.com/en/restaurant/k79c/makyol-desigram-coffee-co), [resmi Instagram](https://www.instagram.com/desigramcoffeeco/).
+
+
+## Han120 Yeni Nesil Meyhane — Hentzer ID 7145
+
+Hentzer exact kayıt `Han120 Yeni Nesil Meyhane`, `Asmalı Mescit, İstiklal Cd. Galatasaray İş Hanı No:120 Kat:7, 34421 Beyoğlu/İstanbul`, telefon `+90 544 935 10 10`, Google place ID `ChIJiZmOVg23yhQReeCDhVwZU3U`. Han120’nun resmi menü sayfası aynı `İstiklal Cad. Galatasaray Han No:120 Kat:7 Beyoğlu` adresini ve telefonu yayımlıyor; resmi Instagram hesabı `@han120.com.tr` aynı işletme kimliğine bağlı.
+
+Resmi menüde 14 bölümden toplam **76 fiyatlı ürün** aktarıldı: Ana Yemekler 6, Tatlılar 6, Ara Sıcaklar 4, Mezeler 8, Meşrubatlar 7, Rakılar 9, Biralar 2, Shot 6, Votka 5, Cin 4, Şampanya 5, Viski 4, Şarap 6 ve Cocktails & Liquers 4. İngilizce çeviri satırları, `ÖNERİLEN` etiketleri ve açıklama/çeviri tekrarları ürün adına alınmadı. Kaynakta ürün menüsü için görünür yayın tarihi yoktur; sayfa footer’ındaki `Copyright 2025` menü tarihi kabul edilmedi, `verifiedAt` yalnızca 24 Ağustos 2026 erişim/doğrulama tarihidir.
+
+Kaynaklar: [Han120 resmi menü](http://www.han120.com/menu/), [Han120 resmi Instagram](https://www.instagram.com/han120.com.tr/).

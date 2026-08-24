@@ -44408,4 +44408,392 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       }
     ]
   },
+  "7145": {
+    "name": "Han120 Yeni Nesil Meyhane",
+    "sourceUrl": "http://www.han120.com/menu/",
+    "sourceName": "Han120 resmi menüsü; exact İstiklal Cad. Galatasaray Han No:120 Kat:7 Beyoğlu ve +90 544 935 10 10 iletişim kaydı Hentzer Google place ID ChIJiZmOVg23yhQReeCDhVwZU3U ile eşleştirildi; resmi Instagram @han120.com.tr ile aynı işletme doğrulandı. Menüde görünür yayın tarihi yoktur, verifiedAt erişim/doğrulama tarihidir",
+    "verifiedAt": "2026-08-24",
+    "items": [
+      {
+        "name": "Tavuk Külbastı",
+        "price": "700 TL",
+        "category": "Ana Yemekler"
+      },
+      {
+        "name": "Beğendili Köfte",
+        "price": "800 TL",
+        "category": "Ana Yemekler"
+      },
+      {
+        "name": "Levrek Izgara",
+        "price": "1000 TL",
+        "category": "Ana Yemekler"
+      },
+      {
+        "name": "Bonfile",
+        "price": "1200 TL",
+        "category": "Ana Yemekler"
+      },
+      {
+        "name": "Kuzu Pirzola",
+        "price": "1300 TL",
+        "category": "Ana Yemekler"
+      },
+      {
+        "name": "Saç Kavurma",
+        "price": "950 TL",
+        "category": "Ana Yemekler"
+      },
+      {
+        "name": "Meyve Tabağı",
+        "price": "300 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Serpme Meyve Tabağı",
+        "price": "500 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Kavun",
+        "price": "300 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Karpuz",
+        "price": "300 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Karışık Çerez",
+        "price": "250 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Yaş Pasta",
+        "price": "1500 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Tereyağlı Karides",
+        "price": "800 TL",
+        "category": "Ara Sıcaklar"
+      },
+      {
+        "name": "Kalamar Tava",
+        "price": "800 TL",
+        "category": "Ara Sıcaklar"
+      },
+      {
+        "name": "Anne Patates Tava",
+        "price": "300 TL",
+        "category": "Ara Sıcaklar"
+      },
+      {
+        "name": "Paçanga Böreği",
+        "price": "250 TL",
+        "category": "Ara Sıcaklar"
+      },
+      {
+        "name": "Ezine Peyniri",
+        "price": "250 TL",
+        "category": "Mezeler"
+      },
+      {
+        "name": "Humus",
+        "price": "300 TL",
+        "category": "Mezeler"
+      },
+      {
+        "name": "Şakşuka",
+        "price": "300 TL",
+        "category": "Mezeler"
+      },
+      {
+        "name": "Havuç Tarator",
+        "price": "300 TL",
+        "category": "Mezeler"
+      },
+      {
+        "name": "Kuru Cacık",
+        "price": "300 TL",
+        "category": "Mezeler"
+      },
+      {
+        "name": "Antep Acılı Ezme",
+        "price": "300 TL",
+        "category": "Mezeler"
+      },
+      {
+        "name": "Şeker Pancarı",
+        "price": "300 TL",
+        "category": "Mezeler"
+      },
+      {
+        "name": "Zehir Zemberek Atom",
+        "price": "300 TL",
+        "category": "Mezeler"
+      },
+      {
+        "name": "KOLA",
+        "price": "300 TL",
+        "category": "Meşrubatlar"
+      },
+      {
+        "name": "FANTA",
+        "price": "300 TL",
+        "category": "Meşrubatlar"
+      },
+      {
+        "name": "SPRİTE",
+        "price": "300 TL",
+        "category": "Meşrubatlar"
+      },
+      {
+        "name": "İCE TEA",
+        "price": "300 TL",
+        "category": "Meşrubatlar"
+      },
+      {
+        "name": "ŞALGAM",
+        "price": "300 TL",
+        "category": "Meşrubatlar"
+      },
+      {
+        "name": "SODA",
+        "price": "150 TL",
+        "category": "Meşrubatlar"
+      },
+      {
+        "name": "REDBUL",
+        "price": "400 TL",
+        "category": "Meşrubatlar"
+      },
+      {
+        "name": "Beylerbeyi Mavi Rakı 35 CL",
+        "price": "2000 TL",
+        "category": "Rakılar"
+      },
+      {
+        "name": "Beylerbeyi Mavi Rakı 50 CL",
+        "price": "2850 TL",
+        "category": "Rakılar"
+      },
+      {
+        "name": "Beylerbeyi Mavi Rakı 70 CL",
+        "price": "3500 TL",
+        "category": "Rakılar"
+      },
+      {
+        "name": "Beylerbeyi Mavi Rakı 100 CL",
+        "price": "4500 TL",
+        "category": "Rakılar"
+      },
+      {
+        "name": "Beylerbeyi Göbek Rakı 35 CL",
+        "price": "2400TL",
+        "category": "Rakılar"
+      },
+      {
+        "name": "Beylerbeyi Göbek Rakı 50 CL",
+        "price": "3200 TL",
+        "category": "Rakılar"
+      },
+      {
+        "name": "Beylerbeyi Göbek Rakı 70 CL",
+        "price": "4000 TL",
+        "category": "Rakılar"
+      },
+      {
+        "name": "Beylerbeyi Göbek Rakı 100 CL",
+        "price": "5200 TL",
+        "category": "Rakılar"
+      },
+      {
+        "name": "Rakı KADEH",
+        "price": "700 TL",
+        "category": "Rakılar"
+      },
+      {
+        "name": "Efes 33CL ŞİŞE",
+        "price": "450 TL",
+        "category": "Biralar"
+      },
+      {
+        "name": "Bomonti 50CL ŞİŞE",
+        "price": "500 TL",
+        "category": "Biralar"
+      },
+      {
+        "name": "Tekila 35 CL",
+        "price": "3500 TL",
+        "category": "Shot"
+      },
+      {
+        "name": "Tekila 70 CL",
+        "price": "7000 TL",
+        "category": "Shot"
+      },
+      {
+        "name": "Tekila SHOT",
+        "price": "400 TL",
+        "category": "Shot"
+      },
+      {
+        "name": "Jagermeister 35 CL",
+        "price": "3500 TL",
+        "category": "Shot"
+      },
+      {
+        "name": "Jagermeister 70 CL",
+        "price": "7000 TL",
+        "category": "Shot"
+      },
+      {
+        "name": "Jagermeister SHOT",
+        "price": "400 TL",
+        "category": "Shot"
+      },
+      {
+        "name": "Absolute Votka 35 CL",
+        "price": "4000 TL",
+        "category": "Votka"
+      },
+      {
+        "name": "Absolute Votka 70 CL",
+        "price": "8000 TL",
+        "category": "Votka"
+      },
+      {
+        "name": "Absolute Votka KADEH",
+        "price": "700 TL",
+        "category": "Votka"
+      },
+      {
+        "name": "Belvedere Votka 70 CL",
+        "price": "13000 TL",
+        "category": "Votka"
+      },
+      {
+        "name": "GreyGouse Votka 70 CL",
+        "price": "13000 TL",
+        "category": "Votka"
+      },
+      {
+        "name": "Gordon’s Gin 35 CL",
+        "price": "4000 TL",
+        "category": "Cin"
+      },
+      {
+        "name": "Gordon’s Gin 70 CL",
+        "price": "8000 TL",
+        "category": "Cin"
+      },
+      {
+        "name": "Gordon’s Gin KADEH",
+        "price": "700 TL",
+        "category": "Cin"
+      },
+      {
+        "name": "Hendrick’s Gin 70 CL",
+        "price": "13000 TL",
+        "category": "Cin"
+      },
+      {
+        "name": "Moet",
+        "price": "13000 TL",
+        "category": "Şampanya"
+      },
+      {
+        "name": "Ice Moet",
+        "price": "14000 TL",
+        "category": "Şampanya"
+      },
+      {
+        "name": "Işıklı Moet",
+        "price": "15000 TL",
+        "category": "Şampanya"
+      },
+      {
+        "name": "Marengo",
+        "price": "3000 TL",
+        "category": "Şampanya"
+      },
+      {
+        "name": "Alkolsüz Şampanya",
+        "price": "1500 TL",
+        "category": "Şampanya"
+      },
+      {
+        "name": "Chivas 12yo 35 CL",
+        "price": "4500 TL",
+        "category": "Viski"
+      },
+      {
+        "name": "Chivas 12yo 70 CL",
+        "price": "8500 TL",
+        "category": "Viski"
+      },
+      {
+        "name": "Chivas 12yo KADEH",
+        "price": "800 TL",
+        "category": "Viski"
+      },
+      {
+        "name": "Chivas 18yo",
+        "price": "15000 TL",
+        "category": "Viski"
+      },
+      {
+        "name": "House Wine Red 75 CL",
+        "price": "1800 TL",
+        "category": "Şarap"
+      },
+      {
+        "name": "House Wine Red KADEH",
+        "price": "700 TL",
+        "category": "Şarap"
+      },
+      {
+        "name": "House Wine White 75 CL",
+        "price": "1800 TL",
+        "category": "Şarap"
+      },
+      {
+        "name": "House Wine White KADEH",
+        "price": "700 TL",
+        "category": "Şarap"
+      },
+      {
+        "name": "Selection White",
+        "price": "2500 TL",
+        "category": "Şarap"
+      },
+      {
+        "name": "Selection Red",
+        "price": "2500 TL",
+        "category": "Şarap"
+      },
+      {
+        "name": "Long Island",
+        "price": "900 TL",
+        "category": "Cocktails & Liquers"
+      },
+      {
+        "name": "Mojito",
+        "price": "900 TL",
+        "category": "Cocktails & Liquers"
+      },
+      {
+        "name": "Sex On The Beach",
+        "price": "900 TL",
+        "category": "Cocktails & Liquers"
+      },
+      {
+        "name": "Malibu",
+        "price": "900 TL",
+        "category": "Cocktails & Liquers"
+      }
+    ]
+  },
 };
