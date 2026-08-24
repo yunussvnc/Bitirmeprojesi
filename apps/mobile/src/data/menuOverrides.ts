@@ -50422,4 +50422,377 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       {name: "Turkish Coffee Packet (250 gr.)", price: "290 TL", category: "Bar Front Products"},
     ],
   },
+  "6176": {
+    "name": "Mikel Coffee Company Büyükşehir Beylikdüzü White Corner",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/jkrk/mikel-coffee-jkrk",
+    "sourceName": "Yemeksepeti canlı menüsü; resmi Mikel Coffee Türkiye Around the World White Corner AVM exact kaydıyla Büyükşehir, Atatürk Blv No:38A D:26, 34520 Beylikdüzü/İstanbul şubesine bağlandı",
+    "verifiedAt": "2026-08-24",
+    "items": [
+      {
+        "name": "Americano",
+        "price": "210 TL",
+        "category": "Hot Coffees"
+      },
+      {
+        "name": "Brewed Coffee",
+        "price": "195 TL",
+        "category": "Hot Coffees"
+      },
+      {
+        "name": "Cappuccino Mikelo",
+        "price": "290 TL",
+        "category": "Hot Coffees"
+      },
+      {
+        "name": "Classic Cappuccino",
+        "price": "240 TL",
+        "category": "Hot Coffees"
+      },
+      {
+        "name": "Flat White",
+        "price": "255 TL",
+        "category": "Hot Coffees"
+      },
+      {
+        "name": "Greek Nes",
+        "price": "185 TL",
+        "category": "Hot Coffees"
+      },
+      {
+        "name": "Latte",
+        "price": "240 TL",
+        "category": "Hot Coffees"
+      },
+      {
+        "name": "Mikeloccino",
+        "price": "320 TL",
+        "category": "Hot Coffees"
+      },
+      {
+        "name": "Mocha",
+        "price": "295 TL",
+        "category": "Hot Coffees"
+      },
+      {
+        "name": "Espresso Classic",
+        "price": "150 TL",
+        "category": "Hot Coffees"
+      },
+      {
+        "name": "Espresso Macchiato",
+        "price": "170 TL",
+        "category": "Hot Coffees"
+      },
+      {
+        "name": "Espresso Au Lait",
+        "price": "200 TL",
+        "category": "Hot Coffees"
+      },
+      {
+        "name": "Espresso Mikelo",
+        "price": "200 TL",
+        "category": "Hot Coffees"
+      },
+      {
+        "name": "Cappuccino Affogato",
+        "price": "290 TL",
+        "category": "Hot Coffees"
+      },
+      {
+        "name": "Toffee Latte",
+        "price": "320 TL",
+        "category": "Hot Coffees"
+      },
+      {
+        "name": "Georgia",
+        "price": "320 TL",
+        "category": "Hot Drinks"
+      },
+      {
+        "name": "Mikelo",
+        "price": "320 TL",
+        "category": "Hot Drinks"
+      },
+      {
+        "name": "Chai Tea Latte",
+        "price": "295 TL",
+        "category": "Hot Drinks"
+      },
+      {
+        "name": "Hot Chocolate",
+        "price": "280 TL",
+        "category": "Hot Drinks"
+      },
+      {
+        "name": "White Chocolate",
+        "price": "280 TL",
+        "category": "Hot Drinks"
+      },
+      {
+        "name": "Tea",
+        "price": "110 TL",
+        "category": "Hot Drinks"
+      },
+      {
+        "name": "Granita Lemon",
+        "price": "345 TL",
+        "category": "Cold Drinks"
+      },
+      {
+        "name": "Granita Strawberry",
+        "price": "345 TL",
+        "category": "Cold Drinks"
+      },
+      {
+        "name": "Iced Cappuccino Mikelo",
+        "price": "300 TL",
+        "category": "Cold Drinks"
+      },
+      {
+        "name": "Vanilyalı Milkshake",
+        "price": "345 TL",
+        "category": "Cold Drinks"
+      },
+      {
+        "name": "Çilekli Milkshake",
+        "price": "345 TL",
+        "category": "Cold Drinks"
+      },
+      {
+        "name": "Cold Special Mikelo",
+        "price": "345 TL",
+        "category": "Cold Drinks"
+      },
+      {
+        "name": "Iced Chai Tea Latte",
+        "price": "225 TL",
+        "category": "Cold Drinks"
+      },
+      {
+        "name": "Iced Chocolate",
+        "price": "305 TL",
+        "category": "Cold Drinks"
+      },
+      {
+        "name": "Iced Georgia",
+        "price": "345 TL",
+        "category": "Cold Drinks"
+      },
+      {
+        "name": "Iced Tea",
+        "price": "285 TL",
+        "category": "Cold Drinks"
+      },
+      {
+        "name": "Iced White Chocolate",
+        "price": "285 TL",
+        "category": "Cold Drinks"
+      },
+      {
+        "name": "Çikolatalı Milkshake",
+        "price": "345 TL",
+        "category": "Cold Drinks"
+      },
+      {
+        "name": "Iced Cappuccino Affogato",
+        "price": "300 TL",
+        "category": "Cold Drinks"
+      },
+      {
+        "name": "Berry Bliss",
+        "price": "275 TL",
+        "category": "Cold Drinks"
+      },
+      {
+        "name": "Chocolate Lotus Biscoff",
+        "price": "295 TL",
+        "category": "Cold Drinks"
+      },
+      {
+        "name": "Strawberry Cheesecake Lotus",
+        "price": "295 TL",
+        "category": "Cold Drinks"
+      },
+      {
+        "name": "W. Chocolate Lotus Biscoff",
+        "price": "295 TL",
+        "category": "Cold Drinks"
+      },
+      {
+        "name": "Iced Macchiato",
+        "price": "215 TL",
+        "category": "Cold Coffees"
+      },
+      {
+        "name": "Iced Americano",
+        "price": "210 TL",
+        "category": "Cold Coffees"
+      },
+      {
+        "name": "Iced Au Lait",
+        "price": "230 TL",
+        "category": "Cold Coffees"
+      },
+      {
+        "name": "Iced Brewed Coffee",
+        "price": "210 TL",
+        "category": "Cold Coffees"
+      },
+      {
+        "name": "Iced Classic Cappuccino",
+        "price": "255 TL",
+        "category": "Cold Coffees"
+      },
+      {
+        "name": "Iced Classic Espresso",
+        "price": "215 TL",
+        "category": "Cold Coffees"
+      },
+      {
+        "name": "Iced Flat White",
+        "price": "265 TL",
+        "category": "Cold Coffees"
+      },
+      {
+        "name": "Iced Greek Frappe",
+        "price": "210 TL",
+        "category": "Cold Coffees"
+      },
+      {
+        "name": "Iced Latte",
+        "price": "255 TL",
+        "category": "Cold Coffees"
+      },
+      {
+        "name": "Iced Latte Macchiato",
+        "price": "220 TL",
+        "category": "Cold Coffees"
+      },
+      {
+        "name": "Iced Mikeloccino",
+        "price": "345 TL",
+        "category": "Cold Coffees"
+      },
+      {
+        "name": "Iced Mocha",
+        "price": "305 TL",
+        "category": "Cold Coffees"
+      },
+      {
+        "name": "Ice Espresso Mikelo",
+        "price": "170 TL",
+        "category": "Cold Coffees"
+      },
+      {
+        "name": "Bagel Three Cheese Sandwich",
+        "price": "330 TL",
+        "category": "Sandwiches"
+      },
+      {
+        "name": "Cheese Sourdough Sandwich",
+        "price": "355 TL",
+        "category": "Sandwiches"
+      },
+      {
+        "name": "Beef Ham Sandwich with Mikel Sauce",
+        "price": "330 TL",
+        "category": "Sandwiches"
+      },
+      {
+        "name": "Double Chocolate Cookie",
+        "price": "225 TL",
+        "category": "Desserts"
+      },
+      {
+        "name": "White Chocolate Brownie",
+        "price": "330 TL",
+        "category": "Desserts"
+      },
+      {
+        "name": "Poppy Seed Lemon Cake",
+        "price": "195 TL",
+        "category": "Desserts"
+      },
+      {
+        "name": "Marble Cake",
+        "price": "195 TL",
+        "category": "Desserts"
+      },
+      {
+        "name": "Cup Lotus Fresh",
+        "price": "390 TL",
+        "category": "Desserts"
+      },
+      {
+        "name": "Cup Spoonful Fresh",
+        "price": "390 TL",
+        "category": "Desserts"
+      },
+      {
+        "name": "Cookie Pistachio Mikel",
+        "price": "280 TL",
+        "category": "Desserts"
+      },
+      {
+        "name": "Pasta Nutella Mikel",
+        "price": "435 TL",
+        "category": "Desserts"
+      },
+      {
+        "name": "Cookie Lotus Mikel",
+        "price": "275 TL",
+        "category": "Desserts"
+      },
+      {
+        "name": "Cheesecake Lotus Raspberry Mikel",
+        "price": "435 TL",
+        "category": "Desserts"
+      },
+      {
+        "name": "San Pellegrino (25 cl.)",
+        "price": "155 TL",
+        "category": "Beverages"
+      },
+      {
+        "name": "Damla Water (50 cl.)",
+        "price": "45 TL",
+        "category": "Beverages"
+      },
+      {
+        "name": "Damla Water (33 cl.)",
+        "price": "70 TL",
+        "category": "Beverages"
+      },
+      {
+        "name": "Espresso Arabica (1000 gr.)",
+        "price": "1.750 TL",
+        "category": "Bar Front Products"
+      },
+      {
+        "name": "Filter Coffee (250 gr.)",
+        "price": "450 TL",
+        "category": "Bar Front Products"
+      },
+      {
+        "name": "Lotus Biscuit (Single Pack)",
+        "price": "40 TL",
+        "category": "Bar Front Products"
+      },
+      {
+        "name": "Gluten-Free Mini Macaroon Cookies",
+        "price": "225 TL",
+        "category": "Bar Front Products"
+      },
+      {
+        "name": "Gluten-Free Salted Walnut Cookies",
+        "price": "225 TL",
+        "category": "Bar Front Products"
+      },
+      {
+        "name": "Turkish Coffee Packet (250 gr.)",
+        "price": "290 TL",
+        "category": "Bar Front Products"
+      },
+    ]
+  },
 };
