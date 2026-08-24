@@ -4,6 +4,404 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6338": {
+    "name": "Cemil Hoca Restoran",
+    "sourceUrl": "https://cemilhoca.com.tr/wp-content/uploads/2026/08/menu_10.html",
+    "sourceName": "Cemil Hoca resmi QR menüsü; erişilebilir URL yolu 2026/08; resmi Taksim/Beylikdüzü sayfası değil, exact Beylikdüzü şubesi için resmi işletme kaydı ve Hentzer ID 6338 Cengiz Topel Cd. No:20, +90 212 850 56 61 ile eşleşti",
+    "verifiedAt": "2026-08-24",
+    "items": [
+      {
+        "name": "Omlet",
+        "price": "315",
+        "category": "Kahvaltı"
+      },
+      {
+        "name": "Kaşarlı Omlet",
+        "price": "375",
+        "category": "Kahvaltı"
+      },
+      {
+        "name": "Sucuklu Yumurta",
+        "price": "440",
+        "category": "Kahvaltı"
+      },
+      {
+        "name": "Kavurmalı Yumurta",
+        "price": "590",
+        "category": "Kahvaltı"
+      },
+      {
+        "name": "Güveçte Tereyağlı Menemen",
+        "price": "350",
+        "category": "Kahvaltı"
+      },
+      {
+        "name": "Güveçte Tereyağlı Kaşarlı Menemen",
+        "price": "400",
+        "category": "Kahvaltı"
+      },
+      {
+        "name": "Kuymak",
+        "price": "490",
+        "category": "Kahvaltı"
+      },
+      {
+        "name": "Gözleme",
+        "price": "285",
+        "category": "Kahvaltı"
+      },
+      {
+        "name": "Açık Büfe Kahvaltı (Hafta Sonu)",
+        "price": "1.200",
+        "category": "Kahvaltı"
+      },
+      {
+        "name": "Serpme Kahvaltı (Hafta İçi)",
+        "price": "1.000",
+        "category": "Kahvaltı"
+      },
+      {
+        "name": "Kahvaltı Tabağı",
+        "price": "710",
+        "category": "Kahvaltı"
+      },
+      {
+        "name": "Balık Çorbası",
+        "price": "440",
+        "category": "Çorbalar"
+      },
+      {
+        "name": "Süzme Mercimek Çorbası",
+        "price": "315",
+        "category": "Çorbalar"
+      },
+      {
+        "name": "Kara Lahana Çorbası",
+        "price": "385",
+        "category": "Çorbalar"
+      },
+      {
+        "name": "Haydari",
+        "price": "250",
+        "category": "Başlangıçlar & Mezeler"
+      },
+      {
+        "name": "Yaprak Sarma",
+        "price": "250",
+        "category": "Başlangıçlar & Mezeler"
+      },
+      {
+        "name": "Yoğurtlu Patlıcan",
+        "price": "275",
+        "category": "Başlangıçlar & Mezeler"
+      },
+      {
+        "name": "Acılı Ezme",
+        "price": "250",
+        "category": "Başlangıçlar & Mezeler"
+      },
+      {
+        "name": "Kuru Cacık",
+        "price": "260",
+        "category": "Başlangıçlar & Mezeler"
+      },
+      {
+        "name": "Erguvan Rüyası",
+        "price": "335",
+        "category": "Başlangıçlar & Mezeler"
+      },
+      {
+        "name": "Çiğ Köfte (10 Sıkım)",
+        "price": "300",
+        "category": "Başlangıçlar & Mezeler"
+      },
+      {
+        "name": "Trabzon Usulü Kaygana",
+        "price": "200",
+        "category": "Başlangıçlar & Mezeler"
+      },
+      {
+        "name": "Atom",
+        "price": "290",
+        "category": "Başlangıçlar & Mezeler"
+      },
+      {
+        "name": "Şakşuka",
+        "price": "275",
+        "category": "Başlangıçlar & Mezeler"
+      },
+      {
+        "name": "Havuç Tarator",
+        "price": "270",
+        "category": "Başlangıçlar & Mezeler"
+      },
+      {
+        "name": "Güveçte Tereyağlı Karides",
+        "price": "790",
+        "category": "Ara Sıcaklar"
+      },
+      {
+        "name": "Güveçte Sebzeli Tereyağlı Karides",
+        "price": "810",
+        "category": "Ara Sıcaklar"
+      },
+      {
+        "name": "Kalamar Tava",
+        "price": "780",
+        "category": "Ara Sıcaklar"
+      },
+      {
+        "name": "İçli Köfte",
+        "price": "290",
+        "category": "Ara Sıcaklar"
+      },
+      {
+        "name": "Patates Kızartması",
+        "price": "225",
+        "category": "Ara Sıcaklar"
+      },
+      {
+        "name": "Hamburger",
+        "price": "560",
+        "category": "Ara Sıcaklar"
+      },
+      {
+        "name": "Cheeseburger",
+        "price": "580",
+        "category": "Ara Sıcaklar"
+      },
+      {
+        "name": "Kara Lahana Sarması",
+        "price": "385",
+        "category": "Ara Sıcaklar"
+      },
+      {
+        "name": "Tereyağlı Fasulye Turşu Kavurması",
+        "price": "325",
+        "category": "Ara Sıcaklar"
+      },
+      {
+        "name": "Levrek Köfte",
+        "price": "220",
+        "category": "Ara Sıcaklar"
+      },
+      {
+        "name": "Hamsili Pilav",
+        "price": "565",
+        "category": "Ara Sıcaklar"
+      },
+      {
+        "name": "Cemil Hoca Karışık Izgara Tabağı",
+        "price": "1.910",
+        "category": "Et & Izgara Çeşitleri"
+      },
+      {
+        "name": "Acılı Kebap",
+        "price": "780",
+        "category": "Et & Izgara Çeşitleri"
+      },
+      {
+        "name": "Acısız Kebap",
+        "price": "780",
+        "category": "Et & Izgara Çeşitleri"
+      },
+      {
+        "name": "Kuzu Pirzola",
+        "price": "1.350",
+        "category": "Et & Izgara Çeşitleri"
+      },
+      {
+        "name": "Tavuk Pirzola",
+        "price": "695",
+        "category": "Et & Izgara Çeşitleri"
+      },
+      {
+        "name": "Tavuk Şiş",
+        "price": "695",
+        "category": "Et & Izgara Çeşitleri"
+      },
+      {
+        "name": "Tavuk Kanat",
+        "price": "695",
+        "category": "Et & Izgara Çeşitleri"
+      },
+      {
+        "name": "Tereyağlı Bonfile Sac Tava",
+        "price": "1.270",
+        "category": "Et & Izgara Çeşitleri"
+      },
+      {
+        "name": "Mantar Soslu Bonfile Izgara",
+        "price": "1.490",
+        "category": "Et & Izgara Çeşitleri"
+      },
+      {
+        "name": "Akçaabat Köfte (135 g / 3 adet)",
+        "price": "440",
+        "category": "Et & Izgara Çeşitleri"
+      },
+      {
+        "name": "Akçaabat Köfte (225 g / 5 adet)",
+        "price": "730",
+        "category": "Et & Izgara Çeşitleri"
+      },
+      {
+        "name": "Akçaabat Köfte — Paylaşımlı Porsiyon (500 g / 750 g / 1 kg)",
+        "price": "1.550 (500 g) / 2.250 (750 g) / 2.950 (1 kg)",
+        "category": "Et & Izgara Çeşitleri"
+      },
+      {
+        "name": "Akçaabat Piyazı (Tek / Çift)",
+        "price": "360 (Tek) / 500 (Çift)",
+        "category": "Salatalar"
+      },
+      {
+        "name": "Cemil Hoca Bahçe Salata (Tek / Çift)",
+        "price": "325 (Tek) / 450 (Çift)",
+        "category": "Salatalar"
+      },
+      {
+        "name": "Çoban Salata (Tek / Çift)",
+        "price": "315 (Tek) / 440 (Çift)",
+        "category": "Salatalar"
+      },
+      {
+        "name": "Roka Salatası (Tek / Çift)",
+        "price": "300 (Tek) / 430 (Çift)",
+        "category": "Salatalar"
+      },
+      {
+        "name": "İlave Peynir",
+        "price": "50",
+        "category": "Salatalar"
+      },
+      {
+        "name": "Gavurdağı Salatası (Tek / Çift)",
+        "price": "430 (Tek) / 620 (Çift)",
+        "category": "Salatalar"
+      },
+      {
+        "name": "Söğüş Tabağı",
+        "price": "260",
+        "category": "Salatalar"
+      },
+      {
+        "name": "Fındıklı Baklava",
+        "price": "310",
+        "category": "Tatlılar & Meyveler"
+      },
+      {
+        "name": "Fırın Sütlaç",
+        "price": "340",
+        "category": "Tatlılar & Meyveler"
+      },
+      {
+        "name": "Sıcak Helva",
+        "price": "380",
+        "category": "Tatlılar & Meyveler"
+      },
+      {
+        "name": "Dondurmalı İrmik Helvası",
+        "price": "350",
+        "category": "Tatlılar & Meyveler"
+      },
+      {
+        "name": "Sufle",
+        "price": "360",
+        "category": "Tatlılar & Meyveler"
+      },
+      {
+        "name": "Yaş Pasta Çeşitleri (Tek Kişilik / 8–10 Kişilik)",
+        "price": "290 (Tek Kişilik) / 1.550 (8–10 Kişilik)",
+        "category": "Tatlılar & Meyveler"
+      },
+      {
+        "name": "Karışık Meyve Tabağı",
+        "price": "640",
+        "category": "Tatlılar & Meyveler"
+      },
+      {
+        "name": "Ayva Tatlısı",
+        "price": "385",
+        "category": "Tatlılar & Meyveler"
+      },
+      {
+        "name": "Kabak Tatlısı",
+        "price": "385",
+        "category": "Tatlılar & Meyveler"
+      },
+      {
+        "name": "Soda / Maden Suyu",
+        "price": "75",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Sıkma Limon Soda",
+        "price": "90",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Ayran",
+        "price": "90",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Kola",
+        "price": "145",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Meyve Suyu",
+        "price": "145",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Sıkma Meyve Suyu (Portakal / Nar)",
+        "price": "210",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Şalgam",
+        "price": "95",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Türk Kahvesi",
+        "price": "120",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Latte / Cappuccino",
+        "price": "170",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Americano",
+        "price": "145",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Nescafe",
+        "price": "120",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Espresso (Tekli / İkili)",
+        "price": "120 (Tekli) / 150 (İkili)",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Çay",
+        "price": "100",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Semaver Çay",
+        "price": "425",
+        "category": "İçecekler"
+      }
+    ]
+  },
   "6163": {
     "name": "Sunset Grill & Bar",
     "sourceUrl": "https://www.sunsetgrillbar.com/assets/yemek.pdf",
