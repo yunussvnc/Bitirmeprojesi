@@ -52387,4 +52387,672 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       },
     ]
   },
+  "6000": {
+    "name": "Maydonoz Döner Arnavutköy İslambey",
+    "sourceUrl": "https://www.migros.com.tr/yemek/maydonoz-doner-arnavutkoy-islambey-mah-st-2591c",
+    "sourceName": "Migros Yemek branch-labeled canlı menüsü; Yandex/official Maydonoz exact Arnavutköy İslambey Fatih Cd. No:44A köprüsüyle eşleştirildi",
+    "verifiedAt": "2026-08-24",
+    "items": [
+      {
+        "name": "2 Adet Tavuk Döner Large Dürüm (45 cm.) Sepette uygulayacağınız kupon ile birlikte!",
+        "price": "690,00 TL",
+        "category": "Migros Yemek Özel Menü"
+      },
+      {
+        "name": "Medium tavuk döner dürüm ve pepsi zero sugar (330 ml) ile",
+        "price": "365,00 TL",
+        "category": "Migros Yemek Özel Menü"
+      },
+      {
+        "name": "4 Adet Doritos'lu Maytako Tavuk Döner + 2'li Külah Patates Kızartması + Pepsi Zero Sugar (1 L.)",
+        "price": "895,00 TL",
+        "category": "Migros Yemek Özel Menü"
+      },
+      {
+        "name": "XLarge Tavuk Döner Dürüm (45 cm.) + Külah Patates Kızartması + Ayran (27 cl.)",
+        "price": "495,00 TL",
+        "category": "Migros Yemek Özel Menü"
+      },
+      {
+        "name": "Tavuk Döner Large Dürüm + Algida Maraş Cup + Pepsi Zero Sugar (330ml)",
+        "price": "505,00 TL",
+        "category": "Avantajlı Algida Menüleri"
+      },
+      {
+        "name": "Tavuk Döner Small Dürüm + Carte dor Meyve Rüyası + Pepsi Zero Sugar (330ml)",
+        "price": "415,00 TL",
+        "category": "Avantajlı Algida Menüleri"
+      },
+      {
+        "name": "2 Adet Doritos'lu Maytako (Tavuk Dönerden) + Magnum Mini Badem (60 gr.) + Pepsi Zero Sugar (33 cl.)",
+        "price": "530,00 TL",
+        "category": "Avantajlı Algida Menüleri"
+      },
+      {
+        "name": "2 Adet Doritos'lu Maytako (Et Dönerden) + Magnum Mini Cookie (60 gr.) + Pepsi Zero Sugar (33 cl.)",
+        "price": "690,00 TL",
+        "category": "Avantajlı Algida Menüleri"
+      },
+      {
+        "name": "Katmer + Algida Dilim Dondurma",
+        "price": "270,00 TL",
+        "category": "Avantajlı Algida Menüleri"
+      },
+      {
+        "name": "Medium tavuk döner dürüm ve pepsi zero sugar (330 ml) ile",
+        "price": "365,00 TL",
+        "category": "Pepsi İndirimli Menüler"
+      },
+      {
+        "name": "Large tavuk döner dürüm (45 cm) ve pepsi zero sugar (330 ml) ile",
+        "price": "415,00 TL",
+        "category": "Pepsi İndirimli Menüler"
+      },
+      {
+        "name": "Medium et döner dürüm ve pepsi zero sugar (330 ml) ile",
+        "price": "475,00 TL",
+        "category": "Pepsi İndirimli Menüler"
+      },
+      {
+        "name": "Large et döner dürüm (45 cm) ve pepsi zero sugar (330 ml) ile",
+        "price": "545,00 TL",
+        "category": "Pepsi İndirimli Menüler"
+      },
+      {
+        "name": "Xlarge et döner dürüm (45 cm) ve pepsi zero sugar (330 ml) ile",
+        "price": "615,00 TL",
+        "category": "Pepsi İndirimli Menüler"
+      },
+      {
+        "name": "2 Adet Tavuk Döner Medium Dürüm + 2'li Külah Patates Kızartması + 2 Adet Pepsi Zero Sugar",
+        "price": "840,00 TL",
+        "category": "Pepsi İndirimli Menüler"
+      },
+      {
+        "name": "2 Adet Tavuk Döner Medium Dürüm + Small Tavuk Döner Dürüm + 2'li Külah Patates Kızartması + Pepsi Zero Sugar (1L.)",
+        "price": "990,00 TL",
+        "category": "Pepsi İndirimli Menüler"
+      },
+      {
+        "name": "2 Adet Doritos'lu Maytako Tavuk Döner",
+        "price": "360,00 TL",
+        "category": "Maytako Menüler"
+      },
+      {
+        "name": "2 Adet Doritos'lu Maytako Et Döner",
+        "price": "520,00 TL",
+        "category": "Maytako Menüler"
+      },
+      {
+        "name": "2 Adet Doritos'lu Maytako Et Döner + Külah Patates Kızartması + Pepsi Pet (25 cl.)",
+        "price": "595,00 TL",
+        "category": "Maytako Menüler"
+      },
+      {
+        "name": "4 Adet Doritos'lu Maytako Tavuk Döner + 2'li Külah Patates Kızartması + Pepsi Zero Sugar (1 L.)",
+        "price": "895,00 TL",
+        "category": "Maytako Menüler"
+      },
+      {
+        "name": "4 Adet Doritos'lu Maytako Et Döner + 2'li Külah Patates Kızartması + Pepsi Zero Sugar (1 L.)",
+        "price": "1.185,00 TL",
+        "category": "Maytako Menüler"
+      },
+      {
+        "name": "Doritos'lu Maytako Et Döner + Doritos'lu Maytako Tavuk Döner",
+        "price": "440,00 TL",
+        "category": "Maytako Menüler"
+      },
+      {
+        "name": "50 gr. tavuk döner,chedar peyniri, salatalık turşusu, , soğan, acılı sarımsaklı mayonez sos,Doritos 20gr",
+        "price": "205,00 TL",
+        "category": "Maytako Menüler"
+      },
+      {
+        "name": "50 gr. et döner, chedar peyniri, salatalık turşusu, soğan, acılı sarımsaklı mayonez sos,Doritos 20gr",
+        "price": "310,00 TL",
+        "category": "Maytako Menüler"
+      },
+      {
+        "name": "Doritos'lu Maytako Tavuk Döner + Külah Patates Kızartması + Pepsi Pet (25 cl.)",
+        "price": "310,00 TL",
+        "category": "Maytako Menüler"
+      },
+      {
+        "name": "Doritos'lu Maytako Et Döner + Külah Patates Kızartması + Pepsi Pet (25 cl.)",
+        "price": "400,00 TL",
+        "category": "Maytako Menüler"
+      },
+      {
+        "name": "Doritos'lu Maytako Et Döner + Doritos'lu Maytako Tavuk Döner + Külah Patates Kızartması + Pepsi Pet (25 cl.)",
+        "price": "550,00 TL",
+        "category": "Maytako Menüler"
+      },
+      {
+        "name": "Medium Tavuk Döner Dürüm + Ayran (17 cl.)",
+        "price": "325,00 TL",
+        "category": "1 Kişilik Menüler"
+      },
+      {
+        "name": "Large Tavuk Döner Dürüm (45 cm.) + Ayran (27 cl.)",
+        "price": "380,00 TL",
+        "category": "1 Kişilik Menüler"
+      },
+      {
+        "name": "XLarge Tavuk Döner Dürüm (45 cm.) + Ayran (27 cl.)",
+        "price": "430,00 TL",
+        "category": "1 Kişilik Menüler"
+      },
+      {
+        "name": "Medium Tavuk Döner Dürüm + Külah Patates Kızartması + Ayran (17 cl.)",
+        "price": "395,00 TL",
+        "category": "1 Kişilik Menüler"
+      },
+      {
+        "name": "Large Tavuk Döner Dürüm (45 cm.) + Külah Patates Kızartması + Ayran (27 cl.)",
+        "price": "450,00 TL",
+        "category": "1 Kişilik Menüler"
+      },
+      {
+        "name": "XLarge Tavuk Döner Dürüm (45 cm.) + Külah Patates Kızartması + Ayran (27 cl.)",
+        "price": "495,00 TL",
+        "category": "1 Kişilik Menüler"
+      },
+      {
+        "name": "Medium Et Döner Dürüm + Ayran (17 cl.)",
+        "price": "435,00 TL",
+        "category": "1 Kişilik Menüler"
+      },
+      {
+        "name": "Large Et Döner Dürüm (45 cm.) + Ayran (27 cl.)",
+        "price": "510,00 TL",
+        "category": "1 Kişilik Menüler"
+      },
+      {
+        "name": "XLarge Et Döner Dürüm (45 cm.) + Ayran (27 cl.)",
+        "price": "580,00 TL",
+        "category": "1 Kişilik Menüler"
+      },
+      {
+        "name": "Medium Et Döner Dürüm + Külah Patates Kızartması + Ayran (17 cl.)",
+        "price": "505,00 TL",
+        "category": "1 Kişilik Menüler"
+      },
+      {
+        "name": "Large Et Döner Dürüm (45 cm.) + Külah Patates Kızartması + Ayran (27 cl.)",
+        "price": "580,00 TL",
+        "category": "1 Kişilik Menüler"
+      },
+      {
+        "name": "XLarge Et Döner Dürüm (45 cm.) + Külah Patates Kızartması + Ayran (27 cl.)",
+        "price": "650,00 TL",
+        "category": "1 Kişilik Menüler"
+      },
+      {
+        "name": "Burger ekmeği, 75 gr. tavuk döner, mayonez, domates, iceberg marul, turşu",
+        "price": "295,00 TL",
+        "category": "Burger Ailesi"
+      },
+      {
+        "name": "Burger ekmeği, 75 gr. et döner, mayonez, domates, iceberg marul, turşu",
+        "price": "405,00 TL",
+        "category": "Burger Ailesi"
+      },
+      {
+        "name": "Burger ekmeği, 90 gr. tavuk burger, iceberg marul, turşu, cheddar peyniri, meat sos",
+        "price": "295,00 TL",
+        "category": "Burger Ailesi"
+      },
+      {
+        "name": "Tavuk Döner Burger + Patates Kızartması + Pepsi (330 ml.)",
+        "price": "435,00 TL",
+        "category": "Burger Ailesi"
+      },
+      {
+        "name": "Et Döner Burger + Patates Kızartması + Pepsi (330 ml.)",
+        "price": "545,00 TL",
+        "category": "Burger Ailesi"
+      },
+      {
+        "name": "Tenders Burger + Patates Kızartması + Pepsi (330 ml.)",
+        "price": "435,00 TL",
+        "category": "Burger Ailesi"
+      },
+      {
+        "name": "2 Adet Tavuk Döner Medium Dürüm + 2'li Külah Patates Kızartması + 2 Adet Pepsi Zero Sugar",
+        "price": "840,00 TL",
+        "category": "2 Kişilik Menüler"
+      },
+      {
+        "name": "2 Adet Tavuk Döner Large Dürüm (45 cm.) + 2'li Külah Patates Kızartması + 2 Adet Pepsi Zero Sugar",
+        "price": "930,00 TL",
+        "category": "2 Kişilik Menüler"
+      },
+      {
+        "name": "2 Adet Et Döner Medium Dürüm + 2'li Külah Patates Kızartması + 2 Adet Pepsi Zero Sugar",
+        "price": "1.070,00 TL",
+        "category": "2 Kişilik Menüler"
+      },
+      {
+        "name": "2 Adet Et Döner Large Dürüm (45 cm.) + 2'li Külah Patates Kızartması + 2 Adet Pepsi Zero Sugar",
+        "price": "1.250,00 TL",
+        "category": "2 Kişilik Menüler"
+      },
+      {
+        "name": "3 Adet Tavuk Döner Medium Dürüm + Pepsi Zero Sugar (1L.)",
+        "price": "855,00 TL",
+        "category": "3 Kişilik Menüler"
+      },
+      {
+        "name": "3 Adet Tavuk Döner Large Dürüm (45 cm.) + Pepsi Zero Sugar (1L.)",
+        "price": "995,00 TL",
+        "category": "3 Kişilik Menüler"
+      },
+      {
+        "name": "3 Adet Et Döner Medium Dürüm + Pepsi Zero Sugar (1L.)",
+        "price": "1.195,00 TL",
+        "category": "3 Kişilik Menüler"
+      },
+      {
+        "name": "3 Adet Et Döner Large Dürüm (45 cm.) + Pepsi Zero Sugar (1L.)",
+        "price": "1.460,00 TL",
+        "category": "3 Kişilik Menüler"
+      },
+      {
+        "name": "50 gr. et döner, salatalık turşusu, patates kızartması, isteğe göre soğan, sarımsaklı mayonez sos. Cin biberi ile",
+        "price": "335,00 TL",
+        "category": "Et Dönerler"
+      },
+      {
+        "name": "Özel fırın lavaşa; 50 gr. et döner, patates kızartması, salatalık turşusu, özel sos, isteğe göre soğan, sarımsaklı mayonez sos. Cin biberi ile",
+        "price": "335,00 TL",
+        "category": "Et Dönerler"
+      },
+      {
+        "name": "Özel fırın lavaşa; 75 gr. et döner, patates kızartması, salatalık turşusu, özel sos, özel sos, isteğe göre soğan, sarımsaklı mayonez sos. Cin biberi ile",
+        "price": "405,00 TL",
+        "category": "Et Dönerler"
+      },
+      {
+        "name": "1,5 adet özel fırın lavaşa; 100 gr. et döner, patates kızartması, salatalık turşusu, özel sos, isteğe göre soğan, sarımsaklı mayonez sos. Cin biberi ile",
+        "price": "495,00 TL",
+        "category": "Et Dönerler"
+      },
+      {
+        "name": "2 adet özel fırın lavaşa; 125 gr. et döner, patates kızartması, salatalık turşusu, özel sos, isteğe göre soğan, sarımsaklı mayonez sos. Cin biberi ile",
+        "price": "570,00 TL",
+        "category": "Et Dönerler"
+      },
+      {
+        "name": "Patates kızartması, salatalık turşusu, özel ince fırın lavaş, isteğe göre cin biberi ile",
+        "price": "530,00 TL",
+        "category": "Et Dönerler"
+      },
+      {
+        "name": "Pilav Üstü Et Döner (100 Gr.)",
+        "price": "550,00 TL",
+        "category": "Et Dönerler"
+      },
+      {
+        "name": "Özel sos, isteğe göre cin biberi ile",
+        "price": "580,00 TL",
+        "category": "Et Dönerler"
+      },
+      {
+        "name": "50 gr. tavuk döner, salatalık turşusu, patates kızartması, isteğe göre soğan, sarımsaklı mayonez sos. Cin biberi ile",
+        "price": "245,00 TL",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Özel fırın lavaşa; 50 gr. tavuk döner, patates kızartması, salatalık turşusu, özel sos, isteğe göre soğan, sarımsaklı mayonez sos. Cin biberi ile",
+        "price": "245,00 TL",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Özel fırın lavaşa; 75 gr. tavuk döner, salatalık turşusu, patates kızartması, özel sos, isteğe göre soğan, sarımsaklı mayonez sos. Cin biberi ile",
+        "price": "295,00 TL",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "1,5 adet özel fırın lavaşa; 100 gr. tavuk döner, patates kızartması, salatalık turşusu, özel sos, isteğe göre soğan, sarımsaklı mayonez sos. Cin biberi ile",
+        "price": "345,00 TL",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "2 adet özel fırın lavaşa; 125 gr. tavuk döner, patates kızartması, salatalık turşusu, özel sos, isteğe göre soğan, sarımsaklı mayonez sos. Cin biberi ile",
+        "price": "395,00 TL",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Patates kızartması, salatalık turşusu, özel ince fırın lavaş, isteğe göre cin biberi ile",
+        "price": "365,00 TL",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Pilav Üstü Tavuk Döner (100 Gr.)",
+        "price": "385,00 TL",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Özel sosu, isteğe göre cin biberi ile",
+        "price": "395,00 TL",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Kaşarlı Patso Sandviç",
+        "price": "250,00 TL",
+        "category": "Sandviçler"
+      },
+      {
+        "name": "Patso Sandviç",
+        "price": "195,00 TL",
+        "category": "Sandviçler"
+      },
+      {
+        "name": "Soğan halkası 4 adet, mozzarella stick 2 adet, kumpir topları 2 adet, mac’n cheese 2 adet, silindir kroket 2 adet, patates kızartması 110 gr.",
+        "price": "265,00 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Cin Biberi",
+        "price": "10,00 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "2'Li Külah Patates Kızartması",
+        "price": "170,00 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Ekstra Lavaş",
+        "price": "20,00 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Külah Patates Kızartması",
+        "price": "110,00 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Soğan Halkası (5 Adet)",
+        "price": "65,00 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Soğan Halkası (8 Adet)",
+        "price": "75,00 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Mercimek Çorbası",
+        "price": "130,00 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Mozarella Stick (2 Adet)",
+        "price": "60,00 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Mozarella Stick (4 Adet)",
+        "price": "100,00 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Kumpir Topları (2 Adet)",
+        "price": "60,00 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Kumpir Topları (4 Adet)",
+        "price": "100,00 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Mac'n Cheese Topları (2 Adet)",
+        "price": "60,00 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Mac'n Cheese Topları (4 Adet)",
+        "price": "100,00 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Silindir Kroket (5 Adet)",
+        "price": "70,00 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Silindir Kroket (8 Adet)",
+        "price": "105,00 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Katmer",
+        "price": "200,00 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Sütlaç",
+        "price": "140,00 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Frambuazlı Cup Pasta (130 Gr.)",
+        "price": "160,00 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Karamelli Cup Pasta (130 Gr.)",
+        "price": "160,00 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Fıstıklı Cup Pasta (130 Gr.)",
+        "price": "160,00 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Çikolatalı Cup Pasta (130 Gr.)",
+        "price": "160,00 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Limonlu Cup Pasta (130 Gr.)",
+        "price": "160,00 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Algida Maraş Kesme Dilim Dondurma (82 Ml.)",
+        "price": "70,00 TL",
+        "category": "Dondurmalar"
+      },
+      {
+        "name": "Algida Maraş Usulü Cup Dondurma (100 Ml.)",
+        "price": "65,00 TL",
+        "category": "Dondurmalar"
+      },
+      {
+        "name": "Carte D'or Mini Premium Meyve Rüyası (100 Ml.)",
+        "price": "75,00 TL",
+        "category": "Dondurmalar"
+      },
+      {
+        "name": "Carte D'or Mini Premium Çikolata Rüyası (100 Ml.)",
+        "price": "75,00 TL",
+        "category": "Dondurmalar"
+      },
+      {
+        "name": "Magnum Mini Badem",
+        "price": "75,00 TL",
+        "category": "Dondurmalar"
+      },
+      {
+        "name": "Magnum Mini Cookie",
+        "price": "75,00 TL",
+        "category": "Dondurmalar"
+      },
+      {
+        "name": "Pepsi (33 Cl.)",
+        "price": "95,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Pepsi Zero Sugar (33 Cl.)",
+        "price": "95,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Yedigün (33 Cl.)",
+        "price": "95,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "7Up (33 Cl.)",
+        "price": "95,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Lipton Ice Tea (33 Cl.)",
+        "price": "95,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Tropicana (33 Cl.)",
+        "price": "95,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Doğanay Şalgam Suyu (33 Cl.)",
+        "price": "65,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Ayran (27 Cl.)",
+        "price": "60,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Ayran (17 Cl.)",
+        "price": "55,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Meyveli Soda (20 Cl.)",
+        "price": "55,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Soda (20 Cl.)",
+        "price": "50,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Su (50 Cl.)",
+        "price": "30,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Pepsi (1 L.)",
+        "price": "120,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Pepsi Zero Sugar (1 L.)",
+        "price": "120,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Yedigün (1 L.)",
+        "price": "120,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Ayran (1 L.)",
+        "price": "120,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "7Up (1 L.)",
+        "price": "120,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Ketçap",
+        "price": "10,00 TL",
+        "category": "Soslar"
+      },
+      {
+        "name": "Mayonez",
+        "price": "10,00 TL",
+        "category": "Soslar"
+      },
+      {
+        "name": "Barbeque Sos",
+        "price": "15,00 TL",
+        "category": "Soslar"
+      },
+      {
+        "name": "Honey Mustard",
+        "price": "15,00 TL",
+        "category": "Soslar"
+      },
+      {
+        "name": "Garlic Sos",
+        "price": "15,00 TL",
+        "category": "Soslar"
+      },
+      {
+        "name": "Ranch Sos",
+        "price": "15,00 TL",
+        "category": "Soslar"
+      },
+      {
+        "name": "Hot Sos",
+        "price": "15,00 TL",
+        "category": "Soslar"
+      },
+      {
+        "name": "2 adet lavaş ile",
+        "price": "375,00 TL",
+        "category": "Kiloluk Tavuk Dönerler (Pişirilmiş)"
+      },
+      {
+        "name": "4 adet lavaş ile",
+        "price": "635,00 TL",
+        "category": "Kiloluk Tavuk Dönerler (Pişirilmiş)"
+      },
+      {
+        "name": "6 adet lavaş ile",
+        "price": "870,00 TL",
+        "category": "Kiloluk Tavuk Dönerler (Pişirilmiş)"
+      },
+      {
+        "name": "8 adet lavaş ile",
+        "price": "1.065,00 TL",
+        "category": "Kiloluk Tavuk Dönerler (Pişirilmiş)"
+      },
+      {
+        "name": "2 adet lavaş ile",
+        "price": "795,00 TL",
+        "category": "Kiloluk Et Dönerler (Pişirilmiş)"
+      },
+      {
+        "name": "4 adet lavaş ile",
+        "price": "1.410,00 TL",
+        "category": "Kiloluk Et Dönerler (Pişirilmiş)"
+      },
+      {
+        "name": "6 adet lavaş ile",
+        "price": "1.945,00 TL",
+        "category": "Kiloluk Et Dönerler (Pişirilmiş)"
+      },
+      {
+        "name": "8 adet lavaş ile",
+        "price": "2.395,00 TL",
+        "category": "Kiloluk Et Dönerler (Pişirilmiş)"
+      },
+    ]
+  },
 };
