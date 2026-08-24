@@ -44010,4 +44010,402 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       }
     ]
   },
+  "7127": {
+    "name": "Desigram Coffee Co. Makyol",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/k79c/makyol-desigram-coffee-co",
+    "sourceName": "Resmi Instagram @desigramcoffeeco (Makyol Yaşam şubesi) + Yemeksepeti k79c canlı menüsü; YS More info adresi Desigram Coffee Co. Makyol, Samsun Cd. No:14 ve Hentzer Google place ID ChIJL7nygSxftRQRzSzGLtxRyCs ile exact eşleştirildi",
+    "verifiedAt": "2026-08-24",
+    "items": [
+      {
+        "name": "Susamlı Tavuk Panini",
+        "price": "220 TL",
+        "category": "Sandviçler & Tostlar"
+      },
+      {
+        "name": "Pizza Tost",
+        "price": "150 TL",
+        "category": "Sandviçler & Tostlar"
+      },
+      {
+        "name": "Kumru Tost",
+        "price": "150 TL",
+        "category": "Sandviçler & Tostlar"
+      },
+      {
+        "name": "Bazlama Karışık Tost",
+        "price": "200 TL",
+        "category": "Sandviçler & Tostlar"
+      },
+      {
+        "name": "Rozbizli Açma Bagel",
+        "price": "275 TL",
+        "category": "Sandviçler & Tostlar"
+      },
+      {
+        "name": "Çeçil Peynirli Salamlı Sandviç",
+        "price": "200 TL",
+        "category": "Sandviçler & Tostlar"
+      },
+      {
+        "name": "Artizan Izgara Tavuk Sandviç",
+        "price": "250 TL",
+        "category": "Sandviçler & Tostlar"
+      },
+      {
+        "name": "Karışık Ayvalık Tost",
+        "price": "200 TL",
+        "category": "Sandviçler & Tostlar"
+      },
+      {
+        "name": "3 Peynirli Haşhaşlı Bagel",
+        "price": "200 TL",
+        "category": "Sandviçler & Tostlar"
+      },
+      {
+        "name": "Dana Jambonlu Cheddarlı Sandviç",
+        "price": "250 TL",
+        "category": "Sandviçler & Tostlar"
+      },
+      {
+        "name": "Dana Jambonlu Cheddarlı Artizan Sandviç",
+        "price": "250 TL",
+        "category": "Sandviçler & Tostlar"
+      },
+      {
+        "name": "Yaban Mersinli Cheesecake",
+        "price": "260 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Bask Cheesecake",
+        "price": "265 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Amerikan Puding Yaban Mersinli",
+        "price": "245 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Muzlu Rulo Pasta",
+        "price": "265 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Amerikan Puding Karamel",
+        "price": "250 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Kakaolu Marlenka",
+        "price": "310 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Siyah Frambuazlı Pasta",
+        "price": "265 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Ballı Marlenka",
+        "price": "310 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Yer Fıstıklı Mono Pasta",
+        "price": "299 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Amerikan Puding Nutella",
+        "price": "245 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Oreolu Yaban Mersinli Pasta",
+        "price": "275 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Strawberry Cream Cup",
+        "price": "265 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Amerikan Puding Lotus",
+        "price": "245 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Tiramisu Cup",
+        "price": "299 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Lotus Cup",
+        "price": "299 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Spoonful Cup",
+        "price": "299 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Brownie Trio",
+        "price": "340 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Tiramisu Kare",
+        "price": "215 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Mono Latte Pasta",
+        "price": "275 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Zürafa Mocha",
+        "price": "265 TL",
+        "category": "Karma Desigrams"
+      },
+      {
+        "name": "Zebra Mocha (Standart Boy)",
+        "price": "265 TL",
+        "category": "Karma Desigrams"
+      },
+      {
+        "name": "Salep (Standart Boy)",
+        "price": "195 TL",
+        "category": "Karma Desigrams"
+      },
+      {
+        "name": "Sıcak Çikolata (Standart Boy)",
+        "price": "240 TL",
+        "category": "Karma Desigrams"
+      },
+      {
+        "name": "Capri-Sun Safari (20 cl.)",
+        "price": "70 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Red Bull Peach Edition (25 cl.)",
+        "price": "185 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Red Bull Energy Drink (25 cl.)",
+        "price": "185 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Red Bull White Edition (25 cl.)",
+        "price": "185 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Premium Su (40 cl.)",
+        "price": "60 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Chai Tea Latte",
+        "price": "255 TL",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Fıstıklı Latte (Standart Boy)",
+        "price": "275 TL",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Iced Latte",
+        "price": "215 TL",
+        "category": "Espresso Bazlı Soğuk Kahveler"
+      },
+      {
+        "name": "Iced Americano",
+        "price": "190 TL",
+        "category": "Espresso Bazlı Soğuk Kahveler"
+      },
+      {
+        "name": "Iced Cafe Mocha",
+        "price": "255 TL",
+        "category": "Espresso Bazlı Soğuk Kahveler"
+      },
+      {
+        "name": "Iced White Mocha",
+        "price": "260 TL",
+        "category": "Espresso Bazlı Soğuk Kahveler"
+      },
+      {
+        "name": "Iced Caramel Macchiato",
+        "price": "265 TL",
+        "category": "Espresso Bazlı Soğuk Kahveler"
+      },
+      {
+        "name": "Iced Toffee Nut Latte",
+        "price": "265 TL",
+        "category": "Espresso Bazlı Soğuk Kahveler"
+      },
+      {
+        "name": "Iced Lotus Latte",
+        "price": "270 TL",
+        "category": "Espresso Bazlı Soğuk Kahveler"
+      },
+      {
+        "name": "Iced Spanish Latte",
+        "price": "260 TL",
+        "category": "Espresso Bazlı Soğuk Kahveler"
+      },
+      {
+        "name": "Iced Filtre Kahve",
+        "price": "155 TL",
+        "category": "Espresso Bazlı Soğuk Kahveler"
+      },
+      {
+        "name": "Fındıklı Latte",
+        "price": "275 TL",
+        "category": "Espresso Bazlı Sıcak Kahveler"
+      },
+      {
+        "name": "Latte",
+        "price": "215 TL",
+        "category": "Espresso Bazlı Sıcak Kahveler"
+      },
+      {
+        "name": "Cappuccino",
+        "price": "205 TL",
+        "category": "Espresso Bazlı Sıcak Kahveler"
+      },
+      {
+        "name": "Flat White",
+        "price": "215 TL",
+        "category": "Espresso Bazlı Sıcak Kahveler"
+      },
+      {
+        "name": "Espresso",
+        "price": "115 TL",
+        "category": "Espresso Bazlı Sıcak Kahveler"
+      },
+      {
+        "name": "Americano",
+        "price": "175 TL",
+        "category": "Espresso Bazlı Sıcak Kahveler"
+      },
+      {
+        "name": "Mocha (Standart Boy)",
+        "price": "240 TL",
+        "category": "Espresso Bazlı Sıcak Kahveler"
+      },
+      {
+        "name": "White Mocha (Standart Boy)",
+        "price": "245 TL",
+        "category": "Espresso Bazlı Sıcak Kahveler"
+      },
+      {
+        "name": "Spanish Latte (Standart Boy)",
+        "price": "270 TL",
+        "category": "Espresso Bazlı Sıcak Kahveler"
+      },
+      {
+        "name": "Toffee Nut Latte (Standart Boy)",
+        "price": "260 TL",
+        "category": "Espresso Bazlı Sıcak Kahveler"
+      },
+      {
+        "name": "Lotus Latte (Standart Boy)",
+        "price": "275 TL",
+        "category": "Espresso Bazlı Sıcak Kahveler"
+      },
+      {
+        "name": "Caramel Macchiato (Standart Boy)",
+        "price": "230 TL",
+        "category": "Espresso Bazlı Sıcak Kahveler"
+      },
+      {
+        "name": "Filtre Kahve (Standart Boy)",
+        "price": "150 TL",
+        "category": "Espresso Bazlı Sıcak Kahveler"
+      },
+      {
+        "name": "Desberry",
+        "price": "260 TL",
+        "category": "Moctails"
+      },
+      {
+        "name": "Strawberry Mojito",
+        "price": "260 TL",
+        "category": "Moctails"
+      },
+      {
+        "name": "Tropic Rush",
+        "price": "260 TL",
+        "category": "Moctails"
+      },
+      {
+        "name": "Blue Zest",
+        "price": "260 TL",
+        "category": "Moctails"
+      },
+      {
+        "name": "Deslime",
+        "price": "260 TL",
+        "category": "Moctails"
+      },
+      {
+        "name": "Golden Hour (Orta Boy)",
+        "price": "260 TL",
+        "category": "Moctails"
+      },
+      {
+        "name": "Tropic Energy (Orta Boy)",
+        "price": "260 TL",
+        "category": "Moctails"
+      },
+      {
+        "name": "Kış Çayı",
+        "price": "125 TL",
+        "category": "Sıcak Çaylar"
+      },
+      {
+        "name": "Kuşburnu",
+        "price": "125 TL",
+        "category": "Sıcak Çaylar"
+      },
+      {
+        "name": "Ada Çayı",
+        "price": "125 TL",
+        "category": "Sıcak Çaylar"
+      },
+      {
+        "name": "Papatya Çayı",
+        "price": "125 TL",
+        "category": "Sıcak Çaylar"
+      },
+      {
+        "name": "Elma Çayı",
+        "price": "125 TL",
+        "category": "Sıcak Çaylar"
+      },
+      {
+        "name": "Ihlamur",
+        "price": "125 TL",
+        "category": "Sıcak Çaylar"
+      },
+      {
+        "name": "Hibiscus",
+        "price": "125 TL",
+        "category": "Sıcak Çaylar"
+      },
+      {
+        "name": "Yeşil Çay",
+        "price": "125 TL",
+        "category": "Sıcak Çaylar"
+      }
+    ]
+  },
 };

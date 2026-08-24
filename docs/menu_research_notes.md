@@ -574,3 +574,12 @@ Hentzer exact kaydı `Fresh Pizza Corner`, `Sinanpaşa, Şht. Dursun Bakan Sk. N
 YS menüsündeki 8 Özel Menüler, 8 Pizzalar (Orta Boy), 1 Tatlılar ve 2 İçecekler kaleminden toplam 19 ürün eklendi. YS sayfasında kampanyalı/orijinal çift fiyat zaman zaman birlikte görünse de doğrulama anındaki liste fiyatları kullanıldı: menüler 500 TL, Margarita Pizza 400 TL, Pocket/Ananas pizzalar 450 TL, Tiramisu 200 TL, Su 40 TL ve Coca-Cola 70 TL. Poşet, ambalaj veya servis kalemi yoktu; carousel/popüler tekrarları eklenmedi. Kaynakta görünür yayın tarihi ürün menüsü için belirtilmemiş, `verifiedAt` yalnızca erişim/doğrulama tarihi olarak tutuldu.
 
 Kaynaklar: [Yemeksepeti kvqf](https://www.yemeksepeti.com/en/restaurant/kvqf/fresh-pizza-corner), [resmi Instagram menü paylaşımı](https://www.instagram.com/reel/DaTGC25tZy7/).
+
+
+## Desigram Coffee Co. Makyol — Hentzer ID 7127
+
+Hentzer exact kayıt `Desigram Coffee Co. Makyol`, `Makyol Yaşam, Barış, Samsun Cd. No:14 D:5 Kapı No:70, 34520 Beylikdüzü/İstanbul`; telefon `+90 533 665 43 31`, Google place ID `ChIJL7nygSxftRQRzSzGLtxRyCs`. Resmi Instagram `@desigramcoffeeco` Makyol Yaşam’ı marka şubeleri arasında gösteriyor. Yemeksepeti `k79c` canlı menüsünün More info paneli vendor adresini `Desigram Coffee Co. Makyol, Samsun Cd. No:14` olarak veriyor; resmi sosyal hesap, Hentzer exact kayıt ve fiyatlı vendor arasında exact şube köprüsü kuruldu.
+
+YS menüsündeki 11 Sandviçler & Tostlar, 19 Tatlılar, 4 Karma Desigrams, 5 İçecekler, 2 Sıcak İçecekler, 9 Espresso Bazlı Soğuk Kahveler, 13 Espresso Bazlı Sıcak Kahveler, 7 Moctails ve 8 Sıcak Çaylar bölümünden toplam **78 Poşet dışı fiyatlı kalem** eklendi. `Poşet` altındaki 1 `Plastic Bag` kalemi dışarıda bırakıldı; popüler/carousel tekrarı bulunmadı. Ürün açıklamalarındaki sıcak/soğuk servis ve tek kişilik ifadeleri ürün adlarına taşınmadı. Kaynakta görünür yayın tarihi yok; `verifiedAt` yalnızca 24 Ağustos 2026 erişim/doğrulama tarihidir.
+
+Kaynaklar: [Yemeksepeti k79c](https://www.yemeksepeti.com/en/restaurant/k79c/makyol-desigram-coffee-co), [resmi Instagram](https://www.instagram.com/desigramcoffeeco/).
