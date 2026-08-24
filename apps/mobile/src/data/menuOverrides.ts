@@ -56198,4 +56198,527 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       },
     ]
   },
+  "2274": {
+    "name": "Coffy Ümraniye Merkez",
+    "sourceUrl": "https://www.migros.com.tr/yemek/coffy-umraniye-ataturk-mah-st-2b002",
+    "sourceName": "Migros Yemek branch menüsü; Coffy Ümraniye official Instagram branch hesabı ve exact Atatürk, Bahçevanlar Sk. No:2A adres köprüsüyle eşleştirildi",
+    "verifiedAt": "2026-08-24",
+    "items": [
+      {
+        "name": "Tatlı Menü",
+        "price": "270,00 TL",
+        "desc": "Seçeceğiniz İçecek +Seçeceğiniz Tatlı",
+        "category": "Menüler"
+      },
+      {
+        "name": "Sandviç Menü",
+        "price": "310,00 TL",
+        "desc": "Seçeceğiniz Kahve + Sıcak Sandviç",
+        "category": "Menüler"
+      },
+      {
+        "name": "Atıştırmalık Menü",
+        "price": "230,00 TL",
+        "desc": "Seçeceğiniz İçecek+ Seçeceğiniz Yiyecek",
+        "category": "Menüler"
+      },
+      {
+        "name": "Freshaa Cool Lime & Strawberry",
+        "price": "200,00 TL",
+        "desc": "Nane ve Misket Limonu Aromalı Çilekli Buzlu İçecek",
+        "category": "Dönemsel Lezzetler"
+      },
+      {
+        "name": "Freshaa Cool Lime & Mango",
+        "price": "200,00 TL",
+        "desc": "Nane ve Misket Limonu Aromalı Mangolu Buzlu İçecek",
+        "category": "Dönemsel Lezzetler"
+      },
+      {
+        "name": "Freshaa Berry Hibiskus & Blueberry",
+        "price": "200,00 TL",
+        "desc": "Orman Meyvesi ve Bamya Çiçeği Aromalı Buzlu İçecek",
+        "category": "Dönemsel Lezzetler"
+      },
+      {
+        "name": "Freshaa Berry Hibiskus & Strawberry",
+        "price": "200,00 TL",
+        "desc": "Orman Meyvesi ve Bamya Çiçeği Aromalı Çilekli Buzlu İçecek",
+        "category": "Dönemsel Lezzetler"
+      },
+      {
+        "name": "Iced Mango Matcha",
+        "price": "210,00 TL",
+        "desc": "Mangolu Yeşil Çay Tozlu Sütlü Buzlu İçecek",
+        "category": "Dönemsel Lezzetler"
+      },
+      {
+        "name": "Iced Berry Matcha",
+        "price": "210,00 TL",
+        "desc": "Orman Meyveli Yeşil Çay Tozlu Sütlü Buzlu İçecek",
+        "category": "Dönemsel Lezzetler"
+      },
+      {
+        "name": "Iced Caffé Americano",
+        "price": "170,00 TL",
+        "desc": "Su Ekli Buzlu Espresso Kahve",
+        "category": "Soğuk Kahveler"
+      },
+      {
+        "name": "Iced Caffé Latte",
+        "price": "175,00 TL",
+        "desc": "Sütlü Buzlu Kahve",
+        "category": "Soğuk Kahveler"
+      },
+      {
+        "name": "Iced Cappuccino",
+        "price": "175,00 TL",
+        "desc": "Bol Süt Köpüklü Buzlu Kahve",
+        "category": "Soğuk Kahveler"
+      },
+      {
+        "name": "Iced Mocha",
+        "price": "190,00 TL",
+        "desc": "Kakaolu Buzlu Sütlü Kahve",
+        "category": "Soğuk Kahveler"
+      },
+      {
+        "name": "Iced White Chocolate Mocha",
+        "price": "190,00 TL",
+        "desc": "Beyaz Çikolata Aromalı Buzlu Sütlü Kahve",
+        "category": "Soğuk Kahveler"
+      },
+      {
+        "name": "Iced Caramel Macchiato",
+        "price": "190,00 TL",
+        "desc": "Karamel Aromalu Süt Köpülü Buzlu Kahve",
+        "category": "Soğuk Kahveler"
+      },
+      {
+        "name": "Iced Salted Caramel Latte",
+        "price": "190,00 TL",
+        "desc": "Tuzlu Karamel Aromalı Buzlu Sütlü Kahve",
+        "category": "Soğuk Kahveler"
+      },
+      {
+        "name": "Caramel Frappe",
+        "price": "200,00 TL",
+        "desc": "Karamel Aromalı Sütlü Buz Parçacıklı İçecek",
+        "category": "Soğuk Kahveler"
+      },
+      {
+        "name": "Mocha Frappe",
+        "price": "200,00 TL",
+        "desc": "Çikolata Aromalı Sütlü Buz Parçacıklı İçecek",
+        "category": "Soğuk Kahveler"
+      },
+      {
+        "name": "Chocolate Cookie Frappe",
+        "price": "200,00 TL",
+        "desc": "Bisküvi Aromalı Buz Parçacıklı Sütlü Kahve",
+        "category": "Soğuk Kahveler"
+      },
+      {
+        "name": "Iced Cherry Blossom Zen Latte",
+        "price": "200,00 TL",
+        "desc": "Kiraz Çiçeği Aromalı Buzlu Sütlü Latte",
+        "category": "Soğuk Kahveler"
+      },
+      {
+        "name": "Iced Caramel Bubble Latte",
+        "price": "200,00 TL",
+        "desc": "Karamel Aromalı Meyve Toplu Sütlü Buzlu Kahve",
+        "category": "Soğuk Kahveler"
+      },
+      {
+        "name": "Iced Cherry Brownie Latte",
+        "price": "200,00 TL",
+        "desc": "Kakaolu, Kiraz Çiçeği Aromalı Buzlu Sütlü Kahve",
+        "category": "Soğuk Kahveler"
+      },
+      {
+        "name": "Filtre Kahve",
+        "price": "165,00 TL",
+        "desc": "Filtre Kahve",
+        "category": "Sıcak Kahveler"
+      },
+      {
+        "name": "Caffé Americano",
+        "price": "170,00 TL",
+        "desc": "Sıcak Su Ekli Espresso Kahve",
+        "category": "Sıcak Kahveler"
+      },
+      {
+        "name": "Caffé Latte",
+        "price": "175,00 TL",
+        "desc": "Sütlü Kahve",
+        "category": "Sıcak Kahveler"
+      },
+      {
+        "name": "Cappuccino",
+        "price": "175,00 TL",
+        "desc": "Bol Süt Köpüklü Kahve",
+        "category": "Sıcak Kahveler"
+      },
+      {
+        "name": "Flat White",
+        "price": "180,00 TL",
+        "desc": "Sütlü Yoğun Espresso Kahve",
+        "category": "Sıcak Kahveler"
+      },
+      {
+        "name": "Mocha",
+        "price": "190,00 TL",
+        "desc": "Kakaolu Sütlü Kahve",
+        "category": "Sıcak Kahveler"
+      },
+      {
+        "name": "White Chocolate Mocha",
+        "price": "190,00 TL",
+        "desc": "Beyaz Çikolata Aromalı Sütlü Kahve",
+        "category": "Sıcak Kahveler"
+      },
+      {
+        "name": "Caramel Macchiato",
+        "price": "190,00 TL",
+        "desc": "Karamel Aromalu Süt Köpülü Kahve",
+        "category": "Sıcak Kahveler"
+      },
+      {
+        "name": "Salted Caramel Latte",
+        "price": "190,00 TL",
+        "desc": "Tuzlu Karamel Aromalı Sütlü Kahve",
+        "category": "Sıcak Kahveler"
+      },
+      {
+        "name": "Chocolate Cookie Latte",
+        "price": "190,00 TL",
+        "desc": "Kurabiye Aromalı Sütlü Kahve",
+        "category": "Sıcak Kahveler"
+      },
+      {
+        "name": "Cherry Brownie Latte",
+        "price": "195,00 TL",
+        "desc": "Kakaolu, Kiraz Çiçeği Aromalı Sütlü Kahve",
+        "category": "Sıcak Kahveler"
+      },
+      {
+        "name": "Cool Lime",
+        "price": "190,00 TL",
+        "desc": "Nane ve Misket Limonu Aromalı Buzlu İçecek",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Minty Lemonade",
+        "price": "190,00 TL",
+        "desc": "Nane Aromalı Buzlu Limonata",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Granada Lemonade",
+        "price": "190,00 TL",
+        "desc": "Kırmızı Meyve Aromalı Buzlu Limonata",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Hibiskus",
+        "price": "190,00 TL",
+        "desc": "Orman Meyvesi ve Bamya Çiçeği Aromalı Buzlu İçecek",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Orman Meyveli Frozen",
+        "price": "200,00 TL",
+        "desc": "Orman Meyveli Buz Parçacıklı İçecek",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Mangolu Frozen",
+        "price": "200,00 TL",
+        "desc": "Mangolu Buz Parçacıklı İçecek",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Coffychino Caramel",
+        "price": "200,00 TL",
+        "desc": "Karamelli Buz Parçacıklı Sütlü İçecek",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Çilekli Milkshake",
+        "price": "200,00 TL",
+        "desc": "Çilekli Buz Parçacıklı İçecek",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Çikolatalı Milkshake",
+        "price": "200,00 TL",
+        "desc": "Sütlü, Kakaolu Buz Parçacıklı İçecek",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Iced Matcha",
+        "price": "200,00 TL",
+        "desc": "Yeşil Çay Tozlu Sütlü Buzlu İçecek",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Iced Strawberry Matcha",
+        "price": "210,00 TL",
+        "desc": "Çilekli Yeşil Çay Tozlu Sütlü Buzlu İçecek",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Iced Vanilla Matcha",
+        "price": "210,00 TL",
+        "desc": "Vanilya Aromalı Yeşil Çay Tozlu Sütlü Buzlu İçecek",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Berry Hibiscus Blueberry Bubble",
+        "price": "200,00 TL",
+        "desc": "Orman Meyvesi ve Bamya Çiçeği Aromalı, Yaban Mersini Aromalı Meyve Toplu Buzlu İçecek",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Strawberry Lemonade",
+        "price": "190,00 TL",
+        "desc": "Çilekli Buzlu Limonata",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Matcha Latte",
+        "price": "215,00 TL",
+        "desc": "Yeşil Çay Tozlu Sütlü İçecek",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Vanilla Matcha Latte",
+        "price": "215,00 TL",
+        "desc": "Vanilya Aromalı Yeşil Çay Tozlu Sütlü İçecek",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Soda (20 Cl.)",
+        "price": "65,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Su (50 Cl.)",
+        "price": "50,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Earl Grey",
+        "price": "110,00 TL",
+        "category": "Çaylar"
+      },
+      {
+        "name": "Çikolatalı Cookie",
+        "price": "130,00 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Çikolata Parçacıklı Cookie",
+        "price": "130,00 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Mozaik Pasta Üçgen Dilim",
+        "price": "130,00 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Cookie Cups Kakaolu Fındık Kremalı",
+        "price": "150,00 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Cookie Cups Karamelli",
+        "price": "150,00 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Mozaik Dilim Kek",
+        "price": "160,00 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Kremalı Havuçlu Dilim Kek",
+        "price": "170,00 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Çikolatalı Muffin",
+        "price": "160,00 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Yaban Mersinli Muffin",
+        "price": "160,00 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Sufle",
+        "price": "180,00 TL",
+        "desc": "Sıcak Sufle",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Frambuazlı Cheesecake",
+        "price": "200,00 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Tiramisu",
+        "price": "190,00 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Limonlu Cheesecake",
+        "price": "200,00 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Profiterollü Pasta",
+        "price": "200,00 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "İspanyol Creamy Cheesecake",
+        "price": "220,00 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Latte Pasta",
+        "price": "220,00 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Chia Puding",
+        "price": "240,00 TL",
+        "desc": "Lezzetli ve pratik chia puding ile atıştırmaların daha sağlıklı",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Orman Meyveli Pasta",
+        "price": "250,00 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Matcha Rulo Pasta",
+        "price": "170,00 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Çikolatalı Portakallı Kek",
+        "price": "180,00 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Tereyağlı Kruvasan (85 Gr.)",
+        "price": "110,00 TL",
+        "category": "Kahvaltılıklar"
+      },
+      {
+        "name": "Dereotlu Poğaça",
+        "price": "100,00 TL",
+        "category": "Kahvaltılıklar"
+      },
+      {
+        "name": "Kaşarlı Ve Zeytin Ezmeli Simit Sandviç",
+        "price": "130,00 TL",
+        "desc": "Kaşar peyniri, zeytin ezmesi",
+        "category": "Kahvaltılıklar"
+      },
+      {
+        "name": "Çikolata Dolgulu Kruvasan",
+        "price": "130,00 TL",
+        "desc": "İçi çikolata dolgulu tereyağlı kruvasan",
+        "category": "Kahvaltılıklar"
+      },
+      {
+        "name": "Çikolata Ve Fındık Kremalı Kruvasan",
+        "price": "130,00 TL",
+        "category": "Kahvaltılıklar"
+      },
+      {
+        "name": "Sıcak Peynirli Sandviç",
+        "price": "180,00 TL",
+        "desc": "Tam yağlı beyaz peynir, kaşar peyniri ve cheddar peyniri",
+        "category": "Sandviçler"
+      },
+      {
+        "name": "Sıcak Karışık Sandviç",
+        "price": "200,00 TL",
+        "desc": "Sucuk, kaşar peyniri ve cheddar peyniri",
+        "category": "Sandviçler"
+      },
+      {
+        "name": "Hindi Fümeli Sıcak Sandviç",
+        "price": "200,00 TL",
+        "category": "Sandviçler"
+      },
+      {
+        "name": "Füme Etli & Peynirli Bagel",
+        "price": "220,00 TL",
+        "desc": "Kekikli bagel ekmek (buğday unlu, ekşi mayalı), füme et, eritme peyniri, turşulu peynirli hardal sos",
+        "category": "Sandviçler"
+      },
+      {
+        "name": "Köri Soslu Tavuklu Baget Sandviç",
+        "price": "230,00 TL",
+        "desc": "Kekikli baget ekmeği, köri soslu tavuk, labne peyniri, kaşar peynir, kapya biber",
+        "category": "Sandviçler"
+      },
+      {
+        "name": "İsli Peynir Ve Hindi Fümeli Baget Sandviç",
+        "price": "230,00 TL",
+        "desc": "Ay çekirdekli baget ekmeği, hindi füme, kuru domatesli mascarpone sos, isli peynir",
+        "category": "Sandviçler"
+      },
+      {
+        "name": "Corny Kakao Kırmızı My Tahıl Bar",
+        "price": "65,00 TL",
+        "desc": "Kasa önü paketli ürün",
+        "category": "Kasa Önü"
+      },
+      {
+        "name": "Glutensiz Brownie",
+        "price": "90,00 TL",
+        "desc": "Kasa önü paketli ürün",
+        "category": "Kasa Önü"
+      },
+      {
+        "name": "Bitter Ve Beyaz Çikolatalı Bardak Cookie",
+        "price": "130,00 TL",
+        "category": "Kasa Önü"
+      },
+      {
+        "name": "Çikolatalı Bardak Cookie",
+        "price": "130,00 TL",
+        "category": "Kasa Önü"
+      },
+      {
+        "name": "Costa Rica (250 Gr.)",
+        "price": "550,00 TL",
+        "category": "Çekirdek Kahveler (250 Gr.)"
+      },
+      {
+        "name": "Ethiopia (250 Gr.)",
+        "price": "550,00 TL",
+        "category": "Çekirdek Kahveler (250 Gr.)"
+      },
+      {
+        "name": "Colombia Supremo ( 250 Gr )",
+        "price": "550,00 TL",
+        "category": "Çekirdek Kahveler (250 Gr.)"
+      },
+      {
+        "name": "Coffy Kapsül Kahve - Medium Roast",
+        "price": "300,00 TL",
+        "category": "Çekirdek Kahveler (250 Gr.)"
+      },
+    ]
+  },
 };
