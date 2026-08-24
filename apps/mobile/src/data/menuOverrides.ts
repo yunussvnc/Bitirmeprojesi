@@ -59046,4 +59046,247 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       },
     ]
   },
+  "2419": {
+    "name": "Mogaf Döner Kağıthane Merkez Şubesi",
+    "sourceUrl": "https://www.migros.com.tr/yemek/mogaf-hatay-doner-kagithane-merkez-mah-st-30b6b",
+    "sourceName": "Migros Yemek branch-labeled `Mogaf Hatay Döner, Kağıthane (Merkez Mah.)` menüsü; resmi Mogaf Kağıthane şube URL’si ve Yandex exact Mermerciler Cad. 8 / +90 212 515 00 02 kaydıyla eşleştirildi",
+    "verifiedAt": "2026-08-24",
+    "items": [
+      {
+        "name": "Mogaf İkili Menü",
+        "price": "649,90 TL",
+        "category": "Migros Yemek Özel Menü"
+      },
+      {
+        "name": "Kampanya Tavuk Dürüm Menü",
+        "price": "359,90 TL",
+        "category": "Migrosa Özel Menü"
+      },
+      {
+        "name": "Bomba Tavuk Döner Dürüm",
+        "price": "319,90 TL",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Hatay Usulü Tavuk Döner Dürüm",
+        "price": "249,90 TL",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Pepsili Mogaf Tavuk Burrito",
+        "price": "499,90 TL",
+        "category": "Pepsli İndirimli Menüler"
+      },
+      {
+        "name": "Pepsili Hatay Tavuk Dürüm",
+        "price": "319,90 TL",
+        "category": "Pepsli İndirimli Menüler"
+      },
+      {
+        "name": "Pepsili Bomba Tavuk Dürüm",
+        "price": "379,90 TL",
+        "category": "Pepsli İndirimli Menüler"
+      },
+      {
+        "name": "Pepsili Mega Tavuk Dürüm",
+        "price": "379,90 TL",
+        "category": "Pepsli İndirimli Menüler"
+      },
+      {
+        "name": "Pepsili Tenders Dürüm",
+        "price": "329,90 TL",
+        "category": "Pepsli İndirimli Menüler"
+      },
+      {
+        "name": "Pepsili Tenders Burger",
+        "price": "319,90 TL",
+        "category": "Pepsli İndirimli Menüler"
+      },
+      {
+        "name": "Mega Tavuk Döner Dürüm",
+        "price": "319,90 TL",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "İskenderun Usulü Tavuk Döner Dürüm",
+        "price": "259,90 TL",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Green Tavuk Döner Dürüm",
+        "price": "269,90 TL",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Hatay Tavuk Dürüm Menü",
+        "price": "389,90 TL",
+        "category": "Menüler"
+      },
+      {
+        "name": "Bomba Tavuk Dürüm Menü",
+        "price": "459,90 TL",
+        "category": "Menüler"
+      },
+      {
+        "name": "Mega Tavuk Dürüm Menü",
+        "price": "459,90 TL",
+        "category": "Menüler"
+      },
+      {
+        "name": "İskenderun Usulü Tavuk Döner Dürüm Menü",
+        "price": "399,90 TL",
+        "category": "Menüler"
+      },
+      {
+        "name": "Green Tavuk Dürüm Menü",
+        "price": "409,90 TL",
+        "category": "Menüler"
+      },
+      {
+        "name": "Mogaf Burger Menü",
+        "price": "474,90 TL",
+        "category": "Burger Menüler"
+      },
+      {
+        "name": "Mogaf Double Burger Menü",
+        "price": "574,90 TL",
+        "category": "Burger Menüler"
+      },
+      {
+        "name": "Tavuk Döner Bowl",
+        "price": "394,90 TL",
+        "category": "Bowls"
+      },
+      {
+        "name": "Mango Mayonez",
+        "price": "34,90 TL",
+        "category": "Soslar"
+      },
+      {
+        "name": "Cheddar Sos",
+        "price": "34,90 TL",
+        "category": "Soslar"
+      },
+      {
+        "name": "Sarımsaklı Mayonez",
+        "price": "29,90 TL",
+        "category": "Soslar"
+      },
+      {
+        "name": "Acı Sos",
+        "price": "29,90 TL",
+        "category": "Soslar"
+      },
+      {
+        "name": "Acılı Mayonez",
+        "price": "29,90 TL",
+        "category": "Soslar"
+      },
+      {
+        "name": "Doritos Cup",
+        "price": "49,90 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Portakal Cup",
+        "price": "119,90 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Antebi Cup",
+        "price": "119,90 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Lotus Cup",
+        "price": "119,90 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Limon Magnum",
+        "price": "149,90 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Gold Latte Magnum",
+        "price": "149,90 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Ayran (28 Cl.)",
+        "price": "54,90 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Pepsi (33 Cl.)",
+        "price": "89,90 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Pepsi Zero Sugar (33 Cl.)",
+        "price": "89,90 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Lipton Ice Tea Şeftali (33 Cl.)",
+        "price": "89,90 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Lipton Ice Tea Limon (33 Cl.)",
+        "price": "89,90 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Lipton Ice Tea Mango (33 Cl.)",
+        "price": "89,90 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Yedigün (33 Cl.)",
+        "price": "89,90 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "7Up Gazoz (330 Ml)",
+        "price": "89,90 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Acılı Şalgam Suyu (30 Cl.)",
+        "price": "74,90 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Acısız Şalgam Suyu (30 Cl.)",
+        "price": "74,90 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Limonlu Soda (20 Cl.)",
+        "price": "44,90 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Soda (20 Cl.)",
+        "price": "39,90 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Su (50 Cl.)",
+        "price": "24,90 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Ayran (1 L.)",
+        "price": "139,90 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Pepsi (1 L.)",
+        "price": "149,90 TL",
+        "category": "İçecekler"
+      },
+    ]
+  },
 };
