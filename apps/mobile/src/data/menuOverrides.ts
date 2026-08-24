@@ -65369,4 +65369,335 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       }
     ],
   },
+
+  "7067": {
+    "name": "Bex Coffee",
+    "sourceUrl": "https://www.migros.com.tr/yemek/bex-coffee-ciragan-besiktas-yildiz-mah-st-2d2ea",
+    "sourceName": "Migros Yemek branch-labeled `Bex Coffee Çırağan, Beşiktaş (Yıldız Mah.)` live menu; official BEX social bridge: Çırağan Caddesi Beşiktaş; local exact listing No:35/1",
+    "verifiedAt": "2026-08-25",
+    "items": [
+      {
+        "name": "Lemonade Tonic",
+        "price": "139,00 TL",
+        "category": "Refresha Drinks",
+        "desc": "Soğuk servis edilir."
+      },
+      {
+        "name": "Rasberry Tonic",
+        "price": "159,00 TL",
+        "category": "Refresha Drinks",
+        "desc": "Mürver çiçeği, tonik"
+      },
+      {
+        "name": "Purple Berry Tonic",
+        "price": "159,00 TL",
+        "category": "Refresha Drinks",
+        "desc": "Soğuk servis edilir."
+      },
+      {
+        "name": "Broken Brown (Büyük Boy)",
+        "price": "149,00 TL",
+        "category": "Signature Drinks",
+        "desc": "Espressonun kremayla buluşması sonucu yumuşak içimli kahve"
+      },
+      {
+        "name": "Bexy Latte (Büyük Boy)",
+        "price": "149,00 TL",
+        "category": "Signature Drinks",
+        "desc": "Raspberry aroması, yoğunlaştırılmış süt, süt, espresso"
+      },
+      {
+        "name": "Pistachio Mocha (Büyük Boy)",
+        "price": "199,00 TL",
+        "category": "Signature Drinks",
+        "desc": "Yoğunlaştırılmış süt kreması, Antep fıstığı, Espresso, Süt Kreması"
+      },
+      {
+        "name": "Spanish Latte (Büyük Boy)",
+        "price": "149,00 TL",
+        "category": "Signature Drinks",
+        "desc": "Espresso, sıcak süt, yoğunlaştırılmış süt"
+      },
+      {
+        "name": "Caramel Drizzle (Büyük Boy)",
+        "price": "149,00 TL",
+        "category": "Signature Drinks",
+        "desc": "Vanilya ve Karamel aroması, Karamelli Çikolata, Espresso, Süt Kreması"
+      },
+      {
+        "name": "Filtre Kahve (Büyük Boy)",
+        "price": "99,00 TL",
+        "category": "Sıcak Kahveler",
+        "desc": "Kahve çekirdeklerinin filtrelerden geçirilerek sıcak su ile demlenmesiyle hazırlanan bir kahve çeşididir."
+      },
+      {
+        "name": "Filtre Kahve (Sütlü, Büyük Boy)",
+        "price": "105,00 TL",
+        "category": "Sıcak Kahveler",
+        "desc": "Filtre kahve, süt"
+      },
+      {
+        "name": "Caffe Americano (Büyük Boy)",
+        "price": "119,00 TL",
+        "category": "Sıcak Kahveler",
+        "desc": "Demlenmiş espressonun sıcak su ile inceltilmesi."
+      },
+      {
+        "name": "Flat White (Büyük Boy)",
+        "price": "129,00 TL",
+        "category": "Sıcak Kahveler",
+        "desc": "Espressonun kremalandırılmış süt ile buluşması sonucu kahveyi yoğun hissedeceğiniz espresso bazlı içecek."
+      },
+      {
+        "name": "Cappuccino (Büyük Boy)",
+        "price": "129,00 TL",
+        "category": "Sıcak Kahveler",
+        "desc": "Espresso, süt, süt köpüğü"
+      },
+      {
+        "name": "Latte (Büyük Boy)",
+        "price": "129,00 TL",
+        "category": "Sıcak Kahveler",
+        "desc": "Espresso, buharda kremalaştırılmış süt ile"
+      },
+      {
+        "name": "Toffee Nut Latte (Büyük Boy)",
+        "price": "149,00 TL",
+        "category": "Sıcak Kahveler",
+        "desc": "Özel toffee nut karışımının espresso, kremalandırılmış süt ile buluştuğu son olarak krema, esmer şekerle tamamlanan yeni yıl lezzeti"
+      },
+      {
+        "name": "White Chocolate Mocha (Büyük Boy)",
+        "price": "159,00 TL",
+        "category": "Sıcak Kahveler",
+        "desc": "Espresso, özel beyaz çikolata sos, kremalandırılmış kadifemsi süt ile buluştu. İsteğe göre yumuşak içim sos, şurup seçenekleri ile"
+      },
+      {
+        "name": "Caramel Mocha (Büyük Boy)",
+        "price": "159,00 TL",
+        "category": "Sıcak Kahveler",
+        "desc": "Espresso, özel beyaz çikolata sos, kremalandırılmış kadifemsi süt ile buluştu. İsteğe göre, yumuşak içim sos, şurup"
+      },
+      {
+        "name": "Iced Bexy Latte",
+        "price": "165,00 TL",
+        "category": "Soğuk Kahveler",
+        "desc": "Espresso, raspberry aroması, süt, buz küpü"
+      },
+      {
+        "name": "Iced Pistachio Mocha",
+        "price": "195,00 TL",
+        "category": "Soğuk Kahveler",
+        "desc": "Espresso, süt, condensed milk, Antep fıstığı özü. (Pistachio Mocha, Antep fıstığı özüyle süslenerek sunulmaktadır.)"
+      },
+      {
+        "name": "Iced Spanish Latte",
+        "price": "165,00 TL",
+        "category": "Soğuk Kahveler",
+        "desc": "Espresso, süt, condensed milk (yoğunlaştırılmış süt kreması) ve buz küplerinin buluşması."
+      },
+      {
+        "name": "Iced Filter Coffee",
+        "price": "125,00 TL",
+        "category": "Soğuk Kahveler",
+        "desc": "Demlenmiş, yumuşak içimli filtre kahve, buz küpleri"
+      },
+      {
+        "name": "Iced Americano",
+        "price": "125,00 TL",
+        "category": "Soğuk Kahveler",
+        "desc": "Espressonun buzlu su ile buluşması."
+      },
+      {
+        "name": "Iced Cappuccino",
+        "price": "140,00 TL",
+        "category": "Soğuk Kahveler",
+        "desc": "Süt, espresso ve buz küplerinin,özel cappuccıno mikserde hazırlanan soğuk süt kreması ile buluşması."
+      },
+      {
+        "name": "Iced Latte",
+        "price": "140,00 TL",
+        "category": "Soğuk Kahveler",
+        "desc": "Soğuk süt ve buz küplerinin espresso ile buluşması."
+      },
+      {
+        "name": "Iced White Chocolate Mocha",
+        "price": "165,00 TL",
+        "category": "Soğuk Kahveler",
+        "desc": "Espresso, özel beyaz çikolata sosu, süt, buz küplerin birleşimi."
+      },
+      {
+        "name": "Iced Caramel Mocha",
+        "price": "165,00 TL",
+        "category": "Soğuk Kahveler",
+        "desc": "Espresso, karamel sos, süt, buz küplerinin, shaker kullanarak tat bütünlüğünün sağlanması."
+      },
+      {
+        "name": "Iced Broken Brown",
+        "price": "175,00 TL",
+        "category": "Soğuk Kahveler",
+        "desc": "Soğuk kahve"
+      },
+      {
+        "name": "Iced Sütlü Filtre",
+        "price": "135,00 TL",
+        "category": "Soğuk Kahveler",
+        "desc": "Soğuk kahve"
+      },
+      {
+        "name": "Hot Chocolate (Orta Boy)",
+        "price": "165,00 TL",
+        "category": "Sıcak İçecekler",
+        "desc": "Özel sıcak çikolata karışımının kremalandırılmış süt ile buluşması."
+      },
+      {
+        "name": "Chai Tea Latte (Orta Boy)",
+        "price": "165,00 TL",
+        "category": "Sıcak İçecekler",
+        "desc": "Baharatlı siyah çay özü ve kremalandırılmış sütün buluşması."
+      },
+      {
+        "name": "Strawberry Frozen",
+        "price": "165,00 TL",
+        "category": "Frozens",
+        "desc": "Çilekli frozen"
+      },
+      {
+        "name": "Cocoberry",
+        "price": "165,00 TL",
+        "category": "Frozens",
+        "desc": "Çilek meyvesi ve Hindistan cevizi aromalı frozen"
+      },
+      {
+        "name": "Rasberry Mixed",
+        "price": "165,00 TL",
+        "category": "Frozens",
+        "desc": "Karışık orman meyvesi, ahududu aromalı frozen"
+      },
+      {
+        "name": "Apple Cubana",
+        "price": "165,00 TL",
+        "category": "Frozens",
+        "desc": "Limonata bazlı, yeşil elma, lime, nane aromalı frozen"
+      },
+      {
+        "name": "Strawberry Smoothie",
+        "price": "133,00 TL",
+        "category": "Smoothies",
+        "desc": "Çilekli smoothie"
+      },
+      {
+        "name": "Pink Berry Smoothie",
+        "price": "133,00 TL",
+        "category": "Smoothies",
+        "desc": "Soğuk servis edilir."
+      },
+      {
+        "name": "Green Apple Smoothie",
+        "price": "133,00 TL",
+        "category": "Smoothies",
+        "desc": "Soğuk servis edilir."
+      },
+      {
+        "name": "Strawberry Milkshake",
+        "price": "149,00 TL",
+        "category": "Milkshakes",
+        "desc": "Strawberry"
+      },
+      {
+        "name": "Chocolate Milkshake",
+        "price": "149,00 TL",
+        "category": "Milkshakes"
+      },
+      {
+        "name": "Coconut Milkshake",
+        "price": "149,00 TL",
+        "category": "Milkshakes"
+      },
+      {
+        "name": "Chocolate Frappe",
+        "price": "165,00 TL",
+        "category": "Frappes",
+        "desc": "Çikolatalı frappe"
+      },
+      {
+        "name": "Caramel Frappe",
+        "price": "165,00 TL",
+        "category": "Frappes",
+        "desc": "Karamel sos, süt, özel frappe tozu ve buz kırıkları"
+      },
+      {
+        "name": "Chai Frappe",
+        "price": "165,00 TL",
+        "category": "Frappes",
+        "desc": "Süt, özel frappe tozu ve buz kırıkları"
+      },
+      {
+        "name": "Hibiscus & Lemon Bubble Tea",
+        "price": "165,00 TL",
+        "category": "Bubble Teas",
+        "desc": "Bubble seçenekleri ile"
+      },
+      {
+        "name": "Nebula",
+        "price": "165,00 TL",
+        "category": "Bubble Teas",
+        "desc": "Mavi mandalina, lime bubble"
+      },
+      {
+        "name": "Black Hole",
+        "price": "165,00 TL",
+        "category": "Bubble Teas",
+        "desc": "Tonik, mavi mandalina, buz parçacıkları"
+      },
+      {
+        "name": "Aurora",
+        "price": "165,00 TL",
+        "category": "Bubble Teas",
+        "desc": "Lime bubblelı, yeşil elma, nane"
+      },
+      {
+        "name": "Sirius",
+        "price": "165,00 TL",
+        "category": "Bubble Teas",
+        "desc": "Kahve, karamel bubble, Hindistan cevizi, vanilya"
+      },
+      {
+        "name": "Pink Milk Way",
+        "price": "165,00 TL",
+        "category": "Bubble Teas",
+        "desc": "Yaban mersini bubbleli, rasberry, Hindistan cevizi"
+      },
+      {
+        "name": "Pollux",
+        "price": "165,00 TL",
+        "category": "Bubble Teas",
+        "desc": "Kahve, yaban mersini, bubble, Hindiztan cevizi"
+      },
+      {
+        "name": "Damla Soda (20 Cl.)",
+        "price": "42,00 TL",
+        "category": "İçecekler",
+        "desc": "Cam şişe"
+      },
+      {
+        "name": "Red Bull (25 Cl.)",
+        "price": "130,00 TL",
+        "category": "İçecekler",
+        "desc": "Enerji içeceği"
+      },
+      {
+        "name": "Damla Su (50 Cl.)",
+        "price": "38,50 TL",
+        "category": "İçecekler",
+        "desc": "Pet şişe"
+      },
+      {
+        "name": "Red Bull Sf (25 Cl.)",
+        "price": "130,00 TL",
+        "category": "İçecekler",
+        "desc": "İçecek"
+      }
+    ],
+  },
 };
