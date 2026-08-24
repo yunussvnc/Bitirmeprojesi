@@ -67187,4 +67187,628 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       }
     ],
   },
+
+  "7155": {
+    "name": "Novikov Istanbul",
+    "sourceUrl": "https://cdn-assets-dynamic.frontify.com/4001946/eyJhc3NldF9pZCI6NTk4MDksInNjb3BlIjoiYXNzZXQ6dmlldyJ9:mandarin-oriental-hotel-group:Uc_3L0U3MuwkPMPNrsv-oUZoDNrMxM4MPqZ4jqjRVrc",
+    "sourceName": "Official Mandarin Oriental Bosphorus / Novikov Istanbul Food Menu updated 15.07.2026; exact Kuruçeşme, Muallim Naci Caddesi No:62 branch",
+    "verifiedAt": "2026-08-25",
+    "items": [
+      {
+        "name": "Edamame",
+        "category": "Asya — Başlangıçlar",
+        "price": "₺560"
+      },
+      {
+        "name": "Szechuan Edamame",
+        "category": "Asya — Başlangıçlar",
+        "price": "₺580"
+      },
+      {
+        "name": "Padron Biber",
+        "category": "Asya — Başlangıçlar",
+        "price": "₺1100"
+      },
+      {
+        "name": "Tuna Taco",
+        "category": "Asya — Başlangıçlar",
+        "price": "₺1100"
+      },
+      {
+        "name": "Etli Taco",
+        "category": "Asya — Başlangıçlar",
+        "price": "₺1050"
+      },
+      {
+        "name": "Tom Yum Çorbası",
+        "category": "Asya — Başlangıçlar",
+        "price": "₺1400"
+      },
+      {
+        "name": "Bebek Kalamar",
+        "category": "Asya — Başlangıçlar",
+        "price": "₺1300"
+      },
+      {
+        "name": "Çıtır Tavuk Parçaları",
+        "category": "Asya — Başlangıçlar",
+        "price": "₺1000"
+      },
+      {
+        "name": "Popcorn Karides",
+        "category": "Asya — Başlangıçlar",
+        "price": "₺1350"
+      },
+      {
+        "name": "Deniz Levreği & Kişniş",
+        "category": "Asya — Yeni Stil Sashimi",
+        "price": "₺1100"
+      },
+      {
+        "name": "Deniz Tarağı & Siyah Trüf",
+        "category": "Asya — Yeni Stil Sashimi",
+        "price": "₺1275"
+      },
+      {
+        "name": "Tuna & Beyaz Trüf Kreması Carpaccio",
+        "category": "Asya — Yeni Stil Sashimi",
+        "price": "₺2100"
+      },
+      {
+        "name": "Tuna Tartar & Havyar",
+        "category": "Asya — Yeni Stil Sashimi",
+        "price": "₺2000"
+      },
+      {
+        "name": "Yuzu & Somon",
+        "category": "Asya — Yeni Stil Sashimi",
+        "price": "₺1650"
+      },
+      {
+        "name": "Kerevit Carpaccio",
+        "category": "Asya — Yeni Stil Sashimi",
+        "price": "₺3050"
+      },
+      {
+        "name": "3 Çeşit",
+        "category": "Asya — Sashimi / Nigiri",
+        "price": "₺3050",
+        "desc": "3 Parça / 2 Parça"
+      },
+      {
+        "name": "5 Çeşit",
+        "category": "Asya — Sashimi / Nigiri",
+        "price": "₺4900",
+        "desc": "3 Parça / 2 Parça"
+      },
+      {
+        "name": "Somon",
+        "category": "Asya — Sashimi / Nigiri",
+        "price": "₺950"
+      },
+      {
+        "name": "Akame",
+        "category": "Asya — Sashimi / Nigiri",
+        "price": "₺1050"
+      },
+      {
+        "name": "Chu Toro",
+        "category": "Asya — Sashimi / Nigiri",
+        "price": "₺1100"
+      },
+      {
+        "name": "O Toro",
+        "category": "Asya — Sashimi / Nigiri",
+        "price": "₺1200"
+      },
+      {
+        "name": "Deniz Tarağı",
+        "category": "Asya — Sashimi / Nigiri",
+        "price": "₺1250"
+      },
+      {
+        "name": "Deniz Levreği",
+        "category": "Asya — Sashimi / Nigiri",
+        "price": "₺1300"
+      },
+      {
+        "name": "Karides (ebi) 1 adet",
+        "category": "Asya — Sashimi / Nigiri",
+        "price": "₺800"
+      },
+      {
+        "name": "Kerevit 1 adet",
+        "category": "Asya — Sashimi / Nigiri"
+      },
+      {
+        "name": "Carabinero 1 adet",
+        "category": "Asya — Sashimi / Nigiri"
+      },
+      {
+        "name": "Karides",
+        "category": "Asya — Tempura",
+        "price": "₺1500"
+      },
+      {
+        "name": "Çıtır Morina Balığı",
+        "category": "Asya — Tempura",
+        "price": "₺1200"
+      },
+      {
+        "name": "Kaplan Karides 1 adet",
+        "category": "Asya — Tempura",
+        "price": "₺2100"
+      },
+      {
+        "name": "Bang Bang Karides",
+        "category": "Asya — Tempura",
+        "price": "₺1350"
+      },
+      {
+        "name": "Sebze",
+        "category": "Asya — Tempura",
+        "price": "₺1000"
+      },
+      {
+        "name": "Gillardeau No.2",
+        "category": "Asya — Tempura",
+        "price": "₺1350"
+      },
+      {
+        "name": "Kral Yengeç Bacağı",
+        "category": "Asya — Tempura",
+        "price": "₺8375"
+      },
+      {
+        "name": "Yarım Istakoz",
+        "category": "Asya — Tempura",
+        "price": "₺6500"
+      },
+      {
+        "name": "Havyar Baeri 50gr",
+        "category": "Asya — Havyar Çeşitleri",
+        "price": "₺11600"
+      },
+      {
+        "name": "Havyar Imperial 50gr",
+        "category": "Asya — Havyar Çeşitleri",
+        "price": "₺15000"
+      },
+      {
+        "name": "Havyar Blini adet",
+        "category": "Asya — Havyar Çeşitleri",
+        "price": "₺750"
+      },
+      {
+        "name": "Gillardeau No.2",
+        "category": "Asya — Oyster",
+        "price": "₺1300"
+      },
+      {
+        "name": "Gillardeau No.2 & Havyar",
+        "category": "Asya — Oyster",
+        "price": "₺1650"
+      },
+      {
+        "name": "Ikura Gunkan",
+        "category": "Asya — Premium Sushi",
+        "price": "₺900"
+      },
+      {
+        "name": "Sırlanmış O Toro Nigiri",
+        "category": "Asya — Premium Sushi",
+        "price": "₺1050"
+      },
+      {
+        "name": "Bıldırcın Yumurtası & Trüf Gunkan",
+        "category": "Asya — Premium Sushi",
+        "price": "₺1000"
+      },
+      {
+        "name": "Sırlanmış Somon Nigiri",
+        "category": "Asya — Premium Sushi",
+        "price": "₺1050"
+      },
+      {
+        "name": "Chu-toro Gunkan & Havyar",
+        "category": "Asya — Premium Sushi",
+        "price": "₺1300"
+      },
+      {
+        "name": "Havyar Gunkan 1 adet",
+        "category": "Asya — Premium Sushi",
+        "price": "₺3200"
+      },
+      {
+        "name": "Istakoz Gunkan",
+        "category": "Asya — Premium Sushi",
+        "price": "₺2850"
+      },
+      {
+        "name": "Çıtır California & Havyar",
+        "category": "Asya — Sushi Roll",
+        "price": "₺5350"
+      },
+      {
+        "name": "Istakoz & Trüf Roll",
+        "category": "Asya — Sushi Roll",
+        "price": "₺3700"
+      },
+      {
+        "name": "Deniz Tarağı & Jalapeno",
+        "category": "Asya — Sushi Roll",
+        "price": "₺2100"
+      },
+      {
+        "name": "California",
+        "category": "Asya — Sushi Roll",
+        "price": "₺4000"
+      },
+      {
+        "name": "Acılı Tuna",
+        "category": "Asya — Sushi Roll",
+        "price": "₺1375"
+      },
+      {
+        "name": "Acılı Somon",
+        "category": "Asya — Sushi Roll",
+        "price": "₺1275"
+      },
+      {
+        "name": "O-Toro, Tartar & Yeşil Soğan",
+        "category": "Asya — Sushi Roll",
+        "price": "₺2600"
+      },
+      {
+        "name": "Kerevit & Chu-toro",
+        "category": "Asya — Sushi Roll",
+        "price": "₺4200"
+      },
+      {
+        "name": "Tuna Avokado",
+        "category": "Asya — Sushi Roll",
+        "price": "₺1275"
+      },
+      {
+        "name": "Sırlanmış Somon Avokado",
+        "category": "Asya — Sushi Roll",
+        "price": "₺1250"
+      },
+      {
+        "name": "Karides Tempura & Avokado",
+        "category": "Asya — Sushi Roll",
+        "price": "₺1275"
+      },
+      {
+        "name": "Çıtır Somon & Peynir",
+        "category": "Asya — Sushi Roll",
+        "price": "₺1650"
+      },
+      {
+        "name": "Deniz Levreği, Yuzu & Trüf",
+        "category": "Asya — Sushi Roll",
+        "price": "₺2150"
+      },
+      {
+        "name": "Carabinero Tempura Roll",
+        "category": "Asya — Sushi Roll",
+        "price": "₺3700"
+      },
+      {
+        "name": "Salatalık & Avokado",
+        "category": "Asya — Sushi Roll",
+        "price": "₺1000"
+      },
+      {
+        "name": "Yeşil Yapraklar & Avokado",
+        "category": "Asya — Sushi Roll",
+        "price": "₺1000"
+      },
+      {
+        "name": "Novikov Ördek Salatası",
+        "category": "Asya — Salata",
+        "price": "₺4200"
+      },
+      {
+        "name": "Trüf Soslu Yeşil Salata",
+        "category": "Asya — Salata",
+        "price": "₺1875"
+      },
+      {
+        "name": "Kral Yengeç & Avokado Salatası",
+        "category": "Asya — Salata",
+        "price": "₺3950"
+      },
+      {
+        "name": "Alaskan Kral Yengeç Bacağı (Bütün)",
+        "category": "Asya — Alaskan Kral Yengeç Bacağı",
+        "price": "₺8375"
+      },
+      {
+        "name": "Alaskan Kral Yengeç Bacağı (Yarım)",
+        "category": "Asya — Alaskan Kral Yengeç Bacağı",
+        "price": "₺4650"
+      },
+      {
+        "name": "Novikov Morina Balığı",
+        "category": "Asya — Robata / Teppanyaki",
+        "price": "₺3700"
+      },
+      {
+        "name": "Miso Soslu Tavuk But",
+        "category": "Asya — Robata / Teppanyaki",
+        "price": "₺2450"
+      },
+      {
+        "name": "Somon Teriyaki",
+        "category": "Asya — Robata / Teppanyaki",
+        "price": "₺3050"
+      },
+      {
+        "name": "Izgara Kalamar \"Aşk ile\"",
+        "category": "Asya — Robata / Teppanyaki",
+        "price": "₺1900"
+      },
+      {
+        "name": "Bonfile Tayland Usulü Karabiber Soslu 160g",
+        "category": "Asya — Robata / Teppanyaki",
+        "price": "₺2850"
+      },
+      {
+        "name": "Buharda Deniz Levrek Fileto Zencefil & Soya Soslu",
+        "category": "Asya — Robata / Teppanyaki",
+        "price": "₺3250"
+      },
+      {
+        "name": "Yarı Yarıya Soslanmış Levrek",
+        "category": "Asya — Robata / Teppanyaki",
+        "price": "₺3200"
+      },
+      {
+        "name": "Çipura Fileto Taghazout",
+        "category": "Asya — Robata / Teppanyaki",
+        "price": "₺2000"
+      },
+      {
+        "name": "Izgara Kaplan Karides",
+        "category": "Asya — Robata / Teppanyaki",
+        "price": "₺2100"
+      },
+      {
+        "name": "Yumurtalı Pilav",
+        "category": "Asya — Wok",
+        "price": "₺1000"
+      },
+      {
+        "name": "Karidesli Pilav",
+        "category": "Asya — Wok",
+        "price": "₺1200"
+      },
+      {
+        "name": "Tavuklu Pilav",
+        "category": "Asya — Wok",
+        "price": "₺1100"
+      },
+      {
+        "name": "Spesiyal Pilav",
+        "category": "Asya — Wok",
+        "price": "₺1500"
+      },
+      {
+        "name": "Tatlı & Ekşi Soslu Tavuk",
+        "category": "Asya — Wok",
+        "price": "₺2100"
+      },
+      {
+        "name": "Szechuan Soslu Karides",
+        "category": "Asya — Wok",
+        "price": "₺2200"
+      },
+      {
+        "name": "Tayland Usulü Dana Eti",
+        "category": "Asya — Wok",
+        "price": "₺2650"
+      },
+      {
+        "name": "Buharda Pilav",
+        "category": "Asya — Sebzeler",
+        "price": "₺750"
+      },
+      {
+        "name": "Shiitake Mantarı & Sarımsak, Tereyağlı",
+        "category": "Asya — Sebzeler",
+        "price": "₺950"
+      },
+      {
+        "name": "Miso Patlıcan",
+        "category": "Asya — Sebzeler",
+        "price": "₺850"
+      },
+      {
+        "name": "Karışık Izgara Sebzeler",
+        "category": "Asya — Sebzeler",
+        "price": "₺800"
+      },
+      {
+        "name": "Mevsimsel Mantar Çorbası",
+        "category": "İtalyan — Başlangıçlar",
+        "price": "₺1500"
+      },
+      {
+        "name": "Balık Çorbası",
+        "category": "İtalyan — Başlangıçlar",
+        "price": "₺2100"
+      },
+      {
+        "name": "Novikov Klasik Burrata",
+        "category": "İtalyan — Başlangıçlar",
+        "price": "₺1800"
+      },
+      {
+        "name": "Dana Carpaccio",
+        "category": "İtalyan — Başlangıçlar",
+        "price": "₺2000"
+      },
+      {
+        "name": "Kral Yengeç, Karides & Domates Salatası",
+        "category": "İtalyan — Başlangıçlar",
+        "price": "₺4000"
+      },
+      {
+        "name": "Kum Midyesi \"Alla Pescatora\"",
+        "category": "İtalyan — Başlangıçlar",
+        "price": "₺1400"
+      },
+      {
+        "name": "Katalan Usulü Istakoz Salatası",
+        "category": "İtalyan — Başlangıçlar",
+        "price": "₺6500"
+      },
+      {
+        "name": "Margherita",
+        "category": "İtalyan — Pizza",
+        "price": "₺2100"
+      },
+      {
+        "name": "Dört Peynirli",
+        "category": "İtalyan — Pizza",
+        "price": "₺2200"
+      },
+      {
+        "name": "Trüf Mantarlı",
+        "category": "İtalyan — Pizza",
+        "price": "₺4000"
+      },
+      {
+        "name": "Novikov \"Deniz Ürünleri\"",
+        "category": "İtalyan — Pizza",
+        "price": "₺3050"
+      },
+      {
+        "name": "Diavola",
+        "category": "İtalyan — Pizza",
+        "price": "₺2450"
+      },
+      {
+        "name": "Bresaola",
+        "category": "İtalyan — Pizza",
+        "price": "₺2700"
+      },
+      {
+        "name": "Novikov Usülü Spaghetti",
+        "category": "İtalyan — Makarna ve Risotto",
+        "price": "₺2100"
+      },
+      {
+        "name": "Bolonez Soslu Fettuccini",
+        "category": "İtalyan — Makarna ve Risotto",
+        "price": "₺2825"
+      },
+      {
+        "name": "Istakoz Linguini",
+        "category": "İtalyan — Makarna ve Risotto",
+        "price": "₺6500"
+      },
+      {
+        "name": "Deniz Ürünlü Spaghetti",
+        "category": "İtalyan — Makarna ve Risotto",
+        "price": "₺3400"
+      },
+      {
+        "name": "Kral Yengeç Cavatelli",
+        "category": "İtalyan — Makarna ve Risotto",
+        "price": "₺4600"
+      },
+      {
+        "name": "Parmesan Peynirli & Trüflü Fettuccini",
+        "category": "İtalyan — Makarna ve Risotto",
+        "price": "₺3025"
+      },
+      {
+        "name": "Penne Puttanesca",
+        "category": "İtalyan — Makarna ve Risotto",
+        "price": "₺2100"
+      },
+      {
+        "name": "Ricotta ve Ispanaklı Ravioli",
+        "category": "İtalyan — Makarna ve Risotto",
+        "price": "₺2200"
+      },
+      {
+        "name": "Trüflü Rigatoni Carbonara",
+        "category": "İtalyan — Makarna ve Risotto",
+        "price": "₺2550"
+      },
+      {
+        "name": "Porçini Risotto",
+        "category": "İtalyan — Makarna ve Risotto",
+        "price": "₺3025"
+      },
+      {
+        "name": "Deniz Mahsüllü Risotto",
+        "category": "İtalyan — Makarna ve Risotto",
+        "price": "₺3250"
+      },
+      {
+        "name": "Izgara Somon",
+        "category": "İtalyan — Ana Yemek",
+        "price": "₺3025"
+      },
+      {
+        "name": "Izgara Dry Age Cowboy Steak 750g (2 kişi)",
+        "category": "İtalyan — Ana Yemek",
+        "price": "₺7450"
+      },
+      {
+        "name": "Izgara Kerevit & Salmoriglio Soslu",
+        "category": "İtalyan — Ana Yemek",
+        "price": "₺4200"
+      },
+      {
+        "name": "Tam Çipura Akdeniz Usulü Izgara",
+        "category": "İtalyan — Ana Yemek",
+        "price": "₺3150"
+      },
+      {
+        "name": "Kuzu Pirzola 300g",
+        "category": "İtalyan — Ana Yemek",
+        "price": "₺3575"
+      },
+      {
+        "name": "Tavuk Milanese",
+        "category": "İtalyan — Ana Yemek",
+        "price": "₺2275"
+      },
+      {
+        "name": "Izgara Deniz Levreği Fileto",
+        "category": "İtalyan — Ana Yemek",
+        "price": "₺3250"
+      },
+      {
+        "name": "Patates Püresi",
+        "category": "İtalyan — Sebzeler",
+        "price": "₺775"
+      },
+      {
+        "name": "Izgara Brokoli",
+        "category": "İtalyan — Sebzeler",
+        "price": "₺715"
+      },
+      {
+        "name": "Patates Kızartması Trüflü Mayonez ile",
+        "category": "İtalyan — Sebzeler",
+        "price": "₺825"
+      },
+      {
+        "name": "Ispanak & Tereyağı",
+        "category": "İtalyan — Sebzeler",
+        "price": "₺825"
+      },
+      {
+        "name": "Izgara Karışık Mantar",
+        "category": "İtalyan — Sebzeler",
+        "price": "₺1000"
+      }
+    ],
+  },
 };
