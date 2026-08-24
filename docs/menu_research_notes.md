@@ -559,3 +559,9 @@ Hentzer ID 6953 `Always Waffle Bayrampaşa` kaydı `Yenidoğan, Atışalanı Cd.
 Yemeksepeti `yri1` canlı vendor metadata’sı `YENIDOGAN MAH. ATISALANI CAD. NO:16 A BAYRAMPAŞA` exact adresini veriyor ve 24 Waffles, 5 Bowls, 2 BOX, 3 Croissants, 5 Cups, 6 Drinks kategorilerinde 45 fiyatlı kalem gösteriyor: https://www.yemeksepeti.com/restaurant/yri1/always-waffle-yri1. Popular carousel tekrarları ve 1 TL `Plastic Bag` kalemi dışlandı. Mevcut fiyatlar kaynaktaki gösterimle korundu; üstü çizili eski fiyat aktarılmadı.
 
 Kaynakta görünür menü yayın tarihi bulunmadı; `verifiedAt` 24 Ağustos 2026 canlı erişim/doğrulama tarihidir. Değişiklik yalnız local `MENU_OVERRIDES` ve bu araştırma günlüğündedir; backend/API/DB değiştirilmedi.
+
+### Menü araştırma batch’i — NOM BURGER Moda (24 Ağustos 2026)
+
+Hentzer ID 796 `NOM BURGER`, `Caferağa, Leylek Sok. No:15/B, 34710 Kadıköy/İstanbul`; Google place ID `0x14cab93d112c5aa3:0x8c1c5d7a7cf0d521`. Menu-TR kaydı `https://www.menu-tr.com/istanbul/kadikoy/hamburger-restorani/nom-burger` aynı exact adresi, `(0216) 784 70 07` telefonunu, resmi Instagram `@nomburgermoda` bağlantısını ve aynı Google Maps kimliğini yayımlıyor.
+
+Yemeksepeti `l2z2` canlı menüsü `https://www.yemeksepeti.com/en/restaurant/l2z2/nom-burger-l2z2` Burgers, Side Dishes, Sauces ve Beverages kategorilerinde 30 benzersiz fiyatlı kalem gösteriyor. Popular carousel tekrarları ana kategorilerden yeniden eklenmedi. `Plastic Bag` 1 TL ambalaj kalemi dışlandı. Kaynakta görünür yayın tarihi yok; `verifiedAt` 24 Ağustos 2026 canlı erişim/doğrulama tarihidir. Değişiklik yalnız local `MENU_OVERRIDES` ve bu araştırma günlüğündedir; backend/API/DB değiştirilmedi.

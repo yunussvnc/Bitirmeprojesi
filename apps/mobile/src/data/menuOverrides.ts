@@ -4,6 +4,164 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "796": {
+    "name": "NOM BURGER",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/l2z2/nom-burger-l2z2",
+    "sourceName": "Menu-TR exact Caferağa, Leylek Sok. No:15/B + telefon/Google Maps kimliği 0x14cab93d112c5aa3:0x8c1c5d7a7cf0d521 ve resmi Instagram @nomburgermoda ile eşleştirilen Yemeksepeti l2z2 canlı menüsü; YS menüsü CAPTCHA arkasından çıkarıldı",
+    "verifiedAt": "2026-08-24",
+    "items": [
+      {
+        "name": "Truffle Chicken Burger & Fries",
+        "price": "760 TL",
+        "category": "Burgers"
+      },
+      {
+        "name": "Bacon Burger & Fries",
+        "price": "920 TL",
+        "category": "Burgers"
+      },
+      {
+        "name": "Anatolian Chicken Burger & Fries",
+        "price": "750 TL",
+        "category": "Burgers"
+      },
+      {
+        "name": "Truffle Burger & Fries",
+        "price": "890 TL",
+        "category": "Burgers"
+      },
+      {
+        "name": "Anatolian Burger & Fries",
+        "price": "890 TL",
+        "category": "Burgers"
+      },
+      {
+        "name": "Nom Crispy Chicken Burger & Fries",
+        "price": "700 TL",
+        "category": "Burgers"
+      },
+      {
+        "name": "Spicy Chicken Burger & Fries",
+        "price": "715 TL",
+        "category": "Burgers"
+      },
+      {
+        "name": "Creamy Mushroom Burger & Fries",
+        "price": "875 TL",
+        "category": "Burgers"
+      },
+      {
+        "name": "Cheeseburger & Fries",
+        "price": "860 TL",
+        "category": "Burgers"
+      },
+      {
+        "name": "Smash Burger & Fries",
+        "price": "950 TL",
+        "category": "Burgers"
+      },
+      {
+        "name": "Chicken Tenders (4 Pieces)",
+        "price": "450 TL",
+        "category": "Side Dishes"
+      },
+      {
+        "name": "Chicken Tenders (6 Pieces)",
+        "price": "920 TL",
+        "category": "Side Dishes"
+      },
+      {
+        "name": "Chicken Tenders (2 Pieces)",
+        "price": "250 TL",
+        "category": "Side Dishes"
+      },
+      {
+        "name": "Nom Crispy Onion Rings",
+        "price": "280 TL",
+        "category": "Side Dishes"
+      },
+      {
+        "name": "Nom Ketchup",
+        "price": "50 TL",
+        "category": "Sauces"
+      },
+      {
+        "name": "BBQ Sauce",
+        "price": "50 TL",
+        "category": "Sauces"
+      },
+      {
+        "name": "Truffle Mayonnaise",
+        "price": "50 TL",
+        "category": "Sauces"
+      },
+      {
+        "name": "Roasted Eggplant Sauce",
+        "price": "50 TL",
+        "category": "Sauces"
+      },
+      {
+        "name": "Avocado Mayonnaise",
+        "price": "50 TL",
+        "category": "Sauces"
+      },
+      {
+        "name": "Hot Sauce",
+        "price": "50 TL",
+        "category": "Sauces"
+      },
+      {
+        "name": "Sweet Chili Sauce",
+        "price": "50 TL",
+        "category": "Sauces"
+      },
+      {
+        "name": "Coca-Cola Zero Sugar (33 cl.)",
+        "price": "130 TL",
+        "category": "Beverages"
+      },
+      {
+        "name": "Fanta (33cl.)",
+        "price": "130 TL",
+        "category": "Beverages"
+      },
+      {
+        "name": "Sprite (33cl.)",
+        "price": "130 TL",
+        "category": "Beverages"
+      },
+      {
+        "name": "Ozerhisar Ayran (24.5 cl.)",
+        "price": "130 TL",
+        "category": "Beverages"
+      },
+      {
+        "name": "Soda (20 cl.)",
+        "price": "90 TL",
+        "category": "Beverages"
+      },
+      {
+        "name": "Water (50cl.)",
+        "price": "70 TL",
+        "category": "Beverages"
+      },
+      {
+        "name": "Homemade Lemonade",
+        "price": "140 TL",
+        "category": "Beverages"
+      },
+      {
+        "name": "Homemade Hibiscus Lemonade",
+        "price": "150 TL",
+        "category": "Beverages"
+      },
+      {
+        "name": "Spicy Ayran (30 cl.)",
+        "price": "130 TL",
+        "category": "Beverages"
+      }
+    ]
+  },
   "6953": {
     "name": "Always Waffle Bayrampaşa",
     "sourceUrl": "https://www.yemeksepeti.com/restaurant/yri1/always-waffle-yri1",
