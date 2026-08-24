@@ -61041,4 +61041,379 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     ],
   },
 
+  "3674": {
+    name: "Luwi House Coffee",
+    sourceUrl: "https://luwihouse.com/qr-menu",
+    sourceName: "Luwi House resmi Kadıköy Moda QR menüsü",
+    verifiedAt: "2026-08-24",
+    items: [
+      {
+        name: "Espresso",
+        price: "100",
+        category: "Sıcak İçecekler"
+      },
+      {
+        name: "Double Espresso",
+        price: "120",
+        category: "Sıcak İçecekler"
+      },
+      {
+        name: "Espresso Macchiato",
+        price: "130",
+        category: "Sıcak İçecekler"
+      },
+      {
+        name: "Americano",
+        price: "150",
+        category: "Sıcak İçecekler"
+      },
+      {
+        name: "Cappuccino",
+        price: "180",
+        category: "Sıcak İçecekler"
+      },
+      {
+        name: "Flat White",
+        price: "180",
+        category: "Sıcak İçecekler"
+      },
+      {
+        name: "Cortado",
+        price: "180",
+        category: "Sıcak İçecekler"
+      },
+      {
+        name: "Filtre Kahve",
+        price: "150",
+        category: "Sıcak İçecekler"
+      },
+      {
+        name: "Latte",
+        price: "180",
+        category: "Sıcak İçecekler"
+      },
+      {
+        name: "Latte Macchiato",
+        price: "180",
+        category: "Sıcak İçecekler"
+      },
+      {
+        name: "Caramel Macchiato",
+        price: "200",
+        category: "Sıcak İçecekler"
+      },
+      {
+        name: "Latte Karamel",
+        price: "200",
+        category: "Sıcak İçecekler"
+      },
+      {
+        name: "Latte Vanilya",
+        price: "200",
+        category: "Sıcak İçecekler"
+      },
+      {
+        name: "Lotus Latte",
+        price: "200",
+        category: "Sıcak İçecekler"
+      },
+      {
+        name: "Pumpkin Spice Latte",
+        price: "200",
+        category: "Sıcak İçecekler"
+      },
+      {
+        name: "Toffee Nut Latte",
+        price: "200",
+        category: "Sıcak İçecekler"
+      },
+      {
+        name: "Salted Caramel Latte",
+        price: "220",
+        category: "Sıcak İçecekler"
+      },
+      {
+        name: "Chai Tea Latte",
+        price: "200",
+        category: "Sıcak İçecekler"
+      },
+      {
+        name: "Matcha Latte",
+        price: "250",
+        category: "Sıcak İçecekler"
+      },
+      {
+        name: "Mocha",
+        price: "200",
+        category: "Sıcak İçecekler"
+      },
+      {
+        name: "White Chocolate Mocha",
+        price: "200",
+        category: "Sıcak İçecekler"
+      },
+      {
+        name: "Sahlep",
+        price: "200",
+        category: "Sıcak İçecekler"
+      },
+      {
+        name: "Sıcak Çikolata",
+        price: "200",
+        category: "Sıcak İçecekler"
+      },
+      {
+        name: "Türk Kahvesi",
+        price: "120",
+        category: "Sıcak İçecekler"
+      },
+      {
+        name: "Double Türk Kahvesi",
+        price: "150",
+        category: "Sıcak İçecekler"
+      },
+      {
+        name: "Iced White Chocolate Mocha",
+        price: "200",
+        category: "Iced Coffee"
+      },
+      {
+        name: "Iced Mocha",
+        price: "200",
+        category: "Iced Coffee"
+      },
+      {
+        name: "Iced Vanilya Latte",
+        price: "200",
+        category: "Iced Coffee"
+      },
+      {
+        name: "Iced Caramel Latte",
+        price: "200",
+        category: "Iced Coffee"
+      },
+      {
+        name: "Iced Filtre Kahve",
+        price: "150",
+        category: "Iced Coffee"
+      },
+      {
+        name: "Iced Americano",
+        price: "150",
+        category: "Iced Coffee"
+      },
+      {
+        name: "Iced Latte",
+        price: "180",
+        category: "Iced Coffee"
+      },
+      {
+        name: "Iced Matcha Latte",
+        price: "250",
+        category: "Iced Coffee"
+      },
+      {
+        name: "Iced Pumpkin Spice Latte",
+        price: "200",
+        category: "Iced Coffee"
+      },
+      {
+        name: "Iced Toffee Nut Latte",
+        price: "200",
+        category: "Iced Coffee"
+      },
+      {
+        name: "Iced Salted Caramel Latte",
+        price: "220",
+        category: "Iced Coffee"
+      },
+      {
+        name: "Frappuccino - Oreo",
+        price: "200",
+        category: "Iced Coffee"
+      },
+      {
+        name: "Frappuccino - Kakao",
+        price: "200",
+        category: "Iced Coffee"
+      },
+      {
+        name: "Frappuccino - Çilek",
+        price: "200",
+        category: "Iced Coffee"
+      },
+      {
+        name: "Frappe",
+        price: "200",
+        category: "Iced Coffee"
+      },
+      {
+        name: "Affogato",
+        price: "200",
+        category: "Iced Coffee"
+      },
+      {
+        name: "Çay (Bardak)",
+        price: "50",
+        category: "Çaylar"
+      },
+      {
+        name: "Çay (Fincan)",
+        price: "80",
+        category: "Çaylar"
+      },
+      {
+        name: "Bitki Çayları",
+        price: "150",
+        desc: "Yeşil Çay, Ihlamur, Kış Çayı, Hibiscus, Ada Çayı",
+        category: "Çaylar"
+      },
+      {
+        name: "Vanilyalı Milkshake",
+        price: "280",
+        category: "Milkshakes"
+      },
+      {
+        name: "Çikolatalı Milkshake",
+        price: "280",
+        category: "Milkshakes"
+      },
+      {
+        name: "Muzlu Milkshake",
+        price: "280",
+        category: "Milkshakes"
+      },
+      {
+        name: "Kahveli Milkshake",
+        price: "280",
+        category: "Milkshakes"
+      },
+      {
+        name: "Çilekli Milkshake",
+        price: "280",
+        category: "Milkshakes"
+      },
+      {
+        name: "Oreolu Milkshake",
+        price: "280",
+        category: "Milkshakes"
+      },
+      {
+        name: "Mango Mint",
+        price: "250",
+        category: "Frozen & Limonatalar"
+      },
+      {
+        name: "Mango Frozen",
+        price: "250",
+        category: "Frozen & Limonatalar"
+      },
+      {
+        name: "Nane-Limon",
+        price: "250",
+        category: "Frozen & Limonatalar"
+      },
+      {
+        name: "Cool Lime",
+        price: "250",
+        category: "Frozen & Limonatalar"
+      },
+      {
+        name: "Cam Şişe Su",
+        price: "50",
+        category: "Meşrubat"
+      },
+      {
+        name: "Maden Suyu",
+        price: "60",
+        category: "Meşrubat"
+      },
+      {
+        name: "Churchill",
+        price: "140",
+        category: "Meşrubat"
+      },
+      {
+        name: "Coca Cola (Kutu)",
+        price: "90",
+        category: "Meşrubat"
+      },
+      {
+        name: "Fanta (Kutu)",
+        price: "90",
+        category: "Meşrubat"
+      },
+      {
+        name: "Ice Tea (Kutu)",
+        price: "90",
+        category: "Meşrubat"
+      },
+      {
+        name: "Sprite (Kutu)",
+        price: "90",
+        category: "Meşrubat"
+      },
+      {
+        name: "Cappy Meyve Suyu",
+        price: "90",
+        category: "Meşrubat"
+      },
+      {
+        name: "Çilekli Luwi Kıtır",
+        price: "350",
+        category: "Tatlılar"
+      },
+      {
+        name: "Lotus Cheesecake",
+        price: "350",
+        category: "Tatlılar"
+      },
+      {
+        name: "San Sebastian",
+        price: "350",
+        category: "Tatlılar"
+      },
+      {
+        name: "Çikolatalı Pasta",
+        price: "350",
+        category: "Tatlılar"
+      },
+      {
+        name: "Cevizli Brownie",
+        price: "350",
+        category: "Tatlılar"
+      },
+      {
+        name: "Limonlu Cheesecake",
+        price: "350",
+        category: "Tatlılar"
+      },
+      {
+        name: "Frambuazlı Cheesecake",
+        price: "350",
+        category: "Tatlılar"
+      },
+      {
+        name: "Profiterol",
+        price: "350",
+        category: "Tatlılar"
+      },
+      {
+        name: "Magnolia",
+        price: "350",
+        category: "Tatlılar"
+      },
+      {
+        name: "Tiramisu",
+        price: "350",
+        category: "Tatlılar"
+      },
+      {
+        name: "Çilekli Rulo Pasta",
+        price: "350",
+        category: "Tatlılar"
+      }
+    ],
+  },
+
 };
