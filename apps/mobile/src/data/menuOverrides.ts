@@ -58485,4 +58485,457 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       },
     ]
   },
+  "801": {
+    "name": "Californian USA Burger Kadıköy Şubesi",
+    "sourceUrl": "https://www.migros.com.tr/yemek/california-usa-burger-kadikoy-rasim-pasa-mah-st-2f491",
+    "sourceName": "Migros Yemek branch-labeled `California Usa Burger, Kadıköy (Rasimpaşa Mah.)` menüsü; Yandex exact Rıhtım Cad. No:28 / +90 216 510 22 84 ve resmi Californian USA Burger kayıtlarıyla eşleştirildi",
+    "verifiedAt": "2026-08-24",
+    "items": [
+      {
+        "name": "Triple Double Chicken Burger",
+        "price": "492,00 TL",
+        "category": "Tavuk Burger (Chıcken Burger)"
+      },
+      {
+        "name": "Double Chicken Burger Menü",
+        "price": "508,00 TL",
+        "category": "Burger Menüler (Burger Menus)"
+      },
+      {
+        "name": "Double Et Burger",
+        "price": "780,00 TL",
+        "category": "Et Burger (Meat Burger)"
+      },
+      {
+        "name": "Cheeseburger",
+        "price": "588,00 TL",
+        "category": "Et Burger (Meat Burger)"
+      },
+      {
+        "name": "Chicken Burger",
+        "price": "380,00 TL",
+        "category": "Tavuk Burger (Chıcken Burger)"
+      },
+      {
+        "name": "Chicken Spicy Burger",
+        "price": "396,00 TL",
+        "category": "Tavuk Burger (Chıcken Burger)"
+      },
+      {
+        "name": "Double Chicken Burger",
+        "price": "444,00 TL",
+        "category": "Tavuk Burger (Chıcken Burger)"
+      },
+      {
+        "name": "Crispy Chicken Burger",
+        "price": "396,00 TL",
+        "category": "Tavuk Burger (Chıcken Burger)"
+      },
+      {
+        "name": "Enjoy Et Burger",
+        "price": "532,00 TL",
+        "category": "Et Burger (Meat Burger)"
+      },
+      {
+        "name": "Patlıcanlı Et Burger",
+        "price": "532,00 TL",
+        "category": "Et Burger (Meat Burger)"
+      },
+      {
+        "name": "Trüf Mayonezli Burger",
+        "price": "540,00 TL",
+        "category": "Et Burger (Meat Burger)"
+      },
+      {
+        "name": "Mexico Spicy Burger",
+        "price": "584,00 TL",
+        "category": "Et Burger (Meat Burger)"
+      },
+      {
+        "name": "Füme Delight Burger",
+        "price": "704,00 TL",
+        "category": "Et Burger (Meat Burger)"
+      },
+      {
+        "name": "Steak Köfte Burger",
+        "price": "844,00 TL",
+        "category": "Et Burger (Meat Burger)"
+      },
+      {
+        "name": "Kat Bi Kat Burger",
+        "price": "900,00 TL",
+        "category": "Et Burger (Meat Burger)"
+      },
+      {
+        "name": "Karides & Beef Burger",
+        "price": "796,00 TL",
+        "category": "Et Burger (Meat Burger)"
+      },
+      {
+        "name": "Velvet İnferno Smash Burger",
+        "price": "600,00 TL",
+        "category": "Et Burger (Meat Burger)"
+      },
+      {
+        "name": "Midnight Griddle Smash Burger",
+        "price": "600,00 TL",
+        "category": "Et Burger (Meat Burger)"
+      },
+      {
+        "name": "Double Smash Burger",
+        "price": "720,00 TL",
+        "category": "Et Burger (Meat Burger)"
+      },
+      {
+        "name": "Eco Chicken Burger Menü",
+        "price": "444,00 TL",
+        "category": "Burger Menüler (Burger Menus)"
+      },
+      {
+        "name": "Chicken Spicy Burger Menü",
+        "price": "468,00 TL",
+        "category": "Burger Menüler (Burger Menus)"
+      },
+      {
+        "name": "Enjoy Burger Menü",
+        "price": "596,00 TL",
+        "category": "Burger Menüler (Burger Menus)"
+      },
+      {
+        "name": "Cheeseburger Menü",
+        "price": "652,00 TL",
+        "category": "Burger Menüler (Burger Menus)"
+      },
+      {
+        "name": "Trüf Mayonezli Burger Menü",
+        "price": "612,00 TL",
+        "category": "Burger Menüler (Burger Menus)"
+      },
+      {
+        "name": "Patlıcanlı Et Burger Menü",
+        "price": "592,00 TL",
+        "category": "Burger Menüler (Burger Menus)"
+      },
+      {
+        "name": "Mexican Et Burger Menü",
+        "price": "640,00 TL",
+        "category": "Burger Menüler (Burger Menus)"
+      },
+      {
+        "name": "Steak Köfte Burger Menü",
+        "price": "900,00 TL",
+        "category": "Burger Menüler (Burger Menus)"
+      },
+      {
+        "name": "Çıtır Shots (8 Adet)",
+        "price": "392,00 TL",
+        "category": "Çıtır Chıcken Menü (Crıspy Chıcken Menu)"
+      },
+      {
+        "name": "Crispy Wings (8 Adet)",
+        "price": "680,00 TL",
+        "category": "Çıtır Chıcken Menü (Crıspy Chıcken Menu)"
+      },
+      {
+        "name": "Crispy Buttocks (8 Adet)",
+        "price": "600,00 TL",
+        "category": "Çıtır Chıcken Menü (Crıspy Chıcken Menu)"
+      },
+      {
+        "name": "Crispy Wings Menü",
+        "price": "960,00 TL",
+        "category": "Çıtır Chıcken Menü (Crıspy Chıcken Menu)"
+      },
+      {
+        "name": "Patates Kızartması",
+        "price": "228,00 TL",
+        "category": "Diğer Lezzetler (Sıde Dıshes)"
+      },
+      {
+        "name": "Cheddar Soslu Patates Kızartması",
+        "price": "280,00 TL",
+        "category": "Diğer Lezzetler (Sıde Dıshes)"
+      },
+      {
+        "name": "Trüf Parmesanlı Patates Kızartması",
+        "price": "292,00 TL",
+        "category": "Diğer Lezzetler (Sıde Dıshes)"
+      },
+      {
+        "name": "Soğan Halkası (4 Adet)",
+        "price": "160,00 TL",
+        "category": "Diğer Lezzetler (Sıde Dıshes)"
+      },
+      {
+        "name": "Soğan Halkası (8 Adet)",
+        "price": "276,00 TL",
+        "category": "Diğer Lezzetler (Sıde Dıshes)"
+      },
+      {
+        "name": "Mozzarella Stick (4 Adet)",
+        "price": "220,00 TL",
+        "category": "Diğer Lezzetler (Sıde Dıshes)"
+      },
+      {
+        "name": "Mozzarella Sticks (8 Adet)",
+        "price": "340,00 TL",
+        "category": "Diğer Lezzetler (Sıde Dıshes)"
+      },
+      {
+        "name": "Mini Atıştırmalık Sepet",
+        "price": "440,00 TL",
+        "category": "Diğer Lezzetler (Sıde Dıshes)"
+      },
+      {
+        "name": "Atıştırmalık Sepet",
+        "price": "640,00 TL",
+        "category": "Diğer Lezzetler (Sıde Dıshes)"
+      },
+      {
+        "name": "Combo Başlangıç Tabağı",
+        "price": "560,00 TL",
+        "category": "Diğer Lezzetler (Sıde Dıshes)"
+      },
+      {
+        "name": "Chicken Quesadilla",
+        "price": "440,00 TL",
+        "category": "Diğer Lezzetler (Sıde Dıshes)"
+      },
+      {
+        "name": "Beef Quesadilla",
+        "price": "556,00 TL",
+        "category": "Diğer Lezzetler (Sıde Dıshes)"
+      },
+      {
+        "name": "Ev Yapımı Fırın Sütlaç",
+        "price": "260,00 TL",
+        "category": "Tatlılar (Desserts)"
+      },
+      {
+        "name": "Kazandibi(180 Gr)",
+        "price": "240,00 TL",
+        "category": "Tatlılar (Desserts)"
+      },
+      {
+        "name": "Soğuk Baklava",
+        "price": "272,00 TL",
+        "category": "Tatlılar (Desserts)"
+      },
+      {
+        "name": "Sufle",
+        "price": "320,00 TL",
+        "category": "Tatlılar (Desserts)"
+      },
+      {
+        "name": "Frambuazlı Cheesecake",
+        "price": "320,00 TL",
+        "category": "Tatlılar (Desserts)"
+      },
+      {
+        "name": "Tiramisu",
+        "price": "260,00 TL",
+        "category": "Tatlılar (Desserts)"
+      },
+      {
+        "name": "Fıstıklı Soğuk Kadayıf (Sütlü)",
+        "price": "272,00 TL",
+        "category": "Tatlılar (Desserts)"
+      },
+      {
+        "name": "Spoonful",
+        "price": "260,00 TL",
+        "category": "Tatlılar (Desserts)"
+      },
+      {
+        "name": "Oreo Çilekli Mug",
+        "price": "340,00 TL",
+        "category": "Tatlılar (Desserts)"
+      },
+      {
+        "name": "Orman Meyveli Mug",
+        "price": "340,00 TL",
+        "category": "Tatlılar (Desserts)"
+      },
+      {
+        "name": "Lotus Karamelli Mug",
+        "price": "340,00 TL",
+        "category": "Tatlılar (Desserts)"
+      },
+      {
+        "name": "Antep Fıstıklı Çikolatalı Mug",
+        "price": "340,00 TL",
+        "category": "Tatlılar (Desserts)"
+      },
+      {
+        "name": "Profiterol",
+        "price": "240,00 TL",
+        "category": "Tatlılar (Desserts)"
+      },
+      {
+        "name": "Su (500Ml)",
+        "price": "44,00 TL",
+        "category": "İçecekler (Drınks)"
+      },
+      {
+        "name": "Özel Susurluk Ayran (245Ml)",
+        "price": "108,00 TL",
+        "category": "İçecekler (Drınks)"
+      },
+      {
+        "name": "Sütaş Kutu Ayran (275Ml)",
+        "price": "80,00 TL",
+        "category": "İçecekler (Drınks)"
+      },
+      {
+        "name": "Sütaş Cam Şişe Ayran (300Ml)",
+        "price": "88,00 TL",
+        "category": "İçecekler (Drınks)"
+      },
+      {
+        "name": "Pepsi (330Ml)",
+        "price": "124,00 TL",
+        "category": "İçecekler (Drınks)"
+      },
+      {
+        "name": "Pepsi Max (330Ml)",
+        "price": "124,00 TL",
+        "category": "İçecekler (Drınks)"
+      },
+      {
+        "name": "Yedigün (330Ml)",
+        "price": "124,00 TL",
+        "category": "İçecekler (Drınks)"
+      },
+      {
+        "name": "7Up Gazoz (330Ml)",
+        "price": "124,00 TL",
+        "category": "İçecekler (Drınks)"
+      },
+      {
+        "name": "Lıpton Ice Tea Limon (330Ml)",
+        "price": "124,00 TL",
+        "category": "İçecekler (Drınks)"
+      },
+      {
+        "name": "Lıpton Ice Tea Şeftali (330Ml)",
+        "price": "124,00 TL",
+        "category": "İçecekler (Drınks)"
+      },
+      {
+        "name": "Tropıcana Şeftali (330Ml)",
+        "price": "124,00 TL",
+        "category": "İçecekler (Drınks)"
+      },
+      {
+        "name": "Tropıcana Karışık (330Ml)",
+        "price": "124,00 TL",
+        "category": "İçecekler (Drınks)"
+      },
+      {
+        "name": "Tropıcana Vişne (330Ml)",
+        "price": "124,00 TL",
+        "category": "İçecekler (Drınks)"
+      },
+      {
+        "name": "Adanus Şalgam Suyu (1Lt)",
+        "price": "232,00 TL",
+        "category": "İçecekler (Drınks)"
+      },
+      {
+        "name": "Adanus Şalgam Acılı (330Ml)",
+        "price": "140,00 TL",
+        "category": "İçecekler (Drınks)"
+      },
+      {
+        "name": "Adanus Şalgam Acısız (330Ml)",
+        "price": "140,00 TL",
+        "category": "İçecekler (Drınks)"
+      },
+      {
+        "name": "Sade Soda (200Ml)",
+        "price": "48,00 TL",
+        "category": "İçecekler (Drınks)"
+      },
+      {
+        "name": "Limonlu Soda (200Ml)",
+        "price": "64,00 TL",
+        "category": "İçecekler (Drınks)"
+      },
+      {
+        "name": "Naneli Ayran",
+        "price": "80,00 TL",
+        "category": "İçecekler (Drınks)"
+      },
+      {
+        "name": "Acılı Ayran",
+        "price": "80,00 TL",
+        "category": "İçecekler (Drınks)"
+      },
+      {
+        "name": "Special Calıfornıan Sos",
+        "price": "44,00 TL",
+        "category": "Soslar (Sauces)"
+      },
+      {
+        "name": "Hot Chili Sos",
+        "price": "44,00 TL",
+        "category": "Soslar (Sauces)"
+      },
+      {
+        "name": "Bbq",
+        "price": "44,00 TL",
+        "category": "Soslar (Sauces)"
+      },
+      {
+        "name": "Ketçap",
+        "price": "44,00 TL",
+        "category": "Soslar (Sauces)"
+      },
+      {
+        "name": "Mayonez",
+        "price": "44,00 TL",
+        "category": "Soslar (Sauces)"
+      },
+      {
+        "name": "Hardal",
+        "price": "44,00 TL",
+        "category": "Soslar (Sauces)"
+      },
+      {
+        "name": "Ranch Sos",
+        "price": "44,00 TL",
+        "category": "Soslar (Sauces)"
+      },
+      {
+        "name": "Garlic Souce",
+        "price": "44,00 TL",
+        "category": "Soslar (Sauces)"
+      },
+      {
+        "name": "Çedar Sos",
+        "price": "44,00 TL",
+        "category": "Soslar (Sauces)"
+      },
+      {
+        "name": "Peri Peri Sos",
+        "price": "44,00 TL",
+        "category": "Soslar (Sauces)"
+      },
+      {
+        "name": "Dip Sos",
+        "price": "44,00 TL",
+        "category": "Soslar (Sauces)"
+      },
+      {
+        "name": "Maya Chili Sos",
+        "price": "44,00 TL",
+        "category": "Soslar (Sauces)"
+      },
+      {
+        "name": "Sweet Chili Sos",
+        "price": "44,00 TL",
+        "category": "Soslar (Sauces)"
+      },
+    ]
+  },
 };
