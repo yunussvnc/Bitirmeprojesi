@@ -61416,4 +61416,564 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     ],
   },
 
+  "3715": {
+    name: "Aşiyan Kitap Ve Kahve",
+    sourceUrl: "http://asiyankitapkahve.com/qrmenu/",
+    sourceName: "Aşiyan Kitap & Kahve resmi QR menüsü — 02.02.2026 güncelleme tarihi",
+    verifiedAt: "2026-08-24",
+    items: [
+      {
+        name: "Antep incisi",
+        price: "350.00 TL",
+        category: "Tatlılar"
+      },
+      {
+        name: "Ballı cevizli marlenka",
+        price: "350.00 TL",
+        category: "Tatlılar"
+      },
+      {
+        name: "Ballı çikolatalı marlenka",
+        price: "350.00 TL",
+        category: "Tatlılar"
+      },
+      {
+        name: "Beyaz Çikolatalı Brownie",
+        price: "320.00 TL",
+        desc: "İçindekiler:Dondurma ve Çikolata Sos ile servis edilir.",
+        category: "Tatlılar"
+      },
+      {
+        name: "Browni Belçika Rüyası",
+        price: "370.00 TL",
+        desc: "İçindekiler: Prenses kreması , pastacı kreması ,browni ,çilek ,muz ve Belçika çikolatası",
+        category: "Tatlılar"
+      },
+      {
+        name: "Çikolata Bombası",
+        price: "370.00 TL",
+        desc: "İçindekiler: Prenses kreması ,pastacı kreması , çilek, framboğaz özü, redvelvet tozu ve Belçika çikolatası",
+        category: "Tatlılar"
+      },
+      {
+        name: "CocoStar",
+        price: "350.00 TL",
+        category: "Tatlılar"
+      },
+      {
+        name: "Cookie Pie",
+        price: "350.00 TL",
+        category: "Tatlılar"
+      },
+      {
+        name: "Fıstık mono pasta",
+        price: "350.00 TL",
+        category: "Tatlılar"
+      },
+      {
+        name: "Kırmızı Meyveli Cheesecake",
+        price: "350.00 TL",
+        category: "Tatlılar"
+      },
+      {
+        name: "Limon Cheesecake",
+        price: "350.00 TL",
+        category: "Tatlılar"
+      },
+      {
+        name: "Orman meyveli pasta",
+        price: "350.00 TL",
+        category: "Tatlılar"
+      },
+      {
+        name: "San Sebastian Cheesecake",
+        price: "320.00 TL",
+        desc: "İçindekiler:Belçika Çikolatası ile servis edilir",
+        category: "Tatlılar"
+      },
+      {
+        name: "Sıcak Çikolatalı Çilekli Kup",
+        price: "280.00 TL",
+        desc: "İçindekiler: Pastacı Kreması, Red Velvet Kek, Çilek, Sütlü Belçika Çikolatası ile",
+        category: "Tatlılar"
+      },
+      {
+        name: "Sıcak Çikolatalı Kase",
+        price: "370.00 TL",
+        desc: "İçindekiler:Çilek, Muz, Beyaz Çikolata Krema, Bebe Bisküvi ve Sıcak Çikolata",
+        category: "Tatlılar"
+      },
+      {
+        name: "Sufle",
+        price: "300.00 TL",
+        category: "Tatlılar"
+      },
+      {
+        name: "Tiramisu",
+        price: "300.00 TL",
+        desc: "İçindekiler:Kahveli Kedi Dili, Krema Özel Sos eşliğinde servis edilir.",
+        category: "Tatlılar"
+      },
+      {
+        name: "Ukde",
+        price: "320.00 TL",
+        desc: "İçindekiler:Pandispanya Kek, Pastacı Kreması, Çilek, Muz ve Sıcak Belçika Çikolatası ile servis edilir.",
+        category: "Tatlılar"
+      },
+      {
+        name: "Çikolata Frappe",
+        price: "210.00 TL",
+        desc: "İçindekiler: İnstant Kahve, Süt, Şeker, Çikolata Sos ve Buz ile",
+        category: "Frozen Frappe"
+      },
+      {
+        name: "Çilek Frozen",
+        price: "190.00 TL",
+        category: "Frozen Frappe"
+      },
+      {
+        name: "Karadut Frozen",
+        price: "190.00 TL",
+        category: "Frozen Frappe"
+      },
+      {
+        name: "Karamel Frappe",
+        price: "210.00 TL",
+        desc: "İçindekiler: İnstant Kahve, Süt, Şeker, Karamel Sos ve Buz ile",
+        category: "Frozen Frappe"
+      },
+      {
+        name: "Kavun Frozen",
+        price: "190.00 TL",
+        category: "Frozen Frappe"
+      },
+      {
+        name: "Kırmızı Orman Meyveli Frozen",
+        price: "190.00 TL",
+        category: "Frozen Frappe"
+      },
+      {
+        name: "Mango Frozen",
+        price: "190.00 TL",
+        category: "Frozen Frappe"
+      },
+      {
+        name: "Nane Limon Frozen",
+        price: "190.00 TL",
+        category: "Frozen Frappe"
+      },
+      {
+        name: "Sade Frappe",
+        price: "210.00 TL",
+        desc: "İçindekiler: İnstant Kahve, Süt, Şeker ve Buz ile",
+        category: "Frozen Frappe"
+      },
+      {
+        name: "Ananas Smoothie",
+        price: "210.00 TL",
+        category: "Smoothie"
+      },
+      {
+        name: "Çilekli Smoothie",
+        price: "210.00 TL",
+        category: "Smoothie"
+      },
+      {
+        name: "Espresso Smoothie",
+        price: "210.00 TL",
+        category: "Smoothie"
+      },
+      {
+        name: "Çilekli Limonata",
+        price: "190.00 TL",
+        category: "Limonata"
+      },
+      {
+        name: "Klasik Limonata",
+        price: "190.00 TL",
+        category: "Limonata"
+      },
+      {
+        name: "Naneli Limonata",
+        price: "190.00 TL",
+        category: "Limonata"
+      },
+      {
+        name: "Yeşil Elmalı Limonata",
+        price: "190.00 TL",
+        category: "Limonata"
+      },
+      {
+        name: "Beyoğlu Klasik Gazoz",
+        price: "90.00 TL",
+        category: "İçecekler"
+      },
+      {
+        name: "Beyoğlu Limon & Nane",
+        price: "90.00 TL",
+        category: "İçecekler"
+      },
+      {
+        name: "Beyoğlu Portakal",
+        price: "90.00 TL",
+        category: "İçecekler"
+      },
+      {
+        name: "Beyoğlu Reyhan",
+        price: "90.00 TL",
+        category: "İçecekler"
+      },
+      {
+        name: "Beyoğlu Zencefil",
+        price: "90.00 TL",
+        category: "İçecekler"
+      },
+      {
+        name: "Niğde Gazoz",
+        price: "90.00 TL",
+        category: "İçecekler"
+      },
+      {
+        name: "Şeftali Meyve Suyu",
+        price: "90.00 TL",
+        category: "İçecekler"
+      },
+      {
+        name: "Soğuk Çay (Bergamot, Limon, Şeftali)",
+        price: "90.00 TL",
+        category: "İçecekler"
+      },
+      {
+        name: "Vişne Meyve Suyu",
+        price: "90.00 TL",
+        category: "İçecekler"
+      },
+      {
+        name: "Payedar Şerbeti",
+        price: "150.00 TL",
+        category: "Şerbetler"
+      },
+      {
+        name: "Taze Sıkma Meyve suları",
+        price: "200.00 TL",
+        category: "Taze Sıkma Meyve Suları"
+      },
+      {
+        name: "Aile Boyu Demlik Menü",
+        price: "1000.00 TL",
+        desc: "İçindekiler:Patlamış Mısır ile servis edilir.",
+        category: "Demlik Çay"
+      },
+      {
+        name: "Demlik Menü",
+        price: "800.00 TL",
+        desc: "İçindekiler:Patlamış Mısır ile servis edilir.",
+        category: "Demlik Çay"
+      },
+      {
+        name: "Çay",
+        price: "65.00 TL",
+        category: "Çay Su Soda"
+      },
+      {
+        name: "Churchill",
+        price: "100.00 TL",
+        category: "Çay Su Soda"
+      },
+      {
+        name: "Fincan Çay",
+        price: "85.00 TL",
+        category: "Çay Su Soda"
+      },
+      {
+        name: "Sade Soda",
+        price: "90.00 TL",
+        category: "Çay Su Soda"
+      },
+      {
+        name: "Sıkma Limonlu Soda",
+        price: "100.00 TL",
+        category: "Çay Su Soda"
+      },
+      {
+        name: "Su",
+        price: "40.00 TL",
+        category: "Çay Su Soda"
+      },
+      {
+        name: "Patlamış Mısır",
+        price: "150.00 TL",
+        category: "Atıştırmalık"
+      },
+      {
+        name: "Çörek Otu Kahvesi (K)",
+        price: "150.00 TL",
+        category: "Türk Kahvesi"
+      },
+      {
+        name: "Çörek Otu Kahvesi (B)",
+        price: "180.00 TL",
+        category: "Türk Kahvesi"
+      },
+      {
+        name: "Damla Sakızlı Türk Kahvesi (K)",
+        price: "150.00 TL",
+        category: "Türk Kahvesi"
+      },
+      {
+        name: "Damla Sakızlı Türk Kahvesi (B)",
+        price: "180.00 TL",
+        category: "Türk Kahvesi"
+      },
+      {
+        name: "Dibek Kahvesi (K)",
+        price: "150.00 TL",
+        category: "Türk Kahvesi"
+      },
+      {
+        name: "Dibek Kahvesi (B)",
+        price: "180.00 TL",
+        category: "Türk Kahvesi"
+      },
+      {
+        name: "Keçiboynuzu Kahvesi (K)",
+        price: "150.00 TL",
+        category: "Türk Kahvesi"
+      },
+      {
+        name: "Keçiboynuzu Kahvesi (B)",
+        price: "180.00 TL",
+        category: "Türk Kahvesi"
+      },
+      {
+        name: "Menengiç Kahvesi (K)",
+        price: "150.00 TL",
+        category: "Türk Kahvesi"
+      },
+      {
+        name: "Menengiç Kahvesi (B)",
+        price: "180.00 TL",
+        category: "Türk Kahvesi"
+      },
+      {
+        name: "Osmanlı Kahvesi (K)",
+        price: "150.00 TL",
+        category: "Türk Kahvesi"
+      },
+      {
+        name: "Osmanlı Kahvesi (B)",
+        price: "180.00 TL",
+        category: "Türk Kahvesi"
+      },
+      {
+        name: "Sütlü Türk Kahvesi (K)",
+        price: "150.00 TL",
+        category: "Türk Kahvesi"
+      },
+      {
+        name: "Sütlü Türk Kahvesi (B)",
+        price: "180.00 TL",
+        category: "Türk Kahvesi"
+      },
+      {
+        name: "Türk Kahvesi (K)",
+        price: "150.00 TL",
+        category: "Türk Kahvesi"
+      },
+      {
+        name: "Türk Kahvesi (B)",
+        price: "180.00 TL",
+        category: "Türk Kahvesi"
+      },
+      {
+        name: "Americano",
+        price: "190.00 TL",
+        category: "Ecnebi Kahveler"
+      },
+      {
+        name: "Cappuccino",
+        price: "220.00 TL",
+        category: "Ecnebi Kahveler"
+      },
+      {
+        name: "Chai Tea Latte",
+        price: "220.00 TL",
+        category: "Ecnebi Kahveler"
+      },
+      {
+        name: "Cortado",
+        price: "220.00 TL",
+        category: "Ecnebi Kahveler"
+      },
+      {
+        name: "Espresso",
+        price: "160.00 TL",
+        category: "Ecnebi Kahveler"
+      },
+      {
+        name: "Filtre Kahve",
+        price: "190.00 TL",
+        category: "Ecnebi Kahveler"
+      },
+      {
+        name: "Flat White",
+        price: "220.00 TL",
+        category: "Ecnebi Kahveler"
+      },
+      {
+        name: "Karamel Latte",
+        price: "220.00 TL",
+        category: "Ecnebi Kahveler"
+      },
+      {
+        name: "Latte",
+        price: "220.00 TL",
+        category: "Ecnebi Kahveler"
+      },
+      {
+        name: "Mocha",
+        price: "220.00 TL",
+        category: "Ecnebi Kahveler"
+      },
+      {
+        name: "Sütlü Nescafe",
+        price: "220.00 TL",
+        category: "Ecnebi Kahveler"
+      },
+      {
+        name: "White Mocha",
+        price: "220.00 TL",
+        category: "Ecnebi Kahveler"
+      },
+      {
+        name: "Beyaz Sıcak Çikolata",
+        price: "200.00 TL",
+        category: "Sıcak İçecekler"
+      },
+      {
+        name: "Çikolata Kahve",
+        price: "200.00 TL",
+        category: "Sıcak İçecekler"
+      },
+      {
+        name: "Dağ Çilekli Sıcak Çikolata",
+        price: "200.00 TL",
+        category: "Sıcak İçecekler"
+      },
+      {
+        name: "Hindistan Cevizli Sıcak Çikolata",
+        price: "200.00 TL",
+        category: "Sıcak İçecekler"
+      },
+      {
+        name: "Salep",
+        price: "200.00 TL",
+        category: "Sıcak İçecekler"
+      },
+      {
+        name: "Sıcak Çikolata",
+        price: "200.00 TL",
+        category: "Sıcak İçecekler"
+      },
+      {
+        name: "Ada Çayı",
+        price: "190.00 TL",
+        desc: "İçindekiler:Kuru Meyve, Bal ve Limon ile",
+        category: "Bitki Çayları"
+      },
+      {
+        name: "Elma Tarçın Çayı",
+        price: "190.00 TL",
+        desc: "İçindekiler:Kuru Meyve, Bal ve Limon ile",
+        category: "Bitki Çayları"
+      },
+      {
+        name: "Ihlamur Çayı",
+        price: "190.00 TL",
+        desc: "İçindekiler:Kuru Meyve, Bal ve Limon ile",
+        category: "Bitki Çayları"
+      },
+      {
+        name: "Kuşburnu-Hibisküs Çayı",
+        price: "190.00 TL",
+        desc: "İçindekiler:Kuru Meyve, Bal ve Limon ile",
+        category: "Bitki Çayları"
+      },
+      {
+        name: "Nane Limon Çayı",
+        price: "190.00 TL",
+        desc: "İçindekiler:Kuru Meyve, Bal ve Limon ile",
+        category: "Bitki Çayları"
+      },
+      {
+        name: "Papatya Çayı",
+        price: "190.00 TL",
+        desc: "İçindekiler:Kuru Meyve, Bal ve Limon ile",
+        category: "Bitki Çayları"
+      },
+      {
+        name: "Yeşil Çay",
+        price: "190.00 TL",
+        desc: "İçindekiler:Kuru Meyve, Bal ve Limon ile",
+        category: "Bitki Çayları"
+      },
+      {
+        name: "Affogato",
+        price: "180.00 TL",
+        desc: "İçindekiler:2 Top Sade Dondurma Duble Espresso ile servis edilir",
+        category: "Soğuk Kahveler"
+      },
+      {
+        name: "Buzlu Americano",
+        price: "150.00 TL",
+        category: "Soğuk Kahveler"
+      },
+      {
+        name: "Buzlu Filtre Kahve",
+        price: "150.00 TL",
+        category: "Soğuk Kahveler"
+      },
+      {
+        name: "Buzlu Karamel Mocha",
+        price: "190.00 TL",
+        category: "Soğuk Kahveler"
+      },
+      {
+        name: "Buzlu Latte",
+        price: "180.00 TL",
+        category: "Soğuk Kahveler"
+      },
+      {
+        name: "Buzlu Mocha",
+        price: "190.00 TL",
+        category: "Soğuk Kahveler"
+      },
+      {
+        name: "Buzlu White Mocha",
+        price: "190.00 TL",
+        category: "Soğuk Kahveler"
+      },
+      {
+        name: "Çikolatalı Milkshake",
+        price: "210.00 TL",
+        category: "Milkshake"
+      },
+      {
+        name: "Çilekli Milkshake",
+        price: "210.00 TL",
+        category: "Milkshake"
+      },
+      {
+        name: "Karamelli Milkshake",
+        price: "210.00 TL",
+        category: "Milkshake"
+      },
+      {
+        name: "Vanilyalı Milkshake",
+        price: "210.00 TL",
+        category: "Milkshake"
+      }
+    ],
+  },
+
 };
