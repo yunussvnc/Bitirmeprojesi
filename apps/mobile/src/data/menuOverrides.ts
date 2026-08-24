@@ -4,6 +4,635 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "7141": {
+    "name": "Tophane Dürümcüsü",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/jyso/tophane-durumcusu",
+    "sourceName": "Yemeksepeti canlı Tophane Dürümcüsü jyso menüsü; Hakkında adresi Boğazkesen Cad. No:15 Tophane, Hentzer exact ID 7141 ve Sluurpy adresiyle eşleştirildi",
+    "verifiedAt": "2026-08-24",
+    "items": [
+      {
+        "name": "Ezogelin Çorbası",
+        "price": "150 TL",
+        "category": "Çorbalar"
+      },
+      {
+        "name": "Adana Kebap",
+        "price": "540 TL",
+        "category": "Kebaplar"
+      },
+      {
+        "name": "Urfa Kebap",
+        "price": "540 TL",
+        "category": "Kebaplar"
+      },
+      {
+        "name": "Kuzu Ciğer",
+        "price": "640 TL",
+        "category": "Kebaplar"
+      },
+      {
+        "name": "Et Şiş",
+        "price": "620 TL",
+        "category": "Izgaralar"
+      },
+      {
+        "name": "Tavuk Şiş",
+        "price": "470 TL",
+        "category": "Izgaralar"
+      },
+      {
+        "name": "Ciğer Şiş",
+        "price": "640 TL",
+        "category": "Izgaralar"
+      },
+      {
+        "name": "Tavuk Kanat",
+        "price": "470 TL",
+        "category": "Izgaralar"
+      },
+      {
+        "name": "Izgara Köfte",
+        "price": "540 TL",
+        "category": "Izgaralar"
+      },
+      {
+        "name": "Izgara Sucuk",
+        "price": "550 TL",
+        "category": "Izgaralar"
+      },
+      {
+        "name": "Adana Dürüm",
+        "price": "300 TL",
+        "category": "Dürümler"
+      },
+      {
+        "name": "Urfa Dürüm",
+        "price": "300 TL",
+        "category": "Dürümler"
+      },
+      {
+        "name": "Et Şiş Dürüm",
+        "price": "320 TL",
+        "category": "Dürümler"
+      },
+      {
+        "name": "Köfte Dürüm",
+        "price": "300 TL",
+        "category": "Dürümler"
+      },
+      {
+        "name": "Tavuk Şiş Dürüm",
+        "price": "260 TL",
+        "category": "Dürümler"
+      },
+      {
+        "name": "Duble Adana Dürüm",
+        "price": "540 TL",
+        "category": "Dürümler"
+      },
+      {
+        "name": "Duble Urfa Dürüm",
+        "price": "540 TL",
+        "category": "Dürümler"
+      },
+      {
+        "name": "Duble Et Şiş Dürüm",
+        "price": "620 TL",
+        "category": "Dürümler"
+      },
+      {
+        "name": "Duble Tavuk Şiş Dürüm",
+        "price": "470 TL",
+        "category": "Dürümler"
+      },
+      {
+        "name": "Duble Köfte Dürüm",
+        "price": "540 TL",
+        "category": "Dürümler"
+      },
+      {
+        "name": "Duble Sucuk Dürüm",
+        "price": "550 TL",
+        "category": "Dürümler"
+      },
+      {
+        "name": "Ciğer Dürüm",
+        "price": "310 TL",
+        "category": "Dürümler"
+      },
+      {
+        "name": "Duble Ciğer Dürüm",
+        "price": "600 TL",
+        "category": "Dürümler"
+      },
+      {
+        "name": "Ekmek Arası Köfte",
+        "price": "320 TL",
+        "category": "Ekmek Arası Ürünler"
+      },
+      {
+        "name": "Bulgur Pilavı",
+        "price": "140 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Çoban Salata",
+        "price": "170 TL",
+        "category": "Salatalar"
+      },
+      {
+        "name": "Coca-Cola (33 cl.)",
+        "price": "85 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Fanta (33 cl.)",
+        "price": "85 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Şalgam Suyu (33 cl.)",
+        "price": "70 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Ayran (27 cl.)",
+        "price": "70 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Limonlu Soda (20 cl.)",
+        "price": "50 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Soda (20 cl.)",
+        "price": "35 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Su (50 cl.)",
+        "price": "30 TL",
+        "category": "İçecekler"
+      }
+    ]
+  },
+  "7149": {
+    "name": "No6 Coffee Co. Burger",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/vik2/no6-coffee-co-burger",
+    "sourceName": "Yemeksepeti canlı No6 Coffee Co. Burger vik2 menüsü; vendor JSON-LD adresi Yıldırım Mah. Ali Fuat Başgil Cd. No:120A, Hentzer exact ID 7149 ve resmi no6coffee.co kimliğiyle eşleştirildi",
+    "verifiedAt": "2026-08-24",
+    "items": [
+      {
+        "name": "Smash Burger",
+        "price": "552,50 TL",
+        "category": "Burgerler"
+      },
+      {
+        "name": "Truff Smash Burger",
+        "price": "603,50 TL",
+        "category": "Burgerler"
+      },
+      {
+        "name": "Dana Bacon Smash Burger",
+        "price": "612 TL",
+        "category": "Burgerler"
+      },
+      {
+        "name": "Smoked Smash Burger",
+        "price": "612 TL",
+        "category": "Burgerler"
+      },
+      {
+        "name": "Bacon Mushroom Pizza",
+        "price": "552,50 TL",
+        "category": "Pizzalar"
+      },
+      {
+        "name": "Kremalı Mantarlı Pizza",
+        "price": "467,50 TL",
+        "category": "Pizzalar"
+      },
+      {
+        "name": "Margherita Pizza",
+        "price": "399,50 TL",
+        "category": "Pizzalar"
+      },
+      {
+        "name": "Kuru Et Pizza",
+        "price": "552,50 TL",
+        "category": "Pizzalar"
+      },
+      {
+        "name": "Alla Turca Pizza",
+        "price": "467,50 TL",
+        "category": "Pizzalar"
+      },
+      {
+        "name": "Tereyağlı Sade Kruvasan",
+        "price": "255 TL",
+        "category": "Kruvasanlar"
+      },
+      {
+        "name": "Bademli Kruvasan",
+        "price": "212,50 TL",
+        "category": "Kruvasanlar"
+      },
+      {
+        "name": "Dana Fümeli Kruvasan",
+        "price": "467,50 TL",
+        "category": "Kruvasanlar"
+      },
+      {
+        "name": "Çikolatalı Kruvasan",
+        "price": "212,50 TL",
+        "category": "Kruvasanlar"
+      },
+      {
+        "name": "Pastacı Kremalı Çilekli Kruvasan",
+        "price": "467,50 TL",
+        "category": "Kruvasanlar"
+      },
+      {
+        "name": "Pastacı Kremalı Muzlu Kruvasan",
+        "price": "425 TL",
+        "category": "Kruvasanlar"
+      },
+      {
+        "name": "Brownie",
+        "price": "340 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Belçika Çikolatalı Profiterol",
+        "price": "425 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Belçika Çikolatalı Bask Cheesecake",
+        "price": "425 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Nutella Cookie Cake",
+        "price": "255 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Dubai Brownie",
+        "price": "467,50 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Kasap Sucuklu Tulum Peynirli Tost",
+        "price": "318,75 TL",
+        "category": "Tostlar"
+      },
+      {
+        "name": "Pestolu Beyaz Peynirli Tost",
+        "price": "297,50 TL",
+        "category": "Tostlar"
+      },
+      {
+        "name": "Kuru Etli Cheddarlı Tost",
+        "price": "318,75 TL",
+        "category": "Tostlar"
+      },
+      {
+        "name": "No.6 Tost",
+        "price": "318,75 TL",
+        "category": "Tostlar"
+      },
+      {
+        "name": "Patates Kızartması",
+        "price": "238 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Coca-Cola Zero Sugar (33 cl.)",
+        "price": "102 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Coca-Cola (33 cl.)",
+        "price": "102 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Fanta (33 cl.)",
+        "price": "102 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Sprite (33 cl.)",
+        "price": "102 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Silivri Ayran (24,5 cl.)",
+        "price": "102 TL",
+        "category": "İçecekler"
+      }
+    ]
+  },
+  "7163": {
+    "name": "Taffee Coffee Co - Parkada",
+    "sourceUrl": "https://taffeecoffee.com/Menu",
+    "sourceName": "Taffee Coffee resmi menüsü; exact Yıldırım Mah. Şehit Kamil Balkan Cd. No:130-136B Bayrampaşa ve +90 539 859 07 28 iletişim kaydı Hentzer ID 7163 ile eşleştirildi",
+    "verifiedAt": "2026-08-24",
+    "items": [
+      {
+        "name": "Dana Jambon Sandviç",
+        "price": "₺300",
+        "category": "Yiyecekler"
+      },
+      {
+        "name": "Hindi Füme Sandviç",
+        "price": "₺300",
+        "category": "Yiyecekler"
+      },
+      {
+        "name": "Churchill",
+        "price": "₺150",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Milkshake",
+        "price": "₺180",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Ice Lotus Latte",
+        "price": "₺200",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Ice White Mocha",
+        "price": "₺200",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Ice Vanilya Latte",
+        "price": "₺180",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Mineral Water",
+        "price": "₺130",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Ice Latte",
+        "price": "₺180",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Iced Filter Coffee",
+        "price": "₺170",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Frappe",
+        "price": "₺180",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Raspberry Acai",
+        "price": "₺220",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Cool Lime",
+        "price": "₺180",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Orange Mango Moctail",
+        "price": "₺220",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Redbull",
+        "price": "₺150",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Ice Mocha",
+        "price": "₺200",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Ice matcha Latte",
+        "price": "₺230",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Ice Chai Tea Latte",
+        "price": "₺170",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Ice Zebra Mocha",
+        "price": "₺200",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Taffee Cold Brew",
+        "price": "₺210",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Berry Hibiscus",
+        "price": "₺180",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Limonata",
+        "price": "₺180",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Mango Limonata",
+        "price": "₺180",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Çilekli Milkshake",
+        "price": "₺180",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "ULUDAĞ PREMIUM SU",
+        "price": "₺60",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Frozen",
+        "price": "₺180",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Affogato",
+        "price": "₺210",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Ice Americano",
+        "price": "₺170",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Çilekli Limonata",
+        "price": "₺180",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Yeşil Çay",
+        "price": "₺120",
+        "category": "Bitki Çayları"
+      },
+      {
+        "name": "Kış Çayı",
+        "price": "₺180",
+        "category": "Bitki Çayları"
+      },
+      {
+        "name": "Ihlamur Çayı",
+        "price": "₺180",
+        "category": "Bitki Çayları"
+      },
+      {
+        "name": "Double Espresso",
+        "price": "₺130",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Filtre Kahve",
+        "price": "₺170",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Cortado",
+        "price": "₺150",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Ristretto",
+        "price": "₺110",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Türk Kahvesi",
+        "price": "₺120",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Salep",
+        "price": "₺170",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Zebra Mocha",
+        "price": "₺200",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Mocha",
+        "price": "₺200",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "White Chocolate Mocha",
+        "price": "₺200",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Espresso",
+        "price": "₺110",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Classic Hot Chocolate",
+        "price": "₺170",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "V60",
+        "price": "₺210",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Fincan Çay",
+        "price": "₺85",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Caramel Latte",
+        "price": "₺200",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Salted Caramel Latte",
+        "price": "₺200",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Latte Macchiato",
+        "price": "₺180",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Black Tea ( Siyah Çay)",
+        "price": "₺65",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Espresso Macchiato",
+        "price": "₺140",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Americano",
+        "price": "₺170",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Chai Tea Latte",
+        "price": "₺170",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Melisa Çayı",
+        "price": "₺120",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Flat White",
+        "price": "₺170",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Caffè Latte",
+        "price": "₺180",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Lotus Latte",
+        "price": "₺200",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Cappuccino",
+        "price": "₺180",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Chemex",
+        "price": "₺210",
+        "category": "Sıcak İçecekler"
+      }
+    ]
+  },
   "6083": {
     "name": "Valonia Chocolate & Cafe",
     "sourceUrl": "https://valonia.pelit.com.tr/?kaynak=qr",
