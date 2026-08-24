@@ -47316,4 +47316,21 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       {name: "Fanta (1L)", price: "120 TL", category: "Beverages"},
     ],
   },
+  "7119": {
+    name: "Viyana Kahvesi Beşiktaş",
+    sourceUrl: "https://www.yemeksepeti.com/en/restaurant/lb95/besiktas-viyana-kahvesi",
+    sourceName: "Yemeksepeti — Beşiktaş Viyana Kahvesi Yeni Hamam",
+    verifiedAt: "2026-08-24",
+    items: [
+      {name: "Çilekli Mag", price: "345 TL", category: "Tatlılar"},
+      {name: "Muzlu Mag", price: "345 TL", category: "Tatlılar"},
+      {name: "Cevizli Brownie", price: "335 TL", category: "Tatlılar"},
+      {name: "Waffle Bowl", price: "385 TL", category: "Tatlılar"},
+      {name: "Iced White Chocolate Mocha", price: "250 TL", category: "Dünya Kahveleri"},
+      {name: "Iced Mocha", price: "250 TL", category: "Dünya Kahveleri"},
+      {name: "Iced Caramel Latte", price: "250 TL", category: "Dünya Kahveleri"},
+      {name: "Iced Vanilya Latte", price: "250 TL", category: "Dünya Kahveleri"},
+      {name: "Limonata", price: "200 TL", category: "Limonatalar"},
+    ],
+  },
 };
