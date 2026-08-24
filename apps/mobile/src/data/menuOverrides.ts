@@ -59998,4 +59998,558 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       },
     ]
   },
+  "3703": {
+    name: "Fabrikafa Make & Coffee",
+    sourceUrl: "https://menu.fabrikafa.org/",
+    sourceName: "Fabrikafa resmi menü",
+    verifiedAt: "2026-08-24",
+    items: [
+      {
+        name: "Espresso",
+        price: "₺190",
+        category: "Espresso Bar"
+      },
+      {
+        name: "Double Espresso",
+        price: "₺210",
+        category: "Espresso Bar"
+      },
+      {
+        name: "Americano",
+        price: "₺230",
+        category: "Espresso Bar"
+      },
+      {
+        name: "Flat White",
+        price: "₺250",
+        category: "Espresso Bar"
+      },
+      {
+        name: "Cortado",
+        price: "₺240",
+        category: "Espresso Bar"
+      },
+      {
+        name: "Latte",
+        price: "₺250",
+        category: "Espresso Bar"
+      },
+      {
+        name: "Cappucino",
+        price: "₺250",
+        category: "Espresso Bar"
+      },
+      {
+        name: "Mocha",
+        price: "₺260",
+        category: "Espresso Bar"
+      },
+      {
+        name: "White Chocolate Mocha",
+        price: "₺260",
+        category: "Espresso Bar"
+      },
+      {
+        name: "Vanilla Latte",
+        price: "₺260",
+        category: "Espresso Bar"
+      },
+      {
+        name: "Caramel Latte",
+        price: "₺260",
+        category: "Espresso Bar"
+      },
+      {
+        name: "Hazelnut Latte",
+        price: "₺260",
+        category: "Espresso Bar"
+      },
+      {
+        name: "Chai Latte",
+        price: "₺260",
+        category: "Espresso Bar"
+      },
+      {
+        name: "Iced Americano",
+        price: "₺240",
+        category: "Soğuk Kahveler"
+      },
+      {
+        name: "Iced Latte",
+        price: "₺260",
+        category: "Soğuk Kahveler"
+      },
+      {
+        name: "Iced Mocha",
+        price: "₺270",
+        category: "Soğuk Kahveler"
+      },
+      {
+        name: "Iced White Chocolate Mocha",
+        price: "₺270",
+        category: "Soğuk Kahveler"
+      },
+      {
+        name: "Iced Caramel Latte",
+        price: "₺270",
+        category: "Soğuk Kahveler"
+      },
+      {
+        name: "Iced Filtre",
+        price: "₺210",
+        category: "Soğuk Kahveler"
+      },
+      {
+        name: "Iced Sütlü Filtre",
+        price: "₺220",
+        category: "Soğuk Kahveler"
+      },
+      {
+        name: "V60",
+        price: "₺300",
+        desc: "Elle dökülerek demlenir; berrak ve nüanslı bir fincan.",
+        category: "Demleme Kahveler"
+      },
+      {
+        name: "Chemex",
+        price: "₺300",
+        desc: "Cam demleme; ipeksi, kristal berraklığında aromalar.",
+        category: "Demleme Kahveler"
+      },
+      {
+        name: "Filtre Kahve",
+        price: "₺190",
+        category: "Demleme Kahveler"
+      },
+      {
+        name: "Sütlü Filtre Kahve",
+        price: "₺200",
+        category: "Demleme Kahveler"
+      },
+      {
+        name: "Salep",
+        price: "₺250",
+        desc: "Gerçek orkide köküyle hazırlanmış, tarçınla taçlanan kış klasiği.",
+        category: "Salep"
+      },
+      {
+        name: "Sıcak Çikolata",
+        price: "₺250",
+        category: "Sıcak Çikolata"
+      },
+      {
+        name: "Klasik Türk Kahvesi",
+        price: "₺160",
+        category: "Türk Kahvesi"
+      },
+      {
+        name: "Duble Türk Kahvesi",
+        price: "₺190",
+        category: "Türk Kahvesi"
+      },
+      {
+        name: "Damla Sakızlı Türk Kahvesi",
+        price: "₺170",
+        desc: "Sakız adasının ferah aromasıyla kokulu, hafif sakızlı dokunuş.",
+        category: "Türk Kahvesi"
+      },
+      {
+        name: "\"Menengiç\"",
+        price: "₺170",
+        desc: "Kavrulmuş menengiç tohumlarından sütsü, fındıksı lezzet; doğal kafeinsiz keyif.",
+        category: "Türk Kahvesi"
+      },
+      {
+        name: "\"Dibek\" Kahvesi",
+        price: "₺170",
+        desc: "Taş dibekte dövülen özel karışım; yumuşak, hafif baharatlı damak hissi.",
+        category: "Türk Kahvesi"
+      },
+      {
+        name: "Çay",
+        price: "₺50",
+        category: "Çaylar"
+      },
+      {
+        name: "Fincan Çay",
+        price: "₺60",
+        category: "Çaylar"
+      },
+      {
+        name: "Bardak Çay",
+        price: "₺70",
+        category: "Çaylar"
+      },
+      {
+        name: "Yaseminli Yeşil Çay",
+        price: "₺220",
+        desc: "Yasemin çiçekleriyle kokulandırılmış hafif ve ferah yeşil çay.",
+        category: "Çaylar"
+      },
+      {
+        name: "Ihlamur",
+        price: "₺220",
+        desc: "Sakinleştirici etkisiyle ıhlamur çiçeği demlemesi.",
+        category: "Çaylar"
+      },
+      {
+        name: "Ada Çayı",
+        price: "₺220",
+        desc: "Anadolu ada çayı yapraklarından bitkisel, ferahlatıcı içim.",
+        category: "Çaylar"
+      },
+      {
+        name: "Elma Tarçın",
+        price: "₺220",
+        desc: "Kurutulmuş elma parçaları ve tarçın çubuklarıyla mis kokulu karışım.",
+        category: "Çaylar"
+      },
+      {
+        name: "Kış Çayı",
+        price: "₺220",
+        desc: "Zencefil, karanfil, tarçın ve turunçgilli özel karışım; soğuk havaya birebir.",
+        category: "Çaylar"
+      },
+      {
+        name: "Yeşil Çay",
+        price: "₺220",
+        desc: "Buharda işlenen saf yeşil yapraklarla taze, hafif içim.",
+        category: "Çaylar"
+      },
+      {
+        name: "Nane Limon",
+        price: "₺220",
+        desc: "Taze nane ve limon dilimleriyle anında ferahlık.",
+        category: "Çaylar"
+      },
+      {
+        name: "Bitki Çayı Demlik",
+        price: "₺360",
+        desc: "2 kişilik bitki çayı karışımı; paylaşmaya uygun.",
+        category: "Çaylar"
+      },
+      {
+        name: "Limonata",
+        price: "₺250",
+        category: "Limonatalar"
+      },
+      {
+        name: "Çilekli Limonata",
+        price: "₺260",
+        category: "Limonatalar"
+      },
+      {
+        name: "Naneli Limonata",
+        price: "₺260",
+        category: "Limonatalar"
+      },
+      {
+        name: "Kola",
+        price: "₺130",
+        category: "Soğuk İçecekler"
+      },
+      {
+        name: "Fuse Tea",
+        price: "₺110",
+        category: "Soğuk İçecekler"
+      },
+      {
+        name: "Churchill",
+        price: "₺120",
+        desc: "Soda, taze limon dilimleri ve bir tutam tuz; Türk usulü enerji.",
+        category: "Soğuk İçecekler"
+      },
+      {
+        name: "Sade Soda",
+        price: "₺80",
+        category: "Soğuk İçecekler"
+      },
+      {
+        name: "Meyveli Soda",
+        price: "₺90",
+        category: "Soğuk İçecekler"
+      },
+      {
+        name: "Su",
+        price: "₺40",
+        category: "Soğuk İçecekler"
+      },
+      {
+        name: "Memleket Gazozları",
+        price: "₺120",
+        desc: "Türkiye'nin dört bir yanından geleneksel yerli gazoz çeşitlerimiz; bugün hangisi var öğrenin.",
+        category: "Gazozlar"
+      },
+      {
+        name: "Shake Ice Tea",
+        price: "₺210",
+        desc: "Çalkalanarak köpürtülmüş buzlu çay, hafif narenciye dokunuşlu.",
+        category: "Shake Kokteyl"
+      },
+      {
+        name: "Shake LimeLim",
+        price: "₺210",
+        desc: "Limon ve nane ile buz gibi çalkalanmış ferahlık.",
+        category: "Shake Kokteyl"
+      },
+      {
+        name: "Shake Coffee Kavun",
+        price: "₺210",
+        desc: "Soğuk kahveye taze kavun aroması; şaşırtıcı lezzet.",
+        category: "Shake Kokteyl"
+      },
+      {
+        name: "Shake Passion Wave",
+        price: "₺210",
+        desc: "Çarkıfelek ve ekşi tadların buluştuğu lezzet",
+        category: "Shake Kokteyl"
+      },
+      {
+        name: "Shake Sunset Crush",
+        price: "₺210",
+        desc: "Tatlı ve ekşi tadların oluşturduğu yaz esintisi",
+        category: "Shake Kokteyl"
+      },
+      {
+        name: "San Sebastian Cheesecake",
+        price: "₺350",
+        category: "Tatlılar"
+      },
+      {
+        name: "Beyaz Çikolatalı Browni",
+        price: "₺330",
+        desc: "Yoğun kakaolu ıslak brownie, eriyen beyaz çikolata parçaları.",
+        category: "Tatlılar"
+      },
+      {
+        name: "Bitter Çikolatalı Browni",
+        price: "₺330",
+        desc: "Yumuşak brownie hamurunda çıtır cookie parçaları.",
+        category: "Tatlılar"
+      },
+      {
+        name: "Vişneli Browni",
+        price: "₺330",
+        desc: "Kakaonun derinliğini vişnenin ekşi‑tatlı dokunuşuyla dengeleyen ıslak brownie.",
+        category: "Tatlılar"
+      },
+      {
+        name: "Magnolia",
+        price: "₺300",
+        desc: "Kat kat bebe bisküvisi, taze meyveler ve vanilya kreması; hafif ve zarif.",
+        category: "Tatlılar"
+      },
+      {
+        name: "Cookie",
+        price: "₺240",
+        desc: "Dışı kıtır, içi yumuşak tereyağlı klasik kurabiye. Türleri sorunuz.",
+        category: "Tatlılar"
+      },
+      {
+        name: "Adonis",
+        price: "₺420",
+        desc: "Yer fıstığı ezmesi, muz, bebe bisküvisi ve Snickers parçalarıyla enerji dolu tatlı krep.",
+        category: "Tatlı Krepler"
+      },
+      {
+        name: "Makissos",
+        price: "₺420",
+        desc: "Beyaz çikolata, muz‑çilek, fındık ve Oreo ile zenginleştirilmiş lezzet bombası.",
+        category: "Tatlı Krepler"
+      },
+      {
+        name: "Kerasus",
+        price: "₺420",
+        desc: "Nutella, muz‑çilek, fındık ve Oreo kombinasyonuyla çikolata tutkunlarına.",
+        category: "Tatlı Krepler"
+      },
+      {
+        name: "Turin",
+        price: "₺420",
+        desc: "Nutella, muz‑çilek, bebe bisküvisi, yer fıstığı ve hindistan ceviziyle tropik dokunuş.",
+        category: "Tatlı Krepler"
+      },
+      {
+        name: "Sütlü Zambo Çikolatalı Pankek",
+        price: "₺340",
+        desc: "Sıcak sütlü çikolata bazına seçtiğiniz 1 ek malzemeyle servis edilir.",
+        category: "Pankek"
+      },
+      {
+        name: "Bitter Zambo Çikolatalı Pankek",
+        price: "₺340",
+        desc: "Yoğun bitter çikolata bazına seçtiğiniz 1 ek malzemeyle servis edilir.",
+        category: "Pankek"
+      },
+      {
+        name: "Beyaz Zambo Çikolatalı Pankek",
+        price: "₺340",
+        desc: "Kremamsı beyaz çikolata bazına seçtiğiniz 1 ek malzemeyle servis edilir.",
+        category: "Pankek"
+      },
+      {
+        name: "Panburger",
+        price: "₺340",
+        desc: "Kalın pankek burger; seçtiğiniz 3 ek malzemeyle sunulur.",
+        category: "Pankek"
+      },
+      {
+        name: "İlaveler",
+        price: "₺50",
+        desc: "Mevsim Meyveleri, Kuruyemiş, Çakıl Taşı, Bonibon, Bebe Bisküvisi, Snickers, Oreo",
+        category: "Pankek"
+      },
+      {
+        name: "Antioch",
+        price: "₺450",
+        desc: "Yeşil‑kırmızı biberli tavuk sote ve kaşar peynirli doyurucu tuzlu krep.",
+        category: "Tuzlu Krepler"
+      },
+      {
+        name: "Herzam",
+        price: "₺430",
+        desc: "Füme hindi ve cheddar peyniriyle klasik & hafif sandviç alternatifi.",
+        category: "Tuzlu Krepler"
+      },
+      {
+        name: "Ephesus",
+        price: "₺420",
+        desc: "Beyaz peynir, kaşar, zeytin ve domatesle Akdeniz esintisi.",
+        category: "Tuzlu Krepler"
+      },
+      {
+        name: "Margarita",
+        price: "₺370",
+        desc: "Mozzarella",
+        category: "Pizzalar"
+      },
+      {
+        name: "Vejetaryen",
+        price: "₺390",
+        desc: "Renkli biberler, mantar, domates, mısır ve zeytinle sebze şöleni; mozzarella dokunuşlu.",
+        category: "Pizzalar"
+      },
+      {
+        name: "Vegan",
+        price: "₺400",
+        desc: "Mantardan biberlere taptaze sebzeler; peynirsiz, tamamen bitkisel lezzet.",
+        category: "Pizzalar"
+      },
+      {
+        name: "Akdeniz",
+        price: "₺420",
+        desc: "Beyaz peynir, domates, zeytin ve biber üçlüsüyle Ege esintisi; mozzarella ile tamamlanır.",
+        category: "Pizzalar"
+      },
+      {
+        name: "Anadolu",
+        price: "₺470",
+        desc: "Pastırma, kavurma ve sucuklu bol etli kombinasyon; biberlerle harmanlı.",
+        category: "Pizzalar"
+      },
+      {
+        name: "Chicken BBQ",
+        price: "₺450",
+        desc: "Izgara tavuk parçaları, barbekü sos ve mozzarella; dumanlı tat severlere.",
+        category: "Pizzalar"
+      },
+      {
+        name: "Karışık",
+        price: "₺460",
+        desc: "Sucuk, mantar, zeytin, biber ve mısırla dolu klasik pizza keyfi.",
+        category: "Pizzalar"
+      },
+      {
+        name: "Mantı",
+        price: "₺450",
+        desc: "Anne usulü hamur, yoğurt‑sarımsak sosu ve tereyağlı pul biberle servis.",
+        category: "Mantı"
+      },
+      {
+        name: "Penne Arabiata",
+        price: "₺350",
+        desc: "Acı Arabiata sosu ve zeytinle İtalyan tarzı baharatlı penne.",
+        category: "Makarnalar"
+      },
+      {
+        name: "Köri Penne",
+        price: "₺360",
+        desc: "Tavuk, mantar ve pesto‑krema sosuna köri baharatı; aromatik fusion.",
+        category: "Makarnalar"
+      },
+      {
+        name: "Alfredo Penne",
+        price: "₺350",
+        desc: "Tavuk, mantar, pesto‑krema ve parmesanla zenginleşen kremalı klasik.",
+        category: "Makarnalar"
+      },
+      {
+        name: "Kaşarlı",
+        price: "₺250",
+        desc: "Bazlama içinde bol eriyen kaşar; çıtır kenar, uzayan peynir.",
+        category: "Bazlama Tost"
+      },
+      {
+        name: "Karışık",
+        price: "₺260",
+        desc: "Kaşarlı bazlamaya sucuk ilavesi; tam kahvaltılık doyum.",
+        category: "Bazlama Tost"
+      },
+      {
+        name: "Beyaz Peynirli Domatesli",
+        price: "₺260",
+        desc: "Beyaz peynir ve taze domates ikilisi; hafif ve Akdeniz tadında.",
+        category: "Bazlama Tost"
+      },
+      {
+        name: "Crepolis",
+        price: "₺270",
+        desc: "Cheddar ve füme hindiyle modern tost yorumu.",
+        category: "Bazlama Tost"
+      },
+      {
+        name: "Fabri",
+        price: "₺270",
+        desc: "Salça bazlı sos, kaşar, sucuk, mantar, biber ve zeytinle efsane kombin.",
+        category: "Bazlama Tost"
+      },
+      {
+        name: "Sade Omlet",
+        price: "₺290",
+        desc: "Taptaze yumurtayla hazırlanan klasik omlet.",
+        category: "Omlet"
+      },
+      {
+        name: "Kaşarlı Omlet",
+        price: "₺300",
+        desc: "Erimiş kaşarla zenginleşen yumuşacık omlet.",
+        category: "Omlet"
+      },
+      {
+        name: "Beyaz Peynirli Omlet",
+        price: "₺310",
+        desc: "Tuzlu beyaz peynir dokunuşuyla hafif ve lezzetli.",
+        category: "Omlet"
+      },
+      {
+        name: "Sebzeli Omlet",
+        price: "₺310",
+        desc: "Biber, maydanoz ve domatesle renkli, vitamin dolu seçenek.",
+        category: "Omlet"
+      },
+      {
+        name: "Fabri Omlet",
+        price: "₺360",
+        desc: "Sucuk, mantar, zeytin ve mısırla doyurucu kahvaltı favorisi.",
+        category: "Omlet"
+      },
+      {
+        name: "Kavurmalı Omlet",
+        price: "₺380",
+        desc: "Lokum gibi kavurmayla protein deposu.",
+        category: "Omlet"
+      }
+    ],
+  },
+
 };
