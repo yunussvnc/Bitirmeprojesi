@@ -61976,4 +61976,1359 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     ],
   },
 
+  "3724": {
+    name: "Shishly Cafe&Bistro",
+    sourceUrl: "https://panelioo.com/@bistroshishly/menu",
+    sourceName: "Shishly Cafe & Bistro resmi menüsü — son fiyat değişikliği 20.04.2026",
+    verifiedAt: "2026-08-24",
+    items: [
+      {
+        name: "Sade OMLET",
+        price: "285.00 ₺",
+        desc: "3ad yumurta ve 60gr Yeşillik ile servis edilir (225 kcal)",
+        category: "KAHVALTILAR"
+      },
+      {
+        name: "Beyaz Peynirli OMLET",
+        price: "345.00 ₺",
+        desc: "3ad yumurta 35gr beyazpeynir ve 65gr yeşillik ile servis edilir. (325 kcal)",
+        category: "KAHVALTILAR"
+      },
+      {
+        name: "Kaşarlı OMLET",
+        price: "355.00 ₺",
+        desc: "3 ad yumurta, 70gr kaşar ve 65 gr Yeşillik ile servis edilir. (425 kcal)",
+        category: "KAHVALTILAR"
+      },
+      {
+        name: "Karışık Omlet",
+        price: "385.00 ₺",
+        desc: "3ad yumurta, 35gr Beyaz peynir, 30gr mantar, 20gr sucuk yanında 60 gr yeşillik ile servis edilir. (410 kcal)",
+        category: "KAHVALTILAR"
+      },
+      {
+        name: "Sahanda Yumurta",
+        price: "255.00 ₺",
+        desc: "2 ad yumurta ile (190 kcal)",
+        category: "KAHVALTILAR"
+      },
+      {
+        name: "Sahanda Sucuklu Yumurta",
+        price: "355.00 ₺",
+        desc: "2 ad yumurta, 45gr sucuk ile (355 kcal)",
+        category: "KAHVALTILAR"
+      },
+      {
+        name: "Sahanda SUCUK",
+        price: "375.00 ₺",
+        desc: "60 GR sucuk (255 kcal)",
+        category: "KAHVALTILAR"
+      },
+      {
+        name: "Menemen",
+        price: "325.00 ₺",
+        desc: "455 gr domates, 45gr biber, 1ad yumurta ile (255 kcal)",
+        category: "KAHVALTILAR"
+      },
+      {
+        name: "Kaşarlı MENEMEN",
+        price: "365.00 ₺",
+        desc: "455gr domates, 40gr Kaşar 1 ad yumurta ile (365 kcal)",
+        category: "KAHVALTILAR"
+      },
+      {
+        name: "Karışık MENEMEN",
+        price: "395.00 ₺",
+        desc: "455gr domates, 30 gr sucuk, 45gr biber, 40gr kaşar, 1 yumurta ile (415 kcal)",
+        category: "KAHVALTILAR"
+      },
+      {
+        name: "Pratik Kahvaltı",
+        price: "395.00 ₺",
+        desc: "1 Tam Simit, 60gr Nutella, 50gr Domates, 50 gr Salatalık, 35gr Beyaz Peynir, 30gr Zeytin karışık,  2 çay ile servis edilir (465 kcal)",
+        category: "KAHVALTILAR"
+      },
+      {
+        name: "Fit Kahvaltı",
+        price: "455.00 ₺",
+        desc: "115gr Yumurta Akı Omleti ( mantar isteğe bağlı), 35gr yağsız beyaz peynir, 50gr domates, 50gr salatalık, maydanoz, 20gr ceviz, kepekli ekmek ve 2 adet çayla servis edilir",
+        category: "KAHVALTILAR"
+      },
+      {
+        name: "Sıcak Kahvaltı",
+        price: "470.00 ₺",
+        desc: "65gr Göz Yumurta, 30gr Hellim Peyniri, 35gr Soslu Sosis, 135gr Patates Kızartması, 130gr Su Böreği ve 2 Çay ile servis edilir (1100 kcal)",
+        category: "KAHVALTILAR"
+      },
+      {
+        name: "Shishly Kahvaltı",
+        price: "545.00 ₺",
+        desc: "35gr Beyaz Peynir, 35gr Kaşar peynir, 35gr Vişne reçeli, 35gr Nutella, 15gr Tereyağ, 50gr Bal, 12gr Siyah Zeytin, 22gr Yeşil Zeytin, 50gr Domates, 50gr Salatalık, 1ad Haslanmış yumurta, 50gr acuka, 1ad sigara böreği, 1ad pişi ve 2 adet ÇAY ile servis edilir. (1415 kcal)",
+        category: "KAHVALTILAR"
+      },
+      {
+        name: "SERPME KAHVALTI (2 kişilik)",
+        price: "1,750.00 ₺",
+        desc: "300gr 4 çeşit peynir, 22gr salam, 20gr jambon, 100gr domates, 100gr salatalık, 50gr yeşillik, 85gr 2çeşit zeytin, 120gr 2 çeşit reçel, 50gr tahin, 50gr pekmez, 50gr bal 40gr kaymak, 30gr tereyağ 50gr nutella, 50gr acuka, 40gr sucuk, 200gr menemen, 250gr patates kızartması, 2ad pişi, 2ad sigara böreği, 120gr sahanda yumurta ve sınırsız çay.. (4510 kcal) extra kişi için kişi başı 750 tl ücret alınır.",
+        category: "KAHVALTILAR"
+      },
+      {
+        name: "Günün Çorbası",
+        price: "245.00 ₺",
+        desc: "250 ml 180kcal",
+        category: "BASLANGICLAR"
+      },
+      {
+        name: "Parmak Dilim Patates",
+        price: "295.00 ₺",
+        desc: "400 gr patates ile (1200 kcal)",
+        category: "BASLANGICLAR"
+      },
+      {
+        name: "Sigara Böreği",
+        price: "245.00 ₺",
+        desc: "6 adet sigara böreği ile servis edilir (550 kcal)",
+        category: "BASLANGICLAR"
+      },
+      {
+        name: "Soğan Kroket",
+        price: "370.00 ₺",
+        desc: "10 adet soğan halkası ve 300gr patates ile (1200 kcal)",
+        category: "BASLANGICLAR"
+      },
+      {
+        name: "Sosis ve Patates",
+        price: "425.00 ₺",
+        desc: "10 adet sosis ve 300gr parmak patates ile (1400kcal)",
+        category: "BASLANGICLAR"
+      },
+      {
+        name: "Cajun Baharatlı Çıtır Tavuk ve PATATES",
+        price: "465.00 ₺",
+        desc: "180 GR  julyen tavuk parçaları, 50gr honey mustard sosu ve 300gr parmak patates ile",
+        category: "BASLANGICLAR"
+      },
+      {
+        name: "Bira Tabağı",
+        price: "595.00 ₺",
+        desc: "3 ad. Sigara böreği, 2 ad. paçanga böreği, 2 ad. soğan halkası, 2 ad. sosis, 90gr cajun baharatlı tavuk parçaları, 300gr parmak patates, 50gr honeymustard sos ve 50gr sweet chili sos ile servis edilir. (2280 kcal)",
+        category: "BASLANGICLAR"
+      },
+      {
+        name: "Patatesli GÖZLEME",
+        price: "345.00 ₺",
+        desc: "220 gr Gözleme 50gr Domates ve 50gr Salatalık ile servis edilir (620 kcal)",
+        category: "GOZLEMELER"
+      },
+      {
+        name: "Kaşarlı GÖZLEME",
+        price: "375.00 ₺",
+        desc: "220gr Gözleme 50gr Domates ve 50 gr Salatalık ile servis edilir. (770 kcal)",
+        category: "GOZLEMELER"
+      },
+      {
+        name: "Peynirli GÖZLEME",
+        price: "375.00 ₺",
+        desc: "220 gr gözleme 50gr Domates ve 50gr Salatalık ile servis edilir (670 kcal)",
+        category: "GOZLEMELER"
+      },
+      {
+        name: "Kepekli Tost",
+        price: "355.00 ₺",
+        desc: "105gr ekmek, 120gr Beyaz peynir, 60gr domates, 135gr patates ve 65gr yeşillikler ile servis edilir. (950 kcal)",
+        category: "TOSTLAR"
+      },
+      {
+        name: "Kaşarlı Tost",
+        price: "355.00 ₺",
+        desc: "105gr ekmek, 70gr Kaşar, 135 gr patates ve 65gr yeşillik ile servis edilir. (895 kcal)",
+        category: "TOSTLAR"
+      },
+      {
+        name: "Karışık Tost",
+        price: "395.00 ₺",
+        desc: "105gr ekmek, 20gr Salam, 35gr sucuk, 65gr kaşar, 135gr patates ve 65gr yeşillik ile servis edilir. \n(1100 kcal)",
+        category: "TOSTLAR"
+      },
+      {
+        name: "Bahçe SALATA",
+        price: "375.00 ₺",
+        desc: "150gr Bahçe yeşillikleri, maydanoz, nane, 90 gr kırmızı pancar 40gr domates, 30gr salatalık ile servis edilir (90 kcal)",
+        category: "SALATALAR"
+      },
+      {
+        name: "Akdeniz SALATA",
+        price: "430.00 ₺",
+        desc: "150gr Akdeniz yeşillikleri, 30gr mısır, 30gr zeytin, 70gr beyaz peynir ve 20gr ceviz ile servis edilir. (525 kcal)",
+        category: "SALATALAR"
+      },
+      {
+        name: "Cajun SALATA",
+        price: "535.00 ₺",
+        desc: "150gr Akdeniz yeşilliği, 30gr mısır, 30gr zeytin, 80gr kaşar, 180 gr tavuk parçalari ve 80gr honeymaster sos ile servis edilir. (1220 kcal)",
+        category: "SALATALAR"
+      },
+      {
+        name: "Ton balıklı SALATA",
+        price: "595.00 ₺",
+        desc: "150gr Akdeniz yeşillikleri, 30gr mısır, 30gr zeytin, 50gr turşu, 20gr soğan, 160 gr ton balığı ile servis edilir. (430 kcal)",
+        category: "SALATALAR"
+      },
+      {
+        name: "Julyen beef SALATA",
+        price: "845.00 ₺",
+        desc: "150gr Yeşillik üzerine 30gr mısır, 30gr zeytin, soya sosu, 45gr renkli biberli 120 gr sotelenmiş et, (365 kcal)",
+        category: "SALATALAR"
+      },
+      {
+        name: "SEBZELİ KREP",
+        price: "435.00 ₺",
+        desc: "65gr krep hamuru, 50gr mantar, 80gr besamel sos, 185gr karısık sebze, 135 gr patates ve 65gr yeşillik ile (820 kcal)",
+        category: "KREPLER"
+      },
+      {
+        name: "ISPANAKLI KREP",
+        price: "435.00 ₺",
+        desc: "65 gr krep hamuru, 100 gr ıspanak, 80ge besamel sos,135gr patatesve 65 gr yeşillik ile (740 kcal)",
+        category: "KREPLER"
+      },
+      {
+        name: "KARIŞIK KREP",
+        price: "495.00 ₺",
+        desc: "65gr krep hamuru, 120gr tavuk, 50gr mantar, 20gr jambon, 80gr besamel sos, 135 gr patates ve 65 gr yesillik ile (980 kcal)",
+        category: "KREPLER"
+      },
+      {
+        name: "Spaghetti NAPOLİTAN",
+        price: "385.00 ₺",
+        desc: "250gr makarna, 150gr Domates sosu ve 10gr parmesan ile (465 kcal)",
+        category: "MAKARNALAR"
+      },
+      {
+        name: "Spaghetti BOLONEZ",
+        price: "495.00 ₺",
+        desc: "250gr makarna, 150gr Domates sosu, 100gr bolonez kıyması 20gr biber ve 10gr parmesan ile servis edilir.(670 kcal)",
+        category: "MAKARNALAR"
+      },
+      {
+        name: "Penne ARABİATA",
+        price: "395.00 ₺",
+        desc: "250gr makarna, 150gr Domates sosu, 20gr jalapeno, 50gr zeytin, acısos ve 10gr parmesan ile  (555 kcal)",
+        category: "MAKARNALAR"
+      },
+      {
+        name: "Penne KÖRİ",
+        price: "415.00 ₺",
+        desc: "250gr makarna 125 gr Krema, 50gr mantar, 20gr pesto, 15gr köri sos ve 10gr parmesan ile (810 kcal)",
+        category: "MAKARNALAR"
+      },
+      {
+        name: "Penne chıcken all PESTO",
+        price: "525.00 ₺",
+        desc: "250 gr makarna, 125gr Kremalı pesto sosu, 50gr mantar, 120 gr julyen tavuk parçaları ve 10gr parmesan ile (1050 kcal)",
+        category: "MAKARNALAR"
+      },
+      {
+        name: "Tavuk BURGER",
+        price: "495.00 ₺",
+        desc: "110 GR tavuk, 20gr yeşillik, 70gr domates, 20gr turşu ve 135gr patates ile (785 kcal)",
+        category: "BURGERLER"
+      },
+      {
+        name: "Klasik BURGER",
+        price: "535.00 ₺",
+        desc: "150 GR burger köftesi, 70gr domates, 20gr yeşillik, 20gr turşu, özel burger sosu ve 135gr patates ile (1050 kcal)",
+        category: "BURGERLER"
+      },
+      {
+        name: "Cheese BURGER",
+        price: "565.00 ₺",
+        desc: "150 GR burger köftesi, 70gr domates, 20gr yeşillik, 20gr turşu, özel burger sosu, 30gr cheddar peyniri ve 135gr patates ile (1190 kcal)",
+        category: "BURGERLER"
+      },
+      {
+        name: "Peynirli QUESADİLLA",
+        price: "525.00 ₺",
+        desc: "Tortilla ekmeği arasına 150 gr cheddar peyniri ve kaşar peyniri, 20gr jalapieno ile yanında 135gr patates, 65gr yeşillik 40gr süzme yoğurt ve 40gr avakado sos ile servis edilir. (1290 kcal)",
+        category: "QUESADILLA"
+      },
+      {
+        name: "Tavuklu QUESADİLLA",
+        price: "595.00 ₺",
+        desc: "Tortilla ekmeği arasına 120 gr tavuk, 20gr biberler, 20gr soğan ve 100 gr kaşar ile yanında 135gr patates 65gr yeşillik 40gr süzme yoğurt ve 40gr avakado sos ile servis edilir. (1370 kcal)",
+        category: "QUESADILLA"
+      },
+      {
+        name: "Etli QUESADİLLA",
+        price: "795.00 ₺",
+        desc: "Tortilla ekmeği arasına 120 gr bonfile, 20gr biberler, 20gr soğan ve 100 gr kaşar ile yanında 135gr patates 65gr yeşillik 40gr süzme yogurt ve 40gr avakado sos ile servis edilir. (1470 kcal)",
+        category: "QUESADILLA"
+      },
+      {
+        name: "Sebzeli WRAP",
+        price: "475.00 ₺",
+        desc: "Tortilla ekmeği arasına, 230gr karışık sebze (brokoli, karnabahar, mısır, renkli biberler), 135gr patates ve 60gr yeşillik ile servis edilir. (810 kcal)",
+        category: "WRAPLAR"
+      },
+      {
+        name: "Tavuk WRAP",
+        price: "495.00 ₺",
+        desc: "Tortilla ekmeği arasına,50gr renkli biber, 50gr mantar, 30gr karamelize soğan, 120 gr julyen tavuk parçaları, 135gr patates ve 60gr yeşillik ile servis edilir. (940 kcal)",
+        category: "WRAPLAR"
+      },
+      {
+        name: "Cheddar tavuk WRAP",
+        price: "515.00 ₺",
+        desc: "Tortilla ekmeği arasına,50gr renkli biber, 50gr mantar, 30gr karamelize soğan, 45gr cheddar peyniri, 120 gr julyen tavuk parçaları, 135gr patates ve 60gr yeşillik ile servis edilir. (1100 kcal)",
+        category: "WRAPLAR"
+      },
+      {
+        name: "Et WRAP",
+        price: "695.00 ₺",
+        desc: "Tortilla ekmeği arasına,50gr renkli biber, 50gr mantar, 30gr karamelize soğan, 120 gr julyen bonfile dilimleri, 135gr patates ve 60gr yeşillik ile servis edilir. (970 kcal)",
+        category: "WRAPLAR"
+      },
+      {
+        name: "Cheddar et WRAP",
+        price: "715.00 ₺",
+        desc: "Tortilla ekmeği arasına, 50gr renkli biber, 50gr mantar, 50gr karamelize soğan, 45gr cheddar peyniri, 120 gr julyen bonfile dilimleri, 135gr patates ve 60gr yeşillik ile servis edilir. (1150 kcal)",
+        category: "WRAPLAR"
+      },
+      {
+        name: "Köfte WRAP",
+        price: "535.00 ₺",
+        desc: "Tortilla ekmeği arasına 150 gr köfte, 40gr yeşillik, 30gr turşu, 50gr domates, 40gr kaşar peyniri yanında 60gr yeşillik ve 135gr patates ile servis edilir. (1215 kcal)",
+        category: "WRAPLAR"
+      },
+      {
+        name: "Tavuk SCHNITZEL",
+        price: "515.00 ₺",
+        desc: "165GR pankolu Tavuk bonfile, 5gr tereyağ 60gr yeşillik ve 135gr patates ile (880 kcal)",
+        category: "TAVUKLAR"
+      },
+      {
+        name: "Soya soslu TAVUK",
+        price: "535.00 ₺",
+        desc: "180GR Tavuk parçaları, 50gr renkli biberler, 50gr mantar, 20gr soya, 150 gr pilav ve 135gr patates ile (995 kcal)",
+        category: "TAVUKLAR"
+      },
+      {
+        name: "Kremalı TAVUK",
+        price: "545.00 ₺",
+        desc: "180GR Tavuk parçaları, renkli biberler, mantar, pilav ve patates ile",
+        category: "TAVUKLAR"
+      },
+      {
+        name: "Köri soslu TAVUK",
+        price: "545.00 ₺",
+        desc: "180GR Tavuk parçaları, 50gr renkli biberler, 50gr mantar, 75gr krema, 5 gr köri, 150gr pilav ve 135gr patates ile (1145 kcal)",
+        category: "TAVUKLAR"
+      },
+      {
+        name: "Barbekü soslu tavuk ızgara",
+        price: "555.00 ₺",
+        desc: "260 gr ızgara tavuk üzerine 50gr barbekü sosu ve yanında 65gr yeşillik 135gr patates ile servis edilir. (1060 kcal)",
+        category: "TAVUKLAR"
+      },
+      {
+        name: "Beğendili Tavuk",
+        price: "575.00 ₺",
+        desc: "215gr Beğendi sosu üzerine 180 gr tavuk ve uzerıne 50gr domates sosu ve 150gr pilav ve 135gr patates ile servis edilir. (1305 kcal)",
+        category: "TAVUKLAR"
+      },
+      {
+        name: "Biberiyeli Tavuk Izgara",
+        price: "545.00 ₺",
+        desc: "300 GR ızgara tavuk bonfile ve  tavuk but, 150gr pilav ve 65gr yeşillik ile (1250 kcal)",
+        category: "TAVUKLAR"
+      },
+      {
+        name: "Meksika ATEŞİ",
+        price: "565.00 ₺",
+        desc: "180GR Tavuk parçaları, 40gr acısos, 50gr renkli biberler, 20gr kuru soğan, 10gr jalapeno, 10gr meksika fasulyesi, 150gr pilav ve 65gr yeşillik ile\n(635 kcal)",
+        category: "TAVUKLAR"
+      },
+      {
+        name: "Paris soslu piliç",
+        price: "570.00 ₺",
+        desc: "170 gr ızgara tavuk göğüs üzerine 20 gr cafe de Paris sosu, 40 gr krema, 150 gr pilav ve 135 gr patates ( 1110 kcal )",
+        category: "TAVUKLAR"
+      },
+      {
+        name: "MANTAR SOSLU TAVUK IZGARA",
+        price: "585.00 ₺",
+        desc: "170 gr ızgara tavuk göğüs üzerine 100 gr besamel sosu yanında 150 gr pilav ve 135gr patates ile (1110 kcal)",
+        category: "TAVUKLAR"
+      },
+      {
+        name: "Beğendili Kasap Köfte",
+        price: "665.00 ₺",
+        desc: "215gr Beğendili sos üzerine 200 gr köfte ve yanında 150gr pilav 135gr patates ile servis edilir. (1610 kcal)",
+        category: "ETLER"
+      },
+      {
+        name: "Kasap KÖFTE",
+        price: "615.00 ₺",
+        desc: "200 GR ızgara köfte, 150gr pilav ve 135gr patates ile servis edilir. (1190 kcal)",
+        category: "ETLER"
+      },
+      {
+        name: "Lokum BONFİLE",
+        price: "1,245.00 ₺",
+        desc: "200 GR ızgara bonfile, 150gr haslanmış sote sebze ve 135 ızgara patates ile servis edilir. (570 kcal)",
+        category: "ETLER"
+      },
+      {
+        name: "Mantar soslu BONFİLE",
+        price: "1,295.00 ₺",
+        desc: "200 gr ızgara bonfile, 50gr mantar, 20gr demi glace sos, 150gr haslanmış sote sebze ve 135gr ızgara patates ile servis edilir (615 kcal)",
+        category: "ETLER"
+      },
+      {
+        name: "Rokfor soslu BONFİLE",
+        price: "1,395.00 ₺",
+        desc: "200 gr ızgara bonfile, 50gr rokfor sosu, 40gr krema 150gr haslanmış sote sebze ve 135 gr ızgara  patates ile servis edilir. (830 kcal)",
+        category: "ETLER"
+      },
+      {
+        name: "PARİS SOSLU BONFİLE",
+        price: "1,395.00 ₺",
+        desc: "200 gr ızgara bonfile üzerine 20gr cafede Paris 40gr krema ve yanında 150gr haşlanmış sebze ve 135gr ızgara patates ile (730 kcal)",
+        category: "ETLER"
+      },
+      {
+        name: "BEŞAMEL SOSLU BONFİLE",
+        price: "1,295.00 ₺",
+        desc: "200gr dana bonfile, 30gr mantar, 100gr beşamel sos, 150 gr haslanmış sebze ve 135 gr ızgara patates ile (740 kcal)",
+        category: "ETLER"
+      },
+      {
+        name: "SOMON IZGARA",
+        price: "1,250.00 ₺",
+        desc: "300 GR Somon, 100 gr yeşillik 100gr domates, 60gr soğan, 120gr haşlanmış patates ile (790 kcal)",
+        category: "BALIKLAR"
+      },
+      {
+        name: "LEVREK IZGARA",
+        price: "1,150.00 ₺",
+        desc: "300GR Levrek, 100gr yeşillik, 100gr domates, 60gr soğan, 120gr haslanmış patates ile (480 kcal)",
+        category: "BALIKLAR"
+      },
+      {
+        name: "Maraş DONDURMA",
+        price: "345.00 ₺",
+        desc: "150gr Kesme maraş dondurması, fıstık ile beraber. (240 kcal)",
+        category: "TATLILAR"
+      },
+      {
+        name: "Dondurma",
+        price: "360.00 ₺",
+        desc: "120 gr 3 top dondurma çilek, vanilya, çikolata (255 kcal)",
+        category: "TATLILAR"
+      },
+      {
+        name: "Kızarmış DONDURMA",
+        price: "425.00 ₺",
+        desc: "Dışı pane içi 180gr maraş dondurması ister ballı ister çikolata rüyalı (475 kcal)",
+        category: "TATLILAR"
+      },
+      {
+        name: "Çikolatalı BROWNİ",
+        price: "365.00 ₺",
+        desc: "170 GR çikolatalı kek (650 kcal)",
+        category: "TATLILAR"
+      },
+      {
+        name: "Frambuazlı CHEESECAKE",
+        price: "375.00 ₺",
+        desc: "160 gr frambuazlı (530 kcal)",
+        category: "TATLILAR"
+      },
+      {
+        name: "Limonlu CHEESECAKE",
+        price: "375.00 ₺",
+        desc: "150 gr limonlu (530 kcal)",
+        category: "TATLILAR"
+      },
+      {
+        name: "Tiramisu",
+        price: "335.00 ₺",
+        desc: "150 gr tiramisu (260 kcal)",
+        category: "TATLILAR"
+      },
+      {
+        name: "Fıstıklı KATMER",
+        price: "375.00 ₺",
+        desc: "150gr Antep fıstıklı katmer (156 kcal)",
+        category: "TATLILAR"
+      },
+      {
+        name: "FISTIKLI İRMİK HELVASI",
+        price: "375.00 ₺",
+        desc: "135gr irmik helvası, 50gr dondurma (610 kcal)",
+        category: "TATLILAR"
+      },
+      {
+        name: "Çay",
+        price: "65.00 ₺",
+        desc: "150ml (2 kcal)",
+        category: "SICAK ICECEKLER"
+      },
+      {
+        name: "Fincan Çay",
+        price: "100.00 ₺",
+        desc: "250ml (3 kcal)",
+        category: "SICAK ICECEKLER"
+      },
+      {
+        name: "Bitki Çayları",
+        price: "245.00 ₺",
+        desc: "400ml Papatya,yeşilçay,ıhlamur,adaçayı,nane-limon,kışçayı (4kcal)",
+        category: "SICAK ICECEKLER"
+      },
+      {
+        name: "Türk Kahvesi",
+        price: "145.00 ₺",
+        desc: "75ml (2 kcal)",
+        category: "SICAK ICECEKLER"
+      },
+      {
+        name: "Duble Türk Kahvesi",
+        price: "175.00 ₺",
+        desc: "150ml (4 kcal)",
+        category: "SICAK ICECEKLER"
+      },
+      {
+        name: "Sahlep",
+        price: "225.00 ₺",
+        desc: "200ml tarçınlı (190 kcal)",
+        category: "SICAK ICECEKLER"
+      },
+      {
+        name: "Nescafe",
+        price: "150.00 ₺",
+        desc: "200ml (2 kcal)",
+        category: "SICAK ICECEKLER"
+      },
+      {
+        name: "Sütlü Nescafe",
+        price: "175.00 ₺",
+        desc: "200ml sade sütten (127 kcal)",
+        category: "SICAK ICECEKLER"
+      },
+      {
+        name: "Espresso",
+        price: "150.00 ₺",
+        desc: "70ml ( 7kcal)",
+        category: "SICAK ICECEKLER"
+      },
+      {
+        name: "Duble Espresso",
+        price: "175.00 ₺",
+        desc: "145ml (14 kcal)",
+        category: "SICAK ICECEKLER"
+      },
+      {
+        name: "Espresso Macchiato",
+        price: "195.00 ₺",
+        desc: "150ml sütkremalı (60 kcal)",
+        category: "SICAK ICECEKLER"
+      },
+      {
+        name: "Americano",
+        price: "175.00 ₺",
+        desc: "200ml (4 kcal)",
+        category: "SICAK ICECEKLER"
+      },
+      {
+        name: "Americano Sütlü",
+        price: "195.00 ₺",
+        desc: "200ml sütü yanında (140 kcal)",
+        category: "SICAK ICECEKLER"
+      },
+      {
+        name: "Cappucino",
+        price: "215.00 ₺",
+        desc: "200ml (110kcal)",
+        category: "SICAK ICECEKLER"
+      },
+      {
+        name: "Cappucino Fındık",
+        price: "235.00 ₺",
+        desc: "200ml 3cl surup (240 kcal)",
+        category: "SICAK ICECEKLER"
+      },
+      {
+        name: "Cappucino Karamel",
+        price: "235.00 ₺",
+        desc: "200ml 3cl syrup (240 kcal)",
+        category: "SICAK ICECEKLER"
+      },
+      {
+        name: "Coffee Latte",
+        price: "225.00 ₺",
+        desc: "225ml (140kcal)",
+        category: "SICAK ICECEKLER"
+      },
+      {
+        name: "Coffee Latte Fındık",
+        price: "245.00 ₺",
+        desc: "225ml 3cl şurup 240 kcal",
+        category: "SICAK ICECEKLER"
+      },
+      {
+        name: "Coffee Latte Karamel",
+        price: "245.00 ₺",
+        desc: "225ml 3 cl surup (240 kcal)",
+        category: "SICAK ICECEKLER"
+      },
+      {
+        name: "Sıcak Çikolata",
+        price: "245.00 ₺",
+        desc: "225ml (220 kcal)",
+        category: "SICAK ICECEKLER"
+      },
+      {
+        name: "Coffee Baileys",
+        price: "625.00 ₺",
+        desc: "200 ml kahve ve baileys 5cl  (165 kcal)",
+        category: "SICAK ICECEKLER"
+      },
+      {
+        name: "Küçük Su",
+        price: "65.00 ₺",
+        desc: "330ml cam (0 kcal)",
+        category: "SOGUK ICECEKLER"
+      },
+      {
+        name: "Büyük Su",
+        price: "145.00 ₺",
+        category: "SOGUK ICECEKLER"
+      },
+      {
+        name: "Küçük Soda",
+        price: "95.00 ₺",
+        desc: "200ml (0 kcal)",
+        category: "SOGUK ICECEKLER"
+      },
+      {
+        name: "Büyük Soda",
+        price: "180.00 ₺",
+        category: "SOGUK ICECEKLER"
+      },
+      {
+        name: "Meyveli Soda",
+        price: "110.00 ₺",
+        desc: "200ml çilek, elma, limon, ananas ( 36 kcal)",
+        category: "SOGUK ICECEKLER"
+      },
+      {
+        name: "Churchill",
+        price: "120.00 ₺",
+        desc: "200ml limon, tuz, soda (7 kcal)",
+        category: "SOGUK ICECEKLER"
+      },
+      {
+        name: "Ayran",
+        price: "95.00 ₺",
+        desc: "250ml (105 kcal)",
+        category: "SOGUK ICECEKLER"
+      },
+      {
+        name: "Kola",
+        price: "125.00 ₺",
+        desc: "300ml (126 kcal)",
+        category: "SOGUK ICECEKLER"
+      },
+      {
+        name: "Sprite",
+        price: "125.00 ₺",
+        desc: "300 ml (126 kcal)",
+        category: "SOGUK ICECEKLER"
+      },
+      {
+        name: "Fanta",
+        price: "125.00 ₺",
+        desc: "300ml (126 kcal)",
+        category: "SOGUK ICECEKLER"
+      },
+      {
+        name: "Cappy Meyve Suları",
+        price: "125.00 ₺",
+        desc: "330ml teneke vişne, şeftali, karışık (105 kcal)",
+        category: "SOGUK ICECEKLER"
+      },
+      {
+        name: "FUSE Tea",
+        price: "125.00 ₺",
+        desc: "330ml kutu şeftali, limon, mango (44kcal)",
+        category: "SOGUK ICECEKLER"
+      },
+      {
+        name: "SCHWEPPES",
+        price: "145.00 ₺",
+        desc: "250ml tonıc, mandarin,bitterlimon(53 kcal)",
+        category: "SOGUK ICECEKLER"
+      },
+      {
+        name: "RedBull",
+        price: "215.00 ₺",
+        desc: "250ml (115 kcal)",
+        category: "SOGUK ICECEKLER"
+      },
+      {
+        name: "Ev Yapımı Limonata",
+        price: "215.00 ₺",
+        desc: "300ml (45 kcal)",
+        category: "SOGUK ICECEKLER"
+      },
+      {
+        name: "Meyveli Limonatalar",
+        price: "225.00 ₺",
+        desc: "300ml (165 kcal)",
+        category: "SOGUK ICECEKLER"
+      },
+      {
+        name: "Nescafe Frappe",
+        price: "245.00 ₺",
+        desc: "300ml Nescafe, süt, buz (150 kcal)",
+        category: "SOGUK ICECEKLER"
+      },
+      {
+        name: "Ice Cappucino",
+        price: "235.00 ₺",
+        desc: "300ml espresso,buz,süt (160 kcal)",
+        category: "SOGUK ICECEKLER"
+      },
+      {
+        name: "Ice Latte",
+        price: "235.00 ₺",
+        desc: "300ml espresso, buz, süt (160 kcal)",
+        category: "SOGUK ICECEKLER"
+      },
+      {
+        name: "Milkshake",
+        price: "245.00 ₺",
+        desc: "300ml çilek,çikolata,vanilya (250-300 kcal)",
+        category: "SOGUK ICECEKLER"
+      },
+      {
+        name: "Taze Meyve Suyu",
+        price: "245.00 ₺",
+        desc: "300ml (145 kcal)",
+        category: "SOGUK ICECEKLER"
+      },
+      {
+        name: "COOL LIME",
+        price: "325.00 ₺",
+        category: "ALKOLSUZ KOKTEYL"
+      },
+      {
+        name: "BERRY HIBISCUS",
+        price: "325.00 ₺",
+        category: "ALKOLSUZ KOKTEYL"
+      },
+      {
+        name: "ORANGE & MANGO",
+        price: "325.00 ₺",
+        category: "ALKOLSUZ KOKTEYL"
+      },
+      {
+        name: "BLUEBERRY & LCHEE",
+        price: "325.00 ₺",
+        category: "ALKOLSUZ KOKTEYL"
+      },
+      {
+        name: "STRAWBERRY & ACAI",
+        price: "325.00 ₺",
+        category: "ALKOLSUZ KOKTEYL"
+      },
+      {
+        name: "DRAGON FRUIT & MANGO",
+        price: "325.00 ₺",
+        category: "ALKOLSUZ KOKTEYL"
+      },
+      {
+        name: "Efes - 30cl Fıçı",
+        price: "215.00 ₺",
+        desc: "%5 alc. (130 kcal) TR",
+        category: "BIRALAR"
+      },
+      {
+        name: "Efes - 50cl Fıçı",
+        price: "245.00 ₺",
+        desc: "%5 alc. (210 kcal) TR",
+        category: "BIRALAR"
+      },
+      {
+        name: "Efes - 33cl Şişe",
+        price: "235.00 ₺",
+        desc: "%5 alc. (145 kcal) TR",
+        category: "BIRALAR"
+      },
+      {
+        name: "Efes - 50cl Şişe",
+        price: "265.00 ₺",
+        desc: "%5 alc. (210 kcal) TR",
+        category: "BIRALAR"
+      },
+      {
+        name: "Efes Malt - 50cl",
+        price: "265.00 ₺",
+        desc: "%5 alc. (225 kcal) TR",
+        category: "BIRALAR"
+      },
+      {
+        name: "Efes - 50cl Özel Seri",
+        price: "285.00 ₺",
+        desc: "%4.5 alc. (210 kcal) TR",
+        category: "BIRALAR"
+      },
+      {
+        name: "Efes Glutensiz - 50cl",
+        price: "325.00 ₺",
+        desc: "%4 alc. (170 kcal) TR",
+        category: "BIRALAR"
+      },
+      {
+        name: "STELLA ARTOİS 44CL",
+        price: "345.00 ₺",
+        desc: "%5 alc. (180 kcal) BELÇİKA",
+        category: "BIRALAR"
+      },
+      {
+        name: "Bomonti Filtresiz -50 cl",
+        price: "295.00 ₺",
+        desc: "%4.8 alc. (225 kcal) TR",
+        category: "BIRALAR"
+      },
+      {
+        name: "BELFAST 50CL",
+        price: "315.00 ₺",
+        desc: "%5 alc. (215 kcal) TR",
+        category: "BIRALAR"
+      },
+      {
+        name: "Amsterdam -50cl",
+        price: "435.00 ₺",
+        desc: "%8 alc. (300 kcal) HOLLANDA",
+        category: "BIRALAR"
+      },
+      {
+        name: "Becks - 33cl",
+        price: "315.00 ₺",
+        desc: "%5 alc. (145 kcal) ALMANYA",
+        category: "BIRALAR"
+      },
+      {
+        name: "Budweiser -33cl",
+        price: "315.00 ₺",
+        desc: "%5 alc. (135 kcal) ÇEKYA",
+        category: "BIRALAR"
+      },
+      {
+        name: "Miller -33cl",
+        price: "315.00 ₺",
+        desc: "%4.7 alc. (148 kcal) ABD",
+        category: "BIRALAR"
+      },
+      {
+        name: "Heineken -33cl",
+        price: "315.00 ₺",
+        desc: "%5 alc. (150 kcal) HOLLANDA",
+        category: "BIRALAR"
+      },
+      {
+        name: "Corona -33cl",
+        price: "375.00 ₺",
+        desc: "%4.5 alc. (150 kcal) MEXİCA",
+        category: "BIRALAR"
+      },
+      {
+        name: "Yeni Rakı - (TEK)",
+        price: "395.00 ₺",
+        desc: "5 cl",
+        category: "RAKILAR"
+      },
+      {
+        name: "Yeni Rakı -(DUBLE)",
+        price: "695.00 ₺",
+        desc: "8 CL",
+        category: "RAKILAR"
+      },
+      {
+        name: "Yeni Rakı - 20 cl",
+        price: "1,195.00 ₺",
+        category: "RAKILAR"
+      },
+      {
+        name: "Yeni Rakı - 35 cl",
+        price: "1,950.00 ₺",
+        category: "RAKILAR"
+      },
+      {
+        name: "House Wine (KADEH)",
+        price: "475.00 ₺",
+        desc: "150ml %12.5 Alk. (120 kcal) TR\nKavaklıdere DİKMEN, Öküzgözü, boğazkere, Syrah, cabernet sauvıgnon üzümlerinden üretilen kupaj şaraptır.",
+        category: "KIRMIZI SARAPLAR"
+      },
+      {
+        name: "Angora (KADEH)",
+        price: "495.00 ₺",
+        desc: "150ml %13 Alc. (120 kcal) TR\nEge bölgesi' nin Cabernet sauvignon, Alicante ve Merlot üzümleri ile Doğu anadolu bölgesi'nin Öküzgözü üzümlerinden üretilmiştir.",
+        category: "KIRMIZI SARAPLAR"
+      },
+      {
+        name: "Ancyra Merlot(KADEH)",
+        price: "575.00 ₺",
+        desc: "150ml %14.5 Alc. (130 kcal) TR\nEge bölgesi' nin DENİZLİ- GÜNEY bağlarının Merlot üzümlerinden üretildi.",
+        category: "KIRMIZI SARAPLAR"
+      },
+      {
+        name: "Ancyra SYRAH(KADEH)",
+        price: "575.00 ₺",
+        desc: "150ml %14 Alc. (125 kcal) TR\nEge bölgesi' nin DENİZLİ- GÜNEY bağlarının Cabernet sauvignon ve Syrah üzümlerinden üretildi.",
+        category: "KIRMIZI SARAPLAR"
+      },
+      {
+        name: "Yakut - 37,5 cl.",
+        price: "1,395.00 ₺",
+        desc: "37.5 CL %13.5 Alc. (310 kcal) TR\nEge bölgesi' nin Carignan, Alicante üzümleri ile Doğu anadolu bölgesi'nin Öküzgözü ve Boğazkere üzümlerinden üretilmiştir.",
+        category: "KIRMIZI SARAPLAR"
+      },
+      {
+        name: "Angora 75cl",
+        price: "2,245.00 ₺",
+        desc: "75CL %13 Alc. (600 kcal) TR\nEge bölgesi' nin Cabernet sauvignon, Alicante ve Merlot üzümleri ile Doğu anadolu bölgesi'nin Öküzgözü üzümlerinden üretilmiştir.",
+        category: "KIRMIZI SARAPLAR"
+      },
+      {
+        name: "Ancyra Kalecik Karası",
+        price: "2,575.00 ₺",
+        desc: "75 CL %13.9 Alc. (620 kcal) TR\nKalecik ve Kırşehir bağlarının kalecik karası üzümlerinden üretilmiştir.",
+        category: "KIRMIZI SARAPLAR"
+      },
+      {
+        name: "Ancyra Öküzgözü",
+        price: "2,575.00 ₺",
+        desc: "75 CL %13.5 Alc. (620 kcal) TR\nElazığ bağlarının Öküzgözü üzümlerinden üretilmiştir.",
+        category: "KIRMIZI SARAPLAR"
+      },
+      {
+        name: "Ancyra cabernet sauvıgnon-syrah",
+        price: "2,575.00 ₺",
+        desc: "75CL %14 Alc. (125 kcal) TR\nEge bölgesi' nin DENİZLİ- GÜNEY bağlarının Cabernet sauvignon ve Syrah üzümlerinden üretildi.",
+        category: "KIRMIZI SARAPLAR"
+      },
+      {
+        name: "Yakut - 75 cl",
+        price: "2,525.00 ₺",
+        desc: "75 CL %13.5 Alc. (620 kcal) TR\nEge bölgesi' nin Carignan, Alicante üzümleri ile Doğu anadolu bölgesi'nin Öküzgözü ve Boğazkere üzümlerinden üretilmiştir.",
+        category: "KIRMIZI SARAPLAR"
+      },
+      {
+        name: "Selection 75cl",
+        price: "3,995.00 ₺",
+        desc: "75 CL %14 Alc. (620 kcal) TR",
+        category: "KIRMIZI SARAPLAR"
+      },
+      {
+        name: "Egeo Merlot",
+        price: "4,515.00 ₺",
+        desc: "75 CL %13.8 Alc. (615 kcal) TR\nDenizli bölgesi güney bağlarımızda yetişen Cabernet Franc ve Merlot üzümlerinin 12 ay meşe fıçılarda olgunlaşmasıyla olmuştur.",
+        category: "KIRMIZI SARAPLAR"
+      },
+      {
+        name: "Egeo Malbec",
+        price: "4,945.00 ₺",
+        desc: "75 CL %14.5 Alc. (640 kcal) TR\nKavaklıdere’nin Pendore bağlarında yetişen Malbec üzümlerinden üretilmiş olan bu kırmızı şarap, 10 ay boyunca 225 litrelik Fransız meşe fıçılarda olgunlaştırılmıştır. Kısıtlı filtrasyon uygulandığı için tortu oluşması doğaldır",
+        category: "KIRMIZI SARAPLAR"
+      },
+      {
+        name: "Ancyra Merlot",
+        price: "2,575.00 ₺",
+        desc: "150ml %14.5 Alc. (130 kcal) TR\nEge bölgesi' nin DENİZLİ- GÜNEY bağlarının Merlot üzümlerinden üretildi.",
+        category: "KIRMIZI SARAPLAR"
+      },
+      {
+        name: "House Wine(KADEH)",
+        price: "475.00 ₺",
+        desc: "150 ml, %13.5 alkol, 125 kcal, Tr\nKavaklıdere Kavak, Ege bölgesinin Sultaniye ve Sauvıgnon Blanc, Orta Anadolu Bölgesi'nin Narince ve Emir üzümlerinden üretilmiştir.",
+        category: "BEYAZ SARAPLAR"
+      },
+      {
+        name: "Angora (KADEH)",
+        price: "495.00 ₺",
+        desc: "150 ml, %14 alkol, 115 kcal, TR\nDenizli'nin Sultaniye üzümlerinden üretilmiştir.",
+        category: "BEYAZ SARAPLAR"
+      },
+      {
+        name: "Vinart sauvıgnon blanc (KADEH)",
+        price: "595.00 ₺",
+        desc: "150 ml, %14 alkol, 120kcal, TR\nDenizli Güney bağlarının Sauvıgnon Blanc üzümlerinden üretilmiştir.",
+        category: "BEYAZ SARAPLAR"
+      },
+      {
+        name: "Çankaya - 37,5 cl",
+        price: "1,395.00 ₺",
+        category: "BEYAZ SARAPLAR"
+      },
+      {
+        name: "Ancyra",
+        price: "2,575.00 ₺",
+        desc: "Narince",
+        category: "BEYAZ SARAPLAR"
+      },
+      {
+        name: "Vinart",
+        price: "2,675.00 ₺",
+        desc: "75CL, %14 alkol, 600 kcal, TR\nDenizli Güney bağlarının Sauvıgnon Blanc üzümlerinden üretilmiştir.",
+        category: "BEYAZ SARAPLAR"
+      },
+      {
+        name: "Çankaya - 75 cl",
+        price: "2,525.00 ₺",
+        desc: "Narince, Sultaniye",
+        category: "BEYAZ SARAPLAR"
+      },
+      {
+        name: "Egeo",
+        price: "4,545.00 ₺",
+        desc: "Sauv Blanc",
+        category: "BEYAZ SARAPLAR"
+      },
+      {
+        name: "Vinart NARİNCE-CHARDONNAY (KADEH)",
+        price: "595.00 ₺",
+        desc: "150 ml, %13.5 alkol, 125 kcal, TR\nKapadokya bağlarında yetişen Narince ve Chardonnay üzümlerinden üretilen tankta ve fransız meşe fıçılarda fermente edilip ''elevage sur lies''\nyöntemi ile olgunlastırılmıstır.",
+        category: "BEYAZ SARAPLAR"
+      },
+      {
+        name: "Vinart CHARDONNAY-NARİNCE",
+        price: "2,675.00 ₺",
+        desc: "75 CL, %13.5 alkol, 630 kcal, TR\nKapadokya bağlarında yetişen Narince ve Chardonnay üzümlerinden üretilen tankta ve fransız meşe fıçılarda fermente edilip ''elevage sur lies''\nyöntemi ile olgunlastırılmıstır.",
+        category: "BEYAZ SARAPLAR"
+      },
+      {
+        name: "Myrina",
+        price: "495.00 ₺",
+        desc: "Kadeh 150 ml",
+        category: "ROSE SARAPLAR"
+      },
+      {
+        name: "Lâl",
+        price: "555.00 ₺",
+        desc: "Kadeh 150ml",
+        category: "ROSE SARAPLAR"
+      },
+      {
+        name: "Myrina - 75 cl",
+        price: "2,175.00 ₺",
+        category: "ROSE SARAPLAR"
+      },
+      {
+        name: "Lâl - 75 cl",
+        price: "2,425.00 ₺",
+        category: "ROSE SARAPLAR"
+      },
+      {
+        name: "Ancyra Blush - 75 cl",
+        price: "2,625.00 ₺",
+        category: "ROSE SARAPLAR"
+      },
+      {
+        name: "İnci Damlası",
+        price: "2,950.00 ₺",
+        category: "KÖPÜKLÜ ŞARAPLAR"
+      },
+      {
+        name: "Pembe Köpük",
+        price: "2,950.00 ₺",
+        category: "KÖPÜKLÜ ŞARAPLAR"
+      },
+      {
+        name: "Margarita",
+        price: "760.00 ₺",
+        desc: "Tekila, Cointreau, Limon suyu",
+        category: "KOKTEYL"
+      },
+      {
+        name: "Negroni",
+        price: "775.00 ₺",
+        desc: "Cin, Campari, Vermut Rosso",
+        category: "KOKTEYL"
+      },
+      {
+        name: "Brave Bull",
+        price: "765.00 ₺",
+        desc: "Tekila, Kahlua",
+        category: "KOKTEYL"
+      },
+      {
+        name: "Dry Martini",
+        price: "595.00 ₺",
+        desc: "Cin, Vermut",
+        category: "KOKTEYL"
+      },
+      {
+        name: "Appletini",
+        price: "595.00 ₺",
+        desc: "Martini Bianco, Limon Suyu, Taze Elma Suyu",
+        category: "KOKTEYL"
+      },
+      {
+        name: "Sex On The Beach",
+        price: "695.00 ₺",
+        desc: "Votka, Tekila, Archers, Grenadine, Limon suyu, Portakal Suyu",
+        category: "KOKTEYL"
+      },
+      {
+        name: "Mojito",
+        price: "695.00 ₺",
+        desc: "Rom, Lime, Esmer Şeker, Nane, Soda",
+        category: "KOKTEYL"
+      },
+      {
+        name: "White Lady",
+        price: "585.00 ₺",
+        desc: "Cin, Cointreau,",
+        category: "KOKTEYL"
+      },
+      {
+        name: "White / Black Russian",
+        price: "595.00 ₺",
+        desc: "Votka, Kahlua, Süt",
+        category: "KOKTEYL"
+      },
+      {
+        name: "Japanese Iced Tea",
+        price: "685.00 ₺",
+        desc: "Votka, Cin, Rom, Kavun Schnapps, Sweet and Sour",
+        category: "KOKTEYL"
+      },
+      {
+        name: "Jagerbomb",
+        price: "645.00 ₺",
+        desc: "Jägermeister, Redbull",
+        category: "KOKTEYL"
+      },
+      {
+        name: "Lynchburg Lemonade",
+        price: "775.00 ₺",
+        desc: "Jack Danlels, Cointreau, Sweet and Sour, Gazoz",
+        category: "KOKTEYL"
+      },
+      {
+        name: "B52",
+        price: "545.00 ₺",
+        desc: "Kahlua, Bailey's, Cointreau",
+        category: "KOKTEYL"
+      },
+      {
+        name: "SHİSHLY COCTAİL",
+        price: "895.00 ₺",
+        desc: "Votka, Bacardi, Cointreau, Blue Curacau, Ev Yapımı Limonata",
+        category: "KOKTEYL"
+      },
+      {
+        name: "Long Island Iced Tea",
+        price: "945.00 ₺",
+        desc: "Votka, Cin, Rom, Tekila, Cointreau, Limon suyu, Kola",
+        category: "KOKTEYL"
+      },
+      {
+        name: "Tekila Silver",
+        price: "385.00 ₺",
+        desc: "5 CL",
+        category: "ALKOLLU ICECEKLER"
+      },
+      {
+        name: "Tekila Gold",
+        price: "415.00 ₺",
+        desc: "5 CL",
+        category: "ALKOLLU ICECEKLER"
+      },
+      {
+        name: "Absolut",
+        price: "515.00 ₺",
+        desc: "5 CL",
+        category: "ALKOLLU ICECEKLER"
+      },
+      {
+        name: "Stolichnaya",
+        price: "625.00 ₺",
+        desc: "5 CL",
+        category: "ALKOLLU ICECEKLER"
+      },
+      {
+        name: "Smirnoff",
+        price: "500.00 ₺",
+        desc: "5 CL",
+        category: "ALKOLLU ICECEKLER"
+      },
+      {
+        name: "Belvedere",
+        price: "1,225.00 ₺",
+        desc: "5 CL",
+        category: "ALKOLLU ICECEKLER"
+      },
+      {
+        name: "Gordon's",
+        price: "515.00 ₺",
+        desc: "5 CL",
+        category: "ALKOLLU ICECEKLER"
+      },
+      {
+        name: "Beefeater",
+        price: "580.00 ₺",
+        desc: "5 CL",
+        category: "ALKOLLU ICECEKLER"
+      },
+      {
+        name: "Jack Daniels",
+        price: "565.00 ₺",
+        desc: "5 CL",
+        category: "ALKOLLU ICECEKLER"
+      },
+      {
+        name: "Jack Daniels GENTLEMAN",
+        price: "635.00 ₺",
+        desc: "5 CL",
+        category: "ALKOLLU ICECEKLER"
+      },
+      {
+        name: "Jack Daniels HONEY",
+        price: "645.00 ₺",
+        desc: "5 CL",
+        category: "ALKOLLU ICECEKLER"
+      },
+      {
+        name: "J&B",
+        price: "500.00 ₺",
+        desc: "5 CL",
+        category: "ALKOLLU ICECEKLER"
+      },
+      {
+        name: "Jameson",
+        price: "585.00 ₺",
+        desc: "5 CL",
+        category: "ALKOLLU ICECEKLER"
+      },
+      {
+        name: "Famous Grouse",
+        price: "595.00 ₺",
+        desc: "5 CL",
+        category: "ALKOLLU ICECEKLER"
+      },
+      {
+        name: "Johnnie Walker RED",
+        price: "545.00 ₺",
+        desc: "5 CL",
+        category: "ALKOLLU ICECEKLER"
+      },
+      {
+        name: "Johnnie Walker BLACK",
+        price: "635.00 ₺",
+        desc: "5 CL",
+        category: "ALKOLLU ICECEKLER"
+      },
+      {
+        name: "Chivas Regal",
+        price: "635.00 ₺",
+        desc: "5 CL",
+        category: "ALKOLLU ICECEKLER"
+      },
+      {
+        name: "Bacardi",
+        price: "585.00 ₺",
+        desc: "5 CL",
+        category: "ALKOLLU ICECEKLER"
+      },
+      {
+        name: "Havana Club",
+        price: "695.00 ₺",
+        desc: "5 CL",
+        category: "ALKOLLU ICECEKLER"
+      },
+      {
+        name: "Captain Morgan",
+        price: "575.00 ₺",
+        desc: "Black",
+        category: "ALKOLLU ICECEKLER"
+      },
+      {
+        name: "Martini Bianco, Rosso , Extra Dry",
+        price: "565.00 ₺",
+        desc: "5 CL",
+        category: "ALKOLLU ICECEKLER"
+      },
+      {
+        name: "Campari",
+        price: "675.00 ₺",
+        desc: "5 CL",
+        category: "ALKOLLU ICECEKLER"
+      },
+      {
+        name: "Cardinal Melon",
+        price: "575.00 ₺",
+        desc: "5 CL",
+        category: "ALKOLLU ICECEKLER"
+      },
+      {
+        name: "Archers",
+        price: "495.00 ₺",
+        desc: "5 CL",
+        category: "ALKOLLU ICECEKLER"
+      },
+      {
+        name: "Safari",
+        price: "465.00 ₺",
+        desc: "5 CL",
+        category: "ALKOLLU ICECEKLER"
+      },
+      {
+        name: "Amaretto",
+        price: "595.00 ₺",
+        desc: "5 CL",
+        category: "ALKOLLU ICECEKLER"
+      },
+      {
+        name: "Baileys",
+        price: "495.00 ₺",
+        desc: "5 CL",
+        category: "ALKOLLU ICECEKLER"
+      },
+      {
+        name: "Cointreau",
+        price: "1,125.00 ₺",
+        desc: "5 CL",
+        category: "ALKOLLU ICECEKLER"
+      },
+      {
+        name: "Hennessy",
+        price: "960.00 ₺",
+        desc: "5 CL",
+        category: "ALKOLLU ICECEKLER"
+      },
+      {
+        name: "Martel",
+        price: "960.00 ₺",
+        desc: "5 CL",
+        category: "ALKOLLU ICECEKLER"
+      },
+      {
+        name: "Southern Comfort",
+        price: "625.00 ₺",
+        desc: "5 CL",
+        category: "ALKOLLU ICECEKLER"
+      },
+      {
+        name: "Jägermeister",
+        price: "545.00 ₺",
+        desc: "4 CL",
+        category: "ALKOLLU ICECEKLER"
+      }
+    ],
+  },
+
 };
