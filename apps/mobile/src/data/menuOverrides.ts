@@ -59565,4 +59565,437 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       },
     ]
   },
+  "3708": {
+    "name": "Üsküdar Coffy",
+    "sourceUrl": "https://www.migros.com.tr/yemek/coffy-uskudar-mimar-sinan-mah-st-25e20",
+    "sourceName": "Migros Yemek branch-labeled `Coffy, Üsküdar (Mimar Sinan Mah.)` menüsü; Yandex exact Üsküdar Coffy İsmail Dümbüllü Sok. 2/205 ve +90 532 416 37 12 kaydıyla eşleştirildi",
+    "verifiedAt": "2026-08-24",
+    "items": [
+      {
+        "name": "Tatlı Menü",
+        "price": "270,00 TL",
+        "category": "Menüler"
+      },
+      {
+        "name": "Sandviç Menü",
+        "price": "310,00 TL",
+        "category": "Menüler"
+      },
+      {
+        "name": "Atıştırmalık Menü",
+        "price": "230,00 TL",
+        "category": "Menüler"
+      },
+      {
+        "name": "Freshaa Cool Lime & Strawberry",
+        "price": "200,00 TL",
+        "category": "Dönemsel Lezzetler"
+      },
+      {
+        "name": "Freshaa Cool Lime & Mango",
+        "price": "200,00 TL",
+        "category": "Dönemsel Lezzetler"
+      },
+      {
+        "name": "Freshaa Berry Hibiskus & Blueberry",
+        "price": "200,00 TL",
+        "category": "Dönemsel Lezzetler"
+      },
+      {
+        "name": "Freshaa Berry Hibiskus & Strawberry",
+        "price": "200,00 TL",
+        "category": "Dönemsel Lezzetler"
+      },
+      {
+        "name": "Iced Mango Matcha",
+        "price": "210,00 TL",
+        "category": "Dönemsel Lezzetler"
+      },
+      {
+        "name": "Iced Berry Matcha",
+        "price": "210,00 TL",
+        "category": "Dönemsel Lezzetler"
+      },
+      {
+        "name": "Iced Caffé Americano",
+        "price": "170,00 TL",
+        "category": "Soğuk Kahveler"
+      },
+      {
+        "name": "Iced Caffé Latte",
+        "price": "175,00 TL",
+        "category": "Soğuk Kahveler"
+      },
+      {
+        "name": "Iced Cappuccino",
+        "price": "175,00 TL",
+        "category": "Soğuk Kahveler"
+      },
+      {
+        "name": "Iced Mocha",
+        "price": "190,00 TL",
+        "category": "Soğuk Kahveler"
+      },
+      {
+        "name": "Iced White Chocolate Mocha",
+        "price": "190,00 TL",
+        "category": "Soğuk Kahveler"
+      },
+      {
+        "name": "Iced Caramel Macchiato",
+        "price": "190,00 TL",
+        "category": "Soğuk Kahveler"
+      },
+      {
+        "name": "Iced Salted Caramel Latte",
+        "price": "190,00 TL",
+        "category": "Soğuk Kahveler"
+      },
+      {
+        "name": "Caramel Frappe",
+        "price": "200,00 TL",
+        "category": "Soğuk Kahveler"
+      },
+      {
+        "name": "Mocha Frappe",
+        "price": "200,00 TL",
+        "category": "Soğuk Kahveler"
+      },
+      {
+        "name": "Chocolate Cookie Frappe",
+        "price": "200,00 TL",
+        "category": "Soğuk Kahveler"
+      },
+      {
+        "name": "Iced Cherry Blossom Zen Latte",
+        "price": "200,00 TL",
+        "category": "Soğuk Kahveler"
+      },
+      {
+        "name": "Iced Caramel Bubble Latte",
+        "price": "200,00 TL",
+        "category": "Soğuk Kahveler"
+      },
+      {
+        "name": "Iced Cherry Brownie Latte",
+        "price": "200,00 TL",
+        "category": "Soğuk Kahveler"
+      },
+      {
+        "name": "Filtre Kahve",
+        "price": "165,00 TL",
+        "category": "Sıcak Kahveler"
+      },
+      {
+        "name": "Caffé Americano",
+        "price": "170,00 TL",
+        "category": "Sıcak Kahveler"
+      },
+      {
+        "name": "Caffé Latte",
+        "price": "175,00 TL",
+        "category": "Sıcak Kahveler"
+      },
+      {
+        "name": "Cappuccino",
+        "price": "175,00 TL",
+        "category": "Sıcak Kahveler"
+      },
+      {
+        "name": "Flat White",
+        "price": "180,00 TL",
+        "category": "Sıcak Kahveler"
+      },
+      {
+        "name": "Mocha",
+        "price": "190,00 TL",
+        "category": "Sıcak Kahveler"
+      },
+      {
+        "name": "White Chocolate Mocha",
+        "price": "190,00 TL",
+        "category": "Sıcak Kahveler"
+      },
+      {
+        "name": "Caramel Macchiato",
+        "price": "190,00 TL",
+        "category": "Sıcak Kahveler"
+      },
+      {
+        "name": "Salted Caramel Latte",
+        "price": "190,00 TL",
+        "category": "Sıcak Kahveler"
+      },
+      {
+        "name": "Chocolate Cookie Latte",
+        "price": "190,00 TL",
+        "category": "Sıcak Kahveler"
+      },
+      {
+        "name": "Cherry Brownie Latte",
+        "price": "195,00 TL",
+        "category": "Sıcak Kahveler"
+      },
+      {
+        "name": "Cool Lime",
+        "price": "190,00 TL",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Minty Lemonade",
+        "price": "190,00 TL",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Granada Lemonade",
+        "price": "190,00 TL",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Hibiskus",
+        "price": "190,00 TL",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Orman Meyveli Frozen",
+        "price": "200,00 TL",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Mangolu Frozen",
+        "price": "200,00 TL",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Coffychino Caramel",
+        "price": "200,00 TL",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Çilekli Milkshake",
+        "price": "200,00 TL",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Çikolatalı Milkshake",
+        "price": "200,00 TL",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Iced Matcha",
+        "price": "200,00 TL",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Iced Strawberry Matcha",
+        "price": "210,00 TL",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Iced Vanilla Matcha",
+        "price": "210,00 TL",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Berry Hibiscus Blueberry Bubble",
+        "price": "200,00 TL",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Strawberry Lemonade",
+        "price": "190,00 TL",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Matcha Latte",
+        "price": "215,00 TL",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Vanilla Matcha Latte",
+        "price": "215,00 TL",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Soda (20 Cl.)",
+        "price": "65,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Su (50 Cl.)",
+        "price": "50,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Earl Grey",
+        "price": "110,00 TL",
+        "category": "Çaylar"
+      },
+      {
+        "name": "Çikolatalı Cookie",
+        "price": "130,00 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Çikolata Parçacıklı Cookie",
+        "price": "130,00 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Mozaik Pasta Üçgen Dilim",
+        "price": "130,00 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Cookie Cups Kakaolu Fındık Kremalı",
+        "price": "150,00 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Cookie Cups Karamelli",
+        "price": "150,00 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Mozaik Dilim Kek",
+        "price": "160,00 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Kremalı Havuçlu Dilim Kek",
+        "price": "170,00 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Çikolatalı Muffin",
+        "price": "160,00 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Yaban Mersinli Muffin",
+        "price": "160,00 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Sufle",
+        "price": "180,00 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Frambuazlı Cheesecake",
+        "price": "200,00 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Tiramisu",
+        "price": "190,00 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Profiterollü Pasta",
+        "price": "200,00 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Orman Meyveli Pasta",
+        "price": "250,00 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Matcha Rulo Pasta",
+        "price": "170,00 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Çikolatalı Portakallı Kek",
+        "price": "180,00 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Tereyağlı Kruvasan (85 Gr.)",
+        "price": "110,00 TL",
+        "category": "Kahvaltılıklar"
+      },
+      {
+        "name": "Dereotlu Poğaça",
+        "price": "100,00 TL",
+        "category": "Kahvaltılıklar"
+      },
+      {
+        "name": "Kaşarlı Ve Zeytin Ezmeli Simit Sandviç",
+        "price": "130,00 TL",
+        "category": "Kahvaltılıklar"
+      },
+      {
+        "name": "Çikolata Dolgulu Kruvasan",
+        "price": "130,00 TL",
+        "category": "Kahvaltılıklar"
+      },
+      {
+        "name": "Çikolata Ve Fındık Kremalı Kruvasan",
+        "price": "130,00 TL",
+        "category": "Kahvaltılıklar"
+      },
+      {
+        "name": "Sıcak Karışık Sandviç",
+        "price": "200,00 TL",
+        "category": "Sandviçler"
+      },
+      {
+        "name": "Hindi Fümeli Sıcak Sandviç",
+        "price": "200,00 TL",
+        "category": "Sandviçler"
+      },
+      {
+        "name": "Köri Soslu Tavuklu Baget Sandviç",
+        "price": "230,00 TL",
+        "category": "Sandviçler"
+      },
+      {
+        "name": "İsli Peynir Ve Hindi Fümeli Baget Sandviç",
+        "price": "230,00 TL",
+        "category": "Sandviçler"
+      },
+      {
+        "name": "Corny Kakao Kırmızı My Tahıl Bar",
+        "price": "65,00 TL",
+        "category": "Kasa Önü"
+      },
+      {
+        "name": "Glutensiz Brownie",
+        "price": "90,00 TL",
+        "category": "Kasa Önü"
+      },
+      {
+        "name": "Bitter Ve Beyaz Çikolatalı Bardak Cookie",
+        "price": "130,00 TL",
+        "category": "Kasa Önü"
+      },
+      {
+        "name": "Çikolatalı Bardak Cookie",
+        "price": "130,00 TL",
+        "category": "Kasa Önü"
+      },
+      {
+        "name": "Costa Rica (250 Gr.)",
+        "price": "550,00 TL",
+        "category": "Çekirdek Kahveler (250 Gr.)"
+      },
+      {
+        "name": "Ethiopia (250 Gr.)",
+        "price": "550,00 TL",
+        "category": "Çekirdek Kahveler (250 Gr.)"
+      },
+      {
+        "name": "Colombia Supremo ( 250 Gr )",
+        "price": "550,00 TL",
+        "category": "Çekirdek Kahveler (250 Gr.)"
+      },
+      {
+        "name": "Coffy Kapsül Kahve - Medium Roast",
+        "price": "300,00 TL",
+        "category": "Çekirdek Kahveler (250 Gr.)"
+      },
+    ]
+  },
 };
