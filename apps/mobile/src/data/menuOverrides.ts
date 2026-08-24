@@ -54339,4 +54339,732 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       },
     ]
   },
+  "3940": {
+    "name": "Pizza Bulls Bakırköy Zuhuratbaba",
+    "sourceUrl": "https://www.migros.com.tr/yemek/pizza-bulls-bakirkoy-zuhuratbaba-mah-st-2166d",
+    "sourceName": "Migros Yemek branch-labeled canlı menüsü; official Pizzabulls/online menu ve Yandex exact Bakırköy Zuhuratbaba şube köprüsüyle eşleştirildi",
+    "verifiedAt": "2026-08-24",
+    "items": [
+      {
+        "name": "Küçük Boy Pizza + Kutu İçecek + Elma Dilim Patates + Sos",
+        "price": "579,70 TL",
+        "category": "Migros Yemek Özel Menü"
+      },
+      {
+        "name": "Orta Boy Pizza + Çıtır Tavuk + Pat Bulls + Kutu İçecek + Sos",
+        "price": "959,60 TL",
+        "category": "Coca-Cola Lezzetli Menüler"
+      },
+      {
+        "name": "2 Orta Boy Pizza + Çıtır Tavuk + Pat Bulls + 1 L. İçecek + 2 Sos",
+        "price": "1.469,50 TL",
+        "category": "Coca-Cola Lezzetli Menüler"
+      },
+      {
+        "name": "Büyük Boy Pizza + 1 L. İçecek + 2 Adet Sos",
+        "price": "849,80 TL",
+        "category": "Coca-Cola Lezzetli Menüler"
+      },
+      {
+        "name": "Büyük Boy Pizza + Çıtır Tavuk + Elma Dilim Patates + 1 L. İçecek + 2 Sos",
+        "price": "1.199,60 TL",
+        "category": "Coca-Cola Lezzetli Menüler"
+      },
+      {
+        "name": "Büyük Boy Pizza + 6 Tavuk But + Elma Dilim Patates + 1 L. İçecek + 2 Sos",
+        "price": "1.294,70 TL",
+        "category": "Coca-Cola Lezzetli Menüler"
+      },
+      {
+        "name": "Orta Boy Pizza + Kutu İçecek + Sufle + Sos",
+        "price": "759,70 TL",
+        "category": "İndirimli Menüler"
+      },
+      {
+        "name": "Büyük Boy Pepperoni Pizza",
+        "price": "499,90 TL",
+        "category": "İndirimli Menüler"
+      },
+      {
+        "name": "Büyük Boy Sucuklu Pizza",
+        "price": "499,90 TL",
+        "category": "İndirimli Menüler"
+      },
+      {
+        "name": "2 Adet Büyük Boy Pizza + Sos ( 575 + 575)",
+        "price": "1.379,80 TL",
+        "category": "İndirimli Menüler"
+      },
+      {
+        "name": "2 Adet Orta Boy Pizza + Sos ( 380 + 380)",
+        "price": "959,80 TL",
+        "category": "İndirimli Menüler"
+      },
+      {
+        "name": "Orta Boy Pizza + Kutu İçecek + Sos",
+        "price": "609,80 TL",
+        "category": "İndirimli Menüler"
+      },
+      {
+        "name": "Çıtır Tavuk Menü",
+        "price": "289,90 TL",
+        "category": "İndirimli Menüler"
+      },
+      {
+        "name": "2 Adet Küçük Boy Pizza + Sos ( 279+ 279 )",
+        "price": "699,80 TL",
+        "category": "İndirimli Menüler"
+      },
+      {
+        "name": "Orta Boy Pepperoni Pizza",
+        "price": "379,90 TL",
+        "category": "İndirimli Menüler"
+      },
+      {
+        "name": "Orta Boy Sucuklu Pizza",
+        "price": "379,90 TL",
+        "category": "İndirimli Menüler"
+      },
+      {
+        "name": "Büyük Boy Pizza + 2 Adet Sos",
+        "price": "689,90 TL",
+        "category": "İndirimli Menüler"
+      },
+      {
+        "name": "Orta Boy Pizza + Çıtır Tavuk + Kutu İçecek + Sos",
+        "price": "859,70 TL",
+        "category": "İndirimli Menüler"
+      },
+      {
+        "name": "Büyük Boy Pizza + Çıtır Tavuk + Elma Dilim Patates + 1 L. İçecek + 2 Sos",
+        "price": "1.199,60 TL",
+        "category": "İndirimli Menüler"
+      },
+      {
+        "name": "Büyük Boy Pizza + 6 Tavuk But + Elma Dilim Patates + 1 L. İçecek + 2 Sos",
+        "price": "1.294,70 TL",
+        "category": "İndirimli Menüler"
+      },
+      {
+        "name": "2 Büyük Boy Pizza + Çıtır Tavuk + Pat Bulls + 1 L. İçecek + 4 Sos",
+        "price": "1.889,50 TL",
+        "category": "İndirimli Menüler"
+      },
+      {
+        "name": "2 Orta Boy Pizza + Çıtır Tavuk + Pat Bulls + 1 L. İçecek + 2 Sos",
+        "price": "1.469,50 TL",
+        "category": "İndirimli Menüler"
+      },
+      {
+        "name": "2 Adet Küçük Boy Pizza + 1L. İçecek + Sos ( 345 + 345)",
+        "price": "859,70 TL",
+        "category": "İndirimli Menüler"
+      },
+      {
+        "name": "2 Adet Orta Boy Pizza + 1L. İçecek + Sos ( 438 + 438)",
+        "price": "1.119,70 TL",
+        "category": "İndirimli Menüler"
+      },
+      {
+        "name": "2 Adet Büyük Boy Pizza + 1L. İçecek + Sos (630 + 630 )",
+        "price": "1.539,70 TL",
+        "category": "İndirimli Menüler"
+      },
+      {
+        "name": "Cheese Bread (Sade) + 4 Adet Acılı Tavuk + Kutu İçecek",
+        "price": "499,70 TL",
+        "category": "İndirimli Menüler"
+      },
+      {
+        "name": "Cheese Bread (Sade) + Çıtır Tavuk 200Gr. + Kutu İçecek",
+        "price": "559,70 TL",
+        "category": "İndirimli Menüler"
+      },
+      {
+        "name": "Orta Boy Pizza + Kutu İçecek + Elma Dilim Patates + Sos",
+        "price": "709,70 TL",
+        "category": "İndirimli Menüler"
+      },
+      {
+        "name": "Küçük Boy Pizza + Kutu İçecek + Sos",
+        "price": "479,80 TL",
+        "category": "İndirimli Menüler"
+      },
+      {
+        "name": "Orta Boy Pizza + Çıtır Tavuk + Pat Bulls + Kutu İçecek + Sos",
+        "price": "959,60 TL",
+        "category": "İndirimli Menüler"
+      },
+      {
+        "name": "2'Li Tatlı",
+        "price": "279,90 TL",
+        "category": "İndirimli Menüler"
+      },
+      {
+        "name": "Pizza Margarita (Orta)",
+        "price": "399,90 TL",
+        "category": "Dünyanın Lezzetleri Pizzalar (Orta)"
+      },
+      {
+        "name": "Pizza Nefis (Orta)",
+        "price": "449,90 TL",
+        "category": "Dünyanın Lezzetleri Pizzalar (Orta)"
+      },
+      {
+        "name": "Pizza New York (Orta)",
+        "price": "449,90 TL",
+        "category": "Dünyanın Lezzetleri Pizzalar (Orta)"
+      },
+      {
+        "name": "Pizza Los Angeles (Orta)",
+        "price": "449,90 TL",
+        "category": "Dünyanın Lezzetleri Pizzalar (Orta)"
+      },
+      {
+        "name": "Pizza Gamer (Orta)",
+        "price": "449,90 TL",
+        "category": "Dünyanın Lezzetleri Pizzalar (Orta)"
+      },
+      {
+        "name": "Pizza Boston (Orta)",
+        "price": "449,90 TL",
+        "category": "Dünyanın Lezzetleri Pizzalar (Orta)"
+      },
+      {
+        "name": "Pizza Seattle (Orta)",
+        "price": "449,90 TL",
+        "category": "Dünyanın Lezzetleri Pizzalar (Orta)"
+      },
+      {
+        "name": "Pizza Karışık (Orta)",
+        "price": "449,90 TL",
+        "category": "Dünyanın Lezzetleri Pizzalar (Orta)"
+      },
+      {
+        "name": "Pizza Houston (Orta)",
+        "price": "469,90 TL",
+        "category": "Farklı Lezzetler Pizzalar (Orta)"
+      },
+      {
+        "name": "Pizza Sacramento (Orta)",
+        "price": "469,90 TL",
+        "category": "Farklı Lezzetler Pizzalar (Orta)"
+      },
+      {
+        "name": "Pizza Kentucky (Orta)",
+        "price": "469,90 TL",
+        "category": "Farklı Lezzetler Pizzalar (Orta)"
+      },
+      {
+        "name": "Pizza Dallas (Orta)",
+        "price": "469,90 TL",
+        "category": "Farklı Lezzetler Pizzalar (Orta)"
+      },
+      {
+        "name": "Pizza Dört Peynirli (Orta)",
+        "price": "469,90 TL",
+        "category": "Farklı Lezzetler Pizzalar (Orta)"
+      },
+      {
+        "name": "Pizza Anadolu (Orta)",
+        "price": "489,90 TL",
+        "category": "Etli Lezzetler Pizzalar (Orta)"
+      },
+      {
+        "name": "Pizza Miami (Orta)",
+        "price": "489,90 TL",
+        "category": "Etli Lezzetler Pizzalar (Orta)"
+      },
+      {
+        "name": "Pizza Chicago (Orta)",
+        "price": "489,90 TL",
+        "category": "Etli Lezzetler Pizzalar (Orta)"
+      },
+      {
+        "name": "Pizza Dönerli (Orta)",
+        "price": "489,90 TL",
+        "category": "Etli Lezzetler Pizzalar (Orta)"
+      },
+      {
+        "name": "Pizza New Jersey (Orta)",
+        "price": "509,90 TL",
+        "category": "Gurme Lezzetler Pizzalar (Orta)"
+      },
+      {
+        "name": "Pizza Mississippi (Orta)",
+        "price": "509,90 TL",
+        "category": "Gurme Lezzetler Pizzalar (Orta)"
+      },
+      {
+        "name": "Pizza Ali Baba (Orta)",
+        "price": "509,90 TL",
+        "category": "Gurme Lezzetler Pizzalar (Orta)"
+      },
+      {
+        "name": "Pizza Orlando (Orta)",
+        "price": "509,90 TL",
+        "category": "Gurme Lezzetler Pizzalar (Orta)"
+      },
+      {
+        "name": "Pizza Hindi Tandırlı (Orta)",
+        "price": "509,90 TL",
+        "category": "Gurme Lezzetler Pizzalar (Orta)"
+      },
+      {
+        "name": "Pizza Margarita (Büyük)",
+        "price": "589,90 TL",
+        "category": "Dünyanın Lezzetleri Pizzalar (Büyük)"
+      },
+      {
+        "name": "Pizza Nefis (Büyük)",
+        "price": "629,90 TL",
+        "category": "Dünyanın Lezzetleri Pizzalar (Büyük)"
+      },
+      {
+        "name": "Pizza New York (Büyük)",
+        "price": "629,90 TL",
+        "category": "Dünyanın Lezzetleri Pizzalar (Büyük)"
+      },
+      {
+        "name": "Pizza Los Angeles (Büyük)",
+        "price": "629,90 TL",
+        "category": "Dünyanın Lezzetleri Pizzalar (Büyük)"
+      },
+      {
+        "name": "Pizza Boston (Büyük)",
+        "price": "629,90 TL",
+        "category": "Dünyanın Lezzetleri Pizzalar (Büyük)"
+      },
+      {
+        "name": "Pizza Gamer (Büyük)",
+        "price": "629,90 TL",
+        "category": "Dünyanın Lezzetleri Pizzalar (Büyük)"
+      },
+      {
+        "name": "Pizza Seattle (Büyük)",
+        "price": "629,90 TL",
+        "category": "Dünyanın Lezzetleri Pizzalar (Büyük)"
+      },
+      {
+        "name": "Pizza Karışık (Büyük)",
+        "price": "629,90 TL",
+        "category": "Dünyanın Lezzetleri Pizzalar (Büyük)"
+      },
+      {
+        "name": "Pizza Houston (Büyük)",
+        "price": "689,90 TL",
+        "category": "Farklı Lezzetler Pizzalar (Büyük)"
+      },
+      {
+        "name": "Pizza Dallas (Büyük)",
+        "price": "689,90 TL",
+        "category": "Farklı Lezzetler Pizzalar (Büyük)"
+      },
+      {
+        "name": "Pizza Sacramento (Büyük)",
+        "price": "689,90 TL",
+        "category": "Farklı Lezzetler Pizzalar (Büyük)"
+      },
+      {
+        "name": "Pizza Kentucky (Büyük)",
+        "price": "689,90 TL",
+        "category": "Farklı Lezzetler Pizzalar (Büyük)"
+      },
+      {
+        "name": "Pizza Dört Peynirli (Büyük)",
+        "price": "689,90 TL",
+        "category": "Farklı Lezzetler Pizzalar (Büyük)"
+      },
+      {
+        "name": "Pizza Anadolu (Büyük)",
+        "price": "699,90 TL",
+        "category": "Etli Lezzetler Pizzalar (Büyük)"
+      },
+      {
+        "name": "Pizza Dönerli (Büyük)",
+        "price": "699,90 TL",
+        "category": "Etli Lezzetler Pizzalar (Büyük)"
+      },
+      {
+        "name": "Pizza Miami (Büyük)",
+        "price": "699,90 TL",
+        "category": "Etli Lezzetler Pizzalar (Büyük)"
+      },
+      {
+        "name": "Pizza Chicago (Büyük)",
+        "price": "699,90 TL",
+        "category": "Etli Lezzetler Pizzalar (Büyük)"
+      },
+      {
+        "name": "Pizza Mississippi (Büyük)",
+        "price": "739,90 TL",
+        "category": "Gurme Lezzetler Pizzalar (Büyük)"
+      },
+      {
+        "name": "Pizza Ali Baba (Büyük)",
+        "price": "739,90 TL",
+        "category": "Gurme Lezzetler Pizzalar (Büyük)"
+      },
+      {
+        "name": "Pizza New Jersey (Büyük)",
+        "price": "739,90 TL",
+        "category": "Gurme Lezzetler Pizzalar (Büyük)"
+      },
+      {
+        "name": "Pizza Orlando (Büyük)",
+        "price": "739,90 TL",
+        "category": "Gurme Lezzetler Pizzalar (Büyük)"
+      },
+      {
+        "name": "Pizza Hindi Tandırlı (Büyük)",
+        "price": "739,90 TL",
+        "category": "Gurme Lezzetler Pizzalar (Büyük)"
+      },
+      {
+        "name": "Pizza Margarita (Küçük)",
+        "price": "289,90 TL",
+        "category": "Dünyanın Lezzetleri Pizzalar (Küçük)"
+      },
+      {
+        "name": "Pizza Nefis (Küçük)",
+        "price": "319,90 TL",
+        "category": "Dünyanın Lezzetleri Pizzalar (Küçük)"
+      },
+      {
+        "name": "Pizza New York (Küçük)",
+        "price": "319,90 TL",
+        "category": "Dünyanın Lezzetleri Pizzalar (Küçük)"
+      },
+      {
+        "name": "Pizza Los Angeles (Küçük)",
+        "price": "319,90 TL",
+        "category": "Dünyanın Lezzetleri Pizzalar (Küçük)"
+      },
+      {
+        "name": "Pizza Boston (Küçük)",
+        "price": "319,90 TL",
+        "category": "Dünyanın Lezzetleri Pizzalar (Küçük)"
+      },
+      {
+        "name": "Pizza Gamer (Küçük)",
+        "price": "319,90 TL",
+        "category": "Dünyanın Lezzetleri Pizzalar (Küçük)"
+      },
+      {
+        "name": "Pizza Karışık (Küçük)",
+        "price": "319,90 TL",
+        "category": "Dünyanın Lezzetleri Pizzalar (Küçük)"
+      },
+      {
+        "name": "Pizza Seattle (Küçük)",
+        "price": "319,90 TL",
+        "category": "Dünyanın Lezzetleri Pizzalar (Küçük)"
+      },
+      {
+        "name": "Pizza Sacramento (Küçük)",
+        "price": "329,90 TL",
+        "category": "Farklı Lezzetler Pizzalar (Küçük)"
+      },
+      {
+        "name": "Pizza Houston (Küçük)",
+        "price": "329,90 TL",
+        "category": "Farklı Lezzetler Pizzalar (Küçük)"
+      },
+      {
+        "name": "Pizza Kentucky (Küçük)",
+        "price": "329,90 TL",
+        "category": "Farklı Lezzetler Pizzalar (Küçük)"
+      },
+      {
+        "name": "Pizza Dallas (Küçük)",
+        "price": "329,90 TL",
+        "category": "Farklı Lezzetler Pizzalar (Küçük)"
+      },
+      {
+        "name": "Pizza Dört Peynirli (Küçük)",
+        "price": "329,90 TL",
+        "category": "Farklı Lezzetler Pizzalar (Küçük)"
+      },
+      {
+        "name": "Pizza Chicago (Küçük)",
+        "price": "359,90 TL",
+        "category": "Etli Lezzetler Pizzalar (Küçük)"
+      },
+      {
+        "name": "Pizza Dönerli (Küçük)",
+        "price": "359,90 TL",
+        "category": "Etli Lezzetler Pizzalar (Küçük)"
+      },
+      {
+        "name": "Pizza Miami (Küçük)",
+        "price": "359,90 TL",
+        "category": "Etli Lezzetler Pizzalar (Küçük)"
+      },
+      {
+        "name": "Pizza Anadolu (Küçük)",
+        "price": "359,90 TL",
+        "category": "Etli Lezzetler Pizzalar (Küçük)"
+      },
+      {
+        "name": "Pizza Ali Baba (Küçük)",
+        "price": "369,90 TL",
+        "category": "Gurme Lezzetler Pizzalar (Küçük)"
+      },
+      {
+        "name": "Pizza Mississippi (Küçük)",
+        "price": "369,90 TL",
+        "category": "Gurme Lezzetler Pizzalar (Küçük)"
+      },
+      {
+        "name": "Pizza New Jersey (Küçük)",
+        "price": "369,90 TL",
+        "category": "Gurme Lezzetler Pizzalar (Küçük)"
+      },
+      {
+        "name": "Pizza Orlando (Küçük)",
+        "price": "369,90 TL",
+        "category": "Gurme Lezzetler Pizzalar (Küçük)"
+      },
+      {
+        "name": "Pizza Hindi Tandırlı (Küçük)",
+        "price": "369,90 TL",
+        "category": "Gurme Lezzetler Pizzalar (Küçük)"
+      },
+      {
+        "name": "Cheese Bread",
+        "price": "169,90 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Pat Bulls",
+        "price": "99,90 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Cheese Bread (Kavurmalı)",
+        "price": "269,90 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Cheese Bread (Sucuklu)",
+        "price": "189,90 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Cheese Bread (Acılı)",
+        "price": "179,90 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Cheese Bread (Sebzeli)",
+        "price": "179,90 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Çıtır Tavuk",
+        "price": "249,90 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Tavuk Butları (4 Adet)",
+        "price": "240,00 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Tavuk Butları (8 Adet)",
+        "price": "470,00 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Tavuk Butları (12 Adet)",
+        "price": "690,00 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Acılı Tavuk ( 4 Adet - 200Gr.)",
+        "price": "189,90 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Elma Dilim Patates",
+        "price": "99,90 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Soğan Halkası (8 Adet)",
+        "price": "69,90 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Peynirli Sarımsaklı Ekmek",
+        "price": "159,90 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Tavuk Fingers (4 Adet)",
+        "price": "169,90 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Tavuk Fingers (8 Adet)",
+        "price": "329,90 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Tavuk Fingers (12 Adet)",
+        "price": "469,90 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Ketçap",
+        "price": "5,00 TL",
+        "category": "Soslar"
+      },
+      {
+        "name": "Mayonez",
+        "price": "5,00 TL",
+        "category": "Soslar"
+      },
+      {
+        "name": "Acı Sos",
+        "price": "30,00 TL",
+        "category": "Soslar"
+      },
+      {
+        "name": "Kenar Sos",
+        "price": "30,00 TL",
+        "category": "Soslar"
+      },
+      {
+        "name": "Barbekü Sos",
+        "price": "30,00 TL",
+        "category": "Soslar"
+      },
+      {
+        "name": "Ranch Sos",
+        "price": "30,00 TL",
+        "category": "Soslar"
+      },
+      {
+        "name": "Cheddar Sos",
+        "price": "30,00 TL",
+        "category": "Soslar"
+      },
+      {
+        "name": "Çikolatalı Sufle",
+        "price": "149,90 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Vişneli Cup",
+        "price": "149,90 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Profiterol",
+        "price": "149,90 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Coca-cola (330 Ml.)",
+        "price": "129,90 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Coca-cola Zero (330 Ml.)",
+        "price": "129,90 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Fanta (330 Ml.)",
+        "price": "129,90 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Sprite (330 Ml.)",
+        "price": "129,90 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Sprite Cool Mint (330 Ml.)",
+        "price": "129,90 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Fuse Tea Şeftali (33 Cl.)",
+        "price": "129,90 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Fuse Tea Limon (33 Cl.)",
+        "price": "129,90 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Fuse Tea Mango Ve Ananas (33Cl.)",
+        "price": "129,90 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Ayran (300 Ml.)",
+        "price": "89,90 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Pet Su (500 Ml)",
+        "price": "30,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Coca-cola (1 L.)",
+        "price": "159,90 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Coca-cola Şekersiz (1 L.)",
+        "price": "159,90 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Fanta (1 L.)",
+        "price": "159,90 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Sprite (1 L.)",
+        "price": "159,90 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Sprite Cool Mint (1L.)",
+        "price": "159,90 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Fuse Tea Şeftali (1 L.)",
+        "price": "159,90 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Fuse Tea Limon (1 L.)",
+        "price": "159,90 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Fuse Tea Mango Ve Ananas (1 L.)",
+        "price": "159,90 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Ayran (1 L.)",
+        "price": "159,90 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Su (1L.)",
+        "price": "50,00 TL",
+        "category": "İçecekler"
+      },
+    ]
+  },
 };
