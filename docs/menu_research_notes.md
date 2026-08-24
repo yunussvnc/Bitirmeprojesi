@@ -517,3 +517,11 @@ Hentzer canlı ID 707 `Hasan Usta Kebap` kaydı `Koşuyolu, Dr. Eyüp Aksoy Cd. 
 Yemeksepeti `https://www.yemeksepeti.com/restaurant/nd2j/hasan-usta-kebap-nd2j` public vendor menüsü 24 Ağustos 2026 erişiminde 18 ürün kategorisinde fiyatlı gerçek ürünleri gösterdi. Sayfada açık yayın tarihi bulunmadığı için `verifiedAt: 2026-08-24` erişim/doğrulama tarihi olarak kullanıldı; fiyatlar kaynakta görülen TL rakamlarıyla tutuldu. Popüler carousel tekrarları ana kategorilerden çıkarıldı. `Poşet` 1 TL satırı servis/ambalaj kalemi olduğu için eklenmedi.
 
 Yemeksepeti sayfasında exact vendor adresi görünür değildi; exact şube bağı resmi site ve MyRezzta’nın aynı işletme, adres ve telefon kanıtıyla kuruldu. Başka Hasan Usta şubelerinden fiyat aktarılmadı.
+
+### Çanak Kebap & Katmer ID 721 Yemeksepeti menüsü (24 Ağustos 2026)
+
+Hentzer canlı ID 721 `Çanak Kebap ve Katmer` kaydı `Acıbadem, Acıbadem Cd. No:115, 36660 Kadıköy/İstanbul`, koordinat `41.0054712, 29.0455516`, Google place ID `0x14cab8078f573921:0x58435dd1a710ccf2` ve 3.635 değerlendirme ile exact işletmedir. Resmi `@canakkebap` kaydı Acıbadem sipariş telefonu `0 (216) 339 08 05` bilgisini veriyor; resmi site `canakkebap.com.tr` olarak listeleniyor.
+
+Yemeksepeti `https://www.yemeksepeti.com/restaurant/a2um/canak-kebap-and-katmer-a2um` sayfası başlıkta `Istanbul Acıbadem Cd.` konumunu ve `Çanak Kebap & Katmer` vendor kaydını gösteriyor. Browser Markdown’ında 12 menü kategorisinde 95 fiyatlı gerçek ürün bulundu. Görünür yayın tarihi yok; `verifiedAt: 2026-08-24` erişim/doğrulama tarihi olarak tutuldu.
+
+Popüler carousel tekrarları, teknik `0` satırları ve `Poşet` 1 TL ambalaj kalemi eklenmedi. Fiyatlar Yemeksepeti kaynağında görülen TL rakamlarıyla korundu; başka Çanak şubesinden fiyat aktarılmadı.

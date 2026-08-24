@@ -4,6 +4,489 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "721": {
+    "name": "Çanak Kebap & Katmer",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/a2um/canak-kebap-and-katmer-a2um",
+    "sourceName": "Yemeksepeti Acıbadem Cd. canlı menüsü; resmi @canakkebap Acıbadem telefonu ve Hentzer ID 721 exact adresiyle eşleştirildi",
+    "verifiedAt": "2026-08-24",
+    "items": [
+      {
+        "name": "Mercimek Çorbası",
+        "price": "240",
+        "category": "Çorbalar"
+      },
+      {
+        "name": "Yuvalama Çorbası",
+        "price": "470",
+        "category": "Çorbalar"
+      },
+      {
+        "name": "Isırgan Çorbası",
+        "price": "415",
+        "category": "Çorbalar"
+      },
+      {
+        "name": "Alaca Çorbası",
+        "price": "430",
+        "category": "Çorbalar"
+      },
+      {
+        "name": "Şiveydiz Çorbası",
+        "price": "500",
+        "category": "Çorbalar"
+      },
+      {
+        "name": "Kızartma İçli Köfte (Adet)",
+        "price": "190",
+        "category": "Ara Sıcaklar"
+      },
+      {
+        "name": "Fosforlu",
+        "price": "750",
+        "category": "Ara Sıcaklar"
+      },
+      {
+        "name": "Kuzu Tandır",
+        "price": "1.150",
+        "category": "Ara Sıcaklar"
+      },
+      {
+        "name": "Firik Pilavı",
+        "price": "450",
+        "category": "Ara Sıcaklar"
+      },
+      {
+        "name": "Patates Kızartması",
+        "price": "350",
+        "category": "Ara Sıcaklar"
+      },
+      {
+        "name": "Çiğ Köfte (10 Sıkım)",
+        "price": "480",
+        "category": "Ara Sıcaklar"
+      },
+      {
+        "name": "Domatesli Kebap",
+        "price": "980",
+        "category": "Kebaplar"
+      },
+      {
+        "name": "Çanak Kıyma Kebabı (Acılı)",
+        "price": "900",
+        "category": "Kebaplar"
+      },
+      {
+        "name": "Çanak Kıyma Kebabı (Acısız)",
+        "price": "900",
+        "category": "Kebaplar"
+      },
+      {
+        "name": "Yoğurtlu Kebap",
+        "price": "950",
+        "category": "Kebaplar"
+      },
+      {
+        "name": "Patlıcanlı Kebap",
+        "price": "1.300",
+        "category": "Kebaplar"
+      },
+      {
+        "name": "Karışık Kebap",
+        "price": "2.000",
+        "category": "Kebaplar"
+      },
+      {
+        "name": "Kuzu Şiş",
+        "price": "1.100",
+        "category": "Izgaralar"
+      },
+      {
+        "name": "Terbiyeli Şiş (Acılı)",
+        "price": "1.100",
+        "category": "Izgaralar"
+      },
+      {
+        "name": "Tavuk Şiş",
+        "price": "720",
+        "category": "Izgaralar"
+      },
+      {
+        "name": "Kuzu Pirzola",
+        "price": "1.200",
+        "category": "Izgaralar"
+      },
+      {
+        "name": "Kaburga",
+        "price": "1.200",
+        "category": "Izgaralar"
+      },
+      {
+        "name": "Çöp Şiş",
+        "price": "1.100",
+        "category": "Izgaralar"
+      },
+      {
+        "name": "Kanat Izgara",
+        "price": "720",
+        "category": "Izgaralar"
+      },
+      {
+        "name": "Izgara Köfte",
+        "price": "780",
+        "category": "Izgaralar"
+      },
+      {
+        "name": "Beyti Kebap (Sarımsaklı)",
+        "price": "1.200",
+        "category": "Spesiyaller"
+      },
+      {
+        "name": "Sarma Beyti Kebap",
+        "price": "1.200",
+        "category": "Spesiyaller"
+      },
+      {
+        "name": "Alinazik Kebap (Kebaptan)",
+        "price": "950",
+        "category": "Spesiyaller"
+      },
+      {
+        "name": "Alinazik Kebap (Şişten)",
+        "price": "1.150",
+        "category": "Spesiyaller"
+      },
+      {
+        "name": "Ezmeli Kebap (Kebaptan)",
+        "price": "950",
+        "category": "Spesiyaller"
+      },
+      {
+        "name": "Halep İşi Kebap",
+        "price": "950",
+        "category": "Spesiyaller"
+      },
+      {
+        "name": "Abugannuş (Kebaptan)",
+        "price": "950",
+        "category": "Spesiyaller"
+      },
+      {
+        "name": "Abugannuş (Şişten)",
+        "price": "1.150",
+        "category": "Spesiyaller"
+      },
+      {
+        "name": "Oruk Kebabı",
+        "price": "980",
+        "category": "Spesiyaller"
+      },
+      {
+        "name": "Fıstıklı Kebap",
+        "price": "1.050",
+        "category": "Spesiyaller"
+      },
+      {
+        "name": "Küşleme",
+        "price": "1.200",
+        "category": "Spesiyaller"
+      },
+      {
+        "name": "Çanak Kebap",
+        "price": "1.250",
+        "category": "Spesiyaller"
+      },
+      {
+        "name": "Ezmeli Kebap (Şişten)",
+        "price": "1.150",
+        "category": "Spesiyaller"
+      },
+      {
+        "name": "Soğan Kebabı",
+        "price": "900",
+        "category": "Spesiyaller"
+      },
+      {
+        "name": "Acılı Dürüm",
+        "price": "900",
+        "category": "Dürümler"
+      },
+      {
+        "name": "Tavuk Şiş Dürüm",
+        "price": "720",
+        "category": "Dürümler"
+      },
+      {
+        "name": "Kuzu Şiş Dürüm",
+        "price": "1.100",
+        "category": "Dürümler"
+      },
+      {
+        "name": "Çöp Şiş Dürüm",
+        "price": "1.100",
+        "category": "Dürümler"
+      },
+      {
+        "name": "Beyti Dürüm",
+        "price": "1.200",
+        "category": "Dürümler"
+      },
+      {
+        "name": "Lahmacun",
+        "price": "240",
+        "category": "Fırın Ürünleri"
+      },
+      {
+        "name": "Fındık Lahmacun",
+        "price": "150",
+        "category": "Fırın Ürünleri"
+      },
+      {
+        "name": "Semsek (Kapalı)",
+        "price": "220",
+        "category": "Fırın Ürünleri"
+      },
+      {
+        "name": "Kaşarlı Pide",
+        "price": "730",
+        "category": "Fırın Ürünleri"
+      },
+      {
+        "name": "Kuşbaşılı Pide",
+        "price": "760",
+        "category": "Fırın Ürünleri"
+      },
+      {
+        "name": "Kuşbaşılı Kaşarlı Pide",
+        "price": "760",
+        "category": "Fırın Ürünleri"
+      },
+      {
+        "name": "Karışık Pide",
+        "price": "760",
+        "category": "Fırın Ürünleri"
+      },
+      {
+        "name": "Süzme Yoğurt",
+        "price": "350",
+        "category": "Zeytinyağlılar & Mezeler"
+      },
+      {
+        "name": "Haydari",
+        "price": "350",
+        "category": "Zeytinyağlılar & Mezeler"
+      },
+      {
+        "name": "Yoğurtlu Dövme Buğday",
+        "price": "350",
+        "category": "Zeytinyağlılar & Mezeler"
+      },
+      {
+        "name": "Yoğurtlu Semizotu",
+        "price": "350",
+        "category": "Zeytinyağlılar & Mezeler"
+      },
+      {
+        "name": "Panço",
+        "price": "350",
+        "category": "Zeytinyağlılar & Mezeler"
+      },
+      {
+        "name": "Humus",
+        "price": "350",
+        "category": "Zeytinyağlılar & Mezeler"
+      },
+      {
+        "name": "Enginar",
+        "price": "350",
+        "category": "Zeytinyağlılar & Mezeler"
+      },
+      {
+        "name": "Halep Köfte",
+        "price": "350",
+        "category": "Zeytinyağlılar & Mezeler"
+      },
+      {
+        "name": "Fava",
+        "price": "350",
+        "category": "Zeytinyağlılar & Mezeler"
+      },
+      {
+        "name": "Patlıcan Ezmesi",
+        "price": "350",
+        "category": "Zeytinyağlılar & Mezeler"
+      },
+      {
+        "name": "Kuru Cacık",
+        "price": "350",
+        "category": "Zeytinyağlılar & Mezeler"
+      },
+      {
+        "name": "Muamara",
+        "price": "350",
+        "category": "Zeytinyağlılar & Mezeler"
+      },
+      {
+        "name": "Patlıcan Soslu",
+        "price": "350",
+        "category": "Zeytinyağlılar & Mezeler"
+      },
+      {
+        "name": "Zeytinyağlı Yaprak Sarma (5 Adet)",
+        "price": "350",
+        "category": "Zeytinyağlılar & Mezeler"
+      },
+      {
+        "name": "Karışık Turşu",
+        "price": "350",
+        "category": "Zeytinyağlılar & Mezeler"
+      },
+      {
+        "name": "Yoğurtlu Patlıcan",
+        "price": "350",
+        "category": "Zeytinyağlılar & Mezeler"
+      },
+      {
+        "name": "Zeytinyağlı Taze Fasulye",
+        "price": "350",
+        "category": "Zeytinyağlılar & Mezeler"
+      },
+      {
+        "name": "Ezme Salata",
+        "price": "350",
+        "category": "Salatalar"
+      },
+      {
+        "name": "Çoban Salata",
+        "price": "450",
+        "category": "Salatalar"
+      },
+      {
+        "name": "Mevsim Salata",
+        "price": "450",
+        "category": "Salatalar"
+      },
+      {
+        "name": "Patlıcan Salata",
+        "price": "350",
+        "category": "Salatalar"
+      },
+      {
+        "name": "Gavurdağı Salatası",
+        "price": "450",
+        "category": "Salatalar"
+      },
+      {
+        "name": "Zahter Salatası",
+        "price": "350",
+        "category": "Salatalar"
+      },
+      {
+        "name": "Cevizli Baklava",
+        "price": "380",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Hatay Kireç Kabağı Tatlısı",
+        "price": "380",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Ceviz Tatlısı (Adet)",
+        "price": "80",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Fırın Sütlaç",
+        "price": "300",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Fıstıklı Kadayıf",
+        "price": "380",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Katmer",
+        "price": "800",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Künefe",
+        "price": "400",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Şöbiyet",
+        "price": "450",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Coca-Cola Zero Sugar (33 cl.)",
+        "price": "130",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Coca-Cola (33 cl.)",
+        "price": "130",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Coca-Cola Light (33 cl.)",
+        "price": "130",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Coca-Cola Şekersiz (33 cl.)",
+        "price": "130",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Fanta (33 cl.)",
+        "price": "130",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Sprite (33 cl.)",
+        "price": "130",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Cappy (33 cl.)",
+        "price": "130",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Ayran (30 cl.)",
+        "price": "120",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Şalgam Suyu (20 cl.)",
+        "price": "130",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Soda (20 cl.)",
+        "price": "90",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Su (1,5 L.)",
+        "price": "100",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Zeytinyağlı & Meze (500 gr.)",
+        "price": "550",
+        "category": "Kiloluk Mezeler"
+      },
+      {
+        "name": "Zeytinyağlı & Meze (1 kg.)",
+        "price": "1.100",
+        "category": "Kiloluk Mezeler"
+      }
+    ]
+  },
   "707": {
     "name": "Hasan Usta Kebap",
     "sourceUrl": "https://www.yemeksepeti.com/restaurant/nd2j/hasan-usta-kebap-nd2j",
