@@ -45306,4 +45306,606 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       }
     ]
   },
+  "7277": {
+    "name": "Isokyo",
+    "sourceUrl": "https://www.raffles.com/tr/istanbul/dining/isokyo/#menus",
+    "sourceName": "Raffles Istanbul resmi Isokyo menü widgetı; exact Zorlu Center 34340 İstanbul ve +90 212 924 0200 kaydıyla Hentzer ID 7277 eşleştirildi. Yemek ve Tatlılar menüsü 15.05.2026, Öğle Yemeği menüsü 08.01.2026 itibarıyla geçerlidir; 01.03.2025 tarihli İçecek, Şarap Seçkisi ve Kokteyl bölümleri bir yıldan eski olduğu için dahil edilmedi",
+    "verifiedAt": "2026-08-24",
+    "items": [
+      {
+        "name": "Edamame",
+        "price": "550",
+        "desc": "Lapsang souchong çayı, deniz tuzu (132 kcal)",
+        "category": "Atıştırmalıklar"
+      },
+      {
+        "name": "Padrón Biberleri",
+        "price": "1600",
+        "desc": "Tempura Padrón biberleri, acı sarımsaklı krema (831 kcal)",
+        "category": "Atıştırmalıklar"
+      },
+      {
+        "name": "Istakoz Hot Dog",
+        "price": "1950",
+        "desc": "Ev yapımı ıstakoz sosisi, matcha çaylı ekmek, çedar peyniri, wakame sosu (1166 kcal)",
+        "category": "Atıştırmalıklar"
+      },
+      {
+        "name": "Bao Bun Slider",
+        "price": "1050",
+        "desc": "Dana kaburga, Asya lahana salatası, karabiber sosu (1023 kcal)",
+        "category": "Atıştırmalıklar"
+      },
+      {
+        "name": "Kıtır Bebek Kalamar",
+        "price": "1450",
+        "desc": "Kızarmış bebek kalamar, taze soğan, kişniş, acı biber, gochujang sos (356 kcal)",
+        "category": "Atıştırmalıklar"
+      },
+      {
+        "name": "Ton Balığı Tartar Çıtır Sandviç",
+        "price": "1150",
+        "desc": "Ton balığı tartarlı çıtır sandviçler, avokado, tobiko (576 kcal)",
+        "category": "Atıştırmalıklar"
+      },
+      {
+        "name": "Kore Usulü Kızarmış Tavuk",
+        "price": "850",
+        "desc": "Fermente biber mayonez (1634 kcal)",
+        "category": "Atıştırmalıklar"
+      },
+      {
+        "name": "Ördek Lokmaları",
+        "price": "1300",
+        "desc": "Kıtır ördek parçaları (2260 kcal)",
+        "category": "Atıştırmalıklar"
+      },
+      {
+        "name": "Ördek Tako",
+        "price": "1050",
+        "desc": "Fırınlanmış ördek, kaz ciğeri, hoisin sos (622 kcal)",
+        "category": "Atıştırmalıklar"
+      },
+      {
+        "name": "Dana Tako",
+        "price": "1050",
+        "desc": "Dana kaburga, susamlı soya sosu, taze soğan (899 kcal)",
+        "category": "Atıştırmalıklar"
+      },
+      {
+        "name": "Kemik İliği ve Dana Tartar",
+        "price": "2250",
+        "desc": "Asya usulü dana tartar, ızgara kemik iliği, kıtır brioche ekmeği (979 kcal)",
+        "category": "Başlangıçlar"
+      },
+      {
+        "name": "Dinamit Karides",
+        "price": "1450",
+        "desc": "Kızarmış karides, shichimi togarashi, dinamit sos (942 kcal)",
+        "category": "Başlangıçlar"
+      },
+      {
+        "name": "Tavada Miso Deniz Tarağı",
+        "price": "1150",
+        "desc": "Siyah mantar, miso kreması (454 kcal)",
+        "category": "Başlangıçlar"
+      },
+      {
+        "name": "Izgara Miso Patlıcan",
+        "price": "1050",
+        "desc": "Tempura patlıcan, karamelize miso, fermente sarımsak kreması (1093 kcal)",
+        "category": "Başlangıçlar"
+      },
+      {
+        "name": "Istakoz ve Kara Morinalı Mantı",
+        "price": "1950",
+        "desc": "Siyah havyar, turşulanmış zencefil suyu, soya sosu (244 kcal)",
+        "category": "Başlangıçlar"
+      },
+      {
+        "name": "Dana Etli Mantı",
+        "price": "1450",
+        "desc": "Kıtır soğan, taze soğan (240 kcal)",
+        "category": "Başlangıçlar"
+      },
+      {
+        "name": "Karidesli Gyoza",
+        "price": "1350",
+        "desc": "Jumbo karides, şitaki mantarı (319 kcal)",
+        "category": "Başlangıçlar"
+      },
+      {
+        "name": "İsokyo Ördek Salatası",
+        "price": "1450",
+        "desc": "Kıtır ördek, hindiba, kale, konfi pancar, susam sosu (1366 kcal)",
+        "category": "Başlangıçlar"
+      },
+      {
+        "name": "Kurutulmuş Somon Salatası",
+        "price": "1550",
+        "desc": "Ispanak, hindiba, kuşkonmaz, bebek turp, wasabi-hurma sosu (532 kcal)",
+        "category": "Başlangıçlar"
+      },
+      {
+        "name": "Tatlı Mısır Çorbası",
+        "price": "650",
+        "desc": "Limon otu, kıtır wonton, yeşil elma köpüğü (538 kcal)",
+        "category": "Başlangıçlar"
+      },
+      {
+        "name": "Unagi",
+        "price": "470",
+        "desc": "Yılan balığı (163 kcal)",
+        "category": "Sashimi & Nigiri"
+      },
+      {
+        "name": "Shake",
+        "price": "420",
+        "desc": "Somon (119 kcal)",
+        "category": "Sashimi & Nigiri"
+      },
+      {
+        "name": "Suzuki",
+        "price": "420",
+        "desc": "Levrek (90 kcal)",
+        "category": "Sashimi & Nigiri"
+      },
+      {
+        "name": "Maguro",
+        "price": "450",
+        "desc": "Ton balığı (101 kcal)",
+        "category": "Sashimi & Nigiri"
+      },
+      {
+        "name": "Toro",
+        "price": "470",
+        "desc": "Ton balığı karın bölgesi (116kcal)",
+        "category": "Sashimi & Nigiri"
+      },
+      {
+        "name": "Yılan Balığı",
+        "price": "1350",
+        "desc": "Teriyaki sos, susam (381 kcal)",
+        "category": "Oshi"
+      },
+      {
+        "name": "Karides",
+        "price": "1400",
+        "desc": "Avokado, dinamit sos (639 kcal)",
+        "category": "Oshi"
+      },
+      {
+        "name": "Somon",
+        "price": "1400",
+        "desc": "Yuzu mayonez (1055 kcal)",
+        "category": "Oshi"
+      },
+      {
+        "name": "Ton Balığı",
+        "price": "1450",
+        "desc": "Avokado, taze soğan, susam",
+        "category": "Oshi"
+      },
+      {
+        "name": "Ton Balığı",
+        "price": "1250",
+        "desc": "(329 kcal)",
+        "category": "Maki"
+      },
+      {
+        "name": "Somon",
+        "price": "1150",
+        "desc": "(402 kcal)",
+        "category": "Maki"
+      },
+      {
+        "name": "Salatalık",
+        "price": "950",
+        "desc": "(178 kcal)",
+        "category": "Maki"
+      },
+      {
+        "name": "Avokado",
+        "price": "1050",
+        "desc": "(245 kcal)",
+        "category": "Maki"
+      },
+      {
+        "name": "California",
+        "price": "1400",
+        "desc": "Avokado, salatalık, surimi, tobiko, krem peynir (455 kcal)",
+        "category": "Geleneksel Roll’ler"
+      },
+      {
+        "name": "Dragon",
+        "price": "1750",
+        "desc": "Avokado, salatalık, yılan balığı, tempura karides, unagi sos, kavrulmuş susam (616 kcal)",
+        "category": "Geleneksel Roll’ler"
+      },
+      {
+        "name": "Acılı Ton Balığı",
+        "price": "1750",
+        "desc": "Avokado, salatalık, ton balığı, susam, acılı tomamiso sos (487 kcal)",
+        "category": "Geleneksel Roll’ler"
+      },
+      {
+        "name": "Philadelphia",
+        "price": "1500",
+        "desc": "Somon, avokado, salatalık, krem peynir (924 kcal)",
+        "category": "Geleneksel Roll’ler"
+      },
+      {
+        "name": "İsokyo",
+        "price": "2200",
+        "desc": "Avokado, tempura karides, somon, susam, acılı mayonez, wakame (962 kcal)",
+        "category": "Şefin İmza Roll’leri"
+      },
+      {
+        "name": "Kral Yengeç",
+        "price": "2650",
+        "desc": "Avokado, salatalık, krem peynir, kızarmış panko, dinamit sos, frenk soğanı (918 kcal)",
+        "category": "Şefin İmza Roll’leri"
+      },
+      {
+        "name": "Butterfly",
+        "price": "1850",
+        "desc": "Avokado, salatalık, krem peynir, tempura karides, yengeç, tobiko, trüf püresi (814 kcal)",
+        "category": "Şefin İmza Roll’leri"
+      },
+      {
+        "name": "Rainbow",
+        "price": "1850",
+        "desc": "Somon, ton balığı, levrek, çubuk yengeç, avokado, salatalık, somon ikura (391 kcal)",
+        "category": "Şefin İmza Roll’leri"
+      },
+      {
+        "name": "Tegata",
+        "price": "1850",
+        "desc": "İstiridye mantarı, avokado, tempura levrek, beyaz lahana, trüf mantarı (714 kcal)",
+        "category": "Şefin İmza Roll’leri"
+      },
+      {
+        "name": "Unagi",
+        "price": "1750",
+        "desc": "Avokado, salatalık, yamagobo havuç, yılan balığı, çıtır patates, füme yılan balığı sosu",
+        "category": "Şefin İmza Roll’leri"
+      },
+      {
+        "name": "Somon Tartar",
+        "price": "1850",
+        "desc": "Avokado, Philadelphia peyniri, somon tartar, kıtır pancar (795 kcal)",
+        "category": "Şefin İmza Roll’leri"
+      },
+      {
+        "name": "İstanbul",
+        "price": "1750",
+        "desc": "Teriyaki somon, tempura karides, avokado, krem peynir, susam (578 kcal)",
+        "category": "Şefin İmza Roll’leri"
+      },
+      {
+        "name": "Kagura",
+        "price": "2000",
+        "desc": "Somon, kıtır karides, avokado, kuşkonmaz, susam (999 kcal)",
+        "category": "Şefin İmza Roll’leri"
+      },
+      {
+        "name": "Dinamit Karides",
+        "price": "1850",
+        "desc": "Tempura karides, avokado, susam, taze soğan, dinamit sos (762 kcal)",
+        "category": "Şefin İmza Roll’leri"
+      },
+      {
+        "name": "Acılı Vejetaryen",
+        "price": "1200",
+        "desc": "İstiridye mantarı, kuşkonmaz, tofu, salatalık, domates turşusu, tenkasu (493 kcal)",
+        "category": "Şefin İmza Roll’leri"
+      },
+      {
+        "name": "Wok’ta Kızartılmış Kanada Istakozu",
+        "price": "3950",
+        "desc": "Siyah biber sosu, zencefil, taze soğan (308 kcal)",
+        "category": "Ana Yemekler"
+      },
+      {
+        "name": "Sous-vide Siyah Morina Balığı",
+        "price": "3500",
+        "desc": "Siyah Malabar sosu (403 kcal)",
+        "category": "Ana Yemekler"
+      },
+      {
+        "name": "Soya ile Glaze Edilmiş Dana Bonfile",
+        "price": "2900",
+        "desc": "Miso ile fırınlanmış bebek patates, mantar, edamame  (929 kcal)",
+        "category": "Ana Yemekler"
+      },
+      {
+        "name": "Ananaslı Jumbo Karides",
+        "price": "2950",
+        "desc": "Karabiber ile glaze edilmiş ızgara karides, kurutulmuş ananas",
+        "category": "Ana Yemekler"
+      },
+      {
+        "name": "Kıtır Yabani Levrek",
+        "price": "2250",
+        "desc": "Brokolini, pak choi, Sichuan sosu (365 kcal)",
+        "category": "Ana Yemekler"
+      },
+      {
+        "name": "Tiftiklenmiş Dana Kaburga",
+        "price": "2050",
+        "desc": "Bulgogi sosu, kıtır kinoa, kuşkonmaz (997 kcal)",
+        "category": "Ana Yemekler"
+      },
+      {
+        "name": "Kuzu Yakitori",
+        "price": "2250",
+        "desc": "Buharda pişmiş pilav veya kızarmış pilav ile (841 kcal)",
+        "category": "Ana Yemekler"
+      },
+      {
+        "name": "Tavuk Yakitori",
+        "price": "1550",
+        "desc": "Buharda pişmiş pilav veya kızarmış pilav ile (666)",
+        "category": "Ana Yemekler"
+      },
+      {
+        "name": "Organik Tavuk",
+        "price": "1850",
+        "desc": "Kore barbekü sosu, edamame, pak choi (1310 kcal)",
+        "category": "Ana Yemekler"
+      },
+      {
+        "name": "Tavuk ve Pilav",
+        "price": "1850",
+        "desc": "Zencefil-hindistan cevizi soslu tavuk, zencefil ve pırasalı kızarmış pilav (1364 kcal)",
+        "category": "Ana Yemekler"
+      },
+      {
+        "name": "Brokolini",
+        "price": "1050",
+        "desc": "Sote brokolini, kaju sosu, kıtır kinoa (1078 kcal)",
+        "category": "Ana Yemekler"
+      },
+      {
+        "name": "Wok’ta Kızartılmış Sebzeler",
+        "price": "1050",
+        "desc": "Tofu ile (246 kcal)",
+        "category": "Ana Yemekler"
+      },
+      {
+        "name": "Zencefil ve Pırasalı Kızarmış Pilav",
+        "price": "750",
+        "desc": "(670 kcal)",
+        "category": "Ana Yemekler"
+      },
+      {
+        "name": "Sushi Pirinci",
+        "price": "550",
+        "desc": "(638 kcal)",
+        "category": "Ana Yemekler"
+      },
+      {
+        "name": "Buharda Pişmiş Yasemin Pirinci",
+        "price": "550",
+        "desc": "(645 kcal)",
+        "category": "Ana Yemekler"
+      },
+      {
+        "name": "Matcha Rulo",
+        "price": "900",
+        "desc": "Matcha pandispanya, Antep fıstıklı krokan, matcha ve hindistan cevizli bavyera kreması, vanilya sos (804 kcal)",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "İstanbul to Tokyo",
+        "price": "850",
+        "desc": "Baklava hamuru, kaymak, lor peyniri, Antep fıstığı, bal, matcha tozu (178 kcal)",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Hindistan Cevizi Rüyası",
+        "price": "850",
+        "desc": "Hindistan cevizi sorbe, mango ve çarkıfelek meyveli komposto, dakuaz, lime (343 kcal)",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Kumkuat Crème Brûlée",
+        "price": "750",
+        "desc": "Baklava hamuruna sarılmış badem çubuğu (953 kcal)",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Tatlı Mini Burgerler",
+        "price": "750",
+        "desc": "Bao bun, vanilyalı dondurma, karamel sos (872 kcal)",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Mochi Meyve Tabağı",
+        "price": "1500",
+        "desc": "Hindistan cevizi, çikolata ve mango mochiler, mevsim meyveleri (642 kcal)",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Sorbe",
+        "price": "400",
+        "desc": "Liçi, mango, limon-adaçayı, çarkıfelek meyvesi, hindistan cevizi (72 kcal)",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Mercimek Çorbası",
+        "price": "600",
+        "desc": "Kruton ve limon ile servis edilir (1012 kcal)",
+        "category": "Çorbalar"
+      },
+      {
+        "name": "Domates Çorbası",
+        "price": "600",
+        "desc": "Taze fesleğenli kremsi domates çorbası (945 kcal)",
+        "category": "Çorbalar"
+      },
+      {
+        "name": "Ahtapot Karpaçyo",
+        "price": "1.650",
+        "desc": "Kuru domatesli chermoula sos, roka, çam fıstığı, çıtır mürekkep ekmek, sarımsaklı aioli, kiraz domates (1082 kcal)",
+        "category": "Atıştırmalıklar"
+      },
+      {
+        "name": "Çıtır Kabak",
+        "price": "850",
+        "desc": "Fırınlanmış domates sos, dereotlu krema (900 kcal)",
+        "category": "Atıştırmalıklar"
+      },
+      {
+        "name": "Karides Mantı",
+        "price": "1.350",
+        "desc": "Yoğurt ve acılı domates sos (1206 kcal)",
+        "category": "Atıştırmalıklar"
+      },
+      {
+        "name": "Yaz Mücveri",
+        "price": "950",
+        "desc": "kabak mücver, tütsülenmiş yoğurt, zeytinyağlı ıspanak, salsa sos (872 kcal)",
+        "category": "Atıştırmalıklar"
+      },
+      {
+        "name": "Roka Avokado Salatası",
+        "price": "1.150",
+        "desc": "Roka, avokado, kuru domates, ceviz, kiraz domates, yeşil zeytin, balsamik sirke sos(1024 kcal)",
+        "category": "Salatalar"
+      },
+      {
+        "name": "Taze Burrata Salatası",
+        "price": "1.450",
+        "desc": "Karışık köy domatesleri, ezilmiş acokado, roka, fesleğen, balsamik glaze, çıtır panini ekmeği (1160 kcal)",
+        "category": "Salatalar"
+      },
+      {
+        "name": "Yunan Salatası",
+        "price": "950",
+        "desc": "Kiraz domates, kırmızı soğan, biber, salatalık, feta peyniri, semizotu, çıtır ekşi mayalı ekmek, kızarmış kapari (612 kcal)",
+        "category": "Salatalar"
+      },
+      {
+        "name": "Süper Besin Salatası",
+        "price": "1.250",
+        "desc": "Izgara somon, fırınlanmış balkabağı, ıspanak, avokado, esmer pirinç, ayçiçeği ve keten tohumu, zeytin, lime-yoğurt sos (977 kcal)",
+        "category": "Salatalar"
+      },
+      {
+        "name": "Margarita Pizza",
+        "price": "1.200",
+        "desc": "Mozzarella, parmesan peyniri, fesleğen ve kiraz domates (1943 kcal)",
+        "category": "Makarna ve Pizzalar"
+      },
+      {
+        "name": "Dana Etli Pizza",
+        "price": "1.450",
+        "desc": "Dana kavurma, domates sos, zozzarella, jalapeno biber, kiraz domates (2089 kcal)",
+        "category": "Makarna ve Pizzalar"
+      },
+      {
+        "name": "Karidesli Tagliatelle",
+        "price": "1.650",
+        "desc": "Sotelenmiş karides, kiraz domates, acı biber, maydanoz (992 kcal)",
+        "category": "Makarna ve Pizzalar"
+      },
+      {
+        "name": "El Yapımı Dana Etli Maltagliati",
+        "price": "1.450",
+        "desc": "Dana yahni, domates, maydanoz, parmesan peyniri (1406 kcal)",
+        "category": "Makarna ve Pizzalar"
+      },
+      {
+        "name": "Louisiana Ussulu Tavuklu Farfalle",
+        "price": "1450",
+        "desc": "Panelenmiş tavuk göğsü, kremalı Cajun-parmesan soslu farfelle (1881 kcal)",
+        "category": "Makarna ve Pizzalar"
+      },
+      {
+        "name": "Patlıcan ve Domates Soslu Kalamarata",
+        "price": "1.350",
+        "desc": "Domates sos, kızarmış patlıcan, stracciatella peyniri ve fesleğen (1511 kcal)",
+        "category": "Makarna ve Pizzalar"
+      },
+      {
+        "name": "Mushroom Risotto",
+        "price": "1.300",
+        "desc": "Sotelenmiş yabani mantarlar, kuşkonmaz, ızgara istiridye mantarı, trüf yağı",
+        "category": "Makarna ve Pizzalar"
+      },
+      {
+        "name": "Dana Burger",
+        "price": "2.100",
+        "desc": "220 gr burger eti, sarımsaklı mayonez, karamelize mantar, çıtır soğan, dana bacon, çedar peyniri (1814 kcal)",
+        "category": "Ana Yemekler"
+      },
+      {
+        "name": "Izgara Somon",
+        "price": "2.120",
+        "desc": "Ekşi kremalı salatalık ve kabak salatası, dereotu ve file badem ile (852 kcal)",
+        "category": "Ana Yemekler"
+      },
+      {
+        "name": "Izgara Dana Bonfile",
+        "price": "2.950",
+        "desc": "Mantarlı çıtır patates püresi, dana sos (930 kcal)",
+        "category": "Ana Yemekler"
+      },
+      {
+        "name": "Tavuk Şiş",
+        "price": "1.450",
+        "desc": "Yoğurt marineli tavuk but, bulgur pilavı, domates biber, lavaş ekmeği ile (1196 kcal)",
+        "category": "Ana Yemekler"
+      },
+      {
+        "name": "Yabani Deniz Levreği",
+        "price": "2.200",
+        "desc": "Konfi enginar, siyah zeytin, kapari, domates, patates, kuşkonmaz, kremalı balık sos (1075 kcal)",
+        "category": "Ana Yemekler"
+      },
+      {
+        "name": "Izgara Karides",
+        "price": "2.650",
+        "desc": "Çanakkale domates ezmesi, konfi arpacık soğan (913,34 kcal)",
+        "category": "Ana Yemekler"
+      },
+      {
+        "name": "İstanbul Usulü Köfte Ekmek",
+        "price": "1.450",
+        "desc": "ızgara köfte, domates, biber, közlenmiş soğan, pul biber, acuka aioli sos (1297 kcal)",
+        "category": "Ana Yemekler"
+      },
+      {
+        "name": "İtalyan Tiramisu",
+        "price": "1.050",
+        "desc": "Maskarpon kreması, kahveli kek, bisküvi (855,62 kcal)",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Çikolatalı Tart",
+        "price": "1050",
+        "desc": "Çikolatalı sable hamuru, fındık ezmesi, çikolatalı mus, vanilyalı dondurma (1280 kcal)",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Egzotik Pavlova",
+        "price": "1100",
+        "desc": "Mango-tutku meyvesi dolgulu beze, limon sorbe (605,8 kcal)",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Mevsimsel Meyve Tabağı",
+        "price": "995",
+        "desc": "Dilimlenmiş taze mevsim meyveleri (667,86 kcal)",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Dondurma Seçenekleri (3 Top)",
+        "price": "900",
+        "desc": "Çikolata, çilek, antep fıstığı, vanilya, ahududu, mango, limon (249 kcal)",
+        "category": "Tatlılar"
+      }
+    ]
+  },
 };
