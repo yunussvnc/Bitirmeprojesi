@@ -46554,4 +46554,21 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       {name: "Eker Tavukgöğsü (100 gr.)", price: "48 TL", category: "Tatlılar", desc: "Paket"},
     ],
   },
+  "7160": {
+    name: "Krispii Coffee",
+    sourceUrl: "https://www.yemeksepeti.com/en/restaurant/cqfv/krispii-waffle-cqfv",
+    sourceName: "Yemeksepeti — Krispii Waffle Beşiktaş",
+    verifiedAt: "2026-08-24",
+    items: [
+      {name: "Klasik Cup Waffle", price: "350 TL", category: "Bowl Waffles", desc: "Waffle parçaları, çikolata sos, çilek, muz"},
+      {name: "Atom Waffle", price: "360 TL", category: "Bowl Waffles", desc: "Özel waffle hamuru üzerine; sütlü çikolata, beyaz çikolata, Antep fıstıklı çikolata, muz, çilek, fındık kırığı, Antep fıstığı tozu, Hindistan cevizi, çakıl taşı, bonibon"},
+      {name: "Atomix Waffle", price: "300 TL", category: "Bowl Waffles", desc: "Waffle hamuru üzerine; sütlü çikolata, muz, çilek"},
+      {name: "Classic Waffle", price: "300 TL", category: "Bowl Waffles", desc: "Özel waffle hamuru üzerine; sütlü çikolata, çilek, muz, fındık kırığı, toz fıstık, Oreo parçaları, çakıl taşı"},
+      {name: "Crazy Waffle", price: "350 TL", category: "Bowl Waffles", desc: "Özel waffle hamuru üzerine; sütlü çikolata, beyaz çikolata, frambuazlı çikolata, Antep fıstığı çikolata, muz, çilek, fındık kırığı, Antep fıstık tozu, Oreo parçaları, çakıl taşı, bonibon"},
+      {name: "Karamelli Waffle", price: "335 TL", category: "Bowl Waffles", desc: "Özel waffle hamuru, sütlü çikolata, karamelli çikolata, muz, çilek, fındık kırığı, Oreo parçacıkları, çakıl taşı, bonibon"},
+      {name: "Dubai Bowl Waffle", price: "385 TL", category: "Bowl Waffles", desc: "Özel waffle hamuru, sütlü çikolata, muz, çilek, üzerine sütlü çikolata, Antep fıstığı, kadayıf, Antep fıstığı tozu"},
+      {name: "Üç Çikolatalı Bowl Waffle", price: "350 TL", category: "Bowl Waffles", desc: "Özel waffle hamuru, sütlü çikolata, muz, çilek, bitter çikolata, beyaz çikolata, fındık kırığı, Oreo parçacıkları"},
+      {name: "Frambuaz Aşkı Bardak Waffle", price: "300 TL", category: "Bardak Waffles", desc: "Cup içerisine; dilimlenmiş özel waffle hamuru, sütlü çikolata, frambuazlı çikolata, muz, çilek, fındık kırığı, Oreo parçacıkları, Bonibon, çakıl taşı"},
+    ],
+  },
 };
