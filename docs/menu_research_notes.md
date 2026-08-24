@@ -592,3 +592,22 @@ Hentzer exact kayıt `Han120 Yeni Nesil Meyhane`, `Asmalı Mescit, İstiklal Cd.
 Resmi menüde 14 bölümden toplam **76 fiyatlı ürün** aktarıldı: Ana Yemekler 6, Tatlılar 6, Ara Sıcaklar 4, Mezeler 8, Meşrubatlar 7, Rakılar 9, Biralar 2, Shot 6, Votka 5, Cin 4, Şampanya 5, Viski 4, Şarap 6 ve Cocktails & Liquers 4. İngilizce çeviri satırları, `ÖNERİLEN` etiketleri ve açıklama/çeviri tekrarları ürün adına alınmadı. Kaynakta ürün menüsü için görünür yayın tarihi yoktur; sayfa footer’ındaki `Copyright 2025` menü tarihi kabul edilmedi, `verifiedAt` yalnızca 24 Ağustos 2026 erişim/doğrulama tarihidir.
 
 Kaynaklar: [Han120 resmi menü](http://www.han120.com/menu/), [Han120 resmi Instagram](https://www.instagram.com/han120.com.tr/).
+
+
+## Menü araştırma batch’i — Hacı Nadir Efendi Bayrampaşa (24 Ağustos 2026)
+
+Hentzer ID 7156 `Hacı Nadir Efendi`, `Muratpaşa, Eski Edirne Asf. No:9 D:A, 34400 Bayrampaşa/İstanbul` kaydıdır. Migros Yemek’in `Hacı Nadir Efendi, Bayrampaşa (Muratpaşa Mah.)` vendor sayfası [canlı menüde](https://www.migros.com.tr/yemek/haci-nadir-efendi-bayrampasa-muratpasa-mah-st-30101) 12 kategori ve **97 benzersiz fiyatlı ürün** gösterdi; sayfa ürün kartlarında fiyatları ve ürün görsellerini erişilebilir biçimde yayımlıyor. Migros restoran bilgi panelinde exact merkez adresi/telefonu göstermiyor; exact adres bağı [Restaurant Guru kaydında](https://restaurantguru.com/amp/Haci-Nadir-Efendi-Istanbul) aynı `Eski Edirne Asf. No:9 D:A` olarak görünüyor. Resmi marka sosyal sonuçlarında Bayrampaşa şubesi adına 2026-07-28 tarihli güncel ürün aktivitesi görüldü. Bu üçlü branch kimliği (Migros Bayrampaşa/Muratpaşa vendor, exact adres kaydı ve güncel resmi Bayrampaşa sosyal kimliği) ile menü aktarımı yapıldı; menü kaynağında görünür yayın tarihi yoktur, `verifiedAt` yalnızca erişim/doğrulama tarihidir.
+
+Migros browser menüsündeki kategori sayıları: `0 No'lu Pasta` 10, `Sütlü Tatlı` 5, `Kuru Pasta & Grisini` 15, `Petifür` 2, `Dondurma (1 Kg)` 16, `Ekler & Magnolia & Makaron` 4, `Pasta (Adet)` 9, `Fıstıklı Baklava (500 G)` 7, `Cevizli Baklava (500 G)` 4, `Cevizli Baklava (1 Kg)` 5, `Fıstıklı Baklava (1 Kg)` 8 ve `İçecekler` 12. Poşet, plastic bag, ambalaj, kuver veya servis kalemi bulunmadı; tüm 97 kalemde fiyat alanı dolu ve isim/fiyat/kategori üçlüsü benzersizdir.
+
+## MİS KAHVALTI — Hentzer ID 7139 hold
+
+Hentzer exact kayıt `MİS KAHVALTI`, `Kavacık, Kürşad Cd. 10/9, 34810 Beykoz/İstanbul`, telefon `+90 216 465 65 54`, Google place ID `ChIJ5UKCgzDKyhQRUbOjfo6gxJ0`. [Menu-TR kaydı](https://www.menu-tr.com/istanbul/beykoz/restoran/mis-kahvalti) aynı adres ve telefonu doğruluyor; ancak erişilebilir güncel ürün/fiyat menüsü bulunamadı. Restoranım ve Yandex exact metadata’sı da işletme kimliğini destekliyor, fakat fiyatlı menü kanıtı olmadan ID 7139’a aktarım yapılmadı.
+
+## Terra Pizza Metrohome — Hentzer ID 7136 red
+
+Hentzer exact kayıt `Terra Pizza - İstanbul (Metrohome Beylikdüzü)`, `Cumhuriyet Mh. Onur Sk. No:3J, 34520 Beylikdüzü/İstanbul`. [Terra Pizza resmi restoran listesi](https://www.terrapizza.com.tr/restoranlarimiz) bu exact adresi doğruluyor. Arama sonucundaki [YS `k82t` vendorı](https://www.yemeksepeti.com/en/restaurant/k82t/terra-pizza-k82t) erişilebilir, geniş ve fiyatlı menü gösterse de More info paneli vendor adresini `Şehitler Mah. Park Cad. No:63 Kat:1 Salihli/Manisa` olarak verdi. Yanlış şube olduğundan fiyatlar aktarılmadı.
+
+## Comu Burger — Hentzer ID 7132 hold
+
+Hentzer queue kaydı `Comu Burger`, `Sinanpaşa, Ihlamurdere Cd., 34357 Beşiktaş/İstanbul`, Google place ID `ChIJDSRsMQC3yhQRsJqJevfaCFc`, koordinat `41.0477795, 29.0022972`. [YS `n9f2` vendorı](https://www.yemeksepeti.com/en/restaurant/n9f2/comu-burger) More info panelinde `Ihlamurdere Cd. 106b` adresini ve 7 burger ile yan ürün/sos, tatlı ve içecek kategorilerinde güncel görünen fiyatları gösteriyor. [Resmi Instagram hesabının taşınma duyurusu](https://www.instagram.com/p/Db54RqKiEuw/) ise Comu Burger’ın Beşiktaş’tan Çengelköy’e taşındığını ve yeni adresin Çengelköy olduğunu; arama sonucunda açılış tarihinin 2026-08-05 olarak göründüğünü belirtiyor. 24 Ağustos 2026 itibarıyla Beşiktaş YS vendorı eski şube/stale olabilir; güncel exact Beşiktaş işletme köprüsü olmadan fiyat aktarılmadı.

@@ -44796,4 +44796,514 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       }
     ]
   },
+    "7156": {
+    "name": "Hacı Nadir Efendi",
+    "sourceUrl": "https://www.migros.com.tr/yemek/haci-nadir-efendi-bayrampasa-muratpasa-mah-st-30101",
+    "sourceName": "Migros Yemek Bayrampaşa (Muratpaşa Mah.) exact vendor; Hentzer exact adres Eski Edirne Asf. No:9 D:A ile Restaurant Guru kaydı ve güncel resmi Hacı Nadir Efendi Bayrampaşa sosyal paylaşımlarıyla eşleştirildi; canlı fiyatlar browser DOM’dan alındı",
+    "verifiedAt": "2026-08-24",
+    "items": [
+      {
+        "name": "0 No'lu Muz Çilek New York",
+        "price": "1.200,00 TL",
+        "category": "0 No'lu Pasta"
+      },
+      {
+        "name": "0 No'lu Fıstıklı",
+        "price": "1.200,00 TL",
+        "category": "0 No'lu Pasta"
+      },
+      {
+        "name": "0 No'lu Dubai",
+        "price": "1.200,00 TL",
+        "category": "0 No'lu Pasta"
+      },
+      {
+        "name": "0 No'lu Çilekli",
+        "price": "1.200,00 TL",
+        "category": "0 No'lu Pasta"
+      },
+      {
+        "name": "0 No'lu Pasta Çikolatalı",
+        "price": "1.200,00 TL",
+        "category": "0 No'lu Pasta"
+      },
+      {
+        "name": "0 No'lu Karaorman Meyveli",
+        "price": "1.200,00 TL",
+        "category": "0 No'lu Pasta"
+      },
+      {
+        "name": "0 No'lu Mois Çilekli",
+        "price": "1.200,00 TL",
+        "category": "0 No'lu Pasta"
+      },
+      {
+        "name": "0 No'lu Profiterollü",
+        "price": "1.200,00 TL",
+        "category": "0 No'lu Pasta"
+      },
+      {
+        "name": "0 No'lu Muz Çikolata",
+        "price": "1.200,00 TL",
+        "category": "0 No'lu Pasta"
+      },
+      {
+        "name": "0 No'lu Pasta Çikolata - Negro - Çilek",
+        "price": "1.200,00 TL",
+        "category": "0 No'lu Pasta"
+      },
+      {
+        "name": "Trileçe Dilim Frambuaz",
+        "price": "149,00 TL",
+        "category": "Sütlü Tatlı"
+      },
+      {
+        "name": "Trileçe Dilim Karamel",
+        "price": "149,00 TL",
+        "category": "Sütlü Tatlı"
+      },
+      {
+        "name": "Kazandibi",
+        "price": "195,00 TL",
+        "desc": "Geleneksel kazandibi, hafif ve sütlü yapısıyla tatlı severlerin favorisi. Her kaşıkta süt ve karamelin mükemmel uyumunu hissedeceksiniz.",
+        "category": "Sütlü Tatlı"
+      },
+      {
+        "name": "Sütlü Nuriye (1 Kg)",
+        "price": "1.210,00 TL",
+        "desc": "Fındıklı ve hindistan cevizli",
+        "category": "Sütlü Tatlı"
+      },
+      {
+        "name": "Fırın Sütlaç Güveçte",
+        "price": "200,00 TL",
+        "desc": "Tek kişilik",
+        "category": "Sütlü Tatlı"
+      },
+      {
+        "name": "Scone Çikolatalı (300 G)",
+        "price": "380,00 TL",
+        "category": "Kuru Pasta & Grisini"
+      },
+      {
+        "name": "Scone Fındıklı (300 G)",
+        "price": "380,00 TL",
+        "category": "Kuru Pasta & Grisini"
+      },
+      {
+        "name": "Japanese Kurabiye (150 G)",
+        "price": "380,00 TL",
+        "category": "Kuru Pasta & Grisini"
+      },
+      {
+        "name": "Bisconiti (300 G)",
+        "price": "380,00 TL",
+        "category": "Kuru Pasta & Grisini"
+      },
+      {
+        "name": "Selanik Gevreği (300 G)",
+        "price": "380,00 TL",
+        "category": "Kuru Pasta & Grisini"
+      },
+      {
+        "name": "Acı Badem (300 G)",
+        "price": "380,00 TL",
+        "category": "Kuru Pasta & Grisini"
+      },
+      {
+        "name": "Yaprak Galeta Susamlı (200 G)",
+        "price": "120,00 TL",
+        "category": "Kuru Pasta & Grisini"
+      },
+      {
+        "name": "Çörek Otlu (200 G)",
+        "price": "120,00 TL",
+        "category": "Kuru Pasta & Grisini"
+      },
+      {
+        "name": "Çekirdekli (200 G)",
+        "price": "120,00 TL",
+        "category": "Kuru Pasta & Grisini"
+      },
+      {
+        "name": "Susamlı Çubuk (200 G)",
+        "price": "160,00 TL",
+        "category": "Kuru Pasta & Grisini"
+      },
+      {
+        "name": "Grisini Fesleğen (200 G)",
+        "price": "195,00 TL",
+        "category": "Kuru Pasta & Grisini"
+      },
+      {
+        "name": "Salçalı (200 G)",
+        "price": "195,00 TL",
+        "category": "Kuru Pasta & Grisini"
+      },
+      {
+        "name": "5 Çay Keki",
+        "price": "290,00 TL",
+        "category": "Kuru Pasta & Grisini"
+      },
+      {
+        "name": "Tuzlu Kuru Pasta (1 Kg)",
+        "price": "575,00 TL",
+        "category": "Kuru Pasta & Grisini"
+      },
+      {
+        "name": "Kuru Pasta Tatlı (1Kg )",
+        "price": "670,00 TL",
+        "category": "Kuru Pasta & Grisini"
+      },
+      {
+        "name": "Muzlu Mini Petifür (1 Kg)",
+        "price": "700,00 TL",
+        "category": "Petifür"
+      },
+      {
+        "name": "Vişneli Mini Petifür (1 Kg)",
+        "price": "700,00 TL",
+        "category": "Petifür"
+      },
+      {
+        "name": "Karadut (1 Kg)",
+        "price": "980,00 TL",
+        "category": "Dondurma (1 Kg)"
+      },
+      {
+        "name": "Karadut (500 G)",
+        "price": "500,00 TL",
+        "category": "Dondurma (1 Kg)"
+      },
+      {
+        "name": "Damla Sakızı (1 Kg)",
+        "price": "980,00 TL",
+        "category": "Dondurma (1 Kg)"
+      },
+      {
+        "name": "Lotus (1 Kg)",
+        "price": "980,00 TL",
+        "category": "Dondurma (1 Kg)"
+      },
+      {
+        "name": "Damla Sakızı (500 G)",
+        "price": "500,00 TL",
+        "category": "Dondurma (1 Kg)"
+      },
+      {
+        "name": "Nutella (1 Kg)",
+        "price": "980,00 TL",
+        "category": "Dondurma (1 Kg)"
+      },
+      {
+        "name": "Frambuaz (1 Kg)",
+        "price": "980,00 TL",
+        "category": "Dondurma (1 Kg)"
+      },
+      {
+        "name": "Çilek Sorbe (1 Kg)",
+        "price": "980,00 TL",
+        "category": "Dondurma (1 Kg)"
+      },
+      {
+        "name": "Muz (1 Kg)",
+        "price": "980,00 TL",
+        "category": "Dondurma (1 Kg)"
+      },
+      {
+        "name": "Bitter Çikolata (1 Kg)",
+        "price": "980,00 TL",
+        "category": "Dondurma (1 Kg)"
+      },
+      {
+        "name": "Bal Kaymak (1 Kg)",
+        "price": "980,00 TL",
+        "category": "Dondurma (1 Kg)"
+      },
+      {
+        "name": "Bodrum Mandalina (1 Kg)",
+        "price": "980,00 TL",
+        "category": "Dondurma (1 Kg)"
+      },
+      {
+        "name": "Coconat (1 Kg)",
+        "price": "980,00 TL",
+        "category": "Dondurma (1 Kg)"
+      },
+      {
+        "name": "Oreo (1 Kg)",
+        "price": "980,00 TL",
+        "category": "Dondurma (1 Kg)"
+      },
+      {
+        "name": "Karışık Dondurma (1 Kg)",
+        "price": "980,00 TL",
+        "category": "Dondurma (1 Kg)"
+      },
+      {
+        "name": "Karışık Dondurma (500 G)",
+        "price": "500,00 TL",
+        "category": "Dondurma (1 Kg)"
+      },
+      {
+        "name": "Ekler (1 Kg)",
+        "price": "1.050,00 TL",
+        "desc": "Ekleristan Ekleri",
+        "category": "Ekler & Magnolia & Makaron"
+      },
+      {
+        "name": "Oreo'lu Mag (Adet)",
+        "price": "210,00 TL",
+        "category": "Ekler & Magnolia & Makaron"
+      },
+      {
+        "name": "Çilekli Mag (Adet)",
+        "price": "210,00 TL",
+        "category": "Ekler & Magnolia & Makaron"
+      },
+      {
+        "name": "Tiramisu Mag (Adet)",
+        "price": "210,00 TL",
+        "category": "Ekler & Magnolia & Makaron"
+      },
+      {
+        "name": "Mono Çikolata",
+        "price": "325,00 TL",
+        "category": "Pasta (Adet)"
+      },
+      {
+        "name": "Dubai",
+        "price": "325,00 TL",
+        "category": "Pasta (Adet)"
+      },
+      {
+        "name": "Volkanik",
+        "price": "325,00 TL",
+        "category": "Pasta (Adet)"
+      },
+      {
+        "name": "Çilek Mois",
+        "price": "325,00 TL",
+        "category": "Pasta (Adet)"
+      },
+      {
+        "name": "Fıstıklı Pasta",
+        "price": "325,00 TL",
+        "category": "Pasta (Adet)"
+      },
+      {
+        "name": "Tek Pasta Fıstıklı (Adet)",
+        "price": "325,00 TL",
+        "category": "Pasta (Adet)"
+      },
+      {
+        "name": "Çilekli Babaroski",
+        "price": "325,00 TL",
+        "category": "Pasta (Adet)"
+      },
+      {
+        "name": "Red Velvet",
+        "price": "325,00 TL",
+        "category": "Pasta (Adet)"
+      },
+      {
+        "name": "Meyveli",
+        "price": "325,00 TL",
+        "category": "Pasta (Adet)"
+      },
+      {
+        "name": "Fıstıklı Baklava Klasik (500 G)",
+        "price": "785,00 TL",
+        "category": "Fıstıklı Baklava (500 G)"
+      },
+      {
+        "name": "Soğuk Baklava Fıstıklı (500 G)",
+        "price": "695,00 TL",
+        "category": "Fıstıklı Baklava (500 G)"
+      },
+      {
+        "name": "Şöbiyet Fıstıklı (500 G)",
+        "price": "975,00 TL",
+        "category": "Fıstıklı Baklava (500 G)"
+      },
+      {
+        "name": "Fıstıklı Kadayıf (500 G)",
+        "price": "785,00 TL",
+        "category": "Fıstıklı Baklava (500 G)"
+      },
+      {
+        "name": "Fıstıklı Midye (500 G)",
+        "price": "975,00 TL",
+        "category": "Fıstıklı Baklava (500 G)"
+      },
+      {
+        "name": "Fıstıklı Özel (500 G)",
+        "price": "975,00 TL",
+        "category": "Fıstıklı Baklava (500 G)"
+      },
+      {
+        "name": "Yeşil Burma (500 G)",
+        "price": "1.565,00 TL",
+        "category": "Fıstıklı Baklava (500 G)"
+      },
+      {
+        "name": "Cevizli Özel (500 G)",
+        "price": "585,00 TL",
+        "category": "Cevizli Baklava (500 G)"
+      },
+      {
+        "name": "Cevizli Ev Baklavası (500 G)",
+        "price": "585,00 TL",
+        "category": "Cevizli Baklava (500 G)"
+      },
+      {
+        "name": "Cevizli Midye (500 G)",
+        "price": "535,00 TL",
+        "category": "Cevizli Baklava (500 G)"
+      },
+      {
+        "name": "Cevizli Klasik (500 G)",
+        "price": "535,00 TL",
+        "category": "Cevizli Baklava (500 G)"
+      },
+      {
+        "name": "Cevizli Özel (1 Kg)",
+        "price": "1.160,00 TL",
+        "category": "Cevizli Baklava (1 Kg)"
+      },
+      {
+        "name": "Cevizli Ev Baklavası (1 Kg)",
+        "price": "1.160,00 TL",
+        "category": "Cevizli Baklava (1 Kg)"
+      },
+      {
+        "name": "Cevizli Midye (1 Kg)",
+        "price": "1.080,00 TL",
+        "category": "Cevizli Baklava (1 Kg)"
+      },
+      {
+        "name": "Cevizli Şöbiyet (1 Kg)",
+        "price": "1.160,00 TL",
+        "category": "Cevizli Baklava (1 Kg)"
+      },
+      {
+        "name": "Cevizli Klasik (1 Kg)",
+        "price": "1.080,00 TL",
+        "category": "Cevizli Baklava (1 Kg)"
+      },
+      {
+        "name": "Fıstıklı Klasik (1 Kg)",
+        "price": "1.552,00 TL",
+        "category": "Fıstıklı Baklava (1 Kg)"
+      },
+      {
+        "name": "Soğuk Baklava Fıstıklı (1 Kg)",
+        "price": "1.300,00 TL",
+        "desc": "Soğuk baklava, fıstıkla zenginleştirilmiş hafif ve serinletici bir tatlı. Yaz aylarında tatlı krizlerinizi dindirecek ideal bir seçenek.",
+        "category": "Fıstıklı Baklava (1 Kg)"
+      },
+      {
+        "name": "Şöbiyet Fıstıklı (1 Kg)",
+        "price": "1.910,00 TL",
+        "category": "Fıstıklı Baklava (1 Kg)"
+      },
+      {
+        "name": "Havuç Dilim Fıstıklı (1 Kg)",
+        "price": "1.830,00 TL",
+        "category": "Fıstıklı Baklava (1 Kg)"
+      },
+      {
+        "name": "Fıstıklı Kadayıf (1 Kg)",
+        "price": "1.552,00 TL",
+        "category": "Fıstıklı Baklava (1 Kg)"
+      },
+      {
+        "name": "Fıstıklı Midye (1 Kg)",
+        "price": "1.910,00 TL",
+        "category": "Fıstıklı Baklava (1 Kg)"
+      },
+      {
+        "name": "Fıstıklı Özel (1 Kg)",
+        "price": "1.910,00 TL",
+        "category": "Fıstıklı Baklava (1 Kg)"
+      },
+      {
+        "name": "Yeşil Burma (1 Kg)",
+        "price": "3.000,00 TL",
+        "category": "Fıstıklı Baklava (1 Kg)"
+      },
+      {
+        "name": "Cappy Pulpy Portakal (1 Lt)",
+        "price": "160,00 TL",
+        "desc": "1 Litre",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Beypazarı Soda (200Ml)",
+        "price": "60,00 TL",
+        "desc": "200 Ml",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Su (200 Ml)",
+        "price": "50,00 TL",
+        "desc": "200 Ml",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Capri-sun (200 Ml)",
+        "price": "75,00 TL",
+        "desc": "200 Ml",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Sprite (330Ml)",
+        "price": "100,00 TL",
+        "desc": "330 Ml",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Fanta (330Ml)",
+        "price": "100,00 TL",
+        "desc": "330 Ml",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Fanta 1 Lt",
+        "price": "150,00 TL",
+        "desc": "1 Litre",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Coca Cola (1 Lt)",
+        "price": "150,00 TL",
+        "desc": "1 Litre",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Coca Cola (330Ml)",
+        "price": "100,00 TL",
+        "desc": "330 Ml",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Lipton İce Tea Limon (330Ml)",
+        "price": "100,00 TL",
+        "desc": "330 Ml",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Lipton İce Tea Şeftali (330Ml)",
+        "price": "100,00 TL",
+        "desc": "330 Ml",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Lipton İce Tea Mango Ve Egzotik (330Ml)",
+        "price": "100,00 TL",
+        "desc": "330 Ml",
+        "category": "İçecekler"
+      }
+    ]
+  },
 };
