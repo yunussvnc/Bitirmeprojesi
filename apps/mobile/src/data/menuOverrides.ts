@@ -46278,4 +46278,30 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { name: "Su (50 cl.)", price: "25,50 TL", desc: "Pet şişe", category: "İçecekler" }
     ],
   },
+  "7168": {
+    name: "Taff Burger Akaretler",
+    sourceUrl: "https://www.yemeksepeti.com/en/restaurant/a6ms/taff-burger-a6ms",
+    sourceName: "Yemeksepeti — resmi Taff Akaretler, Şair Nedim Cd. No:19 (güncel TL menüsü)",
+    verifiedAt: "2026-08-24",
+    items: [
+      { name: "Cheeseburger", price: "570 TL", desc: "Dana burger köftesi, cheddar peyniri, turşu, ketçap, hardal sos", category: "Burgerler" },
+      { name: "Youki Burger", price: "615 TL", desc: "Dana burger köftesi, cheddar peyniri, turşu, trüflü mayonez, özel sos", category: "Burgerler" },
+      { name: "Diplomat Burger", price: "640 TL", desc: "Dana burger köftesi, cheddar peyniri, dana füme eti, Doritos cips, özel sos", category: "Burgerler" },
+      { name: "Coy Burger", price: "620 TL", desc: "Dana burger köftesi, cheddar peyniri, soğan, köz biberli özel sos", category: "Burgerler" },
+      { name: "Lilly Burger", price: "610 TL", desc: "Dana burger köftesi, cheddar peyniri, krema, soğan turşusu, vişneli özel sos", category: "Burgerler" },
+      { name: "Truffle Burger", price: "620 TL", desc: "Dana burger köftesi, cheddar peyniri, marul, turşu, trüflü mayonez", category: "Burgerler" },
+      { name: "Feyk Burger", price: "610 TL", desc: "Dana burger köftesi, cheddar peyniri, karamelize soğan, turşu, marul, özel sos", category: "Burgerler" },
+      { name: "Patates Kızartması", price: "210 TL", desc: "Parmak dilim", category: "Yan Ürünler" },
+      { name: "Baharatlı Patates Kızartması", price: "210 TL", desc: "Parmak dilim", category: "Yan Ürünler" },
+      { name: "Trüflü & Parmesanlı Patates Kızartması", price: "290 TL", desc: "Parmak dilim", category: "Yan Ürünler" },
+      { name: "Coca-Cola (33 cl)", price: "110 TL", desc: "Kutu içecek", category: "İçecekler" },
+      { name: "Coca-Cola Zero Sugar (33 cl)", price: "110 TL", desc: "Kutu içecek", category: "İçecekler" },
+      { name: "Fanta (33 cl)", price: "110 TL", desc: "Kutu içecek", category: "İçecekler" },
+      { name: "Sprite (33 cl)", price: "110 TL", desc: "Kutu içecek", category: "İçecekler" },
+      { name: "Fuse Tea (33 cl)", price: "110 TL", desc: "Kutu içecek", category: "İçecekler" },
+      { name: "Ayran (24,5 cl.)", price: "110 TL", desc: "Büyük boy", category: "İçecekler" },
+      { name: "Soda (20 cl)", price: "80 TL", desc: "Cam şişe", category: "İçecekler" },
+      { name: "Su (50 cl)", price: "70 TL", desc: "Pet şişe", category: "İçecekler" }
+    ],
+  },
 };
