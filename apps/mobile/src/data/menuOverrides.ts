@@ -53055,4 +53055,92 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       },
     ]
   },
+  "6456": {
+    "name": "Das Haus Des Döners Beşiktaş Sinanpaşa",
+    "sourceUrl": "https://www.migros.com.tr/yemek/das-haus-des-doner-besiktas-sinanpasa-mah-st-323c2",
+    "sourceName": "Migros Yemek branch-labeled canlı menüsü; official Das Haus Des Döners/Instagram ve Apple exact Beşiktaş Sinanpaşa Şht. Asım Cd. No:32/A köprüsüyle eşleştirildi",
+    "verifiedAt": "2026-08-24",
+    "items": [
+      {
+        "name": "Patates",
+        "price": "100,00 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "İçli Köfte",
+        "price": "120,00 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Coca Cola (330 Ml)",
+        "price": "100,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Coca Cola Zero (330 Ml)",
+        "price": "100,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Fanta (330 Ml)",
+        "price": "100,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Sprite (330 Ml)",
+        "price": "100,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Fuse Tea (330 Ml)",
+        "price": "100,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Ayran (275 Ml)",
+        "price": "70,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Soda (200 Ml)",
+        "price": "45,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Su (500 Ml)",
+        "price": "25,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Coca Cola Fırsatı 2'Li (100 Gr) Tavuk Döner Menü",
+        "price": "950,00 TL",
+        "category": "Coca-cola Doyuran Menüleri"
+      },
+      {
+        "name": "Coca Cola Fırsatı 2'Li (100 Gr) Et Döner Menü",
+        "price": "1.200,00 TL",
+        "category": "Coca-cola Doyuran Menüleri"
+      },
+      {
+        "name": "Coca Cola Fırsatı 3'Lü (100 Gr) Et Döner Menü",
+        "price": "1.900,00 TL",
+        "category": "Coca-cola Doyuran Menüleri"
+      },
+      {
+        "name": "Coca Cola Fırsatı 3'Lü (100 Gr) Tavuk Döner Menü",
+        "price": "1.500,00 TL",
+        "category": "Coca-cola Doyuran Menüleri"
+      },
+      {
+        "name": "Coca Cola Fırsatı Et Döner Menü",
+        "price": "620,00 TL",
+        "category": "Coca-cola Doyuran Menüleri"
+      },
+      {
+        "name": "Coca Cola Fırsatı Tavuk Döner Menü",
+        "price": "520,00 TL",
+        "category": "Coca-cola Doyuran Menüleri"
+      },
+    ]
+  },
 };
