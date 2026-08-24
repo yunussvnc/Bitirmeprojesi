@@ -60552,4 +60552,493 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     ],
   },
 
+  "3710": {
+    name: "7K coffee workshop (Specialty coffee)",
+    sourceUrl: "https://drive.google.com/file/d/1F_kqWV6VxdBpLFvcMqzA-v82wzXhRK5s/view?usp=sharing",
+    sourceName: "7K resmi 2026 menüsü (official Linktree/Google Drive PDF)",
+    verifiedAt: "2026-08-24",
+    items: [
+      {
+        name: "Espresso Doppio",
+        price: "150",
+        category: "Espresso Based Coffee"
+      },
+      {
+        name: "Americano",
+        price: "180",
+        category: "Espresso Based Coffee"
+      },
+      {
+        name: "Cappuccino",
+        price: "185",
+        category: "Espresso Based Coffee"
+      },
+      {
+        name: "Caffe Latte",
+        price: "190",
+        category: "Espresso Based Coffee"
+      },
+      {
+        name: "Flat White",
+        price: "190",
+        category: "Espresso Based Coffee"
+      },
+      {
+        name: "Cortado",
+        price: "180",
+        category: "Espresso Based Coffee"
+      },
+      {
+        name: "Lotus Latte",
+        price: "220",
+        category: "Espresso Based Coffee"
+      },
+      {
+        name: "Syrup Latte",
+        price: "210",
+        category: "Espresso Based Coffee"
+      },
+      {
+        name: "Caffe Mocha",
+        price: "220",
+        category: "Espresso Based Coffee"
+      },
+      {
+        name: "Zebra Mocha",
+        price: "230",
+        category: "Espresso Based Coffee"
+      },
+      {
+        name: "Spanish Latte",
+        price: "220",
+        category: "Espresso Based Coffee"
+      },
+      {
+        name: "Belgium Hot Chocolate",
+        price: "230",
+        desc: "White Chocolate/Chocolate",
+        category: "Hot Drinks"
+      },
+      {
+        name: "Farsi Hot Chocolate",
+        price: "250",
+        category: "Hot Drinks"
+      },
+      {
+        name: "Chai Tea Latte",
+        price: "210",
+        category: "Hot Drinks"
+      },
+      {
+        name: "Cup of Turkish Tea",
+        price: "80₺",
+        category: "Hot Drinks"
+      },
+      {
+        name: "Filter Coffee",
+        price: "180",
+        category: "Brew"
+      },
+      {
+        name: "V60",
+        price: "240",
+        category: "Brew"
+      },
+      {
+        name: "Iced Filter Coffee",
+        price: "190",
+        category: "Iced Brew"
+      },
+      {
+        name: "Japanese Iced",
+        price: "260",
+        category: "Iced Brew"
+      },
+      {
+        name: "Cold Drip",
+        price: "270",
+        category: "Iced Brew"
+      },
+      {
+        name: "Classic",
+        price: "150",
+        category: "Turkish Coffee"
+      },
+      {
+        name: "Iced Americano",
+        price: "190",
+        category: "Iced Coffee"
+      },
+      {
+        name: "Iced Cafe Latte",
+        price: "210",
+        category: "Iced Coffee"
+      },
+      {
+        name: "Iced Lotus Latte",
+        price: "250",
+        category: "Iced Coffee"
+      },
+      {
+        name: "Iced Syrup Latte",
+        price: "220",
+        desc: "Caramel, Vanilla, Salted Caramel; Lavender, Ginger, Hazelnut",
+        category: "Iced Coffee"
+      },
+      {
+        name: "Iced Cafe Mocha",
+        price: "240",
+        desc: "Chocolate/White Chocolate",
+        category: "Iced Coffee"
+      },
+      {
+        name: "Iced Zebra Mocha",
+        price: "250",
+        category: "Iced Coffee"
+      },
+      {
+        name: "Affogato",
+        price: "250",
+        category: "Iced Coffee"
+      },
+      {
+        name: "Iced Spanish Latte",
+        price: "240",
+        category: "Iced Coffee"
+      },
+      {
+        name: "Ceremonial Matcha Latte",
+        price: "250",
+        category: "Matcha Drinks"
+      },
+      {
+        name: "Iced Ceremonial Matcha Latte",
+        price: "270",
+        category: "Matcha Drinks"
+      },
+      {
+        name: "Iced Honey Matcha",
+        price: "280",
+        category: "Matcha Drinks"
+      },
+      {
+        name: "Iced Strawberry Matcha",
+        price: "280",
+        category: "Matcha Drinks"
+      },
+      {
+        name: "Iced Mango Matcha",
+        price: "280",
+        category: "Matcha Drinks"
+      },
+      {
+        name: "Milkshakes",
+        price: "250",
+        desc: "Strawberry/Banana/Date/Chocolate/Mango",
+        category: "Cold Drinks"
+      },
+      {
+        name: "Mocha Cooler",
+        price: "270",
+        category: "Cold Drinks"
+      },
+      {
+        name: "Lemonade",
+        price: "180",
+        category: "Cold Drinks"
+      },
+      {
+        name: "Strawberry Lemonade",
+        price: "220",
+        category: "Cold Drinks"
+      },
+      {
+        name: "Mint Lemonade",
+        price: "220",
+        category: "Cold Drinks"
+      },
+      {
+        name: "Peach Lemonade",
+        price: "220",
+        category: "Cold Drinks"
+      },
+      {
+        name: "Frozen",
+        price: "250",
+        desc: "Strawberry, Mango, Forest Fruit",
+        category: "Cold Drinks"
+      },
+      {
+        name: "Churchill",
+        price: "120",
+        category: "Cold Drinks"
+      },
+      {
+        name: "Soda",
+        price: "80",
+        category: "Cold Drinks"
+      },
+      {
+        name: "Su (Cam şişe)",
+        price: "60",
+        category: "Cold Drinks"
+      },
+      {
+        name: "Cool Lime",
+        price: "275",
+        category: "Moctails"
+      },
+      {
+        name: "7K Moctail",
+        price: "275",
+        category: "Moctails"
+      },
+      {
+        name: "Mojito",
+        price: "290",
+        category: "Moctails"
+      },
+      {
+        name: "Hawai Moctail",
+        price: "300",
+        category: "Moctails"
+      },
+      {
+        name: "Smoked Cinnamon Hibiscus",
+        price: "310",
+        category: "Moctails"
+      },
+      {
+        name: "Hibiscus Iced Tea",
+        price: "290",
+        category: "Moctails"
+      },
+      {
+        name: "Strawberry Mint Smash",
+        price: "300",
+        category: "Summer Collection"
+      },
+      {
+        name: "Purple Sunset",
+        price: "300",
+        category: "Summer Collection"
+      },
+      {
+        name: "Bitter Crimson",
+        price: "300",
+        category: "Summer Collection"
+      },
+      {
+        name: "Kuzu Kulağı",
+        price: "300",
+        category: "Summer Collection"
+      },
+      {
+        name: "White Chocolate Brownie",
+        price: "310",
+        category: "Brownie"
+      },
+      {
+        name: "Raspberry Brownie",
+        price: "300",
+        category: "Brownie"
+      },
+      {
+        name: "San Sebastian",
+        price: "290",
+        category: "Desserts"
+      },
+      {
+        name: "French Cream Puff",
+        price: "310",
+        category: "Desserts"
+      },
+      {
+        name: "Creme Brulee",
+        price: "300",
+        category: "Desserts"
+      },
+      {
+        name: "7K Cup",
+        price: "320",
+        category: "Desserts"
+      },
+      {
+        name: "Tiramisu",
+        price: "300",
+        category: "Desserts"
+      },
+      {
+        name: "Cinnamon Roll",
+        price: "290",
+        category: "Desserts"
+      },
+      {
+        name: "Paris Brest",
+        price: "310",
+        category: "Desserts"
+      },
+      {
+        name: "Havuçlu Cevizli Kek",
+        price: "290",
+        category: "Desserts"
+      },
+      {
+        name: "Red Velvet",
+        price: "310",
+        category: "Desserts"
+      },
+      {
+        name: "Volovan",
+        price: "300",
+        category: "Desserts"
+      },
+      {
+        name: "Limonlu Kek",
+        price: "300",
+        category: "Desserts"
+      },
+      {
+        name: "Chocolate Chip Cookie",
+        price: "150",
+        category: "Cookies"
+      },
+      {
+        name: "Lotus Cookie",
+        price: "180",
+        category: "Cookies"
+      },
+      {
+        name: "Tarçınlı Cevizli Kurabiye (4 Adet)",
+        price: "80",
+        category: "Cookies"
+      },
+      {
+        name: "Lotus Cheesecake",
+        price: "340",
+        category: "Cheesecakes"
+      },
+      {
+        name: "Bitter Cheesecake",
+        price: "340",
+        category: "Cheesecakes"
+      },
+      {
+        name: "Lemon Cheesecake",
+        price: "340",
+        category: "Cheesecakes"
+      },
+      {
+        name: "Çikolatalı Meyveli Kruvasan",
+        price: "360",
+        category: "Kruvasan"
+      },
+      {
+        name: "Prenses Kremalı Kruvasan",
+        price: "380",
+        category: "Kruvasan"
+      },
+      {
+        name: "Earl Grey",
+        price: "220",
+        category: "Artisan Tea"
+      },
+      {
+        name: "Refreshing Mint",
+        price: "220",
+        category: "Artisan Tea"
+      },
+      {
+        name: "Rooibos Cream Orange",
+        price: "220",
+        category: "Artisan Tea"
+      },
+      {
+        name: "Tropical Sun",
+        price: "220",
+        category: "Artisan Tea"
+      },
+      {
+        name: "Huckleberry Friend",
+        price: "220",
+        category: "Artisan Tea"
+      },
+      {
+        name: "Ayurveda Herbs and Ginger",
+        price: "220",
+        category: "Artisan Tea"
+      },
+      {
+        name: "Get The Power",
+        price: "220",
+        category: "Artisan Tea"
+      },
+      {
+        name: "Morgenthau",
+        price: "220",
+        category: "Artisan Tea"
+      },
+      {
+        name: "Broccoli and Cream Cheese Quiche",
+        price: "190",
+        category: "Breakfast"
+      },
+      {
+        name: "Dereotlu Peynirli Poğaça",
+        price: "90",
+        category: "Breakfast"
+      },
+      {
+        name: "Dereotlu ve Mısır Unlu Muffin",
+        price: "90",
+        category: "Breakfast"
+      },
+      {
+        name: "Cheddar, Kaşar, Hindi Füme, Marul",
+        price: "270",
+        category: "Fransız Kruvasan Sandviç"
+      },
+      {
+        name: "Dana Jambon, Mozarella, Fesleğen Domates",
+        price: "320",
+        category: "Fransız Kruvasan Sandviç"
+      },
+      {
+        name: "Pesto Soslu Yumurtalı Kruvasan Sandviç",
+        price: "330",
+        category: "Fransız Kruvasan Sandviç"
+      },
+      {
+        name: "Cheddar, Kaşar, Hindi Füme",
+        price: "270",
+        category: "Tost (Ekşi Mayalı)"
+      },
+      {
+        name: "Oatmeal Smoothie Bowl",
+        price: "360",
+        category: "Smoothie Bowl"
+      },
+      {
+        name: "Dark Chocolate Strawberry",
+        price: "380",
+        category: "Smoothie Bowl"
+      },
+      {
+        name: "Raspberry Rosewater",
+        price: "380",
+        category: "Smoothie Bowl"
+      },
+      {
+        name: "Dark Chocolate Maca Raspberry",
+        price: "380",
+        category: "Smoothie Bowl"
+      },
+      {
+        name: "Chocolate Chia",
+        price: "400",
+        category: "Smoothie Bowl"
+      }
+    ],
+  },
+
 };
