@@ -4,6 +4,659 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6083": {
+    "name": "Valonia Chocolate & Cafe",
+    "sourceUrl": "https://valonia.pelit.com.tr/?kaynak=qr",
+    "sourceName": "Valonia Pelit QR canlı menüsü; exact Türkali/Ihlamurdere Cd. No:40/B ve 0212 259 18 56 işletme kimliği Hentzer ve Yelp kaydıyla eşleştirildi",
+    "verifiedAt": "2026-08-24",
+    "items": [
+      {
+        "name": "ÇITIR SİMİT",
+        "price": "300.00",
+        "category": "Güne İyi Başlamak İçin",
+        "desc": "Valonia’nın Çıtır Simit’ini denediniz mi? Kaşar peynirli ve domatesli nefis simit tostunuzabir bardak çay eşlik ediyor."
+      },
+      {
+        "name": "KAHVALTI TABAĞI",
+        "price": "600.00",
+        "category": "Güne İyi Başlamak İçin",
+        "desc": "Valonia’dan doping etkisi yapacak Kahvaltı Tabağı. Yöresel peynirler, tereyağı, bal, kaymak, zeytin, salatalık, domates, kuru meyveler,reçel ve çay."
+      },
+      {
+        "name": "KARIŞIK TOST",
+        "price": "250.00",
+        "category": "Güne İyi Başlamak İçin",
+        "desc": "Tostuna karar veremeyenlere,sucuklu ve kaşar peynirli Karışık Tost."
+      },
+      {
+        "name": "KAŞARLI TOST",
+        "price": "180.00",
+        "category": "Güne İyi Başlamak İçin",
+        "desc": "Sade sevenlere Kaşar Peynirli Tost"
+      },
+      {
+        "name": "KEYFİ KAHVALTI (İKİ KİŞİLİK",
+        "price": "900.00",
+        "category": "Güne İyi Başlamak İçin",
+        "desc": "Keyifli bir kahvaltı günün tüm seyrini değiştirir. Valonia’dan güne keyifle başlayacağınız Keyfi Kahvaltı. Karışık peynir tabağı, dana jambon ve salam, zeytin çeşitleri, domates, petek bal - kaymak, vişne reçeli, kayısı reçeli. 4 bardak çay ile."
+      },
+      {
+        "name": "OMLET ÇEŞİTLERİ (KÖY OMLETİ)",
+        "price": "220.00",
+        "category": "Güne İyi Başlamak İçin",
+        "desc": "Kahvaltının vazgeçilmezi omletinizi nasıl alırdınız?"
+      },
+      {
+        "name": "OMLET ÇEŞİTLERİ (SADE)",
+        "price": "160.00",
+        "category": "Güne İyi Başlamak İçin",
+        "desc": "Kahvaltının vazgeçilmezi omletinizi nasıl alırdınız?"
+      },
+      {
+        "name": "OMLET ÇEŞİTLERİ (TÜRK OMLETİ)",
+        "price": "220.00",
+        "category": "Güne İyi Başlamak İçin",
+        "desc": "Kahvaltının vazgeçilmezi omletinizi nasıl alırdınız?"
+      },
+      {
+        "name": "SAHANDA MENEMEN",
+        "price": "240.00",
+        "category": "Güne İyi Başlamak İçin",
+        "desc": "Menemensiz yapamayanlara, Valonia ustalarından dumanı üstünde Sahanda Menemen."
+      },
+      {
+        "name": "SAHANDA YUMURTA (SADE)",
+        "price": "160.00",
+        "category": "Güne İyi Başlamak İçin",
+        "desc": "Tercihiniz klasik bir kahvaltıysa, sahanda yumurtaseçenekleri emrinize amade."
+      },
+      {
+        "name": "SAHANDA YUMURTA (SUCUKLU)",
+        "price": "220.00",
+        "category": "Güne İyi Başlamak İçin",
+        "desc": "Tercihiniz klasik bir kahvaltıysa, sahanda yumurtaseçenekleri emrinize amade."
+      },
+      {
+        "name": "SİMİT OMLET",
+        "price": "260.00",
+        "category": "Güne İyi Başlamak İçin",
+        "desc": "Karışık omlet, Valonia simiti ile buluşuyor. Bu lezzete Ezine peyniri, domates – salatalık söğüş eşlik ediyor."
+      },
+      {
+        "name": "VALONIA TOST",
+        "price": "240.00",
+        "category": "Güne İyi Başlamak İçin",
+        "desc": "Tostunuza Valonia tarifi.Hellim peynir, domates ve pesto sos ile."
+      },
+      {
+        "name": "CHEESEBURGER",
+        "price": "600.00",
+        "category": "Tüm Gün İçin",
+        "desc": "Nefis hamburger köftesi üzerinde cheddar peyniri, taptaze marul, domates, soğan, kornişon turşu, patates kızartması ve kızarmış soğan halkaları."
+      },
+      {
+        "name": "GÜNÜN ÇORBASI",
+        "price": "120.00",
+        "category": "Tüm Gün İçin",
+        "desc": "Yemekten önce sıcacık bir çorba nefis olur. Günün çorbasını sormayı unutmayınız."
+      },
+      {
+        "name": "HAMBURGER",
+        "price": "550.00",
+        "category": "Tüm Gün İçin",
+        "desc": "Klasik hamburger sıra dışı bir lezzette. Hamburger köftesi marul, domates, soğan, kornişon turşu, patates kızartması ve kızarmış soğan halkaları ile birlikte."
+      },
+      {
+        "name": "IZGARA KÖFTE",
+        "price": "650.00",
+        "category": "Tüm Gün İçin",
+        "desc": "Sofraların klasik lezzetini özel baharatlarla daha da klasikleştirdik. Pirinç pilavı ve patates tava ilelezzetini pekiştirdik."
+      },
+      {
+        "name": "KÖRİ SOSLU TAVUK",
+        "price": "450.00",
+        "category": "Tüm Gün İçin",
+        "desc": "Körinin tadına doya doya varacağınız eşsiz bir lezzet! Köri sosuyla marine edilmiş ve sotelenmiş nefis tavuk bonfile eti, özel soslu enfes tagliatelle ve taptaze Akdeniz yeşillikleri ile size eşlik ediyor."
+      },
+      {
+        "name": "PATATES TAVA",
+        "price": "150.00",
+        "category": "Tüm Gün İçin",
+        "desc": "Atıştırmalık sevenlere, çıtır çıtır patates tava."
+      },
+      {
+        "name": "TAVUK SCHINITZEL",
+        "price": "450.00",
+        "category": "Tüm Gün İçin",
+        "desc": "Schnitzeli hiç bu kadar havalı görmediniz. Tam kıvamında kızarmış tavuk göğsü, yanında hardallı patates salatası ve kiraz domatesler ile."
+      },
+      {
+        "name": "TRIO BURGER",
+        "price": "450.00",
+        "category": "Tüm Gün İçin",
+        "desc": "Lezzeti 3’e katlamak isteyenlere, Valonia’dan birbirinden lezzetli 3 mini burger."
+      },
+      {
+        "name": "ZENCEFİLLİ TAVUK",
+        "price": "450.00",
+        "category": "Tüm Gün İçin",
+        "desc": "Ana yemeğiniz hazırlanırken, zencefil aroması ile tavuk bonfile dilimlerini salsa sosa banacak, lezzetine parmağınızı basacaksınız."
+      },
+      {
+        "name": "AKDENİZ SALATASI",
+        "price": "320.00",
+        "category": "Taze-Taze, Yeşil-Yeşil",
+        "desc": "Akdeniz yeşilliklerine kiraz domatesler, Çengelköy salatalığı, yeşil biber, kapari, zeytin ve baharatlı rulotulum peyniri eşlik ediyor."
+      },
+      {
+        "name": "HELLİM PEYNİRLİ SALATA",
+        "price": "350.00",
+        "category": "Taze-Taze, Yeşil-Yeşil",
+        "desc": "Kıbrıs’ın meşhur peyniri hellim, ızgara sebzelerarasında yerini aldı, lezzeti şanını aştı."
+      },
+      {
+        "name": "SEZAR SALATA",
+        "price": "380.00",
+        "category": "Taze-Taze, Yeşil-Yeşil",
+        "desc": "Taze marul yaprakları arasında cajun aromalı ızgara tavuk parçaları, parmesan dilimleri ve sarımsaklı kruton."
+      },
+      {
+        "name": "TON BALIKLI SALATA",
+        "price": "390.00",
+        "category": "Taze-Taze, Yeşil-Yeşil",
+        "desc": "İstanbul’un sofrasından balık eksik olmaz. Balık ve salatanın kusursuz uyumunu bir deValonia’nın tarifiyle deneyin."
+      },
+      {
+        "name": "ISPANAKLI PEYNİRLİ TORTELLINI",
+        "price": "350.00",
+        "category": "Makarnalar",
+        "desc": "Valonia’nın usta ellerinden krema soslu “Ispanaklı, Peynirli Tortellini”."
+      },
+      {
+        "name": "KAYSERİ MANTISI",
+        "price": "380.00",
+        "category": "Makarnalar",
+        "desc": "Valonia’dan enfes geleneksel bir lezzet: Sarımsaklı yoğurtluKayseri Mantısı"
+      },
+      {
+        "name": "KEPEKLİ TAGLIATELLE",
+        "price": "350.00",
+        "category": "Makarnalar",
+        "desc": "Tagliatelle sevenlere Valonia’dan yeni bir lezzet. Fesleğen ile tamamlanmış domates sosluKepekli Tagliatelle."
+      },
+      {
+        "name": "KİREMİTTE BURGU MAKARNA",
+        "price": "370.00",
+        "category": "Makarnalar",
+        "desc": "Makarnayı kiremit ile buluşturduk. Kıymalı domates sosu ile enfes bir lezzete dönüştürdük."
+      },
+      {
+        "name": "PENNE ARABIATTA",
+        "price": "350.00",
+        "category": "Makarnalar",
+        "desc": "Makarna ve acıyı seviyorsanız, “Penne Arabiatta”ya bayılacaksınız. Parmesan peyniri, ve acılı domates sosu üstüne bir de Valonia lezzeti ekleninceen favori tadınız olacak."
+      },
+      {
+        "name": "TAGLIATELLE AL FUNGHI",
+        "price": "420.00",
+        "category": "Makarnalar",
+        "desc": "İstanbul’da enfes bir İtalyan lezzeti. Porcini mantar sosu ile birlikte."
+      },
+      {
+        "name": "YAZ MANTISI",
+        "price": "350.00",
+        "category": "Makarnalar",
+        "desc": "Valonia’nın usta ellerinden kıtır kıtırsarımsaklı yoğurtlu “Yaz Mantısı”"
+      },
+      {
+        "name": "PANİNİ TOST",
+        "price": "320.00",
+        "category": "Ekmek Arası",
+        "desc": "Acelesi olanlara Valonia ustalığıyla “Panini Tost”. Taze baharatlarla marine edilmiş ızgara tavuk göğsü, mozzarella ve cheddar peyniri yanında patates kızartması ile birlikte"
+      },
+      {
+        "name": "TAVUK WRAP",
+        "price": "400.00",
+        "category": "Ekmek Arası",
+        "desc": "Lezzeti sarıp sarmaladık: Tortilla içindemısır gevreği ile panelenmiş tavuk dilimleri, ve mevsim yeşillikleri."
+      },
+      {
+        "name": "TAVUKLU QUASEDILLA",
+        "price": "400.00",
+        "category": "Ekmek Arası",
+        "desc": "Ziyafeti dilimlere böldük. Izgara sebzeler, roti tavuk, kaşar ve cheddar peyniri yanındadomates, salatalık, biber ile."
+      },
+      {
+        "name": "BİR TOP DONDURMA",
+        "price": "80.00",
+        "category": "Güne Tat Katanlar",
+        "desc": "Sade, Çikolata, Kavun, Vişne, Karamel, Damla Sakız, Çilek, Limon, Bisküvi, Fıstık, Çıtırcıkve Böğürtlen."
+      },
+      {
+        "name": "ÇATLAK RULO",
+        "price": "350.00",
+        "category": "Güne Tat Katanlar",
+        "desc": "Sarılmış parça çikolatalı pandispanya içerisindebeyaz çikolatalı krema ve çilek."
+      },
+      {
+        "name": "CHOCOLATE SPESİYAL",
+        "price": "350.00",
+        "category": "Güne Tat Katanlar",
+        "desc": "Valonia’dan en özel sohbetlerinize eşlik edecek nefis lezzet. Kat kat pandispanya arasında, orman meyveleri ve özel çikolatalı kreması."
+      },
+      {
+        "name": "ÇİLEKLİ BURGER",
+        "price": "350.00",
+        "category": "Güne Tat Katanlar",
+        "desc": "Pandispanya arasında enfes beyaz çikolatalı kremave çilek parçacıklarının buluşması ileBurger’in tatlı haline bayılacaksınız."
+      },
+      {
+        "name": "ÇİLEKLİ MİLFÖY",
+        "price": "350.00",
+        "category": "Güne Tat Katanlar",
+        "desc": "Beyaz çikolatalı özel kreması veçilek parçaları kalp şeklinde çıtır milföy arasında."
+      },
+      {
+        "name": "FIRIN SÜTLAÇ",
+        "price": "350.00",
+        "category": "Güne Tat Katanlar"
+      },
+      {
+        "name": "KAZANDİBİ",
+        "price": "350.00",
+        "category": "Güne Tat Katanlar"
+      },
+      {
+        "name": "MEYVELİ ÇİKOLATA FONDUE",
+        "price": "380.00",
+        "category": "Güne Tat Katanlar",
+        "desc": "Taptaze meyvelerin, Valonia’nın erimiş sütlü çikolatasıyla buluşması."
+      },
+      {
+        "name": "MONAMİ",
+        "price": "350.00",
+        "category": "Güne Tat Katanlar",
+        "desc": "Çıtır milföy üzerinde enfes pişmiş krema, çilek ve bebe bisküvisi."
+      },
+      {
+        "name": "MOZAİK KEK",
+        "price": "350.00",
+        "category": "Güne Tat Katanlar",
+        "desc": "Valonia çikolatası ve bisküvi enfes bir lezzet yaratmak için bir arada."
+      },
+      {
+        "name": "QUALITY ÇİLEKLİ ÇİKOLATALI PASTA",
+        "price": "350.00",
+        "category": "Güne Tat Katanlar",
+        "desc": "Valonia’dan yeni bir tat; çikolatanın enfes hali taptaze çileklerle buluştu."
+      },
+      {
+        "name": "SAN SEBASTIAN",
+        "price": "350.00",
+        "category": "Güne Tat Katanlar",
+        "desc": "İspanya’nın San Sebastian şehrinde doğan bu farklı lezzet mis gibi kokusu ve iştah açan görüntüsüyle çay saatlerinize ayrı bir hava katacak."
+      },
+      {
+        "name": "SUPANGLE",
+        "price": "350.00",
+        "category": "Güne Tat Katanlar"
+      },
+      {
+        "name": "TİRAMİSU",
+        "price": "350.00",
+        "category": "Güne Tat Katanlar",
+        "desc": "Bildiğiniz Tiramisu’ya Valonia lezzeti ve yorumu. Daha önce yediklerinizi unutun bu lezzetin keyfini çıkarın."
+      },
+      {
+        "name": "VALONIA ISLAK KEK (YANINDA DONDURMA)",
+        "price": "380.00",
+        "category": "Güne Tat Katanlar",
+        "desc": "Dondurmasız olmaz diyenlere; seçmiş olduğunuz enfes Islak Kek’lnizeyanında bir top dondurma eşlik ediyor."
+      },
+      {
+        "name": "VALONIA BEYAZ ÇİKOLATALI ISLAK KEK",
+        "price": "350.00",
+        "category": "Güne Tat Katanlar",
+        "desc": "Islak kekin üzerinde enfes beyaz çikolata, içinde akışkan gerçek çikolata."
+      },
+      {
+        "name": "VALONIA BİTTER ÇİKOLATALI ISLAK KEK",
+        "price": "350.00",
+        "category": "Güne Tat Katanlar",
+        "desc": "Islak kekin üzerinde enfes bitter çikolata, içinde akışkan gerçek çikolata."
+      },
+      {
+        "name": "VALONIA CHEESECAKE",
+        "price": "350.00",
+        "category": "Güne Tat Katanlar",
+        "desc": "Bugün hangisini denesem diyecekbu lezzetten vazgeçemeyeceksiniz."
+      },
+      {
+        "name": "VALONIA PROFİTEROL",
+        "price": "380.00",
+        "category": "Güne Tat Katanlar",
+        "desc": "Profiterol lezzetiyle Valonia çikolatasının benzersiz buluşması."
+      },
+      {
+        "name": "VALONIA SÜTLÜ ÇİKOLATALI ISLAK KEK",
+        "price": "350.00",
+        "category": "Güne Tat Katanlar",
+        "desc": "Islak kekin üzerinde enfes sütlü çikolata, içinde akışkan gerçek çikolata."
+      },
+      {
+        "name": "VALONİA ULUDAĞ",
+        "price": "380.00",
+        "category": "Güne Tat Katanlar",
+        "desc": "Zamana meydan okumuş bir Valonia klasiği. Fıstıklı krokanlı pandispanya üzerinde enfes çikolata sosuyla 60 yılı aşkın süredir sizinle."
+      },
+      {
+        "name": "VALOWNIE",
+        "price": "350.00",
+        "category": "Güne Tat Katanlar",
+        "desc": "Enfes çikolatalı kekinin içerisinde beyaz çikolata ve üzerinde sütlü çikolata sosuyla"
+      },
+      {
+        "name": "WAFFLE",
+        "price": "380.00",
+        "category": "Güne Tat Katanlar",
+        "desc": "Taze mevsim meyveleri, yumuşacık waffle ve erimiş gerçek çikolata ile."
+      },
+      {
+        "name": "BARDAK ÇAY (DEMLEME)",
+        "price": "60.00",
+        "category": "Sıcak İçecekler",
+        "desc": "Karadeniz’in kaliteli çaylarından hazırladığımız, tam kıvamında demlenmiş çay."
+      },
+      {
+        "name": "BİTKİ ÇAYLARI (YEŞİL ÇAY)",
+        "price": "120.00",
+        "category": "Sıcak İçecekler",
+        "desc": "Bitki çayının her çeşidi, her lezzeti onu çağırmanızı bekliyor."
+      },
+      {
+        "name": "BİTKİ ÇAYLARI (ADA ÇAYI)",
+        "price": "120.00",
+        "category": "Sıcak İçecekler",
+        "desc": "Bitki çayının her çeşidi, her lezzeti onu çağırmanızı bekliyor."
+      },
+      {
+        "name": "BİTKİ ÇAYLARI (BÖĞÜRTLEN ÇAYI)",
+        "price": "120.00",
+        "category": "Sıcak İçecekler",
+        "desc": "Bitki çayının her çeşidi, her lezzeti onu çağırmanızı bekliyor."
+      },
+      {
+        "name": "BİTKİ ÇAYLARI (ELMA ÇAYI)",
+        "price": "120.00",
+        "category": "Sıcak İçecekler",
+        "desc": "Bitki çayının her çeşidi, her lezzeti onu çağırmanızı bekliyor."
+      },
+      {
+        "name": "BİTKİ ÇAYLARI (IHLAMUR)",
+        "price": "120.00",
+        "category": "Sıcak İçecekler",
+        "desc": "Bitki çayının her çeşidi, her lezzeti onu çağırmanızı bekliyor."
+      },
+      {
+        "name": "BİTKİ ÇAYLARI (KAYISILI FORM ÇAYI)",
+        "price": "120.00",
+        "category": "Sıcak İçecekler",
+        "desc": "Bitki çayının her çeşidi, her lezzeti onu çağırmanızı bekliyor."
+      },
+      {
+        "name": "BİTKİ ÇAYLARI (KUŞBURNU ÇAYI)",
+        "price": "120.00",
+        "category": "Sıcak İçecekler",
+        "desc": "Bitki çayının her çeşidi, her lezzeti onu çağırmanızı bekliyor."
+      },
+      {
+        "name": "BİTKİ ÇAYLARI (NANE-LİMON)",
+        "price": "120.00",
+        "category": "Sıcak İçecekler",
+        "desc": "Bitki çayının her çeşidi, her lezzeti onu çağırmanızı bekliyor."
+      },
+      {
+        "name": "BİTKİ ÇAYLARI (PAPATYA ÇAYI)",
+        "price": "120.00",
+        "category": "Sıcak İçecekler",
+        "desc": "Bitki çayının her çeşidi, her lezzeti onu çağırmanızı bekliyor."
+      },
+      {
+        "name": "BİTKİ ÇAYLARI (REZENE ÇAYI)",
+        "price": "120.00",
+        "category": "Sıcak İçecekler",
+        "desc": "Bitki çayının her çeşidi, her lezzeti onu çağırmanızı bekliyor."
+      },
+      {
+        "name": "CAFFE LATTE",
+        "price": "140.00",
+        "category": "Sıcak İçecekler",
+        "desc": "Kahvede sütten vazgeçemeyenlerin tercihi bugün de Caffe Latte."
+      },
+      {
+        "name": "CAPPUCCINO",
+        "price": "140.00",
+        "category": "Sıcak İçecekler",
+        "desc": "Krema kıvamında süt ve süt köpüğüyleespressonun bir başka hali."
+      },
+      {
+        "name": "DAMLA SAKIZLI TÜRK KAHVESİ",
+        "price": "135.00",
+        "category": "Sıcak İçecekler",
+        "desc": "Türk Kahvesinin köpüğüne, tadına, damla sakızı eklendi."
+      },
+      {
+        "name": "DOUBLE ESPRESSO",
+        "price": "150.00",
+        "category": "Sıcak İçecekler",
+        "desc": "Sevdiği tadı ikiye katlamak isteyenlere."
+      },
+      {
+        "name": "ESPRESSO",
+        "price": "140.00",
+        "category": "Sıcak İçecekler",
+        "desc": "Günün her saatine harika bir İtalyan klasiği."
+      },
+      {
+        "name": "FİLTRE KAHVE",
+        "price": "140.00",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "FİNCAN ÇAY (DEMLEME)",
+        "price": "70.00",
+        "category": "Sıcak İçecekler",
+        "desc": "Tam deminde fincan çay."
+      },
+      {
+        "name": "FİNCAN SÜT",
+        "price": "80.00",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "GIANDUJA MOCHA",
+        "price": "140.00",
+        "category": "Sıcak İçecekler",
+        "desc": "Gerçek Valonia çikolatanın Mocha ile buluşması"
+      },
+      {
+        "name": "NESCAFE",
+        "price": "140.00",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "SALEP",
+        "price": "140.00",
+        "category": "Sıcak İçecekler",
+        "desc": "Üzerinde tarçınıyla bu kış da içinizi ısıtacak."
+      },
+      {
+        "name": "TÜRK KAHVESİ (DUBLE TÜRK KAHVESİ)",
+        "price": "140.00",
+        "category": "Sıcak İçecekler",
+        "desc": "Valonia’nın usta ellerinden “Geleneksel Türk Kahvesi” Turkish Coffee from Valonia."
+      },
+      {
+        "name": "TÜRK KAHVESİ (TÜRK KAHVESİ)",
+        "price": "130.00",
+        "category": "Sıcak İçecekler",
+        "desc": "Valonia’nın usta ellerinden “Geleneksel Türk Kahvesi” Turkish Coffee from Valonia."
+      },
+      {
+        "name": "VALONIA HOT CHOCOLATE",
+        "price": "140.00",
+        "category": "Sıcak İçecekler",
+        "desc": "Çikolatanın her formunu sevenlere Valonia tarifiyle sıcak çikolata."
+      },
+      {
+        "name": "WHITE MOCHA",
+        "price": "140.00",
+        "category": "Sıcak İçecekler",
+        "desc": "Espresso ve sütün buluşmasınaçikolata da eklendi."
+      },
+      {
+        "name": "AYRAN",
+        "price": "90.00",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "BUZLU CAFFE LATTE",
+        "price": "150.00",
+        "category": "Soğuk İçecekler",
+        "desc": "Espresso üzerine yoğun süt ileyaz mevsiminin ideal kahvesi"
+      },
+      {
+        "name": "BUZLU MOCHA",
+        "price": "150.00",
+        "category": "Soğuk İçecekler",
+        "desc": "Espresso, süt ve çikolatayla buzgibi bir kahve ferahlığı."
+      },
+      {
+        "name": "COCA COLA",
+        "price": "100.00",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "COCA COLA LIGHT",
+        "price": "100.00",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "COCA COLA ZERO",
+        "price": "100.00",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "COOL LIME",
+        "price": "150.00",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "EV YAPIMI LİMONATA",
+        "price": "145.00",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "FANTA",
+        "price": "100.00",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "FROZEN",
+        "price": "150.00",
+        "category": "Soğuk İçecekler",
+        "desc": "Mango, çilek, limon ve tutti fruttis seçenekleriyle."
+      },
+      {
+        "name": "FROZITA CILEK",
+        "price": "150.00",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "FROZITA FRUTTA CILEK",
+        "price": "150.00",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "FROZITA FRUTTA MANGO",
+        "price": "150.00",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "FROZITA KARAMEL",
+        "price": "150.00",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "FROZITA MOCHA - FROZITA ESPRESSO",
+        "price": "150.00",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "FUSE TEA ŞEFTALİ VE LİMON",
+        "price": "100.00",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "HIBISKUS",
+        "price": "150.00",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "ICED CARAMEL MACCHIATO",
+        "price": "150.00",
+        "category": "Soğuk İçecekler",
+        "desc": "Soğuk süt, süt köpüğüne eklenen espresso ve karamelle hazırlanan Iced Caramel Macchiato içinizi serinletecek."
+      },
+      {
+        "name": "JAVA CHIP MOCHA FRAPPE",
+        "price": "150.00",
+        "category": "Soğuk İçecekler",
+        "desc": "Süt, mocha sos, kar haline getirilmiş buz, özel krema bazlı karışım ve çikolata sos."
+      },
+      {
+        "name": "MANGO PASSION",
+        "price": "150.00",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "MATCHA ÇAYI",
+        "price": "120.00",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "MEYVE SUYU",
+        "price": "75.00",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "SODA",
+        "price": "75.00",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "SPRITE",
+        "price": "100.00",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "SU",
+        "price": "50.00",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "TAZE PORTAKAL SUYU",
+        "price": "150.00",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "VALONIA CHOCOLATE MIX",
+        "price": "150.00",
+        "category": "Soğuk İçecekler",
+        "desc": "Valonia’nın gerçek çikolatalarıyla yapılmış enfes buz gibi bir karışım."
+      }
+    ]
+  },
   "957": {
     "name": "Baylan",
     "sourceUrl": "https://www.yemeksepeti.com/restaurant/t44g/baylan-t44g",

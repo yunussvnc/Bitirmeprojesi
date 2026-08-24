@@ -533,3 +533,11 @@ Hentzer canlı ID 957 `Baylan`, `Caferağa, Muvakkıthane Cd. No:9/A, 34710 Kad�
 Yemeksepeti `https://www.yemeksepeti.com/restaurant/t44g/baylan-t44g` vendor sayfası browser’da `Hakkında` panelinde `Caferağa Mah. - Moda Caferağa, Muvakkıthane Cd. No: 9/A, 34710 Kadıköy/İstanbul` adresini gösterdi. Aynı canlı sayfada 9 kategori ve 85 kaynak satırı/fiyatı görünür; `Sıcak Kahveler` içindeki aynı ad-fiyat tekrarları tekilleştirildikten sonra 80 benzersiz ürün/fiyat/kategori kalemi aktarıldı. Fiyatlar 24 Ağustos 2026 canlı erişiminde kaynakta görülen biçimleriyle tutuldu; açık yayın tarihi bulunmadığı için `verifiedAt` erişim/doğrulama tarihidir.
 
 `Adet olarak servis edilir`, `Sıcak servis edilir` ve `Soğuk servis edilir` gibi açıklamalar ürün adı olmadığı için ayrı menü kalemi yapılmadı. Ambalaj/servis/kuver kalemi bulunmadı; fiyat uydurulmadı. Değişiklik yalnız yerel `MENU_OVERRIDES` tablosu ve bu araştırma günlüğü kapsamındadır; backend/API/DB’ye yazım yapılmadı.
+
+### Valonia Chocolate & Cafe ID 6083 Pelit QR menüsü (24 Ağustos 2026)
+
+Hentzer canlı ID 6083 `Valonia Chocolate & Cafe`, `Türkali, Ihlamurdere Cd. No:40/B, 34357 Beşiktaş/İstanbul` kaydıdır. Yelp işletme kaydı `https://www.yelp.com/biz/valonia-chocolate-ve-cafe-istanbul` aynı `Ihlamurdere Cad. No:40/B` adresini ve `0212 259 18 56` telefonunu gösterdi; işletme web sitesi olarak `valonia.com.tr` bağlantısını veriyor. Bu exact kimlik Hentzer kaydıyla eşleşti.
+
+Resmi şube menüsü `http://sube.valonia.com.tr/sitemenu/` fiyat göstermeyen ürün açıklamalarını yayımlıyor. Resmi Pelit QR menüsü `https://valonia.pelit.com.tr/?kaynak=qr` browser/DOM erişiminde 8 bölümde 99 kart ve 112 sayısal fiyat satırı gösterdi. Çoklu fiyat satırları (omlet, sahanda yumurta, bitki çayları ve Türk kahvesi) etiketleri ürün adına parantez içinde korunarak ayrı kalemlere dönüştürüldü; böylece 112 benzersiz ad/fiyat/kategori ürünü aktarıldı.
+
+Kaynakta görünür yayın tarihi yok; `verifiedAt` 24 Ağustos 2026 canlı erişim/doğrulama tarihidir. Pardon işletme menüsü ürün adlarını gösterse de fiyat vermediği için fiyatlar yalnız resmi Pelit QR kaynağından alındı. Ambalaj/servis/kuver kalemi eklenmedi ve fiyat uydurulmadı. Değişiklik yalnız yerel `MENU_OVERRIDES` tablosu ve bu araştırma günlüğü kapsamındadır; backend/API/DB’ye yazım yapılmadı.
