@@ -64877,4 +64877,184 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       }
     ],
   },
+
+  "7079": {
+    "name": "A De Lauren Bakery",
+    "sourceUrl": "https://www.migros.com.tr/yemek/adelauren-besiktas-turkali-mah-st-187dd",
+    "sourceName": "Migros Yemek branch-labeled `Adelauren, Beşiktaş (Türkali Mah.)` live menu; exact official Facebook bridge: Türkali Mah. Kemal Türel Sok. No:5/C, Beşiktaş",
+    "verifiedAt": "2026-08-24",
+    "items": [
+      {
+        "name": "Lauren Chicken Food Menü 1",
+        "price": "200,00 TL",
+        "category": "Menüler",
+        "desc": "Lauren Chicken Food + Kutu İçecek"
+      },
+      {
+        "name": "Mantı Menü",
+        "price": "300,00 TL",
+        "category": "Menüler",
+        "desc": "Mantı + Mozaik Pasta + Kutu İçecek"
+      },
+      {
+        "name": "American Cookie Fondü",
+        "price": "200,00 TL",
+        "category": "Belçikalı Fondüler",
+        "desc": "Sıcak cookie, muz, çilek, sütlü & beyaz Belçika çikolatası"
+      },
+      {
+        "name": "Glacial",
+        "price": "200,00 TL",
+        "category": "Belçikalı Fondüler",
+        "desc": "Kakaolu veya sade waffle, mascarpone krema, muz, çilek, sütlü Belçika çikolatası, beyaz Belçika çikolatası"
+      },
+      {
+        "name": "Poni",
+        "price": "200,00 TL",
+        "category": "Belçikalı Fondüler",
+        "desc": "Brownie, çilek, muz, sütlü Belçika çikolatası, beyaz Belçika çikolatası"
+      },
+      {
+        "name": "Cookie Cup",
+        "price": "130,00 TL",
+        "category": "Ev Yapımı Tatlılar",
+        "desc": "Özel mag kreması, muz, Belçika çikolatalı cookie"
+      },
+      {
+        "name": "Belçika Çikolatalı Cookie",
+        "price": "100,00 TL",
+        "category": "Ev Yapımı Tatlılar"
+      },
+      {
+        "name": "Belçika Usulü Mozaik Pasta",
+        "price": "140,00 TL",
+        "category": "Ev Yapımı Tatlılar",
+        "desc": "Belçika çikolatalı sos, fındık, bisküvi"
+      },
+      {
+        "name": "Beyaz Çikolatalı Çilekli Dev Ekler",
+        "price": "140,00 TL",
+        "category": "Ev Yapımı Tatlılar",
+        "desc": "Beyaz Belçika çikolatası, prenses krema, çilek"
+      },
+      {
+        "name": "Çilekli Cup",
+        "price": "130,00 TL",
+        "category": "Ev Yapımı Tatlılar",
+        "desc": "(Cam kavanozda servis edilir.) Özel mag kreması, çilek, bebe bisküvisi"
+      },
+      {
+        "name": "Oreolu Muzlu Cup",
+        "price": "130,00 TL",
+        "category": "Ev Yapımı Tatlılar",
+        "desc": "(Cam kavanozda servis edilir.) Özel mag kreması, muz, Oreo"
+      },
+      {
+        "name": "Profiterol Cup",
+        "price": "150,00 TL",
+        "category": "Ev Yapımı Tatlılar",
+        "desc": "(Cam kavanozda servis edilir.) Pastacı kreması, pataşu hamur topları, profiterol sos, Antep fıstığı"
+      },
+      {
+        "name": "Sütlü Çikolatalı Muzlu Dev Ekler",
+        "price": "140,00 TL",
+        "category": "Ev Yapımı Tatlılar",
+        "desc": "Sütlü Belçika çikolatası, çikolatalı prenses krema, muz"
+      },
+      {
+        "name": "Lauren Chicken Food",
+        "price": "200,00 TL",
+        "category": "Tuzlu Lezzetler",
+        "desc": "Tuzlu Belçika waffle üzerine özel peynir karışımı, cips, tavuk şnitzel. Seçeceğiniz sos ile"
+      },
+      {
+        "name": "Mantı",
+        "price": "200,00 TL",
+        "category": "Tuzlu Lezzetler",
+        "desc": "Ev yapımı"
+      },
+      {
+        "name": "Kakaolu Milkshake",
+        "price": "100,00 TL",
+        "category": "Milkshakes"
+      },
+      {
+        "name": "Çilekli Milkshake",
+        "price": "100,00 TL",
+        "category": "Milkshakes"
+      },
+      {
+        "name": "Muzlu Milkshake",
+        "price": "100,00 TL",
+        "category": "Milkshakes"
+      },
+      {
+        "name": "Ice Chocolate",
+        "price": "120,00 TL",
+        "category": "Milkshakes"
+      },
+      {
+        "name": "Sıcak Çikolata",
+        "price": "100,00 TL",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Filtre Kahve",
+        "price": "80,00 TL",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Salep",
+        "price": "80,00 TL",
+        "category": "Sıcak İçecekler",
+        "desc": "İsteğe göre tarçın"
+      },
+      {
+        "name": "Double Türk Kahvesi",
+        "price": "60,00 TL",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Greek Frappe",
+        "price": "100,00 TL",
+        "category": "Soğuk Kahveler",
+        "desc": "Granül kahve, buz, dondurma"
+      },
+      {
+        "name": "Coca-Cola Zero Sugar (33 cl.)",
+        "price": "45,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Coca-Cola (33 cl.)",
+        "price": "45,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Fanta (33 cl.)",
+        "price": "45,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Sprite (33 cl.)",
+        "price": "45,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Lipton Ice Tea (33 cl.)",
+        "price": "45,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Niğde Gazozu (25 cl.)",
+        "price": "45,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Su (50 cl.)",
+        "price": "20,00 TL",
+        "category": "İçecekler"
+      }
+    ],
+  },
 };
