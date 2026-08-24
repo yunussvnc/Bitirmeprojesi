@@ -63837,5 +63837,1044 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       }
     ],
   },
-
+  "3739": {
+    "name": "Miesta Coffee & Dessert",
+    "sourceUrl": "https://miesta.com.tr/giris.aspx",
+    "sourceName": "Miesta resmi online menüsü (miesta.com.tr/giris.aspx), Fiyat Değişim Tarihi 24.07.2026; exact şube resmi @miestacoffeedessert adres köprüsü: Kartaltepe, Lavanta Sk. Ağaçsaray Apartmanı No:4/D, 34145 Bakırköy/İstanbul",
+    "verifiedAt": "2026-08-24",
+    "items": [
+      {
+        "name": "TON BALIKLI SALATA",
+        "price": "290₺",
+        "desc": "Akdeniz yeşillikleri, kokteyl domates, mısır, ton balığı.",
+        "category": "KAMPANYALAR"
+      },
+      {
+        "name": "AKDENİZ SALATA",
+        "price": "275₺",
+        "desc": "Akdeniz yeşilliği, beyaz peynir, kokteyl domates, çengelköy salatalığı, mısır.",
+        "category": "KAMPANYALAR"
+      },
+      {
+        "name": "Chocolate Cookie + Soğuk Filtre Kahve veya Soğuk Americano",
+        "price": "340₺",
+        "desc": "390 TL yerine 340 TL\nKurabiye sevenler için chocolate  cookie + Filtre Kahve veya Americano ile sizlerle.",
+        "category": "KAMPANYALAR"
+      },
+      {
+        "name": "Alacağın Tatlının Yanında Herhangi Bir Kahve Çeşidi 220TL",
+        "price": "185₺",
+        "desc": "Menüden seçeceğiniz tatlı eşliğinde taze çekilmiş tüm kahve seçeneklerimiz sadece 210TL.  Soğuk kahve seçeneğimiz 220 TL! Erimiş çikolata ekstradır.",
+        "category": "KAMPANYALAR"
+      },
+      {
+        "name": "GÜNÜN KAMPANYASI SADE SAN SEBASTİAN+ ICE LATTE/AMERICANO 580 TL YERİNE 525 TL",
+        "price": "525₺",
+        "desc": "Bugüne özel kampanya. İsteğe bağlı ücretli olarak üzerine sütlü, beyaz ya da ruby belçika çikolata sosu ekletebilirsiniz. \nAlerjen Uyarısı: Gluten, yumurta, süt ve süt ürünleri",
+        "category": "KAMPANYALAR"
+      },
+      {
+        "name": "Dört Peynirli Pizza 30 cm+Fanta 575TL (Ortalama pişirme süresi 20dk)",
+        "price": "575₺",
+        "desc": "İçerisinde kullanmış olduğumuz özel üretim taze kaşar peyniri, mozarella, parmesan ve cheddar peyniri eşliğinde lezziz dört peynirli pizza.",
+        "category": "KAMPANYALAR"
+      },
+      {
+        "name": "CREMEE BRULE+ ICE LATTE 535TL YERİNE 485TL",
+        "price": "485₺",
+        "desc": "Yumuşacık krema üzerine karamelize şeker tabakası kaplanmış fransız lezzeti. Çilek ve çikolata sosu ile servis edilir. Latte için süt tercihiniz laktozsuz süt ve bitkisel süt ekstra.\n Alerjen Uyarısı: Yumurta, süt ve süt ürünleri",
+        "category": "KAMPANYALAR"
+      },
+      {
+        "name": "MAGNOLİA + ICE AMERICANO/ ICE LATTE 590 YERİNE 535TL",
+        "price": "535₺",
+        "desc": "MİX, ÇİLEKLİ VE MUZU MAGNOLYADA GEÇERLİDİR. Lezzetli kremamsı muhallebi ile bisküvi parçacıklarının en güzel hali. Üzerinde cikolata sosu ile servis edilir. Alerjen Uyarısı: Yumurta, süt ve süt ürünleri içerir.",
+        "category": "KAMPANYALAR"
+      },
+      {
+        "name": "Snickers cheescake + Kahve 565TL YERİNE 515TL",
+        "price": "515₺",
+        "desc": "Snickers cheesecake'in yanında istediğiniz kahve  ile birlikte 515 lira.",
+        "category": "KAMPANYALAR"
+      },
+      {
+        "name": "MAGNUM KRUVASAN",
+        "price": "450₺",
+        "desc": "BADEMLİ MAGNUM, MUZ, ERİMİŞ BELÇİKA ÇİKOLATASI VE FİLE BADEM",
+        "category": "KAMPANYALAR"
+      },
+      {
+        "name": "SANDVİÇ + LİMONATA",
+        "price": "395₺",
+        "desc": "SEÇTİĞİNİZ BİR SANDVİÇ + LİMONATA 455 YERİNE 395 TL",
+        "category": "VEGAN REFRESHER"
+      },
+      {
+        "name": "KIRMIZI MEYVELİ MAGNUM KRUVASAN",
+        "price": "460₺",
+        "desc": "ORMAN MEYVELERİ, ÇİLEK VE KARADUT&BÖĞÜRTLEN MAGNUMLU KRUVASAN. ERİMİŞ BELÇİKA ÇİKOALTASI İLE SERVİS EDİLİR",
+        "category": "VEGAN REFRESHER"
+      },
+      {
+        "name": "CERES",
+        "price": "250₺",
+        "desc": "Kuzu kulağı, Yeşil elma ve Nane.",
+        "category": "VEGAN REFRESHER"
+      },
+      {
+        "name": "BACCHUS",
+        "price": "250₺",
+        "desc": "Yaban mersini, Mangostan ve Karanfil.",
+        "category": "VEGAN REFRESHER"
+      },
+      {
+        "name": "PROSERPİNA",
+        "price": "250₺",
+        "desc": "Nar, Yaban mersini ve Zencefil.",
+        "category": "VEGAN REFRESHER"
+      },
+      {
+        "name": "HERCULES",
+        "price": "250₺",
+        "desc": "Çarkıfelek, Acı biber ve  Zerdeçal.",
+        "category": "VEGAN REFRESHER"
+      },
+      {
+        "name": "SOL İNVİCTUS",
+        "price": "250₺",
+        "desc": "Mandalina, Guava ve Zerdeçal.",
+        "category": "TATLILAR"
+      },
+      {
+        "name": "CUPİD",
+        "price": "250₺",
+        "desc": "Frambuaz, Hibiscus ve Kakule.",
+        "category": "TATLILAR"
+      },
+      {
+        "name": "Orman Meyveli New York Cheesecake",
+        "price": "340₺",
+        "desc": "Lezzet söleni kırmızı meyveler ile olusturduğumuz New York Cheesecake.\nGluten İcerir.",
+        "category": "TATLILAR"
+      },
+      {
+        "name": "Fıstık Kadayıflı Magnolia (YENİ ÜRÜN)",
+        "price": "425₺",
+        "desc": "Lezzetli yumuşacık kremamsı muhallebi ile kavrulmuş kadayıfın en güzel halini antep fıstığı ile tatlandırdık. Üzerinde cikolata sosu ve toz antep fıstığı ile servis edilir. \nAlerjen Uyarısı: Yumurta, süt ve süt ürünleri içerir.",
+        "category": "TATLILAR"
+      },
+      {
+        "name": "KitKatlı Cookie",
+        "price": "235₺",
+        "desc": "Çikolata parçacıklı enfes kurabiye ve kitkat çikolata kremalı.",
+        "category": "TATLILAR"
+      },
+      {
+        "name": "Lotuslu Cookie",
+        "price": "235₺",
+        "desc": "Çikolata parçacıklı enfes kurabiye ve lotus kremalı.",
+        "category": "TATLILAR"
+      },
+      {
+        "name": "Vişneli Beyaz Çikolatalı Brownie",
+        "price": "420₺",
+        "desc": "Arasında vişne ve beyaz çikolata, yoğun çikolata sevenler için harika lezzet. Ekstra olarak yanında vanilyalı dondurma servis verebiliriz. Alerjen Uyarısı: Gluten, yumurta, süt ve süt ürünleri içerir.",
+        "category": "TATLILAR"
+      },
+      {
+        "name": "Sade San Sebastian",
+        "price": "375₺",
+        "desc": "GLUTENSİZ. Bask cheesecake ya da La Vina San Sebastian yanık cheesecake olarak bilinen ve çok tercih edilen harika lezzet. İsteğe bağlı ekstra olarak üzerine sütlü, beyaz ya da ruby belçika çikolata sosu ekletebilirsiniz.",
+        "category": "TATLILAR"
+      },
+      {
+        "name": "Fragola Gelato - Yeni Lezzet",
+        "price": "350₺",
+        "desc": "Vanilyalı Dondurma, Çilek, Lotus Bisküvi Parçacıkları ve Sütlü Belçika Çikolatasının Muhteşem Uyumu",
+        "category": "TATLILAR"
+      },
+      {
+        "name": "Creme Brulee",
+        "price": "320₺",
+        "desc": "GLUTENSİZ. Yumuşacık krema üzerine karamelize şeker tabakası kaplanmış fransız lezzeti. Çilek ve çikolata sosu ile servis edilir.\nAlerjen Uyarısı: Yumurta, süt ve süt ürünleri",
+        "category": "TATLILAR"
+      },
+      {
+        "name": "Snickers Cheescake",
+        "price": "350₺",
+        "desc": "Yer fısıtığı ve karamel severlere, yeni bir cheescake yorumu.",
+        "category": "TATLILAR"
+      },
+      {
+        "name": "Spoonful",
+        "price": "300₺",
+        "desc": "Miesta Spoonful",
+        "category": "TATLILAR"
+      },
+      {
+        "name": "Çilekli Magnolia",
+        "price": "375₺",
+        "desc": "Lezzetli kremamsı muhallebi ile bisküvi parçacıklarının en güzel hali. \nÜzerinde cikolata sosu ile servis edilir.\nAlerjen Uyarısı: Yumurta, süt ve süt ürünleri içerir.",
+        "category": "TATLILAR"
+      },
+      {
+        "name": "Muzlu Magnolia",
+        "price": "375₺",
+        "desc": "Lezzetli kremamsı muhallebi ile bisküvi parçacıklarının en güzel hali. \nÜzerinde cikolata sosu ile servis edilir.\nAlerjen Uyarısı: Yumurta, süt ve süt ürünleri içerir.",
+        "category": "TATLILAR"
+      },
+      {
+        "name": "Beyaz Çikolatalı Brownie",
+        "price": "375₺",
+        "desc": "Arasında sıcacık beyaz çikolata ile yoğun çikolata sevenler için harika lezzet. İsterseniz üzerine ekstra olarak sütlü, beyaz ya da ruby belçika çikolata sosu ve vanilyalı dondurma ekletebilirsiniz. Alerjen Uyarısı: Gluten, yumurta, süt ve süt ürünleri içerir.",
+        "category": "TATLILAR"
+      },
+      {
+        "name": "İbiza",
+        "price": "350₺",
+        "desc": "Krema ve nutellanın bisküvi ile harika uyumu.",
+        "category": "TATLILAR"
+      },
+      {
+        "name": "mix magnolya (çilek muz)",
+        "price": "380₺",
+        "desc": "Lezzetli kremamsı muhallebi ile bisküvi parçacıklarının en güzel hali. Üzerinde cikolata sosu ile servis edilir. Alerjen Uyarısı: Yumurta, süt ve süt ürünleri içerir.",
+        "category": "TATLILAR"
+      },
+      {
+        "name": "Chocolate Cookie",
+        "price": "175₺",
+        "desc": "Kurabiye sevenler için chocolate cookie sade ve çikolatalı seçenekleri ile sizlerle.\nAlerjen Uyarısı: Gluten, yumurta, süt ve süt ürünleri",
+        "category": "TATLILAR"
+      },
+      {
+        "name": "Marlenka",
+        "price": "340₺",
+        "desc": "Ballı ve cevizli Çekya'nın geleneksel lezzeti.",
+        "category": "TATLILAR"
+      },
+      {
+        "name": "LOTUSLU MAGNOLYA",
+        "price": "460₺",
+        "desc": "Taze muz, magnolya ve erimiş lotus.",
+        "category": "BUZLU KAHVELER"
+      },
+      {
+        "name": "SAN PİSTACHİO SEBASTİAN",
+        "price": "400₺",
+        "desc": "Antep fıstıklı sebastian",
+        "category": "BUZLU KAHVELER"
+      },
+      {
+        "name": "ICE PİSTACHİO LATTE",
+        "price": "300₺",
+        "desc": "Espresso, süt, antep fıstığı, buz. Tatlı, dengeli, ipeksi..",
+        "category": "BUZLU KAHVELER"
+      },
+      {
+        "name": "Iced Matcha Latte",
+        "price": "275₺",
+        "desc": "Japonya'nın geleneksel yeşil çayı, matcha ile hazırlanan özel latte.\nSüt ile buluşarak yumuşak ve ferahlatıcı bir lezzet sunar.\nLaktozsuz süt seçeneğimiz mevcut.",
+        "category": "BUZLU KAHVELER"
+      },
+      {
+        "name": "Çilekli Iced Matcha Latte",
+        "price": "295₺",
+        "desc": "Japonya'nın geleneksel yeşil çayı, matcha ile hazırlanan özel latte.\nSüt ve çilek püresi ile buluşarak yumuşak ve ferahlatıcı bir lezzet sunar.\nLaktozsuz süt seçeneğimiz mevcut.",
+        "category": "BUZLU KAHVELER"
+      },
+      {
+        "name": "Kırmızı Orman Meyveli  Iced Matcha Latte",
+        "price": "295₺",
+        "desc": "Japonya'nın geleneksel yeşil çayı, matcha ile hazırlanan özel latte.\nSüt ve kırmızı meyveler püresi ile buluşarak yumuşak ve ferahlatıcı bir lezzet sunar.\nLaktozsuz süt seçeneğimiz mevcut.",
+        "category": "BUZLU KAHVELER"
+      },
+      {
+        "name": "Iced Orange Americano",
+        "price": "250₺",
+        "desc": "Taze sıkılmış portakal suyu ve yoğun espresso buluştu. Narenciye ferahlığı ile kahve enerjisini bir araya getiren eşsiz bir tat.\nTaze sıkılmış portakal suyu, çift shot epresso, bol buz.",
+        "category": "BUZLU KAHVELER"
+      },
+      {
+        "name": "Iced Cream Shaken Espresso",
+        "price": "290₺",
+        "desc": "Espresso, süt, krema. Serin, yoğun, tatlı dokunuşlu.",
+        "category": "BUZLU KAHVELER"
+      },
+      {
+        "name": "Iced Latte",
+        "price": "215₺",
+        "desc": "Espresso ve soğuk süt. Yumuşak, kremamsı, serinletici.",
+        "category": "BUZLU KAHVELER"
+      },
+      {
+        "name": "Iced Americano",
+        "price": "200₺",
+        "desc": "Espresso ve soğuk su. Temiz, ferah, uzun içim.",
+        "category": "BUZLU KAHVELER"
+      },
+      {
+        "name": "Iced Flat White",
+        "price": "210₺",
+        "desc": "Yoğun espresso, soğuk süt ve buzun soğuk kahve severlerle buluşması",
+        "category": "BUZLU KAHVELER"
+      },
+      {
+        "name": "Iced Mocha",
+        "price": "255₺",
+        "desc": "Espresso, süt, çikoata, buz. Tatlı, dengeli, ipeksi.",
+        "category": "BUZLU KAHVELER"
+      },
+      {
+        "name": "Soğuk Filtre Kahve",
+        "price": "200₺",
+        "desc": "Soğuk demleme filtre kahve. Temiz, hafif, yumuşak içim.",
+        "category": "BUZLU KAHVELER"
+      },
+      {
+        "name": "Iced White Mocha",
+        "price": "255₺",
+        "desc": "Espresso, süt, çikoata, buz. Tatlı, dengeli, ipeksi.",
+        "category": "BUZLU KAHVELER"
+      },
+      {
+        "name": "Iced Vanilya Latte",
+        "price": "250₺",
+        "desc": "Espresso, süt, vanilya, buz. Tatlı, dengeli, ipeksi.",
+        "category": "BUZLU KAHVELER"
+      },
+      {
+        "name": "Iced Lotus Latte",
+        "price": "250₺",
+        "desc": "Yoğun espresso, lotus şurubu, soğuk süt ve buzun soğuk kahve severlerle buluşması",
+        "category": "BUZLU KAHVELER"
+      },
+      {
+        "name": "Iced Karamel Latte",
+        "price": "250₺",
+        "desc": "Yoğun espresso, karamel şurubu, soğuk süt ve buzun soğuk kahve severlerle buluşması",
+        "category": "BUZLU KAHVELER"
+      },
+      {
+        "name": "Iced Toffee Nut Latte",
+        "price": "250₺",
+        "desc": "Yoğun espresso, fındık şurubu, soğuk süt ve buzun soğuk kahve severlerle buluşması",
+        "category": "BUZLU KAHVELER"
+      },
+      {
+        "name": "Iced Bal Kabağı Latte",
+        "price": "250₺",
+        "desc": "Yoğun espresso, Bal Kabağı şurubu, soğuk süt ve buzun soğuk kahve severlerle buluşması",
+        "category": "BUZLU KAHVELER"
+      },
+      {
+        "name": "Iced Chocolate Cookie Latte",
+        "price": "250₺",
+        "desc": "Espresso, süt, çikolatalı kurabiye armoası buz. Tatlı, dengeli, ipeksi..",
+        "category": "BUZLU KAHVELER"
+      },
+      {
+        "name": "Iced Panda Mocha",
+        "price": "255₺",
+        "desc": "Espresso, süt, çikoata, buz. Tatlı, dengeli, ipeksi.",
+        "category": "BUZLU KAHVELER"
+      },
+      {
+        "name": "Cold Brew",
+        "price": "240₺",
+        "desc": "Uzun demleme, doğal tatlılık. Düşük asidite, yumuşak içim.",
+        "category": "ESPRESSO BAZLILAR"
+      },
+      {
+        "name": "Iced Spanish Latte",
+        "price": "275₺",
+        "desc": "Yoğunlaştırılmış latte.",
+        "category": "ESPRESSO BAZLILAR"
+      },
+      {
+        "name": "Latte",
+        "price": "210₺",
+        "desc": "Epresso ve süt. Yumuşak, kremamsı, dengeli.",
+        "category": "ESPRESSO BAZLILAR"
+      },
+      {
+        "name": "Golden Winter Honey Latte",
+        "price": "260₺",
+        "desc": "Kış günlerin vazgeçilmezi. Sadece kışa özel içeceğimiz. Golden Winter Honey Latte. Altın rengi süt ve balın büyülü birleşimiyle hazırlanan bu latte, zerdeçalın doğal ısısını ve balın tatlılığını bir araya getiriyor. Yumuşacık sütle harmanlanan baharatlı altın tonları, hem bedeninizi ısıtacak hem de bağışıklığınızı güçlenderecek. Hafif bir dokunuşla tarçın ve zencefil, kışa özel lezzetini taçlandırıyor. \nİçeriği: Vietnam tarçını, karabiber, zerdeçal, zencefil, kakule.\nBal ile içilmesi tavsiyemizdir.\nSICAK KAHVE KAMPANYA DAHİL DEĞİLDİR.",
+        "category": "ESPRESSO BAZLILAR"
+      },
+      {
+        "name": "Mocha",
+        "price": "240₺",
+        "desc": "Espresso, süt, çikolata. Yoğun, tatlı, ipeksi.",
+        "category": "ESPRESSO BAZLILAR"
+      },
+      {
+        "name": "Cappuccino",
+        "price": "210₺",
+        "desc": "Yoğun espresso, sıcak süt, kalın süt köpüğü. Klasik, dengeli, zarif.",
+        "category": "ESPRESSO BAZLILAR"
+      },
+      {
+        "name": "Americano",
+        "price": "195₺",
+        "desc": "Espresso ve sıcak su. Temiz, hafif, uzun içim.",
+        "category": "ESPRESSO BAZLILAR"
+      },
+      {
+        "name": "Caramel Macchiato",
+        "price": "210₺",
+        "desc": "Karamelli orta yoğun süt kremalı kahve.",
+        "category": "ESPRESSO BAZLILAR"
+      },
+      {
+        "name": "Flat White",
+        "price": "220₺",
+        "desc": "Yoğun espresso, ince mikro köpük süt. Dengeli, yumuşak, karakterli.",
+        "category": "ESPRESSO BAZLILAR"
+      },
+      {
+        "name": "Cortado",
+        "price": "210₺",
+        "desc": "1/2 espresso 1/2 süt.",
+        "category": "ESPRESSO BAZLILAR"
+      },
+      {
+        "name": "Single Espresso",
+        "price": "130₺",
+        "desc": "Saf kahve özü. Yoğun, kısa, net.",
+        "category": "ESPRESSO BAZLILAR"
+      },
+      {
+        "name": "Double Espresso",
+        "price": "150₺",
+        "desc": "Double shot espresso.",
+        "category": "ESPRESSO BAZLILAR"
+      },
+      {
+        "name": "Salted Caramel latte",
+        "price": "200₺",
+        "desc": "Tuzlu karamelli kahve.",
+        "category": "ESPRESSO BAZLILAR"
+      },
+      {
+        "name": "Espresso Macchiato",
+        "price": "155₺",
+        "desc": "Espresso, az miktarda süt köpüğü. Yoğun, kısa, dengeli dokunuşlu.",
+        "category": "ESPRESSO BAZLILAR"
+      },
+      {
+        "name": "Ristretto",
+        "price": "130₺",
+        "desc": "Kısa çekim espresso. Daha yoğun, koyu ve konsatre.",
+        "category": "ESPRESSO BAZLILAR"
+      },
+      {
+        "name": "Red Eye",
+        "price": "210₺",
+        "desc": "Filtre kahve ve tek shot espresso. x1.5 kafein seviyesi.",
+        "category": "ESPRESSO BAZLILAR"
+      },
+      {
+        "name": "Black Eye",
+        "price": "210₺",
+        "desc": "Filtre kahve ve double shot espresso. x2 kafein seviyesi.",
+        "category": "ESPRESSO BAZLILAR"
+      },
+      {
+        "name": "Vanilla Latte",
+        "price": "240₺",
+        "desc": "Vanilyalı kahve.",
+        "category": "ESPRESSO BAZLILAR"
+      },
+      {
+        "name": "Caramel Latte",
+        "price": "240₺",
+        "desc": "Karamelli kahve.",
+        "category": "ESPRESSO BAZLILAR"
+      },
+      {
+        "name": "Affogato",
+        "price": "240₺",
+        "desc": "1 top vanilya dondurma üzerine double espresso dökülerek ortaya çıkan lezzet",
+        "category": "ESPRESSO BAZLILAR"
+      },
+      {
+        "name": "Toffee Nut Latte",
+        "price": "240₺",
+        "desc": "Fındık ve karamelli kahve.",
+        "category": "ESPRESSO BAZLILAR"
+      },
+      {
+        "name": "Chocolate Cookie Latte",
+        "price": "240₺",
+        "desc": "Kurabiye ve çikolata aromalı kahve.",
+        "category": "ESPRESSO BAZLILAR"
+      },
+      {
+        "name": "Lotus Latte",
+        "price": "240₺",
+        "desc": "Lotus kremalı kahve.",
+        "category": "ESPRESSO BAZLILAR"
+      },
+      {
+        "name": "Banana Latte",
+        "price": "240₺",
+        "desc": "Muzlu kahve.",
+        "category": "ESPRESSO BAZLILAR"
+      },
+      {
+        "name": "Strawberry Latte",
+        "price": "240₺",
+        "desc": "Çilekli kahve.",
+        "category": "ESPRESSO BAZLILAR"
+      },
+      {
+        "name": "Punpkin Spice Latte",
+        "price": "240₺",
+        "desc": "Bal kabağı ve kendine münhasır kış baharatlarıyla hazırlanmış kahve.",
+        "category": "ESPRESSO BAZLILAR"
+      },
+      {
+        "name": "White Mocha",
+        "price": "240₺",
+        "desc": "Espresso, süt, çikolata. Yoğun, tatlı, ipeksi.",
+        "category": "ESPRESSO BAZLILAR"
+      },
+      {
+        "name": "Panda Mocha",
+        "price": "240₺",
+        "desc": "Espresso, süt, çikolata. Yoğun, tatlı, ipeksi.",
+        "category": "LİMONATALAR"
+      },
+      {
+        "name": "Spanish Latte",
+        "price": "250₺",
+        "desc": "Yoğunlaştırılmış latte.",
+        "category": "LİMONATALAR"
+      },
+      {
+        "name": "LİMONATA",
+        "price": "200₺",
+        "desc": "El yapımı klasik limonata",
+        "category": "MOCKTAİLS"
+      },
+      {
+        "name": "Meyveli Limonata",
+        "price": "225₺",
+        "desc": "Çilekli, Narlı, Naneli, Yeşil Elmalı, Mangolu, Böğürtlenli, Ananaslı",
+        "category": "MOCKTAİLS"
+      },
+      {
+        "name": "Cool Lime",
+        "price": "235₺",
+        "desc": "Nane, misket limon, limon suyu, cool lime özü, şeker ve su ile hazırlanan kokteyl",
+        "category": "MOCKTAİLS"
+      },
+      {
+        "name": "Mango Dragonfruit Refresher",
+        "price": "250₺",
+        "desc": "Ejder meyvesi parçalarının buzla çalkalanıp mango tadıyla birleşerek, misafirlere sıcak havalarda serinleten tropikal lezzet",
+        "category": "MOCKTAİLS"
+      },
+      {
+        "name": "Hibiscus Berry",
+        "price": "250₺",
+        "desc": "Demlenen hibiscus çayına yaban mersini ve frambuaz şurubu katılarak yapılan kokteyl",
+        "category": "MOCKTAİLS"
+      },
+      {
+        "name": "Cool Lime Mineral",
+        "price": "245₺",
+        "desc": "Nane, misket limon, limon suyu, cool lime özü, şeker ve soda ile hazırlanan kokteyl",
+        "category": "MOCKTAİLS"
+      },
+      {
+        "name": "Klasik Mojito",
+        "price": "240₺",
+        "desc": "Klasik non-alcohol mojito.",
+        "category": "MOCKTAİLS"
+      },
+      {
+        "name": "Çilekli Mojito",
+        "price": "260₺",
+        "desc": "Klasik non-alcohol mojito.",
+        "category": "MOCKTAİLS"
+      },
+      {
+        "name": "Açai Sun",
+        "price": "250₺",
+        "desc": "Açai ve çilek meyvelerinden oluşan mokteyl",
+        "category": "MOCKTAİLS"
+      },
+      {
+        "name": "Pink Lychee",
+        "price": "250₺",
+        "desc": "Lychee ve yaban mersini meyveleri ile oluşan mokteyl",
+        "category": "MOCKTAİLS"
+      },
+      {
+        "name": "Aperol Spritz",
+        "price": "250₺",
+        "desc": "Bitter portakal.",
+        "category": "FRAPPELER"
+      },
+      {
+        "name": "SCİNTİLLA FLORİS",
+        "price": "250₺",
+        "desc": "ELEKTRİK ÇİÇEĞİ VE YABAN MERSİNİ.",
+        "category": "FRAPPELER"
+      },
+      {
+        "name": "Vanilya Frappe",
+        "price": "260₺",
+        "desc": "Vanilya şurubu, süt ve yoğun espressonun kar kıvamına gelen buz parçaları ile birleşmesiyle oluşan lezzet",
+        "category": "FRAPPELER"
+      },
+      {
+        "name": "KitKat Frappuccino (YENİ ÜRÜN)",
+        "price": "300₺",
+        "desc": "Gerçek Kitkat Çikolata parçacıklı, dondurma ve yoğun espressonun kar kıvamına gelen buz parçaları ile birleşmesiyle oluşan lezzet.",
+        "category": "FRAPPELER"
+      },
+      {
+        "name": "Çikolata Frappe",
+        "price": "260₺",
+        "desc": "Çikolata şurubu, süt ve yoğun espressonun kar kıvamına gelen buz parçaları ile birleşmesiyle oluşan lezzet",
+        "category": "FRAPPELER"
+      },
+      {
+        "name": "Çilek Frappe",
+        "price": "260₺",
+        "desc": "Çilek şurubu, süt ve yoğun espressonun kar kıvamına gelen buz parçaları ile birleşmesiyle oluşan lezzet",
+        "category": "FRAPPELER"
+      },
+      {
+        "name": "Coconut Frappe",
+        "price": "260₺",
+        "desc": "Coconut şurubu, süt ve yoğun espressonun kar kıvamına gelen buz parçaları ile birleşmesiyle oluşan lezzet",
+        "category": "FRAPPELER"
+      },
+      {
+        "name": "Lotus Frappe",
+        "price": "300₺",
+        "desc": "Lotus şurubu, süt ve yoğun espressonun kar kıvamına gelen buz parçaları ile birleşmesiyle oluşan lezzet",
+        "category": "FRAPPELER"
+      },
+      {
+        "name": "Toffee Nut Frappe",
+        "price": "260₺",
+        "desc": "Toffee Nut şurubu, süt ve yoğun espressonun kar kıvamına gelen buz parçaları ile birleşmesiyle oluşan lezzet",
+        "category": "FRAPPELER"
+      },
+      {
+        "name": "Mango Frappe",
+        "price": "260₺",
+        "desc": "Mango şurubu, süt ve yoğun espressonun kar kıvamına gelen buz parçaları ile birleşmesiyle oluşan lezzet",
+        "category": "FROZENLAR"
+      },
+      {
+        "name": "Banana Frappe",
+        "price": "260₺",
+        "desc": "Banana şurubu, süt ve yoğun espressonun kar kıvamına gelen buz parçaları ile birleşmesiyle oluşan lezzet",
+        "category": "FROZENLAR"
+      },
+      {
+        "name": "Mango Frozen",
+        "price": "245₺",
+        "desc": "Mango püresi ve buzun blend edilmesi ile ortaya çıkan lezzet",
+        "category": "FROZENLAR"
+      },
+      {
+        "name": "Kavun (Melon) Frozen",
+        "price": "245₺",
+        "desc": "Kavun püresi ve buzun blend edilmesi ile ortaya çıkan lezzet",
+        "category": "FROZENLAR"
+      },
+      {
+        "name": "Şeftali (Peach) Frozen",
+        "price": "245₺",
+        "desc": "Şeftali püresi ve buzun blend edilmesi ile ortaya çıkan lezzet",
+        "category": "FROZENLAR"
+      },
+      {
+        "name": "Böğürtlen (Blackberry) Frozen",
+        "price": "245₺",
+        "desc": "Böğürtlen püresi ve buzun blend edilmesi ile ortaya çıkan lezzet",
+        "category": "FROZENLAR"
+      },
+      {
+        "name": "Çilek (Strawberry) Frozen",
+        "price": "245₺",
+        "desc": "Çilek püresi ve buzun blend edilmesi ile ortaya çıkan lezzet",
+        "category": "FROZENLAR"
+      },
+      {
+        "name": "Mint Lemon Frozen",
+        "price": "245₺",
+        "desc": "Mint Lemon püresi ve buzun blend edilmesi ile ortaya çıkan lezzet",
+        "category": "FROZENLAR"
+      },
+      {
+        "name": "Ananas (Pineapple) Frozen",
+        "price": "245₺",
+        "desc": "Ananas püresi ve buzun blend edilmesi ile ortaya çıkan lezzet",
+        "category": "FROZENLAR"
+      },
+      {
+        "name": "Karpuz (Watermelon) Frozen",
+        "price": "245₺",
+        "desc": "Karpuz püresi ve buzun blend edilmesi ile ortaya çıkan lezzet",
+        "category": "MILKSHAKELER"
+      },
+      {
+        "name": "Muz (Banana) Frozen",
+        "price": "245₺",
+        "desc": "Muz püresi ve buzun blend edilmesi ile ortaya çıkan lezzet",
+        "category": "MILKSHAKELER"
+      },
+      {
+        "name": "Vanilya Milkshake",
+        "price": "250₺",
+        "desc": "Vanilya dondurma, milkshake tozu, süt ve buzun karışımı ile ortaya çıkan lezzet,  isteğe bağlı krem şanti eklenebilir.",
+        "category": "MILKSHAKELER"
+      },
+      {
+        "name": "Çikolatalı Milkshake",
+        "price": "250₺",
+        "desc": "Vanilya dondurma, milkshake tozu, çikolata sosu, süt ve buzun karışımı ile ortaya çıkan lezzet, isteğe bağlı krem şanti eklenebilir.",
+        "category": "MILKSHAKELER"
+      },
+      {
+        "name": "Çilekli Milkshake",
+        "price": "250₺",
+        "desc": "Vanilya dondurma, milkshake tozu, çilek sosu, süt ve buzun karışımı ile ortaya çıkan lezzet,  isteğe bağlı krem şanti eklenebilir.",
+        "category": "MILKSHAKELER"
+      },
+      {
+        "name": "Karamel Milkshake",
+        "price": "250₺",
+        "desc": "Vanilya dondurma, milkshake tozu, Karamel sosu, süt ve buzun karışımı ile ortaya çıkan lezzet, isteğe bağlı krem şanti eklenebilir.",
+        "category": "MILKSHAKELER"
+      },
+      {
+        "name": "Muzlu Milkshake",
+        "price": "250₺",
+        "desc": "Vanilya dondurma, milkshake tozu, muz sosu, süt ve buzun karışımı ile ortaya çıkan lezzet, isteğe bağlı krem şanti eklenebilir.",
+        "category": "MILKSHAKELER"
+      },
+      {
+        "name": "Lotus Milkshake",
+        "price": "250₺",
+        "desc": "Vanilya dondurma, milkshake tozu, lotus sosu, süt ve buzun karışımı ile ortaya çıkan lezzet, isteğe bağlı krem şanti eklenebilir.",
+        "category": "MILKSHAKELER"
+      },
+      {
+        "name": "Coconut Milkshake",
+        "price": "250₺",
+        "desc": "Vanilya dondurma, milkshake tozu, Coconut sosu, süt ve buzun karışımı ile ortaya çıkan lezzet, isteğe bağlı krem şanti eklenebilir.",
+        "category": "MILKSHAKELER"
+      },
+      {
+        "name": "Mango Milkshake",
+        "price": "250₺",
+        "desc": "Vanilya dondurma, milkshake tozu, Mango sosu, süt ve buzun karışımı ile ortaya çıkan lezzet, isteğe bağlı krem şanti eklenebilir.",
+        "category": "SMOOTHİE"
+      },
+      {
+        "name": "Kavun Milkshake",
+        "price": "250₺",
+        "desc": "Vanilya dondurma, milkshake tozu, Kavun sosu, süt ve buzun karışımı ile ortaya çıkan lezzet, isteğe bağlı krem şanti eklenebilir.",
+        "category": "SMOOTHİE"
+      },
+      {
+        "name": "Coconut Smoothie",
+        "price": "250₺",
+        "desc": "Coconut püresi, süt ve buzun blend edilmesi ile ortaya çıkan lezzet.",
+        "category": "BREW BAR"
+      },
+      {
+        "name": "RED BERRİES SMOOTHİE",
+        "price": "250₺",
+        "desc": "Red Berries( kırmızı meyveler) püresi, süt ve buzun blend edilmesi ile ortaya çıkan lezzet.",
+        "category": "BREW BAR"
+      },
+      {
+        "name": "Türk Kahvesi",
+        "price": "145₺",
+        "desc": "Klasik Türk Kahvesi, su ve çikolata ile servis edilir.",
+        "category": "BREW BAR"
+      },
+      {
+        "name": "Double Türk Kahvesi",
+        "price": "200₺",
+        "desc": "Klasik Double Türk Kahvesi, su ve çikolata ile servis edilir.",
+        "category": "BREW BAR"
+      },
+      {
+        "name": "Filtre Kahve",
+        "price": "180₺",
+        "desc": "Guatemala kahve çekirdeklerinin demlenmesi ile oluşan taze lezzet.\nSoğuk veya sıcak olarak seçebilirsiniz.",
+        "category": "BREW BAR"
+      },
+      {
+        "name": "Sütlü Filtre Kahve",
+        "price": "200₺",
+        "desc": "Guatemala kahve çekirdeklerinin demlenmesi  ve buharla ısıtılmış sütün birleşmesi ile oluşan taze lezzet. Soğuk veya sıcak olarak seçebilirsiniz.",
+        "category": "DEMLEME ÇAYLAR"
+      },
+      {
+        "name": "V60",
+        "price": "250₺",
+        "desc": "V60 bir kahve demleme yöntemidir. Bu yöntemle yapılan ve demlenen kahveler filtre kahvedir. V60 ismini kendi şeklinden alır. 60 derecelik açılarla “V” şeklindedir.",
+        "category": "DEMLEME ÇAYLAR"
+      },
+      {
+        "name": "Demleme Çay",
+        "price": "70₺",
+        "desc": "Sıcacık demleme Türk çayı, tatlı ve ya tuzlu kurabiye ile servis edilir.",
+        "category": "DEMLEME ÇAYLAR"
+      },
+      {
+        "name": "Fincan Çay",
+        "price": "120₺",
+        "desc": "Sıcacık demleme Türk çayı, tatlı ve ya tuzlu kurabiye ile servis edilir.",
+        "category": "DEMLEME ÇAYLAR"
+      },
+      {
+        "name": "Ihlamur Çayı",
+        "price": "250₺",
+        "desc": "Kış günlerinin vazgeçilmezi ıhlamur çayı, bal ve limon ile servis edilir.",
+        "category": "DEMLEME ÇAYLAR"
+      },
+      {
+        "name": "Kış Çayı",
+        "price": "250₺",
+        "desc": "Hastalıklara birebir kış çayı, bal ve limon ile servis edilir.",
+        "category": "DEMLEME ÇAYLAR"
+      },
+      {
+        "name": "Yeşil Çay",
+        "price": "250₺",
+        "desc": "Yeşil çay, bal ve limon ile servis edilir.",
+        "category": "DEMLEME ÇAYLAR"
+      },
+      {
+        "name": "Ada Çayı",
+        "price": "250₺",
+        "desc": "Ada çayı, bal ve limon ile servis edilir.",
+        "category": "KAHVESİZ SICAKLAR"
+      },
+      {
+        "name": "Papatya Çayı",
+        "price": "250₺",
+        "desc": "Papatya çayı, bal ve limon ile servis edilir.",
+        "category": "KAHVESİZ SICAKLAR"
+      },
+      {
+        "name": "Chai Tea Latte",
+        "price": "240₺",
+        "desc": "Chai Tea Latte, genelde kış aylarında içilen bir içecektir. Aynı zamanda, masala çayı olarak da bilinen bu çay çeşidi, baharat, süt, siyah çay ve bitkilerle hazırlanmaktadır.",
+        "category": "KAHVESİZ SICAKLAR"
+      },
+      {
+        "name": "Ballı Süt",
+        "price": "160₺",
+        "desc": "Laktozsuz tercihinizi belirtiniz.",
+        "category": "KAHVESİZ SICAKLAR"
+      },
+      {
+        "name": "Golden Milk",
+        "price": "250₺",
+        "desc": "Hint mutfağının lezzetli ve sağlıklı içeceği Golden Milk. Baharatlı, zengin içerikli sağlık deposu içecek.  Temel bileşeni olan zerdeçal, antioksidan ve anti-inflamatuar vücudunuzu besler.\nÖneri; bal ile içilmesi tavsiye edilir.\nİçerik: Zerdeçal, zencefil, kakule, Vietnam tarçını, karabiber.",
+        "category": "KAHVESİZ SICAKLAR"
+      },
+      {
+        "name": "Matcha Latte",
+        "price": "260₺",
+        "desc": "Japonya'nın geleneksel yeşil çayı, matcha ile hazırlanan özel latte. Süt ile buluşarak yumuşak ve ferahlatıcı bir lezzet sunar. Laktozsuz süt seçeneğimiz mevcut.",
+        "category": "KAHVESİZ SICAKLAR"
+      },
+      {
+        "name": "Fransız White Hot Chocolate",
+        "price": "290₺",
+        "desc": "Kış aylarının vazgeçilmezi; gerçek beyaz çikolata ile yaptığımız beyaz sıcak çikolata.",
+        "category": "KAHVESİZ SICAKLAR"
+      },
+      {
+        "name": "Fransız Hot Chocolate",
+        "price": "290₺",
+        "desc": "Kış aylarının vazgeçilmezi; gerçek çikolata ile yaptığımız sıcak çikolata.",
+        "category": "KAHVESİZ SICAKLAR"
+      },
+      {
+        "name": "Sahlep",
+        "price": "240₺",
+        "desc": "Daha çok kışın tercih edilen yumuşacık süt kreması ile birleşen lezzet. İsteğe göre tarçın ile servis edilir.",
+        "category": "KAHVESİZ SICAKLAR"
+      },
+      {
+        "name": "Çilekli Sıcak Çikolata",
+        "price": "280₺",
+        "desc": "Kış aylarının vazgeçilmezi çilekli sıcak çikolata.",
+        "category": "KAHVESİZ SICAKLAR"
+      },
+      {
+        "name": "Muzlu Sıcak Çikolata",
+        "price": "280₺",
+        "desc": "Kış aylarının vazgeçilmezi muzlu sıcak çikolata.",
+        "category": "EL YAPIMI SOĞUK ÇAYLAR"
+      },
+      {
+        "name": "Lotuslu Fransız Hot Chocolate",
+        "price": "320₺",
+        "desc": "Kış aylarının vazgeçilmezi; gerçek çikolata ile yaptığımız, lotus krema ile birleştirdiğimiz sıcak çikolata.",
+        "category": "EL YAPIMI SOĞUK ÇAYLAR"
+      },
+      {
+        "name": "El Yapımı Şeftali Soğuk Çay",
+        "price": "240₺",
+        "desc": "Şeftali Püresi, demleme çay ile yapılır.",
+        "category": "EL YAPIMI SOĞUK ÇAYLAR"
+      },
+      {
+        "name": "El Yapımı Mango Soğuk Çay",
+        "price": "240₺",
+        "desc": "Mango Püresi, demleme çay ile yapılır.",
+        "category": "EL YAPIMI SOĞUK ÇAYLAR"
+      },
+      {
+        "name": "El Yapımı Limon Soğuk Çay",
+        "price": "240₺",
+        "desc": "Limon Püresi, demleme çay ile yapılır.",
+        "category": "EL YAPIMI SOĞUK ÇAYLAR"
+      },
+      {
+        "name": "El Yapımı Ananas Soğuk Çay",
+        "price": "240₺",
+        "desc": "Ananas Püresi, demleme çay ile yapılır.",
+        "category": "KRUVASANLAR"
+      },
+      {
+        "name": "El Yapımı Karpuz Soğuk Çay",
+        "price": "240₺",
+        "desc": "Karpuz Püresi, demleme çay ile yapılır.",
+        "category": "KRUVASANLAR"
+      },
+      {
+        "name": "Hindi Füme Kruvasan",
+        "price": "270₺",
+        "desc": "Terayağlı kruvasan arasına hindi füme, taze kaşar, krem peynir ve isteğe bağlı yeşillikler. Toplam Enerji: ~601 kcal • Protein: ~21.0 g • Yağ: ~41.3 g • Doymuş Yağ: ~20.6 g • Karbonhidrat: ~38.5 g • Şekerler: ~16.7 g • Diyet Lifi: ~3.3 g • Tuz: ~1.39 g • Kalsiyum: ~203 mg",
+        "category": "KRUVASANLAR"
+      },
+      {
+        "name": "Dana Jambon Kruvasan",
+        "price": "280₺",
+        "desc": "Terayağlı kruvasan arasına dana jambon, taze kaşar, krem peynir ve isteğe bağlı yeşillikler. İsteğinize göre ekstra avokado dip sos ekletebilirsiniz. * Toplam Enerji: ~582 kcal • Protein: ~20.0 g • Yağ: ~41.3 g • Doymuş Yağ: ~20.6 g • Karbonhidrat: ~39.8 g • Şekerler: ~16.7 g • Diyet Lifi: ~3.3 g • Tuz: ~1.74 g • Kalsiyum: ~203 mg",
+        "category": "KRUVASANLAR"
+      },
+      {
+        "name": "Tereyağlı Kruvasan",
+        "price": "235₺",
+        "desc": "Nefis tereyağlı kruvasan sizlerle. Süt karameli ile servis edilir. Toplam Enerji: ~497 kcal • Protein: ~12.2 g • Yağ: ~28.2 g • Doymuş Yağ: ~10.8 g • Karbonhidrat: ~52.8 g • Şekerler: ~32.1 g • Diyet Lifi: ~3.3 g • Tuz: ~0.21 g",
+        "category": "KRUVASANLAR"
+      },
+      {
+        "name": "Beyaz Peynirli Kruvasan",
+        "price": "275₺",
+        "desc": "Terayağlı kruvasan arasına beyaz peynir, domates, zeytin ezmesi ve acuka ve isteğe bağlı yeşillikler. Toplam Enerji: ~742 kcal • Protein: ~26.1 g • Yağ: ~50.5 g • Doymuş Yağ: ~26.7 g • Karbonhidrat: ~44.2 g • Şekerler: ~19.4 g • Diyet Lifi: ~3.6 g • Tuz: ~3.78 g • Kalsiyum: ~393 mg",
+        "category": "KRUVASANLAR"
+      },
+      {
+        "name": "Kremalı Çilekli Muzlu Çikolatalı Kruvasan",
+        "price": "450₺",
+        "desc": "Terayağlı kruvasan arasına pastacı kreması, çilek, muz ve üzerine belçika çikolatası",
+        "category": "PİZZALAR"
+      },
+      {
+        "name": "Nutellalı Kruvasan",
+        "price": "265₺",
+        "desc": "Mis gibi tereyağlı fransız kruvasanı belçika çikolatası ve nutella ile buluşturuyoruz.\nAlerjen Uyarısı: Gluten, yumurta, süt ve süt ürünleri",
+        "category": "PİZZALAR"
+      },
+      {
+        "name": "EL YAPIMI KARIŞIK PİZZA 30 CM (ORTALAMA PİŞİRME SÜRESİ 20 DK)",
+        "price": "460₺",
+        "desc": "Dana Sucuk, Dana Sosis, Mantar, Yeşil Biber, Kırmızı Biber, Mısır, Siyah Zeytin, Mozarella ve Pizza Sosu ile",
+        "category": "SANDVİÇLER"
+      },
+      {
+        "name": "DÖRT PEYNİRLİ PİZZA 30CM (ORTALAMA PİŞİRME SÜRESİ 20 DK)",
+        "price": "495₺",
+        "desc": "İçerisinde kullanmış olduğumuz özel üretim taze kaşar peyniri, mozarella, parmesan ve cheddar peyniri eşliğinde lezziz dört peynirli pizza.",
+        "category": "SANDVİÇLER"
+      },
+      {
+        "name": "Tam Tahıllı Dana Jambon Sandvic",
+        "price": "250₺",
+        "desc": "Taze sandviç ekmeği arasına kıvırcık, dilim jambon, dilim kaşar, krem peynir,salatalık, biber.",
+        "category": "SANDVİÇLER"
+      },
+      {
+        "name": "Tam Tahıllı Hindi Füme Sandvic",
+        "price": "235₺",
+        "desc": "Taze sandviç ekmeği arasına kıvırcık, hindi füme, dilim kaşar, krem peynir, biber, salatalık.",
+        "category": "KAHVALTI"
+      },
+      {
+        "name": "Tam Tahıllı Beyaz Peynirli Sandvic",
+        "price": "250₺",
+        "desc": "Taze sandviç ekmeği arasına kıvırcık, krem peynir, dilim beyaz peynir, zeytin ezmesi, dilim domates, dilim salatalık.",
+        "category": "KAHVALTI"
+      },
+      {
+        "name": "Miesta Kruvasan Kahvaltı",
+        "price": "400₺",
+        "desc": "Zeytin ezmesi, acuka, krem peynir, nutella, cilek, dilimlenmis salata, dilim hindi füme, dilim kaşar, kruvasan eşliğinde.\nÇay yanında ikramımızdır.",
+        "category": "KAHVALTI"
+      },
+      {
+        "name": "Su",
+        "price": "60₺",
+        "desc": "Miesta Coffee Dessert",
+        "category": "SOFT İÇECEKLER"
+      },
+      {
+        "name": "Taze Sıkılmış Portakal Suyu",
+        "price": "190₺",
+        "desc": "Taze organik sıkma portakal.",
+        "category": "SOFT İÇECEKLER"
+      },
+      {
+        "name": "Coca Cola",
+        "price": "140₺",
+        "desc": "Miesta Coffee Dessert",
+        "category": "SOFT İÇECEKLER"
+      },
+      {
+        "name": "Fanta",
+        "price": "140₺",
+        "desc": "Miesta Coffee Dessert",
+        "category": "SOFT İÇECEKLER"
+      },
+      {
+        "name": "Sprite",
+        "price": "140₺",
+        "desc": "Miesta Coffee Dessert",
+        "category": "SOFT İÇECEKLER"
+      },
+      {
+        "name": "Churchill",
+        "price": "145₺",
+        "desc": "Miesta Coffee Dessert",
+        "category": "DONDURMALAR"
+      },
+      {
+        "name": "Sade Soda",
+        "price": "120₺",
+        "desc": "Miesta Coffee Dessert",
+        "category": "DONDURMALAR"
+      }
+    ],
+  },
 };
