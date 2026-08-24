@@ -4,6 +4,414 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "957": {
+    "name": "Baylan",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/t44g/baylan-t44g",
+    "sourceName": "Yemeksepeti Baylan t44g canlı menüsü; Hakkında panelindeki exact Caferağa Mah. - Moda Caferağa, Muvakkıthane Cd. No:9/A ile resmi Baylan Kadıköy 0216 346 63 50 kaydıyla eşleştirildi",
+    "verifiedAt": "2026-08-24",
+    "items": [
+      {
+        "name": "Peynirli Dereotlu Poğaça",
+        "price": "90",
+        "category": "Poğaçalar & Simitler"
+      },
+      {
+        "name": "Simit",
+        "price": "48",
+        "category": "Poğaçalar & Simitler"
+      },
+      {
+        "name": "Patlıcanlı Börek",
+        "price": "100",
+        "category": "Poğaçalar & Simitler"
+      },
+      {
+        "name": "Peynirli Poğaça",
+        "price": "100",
+        "category": "Poğaçalar & Simitler"
+      },
+      {
+        "name": "Patatesli Börek",
+        "price": "100",
+        "category": "Poğaçalar & Simitler"
+      },
+      {
+        "name": "Paskalya Çöreği (1 kg.)",
+        "price": "1.100",
+        "category": "Poğaçalar & Simitler"
+      },
+      {
+        "name": "Paskalya Çöreği (500 gr.)",
+        "price": "500",
+        "category": "Poğaçalar & Simitler"
+      },
+      {
+        "name": "Ay Çöreği",
+        "price": "100",
+        "category": "Poğaçalar & Simitler"
+      },
+      {
+        "name": "Paskalya Çöreği (250 gr.)",
+        "price": "300",
+        "category": "Poğaçalar & Simitler"
+      },
+      {
+        "name": "Jambonlu Peynirli Kruvasan Sandviç",
+        "price": "400",
+        "category": "Kruvasanlar"
+      },
+      {
+        "name": "Mini Kruvasan",
+        "price": "100",
+        "category": "Kruvasanlar"
+      },
+      {
+        "name": "Domatesli Peynirli Kruvasan Sandviç",
+        "price": "300",
+        "category": "Kruvasanlar"
+      },
+      {
+        "name": "Hindi Fümeli Peynirli Kruvasan Sandviç",
+        "price": "300",
+        "category": "Kruvasanlar"
+      },
+      {
+        "name": "Sade Kruvasan",
+        "price": "200",
+        "category": "Kruvasanlar"
+      },
+      {
+        "name": "Çikolatalı Kruvasan",
+        "price": "276",
+        "category": "Kruvasanlar"
+      },
+      {
+        "name": "Bademli Kruvasan",
+        "price": "300",
+        "category": "Kruvasanlar"
+      },
+      {
+        "name": "Profiterol",
+        "price": "400",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Çilekli Tart",
+        "price": "400",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Meyveli Tart",
+        "price": "400",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Tiramisu",
+        "price": "400",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Çikolatalı Ekler (250 gr.)",
+        "price": "480",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Karamelli Trileçe",
+        "price": "400",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Limonlu Kek",
+        "price": "200",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Çikolatalı Kek",
+        "price": "200",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Fındıklı Kek",
+        "price": "200",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Fırın Sütlaç",
+        "price": "400",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Orman Meyveli Pavlova",
+        "price": "500",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Şu Karamela Ballı",
+        "price": "400",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Frambuazlı Makaron (Adet)",
+        "price": "100",
+        "category": "Makaronlar"
+      },
+      {
+        "name": "Limonlu Makaron (Adet)",
+        "price": "100",
+        "category": "Makaronlar"
+      },
+      {
+        "name": "Kayısılı Makaron (Adet)",
+        "price": "100",
+        "category": "Makaronlar"
+      },
+      {
+        "name": "Fıstıklı Makaron (Adet)",
+        "price": "100",
+        "category": "Makaronlar"
+      },
+      {
+        "name": "Vanilyalı Makaron (Adet)",
+        "price": "100",
+        "category": "Makaronlar"
+      },
+      {
+        "name": "Kahveli Makaron (Adet)",
+        "price": "100",
+        "category": "Makaronlar"
+      },
+      {
+        "name": "Çikolatalı Makaron (Adet)",
+        "price": "100",
+        "category": "Makaronlar"
+      },
+      {
+        "name": "Karamelli Makaron (Adet)",
+        "price": "100",
+        "category": "Makaronlar"
+      },
+      {
+        "name": "Güllü Makaron",
+        "price": "100",
+        "category": "Makaronlar"
+      },
+      {
+        "name": "Tatlı Kuru Pasta (1 kg.)",
+        "price": "1.400",
+        "category": "Kiloluk Kuru Pastalar"
+      },
+      {
+        "name": "Tuzlu Kuru Pasta (1 kg.)",
+        "price": "1.400",
+        "category": "Kiloluk Kuru Pastalar"
+      },
+      {
+        "name": "Latte",
+        "price": "300",
+        "category": "Sıcak Kahveler"
+      },
+      {
+        "name": "Beyaz Çikolatalı Mocha",
+        "price": "300",
+        "category": "Sıcak Kahveler"
+      },
+      {
+        "name": "Sütlü Türk Kahvesi",
+        "price": "300",
+        "category": "Sıcak Kahveler"
+      },
+      {
+        "name": "Türk Kahvesi",
+        "price": "200",
+        "category": "Sıcak Kahveler"
+      },
+      {
+        "name": "Duble Espresso",
+        "price": "300",
+        "category": "Sıcak Kahveler"
+      },
+      {
+        "name": "Macchiato",
+        "price": "300",
+        "category": "Sıcak Kahveler"
+      },
+      {
+        "name": "Karamel Macchiato",
+        "price": "300",
+        "category": "Sıcak Kahveler"
+      },
+      {
+        "name": "Cappuccino",
+        "price": "300",
+        "category": "Sıcak Kahveler"
+      },
+      {
+        "name": "Filtre Kahve",
+        "price": "200",
+        "category": "Sıcak Kahveler"
+      },
+      {
+        "name": "Double Türk Kahvesi",
+        "price": "300",
+        "category": "Sıcak Kahveler"
+      },
+      {
+        "name": "Espresso",
+        "price": "200",
+        "category": "Sıcak Kahveler"
+      },
+      {
+        "name": "Americano",
+        "price": "300",
+        "category": "Sıcak Kahveler"
+      },
+      {
+        "name": "Mocha",
+        "price": "300",
+        "category": "Sıcak Kahveler"
+      },
+      {
+        "name": "Kuşburnu Çayı",
+        "price": "200",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Papatya Çayı",
+        "price": "200",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Yeşil Çay",
+        "price": "200",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Nane Limon Çayı",
+        "price": "200",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Rezene Çayı",
+        "price": "200",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Yasemin Çayı",
+        "price": "200",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Adaçayı",
+        "price": "200",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Ihlamur",
+        "price": "200",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Çay",
+        "price": "100",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Sıcak Çikolata",
+        "price": "300",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Salep",
+        "price": "300",
+        "category": "Sıcak İçecekler"
+      },
+      {
+        "name": "Buzlu Americano",
+        "price": "300",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Soğuk Türk Kahvesi",
+        "price": "300",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Buzlu Latte",
+        "price": "300",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Caffe Glasse",
+        "price": "300",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Çilekli Frappe",
+        "price": "300",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Çikolatalı Frappe",
+        "price": "300",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Kavunlu Frozen",
+        "price": "300",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Muzlu Frozen",
+        "price": "300",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Muzlu Frappe",
+        "price": "300",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Çilekli Frozen",
+        "price": "300",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Naneli Limonlu Frozen",
+        "price": "300",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Çikolatalı Milkshake",
+        "price": "300",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Çilekli Milkshake",
+        "price": "300",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Portakal Suyu",
+        "price": "300",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Limonata",
+        "price": "200",
+        "category": "Soğuk İçecekler"
+      },
+      {
+        "name": "Su ( 33 cl.)",
+        "price": "100",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Maden Suyu (20 cl.)",
+        "price": "100",
+        "category": "İçecekler"
+      }
+    ]
+  },
   "721": {
     "name": "Çanak Kebap & Katmer",
     "sourceUrl": "https://www.yemeksepeti.com/restaurant/a2um/canak-kebap-and-katmer-a2um",

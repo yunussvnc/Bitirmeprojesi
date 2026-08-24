@@ -525,3 +525,11 @@ Hentzer canlı ID 721 `Çanak Kebap ve Katmer` kaydı `Acıbadem, Acıbadem Cd. 
 Yemeksepeti `https://www.yemeksepeti.com/restaurant/a2um/canak-kebap-and-katmer-a2um` sayfası başlıkta `Istanbul Acıbadem Cd.` konumunu ve `Çanak Kebap & Katmer` vendor kaydını gösteriyor. Browser Markdown’ında 12 menü kategorisinde 95 fiyatlı gerçek ürün bulundu. Görünür yayın tarihi yok; `verifiedAt: 2026-08-24` erişim/doğrulama tarihi olarak tutuldu.
 
 Popüler carousel tekrarları, teknik `0` satırları ve `Poşet` 1 TL ambalaj kalemi eklenmedi. Fiyatlar Yemeksepeti kaynağında görülen TL rakamlarıyla korundu; başka Çanak şubesinden fiyat aktarılmadı.
+
+### Baylan Kadıköy ID 957 Yemeksepeti menüsü (24 Ağustos 2026)
+
+Hentzer canlı ID 957 `Baylan`, `Caferağa, Muvakkıthane Cd. No:9/A, 34710 Kadıköy/İstanbul` kaydıdır. Baylan’ın resmi iletişim sayfası `https://www.baylangida.com/tr/iletisim` aynı Baylan Kadıköy şubesini `Muvakkithane Caddesi No: 9/A 34710 Kadıköy` ve `0216 346 63 50` telefonu ile yayımlar; bu resmi şube adresi Hentzer exact kaydıyla eşleşti.
+
+Yemeksepeti `https://www.yemeksepeti.com/restaurant/t44g/baylan-t44g` vendor sayfası browser’da `Hakkında` panelinde `Caferağa Mah. - Moda Caferağa, Muvakkıthane Cd. No: 9/A, 34710 Kadıköy/İstanbul` adresini gösterdi. Aynı canlı sayfada 9 kategori ve 85 kaynak satırı/fiyatı görünür; `Sıcak Kahveler` içindeki aynı ad-fiyat tekrarları tekilleştirildikten sonra 80 benzersiz ürün/fiyat/kategori kalemi aktarıldı. Fiyatlar 24 Ağustos 2026 canlı erişiminde kaynakta görülen biçimleriyle tutuldu; açık yayın tarihi bulunmadığı için `verifiedAt` erişim/doğrulama tarihidir.
+
+`Adet olarak servis edilir`, `Sıcak servis edilir` ve `Soğuk servis edilir` gibi açıklamalar ürün adı olmadığı için ayrı menü kalemi yapılmadı. Ambalaj/servis/kuver kalemi bulunmadı; fiyat uydurulmadı. Değişiklik yalnız yerel `MENU_OVERRIDES` tablosu ve bu araştırma günlüğü kapsamındadır; backend/API/DB’ye yazım yapılmadı.
