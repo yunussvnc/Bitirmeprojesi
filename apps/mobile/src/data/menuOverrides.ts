@@ -55067,4 +55067,372 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       },
     ]
   },
+  "4220": {
+    "name": "The Coffee Factory Ataşehir Örnek",
+    "sourceUrl": "https://www.migros.com.tr/yemek/the-coffee-factory-atasehir-ornek-mah-st-2efd4",
+    "sourceName": "Migros Yemek branch-labeled canlı menüsü; official The Coffee Factory ve Yandex exact Ataşehir Örnek Şht. Cahar Dudayev Cd. No:8/A köprüsüyle eşleştirildi",
+    "verifiedAt": "2026-08-24",
+    "items": [
+      {
+        "name": "Espresso",
+        "price": "155,00 TL",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "Espresso Macchiato",
+        "price": "170,00 TL",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "Cortado",
+        "price": "210,00 TL",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "Caffe Americano",
+        "price": "205,00 TL",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "Cappuccıno",
+        "price": "225,00 TL",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "Flat White",
+        "price": "225,00 TL",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "Caffe Latte",
+        "price": "225,00 TL",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "Caramel Macchiato",
+        "price": "270,00 TL",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "Berry Latte",
+        "price": "270,00 TL",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "Toffee Nut Latte",
+        "price": "270,00 TL",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "Mint Mocha",
+        "price": "270,00 TL",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "Salted Caramel Latte",
+        "price": "275,00 TL",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "Spanish Latte",
+        "price": "275,00 TL",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "Caffe Mocha",
+        "price": "275,00 TL",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "Dominic Mocha",
+        "price": "300,00 TL",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "White Chocolate Mocha",
+        "price": "275,00 TL",
+        "category": "Espresso Beverage"
+      },
+      {
+        "name": "Iced Caffe Americano",
+        "price": "210,00 TL",
+        "category": "Iced Espresso Beverage"
+      },
+      {
+        "name": "Iced Caffe Latte",
+        "price": "230,00 TL",
+        "category": "Iced Espresso Beverage"
+      },
+      {
+        "name": "Iced Caramel Macchiato",
+        "price": "280,00 TL",
+        "category": "Iced Espresso Beverage"
+      },
+      {
+        "name": "Iced Berry Latte",
+        "price": "280,00 TL",
+        "category": "Iced Espresso Beverage"
+      },
+      {
+        "name": "Iced Salted Caramel Latte",
+        "price": "285,00 TL",
+        "category": "Iced Espresso Beverage"
+      },
+      {
+        "name": "Iced White Chocolate Mocha",
+        "price": "285,00 TL",
+        "category": "Iced Espresso Beverage"
+      },
+      {
+        "name": "Iced Mocha",
+        "price": "285,00 TL",
+        "category": "Iced Espresso Beverage"
+      },
+      {
+        "name": "Iced Toffee Nut Latte",
+        "price": "285,00 TL",
+        "category": "Iced Espresso Beverage"
+      },
+      {
+        "name": "Iced Spanish Latte",
+        "price": "285,00 TL",
+        "category": "Iced Espresso Beverage"
+      },
+      {
+        "name": "Iced Mint Mocha",
+        "price": "325,00 TL",
+        "category": "Iced Espresso Beverage"
+      },
+      {
+        "name": "Filter Coffee",
+        "price": "170,00 TL",
+        "category": "Brewed Coffee"
+      },
+      {
+        "name": "Iced Filter Coffee",
+        "price": "180,00 TL",
+        "category": "Brewed Coffee"
+      },
+      {
+        "name": "Cold Brew",
+        "price": "270,00 TL",
+        "category": "Brewed Coffee"
+      },
+      {
+        "name": "V60",
+        "price": "260,00 TL",
+        "category": "Brewed Coffee"
+      },
+      {
+        "name": "Chemex",
+        "price": "260,00 TL",
+        "category": "Brewed Coffee"
+      },
+      {
+        "name": "Sorrel & Green Plum",
+        "price": "305,00 TL",
+        "category": "Mocktails"
+      },
+      {
+        "name": "Chili Passion",
+        "price": "305,00 TL",
+        "category": "Mocktails"
+      },
+      {
+        "name": "Cherry Chocolate",
+        "price": "305,00 TL",
+        "category": "Mocktails"
+      },
+      {
+        "name": "Iced Matcha Latte",
+        "price": "270,00 TL",
+        "category": "Matcha"
+      },
+      {
+        "name": "Iced Blackberry Matcha Latte",
+        "price": "285,00 TL",
+        "category": "Matcha"
+      },
+      {
+        "name": "Iced Strawberry Matcha Latte",
+        "price": "285,00 TL",
+        "category": "Matcha"
+      },
+      {
+        "name": "Iced Mango Matcha Latte",
+        "price": "285,00 TL",
+        "category": "Matcha"
+      },
+      {
+        "name": "Strawberry",
+        "price": "285,00 TL",
+        "category": "Frozens /Smoothies"
+      },
+      {
+        "name": "Mango",
+        "price": "285,00 TL",
+        "category": "Frozens /Smoothies"
+      },
+      {
+        "name": "Redberry",
+        "price": "285,00 TL",
+        "category": "Frozens /Smoothies"
+      },
+      {
+        "name": "Chai Tea Latte",
+        "price": "275,00 TL",
+        "category": "Other Beverages"
+      },
+      {
+        "name": "Iced Chai Tea Latte",
+        "price": "280,00 TL",
+        "category": "Other Beverages"
+      },
+      {
+        "name": "Hot Chocolate",
+        "price": "240,00 TL",
+        "category": "Other Beverages"
+      },
+      {
+        "name": "White Hot Chocolate",
+        "price": "240,00 TL",
+        "category": "Other Beverages"
+      },
+      {
+        "name": "Demleme Fincan Çay",
+        "price": "85,00 TL",
+        "category": "Other Beverages"
+      },
+      {
+        "name": "Turkish Coffee",
+        "price": "160,00 TL",
+        "category": "Other Beverages"
+      },
+      {
+        "name": "Caramel Waffle",
+        "price": "285,00 TL",
+        "category": "Fruit & Cream"
+      },
+      {
+        "name": "Strawberry's Chocolate",
+        "price": "285,00 TL",
+        "category": "Fruit & Cream"
+      },
+      {
+        "name": "Coconut",
+        "price": "285,00 TL",
+        "category": "Fruit & Cream"
+      },
+      {
+        "name": "Chocolate",
+        "price": "285,00 TL",
+        "category": "Fruit & Cream"
+      },
+      {
+        "name": "Nut Cream",
+        "price": "285,00 TL",
+        "category": "Fruit & Cream"
+      },
+      {
+        "name": "Pistachio",
+        "price": "285,00 TL",
+        "category": "Fruit & Cream"
+      },
+      {
+        "name": "Lemonade Plain",
+        "price": "215,00 TL",
+        "category": "Lemonade"
+      },
+      {
+        "name": "Strawberry Lemonade",
+        "price": "275,00 TL",
+        "category": "Lemonade"
+      },
+      {
+        "name": "Mango Lemonade",
+        "price": "275,00 TL",
+        "category": "Lemonade"
+      },
+      {
+        "name": "Brazilian Lemonade",
+        "price": "275,00 TL",
+        "category": "Lemonade"
+      },
+      {
+        "name": "Lime",
+        "price": "285,00 TL",
+        "category": "Refreshers"
+      },
+      {
+        "name": "-Mango Refresher",
+        "price": "285,00 TL",
+        "category": "Refreshers"
+      },
+      {
+        "name": "Acai Berry",
+        "price": "285,00 TL",
+        "category": "Refreshers"
+      },
+      {
+        "name": "Very Berry",
+        "price": "285,00 TL",
+        "category": "Refreshers"
+      },
+      {
+        "name": "Espresso Extra",
+        "price": "60,00 TL",
+        "category": "Pick Your Extra"
+      },
+      {
+        "name": "Decaf Espresso Extra",
+        "price": "60,00 TL",
+        "category": "Pick Your Extra"
+      },
+      {
+        "name": "Foam Creammer extra",
+        "price": "60,00 TL",
+        "category": "Pick Your Extra"
+      },
+      {
+        "name": "Syrup/puree Extra",
+        "price": "60,00 TL",
+        "category": "Pick Your Extra"
+      },
+      {
+        "name": "Chocolate extra",
+        "price": "75,00 TL",
+        "category": "Pick Your Extra"
+      },
+      {
+        "name": "Vegan Milk Extra",
+        "price": "65,00 TL",
+        "category": "Pick Your Extra"
+      },
+      {
+        "name": "Belçika Çikolatalı Pasta (250 G)",
+        "price": "325,00 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Hindi Fümeli Baget Sandviç",
+        "price": "290,00 TL",
+        "category": "Sandviçler"
+      },
+      {
+        "name": "Pesto Soslu Mozerellalı Foccacıa Sandviç",
+        "price": "270,00 TL",
+        "category": "Sandviçler"
+      },
+      {
+        "name": "Haşhaşlı 4 Peynirli Sandviç",
+        "price": "275,00 TL",
+        "category": "Sandviçler"
+      },
+      {
+        "name": "Dana Jambon Artizan Sandviç",
+        "price": "290,00 TL",
+        "category": "Sandviçler"
+      },
+    ]
+  },
 };
