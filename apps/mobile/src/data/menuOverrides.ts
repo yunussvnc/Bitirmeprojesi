@@ -66790,4 +66790,401 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       }
     ],
   },
+
+  "7116": {
+    "name": "Bosphorus Grill",
+    "sourceUrl": "https://www.menumodo.com/app.php/viewer/client_outlet/KIIST_FB1?lang=tr&tags=b&designID=kempi",
+    "sourceName": "Official Çırağan Palace Kempinski Bosphorus Grill Menumodo viewer — 04 Mayıs 2026 lunch menu + 20 Mayıs 2026 dinner menu; exact Yıldız, Çırağan Cd. No:32 branch",
+    "verifiedAt": "2026-08-25",
+    "items": [
+      {
+        "name": "Soğuk Avokado Çorbası",
+        "price": "920 ₺",
+        "category": "Öğle — Yeşillerin Tonları ve Daha Fazlası",
+        "desc": "Kavrulmuş ceviz ile"
+      },
+      {
+        "name": "Burrata ve Bahçe Keyfi",
+        "price": "1450 ₺",
+        "category": "Öğle — Yeşillerin Tonları ve Daha Fazlası",
+        "desc": "Semizotu, közlenmiş padron biberler, rengarenk çeri domatesler, çilek, pesto ve balzamik sos ile"
+      },
+      {
+        "name": "“Niçoise” Salatası",
+        "price": "1700 ₺",
+        "category": "Öğle — Yeşillerin Tonları ve Daha Fazlası",
+        "desc": "Dilimlenmiş ton balığı, bebek patatesler, Kalamata zeytinleri, kırmızı soğan, mevsim yeşillikleri, taze fasulye ve yumurta eşliğinde"
+      },
+      {
+        "name": "Kavun ve “Stracciatella”",
+        "price": "870 ₺",
+        "category": "Öğle — Yeşillerin Tonları ve Daha Fazlası",
+        "desc": "Kuzukulağı yaprakları, çıtır kavrulmuş bademler ve keskin yeşil elma sosu ile"
+      },
+      {
+        "name": "Narenciye Aromalı Somon ve Kinoa",
+        "price": "1550 ₺",
+        "category": "Öğle — Yeşillerin Tonları ve Daha Fazlası",
+        "desc": "Avokado püresi, mevsim yeşillikleri, ekşi krema ve zeytinyağlı-limon sosu"
+      },
+      {
+        "name": "Klasik Sezar Salatası",
+        "price": "1200 ₺",
+        "category": "Öğle — Yeşillerin Tonları ve Daha Fazlası",
+        "desc": "Yedikule marul, parmesan cipsleri ve ev yapımı krutonlar, imza Sezar sosumuzla harmanlanmış"
+      },
+      {
+        "name": "Izgara Tavuklu Sezar Salatası",
+        "price": "1450 ₺",
+        "category": "Öğle — Yeşillerin Tonları ve Daha Fazlası"
+      },
+      {
+        "name": "İskenderun Karidesli Sezar Salatası",
+        "price": "1700 ₺",
+        "category": "Öğle — Yeşillerin Tonları ve Daha Fazlası"
+      },
+      {
+        "name": "Tay Usulü Yeşil Mango ve Izgara Karides (130 g) Kâsesi",
+        "price": "1300 ₺",
+        "category": "Öğle — Yeşillerin Tonları ve Daha Fazlası",
+        "desc": "Jülyen mango, taze fasulye ve soba eriştesi, çıtır yer fıstığı ve çarkıfelek meyve sosu"
+      },
+      {
+        "name": "Ekşi Mayalı Külüp Sandviç",
+        "price": "1650 ₺",
+        "category": "Öğle — Artisan Sandviç Koleksiyonu",
+        "desc": "Tavuk göğsü, dana jambon, marul, domates, hardallı baharat sos, yumurta ve kızarmış ekşi mayalı ekmek üzerinde"
+      },
+      {
+        "name": "Cheeseburger",
+        "price": "2200 ₺",
+        "category": "Öğle — Artisan Sandviç Koleksiyonu",
+        "desc": "Karamelize soğan, çedar peyniri, taze yeşillikler, domates, turşu ve patates kızartması"
+      },
+      {
+        "name": "Pide Ekmeğinde Chipotle Soslu Tavuk (170 g)",
+        "price": "1250 ₺",
+        "category": "Öğle — Artisan Sandviç Koleksiyonu",
+        "desc": "Marul, tütsülenmiş domates, taze soğan ve kızarmış patates"
+      },
+      {
+        "name": "Fungi Pizza",
+        "price": "1450 ₺",
+        "category": "Öğle — Fırının Kalbinden",
+        "desc": "Kestane ve istiridye mantarları, trüf püresi, biberiye-maydanoz sosu ve su teresi ile"
+      },
+      {
+        "name": "“Diavola” Pizza",
+        "price": "1600 ₺",
+        "category": "Öğle — Fırının Kalbinden",
+        "desc": "İtalyan salamı, renkli biberler ve acı biber sos eşliğinde"
+      },
+      {
+        "name": "“Stracciatella” Pizza",
+        "price": "1500 ₺",
+        "category": "Öğle — Fırının Kalbinden",
+        "desc": "Roka yaprakları, bal, beyaz trüf yağı ve dereotlu krema sos ile"
+      },
+      {
+        "name": "“Margherita” Pizza",
+        "price": "1400 ₺",
+        "category": "Öğle — Fırının Kalbinden",
+        "desc": "Tütsülenmiş domates sos, mozzarella peyniri ve aromatik taze fesleğen çeşnisi"
+      },
+      {
+        "name": "Lahmacun",
+        "price": "950 ₺",
+        "category": "Öğle — Fırının Kalbinden",
+        "desc": "Zırhlanmış dana eti, domates, sumaklı soğan ve nane yapraklı marul salatası eşliğinde"
+      },
+      {
+        "name": "Lagos Balığı Provensal (180 g)",
+        "price": "2900 ₺",
+        "category": "Öğle — Şefin İmza Tabakları",
+        "desc": "Bebek enginar konfit, kişniş baharatlı nohut ve roka yaprakları eşliğinde"
+      },
+      {
+        "name": "Izgara Dana Madalyon (160 g)",
+        "price": "3450 ₺",
+        "category": "Öğle — Şefin İmza Tabakları",
+        "desc": "Erik aromalı kuskus, sotelenmiş fasulye, yeşil salata ve taze otlu vinaigrette eşliğinde"
+      },
+      {
+        "name": "“Sous Vide” Organik Tavuk (170 g)",
+        "price": "1400 ₺",
+        "category": "Öğle — Şefin İmza Tabakları",
+        "desc": "Kremalı ve misket limonlu patates püresi, fırınlanmış mısır, eritilmiş ve tütsülenmiş domates sos eşliğinde"
+      },
+      {
+        "name": "Zahter ile Marinelenmiş Kuzu Küşleme (170 g)",
+        "price": "3300 ₺",
+        "category": "Öğle — Şefin İmza Tabakları",
+        "desc": "Orzotto, tavada mühürlenmiş karalahana ve çıtır kızarmış bamya eşliğinde"
+      },
+      {
+        "name": "“Nasi Goreng”",
+        "price": "1600 ₺",
+        "category": "Öğle — Şefin İmza Tabakları",
+        "desc": "Ev yapımı bebek salatalık turşusu, göz yumurta ve çıtır karides cipsi eşliğinde; Endonezya usulü kavrulmuş pirinç"
+      },
+      {
+        "name": "Vegan Tabağı",
+        "price": "1250 ₺",
+        "category": "Öğle — Sağlıklı ve Besleyici Tabaklar",
+        "desc": "Enginar, müceddere, yeşil domates, yaban mersini, yulaflı kabak mücveri ve guacamole ile"
+      },
+      {
+        "name": "Mantar Kokoreç",
+        "price": "950 ₺",
+        "category": "Öğle — Sağlıklı ve Besleyici Tabaklar",
+        "desc": "Sotelenmiş mevsim mantarları, domates salatası, sumak pekmezi, jalapeno turşusu ve poy baharatı ile (Vegan)"
+      },
+      {
+        "name": "Asya Kasesi",
+        "price": "1600 ₺",
+        "category": "Öğle — Sağlıklı ve Besleyici Tabaklar",
+        "desc": "Çıtır tofu, kaju fıstığı, salatalık, susam, avokado, suşi pirinci, edamame, nori, zencefil turşusu ve wasabi mayonez (Vegan seçenekli)"
+      },
+      {
+        "name": "Meyveli Parfe",
+        "price": "950 ₺",
+        "category": "Öğle — Göz Kamaştırıcı Tatlılar",
+        "desc": "Beyaz çikolata mousse ve çarkıfelek meyvesi katmanları"
+      },
+      {
+        "name": "Baharatlarla Tatlandırılmış Karamelize Şeftali",
+        "price": "950 ₺",
+        "category": "Öğle — Göz Kamaştırıcı Tatlılar",
+        "desc": "Kavrulmuş yulaflı kıtır katmanları ve hindistan cevizi kreması eşliğinde (Vegan)"
+      },
+      {
+        "name": "Çikolatalı Brownie",
+        "price": "950 ₺",
+        "category": "Öğle — Göz Kamaştırıcı Tatlılar",
+        "desc": "Kavrulmuş ceviz ve vanilyalı dondurma eşliğinde"
+      },
+      {
+        "name": "Mevsim Meyve Tabağı",
+        "price": "1100 ₺",
+        "category": "Öğle — Göz Kamaştırıcı Tatlılar",
+        "desc": "Vegan"
+      },
+      {
+        "name": "Dondurma (Bir Top)",
+        "price": "420 ₺",
+        "category": "Öğle — Göz Kamaştırıcı Tatlılar",
+        "desc": "Vanilya, bitter çikolata, çilek, zeytinyağ ve defne yaprağı"
+      },
+      {
+        "name": "Sorbeler (Bir Top)",
+        "price": "420 ₺",
+        "category": "Öğle — Göz Kamaştırıcı Tatlılar",
+        "desc": "Limon, çarkıfelek meyvesi, ahududu, kavun (Vegan)"
+      },
+      {
+        "name": "Şekeri Azaltılmış Dondurma (Bir Top)",
+        "price": "420 ₺",
+        "category": "Öğle — Göz Kamaştırıcı Tatlılar",
+        "desc": "Fıstıklı"
+      },
+      {
+        "name": "Akdeniz Usulü Balık Çorbası",
+        "price": "980 ₺",
+        "category": "Akşam — Başlangıçlar",
+        "desc": "Yaz sebzeleri, Ege otları ve acılı nane yağı"
+      },
+      {
+        "name": "Balık Yumurtalı ve Baharatlı İstiridye (adet)",
+        "price": "1250 ₺",
+        "category": "Akşam — Başlangıçlar",
+        "desc": "Kırık buz üzerinde, acı sos ve arpacık soğanlı kırmızı şarap sirkesi"
+      },
+      {
+        "name": "Stracciatella Peynirli Ata Tohumu Domates",
+        "price": "1300 ₺",
+        "category": "Akşam — Başlangıçlar",
+        "desc": "Zahter ve yaz yeşillikleri, kavrulmuş badem ve çilek sirkesi"
+      },
+      {
+        "name": "Marine Edilmiş Fırın Patlıcan",
+        "price": "1150 ₺",
+        "category": "Akşam — Başlangıçlar",
+        "desc": "Keçi peynirli, baharatlı isli biber ezmesi, nar ekşisi ve çam fıstığı"
+      },
+      {
+        "name": "Levrek Crudo (160g)",
+        "price": "1550 ₺",
+        "category": "Akşam — Başlangıçlar",
+        "desc": "Misket limonu ve zencefil sosu, kumkuat, jalapeño biberi, dereotu yağı, taze kişniş ve kiraz ile"
+      },
+      {
+        "name": "Fırınlanmış Enginar",
+        "price": "1150 ₺",
+        "category": "Akşam — Başlangıçlar",
+        "desc": "Narenciye marineli ve dukkah baharatı (Vegan)"
+      },
+      {
+        "name": "Beyaz Peynir ve Acı Biber Reçelli Karpuz",
+        "price": "980 ₺",
+        "category": "Akşam — Başlangıçlar"
+      },
+      {
+        "name": "Saroz Bebek Ahtapot Salatası (140g)",
+        "price": "1900 ₺",
+        "category": "Akşam — Başlangıçlar",
+        "desc": "Mevsim yeşillikleri, kaya koruğu, greyfurt dilimleri ve limonlu “vinaigrette” sos"
+      },
+      {
+        "name": "Erken Hasat Salatalık ve Kavun Granita",
+        "price": "980 ₺",
+        "category": "Akşam — Başlangıçlar",
+        "desc": "Çıtır nohut, mevsim yeşillikleri, avokado ve dereotu sosu (Vegan)"
+      },
+      {
+        "name": "Günün Mezeleri",
+        "price": "580 ₺",
+        "category": "Akşam — Başlangıçlar",
+        "desc": "Adet"
+      },
+      {
+        "name": "Kızarmış Kalamar (180g)",
+        "price": "1750 ₺",
+        "category": "Akşam — Ara Sıcaklar",
+        "desc": "Acı biber, taze soğan ve isli kırmızı biber sosu"
+      },
+      {
+        "name": "Meşe Odununda Közlenmiş Patlıcan ve Tahinli Yoğurt",
+        "price": "1450 ₺",
+        "category": "Akşam — Ara Sıcaklar",
+        "desc": "Baharatlı nohut, pastırma ve çıtır soğan"
+      },
+      {
+        "name": "Hellim ve Nektarın Şiş",
+        "price": "1100 ₺",
+        "category": "Akşam — Ara Sıcaklar",
+        "desc": "Taze bahçe yeşillikleri, naneli “vinaigrette” sos ve dukkah baharatı"
+      },
+      {
+        "name": "Közlenmiş Baharatlı Mantar",
+        "price": "1050 ₺",
+        "category": "Akşam — Ara Sıcaklar",
+        "desc": "Domates salatası, sumak ekşisi, jalapeño turşusu ve sıcak Anadolu baharatları"
+      },
+      {
+        "name": "Zahter Marineli Lagos (175g)",
+        "price": "2900 ₺",
+        "category": "Akşam — Ana Yemekler",
+        "desc": "Bezelye ve nane püresi, ezilmiş bebek patates, limon-karides tereyağı"
+      },
+      {
+        "name": "Kömür Izgarasında Antrikot (270g)",
+        "price": "3800 ₺",
+        "category": "Akşam — Ana Yemekler",
+        "desc": "Bezelye ve nane püresi, ezilmiş bebek patates, limon-karides tereyağı"
+      },
+      {
+        "name": "İç Baklalı Ege Otları Yahnisi",
+        "price": "1100 ₺",
+        "category": "Akşam — Ana Yemekler",
+        "desc": "Humus, ızgara yaz kabağı, domates sosu ve “chimichurri”, taze bahçe yeşillikleri, naneli sos ve dukkah baharatlı (Vegan)"
+      },
+      {
+        "name": "Dağ Kekikli Kuzu Pirzola (170g)",
+        "price": "3600 ₺",
+        "category": "Akşam — Siz Seçin Biz Izgara Yapalım / Et Seçeneklerimiz"
+      },
+      {
+        "name": "Sarımsak ile Terbiyelenmiş Kuzu Şiş (170g)",
+        "price": "2600 ₺",
+        "category": "Akşam — Siz Seçin Biz Izgara Yapalım / Et Seçeneklerimiz"
+      },
+      {
+        "name": "Biberiye-Soğan ile Dinlendirilmiş Dana Şaşlık (170g)",
+        "price": "2900 ₺",
+        "category": "Akşam — Siz Seçin Biz Izgara Yapalım / Et Seçeneklerimiz"
+      },
+      {
+        "name": "Karabiberli Dana Madalyon (170g)",
+        "price": "3450 ₺",
+        "category": "Akşam — Siz Seçin Biz Izgara Yapalım / Et Seçeneklerimiz"
+      },
+      {
+        "name": "Fıstıklı ve Kişnişli Acılı Yaz Kebabı (170g)",
+        "price": "2400 ₺",
+        "category": "Akşam — Siz Seçin Biz Izgara Yapalım / Et Seçeneklerimiz"
+      },
+      {
+        "name": "Beş Baharatlı Tavuk But Şiş (170g)",
+        "price": "1900 ₺",
+        "category": "Akşam — Siz Seçin Biz Izgara Yapalım / Et Seçeneklerimiz"
+      },
+      {
+        "name": "Kasap Köfte (170g)",
+        "price": "2400 ₺",
+        "category": "Akşam — Siz Seçin Biz Izgara Yapalım / Et Seçeneklerimiz"
+      },
+      {
+        "name": "Chefin Karışık Izgara Tabağı",
+        "price": "3700 ₺",
+        "category": "Akşam — Siz Seçin Biz Izgara Yapalım / Et Seçeneklerimiz",
+        "desc": "Pirzola, Tavuk but şiş, Adana kebap, Dana Madalyon"
+      },
+      {
+        "name": "Anason Marineli İskenderun Jumbo Karides (170g)",
+        "price": "3250 ₺",
+        "category": "Akşam — Siz Seçin Biz Izgara Yapalım / Deniz Ürünlerimiz Seçeneklerimiz"
+      },
+      {
+        "name": "Limon ve Tane Kişnişli Izgara Çipura (170g)",
+        "price": "2750 ₺",
+        "category": "Akşam — Siz Seçin Biz Izgara Yapalım / Deniz Ürünlerimiz Seçeneklerimiz"
+      },
+      {
+        "name": "Dereotu Aromalı Levrek (170g)",
+        "price": "2850 ₺",
+        "category": "Akşam — Siz Seçin Biz Izgara Yapalım / Deniz Ürünlerimiz Seçeneklerimiz"
+      },
+      {
+        "name": "Tahinli Dondurma Susamlı Krokan",
+        "price": "900 ₺",
+        "category": "Akşam — Tatlılar"
+      },
+      {
+        "name": "Çikolatalı Nemesis",
+        "price": "1100 ₺",
+        "category": "Akşam — Tatlılar",
+        "desc": "Çırpılmış “mascarpone” ve kurutulmuş vişne"
+      },
+      {
+        "name": "Trileçe",
+        "price": "1050 ₺",
+        "category": "Akşam — Tatlılar",
+        "desc": "Üç sütte ıslatılmış hafif sünger kek ve karamel sos"
+      },
+      {
+        "name": "Zahterli Gaziantep Baklavası",
+        "price": "1150 ₺",
+        "category": "Akşam — Tatlılar",
+        "desc": "Kaymak ve erken hasat toz fıstık"
+      },
+      {
+        "name": "Mevsim Meyveleri Tabağı",
+        "price": "1250 ₺",
+        "category": "Akşam — Tatlılar",
+        "desc": "Vegan"
+      },
+      {
+        "name": "Dondurma Seçenekleri",
+        "price": "420 ₺",
+        "category": "Akşam — Tatlılar",
+        "desc": "1 top: Çikolatalı, Defne Yapraklı ve Zeytinyağlı, Vanilyalı, Şekersiz Fıstıklı"
+      },
+      {
+        "name": "Sorbeler",
+        "price": "420 ₺",
+        "category": "Akşam — Tatlılar",
+        "desc": "1 top: Mango, Çarkıfelek Meyveli, Limonlu (Vegan)"
+      }
+    ],
+  },
 };
