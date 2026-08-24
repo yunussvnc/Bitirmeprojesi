@@ -58222,4 +58222,267 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       },
     ]
   },
+  "2310": {
+    "name": "Burger Zoom Bahçelievler",
+    "sourceUrl": "https://www.migros.com.tr/yemek/burgerzoom-bahcelievler-bahcelievler-mah-st-2af00",
+    "sourceName": "Migros Yemek branch-labeled `Burgerzoom, Bahçelievler (Bahçelievler Mah.)` menüsü; resmi şube ve D-100, Yanyol C Blok No:27 CA / 0850 304 9666 exact adres-telefon köprüsüyle eşleştirildi",
+    "verifiedAt": "2026-08-24",
+    "items": [
+      {
+        "name": "Klasik Burger",
+        "price": "612,00 TL",
+        "category": "Burgerler"
+      },
+      {
+        "name": "Trüf Burger",
+        "price": "625,00 TL",
+        "category": "Burgerler"
+      },
+      {
+        "name": "Zoom Burger",
+        "price": "789,00 TL",
+        "category": "Burgerler"
+      },
+      {
+        "name": "Füme Burger",
+        "price": "779,00 TL",
+        "category": "Burgerler"
+      },
+      {
+        "name": "Barbekü Burger",
+        "price": "649,00 TL",
+        "category": "Burgerler"
+      },
+      {
+        "name": "Mantar Burger",
+        "price": "658,00 TL",
+        "category": "Burgerler"
+      },
+      {
+        "name": "Acılı Burger",
+        "price": "624,00 TL",
+        "category": "Burgerler"
+      },
+      {
+        "name": "Falafel Burger",
+        "price": "444,00 TL",
+        "category": "Burgerler"
+      },
+      {
+        "name": "Acılı Tavuk Burger",
+        "price": "497,00 TL",
+        "category": "Burgerler"
+      },
+      {
+        "name": "Tavuk Burger",
+        "price": "490,00 TL",
+        "category": "Burgerler"
+      },
+      {
+        "name": "Trüflü Tavuk Burger",
+        "price": "504,00 TL",
+        "category": "Burgerler"
+      },
+      {
+        "name": "Baharatlı Patates Kızartması",
+        "price": "172,00 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Cheddarlı Patates Kızartması",
+        "price": "337,00 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Trüflü Patates Kızartması",
+        "price": "362,00 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "8'Li Peynir Çubuğu",
+        "price": "270,00 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "4'Lü Peynir Çubuğu",
+        "price": "145,00 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "8'Li Soğan Halkası",
+        "price": "107,00 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Tavuk Parçaları (200 Gr.)",
+        "price": "354,00 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "4'Lü Soğan Halkası",
+        "price": "84,00 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Mix Tabak",
+        "price": "388,00 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Xl Mix Tabağı",
+        "price": "660,00 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Beyaz Çikolatalı Brownie",
+        "price": "310,00 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Lotus Cup",
+        "price": "310,00 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Orman Meyveli Cup",
+        "price": "310,00 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Oreo Cup",
+        "price": "310,00 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Çikolatalı Sufle",
+        "price": "310,00 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Fıstık Cup",
+        "price": "310,00 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Özer Hisar Ayran (24,5 Cl.)",
+        "price": "85,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Limonlu Soda (20 Cl.)",
+        "price": "58,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Soda (20 Cl.)",
+        "price": "34,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Su (50 Cl.)",
+        "price": "35,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Pepsi Max (1 L.)",
+        "price": "118,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Pepsi (1 L.)",
+        "price": "118,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Pepsi Max (33 Cl.)",
+        "price": "85,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Pepsi (33 Cl.)",
+        "price": "85,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Yedigün (33 Cl.)",
+        "price": "85,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "7Up (33 Cl.)",
+        "price": "85,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Yedigün (1 L.)",
+        "price": "118,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Lipton Ice Tea (33 Cl.)",
+        "price": "85,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Tropicana (33 Cl.)",
+        "price": "85,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "7Up (1 L.)",
+        "price": "118,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Cheddar Sos (50 Gr.)",
+        "price": "70,00 TL",
+        "category": "Soslar"
+      },
+      {
+        "name": "Trüflü Mayonez Sos (50 Gr.)",
+        "price": "55,00 TL",
+        "category": "Soslar"
+      },
+      {
+        "name": "Zoom Sos (50 Gr.)",
+        "price": "36,00 TL",
+        "category": "Soslar"
+      },
+      {
+        "name": "Ranch Sos (50 Gr.)",
+        "price": "36,00 TL",
+        "category": "Soslar"
+      },
+      {
+        "name": "Acı Sos (50 Gr.)",
+        "price": "36,00 TL",
+        "category": "Soslar"
+      },
+      {
+        "name": "Barbekü Sos (50 Gr.)",
+        "price": "58,00 TL",
+        "category": "Soslar"
+      },
+      {
+        "name": "Hardal Sos (50 Gr.)",
+        "price": "68,00 TL",
+        "category": "Soslar"
+      },
+      {
+        "name": "Acı Tatlı Sos (50 Gr.)",
+        "price": "33,00 TL",
+        "category": "Soslar"
+      },
+      {
+        "name": "Mayonez (9 Gr.)",
+        "price": "9,00 TL",
+        "category": "Soslar"
+      },
+      {
+        "name": "Ketçap (9 Gr.)",
+        "price": "9,00 TL",
+        "category": "Soslar"
+      },
+    ]
+  },
 };
