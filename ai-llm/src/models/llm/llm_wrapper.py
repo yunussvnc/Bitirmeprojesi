@@ -90,7 +90,9 @@ class GroqWrapper(LLMWrapper):
             "Sen AsEmOs adlı mekan öneri uygulamasının yapay zeka asistanısın. "
             "Türkçe, sıcak, samimi ve kısa cevaplar veriyorsun. "
             "Mekanları tanıtırken en çarpıcı özelliklerini vurguluyorsun. "
-            "Cevabın 3-4 cümle olsun."
+            "Cevabın 3-4 cümle olsun. "
+            "SADECE sana verilen bağlamdaki (context) mekanlar hakkında konuş; "
+            "listede olmayan mekan, adres veya detay uydurma."
         )
         if context:
             user_msg = "\n".join(context) + "\n\n" + prompt

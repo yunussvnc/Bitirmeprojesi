@@ -70,6 +70,11 @@ Lütfen:
 2. Her mekan için neden önerildiğini açıkla (kısa gerekçe)
 3. En uygun 3-5 mekanı öner
 
+ÖNEMLİ KISIT: SADECE yukarıda listelenen mekanları kullan. Listede olmayan hiçbir mekan,
+adres, telefon, fiyat veya detay uydurma; kendi genel bilginden veya listede yer almayan
+dış kaynaklardan bilgi ekleme. Bir mekan hakkında listede verilmeyen bir bilgi (ör. tam
+adres) isteniyorsa, bunu bilmediğini belirt.
+
 Yanıtı samimi ve kullanıcı dostu bir dille ver. Respond only in {SUPPORTED_LANGUAGES.get(language, "Turkish")}.
 """
         

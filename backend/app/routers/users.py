@@ -17,6 +17,7 @@ from sqlalchemy.orm import Session
 import models, schemas, crud
 from app.dependencies import get_db, get_current_user, get_optional_user
 from app.services.rate_limiter import follow_rate_limiter
+from config import get_settings
 
 router = APIRouter(tags=["Users"])
 
@@ -774,6 +775,7 @@ def get_user_tagged_posts(
 # --- CONTACT SYNC & RECOMMENDATIONS ---
 
 import hashlib
+import hmac
 
 def _hash_phone(phone: str) -> str:
     # Normalize by removing non-digits
@@ -781,8 +783,10 @@ def _hash_phone(phone: str) -> str:
     digits = re.sub(r'\D', '', phone)
     if not digits:
         return ""
-    # Simple SHA-256 hash of the digits
-    return hashlib.sha256(digits.encode('utf-8')).hexdigest()
+    # HMAC-SHA256 with server-side pepper (JWT_SECRET_KEY) — düşük entropili
+    # telefon numaralarını tuzsuz hash'e göre rainbow table saldırılarına karşı korur.
+    pepper = get_settings().JWT_SECRET_KEY.encode('utf-8')
+    return hmac.new(pepper, digits.encode('utf-8'), hashlib.sha256).hexdigest()
 
 
 @router.post("/me/contacts/sync")
