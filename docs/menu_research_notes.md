@@ -1617,3 +1617,6 @@ Hentzer kaydı `Büyükşehir, 34520 Beylikdüzü/İstanbul`, `+90 212 873 60 68
 
 ## MIKEL COFFEE COMPANY BEYLİKDÜZÜ ID 6960 strict HOLD
 Hentzer kaydı `Samsun Cd., Barış, Kır Sk. No:21/10, 34500 Beylikdüzü/İstanbul`, `+90 212 272 32 32`; telefon resmi Mikel kaynaklarıyla destekleniyor, ancak adres kaynakları çelişkili: resmi açılış paylaşımında `Samsun Cad. No:21 İç Kapı No:18`, Yandex’te `Barış Mah. Kır Sok. No:3`, Hentzer’de `Kır Sk. No:21/10`. Yemeksepeti’nde güncel item-level fiyatlı Mikel menüsü bulunmasına rağmen vendor adresi exact Beylikdüzü şubesiyle kesinleştirilemedi. %100 şube/adres paritesi sağlanamadığından **override eklenmedi; strict HOLD**.
+
+## DOĞU KARADENİZ PİDE SARAYI ID 6959 kabul
+Hentzer kaydı `Türkali, Şair Nedim Cd. 50/A, 34353 Beşiktaş/İstanbul`, `+90 212 259 53 53`; resmi `@dogukaradenizpide` hesabı Beşiktaş şubesini, adres bölgesini ve telefon numaralarını doğruluyor; ek telefon `+90 212 259 96 96` olarak yayınlanmış. Yemeksepeti `lxcj` canlı vendor menüsü 2026-08-26 tarihinde 75 benzersiz gıda/içecek kalemi gösterdi. Popüler carousel tekrarları ve poşet dışlandı; ürünler çorba, lahmacun, pide, kebap, ızgara, dürüm, döner, yan lezzet, salata, tatlı ve içecek kategorilerinden alındı. **Override kabul edildi.**
