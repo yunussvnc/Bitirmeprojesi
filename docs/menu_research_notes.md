@@ -1593,3 +1593,6 @@ Hentzer kaydı `Gümüşsuyu, Fatin Hoca Sk. 21-B, 34437 Beykoz/İstanbul`, `+90
 
 ## HAMSIKÖY METİN USTA BEŞİKTAŞ ID 6968 kabul
 Hentzer kaydı `Sinanpaşa Mah. Ihlamurdere Cd, Altıntaş Sk. 39/A, 34351 Beşiktaş/İstanbul`, `+90 547 293 19 96`; Metin Usta resmi Beşiktaş şube sayfası aynı exact adres/telefonu doğruluyor. Yemeksepeti `pw0q` canlı menüsü 2026-08-26 tarihinde 16 sütlaç, 1 yan ürün ve 8 benzersiz içecek olmak üzere **25 fiyatlı kalem** sundu. Tekrarlanan Elmalı Soda ve Poşet kalemi dışlandı. **Override kabul edildi.**
+
+## NAVOI (HAYMA) RESTAURANT ID 6967 strict HOLD
+Hentzer kaydı `Adnan Kahveci, 34528 Beylikdüzü/İstanbul`, `+90 554 192 10 02`; Yandex, resmi sosyal içerikler ve Hayma Restaurant Facebook hesabı telefon/işletme bağını destekliyor. RestaurantGuru yalnızca kişi başı fiyat aralığı gösteriyor; kamuya açık, son bir yıl içinde doğrulanabilir item-level menü ve ürün fiyatları bulunamadı. Benzer/ilişkisiz menü kaynakları kullanılmadı. **Override eklenmedi; strict HOLD**.
