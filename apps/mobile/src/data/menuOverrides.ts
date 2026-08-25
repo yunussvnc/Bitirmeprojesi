@@ -75344,4 +75344,113 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
   ]
 },
 
+  "7094": {
+  "name": "Merkez Büfe Ortaköy",
+  "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/x5im/merkez-bufe-x5im",
+  "sourceName": "Yemeksepeti canlı vendor x5im; resmi Instagram @merkezbufeortakoy ve Tıkla exact Mecidiye Gözlükçü Sk. No:1 / 0212 236 72 34 kimlik eşleşmesi. Poşet satırı dışlandı.",
+  "verifiedAt": "2026-08-25",
+  "items": [
+    {
+      "name": "Kaşarlı Tost",
+      "price": "115",
+      "category": "Tostlar"
+    },
+    {
+      "name": "Sucuklu Tost",
+      "price": "145",
+      "category": "Tostlar"
+    },
+    {
+      "name": "Karışık Tost",
+      "price": "145",
+      "category": "Tostlar"
+    },
+    {
+      "name": "Yengen Tost",
+      "price": "160",
+      "category": "Tostlar"
+    },
+    {
+      "name": "Sosisli Sandviç",
+      "price": "110",
+      "category": "Sandviçler"
+    },
+    {
+      "name": "Goralı Sandviç",
+      "price": "130",
+      "category": "Sandviçler"
+    },
+    {
+      "name": "Yarım Ekmek Arası Et Döner",
+      "price": "310",
+      "category": "Et Dönerler"
+    },
+    {
+      "name": "3/4 Ekmek Arası Et Döner",
+      "price": "475",
+      "category": "Et Dönerler"
+    },
+    {
+      "name": "Et Döner Dürüm",
+      "price": "385",
+      "category": "Et Dönerler"
+    },
+    {
+      "name": "Et Döner (110 gr.)",
+      "price": "600",
+      "category": "Et Dönerler"
+    },
+    {
+      "name": "Yarım Ekmek Arası Tavuk Döner",
+      "price": "180",
+      "category": "Tavuk Dönerler"
+    },
+    {
+      "name": "Pide Ekmek Arası Tavuk Döner",
+      "price": "180",
+      "category": "Tavuk Dönerler"
+    },
+    {
+      "name": "3/4 Ekmek Arası Tavuk Döner",
+      "price": "265",
+      "category": "Tavuk Dönerler"
+    },
+    {
+      "name": "Tavuk Döner Dürüm",
+      "price": "250",
+      "category": "Tavuk Dönerler"
+    },
+    {
+      "name": "Tavuk Döner (110 gr.)",
+      "price": "300",
+      "category": "Tavuk Dönerler"
+    },
+    {
+      "name": "Islak Hamburger",
+      "price": "135",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Açık Ayran (30 cl.)",
+      "price": "60",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Ayran (30 cl.)",
+      "price": "55",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Soda (20 cl.)",
+      "price": "45",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Su (50 cl.)",
+      "price": "25",
+      "category": "İçecekler"
+    }
+  ]
+},
+
 };

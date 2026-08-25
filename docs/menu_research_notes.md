@@ -1227,3 +1227,6 @@ Hentzer kaydı `Kartaltepe Mahallesi Fatih Caddesi No:191 giriş, Bayrampaşa/İ
 
 ## Altın Şiş Kebap Beylikdüzü ID 7095 acceptance
 Hentzer exact kayıt `Kavaklı, İstanbul Cd., Beylikdüzü/İstanbul`, `+90 212 877 00 13`; resmi Instagram `@altinsiskebap_kavakli` ve `@altinsiskebap_beylikduzu` aynı Beylikdüzü kimliği/telefonu doğruluyor. Yemeksepeti canlı vendor `au2s` menüsünden çorba, fırın ürünleri, kebap/ızgara, dürüm, salata, tatlı ve içecek kategorilerinde **43 ürün ve güncel fiyat** aktarıldı. Poşet satırı dışlandı. `verifiedAt` canlı doğrulama tarihi `2026-08-25`.
+
+## Merkez Büfe Ortaköy ID 7094 acceptance
+Hentzer exact kayıt `Mecidiye, Gözlükçü Sk. 1A, 34347 Beşiktaş/İstanbul`, `+90 212 236 72 34`; resmi Instagram `@merkezbufeortakoy` ve Tıkla exact Gözlükçü Sk. No:1 / telefon kimliğini destekliyor. Yemeksepeti canlı vendor `x5im` menüsünden tost, sandviç, et döner, tavuk döner, burger ve içecek kategorilerinde **20 ürün ve güncel fiyat** aktarıldı. Poşet satırı dışlandı. `verifiedAt` canlı doğrulama tarihi `2026-08-25`.
