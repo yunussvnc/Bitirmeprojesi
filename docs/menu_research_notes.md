@@ -1458,3 +1458,6 @@ Exact kayıt `Dereağzı, Denizyolu Cad. No:67, 34520 Beylikdüzü/İstanbul`, `
 
 ## JUST COFFEE & ROASTERY ID 7015 strict HOLD
 Exact kayıt `Sinanpaşa, Ihlamurdere Cd. No:6, 34535 Beşiktaş/İstanbul`, `+90 543 489 01 87`; resmi `justmakecoffee.com/iletisim` sayfası adres, telefon ve `@justcoffeeroastery` hesabını doğruluyor. Resmi `/menu/` sayfası yalnızca giriş formu sunuyor; herkese açık güncel item-level kafe menüsü/fiyatları bulunamadı. Ürün satış sayfaları kafe şubesi menüsü yerine e-ticaret/çekirdek ürünleri niteliğinde olduğundan **override eklenmedi; strict HOLD**.
+
+## KANATÇI HAYDAR BEYLİKDÜZÜ SKYPORT ID 7014 strict HOLD
+Exact kayıt `Yakuplu, Hürriyet Blv. No:1 Skyport, 34524 Beylikdüzü/İstanbul`, `+90 212 875 75 18`; resmi iletişim sayfası bu telefonu (+90 212 875 75 16 ile birlikte) ve Skyport şubesini doğruluyor. Resmi Beylikdüzü sayfası yalnızca şube tanıtımı/galerisi sunuyor; tam, son 1 yıl içinde item-level fiyatlı menü bulunamadı. Eski sosyal içeriklerdeki sınırlı fiyatlar kullanılmadı; **override eklenmedi; strict HOLD**.
