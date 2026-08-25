@@ -1752,3 +1752,6 @@ Hentzer kaydı `Cumhuriyet, Nadir Sokağı L Blok No:1/14F, 34520 Beylikdüzü/�
 
 ## BEYKOZLU YAVUZ'UN MUTFAĞI ID 6915 — STRICT HOLD
 Hentzer kaydı `Gümüşsuyu, Fatin Hoca Sk. No:17, 34820 Beykoz/İstanbul`, `+90 532 252 06 75`; Restoranim aynı adres/telefonu, resmi Instagram ise 2025-2026 tarihli balık ve meze paylaşımlarıyla faal işletmeyi doğruluyor. Yakala sayfasında bu restorana ait menü bulunmuyor; Kacıyor sayfasındaki ürünler yalnızca kalori/besin bilgisi içeriyor, fiyat içermiyor. Son bir yılda herkese açık, ürün bazlı ve doğrulanabilir güncel fiyatlı menü bulunamadığından **strict HOLD**; override eklenmedi.
+
+## FRANGO DÖNER BEŞİKTAŞ ID 6914 kabulü
+Hentzer kaydı `Yıldız, Çırağan Cd. 8a, 34349 Beşiktaş/İstanbul`, `+90 212 260 19 99`; Frango resmi şubeler sayfası aynı Beşiktaş şubesini `Yıldız Mah. Çırağan Cad. No:8/A` ve aynı telefonla doğruluyor, Servis Listeleri de exact adres/telefonu destekliyor. Migros Yemek Beşiktaş (Yıldız Mah.) canlı vendorundan 87 benzersiz döner, menü, tavuk/tenders, sos, tatlı ve içecek fiyatı aktarıldı. Resmi site Beşiktaş şubesinin 24.12.2025 tarihinde açıldığını gösteriyor; fiyatlar canlı vendor’dan 26.08.2026 tarihinde doğrulandı. Kampanya/carousel tekrarları ve poşet kalemi dışlandı. **Override kabul edildi.**
