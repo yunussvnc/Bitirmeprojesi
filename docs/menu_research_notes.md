@@ -1725,3 +1725,6 @@ Hentzer kaydı `Cumhuriyet, Buse Sk. No:5, 34520 Beylikdüzü/İstanbul`, `+90 2
 
 ## DÜRÜMCE ORTAKÖY ID 6924 kabulü
 Hentzer kaydı `Yıldız, Çırağan Cd. No:50, 34349 Beşiktaş/İstanbul`, `+90 212 260 30 36`; Restoranim, Mekanlar, Snapchat ve resmi Instagram kaynakları exact Ortaköy şubesini ve telefonu doğruluyor. Migros Yemek Ortaköy canlı vendorunun DOM’unda İçecekler, Salatalar, Dürümler ve Kebaplar kategorilerinde 13 benzersiz güncel fiyat kalemi görüldü ve aktarıldı. Kampanyalar, poşet ve carousel tekrarları dahil edilmedi. **Override kabul edildi.**
+
+## DÖNER RECORDS AKARETLER ID 6923 güncelleme — 2026-08-26
+Önceki 2026-08-24 kaydı, Yemeksepeti `mdui` canlı vendorunun 2026-08-26 görünümüyle yeniden doğrulandı ve güncellendi. Exact şube `Sinanpaşa, Şair Nedim Cd. No:38/A, 34351 Beşiktaş/İstanbul`, telefon `+90 543 950 17 77`; Restoranim ve Yandex aynı adres/telefonu doğruluyor. Güncel vendor görünümündeki Menüler, Döner Bowls, Tavuk Dönerler, Yan Ürünler ve İçecekler kategorilerinden 25 benzersiz kalem tutuldu; önceki kaydın İngilizce adları Türkçe canonical adlarla yenilendi. Poşet ve carousel tekrarları dışlandı. **Override güncellendi.**

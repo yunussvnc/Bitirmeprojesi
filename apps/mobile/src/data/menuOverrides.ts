@@ -54591,126 +54591,36 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     ]
   },
   "6923": {
-    "name": "Döner Records Akaretler",
-    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/mdui/doner-records-mdui",
-    "sourceName": "Yemeksepeti canlı menüsü; resmi Döner Records Instagramı ve Yandex/Apple exact Akaretler adres/telefon köprüsüyle eşleştirildi",
-    "verifiedAt": "2026-08-24",
+    "name": "DÖNER RECORDS AKARETLER",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/mdui/doner-records-mdui",
+    "sourceName": "Yemeksepeti mdui canlı vendor; Restoranim ve resmi işletme kaynakları exact `Sinanpaşa, Şair Nedim Cd. No:38/A, 34351 Beşiktaş/İstanbul` / `+90 543 950 17 77` şube eşleşmesini doğruluyor",
+    "verifiedAt": "2026-08-26",
     "items": [
-      {
-        "name": "Chicken Doner & Fries & Drink Menu",
-        "price": "570 TL",
-        "category": "Menus"
-      },
-      {
-        "name": "Doner & Beverage Menu",
-        "price": "410 TL",
-        "category": "Menus"
-      },
-      {
-        "name": "Chicken Doner in Bread (100 gr.)",
-        "price": "335 TL",
-        "category": "Chicken Doner"
-      },
-      {
-        "name": "Chicken Doner in Bread (125 gr.)",
-        "price": "370 TL",
-        "category": "Chicken Doner"
-      },
-      {
-        "name": "Chicken Doner in Bread (150 gr.)",
-        "price": "405 TL",
-        "category": "Chicken Doner"
-      },
-      {
-        "name": "Chicken Doner in Bread (175 gr.)",
-        "price": "440 TL",
-        "category": "Chicken Doner"
-      },
-      {
-        "name": "Ekmek Arası Tavuk Döner (200 gr.)",
-        "price": "475 TL",
-        "category": "Chicken Doner"
-      },
-      {
-        "name": "Chicken Doner Wrap (100 gr.)",
-        "price": "335 TL",
-        "category": "Chicken Doner"
-      },
-      {
-        "name": "Chicken Doner Wrap (125 gr.)",
-        "price": "370 TL",
-        "category": "Chicken Doner"
-      },
-      {
-        "name": "Chicken Doner Wrap (150 gr.)",
-        "price": "405 TL",
-        "category": "Chicken Doner"
-      },
-      {
-        "name": "Chicken Doner Wrap (175 gr.)",
-        "price": "440 TL",
-        "category": "Chicken Doner"
-      },
-      {
-        "name": "Tavuk Döner Dürüm (200 gr.)",
-        "price": "475 TL",
-        "category": "Chicken Doner"
-      },
-      {
-        "name": "Tavuk Döner Dürüm (250 gr.) (Çift Lavaş)",
-        "price": "525 TL",
-        "category": "Chicken Doner"
-      },
-      {
-        "name": "Ev Yapımı Sarımsaklı Mayonez",
-        "price": "40 TL",
-        "category": "By-products"
-      },
-      {
-        "name": "Ev Yapımı Acılı Sarımsaklı Mayonez",
-        "price": "40 TL",
-        "category": "By-products"
-      },
-      {
-        "name": "Chips",
-        "price": "180 TL",
-        "category": "By-products"
-      },
-      {
-        "name": "Lipton Ice Tea Limon (33 cl.)",
-        "price": "90 TL",
-        "category": "Drinks"
-      },
-      {
-        "name": "Lipton Ice Tea Şeftali (33 cl.)",
-        "price": "90 TL",
-        "category": "Drinks"
-      },
-      {
-        "name": "Pepsi (25 cl.)",
-        "price": "90 TL",
-        "category": "Drinks"
-      },
-      {
-        "name": "Pepsi Max (25 cl.)",
-        "price": "90 TL",
-        "category": "Drinks"
-      },
-      {
-        "name": "Silivri Arslan Kara Maya Ayran (28,5 cl.)",
-        "price": "90 TL",
-        "category": "Drinks"
-      },
-      {
-        "name": "Uludağ Su (40 cl.)",
-        "price": "40 TL",
-        "category": "Drinks"
-      },
-      {
-        "name": "Silivri Arslan Karamaya Ayran (24,5 cl.)",
-        "price": "95 TL",
-        "category": "Drinks"
-      },
+      { "name": "Tavuk Döner & Patates & İçecek Menü", "price": "570 TL", "category": "Menüler" },
+      { "name": "Döner & İçecek Menü", "price": "410 TL", "category": "Menüler" },
+      { "name": "Döner Bowl", "price": "335 TL", "category": "Döner Bowls" },
+      { "name": "Fit Bowl", "price": "475 TL", "category": "Döner Bowls" },
+      { "name": "Ekmek Arası Tavuk Döner (100 gr.)", "price": "335 TL", "category": "Tavuk Dönerler" },
+      { "name": "Ekmek Arası Tavuk Döner (125 gr.)", "price": "370 TL", "category": "Tavuk Dönerler" },
+      { "name": "Ekmek Arası Tavuk Döner (150 gr.)", "price": "405 TL", "category": "Tavuk Dönerler" },
+      { "name": "Ekmek Arası Tavuk Döner (175 gr.)", "price": "440 TL", "category": "Tavuk Dönerler" },
+      { "name": "Ekmek Arası Tavuk Döner (200 gr.)", "price": "475 TL", "category": "Tavuk Dönerler" },
+      { "name": "Tavuk Döner Dürüm (100 gr.)", "price": "335 TL", "category": "Tavuk Dönerler" },
+      { "name": "Tavuk Döner Dürüm (125 gr.)", "price": "370 TL", "category": "Tavuk Dönerler" },
+      { "name": "Tavuk Döner Dürüm (150 gr.)", "price": "405 TL", "category": "Tavuk Dönerler" },
+      { "name": "Tavuk Döner Dürüm (175 gr.)", "price": "440 TL", "category": "Tavuk Dönerler" },
+      { "name": "Tavuk Döner Dürüm (200 gr.)", "price": "475 TL", "category": "Tavuk Dönerler" },
+      { "name": "Tavuk Döner Dürüm (250 gr.) (Çift Lavaş)", "price": "525 TL", "category": "Tavuk Dönerler" },
+      { "name": "Ev Yapımı Sarımsaklı Mayonez", "price": "40 TL", "category": "Yan Ürünler" },
+      { "name": "Ev Yapımı Acılı Sarımsaklı Mayonez", "price": "40 TL", "category": "Yan Ürünler" },
+      { "name": "Patates Kızartması", "price": "180 TL", "category": "Yan Ürünler" },
+      { "name": "Lipton Ice Tea Limon (33 cl.)", "price": "90 TL", "category": "İçecekler" },
+      { "name": "Lipton Ice Tea Şeftali (33 cl.)", "price": "90 TL", "category": "İçecekler" },
+      { "name": "Pepsi (30 cl.)", "price": "90 TL", "category": "İçecekler" },
+      { "name": "Pepsi Max (30 cl.)", "price": "90 TL", "category": "İçecekler" },
+      { "name": "Silivri Arslan Kara Maya Ayran (28,5 cl.)", "price": "90 TL", "category": "İçecekler" },
+      { "name": "Uludağ Su (40 cl.)", "price": "40 TL", "category": "İçecekler" },
+      { "name": "Silivri Arslan Karamaya Ayran (24,5 cl.)", "price": "95 TL", "category": "İçecekler" }
     ]
   },
   "6273": {
