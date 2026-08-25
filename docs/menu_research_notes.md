@@ -1308,3 +1308,6 @@ Exact kayıt `Yıldız, Çırağan Cd. No:35/1, 34349 Beşiktaş/İstanbul`, `+9
 
 ## Suhulet Cafe Restaurant ID 7066 strict HOLD
 Hentzer exact kaydı `Paşabahçe, Yalı Erguvan Çk., 34800 Beykoz/İstanbul` ve telefon `null`; public resmî site/Facebook/Mekanlar/Tripadvisor kaynakları işletmeyi `Paşabahçe Mahallesi, Yalı Erguvan Çk. No:15, Beykoz` olarak gösteriyor. Resmî rezervasyon telefonu `0216 425 07 07`, Instagram telefonu `0543 806 3412`; bu nedenle Hentzer ile 100% adres/telefon parity sağlanamadı. Complete ve son bir yıl içinde item-level fiyatlı menü de doğrulanamadı. Ürün/fiyat uydurulmadı; strict HOLD.
+
+## Bereket Döner - Yakuplu Şubesi ID 7065 strict HOLD
+Hentzer kaydı `Kavaklı, Ayasofya Cd. C3 Blok No:17 D/1, 34520 Beylikdüzü/İstanbul`, `+90 212 955 15 10`; resmî Bereket Döner şube sayfası ve Instagram Yakuplu içerikleri telefonu doğruluyor. Ancak Restoranim aynı telefonu `Olimpiyat Cd. No:76, Kavaklı` adresiyle veriyor; bu adres Hentzer’deki Ayasofya Cd. C3 Blok No:17 D/1 ile eşleşmiyor. Mekanlar sayfasında item-level fiyat bulunmadı ve exact branch için güncel complete fiyatlı menü doğrulanamadı. 100% adres parity sağlanamadığı için ürün/fiyat uydurulmadı; strict HOLD.
