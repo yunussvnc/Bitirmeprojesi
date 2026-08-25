@@ -1614,3 +1614,6 @@ Hentzer kaydı `Sinanpaşa, Şht. Dursun Bakan Sk. No:22, 34353 Beşiktaş/İsta
 
 ## SEDİR RESTAURANT BEYLİKDÜZÜ ID 6961 strict HOLD
 Hentzer kaydı `Büyükşehir, 34520 Beylikdüzü/İstanbul`, `+90 212 873 60 68`; işletme kaynakları Sedir Restaurant Beylikdüzü’nü destekliyor, fakat resmi Facebook sayfası `+90 212 872 26 35` telefonunu gösteriyor. %100 telefon paritesi sağlanamadı. Ayrıca aynı şubeye ait son bir yıl içinde doğrulanabilir item-level fiyatlı menü bulunamadı; farklı şehir/ülke ve eski menüler kullanılmadı. **Override eklenmedi; strict HOLD**.
+
+## MIKEL COFFEE COMPANY BEYLİKDÜZÜ ID 6960 strict HOLD
+Hentzer kaydı `Samsun Cd., Barış, Kır Sk. No:21/10, 34500 Beylikdüzü/İstanbul`, `+90 212 272 32 32`; telefon resmi Mikel kaynaklarıyla destekleniyor, ancak adres kaynakları çelişkili: resmi açılış paylaşımında `Samsun Cad. No:21 İç Kapı No:18`, Yandex’te `Barış Mah. Kır Sok. No:3`, Hentzer’de `Kır Sk. No:21/10`. Yemeksepeti’nde güncel item-level fiyatlı Mikel menüsü bulunmasına rağmen vendor adresi exact Beylikdüzü şubesiyle kesinleştirilemedi. %100 şube/adres paritesi sağlanamadığından **override eklenmedi; strict HOLD**.
