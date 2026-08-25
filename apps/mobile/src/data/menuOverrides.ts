@@ -4,6 +4,42 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6920": {
+    "name": "THE BEST KITCHEN",
+    "sourceUrl": "https://thebestkitchen.tr/menu/",
+    "sourceName": "The Best Kitchen resmi menüsü; exact `Cihannüma, Mazhar Reşit Paşa Sok. No:1/A, 34353 Beşiktaş/İstanbul` / `+90 212 327 34 25` bilgisi resmi site, Waze ve resmi sosyal kaynaklarla doğrulanıyor",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Penne Alla Pollo", "price": "420 ₺", "category": "Makarnalar" },
+      { "name": "Çıtır Alla Pollo", "price": "430 ₺", "category": "Makarnalar" },
+      { "name": "Penne Quattro Formaggi", "price": "420 ₺", "category": "Makarnalar" },
+      { "name": "Spaghetti Napoliten", "price": "400 ₺", "category": "Makarnalar" },
+      { "name": "Penne all'Arrabbiata", "price": "400 ₺", "category": "Makarnalar" },
+      { "name": "Spaghetti Bolognese", "price": "425 ₺", "category": "Makarnalar" },
+      { "name": "Akdeniz Salatası", "price": "390 ₺", "category": "Salatalar" },
+      { "name": "Çıtır Tavuk Salatası", "price": "400 ₺", "category": "Salatalar" },
+      { "name": "Izgara Tavuk Salatası", "price": "400 ₺", "category": "Salatalar" },
+      { "name": "Acılı Tavuk Salatası", "price": "400 ₺", "category": "Salatalar" },
+      { "name": "Sezar Salatası", "price": "400 ₺", "category": "Salatalar" },
+      { "name": "Izgara Hellim Salatası", "price": "400 ₺", "category": "Salatalar" },
+      { "name": "Ton Balıklı Salatası", "price": "400 ₺", "category": "Salatalar" },
+      { "name": "Coca-Cola (33 cl.)", "price": "85 ₺", "category": "İçecekler" },
+      { "name": "Fanta (33 cl.)", "price": "85 ₺", "category": "İçecekler" },
+      { "name": "Ice Tea (33 cl.)", "price": "85 ₺", "category": "İçecekler" },
+      { "name": "Meyve Suyu (33 cl.)", "price": "85 ₺", "category": "İçecekler" },
+      { "name": "Taze Sıkma Portakal Suyu", "price": "210 ₺", "category": "İçecekler" },
+      { "name": "Meyveli Soda (20 cl.)", "price": "75 ₺", "category": "İçecekler" },
+      { "name": "Sprite (33 cl.)", "price": "85 ₺", "category": "İçecekler" },
+      { "name": "Limonata", "price": "85 ₺", "category": "İçecekler" },
+      { "name": "Ayran (30 cl.)", "price": "85 ₺", "category": "İçecekler" },
+      { "name": "Sade Soda (20 cl.)", "price": "70 ₺", "category": "İçecekler" },
+      { "name": "Su", "price": "35 ₺", "category": "İçecekler" },
+      { "name": "Çay", "price": "40 ₺", "category": "İçecekler" },
+      { "name": "Nescafe", "price": "100 ₺", "category": "İçecekler" },
+      { "name": "Türk Kahvesi", "price": "100 ₺", "category": "İçecekler" },
+      { "name": "Bitki Çayları", "price": "100 ₺", "category": "İçecekler" }
+    ]
+  },
   "6924": {
     "name": "DÜRÜMCE ORTAKÖY",
     "sourceUrl": "https://www.migros.com.tr/yemek/durumce-ortakoy-besiktas-yildiz-mah-st-2b888",

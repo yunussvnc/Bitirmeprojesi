@@ -1734,3 +1734,6 @@ Hentzer kaydı `Barış, Adnan Kahveci Cd. No:12, 34520 Beylikdüzü/İstanbul`,
 
 ## SEASON ARTISAN BAKERY ID 6921 — STRICT HOLD
 Hentzer kaydı `Bebek, Küçük Bebek Cd. No:15-17, 34342 Beşiktaş/İstanbul`, `+90 552 661 95 71`; resmi Season sitesi, resmi Instagram ve Yemeksepeti `e1lw` vendoru exact Bebek şubesini ve telefonu doğruluyor. Yemeksepeti vendorunda kategori ve şube adresi görünür olmasına rağmen ürün/fiyat kartları tarayıcıda yüklenmedi; resmi sitede de fiyatlı menü metni bulunmuyor. Son bir yıl içinde herkese açık, ürün bazlı ve güvenilir güncel fiyat listesi doğrulanamadığından **strict HOLD**; override eklenmedi.
+
+## THE BEST KITCHEN BEŞİKTAŞ ID 6920 kabulü
+Hentzer kaydı `Cihannüma, Mazhar Reşit Paşa Sokak No:1/A, 34353 Beşiktaş/İstanbul`, `+90 212 327 34 25`; The Best Kitchen resmi sitesi, Waze ve resmi Facebook/Instagram kaynakları exact işletme, adres ve telefonu doğruluyor. Resmi sitenin güncel menü sayfalarından fiyatı açıkça görülen Makarnalar, Salatalar ve İçecekler kategorilerinde 28 benzersiz ürün/fiyat kalemi aktarıldı. Fiyatı yayımlanmayan Ana Yemekler, Burgerler, Omletler, Tostlar, Krepler, Wrapler, Yan Ürünler ve Tatlılar dahil edilmedi. **Override kabul edildi.**
