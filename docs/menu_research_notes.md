@@ -1503,3 +1503,6 @@ Beykoz Belediyesi resmi tesis sayfası exact adresi `Gümüşsuyu, Kirazlı Yayl
 
 ## PALMİYE KARTAL CAFE ID 6999 kabul
 Yemeksepeti `j35o` canlı menüsünden 2026-08-26 tarihinde 17 gıda/içecek kalemi doğrulandı: 6 gözleme, 2 yan ürün, 3 makarna ve 6 soğuk içecek. Plastik poşet kalemi kapsam dışı bırakıldı. İşletme/şube eşleşmesi resmi Instagram `@palmiyekartalcafe`, Google Maps place ID `ChIJ2asI9a23yhQRTJVPfuLUIpc` ve aynı adresi veren yerel kaynaklarla `Sinanpaşa, Cami Arkası No:5/3, Beşiktaş` olarak doğrulandı; `0501 241 19 03` telefonu Apple Maps ve iki yerel işletme dizininde aynı işletmeyle eşleşti. Fiyatlar canlı Yemeksepeti menüsünden alındığı için bir yıl şartını karşılıyor. **Override kabul edildi.**
+
+## TURKWAZ RESTAURANT ID 6998 strict HOLD
+Hentzer/yerel Google kaydı işletmeyi `Kayabaşı, Adnan Menderes Bulvarı A3 Blok No:7/D-53, 34494 Başakşehir/İstanbul` olarak gösteriyor. Resmi görünen Instagram `@turkwazrestaurant` hesabı `0534 299 3000` telefonunu ve deniz ürünleri restoranı niteliğini gösterse de exact Kayabaşı adresini erişilebilir profilde doğrulayamadı. Aramalarda aynı şubeye ait herkese açık, son bir yıl içinde item-level fiyatlı menü bulunamadı; benzer adlı farklı şehir/işletme menüleri kullanılmadı. %100 branch matching ve güncel fiyat şartları birlikte sağlanamadığından **override eklenmedi; strict HOLD**.
