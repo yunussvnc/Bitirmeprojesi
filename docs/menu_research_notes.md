@@ -1722,3 +1722,6 @@ Hentzer kaydı `Cumhuriyet, Derviş Eroğlu Cd. L Blok No:6 T, 34520 Beylikdüz�
 
 ## YAŞAM KAFE BEYLİKDÜZÜ ID 6925 — STRICT HOLD
 Hentzer kaydı `Cumhuriyet, Buse Sk. No:5, 34520 Beylikdüzü/İstanbul`, `+90 212 872 50 12`; Servis Listeleri, Restoranim ve belediye/Instagram kaynakları exact işletme ve telefonu doğruluyor. Restoranim’deki fiyatlı yorumlar 28.02.2026 yeniden açılışından önceki 2025 fiyatlarıdır; MenuBurada güncel ürün menüsü olmadığını bildiriyor. Son bir yıl içinde işletmeye ait doğrulanabilir ürün bazlı güncel fiyat listesi bulunamadığından **strict HOLD**; override eklenmedi.
+
+## DÜRÜMCE ORTAKÖY ID 6924 kabulü
+Hentzer kaydı `Yıldız, Çırağan Cd. No:50, 34349 Beşiktaş/İstanbul`, `+90 212 260 30 36`; Restoranim, Mekanlar, Snapchat ve resmi Instagram kaynakları exact Ortaköy şubesini ve telefonu doğruluyor. Migros Yemek Ortaköy canlı vendorunun DOM’unda İçecekler, Salatalar, Dürümler ve Kebaplar kategorilerinde 13 benzersiz güncel fiyat kalemi görüldü ve aktarıldı. Kampanyalar, poşet ve carousel tekrarları dahil edilmedi. **Override kabul edildi.**

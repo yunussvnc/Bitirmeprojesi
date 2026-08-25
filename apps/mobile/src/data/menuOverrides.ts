@@ -4,6 +4,27 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6924": {
+    "name": "DÜRÜMCE ORTAKÖY",
+    "sourceUrl": "https://www.migros.com.tr/yemek/durumce-ortakoy-besiktas-yildiz-mah-st-2b888",
+    "sourceName": "Migros Yemek canlı Dürümce Ortaköy vendor; Restoranim, Mekanlar ve resmi Instagram exact `Yıldız, Çırağan Cd. No:50, 34349 Beşiktaş/İstanbul` / `+90 212 260 30 36` şube eşleşmesini doğruluyor",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Pepsi (33 Cl.)", "price": "95,00 TL", "category": "İçecekler" },
+      { "name": "Pepsi Max (33 Cl.)", "price": "95,00 TL", "category": "İçecekler" },
+      { "name": "Yedigün (33 Cl.)", "price": "95,00 TL", "category": "İçecekler" },
+      { "name": "7Up (33 Cl.)", "price": "95,00 TL", "category": "İçecekler" },
+      { "name": "Lipton Ice Tea (33 Cl.)", "price": "95,00 TL", "category": "İçecekler" },
+      { "name": "Şalgam Suyu (33 Cl.)", "price": "95,00 TL", "category": "İçecekler" },
+      { "name": "Ayran (33 Cl.)", "price": "95,00 TL", "category": "İçecekler" },
+      { "name": "Soda (20 Cl.)", "price": "65,00 TL", "category": "İçecekler" },
+      { "name": "Su (50 Cl.)", "price": "35,00 TL", "category": "İçecekler" },
+      { "name": "Dürümce Spesiyal Tavuk Şiş'li Salata", "price": "450,00 TL", "category": "Salatalar" },
+      { "name": "Tavuk Şiş'li Tabla Salata", "price": "450,00 TL", "category": "Salatalar" },
+      { "name": "Adana Tavuk Kebap Dürüm ( Tanıtım Fiyatı)", "price": "370,00 TL", "category": "Dürümler" },
+      { "name": "Adana Tavuk Kebap ( Tanıtım Fiyatı)", "price": "395,00 TL", "category": "Kebaplar" }
+    ]
+  },
   "6926": {
     "name": "LEYYA GELATO BEYLİKDÜZÜ KAMEROĞLU",
     "sourceUrl": "https://www.yemeksepeti.com/restaurant/tcsi/leyya-gelato-tcsi",
