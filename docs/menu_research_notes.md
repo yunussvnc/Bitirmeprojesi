@@ -1260,3 +1260,6 @@ Exact kayıt `Rüzgarlıbahçe, Kavacık Kavşağı, 34805 Beykoz/İstanbul`, `+
 
 ## Esteban Burger ID 7082 acceptance
 Exact kayıt `İHSAN Apartmanı, Abbasağa, Yıldız Cd. No:1, 34024 Beşiktaş/İstanbul`, `+90 212 227 27 11`; resmi Instagram `@estebanburgers` exact adresi ve güncel 2026 işletme içeriklerini destekliyor. Yemeksepeti canlı Esteban menüsünden menüler, burgerler, yan ürünler, içecekler ve soslar kategorilerinde **28 ürün ve güncel fiyat** aktarıldı. Poşet satırı dışlandı. `verifiedAt` canlı doğrulama tarihi `2026-08-25`.
+
+## Beylerbeyi Profiterol Kavacık ID 7081 strict HOLD
+Exact kayıt `Çubuklu, Orhan Veli Kanık Cd. No:87/A, 34810 Beykoz/İstanbul`, `+90 216 693 33 37`; Yandex ve resmi Instagram `@beylerbeyiprofiterolkavacik_` aynı şube kimliğini doğruluyor. Yemeksepeti’nde birden çok Beylerbeyi Profiterol vendorı bulunmasına rağmen s0j4/owe4/moqo/v0nl/xc1p sayfalarında exact Kavacık No:87/A adres-telefon metadata’sı kanıtlanamadı. Güncel fiyatlı menü vendorı ile exact branch paritesi kurulamadığından ürün/fiyat aktarılmadı; strict HOLD.
