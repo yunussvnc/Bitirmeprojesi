@@ -4,6 +4,23 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6963": {
+    "name": "KARDEŞLER KEBAP & CAFE CİHANGİR",
+    "sourceUrl": "https://www.kardeslercihangir.com/tr/menu",
+    "sourceName": "Kardeşler Cihangir resmi canlı menüsü; resmi footer iletişimi ve Hentzer exact kaydı `Firuzağa Mah. Firuzağa Camii Sok. No:1A, Cihangir, Beyoğlu/İstanbul` / `+90 212 251 36 96` ile eşleştirildi",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Serpme Kahvaltı (2 Kişilik)", "price": "900 TL", "category": "Kahvaltı" },
+      { "name": "Paçanga Böreği", "price": "300 TL", "category": "Kahvaltı" },
+      { "name": "Omlet", "price": "250 TL", "category": "Kahvaltı" },
+      { "name": "Menemen", "price": "250 TL", "category": "Kahvaltı" },
+      { "name": "Sahanda Yumurta", "price": "200 TL", "category": "Kahvaltı" },
+      { "name": "Sucuklu Yumurta", "price": "230 TL", "category": "Kahvaltı" },
+      { "name": "Kavurmalı Yumurta", "price": "300 TL", "category": "Kahvaltı" },
+      { "name": "Şehriyeli Tavuk Çorbası", "price": "180 TL", "category": "Çorbalar" },
+      { "name": "Ezogelin / Mercimek Çorbası", "price": "150 TL", "category": "Çorbalar" }
+    ]
+  },
   "6965": {
     "name": "HACIMİRZAOĞLU BAKLAVA - BEYLİKDÜZÜ",
     "sourceUrl": "https://www.hacimirzaoglu.com/baklavalar",

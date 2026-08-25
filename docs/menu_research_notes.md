@@ -1605,3 +1605,6 @@ Hentzer kaydı `Kavaklı, İbrahim Müteferrika Cd. 26/c, 34520 Beylikdüzü/İs
 
 ## AGAFYA MEYHANESİ ID 6964 strict HOLD
 Hentzer kaydı `Sinanpaşa Mahallesi Alabeyi Sk. No:9 Çarşı, Sinanpaşa, 34353 Beşiktaş/İstanbul`, `+90 532 301 14 91`; Yandex, Instagram ve Meyhankoli exact işletme/telefonu destekliyor. Pardon dijital menüsünde bazı kategori fiyatları görünse de ürün adları eksik; Main Dishes/Appetizer/Desserts sayfaları item-level metin döndürmüyor. Fiyatları ürün adlarıyla güvenilir biçimde eşleştirmek mümkün olmadığından ve şarap/rakı kapsam dışı olduğundan **override eklenmedi; strict HOLD**.
+
+## KARDEŞLER KEBAP & CAFE CİHANGİR ID 6963 kabul
+Hentzer kaydı `Cihangir, Firüzağa Mah, Firuzağa Cami Sk, Cihangir, Defterdar Yokuşu Sok. No:1/A, 34082 Beyoğlu/İstanbul`, `+90 212 251 36 96`; resmi Kardeşler Cihangir menü sitesinin footer adres/telefonu aynı şubeyle eşleşiyor. Resmi canlı menü 2026-08-26 tarihinde 9 item-level gıda fiyatı gösterdi: serpme kahvaltı, paçanga böreği, omlet, menemen, sahanda yumurta, sucuklu yumurta, kavurmalı yumurta ve iki çorba. Fiyatı görünmeyen diğer kategoriler ve Popüler carousel tekrarları aktarılmadı. **Override kabul edildi.**
