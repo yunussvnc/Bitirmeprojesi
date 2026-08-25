@@ -1719,3 +1719,6 @@ Hentzer kaydı `Adnan Kahveci Mah. Osmanlı Caddesi, Beyaz Konak, Taner Sk. D:4 
 
 ## LEYYA GELATO BEYLİKDÜZÜ KAMEROĞLU ID 6926 kabulü
 Hentzer kaydı `Cumhuriyet, Derviş Eroğlu Cd. L Blok No:6 T, 34520 Beylikdüzü/İstanbul`, `+90 212 706 80 44`; Restoranim exact adres/telefonu, Yandex arama kaydı telefonu ve resmi Instagram Kameroğlu şubesinin faal olduğunu doğruluyor. Yemeksepeti `tcsi` canlı vendorundan Waffles, Draje & Şekerlemeler, Macaronlar, Tatlılar, İçecekler, Soslar ve Kiloluk Dondurmalar kategorilerinde 15 benzersiz güncel ürün/fiyat kalemi aktarıldı. Popüler carousel tekrarları ve poşet kalemi dahil edilmedi. **Override kabul edildi.**
+
+## YAŞAM KAFE BEYLİKDÜZÜ ID 6925 — STRICT HOLD
+Hentzer kaydı `Cumhuriyet, Buse Sk. No:5, 34520 Beylikdüzü/İstanbul`, `+90 212 872 50 12`; Servis Listeleri, Restoranim ve belediye/Instagram kaynakları exact işletme ve telefonu doğruluyor. Restoranim’deki fiyatlı yorumlar 28.02.2026 yeniden açılışından önceki 2025 fiyatlarıdır; MenuBurada güncel ürün menüsü olmadığını bildiriyor. Son bir yıl içinde işletmeye ait doğrulanabilir ürün bazlı güncel fiyat listesi bulunamadığından **strict HOLD**; override eklenmedi.
