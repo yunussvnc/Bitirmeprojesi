@@ -1542,3 +1542,6 @@ Hentzer kaydı `Yeni Mahalle, Dr. Ömer Besim Paşa Cd. No:101, 34815 Beykoz/İs
 
 ## PAROLE CAFE | RESTAURANT ID 6986 strict HOLD
 Hentzer API kaydı `Asmalı Mescit, İstiklal Cd. No:166/C, 34430 Beyoğlu/İstanbul`, `+90 212 245 01 23`; resmi parola.com.tr, Wanderlog, Trip.com ve 2025 tarihli sosyal paylaşım aynı exact şube ve telefonu doğruluyor. Ancak erişilebilen tam dijital menü `parolecafe.jacca.com` son fiyat güncellemesini `06.01.2024` olarak belirtiyor; bu, 2026-08-26 itibarıyla bir yıldan eski. Güncel sosyal içerikler menü fiyatlarını tam liste olarak vermediğinden fiyat güncelliği şartı sağlanamadı. **Override eklenmedi; strict HOLD**.
+
+## ESPRESSOLAB BEYKOZ ID 6985 strict HOLD
+Hentzer API kaydı `İncirköy, Saip Molla Cd. No:77, 34800 Beykoz/İstanbul`, `+90 444 84 64`; Espressolab resmi Beykoz mağaza sayfası aynı adresi, Yandex ve resmi mağaza/marka kaynakları aynı sipariş hattını doğruluyor. Resmi menü sayfası COPYRIGHT © 2026 görünmesine rağmen ürün-fiyat listesi dinamik/captcha nedeniyle erişilebilir metin olarak sunulmadı. Yemeksepeti arama sonucu bazı ürün fiyatları gösterse de vendor’ın bu exact Beykoz şubesi olduğu tam sayfada doğrulanamadı. Branch paritesi ve güncel item-level fiyatlar birlikte doğrulanamadığı için **override eklenmedi; strict HOLD**.
