@@ -1317,3 +1317,6 @@ Hentzer kaydı `Cumhuriyet, Atatürk Blv. No:27 1|C, 34500 Beylikdüzü/İstanbu
 
 ## Das Haus Des Döners ID 7063 refresh
 Exact kayıt `Cumhuriyet, Okur Sk. No:2/A, 34520 Beylikdüzü/İstanbul`, `+90 531 011 02 29`; resmî Haus Des Döners şubeler sayfası exact adres/telefonu yayımlıyor, Kaçıyor ve 2026 sosyal içerikler de eşleşmeyi destekliyor. Mevcut override exact Beylikdüzü `hc9n` Yemeksepeti vendorıyla yenilendi. Tavuk/et dönerler, Kids Menü, yan ürünler ve içeceklerden **54 benzersiz ürün/fiyat** aktarıldı; poşet/servis satırları dışlandı. `verifiedAt` canlı kontrol tarihi `2026-08-25`.
+
+## Mondo della Pizza ID 7062 refresh
+Exact kayıt `Çubuklu, Vatan Cd. No:2B, 34820 Beykoz/İstanbul`, `+90 216 322 70 70`; Restoranım, Kaçıyor ve exact Migros `Mondo Della Pizza, Beykoz (Çubuklu Mah.)` vendorı ile doğrulandı. Mevcut override Migros’un güncel menüsüyle yenilendi: menüler, 33/26 cm pizzalar, calzone, glutensiz pizza, atıştırmalık, tatlı, tavuklu sandviç, içecek ve soslardan **70 benzersiz ürün/fiyat** aktarıldı. `Restoran Öneriyor` carousel satırı ve gıda dışı metadata dışlandı. `verifiedAt` 2026-08-25.
