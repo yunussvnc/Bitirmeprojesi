@@ -1455,3 +1455,6 @@ Exact kayıt `Rüzgarlıbahçe, Cumhuriyet Cd. No:43, 34805 Beykoz/İstanbul`, `
 
 ## BALIKÇINIZ YUSUF ID 7016 kabul
 Exact kayıt `Dereağzı, Denizyolu Cad. No:67, 34520 Beylikdüzü/İstanbul`, `+90 530 017 34 24`; resmi `@balikcinizyusuf24` profili ve 2026 tarihli sosyal paylaşımlarla adres/telefon eşleşti. Yemeksepeti `gehh` vendorının 2026-08-25 canlı menüsünden Izgaralar, Izgara Balıklar, Tavada Balıklar, Diğer Lezzetler, Ekmek Arası Ürünler, Salatalar, İçecekler ve Kiloluk Balıklar kategorilerinden **30 benzersiz ürün/fiyat** alındı. Plastic Bag kalemi dışlandı.
+
+## JUST COFFEE & ROASTERY ID 7015 strict HOLD
+Exact kayıt `Sinanpaşa, Ihlamurdere Cd. No:6, 34535 Beşiktaş/İstanbul`, `+90 543 489 01 87`; resmi `justmakecoffee.com/iletisim` sayfası adres, telefon ve `@justcoffeeroastery` hesabını doğruluyor. Resmi `/menu/` sayfası yalnızca giriş formu sunuyor; herkese açık güncel item-level kafe menüsü/fiyatları bulunamadı. Ürün satış sayfaları kafe şubesi menüsü yerine e-ticaret/çekirdek ürünleri niteliğinde olduğundan **override eklenmedi; strict HOLD**.
