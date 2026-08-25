@@ -1497,3 +1497,6 @@ Exact kayıt `Yıldırım, Şht. Kamil Balkan Cd. 48/A, 34045 Bayrampaşa/İstan
 
 ## JOKER NO.19 ID 7001 strict HOLD
 Exact adres `Sinanpaşa, Beşiktaş Cd. No:19, 34353 Beşiktaş/İstanbul` Hentzer, Snapchat ve Neleri Meşhur’un 2026 güncel sayfasında eşleşiyor. Ancak telefon paritesi çelişkili: Hentzer/Snapchat `+90 212 227 93 94`, Neleri Meşhur’un 2026-08-25 güncellemesinde `+90 212 227 93 95` görülüyor. Allzinapp yalnızca kategori başlıklarını veriyor, item-level fiyatları erişilebilir değil; eski fiyatlar kullanılmadı. %100 exact şube ve güncel fiyat şartları birlikte sağlanamadığından **override eklenmedi; strict HOLD**.
+
+## KARLITEPE RESTORAN ID 7000 strict HOLD
+Beykoz Belediyesi resmi tesis sayfası exact adresi `Gümüşsuyu, Kirazlı Yayla Cd. No:129, 34820 Beykoz/İstanbul` ve tesis telefonu `444 666 1` olarak doğruluyor; menü bağlantısı da belediye sayfasında mevcut. Ancak Hentzer ID 7000 telefon alanı `null` olduğundan zorunlu exact telefon paritesi sağlanamadı. Kimyon menü uygulaması araçlarda item-level fiyatları erişilebilir biçimde sunmadı; 2025 haberindeki menü bağlantısına rağmen tam güncel fiyat listesi alınamadı. **Override eklenmedi; strict HOLD**.
