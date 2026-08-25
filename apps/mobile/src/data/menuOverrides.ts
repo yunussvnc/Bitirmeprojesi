@@ -87097,4 +87097,217 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     }
   ]
 },
+  "7006": {
+  "name": "Kavacık Bahçe Restoran",
+  "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/zt6c/kavacik-bahce-restoran",
+  "sourceName": "Yemeksepeti current Kavacık Bahçe Restoran menu; exact Hentzer branch is Rüzgarlıbahçe, Adaklı Sk. No:7, 34805 Beykoz/İstanbul, +90 501 499 34 75, matching official @kavacikbahce, Yandex and dated social posts. 41 unique priced food/beverage items imported; Plastic Bag excluded.",
+  "verifiedAt": "2026-08-25",
+  "items": [
+    {
+      "name": "Peynirli Sigara Böreği (3 Adet)",
+      "price": "180",
+      "category": "Börekler"
+    },
+    {
+      "name": "Mercimek Çorbası",
+      "price": "200",
+      "category": "Çorbalar"
+    },
+    {
+      "name": "Peynirli Rize Pidesi",
+      "price": "450",
+      "category": "Fırın Ürünleri"
+    },
+    {
+      "name": "Kuşbaşılı Pide",
+      "price": "550",
+      "category": "Fırın Ürünleri"
+    },
+    {
+      "name": "Kaşarlı Pide",
+      "price": "400",
+      "category": "Fırın Ürünleri"
+    },
+    {
+      "name": "Kıymalı Pide",
+      "price": "500",
+      "category": "Fırın Ürünleri"
+    },
+    {
+      "name": "Kavurmalı Pide",
+      "price": "550",
+      "category": "Fırın Ürünleri"
+    },
+    {
+      "name": "Kaşarlı Sucuklu Pide",
+      "price": "450",
+      "category": "Fırın Ürünleri"
+    },
+    {
+      "name": "Karışık Pide",
+      "price": "450",
+      "category": "Fırın Ürünleri"
+    },
+    {
+      "name": "Lahmacun",
+      "price": "200",
+      "category": "Fırın Ürünleri"
+    },
+    {
+      "name": "Izgara Köfte",
+      "price": "550",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "Izgara Tavuk",
+      "price": "500",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "Yaprak Kanat",
+      "price": "500",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "Kuzu Pirzola",
+      "price": "000",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "Dana Bonfile",
+      "price": "900",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "Izgara Sucuk",
+      "price": "400",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "Karışık Izgara",
+      "price": "000",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "Güveçte Kuru Fasulye",
+      "price": "250",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Rize Et Kavurma",
+      "price": "700",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Karalahana Sarması",
+      "price": "230",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Sade Pişi (5 Adet)",
+      "price": "250",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Anne Patates Kızartması",
+      "price": "250",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Mevsim Salata",
+      "price": "200",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Gavurdağı Salata",
+      "price": "240",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Roka Salatası",
+      "price": "200",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Peynirli Roka Salatası",
+      "price": "230",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Fırın Sütlaç",
+      "price": "200",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Coca-Cola (33 cl.)",
+      "price": "100",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Fanta (33 cl.)",
+      "price": "100",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Sprite (33 cl.)",
+      "price": "100",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Cappy (33 cl.)",
+      "price": "75",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Fuse Tea (33 cl.)",
+      "price": "100",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Şalgam Suyu (30 cl.)",
+      "price": "75",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Soda (20 cl.)",
+      "price": "75",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Su (50 cl.)",
+      "price": "50",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Izgara Köfte (1 kg.)",
+      "price": "700",
+      "category": "Kiloluk Izgaralar (Pişirilmiş)"
+    },
+    {
+      "name": "Izgara Tavuk (1 kg.)",
+      "price": "700",
+      "category": "Kiloluk Izgaralar (Pişirilmiş)"
+    },
+    {
+      "name": "Tavuk Şiş (1 kg.)",
+      "price": "700",
+      "category": "Kiloluk Izgaralar (Pişirilmiş)"
+    },
+    {
+      "name": "Yaprak Kanat (1 kg.)",
+      "price": "500",
+      "category": "Kiloluk Izgaralar (Pişirilmiş)"
+    },
+    {
+      "name": "Kuzu Pirzola (1 kg.)",
+      "price": "800",
+      "category": "Kiloluk Izgaralar (Pişirilmiş)"
+    },
+    {
+      "name": "Izgara Sucuk (1 kg.)",
+      "price": "400",
+      "category": "Kiloluk Izgaralar (Pişirilmiş)"
+    }
+  ]
+},
 };

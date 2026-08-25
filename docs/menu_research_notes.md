@@ -1482,3 +1482,6 @@ Exact mekan adresi `Vişnezade, Şair Nedim Cd. No:27/A, 34353 Beşiktaş/İstan
 
 ## LOKMATA ID 7007 kabul
 Exact kayıt `Vişnezade, Refik Osman Top Sk. No:4, 34357 Beşiktaş/İstanbul`, `+90 212 259 08 88`; Lokmata sosyal medya, Facebook ve güncel yerel kayıtlarla eşleşti. Yemeksepeti `egvp` vendorından 2026-08-25 tarihinde Menus, Kilo Ice Creams, Chocolates, 5li/8li Lokma Tatlısı, Ice creams, Drinks ve Paketli Dondurmalar kategorilerinden **32 benzersiz ürün/fiyat** alındı. Popular carousel tekrarları ve Plastic Bag kalemi dışlandı.
+
+## KAVACIK BAHÇE RESTORAN ID 7006 kabul
+Exact kayıt `Rüzgarlıbahçe, Adaklı Sk. No:7, 34805 Beykoz/İstanbul`, `+90 501 499 34 75`; resmi `@kavacikbahce`, Yandex ve 2025-2026 sosyal paylaşımlarla eşleşti. Yemeksepeti `zt6c` vendorından 2026-08-25 tarihinde Börekler, Çorbalar, Fırın Ürünleri, Izgaralar, Ana Yemekler, Yan Ürünler, Salatalar, Tatlılar, İçecekler ve Kiloluk Izgaralar kategorilerinden **41 benzersiz ürün/fiyat** alındı. Plastic Bag kalemi dışlandı.
