@@ -1254,3 +1254,6 @@ Exact kayıt `Anadolu Caddesi Park Teras AVM No:30, Büyükşehir, 34520 Beylikd
 
 ## 1924 İstanbul ID 7084 acceptance
 Exact kayıt `Asmalı Mescit, Olivya Geçidi Sok. 7-A, 34435 Beyoğlu/İstanbul`, `+90 530 896 03 60`; Restoranım ve resmî 1924istanbul.com kaynakları aynı işletme kimliğini doğruluyor. TheFork exact adresli menüsünde `Last update August 18, 2026` olarak 13 kategoride **89 item-level TRY fiyatı** yayımlanmış. Mezze/zakuski, ana yemek, havyar, pelmeni, çorba, salata, flambé arabası, garnitür, tatlı, kahve, çay, votka ve kokteyl kalemleri aktarıldı. `verifiedAt` canlı kontrol tarihi `2026-08-25`.
+
+## Five O'Clock Kitchen ID 7083 strict HOLD
+Exact kayıt `Rüzgarlıbahçe, Kavacık Kavşağı, 34805 Beykoz/İstanbul`, `+90 216 485 45 00`; Restoranım ve resmi Instagram `@fiveoclock_kitchen` aynı işletme kimliğini destekliyor. Resmî fiveoclock.com kataloğu pasta/çikolata/fırın ürünleri için e-ticaret vitrini olsa da exact Kitchen şubesinin güncel restoran menüsünü ve item-level fiyatlarını sunmuyor. Son bir yıl içinde complete fiyatlı public menü kanıtı bulunamadı; eski 2020 içerikleri kullanılmadı. Ürün/fiyat uydurulmadı; strict HOLD.
