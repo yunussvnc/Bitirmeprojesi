@@ -1425,3 +1425,6 @@ Exact Hentzer kaydı `Barış, Reşat Nuri Güntekin Sk. No:58, 34520 Beylikdüz
 
 ## ACADEMY DÖNER İSTANBUL KAVACIK ID 7026 strict HOLD
 Exact Hentzer kaydı `Kavacık, Otağtepe Cd. No:45/A, 34810 Beykoz/İstanbul`, `+90 216 232 41 51`; resmi Kavacık Instagram profili ve bağımsız işletme kayıtlarıyla adres/telefon eşleşti. Yemeksepeti’nde güncel Academy Döner menüleri bulundu, ancak birden fazla İstanbul/şehir vendorı mevcut ve exact Kavacık adresi vendor sayfasında doğrulanamadı. Şube paritesi kesinleşmeden zincir/genel menü aktarılmadı; **strict HOLD**.
+
+## PAPATYA DÜRÜM ID 7025 strict HOLD
+Exact Hentzer kaydı `Arnavutköy, Sebzeci Bayram Sk. No:8-10, 34345 Beşiktaş/İstanbul`, `+90 212 265 20 30`; resmi `@papatyadurum` profili ve güncel yerel kayıtlarla adres/telefon eşleşti. Yemeksepeti’nde güncel fiyatlı Papatya Dürüm menüsü mevcut olsa da canlı vendor sayfası `New address / generic location` uyarısı veriyor ve exact Arnavutköy şubesini gösteren adres/telefon paritesi sunmuyor. Bu nedenle zincir/vendor eşleşmesi kesinleşmeden **override eklenmedi; strict HOLD**.
