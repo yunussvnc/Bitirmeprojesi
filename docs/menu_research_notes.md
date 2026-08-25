@@ -1485,3 +1485,6 @@ Exact kayıt `Vişnezade, Refik Osman Top Sk. No:4, 34357 Beşiktaş/İstanbul`,
 
 ## KAVACIK BAHÇE RESTORAN ID 7006 kabul
 Exact kayıt `Rüzgarlıbahçe, Adaklı Sk. No:7, 34805 Beykoz/İstanbul`, `+90 501 499 34 75`; resmi `@kavacikbahce`, Yandex ve 2025-2026 sosyal paylaşımlarla eşleşti. Yemeksepeti `zt6c` vendorından 2026-08-25 tarihinde Börekler, Çorbalar, Fırın Ürünleri, Izgaralar, Ana Yemekler, Yan Ürünler, Salatalar, Tatlılar, İçecekler ve Kiloluk Izgaralar kategorilerinden **41 benzersiz ürün/fiyat** alındı. Plastic Bag kalemi dışlandı.
+
+## ART ISTANBUL CAFE & BAR ID 7004 strict HOLD
+Exact kayıt `Kuloğlu Mah., Gazeteci Erol Dernek Sok. No:8, 34437 Beyoğlu/İstanbul`, `+90 505 715 39 61`; Hentzer adres/telefonu Instagram exact location sayfasında doğrudan aynı şekilde görülüyor. Ancak 2025-2026 döneminde herkese açık, tam item-level fiyatlı menü bulunamadı; üçüncü taraf eski/çelişkili telefon ve menü sinyalleri exact güncel menü için yeterli değil. **Override eklenmedi; strict HOLD**.
