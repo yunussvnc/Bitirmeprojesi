@@ -1332,3 +1332,6 @@ Hentzer kaydı `Konaklar, Selvili Sokağı No:5, 34330 Beşiktaş/İstanbul`, `+
 
 ## BlackOwlCoffee ID 7058 strict HOLD
 Exact kayıt `Sinanpaşa, Şht. Asım Cd. No:37, 34353 Beşiktaş/İstanbul`, `+90 212 327 77 07`; Mindtrip, Aratsana, Cybo ve Onedio kaynakları adres/telefonu doğruluyor. RestaurantGuru exact menü sayfası var ancak sayısal güncel fiyat içeriği erişilebilir değil. Yemeksepeti/Migros sonuçları BlackOwlCoffee yerine farklı Blak/Black Coffee Co., Coffy veya Owl işletmelerine ait; exact vendor doğrulanamadı. Son bir yıl içinde complete item-level fiyatlı exact şube menüsü bulunamadı. Ürün/fiyat uydurulmadı; strict HOLD.
+
+## Really Fried Chicken Beşiktaş ID 7057 strict HOLD
+Exact kayıt `Sinanpaşa, Ihlamurdere Cd. No:38, 34357 Beşiktaş/İstanbul`, `+90 212 537 50 50`; resmî homepage/contact sayfaları exact adresi doğruluyor, RestaurantGuru ve Kaçıyor telefon/adresle uyumlu. Resmî site burger, wings ve tenders ürün gruplarını açıklıyor ancak sayısal fiyat yayımlamıyor. Instagram/TikTok tanıtımları complete item-level menü değil; exact Beşiktaş Yemeksepeti/Migros vendorı ve son bir yıl fiyatlı tam liste doğrulanamadı. Ürün/fiyat uydurulmadı; strict HOLD.
