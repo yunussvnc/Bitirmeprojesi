@@ -1656,3 +1656,6 @@ Hentzer kaydı `Cumhuriyet Mah., Cumhuriyet Caddesi Beyaz Park Evleri No:6, 3452
 
 ## BIG CHEESE ID 6947 kabulü
 Hentzer kaydı `Kavacık, Gülşen Sok. No:1A, 34810 Beykoz/İstanbul`, `+90 535 819 88 18`; Big Cheese resmi sitesi aynı Kavacık adresini yayımlıyor, İtalyanMutfağı işletme kaydı aynı adres ve telefonu doğruluyor, resmi sosyal paylaşımlar da aynı şubeyi destekliyor. Yemeksepeti `nw6r` canlı vendor menüsünden 36 benzersiz ürün/fiyat kalemi (makarna, bowl, kruvasan, tatlı ve içecekler) alındı; Popüler carousel tekrarları ayrıca ürün sayılmadı. Menü yayın tarihi görünmediğinden `verifiedAt` erişim/doğrulama tarihi olan 2026-08-26 olarak tutuldu. **Override kabul edildi.**
+
+## MARMARA MARKET ID 6946 — STRICT HOLD
+Hentzer kaydı `Yıldırım, Zafer Cd. No:35, 34035 Bayrampaşa/İstanbul`, `+90 543 593 25 25`; Yandex Maps aynı exact adres ve telefonu gösteriyor ancak işletme durumunu açıkça **Kurum faaliyette değil** olarak işaretliyor. Aktif işletmeye ait güncel fiyatlı menü bulunamadı; market kaydına restoran menüsü uydurulamayacağı için **strict HOLD**. Override eklenmedi.
