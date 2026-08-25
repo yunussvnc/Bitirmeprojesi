@@ -85445,4 +85445,217 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     }
   ]
 },
+  "7037": {
+  "name": "Ira Bakery Beylikdüzü",
+  "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/abp4/ira-bakery-abp4",
+  "sourceName": "Yemeksepeti current İra Bakery menu; exact Hentzer branch is Cumhuriyet, Derviş Eroğlu Cd. No:6 D:c, 34515 Beylikdüzü/İstanbul, +90 505 303 04 29, matching official İra Bakery Beylikdüzü page and Instagram profile. 41 unique priced food items imported; duplicate Fıstıklı Marki and Plastic Bag excluded.",
+  "verifiedAt": "2026-08-25",
+  "items": [
+    {
+      "name": "Oreolu Çilekli Mag",
+      "price": "250 TL",
+      "category": "Mags"
+    },
+    {
+      "name": "Çilekli Mag",
+      "price": "260 TL",
+      "category": "Mags"
+    },
+    {
+      "name": "Orman Meyveli Tart",
+      "price": "340 TL",
+      "category": "Tartlar"
+    },
+    {
+      "name": "Çilekli Tart",
+      "price": "280 TL",
+      "category": "Tartlar"
+    },
+    {
+      "name": "Bal Kabaklı Tart",
+      "price": "275 TL",
+      "category": "Tartlar"
+    },
+    {
+      "name": "Fındıklı Tart",
+      "price": "300 TL",
+      "category": "Tartlar"
+    },
+    {
+      "name": "Pembe Tart",
+      "price": "275 TL",
+      "category": "Tartlar"
+    },
+    {
+      "name": "Oreolu Cheesecake",
+      "price": "300 TL",
+      "category": "Cheesecakes"
+    },
+    {
+      "name": "Bueno Cheesecake",
+      "price": "295 TL",
+      "category": "Cheesecakes"
+    },
+    {
+      "name": "Bal Kabaklı Cheesecake",
+      "price": "310 TL",
+      "category": "Cheesecakes"
+    },
+    {
+      "name": "Frambuazlı Fıstıklı Cheesecake",
+      "price": "320 TL",
+      "category": "Cheesecakes"
+    },
+    {
+      "name": "Limonlu Cheesecake",
+      "price": "290 TL",
+      "category": "Cheesecakes"
+    },
+    {
+      "name": "Lotus Cheesecake",
+      "price": "290 TL",
+      "category": "Cheesecakes"
+    },
+    {
+      "name": "Bask Cheesecake",
+      "price": "305 TL",
+      "category": "Cheesecakes"
+    },
+    {
+      "name": "Fıstıklı Bask Cheesecake",
+      "price": "305 TL",
+      "category": "Cheesecakes"
+    },
+    {
+      "name": "Glütensiz Pasta",
+      "price": "270 TL",
+      "category": "Glütensiz Tatlılar"
+    },
+    {
+      "name": "Gold Pera (Glütensiz)",
+      "price": "310 TL",
+      "category": "Glütensiz Tatlılar"
+    },
+    {
+      "name": "Dubai Cup",
+      "price": "320 TL",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Tiramisu Cup",
+      "price": "305 TL",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Profiterol",
+      "price": "260 TL",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Milföy Pasta",
+      "price": "290 TL",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Fıstıklı Marki",
+      "price": "295 TL",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Limon Pera",
+      "price": "260 TL",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Ahududu",
+      "price": "310 TL",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Cherry Cheese",
+      "price": "310 TL",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Elgant",
+      "price": "250 TL",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Coco White",
+      "price": "290 TL",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Orman Meyveli Kase",
+      "price": "270 TL",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Fraisier",
+      "price": "275 TL",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Lemon Cake",
+      "price": "275 TL",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Caramio",
+      "price": "285 TL",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Karnaval",
+      "price": "300 TL",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Festival",
+      "price": "295 TL",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Panfilya",
+      "price": "300 TL",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Pavlova",
+      "price": "310 TL",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Çikotalı İsveç Sarması",
+      "price": "290 TL",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "İra Roll",
+      "price": "295 TL",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Afrodit",
+      "price": "300 TL",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Ferrero",
+      "price": "310 TL",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Rafaello",
+      "price": "315 TL",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Delux",
+      "price": "305 TL",
+      "category": "Tatlılar"
+    }
+  ]
+},
 };

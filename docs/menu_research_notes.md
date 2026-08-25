@@ -1389,3 +1389,6 @@ Exact kayıt `Beyaz Palace, Adnan Kahveci, Osmanlı Cd. No:63, 34528 Beylikdüz�
 
 ## BABY WAFFLE COFFEE ID 7038 kabul
 Exact kayıt `Barış, Adakent Cd. Beyaz City Çarşı D:4F No:61, 34519 Beylikdüzü/İstanbul`, `+90 535 876 20 72`; güncel resmi Instagram profiliyle adres/telefon eşleşti. Yemeksepeti `Baby Waffle` canlı menüsünden 2026-08-25 tarihinde Waffles, Cup Waffles, Tatlılar, İçecekler, Kruvasanlar ve Waffle Bowls kategorilerinden **43 benzersiz ürün/fiyat** alındı. Popüler carousel tekrarları dışlandı.
+
+## IRA BAKERY BEYLİKDÜZÜ ID 7037 kabul
+Exact kayıt `Cumhuriyet, Derviş Eroğlu Cd. No:6 D:c, 34515 Beylikdüzü/İstanbul`, `+90 505 303 04 29`; resmi İra Bakery Beylikdüzü sayfası ve Instagram profiliyle adres/telefon eşleşti. Yemeksepeti `İra Bakery` canlı menüsünden 2026-08-25 tarihinde Mags, Tartlar, Cheesecakes, Glütensiz Tatlılar ve Tatlılar kategorilerinden **41 benzersiz ürün/fiyat** alındı. Tekrarlanan Fıstıklı Marki ve Plastic Bag kalemi dışlandı.
