@@ -1764,3 +1764,6 @@ Hentzer kaydı `Cumhuriyet mahallesi Derviş Eroğlu cd, Cumhuriyet, Ege Sokağ�
 
 ## HAYVORE BEYOĞLU ID 6911 kabulü
 Hentzer kaydı `İstiklal Caddesi Turnacıbaşı Sok, Kuloğlu, No:4, 34421 Beyoğlu/İstanbul`, `+90 212 245 75 01`; Hayvore resmi iletişim sitesi aynı işletme, adres ve telefonu doğruluyor. Yemeksepeti `bz5x` canlı vendorundan 87 benzersiz Karadeniz yemeği, günlük yemek, çorba, pide/lahmacun, zeytinyağlı, tatlı ve içecek fiyatı aktarıldı. İndirimli güncel satış fiyatları kullanıldı; popüler carousel tekrarları dışlandı. Resmi site Hayvore’nin 2025-2026 seçkilerinde yer aldığını ve faal Beyoğlu işletmesini doğruluyor. **Override kabul edildi.**
+
+## PHOENIX COFFEE LAB KAVACIK ID 6910 — STRICT HOLD
+Hentzer kaydı `Kavacık, Fatih Sultan Mehmet Cd. No:24/1, 34810 Beykoz/İstanbul`, `+90 537 657 70 07`; Phoenix resmi menü sayfası ve resmi Instagram exact Kavacık şubesini doğruluyor. Resmi menüde görseller var ancak fiyatlar metin olarak okunabilir değil. Migros Yemek exact vendoru kategori/ürün adlarını gösteriyor fakat erişilebilir metinde fiyat alanları yok ve ürün görselleri placeholder; Menu-TR de fiyat yayımlamıyor. Son bir yılda herkese açık, ürün bazlı ve doğrulanabilir güncel fiyatlı menü bulunamadığından **strict HOLD**; override eklenmedi.
