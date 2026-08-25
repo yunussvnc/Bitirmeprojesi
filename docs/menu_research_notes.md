@@ -1221,3 +1221,6 @@ Hentzer exact kayıt `Kavaklı, İbrahim Müteferrika Cd. A Blok No:1, 34520 Bey
 
 ## JAPON BAHÇESI ID 7097 HOLD
 Hentzer kaydı `Cumhuriyet, 34520 Beylikdüzü/İstanbul` ve telefon içermiyor. Public aramalarda sonuçlar buranın Beylikdüzü Yaşam Vadisi içindeki Japon Bahçesi park/gezinti alanı olduğunu gösteriyor; exact restoran işletmesi, telefon/adres eşleşmeli food vendor veya güncel item-level fiyatlı menü bulunamadı. Benzer isimli Japon restoranlarının farklı adreslerde olması nedeniyle veri eklenmedi. Strict HOLD.
+
+## HAS BOŞNAK KÖFTECİSİ ID 7096 HOLD
+Hentzer kaydı `Kartaltepe Mahallesi Fatih Caddesi No:191 giriş, Bayrampaşa/İstanbul`, `+90 538 768 20 06`; ancak resmi Instagram `@hasbosnakkofteci` ve Yandex aynı telefonu `Yıldırım Mah. Avaz Köy Yolu No:33/33A, Bayrampaşa` ile eşliyor. Yemeksepeti `v6vz` güncel fiyatlı menü sunsa da bu vendorun Hentzer’deki Fatih Cd. No:191 şubesi olduğu branch-level olarak kanıtlanamadı. Exact adres çakışması nedeniyle ürün/fiyat eklenmedi. Strict HOLD.
