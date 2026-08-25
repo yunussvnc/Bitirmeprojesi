@@ -87310,4 +87310,202 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     }
   ]
 },
+  "7002": {
+  "name": "Köfteci Mehmet Usta",
+  "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/p9rq/kofteci-mehmet-usta-p9rq",
+  "sourceName": "Yemeksepeti current Köfteci Mehmet Usta menu; Apple Maps, official social profile and independent records confirm exact Bayrampaşa branch at Yıldırım, Şht. Kamil Balkan Cd. 48/A, 34045 Bayrampaşa/İstanbul, +90 212 616 88 05. 38 unique priced food/beverage items imported; Popular carousel excluded.",
+  "verifiedAt": "2026-08-25",
+  "items": [
+    {
+      "name": "Gobit Ekmek Arası Dana Yaprak Ciğer",
+      "price": "600",
+      "category": "Gobit Ekmek Arası Ürünler"
+    },
+    {
+      "name": "Gobit Ekmek Arası Izgara Köfte",
+      "price": "550",
+      "category": "Gobit Ekmek Arası Ürünler"
+    },
+    {
+      "name": "Gobit Ekmek Arası Tavuk Döner",
+      "price": "350",
+      "category": "Gobit Ekmek Arası Ürünler"
+    },
+    {
+      "name": "Izgara Köfte Dürüm",
+      "price": "550",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Dana Ciğer Dürüm",
+      "price": "550",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Tavuk Döner Dürüm",
+      "price": "350",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Tavuk Döner",
+      "price": "550",
+      "category": "Tavuk Dönerler"
+    },
+    {
+      "name": "Gobit Ekmek Arası Köfte Menü",
+      "price": "625",
+      "category": "AYRAN MENÜ"
+    },
+    {
+      "name": "Gobit Ekmek Arası Tavuk Döner Menü",
+      "price": "475",
+      "category": "AYRAN MENÜ"
+    },
+    {
+      "name": "Köfte Dürüm Menü",
+      "price": "625",
+      "category": "AYRAN MENÜ"
+    },
+    {
+      "name": "Dana Ciğer Dürüm Menü",
+      "price": "625",
+      "category": "AYRAN MENÜ"
+    },
+    {
+      "name": "Tavuk Döner Dürüm Menü 2",
+      "price": "475",
+      "category": "AYRAN MENÜ"
+    },
+    {
+      "name": "Gobit Ekmek Arası Dana Ciğer Menü 2",
+      "price": "625",
+      "category": "AYRAN MENÜ"
+    },
+    {
+      "name": "Dana Ciğer Dürüm Menü 2",
+      "price": "625",
+      "category": "AYRAN MENÜ"
+    },
+    {
+      "name": "Gobit Ekmek Arası Dana Ciğer Arası Menü 1",
+      "price": "725",
+      "category": "Menüler"
+    },
+    {
+      "name": "Gobit Ekmek Arası Köfte Menü",
+      "price": "725",
+      "category": "Menüler"
+    },
+    {
+      "name": "Gobit Ekmek Tavuk Döner Menü",
+      "price": "625",
+      "category": "Menüler"
+    },
+    {
+      "name": "Tavuk Döner Dürüm Menü 1",
+      "price": "625",
+      "category": "Menüler"
+    },
+    {
+      "name": "Dana Ciğer Dürüm Menü 1",
+      "price": "725",
+      "category": "Menüler"
+    },
+    {
+      "name": "Dürüm Köfte Menü",
+      "price": "725",
+      "category": "Menüler"
+    },
+    {
+      "name": "Fıstıklı Mono Pasta",
+      "price": "250",
+      "category": "Tatlılar / Pastalar"
+    },
+    {
+      "name": "Bademli Beyaz Kubbe Pasta",
+      "price": "250",
+      "category": "Tatlılar / Pastalar"
+    },
+    {
+      "name": "Devil's Çikolatalı Pasta",
+      "price": "250",
+      "category": "Tatlılar / Pastalar"
+    },
+    {
+      "name": "Izgara Köfte",
+      "price": "725",
+      "category": "Kebaplar & Izgaralar"
+    },
+    {
+      "name": "Izgara Dana Ciğer",
+      "price": "725",
+      "category": "Kebaplar & Izgaralar"
+    },
+    {
+      "name": "Coca-Cola (33 cl.)",
+      "price": "150",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Fanta (33 cl.)",
+      "price": "150",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Sprite (33 cl.)",
+      "price": "150",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Fuse Tea (33 cl.)",
+      "price": "150",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Ayran (30 cl.)",
+      "price": "80",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Ayran (20 cl.)",
+      "price": "45",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Coca-Cola Zero Sugar (33 cl.)",
+      "price": "150",
+      "category": "İçecekler"
+    },
+    {
+      "name": "fusetea kavun&çilek",
+      "price": "120",
+      "category": "İçecekler"
+    },
+    {
+      "name": "fusetea şeftali",
+      "price": "120",
+      "category": "İçecekler"
+    },
+    {
+      "name": "fusetea mango&ananas",
+      "price": "120",
+      "category": "İçecekler"
+    },
+    {
+      "name": "fusetea limon",
+      "price": "120",
+      "category": "İçecekler"
+    },
+    {
+      "name": "fusetea karpuz&çilek",
+      "price": "120",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Coca-Cola Zero (33 cl.)",
+      "price": "120",
+      "category": "İçecekler"
+    }
+  ]
+},
 };

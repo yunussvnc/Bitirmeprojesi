@@ -1491,3 +1491,6 @@ Exact kayıt `Kuloğlu Mah., Gazeteci Erol Dernek Sok. No:8, 34437 Beyoğlu/İst
 
 ## MONCAI BUBBLE TEA BEYLİKDÜZÜ ID 7003 strict HOLD
 Exact adres `Yaşam Sokağı, Yaşam Vadisi, Büfe, Cumhuriyet, Atatürk Blv. No:8, 34520 Beylikdüzü/İstanbul` Menum, Corner ve Beylikdüzü sosyal kayıtlarıyla eşleşiyor. Güncel Yemeksepeti menüleri k2be/vg8m/wqqv vendorlarında mevcut; ancak bu vendorlardan hiçbirinin exact Beylikdüzü şubesine ait olduğu ve Hentzer telefonu `+90 539 791 02 32` ile eşleştiği kanıtlanamadı. Instagram profili menü/fiyat yayınlamıyor; bu nedenle %100 exact branch matching şartı sağlanmadığından **override eklenmedi; strict HOLD**.
+
+## KÖFTECİ MEHMET USTA BAYRAMPAŞA ID 7002 kabul
+Exact kayıt `Yıldırım, Şht. Kamil Balkan Cd. 48/A, 34045 Bayrampaşa/İstanbul`, `+90 212 616 88 05`; Apple Maps, resmi sosyal profil ve bağımsız şube kayıtlarıyla eşleşti. Yemeksepeti `p9rq` vendorından 2026-08-25 tarihinde Gobit Ekmek Arası Ürünler, Dürümler, Tavuk Dönerler, AYRAN MENÜ, Menüler, Tatlılar/Pastalar, Kebaplar & Izgaralar ve İçecekler kategorilerinden **38 benzersiz ürün/fiyat** alındı. Popular carousel tekrarları dışlandı.
