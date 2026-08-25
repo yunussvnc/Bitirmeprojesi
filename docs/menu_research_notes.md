@@ -1440,3 +1440,6 @@ Exact Hentzer kaydı `Büyükşehir Mahallesi, Anadolu Caddesi Park Teras AVM No
 
 ## KABİNE İSTANBUL ID 7021 strict HOLD
 Exact kayıt `Pınartepe, Akyurt Cd. WorldPoint No:1C İç Kapı No:3, 34500 Beykent/İstanbul`, `+90 506 065 09 02`; WorldPoint resmi sayfası, Kabine resmi sosyal medya ve Hentzer kaydıyla adres/telefon eşleşti. Resmi Kabine sitesi menü bağlantısı/ürün fiyatı sunmuyor; rezervasyon sayfasında da fiyatlı menü yok. Arama sonuçlarında yalnızca sınırlı fix menü fiyat sinyalleri bulunduğundan tam ve son 1 yıl içinde item-level menü doğrulanamadı. **Override eklenmedi; strict HOLD**.
+
+## UNAŞKI BEYLİKDÜZÜ ID 7020 strict HOLD
+Hentzer kaydı `2.Kısım İfa İş Merkezi 3, Kavaklı, Yeşilyurt Cd., 34524 Beylikdüzü/İstanbul`, `+90 212 876 55 40`; Yandex ve Beylikdüzü sosyal medya kayıtlarında telefon eşleşiyor. Ancak Unaşkı resmi sitesinin güncel arama çıktısı Beylikdüzü şubesini `Adnan Kahveci Mah. Alemdağ Cad. No:2/1 D:78` olarak listeliyor; bu, Hentzer Kavaklı/İfa İş Merkezi adresiyle exact eşleşmiyor. Yemeksepeti’nde güncel menüler mevcut olsa da vendor ID’lerinin exact Kavaklı şubesine aitliği kanıtlanamadı. **Override eklenmedi; strict HOLD**.
