@@ -1428,3 +1428,6 @@ Exact Hentzer kaydı `Kavacık, Otağtepe Cd. No:45/A, 34810 Beykoz/İstanbul`, 
 
 ## PAPATYA DÜRÜM ID 7025 strict HOLD
 Exact Hentzer kaydı `Arnavutköy, Sebzeci Bayram Sk. No:8-10, 34345 Beşiktaş/İstanbul`, `+90 212 265 20 30`; resmi `@papatyadurum` profili ve güncel yerel kayıtlarla adres/telefon eşleşti. Yemeksepeti’nde güncel fiyatlı Papatya Dürüm menüsü mevcut olsa da canlı vendor sayfası `New address / generic location` uyarısı veriyor ve exact Arnavutköy şubesini gösteren adres/telefon paritesi sunmuyor. Bu nedenle zincir/vendor eşleşmesi kesinleşmeden **override eklenmedi; strict HOLD**.
+
+## SHABBY CAFE ID 7024 strict HOLD
+Exact Hentzer kaydı `Sinanpaşa, Köşeli Sk. No:13, 34353 Beşiktaş/İstanbul`, `+90 533 148 83 20`; resmi Shabby sosyal medya ve Apple Maps kaydıyla adres/telefon eşleşti. Resmi menü sayfasında fiyatlar görünse de sayfa tarayıcıda boş/dinamik kalıyor ve doğrudan yeniden alınan HTML zaman aşımında kaldı; menünün güncellik tarihi ve tam item-level kapsamı güvenilir şekilde tekrar doğrulanamadı. Eksik veya tarih riski taşıyan veri aktarılmadı; **strict HOLD**.
