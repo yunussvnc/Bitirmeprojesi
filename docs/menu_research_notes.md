@@ -1704,3 +1704,6 @@ Hentzer kaydı `Altıntepsi, Özkan Cd. 52A, 34000 Bayrampaşa/İstanbul`, `+90 
 
 ## DÖNERCİ DAYI ARNAVUTKÖY ID 6931 kabulü
 Hentzer kaydı `Mustafa Kemal Paşa, Fatih Cd. No:147A, 34275 Arnavutköy/İstanbul`, `+90 531 986 67 44`; Servis Listeleri exact adresi, resmi Instagram hesabı aynı telefonu doğruluyor. Yemeksepeti `tiu1` canlı vendorundan Fırsat Menüleri, Porsiyon Et Döner, Tavuk Dönerler, Dürüm-Ekmek Arası Et Döner ve İçecekler kategorilerinde 20 benzersiz ürün/fiyat kalemi aktarıldı. Popüler tekrarlar ve poşet kalemi dahil edilmedi. **Override kabul edildi.**
+
+## MIDPOINT İSTİKLAL ID 6930 — STRICT HOLD
+Hentzer kaydı `Tomtom, İstiklal Cd. No:187, 34433 Beyoğlu/İstanbul`, `+90 530 955 47 64`; public işletme kaynakları aynı adresi gösterse de Midpoint’in yayınlanan telefonu `+90 212 245 70 40` olarak farklıdır. Resmi midpoint.com.tr sayfası metin olarak erişilemedi; üçüncü taraf sayfalar yalnız genel menü açıklaması veriyor, son bir yıl içinde doğrulanabilir ürün/fiyat listesi yok. Zorunlu exact adres+telefon eşleşmesi sağlanmadığı ve güncel fiyat doğrulanamadığı için **strict HOLD**; override eklenmedi.
