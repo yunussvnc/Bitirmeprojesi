@@ -43568,127 +43568,119 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
   ]
 },
   "7107": {
-    "name": "Fresh Pizza Corner",
-    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/kvqf/fresh-pizza-corner",
-    "sourceName": "Resmi Instagram @freshpizza.corner (02.07.2026 tarihli menü paylaşımı; Sinanpaşa, Şht. Dursun Bakan Sk. No:18) + Yemeksepeti kvqf canlı menüsü; YS More info adresi Şehit Dursun Bakan Sokak 18 ve Hentzer Google place ID ChIJ_5iquAO3yhQRUI1vfY1KANY ile exact eşleştirildi. Kaynakta görünen kampanyalı/orijinal çift fiyat yerine doğrulama anındaki güncel liste fiyatları alındı; yayın tarihi ürün menüsü için ayrıca belirtilmemiştir.",
-    "verifiedAt": "2026-08-24",
-    "items": [
-      {
-        "name": "Dört Peynirli Pizza Menü",
-        "price": "500 TL",
-        "desc": "Dört Peynirli Pizza + Coca-Cola (20 cl.)",
-        "category": "Özel Menüler"
-      },
-      {
-        "name": "Salamlı Pizza Menü",
-        "price": "500 TL",
-        "desc": "Salamlı Pizza + Coca-Cola (20 cl.)",
-        "category": "Özel Menüler"
-      },
-      {
-        "name": "Mantarlı Pizza Menü",
-        "price": "500 TL",
-        "desc": "Mantarlı Pizza + Coca-Cola (20 cl.)",
-        "category": "Özel Menüler"
-      },
-      {
-        "name": "Ananaslı Pizza Menü",
-        "price": "500 TL",
-        "desc": "Ananaslı Pizza + Coca-Cola (20 cl.)",
-        "category": "Özel Menüler"
-      },
-      {
-        "name": "Sucuklu Pizza Menü",
-        "price": "500 TL",
-        "desc": "Sucuklu Pizza + Coca-Cola (20 cl.)",
-        "category": "Özel Menüler"
-      },
-      {
-        "name": "Vejetaryen Pizza Menü",
-        "price": "500 TL",
-        "desc": "Vejetaryen Pizza + Coca-Cola (20 cl.)",
-        "category": "Özel Menüler"
-      },
-      {
-        "name": "Ton Balıklı Pizza Menü",
-        "price": "500 TL",
-        "desc": "Ton Balıklı Pizza + Coca-Cola (20 cl.)",
-        "category": "Özel Menüler"
-      },
-      {
-        "name": "Margherita Menü",
-        "price": "500 TL",
-        "desc": "Margherita + Coca-Cola (20 cl.)",
-        "category": "Özel Menüler"
-      },
-      {
-        "name": "Margarita Pizza (200 gr.)",
-        "price": "400 TL",
-        "desc": "Özel domates sosu, mozzarella peyniri, kekik, parmesan peyniri",
-        "category": "Pizzalar (Orta Boy)"
-      },
-      {
-        "name": "Sucuklu Pocket Pizza (250 gr.)",
-        "price": "450 TL",
-        "desc": "Özel domates sosu, mozarella peyniri, dana sucuk, kekik, parmesan peyniri",
-        "category": "Pizzalar (Orta Boy)"
-      },
-      {
-        "name": "Salamlı Pocket Pizza (250 gr.)",
-        "price": "450 TL",
-        "desc": "Özel domates sosu, dana salam, taze kekik, parmesan peyniri",
-        "category": "Pizzalar (Orta Boy)"
-      },
-      {
-        "name": "Mantarlı Pocket Pizza (250 gr.)",
-        "price": "450 TL",
-        "desc": "Özel domates sosu, taze mozzarella peyniri, kültür mantarı, taze kekik, parmesan peyniri",
-        "category": "Pizzalar (Orta Boy)"
-      },
-      {
-        "name": "Dört Peynirli Pocket Pizza (250 gr.)",
-        "price": "450 TL",
-        "desc": "Özel domates sosu, mozzarella peyniri, kaşar peyniri, parmesan peyniri, cheddar peyniri",
-        "category": "Pizzalar (Orta Boy)"
-      },
-      {
-        "name": "Ton Balıklı Pocket Pizza",
-        "price": "450 TL",
-        "desc": "Özel domates sosu, mozzarella peyniri, ton balığı, mısır, taze kekik, parmesan peyniri",
-        "category": "Pizzalar (Orta Boy)"
-      },
-      {
-        "name": "Vejetaryen Pocket Pizza",
-        "price": "450 TL",
-        "desc": "Özel domates sos, mozzarella peyniri, kırmızı biber, yeşil biber, kültür mantarı, mısır, kekik, parmesan peyniri",
-        "category": "Pizzalar (Orta Boy)"
-      },
-      {
-        "name": "Ananas Pizza",
-        "price": "450 TL",
-        "desc": "Özel domates sos, mozzarella peyniri, ananas, dana salam, kekik, parmesan peyniri",
-        "category": "Pizzalar (Orta Boy)"
-      },
-      {
-        "name": "Tiramisu",
-        "price": "200 TL",
-        "desc": "Dilim olarak servis edilir.",
-        "category": "Tatlılar"
-      },
-      {
-        "name": "Su (50 cl.)",
-        "price": "40 TL",
-        "desc": "Pet şişe",
-        "category": "İçecekler"
-      },
-      {
-        "name": "Coca-Cola (20 cl.)",
-        "price": "70 TL",
-        "desc": "Cam şişe",
-        "category": "İçecekler"
-      }
-    ]
-  },
+  "name": "Fresh Pizza Corner",
+  "sourceUrl": "https://www.yemeksepeti.com/restaurant/kvqf/fresh-pizza-corner",
+  "sourceName": "Yemeksepeti kvqf canlı menüsü (2026-08-25); resmi Instagram @freshpizza.corner arama kaydında Hentzer exact Şht. Dursun Bakan Sk. No:18 ve 0553 311 66 61 eşleşmesi; kampanyalı güncel fiyatlar esas alındı",
+  "verifiedAt": "2026-08-25",
+  "items": [
+    {
+      "name": "Dört Peynirli Pizza Menü",
+      "price": "375 TL",
+      "category": "Özel Menüler"
+    },
+    {
+      "name": "Salamlı Pizza Menü",
+      "price": "375 TL",
+      "category": "Özel Menüler"
+    },
+    {
+      "name": "Mantarlı Pizza Menü",
+      "price": "375 TL",
+      "category": "Özel Menüler"
+    },
+    {
+      "name": "Ananaslı Pizza Menü",
+      "price": "375 TL",
+      "category": "Özel Menüler"
+    },
+    {
+      "name": "Sucuklu Pizza Menü",
+      "price": "375 TL",
+      "category": "Özel Menüler"
+    },
+    {
+      "name": "Vejetaryen Pizza Menü",
+      "price": "375 TL",
+      "category": "Özel Menüler"
+    },
+    {
+      "name": "Ton Balıklı Pizza Menü",
+      "price": "375 TL",
+      "category": "Özel Menüler"
+    },
+    {
+      "name": "Margherita Menü",
+      "price": "375 TL",
+      "category": "Özel Menüler"
+    },
+    {
+      "name": "Margarita Pizza (200 gr.)",
+      "price": "300 TL",
+      "category": "Pizzalar (Orta Boy)",
+      "desc": "Özel domates sosu, mozzarella peyniri, kekik, parmesan peyniri"
+    },
+    {
+      "name": "Sucuklu Pocket Pizza (250 gr.)",
+      "price": "337,50 TL",
+      "category": "Pizzalar (Orta Boy)",
+      "desc": "Özel domates sosu, mozarella peyniri, dana sucuk, kekik, parmesan peyniri"
+    },
+    {
+      "name": "Salamlı Pocket Pizza (250 gr.)",
+      "price": "337,50 TL",
+      "category": "Pizzalar (Orta Boy)",
+      "desc": "Özel domates sosu, dana salam, taze kekik, parmesan peyniri"
+    },
+    {
+      "name": "Mantarlı Pocket Pizza (250 gr.)",
+      "price": "337,50 TL",
+      "category": "Pizzalar (Orta Boy)",
+      "desc": "Özel domates sosu, taze mozzarella peyniri, kültür mantarı, taze kekik, parmesan peyniri"
+    },
+    {
+      "name": "Dört Peynirli Pocket Pizza (250 gr.)",
+      "price": "337,50 TL",
+      "category": "Pizzalar (Orta Boy)",
+      "desc": "Özel domates sosu, mozzarella peyniri, kaşar peyniri, parmesan peyniri, cheddar peyniri"
+    },
+    {
+      "name": "Ton Balıklı Pocket Pizza",
+      "price": "337,50 TL",
+      "category": "Pizzalar (Orta Boy)",
+      "desc": "Özel domates sosu, mozzarella peyniri, ton balığı, mısır, taze kekik, parmesan peyniri"
+    },
+    {
+      "name": "Vejetaryen Pocket Pizza",
+      "price": "337,50 TL",
+      "category": "Pizzalar (Orta Boy)",
+      "desc": "Özel domates sos, mozzarella peyniri, kırmızı biber, yeşil biber, kültür mantarı, mısır, kekik, parmesan peyniri"
+    },
+    {
+      "name": "Ananas Pizza",
+      "price": "337,50 TL",
+      "category": "Pizzalar (Orta Boy)",
+      "desc": "Özel domates sos, mozzarella peyniri, ananas, dana salam, kekik, parmesan peyniri"
+    },
+    {
+      "name": "Tiramisu",
+      "price": "150 TL",
+      "category": "Tatlılar",
+      "desc": "Dilim olarak servis edilir."
+    },
+    {
+      "name": "Su (50 cl.)",
+      "price": "30 TL",
+      "category": "İçecekler",
+      "desc": "Pet şişe"
+    },
+    {
+      "name": "Coca-Cola (20 cl.)",
+      "price": "52,50 TL",
+      "category": "İçecekler",
+      "desc": "Cam şişe"
+    }
+  ]
+},
   "7127": {
     "name": "Desigram Coffee Co. Makyol",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/k79c/makyol-desigram-coffee-co",
