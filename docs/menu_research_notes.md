@@ -1566,3 +1566,6 @@ Hentzer kaydı `Muradiye, Nüzhetiye Cd. 3/A, 34357 Beşiktaş/İstanbul`, `+90 
 
 ## EGE LOKMA & WAFFLE ID 6978 strict HOLD
 Hentzer API kaydı `No:1 Ortaköy, Mecidiye, Mecidiye Köprüsü Sk., 34347 Beşiktaş/İstanbul`, `+90 532 668 01 87`; Cybo kaydı aynı adres/telefonla `Ege Lokmacısı The Dessert Lokma` adını gösteriyor. `egewaffle.com/menu/` resmi sayfası ürün/fiyat içeriği sunmuyor; arama sonuçlarındaki Ege Waffle Yemeksepeti/Migros menüleri Aydın şubelerine ait görünüyor ve aynı Ortaköy işletmesiyle exact branch eşleşmesi doğrulanamadı. İşletme adı ve güncel fiyatlı menü paritesi birlikte sağlanamadığı için **override eklenmedi; strict HOLD**.
+
+## BEYKOZ KOKOREÇ ID 6977 strict HOLD
+Hentzer kaydı `Merkez, Dönence Sk. No:10, 34820 Beykoz/İstanbul`, `+90 216 323 44 77`; Tumisyeri, Yaka.la ve Kaçıyor aynı exact adres/telefonu doğruluyor. Arama sonuçlarındaki fiyatlı Yemeksepeti ve Migros kayıtları farklı işletme/şube adlarına ait (Beykoz Ankara ve Sokak Lezzetleri Kavacık); Beykoz Kokoreç’in kendisi için son bir yıl içinde kamuya açık item-level fiyatlı menü bulunamadı. **Override eklenmedi; strict HOLD**.
