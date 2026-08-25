@@ -86387,4 +86387,67 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     }
   ]
 },
+  "7017": {
+  "name": "KEBAPÇI ESNAF",
+  "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/sqpn/kebapci-esnaf-sqpn",
+  "sourceName": "Yemeksepeti current Kebapçı Esnaf menu; exact Hentzer branch is Rüzgarlıbahçe, Cumhuriyet Cd. No:43, 34805 Beykoz/İstanbul, +90 533 545 61 23, matching official @kebapciesnaf, Yandex and local branch records. 11 unique priced food/beverage items imported; Popular carousel and Poşet excluded.",
+  "verifiedAt": "2026-08-25",
+  "items": [
+    {
+      "name": "Kuzu Şiş Dürüm Menü",
+      "price": "699",
+      "category": "Menüler"
+    },
+    {
+      "name": "Urfa Dürüm Menü",
+      "price": "549",
+      "category": "Menüler"
+    },
+    {
+      "name": "Adana Dürüm Menü",
+      "price": "549",
+      "category": "Menüler"
+    },
+    {
+      "name": "Izgara Kanat Menü",
+      "price": "499",
+      "category": "Menüler"
+    },
+    {
+      "name": "Tavuk Şiş Dürüm Menü",
+      "price": "349",
+      "category": "Menüler"
+    },
+    {
+      "name": "Çiğ Köfte (100 gr.)",
+      "price": "160",
+      "category": "Çiğ Köfteler"
+    },
+    {
+      "name": "Halka Tatlısı (Adet)",
+      "price": "60",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Coca-Cola (33 cl.)",
+      "price": "140",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Ayran (17 cl.)",
+      "price": "50",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Soda (20 cl.)",
+      "price": "40",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Su (50 cl.)",
+      "price": "40",
+      "category": "İçecekler"
+    }
+  ]
+},
 };

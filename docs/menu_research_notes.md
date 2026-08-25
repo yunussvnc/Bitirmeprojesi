@@ -1449,3 +1449,6 @@ Exact kayıt `Sinanpaşa, Hasfırın Cd. No:3 Kat:5, 34353 Beşiktaş/İstanbul`
 
 ## TWINS WAFFLE & COFFEE ID 7018 kabul
 Exact kayıt `İsmet Paşa, Kenar Sokağı Kiptaş Konutları H1 blok no 2ee, 34035 Bayrampaşa/İstanbul`, `+90 553 852 69 27`; İstanbul servis listesi ve Twins Waffle sosyal medya/Yandex kayıtlarıyla eşleşti. Yemeksepeti `cm9r` vendorının Waffles ve İçecekler kategorilerinden 2026-08-25 tarihinde **11 benzersiz ürün/fiyat** alındı. Poşet kalemi dışlandı; Popüler carousel bulunmadığından ek tekrar filtresi uygulanmadı.
+
+## KEBAPÇI ESNAF ID 7017 kabul
+Exact kayıt `Rüzgarlıbahçe, Cumhuriyet Cd. No:43, 34805 Beykoz/İstanbul`, `+90 533 545 61 23`; resmi `@kebapciesnaf`, Yandex ve yerel şube kayıtlarıyla eşleşti. Yemeksepeti `sqpn` vendorından 2026-08-25 tarihinde Menüler, Çiğ Köfteler, Tatlılar ve İçecekler kategorilerinden **11 benzersiz ürün/fiyat** alındı. Popüler carousel tekrarları ve Poşet kalemi dışlandı.
