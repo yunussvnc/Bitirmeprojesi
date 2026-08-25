@@ -1464,3 +1464,6 @@ Exact kayıt `Yakuplu, Hürriyet Blv. No:1 Skyport, 34524 Beylikdüzü/İstanbul
 
 ## KÜNEFİTO MORRY COFFEE ID 7013 strict HOLD
 Exact kayıt `Sinanpaşa Mah. Hasfırın Cad. No:5, İç Kapı No:110, 34353 Beşiktaş/İstanbul`, `+90 538 962 25 33`; Yandex ve Beşiktaş şube sosyal medya paylaşımlarında adres/lokasyon eşleşti. Ancak arama sonuçlarında yalnızca Sakarya şubesine ait Yemeksepeti menüsü bulundu; Beşiktaş şubesi için herkese açık, son 1 yıl içinde tam item-level fiyatlı menü doğrulanamadı. Sosyal içeriklerdeki sınırlı/tekil fiyat sinyalleri yeterli olmadığından **override eklenmedi; strict HOLD**.
+
+## PIZZA DIO BEYLİKDÜZÜ ID 7012 kabul
+Exact kayıt `Barış, Bestekar Sk. No:1 A Blok, 34250 Beylikdüzü/İstanbul`, `+90 549 624 24 00`; resmi Pizza Dio kaydıyla adres/telefon eşleşti. Migros Yemek exact `Pizza Dio, Beylikdüzü (Barış Mah.)` sayfasının 2026-08-25 canlı DOM fiyatlarından Peynirli Pizzalar, Sebzeli Pizzalar, Etli Pizzalar, Yan Ürünler, İçecekler ve Soslar kategorilerinden **21 benzersiz ürün/fiyat** alındı. Poşet ve servis ücreti kalemi bulunmadığından aktarılmadı.

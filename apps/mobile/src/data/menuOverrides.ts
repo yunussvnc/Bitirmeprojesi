@@ -86608,4 +86608,117 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     }
   ]
 },
+  "7012": {
+  "name": "Pizza Dio | Beylikdüzü Pizza",
+  "sourceUrl": "https://www.migros.com.tr/yemek/pizza-dio-beylikduzu-baris-mah-st-19bc3",
+  "sourceName": "Migros Yemek current exact Pizza Dio Beylikdüzü (Barış Mah.) menu; official Pizza Dio site lists Barış, Altı Dükkanlar, Bestekar Sk. No:1 A Blok and +90 549 624 24 00. 21 unique priced food/beverage items imported; no bag/service fee items.",
+  "verifiedAt": "2026-08-25",
+  "items": [
+    {
+      "name": "Margherita Pizza (33 Cm)",
+      "price": "554",
+      "category": "Peynirli Pizzalar"
+    },
+    {
+      "name": "Margarita Tulum Pizza (33 Cm)",
+      "price": "554",
+      "category": "Peynirli Pizzalar"
+    },
+    {
+      "name": "4 Peynirli Pizza (33 Cm)",
+      "price": "689",
+      "category": "Peynirli Pizzalar"
+    },
+    {
+      "name": "Suda Mozzarella Pizza (33 Cm.)",
+      "price": "689",
+      "category": "Peynirli Pizzalar"
+    },
+    {
+      "name": "Margarita Pizza (Büyük Boy)",
+      "price": "554",
+      "category": "Peynirli Pizzalar"
+    },
+    {
+      "name": "Pesto Soslu Pizza (33 Cm)",
+      "price": "689",
+      "category": "Sebzeli Pizzalar"
+    },
+    {
+      "name": "Sebzeli Pizza (33 Cm)",
+      "price": "614",
+      "category": "Sebzeli Pizzalar"
+    },
+    {
+      "name": "Ormana Pizza(33 Cm)",
+      "price": "650",
+      "category": "Sebzeli Pizzalar"
+    },
+    {
+      "name": "Dio Spesiyal Pizza (33 Cm)",
+      "price": "850",
+      "category": "Etli Pizzalar"
+    },
+    {
+      "name": "Cheddarlı Sosisli Pizza 33 Cm)",
+      "price": "739",
+      "category": "Etli Pizzalar"
+    },
+    {
+      "name": "Karışık Dio (33 Cm)",
+      "price": "749",
+      "category": "Etli Pizzalar"
+    },
+    {
+      "name": "Bol Sucuk Pizza (33 Cm)",
+      "price": "734",
+      "category": "Etli Pizzalar"
+    },
+    {
+      "name": "Fırında Elma Dilim Patates",
+      "price": "190",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Sarımsaklı Ekmek",
+      "price": "220",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Coca-cola (33 Cl.)",
+      "price": "70",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Ayran (30 Cl.)",
+      "price": "40",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Sarımsaklı Mayonez",
+      "price": "9",
+      "category": "Soslar"
+    },
+    {
+      "name": "Bbq Sos",
+      "price": "9",
+      "category": "Soslar"
+    },
+    {
+      "name": "Ketçap",
+      "price": "8",
+      "category": "Soslar"
+    },
+    {
+      "name": "Mayonez",
+      "price": "8",
+      "category": "Soslar"
+    },
+    {
+      "name": "Acı Sos",
+      "price": "9",
+      "category": "Soslar"
+    }
+  ]
+},
 };
