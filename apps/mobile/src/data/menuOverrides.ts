@@ -4,6 +4,31 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6999": {
+    "name": "PALMİYE KARTAL CAFE",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/j35o/palmiye-kartal-cafe-j35o",
+    "sourceName": "Yemeksepeti j35o canlı menüsü; şube adresi Sinanpaşa, Cami Arkası No:5/3, Beşiktaş olarak resmi Instagram @palmiyekartalcafe ve Google Maps kimliği ChIJ2asI9a23yhQRTJVPfuLUIpc ile eşleştirildi; telefon 0501 241 19 03 Apple Maps ve iki yerel işletme dizininde aynı şube için doğrulandı",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Kaşarlı Gözleme", "price": "420 TL", "category": "Gözlemeler" },
+      { "name": "Peynirli Gözleme", "price": "420 TL", "category": "Gözlemeler" },
+      { "name": "Patatesli Kaşarlı Gözleme", "price": "420 TL", "category": "Gözlemeler" },
+      { "name": "Sucuklu Kaşarlı Gözleme", "price": "420 TL", "category": "Gözlemeler" },
+      { "name": "Patatesli Gözleme", "price": "420 TL", "category": "Gözlemeler" },
+      { "name": "Peynirli Sucuklu Kaşarlı Gözleme", "price": "420 TL", "category": "Gözlemeler" },
+      { "name": "Parmak Dilim Patates Kızartması (200 gr.)", "price": "280 TL", "category": "Yan Ürünler" },
+      { "name": "Patates Kızartması", "price": "280 TL", "category": "Yan Ürünler" },
+      { "name": "Fettucine Chicken Alfredo", "price": "699 TL", "category": "Makarnalar" },
+      { "name": "Bolonez Soslu Spagetti", "price": "560 TL", "category": "Makarnalar" },
+      { "name": "Caserecce Pesto", "price": "560 TL", "category": "Makarnalar" },
+      { "name": "Coca-Cola (33 cl.)", "price": "110 TL", "category": "Soğuk İçecekler" },
+      { "name": "Fanta (33 cl.)", "price": "110 TL", "category": "Soğuk İçecekler" },
+      { "name": "Su (50 cl.)", "price": "50 TL", "category": "Soğuk İçecekler" },
+      { "name": "Coca-Cola Light (33 cl.)", "price": "120 TL", "category": "Soğuk İçecekler" },
+      { "name": "Vinut Aloe Vera (50 cl.)", "price": "199 TL", "category": "Soğuk İçecekler" },
+      { "name": "Coca-Cola Zero Sugar (33 cl.)", "price": "120 TL", "category": "Soğuk İçecekler" }
+    ]
+  },
   "796": {
     "name": "NOM BURGER",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/l2z2/nom-burger-l2z2",

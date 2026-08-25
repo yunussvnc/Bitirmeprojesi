@@ -1500,3 +1500,6 @@ Exact adres `Sinanpaşa, Beşiktaş Cd. No:19, 34353 Beşiktaş/İstanbul` Hentz
 
 ## KARLITEPE RESTORAN ID 7000 strict HOLD
 Beykoz Belediyesi resmi tesis sayfası exact adresi `Gümüşsuyu, Kirazlı Yayla Cd. No:129, 34820 Beykoz/İstanbul` ve tesis telefonu `444 666 1` olarak doğruluyor; menü bağlantısı da belediye sayfasında mevcut. Ancak Hentzer ID 7000 telefon alanı `null` olduğundan zorunlu exact telefon paritesi sağlanamadı. Kimyon menü uygulaması araçlarda item-level fiyatları erişilebilir biçimde sunmadı; 2025 haberindeki menü bağlantısına rağmen tam güncel fiyat listesi alınamadı. **Override eklenmedi; strict HOLD**.
+
+## PALMİYE KARTAL CAFE ID 6999 kabul
+Yemeksepeti `j35o` canlı menüsünden 2026-08-26 tarihinde 17 gıda/içecek kalemi doğrulandı: 6 gözleme, 2 yan ürün, 3 makarna ve 6 soğuk içecek. Plastik poşet kalemi kapsam dışı bırakıldı. İşletme/şube eşleşmesi resmi Instagram `@palmiyekartalcafe`, Google Maps place ID `ChIJ2asI9a23yhQRTJVPfuLUIpc` ve aynı adresi veren yerel kaynaklarla `Sinanpaşa, Cami Arkası No:5/3, Beşiktaş` olarak doğrulandı; `0501 241 19 03` telefonu Apple Maps ve iki yerel işletme dizininde aynı işletmeyle eşleşti. Fiyatlar canlı Yemeksepeti menüsünden alındığı için bir yıl şartını karşılıyor. **Override kabul edildi.**
