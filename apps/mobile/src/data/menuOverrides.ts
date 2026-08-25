@@ -81556,4 +81556,276 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     }
   ]
 },
+  "7049": {
+  "name": "Anadolu Balıkçısı",
+  "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/q0xv/anadolu-balikcisi",
+  "sourceName": "Yemeksepeti canlı q0xv menüsü; exact Marmara, Hürriyet Blv. No:231, 34524 Beylikdüzü şubesi ve +90 212 777 50 06 telefonu Menu-TR, Yandex ve işletme kaynaklarıyla eşleştirildi. Popular carousel tekrarları ve Plastic Bag satırı dışlanarak 10 kategori üzerinden 44 benzersiz deniz ürünü, yan ürün, salata ve içecek kalemi aktarıldı.",
+  "verifiedAt": "2026-08-25",
+  "items": [
+    {
+      "name": "Balık Çorbası",
+      "price": "200 TL",
+      "desc": "Günlük balık ile hazırlanır.",
+      "category": "Çorbalar"
+    },
+    {
+      "name": "Izgara Deniz Levreği",
+      "price": "1120 TL",
+      "desc": "(Günlük hazırlanmaktadır.)",
+      "category": "Izgara Balıklar"
+    },
+    {
+      "name": "Izgara Deniz Çipurası",
+      "price": "1080 TL",
+      "desc": "(Günlük hazırlanmaktadır.)",
+      "category": "Izgara Balıklar"
+    },
+    {
+      "name": "Izgara Norveç Somon",
+      "price": "464 TL",
+      "desc": "(Günlük hazırlanmaktadır.)",
+      "category": "Izgara Balıklar"
+    },
+    {
+      "name": "Izgara Levrek",
+      "price": "440 TL",
+      "desc": "(Günlük hazırlanmaktadır.)",
+      "category": "Izgara Balıklar"
+    },
+    {
+      "name": "Izgara Çipura",
+      "price": "440 TL",
+      "desc": "(Günlük hazırlanmaktadır.)",
+      "category": "Izgara Balıklar"
+    },
+    {
+      "name": "Izgara Lüfer",
+      "price": "720 TL",
+      "desc": "(Günlük hazırlanmaktadır.)",
+      "category": "Izgara Balıklar"
+    },
+    {
+      "name": "Izgara Palamut",
+      "price": "560 TL",
+      "desc": "Roka, soğan, limon, ekmek ile",
+      "category": "Izgara Balıklar"
+    },
+    {
+      "name": "Izgara Sarıkanat",
+      "price": "480 TL",
+      "desc": "Roka, soğan, limon",
+      "category": "Izgara Balıklar"
+    },
+    {
+      "name": "Mezgit Tava",
+      "price": "360 TL",
+      "desc": "(Günlük hazırlanmaktadır.)",
+      "category": "Tava Balıklar"
+    },
+    {
+      "name": "İstavrit Tava",
+      "price": "320 TL",
+      "desc": "(Günlük hazırlanmaktadır.)",
+      "category": "Tava Balıklar"
+    },
+    {
+      "name": "Barbun Tava",
+      "price": "560 TL",
+      "desc": "(Günlük hazırlanmaktadır.)",
+      "category": "Tava Balıklar"
+    },
+    {
+      "name": "Mırlan Tava",
+      "price": "480 TL",
+      "desc": "(Günlük hazırlanmaktadır.)",
+      "category": "Tava Balıklar"
+    },
+    {
+      "name": "Taş Barbun Tava",
+      "price": "680 TL",
+      "desc": "(Günlük hazırlanmaktadır.)",
+      "category": "Tava Balıklar"
+    },
+    {
+      "name": "Tekir Tava",
+      "price": "480 TL",
+      "desc": "Roka, limon, soğan, ekmek ile",
+      "category": "Tava Balıklar"
+    },
+    {
+      "name": "Hamsi Tava",
+      "price": "320 TL",
+      "desc": "Roka, limon, soğan, ekmek ile",
+      "category": "Tava Balıklar"
+    },
+    {
+      "name": "Palamut Tava",
+      "price": "480 TL",
+      "desc": "Roka, soğan, limon, ekmek ile",
+      "category": "Tava Balıklar"
+    },
+    {
+      "name": "Fener Balığı Kavurma",
+      "price": "600 TL",
+      "desc": "(Günlük hazırlanmaktadır.)",
+      "category": "Kavurma Balıklar"
+    },
+    {
+      "name": "Levrek Kavurma",
+      "price": "600 TL",
+      "desc": "(Günlük hazırlanmaktadır.)",
+      "category": "Kavurma Balıklar"
+    },
+    {
+      "name": "Levrek Buğulama",
+      "price": "600 TL",
+      "desc": "(Günlük hazırlanmaktadır.)",
+      "category": "Buğulama Balıklar"
+    },
+    {
+      "name": "Ekmek Arası Palamut",
+      "price": "240 TL",
+      "desc": "(Günlük hazırlanmaktadır.)",
+      "category": "Ekmek Arası Ürünler"
+    },
+    {
+      "name": "Ekmek Arası Uskumru",
+      "price": "200 TL",
+      "desc": "(Günlük hazırlanmaktadır.)",
+      "category": "Ekmek Arası Ürünler"
+    },
+    {
+      "name": "Tereyağlı Karides",
+      "price": "400 TL",
+      "desc": "(Günlük hazırlanmaktadır.)",
+      "category": "Diğer Lezzetler"
+    },
+    {
+      "name": "Kalamar Tava",
+      "price": "400 TL",
+      "desc": "Tarator sos, ekmek ile",
+      "category": "Diğer Lezzetler"
+    },
+    {
+      "name": "Izgara Kalamar",
+      "price": "400 TL",
+      "desc": "(Günlük hazırlanmaktadır.)",
+      "category": "Diğer Lezzetler"
+    },
+    {
+      "name": "Karides Güveç",
+      "price": "400 TL",
+      "desc": "(Günlük hazırlanmaktadır.)",
+      "category": "Diğer Lezzetler"
+    },
+    {
+      "name": "Tereyağlı Jumbo Karides",
+      "price": "480 TL",
+      "desc": "(Günlük hazırlanmaktadır.)",
+      "category": "Diğer Lezzetler"
+    },
+    {
+      "name": "Izgara Jumbo Karides",
+      "price": "480 TL",
+      "desc": "(Günlük hazırlanmaktadır.)",
+      "category": "Diğer Lezzetler"
+    },
+    {
+      "name": "Patates Kızartması",
+      "price": "112 TL",
+      "desc": "Tek kişilik",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Mevsim Salata",
+      "price": "120 TL",
+      "desc": "Tek kişilik",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Çoban Salatası",
+      "price": "120 TL",
+      "desc": "Tek kişilik",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Coca-Cola Light (33 cl.)",
+      "price": "68 TL",
+      "desc": "Kutu içecek",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Coca-Cola Şekersiz (33 cl.)",
+      "price": "68 TL",
+      "desc": "Kutu içecek",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Sprite (33 cl.)",
+      "price": "68 TL",
+      "desc": "Kutu içecek",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Cappy (33 cl.)",
+      "price": "64 TL",
+      "desc": "Kutu içecek",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Fuse Tea (33 cl.)",
+      "price": "68 TL",
+      "desc": "Kutu içecek",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Lipton Ice Tea (33 cl.)",
+      "price": "68 TL",
+      "desc": "Kutu içecek",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Şalgam Suyu (33 cl.)",
+      "price": "56 TL",
+      "desc": "Bardak",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Soda (20 cl.)",
+      "price": "40 TL",
+      "desc": "Küçük",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Su (50 cl.)",
+      "price": "24 TL",
+      "desc": "Büyük",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Coca-Cola Light (1 L.)",
+      "price": "80 TL",
+      "desc": "Pet şişe",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Coca-Cola Şekersiz (1 L.)",
+      "price": "80 TL",
+      "desc": "Pet şişe",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Sprite (1 L.)",
+      "price": "80 TL",
+      "desc": "Pet şişe",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Fanta (1 L.)",
+      "price": "80 TL",
+      "desc": "Pet şişe",
+      "category": "İçecekler"
+    }
+  ]
+},
 };

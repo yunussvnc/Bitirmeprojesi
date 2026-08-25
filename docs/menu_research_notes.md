@@ -1356,3 +1356,6 @@ Exact kayıt `Rüştempaşa mh. Ragıp Gümüşpala Cd., Galata Köprüsü altı
 
 ## Saray Fırın Beylikdüzü Büyükşehir ID 7050 strict HOLD
 Exact kayıt `Büyükşehir Mah. Cumhuriyet Cad. Ata Center Çarşısı, 34520 Beylikdüzü/İstanbul`, `+90 531 967 21 17`; Restoranım ve YerelEsnaf adres/telefonu doğruluyor. YerelEsnaf son bilgi kontrolünü 23 Haziran 2026 gösteriyor. Public kaynaklarda complete item-level fiyatlı menü yok; arama sonuçlarındaki Saray Ev Yemekleri, Saray Muhallebicisi ve Saray Pizza farklı işletmeler. Son bir yıl exact şube fiyatlı menüsü doğrulanamadı. Ürün/fiyat uydurulmadı; strict HOLD.
+
+## Anadolu Balıkçısı ID 7049 kabul
+Exact kayıt `Marmara, Hürriyet Blv. No:231, 34524 Beylikdüzü/İstanbul`, `+90 212 777 50 06`; Menu-TR, Yandex, Düğün/işletme kayıtlarıyla doğrulandı. Yemeksepeti `q0xv` canlı menüsü 2026-08-25 tarihinde erişildi; Popular carousel tekrarları ve `Plastic Bag` satırı dışlanarak 10 kategoriden **44 benzersiz ürün/fiyat** aktarıldı. Güncel satış fiyatları kullanıldı; balık, deniz ürünü, yan ürün, salata ve içecek kalemleri kapsandı.
