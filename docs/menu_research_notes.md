@@ -1446,3 +1446,6 @@ Hentzer kaydı `2.Kısım İfa İş Merkezi 3, Kavaklı, Yeşilyurt Cd., 34524 B
 
 ## TERRACE BOSPHORUS-HOKKAH LOUNGE ID 7019 strict HOLD
 Exact kayıt `Sinanpaşa, Hasfırın Cd. No:3 Kat:5, 34353 Beşiktaş/İstanbul`, `+90 212 227 02 12`; resmi Terrace Bosphorus sitesi ve resmi sosyal medya kaynaklarıyla adres/telefon eşleşti. Resmi sitede yalnızca sınırlı nargile ve kahve kalemleri görünüyor; menünün yemekler dahil tam kapsamı yok. Ayrıca sayfadaki 18–21 TL kahve fiyatları 2026 bağlamında güncellik/yanlış veri riski taşıyor ve yayın tarihi belirtilmiyor. Bu nedenle son 1 yıl içinde tam ve güvenilir fiyatlı menü doğrulanamadı; **override eklenmedi; strict HOLD**.
+
+## TWINS WAFFLE & COFFEE ID 7018 kabul
+Exact kayıt `İsmet Paşa, Kenar Sokağı Kiptaş Konutları H1 blok no 2ee, 34035 Bayrampaşa/İstanbul`, `+90 553 852 69 27`; İstanbul servis listesi ve Twins Waffle sosyal medya/Yandex kayıtlarıyla eşleşti. Yemeksepeti `cm9r` vendorının Waffles ve İçecekler kategorilerinden 2026-08-25 tarihinde **11 benzersiz ürün/fiyat** alındı. Poşet kalemi dışlandı; Popüler carousel bulunmadığından ek tekrar filtresi uygulanmadı.

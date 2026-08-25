@@ -86324,4 +86324,67 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     }
   ]
 },
+  "7018": {
+  "name": "Twins Waffle & Coffee",
+  "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/cm9r/twins-waffle-cm9r",
+  "sourceName": "Yemeksepeti current Twins Waffle menu; exact Hentzer branch is İsmet Paşa, Kenar Sokağı Kiptaş Konutları H1 blok no 2ee, 34035 Bayrampaşa/İstanbul, +90 553 852 69 27, matching local business records and branch social profile. 11 unique priced food/beverage items imported; Poşet excluded.",
+  "verifiedAt": "2026-08-25",
+  "items": [
+    {
+      "name": "Twins Kova",
+      "price": "390",
+      "category": "Waffles"
+    },
+    {
+      "name": "Twins Bardak Waffle",
+      "price": "320",
+      "category": "Waffles"
+    },
+    {
+      "name": "Klasik Kova Waffle",
+      "price": "380",
+      "category": "Waffles"
+    },
+    {
+      "name": "Karışık Waffle",
+      "price": "350",
+      "category": "Waffles"
+    },
+    {
+      "name": "Twins Special Kova",
+      "price": "380",
+      "category": "Waffles"
+    },
+    {
+      "name": "Kova Waffle",
+      "price": "390",
+      "category": "Waffles"
+    },
+    {
+      "name": "Bardak Waffle",
+      "price": "320",
+      "category": "Waffles"
+    },
+    {
+      "name": "Limonata",
+      "price": "75",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Limonlu Soda (20 cl.)",
+      "price": "65",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Soda (20 cl.)",
+      "price": "50",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Cam şişe su",
+      "price": "35",
+      "category": "İçecekler"
+    }
+  ]
+},
 };
