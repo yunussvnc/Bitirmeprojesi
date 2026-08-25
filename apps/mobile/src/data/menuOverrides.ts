@@ -79680,4 +79680,270 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     }
   ]
 },
+  "7073": {
+  "name": "Tıkıntı",
+  "sourceUrl": "https://www.yemeksepeti.com/restaurant/vtma/tikinti",
+  "sourceName": "Yemeksepeti canlı menüsü; resmî tikinticafe.com adres/telefonu ve YS exact adres kaydı ile Barbaros Bulvarı, Cihannüma, Mazharpaşa Sokağı No:4/A, Beşiktaş şubesine eşleştirildi. 43 benzersiz gıda ürünü aktarıldı; Popüler carousel ve poşet satırı dışlandı.",
+  "verifiedAt": "2026-08-25",
+  "items": [
+    {
+      "name": "Menemen",
+      "price": "350",
+      "desc": "Domates, biber, yumurta",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Sosis Tabağı",
+      "price": "350",
+      "desc": "Tek kişilik",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Sigara Böreği (10 Adet)",
+      "price": "350",
+      "desc": "Beyaz peynir",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Izgara Biftek",
+      "price": "945",
+      "desc": "Patates püresi, pirinç pilavı ile",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "Izgara Köfte",
+      "price": "625",
+      "desc": "Patates püresi, pirinç pilavı ile",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "Izgara Tavuk",
+      "price": "525",
+      "desc": "Patates püresi, pirinç pilavı ile Popüler0",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "Portekiz Usulü Tavuk",
+      "price": "525",
+      "desc": "Tavuk göğüs, havuç, patates. Patates püresi, pirinç pilavı ile Popüler0",
+      "category": "Beyaz Etler"
+    },
+    {
+      "name": "Tavuk Kievski (Acılı)",
+      "price": "525",
+      "desc": "Patates püresi, pirinç pilavı ile",
+      "category": "Beyaz Etler"
+    },
+    {
+      "name": "Beğendi Soslu Tavuk",
+      "price": "525",
+      "desc": "Patates püresi, pirinç pilavı ile Popüler0",
+      "category": "Beyaz Etler"
+    },
+    {
+      "name": "Köri Soslu Tavuk",
+      "price": "525",
+      "desc": "Patates püresi, pirinç pilavı ile Popüler0",
+      "category": "Beyaz Etler"
+    },
+    {
+      "name": "Çin Usulü Tavuk",
+      "price": "525",
+      "desc": "Tavuk fileto, kabak, havuç. Spaghetti ile",
+      "category": "Beyaz Etler"
+    },
+    {
+      "name": "Soya Soslu Tavuk",
+      "price": "520",
+      "desc": "Patates püresi, pirinç pilavı ile",
+      "category": "Beyaz Etler"
+    },
+    {
+      "name": "Domates Soslu Tavuk",
+      "price": "515",
+      "desc": "Patates püresi, pirinç pilavı ile",
+      "category": "Beyaz Etler"
+    },
+    {
+      "name": "Ispanaklı Tavuk",
+      "price": "510",
+      "desc": "Patates püresi, pirinç pilavı ile Popüler0",
+      "category": "Beyaz Etler"
+    },
+    {
+      "name": "Mantarlı Tavuk",
+      "price": "510",
+      "desc": "Patates püresi, pirinç pilavı ile Popüler0",
+      "category": "Beyaz Etler"
+    },
+    {
+      "name": "Tavuk Kavurma",
+      "price": "525",
+      "desc": "Patates püresi, pirinç pilavı ile",
+      "category": "Beyaz Etler"
+    },
+    {
+      "name": "Meksika Soslu Biftek (Acılı)",
+      "price": "790",
+      "desc": "Patates püresi, pirinç pilavı ile",
+      "category": "Kırmızı Etler"
+    },
+    {
+      "name": "Mantarlı Biftek",
+      "price": "790",
+      "desc": "Patates püresi, pirinç pilavı ile",
+      "category": "Kırmızı Etler"
+    },
+    {
+      "name": "Sac Dana Kavurma",
+      "price": "790",
+      "desc": "Patates püresi, pirinç pilavı ile",
+      "category": "Kırmızı Etler"
+    },
+    {
+      "name": "Dana Güveç",
+      "price": "790",
+      "desc": "Patates püresi, pirinç pilavı ile",
+      "category": "Kırmızı Etler"
+    },
+    {
+      "name": "Çin Usulü Et",
+      "price": "790",
+      "desc": "Dana eti, soğan, kapya biber, yeşil biber, sarımsak. Patates püresi, pirinç pilavı ile",
+      "category": "Kırmızı Etler"
+    },
+    {
+      "name": "Bolonez Soslu Spaghetti",
+      "price": "465",
+      "desc": "Bolonez sos, spaghetti",
+      "category": "Makarnalar"
+    },
+    {
+      "name": "Özel Soslu Spaghetti",
+      "price": "465",
+      "desc": "Özel sos, spaghetti",
+      "category": "Makarnalar"
+    },
+    {
+      "name": "Sebzeli Spaghetti",
+      "price": "420",
+      "desc": "Mevsim sebzeleri",
+      "category": "Makarnalar"
+    },
+    {
+      "name": "Spaghetti Napolitan",
+      "price": "420",
+      "desc": "Soğan, sarımsak, domates, fesleğen",
+      "category": "Makarnalar"
+    },
+    {
+      "name": "Pirinç Pilavı",
+      "price": "265",
+      "desc": "Tek kişilik",
+      "category": "Pilavlar"
+    },
+    {
+      "name": "Tıkıntı Tabağı",
+      "price": "625",
+      "desc": "Izgara köfte, sigara böreği, sosis, patates kızartması",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Tavuk Şnitzel",
+      "price": "520",
+      "desc": "Tek kişilik",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Patates Püresi",
+      "price": "305",
+      "desc": "Kaşar peyniri, patates",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Akdeniz Salatası",
+      "price": "445",
+      "desc": "Akdeniz yeşilliği, kırmızıbiber, siyah zeytin, beyaz peynir, domates, salata sosu",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Mevsim Salatası",
+      "price": "350",
+      "desc": "Mevsim yeşillikleri, domates, salatalık, havuç",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Tavuklu Sezar Salata",
+      "price": "465",
+      "desc": "Tavuk, Sezar sos, mevsim yeşillikleri",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Ton Balıklı Makarna Salatası",
+      "price": "485",
+      "desc": "Ton balığı, Sezar sos, mevsim yeşillikleri",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Biftekli Sezar Salata",
+      "price": "790",
+      "desc": "Dana biftek, Sezar sos, mevsim yeşillikleri",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Fanta (33 cl.)",
+      "price": "95",
+      "desc": "Kutu içecek",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Sprite (33 cl.)",
+      "price": "95",
+      "desc": "Kutu içecek",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Cappy (25 cl.)",
+      "price": "95",
+      "desc": "Cam şişe",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Fuse Tea (33 cl.)",
+      "price": "95",
+      "desc": "Kutu içecek",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Sütaş Ayran (28,5 cl.)",
+      "price": "80",
+      "desc": "Büyük boy",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Meyveli Soda (20 cl.)",
+      "price": "80",
+      "desc": "Cam şişe",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Soda (20 cl.)",
+      "price": "70",
+      "desc": "Cam şişe",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Su (33 cl.)",
+      "price": "40",
+      "desc": "Pet şişe",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Coca-Cola (33 cl.)",
+      "price": "95",
+      "desc": "Kutu içecek",
+      "category": "İçecekler"
+    }
+  ]
+},
 };

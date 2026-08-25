@@ -1284,3 +1284,6 @@ Exact kayıt `Çubuklu, Tugay Sk. No:1, 34805 Beykoz/İstanbul`; Hentzer telefon
 
 ## Farazi Bosphorus ID 7074 strict HOLD
 Exact kayıt `Yıldız Mahallesi, Çırağan Caddesi, Yıldız, Yalı Sk. No:3, 34349 Beşiktaş/İstanbul`, `+90 538 498 22 34`; Farazi Bosphorus Facebook sayfası aynı adres ve telefonu, Yandex/Kaçıyor/Instagram kaynakları da aynı işletme kimliğini doğruluyor. Instagram/TikTok içeriklerinde 2026 fix-menu kişi başı fiyatları ve etkinlik tanıtımları bulunuyor, ancak complete item-level alakart menü/fiyat listesi yayımlanmıyor. Son bir yıl şartını karşılayan tam fiyatlı public menü kanıtı bulunamadığından ürün/fiyat uydurulmadı; strict HOLD.
+
+## Tıkıntı ID 7073 acceptance
+Exact kayıt `Barbaros Bulvarı, Cihannüma, Mazharpaşa Sokağı No:4/A, 34353 Beşiktaş/İstanbul`, `+90 212 227 48 41`; resmî tikinticafe.com adres/telefonu, Kaçıyor, Servis Kayıt ve Instagram aynı işletme kimliğini destekliyor. Yemeksepeti canlı `vtma` vendorı aynı `Mazharpaşa Sokağı No:4/A` adresiyle eşleşiyor. Kahvaltılıklar, ızgaralar, beyaz/kırmızı etler, makarnalar, pilavlar, yan ürünler, salatalar ve içecekler kategorilerinden **43 benzersiz gıda ürünü ve güncel fiyat** aktarıldı. `Popüler` carousel tekrarları ve poşet satırı dışlandı. Kaynakta menü yayın tarihi görünmediğinden `verifiedAt` canlı kontrol tarihi `2026-08-25` olarak tutuldu.
