@@ -47732,6 +47732,170 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       {name: "San Sebastian Cheesecake", category: "Cheesecake"},
     ],
   },
+  "7120": {
+    "name": "Kavacık Nazar Profiterol",
+    "sourceUrl": "https://www.migros.com.tr/yemek/nazar-profiterol-beykoz-ruzgarlibahce-mah-st-1f883",
+    "sourceName": "Migros Yemek exact Beykoz (Rüzgarlıbahçe Mah.) vendorı; resmi Nazar Profiterol Kavacık şube sayfası ile doğrulandı",
+    "verifiedAt": "2026-08-25",
+    "items": [
+      {
+        "name": "Vişneli Ekler (Adet)",
+        "price": "125,00 TL",
+        "category": "Ekler"
+      },
+      {
+        "name": "Lotus Bisküvili Ekler (Adet)",
+        "price": "125,00 TL",
+        "category": "Ekler"
+      },
+      {
+        "name": "Çilekli Ekler (Adet)",
+        "price": "125,00 TL",
+        "category": "Ekler"
+      },
+      {
+        "name": "Fıstıklı Ekler (Adet)",
+        "price": "125,00 TL",
+        "category": "Ekler"
+      },
+      {
+        "name": "Kahve & Karamel Ekler (Adet)",
+        "price": "125,00 TL",
+        "category": "Ekler"
+      },
+      {
+        "name": "Limonlu Ekler (Adet)",
+        "price": "125,00 TL",
+        "category": "Ekler"
+      },
+      {
+        "name": "Tiramisulu Ekler (Adet)",
+        "price": "125,00 TL",
+        "category": "Ekler"
+      },
+      {
+        "name": "Fındıklı Ekler (Adet)",
+        "price": "125,00 TL",
+        "category": "Ekler"
+      },
+      {
+        "name": "Orman Meyveli Ekler (Adet)",
+        "price": "125,00 TL",
+        "category": "Ekler"
+      },
+      {
+        "name": "Klasik Ekler İçi Çikolatalı (Adet)",
+        "price": "125,00 TL",
+        "category": "Ekler"
+      },
+      {
+        "name": "Klasik Ekler İçi Beyaz (Adet)",
+        "price": "125,00 TL",
+        "category": "Ekler"
+      },
+      {
+        "name": "Mini Snickers Tort",
+        "price": "166,00 TL",
+        "category": "Ekler"
+      },
+      {
+        "name": "Profiterol (220 Gr)",
+        "price": "458,00 TL",
+        "category": "Profiterol"
+      },
+      {
+        "name": "Profiterol (750 Gr.)",
+        "price": "1.275,00 TL",
+        "category": "Profiterol"
+      },
+      {
+        "name": "Profiterol (1 Kg.)",
+        "price": "1.608,00 TL",
+        "category": "Profiterol"
+      },
+      {
+        "name": "Gold Çikolatalı Profiterol (Porsiyon) (220 G)",
+        "price": "483,00 TL",
+        "category": "Profiterol"
+      },
+      {
+        "name": "Beyaz Çikolatalı Profiterol (600 G)",
+        "price": "1.317,00 TL",
+        "category": "Profiterol"
+      },
+      {
+        "name": "Gold Çikolatalı Profiterol (600 G)",
+        "price": "1.317,00 TL",
+        "category": "Profiterol"
+      },
+      {
+        "name": "Nazar 3'Lü Karışık Profiterol 750 Gr",
+        "price": "1.325,00 TL",
+        "category": "Profiterol"
+      },
+      {
+        "name": "Porsiyon Vişne Fıstık Profiterol",
+        "price": "533,00 TL",
+        "category": "Profiterol"
+      },
+      {
+        "name": "Nazar Tiramisu",
+        "price": "500,00 TL",
+        "category": "Mag & Cup"
+      },
+      {
+        "name": "Nazar Fıstıklı Supangle",
+        "price": "500,00 TL",
+        "category": "Mag & Cup"
+      },
+      {
+        "name": "Nazar Supangle",
+        "price": "500,00 TL",
+        "category": "Mag & Cup"
+      },
+      {
+        "name": "Kazandibi",
+        "price": "458,00 TL",
+        "category": "Sütlü Tatlı"
+      },
+      {
+        "name": "Portakallı Bademli Keşkül",
+        "price": "400,00 TL",
+        "category": "Sütlü Tatlı"
+      },
+      {
+        "name": "Çilekli Pasta",
+        "price": "500,00 TL",
+        "category": "Pasta"
+      },
+      {
+        "name": "Muzlu Pasta",
+        "price": "500,00 TL",
+        "category": "Pasta"
+      },
+      {
+        "name": "Kara Orman Pasta",
+        "price": "1.500,00 TL",
+        "category": "Pasta"
+      },
+      {
+        "name": "Soda (20 Cl.)",
+        "price": "125,00 TL",
+        "category": "İçecek"
+      },
+      {
+        "name": "Su (33 Cl.)",
+        "price": "100,00 TL",
+        "category": "İçecek"
+      },
+      {
+        "name": "Ayşe Babaannenin Limonatası 250 Ml",
+        "price": "210,00 TL",
+        "category": "İçecek"
+      }
+    ]
+  }
+,
   "7122": {
     name: "Döner Bank Bayrampaşa Terazidere",
     sourceUrl: "https://www.yemeksepeti.com/en/restaurant/f7uw/doner-bank",
