@@ -1596,3 +1596,6 @@ Hentzer kaydı `Sinanpaşa Mah. Ihlamurdere Cd, Altıntaş Sk. 39/A, 34351 Beşi
 
 ## NAVOI (HAYMA) RESTAURANT ID 6967 strict HOLD
 Hentzer kaydı `Adnan Kahveci, 34528 Beylikdüzü/İstanbul`, `+90 554 192 10 02`; Yandex, resmi sosyal içerikler ve Hayma Restaurant Facebook hesabı telefon/işletme bağını destekliyor. RestaurantGuru yalnızca kişi başı fiyat aralığı gösteriyor; kamuya açık, son bir yıl içinde doğrulanabilir item-level menü ve ürün fiyatları bulunamadı. Benzer/ilişkisiz menü kaynakları kullanılmadı. **Override eklenmedi; strict HOLD**.
+
+## SEFERİ OCAKBAŞI MEYHANE ID 6966 strict HOLD
+Hentzer kaydı `Marmara Mah., West Istanbul Marina, Yakuplu, Ulusum Cd. No:34 D:4E, 34524 Beylikdüzü/İstanbul`, `+90 543 399 19 22`; Facebook, Instagram ve yerel işletme kayıtları aynı West Istanbul Marina şubesini ve telefonu doğruluyor. 2026 tarihli sosyal paylaşımda yalnızca toplam `Fix Menü 2200 TL` fiyatı görünüyor; kamuya açık item-level yemek/içecek dökümü bulunamadı. Alkol ve meyhane paket içeriği belirsiz olduğundan ürünleri tahmin ederek eklemek güvenilir değil. **Override eklenmedi; strict HOLD**.
