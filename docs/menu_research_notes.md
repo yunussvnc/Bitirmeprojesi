@@ -1431,3 +1431,6 @@ Exact Hentzer kaydı `Arnavutköy, Sebzeci Bayram Sk. No:8-10, 34345 Beşiktaş/
 
 ## SHABBY CAFE ID 7024 strict HOLD
 Exact Hentzer kaydı `Sinanpaşa, Köşeli Sk. No:13, 34353 Beşiktaş/İstanbul`, `+90 533 148 83 20`; resmi Shabby sosyal medya ve Apple Maps kaydıyla adres/telefon eşleşti. Resmi menü sayfasında fiyatlar görünse de sayfa tarayıcıda boş/dinamik kalıyor ve doğrudan yeniden alınan HTML zaman aşımında kaldı; menünün güncellik tarihi ve tam item-level kapsamı güvenilir şekilde tekrar doğrulanamadı. Eksik veya tarih riski taşıyan veri aktarılmadı; **strict HOLD**.
+
+## TABLACI BROTHERS KEBAP RESTORAN ID 7023 strict HOLD
+Exact kayıt `Cihangir, Kazancı Yokuşu Sok. 14/A, 34000 Beyoğlu/İstanbul`, `+90 501 004 29 01`; resmi Tablacı Brothers sitesi, Instagram ve Yandex kaydıyla adres/telefon eşleşti. Resmi `menu.php` sayfasında ürün adları görünse de fiyat alanlarının önemli bölümü eksik/boş (ör. tavuk şiş, İskender, patlıcan kebabı ve bazı içecekler); bu nedenle tam item-level fiyatlı güncel menü doğrulanamadı. Eksik fiyat aktarımı yapılmadı; **strict HOLD**.
