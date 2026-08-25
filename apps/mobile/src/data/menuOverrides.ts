@@ -68784,4 +68784,278 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       }
     ],
   },
+
+  "7181": {
+    "name": "Dalyan Balık",
+    "sourceUrl": "https://dalyanbalik.dijitalkarekodmenu.com/",
+    "sourceName": "Public Dalyan Balıkçılık digital menu; exact branch cross-check via official @balikdalyan and Menu-TR address/phone",
+    "verifiedAt": "2026-08-25",
+    "items": [
+      {
+        "name": "Kalamar",
+        "price": "625,00 ₺",
+        "category": "Ara Sıcak / Savoury Appetizers"
+      },
+      {
+        "name": "Karides / Shrimp",
+        "price": "625,00 ₺",
+        "category": "Ara Sıcak / Savoury Appetizers"
+      },
+      {
+        "name": "Sebzeli Karides",
+        "price": "675,00 ₺",
+        "category": "Ara Sıcak / Savoury Appetizers"
+      },
+      {
+        "name": "Midye Dolma / Stuffed mussels",
+        "price": "20,00 ₺",
+        "category": "Ara Sıcak / Savoury Appetizers"
+      },
+      {
+        "name": "Patates Cips / Potato Chips",
+        "price": "145,00 ₺",
+        "category": "Ara Sıcak / Savoury Appetizers"
+      },
+      {
+        "name": "Mercimek Çorbası / Lentil Soup",
+        "price": "140,00 ₺",
+        "category": "Çorbalar / Soups"
+      },
+      {
+        "name": "Balık Çorbası / Fish soup",
+        "price": "350,00 ₺",
+        "category": "Çorbalar / Soups"
+      },
+      {
+        "name": "Roka Salata / Arugula Salad",
+        "price": "175,00 ₺",
+        "category": "Salatalar / Salad"
+      },
+      {
+        "name": "Mevsım Salata / Seasonal Salad",
+        "price": "175,00 ₺",
+        "category": "Salatalar / Salad"
+      },
+      {
+        "name": "Yeşil Salata / Green Salad",
+        "price": "175,00 ₺",
+        "category": "Salatalar / Salad"
+      },
+      {
+        "name": "Akdenız Salata / Mediterranean Salad",
+        "price": "175,00 ₺",
+        "category": "Salatalar / Salad"
+      },
+      {
+        "name": "Çoban Salata / Shepherds Salad",
+        "price": "175,00 ₺",
+        "category": "Salatalar / Salad"
+      },
+      {
+        "name": "Somon / Grilled Salmon",
+        "price": "540,00 ₺",
+        "category": "Izgaralar / Grills"
+      },
+      {
+        "name": "Çupra / Grilled Sea Bream",
+        "price": "675,00 ₺",
+        "category": "Izgaralar / Grills"
+      },
+      {
+        "name": "Levrek / Grilled Sea Bass",
+        "price": "675,00 ₺",
+        "category": "Izgaralar / Grills"
+      },
+      {
+        "name": "Kaya Levreği / Grilled Rock Bass",
+        "price": "850,00 ₺",
+        "category": "Izgaralar / Grills"
+      },
+      {
+        "name": "Uskumru / Grilled mackerel",
+        "price": "480,00 ₺",
+        "category": "Izgaralar / Grills"
+      },
+      {
+        "name": "Palamut / Grilled acorn",
+        "price": "480,00 ₺",
+        "category": "Izgaralar / Grills"
+      },
+      {
+        "name": "Karışık Balık / Mixed fish",
+        "price": "980,00 ₺",
+        "category": "Izgaralar / Grills"
+      },
+      {
+        "name": "Hamsi / Anchovy pan",
+        "price": "400,00 ₺",
+        "category": "Tavalar / Pan"
+      },
+      {
+        "name": "Çupra Flato / Bream Flato",
+        "price": "850,00 ₺",
+        "category": "Tavalar / Pan"
+      },
+      {
+        "name": "İstavrit",
+        "price": "400,00 ₺",
+        "category": "Tavalar / Pan"
+      },
+      {
+        "name": "Mezgit / Haddock",
+        "price": "675,00 ₺",
+        "category": "Tavalar / Pan"
+      },
+      {
+        "name": "Somon / Salmon",
+        "price": "580,00 ₺",
+        "category": "Kiremit / Burns"
+      },
+      {
+        "name": "Alabalık / Trout",
+        "price": "570,00 ₺",
+        "category": "Kiremit / Burns"
+      },
+      {
+        "name": "Levrek / Sea bass",
+        "price": "685,00 ₺",
+        "category": "Kiremit / Burns"
+      },
+      {
+        "name": "Çupra / Bream",
+        "price": "685,00 ₺",
+        "category": "Kiremit / Burns"
+      },
+      {
+        "name": "Helva (Küçük) / Halva (Small)",
+        "price": "200,00 ₺",
+        "category": "Tatlılar / Desserts"
+      },
+      {
+        "name": "Helva (Büyük) / Halva (Big)",
+        "price": "400,00 ₺",
+        "category": "Tatlılar / Desserts"
+      },
+      {
+        "name": "Kabak Tatlısı / Pumpkin Dessert",
+        "price": "200,00 ₺",
+        "category": "Tatlılar / Desserts"
+      },
+      {
+        "name": "Cola",
+        "price": "70,00 ₺",
+        "category": "Meşrubatlar / Drinks"
+      },
+      {
+        "name": "Fanta",
+        "price": "70,00 ₺",
+        "category": "Meşrubatlar / Drinks"
+      },
+      {
+        "name": "Sprite",
+        "price": "70,00 ₺",
+        "category": "Meşrubatlar / Drinks"
+      },
+      {
+        "name": "Fuse Tea",
+        "price": "70,00 ₺",
+        "category": "Meşrubatlar / Drinks"
+      },
+      {
+        "name": "Turşu Suyu / Pickle Juice",
+        "price": "60,00 ₺",
+        "category": "Meşrubatlar / Drinks"
+      },
+      {
+        "name": "Şalgam / Fermented Carrot Juice",
+        "price": "60,00 ₺",
+        "category": "Meşrubatlar / Drinks"
+      },
+      {
+        "name": "Ayran",
+        "price": "60,00 ₺",
+        "category": "Meşrubatlar / Drinks"
+      },
+      {
+        "name": "Meyve suyu / Fruit juice",
+        "price": "70,00 ₺",
+        "category": "Meşrubatlar / Drinks"
+      },
+      {
+        "name": "Su / Water",
+        "price": "20,00 ₺",
+        "category": "Meşrubatlar / Drinks"
+      },
+      {
+        "name": "Hamsi / Anchovy",
+        "price": "205,00 ₺",
+        "category": "Balık Ekmek / Steams"
+      },
+      {
+        "name": "Levrek / Steamed Sea- Bass",
+        "price": "340,00 ₺",
+        "category": "Balık Ekmek / Steams"
+      },
+      {
+        "name": "Palamut / Steamed Bonita",
+        "price": "250,00 ₺",
+        "category": "Balık Ekmek / Steams"
+      },
+      {
+        "name": "Somon / Steamed Salmon",
+        "price": "270,00 ₺",
+        "category": "Balık Ekmek / Steams"
+      },
+      {
+        "name": "Alabalık / Trout",
+        "price": "250,00 ₺",
+        "category": "Balık Ekmek / Steams"
+      },
+      {
+        "name": "Uskumru / Mackerel",
+        "price": "265,00 ₺",
+        "category": "Balık Ekmek / Steams"
+      },
+      {
+        "name": "Çupra / Bream",
+        "price": "340,00 ₺",
+        "category": "Balık Ekmek / Steams"
+      },
+      {
+        "name": "Mezgit / Haddock",
+        "price": "340,00 ₺",
+        "category": "Balık Ekmek / Steams"
+      },
+      {
+        "name": "Tavuk Şiş / Chicken Shish",
+        "price": "550,00 ₺",
+        "category": "Balık Yemeyenler İçin / For Non-Fish Eaters"
+      },
+      {
+        "name": "Et Şiş / Meat Shish",
+        "price": "700,00 ₺",
+        "category": "Balık Yemeyenler İçin / For Non-Fish Eaters"
+      },
+      {
+        "name": "Tavuk Kanat / Chicken Wing",
+        "price": "550,00 ₺",
+        "category": "Balık Yemeyenler İçin / For Non-Fish Eaters"
+      },
+      {
+        "name": "Sivas köfte / Sivas Meat Ball",
+        "price": "700,00 ₺",
+        "category": "Balık Yemeyenler İçin / For Non-Fish Eaters"
+      },
+      {
+        "name": "Karışık Izgara / Mixed grill",
+        "price": "1.100,00 ₺",
+        "category": "Balık Yemeyenler İçin / For Non-Fish Eaters"
+      },
+      {
+        "name": "Adana Kebap",
+        "price": "700,00 ₺",
+        "category": "Balık Yemeyenler İçin / For Non-Fish Eaters"
+      }
+    ],
+  },
 };
