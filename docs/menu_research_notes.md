@@ -1230,3 +1230,6 @@ Hentzer exact kayıt `Kavaklı, İstanbul Cd., Beylikdüzü/İstanbul`, `+90 212
 
 ## Merkez Büfe Ortaköy ID 7094 acceptance
 Hentzer exact kayıt `Mecidiye, Gözlükçü Sk. 1A, 34347 Beşiktaş/İstanbul`, `+90 212 236 72 34`; resmi Instagram `@merkezbufeortakoy` ve Tıkla exact Gözlükçü Sk. No:1 / telefon kimliğini destekliyor. Yemeksepeti canlı vendor `x5im` menüsünden tost, sandviç, et döner, tavuk döner, burger ve içecek kategorilerinde **20 ürün ve güncel fiyat** aktarıldı. Poşet satırı dışlandı. `verifiedAt` canlı doğrulama tarihi `2026-08-25`.
+
+## Galata Lily Cafe Restaurant ID 7093 acceptance
+Hentzer exact kayıt `Müeyyetzade, Lüleci Hendek Cd. No:69/A, 34425 Beyoğlu/İstanbul`, `+90 544 791 02 13`; Restoranım exact sayfası aynı adres/telefonu doğruluyor. Yemeksepeti canlı `Galata Lily Lounge` vendoru ve resmi Galata Lily sosyal medya kimliği bu işletmeyle eşleştirildi; menüde çorba, kebap/ızgara, makarna, ana yemek, kırmızı et, dürüm, meze, yan ürün, salata, tatlı ve içecek kategorilerinde **40 ürün ve güncel fiyat** aktarıldı. Poşet satırı dışlandı. `verifiedAt` canlı doğrulama tarihi `2026-08-25`.

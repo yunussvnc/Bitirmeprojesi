@@ -75453,4 +75453,213 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
   ]
 },
 
+  "7093": {
+  "name": "Galata Lily Cafe Restaurant",
+  "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/zrls/galata-lily-lounge",
+  "sourceName": "Yemeksepeti canlı vendor zrls (Galata Lily Lounge); exact Restoranım Galata Lily Cafe Restaurant No:69/A / 0544 791 02 13 kimliği ile eşleşme ve resmi Galata Lily sosyal medya kimliği. Poşet satırı dışlandı.",
+  "verifiedAt": "2026-08-25",
+  "items": [
+    {
+      "name": "Mercimek Çorbası",
+      "price": "190",
+      "category": "Çorbalar"
+    },
+    {
+      "name": "Balık Çorbası",
+      "price": "440",
+      "category": "Çorbalar"
+    },
+    {
+      "name": "Izgara Köfte",
+      "price": "610",
+      "category": "Kebaplar & Izgaralar"
+    },
+    {
+      "name": "Tavuk Şiş",
+      "price": "610",
+      "category": "Kebaplar & Izgaralar"
+    },
+    {
+      "name": "Adana Kebap",
+      "price": "690",
+      "category": "Kebaplar & Izgaralar"
+    },
+    {
+      "name": "Kuzu Şiş",
+      "price": "740",
+      "category": "Kebaplar & Izgaralar"
+    },
+    {
+      "name": "Dana Şiş",
+      "price": "740",
+      "category": "Kebaplar & Izgaralar"
+    },
+    {
+      "name": "Kuzu Pirzola",
+      "price": "1500",
+      "category": "Kebaplar & Izgaralar"
+    },
+    {
+      "name": "Spaghetti Napolitan",
+      "price": "520",
+      "category": "Makarnalar"
+    },
+    {
+      "name": "Penne Arrabbiata",
+      "price": "520",
+      "category": "Makarnalar"
+    },
+    {
+      "name": "Pesto Soslu Spaghetti",
+      "price": "520",
+      "category": "Makarnalar"
+    },
+    {
+      "name": "Fettuccine Alfredo",
+      "price": "520",
+      "category": "Makarnalar"
+    },
+    {
+      "name": "Hünkarbeğendi",
+      "price": "540",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Hünkarbeğendi (Dana Etinden)",
+      "price": "740",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Hünkarbeğendi (Kuzu Etinden)",
+      "price": "740",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Dallas Steak (400-450 gr.)",
+      "price": "1610",
+      "category": "Kırmızı Etler"
+    },
+    {
+      "name": "T-Bone Steak (400-450 gr.)",
+      "price": "1600",
+      "category": "Kırmızı Etler"
+    },
+    {
+      "name": "Adana Dürüm",
+      "price": "480",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Köfte Dürüm",
+      "price": "480",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Falafel Dürüm",
+      "price": "480",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Schnitzel Dürüm",
+      "price": "480",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Tavuk Şiş Dürüm",
+      "price": "480",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Karışık Sebze Izgara Dürüm",
+      "price": "480",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Humus",
+      "price": "520",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Patates Kızartması",
+      "price": "290",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Atıştırma Tabağı",
+      "price": "490",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Falafel",
+      "price": "520",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Çoban Salatası",
+      "price": "430",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Hellim Salata",
+      "price": "430",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Sezar Salata",
+      "price": "430",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Ton Balıklı Salata",
+      "price": "430",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Avokado Salata",
+      "price": "430",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Katmer Tatlısı",
+      "price": "420",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Çikolatalı Sufle",
+      "price": "420",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Coca-Cola Zero Sugar (33 cl.)",
+      "price": "110",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Coca-Cola (33 cl.)",
+      "price": "110",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Fanta (33 cl.)",
+      "price": "110",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Sprite (33 cl.)",
+      "price": "110",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Soda (330 cl.)",
+      "price": "70",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Su (50 cl.)",
+      "price": "40",
+      "category": "İçecekler"
+    }
+  ]
+},
+
 };
