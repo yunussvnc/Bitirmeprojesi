@@ -1701,3 +1701,6 @@ Hentzer kaydı `Orta, Demirkapı Cd. 75/A, 34214 Bayrampaşa/İstanbul`, `+90 21
 
 ## AİLE BALIK EVİ ID 6932 kabulü
 Hentzer kaydı `Altıntepsi, Özkan Cd. 52A, 34000 Bayrampaşa/İstanbul`, `+90 212 674 20 10`; Servis Listeleri aynı exact adresi, işletmenin resmi Instagram hesabı aynı telefonu doğruluyor. Yemeksepeti `p8fu` canlı vendorundan Izgara Balıklar, 500 gr ve 1 kg balıklar, Diğer Lezzetler, Salatalar ve İçecekler kategorilerinde 19 benzersiz güncel ürün/fiyat kalemi aktarıldı. Popüler carousel tekrarları ve poşet kalemi dahil edilmedi. **Override kabul edildi.**
+
+## DÖNERCİ DAYI ARNAVUTKÖY ID 6931 kabulü
+Hentzer kaydı `Mustafa Kemal Paşa, Fatih Cd. No:147A, 34275 Arnavutköy/İstanbul`, `+90 531 986 67 44`; Servis Listeleri exact adresi, resmi Instagram hesabı aynı telefonu doğruluyor. Yemeksepeti `tiu1` canlı vendorundan Fırsat Menüleri, Porsiyon Et Döner, Tavuk Dönerler, Dürüm-Ekmek Arası Et Döner ve İçecekler kategorilerinde 20 benzersiz ürün/fiyat kalemi aktarıldı. Popüler tekrarlar ve poşet kalemi dahil edilmedi. **Override kabul edildi.**

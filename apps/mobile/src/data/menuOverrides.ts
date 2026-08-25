@@ -4,6 +4,34 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6931": {
+    "name": "DÖNERCİ DAYI ARNAVUTKÖY",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/tiu1/donerci-dayi-tiu1",
+    "sourceName": "Yemeksepeti tiu1 canlı vendor; Servis Listeleri exact `Mustafa Kemal Paşa, Fatih Cd. No:147A, 34275 Arnavutköy/İstanbul` adresini ve resmi Instagram `+90 531 986 67 44` telefonunu doğruluyor",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Dürüm Et Döner Menü", "price": "720 TL", "category": "Fırsat Menüleri" },
+      { "name": "Yarım Ekmek Arası Et Döner Menü", "price": "680 TL", "category": "Fırsat Menüleri" },
+      { "name": "Tavuk Döner Dürüm Menü", "price": "480 TL", "category": "Fırsat Menüleri" },
+      { "name": "Tombik Ekmek Arası Tavuk Döner Menü", "price": "440 TL", "category": "Fırsat Menüleri" },
+      { "name": "Yarım Ekmek Arası Tavuk Döner Menü", "price": "420 TL", "category": "Fırsat Menüleri" },
+      { "name": "1 Porsiyon Et Döner", "price": "780 TL", "category": "Porsiyon Et Döner" },
+      { "name": "Et Döner İskender (Tam)", "price": "950 TL", "category": "Porsiyon Et Döner" },
+      { "name": "Yarım Ekmek Arası Tavuk Döner (70 gr.)", "price": "180 TL", "category": "Tavuk Dönerler" },
+      { "name": "Tombik Ekmek Arası Tavuk Döner (80 gr.)", "price": "260 TL", "category": "Tavuk Dönerler" },
+      { "name": "Tavuk Döner Dürüm (100 gr.)", "price": "280 TL", "category": "Tavuk Dönerler" },
+      { "name": "Et Dürüm Döner", "price": "550 TL", "category": "Dürüm-Ekmek Arası Et Döner" },
+      { "name": "Yarım Ekmek Et Döner (80 gr.)", "price": "490 TL", "category": "Dürüm-Ekmek Arası Et Döner" },
+      { "name": "Tombik Ekmek Arası Et Döner (80 gr.)", "price": "510 TL", "category": "Dürüm-Ekmek Arası Et Döner" },
+      { "name": "Coca-Cola Zero Sugar", "price": "90 TL", "category": "İçecekler" },
+      { "name": "Coca-Cola", "price": "90 TL", "category": "İçecekler" },
+      { "name": "Sprite", "price": "90 TL", "category": "İçecekler" },
+      { "name": "Fanta", "price": "90 TL", "category": "İçecekler" },
+      { "name": "Ayran", "price": "75 TL", "category": "İçecekler" },
+      { "name": "Limonlu Soda", "price": "50 TL", "category": "İçecekler" },
+      { "name": "Su", "price": "25 TL", "category": "İçecekler" }
+    ]
+  },
   "6932": {
     "name": "AİLE BALIK EVİ",
     "sourceUrl": "https://www.yemeksepeti.com/restaurant/p8fu/aile-balik-evi",
