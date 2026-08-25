@@ -1287,3 +1287,6 @@ Exact kayıt `Yıldız Mahallesi, Çırağan Caddesi, Yıldız, Yalı Sk. No:3, 
 
 ## Tıkıntı ID 7073 acceptance
 Exact kayıt `Barbaros Bulvarı, Cihannüma, Mazharpaşa Sokağı No:4/A, 34353 Beşiktaş/İstanbul`, `+90 212 227 48 41`; resmî tikinticafe.com adres/telefonu, Kaçıyor, Servis Kayıt ve Instagram aynı işletme kimliğini destekliyor. Yemeksepeti canlı `vtma` vendorı aynı `Mazharpaşa Sokağı No:4/A` adresiyle eşleşiyor. Kahvaltılıklar, ızgaralar, beyaz/kırmızı etler, makarnalar, pilavlar, yan ürünler, salatalar ve içecekler kategorilerinden **43 benzersiz gıda ürünü ve güncel fiyat** aktarıldı. `Popüler` carousel tekrarları ve poşet satırı dışlandı. Kaynakta menü yayın tarihi görünmediğinden `verifiedAt` canlı kontrol tarihi `2026-08-25` olarak tutuldu.
+
+## Sinem Pastanesi ID 7072 strict HOLD
+Exact kayıt `Altıntepsi, Fevzipaşa Cd. 73/1, 34035 Bayrampaşa/İstanbul`, `+90 212 501 80 65`; resmî sinempastanesi.com, Kaçıyor, Menu-TR, Yandex ve Instagram `@sinempastanesi1992` aynı işletme kimliğini doğruluyor. Public kaynaklarda ürün/kalori ve tanıtım bilgileri bulunmasına rağmen son bir yıl içinde exact şubeye ait complete item-level fiyatlı menü bulunamadı. Ürün/fiyat uydurulmadı; strict HOLD.
