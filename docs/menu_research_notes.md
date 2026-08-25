@@ -1293,3 +1293,6 @@ Exact kayıt `Altıntepsi, Fevzipaşa Cd. 73/1, 34035 Bayrampaşa/İstanbul`, `+
 
 ## FERMAN KEBAP BÜRYAN IZGARA ID 7071 acceptance
 Exact kayıt `Kavaklı, İbrahim Müteferrika Cd. A Blok No:1, 34520 Beylikdüzü/İstanbul`, `+90 532 593 47 11`; Instagram Ferman Kebap hesapları ve arama sonuçları aynı işletme kimliğini doğruluyor. Yemeksepeti canlı `awtn` menüsünden çorbalar, fırın ürünleri, kebaplar/ızgaralar, mezeler, yan ürünler, salatalar, tatlılar ve içecekler kategorilerinde **61 benzersiz gıda ürünü ve güncel fiyat** aktarıldı. İndirimli güncel satış fiyatları kullanıldı; ikinci/üstü çizili referans fiyatlar ve poşet satırı dışlandı. `verifiedAt` canlı kontrol tarihi `2026-08-25`.
+
+## Sarena ID 7070 strict HOLD
+Exact kayıt `Muratpaşa, Sofular Cd. No:108, 34040 Bayrampaşa/İstanbul`, `+90 532 335 23 66`; Yandex Şarena Cafe & Dondurma ve RestaurantGuru aynı Sofular Cd. No:108 işletmesini doğruluyor. Instagram içerikleri markanın Bayrampaşa/Muratpaşa dondurma işletmesi olduğunu destekliyor. Ancak son bir yıl içinde exact şubeye ait complete item-level fiyatlı public menü bulunamadı; yalnız genel fiyat aralığı ve yorumlar mevcut. Ürün/fiyat uydurulmadı; strict HOLD.
