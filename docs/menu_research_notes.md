@@ -1695,3 +1695,6 @@ Hentzer kaydı `Bereketzade, Camekan Sk. No:6, 34420 Beyoğlu/İstanbul`, `+90 5
 
 ## BEŞİKTAŞ KAHVESİ ID 6934 — STRICT HOLD
 Hentzer kaydı `Sinanpaşa, Hattat Tahsin Sk. 17/A, 34353 Beşiktaş/İstanbul`, `+90 212 236 34 04`; işletmenin resmi iletişim sayfası aynı exact adres ve telefonu doğruluyor. Resmi sitede yalnız işletme tanıtımı/nargile içerikleri var; herkese açık, ürün bazlı ve son bir yıl içinde doğrulanabilir fiyatlı menü bulunamadı. Bu nedenle **strict HOLD**; override eklenmedi.
+
+## DÜRÜM MOLASI BAYRAMPAŞA DÖNER ID 6933 kabulü
+Hentzer kaydı `Orta, Demirkapı Cd. 75/A, 34214 Bayrampaşa/İstanbul`, `+90 212 568 37 61`; resmi Dürüm Molası Bayrampaşa şube sayfası ve Restoranim aynı exact adres/telefonu doğruluyor. Migros Yemek canlı Bayrampaşa vendorunda tarayıcı üzerinden 34 ürünün güncel fiyatları doğrulandı: tavuk dürüm menüleri, tavuk döner dürümleri, 3 kişilik menü, fast food, yan ürünler, tatlılar ve içecekler. Popüler carousel tekrarları, kampanyalar ve poşet kalemi dahil edilmedi. **Override kabul edildi.**

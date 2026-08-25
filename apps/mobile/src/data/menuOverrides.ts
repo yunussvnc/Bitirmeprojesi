@@ -4,6 +4,48 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6933": {
+    "name": "DÜRÜM MOLASI BAYRAMPAŞA DÖNER",
+    "sourceUrl": "https://www.migros.com.tr/yemek/durum-molasi-bayrampasa-ortamahalle-mah-st-25b27",
+    "sourceName": "Migros Yemek canlı Bayrampaşa vendoru; resmi Dürüm Molası şube sayfası ve Restoranim exact `Orta, Demirkapı Cd. 75/A, 34214 Bayrampaşa/İstanbul` / `+90 212 568 37 61` eşleşmesini doğruluyor",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Special Dürüm (130 Gr.) Sütaş Menü", "price": "360 TL", "category": "Tavuk Dürüm Menüler" },
+      { "name": "Normal Dürüm (90 Gr.) Sütaş Menü", "price": "305 TL", "category": "Tavuk Dürüm Menüler" },
+      { "name": "Zurna Dürüm (150 Gr.) Sütaş Menü", "price": "415 TL", "category": "Tavuk Dürüm Menüler" },
+      { "name": "Hatay Usulü Soslu Tavuk Dürüm (90 Gr.)", "price": "270 TL", "category": "Tavuk Döner Dürümler" },
+      { "name": "Hatay Soslu Kaşarlı Tavuk Dürüm (90 Gr.)", "price": "330 TL", "category": "Tavuk Döner Dürümler" },
+      { "name": "Hatay Usulü Special Tavuk Dürüm (130 Gr.)", "price": "330 TL", "category": "Tavuk Döner Dürümler" },
+      { "name": "Hatay Usulü Zurna Tavuk Dürüm (150 Gr.)", "price": "380 TL", "category": "Tavuk Döner Dürümler" },
+      { "name": "3'Lü Tavuk Hatay Soslu Dürüm Menü", "price": "940 TL", "category": "3 Kişilik Menüler" },
+      { "name": "Patso Dürüm", "price": "175 TL", "category": "Fast Food" },
+      { "name": "Patso Sandviç (Yarım)", "price": "135 TL", "category": "Fast Food" },
+      { "name": "Patso Sandviç (3 Çeyrek)", "price": "180 TL", "category": "Fast Food" },
+      { "name": "Patso Sandviç (Tam)", "price": "240 TL", "category": "Fast Food" },
+      { "name": "Bardak Patates Kızartması", "price": "90 TL", "category": "Yan Ürünler" },
+      { "name": "Porsiyon Patates Kızartması", "price": "180 TL", "category": "Yan Ürünler" },
+      { "name": "Sütlaç", "price": "170 TL", "category": "Tatlılar" },
+      { "name": "Hayrabolu", "price": "150 TL", "category": "Tatlılar" },
+      { "name": "Trabzon Fındıklı Baklava", "price": "165 TL", "category": "Tatlılar" },
+      { "name": "Coca-Cola (33 Cl.)", "price": "100 TL", "category": "İçecekler" },
+      { "name": "Coca-Cola Zero Sugar (33 Cl.)", "price": "100 TL", "category": "İçecekler" },
+      { "name": "Fanta (33 Cl.)", "price": "100 TL", "category": "İçecekler" },
+      { "name": "Sprite (33 Cl.)", "price": "100 TL", "category": "İçecekler" },
+      { "name": "Sarıyer Kola (33 Cl.)", "price": "80 TL", "category": "İçecekler" },
+      { "name": "Sarıyer Kola Şekersiz (33 Cl.)", "price": "80 TL", "category": "İçecekler" },
+      { "name": "Sarıyer Fanta (33 Cl.)", "price": "80 TL", "category": "İçecekler" },
+      { "name": "Sarıyer Gazoz (33 Cl.)", "price": "80 TL", "category": "İçecekler" },
+      { "name": "Fuse Tea Şeftali (33 Cl.)", "price": "100 TL", "category": "İçecekler" },
+      { "name": "Fuse Tea Limon (33 Cl.)", "price": "100 TL", "category": "İçecekler" },
+      { "name": "Sütaş Ayran (280 Ml.)", "price": "60 TL", "category": "İçecekler" },
+      { "name": "Ayran (175 Ml.)", "price": "50 TL", "category": "İçecekler" },
+      { "name": "Soda Sade (20 Cl.)", "price": "35 TL", "category": "İçecekler" },
+      { "name": "Soda Limon (20 Cl.)", "price": "40 TL", "category": "İçecekler" },
+      { "name": "Soda Elma (20 Cl.)", "price": "40 TL", "category": "İçecekler" },
+      { "name": "Şalgam Suyu (30 Cl.)", "price": "80 TL", "category": "İçecekler" },
+      { "name": "Su (50 Cl.)", "price": "35 TL", "category": "İçecekler" }
+    ]
+  },
   "6937": {
     "name": "NAPOLI GOURMET BEŞİKTAŞ",
     "sourceUrl": "https://www.yemeksepeti.com/restaurant/y40h/napoli-gourmet-restoran",
