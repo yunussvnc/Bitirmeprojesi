@@ -1635,3 +1635,6 @@ Hentzer kaydı `Çubuklu, Piri Reis Cd. No:2, 34805 Beykoz/İstanbul`, `+90 505 
 
 ## BY DONDURMA ID 6954 — STRICT HOLD
 Hentzer kaydı `Adnan Kahveci, Osmanlı Cd. No:30 G, 34514 Beylikdüzü/İstanbul`, `+90 533 361 64 54`; Restoranim.net aynı işletme adı, exact adres ve telefonu doğruluyor. Ancak sayfa yalnız işletme tanımı, yorumlar ve iletişim bilgisi içeriyor; herkese açık güncel ürün/fiyat listesi bulunmuyor. Son bir yıl içinde fiyatlı doğrulanabilir menü kaynağı bulunamadığından **strict HOLD**; override eklenmedi.
+
+## ALWAYS WAFFLE BAYRAMPAŞA ID 6953 — STRICT HOLD
+Hentzer kaydı `Yenidoğan, Atışalanı Cd. 16/A, 34035 Bayrampaşa/İstanbul`, `+90 538 047 30 66`; Always Waffle resmi Bayrampaşa şube sayfası aynı exact adres ve telefonu açıkça doğruluyor. Migros Yemek aynı “Always Waffle, Bayrampaşa (Yenidoğan Mah.)” vendor adını ve ürün kategorilerini gösteriyor ancak erişilebilir metinde fiyatlar yok. Markanın resmi dijital menüsü fiyat içeriyor olsa da kendi iletişim bölümünde `İçerenköy Mah. Adem Sok. No:82-84` ve `+90 531 855 25 95` bilgilerini veriyor; Bayrampaşa şubesiyle exact eşleşmediği için bu fiyatlar kullanılamaz. Son bir yıl içinde exact Bayrampaşa şubesine bağlı, herkese açık fiyatlı menü doğrulanamadığından **strict HOLD**; override eklenmedi.
