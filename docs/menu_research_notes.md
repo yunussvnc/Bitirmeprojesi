@@ -1623,3 +1623,6 @@ Hentzer kaydı `Türkali, Şair Nedim Cd. 50/A, 34353 Beşiktaş/İstanbul`, `+9
 
 ## GÜNNEHAR BAYRAMPAŞA ID 6958 strict HOLD
 Hentzer kaydı `Altıntepsi, Arda Turan Cd. 30/A, 34035 Bayrampaşa/İstanbul`, `+90 541 471 18 00`; sosyal/yerel kaynaklar işletme adını desteklese de Yemeksepeti `ua36` vendor adresi `Şht. Kamil Balkan Cad. No:56`, Yandex kaydı ise `Yıldırım Mah. Şehit Kamil Balkan Cad. 56A` ve farklı telefon gösteriyor. Bu nedenle vendorun Hentzer’deki exact Altıntepsi şubesi olduğuna dair %100 adres/telefon paritesi sağlanamadı. Güncel fiyatlar mevcut olsa da yanlış şubeye aktarılmaması için **override eklenmedi; strict HOLD**.
+
+## CHOCO NOI WAFFLE & PATISSERIE ID 6957 kabul
+Hentzer kaydı `Yıldırım, Şehir Parkı Caddesi No:19, 34045 Bayrampaşa/İstanbul`, `+90 532 335 45 43`; Choco Noi resmi sosyal paylaşımları aynı exact adres/telefonu doğruluyor. Yemeksepeti `l837` canlı vendor menüsü 2026-08-26 tarihinde 41 benzersiz kalem gösterdi: pizza, tatlı, kruvasan, krep, waffle ve çikolata kategorileri. Kampanya/gel-al fiyatları ayrıca ürün olarak aktarılmadı. **Override kabul edildi.**
