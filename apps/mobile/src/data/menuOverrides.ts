@@ -49136,168 +49136,1040 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     ],
   },
   "7077": {
-    name: "Espressolab Taksim Tünel",
-    sourceUrl: "https://www.migros.com.tr/yemek/espressolab-beyoglu-sahkulu-mah-st-26483",
-    sourceName: "Migros Yemek — Espressolab Beyoğlu (Şahkulu Mah.)",
-    verifiedAt: "2026-08-24",
-    items: [
-      {name: "Espresso", price: "185,00 TL", desc: "(Küçük Boy) Kavrulmuş çekirdeklerle hazırlanır", category: "Espressolu İçecekler"},
-      {name: "Caffe Mocha", price: "318,00 TL", desc: "Gerçek Belçika çikolatası, espresso shot ve 65 derece ısıtılmış kıvamlı süt ile hazırlanmış çikolatalı kahve", category: "Espressolu İçecekler"},
-      {name: "White Chocolate Mocha", price: "318,00 TL", desc: "Gerçek beyaz Belçika çikolatası, espresso shot ve 65 derece ısıtılmış kıvamlı süt ile hazırlanmış beyaz çikolatalı kahve", category: "Espressolu İçecekler"},
-      {name: "Gold Chocolate Mocha", price: "284,00 TL", desc: "Gerçek gold Belçika çikolatası, espresso shot ve 65 derece ısıtılmış kıvamlı süt ile hazırlanan kahve", category: "Espressolu İçecekler"},
-      {name: "Salted Caramel", price: "318,00 TL", desc: "Salted caramel sos ve espresso shotın 65 derece ısıtılmış kıvamlı süt ile buluştuğu aromalı latte", category: "Espressolu İçecekler"},
-      {name: "Lotus Latte", price: "318,00 TL", desc: "Lotus kreması, espresso shot ve 65 derece ısıtılmış kıvamlı süt ile hazırlanan latte", category: "Espressolu İçecekler"},
-      {name: "Iced White Chocolate Mocha", price: "331,00 TL", desc: "Gerçek beyaz Belçika çikolatası, espresso shot ve süt ile hazırlanmış beyaz çikolatalı buzlu kahve", category: "Espressolu İçecekler"},
-      {name: "Iced Lotus Latte", price: "318,00 TL", desc: "Lotus kreması, espresso shot ve kıvamlı süt ile hazırlanan buzlu latte", category: "Espressolu İçecekler"},
-      {name: "Iced Caffe Mocha", price: "331,00 TL", desc: "Gerçek Belçika çikolatası, espresso shot ve süt ile hazırlanmış çikolatalı buzlu kahve", category: "Espressolu İçecekler"},
-      {name: "Ice Salted Caramel Latte", price: "331,00 TL", desc: "Salted caramel sos, espresso shot ve süt ile hazırlanmış aromalı buzlu latte", category: "Espressolu İçecekler"},
-      {name: "Spanish Latte", price: "331,00 TL", desc: "Yoğunlaştılmış süt ve espresso shot 65 derece ısıtılmış kıvamlı süt ile hazırlanan latte", category: "Espressolu İçecekler"},
-      {name: "Ice Spanish Latte", price: "318,00 TL", desc: "Yoğunlaştılmış süt ve espresso shot 65 derece ısıtılmış kıvamlı süt ile hazırlanan latte", category: "Espressolu İçecekler"},
-      {name: "Ice Cortado", price: "223,00 TL", desc: "Espresso shot ile sütün bir araya geldiği Espresso bazlı buzlu kahve", category: "Espressolu İçecekler"},
-      {name: "Cinnamon Roll Latte", price: "284,00 TL", desc: "Tarçın ve mısır gevreği ile zenginleştirilmiş bu latte, muhteşem kokusuyla sizi saracak.", category: "Espressolu İçecekler"},
-      {name: "Tahinli Latte", price: "318,00 TL", desc: "Tahin, hindistan cevizi püresi ve espressoyla hazırlanan sütlü kahve.", category: "Espressolu İçecekler"},
-      {name: "Protein Shake", price: "350,00 TL", desc: "Yer fıstığı ezmesi, muz, bal ve kabak çekirdeği proteiniyle hazırlanan badem sütlü içecek.", category: "Espressolu İçecekler"},
-      {name: "Hojicha Latte", price: "331,00 TL", desc: "Kavrulmuş yeşil çay, vanilya şurubu ve yulaf sütüyle hazırlanan içecek.", category: "Espressolu İçecekler"},
-      {name: "Iced Popcorn Caramel Latte", price: "331,00 TL", desc: "Karamel aromalı latte üzerinde çıtır popcorn ile sunulan eşsiz bir lezzet", category: "Espressolu İçecekler"},
-      {name: "Iced Creme Brulee Tahini Latte", price: "331,00 TL", category: "Espressolu İçecekler"},
-      {name: "Türk Kahvesi", price: "172,00 TL", desc: "Brasil Santos kahve çekirdeği ile hazırlanır", category: "Demleme Kahveler"},
-      {name: "Chemex", price: "331,00 TL", desc: "Chemex yöntemiyle demlenen taze filtre kahve", category: "Demleme Kahveler"},
-      {name: "V60", price: "331,00 TL", desc: "V60 yöntemiyle demlenen taze filtre kahve", category: "Demleme Kahveler"},
-      {name: "Iced V60", price: "331,00 TL", desc: "V60 yöntemiyle demlenen taze filtre kahve", category: "Demleme Kahveler"},
-      {name: "Organik Siyah Çay", price: "102,00 TL", desc: "Demlenmiş siyah çay", category: "Çaylar"},
-      {name: "Yeşil Çay", price: "223,00 TL", desc: "Demlenmiş yeşil çay", category: "Çaylar"},
-      {name: "Eslab Tea", price: "223,00 TL", desc: "Elma, ananas, hünnap, limon otu ile hazırlanır", category: "Çaylar"},
-      {name: "Vanilya Rooibos Çayı", price: "223,00 TL", desc: "Rooibos yaprağı, vanilya parçaları, vanilya aroması. Rooibos Vanilla, Güney Afrika’da yetişen Rooibos bitkisinin Madagascar’dan gelen vanilya parçaları ile harmanlaması ile elde edilir.", category: "Çaylar"},
-      {name: "Moroccan Mint Tea", price: "223,00 TL", desc: "Yeşil çay, elma, nane, gül ile hazırlanır", category: "Çaylar"},
-      {name: "Hibiskus Çayı", price: "223,00 TL", desc: "Demlenmiş hibiskus çayı", category: "Çaylar"},
-      {name: "Detoks Tea", price: "223,00 TL", desc: "Yeşil çay, elma, ananas, limon otu, portakal kabuğu ile hazırlanır", category: "Çaylar"},
-      {name: "Pumpkin Tea", price: "223,00 TL", desc: "Bal Kabaklı çay", category: "Çaylar"},
-      {name: "Lemon Lınden Tea", price: "223,00 TL", category: "Çaylar"},
-      {name: "Pear Apple Tea", price: "223,00 TL", category: "Çaylar"},
-      {name: "Chai Tea Latte", price: "331,00 TL", desc: "Aromalı baharatların 65 derece ısıtılmış kıvamlı süt ile buluştuğu içimi yumuşak çay", category: "Kahvesiz İçecekler"},
-      {name: "Hot Chocolate", price: "274,00 TL", desc: "Sıcak süt, çikolata sosu ile hazırlanır", category: "Kahvesiz İçecekler"},
-      {name: "Iced Chai Tea Latte", price: "343,00 TL", desc: "Aromalı baharatların soğuk süt ve buz parçaları ile buluştuğu içimi yumuşak saoğuk çay", category: "Kahvesiz İçecekler"},
-      {name: "Cold Chocolate", price: "280,00 TL", desc: "Süt, çikolata sosu ile hazırlanır", category: "Kahvesiz İçecekler"},
-      {name: "Cranberry Hibiscus", price: "331,00 TL", desc: "Demlenmiş hibiscus çayı içerisinde; limonata ve kızılcık şurubu ile hazırlanır", category: "Kahvesiz İçecekler"},
-      {name: "Matcha Latte", price: "331,00 TL", desc: "Matcha tozu, süt ile hazırlanır", category: "Kahvesiz İçecekler"},
-      {name: "Iced Matcha Latte", price: "343,00 TL", desc: "Matcha tozunun sütle bir araya geldiği soğuk, yumuşak içimli lezzet", category: "Kahvesiz İçecekler"},
-      {name: "Mojito Hibiscus", price: "331,00 TL", desc: "Yaz aylarının favori içeceği! Yuzu püresi, hibiscus ve mojito şurubu sayesinde ortaya çıkan lezzet", category: "Kahvesiz İçecekler"},
-      {name: "Lime Breeze", price: "331,00 TL", desc: "Misket limon püresinin kahve ve elma özü ile armonisi", category: "Kahvesiz İçecekler"},
-      {name: "Sky", price: "331,00 TL", desc: "Greyfurt, limon, portakal ve mürver çiçeği aromasının birleşimiyle hazırlanan ferahlatıcı yaz lezzeti.", category: "Kahvesiz İçecekler"},
-      {name: "Paragon Lime", price: "356,00 TL", desc: "Canlandırıcı limon, timur berry aroması ve lime sorbe ile sıcak günlerde serinlemeniz için mükemmel bir seçenek.", category: "Kahvesiz İçecekler"},
-      {name: "Matcha Ube Latte", price: "350,00 TL", desc: "Ube özü, yulaf sütü ve matcha ile hazırlanan buzlu içecek.", category: "Kahvesiz İçecekler"},
-      {name: "Ube Latte", price: "331,00 TL", desc: "Ube özü, süt ve espresso ile hazırlanan buzlu içecek.", category: "Kahvesiz İçecekler"},
-      {name: "Brazilian Lemonade", price: "324,00 TL", desc: "Lime’ın ferahlatıcı aroması ve yumuşak dokusuyla hazırlanan yaz içeceği", category: "Kahvesiz İçecekler"},
-      {name: "Passion Fizz", price: "331,00 TL", desc: "Çarkıfelek meyvesinin buzla buluştuğu egzotik ve ferahlatıcı bir içecek", category: "Kahvesiz İçecekler"},
-      {name: "Tiger Juice", price: "337,00 TL", desc: "Muz ve çileğin uyumuyla hazırlanan ferahlatıcı içecek", category: "Kahvesiz İçecekler"},
-      {name: "Kombucha Ananas Hibiscus", price: "254,00 TL", desc: "Ananasın tropik lezzeti, hibiscus dokunuşuyla ferahlatıcı kombucha", category: "Kahvesiz İçecekler"},
-      {name: "Tereyağlı Kruvasan", price: "153,00 TL", desc: "Kahvaltılarınıza eşlik edecek taze lezzet.", category: "Kahvaltılıklar"},
-      {name: "Strawberry Pistachio Shortcake", price: "540,00 TL", desc: "Çilek, taze meyveler ve fıstıklı pastacı kremasının büyüleyici buluşması.", category: "Kahvaltılıklar"},
-      {name: "Şekersiz Üzümlü Scone", price: "237,00 TL", category: "Kahvaltılıklar"},
-      {name: "Peynir Dolgulu Kruvasan", price: "204,00 TL", desc: "Kat kat tereyağlı kruvasanın içinde lezzetli peynir dolgusu.", category: "Kahvaltılıklar"},
-      {name: "Üç Çikolatalı Kruvasan", price: "183,00 TL", desc: "Bitter, sütlü ve beyaz çikolatanın buluştuğu enfes kruvasan.", category: "Kahvaltılıklar"},
-      {name: "Kabaklı Börek", price: "121,00 TL", desc: "Kabaklı iç harç ile hazırlanan börek.", category: "Kahvaltılıklar"},
-      {name: "Ispanaklı Peynirli Poğaça", price: "121,00 TL", desc: "Taze ıspanak ve peynirle hazırlanan, her ısırıkta ev sıcaklığı hissettiren yumuşacık bir klasik", category: "Kahvaltılıklar"},
-      {name: "Zeytinli Poğaça", price: "121,00 TL", desc: "Kıtır hamur içinde zeytin dolgulu poğaça", category: "Kahvaltılıklar"},
-      {name: "Pırasalı Açma", price: "121,00 TL", desc: "Yumuşacık açma hamuru içinde zeytinyağlı pırasa dolgulu dengeli bir lezzet", category: "Kahvaltılıklar"},
-      {name: "Kapalı Pizza", price: "223,00 TL", desc: "Bol iç malzemeli, dışı çıtır içi yumuşacık kapalı pizza", category: "Kahvaltılıklar"},
-      {name: "Eslab Mix Sandviç", price: "356,00 TL", desc: "Ekşi mayalı baget ekmeği, dana jambon, piliç jambon, Macar salamı, cheddar peyniri, dil peyniri, domates, kıvırcık marul", category: "Sandviçler"},
-      {name: "3 Peynirli Avokadolu Açma Sandviç", price: "356,00 TL", desc: "\"Avokado, beyaz peynir, dil peyniri, çedar peyniri ve salatalıktan oluşan vazgeçilmez açma sandviç lezzeti.\"", category: "Sandviçler"},
-      {name: "Korean Chicken Sandviç", price: "369,00 TL", desc: "Çıtır tavuk, kore usulü sos ve cheddar peyniri ile dolu dolu bir sandviç.", category: "Sandviçler"},
-      {name: "Hindi Fümeli & Kaşarlı Acuka Sandviç", price: "369,00 TL", desc: "Acuka, beyaz peynir, cheddar ve hindi füme ile hazırlanan sandviç.", category: "Sandviçler"},
-      {name: "Pesto & Roastbeef Ciabatta Sandviç", price: "369,00 TL", desc: "Pesto sos, roast beef, taze yeşillikler ve peynirle hazırlanan çıtır ciabatta", category: "Sandviçler"},
-      {name: "Sebzeli & Peynirli Bazlama Sandviç", price: "369,00 TL", desc: "Bazlama ekmeği içinde peynir ve taze sebzelerle hazırlanan hafif bir sandviç", category: "Sandviçler"},
-      {name: "Levain Kuki", price: "286,00 TL", desc: "Çikolata ve ceviz parçalarıyla zenginleştirilmiş kuki.", category: "Kekler"},
-      {name: "Antep Fıstıklı Kuki", price: "312,00 TL", desc: "Her lokmada hissedilen Antep Fıstıklarının eşsiz aroması.", category: "Kekler"},
-      {name: "Kakaolu Levain Kuki", price: "311,00 TL", desc: "Zengin çikolata tadıyla, dışı kıtır kıtır, içi yumuşak kuki.", category: "Kekler"},
-      {name: "Limonlu Haşhaşlı Kek", price: "324,00 TL", desc: "Limon kabuğu ve haşhaş tohumu ile hazırlanan kek.", category: "Kekler"},
-      {name: "Çilekli Tart", price: "407,00 TL", desc: "Kıtır tart hamuru üzerine pastacı kreması ile taze çilekler.", category: "Kekler"},
-      {name: "Antep Fıstıklı Tart", price: "502,00 TL", desc: "Kıtır tart hamuru üzerinde fıstıklı pastacı kreması ve Antep fıstığı parçaları", category: "Kekler"},
-      {name: "Çilek & Fıstıklı Crumble", price: "477,00 TL", desc: "Çilek, Antep fıstığı ve kıtır crumble’ın lezzetli uyumu", category: "Kekler"},
-      {name: "İzmir Bombası", price: "216,00 TL", desc: "Akışkan bitter çikolata ile ince hamurun buluşmasıyla hazırlanan atıştırmalık kurabiye", category: "Tatlılar"},
-      {name: "Tiramisu", price: "324,00 TL", desc: "Mascarpone kreması, kahve ile hazırlanır", category: "Tatlılar"},
-      {name: "Çikolatalı Profiterol", price: "331,00 TL", desc: "Özel çiftlik sütü, çikolata, ekler hamuru", category: "Tatlılar"},
-      {name: "Muzlu Rulo", price: "324,00 TL", desc: "Pandispanya arasına pastacı kreması, muz", category: "Tatlılar"},
-      {name: "Mozaik Pasta", price: "324,00 TL", desc: "Çikolata, bisküvi, Antep fıstığı", category: "Tatlılar"},
-      {name: "Muzlu Cicibebeli Puding", price: "324,00 TL", desc: "Muz, bebe bisküvi", category: "Tatlılar"},
-      {name: "Mermer Kek", price: "248,00 TL", desc: "Bitter çikolata, hindistan cevizi aroması", category: "Tatlılar"},
-      {name: "Beyaz Çikolatalı Brownie", price: "445,00 TL", desc: "Beyaz Belçika çikolatası ile hazırlanır", category: "Tatlılar"},
-      {name: "Philadelphia Cheesecake", price: "345,00 TL", desc: "Espressolab farkıyla klasikleşmiş bir lezzet! ''Philadelphia peynir ile özel olarak hazırlanan kremsi dokusuyla muhteşem bir lezzet\"", category: "Tatlılar"},
-      {name: "Kakaolu Levain Kuki", price: "311,00 TL", desc: "Zengin çikolata tadıyla, dışı kıtır kıtır, içi yumuşak kuki.", category: "Tatlılar"},
-      {name: "Limonlu Haşhaşlı Kek", price: "324,00 TL", desc: "Limon kabuğu ve haşhaş tohumu ile hazırlanan kek.", category: "Tatlılar"},
-      {name: "Çilekli Tart", price: "407,00 TL", desc: "Kıtır tart hamuru üzerine pastacı kreması ile taze çilekler.", category: "Tatlılar"},
-      {name: "Meyveli Granola", price: "312,00 TL", desc: "Taze çilek, yaban mersini ve granola parçaları içeren sağlıklı atıştırmalık", category: "Tatlılar"},
-      {name: "Chocolate Coffee Bean", price: "312,00 TL", desc: "Kahve ve çikolatayı kusursuz bir uyumla buluşturan, bitter çikolata kaplı ve mousse dolgulu özel bir tatlı.", category: "Tatlılar"},
-      {name: "Vişneli Vegan Çörek", price: "191,00 TL", desc: "Kat kat çıtır hamur ve yoğun vişne dolgulu vegan çörek.", category: "Tatlılar"},
-      {name: "Strawberry Pistachio Shortcake", price: "540,00 TL", desc: "Çilek, taze meyveler ve fıstıklı pastacı kremasının büyüleyici buluşması.", category: "Tatlılar"},
-      {name: "Sarelle Cup", price: "248,00 TL", desc: "Cup içinde sunulan akışkan Sarelle çikolatası", category: "Tatlılar"},
-      {name: "Acıbadem Pasta", price: "496,00 TL", desc: "İki acıbadem kurabiyesi arasında ipeksi krema dolgusu ve frambuaz dokunuşu", category: "Tatlılar"},
-      {name: "Frambuazlı Pasta", price: "502,00 TL", desc: "Frambuazın tatlı mayhoşluğu, beyaz çikolatanın kadifemsi lezzetiyle buluşuyor", category: "Tatlılar"},
-      {name: "Süper Oreo Cheesecake (Dilim)", price: "426,00 TL", desc: "Oreo bisküvi, bitter çikolata, cheesecake peyniri ile hazırlanır", category: "Cheesecakes"},
-      {name: "San Sebastian Cheesecake", price: "405,00 TL", desc: "Yoğun kıvamı ve yumuşak dokusuyla öne çıkan özel bir cheesecake lezzeti", category: "Cheesecakes"},
-      {name: "Rocher Cheesecake", price: "502,00 TL", desc: "Fındık parçacıklı çikolata kaplama ve kremamsı dokusuyla hazırlanan özel tarif", category: "Cheesecakes"},
-      {name: "Key Lime Cheesecake", price: "489,00 TL", desc: "Key lime’ın ferahlatıcı aromasıyla öne çıkan hafif ve dengeli bir cheesecake", category: "Cheesecakes"},
-      {name: "Frambuaz & Fıstıklı Cheesecake", price: "426,00 TL", desc: "Frambuazın hafif ekşiliğinin, cheesecake ve Antep fıstığıyla buluştuğu unutulmaz lezzet", category: "Cheesecakes"},
-      {name: "Çilek Kurusu", price: "223,00 TL", category: "Atıştırmalıklar"},
-      {name: "Caramel Waffle", price: "108,00 TL", desc: "Çıtır çıtır karamelli waffle bisküvi", category: "Atıştırmalıklar"},
-      {name: "Moms Cookie Brownie", price: "121,00 TL", desc: "Anne kurabiyeli", category: "Atıştırmalıklar"},
-      {name: "Moms Yaban Mersinli Granola Bar", price: "121,00 TL", desc: "(40 gr.) Glutensiz yulaf ezmesi, elma suyu konsantresi, sızma zeytinyağı, yüksek mavi yemiş (yaban mersini), Hindistan cevizi, fındık, badem, ceviz, ay çekirdeği, keten tohumu, kuş üzümü, tarçın", category: "Atıştırmalıklar"},
-      {name: "Moms Yer Fıstıklı Granola Bar", price: "121,00 TL", desc: "(40 gr.) Glutensiz yulaf ezmesi, elma suyu konsantresi, sızma zeytinyağı, yer fıstığı, kakao, keten tohumu", category: "Atıştırmalıklar"},
-      {name: "Snack Honey Sesame", price: "135,00 TL", desc: "Ballı, susamlı atıştırmalık", category: "Atıştırmalıklar"},
-      {name: "Bitter Çikolatalı El Yapımı Gofret", price: "223,00 TL", desc: "EspressoLab El Yapımı Gofret", category: "Atıştırmalıklar"},
-      {name: "İncir Kurusu", price: "223,00 TL", desc: "Doğal tatlılığı ve eşsiz lezzetiyle sağlıklı bir atıştırmalık alternatifi.", category: "Atıştırmalıklar"},
-      {name: "Mini Kakaolu Küp Bar", price: "160,00 TL", desc: "Seren'in Doğal Dünyası Mini Kakaolu Küp Bar 40 Gr- İçindekiler : Hurma, kuru üzüm, fındık ,organik ham kakao, hindistan cevizi", category: "Atıştırmalıklar"},
-      {name: "Şekerli Badem", price: "318,00 TL", desc: "Şekerli Badem 120g. Çıtır bademin şeker kaplamasıyla buluştuğu tatlı atıştırmalık.", category: "Atıştırmalıklar"},
-      {name: "Tohumlu Kraker 35 Gr", price: "235,00 TL", desc: "Seren'in Doğal Dünyası Tohumlu Kraker 35 Gr-İçindekiler : Kara buğday unu, susam , çörek otu, keten tohumu , himalaya tuzu, zeytinyağ", category: "Atıştırmalıklar"},
-      {name: "Espressolab Kuruyemiş", price: "210,00 TL", desc: "Özenle seçilmiş kuruyemişlerden oluşan atıştırmalık", category: "Atıştırmalıklar"},
-      {name: "Kurutulmuş Kale Cipsi", price: "216,00 TL", desc: "Çıtır, kurutulmuş kale cipsi", category: "Atıştırmalıklar"},
-      {name: "Kurutulmuş Pancar Cipsi", price: "216,00 TL", desc: "Çıtır, kurutulmuş pancar cipsi", category: "Atıştırmalıklar"},
-      {name: "Snack Olive Oregano (Zeytinli-kekikli)", price: "140,00 TL", desc: "Zeytin ve kekik aromalı atıştırmalık.", category: "Atıştırmalıklar"},
-      {name: "Gigi's Crunchies Wild Berry 45 Gr", price: "254,00 TL", desc: "Orman meyveli çıtır atıştırmalık.", category: "Atıştırmalıklar"},
-      {name: "Gigi's Crunchies Peanut Butter 45 Gr", price: "254,00 TL", desc: "Fıstık ezmeli çıtır atıştırmalık.", category: "Atıştırmalıklar"},
-      {name: "Espressolab Yer Fıstığı Ve Çilek Bar 35 Gr", price: "127,00 TL", desc: "Yer fıstığı ve çilekli pratik atıştırmalık bar.", category: "Atıştırmalıklar"},
-      {name: "Espressolab Badem Ve Kakao Bar 35 Gr", price: "127,00 TL", desc: "Badem ve kakao içeren atıştırmalık bar.", category: "Atıştırmalıklar"},
-      {name: "Espressolab Domatesli Yulaf Küpü 35 Gr", price: "127,00 TL", desc: "Domates aromalı çıtır yulaf küpleri.", category: "Atıştırmalıklar"},
-      {name: "Fropie Zeytinli Yulaf Küpü 35 Gr", price: "127,00 TL", desc: "Zeytin aromalı çıtır yulaf küpleri.", category: "Atıştırmalıklar"},
-      {name: "Yaban Mersini Kurusu 7 Gr", price: "223,00 TL", desc: "Doğal ve katkısız yaban mersini atıştırmalığı.", category: "Atıştırmalıklar"},
-      {name: "Uludağ Premium Su", price: "70,00 TL", desc: "Cam şişe", category: "Şişelenmiş İçecekler"},
-      {name: "San Pellegrino Maden Suyu (25 Cl.)", price: "169,00 TL", desc: "Cam şişe", category: "Şişelenmiş İçecekler"},
-      {name: "Portakallı San Pellegrino Maden Suyu (25 Cl.)", price: "135,00 TL", desc: "Cam şişe", category: "Şişelenmiş İçecekler"},
-      {name: "Sade Kombucha", price: "254,00 TL", desc: "Cam şişe", category: "Şişelenmiş İçecekler"},
-      {name: "Günlük Süt (1 L.)", price: "142,00 TL", desc: "Espressolab'in çiftliğinde üretilen günlük pastörize edilmiş cam şişe süt.", category: "Şişelenmiş İçecekler"},
-      {name: "Green Shot", price: "166,00 TL", desc: "Maydanoz, matcha ve elma sirkesi ile güne enerjik bir başlangıç yapmanızı sağlar.", category: "Şişelenmiş İçecekler"},
-      {name: "Purple Shot", price: "166,00 TL", desc: "Kara mürver, zencefil ve zerdeçalın eşsiz uyumuyla bağışıklık dostu bir deneyim.", category: "Şişelenmiş İçecekler"},
-      {name: "Arizona Iced Tea Peach", price: "338,00 TL", category: "Şişelenmiş İçecekler"},
-      {name: "Arizona Iced White Tea Blueberry", price: "338,00 TL", category: "Şişelenmiş İçecekler"},
-      {name: "Sorbe Natural Sıradışı Detox", price: "191,00 TL", desc: "Zencefil, Zerdeçal, Yeşil Elma ve Çeşitli baharatlar (250 Ml)", category: "Şişelenmiş İçecekler"},
-      {name: "Sorbe Natural Vitamin Deposu", price: "191,00 TL", desc: "Demirhindi, Hibiscus, Sumak ve Çeşitli baharatlar (250 Ml)", category: "Şişelenmiş İçecekler"},
-      {name: "Sanpelllegrino Aranciata", price: "178,00 TL", desc: "Kan portakalı aromalı ferahlatıcı gazlı içecek", category: "Şişelenmiş İçecekler"},
-      {name: "Okf Aleo Vera Suyu Şekersiz", price: "318,00 TL", category: "Şişelenmiş İçecekler"},
-      {name: "Okf Hindistan Cevizli İçecek", price: "318,00 TL", desc: "Hindistan cevizi aromalı ferahlatıcı içecek", category: "Şişelenmiş İçecekler"},
-      {name: "Espressolab Organik Yeşil Meyve-sebze Suyu", price: "140,00 TL", desc: "Kara lahana, ıspanak, elma ve zencefille hazırlanan organik yeşil meyve-sebze suyu.", category: "Şişelenmiş İçecekler"},
-      {name: "Espressolab Organik Kırmızı Meyve-sebze Suyu", price: "140,00 TL", desc: "Muz, çilek, elma, karpuz ve kırmızı pancarla hazırlanan organik kırmızı meyve-sebze suyu.", category: "Şişelenmiş İçecekler"},
-      {name: "Laktozsuz Günlük Süt", price: "216,00 TL", desc: "Kendi çiftliğimizde ürettiğimiz, cam şişede laktozsuz günlük süt", category: "Şişelenmiş İçecekler"},
-      {name: "Churcill", price: "204,00 TL", desc: "Soda ve limonla hazırlanan ferahlatıcı içecek", category: "Şişelenmiş İçecekler"},
-      {name: "Mineral Su", price: "83,00 TL", desc: "Doğal mineralli ferahlatıcı maden suyu", category: "Şişelenmiş İçecekler"},
-      {name: "Türk Kahvesi (200 Gr.)", price: "381,00 TL", desc: "Brasiz Santos çekirdeğinden üretilmiştir. Özel teneke kutusunda gönderilmektedir.", category: "Paket Kahveler"},
-      {name: "Türk Kahvesi (1 Kg.)", price: "1.620,00 TL", desc: "Paket", category: "Paket Kahveler"},
-      {name: "Pratik Kenya Filtre Kahve (5 Adet)", price: "312,00 TL", desc: "Böğürtlen, yeşil üzüm, sert çekirdekli meyve aromalarına sahiptir.", category: "Paket Kahveler"},
-      {name: "Pratik Colombia Filtre Kahve (5 Adet)", price: "312,00 TL", desc: "Kuru üzüm, erik aromalarına sahiptir.", category: "Paket Kahveler"},
-      {name: "Colombia El Puente (250 Gr.)", price: "625,00 TL", desc: "Karamel, kakao, tarçın, vanilya, incir, elma", category: "Paket Kahveler"},
-      {name: "Colombia El Puente (1 Kg.)", price: "1.950,00 TL", desc: "Karamel, kakao, tarçın, vanilya, incir, elma", category: "Paket Kahveler"},
-      {name: "Hazelnut Tincture 50 Ml", price: "680,00 TL", desc: "Fındık özlü 50 ml sıvı aroma.", category: "Perakende"},
-      {name: "Caramel Tincture 50 Ml", price: "680,00 TL", desc: "Karamel özlü 50 ml sıvı aroma.", category: "Perakende"},
-      {name: "Kabaklı Kalem Börek + Çay Küçük Boy", price: "147,00 TL", desc: "Çay saatine lezzetli bir eşlik arayanlar için kabaklı börek ve küçük boy çay.", category: "Özel Menüler"},
-      {name: "Meyveli Granola + Filtre Kahve Orta Boy", price: "338,00 TL", desc: "Güne fit bir başlangıç isteyenler için meyveli granola ve orta boy filtre kahve.", category: "Özel Menüler"},
-      {name: "Hindi Fümeli & Kaşarlı Acuka Sandviç + Çay Küçük Boy", price: "321,00 TL", desc: "Hindi füme, kaşar ve acukanın uyumunu küçük boy çayla buluşturan lezzetli ikili menü.", category: "Özel Menüler"},
-      {name: "Sebzeli & Peynirli Bazlama Sandviç + Filtre Kahve Orta Boy", price: "321,00 TL", desc: "Sebzeli peynirli bazlama sandviç ve orta boy filtre kahve ikilisi.", category: "Özel Menüler"},
-      {name: "Ispanaklı & Peynirli Poğaça + Çay Küçük Boy", price: "147,00 TL", desc: "Ispanaklı peynirli poğaça ve küçük boy çayla tamamlanan lezzet ikilisi.", category: "Özel Menüler"},
-      {name: "Frambuaz & Fıstıklı Cheesecake + Filtre Kahve Orta Boy", price: "418,00 TL", desc: "Tatlı bir mola için frambuazlı fıstıklı cheesecake ve orta boy filtre kahve.", category: "Özel Menüler"},
-      {name: "Kapalı Pizza + Küçük Çay", price: "218,00 TL", desc: "Sıcacık ve doyurucu kapalı pizza ve küçük boy çay ikilisi.", category: "Özel Menüler"},
-      {name: "Haşhaşlı Limonlu Kek + Filtre Kahve Orta Boy", price: "347,00 TL", desc: "Haşhaşlı limonlu kek ve orta boy filtre kahve ikilisi.", category: "Özel Menüler"},
-      {name: "Chocomel Çikolatalı İçecek", price: "166,00 TL", desc: "Yoğun kakao tadıyla öne çıkan çikolatalı içecek.", category: "Özel Menüler"},
-    ],
-  },
+  "name": "Espressolab Taksim Tünel",
+  "sourceUrl": "https://www.yemeksepeti.com/restaurant/ifdd/espressolab-ifdd",
+  "sourceName": "Yemeksepeti canlı menüsü; resmî Espressolab Taksim Tünel sayfası ve YS adres metni ile exact Şahkulu Mah. İstiklal Caddesi/Tünel No:233, Beyoğlu şubesine eşleştirildi. Hentzer telefon kaydı +90 444 84 64 ile marka iletişim hattı uyumludur. 171 benzersiz gıda ürünü aktarıldı; Popüler carousel tekrarları dışlandı.",
+  "verifiedAt": "2026-08-25",
+  "items": [
+    {
+      "name": "Kabaklı Kalem Börek + Çay Orta Boy",
+      "price": "147",
+      "desc": "Kabaklı kalem börek, çay",
+      "category": "Espressolab Özel Menüler"
+    },
+    {
+      "name": "Meyveli Granola + Filtre Kahve Orta Boy",
+      "price": "338",
+      "desc": "Meyveli granola, filtre kahve",
+      "category": "Espressolab Özel Menüler"
+    },
+    {
+      "name": "Hindi Fümeli & Kaşar Peynirli Acuka Sandviç + Çay Orta Boy",
+      "price": "321",
+      "desc": "Hindi fümeli kaşar peynirli acuka, çay",
+      "category": "Espressolab Özel Menüler"
+    },
+    {
+      "name": "Ispanaklı & Peynirli Poğaça + Çay Orta Boy",
+      "price": "147",
+      "desc": "Ispanaklı peynirli poğaça, çay",
+      "category": "Espressolab Özel Menüler"
+    },
+    {
+      "name": "Frambuazlı & Fıstıklı Cheesecake + Filtre Kahve Orta Boy",
+      "price": "418",
+      "desc": "Frambuazlı fıstıklı cheesecake, filtre kahve",
+      "category": "Espressolab Özel Menüler"
+    },
+    {
+      "name": "Kapalı Pizza + Çay Orta Boy",
+      "price": "218",
+      "desc": "Kapalı pizza, çay",
+      "category": "Espressolab Özel Menüler"
+    },
+    {
+      "name": "Haşhaşlı & Limonlu Kek + Filtre Kahve Orta Boy",
+      "price": "347",
+      "desc": "Haşhaşlı limonlu kek, filtre kahve",
+      "category": "Espressolab Özel Menüler"
+    },
+    {
+      "name": "Sarelle Mocha",
+      "price": "304",
+      "desc": "Sarelle’nin yoğun fındık ve kakao lezzetini espresso ve sütle buluşturan özel mocha",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Espresso",
+      "price": "185",
+      "desc": "Kavrulmuş çekirdeklerle hazırlanır",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Espresso Macchiato",
+      "price": "191",
+      "desc": "(Küçük) Yumuşak içimli, espresso shot, süt kreması ile hazırlanır",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Caffe Americano",
+      "price": "229",
+      "desc": "Espresso'nun sıcak su ile seyreltilmiş hali",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Caffe Latte",
+      "price": "261",
+      "desc": "Espresso shot ile kıvamlı sütün bir araya geldiği, espresso bazlı kahve Popüler0",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Cappuccino",
+      "price": "261",
+      "desc": "Espresso shot, 65 derece ısıtılmış, kıvamlı süt, üzerinde yoğun süt kremasıyla hazırlanan yumuşak içimli kahve",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Cortado",
+      "price": "248",
+      "desc": "Espresso shot, 65 derece ısıtılmış, kıvamlı süt üzeri latte art ile süslenmiş espressonun hafif hali",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Flat White",
+      "price": "210",
+      "desc": "Ekstra espresso shot, kıvamlı sütle yoğun kahve tadı severlerin tercihi",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Filtre Kahve",
+      "price": "172",
+      "desc": "Kavrulmuş, öğütülmüş kahve çekirdeklerinin sıcak su ile demlenmesi ile hazırlanır.",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Chemex",
+      "price": "331",
+      "desc": "Chemex yöntemiyle demlenen taze filtre kahve",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "V60",
+      "price": "331",
+      "desc": "V60 yöntemiyle demlenen taze filtre kahve",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Türk Kahvesi",
+      "price": "172",
+      "desc": "Brasil Santos kahve çekirdeği ile hazırlanır.",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Spanish Latte",
+      "price": "331",
+      "desc": "Yoğunlaştılmış süt ve espresso shot 65 derece ısıtılmış kıvamlı süt ile hazırlanan latte",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Lotus Latte",
+      "price": "318",
+      "desc": "Lotus kreması, espresso shot, 65 derece ısıtılmış kıvamlı süt ile hazırlanan latte",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Salted Caramel Latte",
+      "price": "318",
+      "desc": "Salted caramel sos, espresso shotın 65 derece ısıtılmış, kıvamlı süt ile buluştuğu aromalı latte",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Tahinli Latte",
+      "price": "318",
+      "desc": "Tahin, Hindistan cevizi püresi, espressoyla hazırlanan sütlü kahve",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "White Chocolate Mocha",
+      "price": "318",
+      "desc": "Gerçek beyaz Belçika çikolatası, espresso shot, 65 derece ısıtılmış, kıvamlı süt ile hazırlanmış beyaz çikolatalı kahve",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Caffe Mocha",
+      "price": "318",
+      "desc": "Gerçek Belçika çikolatası, espresso shot, 65 derece ısıtılmış kıvamlı süt ile hazırlanmış çikolatalı kahve",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Iced Popcorn Caramel Latte",
+      "price": "331",
+      "desc": "Karamel aromalı latte üzerinde çıtır popcorn ile sunulan eşsiz bir lezzet",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Iced Caffe Latte",
+      "price": "261",
+      "desc": "Espresso shot ile sütün bir araya geldiği espresso bazlı buzlu kahve Popüler0",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Iced Cappuccino",
+      "price": "267",
+      "desc": "Buz üzerine eklenen süt kremasına espresso shot ilave ederek hazırlanır.",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Iced Caffe Americano",
+      "price": "229",
+      "desc": "Soğuk su ile seyreltilmiş espresso",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Iced Filtre Kahve",
+      "price": "185",
+      "desc": "Taze demlenmiş buzlu kahve",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Cold Brew",
+      "price": "237",
+      "desc": "12 saat boyunca soğuk suda demlenmiş doygun içimli soğuk kahve",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Iced Caffe Mocha",
+      "price": "331",
+      "desc": "Gerçek Belçika çikolatası, espresso shot, süt ile hazırlanmış çikolatalı buzlu kahve",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Iced White Chocolate Mocha",
+      "price": "331",
+      "desc": "Gerçek beyaz Belçika çikolatası, espresso shot, süt ile hazırlanmış beyaz çikolatalı buzlu kahve",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Iced Sarelle Mocha",
+      "price": "311",
+      "desc": "Sarelle’nin yoğun fındık ve kakao lezzetini espresso ve sütle buluşturan özel buzlu mocha",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Iced Spanish Latte",
+      "price": "318",
+      "desc": "Yoğunlaştılmış süt ve espresso shot 65 derece ısıtılmış kıvamlı süt ile hazırlanan latte",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Iced Lotus Latte",
+      "price": "318",
+      "desc": "Lotus kreması, espresso shot ve kıvamlı süt ile hazırlanan buzlu latte",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Iced Salted Caramel Latte",
+      "price": "331",
+      "desc": "Salted caramel sos, espresso shot, süt ile hazırlanmış aromalı buzlu latte",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Iced Creme Brulee Tahinli Latte",
+      "price": "331",
+      "desc": "Creme brulee, tahin",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Iced V60",
+      "price": "331",
+      "desc": "V60 yöntemiyle demlenen taze soğuk filtre kahve",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Cherry Chocolate Cream",
+      "price": "330",
+      "desc": "Vişne kreması ve çikolatanın espresso ile buluştuğu soğuk içecek.",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Chai Tea Latte",
+      "price": "331",
+      "desc": "Aromalı baharatların 65 derece ısıtılmış kıvamlı süt ile buluştuğu içimi yumuşak çay",
+      "category": "Sıcak Kahvesiz İçecekler"
+    },
+    {
+      "name": "Hot Chocolate",
+      "price": "274",
+      "desc": "Sıcak süt, çikolata sosu ile hazırlanır",
+      "category": "Sıcak Kahvesiz İçecekler"
+    },
+    {
+      "name": "Hojicha Latte",
+      "price": "331",
+      "desc": "Kavrulmuş yeşil çay, vanilya şurubu, yulaf sütüyle hazırlanan içecek",
+      "category": "Sıcak Kahvesiz İçecekler"
+    },
+    {
+      "name": "Matcha Latte",
+      "price": "331",
+      "desc": "Matcha tozu, süt ile hazırlanır",
+      "category": "Sıcak Kahvesiz İçecekler"
+    },
+    {
+      "name": "Coconut Blue Matcha",
+      "price": "345",
+      "desc": "Hindistan cevizli ve mavi matchalı köpüklü ferahlatıcı içecek.",
+      "category": "Soğuk Kahvesiz İçecekler"
+    },
+    {
+      "name": "Brazilian Lemonade",
+      "price": "324",
+      "desc": "Lime’ın ferahlatıcı aroması ve yumuşak dokusuyla hazırlanan yaz içeceği",
+      "category": "Soğuk Kahvesiz İçecekler"
+    },
+    {
+      "name": "Tiger Juice",
+      "price": "337",
+      "desc": "Muz ve çileğin uyumuyla hazırlanan ferahlatıcı içecek",
+      "category": "Soğuk Kahvesiz İçecekler"
+    },
+    {
+      "name": "Passion Fizz",
+      "price": "331",
+      "desc": "Çarkıfelek meyvesinin buzla buluştuğu egzotik ve ferahlatıcı bir içecek",
+      "category": "Soğuk Kahvesiz İçecekler"
+    },
+    {
+      "name": "Protein Shake",
+      "price": "350",
+      "desc": "Yer fıstığı ezmesi, muz, bal, kabak çekirdeği proteiniyle hazırlanan badem sütlü içecek",
+      "category": "Soğuk Kahvesiz İçecekler"
+    },
+    {
+      "name": "Pitaya Shake",
+      "price": "331",
+      "desc": "Ejder meyvesi özü ile hazırlanan buzlu içecek",
+      "category": "Soğuk Kahvesiz İçecekler"
+    },
+    {
+      "name": "Cranberry Hibiscus",
+      "price": "331",
+      "desc": "Demlenmiş hibiscus çayı içerisinde; limonata ve kızılcık şurubu ile hazırlanır",
+      "category": "Soğuk Kahvesiz İçecekler"
+    },
+    {
+      "name": "Watermelon Mint",
+      "price": "331",
+      "desc": "Karpuz özü, nane çayı, salatalık ile hazırlanan buzlu içecek",
+      "category": "Soğuk Kahvesiz İçecekler"
+    },
+    {
+      "name": "Sky",
+      "price": "331",
+      "desc": "Greyfurt, limon, portakal ve mürver çiçeği aromasının birleşimiyle hazırlanan ferahlatıcı yaz lezzeti",
+      "category": "Soğuk Kahvesiz İçecekler"
+    },
+    {
+      "name": "Sour Green",
+      "price": "331",
+      "desc": "Yeşil erik, kuzukulağı ve limon aromasının ferahlatıcı tonic ile bir araya geldiği enfes tat",
+      "category": "Soğuk Kahvesiz İçecekler"
+    },
+    {
+      "name": "Paragon Lime",
+      "price": "356",
+      "desc": "Limon, timur berry aroması, lime sorbe ile sıcak günlerde serinlemeniz için mükemmel bir seçenek",
+      "category": "Soğuk Kahvesiz İçecekler"
+    },
+    {
+      "name": "Mojito Hibiscus",
+      "price": "331",
+      "desc": "Yaz aylarının favori içeceği! Yuzu püresi, hibiscus ve mojito şurubu sayesinde ortaya çıkan lezzet",
+      "category": "Soğuk Kahvesiz İçecekler"
+    },
+    {
+      "name": "Lime Breeze",
+      "price": "331",
+      "desc": "Misket limon püresinin kahve ve elma özü ile armonisi",
+      "category": "Soğuk Kahvesiz İçecekler"
+    },
+    {
+      "name": "Bluberry Shake",
+      "price": "350",
+      "desc": "Süt ile yaban mersininin serin ve ferahlatıcı uyumu!",
+      "category": "Soğuk Kahvesiz İçecekler"
+    },
+    {
+      "name": "Yuzu Geisha",
+      "price": "350",
+      "desc": "Espresso, bal, yuzu meyvesi",
+      "category": "Soğuk Kahvesiz İçecekler"
+    },
+    {
+      "name": "Coconut Milk Blend",
+      "price": "203",
+      "desc": "Hindistan cevizi severlerin vazgeçemeyeceği yoğun lezzet!",
+      "category": "Soğuk Kahvesiz İçecekler"
+    },
+    {
+      "name": "Cold Chocolate",
+      "price": "280",
+      "desc": "Süt, çikolata sosu ile hazırlanır",
+      "category": "Soğuk Kahvesiz İçecekler"
+    },
+    {
+      "name": "Iced Chai Tea Latte",
+      "price": "343",
+      "desc": "Aromalı baharatların soğuk süt ve buz parçaları ile buluştuğu içimi yumuşak soğuk çay",
+      "category": "Soğuk Kahvesiz İçecekler"
+    },
+    {
+      "name": "Ube Latte",
+      "price": "331",
+      "desc": "Ube özü, süt, espresso ile hazırlanan buzlu içecek",
+      "category": "Soğuk Kahvesiz İçecekler"
+    },
+    {
+      "name": "Iced Matcha Latte",
+      "price": "343",
+      "desc": "Matcha tozunun sütle bir araya geldiği soğuk, yumuşak içimli lezzet",
+      "category": "Soğuk Kahvesiz İçecekler"
+    },
+    {
+      "name": "Matcha Ube Latte",
+      "price": "350",
+      "desc": "Ube özü, matcha ile hazırlanan buzlu içecek",
+      "category": "Soğuk Kahvesiz İçecekler"
+    },
+    {
+      "name": "Dark Chocolate Milkshake",
+      "price": "284",
+      "desc": "(Orta) Süt, dondurma, çikolata",
+      "category": "Soğuk Kahvesiz İçecekler"
+    },
+    {
+      "name": "Çilekli Milkshake",
+      "price": "284",
+      "desc": "(Orta) Süt, dondurma, çilek",
+      "category": "Soğuk Kahvesiz İçecekler"
+    },
+    {
+      "name": "Eslab Tea",
+      "price": "223",
+      "desc": "Elma, ananas, hünnap, limon otu ile hazırlanır",
+      "category": "Çaylar"
+    },
+    {
+      "name": "Organik Siyah Çay",
+      "price": "102",
+      "desc": "Demlenmiş siyah çay",
+      "category": "Çaylar"
+    },
+    {
+      "name": "Yeşil Çay",
+      "price": "223",
+      "desc": "Demlenmiş yeşil çay",
+      "category": "Çaylar"
+    },
+    {
+      "name": "Moroccan Mint Tea",
+      "price": "223",
+      "desc": "Yeşil çay, elma, nane, gül ile hazırlanır",
+      "category": "Çaylar"
+    },
+    {
+      "name": "Hibiskus Çayı",
+      "price": "223",
+      "desc": "Demlenmiş hibiskus çayı",
+      "category": "Çaylar"
+    },
+    {
+      "name": "Detoks Çayı",
+      "price": "223",
+      "desc": "Yeşil çay, elma, ananas, limon otu, portakal kabuğu ile hazırlanır",
+      "category": "Çaylar"
+    },
+    {
+      "name": "Vanilya Rooibos Çayı",
+      "price": "183",
+      "desc": "Rooibos yaprağı, vanilya parçaları, vanilya aroması. Rooibos Vanilla, Güney Afrika’da yetişen Rooibos bitkisinin Madagascar’dan gelen vanilya parçaları ile harmanlaması ile elde edilir",
+      "category": "Çaylar"
+    },
+    {
+      "name": "Pumpkin Çay",
+      "price": "223",
+      "desc": "Bal kabaklı çay",
+      "category": "Çaylar"
+    },
+    {
+      "name": "Lemon Linden Tea",
+      "price": "223",
+      "desc": "Sıcak servis edilir.",
+      "category": "Çaylar"
+    },
+    {
+      "name": "Pear Apple Tea",
+      "price": "223",
+      "desc": "Sıcak servis edilir.",
+      "category": "Çaylar"
+    },
+    {
+      "name": "Ispanaklı Peynirli Poğaça",
+      "price": "121",
+      "desc": "Taze ıspanak ve peynirle hazırlanan, her ısırıkta ev sıcaklığı hissettiren yumuşacık bir klasik",
+      "category": "Fırın Sandviçler"
+    },
+    {
+      "name": "Tereyağlı Kruvasan",
+      "price": "153",
+      "desc": "Tereyağlı",
+      "category": "Fırın Sandviçler"
+    },
+    {
+      "name": "Anne Poğaçası",
+      "price": "115",
+      "desc": "Havuç, dereotu, maydanoz",
+      "category": "Fırın Sandviçler"
+    },
+    {
+      "name": "Zeytinli Poğaça",
+      "price": "121",
+      "desc": "Kıtır hamur içinde zeytin dolgulu poğaça",
+      "category": "Fırın Sandviçler"
+    },
+    {
+      "name": "Pırasalı Açma",
+      "price": "121",
+      "desc": "Yumuşacık açma hamuru içinde zeytinyağlı pırasa dolgulu dengeli bir lezzet",
+      "category": "Fırın Sandviçler"
+    },
+    {
+      "name": "Kapalı Pizza",
+      "price": "223",
+      "desc": "Bol iç malzemeli, dışı çıtır içi yumuşacık kapalı pizza",
+      "category": "Fırın Sandviçler"
+    },
+    {
+      "name": "Kabaklı Börek",
+      "price": "121",
+      "desc": "Kabaklı iç harç ile hazırlanan börek",
+      "category": "Fırın Sandviçler"
+    },
+    {
+      "name": "3 Peynirli Avokadolu Açma Sandviç",
+      "price": "356",
+      "desc": "Avokado, beyaz peynir, dil peyniri, çedar peyniri ve salatalıktan oluşan vazgeçilmez açma sandviç lezzeti",
+      "category": "Fırın Sandviçler"
+    },
+    {
+      "name": "Hindi Fümeli & Kaşarlı Acuka Sandviç",
+      "price": "369",
+      "desc": "Acuka, beyaz peynir, cheddar ve hindi füme ile hazırlanan sandviç",
+      "category": "Fırın Sandviçler"
+    },
+    {
+      "name": "Eslab Mix Sandviç",
+      "price": "356",
+      "desc": "Ekşi mayalı baget ekmeği, dana jambon, piliç jambon, Macar salamı, cheddar peyniri, dil peyniri, domates, kıvırcık marul",
+      "category": "Fırın Sandviçler"
+    },
+    {
+      "name": "Kore Usulü Tavuk Sandviç",
+      "price": "369",
+      "desc": "Çıtır tavuk, Kore usulü sos ve cheddar peyniri ile dolu dolu bir sandviç",
+      "category": "Fırın Sandviçler"
+    },
+    {
+      "name": "Sebzeli & Peynirli Bazlama Sandviç",
+      "price": "369",
+      "desc": "Bazlama ekmeği içinde peynir ve taze sebzelerle hazırlanan hafif bir sandviç",
+      "category": "Fırın Sandviçler"
+    },
+    {
+      "name": "Pesto & Roastbeef Ciabatta Sandviç",
+      "price": "369",
+      "desc": "Pesto sos, roast beef, taze yeşillikler ve peynirle hazırlanan çıtır ciabatta",
+      "category": "Fırın Sandviçler"
+    },
+    {
+      "name": "Strawberry Pistachio Shortcake",
+      "price": "540",
+      "desc": "Çilek, taze meyveler ve fıstıklı pastacı kreması",
+      "category": "Tatlılar & Kekler"
+    },
+    {
+      "name": "Key Lime Cheesecake",
+      "price": "489",
+      "desc": "Tek kişilik servis edilir.",
+      "category": "Tatlılar & Kekler"
+    },
+    {
+      "name": "Rocher Cheesecake",
+      "price": "502",
+      "desc": "Fındık parçacıklı çikolata kaplama ve kremamsı dokusuyla hazırlanan özel tarif",
+      "category": "Tatlılar & Kekler"
+    },
+    {
+      "name": "Çilekli Tart",
+      "price": "407",
+      "desc": "Kıtır tart hamuru üzerine pastacı kreması ile taze çilekler",
+      "category": "Tatlılar & Kekler"
+    },
+    {
+      "name": "Antep Fıstıklı Tart",
+      "price": "502",
+      "desc": "Kıtır tart hamuru üzerinde fıstıklı pastacı kreması ve Antep fıstığı parçaları",
+      "category": "Tatlılar & Kekler"
+    },
+    {
+      "name": "Chocolate Coffee Bean",
+      "price": "312",
+      "desc": "Kahve ve çikolatayı bir uyumla buluşturan, bitter çikolata kaplı, mousse dolgulu tatlı",
+      "category": "Tatlılar & Kekler"
+    },
+    {
+      "name": "Frambuazlı Pasta",
+      "price": "502",
+      "desc": "Frambuazın tatlı mayhoşluğu, beyaz çikolatanın kadifemsi lezzetiyle buluşuyor",
+      "category": "Tatlılar & Kekler"
+    },
+    {
+      "name": "Çilek & Fıstıklı Crumble",
+      "price": "477",
+      "desc": "Çilek, Antep fıstığı ve kıtır crumble",
+      "category": "Tatlılar & Kekler"
+    },
+    {
+      "name": "Tiramisu",
+      "price": "324",
+      "desc": "Mascarpone kreması, kahve ile hazırlanır",
+      "category": "Tatlılar & Kekler"
+    },
+    {
+      "name": "Muzlu Cicibebeli Puding",
+      "price": "324",
+      "desc": "Muz, bebe bisküvi",
+      "category": "Tatlılar & Kekler"
+    },
+    {
+      "name": "Meyveli Granola",
+      "price": "312",
+      "desc": "Taze çilek, yaban mersini, granola parçaları içeren sağlıklı atıştırmalık",
+      "category": "Tatlılar & Kekler"
+    },
+    {
+      "name": "Çikolatalı Profiterol",
+      "price": "331",
+      "desc": "Özel çiftlik sütü, çikolata, ekler hamuru",
+      "category": "Tatlılar & Kekler"
+    },
+    {
+      "name": "Kakaolu Levain Kuki",
+      "price": "311",
+      "desc": "Zengin çikolata tadıyla, dışı kıtır kıtır, içi yumuşak kuki",
+      "category": "Tatlılar & Kekler"
+    },
+    {
+      "name": "Antep Fıstıklı Kuki",
+      "price": "312",
+      "desc": "Her lokmada hissedilen Antep fıstıklarının eşsiz aroması",
+      "category": "Tatlılar & Kekler"
+    },
+    {
+      "name": "Levain Kuki",
+      "price": "286",
+      "desc": "Çikolata ve ceviz parçalarıyla zenginleştirilmiş kuki",
+      "category": "Tatlılar & Kekler"
+    },
+    {
+      "name": "Muzlu Rulo",
+      "price": "324",
+      "desc": "Pandispanya arasına pastacı kreması, muz",
+      "category": "Tatlılar & Kekler"
+    },
+    {
+      "name": "Mozaik Pasta",
+      "price": "324",
+      "desc": "Çikolata, bisküvi, Antep fıstığı",
+      "category": "Tatlılar & Kekler"
+    },
+    {
+      "name": "Beyaz Çikolatalı Brownie",
+      "price": "445",
+      "desc": "Beyaz Belçika çikolatası ile hazırlanır",
+      "category": "Tatlılar & Kekler"
+    },
+    {
+      "name": "Çikolatalı Ekler",
+      "price": "267",
+      "desc": "Üstü çikolata kaplı, içi pastacı kreması dolgulu",
+      "category": "Tatlılar & Kekler"
+    },
+    {
+      "name": "Mermer Kek",
+      "price": "248",
+      "desc": "Bitter çikolata, Hindistan cevizi aroması",
+      "category": "Tatlılar & Kekler"
+    },
+    {
+      "name": "İzmir Bombası",
+      "price": "216",
+      "desc": "Akışkan bitter çikolata ile ince hamurun buluşmasıyla hazırlanan atıştırmalık kurabiye",
+      "category": "Tatlılar & Kekler"
+    },
+    {
+      "name": "Limonlu Haşhaşlı Kek",
+      "price": "324",
+      "desc": "Üzeri şeker kaplamalı limonlu haşhaşlı kek",
+      "category": "Tatlılar & Kekler"
+    },
+    {
+      "name": "Sarelle Cup",
+      "price": "248",
+      "desc": "Cup içinde sunulan akışkan Sarelle çikolatası",
+      "category": "Tatlılar & Kekler"
+    },
+    {
+      "name": "Vişneli Çikolatalı Crumble",
+      "price": "345",
+      "desc": "Yoğun çikolata, vişne ve kıtır crumble",
+      "category": "Tatlılar & Kekler"
+    },
+    {
+      "name": "Frambuaz & Fıstıklı Cheesecake",
+      "price": "426",
+      "desc": "Frambuazın hafif ekşiliğinin, cheesecake ve Antep fıstığıyla buluştuğu unutulmaz lezzet",
+      "category": "Cheesecakes"
+    },
+    {
+      "name": "Bask Cheesecake",
+      "price": "405",
+      "desc": "Klasikleşen eşsiz lezzet San Sebastian Cheesecake, kremamsı dokusuyla tatlı molalarınıza keyif katıyor.",
+      "category": "Cheesecakes"
+    },
+    {
+      "name": "Süper Oreo Cheesecake (Dilim)",
+      "price": "426",
+      "desc": "Oreo bisküvi, bitter çikolata, cheesecake peyniri ile hazırlanır",
+      "category": "Cheesecakes"
+    },
+    {
+      "name": "Kırmızı Cheesecake",
+      "price": "426",
+      "desc": "Krema, beyaz çikolata ve frambuazın, yumuşacık krımızı kek ile buluştuğu unutulmaz bir lezzet",
+      "category": "Cheesecakes"
+    },
+    {
+      "name": "Espressolab Kuru Yemiş",
+      "price": "210",
+      "desc": "Kuru yemişlerden oluşan atıştırmalık",
+      "category": "Atıştırmalıklar"
+    },
+    {
+      "name": "Espressolab x Fropie Yer Fıstığı Ve Çilek Bar (35 gr.)",
+      "price": "127",
+      "desc": "Yer fıstığı ve çilekli pratik atıştırmalık bar",
+      "category": "Atıştırmalıklar"
+    },
+    {
+      "name": "Espressolab x Fropie Badem Ve Kakao Bar (35 gr.)",
+      "price": "127",
+      "desc": "Badem ve kakao içeren atıştırmalık bar",
+      "category": "Atıştırmalıklar"
+    },
+    {
+      "name": "Espressolab x Fropie Domatesli Yulaf Küpü (35 gr.)",
+      "price": "127",
+      "desc": "Domates aromalı çıtır yulaf küpleri",
+      "category": "Atıştırmalıklar"
+    },
+    {
+      "name": "Bitter Çikolatalı El Yapımı Gofret",
+      "price": "223",
+      "desc": "EspressoLab el yapımı gofret",
+      "category": "Atıştırmalıklar"
+    },
+    {
+      "name": "Moms Coconut & Lemon",
+      "price": "121",
+      "desc": "Elma suyu, kinoa unu, Hindistan cevizi, sızma zeytinyağı, badem, chia tohumu, limon yağı, tuz içeren, glutensiz ve şeker ilavesiz atıştırmalık",
+      "category": "Atıştırmalıklar"
+    },
+    {
+      "name": "Moms Cookie Brownie",
+      "price": "121",
+      "desc": "Anne kurabiyeli",
+      "category": "Atıştırmalıklar"
+    },
+    {
+      "name": "Moms Yaban Mersinli Granola Bar",
+      "price": "121",
+      "desc": "(40 gr.) Glutensiz yulaf ezmesi, elma suyu konsantresi, sızma zeytinyağı, yüksek mavi yemiş (yaban mersini), Hindistan cevizi, fındık, badem, ceviz, ay çekirdeği, keten tohumu, kuş üzümü, tarçın",
+      "category": "Atıştırmalıklar"
+    },
+    {
+      "name": "Moms Yer Fıstıklı Granola Bar",
+      "price": "121",
+      "desc": "(40 gr.) Glutensiz yulaf ezmesi, elma suyu konsantresi, sızma zeytinyağı, yer fıstığı, kakao, keten tohumu",
+      "category": "Atıştırmalıklar"
+    },
+    {
+      "name": "Snack Honey Sesame",
+      "price": "140",
+      "desc": "Ballı, susamlı atıştırmalık",
+      "category": "Atıştırmalıklar"
+    },
+    {
+      "name": "Caramel Waffle",
+      "price": "108",
+      "desc": "Paketli ürün",
+      "category": "Atıştırmalıklar"
+    },
+    {
+      "name": "Çilek Kurusu",
+      "price": "223",
+      "desc": "Atıştırmal�ık keyfi",
+      "category": "Atıştırmalıklar"
+    },
+    {
+      "name": "Fit Brownie (40 gr.)",
+      "price": "235",
+      "desc": "Hurma, kuru üzüm, fındık, organik ham kakao, Hindistan cevizi",
+      "category": "Atıştırmalıklar"
+    },
+    {
+      "name": "Tohumlu Kraker (35 gr.)",
+      "price": "235",
+      "desc": "Karabuğday unu, susam, çörek otu, keten tohumu, himalaya tuzu, zeytinyağı",
+      "category": "Atıştırmalıklar"
+    },
+    {
+      "name": "Şekerli Badem (120 gr.)",
+      "price": "318",
+      "desc": "Çıtır bademin şeker kaplamasıyla buluştuğu tatlı atıştırmalık",
+      "category": "Atıştırmalıklar"
+    },
+    {
+      "name": "Kurutulmuş Kale Cipsi",
+      "price": "216",
+      "desc": "Çıtır, kurutulmuş kale cipsi",
+      "category": "Atıştırmalıklar"
+    },
+    {
+      "name": "Kurutulmuş Pancar Cipsi",
+      "price": "216",
+      "desc": "Çıtır, kurutulmuş pancar cipsi",
+      "category": "Atıştırmalıklar"
+    },
+    {
+      "name": "Snack Olive Oregano (Zeytinli-Kekikli)",
+      "price": "140",
+      "desc": "Zeytin ve kekik aromalı atıştırmalık",
+      "category": "Atıştırmalıklar"
+    },
+    {
+      "name": "Gigi's Crunchies Wild Berry (45 gr.)",
+      "price": "254",
+      "desc": "Orman meyveli çıtır atıştırmalık",
+      "category": "Atıştırmalıklar"
+    },
+    {
+      "name": "Gigi's Crunchies Peanut Butter (45 gr.)",
+      "price": "254",
+      "desc": "Fıstık ezmeli çıtır atıştırmalık",
+      "category": "Atıştırmalıklar"
+    },
+    {
+      "name": "Yaban Mersini Kurusu (7 gr.)",
+      "price": "223",
+      "desc": "Doğal ve katkısız yaban mersini atıştırmalığı",
+      "category": "Atıştırmalıklar"
+    },
+    {
+      "name": "Fropie Zeytinli Yulaf Küpü (35 gr.)",
+      "price": "127",
+      "desc": "Zeytin aromalı çıtır yulaf küpleri",
+      "category": "Atıştırmalıklar"
+    },
+    {
+      "name": "Kavrulmuş Kestane",
+      "price": "155",
+      "desc": "Doğal ve özenle kavrulmuş kestane atıştırmalığı.",
+      "category": "Atıştırmalıklar"
+    },
+    {
+      "name": "Günlük Süt (1 L.)",
+      "price": "216",
+      "desc": "Espressolab'in çiftliğinde üretilen günlük pastörize edilmiş cam şişe süt",
+      "category": "Şişelenmiş İçecekler"
+    },
+    {
+      "name": "Laktozsuz Günlük Süt ( 1L.)",
+      "price": "216",
+      "desc": "Kendi çiftliğimizde ürettiğimiz, cam şişede laktozsuz günlük süt",
+      "category": "Şişelenmiş İçecekler"
+    },
+    {
+      "name": "Espressolab Organik Kırmızı Meyve-Sebze Suyu ( 20 cl.)",
+      "price": "140",
+      "desc": "Muz, çilek, elma, karpuz ve kırmızı pancarla hazırlanan organik kırmızı meyve-sebze suyu",
+      "category": "Şişelenmiş İçecekler"
+    },
+    {
+      "name": "Espressolab Organik Yeşil Meyve-Sebze Suyu (20 cl.)",
+      "price": "140",
+      "desc": "Karalahana, ıspanak, elma ve zencefille hazırlanan organik yeşil meyve-sebze suyu",
+      "category": "Şişelenmiş İçecekler"
+    },
+    {
+      "name": "Green Shot (20 cl.)",
+      "price": "166",
+      "desc": "Maydanoz, matcha, elma sirkesi ile güne enerjik bir başlangıç yapmanızı sağlar.",
+      "category": "Şişelenmiş İçecekler"
+    },
+    {
+      "name": "Churcill (25 cl.)",
+      "price": "204",
+      "desc": "Soda ve limonla hazırlanan ferahlatıcı içecek",
+      "category": "Şişelenmiş İçecekler"
+    },
+    {
+      "name": "OKF Aloe Vera Suyu",
+      "price": "318",
+      "desc": "Aloe vera suyu",
+      "category": "Şişelenmiş İçecekler"
+    },
+    {
+      "name": "OKF Hindistan Cevizi Suyu (50 cl.)",
+      "price": "318",
+      "desc": "Hindistan cevizi aromalı ferahlatıcı içecek",
+      "category": "Şişelenmiş İçecekler"
+    },
+    {
+      "name": "Mineral Su (25 cl.)",
+      "price": "83",
+      "desc": "Doğal mineralli ferahlatıcı maden suyu",
+      "category": "Şişelenmiş İçecekler"
+    },
+    {
+      "name": "Sorbe Natural Sıradışı Detox (25 cl.)",
+      "price": "191",
+      "desc": "Zencefil, zerdeçal, yeşil elma, çeşitli baharatlar",
+      "category": "Şişelenmiş İçecekler"
+    },
+    {
+      "name": "Sorbe Natural Vitamin Deposu (25 cl.)",
+      "price": "191",
+      "desc": "Demirhindi, hibiscus, sumak, çeşitli baharatlar",
+      "category": "Şişelenmiş İçecekler"
+    },
+    {
+      "name": "Arizona Iced Tea Peach (50 cl.)",
+      "price": "318",
+      "desc": "Şeftali aromalı soğuk çay",
+      "category": "Şişelenmiş İçecekler"
+    },
+    {
+      "name": "Arizona Iced Tea Blueberry White Tea (50 cl.)",
+      "price": "318",
+      "desc": "Yaban mersini aromalı soğuk, beyaz çay",
+      "category": "Şişelenmiş İçecekler"
+    },
+    {
+      "name": "Sanpelllegrino Aranciata (50 cl.)",
+      "price": "178",
+      "desc": "Kan portakalı aromalı ferahlatıcı gazlı içecek",
+      "category": "Şişelenmiş İçecekler"
+    },
+    {
+      "name": "San Pellegrino Maden Suyu (25 cl.)",
+      "price": "169",
+      "desc": "Cam şişe",
+      "category": "Şişelenmiş İçecekler"
+    },
+    {
+      "name": "Uludağ Premium Su (50 cl.)",
+      "price": "70",
+      "desc": "Cam şişe",
+      "category": "Şişelenmiş İçecekler"
+    },
+    {
+      "name": "Sade Kombucha (50 cl.)",
+      "price": "254",
+      "desc": "Cam şişe",
+      "category": "Şişelenmiş İçecekler"
+    },
+    {
+      "name": "Kombucha Ananas Hibiscus",
+      "price": "254",
+      "desc": "Ananasın tropik lezzeti, hibiscus dokunuşuyla ferahlatıcı kombucha",
+      "category": "Şişelenmiş İçecekler"
+    },
+    {
+      "name": "Chocomel Çikolatalı İçecek (25 cl.)",
+      "price": "166",
+      "desc": "Yoğun kakao tadıyla öne çıkan çikolatalı içecek",
+      "category": "Şişelenmiş İçecekler"
+    },
+    {
+      "name": "Chiforest Şeftali Aromalı İçecek",
+      "price": "235",
+      "desc": "Şeftali aromalı gazlı içecek",
+      "category": "Şişelenmiş İçecekler"
+    },
+    {
+      "name": "Chiforest Üzüm Aromalı İçecek",
+      "price": "235",
+      "desc": "Üzüm aromalı gazlı içecek",
+      "category": "Şişelenmiş İçecekler"
+    },
+    {
+      "name": "Chiforest Liçi Aromalı İçecek",
+      "price": "235",
+      "desc": "Liçi aromalı gazlı içecek",
+      "category": "Şişelenmiş İçecekler"
+    },
+    {
+      "name": "Matcha Shot",
+      "price": "170",
+      "desc": "Matcha ve meyveli içecek",
+      "category": "Şişelenmiş İçecekler"
+    },
+    {
+      "name": "Ginger Shot",
+      "price": "170",
+      "desc": "Zencefilli içecek",
+      "category": "Şişelenmiş İçecekler"
+    },
+    {
+      "name": "Türk Kahvesi (200 gr.)",
+      "price": "381",
+      "desc": "Brasiz Santos çekirdeğinden üretilmiştir. Özel teneke kutusunda gönderilmektedir.",
+      "category": "Paket Kahveler"
+    },
+    {
+      "name": "Türk Kahvesi (1 kg.)",
+      "price": "1620",
+      "desc": "Paket",
+      "category": "Paket Kahveler"
+    },
+    {
+      "name": "Colombia Decaf (250 gr.)",
+      "price": "635",
+      "desc": "Narenciye aromasına sahiptir.",
+      "category": "Paket Kahveler"
+    },
+    {
+      "name": "Pratik Kenya Filtre Kahve (5 Adet)",
+      "price": "312",
+      "desc": "Böğürtlen, yeşil üzüm, sert çekirdekli meyve aromalarına sahiptir.",
+      "category": "Paket Kahveler"
+    },
+    {
+      "name": "Pratik Colombia Filtre Kahve (5 Adet)",
+      "price": "312",
+      "desc": "Kuru üzüm, erik aromalarına sahiptir.",
+      "category": "Paket Kahveler"
+    },
+    {
+      "name": "Pratik Ethiopia Filtre Kahve (5 Adet)",
+      "price": "312",
+      "desc": "Çikolata, turunçgiller, yaban mersini aromalarına sahiptir.",
+      "category": "Paket Kahveler"
+    }
+  ]
+},
+
   "7063": {
     name: "Haus Des Döners Beylikdüzü",
     sourceUrl: "https://www.migros.com.tr/yemek/haus-des-doner-beylikduzu-cumhuriyet-mah-st-30312",
