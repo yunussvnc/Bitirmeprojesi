@@ -1470,3 +1470,6 @@ Exact kayıt `Barış, Bestekar Sk. No:1 A Blok, 34250 Beylikdüzü/İstanbul`, 
 
 ## SAĞDIÇLAR BALIKÇILIK ID 7011 strict HOLD
 Exact kayıt `Rüzgarlıbahçe Mah. Cumhuriyet Cad. No:143/B Kavacık Beykoz/İstanbul`, `+90 216 322 95 30`; resmi iletişim sayfası bu adres ve telefonu doğruluyor. İşletme kaynaklarda deniz ürünleri toptancısı/balıkçılık firması olarak geçiyor; herkese açık restoran yiyecek menüsü ve item-level satış fiyatları yok. Balık ürünlerini restoran menüsü gibi uydurmamak için **override eklenmedi; strict HOLD**.
+
+## YALLA FALAFEL ID 7010 strict HOLD
+Exact kayıt `Cihannüma Mahallesi, Serencebey Yokuşu, Fırat İş Merkezi, Yıldız, No:1/B, 34022 Beşiktaş/İstanbul`, `+90 506 463 53 92`; resmi `@yallafalafel_istanbul`, Culinary Backstreets ve Snapchat kayıtlarıyla eşleşti. Ancak 2020 tarihli üçüncü taraf içeriklerdeki fiyatlar güncel değildir; güncel Instagram profili menü/ürün fiyatı yayınlamıyor ve herkese açık tam item-level fiyatlı güncel menü bulunamadı. **Override eklenmedi; strict HOLD**.
