@@ -1263,3 +1263,6 @@ Exact kayıt `İHSAN Apartmanı, Abbasağa, Yıldız Cd. No:1, 34024 Beşiktaş/
 
 ## Beylerbeyi Profiterol Kavacık ID 7081 strict HOLD
 Exact kayıt `Çubuklu, Orhan Veli Kanık Cd. No:87/A, 34810 Beykoz/İstanbul`, `+90 216 693 33 37`; Yandex ve resmi Instagram `@beylerbeyiprofiterolkavacik_` aynı şube kimliğini doğruluyor. Yemeksepeti’nde birden çok Beylerbeyi Profiterol vendorı bulunmasına rağmen s0j4/owe4/moqo/v0nl/xc1p sayfalarında exact Kavacık No:87/A adres-telefon metadata’sı kanıtlanamadı. Güncel fiyatlı menü vendorı ile exact branch paritesi kurulamadığından ürün/fiyat aktarılmadı; strict HOLD.
+
+## Kocaman Karadeniz Restaurant ID 7080 acceptance
+Exact kayıt `Yakuplu, Osmangazi Cd. No:1/B, 34524 Beylikdüzü/İstanbul`, `+90 212 864 16 94`; resmî kocamanrestaurant.com, Restoranım ve Migros branch-labeled kaynakları kimliği doğruluyor. Yemeksepeti canlı menüsünden kahvaltılıklar, çorbalar, ana yemekler, Karadeniz pideleri, ızgara, et dönerler, yan ürünler, tatlılar ve içecekler kategorilerinde **87 ürün ve güncel fiyat** aktarıldı. Poşet satırı dışlandı. `verifiedAt` canlı doğrulama tarihi `2026-08-25`.

@@ -78181,4 +78181,448 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
   ]
 },
 
+  "7080": {
+  "name": "Kocaman Karadeniz Restaurant Kuru Fasülye Trabzon Döneri Pide Kahvaltı Kuymak",
+  "sourceUrl": "https://www.yemeksepeti.com/restaurant/wykz/kocaman-karadeniz-mutfagi-wykz",
+  "sourceName": "Yemeksepeti canlı menüsü; resmî kocamanrestaurant.com, Restoranım ve Migros branch-labeled Kocaman Karadeniz Yemekleri kaynakları exact Yakuplu, Osmangazi Cd. No:1/B, 34524 Beylikdüzü / +90 212 864 16 94 kimliğini doğruluyor. 87 gıda ürünü aktarıldı; poşet satırı dışlandı.",
+  "verifiedAt": "2026-08-25",
+  "items": [
+    {
+      "name": "Kara Fırın Simidi",
+      "price": "29.75",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Kahvaltı Tabağı",
+      "price": "327.25",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Söğüş Tabağı (Tek Kişilik)",
+      "price": "140.25",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Trabzon Tereyağı",
+      "price": "93.50",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Peynir Tabağı",
+      "price": "161.50",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Sigara Böreği - Kalem Börek",
+      "price": "161.50",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Haşlanmış Yumurta",
+      "price": "25.50",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Zeytin Tabağı",
+      "price": "89.25",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Trabzon Yayla Bal & Trabzon Tereyağı",
+      "price": "153",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Pekmez & Tahin",
+      "price": "76.50",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Kaşarlı Simit",
+      "price": "89.25",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Tereyağlı Peynirli Yumurta",
+      "price": "297.50",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Tereyağlı Yumurta",
+      "price": "212.50",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Tereyağlı Soğanlı Yumurta",
+      "price": "297.50",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Tereyağlı Kavurmalı Menemen",
+      "price": "391",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Tereyağlı Kıymalı Yumurta",
+      "price": "348.50",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Tereyağlı Sade Menemen",
+      "price": "289",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Tereyağlı Sucuklu Menemen",
+      "price": "382.50",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Tereyağlı Göz Yumurta",
+      "price": "212.50",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Soğuk Sandviç",
+      "price": "144.50",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Taş Fırın Simit Sandviç",
+      "price": "144.50",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Patates Kızartması",
+      "price": "195.50",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Yöresel Tereyağlı Kuymak",
+      "price": "323",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Tereyağlı Mercimek Çorbası",
+      "price": "153",
+      "category": "Çorbalar"
+    },
+    {
+      "name": "Ezogelin Çorbası",
+      "price": "153",
+      "category": "Çorbalar"
+    },
+    {
+      "name": "Tavuk Suyu Çorbası",
+      "price": "199.75",
+      "category": "Çorbalar"
+    },
+    {
+      "name": "Karalahana Çorbası",
+      "price": "199.75",
+      "category": "Çorbalar"
+    },
+    {
+      "name": "Etli Karalahana Sarma",
+      "price": "340",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Muhteşem Üçlü Kocaman Tabak",
+      "price": "569.50",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Meşhur Çayeli Kuru Fasulye",
+      "price": "340",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Meşhur Rize Kavurması",
+      "price": "565.25",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "İzmir Köftesi",
+      "price": "382.50",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Sebzeli Tavuk",
+      "price": "348.50",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Etli Sebzeli Güveç",
+      "price": "459",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Sebzeli Misket Köfte",
+      "price": "382.50",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Turşu Kavurma",
+      "price": "272",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Macar Kebabı",
+      "price": "425",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Tereyağlı Pirinç Pilavı",
+      "price": "153",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Pilav Üstü Kavurma",
+      "price": "433.50",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Pilav Üstü Çayeli Kuru Fasulye",
+      "price": "306",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Fırın Köfte",
+      "price": "382.50",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Fırın Tavuk",
+      "price": "348.50",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "İç Pilav",
+      "price": "204",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Bulgur Pilavı",
+      "price": "161.50",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Trabzon Usulü Kaşarlı Taş Fırın Pidesi",
+      "price": "357",
+      "category": "Karadeniz Pide Çeşitleri"
+    },
+    {
+      "name": "Trabzon Usulü Taş Fırın Sürmene Pide",
+      "price": "476",
+      "category": "Karadeniz Pide Çeşitleri"
+    },
+    {
+      "name": "Kuşbaşılı Trabzon Usulü Taş Fırın Pidesi",
+      "price": "476",
+      "category": "Karadeniz Pide Çeşitleri"
+    },
+    {
+      "name": "Uzun Kavurmalı Kaşarlı Pide - Trabzon Usulü Taş Fırın Pidesi",
+      "price": "476",
+      "category": "Karadeniz Pide Çeşitleri"
+    },
+    {
+      "name": "Taş Fırında Bafra Pidesi",
+      "price": "459",
+      "category": "Karadeniz Pide Çeşitleri"
+    },
+    {
+      "name": "Trabzon Usulü Kuşbaşılı Kaşarlı Taş Fırın Pidesi",
+      "price": "476",
+      "category": "Karadeniz Pide Çeşitleri"
+    },
+    {
+      "name": "Sebzeli Karadeniz Pidesi",
+      "price": "357",
+      "category": "Karadeniz Pide Çeşitleri"
+    },
+    {
+      "name": "Trabzon Usulü Kavurmalı Kaşarlı Taş Fırın Pidesi",
+      "price": "476",
+      "category": "Karadeniz Pide Çeşitleri"
+    },
+    {
+      "name": "Trabzon Usulü Taş Fırın Kıymalı Pide (Kapalı)",
+      "price": "442",
+      "category": "Karadeniz Pide Çeşitleri"
+    },
+    {
+      "name": "Trabzon Usulü Taş Fırın Kavurmalı Pide (Kapalı)",
+      "price": "476",
+      "category": "Karadeniz Pide Çeşitleri"
+    },
+    {
+      "name": "Kapalı Kıymalı Kaşarlı Trabzon Usulü Taş Fırın Pidesi",
+      "price": "442",
+      "category": "Karadeniz Pide Çeşitleri"
+    },
+    {
+      "name": "Trabzon Karışık Karadeniz Pidesi",
+      "price": "476",
+      "category": "Karadeniz Pide Çeşitleri"
+    },
+    {
+      "name": "Sucuk Kaşarlı Karadeniz Pidesi",
+      "price": "476",
+      "category": "Karadeniz Pide Çeşitleri"
+    },
+    {
+      "name": "Kuşbaşı Kaşarlı Trabzon Usulü Taş Fırın Pidesi",
+      "price": "433.50",
+      "category": "Karadeniz Pide Çeşitleri"
+    },
+    {
+      "name": "Kıymalı Kaşarlı (Kapalı) Karadeniz Pidesi",
+      "price": "442",
+      "category": "Karadeniz Pide Çeşitleri"
+    },
+    {
+      "name": "Trabzon Akçaabat Izgara Köfte",
+      "price": "488.75",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "Tombik Ekmek Arası Trabzon Et Döner (80 gr.)",
+      "price": "399.50",
+      "category": "Et Dönerler"
+    },
+    {
+      "name": "Trabzon Et Döner Dürüm (80 gr.)",
+      "price": "399.50",
+      "category": "Et Dönerler"
+    },
+    {
+      "name": "Trabzon Et Döner Dürüm (100 gr.)",
+      "price": "442",
+      "category": "Et Dönerler"
+    },
+    {
+      "name": "Trabzon Et Döneri (150 gr.)",
+      "price": "616.25",
+      "category": "Et Dönerler"
+    },
+    {
+      "name": "Tombik Ekmek Arası Trabzon Et Döner (100 gr.)",
+      "price": "442",
+      "category": "Et Dönerler"
+    },
+    {
+      "name": "Trabzon Et Döneri (100 gr.)",
+      "price": "442",
+      "category": "Et Dönerler"
+    },
+    {
+      "name": "Tombik Ekmek Arası Trabzon Et Döner (65 gr.)",
+      "price": "357",
+      "category": "Et Dönerler"
+    },
+    {
+      "name": "Trabzon Döneri Pilavlı ( 100 GR )",
+      "price": "442",
+      "category": "Et Dönerler"
+    },
+    {
+      "name": "Trabzon Döneri Pilavlı ( 150 GR )",
+      "price": "616.25",
+      "category": "Et Dönerler"
+    },
+    {
+      "name": "Karışık Turşu",
+      "price": "170",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Cacık",
+      "price": "170",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Manda Yoğurdu",
+      "price": "199.75",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Çoban Salata",
+      "price": "170",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Hamsiköy Sütlacı",
+      "price": "195.50",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Laz Böreği",
+      "price": "195.50",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Fındıklı Trabzon Baklavası",
+      "price": "195.50",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Fındıklı Trabzon Baklavası (1 kg.)",
+      "price": "552.50",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Laz Böreği (1 kg.)",
+      "price": "935",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Coca-Cola Zero Sugar (33 cl.)",
+      "price": "102",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Coca-Cola (33 cl.)",
+      "price": "102",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Fanta (33 cl.)",
+      "price": "102",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Sprite (33 cl.)",
+      "price": "102",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Lipton Ice Tea (33 cl.)",
+      "price": "102",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Niğde Gazozu (25 cl.)",
+      "price": "76.50",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Soda (20 cl.)",
+      "price": "51",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Mevsimlik Komposto",
+      "price": "102",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Su (50 cl.)",
+      "price": "34",
+      "category": "İçecekler"
+    }
+  ]
+},
+
 };
