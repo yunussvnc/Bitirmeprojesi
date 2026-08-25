@@ -1554,3 +1554,6 @@ Hentzer API kaydı `Doğan Park Evleri, Adnan Kahveci, Yavuz Sultan Selim Blv. 4
 
 ## CAFE PENABER ID 6982 strict HOLD
 Hentzer API kaydı `Şehit Muhtar Mahallesi, Nane Sokak No:19, 34421 Beyoğlu/İstanbul`, `+90 546 677 67 29`; Cybo ve diğer yerel işletme kayıtları aynı adres/telefonu doğruluyor. Restoranim, Yandex ve Restaurant Guru işletmeyi doğrulasa da son bir yıl içinde kamuya açık item-level fiyatlı menü bulunamadı; kaynaklar yalnızca kafe türü ve genel içecek açıklamaları veriyor. **Override eklenmedi; strict HOLD**.
+
+## BENY BURGER HOUSE & CAFETERIA ID 6981 strict HOLD
+Hentzer kaydı `Vişnezade, Şair Nedim Cd. No:49/A, 34357 Beşiktaş/İstanbul`, `+90 544 916 77 75`; resmi beny.com.tr aynı exact adres ve telefonu doğruluyor. Resmi sitede burger, fries, breakfast, içecek ve tatlı kategorileri ile ürün adları görünmesine rağmen fiyatlar yayınlanmıyor; son bir yıl içinde aynı şubeye ait kamuya açık item-level fiyatlı menü bulunamadı. Fiyat uydurmamak için **override eklenmedi; strict HOLD**.
