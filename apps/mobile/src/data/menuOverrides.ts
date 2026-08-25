@@ -46675,6 +46675,395 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       {name: "Ekler (1 kg.)", price: "1.100 TL", category: "Eklerler", desc: "1 kg. olarak servis edilir."},
     ],
   },
+  "7148": {
+    "name": "Antephan Künefe Bereç",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/tj0v/antephan-kunefe-and-katmer-tj0v",
+    "sourceName": "Yemeksepeti canlı menüsü; exact Bereç şubesi Hentzer ve resmi @antephanberec adres/telefon köprüsüyle doğrulandı",
+    "verifiedAt": "2026-08-25",
+    "items": [
+      {
+        "name": "Cevizli Künefe (1 Kişilik)",
+        "price": "610 TL",
+        "category": "Künefeler (1 Kişilik)"
+      },
+      {
+        "name": "Çıtır Hasır Künefe (1 Kişilik)",
+        "price": "610 TL",
+        "category": "Künefeler (1 Kişilik)"
+      },
+      {
+        "name": "Dondurmalı Burger Künefe (1 Kişilik)",
+        "price": "650 TL",
+        "category": "Künefeler (1 Kişilik)"
+      },
+      {
+        "name": "Fıstıklı Kadayıf Künefe (1 Kişilik)",
+        "price": "625 TL",
+        "category": "Künefeler (1 Kişilik)"
+      },
+      {
+        "name": "Fıstıkzade Künefe (1 Kişilik)",
+        "price": "675 TL",
+        "category": "Künefeler (1 Kişilik)"
+      },
+      {
+        "name": "Kaymaklı Ezme (1 Kişilik)",
+        "price": "750 TL",
+        "category": "Künefeler (1 Kişilik)"
+      },
+      {
+        "name": "Kaymaklı Paşa Künefe (1 Kişilik)",
+        "price": "610 TL",
+        "category": "Künefeler (1 Kişilik)"
+      },
+      {
+        "name": "Peynirli Künefe (1 Kişilik)",
+        "price": "465 TL",
+        "category": "Künefeler (1 Kişilik)"
+      },
+      {
+        "name": "Peynlirli Paşa Künefe (1 Kişilik)",
+        "price": "610 TL",
+        "category": "Künefeler (1 Kişilik)"
+      },
+      {
+        "name": "Special Künefe (1 Kişilik)",
+        "price": "610 TL",
+        "category": "Künefeler (1 Kişilik)"
+      },
+      {
+        "name": "Sultanzade Künefe (1 Kişilik)",
+        "price": "675 TL",
+        "category": "Künefeler (1 Kişilik)"
+      },
+      {
+        "name": "Yeşil Sultan Künefe (1 Kişilik)",
+        "price": "675 TL",
+        "category": "Künefeler (1 Kişilik)"
+      },
+      {
+        "name": "Çikolatalı Künefe (1 Kişilik)",
+        "price": "640 TL",
+        "category": "Künefeler (1 Kişilik)"
+      },
+      {
+        "name": "Yarı Yarıya Künefe",
+        "price": "610 TL",
+        "category": "Künefeler (1 Kişilik)"
+      },
+      {
+        "name": "Antephan Özel Künefe (2 Kişilik)",
+        "price": "1.350 TL",
+        "category": "Künefeler (2 Kişilik)"
+      },
+      {
+        "name": "Cevizli Künefe (2 Kişilik)",
+        "price": "1.220 TL",
+        "category": "Künefeler (2 Kişilik)"
+      },
+      {
+        "name": "Çıtır Hasır Künefe (2 Kişilik)",
+        "price": "1.220 TL",
+        "category": "Künefeler (2 Kişilik)"
+      },
+      {
+        "name": "Dondurmalı Burger Künefe (2 Kişilik)",
+        "price": "1.300 TL",
+        "category": "Künefeler (2 Kişilik)"
+      },
+      {
+        "name": "Fıstıklı Kadayıf Künefe (2 Kişilik)",
+        "price": "1.250 TL",
+        "category": "Künefeler (2 Kişilik)"
+      },
+      {
+        "name": "Fıstıkzade Künefe (2 Kişilik)",
+        "price": "1.350 TL",
+        "category": "Künefeler (2 Kişilik)"
+      },
+      {
+        "name": "Kaymaklı Ezme (2 Kişilik)",
+        "price": "1.450 TL",
+        "category": "Künefeler (2 Kişilik)"
+      },
+      {
+        "name": "Kaymaklı Paşa Künefe (2 Kişilik)",
+        "price": "1.220 TL",
+        "category": "Künefeler (2 Kişilik)"
+      },
+      {
+        "name": "Peynirli Künefe (2 Kişilik)",
+        "price": "930 TL",
+        "category": "Künefeler (2 Kişilik)"
+      },
+      {
+        "name": "Peynlirli Paşa Künefe (2 Kişilik)",
+        "price": "1.220 TL",
+        "category": "Künefeler (2 Kişilik)"
+      },
+      {
+        "name": "Special Künefe (2 Kişilik)",
+        "price": "1.220 TL",
+        "category": "Künefeler (2 Kişilik)"
+      },
+      {
+        "name": "Sultanzade Künefe (2 Kişilik)",
+        "price": "1.350 TL",
+        "category": "Künefeler (2 Kişilik)"
+      },
+      {
+        "name": "Üçü Bir Arada Künefe (2 Kişilik)",
+        "price": "1.310 TL",
+        "category": "Künefeler (2 Kişilik)"
+      },
+      {
+        "name": "Yeşil Sultan Künefe (2 Kişilik)",
+        "price": "1.350 TL",
+        "category": "Künefeler (2 Kişilik)"
+      },
+      {
+        "name": "Yarı Yarıya Künefe (2 Kişilik)",
+        "price": "1.220 TL",
+        "category": "Künefeler (2 Kişilik)"
+      },
+      {
+        "name": "Antephan Özel Künefe (3 Kişilik)",
+        "price": "2.000 TL",
+        "category": "Künefeler (3 Kişilik)"
+      },
+      {
+        "name": "Cevizli Künefe (3 Kişilik)",
+        "price": "1.825 TL",
+        "category": "Künefeler (3 Kişilik)"
+      },
+      {
+        "name": "Çıtır Hasır Künefe (3 Kişilik)",
+        "price": "1.825 TL",
+        "category": "Künefeler (3 Kişilik)"
+      },
+      {
+        "name": "Dondurmalı Burger Künefe (3 Kişilik)",
+        "price": "1.925 TL",
+        "category": "Künefeler (3 Kişilik)"
+      },
+      {
+        "name": "Fıstıklı Kadayıf Künefe (3 Kişilik)",
+        "price": "1.900 TL",
+        "category": "Künefeler (3 Kişilik)"
+      },
+      {
+        "name": "Fıstıkzade Künefe (3 Kişilik)",
+        "price": "2.000 TL",
+        "category": "Künefeler (3 Kişilik)"
+      },
+      {
+        "name": "Kaymaklı Ezme (3 Kişilik)",
+        "price": "2.200 TL",
+        "category": "Künefeler (3 Kişilik)"
+      },
+      {
+        "name": "Kaymaklı Paşa Künefe (3 Kişilik)",
+        "price": "1.825 TL",
+        "category": "Künefeler (3 Kişilik)"
+      },
+      {
+        "name": "Peynirli Künefe (3 Kişilik)",
+        "price": "1.400 TL",
+        "category": "Künefeler (3 Kişilik)"
+      },
+      {
+        "name": "Peynlirli Paşa Künefe (3 Kişilik)",
+        "price": "1.825 TL",
+        "category": "Künefeler (3 Kişilik)"
+      },
+      {
+        "name": "Special Künefe (3 Kişilik)",
+        "price": "1.825 TL",
+        "category": "Künefeler (3 Kişilik)"
+      },
+      {
+        "name": "Sultanzade Künefe (3 Kişilik)",
+        "price": "2.000 TL",
+        "category": "Künefeler (3 Kişilik)"
+      },
+      {
+        "name": "Üçü Bir Arada Künefe (3 Kişilik)",
+        "price": "1.950 TL",
+        "category": "Künefeler (3 Kişilik)"
+      },
+      {
+        "name": "Yeşil Sultan Künefe (3 Kişilik)",
+        "price": "2.000 TL",
+        "category": "Künefeler (3 Kişilik)"
+      },
+      {
+        "name": "Antephan Özel Künefe (4 Kişilik)",
+        "price": "2.550 TL",
+        "category": "Künefeler (4 Kişilik)"
+      },
+      {
+        "name": "Cevizli Künefe (4 Kişilik)",
+        "price": "2.300 TL",
+        "category": "Künefeler (4 Kişilik)"
+      },
+      {
+        "name": "Çıtır Hasır Künefe (4 Kişilik)",
+        "price": "2.300 TL",
+        "category": "Künefeler (4 Kişilik)"
+      },
+      {
+        "name": "Dondurmalı Burger Künefe (4 Kişilik)",
+        "price": "2.450 TL",
+        "category": "Künefeler (4 Kişilik)"
+      },
+      {
+        "name": "Fıstıklı Kadayıf Künefe (4 Kişilik)",
+        "price": "2.350 TL",
+        "category": "Künefeler (4 Kişilik)"
+      },
+      {
+        "name": "Fıstıkzade Künefe (4 Kişilik)",
+        "price": "2.550 TL",
+        "category": "Künefeler (4 Kişilik)"
+      },
+      {
+        "name": "Kaymaklı Ezme (4 Kişilik)",
+        "price": "2.750 TL",
+        "category": "Künefeler (4 Kişilik)"
+      },
+      {
+        "name": "Kaymaklı Paşa Künefe (4 Kişilik)",
+        "price": "2.300 TL",
+        "category": "Künefeler (4 Kişilik)"
+      },
+      {
+        "name": "Peynirli Künefe (4 Kişilik)",
+        "price": "1.730 TL",
+        "category": "Künefeler (4 Kişilik)"
+      },
+      {
+        "name": "Peynlirli Paşa Künefe (4 Kişilik)",
+        "price": "2.300 TL",
+        "category": "Künefeler (4 Kişilik)"
+      },
+      {
+        "name": "Special Künefe (4 Kişilik)",
+        "price": "2.300 TL",
+        "category": "Künefeler (4 Kişilik)"
+      },
+      {
+        "name": "Sultanzade Künefe (4 Kişilik)",
+        "price": "2.550 TL",
+        "category": "Künefeler (4 Kişilik)"
+      },
+      {
+        "name": "Üçü Bir Arada Künefe (4 Kişilik)",
+        "price": "2.500 TL",
+        "category": "Künefeler (4 Kişilik)"
+      },
+      {
+        "name": "Yeşil Sultan Künefe (4 Kişilik)",
+        "price": "2.550 TL",
+        "category": "Künefeler (4 Kişilik)"
+      },
+      {
+        "name": "Yarı Yarıya Künefe (4 Kişilik)",
+        "price": "2.300 TL",
+        "category": "Künefeler (4 Kişilik)"
+      },
+      {
+        "name": "Meşhur Antep Katmer",
+        "price": "850 TL",
+        "category": "Katmerler"
+      },
+      {
+        "name": "Simit Katmer",
+        "price": "905 TL",
+        "category": "Katmerler"
+      },
+      {
+        "name": "Çikolatalı Muska Katmer",
+        "price": "1.000 TL",
+        "category": "Katmerler"
+      },
+      {
+        "name": "Fıstıklı Baklava (1 kg.)",
+        "price": "1.950 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Fıstıklı Baklava (500 gr.)",
+        "price": "975 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Midye Baklava (1 kg.)",
+        "price": "2.340 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Midye Baklava (500 gr.)",
+        "price": "1.170 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Cevizli Baklava (1 kg.)",
+        "price": "1.270 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Cevizli Baklava (500 gr.)",
+        "price": "640 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Soğuk Baklava (1 kg.)",
+        "price": "1.430 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Soğuk Baklava (500 gr.)",
+        "price": "740 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Kaymak",
+        "price": "125 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Maraş Kesme Dondurma",
+        "price": "125 TL",
+        "category": "Dondurmalar"
+      },
+      {
+        "name": "Maraş Kesme Dondurma (1 kg.)",
+        "price": "1.200 TL",
+        "category": "Dondurmalar"
+      },
+      {
+        "name": "Fıstıklı Kadayıf (1 kg.)",
+        "price": "1.450 TL",
+        "category": "Kiloluk Tatlılar"
+      },
+      {
+        "name": "Fıstıklı Kadayıf (500 gr.)",
+        "price": "725 TL",
+        "category": "Kiloluk Tatlılar"
+      },
+      {
+        "name": "Hasır Kadayıf (1 kg.)",
+        "price": "1.450 TL",
+        "category": "Kiloluk Tatlılar"
+      },
+      {
+        "name": "Hasır Kadayıf (500 gr.)",
+        "price": "725 TL",
+        "category": "Kiloluk Tatlılar"
+      }
+    ]
+  }
+,
   "7151": {
     name: "Emek Cafe",
     sourceUrl: "https://www.yemeksepeti.com/en/restaurant/lg15/emek-cafe",
