@@ -1320,3 +1320,6 @@ Exact kayıt `Cumhuriyet, Okur Sk. No:2/A, 34520 Beylikdüzü/İstanbul`, `+90 5
 
 ## Mondo della Pizza ID 7062 refresh
 Exact kayıt `Çubuklu, Vatan Cd. No:2B, 34820 Beykoz/İstanbul`, `+90 216 322 70 70`; Restoranım, Kaçıyor ve exact Migros `Mondo Della Pizza, Beykoz (Çubuklu Mah.)` vendorı ile doğrulandı. Mevcut override Migros’un güncel menüsüyle yenilendi: menüler, 33/26 cm pizzalar, calzone, glutensiz pizza, atıştırmalık, tatlı, tavuklu sandviç, içecek ve soslardan **70 benzersiz ürün/fiyat** aktarıldı. `Restoran Öneriyor` carousel satırı ve gıda dışı metadata dışlandı. `verifiedAt` 2026-08-25.
+
+## Galata Kahvesi ID 7061 strict HOLD
+Exact kayıt `Şahkulu, Yörük Çk. No:1, 34421 Beyoğlu/İstanbul`, `+90 537 222 99 10`; Wanderlog, Restoranım ve diğer işletme kaynakları adres/telefonu doğruluyor. Wheree exact işletmenin menü fotoğrafları ve yemek açıklamalarını sunuyor ancak hiçbir TL/TRY fiyatı yayımlamıyor ve fiyatların değişebileceğini belirtiyor. RestaurantGuru insan doğrulamasına takıldı; exact şubeye ait son bir yıl fiyatlı complete item-level public menü doğrulanamadı. Ürün/fiyat uydurulmadı; strict HOLD.
