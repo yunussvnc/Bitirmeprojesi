@@ -30115,795 +30115,729 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
 },
   "7269": {
   "name": "PizzaLazza - Migros Avm",
-  "sourceUrl": "https://www.yemeksepeti.com/restaurant/qc8y/pizzalazza-qc8y",
-  "sourceName": "PizzaLazza Beylikdüzü Migros AVM canlı Yemeksepeti menüsü (exact Barış Mah. Sakarya Cd. No:1)",
-  "verifiedAt": "2026-08-23",
+  "sourceUrl": "https://www.migros.com.tr/yemek/pizza-lazza-beylikduzu-baris-mah-st-1a10e",
+  "sourceName": "PizzaLazza Beylikdüzü Migros AVM exact public Migros menüsü; official branch page/slug ve Yandex Barış-Sakarya Cd. branch bridge",
+  "verifiedAt": "2026-08-25",
   "items": [
     {
       "name": "Algida Keyif Menüsü",
-      "price": "665",
-      "desc": "",
-      "category": "Avantajlı Algida Menüleri"
-    },
-    {
-      "name": "2 Orta Boy Pizza Fırsatı",
-      "price": "550",
-      "desc": "",
-      "category": "Yemeksepeti Özel Menü"
+      "price": "610,00 TL",
+      "category": "Avantajlı Algida Menüleri",
+      "desc": "1 Adet Orta Boy Pizza + Sufle + Algida Maraş Cup Kampanyalar, seçilen ürünlere göre oluşmaktadır. Seçilen ürünlerin nihai enerji ve besin değerleri bilgilerine sayfanın alt kısmındaki tekil ürünlerin açıklama kısmından erişilebilir."
     },
     {
       "name": "Orta Boy Pizza + Lazza Menü",
-      "price": "400",
-      "desc": "",
-      "category": "Buram Buram Fırsatlar"
+      "price": "400,00 TL",
+      "category": "Buram Buram Fırsatlar",
+      "desc": "Kampanya Sevilen Tatlar pizza grubunda geçerlidir, pizza çeşitlerinde fiyat farkı uygulanabilir. İnce ve normal hamur ücretsiz olarak seçilebilmektedir. Kampanyalar, seçilen ürünlere göre oluşmaktadır. Seçilen ürünlerin nihai enerji ve besin değerleri bilgilerine sayfanın alt kısmındaki tekil ürünlerin açıklama kısmından erişilebilir."
     },
     {
       "name": "Büyük Boy Pizza + Lazza Menü",
-      "price": "500",
-      "desc": "",
-      "category": "Buram Buram Fırsatlar"
+      "price": "500,00 TL",
+      "category": "Buram Buram Fırsatlar",
+      "desc": "Kampanya Sevilen Tatlar pizza grubunda geçerlidir, pizza çeşitlerinde fiyat farkı uygulanabilir. İnce ve normal hamur ücretsiz olarak seçilebilmektedir. Kampanyalar, seçilen ürünlere göre oluşmaktadır. Seçilen ürünlerin nihai enerji ve besin değerleri bilgilerine sayfanın alt kısmındaki tekil ürünlerin açıklama kısmından erişilebilir."
     },
     {
       "name": "Ruffles Özel Menü",
-      "price": "340",
-      "desc": "",
-      "category": "Buram Buram Fırsatlar"
+      "price": "340,00 TL",
+      "category": "Buram Buram Fırsatlar",
+      "desc": "Orta Boy Sevilen Tatlar Pizza + Ruffles + Pepsi Zero Sugar (330 ml) Kampanyalar, seçilen ürünlere göre oluşmaktadır. Seçilen ürünlerin nihai enerji ve besin değerleri bilgilerine sayfanın alt kısmındaki tekil ürünlerin açıklama kısmından erişilebilir."
     },
     {
       "name": "Orta Boy Bol Bol Pizza Fırsatı + Sos",
-      "price": "425",
-      "desc": "",
-      "category": "Buram Buram Fırsatlar"
+      "price": "425,00 TL",
+      "category": "Buram Buram Fırsatlar",
+      "desc": "Kampanya orta boy Bol Bol pizza için geçerlidir. İnce ve normal hamur ücretsiz olarak seçilebilmektedir. Dilediğiniz 1 adet sos ile servis edilmektedir. Kampanyalar, seçilen ürünlere göre oluşmaktadır. Seçilen ürünlerin nihai enerji ve besin değerleri bilgilerine sayfanın alt kısmındaki tekil ürünlerin açıklama kısmından erişilebilir."
     },
     {
       "name": "Büyük Boy Bol Bol Pizza Fırsatı + 2 Adet Sos",
-      "price": "525",
-      "desc": "",
-      "category": "Buram Buram Fırsatlar"
+      "price": "525,00 TL",
+      "category": "Buram Buram Fırsatlar",
+      "desc": "Kampanya büyük boy Bol Bol pizza için geçerlidir. İnce ve normal hamur ücretsiz olarak seçilebilmektedir. Dilediğiniz 2 adet sos ile servis edilmektedir. Kampanyalar, seçilen ürünlere göre oluşmaktadır. Seçilen ürünlerin nihai enerji ve besin değerleri bilgilerine sayfanın alt kısmındaki tekil ürünlerin açıklama kısmından erişilebilir."
     },
     {
       "name": "Dilediğin Orta Boy Gurme Pizza + Sos",
-      "price": "500",
-      "desc": "",
-      "category": "Buram Buram Fırsatlar"
+      "price": "500,00 TL",
+      "category": "Buram Buram Fırsatlar",
+      "desc": "Kampanya Gurme Tatlar pizza grubunda geçerlidir. İnce ve normal hamur ücretsiz olarak seçilebilmektedir. Dilediğiniz 1 adet sos ile servis edilmektedir. Kampanyalar, seçilen ürünlere göre oluşmaktadır. Seçilen ürünlerin nihai enerji ve besin değerleri bilgilerine sayfanın alt kısmındaki tekil ürünlerin açıklama kısmından erişilebilir."
     },
     {
       "name": "Dilediğin Büyük Boy Gurme Pizza + 2 Adet Sos",
-      "price": "600",
-      "desc": "",
-      "category": "Buram Buram Fırsatlar"
+      "price": "600,00 TL",
+      "category": "Buram Buram Fırsatlar",
+      "desc": "Kampanya Gurme Tatlar pizza grubunda geçerlidir. İnce ve normal hamur ücretsiz olarak seçilebilmektedir. Dilediğiniz 2 adet sos ile servis edilmektedir. Kampanyalar, seçilen ürünlere göre oluşmaktadır. Seçilen ürünlerin nihai enerji ve besin değerleri bilgilerine sayfanın alt kısmındaki tekil ürünlerin açıklama kısmından erişilebilir."
     },
     {
-      "name": "Küçük Boy Pizza + Seçeceğiniz Yan Ürün + Pepsi Zero Sugar (33 cl.)",
-      "price": "400",
-      "desc": "",
-      "category": "Buram Buram Fırsatlar"
+      "name": "Küçük Boy Pizza + Dilediğin Yan Ürün + Pepsi Zero Sugar (330 Ml.)",
+      "price": "400,00 TL",
+      "category": "Buram Buram Fırsatlar",
+      "desc": "Kampanya Sevilen Tatlar pizzalarda geçerlidir. Normal hamur ücretsiz olarak seçilebilmektedir. Kampanyalar, seçilen ürünlere göre oluşmaktadır. Seçilen ürünlerin nihai enerji ve besin değerleri bilgilerine sayfanın alt kısmındaki tekil ürünlerin açıklama kısmından erişilebilir."
     },
     {
       "name": "Lipton Ice Tea Sparkling Özel Menü 1",
-      "price": "525",
-      "desc": "",
-      "category": "Buram Buram Fırsatlar"
+      "price": "575,00 TL",
+      "category": "Buram Buram Fırsatlar",
+      "desc": "Orta Boy Bol Bol Pizza + 1 Adet Sos + Lipton Ice Tea Sparkling (330 ml.). Kampanyalar, seçilen ürünlere göre oluşmaktadır. Seçilen ürünlerin nihai enerji ve besin değerleri bilgilerine sayfanın alt kısmındaki tekil ürünlerin açıklama kısmından erişilebilir."
     },
     {
       "name": "Lipton Ice Tea Sparkling Özel Menü 2",
-      "price": "725",
-      "desc": "",
-      "category": "Buram Buram Fırsatlar"
+      "price": "775,00 TL",
+      "category": "Buram Buram Fırsatlar",
+      "desc": "2 Adet Orta Boy Bol Bol Pizza + Lipton Ice Tea Sparkling (1L.). Kampanyalar, seçilen ürünlere göre oluşmaktadır. Seçilen ürünlerin nihai enerji ve besin değerleri bilgilerine sayfanın alt kısmındaki tekil ürünlerin açıklama kısmından erişilebilir."
     },
     {
       "name": "Red Bull Özel Menü",
-      "price": "400",
-      "desc": "",
-      "category": "Buram Buram Fırsatlar"
+      "price": "400,00 TL",
+      "category": "Buram Buram Fırsatlar",
+      "desc": "Orta Boy Sevilen Tatlar Pizza + Parmak Patates (200 gr.) + Red Bull Enerji İçeceği (250 ml.) Kampanyalar, seçilen ürünlere göre oluşmaktadır. Seçilen ürünlerin nihai enerji ve besin değerleri bilgilerine sayfanın alt kısmındaki tekil ürünlerin açıklama kısmından erişilebilir."
     },
     {
       "name": "Dilediğin Fırından Lezzetler",
-      "price": "90",
-      "desc": "",
-      "category": "Buram Buram Fırsatlar"
+      "price": "90,00 TL",
+      "category": "Buram Buram Fırsatlar",
+      "desc": "Kampanya Fırından Lezzetlerde geçerlidir. Kampanyalar, seçilen ürünlere göre oluşmaktadır. Seçilen ürünlerin nihai enerji ve besin değerleri bilgilerine sayfanın alt kısmındaki tekil ürünlerin açıklama kısmından erişilebilir."
     },
     {
-      "name": "Ortaya Bi’Lazza",
-      "price": "255",
-      "desc": "",
-      "category": "Buram Buram Fırsatlar"
+      "name": "Ortaya Bi’lazza",
+      "price": "255,00 TL",
+      "category": "Buram Buram Fırsatlar",
+      "desc": "Parmak Patates (200 gr.) + Çıtır Tavuk Topları (10 Adet) + Soğan Halkası (8 Adet) (Dilediğiniz 2 Adet Sos İle Servis Edilmektedir.) Kampanyalar, seçilen ürünlere göre oluşmaktadır. Seçilen ürünlerin nihai enerji ve besin değerleri bilgilerine sayfanın alt kısmındaki tekil ürünlerin açıklama kısmından erişilebilir."
     },
     {
       "name": "Lazza Menü",
-      "price": "360",
-      "desc": "",
-      "category": "Buram Buram Fırsatlar"
+      "price": "360,00 TL",
+      "category": "Buram Buram Fırsatlar",
+      "desc": "Sucuklu Lazza + Parmak Patates (200 gr.) + 1 Adet Sos + Pepsi Zero Sugar (330 ml.) Kampanyalar, seçilen ürünlere göre oluşmaktadır. Seçilen ürünlerin nihai enerji ve besin değerleri bilgilerine sayfanın alt kısmındaki tekil ürünlerin açıklama kısmından erişilebilir."
     },
     {
       "name": "Dilediğin Çikolatalı Lazza",
-      "price": "215",
-      "desc": "",
-      "category": "Buram Buram Fırsatlar"
+      "price": "215,00 TL",
+      "category": "Buram Buram Fırsatlar",
+      "desc": "Kampanya dilediğiniz 1 adet çikolatalı veya vişneli çikolatalı lazza seçimi için geçerlidir. Kampanyalar, seçilen ürünlere göre oluşmaktadır. Seçilen ürünlerin nihai enerji ve besin değerleri bilgilerine sayfanın alt kısmındaki tekil ürünlerin açıklama kısmından erişilebilir."
     },
     {
-      "name": "3’lü Sos Paketi",
-      "price": "90",
-      "desc": "",
-      "category": "Buram Buram Fırsatlar"
-    },
-    {
-      "name": "Parmak Patates (200 gr.)",
-      "price": "100",
-      "desc": "",
-      "category": "Fırından Lezzetler"
+      "name": "Parmak Patates (200 Gr.)",
+      "price": "100,00 TL",
+      "category": "Fırından Lezzetler",
+      "desc": "Fırından çıkmış, çıtır lezzet. (Dilediğiniz 1 adet sos ile servis edilmektedir.)"
     },
     {
       "name": "Soğan Halkası (8 Adet)",
-      "price": "100",
-      "desc": "",
-      "category": "Fırından Lezzetler"
+      "price": "100,00 TL",
+      "category": "Fırından Lezzetler",
+      "desc": "Fırından çıkmış, çıtır lezzet. (Dilediğiniz 1 adet sos ile servis edilmektedir.)"
     },
     {
       "name": "Çıtır Tavuk Topları (10 Adet)",
-      "price": "100",
-      "desc": "",
-      "category": "Fırından Lezzetler"
+      "price": "100,00 TL",
+      "category": "Fırından Lezzetler",
+      "desc": "Fırınlanmış özel kaplamalı çıtır tavuk topları. (Dilediğiniz 1 adet sos ile servis edilmektedir.)"
     },
     {
       "name": "Sarımsaklı Peynirli Ekmek",
-      "price": "210",
-      "desc": "",
-      "category": "Fırından Lezzetler"
+      "price": "210,00 TL",
+      "category": "Fırından Lezzetler",
+      "desc": "Mozzarella peyniri, cheddarlı peynir, sarımsaklı sos."
     },
     {
       "name": "Doritos Taco",
-      "price": "30",
-      "desc": "",
-      "category": "Fırından Lezzetler"
+      "price": "30,00 TL",
+      "category": "Fırından Lezzetler",
+      "desc": "Sıra dışı baharatlarıyla atıştırmalık zamanlarınızda sizi asla yarı yolda bırakmayacak lezzet. Yemeğinize eşlik etmesi için tıklayın."
     },
     {
       "name": "Ruffles Originals",
-      "price": "30",
-      "desc": "",
-      "category": "Fırından Lezzetler"
+      "price": "30,00 TL",
+      "category": "Fırından Lezzetler",
+      "desc": "Tuzlu, klasik ve tırtıklı bir patates cipsi lezzeti. Yemeğinize eşlik etmesi için tıklayın."
     },
     {
       "name": "Orta Boy Pizza",
-      "price": "515",
-      "desc": "",
-      "category": "Orta Boy Kampanyalar"
-    },
-    {
-      "name": "Orta Boy Pizza + Pepsi Zero Sugar (1 L.)",
-      "price": "540",
-      "desc": "",
-      "category": "Orta Boy Kampanyalar"
-    },
-    {
-      "name": "2 Adet Orta Boy Pizza",
-      "price": "640",
-      "desc": "",
-      "category": "Orta Boy Kampanyalar"
+      "price": "400,00 TL",
+      "category": "Orta Boy Kampanyalar",
+      "desc": "Kampanya Sevilen Tatlar pizza grubunda geçerlidir, pizza çeşitlerinde fiyat farkı uygulanabilir. İnce ve normal hamur ücretsiz olarak seçilebilmektedir. Kampanyalar, seçilen ürünlere göre oluşmaktadır. Seçilen ürünlerin nihai enerji ve besin değerleri bilgilerine sayfanın alt kısmındaki tekil ürünlerin açıklama kısmından erişilebilir."
     },
     {
       "name": "2 Adet Orta Boy Pizza + Pepsi Zero Sugar (1 L.)",
-      "price": "600",
-      "desc": "",
-      "category": "Orta Boy Kampanyalar"
+      "price": "800,00 TL",
+      "category": "Orta Boy Kampanyalar",
+      "desc": "Kampanya Sevilen Tatlar pizza grubunda geçerlidir, pizza çeşitlerinde fiyat farkı uygulanabilir. İnce ve normal hamur ücretsiz olarak seçilebilmektedir.Kampanyalar, seçilen ürünlere göre oluşmaktadır. Seçilen ürünlerin nihai enerji ve besin değerleri bilgilerine sayfanın alt kısmındaki tekil ürünlerin açıklama kısmından erişilebilir."
     },
     {
       "name": "3 Adet Orta Boy Pizza",
-      "price": "990",
-      "desc": "",
-      "category": "Orta Boy Kampanyalar"
+      "price": "990,00 TL",
+      "category": "Orta Boy Kampanyalar",
+      "desc": "Kampanya Sevilen Tatlar pizza grubunda geçerlidir, pizza çeşitlerinde fiyat farkı uygulanabilir. İnce ve normal hamur ücretsiz olarak seçilebilmektedir.Kampanyalar, seçilen ürünlere göre oluşmaktadır. Seçilen ürünlerin nihai enerji ve besin değerleri bilgilerine sayfanın alt kısmındaki tekil ürünlerin açıklama kısmından erişilebilir."
     },
     {
       "name": "3 Adet Orta Boy Pizza + Pepsi Zero Sugar (1 L.)",
-      "price": "1075",
-      "desc": "",
-      "category": "Orta Boy Kampanyalar"
+      "price": "1.075,00 TL",
+      "category": "Orta Boy Kampanyalar",
+      "desc": "Kampanya Sevilen Tatlar pizza grubunda geçerlidir, pizza çeşitlerinde fiyat farkı uygulanabilir. İnce ve normal hamur ücretsiz olarak seçilebilmektedir. Kampanyalar, seçilen ürünlere göre oluşmaktadır. Seçilen ürünlerin nihai enerji ve besin değerleri bilgilerine sayfanın alt kısmındaki tekil ürünlerin açıklama kısmından erişilebilir."
     },
     {
       "name": "Büyük Boy Pizza",
-      "price": "615",
-      "desc": "",
-      "category": "Büyük Boy Kampanyalar"
-    },
-    {
-      "name": "Büyük Boy Pizza + Pepsi Zero Sugar (1 L.)",
-      "price": "585",
-      "desc": "",
-      "category": "Büyük Boy Kampanyalar"
+      "price": "500,00 TL",
+      "category": "Büyük Boy Kampanyalar",
+      "desc": "Kampanya Sevilen Tatlar pizza grubunda geçerlidir, pizza çeşitlerinde fiyat farkı uygulanabilir. İnce ve normal hamur ücretsiz olarak seçilebilmektedir. Kampanyalar, seçilen ürünlere göre oluşmaktadır. Seçilen ürünlerin nihai enerji ve besin değerleri bilgilerine sayfanın alt kısmındaki tekil ürünlerin açıklama kısmından erişilebilir."
     },
     {
       "name": "2 Adet Büyük Boy Pizza",
-      "price": "920",
-      "desc": "",
-      "category": "Büyük Boy Kampanyalar"
+      "price": "920,00 TL",
+      "category": "Büyük Boy Kampanyalar",
+      "desc": "Kampanya Sevilen Tatlar pizza grubunda geçerlidir, pizza çeşitlerinde fiyat farkı uygulanabilir. İnce ve normal hamur ücretsiz olarak seçilebilmektedir. Kampanyalar, seçilen ürünlere göre oluşmaktadır. Seçilen ürünlerin nihai enerji ve besin değerleri bilgilerine sayfanın alt kısmındaki tekil ürünlerin açıklama kısmından erişilebilir."
     },
     {
       "name": "2 Adet Büyük Boy Pizza + Pepsi Zero Sugar (1 L.)",
-      "price": "1005",
-      "desc": "",
-      "category": "Büyük Boy Kampanyalar"
+      "price": "1.005,00 TL",
+      "category": "Büyük Boy Kampanyalar",
+      "desc": "Kampanya Sevilen Tatlar pizza grubunda geçerlidir, pizza çeşitlerinde fiyat farkı uygulanabilir. İnce ve normal hamur ücretsiz olarak seçilebilmektedir. Kampanyalar, seçilen ürünlere göre oluşmaktadır. Seçilen ürünlerin nihai enerji ve besin değerleri bilgilerine sayfanın alt kısmındaki tekil ürünlerin açıklama kısmından erişilebilir."
     },
     {
       "name": "Pizzanı Tasarla (1 Et - 1 Sebze) (Küçük)",
-      "price": "300",
-      "desc": "",
-      "category": "Küçük Boy Pizzalar (4 Dilim)"
+      "price": "300,00 TL",
+      "category": "Küçük Boy Pizzalar (4 Dilim)",
+      "desc": "(Sevilen Tatlar Pizza Grubu) Dilediğin ürünlerle pizzanı tasarla! Seçeceğin 1 et ve 1 sebze ürünüyle lezzetin tadını çıkar! Standart bileşenler: San Marzano tipi sos, mozzarella peyniri."
     },
     {
       "name": "Favori Üçlü Pizza (Küçük)",
-      "price": "300",
-      "desc": "",
-      "category": "Küçük Boy Pizzalar (4 Dilim)"
+      "price": "300,00 TL",
+      "category": "Küçük Boy Pizzalar (4 Dilim)",
+      "desc": "(Sevilen Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, sosis, mantar, mısır."
     },
     {
       "name": "Kampüs Pizza (Küçük)",
-      "price": "300",
-      "desc": "",
-      "category": "Küçük Boy Pizzalar (4 Dilim)"
+      "price": "300,00 TL",
+      "category": "Küçük Boy Pizzalar (4 Dilim)",
+      "desc": "(Sevilen Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, salam, sosis, mısır."
     },
     {
       "name": "Margarita Pizza (Küçük)",
-      "price": "300",
-      "desc": "",
-      "category": "Küçük Boy Pizzalar (4 Dilim)"
+      "price": "300,00 TL",
+      "category": "Küçük Boy Pizzalar (4 Dilim)",
+      "desc": "(Sevilen Tatlar Pizza Grubu) San Marzano tipi sos, ekstra mozzarella peyniri."
     },
     {
       "name": "Sucuk Mısır Partisi (Küçük)",
-      "price": "300",
-      "desc": "",
-      "category": "Küçük Boy Pizzalar (4 Dilim)"
+      "price": "300,00 TL",
+      "category": "Küçük Boy Pizzalar (4 Dilim)",
+      "desc": "(Sevilen Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, sucuk, mısır."
     },
     {
       "name": "Bol Bol Pizza (Küçük)",
-      "price": "325",
-      "desc": "",
-      "category": "Küçük Boy Pizzalar (4 Dilim)"
+      "price": "325,00 TL",
+      "category": "Küçük Boy Pizzalar (4 Dilim)",
+      "desc": "(Özel Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, salam, sosis, sucuk, domates, kekik, mantar, mısır, siyah zeytin, yeşil biber."
     },
     {
       "name": "Doyuran Üçlü Pizza (Küçük)",
-      "price": "325",
-      "desc": "",
-      "category": "Küçük Boy Pizzalar (4 Dilim)"
+      "price": "325,00 TL",
+      "category": "Küçük Boy Pizzalar (4 Dilim)",
+      "desc": "(Özel Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, salam, mantar, siyah zeytin."
     },
     {
       "name": "Egeli Pizza (Küçük)",
-      "price": "325",
-      "desc": "",
-      "category": "Küçük Boy Pizzalar (4 Dilim)"
+      "price": "325,00 TL",
+      "category": "Küçük Boy Pizzalar (4 Dilim)",
+      "desc": "(Özel Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, beyaz peynir, domates, kekik, mantar, siyah zeytin, yeşil biber."
     },
     {
       "name": "Lezzet Küpü Pizza (Küçük)",
-      "price": "325",
-      "desc": "",
-      "category": "Küçük Boy Pizzalar (4 Dilim)"
+      "price": "325,00 TL",
+      "category": "Küçük Boy Pizzalar (4 Dilim)",
+      "desc": "(Özel Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, beyaz peynir, küp sucuk, kekik, siyah zeytin."
     },
     {
       "name": "Sucuk Zengini Pizza (Küçük)",
-      "price": "325",
-      "desc": "",
-      "category": "Küçük Boy Pizzalar (4 Dilim)"
+      "price": "325,00 TL",
+      "category": "Küçük Boy Pizzalar (4 Dilim)",
+      "desc": "(Özel Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, duble sucuk."
     },
     {
       "name": "Efsane Sucuklu Pizza (Küçük)",
-      "price": "350",
-      "desc": "",
-      "category": "Küçük Boy Pizzalar (4 Dilim)"
+      "price": "350,00 TL",
+      "category": "Küçük Boy Pizzalar (4 Dilim)",
+      "desc": "(Zengin Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, cheddarlı peynir, sucuk, kekik, soğan, yeşil biber."
     },
     {
       "name": "İtalyalı Pizza (Küçük)",
-      "price": "350",
-      "desc": "",
-      "category": "Küçük Boy Pizzalar (4 Dilim)"
+      "price": "350,00 TL",
+      "category": "Küçük Boy Pizzalar (4 Dilim)",
+      "desc": "(Zengin Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, küp sucuk, domates, kekik, közlenmiş biber, siyah zeytin."
     },
     {
       "name": "Keyfim Pizza (Küçük)",
-      "price": "350",
-      "desc": "",
-      "category": "Küçük Boy Pizzalar (4 Dilim)"
+      "price": "350,00 TL",
+      "category": "Küçük Boy Pizzalar (4 Dilim)",
+      "desc": "(Zengin Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, salam, sosis, mantar, mısır, siyah zeytin."
     },
     {
       "name": "Süper Karışık Pizza (Küçük)",
-      "price": "350",
-      "desc": "",
-      "category": "Küçük Boy Pizzalar (4 Dilim)"
+      "price": "350,00 TL",
+      "category": "Küçük Boy Pizzalar (4 Dilim)",
+      "desc": "(Zengin Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, sosis, sucuk, domates, mantar, mısır, yeşil biber."
     },
     {
       "name": "Tavuklu Pizza (Küçük)",
-      "price": "350",
-      "desc": "",
-      "category": "Küçük Boy Pizzalar (4 Dilim)"
+      "price": "350,00 TL",
+      "category": "Küçük Boy Pizzalar (4 Dilim)",
+      "desc": "(Zengin Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, duble ızgara tavuk, közlenmiş biber, soğan, yeşil biber (Barbekü sos veya jalapeno biberi ilave edilebilir.)."
     },
     {
       "name": "Dört Peynirli Pizza (Küçük)",
-      "price": "400",
-      "desc": "",
-      "category": "Küçük Boy Pizzalar (4 Dilim)"
+      "price": "400,00 TL",
+      "category": "Küçük Boy Pizzalar (4 Dilim)",
+      "desc": "(Gurme Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, beyaz peynir, cheddarlı peynir, ricotta peyniri."
     },
     {
       "name": "Et Budur Pizza (Küçük)",
-      "price": "400",
-      "desc": "",
-      "category": "Küçük Boy Pizzalar (4 Dilim)"
+      "price": "400,00 TL",
+      "category": "Küçük Boy Pizzalar (4 Dilim)",
+      "desc": "(Gurme Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, kavurma, salam, sosis, sucuk, kekik, közlenmiş biber."
     },
     {
       "name": "Etzza Pizza (Küçük)",
-      "price": "400",
-      "desc": "",
-      "category": "Küçük Boy Pizzalar (4 Dilim)"
+      "price": "400,00 TL",
+      "category": "Küçük Boy Pizzalar (4 Dilim)",
+      "desc": "(Gurme Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, pastırma, sucuk, domates, jalapeno biberi, soğan, yeşil biber."
     },
     {
       "name": "Kavurma Zengini Pizza (Küçük)",
-      "price": "400",
-      "desc": "",
-      "category": "Küçük Boy Pizzalar (4 Dilim)"
+      "price": "400,00 TL",
+      "category": "Küçük Boy Pizzalar (4 Dilim)",
+      "desc": "(Gurme Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, duble kavurma."
     },
     {
       "name": "Ton Ton (Küçük)",
-      "price": "400",
-      "desc": "",
-      "category": "Küçük Boy Pizzalar (4 Dilim)"
+      "price": "400,00 TL",
+      "category": "Küçük Boy Pizzalar (4 Dilim)",
+      "desc": "(Gurme Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, ton balığı, mısır, siyah zeytin, soğan."
     },
     {
       "name": "Pizzanı Tasarla (1 Et - 1 Sebze) (Orta)",
-      "price": "420",
-      "desc": "",
-      "category": "Orta Boy Pizzalar (6 Dilim)"
+      "price": "420,00 TL",
+      "category": "Orta Boy Pizzalar (6 Dilim)",
+      "desc": "(Sevilen Tatlar Pizza Grubu) Dilediğin ürünlerle pizzanı tasarla! Seçeceğin 1 et ve 1 sebze ürünüyle lezzetin tadını çıkar! Standart bileşenler: San Marzano tipi sos, mozzarella peyniri."
     },
     {
-      "name": "Favori Üçlü Pizza (Orta)",
-      "price": "420",
-      "desc": "",
-      "category": "Orta Boy Pizzalar (6 Dilim)"
+      "name": "Favori Üçlü (Orta)",
+      "price": "420,00 TL",
+      "category": "Orta Boy Pizzalar (6 Dilim)",
+      "desc": "(Sevilen Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, sosis, mantar, mısır."
     },
     {
       "name": "Kampüs Pizza (Orta)",
-      "price": "420",
-      "desc": "",
-      "category": "Orta Boy Pizzalar (6 Dilim)"
+      "price": "420,00 TL",
+      "category": "Orta Boy Pizzalar (6 Dilim)",
+      "desc": "(Sevilen Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, salam, sosis, mısır."
     },
     {
       "name": "Margarita Pizza (Orta)",
-      "price": "420",
-      "desc": "",
-      "category": "Orta Boy Pizzalar (6 Dilim)"
+      "price": "420,00 TL",
+      "category": "Orta Boy Pizzalar (6 Dilim)",
+      "desc": "(Sevilen Tatlar Pizza Grubu) San Marzano tipi sos, ekstra mozzarella peyniri."
     },
     {
       "name": "Sucuk Mısır Partisi (Orta)",
-      "price": "420",
-      "desc": "",
-      "category": "Orta Boy Pizzalar (6 Dilim)"
+      "price": "420,00 TL",
+      "category": "Orta Boy Pizzalar (6 Dilim)",
+      "desc": "(Sevilen Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, sucuk, mısır."
     },
     {
       "name": "Bol Bol Pizza (Orta)",
-      "price": "445",
-      "desc": "",
-      "category": "Orta Boy Pizzalar (6 Dilim)"
+      "price": "445,00 TL",
+      "category": "Orta Boy Pizzalar (6 Dilim)",
+      "desc": "(Özel Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, salam, sosis, sucuk, domates, kekik, mantar, mısır, siyah zeytin, yeşil biber."
     },
     {
       "name": "Doyuran Üçlü Pizza (Orta)",
-      "price": "445",
-      "desc": "",
-      "category": "Orta Boy Pizzalar (6 Dilim)"
+      "price": "445,00 TL",
+      "category": "Orta Boy Pizzalar (6 Dilim)",
+      "desc": "(Özel Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, salam, mantar, siyah zeytin."
     },
     {
       "name": "Egeli Pizza (Orta)",
-      "price": "445",
-      "desc": "",
-      "category": "Orta Boy Pizzalar (6 Dilim)"
+      "price": "445,00 TL",
+      "category": "Orta Boy Pizzalar (6 Dilim)",
+      "desc": "(Özel Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, beyaz peynir, domates, kekik, mantar, siyah zeytin, yeşil biber."
     },
     {
       "name": "Lezzet Küpü Pizza (Orta)",
-      "price": "445",
-      "desc": "",
-      "category": "Orta Boy Pizzalar (6 Dilim)"
+      "price": "445,00 TL",
+      "category": "Orta Boy Pizzalar (6 Dilim)",
+      "desc": "(Özel Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, beyaz peynir, küp sucuk, kekik, siyah zeytin."
     },
     {
       "name": "Sucuk Zengini Pizza (Orta)",
-      "price": "445",
-      "desc": "",
-      "category": "Orta Boy Pizzalar (6 Dilim)"
+      "price": "445,00 TL",
+      "category": "Orta Boy Pizzalar (6 Dilim)",
+      "desc": "(Özel Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, duble sucuk."
     },
     {
       "name": "Efsane Sucuklu Pizza (Orta)",
-      "price": "470",
-      "desc": "",
-      "category": "Orta Boy Pizzalar (6 Dilim)"
+      "price": "470,00 TL",
+      "category": "Orta Boy Pizzalar (6 Dilim)",
+      "desc": "(Zengin Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, cheddarlı peynir, sucuk, kekik, soğan, yeşil biber."
     },
     {
       "name": "İtalyalı Pizza (Orta)",
-      "price": "470",
-      "desc": "",
-      "category": "Orta Boy Pizzalar (6 Dilim)"
+      "price": "470,00 TL",
+      "category": "Orta Boy Pizzalar (6 Dilim)",
+      "desc": "(Zengin Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, küp sucuk, domates, kekik, közlenmiş biber, siyah zeytin."
     },
     {
       "name": "Keyfim Pizza (Orta)",
-      "price": "470",
-      "desc": "",
-      "category": "Orta Boy Pizzalar (6 Dilim)"
+      "price": "470,00 TL",
+      "category": "Orta Boy Pizzalar (6 Dilim)",
+      "desc": "(Zengin Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, salam, sosis, mantar, mısır, siyah zeytin."
     },
     {
       "name": "Süper Karışık Pizza (Orta)",
-      "price": "470",
-      "desc": "",
-      "category": "Orta Boy Pizzalar (6 Dilim)"
+      "price": "470,00 TL",
+      "category": "Orta Boy Pizzalar (6 Dilim)",
+      "desc": "(Zengin Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, sosis, sucuk, domates, mantar, mısır, yeşil biber."
     },
     {
       "name": "Tavuklu Pizza (Orta)",
-      "price": "470",
-      "desc": "",
-      "category": "Orta Boy Pizzalar (6 Dilim)"
+      "price": "470,00 TL",
+      "category": "Orta Boy Pizzalar (6 Dilim)",
+      "desc": "(Zengin Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, duble ızgara tavuk, közlenmiş biber, soğan, yeşil biber (Barbekü sos veya jalapeno biberi ilave edilebilir.)."
     },
     {
       "name": "Dört Peynirli Pizza (Orta)",
-      "price": "520",
-      "desc": "",
-      "category": "Orta Boy Pizzalar (6 Dilim)"
+      "price": "520,00 TL",
+      "category": "Orta Boy Pizzalar (6 Dilim)",
+      "desc": "(Gurme Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, beyaz peynir, cheddarlı peynir, ricotta peyniri."
     },
     {
       "name": "Et Budur Pizza (Orta)",
-      "price": "520",
-      "desc": "",
-      "category": "Orta Boy Pizzalar (6 Dilim)"
+      "price": "520,00 TL",
+      "category": "Orta Boy Pizzalar (6 Dilim)",
+      "desc": "(Gurme Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, kavurma, salam, sosis, sucuk, kekik, közlenmiş biber."
     },
     {
       "name": "Etzza Pizza (Orta)",
-      "price": "520",
-      "desc": "",
-      "category": "Orta Boy Pizzalar (6 Dilim)"
+      "price": "520,00 TL",
+      "category": "Orta Boy Pizzalar (6 Dilim)",
+      "desc": "(Gurme Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, pastırma, sucuk, domates, jalapeno biberi, soğan, yeşil biber."
     },
     {
       "name": "Kavurma Zengini Pizza (Orta)",
-      "price": "520",
-      "desc": "",
-      "category": "Orta Boy Pizzalar (6 Dilim)"
+      "price": "520,00 TL",
+      "category": "Orta Boy Pizzalar (6 Dilim)",
+      "desc": "(Gurme Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, duble kavurma."
     },
     {
       "name": "Ton Ton (Orta)",
-      "price": "520",
-      "desc": "",
-      "category": "Orta Boy Pizzalar (6 Dilim)"
+      "price": "520,00 TL",
+      "category": "Orta Boy Pizzalar (6 Dilim)",
+      "desc": "(Gurme Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, ton balığı, mısır, siyah zeytin, soğan."
     },
     {
       "name": "Pizzanı Tasarla (1 Et - 1 Sebze) (Büyük)",
-      "price": "520",
-      "desc": "",
-      "category": "Büyük Boy Pizzalar (8 Dilim)"
+      "price": "520,00 TL",
+      "category": "Büyük Boy Pizzalar (8 Dilim)",
+      "desc": "(Sevilen Tatlar Pizza Grubu) Dilediğin ürünlerle pizzanı tasarla! Seçeceğin 1 et ve 1 sebze ürünüyle lezzetin tadını çıkar! Standart bileşenler: San Marzano tipi sos, mozzarella peyniri."
     },
     {
       "name": "Favori Üçlü Pizza (Büyük)",
-      "price": "520",
-      "desc": "",
-      "category": "Büyük Boy Pizzalar (8 Dilim)"
+      "price": "520,00 TL",
+      "category": "Büyük Boy Pizzalar (8 Dilim)",
+      "desc": "(Sevilen Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, sosis, mantar, mısır."
     },
     {
       "name": "Kampüs Pizza (Büyük)",
-      "price": "520",
-      "desc": "",
-      "category": "Büyük Boy Pizzalar (8 Dilim)"
+      "price": "520,00 TL",
+      "category": "Büyük Boy Pizzalar (8 Dilim)",
+      "desc": "(Sevilen Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, salam, sosis, mısır."
     },
     {
       "name": "Margarita Pizza (Büyük)",
-      "price": "520",
-      "desc": "",
-      "category": "Büyük Boy Pizzalar (8 Dilim)"
+      "price": "520,00 TL",
+      "category": "Büyük Boy Pizzalar (8 Dilim)",
+      "desc": "(Sevilen Tatlar Pizza Grubu) San Marzano tipi sos, ekstra mozzarella peyniri."
     },
     {
       "name": "Sucuk Mısır Partisi (Büyük)",
-      "price": "520",
-      "desc": "",
-      "category": "Büyük Boy Pizzalar (8 Dilim)"
+      "price": "520,00 TL",
+      "category": "Büyük Boy Pizzalar (8 Dilim)",
+      "desc": "(Sevilen Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, sucuk, mısır."
     },
     {
       "name": "Bol Bol Pizza (Büyük)",
-      "price": "545",
-      "desc": "",
-      "category": "Büyük Boy Pizzalar (8 Dilim)"
+      "price": "545,00 TL",
+      "category": "Büyük Boy Pizzalar (8 Dilim)",
+      "desc": "(Özel Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, salam, sosis, sucuk, domates, kekik, mantar, mısır, siyah zeytin, yeşil biber."
     },
     {
       "name": "Doyuran Üçlü Pizza (Büyük)",
-      "price": "545",
-      "desc": "",
-      "category": "Büyük Boy Pizzalar (8 Dilim)"
+      "price": "545,00 TL",
+      "category": "Büyük Boy Pizzalar (8 Dilim)",
+      "desc": "(Özel Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, salam, mantar, siyah zeytin."
     },
     {
       "name": "Egeli Pizza (Büyük)",
-      "price": "545",
-      "desc": "",
-      "category": "Büyük Boy Pizzalar (8 Dilim)"
+      "price": "545,00 TL",
+      "category": "Büyük Boy Pizzalar (8 Dilim)",
+      "desc": "(Özel Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, beyaz peynir, domates, kekik, mantar, siyah zeytin, yeşil biber."
     },
     {
       "name": "Lezzet Küpü Pizza (Büyük)",
-      "price": "545",
-      "desc": "",
-      "category": "Büyük Boy Pizzalar (8 Dilim)"
+      "price": "545,00 TL",
+      "category": "Büyük Boy Pizzalar (8 Dilim)",
+      "desc": "(Özel Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, beyaz peynir, küp sucuk, kekik, siyah zeytin."
     },
     {
       "name": "Sucuk Zengini Pizza (Büyük)",
-      "price": "545",
-      "desc": "",
-      "category": "Büyük Boy Pizzalar (8 Dilim)"
+      "price": "545,00 TL",
+      "category": "Büyük Boy Pizzalar (8 Dilim)",
+      "desc": "(Özel Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, duble sucuk."
     },
     {
       "name": "Efsane Sucuklu Pizza (Büyük)",
-      "price": "570",
-      "desc": "",
-      "category": "Büyük Boy Pizzalar (8 Dilim)"
+      "price": "570,00 TL",
+      "category": "Büyük Boy Pizzalar (8 Dilim)",
+      "desc": "(Zengin Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, cheddarlı peynir, sucuk, kekik, soğan, yeşil biber."
     },
     {
       "name": "İtalyalı Pizza (Büyük)",
-      "price": "570",
-      "desc": "",
-      "category": "Büyük Boy Pizzalar (8 Dilim)"
+      "price": "570,00 TL",
+      "category": "Büyük Boy Pizzalar (8 Dilim)",
+      "desc": "(Zengin Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, küp sucuk, domates, kekik, közlenmiş biber, siyah zeytin."
     },
     {
       "name": "Keyfim Pizza (Büyük)",
-      "price": "570",
-      "desc": "",
-      "category": "Büyük Boy Pizzalar (8 Dilim)"
+      "price": "570,00 TL",
+      "category": "Büyük Boy Pizzalar (8 Dilim)",
+      "desc": "(Zengin Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, salam, sosis, mantar, mısır, siyah zeytin."
     },
     {
       "name": "Süper Karışık Pizza (Büyük)",
-      "price": "570",
-      "desc": "",
-      "category": "Büyük Boy Pizzalar (8 Dilim)"
+      "price": "570,00 TL",
+      "category": "Büyük Boy Pizzalar (8 Dilim)",
+      "desc": "(Zengin Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, sosis, sucuk, domates, mantar, mısır, yeşil biber."
     },
     {
       "name": "Tavuklu Pizza (Büyük)",
-      "price": "570",
-      "desc": "",
-      "category": "Büyük Boy Pizzalar (8 Dilim)"
+      "price": "570,00 TL",
+      "category": "Büyük Boy Pizzalar (8 Dilim)",
+      "desc": "(Zengin Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, duble ızgara tavuk, közlenmiş biber, soğan, yeşil biber (Barbekü sos veya jalapeno biberi ilave edilebilir.)."
     },
     {
       "name": "Dört Peynirli Pizza (Büyük)",
-      "price": "620",
-      "desc": "",
-      "category": "Büyük Boy Pizzalar (8 Dilim)"
+      "price": "620,00 TL",
+      "category": "Büyük Boy Pizzalar (8 Dilim)",
+      "desc": "(Gurme Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, beyaz peynir, cheddarlı peynir, ricotta peyniri."
     },
     {
       "name": "Et Budur Pizza (Büyük)",
-      "price": "620",
-      "desc": "",
-      "category": "Büyük Boy Pizzalar (8 Dilim)"
+      "price": "620,00 TL",
+      "category": "Büyük Boy Pizzalar (8 Dilim)",
+      "desc": "(Gurme Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, kavurma, salam, sosis, sucuk, kekik, közlenmiş biber."
     },
     {
       "name": "Etzza Pizza (Büyük)",
-      "price": "620",
-      "desc": "",
-      "category": "Büyük Boy Pizzalar (8 Dilim)"
+      "price": "620,00 TL",
+      "category": "Büyük Boy Pizzalar (8 Dilim)",
+      "desc": "(Gurme Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, pastırma, sucuk, domates, jalapeno biberi, soğan, yeşil biber."
     },
     {
       "name": "Kavurma Zengini Pizza (Büyük)",
-      "price": "620",
-      "desc": "",
-      "category": "Büyük Boy Pizzalar (8 Dilim)"
+      "price": "620,00 TL",
+      "category": "Büyük Boy Pizzalar (8 Dilim)",
+      "desc": "(Gurme Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, duble kavurma."
     },
     {
       "name": "Ton Ton (Büyük)",
-      "price": "620",
-      "desc": "",
-      "category": "Büyük Boy Pizzalar (8 Dilim)"
+      "price": "620,00 TL",
+      "category": "Büyük Boy Pizzalar (8 Dilim)",
+      "desc": "(Gurme Tatlar Pizza Grubu) San Marzano tipi sos, mozzarella peyniri, ton balığı, mısır, siyah zeytin, soğan."
     },
     {
       "name": "Sucuklu Lazza (1 Kişilik)",
-      "price": "260",
-      "desc": "",
-      "category": "Lazzalar"
+      "price": "260,00 TL",
+      "category": "Lazzalar",
+      "desc": "San Marzano tipi sos, mozzarella peyniri, cheddarlı peynir, ricotta peyniri, sucuk, tereyağı aromalı sos."
     },
     {
       "name": "Tavuklu Lazza (1 Kişilik)",
-      "price": "290",
-      "desc": "",
-      "category": "Lazzalar"
+      "price": "290,00 TL",
+      "category": "Lazzalar",
+      "desc": "San Marzano tipi sos, mozzarella peyniri, cheddarlı peynir, ızgara tavuk, ricotta peyniri, közlenmiş biber, tereyağı aromalı sos."
     },
     {
       "name": "Pastırmalı Lazza (1 Kişilik)",
-      "price": "320",
-      "desc": "",
-      "category": "Lazzalar"
+      "price": "320,00 TL",
+      "category": "Lazzalar",
+      "desc": "San Marzano tipi sos, mozzarella peyniri, pastırma, ricotta peyniri, tereyağı aromalı sos."
     },
     {
       "name": "Kavurmalı Lazza (1 Kişilik)",
-      "price": "350",
-      "desc": "",
-      "category": "Lazzalar"
-    },
-    {
-      "name": "Yoğurtlu Sos",
-      "price": "35",
-      "desc": "",
-      "category": "Soslar"
-    },
-    {
-      "name": "Lazza Sos",
-      "price": "35",
-      "desc": "",
-      "category": "Soslar"
-    },
-    {
-      "name": "Binada Sos",
-      "price": "35",
-      "desc": "",
-      "category": "Soslar"
-    },
-    {
-      "name": "Creamy Jalapeno Sos",
-      "price": "35",
-      "desc": "",
-      "category": "Soslar"
-    },
-    {
-      "name": "Ketçap",
-      "price": "10",
-      "desc": "",
-      "category": "Soslar"
-    },
-    {
-      "name": "Mayonez",
-      "price": "10",
-      "desc": "",
-      "category": "Soslar"
+      "price": "350,00 TL",
+      "category": "Lazzalar",
+      "desc": "San Marzano tipi sos, mozzarella peyniri, kavurma, ricotta peyniri, tereyağı aromalı sos."
     },
     {
       "name": "Çikolatalı Sufle",
-      "price": "150",
-      "desc": "",
-      "category": "Tatlılar & Dondurmalar"
+      "price": "150,00 TL",
+      "category": "Tatlılar & Dondurmalar",
+      "desc": "Sıcak, akışkan ve leziz çikolata dolgulu sufle."
     },
     {
       "name": "Çikolatalı Lazza",
-      "price": "225",
-      "desc": "",
-      "category": "Tatlılar & Dondurmalar"
+      "price": "225,00 TL",
+      "category": "Tatlılar & Dondurmalar",
+      "desc": "Çikolatalı fındık kreması, pudra şekeri, tereyağı aromalı sos."
     },
     {
       "name": "Vişneli Çikolatalı Lazza",
-      "price": "225",
-      "desc": "",
-      "category": "Tatlılar & Dondurmalar"
+      "price": "225,00 TL",
+      "category": "Tatlılar & Dondurmalar",
+      "desc": "Çikolatalı fındık kreması, vişne, pudra şekeri, tereyağı aromalı sos."
     },
     {
       "name": "Algida Maraş Usulü Cup Dondurma",
-      "price": "75",
-      "desc": "",
-      "category": "Tatlılar & Dondurmalar"
+      "price": "75,00 TL",
+      "category": "Tatlılar & Dondurmalar",
+      "desc": "100 ml."
     },
     {
-      "name": "Pepsi Zero Sugar (33 cl.)",
-      "price": "100",
-      "desc": "",
-      "category": "İçecekler"
+      "name": "Pepsi Zero Sugar (330 Ml.)",
+      "price": "100,00 TL",
+      "category": "İçecekler",
+      "desc": "Şekersiz, tatlı, köpüklü baloncukların ferahlatıcı patlamasıyla gerçek kola tadı."
     },
     {
-      "name": "Pepsi (33 cl.)",
-      "price": "100",
-      "desc": "",
-      "category": "İçecekler"
+      "name": "Pepsi (330 Ml.)",
+      "price": "100,00 TL",
+      "category": "İçecekler",
+      "desc": "Cesur, ferahlatıcı, güçlü kola tadı."
     },
     {
-      "name": "Yedigün (33 cl.)",
-      "price": "100",
-      "desc": "",
-      "category": "İçecekler"
+      "name": "Yedigün (330 Ml.)",
+      "price": "100,00 TL",
+      "category": "İçecekler",
+      "desc": "Enfes meyve lezzetiyle portakal meyveli gazoz."
     },
     {
-      "name": "Fruko (33 cl.)",
-      "price": "100",
-      "desc": "",
-      "category": "İçecekler"
+      "name": "Fruko (330 Ml.)",
+      "price": "100,00 TL",
+      "category": "İçecekler",
+      "desc": "Karışık meyve aromalı nostaljik gazoz."
     },
     {
-      "name": "Lipton Ice Tea Sparkling Limon Yuzu (33 cl.)",
-      "price": "100",
-      "desc": "",
-      "category": "İçecekler"
+      "name": "Lipton Ice Tea Sparkling Limon Yuzu (330 Ml.)",
+      "price": "100,00 TL",
+      "category": "İçecekler",
+      "desc": "Muhteşem lezzet ve minik baloncukları ile bambaşka bir Lipton Ice Tea deneyimi!"
     },
     {
-      "name": "Lipton Ice Tea Sparkling Tropikal (33 cl.)",
-      "price": "100",
-      "desc": "",
-      "category": "İçecekler"
+      "name": "Lipton Ice Tea Sparkling Tropikal (330 Ml.)",
+      "price": "100,00 TL",
+      "category": "İçecekler",
+      "desc": "Muhteşem lezzet ve minik baloncukları ile bambaşka bir Lipton Ice Tea deneyimi!"
     },
     {
-      "name": "Lipton Ice Tea Şeftali (33 cl.)",
-      "price": "100",
-      "desc": "",
-      "category": "İçecekler"
+      "name": "Lipton Ice Tea Şeftali (330 Ml.)",
+      "price": "100,00 TL",
+      "category": "İçecekler",
+      "desc": "Narenciyenin keskinliğiyle harmanlanmış yumuşak, lezzetli yeşil çay."
     },
     {
-      "name": "Lipton Ice Tea Limon (33 cl.)",
-      "price": "100",
-      "desc": "",
-      "category": "İçecekler"
+      "name": "Lipton Ice Tea Limon (330 Ml.)",
+      "price": "100,00 TL",
+      "category": "İçecekler",
+      "desc": "Narenciyenin keskinliğiyle harmanlanmış yumuşak, lezzetli yeşil çay."
     },
     {
-      "name": "İtimat Ayran (28 cl.)",
-      "price": "50",
-      "desc": "",
-      "category": "İçecekler"
+      "name": "İtimat Ayran ( 280 Ml.)",
+      "price": "40,00 TL",
+      "category": "İçecekler",
+      "desc": "(280 ml.)."
     },
     {
-      "name": "Su (50 cl.)",
-      "price": "35",
-      "desc": "",
-      "category": "İçecekler"
+      "name": "Su (500 Ml.)",
+      "price": "35,00 TL",
+      "category": "İçecekler",
+      "desc": "(500 ml.)."
     },
     {
-      "name": "Soda (20 cl.)",
-      "price": "40",
-      "desc": "",
-      "category": "İçecekler"
+      "name": "Soda (200 Ml.)",
+      "price": "40,00 TL",
+      "category": "İçecekler",
+      "desc": "(200 ml.)."
     },
     {
-      "name": "Red Bull Şekersiz Enerji İçeceği (25 cl.)",
-      "price": "120",
-      "desc": "",
-      "category": "İçecekler"
+      "name": "Redbull (250 Ml.)",
+      "price": "120,00 TL",
+      "category": "İçecekler",
+      "desc": "Red Bull enerji içeceği fonksiyonel bir içecektir ve ihtiyaç duyduğun her an kanatlandırır."
     },
     {
-      "name": "Red Bull Enerji İçeceği (25 cl.)",
-      "price": "120",
-      "desc": "",
-      "category": "İçecekler"
+      "name": "Redbull Sugarfree (250 Ml.)",
+      "price": "120,00 TL",
+      "category": "İçecekler",
+      "desc": "Red Bull enerji içeceği fonksiyonel bir içecektir ve ihtiyaç duyduğun her an kanatlandırır."
     },
     {
       "name": "Pepsi Zero Sugar (1 L.)",
-      "price": "125",
-      "desc": "",
-      "category": "İçecekler"
+      "price": "125,00 TL",
+      "category": "İçecekler",
+      "desc": "Şekersiz, tatlı, köpüklü baloncukların ferahlatıcı patlamasıyla gerçek kola tadı."
     },
     {
       "name": "Pepsi (1 L.)",
-      "price": "125",
-      "desc": "",
-      "category": "İçecekler"
+      "price": "125,00 TL",
+      "category": "İçecekler",
+      "desc": "Cesur, ferahlatıcı, güçlü kola tadı."
     },
     {
       "name": "Pepsi Twist (1 L.)",
-      "price": "125",
-      "desc": "",
-      "category": "İçecekler"
+      "price": "125,00 TL",
+      "category": "İçecekler",
+      "desc": "Limon ve misket limonu aromasıyla ferahlatan sıfır kalorili, şekersiz kola tadı."
     },
     {
       "name": "Yedigün (1 L.)",
-      "price": "125",
-      "desc": "",
-      "category": "İçecekler"
+      "price": "125,00 TL",
+      "category": "İçecekler",
+      "desc": "Enfes meyve lezzetiyle portakal meyveli gazoz."
     },
     {
-      "name": "7UP (1 L.)",
-      "price": "125",
-      "desc": "",
-      "category": "İçecekler"
+      "name": "7Up (1 L.)",
+      "price": "125,00 TL",
+      "category": "İçecekler",
+      "desc": "Turunçgil aromasının harika tadı ve ferahlığı bir arada."
     },
     {
       "name": "Lipton Ice Tea Sparkling Limon Yuzu (1 L.)",
-      "price": "125",
-      "desc": "",
-      "category": "İçecekler"
+      "price": "125,00 TL",
+      "category": "İçecekler",
+      "desc": "Muhteşem lezzet ve minik baloncukları ile bambaşka bir Lipton Ice Tea deneyimi!"
     },
     {
       "name": "Lipton Ice Tea Sparkling Tropikal (1L.)",
-      "price": "125",
-      "desc": "",
-      "category": "İçecekler"
+      "price": "125,00 TL",
+      "category": "İçecekler",
+      "desc": "Muhteşem lezzet ve minik baloncukları ile bambaşka bir Lipton Ice Tea deneyimi!"
     },
     {
       "name": "Lipton Ice Tea Şeftali (1 L.)",
-      "price": "125",
-      "desc": "",
-      "category": "İçecekler"
+      "price": "125,00 TL",
+      "category": "İçecekler",
+      "desc": "Narenciyenin keskinliğiyle harmanlanmış yumuşak, lezzetli yeşil çay."
     },
     {
       "name": "Lipton Ice Tea Limon (1 L.)",
-      "price": "125",
-      "desc": "",
-      "category": "İçecekler"
+      "price": "125,00 TL",
+      "category": "İçecekler",
+      "desc": "Narenciyenin keskinliğiyle harmanlanmış yumuşak, lezzetli yeşil çay."
     },
     {
       "name": "İtimat Ayran (1 L.)",
-      "price": "135",
-      "desc": "",
-      "category": "İçecekler"
+      "price": "135,00 TL",
+      "category": "İçecekler",
+      "desc": "(1 L.)."
     }
   ]
 },
