@@ -84759,4 +84759,467 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     }
   ]
 },
+  "7039": {
+  "name": "Öz Sanat Cafe",
+  "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/ycu6/ozsanat-pastane",
+  "sourceName": "Yemeksepeti current Özsanat Pastane menu; exact Hentzer branch is Beyaz Palace, Adnan Kahveci, Osmanlı Cd. No:63, 34528 Beylikdüzü/İstanbul, +90 538 040 48 58, matching independent business listing. 91 unique priced food/beverage items imported; plastic bag excluded.",
+  "verifiedAt": "2026-08-25",
+  "items": [
+    {
+      "name": "Sütlaç",
+      "price": "230 TL",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Kazandibi",
+      "price": "230 TL",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Tavukgöğsü",
+      "price": "230 TL",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Aşure",
+      "price": "230 TL",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Keşkül",
+      "price": "230 TL",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Supangle",
+      "price": "180 TL",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Profiterol",
+      "price": "180 TL",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Fıstıklı Pasta (Adet)",
+      "price": "399 TL",
+      "category": "Pastalar (Adet)"
+    },
+    {
+      "name": "Çikolatalı Pasta (Adet)",
+      "price": "399 TL",
+      "category": "Pastalar (Adet)"
+    },
+    {
+      "name": "Çilekli Çikolatalı Pasta (Adet)",
+      "price": "399 TL",
+      "category": "Pastalar (Adet)"
+    },
+    {
+      "name": "Meyveli Pasta (Adet)",
+      "price": "399 TL",
+      "category": "Pastalar (Adet)"
+    },
+    {
+      "name": "Krokanlı Pasta (Adet)",
+      "price": "399 TL",
+      "category": "Pastalar (Adet)"
+    },
+    {
+      "name": "Fransız Ekler Çilekli Fıstıklı Pasta (Adet)",
+      "price": "399 TL",
+      "category": "Pastalar (Adet)"
+    },
+    {
+      "name": "Çilekli Fıstıklı Pasta (4 Kişilik)",
+      "price": "1257 TL",
+      "category": "Pastalar (4 Kişilik)"
+    },
+    {
+      "name": "Meyveli Pasta (4 Kişilik)",
+      "price": "1257 TL",
+      "category": "Pastalar (4 Kişilik)"
+    },
+    {
+      "name": "Frambuazlı Fıstıklı Profiterol Soslu Pasta (4 Kişilik)",
+      "price": "1257 TL",
+      "category": "Pastalar (4 Kişilik)"
+    },
+    {
+      "name": "Muzlu Çilekli Fındıklı Pasta (4 Kişilik)",
+      "price": "1257 TL",
+      "category": "Pastalar (4 Kişilik)"
+    },
+    {
+      "name": "Fıstıklı Profiterollü Pasta (4 Kişilik)",
+      "price": "1257 TL",
+      "category": "Pastalar (4 Kişilik)"
+    },
+    {
+      "name": "Çilekli Muzlu Fıstıklı Çikolatalı Pasta (4 Kişilik)",
+      "price": "1257 TL",
+      "category": "Pastalar (4 Kişilik)"
+    },
+    {
+      "name": "Fıstıklı Çikolatalı Pasta (4 Kişilik)",
+      "price": "1257 TL",
+      "category": "Pastalar (4 Kişilik)"
+    },
+    {
+      "name": "Ganaj Çikolatalı Pasta (4 Kişilik)",
+      "price": "1257 TL",
+      "category": "Pastalar (4 Kişilik)"
+    },
+    {
+      "name": "Vişneli Frambuazlı Böğürtlenli Çikolatalı Pasta (4 Kişilik)",
+      "price": "1257 TL",
+      "category": "Pastalar (4 Kişilik)"
+    },
+    {
+      "name": "Krokanlı Çikolatalı Pasta (4 Kişilik)",
+      "price": "1257 TL",
+      "category": "Pastalar (4 Kişilik)"
+    },
+    {
+      "name": "Çilekli Fıstıklı Mag Pasta (4 Kişilik)",
+      "price": "1257 TL",
+      "category": "Pastalar (4 Kişilik)"
+    },
+    {
+      "name": "Çilekli Fıstıklı Pasta (8 Kişilik)",
+      "price": "1557 TL",
+      "category": "Pastalar (8 Kişilik)"
+    },
+    {
+      "name": "Meyveli Pasta (8 Kişilik)",
+      "price": "1557 TL",
+      "category": "Pastalar (8 Kişilik)"
+    },
+    {
+      "name": "Frambuazlı Fıstıklı Profiterol Soslu Pasta (8 Kişilik)",
+      "price": "1557 TL",
+      "category": "Pastalar (8 Kişilik)"
+    },
+    {
+      "name": "Muzlu Çilekli Fındıklı Pasta (8 Kişilik)",
+      "price": "1557 TL",
+      "category": "Pastalar (8 Kişilik)"
+    },
+    {
+      "name": "Fıstıklı Profiterollü Pasta (8 Kişilik)",
+      "price": "1557 TL",
+      "category": "Pastalar (8 Kişilik)"
+    },
+    {
+      "name": "Çilekli Muzlu Fıstıklı Çikolatalı Pasta (8 Kişilik)",
+      "price": "1557 TL",
+      "category": "Pastalar (8 Kişilik)"
+    },
+    {
+      "name": "Fıstıklı Çikolatalı Pasta (8 Kişilik)",
+      "price": "1557 TL",
+      "category": "Pastalar (8 Kişilik)"
+    },
+    {
+      "name": "Ganaj Çikolatalı Pasta (8 Kişilik)",
+      "price": "1557 TL",
+      "category": "Pastalar (8 Kişilik)"
+    },
+    {
+      "name": "Vişneli Frambuazlı Böğürtlenli Çikolatalı Pasta (8 Kişilik)",
+      "price": "1557 TL",
+      "category": "Pastalar (8 Kişilik)"
+    },
+    {
+      "name": "Krokanlı Çikolatalı Pasta (8 Kişilik)",
+      "price": "1557 TL",
+      "category": "Pastalar (8 Kişilik)"
+    },
+    {
+      "name": "Çilekli Fıstıklı Mag Pasta (8 Kişilik)",
+      "price": "1557 TL",
+      "category": "Pastalar (8 Kişilik)"
+    },
+    {
+      "name": "Çilekli Fıstıklı Pasta (12 Kişilik)",
+      "price": "1999 TL",
+      "category": "Pastalar (12 Kişilik)"
+    },
+    {
+      "name": "Frambuazlı Fıstıklı Profiterol Soslu Pasta (12 Kişilik)",
+      "price": "1999 TL",
+      "category": "Pastalar (12 Kişilik)"
+    },
+    {
+      "name": "Muzlu Çilekli Fındıklı Pasta (12 Kişilik)",
+      "price": "1999 TL",
+      "category": "Pastalar (12 Kişilik)"
+    },
+    {
+      "name": "Fıstıklı Profiterollü Pasta (12 Kişilik)",
+      "price": "1999 TL",
+      "category": "Pastalar (12 Kişilik)"
+    },
+    {
+      "name": "Çilekli Muzlu Fıstıklı Çikolatalı Pasta (12 Kişilik)",
+      "price": "1999 TL",
+      "category": "Pastalar (12 Kişilik)"
+    },
+    {
+      "name": "Fıstıklı Çikolatalı Pasta (12 Kişilik)",
+      "price": "1999 TL",
+      "category": "Pastalar (12 Kişilik)"
+    },
+    {
+      "name": "Ganaj Çikolatalı Pasta (12 Kişilik)",
+      "price": "1999 TL",
+      "category": "Pastalar (12 Kişilik)"
+    },
+    {
+      "name": "Vişneli Frambuazlı Böğürtlenli Çikolatalı Pasta (12 Kişilik)",
+      "price": "1999 TL",
+      "category": "Pastalar (12 Kişilik)"
+    },
+    {
+      "name": "Krokanlı Çikolatalı Pasta (12 Kişilik)",
+      "price": "1999 TL",
+      "category": "Pastalar (12 Kişilik)"
+    },
+    {
+      "name": "Çilekli Fıstıklı Mag Pasta (12 Kişilik)",
+      "price": "1999 TL",
+      "category": "Pastalar (12 Kişilik)"
+    },
+    {
+      "name": "Coca-Cola (33 cl.)",
+      "price": "90 TL",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Fanta (33 cl.)",
+      "price": "90 TL",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Sprite (33 cl.)",
+      "price": "90 TL",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Lipton Ice Tea (33 cl.)",
+      "price": "90 TL",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Limonata (33 cl.)",
+      "price": "90 TL",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Coca-Cola (1 L.)",
+      "price": "70 TL",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Fanta (1 L.)",
+      "price": "140 TL",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Limonata (1 L.)",
+      "price": "90 TL",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Dereotlu Tuzlu Kurabiye (500 gr.)",
+      "price": "557 TL",
+      "category": "Kiloluk Tuzlu Kurabiyeler (500 gr.)"
+    },
+    {
+      "name": "Havuçlu Tuzlu Kurabiye (500 gr.)",
+      "price": "557 TL",
+      "category": "Kiloluk Tuzlu Kurabiyeler (500 gr.)"
+    },
+    {
+      "name": "Zeytinli Peynirli Kurabiye (500 gr.)",
+      "price": "557 TL",
+      "category": "Kiloluk Tuzlu Kurabiyeler (500 gr.)"
+    },
+    {
+      "name": "Zeytinli Baharatlı Kurabiye (500 gr.)",
+      "price": "557 TL",
+      "category": "Kiloluk Tuzlu Kurabiyeler (500 gr.)"
+    },
+    {
+      "name": "Patatesli Tuzlu Kurabiye (500 gr.)",
+      "price": "557 TL",
+      "category": "Kiloluk Tuzlu Kurabiyeler (500 gr.)"
+    },
+    {
+      "name": "Tahinli Cevizli Kurabiye (500 gr.)",
+      "price": "557 TL",
+      "category": "Kiloluk Tatlı Kurabiyeler (500 gr.)"
+    },
+    {
+      "name": "Elmalı Kurabiye (500 gr.)",
+      "price": "557 TL",
+      "category": "Kiloluk Tatlı Kurabiyeler (500 gr.)"
+    },
+    {
+      "name": "Fıstıklı Hindistan Cevizli Çikolatalı Kurabiye (500 gr.)",
+      "price": "557 TL",
+      "category": "Kiloluk Tatlı Kurabiyeler (500 gr.)"
+    },
+    {
+      "name": "Kestaneli Çikolatalı Kurabiye (500 gr.)",
+      "price": "557 TL",
+      "category": "Kiloluk Tatlı Kurabiyeler (500 gr.)"
+    },
+    {
+      "name": "İncirli Kesme Kurabiye (500 gr.)",
+      "price": "557 TL",
+      "category": "Kiloluk Tatlı Kurabiyeler (500 gr.)"
+    },
+    {
+      "name": "Snickers Kurabiye (500 gr.)",
+      "price": "557 TL",
+      "category": "Kiloluk Tatlı Kurabiyeler (500 gr.)"
+    },
+    {
+      "name": "Bademli Kahveli Kurabiye (500 gr.)",
+      "price": "557 TL",
+      "category": "Kiloluk Tatlı Kurabiyeler (500 gr.)"
+    },
+    {
+      "name": "Bademli Kavala Kurabiye (500 gr.)",
+      "price": "557 TL",
+      "category": "Kiloluk Tatlı Kurabiyeler (500 gr.)"
+    },
+    {
+      "name": "Fıstıklı Bar Kurabiye (500 gr.)",
+      "price": "557 TL",
+      "category": "Kiloluk Tatlı Kurabiyeler (500 gr.)"
+    },
+    {
+      "name": "Portakallı Bar Kurabiye (500 gr.)",
+      "price": "557 TL",
+      "category": "Kiloluk Tatlı Kurabiyeler (500 gr.)"
+    },
+    {
+      "name": "Tahinli Çikolatalı Kurabiye (500 gr.)",
+      "price": "557 TL",
+      "category": "Kiloluk Tatlı Kurabiyeler (500 gr.)"
+    },
+    {
+      "name": "Bonibonlu Kurabiye (500 gr.)",
+      "price": "557 TL",
+      "category": "Kiloluk Tatlı Kurabiyeler (500 gr.)"
+    },
+    {
+      "name": "Tahinli Sarma Kurabiye (500 gr.)",
+      "price": "557 TL",
+      "category": "Kiloluk Tatlı Kurabiyeler (500 gr.)"
+    },
+    {
+      "name": "Un Kurabiyesi (500 gr.)",
+      "price": "557 TL",
+      "category": "Kiloluk Tatlı Kurabiyeler (500 gr.)"
+    },
+    {
+      "name": "Çay Kurabiyesi (500 gr.)",
+      "price": "557 TL",
+      "category": "Kiloluk Tatlı Kurabiyeler (500 gr.)"
+    },
+    {
+      "name": "Elmalı Sarma Kurabiye (500 gr.)",
+      "price": "557 TL",
+      "category": "Kiloluk Tatlı Kurabiyeler (500 gr.)"
+    },
+    {
+      "name": "Eti Çangalı Kurabiye (500 gr.)",
+      "price": "557 TL",
+      "category": "Kiloluk Tatlı Kurabiyeler (500 gr.)"
+    },
+    {
+      "name": "Çikolatalı Ekler (500 gr.)",
+      "price": "499 TL",
+      "category": "Kiloluk Tatlılar (500 gr.)"
+    },
+    {
+      "name": "Tiramisulu Ekler (500 gr.)",
+      "price": "499 TL",
+      "category": "Kiloluk Tatlılar (500 gr.)"
+    },
+    {
+      "name": "Çilekli Ekler (500 gr.)",
+      "price": "499 TL",
+      "category": "Kiloluk Tatlılar (500 gr.)"
+    },
+    {
+      "name": "Muzlu Ekler (500 gr.)",
+      "price": "499 TL",
+      "category": "Kiloluk Tatlılar (500 gr.)"
+    },
+    {
+      "name": "Krokanlı Ekler (500 gr.)",
+      "price": "490 TL",
+      "category": "Kiloluk Tatlılar (500 gr.)"
+    },
+    {
+      "name": "Fıstıklı Ekler (500 gr.)",
+      "price": "499 TL",
+      "category": "Kiloluk Tatlılar (500 gr.)"
+    },
+    {
+      "name": "Vanilyalı & Çikolatalı Ekler (500 gr.)",
+      "price": "499 TL",
+      "category": "Kiloluk Tatlılar (500 gr.)"
+    },
+    {
+      "name": "Muzlu Rulo Pasta (500 gr.)",
+      "price": "499 TL",
+      "category": "Kiloluk Tatlılar (500 gr.)"
+    },
+    {
+      "name": "Çilekli Rulo Pasta (500 gr.)",
+      "price": "490 TL",
+      "category": "Kiloluk Tatlılar (500 gr.)"
+    },
+    {
+      "name": "Çilekli Tartolet (500 gr.)",
+      "price": "499 TL",
+      "category": "Kiloluk Tatlılar (500 gr.)"
+    },
+    {
+      "name": "Böğürtlenli Tartolet (500 gr.)",
+      "price": "490 TL",
+      "category": "Kiloluk Tatlılar (500 gr.)"
+    },
+    {
+      "name": "Şeftalili Tartolet (500 gr.)",
+      "price": "499 TL",
+      "category": "Kiloluk Tatlılar (500 gr.)"
+    },
+    {
+      "name": "Ananaslı Tartolet (500 gr.)",
+      "price": "499 TL",
+      "category": "Kiloluk Tatlılar (500 gr.)"
+    },
+    {
+      "name": "Fıstıklı Tartolet (500 gr.)",
+      "price": "490 TL",
+      "category": "Kiloluk Tatlılar (500 gr.)"
+    },
+    {
+      "name": "Vişneli Tartolet (500 gr.)",
+      "price": "490 TL",
+      "category": "Kiloluk Tatlılar (500 gr.)"
+    },
+    {
+      "name": "Muzlu Tartolet (500 gr.)",
+      "price": "499 TL",
+      "category": "Kiloluk Tatlılar (500 gr.)"
+    }
+  ]
+},
 };

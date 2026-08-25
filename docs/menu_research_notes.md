@@ -1383,3 +1383,6 @@ Hentzer kaydı `İsmet Paşa, Karaca Sk. No:4/A, 34040 Bayrampaşa/İstanbul`, `
 
 ## CORNER IRISH PUB ID 7041 strict HOLD
 Hentzer kaydı `Asmalı Mescit Meşrutiyet Cd. No:11/A Galatasaray, Asmalı Mescit, 34430 Beyoğlu/İstanbul`, `+90 533 081 42 64`; adres, Yandex/Nelerimeshur/Corner kaynaklarıyla; telefon ise Corner Irish Pub Instagram profilindeki Pera şubesi kaydıyla eşleşiyor. Ancak bulunan dijital menü yalnızca dinamik kategori başlıkları veriyor, erişilebilir tam ürün-fiyat dökümü sağlamıyor; arama önizlemesindeki birkaç fiyat tam menü kabulü için yeterli değil. 2026-04 güncelleme sinyali olsa da **tam item-level güncel fiyatlı menü doğrulanamadığından override eklenmedi; strict HOLD**.
+
+## ÖZ SANAT CAFE ID 7039 kabul
+Exact kayıt `Beyaz Palace, Adnan Kahveci, Osmanlı Cd. No:63, 34528 Beylikdüzü/İstanbul`, `+90 538 040 48 58`; bağımsız işletme kaydı ile adres ve telefon eşleşti. Yemeksepeti `Özsanat Pastane` canlı menüsünden 2026-08-25 tarihinde tatlılar, adet/kişilik pastalar, içecekler ve 500 gr kurabiye/ekler ürünlerinden **91 benzersiz ürün/fiyat** alındı. Plastik poşet kalemi dışlandı.
