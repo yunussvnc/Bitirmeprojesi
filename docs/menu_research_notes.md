@@ -1305,3 +1305,6 @@ Exact kayıt `Cumhuriyet, Çoruh Sk. No:25, 34520 Beylikdüzü/İstanbul`, `+90 
 
 ## Bex Coffee ID 7067 refresh
 Exact kayıt `Yıldız, Çırağan Cd. No:35/1, 34349 Beşiktaş/İstanbul`, `+90 544 636 96 10`; Kaçıyor, Cybo, Corner, Yandex ve Migros `Bex Coffee Çırağan, Beşiktaş (Yıldız Mah.)` kaynaklarıyla doğrulandı. Mevcut Migros override’ı BEX Coffee resmî güncel menüsüyle yenilendi: espresso sıcak/soğuk içecekler, çay/sıcak içecekler, frappe/milkshake, soğuk içecekler, içecekler, pasta-sandviç ve kasa önü yiyecek/içeceklerinden boy varyantlarıyla **144 benzersiz ürün/fiyat** aktarıldı. Hediye, tekstil, ekipman ve özelleştirme ücretleri dışlandı. `verifiedAt` 2026-08-25.
+
+## Suhulet Cafe Restaurant ID 7066 strict HOLD
+Hentzer exact kaydı `Paşabahçe, Yalı Erguvan Çk., 34800 Beykoz/İstanbul` ve telefon `null`; public resmî site/Facebook/Mekanlar/Tripadvisor kaynakları işletmeyi `Paşabahçe Mahallesi, Yalı Erguvan Çk. No:15, Beykoz` olarak gösteriyor. Resmî rezervasyon telefonu `0216 425 07 07`, Instagram telefonu `0543 806 3412`; bu nedenle Hentzer ile 100% adres/telefon parity sağlanamadı. Complete ve son bir yıl içinde item-level fiyatlı menü de doğrulanamadı. Ürün/fiyat uydurulmadı; strict HOLD.
