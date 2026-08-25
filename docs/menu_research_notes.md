@@ -1557,3 +1557,6 @@ Hentzer API kaydı `Şehit Muhtar Mahallesi, Nane Sokak No:19, 34421 Beyoğlu/İ
 
 ## BENY BURGER HOUSE & CAFETERIA ID 6981 strict HOLD
 Hentzer kaydı `Vişnezade, Şair Nedim Cd. No:49/A, 34357 Beşiktaş/İstanbul`, `+90 544 916 77 75`; resmi beny.com.tr aynı exact adres ve telefonu doğruluyor. Resmi sitede burger, fries, breakfast, içecek ve tatlı kategorileri ile ürün adları görünmesine rağmen fiyatlar yayınlanmıyor; son bir yıl içinde aynı şubeye ait kamuya açık item-level fiyatlı menü bulunamadı. Fiyat uydurmamak için **override eklenmedi; strict HOLD**.
+
+## DEMİRANE RESTAURANT ID 6980 strict HOLD
+Hentzer API kaydı `Yalıköy, Selvi Burnu Cd. No:4, 34820 Beykoz/İstanbul`, `+90 216 323 31 30`; Yaka.la, Restoranim ve Tumisyeri aynı adres/telefonu doğruluyor. Beykoz Kundura resmi Demirane sayfası restoranın Beykoz Kundura içindeki işletme bağını doğruluyor. FineDine canlı menü sayfası bazı fiyatları arama önizlemesinde gösterse de doğrudan erişimde reCAPTCHA ile korunuyor; tam item-level fiyat listesi ve güncellik doğrulanamadı. Diğer kaynaklar yalnızca genel menü açıklamaları veriyor. Fiyat uydurmamak için **override eklenmedi; strict HOLD**.
