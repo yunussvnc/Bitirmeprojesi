@@ -1707,3 +1707,6 @@ Hentzer kaydı `Mustafa Kemal Paşa, Fatih Cd. No:147A, 34275 Arnavutköy/İstan
 
 ## MIDPOINT İSTİKLAL ID 6930 — STRICT HOLD
 Hentzer kaydı `Tomtom, İstiklal Cd. No:187, 34433 Beyoğlu/İstanbul`, `+90 530 955 47 64`; public işletme kaynakları aynı adresi gösterse de Midpoint’in yayınlanan telefonu `+90 212 245 70 40` olarak farklıdır. Resmi midpoint.com.tr sayfası metin olarak erişilemedi; üçüncü taraf sayfalar yalnız genel menü açıklaması veriyor, son bir yıl içinde doğrulanabilir ürün/fiyat listesi yok. Zorunlu exact adres+telefon eşleşmesi sağlanmadığı ve güncel fiyat doğrulanamadığı için **strict HOLD**; override eklenmedi.
+
+## KAVACIK BALIK SOFRASI ID 6929 — STRICT HOLD
+Hentzer kaydı `Kavacık, Yayabeyi Sk. No:19, 34810 Beykoz/İstanbul`, `+90 216 331 02 14`; Yandex Maps aynı exact konumu `Yaya Beyi Sok., No:19` ve telefonu doğruluyor. Instagram hesabında güncel işletme paylaşımları bulunmasına rağmen ürün bazlı fiyat listesi yayımlanmıyor; Menu-TR yalnız genel tanıtım ve yorum içeriyor, güncel fiyat vermiyor. Bu nedenle güncel fiyat şartı sağlanamadığından **strict HOLD**; override eklenmedi.
