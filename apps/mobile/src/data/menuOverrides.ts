@@ -73073,4 +73073,153 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
   ]
 },
 
+  "7102": {
+  "name": "SR DÖNER Beşiktaş",
+  "sourceUrl": "https://www.migros.com.tr/yemek/sr-doner-besiktas-cihannuma-mah-st-1fb9d",
+  "sourceName": "Migros Yemek exact SR Döner, Beşiktaş (Cihannüma Mah.) canlı menüsü; resmi srdoner.com.tr ve Restoranım exact Cihannüma Hasfırın Cd. No:8/1 / 444 77 88 kimlik eşleşmesi. Sayfada ürün adları mevcut, fiyat alanı yayımlanmadığı için price eklenmedi; poşet satırı dışlandı.",
+  "verifiedAt": "2026-08-25",
+  "items": [
+    {
+      "name": "Avantaj Roll-x",
+      "category": "Avantaj Menüleri"
+    },
+    {
+      "name": "Avantaj Crispy Boom",
+      "category": "Avantaj Menüleri"
+    },
+    {
+      "name": "Avantaj Sr Medium",
+      "category": "Avantaj Menüleri"
+    },
+    {
+      "name": "Avantaj Sr Large",
+      "category": "Avantaj Menüleri"
+    },
+    {
+      "name": "Avantaj Rollstar",
+      "category": "Avantaj Menüleri"
+    },
+    {
+      "name": "Avantaj Sr Xxlarge",
+      "category": "Avantaj Menüleri"
+    },
+    {
+      "name": "Roll-x (Acı Sevenlere Özel)",
+      "category": "Sr Gurme Lezzetler Serisi"
+    },
+    {
+      "name": "Crispy Boom (Tenders Sevenlere Özel)",
+      "category": "Sr Gurme Lezzetler Serisi"
+    },
+    {
+      "name": "Roll-x Menü",
+      "category": "Sr Gurme Lezzetler Serisi Menüleri"
+    },
+    {
+      "name": "Crispy Boom Menü",
+      "category": "Sr Gurme Lezzetler Serisi Menüleri"
+    },
+    {
+      "name": "Sr Medium",
+      "category": "Sr Tavuk Dönerler"
+    },
+    {
+      "name": "Sr Large",
+      "category": "Sr Tavuk Dönerler"
+    },
+    {
+      "name": "Roll Star",
+      "category": "Sr Tavuk Dönerler"
+    },
+    {
+      "name": "Sr Xxlarge",
+      "category": "Sr Tavuk Dönerler"
+    },
+    {
+      "name": "Sr Medium Menü",
+      "category": "Sr Tavuk Döner Menüler"
+    },
+    {
+      "name": "Sr Large Menü",
+      "category": "Sr Tavuk Döner Menüler"
+    },
+    {
+      "name": "Rollstar Menü",
+      "category": "Sr Tavuk Döner Menüler"
+    },
+    {
+      "name": "Sr Xxlarge Menü",
+      "category": "Sr Tavuk Döner Menüler"
+    },
+    {
+      "name": "Patates Kızartması (Küçük)",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Patates Kızartması (Büyük)",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Susamlı Soğan Halkası (8 Adet)",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Susamlı Soğan Halkası (5 Adet)",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Mozzarella Stick (4 Adet)",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Ranch Sos",
+      "category": "Soslar"
+    },
+    {
+      "name": "Acı Sos",
+      "category": "Soslar"
+    },
+    {
+      "name": "Barbekü Sos",
+      "category": "Soslar"
+    },
+    {
+      "name": "Acı Mayonez",
+      "category": "Soslar"
+    },
+    {
+      "name": "Fruko (25 Cl.)",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Pepsi Max (33 Cl.)",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Yedigün (33 Cl.)",
+      "category": "İçecekler"
+    },
+    {
+      "name": "7Up (33 Cl.)",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Lipton Ice Tea Şeftali (33 Cl.)",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Soda (20 Cl.)",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Ayran (28 Cl.)",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Su (50 Cl.)",
+      "category": "İçecekler"
+    }
+  ]
+},
+
 };

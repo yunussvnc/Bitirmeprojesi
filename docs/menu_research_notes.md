@@ -1203,3 +1203,6 @@ Hentzer exact kayıt `Kanlıca, Halide Edip Adıvar Cd. No:6, 34810 Beykoz/İsta
 
 ## Ya-Ser Cafe ID 7103 acceptance
 Hentzer exact kayıt `Cihannüma, Akmaz Çeşme Sk. No:18, 34022 Beşiktaş/İstanbul`; telefon kaydı yok. Resmi Instagram `@yasercafe` arama kaydı aynı Cihannüma/Akmazçeşme No:18 adresini destekliyor. Migros Yemek exact `Ya Ser Cafe, Beşiktaş (Cihannüma Mah.)` canlı sayfasından kahvaltı/ızgara, tost, makarna, burger, yan ürün, salata, tatlı ve içecek kategorilerinde **73 ürün adı** aktarıldı. Migros sayfası fiyat alanlarını yayımlamadığı için fiyat uydurulmadı; 73 ürünün tamamında `price` bilinçli olarak boş bırakıldı. `verifiedAt` canlı doğrulama tarihi `2026-08-25`.
+
+## SR DÖNER Beşiktaş ID 7102 acceptance
+Hentzer exact kayıt `Cihannüma, Hasfırın Cd. No:8/1, 34353 Beşiktaş/İstanbul`, `+90 444 77 88`; Restoranım exact sayfası ve resmi `srdoner.com.tr` aynı marka/şube kimliğini destekliyor. Migros Yemek exact `SR Döner, Beşiktaş (Cihannüma Mah.)` canlı menüsünden avantaj menüleri, gurme ürünler, tavuk dönerler, yan ürünler, soslar ve içecekler kategorilerinde **35 gıda ürünü** aktarıldı. Migros sayfası fiyat alanlarını yayımlamadığı için fiyat uydurulmadı; poşet satırı dışlandı. `verifiedAt` canlı doğrulama tarihi `2026-08-25`.
