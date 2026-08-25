@@ -28261,199 +28261,459 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
 ,
   "7256": {
   "name": "Ala Rasi Restaurant",
-  "sourceUrl": "https://www.yemeksepeti.com/restaurant/nqx3/ala-rasi-restaurant",
-  "sourceName": "Yemeksepeti canlı menüsü (Ala Rasi Sıraselviler)",
-  "verifiedAt": "2026-08-23",
+  "sourceUrl": "https://qr1.tabpadmenu.com/ala-rahi-restoran/menu/3472",
+  "sourceName": "Ala Rasi official website linked public TabPad QR menu (exact Sıraselviler branch)",
+  "verifiedAt": "2026-08-25",
   "items": [
     {
-      "name": "Mercimek Çorbası / Lentıl Soup",
-      "price": "250 TL",
-      "desc": "Karamelize sebzeler ve baharatlar mix ile pişirilir.",
-      "category": "Çorbalar / Soups"
+      "name": "Lentil Soup",
+      "price": "240.00 ₺",
+      "category": "SOUPS",
+      "desc": "nourishing soup with spices and a hint of cumin that works beautifully with the lentils"
     },
     {
-      "name": "Kemik Suyu Çorbası / Bone Broth Soup",
-      "price": "245 TL",
-      "desc": "Aromatik baharatlar, sebzeler ve taze otlar ile tatlandırılmış, ağır ateşte kaynatılmıştır.",
-      "category": "Çorbalar / Soups"
+      "name": "Lamb Yakhni (Bone Broth)",
+      "price": "235.00 ₺",
+      "category": "SOUPS",
+      "desc": "slow cooked lamb bones flavoured with aromatic spices and fresh herbs"
     },
     {
-      "name": "Tavuk Şiş",
-      "price": "740 TL",
-      "desc": "Narenciye, sarımsak, baharatlar ve yoğurt marine edilmiş tavuk şiş. Salata, pide ile",
-      "category": "Ana Yemekler / Main Dishes"
+      "name": "Cream Of Mushroom Soup",
+      "price": "360.00 ₺",
+      "category": "SOUPS",
+      "desc": "a smooth and creamy soup made of mushrooms simmered with fresh cream and aromatic herbs"
     },
     {
-      "name": "Tavuk Malai Şiş",
-      "price": "740 TL",
-      "desc": "Limon, yeşil biber, krem ile marine edilmiş tavuk but, mevsim salata, pilav ile",
-      "category": "Ana Yemekler / Main Dishes"
+      "name": "Coconut Lime Soup",
+      "price": "380.00 ₺",
+      "category": "SOUPS",
+      "desc": "a flavorful and aromatic soup made with rich coconut cream, fragrant lime leaves and lemongrass"
     },
     {
-      "name": "Kuzu Yağlı Kara",
-      "price": "1130 TL",
-      "desc": "Baharat, tuz ve biberle marine edilmiş, yumuşak kuzu eti. Salata, ızgara patates ile",
-      "category": "Ana Yemekler / Main Dishes"
+      "name": "Fattoush Salad",
+      "price": "410.00 ₺",
+      "category": "SALADS",
+      "desc": "classic combination of fresh greens, cucumber, onions, olives, tomatoes and pita croutons tossed in molasses sauce"
     },
     {
-      "name": "Reşmi Kebap",
-      "price": "730 TL",
-      "desc": "Paprika biberle tatlandırılmış hafif baharatlı tavuk kebabı. Mevsim salata, aromalı pilav ile",
-      "category": "Ana Yemekler / Main Dishes"
+      "name": "Chicken Caeser Salad",
+      "price": "515.00 ₺",
+      "category": "SALADS",
+      "desc": "mix greens including iceberg lettuce, tomatoes and garlic crotons tossed in classic Caesar dressing topped with grilled chicken and parmesan cheese"
     },
     {
-      "name": "Acılı Paşa Kebap",
-      "price": "730 TL",
-      "desc": "Özel baharatlarla marine edilmiş acılı tavuk kebabı. Salata, aromalı pilav ile",
-      "category": "Ana Yemekler / Main Dishes"
-    },
-    {
-      "name": "Kajulu Dana Kebap - Beef Cashew Kebab",
-      "price": "890 TL",
-      "desc": "Özel sos, soğan, maydanozla marine edilmiş dana eti kebap. Salata, aromalı pilav ile",
-      "category": "Ana Yemekler / Main Dishes"
-    },
-    {
-      "name": "Kuzu Kebap",
-      "price": "870 TL",
-      "desc": "Hafif aromalı kuzu eti kebabı. Salata, aromalı pilav ile",
-      "category": "Ana Yemekler / Main Dishes"
-    },
-    {
-      "name": "Kuzu Pirzola (220 gr.)",
-      "price": "1310 TL",
-      "desc": "Mevsim sebzeleri ile",
-      "category": "Ana Yemekler / Main Dishes"
-    },
-    {
-      "name": "Afgan Dana Şiş / Afghan Beef Botı",
-      "price": "1130 TL",
-      "desc": "Karabiber, tuz, özel baharatlarla marine edilmiş dana eti, kuzu kuyruk yağ. Salata, aromalı pilav ile",
-      "category": "Ana Yemekler / Main Dishes"
-    },
-    {
-      "name": "Tavuk Kanat",
-      "price": "780 TL",
-      "desc": "Özel sos ile marine edilmiş tavuk kanat. Salata, patates kızartması ile",
-      "category": "Ana Yemekler / Main Dishes"
-    },
-    {
-      "name": "Tavuk Biryani / Chicken Biryani",
-      "price": "810 TL",
-      "desc": "Marine edilimiş tavuk, basmati pirinç, baharatlar, safran ile hazırlanan geleneksel tavuk biryani",
-      "category": "Özelliklerimiz / Our Specialities"
-    },
-    {
-      "name": "Kuzu Biryani / Lamb Biryani",
-      "price": "1160 TL",
-      "desc": "Marine kuzu eti, basmati pirinç, baharatlı safran ile hazırlanan geleneksel kuzu biryani",
-      "category": "Özelliklerimiz / Our Specialities"
-    },
-    {
-      "name": "Tavuk Afgan Pilav / Chicken Afghani Pilaf",
-      "price": "810 TL",
-      "desc": "Özel sos ile marine edilmiş ızgara tavuk. Afgan pilavı ile",
-      "category": "Özelliklerimiz / Our Specialities"
-    },
-    {
-      "name": "Kuzu Afgan Pilav / Lamb Afghanı Pılaf",
-      "price": "1160 TL",
-      "desc": "Yumuşak kuzu eti. Afgan pilavı ile",
-      "category": "Özelliklerimiz / Our Specialities"
-    },
-    {
-      "name": "Tavuklu Kepse Pilav / Chicken Kebsa",
-      "price": "830 TL",
-      "desc": "Izgara tavuk, kişniş, tarçın, zerdeçal, kakule, basmati pirinç, özel sos",
-      "category": "Özelliklerimiz / Our Specialities"
-    },
-    {
-      "name": "Kuzu Kepse Pilav / Lamb Kebsa",
-      "price": "1240 TL",
-      "desc": "Yumuşak kuzu eti, kakule, kişniş, tarçın ve zerdeçal ile tatlandırılmış kepse pilav ve özel kepse sos ile",
-      "category": "Özelliklerimiz / Our Specialities"
-    },
-    {
-      "name": "Ala Kiev Kebap - Kebab Ala Kiev",
-      "price": "880 TL",
-      "desc": "Otlar, peynir sosuyla doldurulmuş tavuk kebabı. Turşu, sebze, humus ile",
-      "category": "Özelliklerimiz / Our Specialities"
-    },
-    {
-      "name": "Tereyağı Soslu Tavuk",
-      "price": "725 TL",
-      "desc": "Tereyağı sosunda özel baharatlarla pişirilmiş kemiksiz tavuk but",
-      "category": "Özelliklerimiz / Our Specialities"
-    },
-    {
-      "name": "Peynir Reşmi Güveç / Paneer Reshmi",
-      "price": "725 TL",
-      "desc": "Krema, peynir sosunda pişirilmiş, karabiberle hafif tatlandırılmış Pakistan usulü tavuk güveç",
-      "category": "Özelliklerimiz / Our Specialities"
-    },
-    {
-      "name": "Pakistan Usulü Tavuk Sac Tava",
-      "price": "710 TL",
-      "desc": "Taze yeşil biber, sarımsak ve kişniş içeren domates ve zencefil bazlı sos ile pişirilen kemiksiz tavuk.",
-      "category": "Özelliklerimiz / Our Specialities"
-    },
-    {
-      "name": "Pakistan Usulü Kuzu Sac Tava",
-      "price": "1050 TL",
-      "desc": "Yaze yeşil biber, sarımsak ve kişniş içeren domates ve zencefil bazlı sos ile pişirilen yumuşak kuzu eti.",
-      "category": "Özelliklerimiz / Our Specialities"
-    },
-    {
-      "name": "Fattoush Salata",
-      "price": "430 TL",
-      "desc": "Özel fattoush sos, mevsim yeşillikleri, salatalık, soğan, zeytin, domates",
-      "category": "Salatalar / Salads"
-    },
-    {
-      "name": "Sezar Salata",
-      "price": "530 TL",
-      "desc": "Limon suyu, zeytinyağı, hardal sosu ile tatlandırılmış marul, çeri domates, özel Sezar sos ile",
-      "category": "Salatalar / Salads"
-    },
-    {
-      "name": "Humus",
-      "price": "295 TL",
-      "desc": "Nohut, tahin, zeytinyağı, limon suyu, sarımsak",
-      "category": "Mezeler"
+      "name": "Hummus",
+      "price": "285.00 ₺",
+      "category": "MEZZES",
+      "desc": "Middle Eastern dip with chickpeas, tahini, olive oil, lemon juice and garlic"
     },
     {
       "name": "Ezme",
-      "price": "280 TL",
-      "desc": "Domates salçası, nar ekşisi, sarımsak, zeytinyağı, baharatlar, ceviz",
-      "category": "Mezeler"
+      "price": "270.00 ₺",
+      "category": "MEZZES",
+      "desc": "tomato salsa with chopped vegetables, pomegranate molasses, garlic, olive oil, spices and crushed walnuts"
     },
     {
-      "name": "Mütebbel",
-      "price": "295 TL",
-      "desc": "Közlenmiş patlıcan, zeytinyağı, tahin, sarımsak",
-      "category": "Mezeler"
+      "name": "Mutabbal",
+      "price": "285.00 ₺",
+      "category": "MEZZES",
+      "desc": "Middle Eastern dip made using roasted eggplant, olive oil, yogurt and garlic making it a perfect vegetarian paste"
     },
     {
       "name": "Atom",
-      "price": "295 TL",
-      "desc": "Süzme yoğurt, kuru acı biber, sarımsak, tereyağı",
-      "category": "Mezeler"
+      "price": "285.00 ₺",
+      "category": "MEZZES",
+      "desc": "strained yogurt with cream dried chill peppers, garlic and butter"
     },
     {
-      "name": "Ala Meze Tabağı",
-      "price": "895 TL",
-      "desc": "Ezme, humus, mütebbel, şakşuka, ala gurme",
-      "category": "Mezeler"
+      "name": "Ala Gourmet",
+      "price": "395.00 ₺",
+      "category": "MEZZES",
+      "desc": "Ala Rasi signature mezze made using strained yogurt, mushroom, dried chilli, caramelized onion, tomato, garlic and butter topped with sesame seeds"
+    },
+    {
+      "name": "Ala Mezze Platter",
+      "price": "880.00 ₺",
+      "category": "MEZZES",
+      "desc": "combination of ezme, hummus, mutabbal, turkish shakshouka and ala gourmet"
+    },
+    {
+      "name": "Cheesy Creamed Spinach",
+      "price": "360.00 ₺",
+      "category": "MEZZES",
+      "desc": "bright green spinach in a rich, cheesy cream sauce served with garlic butter bread"
+    },
+    {
+      "name": "Cheesy Creamed Mushroom",
+      "price": "385.00 ₺",
+      "category": "MEZZES",
+      "desc": "mushrooms sauteed in a rich, cheesy cream sauce served with garlic butter bread"
+    },
+    {
+      "name": "Loaded Mushrooms",
+      "price": "360.00 ₺",
+      "category": "MEZZES"
+    },
+    {
+      "name": "French Fries",
+      "price": "315.00 ₺",
+      "category": "MEZZES",
+      "desc": "bucket of fries sprinkled with our signature seasoning served with a dip of sauce"
+    },
+    {
+      "name": "Shish Taouk",
+      "price": "725.00 ₺",
+      "category": "MAIN COURSE",
+      "desc": "traditional marinated chicken boneless cubes bathed in a bold yogurt based marinade with citrus, garlic and warm spices served with side salad & aromatic rice"
+    },
+    {
+      "name": "Chicken Malai Boti",
+      "price": "725.00 ₺",
+      "category": "MAIN COURSE",
+      "desc": "chargrilled tender chicken pieces marinated with lemon, green chilli and cream, served with side salad and aromatic rice"
+    },
+    {
+      "name": "Chicken Reshmi Kebab",
+      "price": "715.00 ₺",
+      "category": "MAIN COURSE",
+      "desc": "CONTAINS LAMB FAT"
+    },
+    {
+      "name": "Chicken Pasha Kebab",
+      "price": "715.00 ₺",
+      "category": "MAIN COURSE",
+      "desc": "CONTAINS LAMB FAT"
+    },
+    {
+      "name": "Beef Cashew Kebab",
+      "price": "870.00 ₺",
+      "category": "MAIN COURSE",
+      "desc": "CONTAINS LAMB FAT"
+    },
+    {
+      "name": "Lamb Kebab",
+      "price": "850.00 ₺",
+      "category": "MAIN COURSE",
+      "desc": "mildly flavoured lamb kebab served with side salad & aromatic rice"
+    },
+    {
+      "name": "Lamb Lokum",
+      "price": "1,100.00 ₺",
+      "category": "MAIN COURSE",
+      "desc": "boneless lamb cubes marinated with spice, salt and pepper grilled to perfection making it incredibly tender, served with side salad & aromatic rice"
+    },
+    {
+      "name": "Lamb Chops (3 pcs)",
+      "price": "1,290.00 ₺",
+      "category": "MAIN COURSE",
+      "desc": "250 grams of chargrilled tender lamb chops marinated with black pepper, salt and special blend of spices, served with grilled vegetables"
+    },
+    {
+      "name": "Afghani Beef Boti",
+      "price": "1,100.00 ₺",
+      "category": "MAIN COURSE",
+      "desc": "tender, mildly spiced and salted beef tenderloin pieces, served with side salad and aromatic rice"
+    },
+    {
+      "name": "Chicken Wings",
+      "price": "760.00 ₺",
+      "category": "MAIN COURSE",
+      "desc": "7 pieces of wings marinated in aromatic spices, served with side salad and aromatic rice"
+    },
+    {
+      "name": "Chimichurri Grilled Chicken",
+      "price": "715.00 ₺",
+      "category": "MAIN COURSE",
+      "desc": "juicy grilled chicken served with chimichurri sauce made from fresh herbs, garlic and a touch of vinegar, served with sauteed vegetables and fries"
+    },
+    {
+      "name": "Creamy Mushroom Grilled Chicken",
+      "price": "715.00 ₺",
+      "category": "MAIN COURSE",
+      "desc": "juicy grilled chicken served with creamy mushroom sauce made from mushrooms, cream and a hint of aromatic seasoning, served with sauteed vegetables and fries"
+    },
+    {
+      "name": "Mexican Grilled Chicken",
+      "price": "715.00 ₺",
+      "category": "MAIN COURSE",
+      "desc": "juicy grilled chicken served with tangy tomato sauce made from fresh tomatoes, chilli peppers and aromatic herbs served with sauteed vegetables and fries"
+    },
+    {
+      "name": "Plain Rice",
+      "price": "250.00 ₺",
+      "category": "MAIN COURSE",
+      "desc": "Plain, Kebsa OR Aromatic Rice"
+    },
+    {
+      "name": "Chicken Biryani",
+      "price": "790.00 ₺",
+      "category": "OUR SPECIALITIES",
+      "desc": "traditional chicken biryani spiced with herbs and a hint of saffron"
+    },
+    {
+      "name": "Lamb Biryani",
+      "price": "1,140.00 ₺",
+      "category": "OUR SPECIALITIES",
+      "desc": "traditional lamb biryani spiced with herbs and a hint of saffron"
+    },
+    {
+      "name": "Chicken Afghani Pilaf",
+      "price": "790.00 ₺",
+      "category": "OUR SPECIALITIES",
+      "desc": "chicken pieces marinated with special sauce served on Afghan rice covered in bread dome"
+    },
+    {
+      "name": "Lamb Afghani Pilaf",
+      "price": "1,140.00 ₺",
+      "category": "OUR SPECIALITIES",
+      "desc": "tender lamb marinated with special sauce served on Afghan rice covered in bread dome"
+    },
+    {
+      "name": "Chicken Kebsa",
+      "price": "830.00 ₺",
+      "category": "OUR SPECIALITIES",
+      "desc": "half roasted chicken served with special kebsa sauce and signature kebsa rice spiced with cardamom, coriander, cinnamon & turmeric"
+    },
+    {
+      "name": "Lamb Kebsa",
+      "price": "1,240.00 ₺",
+      "category": "OUR SPECIALITIES",
+      "desc": "slow cooked tender lamb served with special kebsa sauce and signature kebsa rice spiced with cardamom, coriander, cinnamon & turmeric"
+    },
+    {
+      "name": "Ala Rosh",
+      "price": "1,240.00 ₺",
+      "category": "OUR SPECIALITIES",
+      "desc": "tender lamb shank cooked slowly in mild spices served with bone broth, garlic, onions and potatoes"
+    },
+    {
+      "name": "Lamb Shank",
+      "price": "1,290.00 ₺",
+      "category": "OUR SPECIALITIES",
+      "desc": "slow cooked lamb shank covered in bread on a bed of mashed potato served with demi glace sauce"
+    },
+    {
+      "name": "Chilli Tamarind Chicken Kebab",
+      "price": "780.00 ₺",
+      "category": "OUR SPECIALITIES",
+      "desc": "chicken kebab spiced and tossed in our tangy tamarind sauce served on bread"
+    },
+    {
+      "name": "Chilli Tamarind Lamb Kebab",
+      "price": "1,150.00 ₺",
+      "category": "OUR SPECIALITIES",
+      "desc": "lamb kebab spiced and tossed in our tangy tamarind sauce served on bread"
+    },
+    {
+      "name": "Kebab Ala Kiev",
+      "price": "860.00 ₺",
+      "category": "OUR SPECIALITIES",
+      "desc": "tender chicken kebab filled with herb and cheese sauce, served with pickles, vegetables and hummus"
+    },
+    {
+      "name": "Beyti Kebab",
+      "price": "960.00 ₺",
+      "category": "OUR SPECIALITIES"
+    },
+    {
+      "name": "Butter Curry Chicken",
+      "price": "725.00 ₺",
+      "category": "OUR SPECIALITIES",
+      "desc": "boneless chicken cooked in butter, cream and a splash of tomato sauce"
+    },
+    {
+      "name": "Chicken Paneer Reshmi",
+      "price": "725.00 ₺",
+      "category": "OUR SPECIALITIES",
+      "desc": "tender chargrilled chicken cooked in creamy sauce with a hint of black pepper topped with cheese pieces"
+    },
+    {
+      "name": "Chicken Karahi",
+      "price": "710.00 ₺",
+      "category": "OUR SPECIALITIES",
+      "desc": "boneless chicken cooked in tomato and ginger gravy spiced with green chillies, garlic and coriander"
+    },
+    {
+      "name": "Lamb Karahi",
+      "price": "1,040.00 ₺",
+      "category": "OUR SPECIALITIES",
+      "desc": "tender lamb cooked in tomato and ginger gravy spiced with green chillies, garlic and coriander"
+    },
+    {
+      "name": "Traditional Turkish Dumplings",
+      "price": "725.00 ₺",
+      "category": "OUR SPECIALITIES",
+      "desc": "dumplings filled with ground meat, served with rich garlic yogurt sauce and drizzled with melted butter and paprika"
+    },
+    {
+      "name": "Fusion Turkish Dumplings",
+      "price": "750.00 ₺",
+      "category": "OUR SPECIALITIES",
+      "desc": "Turkish dumplings filled with ground meat tossed in Ala Rasi’s signature sauce"
+    },
+    {
+      "name": "ClayPot Turkish Dumplings",
+      "price": "715.00 ₺",
+      "category": "OUR SPECIALITIES"
+    },
+    {
+      "name": "Mishkak Platter",
+      "price": "1,490.00 ₺",
+      "category": "ALA PLATTERS",
+      "desc": "SERVES 1 PERSON"
+    },
+    {
+      "name": "Ala Sofra Mini Platter",
+      "price": "2,990.00 ₺",
+      "category": "ALA PLATTERS",
+      "desc": "SERVES 2-3 PERSONS"
+    },
+    {
+      "name": "Ala Sofra Family Platter",
+      "price": "5,850.00 ₺",
+      "category": "ALA PLATTERS",
+      "desc": "SERVES 4-6 PERSONS"
+    },
+    {
+      "name": "Sultan Sofra Mini Platter",
+      "price": "4,490.00 ₺",
+      "category": "ALA PLATTERS",
+      "desc": "SERVES 3-4 PERSONS"
+    },
+    {
+      "name": "Sultan Sofra Family Platter",
+      "price": "7,600.00 ₺",
+      "category": "ALA PLATTERS",
+      "desc": "SERVES 5-6 PERSONS"
+    },
+    {
+      "name": "Daal Tarka",
+      "price": "585.00 ₺",
+      "category": "TRADITIONAL VEGETARIAN DELICACIES",
+      "desc": "South Asian lentil curry with tempered spices"
+    },
+    {
+      "name": "Palak Paneer (Spinach with Feta)",
+      "price": "620.00 ₺",
+      "category": "TRADITIONAL VEGETARIAN DELICACIES",
+      "desc": "authentic Indian dish made with pureed spinach, onion, spices, corn, feta cheese (paneer) and herbs topped with crunchy cashews"
+    },
+    {
+      "name": "Daal Chana Fry (Chickpea Lentils)",
+      "price": "615.00 ₺",
+      "category": "TRADITIONAL VEGETARIAN DELICACIES",
+      "desc": "chickpea lentils cooked in tomato gravy"
+    },
+    {
+      "name": "Vegetable Biryani",
+      "price": "620.00 ₺",
+      "category": "TRADITIONAL VEGETARIAN DELICACIES",
+      "desc": "aromatic biryani rice loaded with veggies, cashews, herbs and a hint of saffron"
+    },
+    {
+      "name": "Aloo Matar (Potato & Pea)",
+      "price": "560.00 ₺",
+      "category": "TRADITIONAL VEGETARIAN DELICACIES",
+      "desc": "potatoes and peas in a mildly spiced creamy tomato based gravy"
+    },
+    {
+      "name": "Garlic Butter Naan",
+      "price": "80.00 ₺",
+      "category": "BRICK OVEN"
+    },
+    {
+      "name": "Rogni Naan",
+      "price": "100.00 ₺",
+      "category": "BRICK OVEN",
+      "desc": "buttered and topped with sesame seeds"
+    },
+    {
+      "name": "Balloon Lavash",
+      "price": "0.00 ₺",
+      "category": "BRICK OVEN"
+    },
+    {
+      "name": "Arabic Pita Bread",
+      "price": "0.00 ₺",
+      "category": "BRICK OVEN"
+    },
+    {
+      "name": "Kunafeh",
+      "price": "300.00 ₺",
+      "category": "DESSERTS",
+      "desc": "delicious cheese filled kunafeh served with a choice of ice cream OR cream"
     },
     {
       "name": "Katmer",
-      "price": "380 TL",
-      "desc": "Antep usulü, kaymaklı, fıstıklı el yufkası. İsteğe göre dondurma veya kaymak ile",
-      "category": "Tatlılar / Desserts"
+      "price": "380.00 ₺",
+      "category": "DESSERTS",
+      "desc": "Antep style crispy phyllo filled with pistachios served with a choice of ice cream OR cream"
+    },
+    {
+      "name": "KunaFiesta",
+      "price": "390.00 ₺",
+      "category": "DESSERTS"
+    },
+    {
+      "name": "Shahi Gulab Jamun",
+      "price": "350.00 ₺",
+      "category": "DESSERTS",
+      "desc": "traditional South Asian dessert served in saffron milk topped with pistachios"
+    },
+    {
+      "name": "Pepsi",
+      "price": "120.00 ₺",
+      "category": "BEVERAGES",
+      "desc": "330 ml"
+    },
+    {
+      "name": "Fanta",
+      "price": "120.00 ₺",
+      "category": "BEVERAGES",
+      "desc": "330 ml"
+    },
+    {
+      "name": "7Up",
+      "price": "120.00 ₺",
+      "category": "BEVERAGES",
+      "desc": "330 ml"
+    },
+    {
+      "name": "Lipton IceTea",
+      "price": "120.00 ₺",
+      "category": "BEVERAGES",
+      "desc": "330 ml"
+    },
+    {
+      "name": "Lemon Soda",
+      "price": "85.00 ₺",
+      "category": "BEVERAGES",
+      "desc": "200 ml"
+    },
+    {
+      "name": "Sparkling Water",
+      "price": "85.00 ₺",
+      "category": "BEVERAGES",
+      "desc": "200 ml"
+    },
+    {
+      "name": "Water",
+      "price": "80.00 ₺",
+      "category": "BEVERAGES",
+      "desc": "330 ml"
+    },
+    {
+      "name": "Ayran",
+      "price": "120.00 ₺",
+      "category": "BEVERAGES"
+    },
+    {
+      "name": "Milk Tea",
+      "price": "180.00 ₺",
+      "category": "BEVERAGES"
     }
   ]
-}
-,
+},
   "7257": {
   "name": "Trois Coffee",
   "sourceUrl": "https://www.instagram.com/p/DaFcBe_MXd1/",
