@@ -1233,3 +1233,6 @@ Hentzer exact kayıt `Mecidiye, Gözlükçü Sk. 1A, 34347 Beşiktaş/İstanbul`
 
 ## Galata Lily Cafe Restaurant ID 7093 acceptance
 Hentzer exact kayıt `Müeyyetzade, Lüleci Hendek Cd. No:69/A, 34425 Beyoğlu/İstanbul`, `+90 544 791 02 13`; Restoranım exact sayfası aynı adres/telefonu doğruluyor. Yemeksepeti canlı `Galata Lily Lounge` vendoru ve resmi Galata Lily sosyal medya kimliği bu işletmeyle eşleştirildi; menüde çorba, kebap/ızgara, makarna, ana yemek, kırmızı et, dürüm, meze, yan ürün, salata, tatlı ve içecek kategorilerinde **40 ürün ve güncel fiyat** aktarıldı. Poşet satırı dışlandı. `verifiedAt` canlı doğrulama tarihi `2026-08-25`.
+
+## The Smashy ID 7092 acceptance
+Hentzer exact kayıt `Sinanpaşa, Şair Nedim Cd. No:44, 34353 Beşiktaş/İstanbul`, `+90 212 236 85 02`; Yemeksepeti vendor sayfası `Şair Nedim Cad. Çepni Apt. No:44A İç Kapı No:2 Beşiktaş` adresini, resmi `@thesmashyburger` içerikleri de Smashy Akaretler ve aynı telefonu destekliyor. Yemeksepeti canlı menüsünden et burger, tavuk burger, hot dog, yan ürün, içecek ve sos kategorilerinde **34 ürün ve güncel fiyat** aktarıldı. Poşet satırı dışlandı. `verifiedAt` canlı doğrulama tarihi `2026-08-25`.

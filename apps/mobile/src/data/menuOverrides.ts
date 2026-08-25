@@ -75662,4 +75662,183 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
   ]
 },
 
+  "7092": {
+  "name": "The Smashy",
+  "sourceUrl": "https://www.yemeksepeti.com/restaurant/wjqj/the-smashy-burger",
+  "sourceName": "Yemeksepeti canlı vendor wjqj; exact Şair Nedim Cad. Çepni Apt. No:44A İç Kapı No:2 Beşiktaş adresi search kaydında; resmi @thesmashyburger ve güncel içeriklerde 0212 236 85 02 / Smashy Akaretler kimlik eşleşmesi. Poşet satırı dışlandı.",
+  "verifiedAt": "2026-08-25",
+  "items": [
+    {
+      "name": "Chili Cheddar",
+      "price": "580",
+      "category": "Et Burgerler"
+    },
+    {
+      "name": "Cherry Dream",
+      "price": "590",
+      "category": "Et Burgerler"
+    },
+    {
+      "name": "Curly-B",
+      "price": "615",
+      "category": "Et Burgerler"
+    },
+    {
+      "name": "Smashy",
+      "price": "570",
+      "category": "Et Burgerler"
+    },
+    {
+      "name": "Mushboom Burger",
+      "price": "590",
+      "category": "Et Burgerler"
+    },
+    {
+      "name": "Newbie Burger",
+      "price": "605",
+      "category": "Et Burgerler"
+    },
+    {
+      "name": "Oklahoma Smash Burger",
+      "price": "580",
+      "category": "Et Burgerler"
+    },
+    {
+      "name": "Chicken Burger",
+      "price": "450",
+      "category": "Tavuk Burgerler"
+    },
+    {
+      "name": "Honey-M",
+      "price": "450",
+      "category": "Tavuk Burgerler"
+    },
+    {
+      "name": "Hot Chicken Burger",
+      "price": "450",
+      "category": "Tavuk Burgerler"
+    },
+    {
+      "name": "Chicka Bell Chicken Burger",
+      "price": "460",
+      "category": "Tavuk Burgerler"
+    },
+    {
+      "name": "Barbekü Soslu Chicken Burger",
+      "price": "470",
+      "category": "Tavuk Burgerler"
+    },
+    {
+      "name": "Rocket Science",
+      "price": "350",
+      "category": "Hot Dog'lar"
+    },
+    {
+      "name": "Fire Atack",
+      "price": "350",
+      "category": "Hot Dog'lar"
+    },
+    {
+      "name": "BBQ Hot Dog",
+      "price": "375",
+      "category": "Hot Dog'lar"
+    },
+    {
+      "name": "Sade Patates Kızartması",
+      "price": "195",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Baharatlı Patates Kızartması",
+      "price": "200",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Trüflü Parmesanlı Patates Kızartması",
+      "price": "245",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Cheddar Soslu Kaşık Patates Kızartması",
+      "price": "280",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Chicken Bites",
+      "price": "395",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Buffalo Bites",
+      "price": "405",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Chicken Tenders",
+      "price": "415",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Coca-Cola Zero Sugar (33 cl.)",
+      "price": "95",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Coca-Cola (33 cl.)",
+      "price": "95",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Sprite (33 cl.)",
+      "price": "95",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Fuse Tea Limon (33 cl.)",
+      "price": "95",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Fuse Tea Şeftali (33 cl.)",
+      "price": "95",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Özerhisar Ayran (30 cl.)",
+      "price": "95",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Su (50 cl.)",
+      "price": "65",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Smashy Sos",
+      "price": "40",
+      "category": "Soslar"
+    },
+    {
+      "name": "Ballı Hardal",
+      "price": "40",
+      "category": "Soslar"
+    },
+    {
+      "name": "Dynamite Sos",
+      "price": "40",
+      "category": "Soslar"
+    },
+    {
+      "name": "Sweet Mayonez",
+      "price": "40",
+      "category": "Soslar"
+    },
+    {
+      "name": "Cherry Barbekü",
+      "price": "40",
+      "category": "Soslar"
+    }
+  ]
+},
+
 };
