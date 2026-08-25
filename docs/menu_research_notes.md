@@ -1611,3 +1611,6 @@ Hentzer kaydı `Cihangir, Firüzağa Mah, Firuzağa Cami Sk, Cihangir, Defterdar
 
 ## MANHATTAN BEŞİKTAŞ ID 6962 strict HOLD
 Hentzer kaydı `Sinanpaşa, Şht. Dursun Bakan Sk. No:22, 34353 Beşiktaş/İstanbul`, `+90 212 227 43 35`; Wanderlog, Metropol360 ve yerel rehberler exact adresi destekliyor, ancak telefon eşleşmesi güvenilir kamu kaynağında doğrulanamadı. Arama sonuçlarındaki Manhattan Coffee menüleri Kadıköy/başka şubelere veya alakasız Cafe Manhattan’a ait; Beşiktaş exact şubesi için son bir yıl içinde item-level fiyatlı güncel menü bulunamadı. **Override eklenmedi; strict HOLD**.
+
+## SEDİR RESTAURANT BEYLİKDÜZÜ ID 6961 strict HOLD
+Hentzer kaydı `Büyükşehir, 34520 Beylikdüzü/İstanbul`, `+90 212 873 60 68`; işletme kaynakları Sedir Restaurant Beylikdüzü’nü destekliyor, fakat resmi Facebook sayfası `+90 212 872 26 35` telefonunu gösteriyor. %100 telefon paritesi sağlanamadı. Ayrıca aynı şubeye ait son bir yıl içinde doğrulanabilir item-level fiyatlı menü bulunamadı; farklı şehir/ülke ve eski menüler kullanılmadı. **Override eklenmedi; strict HOLD**.
