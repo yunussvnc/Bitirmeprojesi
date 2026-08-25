@@ -1437,3 +1437,6 @@ Exact kayıt `Cihangir, Kazancı Yokuşu Sok. 14/A, 34000 Beyoğlu/İstanbul`, `
 
 ## BİGMAMAS PRE BEYLİKDÜZÜ ID 7022 strict HOLD
 Exact Hentzer kaydı `Büyükşehir Mahallesi, Anadolu Caddesi Park Teras AVM No:30/14, 34520 Beylikdüzü/İstanbul`, `+90 212 871 01 87`; Restaurant Guru ve `@bigmamasbeylikduzu` kaynaklarıyla telefon/lokasyon sinyali eşleşti. Ancak resmi Big Mamas Pre menü sayfası yalnızca marka tanıtımı veriyor, ürün/fiyat listesi sunmuyor; arama sonuçlarındaki diğer Yemeksepeti vendorları farklı şehir veya doğrulanmamış şubelere ait. Exact Beylikdüzü şubesi için 1 yıl şartında tam item-level fiyatlı menü doğrulanamadığından **override eklenmedi; strict HOLD**.
+
+## KABİNE İSTANBUL ID 7021 strict HOLD
+Exact kayıt `Pınartepe, Akyurt Cd. WorldPoint No:1C İç Kapı No:3, 34500 Beykent/İstanbul`, `+90 506 065 09 02`; WorldPoint resmi sayfası, Kabine resmi sosyal medya ve Hentzer kaydıyla adres/telefon eşleşti. Resmi Kabine sitesi menü bağlantısı/ürün fiyatı sunmuyor; rezervasyon sayfasında da fiyatlı menü yok. Arama sonuçlarında yalnızca sınırlı fix menü fiyat sinyalleri bulunduğundan tam ve son 1 yıl içinde item-level menü doğrulanamadı. **Override eklenmedi; strict HOLD**.
