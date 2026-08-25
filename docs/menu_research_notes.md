@@ -1476,3 +1476,6 @@ Exact kayıt `Cihannüma Mahallesi, Serencebey Yokuşu, Fırat İş Merkezi, Yı
 
 ## SUN BROTHERS PIZZA BEŞİKTAŞ ID 7009 kabul
 Exact kayıt `Türkali Mahallesi, Ihlamurdere Cd. No:112/A, 34257 Beşiktaş/İstanbul`, `+90 212 813 32 82`; resmi Sun Brothers şube dizininde İstanbul Türkali Şube olarak doğrulandı. Yemeksepeti `vjwi` vendorının Extreme Pizzas (30/42 cm), Brother Pizzas (30/42 cm) ve İçecekler kategorilerinden 2026-08-25 tarihinde **40 benzersiz ürün/fiyat** alındı. Poşet/servis ücreti kalemi bulunmadığından aktarılmadı.
+
+## THE CO. COFFEE AKARETLER ID 7008 strict HOLD
+Exact mekan adresi `Vişnezade, Şair Nedim Cd. No:27/A, 34353 Beşiktaş/İstanbul` olarak harita kaynaklarında eşleşiyor; Yemeksepeti `vhrz` vendorında güncel, geniş fiyatlı menü mevcut. Ancak zorunlu telefon paritesi sağlanamadı: Hentzer `+90 554 561 75 66`, Yandex kaydı `+90 537 481 03 58` gösteriyor ve resmi THE CO. kaynaklarında Akaretler şubesine ait bu telefonlardan biri doğrulanamadı. Bu nedenle menü mevcut olsa da exact şube kimliği %100 kanıtlanmadığından **override eklenmedi; strict HOLD**.
