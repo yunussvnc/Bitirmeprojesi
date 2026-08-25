@@ -1560,3 +1560,6 @@ Hentzer kaydı `Vişnezade, Şair Nedim Cd. No:49/A, 34357 Beşiktaş/İstanbul`
 
 ## DEMİRANE RESTAURANT ID 6980 strict HOLD
 Hentzer API kaydı `Yalıköy, Selvi Burnu Cd. No:4, 34820 Beykoz/İstanbul`, `+90 216 323 31 30`; Yaka.la, Restoranim ve Tumisyeri aynı adres/telefonu doğruluyor. Beykoz Kundura resmi Demirane sayfası restoranın Beykoz Kundura içindeki işletme bağını doğruluyor. FineDine canlı menü sayfası bazı fiyatları arama önizlemesinde gösterse de doğrudan erişimde reCAPTCHA ile korunuyor; tam item-level fiyat listesi ve güncellik doğrulanamadı. Diğer kaynaklar yalnızca genel menü açıklamaları veriyor. Fiyat uydurmamak için **override eklenmedi; strict HOLD**.
+
+## Bİ DOST COFFEE & CHOCOLATE ID 6979 kabul
+Hentzer kaydı `Muradiye, Nüzhetiye Cd. 3/A, 34357 Beşiktaş/İstanbul`, `+90 212 260 68 01`; Bulurum, Yemeksepeti yorumları ve resmi Instagram aynı exact işletme/telefonu doğruluyor. Yemeksepeti `pqgp` canlı vendor menüsü 2026-08-26 tarihinde erişildi. Poğaçalar & Simitler, Bi Dost Tostlar, Soğuk Sandviçler, Kruvasanlar, Tatlılar, Vitamin Bar, Bitki Çayları, Soğuk Kahveler, Sıcak Kahveler, Sıcak İçecekler ve İçecekler kategorilerinden **43 benzersiz gıda/içecek kalemi** aktarıldı. Poşet kalemi ve Popüler carousel tekrarları dışlandı. **Override kabul edildi.**
