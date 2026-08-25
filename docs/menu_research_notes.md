@@ -1248,3 +1248,6 @@ Exact kayıt `Adnan Kahveci Mah. Kışla Cd. No:36, 34519 Beylikdüzü/İstanbul
 
 ## Mahzen Restaurant ID 7086 acceptance
 Exact kayıt `Hüseyinağa, İstiklal Cd. Çiçek Pasajı No:172/4A, 34000 Beyoğlu/İstanbul`, `+90 543 249 74 01`; resmî mahzenrestaurant.com, Wheree ve public işletme kayıtları aynı Çiçek Pasajı kimliğini doğruluyor. Yemeksepeti canlı menüsünden ızgaralar, deniz ürünleri, ana yemekler, salatalar, ara sıcaklar, mezeler, içecekler ve tatlılar kategorilerinde **81 ürün ve güncel fiyat** aktarıldı. `Plastic Bag` satırı dışlandı. `verifiedAt` canlı doğrulama tarihi `2026-08-25`.
+
+## Beer & More ID 7085 strict HOLD
+Exact kayıt `Anadolu Caddesi Park Teras AVM No:30, Büyükşehir, 34520 Beylikdüzü/İstanbul`, `+90 212 873 10 20`; Restoranım, Mekanlar, Menu-TR ve Instagram kaynakları aynı işletme kimliğini destekliyor. Ancak son bir yıl içinde erişilebilir complete ve item-level fiyatlı public menü bulunamadı; Instagram ağırlıklı olarak etkinlik/tanıtım içeriği sunuyor ve exact Yemeksepeti vendor menüsü bulunamadı. Ürün/fiyat uydurulmadı; strict HOLD.
