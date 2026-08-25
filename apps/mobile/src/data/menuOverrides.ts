@@ -78032,4 +78032,153 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
   ]
 },
 
+  "7082": {
+  "name": "Esteban Burger",
+  "sourceUrl": "https://www.yemeksepeti.com/restaurant/wikl/esteban",
+  "sourceName": "Yemeksepeti canlı Esteban menüsü; resmi Instagram `@estebanburgers` ve güncel 2026 paylaşımları exact İHSAN Apartmanı, Abbasağa, Yıldız Cd. No:1, Beşiktaş kimliğini destekliyor. Hentzer telefon: +90 212 227 27 11. Poşet satırı dışlandı.",
+  "verifiedAt": "2026-08-25",
+  "items": [
+    {
+      "name": "Mendoza Burger (110 gr.) & Patates Kızartması Menü",
+      "price": "650",
+      "category": "Menüler"
+    },
+    {
+      "name": "Burning Mendoza Burger (110 gr.) & Patates Kızartması Menü",
+      "price": "650",
+      "category": "Menüler"
+    },
+    {
+      "name": "Base Burger (110 gr.) & Patates Kızartması Menü",
+      "price": "700",
+      "category": "Menüler"
+    },
+    {
+      "name": "High Mendoza Burger (220 gr.) & Patates Kızartması",
+      "price": "815",
+      "category": "Menüler"
+    },
+    {
+      "name": "High Burning Mendoza Burger (220 gr.) Menü",
+      "price": "815",
+      "category": "Menüler"
+    },
+    {
+      "name": "High Base Burger (220 gr.) & Patates Kızartması Menü",
+      "price": "850",
+      "category": "Menüler"
+    },
+    {
+      "name": "Santa Fe Burger (110 gr.) & Patates Kızartması Menü",
+      "price": "850",
+      "category": "Menüler"
+    },
+    {
+      "name": "Mendoza Burger (110 gr.)",
+      "price": "486",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Base Burger (110 gr.)",
+      "price": "530",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Burning Mendoza Burger (110 gr.)",
+      "price": "486",
+      "category": "Burgerler"
+    },
+    {
+      "name": "High Mendoza Burger (220 gr.)",
+      "price": "740",
+      "category": "Burgerler"
+    },
+    {
+      "name": "High Base Burger (220 gr.)",
+      "price": "790",
+      "category": "Burgerler"
+    },
+    {
+      "name": "High Burning Mendoza Burger (220 gr.)",
+      "price": "740",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Baharatlı Patates Kızartması",
+      "price": "225",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Patates Kızartması",
+      "price": "215",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Burger Ekmeği",
+      "price": "125",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Özerhisar Ayran (33 cl.)",
+      "price": "135",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Su (33 cl.)",
+      "price": "50",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Lipton Ice Tea (33 cl.)",
+      "price": "125",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Coca-Cola (33 cl.)",
+      "price": "145",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Fanta (33 cl.)",
+      "price": "145",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Coca-Cola Şekersiz (33 cl.)",
+      "price": "145",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Sriracha Mayo Sos",
+      "price": "50",
+      "category": "Soslar"
+    },
+    {
+      "name": "Sriracha Acı Sos",
+      "price": "45",
+      "category": "Soslar"
+    },
+    {
+      "name": "Barbekü Sos",
+      "price": "40",
+      "category": "Soslar"
+    },
+    {
+      "name": "Hardal",
+      "price": "40",
+      "category": "Soslar"
+    },
+    {
+      "name": "Heinz Mayonez",
+      "price": "30",
+      "category": "Soslar"
+    },
+    {
+      "name": "Heinz Ketchup",
+      "price": "25",
+      "category": "Soslar"
+    }
+  ]
+},
+
 };

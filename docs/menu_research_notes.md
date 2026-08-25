@@ -1257,3 +1257,6 @@ Exact kayıt `Asmalı Mescit, Olivya Geçidi Sok. 7-A, 34435 Beyoğlu/İstanbul`
 
 ## Five O'Clock Kitchen ID 7083 strict HOLD
 Exact kayıt `Rüzgarlıbahçe, Kavacık Kavşağı, 34805 Beykoz/İstanbul`, `+90 216 485 45 00`; Restoranım ve resmi Instagram `@fiveoclock_kitchen` aynı işletme kimliğini destekliyor. Resmî fiveoclock.com kataloğu pasta/çikolata/fırın ürünleri için e-ticaret vitrini olsa da exact Kitchen şubesinin güncel restoran menüsünü ve item-level fiyatlarını sunmuyor. Son bir yıl içinde complete fiyatlı public menü kanıtı bulunamadı; eski 2020 içerikleri kullanılmadı. Ürün/fiyat uydurulmadı; strict HOLD.
+
+## Esteban Burger ID 7082 acceptance
+Exact kayıt `İHSAN Apartmanı, Abbasağa, Yıldız Cd. No:1, 34024 Beşiktaş/İstanbul`, `+90 212 227 27 11`; resmi Instagram `@estebanburgers` exact adresi ve güncel 2026 işletme içeriklerini destekliyor. Yemeksepeti canlı Esteban menüsünden menüler, burgerler, yan ürünler, içecekler ve soslar kategorilerinde **28 ürün ve güncel fiyat** aktarıldı. Poşet satırı dışlandı. `verifiedAt` canlı doğrulama tarihi `2026-08-25`.
