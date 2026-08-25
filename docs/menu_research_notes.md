@@ -1398,3 +1398,6 @@ Hentzer kaydı `Türkali, Ihlamurdere Cd. No:88/B, 34357 Beşiktaş/İstanbul`, 
 
 ## BEYOĞLU OCAKBAŞI & RESTAURANT TAKSİM ID 7035 strict HOLD
 Exact kayıt `Şehit Muhtar, Bekar Sk. No:20, 34435 Beyoğlu/İstanbul`, `+90 212 249 30 30`; İstanbul.net, Yandex ve resmi Instagram kaynaklarıyla eşleşti. Ancak bulunan kaynaklarda 2025-2026 dönemine ait tam item-level fiyatlı menü yok; yalnızca genel yemek tanımları ve sınırlı/özet fiyat sinyalleri var. 1 yıl şartıyla doğrulanabilir tam menü bulunamadığından **override eklenmedi; strict HOLD**.
+
+## ADANA TİRYAKİ OCAKBAŞI ID 7034 strict HOLD
+Exact kayıt `Kuruçeşme, Yeşilpınar Sk. No:6, 34345 Beşiktaş/İstanbul`, `+90 212 265 13 90`; Restoranım, Threads ve resmi Instagram kaynaklarıyla adres/telefon eşleşti. Ancak 2025-2026 döneminde bu exact işletmeye ait tam item-level fiyatlı menü bulunamadı; arama sonuçlarındaki `Adana Ocakbaşı` Yemeksepeti kaydı farklı şehir/işletme olduğundan kullanılmadı. Bu nedenle **override eklenmedi; strict HOLD**.
