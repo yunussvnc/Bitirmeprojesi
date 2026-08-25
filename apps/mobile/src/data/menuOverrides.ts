@@ -78625,4 +78625,187 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
   ]
 },
 
+  "7078": {
+  "name": "Elbet Steakhouse",
+  "sourceUrl": "https://www.yemeksepeti.com/restaurant/oi6f/elbet-steakhouse-oi6f",
+  "sourceName": "Yemeksepeti canlı menüsü; resmî elbetsteakhouse.com.tr Akasya AVM şubesi ve Hentzer kaydındaki Acıbadem, Akasya AVM, 34660 Üsküdar / +90 216 514 55 35 exact kimliğiyle eşleştirildi. 35 gıda ürünü aktarıldı; poşet/servis satırları dışlandı.",
+  "verifiedAt": "2026-08-25",
+  "items": [
+    {
+      "name": "Cheddarlı Frankfurter Sosis",
+      "price": "470",
+      "category": "Başlangıçlar"
+    },
+    {
+      "name": "Pastrami",
+      "price": "2475",
+      "category": "Başlangıçlar"
+    },
+    {
+      "name": "Homemade Sosis (Adet)",
+      "price": "415",
+      "category": "Başlangıçlar"
+    },
+    {
+      "name": "Dana Füme (Büyük)",
+      "price": "2420",
+      "category": "Başlangıçlar"
+    },
+    {
+      "name": "Et Sushi",
+      "price": "935",
+      "category": "Başlangıçlar"
+    },
+    {
+      "name": "Dana Carpaccio",
+      "price": "1705",
+      "category": "Başlangıçlar"
+    },
+    {
+      "name": "Kaburga Patates",
+      "price": "1210",
+      "category": "Başlangıçlar"
+    },
+    {
+      "name": "İlik",
+      "price": "810",
+      "category": "Başlangıçlar"
+    },
+    {
+      "name": "Dana Füme (Küçük)",
+      "price": "1210",
+      "category": "Başlangıçlar"
+    },
+    {
+      "name": "Steak Tartar",
+      "price": "1980",
+      "category": "Başlangıçlar"
+    },
+    {
+      "name": "Cheddar Füme",
+      "price": "1925",
+      "category": "Başlangıçlar"
+    },
+    {
+      "name": "Atom Kokoreç",
+      "price": "1925",
+      "category": "Başlangıçlar"
+    },
+    {
+      "name": "Elbet Burger",
+      "price": "935",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Lokum Burger",
+      "price": "1155",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Café de Paris Soslu Lokum Burger",
+      "price": "1210",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Kaburga Burger",
+      "price": "1210",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Trüflü Burger",
+      "price": "1210",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Fit Burger",
+      "price": "990",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Dallas Steak",
+      "price": "3685",
+      "category": "Steaks"
+    },
+    {
+      "name": "Sırt (2 Kişilik)",
+      "price": "5500",
+      "category": "Steaks"
+    },
+    {
+      "name": "Dana Bonfile",
+      "price": "2530",
+      "category": "Steaks"
+    },
+    {
+      "name": "Toscana",
+      "price": "3245",
+      "category": "Steaks"
+    },
+    {
+      "name": "Tereyağında Bonfile (2 Kişilik)",
+      "price": "5500",
+      "category": "Steaks"
+    },
+    {
+      "name": "Tomahawk",
+      "price": "6050",
+      "category": "Steaks"
+    },
+    {
+      "name": "Asado (2 Kişilik)",
+      "price": "5500",
+      "category": "Steaks"
+    },
+    {
+      "name": "New York Steak",
+      "price": "3245",
+      "category": "Steaks"
+    },
+    {
+      "name": "Fiorentina",
+      "price": "6050",
+      "category": "Steaks"
+    },
+    {
+      "name": "SANDO KATSU",
+      "price": "2200",
+      "category": "İnce Etler"
+    },
+    {
+      "name": "Lokum",
+      "price": "2420",
+      "category": "İnce Etler"
+    },
+    {
+      "name": "Dana Şaşlık",
+      "price": "2420",
+      "category": "İnce Etler"
+    },
+    {
+      "name": "Dana Antrikot",
+      "price": "2640",
+      "category": "İnce Etler"
+    },
+    {
+      "name": "Spaghetti Et",
+      "price": "2420",
+      "category": "İnce Etler"
+    },
+    {
+      "name": "Kuzu Sırt",
+      "price": "2255",
+      "category": "Kuzu Etleri"
+    },
+    {
+      "name": "Kuzu Pirzola",
+      "price": "2420",
+      "category": "Kuzu Etleri"
+    },
+    {
+      "name": "Kuzu Küşleme",
+      "price": "2310",
+      "category": "Kuzu Etleri"
+    }
+  ]
+},
 };

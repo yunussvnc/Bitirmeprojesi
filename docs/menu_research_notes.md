@@ -1269,3 +1269,6 @@ Exact kayıt `Yakuplu, Osmangazi Cd. No:1/B, 34524 Beylikdüzü/İstanbul`, `+90
 
 ## A De Lauren Bakery ID 7079 refresh
 Exact kayıt `Türkali, Kemal Türel Sk. No:5/C, 34357 Beşiktaş/İstanbul`, `+90 212 236 02 01`; resmî Facebook/Instagram ve Migros `Adelauren, Beşiktaş (Türkali Mah.)` branch-labeled sayfası kimliği doğruluyor. Aynı exact Migros canlı menüsü yeniden kontrol edildi; **31 ürün ve fiyat** korunarak `verifiedAt` `2026-08-25` yapıldı. Ürün/fiyat kapsamı değiştirilmedi.
+
+## Elbet Steakhouse ID 7078 acceptance
+Exact kayıt `Acıbadem, Akasya Avm, 34660 Üsküdar/İstanbul`, `+90 216 514 55 35`; resmî elbetsteakhouse.com.tr Akasya AVM şubesini doğruluyor ve kamuya açık işletme kaydı aynı telefonu destekliyor. Yemeksepeti canlı `oi6f` menüsünden başlangıçlar, burgerler, steaks, ince etler ve kuzu etleri kategorilerinde **35 gıda ürünü ve güncel fiyat** aktarıldı. Finedine arama sonucu menü fiyatlarının 23 Mayıs 2026’dan itibaren uygulandığını belirtiyor; Yemeksepeti canlı menüsü item-level fiyatları sunduğu için kaynak olarak kullanıldı. Poşet/servis satırları dışlandı. `verifiedAt` canlı kontrol tarihi `2026-08-25`.
