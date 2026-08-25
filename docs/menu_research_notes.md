@@ -1359,3 +1359,6 @@ Exact kayıt `Büyükşehir Mah. Cumhuriyet Cad. Ata Center Çarşısı, 34520 B
 
 ## Anadolu Balıkçısı ID 7049 kabul
 Exact kayıt `Marmara, Hürriyet Blv. No:231, 34524 Beylikdüzü/İstanbul`, `+90 212 777 50 06`; Menu-TR, Yandex, Düğün/işletme kayıtlarıyla doğrulandı. Yemeksepeti `q0xv` canlı menüsü 2026-08-25 tarihinde erişildi; Popular carousel tekrarları ve `Plastic Bag` satırı dışlanarak 10 kategoriden **44 benzersiz ürün/fiyat** aktarıldı. Güncel satış fiyatları kullanıldı; balık, deniz ürünü, yan ürün, salata ve içecek kalemleri kapsandı.
+
+## Port Of Point ID 7048 strict HOLD
+Exact kayıt `West İstanbul Marina, Marmara Mahallesi, Ulusum Caddesi No:22, İç Kapı No:8, 34524 Beylikdüzü/İstanbul`, `+90 534 718 73 70`; Cybo, Nerdeler ve Port Of Point/Pargalı sosyal içerikleri adres/telefonu doğruluyor. Portofpoint.com DNS çözümlemedi; RestaurantGuru menüsü CAPTCHA/şüpheli trafik ile engelli. Son bir yıl içinde exact Port Of Point şubesine ait erişilebilir complete item-level fiyatlı menü doğrulanamadı. Ürün/fiyat uydurulmadı; strict HOLD.
