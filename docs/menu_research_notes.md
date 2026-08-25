@@ -1353,3 +1353,6 @@ Exact Hentzer kaydı `Vişnezade, Süleyman Seba Cd., 34357 Beşiktaş/İstanbul
 
 ## Yaka Balık Restaurant ID 7051 strict HOLD
 Exact kayıt `Rüştempaşa mh. Ragıp Gümüşpala Cd., Galata Köprüsü altı dükkanlar No:4 / iç kapı 18, 34110 Eminönü/İstanbul`, `+90 212 527 38 89`; yakabalik.com, Restoranım, Düğün.com, Nelerimeşhur ve TripAdvisor işletme kimliğini doğruluyor. Resmî `our-menu` sayfasında yalnız `Yılbaşı Menü`, `fix menü -Limitsiz` ve `fix menü 1` başlıkları/eski özetler var; sayısal, tam item-level güncel fiyat listesi yok. Son bir yıl içinde exact şubeye ait complete fiyatlı public menü doğrulanamadı. Ürün/fiyat uydurulmadı; strict HOLD.
+
+## Saray Fırın Beylikdüzü Büyükşehir ID 7050 strict HOLD
+Exact kayıt `Büyükşehir Mah. Cumhuriyet Cad. Ata Center Çarşısı, 34520 Beylikdüzü/İstanbul`, `+90 531 967 21 17`; Restoranım ve YerelEsnaf adres/telefonu doğruluyor. YerelEsnaf son bilgi kontrolünü 23 Haziran 2026 gösteriyor. Public kaynaklarda complete item-level fiyatlı menü yok; arama sonuçlarındaki Saray Ev Yemekleri, Saray Muhallebicisi ve Saray Pizza farklı işletmeler. Son bir yıl exact şube fiyatlı menüsü doğrulanamadı. Ürün/fiyat uydurulmadı; strict HOLD.
