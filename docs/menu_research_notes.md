@@ -1296,3 +1296,6 @@ Exact kayıt `Kavaklı, İbrahim Müteferrika Cd. A Blok No:1, 34520 Beylikdüz�
 
 ## Sarena ID 7070 strict HOLD
 Exact kayıt `Muratpaşa, Sofular Cd. No:108, 34040 Bayrampaşa/İstanbul`, `+90 532 335 23 66`; Yandex Şarena Cafe & Dondurma ve RestaurantGuru aynı Sofular Cd. No:108 işletmesini doğruluyor. Instagram içerikleri markanın Bayrampaşa/Muratpaşa dondurma işletmesi olduğunu destekliyor. Ancak son bir yıl içinde exact şubeye ait complete item-level fiyatlı public menü bulunamadı; yalnız genel fiyat aralığı ve yorumlar mevcut. Ürün/fiyat uydurulmadı; strict HOLD.
+
+## Lakaas Coffee ID 7069 strict HOLD
+Exact kayıt `Yıldırım, Rize Sk. 1/A, 34045 Bayrampaşa/İstanbul`, `+90 506 957 53 84`; Snapchat, Wheree, RestaurantGuru, Mekanlar ve Instagram marka hesabı aynı işletme kimliğini destekliyor. RestaurantGuru menü sayfası menünün en son **4 yıl önce** güncellendiğini ve fiyatların değişmiş olabileceğini açıkça belirtiyor; Mekanlar sayfasında item-level fiyat listesi yok. Son bir yıl şartını karşılayan complete güncel public menü bulunamadı. Ürün/fiyat uydurulmadı; strict HOLD.
