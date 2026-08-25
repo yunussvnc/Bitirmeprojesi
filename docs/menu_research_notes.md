@@ -1758,3 +1758,6 @@ Hentzer kaydı `Yıldız, Çırağan Cd. 8a, 34349 Beşiktaş/İstanbul`, `+90 2
 
 ## GEPPETTO PLUS BEYLİKDÜZÜ ID 6913 — STRICT HOLD
 Hentzer kaydı `Semerkand Line Avm, Barış, Peyami Safa Sokağı, 34520 Beylikdüzü/İstanbul`, `+90 212 809 00 94`; Cybo, Yelp, Bulurum, Menuburada ve işletme sosyal kaynakları exact şube/telefonu doğruluyor. Ancak son bir yılda herkese açık, ürün bazlı ve doğrulanabilir güncel fiyatlı menü bulunamadı: Menuburada yalnızca kategori/çalışma bilgisi veriyor, Carta eski/genel içerik sunuyor, Yelp fiyatlı menü yayımlamıyor ve resmi Instagram erişimi giriş duvarında kalıyor. **Strict HOLD**; override eklenmedi.
+
+## MIDPOINT BEYLİKDÜZÜ ID 6912 — STRICT HOLD
+Hentzer kaydı `Cumhuriyet mahallesi Derviş Eroğlu cd, Cumhuriyet, Ege Sokağı No:4/1, 34520 Beylikdüzü/İstanbul`, `+90 537 954 52 33`; Restoranim, Servis Kayıt/Listesi ve Kacıyor exact adres/telefonu doğruluyor, 2025-2026 yorumları şubenin faal olduğunu gösteriyor. Resmi OmniDiner menü URL’sinde herkese açık metin çıkarımında yalnızca Kadıköy bağlantısı görünür oldu; Beylikdüzü ürün/fiyat listesi yüklenmedi. Kacıyor yalnızca kalori/besin verisi, RestaurantGuru ise güvenilir güncel fiyat doğrulaması sağlamıyor. Son bir yıl içinde exact şubeye bağlı, herkese açık ve ürün bazlı güncel fiyatlı menü doğrulanamadığından **strict HOLD**; override eklenmedi.
