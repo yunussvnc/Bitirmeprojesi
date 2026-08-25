@@ -1749,3 +1749,6 @@ Hentzer kaydı `Cihannüma, Ressam Hamdi Bey Sk. No:2-A, 34353 Beşiktaş/İstan
 
 ## THE CHURROLL BEYLİKDÜZÜ ID 6916 — STRICT HOLD
 Hentzer kaydı `Cumhuriyet, Nadir Sokağı L Blok No:1/14F, 34520 Beylikdüzü/İstanbul`, telefon alanı boş. Resmi The Churroll sitesi marka/ürünleri, Beylikdüzü Instagram hesabı ve 2025-2026 şube paylaşımları exact Nadir Sokak şubesini doğruluyor; Yemeksepeti `if5b` canlı vendorunda güncel churros ve içecek fiyatları okunabiliyor. Ancak canonical Hentzer telefon alanı boş ve bu şubeye ait doğrulanabilir exact telefon bulunamadığından zorunlu adres+telefon eşleşmesi sağlanamadı. **Strict HOLD**; override eklenmedi.
+
+## BEYKOZLU YAVUZ'UN MUTFAĞI ID 6915 — STRICT HOLD
+Hentzer kaydı `Gümüşsuyu, Fatin Hoca Sk. No:17, 34820 Beykoz/İstanbul`, `+90 532 252 06 75`; Restoranim aynı adres/telefonu, resmi Instagram ise 2025-2026 tarihli balık ve meze paylaşımlarıyla faal işletmeyi doğruluyor. Yakala sayfasında bu restorana ait menü bulunmuyor; Kacıyor sayfasındaki ürünler yalnızca kalori/besin bilgisi içeriyor, fiyat içermiyor. Son bir yılda herkese açık, ürün bazlı ve doğrulanabilir güncel fiyatlı menü bulunamadığından **strict HOLD**; override eklenmedi.
