@@ -4,6 +4,23 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6965": {
+    "name": "HACIMİRZAOĞLU BAKLAVA - BEYLİKDÜZÜ",
+    "sourceUrl": "https://www.hacimirzaoglu.com/baklavalar",
+    "sourceName": "Hacımirzaoğlu resmi baklava kataloğu ve resmi iletişim sayfası; Hentzer exact kaydı `Kavaklı, İbrahim Müteferrika Cd. 26/c, 34520 Beylikdüzü/İstanbul` / `+90 530 312 37 47` ile eşleştirildi",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Fıstıklı Ankara Dürüm Baklava", "price": "2250 TL", "category": "Baklavalar" },
+      { "name": "Fıstıklı Kıvrım Baklava", "price": "2300 TL", "category": "Baklavalar" },
+      { "name": "Fıstıklı Özel Baklava", "price": "2250 TL", "category": "Baklavalar" },
+      { "name": "Fıstıklı Şöbiyet", "price": "2300 TL", "category": "Baklavalar" },
+      { "name": "Fıstıklı Soğuk Baklava", "price": "1850 TL", "category": "Baklavalar" },
+      { "name": "Fıstıklı Midye Baklava", "price": "2350 TL", "category": "Baklavalar" },
+      { "name": "Fıstıklı Kuru Baklava", "price": "2250 TL", "category": "Baklavalar" },
+      { "name": "Fıstıklı Havuç Dilimi Baklava", "price": "2250 TL", "category": "Baklavalar" },
+      { "name": "Fıstıklı Baklava", "price": "1950 TL", "category": "Baklavalar" }
+    ]
+  },
   "6968": {
     "name": "HAMSIKÖY METİN USTA BEŞİKTAŞ",
     "sourceUrl": "https://www.yemeksepeti.com/restaurant/pw0q/metin-usta-hamsikoy-sutlaci-pw0q",

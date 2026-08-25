@@ -1599,3 +1599,6 @@ Hentzer kaydı `Adnan Kahveci, 34528 Beylikdüzü/İstanbul`, `+90 554 192 10 02
 
 ## SEFERİ OCAKBAŞI MEYHANE ID 6966 strict HOLD
 Hentzer kaydı `Marmara Mah., West Istanbul Marina, Yakuplu, Ulusum Cd. No:34 D:4E, 34524 Beylikdüzü/İstanbul`, `+90 543 399 19 22`; Facebook, Instagram ve yerel işletme kayıtları aynı West Istanbul Marina şubesini ve telefonu doğruluyor. 2026 tarihli sosyal paylaşımda yalnızca toplam `Fix Menü 2200 TL` fiyatı görünüyor; kamuya açık item-level yemek/içecek dökümü bulunamadı. Alkol ve meyhane paket içeriği belirsiz olduğundan ürünleri tahmin ederek eklemek güvenilir değil. **Override eklenmedi; strict HOLD**.
+
+## HACIMİRZAOĞLU BAKLAVA - BEYLİKDÜZÜ ID 6965 kabul
+Hentzer kaydı `Kavaklı, İbrahim Müteferrika Cd. 26/c, 34520 Beylikdüzü/İstanbul`, `+90 530 312 37 47`; Hacımirzaoğlu resmi iletişim sayfası aynı exact adres ve telefonu doğruluyor. Resmi `baklavalar` kataloğu 2026-08-26 tarihinde 9 item-level ürün/fiyat gösterdi: Fıstıklı Ankara Dürüm, Kıvrım, Özel, Şöbiyet, Soğuk, Midye, Kuru, Havuç Dilimi ve klasik Fıstıklı Baklava. **Override kabul edildi.**
