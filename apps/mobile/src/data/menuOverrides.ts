@@ -49349,6 +49349,105 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       {name: "Fanta (33 Cl.)", price: "120,00 TL", desc: "Kutu içecek", category: "İçecekler"},
     ],
   },
+  "7113": {
+    "name": "Hatay Usulü Şan Döner",
+    "sourceUrl": "https://www.migros.com.tr/yemek/hatay-usulu-san-doner-bayrampasa-cevatpasa-mah-st-31123",
+    "sourceName": "Migros Yemek exact Bayrampaşa (Cevatpaşa Mah.) vendorı; resmi/public @sandoner34 ve Restoranım No:179C/+90 212 618 34 21 ile exact şube doğrulandı",
+    "verifiedAt": "2026-08-25",
+    "items": [
+      {
+        "name": "2'Li Avantaj Menü",
+        "price": "550,00 TL",
+        "category": "Menüler"
+      },
+      {
+        "name": "Şan Dürüm + Ayran",
+        "price": "220,00 TL",
+        "category": "Menüler"
+      },
+      {
+        "name": "Mega Dürüm + Ayran",
+        "price": "255,00 TL",
+        "category": "Menüler"
+      },
+      {
+        "name": "Mega Dürüm Menü",
+        "price": "300,00 TL",
+        "category": "Menüler"
+      },
+      {
+        "name": "10'Lu Avantaj Menü",
+        "price": "1.500,00 TL",
+        "category": "Menüler"
+      },
+      {
+        "name": "Mega Menü Kola",
+        "price": "350,00 TL",
+        "category": "Menüler"
+      },
+      {
+        "name": "5'Li Avantaj Menü",
+        "price": "800,00 TL",
+        "category": "Menüler"
+      },
+      {
+        "name": "Şan Dürüm Menü",
+        "price": "280,00 TL",
+        "category": "Menüler"
+      },
+      {
+        "name": "Hatay Usulü Şan Tavuk Dürüm",
+        "price": "170,00 TL",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Mega Tavuk Dürüm",
+        "price": "200,00 TL",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Cips Patatesi",
+        "price": "100,00 TL",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Sütaş Tatlım Puding",
+        "price": "30,00 TL",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "Ayran (17 Cl.)",
+        "price": "50,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Ayran (27,5 Cl.)",
+        "price": "70,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Coca-cola (33 Cl.)",
+        "price": "95,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Su (50 Cl.)",
+        "price": "20,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Coca-cola (1 L.)",
+        "price": "130,00 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Fanta (33 Cl.)",
+        "price": "90,00 TL",
+        "category": "İçecekler"
+      }
+    ]
+  }
+,
   "7114": {
     name: "Sushi 34 Esenyurt",
     sourceUrl: "https://www.migros.com.tr/yemek/sushi34-esenyurt-mevlana-mah-st-220ae",
