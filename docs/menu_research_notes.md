@@ -1266,3 +1266,6 @@ Exact kayıt `Çubuklu, Orhan Veli Kanık Cd. No:87/A, 34810 Beykoz/İstanbul`, 
 
 ## Kocaman Karadeniz Restaurant ID 7080 acceptance
 Exact kayıt `Yakuplu, Osmangazi Cd. No:1/B, 34524 Beylikdüzü/İstanbul`, `+90 212 864 16 94`; resmî kocamanrestaurant.com, Restoranım ve Migros branch-labeled kaynakları kimliği doğruluyor. Yemeksepeti canlı menüsünden kahvaltılıklar, çorbalar, ana yemekler, Karadeniz pideleri, ızgara, et dönerler, yan ürünler, tatlılar ve içecekler kategorilerinde **87 ürün ve güncel fiyat** aktarıldı. Poşet satırı dışlandı. `verifiedAt` canlı doğrulama tarihi `2026-08-25`.
+
+## A De Lauren Bakery ID 7079 refresh
+Exact kayıt `Türkali, Kemal Türel Sk. No:5/C, 34357 Beşiktaş/İstanbul`, `+90 212 236 02 01`; resmî Facebook/Instagram ve Migros `Adelauren, Beşiktaş (Türkali Mah.)` branch-labeled sayfası kimliği doğruluyor. Aynı exact Migros canlı menüsü yeniden kontrol edildi; **31 ürün ve fiyat** korunarak `verifiedAt` `2026-08-25` yapıldı. Ürün/fiyat kapsamı değiştirilmedi.

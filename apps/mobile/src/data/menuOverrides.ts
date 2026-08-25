@@ -65963,8 +65963,8 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
   "7079": {
     "name": "A De Lauren Bakery",
     "sourceUrl": "https://www.migros.com.tr/yemek/adelauren-besiktas-turkali-mah-st-187dd",
-    "sourceName": "Migros Yemek branch-labeled `Adelauren, Beşiktaş (Türkali Mah.)` live menu; exact official Facebook bridge: Türkali Mah. Kemal Türel Sok. No:5/C, Beşiktaş",
-    "verifiedAt": "2026-08-24",
+    "sourceName": "Migros Yemek branch-labeled `Adelauren, Beşiktaş (Türkali Mah.)` live menu; exact official Facebook bridge: Türkali Mah. Kemal Türel Sok. No:5/C, Beşiktaş; Hentzer phone +90 212 236 02 01 matches public branch identity",
+    "verifiedAt": "2026-08-25",
     "items": [
       {
         "name": "Lauren Chicken Food Menü 1",
