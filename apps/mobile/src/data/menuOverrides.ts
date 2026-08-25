@@ -71898,4 +71898,878 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
   ]
 },
 
+  "7104": {
+  "name": "Kanlıca Teras",
+  "sourceUrl": "https://menu.kanlicateras.com/",
+  "sourceName": "Resmi menu.kanlicateras.com dijital menüsü; resmi Instagram @kanlicateras, Mekanlar ve exact Hentzer Kanlıca Halide Edip Adıvar Cd. No:6 / 0216 680 90 00 kimlik eşleşmesi",
+  "verifiedAt": "2026-08-25",
+  "items": [
+    {
+      "name": "Serpme Kahvaltı (2 Kişiliktir)",
+      "price": "1.850,00 ₺",
+      "category": "Kahvaltı"
+    },
+    {
+      "name": "Klasik Kahvaltı Tabağı",
+      "price": "575,00 ₺",
+      "category": "Kahvaltı"
+    },
+    {
+      "name": "Fit kahvaltı",
+      "price": "615,00 ₺",
+      "category": "Kahvaltı"
+    },
+    {
+      "name": "Kızarmış Peynirli Simit Tabağı",
+      "price": "395,00 ₺",
+      "category": "Kahvaltı"
+    },
+    {
+      "name": "Pişi Tabağı",
+      "price": "465,00 ₺",
+      "category": "Kahvaltı"
+    },
+    {
+      "name": "Mantarlı Kaşarlı Dereotlu Omlet",
+      "price": "415,00 ₺",
+      "category": "Kahvaltı"
+    },
+    {
+      "name": "Karışık Omlet",
+      "price": "435,00 ₺",
+      "category": "Kahvaltı"
+    },
+    {
+      "name": "Sucuklu Yumurta",
+      "price": "435,00 ₺",
+      "category": "Kahvaltı"
+    },
+    {
+      "name": "Menemen",
+      "price": "395,00 ₺",
+      "category": "Kahvaltı"
+    },
+    {
+      "name": "Muhlama",
+      "price": "495,00 ₺",
+      "category": "Kahvaltı"
+    },
+    {
+      "name": "Kaşarlı Tost",
+      "price": "315,00 ₺",
+      "category": "Tostlar Gözlemeler"
+    },
+    {
+      "name": "Beyaz Peynirli Domatesli Tost",
+      "price": "315,00 ₺",
+      "category": "Tostlar Gözlemeler"
+    },
+    {
+      "name": "Karışık Tost",
+      "price": "340,00 ₺",
+      "category": "Tostlar Gözlemeler"
+    },
+    {
+      "name": "Akdeniz Tost",
+      "price": "340,00 ₺",
+      "category": "Tostlar Gözlemeler"
+    },
+    {
+      "name": "Babaanne Tostu",
+      "price": "365,00 ₺",
+      "category": "Tostlar Gözlemeler"
+    },
+    {
+      "name": "Kavurmalı Kaşarlı Tost",
+      "price": "420,00 ₺",
+      "category": "Tostlar Gözlemeler"
+    },
+    {
+      "name": "Ayvalık Tostu",
+      "price": "435,00 ₺",
+      "category": "Tostlar Gözlemeler"
+    },
+    {
+      "name": "Patatesli Gözleme",
+      "price": "410,00 ₺",
+      "category": "Tostlar Gözlemeler"
+    },
+    {
+      "name": "Ispanaklı Kaşarlı Gözleme",
+      "price": "435,00 ₺",
+      "category": "Tostlar Gözlemeler"
+    },
+    {
+      "name": "Kaşarlı Gözleme",
+      "price": "495,00 ₺",
+      "category": "Tostlar Gözlemeler"
+    },
+    {
+      "name": "Beyaz Peynirli Gözleme",
+      "price": "485,00 ₺",
+      "category": "Tostlar Gözlemeler"
+    },
+    {
+      "name": "Kıymalı Gözleme",
+      "price": "535,00 ₺",
+      "category": "Tostlar Gözlemeler"
+    },
+    {
+      "name": "Patates Kızartması",
+      "price": "285,00 ₺",
+      "category": "Lezzetli Atıştırmalık"
+    },
+    {
+      "name": "Soğan Halkası",
+      "price": "295,00 ₺",
+      "category": "Lezzetli Atıştırmalık"
+    },
+    {
+      "name": "Patso Burger",
+      "price": "310,00 ₺",
+      "category": "Lezzetli Atıştırmalık"
+    },
+    {
+      "name": "Sosisli veya Kaşarlı veya Sucuklu Patso Burger",
+      "price": "370,00 ₺",
+      "category": "Lezzetli Atıştırmalık"
+    },
+    {
+      "name": "Sucuklu Kaşarlı Patso Burger",
+      "price": "425,00 ₺",
+      "category": "Lezzetli Atıştırmalık"
+    },
+    {
+      "name": "Sosis Sepeti - 2 Kişilik",
+      "price": "490,00 ₺",
+      "category": "Lezzetli Atıştırmalık"
+    },
+    {
+      "name": "Combo Sepeti - 2 Kişilik",
+      "price": "535,00 ₺",
+      "category": "Lezzetli Atıştırmalık"
+    },
+    {
+      "name": "Çıtır Tavuk",
+      "price": "495,00 ₺",
+      "category": "Lezzetli Atıştırmalık"
+    },
+    {
+      "name": "Günün Çorbası",
+      "price": "200,00 ₺",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Izgara Köfte",
+      "price": "640,00 ₺",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Kaşarlı Izgara Köfte",
+      "price": "675,00 ₺",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Soya Soslu Tavuk ( 160 gr. )",
+      "price": "525,00 ₺",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Köri Soslu Tavuk ( 160 gr. )",
+      "price": "525,00 ₺",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Barbekü Soslu Tavuk ( 160 gr. )",
+      "price": "525,00 ₺",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Kekikli Mantarlı Tavuk ( 160 gr. )",
+      "price": "525,00 ₺",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Izgara Tavuk Bonfile ( 300-350 gr. )",
+      "price": "540,00 ₺",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Izgara Tavuk Pirzola ( 300-350 gr. )",
+      "price": "540,00 ₺",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Tavuk Şinitzel ( 300-350 gr. )",
+      "price": "540,00 ₺",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Teras Burger (100 gr.)",
+      "price": "490,00 ₺",
+      "category": "Burger Dürüm Krep"
+    },
+    {
+      "name": "Teras Burger (150 gr.)",
+      "price": "565,00 ₺",
+      "category": "Burger Dürüm Krep"
+    },
+    {
+      "name": "Teras Cheese Burger (100 gr.)",
+      "price": "515,00 ₺",
+      "category": "Burger Dürüm Krep"
+    },
+    {
+      "name": "Teras Cheese Burger (150 gr.)",
+      "price": "590,00 ₺",
+      "category": "Burger Dürüm Krep"
+    },
+    {
+      "name": "Mantarlı Teras Cheese Burger (100 gr.)",
+      "price": "535,00 ₺",
+      "category": "Burger Dürüm Krep"
+    },
+    {
+      "name": "Mantarlı Teras Cheese Burger (150 gr.)",
+      "price": "610,00 ₺",
+      "category": "Burger Dürüm Krep"
+    },
+    {
+      "name": "Füme Kaburgalı Teras Cheese Burger (100 gr.)",
+      "price": "610,00 ₺",
+      "category": "Burger Dürüm Krep"
+    },
+    {
+      "name": "Füme Kaburgalı Teras Cheese Burger (150 gr.)",
+      "price": "685,00 ₺",
+      "category": "Burger Dürüm Krep"
+    },
+    {
+      "name": "Teras Tavuk Burger",
+      "price": "510,00 ₺",
+      "category": "Burger Dürüm Krep"
+    },
+    {
+      "name": "Izgara Tavuklu Dürüm",
+      "price": "510,00 ₺",
+      "category": "Burger Dürüm Krep"
+    },
+    {
+      "name": "Izgara Köfte Dürüm",
+      "price": "575,00 ₺",
+      "category": "Burger Dürüm Krep"
+    },
+    {
+      "name": "Izgara Etli Dürüm",
+      "price": "635,00 ₺",
+      "category": "Burger Dürüm Krep"
+    },
+    {
+      "name": "Tavuklu Mantarlı Krep",
+      "price": "535,00 ₺",
+      "category": "Burger Dürüm Krep"
+    },
+    {
+      "name": "Vejeteryan Dürüm",
+      "price": "420,00 ₺",
+      "category": "Burger Dürüm Krep"
+    },
+    {
+      "name": "Pizza Margarita (Orta Boy)",
+      "price": "525,00 ₺",
+      "category": "Pizza"
+    },
+    {
+      "name": "Pizza Margarita (Büyük Boy)",
+      "price": "585,00 ₺",
+      "category": "Pizza"
+    },
+    {
+      "name": "Akdeniz Pizza (Orta Boy)",
+      "price": "585,00 ₺",
+      "category": "Pizza"
+    },
+    {
+      "name": "Akdeniz Pizza (Büyük Boy)",
+      "price": "670,00 ₺",
+      "category": "Pizza"
+    },
+    {
+      "name": "Dört Peynirli Pizza (Orta Boy)",
+      "price": "610,00 ₺",
+      "category": "Pizza"
+    },
+    {
+      "name": "Dört Peynirli Pizza (Büyük Boy)",
+      "price": "695,00 ₺",
+      "category": "Pizza"
+    },
+    {
+      "name": "Dağ Mantarlı Pizza(Orta Boy)",
+      "price": "585,00 ₺",
+      "category": "Pizza"
+    },
+    {
+      "name": "Dağ Mantarlı Pizza (Büyük Boy)",
+      "price": "670,00 ₺",
+      "category": "Pizza"
+    },
+    {
+      "name": "Kremalı Tavuklu Pizza (Orta Boy)",
+      "price": "610,00 ₺",
+      "category": "Pizza"
+    },
+    {
+      "name": "Kremalı Tavuklu Pizza (Büyük Boy)",
+      "price": "695,00 ₺",
+      "category": "Pizza"
+    },
+    {
+      "name": "Barbekü Tavuklu Pizza (Orta Boy)",
+      "price": "610,00 ₺",
+      "category": "Pizza"
+    },
+    {
+      "name": "Barbekü Tavuklu Pizza (Büyük Boy)",
+      "price": "695,00 ₺",
+      "category": "Pizza"
+    },
+    {
+      "name": "Ton Balıklı Pizza (Orta Boy)",
+      "price": "610,00 ₺",
+      "category": "Pizza"
+    },
+    {
+      "name": "Ton Balıklı Pizza (Büyük Boy)",
+      "price": "695,00 ₺",
+      "category": "Pizza"
+    },
+    {
+      "name": "Füme Kaburga Pizza (Orta Boy)",
+      "price": "720,00 ₺",
+      "category": "Pizza"
+    },
+    {
+      "name": "Füme Kaburga Pizza (Büyük Boy)",
+      "price": "820,00 ₺",
+      "category": "Pizza"
+    },
+    {
+      "name": "Karışık Teras Pizza (Orta Boy)",
+      "price": "610,00 ₺",
+      "category": "Pizza"
+    },
+    {
+      "name": "Karışık Teras Pizza (Büyük Boy)",
+      "price": "695,00 ₺",
+      "category": "Pizza"
+    },
+    {
+      "name": "Penne Arrabbiata",
+      "price": "425,00 ₺",
+      "category": "Makarna & Noodle"
+    },
+    {
+      "name": "Spaghetti Bolognese",
+      "price": "525,00 ₺",
+      "category": "Makarna & Noodle"
+    },
+    {
+      "name": "Tavuklu Fettuccine Alfredo",
+      "price": "515,00 ₺",
+      "category": "Makarna & Noodle"
+    },
+    {
+      "name": "Körili Tavuklu Fettuccine",
+      "price": "515,00 ₺",
+      "category": "Makarna & Noodle"
+    },
+    {
+      "name": "Ev Yapımı Mantı",
+      "price": "475,00 ₺",
+      "category": "Makarna & Noodle"
+    },
+    {
+      "name": "Sebzeli Noodle",
+      "price": "450,00 ₺",
+      "category": "Makarna & Noodle"
+    },
+    {
+      "name": "Tavuklu Noodle",
+      "price": "515,00 ₺",
+      "category": "Makarna & Noodle"
+    },
+    {
+      "name": "Etli Noodle",
+      "price": "625,00 ₺",
+      "category": "Makarna & Noodle"
+    },
+    {
+      "name": "Karidesli Noodle",
+      "price": "625,00 ₺",
+      "category": "Makarna & Noodle"
+    },
+    {
+      "name": "Bol Tahıllı Salata",
+      "price": "440,00 ₺",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Çıtır Tavuk Salata",
+      "price": "495,00 ₺",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Tavuklu Sezar Salata",
+      "price": "495,00 ₺",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Kinoalı & Cevizli Izgara Tavuk Salata",
+      "price": "495,00 ₺",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Biftekli Salata",
+      "price": "625,00 ₺",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Izgara Köfte Salata",
+      "price": "565,00 ₺",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Ton Balıklı Salata",
+      "price": "565,00 ₺",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Mozaik",
+      "price": "315,00 ₺",
+      "category": "Ev Yapımı Tatlılar"
+    },
+    {
+      "name": "Dondurmalı İrmik Helvası",
+      "price": "315,00 ₺",
+      "category": "Ev Yapımı Tatlılar"
+    },
+    {
+      "name": "Magnolia",
+      "price": "345,00 ₺",
+      "category": "Ev Yapımı Tatlılar"
+    },
+    {
+      "name": "Magnolia Çikolatalı",
+      "price": "375,00 ₺",
+      "category": "Ev Yapımı Tatlılar"
+    },
+    {
+      "name": "San Sebastian Cheesecake",
+      "price": "345,00 ₺",
+      "category": "Ev Yapımı Tatlılar"
+    },
+    {
+      "name": "San Sebastian Cheesecake",
+      "price": "375,00 ₺",
+      "category": "Ev Yapımı Tatlılar"
+    },
+    {
+      "name": "Cheesecake Frambuazlı",
+      "price": "375,00 ₺",
+      "category": "Ev Yapımı Tatlılar"
+    },
+    {
+      "name": "Cheesecake Limonlu",
+      "price": "345,00 ₺",
+      "category": "Ev Yapımı Tatlılar"
+    },
+    {
+      "name": "Cheesecake Çikolatalı",
+      "price": "365,00 ₺",
+      "category": "Ev Yapımı Tatlılar"
+    },
+    {
+      "name": "Sufle",
+      "price": "375,00 ₺",
+      "category": "Ev Yapımı Tatlılar"
+    },
+    {
+      "name": "Sıcak Brownie",
+      "price": "375,00 ₺",
+      "category": "Ev Yapımı Tatlılar"
+    },
+    {
+      "name": "1/2 Sıcak Browni",
+      "price": "295,00 ₺",
+      "category": "Ev Yapımı Tatlılar"
+    },
+    {
+      "name": "Nutellalı Muzlu Krep",
+      "price": "400,00 ₺",
+      "category": "Ev Yapımı Tatlılar"
+    },
+    {
+      "name": "Waffle",
+      "price": "425,00 ₺",
+      "category": "Ev Yapımı Tatlılar"
+    },
+    {
+      "name": "Fondü",
+      "price": "435,00 ₺",
+      "category": "Ev Yapımı Tatlılar"
+    },
+    {
+      "name": "Meyve Tabağı",
+      "price": "475,00 ₺",
+      "category": "Ev Yapımı Tatlılar"
+    },
+    {
+      "name": "Dondurma (1 Top: 60 gr.)",
+      "price": "125,00 ₺",
+      "category": "Ev Yapımı Tatlılar"
+    },
+    {
+      "name": "Yanında Pudra Şekerli ( 200 gr. )",
+      "price": "175,00 ₺",
+      "category": "Tarihi Meşhur Kanlıca Yoğurdu"
+    },
+    {
+      "name": "Yanında Ballı ( 200 gr. )",
+      "price": "190,00 ₺",
+      "category": "Tarihi Meşhur Kanlıca Yoğurdu"
+    },
+    {
+      "name": "Yanında Mevsim Meyveli ve Pudra Şekerli ( 200 gr. )",
+      "price": "220,00 ₺",
+      "category": "Tarihi Meşhur Kanlıca Yoğurdu"
+    },
+    {
+      "name": "Bardak Çay",
+      "price": "70,00 ₺",
+      "category": "Çaylar"
+    },
+    {
+      "name": "Fincan Çay",
+      "price": "110,00 ₺",
+      "category": "Çaylar"
+    },
+    {
+      "name": "Bakırda Semaver Demlik Çay",
+      "price": "420,00 ₺",
+      "category": "Çaylar"
+    },
+    {
+      "name": "Bakırda Semaver Demlik Çay",
+      "price": "720,00 ₺",
+      "category": "Çaylar"
+    },
+    {
+      "name": "Chai Tea Latte",
+      "price": "150,00 ₺",
+      "category": "Çaylar"
+    },
+    {
+      "name": "Meyve Çayları",
+      "price": "75,00 ₺",
+      "category": "Çaylar"
+    },
+    {
+      "name": "Taze Nane Limon",
+      "price": "130,00 ₺",
+      "category": "Çaylar"
+    },
+    {
+      "name": "Yeşil Çay",
+      "price": "160,00 ₺",
+      "category": "Çaylar"
+    },
+    {
+      "name": "Yasemin Çayı",
+      "price": "160,00 ₺",
+      "category": "Çaylar"
+    },
+    {
+      "name": "Ada Çayı",
+      "price": "160,00 ₺",
+      "category": "Çaylar"
+    },
+    {
+      "name": "Papatya Çayı",
+      "price": "160,00 ₺",
+      "category": "Çaylar"
+    },
+    {
+      "name": "Ihlamur",
+      "price": "175,00 ₺",
+      "category": "Çaylar"
+    },
+    {
+      "name": "Dinlendirici Çay",
+      "price": "175,00 ₺",
+      "category": "Çaylar"
+    },
+    {
+      "name": "Kış Çayı",
+      "price": "175,00 ₺",
+      "category": "Çaylar"
+    },
+    {
+      "name": "Gojiberry Limonlu Zencefil Çayı",
+      "price": "185,00 ₺",
+      "category": "Çaylar"
+    },
+    {
+      "name": "Ev Yapımı Kurabiye Tabağı",
+      "price": "275,00 ₺",
+      "category": "Çaylar"
+    },
+    {
+      "name": "Lüks Karışık Kuruyemiş Tabağı",
+      "price": "380,00 ₺",
+      "category": "Çaylar"
+    },
+    {
+      "name": "Türk Kahvesi",
+      "price": "165,00 ₺",
+      "category": "Kahveler"
+    },
+    {
+      "name": "Double Türk Kahvesi",
+      "price": "200,00 ₺",
+      "category": "Kahveler"
+    },
+    {
+      "name": "Damla Sakızlı Türk Kahvesi",
+      "price": "175,00 ₺",
+      "category": "Kahveler"
+    },
+    {
+      "name": "Dibek Kahvesi",
+      "price": "175,00 ₺",
+      "category": "Kahveler"
+    },
+    {
+      "name": "Nescafe",
+      "price": "165,00 ₺",
+      "category": "Kahveler"
+    },
+    {
+      "name": "Sütlü Nescafe",
+      "price": "175,00 ₺",
+      "category": "Kahveler"
+    },
+    {
+      "name": "Filtre Kahve",
+      "price": "165,00 ₺",
+      "category": "Kahveler"
+    },
+    {
+      "name": "Espresso",
+      "price": "165,00 ₺",
+      "category": "Kahveler"
+    },
+    {
+      "name": "Espresso Macchiato",
+      "price": "170,00 ₺",
+      "category": "Kahveler"
+    },
+    {
+      "name": "Double Espresso",
+      "price": "200,00 ₺",
+      "category": "Kahveler"
+    },
+    {
+      "name": "Americano",
+      "price": "200,00 ₺",
+      "category": "Kahveler"
+    },
+    {
+      "name": "Cappucino",
+      "price": "210,00 ₺",
+      "category": "Kahveler"
+    },
+    {
+      "name": "Caffe Latte",
+      "price": "215,00 ₺",
+      "category": "Kahveler"
+    },
+    {
+      "name": "Flat White",
+      "price": "210,00 ₺",
+      "category": "Kahveler"
+    },
+    {
+      "name": "Cortado",
+      "price": "200,00 ₺",
+      "category": "Kahveler"
+    },
+    {
+      "name": "Caramel Macchiato",
+      "price": "235,00 ₺",
+      "category": "Kahveler"
+    },
+    {
+      "name": "Mocha",
+      "price": "235,00 ₺",
+      "category": "Kahveler"
+    },
+    {
+      "name": "White Chocolate Mocha",
+      "price": "235,00 ₺",
+      "category": "Kahveler"
+    },
+    {
+      "name": "Affogato",
+      "price": "350,00 ₺",
+      "category": "Kahveler"
+    },
+    {
+      "name": "Sıcak Çikolata",
+      "price": "215,00 ₺",
+      "category": "Kahveler"
+    },
+    {
+      "name": "Sıcak Ballı Süt",
+      "price": "165,00 ₺",
+      "category": "Kahveler"
+    },
+    {
+      "name": "Salep ( kış aylarında )",
+      "price": "215,00 ₺",
+      "category": "Kahveler"
+    },
+    {
+      "name": "Coca Cola/Cola Zero/Fanta/Sprite",
+      "price": "110,00 ₺",
+      "category": "Meşrubatlar"
+    },
+    {
+      "name": "Ice Tea",
+      "price": "110,00 ₺",
+      "category": "Meşrubatlar"
+    },
+    {
+      "name": "Schweppes Gazoz",
+      "price": "110,00 ₺",
+      "category": "Meşrubatlar"
+    },
+    {
+      "name": "Cappy Meyve Suyu",
+      "price": "110,00 ₺",
+      "category": "Meşrubatlar"
+    },
+    {
+      "name": "Eker Yayık Ayranı",
+      "price": "110,00 ₺",
+      "category": "Meşrubatlar"
+    },
+    {
+      "name": "Naneli Fesleğenli Ayran",
+      "price": "125,00 ₺",
+      "category": "Meşrubatlar"
+    },
+    {
+      "name": "Taze Sıkılmış Portakal (Küçük)",
+      "price": "175,00 ₺",
+      "category": "Meşrubatlar"
+    },
+    {
+      "name": "Taze Sıkılmış Portakal Suyu (Büyük)",
+      "price": "240,00 ₺",
+      "category": "Meşrubatlar"
+    },
+    {
+      "name": "Red Bull Enerji İçeceği (250 ml)",
+      "price": "135,00 ₺",
+      "category": "Meşrubatlar"
+    },
+    {
+      "name": "Monster Enerji İçeceği (500 ml)",
+      "price": "165,00 ₺",
+      "category": "Meşrubatlar"
+    },
+    {
+      "name": "Meyveli Soda",
+      "price": "95,00 ₺",
+      "category": "Meşrubatlar"
+    },
+    {
+      "name": "Churchill",
+      "price": "100,00 ₺",
+      "category": "Meşrubatlar"
+    },
+    {
+      "name": "Maden Suyu",
+      "price": "90,00 ₺",
+      "category": "Meşrubatlar"
+    },
+    {
+      "name": "Cam Şişe Su 330 ml",
+      "price": "70,00 ₺",
+      "category": "Meşrubatlar"
+    },
+    {
+      "name": "Cam Şişe Su 1 lt",
+      "price": "150,00 ₺",
+      "category": "Meşrubatlar"
+    },
+    {
+      "name": "Ev Yapımı Taze Limonata (Küçük)",
+      "price": "190,00 ₺",
+      "category": "Yaz İçecekleri"
+    },
+    {
+      "name": "Ev Yapımı Taze Limonata (Büyük)",
+      "price": "225,00 ₺",
+      "category": "Yaz İçecekleri"
+    },
+    {
+      "name": "Taze Çilekli Naneli Limonata",
+      "price": "250,00 ₺",
+      "category": "Yaz İçecekleri"
+    },
+    {
+      "name": "Iced Americano",
+      "price": "220,00 ₺",
+      "category": "Yaz İçecekleri"
+    },
+    {
+      "name": "Iced Latte Macchiato",
+      "price": "245,00 ₺",
+      "category": "Yaz İçecekleri"
+    },
+    {
+      "name": "Iced Caramel Macchiato",
+      "price": "265,00 ₺",
+      "category": "Yaz İçecekleri"
+    },
+    {
+      "name": "Iced Chocolate Mocha",
+      "price": "265,00 ₺",
+      "category": "Yaz İçecekleri"
+    },
+    {
+      "name": "Iced White Chocolate Mocha",
+      "price": "265,00 ₺",
+      "category": "Yaz İçecekleri"
+    },
+    {
+      "name": "Frozen",
+      "price": "265,00 ₺",
+      "category": "Yaz İçecekleri"
+    },
+    {
+      "name": "Milk Shake (Sütlü)",
+      "price": "265,00 ₺",
+      "category": "Yaz İçecekleri"
+    },
+    {
+      "name": "Cool Lime",
+      "price": "225,00 ₺",
+      "category": "Yaz İçecekleri"
+    }
+  ]
+},
+
 };

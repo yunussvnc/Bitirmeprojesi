@@ -1197,3 +1197,6 @@ Hentzer exact kayıt `Bebek Yokuşu (Yok) No:1B, Etiler, 34337 Beşiktaş/İstan
 
 ## HOLD — Lumier’s Chimney Cake ID 7105
 Hentzer exact kayıt `Cihannüma, Barbaros Blv. No:5A, 34351 Beşiktaş/İstanbul`; telefon kaydı yok. Resmi Instagram arama sonuçları Beşiktaş No:5A şubesini destekliyor ve 2026 tarihli içeriklerde ürünleri gösteriyor; ancak yalnız Lumier’s Spesiyal 260 TL ve Böğürtlenli Spesiyal 310 TL gibi tekil fiyatlar görünür. Complete, son bir yıl içinde doğrulanabilir item-level fiyatlı menü bulunamadı. ID 7105 strict HOLD; repo override değişikliği yapılmadı.
+
+## Kanlıca Teras ID 7104 acceptance
+Hentzer exact kayıt `Kanlıca, Halide Edip Adıvar Cd. No:6, 34810 Beykoz/İstanbul`, `+90 216 680 90 00`; resmi Instagram `@kanlicateras`, Mekanlar ve yerel arama sonuçları aynı şube/telefonu destekliyor. Resmi `menu.kanlicateras.com` dijital menüsünün 14 kategori endpointi HTTP 200 ile canlı doğrulandı; HTML kartlarındaki ürün başlıkları ve `<strong>` fiyatları ayrıştırılarak **173 benzersiz ürün/fiyat** aktarıldı. `verifiedAt` canlı doğrulama tarihi `2026-08-25`; servis ücreti veya paketleme satırı alınmadı.
