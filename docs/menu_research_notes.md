@@ -1515,3 +1515,6 @@ Hentzer API exact kaydı `Kavaklı, Mustafa Kemal Caddesi, İzzet Begoviç Sokak
 
 ## MEYHANEBARBAROS ID 6995 strict HOLD
 Hentzer API kaydı `Cihannüma, Salihefendi Sk. No:2, 34353 Beşiktaş/İstanbul`, `+90 532 790 34 92`; Tumisyeri aynı işletme adını ve telefonu doğruluyor. TripAdvisor’da aynı bina `By Muzaffer` adıyla No:2/A olarak geçiyor; isim varyantı nedeniyle işletme kimliği dikkatle ayrıştırıldı. Son bir yıl içinde Meyhanebarbaros’un herkese açık item-level fiyatlı menüsü bulunamadı; benzer adlı Barbaros/By Muzaffer menüleri aynı işletme olarak doğrulanamadığından kullanılmadı. **Override eklenmedi; strict HOLD**.
+
+## STIELA CAFE ID 6994 strict HOLD
+Hentzer API kaydı `Göksu, Dz. Besimpaşa Mahallesi Kurabiye Sokak No:14/1, 34820 Beykoz/İstanbul`, `+90 532 730 13 93`; resmi Instagram `@stielacafe`, Facebook ve güncel sosyal paylaşımlar aynı adres/telefonu doğruluyor. Yemeksepeti `h5b1` aynı işletme adıyla menü yayımlıyor ancak görünür fiyatlar 20–149 TL aralığında kalıyor ve menüde yayın/güncelleme tarihi yok; 2026-08-26 itibarıyla bu fiyatlar güncel kabul edilemeyecek kadar eski/stale olduğundan fiyatların son bir yıl şartı doğrulanamadı. Fiyat uydurmamak için **override eklenmedi; strict HOLD**.
