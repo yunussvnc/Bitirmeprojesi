@@ -1350,3 +1350,6 @@ Exact kayıt `Ekinoks Beylikdüzü, Büyükşehir, Cumhuriyet Cd. No:1 D:21, 345
 
 ## Death By Chocolate ID 7052 strict HOLD
 Exact Hentzer kaydı `Vişnezade, Süleyman Seba Cd., 34357 Beşiktaş/İstanbul`, `+90 531 899 98 76`; Corner, TikTok ve güncel public içerikler aynı işletmeyi `Vişnezade, Süleyman Seba Cd. No/85C` ve aynı telefonla gösteriyor. Yemeksepeti `mctn` canlı menüsü item-level tatlı/içecek fiyatları yayımlıyor ancak exact branch adres/telefonu doğrulanamıyor. Hentzer adresindeki numarasız kayıt ile public `No/85C` arasında fark bulunduğundan 100% branch parity sağlanamadı. Ürün/fiyat uydurulmadı; strict HOLD.
+
+## Yaka Balık Restaurant ID 7051 strict HOLD
+Exact kayıt `Rüştempaşa mh. Ragıp Gümüşpala Cd., Galata Köprüsü altı dükkanlar No:4 / iç kapı 18, 34110 Eminönü/İstanbul`, `+90 212 527 38 89`; yakabalik.com, Restoranım, Düğün.com, Nelerimeşhur ve TripAdvisor işletme kimliğini doğruluyor. Resmî `our-menu` sayfasında yalnız `Yılbaşı Menü`, `fix menü -Limitsiz` ve `fix menü 1` başlıkları/eski özetler var; sayısal, tam item-level güncel fiyat listesi yok. Son bir yıl içinde exact şubeye ait complete fiyatlı public menü doğrulanamadı. Ürün/fiyat uydurulmadı; strict HOLD.
