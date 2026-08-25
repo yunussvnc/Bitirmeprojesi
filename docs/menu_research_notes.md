@@ -1692,3 +1692,6 @@ Hentzer kaydı `Şahkulu, Şahkapısı Sk. No:2 D:B, 34421 Beyoğlu/İstanbul` v
 
 ## F&B CULTURE ID 6935 — STRICT HOLD
 Hentzer kaydı `Bereketzade, Camekan Sk. No:6, 34420 Beyoğlu/İstanbul`, `+90 532 275 69 94`; resmi fbculture.com, Yelp, Waze ve resmi Instagram aynı exact Galata şubesi ve telefonu doğruluyor. Wheree menü sayfası yalnız fotoğraf/ürün anlatıları sunuyor ve fiyatların değişebileceğini belirtiyor; okunabilir, tarihli ürün-fiyat tablosu vermiyor. Tripadvisor/Yelp menü görsellerinde de son bir yıl güncelliği ve tüm fiyatlar güvenilir biçimde doğrulanamadı. Exact eşleşme mevcut olsa da güncel fiyat şartı sağlanamadığından **strict HOLD**; override eklenmedi.
+
+## BEŞİKTAŞ KAHVESİ ID 6934 — STRICT HOLD
+Hentzer kaydı `Sinanpaşa, Hattat Tahsin Sk. 17/A, 34353 Beşiktaş/İstanbul`, `+90 212 236 34 04`; işletmenin resmi iletişim sayfası aynı exact adres ve telefonu doğruluyor. Resmi sitede yalnız işletme tanıtımı/nargile içerikleri var; herkese açık, ürün bazlı ve son bir yıl içinde doğrulanabilir fiyatlı menü bulunamadı. Bu nedenle **strict HOLD**; override eklenmedi.
