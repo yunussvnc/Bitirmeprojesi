@@ -29945,85 +29945,72 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
   "7266": {
   "name": "Pizza Krema Akaretler",
   "sourceUrl": "https://pizzakrema.clopos.menu/en/1/products",
-  "sourceName": "Pizza Krema resmi Clopos QR menüsü (exact Vişnezade Şair Nedim Cd. No:53/B adresi)",
-  "verifiedAt": "2026-08-23",
+  "sourceName": "Pizza Krema resmi Clopos public menüsü (exact Vişnezade Şair Nedim Cd. No:53/B, 34357 Beşiktaş/İstanbul; by Özgür Aydın)",
+  "verifiedAt": "2026-08-25",
   "items": [
     {
       "name": "Pizza Krema",
-      "price": "715",
-      "desc": "",
+      "price": "715.00 ₺",
       "category": "Pizzalar"
     },
     {
       "name": "Sucuk Sever",
-      "price": "715",
-      "desc": "",
+      "price": "715.00 ₺",
       "category": "Pizzalar"
     },
     {
       "name": "Mantar Şöleni",
-      "price": "715",
-      "desc": "",
+      "price": "715.00 ₺",
       "category": "Pizzalar"
     },
     {
       "name": "Margarita",
-      "price": "710",
-      "desc": "",
+      "price": "710.00 ₺",
       "category": "Pizzalar"
     },
     {
       "name": "Cola",
-      "price": "95",
-      "desc": "",
+      "price": "95.00 ₺",
       "category": "İçecekler"
     },
     {
       "name": "Cola Zero",
-      "price": "95",
-      "desc": "",
+      "price": "95.00 ₺",
       "category": "İçecekler"
     },
     {
       "name": "Fanta",
-      "price": "95",
-      "desc": "",
+      "price": "95.00 ₺",
       "category": "İçecekler"
     },
     {
       "name": "Sprite",
-      "price": "95",
-      "desc": "",
+      "price": "95.00 ₺",
       "category": "İçecekler"
     },
     {
       "name": "Ice Tea Şeftali",
-      "price": "95",
-      "desc": "",
+      "price": "95.00 ₺",
       "category": "İçecekler"
     },
     {
       "name": "Ice Tea Limon",
-      "price": "95",
-      "desc": "",
+      "price": "95.00 ₺",
       "category": "İçecekler"
     },
     {
       "name": "Ayran",
-      "price": "95",
-      "desc": "",
+      "price": "95.00 ₺",
       "category": "İçecekler"
     },
     {
       "name": "Su",
-      "price": "50",
-      "desc": "",
+      "price": "50.00 ₺",
       "category": "İçecekler"
     },
     {
       "name": "Soda",
-      "price": "95",
-      "desc": "",
+      "price": "95.00 ₺",
       "category": "İçecekler"
     }
   ]
