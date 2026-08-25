@@ -77164,4 +77164,418 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
   ]
 },
 
+  "7086": {
+  "name": "Mahzen Restaurant",
+  "sourceUrl": "https://www.yemeksepeti.com/restaurant/fz6u/mahzen-restaurant",
+  "sourceName": "Yemeksepeti canlı Mahzen Restaurant menüsü; resmî mahzenrestaurant.com iletişim kaydı, Wheree ve diğer public kaynaklar exact Hüseyinağa/İstiklal Cd. Çiçek Pasajı No:172/4A / 0543 249 74 01 kimliğini doğruluyor. Plastic Bag satırı dışlandı.",
+  "verifiedAt": "2026-08-25",
+  "items": [
+    {
+      "name": "Tavuk Şiş",
+      "price": "500",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "Izgara Köfte",
+      "price": "950",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "Kuzu Şiş",
+      "price": "965",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "Kuzu Pirzola",
+      "price": "1250",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "Dana Bonfile",
+      "price": "1250",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "Karışık Izgara Tabağı",
+      "price": "1350",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "Çıtır Hamsi Tava",
+      "price": "700",
+      "category": "Deniz Ürünleri"
+    },
+    {
+      "name": "Izgara Levrek",
+      "price": "1145",
+      "category": "Deniz Ürünleri"
+    },
+    {
+      "name": "Izgara Çipura",
+      "price": "1145",
+      "category": "Deniz Ürünleri"
+    },
+    {
+      "name": "Izgara Balık Şiş",
+      "price": "1145",
+      "category": "Deniz Ürünleri"
+    },
+    {
+      "name": "Çıtır Mezgit Fileto Tava",
+      "price": "1375",
+      "category": "Deniz Ürünleri"
+    },
+    {
+      "name": "Izgara Somon",
+      "price": "1375",
+      "category": "Deniz Ürünleri"
+    },
+    {
+      "name": "Falafel Tabule",
+      "price": "250",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Tavuk Schnitzel (Adet)",
+      "price": "400",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Kremalı & Körili Tavuklu Penne Makarna",
+      "price": "460",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Domates Soslu & Misket Köfteli Penne Makarna",
+      "price": "690",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Püre Yatağında Dana Kavurma",
+      "price": "880",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Çıtır Pane Dana Et Schnitzel",
+      "price": "1175",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Kiremitte Kremalı Sebzeli Balık Kavurma",
+      "price": "1200",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Sebzeli Somon Güveç",
+      "price": "1375",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Mahzen Salata",
+      "price": "350",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Çoban Salata (250 gr.)",
+      "price": "350",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Cevizli Tulum Peynirli Zeytinyağlı Çoban Salata",
+      "price": "420",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Pera Salata",
+      "price": "350",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Portakallı Roka Hellim Salata",
+      "price": "420",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Beyaz Peynirli Roka Salatası",
+      "price": "350",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Tabbule & Tahıllı Lor Peyniri Salatası",
+      "price": "350",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Otlu Yeşil Akdeniz Salatası",
+      "price": "350",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Balzamik Soslu Gurme Ton Balıklı Salata",
+      "price": "390",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Çıtır Patates Kroket (7 Adet)",
+      "price": "150",
+      "category": "Ara Sıcaklar"
+    },
+    {
+      "name": "Karışık Sıcak Atıştırmalık Tabağı (2 Kişilik)",
+      "price": "350",
+      "category": "Ara Sıcaklar"
+    },
+    {
+      "name": "Çıtır Patates Kızartması (2 Kişilik)",
+      "price": "200",
+      "category": "Ara Sıcaklar"
+    },
+    {
+      "name": "Panelenmiş Çıtır Tavuk (4 Adet)",
+      "price": "350",
+      "category": "Ara Sıcaklar"
+    },
+    {
+      "name": "Güveçte Otlu & Peynirli Fırın Mantar (2 Kişilik)",
+      "price": "450",
+      "category": "Ara Sıcaklar"
+    },
+    {
+      "name": "Sıcak Izgara Hellim Peyniri (5 Adet)",
+      "price": "350",
+      "category": "Ara Sıcaklar"
+    },
+    {
+      "name": "Hellim Peynirli Çıtır Kabak Mücver (4 Adet)",
+      "price": "450",
+      "category": "Ara Sıcaklar"
+    },
+    {
+      "name": "Çıtır Peynirli Kalem Böreği (4 Adet)",
+      "price": "200",
+      "category": "Ara Sıcaklar"
+    },
+    {
+      "name": "Pastırmalı Paçanga Böreği (2 Adet)",
+      "price": "400",
+      "category": "Ara Sıcaklar"
+    },
+    {
+      "name": "Özel Baharat Marinasyonlu Izgara Kalamar (6 Adet)",
+      "price": "590",
+      "category": "Ara Sıcaklar"
+    },
+    {
+      "name": "Çıtır Halka Kalamar & Tarator Sos (6 Adet)",
+      "price": "600",
+      "category": "Ara Sıcaklar"
+    },
+    {
+      "name": "Çıtır Pane Karides (12 Adet)",
+      "price": "750",
+      "category": "Ara Sıcaklar"
+    },
+    {
+      "name": "Güveçte Fırınlanmış Kaşarlı Karides (12 Adet)",
+      "price": "590",
+      "category": "Ara Sıcaklar"
+    },
+    {
+      "name": "Güveçte Fırınlanmış Kokoreç",
+      "price": "600",
+      "category": "Ara Sıcaklar"
+    },
+    {
+      "name": "Tereyağlı İnce Yaprak Ciğer",
+      "price": "600",
+      "category": "Ara Sıcaklar"
+    },
+    {
+      "name": "Mavi Haşhaşlı Tavuk Çorbası",
+      "price": "150",
+      "category": "Çorbalar"
+    },
+    {
+      "name": "Beyaz Peynir",
+      "price": "150",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Karışık Turşu",
+      "price": "150",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Söğüş Tabağı",
+      "price": "150",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Acılı Ezme",
+      "price": "150",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Haydari",
+      "price": "150",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Humus",
+      "price": "150",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Muhammara",
+      "price": "150",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Girit Ezme",
+      "price": "150",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Havuç Tarator",
+      "price": "150",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Hardallı Patates Salatası",
+      "price": "150",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Patlıcan Salatası",
+      "price": "150",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Yoğurtlu Semizotu",
+      "price": "150",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Kuru Cacık",
+      "price": "150",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Baharatlı Zeytin",
+      "price": "150",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Atom",
+      "price": "150",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Zeytinyağlı Yaprak Sarma",
+      "price": "180",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Şakşuka",
+      "price": "150",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Kavun",
+      "price": "150",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Karpuz",
+      "price": "150",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Levrek Marine",
+      "price": "600",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Süzme Yoğurt",
+      "price": "150",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Izgara Hellim Peyniri",
+      "price": "350",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Dondurmalı İrmik Helvası",
+      "price": "300",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Kaşarlı Gözleme (Adet)",
+      "price": "295",
+      "category": "Gözlemeler"
+    },
+    {
+      "name": "Peynirli & Kaşarlı Gözleme (Adet)",
+      "price": "295",
+      "category": "Gözlemeler"
+    },
+    {
+      "name": "Patatesli Gözleme (Adet)",
+      "price": "295",
+      "category": "Gözlemeler"
+    },
+    {
+      "name": "Peynirli Gözleme (Adet)",
+      "price": "295",
+      "category": "Gözlemeler"
+    },
+    {
+      "name": "Patatesli & Kaşarlı Gözleme (Adet)",
+      "price": "295",
+      "category": "Gözlemeler"
+    },
+    {
+      "name": "Coca-Cola (33 cl.)",
+      "price": "160",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Fanta (33 cl.)",
+      "price": "160",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Sprite (33 cl.)",
+      "price": "160",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Lipton Ice Tea (33 cl.)",
+      "price": "160",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Şalgam Suyu (30 cl.)",
+      "price": "160",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Ayran (30 cl.)",
+      "price": "135",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Soda (20 cl.)",
+      "price": "145",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Su (50 cl.)",
+      "price": "100",
+      "category": "İçecekler"
+    }
+  ]
+},
+
 };

@@ -1245,3 +1245,6 @@ Exact kayıt `Cumhuriyet, Nadir Sokağı No:2 G, 34515 Beylikdüzü/İstanbul`, 
 
 ## Kırlangıç Balık Restoran ID 7087 acceptance
 Exact kayıt `Adnan Kahveci Mah. Kışla Cd. No:36, 34519 Beylikdüzü/İstanbul`, `+90 552 772 24 24`; Restoranım, Menum ve Instagram kaynakları aynı işletme kimliğini destekliyor. Yemeksepeti canlı menüsünden çorbalar, deniz ürünleri, makarnalar, mezeler, ara sıcaklar, salatalar, içecekler ve tatlılar kategorilerinde **69 ürün ve güncel fiyat** aktarıldı. `Plastic Bag` satırı dışlandı. `verifiedAt` canlı doğrulama tarihi `2026-08-25`.
+
+## Mahzen Restaurant ID 7086 acceptance
+Exact kayıt `Hüseyinağa, İstiklal Cd. Çiçek Pasajı No:172/4A, 34000 Beyoğlu/İstanbul`, `+90 543 249 74 01`; resmî mahzenrestaurant.com, Wheree ve public işletme kayıtları aynı Çiçek Pasajı kimliğini doğruluyor. Yemeksepeti canlı menüsünden ızgaralar, deniz ürünleri, ana yemekler, salatalar, ara sıcaklar, mezeler, içecekler ve tatlılar kategorilerinde **81 ürün ve güncel fiyat** aktarıldı. `Plastic Bag` satırı dışlandı. `verifiedAt` canlı doğrulama tarihi `2026-08-25`.
