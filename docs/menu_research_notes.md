@@ -1494,3 +1494,6 @@ Exact adres `Yaşam Sokağı, Yaşam Vadisi, Büfe, Cumhuriyet, Atatürk Blv. No
 
 ## KÖFTECİ MEHMET USTA BAYRAMPAŞA ID 7002 kabul
 Exact kayıt `Yıldırım, Şht. Kamil Balkan Cd. 48/A, 34045 Bayrampaşa/İstanbul`, `+90 212 616 88 05`; Apple Maps, resmi sosyal profil ve bağımsız şube kayıtlarıyla eşleşti. Yemeksepeti `p9rq` vendorından 2026-08-25 tarihinde Gobit Ekmek Arası Ürünler, Dürümler, Tavuk Dönerler, AYRAN MENÜ, Menüler, Tatlılar/Pastalar, Kebaplar & Izgaralar ve İçecekler kategorilerinden **38 benzersiz ürün/fiyat** alındı. Popular carousel tekrarları dışlandı.
+
+## JOKER NO.19 ID 7001 strict HOLD
+Exact adres `Sinanpaşa, Beşiktaş Cd. No:19, 34353 Beşiktaş/İstanbul` Hentzer, Snapchat ve Neleri Meşhur’un 2026 güncel sayfasında eşleşiyor. Ancak telefon paritesi çelişkili: Hentzer/Snapchat `+90 212 227 93 94`, Neleri Meşhur’un 2026-08-25 güncellemesinde `+90 212 227 93 95` görülüyor. Allzinapp yalnızca kategori başlıklarını veriyor, item-level fiyatları erişilebilir değil; eski fiyatlar kullanılmadı. %100 exact şube ve güncel fiyat şartları birlikte sağlanamadığından **override eklenmedi; strict HOLD**.
