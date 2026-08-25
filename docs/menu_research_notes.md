@@ -1731,3 +1731,6 @@ Hentzer kaydı `Yıldız, Çırağan Cd. No:50, 34349 Beşiktaş/İstanbul`, `+9
 
 ## LOKAL PATİSSERİE ID 6922 — STRICT HOLD
 Hentzer kaydı `Barış, Adnan Kahveci Cd. No:12, 34520 Beylikdüzü/İstanbul`, `+90 507 723 97 29`; bulunan kamu kaydı aynı isim, adres ve telefonu `Şişli, Adnan Kahveci Cd. No:12` olarak gösteriyor. Beylikdüzü ilçesiyle exact branch eşleşmesi doğrulanamadı; ayrıca son bir yıl içinde herkese açık ürün bazlı fiyatlı menü bulunamadı. Zorunlu exact eşleşme ve güncel fiyat şartları sağlanamadığından **strict HOLD**; override eklenmedi.
+
+## SEASON ARTISAN BAKERY ID 6921 — STRICT HOLD
+Hentzer kaydı `Bebek, Küçük Bebek Cd. No:15-17, 34342 Beşiktaş/İstanbul`, `+90 552 661 95 71`; resmi Season sitesi, resmi Instagram ve Yemeksepeti `e1lw` vendoru exact Bebek şubesini ve telefonu doğruluyor. Yemeksepeti vendorunda kategori ve şube adresi görünür olmasına rağmen ürün/fiyat kartları tarayıcıda yüklenmedi; resmi sitede de fiyatlı menü metni bulunmuyor. Son bir yıl içinde herkese açık, ürün bazlı ve güvenilir güncel fiyat listesi doğrulanamadığından **strict HOLD**; override eklenmedi.
