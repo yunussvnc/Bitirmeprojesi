@@ -4,6 +4,15 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6987": {
+    "name": "PIZZETTO PIZZA",
+    "sourceUrl": "https://www.instagram.com/p/DQZ5uxejMIt/",
+    "sourceName": "Pizzetto Pizza Yeni Mahalle resmi Instagram gönderisi (19 Nisan 2026), Migros Yemek exact şube sayfası ve Hentzer kaydı `Yeni Mahalle, Dr. Ömer Besim Paşa Cd. No:101, 34815 Beykoz/İstanbul` / `+90 507 113 77 86` eşleştirildi",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "2 Adet Büyük Pizza + 1 Litre İçecek Menüsü", "price": "640 TL", "category": "Menüler" }
+    ]
+  },
   "6990": {
     "name": "KARACALI RESTAURANT",
     "sourceUrl": "https://www.yemeksepeti.com/restaurant/qwdb/karacali-restaurant-qwdb",

@@ -1536,3 +1536,6 @@ Hentzer kaydı `Teşvikiye, Hakkı Yeten Cd. 10M, 34349 Beşiktaş/İstanbul`, `
 
 ## BOOK AND TEA HOUSE ID 6988 strict HOLD
 Hentzer API kaydı `Barış Mahallesi, Reşat Nuri Güntekin Sokak No:59, 34353 Beylikdüzü/İstanbul`, `+90 537 396 89 00`; Yerel Esnaf, Kaliteli Firmalar Rehberi, Yandex ve diğer işletme kayıtları aynı adres/telefonu doğruluyor. Son bir yıl içinde aynı exact şubeye ait kamuya açık item-level fiyatlı menü bulunamadı; Restoranim/Mekanlar sayfaları yalnızca genel ürün türlerini, Kacıyor ise fiyat içermeyen besin listesini gösteriyor. Fiyat uydurmamak için **override eklenmedi; strict HOLD**.
+
+## PIZZETTO PIZZA ID 6987 kabul
+Hentzer kaydı `Yeni Mahalle, Dr. Ömer Besim Paşa Cd. No:101, 34815 Beykoz/İstanbul`, `+90 507 113 77 86`; Migros Yemek exact `Pizzetto Pizza, Beykoz (Yeni Mahalle Mah.)`, resmi Instagram `@pizza_yenimahalle`, Facebook ve Cybo aynı şube/telefonu doğruluyor. Resmi Instagram gönderisi `https://www.instagram.com/p/DQZ5uxejMIt/` 19 Nisan 2026 tarihli ve `2 Adet Büyük Pizza + 1 Lt Cola — 640 TL` promosyonunu açıkça gösteriyor; son bir yıl şartı sağlandı. Migros sayfasında ürünler görünür olsa da item fiyatları tam metin çıktısında yer almadığı için yalnızca bu açıkça fiyatlandırılmış promosyon aktarıldı; fiyatı görünmeyen diğer pizza/menü kalemleri eklenmedi. **Override kabul edildi: 1 ürün.**
