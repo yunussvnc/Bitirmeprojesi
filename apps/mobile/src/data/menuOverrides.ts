@@ -568,163 +568,86 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       }
     ]
   },
-  "7149": {
-    "name": "No6 Coffee Co. Burger",
-    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/vik2/no6-coffee-co-burger",
-    "sourceName": "Yemeksepeti canlı No6 Coffee Co. Burger vik2 menüsü; vendor JSON-LD adresi Yıldırım Mah. Ali Fuat Başgil Cd. No:120A, Hentzer exact ID 7149 ve resmi no6coffee.co kimliğiyle eşleştirildi",
-    "verifiedAt": "2026-08-24",
-    "items": [
-      {
-        "name": "Smash Burger",
-        "price": "552,50 TL",
-        "category": "Burgerler"
-      },
-      {
-        "name": "Truff Smash Burger",
-        "price": "603,50 TL",
-        "category": "Burgerler"
-      },
-      {
-        "name": "Dana Bacon Smash Burger",
-        "price": "612 TL",
-        "category": "Burgerler"
-      },
-      {
-        "name": "Smoked Smash Burger",
-        "price": "612 TL",
-        "category": "Burgerler"
-      },
-      {
-        "name": "Bacon Mushroom Pizza",
-        "price": "552,50 TL",
-        "category": "Pizzalar"
-      },
-      {
-        "name": "Kremalı Mantarlı Pizza",
-        "price": "467,50 TL",
-        "category": "Pizzalar"
-      },
-      {
-        "name": "Margherita Pizza",
-        "price": "399,50 TL",
-        "category": "Pizzalar"
-      },
-      {
-        "name": "Kuru Et Pizza",
-        "price": "552,50 TL",
-        "category": "Pizzalar"
-      },
-      {
-        "name": "Alla Turca Pizza",
-        "price": "467,50 TL",
-        "category": "Pizzalar"
-      },
-      {
-        "name": "Tereyağlı Sade Kruvasan",
-        "price": "255 TL",
-        "category": "Kruvasanlar"
-      },
-      {
-        "name": "Bademli Kruvasan",
-        "price": "212,50 TL",
-        "category": "Kruvasanlar"
-      },
-      {
-        "name": "Dana Fümeli Kruvasan",
-        "price": "467,50 TL",
-        "category": "Kruvasanlar"
-      },
-      {
-        "name": "Çikolatalı Kruvasan",
-        "price": "212,50 TL",
-        "category": "Kruvasanlar"
-      },
-      {
-        "name": "Pastacı Kremalı Çilekli Kruvasan",
-        "price": "467,50 TL",
-        "category": "Kruvasanlar"
-      },
-      {
-        "name": "Pastacı Kremalı Muzlu Kruvasan",
-        "price": "425 TL",
-        "category": "Kruvasanlar"
-      },
-      {
-        "name": "Brownie",
-        "price": "340 TL",
-        "category": "Tatlılar"
-      },
-      {
-        "name": "Belçika Çikolatalı Profiterol",
-        "price": "425 TL",
-        "category": "Tatlılar"
-      },
-      {
-        "name": "Belçika Çikolatalı Bask Cheesecake",
-        "price": "425 TL",
-        "category": "Tatlılar"
-      },
-      {
-        "name": "Nutella Cookie Cake",
-        "price": "255 TL",
-        "category": "Tatlılar"
-      },
-      {
-        "name": "Dubai Brownie",
-        "price": "467,50 TL",
-        "category": "Tatlılar"
-      },
-      {
-        "name": "Kasap Sucuklu Tulum Peynirli Tost",
-        "price": "318,75 TL",
-        "category": "Tostlar"
-      },
-      {
-        "name": "Pestolu Beyaz Peynirli Tost",
-        "price": "297,50 TL",
-        "category": "Tostlar"
-      },
-      {
-        "name": "Kuru Etli Cheddarlı Tost",
-        "price": "318,75 TL",
-        "category": "Tostlar"
-      },
-      {
-        "name": "No.6 Tost",
-        "price": "318,75 TL",
-        "category": "Tostlar"
-      },
-      {
-        "name": "Patates Kızartması",
-        "price": "238 TL",
-        "category": "Yan Ürünler"
-      },
-      {
-        "name": "Coca-Cola Zero Sugar (33 cl.)",
-        "price": "102 TL",
-        "category": "İçecekler"
-      },
-      {
-        "name": "Coca-Cola (33 cl.)",
-        "price": "102 TL",
-        "category": "İçecekler"
-      },
-      {
-        "name": "Fanta (33 cl.)",
-        "price": "102 TL",
-        "category": "İçecekler"
-      },
-      {
-        "name": "Sprite (33 cl.)",
-        "price": "102 TL",
-        "category": "İçecekler"
-      },
-      {
-        "name": "Silivri Ayran (24,5 cl.)",
-        "price": "102 TL",
-        "category": "İçecekler"
-      }
-    ]
+  7149: {
+    name: "No6 Coffee",
+    sourceUrl: "https://no6coffee.clopos.menu/tr/1/products",
+    sourceName: "No6 Coffee public Clopos menüsü",
+    verifiedAt: "2026-08-25",
+    items: [
+      { name: "Çay/Turkish Tea", price: "40.00 ₺", category: "Sıcak içecekler" },
+      { name: "Fincan çay", price: "75.00 ₺", category: "Sıcak içecekler" },
+      { name: "Ana&Man Karışık çay", price: "120.00 ₺", category: "Sıcak içecekler" },
+      { name: "Mango çayı/Mango tea", price: "120.00 ₺", category: "Sıcak içecekler" },
+      { name: "Karadut çayı/Black Mulberry tea", price: "120.00 ₺", category: "Sıcak içecekler" },
+      { name: "Çilek çayı/Strawberry tea", price: "120.00 ₺", category: "Sıcak içecekler" },
+      { name: "Ananas çayı", price: "120.00 ₺", category: "Sıcak içecekler" },
+      { name: "Türk kahvesi/Turkish Coffee", price: "150.00 ₺", category: "Sıcak içecekler" },
+      { name: "Double Türk kahvesi", price: "225.00 ₺", category: "Sıcak içecekler" },
+      { name: "Sütlü Türk kahvesi/Turkish Coffee With Milk", price: "180.00 ₺", category: "Sıcak içecekler" },
+      { name: "Double Sütlü Türk kahvesi", price: "260.00 ₺", category: "Sıcak içecekler" },
+      { name: "Filtre Kahve/Filter Coffee", price: "150.00 ₺", category: "Sıcak içecekler" },
+      { name: "Sütlü Filtre Kahve/Filter Coffee With Milk", price: "170.00 ₺", category: "Sıcak içecekler" },
+      { name: "Ballı Süt", price: "130.00 ₺", category: "Sıcak içecekler" },
+      { name: "Espresso", price: "110.00 ₺", category: "Sıcak içecekler" },
+      { name: "Double Espresso", price: "150.00 ₺", category: "Sıcak içecekler" },
+      { name: "Espresso Macchiato", price: "150.00 ₺", category: "Sıcak içecekler" },
+      { name: "Americano", price: "150.00 ₺", category: "Sıcak içecekler" },
+      { name: "Cortado", price: "160.00 ₺", category: "Sıcak içecekler" },
+      { name: "Latte", price: "170.00 ₺", category: "Sıcak içecekler" },
+      { name: "Latte Karamel", price: "200.00 ₺", category: "Sıcak içecekler" },
+      { name: "Cappuccino", price: "170.00 ₺", category: "Sıcak içecekler" },
+      { name: "Kupa çay", price: "80.00 ₺", category: "Sıcak içecekler" },
+      { name: "Şerbet Bardak", price: "160.00 ₺", category: "Soğuk içecekler" },
+      { name: "Soda/Mineral water", price: "60.00 ₺", category: "Soğuk içecekler" },
+      { name: "Churchill", price: "130.00 ₺", category: "Soğuk içecekler" },
+      { name: "Mini şerbet", price: "50.00 ₺", category: "Soğuk içecekler" },
+      { name: "Su/Water", price: "40.00 ₺", category: "Soğuk içecekler" },
+      { name: "Yarım bardak şerbet", price: "80.00 ₺", category: "Soğuk içecekler" },
+      { name: "Şerbet -take -away", price: "160.00 ₺", category: "Soğuk içecekler" },
+      { name: "Soda Limon", price: "110.00 ₺", category: "Soğuk içecekler" },
+      { name: "Beyaz Çikolatalı Brownie", price: "290.00 ₺", category: "Tatlı" },
+      { name: "Cevizli Ballı Marlenka", price: "280.00 ₺", category: "Tatlı" },
+      { name: "Fıstıklı Marlenka", price: "320.00 ₺", category: "Tatlı" },
+      { name: "Kavun Frozen", price: "200.00 ₺", category: "Frozen" },
+      { name: "Ananas Frozen/Pineapple", price: "200.00 ₺", category: "Frozen" },
+      { name: "Mango Frozen", price: "200.00 ₺", category: "Frozen" },
+      { name: "Çilek Frozen/Strawberry", price: "200.00 ₺", category: "Frozen" },
+      { name: "Mix Frozen (Mango, Çilek, Ananas)", price: "200.00 ₺", category: "Frozen" },
+      { name: "Elma Frozen", price: "200.00 ₺", category: "Frozen" },
+      { name: "Karadut Frozen", price: "200.00 ₺", category: "Frozen" },
+      { name: "Limon Frozen", price: "200.00 ₺", category: "Frozen" },
+      { name: "Ananas Mango Frozen", price: "200.00 ₺", category: "Frozen" },
+      { name: "Egzotik Frozen (Mango, Limon, Kavun)", price: "200.00 ₺", category: "Frozen" },
+      { name: "Karadut Mix (Karadut, Çilek, Yeşil Elma)", price: "200.00 ₺", category: "Frozen" },
+      { name: "Tropical Frozen (Kavun, Yeşil Elma, Limon)", price: "200.00 ₺", category: "Frozen" },
+      { name: "Karadut & Hibiskus Frozen", price: "200.00 ₺", category: "Frozen" },
+      { name: "Ananas & Çilek Frozen", price: "200.00 ₺", category: "Frozen" },
+      { name: "Denge (Karadut, Kavun, Limon)", price: "200.00 ₺", category: "Frozen" },
+      { name: "Ice Americano", price: "160.00 ₺", category: "Soğuk kahveler" },
+      { name: "Ice Latte", price: "200.00 ₺", category: "Soğuk kahveler" },
+      { name: "Ice Latte Karamel", price: "240.00 ₺", category: "Soğuk kahveler" },
+      { name: "Çift Kaşarlı Tost", price: "210.00 ₺", category: "Yiyecek" },
+      { name: "Kaşarlı Tost", price: "180.00 ₺", category: "Yiyecek" },
+      { name: "Karışık Çift Kaşarlı", price: "270.00 ₺", category: "Yiyecek" },
+      { name: "Patates Kızartması", price: "210.00 ₺", category: "Yiyecek" },
+      { name: "Kavurmalı & Kaşarlı Tost", price: "320.00 ₺", category: "Yiyecek" },
+      { name: "Çıtır Tavuk&Patates", price: "330.00 ₺", category: "Yiyecek" },
+      { name: "Karışık Kızartma Tabağı", price: "440.00 ₺", category: "Yiyecek" },
+      { name: "Kartopu", price: "350.00 ₺", category: "Tatlı" },
+      { name: "Cola", price: "90.00 ₺", category: "Soğuk içecekler" },
+      { name: "Zencefil Çayı", price: "100.00 ₺", category: "Sıcak içecekler" },
+      { name: "Lungo", price: "150.00 ₺", category: "Sıcak içecekler" },
+      { name: "Oralet", price: "40.00 ₺", category: "Sıcak içecekler" },
+      { name: "Limonata", price: "150.00 ₺", category: "Soğuk içecekler" },
+      { name: "Kant", price: "40.00 ₺", category: "Sıcak içecekler" },
+      { name: "Gazoz", price: "65.00 ₺", category: "Soğuk içecekler" },
+      { name: "Meyveli Soda", price: "65.00 ₺", category: "Soğuk içecekler" },
+      { name: "Dibek Kahvesi", price: "150.00 ₺", category: "Sıcak içecekler" },
+      { name: "Menengiç", price: "150.00 ₺", category: "Sıcak içecekler" },
+      { name: "Tramisu", price: "300.00 ₺", category: "Tatlı" },
+      { name: "Belçika Çikolata Şelalesi", price: "300.00 ₺", category: "Tatlı" },
+      { name: "Kara Orman Şelalesi", price: "300.00 ₺", category: "Tatlı" },
+    ],
   },
   "7163": {
     "name": "Taffee Coffee Co - Parkada",
