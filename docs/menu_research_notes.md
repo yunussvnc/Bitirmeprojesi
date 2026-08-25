@@ -1740,3 +1740,6 @@ Hentzer kaydı `Cihannüma, Mazhar Reşit Paşa Sokak No:1/A, 34353 Beşiktaş/�
 
 ## NADİDE MEYHANE ID 6919 — STRICT HOLD
 Hentzer kaydı `Gazeteciler Sitesi, Esentepe, Matbuat Sk. No:12 D:12, 34394 Şişli/İstanbul`, `+90 533 946 09 77`; resmi Nadide iletişim sayfası ve 2025-2026 resmi Instagram paylaşımları exact adres/telefonu doğruluyor. Resmi menü sayfasında yalnızca Öğle Menüsü ve Akşam Menüsü başlıkları erişilebilir; ürün bazlı fiyatlar okunabilir olarak yayımlanmıyor. Son bir yılda herkese açık ve doğrulanabilir güncel fiyatlı menü bulunamadığından **strict HOLD**; override eklenmedi.
+
+## CRYING BOY ID 6918 — STRICT HOLD
+Hentzer kaydı `Çubuklu, 34805 Beykoz/İstanbul`, telefon alanı boş. Restoranim aynı konumu ve açıkça `Telefon yok` bilgisini gösteriyor; Yandex kaydı Orhan Veli Kanık Caddesi 19A konumunu ve telefon belirtilmediğini gösteriyor. Ayrıca Yandex kaydı kalıcı kapalı olarak indekslenmiş ve son bir yıl içinde herkese açık, ürün bazlı güncel fiyatlı menü bulunamadı. Zorunlu exact telefon eşleşmesi ve güncel fiyat şartları sağlanamadığından **strict HOLD**; override eklenmedi.
