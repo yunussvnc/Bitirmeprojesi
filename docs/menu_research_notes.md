@@ -1518,3 +1518,6 @@ Hentzer API kaydı `Cihannüma, Salihefendi Sk. No:2, 34353 Beşiktaş/İstanbul
 
 ## STIELA CAFE ID 6994 strict HOLD
 Hentzer API kaydı `Göksu, Dz. Besimpaşa Mahallesi Kurabiye Sokak No:14/1, 34820 Beykoz/İstanbul`, `+90 532 730 13 93`; resmi Instagram `@stielacafe`, Facebook ve güncel sosyal paylaşımlar aynı adres/telefonu doğruluyor. Yemeksepeti `h5b1` aynı işletme adıyla menü yayımlıyor ancak görünür fiyatlar 20–149 TL aralığında kalıyor ve menüde yayın/güncelleme tarihi yok; 2026-08-26 itibarıyla bu fiyatlar güncel kabul edilemeyecek kadar eski/stale olduğundan fiyatların son bir yıl şartı doğrulanamadı. Fiyat uydurmamak için **override eklenmedi; strict HOLD**.
+
+## BEŞİKTAŞ OLTA BALIK ID 6993 strict HOLD
+Hentzer API exact kaydı `Sinanpaşa, Köyiçi Mektep Sk. No:14/A, 34890 Beşiktaş/İstanbul`, `+90 212 259 39 09`; Meyhankoli, Restaurant Guru ve diğer işletme kayıtları aynı adres/telefonu doğruluyor. Resmi `https://oltabalik.co/` menüsü işletme ürünlerini ve bazı fiyat aralıklarını (ör. Karides Şiş 180–200 TL, Kalamar Dolma 100–150 TL, Lagos 2.000–2.200 TL, Ahtapot Kol 200–800 TL) yayımlıyor; ancak tam item-level fiyatların çoğu görünmüyor veya “fiyat belirtilmemiş” durumda. Quandoo’daki 5–30 TL fiyatlar açıkça eski. Son bir yıl şartını tam ürün/fiyat listesiyle doğrulamak mümkün olmadığından **override eklenmedi; strict HOLD**.
