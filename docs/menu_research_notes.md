@@ -1419,3 +1419,6 @@ Exact kayıt `Kuloğlu, Sadri Alışık Sk. No:12/A, 34340 Beyoğlu/İstanbul`, 
 
 ## ALBATROS FISH RESTAURANT ID 7028 strict HOLD
 Hentzer kaydı `Atatürk, Albatros Sk., 34500 Büyükçekmece/İstanbul`, `+90 212 883 32 08`; resmi Instagram/Yandex kaynaklarında aynı telefon ve Albatros/Atatürk lokasyonu görüldü. Ancak resmi alan adı erişimde hosting/DNS hata sayfası veriyor, Mekanlar menü sayfasında ürün/fiyat bulunmuyor ve son 1 yıl içinde tam item-level fiyatlı menü doğrulanamadı. Eksik veya eski fiyat aktarılmadı; **strict HOLD**.
+
+## HELVACI ALİ BEYLİKDÜZÜ ID 7027 strict HOLD
+Exact Hentzer kaydı `Barış, Reşat Nuri Güntekin Sk. No:58, 34520 Beylikdüzü/İstanbul`, `+90 541 193 19 00`; resmi Beylikdüzü Instagram profili ve resmi şube adresiyle eşleşiyor. Yemeksepeti’nde güncel fiyatlı Helvacı Ali menüsü bulundu, fakat canlı sayfa `New address / generic location` uyarısı veriyor ve vendorın exact Beylikdüzü şubesi olduğu doğrulanamıyor; resmi sitedeki genel çağrı merkezi telefonu da branch telefonuyla aynı değil. Şube paritesi kesinleşmediğinden **override eklenmedi; strict HOLD**.
