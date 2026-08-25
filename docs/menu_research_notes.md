@@ -1488,3 +1488,6 @@ Exact kayıt `Rüzgarlıbahçe, Adaklı Sk. No:7, 34805 Beykoz/İstanbul`, `+90 
 
 ## ART ISTANBUL CAFE & BAR ID 7004 strict HOLD
 Exact kayıt `Kuloğlu Mah., Gazeteci Erol Dernek Sok. No:8, 34437 Beyoğlu/İstanbul`, `+90 505 715 39 61`; Hentzer adres/telefonu Instagram exact location sayfasında doğrudan aynı şekilde görülüyor. Ancak 2025-2026 döneminde herkese açık, tam item-level fiyatlı menü bulunamadı; üçüncü taraf eski/çelişkili telefon ve menü sinyalleri exact güncel menü için yeterli değil. **Override eklenmedi; strict HOLD**.
+
+## MONCAI BUBBLE TEA BEYLİKDÜZÜ ID 7003 strict HOLD
+Exact adres `Yaşam Sokağı, Yaşam Vadisi, Büfe, Cumhuriyet, Atatürk Blv. No:8, 34520 Beylikdüzü/İstanbul` Menum, Corner ve Beylikdüzü sosyal kayıtlarıyla eşleşiyor. Güncel Yemeksepeti menüleri k2be/vg8m/wqqv vendorlarında mevcut; ancak bu vendorlardan hiçbirinin exact Beylikdüzü şubesine ait olduğu ve Hentzer telefonu `+90 539 791 02 32` ile eşleştiği kanıtlanamadı. Instagram profili menü/fiyat yayınlamıyor; bu nedenle %100 exact branch matching şartı sağlanmadığından **override eklenmedi; strict HOLD**.
