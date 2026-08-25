@@ -1629,3 +1629,6 @@ Hentzer kaydı `Yıldırım, Şehir Parkı Caddesi No:19, 34045 Bayrampaşa/İst
 
 ## GAZİ'NİN YERİ ID 6956 — STRICT HOLD
 Hentzer kaydı `Gümüşsuyu, 34820 Beykoz/İstanbul`, `+90 539 685 47 19`; Kaçıyor işletme sayfası ve Yandex işletme kaydı aynı telefon ile exact işletme kimliğini destekliyor. Resmi `gazininyeri.com` Restaurant sayfası menüden söz ediyor ancak erişilebilir ürün fiyatı yayınlamıyor; Kaçıyor yalnızca kalori/örnek ürün adları veriyor, fiyat vermiyor. Son bir yıl içinde herkese açık, fiyat içeren doğrulanabilir menü bulunamadığı için **strict HOLD**; override eklenmedi.
+
+## BANG BANG AIRSOFT & COFFEE ID 6955 — STRICT HOLD
+Hentzer kaydı `Çubuklu, Piri Reis Cd. No:2, 34805 Beykoz/İstanbul`, `+90 505 440 22 26`; Kaçıyor işletme sayfası aynı adres ve telefonu, Instagram `@bang.bangcoffee` ise aynı işletme adını doğruluyor. Mekanlar.com menü sekmesi yalnızca “Menü Fotoğrafı Gönderin” çağrısı veriyor; erişilebilir ürün/fiyat listesi yok. Kaçıyor yalnızca genel kalori/ürün adları yayımlıyor ve fiyat vermiyor. Son bir yıl içinde herkese açık, fiyat içeren doğrulanabilir menü bulunamadığından **strict HOLD**; override eklenmedi.
