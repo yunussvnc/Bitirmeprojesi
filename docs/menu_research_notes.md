@@ -1413,3 +1413,6 @@ Exact kayıt `Rüzgarlıbahçe, Cumhuriyet Cd. No:75, 34805 Kavacık-Beykoz/İst
 
 ## 8ONE BURGER BOSPHORUS - ORTAKÖY ID 7030 kabul
 Exact kayıt `Ortaköy, 34353 Beşiktaş/İstanbul`, `+90 537 255 55 58`; resmi 8oneburger şube bağlantıları ve Yandex Ortaköy kaydıyla eşleşti. Yemeksepeti `8 One Burger` canlı menüsünden 2026-08-25 tarihinde Menus for 2-3 People, Special Menus, Burgers, Çocuk Menüleri, By-products, İçecekler ve Meyveli Yoğurtlar kategorilerinden **55 benzersiz ürün/fiyat** alındı. Popular carousel tekrarları ve Plastic Bag kalemi dışlandı.
+
+## DÜRÜMCE BEYOĞLU ID 7029 kabul
+Exact kayıt `Kuloğlu, Sadri Alışık Sk. No:12/A, 34340 Beyoğlu/İstanbul`, `+90 212 249 41 42`; resmi `@durumcebeyoglu` profili adres ve telefonla eşleşti. Yemeksepeti `Dürümce` canlı menüsünden 2026-08-25 tarihinde Çorbalar, Kebaplar, Çiğ Köfteler, Dürümler, Yan Ürünler, Tatlılar, İçecekler, Menüler, Dürüm Menüler, Kebap Menüler, Doyuran Menüler ve Salatalar kategorilerinden **75 benzersiz ürün/fiyat** alındı. Popüler carousel tekrarları ve Poşet kalemi dışlandı.

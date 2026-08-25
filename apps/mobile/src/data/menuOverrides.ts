@@ -85941,4 +85941,387 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     }
   ]
 },
+  "7029": {
+  "name": "Dürümce Beyoğlu",
+  "sourceUrl": "https://www.yemeksepeti.com/restaurant/eb5w/durumce-eb5w",
+  "sourceName": "Yemeksepeti current Dürümce menu; exact Hentzer branch is Kuloğlu, Sadri Alışık Sk. No:12/A, 34340 Beyoğlu/İstanbul, +90 212 249 41 42, matching the official @durumcebeyoglu profile. 75 unique priced food/beverage items imported; Popular carousel and Poşet excluded.",
+  "verifiedAt": "2026-08-25",
+  "items": [
+    {
+      "name": "Mercimek Çorbası",
+      "price": "150 TL",
+      "category": "Çorbalar"
+    },
+    {
+      "name": "Ekmek, limon ile",
+      "price": "550 TL",
+      "category": "Çorbalar"
+    },
+    {
+      "name": "Kelle Paça Çorbası",
+      "price": "550 TL",
+      "category": "Çorbalar"
+    },
+    {
+      "name": "Adana Kebap",
+      "price": "749 TL",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Közlenmiş biber, közlenmiş domates. Bulgur pilavı, sumaklı soğan, pide, turşu, ezme, mevsim salatası, çiğ köfte, yoğurtlu tahıl ile",
+      "price": "895 TL",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Sarma Beyti Kebap",
+      "price": "895 TL",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Közlenmiş biber, domates, turşu, ezme, sumaklı soğan, çiğ köfte, salata, soslu lavaş ile",
+      "price": "895 TL",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Patlıcanlı Kebap",
+      "price": "895 TL",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Közlenmiş biber, közlenmiş domates, günün salatası, çiğ köfte, ezme, turşu, yoğurtlu sos ile",
+      "price": "3900 TL",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Karışık Izgara (2 Kişilik)",
+      "price": "3900 TL",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Tavuk kanat, tavuk şiş, çöp şiş, domatesli kebap, Adana kebap",
+      "price": "7700 TL",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Karışık Izgara (4 Kişilik)",
+      "price": "7700 TL",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Ciğer şiş, patlıcanlı kebap, Adana kebap, domatesli kebap, çöp şiş, tavuk şiş, tavuk kanat",
+      "price": "8950 TL",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Karışık Izgara (5 Kişilik)",
+      "price": "8950 TL",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Patlıcanlı kebap, Adana kebap, domatesli kebap, çöp şiş, ciğer şiş, tavuk kanat, tavuk şiş",
+      "price": "895 TL",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Domatesli Kebap",
+      "price": "895 TL",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Közlenmiş biber, közlenmiş domates, bulgur pilavı, ezme karışık turşu, Adana usulü yoğurtlu tahıl, sumaklı soğan, çiğ köfte, mevsim salatası ile",
+      "price": "980 TL",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Ciğer Şiş",
+      "price": "980 TL",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Közlenmiş biber, közlenmiş domates, bulgur pilavı, yeşillik, ezme, turşu, çiğ köfte, mevsim salatası, Adana yoğurtlusu ile",
+      "price": "850 TL",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Tavuk Kanat",
+      "price": "850 TL",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Közlenmi̇ş biber, közlenmiş domates, bulgur pilavı, sumaklı soğan, yeşillik, ezme, turşu, Adana yoğurtlusu, çiğ köfte, mevsim salatası ile",
+      "price": "630 TL",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Tavuk Şiş",
+      "price": "630 TL",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Közlenmiş biber, közlenmiş domates, bulgur pilavı, sumaklı soğan, mevsim salatası, çiğ köfte, turşu, Adana yoğurtlusu, soslu lavaş ile",
+      "price": "820 TL",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Tatlı Adana Kebap",
+      "price": "820 TL",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Kıyma. Tırnak pide, közlenmiş domates, közlenmiş biber, hamsiköy sütlaç, Adana usulü yoğurtlu yarma, ezme, turşu, salata, sumaklı soğan ile",
+      "price": "410 TL",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Adana Tavuk Kebap",
+      "price": "410 TL",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Mevsim salata, çiğ köfte, yoğurtlu yarma aşı, turşu, acılı ezme ile",
+      "price": "750 TL",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Adana Tavuk Kebap (2 Adet)",
+      "price": "750 TL",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Tavuk göğüs, tavuk but, baharatlar. Lavaş, mevsim salatası, çiğ köfte, yoğurtlu yarma, turşu, acılı ezme ile",
+      "price": "590 TL",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Spicy Butcher's Meatballs (6 Pieces)",
+      "price": "590 TL",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Çiğ Köfte Dürüm",
+      "price": "210 TL",
+      "category": "Çiğ Köfteler"
+    },
+    {
+      "name": "Çiğ köfte, yeşillik, nar ekşisi, turşu, ezme. Adana usulü yoğurtlu tahıl, mevsim salatası ile",
+      "price": "315 TL",
+      "category": "Çiğ Köfteler"
+    },
+    {
+      "name": "Çiğ Köfte",
+      "price": "315 TL",
+      "category": "Çiğ Köfteler"
+    },
+    {
+      "name": "Çöp Şiş Dürüm",
+      "price": "740 TL",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Çöp şiş dürüm, domates, yeşillik, kıvırcık marul, turşu, ezme Adana usulü yoğurtlu tahıl, soğan salatası ile",
+      "price": "465 TL",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Tavuk Şiş Dürüm",
+      "price": "465 TL",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Tavuk şiş, domates, yeşillik, kıvırcık marul. Turşu, ezme, Adana usulü yoğurtlu tahıl, soğanlı salata ile",
+      "price": "645 TL",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Ciğer Dürüm",
+      "price": "645 TL",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Kuzu ciğer, domates, yeşillik, kıvırcık marul, turşu, ezme, Adana usulü yoğurtlu tahıl, soğanlı salata ile",
+      "price": "540 TL",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Adana Dürüm",
+      "price": "540 TL",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Adana dürüm közlenmiş domates, közlenmiş biber, çiğ köfte, ezme, yoğurtlu yarma, turşu, mevsim salata ile",
+      "price": "870 TL",
+      "category": "Dürümler"
+    },
+    {
+      "name": "2'li Tavuk Şiş Dürüm",
+      "price": "870 TL",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Tavuk şiş, kıvırcık marul, domates. Tablacı salata, mevsim salata, ezme, Adana turşusu, yoğurtlu yarma",
+      "price": "365 TL",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Adana Tavuk Kebap Dürüm",
+      "price": "365 TL",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Tavuk göğüs, tavuk but. Tandır lavaş, mevsim salata, çiğ köfte, yoğurtlu yarma aşı, turşu, acılı ezme ile",
+      "price": "440 TL",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Tablacı salatası, mevsim salatası, ezme, adana turşusu, yoğurtlu yarma ile",
+      "price": "440 TL",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Adana Tavuk Dürüm",
+      "price": "440 TL",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Mevsim salata, çiğ köfte, yoğurtlu yarma aşı, turşu, acılı ezme ile",
+      "price": "400 TL",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Kızartılmış İçli Köfte (Adet)",
+      "price": "195 TL",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Adet olarak servis edilir.",
+      "price": "225 TL",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Patates Kızartması",
+      "price": "225 TL",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Katmer",
+      "price": "450 TL",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Tek kişilik",
+      "price": "420 TL",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Künefe",
+      "price": "420 TL",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Hamsi Köy Sütlacı",
+      "price": "295 TL",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Şalgam Suyu (33 cl.)",
+      "price": "95 TL",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Pet şişe",
+      "price": "95 TL",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Ayran (33 cl.)",
+      "price": "95 TL",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Büyük boy",
+      "price": "55 TL",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Soda (20 cl.)",
+      "price": "55 TL",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Cam şişe",
+      "price": "35 TL",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Su (50 cl.)",
+      "price": "35 TL",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Tavuk Dürüm Menü",
+      "price": "480 TL",
+      "category": "Menüler"
+    },
+    {
+      "name": "Adana Dürüm Menü",
+      "price": "555 TL",
+      "category": "Dürüm Menüler"
+    },
+    {
+      "name": "Adana Tavuk Kebap Aile Menü",
+      "price": "820 TL",
+      "category": "Kebap Menüler"
+    },
+    {
+      "name": "Doyuran Adana Dürüm Menü",
+      "price": "1150 TL",
+      "category": "Doyuran Menüler"
+    },
+    {
+      "name": "2 Adet Günün Çorbası + 2 Adet Adana Dürüm + 4 Çeşit Garnitür + 2 Adet Ayran (33 cl.)",
+      "price": "1200 TL",
+      "category": "Doyuran Menüler"
+    },
+    {
+      "name": "Doyuran Tavuk Şiş Dürüm Menü",
+      "price": "1200 TL",
+      "category": "Doyuran Menüler"
+    },
+    {
+      "name": "2 Adet Günün Çorbası + 2 Adet Tavuk Şiş Dürüm + 4 Çeşit Garnitür + 2 Adet Ayran (33 cl.)",
+      "price": "1200 TL",
+      "category": "Doyuran Menüler"
+    },
+    {
+      "name": "Doyuran Adana Kebap Menü",
+      "price": "1200 TL",
+      "category": "Doyuran Menüler"
+    },
+    {
+      "name": "Mevsim Salatası",
+      "price": "250 TL",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Domates, salatalık, mevsim sebzeleri, özel ev sosu",
+      "price": "450 TL",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Tavuklu Yeşil Salata",
+      "price": "450 TL",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Tavuk, domates, salatalık, soğan, limon, zeytinyağı",
+      "price": "250 TL",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Tablacı Salata",
+      "price": "250 TL",
+      "category": "Salatalar"
+    }
+  ]
+},
 };
