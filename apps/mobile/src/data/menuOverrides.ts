@@ -67811,4 +67811,238 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       }
     ],
   },
+
+  "7176": {
+    "name": "Lune Doree Patisserie",
+    "sourceUrl": "https://lunedoree.ist/",
+    "sourceName": "Official Lune Doree Patisserie Kanlıca/Beykoz exact menu; official address Hacı Muhittin Sokak No:12/B; public item-level menu with © 2026",
+    "verifiedAt": "2026-08-25",
+    "items": [
+      {
+        "name": "Belcolade Belçika Çikolatası",
+        "price": "92,00 ₺",
+        "category": "TATLI ÇEŞİTLERİ"
+      },
+      {
+        "name": "Brownie Çikolatalı",
+        "price": "425,50 ₺",
+        "category": "TATLI ÇEŞİTLERİ"
+      },
+      {
+        "name": "Brownie Vişneli",
+        "price": "425,50 ₺",
+        "category": "TATLI ÇEŞİTLERİ"
+      },
+      {
+        "name": "Frambuazlı Cheesecake",
+        "price": "425,50 ₺",
+        "category": "TATLI ÇEŞİTLERİ"
+      },
+      {
+        "name": "Havuçlu Tarçınlı Kek",
+        "price": "115,00 ₺",
+        "category": "TATLI ÇEŞİTLERİ"
+      },
+      {
+        "name": "Kruvasan",
+        "price": "115,00 ₺",
+        "category": "TATLI ÇEŞİTLERİ"
+      },
+      {
+        "name": "Limonlu Cheesecake",
+        "price": "425,50 ₺",
+        "category": "TATLI ÇEŞİTLERİ"
+      },
+      {
+        "name": "Lotus Magnolia",
+        "price": "425,50 ₺",
+        "category": "TATLI ÇEŞİTLERİ"
+      },
+      {
+        "name": "Macaron (3 Adet)",
+        "price": "230,00 ₺",
+        "category": "TATLI ÇEŞİTLERİ"
+      },
+      {
+        "name": "Nutella Magnolia",
+        "price": "425,50 ₺",
+        "category": "TATLI ÇEŞİTLERİ"
+      },
+      {
+        "name": "Oreo Magnolia",
+        "price": "425,50 ₺",
+        "category": "TATLI ÇEŞİTLERİ"
+      },
+      {
+        "name": "Profiterol Çikolatalı",
+        "price": "425,50 ₺",
+        "category": "TATLI ÇEŞİTLERİ"
+      },
+      {
+        "name": "Profiterol Karamelli",
+        "price": "425,50 ₺",
+        "category": "TATLI ÇEŞİTLERİ"
+      },
+      {
+        "name": "Sade Magnolia",
+        "price": "425,50 ₺",
+        "category": "TATLI ÇEŞİTLERİ"
+      },
+      {
+        "name": "San Sebastian",
+        "price": "425,50 ₺",
+        "category": "TATLI ÇEŞİTLERİ"
+      },
+      {
+        "name": "Tiramisu",
+        "price": "425,50 ₺",
+        "category": "TATLI ÇEŞİTLERİ"
+      },
+      {
+        "name": "Tiramisu Limonlu",
+        "price": "425,50 ₺",
+        "category": "TATLI ÇEŞİTLERİ"
+      },
+      {
+        "name": "Tiramisu Topları",
+        "price": "425,50 ₺",
+        "category": "TATLI ÇEŞİTLERİ"
+      },
+      {
+        "name": "Americano",
+        "price": "287,50 ₺",
+        "category": "KAHVE ÇEŞİTLERİ"
+      },
+      {
+        "name": "Cappuccino",
+        "price": "287,50 ₺",
+        "category": "KAHVE ÇEŞİTLERİ"
+      },
+      {
+        "name": "Caramel Latte",
+        "price": "287,50 ₺",
+        "category": "KAHVE ÇEŞİTLERİ"
+      },
+      {
+        "name": "Double Espresso",
+        "price": "287,50 ₺",
+        "category": "KAHVE ÇEŞİTLERİ"
+      },
+      {
+        "name": "Espresso",
+        "price": "230,00 ₺",
+        "category": "KAHVE ÇEŞİTLERİ"
+      },
+      {
+        "name": "Filtre Kahve",
+        "price": "287,50 ₺",
+        "category": "KAHVE ÇEŞİTLERİ"
+      },
+      {
+        "name": "Latte Macchiato",
+        "price": "287,50 ₺",
+        "category": "KAHVE ÇEŞİTLERİ"
+      },
+      {
+        "name": "Sıcak Çikolata",
+        "price": "230,00 ₺",
+        "category": "KAHVE ÇEŞİTLERİ"
+      },
+      {
+        "name": "Türk Kahvesi",
+        "price": "207,00 ₺",
+        "category": "KAHVE ÇEŞİTLERİ"
+      },
+      {
+        "name": "White Chocolate Mocha",
+        "price": "287,50 ₺",
+        "category": "KAHVE ÇEŞİTLERİ"
+      },
+      {
+        "name": "Affogato",
+        "price": "310,50 ₺",
+        "category": "ICED COFFEES"
+      },
+      {
+        "name": "Iced Americano",
+        "price": "310,50 ₺",
+        "category": "ICED COFFEES"
+      },
+      {
+        "name": "Iced Caramel Latte",
+        "price": "310,50 ₺",
+        "category": "ICED COFFEES"
+      },
+      {
+        "name": "Iced Latte",
+        "price": "310,50 ₺",
+        "category": "ICED COFFEES"
+      },
+      {
+        "name": "Iced White Chocolate Mocha",
+        "price": "310,50 ₺",
+        "category": "ICED COFFEES"
+      },
+      {
+        "name": "Iced Matcha Latte",
+        "price": "310,50 ₺",
+        "category": "MATCHA"
+      },
+      {
+        "name": "Iced Strawberry Matcha",
+        "price": "322,00 ₺",
+        "category": "MATCHA"
+      },
+      {
+        "name": "Çikolata Milkshake",
+        "price": "287,50 ₺",
+        "category": "MILK SHAKE"
+      },
+      {
+        "name": "Çilek Milkshake",
+        "price": "287,50 ₺",
+        "category": "MILK SHAKE"
+      },
+      {
+        "name": "Muz Milkshake",
+        "price": "287,50 ₺",
+        "category": "MILK SHAKE"
+      },
+      {
+        "name": "Churchill",
+        "price": "195,50 ₺",
+        "category": "SOFT İÇECEKLER"
+      },
+      {
+        "name": "S. Benedetto Ice Tea Limon",
+        "price": "172,50 ₺",
+        "category": "SOFT İÇECEKLER"
+      },
+      {
+        "name": "S. Benedetto Ice Tea Matcha",
+        "price": "172,50 ₺",
+        "category": "SOFT İÇECEKLER"
+      },
+      {
+        "name": "S. Benedetto Ice Tea Şeftali",
+        "price": "172,50 ₺",
+        "category": "SOFT İÇECEKLER"
+      },
+      {
+        "name": "S. Benedetto Kolajenli Su",
+        "price": "230,00 ₺",
+        "category": "SOFT İÇECEKLER"
+      },
+      {
+        "name": "S. Benedetto Mineralli Su",
+        "price": "115,00 ₺",
+        "category": "SOFT İÇECEKLER"
+      },
+      {
+        "name": "S. Benedetto Su",
+        "price": "69,00 ₺",
+        "category": "SOFT İÇECEKLER"
+      }
+    ],
+  },
 };
