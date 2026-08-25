@@ -1647,3 +1647,6 @@ Hentzer kaydı `WEST İSTANBUL MARİNA, Marmara, Ulusum Cd. NO:34/6A, 34520 Beyl
 
 ## ANFIELD CAFE&PUB ID 6950 — STRICT HOLD
 Hentzer kaydı `Kocatepe, Lamartin Cd. No:30, 34437 Beyoğlu/İstanbul` ve telefon alanı boş. Menu-TR/Wanderlog aynı adresi doğruluyor; Cybo ve TumIsyeri telefon olarak `+90 532 430 96 91` veriyor. Bulunan herkese açık DSLink QR menüsü (`https://anfieldcafepubtaksim.dslink.co`) çok sayıda ürün kategorisi içeriyor, ancak iletişim bölümünde adres yayınlamıyor ve farklı telefon `+90 531 369 29 33` gösteriyor. Bu telefon uyuşmazlığı exact şube kimliğini kesinleştirmediği için, menü ürünleri ve fiyatları olsa dahi %100 branch matching şartı sağlanmış sayılmadı. **Strict HOLD**; override eklenmedi.
+
+## BURSA GARAJ KEBAP ID 6949 kabulü
+Hentzer kaydı `Levent, Hanımeli Sk. No:2, 34330 Beşiktaş/İstanbul`, `+90 212 281 48 48`; resmi Bursa Garaj iletişim sayfası aynı adresi ve resmi Instagram/iletişim kaynakları aynı telefonu doğruluyor. Resmi DSLink canlı menü `https://bursagarajkebap.dslink.co/kebaplar` üzerinde son fiyat değişim tarihi `21.07.2026` olarak görünüyor; 28 gerçek kebap/döner ürününün fiyatları doğrudan bu exact şubenin menüsünden aktarıldı. Kampanya, carousel veya çevre bedeli eklenmedi. **Override kabul edildi.**

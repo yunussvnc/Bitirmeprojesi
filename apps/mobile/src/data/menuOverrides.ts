@@ -4,6 +4,42 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6949": {
+    "name": "BURSA GARAJ KEBAP",
+    "sourceUrl": "https://bursagarajkebap.dslink.co/kebaplar",
+    "sourceName": "Bursa Garaj Kebap resmi DSLink canlı menüsü (son fiyat değişim tarihi 21.07.2026); resmi iletişim kaydı ve Hentzer exact kaydı `Levent Mah. Hanımeli Sok. No:2, 34330 Beşiktaş/İstanbul` / `+90 212 281 48 48` ile eşleştirildi",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "İskender Kebap - 120gr", "price": "840 TL", "category": "Kebaplar" },
+      { "name": "İskender Keb. 1.5 - 160gr", "price": "1040 TL", "category": "Kebaplar" },
+      { "name": "İskender Duble Porsion - 200gr", "price": "1240 TL", "category": "Kebaplar" },
+      { "name": "Eti Bol İskender - 160Gr", "price": "1040 TL", "category": "Kebaplar" },
+      { "name": "Eti Bol İskender (1.5) - 200Gr", "price": "1240 TL", "category": "Kebaplar" },
+      { "name": "Eti Bol İskender (Double) - 250Gr", "price": "1440 TL", "category": "Kebaplar" },
+      { "name": "Karışık 1 Porsiyon - 160gr", "price": "1080 TL", "category": "Kebaplar" },
+      { "name": "Karışık İskender (1.5) - 220gr", "price": "1300 TL", "category": "Kebaplar" },
+      { "name": "Karışık Duble Porsiyon - 280gr", "price": "1500 TL", "category": "Kebaplar" },
+      { "name": "Döner 1 Porsiyon - 120gr", "price": "810 TL", "category": "Kebaplar" },
+      { "name": "Döner 1.5 Porsiyon - 160gr", "price": "1000 TL", "category": "Kebaplar" },
+      { "name": "Döner Duble Porsiyon - 200gr", "price": "1200 TL", "category": "Kebaplar" },
+      { "name": "Pilav Üstü Döner - 120Gr", "price": "810 TL", "category": "Kebaplar" },
+      { "name": "Pilav Üstü Döner (1.5) - 160Gr", "price": "1010 TL", "category": "Kebaplar" },
+      { "name": "Pilav Üstü Döner - Double (200Gr)", "price": "1310 TL", "category": "Kebaplar" },
+      { "name": "Pideli Köfte - 120Gr", "price": "840 TL", "category": "Kebaplar" },
+      { "name": "Pideli Köfte (1.5) - 160Gr", "price": "1040 TL", "category": "Kebaplar" },
+      { "name": "Pideli Köfte (Double) - 200Gr", "price": "1240 TL", "category": "Kebaplar" },
+      { "name": "Parmak Köfte - 120Gr", "price": "840 TL", "category": "Kebaplar" },
+      { "name": "Parmak Köfte (1.5) - 160Gr", "price": "1040 TL", "category": "Kebaplar" },
+      { "name": "Parmak Şiş Köfte Double 200gr", "price": "1240 TL", "category": "Kebaplar" },
+      { "name": "Bonfile 1 porsiyon - 120gr", "price": "1190 TL", "category": "Kebaplar" },
+      { "name": "Bonfile 1.5 porsiyon - 160gr", "price": "1390 TL", "category": "Kebaplar" },
+      { "name": "Bonfile Duble Porsiyon - 220Gr", "price": "1590 TL", "category": "Kebaplar" },
+      { "name": "Tombik Döner 60Gr.", "price": "520 TL", "category": "Kebaplar" },
+      { "name": "Tombik Döner (1.5) - 90Gr.", "price": "620 TL", "category": "Kebaplar" },
+      { "name": "Tombik Döner (Double) - 120Gr.", "price": "670 TL", "category": "Kebaplar" },
+      { "name": "Döner - 500Gr", "price": "3200 TL", "category": "Kebaplar" }
+    ]
+  },
   "6957": {
     "name": "CHOCO NOI WAFFLE & PATISSERIE",
     "sourceUrl": "https://www.yemeksepeti.com/restaurant/l837/choco-noi-waffle-and-patisserie",
