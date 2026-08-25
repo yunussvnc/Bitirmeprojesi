@@ -86450,4 +86450,162 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     }
   ]
 },
+  "7016": {
+  "name": "Balıkçınız Yusuf",
+  "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/gehh/balikciniz-yusuf",
+  "sourceName": "Yemeksepeti current Balıkçınız Yusuf menu; exact Hentzer branch is Dereağzı, Denizyolu Cad. No:67, 34520 Beylikdüzü/İstanbul, +90 530 017 34 24, matching the official branch Instagram profile and dated local posts. 30 unique priced food/beverage items imported; Plastic Bag excluded.",
+  "verifiedAt": "2026-08-25",
+  "items": [
+    {
+      "name": "Izgara Köfte",
+      "price": "420",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "Izgara Levrek",
+      "price": "750",
+      "category": "Izgara Balıklar"
+    },
+    {
+      "name": "Izgara Çipura",
+      "price": "750",
+      "category": "Izgara Balıklar"
+    },
+    {
+      "name": "Izgara Uskumru",
+      "price": "700",
+      "category": "Izgara Balıklar"
+    },
+    {
+      "name": "Izgara Somon",
+      "price": "750",
+      "category": "Izgara Balıklar"
+    },
+    {
+      "name": "Izgara Kalkan Balığı",
+      "price": "2500",
+      "category": "Izgara Balıklar"
+    },
+    {
+      "name": "Ahtapot Izgara",
+      "price": "1100",
+      "category": "Izgara Balıklar"
+    },
+    {
+      "name": "Hamsi Tava",
+      "price": "500",
+      "category": "Tavada Balıklar"
+    },
+    {
+      "name": "İstavrit Tava",
+      "price": "550",
+      "category": "Tavada Balıklar"
+    },
+    {
+      "name": "Mezgit Tava",
+      "price": "700",
+      "category": "Tavada Balıklar"
+    },
+    {
+      "name": "Tekir Tava",
+      "price": "1200",
+      "category": "Tavada Balıklar"
+    },
+    {
+      "name": "Mırlan Mezgit Tava (Kılçıksız)",
+      "price": "900",
+      "category": "Tavada Balıklar"
+    },
+    {
+      "name": "Kalamar Tava",
+      "price": "900",
+      "category": "Tavada Balıklar"
+    },
+    {
+      "name": "Midye Tava",
+      "price": "450",
+      "category": "Diğer Lezzetler"
+    },
+    {
+      "name": "Karides Güveç",
+      "price": "800",
+      "category": "Diğer Lezzetler"
+    },
+    {
+      "name": "Tereyağlı Karides",
+      "price": "800",
+      "category": "Diğer Lezzetler"
+    },
+    {
+      "name": "Midye Dolma (Adet)",
+      "price": "15",
+      "category": "Diğer Lezzetler"
+    },
+    {
+      "name": "Ekmek Arası Uskumru",
+      "price": "325",
+      "category": "Ekmek Arası Ürünler"
+    },
+    {
+      "name": "Mevsim Salata (4 Kişilik)",
+      "price": "450",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Yeşil Salata (2 Kişilik)",
+      "price": "250",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Çoban Salata (4 Kişilik)",
+      "price": "450",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Cola Turka (33 cl.)",
+      "price": "60",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Didi Şeftali (33 cl.)",
+      "price": "50",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Doğanay Limonata (33 cl.)",
+      "price": "50",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Çamlıca Portakallı Gazoz (33 cl.)",
+      "price": "50",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Şalgam Suyu (30 cl.)",
+      "price": "65",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Izgara Deniz Levreği (900 gr.)",
+      "price": "1300",
+      "category": "Kiloluk Balıklar (Pişirilmiş)"
+    },
+    {
+      "name": "Izgara Deniz Çipura (900 gr.)",
+      "price": "1300",
+      "category": "Kiloluk Balıklar (Pişirilmiş)"
+    },
+    {
+      "name": "Hamsi Tava (1 kg.)",
+      "price": "600",
+      "category": "Kiloluk Balıklar (Pişirilmiş)"
+    },
+    {
+      "name": "İstavrit Tava (1 kg.)",
+      "price": "600",
+      "category": "Kiloluk Balıklar (Pişirilmiş)"
+    }
+  ]
+},
 };

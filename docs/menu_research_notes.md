@@ -1452,3 +1452,6 @@ Exact kayıt `İsmet Paşa, Kenar Sokağı Kiptaş Konutları H1 blok no 2ee, 34
 
 ## KEBAPÇI ESNAF ID 7017 kabul
 Exact kayıt `Rüzgarlıbahçe, Cumhuriyet Cd. No:43, 34805 Beykoz/İstanbul`, `+90 533 545 61 23`; resmi `@kebapciesnaf`, Yandex ve yerel şube kayıtlarıyla eşleşti. Yemeksepeti `sqpn` vendorından 2026-08-25 tarihinde Menüler, Çiğ Köfteler, Tatlılar ve İçecekler kategorilerinden **11 benzersiz ürün/fiyat** alındı. Popüler carousel tekrarları ve Poşet kalemi dışlandı.
+
+## BALIKÇINIZ YUSUF ID 7016 kabul
+Exact kayıt `Dereağzı, Denizyolu Cad. No:67, 34520 Beylikdüzü/İstanbul`, `+90 530 017 34 24`; resmi `@balikcinizyusuf24` profili ve 2026 tarihli sosyal paylaşımlarla adres/telefon eşleşti. Yemeksepeti `gehh` vendorının 2026-08-25 canlı menüsünden Izgaralar, Izgara Balıklar, Tavada Balıklar, Diğer Lezzetler, Ekmek Arası Ürünler, Salatalar, İçecekler ve Kiloluk Balıklar kategorilerinden **30 benzersiz ürün/fiyat** alındı. Plastic Bag kalemi dışlandı.
