@@ -53,7 +53,7 @@ Semantik arama modellerindeki en büyük problemlerden biri olan kavramsal sapma
 
 ### 2. Groq Llama 3.1 Niyet Sınıflandırıcı & Sohbet (Chit-chat) Bypass
 Uygulamadaki yapay zeka arama çubuğunun sadece mekan aramalarında değil, genel sohbet sorgularında da doğru tepki vermesi sağlanmıştır:
-*   **Akıllı Yönlendirme:** Kullanıcı sorgusu alındığında, Groq (`llama-3.1-8b-instant`) modeli kullanılarak sorgunun bir mekan/yemek arayışı mı yoksa genel sohbet/soru (chit-chat) mu olduğu sınıflandırılır.
+*   **Akıllı Yönlendirme:** Kullanıcı sorgusu alındığında, Groq (`openai/gpt-oss-20b`) modeli kullanılarak sorgunun bir mekan/yemek arayışı mı yoksa genel sohbet/soru (chit-chat) mu olduğu sınıflandırılır.
 *   **Sohbet Fallback'i:** Sorgu mekan dışı bir sohbet ise (`is_venue_related = false`), boş mekan listesi döndürmek yerine kullanıcıya samimi bir rehberlik mesajı (örneğin: *"Merhaba! Ben senin yapay zeka asistanınım. Beşiktaş'ta deniz manzaralı sakin bir kafe önerisi gibi mekan aramalarında yardımcı olabilirim..."*) sunulur.
 *   **Hızlı Fallback:** Groq API'sinde bir gecikme veya hata yaşanırsa, sistem otomatik olarak yerel Regex/kelime eşleme fallback kontrolüne geçerek kesintisiz yanıt garantisi sunar.
 

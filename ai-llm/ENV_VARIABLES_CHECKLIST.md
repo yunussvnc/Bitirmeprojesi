@@ -27,7 +27,7 @@ Bu değişkenler genelde default değerlerde bırakılabilir:
 
 | Variable | Açıklama | Default Değer |
 |----------|----------|---------------|
-| `GROQ_MODEL` | Kullanılacak Groq model | `llama-3.1-8b-instant` |
+| `GROQ_MODEL` | Kullanılacak Groq model | `openai/gpt-oss-20b` |
 | `LLM_PROVIDER` | LLM provider türü | `layered` (Groq → Local fallback) |
 | `HUGGINGFACE_MODEL` | Yerel model (fallback) | `google/gemma-2-2b-it` |
 | `USE_4BIT_QUANTIZATION` | Model quantization (RAM tasarrufu) | `true` |
@@ -61,7 +61,7 @@ Render.com'daki servisinizin Environment tab'ından şu değişkenleri ekleyin:
 ```bash
 # LLM API
 GROQ_API_KEY=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
-GROQ_MODEL=llama-3.1-8b-instant
+GROQ_MODEL=openai/gpt-oss-20b
 
 # Google Maps Data
 SERPAPI_KEY=7611394bab18f12168e1aa91e034263a4ebdc2cb61fb2d28456027171c5aa887

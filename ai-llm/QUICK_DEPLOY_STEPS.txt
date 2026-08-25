@@ -56,7 +56,7 @@
 
    🟢 STANDART (olduğu gibi):
    ────────────────────────────────────────
-   GROQ_MODEL                = llama-3.1-8b-instant
+   GROQ_MODEL                = openai/gpt-oss-20b
    LLM_PROVIDER              = layered
    HUGGINGFACE_MODEL         = google/gemma-2-2b-it
    USE_4BIT_QUANTIZATION     = true

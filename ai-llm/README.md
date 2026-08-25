@@ -23,7 +23,7 @@ Bulut ortamlarındaki (örneğin Render.com Free katmanı - 2GB RAM sınırı) k
 
 ### 2. Katmanlı LLM (Groq & Gemma Fallback)
 Platform, kararlı ve kesintisiz hizmet sunabilmek için katmanlı bir LLM mimarisi kullanır:
-*   **Birincil Model (Groq Cloud):** İstekler son derece hızlı çalışan Groq Cloud (`llama-3.1-8b-instant`) servisi ile işlenir ve milisaniyeler içinde yanıtlanır.
+*   **Birincil Model (Groq Cloud):** İstekler son derece hızlı çalışan Groq Cloud (`openai/gpt-oss-20b`) servisi ile işlenir ve milisaniyeler içinde yanıtlanır.
 *   **İkincil Model (Yerel Gemma 2):** Bulut API'sinde bir kota aşımı, ağ kesintisi veya hata yaşanırsa, sistem otomatik olarak yerel olarak çalışan HuggingFace Gemma 2 modeline veya pure algoritmik skorlama motoruna düşer (fallback).
 
 ### 3. Çok Dilli İçerik Filtresi (Content Moderation)

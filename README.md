@@ -57,7 +57,7 @@ Projenin son fazında sisteme entegre edilen modern ve performans odaklı özell
 | **Tanıtım Web** | Vite, React 19, TypeScript, React Three Fiber & Drei, Framer Motion | 3D etkileşimli modern landing page. |
 | **Backend API** | Python 3.11, FastAPI, SQLAlchemy, Alembic, PostgreSQL, Redis Pub/Sub, Websockets | JWT + Google Auth, CRUD, asenkron background tasks ve sohbet sunucusu. |
 | **AI Servisi** | Python 3.11, FastAPI, Sentence Transformers, Qdrant, HuggingFace Transformers, PyTorch | Semantik arama, vektör indeksleme, yerel duygu analizi ve LLM yönetim servisi. |
-| **LLM Katmanı** | Groq Cloud (`llama-3.1-8b-instant`) + HuggingFace Local Gemma 2 | Hızlı cloud yanıtı alan, hata durumunda yerel modele veya puanlama motoruna düşen dayanıklı zincir. |
+| **LLM Katmanı** | Groq Cloud (`openai/gpt-oss-20b`) + HuggingFace Local Gemma 2 | Hızlı cloud yanıtı alan, hata durumunda yerel modele veya puanlama motoruna düşen dayanıklı zincir. |
 | **Vektör Arama** | Qdrant + `paraphrase-multilingual-MiniLM-L12-v2` | Çok dilli (multilingual) semantik arama yeteneği ve 198 doğrulanmış İstanbul mekanı. |
 | **Önbellek (Cache)**| Redis (FastAPI + AI-LLM katmanlarında ayrı ayrı caching) | Mekan sorgularını ve oturum verilerini milisaniyeler seviyesine indiren önbellek yapısı. |
 | **Medya Depolama**| Cloudinary & Local Storage Fallback | Kullanıcı profil resimleri, postlar ve hikaye medyaları için CDN destekli depolama. |

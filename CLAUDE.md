@@ -46,7 +46,7 @@ AsEmOs birbirine bağlı 5 ana bileşenden (modülden) oluşmaktadır:
 1.  **Mobil (App):** React Native + [Expo SDK 54](file:///d:/BitirmeProjesi/apps/mobile/package.json), Expo Router, Zustand (Global State), Leaflet JS & WebView Harita, Lucide Icons, i18next (Çoklu Dil).
 2.  **Backend API:** Python 3.11, [FastAPI](file:///d:/BitirmeProjesi/backend/main.py), SQLAlchemy, Alembic, PostgreSQL, Redis Pub/Sub, WebSockets.
 3.  **AI Servisi:** Python 3.11, [FastAPI (ai-llm)](file:///d:/BitirmeProjesi/ai-llm/app.py), Sentence Transformers (`paraphrase-multilingual-MiniLM-L12-v2`), Qdrant, HuggingFace Transformers, PyTorch.
-4.  **LLM Katmanı:** Groq Cloud (`llama-3.1-8b-instant`) + HuggingFace Yerel Gemma 2 (hata durumunda fallback).
+4.  **LLM Katmanı:** Groq Cloud (`openai/gpt-oss-20b`) + HuggingFace Yerel Gemma 2 (hata durumunda fallback).
 5.  **Tanıtım Web:** Vite, React 19, TypeScript, React Three Fiber & Drei, Framer Motion (3D Landing Page).
 6.  **Admin:** Next.js 15 Web Yönetici Paneli.
 

@@ -51,7 +51,7 @@ class LLMWrapper(ABC):
 class GroqWrapper(LLMWrapper):
     """
     Groq Cloud API wrapper.
-    llama-3.1-8b-instant ile saniyeler içinde cevap verir.
+    openai/gpt-oss-20b (Groq üzerinde) ile saniyeler içinde cevap verir.
     Internet yoksa veya kota doluysa exception fırlatır → fallback tetiklenir.
     """
 
@@ -69,7 +69,7 @@ class GroqWrapper(LLMWrapper):
         load_dotenv()  # .env'i kesinlikle yükle
 
         self.api_key = api_key or _s.GROQ_API_KEY or os.getenv("GROQ_API_KEY", "")
-        self.model   = model   or getattr(_s, "GROQ_MODEL", None) or os.getenv("GROQ_MODEL", "llama-3.1-8b-instant")
+        self.model   = model   or getattr(_s, "GROQ_MODEL", None) or os.getenv("GROQ_MODEL", "openai/gpt-oss-20b")
         self.timeout = timeout
 
         if not self.api_key:

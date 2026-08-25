@@ -79,7 +79,7 @@ BACKEND_API_URL=https://asemos-backend.onrender.com
 
 **Standart:**
 ```bash
-GROQ_MODEL=llama-3.1-8b-instant
+GROQ_MODEL=openai/gpt-oss-20b
 LLM_PROVIDER=layered
 EMBEDDING_DEVICE=cpu
 CORS_ORIGINS=*

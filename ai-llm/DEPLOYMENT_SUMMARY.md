@@ -59,7 +59,7 @@ BACKEND_API_URL=https://asemos-backend.onrender.com
 
 **Standart** (copy-paste):
 ```
-GROQ_MODEL=llama-3.1-8b-instant
+GROQ_MODEL=openai/gpt-oss-20b
 LLM_PROVIDER=layered
 CORS_ORIGINS=*
 ```
@@ -332,7 +332,7 @@ Add in Render dashboard (Environment tab):
 - `BACKEND_API_URL`
 
 **Standard:**
-- `GROQ_MODEL=llama-3.1-8b-instant`
+- `GROQ_MODEL=openai/gpt-oss-20b`
 - `LLM_PROVIDER=layered`
 - `CORS_ORIGINS=*`
 - etc. (see ENV_VARIABLES_CHECKLIST.md)

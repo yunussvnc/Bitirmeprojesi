@@ -2655,7 +2655,7 @@ async def generate_review_analysis_llm(place_name: str, reviews: List[str], lang
             print(f"[ReviewInsight] Local LLM yorum analizi hatası: {e}")
             return {}
 
-    groq_model = settings.GROQ_MODEL or os.getenv("GROQ_MODEL", "llama-3.1-8b-instant")
+    groq_model = settings.GROQ_MODEL or os.getenv("GROQ_MODEL", "openai/gpt-oss-20b")
     import httpx
     
     headers = {

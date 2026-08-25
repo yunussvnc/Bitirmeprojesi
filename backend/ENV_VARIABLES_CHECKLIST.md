@@ -24,7 +24,7 @@ Bu dosya, Render.com'da ayarlanması gereken tüm environment variables'ları li
 - [ ] `ALLOWED_ORIGINS` = `*` (mobile app için OK)
 - [ ] `LLM_ENABLED` = `True`
 - [ ] `LLM_PROVIDER` = `groq`
-- [ ] `GROQ_MODEL` = `llama-3.1-8b-instant`
+- [ ] `GROQ_MODEL` = `openai/gpt-oss-20b`
 - [ ] `RECOMMEND_CACHE_TTL` = `1800`
 - [ ] `SMTP_HOST` = `smtp.gmail.com`
 - [ ] `SMTP_PORT` = `587`
@@ -164,7 +164,7 @@ ALLOWED_ORIGINS=*
 LLM_ENABLED=True
 LLM_PROVIDER=groq
 GROQ_API_KEY=gsk_BURAYA_GROQ_KEY
-GROQ_MODEL=llama-3.1-8b-instant
+GROQ_MODEL=openai/gpt-oss-20b
 RECOMMEND_CACHE_TTL=1800
 SMTP_HOST=smtp.gmail.com
 SMTP_PORT=587

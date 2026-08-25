@@ -50,7 +50,7 @@ git push origin main
 - `ALLOWED_ORIGINS=*`
 - `LLM_ENABLED=True`
 - `LLM_PROVIDER=groq`
-- `GROQ_MODEL=llama-3.1-8b-instant`
+- `GROQ_MODEL=openai/gpt-oss-20b`
 - `SMTP_HOST=smtp.gmail.com`
 - `SMTP_PORT=587`
 
