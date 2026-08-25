@@ -1194,3 +1194,6 @@ Hentzer exact kayıt `Yakuplu, Hürriyet Blv. 23 A, 34524 Beylikdüzü/İstanbul
 
 ## HOLD — Miss Pizza Etiler ID 7106
 Hentzer exact kayıt `Bebek Yokuşu (Yok) No:1B, Etiler, 34337 Beşiktaş/İstanbul`, `+90 212 257 32 10`; Restoranım exact sayfası ve resmi `misspizza.com.tr` arama kayıtları aynı adres/telefonu destekliyor. Resmi site şu anda eski/demo içerik gösteriyor ve `/menu` endpoint’inden güvenilir içerik çıkarılamadı. Yemeksepeti’nde Miss Pizza fiyatlı vendorları var fakat `a0mm`/`ma9v` sonuçlarının Etiler No:1B şubesi olduğu kanıtlanamadı. ID 7106 strict HOLD; repo override değişikliği yapılmadı.
+
+## HOLD — Lumier’s Chimney Cake ID 7105
+Hentzer exact kayıt `Cihannüma, Barbaros Blv. No:5A, 34351 Beşiktaş/İstanbul`; telefon kaydı yok. Resmi Instagram arama sonuçları Beşiktaş No:5A şubesini destekliyor ve 2026 tarihli içeriklerde ürünleri gösteriyor; ancak yalnız Lumier’s Spesiyal 260 TL ve Böğürtlenli Spesiyal 310 TL gibi tekil fiyatlar görünür. Complete, son bir yıl içinde doğrulanabilir item-level fiyatlı menü bulunamadı. ID 7105 strict HOLD; repo override değişikliği yapılmadı.
