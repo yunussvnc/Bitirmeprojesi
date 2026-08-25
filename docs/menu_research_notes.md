@@ -1677,3 +1677,6 @@ Hentzer kaydı `Şehit Muhtar, Tarlabaşı Blv No:84, 34435 Beyoğlu/İstanbul`,
 
 ## QUKI MEYHANE WEST İSTANBUL MARINA ID 6940 — STRICT HOLD
 Hentzer/Restoranim ve resmi Instagram `Marmara, West İstanbul Marina, 34524 Beylikdüzü/İstanbul`, `+90 505 047 73 62` bilgilerini destekliyor. Yandex aynı marina bölgesini `Marmara Mah., Ulusum Cad., 28/1` olarak gösterse de farklı telefon `+90 530 933 48 85` yayımlıyor. Bulunan Fırsat Bu Fırsat menü/fiyat kaydı 24 Haziran 2023 son kullanım tarihli olduğundan bir yıllık güncellik şartını karşılamıyor. Exact telefon ve güncel fiyat koşulları birlikte sağlanamadığı için **strict HOLD**; override eklenmedi.
+
+## DOLÇETTO BAKE HOUSE ID 6939 — STRICT HOLD
+Hentzer kaydı `Kavaklı, Yeşilyurt Cd., 34520 Beylikdüzü/İstanbul` ve telefon alanı **boş**. Restoranim.net aynı exact adresi doğruluyor ve telefon yayımlamıyor; resmi Instagram arama sonuçlarında `+90 530 313 18 95` görülse de bu numara Hentzer kaydıyla eşleştirilecek canonical telefon olarak doğrulanamadı. Yemeksepeti `z45v` canlı vendorunda güncel görünen ürün/fiyatlar (kahvaltılıklar, kruvasanlar, tatlılar, kahveler ve çaylar) mevcut olsa da zorunlu adres+telefon exact eşleşmesi sağlanmadan override eklenemez. **Strict HOLD**.
