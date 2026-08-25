@@ -47944,6 +47944,30 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       {name: "Fanta (1L)", price: "120 TL", category: "Beverages"},
     ],
   },
+  "7117": {
+    "name": "Nasko Et Urunleri",
+    "sourceUrl": "https://kuruet.com/meat/",
+    "sourceName": "Resmi Nasko Et sitesi naskoet.com (başka şube yok; exact No:58/0212 614 97 18) + resmi kuruet.com WooCommerce ürün kataloğu",
+    "verifiedAt": "2026-08-25",
+    "items": [
+      {
+        "name": "Antrikot Kuru Et | 250 gr",
+        "price": "730,00 TL",
+        "category": "Resmi ürün kataloğu"
+      },
+      {
+        "name": "İsli Peynir | 1 kg",
+        "price": "950,00 TL",
+        "category": "Resmi ürün kataloğu"
+      },
+      {
+        "name": "Soka Kahvaltılık ve Meze | 280 gr",
+        "price": "340,00 TL",
+        "category": "Resmi ürün kataloğu"
+      }
+    ]
+  }
+,
   "7119": {
     name: "Viyana Kahvesi Beşiktaş",
     sourceUrl: "https://www.yemeksepeti.com/en/restaurant/lb95/besiktas-viyana-kahvesi",
