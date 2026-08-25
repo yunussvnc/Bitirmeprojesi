@@ -1581,3 +1581,6 @@ Hentzer kaydı `Türkali, Ihlamurdere Cd. No:37, 34330 Beşiktaş/İstanbul`, `+
 
 ## MOISE KARAKÖY ID 6972 strict HOLD
 Hentzer kaydı `Bereketzade, Felek Sk. No:2, 34421 Beyoğlu/İstanbul`, `+90 549 763 11 16`; Moise resmi rezervasyon sayfası aynı exact adres ve WhatsApp numarasını doğruluyor. Resmi menü sayfası Kahvaltı/Ocakbaşı/Alkol menü bağlantıları sunuyor; kahvaltı PDF’si metin olarak çıkarılamadı, ocakbaşı PDF’si ise gerçek ürün/fiyat yerine placeholder metin döndürüyor. Menulux QR bağlantısı da item-level fiyatları erişilebilir biçimde vermedi. Son bir yıl içinde doğrulanabilir tam fiyatlı kamu menüsü bulunamadığından **override eklenmedi; strict HOLD**. Alkol menüsü kapsam dışıdır.
+
+## SUFLÖR ID 6971 strict HOLD
+Hentzer kaydı `Vişnezade, Çatlak Çeşme Sk. No:1/D, 34357 Beşiktaş/İstanbul`, `+90 212 227 20 00`; Cybo, Flickr ve işletme rehberleri bu adres/telefonu doğruluyor. Suflör resmi menü sayfası güncel ürün/fiyat listesi sunuyor; ancak aynı resmi sayfanın iletişim bölümünde `+90 507 151 18 77` yazıyor ve Hentzer telefonu ile uyuşmuyor. Menüde Beşiktaş/Kadıköy ayrımı adres düzeyinde yapılmadığından %100 şube/telefon paritesi sağlanamadı. Fiyatlar mevcut olsa da yanlış şubeye aktarma riskinden **override eklenmedi; strict HOLD**.
