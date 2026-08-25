@@ -1545,3 +1545,6 @@ Hentzer API kaydı `Asmalı Mescit, İstiklal Cd. No:166/C, 34430 Beyoğlu/İsta
 
 ## ESPRESSOLAB BEYKOZ ID 6985 strict HOLD
 Hentzer API kaydı `İncirköy, Saip Molla Cd. No:77, 34800 Beykoz/İstanbul`, `+90 444 84 64`; Espressolab resmi Beykoz mağaza sayfası aynı adresi, Yandex ve resmi mağaza/marka kaynakları aynı sipariş hattını doğruluyor. Resmi menü sayfası COPYRIGHT © 2026 görünmesine rağmen ürün-fiyat listesi dinamik/captcha nedeniyle erişilebilir metin olarak sunulmadı. Yemeksepeti arama sonucu bazı ürün fiyatları gösterse de vendor’ın bu exact Beykoz şubesi olduğu tam sayfada doğrulanamadı. Branch paritesi ve güncel item-level fiyatlar birlikte doğrulanamadığı için **override eklenmedi; strict HOLD**.
+
+## BONAVIAS BEYLİKDÜZÜ ID 6984 kabul
+Hentzer API kaydı `Barış, E-5 Yanyolu No:28, 34520 Beylikdüzü/İstanbul`, `+90 544 734 20 20`; Bonavias resmi şubeler sayfası aynı adres/telefonu doğruluyor. Yemeksepeti `r57h` canlı menüsü 2026-08-26 tarihinde erişildi. Crepes, Dessert Cups, Kruvasanlar, Pancakes, Tatlılar, Waffles, İçecekler ve Özel Kutular kategorilerinden **48 benzersiz gıda/içecek kalemi** aktarıldı. Fiyatlar canlı vendor menüsünden alındı; hizmet/poşet kalemi ve carousel tekrarı eklenmedi. **Override kabul edildi.**
