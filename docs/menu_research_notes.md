@@ -1686,3 +1686,6 @@ Hentzer kaydı `Kavacık, Ekinciler Cd. No:2/A, 34810 Beykoz/İstanbul`, `+90 54
 
 ## NAPOLI GOURMET BEŞİKTAŞ ID 6937 kabulü
 Hentzer kaydı `Vişnezade, Çatalmektep Sk. 2A, 34400 Beşiktaş/İstanbul`, `+90 541 343 15 15`; DineLuup, İtalyanMutfağı ve Napoli Gourmet’in sosyal/işletme kaynakları aynı Beşiktaş şubesini doğruluyor. Yemeksepeti `y40h` canlı vendorundan Orta Boy Pizzalar (4), Makarnalar (6), Yan Ürünler (1), Tatlılar (2) ve İçecekler (7) kategorilerinden toplam 20 benzersiz ürün/fiyat kalemi aktarıldı. Popüler carousel tekrarları dahil edilmedi. **Override kabul edildi.**
+
+## GÜNEY RESTAURANT ID 6936 — STRICT HOLD
+Hentzer kaydı `Şahkulu, Şahkapısı Sk. No:2 D:B, 34421 Beyoğlu/İstanbul` ve telefon alanı **boş**. Resmi Güney Restaurant sitesi/QR sayfası aynı bölgedeki `Şahkapısı Sk. No:2` konumunu destekliyor ancak dört farklı telefon yayımlıyor (`+90 212 249 0393`, `+90 212 251 8885`, `+90 212 293 5759`, `+90 538 097 5536`); Trip.com da yalnız ilk telefonu ve D:B adresini gösteriyor. Hentzer kaydıyla exact canonical telefon eşleşmesi kurulamadı. Ayrıca resmi QR sayfasının tarih göstergesi 01.10.2024 olup bir yıllık güncellik sınırını aşmış durumda. Bu nedenle **strict HOLD**; override eklenmedi.
