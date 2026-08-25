@@ -1329,3 +1329,6 @@ Exact kayıt `Kanlıca, Halide Edip Adıvar Cd. No:58/1, 34810 Beykoz/İstanbul`
 
 ## On2 Pizzeria Ristorante ID 7059 strict HOLD
 Hentzer kaydı `Konaklar, Selvili Sokağı No:5, 34330 Beşiktaş/İstanbul`, `+90 545 522 62 12`; Yandex aynı telefonu ancak `Selvili Sok. 3B` adresini veriyor. Resmî Instagram hesabı rezervasyon için `0537 838 33 85`, gel-al için `0533 455 95 03` yayımlıyor; telefonlar Hentzer ile eşleşmiyor. Yemeksepeti `mq2g` güncel item-level menüye sahip olsa da exact No:5 branch adres/telefonunu doğrulamıyor. 100% adres/telefon parity sağlanamadığı için ürün/fiyat uydurulmadı; strict HOLD.
+
+## BlackOwlCoffee ID 7058 strict HOLD
+Exact kayıt `Sinanpaşa, Şht. Asım Cd. No:37, 34353 Beşiktaş/İstanbul`, `+90 212 327 77 07`; Mindtrip, Aratsana, Cybo ve Onedio kaynakları adres/telefonu doğruluyor. RestaurantGuru exact menü sayfası var ancak sayısal güncel fiyat içeriği erişilebilir değil. Yemeksepeti/Migros sonuçları BlackOwlCoffee yerine farklı Blak/Black Coffee Co., Coffy veya Owl işletmelerine ait; exact vendor doğrulanamadı. Son bir yıl içinde complete item-level fiyatlı exact şube menüsü bulunamadı. Ürün/fiyat uydurulmadı; strict HOLD.
