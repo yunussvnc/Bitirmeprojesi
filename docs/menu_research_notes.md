@@ -1587,3 +1587,6 @@ Hentzer kaydı `Vişnezade, Çatlak Çeşme Sk. No:1/D, 34357 Beşiktaş/İstanb
 
 ## KATTO BURGER & MUTFAK ID 6970 strict HOLD
 Hentzer kaydı `Acarlar, Acrloft, 34820 Beykoz/İstanbul`, `+90 531 500 01 00`; resmi Instagram `@kattomutfak`, Menu-TR ve 2026 tarihli sosyal içerikler AcrLoft AVM/Beykoz şube bağını doğruluyor. Ancak kamuya açık kaynaklarda tam item-level güncel menü fiyat listesi yok; sosyal paylaşım/snippetler yalnızca parçalı fiyat sinyali veriyor (ör. 470 TL) ve ürün adı/fiyat seti tamamlanamıyor. Benzer isimli Tacos & Burger menüsü exact işletme değildir. **Override eklenmedi; strict HOLD**.
+
+## KANLICA BÖREKÇİSİ ID 6969 kabul
+Hentzer kaydı `Gümüşsuyu, Fatin Hoca Sk. 21-B, 34437 Beykoz/İstanbul`, `+90 544 331 18 72`; Yandex Maps ve yerel kaynaklar aynı exact adres/telefonu doğruluyor. Yemeksepeti `cc2l` canlı vendor sayfası 2026-08-26 tarihinde Fatin Hoca Sk. 21/B ve 11 benzersiz fiyatlı kalem gösterdi: 3 börek, 1 kır pidesi ve 7 içecek. 15% indirim kampanyası ürün fiyatı olarak aktarılmadı. Poşet/servis kalemi yoktu. **Override kabul edildi.**

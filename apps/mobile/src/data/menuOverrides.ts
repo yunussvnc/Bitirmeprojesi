@@ -4,6 +4,25 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6969": {
+    "name": "KANLICA BÖREKÇİSİ",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/cc2l/kanlica-borekcisi-cc2l",
+    "sourceName": "Yemeksepeti cc2l canlı Fatin Hoca Sk. 21/B vendor menüsü, Yandex/yerel işletme kayıtları ve Hentzer exact kaydı `Gümüşsuyu, Fatin Hoca Sk. 21-B, 34437 Beykoz/İstanbul` / `+90 544 331 18 72` ile eşleştirildi",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Küt Böreği", "price": "153 TL", "category": "Börekler" },
+      { "name": "Kıymalı Kol Böreği", "price": "170 TL", "category": "Börekler" },
+      { "name": "Patatesli Kol Böreği", "price": "170 TL", "category": "Börekler" },
+      { "name": "Kıymalı Kır Pidesi", "price": "68 TL", "category": "Kır Pideleri" },
+      { "name": "Coca-Cola (33 cl.)", "price": "85 TL", "category": "İçecekler" },
+      { "name": "Fuse Tea (33 cl.)", "price": "85 TL", "category": "İçecekler" },
+      { "name": "Cappy (20 cl.)", "price": "34 TL", "category": "İçecekler" },
+      { "name": "Uludağ Limonata (33 cl.)", "price": "68 TL", "category": "İçecekler" },
+      { "name": "Niğde Gazozu (25 cl.)", "price": "51 TL", "category": "İçecekler" },
+      { "name": "Çamlıca Gazoz (25 cl.)", "price": "51 TL", "category": "İçecekler" },
+      { "name": "Sütaş Ayran (17,5 cl.)", "price": "34 TL", "category": "İçecekler" }
+    ]
+  },
   "6974": {
     "name": "DÜRÜMCÜ ESNAF ORTAÇEŞME",
     "sourceUrl": "https://www.migros.com.tr/yemek/durumcu-esnaf-beykoz-ortacesme-mah-st-32d5b",
