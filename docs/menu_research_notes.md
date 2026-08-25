@@ -1188,3 +1188,6 @@ Hentzer exact kayıt `Yalıköy, Ahmet Mithat Cd. No:19 D:B, 34820 Beykoz/İstan
 
 ## HOLD — Hamdiye Abla Karadeniz Mutfağı Kahvaltı Ve Izgara ID 7109
 Hentzer exact kayıt `Türbesi, Tokatköy, Doğu Kapısı Cd. Hz. Yuşa Cami, 34820 Beykoz/İstanbul`, `+90 538 683 98 32`; Restoranım exact sayfası ve resmi Instagram `@hamdiye_abla_karadenizmutfagi` aynı adres/telefon/işletme kimliğini destekliyor. Ancak public kaynaklarda complete item-level ve son bir yıl içinde doğrulanabilir fiyatlı menü yok. Menu-TR kategorileri ve yorumları veriyor fakat fiyat listesi vermiyor; tek bir 2025 yorumundaki kişi başı 500 TL güncel complete menü kanıtı değil. ID 7109 strict HOLD; repo override değişikliği yapılmadı.
+
+## HOLD — Et Ovası Beylikdüzü ID 7108
+Hentzer exact kayıt `Yakuplu, Hürriyet Blv. 23 A, 34524 Beylikdüzü/İstanbul`, `+90 212 876 93 51`; resmi Instagram/Facebook ve `etovasi.com` aynı şube/telefon/adres kimliğini destekliyor. `qrmenuleri.com/etovasi/en/` bazı ızgara ürünleri ve fiyatlar gösteriyor ancak çıktı eksik ve malformatlı: kategoriler tekrarlanıyor, bazı ürün-fiyat eşleşmeleri belirsiz ve complete güncel menü sağlanamıyor. Arama sonuçlarında 2024 ve daha eski içerikler ağırlıkta; son bir yıl içinde complete menü doğrulanamadı. ID 7108 strict HOLD; repo override değişikliği yapılmadı.
