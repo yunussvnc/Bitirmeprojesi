@@ -1326,3 +1326,6 @@ Exact kayıt `Şahkulu, Yörük Çk. No:1, 34421 Beyoğlu/İstanbul`, `+90 537 2
 
 ## Kanlıca Sahil Balıkçısı | KANLICA BALIKÇISI ID 7060 strict HOLD
 Exact kayıt `Kanlıca, Halide Edip Adıvar Cd. No:58/1, 34810 Beykoz/İstanbul`, `+90 216 342 34 75`; resmî iletişim sayfası, Restoranım, Kaçıyor ve sosyal içerikler adres/telefonu doğruluyor. Resmî `menu.php` sayfası ve iki sayfalı PDF menü incelendi. PDF’de yaklaşık 80 fiyat alanının tamamında yalnızca `₺` sembolü bulunuyor; sayısal item fiyatları yok. Bu nedenle son bir yıl içinde complete, sayısal fiyatlı public menü doğrulanamadı. Ürün/fiyat uydurulmadı; strict HOLD.
+
+## On2 Pizzeria Ristorante ID 7059 strict HOLD
+Hentzer kaydı `Konaklar, Selvili Sokağı No:5, 34330 Beşiktaş/İstanbul`, `+90 545 522 62 12`; Yandex aynı telefonu ancak `Selvili Sok. 3B` adresini veriyor. Resmî Instagram hesabı rezervasyon için `0537 838 33 85`, gel-al için `0533 455 95 03` yayımlıyor; telefonlar Hentzer ile eşleşmiyor. Yemeksepeti `mq2g` güncel item-level menüye sahip olsa da exact No:5 branch adres/telefonunu doğrulamıyor. 100% adres/telefon parity sağlanamadığı için ürün/fiyat uydurulmadı; strict HOLD.
