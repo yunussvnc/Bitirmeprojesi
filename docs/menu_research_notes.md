@@ -1683,3 +1683,6 @@ Hentzer kaydı `Kavaklı, Yeşilyurt Cd., 34520 Beylikdüzü/İstanbul` ve telef
 
 ## BREAKBOYZ COFFEE KAVACIK ID 6938 kabulü
 Hentzer kaydı `Kavacık, Ekinciler Cd. No:2/A, 34810 Beykoz/İstanbul`, `+90 542 735 14 75`; Yandex ve Menu-TR aynı exact adres/telefonu doğruluyor, resmi site de Breakboyz markasını ve menü PDF’sini yayımlıyor. Resmi PDF metadata tarihi 30.10.2025 olup 26.08.2026 doğrulama tarihinde bir yıllık sınır içindedir. PDF’den 16 soğuk kahve, 4 soğuk içecek, 8 refresher, 5 sıcak içecek ve 7 çay olmak üzere 40 benzersiz ürün/fiyat kalemi aktarıldı. PDF’de varyant fiyatı belirsiz olan ikinci boyutlar ve menü görselindeki açıklaması ayrıştırılamayan kalemler dahil edilmedi. **Override kabul edildi.**
+
+## NAPOLI GOURMET BEŞİKTAŞ ID 6937 kabulü
+Hentzer kaydı `Vişnezade, Çatalmektep Sk. 2A, 34400 Beşiktaş/İstanbul`, `+90 541 343 15 15`; DineLuup, İtalyanMutfağı ve Napoli Gourmet’in sosyal/işletme kaynakları aynı Beşiktaş şubesini doğruluyor. Yemeksepeti `y40h` canlı vendorundan Orta Boy Pizzalar (4), Makarnalar (6), Yan Ürünler (1), Tatlılar (2) ve İçecekler (7) kategorilerinden toplam 20 benzersiz ürün/fiyat kalemi aktarıldı. Popüler carousel tekrarları dahil edilmedi. **Override kabul edildi.**

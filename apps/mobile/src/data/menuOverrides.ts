@@ -4,6 +4,34 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6937": {
+    "name": "NAPOLI GOURMET BEŞİKTAŞ",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/y40h/napoli-gourmet-restoran",
+    "sourceName": "Yemeksepeti y40h canlı vendor; DineLuup ve İtalyanMutfağı exact `Vişnezade, Çatalmektep Sk. 2A, 34400/34357 Beşiktaş/İstanbul` / `+90 541 343 15 15` şube eşleşmesini doğruluyor",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Marinara Pizza", "price": "395 TL", "category": "Orta Boy Pizzalar" },
+      { "name": "Margherita Pizza", "price": "445 TL", "category": "Orta Boy Pizzalar" },
+      { "name": "Gourmet Pizza", "price": "535 TL", "category": "Orta Boy Pizzalar" },
+      { "name": "Burrata Pizza", "price": "765 TL", "category": "Orta Boy Pizzalar" },
+      { "name": "Penne Arrabbiata", "price": "435 TL", "category": "Makarnalar" },
+      { "name": "Fettuccine Alfredo", "price": "595 TL", "category": "Makarnalar" },
+      { "name": "Fettuccine Bolognese", "price": "565 TL", "category": "Makarnalar" },
+      { "name": "Fettuccine Carbonara", "price": "565 TL", "category": "Makarnalar" },
+      { "name": "Ravioli Gorgonzola", "price": "575 TL", "category": "Makarnalar" },
+      { "name": "Risotto Funghi", "price": "575 TL", "category": "Makarnalar" },
+      { "name": "Biberiyeli Patates Kızartması", "price": "345 TL", "category": "Yan Ürünler" },
+      { "name": "Tiramisu", "price": "425 TL", "category": "Tatlılar" },
+      { "name": "Panna Cotta", "price": "385 TL", "category": "Tatlılar" },
+      { "name": "Coca-Cola Zero Sugar (33 cl.)", "price": "115 TL", "category": "İçecekler" },
+      { "name": "Coca-Cola (33 cl.)", "price": "115 TL", "category": "İçecekler" },
+      { "name": "Fanta (33 cl.)", "price": "115 TL", "category": "İçecekler" },
+      { "name": "Sprite (33 cl.)", "price": "115 TL", "category": "İçecekler" },
+      { "name": "Fuse Tea (33 cl.)", "price": "115 TL", "category": "İçecekler" },
+      { "name": "San Pellegrino (25 cl.)", "price": "95 TL", "category": "İçecekler" },
+      { "name": "Soda (20 cl.)", "price": "95 TL", "category": "İçecekler" }
+    ]
+  },
   "6938": {
     "name": "BREAKBOYZ COFFEE - KAVACIK",
     "sourceUrl": "http://www.breakboyzcoffee.com/wp-content/uploads/2025/10/Breakboyz-Coffee-Menu.pdf",
