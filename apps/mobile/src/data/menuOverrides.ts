@@ -68045,4 +68045,743 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       }
     ],
   },
+
+  "7167": {
+    "name": "NUAR ET & KEBAP RESTAURANT",
+    "sourceUrl": "https://nuar.qrmenum.app/",
+    "sourceName": "Official Nuar QR Menu App exact Beylikdüzü branch; public YİYECEKLER/İÇECEKLER category pages; address Barbaros Hayrettin Paşa Mh. 1995. Sk. No1/3",
+    "verifiedAt": "2026-08-25",
+    "items": [
+      {
+        "name": "TULUM PEYNİRİ VE TEREYAĞI",
+        "price": "100 TL",
+        "category": "TULUM PEYNİRİ VE TEREYAĞI"
+      },
+      {
+        "name": "Şefin Tercihi",
+        "price": "200,00 ₺",
+        "category": "ÇORBA"
+      },
+      {
+        "name": "İçli Köfte",
+        "price": "250,00 ₺",
+        "category": "ARA SICAKLAR"
+      },
+      {
+        "name": "Sıcak Pazı",
+        "price": "350,00 ₺",
+        "category": "ARA SICAKLAR"
+      },
+      {
+        "name": "Paçanga Böreği",
+        "price": "250,00 ₺",
+        "category": "ARA SICAKLAR"
+      },
+      {
+        "name": "Güveçte Kaşarlı Mantar",
+        "price": "380,00 ₺",
+        "category": "ARA SICAKLAR"
+      },
+      {
+        "name": "Atom Patates",
+        "price": "350,00 ₺",
+        "category": "ARA SICAKLAR"
+      },
+      {
+        "name": "Patates Tava",
+        "price": "290,00 ₺",
+        "category": "ARA SICAKLAR"
+      },
+      {
+        "name": "Pastırmalı Humus",
+        "price": "400,00 ₺",
+        "category": "ARA SICAKLAR"
+      },
+      {
+        "name": "Güveçte İstiridye Mantarı",
+        "price": "430,00 ₺",
+        "category": "ARA SICAKLAR"
+      },
+      {
+        "name": "Gavurdağı Salata",
+        "price": "375,00 ₺",
+        "category": "SALATALAR"
+      },
+      {
+        "name": "Çoban Salata",
+        "price": "300,00 ₺",
+        "category": "SALATALAR"
+      },
+      {
+        "name": "Kaşık Salata",
+        "price": "300,00 ₺",
+        "category": "SALATALAR"
+      },
+      {
+        "name": "Tablacı Salata",
+        "price": "300,00 ₺",
+        "category": "SALATALAR"
+      },
+      {
+        "name": "Keçi Peynirli Salata",
+        "price": "350,00 ₺",
+        "category": "SALATALAR"
+      },
+      {
+        "name": "Akdeniz Salata",
+        "price": "300,00 ₺",
+        "category": "SALATALAR"
+      },
+      {
+        "name": "Tulum Peynirli Salata",
+        "price": "350,00 ₺",
+        "category": "SALATALAR"
+      },
+      {
+        "name": "Nuar Salata",
+        "price": "380,00 ₺",
+        "category": "SALATALAR"
+      },
+      {
+        "name": "Sezar Salata",
+        "price": "550,00 ₺",
+        "category": "SALATALAR"
+      },
+      {
+        "name": "Mevsim Salata",
+        "price": "300,00 ₺",
+        "category": "SALATALAR"
+      },
+      {
+        "name": "Söğüş",
+        "price": "200,00 ₺",
+        "category": "SALATALAR"
+      },
+      {
+        "name": "Peynirli Roka Salatası",
+        "price": "330,00 ₺",
+        "category": "SALATALAR"
+      },
+      {
+        "name": "Lahmacun",
+        "price": "250,00 ₺",
+        "category": "TAŞ FIRIN"
+      },
+      {
+        "name": "Spesiyal Satır Kıymalı Pide",
+        "price": "600,00 ₺",
+        "category": "TAŞ FIRIN"
+      },
+      {
+        "name": "Kaşar Peynirli Pide",
+        "price": "450,00 ₺",
+        "category": "TAŞ FIRIN"
+      },
+      {
+        "name": "Kıymalı Pide",
+        "price": "500,00 ₺",
+        "category": "TAŞ FIRIN"
+      },
+      {
+        "name": "Kuşbaşılı Pide",
+        "price": "600,00 ₺",
+        "category": "TAŞ FIRIN"
+      },
+      {
+        "name": "Kavurmalı Pide",
+        "price": "600,00 ₺",
+        "category": "TAŞ FIRIN"
+      },
+      {
+        "name": "Kavurmalı Kaşarlı Pide",
+        "price": "650,00 ₺",
+        "category": "TAŞ FIRIN"
+      },
+      {
+        "name": "Fındık Lahmacun",
+        "price": "120,00 ₺",
+        "category": "TAŞ FIRIN"
+      },
+      {
+        "name": "Kaşar Peynirli Tırnak Pide",
+        "price": "150,00 ₺",
+        "category": "TAŞ FIRIN"
+      },
+      {
+        "name": "Sucuklu Kaşarlı Pide",
+        "price": "550,00 ₺",
+        "category": "TAŞ FIRIN"
+      },
+      {
+        "name": "Kuşbaşı Kaşarlı Pide",
+        "price": "700,00 ₺",
+        "category": "TAŞ FIRIN"
+      },
+      {
+        "name": "Pizza Kaburga",
+        "price": "650,00 ₺",
+        "category": "PİZZALAR"
+      },
+      {
+        "name": "Pizza Turco",
+        "price": "650,00 ₺",
+        "category": "PİZZALAR"
+      },
+      {
+        "name": "Pizza Margherita",
+        "price": "550,00 ₺",
+        "category": "PİZZALAR"
+      },
+      {
+        "name": "Atom",
+        "price": "330,00 ₺",
+        "category": "MEZELER"
+      },
+      {
+        "name": "Otlu Peynir",
+        "price": "330,00 ₺",
+        "category": "MEZELER"
+      },
+      {
+        "name": "Ispanak",
+        "price": "330,00 ₺",
+        "category": "MEZELER"
+      },
+      {
+        "name": "Amerikan Salata",
+        "price": "330,00 ₺",
+        "category": "MEZELER"
+      },
+      {
+        "name": "Mutabal",
+        "price": "330,00 ₺",
+        "category": "MEZELER"
+      },
+      {
+        "name": "Pancar",
+        "price": "330,00 ₺",
+        "category": "MEZELER"
+      },
+      {
+        "name": "Arap Tava",
+        "price": "330,00 ₺",
+        "category": "MEZELER"
+      },
+      {
+        "name": "Fava",
+        "price": "330,00 ₺",
+        "category": "MEZELER"
+      },
+      {
+        "name": "Biber Borani",
+        "price": "330,00 ₺",
+        "category": "MEZELER"
+      },
+      {
+        "name": "Al Biber",
+        "price": "330,00 ₺",
+        "category": "MEZELER"
+      },
+      {
+        "name": "BARBUNYA PİLAKİ",
+        "price": "330,00 ₺",
+        "category": "MEZELER"
+      },
+      {
+        "name": "BÖRÜLCE",
+        "price": "330,00 ₺",
+        "category": "MEZELER"
+      },
+      {
+        "name": "Kuru Domates",
+        "price": "330,00 ₺",
+        "category": "MEZELER"
+      },
+      {
+        "name": "Acılı Ezme",
+        "price": "330,00 ₺",
+        "category": "MEZELER"
+      },
+      {
+        "name": "Muhammara",
+        "price": "330,00 ₺",
+        "category": "MEZELER"
+      },
+      {
+        "name": "Patlıcan Salata",
+        "price": "330,00 ₺",
+        "category": "MEZELER"
+      },
+      {
+        "name": "Köpoğlu",
+        "price": "330,00 ₺",
+        "category": "MEZELER"
+      },
+      {
+        "name": "Şakşuka",
+        "price": "330,00 ₺",
+        "category": "MEZELER"
+      },
+      {
+        "name": "Girit Ezmesi",
+        "price": "330,00 ₺",
+        "category": "MEZELER"
+      },
+      {
+        "name": "Semizotu",
+        "price": "330,00 ₺",
+        "category": "MEZELER"
+      },
+      {
+        "name": "Haydari",
+        "price": "330,00 ₺",
+        "category": "MEZELER"
+      },
+      {
+        "name": "Kuru Cacık",
+        "price": "330,00 ₺",
+        "category": "MEZELER"
+      },
+      {
+        "name": "Yoğurtlu Pancar",
+        "price": "330,00 ₺",
+        "category": "MEZELER"
+      },
+      {
+        "name": "Hibeş",
+        "price": "330,00 ₺",
+        "category": "MEZELER"
+      },
+      {
+        "name": "Havuç Tarator",
+        "price": "330,00 ₺",
+        "category": "MEZELER"
+      },
+      {
+        "name": "Zeytinyağlı Enginar",
+        "price": "330,00 ₺",
+        "category": "MEZELER"
+      },
+      {
+        "name": "Soğan/Sarımsak",
+        "price": "330,00 ₺",
+        "category": "MEZELER"
+      },
+      {
+        "name": "Portakallı Kereviz",
+        "price": "330,00 ₺",
+        "category": "MEZELER"
+      },
+      {
+        "name": "Yaprak Sarma",
+        "price": "330,00 ₺",
+        "category": "MEZELER"
+      },
+      {
+        "name": "Yoğurt",
+        "price": "330,00 ₺",
+        "category": "MEZELER"
+      },
+      {
+        "name": "Beyaz Peynir Tek",
+        "price": "270,00 ₺",
+        "category": "MEZELER"
+      },
+      {
+        "name": "Antep Turşu",
+        "price": "330,00 ₺",
+        "category": "MEZELER"
+      },
+      {
+        "name": "Kavun",
+        "price": "330,00 ₺",
+        "category": "MEZELER"
+      },
+      {
+        "name": "Çiğ Köfte",
+        "price": "380,00 ₺",
+        "category": "MEZELER"
+      },
+      {
+        "name": "Adana Kebap",
+        "price": "800,00 ₺",
+        "category": "ANA YEMEK"
+      },
+      {
+        "name": "İskender Kebap",
+        "price": "1.000,00 ₺",
+        "category": "ANA YEMEK"
+      },
+      {
+        "name": "Urfa Kebap",
+        "price": "800,00 ₺",
+        "category": "ANA YEMEK"
+      },
+      {
+        "name": "Fıstıklı Kebap",
+        "price": "1.050,00 ₺",
+        "category": "ANA YEMEK"
+      },
+      {
+        "name": "Patlıcan Kebap",
+        "price": "950,00 ₺",
+        "category": "ANA YEMEK"
+      },
+      {
+        "name": "Patlıcan Yatağında Kebap",
+        "price": "1.000,00 ₺",
+        "category": "ANA YEMEK"
+      },
+      {
+        "name": "Beyti Kebap",
+        "price": "900,00 ₺",
+        "category": "ANA YEMEK"
+      },
+      {
+        "name": "Beyti Sarma",
+        "price": "950,00 ₺",
+        "category": "ANA YEMEK"
+      },
+      {
+        "name": "Ali Nazik Etten",
+        "price": "1.250,00 ₺",
+        "category": "ANA YEMEK"
+      },
+      {
+        "name": "Ali Nazik Kıyma",
+        "price": "1.000,00 ₺",
+        "category": "ANA YEMEK"
+      },
+      {
+        "name": "Şaşlık",
+        "price": "1.350,00 ₺",
+        "category": "ANA YEMEK"
+      },
+      {
+        "name": "Nuar Yağlı Kara",
+        "price": "1.350,00 ₺",
+        "category": "ANA YEMEK"
+      },
+      {
+        "name": "Dana Lokum",
+        "price": "1.350,00 ₺",
+        "category": "ANA YEMEK"
+      },
+      {
+        "name": "Küşleme",
+        "price": "1.150,00 ₺",
+        "category": "ANA YEMEK"
+      },
+      {
+        "name": "Dana Antrikot",
+        "price": "1.350,00 ₺",
+        "category": "ANA YEMEK"
+      },
+      {
+        "name": "Kuzu Şiş",
+        "price": "1.150,00 ₺",
+        "category": "ANA YEMEK"
+      },
+      {
+        "name": "Çöp Şiş",
+        "price": "1.100,00 ₺",
+        "category": "ANA YEMEK"
+      },
+      {
+        "name": "Kuzu Pirzola",
+        "price": "1.250,00 ₺",
+        "category": "ANA YEMEK"
+      },
+      {
+        "name": "Kuzu Kaburga",
+        "price": "1.100,00 ₺",
+        "category": "ANA YEMEK"
+      },
+      {
+        "name": "Kuzu Tandır",
+        "price": "1.100,00 ₺",
+        "category": "ANA YEMEK"
+      },
+      {
+        "name": "Çıtır Kanat",
+        "price": "650,00 ₺",
+        "category": "ANA YEMEK"
+      },
+      {
+        "name": "Kanat",
+        "price": "650,00 ₺",
+        "category": "ANA YEMEK"
+      },
+      {
+        "name": "Tavuk Şiş",
+        "price": "720,00 ₺",
+        "category": "ANA YEMEK"
+      },
+      {
+        "name": "Izgara Köfte",
+        "price": "800,00 ₺",
+        "category": "ANA YEMEK"
+      },
+      {
+        "name": "Kasap Sucuk",
+        "price": "700,00 ₺",
+        "category": "ANA YEMEK"
+      },
+      {
+        "name": "NUAR SPECIAL 2 KİŞİLİK",
+        "price": "2.600,00 ₺",
+        "category": "ANA YEMEK"
+      },
+      {
+        "name": "NUAR SPECIAL 4 KİŞİLİK",
+        "price": "5.200,00 ₺",
+        "category": "ANA YEMEK"
+      },
+      {
+        "name": "NUAR MAKARNA",
+        "price": "700,00 ₺",
+        "category": "ANA YEMEK"
+      },
+      {
+        "name": "Dürüm Et Şiş",
+        "price": "550,00 ₺",
+        "category": "ANA YEMEK"
+      },
+      {
+        "name": "TAVUK PİRZOLA",
+        "price": "720,00 ₺",
+        "category": "ANA YEMEK"
+      },
+      {
+        "name": "KARIŞIK ET",
+        "price": "1.400,00 ₺",
+        "category": "ANA YEMEK"
+      },
+      {
+        "name": "Lokum Burger",
+        "price": "500,00 ₺",
+        "category": "BURGERLER"
+      },
+      {
+        "name": "Kaburga Tiftik Burger",
+        "price": "500,00 ₺",
+        "category": "BURGERLER"
+      },
+      {
+        "name": "Nuar Kapalı Burger",
+        "price": "500,00 ₺",
+        "category": "BURGERLER"
+      },
+      {
+        "name": "HAMBURGER",
+        "price": "450,00 ₺",
+        "category": "BURGERLER"
+      },
+      {
+        "name": "TAVUK SOTE",
+        "price": "800,00 ₺",
+        "category": "TAVALAR"
+      },
+      {
+        "name": "KİLİS TAVA TEK KİŞİLİK",
+        "price": "950,00 ₺",
+        "category": "TAVALAR"
+      },
+      {
+        "name": "KİLİS TAVA 2 KİŞİLİK",
+        "price": "1.850,00 ₺",
+        "category": "TAVALAR"
+      },
+      {
+        "name": "KİLİS TAVA 4 KİŞİLİK",
+        "price": "3.650,00 ₺",
+        "category": "TAVALAR"
+      },
+      {
+        "name": "Soya Soslu Tavuk",
+        "price": "800,00 ₺",
+        "category": "TAVALAR"
+      },
+      {
+        "name": "Et Sote",
+        "price": "1.100,00 ₺",
+        "category": "TAVALAR"
+      },
+      {
+        "name": "Çoban Kavurma",
+        "price": "1.100,00 ₺",
+        "category": "TAVALAR"
+      },
+      {
+        "name": "Künefe",
+        "price": "400,00 ₺",
+        "category": "TATLILAR"
+      },
+      {
+        "name": "BALLI MUZ",
+        "price": "400,00 ₺",
+        "category": "TATLILAR"
+      },
+      {
+        "name": "Katmer",
+        "price": "550,00 ₺",
+        "category": "TATLILAR"
+      },
+      {
+        "name": "Tahinli Kabak Tatlısı",
+        "price": "350,00 ₺",
+        "category": "TATLILAR"
+      },
+      {
+        "name": "Ayva Tatlısı",
+        "price": "350,00 ₺",
+        "category": "TATLILAR"
+      },
+      {
+        "name": "Fırın Sütlaç",
+        "price": "300,00 ₺",
+        "category": "TATLILAR"
+      },
+      {
+        "name": "Kaymaklı İncir Tatlısı",
+        "price": "350,00 ₺",
+        "category": "TATLILAR"
+      },
+      {
+        "name": "Meyve Tabağı",
+        "price": "310,00 ₺",
+        "category": "TATLILAR"
+      },
+      {
+        "name": "Maraş Top Dondurma",
+        "price": "80,00 ₺",
+        "category": "TATLILAR"
+      },
+      {
+        "name": "DONDURMALI İRMİK TATLISI",
+        "price": "300,00 ₺",
+        "category": "TATLILAR"
+      },
+      {
+        "name": "Meşrubatlar",
+        "price": "120,00 ₺",
+        "category": "İÇECEKLER"
+      },
+      {
+        "name": "SOĞUK LATTE",
+        "price": "135,00 ₺",
+        "category": "İÇECEKLER"
+      },
+      {
+        "name": "SU 1 LT",
+        "price": "100,00 ₺",
+        "category": "İÇECEKLER"
+      },
+      {
+        "name": "Maden Suyu",
+        "price": "100,00 ₺",
+        "category": "İÇECEKLER"
+      },
+      {
+        "name": "Ayran",
+        "price": "110,00 ₺",
+        "category": "İÇECEKLER"
+      },
+      {
+        "name": "Şalgam Suyu Acılı/Acısız",
+        "price": "130,00 ₺",
+        "category": "İÇECEKLER"
+      },
+      {
+        "name": "Portakal Suyu",
+        "price": "350,00 ₺",
+        "category": "İÇECEKLER"
+      },
+      {
+        "name": "Redbull",
+        "price": "250,00 ₺",
+        "category": "İÇECEKLER"
+      },
+      {
+        "name": "Türk Kahvesi",
+        "price": "120,00 ₺",
+        "category": "SICAK İÇECEKLER"
+      },
+      {
+        "name": "Dibek Kahvesi",
+        "price": "120,00 ₺",
+        "category": "SICAK İÇECEKLER"
+      },
+      {
+        "name": "Espresso",
+        "price": "150,00 ₺",
+        "category": "SICAK İÇECEKLER"
+      },
+      {
+        "name": "Americano",
+        "price": "150,00 ₺",
+        "category": "SICAK İÇECEKLER"
+      },
+      {
+        "name": "Çay",
+        "price": "80,00 ₺",
+        "category": "SICAK İÇECEKLER"
+      },
+      {
+        "name": "LATTE SICAK",
+        "price": "250,00 ₺",
+        "category": "SICAK İÇECEKLER"
+      },
+      {
+        "name": "Efes Pilsen 33 cl",
+        "price": "280,00 ₺",
+        "category": "BİRA"
+      },
+      {
+        "name": "Efes Pilsen 50 cl",
+        "price": "300,00 ₺",
+        "category": "BİRA"
+      },
+      {
+        "name": "Bomonti Filtresiz 50 cl",
+        "price": "350,00 ₺",
+        "category": "BİRA"
+      },
+      {
+        "name": "Büyülübağ Vedat Milor Serisi 70 cl",
+        "price": "2.100,00 ₺",
+        "category": "KIRMIZI ŞARAPLAR"
+      },
+      {
+        "name": "JP Chenet France Merlot",
+        "price": "2.600,00 ₺",
+        "category": "KIRMIZI ŞARAPLAR"
+      },
+      {
+        "name": "JP Chenet Sauvignon Blanc 75 cl",
+        "price": "2.600,00 ₺",
+        "category": "BEYAZ ŞARAPLAR"
+      },
+      {
+        "name": "Vedat Milor Büyülübağ Sultaniye 70 cl",
+        "price": "2.100,00 ₺",
+        "category": "BEYAZ ŞARAPLAR"
+      },
+      {
+        "name": "ROZ ŞARAP 70 cl",
+        "price": "2.100,00 ₺",
+        "category": "ROSE ŞARAPLAR"
+      },
+      {
+        "name": "Altın Köpük 70 cl",
+        "price": "2.100,00 ₺",
+        "category": "ŞAMPANYALAR"
+      },
+      {
+        "name": "Mojito",
+        "price": "600,00 ₺",
+        "category": "KOKTEYLLER"
+      }
+    ],
+  },
 };
