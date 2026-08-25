@@ -1206,3 +1206,6 @@ Hentzer exact kayıt `Cihannüma, Akmaz Çeşme Sk. No:18, 34022 Beşiktaş/İst
 
 ## SR DÖNER Beşiktaş ID 7102 acceptance
 Hentzer exact kayıt `Cihannüma, Hasfırın Cd. No:8/1, 34353 Beşiktaş/İstanbul`, `+90 444 77 88`; Restoranım exact sayfası ve resmi `srdoner.com.tr` aynı marka/şube kimliğini destekliyor. Migros Yemek exact `SR Döner, Beşiktaş (Cihannüma Mah.)` canlı menüsünden avantaj menüleri, gurme ürünler, tavuk dönerler, yan ürünler, soslar ve içecekler kategorilerinde **35 gıda ürünü** aktarıldı. Migros sayfası fiyat alanlarını yayımlamadığı için fiyat uydurulmadı; poşet satırı dışlandı. `verifiedAt` canlı doğrulama tarihi `2026-08-25`.
+
+## Münhasır Garden Döner & Kebap ID 7101 acceptance
+Hentzer exact kayıt `Hüseyinağa, İstiklal Cd. No:62, 34435 Beyoğlu/İstanbul`, `+90 541 422 47 42`; resmi Instagram `@munhasirdonerkebap` ve 2026-08-05 tarihli resmi içerik aynı No:62/telefon kimliğini destekliyor. Resmi `munhasirgarden.istanbul/menu` sayfasının gömülü Wix JSON verisi ayrıştırılarak döner varyantları dahil **194 benzersiz ürün/varyant ve fiyat** aktarıldı. Fiyatların resmi menüde güncel olarak sunulduğu canlı kontrolde doğrulandı; `verifiedAt` `2026-08-25`.

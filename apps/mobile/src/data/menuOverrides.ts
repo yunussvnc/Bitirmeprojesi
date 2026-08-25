@@ -73222,4 +73222,1104 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
   ]
 },
 
+  "7101": {
+  "name": "Münhasır Garden Döner & Kebap",
+  "sourceUrl": "https://www.munhasirgarden.istanbul/menu",
+  "sourceName": "Resmi Münhasır Garden menüsü; resmi Instagram @munhasirdonerkebap ve 2026-08-05 tarihli resmi içerikte exact İstiklal Cd. No:62 / 0541 422 47 42 eşleşmesi",
+  "verifiedAt": "2026-08-25",
+  "items": [
+    {
+      "name": "Sandviç Döner - 70 gr",
+      "price": "₺420.00",
+      "category": "Resmi Menü",
+      "desc": "*Kalori: 70 gr için 520-580 kcal • 100 gr için 690-760 kcal • 150 gr için 930-1030 kcal. Sandviç Ekmeği arasında Domates, Patates Kızartması ve Doğranmış Yeşil Soğan."
+    },
+    {
+      "name": "Sandviç Döner - 100 gr",
+      "price": "₺590.00",
+      "category": "Resmi Menü",
+      "desc": "*Kalori: 70 gr için 520-580 kcal • 100 gr için 690-760 kcal • 150 gr için 930-1030 kcal. Sandviç Ekmeği arasında Domates, Patates Kızartması ve Doğranmış Yeşil Soğan."
+    },
+    {
+      "name": "Sandviç Döner - 150 gr",
+      "price": "₺885.00",
+      "category": "Resmi Menü",
+      "desc": "*Kalori: 70 gr için 520-580 kcal • 100 gr için 690-760 kcal • 150 gr için 930-1030 kcal. Sandviç Ekmeği arasında Domates, Patates Kızartması ve Doğranmış Yeşil Soğan."
+    },
+    {
+      "name": "Dürüm Döner - 70 gr",
+      "price": "₺420.00",
+      "category": "Resmi Menü",
+      "desc": "*Kalori: 70 gr için 500-560 kcal • 100 gr için 670-740 kcal • 150 gr için 900-1000 kcal. Lavaş arasında Domates, Patates Kızartması ve Doğranmış Yeşil Soğan."
+    },
+    {
+      "name": "Dürüm Döner - 100 gr",
+      "price": "₺590.00",
+      "category": "Resmi Menü",
+      "desc": "*Kalori: 70 gr için 500-560 kcal • 100 gr için 670-740 kcal • 150 gr için 900-1000 kcal. Lavaş arasında Domates, Patates Kızartması ve Doğranmış Yeşil Soğan."
+    },
+    {
+      "name": "Dürüm Döner - 150 gr",
+      "price": "₺885.00",
+      "category": "Resmi Menü",
+      "desc": "*Kalori: 70 gr için 500-560 kcal • 100 gr için 670-740 kcal • 150 gr için 900-1000 kcal. Lavaş arasında Domates, Patates Kızartması ve Doğranmış Yeşil Soğan."
+    },
+    {
+      "name": "Porsiyon Döner - 100 gr",
+      "price": "₺590.00",
+      "category": "Resmi Menü",
+      "desc": "*Kalori: 100 gr için 700-800 kcal • 150 gr için 900-1050 kcal • 200 gr için 1400-1600 kcal. Servis tabağında Patates Kızartması, Domates, Yeşil Biber ve Doğranmış Yeşil Soğan ile servis edilir."
+    },
+    {
+      "name": "Porsiyon Döner - 150 gr",
+      "price": "₺885.00",
+      "category": "Resmi Menü",
+      "desc": "*Kalori: 100 gr için 700-800 kcal • 150 gr için 900-1050 kcal • 200 gr için 1400-1600 kcal. Servis tabağında Patates Kızartması, Domates, Yeşil Biber ve Doğranmış Yeşil Soğan ile servis edilir."
+    },
+    {
+      "name": "Porsiyon Döner - 200 gr",
+      "price": "₺1,180.00",
+      "category": "Resmi Menü",
+      "desc": "*Kalori: 100 gr için 700-800 kcal • 150 gr için 900-1050 kcal • 200 gr için 1400-1600 kcal. Servis tabağında Patates Kızartması, Domates, Yeşil Biber ve Doğranmış Yeşil Soğan ile servis edilir."
+    },
+    {
+      "name": "Pilav Üstü Döner - 100 gr",
+      "price": "₺680.00",
+      "category": "Resmi Menü",
+      "desc": "*750-850 kcal. Servis tabağında Beyaz Pilav, Patates Kızartması, Domates ve Yeşil Biber ile servis edilir."
+    },
+    {
+      "name": "İskender Kebap - 100 gr",
+      "price": "₺720.00",
+      "category": "Resmi Menü",
+      "desc": "*900-1050 kcal. Özel hazırlanmış pide üzerinde domates sosu, tava yoğurdu ve kaynatılmış tereyağ sos ile servis edilir."
+    },
+    {
+      "name": "Karışık Kebap Tabağı (290 gr)",
+      "price": "₺1,200.00",
+      "category": "Resmi Menü",
+      "desc": "*950-1.050 kcal. Karışık Et (Tavuk Şiş, Tavuk Kanat, Kuzu Şiş, Adana Kebap, Kuzu Pirzola ve Döner). Soğan, Domates, Yeşil Biber ve Pilav ile servis edilir."
+    },
+    {
+      "name": "Adana Kebap (200 gr)",
+      "price": "₺750.00",
+      "category": "Resmi Menü",
+      "desc": "*580-620 kcal. Zırh Kıyma. Soğan, Yeşil Biber ve Domates ile servis edilir."
+    },
+    {
+      "name": "Urfa Kebap (200 gr)",
+      "price": "₺750.00",
+      "category": "Resmi Menü",
+      "desc": "*560-600 kcal. Zırh Kıyma. Soğan, Yeşil Biber ve Domates ile servis edilir."
+    },
+    {
+      "name": "Izgara Köfte (250 gr)",
+      "price": "₺680.00",
+      "category": "Resmi Menü",
+      "desc": "*750-800 kcal. Dana Köfte. Patates Kızartması, Pilav ve Özel Sos ile servis edilir."
+    },
+    {
+      "name": "Beyti Kebap (200 gr)",
+      "price": "₺780.00",
+      "category": "Resmi Menü",
+      "desc": "*850-900 kcal. Sarımsak ve Maydanozlu Zırh Kıyma. Soğan, Domates ve Yeşil Biber ile servis edilir."
+    },
+    {
+      "name": "Sarma Beyti (200 gr)",
+      "price": "₺840.00",
+      "category": "Resmi Menü",
+      "desc": "*950-1030 kcal. Zırh Kıyma, Lavaş, Süzme Yoğurt, Toz Antep Fıstığı."
+    },
+    {
+      "name": "Ali Nazik (Kebap) (200 gr)",
+      "price": "₺840.00",
+      "category": "Resmi Menü",
+      "desc": "*700-760 kcal. Zırh Kıyma, Süzme Yoğurt, Patlıcan, Sarımsak, Özel Sos."
+    },
+    {
+      "name": "Fıstıklı Kebap (200 gr)",
+      "price": "₺840.00",
+      "category": "Resmi Menü",
+      "desc": "*680-720 kcal. Zırh Kıyma, Toz Antep Fıstığı. Soğan, Domates ve Yeşil Biber ile servis edilir."
+    },
+    {
+      "name": "Patlıcan Kebap (200 gr)",
+      "price": "₺940.00",
+      "category": "Resmi Menü",
+      "desc": "*520-560 kcal. Zırh Kıyma ve aynı şişte Izgara Patlıcan. Soğan, Domates ve Yeşil Biber ile servis edilir."
+    },
+    {
+      "name": "Münhasır Kebap (260 gr)",
+      "price": "₺1,020.00",
+      "category": "Resmi Menü",
+      "desc": "*680-740 kcal. Zırh Kıyma ve Dana Bonfile şeritleri. Soğan yatağında, yanında Domates ve Yeşil Biber ile servis edilir."
+    },
+    {
+      "name": "Kuzu Şiş (200 gr)",
+      "price": "₺990.00",
+      "category": "Resmi Menü",
+      "desc": "*630-670 kcal. Kuzu Eti. Soğan, Domates, Yeşil Biber ve Pilav ile servis edilir."
+    },
+    {
+      "name": "Dana Şiş (200 gr)",
+      "price": "₺990.00",
+      "category": "Resmi Menü",
+      "desc": "*520-580 kcal. Dana Eti. Soğan, Domates, Yeşil Biber ve Pilav ile servis edilir."
+    },
+    {
+      "name": "Çöp Şiş (200 gr)",
+      "price": "₺990.00",
+      "category": "Resmi Menü",
+      "desc": "*610-650 kcal. Kuşbaşı Kuzu Eti. Soğan, Domates, Yeşil Biber ve Pilav ile servis edilir."
+    },
+    {
+      "name": "Ali Nazik (Et) (200 gr)",
+      "price": "₺1,050.00",
+      "category": "Resmi Menü",
+      "desc": "*560-600 kcal. Kuşbaşı Kuzu Eti. Patlıcan, Yoğurt, Sarımsak ve Domates Sos."
+    },
+    {
+      "name": "Kuzu Kaburga (350 gr)",
+      "price": "₺1,200.00",
+      "category": "Resmi Menü",
+      "desc": "*820-870 kcal. Kuzu Kaburga. Soğan, Domates, Yeşil Biber ve Pilav ile servis edilir."
+    },
+    {
+      "name": "Kuzu Külbastı (200 gr)",
+      "price": "₺1,200.00",
+      "category": "Resmi Menü",
+      "desc": "*700-740 kcal. Kuzu Kontrfile. Soğan, Domates, Yeşil Biber ve Pilav ile servis edilir."
+    },
+    {
+      "name": "Küşleme (220 gr)",
+      "price": "₺1,300.00",
+      "category": "Resmi Menü",
+      "desc": "*500-540 kcal. Yağsız Kuzu Bonfile, Abagannuş, Soğan, Domates, Yeşil Biber."
+    },
+    {
+      "name": "Yağlı Karalı (230 gr)",
+      "price": "₺1,300.00",
+      "category": "Resmi Menü",
+      "desc": "*760-800 kcal. Kuzu Bonfile, Soğan, Domates, Yeşil Biber ve Pilav ile servis edilir."
+    },
+    {
+      "name": "Çökertme Kebabı (200 gr)",
+      "price": "₺1,200.00",
+      "category": "Resmi Menü",
+      "desc": "*930-970 kcal. Dana Bonfile, Kibrit Patates, Sarımsaklı Süzme Yoğurt, Tereyağ."
+    },
+    {
+      "name": "Dana Lokum (200 gr)",
+      "price": "₺1,300.00",
+      "category": "Resmi Menü",
+      "desc": "*560-600 kcal. Dana Bonfile, Demi Glace Sos, Baby Patates, Köy Biberi."
+    },
+    {
+      "name": "Kuzu Pirzola (270 gr)",
+      "price": "₺1,550.00",
+      "category": "Resmi Menü",
+      "desc": "*770-800 kcal. Kuzu Pirzola. Soğan, Domates, Yeşil Biber ve Pilav ile servis edilir."
+    },
+    {
+      "name": "Karışık Et Tabağı (400 gr)",
+      "price": "₺1,450.00",
+      "category": "Resmi Menü",
+      "desc": "*1.080-1.120 kcal. Karışık Et (Adana Kebap, Kuzu Şiş, Kuzu Külbastı, Kuzu Pirzola, Kuzu Kaburga ve Döner)."
+    },
+    {
+      "name": "Münhasır Tava (260 gr)",
+      "price": "₺1,450.00",
+      "category": "Resmi Menü",
+      "desc": "*680-730 kcal. Münhasır Tava (260 g). Pirzola, kaburga ve dana eti; biber ve domates ile servis edilir. Enerji değeri standart reçete ve porsiyon miktarı esas alınarak hesaplanmış olup değişiklik gösterebilir."
+    },
+    {
+      "name": "Patlıcan Tava (200 gr)",
+      "price": "₺1,040.00",
+      "category": "Resmi Menü",
+      "desc": "*700-760 kcal. Patlıcan Tava (200 g). Zırh Kıyma ve Patlıcan; Domates, Yeşil Biber, Soğan ve Kırmızı Biber"
+    },
+    {
+      "name": "Tava Soğan Kebabı (200 gr)",
+      "price": "₺900.00",
+      "category": "Resmi Menü",
+      "desc": "*700-760 kcal. Tava Soğan Kebabı (200 g). Zırh Kıyma ve Arpacık Soğan; Domates, Yeşil Biber, Kırmızı Biber"
+    },
+    {
+      "name": "Kilis Tava (200 gr)",
+      "price": "₺880.00",
+      "category": "Resmi Menü",
+      "desc": "*600-660 kcal. Kilis Tava (200 g). Zırh Kıyma, Soğan, Domates, Yeşil Biber, Kırmızı Biber, Maydanoz ve Baharatlarla hazırlanır."
+    },
+    {
+      "name": "Kuzu Pirzola Tava ( 270 gr)",
+      "price": "₺1,650.00",
+      "category": "Resmi Menü",
+      "desc": "*900-960 kcal. Kuzu Pirzola Tava (270 g). Kuzu Pirzola; Soğan, Domates, Yeşil Biber ve Kırmızı Biber."
+    },
+    {
+      "name": "Çıtır Kanat Tava ( 200 gr)",
+      "price": "₺790.00",
+      "category": "Resmi Menü",
+      "desc": "*600-660 kcal. Çıtır Kanat Tava (200 g). Baharatlarla marine edilmiş çıtır Tavuk Kanat; Soğan, Domates, Yeşil Biber ve Kırmızı Biber."
+    },
+    {
+      "name": "Döner Kebap (1 KG)",
+      "price": "₺4,720.00",
+      "category": "Resmi Menü",
+      "desc": "*2.300-2.500 kcal."
+    },
+    {
+      "name": "Karışık Tavuk Izgara (1 KG)",
+      "price": "₺3,400.00",
+      "category": "Resmi Menü",
+      "desc": "*1.450-1.600 kcal."
+    },
+    {
+      "name": "Adana Kebap (1 KG)",
+      "price": "₺4,500.00",
+      "category": "Resmi Menü",
+      "desc": "*2.800-3.000 kcal."
+    },
+    {
+      "name": "Kuzu Şiş (1 KG)",
+      "price": "₺4,950.00",
+      "category": "Resmi Menü",
+      "desc": "*2.400-2.600 kcal."
+    },
+    {
+      "name": "Dana Lokum (1 KG)",
+      "price": "₺6,500.00",
+      "category": "Resmi Menü",
+      "desc": "*1.600-1.750 kcal."
+    },
+    {
+      "name": "Kuzu Kaburga (1 KG)",
+      "price": "₺5,600.00",
+      "category": "Resmi Menü",
+      "desc": "*3.200-3.500 kcal."
+    },
+    {
+      "name": "Yağlı Karalı (1 KG)",
+      "price": "₺6,500.00",
+      "category": "Resmi Menü",
+      "desc": "*2.700-2.900 kcal."
+    },
+    {
+      "name": "Kuzu Külbastı (1 KG)",
+      "price": "₺6,000.00",
+      "category": "Resmi Menü",
+      "desc": "*2.200-2.400 kcal."
+    },
+    {
+      "name": "Kuzu Pirzola (1 KG)",
+      "price": "₺6,200.00",
+      "category": "Resmi Menü",
+      "desc": "*2.500-2.700 kcal."
+    },
+    {
+      "name": "Karışık Kebap (1 KG)",
+      "price": "₺4,800.00",
+      "category": "Resmi Menü",
+      "desc": "*2.400-2.600 kcal."
+    },
+    {
+      "name": "Karışık Et Tabağı (1 KG)",
+      "price": "₺5,800.00",
+      "category": "Resmi Menü",
+      "desc": "*2.600-2.800 kcal."
+    },
+    {
+      "name": "Tavuk Şiş - 240 gr",
+      "price": "₺720.00",
+      "category": "Resmi Menü",
+      "desc": "*600-640 kcal. Tavuk Fileto. Soğan, Domates, Yeşil Biber ve Pilav ile servis edilir."
+    },
+    {
+      "name": "Tavuk Pirzola - 340 gr",
+      "price": "₺720.00",
+      "category": "Resmi Menü",
+      "desc": "*670-710 kcal. Tavuk Pirzola. Soğan, Domates, Yeşil Biber ve Pilav ile servis edilir."
+    },
+    {
+      "name": "Tavuk Kebap - 250 gr",
+      "price": "₺720.00",
+      "category": "Resmi Menü",
+      "desc": "*620-660 kcal. Tavuk Fileto, Kuyruk Yağı. Soğan, Domates, Yeşil Biber ve Pilav ile servis edilir."
+    },
+    {
+      "name": "Izgara Tavuk Kanat - 300 gr",
+      "price": "₺790.00",
+      "category": "Resmi Menü",
+      "desc": "*660-700 kcal. Tavuk Kanat. Soğan, Domates, Yeşil Biber ve Pilav ile servis edilir."
+    },
+    {
+      "name": "Piliç Külbastı - 200 gr",
+      "price": "₺620.00",
+      "category": "Resmi Menü",
+      "desc": "*590-630 kcal. Tavuk Göğüs, Domates, Yeşil Biber, Baby Patates, Pilav."
+    },
+    {
+      "name": "Klasik Burger (150 gr)",
+      "price": "₺590.00",
+      "category": "Resmi Menü",
+      "desc": "*860-900 kcal. Burger Köftesi, Chipotle Sos, Karamelize Soğan, Domates, Turşu, Yeşillik. Patates Kızartması ile servis edilir."
+    },
+    {
+      "name": "Cheeseburger (150 gr)",
+      "price": "₺630.00",
+      "category": "Resmi Menü",
+      "desc": "*920-960 kcal. Burger Köftesi, Cheddar Sos, Chipotle Sos, Karamelize Soğan, Domates, Turşu, Yeşillik. Patates Kızartması ile servis edilir."
+    },
+    {
+      "name": "Tavuk Burger (150 gr)",
+      "price": "₺580.00",
+      "category": "Resmi Menü",
+      "desc": "*770-810 kcal. Tavuk Göğüs, Chipotle Sos, Domates, Turşu, Yeşillik, Karamelize Soğan. Patates Kızartması ile servis edilir."
+    },
+    {
+      "name": "Tavuk Şiş Dürüm (160 gr)",
+      "price": "₺610.00",
+      "category": "Resmi Menü",
+      "desc": "*440-480 kcal. Tavuk Göğüs, Domates, Soğan, Maydanoz."
+    },
+    {
+      "name": "Adana Dürüm (160 gr)",
+      "price": "₺660.00",
+      "category": "Resmi Menü",
+      "desc": "*600-640 kcal. Zırh Kıyma, Domates, Soğan, Maydanoz."
+    },
+    {
+      "name": "Çöp Şiş Dürüm (160 gr)",
+      "price": "₺750.00",
+      "category": "Resmi Menü",
+      "desc": "*540-580 kcal. Kuşbaşı Kuzu Eti, Domates, Soğan, Maydanoz."
+    },
+    {
+      "name": "Kuzu Şiş Dürüm (160 gr)",
+      "price": "₺750.00",
+      "category": "Resmi Menü",
+      "desc": "*550-590 kcal. Kuzu Eti, Domates, Soğan, Maydanoz."
+    },
+    {
+      "name": "Lahmacun (150 gr)",
+      "price": "₺240.00",
+      "category": "Resmi Menü",
+      "desc": "*460-500 kcal. Karışık Dana ve Kuzu Kıyma."
+    },
+    {
+      "name": "Antep Lahmacun (150 gr)",
+      "price": "₺290.00",
+      "category": "Resmi Menü",
+      "desc": "*470-510 kcal. Karışık Dana ve Kuzu Kıyma. Sarımsak, Biber Salçası."
+    },
+    {
+      "name": "Kaşarlı Pide (200 gr)",
+      "price": "₺590.00",
+      "category": "Resmi Menü",
+      "desc": "*1.130-1.170 kcal. Kaşar Peyniri, Pide Hamuru."
+    },
+    {
+      "name": "Sebzeli Pide (200 gr)",
+      "price": "₺590.00",
+      "category": "Resmi Menü",
+      "desc": "*1.160-1.200 kcal. Kaşar Peyniri, Sebze Mix, Pide Hamuru."
+    },
+    {
+      "name": "Kıymalı Pide (150 gr)",
+      "price": "₺640.00",
+      "category": "Resmi Menü",
+      "desc": "*800-840 kcal. Dana ve Kuzu Karışık Kıyma, Pide Hamuru."
+    },
+    {
+      "name": "Kıymalı Kaşarlı Pide (150 gr kıyma + 200 gr kaşar)",
+      "price": "₺680.00",
+      "category": "Resmi Menü",
+      "desc": "*1.500-1.540 kcal. Dana ve Kuzu Karışık Kıyma, Kaşar Peyniri, Pide Hamuru."
+    },
+    {
+      "name": "Kaşarlı Sucuklu Pide (150 gr sucuk + 200 gr kaşar)",
+      "price": "₺680.00",
+      "category": "Resmi Menü",
+      "desc": "*1.660-1.700 kcal. Sucuk, Kaşar Peyniri, Pide Hamuru."
+    },
+    {
+      "name": "Kuşbaşılı Pide (150 gr)",
+      "price": "₺680.00",
+      "category": "Resmi Menü",
+      "desc": "*760-800 kcal. Kuşbaşı Dana Eti, Soğan, Domates, Yeşil Biber, Pide Hamuru."
+    },
+    {
+      "name": "Kuşbaşılı Kaşarlı Pide (150 gr kuşbaşı + 200 gr kaşar)",
+      "price": "₺720.00",
+      "category": "Resmi Menü",
+      "desc": "*1.460-1.500 kcal. Kuşbaşı Dana Eti, Soğan, Domates, Yeşil Biber, Kaşar Peyniri, Pide Hamuru."
+    },
+    {
+      "name": "Karışık Pide (50 gr kıyma + 50 gr sucuk + 50 gr kuşbaşı + 200 gr kaşar)",
+      "price": "₺750.00",
+      "category": "Resmi Menü",
+      "desc": "*1.540-1.580 kcal. Karışık Dana ve Kuzu Kıyma, Sucuk, Kuşbaşı Dana Eti, Kaşar Peyniri, Pide Hamuru."
+    },
+    {
+      "name": "Künefe",
+      "price": "₺400.00",
+      "category": "Resmi Menü",
+      "desc": "*650-750 kcal. Fırında pişirilmiş, içi erimiş peynir dolgulu, şerbetle servis edilen geleneksel çıtır tatlı."
+    },
+    {
+      "name": "Katmer",
+      "price": "₺400.00",
+      "category": "Resmi Menü",
+      "desc": "*750-850 kcal. Fırında pişirilmiş, irmik dolgulu, toz Antep fıstığı ve şerbetle servis edilen geleneksel ince çıtır tatlı."
+    },
+    {
+      "name": "Dondurmalı Havuç Dilim Baklava",
+      "price": "₺520.00",
+      "category": "Resmi Menü",
+      "desc": "*680-780 kcal. Üzeri kremamsı dondurma ile servis edilen havuç dilim baklava; zengin ve ferahlatıcı bir Türk tatlısı deneyimi."
+    },
+    {
+      "name": "Kaymak / Dondurma",
+      "price": "₺140.00",
+      "category": "Resmi Menü",
+      "desc": "*140-180 kcal. Tatlınızın yanına bir top kaymak veya bir top dondurma."
+    },
+    {
+      "name": "Karışık Meze Tabağı (450 gr)",
+      "price": "₺750.00",
+      "category": "Resmi Menü",
+      "desc": "*650-750 kcal. Meze dolabımızdan sizin için özenle derlediğimiz meze tabağı."
+    },
+    {
+      "name": "Kuru Cacık (180 gr)",
+      "price": "₺290.00",
+      "category": "Resmi Menü",
+      "desc": "*140-170 kcal. Yoğurt, Salatalık, Nane."
+    },
+    {
+      "name": "Humus (180 gr)",
+      "price": "₺330.00",
+      "category": "Resmi Menü",
+      "desc": "*350-390 kcal. Nohut, Tahin, Sarımsak, Süzme Yoğurt, Zeytinyağı, Kimyon."
+    },
+    {
+      "name": "Patlıcan Salata (180 gr)",
+      "price": "₺290.00",
+      "category": "Resmi Menü",
+      "desc": "*110-160 kcal. Patlıcan, Zeytinyağı, Sarımsak."
+    },
+    {
+      "name": "Mütebbel (180 gr)",
+      "price": "₺290.00",
+      "category": "Resmi Menü",
+      "desc": "*190-230 kcal. Patlıcan, Sarımsak, Yoğurt, Domates, Maydanoz, Susam, Zeytinyağı."
+    },
+    {
+      "name": "Abagannuş (180 gr)",
+      "price": "₺290.00",
+      "category": "Resmi Menü",
+      "desc": "*120-170 kcal. Patlıcan, Kırmızı Biber, Yeşil Biber, Domates, Soğan, Maydanoz, Sarımsak, Zeytinyağı, Limon Suyu, Nar Ekşisi."
+    },
+    {
+      "name": "Ali Nazik Salata (180 gr)",
+      "price": "₺290.00",
+      "category": "Resmi Menü",
+      "desc": "*190-240 kcal. Yoğurt, Patlıcan, Sarımsak, Tereyağı."
+    },
+    {
+      "name": "Muhammara (180 gr)",
+      "price": "₺290.00",
+      "category": "Resmi Menü",
+      "desc": "*390-440 kcal. Köz Kırmızı Biber, Salça, Zeytinyağı, Ceviz, Galeta Unu, Nar Ekşisi, Sarımsak."
+    },
+    {
+      "name": "Köz Biber (180 gr)",
+      "price": "₺290.00",
+      "category": "Resmi Menü",
+      "desc": "*110-150 kcal. Közlenmiş Kırmızı Biber, Zeytinyağı, Sarımsak."
+    },
+    {
+      "name": "Şakşuka (180 gr)",
+      "price": "₺290.00",
+      "category": "Resmi Menü",
+      "desc": "*170-210 kcal. Süzme Yoğurt, Pancar, Maydanoz, Ceviz."
+    },
+    {
+      "name": "Yaprak Sarma (180 gr)",
+      "price": "₺330.00",
+      "category": "Resmi Menü",
+      "desc": "*290-340 kcal. Asma Yaprağı, Pilav Harcı, Zeytinyağı."
+    },
+    {
+      "name": "Münhasır Turşu (180 gr)",
+      "price": "₺290.00",
+      "category": "Resmi Menü",
+      "desc": "*25-45 kcal. Karışık Turşu Tabağı."
+    },
+    {
+      "name": "Atom (180 gr)",
+      "price": "₺330.00",
+      "category": "Resmi Menü",
+      "desc": "*260-300 kcal. Acı Kırmızı Biber, Süzme Yoğurt, Sarımsak, Zeytinyağı."
+    },
+    {
+      "name": "Çoban Salata (250 gr)",
+      "price": "₺350.00",
+      "category": "Resmi Menü",
+      "desc": "*160-200 kcal. Doğranmış Domates, Soğan, Salatalık ve Yeşil Biber. Zeytinyağı, Limon Suyu ve Nar Ekşisi ile servis edilir."
+    },
+    {
+      "name": "Mevsim Salata (250 gr)",
+      "price": "₺350.00",
+      "category": "Resmi Menü",
+      "desc": "*140-180 kcal. Göbek Yaprakları, Marul, Roka, Çeri Domates. Zeytinyağı, Limon Suyu ve Nar Ekşisi ile servis edilir."
+    },
+    {
+      "name": "Gavurdağı Salata (250 gr)",
+      "price": "₺390.00",
+      "category": "Resmi Menü",
+      "desc": "*320-360 kcal. Doğranmış Domates, Doğranmış Soğan ve yöresel baharatlar. Limon Suyu, Ceviz ve Nar Ekşisi ile servis edilir."
+    },
+    {
+      "name": "Kahvaltı Tabağı",
+      "price": "₺650.00",
+      "category": "Resmi Menü",
+      "desc": "*750-950 kcal. Beyaz Peynir, Kaşar, Misket Peynir, Köy Peyniri, Örgü Peynir, Otlu Peynir, Tulum Peyniri, Salam, Siyah Zeytin, Yeşil Zeytin, Reçel, Bal, Kaymak, Tereyağ, Tahin Helva, Nutella, Yoğurt, Domates, Salatalık, Yeşil Biber ve seçeceğiniz bir sıcak ürün (Sucuklu Yumurta, Menemen veya Sahanda Yumurta)."
+    },
+    {
+      "name": "Serpme Kahvaltı",
+      "price": "₺1,450.00",
+      "category": "Resmi Menü",
+      "desc": "*1.800-2.400 kcal. Beyaz Peynir, Kaşar, Top Peynir, Köy Peyniri, Örgü Peynir, Otlu Peynir, Tulum Peyniri, Salam, Siyah Zeytin, Yeşil Zeytin, Reçel, Bal, Kaymak, Tereyağ, Tahin Helva, Nutella, Yoğurt, Domates, Salatalık, Yeşil Biber ve seçeceğiniz bir sıcak ürün (Sucuklu Yumurta, Menemen veya Sahanda Yumurta)."
+    },
+    {
+      "name": "Süzme Mercimek Çorbası",
+      "price": "₺165.00",
+      "category": "Resmi Menü",
+      "desc": "*180-220 kcal."
+    },
+    {
+      "name": "Fındık Lahmacun",
+      "price": "₺175.00",
+      "category": "Resmi Menü",
+      "desc": "*120-150 kcal."
+    },
+    {
+      "name": "Semsek Pide",
+      "price": "₺175.00",
+      "category": "Resmi Menü",
+      "desc": "*180-220 kcal."
+    },
+    {
+      "name": "Pilav",
+      "price": "₺210.00",
+      "category": "Resmi Menü",
+      "desc": "*300-350 kcal."
+    },
+    {
+      "name": "İçli Köfte (Adet)",
+      "price": "₺210.00",
+      "category": "Resmi Menü",
+      "desc": "*160-190 kcal. Kızarmış hamur içerisinde Bulgur, Kuzu Kıyma ve Ceviz."
+    },
+    {
+      "name": "Patates Kızartması",
+      "price": "₺275.00",
+      "category": "Resmi Menü",
+      "desc": "*400-450 kcal."
+    },
+    {
+      "name": "Çiğ Köfte",
+      "price": "₺400.00",
+      "category": "Resmi Menü",
+      "desc": "*250-300 kcal. Elde yoğrulmuş Bulgur, Soğan ve Kırmızı Acı Biber."
+    },
+    {
+      "name": "Falafel",
+      "price": "₺400.00",
+      "category": "Resmi Menü",
+      "desc": "*450-520 kcal. Falafel Köftesi, Yoğurtlu Tahin Sos, Baharatlı Tereyağı Sos."
+    },
+    {
+      "name": "Küçük Su (0.50ml)",
+      "price": "₺50.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Büyük Su (1lt)",
+      "price": "₺95.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Soda (200ml)",
+      "price": "₺95.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Ayran (285ml)",
+      "price": "₺105.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Coca-Cola (300ml)",
+      "price": "₺105.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Sprite (300ml)",
+      "price": "₺105.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Fanta (300ml)",
+      "price": "₺105.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Cappy Meyve Suyu (250ml)",
+      "price": "₺105.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Fuse Tea (250ml)",
+      "price": "₺105.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Burn Enerji İçeceği (250ml)",
+      "price": "₺200.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Şalgam Suyu (330ml)",
+      "price": "₺105.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Ev Yapımı Limonata (300ml)",
+      "price": "₺240.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Taze Sıkılmış Portakal Suyu (300ml)",
+      "price": "₺240.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Taze Sıkılmış Nar Suyu (300ml)",
+      "price": "₺240.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Karışık Taze Meyve Suyu (300ml)",
+      "price": "₺240.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Çay",
+      "price": "₺50.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Türk Kahvesi",
+      "price": "₺190.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Nescafe",
+      "price": "₺190.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Espresso",
+      "price": "₺190.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Cafe Latte",
+      "price": "₺220.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Cappuccino",
+      "price": "₺220.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Cafe Macchiato",
+      "price": "₺220.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Americano",
+      "price": "₺220.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Cafe Mocha",
+      "price": "₺220.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Efes - 33cl",
+      "price": "₺290.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Efes - 50cl",
+      "price": "₺320.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Bomonti Filtresiz - 50cl",
+      "price": "₺350.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Miller - 33cl",
+      "price": "₺320.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Corona - 35cl",
+      "price": "₺360.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Yeni Rakı - Tek",
+      "price": "₺350.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Yeni Rakı - Duble",
+      "price": "₺450.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Yeni Rakı - 20cl",
+      "price": "₺1,200.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Yeni Rakı - 35cl",
+      "price": "₺1,500.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Yeni Rakı - 50cl",
+      "price": "₺1,950.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Yeni Rakı - 70cl",
+      "price": "₺2,500.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Yeni Rakı - 100cl",
+      "price": "₺3,300.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Yeni Rakı Yeni Seri - 20cl",
+      "price": "₺1,200.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Yeni Rakı Yeni Seri - 35cl",
+      "price": "₺1,600.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Yeni Rakı Yeni Seri - 50cl",
+      "price": "₺2,300.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Yeni Rakı Yeni Seri - 70cl",
+      "price": "₺2,900.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Yeni Rakı Yeni Seri - 100cl",
+      "price": "₺3,800.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Beylerbeyi Göbek - Tek",
+      "price": "₺450.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Beylerbeyi Göbek - Duble",
+      "price": "₺550.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Beylerbeyi Göbek - 35cl",
+      "price": "₺2,100.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Beylerbeyi Göbek - 50cl",
+      "price": "₺2,800.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Beylerbeyi Göbek - 70cl",
+      "price": "₺3,700.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Beylerbeyi Göbek - 100cl",
+      "price": "₺4,600.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Tekirdağ Altın Seri - 20cl",
+      "price": "₺1,300.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Tekirdağ Altın Seri - 35cl",
+      "price": "₺1,900.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Tekirdağ Altın Seri - 50cl",
+      "price": "₺2,600.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Tekirdağ Altın Seri - 70cl",
+      "price": "₺3,500.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Tekirdağ Altın Seri - 100cl",
+      "price": "₺4,400.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Kırmızı Şarap (Kadeh)",
+      "price": "₺400.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Büyülübağ Meltemi (75cl)",
+      "price": "₺1,590.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Ancyra Öküzgözü (75cl)",
+      "price": "₺2,190.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Ancyra Kalecik Karası (75cl)",
+      "price": "₺2,190.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Sarafin Cabernet Sauvignon (75cl)",
+      "price": "₺3,400.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Sarafin Merlot (75cl)",
+      "price": "₺3,400.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Beyaz Şarap (Kadeh)",
+      "price": "₺400.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Ancyra Sultaniye Emir (75cl)",
+      "price": "₺2,190.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Ancyra Sauvignon Blanc (75cl)",
+      "price": "₺2,190.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Sarafin Chardonnay (75cl)",
+      "price": "₺3,400.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Ancyra Blush (Kadeh)",
+      "price": "₺550.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Ancyra Blush (75cl)",
+      "price": "₺2,190.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Absolut - Duble",
+      "price": "₺450.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "JW Red Label - Duble",
+      "price": "₺500.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "JW Black Label - Duble",
+      "price": "₺550.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Chivas Regal - Duble",
+      "price": "₺600.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Jack Daniels - Duble",
+      "price": "₺600.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Olmeca Gold - Shot",
+      "price": "₺450.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Gordon's - Duble",
+      "price": "₺600.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Hendrick's - Duble",
+      "price": "₺830.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Hennessy VSOP (Duble)",
+      "price": "₺900.00",
+      "category": "Resmi Menü"
+    },
+    {
+      "name": "Mojito",
+      "price": "₺450.00",
+      "category": "Resmi Menü",
+      "desc": "Taze Nane Lime Soda Şeker"
+    },
+    {
+      "name": "Virgin Mary",
+      "price": "₺450.00",
+      "category": "Resmi Menü",
+      "desc": "Domates Suyu, Tuz, Karabiber, Worcestershire Acı Sos"
+    },
+    {
+      "name": "Green Velvet",
+      "price": "₺450.00",
+      "category": "Resmi Menü",
+      "desc": "Kuzu Kulağı, Taze nane, Yeşil Elma, Limon suyu, Şeker, Soda"
+    },
+    {
+      "name": "Margarita",
+      "price": "₺700.00",
+      "category": "Resmi Menü",
+      "desc": "Tekila, Portakal Likörü ve Lime Suyu"
+    },
+    {
+      "name": "Espresso Martini",
+      "price": "₺700.00",
+      "category": "Resmi Menü",
+      "desc": "Vodka, Kahlúa ve Espresso"
+    },
+    {
+      "name": "Negroni",
+      "price": "₺700.00",
+      "category": "Resmi Menü",
+      "desc": "Cin, Tatlı Vermut ve Campari"
+    },
+    {
+      "name": "Lynchburg Lemonade",
+      "price": "₺700.00",
+      "category": "Resmi Menü",
+      "desc": "Viski, Portakal Likörü, Tatlı Ekşi Sos ve Sprite"
+    },
+    {
+      "name": "Dry Martini",
+      "price": "₺700.00",
+      "category": "Resmi Menü",
+      "desc": "Cin ve Vermut"
+    },
+    {
+      "name": "Mojito",
+      "price": "₺700.00",
+      "category": "Resmi Menü",
+      "desc": "Rom, Lime, Nane ve Soda"
+    },
+    {
+      "name": "Aperol Spritz",
+      "price": "₺700.00",
+      "category": "Resmi Menü",
+      "desc": "Aperol, Prosecco ve Soda"
+    },
+    {
+      "name": "Hugo Spritz",
+      "price": "₺700.00",
+      "category": "Resmi Menü",
+      "desc": "Prosecco ve Soda, Mürver Çiçeği Likörü ve Nane"
+    },
+    {
+      "name": "Long Island Ice Tea",
+      "price": "₺700.00",
+      "category": "Resmi Menü",
+      "desc": "Rom, Cin, Vodka, Portakal Likör, Tekila, Tatlı Ekşi Sos ve Kola"
+    },
+    {
+      "name": "Whiskey Sour",
+      "price": "₺700.00",
+      "category": "Resmi Menü",
+      "desc": "Bourbon Viski, bitter ve Tatlı Ekşi Sos"
+    },
+    {
+      "name": "Bloody Mary",
+      "price": "₺700.00",
+      "category": "Resmi Menü",
+      "desc": "Votka Domates Suyu, Acı Sos, Worcestershire Sos, Tuz, Karabiber, Kereviz, Limon Suyu"
+    },
+    {
+      "name": "Lavender",
+      "price": "₺750.00",
+      "category": "Resmi Menü",
+      "desc": "Mavi Kelebek Demli, Rum, Ananas Suyu, Limon Suyu, Lime Cordial, Lavanta Cordial, Lavanta Bitter"
+    },
+    {
+      "name": "Bodega",
+      "price": "₺750.00",
+      "category": "Resmi Menü",
+      "desc": "Cin, Skinos (Damla Sakızlı Likör), Salatalık Suyu, Lime Cordial"
+    },
+    {
+      "name": "Spicy Mango",
+      "price": "₺750.00",
+      "category": "Resmi Menü",
+      "desc": "Mex Biberi ile İnfüz Tekila, Portakal Likörü, Tatlı Ekşi Sos, Mango Püresi"
+    },
+    {
+      "name": "Benedikto",
+      "price": "₺750.00",
+      "category": "Resmi Menü",
+      "desc": "Cin, Limon Cello, Kuzu Kulağı, Limon Suyu, Citrus Bitter, Lavanta"
+    },
+    {
+      "name": "Bergamont",
+      "price": "₺750.00",
+      "category": "Resmi Menü",
+      "desc": "Votka, Limon Suyu, Fesleğen, Salatalık, Bergamont Cordial, Lime Cordial, Citrus Bitter"
+    }
+  ]
+},
+
 };
