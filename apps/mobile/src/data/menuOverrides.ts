@@ -79946,4 +79946,378 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     }
   ]
 },
+  "7071": {
+  "name": "FERMAN KEBAP BÜRYAN IZGARA",
+  "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/awtn/ferman-kebap-and-buryan-and-izgara-awtn",
+  "sourceName": "Yemeksepeti canlı menüsü; Instagram Ferman Kebap hesapları ve exact Kavaklı, İbrahim Müteferrika Cd. A Blok No:1 adres/0532 593 47 11 kimliğiyle eşleştirildi. 61 benzersiz gıda ürünü aktarıldı; indirimli güncel satış fiyatları kullanıldı, referans fiyatlar ve poşet satırı dışlandı.",
+  "verifiedAt": "2026-08-25",
+  "items": [
+    {
+      "name": "Günün Çorbası",
+      "price": "128",
+      "desc": "Ekmek ile",
+      "category": "Çorbalar"
+    },
+    {
+      "name": "Kelle Paça Çorbası",
+      "price": "480",
+      "desc": "Ekmek ile",
+      "category": "Çorbalar"
+    },
+    {
+      "name": "Avşor Çorbası",
+      "price": "480",
+      "desc": "Büryan yağı, kemiksiz et, biber salçası, domates salçası",
+      "category": "Çorbalar"
+    },
+    {
+      "name": "Mercimek Çorbası",
+      "price": "128",
+      "desc": "Ekmek ile Popular![](https://images.deliveryhero.io/image/fd-tr/Products/78792486.jpg?width=150&height=150)0",
+      "category": "Çorbalar"
+    },
+    {
+      "name": "Fındık Lahmacun",
+      "price": "120",
+      "desc": "Adet olarak servis edilir.",
+      "category": "Fırın Ürünler"
+    },
+    {
+      "name": "Kaşarlı Pide",
+      "price": "440",
+      "desc": "Kaşar peyniri",
+      "category": "Fırın Ürünler"
+    },
+    {
+      "name": "Kıymalı Pide",
+      "price": "464",
+      "desc": "Dana kıyma",
+      "category": "Fırın Ürünler"
+    },
+    {
+      "name": "Kuşbaşılı Pide",
+      "price": "520",
+      "desc": "Dana kuşbaşı",
+      "category": "Fırın Ürünler"
+    },
+    {
+      "name": "Kavurmalı Pide",
+      "price": "560",
+      "desc": "Dana kıyma",
+      "category": "Fırın Ürünler"
+    },
+    {
+      "name": "Karışık Pide",
+      "price": "600",
+      "desc": "Dana kıyma, dana sucuk",
+      "category": "Fırın Ürünler"
+    },
+    {
+      "name": "Sucuklu Kaşarlı Pide",
+      "price": "480",
+      "desc": "Kaşar peyniri, dana sucuk",
+      "category": "Fırın Ürünler"
+    },
+    {
+      "name": "Kuşbaşılı Yumurtalı Pide",
+      "price": "520",
+      "desc": "Dana kuşbaşı, yumurta",
+      "category": "Fırın Ürünler"
+    },
+    {
+      "name": "Kuşbaşılı Kaşarlı Pide",
+      "price": "520",
+      "desc": "Dana kuşbaşı, kaşar peyniri",
+      "category": "Fırın Ürünler"
+    },
+    {
+      "name": "Tavuk Şiş",
+      "price": "448",
+      "desc": "Garnitür ile",
+      "category": "Kebaplar & Izgaralar"
+    },
+    {
+      "name": "Tavuk Pirzola",
+      "price": "448",
+      "desc": "Garnitür ile",
+      "category": "Kebaplar & Izgaralar"
+    },
+    {
+      "name": "Adana Kebap",
+      "price": "520",
+      "desc": "Garnitür ile",
+      "category": "Kebaplar & Izgaralar"
+    },
+    {
+      "name": "Urfa Kebap",
+      "price": "520",
+      "desc": "Garnitür ile",
+      "category": "Kebaplar & Izgaralar"
+    },
+    {
+      "name": "Patlıcanlı Kebap",
+      "price": "680",
+      "desc": "Garnitür ile",
+      "category": "Kebaplar & Izgaralar"
+    },
+    {
+      "name": "Domatesli Kebap",
+      "price": "680",
+      "desc": "Garnitür ile",
+      "category": "Kebaplar & Izgaralar"
+    },
+    {
+      "name": "Kuzu Ciğer",
+      "price": "720",
+      "desc": "Garnitür ile",
+      "category": "Kebaplar & Izgaralar"
+    },
+    {
+      "name": "Dana Antrikot",
+      "price": "880",
+      "desc": "Garnitür ile",
+      "category": "Kebaplar & Izgaralar"
+    },
+    {
+      "name": "Kuzu Pirzola",
+      "price": "760",
+      "desc": "Garnitür ile",
+      "category": "Kebaplar & Izgaralar"
+    },
+    {
+      "name": "Kuzu Şiş",
+      "price": "760",
+      "desc": "Garnitür ile",
+      "category": "Kebaplar & Izgaralar"
+    },
+    {
+      "name": "Açık Beyti Kebap",
+      "price": "760",
+      "desc": "Garnitür ile",
+      "category": "Kebaplar & Izgaralar"
+    },
+    {
+      "name": "Izgara Sucuk",
+      "price": "560",
+      "desc": "Garnitür ile",
+      "category": "Kebaplar & Izgaralar"
+    },
+    {
+      "name": "Sac Tava",
+      "price": "800",
+      "desc": "Garnitür ile",
+      "category": "Kebaplar & Izgaralar"
+    },
+    {
+      "name": "Kuzu Kaburga",
+      "price": "680",
+      "desc": "Garnitür ile",
+      "category": "Kebaplar & Izgaralar"
+    },
+    {
+      "name": "Kuzu Küşleme",
+      "price": "880",
+      "desc": "Garnitür ile",
+      "category": "Kebaplar & Izgaralar"
+    },
+    {
+      "name": "Kuzu Lokum",
+      "price": "880",
+      "desc": "Garnitür ile",
+      "category": "Kebaplar & Izgaralar"
+    },
+    {
+      "name": "Kuzu Böbrek",
+      "price": "600",
+      "desc": "Garnitür ile",
+      "category": "Kebaplar & Izgaralar"
+    },
+    {
+      "name": "Haydari",
+      "price": "128",
+      "desc": "Tek kişilik",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Acılı Ezme",
+      "price": "128",
+      "desc": "Tek kişilik",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Çiğ Köfte (250 gr.)",
+      "price": "152",
+      "desc": "Garnitür ile",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Manda Yoğurt",
+      "price": "152",
+      "desc": "Tek kişilik",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Kızartma İçli Köfte (1 Adet)",
+      "price": "168",
+      "desc": "Adet olarak servis edilir.",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Pirinç Pilavı",
+      "price": "112",
+      "desc": "Tek kişilik",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Patates Tava",
+      "price": "176",
+      "desc": "Tek kişilik",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Çoban Salata",
+      "price": "140",
+      "desc": "Domates, biber, maydanoz, isteğe göre soğan",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Gavurdağı Salata",
+      "price": "176",
+      "desc": "Domates, biber, maydanoz, ceviz",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Mevsim Salata",
+      "price": "140",
+      "desc": "Mor lahana, maydanoz, havuç, limon",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Kaşık Salatası",
+      "price": "124",
+      "desc": "Domates, biber, maydanoz, nane, dereotu",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Peynirli Roka Salatası",
+      "price": "156",
+      "desc": "Roka, domates, beyaz peynir, limon",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Sütlaç",
+      "price": "200",
+      "desc": "Tek kişilik",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Havuç Dilim Baklava",
+      "price": "280",
+      "desc": "Tek kişilik",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Katmer",
+      "price": "280",
+      "desc": "Tek kişilik",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Künefe",
+      "price": "240",
+      "desc": "Tek kişilik",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Hayrabolu Tatlısı",
+      "price": "176",
+      "desc": "Un, irmik, lor peyniri, yumurta",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Kabak Tatlısı",
+      "price": "176",
+      "desc": "Tek kişilik",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Kaymaklı Fıstıklı Künefe",
+      "price": "280",
+      "desc": "Tek kişilik",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Soğuk Kadayıf",
+      "price": "200",
+      "desc": "Tek kişilik",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "İncir Tatlısı",
+      "price": "176",
+      "desc": "Tek kişilik",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Coca-Cola (33 cl.)",
+      "price": "72",
+      "desc": "Kutu içecek",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Coca-Cola Zero (33 cl.)",
+      "price": "72",
+      "desc": "Kutu içecek",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Fanta (33 cl.)",
+      "price": "72",
+      "desc": "Kutu içecek",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Cappy (33 cl.)",
+      "price": "72",
+      "desc": "Kutu içecek",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Fuse Tea (33 cl.)",
+      "price": "72",
+      "desc": "Kutu içecek",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Ayran (29 cl.)",
+      "price": "72",
+      "desc": "Büyük boy",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Meyveli Soda (20 cl.)",
+      "price": "72",
+      "desc": "Cam şişe",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Sırma Soda (20 cl.)",
+      "price": "72",
+      "desc": "Cam şişe",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Su (50 cl.)",
+      "price": "40",
+      "desc": "Pet şişe",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Sprite (1 L.)",
+      "price": "72",
+      "desc": "Pet şişe",
+      "category": "İçecekler"
+    }
+  ]
+},
 };

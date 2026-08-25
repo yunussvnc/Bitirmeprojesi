@@ -1290,3 +1290,6 @@ Exact kayıt `Barbaros Bulvarı, Cihannüma, Mazharpaşa Sokağı No:4/A, 34353 
 
 ## Sinem Pastanesi ID 7072 strict HOLD
 Exact kayıt `Altıntepsi, Fevzipaşa Cd. 73/1, 34035 Bayrampaşa/İstanbul`, `+90 212 501 80 65`; resmî sinempastanesi.com, Kaçıyor, Menu-TR, Yandex ve Instagram `@sinempastanesi1992` aynı işletme kimliğini doğruluyor. Public kaynaklarda ürün/kalori ve tanıtım bilgileri bulunmasına rağmen son bir yıl içinde exact şubeye ait complete item-level fiyatlı menü bulunamadı. Ürün/fiyat uydurulmadı; strict HOLD.
+
+## FERMAN KEBAP BÜRYAN IZGARA ID 7071 acceptance
+Exact kayıt `Kavaklı, İbrahim Müteferrika Cd. A Blok No:1, 34520 Beylikdüzü/İstanbul`, `+90 532 593 47 11`; Instagram Ferman Kebap hesapları ve arama sonuçları aynı işletme kimliğini doğruluyor. Yemeksepeti canlı `awtn` menüsünden çorbalar, fırın ürünleri, kebaplar/ızgaralar, mezeler, yan ürünler, salatalar, tatlılar ve içecekler kategorilerinde **61 benzersiz gıda ürünü ve güncel fiyat** aktarıldı. İndirimli güncel satış fiyatları kullanıldı; ikinci/üstü çizili referans fiyatlar ve poşet satırı dışlandı. `verifiedAt` canlı kontrol tarihi `2026-08-25`.
