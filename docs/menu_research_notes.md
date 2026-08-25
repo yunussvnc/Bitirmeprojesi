@@ -1344,3 +1344,6 @@ Exact kayıt `Ortaköy, Portakal Ykş. Cd. No:17, 34347 Beşiktaş/İstanbul`, `
 
 ## Cozy Brew - Beşiktaş Cafe | Kahve & Tatlı ID 7054 refresh
 Exact kayıt `Türkali, Yeniyol Sokağı No 9, 34357 Beşiktaş/İstanbul`, `+90 537 509 96 01`; Restoranım, Instagram etkinlik içeriği ve public işletme kayıtlarıyla doğrulandı. Menüm.co canlı QR menüsü 2026-08-25 tarihinde açılarak 15 kategoriden **123 benzersiz ürün/fiyat** çıkarıldı: mocktail, milkshake, frozen, matcha, özel/sıcak/soğuk/Türk kahveleri, sıcak-soğuk içecek, çay, burger-patates, tortilla/wrap, soft içecek ve tatlılar. Gıda dışı kalem bulunmadı; `verifiedAt` 2026-08-25.
+
+## Sirtaki Meyhanesi ID 7053 strict HOLD
+Exact kayıt `Ekinoks Beylikdüzü, Büyükşehir, Cumhuriyet Cd. No:1 D:21, 34520 Beylikdüzü/İstanbul`, `+90 538 410 23 07`; Restoranım ve Cybo adres/telefonu doğruluyor. Yandex exact `Cumhuriyet Cad. 1/21` ve aynı telefonu gösteriyor ancak `Kurum faaliyette değil` durumunu yayımlıyor. Instagram’da 2025 tarihli kişi başı fix-menu fiyatları var ancak complete item-level alakart menü değil. Mevcut işletme durumu ve son bir yıl complete fiyatlı public menü şartları güvenilir biçimde karşılanamadı. Ürün/fiyat uydurulmadı; strict HOLD.
