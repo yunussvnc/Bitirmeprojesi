@@ -83616,4 +83616,1147 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     }
   ]
 },
+  "7043": {
+  "name": "Seyran Pastanesi",
+  "sourceUrl": "https://www.yemeksepeti.com/restaurant/xrku/seyran-pasta-and-restaurant-xrku",
+  "sourceName": "Yemeksepeti current Seyran Pasta & Restaurant menu; exact branch identity verified against Hentzer: Orta, Numunebağı Cd. No:78, 34040 Bayrampaşa/İstanbul and +90 212 501 72 88, matching official Seyran contact page and business directory. 227 unique priced food/beverage items imported; Popular carousel duplicates and plastic bag excluded.",
+  "verifiedAt": "2026-08-25",
+  "items": [
+    {
+      "name": "Sıcak Kahvaltı",
+      "price": "760 TL",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Simitra",
+      "price": "460 TL",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Günün Çorbası",
+      "price": "250 TL",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Mini Kahvaltı",
+      "price": "500 TL",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Fit Kahvaltı",
+      "price": "590 TL",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Güçlü Kahvaltı",
+      "price": "590 TL",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Avokado Soslu Çırpılmış Yumurta",
+      "price": "590 TL",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Avokado Soslu Poşe Yumurta",
+      "price": "590 TL",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Ekmek Üstü Krem Peynirli Çırpılmış Yumurta",
+      "price": "590 TL",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Mıhlama",
+      "price": "420 TL",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Patatesli Yumurta",
+      "price": "280 TL",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Pancake",
+      "price": "360 TL",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Sade Omlet",
+      "price": "260 TL",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Köy Omleti",
+      "price": "395 TL",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Beş Peynirli Omlet",
+      "price": "395 TL",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Seyran Special Omlet",
+      "price": "410 TL",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Lüks Kahvaltı Tabağı",
+      "price": "765 TL",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Aceleci Kahvaltı",
+      "price": "580 TL",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Güne Seyranla Başla (2 Kişilik)",
+      "price": "1740 TL",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Simit Tabağı",
+      "price": "330 TL",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Menemen",
+      "price": "310 TL",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Sahanda Yumurta",
+      "price": "240 TL",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Sahanda Sucuklu Yumurta",
+      "price": "395 TL",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Sahanda Sucuk",
+      "price": "395 TL",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Pişi Tabağı",
+      "price": "215 TL",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Peynirli Gözleme",
+      "price": "360 TL",
+      "category": "Gözlemeler"
+    },
+    {
+      "name": "Patatesli Gözleme",
+      "price": "360 TL",
+      "category": "Gözlemeler"
+    },
+    {
+      "name": "Klasik Köfte Sandviç",
+      "price": "595 TL",
+      "category": "Sandviçler"
+    },
+    {
+      "name": "Tavuk Sandviç",
+      "price": "500 TL",
+      "category": "Sandviçler"
+    },
+    {
+      "name": "Köfteli Bazlama Sandviç",
+      "price": "590 TL",
+      "category": "Sandviçler"
+    },
+    {
+      "name": "Ton Balıklı Sandviç",
+      "price": "450 TL",
+      "category": "Sandviçler"
+    },
+    {
+      "name": "Karışık Peynirli Sandviç",
+      "price": "360 TL",
+      "category": "Sandviçler"
+    },
+    {
+      "name": "Beyaz Peynirli Sandviç",
+      "price": "330 TL",
+      "category": "Sandviçler"
+    },
+    {
+      "name": "Baharatlı Patates Kızartması",
+      "price": "330 TL",
+      "category": "Atıştırmalıklar"
+    },
+    {
+      "name": "Combo Tabağı",
+      "price": "790 TL",
+      "category": "Atıştırmalıklar"
+    },
+    {
+      "name": "Çıtır Sepeti",
+      "price": "595 TL",
+      "category": "Atıştırmalıklar"
+    },
+    {
+      "name": "Cajun Baharatlı Tavuk Parçaları",
+      "price": "655 TL",
+      "category": "Atıştırmalıklar"
+    },
+    {
+      "name": "Börek Sepeti",
+      "price": "460 TL",
+      "category": "Atıştırmalıklar"
+    },
+    {
+      "name": "Ege Tostu",
+      "price": "440 TL",
+      "category": "Tostlar"
+    },
+    {
+      "name": "Seyran Köy Tostu",
+      "price": "440 TL",
+      "category": "Tostlar"
+    },
+    {
+      "name": "Ayvalık Tostu",
+      "price": "530 TL",
+      "category": "Tostlar"
+    },
+    {
+      "name": "Kaşarlı Bazlama Tost",
+      "price": "410 TL",
+      "category": "Tostlar"
+    },
+    {
+      "name": "Karışık Bazlama Tost",
+      "price": "420 TL",
+      "category": "Tostlar"
+    },
+    {
+      "name": "Beyaz Peynirli Domatesli Bazlama Tost",
+      "price": "410 TL",
+      "category": "Tostlar"
+    },
+    {
+      "name": "Diet Tost",
+      "price": "410 TL",
+      "category": "Tostlar"
+    },
+    {
+      "name": "Kaşarlı Simit Tost",
+      "price": "410 TL",
+      "category": "Tostlar"
+    },
+    {
+      "name": "Salçalı Bazlama Tost",
+      "price": "440 TL",
+      "category": "Tostlar"
+    },
+    {
+      "name": "Tavuklu Mantarlı Krep",
+      "price": "720 TL",
+      "category": "Krepler"
+    },
+    {
+      "name": "Ispanaklı Cevizli Krep",
+      "price": "685 TL",
+      "category": "Krepler"
+    },
+    {
+      "name": "Ispanaklı Kıtır Krep",
+      "price": "685 TL",
+      "category": "Krepler"
+    },
+    {
+      "name": "Kızarmış Hellim Salata",
+      "price": "685 TL",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Izgara Tavuklu Salata",
+      "price": "650 TL",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Tavuklu Sezar Salata",
+      "price": "710 TL",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Ton Balıklı Salata",
+      "price": "710 TL",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Çıtır Tavuk Salata",
+      "price": "660 TL",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Cevizli Tulum Salata",
+      "price": "660 TL",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Akdeniz Salata",
+      "price": "575 TL",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Margarita Pizza",
+      "price": "660 TL",
+      "category": "Orta Boy Pizzalar (1 - 2 Kişilik)"
+    },
+    {
+      "name": "Seyran Peynir Karnavalı",
+      "price": "750 TL",
+      "category": "Orta Boy Pizzalar (1 - 2 Kişilik)"
+    },
+    {
+      "name": "Sucuklu Pizza",
+      "price": "750 TL",
+      "category": "Orta Boy Pizzalar (1 - 2 Kişilik)"
+    },
+    {
+      "name": "BBQ Etli Pizza",
+      "price": "860 TL",
+      "category": "Orta Boy Pizzalar (1 - 2 Kişilik)"
+    },
+    {
+      "name": "BBQ Tavuklu Pizza",
+      "price": "750 TL",
+      "category": "Orta Boy Pizzalar (1 - 2 Kişilik)"
+    },
+    {
+      "name": "Karışık Pizza",
+      "price": "860 TL",
+      "category": "Orta Boy Pizzalar (1 - 2 Kişilik)"
+    },
+    {
+      "name": "Ton Balıklı Pizza",
+      "price": "815 TL",
+      "category": "Orta Boy Pizzalar (1 - 2 Kişilik)"
+    },
+    {
+      "name": "Anadolu Ateşi",
+      "price": "860 TL",
+      "category": "Orta Boy Pizzalar (1 - 2 Kişilik)"
+    },
+    {
+      "name": "Vejeteryan Pizza",
+      "price": "685 TL",
+      "category": "Orta Boy Pizzalar (1 - 2 Kişilik)"
+    },
+    {
+      "name": "Izgara Tavuklu Mantarlı Penne",
+      "price": "720 TL",
+      "category": "Makarnalar"
+    },
+    {
+      "name": "Fesleğenli Penne",
+      "price": "600 TL",
+      "category": "Makarnalar"
+    },
+    {
+      "name": "Fettucine Alfredo",
+      "price": "720 TL",
+      "category": "Makarnalar"
+    },
+    {
+      "name": "Fettucine Bolognese",
+      "price": "720 TL",
+      "category": "Makarnalar"
+    },
+    {
+      "name": "Seyran Çıtır Mantı",
+      "price": "600 TL",
+      "category": "Makarnalar"
+    },
+    {
+      "name": "Penne Arrabbiata",
+      "price": "600 TL",
+      "category": "Makarnalar"
+    },
+    {
+      "name": "Köfteli Penne",
+      "price": "750 TL",
+      "category": "Makarnalar"
+    },
+    {
+      "name": "Sebzeli Fettucine",
+      "price": "600 TL",
+      "category": "Makarnalar"
+    },
+    {
+      "name": "Klasik Ev Yapımı Mantı",
+      "price": "600 TL",
+      "category": "Makarnalar"
+    },
+    {
+      "name": "Cheddarlı Et Dürüm",
+      "price": "880 TL",
+      "category": "Dürüm ve Quesadilla"
+    },
+    {
+      "name": "Etli Quesadilla",
+      "price": "880 TL",
+      "category": "Dürüm ve Quesadilla"
+    },
+    {
+      "name": "Tavuklu Quesadilla",
+      "price": "720 TL",
+      "category": "Dürüm ve Quesadilla"
+    },
+    {
+      "name": "Cheddarlı Tavuk Dürüm",
+      "price": "720 TL",
+      "category": "Dürüm ve Quesadilla"
+    },
+    {
+      "name": "Köfte Dürüm",
+      "price": "780 TL",
+      "category": "Dürüm ve Quesadilla"
+    },
+    {
+      "name": "Cheeseburger",
+      "price": "660 TL",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Hamburger",
+      "price": "650 TL",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Mexican Burger",
+      "price": "760 TL",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Seyran Burger",
+      "price": "760 TL",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Chicken Burger",
+      "price": "600 TL",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Chili Chicken Burger",
+      "price": "640 TL",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Teksas Burger",
+      "price": "760 TL",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Tiftik Burger",
+      "price": "830 TL",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Izgara Köfte",
+      "price": "830 TL",
+      "category": "Kırmızı Etler"
+    },
+    {
+      "name": "Etli Çökertme Kebabı",
+      "price": "1300 TL",
+      "category": "Kırmızı Etler"
+    },
+    {
+      "name": "Chicken Mushroom",
+      "price": "720 TL",
+      "category": "Beyaz Etler"
+    },
+    {
+      "name": "Ispanak Soslu Tavuk",
+      "price": "720 TL",
+      "category": "Beyaz Etler"
+    },
+    {
+      "name": "Sweet Chili Soslu Tavuk",
+      "price": "720 TL",
+      "category": "Beyaz Etler"
+    },
+    {
+      "name": "Meksika Soslu Tavuk",
+      "price": "720 TL",
+      "category": "Beyaz Etler"
+    },
+    {
+      "name": "Piliç But Izgara",
+      "price": "720 TL",
+      "category": "Beyaz Etler"
+    },
+    {
+      "name": "Piliç Bonfile Izgara",
+      "price": "720 TL",
+      "category": "Beyaz Etler"
+    },
+    {
+      "name": "Köri Soslu Tavuk",
+      "price": "720 TL",
+      "category": "Beyaz Etler"
+    },
+    {
+      "name": "Viyana Şinitzel",
+      "price": "720 TL",
+      "category": "Beyaz Etler"
+    },
+    {
+      "name": "Beğendili Tavuk Pirzola",
+      "price": "720 TL",
+      "category": "Beyaz Etler"
+    },
+    {
+      "name": "Diet Tavuk Izgara",
+      "price": "720 TL",
+      "category": "Fit Menü"
+    },
+    {
+      "name": "Fit Köfte",
+      "price": "888 TL",
+      "category": "Fit Menü"
+    },
+    {
+      "name": "Fit But",
+      "price": "720 TL",
+      "category": "Fit Menü"
+    },
+    {
+      "name": "Frambuazlı Trileçe",
+      "price": "370 TL",
+      "category": "Adet Pastalar"
+    },
+    {
+      "name": "Malaga",
+      "price": "370 TL",
+      "category": "Adet Pastalar"
+    },
+    {
+      "name": "Profiterol Kule",
+      "price": "370 TL",
+      "category": "Adet Pastalar"
+    },
+    {
+      "name": "Şokola Profiterol",
+      "price": "370 TL",
+      "category": "Adet Pastalar"
+    },
+    {
+      "name": "Tinton",
+      "price": "370 TL",
+      "category": "Adet Pastalar"
+    },
+    {
+      "name": "Frambuazlı Trileçe (Tepsi)",
+      "price": "1545 TL",
+      "category": "Adet Pastalar"
+    },
+    {
+      "name": "Fıstık Çilek Kare",
+      "price": "370 TL",
+      "category": "Adet Pastalar"
+    },
+    {
+      "name": "Seyran Bomba",
+      "price": "370 TL",
+      "category": "Adet Pastalar"
+    },
+    {
+      "name": "Çilekli Brownie",
+      "price": "370 TL",
+      "category": "Adet Pastalar"
+    },
+    {
+      "name": "Şokola Piko",
+      "price": "370 TL",
+      "category": "Adet Pastalar"
+    },
+    {
+      "name": "Dört Mevsim",
+      "price": "370 TL",
+      "category": "Adet Pastalar"
+    },
+    {
+      "name": "Çilekli Mag",
+      "price": "360 TL",
+      "category": "Sütlü Tatlılar"
+    },
+    {
+      "name": "Keşkül",
+      "price": "360 TL",
+      "category": "Sütlü Tatlılar"
+    },
+    {
+      "name": "Muzlu Mag",
+      "price": "360 TL",
+      "category": "Sütlü Tatlılar"
+    },
+    {
+      "name": "Profiterol",
+      "price": "360 TL",
+      "category": "Sütlü Tatlılar"
+    },
+    {
+      "name": "Supangle",
+      "price": "360 TL",
+      "category": "Sütlü Tatlılar"
+    },
+    {
+      "name": "Sufle",
+      "price": "360 TL",
+      "category": "Sütlü Tatlılar"
+    },
+    {
+      "name": "Patatesli Kol Böreği (500 gr.)",
+      "price": "590 TL",
+      "category": "Kiloluk Börekler (500 gr.)"
+    },
+    {
+      "name": "Kıymalı Kol Böreği (500 gr.)",
+      "price": "690 TL",
+      "category": "Kiloluk Börekler (500 gr.)"
+    },
+    {
+      "name": "Peynirli Kol Böreği (500 gr.)",
+      "price": "590 TL",
+      "category": "Kiloluk Börekler (500 gr.)"
+    },
+    {
+      "name": "Su Böreği (500 gr.)",
+      "price": "590 TL",
+      "category": "Kiloluk Börekler (500 gr.)"
+    },
+    {
+      "name": "Fıstıklı Çikolatalı Mini Rulo (1000 gr.)",
+      "price": "1520 TL",
+      "category": "Kiloluk Ek Lezzetler (1000 gr.)"
+    },
+    {
+      "name": "Klasik Tatlı Kuru Pasta (1000 gr.)",
+      "price": "1400 TL",
+      "category": "Kiloluk Ek Lezzetler (1000 gr.)"
+    },
+    {
+      "name": "Klasik Tuzlu İçli Kuru Pasta (1000 gr.)",
+      "price": "1400 TL",
+      "category": "Kiloluk Ek Lezzetler (1000 gr.)"
+    },
+    {
+      "name": "Spesiyal Kuru Pasta (1000 gr.)",
+      "price": "2280 TL",
+      "category": "Kiloluk Ek Lezzetler (1000 gr.)"
+    },
+    {
+      "name": "Çikolatalı Ekler (1000 gr.)",
+      "price": "1400 TL",
+      "category": "Kiloluk Ek Lezzetler (1000 gr.)"
+    },
+    {
+      "name": "Frambuazlı Ekler (1000 gr.)",
+      "price": "1400 TL",
+      "category": "Kiloluk Ek Lezzetler (1000 gr.)"
+    },
+    {
+      "name": "Fıstıklı Ekler (1000 gr.)",
+      "price": "1400 TL",
+      "category": "Kiloluk Ek Lezzetler (1000 gr.)"
+    },
+    {
+      "name": "Fındıklı Ekler (1000 gr.)",
+      "price": "1400 TL",
+      "category": "Kiloluk Ek Lezzetler (1000 gr.)"
+    },
+    {
+      "name": "Karamelli Ekler (1000 gr.)",
+      "price": "1400 TL",
+      "category": "Kiloluk Ek Lezzetler (1000 gr.)"
+    },
+    {
+      "name": "Karışık Ekler (1000 gr.)",
+      "price": "1400 TL",
+      "category": "Kiloluk Ek Lezzetler (1000 gr.)"
+    },
+    {
+      "name": "Kürdanlı Kestane (1000 gr.)",
+      "price": "2380 TL",
+      "category": "Kiloluk Ek Lezzetler (1000 gr.)"
+    },
+    {
+      "name": "Makaron (6 Adet)",
+      "price": "420 TL",
+      "category": "Kiloluk Ek Lezzetler (1000 gr.)"
+    },
+    {
+      "name": "Paris Ekler",
+      "price": "1520 TL",
+      "category": "Kiloluk Ek Lezzetler (1000 gr.)"
+    },
+    {
+      "name": "Fıstıklı Çikolatalı Mini Rulo (500 gr.)",
+      "price": "760 TL",
+      "category": "Kiloluk Ek Lezzetler (500 gr.)"
+    },
+    {
+      "name": "Klasik Tatlı Kuru Pasta (500 gr.)",
+      "price": "700 TL",
+      "category": "Kiloluk Ek Lezzetler (500 gr.)"
+    },
+    {
+      "name": "Klasik Tuzlu İçli Kuru Pasta (500 gr.)",
+      "price": "700 TL",
+      "category": "Kiloluk Ek Lezzetler (500 gr.)"
+    },
+    {
+      "name": "Spesiyal Kuru Pasta (500 gr.",
+      "price": "1140 TL",
+      "category": "Kiloluk Ek Lezzetler (500 gr.)"
+    },
+    {
+      "name": "Çikolatalı Ekler (500 gr.)",
+      "price": "700 TL",
+      "category": "Kiloluk Ek Lezzetler (500 gr.)"
+    },
+    {
+      "name": "Frambuazlı Ekler (500 gr.)",
+      "price": "700 TL",
+      "category": "Kiloluk Ek Lezzetler (500 gr.)"
+    },
+    {
+      "name": "Fıstıklı Ekler (500 gr.)",
+      "price": "700 TL",
+      "category": "Kiloluk Ek Lezzetler (500 gr.)"
+    },
+    {
+      "name": "Fındıklı Ekler (500 gr.)",
+      "price": "700 TL",
+      "category": "Kiloluk Ek Lezzetler (500 gr.)"
+    },
+    {
+      "name": "Karamelli Ekler (500 gr.)",
+      "price": "700 TL",
+      "category": "Kiloluk Ek Lezzetler (500 gr.)"
+    },
+    {
+      "name": "Karışık Ekler (500 gr.)",
+      "price": "700 TL",
+      "category": "Kiloluk Ek Lezzetler (500 gr.)"
+    },
+    {
+      "name": "Kürdanlı Kestane (500 gr.)",
+      "price": "1190 TL",
+      "category": "Kiloluk Ek Lezzetler (500 gr.)"
+    },
+    {
+      "name": "Paris Ekler (500 gr.)",
+      "price": "760 TL",
+      "category": "Kiloluk Ek Lezzetler (500 gr.)"
+    },
+    {
+      "name": "Ankara Dürüm (1000 gr.)",
+      "price": "2590 TL",
+      "category": "Kiloluk Şerbetli Tatlılar (1000 gr.)"
+    },
+    {
+      "name": "Şekerpare (Uzun) (1000 gr.)",
+      "price": "880 TL",
+      "category": "Kiloluk Şerbetli Tatlılar (1000 gr.)"
+    },
+    {
+      "name": "Ev Baklavası (1000 gr.)",
+      "price": "1795 TL",
+      "category": "Kiloluk Şerbetli Tatlılar (1000 gr.)"
+    },
+    {
+      "name": "Cevizli Baklava (1000 gr.)",
+      "price": "1795 TL",
+      "category": "Kiloluk Şerbetli Tatlılar (1000 gr.)"
+    },
+    {
+      "name": "Fıstıklı Şöbiyet (1000 gr.)",
+      "price": "2590 TL",
+      "category": "Kiloluk Şerbetli Tatlılar (1000 gr.)"
+    },
+    {
+      "name": "Fıstıklı Kadayıf (1000 gr.)",
+      "price": "2120 TL",
+      "category": "Kiloluk Şerbetli Tatlılar (1000 gr.)"
+    },
+    {
+      "name": "Ankara Dürüm (500 gr.)",
+      "price": "1300 TL",
+      "category": "Kiloluk Şerbetli Tatlılar (500 gr.)"
+    },
+    {
+      "name": "Ev Baklavası (500 gr.)",
+      "price": "900 TL",
+      "category": "Kiloluk Şerbetli Tatlılar (500 gr.)"
+    },
+    {
+      "name": "Fıstıklı Kadayıf (500 gr.)",
+      "price": "1060 TL",
+      "category": "Kiloluk Şerbetli Tatlılar (500 gr.)"
+    },
+    {
+      "name": "Altın Sarısı Kutu Madlen Çikolata (500 gr.)",
+      "price": "1500 TL",
+      "category": "Çikolatalar"
+    },
+    {
+      "name": "Altın Sarısı Kutu Madlen Çikolata (750 gr.)",
+      "price": "2100 TL",
+      "category": "Çikolatalar"
+    },
+    {
+      "name": "Altın Sarısı Kutu Madlen Çikolata (1000 gr.)",
+      "price": "2465 TL",
+      "category": "Çikolatalar"
+    },
+    {
+      "name": "Turkuaz Altın Varaklı Kutu Madlen Çikolata (500 gr.)",
+      "price": "1500 TL",
+      "category": "Çikolatalar"
+    },
+    {
+      "name": "Turkuaz Altın Varaklı Kutu Madlen Çikolata (750 gr.)",
+      "price": "1900 TL",
+      "category": "Çikolatalar"
+    },
+    {
+      "name": "Siyah Kutu Madlen Çikolata (500 gr.)",
+      "price": "1500 TL",
+      "category": "Çikolatalar"
+    },
+    {
+      "name": "Siyah Kutu Madlen Çikolata (750 gr.)",
+      "price": "1995 TL",
+      "category": "Çikolatalar"
+    },
+    {
+      "name": "Renkli Kutu Spesiyal Çikolata (24'lü)",
+      "price": "1385 TL",
+      "category": "Çikolatalar"
+    },
+    {
+      "name": "Kırmızı Kutu Spesiyal Çikolata (750 gr.)",
+      "price": "1450 TL",
+      "category": "Çikolatalar"
+    },
+    {
+      "name": "Renkli Kutu Spesiyal Çikolata (16'lı)",
+      "price": "1175 TL",
+      "category": "Çikolatalar"
+    },
+    {
+      "name": "Kırmızı Kutu Spesiyal Çikolata (500 gr.)",
+      "price": "1175 TL",
+      "category": "Çikolatalar"
+    },
+    {
+      "name": "İstanbul Serisi Special Çikolata (48'li)",
+      "price": "2350 TL",
+      "category": "Çikolatalar"
+    },
+    {
+      "name": "Siyah Kutu Spesiyal Çikolata (16'lı)",
+      "price": "1175 TL",
+      "category": "Çikolatalar"
+    },
+    {
+      "name": "Kampanyalı Madlen Çikolata 500 gr. (Net 290 gr.)",
+      "price": "850 TL",
+      "category": "Çikolatalar"
+    },
+    {
+      "name": "Kampanyalı Madlen Çikolata 750 gr. (Net 435 gr.)",
+      "price": "1150 TL",
+      "category": "Çikolatalar"
+    },
+    {
+      "name": "Frambuazlı Pasta (No.0)",
+      "price": "1560 TL",
+      "category": "Pastalar (No.0)"
+    },
+    {
+      "name": "Kamboz Pasta (No.0)",
+      "price": "1560 TL",
+      "category": "Pastalar (No.0)"
+    },
+    {
+      "name": "Profiterollü Pasta (No.0)",
+      "price": "1560 TL",
+      "category": "Pastalar (No.0)"
+    },
+    {
+      "name": "Black Force Pasta (No.0)",
+      "price": "1560 TL",
+      "category": "Pastalar (No.0)"
+    },
+    {
+      "name": "Çilekli Çikolatalı Pasta (No.0)",
+      "price": "1560 TL",
+      "category": "Pastalar (No.0)"
+    },
+    {
+      "name": "Pikola Pasta (No.0)",
+      "price": "1560 TL",
+      "category": "Pastalar (No.0)"
+    },
+    {
+      "name": "Hasbahçe Pasta (No.0)",
+      "price": "1560 TL",
+      "category": "Pastalar (No.0)"
+    },
+    {
+      "name": "Muzlu Çilekli Pasta (No.0)",
+      "price": "1560 TL",
+      "category": "Pastalar (No.0)"
+    },
+    {
+      "name": "Saçaklı Çilekli Pasta (No.0)",
+      "price": "1560 TL",
+      "category": "Pastalar (No.0)"
+    },
+    {
+      "name": "Special Pasta (No.0)",
+      "price": "1560 TL",
+      "category": "Pastalar (No.0)"
+    },
+    {
+      "name": "Kırmızı Kalp Pasta (No.0)",
+      "price": "1560 TL",
+      "category": "Pastalar (No.0)"
+    },
+    {
+      "name": "Kırmızı Kadife Pasta (No.0)",
+      "price": "1560 TL",
+      "category": "Pastalar (No.0)"
+    },
+    {
+      "name": "Fındıklı Krokanlı Pasta (No.1)",
+      "price": "1860 TL",
+      "category": "Pastalar (No.1)"
+    },
+    {
+      "name": "Karayip Pasta (No.1)",
+      "price": "1860 TL",
+      "category": "Pastalar (No.1)"
+    },
+    {
+      "name": "Kırmızı Kalp Pasta (No.1)",
+      "price": "1860 TL",
+      "category": "Pastalar (No.1)"
+    },
+    {
+      "name": "Pikola Pasta (No.1)",
+      "price": "1860 TL",
+      "category": "Pastalar (No.1)"
+    },
+    {
+      "name": "Spesiyal Pasta (No.1)",
+      "price": "1860 TL",
+      "category": "Pastalar (No.1)"
+    },
+    {
+      "name": "Uğur Böceği Pasta (No.1)",
+      "price": "1860 TL",
+      "category": "Pastalar (No.1)"
+    },
+    {
+      "name": "Muzlu Çilekli Pasta (No.1)",
+      "price": "1860 TL",
+      "category": "Pastalar (No.1)"
+    },
+    {
+      "name": "Kırmızı Kadife Pasta (No.1)",
+      "price": "1860 TL",
+      "category": "Pastalar (No.1)"
+    },
+    {
+      "name": "Şampiyon Pasta (No.2)",
+      "price": "2280 TL",
+      "category": "Pastalar (No.2)"
+    },
+    {
+      "name": "Muzlu Çilekli Pasta (No.2)",
+      "price": "2280 TL",
+      "category": "Pastalar (No.2)"
+    },
+    {
+      "name": "Karaorman Pasta (No.2)",
+      "price": "2280 TL",
+      "category": "Pastalar (No.2)"
+    },
+    {
+      "name": "Pikola Pasta (No.2)",
+      "price": "2280 TL",
+      "category": "Pastalar (No.2)"
+    },
+    {
+      "name": "Saçaklı Çilekli Pasta (No.2)",
+      "price": "2280 TL",
+      "category": "Pastalar (No.2)"
+    },
+    {
+      "name": "Spesiyal Pasta (No.2)",
+      "price": "2280 TL",
+      "category": "Pastalar (No.2)"
+    },
+    {
+      "name": "Black Force Pasta (No.3)",
+      "price": "2650 TL",
+      "category": "Pastalar (No.3)"
+    },
+    {
+      "name": "Saçaklı Çilekli Pasta (No.3)",
+      "price": "2880 TL",
+      "category": "Pastalar (No.3)"
+    },
+    {
+      "name": "Sade Dondurma (500 gr.)",
+      "price": "450 TL",
+      "category": "Kiloluk Dondurmalar"
+    },
+    {
+      "name": "Çikolatalı Dondurma (500 gr.)",
+      "price": "450 TL",
+      "category": "Kiloluk Dondurmalar"
+    },
+    {
+      "name": "Fıstıklı Dondurma (500 gr.)",
+      "price": "450 TL",
+      "category": "Kiloluk Dondurmalar"
+    },
+    {
+      "name": "Karamelli Dondurma (500 gr.)",
+      "price": "450 TL",
+      "category": "Kiloluk Dondurmalar"
+    },
+    {
+      "name": "Limonlu Dondurma (500 gr.)",
+      "price": "450 TL",
+      "category": "Kiloluk Dondurmalar"
+    },
+    {
+      "name": "Sade Dondurma (1000 gr.)",
+      "price": "900 TL",
+      "category": "Kiloluk Dondurmalar"
+    },
+    {
+      "name": "Çikolatalı Dondurma (1000 gr.)",
+      "price": "900 TL",
+      "category": "Kiloluk Dondurmalar"
+    },
+    {
+      "name": "Fıstıklı Dondurma (1000 gr.)",
+      "price": "900 TL",
+      "category": "Kiloluk Dondurmalar"
+    },
+    {
+      "name": "Karamelli Dondurma (1000 gr.)",
+      "price": "900 TL",
+      "category": "Kiloluk Dondurmalar"
+    },
+    {
+      "name": "Limonlu Dondurma (1000 gr.)",
+      "price": "900 TL",
+      "category": "Kiloluk Dondurmalar"
+    },
+    {
+      "name": "Pepsi (33 cl.)",
+      "price": "130 TL",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Pepsi Max (33 cl.)",
+      "price": "130 TL",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Yedigün (33 cl.)",
+      "price": "130 TL",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Fruko (33 cl.)",
+      "price": "130 TL",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Tropicana (33 cl.)",
+      "price": "130 TL",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Lipton Ice Tea (33 cl.)",
+      "price": "130 TL",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Taze Sıkma Portakal Suyu",
+      "price": "250 TL",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Ayran (30 cl.)",
+      "price": "95 TL",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Meyveli Soda (20 cl.)",
+      "price": "50 TL",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Soda (20 cl.)",
+      "price": "40 TL",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Su (33 cl.)",
+      "price": "50 TL",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Pepsi (1 L.)",
+      "price": "150 TL",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Yedigün (1 L.)",
+      "price": "150 TL",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Pepsi (2,5 L.)",
+      "price": "200 TL",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Yedigün (2,5 L.)",
+      "price": "200 TL",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Seyran Organik Limonata",
+      "price": "175 TL",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Seyran Organik Böğürtlen Suyu",
+      "price": "175 TL",
+      "category": "İçecekler"
+    }
+  ]
+},
 };

@@ -1374,3 +1374,6 @@ Exact kayıt `Çubuklu, Şehit Ersin Güner Cad No:6, 34805 Beykoz/İstanbul`; r
 
 ## BEŞİKTAŞ ANTAKYA SOFRASI ID 7044 kabul
 Exact kayıt `Türkali, Muradiye Bostanı Sok. No:4, 34357 Beşiktaş/İstanbul`, `+90 541 631 96 81`; Restoranım, Türkiye Kayıtları, Wanderboat ve Hentzer kaydıyla doğrulandı. Migros Yemek exact `Antakya Sofrası, Beşiktaş (Türkali Mah.)` vendorının 2026-08-25 canlı menüsü kullanıldı; kampanya/orijinal fiyatlar arasından güncel satış fiyatı alınarak menüler, çorbalar, kebap/ızgara, dürüm, yöresel, salata, içecek ve kiloluk pişmiş ürün kategorilerinden **43 benzersiz ürün/fiyat** aktarıldı.
+
+## SEYRAN PASTANESİ ID 7043 kabul
+Exact kayıt `Orta, Numunebağı Cd. No:78, 34040 Bayrampaşa/İstanbul`, `+90 212 501 72 88`; resmi Seyran iletişim kaydı ve işletme dizini ile eşleştirildi. Yemeksepeti `Seyran Pasta & Restaurant` güncel menüsü ve aynı şubenin Migros Yemek kaydı çapraz kontrol edildi; 2026-08-25 tarihinde **227 benzersiz fiyatlı yiyecek/içecek ürünü** alındı. `Popüler` carousel tekrarları ve plastik poşet kalemi dışlandı; CAPTCHA aşılmadı.
