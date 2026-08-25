@@ -1746,3 +1746,6 @@ Hentzer kaydı `Çubuklu, 34805 Beykoz/İstanbul`, telefon alanı boş. Restoran
 
 ## BELLA BURGER BEŞİKTAŞ ID 6917 kabulü
 Hentzer kaydı `Cihannüma, Ressam Hamdi Bey Sk. No:2-A, 34353 Beşiktaş/İstanbul`, `+90 212 236 03 18`; Cybo exact adres/telefon kaydı ve resmi Bella Burger Instagramı telefon/adres paylaşımı şubeyi doğruluyor. Yemeksepeti `l03k` canlı vendorundan Burgerler, Tavuk Burgerler, Tenders, Wings, Yan Ürünler, Tatlılar, İçecekler ve Soslar kategorilerinde 61 benzersiz güncel fiyat kalemi aktarıldı. İndirimli güncel satış fiyatı kullanıldı; poşet kalemi ve popüler carousel tekrarları dışlandı. **Override kabul edildi.**
+
+## THE CHURROLL BEYLİKDÜZÜ ID 6916 — STRICT HOLD
+Hentzer kaydı `Cumhuriyet, Nadir Sokağı L Blok No:1/14F, 34520 Beylikdüzü/İstanbul`, telefon alanı boş. Resmi The Churroll sitesi marka/ürünleri, Beylikdüzü Instagram hesabı ve 2025-2026 şube paylaşımları exact Nadir Sokak şubesini doğruluyor; Yemeksepeti `if5b` canlı vendorunda güncel churros ve içecek fiyatları okunabiliyor. Ancak canonical Hentzer telefon alanı boş ve bu şubeye ait doğrulanabilir exact telefon bulunamadığından zorunlu adres+telefon eşleşmesi sağlanamadı. **Strict HOLD**; override eklenmedi.
