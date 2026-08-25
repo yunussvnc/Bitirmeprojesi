@@ -1653,3 +1653,6 @@ Hentzer kaydı `Levent, Hanımeli Sk. No:2, 34330 Beşiktaş/İstanbul`, `+90 21
 
 ## BEYLİKDÜZÜ BİRİNCİ PROFİTEROL ID 6948 — STRICT HOLD
 Hentzer kaydı `Cumhuriyet Mah., Cumhuriyet Caddesi Beyaz Park Evleri No:6, 34520 Beylikdüzü/İstanbul`, `+90 534 744 34 58`; Restoranim.net aynı işletme adı, exact adres ve telefonu doğruluyor ve 2025-2026 tarihli kullanıcı yorumları mevcut. RestaurantGuru menü sayfası menü/fiyat bilgisi bulunduğunu belirtse de erişimde insan doğrulama duvarına takıldı; okunabilir güncel ürün/fiyat listesi elde edilemedi. Son bir yıl içinde exact şubeye ait doğrulanabilir fiyatlı menü bulunamadığından **strict HOLD**; override eklenmedi.
+
+## BIG CHEESE ID 6947 kabulü
+Hentzer kaydı `Kavacık, Gülşen Sok. No:1A, 34810 Beykoz/İstanbul`, `+90 535 819 88 18`; Big Cheese resmi sitesi aynı Kavacık adresini yayımlıyor, İtalyanMutfağı işletme kaydı aynı adres ve telefonu doğruluyor, resmi sosyal paylaşımlar da aynı şubeyi destekliyor. Yemeksepeti `nw6r` canlı vendor menüsünden 36 benzersiz ürün/fiyat kalemi (makarna, bowl, kruvasan, tatlı ve içecekler) alındı; Popüler carousel tekrarları ayrıca ürün sayılmadı. Menü yayın tarihi görünmediğinden `verifiedAt` erişim/doğrulama tarihi olan 2026-08-26 olarak tutuldu. **Override kabul edildi.**
