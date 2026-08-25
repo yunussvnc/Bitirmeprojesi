@@ -1659,3 +1659,6 @@ Hentzer kaydı `Kavacık, Gülşen Sok. No:1A, 34810 Beykoz/İstanbul`, `+90 535
 
 ## MARMARA MARKET ID 6946 — STRICT HOLD
 Hentzer kaydı `Yıldırım, Zafer Cd. No:35, 34035 Bayrampaşa/İstanbul`, `+90 543 593 25 25`; Yandex Maps aynı exact adres ve telefonu gösteriyor ancak işletme durumunu açıkça **Kurum faaliyette değil** olarak işaretliyor. Aktif işletmeye ait güncel fiyatlı menü bulunamadı; market kaydına restoran menüsü uydurulamayacağı için **strict HOLD**. Override eklenmedi.
+
+## MAVİ KAPI KAFE ID 6945 — STRICT HOLD
+Hentzer kaydı `No:14/1, Anadolufeneri, Adatepe Çıkmazı No:14-1, 34829 Beykoz/İstanbul`, `+90 533 489 61 58`; Restoranim.net ve Instagram `@mavvikapi` aynı exact şube adresi/telefonu doğruluyor. Menuweb üzerinde bir PDF menü bağlantısı bulundu ancak doğrudan erişim 403 ile engellendi; PDF’nin son bir yıl içinde güncellendiği doğrulanamadı ve ürün/fiyat listesi güvenilir biçimde okunamadı. Mekanlar.com/Restoranim kaynakları fiyatlı güncel menü sunmuyor. Bu nedenle **strict HOLD**; override eklenmedi.
