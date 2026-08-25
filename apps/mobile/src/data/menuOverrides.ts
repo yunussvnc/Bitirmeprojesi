@@ -76810,4 +76810,358 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
   ]
 },
 
+  "7087": {
+  "name": "KIRLANGIÇ BALIK RESTORAN",
+  "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/jfhl/kirlangic-balik-restoran",
+  "sourceName": "Yemeksepeti canlı Kırlangıç Balık Restoran menüsü; exact Restoranım ve Menum kaynakları Adnan Kahveci Mah. Kışla Cd. No:36 / 0552 772 24 24 adres-telefon eşleşmesini doğruluyor. Instagram işletme profili de güncel 2026 içerikleriyle işletmeyi destekliyor. Plastic Bag satırı dışlandı.",
+  "verifiedAt": "2026-08-25",
+  "items": [
+    {
+      "name": "Balık Çorbası",
+      "price": "400",
+      "category": "Çorbalar"
+    },
+    {
+      "name": "Mezgit Tava",
+      "price": "500",
+      "category": "Deniz Ürünleri"
+    },
+    {
+      "name": "Hamsi Tava",
+      "price": "400",
+      "category": "Deniz Ürünleri"
+    },
+    {
+      "name": "İstavrit Tava",
+      "price": "500",
+      "category": "Deniz Ürünleri"
+    },
+    {
+      "name": "Izgara Çinekop",
+      "price": "700",
+      "category": "Deniz Ürünleri"
+    },
+    {
+      "name": "Izgara Sarıkanat",
+      "price": "1000",
+      "category": "Deniz Ürünleri"
+    },
+    {
+      "name": "Izgara Çipura",
+      "price": "700",
+      "category": "Deniz Ürünleri"
+    },
+    {
+      "name": "Izgara Somon",
+      "price": "750",
+      "category": "Deniz Ürünleri"
+    },
+    {
+      "name": "Izgara Levrek",
+      "price": "700",
+      "category": "Deniz Ürünleri"
+    },
+    {
+      "name": "Balık Köfte",
+      "price": "400",
+      "category": "Deniz Ürünleri"
+    },
+    {
+      "name": "Tekir Tava",
+      "price": "700",
+      "category": "Deniz Ürünleri"
+    },
+    {
+      "name": "Tava Barbun",
+      "price": "800",
+      "category": "Deniz Ürünleri"
+    },
+    {
+      "name": "Tava Mırlan",
+      "price": "600",
+      "category": "Deniz Ürünleri"
+    },
+    {
+      "name": "Balık Kokoreç",
+      "price": "450",
+      "category": "Deniz Ürünleri"
+    },
+    {
+      "name": "Izgara Ahtapot",
+      "price": "700",
+      "category": "Deniz Ürünleri"
+    },
+    {
+      "name": "Deniz Mahsullü Linguine",
+      "price": "600",
+      "category": "Makarnalar"
+    },
+    {
+      "name": "Spaghetti Napolitan",
+      "price": "400",
+      "category": "Makarnalar"
+    },
+    {
+      "name": "Spaghetti Bolognese",
+      "price": "400",
+      "category": "Makarnalar"
+    },
+    {
+      "name": "Karidesli Tagliatelle",
+      "price": "600",
+      "category": "Makarnalar"
+    },
+    {
+      "name": "Deniz Börülcesi",
+      "price": "250",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Havuç Tarator",
+      "price": "300",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Haydari",
+      "price": "250",
+      "category": "Mezeler"
+    },
+    {
+      "name": "İsli Midye",
+      "price": "300",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Közlenmiş Domates",
+      "price": "200",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Köpoğlu",
+      "price": "250",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Lakerda Torik",
+      "price": "350",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Közlenmiş Patlıcan",
+      "price": "250",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Humus",
+      "price": "250",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Pembe Sultan",
+      "price": "250",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Zeytinyağlı Yaprak Sarma",
+      "price": "300",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Acılı Ezme",
+      "price": "250",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Acılı Atom",
+      "price": "250",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Çiroz",
+      "price": "310",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Fava",
+      "price": "250",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Girit Mezesi",
+      "price": "300",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Hamsi Marin",
+      "price": "300",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Levrek Marin",
+      "price": "300",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Pazı Kavurma",
+      "price": "250",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Şakşıka",
+      "price": "250",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Zeytinyağlı Izgara Enginar",
+      "price": "250",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Semiz Otu",
+      "price": "250",
+      "category": "Mezeler"
+    },
+    {
+      "name": "Patates kızartma",
+      "price": "250",
+      "category": "Ara Sıcaklar"
+    },
+    {
+      "name": "Kalamar Tava",
+      "price": "650",
+      "category": "Ara Sıcaklar"
+    },
+    {
+      "name": "Tereyağlı Karides",
+      "price": "650",
+      "category": "Ara Sıcaklar"
+    },
+    {
+      "name": "Güveçte Karides",
+      "price": "650",
+      "category": "Ara Sıcaklar"
+    },
+    {
+      "name": "Balık simit",
+      "price": "400",
+      "category": "Ara Sıcaklar"
+    },
+    {
+      "name": "Çıtır jumbo",
+      "price": "300",
+      "category": "Ara Sıcaklar"
+    },
+    {
+      "name": "Deniz böreği",
+      "price": "400",
+      "category": "Ara Sıcaklar"
+    },
+    {
+      "name": "Mantar ızgara",
+      "price": "300",
+      "category": "Ara Sıcaklar"
+    },
+    {
+      "name": "Gavurdağ",
+      "price": "450",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Mevsim Salata",
+      "price": "400",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Çoban Salata",
+      "price": "400",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Roka Salatası",
+      "price": "400",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Deniz Mahsulleri Salatası",
+      "price": "400",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Soğan Salatası",
+      "price": "350",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Pepsi",
+      "price": "100",
+      "category": "İçecekler"
+    },
+    {
+      "name": "7 UP",
+      "price": "100",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Lipton Ice Tea Şeftali (33 cl.)",
+      "price": "100",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Şalgam",
+      "price": "90",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Su (50 cl.)",
+      "price": "50",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Su (1 L.)",
+      "price": "80",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Yedi̇gün",
+      "price": "100",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Tropi̇cana Şeftali̇ (33 cl.)",
+      "price": "100",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Tropi̇cana Vi̇şne (33 cl.)",
+      "price": "100",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Ayva Tatlısı",
+      "price": "300",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Kabak Tatlısı",
+      "price": "275",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Cevizli Ev Baklavası",
+      "price": "370",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Şekerpare",
+      "price": "250",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Dondurmalı İrmik Helvası",
+      "price": "250",
+      "category": "Tatlılar"
+    }
+  ]
+},
+
 };

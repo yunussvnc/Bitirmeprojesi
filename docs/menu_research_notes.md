@@ -1242,3 +1242,6 @@ Hentzer exact kayıt `Cumhuriyet, Onur Sk. Kameroğlu Sitesi L Blok No:3B, 34520
 
 ## The Coffee Factory Beylikdüzü Kameroğlu ID 7088 update
 Exact kayıt `Cumhuriyet, Nadir Sokağı No:2 G, 34515 Beylikdüzü/İstanbul`, `+90 501 056 62 02`; Restoranım exact sayfası adres ve telefonu doğruluyor. Önceki 2026-08-24 menü override’ı, Yemeksepeti İstanbul vendor `pr53` canlı menüsündeki güncel **80 ürün/fiyat** ile 2026-08-25 tarihinde yenilendi. Poşet satırı dışlandı.
+
+## Kırlangıç Balık Restoran ID 7087 acceptance
+Exact kayıt `Adnan Kahveci Mah. Kışla Cd. No:36, 34519 Beylikdüzü/İstanbul`, `+90 552 772 24 24`; Restoranım, Menum ve Instagram kaynakları aynı işletme kimliğini destekliyor. Yemeksepeti canlı menüsünden çorbalar, deniz ürünleri, makarnalar, mezeler, ara sıcaklar, salatalar, içecekler ve tatlılar kategorilerinde **69 ürün ve güncel fiyat** aktarıldı. `Plastic Bag` satırı dışlandı. `verifiedAt` canlı doğrulama tarihi `2026-08-25`.
