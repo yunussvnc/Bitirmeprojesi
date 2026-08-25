@@ -1524,3 +1524,6 @@ Hentzer API exact kaydı `Sinanpaşa, Köyiçi Mektep Sk. No:14/A, 34890 Beşikt
 
 ## BEYZADE KÜNEFE KAHVALTI & BEYLİKDÜZÜ ID 6992 strict HOLD
 Hentzer API kaydı `Cumhuriyet Mahallesi, Şehitler Caddesi No:11, 34515 Esenyurt/İstanbul`, `+90 533 616 87 02`. Beyzade’nin resmi şube sayfası adresi `No:11/1` olarak doğruluyor ancak `0212 261 67 67` ve `0212 577 27 27` telefonlarını veriyor; bu nedenle zorunlu exact telefon paritesi sağlanamadı. Resmi marka sitesinde güncel Antep kahvaltısı ve baklava fiyatları bulunmasına rağmen şube telefonu uyuşmazlığı çözülmeden ürün aktarımı yapılmadı. **Override eklenmedi; strict HOLD**.
+
+## İNTİBA DÖNER ID 6991 kabul
+Hentzer API kaydı `Kavacık, Cumhuriyet Cd. No:41, 34805 Beykoz/İstanbul`, `+90 850 644 57 75`; resmi intiba.com.tr şube/sipariş hattı, Waze ve resmi Instagram aynı Kavacık kimliğini doğruluyor. Resmi Kavacık QR menüsü yüklenmediği için aynı marka ve şubeye ait Yemeksepeti `nhxk` canlı menüsü kullanıldı. 2026-08-26 erişiminde Çorbalar, Et Dönerler, Diğer Lezzetler, Salatalar, Yan Ürünler, Tatlılar, İçecekler ve Kiloluk Tatlılar kategorilerinden **39 benzersiz gıda/içecek ürünü** aktarıldı; Popüler carousel tekrarları ve Poşet kalemi dışlandı. Fiyatlar canlı Yemeksepeti menüsünden alındı; ürün veya fiyat uydurulmadı. **Override kabul edildi.**
