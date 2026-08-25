@@ -1311,3 +1311,6 @@ Hentzer exact kaydı `Paşabahçe, Yalı Erguvan Çk., 34800 Beykoz/İstanbul` v
 
 ## Bereket Döner - Yakuplu Şubesi ID 7065 strict HOLD
 Hentzer kaydı `Kavaklı, Ayasofya Cd. C3 Blok No:17 D/1, 34520 Beylikdüzü/İstanbul`, `+90 212 955 15 10`; resmî Bereket Döner şube sayfası ve Instagram Yakuplu içerikleri telefonu doğruluyor. Ancak Restoranim aynı telefonu `Olimpiyat Cd. No:76, Kavaklı` adresiyle veriyor; bu adres Hentzer’deki Ayasofya Cd. C3 Blok No:17 D/1 ile eşleşmiyor. Mekanlar sayfasında item-level fiyat bulunmadı ve exact branch için güncel complete fiyatlı menü doğrulanamadı. 100% adres parity sağlanamadığı için ürün/fiyat uydurulmadı; strict HOLD.
+
+## Wood Coffee Brunch & Bakery ID 7064 strict HOLD
+Hentzer kaydı `Cumhuriyet, Atatürk Blv. No:27 1|C, 34500 Beylikdüzü/İstanbul` ve telefon `null`; 2026 Instagram içerikleri exact işletmeyi `Cumhuriyet Mah. Atatürk Bulvarı No:27/1C` olarak doğruluyor. Bir içerikte birkaç kampanya fiyatı (sandviç+kahve 350 TL, granola bowl kombinasyonları 450 TL) bulunmasına rağmen complete item-level menü yok. Hentzer’de telefon bulunmadığı ve public exact phone parity kurulamadığı için 100% adres/telefon şartı sağlanamadı. Ürün/fiyat uydurulmadı; strict HOLD.
