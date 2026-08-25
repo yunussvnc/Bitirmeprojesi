@@ -1461,3 +1461,6 @@ Exact kayıt `Sinanpaşa, Ihlamurdere Cd. No:6, 34535 Beşiktaş/İstanbul`, `+9
 
 ## KANATÇI HAYDAR BEYLİKDÜZÜ SKYPORT ID 7014 strict HOLD
 Exact kayıt `Yakuplu, Hürriyet Blv. No:1 Skyport, 34524 Beylikdüzü/İstanbul`, `+90 212 875 75 18`; resmi iletişim sayfası bu telefonu (+90 212 875 75 16 ile birlikte) ve Skyport şubesini doğruluyor. Resmi Beylikdüzü sayfası yalnızca şube tanıtımı/galerisi sunuyor; tam, son 1 yıl içinde item-level fiyatlı menü bulunamadı. Eski sosyal içeriklerdeki sınırlı fiyatlar kullanılmadı; **override eklenmedi; strict HOLD**.
+
+## KÜNEFİTO MORRY COFFEE ID 7013 strict HOLD
+Exact kayıt `Sinanpaşa Mah. Hasfırın Cad. No:5, İç Kapı No:110, 34353 Beşiktaş/İstanbul`, `+90 538 962 25 33`; Yandex ve Beşiktaş şube sosyal medya paylaşımlarında adres/lokasyon eşleşti. Ancak arama sonuçlarında yalnızca Sakarya şubesine ait Yemeksepeti menüsü bulundu; Beşiktaş şubesi için herkese açık, son 1 yıl içinde tam item-level fiyatlı menü doğrulanamadı. Sosyal içeriklerdeki sınırlı/tekil fiyat sinyalleri yeterli olmadığından **override eklenmedi; strict HOLD**.
