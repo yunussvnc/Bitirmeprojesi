@@ -1236,3 +1236,6 @@ Hentzer exact kayıt `Müeyyetzade, Lüleci Hendek Cd. No:69/A, 34425 Beyoğlu/�
 
 ## The Smashy ID 7092 acceptance
 Hentzer exact kayıt `Sinanpaşa, Şair Nedim Cd. No:44, 34353 Beşiktaş/İstanbul`, `+90 212 236 85 02`; Yemeksepeti vendor sayfası `Şair Nedim Cad. Çepni Apt. No:44A İç Kapı No:2 Beşiktaş` adresini, resmi `@thesmashyburger` içerikleri de Smashy Akaretler ve aynı telefonu destekliyor. Yemeksepeti canlı menüsünden et burger, tavuk burger, hot dog, yan ürün, içecek ve sos kategorilerinde **34 ürün ve güncel fiyat** aktarıldı. Poşet satırı dışlandı. `verifiedAt` canlı doğrulama tarihi `2026-08-25`.
+
+## Vero Gusto ID 7089 acceptance
+Hentzer exact kayıt `Cumhuriyet, Onur Sk. Kameroğlu Sitesi L Blok No:3B, 34520 Beylikdüzü/İstanbul`, `+90 534 050 56 72`; resmî Vero Gusto Türkiye sitesi ve güncel sosyal/public içerikler aynı Kameroğlu kimliğini destekliyor. Resmî `verogustotr.com/tr/categories` canlı menüsünden kahvaltı/flatbread-panino, başlangıç, salata, makarna-ravioli-tortellini, pizza, tatlı, ekstra ve içecek/şarap-bira kategorilerinde **124 ürün ve güncel fiyat** aktarıldı. `verifiedAt` canlı doğrulama tarihi `2026-08-25`.

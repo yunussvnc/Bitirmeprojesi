@@ -75841,4 +75841,633 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
   ]
 },
 
+  "7089": {
+  "name": "Vero Gusto",
+  "sourceUrl": "https://verogustotr.com/tr/categories",
+  "sourceName": "Vero Gusto Türkiye resmî canlı menü sitesi; exact Cumhuriyet Mah. Onur Sk. Kameroğlu Sitesi L Blok No:3B / 0534 050 56 72 kimliği resmî sosyal medya ve güncel public kayıtlarla doğrulandı.",
+  "verifiedAt": "2026-08-25",
+  "items": [
+    {
+      "name": "Classic Egg Flatbread",
+      "price": "250",
+      "category": "Kahvaltı Flatbread&Panino"
+    },
+    {
+      "name": "Tartufo Egg Flatbread",
+      "price": "380",
+      "category": "Kahvaltı Flatbread&Panino"
+    },
+    {
+      "name": "Tacchino Egg Flatbread",
+      "price": "370",
+      "category": "Kahvaltı Flatbread&Panino"
+    },
+    {
+      "name": "Avacado Salmone Egg Flatbread",
+      "price": "450",
+      "category": "Kahvaltı Flatbread&Panino"
+    },
+    {
+      "name": "Melanzane Egg Flatbread",
+      "price": "340",
+      "category": "Kahvaltı Flatbread&Panino"
+    },
+    {
+      "name": "Salsiccia Egg Flatbread",
+      "price": "370",
+      "category": "Kahvaltı Flatbread&Panino"
+    },
+    {
+      "name": "Bacon Egg Flatbread",
+      "price": "390",
+      "category": "Kahvaltı Flatbread&Panino"
+    },
+    {
+      "name": "Ekşi Maya Capreese Panino",
+      "price": "250",
+      "category": "Kahvaltı Flatbread&Panino"
+    },
+    {
+      "name": "Ekşi Maya Oliva Panino",
+      "price": "270",
+      "category": "Kahvaltı Flatbread&Panino"
+    },
+    {
+      "name": "Ekşi Maya Arrostito Panino",
+      "price": "300",
+      "category": "Kahvaltı Flatbread&Panino"
+    },
+    {
+      "name": "Ekşi Maya Tacchino Panino",
+      "price": "350",
+      "category": "Kahvaltı Flatbread&Panino"
+    },
+    {
+      "name": "Ekşi Maya Sezar Panino",
+      "price": "350",
+      "category": "Kahvaltı Flatbread&Panino"
+    },
+    {
+      "name": "Ekşi Maya Roastbeef Panino",
+      "price": "490",
+      "category": "Kahvaltı Flatbread&Panino"
+    },
+    {
+      "name": "Capreese Panino",
+      "price": "250",
+      "category": "Kahvaltı Flatbread&Panino"
+    },
+    {
+      "name": "Roastbeef Panino",
+      "price": "490",
+      "category": "Kahvaltı Flatbread&Panino"
+    },
+    {
+      "name": "Bacon Panino",
+      "price": "450",
+      "category": "Kahvaltı Flatbread&Panino"
+    },
+    {
+      "name": "Tacchino Panino",
+      "price": "350",
+      "category": "Kahvaltı Flatbread&Panino"
+    },
+    {
+      "name": "Bruschetta al Oliva",
+      "price": "330",
+      "category": "Başlangıç"
+    },
+    {
+      "name": "Bruschetta al Arristoto",
+      "price": "350",
+      "category": "Başlangıç"
+    },
+    {
+      "name": "Bruschetta al Tacchino",
+      "price": "390",
+      "category": "Başlangıç"
+    },
+    {
+      "name": "Mozarella Pancar Salatası",
+      "price": "525",
+      "category": "Salata"
+    },
+    {
+      "name": "Parmesanlı Roka Salatası",
+      "price": "530",
+      "category": "Salata"
+    },
+    {
+      "name": "Insalata Mediterrane",
+      "price": "490",
+      "category": "Salata"
+    },
+    {
+      "name": "Insalata di tacchino",
+      "price": "640",
+      "category": "Salata"
+    },
+    {
+      "name": "Insalata di Salmone",
+      "price": "750",
+      "category": "Salata"
+    },
+    {
+      "name": "Burrata",
+      "price": "695",
+      "category": "Salata"
+    },
+    {
+      "name": "Insalata di Breseola",
+      "price": "785",
+      "category": "Salata"
+    },
+    {
+      "name": "Lazanya ( 2 Kişilik",
+      "price": "950",
+      "category": "Makarna-Ravioli-Tortellini"
+    },
+    {
+      "name": "Spinaci con cremosa Canneloni",
+      "price": "595",
+      "category": "Makarna-Ravioli-Tortellini"
+    },
+    {
+      "name": "Con alla Bolognese Canneloni",
+      "price": "720",
+      "category": "Makarna-Ravioli-Tortellini"
+    },
+    {
+      "name": "Fettuchini Alfredo",
+      "price": "495",
+      "category": "Makarna-Ravioli-Tortellini"
+    },
+    {
+      "name": "Rigatoni Puttanesca",
+      "price": "475",
+      "category": "Makarna-Ravioli-Tortellini"
+    },
+    {
+      "name": "Pappardelle Crema di Tartufo",
+      "price": "575",
+      "category": "Makarna-Ravioli-Tortellini"
+    },
+    {
+      "name": "Fettuchıne Formaggıo",
+      "price": "525",
+      "category": "Makarna-Ravioli-Tortellini"
+    },
+    {
+      "name": "Spaghetti Bolognese",
+      "price": "575",
+      "category": "Makarna-Ravioli-Tortellini"
+    },
+    {
+      "name": "Rigatoni Bolognese",
+      "price": "575",
+      "category": "Makarna-Ravioli-Tortellini"
+    },
+    {
+      "name": "Ravioli di Spinaci",
+      "price": "580",
+      "category": "Makarna-Ravioli-Tortellini"
+    },
+    {
+      "name": "Ravioli al Pomodoro",
+      "price": "580",
+      "category": "Makarna-Ravioli-Tortellini"
+    },
+    {
+      "name": "Ravioli Crema di Tartufo",
+      "price": "745",
+      "category": "Makarna-Ravioli-Tortellini"
+    },
+    {
+      "name": "Tortellini Parmıgıano",
+      "price": "545",
+      "category": "Makarna-Ravioli-Tortellini"
+    },
+    {
+      "name": "Tortellini Tricolore",
+      "price": "595",
+      "category": "Makarna-Ravioli-Tortellini"
+    },
+    {
+      "name": "Tortellini Crema di Noci",
+      "price": "745",
+      "category": "Makarna-Ravioli-Tortellini"
+    },
+    {
+      "name": "Margharita Originale",
+      "price": "500",
+      "category": "Pizza"
+    },
+    {
+      "name": "Margharita Mediterrane",
+      "price": "520",
+      "category": "Pizza"
+    },
+    {
+      "name": "Melanzane",
+      "price": "575",
+      "category": "Pizza"
+    },
+    {
+      "name": "Pesto",
+      "price": "595",
+      "category": "Pizza"
+    },
+    {
+      "name": "Ricotta-Pesto",
+      "price": "615",
+      "category": "Pizza"
+    },
+    {
+      "name": "Margharita Fughi",
+      "price": "625",
+      "category": "Pizza"
+    },
+    {
+      "name": "Con Verdure",
+      "price": "595",
+      "category": "Pizza"
+    },
+    {
+      "name": "Pollo Cremoso",
+      "price": "655",
+      "category": "Pizza"
+    },
+    {
+      "name": "Tacchino Cremoso",
+      "price": "655",
+      "category": "Pizza"
+    },
+    {
+      "name": "Formaggio",
+      "price": "685",
+      "category": "Pizza"
+    },
+    {
+      "name": "Pepperoni",
+      "price": "725",
+      "category": "Pizza"
+    },
+    {
+      "name": "Pancar-Keçibüş",
+      "price": "725",
+      "category": "Pizza"
+    },
+    {
+      "name": "Anatolia",
+      "price": "790",
+      "category": "Pizza"
+    },
+    {
+      "name": "Alaturka",
+      "price": "735",
+      "category": "Pizza"
+    },
+    {
+      "name": "Burrata",
+      "price": "725",
+      "category": "Pizza"
+    },
+    {
+      "name": "Bacon",
+      "price": "835",
+      "category": "Pizza"
+    },
+    {
+      "name": "Pesto-Jam",
+      "price": "765",
+      "category": "Pizza"
+    },
+    {
+      "name": "Straccıatella Pomodori",
+      "price": "775",
+      "category": "Pizza"
+    },
+    {
+      "name": "Pesto Roastbeef",
+      "price": "875",
+      "category": "Pizza"
+    },
+    {
+      "name": "Diavola",
+      "price": "840",
+      "category": "Pizza"
+    },
+    {
+      "name": "Vero Gusto Yaz Pizzası",
+      "price": "775",
+      "category": "Pizza"
+    },
+    {
+      "name": "Pesto Straccıatella",
+      "price": "795",
+      "category": "Pizza"
+    },
+    {
+      "name": "Burrata Roastbeef",
+      "price": "920",
+      "category": "Pizza"
+    },
+    {
+      "name": "Pestolu Pancar-Cotto",
+      "price": "900",
+      "category": "Pizza"
+    },
+    {
+      "name": "Dana Cotto",
+      "price": "950",
+      "category": "Pizza"
+    },
+    {
+      "name": "Tiramisu Savioardi",
+      "price": "365",
+      "category": "Tatlı"
+    },
+    {
+      "name": "Nutella Panizzo",
+      "price": "450",
+      "category": "Tatlı"
+    },
+    {
+      "name": "Parmesan",
+      "price": "95",
+      "category": "Ekstra"
+    },
+    {
+      "name": "Suda Mozarella",
+      "price": "110",
+      "category": "Ekstra"
+    },
+    {
+      "name": "Trüf Yağı",
+      "price": "110",
+      "category": "Ekstra"
+    },
+    {
+      "name": "Tavuk Bonfile",
+      "price": "110",
+      "category": "Ekstra"
+    },
+    {
+      "name": "Mantar",
+      "price": "95",
+      "category": "Ekstra"
+    },
+    {
+      "name": "Krema",
+      "price": "90",
+      "category": "Ekstra"
+    },
+    {
+      "name": "San Benedetto Mineralli Su 250 ml.",
+      "price": "110",
+      "category": "İçecek"
+    },
+    {
+      "name": "San Benedetto Mineralli Su 750 ml.",
+      "price": "230",
+      "category": "İçecek"
+    },
+    {
+      "name": "Damla Su Cam Şişe",
+      "price": "80",
+      "category": "İçecek"
+    },
+    {
+      "name": "Coca Cola",
+      "price": "110",
+      "category": "İçecek"
+    },
+    {
+      "name": "Fanta",
+      "price": "110",
+      "category": "İçecek"
+    },
+    {
+      "name": "Fuse Tea",
+      "price": "110",
+      "category": "İçecek"
+    },
+    {
+      "name": "Sprite",
+      "price": "110",
+      "category": "İçecek"
+    },
+    {
+      "name": "Beyoğlu Gazoz",
+      "price": "110",
+      "category": "İçecek"
+    },
+    {
+      "name": "SCHWEPPES MANDARİN",
+      "price": "110",
+      "category": "İçecek"
+    },
+    {
+      "name": "Damla Cam Şişe Maden Suyu",
+      "price": "110",
+      "category": "İçecek"
+    },
+    {
+      "name": "Sütaş Ayran",
+      "price": "110",
+      "category": "İçecek"
+    },
+    {
+      "name": "Fesleğenli Ayran",
+      "price": "130",
+      "category": "İçecek"
+    },
+    {
+      "name": "Limonata",
+      "price": "135",
+      "category": "İçecek"
+    },
+    {
+      "name": "Naneli Limonata",
+      "price": "145",
+      "category": "İçecek"
+    },
+    {
+      "name": "Kadeh",
+      "price": "325",
+      "category": "İçecek"
+    },
+    {
+      "name": "Şişe",
+      "price": "1350",
+      "category": "İçecek"
+    },
+    {
+      "name": "Peroni Bira 33 cl.",
+      "price": "350",
+      "category": "İçecek"
+    },
+    {
+      "name": "Süryani Hamro Kadeh",
+      "price": "425",
+      "category": "Şarap/Bira"
+    },
+    {
+      "name": "Süryani Dara Kadeh",
+      "price": "475",
+      "category": "Şarap/Bira"
+    },
+    {
+      "name": "Süryani Beyaz Kadeh",
+      "price": "425",
+      "category": "Şarap/Bira"
+    },
+    {
+      "name": "Süryani Hamro Şişe 75 cl.",
+      "price": "1990",
+      "category": "Şarap/Bira"
+    },
+    {
+      "name": "Süryani Dara Şişe 75 cl.",
+      "price": "2150",
+      "category": "Şarap/Bira"
+    },
+    {
+      "name": "Süryani Beyaz Şişe 75 cl.",
+      "price": "1990",
+      "category": "Şarap/Bira"
+    },
+    {
+      "name": "Garnet Kırmızı Kadeh",
+      "price": "450",
+      "category": "Şarap/Bira"
+    },
+    {
+      "name": "Garnet Kırmızı Şişe 75 cl.",
+      "price": "1950",
+      "category": "Şarap/Bira"
+    },
+    {
+      "name": "Solaris Beyaz Kadeh",
+      "price": "450",
+      "category": "Şarap/Bira"
+    },
+    {
+      "name": "Solaris Beyaz Şişe 75 cl.",
+      "price": "1950",
+      "category": "Şarap/Bira"
+    },
+    {
+      "name": "Solaris Rose Kadeh",
+      "price": "450",
+      "category": "Şarap/Bira"
+    },
+    {
+      "name": "Solaris Rose Şişe 75 cl.",
+      "price": "1950",
+      "category": "Şarap/Bira"
+    },
+    {
+      "name": "Şirince Kalecik Bağları Kadeh",
+      "price": "495",
+      "category": "Şarap/Bira"
+    },
+    {
+      "name": "Şirince Kalecik Bağları Şişe 75 cl.",
+      "price": "2750",
+      "category": "Şarap/Bira"
+    },
+    {
+      "name": "Hazar Şirince Beyaz Kadeh",
+      "price": "460",
+      "category": "Şarap/Bira"
+    },
+    {
+      "name": "Hazar Şirince Beyaz Şişe 75 cl.",
+      "price": "2300",
+      "category": "Şarap/Bira"
+    },
+    {
+      "name": "Hazar Şirince Kırmızı Kadeh",
+      "price": "475",
+      "category": "Şarap/Bira"
+    },
+    {
+      "name": "Hazar Şirince Kırmızı Şişe 75 cl.",
+      "price": "2400",
+      "category": "Şarap/Bira"
+    },
+    {
+      "name": "Karışık 5 Meyveli Sangria",
+      "price": "485",
+      "category": "Şarap/Bira"
+    },
+    {
+      "name": "Karışık 5 Meyveli Sangria Şişe 75 cl.",
+      "price": "2650",
+      "category": "Şarap/Bira"
+    },
+    {
+      "name": "Marnas Ananas-Vanilya Kadeh",
+      "price": "485",
+      "category": "Şarap/Bira"
+    },
+    {
+      "name": "Marnas Ananas-Vanilya Şişe 75 cl.",
+      "price": "2650",
+      "category": "Şarap/Bira"
+    },
+    {
+      "name": "Saudade Premium Kadeh",
+      "price": "600",
+      "category": "Şarap/Bira"
+    },
+    {
+      "name": "Saudade Premium Şişe 75 cl.",
+      "price": "3600",
+      "category": "Şarap/Bira"
+    },
+    {
+      "name": "PRİUS Ahmetbey Kadeh",
+      "price": "480",
+      "category": "Şarap/Bira"
+    },
+    {
+      "name": "PRİUS Ahmetbey Şişe 75 cl.",
+      "price": "2550",
+      "category": "Şarap/Bira"
+    },
+    {
+      "name": "PRİUS Papaskarası-Kalecik Karası Kadeh",
+      "price": "625",
+      "category": "Şarap/Bira"
+    },
+    {
+      "name": "PRİUS Papaskarası-Kalecik Karası Şişe 75 cl.",
+      "price": "3650",
+      "category": "Şarap/Bira"
+    },
+    {
+      "name": "KASOR Butik ve Yerel Üretim Kadeh",
+      "price": "650",
+      "category": "Şarap/Bira"
+    },
+    {
+      "name": "KASOR Butik ve Yerel Üretim Şişe 75 cl.",
+      "price": "3750",
+      "category": "Şarap/Bira"
+    },
+    {
+      "name": "PRİUS Marteniçka Kadeh",
+      "price": "495",
+      "category": "Şarap/Bira"
+    },
+    {
+      "name": "PRİUS Marteniçka Şişe 75 cl.",
+      "price": "2750",
+      "category": "Şarap/Bira"
+    }
+  ]
+},
+
 };
