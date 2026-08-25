@@ -4,6 +4,44 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6974": {
+    "name": "DÜRÜMCÜ ESNAF ORTAÇEŞME",
+    "sourceUrl": "https://www.migros.com.tr/yemek/durumcu-esnaf-beykoz-ortacesme-mah-st-32d5b",
+    "sourceName": "Migros Yemek exact Ortaçeşme vendor menüsü, Dürümcü Esnaf resmi şube kaynakları ve Hentzer kaydı `Ortaçeşme, Akbaba Cd. No:4, 34825 Beykoz/İstanbul` / `+90 216 323 40 03` ile eşleştirildi",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Kanat Menü", "price": "549 TL", "category": "Menüler" },
+      { "name": "Adana Dürüm Menü", "price": "549 TL", "category": "Menüler" },
+      { "name": "Urfa Dürüm Menü", "price": "549 TL", "category": "Menüler" },
+      { "name": "Kuzu Şiş Dürüm Menü", "price": "699 TL", "category": "Menüler" },
+      { "name": "Tavuk Şiş Dürüm Menü", "price": "410 TL", "category": "Menüler" },
+      { "name": "Sucuk Kebap Menü", "price": "549 TL", "category": "Menüler" },
+      { "name": "Ciğer Kavurma Dürüm Menü", "price": "410 TL", "category": "Menüler" },
+      { "name": "Urfa Dürüm + Pepsi Menü", "price": "449 TL", "category": "Pepsili Dürümler" },
+      { "name": "Adana Dürüm + Pepsi Menü", "price": "449 TL", "category": "Pepsili Dürümler" },
+      { "name": "Tavuk Şiş Dürüm + Pepsi Menü", "price": "349 TL", "category": "Pepsili Dürümler" },
+      { "name": "Sucuk Kebap Dürüm + Pepsi Menü", "price": "449 TL", "category": "Pepsili Dürümler" },
+      { "name": "Ciğer Kavurma + Pepsi Menü", "price": "349 TL", "category": "Pepsili Dürümler" },
+      { "name": "Cheddar Peynirli Adana Dürüm + Pepsi", "price": "449 TL", "category": "Spesiyal Dürümler" },
+      { "name": "Köz Patlıcanlı Adana Dürüm + Pepsi", "price": "449 TL", "category": "Spesiyal Dürümler" },
+      { "name": "Cheddar Peynirli Tavuk Şiş Dürüm + Pepsi", "price": "349 TL", "category": "Spesiyal Dürümler" },
+      { "name": "Çiğ Köfte Porsiyon (100 Gr)", "price": "185 TL", "category": "Yan Ürünler" },
+      { "name": "Sıcak Halka Tatlı (Adet)", "price": "55 TL", "category": "Yan Ürünler" },
+      { "name": "Ezogelin Çorba", "price": "150 TL", "category": "Yan Ürünler" },
+      { "name": "Patates (90 Gr.)", "price": "80 TL", "category": "Yan Ürünler" },
+      { "name": "Patates (180 Gr)", "price": "150 TL", "category": "Yan Ürünler" },
+      { "name": "Bulgur Pilavı (150 Gr)", "price": "75 TL", "category": "Yan Ürünler" },
+      { "name": "Humus (150 Gr)", "price": "115 TL", "category": "Yan Ürünler" },
+      { "name": "İçli Köfte", "price": "75 TL", "category": "Yan Ürünler" },
+      { "name": "Köz Patlıcan (150 Gr)", "price": "75 TL", "category": "Yan Ürünler" },
+      { "name": "Kuru Patlıcan Dolma", "price": "75 TL", "category": "Yan Ürünler" },
+      { "name": "Yayık Ayran", "price": "55 TL", "category": "İçecekler" },
+      { "name": "Su", "price": "35 TL", "category": "İçecekler" },
+      { "name": "Soda", "price": "45 TL", "category": "İçecekler" },
+      { "name": "Pepsi Kola", "price": "105 TL", "category": "İçecekler" },
+      { "name": "Pepsi Zero Sugar", "price": "105 TL", "category": "İçecekler" }
+    ]
+  },
   "6975": {
     "name": "ALTINTEPSİ PİDE LAHMACUN DÖNER SALONU",
     "sourceUrl": "https://www.yemeksepeti.com/restaurant/nbac/altin-tepsi-pide-and-lahmacun-and-doner",
