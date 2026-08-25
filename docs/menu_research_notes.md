@@ -1392,3 +1392,6 @@ Exact kayıt `Barış, Adakent Cd. Beyaz City Çarşı D:4F No:61, 34519 Beylikd
 
 ## IRA BAKERY BEYLİKDÜZÜ ID 7037 kabul
 Exact kayıt `Cumhuriyet, Derviş Eroğlu Cd. No:6 D:c, 34515 Beylikdüzü/İstanbul`, `+90 505 303 04 29`; resmi İra Bakery Beylikdüzü sayfası ve Instagram profiliyle adres/telefon eşleşti. Yemeksepeti `İra Bakery` canlı menüsünden 2026-08-25 tarihinde Mags, Tartlar, Cheesecakes, Glütensiz Tatlılar ve Tatlılar kategorilerinden **41 benzersiz ürün/fiyat** alındı. Tekrarlanan Fıstıklı Marki ve Plastic Bag kalemi dışlandı.
+
+## BARACCA COFFEE ID 7036 strict HOLD
+Hentzer kaydı `Türkali, Ihlamurdere Cd. No:88/B, 34357 Beşiktaş/İstanbul`, `+90 533 742 22 22`. Adres Facebook/işletme kayıtlarıyla eşleşse de aynı adres için yayınlanan Baracca iletişim telefonu `+90 212 259 70 35` olarak farklıdır. Ayrıca doğrulanabilir güncel item-level fiyatlı menü bulunamadı. Zorunlu **%100 adres/telefon paritesi sağlanmadığından override eklenmedi; strict HOLD**.
