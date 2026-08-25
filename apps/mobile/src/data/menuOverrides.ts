@@ -85658,4 +85658,287 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     }
   ]
 },
+  "7030": {
+  "name": "8one Burger Bosphorus - Ortaköy",
+  "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/b7qz/8-one-burger-b7qz",
+  "sourceName": "Yemeksepeti current 8 One Burger menu; exact Hentzer branch is Ortaköy, 34353 Beşiktaş/İstanbul, phone +90 537 255 55 58, matching official 8oneburger branch listing and Yandex Ortaköy listing. 55 unique priced food/beverage items imported; Popular carousel and Plastic Bag excluded.",
+  "verifiedAt": "2026-08-25",
+  "items": [
+    {
+      "name": "Friends Combo",
+      "price": "1750 TL",
+      "category": "Menus for 2-3 People"
+    },
+    {
+      "name": "Couple Combo Menu",
+      "price": "1150 TL",
+      "category": "Menus for 2-3 People"
+    },
+    {
+      "name": "Combo Meal 4",
+      "price": "675 TL",
+      "category": "Special Menus"
+    },
+    {
+      "name": "Combo Meal 2",
+      "price": "495 TL",
+      "category": "Special Menus"
+    },
+    {
+      "name": "Combo Meal 3",
+      "price": "675 TL",
+      "category": "Special Menus"
+    },
+    {
+      "name": "Combo Meal 1",
+      "price": "495 TL",
+      "category": "Special Menus"
+    },
+    {
+      "name": "Combo Meal 6",
+      "price": "850 TL",
+      "category": "Special Menus"
+    },
+    {
+      "name": "Chezzy (225 gr.)",
+      "price": "740 TL",
+      "category": "Burgers"
+    },
+    {
+      "name": "Chezzy (150 gr.)",
+      "price": "550 TL",
+      "category": "Burgers"
+    },
+    {
+      "name": "Smash Onion (225 gr.)",
+      "price": "750 TL",
+      "category": "Burgers"
+    },
+    {
+      "name": "Smash Onion (150 gr.)",
+      "price": "570 TL",
+      "category": "Burgers"
+    },
+    {
+      "name": "Spicy (225 gr.)",
+      "price": "775 TL",
+      "category": "Burgers"
+    },
+    {
+      "name": "Spicy (150 gr.)",
+      "price": "585 TL",
+      "category": "Burgers"
+    },
+    {
+      "name": "Prime (225 gr.)",
+      "price": "1050 TL",
+      "category": "Burgers"
+    },
+    {
+      "name": "Prime (150 gr.)",
+      "price": "750 TL",
+      "category": "Burgers"
+    },
+    {
+      "name": "Mushrooms (225 gr.)",
+      "price": "795 TL",
+      "category": "Burgers"
+    },
+    {
+      "name": "Mushrooms (150 gr.)",
+      "price": "595 TL",
+      "category": "Burgers"
+    },
+    {
+      "name": "Egg Buster (225 gr.)",
+      "price": "750 TL",
+      "category": "Burgers"
+    },
+    {
+      "name": "Egg Buster (150 gr.)",
+      "price": "570 TL",
+      "category": "Burgers"
+    },
+    {
+      "name": "Truffle (225 gr.)",
+      "price": "890 TL",
+      "category": "Burgers"
+    },
+    {
+      "name": "Truffle (150 gr.)",
+      "price": "720 TL",
+      "category": "Burgers"
+    },
+    {
+      "name": "Chezzy (75 gr.)",
+      "price": "365 TL",
+      "category": "Burgers"
+    },
+    {
+      "name": "Smash Onion (75 gr.)",
+      "price": "385 TL",
+      "category": "Burgers"
+    },
+    {
+      "name": "Spicy (75 gr.)",
+      "price": "390 TL",
+      "category": "Burgers"
+    },
+    {
+      "name": "Prime (75 gr.)",
+      "price": "570 TL",
+      "category": "Burgers"
+    },
+    {
+      "name": "Mushrooms (75 gr.)",
+      "price": "415 TL",
+      "category": "Burgers"
+    },
+    {
+      "name": "Egg Buster (75 gr.)",
+      "price": "395 TL",
+      "category": "Burgers"
+    },
+    {
+      "name": "Truffle (75 gr.)",
+      "price": "540 TL",
+      "category": "Burgers"
+    },
+    {
+      "name": "Girl's Meal Nugget Menü",
+      "price": "290 TL",
+      "category": "Çocuk Menüleri"
+    },
+    {
+      "name": "Boy's Meal Nugget Menü",
+      "price": "290 TL",
+      "category": "Çocuk Menüleri"
+    },
+    {
+      "name": "Girl's Meal Burger Menü",
+      "price": "455 TL",
+      "category": "Çocuk Menüleri"
+    },
+    {
+      "name": "Boy's Meal Burger Menü",
+      "price": "455 TL",
+      "category": "Çocuk Menüleri"
+    },
+    {
+      "name": "Chips",
+      "price": "110 TL",
+      "category": "By-products"
+    },
+    {
+      "name": "Sweet Potato Fries",
+      "price": "210 TL",
+      "category": "By-products"
+    },
+    {
+      "name": "Animal Style Fries",
+      "price": "260 TL",
+      "category": "By-products"
+    },
+    {
+      "name": "Chicken Nuggets (6 Pieces)",
+      "price": "170 TL",
+      "category": "By-products"
+    },
+    {
+      "name": "Onion Rings (6 Pieces)",
+      "price": "140 TL",
+      "category": "By-products"
+    },
+    {
+      "name": "Mozzarella Sticks (5 Pieces)",
+      "price": "170 TL",
+      "category": "By-products"
+    },
+    {
+      "name": "Sariyer Orange (33 cl.)",
+      "price": "69 TL",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Sariyer Soda (33 cl.)",
+      "price": "69 TL",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Eker Ayran (30 cl.)",
+      "price": "75 TL",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Sultan Apple Soda (20 cl.)",
+      "price": "50 TL",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Sultan Water (40 cl.)",
+      "price": "35 TL",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Juss Tea Peach (25 cl.)",
+      "price": "69 TL",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Juss Tea Limon (25 cl.)",
+      "price": "69 TL",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Sultan Sade Soda (20 cl.)",
+      "price": "50 TL",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Sarıyer Gazoz (20 cl.)",
+      "price": "69 TL",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Sultan Limonlu Soda (20 cl.)",
+      "price": "50 TL",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Cola Turka (20 cl.)",
+      "price": "69 TL",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Cola Turka (33 cl.)",
+      "price": "69 TL",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Cola Turka Şekersiz (33 cl)",
+      "price": "69 TL",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Çilekli Yoğurt",
+      "price": "40 TL",
+      "category": "Meyveli Yoğurtlar"
+    },
+    {
+      "name": "Apricot & Peach Yogurt",
+      "price": "40 TL",
+      "category": "Meyveli Yoğurtlar"
+    },
+    {
+      "name": "Muzlu Puding",
+      "price": "40 TL",
+      "category": "Meyveli Yoğurtlar"
+    },
+    {
+      "name": "Çikolatalı Puding",
+      "price": "40 TL",
+      "category": "Meyveli Yoğurtlar"
+    }
+  ]
+},
 };

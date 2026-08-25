@@ -1410,3 +1410,6 @@ Exact resmi şube adresi `Cumhuriyet Mah. Dervişoğlu Cad. Metrohome Suites F B
 
 ## ISTANBUL LAHMACUN ID 7031 strict HOLD
 Exact kayıt `Rüzgarlıbahçe, Cumhuriyet Cd. No:75, 34805 Kavacık-Beykoz/İstanbul`, `+90 216 680 32 22`; resmi Instagram içerikleri ve işletme kayıtlarıyla eşleşti. Yemeksepeti’nde aynı işletme adına ait menü ve güncel fiyat sinyalleri bulundu, ancak canlı sayfa Cloudflare erişim engeli nedeniyle tam ve yeniden doğrulanabilir item-level çıktı vermedi; yerel tarayıcı çıktısı da erişim reddi döndürdü. Eksik menü aktarımı yapılmadı; **strict HOLD**.
+
+## 8ONE BURGER BOSPHORUS - ORTAKÖY ID 7030 kabul
+Exact kayıt `Ortaköy, 34353 Beşiktaş/İstanbul`, `+90 537 255 55 58`; resmi 8oneburger şube bağlantıları ve Yandex Ortaköy kaydıyla eşleşti. Yemeksepeti `8 One Burger` canlı menüsünden 2026-08-25 tarihinde Menus for 2-3 People, Special Menus, Burgers, Çocuk Menüleri, By-products, İçecekler ve Meyveli Yoğurtlar kategorilerinden **55 benzersiz ürün/fiyat** alındı. Popular carousel tekrarları ve Plastic Bag kalemi dışlandı.
