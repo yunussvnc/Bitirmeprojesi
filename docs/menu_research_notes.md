@@ -1335,3 +1335,6 @@ Exact kayıt `Sinanpaşa, Şht. Asım Cd. No:37, 34353 Beşiktaş/İstanbul`, `+
 
 ## Really Fried Chicken Beşiktaş ID 7057 strict HOLD
 Exact kayıt `Sinanpaşa, Ihlamurdere Cd. No:38, 34357 Beşiktaş/İstanbul`, `+90 212 537 50 50`; resmî homepage/contact sayfaları exact adresi doğruluyor, RestaurantGuru ve Kaçıyor telefon/adresle uyumlu. Resmî site burger, wings ve tenders ürün gruplarını açıklıyor ancak sayısal fiyat yayımlamıyor. Instagram/TikTok tanıtımları complete item-level menü değil; exact Beşiktaş Yemeksepeti/Migros vendorı ve son bir yıl fiyatlı tam liste doğrulanamadı. Ürün/fiyat uydurulmadı; strict HOLD.
+
+## Vira Vira ID 7056 strict HOLD
+Exact kayıt `Arnavutköy, Bebek Arnavutköy Cd No:48, 34345 Beşiktaş/İstanbul`, `+90 212 257 18 05`; Trip.com, Aramabul ve Meyhankoli adres/telefonu doğruluyor. Resmî Facebook exact No:48 adresini ve güncel `+90 540 257 18 05` rezervasyon hattını gösteriyor; 0212 işletme hattı 2026 fix-menü paylaşımında mevcut. Güncel içerikte kişi başı 2.750 TL alkollü fix menü paketi var ancak complete item-level alakart ürün/fiyat listesi yok. Son bir yıl içinde exact şubeye ait tam fiyatlı public menü doğrulanamadı. Ürün/fiyat uydurulmadı; strict HOLD.
