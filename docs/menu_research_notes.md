@@ -1185,3 +1185,6 @@ Hentzer exact kayıt `Adnan Kahveci İnönü Caddesi, Yenievler, Sedef Sk. No:2 
 
 ## HOLD — Büyük Beykoz Balıkçısı SERVET ID 7111
 Hentzer exact kayıt `Yalıköy, Ahmet Mithat Cd. No:19 D:B, 34820 Beykoz/İstanbul`, `+90 216 323 13 26`; Postcard/Yandex aynı yerel kimliği destekliyor. Ancak Yandex kaydı işletmeyi açıkça `artık faal değil` olarak işaretliyor; bu durum Hentzer `is_open` bilgisiyle çelişiyor. Restoranım/Menu-TR yalnız profil/fiyat aralığı sunuyor; complete güncel item-level menü yok. 2025-08-25 tarihli Instagram içeriği yalnız tekil fiyatlar veriyor ve complete menü/aktiflik kanıtı oluşturmuyor. ID 7111 strict HOLD; repo override değişikliği yapılmadı.
+
+## HOLD — Hamdiye Abla Karadeniz Mutfağı Kahvaltı Ve Izgara ID 7109
+Hentzer exact kayıt `Türbesi, Tokatköy, Doğu Kapısı Cd. Hz. Yuşa Cami, 34820 Beykoz/İstanbul`, `+90 538 683 98 32`; Restoranım exact sayfası ve resmi Instagram `@hamdiye_abla_karadenizmutfagi` aynı adres/telefon/işletme kimliğini destekliyor. Ancak public kaynaklarda complete item-level ve son bir yıl içinde doğrulanabilir fiyatlı menü yok. Menu-TR kategorileri ve yorumları veriyor fakat fiyat listesi vermiyor; tek bir 2025 yorumundaki kişi başı 500 TL güncel complete menü kanıtı değil. ID 7109 strict HOLD; repo override değişikliği yapılmadı.
