@@ -50171,48 +50171,338 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
 },
 
   "7063": {
-    name: "Haus Des Döners Beylikdüzü",
-    sourceUrl: "https://www.migros.com.tr/yemek/haus-des-doner-beylikduzu-cumhuriyet-mah-st-30312",
-    sourceName: "Migros Yemek — Haus Des Döner Beylikdüzü (Cumhuriyet Mah.)",
-    verifiedAt: "2026-08-24",
-    items: [
-      {name: "Tavuk Döner Dürüm (150 Gr.)", price: "560,00 TL", desc: "Domates, marul, mor soğan, salatalık, kırmızılahana, salatalık turşusu", category: "Tavuk Dönerler"},
-      {name: "Ekmek Arası Tavuk Döner (200 Gr.)", price: "580,00 TL", desc: "Domates, marul, mor soğan, salatalık, kırmızılahana, salatalık turşusu", category: "Tavuk Dönerler"},
-      {name: "Tavuk Döner Teller (100 Gr.)", price: "490,00 TL", desc: "Domates, marul, mor soğan, salatalık, kırmızılahana, salatalık turşusu, patates kızartması", category: "Tavuk Dönerler"},
-      {name: "Tavuk Döner Teller (150 Gr.)", price: "560,00 TL", desc: "Domates, marul, mor soğan, salatalık, kırmızılahana, salatalık turşusu, patates kızartması", category: "Tavuk Dönerler"},
-      {name: "Tavuk Döner Teller (200 Gr.)", price: "580,00 TL", desc: "Domates, marul, mor soğan, salatalık, kırmızılahana, salatalık turşusu, patates kızartması", category: "Tavuk Dönerler"},
-      {name: "Tavuk Döner Teller (120 Gr.)", price: "530,00 TL", desc: "Domates, marul, mor soğan, salatalık, kırmızılahana, salatalık turşusu, patates kızartması", category: "Tavuk Dönerler"},
-      {name: "Ekmek Arası Tavuk Döner (120 Gr.)", price: "530,00 TL", desc: "Domates, marul, mor soğan, salatalık, kırmızılahana, salatalık turşusu", category: "Tavuk Dönerler"},
-      {name: "Ekmek Arası Tavuk Döner (150 Gr.)", price: "560,00 TL", desc: "Domates, marul, mor soğan, salatalık, kırmızılahana, salatalık turşusu", category: "Tavuk Dönerler"},
-      {name: "Tavuk Döner Dürüm (100 Gr.)", price: "490,00 TL", desc: "Domates, marul, mor soğan, salatalık, kırmızılahana, salatalık turşusu", category: "Tavuk Dönerler"},
-      {name: "Ekmek Arası Tavuk Döner (100 Gr.)", price: "490,00 TL", desc: "Domates, marul, mor soğan, salatalık, kırmızılahana, salatalık turşusu", category: "Tavuk Dönerler"},
-      {name: "Tavuk Döner Dürüm (200 Gr.)", price: "580,00 TL", desc: "Domates, marul, mor soğan, salatalık, kırmızılahana, salatalık turşusu", category: "Tavuk Dönerler"},
-      {name: "Tavuk Döner Dürüm (120 Gr.)", price: "530,00 TL", desc: "Domates, marul, mor soğan, salatalık, kırmızılahana, salatalık turşusu", category: "Tavuk Dönerler"},
-      {name: "Ekmek Arası Et Döner (120 Gr.)", price: "650,00 TL", desc: "Domates, marul, mor soğan, salatalık, kırmızılahana, salatalık turşusu", category: "Et Dönerler"},
-      {name: "Et Döner Dürüm (100 Gr.)", price: "600,00 TL", desc: "Domates, marul, mor soğan, salatalık, kırmızılahana, salatalık turşusu", category: "Et Dönerler"},
-      {name: "Et Döner Box (150 Gr.)", price: "690,00 TL", desc: "Domates, marul, mor soğan, salatalık, kırmızılahana, salatalık turşusu, et döner", category: "Et Dönerler"},
-      {name: "Et Döner Box (200 Gr.)", price: "730,00 TL", desc: "Domates, marul, mor soğan, salatalık, kırmızılahana, salatalık turşusu, et döner", category: "Et Dönerler"},
-      {name: "Ekmek Arası Et Döner (100 Gr.)", price: "600,00 TL", desc: "Domates, marul, mor soğan, salatalık, kırmızılahana, salatalık turşusu", category: "Et Dönerler"},
-      {name: "Et Döner Dürüm (150 Gr.)", price: "690,00 TL", desc: "Et döner, yeşillik", category: "Et Dönerler"},
-      {name: "Et Döner Box (120 Gr.)", price: "650,00 TL", desc: "Haus Des Döner'in Berlin soslu et döneri. Box içinde bol et döner ile servis edilir. Patatesli veya patatessiz tercihini yap, dönerinin keyfini çıkar. Senin dönerin, senin lezzetin.", category: "Et Dönerler"},
-      {name: "Ekmek Arası Et Döner (150 Gr.)", price: "690,00 TL", desc: "Domates, marul, mor soğan, salatalık, kırmızılahana, salatalık turşusu", category: "Et Dönerler"},
-      {name: "Et Döner Box (100 Gr.)", price: "600,00 TL", desc: "Domates, marul, mor soğan, salatalık, kırmızılahana, salatalık turşusu, et döner", category: "Et Dönerler"},
-      {name: "Et Döner Dürüm (120 Gr.)", price: "670,00 TL", desc: "Domates, marul, mor soğan, salatalık, kırmızılahana, salatalık turşusu", category: "Et Dönerler"},
-      {name: "Ekmek Arası Et Döner (200 Gr.)", price: "730,00 TL", desc: "Domates, marul, mor soğan, salatalık, kırmızılahana, salatalık turşusu", category: "Et Dönerler"},
-      {name: "Et Döner Dürüm (200 Gr.)", price: "730,00 TL", desc: "Domates, marul, mor soğan, salatalık, kırmızılahana, salatalık turşusu", category: "Et Dönerler"},
-      {name: "Patates Kızartması", price: "125,00 TL", desc: "Parmak dilim", category: "Aperitifler"},
-      {name: "Falafel", price: "170,00 TL", desc: "Porsiyon olarak servis edilir (5 adet)", category: "Aperitifler"},
-      {name: "Eker Ayran (27 Cl.)", price: "75,00 TL", desc: "Ferahlık ve lezzet arayanlar için ideal bir seçim olan Sütaş Ayran, geleneksel Türk içeceği olarak yemeklerinize eşlik eder.", category: "İçecekler"},
-      {name: "Coca-cola (33 Cl.)", price: "120,00 TL", desc: "Kutu içecek", category: "İçecekler"},
-      {name: "Red Bull (25 Cl.)", price: "140,00 TL", desc: "Kutu içecek", category: "İçecekler"},
-      {name: "Fuse Tea (33 Cl.)", price: "120,00 TL", desc: "Kutu içecek", category: "İçecekler"},
-      {name: "Soda (20 Cl.)", price: "65,00 TL", desc: "Cam şişe", category: "İçecekler"},
-      {name: "Capri-sun (20 Cl.)", price: "80,00 TL", desc: "Paket içecek", category: "İçecekler"},
-      {name: "Sprite (33 Cl.)", price: "120,00 TL", desc: "Kutu içecek", category: "İçecekler"},
-      {name: "Su (50 Cl.)", price: "40,00 TL", desc: "Pet şişe", category: "İçecekler"},
-      {name: "Fanta (33 Cl.)", price: "120,00 TL", desc: "Kutu içecek", category: "İçecekler"},
-    ],
-  },
+  "name": "Das Haus Des Döners",
+  "sourceUrl": "https://www.yemeksepeti.com/restaurant/hc9n/haus-des-doner-hc9n",
+  "sourceName": "Yemeksepeti exact Beylikdüzü vendorı; resmî Haus Des Döners şubeler sayfasındaki Cumhuriyet Mah. Okur Sk. No:2/A ve +90 531 011 02 29 ile eşleştirildi. 54 benzersiz döner, çocuk menüsü, yan ürün ve içecek kalemi aktarıldı; poşet/servis satırları dışlandı.",
+  "verifiedAt": "2026-08-25",
+  "items": [
+    {
+      "name": "Tavuk Teller (120 gr.)",
+      "price": "580",
+      "desc": "Tek kişilik",
+      "category": "Tavuk Dönerler"
+    },
+    {
+      "name": "Tavuk Bowl Döner (120 gr.)",
+      "price": "520",
+      "desc": "Domates, marul, mor soğan, salatalık, kırmızılahana, salatalık turşusu",
+      "category": "Tavuk Dönerler"
+    },
+    {
+      "name": "Tavuk Bowl Döner (200 gr.)",
+      "price": "570",
+      "desc": "Domates, marul, mor soğan, salatalık, kırmızılahana, salatalık turşusu",
+      "category": "Tavuk Dönerler"
+    },
+    {
+      "name": "Tavuk Bowl Döner (100 gr.)",
+      "price": "480",
+      "desc": "Domates, marul, mor soğan, salatalık, kırmızılahana, salatalık turşusu",
+      "category": "Tavuk Dönerler"
+    },
+    {
+      "name": "Tavuk Bowl Döner (150 gr.)",
+      "price": "550",
+      "desc": "Domates, marul, mor soğan, salatalık, kırmızılahana, salatalık turşusu",
+      "category": "Tavuk Dönerler"
+    },
+    {
+      "name": "Tavuk Teller (200 gr.)",
+      "price": "630",
+      "desc": "Berlin sos, et. Patates kızartması ile",
+      "category": "Tavuk Dönerler"
+    },
+    {
+      "name": "Tavuk Teller (100 gr.)",
+      "price": "540",
+      "desc": "Tek kişilik",
+      "category": "Tavuk Dönerler"
+    },
+    {
+      "name": "Tavuk Teller (150 gr.)",
+      "price": "610",
+      "desc": "Tek kişilik",
+      "category": "Tavuk Dönerler"
+    },
+    {
+      "name": "Tavuk Lavaş (100 Gram)",
+      "price": "480",
+      "desc": "Haus Des Döner'in Berlin soslu tavuk döneri. Taptaze lavaşın içinde servis edilir. Domates, salatalık, soğan, göbek marul, mor lahana turşusu, mısır, salatalık turşusu ve jalapeño turşusundan dilediğini seç. Senin dönerin, senin lezzetin.",
+      "category": "Tavuk Dönerler"
+    },
+    {
+      "name": "Tavuk Lavaş (120 Gram)",
+      "price": "520",
+      "desc": "Haus Des Döner'in Berlin soslu tavuk döneri. Taptaze lavaşın içinde servis edilir. Domates, salatalık, soğan, göbek marul, mor lahana turşusu, mısır, salatalık turşusu ve jalapeno turşusundan dilediğini seç. Senin dönerin, senin lezzetin.",
+      "category": "Tavuk Dönerler"
+    },
+    {
+      "name": "Tavuk Lavaş (150 Gram)",
+      "price": "550",
+      "desc": "Haus Des Döner'in Berlin soslu tavuk döneri. Taptaze lavaşın içinde servis edilir. Domates, salatalık, soğan, göbek marul, mor lahana turşusu, mısır, salatalık turşusu ve jalapeno turşusundan dilediğini seç. Senin dönerin, senin lezzetin.",
+      "category": "Tavuk Dönerler"
+    },
+    {
+      "name": "Tavuk Lavaş (200 Gram)",
+      "price": "570",
+      "desc": "Haus Des Döner'in Berlin soslu tavuk döneri. Taptaze lavaşın içinde servis edilir. Domates, salatalık, soğan, göbek marul, mor lahana turşusu, mısır, salatalık turşusu ve jalapeno turşusundan dilediğini seç. Senin dönerin, senin lezzetin.",
+      "category": "Tavuk Dönerler"
+    },
+    {
+      "name": "Tavuk Ekmek (100 Gram)",
+      "price": "480",
+      "desc": "Haus Des Döner'in Berlin soslu tavuk döneri. Özel ekmeğimizin içinde servis edilir. Domates, salatalık, soğan, göbek marul, mor lahana turşusu, mısır, salatalık turşusu ve jalapeño turşusundan dilediğini seç. Senin dönerin, senin lezzetin.",
+      "category": "Tavuk Dönerler"
+    },
+    {
+      "name": "Tavuk Ekmek (120 gr.)",
+      "price": "520",
+      "desc": "Domates, salatalık, soğan, göbek marul, mor lahana turşusu, mısır, salatalık turşusu, jalapeño turşusu",
+      "category": "Tavuk Dönerler"
+    },
+    {
+      "name": "Tavuk Ekmek (150 Gram)",
+      "price": "550",
+      "desc": "Haus Des Döner'in Berlin soslu tavuk döneri. Özel ekmeğimizin içinde servis edilir. Domates, salatalık, soğan, göbek marul, mor lahana turşusu, mısır, salatalık turşusu ve jalapeño turşusundan dilediğini seç. Senin dönerin, senin lezzetin.",
+      "category": "Tavuk Dönerler"
+    },
+    {
+      "name": "Tavuk Ekmek (200 Gram)",
+      "price": "570",
+      "desc": "Haus Des Döner'in Berlin soslu tavuk döneri. Özel ekmeğimizin içinde servis edilir. Domates, salatalık, soğan, göbek marul, mor lahana turşusu, mısır, salatalık turşusu ve jalapeño turşusundan dilediğini seç. Senin dönerin, senin lezzetin.",
+      "category": "Tavuk Dönerler"
+    },
+    {
+      "name": "Tavuk Box (100 Gram)",
+      "price": "480",
+      "desc": "Haus Des Döner'in Berlin soslu tavuk döneri. Box içinde tavuk döner ile servis edilir. Patatesli veya patatessiz tercihini yap, dönerinin keyfini çıkar. Senin dönerin, senin lezzetin.",
+      "category": "Tavuk Dönerler"
+    },
+    {
+      "name": "Tavuk Box (120 Gram)",
+      "price": "520",
+      "desc": "Haus Des Döner'in Berlin soslu tavuk döneri. Box içinde tavuk döner ile servis edilir. Patatesli veya patatessiz tercihini yap, dönerinin keyfini çıkar. Senin dönerin, senin lezzetin.",
+      "category": "Tavuk Dönerler"
+    },
+    {
+      "name": "Tavuk Box (150 Gram)",
+      "price": "550",
+      "desc": "Haus Des Döner'in Berlin soslu tavuk döneri. Box içinde tavuk döner ile servis edilir. Patatesli veya patatessiz tercihini yap, dönerinin keyfini çıkar. Senin dönerin, senin lezzetin.",
+      "category": "Tavuk Dönerler"
+    },
+    {
+      "name": "Tavuk Box (200 Gram)",
+      "price": "570",
+      "desc": "Haus Des Döner'in Berlin soslu tavuk döneri. Box içinde tavuk döner ile servis edilir. Patatesli veya patatessiz tercihini yap, dönerinin keyfini çıkar. Senin dönerin, senin lezzetin.",
+      "category": "Tavuk Dönerler"
+    },
+    {
+      "name": "Kids Box Et Lavaş (50 Gram)",
+      "price": "560",
+      "desc": "50 gr. et döner lavaş ile servis edilir. Yanında Capri-Sun içecek, patates ve kutu içinde sürpriz oyuncak bulunur.",
+      "category": "Kids Menü"
+    },
+    {
+      "name": "Kids Box Tavuk Lavaş (50 gr.)",
+      "price": "460",
+      "desc": "50 gr. tavuk döner lavaş ile servis edilir. Capri-Sun içecek, patates ve kutu içinde sürpriz oyuncak bulunur.",
+      "category": "Kids Menü"
+    },
+    {
+      "name": "Et Bowl (150 gr.)",
+      "price": "680",
+      "desc": "Haus Des Döner'in Berlin soslu et döneri. Taptaze et dönerimiz bowl içinde servis edilir. Dilediğin salataları seçerek, dönerini kendi zevkine göre tamamlayabilirsin. Senin dönerin, senin lezzetin.",
+      "category": "Et Dönerler"
+    },
+    {
+      "name": "Et Bowl (100 gr.)",
+      "price": "590",
+      "desc": "Haus Des Döner'in Berlin soslu et döneri. Taptaze et dönerimiz bowl içinde servis edilir. Dilediğin salataları seçerek, dönerini kendi zevkine göre tamamlayabilirsin. Senin dönerin, senin lezzetin.",
+      "category": "Et Dönerler"
+    },
+    {
+      "name": "Et Bowl Döner (200 gr.)",
+      "price": "720",
+      "desc": "Domates, marul, mor soğan, salatalık, kırmızı lahana, salatalık turşusu",
+      "category": "Et Dönerler"
+    },
+    {
+      "name": "Et Bowl (120 gr.)",
+      "price": "640",
+      "desc": "Haus Des Döner'in Berlin soslu et döneri. Taptaze et dönerimiz bowl içinde servis edilir. Dilediğin salataları seçerek, dönerini kendi zevkine göre tamamlayabilirsin. Senin dönerin, senin lezzetin.",
+      "category": "Et Dönerler"
+    },
+    {
+      "name": "Et Teller (100 gr.)",
+      "price": "650",
+      "desc": "Berlin sos, et, patates kızartması",
+      "category": "Et Dönerler"
+    },
+    {
+      "name": "Et Teller (120 gr.)",
+      "price": "700",
+      "desc": "Berlin sos, et. Patates kızartması ile",
+      "category": "Et Dönerler"
+    },
+    {
+      "name": "Et Teller (150 gr.)",
+      "price": "740",
+      "desc": "Tek kişilik",
+      "category": "Et Dönerler"
+    },
+    {
+      "name": "Et Teller (200 gr.)",
+      "price": "780",
+      "desc": "Berlin sos, et, patates kızartması",
+      "category": "Et Dönerler"
+    },
+    {
+      "name": "Et Lavaş (100 gr.)",
+      "price": "590",
+      "desc": "Haus Des Döner'in Berlin soslu et döneri. Taptaze lavaşın içinde servis edilir. Domates, salatalık, soğan, göbek marul, mor lahana turşusu, mısır, salatalık turşusu ve jalapeño turşusundan dilediğini seç. Senin dönerin, senin lezzetin.",
+      "category": "Et Dönerler"
+    },
+    {
+      "name": "Et Lavaş (120 gr.)",
+      "price": "640",
+      "desc": "Haus Des Döner'in Berlin soslu et döneri. Taptaze lavaşın içinde servis edilir. Domates, salatalık, soğan, göbek marul, mor lahana turşusu, mısır, salatalık turşusu ve jalapeño turşusundan dilediğini seç. Senin dönerin, senin lezzetin.",
+      "category": "Et Dönerler"
+    },
+    {
+      "name": "Et Lavaş (150 gr.)",
+      "price": "680",
+      "desc": "Haus Des Döner'in Berlin soslu et döneri. Taptaze lavaşın içinde servis edilir. Domates, salatalık, soğan, göbek marul, mor lahana turşusu, mısır, salatalık turşusu ve jalapeño turşusundan dilediğini seç. Senin dönerin, senin lezzetin.",
+      "category": "Et Dönerler"
+    },
+    {
+      "name": "Et Lavaş (200 gr.)",
+      "price": "720",
+      "desc": "Haus Des Döner'in Berlin soslu et döneri. Taptaze lavaşın içinde servis edilir. Domates, salatalık, soğan, göbek marul, mor lahana turşusu, mısır, salatalık turşusu ve jalapeño turşusundan dilediğini seç. Senin dönerin, senin lezzetin.",
+      "category": "Et Dönerler"
+    },
+    {
+      "name": "Et Ekmek (100 gr.)",
+      "price": "590",
+      "desc": "Haus Des Döner'in Berlin soslu et döneri. Özel ekmeğimizin içinde servis edilir. Domates, salatalık, soğan, göbek marul, mor lahana turşusu, mısır, salatalık turşusu ve jalapeño turşusundan dilediğini seç. Senin dönerin, senin lezzetin.",
+      "category": "Et Dönerler"
+    },
+    {
+      "name": "Et Ekmek (120 gr.)",
+      "price": "640",
+      "desc": "Haus Des Döner'in Berlin soslu et döneri. Özel ekmeğimizin içinde servis edilir. Domates, salatalık, soğan, göbek marul, mor lahana turşusu, mısır, salatalık turşusu ve jalapeño turşusundan dilediğini seç. Senin dönerin, senin lezzetin.",
+      "category": "Et Dönerler"
+    },
+    {
+      "name": "Et Ekmek (150 gr.)",
+      "price": "680",
+      "desc": "Haus Des Döner'in Berlin soslu et döneri. Özel ekmeğimizin içinde servis edilir. Domates, salatalık, soğan, göbek marul, mor lahana turşusu, mısır, salatalık turşusu ve jalapeño turşusundan dilediğini seç. Senin dönerin, senin lezzetin.",
+      "category": "Et Dönerler"
+    },
+    {
+      "name": "Et Ekmek (200 gr.)",
+      "price": "720",
+      "desc": "Haus Des Döner'in Berlin soslu et döneri. Özel ekmeğimizin içinde servis edilir. Domates, salatalık, soğan, göbek marul, mor lahana turşusu, mısır, salatalık turşusu ve jalapeño turşusundan dilediğini seç. Senin dönerin, senin lezzetin.",
+      "category": "Et Dönerler"
+    },
+    {
+      "name": "Et Box (100 gr.)",
+      "price": "590",
+      "desc": "Haus Des Döner'in Berlin soslu et döneri. Box içinde bol et döner ile servis edilir. Patatesli veya patatessiz tercihini yap, dönerinin keyfini çıkar. Senin dönerin, senin lezzetin.",
+      "category": "Et Dönerler"
+    },
+    {
+      "name": "Et Box (120 gr.)",
+      "price": "640",
+      "desc": "Haus Des Döner'in Berlin soslu et döneri. Box içinde bol et döner ile servis edilir. Patatesli veya patatessiz tercihini yap, dönerinin keyfini çıkar. Senin dönerin, senin lezzetin.",
+      "category": "Et Dönerler"
+    },
+    {
+      "name": "Et Box (150 gr.)",
+      "price": "680",
+      "desc": "Haus Des Döner'in Berlin soslu et döneri. Box içinde bol et döner ile servis edilir. Patatesli veya patatessiz tercihini yap, dönerinin keyfini çıkar. Senin dönerin, senin lezzetin.",
+      "category": "Et Dönerler"
+    },
+    {
+      "name": "Et Box (200 gr.)",
+      "price": "720",
+      "desc": "Haus Des Döner'in Berlin soslu et döneri. Box içinde bol et döner ile servis edilir. Patatesli veya patatessiz tercihini yap, dönerinin keyfini çıkar. Senin dönerin, senin lezzetin.",
+      "category": "Et Dönerler"
+    },
+    {
+      "name": "Patates Kızartması",
+      "price": "125",
+      "desc": "Parmak dilim",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Falafel (5 Adet)",
+      "price": "175",
+      "desc": "5 adet olarak servis edilir.",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Coca-Cola Zero Sugar (33 cl.)",
+      "price": "120",
+      "desc": "Kutu içecek",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Coca-Cola (33 cl.)",
+      "price": "120",
+      "desc": "Kutu içecek",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Fanta (33 cl.)",
+      "price": "120",
+      "desc": "Kutu içecek",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Sprite (33 cl.)",
+      "price": "120",
+      "desc": "Kutu içecek",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Fuse Tea (33 cl.)",
+      "price": "120",
+      "desc": "Kutu içecek",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Red Bull (25 cl.)",
+      "price": "140",
+      "desc": "On sekiz yaşından küçüklere enerji içeceklerinin satışı yapılmamaktadır. Alkol ile karıştırılarak veya beraber tüketilmemelidir. Çocuklar, 18 yaş altı kişiler, yaşlılar, diyabetikler, yüksek tansiyonu olanlar, gebe ve emzikli kadınlar, metabolik hastalığı olanlar, böbrek yetmezliği olanlar ile kafeine hassas kişiler için tavsiye edilmez. Sporcu içeceği değildir, yoğun fiziksel aktivite öncesinde, sırasında veya sonrasında tüketilmemelidir. Günlük 500 ml’den fazla tüketilmesi tavsiye edilmez.",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Capri-Sun (20 cl.)",
+      "price": "85",
+      "desc": "Paketli içecek",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Ayran (27 cl.)",
+      "price": "85",
+      "desc": "Büyük boy",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Soda (20 cl.)",
+      "price": "70",
+      "desc": "Cam şişe",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Su (50 cl.)",
+      "price": "45",
+      "desc": "Pet şişe",
+      "category": "İçecekler"
+    }
+  ]
+},
+
   "7113": {
     "name": "Hatay Usulü Şan Döner",
     "sourceUrl": "https://www.migros.com.tr/yemek/hatay-usulu-san-doner-bayrampasa-cevatpasa-mah-st-31123",

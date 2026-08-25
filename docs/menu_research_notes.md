@@ -1314,3 +1314,6 @@ Hentzer kaydı `Kavaklı, Ayasofya Cd. C3 Blok No:17 D/1, 34520 Beylikdüzü/İs
 
 ## Wood Coffee Brunch & Bakery ID 7064 strict HOLD
 Hentzer kaydı `Cumhuriyet, Atatürk Blv. No:27 1|C, 34500 Beylikdüzü/İstanbul` ve telefon `null`; 2026 Instagram içerikleri exact işletmeyi `Cumhuriyet Mah. Atatürk Bulvarı No:27/1C` olarak doğruluyor. Bir içerikte birkaç kampanya fiyatı (sandviç+kahve 350 TL, granola bowl kombinasyonları 450 TL) bulunmasına rağmen complete item-level menü yok. Hentzer’de telefon bulunmadığı ve public exact phone parity kurulamadığı için 100% adres/telefon şartı sağlanamadı. Ürün/fiyat uydurulmadı; strict HOLD.
+
+## Das Haus Des Döners ID 7063 refresh
+Exact kayıt `Cumhuriyet, Okur Sk. No:2/A, 34520 Beylikdüzü/İstanbul`, `+90 531 011 02 29`; resmî Haus Des Döners şubeler sayfası exact adres/telefonu yayımlıyor, Kaçıyor ve 2026 sosyal içerikler de eşleşmeyi destekliyor. Mevcut override exact Beylikdüzü `hc9n` Yemeksepeti vendorıyla yenilendi. Tavuk/et dönerler, Kids Menü, yan ürünler ve içeceklerden **54 benzersiz ürün/fiyat** aktarıldı; poşet/servis satırları dışlandı. `verifiedAt` canlı kontrol tarihi `2026-08-25`.
