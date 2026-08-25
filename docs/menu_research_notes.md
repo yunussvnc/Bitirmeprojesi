@@ -1278,3 +1278,6 @@ Exact kayıt `Şahkulu, İstiklal Cd. No:233, 34420 Beyoğlu/İstanbul`, `+90 44
 
 ## Adil Kaya Pasta Cafe ID 7076 strict HOLD
 Exact kayıt `Soğuksu, Karadut Sk. No:47, 34800 Beykoz/İstanbul`, `+90 216 537 84 91`; Restoranım, Menu-TR, Kaçıyor, Cybo ve Instagram `@adilkayapastacafe` aynı şube kimliğini destekliyor. Ancak son bir yıl içinde exact şubeye ait complete ve item-level fiyatlı public menü bulunamadı; bulunan sayfalar genel tanıtım, ürün/kalori bilgisi veya sipariş iletişimi sunuyor fakat fiyatlı menü yayımlamıyor. Ürün/fiyat uydurulmadı; strict HOLD.
+
+## Beykoz Kahvecisi ID 7075 strict HOLD
+Exact kayıt `Çubuklu, Tugay Sk. No:1, 34805 Beykoz/İstanbul`; Hentzer telefon yayımlamıyor. Yakala aynı exact adresi doğruluyor fakat sayfada açıkça menü bilgisi ve iletişim bilgisi bulunmadığı belirtiliyor. Beykoz Belediyesi bağlantılı Doğuş Haber içeriği markayı ve kahve, tatlı, tuzlu pastane, sandviç ürün gruplarını doğruluyor; ancak son bir yıl içinde exact şubeye ait complete item-level fiyatlı public menü bulunamadı. Ürün/fiyat uydurulmadı; strict HOLD.
