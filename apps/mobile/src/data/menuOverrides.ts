@@ -86929,4 +86929,172 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     }
   ]
 },
+  "7007": {
+  "name": "Lokmata",
+  "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/egvp/lokmata-egvp",
+  "sourceName": "Yemeksepeti current Lokmata menu; exact Hentzer branch is Vişnezade, Refik Osman Top Sk. No:4, 34357 Beşiktaş/İstanbul, +90 212 259 08 88, matching current Lokmata social/location records. 32 unique priced dessert/beverage items imported; Popular carousel and Plastic Bag excluded.",
+  "verifiedAt": "2026-08-25",
+  "items": [
+    {
+      "name": "İki Tane Beşli",
+      "price": "520",
+      "category": "Menus"
+    },
+    {
+      "name": "Bi Lokmata Bi Dondurma Menü",
+      "price": "340",
+      "category": "Menus"
+    },
+    {
+      "name": "Plain Ice Cream (500 gr.)",
+      "price": "560",
+      "category": "Kilo Ice Creams"
+    },
+    {
+      "name": "Chocolate Ice Cream (250 gr.)",
+      "price": "295",
+      "category": "Kilo Ice Creams"
+    },
+    {
+      "name": "Plain Chocolate Pistachio Ice Cream (500 gr.)",
+      "price": "590",
+      "category": "Kilo Ice Creams"
+    },
+    {
+      "name": "Lotus Sosu",
+      "price": "60",
+      "category": "Chocolates"
+    },
+    {
+      "name": "Bueno Sosus",
+      "price": "60",
+      "category": "Chocolates"
+    },
+    {
+      "name": "Sütlü Çikolata Sosu",
+      "price": "60",
+      "category": "Chocolates"
+    },
+    {
+      "name": "Beyaz Çikolata Sosu",
+      "price": "60",
+      "category": "Chocolates"
+    },
+    {
+      "name": "Bitter Çikolata Sosu",
+      "price": "60",
+      "category": "Chocolates"
+    },
+    {
+      "name": "Antep Fıstığı Sosu",
+      "price": "70",
+      "category": "Chocolates"
+    },
+    {
+      "name": "Lokma (5 Pieces)",
+      "price": "260",
+      "category": "5li Lokma Tatlısı"
+    },
+    {
+      "name": "5'li Bueno",
+      "price": "260",
+      "category": "5li Lokma Tatlısı"
+    },
+    {
+      "name": "5'li Modern",
+      "price": "260",
+      "category": "5li Lokma Tatlısı"
+    },
+    {
+      "name": "5'li Klasik",
+      "price": "260",
+      "category": "5li Lokma Tatlısı"
+    },
+    {
+      "name": "Lokma (8 Pieces)",
+      "price": "315",
+      "category": "8li Lokma Tatlısı"
+    },
+    {
+      "name": "Modern",
+      "price": "315",
+      "category": "8li Lokma Tatlısı"
+    },
+    {
+      "name": "Classical",
+      "price": "315",
+      "category": "8li Lokma Tatlısı"
+    },
+    {
+      "name": "Dubai Lokma (8 Pieces)",
+      "price": "325",
+      "category": "8li Lokma Tatlısı"
+    },
+    {
+      "name": "8'li Bueno",
+      "price": "315",
+      "category": "8li Lokma Tatlısı"
+    },
+    {
+      "name": "8'li Lotus",
+      "price": "325",
+      "category": "8li Lokma Tatlısı"
+    },
+    {
+      "name": "Çarkıfelek Dondurma",
+      "price": "120",
+      "category": "Ice creams"
+    },
+    {
+      "name": "Tahinli Dondurma",
+      "price": "120",
+      "category": "Ice creams"
+    },
+    {
+      "name": "Lotuslu Dondurma",
+      "price": "120",
+      "category": "Ice creams"
+    },
+    {
+      "name": "Raspberry Ice Cream",
+      "price": "120",
+      "category": "Ice creams"
+    },
+    {
+      "name": "Limonlu Dondurma",
+      "price": "120",
+      "category": "Ice creams"
+    },
+    {
+      "name": "Soda (20 cl.)",
+      "price": "35",
+      "category": "Drinks"
+    },
+    {
+      "name": "Milk (20 cl.)",
+      "price": "50",
+      "category": "Drinks"
+    },
+    {
+      "name": "Lemonade (33 cl.)",
+      "price": "120",
+      "category": "Drinks"
+    },
+    {
+      "name": "Erikli Water (33 cl.)",
+      "price": "30",
+      "category": "Drinks"
+    },
+    {
+      "name": "Sade Dondurma (200 gr)",
+      "price": "280",
+      "category": "Paketli Dondurmalar"
+    },
+    {
+      "name": "Çikolatalı Dondurma (200 gr)",
+      "price": "280",
+      "category": "Paketli Dondurmalar"
+    }
+  ]
+},
 };

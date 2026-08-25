@@ -1479,3 +1479,6 @@ Exact kayıt `Türkali Mahallesi, Ihlamurdere Cd. No:112/A, 34257 Beşiktaş/İs
 
 ## THE CO. COFFEE AKARETLER ID 7008 strict HOLD
 Exact mekan adresi `Vişnezade, Şair Nedim Cd. No:27/A, 34353 Beşiktaş/İstanbul` olarak harita kaynaklarında eşleşiyor; Yemeksepeti `vhrz` vendorında güncel, geniş fiyatlı menü mevcut. Ancak zorunlu telefon paritesi sağlanamadı: Hentzer `+90 554 561 75 66`, Yandex kaydı `+90 537 481 03 58` gösteriyor ve resmi THE CO. kaynaklarında Akaretler şubesine ait bu telefonlardan biri doğrulanamadı. Bu nedenle menü mevcut olsa da exact şube kimliği %100 kanıtlanmadığından **override eklenmedi; strict HOLD**.
+
+## LOKMATA ID 7007 kabul
+Exact kayıt `Vişnezade, Refik Osman Top Sk. No:4, 34357 Beşiktaş/İstanbul`, `+90 212 259 08 88`; Lokmata sosyal medya, Facebook ve güncel yerel kayıtlarla eşleşti. Yemeksepeti `egvp` vendorından 2026-08-25 tarihinde Menus, Kilo Ice Creams, Chocolates, 5li/8li Lokma Tatlısı, Ice creams, Drinks ve Paketli Dondurmalar kategorilerinden **32 benzersiz ürün/fiyat** alındı. Popular carousel tekrarları ve Plastic Bag kalemi dışlandı.
