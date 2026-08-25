@@ -1710,3 +1710,6 @@ Hentzer kaydı `Tomtom, İstiklal Cd. No:187, 34433 Beyoğlu/İstanbul`, `+90 53
 
 ## KAVACIK BALIK SOFRASI ID 6929 — STRICT HOLD
 Hentzer kaydı `Kavacık, Yayabeyi Sk. No:19, 34810 Beykoz/İstanbul`, `+90 216 331 02 14`; Yandex Maps aynı exact konumu `Yaya Beyi Sok., No:19` ve telefonu doğruluyor. Instagram hesabında güncel işletme paylaşımları bulunmasına rağmen ürün bazlı fiyat listesi yayımlanmıyor; Menu-TR yalnız genel tanıtım ve yorum içeriyor, güncel fiyat vermiyor. Bu nedenle güncel fiyat şartı sağlanamadığından **strict HOLD**; override eklenmedi.
+
+## 10 BURGER BEYLİKDÜZÜ ID 6928 kabulü
+Hentzer kaydı `Cumhuriyet Mahallesi, Atatürk Bulvarı, Alya, Cumhuriyet, Dolunay Sitesi No:27/1D A Blok İç Kapı No:58, 34519 Beylikdüzü/İstanbul`, `+90 553 955 31 01`; resmi Instagram paylaşımları aynı şube adresini ve telefonu doğruluyor. Migros Yemek Beylikdüzü Cumhuriyet canlı vendorunda tarayıcı DOM’u üzerinden güncel fiyatı görülen 18 benzersiz burger, avantajlı menü, yan ürün ve ikili menü kalemi aktarıldı. Popüler carousel tekrarları, fiyatı DOM’da doğrudan doğrulanamayan ürünler, kampanyalar ve ekstra soslar dahil edilmedi. **Override kabul edildi.**

@@ -4,6 +4,32 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6928": {
+    "name": "10 BURGER BEYLİKDÜZÜ",
+    "sourceUrl": "https://www.migros.com.tr/yemek/10-burger-beylikduzu-cumhuriyet-mah-st-2e52b",
+    "sourceName": "Migros Yemek canlı 10 Burger Beylikdüzü vendoru; resmi Instagram exact `Alya, Cumhuriyet Mahallesi, Atatürk Bulvarı, Dolunay Sitesi No:27/1D A Blok İç Kapı No:58, 34519 Beylikdüzü` / `+90 553 955 31 01` şube eşleşmesini doğruluyor",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Burger Sizden Limonata Bizden", "price": "639,90 TL", "category": "Avantajlı Menüler" },
+      { "name": "Migrosa Özel 2'Li Klasik Burger 1 Litre Coca Cola", "price": "1.144,90 TL", "category": "Avantajlı Menüler" },
+      { "name": "Migros Özel Klasik Burger Coca Cola Menü", "price": "659,90 TL", "category": "Avantajlı Menüler" },
+      { "name": "Cheeseburger Menü", "price": "599,90 TL", "category": "Burgerler" },
+      { "name": "Steak Burger Menü", "price": "684,90 TL", "category": "Burgerler" },
+      { "name": "Klasik Burger Menü", "price": "599,90 TL", "category": "Burgerler" },
+      { "name": "Mushrooms Burger", "price": "634,90 TL", "category": "Burgerler" },
+      { "name": "Dublex Burger Menü", "price": "934,90 TL", "category": "Burgerler" },
+      { "name": "Çıtır Tavuk Burger Menü", "price": "499,90 TL", "category": "Burgerler" },
+      { "name": "Big Royal Burger", "price": "599,90 TL", "category": "Burgerler" },
+      { "name": "6'Lı Soğan Halkası", "price": "164,90 TL", "category": "Yan Ürünler" },
+      { "name": "12'Li Çıtır Tavuk Topları", "price": "199,90 TL", "category": "Yan Ürünler" },
+      { "name": "Kombo Tabağı", "price": "519,90 TL", "category": "Yan Ürünler" },
+      { "name": "12'Li Soğan Halkası", "price": "199,90 TL", "category": "Yan Ürünler" },
+      { "name": "Mozzarella Sticks (4 Adet)", "price": "184,90 TL", "category": "Yan Ürünler" },
+      { "name": "Klasik İkili", "price": "1.069,90 TL", "category": "İkili Menüler" },
+      { "name": "Çıtır İkili", "price": "804,90 TL", "category": "İkili Menüler" },
+      { "name": "On Numara İkili", "price": "919,90 TL", "category": "İkili Menüler" }
+    ]
+  },
   "6931": {
     "name": "DÖNERCİ DAYI ARNAVUTKÖY",
     "sourceUrl": "https://www.yemeksepeti.com/restaurant/tiu1/donerci-dayi-tiu1",
