@@ -1767,3 +1767,6 @@ Hentzer kaydı `İstiklal Caddesi Turnacıbaşı Sok, Kuloğlu, No:4, 34421 Beyo
 
 ## PHOENIX COFFEE LAB KAVACIK ID 6910 — STRICT HOLD
 Hentzer kaydı `Kavacık, Fatih Sultan Mehmet Cd. No:24/1, 34810 Beykoz/İstanbul`, `+90 537 657 70 07`; Phoenix resmi menü sayfası ve resmi Instagram exact Kavacık şubesini doğruluyor. Resmi menüde görseller var ancak fiyatlar metin olarak okunabilir değil. Migros Yemek exact vendoru kategori/ürün adlarını gösteriyor fakat erişilebilir metinde fiyat alanları yok ve ürün görselleri placeholder; Menu-TR de fiyat yayımlamıyor. Son bir yılda herkese açık, ürün bazlı ve doğrulanabilir güncel fiyatlı menü bulunamadığından **strict HOLD**; override eklenmedi.
+
+## YAŞAM VADİSİ NOSTALJİ CAFE BEYLİKDÜZÜ ID 6909 kabulü
+Hentzer kaydı `Adnan Kahveci, Buse Sk. D:8/9 a kadar, 34500 Beylikdüzü/İstanbul`, `+90 554 797 56 49`; resmi Karekod Restaurant Menu iletişim sayfası aynı adres ve telefonu doğruluyor, Restoranim ve resmi Instagram 2025-2026 faal işletmeyi destekliyor. Resmi QR menüde 26.08.2026 tarihinde 39 benzersiz yiyecek, sıcak/soğuk içecek ve tatlı fiyatı görüldü. Ayrıca resmi Instagram’ın 12.07.2026 paylaşımı QR menüdeki bazı fiyatları bağımsız olarak destekliyor. **Override kabul edildi.**
