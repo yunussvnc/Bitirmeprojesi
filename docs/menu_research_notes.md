@@ -1209,3 +1209,6 @@ Hentzer exact kayıt `Cihannüma, Hasfırın Cd. No:8/1, 34353 Beşiktaş/İstan
 
 ## Münhasır Garden Döner & Kebap ID 7101 acceptance
 Hentzer exact kayıt `Hüseyinağa, İstiklal Cd. No:62, 34435 Beyoğlu/İstanbul`, `+90 541 422 47 42`; resmi Instagram `@munhasirdonerkebap` ve 2026-08-05 tarihli resmi içerik aynı No:62/telefon kimliğini destekliyor. Resmi `munhasirgarden.istanbul/menu` sayfasının gömülü Wix JSON verisi ayrıştırılarak döner varyantları dahil **194 benzersiz ürün/varyant ve fiyat** aktarıldı. Fiyatların resmi menüde güncel olarak sunulduğu canlı kontrolde doğrulandı; `verifiedAt` `2026-08-25`.
+
+## Tarihi Van Kahvaltısı ID 7100 acceptance
+Hentzer exact kayıt `Rüzgarlıbahçe, Yasemin Sk. No:06, 34805 Beykoz/İstanbul`, `+90 216 322 18 26`; Restoranım exact sayfası ve resmi Instagram `@vankahvaltimangal` aynı adres/telefonu destekliyor. Yemeksepeti canlı vendor `ff8e` menüsünden kahvaltı, tost, sandviç, başlangıç, ana yemek, pizza, burger, wrap, quesadilla, makarna, yan ürün, salata, tatlı ve içecek kategorilerinde **89 ürün ve güncel indirimli fiyat** aktarıldı. Binlik/ondalık fiyatlar normalize edildi; poşet satırı dışlandı. `verifiedAt` canlı doğrulama tarihi `2026-08-25`.

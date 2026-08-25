@@ -74322,4 +74322,458 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
   ]
 },
 
+  "7100": {
+  "name": "Tarihi Van Kahvaltısı",
+  "sourceUrl": "https://www.yemeksepeti.com/restaurant/ff8e/tarihi-van-kahvaltisi-restaurant",
+  "sourceName": "Yemeksepeti canlı vendor ff8e; exact Restoranım kaydı ve resmi Instagram @vankahvaltimangal ile Rüzgarlıbahçe Yasemin Sk. No:06 / 0216 322 18 26 şube doğrulaması",
+  "verifiedAt": "2026-08-25",
+  "items": [
+    {
+      "name": "Köy Kahvaltısı",
+      "price": "552.50",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Van Kahvaltısı (2 Kişilik)",
+      "price": "1700",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Kahvaltı Tabağı",
+      "price": "416.50",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Menemen",
+      "price": "263.50",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Kaşarlı Menemen",
+      "price": "331.50",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Sucuklu Menemen",
+      "price": "331.50",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Karışık Menemen",
+      "price": "369.75",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Sucuklu Yumurta",
+      "price": "255",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Sahanda Yumurta",
+      "price": "212.50",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Haşlanmış Yumurta",
+      "price": "34",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Kavurmalı Yumurta",
+      "price": "386.75",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Mantarlı Kaşarlı Omlet",
+      "price": "340",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Sade Omlet",
+      "price": "246.50",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Peynirli Omlet",
+      "price": "297.50",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Kaşarlı Omlet",
+      "price": "297.50",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Bal (100 gr.)",
+      "price": "170",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Kaymak (50 gr.)",
+      "price": "170",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Zeytin (100 gr.)",
+      "price": "89.25",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Söğüş Tabağı",
+      "price": "148.75",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Petek Bal (100 gr.)",
+      "price": "212.50",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Bal (500 gr.)",
+      "price": "807.50",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Otlu Peynir (100 gr.)",
+      "price": "187",
+      "category": "Kahvaltılıklar"
+    },
+    {
+      "name": "Kaşarlı Tost",
+      "price": "170",
+      "category": "Tostlar"
+    },
+    {
+      "name": "Peynirli Tost",
+      "price": "212.50",
+      "category": "Tostlar"
+    },
+    {
+      "name": "Karışık Tost",
+      "price": "233.75",
+      "category": "Tostlar"
+    },
+    {
+      "name": "Sosisli Patso",
+      "price": "314.50",
+      "category": "Sandviçler"
+    },
+    {
+      "name": "Günün Çorbası",
+      "price": "114.75",
+      "category": "Başlangıçlar"
+    },
+    {
+      "name": "Başlangıç Tabağı",
+      "price": "361.25",
+      "category": "Başlangıçlar"
+    },
+    {
+      "name": "Soğan Halkası",
+      "price": "229.50",
+      "category": "Başlangıçlar"
+    },
+    {
+      "name": "Peynirli Sarma Börek (6 Adet)",
+      "price": "170",
+      "category": "Başlangıçlar"
+    },
+    {
+      "name": "Paçanga Böreği",
+      "price": "170",
+      "category": "Başlangıçlar"
+    },
+    {
+      "name": "Baharatlı Patates Kızartması",
+      "price": "153",
+      "category": "Başlangıçlar"
+    },
+    {
+      "name": "Çıtır Tavuk & Patates Kızartması",
+      "price": "306",
+      "category": "Başlangıçlar"
+    },
+    {
+      "name": "Izgara Tavuk & İtalyan Makarna",
+      "price": "467.50",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Izgara Tavuk Bonfile",
+      "price": "416.50",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Karışık Izgara",
+      "price": "1062.50",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Izgara Köfte & İtalyan Makarna",
+      "price": "501.50",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Izgara Köfte",
+      "price": "442",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Kaşarlı Izgara Köfte",
+      "price": "510",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Tavuk Graten",
+      "price": "467.50",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Köfte Graten",
+      "price": "552.50",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Köri Soslu Tavuk",
+      "price": "357",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Tavuk Schnitzel",
+      "price": "467.50",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Dana Bonfile",
+      "price": "782",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Mantarlı Bonfile",
+      "price": "782",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Etli Ağa Kebabı",
+      "price": "1062.50",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Tavuklu Ağa Kebabı",
+      "price": "637.50",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Köfte",
+      "price": "467.50",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Moğol Tavuk",
+      "price": "403.75",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Meat Pizza",
+      "price": "518.50",
+      "category": "Orta Boy Pizzalar (33 cm.)"
+    },
+    {
+      "name": "4 Peynirli Pizza",
+      "price": "552.50",
+      "category": "Orta Boy Pizzalar (33 cm.)"
+    },
+    {
+      "name": "Vejetaryen Pizza",
+      "price": "501.50",
+      "category": "Orta Boy Pizzalar (33 cm.)"
+    },
+    {
+      "name": "Turca Pizza",
+      "price": "510",
+      "category": "Orta Boy Pizzalar (33 cm.)"
+    },
+    {
+      "name": "Margherita Pizza",
+      "price": "382.50",
+      "category": "Orta Boy Pizzalar (33 cm.)"
+    },
+    {
+      "name": "Milan Pizza",
+      "price": "412.25",
+      "category": "Orta Boy Pizzalar (33 cm.)"
+    },
+    {
+      "name": "Tavuklu Pizza",
+      "price": "433.50",
+      "category": "Orta Boy Pizzalar (33 cm.)"
+    },
+    {
+      "name": "Ton Balıklı Pizza",
+      "price": "510",
+      "category": "Orta Boy Pizzalar (33 cm.)"
+    },
+    {
+      "name": "Kavurmalı Pizza",
+      "price": "552.50",
+      "category": "Orta Boy Pizzalar (33 cm.)"
+    },
+    {
+      "name": "Ekstra Meat Pizza",
+      "price": "765",
+      "category": "Orta Boy Pizzalar (33 cm.)"
+    },
+    {
+      "name": "BBQ Burger",
+      "price": "467.50",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Cheeseburger",
+      "price": "425",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Hamburger",
+      "price": "382.50",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Mexican Burger",
+      "price": "442",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Etli Wrap",
+      "price": "510",
+      "category": "Wraps"
+    },
+    {
+      "name": "Köfteli Wrap",
+      "price": "488.75",
+      "category": "Wraps"
+    },
+    {
+      "name": "Tavuklu Wrap",
+      "price": "420.75",
+      "category": "Wraps"
+    },
+    {
+      "name": "Tavuklu Quesadilla",
+      "price": "382.50",
+      "category": "Quesadlillas"
+    },
+    {
+      "name": "Köfteli Quesadilla",
+      "price": "403.75",
+      "category": "Quesadlillas"
+    },
+    {
+      "name": "Mantarlı Penne",
+      "price": "331.50",
+      "category": "Makarnalar"
+    },
+    {
+      "name": "Çıtır Tavuklu Penne",
+      "price": "382.50",
+      "category": "Makarnalar"
+    },
+    {
+      "name": "Chicken Alfredo Makarna",
+      "price": "416.50",
+      "category": "Makarnalar"
+    },
+    {
+      "name": "Penne Arrabbiata",
+      "price": "331.50",
+      "category": "Makarnalar"
+    },
+    {
+      "name": "Sosis Tabağı",
+      "price": "301.75",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Tavuklu Sezar Salata",
+      "price": "361.25",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Peynirli Akdeniz Salata",
+      "price": "331.50",
+      "category": "Salatalar"
+    },
+    {
+      "name": "4 Mevsim Salata",
+      "price": "297.50",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Çıtır Tavuklu Salata",
+      "price": "399.50",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Çoban Salata",
+      "price": "255",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Ton Balıklı Mevsim Salata",
+      "price": "340",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Künefe",
+      "price": "276.25",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Frambuazlı Cheesecake",
+      "price": "292.40",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Limonlu Cheesecake",
+      "price": "195.50",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Katmer Tatlısı",
+      "price": "276.25",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Taze Sıkma Portakal Suyu",
+      "price": "255",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Ayran (30 cl.)",
+      "price": "59.50",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Soda (20 cl.)",
+      "price": "42.50",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Su (50 cl.)",
+      "price": "25.50",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Uzay Portakal (25 cl.)",
+      "price": "59.50",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Uzay Gazoz (25 cl.)",
+      "price": "59.50",
+      "category": "İçecekler"
+    }
+  ]
+},
+
 };
