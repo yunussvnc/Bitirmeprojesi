@@ -1416,3 +1416,6 @@ Exact kayıt `Ortaköy, 34353 Beşiktaş/İstanbul`, `+90 537 255 55 58`; resmi 
 
 ## DÜRÜMCE BEYOĞLU ID 7029 kabul
 Exact kayıt `Kuloğlu, Sadri Alışık Sk. No:12/A, 34340 Beyoğlu/İstanbul`, `+90 212 249 41 42`; resmi `@durumcebeyoglu` profili adres ve telefonla eşleşti. Yemeksepeti `Dürümce` canlı menüsünden 2026-08-25 tarihinde Çorbalar, Kebaplar, Çiğ Köfteler, Dürümler, Yan Ürünler, Tatlılar, İçecekler, Menüler, Dürüm Menüler, Kebap Menüler, Doyuran Menüler ve Salatalar kategorilerinden **75 benzersiz ürün/fiyat** alındı. Popüler carousel tekrarları ve Poşet kalemi dışlandı.
+
+## ALBATROS FISH RESTAURANT ID 7028 strict HOLD
+Hentzer kaydı `Atatürk, Albatros Sk., 34500 Büyükçekmece/İstanbul`, `+90 212 883 32 08`; resmi Instagram/Yandex kaynaklarında aynı telefon ve Albatros/Atatürk lokasyonu görüldü. Ancak resmi alan adı erişimde hosting/DNS hata sayfası veriyor, Mekanlar menü sayfasında ürün/fiyat bulunmuyor ve son 1 yıl içinde tam item-level fiyatlı menü doğrulanamadı. Eksik veya eski fiyat aktarılmadı; **strict HOLD**.
