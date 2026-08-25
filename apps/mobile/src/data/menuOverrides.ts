@@ -75120,4 +75120,228 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
   ]
 },
 
+  "7095": {
+  "name": "Altın Şiş Kebap Beylikdüzü",
+  "sourceUrl": "https://www.yemeksepeti.com/restaurant/au2s/altin-sis-kebap-and-lahmacun-au2s",
+  "sourceName": "Yemeksepeti canlı vendor au2s; resmi Instagram @altinsiskebap_kavakli ve @altinsiskebap_beylikduzu exact 0212 877 00 13 / Beylikdüzü kimlik eşleşmesi. Poşet satırı dışlandı.",
+  "verifiedAt": "2026-08-25",
+  "items": [
+    {
+      "name": "Ezogelin Çorbası",
+      "price": "130",
+      "category": "Çorbalar"
+    },
+    {
+      "name": "Kuşbaşılı Pide",
+      "price": "400",
+      "category": "Fırın Ürünleri"
+    },
+    {
+      "name": "Kuşbaşılı Kaşarlı Pide",
+      "price": "400",
+      "category": "Fırın Ürünleri"
+    },
+    {
+      "name": "Kavurmalı Pide",
+      "price": "460",
+      "category": "Fırın Ürünleri"
+    },
+    {
+      "name": "Kavurmalı Kaşarlı Pide",
+      "price": "460",
+      "category": "Fırın Ürünleri"
+    },
+    {
+      "name": "Kıymalı Pide",
+      "price": "350",
+      "category": "Fırın Ürünleri"
+    },
+    {
+      "name": "Karışık Pide",
+      "price": "400",
+      "category": "Fırın Ürünleri"
+    },
+    {
+      "name": "Lahmacun",
+      "price": "130",
+      "category": "Fırın Ürünleri"
+    },
+    {
+      "name": "Antep Usulü Lahmacun",
+      "price": "160",
+      "category": "Fırın Ürünleri"
+    },
+    {
+      "name": "Kaşarlı Pide",
+      "price": "350",
+      "category": "Fırın Ürünleri"
+    },
+    {
+      "name": "Kıymalı Kaşarlı Pide",
+      "price": "370",
+      "category": "Fırın Ürünleri"
+    },
+    {
+      "name": "Sucuklu Kaşarlı Pide",
+      "price": "370",
+      "category": "Fırın Ürünleri"
+    },
+    {
+      "name": "Cevizli Özel Lahmacun",
+      "price": "190",
+      "category": "Fırın Ürünleri"
+    },
+    {
+      "name": "Tavuk Şiş",
+      "price": "400",
+      "category": "Kebaplar & Izgaralar"
+    },
+    {
+      "name": "Tavuk Kanat",
+      "price": "400",
+      "category": "Kebaplar & Izgaralar"
+    },
+    {
+      "name": "Kuzu Şiş",
+      "price": "490",
+      "category": "Kebaplar & Izgaralar"
+    },
+    {
+      "name": "Çöp Şiş",
+      "price": "470",
+      "category": "Kebaplar & Izgaralar"
+    },
+    {
+      "name": "Ciğer Şiş",
+      "price": "470",
+      "category": "Kebaplar & Izgaralar"
+    },
+    {
+      "name": "Domatesli Kebap",
+      "price": "560",
+      "category": "Kebaplar & Izgaralar"
+    },
+    {
+      "name": "Karışık Kebap",
+      "price": "820",
+      "category": "Kebaplar & Izgaralar"
+    },
+    {
+      "name": "Yoğurtlu Kebap",
+      "price": "440",
+      "category": "Kebaplar & Izgaralar"
+    },
+    {
+      "name": "İskender (Adana Kebaptan)",
+      "price": "440",
+      "category": "Kebaplar & Izgaralar"
+    },
+    {
+      "name": "Sarma Beyti Kebap",
+      "price": "570",
+      "category": "Kebaplar & Izgaralar"
+    },
+    {
+      "name": "Alinazik Kebap (Kuzu Şişten)",
+      "price": "570",
+      "category": "Kebaplar & Izgaralar"
+    },
+    {
+      "name": "Patlıcanlı Kebap",
+      "price": "570",
+      "category": "Kebaplar & Izgaralar"
+    },
+    {
+      "name": "Adana Kebap",
+      "price": "400",
+      "category": "Kebaplar & Izgaralar"
+    },
+    {
+      "name": "Urfa Kebap",
+      "price": "400",
+      "category": "Kebaplar & Izgaralar"
+    },
+    {
+      "name": "Izgara Köfte",
+      "price": "400",
+      "category": "Kebaplar & Izgaralar"
+    },
+    {
+      "name": "Çöp Şiş Dürüm",
+      "price": "450",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Kuzu Şiş Dürüm",
+      "price": "470",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Ciğer Şiş Dürüm",
+      "price": "450",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Adana Dürüm",
+      "price": "240",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Urfa Dürüm",
+      "price": "240",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Tavuk Şiş Dürüm",
+      "price": "240",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Çoban Salata",
+      "price": "110",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Künefe",
+      "price": "190",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Sütlaç",
+      "price": "140",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Pepsi (33 cl.)",
+      "price": "70",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Sarıyer Gazoz (300 ml.)",
+      "price": "70",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Şalgam Suyu (30 cl.)",
+      "price": "60",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Ayran (30 cl.)",
+      "price": "60",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Soda (20 cl.)",
+      "price": "40",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Su (30 cl.)",
+      "price": "20",
+      "category": "İçecekler"
+    }
+  ]
+},
+
 };

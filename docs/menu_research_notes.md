@@ -1224,3 +1224,6 @@ Hentzer kaydı `Cumhuriyet, 34520 Beylikdüzü/İstanbul` ve telefon içermiyor.
 
 ## HAS BOŞNAK KÖFTECİSİ ID 7096 HOLD
 Hentzer kaydı `Kartaltepe Mahallesi Fatih Caddesi No:191 giriş, Bayrampaşa/İstanbul`, `+90 538 768 20 06`; ancak resmi Instagram `@hasbosnakkofteci` ve Yandex aynı telefonu `Yıldırım Mah. Avaz Köy Yolu No:33/33A, Bayrampaşa` ile eşliyor. Yemeksepeti `v6vz` güncel fiyatlı menü sunsa da bu vendorun Hentzer’deki Fatih Cd. No:191 şubesi olduğu branch-level olarak kanıtlanamadı. Exact adres çakışması nedeniyle ürün/fiyat eklenmedi. Strict HOLD.
+
+## Altın Şiş Kebap Beylikdüzü ID 7095 acceptance
+Hentzer exact kayıt `Kavaklı, İstanbul Cd., Beylikdüzü/İstanbul`, `+90 212 877 00 13`; resmi Instagram `@altinsiskebap_kavakli` ve `@altinsiskebap_beylikduzu` aynı Beylikdüzü kimliği/telefonu doğruluyor. Yemeksepeti canlı vendor `au2s` menüsünden çorba, fırın ürünleri, kebap/ızgara, dürüm, salata, tatlı ve içecek kategorilerinde **43 ürün ve güncel fiyat** aktarıldı. Poşet satırı dışlandı. `verifiedAt` canlı doğrulama tarihi `2026-08-25`.
