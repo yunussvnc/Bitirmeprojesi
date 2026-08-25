@@ -1650,3 +1650,6 @@ Hentzer kaydı `Kocatepe, Lamartin Cd. No:30, 34437 Beyoğlu/İstanbul` ve telef
 
 ## BURSA GARAJ KEBAP ID 6949 kabulü
 Hentzer kaydı `Levent, Hanımeli Sk. No:2, 34330 Beşiktaş/İstanbul`, `+90 212 281 48 48`; resmi Bursa Garaj iletişim sayfası aynı adresi ve resmi Instagram/iletişim kaynakları aynı telefonu doğruluyor. Resmi DSLink canlı menü `https://bursagarajkebap.dslink.co/kebaplar` üzerinde son fiyat değişim tarihi `21.07.2026` olarak görünüyor; 28 gerçek kebap/döner ürününün fiyatları doğrudan bu exact şubenin menüsünden aktarıldı. Kampanya, carousel veya çevre bedeli eklenmedi. **Override kabul edildi.**
+
+## BEYLİKDÜZÜ BİRİNCİ PROFİTEROL ID 6948 — STRICT HOLD
+Hentzer kaydı `Cumhuriyet Mah., Cumhuriyet Caddesi Beyaz Park Evleri No:6, 34520 Beylikdüzü/İstanbul`, `+90 534 744 34 58`; Restoranim.net aynı işletme adı, exact adres ve telefonu doğruluyor ve 2025-2026 tarihli kullanıcı yorumları mevcut. RestaurantGuru menü sayfası menü/fiyat bilgisi bulunduğunu belirtse de erişimde insan doğrulama duvarına takıldı; okunabilir güncel ürün/fiyat listesi elde edilemedi. Son bir yıl içinde exact şubeye ait doğrulanabilir fiyatlı menü bulunamadığından **strict HOLD**; override eklenmedi.
