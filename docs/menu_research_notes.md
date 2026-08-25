@@ -1323,3 +1323,6 @@ Exact kayıt `Çubuklu, Vatan Cd. No:2B, 34820 Beykoz/İstanbul`, `+90 216 322 7
 
 ## Galata Kahvesi ID 7061 strict HOLD
 Exact kayıt `Şahkulu, Yörük Çk. No:1, 34421 Beyoğlu/İstanbul`, `+90 537 222 99 10`; Wanderlog, Restoranım ve diğer işletme kaynakları adres/telefonu doğruluyor. Wheree exact işletmenin menü fotoğrafları ve yemek açıklamalarını sunuyor ancak hiçbir TL/TRY fiyatı yayımlamıyor ve fiyatların değişebileceğini belirtiyor. RestaurantGuru insan doğrulamasına takıldı; exact şubeye ait son bir yıl fiyatlı complete item-level public menü doğrulanamadı. Ürün/fiyat uydurulmadı; strict HOLD.
+
+## Kanlıca Sahil Balıkçısı | KANLICA BALIKÇISI ID 7060 strict HOLD
+Exact kayıt `Kanlıca, Halide Edip Adıvar Cd. No:58/1, 34810 Beykoz/İstanbul`, `+90 216 342 34 75`; resmî iletişim sayfası, Restoranım, Kaçıyor ve sosyal içerikler adres/telefonu doğruluyor. Resmî `menu.php` sayfası ve iki sayfalı PDF menü incelendi. PDF’de yaklaşık 80 fiyat alanının tamamında yalnızca `₺` sembolü bulunuyor; sayısal item fiyatları yok. Bu nedenle son bir yıl içinde complete, sayısal fiyatlı public menü doğrulanamadı. Ürün/fiyat uydurulmadı; strict HOLD.
