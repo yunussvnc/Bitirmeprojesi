@@ -4,6 +4,29 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6926": {
+    "name": "LEYYA GELATO BEYLİKDÜZÜ KAMEROĞLU",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/tcsi/leyya-gelato-tcsi",
+    "sourceName": "Yemeksepeti tcsi canlı vendor; Restoranim ve Yandex exact `Cumhuriyet, Derviş Eroğlu Cd. L Blok No:6 T, 34520 Beylikdüzü/İstanbul` / `+90 212 706 80 44` şube eşleşmesini doğruluyor",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Bubble Waffle", "price": "430 TL", "category": "Waffles" },
+      { "name": "Draje & Şekerleme", "price": "360 TL", "category": "Draje & Şekerlemeler" },
+      { "name": "Antep Fıstıklı Macaron", "price": "75 TL", "category": "Macaronlar" },
+      { "name": "Rose Macaron", "price": "75 TL", "category": "Macaronlar" },
+      { "name": "Limonlu Macaron", "price": "75 TL", "category": "Macaronlar" },
+      { "name": "Double Çikolatalı Macaron", "price": "75 TL", "category": "Macaronlar" },
+      { "name": "Çilekli Macaron", "price": "75 TL", "category": "Macaronlar" },
+      { "name": "Krep", "price": "285 TL", "category": "Tatlılar" },
+      { "name": "Mini Pancake", "price": "285 TL", "category": "Tatlılar" },
+      { "name": "Bask Cheesecake", "price": "340 TL", "category": "Tatlılar" },
+      { "name": "Soda (20 cl.)", "price": "100 TL", "category": "İçecekler" },
+      { "name": "Su (30 cl.)", "price": "60 TL", "category": "İçecekler" },
+      { "name": "Çikolata Sos", "price": "75 TL", "category": "Soslar" },
+      { "name": "Gelato Dondurma (500 gr.)", "price": "1.150 TL", "category": "Kiloluk Dondurmalar" },
+      { "name": "Gelato Dondurma (1 kg.)", "price": "2.300 TL", "category": "Kiloluk Dondurmalar" }
+    ]
+  },
   "6927": {
     "name": "NOOKIE NOODLE BEYLİKDÜZÜ",
     "sourceUrl": "https://www.yemeksepeti.com/restaurant/n8fx/nookie-noodle",

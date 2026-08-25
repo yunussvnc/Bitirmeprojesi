@@ -1716,3 +1716,6 @@ Hentzer kaydı `Cumhuriyet Mahallesi, Atatürk Bulvarı, Alya, Cumhuriyet, Dolun
 
 ## NOOKIE NOODLE BEYLİKDÜZÜ ID 6927 kabulü
 Hentzer kaydı `Adnan Kahveci Mah. Osmanlı Caddesi, Beyaz Konak, Taner Sk. D:4 B Blok No:4 Dükkan:21, 34528 Beylikdüzü/İstanbul`, `+90 506 141 50 87`; Yandex Maps aynı Taner Sokak şubesini ve telefonu, Facebook işletme kaydı aynı adresi doğruluyor. Resmi menü ve Yemeksepeti `n8fx` canlı vendorundan Kore Usulü Yemekler, Tavuklu Noodle, Tavuklu Fried Rice, Noodle Menüleri, İçecekler ve Tavuklu Pilavlar kategorilerinde 31 benzersiz güncel ürün/fiyat kalemi aktarıldı. Popüler carousel tekrarları ve poşet kalemi dahil edilmedi. **Override kabul edildi.**
+
+## LEYYA GELATO BEYLİKDÜZÜ KAMEROĞLU ID 6926 kabulü
+Hentzer kaydı `Cumhuriyet, Derviş Eroğlu Cd. L Blok No:6 T, 34520 Beylikdüzü/İstanbul`, `+90 212 706 80 44`; Restoranim exact adres/telefonu, Yandex arama kaydı telefonu ve resmi Instagram Kameroğlu şubesinin faal olduğunu doğruluyor. Yemeksepeti `tcsi` canlı vendorundan Waffles, Draje & Şekerlemeler, Macaronlar, Tatlılar, İçecekler, Soslar ve Kiloluk Dondurmalar kategorilerinde 15 benzersiz güncel ürün/fiyat kalemi aktarıldı. Popüler carousel tekrarları ve poşet kalemi dahil edilmedi. **Override kabul edildi.**
