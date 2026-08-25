@@ -6135,2443 +6135,2155 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     ]
   },
   "7289": {
-    "name": "SushiCo Zorlu Center",
-    "sourceUrl": "https://zorlu-center-sushico.arimenu.com/",
-    "sourceName": "SushiCo Zorlu Center QR menüsü (exact Zorlu Center AVM Levazım Mah. Koru Sokak No:2)",
-    "verifiedAt": "2026-08-23",
-    "items": [
-      {
-        "name": "Mochi (Hindistan Cevizi)",
-        "price": "280.00 TL",
-        "desc": "1 Adet",
-        "category": "Yeniler"
-      },
-      {
-        "name": "Crunchy Calı̇fornı̇a Roll (8 Adet)",
-        "price": "860.00 TL",
-        "desc": "Surumi Yengeç, avokado,çıtır soğan, teriyaki sos, acılı mayonez Kcal:421",
-        "category": "Yeniler"
-      },
-      {
-        "name": "Acılı Sebzeli Tavuk",
-        "price": "880.00 TL",
-        "desc": "Tavuk but, kapya biber, sivri biber, mantar. Sade Pilav ile servis edilir. Kcal:1259",
-        "category": "Yeniler"
-      },
-      {
-        "name": "Mochi (Çilek)",
-        "price": "280.00 TL",
-        "desc": "1 Adet",
-        "category": "Yeniler"
-      },
-      {
-        "name": "Golden Ebi Roll (8 Adet)",
-        "price": "920.00 TL",
-        "desc": "Golden Ebi, mango, krem peynir, avokado, tenkasu, yuzu mayonez Kcal:443",
-        "category": "Yeniler"
-      },
-      {
-        "name": "Sarımsak Soslu Green Bean",
-        "price": "480.00 TL",
-        "desc": "Yeşil fasulye, özel sarımsak sos Kcal:316",
-        "category": "Yeniler"
-      },
-      {
-        "name": "Hamachı̇ Tropı̇cal Tartar",
-        "price": "980.00 TL",
-        "desc": "Hamachi Balığı Kcal:401",
-        "category": "Yeniler"
-      },
-      {
-        "name": "Hikari Roll (8 Adet)",
-        "price": "860.00 TL",
-        "desc": "Salatalık, avokado, çıtır patates, hamachi, trüf mantarı, hikari sos Kcal:331",
-        "category": "Yeniler"
-      },
-      {
-        "name": "Yeşil Soğanlı Dana Eti",
-        "price": "1100.00 TL",
-        "desc": "Dana eti , yeşil soğan, Sade Pilav ile servis edilir. Kcal:1427",
-        "category": "Yeniler"
-      },
-      {
-        "name": "Susamlı Tavuklu Zenı̇th Salata",
-        "price": "640.00 TL",
-        "desc": "Susamlı tavuk, yedikule marul, akdeniz yeşilliği, susamlı dressing sos Kcal:1070",
-        "category": "Yeniler"
-      },
-      {
-        "name": "Baby Bento Menü",
-        "price": "714.00 TL",
-        "desc": "Susamlı Tavuk, Parmesanlı Mısır Topları(4 Adet), Soft İçecek Kcal: 1389",
-        "category": "Yeniler"
-      },
-      {
-        "name": "Matcha Crepe Cake",
-        "price": "480.00 TL",
-        "desc": "",
-        "category": "Yeniler"
-      },
-      {
-        "name": "Çıtır Levrekli Zenı̇th Salata",
-        "price": "819.00 TL",
-        "desc": "Levrek, yedikule marul, akdeniz yeşilliği, susamlı dressing sos Kcal:987",
-        "category": "Yeniler"
-      },
-      {
-        "name": "Parmesanlı Mısır Topları",
-        "price": "570.00 TL",
-        "desc": "Mısır, parmesan peyniri, yuzu mayonez, frenk soğan Kcal:816",
-        "category": "Yeniler"
-      },
-      {
-        "name": "Hamachi Carpaccio",
-        "price": "980.00 TL",
-        "desc": "Hamachi Balığı, akdeniz yeşilliği, susam, özel hamchi sosu Kcal:227",
-        "category": "Yeniler"
-      },
-      {
-        "name": "Hamachi Roll (6 Adet)",
-        "price": "580.00 TL",
-        "desc": "Hamachi Balığı Kcal:181",
-        "category": "Yeniler"
-      },
-      {
-        "name": "Mochi (Çikolata)",
-        "price": "280.00 TL",
-        "desc": "1 Adet",
-        "category": "Yeniler"
-      },
-      {
-        "name": "Buharda Somonlu Zenı̇th Salata",
-        "price": "819.00 TL",
-        "desc": "Somon, yedikule marul, akdeniz yeşilliği, susamlı dressing sos Kcal:475",
-        "category": "Yeniler"
-      },
-      {
-        "name": "Terı̇yakı̇ Tavuk Udon Bowl",
-        "price": "890.00 TL",
-        "desc": "Udon noodle, kapya biber, yeşil soğan, brokoli, Tavuk but, noodle sos, teriyaki sos, susam Kcal:1245",
-        "category": "Yeniler"
-      },
-      {
-        "name": "Hamachi Nigiri (2 Adet)",
-        "price": "610.00 TL",
-        "desc": "Hamachi Balığı Kcal:106",
-        "category": "Yeniler"
-      },
-      {
-        "name": "Mango Soslu Denı̇z Mahsullü Salata",
-        "price": "882.00 TL",
-        "desc": "Yedikule marul , akdeniz yeşilliği, Surimi yengeç, karides, edamame, avokado, mango sos Kcal:487",
-        "category": "Yeniler"
-      },
-      {
-        "name": "Hamachi Sashimi (12 Adet)",
-        "price": "1200.00 TL",
-        "desc": "Hamachi Balığı Kcal:176",
-        "category": "Yeniler"
-      },
-      {
-        "name": "Hamachi Carpaccio",
-        "price": "980.00 TL",
-        "desc": "Hamachi Balığı Kcal :227",
-        "category": "Başlangıçlar"
-      },
-      {
-        "name": "Parmesanlı Mısır Topları",
-        "price": "570.00 TL",
-        "desc": "Mısır, parmesan peyniri, yuzu mayonez, frenk soğan Kcal :816",
-        "category": "Başlangıçlar"
-      },
-      {
-        "name": "Hamachı̇ Tropı̇cal Tartar",
-        "price": "980.00 TL",
-        "desc": "Hamachi Balığı , Sushi Pilavı , Mango , Avokado , İkura , Nori Cips , Samurai Sos , Shichimi Kcal:414",
-        "category": "Başlangıçlar"
-      },
-      {
-        "name": "Crispy green bean tempura",
-        "price": "546.00 TL",
-        "desc": "Tempura Yeşil Çin Faulyesi, Yanında Tempura Sos, Yuzu Mayonez Kcal:926",
-        "category": "Başlangıçlar"
-      },
-      {
-        "name": "Mongolian Chicken",
-        "price": "624.00 TL",
-        "desc": "özel sosumuzla marine edilmiş ve kızarmış tavuk but, aromatik körili Japon mayonezi Kcal: 1051",
-        "category": "Başlangıçlar"
-      },
-      {
-        "name": "Kimchi Cucumber Salad",
-        "price": "430.00 TL",
-        "desc": "Salatalık, Yeşil Soğan,İnce Havuç,Kimchi Sos,Susam Kcal:110",
-        "category": "Başlangıçlar"
-      },
-      {
-        "name": "Golden Ebi Bites",
-        "price": "880.00 TL",
-        "desc": "Özel teknikle tempuralanmış 3 adet Jumbo Karides, Frenk Soğanı, Lime dilimi ve yuzu mayonez Kcal:536",
-        "category": "Başlangıçlar"
-      },
-      {
-        "name": "Somon Carpaccio",
-        "price": "980.00 TL",
-        "desc": "Somon, goma wakame Kcal :301",
-        "category": "Başlangıçlar"
-      },
-      {
-        "name": "Chicken Katsu Finger",
-        "price": "680.00 TL",
-        "desc": "Pane tavuk göğüs, japon köri sos ile. Kcal: 1215",
-        "category": "Başlangıçlar"
-      },
-      {
-        "name": "Karides Topları",
-        "price": "714.00 TL",
-        "desc": "Karides, Havuç, Sarımsak, Zencefil, Taze Soğan, Mayonez, Frenk Soğan Kcal:809",
-        "category": "Başlangıçlar"
-      },
-      {
-        "name": "Edamame",
-        "price": "382.00 TL",
-        "desc": "Organik Soya Fasulyesi Kcal :240",
-        "category": "Başlangıçlar"
-      },
-      {
-        "name": "Chili Garlic Edamame",
-        "price": "410.00 TL",
-        "desc": "Organik soya fasülyesi, chilli garlic sos. Kcal:267",
-        "category": "Başlangıçlar"
-      },
-      {
-        "name": "Karides Cipsi",
-        "price": "346.00 TL",
-        "desc": "Kcal :560",
-        "category": "Başlangıçlar"
-      },
-      {
-        "name": "Tavuk Topları",
-        "price": "590.00 TL",
-        "desc": "ane tavuk köfte, sriracha sos ve tatlı ekşi sos ile. (8 adet) Kcal:839",
-        "category": "Başlangıçlar"
-      },
-      {
-        "name": "Karides Tempura",
-        "price": "910.00 TL",
-        "desc": "Tempura karides, tempura sebze, tempura sos ile. Kcal:920",
-        "category": "Başlangıçlar"
-      },
-      {
-        "name": "Fish & Cips",
-        "price": "980.00 TL",
-        "desc": "Pane levrek, patates kızartması, acı mayonez ve trüflü mayonez ile. Kcal:1528",
-        "category": "Başlangıçlar"
-      },
-      {
-        "name": "Shrimp Bomb",
-        "price": "910.00 TL",
-        "desc": "Tempura karides, kore acı mayonez. Kcal:1091",
-        "category": "Başlangıçlar"
-      },
-      {
-        "name": "Çıtır Karides",
-        "price": "910.00 TL",
-        "desc": "Pane karides, sriracha sos ve sweet chili sos ile. Kcal:1172",
-        "category": "Başlangıçlar"
-      },
-      {
-        "name": "Corn Tempura",
-        "price": "616.00 TL",
-        "desc": "Tempura mısır, shicimi baharatı ve trüflü mayonez ile. Kcal:775",
-        "category": "Başlangıçlar"
-      },
-      {
-        "name": "Trüflü Çin Mantısı",
-        "price": "546.00 TL",
-        "desc": "Asya sebzeli dana kıymalı Çin mantısı, frenk soğan, susam, trüf mantarı, trüf ve yuzu aromalı sos ile. Kcal:865",
-        "category": "Dim-Sum"
-      },
-      {
-        "name": "Dana Etli Gyoza",
-        "price": "600.00 TL",
-        "desc": "Asya sebzeli dana kıymalı buharda japon mantısı, gyoza sos ile.(5 adet) Kcal:780",
-        "category": "Dim-Sum"
-      },
-      {
-        "name": "Karides Spring Roll",
-        "price": "496.00 TL",
-        "desc": "Nefis Çin yufkasına sarılı karidesler ve yuzu mayonez Kcal:593",
-        "category": "Dim-Sum"
-      },
-      {
-        "name": "Karidesli Gyoza (5 Adet)",
-        "price": "640.00 TL",
-        "desc": "Asya sebzeli karides kıymalı buharda japon mantısı, gyoza sos ile. Kcal:729",
-        "category": "Dim-Sum"
-      },
-      {
-        "name": "Çıtır Çin Mantısı",
-        "price": "560.00 TL",
-        "desc": "Asya sebzeli dana kıymalı kızarmış çin mantısı, sriracha sos ve tatlı ekşi sos ile( 4adet) Kcal:1038",
-        "category": "Dim-Sum"
-      },
-      {
-        "name": "Çin Böreği",
-        "price": "410.00 TL",
-        "desc": "Asya sebzeli dana kıymalı kızarmış çin böreği. (2 adet) Kcal:838",
-        "category": "Dim-Sum"
-      },
-      {
-        "name": "Buharda Çin Mantısı",
-        "price": "560.00 TL",
-        "desc": "Asya sebzeli dana kıymalı buharda çin mantısı, sarımsak sos ile. (4 adet) Kcal:868",
-        "category": "Dim-Sum"
-      },
-      {
-        "name": "Korean Wonton (4 Adet)",
-        "price": "598.00 TL",
-        "desc": "Asya sebzeli dana kıymalı buharda mantı, yer fıstığı, taze soğan, susam, çin acı yağı, salkım biber ile. Kcal:386",
-        "category": "Dim-Sum"
-      },
-      {
-        "name": "Tavuklu Bao Burger",
-        "price": "688.00 TL",
-        "desc": "Köri ile aromalandırılmış tavuk but, köri mayonezli göbek marul salatası, kırmızı soğan turşusu. Kcal:1606",
-        "category": "BUN"
-      },
-      {
-        "name": "Tavuklu Bun",
-        "price": "730.00 TL",
-        "desc": "(2 Ad) Pane tavuk göğüs (trüf mayonez ve acı mayonez ile), kırmızı lahana, kırmızı soğan, kişniş. Kcal:1192",
-        "category": "BUN"
-      },
-      {
-        "name": "Bao Burger (karidesli)",
-        "price": "794.00 TL",
-        "desc": "(2 Ad) Panko ile kızartılmış karides köfte, kimchi soslu salatalık ve trüf mayonez Kcal:1150",
-        "category": "BUN"
-      },
-      {
-        "name": "Çıtır Dana Bun",
-        "price": "760.00 TL",
-        "desc": "Dana Eti, Trüf Mayonez, salatalık salatası, patates, acı mayonez Kcal:1248",
-        "category": "BUN"
-      },
-      {
-        "name": "Çıtır Levrekli Bun (2 Adet)",
-        "price": "794.00 TL",
-        "desc": "Levrek, Sarımsak ve Coleslaw Kcal:1031",
-        "category": "BUN"
-      },
-      {
-        "name": "Ördek Bun",
-        "price": "870.00 TL",
-        "desc": "(2 Ad) Kızarmış ördek, sivri biber, domates, taze soğan. Kcal:935",
-        "category": "BUN"
-      },
-      {
-        "name": "Acılı Ekşili Çorba",
-        "price": "418.00 TL",
-        "desc": "Tavuk göğüs, havuç, beyaz lahana, soya filizi, sirkesi, yumurta, çin acı sos. Kcal:581",
-        "category": "Çorbalar"
-      },
-      {
-        "name": "Tavuk Mısır Çorba",
-        "price": "418.00 TL",
-        "desc": "Tavuk göğüs, mısır, yumurta. Kcal:581",
-        "category": "Çorbalar"
-      },
-      {
-        "name": "Buharda Mantılı Çorba",
-        "price": "460.00 TL",
-        "desc": "Çin Mantısı (3 Ad), taze soğan, yumurta. Kcal:563",
-        "category": "Çorbalar"
-      },
-      {
-        "name": "Miso Çorba",
-        "price": "460.00 TL",
-        "desc": "Miso sos, tofu, yosun, yeşil soğan. / Alkol içerir. Kcal:511",
-        "category": "Çorbalar"
-      },
-      {
-        "name": "Tom Yum",
-        "price": "498.00 TL",
-        "desc": "Tom Yum, Shitake Mantar, Ceri Domates, Lemon Grass, Kırmızı Soğan, Karides Çim Çim (3 Adet),Kişniş, Zencefil, Sarımsak ve Fish Sos Kcal:619",
-        "category": "Çorbalar"
-      },
-      {
-        "name": "Tom Ga Kai",
-        "price": "880.00 TL",
-        "desc": "Aromatik Thai rameni; tavuk göğüs, Nissin noodle, hindistan cevizi sütü, limon çubuğu, shiitake mantarı, kişniş, taze soğan, acı yağ. Kcal: 1829",
-        "category": "Ramen"
-      },
-      {
-        "name": "Tavuklu Ramen",
-        "price": "880.00 TL",
-        "desc": "Tavuk, nissin noodle, shitake mantarı, taze soğan, baby mısır, kişniş, ıspanak, 1/2 Haşlanmış Yumurta. Kcal: 1213",
-        "category": "Ramen"
-      },
-      {
-        "name": "Dana Etli Ramen",
-        "price": "966.00 TL",
-        "desc": "Dana eti, ıspanak, kişniş, shitake mantar, baby mısır, miso, nissin, sarımsak, zencefil, taze soğan ve yumurta Kcal: 1173",
-        "category": "Ramen"
-      },
-      {
-        "name": "Karidesli Ramen",
-        "price": "980.00 TL",
-        "desc": "Jumbo Karides (4 adet), nissin noodle, shitake Mantarı taze soğan, baby mısır, kişniş, ıspanak, 1/2 Haşlanmış Yumurta. Kcal: 1138",
-        "category": "Ramen"
-      },
-      {
-        "name": "Mango Soslu Denı̇z Mahsullü Salata",
-        "price": "882.00 TL",
-        "desc": "Yedikule marul , akdeniz yeşilliği, Surimi yengeç, karides, edamame, avokado, mango sos Kcal:487",
-        "category": "Salatalar"
-      },
-      {
-        "name": "Susamlı Tavuklu Zenı̇th Salata",
-        "price": "640.00 TL",
-        "desc": "Susamlı tavuk, yedikule marul, akdeniz yeşilliği, susamlı dressing sos Kcal:1070",
-        "category": "Salatalar"
-      },
-      {
-        "name": "Buharda Somonlu Zenı̇th Salata",
-        "price": "819.00 TL",
-        "desc": "Somon, yedikule marul, akdeniz yeşilliği, susamlı dressing sos Kcal:475",
-        "category": "Salatalar"
-      },
-      {
-        "name": "Çıtır Levrekli Zenı̇th Salata",
-        "price": "819.00 TL",
-        "desc": "Levrek, yedikule marul, akdeniz yeşilliği, susamlı dressing sos Kcal:987",
-        "category": "Salatalar"
-      },
-      {
-        "name": "Sushico Yosun Salatası",
-        "price": "714.00 TL",
-        "desc": "Karışık yeşillik, yosun, tobiko, salatalık, susam, ponzu sos. Kcal:160",
-        "category": "Salatalar"
-      },
-      {
-        "name": "Acı Lahana Salatası",
-        "price": "376.00 TL",
-        "desc": "Kırmızı lahana, domates, sirke, çin acı sos, limon. Kcal:96",
-        "category": "Salatalar"
-      },
-      {
-        "name": "Mhu Shu Tavuk",
-        "price": "880.00 TL",
-        "desc": "Tavuk, dolmalık biber, kapya biber, havuç, mantar, salatalık, soya filizi Kcal:738",
-        "category": "Tavuk"
-      },
-      {
-        "name": "Acılı Sebzeli Tavuk",
-        "price": "880.00 TL",
-        "desc": "Tavuk but, kapya biber, sivri biber, mantar. Sade Pilav ile servis edilir. Kcal:1259",
-        "category": "Tavuk"
-      },
-      {
-        "name": "Tatlı Ekşi Soslu Tavuk",
-        "price": "870.00 TL",
-        "desc": "Pane tavuk göğüs, ananas, dolmalık biber, kuru soğan, tatlı ekşi sos. Kcal:1195",
-        "category": "Tavuk"
-      },
-      {
-        "name": "General Tso Tavuk",
-        "price": "880.00 TL",
-        "desc": "Pane tavuk but, tatlı ekşi ve çin acı sos. Kcal:1386",
-        "category": "Tavuk"
-      },
-      {
-        "name": "Zencefil Soslu Çıtır Tavuk",
-        "price": "870.00 TL",
-        "desc": "Pane tavuk göğüs, zencefil, taze soğan, salkım biber, çin acı sos. Kcal:1014",
-        "category": "Tavuk"
-      },
-      {
-        "name": "Kırmızı Köri Soslu Tavuk",
-        "price": "890.00 TL",
-        "desc": "Tavuk but, kırmızı köri, hindistan cevizi sütü, dolmalık biber, kapya biber, taze soğan, shitake mantar, kuru soğan, 150 Gr Sade pilav ile. Kcal:1373",
-        "category": "Tavuk"
-      },
-      {
-        "name": "Mançuryan Usulü Tavuk",
-        "price": "880.00 TL",
-        "desc": "Pane tavuk göğüs, kabak, shitake mantar, sivri biber, soya filizi, yer fıstığı, salkım biber, çin acı sos. Kcal:1081",
-        "category": "Tavuk"
-      },
-      {
-        "name": "Chicken Katsu Bowl",
-        "price": "890.00 TL",
-        "desc": "Tavuk, Pilav, Coleslaw Salad Kcal:1720",
-        "category": "Tavuk"
-      },
-      {
-        "name": "Ballı Kore Tavuk",
-        "price": "880.00 TL",
-        "desc": "Ballı ve yer fıstıklı, Gochujang soslu Kore tavuk but Kcal:1209",
-        "category": "Tavuk"
-      },
-      {
-        "name": "Rabokki",
-        "price": "726.00 TL",
-        "desc": "Rice cake, noodle, Beyaz lahana, havuç, Taze soğan, Kcal:631",
-        "category": "Kore"
-      },
-      {
-        "name": "Tavuklu Rabokki",
-        "price": "770.00 TL",
-        "desc": "Tavuk, pirinç kek, noodle, beyaz lahana, havuç, taze soğan, sarımsak, zencefil, taze soğan ve susam Kcal:763",
-        "category": "Kore"
-      },
-      {
-        "name": "Cheesy Tteokbokki",
-        "price": "660.00 TL",
-        "desc": "Pirinç keki, beyaz lahana, havuç, sarımsak, zencefil, kore acı sos, susam, mozerella Kcal:601",
-        "category": "Kore"
-      },
-      {
-        "name": "Korean Wonton (4 Adet)",
-        "price": "598.00 TL",
-        "desc": "Asya sebzeli dana kıymalı buharda mantı, yer fıstığı, taze soğan, susam, çin acı yağı, salkım biber ile. Kcal:386",
-        "category": "Kore"
-      },
-      {
-        "name": "Kore Usulü Tavuklu Bulgogi Udon",
-        "price": "914.00 TL",
-        "desc": "Tavuk, Shitake Mantarı, Kuru Soğan, Sarımsak, Zencefil ve Yumurta / Üzerine Frenk Soğanı ve Susam Kcal:672",
-        "category": "Kore"
-      },
-      {
-        "name": "Kore Usulü Bulgogi Dana Udon",
-        "price": "980.00 TL",
-        "desc": "Dana Eti, Udon, shitake mantar, kuru soğan, sarımsak, yumurta, renk soğan, beyaz susam Kcal:716",
-        "category": "Kore"
-      },
-      {
-        "name": "Yeşil Soğanlı Dana Eti",
-        "price": "1100.00 TL",
-        "desc": "Dana eti , yeşil soğan, Sade Pilav ile servis edilir. Kcal:1427",
-        "category": "Dana Eti"
-      },
-      {
-        "name": "Çıtır Patlıcanlı Dana Eti",
-        "price": "1200.00 TL",
-        "desc": "Dana eti, pane patlıcan, taze soğan, sirke, salkım biber, chilli garlic sos, Kcal:1623",
-        "category": "Dana Eti"
-      },
-      {
-        "name": "Limon Soslu Çıtır Dana Eti",
-        "price": "1220.00 TL",
-        "desc": "Pane dana eti, limon, susam. Kcal:1977",
-        "category": "Dana Eti"
-      },
-      {
-        "name": "İnce Kıyım Biberli Dana",
-        "price": "1200.00 TL",
-        "desc": "Dana Eti, sivri biber, havuç Kcal:940",
-        "category": "Dana Eti"
-      },
-      {
-        "name": "Yeşil Biberli Dana Eti",
-        "price": "1100.00 TL",
-        "desc": "Dana eti, dolmalık biber, havuç, sarımsak / 150 Gr Sade pilav ile servis edilir Kcal:1253",
-        "category": "Dana Eti"
-      },
-      {
-        "name": "Shitake Mantarlı Dana Eti",
-        "price": "1220.00 TL",
-        "desc": "Dana eti, kabak, shitake mantarı, sivri biber, fıstık, kurutulmuş kırmızı biber, çin acı sos, 150 Gr Sade pilav ile. Kcal:1355",
-        "category": "Dana Eti"
-      },
-      {
-        "name": "Tatlı Ekşi Soslu Karides",
-        "price": "1230.00 TL",
-        "desc": "Jumbo Karides, dolmalık biber, kuru soğan, ananas, tatlı ekşi sos. Kcal:966",
-        "category": "Deniz Mahsülleri"
-      },
-      {
-        "name": "Zencefilli Çıtır Levrek",
-        "price": "1200.00 TL",
-        "desc": "Pane levrek, brokoli, shitake mantarı, taze soğan, salkım biber. Kcal:758",
-        "category": "Deniz Mahsülleri"
-      },
-      {
-        "name": "Kung Pao Karides",
-        "price": "1230.00 TL",
-        "desc": "Jumbo Karides, sivri biber, kapya biber, taze soğan, kırmızı soğan, tuzlu fıstık Kcal:853",
-        "category": "Deniz Mahsülleri"
-      },
-      {
-        "name": "Kızarmış Pekin Ördeği (Çeyrek)",
-        "price": "1360.00 TL",
-        "desc": "Ördek, salatalık, taze soğan, ördek sos, 5 adet pancake ile. Kcal:1488",
-        "category": "Ördek"
-      },
-      {
-        "name": "Ördek Bun",
-        "price": "870.00 TL",
-        "desc": "Kızarmış ördek, sivri biber, domates, taze soğan. Kcal:935",
-        "category": "Ördek"
-      },
-      {
-        "name": "Kızarmış Pekin Ördeği (Yarım)",
-        "price": "2600.00 TL",
-        "desc": "Ördek, salatalık, taze soğan, ördek sos, 10 adet pancake ile. Kcal:2672",
-        "category": "Ördek"
-      },
-      {
-        "name": "Ördek Donburi",
-        "price": "980.00 TL",
-        "desc": "Ördek, sivri biber, yeşil soğan, domates, çin acı sos, schimi baharatı, haşlanmış pilav. Kcal:1333",
-        "category": "Ördek"
-      },
-      {
-        "name": "Sarımsak Soslu Green Bean",
-        "price": "480.00 TL",
-        "desc": "Yeşil fasulye, özel sarımsak sos Kcal:316",
-        "category": "Sebzeler"
-      },
-      {
-        "name": "Karışık Sebze",
-        "price": "480.00 TL",
-        "desc": "Baby mısır, brokoli, havuç, kabak, beyaz lahana, pakçoy, shitake mantar, soya filizi, kapya biber, Green Bean ve Pırasa Kcal:482",
-        "category": "Sebzeler"
-      },
-      {
-        "name": "Acılı Karışık Sebze",
-        "price": "480.00 TL",
-        "desc": "Baby mısır, brokoli, havuç, kabak, beyaz lahana, pakçoy, shitake mantar, soya filizi, kapya biber, çin acı sos, Green Bean ve Pırasa Kcal:494",
-        "category": "Sebzeler"
-      },
-      {
-        "name": "Sarımsak Soslu Brokoli",
-        "price": "480.00 TL",
-        "desc": "Brokoli, havuç, sarımsak. Kcal:306",
-        "category": "Sebzeler"
-      },
-      {
-        "name": "Siyah Sarımsaklı Udon",
-        "price": "860.00 TL",
-        "desc": "Ispanak, kapya biber, siyah sarımsak, baby mısır, shitake mantar Kcal:476",
-        "category": "Noodle"
-      },
-      {
-        "name": "Siyah Sarımsaklı Dana Udon",
-        "price": "980.00 TL",
-        "desc": "Dana Eti, ıspanak, kapya biber, siyah sarımsak, baby mısır, havuç, shitake mantar, Kcal:648",
-        "category": "Noodle"
-      },
-      {
-        "name": "Kore Usulü Tavuklu Bulgogi Udon",
-        "price": "914.00 TL",
-        "desc": "Udon, tavuk, shitake mantar, kuru soğan, yumurta, susam. Kcal:672",
-        "category": "Noodle"
-      },
-      {
-        "name": "Kore Usulü Bulgogi Dana Udon",
-        "price": "980.00 TL",
-        "desc": "Udon, dana eti, shitake mantar, kuru soğan, yumurta, susam. Kcal:716",
-        "category": "Noodle"
-      },
-      {
-        "name": "Mamma Bao Noodle",
-        "price": "966.00 TL",
-        "desc": "Kalın Şerit Makarna, dana eti, ıspanak, kırmızı soğan turşusu, susamlı trüflü acı sos Kcal:655",
-        "category": "Noodle"
-      },
-      {
-        "name": "Sade Noodle",
-        "price": "548.00 TL",
-        "desc": "Erişte, noodle sos. Kcal:624",
-        "category": "Noodle"
-      },
-      {
-        "name": "Sebzeli Noodle",
-        "price": "684.00 TL",
-        "desc": "Erişte, brokoli, havuç, soya filizi, lahana, yeşil soğan, kapya biber, noodle sos. Kcal:497",
-        "category": "Noodle"
-      },
-      {
-        "name": "Tavuklu Noodle",
-        "price": "754.00 TL",
-        "desc": "Erişte, tavuk göğüs, brokoli, havuç, soya filizi, lahana, yeşil soğan, kapya biber, noodle sos. Kcal:629",
-        "category": "Noodle"
-      },
-      {
-        "name": "Dana Etli Noodle",
-        "price": "850.00 TL",
-        "desc": "Erişte, dana eti, brokoli, havuç, soya filizi, lahana, yeşil soğan, kapya biber, noodle sos. Kcal:667",
-        "category": "Noodle"
-      },
-      {
-        "name": "Karidesli Noodle",
-        "price": "914.00 TL",
-        "desc": "Erişte, 7 adet jumbo karides, brokoli, havuç, soya filizi, yeşil soğan,lahana, kapya biber, noodle sos. Kcal:596",
-        "category": "Noodle"
-      },
-      {
-        "name": "Körili Singapur Noodle",
-        "price": "924.00 TL",
-        "desc": "Erişte, tavuk göğüs, 3 adet jumbo karides, brokoli, havuç, salatalık, soya filizi, yeşil soğan, kapya biber, yumurta, körili noodle sos. Kcal:646",
-        "category": "Noodle"
-      },
-      {
-        "name": "Pad Thai Tavuk",
-        "price": "880.00 TL",
-        "desc": "Vermicelli Pirinç eriştesi, tavuk göğüs, soya filizi, taze soğan, fıstık, yumurta, lime ve pul biber ile. Kcal:660",
-        "category": "Noodle"
-      },
-      {
-        "name": "Pad Thai Karides",
-        "price": "980.00 TL",
-        "desc": "Vermicelli Pirinç eriştesi, karides, soya filizi, taze soğan, fıstık, yumurta, lime ve pul biber ile. Kcal:649",
-        "category": "Noodle"
-      },
-      {
-        "name": "Yaki Soba Sebzeli Noodle",
-        "price": "714.00 TL",
-        "desc": "Nissin noodle, pakçoy, havuç, soya filizi, shitake mantarı, kapya biber, dolma biber, kırmızı soğan, karabiber, noodle sos. Kcal:428",
-        "category": "Noodle"
-      },
-      {
-        "name": "Yaki Soba Tavuklu Noodle",
-        "price": "770.00 TL",
-        "desc": "Nissin noodle, tavuk göğüs, pakçoy, havuç, soya filizi, shitake mantarı, kapya biber, dolma biber, kırmızı soğan, karabiber, noodle sos. Kcal:560",
-        "category": "Noodle"
-      },
-      {
-        "name": "Yaki Soba Dana Etli Noodle",
-        "price": "880.00 TL",
-        "desc": "Nissin noodle, dana eti, pakçoy, havuç, soya filizi, shitake mantarı, kapya biber, dolma biber, kırmızı soğan, karabiber, noodle sos. Kcal:601",
-        "category": "Noodle"
-      },
-      {
-        "name": "Yaki Soba Karidesli Noodle",
-        "price": "940.00 TL",
-        "desc": "Nissin noodle, 7 adet jumbo karides, pakçoy, havuç, soya filizi, shitake mantarı, kapya biber, dolma biber, kırmızı soğan, karabiber, noodle sos. Kcal: 487",
-        "category": "Noodle"
-      },
-      {
-        "name": "Sade Pilav",
-        "price": "410.00 TL",
-        "desc": "Buharda pişmiş basmati pilavı. 300 Gr Kcal:390",
-        "category": "Pilav"
-      },
-      {
-        "name": "Sebzeli Pilav",
-        "price": "494.00 TL",
-        "desc": "Buharda pişmiş basmati , bezelye, havuç, mısır, yeşil soğan. beyaz ve kırmızı lahana Kcal:453",
-        "category": "Pilav"
-      },
-      {
-        "name": "Sade Pilav 150 Gr",
-        "price": "240.00 TL",
-        "desc": "Buharda pişmiş basmati pilavı. Kcal:195",
-        "category": "Pilav"
-      },
-      {
-        "name": "Yumurtalı Pilav",
-        "price": "520.00 TL",
-        "desc": "Buharda pişmiş basmati ,yumurta, bezelye, havuç, mısır, yeşil soğan Kcal:483",
-        "category": "Pilav"
-      },
-      {
-        "name": "Tavuklu Pilav",
-        "price": "620.00 TL",
-        "desc": "Buharda pişmiş basmati ,tavuk, yumurta, bezelye, havuç, mısır, yeşil soğan Kcal:549",
-        "category": "Pilav"
-      },
-      {
-        "name": "Dana Etli ve Körili Pilav",
-        "price": "720.00 TL",
-        "desc": "Buharda pişmiş basmati , dana eti, bezelye, yumurta, mantar, havuç, mısır, yeşil soğan, köri, Yumurta. Kcal:569",
-        "category": "Pilav"
-      },
-      {
-        "name": "Dana Etli Pilav",
-        "price": "720.00 TL",
-        "desc": "Buharda pişmiş basmati , dana eti, bezelye, yumurta, havuç, mısır, yeşil soğan Kcal:588",
-        "category": "Pilav"
-      },
-      {
-        "name": "Thai Usulü Ananaslı Pilav",
-        "price": "700.00 TL",
-        "desc": "Buharda pişmiş basmati, ananas, kaju, bezelye, havuç, mısır, yeşil soğan, beyaz ve kırmızı lahana, köri. Kcal:582",
-        "category": "Pilav"
-      },
-      {
-        "name": "Karidesli Pilav",
-        "price": "838.00 TL",
-        "desc": "Buharda pişmiş basmati , karides, bezelye, yumurta, havuç, mısır, yeşil soğan, Kcal:582",
-        "category": "Pilav"
-      },
-      {
-        "name": "Hamachi Nigiri (2 Adet)",
-        "price": "610.00 TL",
-        "desc": "Hamachi Balığı 2 adet Kcal:106",
-        "category": "Nigiri / Sashimi"
-      },
-      {
-        "name": "Hamachi Sashimi (12 Adet)",
-        "price": "1200.00 TL",
-        "desc": "Hamachi Balığı Kcal:176",
-        "category": "Nigiri / Sashimi"
-      },
-      {
-        "name": "Hot salmon nigiri",
-        "price": "484.00 TL",
-        "desc": "Samurai Sos, Teriyaki Sos, Goma wakame, susam (Pürmüzlenmiş) 2 Adet Kcal:176",
-        "category": "Nigiri / Sashimi"
-      },
-      {
-        "name": "Tamago",
-        "price": "298.00 TL",
-        "desc": "Omlet 2 Adet Kcal:176",
-        "category": "Nigiri / Sashimi"
-      },
-      {
-        "name": "Saba",
-        "price": "386.00 TL",
-        "desc": "Uskumru",
-        "category": "Nigiri / Sashimi"
-      },
-      {
-        "name": "Maguro",
-        "price": "610.00 TL",
-        "desc": "Ton 2 Adet Kcal:106",
-        "category": "Nigiri / Sashimi"
-      },
-      {
-        "name": "Kani",
-        "price": "400.00 TL",
-        "desc": "Surimi 2 Adet Kcal:84",
-        "category": "Nigiri / Sashimi"
-      },
-      {
-        "name": "Toro",
-        "price": "630.00 TL",
-        "desc": "Yağlı Ton 2 Adet Kcal:130",
-        "category": "Nigiri / Sashimi"
-      },
-      {
-        "name": "Suzuki",
-        "price": "398.00 TL",
-        "desc": "Levrek 2 Adet Kcal:92",
-        "category": "Nigiri / Sashimi"
-      },
-      {
-        "name": "Sake",
-        "price": "450.00 TL",
-        "desc": "Somon 2 Adet Kcal:124",
-        "category": "Nigiri / Sashimi"
-      },
-      {
-        "name": "Sake Avokado",
-        "price": "460.00 TL",
-        "desc": "Somon ve Avokado 2 adet Kcal:156",
-        "category": "Nigiri / Sashimi"
-      },
-      {
-        "name": "Ebi",
-        "price": "460.00 TL",
-        "desc": "Karides 2 adet Kcal:90",
-        "category": "Nigiri / Sashimi"
-      },
-      {
-        "name": "Unagi",
-        "price": "788.00 TL",
-        "desc": "Yılan Balığı 2 adet Kcal:148",
-        "category": "Nigiri / Sashimi"
-      },
-      {
-        "name": "Ikura",
-        "price": "788.00 TL",
-        "desc": "Balık Yumurtası 2 adet Kcal:140",
-        "category": "Nigiri / Sashimi"
-      },
-      {
-        "name": "Nigiri Mix 5 Adet",
-        "price": "1040.00 TL",
-        "desc": "",
-        "category": "Nigiri / Sashimi"
-      },
-      {
-        "name": "Sake Sashimi (12 adet)",
-        "price": "1200.00 TL",
-        "desc": "120 gr Somon / Soya Sosu,Wasabi ve Zencefil Turşusu ile servis edilmektedir Kcal:250",
-        "category": "Nigiri / Sashimi"
-      },
-      {
-        "name": "Karışık Sashimi (12 adet)",
-        "price": "1260.00 TL",
-        "desc": "3 Maguro, 3 Somon, 2 Ebi, 2 Levrek, 2 Uskumru / Soya Sosu,Wasabi ve Zencefil Turşusu ile servis edilmektedir",
-        "category": "Nigiri / Sashimi"
-      },
-      {
-        "name": "Maguro Sashimi (12 adet)",
-        "price": "1260.00 TL",
-        "desc": "120 gr Ton / Soya Sosu,Wasabi ve Zencefil Turşusu ile servis edilmektedir Kcal:176",
-        "category": "Nigiri / Sashimi"
-      },
-      {
-        "name": "Sake & Maguro Sashimi (12 adet)",
-        "price": "1260.00 TL",
-        "desc": "6 Maguro, 6 Somon / Soya Sosu, Wasabi ve Zencefil Turşusu ile servis edilmektedir",
-        "category": "Nigiri / Sashimi"
-      },
-      {
-        "name": "Hamachi Roll (6 Adet)",
-        "price": "580.00 TL",
-        "desc": "Hamachi Balığı Kcal:181",
-        "category": "Sushi Rolls"
-      },
-      {
-        "name": "Kappa Roll",
-        "price": "368.00 TL",
-        "desc": "Salatalık (6 adet) Kcal:128",
-        "category": "Sushi Rolls"
-      },
-      {
-        "name": "Maguro Roll",
-        "price": "616.00 TL",
-        "desc": "Ton (6 adet) Kcal:181",
-        "category": "Sushi Rolls"
-      },
-      {
-        "name": "Ebi Roll",
-        "price": "570.00 TL",
-        "desc": "Karides (6 adet) Kcal:151",
-        "category": "Sushi Rolls"
-      },
-      {
-        "name": "Kani Roll",
-        "price": "500.00 TL",
-        "desc": "Surimi (6 Adet) Kcal:140",
-        "category": "Sushi Rolls"
-      },
-      {
-        "name": "Sake Roll",
-        "price": "560.00 TL",
-        "desc": "Somon (6 adet) Kcal:206",
-        "category": "Sushi Rolls"
-      },
-      {
-        "name": "Unagi Roll",
-        "price": "746.00 TL",
-        "desc": "Yılan Balığı (6 adet) Kcal:212",
-        "category": "Sushi Rolls"
-      },
-      {
-        "name": "Avocado Ebi Roll",
-        "price": "578.00 TL",
-        "desc": "Karides ve Avokado (6 adet) Kcal:199",
-        "category": "Sushi Rolls"
-      },
-      {
-        "name": "Avocado Sake Roll",
-        "price": "570.00 TL",
-        "desc": "Somon ve Avokado (6 adet) Kcal:254",
-        "category": "Sushi Rolls"
-      },
-      {
-        "name": "Avocado Roll",
-        "price": "400.00 TL",
-        "desc": "(6 adet) Kcal:219",
-        "category": "Sushi Rolls"
-      },
-      {
-        "name": "Lord Of The Rolls (22 Parça)",
-        "price": "2680.00 TL",
-        "desc": "Trüflü Ebi Tempura Roll, Tokyo Drift Roll, Dragon Roll Kcal: 1598",
-        "category": "Set Menüler"
-      },
-      {
-        "name": "Hot'n Roll Set (20 Adet)",
-        "price": "2530.00 TL",
-        "desc": "Zen Roll 8 parça, Tokyo Drift roll 8 parça, Hot Salmon Nigiri 4 adet Kcal: 1374",
-        "category": "Set Menüler"
-      },
-      {
-        "name": "First Kiss Set (24 Adet)",
-        "price": "2380.00 TL",
-        "desc": "Kibuka Roll 8 parça, Mizu Roll 8 parça, Tsunami Roll 8 parça Kcal: 1483",
-        "category": "Set Menüler"
-      },
-      {
-        "name": "Best Of (22 Parça)",
-        "price": "2250.00 TL",
-        "desc": "California Roll 8, Philly Roll 8, Sake Roll 6 Kcal: 863",
-        "category": "Set Menüler"
-      },
-      {
-        "name": "California Dream",
-        "price": "1660.00 TL",
-        "desc": "16 Parça/ California Roll 4, Spicy California Roll 4, Sesame California Roll 4, Black Sesame California Roll 4 Kcal: 859",
-        "category": "Set Menüler"
-      },
-      {
-        "name": "Salmon Dream",
-        "price": "1550.00 TL",
-        "desc": "(16 parça) Philadelphia Roll 4, Spicy Philadelphia Roll 4, Tobikko Philadelphia Roll 4, Black Sesame Philadelphia Roll 4 Kcal:1044",
-        "category": "Set Menüler"
-      },
-      {
-        "name": "Sushi King",
-        "price": "2000.00 TL",
-        "desc": "15 Parça + Edamame/ Sake Roll 3, Kani Roll 3, California Roll 3, Maguro 1, Suzuki 1, Sake 1, Ebi 1, Saba 1, Kani 1 Kcal:785",
-        "category": "Set Menüler"
-      },
-      {
-        "name": "Salmon Lovers",
-        "price": "2300.00 TL",
-        "desc": "20 Parça/ San Diego Roll 6, Philadelphia Roll 6, Sake Roll 6, Sake Nigiri 2 Kcal: 931",
-        "category": "Set Menüler"
-      },
-      {
-        "name": "Sushi Prince 1",
-        "price": "2980.00 TL",
-        "desc": "25 Parça/ California Roll 3, Spicy California Roll 3, Sake Roll 3, Kappa Roll 3, Crunchy Roll 5, Sake Nigiri 2, Suzuki Nigiri 2, Kani Nigiri 2, Ebi Nigiri 2, SushiCo Yosun Salatası Kcal:1141",
-        "category": "Set Menüler"
-      },
-      {
-        "name": "Veggie Set Menü",
-        "price": "1390.00 TL",
-        "desc": "Veggie Roll 8, Avocado Roll 3, Takuan Roll 3, Tamago Nigiri 2, Goma Wakame (16 adet) Kcal:798",
-        "category": "Set Menüler"
-      },
-      {
-        "name": "Terı̇yakı̇ Tavuk Udon Bowl",
-        "price": "890.00 TL",
-        "desc": "Udon noodle, kapya biber, yeşil soğan, brokoli, Tavuk but, noodle sos, teriyaki sos, susam Kcal:1515",
-        "category": "Poke Bowl"
-      },
-      {
-        "name": "Salmon Poke Bowl",
-        "price": "1260.00 TL",
-        "desc": "Sushi Pilavı, Somon, Avokado, İç Edamame, Wakame, Mayonez(Somon),Schimi baharatı/ Soya Sosu ile servis edilmektedir. Kcal:598",
-        "category": "Poke Bowl"
-      },
-      {
-        "name": "Teriyaki Somon Bowl",
-        "price": "1200.00 TL",
-        "desc": "Teriyaki soslu kızarmış somon, avokado, pilav, nori cips ve acı lahana salatası Kcal:1239",
-        "category": "Poke Bowl"
-      },
-      {
-        "name": "Salmon & Maguro Poke Bowl",
-        "price": "1260.00 TL",
-        "desc": "Sushi Pilavı, Somon, Maguro, Edamame, Yosun Salatası, Avokado, Mayonez, Schimi baharatı / Soya Sosu ile servis edilmektedir. Kcal:573",
-        "category": "Poke Bowl"
-      },
-      {
-        "name": "Ördek Donburi",
-        "price": "980.00 TL",
-        "desc": "Ördek,İnce Kıyım Yeşil Soğan,İnce Kıyım Domates, İnce Kıyım Sivri Biber, Schimi Baharatı ve Kuru Soğan / Sos ile servis edilmemektedir. Kcal:1063",
-        "category": "Poke Bowl"
-      },
-      {
-        "name": "Chicken Katsu Bowl",
-        "price": "890.00 TL",
-        "desc": "Pane tavuk göğüs, pilav, coleslaw salad, japon köri sos ile. Kcal:1450",
-        "category": "Poke Bowl"
-      },
-      {
-        "name": "Dana Etli Bowl",
-        "price": "1080.00 TL",
-        "desc": "sebzeli pilav, dana eti, nori cipsi, biber, kırmızı soğan, soya filizi Kcal:884",
-        "category": "Poke Bowl"
-      },
-      {
-        "name": "SushiCo Special 1",
-        "price": "1240.00 TL",
-        "desc": "California Roll, Sake Roll / Dışı Susam Kaplı, 1 Adet Coca-Cola",
-        "category": "Özel Menü"
-      },
-      {
-        "name": "SushiCo Special 2",
-        "price": "1386.00 TL",
-        "desc": "California Roll, Sake Roll / Dışı Susam Kaplı, 1 Kadeh Şarap",
-        "category": "Özel Menü"
-      },
-      {
-        "name": "Sushi Keyfi 1",
-        "price": "2800.00 TL",
-        "desc": "California Roll, Philadelphia Roll, Dragon Roll, Kani Roll, 2 Adet Coca-Cola",
-        "category": "Özel Menü"
-      },
-      {
-        "name": "Sushi Keyfi 2",
-        "price": "3300.00 TL",
-        "desc": "California Roll, Philadelphia Roll, Dragon Roll, Kani Roll, 2 Kadeh Şarap",
-        "category": "Özel Menü"
-      },
-      {
-        "name": "Sushi Banda",
-        "price": "590.00 TL",
-        "desc": "Tempura Somon Kcal: 239",
-        "category": "Çocuk Menü"
-      },
-      {
-        "name": "Baby Shark Roll (8 Adet)",
-        "price": "714.00 TL",
-        "desc": "Pankolu Levrek, Mayonez, Kıtır patates Kcal:387",
-        "category": "Çocuk Menü"
-      },
-      {
-        "name": "Çocuk Menüsü 1",
-        "price": "1100.00 TL",
-        "desc": "Sushi Banda (6 adet),Çıtır Levrek, Sebzeli Noodle, Mozaik Roll (2 adet)Fuse Tea Veya Cappy",
-        "category": "Çocuk Menü"
-      },
-      {
-        "name": "Baby Bento Menü",
-        "price": "714.00 TL",
-        "desc": "Susamlı Tavuk, Parmesanlı Mısır Topları(4 Adet), Soft İçecek Kcal:1389",
-        "category": "Çocuk Menü"
-      },
-      {
-        "name": "Çocuk Menüsü 2",
-        "price": "1100.00 TL",
-        "desc": "Sebzeli Erişte, Çıtır Mantı 2 Adet, Tavuk Topları, Ballı Kızarmış Muz,Fustea veya Cappy Kcal: 1944",
-        "category": "Çocuk Menü"
-      },
-      {
-        "name": "Bento Menü 1",
-        "price": "1500.00 TL",
-        "desc": "Edamame, Trüflü Ebi Tempura Roll (8 adet), Philly Roll (8 adet), Hot Salmon Nigiri (2 adet), Coca-Cola Kcal:1306",
-        "category": "Bento Menü"
-      },
-      {
-        "name": "Trio Bento",
-        "price": "1240.00 TL",
-        "desc": "Edamame, Dana Etli Gyoza (3 adet), Seçeceğiniz 1 Special Roll, Coca-Cola / Unagi içeren ürünler için +10 TL eklenir",
-        "category": "Bento Menü"
-      },
-      {
-        "name": "Trio Bento 2",
-        "price": "1100.00 TL",
-        "desc": "1 adet çin böreği, sebzeli noodle, mançuryan tavuk Kcal: 1209",
-        "category": "Bento Menü"
-      },
-      {
-        "name": "Trio Bento 3",
-        "price": "1150.00 TL",
-        "desc": "Çıtır Çin Mantısı (2 adet) / Karışık Sebzeli Dana Eti, Körili Sebzeli Pilav / Coca-Cola",
-        "category": "Bento Menü"
-      },
-      {
-        "name": "Trio Bento 5",
-        "price": "1250.00 TL",
-        "desc": "Sebzeli Egg Noodle 1/2 pors, Acı Lahana Salatası 1/2 pors, seçeceğiniz bir Cooked Roll ile",
-        "category": "Bento Menü"
-      },
-      {
-        "name": "Trio Bento 6",
-        "price": "990.00 TL",
-        "desc": "Levrek Bun 2 adet, Fresh Kimchi Salad 1 pors Kcal:1141",
-        "category": "Bento Menü"
-      },
-      {
-        "name": "Bento Menü 2",
-        "price": "1260.00 TL",
-        "desc": "Çıtır Çin Mantısı (2 adet), Zencefil Soslu Çıtır Tavuk, Sebzeli Noodle, Acı Lahana Salatası, Coca-Cola *12.00-17.00 arası geçerlidir Kcal:1010",
-        "category": "Bento Menü"
-      },
-      {
-        "name": "Bento Menü 3",
-        "price": "1500.00 TL",
-        "desc": "Edamame, Sesame Maki Roll (6 adet), California Roll (6 adet), Sake Roll (6 adet), Coca-Cola *12.00-22.00 arası geçerlidir Kcal:762",
-        "category": "Bento Menü"
-      },
-      {
-        "name": "Bento Menü 4",
-        "price": "1500.00 TL",
-        "desc": "Tavuk Topları (4 adet), Sebzeli Noodle, Ebi Ten Roll (5 adet), Sake Ten Roll (3 adet), Coca-Cola - (Pişmiş roller bulunur) *12.00-22.00* arası geçerlidir Kcal:1217",
-        "category": "Bento Menü"
-      },
-      {
-        "name": "Bento Menü 5",
-        "price": "1500.00 TL",
-        "desc": "California Roll (6 adet), Philadelphia Roll (6 adet), Kappa Roll (6 adet), SushiCo Yosun Salatası, Coca-Cola Kcal:689",
-        "category": "Bento Menü"
-      },
-      {
-        "name": "Hikari Roll (8 Adet)",
-        "price": "860.00 TL",
-        "desc": "Salatalık, avokado, çıtır patates, hamachi, trüf mantarı, hikari sos Kcal:331",
-        "category": "Special Roll"
-      },
-      {
-        "name": "Crunchy Calı̇fornı̇a Roll (8 Adet)",
-        "price": "860.00 TL",
-        "desc": "Surumi Yengeç, avokado,çıtır soğan, teriyaki sos, acılı mayonez Kcal:421",
-        "category": "Special Roll"
-      },
-      {
-        "name": "Mizu Roll",
-        "price": "856.00 TL",
-        "desc": "Somon, maguro, mango/ salatalık, krem peynir, yuzu mayonez, ikura Kcal:489",
-        "category": "Special Roll"
-      },
-      {
-        "name": "Sesame Maki Roll",
-        "price": "866.00 TL",
-        "desc": "Karides, Avokado, Salatalık, Mayonez, Kıvırcık / Dışı Susam (8 adet) Kcal:277",
-        "category": "Special Roll"
-      },
-      {
-        "name": "Süper Salmon Roll (8 Adet)",
-        "price": "878.00 TL",
-        "desc": "Somon, krem paynir, salatalık / Kızarmış panko, yuzu mayonez Kcal:555",
-        "category": "Special Roll"
-      },
-      {
-        "name": "Osaka Roll (8 adet)",
-        "price": "860.00 TL",
-        "desc": "Avokado, salatalık, krem peynir/ pürmüzlenmiş somon, goma wakame, siyah ve beyaz susam, teriyaki sos. Kcal:419",
-        "category": "Special Roll"
-      },
-      {
-        "name": "Kimchi Tuna Roll (8 adet)",
-        "price": "850.00 TL",
-        "desc": "Salatalık, avokado/ maguro, taze soğan, kimchi sos, frenk soğanı. Kcal:227",
-        "category": "Special Roll"
-      },
-      {
-        "name": "California Roll",
-        "price": "860.00 TL",
-        "desc": "Surimi Yengeç, Avokado, Salatalık, Mayonez, Kıvırcık / Dışı Tobikko (8 adet) Kcal:303",
-        "category": "Special Roll"
-      },
-      {
-        "name": "Spicy California Roll",
-        "price": "860.00 TL",
-        "desc": "Surimi Yengeç, Avokado, Salatalık, Mayonez, Kıvırcık / Dışı Tobikko ve Acı Baharat (8 adet) Kcal:309",
-        "category": "Special Roll"
-      },
-      {
-        "name": "Philadelphia Roll",
-        "price": "860.00 TL",
-        "desc": "Somon, Kıvırcık, Salatalık, Krem Peynir / Dışı Susam (8 adet) Kcal:284",
-        "category": "Special Roll"
-      },
-      {
-        "name": "Spicy Philadelphia Roll",
-        "price": "860.00 TL",
-        "desc": "Somon, Kıvırcık, Salatalık, Krem Peynir / Dışı Acı Baharat (8 adet) Kcal:338",
-        "category": "Special Roll"
-      },
-      {
-        "name": "Ebi California Roll",
-        "price": "866.00 TL",
-        "desc": "Karides, Avokado, Salatalık, Mayonez, Kıvırcık / Dışı Masago (8 adet) Kcal:330",
-        "category": "Special Roll"
-      },
-      {
-        "name": "San Diego Roll",
-        "price": "850.00 TL",
-        "desc": "Somon, Avokado, Salatalık / Dışı Masago (6 adet) Kcal:317",
-        "category": "Special Roll"
-      },
-      {
-        "name": "Mango Roll",
-        "price": "880.00 TL",
-        "desc": "Somon, Avokado, Krem Peynir / Dışı Mango & Masago (8 adet) Kcal:342",
-        "category": "Special Roll"
-      },
-      {
-        "name": "Crunchy Roll",
-        "price": "850.00 TL",
-        "desc": "Yengeç Salatası, Mayonez / Dışı Tobikko (5 adet) Kcal:226",
-        "category": "Special Roll"
-      },
-      {
-        "name": "Rainbow Roll",
-        "price": "866.00 TL",
-        "desc": "Surimi Yengeç, Salatalık / Dışı Somon, Avokado, Ton Balığı, Levrek (6 adet) Kcal:268",
-        "category": "Special Roll"
-      },
-      {
-        "name": "Veggie Roll",
-        "price": "690.00 TL",
-        "desc": "Green Bean tempura, Avokado, Havuç, Salatalık, Kıvırcık / Dışı Susam (8 adet) Kcal:283",
-        "category": "Special Roll"
-      },
-      {
-        "name": "Tiger Roll",
-        "price": "890.00 TL",
-        "desc": "Yılan Balığı, Avokado, Salatalık, Krem Peynir, Acı Sos / Dışı Karides (5 adet) Kcal:321",
-        "category": "Special Roll"
-      },
-      {
-        "name": "Two Way Salmon Roll",
-        "price": "866.00 TL",
-        "desc": "Somon, Salatalık, Krem Peynir / Dışı Pürmüzlenmiş Somon, Ponzu Sos, Teriyaki Sos ve Acı Sos ile (5 adet) Kcal:355",
-        "category": "Special Roll"
-      },
-      {
-        "name": "Exotic Roll 8 adet",
-        "price": "690.00 TL",
-        "desc": "Avokado / Mango Kcal:265",
-        "category": "Special Roll"
-      },
-      {
-        "name": "Riki Roll (8pcs)",
-        "price": "900.00 TL",
-        "desc": "Tempura levrek, avokado,krem peynir/ dışı yuzulu mayonez, pırasa kıtırı Kcal:458",
-        "category": "Cooked Roll"
-      },
-      {
-        "name": "Tsunami Roll",
-        "price": "920.00 TL",
-        "desc": "Tempura somon, salatalık, avokado/ lezzetlendirilmiş panko, samurai sos, mikro yeşillik Kcal:455",
-        "category": "Cooked Roll"
-      },
-      {
-        "name": "Corn Tempura Roll (8 adet)",
-        "price": "920.00 TL",
-        "desc": "Tempura karides, salatalık, avokado /dışı corn tempura, trüflü mayonez ve schimi baharatı Kcal:579",
-        "category": "Cooked Roll"
-      },
-      {
-        "name": "Zen Roll (8 adet)",
-        "price": "920.00 TL",
-        "desc": "Tempura karides, avokado/ dışı trüf mantar dilimleri, trüflü mayonez,schimi baharatı Kcal:382",
-        "category": "Cooked Roll"
-      },
-      {
-        "name": "Yuzu Special Roll",
-        "price": "920.00 TL",
-        "desc": "Kızarmış Levrek, Salatalık, Avokado, / Dışı pürmüzlenmiş Levrek, mikro filizi, tobikko, yuzu sos Kcal:391",
-        "category": "Cooked Roll"
-      },
-      {
-        "name": "Kibuka Roll (8 pcs)",
-        "price": "900.00 TL",
-        "desc": "Tempura karides, avokado, takuan/dışı pürmüzlenmiş somon, acılı mayonez,soğan turşusu, beyaz ve siyah susam Kcal:539",
-        "category": "Cooked Roll"
-      },
-      {
-        "name": "Sake Teriyaki Roll (8 adet)",
-        "price": "900.00 TL",
-        "desc": "Teriyaki sos ile pişirilmiş somon, salatalık, avokado/ tenkasu, yuzu mayonez, teriyaki sos. Kcal:472",
-        "category": "Cooked Roll"
-      },
-      {
-        "name": "Golden Ebi Roll (8 Adet)",
-        "price": "920.00 TL",
-        "desc": "Golden Ebi, mango, krem peynir, avokado, tenkasu, yuzu mayonez (acılı) Kcal:443",
-        "category": "Cooked Roll"
-      },
-      {
-        "name": "Sake Ten Roll",
-        "price": "900.00 TL",
-        "desc": "Kızarmış Somon, Avokado, Salatalık, Mayonez, Kıvırcık / Dışı Masago (6 adet) Kcal:358",
-        "category": "Cooked Roll"
-      },
-      {
-        "name": "Ebi Ten Roll",
-        "price": "900.00 TL",
-        "desc": "Kızarmış Karides, Avokado, Mayonez, Masago / Dışı Susam (5 adet) Kcal:368",
-        "category": "Cooked Roll"
-      },
-      {
-        "name": "Samurai Roll",
-        "price": "860.00 TL",
-        "desc": "Kızarmış Karides, Avokado, Kıvırcık, Japon Turbu / Dışı Susam ve Masago (8 adet)",
-        "category": "Cooked Roll"
-      },
-      {
-        "name": "Philly Roll",
-        "price": "920.00 TL",
-        "desc": "Surimi Yengeç, Avokado, Krem Peynir / Dışı Kızarmış (8 adet) Kcal:354",
-        "category": "Cooked Roll"
-      },
-      {
-        "name": "İstanbul Roll",
-        "price": "920.00 TL",
-        "desc": "Kızarmış Karides, Avokado, Mayonez, Salatalık, Masago / Dışı Kızarmış Somon (5 adet) Kcal:362",
-        "category": "Cooked Roll"
-      },
-      {
-        "name": "Dragon Roll",
-        "price": "960.00 TL",
-        "desc": "Avokado, Salatalık/ Dışı Yılan Balığı (6 adet) Kcal:302",
-        "category": "Cooked Roll"
-      },
-      {
-        "name": "Tokyo Drift Roll",
-        "price": "920.00 TL",
-        "desc": "Kızarmış Somon,Mayonez, Avokado, Salatalık / Masago, Kıtır Patates (8 adet) Kcal:640",
-        "category": "Cooked Roll"
-      },
-      {
-        "name": "Trüflü Ebi Tempura Roll",
-        "price": "920.00 TL",
-        "desc": "Kızarmış Karides, Avokado, Salatalık / Dışı Trüf Yağlı Mayonez, Kıtır Patates, Teriyaki Sos, Beyaz Susam (8 adet) Kcal:656",
-        "category": "Cooked Roll"
-      },
-      {
-        "name": "Fish & Chips Roll",
-        "price": "900.00 TL",
-        "desc": "Kızarmış Levrek, Kıtır Patates, Salatalık, Trüf Yağlı Mayonez / Dışı Avokado, Kıtır Patates, Teriyaki Sos (6 adet) Kcal:564",
-        "category": "Cooked Roll"
-      },
-      {
-        "name": "Super Dragon Roll",
-        "price": "2000.00 TL",
-        "desc": "Avokado, Salatalık/ Dışı Yılan Balığı(125 Gr)/ Teriyaki Sos (8 adet) Kcal:290",
-        "category": "Cooked Roll"
-      },
-      {
-        "name": "Chicken Teriyaki Roll",
-        "price": "860.00 TL",
-        "desc": "Kızarmış Tempura Tavuk, Mayonez, Beyaz Lahana / Dışı Susam, Kıtır Soğan, Teriyaki Sos (8 adet) Kcal:443",
-        "category": "Cooked Roll"
-      },
-      {
-        "name": "Matcha Crepe Cake",
-        "price": "480.00 TL",
-        "desc": "",
-        "category": "Tatlılar"
-      },
-      {
-        "name": "Mochi (Hindistan Cevizi)",
-        "price": "280.00 TL",
-        "desc": "1 Adet",
-        "category": "Tatlılar"
-      },
-      {
-        "name": "Mochi (Çikolata)",
-        "price": "280.00 TL",
-        "desc": "1 Adet",
-        "category": "Tatlılar"
-      },
-      {
-        "name": "Mochi (Çilek)",
-        "price": "280.00 TL",
-        "desc": "1 Adet",
-        "category": "Tatlılar"
-      },
-      {
-        "name": "Kızarmış Dondurma",
-        "price": "520.00 TL",
-        "desc": "Kızarmış ceviz ve bal ile. Kcal:974",
-        "category": "Tatlılar"
-      },
-      {
-        "name": "Kızarmış Dondurma",
-        "price": "520.00 TL",
-        "desc": "Kızarmış ceviz ve bal ile. Çikolata Kcal:974",
-        "category": "Tatlılar"
-      },
-      {
-        "name": "Kızarmış Muz",
-        "price": "510.00 TL",
-        "desc": "Kızarmış ceviz ve bal ile. Kcal:1084",
-        "category": "Tatlılar"
-      },
-      {
-        "name": "Sweet Roll",
-        "price": "520.00 TL",
-        "desc": "Muz, Armut, Yeşil elma, kızarmış ceviz, bal, nutella, çilek",
-        "category": "Tatlılar"
-      },
-      {
-        "name": "Mozaik Roll",
-        "price": "480.00 TL",
-        "desc": "Kcal:389",
-        "category": "Tatlılar"
-      },
-      {
-        "name": "BUN’utella (2 Adet)",
-        "price": "480.00 TL",
-        "desc": "Nutella, muz, çilek, yer fıstığı. Kcal:502",
-        "category": "Tatlılar"
-      },
-      {
-        "name": "Kızarmış Ceviz",
-        "price": "518.00 TL",
-        "desc": "Kcal:671",
-        "category": "Tatlılar"
-      },
-      {
-        "name": "Kyoto Cheesecake",
-        "price": "450.00 TL",
-        "desc": "",
-        "category": "Tatlılar"
-      },
-      {
-        "name": "Apple pie rolls",
-        "price": "480.00 TL",
-        "desc": "kırmızı elma, ceviz, tarçın harcı, bal Kcal:779",
-        "category": "Tatlılar"
-      },
-      {
-        "name": "Limon Sorbe",
-        "price": "360.00 TL",
-        "desc": "Kcal: 162",
-        "category": "Tatlılar"
-      },
-      {
-        "name": "Coca-Cola",
-        "price": "176.00 TL",
-        "desc": "Orijinal Tat / Zero Sugar",
-        "category": "Soğuk İçecekler"
-      },
-      {
-        "name": "Fanta",
-        "price": "176.00 TL",
-        "desc": "",
-        "category": "Soğuk İçecekler"
-      },
-      {
-        "name": "Sprite",
-        "price": "176.00 TL",
-        "desc": "",
-        "category": "Soğuk İçecekler"
-      },
-      {
-        "name": "Cappy",
-        "price": "176.00 TL",
-        "desc": "",
-        "category": "Soğuk İçecekler"
-      },
-      {
-        "name": "Fuse Tea",
-        "price": "176.00 TL",
-        "desc": "Şeftali / Limon",
-        "category": "Soğuk İçecekler"
-      },
-      {
-        "name": "Damla Su",
-        "price": "110.00 TL",
-        "desc": "",
-        "category": "Soğuk İçecekler"
-      },
-      {
-        "name": "Damla Su (750 ml)",
-        "price": "226.00 TL",
-        "desc": "",
-        "category": "Soğuk İçecekler"
-      },
-      {
-        "name": "Damla Minera Maden Suyu",
-        "price": "176.00 TL",
-        "desc": "",
-        "category": "Soğuk İçecekler"
-      },
-      {
-        "name": "Damla Minera Maden Suyu (750 ml)",
-        "price": "242.00 TL",
-        "desc": "",
-        "category": "Soğuk İçecekler"
-      },
-      {
-        "name": "Schweppes",
-        "price": "176.00 TL",
-        "desc": "Mandarin / Bitter Lemon",
-        "category": "Soğuk İçecekler"
-      },
-      {
-        "name": "Limonata",
-        "price": "242.00 TL",
-        "desc": "",
-        "category": "Soğuk İçecekler"
-      },
-      {
-        "name": "Taze Sıkılmış Portakal Suyu",
-        "price": "266.00 TL",
-        "desc": "",
-        "category": "Soğuk İçecekler"
-      },
-      {
-        "name": "Rem",
-        "price": "440.00 TL",
-        "desc": "Havlıcan / Reyhan",
-        "category": "Soğuk İçecekler"
-      },
-      {
-        "name": "Milk Oolong",
-        "price": "210.00 TL",
-        "desc": "",
-        "category": "Sıcak İçecekler"
-      },
-      {
-        "name": "Espresso",
-        "price": "186.00 TL",
-        "desc": "",
-        "category": "Sıcak İçecekler"
-      },
-      {
-        "name": "Americano",
-        "price": "210.00 TL",
-        "desc": "",
-        "category": "Sıcak İçecekler"
-      },
-      {
-        "name": "Türk Kahvesi",
-        "price": "174.00 TL",
-        "desc": "",
-        "category": "Sıcak İçecekler"
-      },
-      {
-        "name": "Sencha",
-        "price": "210.00 TL",
-        "desc": "",
-        "category": "Sıcak İçecekler"
-      },
-      {
-        "name": "Egeo Cabernet Franc–Merlot",
-        "price": "3270.00 TL",
-        "desc": "Kırmızı Şarap",
-        "category": "Kırmızı Şarap"
-      },
-      {
-        "name": "Borgobruno ( Kadeh )",
-        "price": "390.00 TL",
-        "desc": "",
-        "category": "Kırmızı Şarap"
-      },
-      {
-        "name": "Çakır Winery ( Kadeh )",
-        "price": "500.00 TL",
-        "desc": "",
-        "category": "Kırmızı Şarap"
-      },
-      {
-        "name": "Selection Öküzgözü–Boğazkere ( Kadeh )",
-        "price": "650.00 TL",
-        "desc": "Kırmızı Şarap",
-        "category": "Kırmızı Şarap"
-      },
-      {
-        "name": "Borgobruno ( Karaf )",
-        "price": "970.00 TL",
-        "desc": "",
-        "category": "Kırmızı Şarap"
-      },
-      {
-        "name": "Çakır Winery ( Karaf )",
-        "price": "1150.00 TL",
-        "desc": "",
-        "category": "Kırmızı Şarap"
-      },
-      {
-        "name": "Selection Öküzgözü–Boğazkere ( Karaf )",
-        "price": "1520.00 TL",
-        "desc": "Kırmızı Şarap",
-        "category": "Kırmızı Şarap"
-      },
-      {
-        "name": "Porta Caeli Diverti Cabernet Sauvignon ( Şişe )",
-        "price": "2410.00 TL",
-        "desc": "Merlot Kırmızı Şarap",
-        "category": "Kırmızı Şarap"
-      },
-      {
-        "name": "Montes Classic Series Merlot ( Şişe )",
-        "price": "2840.00 TL",
-        "desc": "Kırmızı Şarap",
-        "category": "Kırmızı Şarap"
-      },
-      {
-        "name": "Borgobruno ( Şişe )",
-        "price": "1950.00 TL",
-        "desc": "",
-        "category": "Kırmızı Şarap"
-      },
-      {
-        "name": "Vourla ( Şişe )",
-        "price": "4370.00 TL",
-        "desc": "Kırmızı Şarap",
-        "category": "Kırmızı Şarap"
-      },
-      {
-        "name": "Çakır Winery ( Şişe )",
-        "price": "2300.00 TL",
-        "desc": "",
-        "category": "Kırmızı Şarap"
-      },
-      {
-        "name": "Suvla Kalecik Karası ( Şişe )",
-        "price": "2300.00 TL",
-        "desc": "Kırmızı Şarap",
-        "category": "Kırmızı Şarap"
-      },
-      {
-        "name": "Selection Öküzgözü–Boğazkere ( Şişe )",
-        "price": "3040.00 TL",
-        "desc": "Kırmızı Şarap",
-        "category": "Kırmızı Şarap"
-      },
-      {
-        "name": "Akın Gürbüz ( Şişe )",
-        "price": "3030.00 TL",
-        "desc": "Kırmızı Şarap",
-        "category": "Kırmızı Şarap"
-      },
-      {
-        "name": "Selection Narince Emir ( Kadeh)",
-        "price": "650.00 TL",
-        "desc": "",
-        "category": "Beyaz Şarap"
-      },
-      {
-        "name": "Borgobruno Pinot Grigio ( Kadeh )",
-        "price": "390.00 TL",
-        "desc": "Beyaz Şarap",
-        "category": "Beyaz Şarap"
-      },
-      {
-        "name": "Pamukkale Anfora Sauvignon Blanc ( Kadeh )",
-        "price": "500.00 TL",
-        "desc": "Beyaz Şarap",
-        "category": "Beyaz Şarap"
-      },
-      {
-        "name": "Selection Narince Emir ( Karaf )",
-        "price": "1520.00 TL",
-        "desc": "",
-        "category": "Beyaz Şarap"
-      },
-      {
-        "name": "Borgobruno Pinot Grigio ( Karaf )",
-        "price": "970.00 TL",
-        "desc": "Beyaz Şarap",
-        "category": "Beyaz Şarap"
-      },
-      {
-        "name": "Pamukkale Anfora Sauvignon Blanc ( Karaf )",
-        "price": "1150.00 TL",
-        "desc": "Beyaz Şarap",
-        "category": "Beyaz Şarap"
-      },
-      {
-        "name": "Pamukkale Anfora Sauvignon Blanc ( Şişe )",
-        "price": "2300.00 TL",
-        "desc": "Beyaz Şarap",
-        "category": "Beyaz Şarap"
-      },
-      {
-        "name": "Khilon ( Şişe )",
-        "price": "3790.00 TL",
-        "desc": "Beyaz Şarap",
-        "category": "Beyaz Şarap"
-      },
-      {
-        "name": "Egeo Fumé Blanc ( Şişe )",
-        "price": "3730.00 TL",
-        "desc": "Beyaz Şarap",
-        "category": "Beyaz Şarap"
-      },
-      {
-        "name": "Rindera ( Şişe )",
-        "price": "2070.00 TL",
-        "desc": "Kırmızı Şarap",
-        "category": "Beyaz Şarap"
-      },
-      {
-        "name": "Borgobruno Pinot Grigio ( Şişe )",
-        "price": "1950.00 TL",
-        "desc": "Beyaz Şarap",
-        "category": "Beyaz Şarap"
-      },
-      {
-        "name": "Kuzubağ Narince Chardonnay ( Şişe )",
-        "price": "2300.00 TL",
-        "desc": "Beyaz Şarap",
-        "category": "Beyaz Şarap"
-      },
-      {
-        "name": "Selection Narince Emir ( Şişe )",
-        "price": "3040.00 TL",
-        "desc": "Beyaz Şarap",
-        "category": "Beyaz Şarap"
-      },
-      {
-        "name": "La Gioiosa Prosecco Frizzante ( Kadeh )",
-        "price": "410.00 TL",
-        "desc": "Yarı Köpüklü Beyaz Şarap",
-        "category": "Köpüklü Şarap"
-      },
-      {
-        "name": "La Gioiosa Prosecco Treviso ( Şişe )",
-        "price": "4020.00 TL",
-        "desc": "Beyaz Köpüklü Şarap",
-        "category": "Köpüklü Şarap"
-      },
-      {
-        "name": "La Gioiosa Prosecco Frizzante ( Şişe )",
-        "price": "2070.00 TL",
-        "desc": "Yarı Köpüklü Beyaz Şarap",
-        "category": "Köpüklü Şarap"
-      },
-      {
-        "name": "Peyrassol Roze Şarap ( Kadeh )",
-        "price": "550.00 TL",
-        "desc": "",
-        "category": "Rose Şarap"
-      },
-      {
-        "name": "Peyrassol Roze Şarap ( Karaf )",
-        "price": "1260.00 TL",
-        "desc": "",
-        "category": "Rose Şarap"
-      },
-      {
-        "name": "Peyrassol Roze Şarap ( Şişe )",
-        "price": "2530.00 TL",
-        "desc": "",
-        "category": "Rose Şarap"
-      },
-      {
-        "name": "Belfiore Pinot Grigio Blush Roze Şarap ( Şişe )",
-        "price": "2180.00 TL",
-        "desc": "Veneto Cielo Pinot Grigio",
-        "category": "Rose Şarap"
-      },
-      {
-        "name": "Tuborg Ice 33 cl",
-        "price": "300.00 TL",
-        "desc": "",
-        "category": "Bira"
-      },
-      {
-        "name": "Frederik Neipa 35 cl",
-        "price": "360.00 TL",
-        "desc": "",
-        "category": "Bira"
-      },
-      {
-        "name": "Tuborg Smooth 33 cl",
-        "price": "300.00 TL",
-        "desc": "",
-        "category": "Bira"
-      },
-      {
-        "name": "Tokyo Zen Green Tea Lager",
-        "price": "470.00 TL",
-        "desc": "",
-        "category": "Bira"
-      },
-      {
-        "name": "Frederik Local 35 cl",
-        "price": "360.00 TL",
-        "desc": "",
-        "category": "Bira"
-      },
-      {
-        "name": "Frederik Tropic Ipa 35 cl",
-        "price": "360.00 TL",
-        "desc": "",
-        "category": "Bira"
-      },
-      {
-        "name": "Tuborg Gold 33 cl",
-        "price": "300.00 TL",
-        "desc": "",
-        "category": "Bira"
-      },
-      {
-        "name": "Tuborg Gold 50 cl",
-        "price": "330.00 TL",
-        "desc": "",
-        "category": "Bira"
-      },
-      {
-        "name": "Tuborg Filtresiz",
-        "price": "330.00 TL",
-        "desc": "50 cl",
-        "category": "Bira"
-      },
-      {
-        "name": "Carlsberg 33 cl",
-        "price": "330.00 TL",
-        "desc": "33 cl",
-        "category": "Bira"
-      },
-      {
-        "name": "Carlsberg Luna",
-        "price": "340.00 TL",
-        "desc": "50 cl",
-        "category": "Bira"
-      },
-      {
-        "name": "Frederik India Pale Ale",
-        "price": "360.00 TL",
-        "desc": "35 cl",
-        "category": "Bira"
-      },
-      {
-        "name": "Frederik Yakima IPA",
-        "price": "360.00 TL",
-        "desc": "35 cl",
-        "category": "Bira"
-      },
-      {
-        "name": "Frederik Wheat IPA",
-        "price": "360.00 TL",
-        "desc": "35 cl",
-        "category": "Bira"
-      },
-      {
-        "name": "Frederik Marzen Lager",
-        "price": "360.00 TL",
-        "desc": "35 cl",
-        "category": "Bira"
-      },
-      {
-        "name": "Frederik Brown Ale",
-        "price": "360.00 TL",
-        "desc": "35 cl",
-        "category": "Bira"
-      },
-      {
-        "name": "Sol",
-        "price": "410.00 TL",
-        "desc": "33 cl",
-        "category": "Bira"
-      },
-      {
-        "name": "Desperados",
-        "price": "420.00 TL",
-        "desc": "33 cl",
-        "category": "Bira"
-      },
-      {
-        "name": "Weihenstephan Hefeweisbier",
-        "price": "440.00 TL",
-        "desc": "33 cl",
-        "category": "Bira"
-      },
-      {
-        "name": "Weihenstephan Vitus",
-        "price": "440.00 TL",
-        "desc": "33 cl",
-        "category": "Bira"
-      },
-      {
-        "name": "Kronenbourg Blanc 1664",
-        "price": "370.00 TL",
-        "desc": "33 cl",
-        "category": "Bira"
-      },
-      {
-        "name": "Guinness",
-        "price": "480.00 TL",
-        "desc": "44 cl",
-        "category": "Bira"
-      },
-      {
-        "name": "Grimbergen Blonde",
-        "price": "440.00 TL",
-        "desc": "33 cl",
-        "category": "Bira"
-      },
-      {
-        "name": "Grimbergen Double Ambree",
-        "price": "440.00 TL",
-        "desc": "33 cl",
-        "category": "Bira"
-      },
-      {
-        "name": "Tsingtao",
-        "price": "470.00 TL",
-        "desc": "33 cl",
-        "category": "Bira"
-      },
-      {
-        "name": "Asahi Super Dry 33 cl",
-        "price": "470.00 TL",
-        "desc": "",
-        "category": "Bira"
-      },
-      {
-        "name": "Chivas Rgl Smooth&Smoky",
-        "price": "640.00 TL",
-        "desc": "5cl",
-        "category": "WHİSKEY"
-      },
-      {
-        "name": "The Glengrant Arboralis (5cl)",
-        "price": "610.00 TL",
-        "desc": "",
-        "category": "WHİSKEY"
-      },
-      {
-        "name": "Ballantines Finest (5cl)",
-        "price": "560.00 TL",
-        "desc": "",
-        "category": "WHİSKEY"
-      },
-      {
-        "name": "Hibiki (5cl)",
-        "price": "2370.00 TL",
-        "desc": "",
-        "category": "WHİSKEY"
-      },
-      {
-        "name": "Chivas Rgl 12 YO (5cl)",
-        "price": "640.00 TL",
-        "desc": "",
-        "category": "WHİSKEY"
-      },
-      {
-        "name": "Chivas Rgl 18 YO (5cl)",
-        "price": "1160.00 TL",
-        "desc": "",
-        "category": "WHİSKEY"
-      },
-      {
-        "name": "Jameson (5cl)",
-        "price": "610.00 TL",
-        "desc": "",
-        "category": "WHİSKEY"
-      },
-      {
-        "name": "Chivas Extra 13YO Sheery Cask (5cl)",
-        "price": "680.00 TL",
-        "desc": "",
-        "category": "WHİSKEY"
-      },
-      {
-        "name": "Glenlivet 12 YO (5cl)",
-        "price": "840.00 TL",
-        "desc": "",
-        "category": "WHİSKEY"
-      },
-      {
-        "name": "Ballantines 7 YO Bourbon (5cl)",
-        "price": "630.00 TL",
-        "desc": "",
-        "category": "WHİSKEY"
-      },
-      {
-        "name": "Jameson Black Barrel 6 (5cl)",
-        "price": "680.00 TL",
-        "desc": "",
-        "category": "WHİSKEY"
-      },
-      {
-        "name": "Oje de Tigre Joven",
-        "price": "720.00 TL",
-        "desc": "",
-        "category": "Tekila"
-      },
-      {
-        "name": "Olmeca Altos (5cl)",
-        "price": "510.00 TL",
-        "desc": "",
-        "category": "Tekila"
-      },
-      {
-        "name": "Bumbu XO",
-        "price": "570.00 TL",
-        "desc": "",
-        "category": "Rom"
-      },
-      {
-        "name": "Havana Club (5cl)",
-        "price": "510.00 TL",
-        "desc": "",
-        "category": "Rom"
-      },
-      {
-        "name": "Roku (5cl)",
-        "price": "700.00 TL",
-        "desc": "",
-        "category": "Cin"
-      },
-      {
-        "name": "Beefeater (5cl)",
-        "price": "560.00 TL",
-        "desc": "",
-        "category": "Cin"
-      },
-      {
-        "name": "Beefeater Pink (5cl)",
-        "price": "560.00 TL",
-        "desc": "",
-        "category": "Cin"
-      },
-      {
-        "name": "Malfy Limone (5cl)",
-        "price": "640.00 TL",
-        "desc": "",
-        "category": "Cin"
-      },
-      {
-        "name": "Malfy Rosa (5cl)",
-        "price": "640.00 TL",
-        "desc": "",
-        "category": "Cin"
-      },
-      {
-        "name": "Malfy Orginale (5cl)",
-        "price": "640.00 TL",
-        "desc": "",
-        "category": "Cin"
-      },
-      {
-        "name": "Haku (5cl)",
-        "price": "800.00 TL",
-        "desc": "",
-        "category": "Votka"
-      },
-      {
-        "name": "Absolute Blue (5cl)",
-        "price": "550.00 TL",
-        "desc": "",
-        "category": "Votka"
-      },
-      {
-        "name": "Absolute Mandarin (5cl)",
-        "price": "460.00 TL",
-        "desc": "",
-        "category": "Votka"
-      },
-      {
-        "name": "Absolute Citron (5cl)",
-        "price": "550.00 TL",
-        "desc": "",
-        "category": "Votka"
-      },
-      {
-        "name": "Absolute Elyx V (5cl)",
-        "price": "1100.00 TL",
-        "desc": "",
-        "category": "Votka"
-      },
-      {
-        "name": "Beefeater Gin",
-        "price": "740.00 TL",
-        "desc": "",
-        "category": "Gin Tonic & Spritz"
-      },
-      {
-        "name": "Beefeater Pink",
-        "price": "740.00 TL",
-        "desc": "",
-        "category": "Gin Tonic & Spritz"
-      },
-      {
-        "name": "Roku Gin",
-        "price": "740.00 TL",
-        "desc": "",
-        "category": "Gin Tonic & Spritz"
-      },
-      {
-        "name": "Aperol Spritz",
-        "price": "740.00 TL",
-        "desc": "",
-        "category": "Gin Tonic & Spritz"
-      },
-      {
-        "name": "Malfy Gin con Limone",
-        "price": "740.00 TL",
-        "desc": "",
-        "category": "Gin Tonic & Spritz"
-      },
-      {
-        "name": "Sparkling Sake Spritz",
-        "price": "740.00 TL",
-        "desc": "",
-        "category": "Gin Tonic & Spritz"
-      },
-      {
-        "name": "Garrone Dry (5cl)",
-        "price": "670.00 TL",
-        "desc": "",
-        "category": "Vermut"
-      },
-      {
-        "name": "Garrone Bianco (5cl)",
-        "price": "640.00 TL",
-        "desc": "",
-        "category": "Vermut"
-      },
-      {
-        "name": "Garrone Rosso (5cl)",
-        "price": "640.00 TL",
-        "desc": "",
-        "category": "Vermut"
-      },
-      {
-        "name": "Martell VSOP (5cl)",
-        "price": "640.00 TL",
-        "desc": "",
-        "category": "Konyak"
-      },
-      {
-        "name": "Aperol (5cl)",
-        "price": "510.00 TL",
-        "desc": "",
-        "category": "Likör"
-      },
-      {
-        "name": "Baker's Field İresh Cream (5cl)",
-        "price": "490.00 TL",
-        "desc": "",
-        "category": "Likör"
-      },
-      {
-        "name": "Kahlua (5cl)",
-        "price": "490.00 TL",
-        "desc": "",
-        "category": "Likör"
-      },
-      {
-        "name": "Campari (5cl)",
-        "price": "510.00 TL",
-        "desc": "",
-        "category": "Likör"
-      },
-      {
-        "name": "Jagermaster (5cl)",
-        "price": "540.00 TL",
-        "desc": "",
-        "category": "Likör"
-      },
-      {
-        "name": "Triple Sec (5cl)",
-        "price": "510.00 TL",
-        "desc": "",
-        "category": "Likör"
-      },
-      {
-        "name": "Citrus Lemonade",
-        "price": "220.00 TL",
-        "desc": "",
-        "category": "Moctails"
-      },
-      {
-        "name": "Over The Rainbow",
-        "price": "220.00 TL",
-        "desc": "",
-        "category": "Moctails"
-      },
-      {
-        "name": "Virgin Mojito",
-        "price": "220.00 TL",
-        "desc": "",
-        "category": "Moctails"
-      },
-      {
-        "name": "Green Mill Zero",
-        "price": "220.00 TL",
-        "desc": "",
-        "category": "Moctails"
-      },
-      {
-        "name": "Blue Skies Alkolsüz",
-        "price": "220.00 TL",
-        "desc": "",
-        "category": "Moctails"
-      },
-      {
-        "name": "Sandos Alkolsüz",
-        "price": "220.00 TL",
-        "desc": "",
-        "category": "Moctails"
-      },
-      {
-        "name": "Rooibos & Peach",
-        "price": "220.00 TL",
-        "desc": "Roobios Çayı, Şeftali",
-        "category": "Moctails"
-      },
-      {
-        "name": "Raspberry",
-        "price": "220.00 TL",
-        "desc": "Ahududu, Acai",
-        "category": "Moctails"
-      },
-      {
-        "name": "Japanese Lime",
-        "price": "220.00 TL",
-        "desc": "Misket Limonu, Nane",
-        "category": "Moctails"
-      },
-      {
-        "name": "Margarita",
-        "price": "740.00 TL",
-        "desc": "",
-        "category": "Classic Kokteyller"
-      },
-      {
-        "name": "Espresso Martini",
-        "price": "740.00 TL",
-        "desc": "",
-        "category": "Classic Kokteyller"
-      },
-      {
-        "name": "Mojito",
-        "price": "740.00 TL",
-        "desc": "",
-        "category": "Classic Kokteyller"
-      },
-      {
-        "name": "Bellini",
-        "price": "740.00 TL",
-        "desc": "",
-        "category": "Classic Kokteyller"
-      },
-      {
-        "name": "Whisky Sour",
-        "price": "750.00 TL",
-        "desc": "",
-        "category": "Classic Kokteyller"
-      },
-      {
-        "name": "Negroni",
-        "price": "740.00 TL",
-        "desc": "",
-        "category": "Classic Kokteyller"
-      },
-      {
-        "name": "özeki junmai premium 9 cl.",
-        "price": "550.00 TL",
-        "desc": "",
-        "category": "Sake"
-      },
-      {
-        "name": "hakushika junmai ginjo gold label 18 cl.",
-        "price": "690.00 TL",
-        "desc": "",
-        "category": "Sake"
-      },
-      {
-        "name": "hakushika junmai ginjo gold label 72 cl.",
-        "price": "2775.00 TL",
-        "desc": "",
-        "category": "Sake"
-      },
-      {
-        "name": "hakushika junmai namachozo fresh - light 18 cl.",
-        "price": "590.00 TL",
-        "desc": "",
-        "category": "Sake"
-      },
-      {
-        "name": "hakushika junmai namachozo fresh - light 72 cl.",
-        "price": "2360.00 TL",
-        "desc": "",
-        "category": "Sake"
-      },
-      {
-        "name": "hakushika junmai ginjo gold label 9 cl.",
-        "price": "345.00 TL",
-        "desc": "",
-        "category": "Sake"
-      },
-      {
-        "name": "hakushika sparkling sake 72 cl.",
-        "price": "3720.00 TL",
-        "desc": "",
-        "category": "Sake"
-      },
-      {
-        "name": "hakushika sparkling sake 15 cl.",
-        "price": "775.00 TL",
-        "desc": "",
-        "category": "Sake"
-      },
-      {
-        "name": "özeki junmai premium 75 cl.",
-        "price": "4400.00 TL",
-        "desc": "",
-        "category": "Sake"
-      },
-      {
-        "name": "midorikawa junmai ginjo sake 72 cl.",
-        "price": "4200.00 TL",
-        "desc": "",
-        "category": "Sake"
-      },
-      {
-        "name": "hakushika junmai namachozo fresh - light 9 cl.",
-        "price": "295.00 TL",
-        "desc": "",
-        "category": "Sake"
-      },
-      {
-        "name": "midorikawa junmai ginjo sake 9cl.",
-        "price": "525.00 TL",
-        "desc": "",
-        "category": "Sake"
-      },
-      {
-        "name": "özeki junmai premium 18 cl.",
-        "price": "1100.00 TL",
-        "desc": "",
-        "category": "Sake"
-      },
-      {
-        "name": "midorikawa junmai ginjo sake 18cl.",
-        "price": "1050.00 TL",
-        "desc": "",
-        "category": "Sake"
-      },
-      {
-        "name": "Dynamite",
-        "price": "750.00 TL",
-        "desc": "",
-        "category": "Signature Kokteyller"
-      },
-      {
-        "name": "Shibumi",
-        "price": "750.00 TL",
-        "desc": "",
-        "category": "Signature Kokteyller"
-      },
-      {
-        "name": "Samurai",
-        "price": "750.00 TL",
-        "desc": "",
-        "category": "Signature Kokteyller"
-      },
-      {
-        "name": "Ninja",
-        "price": "750.00 TL",
-        "desc": "",
-        "category": "Signature Kokteyller"
-      },
-      {
-        "name": "Blue Skies",
-        "price": "750.00 TL",
-        "desc": "",
-        "category": "Signature Kokteyller"
-      },
-      {
-        "name": "Satsuma",
-        "price": "750.00 TL",
-        "desc": "",
-        "category": "Signature Kokteyller"
-      },
-      {
-        "name": "Soju Shot",
-        "price": "100.00 TL",
-        "desc": "4 cl",
-        "category": "DAMSO ARİJİNAL SOJU"
-      },
-      {
-        "name": "Soju Lowbal",
-        "price": "410.00 TL",
-        "desc": "10 cl",
-        "category": "DAMSO ARİJİNAL SOJU"
-      },
-      {
-        "name": "Damso ( Orijinal-Peach-Blueberry-Lhychee) Soju",
-        "price": "780.00 TL",
-        "desc": "35 cl",
-        "category": "DAMSO ARİJİNAL SOJU"
-      }
-    ]
-  },
+  "name": "SushiCo Zorlu Center",
+  "sourceUrl": "https://zorlu-center-sushico.arimenu.com/",
+  "sourceName": "SushiCo Zorlu Center official Arimenu QR menüsü (exact Zorlu Center)",
+  "verifiedAt": "2026-08-25",
+  "items": [
+    {
+      "name": "Hamachi Carpaccio",
+      "price": "980.00 TL",
+      "desc": "Hamachi Balığı",
+      "category": "Başlangıçlar"
+    },
+    {
+      "name": "Parmesanlı Mısır Topları",
+      "price": "570.00 TL",
+      "desc": "Mısır, parmesan peyniri, yuzu mayonez, frenk soğan",
+      "category": "Başlangıçlar"
+    },
+    {
+      "name": "Hamachı̇ Tropı̇cal Tartar",
+      "price": "980.00 TL",
+      "desc": "Hamachi Balığı , Sushi Pilavı , Mango , Avokado , İkura , Nori Cips , Samurai Sos , Shichimi",
+      "category": "Başlangıçlar"
+    },
+    {
+      "name": "Mongolian Chicken",
+      "price": "624.00 TL",
+      "desc": "özel sosumuzla marine edilmiş ve kızarmış tavuk but, aromatik körili Japon mayonezi",
+      "category": "Başlangıçlar"
+    },
+    {
+      "name": "Kimchi Cucumber Salad",
+      "price": "430.00 TL",
+      "desc": "Salatalık, Yeşil Soğan,İnce Havuç,Kimchi Sos,Susam",
+      "category": "Başlangıçlar"
+    },
+    {
+      "name": "Golden Ebi Bites",
+      "price": "880.00 TL",
+      "desc": "Özel teknikle tempuralanmış 3 adet Jumbo Karides, Frenk Soğanı, Lime dilimi ve yuzu mayonez",
+      "category": "Başlangıçlar"
+    },
+    {
+      "name": "Somon Carpaccio",
+      "price": "980.00 TL",
+      "desc": "Somon, goma wakame",
+      "category": "Başlangıçlar"
+    },
+    {
+      "name": "Chicken Katsu Finger",
+      "price": "680.00 TL",
+      "desc": "Pane tavuk göğüs, japon köri sos ile.",
+      "category": "Başlangıçlar"
+    },
+    {
+      "name": "Karides Topları",
+      "price": "714.00 TL",
+      "desc": "Karides, Havuç, Sarımsak, Zencefil, Taze Soğan, Mayonez, Frenk Soğan",
+      "category": "Başlangıçlar"
+    },
+    {
+      "name": "Edamame",
+      "price": "382.00 TL",
+      "desc": "Organik Soya Fasulyesi",
+      "category": "Başlangıçlar"
+    },
+    {
+      "name": "Crispy green bean tempura",
+      "price": "546.00 TL",
+      "desc": "Tempura Yeşil Çin Faulyesi, Yanında Tempura Sos, Yuzu Mayonez",
+      "category": "Başlangıçlar"
+    },
+    {
+      "name": "Chili Garlic Edamame",
+      "price": "410.00 TL",
+      "desc": "Organik soya fasülyesi, chilli garlic sos.",
+      "category": "Başlangıçlar"
+    },
+    {
+      "name": "Karides Cipsi",
+      "price": "346.00 TL",
+      "category": "Başlangıçlar"
+    },
+    {
+      "name": "Karides Tempura",
+      "price": "910.00 TL",
+      "desc": "Tempura karides, tempura sebze, tempura sos ile.",
+      "category": "Başlangıçlar"
+    },
+    {
+      "name": "Tavuk Topları",
+      "price": "590.00 TL",
+      "desc": "ane tavuk köfte, sriracha sos ve tatlı ekşi sos ile. (8 adet)",
+      "category": "Başlangıçlar"
+    },
+    {
+      "name": "Fish & Cips",
+      "price": "980.00 TL",
+      "desc": "Pane levrek, patates kızartması, acı mayonez ve trüflü mayonez ile.",
+      "category": "Başlangıçlar"
+    },
+    {
+      "name": "Shrimp Bomb",
+      "price": "910.00 TL",
+      "desc": "Tempura karides, kore acı mayonez.",
+      "category": "Başlangıçlar"
+    },
+    {
+      "name": "Çıtır Karides",
+      "price": "910.00 TL",
+      "desc": "Pane karides, sriracha sos ve sweet chili sos ile.",
+      "category": "Başlangıçlar"
+    },
+    {
+      "name": "Corn Tempura",
+      "price": "616.00 TL",
+      "desc": "Tempura mısır, shicimi baharatı ve trüflü mayonez ile.",
+      "category": "Başlangıçlar"
+    },
+    {
+      "name": "Trüflü Çin Mantısı",
+      "price": "546.00 TL",
+      "desc": "Asya sebzeli dana kıymalı Çin mantısı, frenk soğan, susam, trüf mantarı, trüf ve yuzu aromalı sos ile.",
+      "category": "Dim-Sum"
+    },
+    {
+      "name": "Dana Etli Gyoza",
+      "price": "600.00 TL",
+      "desc": "Asya sebzeli dana kıymalı buharda japon mantısı, gyoza sos ile.(5 adet)",
+      "category": "Dim-Sum"
+    },
+    {
+      "name": "Karides Spring Roll",
+      "price": "496.00 TL",
+      "desc": "Nefis Çin yufkasına sarılı karidesler ve yuzu mayonez",
+      "category": "Dim-Sum"
+    },
+    {
+      "name": "Karidesli Gyoza (5 Adet)",
+      "price": "640.00 TL",
+      "desc": "Asya sebzeli karides kıymalı buharda japon mantısı, gyoza sos ile.",
+      "category": "Dim-Sum"
+    },
+    {
+      "name": "Çıtır Çin Mantısı",
+      "price": "560.00 TL",
+      "desc": "Asya sebzeli dana kıymalı kızarmış çin mantısı, sriracha sos ve tatlı ekşi sos ile( 4adet)",
+      "category": "Dim-Sum"
+    },
+    {
+      "name": "Çin Böreği",
+      "price": "410.00 TL",
+      "desc": "Asya sebzeli dana kıymalı kızarmış çin böreği. (2 adet)",
+      "category": "Dim-Sum"
+    },
+    {
+      "name": "Buharda Çin Mantısı",
+      "price": "560.00 TL",
+      "desc": "Asya sebzeli dana kıymalı buharda çin mantısı, sarımsak sos ile. (4 adet)",
+      "category": "Dim-Sum"
+    },
+    {
+      "name": "Korean Wonton (4 Adet)",
+      "price": "598.00 TL",
+      "desc": "Asya sebzeli dana kıymalı buharda mantı, yer fıstığı, taze soğan, susam, çin acı yağı, salkım biber ile.",
+      "category": "Dim-Sum"
+    },
+    {
+      "name": "Tavuklu Bao Burger",
+      "price": "688.00 TL",
+      "desc": "Köri ile aromalandırılmış tavuk but, köri mayonezli göbek marul salatası, kırmızı soğan turşusu.",
+      "category": "BUN"
+    },
+    {
+      "name": "Tavuklu Bun",
+      "price": "730.00 TL",
+      "desc": "(2 Ad) Pane tavuk göğüs (trüf mayonez ve acı mayonez ile), kırmızı lahana, kırmızı soğan, kişniş.",
+      "category": "BUN"
+    },
+    {
+      "name": "Bao Burger (karidesli)",
+      "price": "794.00 TL",
+      "desc": "(2 Ad) Panko ile kızartılmış karides köfte, kimchi soslu salatalık ve trüf mayonez",
+      "category": "BUN"
+    },
+    {
+      "name": "Çıtır Dana Bun",
+      "price": "760.00 TL",
+      "desc": "Dana Eti, Trüf Mayonez, salatalık salatası, patates, acı mayonez",
+      "category": "BUN"
+    },
+    {
+      "name": "Çıtır Levrekli Bun (2 Adet)",
+      "price": "794.00 TL",
+      "desc": "Levrek, Sarımsak ve Coleslaw",
+      "category": "BUN"
+    },
+    {
+      "name": "Ördek Bun",
+      "price": "870.00 TL",
+      "desc": "(2 Ad) Kızarmış ördek, sivri biber, domates, taze soğan.",
+      "category": "BUN"
+    },
+    {
+      "name": "Acılı Ekşili Çorba",
+      "price": "418.00 TL",
+      "desc": "Tavuk göğüs, havuç, beyaz lahana, soya filizi, sirkesi, yumurta, çin acı sos.",
+      "category": "Çorbalar"
+    },
+    {
+      "name": "Tavuk Mısır Çorba",
+      "price": "418.00 TL",
+      "desc": "Tavuk göğüs, mısır, yumurta.",
+      "category": "Çorbalar"
+    },
+    {
+      "name": "Buharda Mantılı Çorba",
+      "price": "460.00 TL",
+      "desc": "Çin Mantısı (3 Ad), taze soğan, yumurta.",
+      "category": "Çorbalar"
+    },
+    {
+      "name": "Miso Çorba",
+      "price": "460.00 TL",
+      "desc": "Miso sos, tofu, yosun, yeşil soğan. / Alkol içerir.",
+      "category": "Çorbalar"
+    },
+    {
+      "name": "Tom Yum",
+      "price": "498.00 TL",
+      "desc": "Tom Yum, Shitake Mantar, Ceri Domates, Lemon Grass, Kırmızı Soğan, Karides Çim Çim (3 Adet),Kişniş, Zencefil, Sarımsak ve Fish Sos",
+      "category": "Çorbalar"
+    },
+    {
+      "name": "Tom Ga Kai",
+      "price": "880.00 TL",
+      "desc": "Aromatik Thai rameni; tavuk göğüs, Nissin noodle, hindistan cevizi sütü, limon çubuğu, shiitake mantarı, kişniş, taze soğan, acı yağ.",
+      "category": "Ramen"
+    },
+    {
+      "name": "Tavuklu Ramen",
+      "price": "880.00 TL",
+      "desc": "Tavuk, nissin noodle, shitake mantarı, taze soğan, baby mısır, kişniş, ıspanak, 1/2 Haşlanmış Yumurta.",
+      "category": "Ramen"
+    },
+    {
+      "name": "Dana Etli Ramen",
+      "price": "966.00 TL",
+      "desc": "Dana eti, ıspanak, kişniş, shitake mantar, baby mısır, miso, nissin, sarımsak, zencefil, taze soğan ve yumurta",
+      "category": "Ramen"
+    },
+    {
+      "name": "Karidesli Ramen",
+      "price": "980.00 TL",
+      "desc": "Jumbo Karides (4 adet), nissin noodle, shitake Mantarı taze soğan, baby mısır, kişniş, ıspanak, 1/2 Haşlanmış Yumurta.",
+      "category": "Ramen"
+    },
+    {
+      "name": "Susamlı Tavuklu Zenı̇th Salata",
+      "price": "640.00 TL",
+      "desc": "Susamlı tavuk, yedikule marul, akdeniz yeşilliği, susamlı dressing sos",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Buharda Somonlu Zenı̇th Salata",
+      "price": "819.00 TL",
+      "desc": "Somon, yedikule marul, akdeniz yeşilliği, susamlı dressing sos",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Çıtır Levrekli Zenı̇th Salata",
+      "price": "819.00 TL",
+      "desc": "Levrek, yedikule marul, akdeniz yeşilliği, susamlı dressing sos",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Mango Soslu Denı̇z Mahsullü Salata",
+      "price": "882.00 TL",
+      "desc": "Yedikule marul , akdeniz yeşilliği, Surimi yengeç, karides, edamame, avokado, mango sos",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Sushico Yosun Salatası",
+      "price": "714.00 TL",
+      "desc": "Karışık yeşillik, yosun, tobiko, salatalık, susam, ponzu sos.",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Acı Lahana Salatası",
+      "price": "376.00 TL",
+      "desc": "Kırmızı lahana, domates, sirke, çin acı sos, limon.",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Acılı Sebzeli Tavuk",
+      "price": "880.00 TL",
+      "desc": "Tavuk but, kapya biber, sivri biber, mantar. Sade Pilav ile servis edilir.",
+      "category": "Tavuk"
+    },
+    {
+      "name": "Mhu Shu Tavuk",
+      "price": "880.00 TL",
+      "desc": "Tavuk, dolmalık biber, kapya biber, havuç, mantar, salatalık, soya filizi",
+      "category": "Tavuk"
+    },
+    {
+      "name": "Tatlı Ekşi Soslu Tavuk",
+      "price": "870.00 TL",
+      "desc": "Pane tavuk göğüs, ananas, dolmalık biber, kuru soğan, tatlı ekşi sos.",
+      "category": "Tavuk"
+    },
+    {
+      "name": "General Tso Tavuk",
+      "price": "880.00 TL",
+      "desc": "Pane tavuk but, tatlı ekşi ve çin acı sos.",
+      "category": "Tavuk"
+    },
+    {
+      "name": "Zencefil Soslu Çıtır Tavuk",
+      "price": "870.00 TL",
+      "desc": "Pane tavuk göğüs, zencefil, taze soğan, salkım biber, çin acı sos.",
+      "category": "Tavuk"
+    },
+    {
+      "name": "Kırmızı Köri Soslu Tavuk",
+      "price": "890.00 TL",
+      "desc": "Tavuk but, kırmızı köri, hindistan cevizi sütü, dolmalık biber, kapya biber, taze soğan, shitake mantar, kuru soğan, 150 Gr Sade pilav ile.",
+      "category": "Tavuk"
+    },
+    {
+      "name": "Mançuryan Usulü Tavuk",
+      "price": "880.00 TL",
+      "desc": "Pane tavuk göğüs, kabak, shitake mantar, sivri biber, soya filizi, yer fıstığı, salkım biber, çin acı sos.",
+      "category": "Tavuk"
+    },
+    {
+      "name": "Ballı Kore Tavuk",
+      "price": "880.00 TL",
+      "desc": "Ballı ve yer fıstıklı, Gochujang soslu Kore tavuk but",
+      "category": "Tavuk"
+    },
+    {
+      "name": "Rabokki",
+      "price": "726.00 TL",
+      "desc": "Rice cake, noodle, Beyaz lahana, havuç, Taze soğan,",
+      "category": "Kore"
+    },
+    {
+      "name": "Tavuklu Rabokki",
+      "price": "770.00 TL",
+      "desc": "Tavuk, pirinç kek, noodle, beyaz lahana, havuç, taze soğan, sarımsak, zencefil, taze soğan ve susam",
+      "category": "Kore"
+    },
+    {
+      "name": "Cheesy Tteokbokki",
+      "price": "660.00 TL",
+      "desc": "Pirinç keki, beyaz lahana, havuç, sarımsak, zencefil, kore acı sos, susam, mozerella",
+      "category": "Kore"
+    },
+    {
+      "name": "Yeşil Soğanlı Dana Eti",
+      "price": "1100.00 TL",
+      "desc": "Dana eti , yeşil soğan, Sade Pilav ile servis edilir.",
+      "category": "Dana Eti"
+    },
+    {
+      "name": "Çıtır Patlıcanlı Dana Eti",
+      "price": "1200.00 TL",
+      "desc": "Dana eti, pane patlıcan, taze soğan, sirke, salkım biber, chilli garlic sos,",
+      "category": "Dana Eti"
+    },
+    {
+      "name": "Limon Soslu Çıtır Dana Eti",
+      "price": "1220.00 TL",
+      "desc": "Pane dana eti, limon, susam.",
+      "category": "Dana Eti"
+    },
+    {
+      "name": "İnce Kıyım Biberli Dana",
+      "price": "1200.00 TL",
+      "desc": "Dana Eti, sivri biber, havuç",
+      "category": "Dana Eti"
+    },
+    {
+      "name": "Yeşil Biberli Dana Eti",
+      "price": "1100.00 TL",
+      "desc": "Dana eti, dolmalık biber, havuç, sarımsak / 150 Gr Sade pilav ile servis edilir",
+      "category": "Dana Eti"
+    },
+    {
+      "name": "Shitake Mantarlı Dana Eti",
+      "price": "1220.00 TL",
+      "desc": "Dana eti, kabak, shitake mantarı, sivri biber, fıstık, kurutulmuş kırmızı biber, çin acı sos, 150 Gr Sade pilav ile.",
+      "category": "Dana Eti"
+    },
+    {
+      "name": "Tatlı Ekşi Soslu Karides",
+      "price": "1230.00 TL",
+      "desc": "Jumbo Karides, dolmalık biber, kuru soğan, ananas, tatlı ekşi sos.",
+      "category": "Deniz Mahsülleri"
+    },
+    {
+      "name": "Zencefilli Çıtır Levrek",
+      "price": "1200.00 TL",
+      "desc": "Pane levrek, brokoli, shitake mantarı, taze soğan, salkım biber.",
+      "category": "Deniz Mahsülleri"
+    },
+    {
+      "name": "Kung Pao Karides",
+      "price": "1230.00 TL",
+      "desc": "Jumbo Karides, sivri biber, kapya biber, taze soğan, kırmızı soğan, tuzlu fıstık",
+      "category": "Deniz Mahsülleri"
+    },
+    {
+      "name": "Kızarmış Pekin Ördeği (Çeyrek)",
+      "price": "1360.00 TL",
+      "desc": "Ördek, salatalık, taze soğan, ördek sos, 5 adet pancake ile.",
+      "category": "Ördek"
+    },
+    {
+      "name": "Kızarmış Pekin Ördeği (Yarım)",
+      "price": "2600.00 TL",
+      "desc": "Ördek, salatalık, taze soğan, ördek sos, 10 adet pancake ile.",
+      "category": "Ördek"
+    },
+    {
+      "name": "Ördek Donburi",
+      "price": "980.00 TL",
+      "desc": "Ördek, sivri biber, yeşil soğan, domates, çin acı sos, schimi baharatı, haşlanmış pilav.",
+      "category": "Ördek"
+    },
+    {
+      "name": "Sarımsak Soslu Green Bean",
+      "price": "480.00 TL",
+      "desc": "Yeşil fasulye, özel sarımsak sos",
+      "category": "Sebzeler"
+    },
+    {
+      "name": "Karışık Sebze",
+      "price": "480.00 TL",
+      "desc": "Baby mısır, brokoli, havuç, kabak, beyaz lahana, pakçoy, shitake mantar, soya filizi, kapya biber, Green Bean ve Pırasa",
+      "category": "Sebzeler"
+    },
+    {
+      "name": "Acılı Karışık Sebze",
+      "price": "480.00 TL",
+      "desc": "Baby mısır, brokoli, havuç, kabak, beyaz lahana, pakçoy, shitake mantar, soya filizi, kapya biber, çin acı sos, Green Bean ve Pırasa",
+      "category": "Sebzeler"
+    },
+    {
+      "name": "Sarımsak Soslu Brokoli",
+      "price": "480.00 TL",
+      "desc": "Brokoli, havuç, sarımsak.",
+      "category": "Sebzeler"
+    },
+    {
+      "name": "Siyah Sarımsaklı Dana Udon",
+      "price": "980.00 TL",
+      "desc": "Dana Eti, ıspanak, kapya biber, siyah sarımsak, baby mısır, havuç, shitake mantar,",
+      "category": "Noodle"
+    },
+    {
+      "name": "Kore Usulü Tavuklu Bulgogi Udon",
+      "price": "914.00 TL",
+      "desc": "Udon, tavuk, shitake mantar, kuru soğan, yumurta, susam.",
+      "category": "Noodle"
+    },
+    {
+      "name": "Kore Usulü Bulgogi Dana Udon",
+      "price": "980.00 TL",
+      "desc": "Udon, dana eti, shitake mantar, kuru soğan, yumurta, susam.",
+      "category": "Noodle"
+    },
+    {
+      "name": "Mamma Bao Noodle",
+      "price": "966.00 TL",
+      "desc": "Kalın Şerit Makarna, dana eti, ıspanak, kırmızı soğan turşusu, susamlı trüflü acı sos",
+      "category": "Noodle"
+    },
+    {
+      "name": "Siyah Sarımsaklı Udon",
+      "price": "860.00 TL",
+      "desc": "Ispanak, kapya biber, siyah sarımsak, baby mısır, shitake mantar",
+      "category": "Noodle"
+    },
+    {
+      "name": "Sade Noodle",
+      "price": "548.00 TL",
+      "desc": "Erişte, noodle sos.",
+      "category": "Noodle"
+    },
+    {
+      "name": "Sebzeli Noodle",
+      "price": "684.00 TL",
+      "desc": "Erişte, brokoli, havuç, soya filizi, lahana, yeşil soğan, kapya biber, noodle sos.",
+      "category": "Noodle"
+    },
+    {
+      "name": "Tavuklu Noodle",
+      "price": "754.00 TL",
+      "desc": "Erişte, tavuk göğüs, brokoli, havuç, soya filizi, lahana, yeşil soğan, kapya biber, noodle sos.",
+      "category": "Noodle"
+    },
+    {
+      "name": "Dana Etli Noodle",
+      "price": "850.00 TL",
+      "desc": "Erişte, dana eti, brokoli, havuç, soya filizi, lahana, yeşil soğan, kapya biber, noodle sos.",
+      "category": "Noodle"
+    },
+    {
+      "name": "Karidesli Noodle",
+      "price": "914.00 TL",
+      "desc": "Erişte, 7 adet jumbo karides, brokoli, havuç, soya filizi, yeşil soğan,lahana, kapya biber, noodle sos.",
+      "category": "Noodle"
+    },
+    {
+      "name": "Körili Singapur Noodle",
+      "price": "924.00 TL",
+      "desc": "Erişte, tavuk göğüs, 3 adet jumbo karides, brokoli, havuç, salatalık, soya filizi, yeşil soğan, kapya biber, yumurta, körili noodle sos.",
+      "category": "Noodle"
+    },
+    {
+      "name": "Pad Thai Tavuk",
+      "price": "880.00 TL",
+      "desc": "Vermicelli Pirinç eriştesi, tavuk göğüs, soya filizi, taze soğan, fıstık, yumurta, lime ve pul biber ile.",
+      "category": "Noodle"
+    },
+    {
+      "name": "Pad Thai Karides",
+      "price": "980.00 TL",
+      "desc": "Vermicelli Pirinç eriştesi, karides, soya filizi, taze soğan, fıstık, yumurta, lime ve pul biber ile.",
+      "category": "Noodle"
+    },
+    {
+      "name": "Yaki Soba Sebzeli Noodle",
+      "price": "714.00 TL",
+      "desc": "Nissin noodle, pakçoy, havuç, soya filizi, shitake mantarı, kapya biber, dolma biber, kırmızı soğan, karabiber, noodle sos.",
+      "category": "Noodle"
+    },
+    {
+      "name": "Yaki Soba Tavuklu Noodle",
+      "price": "770.00 TL",
+      "desc": "Nissin noodle, tavuk göğüs, pakçoy, havuç, soya filizi, shitake mantarı, kapya biber, dolma biber, kırmızı soğan, karabiber, noodle sos.",
+      "category": "Noodle"
+    },
+    {
+      "name": "Yaki Soba Dana Etli Noodle",
+      "price": "880.00 TL",
+      "desc": "Nissin noodle, dana eti, pakçoy, havuç, soya filizi, shitake mantarı, kapya biber, dolma biber, kırmızı soğan, karabiber, noodle sos.",
+      "category": "Noodle"
+    },
+    {
+      "name": "Yaki Soba Karidesli Noodle",
+      "price": "940.00 TL",
+      "desc": "Nissin noodle, 7 adet jumbo karides, pakçoy, havuç, soya filizi, shitake mantarı, kapya biber, dolma biber, kırmızı soğan, karabiber, noodle sos.",
+      "category": "Noodle"
+    },
+    {
+      "name": "Sade Pilav",
+      "price": "410.00 TL",
+      "desc": "Buharda pişmiş basmati pilavı. 300 Gr",
+      "category": "Pilav"
+    },
+    {
+      "name": "Sebzeli Pilav",
+      "price": "494.00 TL",
+      "desc": "Buharda pişmiş basmati , bezelye, havuç, mısır, yeşil soğan. beyaz ve kırmızı lahana",
+      "category": "Pilav"
+    },
+    {
+      "name": "Sade Pilav 150 Gr",
+      "price": "240.00 TL",
+      "desc": "Buharda pişmiş basmati pilavı.",
+      "category": "Pilav"
+    },
+    {
+      "name": "Yumurtalı Pilav",
+      "price": "520.00 TL",
+      "desc": "Buharda pişmiş basmati ,yumurta, bezelye, havuç, mısır, yeşil soğan",
+      "category": "Pilav"
+    },
+    {
+      "name": "Tavuklu Pilav",
+      "price": "620.00 TL",
+      "desc": "Buharda pişmiş basmati ,tavuk, yumurta, bezelye, havuç, mısır, yeşil soğan",
+      "category": "Pilav"
+    },
+    {
+      "name": "Dana Etli ve Körili Pilav",
+      "price": "720.00 TL",
+      "desc": "Buharda pişmiş basmati , dana eti, bezelye, yumurta, mantar, havuç, mısır, yeşil soğan, köri, Yumurta.",
+      "category": "Pilav"
+    },
+    {
+      "name": "Dana Etli Pilav",
+      "price": "720.00 TL",
+      "desc": "Buharda pişmiş basmati , dana eti, bezelye, yumurta, havuç, mısır, yeşil soğan",
+      "category": "Pilav"
+    },
+    {
+      "name": "Thai Usulü Ananaslı Pilav",
+      "price": "700.00 TL",
+      "desc": "Buharda pişmiş basmati, ananas, kaju, bezelye, havuç, mısır, yeşil soğan, beyaz ve kırmızı lahana, köri.",
+      "category": "Pilav"
+    },
+    {
+      "name": "Karidesli Pilav",
+      "price": "838.00 TL",
+      "desc": "Buharda pişmiş basmati , karides, bezelye, yumurta, havuç, mısır, yeşil soğan,",
+      "category": "Pilav"
+    },
+    {
+      "name": "Hamachi Nigiri (2 Adet)",
+      "price": "610.00 TL",
+      "desc": "Hamachi Balığı 2 adet",
+      "category": "Nigiri / Sashimi"
+    },
+    {
+      "name": "Hamachi Sashimi (12 Adet)",
+      "price": "1200.00 TL",
+      "desc": "Hamachi Balığı",
+      "category": "Nigiri / Sashimi"
+    },
+    {
+      "name": "Hot salmon nigiri",
+      "price": "484.00 TL",
+      "desc": "Samurai Sos, Teriyaki Sos, Goma wakame, susam (Pürmüzlenmiş) 2 Adet",
+      "category": "Nigiri / Sashimi"
+    },
+    {
+      "name": "Tamago",
+      "price": "298.00 TL",
+      "desc": "Omlet 2 Adet",
+      "category": "Nigiri / Sashimi"
+    },
+    {
+      "name": "Saba",
+      "price": "386.00 TL",
+      "desc": "Uskumru",
+      "category": "Nigiri / Sashimi"
+    },
+    {
+      "name": "Maguro",
+      "price": "610.00 TL",
+      "desc": "Ton 2 Adet",
+      "category": "Nigiri / Sashimi"
+    },
+    {
+      "name": "Kani",
+      "price": "400.00 TL",
+      "desc": "Surimi 2 Adet",
+      "category": "Nigiri / Sashimi"
+    },
+    {
+      "name": "Toro",
+      "price": "630.00 TL",
+      "desc": "Yağlı Ton 2 Adet",
+      "category": "Nigiri / Sashimi"
+    },
+    {
+      "name": "Suzuki",
+      "price": "398.00 TL",
+      "desc": "Levrek 2 Adet",
+      "category": "Nigiri / Sashimi"
+    },
+    {
+      "name": "Sake",
+      "price": "450.00 TL",
+      "desc": "Somon 2 Adet",
+      "category": "Nigiri / Sashimi"
+    },
+    {
+      "name": "Sake Avokado",
+      "price": "460.00 TL",
+      "desc": "Somon ve Avokado 2 adet",
+      "category": "Nigiri / Sashimi"
+    },
+    {
+      "name": "Ebi",
+      "price": "460.00 TL",
+      "desc": "Karides 2 adet",
+      "category": "Nigiri / Sashimi"
+    },
+    {
+      "name": "Unagi",
+      "price": "788.00 TL",
+      "desc": "Yılan Balığı 2 adet",
+      "category": "Nigiri / Sashimi"
+    },
+    {
+      "name": "Ikura",
+      "price": "788.00 TL",
+      "desc": "Balık Yumurtası 2 adet",
+      "category": "Nigiri / Sashimi"
+    },
+    {
+      "name": "Nigiri Mix 5 Adet",
+      "price": "1040.00 TL",
+      "category": "Nigiri / Sashimi"
+    },
+    {
+      "name": "Sake Sashimi (12 adet)",
+      "price": "1200.00 TL",
+      "desc": "120 gr Somon / Soya Sosu,Wasabi ve Zencefil Turşusu ile servis edilmektedir",
+      "category": "Nigiri / Sashimi"
+    },
+    {
+      "name": "Karışık Sashimi (12 adet)",
+      "price": "1260.00 TL",
+      "desc": "3 Maguro, 3 Somon, 2 Ebi, 2 Levrek, 2 Uskumru / Soya Sosu,Wasabi ve Zencefil Turşusu ile servis edilmektedir",
+      "category": "Nigiri / Sashimi"
+    },
+    {
+      "name": "Maguro Sashimi (12 adet)",
+      "price": "1260.00 TL",
+      "desc": "120 gr Ton / Soya Sosu,Wasabi ve Zencefil Turşusu ile servis edilmektedir",
+      "category": "Nigiri / Sashimi"
+    },
+    {
+      "name": "Sake & Maguro Sashimi (12 adet)",
+      "price": "1260.00 TL",
+      "desc": "6 Maguro, 6 Somon / Soya Sosu, Wasabi ve Zencefil Turşusu ile servis edilmektedir",
+      "category": "Nigiri / Sashimi"
+    },
+    {
+      "name": "Hamachi Roll (6 Adet)",
+      "price": "580.00 TL",
+      "desc": "Hamachi Balığı",
+      "category": "Sushi Rolls"
+    },
+    {
+      "name": "Kappa Roll",
+      "price": "368.00 TL",
+      "desc": "Salatalık (6 adet)",
+      "category": "Sushi Rolls"
+    },
+    {
+      "name": "Maguro Roll",
+      "price": "616.00 TL",
+      "desc": "Ton (6 adet)",
+      "category": "Sushi Rolls"
+    },
+    {
+      "name": "Ebi Roll",
+      "price": "570.00 TL",
+      "desc": "Karides (6 adet)",
+      "category": "Sushi Rolls"
+    },
+    {
+      "name": "Kani Roll",
+      "price": "500.00 TL",
+      "desc": "Surimi (6 Adet)",
+      "category": "Sushi Rolls"
+    },
+    {
+      "name": "Sake Roll",
+      "price": "560.00 TL",
+      "desc": "Somon (6 adet)",
+      "category": "Sushi Rolls"
+    },
+    {
+      "name": "Unagi Roll",
+      "price": "746.00 TL",
+      "desc": "Yılan Balığı (6 adet)",
+      "category": "Sushi Rolls"
+    },
+    {
+      "name": "Avocado Ebi Roll",
+      "price": "578.00 TL",
+      "desc": "Karides ve Avokado (6 adet)",
+      "category": "Sushi Rolls"
+    },
+    {
+      "name": "Avocado Sake Roll",
+      "price": "570.00 TL",
+      "desc": "Somon ve Avokado (6 adet)",
+      "category": "Sushi Rolls"
+    },
+    {
+      "name": "Avocado Roll",
+      "price": "400.00 TL",
+      "desc": "(6 adet)",
+      "category": "Sushi Rolls"
+    },
+    {
+      "name": "Hot'n Roll Set (20 Adet)",
+      "price": "2530.00 TL",
+      "desc": "Zen Roll 8 parça, Tokyo Drift roll 8 parça, Hot Salmon Nigiri 4 adet",
+      "category": "Set Menüler"
+    },
+    {
+      "name": "First Kiss Set (24 Adet)",
+      "price": "2380.00 TL",
+      "desc": "Kibuka Roll 8 parça, Mizu Roll 8 parça, Tsunami Roll 8 parça",
+      "category": "Set Menüler"
+    },
+    {
+      "name": "Best Of (22 Parça)",
+      "price": "2250.00 TL",
+      "desc": "California Roll 8, Philly Roll 8, Sake Roll 6",
+      "category": "Set Menüler"
+    },
+    {
+      "name": "Lord Of The Rolls (22 Parça)",
+      "price": "2680.00 TL",
+      "desc": "Trüflü Ebi Tempura Roll, Tokyo Drift Roll, Dragon Roll",
+      "category": "Set Menüler"
+    },
+    {
+      "name": "California Dream",
+      "price": "1660.00 TL",
+      "desc": "16 Parça/ California Roll 4, Spicy California Roll 4, Sesame California Roll 4, Black Sesame California Roll 4",
+      "category": "Set Menüler"
+    },
+    {
+      "name": "Salmon Dream",
+      "price": "1550.00 TL",
+      "desc": "(16 parça) Philadelphia Roll 4, Spicy Philadelphia Roll 4, Tobikko Philadelphia Roll 4, Black Sesame Philadelphia Roll 4",
+      "category": "Set Menüler"
+    },
+    {
+      "name": "Sushi King",
+      "price": "2000.00 TL",
+      "desc": "15 Parça + Edamame/ Sake Roll 3, Kani Roll 3, California Roll 3, Maguro 1, Suzuki 1, Sake 1, Ebi 1, Saba 1, Kani 1",
+      "category": "Set Menüler"
+    },
+    {
+      "name": "Salmon Lovers",
+      "price": "2300.00 TL",
+      "desc": "20 Parça/ San Diego Roll 6, Philadelphia Roll 6, Sake Roll 6, Sake Nigiri 2",
+      "category": "Set Menüler"
+    },
+    {
+      "name": "Sushi Prince 1",
+      "price": "2980.00 TL",
+      "desc": "25 Parça/ California Roll 3, Spicy California Roll 3, Sake Roll 3, Kappa Roll 3, Crunchy Roll 5, Sake Nigiri 2, Suzuki Nigiri 2, Kani Nigiri 2, Ebi Nigiri 2, SushiCo Yosun Salatası",
+      "category": "Set Menüler"
+    },
+    {
+      "name": "Veggie Set Menü",
+      "price": "1390.00 TL",
+      "desc": "Veggie Roll 8, Avocado Roll 3, Takuan Roll 3, Tamago Nigiri 2, Goma Wakame (16 adet)",
+      "category": "Set Menüler"
+    },
+    {
+      "name": "Terı̇yakı̇ Tavuk Udon Bowl",
+      "price": "890.00 TL",
+      "desc": "Udon noodle, kapya biber, yeşil soğan, brokoli, Tavuk but, noodle sos, teriyaki sos, susam",
+      "category": "Poke Bowl"
+    },
+    {
+      "name": "Salmon Poke Bowl",
+      "price": "1260.00 TL",
+      "desc": "Sushi Pilavı, Somon, Avokado, İç Edamame, Wakame, Mayonez(Somon),Schimi baharatı/ Soya Sosu ile servis edilmektedir.",
+      "category": "Poke Bowl"
+    },
+    {
+      "name": "Teriyaki Somon Bowl",
+      "price": "1200.00 TL",
+      "desc": "Teriyaki soslu kızarmış somon, avokado, pilav, nori cips ve acı lahana salatası",
+      "category": "Poke Bowl"
+    },
+    {
+      "name": "Salmon & Maguro Poke Bowl",
+      "price": "1260.00 TL",
+      "desc": "Sushi Pilavı, Somon, Maguro, Edamame, Yosun Salatası, Avokado, Mayonez, Schimi baharatı / Soya Sosu ile servis edilmektedir.",
+      "category": "Poke Bowl"
+    },
+    {
+      "name": "Chicken Katsu Bowl",
+      "price": "890.00 TL",
+      "desc": "Pane tavuk göğüs, pilav, coleslaw salad, japon köri sos ile.",
+      "category": "Poke Bowl"
+    },
+    {
+      "name": "Dana Etli Bowl",
+      "price": "1080.00 TL",
+      "desc": "sebzeli pilav, dana eti, nori cipsi, biber, kırmızı soğan, soya filizi",
+      "category": "Poke Bowl"
+    },
+    {
+      "name": "SushiCo Special 1",
+      "price": "1240.00 TL",
+      "desc": "California Roll, Sake Roll / Dışı Susam Kaplı, 1 Adet Coca-Cola",
+      "category": "Özel Menü"
+    },
+    {
+      "name": "SushiCo Special 2",
+      "price": "1386.00 TL",
+      "desc": "California Roll, Sake Roll / Dışı Susam Kaplı, 1 Kadeh Şarap",
+      "category": "Özel Menü"
+    },
+    {
+      "name": "Sushi Keyfi 1",
+      "price": "2800.00 TL",
+      "desc": "California Roll, Philadelphia Roll, Dragon Roll, Kani Roll, 2 Adet Coca-Cola",
+      "category": "Özel Menü"
+    },
+    {
+      "name": "Sushi Keyfi 2",
+      "price": "3300.00 TL",
+      "desc": "California Roll, Philadelphia Roll, Dragon Roll, Kani Roll, 2 Kadeh Şarap",
+      "category": "Özel Menü"
+    },
+    {
+      "name": "Bento Menü 1",
+      "price": "1500.00 TL",
+      "desc": "Edamame, Trüflü Ebi Tempura Roll (8 adet), Philly Roll (8 adet), Hot Salmon Nigiri (2 adet), Coca-Cola",
+      "category": "Bento Menü"
+    },
+    {
+      "name": "Trio Bento",
+      "price": "1240.00 TL",
+      "desc": "Edamame, Dana Etli Gyoza (3 adet), Seçeceğiniz 1 Special Roll, Coca-Cola / Unagi içeren ürünler için +10 TL eklenir",
+      "category": "Bento Menü"
+    },
+    {
+      "name": "Trio Bento 2",
+      "price": "1100.00 TL",
+      "desc": "1 adet çin böreği, sebzeli noodle, mançuryan tavuk",
+      "category": "Bento Menü"
+    },
+    {
+      "name": "Trio Bento 3",
+      "price": "1150.00 TL",
+      "desc": "Çıtır Çin Mantısı (2 adet) / Karışık Sebzeli Dana Eti, Körili Sebzeli Pilav / Coca-Cola",
+      "category": "Bento Menü"
+    },
+    {
+      "name": "Trio Bento 5",
+      "price": "1250.00 TL",
+      "desc": "Sebzeli Egg Noodle 1/2 pors, Acı Lahana Salatası 1/2 pors, seçeceğiniz bir Cooked Roll ile",
+      "category": "Bento Menü"
+    },
+    {
+      "name": "Trio Bento 6",
+      "price": "990.00 TL",
+      "desc": "Levrek Bun 2 adet, Fresh Kimchi Salad 1 pors",
+      "category": "Bento Menü"
+    },
+    {
+      "name": "Bento Menü 2",
+      "price": "1260.00 TL",
+      "desc": "Çıtır Çin Mantısı (2 adet), Zencefil Soslu Çıtır Tavuk, Sebzeli Noodle, Acı Lahana Salatası, Coca-Cola *12.00-17.00 arası geçerlidir",
+      "category": "Bento Menü"
+    },
+    {
+      "name": "Bento Menü 3",
+      "price": "1500.00 TL",
+      "desc": "Edamame, Sesame Maki Roll (6 adet), California Roll (6 adet), Sake Roll (6 adet), Coca-Cola *12.00-22.00 arası geçerlidir",
+      "category": "Bento Menü"
+    },
+    {
+      "name": "Bento Menü 4",
+      "price": "1500.00 TL",
+      "desc": "Tavuk Topları (4 adet), Sebzeli Noodle, Ebi Ten Roll (5 adet), Sake Ten Roll (3 adet), Coca-Cola - (Pişmiş roller bulunur) *12.00-22.00* arası geçerlidir",
+      "category": "Bento Menü"
+    },
+    {
+      "name": "Bento Menü 5",
+      "price": "1500.00 TL",
+      "desc": "California Roll (6 adet), Philadelphia Roll (6 adet), Kappa Roll (6 adet), SushiCo Yosun Salatası, Coca-Cola",
+      "category": "Bento Menü"
+    },
+    {
+      "name": "Çocuk Menüsü 1",
+      "price": "1100.00 TL",
+      "desc": "Sushi Banda (6 adet),Çıtır Levrek, Sebzeli Noodle, Mozaik Roll (2 adet)Fuse Tea Veya Cappy",
+      "category": "Çocuk Menü"
+    },
+    {
+      "name": "Baby Bento Menü",
+      "price": "714.00 TL",
+      "desc": "Susamlı Tavuk, Parmesanlı Mısır Topları(4 Adet), Soft İçecek",
+      "category": "Çocuk Menü"
+    },
+    {
+      "name": "Sushi Banda",
+      "price": "590.00 TL",
+      "desc": "Tempura Somon",
+      "category": "Çocuk Menü"
+    },
+    {
+      "name": "Baby Shark Roll (8 Adet)",
+      "price": "714.00 TL",
+      "desc": "Pankolu Levrek, Mayonez, Kıtır patates",
+      "category": "Çocuk Menü"
+    },
+    {
+      "name": "Çocuk Menüsü 2",
+      "price": "1100.00 TL",
+      "desc": "Sebzeli Erişte, Çıtır Mantı 2 Adet, Tavuk Topları, Ballı Kızarmış Muz,Fustea veya Cappy",
+      "category": "Çocuk Menü"
+    },
+    {
+      "name": "Hikari Roll (8 Adet)",
+      "price": "860.00 TL",
+      "desc": "Salatalık, avokado, çıtır patates, hamachi, trüf mantarı, hikari sos",
+      "category": "Special Roll"
+    },
+    {
+      "name": "Crunchy Calı̇fornı̇a Roll (8 Adet)",
+      "price": "860.00 TL",
+      "desc": "Surumi Yengeç, avokado,çıtır soğan, teriyaki sos, acılı mayonez",
+      "category": "Special Roll"
+    },
+    {
+      "name": "Mizu Roll",
+      "price": "856.00 TL",
+      "desc": "Somon, maguro, mango/ salatalık, krem peynir, yuzu mayonez, ikura",
+      "category": "Special Roll"
+    },
+    {
+      "name": "Sesame Maki Roll",
+      "price": "866.00 TL",
+      "desc": "Karides, Avokado, Salatalık, Mayonez, Kıvırcık / Dışı Susam (8 adet)",
+      "category": "Special Roll"
+    },
+    {
+      "name": "Süper Salmon Roll (8 Adet)",
+      "price": "878.00 TL",
+      "desc": "Somon, krem paynir, salatalık / Kızarmış panko, yuzu mayonez",
+      "category": "Special Roll"
+    },
+    {
+      "name": "Osaka Roll (8 adet)",
+      "price": "860.00 TL",
+      "desc": "Avokado, salatalık, krem peynir/ pürmüzlenmiş somon, goma wakame, siyah ve beyaz susam, teriyaki sos.",
+      "category": "Special Roll"
+    },
+    {
+      "name": "California Roll",
+      "price": "860.00 TL",
+      "desc": "Surimi Yengeç, Avokado, Salatalık, Mayonez, Kıvırcık / Dışı Tobikko (8 adet)",
+      "category": "Special Roll"
+    },
+    {
+      "name": "Kimchi Tuna Roll (8 adet)",
+      "price": "850.00 TL",
+      "desc": "Salatalık, avokado/ maguro, taze soğan, kimchi sos, frenk soğanı.",
+      "category": "Special Roll"
+    },
+    {
+      "name": "Spicy California Roll",
+      "price": "860.00 TL",
+      "desc": "Surimi Yengeç, Avokado, Salatalık, Mayonez, Kıvırcık / Dışı Tobikko ve Acı Baharat (8 adet)",
+      "category": "Special Roll"
+    },
+    {
+      "name": "Philadelphia Roll",
+      "price": "860.00 TL",
+      "desc": "Somon, Kıvırcık, Salatalık, Krem Peynir / Dışı Susam (8 adet)",
+      "category": "Special Roll"
+    },
+    {
+      "name": "Spicy Philadelphia Roll",
+      "price": "860.00 TL",
+      "desc": "Somon, Kıvırcık, Salatalık, Krem Peynir / Dışı Acı Baharat (8 adet)",
+      "category": "Special Roll"
+    },
+    {
+      "name": "Ebi California Roll",
+      "price": "866.00 TL",
+      "desc": "Karides, Avokado, Salatalık, Mayonez, Kıvırcık / Dışı Masago (8 adet)",
+      "category": "Special Roll"
+    },
+    {
+      "name": "San Diego Roll",
+      "price": "850.00 TL",
+      "desc": "Somon, Avokado, Salatalık / Dışı Masago (6 adet)",
+      "category": "Special Roll"
+    },
+    {
+      "name": "Mango Roll",
+      "price": "880.00 TL",
+      "desc": "Somon, Avokado, Krem Peynir / Dışı Mango & Masago (8 adet)",
+      "category": "Special Roll"
+    },
+    {
+      "name": "Crunchy Roll",
+      "price": "850.00 TL",
+      "desc": "Yengeç Salatası, Mayonez / Dışı Tobikko (5 adet)",
+      "category": "Special Roll"
+    },
+    {
+      "name": "Rainbow Roll",
+      "price": "866.00 TL",
+      "desc": "Surimi Yengeç, Salatalık / Dışı Somon, Avokado, Ton Balığı, Levrek (6 adet)",
+      "category": "Special Roll"
+    },
+    {
+      "name": "Veggie Roll",
+      "price": "690.00 TL",
+      "desc": "Green Bean tempura, Avokado, Havuç, Salatalık, Kıvırcık / Dışı Susam (8 adet)",
+      "category": "Special Roll"
+    },
+    {
+      "name": "Tiger Roll",
+      "price": "890.00 TL",
+      "desc": "Yılan Balığı, Avokado, Salatalık, Krem Peynir, Acı Sos / Dışı Karides (5 adet)",
+      "category": "Special Roll"
+    },
+    {
+      "name": "Two Way Salmon Roll",
+      "price": "866.00 TL",
+      "desc": "Somon, Salatalık, Krem Peynir / Dışı Pürmüzlenmiş Somon, Ponzu Sos, Teriyaki Sos ve Acı Sos ile (5 adet)",
+      "category": "Special Roll"
+    },
+    {
+      "name": "Exotic Roll 8 adet",
+      "price": "690.00 TL",
+      "desc": "Avokado / Mango",
+      "category": "Special Roll"
+    },
+    {
+      "name": "Zen Roll (8 adet)",
+      "price": "920.00 TL",
+      "desc": "Tempura karides, avokado/ dışı trüf mantar dilimleri, trüflü mayonez,schimi baharatı",
+      "category": "Cooked Roll"
+    },
+    {
+      "name": "Yuzu Special Roll",
+      "price": "920.00 TL",
+      "desc": "Kızarmış Levrek, Salatalık, Avokado, / Dışı pürmüzlenmiş Levrek, mikro filizi, tobikko, yuzu sos",
+      "category": "Cooked Roll"
+    },
+    {
+      "name": "Kibuka Roll (8 pcs)",
+      "price": "900.00 TL",
+      "desc": "Tempura karides, avokado, takuan/dışı pürmüzlenmiş somon, acılı mayonez,soğan turşusu, beyaz ve siyah susam",
+      "category": "Cooked Roll"
+    },
+    {
+      "name": "Sake Teriyaki Roll (8 adet)",
+      "price": "900.00 TL",
+      "desc": "Teriyaki sos ile pişirilmiş somon, salatalık, avokado/ tenkasu, yuzu mayonez, teriyaki sos.",
+      "category": "Cooked Roll"
+    },
+    {
+      "name": "Golden Ebi Roll (8 Adet)",
+      "price": "920.00 TL",
+      "desc": "Golden Ebi, mango, krem peynir, avokado, tenkasu, yuzu mayonez (acılı)",
+      "category": "Cooked Roll"
+    },
+    {
+      "name": "Riki Roll (8pcs)",
+      "price": "900.00 TL",
+      "desc": "Tempura levrek, avokado,krem peynir/ dışı yuzulu mayonez, pırasa kıtırı",
+      "category": "Cooked Roll"
+    },
+    {
+      "name": "Tsunami Roll",
+      "price": "920.00 TL",
+      "desc": "Tempura somon, salatalık, avokado/ lezzetlendirilmiş panko, samurai sos, mikro yeşillik",
+      "category": "Cooked Roll"
+    },
+    {
+      "name": "Corn Tempura Roll (8 adet)",
+      "price": "920.00 TL",
+      "desc": "Tempura karides, salatalık, avokado /dışı corn tempura, trüflü mayonez ve schimi baharatı",
+      "category": "Cooked Roll"
+    },
+    {
+      "name": "Sake Ten Roll",
+      "price": "900.00 TL",
+      "desc": "Kızarmış Somon, Avokado, Salatalık, Mayonez, Kıvırcık / Dışı Masago (6 adet)",
+      "category": "Cooked Roll"
+    },
+    {
+      "name": "Ebi Ten Roll",
+      "price": "900.00 TL",
+      "desc": "Kızarmış Karides, Avokado, Mayonez, Masago / Dışı Susam (5 adet)",
+      "category": "Cooked Roll"
+    },
+    {
+      "name": "Samurai Roll",
+      "price": "860.00 TL",
+      "desc": "Kızarmış Karides, Avokado, Kıvırcık, Japon Turbu / Dışı Susam ve Masago (8 adet)",
+      "category": "Cooked Roll"
+    },
+    {
+      "name": "Philly Roll",
+      "price": "920.00 TL",
+      "desc": "Surimi Yengeç, Avokado, Krem Peynir / Dışı Kızarmış (8 adet)",
+      "category": "Cooked Roll"
+    },
+    {
+      "name": "İstanbul Roll",
+      "price": "920.00 TL",
+      "desc": "Kızarmış Karides, Avokado, Mayonez, Salatalık, Masago / Dışı Kızarmış Somon (5 adet)",
+      "category": "Cooked Roll"
+    },
+    {
+      "name": "Dragon Roll",
+      "price": "960.00 TL",
+      "desc": "Avokado, Salatalık/ Dışı Yılan Balığı (6 adet)",
+      "category": "Cooked Roll"
+    },
+    {
+      "name": "Tokyo Drift Roll",
+      "price": "920.00 TL",
+      "desc": "Kızarmış Somon,Mayonez, Avokado, Salatalık / Masago, Kıtır Patates (8 adet)",
+      "category": "Cooked Roll"
+    },
+    {
+      "name": "Trüflü Ebi Tempura Roll",
+      "price": "920.00 TL",
+      "desc": "Kızarmış Karides, Avokado, Salatalık / Dışı Trüf Yağlı Mayonez, Kıtır Patates, Teriyaki Sos, Beyaz Susam (8 adet)",
+      "category": "Cooked Roll"
+    },
+    {
+      "name": "Fish & Chips Roll",
+      "price": "900.00 TL",
+      "desc": "Kızarmış Levrek, Kıtır Patates, Salatalık, Trüf Yağlı Mayonez / Dışı Avokado, Kıtır Patates, Teriyaki Sos (6 adet)",
+      "category": "Cooked Roll"
+    },
+    {
+      "name": "Super Dragon Roll",
+      "price": "2000.00 TL",
+      "desc": "Avokado, Salatalık/ Dışı Yılan Balığı(125 Gr)/ Teriyaki Sos (8 adet)",
+      "category": "Cooked Roll"
+    },
+    {
+      "name": "Chicken Teriyaki Roll",
+      "price": "860.00 TL",
+      "desc": "Kızarmış Tempura Tavuk, Mayonez, Beyaz Lahana / Dışı Susam, Kıtır Soğan, Teriyaki Sos (8 adet)",
+      "category": "Cooked Roll"
+    },
+    {
+      "name": "Mochi (Çikolata)",
+      "price": "280.00 TL",
+      "desc": "1 Adet",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Mochi (Çilek)",
+      "price": "280.00 TL",
+      "desc": "1 Adet",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Matcha Crepe Cake",
+      "price": "480.00 TL",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Mochi (Hindistan Cevizi)",
+      "price": "280.00 TL",
+      "desc": "1 Adet",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Kızarmış Dondurma",
+      "price": "520.00 TL",
+      "desc": "Kızarmış ceviz ve bal ile.",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Kızarmış Muz",
+      "price": "510.00 TL",
+      "desc": "Kızarmış ceviz ve bal ile.",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Sweet Roll",
+      "price": "520.00 TL",
+      "desc": "Muz, Armut, Yeşil elma, kızarmış ceviz, bal, nutella, çilek",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Mozaik Roll",
+      "price": "480.00 TL",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "BUN’utella (2 Adet)",
+      "price": "480.00 TL",
+      "desc": "Nutella, muz, çilek, yer fıstığı.",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Kızarmış Ceviz",
+      "price": "518.00 TL",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Kyoto Cheesecake",
+      "price": "450.00 TL",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Apple pie rolls",
+      "price": "480.00 TL",
+      "desc": "kırmızı elma, ceviz, tarçın harcı, bal",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Limon Sorbe",
+      "price": "360.00 TL",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Coca-Cola",
+      "price": "176.00 TL",
+      "desc": "Orijinal Tat / Zero Sugar",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Fanta",
+      "price": "176.00 TL",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Sprite",
+      "price": "176.00 TL",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Cappy",
+      "price": "176.00 TL",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Fuse Tea",
+      "price": "176.00 TL",
+      "desc": "Şeftali / Limon",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Damla Su",
+      "price": "110.00 TL",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Damla Su (750 ml)",
+      "price": "226.00 TL",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Damla Minera Maden Suyu",
+      "price": "176.00 TL",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Damla Minera Maden Suyu (750 ml)",
+      "price": "242.00 TL",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Schweppes",
+      "price": "176.00 TL",
+      "desc": "Mandarin / Bitter Lemon",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Limonata",
+      "price": "242.00 TL",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Taze Sıkılmış Portakal Suyu",
+      "price": "266.00 TL",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Rem",
+      "price": "440.00 TL",
+      "desc": "Havlıcan / Reyhan",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Milk Oolong",
+      "price": "210.00 TL",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Espresso",
+      "price": "186.00 TL",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Americano",
+      "price": "210.00 TL",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Türk Kahvesi",
+      "price": "174.00 TL",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Sencha",
+      "price": "210.00 TL",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Borgobruno ( Kadeh )",
+      "price": "390.00 TL",
+      "category": "Kırmızı Şarap"
+    },
+    {
+      "name": "Egeo Cabernet Franc–Merlot",
+      "price": "3270.00 TL",
+      "desc": "Kırmızı Şarap",
+      "category": "Kırmızı Şarap"
+    },
+    {
+      "name": "Çakır Winery ( Kadeh )",
+      "price": "500.00 TL",
+      "category": "Kırmızı Şarap"
+    },
+    {
+      "name": "Selection Öküzgözü–Boğazkere ( Kadeh )",
+      "price": "650.00 TL",
+      "desc": "Kırmızı Şarap",
+      "category": "Kırmızı Şarap"
+    },
+    {
+      "name": "Borgobruno ( Karaf )",
+      "price": "970.00 TL",
+      "category": "Kırmızı Şarap"
+    },
+    {
+      "name": "Çakır Winery ( Karaf )",
+      "price": "1150.00 TL",
+      "category": "Kırmızı Şarap"
+    },
+    {
+      "name": "Selection Öküzgözü–Boğazkere ( Karaf )",
+      "price": "1520.00 TL",
+      "desc": "Kırmızı Şarap",
+      "category": "Kırmızı Şarap"
+    },
+    {
+      "name": "Porta Caeli Diverti Cabernet Sauvignon ( Şişe )",
+      "price": "2410.00 TL",
+      "desc": "Merlot Kırmızı Şarap",
+      "category": "Kırmızı Şarap"
+    },
+    {
+      "name": "Montes Classic Series Merlot ( Şişe )",
+      "price": "2840.00 TL",
+      "desc": "Kırmızı Şarap",
+      "category": "Kırmızı Şarap"
+    },
+    {
+      "name": "Borgobruno ( Şişe )",
+      "price": "1950.00 TL",
+      "category": "Kırmızı Şarap"
+    },
+    {
+      "name": "Vourla ( Şişe )",
+      "price": "4370.00 TL",
+      "desc": "Kırmızı Şarap",
+      "category": "Kırmızı Şarap"
+    },
+    {
+      "name": "Çakır Winery ( Şişe )",
+      "price": "2300.00 TL",
+      "category": "Kırmızı Şarap"
+    },
+    {
+      "name": "Suvla Kalecik Karası ( Şişe )",
+      "price": "2300.00 TL",
+      "desc": "Kırmızı Şarap",
+      "category": "Kırmızı Şarap"
+    },
+    {
+      "name": "Selection Öküzgözü–Boğazkere ( Şişe )",
+      "price": "3040.00 TL",
+      "desc": "Kırmızı Şarap",
+      "category": "Kırmızı Şarap"
+    },
+    {
+      "name": "Akın Gürbüz ( Şişe )",
+      "price": "3030.00 TL",
+      "desc": "Kırmızı Şarap",
+      "category": "Kırmızı Şarap"
+    },
+    {
+      "name": "Selection Narince Emir ( Kadeh)",
+      "price": "650.00 TL",
+      "category": "Beyaz Şarap"
+    },
+    {
+      "name": "Borgobruno Pinot Grigio ( Kadeh )",
+      "price": "390.00 TL",
+      "desc": "Beyaz Şarap",
+      "category": "Beyaz Şarap"
+    },
+    {
+      "name": "Pamukkale Anfora Sauvignon Blanc ( Kadeh )",
+      "price": "500.00 TL",
+      "desc": "Beyaz Şarap",
+      "category": "Beyaz Şarap"
+    },
+    {
+      "name": "Selection Narince Emir ( Karaf )",
+      "price": "1520.00 TL",
+      "category": "Beyaz Şarap"
+    },
+    {
+      "name": "Borgobruno Pinot Grigio ( Karaf )",
+      "price": "970.00 TL",
+      "desc": "Beyaz Şarap",
+      "category": "Beyaz Şarap"
+    },
+    {
+      "name": "Pamukkale Anfora Sauvignon Blanc ( Karaf )",
+      "price": "1150.00 TL",
+      "desc": "Beyaz Şarap",
+      "category": "Beyaz Şarap"
+    },
+    {
+      "name": "Pamukkale Anfora Sauvignon Blanc ( Şişe )",
+      "price": "2300.00 TL",
+      "desc": "Beyaz Şarap",
+      "category": "Beyaz Şarap"
+    },
+    {
+      "name": "Khilon ( Şişe )",
+      "price": "3790.00 TL",
+      "desc": "Beyaz Şarap",
+      "category": "Beyaz Şarap"
+    },
+    {
+      "name": "Egeo Fumé Blanc ( Şişe )",
+      "price": "3730.00 TL",
+      "desc": "Beyaz Şarap",
+      "category": "Beyaz Şarap"
+    },
+    {
+      "name": "Rindera ( Şişe )",
+      "price": "2070.00 TL",
+      "desc": "Kırmızı Şarap",
+      "category": "Beyaz Şarap"
+    },
+    {
+      "name": "Borgobruno Pinot Grigio ( Şişe )",
+      "price": "1950.00 TL",
+      "desc": "Beyaz Şarap",
+      "category": "Beyaz Şarap"
+    },
+    {
+      "name": "Kuzubağ Narince Chardonnay ( Şişe )",
+      "price": "2300.00 TL",
+      "desc": "Beyaz Şarap",
+      "category": "Beyaz Şarap"
+    },
+    {
+      "name": "Selection Narince Emir ( Şişe )",
+      "price": "3040.00 TL",
+      "desc": "Beyaz Şarap",
+      "category": "Beyaz Şarap"
+    },
+    {
+      "name": "La Gioiosa Prosecco Frizzante ( Kadeh )",
+      "price": "410.00 TL",
+      "desc": "Yarı Köpüklü Beyaz Şarap",
+      "category": "Köpüklü Şarap"
+    },
+    {
+      "name": "La Gioiosa Prosecco Treviso ( Şişe )",
+      "price": "4020.00 TL",
+      "desc": "Beyaz Köpüklü Şarap",
+      "category": "Köpüklü Şarap"
+    },
+    {
+      "name": "La Gioiosa Prosecco Frizzante ( Şişe )",
+      "price": "2070.00 TL",
+      "desc": "Yarı Köpüklü Beyaz Şarap",
+      "category": "Köpüklü Şarap"
+    },
+    {
+      "name": "Peyrassol Roze Şarap ( Kadeh )",
+      "price": "550.00 TL",
+      "category": "Rose Şarap"
+    },
+    {
+      "name": "Peyrassol Roze Şarap ( Karaf )",
+      "price": "1260.00 TL",
+      "category": "Rose Şarap"
+    },
+    {
+      "name": "Peyrassol Roze Şarap ( Şişe )",
+      "price": "2530.00 TL",
+      "category": "Rose Şarap"
+    },
+    {
+      "name": "Belfiore Pinot Grigio Blush Roze Şarap ( Şişe )",
+      "price": "2180.00 TL",
+      "desc": "Veneto Cielo Pinot Grigio",
+      "category": "Rose Şarap"
+    },
+    {
+      "name": "Tokyo Zen Green Tea Lager",
+      "price": "470.00 TL",
+      "category": "Bira"
+    },
+    {
+      "name": "Frederik Local 35 cl",
+      "price": "360.00 TL",
+      "category": "Bira"
+    },
+    {
+      "name": "Frederik Tropic Ipa 35 cl",
+      "price": "360.00 TL",
+      "category": "Bira"
+    },
+    {
+      "name": "Tuborg Ice 33 cl",
+      "price": "300.00 TL",
+      "category": "Bira"
+    },
+    {
+      "name": "Frederik Neipa 35 cl",
+      "price": "360.00 TL",
+      "category": "Bira"
+    },
+    {
+      "name": "Tuborg Smooth 33 cl",
+      "price": "300.00 TL",
+      "category": "Bira"
+    },
+    {
+      "name": "Tuborg Gold 33 cl",
+      "price": "300.00 TL",
+      "category": "Bira"
+    },
+    {
+      "name": "Tuborg Gold 50 cl",
+      "price": "330.00 TL",
+      "category": "Bira"
+    },
+    {
+      "name": "Tuborg Filtresiz",
+      "price": "330.00 TL",
+      "desc": "50 cl",
+      "category": "Bira"
+    },
+    {
+      "name": "Carlsberg 33 cl",
+      "price": "330.00 TL",
+      "desc": "33 cl",
+      "category": "Bira"
+    },
+    {
+      "name": "Carlsberg Luna",
+      "price": "340.00 TL",
+      "desc": "50 cl",
+      "category": "Bira"
+    },
+    {
+      "name": "Frederik India Pale Ale",
+      "price": "360.00 TL",
+      "desc": "35 cl",
+      "category": "Bira"
+    },
+    {
+      "name": "Frederik Yakima IPA",
+      "price": "360.00 TL",
+      "desc": "35 cl",
+      "category": "Bira"
+    },
+    {
+      "name": "Frederik Wheat IPA",
+      "price": "360.00 TL",
+      "desc": "35 cl",
+      "category": "Bira"
+    },
+    {
+      "name": "Frederik Marzen Lager",
+      "price": "360.00 TL",
+      "desc": "35 cl",
+      "category": "Bira"
+    },
+    {
+      "name": "Frederik Brown Ale",
+      "price": "360.00 TL",
+      "desc": "35 cl",
+      "category": "Bira"
+    },
+    {
+      "name": "Sol",
+      "price": "410.00 TL",
+      "desc": "33 cl",
+      "category": "Bira"
+    },
+    {
+      "name": "Desperados",
+      "price": "420.00 TL",
+      "desc": "33 cl",
+      "category": "Bira"
+    },
+    {
+      "name": "Weihenstephan Hefeweisbier",
+      "price": "440.00 TL",
+      "desc": "33 cl",
+      "category": "Bira"
+    },
+    {
+      "name": "Weihenstephan Vitus",
+      "price": "440.00 TL",
+      "desc": "33 cl",
+      "category": "Bira"
+    },
+    {
+      "name": "Kronenbourg Blanc 1664",
+      "price": "370.00 TL",
+      "desc": "33 cl",
+      "category": "Bira"
+    },
+    {
+      "name": "Guinness",
+      "price": "480.00 TL",
+      "desc": "44 cl",
+      "category": "Bira"
+    },
+    {
+      "name": "Grimbergen Blonde",
+      "price": "440.00 TL",
+      "desc": "33 cl",
+      "category": "Bira"
+    },
+    {
+      "name": "Grimbergen Double Ambree",
+      "price": "440.00 TL",
+      "desc": "33 cl",
+      "category": "Bira"
+    },
+    {
+      "name": "Tsingtao",
+      "price": "470.00 TL",
+      "desc": "33 cl",
+      "category": "Bira"
+    },
+    {
+      "name": "Asahi Super Dry 33 cl",
+      "price": "470.00 TL",
+      "category": "Bira"
+    },
+    {
+      "name": "Chivas Rgl Smooth&Smoky",
+      "price": "640.00 TL",
+      "desc": "5cl",
+      "category": "WHİSKEY"
+    },
+    {
+      "name": "The Glengrant Arboralis (5cl)",
+      "price": "610.00 TL",
+      "category": "WHİSKEY"
+    },
+    {
+      "name": "Ballantines Finest (5cl)",
+      "price": "560.00 TL",
+      "category": "WHİSKEY"
+    },
+    {
+      "name": "Hibiki (5cl)",
+      "price": "2370.00 TL",
+      "category": "WHİSKEY"
+    },
+    {
+      "name": "Chivas Rgl 12 YO (5cl)",
+      "price": "640.00 TL",
+      "category": "WHİSKEY"
+    },
+    {
+      "name": "Chivas Rgl 18 YO (5cl)",
+      "price": "1160.00 TL",
+      "category": "WHİSKEY"
+    },
+    {
+      "name": "Jameson (5cl)",
+      "price": "610.00 TL",
+      "category": "WHİSKEY"
+    },
+    {
+      "name": "Chivas Extra 13YO Sheery Cask (5cl)",
+      "price": "680.00 TL",
+      "category": "WHİSKEY"
+    },
+    {
+      "name": "Glenlivet 12 YO (5cl)",
+      "price": "840.00 TL",
+      "category": "WHİSKEY"
+    },
+    {
+      "name": "Ballantines 7 YO Bourbon (5cl)",
+      "price": "630.00 TL",
+      "category": "WHİSKEY"
+    },
+    {
+      "name": "Jameson Black Barrel 6 (5cl)",
+      "price": "680.00 TL",
+      "category": "WHİSKEY"
+    },
+    {
+      "name": "Olmeca Altos (5cl)",
+      "price": "510.00 TL",
+      "category": "Tekila"
+    },
+    {
+      "name": "Oje de Tigre Joven",
+      "price": "720.00 TL",
+      "category": "Tekila"
+    },
+    {
+      "name": "Bumbu XO",
+      "price": "570.00 TL",
+      "category": "Rom"
+    },
+    {
+      "name": "Havana Club (5cl)",
+      "price": "510.00 TL",
+      "category": "Rom"
+    },
+    {
+      "name": "Roku (5cl)",
+      "price": "700.00 TL",
+      "category": "Cin"
+    },
+    {
+      "name": "Beefeater (5cl)",
+      "price": "560.00 TL",
+      "category": "Cin"
+    },
+    {
+      "name": "Beefeater Pink (5cl)",
+      "price": "560.00 TL",
+      "category": "Cin"
+    },
+    {
+      "name": "Malfy Limone (5cl)",
+      "price": "640.00 TL",
+      "category": "Cin"
+    },
+    {
+      "name": "Malfy Rosa (5cl)",
+      "price": "640.00 TL",
+      "category": "Cin"
+    },
+    {
+      "name": "Malfy Orginale (5cl)",
+      "price": "640.00 TL",
+      "category": "Cin"
+    },
+    {
+      "name": "Haku (5cl)",
+      "price": "800.00 TL",
+      "category": "Votka"
+    },
+    {
+      "name": "Absolute Blue (5cl)",
+      "price": "550.00 TL",
+      "category": "Votka"
+    },
+    {
+      "name": "Absolute Mandarin (5cl)",
+      "price": "460.00 TL",
+      "category": "Votka"
+    },
+    {
+      "name": "Absolute Citron (5cl)",
+      "price": "550.00 TL",
+      "category": "Votka"
+    },
+    {
+      "name": "Absolute Elyx V (5cl)",
+      "price": "1100.00 TL",
+      "category": "Votka"
+    },
+    {
+      "name": "Beefeater Gin",
+      "price": "740.00 TL",
+      "category": "Gin Tonic & Spritz"
+    },
+    {
+      "name": "Beefeater Pink",
+      "price": "740.00 TL",
+      "category": "Gin Tonic & Spritz"
+    },
+    {
+      "name": "Roku Gin",
+      "price": "740.00 TL",
+      "category": "Gin Tonic & Spritz"
+    },
+    {
+      "name": "Aperol Spritz",
+      "price": "740.00 TL",
+      "category": "Gin Tonic & Spritz"
+    },
+    {
+      "name": "Malfy Gin con Limone",
+      "price": "740.00 TL",
+      "category": "Gin Tonic & Spritz"
+    },
+    {
+      "name": "Sparkling Sake Spritz",
+      "price": "740.00 TL",
+      "category": "Gin Tonic & Spritz"
+    },
+    {
+      "name": "Garrone Bianco (5cl)",
+      "price": "640.00 TL",
+      "category": "Vermut"
+    },
+    {
+      "name": "Garrone Rosso (5cl)",
+      "price": "640.00 TL",
+      "category": "Vermut"
+    },
+    {
+      "name": "Garrone Dry (5cl)",
+      "price": "670.00 TL",
+      "category": "Vermut"
+    },
+    {
+      "name": "Martell VSOP (5cl)",
+      "price": "640.00 TL",
+      "category": "Konyak"
+    },
+    {
+      "name": "Baker's Field İresh Cream (5cl)",
+      "price": "490.00 TL",
+      "category": "Likör"
+    },
+    {
+      "name": "Aperol (5cl)",
+      "price": "510.00 TL",
+      "category": "Likör"
+    },
+    {
+      "name": "Kahlua (5cl)",
+      "price": "490.00 TL",
+      "category": "Likör"
+    },
+    {
+      "name": "Campari (5cl)",
+      "price": "510.00 TL",
+      "category": "Likör"
+    },
+    {
+      "name": "Jagermaster (5cl)",
+      "price": "540.00 TL",
+      "category": "Likör"
+    },
+    {
+      "name": "Triple Sec (5cl)",
+      "price": "510.00 TL",
+      "category": "Likör"
+    },
+    {
+      "name": "Over The Rainbow",
+      "price": "220.00 TL",
+      "category": "Moctails"
+    },
+    {
+      "name": "Virgin Mojito",
+      "price": "220.00 TL",
+      "category": "Moctails"
+    },
+    {
+      "name": "Green Mill Zero",
+      "price": "220.00 TL",
+      "category": "Moctails"
+    },
+    {
+      "name": "Blue Skies Alkolsüz",
+      "price": "220.00 TL",
+      "category": "Moctails"
+    },
+    {
+      "name": "Sandos Alkolsüz",
+      "price": "220.00 TL",
+      "category": "Moctails"
+    },
+    {
+      "name": "Citrus Lemonade",
+      "price": "220.00 TL",
+      "category": "Moctails"
+    },
+    {
+      "name": "Rooibos & Peach",
+      "price": "220.00 TL",
+      "desc": "Roobios Çayı, Şeftali",
+      "category": "Moctails"
+    },
+    {
+      "name": "Raspberry",
+      "price": "220.00 TL",
+      "desc": "Ahududu, Acai",
+      "category": "Moctails"
+    },
+    {
+      "name": "Japanese Lime",
+      "price": "220.00 TL",
+      "desc": "Misket Limonu, Nane",
+      "category": "Moctails"
+    },
+    {
+      "name": "Whisky Sour",
+      "price": "750.00 TL",
+      "category": "Classic Kokteyller"
+    },
+    {
+      "name": "Negroni",
+      "price": "740.00 TL",
+      "category": "Classic Kokteyller"
+    },
+    {
+      "name": "Margarita",
+      "price": "740.00 TL",
+      "category": "Classic Kokteyller"
+    },
+    {
+      "name": "Espresso Martini",
+      "price": "740.00 TL",
+      "category": "Classic Kokteyller"
+    },
+    {
+      "name": "Bellini",
+      "price": "740.00 TL",
+      "category": "Classic Kokteyller"
+    },
+    {
+      "name": "Mojito",
+      "price": "740.00 TL",
+      "category": "Classic Kokteyller"
+    },
+    {
+      "name": "hakushika junmai namachozo fresh - light 72 cl.",
+      "price": "2360.00 TL",
+      "category": "Sake"
+    },
+    {
+      "name": "hakushika junmai ginjo gold label 9 cl.",
+      "price": "345.00 TL",
+      "category": "Sake"
+    },
+    {
+      "name": "hakushika sparkling sake 72 cl.",
+      "price": "3720.00 TL",
+      "category": "Sake"
+    },
+    {
+      "name": "hakushika sparkling sake 15 cl.",
+      "price": "775.00 TL",
+      "category": "Sake"
+    },
+    {
+      "name": "özeki junmai premium 75 cl.",
+      "price": "4400.00 TL",
+      "category": "Sake"
+    },
+    {
+      "name": "midorikawa junmai ginjo sake 72 cl.",
+      "price": "4200.00 TL",
+      "category": "Sake"
+    },
+    {
+      "name": "hakushika junmai namachozo fresh - light 9 cl.",
+      "price": "295.00 TL",
+      "category": "Sake"
+    },
+    {
+      "name": "midorikawa junmai ginjo sake 9cl.",
+      "price": "525.00 TL",
+      "category": "Sake"
+    },
+    {
+      "name": "özeki junmai premium 18 cl.",
+      "price": "1100.00 TL",
+      "category": "Sake"
+    },
+    {
+      "name": "midorikawa junmai ginjo sake 18cl.",
+      "price": "1050.00 TL",
+      "category": "Sake"
+    },
+    {
+      "name": "özeki junmai premium 9 cl.",
+      "price": "550.00 TL",
+      "category": "Sake"
+    },
+    {
+      "name": "hakushika junmai ginjo gold label 18 cl.",
+      "price": "690.00 TL",
+      "category": "Sake"
+    },
+    {
+      "name": "hakushika junmai ginjo gold label 72 cl.",
+      "price": "2775.00 TL",
+      "category": "Sake"
+    },
+    {
+      "name": "hakushika junmai namachozo fresh - light 18 cl.",
+      "price": "590.00 TL",
+      "category": "Sake"
+    },
+    {
+      "name": "Shibumi",
+      "price": "750.00 TL",
+      "category": "Signature Kokteyller"
+    },
+    {
+      "name": "Samurai",
+      "price": "750.00 TL",
+      "category": "Signature Kokteyller"
+    },
+    {
+      "name": "Ninja",
+      "price": "750.00 TL",
+      "category": "Signature Kokteyller"
+    },
+    {
+      "name": "Blue Skies",
+      "price": "750.00 TL",
+      "category": "Signature Kokteyller"
+    },
+    {
+      "name": "Satsuma",
+      "price": "750.00 TL",
+      "category": "Signature Kokteyller"
+    },
+    {
+      "name": "Dynamite",
+      "price": "750.00 TL",
+      "category": "Signature Kokteyller"
+    },
+    {
+      "name": "Damso ( Orijinal-Peach-Blueberry-Lhychee) Soju",
+      "price": "780.00 TL",
+      "desc": "35 cl",
+      "category": "DAMSO ARİJİNAL SOJU"
+    },
+    {
+      "name": "Soju Shot",
+      "price": "100.00 TL",
+      "desc": "4 cl",
+      "category": "DAMSO ARİJİNAL SOJU"
+    },
+    {
+      "name": "Soju Lowbal",
+      "price": "410.00 TL",
+      "desc": "10 cl",
+      "category": "DAMSO ARİJİNAL SOJU"
+    }
+  ]
+},
   "7285": {
     "name": "U/We Coffee Roasters",
     "sourceUrl": "https://uwecoffee.com/",
