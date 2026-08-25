@@ -26835,511 +26835,338 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
 }
 ,
   "7249": {
-  "name": "Beşiktaş Çıtır Pide & Lahmacun",
-  "sourceUrl": "https://www.yemeksepeti.com/restaurant/fga4/besiktas-citir-pide-and-lahmacun-fga4",
-  "sourceName": "Beşiktaş Çıtır Yemeksepeti canlı menüsü",
-  "verifiedAt": "2026-08-23",
-  "items": [
-    {
-      "name": "Mercimek Çorbası",
-      "price": "176 TL",
-      "desc": "Ekmek ile",
-      "category": "Çorbalar"
-    },
-    {
-      "name": "Soğansız Antep Lahmacun",
-      "price": "176 TL",
-      "desc": "Adet olarak servis edilmektedir.",
-      "category": "Lahmacunlar"
-    },
-    {
-      "name": "Soğanlı Antep Lahmacun",
-      "price": "176 TL",
-      "desc": "Adet olarak servis edilmektedir.",
-      "category": "Lahmacunlar"
-    },
-    {
-      "name": "Kaşarlı Antep Lahmacun",
-      "price": "200 TL",
-      "desc": "Adet olarak servis edilmektedir.",
-      "category": "Lahmacunlar"
-    },
-    {
-      "name": "Kaşarlı Malatya Lahmacun (Uzun)",
-      "price": "344 TL",
-      "desc": "Adet olarak servis edilmektedir.",
-      "category": "Lahmacunlar"
-    },
-    {
-      "name": "Malatya Lahmacun (Uzun)",
-      "price": "320 TL",
-      "desc": "Adet olarak servis edilmektedir.",
-      "category": "Lahmacunlar"
-    },
-    {
-      "name": "Kaşarlı Pide (Açık)",
-      "price": "360 TL",
-      "desc": "Kaşar peyniri",
-      "category": "Pideler"
-    },
-    {
-      "name": "Kıymalı Pide (Açık)",
-      "price": "400 TL",
-      "desc": "Kıyma",
-      "category": "Pideler"
-    },
-    {
-      "name": "Kıymalı Kaşarlı Pide (Açık)",
-      "price": "464 TL",
-      "desc": "Kıyma, kaşar peyniri",
-      "category": "Pideler"
-    },
-    {
-      "name": "Etli Ekmek",
-      "price": "480 TL",
-      "desc": "Dana kıyma, domates, biber",
-      "category": "Pideler"
-    },
-    {
-      "name": "Kuşbaşılı Pide (Açık)",
-      "price": "480 TL",
-      "desc": "Kuşbaşı",
-      "category": "Pideler"
-    },
-    {
-      "name": "Kuşbaşılı Kaşarlı Pide (Açık)",
-      "price": "480 TL",
-      "desc": "Dana bonfile, domates, biber, kaşar peyniri",
-      "category": "Pideler"
-    },
-    {
-      "name": "Kavurmalı Kaşarlı Pide (Açık)",
-      "price": "480 TL",
-      "desc": "Kavurma, kaşar peyniri",
-      "category": "Pideler"
-    },
-    {
-      "name": "Sucuklu Kaşarlı Pide (Açık)",
-      "price": "480 TL",
-      "desc": "Sucuk, kaşar",
-      "category": "Pideler"
-    },
-    {
-      "name": "Çıtır Karışık Pide (Açık)",
-      "price": "520 TL",
-      "desc": "Çıtır hamur üzerine kuşbaşı et sucuk kavurma ve kaşar peyniri ile hazırlanan lezzetli pide. Sıcak servis edilir.",
-      "category": "Pideler"
-    },
-    {
-      "name": "Alaturka Pide (Açık)",
-      "price": "520 TL",
-      "desc": "Geleneksel Alaturka pidesi kavurma sucuk pastırma ve kaşar peyniri ile hazırlanmış açık pide olarak servis edilir. Lezzetli malzemelerin mükemmel uyumu ile hazırlanmıştır.",
-      "category": "Pideler"
-    },
-    {
-      "name": "Bafra Pidesi",
-      "price": "440 TL",
-      "desc": "Dana kıyma, soğan",
-      "category": "Pideler"
-    },
-    {
-      "name": "Ispanaklı Kaşarlı Pide (Açık)",
-      "price": "360 TL",
-      "desc": "Ispanak, baharat, kaşar peyniri",
-      "category": "Pideler"
-    },
-    {
-      "name": "Ispanaklı Pide (Kapalı)",
-      "price": "296 TL",
-      "desc": "Ispanak, baharat",
-      "category": "Pideler"
-    },
-    {
-      "name": "Karışık Pide (Açık)",
-      "price": "480 TL",
-      "desc": "Sucuk, kavurma, kaşar peyniri",
-      "category": "Pideler"
-    },
-    {
-      "name": "Kavurmalı Pide (Kapalı)",
-      "price": "520 TL",
-      "desc": "Kavurma",
-      "category": "Pideler"
-    },
-    {
-      "name": "Mantarlı Pide (Açık)",
-      "price": "440 TL",
-      "desc": "Mantar, kaşar peyniri",
-      "category": "Pideler"
-    },
-    {
-      "name": "Pastırmalı Kaşarlı Pide (Açık)",
-      "price": "520 TL",
-      "desc": "Pastırma, kaşar peyniri",
-      "category": "Pideler"
-    },
-    {
-      "name": "Pastırmalı Pide (Kapalı)",
-      "price": "560 TL",
-      "desc": "Pastırma",
-      "category": "Pideler"
-    },
-    {
-      "name": "Patatesli Kaşarlı Pide (Açık)",
-      "price": "384 TL",
-      "desc": "Patates, baharat, kaşar peyniri",
-      "category": "Pideler"
-    },
-    {
-      "name": "Sucuklu Pide (Kapalı)",
-      "price": "496 TL",
-      "desc": "Sucuk",
-      "category": "Pideler"
-    },
-    {
-      "name": "Patatesli Pide (Kapalı)",
-      "price": "296 TL",
-      "desc": "Patates, baharat",
-      "category": "Pideler"
-    },
-    {
-      "name": "Sebzeli Pide (Açık)",
-      "price": "384 TL",
-      "desc": "Domates, biber, mantar, kaşar peyniri",
-      "category": "Pideler"
-    },
-    {
-      "name": "Tavuklu Pide (Açık)",
-      "price": "400 TL",
-      "desc": "Tavuk göğüs, domates, biber, kaşar peyniri",
-      "category": "Pideler"
-    },
-    {
-      "name": "Bıçak Arası Pide",
-      "price": "520 TL",
-      "desc": "Zırhta çekilmiş kuşbaşı et, domates biber, kaşar peyniri",
-      "category": "Pideler"
-    },
-    {
-      "name": "Beyti Kebabı",
-      "price": "600 TL",
-      "desc": "Lavaşa sarılı; kıyma. Közlenmiş domates, közlenmiş biber, közlenmiş soğan ile",
-      "category": "Kebaplar & Izgaralar"
-    },
-    {
-      "name": "Adana Kebap",
-      "price": "560 TL",
-      "desc": "(200 gr.) Bulgur pilavı, közlenmiş domates, közlenmiş biber, çoban salata ile",
-      "category": "Kebaplar & Izgaralar"
-    },
-    {
-      "name": "Urfa Kebap",
-      "price": "560 TL",
-      "desc": "(200 gr.) Bulgur pilavı, közlenmiş domates, közlenmiş biber, çoban salata ile",
-      "category": "Kebaplar & Izgaralar"
-    },
-    {
-      "name": "Et Şiş",
-      "price": "600 TL",
-      "desc": "(200 gr.) Bulgur pilavı, közlenmiş domates, közlenmiş biber, çoban salata ile",
-      "category": "Kebaplar & Izgaralar"
-    },
-    {
-      "name": "Tavuk Şiş",
-      "price": "520 TL",
-      "desc": "(250 gr.) Bulgur pilavı, közlenmiş domates, közlenmiş biber, çoban salata ile",
-      "category": "Kebaplar & Izgaralar"
-    },
-    {
-      "name": "Yaprak Kanat",
-      "price": "560 TL",
-      "desc": "(250 gr.) Bulgur pilavı, közlenmiş domates, közlenmiş biber, çoban salata ile",
-      "category": "Kebaplar & Izgaralar"
-    },
-    {
-      "name": "Patlıcanlı Kebap",
-      "price": "600 TL",
-      "desc": "Bulgur pilavı, közlenmiş domates, közlenmiş biber, çoban salata ile",
-      "category": "Kebaplar & Izgaralar"
-    },
-    {
-      "name": "Domatesli Kebap",
-      "price": "600 TL",
-      "desc": "Bulgur pilavı, közlenmiş domates, közlenmiş biber, çoban salata ile",
-      "category": "Kebaplar & Izgaralar"
-    },
-    {
-      "name": "Karışık Kebap",
-      "price": "1.120 TL",
-      "desc": "Adana kebap, tavuk şiş, tavuk kanat, et şiş. Lahmacun, bulgur pilavı, közlenmiş domates, közlenmiş biber, çoban salata ile",
-      "category": "Kebaplar & Izgaralar"
-    },
-    {
-      "name": "Adana Dürüm",
-      "price": "360 TL",
-      "desc": "Domates, maydanoz, soğan",
-      "category": "Dürümler"
-    },
-    {
-      "name": "Urfa Dürüm",
-      "price": "360 TL",
-      "desc": "Domates, maydanoz, soğan",
-      "category": "Dürümler"
-    },
-    {
-      "name": "Tavuk Şiş Dürüm",
-      "price": "344 TL",
-      "desc": "Domates, maydanoz, soğan",
-      "category": "Dürümler"
-    },
-    {
-      "name": "Et Şiş Dürüm",
-      "price": "400 TL",
-      "desc": "Domates, maydanoz, soğan",
-      "category": "Dürümler"
-    },
-    {
-      "name": "Çıtır Dürüm",
-      "price": "440 TL",
-      "desc": "Lahmacun arasına; Adana kebap, soğan, domates, maydanoz",
-      "category": "Dürümler"
-    },
-    {
-      "name": "Yağlı Karışık Katmer",
-      "price": "208 TL",
-      "desc": "Kavurma, kaşar peyniri",
-      "category": "Katmerler"
-    },
-    {
-      "name": "Yağlı Kaşarlı Katmer",
-      "price": "192 TL",
-      "desc": "Kaşar peyniri",
-      "category": "Katmerler"
-    },
-    {
-      "name": "Yağlı Kavurmalı Kaşarlı Katmer",
-      "price": "208 TL",
-      "desc": "Kavurma, kaşar peyniri",
-      "category": "Katmerler"
-    },
-    {
-      "name": "Yağlı Kavurmalı Katmer",
-      "price": "200 TL",
-      "desc": "Kavurma",
-      "category": "Katmerler"
-    },
-    {
-      "name": "Yağlı Pastırmalı Kaşarlı Katmer",
-      "price": "216 TL",
-      "desc": "Pastırma, kaşar peyniri",
-      "category": "Katmerler"
-    },
-    {
-      "name": "Yağlı Pastırmalı Katmer",
-      "price": "216 TL",
-      "desc": "Pastırma",
-      "category": "Katmerler"
-    },
-    {
-      "name": "Yağlı Patatesli Katmer",
-      "price": "192 TL",
-      "desc": "Patates",
-      "category": "Katmerler"
-    },
-    {
-      "name": "Yağlı Sucuklu Kaşarlı Katmer",
-      "price": "192 TL",
-      "desc": "Sucuk, kaşar peyniri",
-      "category": "Katmerler"
-    },
-    {
-      "name": "Yağlı Sucuklu Katmer",
-      "price": "192 TL",
-      "desc": "Sucuk",
-      "category": "Katmerler"
-    },
-    {
-      "name": "Çiğ Köfte (10 Sıkım)",
-      "price": "160 TL",
-      "desc": "Domates, limon, kıvırcık marul, lavaş ile",
-      "category": "Çiğ Köfteler"
-    },
-    {
-      "name": "Çiğ Köfte (20 Sıkım)",
-      "price": "240 TL",
-      "desc": "Domates, limon, kıvırcık marul, lavaş ile",
-      "category": "Çiğ Köfteler"
-    },
-    {
-      "name": "Çiğ köfte (30 Sıkım)",
-      "price": "320 TL",
-      "desc": "Domates, limon, kıvırcık marul, lavaş ile",
-      "category": "Çiğ Köfteler"
-    },
-    {
-      "name": "Domates Söğüş",
-      "price": "40 TL",
-      "desc": "Tek kişilik",
-      "category": "Yan Ürünler"
-    },
-    {
-      "name": "Lavaş Ekmeği",
-      "price": "32 TL",
-      "desc": "Adet olarak servis edilmektedir.",
-      "category": "Yan Ürünler"
-    },
-    {
-      "name": "Soğan Söğüş",
-      "price": "40 TL",
-      "desc": "Tek kişilik",
-      "category": "Yan Ürünler"
-    },
-    {
-      "name": "Tırnak Pide",
-      "price": "48 TL",
-      "desc": "Mayalı hamura şekil verilerek hazırlanan sade bir pide çeşididir.",
-      "category": "Yan Ürünler"
-    },
-    {
-      "name": "Ezme",
-      "price": "88 TL",
-      "desc": "Tek kişilik",
-      "category": "Yan Ürünler"
-    },
-    {
-      "name": "Katmer Tatlısı",
-      "price": "240 TL",
-      "desc": "Tek kişilik",
-      "category": "Tatlılar"
-    },
-    {
-      "name": "Antep Fıstıklı Dolama",
-      "price": "240 TL",
-      "desc": "Tek kişilik",
-      "category": "Tatlılar"
-    },
-    {
-      "name": "Kiremitte Sütlaç",
-      "price": "120 TL",
-      "desc": "Tek kişilik",
-      "category": "Tatlılar"
-    },
-    {
-      "name": "Künefe",
-      "price": "224 TL",
-      "desc": "Tek kişilik",
-      "category": "Tatlılar"
-    },
-    {
-      "name": "Coca-Cola (33 cl.)",
-      "price": "96 TL",
-      "desc": "Kutu içecek",
-      "category": "İçecekler"
-    },
-    {
-      "name": "Coca-Cola Şekersiz (33 cl.)",
-      "price": "96 TL",
-      "desc": "Kutu içecek",
-      "category": "İçecekler"
-    },
-    {
-      "name": "Fanta (33 cl.)",
-      "price": "96 TL",
-      "desc": "Kutu içecek",
-      "category": "İçecekler"
-    },
-    {
-      "name": "Sprite (33 cl.)",
-      "price": "96 TL",
-      "desc": "Kutu içecek",
-      "category": "İçecekler"
-    },
-    {
-      "name": "Cappy (33 cl.)",
-      "price": "96 TL",
-      "desc": "Kutu içecek",
-      "category": "İçecekler"
-    },
-    {
-      "name": "Fuse Tea Şeftali (33 cl.)",
-      "price": "96 TL",
-      "desc": "Kutu içecek",
-      "category": "İçecekler"
-    },
-    {
-      "name": "Şalgam Suyu (33 cl.)",
-      "price": "64 TL",
-      "desc": "Pet şişe",
-      "category": "İçecekler"
-    },
-    {
-      "name": "Ayran (30 cl.)",
-      "price": "64 TL",
-      "desc": "Büyük boy",
-      "category": "İçecekler"
-    },
-    {
-      "name": "Soda (20 cl.)",
-      "price": "48 TL",
-      "desc": "Cam şişe",
-      "category": "İçecekler"
-    },
-    {
-      "name": "Su (50 cl.)",
-      "price": "40 TL",
-      "desc": "Pet şişe",
-      "category": "İçecekler"
-    },
-    {
-      "name": "Coca-Cola (1 L.)",
-      "price": "176 TL",
-      "desc": "Pet şişe",
-      "category": "İçecekler"
-    },
-    {
-      "name": "Coca-Cola Şekersiz (1 L.)",
-      "price": "176 TL",
-      "desc": "Pet şişe",
-      "category": "İçecekler"
-    },
-    {
-      "name": "Fanta (1 L.)",
-      "price": "176 TL",
-      "desc": "Pet şişe",
-      "category": "İçecekler"
-    },
-    {
-      "name": "Ayran (1 L.)",
-      "price": "152 TL",
-      "desc": "Pet şişe",
-      "category": "İçecekler"
-    },
-    {
-      "name": "Coca-Cola (2,5 L.)",
-      "price": "240 TL",
-      "desc": "Pet şişe",
-      "category": "İçecekler"
-    },
-    {
-      "name": "Fanta (2,5 L.)",
-      "price": "240 TL",
-      "desc": "Pet şişe",
-      "category": "İçecekler"
-    },
-    {
-      "name": "Sarıyer Portakal (33 cl.)",
-      "price": "64 TL",
-      "desc": "Kutu içecek",
-      "category": "İçecekler"
-    },
-    {
-      "name": "Sarıyer Kola (33 cl.)",
-      "price": "64 TL",
-      "desc": "Kutu içecek",
-      "category": "İçecekler"
-    }
-  ]
-}
+    "name": "Beşiktaş Çıtır Pide & Lahmacun",
+    "sourceUrl": "https://besiktascitir.com/#/menu",
+    "sourceName": "Beşiktaş Çıtır resmi public API menüsü",
+    "verifiedAt": "2026-08-25",
+    "items": [
+      {
+        "name": "Lahmacun",
+        "price": "150.00 ₺",
+        "category": "Lahmacun"
+      },
+      {
+        "name": "Acılı Lahmcanun",
+        "price": "150.00 ₺",
+        "category": "Lahmacun"
+      },
+      {
+        "name": "Soğanlı Lahmacun",
+        "price": "150.00 ₺",
+        "category": "Lahmacun"
+      },
+      {
+        "name": "Soğanlı Acılı Lahmacun",
+        "price": "150.00 ₺",
+        "category": "Lahmacun"
+      },
+      {
+        "name": "Kaşarlı Lahmacun",
+        "price": "200.00 ₺",
+        "category": "Lahmacun"
+      },
+      {
+        "name": "Malatya Lahmacun",
+        "price": "290.00 ₺",
+        "category": "Lahmacun"
+      },
+      {
+        "name": "Malatya Acılı Lahmacun",
+        "price": "290.00 ₺",
+        "category": "Lahmacun"
+      },
+      {
+        "name": "Malatya Kaşarlı Lahmacun",
+        "price": "350.00 ₺",
+        "category": "Lahmacun"
+      },
+      {
+        "name": "Kaşarlı Pide",
+        "price": "370.00 ₺",
+        "desc": "Kaşar peyniri",
+        "category": "Pideler"
+      },
+      {
+        "name": "Kuşbaşı Sade",
+        "price": "400.00 ₺",
+        "category": "Pideler"
+      },
+      {
+        "name": "Kuşbaşı Kaşarlı Pide",
+        "price": "420.00 ₺",
+        "desc": "Kuşbaşı Kaşarlı",
+        "category": "Pideler"
+      },
+      {
+        "name": "Kıyma Sade",
+        "price": "380.00 ₺",
+        "category": "Pideler"
+      },
+      {
+        "name": "Kıyma Kaşar",
+        "price": "400.00 ₺",
+        "category": "Pideler"
+      },
+      {
+        "name": "Çıtır Special",
+        "price": "440.00 ₺",
+        "desc": "Kavurma ,sucuk, kıyma ,kuşbaşı ve kaşar",
+        "category": "Pideler"
+      },
+      {
+        "name": "Pastırma Sade",
+        "price": "450.00 ₺",
+        "category": "Pideler"
+      },
+      {
+        "name": "Pastırma Kaşar Pide",
+        "price": "440.00 ₺",
+        "category": "Pideler"
+      },
+      {
+        "name": "Kavurma Sade",
+        "price": "440.00 ₺",
+        "category": "Pideler"
+      },
+      {
+        "name": "Kavurma Kaşarlı pide",
+        "price": "420.00 ₺",
+        "category": "Pideler"
+      },
+      {
+        "name": "Alaturka Pide",
+        "price": "440.00 ₺",
+        "desc": "Pastırma, kavurma ,sucuk ve kaşar",
+        "category": "Pideler"
+      },
+      {
+        "name": "Karışık Pide",
+        "price": "420.00 ₺",
+        "desc": "Kavurma ,sucuk, kıyma ve kaşar",
+        "category": "Pideler"
+      },
+      {
+        "name": "Bafra Pidesi",
+        "price": "390.00 ₺",
+        "desc": "kıyma, soğan",
+        "category": "Pideler"
+      },
+      {
+        "name": "Bıçak Arası",
+        "price": "450.00 ₺",
+        "category": "Pideler"
+      },
+      {
+        "name": "Tavuklu Pide",
+        "price": "380.00 ₺",
+        "category": "Pideler"
+      },
+      {
+        "name": "Etli Ekmek",
+        "price": "400.00 ₺",
+        "category": "Pideler"
+      },
+      {
+        "name": "Vejeteryan Pide",
+        "price": "380.00 ₺",
+        "category": "Vejeteryan"
+      },
+      {
+        "name": "Ispanak Sade",
+        "price": "370.00 ₺",
+        "category": "Vejeteryan"
+      },
+      {
+        "name": "Ispanak Kaşar",
+        "price": "380.00 ₺",
+        "category": "Vejeteryan"
+      },
+      {
+        "name": "Patates Sade",
+        "price": "370.00 ₺",
+        "category": "Vejeteryan"
+      },
+      {
+        "name": "Patetes Kaşarlı Pide",
+        "price": "380.00 ₺",
+        "category": "Vejeteryan"
+      },
+      {
+        "name": "Mantarlı Pide",
+        "price": "380.00 ₺",
+        "category": "Vejeteryan"
+      },
+      {
+        "name": "Adana Kebap",
+        "price": "520.00 ₺",
+        "desc": "2 şiş Adana(acılı) kebap Pilav Pişmiş domates Soğan Maydanoz Lavaş",
+        "category": "Kebap"
+      },
+      {
+        "name": "Urfa Kebap",
+        "price": "520.00 ₺",
+        "desc": "2 şiş Urfa(acısız) kebap Pilav Pişmiş domates Soğan Maydanoz Lavaş",
+        "category": "Kebap"
+      },
+      {
+        "name": "Et Şiş Porsiyon",
+        "price": "550.00 ₺",
+        "desc": "4 şiş Et Pilav Pişmiş domates Soğan Maydanoz Lavaş",
+        "category": "Kebap"
+      },
+      {
+        "name": "Tavuk Şiş Porsiyon",
+        "price": "480.00 ₺",
+        "desc": "2 şiş Tavuk Pilav Pişmiş domates Soğan Maydanoz Lavaş",
+        "category": "Kebap"
+      },
+      {
+        "name": "Yaprak Kanat",
+        "price": "520.00 ₺",
+        "desc": "8 Adet Yaprak Kanat Pilav Pişmiş domates Soğan Maydanoz Lavaş",
+        "category": "Kebap"
+      },
+      {
+        "name": "Karışık kebap",
+        "price": "1100.00 ₺",
+        "desc": "1 şiş Adana yada Urfa 2 şiş Et 4 adet Kanat 1 şiş Tavuk 1 adet Fındık Lahmacun Pilav Yeşillik Soğan Ezme",
+        "category": "Kebap"
+      },
+      {
+        "name": "Domates Kebap",
+        "price": "520.00 ₺",
+        "desc": "2 şiş Domates kebap Pilav Pişmiş domates Soğan Maydanoz Lavaş",
+        "category": "Kebap"
+      },
+      {
+        "name": "Patlıcan Kebap",
+        "price": "520.00 ₺",
+        "desc": "Patlıcan kebap Pilav Pişmiş domates Soğan Maydanoz Lavaş",
+        "category": "Kebap"
+      },
+      {
+        "name": "Adana Dürüm",
+        "price": "320.00 ₺",
+        "desc": "1 Şiş Adana soğan maydonoz karşımı Domates ve baharatlar",
+        "category": "Dürüm"
+      },
+      {
+        "name": "Urfa Dürüm",
+        "price": "320.00 ₺",
+        "desc": "1 Şiş Urfa soğan maydonoz karşımı Domates ve baharatlar",
+        "category": "Dürüm"
+      },
+      {
+        "name": "Et Şiş Dürüm",
+        "price": "350.00 ₺",
+        "desc": "2 Şiş et soğan maydonoz karşımı Domates ve baharatlar",
+        "category": "Dürüm"
+      },
+      {
+        "name": "Tavuk Dürüm",
+        "price": "300.00 ₺",
+        "desc": "1 Şiş tavuk soğan maydonoz karşımı Domates ve baharatlar",
+        "category": "Dürüm"
+      },
+      {
+        "name": "Çıtır Dürüm",
+        "price": "450.00 ₺",
+        "desc": "Lahmacun arası Adana veya Urfa kebap",
+        "category": "Dürüm"
+      },
+      {
+        "name": "Kaşarlı Katmer",
+        "price": "250.00 ₺",
+        "desc": "Kaşarlı Yağlı",
+        "category": "Katmer"
+      },
+      {
+        "name": "Pastırmalı Katmer",
+        "price": "280.00 ₺",
+        "category": "Katmer"
+      },
+      {
+        "name": "Sucuklu Katmer",
+        "price": "250.00 ₺",
+        "category": "Katmer"
+      },
+      {
+        "name": "Kavurmalı Katmer",
+        "price": "270.00 ₺",
+        "category": "Katmer"
+      },
+      {
+        "name": "Künefe",
+        "price": "250.00 ₺",
+        "category": "Tatlı"
+      },
+      {
+        "name": "Sütlaç",
+        "price": "150.00 ₺",
+        "category": "Tatlı"
+      },
+      {
+        "name": "Katmer Tatlısı",
+        "price": "270.00 ₺",
+        "category": "Tatlı"
+      },
+      {
+        "name": "Kaymaklı Fıstıklı Dolama",
+        "price": "300.00 ₺",
+        "category": "Tatlı"
+      },
+      {
+        "name": "Mercimek Çorbası",
+        "price": "150.00 ₺",
+        "category": "Çorba"
+      },
+      {
+        "name": "Sarıyer İçecekleri",
+        "price": "70.00 ₺",
+        "category": "İçecek"
+      },
+      {
+        "name": "Cola-Fanta",
+        "price": "100.00 ₺",
+        "category": "İçecek"
+      },
+      {
+        "name": "Açık Ayran",
+        "price": "70.00 ₺",
+        "category": "İçecek"
+      },
+      {
+        "name": "Ayran",
+        "price": "60.00 ₺",
+        "category": "İçecek"
+      },
+      {
+        "name": "Gazoz-MeyveSuyu",
+        "price": "80.00 ₺",
+        "category": "İçecek"
+      },
+      {
+        "name": "Su",
+        "price": "25.00 ₺",
+        "category": "İçecek"
+      },
+      {
+        "name": "Patates Kızartması",
+        "price": "150.00 ₺",
+        "category": "Et Döner"
+      },
+      {
+        "name": "Sarıyer - Meşrubat Çeşitleri",
+        "price": "70.00 ₺",
+        "category": "İçecek"
+      },
+      {
+        "name": "Soda",
+        "price": "50.00 ₺",
+        "category": "İçecek"
+      }
+    ]
+  }
 ,
   "7250": {
   "name": "Mart Coffee Co.",
