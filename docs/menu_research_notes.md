@@ -1362,3 +1362,6 @@ Exact kayıt `Marmara, Hürriyet Blv. No:231, 34524 Beylikdüzü/İstanbul`, `+9
 
 ## Port Of Point ID 7048 strict HOLD
 Exact kayıt `West İstanbul Marina, Marmara Mahallesi, Ulusum Caddesi No:22, İç Kapı No:8, 34524 Beylikdüzü/İstanbul`, `+90 534 718 73 70`; Cybo, Nerdeler ve Port Of Point/Pargalı sosyal içerikleri adres/telefonu doğruluyor. Portofpoint.com DNS çözümlemedi; RestaurantGuru menüsü CAPTCHA/şüpheli trafik ile engelli. Son bir yıl içinde exact Port Of Point şubesine ait erişilebilir complete item-level fiyatlı menü doğrulanamadı. Ürün/fiyat uydurulmadı; strict HOLD.
+
+## Ravenna Akaretler ID 7047 strict HOLD
+Exact kayıt `Vişnezade, Süleyman Seba Cd. 69/A, 34357 Beşiktaş/İstanbul`; Hentzer telefon alanı boş. Restoranım ve Corner exact 69/A adresini doğruluyor, Restoranım `Telefon yok` gösteriyor. Instagram’da 2024/2025 dönemine ait sınırlı lazanya/piadina fiyatları var ancak complete item-level güncel menü değil; 2026 içerikleri de ürün tanıtımı. Yemeksepeti `Ravenna Coffee` farklı işletme. Telefon paritesi ve son bir yıl exact complete fiyatlı public menü doğrulanamadı. Ürün/fiyat uydurulmadı; strict HOLD.
