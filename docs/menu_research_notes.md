@@ -1761,3 +1761,6 @@ Hentzer kaydı `Semerkand Line Avm, Barış, Peyami Safa Sokağı, 34520 Beylikd
 
 ## MIDPOINT BEYLİKDÜZÜ ID 6912 — STRICT HOLD
 Hentzer kaydı `Cumhuriyet mahallesi Derviş Eroğlu cd, Cumhuriyet, Ege Sokağı No:4/1, 34520 Beylikdüzü/İstanbul`, `+90 537 954 52 33`; Restoranim, Servis Kayıt/Listesi ve Kacıyor exact adres/telefonu doğruluyor, 2025-2026 yorumları şubenin faal olduğunu gösteriyor. Resmi OmniDiner menü URL’sinde herkese açık metin çıkarımında yalnızca Kadıköy bağlantısı görünür oldu; Beylikdüzü ürün/fiyat listesi yüklenmedi. Kacıyor yalnızca kalori/besin verisi, RestaurantGuru ise güvenilir güncel fiyat doğrulaması sağlamıyor. Son bir yıl içinde exact şubeye bağlı, herkese açık ve ürün bazlı güncel fiyatlı menü doğrulanamadığından **strict HOLD**; override eklenmedi.
+
+## HAYVORE BEYOĞLU ID 6911 kabulü
+Hentzer kaydı `İstiklal Caddesi Turnacıbaşı Sok, Kuloğlu, No:4, 34421 Beyoğlu/İstanbul`, `+90 212 245 75 01`; Hayvore resmi iletişim sitesi aynı işletme, adres ve telefonu doğruluyor. Yemeksepeti `bz5x` canlı vendorundan 87 benzersiz Karadeniz yemeği, günlük yemek, çorba, pide/lahmacun, zeytinyağlı, tatlı ve içecek fiyatı aktarıldı. İndirimli güncel satış fiyatları kullanıldı; popüler carousel tekrarları dışlandı. Resmi site Hayvore’nin 2025-2026 seçkilerinde yer aldığını ve faal Beyoğlu işletmesini doğruluyor. **Override kabul edildi.**
