@@ -1671,3 +1671,6 @@ Hentzer kaydı `Sinanpaşa, Altıntaş Sk. 27/a, 34022 Beşiktaş/İstanbul`, `+
 
 ## CIM’S ARTISAN PÂTISSERIE KAVACIK ID 6942 — STRICT HOLD
 Hentzer kaydı `Kavacık, Orhan Veli Kanık Cd. No:110, 34810 Beykoz/İstanbul`, `+90 216 680 28 88`; RestaurantGuru ve işletmenin sosyal kaynakları aynı Kavacık adresini ve telefonu destekliyor. RestaurantGuru menü URL’si güncel fiyatları göstermeden insan doğrulama duvarına yönlendiriyor; erişilebilir işletme sayfasında yalnız genel fiyat aralığı bulunuyor, ürün bazlı güncel fiyat listesi yok. Son bir yıl şartını güvenilir biçimde kanıtlayan herkese açık fiyatlı menü bulunamadığından **strict HOLD**; override eklenmedi.
+
+## SOFRAM KEBAP DÖNER ID 6941 — STRICT HOLD
+Hentzer kaydı `Şehit Muhtar, Tarlabaşı Blv No:84, 34435 Beyoğlu/İstanbul`, `+90 212 297 93 98`; RestaurantGuru, Cybo ve Tripadvisor adres/telefonu destekliyor. RestaurantGuru menü URL’si insan doğrulama duvarına yönlendiriyor; işletme sayfasında yalnız genel kişi başı fiyat aralığı var, ürün bazlı güncel menü/fiyat listesi bulunmuyor. Son bir yıl içinde doğrulanabilir herkese açık fiyatlı menü elde edilemediği için **strict HOLD**; override eklenmedi.
