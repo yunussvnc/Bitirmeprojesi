@@ -1737,3 +1737,6 @@ Hentzer kaydı `Bebek, Küçük Bebek Cd. No:15-17, 34342 Beşiktaş/İstanbul`,
 
 ## THE BEST KITCHEN BEŞİKTAŞ ID 6920 kabulü
 Hentzer kaydı `Cihannüma, Mazhar Reşit Paşa Sokak No:1/A, 34353 Beşiktaş/İstanbul`, `+90 212 327 34 25`; The Best Kitchen resmi sitesi, Waze ve resmi Facebook/Instagram kaynakları exact işletme, adres ve telefonu doğruluyor. Resmi sitenin güncel menü sayfalarından fiyatı açıkça görülen Makarnalar, Salatalar ve İçecekler kategorilerinde 28 benzersiz ürün/fiyat kalemi aktarıldı. Fiyatı yayımlanmayan Ana Yemekler, Burgerler, Omletler, Tostlar, Krepler, Wrapler, Yan Ürünler ve Tatlılar dahil edilmedi. **Override kabul edildi.**
+
+## NADİDE MEYHANE ID 6919 — STRICT HOLD
+Hentzer kaydı `Gazeteciler Sitesi, Esentepe, Matbuat Sk. No:12 D:12, 34394 Şişli/İstanbul`, `+90 533 946 09 77`; resmi Nadide iletişim sayfası ve 2025-2026 resmi Instagram paylaşımları exact adres/telefonu doğruluyor. Resmi menü sayfasında yalnızca Öğle Menüsü ve Akşam Menüsü başlıkları erişilebilir; ürün bazlı fiyatlar okunabilir olarak yayımlanmıyor. Son bir yılda herkese açık ve doğrulanabilir güncel fiyatlı menü bulunamadığından **strict HOLD**; override eklenmedi.
