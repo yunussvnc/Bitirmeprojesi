@@ -74776,4 +74776,348 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
   ]
 },
 
+  "7098": {
+  "name": "Fikir Et Restoran & Kasap",
+  "sourceUrl": "https://www.yemeksepeti.com/restaurant/fl27/fikr-et",
+  "sourceName": "Yemeksepeti canlı vendor fl27; exact Restoranım ve resmi Instagram @fikiret_mangal ile Kavaklı İbrahim Müteferrika Cd. A Blok No:1 / 0212 875 75 76 şube doğrulaması",
+  "verifiedAt": "2026-08-25",
+  "items": [
+    {
+      "name": "Ciğer",
+      "price": "715",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Kaburga Şiş",
+      "price": "715",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Adana Kebap",
+      "price": "650",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Kuzu Külbastı",
+      "price": "1045",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Tavuk Şiş",
+      "price": "605",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Kuzu Çöp Şiş",
+      "price": "685",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Sarma Beyti Kebap (1.5 Porsiyon)",
+      "price": "1035",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Beyti Kebap (Açık) (1.5 Porsiyon)",
+      "price": "1015",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Kuşbaşı Şiş",
+      "price": "685",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Yoğurtlu Kebap",
+      "price": "770",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Karışık Kebap (2 Kişilik)",
+      "price": "2200",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Karışık Kebap (3 Kişilik)",
+      "price": "3110",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Tavuk Kanat",
+      "price": "605",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Fikr-et Kebap (1 Kişilik )",
+      "price": "685",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Fikr-Et Kebap (2 Kişilik) (250 gr.)",
+      "price": "1210",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Patlıcan Kebabı",
+      "price": "1090",
+      "category": "Kebaplar"
+    },
+    {
+      "name": "Lokum Burger",
+      "price": "770",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Fikr-Et Burger",
+      "price": "595",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Fikr-et Acılı Burger",
+      "price": "585",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Fikr-Et Crispy Burger",
+      "price": "585",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Fikret Crispy Burger (150 gr.)",
+      "price": "640",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Fikr-Et Smash Burger",
+      "price": "585",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Fikr-et Ev Burger",
+      "price": "485",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Fikr-et Tavuk Burger",
+      "price": "470",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Fikret Burger (150 gr.)",
+      "price": "650",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Fikr-Et Smash Burger (150 gr.)",
+      "price": "640",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Fikret Acılı Burger (150 gr.)",
+      "price": "640",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Fikret Ev Burger (150 gr.)",
+      "price": "540",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Lokum",
+      "price": "1760",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "Et Spaghetti",
+      "price": "1650",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "Kasap Köfte (200 gr.)",
+      "price": "715",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "Cheddarlı Köfte (250 gr.)",
+      "price": "825",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "Kuzu Pirzola (300 gr.)",
+      "price": "1090",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "Karışık Steak",
+      "price": "2200",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "Fikr-et Spagetti",
+      "price": "1650",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "Fikr-et Yaprak Et",
+      "price": "1650",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "Kuzu İncik",
+      "price": "1265",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "Dana Antrikot",
+      "price": "1870",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "Adana Dürüm",
+      "price": "440",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Kuzu Şiş Dürüm",
+      "price": "475",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Kuzu Çöp Şiş Dürüm",
+      "price": "475",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Ciğer Şiş Dürüm",
+      "price": "475",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Tavuk Şiş Dürüm",
+      "price": "400",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Tulum Peynirli Salata",
+      "price": "330",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Avokado Salata",
+      "price": "375",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Gavurdağı Salata",
+      "price": "310",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Havuç Dilimi Baklava",
+      "price": "295",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Fıstıklı Kadayıf",
+      "price": "295",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "İç Pilav",
+      "price": "150",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Baharatlı Patates Cipsi",
+      "price": "215",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Soğan Çiçeği",
+      "price": "275",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Mozzarella Sticks",
+      "price": "195",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Chicken Stick",
+      "price": "275",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Full Mix",
+      "price": "320",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Pepsi (33 cl.)",
+      "price": "90",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Pepsi Max (33 cl.)",
+      "price": "90",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Yedigün (33 cl.)",
+      "price": "90",
+      "category": "İçecekler"
+    },
+    {
+      "name": "7UP (33 cl.)",
+      "price": "90",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Lipton Ice Tea Şeftali (33 cl.)",
+      "price": "90",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Lipton Ice Tea Mango (33 cl.)",
+      "price": "90",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Şalgam Suyu (33 cl.)",
+      "price": "60",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Meyveli Soda (20 cl.)",
+      "price": "65",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Soda (20 cl.)",
+      "price": "60",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Hardal",
+      "price": "10",
+      "category": "Soslar"
+    },
+    {
+      "name": "Ketçap",
+      "price": "10",
+      "category": "Soslar"
+    },
+    {
+      "name": "Barbekü Sos",
+      "price": "10",
+      "category": "Soslar"
+    },
+    {
+      "name": "Mayonez",
+      "price": "10",
+      "category": "Soslar"
+    }
+  ]
+},
+
 };

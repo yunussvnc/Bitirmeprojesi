@@ -1215,3 +1215,6 @@ Hentzer exact kayıt `Rüzgarlıbahçe, Yasemin Sk. No:06, 34805 Beykoz/İstanbu
 
 ## Fıstıkça Dondurma Beylikdüzü (Demir Country) ID 7099 HOLD
 Hentzer exact kayıt `Kavaklı, Mehmet Akif Ersoy Cd. No:17, 34520/34480 Beylikdüzü/İstanbul`, `+90 541 150 46 27`; Restoranım ve resmi Instagram `@fistikcadondurma.beylikduzu` aynı adres/telefonu doğruluyor. Güncel sosyal içerikler dondurma, waffle ve tatlıları desteklese de complete item-level güncel fiyatlı menü veya güvenilir sipariş platformu bulunamadı; yorumlarda yer alan tekil tutarlar menü kaynağı olarak kullanılmadı. Strict HOLD; ürün/fiyat eklenmedi.
+
+## Fikir Et Restoran & Kasap ID 7098 acceptance
+Hentzer exact kayıt `Kavaklı, İbrahim Müteferrika Cd. A Blok No:1, 34520 Beylikdüzü/İstanbul`, `+90 212 875 75 76`; Restoranım exact sayfası ve resmi Instagram `@fikiret_mangal` aynı Beylikdüzü/telefon kimliğini destekliyor. Yemeksepeti canlı vendor `fl27` menüsünden kebap, burger, ızgara, dürüm, salata, tatlı, yan ürün ve içecek kategorilerinde **67 ürün ve güncel fiyat** aktarıldı. Poşet/servis satırı dahil edilmedi. `verifiedAt` canlı doğrulama tarihi `2026-08-25`.
