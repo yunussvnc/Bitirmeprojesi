@@ -1563,3 +1563,6 @@ Hentzer API kaydı `Yalıköy, Selvi Burnu Cd. No:4, 34820 Beykoz/İstanbul`, `+
 
 ## Bİ DOST COFFEE & CHOCOLATE ID 6979 kabul
 Hentzer kaydı `Muradiye, Nüzhetiye Cd. 3/A, 34357 Beşiktaş/İstanbul`, `+90 212 260 68 01`; Bulurum, Yemeksepeti yorumları ve resmi Instagram aynı exact işletme/telefonu doğruluyor. Yemeksepeti `pqgp` canlı vendor menüsü 2026-08-26 tarihinde erişildi. Poğaçalar & Simitler, Bi Dost Tostlar, Soğuk Sandviçler, Kruvasanlar, Tatlılar, Vitamin Bar, Bitki Çayları, Soğuk Kahveler, Sıcak Kahveler, Sıcak İçecekler ve İçecekler kategorilerinden **43 benzersiz gıda/içecek kalemi** aktarıldı. Poşet kalemi ve Popüler carousel tekrarları dışlandı. **Override kabul edildi.**
+
+## EGE LOKMA & WAFFLE ID 6978 strict HOLD
+Hentzer API kaydı `No:1 Ortaköy, Mecidiye, Mecidiye Köprüsü Sk., 34347 Beşiktaş/İstanbul`, `+90 532 668 01 87`; Cybo kaydı aynı adres/telefonla `Ege Lokmacısı The Dessert Lokma` adını gösteriyor. `egewaffle.com/menu/` resmi sayfası ürün/fiyat içeriği sunmuyor; arama sonuçlarındaki Ege Waffle Yemeksepeti/Migros menüleri Aydın şubelerine ait görünüyor ve aynı Ortaköy işletmesiyle exact branch eşleşmesi doğrulanamadı. İşletme adı ve güncel fiyatlı menü paritesi birlikte sağlanamadığı için **override eklenmedi; strict HOLD**.
