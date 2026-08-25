@@ -1338,3 +1338,6 @@ Exact kayıt `Sinanpaşa, Ihlamurdere Cd. No:38, 34357 Beşiktaş/İstanbul`, `+
 
 ## Vira Vira ID 7056 strict HOLD
 Exact kayıt `Arnavutköy, Bebek Arnavutköy Cd No:48, 34345 Beşiktaş/İstanbul`, `+90 212 257 18 05`; Trip.com, Aramabul ve Meyhankoli adres/telefonu doğruluyor. Resmî Facebook exact No:48 adresini ve güncel `+90 540 257 18 05` rezervasyon hattını gösteriyor; 0212 işletme hattı 2026 fix-menü paylaşımında mevcut. Güncel içerikte kişi başı 2.750 TL alkollü fix menü paketi var ancak complete item-level alakart ürün/fiyat listesi yok. Son bir yıl içinde exact şubeye ait tam fiyatlı public menü doğrulanamadı. Ürün/fiyat uydurulmadı; strict HOLD.
+
+## Aurora Restaurant Ortaköy ID 7055 strict HOLD
+Exact kayıt `Ortaköy, Portakal Ykş. Cd. No:17, 34347 Beşiktaş/İstanbul`, `+90 533 136 37 67`; resmî site, Restoranım, Google Travel ve Facebook exact adresi doğruluyor; Restoranım/Google Travel Hentzer telefonuyla eşleşiyor. Resmî sitede yalnız düğün/nişan organizasyonu için kişi başı Beyaz Et 1.500 TL ve Kırmızı Et 1.750 TL bilgisi var; complete item-level alakart fiyat listesi yok. Tripadvisor ve diğer kaynaklarda menü fotoğrafları/yemek türleri bulunsa da son bir yıl içinde exact şubeye ait tam fiyatlı public menü doğrulanamadı. Ürün/fiyat uydurulmadı; strict HOLD.
