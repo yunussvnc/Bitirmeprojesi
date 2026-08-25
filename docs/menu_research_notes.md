@@ -1401,3 +1401,6 @@ Exact kayıt `Şehit Muhtar, Bekar Sk. No:20, 34435 Beyoğlu/İstanbul`, `+90 21
 
 ## ADANA TİRYAKİ OCAKBAŞI ID 7034 strict HOLD
 Exact kayıt `Kuruçeşme, Yeşilpınar Sk. No:6, 34345 Beşiktaş/İstanbul`, `+90 212 265 13 90`; Restoranım, Threads ve resmi Instagram kaynaklarıyla adres/telefon eşleşti. Ancak 2025-2026 döneminde bu exact işletmeye ait tam item-level fiyatlı menü bulunamadı; arama sonuçlarındaki `Adana Ocakbaşı` Yemeksepeti kaydı farklı şehir/işletme olduğundan kullanılmadı. Bu nedenle **override eklenmedi; strict HOLD**.
+
+## BİRLİK KASAP STEAKPOINT ID 7033 strict HOLD
+Hentzer kaydı `Rüzgarlıbahçe, Cumhuriyet Cd. No:57, 34805 Beykoz/İstanbul`, `+90 216 425 55 29`; resmi site ve Instagram adresiyle eşleşti. Ancak telefon kaynakları `0216 425 55 29-28` ve resmi dijital menü rezervasyon hattı `0216 425 55 28` olarak farklılaşıyor. Ayrıca resmi dijital menü yalnızca görsel/dinamik sayfalar ve ok butonları sunuyor; tam item-level fiyatlar metin olarak erişilebilir değil. Zorunlu adres/telefon paritesi ve güncel fiyat doğrulaması sağlanamadığından **override eklenmedi; strict HOLD**.
