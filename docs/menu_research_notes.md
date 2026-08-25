@@ -1368,3 +1368,6 @@ Exact kayıt `Vişnezade, Süleyman Seba Cd. 69/A, 34357 Beşiktaş/İstanbul`; 
 
 ## Brooklyn Express Beylikdüzü ID 7046 kabul
 Exact kayıt `Ekinoks AVM, Büyükçekmece Mah., Cumhuriyet Cd. No:1 E1 Blok No:28, 34000 Beylikdüzü/İstanbul`, `+90 546 524 86 73`; Ekinoks AVM’nin resmî Brooklyn Express sayfası, Restoranım ve işletme kayıtlarıyla doğrulandı. Resmî `menu.brooklynexpress.com.tr` QR menüsü 2026-08-25 tarihinde kontrol edildi; Şişe Biralar, Draft Beer, Veal, Lamb Meat, Meatballs Kebab Sausage, Raki ve Extras kategorilerinden **92 benzersiz ürün/fiyat** aktarıldı. `%10 Service Fee` menü kalemi olarak eklenmedi.
+
+## Karaköy Kahvesi Çubuklu ID 7045 kabul
+Exact kayıt `Çubuklu, Şehit Ersin Güner Cad No:6, 34805 Beykoz/İstanbul`; resmî site, Instagram, Restoranım ve Yandex kaynaklarıyla doğrulandı. Telefon Hentzer’de boş olsa da resmî Instagram profil arama sonucu `0541 634 34 34` bilgisini exact Çubuklu şubesiyle birlikte yayımlıyor. Resmî `karakoykahvesicubuklu.com` menüsü 2026-08-25 tarihinde kontrol edildi; kampanya, kahvaltı, tost, aperatif, ana yemek, pizza, makarna, salata, hamburger, wrap, çay, soğuk içecek, frozen, milkshake, kahve, smoothie, pasta ve nargile kategorilerinden **159 benzersiz ürün/fiyat** aktarıldı. Popüler carousel tekrarları dışlandı.

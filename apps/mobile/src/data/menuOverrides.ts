@@ -82388,4 +82388,966 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     }
   ]
 },
+  "7045": {
+  "name": "Karaköy Kahvesi Çubuklu",
+  "sourceUrl": "https://www.karakoykahvesicubuklu.com/",
+  "sourceName": "Official Karaköy Kahvesi Çubuklu menu; Restoranım, Instagram and official business sources confirm exact Çubuklu, Şehit Ersin Güner Cad No:6, 34805 Beykoz branch. The official public menu snapshot contains 159 unique food and beverage items across campaigns, breakfast, toast, appetizers, mains, pizza, pasta, salads, burgers, wraps, teas, cold drinks, frozen, milkshake, coffee, smoothies, cakes and nargile; Popular carousel duplicates excluded.",
+  "verifiedAt": "2026-08-25",
+  "items": [
+    {
+      "name": "Özel Chicken Burger Menü",
+      "price": "295.00 TL",
+      "desc": "",
+      "category": "Kampanyalar"
+    },
+    {
+      "name": "Churros + İçecek",
+      "price": "250.00 TL",
+      "desc": "",
+      "category": "Kampanyalar"
+    },
+    {
+      "name": "Waffle Bowl + İçecek",
+      "price": "250.00 TL",
+      "desc": "",
+      "category": "Kampanyalar"
+    },
+    {
+      "name": "Serpme Kahvaltı (2 Kişilik)",
+      "price": "1300.00 TL",
+      "desc": "",
+      "category": "Kahvaltılar"
+    },
+    {
+      "name": "Kahvaltı Tabağı",
+      "price": "540.00 TL",
+      "desc": "",
+      "category": "Kahvaltılar"
+    },
+    {
+      "name": "Sade Omlet",
+      "price": "225.00 TL",
+      "desc": "",
+      "category": "Kahvaltılar"
+    },
+    {
+      "name": "Peynirli Omlet",
+      "price": "240.00 TL",
+      "desc": "",
+      "category": "Kahvaltılar"
+    },
+    {
+      "name": "Karışık Omlet",
+      "price": "250.00 TL",
+      "desc": "",
+      "category": "Kahvaltılar"
+    },
+    {
+      "name": "Menemen",
+      "price": "245.00 TL",
+      "desc": "",
+      "category": "Kahvaltılar"
+    },
+    {
+      "name": "Karışık Menemen",
+      "price": "270.00 TL",
+      "desc": "",
+      "category": "Kahvaltılar"
+    },
+    {
+      "name": "Mıhlama",
+      "price": "350.00 TL",
+      "desc": "",
+      "category": "Kahvaltılar"
+    },
+    {
+      "name": "Sahanda Yumurta",
+      "price": "180.00 TL",
+      "desc": "",
+      "category": "Kahvaltılar"
+    },
+    {
+      "name": "Sucuklu Yumurta",
+      "price": "210.00 TL",
+      "desc": "",
+      "category": "Kahvaltılar"
+    },
+    {
+      "name": "Peynirli Yumurta",
+      "price": "210.00 TL",
+      "desc": "",
+      "category": "Kahvaltılar"
+    },
+    {
+      "name": "Sahanda Sucuk",
+      "price": "180.00 TL",
+      "desc": "",
+      "category": "Kahvaltılar"
+    },
+    {
+      "name": "Kavurmalı Yumurta",
+      "price": "295.00 TL",
+      "desc": "",
+      "category": "Kahvaltılar"
+    },
+    {
+      "name": "Kaşarlı Gözleme",
+      "price": "330.00 TL",
+      "desc": "",
+      "category": "Kahvaltılar"
+    },
+    {
+      "name": "Peynirli Gözleme",
+      "price": "330.00 TL",
+      "desc": "",
+      "category": "Kahvaltılar"
+    },
+    {
+      "name": "Sucuk Kaşarlı Gözleme",
+      "price": "360.00 TL",
+      "desc": "",
+      "category": "Kahvaltılar"
+    },
+    {
+      "name": "Karaköy Bazlama Tost",
+      "price": "370.00 TL",
+      "desc": "",
+      "category": "Tostlar"
+    },
+    {
+      "name": "Kaşarlı Tost",
+      "price": "270.00 TL",
+      "desc": "",
+      "category": "Tostlar"
+    },
+    {
+      "name": "Beyaz Peynirli Tost",
+      "price": "270.00 TL",
+      "desc": "",
+      "category": "Tostlar"
+    },
+    {
+      "name": "Çift Kaşarlı Tost",
+      "price": "280.00 TL",
+      "desc": "",
+      "category": "Tostlar"
+    },
+    {
+      "name": "Karışık Tost",
+      "price": "300.00 TL",
+      "desc": "",
+      "category": "Tostlar"
+    },
+    {
+      "name": "Kavurmalı Kaşarlı Tost",
+      "price": "370.00 TL",
+      "desc": "",
+      "category": "Tostlar"
+    },
+    {
+      "name": "Patates Tava",
+      "price": "220.00 TL",
+      "desc": "",
+      "category": "Aperatifler"
+    },
+    {
+      "name": "Sigara Böreği",
+      "price": "260.00 TL",
+      "desc": "",
+      "category": "Aperatifler"
+    },
+    {
+      "name": "Sosis Tabağı",
+      "price": "280.00 TL",
+      "desc": "",
+      "category": "Aperatifler"
+    },
+    {
+      "name": "Chicken Finger",
+      "price": "350.00 TL",
+      "desc": "",
+      "category": "Aperatifler"
+    },
+    {
+      "name": "Combo Kızartma Tabağı",
+      "price": "450.00 TL",
+      "desc": "",
+      "category": "Aperatifler"
+    },
+    {
+      "name": "Izgara Köfte",
+      "price": "570.00 TL",
+      "desc": "",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Izgara Kaşarlı Köfte",
+      "price": "585.00 TL",
+      "desc": "",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Beğendili Köfte",
+      "price": "585.00 TL",
+      "desc": "",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Etli Fajita",
+      "price": "900.00 TL",
+      "desc": "",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Tavuk Fajita",
+      "price": "570.00 TL",
+      "desc": "",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Viyana Usulü Şinitzel",
+      "price": "570.00 TL",
+      "desc": "",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Pideli Köfte",
+      "price": "585.00 TL",
+      "desc": "",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Karışık Izgara",
+      "price": "700.00 TL",
+      "desc": "",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Izgara Tavuk Pirzola",
+      "price": "500.00 TL",
+      "desc": "",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Beğendili Tavuk",
+      "price": "520.00 TL",
+      "desc": "",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Tavuk Şinitzel",
+      "price": "520.00 TL",
+      "desc": "",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Köri Soslu Tavuk",
+      "price": "520.00 TL",
+      "desc": "",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Meksika Soslu Tavuk",
+      "price": "520.00 TL",
+      "desc": "",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Barbekü Soslu Tavuk",
+      "price": "520.00 TL",
+      "desc": "",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Pesto Soslu Tavuk",
+      "price": "520.00 TL",
+      "desc": "",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Menü Special",
+      "price": "595.00 TL",
+      "desc": "",
+      "category": "Ana Yemekler"
+    },
+    {
+      "name": "Margarita Pizza",
+      "price": "460.00 TL",
+      "desc": "",
+      "category": "Pizzalar"
+    },
+    {
+      "name": "Karışık Pizza",
+      "price": "515.00 TL",
+      "desc": "",
+      "category": "Pizzalar"
+    },
+    {
+      "name": "Vejetaryen Pizza",
+      "price": "515.00 TL",
+      "desc": "",
+      "category": "Pizzalar"
+    },
+    {
+      "name": "Karaköy Spesiyal Pizza",
+      "price": "550.00 TL",
+      "desc": "",
+      "category": "Pizzalar"
+    },
+    {
+      "name": "Ton Balıklı Pizza",
+      "price": "550.00 TL",
+      "desc": "",
+      "category": "Pizzalar"
+    },
+    {
+      "name": "Spagetti Bolonez",
+      "price": "500.00 TL",
+      "desc": "",
+      "category": "Makarnalar"
+    },
+    {
+      "name": "Tavuklu Penne",
+      "price": "500.00 TL",
+      "desc": "",
+      "category": "Makarnalar"
+    },
+    {
+      "name": "Penne Al Arrabiata",
+      "price": "450.00 TL",
+      "desc": "",
+      "category": "Makarnalar"
+    },
+    {
+      "name": "Fettuccini Alfredo",
+      "price": "500.00 TL",
+      "desc": "",
+      "category": "Makarnalar"
+    },
+    {
+      "name": "Ton Balıklı Salata",
+      "price": "460.00 TL",
+      "desc": "",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Mevsim Salata",
+      "price": "270.00 TL",
+      "desc": "",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Sezar Salata (Tavuklu)",
+      "price": "460.00 TL",
+      "desc": "",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Çıtır Tavuklu Salata",
+      "price": "460.00 TL",
+      "desc": "",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Çoban Salata",
+      "price": "270.00 TL",
+      "desc": "",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Akdeniz Salata",
+      "price": "320.00 TL",
+      "desc": "",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Hamburger",
+      "price": "470.00 TL",
+      "desc": "",
+      "category": "Hamburgerler"
+    },
+    {
+      "name": "Cheese Burger",
+      "price": "480.00 TL",
+      "desc": "",
+      "category": "Hamburgerler"
+    },
+    {
+      "name": "Tavuk Burger",
+      "price": "440.00 TL",
+      "desc": "",
+      "category": "Hamburgerler"
+    },
+    {
+      "name": "Karaköy Kahvesi Burger",
+      "price": "495.00 TL",
+      "desc": "",
+      "category": "Hamburgerler"
+    },
+    {
+      "name": "Texas Double Burger",
+      "price": "590.00 TL",
+      "desc": "",
+      "category": "Hamburgerler"
+    },
+    {
+      "name": "Tavuklu Wrap",
+      "price": "450.00 TL",
+      "desc": "",
+      "category": "Wraplar"
+    },
+    {
+      "name": "Köfte Wrap",
+      "price": "490.00 TL",
+      "desc": "",
+      "category": "Wraplar"
+    },
+    {
+      "name": "Çay",
+      "price": "65.00 TL",
+      "desc": "",
+      "category": "Çaylar"
+    },
+    {
+      "name": "Fincan Çay",
+      "price": "85.00 TL",
+      "desc": "",
+      "category": "Çaylar"
+    },
+    {
+      "name": "Ada Çayı",
+      "price": "195.00 TL",
+      "desc": "",
+      "category": "Çaylar"
+    },
+    {
+      "name": "Yeşil Çay",
+      "price": "195.00 TL",
+      "desc": "",
+      "category": "Çaylar"
+    },
+    {
+      "name": "Papatya Çayı",
+      "price": "195.00 TL",
+      "desc": "",
+      "category": "Çaylar"
+    },
+    {
+      "name": "Ihlamur",
+      "price": "195.00 TL",
+      "desc": "",
+      "category": "Çaylar"
+    },
+    {
+      "name": "Kış Çayı",
+      "price": "195.00 TL",
+      "desc": "",
+      "category": "Çaylar"
+    },
+    {
+      "name": "Orman Meyveli Çay",
+      "price": "195.00 TL",
+      "desc": "",
+      "category": "Çaylar"
+    },
+    {
+      "name": "Karışık Meyveli Çay",
+      "price": "195.00 TL",
+      "desc": "",
+      "category": "Çaylar"
+    },
+    {
+      "name": "Karaköy Bitki Çayı",
+      "price": "195.00 TL",
+      "desc": "",
+      "category": "Çaylar"
+    },
+    {
+      "name": "Salep",
+      "price": "195.00 TL",
+      "desc": "",
+      "category": "Çaylar"
+    },
+    {
+      "name": "Kuşburnu",
+      "price": "65.00 TL",
+      "desc": "",
+      "category": "Çaylar"
+    },
+    {
+      "name": "Muz",
+      "price": "65.00 TL",
+      "desc": "",
+      "category": "Çaylar"
+    },
+    {
+      "name": "Kivi",
+      "price": "65.00 TL",
+      "desc": "",
+      "category": "Çaylar"
+    },
+    {
+      "name": "Oralet",
+      "price": "65.00 TL",
+      "desc": "",
+      "category": "Çaylar"
+    },
+    {
+      "name": "Elma",
+      "price": "65.00 TL",
+      "desc": "",
+      "category": "Çaylar"
+    },
+    {
+      "name": "Karadut",
+      "price": "65.00 TL",
+      "desc": "",
+      "category": "Çaylar"
+    },
+    {
+      "name": "Pepsi (300 ml)",
+      "price": "120.00 TL",
+      "desc": "",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Yedigün (300 ml)",
+      "price": "120.00 TL",
+      "desc": "",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Seven Up (300 ml)",
+      "price": "120.00 TL",
+      "desc": "",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Ice Tea (330 ml)",
+      "price": "120.00 TL",
+      "desc": "",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Meyve Suyu (330 ml)",
+      "price": "120.00 TL",
+      "desc": "",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Sıkma Portakal (225ml)",
+      "price": "185.00 TL",
+      "desc": "",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Limonata (350 ml)",
+      "price": "150.00 TL",
+      "desc": "",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Cool Lime (350 ml)",
+      "price": "150.00 TL",
+      "desc": "",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Ayran (300 ml)",
+      "price": "70.00 TL",
+      "desc": "",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Meyveli Soda (200 ml)",
+      "price": "100.00 TL",
+      "desc": "",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Churchill (225 ml)",
+      "price": "100.00 TL",
+      "desc": "",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Sade Soda (200 ml)",
+      "price": "90.00 TL",
+      "desc": "",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Su (500 ml)",
+      "price": "30.00 TL",
+      "desc": "",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Çilekli Frozen",
+      "price": "240.00 TL",
+      "desc": "",
+      "category": "Frozenler"
+    },
+    {
+      "name": "Kivili Frozen",
+      "price": "240.00 TL",
+      "desc": "",
+      "category": "Frozenler"
+    },
+    {
+      "name": "Çikolatalı Frozen",
+      "price": "240.00 TL",
+      "desc": "",
+      "category": "Frozenler"
+    },
+    {
+      "name": "Böğürtlenli Frozen",
+      "price": "240.00 TL",
+      "desc": "",
+      "category": "Frozenler"
+    },
+    {
+      "name": "Şeftalili Frozen",
+      "price": "240.00 TL",
+      "desc": "",
+      "category": "Frozenler"
+    },
+    {
+      "name": "Orman Meyveli Frozen",
+      "price": "240.00 TL",
+      "desc": "",
+      "category": "Frozenler"
+    },
+    {
+      "name": "Yeşil Elma Frozen",
+      "price": "240.00 TL",
+      "desc": "",
+      "category": "Frozenler"
+    },
+    {
+      "name": "Vanilyalı Milkshake",
+      "price": "260.00 TL",
+      "desc": "",
+      "category": "Milkshake"
+    },
+    {
+      "name": "Caramel Milkshake",
+      "price": "260.00 TL",
+      "desc": "",
+      "category": "Milkshake"
+    },
+    {
+      "name": "Çilekli Milkshake",
+      "price": "260.00 TL",
+      "desc": "",
+      "category": "Milkshake"
+    },
+    {
+      "name": "Çikolatalı Milkshake",
+      "price": "260.00 TL",
+      "desc": "",
+      "category": "Milkshake"
+    },
+    {
+      "name": "Türk Kahvesi",
+      "price": "170.00 TL",
+      "desc": "",
+      "category": "Kahveler"
+    },
+    {
+      "name": "Damla Sakızlı Türk Kahvesi",
+      "price": "170.00 TL",
+      "desc": "",
+      "category": "Kahveler"
+    },
+    {
+      "name": "Dibek Kahvesi",
+      "price": "175.00 TL",
+      "desc": "",
+      "category": "Kahveler"
+    },
+    {
+      "name": "Menengiç Kahvesi",
+      "price": "175.00 TL",
+      "desc": "",
+      "category": "Kahveler"
+    },
+    {
+      "name": "Sıcak Çikolata",
+      "price": "220.00 TL",
+      "desc": "",
+      "category": "Kahveler"
+    },
+    {
+      "name": "Cafe Latte",
+      "price": "230.00 TL",
+      "desc": "",
+      "category": "Kahveler"
+    },
+    {
+      "name": "Caramel Latte",
+      "price": "230.00 TL",
+      "desc": "",
+      "category": "Kahveler"
+    },
+    {
+      "name": "Filtre Kahve",
+      "price": "215.00 TL",
+      "desc": "",
+      "category": "Kahveler"
+    },
+    {
+      "name": "Americano",
+      "price": "220.00 TL",
+      "desc": "",
+      "category": "Kahveler"
+    },
+    {
+      "name": "Espresso",
+      "price": "195.00 TL",
+      "desc": "",
+      "category": "Kahveler"
+    },
+    {
+      "name": "Cappuccino",
+      "price": "230.00 TL",
+      "desc": "",
+      "category": "Kahveler"
+    },
+    {
+      "name": "Vanilyalı Cappuccino",
+      "price": "230.00 TL",
+      "desc": "",
+      "category": "Kahveler"
+    },
+    {
+      "name": "Mocha",
+      "price": "240.00 TL",
+      "desc": "",
+      "category": "Kahveler"
+    },
+    {
+      "name": "White Chocolate Mocha",
+      "price": "240.00 TL",
+      "desc": "",
+      "category": "Kahveler"
+    },
+    {
+      "name": "Ice Latte",
+      "price": "250.00 TL",
+      "desc": "",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Ice Americano",
+      "price": "240.00 TL",
+      "desc": "",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Ice Filtre",
+      "price": "240.00 TL",
+      "desc": "",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Ice Caramel Latte",
+      "price": "250.00 TL",
+      "desc": "",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Ice Mocha",
+      "price": "250.00 TL",
+      "desc": "",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Frappe",
+      "price": "260.00 TL",
+      "desc": "",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Çilekli Smoothie",
+      "price": "250.00 TL",
+      "desc": "",
+      "category": "Smoothie"
+    },
+    {
+      "name": "Kivili Smoothie",
+      "price": "250.00 TL",
+      "desc": "",
+      "category": "Smoothie"
+    },
+    {
+      "name": "Kavunlu Smoothie",
+      "price": "250.00 TL",
+      "desc": "",
+      "category": "Smoothie"
+    },
+    {
+      "name": "Narlı Smoothie",
+      "price": "250.00 TL",
+      "desc": "",
+      "category": "Smoothie"
+    },
+    {
+      "name": "Böğürtlenli Smoothie",
+      "price": "250.00 TL",
+      "desc": "",
+      "category": "Smoothie"
+    },
+    {
+      "name": "Çikolatalı Smoothie",
+      "price": "250.00 TL",
+      "desc": "",
+      "category": "Smoothie"
+    },
+    {
+      "name": "Şeftalili Smoothie",
+      "price": "250.00 TL",
+      "desc": "",
+      "category": "Smoothie"
+    },
+    {
+      "name": "Orman Meyveli Smoothie",
+      "price": "250.00 TL",
+      "desc": "",
+      "category": "Smoothie"
+    },
+    {
+      "name": "Dubai Çikolatalı Pasta",
+      "price": "300.00 TL",
+      "desc": "",
+      "category": "Pastalar"
+    },
+    {
+      "name": "Mozaik Pasta",
+      "price": "285.00 TL",
+      "desc": "",
+      "category": "Pastalar"
+    },
+    {
+      "name": "Dondurmalı Brownie",
+      "price": "300.00 TL",
+      "desc": "",
+      "category": "Pastalar"
+    },
+    {
+      "name": "Frambuazlı Cheesecake",
+      "price": "285.00 TL",
+      "desc": "",
+      "category": "Pastalar"
+    },
+    {
+      "name": "Limonlu Cheesecake",
+      "price": "285.00 TL",
+      "desc": "",
+      "category": "Pastalar"
+    },
+    {
+      "name": "Tiramisu",
+      "price": "285.00 TL",
+      "desc": "",
+      "category": "Pastalar"
+    },
+    {
+      "name": "Frambuazlı Çikolatalı Pasta",
+      "price": "285.00 TL",
+      "desc": "",
+      "category": "Pastalar"
+    },
+    {
+      "name": "Dondurmalı Çikolatalı Sufle",
+      "price": "300.00 TL",
+      "desc": "",
+      "category": "Pastalar"
+    },
+    {
+      "name": "San Sebastian",
+      "price": "310.00 TL",
+      "desc": "",
+      "category": "Pastalar"
+    },
+    {
+      "name": "Trileçe Karamelli",
+      "price": "250.00 TL",
+      "desc": "",
+      "category": "Pastalar"
+    },
+    {
+      "name": "Waffle",
+      "price": "390.00 TL",
+      "desc": "",
+      "category": "Pastalar"
+    },
+    {
+      "name": "Mor Velvet",
+      "price": "285.00 TL",
+      "desc": "",
+      "category": "Pastalar"
+    },
+    {
+      "name": "Magnolya",
+      "price": "300.00 TL",
+      "desc": "",
+      "category": "Pastalar"
+    },
+    {
+      "name": "Dondurma (1 Top)",
+      "price": "60.00 TL",
+      "desc": "",
+      "category": "Pastalar"
+    },
+    {
+      "name": "Meyve Tabağı",
+      "price": "300.00 TL",
+      "desc": "",
+      "category": "Pastalar"
+    },
+    {
+      "name": "Meyve Tabağı (Double)",
+      "price": "470.00 TL",
+      "desc": "",
+      "category": "Pastalar"
+    },
+    {
+      "name": "Çerez",
+      "price": "250.00 TL",
+      "desc": "",
+      "category": "Pastalar"
+    },
+    {
+      "name": "Nargile",
+      "price": "600.00 TL",
+      "desc": "",
+      "category": "Nargile"
+    },
+    {
+      "name": "Nargile Special Tatlar",
+      "price": "650.00 TL",
+      "desc": "",
+      "category": "Nargile"
+    },
+    {
+      "name": "Nargile Dark Tütün",
+      "price": "750.00 TL",
+      "desc": "",
+      "category": "Nargile"
+    },
+    {
+      "name": "Kafa Değişimi",
+      "price": "300.00 TL",
+      "desc": "",
+      "category": "Nargile"
+    },
+    {
+      "name": "Buzlu Marpuç",
+      "price": "150.00 TL",
+      "desc": "",
+      "category": "Nargile"
+    }
+  ]
+},
 };
