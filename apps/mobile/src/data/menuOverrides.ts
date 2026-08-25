@@ -81828,4 +81828,564 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     }
   ]
 },
+  "7046": {
+  "name": "Brooklyn Express Beylikdüzü",
+  "sourceUrl": "https://menu.brooklynexpress.com.tr/",
+  "sourceName": "Official Brooklyn Express QR Menu exact Ekinoks Beylikdüzü branch; Ekinoks AVM, Restoranım and public business records confirm Ekinoks Avm, Cumhuriyet Cd. No:1 E1 Blok No:28, 34000 Beylikdüzü and +90 546 524 86 73. Eight QR categories yielded 92 unique food/beverage items; service fee excluded.",
+  "verifiedAt": "2026-08-25",
+  "items": [
+    {
+      "name": "Becks 50cl",
+      "price": "155 TL",
+      "desc": "",
+      "category": "Şişe Biralar"
+    },
+    {
+      "name": "Belfast 50cl",
+      "price": "145 TL",
+      "desc": "",
+      "category": "Şişe Biralar"
+    },
+    {
+      "name": "Bomonti Filtresiz 50cl",
+      "price": "145 TL",
+      "desc": "",
+      "category": "Şişe Biralar"
+    },
+    {
+      "name": "Bud 50cl",
+      "price": "165 TL",
+      "desc": "",
+      "category": "Şişe Biralar"
+    },
+    {
+      "name": "Corona",
+      "price": "245 TL",
+      "desc": "",
+      "category": "Şişe Biralar"
+    },
+    {
+      "name": "Efes Malt 50cl",
+      "price": "134 TL",
+      "desc": "",
+      "category": "Şişe Biralar"
+    },
+    {
+      "name": "Efes Pilsen 50cl",
+      "price": "134 TL",
+      "desc": "",
+      "category": "Şişe Biralar"
+    },
+    {
+      "name": "Özel Seri 50cl",
+      "price": "145 TL",
+      "desc": "",
+      "category": "Şişe Biralar"
+    },
+    {
+      "name": "Leffe Brune",
+      "price": "315 TL",
+      "desc": "",
+      "category": "Şişe Biralar"
+    },
+    {
+      "name": "Miller 33cl",
+      "price": "134 TL",
+      "desc": "",
+      "category": "Şişe Biralar"
+    },
+    {
+      "name": "Erdinger",
+      "price": "315 TL",
+      "desc": "",
+      "category": "Şişe Biralar"
+    },
+    {
+      "name": "Duvel",
+      "price": "330 TL",
+      "desc": "",
+      "category": "Şişe Biralar"
+    },
+    {
+      "name": "Hoergarden",
+      "price": "315 TL",
+      "desc": "",
+      "category": "Şişe Biralar"
+    },
+    {
+      "name": "Efes Glutensiz",
+      "price": "195 TL",
+      "desc": "",
+      "category": "Şişe Biralar"
+    },
+    {
+      "name": "Miller Lime 33cl",
+      "price": "150 TL",
+      "desc": "",
+      "category": "Şişe Biralar"
+    },
+    {
+      "name": "Stella",
+      "price": "205 TL",
+      "desc": "",
+      "category": "Şişe Biralar"
+    },
+    {
+      "name": "Ashai",
+      "price": "270 TL",
+      "desc": "",
+      "category": "Şişe Biralar"
+    },
+    {
+      "name": "Lucky",
+      "price": "275 TL",
+      "desc": "",
+      "category": "Şişe Biralar"
+    },
+    {
+      "name": "Petrus",
+      "price": "275 TL",
+      "desc": "",
+      "category": "Şişe Biralar"
+    },
+    {
+      "name": "Fıçı Becks 40cl",
+      "price": "124 TL",
+      "desc": "",
+      "category": "draft beer"
+    },
+    {
+      "name": "Fıçı Belfast 40cl",
+      "price": "124 TL",
+      "desc": "",
+      "category": "draft beer"
+    },
+    {
+      "name": "Fıçı Bomonti 40cl",
+      "price": "124 TL",
+      "desc": "",
+      "category": "draft beer"
+    },
+    {
+      "name": "Fıçı Bud 40cl",
+      "price": "124 TL",
+      "desc": "",
+      "category": "draft beer"
+    },
+    {
+      "name": "Fıçı Efes Pilsen 40cl",
+      "price": "124 TL",
+      "desc": "",
+      "category": "draft beer"
+    },
+    {
+      "name": "Fıçı Malt 40cl",
+      "price": "124 TL",
+      "desc": "",
+      "category": "draft beer"
+    },
+    {
+      "name": "Eski Kaşar",
+      "price": "140 TL",
+      "desc": "",
+      "category": "Veal"
+    },
+    {
+      "name": "Hindi Füme",
+      "price": "110 TL",
+      "desc": "",
+      "category": "Veal"
+    },
+    {
+      "name": "İsli Peynir",
+      "price": "120 TL",
+      "desc": "",
+      "category": "Veal"
+    },
+    {
+      "name": "Kuru Et",
+      "price": "165 TL",
+      "desc": "",
+      "category": "Veal"
+    },
+    {
+      "name": "Zeytin",
+      "price": "65 TL",
+      "desc": "",
+      "category": "Veal"
+    },
+    {
+      "name": "Erik",
+      "price": "125 TL",
+      "desc": "",
+      "category": "Veal"
+    },
+    {
+      "name": "Ananas",
+      "price": "175 TL",
+      "desc": "",
+      "category": "Veal"
+    },
+    {
+      "name": "Karışık Meyve",
+      "price": "120 TL",
+      "desc": "",
+      "category": "Veal"
+    },
+    {
+      "name": "Turşu",
+      "price": "65 TL",
+      "desc": "",
+      "category": "Veal"
+    },
+    {
+      "name": "İsli Saçaklı",
+      "price": "155 TL",
+      "desc": "",
+      "category": "Veal"
+    },
+    {
+      "name": "Kola",
+      "price": "85 TL",
+      "desc": "",
+      "category": "Lamb Meat"
+    },
+    {
+      "name": "Sade Soda",
+      "price": "55 TL",
+      "desc": "",
+      "category": "Lamb Meat"
+    },
+    {
+      "name": "Redbull",
+      "price": "110 TL",
+      "desc": "",
+      "category": "Lamb Meat"
+    },
+    {
+      "name": "Meyve Suyu",
+      "price": "85 TL",
+      "desc": "",
+      "category": "Lamb Meat"
+    },
+    {
+      "name": "Soğuk Kahve",
+      "price": "65 TL",
+      "desc": "",
+      "category": "Lamb Meat"
+    },
+    {
+      "name": "Shweppes Tonik",
+      "price": "85 TL",
+      "desc": "",
+      "category": "Lamb Meat"
+    },
+    {
+      "name": "Su",
+      "price": "8 TL",
+      "desc": "",
+      "category": "Lamb Meat"
+    },
+    {
+      "name": "Kahve",
+      "price": "65 TL",
+      "desc": "",
+      "category": "Lamb Meat"
+    },
+    {
+      "name": "Antep Fıstığı 45Gr",
+      "price": "125 TL",
+      "desc": "",
+      "category": "Meatballs Kebab Sausage"
+    },
+    {
+      "name": "Antep Fıstığı 90Gr",
+      "price": "250 TL",
+      "desc": "",
+      "category": "Meatballs Kebab Sausage"
+    },
+    {
+      "name": "Badem 45Gr",
+      "price": "65 TL",
+      "desc": "",
+      "category": "Meatballs Kebab Sausage"
+    },
+    {
+      "name": "Badem 90Gr",
+      "price": "135 TL",
+      "desc": "",
+      "category": "Meatballs Kebab Sausage"
+    },
+    {
+      "name": "Festival Karışık 75Gr",
+      "price": "95 TL",
+      "desc": "",
+      "category": "Meatballs Kebab Sausage"
+    },
+    {
+      "name": "Fındık 45Gr",
+      "price": "100 TL",
+      "desc": "",
+      "category": "Meatballs Kebab Sausage"
+    },
+    {
+      "name": "Fındık 90Gr",
+      "price": "175 TL",
+      "desc": "",
+      "category": "Meatballs Kebab Sausage"
+    },
+    {
+      "name": "Kaju 75Gr",
+      "price": "110 TL",
+      "desc": "",
+      "category": "Meatballs Kebab Sausage"
+    },
+    {
+      "name": "Mısır",
+      "price": "70 TL",
+      "desc": "",
+      "category": "Meatballs Kebab Sausage"
+    },
+    {
+      "name": "Cips 104 Gr",
+      "price": "75 TL",
+      "desc": "",
+      "category": "Meatballs Kebab Sausage"
+    },
+    {
+      "name": "Beyaz Leblebi",
+      "price": "60 TL",
+      "desc": "",
+      "category": "Meatballs Kebab Sausage"
+    },
+    {
+      "name": "Sarı Leblebi",
+      "price": "60 TL",
+      "desc": "",
+      "category": "Meatballs Kebab Sausage"
+    },
+    {
+      "name": "Kutu Cips",
+      "price": "105 TL",
+      "desc": "",
+      "category": "Meatballs Kebab Sausage"
+    },
+    {
+      "name": "Nacho",
+      "price": "150 TL",
+      "desc": "",
+      "category": "Meatballs Kebab Sausage"
+    },
+    {
+      "name": "Angora Beyaz Şarap",
+      "price": "295 TL",
+      "desc": "",
+      "category": "Raki"
+    },
+    {
+      "name": "Angora Kırmızı Şarap",
+      "price": "295 TL",
+      "desc": "",
+      "category": "Raki"
+    },
+    {
+      "name": "Angora Lal",
+      "price": "310 TL",
+      "desc": "",
+      "category": "Raki"
+    },
+    {
+      "name": "Beefeater Gın 0,5 cl",
+      "price": "320 TL",
+      "desc": "",
+      "category": "Raki"
+    },
+    {
+      "name": "Finlandiya Vodka 0,5cl",
+      "price": "190 TL",
+      "desc": "",
+      "category": "Raki"
+    },
+    {
+      "name": "Gordons Gın 0,5cl",
+      "price": "210 TL",
+      "desc": "",
+      "category": "Raki"
+    },
+    {
+      "name": "Jack Daniels",
+      "price": "390 TL",
+      "desc": "",
+      "category": "Raki"
+    },
+    {
+      "name": "Chivas",
+      "price": "320 TL",
+      "desc": "",
+      "category": "Raki"
+    },
+    {
+      "name": "Cin Mare",
+      "price": "555 TL",
+      "desc": "",
+      "category": "Raki"
+    },
+    {
+      "name": "Beluga Noble Votka",
+      "price": "555 TL",
+      "desc": "",
+      "category": "Raki"
+    },
+    {
+      "name": "Jager",
+      "price": "390 TL",
+      "desc": "",
+      "category": "Raki"
+    },
+    {
+      "name": "Hennessy",
+      "price": "390 TL",
+      "desc": "",
+      "category": "Raki"
+    },
+    {
+      "name": "Trio Kırmızı Şarap",
+      "price": "295 TL",
+      "desc": "",
+      "category": "Raki"
+    },
+    {
+      "name": "Trio Beyaz Şarap",
+      "price": "295 TL",
+      "desc": "",
+      "category": "Raki"
+    },
+    {
+      "name": "Senfoni Kırmızı Şarap",
+      "price": "255 TL",
+      "desc": "",
+      "category": "Raki"
+    },
+    {
+      "name": "Senfoni Beyaz Şarap",
+      "price": "255 TL",
+      "desc": "",
+      "category": "Raki"
+    },
+    {
+      "name": "Jameson",
+      "price": "320 TL",
+      "desc": "",
+      "category": "Raki"
+    },
+    {
+      "name": "Ballentines",
+      "price": "320 TL",
+      "desc": "",
+      "category": "Raki"
+    },
+    {
+      "name": "Absolut 05cl",
+      "price": "320 TL",
+      "desc": "",
+      "category": "Raki"
+    },
+    {
+      "name": "Patrus",
+      "price": "270 TL",
+      "desc": "",
+      "category": "Raki"
+    },
+    {
+      "name": "Bira Tabağı",
+      "price": "215 TL",
+      "desc": "",
+      "category": "Extras"
+    },
+    {
+      "name": "Çıtır Tavuk",
+      "price": "210 TL",
+      "desc": "",
+      "category": "Extras"
+    },
+    {
+      "name": "Islak Hamburger",
+      "price": "105 TL",
+      "desc": "",
+      "category": "Extras"
+    },
+    {
+      "name": "Nugget Tabağı",
+      "price": "195 TL",
+      "desc": "",
+      "category": "Extras"
+    },
+    {
+      "name": "Patates Tabağı",
+      "price": "165 TL",
+      "desc": "",
+      "category": "Extras"
+    },
+    {
+      "name": "4 Peynirli Pizza",
+      "price": "250 TL",
+      "desc": "",
+      "category": "Extras"
+    },
+    {
+      "name": "Füme Et & Cheddar Pizza",
+      "price": "270 TL",
+      "desc": "",
+      "category": "Extras"
+    },
+    {
+      "name": "Margarita Pizza",
+      "price": "210 TL",
+      "desc": "",
+      "category": "Extras"
+    },
+    {
+      "name": "Midye",
+      "price": "15 TL",
+      "desc": "",
+      "category": "Extras"
+    },
+    {
+      "name": "Midye 10 Adet",
+      "price": "140 TL",
+      "desc": "",
+      "category": "Extras"
+    },
+    {
+      "name": "Pepperoni Pizza",
+      "price": "250 TL",
+      "desc": "",
+      "category": "Extras"
+    },
+    {
+      "name": "Sosisli",
+      "price": "140 TL",
+      "desc": "",
+      "category": "Extras"
+    },
+    {
+      "name": "Goralı",
+      "price": "130 TL",
+      "desc": "",
+      "category": "Extras"
+    },
+    {
+      "name": "Kebapçe",
+      "price": "290 TL",
+      "desc": "",
+      "category": "Extras"
+    },
+    {
+      "name": "Börek Tabağı",
+      "price": "230 TL",
+      "desc": "",
+      "category": "Extras"
+    }
+  ]
+},
 };

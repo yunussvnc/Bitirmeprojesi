@@ -1365,3 +1365,6 @@ Exact kayıt `West İstanbul Marina, Marmara Mahallesi, Ulusum Caddesi No:22, İ
 
 ## Ravenna Akaretler ID 7047 strict HOLD
 Exact kayıt `Vişnezade, Süleyman Seba Cd. 69/A, 34357 Beşiktaş/İstanbul`; Hentzer telefon alanı boş. Restoranım ve Corner exact 69/A adresini doğruluyor, Restoranım `Telefon yok` gösteriyor. Instagram’da 2024/2025 dönemine ait sınırlı lazanya/piadina fiyatları var ancak complete item-level güncel menü değil; 2026 içerikleri de ürün tanıtımı. Yemeksepeti `Ravenna Coffee` farklı işletme. Telefon paritesi ve son bir yıl exact complete fiyatlı public menü doğrulanamadı. Ürün/fiyat uydurulmadı; strict HOLD.
+
+## Brooklyn Express Beylikdüzü ID 7046 kabul
+Exact kayıt `Ekinoks AVM, Büyükçekmece Mah., Cumhuriyet Cd. No:1 E1 Blok No:28, 34000 Beylikdüzü/İstanbul`, `+90 546 524 86 73`; Ekinoks AVM’nin resmî Brooklyn Express sayfası, Restoranım ve işletme kayıtlarıyla doğrulandı. Resmî `menu.brooklynexpress.com.tr` QR menüsü 2026-08-25 tarihinde kontrol edildi; Şişe Biralar, Draft Beer, Veal, Lamb Meat, Meatballs Kebab Sausage, Raki ve Extras kategorilerinden **92 benzersiz ürün/fiyat** aktarıldı. `%10 Service Fee` menü kalemi olarak eklenmedi.
