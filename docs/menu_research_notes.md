@@ -1632,3 +1632,6 @@ Hentzer kaydı `Gümüşsuyu, 34820 Beykoz/İstanbul`, `+90 539 685 47 19`; Kaç
 
 ## BANG BANG AIRSOFT & COFFEE ID 6955 — STRICT HOLD
 Hentzer kaydı `Çubuklu, Piri Reis Cd. No:2, 34805 Beykoz/İstanbul`, `+90 505 440 22 26`; Kaçıyor işletme sayfası aynı adres ve telefonu, Instagram `@bang.bangcoffee` ise aynı işletme adını doğruluyor. Mekanlar.com menü sekmesi yalnızca “Menü Fotoğrafı Gönderin” çağrısı veriyor; erişilebilir ürün/fiyat listesi yok. Kaçıyor yalnızca genel kalori/ürün adları yayımlıyor ve fiyat vermiyor. Son bir yıl içinde herkese açık, fiyat içeren doğrulanabilir menü bulunamadığından **strict HOLD**; override eklenmedi.
+
+## BY DONDURMA ID 6954 — STRICT HOLD
+Hentzer kaydı `Adnan Kahveci, Osmanlı Cd. No:30 G, 34514 Beylikdüzü/İstanbul`, `+90 533 361 64 54`; Restoranim.net aynı işletme adı, exact adres ve telefonu doğruluyor. Ancak sayfa yalnız işletme tanımı, yorumlar ve iletişim bilgisi içeriyor; herkese açık güncel ürün/fiyat listesi bulunmuyor. Son bir yıl içinde fiyatlı doğrulanabilir menü kaynağı bulunamadığından **strict HOLD**; override eklenmedi.
