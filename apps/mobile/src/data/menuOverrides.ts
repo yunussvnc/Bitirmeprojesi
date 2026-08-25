@@ -67326,335 +67326,877 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
   },
 
   "7067": {
-    "name": "Bex Coffee",
-    "sourceUrl": "https://www.migros.com.tr/yemek/bex-coffee-ciragan-besiktas-yildiz-mah-st-2d2ea",
-    "sourceName": "Migros Yemek branch-labeled `Bex Coffee Çırağan, Beşiktaş (Yıldız Mah.)` live menu; official BEX social bridge: Çırağan Caddesi Beşiktaş; local exact listing No:35/1",
-    "verifiedAt": "2026-08-25",
-    "items": [
-      {
-        "name": "Lemonade Tonic",
-        "price": "139,00 TL",
-        "category": "Refresha Drinks",
-        "desc": "Soğuk servis edilir."
-      },
-      {
-        "name": "Rasberry Tonic",
-        "price": "159,00 TL",
-        "category": "Refresha Drinks",
-        "desc": "Mürver çiçeği, tonik"
-      },
-      {
-        "name": "Purple Berry Tonic",
-        "price": "159,00 TL",
-        "category": "Refresha Drinks",
-        "desc": "Soğuk servis edilir."
-      },
-      {
-        "name": "Broken Brown (Büyük Boy)",
-        "price": "149,00 TL",
-        "category": "Signature Drinks",
-        "desc": "Espressonun kremayla buluşması sonucu yumuşak içimli kahve"
-      },
-      {
-        "name": "Bexy Latte (Büyük Boy)",
-        "price": "149,00 TL",
-        "category": "Signature Drinks",
-        "desc": "Raspberry aroması, yoğunlaştırılmış süt, süt, espresso"
-      },
-      {
-        "name": "Pistachio Mocha (Büyük Boy)",
-        "price": "199,00 TL",
-        "category": "Signature Drinks",
-        "desc": "Yoğunlaştırılmış süt kreması, Antep fıstığı, Espresso, Süt Kreması"
-      },
-      {
-        "name": "Spanish Latte (Büyük Boy)",
-        "price": "149,00 TL",
-        "category": "Signature Drinks",
-        "desc": "Espresso, sıcak süt, yoğunlaştırılmış süt"
-      },
-      {
-        "name": "Caramel Drizzle (Büyük Boy)",
-        "price": "149,00 TL",
-        "category": "Signature Drinks",
-        "desc": "Vanilya ve Karamel aroması, Karamelli Çikolata, Espresso, Süt Kreması"
-      },
-      {
-        "name": "Filtre Kahve (Büyük Boy)",
-        "price": "99,00 TL",
-        "category": "Sıcak Kahveler",
-        "desc": "Kahve çekirdeklerinin filtrelerden geçirilerek sıcak su ile demlenmesiyle hazırlanan bir kahve çeşididir."
-      },
-      {
-        "name": "Filtre Kahve (Sütlü, Büyük Boy)",
-        "price": "105,00 TL",
-        "category": "Sıcak Kahveler",
-        "desc": "Filtre kahve, süt"
-      },
-      {
-        "name": "Caffe Americano (Büyük Boy)",
-        "price": "119,00 TL",
-        "category": "Sıcak Kahveler",
-        "desc": "Demlenmiş espressonun sıcak su ile inceltilmesi."
-      },
-      {
-        "name": "Flat White (Büyük Boy)",
-        "price": "129,00 TL",
-        "category": "Sıcak Kahveler",
-        "desc": "Espressonun kremalandırılmış süt ile buluşması sonucu kahveyi yoğun hissedeceğiniz espresso bazlı içecek."
-      },
-      {
-        "name": "Cappuccino (Büyük Boy)",
-        "price": "129,00 TL",
-        "category": "Sıcak Kahveler",
-        "desc": "Espresso, süt, süt köpüğü"
-      },
-      {
-        "name": "Latte (Büyük Boy)",
-        "price": "129,00 TL",
-        "category": "Sıcak Kahveler",
-        "desc": "Espresso, buharda kremalaştırılmış süt ile"
-      },
-      {
-        "name": "Toffee Nut Latte (Büyük Boy)",
-        "price": "149,00 TL",
-        "category": "Sıcak Kahveler",
-        "desc": "Özel toffee nut karışımının espresso, kremalandırılmış süt ile buluştuğu son olarak krema, esmer şekerle tamamlanan yeni yıl lezzeti"
-      },
-      {
-        "name": "White Chocolate Mocha (Büyük Boy)",
-        "price": "159,00 TL",
-        "category": "Sıcak Kahveler",
-        "desc": "Espresso, özel beyaz çikolata sos, kremalandırılmış kadifemsi süt ile buluştu. İsteğe göre yumuşak içim sos, şurup seçenekleri ile"
-      },
-      {
-        "name": "Caramel Mocha (Büyük Boy)",
-        "price": "159,00 TL",
-        "category": "Sıcak Kahveler",
-        "desc": "Espresso, özel beyaz çikolata sos, kremalandırılmış kadifemsi süt ile buluştu. İsteğe göre, yumuşak içim sos, şurup"
-      },
-      {
-        "name": "Iced Bexy Latte",
-        "price": "165,00 TL",
-        "category": "Soğuk Kahveler",
-        "desc": "Espresso, raspberry aroması, süt, buz küpü"
-      },
-      {
-        "name": "Iced Pistachio Mocha",
-        "price": "195,00 TL",
-        "category": "Soğuk Kahveler",
-        "desc": "Espresso, süt, condensed milk, Antep fıstığı özü. (Pistachio Mocha, Antep fıstığı özüyle süslenerek sunulmaktadır.)"
-      },
-      {
-        "name": "Iced Spanish Latte",
-        "price": "165,00 TL",
-        "category": "Soğuk Kahveler",
-        "desc": "Espresso, süt, condensed milk (yoğunlaştırılmış süt kreması) ve buz küplerinin buluşması."
-      },
-      {
-        "name": "Iced Filter Coffee",
-        "price": "125,00 TL",
-        "category": "Soğuk Kahveler",
-        "desc": "Demlenmiş, yumuşak içimli filtre kahve, buz küpleri"
-      },
-      {
-        "name": "Iced Americano",
-        "price": "125,00 TL",
-        "category": "Soğuk Kahveler",
-        "desc": "Espressonun buzlu su ile buluşması."
-      },
-      {
-        "name": "Iced Cappuccino",
-        "price": "140,00 TL",
-        "category": "Soğuk Kahveler",
-        "desc": "Süt, espresso ve buz küplerinin,özel cappuccıno mikserde hazırlanan soğuk süt kreması ile buluşması."
-      },
-      {
-        "name": "Iced Latte",
-        "price": "140,00 TL",
-        "category": "Soğuk Kahveler",
-        "desc": "Soğuk süt ve buz küplerinin espresso ile buluşması."
-      },
-      {
-        "name": "Iced White Chocolate Mocha",
-        "price": "165,00 TL",
-        "category": "Soğuk Kahveler",
-        "desc": "Espresso, özel beyaz çikolata sosu, süt, buz küplerin birleşimi."
-      },
-      {
-        "name": "Iced Caramel Mocha",
-        "price": "165,00 TL",
-        "category": "Soğuk Kahveler",
-        "desc": "Espresso, karamel sos, süt, buz küplerinin, shaker kullanarak tat bütünlüğünün sağlanması."
-      },
-      {
-        "name": "Iced Broken Brown",
-        "price": "175,00 TL",
-        "category": "Soğuk Kahveler",
-        "desc": "Soğuk kahve"
-      },
-      {
-        "name": "Iced Sütlü Filtre",
-        "price": "135,00 TL",
-        "category": "Soğuk Kahveler",
-        "desc": "Soğuk kahve"
-      },
-      {
-        "name": "Hot Chocolate (Orta Boy)",
-        "price": "165,00 TL",
-        "category": "Sıcak İçecekler",
-        "desc": "Özel sıcak çikolata karışımının kremalandırılmış süt ile buluşması."
-      },
-      {
-        "name": "Chai Tea Latte (Orta Boy)",
-        "price": "165,00 TL",
-        "category": "Sıcak İçecekler",
-        "desc": "Baharatlı siyah çay özü ve kremalandırılmış sütün buluşması."
-      },
-      {
-        "name": "Strawberry Frozen",
-        "price": "165,00 TL",
-        "category": "Frozens",
-        "desc": "Çilekli frozen"
-      },
-      {
-        "name": "Cocoberry",
-        "price": "165,00 TL",
-        "category": "Frozens",
-        "desc": "Çilek meyvesi ve Hindistan cevizi aromalı frozen"
-      },
-      {
-        "name": "Rasberry Mixed",
-        "price": "165,00 TL",
-        "category": "Frozens",
-        "desc": "Karışık orman meyvesi, ahududu aromalı frozen"
-      },
-      {
-        "name": "Apple Cubana",
-        "price": "165,00 TL",
-        "category": "Frozens",
-        "desc": "Limonata bazlı, yeşil elma, lime, nane aromalı frozen"
-      },
-      {
-        "name": "Strawberry Smoothie",
-        "price": "133,00 TL",
-        "category": "Smoothies",
-        "desc": "Çilekli smoothie"
-      },
-      {
-        "name": "Pink Berry Smoothie",
-        "price": "133,00 TL",
-        "category": "Smoothies",
-        "desc": "Soğuk servis edilir."
-      },
-      {
-        "name": "Green Apple Smoothie",
-        "price": "133,00 TL",
-        "category": "Smoothies",
-        "desc": "Soğuk servis edilir."
-      },
-      {
-        "name": "Strawberry Milkshake",
-        "price": "149,00 TL",
-        "category": "Milkshakes",
-        "desc": "Strawberry"
-      },
-      {
-        "name": "Chocolate Milkshake",
-        "price": "149,00 TL",
-        "category": "Milkshakes"
-      },
-      {
-        "name": "Coconut Milkshake",
-        "price": "149,00 TL",
-        "category": "Milkshakes"
-      },
-      {
-        "name": "Chocolate Frappe",
-        "price": "165,00 TL",
-        "category": "Frappes",
-        "desc": "Çikolatalı frappe"
-      },
-      {
-        "name": "Caramel Frappe",
-        "price": "165,00 TL",
-        "category": "Frappes",
-        "desc": "Karamel sos, süt, özel frappe tozu ve buz kırıkları"
-      },
-      {
-        "name": "Chai Frappe",
-        "price": "165,00 TL",
-        "category": "Frappes",
-        "desc": "Süt, özel frappe tozu ve buz kırıkları"
-      },
-      {
-        "name": "Hibiscus & Lemon Bubble Tea",
-        "price": "165,00 TL",
-        "category": "Bubble Teas",
-        "desc": "Bubble seçenekleri ile"
-      },
-      {
-        "name": "Nebula",
-        "price": "165,00 TL",
-        "category": "Bubble Teas",
-        "desc": "Mavi mandalina, lime bubble"
-      },
-      {
-        "name": "Black Hole",
-        "price": "165,00 TL",
-        "category": "Bubble Teas",
-        "desc": "Tonik, mavi mandalina, buz parçacıkları"
-      },
-      {
-        "name": "Aurora",
-        "price": "165,00 TL",
-        "category": "Bubble Teas",
-        "desc": "Lime bubblelı, yeşil elma, nane"
-      },
-      {
-        "name": "Sirius",
-        "price": "165,00 TL",
-        "category": "Bubble Teas",
-        "desc": "Kahve, karamel bubble, Hindistan cevizi, vanilya"
-      },
-      {
-        "name": "Pink Milk Way",
-        "price": "165,00 TL",
-        "category": "Bubble Teas",
-        "desc": "Yaban mersini bubbleli, rasberry, Hindistan cevizi"
-      },
-      {
-        "name": "Pollux",
-        "price": "165,00 TL",
-        "category": "Bubble Teas",
-        "desc": "Kahve, yaban mersini, bubble, Hindiztan cevizi"
-      },
-      {
-        "name": "Damla Soda (20 Cl.)",
-        "price": "42,00 TL",
-        "category": "İçecekler",
-        "desc": "Cam şişe"
-      },
-      {
-        "name": "Red Bull (25 Cl.)",
-        "price": "130,00 TL",
-        "category": "İçecekler",
-        "desc": "Enerji içeceği"
-      },
-      {
-        "name": "Damla Su (50 Cl.)",
-        "price": "38,50 TL",
-        "category": "İçecekler",
-        "desc": "Pet şişe"
-      },
-      {
-        "name": "Red Bull Sf (25 Cl.)",
-        "price": "130,00 TL",
-        "category": "İçecekler",
-        "desc": "İçecek"
-      }
-    ],
-  },
+  "name": "Bex Coffee",
+  "sourceUrl": "https://bexcoffee.com/en/pages/menu",
+  "sourceName": "BEX Coffee resmî güncel menüsü; exact Yıldız, Çırağan Cd. No:35/1 şubesi Kaçıyor/Cybo/Corner/Yandex ve Migros Yemek `Bex Coffee Çırağan` vendorıyla eşleştirildi. 144 yiyecek/içecek ürünü ve boy varyantı aktarıldı; hediye/tekstil/ekipman ürünleri ve özelleştirme ücretleri dışlandı.",
+  "verifiedAt": "2026-08-25",
+  "items": [
+    {
+      "name": "Solo (Tek Shot)",
+      "price": "70",
+      "desc": "",
+      "category": "Espresso Bazlı Sıcak İçecekler"
+    },
+    {
+      "name": "Dripper (Gift Shot)",
+      "price": "100",
+      "desc": "",
+      "category": "Espresso Bazlı Sıcak İçecekler"
+    },
+    {
+      "name": "Americano (Medium)",
+      "price": "110",
+      "desc": "",
+      "category": "Espresso Bazlı Sıcak İçecekler"
+    },
+    {
+      "name": "Americano (Large)",
+      "price": "125",
+      "desc": "",
+      "category": "Espresso Bazlı Sıcak İçecekler"
+    },
+    {
+      "name": "Americano (Extra Large)",
+      "price": "130",
+      "desc": "",
+      "category": "Espresso Bazlı Sıcak İçecekler"
+    },
+    {
+      "name": "Latte (Medium)",
+      "price": "110",
+      "desc": "",
+      "category": "Espresso Bazlı Sıcak İçecekler"
+    },
+    {
+      "name": "Latte (Large)",
+      "price": "125",
+      "desc": "",
+      "category": "Espresso Bazlı Sıcak İçecekler"
+    },
+    {
+      "name": "Latte (Extra Large)",
+      "price": "130",
+      "desc": "",
+      "category": "Espresso Bazlı Sıcak İçecekler"
+    },
+    {
+      "name": "Flat White (Medium)",
+      "price": "110",
+      "desc": "",
+      "category": "Espresso Bazlı Sıcak İçecekler"
+    },
+    {
+      "name": "Flat White (Large)",
+      "price": "125",
+      "desc": "",
+      "category": "Espresso Bazlı Sıcak İçecekler"
+    },
+    {
+      "name": "Flat White (Extra Large)",
+      "price": "130",
+      "desc": "",
+      "category": "Espresso Bazlı Sıcak İçecekler"
+    },
+    {
+      "name": "Cappuccino (Medium)",
+      "price": "110",
+      "desc": "",
+      "category": "Espresso Bazlı Sıcak İçecekler"
+    },
+    {
+      "name": "Cappuccino (Large)",
+      "price": "125",
+      "desc": "",
+      "category": "Espresso Bazlı Sıcak İçecekler"
+    },
+    {
+      "name": "Cappuccino (Extra Large)",
+      "price": "130",
+      "desc": "",
+      "category": "Espresso Bazlı Sıcak İçecekler"
+    },
+    {
+      "name": "Mocha (Medium)",
+      "price": "115",
+      "desc": "",
+      "category": "Espresso Bazlı Sıcak İçecekler"
+    },
+    {
+      "name": "Mocha (Large)",
+      "price": "135",
+      "desc": "",
+      "category": "Espresso Bazlı Sıcak İçecekler"
+    },
+    {
+      "name": "Mocha (Extra Large)",
+      "price": "155",
+      "desc": "",
+      "category": "Espresso Bazlı Sıcak İçecekler"
+    },
+    {
+      "name": "Caramel Mocha (Medium)",
+      "price": "115",
+      "desc": "",
+      "category": "Espresso Bazlı Sıcak İçecekler"
+    },
+    {
+      "name": "Caramel Mocha (Large)",
+      "price": "135",
+      "desc": "",
+      "category": "Espresso Bazlı Sıcak İçecekler"
+    },
+    {
+      "name": "Caramel Mocha (Extra Large)",
+      "price": "155",
+      "desc": "",
+      "category": "Espresso Bazlı Sıcak İçecekler"
+    },
+    {
+      "name": "White Chocolate Mocha (Medium)",
+      "price": "115",
+      "desc": "",
+      "category": "Espresso Bazlı Sıcak İçecekler"
+    },
+    {
+      "name": "White Chocolate Mocha (Large)",
+      "price": "135",
+      "desc": "",
+      "category": "Espresso Bazlı Sıcak İçecekler"
+    },
+    {
+      "name": "White Chocolate Mocha (Extra Large)",
+      "price": "155",
+      "desc": "",
+      "category": "Espresso Bazlı Sıcak İçecekler"
+    },
+    {
+      "name": "Broken Brown (Medium)",
+      "price": "115",
+      "desc": "",
+      "category": "Espresso Bazlı Sıcak İçecekler"
+    },
+    {
+      "name": "Broken Brown (Large)",
+      "price": "135",
+      "desc": "",
+      "category": "Espresso Bazlı Sıcak İçecekler"
+    },
+    {
+      "name": "Broken Brown (Extra Large)",
+      "price": "155",
+      "desc": "",
+      "category": "Espresso Bazlı Sıcak İçecekler"
+    },
+    {
+      "name": "Pistachio Mocha (Medium)",
+      "price": "115",
+      "desc": "",
+      "category": "Espresso Bazlı Sıcak İçecekler"
+    },
+    {
+      "name": "Pistachio Mocha (Large)",
+      "price": "135",
+      "desc": "",
+      "category": "Espresso Bazlı Sıcak İçecekler"
+    },
+    {
+      "name": "Pistachio Mocha (Extra Large)",
+      "price": "155",
+      "desc": "",
+      "category": "Espresso Bazlı Sıcak İçecekler"
+    },
+    {
+      "name": "Spanish Latte (Medium)",
+      "price": "115",
+      "desc": "",
+      "category": "Espresso Bazlı Sıcak İçecekler"
+    },
+    {
+      "name": "Spanish Latte (Large)",
+      "price": "135",
+      "desc": "",
+      "category": "Espresso Bazlı Sıcak İçecekler"
+    },
+    {
+      "name": "Spanish Latte (Extra Large)",
+      "price": "155",
+      "desc": "",
+      "category": "Espresso Bazlı Sıcak İçecekler"
+    },
+    {
+      "name": "Bexy Latte (Medium)",
+      "price": "115",
+      "desc": "",
+      "category": "Espresso Bazlı Sıcak İçecekler"
+    },
+    {
+      "name": "Bexy Latte (Large)",
+      "price": "135",
+      "desc": "",
+      "category": "Espresso Bazlı Sıcak İçecekler"
+    },
+    {
+      "name": "Bexy Latte (Extra Large)",
+      "price": "155",
+      "desc": "",
+      "category": "Espresso Bazlı Sıcak İçecekler"
+    },
+    {
+      "name": "Caramel Drizzle (Medium)",
+      "price": "115",
+      "desc": "",
+      "category": "Espresso Bazlı Sıcak İçecekler"
+    },
+    {
+      "name": "Caramel Drizzle (Large)",
+      "price": "135",
+      "desc": "",
+      "category": "Espresso Bazlı Sıcak İçecekler"
+    },
+    {
+      "name": "Caramel Drizzle (Extra Large)",
+      "price": "155",
+      "desc": "",
+      "category": "Espresso Bazlı Sıcak İçecekler"
+    },
+    {
+      "name": "Ice Americano (Standart)",
+      "price": "125",
+      "desc": "",
+      "category": "Espresso Bazlı Soğuk İçecekler"
+    },
+    {
+      "name": "Ice Latte (Standart)",
+      "price": "140",
+      "desc": "",
+      "category": "Espresso Bazlı Soğuk İçecekler"
+    },
+    {
+      "name": "Ice Cappuccino (Standart)",
+      "price": "140",
+      "desc": "",
+      "category": "Espresso Bazlı Soğuk İçecekler"
+    },
+    {
+      "name": "Ice Mocha (Standart)",
+      "price": "140",
+      "desc": "",
+      "category": "Espresso Bazlı Soğuk İçecekler"
+    },
+    {
+      "name": "Ice Caramel Mocha (Standart)",
+      "price": "155",
+      "desc": "",
+      "category": "Espresso Bazlı Soğuk İçecekler"
+    },
+    {
+      "name": "Ice White Chocolate Mocha (Standart)",
+      "price": "155",
+      "desc": "",
+      "category": "Espresso Bazlı Soğuk İçecekler"
+    },
+    {
+      "name": "Ice Broken Brown (Standart)",
+      "price": "155",
+      "desc": "",
+      "category": "Espresso Bazlı Soğuk İçecekler"
+    },
+    {
+      "name": "Ice Spanish Latte (Standart)",
+      "price": "155",
+      "desc": "",
+      "category": "Espresso Bazlı Soğuk İçecekler"
+    },
+    {
+      "name": "Pink Vibe (Standart)",
+      "price": "185",
+      "desc": "",
+      "category": "Espresso Bazlı Soğuk İçecekler"
+    },
+    {
+      "name": "Summertime Sadness (Standart)",
+      "price": "185",
+      "desc": "",
+      "category": "Espresso Bazlı Soğuk İçecekler"
+    },
+    {
+      "name": "Caramel Macchiato (Standart)",
+      "price": "155",
+      "desc": "",
+      "category": "Espresso Bazlı Soğuk İçecekler"
+    },
+    {
+      "name": "Chemed",
+      "price": "115",
+      "desc": "",
+      "category": "Tea Wave Sıcak Çaylar"
+    },
+    {
+      "name": "Cold Brew",
+      "price": "125",
+      "desc": "",
+      "category": "Tea Wave Sıcak Çaylar"
+    },
+    {
+      "name": "Cold Brew Latte",
+      "price": "140",
+      "desc": "",
+      "category": "Tea Wave Sıcak Çaylar"
+    },
+    {
+      "name": "Black Tea",
+      "price": "70",
+      "desc": "",
+      "category": "Tea Wave Sıcak Çaylar"
+    },
+    {
+      "name": "Türk Kahvesi (Solo (Tek))",
+      "price": "85",
+      "desc": "",
+      "category": "Filtre Kahve ve Sıcak İçecekler"
+    },
+    {
+      "name": "Türk Kahvesi (Double (Çift))",
+      "price": "100",
+      "desc": "",
+      "category": "Filtre Kahve ve Sıcak İçecekler"
+    },
+    {
+      "name": "Ice Filter Coffee (Standart)",
+      "price": "125",
+      "desc": "",
+      "category": "Filtre Kahve ve Sıcak İçecekler"
+    },
+    {
+      "name": "Chai Tea Latte (Medium)",
+      "price": "125",
+      "desc": "",
+      "category": "Filtre Kahve ve Sıcak İçecekler"
+    },
+    {
+      "name": "Chai Tea Latte (Large)",
+      "price": "140",
+      "desc": "",
+      "category": "Filtre Kahve ve Sıcak İçecekler"
+    },
+    {
+      "name": "Chai Tea Latte (Extra Large)",
+      "price": "155",
+      "desc": "",
+      "category": "Filtre Kahve ve Sıcak İçecekler"
+    },
+    {
+      "name": "Sweet Hot Chocolate (Medium)",
+      "price": "125",
+      "desc": "",
+      "category": "Filtre Kahve ve Sıcak İçecekler"
+    },
+    {
+      "name": "Sweet Hot Chocolate (Large)",
+      "price": "140",
+      "desc": "",
+      "category": "Filtre Kahve ve Sıcak İçecekler"
+    },
+    {
+      "name": "Sweet Hot Chocolate (Extra Large)",
+      "price": "155",
+      "desc": "",
+      "category": "Filtre Kahve ve Sıcak İçecekler"
+    },
+    {
+      "name": "Matcha Latte (Medium)",
+      "price": "125",
+      "desc": "",
+      "category": "Filtre Kahve ve Sıcak İçecekler"
+    },
+    {
+      "name": "Matcha Latte (Large)",
+      "price": "140",
+      "desc": "",
+      "category": "Filtre Kahve ve Sıcak İçecekler"
+    },
+    {
+      "name": "Matcha Latte (Extra Large)",
+      "price": "155",
+      "desc": "",
+      "category": "Filtre Kahve ve Sıcak İçecekler"
+    },
+    {
+      "name": "Broken Green (Medium)",
+      "price": "125",
+      "desc": "",
+      "category": "Filtre Kahve ve Sıcak İçecekler"
+    },
+    {
+      "name": "Broken Green (Large)",
+      "price": "140",
+      "desc": "",
+      "category": "Filtre Kahve ve Sıcak İçecekler"
+    },
+    {
+      "name": "Broken Green (Extra Large)",
+      "price": "155",
+      "desc": "",
+      "category": "Filtre Kahve ve Sıcak İçecekler"
+    },
+    {
+      "name": "Oreo Frappe (Standart)",
+      "price": "185",
+      "desc": "",
+      "category": "Frappe/Milkshake Karışım İçecekler"
+    },
+    {
+      "name": "Chocolate Frappe (Standart)",
+      "price": "185",
+      "desc": "",
+      "category": "Frappe/Milkshake Karışım İçecekler"
+    },
+    {
+      "name": "Caramel Frappe (Standart)",
+      "price": "185",
+      "desc": "",
+      "category": "Frappe/Milkshake Karışım İçecekler"
+    },
+    {
+      "name": "Oreo Milkshake (Standart)",
+      "price": "185",
+      "desc": "",
+      "category": "Frappe/Milkshake Karışım İçecekler"
+    },
+    {
+      "name": "Coconut Milkshake (Standart)",
+      "price": "185",
+      "desc": "",
+      "category": "Frappe/Milkshake Karışım İçecekler"
+    },
+    {
+      "name": "Strawberry Milkshake (Standart)",
+      "price": "185",
+      "desc": "",
+      "category": "Frappe/Milkshake Karışım İçecekler"
+    },
+    {
+      "name": "Apple Guava (Standart)",
+      "price": "185",
+      "desc": "",
+      "category": "BEX Refreshing Cool Drinks"
+    },
+    {
+      "name": "Black Hole (Standart)",
+      "price": "185",
+      "desc": "",
+      "category": "BEX Refreshing Cool Drinks"
+    },
+    {
+      "name": "Drax (Standart)",
+      "price": "185",
+      "desc": "",
+      "category": "BEX Refreshing Cool Drinks"
+    },
+    {
+      "name": "Lemonade (Standart)",
+      "price": "155",
+      "desc": "",
+      "category": "Bex Another Cold Drinks"
+    },
+    {
+      "name": "Orange Ice Tea (Standart)",
+      "price": "155",
+      "desc": "",
+      "category": "Bex Another Cold Drinks"
+    },
+    {
+      "name": "Cyan (Standart)",
+      "price": "155",
+      "desc": "",
+      "category": "Bex Another Cold Drinks"
+    },
+    {
+      "name": "Redbull",
+      "price": "130",
+      "desc": "",
+      "category": "İÇECEK"
+    },
+    {
+      "name": "Redbull Şekersiz",
+      "price": "130",
+      "desc": "",
+      "category": "İÇECEK"
+    },
+    {
+      "name": "Cam Su",
+      "price": "50",
+      "desc": "",
+      "category": "İÇECEK"
+    },
+    {
+      "name": "Beyoğlu Gazoz",
+      "price": "70",
+      "desc": "",
+      "category": "İÇECEK"
+    },
+    {
+      "name": "Beyoğlu Zencefilli",
+      "price": "70",
+      "desc": "",
+      "category": "İÇECEK"
+    },
+    {
+      "name": "Beyoğlu Meyan Kökü",
+      "price": "70",
+      "desc": "",
+      "category": "İÇECEK"
+    },
+    {
+      "name": "Beyoğlu Turuncu",
+      "price": "70",
+      "desc": "",
+      "category": "İÇECEK"
+    },
+    {
+      "name": "Cold Brew",
+      "price": "190",
+      "desc": "",
+      "category": "İÇECEK"
+    },
+    {
+      "name": "Fuse Tea Şeftali",
+      "price": "90",
+      "desc": "",
+      "category": "İÇECEK"
+    },
+    {
+      "name": "Fuse Tea Limon",
+      "price": "90",
+      "desc": "",
+      "category": "İÇECEK"
+    },
+    {
+      "name": "Damla Green",
+      "price": "90",
+      "desc": "",
+      "category": "İÇECEK"
+    },
+    {
+      "name": "Damla Meyveli",
+      "price": "90",
+      "desc": "",
+      "category": "İÇECEK"
+    },
+    {
+      "name": "Damla Sade",
+      "price": "50",
+      "desc": "",
+      "category": "İÇECEK"
+    },
+    {
+      "name": "San Pellegrino",
+      "price": "110",
+      "desc": "",
+      "category": "İÇECEK"
+    },
+    {
+      "name": "Schweppes B. Lemon",
+      "price": "80",
+      "desc": "",
+      "category": "İÇECEK"
+    },
+    {
+      "name": "Cherry Chocolate Cake",
+      "price": "170",
+      "desc": "",
+      "category": "PASTA SANDVİÇ"
+    },
+    {
+      "name": "Chocolate Cake",
+      "price": "170",
+      "desc": "",
+      "category": "PASTA SANDVİÇ"
+    },
+    {
+      "name": "Strawberry Cheesecake",
+      "price": "180",
+      "desc": "",
+      "category": "PASTA SANDVİÇ"
+    },
+    {
+      "name": "B. & White Cake",
+      "price": "195",
+      "desc": "",
+      "category": "PASTA SANDVİÇ"
+    },
+    {
+      "name": "Latte Cake",
+      "price": "175",
+      "desc": "",
+      "category": "PASTA SANDVİÇ"
+    },
+    {
+      "name": "Lemon Cheesecake",
+      "price": "180",
+      "desc": "",
+      "category": "PASTA SANDVİÇ"
+    },
+    {
+      "name": "Pistachio Dream",
+      "price": "195",
+      "desc": "",
+      "category": "PASTA SANDVİÇ"
+    },
+    {
+      "name": "Bex Pistachio",
+      "price": "220",
+      "desc": "",
+      "category": "PASTA SANDVİÇ"
+    },
+    {
+      "name": "San Sebastian Cheesecake",
+      "price": "185",
+      "desc": "",
+      "category": "PASTA SANDVİÇ"
+    },
+    {
+      "name": "Strawberry Donut",
+      "price": "85",
+      "desc": "",
+      "category": "PASTA SANDVİÇ"
+    },
+    {
+      "name": "Chocolate Donut",
+      "price": "85",
+      "desc": "",
+      "category": "PASTA SANDVİÇ"
+    },
+    {
+      "name": "Solar Bloom",
+      "price": "185",
+      "desc": "",
+      "category": "PASTA SANDVİÇ"
+    },
+    {
+      "name": "Velvet Moon",
+      "price": "185",
+      "desc": "",
+      "category": "PASTA SANDVİÇ"
+    },
+    {
+      "name": "Tiramisu Cup",
+      "price": "190",
+      "desc": "",
+      "category": "PASTA SANDVİÇ"
+    },
+    {
+      "name": "Tropical Boost",
+      "price": "185",
+      "desc": "",
+      "category": "PASTA SANDVİÇ"
+    },
+    {
+      "name": "Strawberry Boost",
+      "price": "185",
+      "desc": "",
+      "category": "PASTA SANDVİÇ"
+    },
+    {
+      "name": "Strawberry Chocolate Cup",
+      "price": "190",
+      "desc": "",
+      "category": "PASTA SANDVİÇ"
+    },
+    {
+      "name": "Cherry Cup",
+      "price": "190",
+      "desc": "",
+      "category": "PASTA SANDVİÇ"
+    },
+    {
+      "name": "Dubai Cup",
+      "price": "200",
+      "desc": "",
+      "category": "PASTA SANDVİÇ"
+    },
+    {
+      "name": "Magnolia Strawberry",
+      "price": "150",
+      "desc": "",
+      "category": "PASTA SANDVİÇ"
+    },
+    {
+      "name": "Smoked Turkey Croissant",
+      "price": "100",
+      "desc": "",
+      "category": "PASTA SANDVİÇ"
+    },
+    {
+      "name": "Spinach Sprout Croissant",
+      "price": "100",
+      "desc": "",
+      "category": "PASTA SANDVİÇ"
+    },
+    {
+      "name": "Pesto Fume",
+      "price": "175",
+      "desc": "",
+      "category": "PASTA SANDVİÇ"
+    },
+    {
+      "name": "Three Cheese Bagel",
+      "price": "135",
+      "desc": "",
+      "category": "PASTA SANDVİÇ"
+    },
+    {
+      "name": "Labneh Sesame Seed Bagel",
+      "price": "135",
+      "desc": "",
+      "category": "PASTA SANDVİÇ"
+    },
+    {
+      "name": "Beef Ham Rye Bread Sandwich",
+      "price": "210",
+      "desc": "",
+      "category": "PASTA SANDVİÇ"
+    },
+    {
+      "name": "Fume Salmon Sandwich",
+      "price": "210",
+      "desc": "",
+      "category": "PASTA SANDVİÇ"
+    },
+    {
+      "name": "Caprese Sandwich",
+      "price": "170",
+      "desc": "",
+      "category": "PASTA SANDVİÇ"
+    },
+    {
+      "name": "Smoked Turkey Baguette Sandwich",
+      "price": "170",
+      "desc": "",
+      "category": "PASTA SANDVİÇ"
+    },
+    {
+      "name": "Burning Man",
+      "price": "185",
+      "desc": "",
+      "category": "PASTA SANDVİÇ"
+    },
+    {
+      "name": "Bexy Fit",
+      "price": "155",
+      "desc": "",
+      "category": "PASTA SANDVİÇ"
+    },
+    {
+      "name": "Bex Milk Stick Chocolate",
+      "price": "95",
+      "desc": "",
+      "category": "KASAÖNÜ"
+    },
+    {
+      "name": "Bitter Milk Stick Chocolate",
+      "price": "95",
+      "desc": "",
+      "category": "KASAÖNÜ"
+    },
+    {
+      "name": "Bex Milk Stick Chocolate With Pistachio",
+      "price": "90",
+      "desc": "",
+      "category": "KASAÖNÜ"
+    },
+    {
+      "name": "Bex Milk Stick Chocolate With Hazelnut",
+      "price": "90",
+      "desc": "",
+      "category": "KASAÖNÜ"
+    },
+    {
+      "name": "Bitter Chocolate Fudge With Cherry",
+      "price": "20",
+      "desc": "",
+      "category": "KASAÖNÜ"
+    },
+    {
+      "name": "Raspberry Chocolate Fudge",
+      "price": "20",
+      "desc": "",
+      "category": "KASAÖNÜ"
+    },
+    {
+      "name": "Caramel Fudge",
+      "price": "20",
+      "desc": "",
+      "category": "KASAÖNÜ"
+    },
+    {
+      "name": "Munchy Cookie Crisps",
+      "price": "80",
+      "desc": "",
+      "category": "KASAÖNÜ"
+    },
+    {
+      "name": "Munchy Multi-Seed Crisps",
+      "price": "80",
+      "desc": "",
+      "category": "KASAÖNÜ"
+    },
+    {
+      "name": "Pole Cherry",
+      "price": "45",
+      "desc": "",
+      "category": "KASAÖNÜ"
+    },
+    {
+      "name": "Rawesome Nuts&Berries Bar",
+      "price": "45",
+      "desc": "",
+      "category": "KASAÖNÜ"
+    },
+    {
+      "name": "Rawesome Orange&Hazelnut Protein Bar",
+      "price": "45",
+      "desc": "",
+      "category": "KASAÖNÜ"
+    },
+    {
+      "name": "Sugar Free Granola With Stevia",
+      "price": "80",
+      "desc": "",
+      "category": "KASAÖNÜ"
+    },
+    {
+      "name": "Hazelnut Cookie Cup",
+      "price": "75",
+      "desc": "",
+      "category": "KASAÖNÜ"
+    },
+    {
+      "name": "Salted Cookie Cup",
+      "price": "75",
+      "desc": "",
+      "category": "KASAÖNÜ"
+    },
+    {
+      "name": "Dubai Stick Chocolate 42 G",
+      "price": "110",
+      "desc": "",
+      "category": "KASAÖNÜ"
+    },
+    {
+      "name": "Pole Berry Mix",
+      "price": "45",
+      "desc": "",
+      "category": "KASAÖNÜ"
+    },
+    {
+      "name": "Nostalgic Water 50 G",
+      "price": "75",
+      "desc": "",
+      "category": "KASAÖNÜ"
+    }
+  ]
+},
 
   "7054": {
     "name": "Cozy Brew",
