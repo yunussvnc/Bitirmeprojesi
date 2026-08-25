@@ -1674,3 +1674,6 @@ Hentzer kaydı `Kavacık, Orhan Veli Kanık Cd. No:110, 34810 Beykoz/İstanbul`,
 
 ## SOFRAM KEBAP DÖNER ID 6941 — STRICT HOLD
 Hentzer kaydı `Şehit Muhtar, Tarlabaşı Blv No:84, 34435 Beyoğlu/İstanbul`, `+90 212 297 93 98`; RestaurantGuru, Cybo ve Tripadvisor adres/telefonu destekliyor. RestaurantGuru menü URL’si insan doğrulama duvarına yönlendiriyor; işletme sayfasında yalnız genel kişi başı fiyat aralığı var, ürün bazlı güncel menü/fiyat listesi bulunmuyor. Son bir yıl içinde doğrulanabilir herkese açık fiyatlı menü elde edilemediği için **strict HOLD**; override eklenmedi.
+
+## QUKI MEYHANE WEST İSTANBUL MARINA ID 6940 — STRICT HOLD
+Hentzer/Restoranim ve resmi Instagram `Marmara, West İstanbul Marina, 34524 Beylikdüzü/İstanbul`, `+90 505 047 73 62` bilgilerini destekliyor. Yandex aynı marina bölgesini `Marmara Mah., Ulusum Cad., 28/1` olarak gösterse de farklı telefon `+90 530 933 48 85` yayımlıyor. Bulunan Fırsat Bu Fırsat menü/fiyat kaydı 24 Haziran 2023 son kullanım tarihli olduğundan bir yıllık güncellik şartını karşılamıyor. Exact telefon ve güncel fiyat koşulları birlikte sağlanamadığı için **strict HOLD**; override eklenmedi.
