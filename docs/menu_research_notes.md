@@ -1191,3 +1191,6 @@ Hentzer exact kayıt `Türbesi, Tokatköy, Doğu Kapısı Cd. Hz. Yuşa Cami, 34
 
 ## HOLD — Et Ovası Beylikdüzü ID 7108
 Hentzer exact kayıt `Yakuplu, Hürriyet Blv. 23 A, 34524 Beylikdüzü/İstanbul`, `+90 212 876 93 51`; resmi Instagram/Facebook ve `etovasi.com` aynı şube/telefon/adres kimliğini destekliyor. `qrmenuleri.com/etovasi/en/` bazı ızgara ürünleri ve fiyatlar gösteriyor ancak çıktı eksik ve malformatlı: kategoriler tekrarlanıyor, bazı ürün-fiyat eşleşmeleri belirsiz ve complete güncel menü sağlanamıyor. Arama sonuçlarında 2024 ve daha eski içerikler ağırlıkta; son bir yıl içinde complete menü doğrulanamadı. ID 7108 strict HOLD; repo override değişikliği yapılmadı.
+
+## HOLD — Miss Pizza Etiler ID 7106
+Hentzer exact kayıt `Bebek Yokuşu (Yok) No:1B, Etiler, 34337 Beşiktaş/İstanbul`, `+90 212 257 32 10`; Restoranım exact sayfası ve resmi `misspizza.com.tr` arama kayıtları aynı adres/telefonu destekliyor. Resmi site şu anda eski/demo içerik gösteriyor ve `/menu` endpoint’inden güvenilir içerik çıkarılamadı. Yemeksepeti’nde Miss Pizza fiyatlı vendorları var fakat `a0mm`/`ma9v` sonuçlarının Etiler No:1B şubesi olduğu kanıtlanamadı. ID 7106 strict HOLD; repo override değişikliği yapılmadı.
