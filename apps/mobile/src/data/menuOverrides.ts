@@ -8667,423 +8667,314 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
   },
   "7278": {
   "name": "Pizza Wich Beşiktaş",
-  "sourceUrl": "https://www.yemeksepeti.com/restaurant/j9va/pizza-wich-j9va",
-  "sourceName": "Yemeksepeti canlı menüsü (Pizza Wich; Hentzer/Yandex exact Sinanpaşa Şht. Asım Cd. 24/A Beşiktaş şube eşleşmesi; Popüler tekrarları ve Poşet çıkarıldı)",
-  "verifiedAt": "2026-08-23",
+  "sourceUrl": "https://www.migros.com.tr/yemek/pizza-wich-besiktas-sinanpasa-mah-st-1c961",
+  "sourceName": "Pizza Wich Beşiktaş (Sinanpaşa) Migros public menüsü; exact Şehit Asım/Ortabahçe Cd. 24/A branch bridge",
+  "verifiedAt": "2026-08-25",
   "items": [
     {
-      "name": "Margherita Pizza (24 cm.)",
-      "price": "290",
-      "category": "Küçük Boy Klasik Pizzalar (24 cm.)",
-      "desc": "Özel sos, mozzarella peyniri, fesleğen sos"
+      "name": "Akdeniz Pizza (Orta)",
+      "price": "380,00 TL",
+      "category": "Orta Boy Klasik Pizzalar (28 Cm.)",
+      "desc": "Mozzarella peyniri, domates, yeşilbiber, siyah zeytin, ricotta peyniri, fesleğen sos"
     },
     {
-      "name": "Quattro Formaggi Pizza(24cm)",
-      "price": "320",
-      "category": "Küçük Boy Klasik Pizzalar (24 cm.)",
-      "desc": "Özel sos,mozzarellapeyniri,rokforpeyniri,parmesanpeyniri,cheddarpeyniri,roka Special sauce,mozzarellacheese,bluecheese,parmesancheese,cheddarcheese,arragula"
-    },
-    {
-      "name": "Funghi Pizza (24 cm.)",
-      "price": "320",
-      "category": "Küçük Boy Klasik Pizzalar (24 cm.)",
-      "desc": "Özel sos, mozzarella peyniri, kültür mantarı, kestane mantarı, istiridye mantarı"
-    },
-    {
-      "name": "Pepperoni Pizza (24 cm.)",
-      "price": "320",
-      "category": "Küçük Boy Klasik Pizzalar (24 cm.)",
-      "desc": "Özel sos, mozzarella peyniri, pepperoni"
-    },
-    {
-      "name": "Anatolian Pizza (24 cm.)",
-      "price": "320",
-      "category": "Küçük Boy Klasik Pizzalar (24 cm.)",
-      "desc": "Özel sos, mozzarella peyniri, ricotta peyniri, kırmızıbiber, közlenmiş patlıcan, domates, roka, fesleğen sos"
-    },
-    {
-      "name": "Ricotta Spinach Pizza (24 cm.)",
-      "price": "320",
-      "category": "Küçük Boy Klasik Pizzalar (24 cm.)",
-      "desc": "Özel sos, mozzarella peyniri, ricotta peyniri, ıspanak, soğan, sarımsak, domates, fesleğen sos"
-    },
-    {
-      "name": "Veggie Pizza (24 cm.)",
-      "price": "335",
-      "category": "Küçük Boy Klasik Pizzalar (24 cm.)",
-      "desc": "Özel sos, mozzarella peyniri, mantar, kırmızı soğan, ıspanak, brokoli, zeytin, domates, fesleğen sos"
-    },
-    {
-      "name": "Anatolia Mushroom Pizza (24 cm.)",
-      "price": "330",
-      "category": "Küçük Boy Klasik Pizzalar (24 cm.)",
-      "desc": "Özel sos, mozzarella peyniri, mantar, kırmızıbiber, yeşil biber, mısır, zeytin"
-    },
-    {
-      "name": "Mediterrenean Pizza (24 cm.)",
-      "price": "320",
-      "category": "Küçük Boy Klasik Pizzalar (24 cm.)",
-      "desc": "Özel sos, mozzarella peyniri, ricotta peyniri, yeşil biber, zeytin, domates, roka, fesleğen sos"
-    },
-    {
-      "name": "Zucchini Pesto Pizza (24 cm.)",
-      "price": "330",
-      "category": "Küçük Boy Klasik Pizzalar (24 cm.)",
-      "desc": "Özel sos, mozzarella peyniri, ricotta peyniri, kabak, sarımsak, domates, roka, fesleğen sos"
-    },
-    {
-      "name": "Mega Turco Pizza (24 cm.)",
-      "price": "350",
-      "category": "Küçük Boy Gurme Pizzalar (24 cm.)",
-      "desc": "Özel sos, mozzarella peyniri, mantar, yeşil biber, kırmızıbiber, sucuk, salam, sosis, mısır, zeytin"
-    },
-    {
-      "name": "BBQ Tavuklu Pizza (24 cm.)",
-      "price": "350",
-      "category": "Küçük Boy Gurme Pizzalar (24 cm.)",
-      "desc": "Özel sos, mozzarella peyniri, kırmızı soğan, yeşil biber, kırmızıbiber, piliç bonfile, barbekü sos"
-    },
-    {
-      "name": "Mediterranean",
-      "price": "380",
-      "category": "Orta Boy Klasik Pizzalar (28 cm.)",
-      "desc": "Mozzarella peyniri, domates, yeşil biber, siyah zeytin, ricotta peyniri, fesleğen sos"
-    },
-    {
-      "name": "Funghi",
-      "price": "390",
-      "category": "Orta Boy Klasik Pizzalar (28 cm.)",
+      "name": "Pizza 3 Mantar (Orta)",
+      "price": "390,00 TL",
+      "category": "Orta Boy Klasik Pizzalar (28 Cm.)",
       "desc": "Mozzarella peyniri, özel sos, istiridye mantarı, kestane mantarı, kültür mantarı"
     },
     {
-      "name": "Quattro Formaggi",
-      "price": "390",
-      "category": "Orta Boy Klasik Pizzalar (28 cm.)",
+      "name": "Pizza 4 Peynir (Orta)",
+      "price": "390,00 TL",
+      "category": "Orta Boy Klasik Pizzalar (28 Cm.)",
       "desc": "Mozzarella peyniri, özel sos, rokfor peyniri, parmesan peyniri, cheddar peyniri"
     },
     {
-      "name": "Anatolian",
-      "price": "380",
-      "category": "Orta Boy Klasik Pizzalar (28 cm.)",
+      "name": "Pizza Anatolia (Orta)",
+      "price": "380,00 TL",
+      "category": "Orta Boy Klasik Pizzalar (28 Cm.)",
       "desc": "Mozzarella peyniri, özel sos, közlenmiş patlıcan, kaymak, lor peyniri, domates, kırmızıbiber, fesleğen sos"
     },
     {
-      "name": "Ricotta & Spinach",
-      "price": "380",
-      "category": "Orta Boy Klasik Pizzalar (28 cm.)",
+      "name": "Pizza Ispanak (Orta)",
+      "price": "380,00 TL",
+      "category": "Orta Boy Klasik Pizzalar (28 Cm.)",
       "desc": "Özel sos, mozzarella peyniri, ricotta peyniri, ıspanak, soğan, sarımsak, domates"
     },
     {
-      "name": "Margherita (Orta)",
-      "price": "340",
-      "category": "Orta Boy Klasik Pizzalar (28 cm.)",
+      "name": "Pizza Margherita (Orta)",
+      "price": "340,00 TL",
+      "category": "Orta Boy Klasik Pizzalar (28 Cm.)",
       "desc": "Özel sos, mozzarella peyniri, fesleğen sos"
     },
     {
-      "name": "Pepperoni (Orta)",
-      "price": "390",
-      "category": "Orta Boy Klasik Pizzalar (28 cm.)",
+      "name": "Pizza Pepperoni (Orta)",
+      "price": "390,00 TL",
+      "category": "Orta Boy Klasik Pizzalar (28 Cm.)",
       "desc": "Mozzarella peyniri, özel sos, dana pepperoni"
     },
     {
-      "name": "Veggie Pizza (Orta Boy)",
-      "price": "380",
-      "category": "Orta Boy Klasik Pizzalar (28 cm.)",
+      "name": "Pizza Veggie (Orta)",
+      "price": "380,00 TL",
+      "category": "Orta Boy Klasik Pizzalar (28 Cm.)",
       "desc": "Mozzarella peyniri, özel sos, mantar, brokoli, siyah zeytin, soğan, ıspanak, domates"
     },
     {
-      "name": "Kavurma Zengini",
-      "price": "470",
-      "category": "Orta Boy Gurme Pizzalar (28 cm.)",
-      "desc": "Özel sos, mozarella peyniri, kavurma, kırmızısoğan, yeşil biber, kırmızıbiber"
+      "name": "Kavurma Zengini Pizza (Orta)",
+      "price": "470,00 TL",
+      "category": "Orta Boy Gurme Pizzalar (28 Cm.)",
+      "desc": "Özel sos, mozarella peyniri, kavurma, kırmızısoğan, yeşilbiber, kırmızıbiber"
     },
     {
-      "name": "Goat Cheese (Orta)",
-      "price": "470",
-      "category": "Orta Boy Gurme Pizzalar (28 cm.)",
-      "desc": "Özel sos, mozzarella peyniri, keçi peyniri, kurutulmuş domates, siyah zeytin, fesleğen sos"
+      "name": "Pizza Anadolu Gurme (Orta)",
+      "price": "470,00 TL",
+      "category": "Orta Boy Gurme Pizzalar (28 Cm.)",
+      "desc": "Özel sos, mozzarella peyniri, pastırma, kavurma, küp sucuk, kırmızı soğan, yeşilbiber, kırmızıbiber"
     },
     {
-      "name": "Pastırmalı Pizza (Orta Boy)",
-      "price": "470",
-      "category": "Orta Boy Gurme Pizzalar (28 cm.)",
-      "desc": "Özel sos, mozzarella peyniri, pastırma, yeşil biber, kırmızıbiber, kırmızı soğan"
+      "name": "Pizza Pastırma (Orta)",
+      "price": "470,00 TL",
+      "category": "Orta Boy Gurme Pizzalar (28 Cm.)",
+      "desc": "Özel sos, mozzarella peyniri, pastırma, yeşilbiber, kırmızıbiber, kırmızı soğan"
     },
     {
-      "name": "Mega Turco",
-      "price": "420",
-      "category": "Orta Boy Gurme Pizzalar (28 cm.)",
-      "desc": "Mozzarella peyniri, salam, sucuk, sosis, mantar, mısır, zeytin, kırmızıbiber, yeşil biber"
+      "name": "Mega Turco (Orta)",
+      "price": "420,00 TL",
+      "category": "Orta Boy Gurme Pizzalar (28 Cm.)",
+      "desc": "Mozzarella peyniri, salam, sucuk, sosis, mantar, mısır, zeytin, kırmızıbiber, yeşilbiber"
     },
     {
-      "name": "Arrabbiata (Orta)",
-      "price": "420",
-      "category": "Orta Boy Gurme Pizzalar (28 cm.)",
+      "name": "Pizza Arrabbiata (Orta)",
+      "price": "420,00 TL",
+      "category": "Orta Boy Gurme Pizzalar (28 Cm.)",
       "desc": "Mozzarella peyniri, özel sos, dana pepperoni, mantar, mısır, zeytin, jalapeno biberi"
     },
     {
-      "name": "Barbekü Soslu Tavuklu Pizza",
-      "price": "420",
-      "category": "Orta Boy Gurme Pizzalar (28 cm.)",
-      "desc": "Mozzarella peyniri, özel sos, tavuk bonfile, barbekü sos, kırmızıbiber, yeşil biber, soğan"
+      "name": "Pizza Bbq Tavuk (Orta)",
+      "price": "420,00 TL",
+      "category": "Orta Boy Gurme Pizzalar (28 Cm.)",
+      "desc": "Mozzarella peyniri, özel sos, tavuk bonfile, barbekü sos, kırmızıbiber, yeşilbiber, soğan"
     },
     {
-      "name": "Chicken Steak",
-      "price": "420",
-      "category": "Orta Boy Gurme Pizzalar (28 cm.)",
+      "name": "Pizza Chicken Steak (Orta)",
+      "price": "420,00 TL",
+      "category": "Orta Boy Gurme Pizzalar (28 Cm.)",
       "desc": "Özel sos, mozarella peyniri, tavuk, mantar, kırmızı soğan, jalapeno biberi"
     },
     {
-      "name": "Gideros (Orta)",
-      "price": "430",
-      "category": "Orta Boy Gurme Pizzalar (28 cm.)",
+      "name": "Pizza Gideros (Orta)",
+      "price": "430,00 TL",
+      "category": "Orta Boy Gurme Pizzalar (28 Cm.)",
       "desc": "Mozzarella peyniri, özel sos, mantar, dana jambon, siyah zeytin, soğan, jalapeno biberi"
     },
     {
-      "name": "Hawaiian",
-      "price": "430",
-      "category": "Orta Boy Gurme Pizzalar (28 cm.)",
+      "name": "Pizza Hawaiian (Orta)",
+      "price": "430,00 TL",
+      "category": "Orta Boy Gurme Pizzalar (28 Cm.)",
       "desc": "Mozzarella peyniri, özel sos, dana jambon, ananas"
     },
     {
-      "name": "Jambon & Cheddar Pizza",
-      "price": "420",
-      "category": "Orta Boy Gurme Pizzalar (28 cm.)",
-      "desc": "Mozzarella peyniri, özel sos, dana jambon, cheddar peyniri, yeşil biber, soğan"
+      "name": "Pizza Jambon & Cheddar (Orta)",
+      "price": "420,00 TL",
+      "category": "Orta Boy Gurme Pizzalar (28 Cm.)",
+      "desc": "Mozzarella peyniri, özel sos, dana jambon, cheddar peyniri, yeşilbiber, soğan"
     },
     {
-      "name": "Zucchini & Pesto",
-      "price": "380",
-      "category": "Orta Boy Gurme Pizzalar (28 cm.)",
+      "name": "Pizza Kabak Pesto (Orta)",
+      "price": "380,00 TL",
+      "category": "Orta Boy Gurme Pizzalar (28 Cm.)",
       "desc": "Özel sos, mozzarella peyniri, ricotta peyniri, kabak, sarımsak, domates, fesleğen sos"
     },
     {
-      "name": "Küp Sucuk Pizza (Orta Boy)",
-      "price": "420",
-      "category": "Orta Boy Gurme Pizzalar (28 cm.)",
-      "desc": "Özel sos, mozzarella peyniri, küp sucuk, yeşil biber, kırmızıbiber, zeytin"
+      "name": "Pizza Küp Sucuk (Orta)",
+      "price": "420,00 TL",
+      "category": "Orta Boy Gurme Pizzalar (28 Cm.)",
+      "desc": "Özel sos, mozzarella peyniri, küp sucuk, yeşilbiber, kırmızıbiber, zeytin"
     },
     {
       "name": "Pizza Sosis & Cheddar (Orta)",
-      "price": "420",
-      "category": "Orta Boy Gurme Pizzalar (28 cm.)",
+      "price": "420,00 TL",
+      "category": "Orta Boy Gurme Pizzalar (28 Cm.)",
       "desc": "Özel sos, mozzarella peyniri, sosis, cheddar peyniri"
     },
     {
-      "name": "Al Tonno Pizza",
-      "price": "450",
-      "category": "Orta Boy Gurme Pizzalar (28 cm.)",
+      "name": "Pizza Tonno (Orta)",
+      "price": "450,00 TL",
+      "category": "Orta Boy Gurme Pizzalar (28 Cm.)",
       "desc": "Mozzarella peyniri, özel sos, ton balığı, mısır, soğan, kapari"
     },
     {
-      "name": "Mediterranean (Büyük)",
-      "price": "870",
-      "category": "Büyük Boy Klasik Pizzalar (45 cm.) (3-4 Kişilik)",
-      "desc": "Mozzarella peyniri, domates, yeşil biber, siyah zeytin, ricotta peyniri, fesleğen sos"
+      "name": "Akdeniz Pizza (Büyük)",
+      "price": "870,00 TL",
+      "category": "Büyük Boy Klasik Pizzalar (45 Cm.)",
+      "desc": "Mozzarella peyniri, domates, yeşilbiber, siyah zeytin, ricotta peyniri, fesleğen sos"
     },
     {
-      "name": "Funghi (Büyük)",
-      "price": "870",
-      "category": "Büyük Boy Klasik Pizzalar (45 cm.) (3-4 Kişilik)",
+      "name": "Pizza 3 Mantar (Büyük)",
+      "price": "870,00 TL",
+      "category": "Büyük Boy Klasik Pizzalar (45 Cm.)",
       "desc": "Mozzarella peyniri, özel sos, istiridye mantarı, kestane mantarı, kültür mantarı"
     },
     {
-      "name": "Quattro Formaggi (Büyük)",
-      "price": "870",
-      "category": "Büyük Boy Klasik Pizzalar (45 cm.) (3-4 Kişilik)",
+      "name": "Pizza 4 Peynir (Büyük)",
+      "price": "870,00 TL",
+      "category": "Büyük Boy Klasik Pizzalar (45 Cm.)",
       "desc": "Mozzarella peyniri, özel sos, rokfor peyniri, parmesan peyniri, cheddar peyniri"
     },
     {
-      "name": "Anatolian Pizza",
-      "price": "870",
-      "category": "Büyük Boy Klasik Pizzalar (45 cm.) (3-4 Kişilik)",
+      "name": "Pizza Anatolia (Büyük)",
+      "price": "870,00 TL",
+      "category": "Büyük Boy Klasik Pizzalar (45 Cm.)",
       "desc": "Mozzarella peyniri, özel sos, közlenmiş patlıcan, kaymak, lor peyniri, domates, kırmızıbiber, fesleğen sos"
     },
     {
-      "name": "Ricotta & Spinach Pizza",
-      "price": "870",
-      "category": "Büyük Boy Klasik Pizzalar (45 cm.) (3-4 Kişilik)",
+      "name": "Pizza Ispanak (Büyük)",
+      "price": "870,00 TL",
+      "category": "Büyük Boy Klasik Pizzalar (45 Cm.)",
       "desc": "Özel sos, mozzarella peyniri, ricotta peyniri, ıspanak, soğan, sarımsak, domates"
     },
     {
-      "name": "Margherita Pizza (Büyük)",
-      "price": "830",
-      "category": "Büyük Boy Klasik Pizzalar (45 cm.) (3-4 Kişilik)",
+      "name": "Pizza Margherita (Büyük)",
+      "price": "830,00 TL",
+      "category": "Büyük Boy Klasik Pizzalar (45 Cm.)",
       "desc": "Özel sos, mozzarella peyniri, fesleğen sos"
     },
     {
-      "name": "Pepperoni",
-      "price": "870",
-      "category": "Büyük Boy Klasik Pizzalar (45 cm.) (3-4 Kişilik)",
+      "name": "Pizza Pepperoni (Büyük)",
+      "price": "870,00 TL",
+      "category": "Büyük Boy Klasik Pizzalar (45 Cm.)",
       "desc": "Mozzarella peyniri, özel sos, dana pepperoni"
     },
     {
-      "name": "Veggie Pizza",
-      "price": "870",
-      "category": "Büyük Boy Klasik Pizzalar (45 cm.) (3-4 Kişilik)",
+      "name": "Pizza Veggie (Büyük)",
+      "price": "870,00 TL",
+      "category": "Büyük Boy Klasik Pizzalar (45 Cm.)",
       "desc": "Mozzarella peyniri, özel sos, mantar, brokoli, siyah zeytin, soğan, ıspanak, domates"
     },
     {
-      "name": "Kavurma Zengini Pizza",
-      "price": "940",
-      "category": "Büyük Boy Gurme Pizzalar (45 cm.) (3-4 Kişilik)",
-      "desc": "Özel sos, mozarella peyniri, kavurma, kırmızı soğan, yeşil biber, kırmızıbiber"
+      "name": "Kavurma Zengini Pizza (Büyük)",
+      "price": "940,00 TL",
+      "category": "Büyük Boy Gurme Pizzalar (45 Cm.)",
+      "desc": "Özel sos, mozarella peyniri, kavurma, kırmızı soğan, yeşilbiber, kırmızıbiber"
     },
     {
-      "name": "Anatolia Gourmet Pizza",
-      "price": "950",
-      "category": "Büyük Boy Gurme Pizzalar (45 cm.) (3-4 Kişilik)",
-      "desc": "Özel sos, mozzarella peyniri, pastırma, kavurma, küp sucuk, kırmızı soğan, yeşil biber, kırmızıbiber"
+      "name": "Pizza Anadolu Gurme (Büyük)",
+      "price": "950,00 TL",
+      "category": "Büyük Boy Gurme Pizzalar (45 Cm.)",
+      "desc": "Özel sos, mozzarella peyniri, pastırma, kavurma, küp sucuk, kırmızı soğan, yeşilbiber, kırmızıbiber"
     },
     {
-      "name": "Goat Cheese Pizza",
-      "price": "920",
-      "category": "Büyük Boy Gurme Pizzalar (45 cm.) (3-4 Kişilik)",
-      "desc": "Özel sos, mozzarella peyniri, keçi peyniri, kurutulmuş domates, siyah zeytin, fesleğen sos"
-    },
-    {
-      "name": "Pastırmalı Pizza",
-      "price": "970",
-      "category": "Büyük Boy Gurme Pizzalar (45 cm.) (3-4 Kişilik)",
-      "desc": "Özel sos, mozzarella peyniri, dana pastırma, yeşil biber, kırmızıbiber, kırmızı soğan"
+      "name": "Pizza Pastırma (Büyük)",
+      "price": "970,00 TL",
+      "category": "Büyük Boy Gurme Pizzalar (45 Cm.)",
+      "desc": "Özel sos, mozzarella peyniri, dana pastırma, yeşilbiber, kırmızıbiber, kırmızı soğan"
     },
     {
       "name": "Mega Turco (Büyük)",
-      "price": "870",
-      "category": "Büyük Boy Gurme Pizzalar (45 cm.) (3-4 Kişilik)",
-      "desc": "Mozzarella peyniri, salam, sucuk, sosis, mantar, mısır, zeytin, kırmızıbiber, yeşil biber"
+      "price": "870,00 TL",
+      "category": "Büyük Boy Gurme Pizzalar (45 Cm.)",
+      "desc": "Mozzarella peyniri, salam, sucuk, sosis, mantar, mısır, zeytin, kırmızıbiber, yeşilbiber"
     },
     {
-      "name": "Arrabbiata Pizza",
-      "price": "850",
-      "category": "Büyük Boy Gurme Pizzalar (45 cm.) (3-4 Kişilik)",
+      "name": "Pizza Arrabbiata (Büyük)",
+      "price": "850,00 TL",
+      "category": "Büyük Boy Gurme Pizzalar (45 Cm.)",
       "desc": "Mozzarella peyniri, özel sos, dana pepperoni, mantar, mısır, zeytin, jalapeno biberi"
     },
     {
-      "name": "BBQ Tavuk Pizza",
-      "price": "870",
-      "category": "Büyük Boy Gurme Pizzalar (45 cm.) (3-4 Kişilik)",
-      "desc": "Mozzarella peyniri, özel sos, tavuk bonfile, barbekü sos, kırmızıbiber, yeşil biber, soğan"
+      "name": "Pizza Bbq Tavuk (Büyük)",
+      "price": "870,00 TL",
+      "category": "Büyük Boy Gurme Pizzalar (45 Cm.)",
+      "desc": "Mozzarella peyniri, özel sos, tavuk bonfile, barbekü sos, kırmızıbiber, yeşilbiber, soğan"
     },
     {
-      "name": "Chicken Steak Pizza",
-      "price": "870",
-      "category": "Büyük Boy Gurme Pizzalar (45 cm.) (3-4 Kişilik)",
+      "name": "Pizza Chicken Steak (Büyük)",
+      "price": "870,00 TL",
+      "category": "Büyük Boy Gurme Pizzalar (45 Cm.)",
       "desc": "Özel sos, mozarella peyniri, tavuk, mantar, kırmızı soğan, jalapeno biberi"
     },
     {
-      "name": "Gideros Pizza",
-      "price": "870",
-      "category": "Büyük Boy Gurme Pizzalar (45 cm.) (3-4 Kişilik)",
+      "name": "Pizza Gideros (Büyük)",
+      "price": "870,00 TL",
+      "category": "Büyük Boy Gurme Pizzalar (45 Cm.)",
       "desc": "Mozzarella peyniri, özel sos, mantar, dana jambon, siyah zeytin, soğan, jalapeno biberi"
     },
     {
-      "name": "Hawaiian Pizza",
-      "price": "900",
-      "category": "Büyük Boy Gurme Pizzalar (45 cm.) (3-4 Kişilik)",
+      "name": "Pizza Hawaiian (Büyük)",
+      "price": "900,00 TL",
+      "category": "Büyük Boy Gurme Pizzalar (45 Cm.)",
       "desc": "Mozzarella peyniri, özel sos, dana jambon, ananas"
     },
     {
-      "name": "Jambon & Cheddar Pizza",
-      "price": "870",
-      "category": "Büyük Boy Gurme Pizzalar (45 cm.) (3-4 Kişilik)",
-      "desc": "Mozzarella peyniri, özel sos, dana jambon, cheddar peyniri, yeşil biber, soğan"
+      "name": "Pizza Jambon & Cheddar (Büyük)",
+      "price": "870,00 TL",
+      "category": "Büyük Boy Gurme Pizzalar (45 Cm.)",
+      "desc": "Mozzarella peyniri, özel sos, dana jambon, cheddar peyniri, yeşilbiber, soğan"
     },
     {
       "name": "Pizza Kabak Pesto (Büyük)",
-      "price": "870",
-      "category": "Büyük Boy Gurme Pizzalar (45 cm.) (3-4 Kişilik)",
+      "price": "870,00 TL",
+      "category": "Büyük Boy Gurme Pizzalar (45 Cm.)",
       "desc": "Özel sos, mozzarella peyniri, ricotta peyniri, kabak, sarımsak, domates, fesleğen sos"
     },
     {
-      "name": "Küp Sucuk (Büyük)",
-      "price": "870",
-      "category": "Büyük Boy Gurme Pizzalar (45 cm.) (3-4 Kişilik)",
-      "desc": "Özel sos, mozzarella peyniri, küp sucuk, yeşil biber, kırmızıbiber, zeytin"
+      "name": "Pizza Küp Sucuk (Büyük)",
+      "price": "870,00 TL",
+      "category": "Büyük Boy Gurme Pizzalar (45 Cm.)",
+      "desc": "Özel sos, mozzarella peyniri, küp sucuk, yeşilbiber, kırmızıbiber, zeytin"
     },
     {
-      "name": "Sosis & Cheddar Pizza",
-      "price": "870",
-      "category": "Büyük Boy Gurme Pizzalar (45 cm.) (3-4 Kişilik)",
+      "name": "Pizza Sosis & Cheddar (Büyük)",
+      "price": "870,00 TL",
+      "category": "Büyük Boy Gurme Pizzalar (45 Cm.)",
       "desc": "Özel sos, mozzarella peyniri, sosis, cheddar peyniri"
     },
     {
-      "name": "Al Tonno",
-      "price": "920",
-      "category": "Büyük Boy Gurme Pizzalar (45 cm.) (3-4 Kişilik)",
+      "name": "Pizza Tonno (Büyük)",
+      "price": "920,00 TL",
+      "category": "Büyük Boy Gurme Pizzalar (45 Cm.)",
       "desc": "Mozzarella peyniri, özel sos, ton balığı, mısır, soğan, kapari"
     },
     {
-      "name": "Coca-Cola (33 cl.)",
-      "price": "95",
+      "name": "Coca-cola (33 Cl.)",
+      "price": "95,00 TL",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Coca-cola Şekersiz (33 Cl.)",
+      "price": "95,00 TL",
       "category": "İçecekler",
-      "desc": "Kutu içecek"
+      "desc": "Kutu"
     },
     {
-      "name": "Coca-Cola Şekersiz (33 cl.)",
-      "price": "95",
-      "category": "İçecekler",
-      "desc": "Kutu içecek"
+      "name": "Fanta (33 Cl.)",
+      "price": "95,00 TL",
+      "category": "İçecekler"
     },
     {
-      "name": "Fanta (33 cl.)",
-      "price": "95",
-      "category": "İçecekler",
-      "desc": "Kutu içecek"
+      "name": "Sprite (33 Cl.)",
+      "price": "95,00 TL",
+      "category": "İçecekler"
     },
     {
-      "name": "Sprite (33 cl.)",
-      "price": "95",
-      "category": "İçecekler",
-      "desc": "Kutu içecek"
+      "name": "Fuse Tea (33 Cl.)",
+      "price": "95,00 TL",
+      "category": "İçecekler"
     },
     {
-      "name": "Fuse Tea (33 cl.)",
-      "price": "95",
-      "category": "İçecekler",
-      "desc": "Kutu içecek"
+      "name": "Ayran (33 Cl.)",
+      "price": "60,00 TL",
+      "category": "İçecekler"
     },
     {
-      "name": "Ayran (33 cl.)",
-      "price": "60",
-      "category": "İçecekler",
-      "desc": "Büyük"
+      "name": "Soda (20 Cl.)",
+      "price": "50,00 TL",
+      "category": "İçecekler"
     },
     {
-      "name": "Soda (20 cl.)",
-      "price": "50",
-      "category": "İçecekler",
-      "desc": "Cam şişe"
-    },
-    {
-      "name": "Su (50 cl.)",
-      "price": "25",
-      "category": "İçecekler",
-      "desc": "Pet şişe"
-    },
-    {
-      "name": "Acı Sos",
-      "price": "7",
-      "category": "Soslar",
-      "desc": "Paket"
-    },
-    {
-      "name": "BBQ Sos",
-      "price": "7",
-      "category": "Soslar",
-      "desc": "Paket"
-    },
-    {
-      "name": "Ketçap",
-      "price": "6",
-      "category": "Soslar",
-      "desc": "Paket"
-    },
-    {
-      "name": "Mayonez",
-      "price": "6",
-      "category": "Soslar",
-      "desc": "Paket"
+      "name": "Su (50 Cl.)",
+      "price": "25,00 TL",
+      "category": "İçecekler"
     }
   ]
 },
