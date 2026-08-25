@@ -1620,3 +1620,6 @@ Hentzer kaydı `Samsun Cd., Barış, Kır Sk. No:21/10, 34500 Beylikdüzü/İsta
 
 ## DOĞU KARADENİZ PİDE SARAYI ID 6959 kabul
 Hentzer kaydı `Türkali, Şair Nedim Cd. 50/A, 34353 Beşiktaş/İstanbul`, `+90 212 259 53 53`; resmi `@dogukaradenizpide` hesabı Beşiktaş şubesini, adres bölgesini ve telefon numaralarını doğruluyor; ek telefon `+90 212 259 96 96` olarak yayınlanmış. Yemeksepeti `lxcj` canlı vendor menüsü 2026-08-26 tarihinde 75 benzersiz gıda/içecek kalemi gösterdi. Popüler carousel tekrarları ve poşet dışlandı; ürünler çorba, lahmacun, pide, kebap, ızgara, dürüm, döner, yan lezzet, salata, tatlı ve içecek kategorilerinden alındı. **Override kabul edildi.**
+
+## GÜNNEHAR BAYRAMPAŞA ID 6958 strict HOLD
+Hentzer kaydı `Altıntepsi, Arda Turan Cd. 30/A, 34035 Bayrampaşa/İstanbul`, `+90 541 471 18 00`; sosyal/yerel kaynaklar işletme adını desteklese de Yemeksepeti `ua36` vendor adresi `Şht. Kamil Balkan Cad. No:56`, Yandex kaydı ise `Yıldırım Mah. Şehit Kamil Balkan Cad. 56A` ve farklı telefon gösteriyor. Bu nedenle vendorun Hentzer’deki exact Altıntepsi şubesi olduğuna dair %100 adres/telefon paritesi sağlanamadı. Güncel fiyatlar mevcut olsa da yanlış şubeye aktarılmaması için **override eklenmedi; strict HOLD**.
