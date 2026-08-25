@@ -1404,3 +1404,6 @@ Exact kayıt `Kuruçeşme, Yeşilpınar Sk. No:6, 34345 Beşiktaş/İstanbul`, `
 
 ## BİRLİK KASAP STEAKPOINT ID 7033 strict HOLD
 Hentzer kaydı `Rüzgarlıbahçe, Cumhuriyet Cd. No:57, 34805 Beykoz/İstanbul`, `+90 216 425 55 29`; resmi site ve Instagram adresiyle eşleşti. Ancak telefon kaynakları `0216 425 55 29-28` ve resmi dijital menü rezervasyon hattı `0216 425 55 28` olarak farklılaşıyor. Ayrıca resmi dijital menü yalnızca görsel/dinamik sayfalar ve ok butonları sunuyor; tam item-level fiyatlar metin olarak erişilebilir değil. Zorunlu adres/telefon paritesi ve güncel fiyat doğrulaması sağlanamadığından **override eklenmedi; strict HOLD**.
+
+## MAGNOLIA SHOP COFFEE CO. METROHOME ID 7032 strict HOLD
+Exact resmi şube adresi `Cumhuriyet Mah. Dervişoğlu Cad. Metrohome Suites F Blok No:17 Beylikdüzü/İstanbul` ve aynı lokasyona ait güncel Yemeksepeti `Magnolia Shop` fiyatlı menüsü bulundu. Ancak Hentzer telefon alanı boş, resmi MetroHome şube sayfasında telefon yayınlanmıyor ve çevrimiçi Instagram lokasyonunda farklı/bağımsız bir telefon görünüyor. Zorunlu **%100 adres/telefon paritesi sağlanamadığından override eklenmedi; strict HOLD**.
