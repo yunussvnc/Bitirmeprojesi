@@ -1347,3 +1347,6 @@ Exact kayıt `Türkali, Yeniyol Sokağı No 9, 34357 Beşiktaş/İstanbul`, `+90
 
 ## Sirtaki Meyhanesi ID 7053 strict HOLD
 Exact kayıt `Ekinoks Beylikdüzü, Büyükşehir, Cumhuriyet Cd. No:1 D:21, 34520 Beylikdüzü/İstanbul`, `+90 538 410 23 07`; Restoranım ve Cybo adres/telefonu doğruluyor. Yandex exact `Cumhuriyet Cad. 1/21` ve aynı telefonu gösteriyor ancak `Kurum faaliyette değil` durumunu yayımlıyor. Instagram’da 2025 tarihli kişi başı fix-menu fiyatları var ancak complete item-level alakart menü değil. Mevcut işletme durumu ve son bir yıl complete fiyatlı public menü şartları güvenilir biçimde karşılanamadı. Ürün/fiyat uydurulmadı; strict HOLD.
+
+## Death By Chocolate ID 7052 strict HOLD
+Exact Hentzer kaydı `Vişnezade, Süleyman Seba Cd., 34357 Beşiktaş/İstanbul`, `+90 531 899 98 76`; Corner, TikTok ve güncel public içerikler aynı işletmeyi `Vişnezade, Süleyman Seba Cd. No/85C` ve aynı telefonla gösteriyor. Yemeksepeti `mctn` canlı menüsü item-level tatlı/içecek fiyatları yayımlıyor ancak exact branch adres/telefonu doğrulanamıyor. Hentzer adresindeki numarasız kayıt ile public `No/85C` arasında fark bulunduğundan 100% branch parity sağlanamadı. Ürün/fiyat uydurulmadı; strict HOLD.
