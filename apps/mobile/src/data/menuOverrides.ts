@@ -4,6 +4,39 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6968": {
+    "name": "HAMSIKÖY METİN USTA BEŞİKTAŞ",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/pw0q/metin-usta-hamsikoy-sutlaci-pw0q",
+    "sourceName": "Yemeksepeti pw0q canlı menüsü, Metin Usta resmi Beşiktaş şube sayfası ve Hentzer exact kaydı `Sinanpaşa Mah. Ihlamurdere Cd, Altıntaş Sk. 39/A, 34351 Beşiktaş/İstanbul` / `+90 547 293 19 96` ile eşleştirildi",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Hamsiköy Sütlaç", "price": "289 TL", "category": "Sütlaçlar" },
+      { "name": "Çıtır Kadayıf Antep Fıstığı ve Çikolata Soslu Hamsiköy Sütlacı", "price": "359 TL", "category": "Sütlaçlar" },
+      { "name": "Bal Bademli Sütlaç", "price": "329 TL", "category": "Sütlaçlar" },
+      { "name": "Tahin Fındıklı Sütlaç", "price": "297 TL", "category": "Sütlaçlar" },
+      { "name": "Bal Muzlu Sütlaç", "price": "319 TL", "category": "Sütlaçlar" },
+      { "name": "Çikolatalı Muzlu Sütlaç", "price": "325 TL", "category": "Sütlaçlar" },
+      { "name": "Karamel Muzlu Sütlaç", "price": "323 TL", "category": "Sütlaçlar" },
+      { "name": "Frambuazlı Muzlu Sütlaç", "price": "323 TL", "category": "Sütlaçlar" },
+      { "name": "Sade Dondurmalı Sütlaç", "price": "329 TL", "category": "Sütlaçlar" },
+      { "name": "Tahinli Muzlu Hamsiköy Sütlacı", "price": "323 TL", "category": "Sütlaçlar" },
+      { "name": "Antep Çıtır Sütlaç", "price": "359 TL", "category": "Sütlaçlar" },
+      { "name": "Frambuazlı Çıtır Hamsiköy Sütlacı", "price": "319 TL", "category": "Sütlaçlar" },
+      { "name": "İtalyan Karamel Dondurmalı Çıtır Kadayıf Parçalı ve Tahin Soslu", "price": "329 TL", "category": "Sütlaçlar" },
+      { "name": "Bademli & Kadayıflı & Antep Fıstıklı Çikolata Soslu Sütlaç", "price": "367 TL", "category": "Sütlaçlar" },
+      { "name": "Tahinli Çıtır Hamsiköy Sütlacı", "price": "313 TL", "category": "Sütlaçlar" },
+      { "name": "Muzlu Hamsiköy Sütlacı", "price": "329 TL", "category": "Sütlaçlar" },
+      { "name": "Ekstra Fındık", "price": "79 TL", "category": "Yan Ürünler" },
+      { "name": "Elmalı Soda (20 cl.)", "price": "89 TL", "category": "İçecekler" },
+      { "name": "Limonlu Soda (20 cl.)", "price": "89 TL", "category": "İçecekler" },
+      { "name": "Karadutlu & Frenk Üzümlü Soda (20 cl.)", "price": "89 TL", "category": "İçecekler" },
+      { "name": "Karpuz & Çilekli Soda (20 cl.)", "price": "89 TL", "category": "İçecekler" },
+      { "name": "Soda (20 cl.)", "price": "69 TL", "category": "İçecekler" },
+      { "name": "Su (50 cl.)", "price": "45 TL", "category": "İçecekler" },
+      { "name": "Limonata", "price": "75 TL", "category": "İçecekler" },
+      { "name": "Berry&Hibisküs", "price": "85 TL", "category": "İçecekler" }
+    ]
+  },
   "6969": {
     "name": "KANLICA BÖREKÇİSİ",
     "sourceUrl": "https://www.yemeksepeti.com/restaurant/cc2l/kanlica-borekcisi-cc2l",

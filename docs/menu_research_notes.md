@@ -1590,3 +1590,6 @@ Hentzer kaydı `Acarlar, Acrloft, 34820 Beykoz/İstanbul`, `+90 531 500 01 00`; 
 
 ## KANLICA BÖREKÇİSİ ID 6969 kabul
 Hentzer kaydı `Gümüşsuyu, Fatin Hoca Sk. 21-B, 34437 Beykoz/İstanbul`, `+90 544 331 18 72`; Yandex Maps ve yerel kaynaklar aynı exact adres/telefonu doğruluyor. Yemeksepeti `cc2l` canlı vendor sayfası 2026-08-26 tarihinde Fatin Hoca Sk. 21/B ve 11 benzersiz fiyatlı kalem gösterdi: 3 börek, 1 kır pidesi ve 7 içecek. 15% indirim kampanyası ürün fiyatı olarak aktarılmadı. Poşet/servis kalemi yoktu. **Override kabul edildi.**
+
+## HAMSIKÖY METİN USTA BEŞİKTAŞ ID 6968 kabul
+Hentzer kaydı `Sinanpaşa Mah. Ihlamurdere Cd, Altıntaş Sk. 39/A, 34351 Beşiktaş/İstanbul`, `+90 547 293 19 96`; Metin Usta resmi Beşiktaş şube sayfası aynı exact adres/telefonu doğruluyor. Yemeksepeti `pw0q` canlı menüsü 2026-08-26 tarihinde 16 sütlaç, 1 yan ürün ve 8 benzersiz içecek olmak üzere **25 fiyatlı kalem** sundu. Tekrarlanan Elmalı Soda ve Poşet kalemi dışlandı. **Override kabul edildi.**
