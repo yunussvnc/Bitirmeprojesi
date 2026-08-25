@@ -1341,3 +1341,6 @@ Exact kayıt `Arnavutköy, Bebek Arnavutköy Cd No:48, 34345 Beşiktaş/İstanbu
 
 ## Aurora Restaurant Ortaköy ID 7055 strict HOLD
 Exact kayıt `Ortaköy, Portakal Ykş. Cd. No:17, 34347 Beşiktaş/İstanbul`, `+90 533 136 37 67`; resmî site, Restoranım, Google Travel ve Facebook exact adresi doğruluyor; Restoranım/Google Travel Hentzer telefonuyla eşleşiyor. Resmî sitede yalnız düğün/nişan organizasyonu için kişi başı Beyaz Et 1.500 TL ve Kırmızı Et 1.750 TL bilgisi var; complete item-level alakart fiyat listesi yok. Tripadvisor ve diğer kaynaklarda menü fotoğrafları/yemek türleri bulunsa da son bir yıl içinde exact şubeye ait tam fiyatlı public menü doğrulanamadı. Ürün/fiyat uydurulmadı; strict HOLD.
+
+## Cozy Brew - Beşiktaş Cafe | Kahve & Tatlı ID 7054 refresh
+Exact kayıt `Türkali, Yeniyol Sokağı No 9, 34357 Beşiktaş/İstanbul`, `+90 537 509 96 01`; Restoranım, Instagram etkinlik içeriği ve public işletme kayıtlarıyla doğrulandı. Menüm.co canlı QR menüsü 2026-08-25 tarihinde açılarak 15 kategoriden **123 benzersiz ürün/fiyat** çıkarıldı: mocktail, milkshake, frozen, matcha, özel/sıcak/soğuk/Türk kahveleri, sıcak-soğuk içecek, çay, burger-patates, tortilla/wrap, soft içecek ve tatlılar. Gıda dışı kalem bulunmadı; `verifiedAt` 2026-08-25.

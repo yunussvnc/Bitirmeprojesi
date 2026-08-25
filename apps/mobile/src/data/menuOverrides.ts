@@ -68840,698 +68840,751 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
 },
 
   "7054": {
-    "name": "Cozy Brew",
-    "sourceUrl": "https://menum.co/CozyBrew",
-    "sourceName": "Menüm.co official QR menu — Cozy Brew / official branch handle `cozybrewbesiktas`; exact local address Yeniyol Sokağı No:9, Beşiktaş",
-    "verifiedAt": "2026-08-25",
-    "items": [
-      {
-        "name": "Cheri Cheri Lady",
-        "price": "210,00 ₺",
-        "category": "Cozy Mocktails",
-        "desc": "Elma suyu, sweet and sour syrup, yaban mersini püre."
-      },
-      {
-        "name": "Mordor",
-        "price": "280,00 ₺",
-        "category": "Cozy Mocktails",
-        "desc": "Aktif karbon, vanilya, hibiscus, sprite"
-      },
-      {
-        "name": "Kuzu Kulağı",
-        "price": "220,00 ₺",
-        "category": "Cozy Mocktails",
-        "desc": "2 kuzu kulağı… Beyefendi burası Cozy! Az olsun 4 olsun."
-      },
-      {
-        "name": "Oreo milkshake",
-        "price": "220,00 ₺",
-        "category": "Milkshake",
-        "desc": "Dondurma, oreo, çikolata, süt."
-      },
-      {
-        "name": "Çilek milkshake",
-        "price": "220,00 ₺",
-        "category": "Milkshake",
-        "desc": "Dondurma, çilek püresi, süt."
-      },
-      {
-        "name": "Muz Milkshake",
-        "price": "220,00 ₺",
-        "category": "Milkshake",
-        "desc": "Dondurma, Muz püre, süt"
-      },
-      {
-        "name": "Elma Frozen",
-        "price": "210,00 ₺",
-        "category": "Frozen",
-        "desc": "Ekşi elma suyu, elma püresi ve buz."
-      },
-      {
-        "name": "Karpuz Frozen",
-        "price": "210,00 ₺",
-        "category": "Frozen",
-        "desc": "Karpuz püresi, ekşi elma suyu ve buz."
-      },
-      {
-        "name": "Mango Frozen",
-        "price": "210,00 ₺",
-        "category": "Frozen",
-        "desc": "Mango püresi , ekşi elma suyu ve buz."
-      },
-      {
-        "name": "Karadut Frozen",
-        "price": "210,00 ₺",
-        "category": "Frozen",
-        "desc": "Karadut püre, ekşi elma suyu ve buz."
-      },
-      {
-        "name": "Ananas Frozen",
-        "price": "210,00 ₺",
-        "category": "Frozen",
-        "desc": "Ananas püre, ekşi elma suyu ve buz."
-      },
-      {
-        "name": "Karpuz çilek frozen",
-        "price": "210,00 ₺",
-        "category": "Frozen",
-        "desc": "Karpuz-çilek püre, ekşi elma suyu ve buz."
-      },
-      {
-        "name": "Şeftali Frozen",
-        "price": "210,00 ₺",
-        "category": "Frozen",
-        "desc": "Şeftali püre, ekşi elma suyu ve buz."
-      },
-      {
-        "name": "Matcha Latte",
-        "price": "270,00 ₺",
-        "category": "Matcha Bar"
-      },
-      {
-        "name": "İce matcha",
-        "price": "270,00 ₺",
-        "category": "Matcha Bar"
-      },
-      {
-        "name": "İce strawberry matcha",
-        "price": "290,00 ₺",
-        "category": "Matcha Bar"
-      },
-      {
-        "name": "İce vanilya matcha",
-        "price": "290,00 ₺",
-        "category": "Matcha Bar"
-      },
-      {
-        "name": "Black Latte",
-        "price": "230,00 ₺",
-        "category": "Cozy Özel Kahveler",
-        "desc": "Madagascar vanilyası , aktif karbon , sıcak süt"
-      },
-      {
-        "name": "Bicerin",
-        "price": "200,00 ₺",
-        "category": "Cozy Özel Kahveler",
-        "desc": "Sıcak çikolata, single espresso, süt, buz."
-      },
-      {
-        "name": "Patlayan Şekerli Ice Latte",
-        "price": "230,00 ₺",
-        "category": "Cozy Özel Kahveler",
-        "desc": "(Gerçekten patlıyor) Double shot espresso , patlayan şeker püresi , süt"
-      },
-      {
-        "name": "Salted Popcorn Latte",
-        "price": "230,00 ₺",
-        "category": "Cozy Özel Kahveler",
-        "desc": "Tuzlu patlamış mısır aromalı latte"
-      },
-      {
-        "name": "Püskevit Latte",
-        "price": "230,00 ₺",
-        "category": "Cozy Özel Kahveler",
-        "desc": "Büskivi aroması, süt, single espresso."
-      },
-      {
-        "name": "Irish kiss latte",
-        "price": "230,00 ₺",
-        "category": "Cozy Özel Kahveler",
-        "desc": "İrish whisky şurup, single espresso, süt"
-      },
-      {
-        "name": "Pandam latte",
-        "price": "230,00 ₺",
-        "category": "Cozy Özel Kahveler"
-      },
-      {
-        "name": "Çikita latte",
-        "price": "230,00 ₺",
-        "category": "Cozy Özel Kahveler",
-        "desc": "Çikolata, püre muz, single espresso, süt"
-      },
-      {
-        "name": "Şıpsevdi latte",
-        "price": "230,00 ₺",
-        "category": "Cozy Özel Kahveler",
-        "desc": "Muz, Çilek püre, single espresso, süt."
-      },
-      {
-        "name": "Lotus latte",
-        "price": "230,00 ₺",
-        "category": "Cozy Özel Kahveler",
-        "desc": "Lotus şurubu, single espresso, süt"
-      },
-      {
-        "name": "Double espresso",
-        "price": "130,00 ₺",
-        "category": "Sıcak Kahveler",
-        "desc": "Çift shot çekilmiş espresso"
-      },
-      {
-        "name": "Filtre Kahve",
-        "price": "160,00 ₺",
-        "category": "Sıcak Kahveler",
-        "desc": "Öğütülmüş kahve çekirdeklerinin sıcak suyla demlenerek süzüldüğü, pürüzsüz ve hafif içimiyle bilinen bir kahve türüdür."
-      },
-      {
-        "name": "Americano",
-        "price": "170,00 ₺",
-        "category": "Sıcak Kahveler",
-        "desc": "Çift shot çekilmiş espresso üzerine sıcak su eklenir. Espressoya göre içimi daha hafiftir."
-      },
-      {
-        "name": "Latte",
-        "price": "190,00 ₺",
-        "category": "Sıcak Kahveler",
-        "desc": "Espresso üzerine buharla ısıtılmış süt eklenerek hazırlanan, yumuşak içimli ve kremamsı yapısıyla öne çıkan bir kahve çeşididir."
-      },
-      {
-        "name": "Cappucino",
-        "price": "200,00 ₺",
-        "category": "Sıcak Kahveler",
-        "desc": "Eşit oranlarda espresso, buharla ısıtılmış süt ve süt köpüğü ile hazırlanan, yoğun aromalı ve köpüklü yapısıyla sevilen klasik bir İtalyan kahvesidir."
-      },
-      {
-        "name": "Flat White",
-        "price": "200,00 ₺",
-        "category": "Sıcak Kahveler",
-        "desc": "Flat white, iki shot  espresso  üzerine ince mikroköpüklü süt eklenerek yapılan, kahve aroması belirgin ama dokusu yumuşak bir kahve çeşididir."
-      },
-      {
-        "name": "Cortado",
-        "price": "170,00 ₺",
-        "category": "Sıcak Kahveler",
-        "desc": "Cortado, espresso ve ısıl işlem görmüş süt karıştırılarak yapılan bir kahve türüdür. Cortado İspanyolca'da kesmek anlamına gelir ve bu, espresso'nun sertliğini, eklenen sütle hafifçe kesmek anlamına gelir."
-      },
-      {
-        "name": "Mocha",
-        "price": "220,00 ₺",
-        "category": "Sıcak Kahveler",
-        "desc": "Tek shot espresso, sıcak süt ve çikolata şurubunun birleşimiyle yapılan tatlı ve kremalı bir kahve içeceğidir."
-      },
-      {
-        "name": "White Mocha",
-        "price": "220,00 ₺",
-        "category": "Sıcak Kahveler",
-        "desc": "Mocha, espresso, sıcak süt ve beyaz çikolata şurubunun birleşimiyle yapılan tatlı ve kremalı bir kahve içeceğidir."
-      },
-      {
-        "name": "Caramel Latte",
-        "price": "220,00 ₺",
-        "category": "Sıcak Kahveler",
-        "desc": "Karamel şurubu ile birlikte."
-      },
-      {
-        "name": "Salted Caramel Latte",
-        "price": "220,00 ₺",
-        "category": "Sıcak Kahveler",
-        "desc": "Salted Caramel şurubu ile"
-      },
-      {
-        "name": "Vanilla Latte",
-        "price": "220,00 ₺",
-        "category": "Sıcak Kahveler",
-        "desc": "Vanilya şurubu ile birlikte."
-      },
-      {
-        "name": "Coconut Latte",
-        "price": "220,00 ₺",
-        "category": "Sıcak Kahveler",
-        "desc": "Hindistan cevizi şurubu ile birlikte."
-      },
-      {
-        "name": "Hazel Nut Latte",
-        "price": "220,00 ₺",
-        "category": "Sıcak Kahveler",
-        "desc": "Fındık şurubu ile birlikte."
-      },
-      {
-        "name": "Toffee Nut Latte",
-        "price": "220,00 ₺",
-        "category": "Sıcak Kahveler",
-        "desc": "Karamelli fındık şurubu ile birlikte."
-      },
-      {
-        "name": "Macchiato",
-        "price": "170,00 ₺",
-        "category": "Sıcak Kahveler",
-        "desc": "Macchiato, İtalyanca'da lekeli veya benekli anlamına gelir ve kahve dünyasında bu, espresso üzerine az miktarda süt veya süt köpüğü eklenerek yapılan bir içeceği ifade eder. Çift shot espresso kullanılır."
-      },
-      {
-        "name": "Caramel Macchiato",
-        "price": "190,00 ₺",
-        "category": "Sıcak Kahveler",
-        "desc": "Geleneksel olarak bir caramel macchiato, 2 shot espresso ile hazırlanır.Karamelin tatlılığıyla espressonun sertliği bu şekilde güzelce dengelenir."
-      },
-      {
-        "name": "Red Eye",
-        "price": "190,00 ₺",
-        "category": "Sıcak Kahveler",
-        "desc": "Tek shot espresso üzerine filtre kahve eklenerek hazırlanır. Oldukça sert bir kahvedir"
-      },
-      {
-        "name": "Dead Eye",
-        "price": "200,00 ₺",
-        "category": "Sıcak Kahveler",
-        "desc": "Çift shot espresso üzerine filtre kahve eklenir. Fazlasıyla sert bir kahvedir."
-      },
-      {
-        "name": "Soğuk Filtre kahve",
-        "price": "180,00 ₺",
-        "category": "Soğuk Kahveler"
-      },
-      {
-        "name": "Ice Americano",
-        "price": "190,00 ₺",
-        "category": "Soğuk Kahveler"
-      },
-      {
-        "name": "Ice Latte",
-        "price": "210,00 ₺",
-        "category": "Soğuk Kahveler"
-      },
-      {
-        "name": "Ice Mocha",
-        "price": "240,00 ₺",
-        "category": "Soğuk Kahveler"
-      },
-      {
-        "name": "Ice White Mocha",
-        "price": "240,00 ₺",
-        "category": "Soğuk Kahveler"
-      },
-      {
-        "name": "Ice Caramel Latte",
-        "price": "240,00 ₺",
-        "category": "Soğuk Kahveler"
-      },
-      {
-        "name": "Ice Hazel Nut Latte",
-        "price": "240,00 ₺",
-        "category": "Soğuk Kahveler"
-      },
-      {
-        "name": "Ice Toffee Nut Latte",
-        "price": "240,00 ₺",
-        "category": "Soğuk Kahveler"
-      },
-      {
-        "name": "Ice Coconut Latte",
-        "price": "240,00 ₺",
-        "category": "Soğuk Kahveler"
-      },
-      {
-        "name": "Ice Salted Caramel Latte",
-        "price": "240,00 ₺",
-        "category": "Soğuk Kahveler"
-      },
-      {
-        "name": "İce Spanish latte",
-        "price": "220,00 ₺",
-        "category": "Soğuk Kahveler",
-        "desc": "Yoğunlaştırılmış süt, yarım yağlı süt,  espresso."
-      },
-      {
-        "name": "Türk Kahvesi",
-        "price": "140,00 ₺",
-        "category": "Türk Kahveleri"
-      },
-      {
-        "name": "Double Türk Kahvesi",
-        "price": "170,00 ₺",
-        "category": "Türk Kahveleri"
-      },
-      {
-        "name": "Damla Sakızlı Türk Kahvesi",
-        "price": "150,00 ₺",
-        "category": "Türk Kahveleri"
-      },
-      {
-        "name": "Menengiç Kahvesi",
-        "price": "140,00 ₺",
-        "category": "Türk Kahveleri",
-        "desc": "Menengiç, kahveye benzer şekilde kavrulup öğütülen, kafeinsiz ve fındıksı bir tadı olan bir bitkidir."
-      },
-      {
-        "name": "Dibek Kahvesi",
-        "price": "140,00 ₺",
-        "category": "Türk Kahveleri",
-        "desc": "Dibek kahvesi, kahve çekirdeklerinin taş bir dibekte dövülerek öğütülüp geleneksel yöntemle yapılan yoğun aromalı bir Türk kahvesidir."
-      },
-      {
-        "name": "Salep",
-        "price": "180,00 ₺",
-        "category": "Sıcak İçecekler"
-      },
-      {
-        "name": "Sıcak çikolata",
-        "price": "180,00 ₺",
-        "category": "Sıcak İçecekler"
-      },
-      {
-        "name": "Beyaz çikolata",
-        "price": "180,00 ₺",
-        "category": "Sıcak İçecekler"
-      },
-      {
-        "name": "Chai tea latte",
-        "price": "180,00 ₺",
-        "category": "Sıcak İçecekler"
-      },
-      {
-        "name": "Su",
-        "price": "50,00 ₺",
-        "category": "Soğuk İçecekler"
-      },
-      {
-        "name": "Soda",
-        "price": "70,00 ₺",
-        "category": "Soğuk İçecekler"
-      },
-      {
-        "name": "Churchill",
-        "price": "90,00 ₺",
-        "category": "Soğuk İçecekler"
-      },
-      {
-        "name": "Portakal Suyu",
-        "price": "220,00 ₺",
-        "category": "Soğuk İçecekler",
-        "desc": "Taze sıkılmış portakal suyu."
-      },
-      {
-        "name": "Yaban Mersini Limonata",
-        "price": "200,00 ₺",
-        "category": "Soğuk İçecekler"
-      },
-      {
-        "name": "Soğuk salep",
-        "price": "200,00 ₺",
-        "category": "Soğuk İçecekler"
-      },
-      {
-        "name": "İce hibiscus",
-        "price": "200,00 ₺",
-        "category": "Soğuk İçecekler"
-      },
-      {
-        "name": "Red Bull Energy Drink",
-        "price": "180,00 ₺",
-        "category": "Soğuk İçecekler"
-      },
-      {
-        "name": "Red Bull Sugarfree",
-        "price": "180,00 ₺",
-        "category": "Soğuk İçecekler"
-      },
-      {
-        "name": "Red Bull White Edition",
-        "price": "180,00 ₺",
-        "category": "Soğuk İçecekler"
-      },
-      {
-        "name": "Çay",
-        "price": "60,00 ₺",
-        "category": "Çay Çeşitleri"
-      },
-      {
-        "name": "Fincan Çay",
-        "price": "110,00 ₺",
-        "category": "Çay Çeşitleri"
-      },
-      {
-        "name": "Ihlamur",
-        "price": "180,00 ₺",
-        "category": "Çay Çeşitleri"
-      },
-      {
-        "name": "Ada çayı",
-        "price": "180,00 ₺",
-        "category": "Çay Çeşitleri"
-      },
-      {
-        "name": "Yeşil Çay",
-        "price": "180,00 ₺",
-        "category": "Çay Çeşitleri"
-      },
-      {
-        "name": "Kış Çayı",
-        "price": "180,00 ₺",
-        "category": "Çay Çeşitleri"
-      },
-      {
-        "name": "Papatya çayı",
-        "price": "180,00 ₺",
-        "category": "Çay Çeşitleri"
-      },
-      {
-        "name": "Hibiscus Çayı",
-        "price": "180,00 ₺",
-        "category": "Çay Çeşitleri"
-      },
-      {
-        "name": "Melisa Çayı",
-        "price": "180,00 ₺",
-        "category": "Çay Çeşitleri"
-      },
-      {
-        "name": "Chicken Burger",
-        "price": "360,00 ₺",
-        "category": "Burger & Patates",
-        "desc": "Panelenmiş Tavuk, Ballı hardal, Cheddar, Göbek, Turşu. Çıtır soğan Baharatlı Patates ile birlikte servis edilir."
-      },
-      {
-        "name": "Ranch Chicken Burger",
-        "price": "360,00 ₺",
-        "category": "Burger & Patates",
-        "desc": "Panelenmiş tavuk, Ranch sos, Turşu, Göbek, çıtır soğan baharatlı Patates ile birlikte servis edilir."
-      },
-      {
-        "name": "Falafel Burger",
-        "price": "360,00 ₺",
-        "category": "Burger & Patates",
-        "desc": "Guacamole sos, Domates, Turşu, Göbek Baharatlı Patates ile birlikte servis edilir."
-      },
-      {
-        "name": "Meksika Chicken Burger",
-        "price": "360,00 ₺",
-        "category": "Burger & Patates",
-        "desc": "Panelenmiş çıtır tavuk, Meksika sosu, göbek, jalapeno turşusu cheddar , kıtır soğan , baharatlı patates ile servis edilir"
-      },
-      {
-        "name": "Sade patates",
-        "price": "160,00 ₺",
-        "category": "Burger & Patates"
-      },
-      {
-        "name": "Baharatlı patates",
-        "price": "180,00 ₺",
-        "category": "Burger & Patates"
-      },
-      {
-        "name": "Trüf parmesan patates",
-        "price": "220,00 ₺",
-        "category": "Burger & Patates"
-      },
-      {
-        "name": "Chicken cajun",
-        "price": "330,00 ₺",
-        "category": "Burger & Patates"
-      },
-      {
-        "name": "Çıtır Tavuk Wrap",
-        "price": "360,00 ₺",
-        "category": "Tortilla Pizzalar & Wrap"
-      },
-      {
-        "name": "Ranch Wrap",
-        "price": "360,00 ₺",
-        "category": "Tortilla Pizzalar & Wrap"
-      },
-      {
-        "name": "Meksikan Chicken Wrap",
-        "price": "360,00 ₺",
-        "category": "Tortilla Pizzalar & Wrap"
-      },
-      {
-        "name": "Falafel Wrap",
-        "price": "360,00 ₺",
-        "category": "Tortilla Pizzalar & Wrap"
-      },
-      {
-        "name": "Margherita Pizza",
-        "price": "320,00 ₺",
-        "category": "Tortilla Pizzalar & Wrap",
-        "desc": "30 cm tortilla iki adet , el yapımı domates sos , mozarella peyniri kurutulmuş fesleğen"
-      },
-      {
-        "name": "3 Peynirli Pizza",
-        "price": "340,00 ₺",
-        "category": "Tortilla Pizzalar & Wrap",
-        "desc": "30 cm tortilla iki adet , el yapımı domates sos , mozarella peyniri , cheddar peyniri , parmesan ve kurutulmuş fesleğen"
-      },
-      {
-        "name": "Bugün Date Yok",
-        "price": "370,00 ₺",
-        "category": "Tortilla Pizzalar & Wrap",
-        "desc": "30 cm tortilla iki adet , el yapımı domates sos , mozarella peyniri, kasap sucuk , kıtır soğan , sarımsaklı sos , cheddar peyniri ve kurutulmuş fesleğen"
-      },
-      {
-        "name": "Meksikan",
-        "price": "370,00 ₺",
-        "category": "Tortilla Pizzalar & Wrap",
-        "desc": "30 cm tortilla iki adet , el yapımı domates sos , mozarella peyniri kasap sucuk, jalapeno , kıtır soğan , cheddar peyniri , Meksika’n sos kurutulmuş fesleğen"
-      },
-      {
-        "name": "Tavuklu BBQ",
-        "price": "380,00 ₺",
-        "category": "Tortilla Pizzalar & Wrap",
-        "desc": "30 cm tortilla iki adet , el yapımı domates sos , mozarella peyniri , çıtır tavuk parçaları , kıtır soğan , cheddar peyniri, bbq sosu ve kurutulmuş fesleğen"
-      },
-      {
-        "name": "Pepsi",
-        "price": "120,00 ₺",
-        "category": "Soft İçecekler"
-      },
-      {
-        "name": "Sprite",
-        "price": "120,00 ₺",
-        "category": "Soft İçecekler"
-      },
-      {
-        "name": "Fanta",
-        "price": "120,00 ₺",
-        "category": "Soft İçecekler"
-      },
-      {
-        "name": "Ice Tea Şeftali",
-        "price": "120,00 ₺",
-        "category": "Soft İçecekler"
-      },
-      {
-        "name": "Ice Tea Limon",
-        "price": "120,00 ₺",
-        "category": "Soft İçecekler"
-      },
-      {
-        "name": "Churros",
-        "price": "149,00 ₺",
-        "category": "Tatlılar",
-        "desc": "4 adet şeker ve tarçına bulanmış Churros yanında dilediğiniz 1 adet çikolata sosu"
-      },
-      {
-        "name": "Cozy Lotus",
-        "price": "149,00 ₺",
-        "category": "Tatlılar",
-        "desc": "Çıtır bisküvi tabanı üzerinde labneli krema , lotus ve lotus kıtırı."
-      },
-      {
-        "name": "Cozy Çikolata",
-        "price": "149,00 ₺",
-        "category": "Tatlılar",
-        "desc": "Çıtır bisküvi tabanı üzerinde labneli krema beyaz ve sütlü çikolata"
-      },
-      {
-        "name": "Cozy Barbie",
-        "price": "149,00 ₺",
-        "category": "Tatlılar",
-        "desc": "Çıtır bisküvi tabanı üzerinde labneli krema , ruby çikolata ve çilek"
-      },
-      {
-        "name": "Mathilda",
-        "price": "149,00 ₺",
-        "category": "Tatlılar",
-        "desc": "Çikolatalı el yapımı kek arasında pastacı kreması çilek ve muz. Üzerinde sütlü ve beyaz çikolata lotus kıtırı"
-      },
-      {
-        "name": "Seratonin",
-        "price": "149,00 ₺",
-        "category": "Tatlılar",
-        "desc": "Kakaolu el yapımı kek , pastacı kreması çilek muz sütlü ve beyaz çikolata ve lotus kıtırı"
-      },
-      {
-        "name": "Tiramisu",
-        "price": "149,00 ₺",
-        "category": "Tatlılar",
-        "desc": "Maskarpone peyniri ve kedi dili ile yapılır"
-      },
-      {
-        "name": "Antep Tiramisu",
-        "price": "149,00 ₺",
-        "category": "Tatlılar",
-        "desc": "Maskarpone ve kedi dili ile yapılır. İçi Antep fıstığı dolgusu ve üzerine toz Antep fıstığı ile servis edilir."
-      },
-      {
-        "name": "Kuruhasan",
-        "price": "149,00 ₺",
-        "category": "Tatlılar",
-        "desc": "Çıtır Kruvasan pastacı kreması çilek muz üzerine sütlü ve beyaz çikolata ve pudra şekeri"
-      },
-      {
-        "name": "Lotus Hasan",
-        "price": "149,00 ₺",
-        "category": "Tatlılar",
-        "desc": "Çıtır Kruvasan pastacı kreması muz lotus kreması ve lotus kıtırı ile servis edilir"
-      },
-      {
-        "name": "Antep Hasan",
-        "price": "149,00 ₺",
-        "category": "Tatlılar",
-        "desc": "Çıtır Kruvasan pastacı kreması çilek muz Antep fıstığı sosu , beyaz çikolata ve toz Antep fıstığı ile servis edilir"
-      },
-      {
-        "name": "Barbie Hasan",
-        "price": "149,00 ₺",
-        "category": "Tatlılar",
-        "desc": "Çıtır Kruvasan pastacı kreması çilek muz beyaz çikolata ve ruby çikolatası ile servis edilir"
-      },
-      {
-        "name": "Magnolia Çilek",
-        "price": "149,00 ₺",
-        "category": "Tatlılar",
-        "desc": "Bebe bisküvisi magnolia kreması ve çilek ile servis edilir"
-      },
-      {
-        "name": "Magnolia Lotus",
-        "price": "149,00 ₺",
-        "category": "Tatlılar",
-        "desc": "Bebe bisküvisi magnolia kreması ve lotus kreması ve lotus kıtırı ile servis edilir"
-      },
-      {
-        "name": "Muz Magnolia",
-        "price": "149,00 ₺",
-        "category": "Tatlılar",
-        "desc": "Bebe bisküvisi magnolia kreması ve muz ile servis edilir"
-      },
-      {
-        "name": "Magnolia Oreo",
-        "price": "149,00 ₺",
-        "category": "Tatlılar",
-        "desc": "Oreo bisküvisi magnolia kreması  ile servis edilir"
-      }
-    ],
-  },
+  "name": "Cozy Brew - Beşiktaş Cafe | Kahve & Tatlı",
+  "sourceUrl": "https://menum.co/CozyBrew",
+  "sourceName": "Menüm.co canlı QR menü exact Cozy Brew kaydı; Hentzer, Restoranım ve sosyal içeriklerdeki Türkali/Yeniyol Sokağı No:9, 34357 Beşiktaş ve +90 537 509 96 01 ile eşleştirildi. 15 kategori üzerinden 123 benzersiz kahve, mocktail, milkshake, frozen, matcha, çay, burger, patates, tortilla/wrap, soft içecek ve tatlı kalemi aktarıldı.",
+  "verifiedAt": "2026-08-25",
+  "items": [
+    {
+      "name": "Cheri Cheri Lady",
+      "price": "210.00 TL",
+      "desc": "",
+      "category": "Cozy Mocktails"
+    },
+    {
+      "name": "Mordor",
+      "price": "280.00 TL",
+      "desc": "",
+      "category": "Cozy Mocktails"
+    },
+    {
+      "name": "Kuzu Kulağı",
+      "price": "220.00 TL",
+      "desc": "",
+      "category": "Cozy Mocktails"
+    },
+    {
+      "name": "Oreo milkshake",
+      "price": "220.00 TL",
+      "desc": "",
+      "category": "Milkshake"
+    },
+    {
+      "name": "Çilek milkshake",
+      "price": "220.00 TL",
+      "desc": "",
+      "category": "Milkshake"
+    },
+    {
+      "name": "Muz Milkshake",
+      "price": "220.00 TL",
+      "desc": "",
+      "category": "Milkshake"
+    },
+    {
+      "name": "Elma Frozen",
+      "price": "210.00 TL",
+      "desc": "",
+      "category": "Frozen"
+    },
+    {
+      "name": "Karpuz Frozen",
+      "price": "210.00 TL",
+      "desc": "",
+      "category": "Frozen"
+    },
+    {
+      "name": "Mango Frozen",
+      "price": "210.00 TL",
+      "desc": "",
+      "category": "Frozen"
+    },
+    {
+      "name": "Karadut Frozen",
+      "price": "210.00 TL",
+      "desc": "",
+      "category": "Frozen"
+    },
+    {
+      "name": "Ananas Frozen",
+      "price": "210.00 TL",
+      "desc": "",
+      "category": "Frozen"
+    },
+    {
+      "name": "Karpuz çilek frozen",
+      "price": "210.00 TL",
+      "desc": "",
+      "category": "Frozen"
+    },
+    {
+      "name": "Şeftali Frozen",
+      "price": "210.00 TL",
+      "desc": "",
+      "category": "Frozen"
+    },
+    {
+      "name": "Matcha Latte",
+      "price": "270.00 TL",
+      "desc": "",
+      "category": "Matcha Bar"
+    },
+    {
+      "name": "İce matcha",
+      "price": "270.00 TL",
+      "desc": "",
+      "category": "Matcha Bar"
+    },
+    {
+      "name": "İce strawberry matcha",
+      "price": "290.00 TL",
+      "desc": "",
+      "category": "Matcha Bar"
+    },
+    {
+      "name": "İce vanilya matcha",
+      "price": "290.00 TL",
+      "desc": "",
+      "category": "Matcha Bar"
+    },
+    {
+      "name": "Black Latte",
+      "price": "230.00 TL",
+      "desc": "",
+      "category": "Cozy Özel Kahveler"
+    },
+    {
+      "name": "Bicerin",
+      "price": "200.00 TL",
+      "desc": "",
+      "category": "Cozy Özel Kahveler"
+    },
+    {
+      "name": "Patlayan Şekerli Ice Latte",
+      "price": "230.00 TL",
+      "desc": "",
+      "category": "Cozy Özel Kahveler"
+    },
+    {
+      "name": "Salted Popcorn Latte",
+      "price": "230.00 TL",
+      "desc": "",
+      "category": "Cozy Özel Kahveler"
+    },
+    {
+      "name": "Püskevit Latte",
+      "price": "230.00 TL",
+      "desc": "",
+      "category": "Cozy Özel Kahveler"
+    },
+    {
+      "name": "Irish kiss latte",
+      "price": "230.00 TL",
+      "desc": "",
+      "category": "Cozy Özel Kahveler"
+    },
+    {
+      "name": "Pandam latte",
+      "price": "230.00 TL",
+      "desc": "",
+      "category": "Cozy Özel Kahveler"
+    },
+    {
+      "name": "Çikita latte",
+      "price": "230.00 TL",
+      "desc": "",
+      "category": "Cozy Özel Kahveler"
+    },
+    {
+      "name": "Şıpsevdi latte",
+      "price": "230.00 TL",
+      "desc": "",
+      "category": "Cozy Özel Kahveler"
+    },
+    {
+      "name": "Lotus latte",
+      "price": "230.00 TL",
+      "desc": "",
+      "category": "Cozy Özel Kahveler"
+    },
+    {
+      "name": "Double espresso",
+      "price": "130.00 TL",
+      "desc": "",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Filtre Kahve",
+      "price": "160.00 TL",
+      "desc": "",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Americano",
+      "price": "170.00 TL",
+      "desc": "",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Latte",
+      "price": "190.00 TL",
+      "desc": "",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Cappucino",
+      "price": "200.00 TL",
+      "desc": "",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Flat White",
+      "price": "200.00 TL",
+      "desc": "",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Cortado",
+      "price": "170.00 TL",
+      "desc": "",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Mocha",
+      "price": "220.00 TL",
+      "desc": "",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "White Mocha",
+      "price": "220.00 TL",
+      "desc": "",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Caramel Latte",
+      "price": "220.00 TL",
+      "desc": "",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Salted Caramel Latte",
+      "price": "220.00 TL",
+      "desc": "",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Vanilla Latte",
+      "price": "220.00 TL",
+      "desc": "",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Coconut Latte",
+      "price": "220.00 TL",
+      "desc": "",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Hazel Nut Latte",
+      "price": "220.00 TL",
+      "desc": "",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Toffee Nut Latte",
+      "price": "220.00 TL",
+      "desc": "",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Macchiato",
+      "price": "170.00 TL",
+      "desc": "",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Caramel Macchiato",
+      "price": "190.00 TL",
+      "desc": "",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Red Eye",
+      "price": "190.00 TL",
+      "desc": "",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Dead Eye",
+      "price": "200.00 TL",
+      "desc": "",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Soğuk Filtre kahve",
+      "price": "180.00 TL",
+      "desc": "",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Ice Americano",
+      "price": "190.00 TL",
+      "desc": "",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Ice Latte",
+      "price": "210.00 TL",
+      "desc": "",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Ice Mocha",
+      "price": "240.00 TL",
+      "desc": "",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Ice White Mocha",
+      "price": "240.00 TL",
+      "desc": "",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Ice Caramel Latte",
+      "price": "240.00 TL",
+      "desc": "",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Ice Hazel Nut Latte",
+      "price": "240.00 TL",
+      "desc": "",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Ice Toffee Nut Latte",
+      "price": "240.00 TL",
+      "desc": "",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Ice Coconut Latte",
+      "price": "240.00 TL",
+      "desc": "",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Ice Salted Caramel Latte",
+      "price": "240.00 TL",
+      "desc": "",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "İce Spanish latte",
+      "price": "220.00 TL",
+      "desc": "",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Türk Kahvesi",
+      "price": "140.00 TL",
+      "desc": "",
+      "category": "Türk Kahveleri"
+    },
+    {
+      "name": "Double Türk Kahvesi",
+      "price": "170.00 TL",
+      "desc": "",
+      "category": "Türk Kahveleri"
+    },
+    {
+      "name": "Damla Sakızlı Türk Kahvesi",
+      "price": "150.00 TL",
+      "desc": "",
+      "category": "Türk Kahveleri"
+    },
+    {
+      "name": "Menengiç Kahvesi",
+      "price": "140.00 TL",
+      "desc": "",
+      "category": "Türk Kahveleri"
+    },
+    {
+      "name": "Dibek Kahvesi",
+      "price": "140.00 TL",
+      "desc": "",
+      "category": "Türk Kahveleri"
+    },
+    {
+      "name": "Salep",
+      "price": "180.00 TL",
+      "desc": "",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Sıcak çikolata",
+      "price": "180.00 TL",
+      "desc": "",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Beyaz çikolata",
+      "price": "180.00 TL",
+      "desc": "",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Chai tea latte",
+      "price": "180.00 TL",
+      "desc": "",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Su",
+      "price": "50.00 TL",
+      "desc": "",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Soda",
+      "price": "70.00 TL",
+      "desc": "",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Churchill",
+      "price": "90.00 TL",
+      "desc": "",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Portakal Suyu",
+      "price": "220.00 TL",
+      "desc": "",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Yaban Mersini Limonata",
+      "price": "200.00 TL",
+      "desc": "",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Soğuk salep",
+      "price": "200.00 TL",
+      "desc": "",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "İce hibiscus",
+      "price": "200.00 TL",
+      "desc": "",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Red Bull Energy Drink",
+      "price": "180.00 TL",
+      "desc": "",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Red Bull Sugarfree",
+      "price": "180.00 TL",
+      "desc": "",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Red Bull White Edition",
+      "price": "180.00 TL",
+      "desc": "",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Çay",
+      "price": "60.00 TL",
+      "desc": "",
+      "category": "Çay Çeşitleri"
+    },
+    {
+      "name": "Fincan Çay",
+      "price": "110.00 TL",
+      "desc": "",
+      "category": "Çay Çeşitleri"
+    },
+    {
+      "name": "Ihlamur",
+      "price": "180.00 TL",
+      "desc": "",
+      "category": "Çay Çeşitleri"
+    },
+    {
+      "name": "Ada çayı",
+      "price": "180.00 TL",
+      "desc": "",
+      "category": "Çay Çeşitleri"
+    },
+    {
+      "name": "Yeşil Çay",
+      "price": "180.00 TL",
+      "desc": "",
+      "category": "Çay Çeşitleri"
+    },
+    {
+      "name": "Kış Çayı",
+      "price": "180.00 TL",
+      "desc": "",
+      "category": "Çay Çeşitleri"
+    },
+    {
+      "name": "Papatya çayı",
+      "price": "180.00 TL",
+      "desc": "",
+      "category": "Çay Çeşitleri"
+    },
+    {
+      "name": "Hibiscus Çayı",
+      "price": "180.00 TL",
+      "desc": "",
+      "category": "Çay Çeşitleri"
+    },
+    {
+      "name": "Melisa Çayı",
+      "price": "180.00 TL",
+      "desc": "",
+      "category": "Çay Çeşitleri"
+    },
+    {
+      "name": "Chicken Burger",
+      "price": "360.00 TL",
+      "desc": "",
+      "category": "Burger & Patates"
+    },
+    {
+      "name": "Ranch Chicken Burger",
+      "price": "360.00 TL",
+      "desc": "",
+      "category": "Burger & Patates"
+    },
+    {
+      "name": "Falafel Burger",
+      "price": "360.00 TL",
+      "desc": "",
+      "category": "Burger & Patates"
+    },
+    {
+      "name": "Meksika Chicken Burger",
+      "price": "360.00 TL",
+      "desc": "",
+      "category": "Burger & Patates"
+    },
+    {
+      "name": "Sade patates",
+      "price": "160.00 TL",
+      "desc": "",
+      "category": "Burger & Patates"
+    },
+    {
+      "name": "Baharatlı patates",
+      "price": "180.00 TL",
+      "desc": "",
+      "category": "Burger & Patates"
+    },
+    {
+      "name": "Trüf parmesan patates",
+      "price": "220.00 TL",
+      "desc": "",
+      "category": "Burger & Patates"
+    },
+    {
+      "name": "Chicken cajun",
+      "price": "330.00 TL",
+      "desc": "",
+      "category": "Burger & Patates"
+    },
+    {
+      "name": "Çıtır Tavuk Wrap",
+      "price": "360.00 TL",
+      "desc": "",
+      "category": "Tortilla Pizzalar & Wrap"
+    },
+    {
+      "name": "Ranch Wrap",
+      "price": "360.00 TL",
+      "desc": "",
+      "category": "Tortilla Pizzalar & Wrap"
+    },
+    {
+      "name": "Meksikan Chicken Wrap",
+      "price": "360.00 TL",
+      "desc": "",
+      "category": "Tortilla Pizzalar & Wrap"
+    },
+    {
+      "name": "Falafel Wrap",
+      "price": "360.00 TL",
+      "desc": "",
+      "category": "Tortilla Pizzalar & Wrap"
+    },
+    {
+      "name": "Margherita Pizza",
+      "price": "320.00 TL",
+      "desc": "",
+      "category": "Tortilla Pizzalar & Wrap"
+    },
+    {
+      "name": "3 Peynirli Pizza",
+      "price": "340.00 TL",
+      "desc": "",
+      "category": "Tortilla Pizzalar & Wrap"
+    },
+    {
+      "name": "Bugün Date Yok",
+      "price": "370.00 TL",
+      "desc": "",
+      "category": "Tortilla Pizzalar & Wrap"
+    },
+    {
+      "name": "Meksikan",
+      "price": "370.00 TL",
+      "desc": "",
+      "category": "Tortilla Pizzalar & Wrap"
+    },
+    {
+      "name": "Tavuklu BBQ",
+      "price": "380.00 TL",
+      "desc": "",
+      "category": "Tortilla Pizzalar & Wrap"
+    },
+    {
+      "name": "Pepsi",
+      "price": "120.00 TL",
+      "desc": "",
+      "category": "Soft İçecekler"
+    },
+    {
+      "name": "Sprite",
+      "price": "120.00 TL",
+      "desc": "",
+      "category": "Soft İçecekler"
+    },
+    {
+      "name": "Fanta",
+      "price": "120.00 TL",
+      "desc": "",
+      "category": "Soft İçecekler"
+    },
+    {
+      "name": "Ice Tea Şeftali",
+      "price": "120.00 TL",
+      "desc": "",
+      "category": "Soft İçecekler"
+    },
+    {
+      "name": "Ice Tea Limon",
+      "price": "120.00 TL",
+      "desc": "",
+      "category": "Soft İçecekler"
+    },
+    {
+      "name": "Churros",
+      "price": "149.00 TL",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Cozy Lotus",
+      "price": "149.00 TL",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Cozy Çikolata",
+      "price": "149.00 TL",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Cozy Barbie",
+      "price": "149.00 TL",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Mathilda",
+      "price": "149.00 TL",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Seratonin",
+      "price": "149.00 TL",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Tiramisu",
+      "price": "149.00 TL",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Antep Tiramisu",
+      "price": "149.00 TL",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Kuruhasan",
+      "price": "149.00 TL",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Lotus Hasan",
+      "price": "149.00 TL",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Antep Hasan",
+      "price": "149.00 TL",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Barbie Hasan",
+      "price": "149.00 TL",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Magnolia Çilek",
+      "price": "149.00 TL",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Magnolia Lotus",
+      "price": "149.00 TL",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Muz Magnolia",
+      "price": "149.00 TL",
+      "desc": "",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Magnolia Oreo",
+      "price": "149.00 TL",
+      "desc": "",
+      "category": "Tatlılar"
+    }
+  ]
+},
 
   "7116": {
     "name": "Bosphorus Grill",
