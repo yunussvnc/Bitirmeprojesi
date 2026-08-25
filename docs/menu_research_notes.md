@@ -1179,3 +1179,9 @@ Hentzer exact kayıt `andromeda gold/doğu, Atatürk, Sedef Cd., 34758 Ataşehir
 
 ## Hatay Usulü Şan Döner ID 7113 acceptance
 Hentzer exact kayıt `Cevatpaşa mahallesi Millet Caddesi No:179C, 34045 Bayrampaşa/İstanbul`, `+90 212 618 34 21`; Restoranım aynı adres/telefonu ve 2026 yorumlarını, public `@sandoner34` aynı şube telefon/adresini destekliyor. Exact Migros vendor `Hatay Usulü Şan Döner, Bayrampaşa (Cevatpaşa Mah.)` canlı public sayfada aktif kart fiyatlarını gösteriyor. Snapshot’tan kampanya alanları dışlanarak Menüler 8, Tavuk Dönerler 3, Tatlılar 1 ve İçecekler 6 olmak üzere toplam **18 benzersiz ürün/fiyat** aktarıldı. `verifiedAt` canlı doğrulama tarihi `2026-08-25`; paketleme/servis satırı yok.
+
+## HOLD — Şahin Kebap ID 7112
+Hentzer exact kayıt `Adnan Kahveci İnönü Caddesi, Yenievler, Sedef Sk. No:2 D:1, 34528 Beylikdüzü/İstanbul`, `+90 536 284 84 81`; Kaçıyor aynı adres/telefonu destekliyor. `sahinkebap.com` arama sonucunda item-level fiyatlı ürünler gösterse de public sayfasında sipariş telefonu `0212 987 65 43` olarak veriliyor; Hentzer exact telefonuyla uyuşmuyor ve resmi sayfada No:2/D:1 adresi görünür şekilde bağlanamıyor. Kaçıyor/Yandex/Bulurum fiyatlı complete menü sunmuyor; Yemeksepeti sonucu generic. Fiyat transferi güvenli olmadığı için ID 7112 strict HOLD; repo override değişikliği yapılmadı.
+
+## HOLD — Büyük Beykoz Balıkçısı SERVET ID 7111
+Hentzer exact kayıt `Yalıköy, Ahmet Mithat Cd. No:19 D:B, 34820 Beykoz/İstanbul`, `+90 216 323 13 26`; Postcard/Yandex aynı yerel kimliği destekliyor. Ancak Yandex kaydı işletmeyi açıkça `artık faal değil` olarak işaretliyor; bu durum Hentzer `is_open` bilgisiyle çelişiyor. Restoranım/Menu-TR yalnız profil/fiyat aralığı sunuyor; complete güncel item-level menü yok. 2025-08-25 tarihli Instagram içeriği yalnız tekil fiyatlar veriyor ve complete menü/aktiflik kanıtı oluşturmuyor. ID 7111 strict HOLD; repo override değişikliği yapılmadı.

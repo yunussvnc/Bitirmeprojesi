@@ -71636,4 +71636,274 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       }
     ],
   },
+  "7110": {
+  "name": "Mesutların Yeri (Deniz Manzaralı)",
+  "sourceUrl": "https://www.mesutlarinyeri.com/menu/",
+  "sourceName": "Resmi Mesutların Yeri menü sayfası; resmi Instagram @mesutlarinyeri exact telefon 0537 664 14 51 ile Hentzer Tokatköy/Hz. Yuşa şubesi eşleşmesi",
+  "verifiedAt": "2026-08-25",
+  "items": [
+    {
+      "name": "Serpme Kahvaltı",
+      "price": "₺1600.00",
+      "category": "KAHVALTI ÇEŞİTLERİ",
+      "desc": "En az 2 kişiliktir"
+    },
+    {
+      "name": "Kahvaltı Tabağı",
+      "price": "₺600.00",
+      "category": "KAHVALTI ÇEŞİTLERİ",
+      "desc": "Tek kişiliktir"
+    },
+    {
+      "name": "Semaver Çay",
+      "price": "₺600.00",
+      "category": "KAHVALTI ÇEŞİTLERİ",
+      "desc": "4 kişiliktir"
+    },
+    {
+      "name": "Mıhlama",
+      "price": "₺400.00",
+      "category": "TAVALAR"
+    },
+    {
+      "name": "Menemen",
+      "price": "₺300.00",
+      "category": "TAVALAR"
+    },
+    {
+      "name": "Patates Kızartması",
+      "price": "₺260.00",
+      "category": "TAVALAR"
+    },
+    {
+      "name": "Sucuk Tava",
+      "price": "₺300.00",
+      "category": "TAVALAR"
+    },
+    {
+      "name": "Sucuklu Yumurta",
+      "price": "₺350.00",
+      "category": "TAVALAR"
+    },
+    {
+      "name": "Sahanda Yumurta",
+      "price": "₺350.00",
+      "category": "TAVALAR"
+    },
+    {
+      "name": "Köfte Izgara",
+      "price": "₺650.00",
+      "category": "ET ÇEŞİTLERİ"
+    },
+    {
+      "name": "Tavuk Pirzola",
+      "price": "₺550.00",
+      "category": "ET ÇEŞİTLERİ"
+    },
+    {
+      "name": "Sucuk Izgara",
+      "price": "₺600.00",
+      "category": "ET ÇEŞİTLERİ"
+    },
+    {
+      "name": "Dana Antrikot",
+      "price": "₺900.00",
+      "category": "ET ÇEŞİTLERİ"
+    },
+    {
+      "name": "Kuzu Pirzola",
+      "price": "₺900.00",
+      "category": "ET ÇEŞİTLERİ"
+    },
+    {
+      "name": "Kanat Izgara",
+      "price": "₺600.00",
+      "category": "ET ÇEŞİTLERİ"
+    },
+    {
+      "name": "Karışık Izgara",
+      "price": "₺600.00",
+      "category": "ET ÇEŞİTLERİ",
+      "desc": "Köfte, Tavuk, Sucuk"
+    },
+    {
+      "name": "Tam Karışık Izgara",
+      "price": "₺1200.00",
+      "category": "ET ÇEŞİTLERİ",
+      "desc": "Kuzu Pirzola, Köfte, Tavuk, Sucuk"
+    },
+    {
+      "name": "Peynirli Gözleme",
+      "price": "₺300.00",
+      "category": "GÖZLEME ÇEŞİTLERİ"
+    },
+    {
+      "name": "Patatesli Gözleme",
+      "price": "₺300.00",
+      "category": "GÖZLEME ÇEŞİTLERİ"
+    },
+    {
+      "name": "Kıymalı Gözleme",
+      "price": "₺390.00",
+      "category": "GÖZLEME ÇEŞİTLERİ"
+    },
+    {
+      "name": "Kaşarlı Gözleme",
+      "price": "₺350.00",
+      "category": "GÖZLEME ÇEŞİTLERİ"
+    },
+    {
+      "name": "Ispanaklı Gözleme",
+      "price": "₺350.00",
+      "category": "GÖZLEME ÇEŞİTLERİ"
+    },
+    {
+      "name": "Çikolatalı Gözleme",
+      "price": "₺350.00",
+      "category": "GÖZLEME ÇEŞİTLERİ"
+    },
+    {
+      "name": "Kıymalı, Kaşarlı Gözleme",
+      "price": "₺350.00",
+      "category": "GÖZLEME ÇEŞİTLERİ"
+    },
+    {
+      "name": "Patatesli, Kaşarlı Gözleme",
+      "price": "₺320.00",
+      "category": "GÖZLEME ÇEŞİTLERİ"
+    },
+    {
+      "name": "Peynirli, Ispanaklı Gözleme",
+      "price": "₺350.00",
+      "category": "GÖZLEME ÇEŞİTLERİ"
+    },
+    {
+      "name": "Sucuklu, Kaşarlı Gözleme",
+      "price": "₺350.00",
+      "category": "GÖZLEME ÇEŞİTLERİ"
+    },
+    {
+      "name": "Söğüş Salata",
+      "price": "₺220.00",
+      "category": "SALATALAR"
+    },
+    {
+      "name": "Çoban Salata",
+      "price": "₺250.00",
+      "category": "SALATALAR"
+    },
+    {
+      "name": "Yeşillik Salata",
+      "price": "₺250.00",
+      "category": "SALATALAR"
+    },
+    {
+      "name": "El Açması Ev Mantısı",
+      "price": "₺350.00",
+      "category": "EV YEMEKLERİ"
+    },
+    {
+      "name": "Köfte Ekmek",
+      "price": "₺280.00",
+      "category": "EKMEK ARASI"
+    },
+    {
+      "name": "Sucuk Ekmek",
+      "price": "₺280.00",
+      "category": "EKMEK ARASI"
+    },
+    {
+      "name": "Demlik Çay",
+      "price": "₺600.00",
+      "category": "İÇECEKLER"
+    },
+    {
+      "name": "Bardak Çay",
+      "price": "₺30.00",
+      "category": "İÇECEKLER"
+    },
+    {
+      "name": "Türk Kahvesi",
+      "price": "₺120.00",
+      "category": "İÇECEKLER"
+    },
+    {
+      "name": "Nescafe",
+      "price": "₺100.00",
+      "category": "İÇECEKLER"
+    },
+    {
+      "name": "Sahlep",
+      "price": "₺150.00",
+      "category": "İÇECEKLER"
+    },
+    {
+      "name": "Açık Ayran",
+      "price": "₺80.00",
+      "category": "İÇECEKLER"
+    },
+    {
+      "name": "Kapalı Ayran",
+      "price": "₺50.00",
+      "category": "İÇECEKLER"
+    },
+    {
+      "name": "Cola (Pepsi)",
+      "price": "₺90.00",
+      "category": "İÇECEKLER"
+    },
+    {
+      "name": "Fanta",
+      "price": "₺90.00",
+      "category": "İÇECEKLER"
+    },
+    {
+      "name": "Cappy",
+      "price": "₺90.00",
+      "category": "İÇECEKLER"
+    },
+    {
+      "name": "IceTea",
+      "price": "₺90.00",
+      "category": "İÇECEKLER"
+    },
+    {
+      "name": "Soda",
+      "price": "₺40.00",
+      "category": "İÇECEKLER"
+    },
+    {
+      "name": "Su",
+      "price": "₺90.00",
+      "category": "İÇECEKLER"
+    },
+    {
+      "name": "Şalgam",
+      "price": "₺70.00",
+      "category": "İÇECEKLER"
+    },
+    {
+      "name": "Çamlıca Gazoz",
+      "price": "₺50.00",
+      "category": "İÇECEKLER"
+    },
+    {
+      "name": "Ev Sütlacı",
+      "price": "₺200.00",
+      "category": "TATLILAR"
+    },
+    {
+      "name": "Kabak Tatlısı (Sade)",
+      "price": "₺150.00",
+      "category": "TATLILAR"
+    },
+    {
+      "name": "Kabak Tatlısı",
+      "price": "₺200.00",
+      "category": "TATLILAR",
+      "desc": "Tahinli ve Kaymaklı"
+    }
+  ]
+},
+
 };
