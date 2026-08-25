@@ -1668,3 +1668,6 @@ Hentzer kaydı `Sinanpaşa, Şair Nedim Cd. 18/A, 34357 Beşiktaş/İstanbul`, `
 
 ## SOOTE MEZE & BISTRO ID 6943 kabulü
 Hentzer kaydı `Sinanpaşa, Altıntaş Sk. 27/a, 34022 Beşiktaş/İstanbul`, `+90 540 119 03 24`; işletmenin resmi sitesi, resmi dijital menü footerı ve Restoranim.net aynı exact şube adresi/telefonu doğruluyor. Resmi dijital menünün 2026 footerı ve canlı sayfaları kullanıldı. Appetizers (21), Hot Snaps (5), Grids (6), White Meats (2) ve Salads (6) kategorilerinden toplam 40 benzersiz yiyecek ürünü/fiyatı aktarıldı. Alkollü içecekler ve sabit menüler aktarılmadı; carousel/çevre bedeli yok. **Override kabul edildi.**
+
+## CIM’S ARTISAN PÂTISSERIE KAVACIK ID 6942 — STRICT HOLD
+Hentzer kaydı `Kavacık, Orhan Veli Kanık Cd. No:110, 34810 Beykoz/İstanbul`, `+90 216 680 28 88`; RestaurantGuru ve işletmenin sosyal kaynakları aynı Kavacık adresini ve telefonu destekliyor. RestaurantGuru menü URL’si güncel fiyatları göstermeden insan doğrulama duvarına yönlendiriyor; erişilebilir işletme sayfasında yalnız genel fiyat aralığı bulunuyor, ürün bazlı güncel fiyat listesi yok. Son bir yıl şartını güvenilir biçimde kanıtlayan herkese açık fiyatlı menü bulunamadığından **strict HOLD**; override eklenmedi.
