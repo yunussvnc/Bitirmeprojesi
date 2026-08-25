@@ -1443,3 +1443,6 @@ Exact kayıt `Pınartepe, Akyurt Cd. WorldPoint No:1C İç Kapı No:3, 34500 Bey
 
 ## UNAŞKI BEYLİKDÜZÜ ID 7020 strict HOLD
 Hentzer kaydı `2.Kısım İfa İş Merkezi 3, Kavaklı, Yeşilyurt Cd., 34524 Beylikdüzü/İstanbul`, `+90 212 876 55 40`; Yandex ve Beylikdüzü sosyal medya kayıtlarında telefon eşleşiyor. Ancak Unaşkı resmi sitesinin güncel arama çıktısı Beylikdüzü şubesini `Adnan Kahveci Mah. Alemdağ Cad. No:2/1 D:78` olarak listeliyor; bu, Hentzer Kavaklı/İfa İş Merkezi adresiyle exact eşleşmiyor. Yemeksepeti’nde güncel menüler mevcut olsa da vendor ID’lerinin exact Kavaklı şubesine aitliği kanıtlanamadı. **Override eklenmedi; strict HOLD**.
+
+## TERRACE BOSPHORUS-HOKKAH LOUNGE ID 7019 strict HOLD
+Exact kayıt `Sinanpaşa, Hasfırın Cd. No:3 Kat:5, 34353 Beşiktaş/İstanbul`, `+90 212 227 02 12`; resmi Terrace Bosphorus sitesi ve resmi sosyal medya kaynaklarıyla adres/telefon eşleşti. Resmi sitede yalnızca sınırlı nargile ve kahve kalemleri görünüyor; menünün yemekler dahil tam kapsamı yok. Ayrıca sayfadaki 18–21 TL kahve fiyatları 2026 bağlamında güncellik/yanlış veri riski taşıyor ve yayın tarihi belirtilmiyor. Bu nedenle son 1 yıl içinde tam ve güvenilir fiyatlı menü doğrulanamadı; **override eklenmedi; strict HOLD**.
