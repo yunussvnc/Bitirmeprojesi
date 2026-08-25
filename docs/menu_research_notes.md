@@ -1662,3 +1662,6 @@ Hentzer kaydı `Yıldırım, Zafer Cd. No:35, 34035 Bayrampaşa/İstanbul`, `+90
 
 ## MAVİ KAPI KAFE ID 6945 — STRICT HOLD
 Hentzer kaydı `No:14/1, Anadolufeneri, Adatepe Çıkmazı No:14-1, 34829 Beykoz/İstanbul`, `+90 533 489 61 58`; Restoranim.net ve Instagram `@mavvikapi` aynı exact şube adresi/telefonu doğruluyor. Menuweb üzerinde bir PDF menü bağlantısı bulundu ancak doğrudan erişim 403 ile engellendi; PDF’nin son bir yıl içinde güncellendiği doğrulanamadı ve ürün/fiyat listesi güvenilir biçimde okunamadı. Mekanlar.com/Restoranim kaynakları fiyatlı güncel menü sunmuyor. Bu nedenle **strict HOLD**; override eklenmedi.
+
+## MENDEL'S AKARETLER ID 6944 — STRICT HOLD
+Hentzer kaydı `Sinanpaşa, Şair Nedim Cd. 18/A, 34357 Beşiktaş/İstanbul`, `+90 544 250 72 26`; Mendel's resmi Beşiktaş şube sayfası ve resmi Instagram aynı exact adres/telefonu doğruluyor. RestaurantGuru menü sayfası adresi doğrulasa da menü sürümlerinin en yenisini 3 yıl önce gösteriyor ve farklı telefon `+90 212 258 42 22` yayımlıyor; resmi sayfa dinamik olarak yalnız “Lezzet Yükleniyor” döndüğünden güncel ürün/fiyat listesi doğrulanamadı. Bir yıllık güncellik ve telefon tutarlılığı şartları sağlanmadığından **strict HOLD**; override eklenmedi.
