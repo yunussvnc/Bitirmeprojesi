@@ -1578,3 +1578,6 @@ Hentzer kaydı `Altıntepsi, Kutlu Sokağı No:22, 34035 Bayrampaşa/İstanbul`,
 
 ## ROASTORY COFFEE CO BEŞİKTAŞ ID 6973 strict HOLD
 Hentzer kaydı `Türkali, Ihlamurdere Cd. No:37, 34330 Beşiktaş/İstanbul`, `+90 546 521 96 57`. Listorant aynı Ihlamurdere adresini destekliyor; ancak resmi Instagram arama sonuçları işletmeyi `İstiklal Caddesi` olarak tanımlıyor ve son 2026 paylaşımlarındaki şube adresi Hentzer kaydından farklı görünüyor. Roastico/Roastery House gibi benzer isimli işletmelerin fiyatlı menüleri exact Roastory şubesiyle eşleşmiyor. %100 branch/adres paritesi sağlanamadığından **override eklenmedi; strict HOLD**.
+
+## MOISE KARAKÖY ID 6972 strict HOLD
+Hentzer kaydı `Bereketzade, Felek Sk. No:2, 34421 Beyoğlu/İstanbul`, `+90 549 763 11 16`; Moise resmi rezervasyon sayfası aynı exact adres ve WhatsApp numarasını doğruluyor. Resmi menü sayfası Kahvaltı/Ocakbaşı/Alkol menü bağlantıları sunuyor; kahvaltı PDF’si metin olarak çıkarılamadı, ocakbaşı PDF’si ise gerçek ürün/fiyat yerine placeholder metin döndürüyor. Menulux QR bağlantısı da item-level fiyatları erişilebilir biçimde vermedi. Son bir yıl içinde doğrulanabilir tam fiyatlı kamu menüsü bulunamadığından **override eklenmedi; strict HOLD**. Alkol menüsü kapsam dışıdır.
