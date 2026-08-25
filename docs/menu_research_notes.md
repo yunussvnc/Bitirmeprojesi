@@ -1239,3 +1239,6 @@ Hentzer exact kayıt `Sinanpaşa, Şair Nedim Cd. No:44, 34353 Beşiktaş/İstan
 
 ## Vero Gusto ID 7089 acceptance
 Hentzer exact kayıt `Cumhuriyet, Onur Sk. Kameroğlu Sitesi L Blok No:3B, 34520 Beylikdüzü/İstanbul`, `+90 534 050 56 72`; resmî Vero Gusto Türkiye sitesi ve güncel sosyal/public içerikler aynı Kameroğlu kimliğini destekliyor. Resmî `verogustotr.com/tr/categories` canlı menüsünden kahvaltı/flatbread-panino, başlangıç, salata, makarna-ravioli-tortellini, pizza, tatlı, ekstra ve içecek/şarap-bira kategorilerinde **124 ürün ve güncel fiyat** aktarıldı. `verifiedAt` canlı doğrulama tarihi `2026-08-25`.
+
+## The Coffee Factory Beylikdüzü Kameroğlu ID 7088 update
+Exact kayıt `Cumhuriyet, Nadir Sokağı No:2 G, 34515 Beylikdüzü/İstanbul`, `+90 501 056 62 02`; Restoranım exact sayfası adres ve telefonu doğruluyor. Önceki 2026-08-24 menü override’ı, Yemeksepeti İstanbul vendor `pr53` canlı menüsündeki güncel **80 ürün/fiyat** ile 2026-08-25 tarihinde yenilendi. Poşet satırı dışlandı.

@@ -49758,74 +49758,414 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     ],
   },
   "7088": {
-    name: "The Coffee Factory Beylikdüzü Kameroğlu",
-    sourceUrl: "https://www.yemeksepeti.com/en/restaurant/ex3a/the-coffee-factory-ex3a",
-    sourceName: "Yemeksepeti — The Coffee Factory Beylikdüzü Kameroğlu",
-    verifiedAt: "2026-08-24",
-    items: [
-      {name: "İtalyan Sandviç", price: "305 TL", desc: "Ciabatta ekmeğine; kaşar peyniri, İtalyan sos, pesto sos, parmesan peyniri, dana salam, dana sucuk", category: "Sandviçler"},
-      {name: "Haşhaşlı 3 Peynirli Sandviç", price: "290 TL", desc: "Haşhaşlı bagel ekmeği arasına; kaşar peyniri, beyaz peynir, cheddar peynir", category: "Sandviçler"},
-      {name: "Ay Çekirdekli Beyaz Peynirli Sandviç", price: "305 TL", desc: "Pesto sos, beyaz peynir, zeytin, kurumuş domates, yeşil biber, kapya biber", category: "Sandviçler"},
-      {name: "Hindi Füme Baget Sandviç", price: "305 TL", desc: "Çavdarlı baget ekmeği arasına; hindi jambon, cheddar peyniri, kapya biber, mantar", category: "Sandviçler"},
-      {name: "Artızan Dana Jambonlu Sandviç", price: "305 TL", desc: "Baget ekmeği arasına; mozzarella peyniri, dana jambon, siyah zeytin, kurumuş domates, parmesan peyniri, pesto sos", category: "Sandviçler"},
-      {name: "Dana Jambonlu Mozzarella Sandviç", price: "280 TL", desc: "Adet olarak servis edilir.", category: "Sandviçler"},
-      {name: "Tereyağlı Kruvasan", price: "230 TL", desc: "Sıcak servis edilir.", category: "Kruvasanlar"},
-      {name: "Frambuazlı Cheesecake", price: "310 TL", desc: "Dilim olarak servis edilir.", category: "Cheesecakes"},
-      {name: "İspanyol Cheesecake", price: "345 TL", desc: "Adet olarak servis edilir.", category: "Cheesecakes"},
-      {name: "Belçika Çikolatalı Pasta", price: "340 TL", desc: "Dilim olarak servis edilir.", category: "Pasta & Kekler"},
-      {name: "Limonlu Kek", price: "185 TL", desc: "Dilim olarak servis edilir.", category: "Pasta & Kekler"},
-      {name: "Kremalı Havuçlu Kek", price: "275 TL", desc: "Havuçlu kek katları arasına; peynirli krema, ceviz parçaları", category: "Pasta & Kekler"},
-      {name: "Brownie", price: "300 TL", desc: "Dilim olarak servis edilir.", category: "Pasta & Kekler"},
-      {name: "Çikolatalı Cookie", price: "180 TL", desc: "Tek kişilik", category: "Pasta & Kekler"},
-      {name: "Mozaik Kek", price: "185 TL", desc: "Dilim olarak servis edilir.", category: "Pasta & Kekler"},
-      {name: "Çikolatalı Muffin", price: "185 TL", desc: "Tek kişilik", category: "Pasta & Kekler"},
-      {name: "Yaban Mersinli Muffin", price: "180 TL", desc: "Tek kişilik", category: "Pasta & Kekler"},
-      {name: "Antep Fıstıklı Pasta", price: "335 TL", desc: "Dilim olarak servis edilir.", category: "Pasta & Kekler"},
-      {name: "Uludağ Mineralli Su (50 cl.)", price: "100 TL", desc: "Cam şişe", category: "Şişelenmiş İçecekler"},
-      {name: "Uludağ Premium Su (40 cl.)", price: "70 TL", desc: "Cam şişe", category: "Şişelenmiş İçecekler"},
-      {name: "Türk Kahvesi", price: "160 TL", desc: "Sıcak servis edilir.", category: "Sıcak Kahveler"},
-      {name: "Cortado", price: "210 TL", desc: "Sıcak servis edilir.", category: "Sıcak Kahveler"},
-      {name: "Fresh Filter Coffee", price: "170 TL", desc: "Sıcak servis edilir.", category: "Sıcak Kahveler"},
-      {name: "Caffe Americano", price: "205 TL", desc: "Sıcak servis edilir.", category: "Sıcak Kahveler"},
-      {name: "Cappuccino", price: "190 TL", desc: "Sıcak servis edilir.", category: "Sıcak Kahveler"},
-      {name: "Caffe Latte", price: "230 TL", desc: "Sıcak servis edilir.", category: "Sıcak Kahveler"},
-      {name: "Flat White", price: "230 TL", desc: "Sıcak servis edilir.", category: "Sıcak Kahveler"},
-      {name: "Caramel Macchiato", price: "275 TL", desc: "Sıcak servis edilir.", category: "Sıcak Kahveler"},
-      {name: "Berry Latte", price: "275 TL", desc: "Sıcak servis edilir.", category: "Sıcak Kahveler"},
-      {name: "Toffee Nut Latte", price: "275 TL", desc: "Sıcak servis edilir.", category: "Sıcak Kahveler"},
-      {name: "Spanish Latte", price: "280 TL", desc: "Sıcak servis edilir.", category: "Sıcak Kahveler"},
-      {name: "Salted Caramel Latte", price: "290 TL", desc: "Sıcak servis edilir.", category: "Sıcak Kahveler"},
-      {name: "Caffe Mocha", price: "280 TL", desc: "Sıcak servis edilir.", category: "Sıcak Kahveler"},
-      {name: "White Chocolate Mocha", price: "290 TL", desc: "Sıcak servis edilir.", category: "Sıcak Kahveler"},
-      {name: "Iced Filter Coffee", price: "185 TL", desc: "Soğuk servis edilir.", category: "Soğuk Kahveler"},
-      {name: "Iced Caffe Americano", price: "215 TL", desc: "Soğuk servis edilir.", category: "Soğuk Kahveler"},
-      {name: "Iced Caffe Latte", price: "235 TL", desc: "Soğuk servis edilir.", category: "Soğuk Kahveler"},
-      {name: "Iced Caramel Macchiato", price: "290 TL", desc: "Soğuk servis edilir.", category: "Soğuk Kahveler"},
-      {name: "Iced White Chocolate Mocha", price: "300 TL", desc: "Soğuk servis edilir.", category: "Soğuk Kahveler"},
-      {name: "Iced Caffe Mocha", price: "300 TL", desc: "Soğuk servis edilir.", category: "Soğuk Kahveler"},
-      {name: "Iced Spanish Latte", price: "300 TL", desc: "Soğuk servis edilir.", category: "Soğuk Kahveler"},
-      {name: "Iced Salted Caramel Latte", price: "300 TL", desc: "Soğuk servis edilir.", category: "Soğuk Kahveler"},
-      {name: "Iced Berry Latte", price: "290 TL", desc: "Soğuk servis edilir.", category: "Soğuk Kahveler"},
-      {name: "Iced Toffee Nut Latte", price: "290 TL", desc: "Soğuk servis edilir.", category: "Soğuk Kahveler"},
-      {name: "Chai Tea Latte", price: "290 TL", desc: "Sıcak servis edilir.", category: "Sıcak İçecekler"},
-      {name: "Hot Chocolate", price: "240 TL", desc: "Sıcak servis edilir.", category: "Sıcak İçecekler"},
-      {name: "Mango Refresher", price: "290 TL", desc: "Mango, soda, buz", category: "Limonatalar"},
-      {name: "Acai Berry Refresher", price: "290 TL", desc: "Çilek, kırmızı meyve aroması, buz", category: "Limonatalar"},
-      {name: "Lime Refresher", price: "290 TL", desc: "Misket limon aroması, Soda, buz", category: "Limonatalar"},
-      {name: "Very Berry Refresher", price: "290 TL", desc: "Frambuaz, böğürtlen,Soda, buz", category: "Limonatalar"},
-      {name: "Mango Limonata", price: "270 TL", desc: "Soğuk servis edilir.", category: "Limonatalar"},
-      {name: "Çilekli Limonata", price: "270 TL", desc: "Soğuk servis edilir.", category: "Limonatalar"},
-      {name: "Limonata", price: "215 TL", desc: "Soğuk servis edilir.", category: "Limonatalar"},
-      {name: "Strawberry's Chocolate Cream", price: "300 TL", desc: "Soğuk servis edilir.", category: "Limonatalar"},
-      {name: "Chocolate Cream", price: "300 TL", desc: "Soğuk servis edilir.", category: "Limonatalar"},
-      {name: "Caramel Waffle Cream", price: "300 TL", desc: "Soğuk servis edilir.", category: "Limonatalar"},
-      {name: "Pistachio Cream", price: "300 TL", desc: "Antep fıstığı, süt, buz", category: "Limonatalar"},
-      {name: "Nut Cream", price: "260 TL", desc: "Fındık, süt, buz", category: "Limonatalar"},
-      {name: "Mango Frozen", price: "295 TL", desc: "Soğuk servis edilir.", category: "Frozens"},
-      {name: "Strawberry Frozen", price: "295 TL", desc: "Soğuk servis edilir.", category: "Frozens"},
-      {name: "Red Berry Frozen", price: "295 TL", desc: "Soğuk servis edilir.", category: "Frozens"},
-    ],
-  },
+  "name": "The Coffee Factory Beylikdüzü Kameroğlu",
+  "sourceUrl": "https://www.yemeksepeti.com/restaurant/pr53/the-coffee-factory-pr53",
+  "sourceName": "Yemeksepeti canlı İstanbul vendor pr53; exact Restoranım The Coffee Factory Beylikdüzü Kameroğlu sayfası Cumhuriyet Nadir Sokağı No:2G / 0501 056 62 02 adres-telefon eşleşmesini doğruluyor. Önceki 2026-08-24 vendor kaydı güncel pr53 menüsüyle yenilendi; poşet satırı dışlandı.",
+  "verifiedAt": "2026-08-25",
+  "items": [
+    {
+      "name": "Dereotlu Peynirli Poğaça",
+      "price": "72",
+      "category": "Poğaçalar"
+    },
+    {
+      "name": "Açma Zeytinli Örgü",
+      "price": "78",
+      "category": "Poğaçalar"
+    },
+    {
+      "name": "Açma Patatesli Örgü",
+      "price": "78",
+      "category": "Poğaçalar"
+    },
+    {
+      "name": "Poğaça Siyez Unlu Peynirli",
+      "price": "72",
+      "category": "Poğaçalar"
+    },
+    {
+      "name": "Poğaça Zeytinli",
+      "price": "72",
+      "category": "Poğaçalar"
+    },
+    {
+      "name": "İtalyan Sandviç",
+      "price": "270",
+      "category": "Sandviçler"
+    },
+    {
+      "name": "Haşhaşlı 3 Peynirli Sandviç",
+      "price": "230",
+      "category": "Sandviçler"
+    },
+    {
+      "name": "Ay Çekirdekli Beyaz Peynirli Sandviç",
+      "price": "260",
+      "category": "Sandviçler"
+    },
+    {
+      "name": "Hindi Füme Baget Sandviç",
+      "price": "270",
+      "category": "Sandviçler"
+    },
+    {
+      "name": "Artızan Dana Jambonlu Sandviç",
+      "price": "255",
+      "category": "Sandviçler"
+    },
+    {
+      "name": "Izgara Tavuklu Pesto Soslu Sandviç",
+      "price": "260",
+      "category": "Sandviçler"
+    },
+    {
+      "name": "Dana Jambonlu Mozzarella Sandviç",
+      "price": "260",
+      "category": "Sandviçler"
+    },
+    {
+      "name": "Tereyağlı Kruvasan",
+      "price": "170",
+      "category": "Kruvasanlar"
+    },
+    {
+      "name": "Jambonlu Peynirli Kruvasan Sandviç",
+      "price": "265",
+      "category": "Kruvasanlar"
+    },
+    {
+      "name": "Cheddarlı Kaşarlı Kruvasan Sandviç",
+      "price": "255",
+      "category": "Kruvasanlar"
+    },
+    {
+      "name": "Mozzarella Kruvasan",
+      "price": "180",
+      "category": "Kruvasanlar"
+    },
+    {
+      "name": "Frambuazlı Cheesecake",
+      "price": "300",
+      "category": "Cheesecakes"
+    },
+    {
+      "name": "Çikolatalı Cheesecake",
+      "price": "300",
+      "category": "Cheesecakes"
+    },
+    {
+      "name": "İspanyol Cheesecake",
+      "price": "320",
+      "category": "Cheesecakes"
+    },
+    {
+      "name": "Belçika Çikolatalı Pasta",
+      "price": "300",
+      "category": "Adet Pastalar & Kekler"
+    },
+    {
+      "name": "Mozaik Pasta",
+      "price": "250",
+      "category": "Adet Pastalar & Kekler"
+    },
+    {
+      "name": "Limonlu Kek",
+      "price": "150",
+      "category": "Adet Pastalar & Kekler"
+    },
+    {
+      "name": "Kremalı Havuçlu Kek",
+      "price": "255",
+      "category": "Adet Pastalar & Kekler"
+    },
+    {
+      "name": "Brownie",
+      "price": "255",
+      "category": "Adet Pastalar & Kekler"
+    },
+    {
+      "name": "Çikolatalı Cookie",
+      "price": "155",
+      "category": "Adet Pastalar & Kekler"
+    },
+    {
+      "name": "Mozaik Kek",
+      "price": "150",
+      "category": "Adet Pastalar & Kekler"
+    },
+    {
+      "name": "Çikolatalı Muffin",
+      "price": "155",
+      "category": "Adet Pastalar & Kekler"
+    },
+    {
+      "name": "Yaban Mersinli Muffin",
+      "price": "155",
+      "category": "Adet Pastalar & Kekler"
+    },
+    {
+      "name": "Çikolata Parçacıklı Cookie",
+      "price": "155",
+      "category": "Adet Pastalar & Kekler"
+    },
+    {
+      "name": "Factory Singanutre Cake",
+      "price": "300",
+      "category": "Adet Pastalar & Kekler"
+    },
+    {
+      "name": "Antep Fıstıklı Pasta",
+      "price": "310",
+      "category": "Adet Pastalar & Kekler"
+    },
+    {
+      "name": "San Pellegrino Aranciata (25 cl.)",
+      "price": "125",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Sunpride Nar Suyu (25 cl.)",
+      "price": "120",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Uludağ Mineralli Su (50 cl.)",
+      "price": "85",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Uludağ Su (40 cl.)",
+      "price": "40",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Uludağ Premium Su (40 cl.)",
+      "price": "55",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Türk Kahvesi",
+      "price": "130",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Cortado",
+      "price": "160",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Fresh Filter Coffee",
+      "price": "145",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Caffe Americano",
+      "price": "155",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Cappuccino",
+      "price": "180",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Caffe Latte",
+      "price": "180",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Flat White",
+      "price": "180",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Caramel Macchiato",
+      "price": "215",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Berry Latte",
+      "price": "214",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Toffee Nut Latte",
+      "price": "215",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Spanish Latte",
+      "price": "215",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Salted Caramel Latte",
+      "price": "215",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Caffe Mocha",
+      "price": "215",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "White Chocolate Mocha",
+      "price": "205",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Iced Filter Coffee",
+      "price": "155",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Iced Caffe Americano",
+      "price": "170",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Iced Caffe Latte",
+      "price": "185",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Iced Caramel Macchiato",
+      "price": "230",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Iced White Chocolate Mocha",
+      "price": "230",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Iced Caffe Mocha",
+      "price": "230",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Iced Spanish Latte",
+      "price": "230",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Iced Salted Caramel Latte",
+      "price": "230",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Iced Berry Latte",
+      "price": "230",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Iced Toffee Nut Latte",
+      "price": "230",
+      "category": "Soğuk Kahveler"
+    },
+    {
+      "name": "Chai Tea Latte",
+      "price": "215",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Hot Chocolate",
+      "price": "190",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "White Hot Chocolate",
+      "price": "190",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Mango Refresher",
+      "price": "220",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Acai Berry Refresher",
+      "price": "220",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Lime Refresher",
+      "price": "220",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Very Berry Refresher",
+      "price": "210",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Mango Limonata",
+      "price": "215",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Çilekli Limonata",
+      "price": "215",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Limonata",
+      "price": "180",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Redberry Lemonade",
+      "price": "215",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Strawberry's Chocolate Cream",
+      "price": "235",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Chocolate Cream",
+      "price": "235",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Coconut Cream",
+      "price": "235",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Caramel Waffle Cream",
+      "price": "215",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Pistachio Cream",
+      "price": "235",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Nut Cream",
+      "price": "235",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Mango Frozen",
+      "price": "230",
+      "category": "Frozens"
+    },
+    {
+      "name": "Strawberry Frozen",
+      "price": "230",
+      "category": "Frozens"
+    },
+    {
+      "name": "Red Berry Frozen",
+      "price": "230",
+      "category": "Frozens"
+    }
+  ]
+},
+
   "6775": {
     name: "Coffy Kavacık",
     sourceUrl: "https://www.yemeksepeti.com/en/restaurant/my21/coffy-my21",
