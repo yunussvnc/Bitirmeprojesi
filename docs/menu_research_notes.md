@@ -1584,3 +1584,6 @@ Hentzer kaydı `Bereketzade, Felek Sk. No:2, 34421 Beyoğlu/İstanbul`, `+90 549
 
 ## SUFLÖR ID 6971 strict HOLD
 Hentzer kaydı `Vişnezade, Çatlak Çeşme Sk. No:1/D, 34357 Beşiktaş/İstanbul`, `+90 212 227 20 00`; Cybo, Flickr ve işletme rehberleri bu adres/telefonu doğruluyor. Suflör resmi menü sayfası güncel ürün/fiyat listesi sunuyor; ancak aynı resmi sayfanın iletişim bölümünde `+90 507 151 18 77` yazıyor ve Hentzer telefonu ile uyuşmuyor. Menüde Beşiktaş/Kadıköy ayrımı adres düzeyinde yapılmadığından %100 şube/telefon paritesi sağlanamadı. Fiyatlar mevcut olsa da yanlış şubeye aktarma riskinden **override eklenmedi; strict HOLD**.
+
+## KATTO BURGER & MUTFAK ID 6970 strict HOLD
+Hentzer kaydı `Acarlar, Acrloft, 34820 Beykoz/İstanbul`, `+90 531 500 01 00`; resmi Instagram `@kattomutfak`, Menu-TR ve 2026 tarihli sosyal içerikler AcrLoft AVM/Beykoz şube bağını doğruluyor. Ancak kamuya açık kaynaklarda tam item-level güncel menü fiyat listesi yok; sosyal paylaşım/snippetler yalnızca parçalı fiyat sinyali veriyor (ör. 470 TL) ve ürün adı/fiyat seti tamamlanamıyor. Benzer isimli Tacos & Burger menüsü exact işletme değildir. **Override eklenmedi; strict HOLD**.
