@@ -4,6 +4,27 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6983": {
+    "name": "YK ZİYAFET HATAY DÖNER",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/rgc4/yk-ziyafet-hatay-doner",
+    "sourceName": "Yandex Maps exact kaydı, Yemeksepeti rgc4 canlı vendor menüsü ve Hentzer kaydı `Doğan Park Evleri, Adnan Kahveci, Yavuz Sultan Selim Blv. 41 B, 34528 Beylikdüzü/İstanbul` / `+90 545 824 99 18` eşleştirildi",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Öğrenci Ziyafet Tavuk Döner Dürüm (50 gr.)", "price": "220 TL", "category": "Tavuk Dönerler" },
+      { "name": "Mini Ziyafet Tavuk Döner Dürüm (70 gr.)", "price": "250 TL", "category": "Tavuk Dönerler" },
+      { "name": "Klasik Ziyafet Tavuk Döner Dürüm (90 gr.)", "price": "280 TL", "category": "Tavuk Dönerler" },
+      { "name": "Büyük Ziyafet Tavuk Döner Dürüm (100 gr.)", "price": "310 TL", "category": "Tavuk Dönerler" },
+      { "name": "Mega Ziyafet Tavuk Döner Dürüm (150 gr.)", "price": "360 TL", "category": "Tavuk Dönerler" },
+      { "name": "Fanta (33 cl.)", "price": "90 TL", "category": "İçecekler" },
+      { "name": "Pepsi (33 cl.)", "price": "90 TL", "category": "İçecekler" },
+      { "name": "Lipton Ice Tea (33 cl.)", "price": "90 TL", "category": "İçecekler" },
+      { "name": "Niğde Gazozu (20 cl.)", "price": "70 TL", "category": "İçecekler" },
+      { "name": "Ateşoğlu Ayran (30 cl.)", "price": "70 TL", "category": "İçecekler" },
+      { "name": "Sırma Limonlu Soda (20 cl.)", "price": "60 TL", "category": "İçecekler" },
+      { "name": "Beypazarı Sade Soda (20 cl.)", "price": "40 TL", "category": "İçecekler" },
+      { "name": "Nestle Su (50 cl.)", "price": "30 TL", "category": "İçecekler" }
+    ]
+  },
   "6984": {
     "name": "BONAVIAS BEYLİKDÜZÜ",
     "sourceUrl": "https://www.yemeksepeti.com/restaurant/r57h/bonavias",

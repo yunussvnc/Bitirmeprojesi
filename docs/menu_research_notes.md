@@ -1548,3 +1548,6 @@ Hentzer API kaydı `İncirköy, Saip Molla Cd. No:77, 34800 Beykoz/İstanbul`, `
 
 ## BONAVIAS BEYLİKDÜZÜ ID 6984 kabul
 Hentzer API kaydı `Barış, E-5 Yanyolu No:28, 34520 Beylikdüzü/İstanbul`, `+90 544 734 20 20`; Bonavias resmi şubeler sayfası aynı adres/telefonu doğruluyor. Yemeksepeti `r57h` canlı menüsü 2026-08-26 tarihinde erişildi. Crepes, Dessert Cups, Kruvasanlar, Pancakes, Tatlılar, Waffles, İçecekler ve Özel Kutular kategorilerinden **48 benzersiz gıda/içecek kalemi** aktarıldı. Fiyatlar canlı vendor menüsünden alındı; hizmet/poşet kalemi ve carousel tekrarı eklenmedi. **Override kabul edildi.**
+
+## YK ZİYAFET HATAY DÖNER ID 6983 kabul
+Hentzer API kaydı `Doğan Park Evleri, Adnan Kahveci, Yavuz Sultan Selim Blv. 41 B, 34528 Beylikdüzü/İstanbul`, `+90 545 824 99 18`; Yandex Maps aynı exact adres ve telefonu doğruluyor. Yemeksepeti `rgc4` canlı vendor menüsü 2026-08-26 tarihinde erişildi ve Öğrenci, Mini, Klasik, Büyük, Mega Tavuk Döner Dürüm ile 8 içecek olmak üzere **13 benzersiz gıda/içecek kalemi** aktarıldı. Popüler carousel tekrarları ve Poşet kalemi dışlandı. Fiyatlar canlı Yemeksepeti menüsünden alındı; ürün veya fiyat uydurulmadı. **Override kabul edildi.**
