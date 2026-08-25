@@ -68464,6 +68464,365 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     ],
   },
 
+  "7178": {
+    "name": "Tadım Sebzeli Döner",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/iys0/tadim-sebzeli-doner",
+    "sourceName": "Yemeksepeti canlı menüsü; exact Ortaköy şube Restoranim/Yandex çapraz doğrulaması",
+    "verifiedAt": "2026-08-25",
+    "items": [
+      {
+        "name": "2'li Tadım Kaşarlı Tavuk Döner Dürüm Menü",
+        "price": "499 TL",
+        "category": "Ekonomik Menüler"
+      },
+      {
+        "name": "Sporcu Menüsü 1",
+        "price": "300 TL",
+        "category": "Ekonomik Menüler"
+      },
+      {
+        "name": "Sporcu Menüsü 2",
+        "price": "350 TL",
+        "category": "Ekonomik Menüler"
+      },
+      {
+        "name": "Sporcu Menüsü 3",
+        "price": "400 TL",
+        "category": "Ekonomik Menüler"
+      },
+      {
+        "name": "Yarım Ekmek Kaşarlı Tost",
+        "price": "250 TL",
+        "category": "Tostlar"
+      },
+      {
+        "name": "Kaşarlı Sucuklu Tost",
+        "price": "300 TL",
+        "category": "Tostlar"
+      },
+      {
+        "name": "Tam Ekmek Arası Kaşarlı Tost",
+        "price": "400 TL",
+        "category": "Tostlar"
+      },
+      {
+        "name": "3/4 Ekmek Arası Tavuk Döner (100 gr.)",
+        "price": "250 TL",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Tadım 3/4 Ekmek Arası Tavuk Döner (150 gr.)",
+        "price": "300 TL",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Tavuk Döner Dürüm (100 gr.)",
+        "price": "250 TL",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Tadım Tavuk Döner Dürüm (150 gr.)",
+        "price": "300 TL",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Tadım Tavuk Döner Sandviç (70 gr.)",
+        "price": "200 TL",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Tadım Tavuk Döner (150 gr.)",
+        "price": "450 TL",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Tadım Pilav Üstü Tavuk Döner (150 gr.)",
+        "price": "500 TL",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Tadım Kaşarlı Tavuk Döner Dürüm (150 gr.)",
+        "price": "350 TL",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Tadım Kaşarlı Tavuk Döner Dürüm (100 gr.)",
+        "price": "300 TL",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Tadım Kaşarlı Tavuk Döner Sandviç (100 gr.)",
+        "price": "300 TL",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Tadım Pide Ekmeğine Özel Tavuk Döner (70 gr.)",
+        "price": "200 TL",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Tadım Tam Ekmek Arası Kaşarlı Tavuk Döner (150 gr.)",
+        "price": "400 TL",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Tadım Tam Ekmek Arası Tavuk Döner (150 gr.)",
+        "price": "300 TL",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Tadım Tavuk Döner Dürüm (130 gr.)",
+        "price": "300 TL",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Tadım Tavuk Döner Dürüm (100 gr.)",
+        "price": "250 TL",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Tadım 3/4 Ekmek Arası Kaşarlı Tavuk Döner (100 gr.)",
+        "price": "350 TL",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Tadım Yarım Ekmek Arası Kaşarlı Tavuk Döner (70 gr.)",
+        "price": "300 TL",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Tadım Yarım Ekmek Arası Tavuk Döner (100 gr.)",
+        "price": "250 TL",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Mega Tavuk Döner Dürüm (200 gr.)",
+        "price": "350 TL",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Tadım Beyti (Tavuk Dönerden)",
+        "price": "500 TL",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Sandviç Ekmek Arası Tavuk Döner (100 gr.)",
+        "price": "250 TL",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Tavuk Porsiyon Döner (200 gr.)",
+        "price": "450 TL",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Tavuk Döner (200 gr.)",
+        "price": "450 TL",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Tavuk Döner (250 gr.)",
+        "price": "500 TL",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Tavuk Döner Dürüm (200 gr.)",
+        "price": "400 TL",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "Tavuk Döner Duble Sandviç (150 gr.)",
+        "price": "250 TL",
+        "category": "Tavuk Dönerler"
+      },
+      {
+        "name": "3/4 Ekmek Arası Tadım Et Döner (100 gr.)",
+        "price": "500 TL",
+        "category": "Et Dönerler"
+      },
+      {
+        "name": "Tadım Tam Ekmek Arası Et Döner (130 gr.)",
+        "price": "550 TL",
+        "category": "Et Dönerler"
+      },
+      {
+        "name": "Tadım Et Döner (150 gr.)",
+        "price": "600 TL",
+        "category": "Et Dönerler"
+      },
+      {
+        "name": "Tadım Pilav Üstü Et Döner (150 gr.)",
+        "price": "650 TL",
+        "category": "Et Dönerler"
+      },
+      {
+        "name": "Tadım Et Döner Sandviç (100 gr.)",
+        "price": "500 TL",
+        "category": "Et Dönerler"
+      },
+      {
+        "name": "Tadım Yarım Ekmek Arası Et Döner (100 gr.)",
+        "price": "500 TL",
+        "category": "Et Dönerler"
+      },
+      {
+        "name": "Tadım Et Döner Dürüm (100 gr.)",
+        "price": "500 TL",
+        "category": "Et Dönerler"
+      },
+      {
+        "name": "Tadım Kaşarlı Et Döner Dürüm (100 gr.)",
+        "price": "600 TL",
+        "category": "Et Dönerler"
+      },
+      {
+        "name": "Tadım Tam Ekmek Arası Et Döner (150 gr.)",
+        "price": "600 TL",
+        "category": "Et Dönerler"
+      },
+      {
+        "name": "Lavaş Üstü Et Döner (150 gr.)",
+        "price": "600 TL",
+        "category": "Et Dönerler"
+      },
+      {
+        "name": "Yarım Ekmek Arası Et Döner (100 gr.)",
+        "price": "500 TL",
+        "category": "Et Dönerler"
+      },
+      {
+        "name": "Et Döner Sandviç (70 gr.)",
+        "price": "450 TL",
+        "category": "Et Dönerler"
+      },
+      {
+        "name": "Tadım Beyti Kebap",
+        "price": "600 TL",
+        "category": "Et Dönerler"
+      },
+      {
+        "name": "Patates Kızartması",
+        "price": "220 TL",
+        "category": "Yan Ürünler"
+      },
+      {
+        "name": "Coca-Cola Zero Sugar (33 cl.)",
+        "price": "80 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Coca-Cola (33 cl.)",
+        "price": "80 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Coca-Cola Light (33 cl.)",
+        "price": "80 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Coca-Cola Şekersiz (33 cl.)",
+        "price": "80 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Fanta (33 cl.)",
+        "price": "80 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Sprite (33 cl.)",
+        "price": "80 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Cappy (33 cl.)",
+        "price": "80 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Fuse Tea (33 cl.)",
+        "price": "80 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Doğanay Şalgam Suyu (33 cl.)",
+        "price": "60 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Sütaş Ayran (30 cl.)",
+        "price": "60 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Limonlu Soda (20 cl.)",
+        "price": "50 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Sade Soda (20 cl.)",
+        "price": "60 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Su (50 cl.)",
+        "price": "30 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Coca-Cola (1 L.)",
+        "price": "150 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Coca-Cola Light (1 L.)",
+        "price": "150 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Coca-Cola Zero Sugar (1 L.)",
+        "price": "150 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Coca-Cola Şekersiz (1 L.)",
+        "price": "150 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Fanta (1 L.)",
+        "price": "150 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Sprite (1 L.)",
+        "price": "150 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Coca-Cola (2,5 L.)",
+        "price": "200 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Fanta (2.5 L.)",
+        "price": "200 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Su (1,5 L.)",
+        "price": "60 TL",
+        "category": "İçecekler"
+      },
+      {
+        "name": "Ayran (1 L.)",
+        "price": "150 TL",
+        "category": "İçecekler"
+      }
+    ]
+  }
+,
   "7181": {
     "name": "Dalyan Balık",
     "sourceUrl": "https://dalyanbalik.dijitalkarekodmenu.com/",
