@@ -72772,4 +72772,305 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
   ]
 },
 
+  "7103": {
+  "name": "Ya-Ser Cafe",
+  "sourceUrl": "https://www.migros.com.tr/yemek/ya-ser-cafe-besiktas-cihannuma-mah-st-22370",
+  "sourceName": "Migros Yemek exact Ya Ser Cafe, Beşiktaş (Cihannüma Mah.) canlı menüsü; resmi Instagram @yasercafe arama kaydında Cihannüma Akmazçeşme Sokak No:18 eşleşmesi. Sayfada ürün adları mevcut, fiyat alanı yayımlanmadığı için price eklenmedi.",
+  "verifiedAt": "2026-08-25",
+  "items": [
+    {
+      "name": "Kaşarlı Tost",
+      "category": "Tostlar"
+    },
+    {
+      "name": "Sucuklu Tost",
+      "category": "Tostlar"
+    },
+    {
+      "name": "Karışık Tost",
+      "category": "Tostlar"
+    },
+    {
+      "name": "Beyaz Peynirli Tost",
+      "category": "Tostlar"
+    },
+    {
+      "name": "Kavurmalı Kaşarlı Tost",
+      "category": "Tostlar"
+    },
+    {
+      "name": "Kavurmalı Sucuklu Tost",
+      "category": "Tostlar"
+    },
+    {
+      "name": "Çikolatalı Tost",
+      "category": "Tostlar"
+    },
+    {
+      "name": "Ya Ser Special Tost",
+      "category": "Tostlar"
+    },
+    {
+      "name": "Ya Ser Izgara Köfte",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "Izgara Tavuk",
+      "category": "Izgaralar"
+    },
+    {
+      "name": "Penne Con Pollo Al Curry",
+      "category": "Makarnalar & Mantılar"
+    },
+    {
+      "name": "Penne All Arrabbiata",
+      "category": "Makarnalar & Mantılar"
+    },
+    {
+      "name": "Cremosa Di Fettuccine",
+      "category": "Makarnalar & Mantılar"
+    },
+    {
+      "name": "Spaghetti Bolognese",
+      "category": "Makarnalar & Mantılar"
+    },
+    {
+      "name": "Mantı",
+      "category": "Makarnalar & Mantılar"
+    },
+    {
+      "name": "Hamburger",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Cheeseburger",
+      "category": "Burgerler"
+    },
+    {
+      "name": "Ya Ser Burger",
+      "category": "Burgerler"
+    },
+    {
+      "name": "French Fries",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Wiener Schnitzel",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Sosis Tabağı",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Soğan Halkası (6 Adet)",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Sigara Böreği",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Nugget & French Fries",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Combo Tabağı",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Çerez",
+      "category": "Yan Ürünler"
+    },
+    {
+      "name": "Sezar Salata",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Ton Balıklı Salata",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Çıtır Tavuk Salata",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Ya Ser Maş Salata",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Mevsim Salata",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Sufle",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Bask Cheesecake",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Frambuazlı Cheesecake",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Limonlu Cheesecake",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Coca-cola (33 Cl.)",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Fanta (33 Cl.)",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Niğde Gazozu (25 Cl.)",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Cappy (33 Cl.)",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Fuse Tea (33 Cl.)",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Red Bull (25 Cl.)",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Meyveli Soda (20 Cl.)",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Soda (20 Cl.)",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Sıcak Çikolata",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Salep",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Çay",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Fincan Çay",
+      "category": "Sıcak İçecekler"
+    },
+    {
+      "name": "Klasik Limonata",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Naneli Limonata",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Soğuk Çikolata",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Çilekli Soğuk Çikolata",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Muzlu Soğuk Çikolata",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Karamelli Soğuk Çikolata",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Vişneli Soğuk Çikolata",
+      "category": "Soğuk İçecekler"
+    },
+    {
+      "name": "Espresso",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Macchiato",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Americano",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Cappuccino",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Menengiç Kahvesi",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Damla Sakızlı Türk Kahvesi",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Filtre Kahve",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Nescafe",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Sütlü Nescafe",
+      "category": "Sıcak Kahveler"
+    },
+    {
+      "name": "Çilekli Frozen",
+      "category": "Frozens"
+    },
+    {
+      "name": "Muzlu Frozen",
+      "category": "Frozens"
+    },
+    {
+      "name": "Kivili Frozen",
+      "category": "Frozens"
+    },
+    {
+      "name": "Orman Meyveli Frozen",
+      "category": "Frozens"
+    },
+    {
+      "name": "Limonlu Frozen",
+      "category": "Frozens"
+    },
+    {
+      "name": "Karpuzlu Frozen",
+      "category": "Frozens"
+    },
+    {
+      "name": "Kivi Kokteyl",
+      "category": "Kokteyls"
+    },
+    {
+      "name": "Muz Kokteyl",
+      "category": "Kokteyls"
+    },
+    {
+      "name": "Elma Kokteyl",
+      "category": "Kokteyls"
+    },
+    {
+      "name": "Karadut Kokteyl",
+      "category": "Kokteyls"
+    }
+  ]
+},
+
 };

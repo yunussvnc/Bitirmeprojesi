@@ -1200,3 +1200,6 @@ Hentzer exact kayıt `Cihannüma, Barbaros Blv. No:5A, 34351 Beşiktaş/İstanbu
 
 ## Kanlıca Teras ID 7104 acceptance
 Hentzer exact kayıt `Kanlıca, Halide Edip Adıvar Cd. No:6, 34810 Beykoz/İstanbul`, `+90 216 680 90 00`; resmi Instagram `@kanlicateras`, Mekanlar ve yerel arama sonuçları aynı şube/telefonu destekliyor. Resmi `menu.kanlicateras.com` dijital menüsünün 14 kategori endpointi HTTP 200 ile canlı doğrulandı; HTML kartlarındaki ürün başlıkları ve `<strong>` fiyatları ayrıştırılarak **173 benzersiz ürün/fiyat** aktarıldı. `verifiedAt` canlı doğrulama tarihi `2026-08-25`; servis ücreti veya paketleme satırı alınmadı.
+
+## Ya-Ser Cafe ID 7103 acceptance
+Hentzer exact kayıt `Cihannüma, Akmaz Çeşme Sk. No:18, 34022 Beşiktaş/İstanbul`; telefon kaydı yok. Resmi Instagram `@yasercafe` arama kaydı aynı Cihannüma/Akmazçeşme No:18 adresini destekliyor. Migros Yemek exact `Ya Ser Cafe, Beşiktaş (Cihannüma Mah.)` canlı sayfasından kahvaltı/ızgara, tost, makarna, burger, yan ürün, salata, tatlı ve içecek kategorilerinde **73 ürün adı** aktarıldı. Migros sayfası fiyat alanlarını yayımlamadığı için fiyat uydurulmadı; 73 ürünün tamamında `price` bilinçli olarak boş bırakıldı. `verifiedAt` canlı doğrulama tarihi `2026-08-25`.
