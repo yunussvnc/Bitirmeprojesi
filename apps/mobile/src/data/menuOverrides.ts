@@ -85222,4 +85222,227 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     }
   ]
 },
+  "7038": {
+  "name": "Baby Waffle Coffee",
+  "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/z2oc/baby-waffle-z2oc",
+  "sourceName": "Yemeksepeti current Baby Waffle menu; exact Hentzer branch is Barış, Adakent Cd. Beyaz City Çarşı D:4F No:61, 34519 Beylikdüzü/İstanbul, +90 535 876 20 72, matching the current official Instagram profile. 43 unique priced food/beverage items imported; Popular carousel duplicates excluded.",
+  "verifiedAt": "2026-08-25",
+  "items": [
+    {
+      "name": "Baby Classic Waffle",
+      "price": "475 TL",
+      "category": "Waffles"
+    },
+    {
+      "name": "Baby Milk Waffle",
+      "price": "475 TL",
+      "category": "Waffles"
+    },
+    {
+      "name": "Baby White Waffle",
+      "price": "475 TL",
+      "category": "Waffles"
+    },
+    {
+      "name": "Baby Bitter Waffle",
+      "price": "475 TL",
+      "category": "Waffles"
+    },
+    {
+      "name": "Baby Gold Waffle",
+      "price": "515 TL",
+      "category": "Waffles"
+    },
+    {
+      "name": "Baby Energy Waffle",
+      "price": "525 TL",
+      "category": "Waffles"
+    },
+    {
+      "name": "Baby Bomb Waffle",
+      "price": "585 TL",
+      "category": "Waffles"
+    },
+    {
+      "name": "Baby Natural Waffle (Meyvesiz)",
+      "price": "445 TL",
+      "category": "Waffles"
+    },
+    {
+      "name": "Baby Special Waffle",
+      "price": "515 TL",
+      "category": "Waffles"
+    },
+    {
+      "name": "Baby Exotic Waffle",
+      "price": "475 TL",
+      "category": "Waffles"
+    },
+    {
+      "name": "Baby Dubai Çikolatalı Waffle",
+      "price": "645 TL",
+      "category": "Waffles"
+    },
+    {
+      "name": "Baby Dubai Waffle (Meyvesiz)",
+      "price": "595 TL",
+      "category": "Waffles"
+    },
+    {
+      "name": "Baby Milk (Muzlu)",
+      "price": "455 TL",
+      "category": "Waffles"
+    },
+    {
+      "name": "Baby Milk (Çilekli)",
+      "price": "455 TL",
+      "category": "Waffles"
+    },
+    {
+      "name": "Baby Triple Waffle",
+      "price": "500 TL",
+      "category": "Waffles"
+    },
+    {
+      "name": "Baby Klasik Waffle (Muzlu)",
+      "price": "455 TL",
+      "category": "Waffles"
+    },
+    {
+      "name": "Baby Klasik Waffle (Çilekli)",
+      "price": "455 TL",
+      "category": "Waffles"
+    },
+    {
+      "name": "Cup Klasik",
+      "price": "379.99 TL",
+      "category": "Cup Waffles"
+    },
+    {
+      "name": "Cup Exotic",
+      "price": "379.99 TL",
+      "category": "Cup Waffles"
+    },
+    {
+      "name": "Cup Bitter",
+      "price": "379.99 TL",
+      "category": "Cup Waffles"
+    },
+    {
+      "name": "Cup Gold",
+      "price": "379.99 TL",
+      "category": "Cup Waffles"
+    },
+    {
+      "name": "Cup Triple",
+      "price": "379.99 TL",
+      "category": "Cup Waffles"
+    },
+    {
+      "name": "Cup Milk",
+      "price": "379.99 TL",
+      "category": "Cup Waffles"
+    },
+    {
+      "name": "Cup Enerji",
+      "price": "389.99 TL",
+      "category": "Cup Waffles"
+    },
+    {
+      "name": "Çilek Rüyası",
+      "price": "359.99 TL",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Muz Rüyası",
+      "price": "359.99 TL",
+      "category": "Tatlılar"
+    },
+    {
+      "name": "Coca-Cola (33 cl.)",
+      "price": "120 TL",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Lipton Ice Tea (33 cl.)",
+      "price": "120 TL",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Su (50 cl.)",
+      "price": "60 TL",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Çilekli & Muzlu Kruvasan",
+      "price": "450 TL",
+      "category": "Kruvasanlar"
+    },
+    {
+      "name": "Çilekli Kruvasan",
+      "price": "430 TL",
+      "category": "Kruvasanlar"
+    },
+    {
+      "name": "Muzlu Kruvasan",
+      "price": "430 TL",
+      "category": "Kruvasanlar"
+    },
+    {
+      "name": "Klasik Kova Waffle",
+      "price": "445 TL",
+      "category": "Waffle Bowls"
+    },
+    {
+      "name": "White Kova Waffle",
+      "price": "445 TL",
+      "category": "Waffle Bowls"
+    },
+    {
+      "name": "Milk Kova Waffle",
+      "price": "445 TL",
+      "category": "Waffle Bowls"
+    },
+    {
+      "name": "Choco Berry Kova Waffle",
+      "price": "450 TL",
+      "category": "Waffle Bowls"
+    },
+    {
+      "name": "Bitter Kova Waffle",
+      "price": "445 TL",
+      "category": "Waffle Bowls"
+    },
+    {
+      "name": "Special Kova Waffle",
+      "price": "465 TL",
+      "category": "Waffle Bowls"
+    },
+    {
+      "name": "Gold Kova Waffle",
+      "price": "465 TL",
+      "category": "Waffle Bowls"
+    },
+    {
+      "name": "Energy Kova Waffle",
+      "price": "485 TL",
+      "category": "Waffle Bowls"
+    },
+    {
+      "name": "Exotic Kova Waffle",
+      "price": "445 TL",
+      "category": "Waffle Bowls"
+    },
+    {
+      "name": "Bomb Kova Waffle",
+      "price": "500 TL",
+      "category": "Waffle Bowls"
+    },
+    {
+      "name": "Triple Kova Waffle",
+      "price": "450 TL",
+      "category": "Waffle Bowls"
+    }
+  ]
+},
 };

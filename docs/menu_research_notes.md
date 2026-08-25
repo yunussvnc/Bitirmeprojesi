@@ -1386,3 +1386,6 @@ Hentzer kaydı `Asmalı Mescit Meşrutiyet Cd. No:11/A Galatasaray, Asmalı Mesc
 
 ## ÖZ SANAT CAFE ID 7039 kabul
 Exact kayıt `Beyaz Palace, Adnan Kahveci, Osmanlı Cd. No:63, 34528 Beylikdüzü/İstanbul`, `+90 538 040 48 58`; bağımsız işletme kaydı ile adres ve telefon eşleşti. Yemeksepeti `Özsanat Pastane` canlı menüsünden 2026-08-25 tarihinde tatlılar, adet/kişilik pastalar, içecekler ve 500 gr kurabiye/ekler ürünlerinden **91 benzersiz ürün/fiyat** alındı. Plastik poşet kalemi dışlandı.
+
+## BABY WAFFLE COFFEE ID 7038 kabul
+Exact kayıt `Barış, Adakent Cd. Beyaz City Çarşı D:4F No:61, 34519 Beylikdüzü/İstanbul`, `+90 535 876 20 72`; güncel resmi Instagram profiliyle adres/telefon eşleşti. Yemeksepeti `Baby Waffle` canlı menüsünden 2026-08-25 tarihinde Waffles, Cup Waffles, Tatlılar, İçecekler, Kruvasanlar ve Waffle Bowls kategorilerinden **43 benzersiz ürün/fiyat** alındı. Popüler carousel tekrarları dışlandı.
