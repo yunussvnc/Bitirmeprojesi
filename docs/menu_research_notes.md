@@ -1698,3 +1698,6 @@ Hentzer kaydı `Sinanpaşa, Hattat Tahsin Sk. 17/A, 34353 Beşiktaş/İstanbul`,
 
 ## DÜRÜM MOLASI BAYRAMPAŞA DÖNER ID 6933 kabulü
 Hentzer kaydı `Orta, Demirkapı Cd. 75/A, 34214 Bayrampaşa/İstanbul`, `+90 212 568 37 61`; resmi Dürüm Molası Bayrampaşa şube sayfası ve Restoranim aynı exact adres/telefonu doğruluyor. Migros Yemek canlı Bayrampaşa vendorunda tarayıcı üzerinden 34 ürünün güncel fiyatları doğrulandı: tavuk dürüm menüleri, tavuk döner dürümleri, 3 kişilik menü, fast food, yan ürünler, tatlılar ve içecekler. Popüler carousel tekrarları, kampanyalar ve poşet kalemi dahil edilmedi. **Override kabul edildi.**
+
+## AİLE BALIK EVİ ID 6932 kabulü
+Hentzer kaydı `Altıntepsi, Özkan Cd. 52A, 34000 Bayrampaşa/İstanbul`, `+90 212 674 20 10`; Servis Listeleri aynı exact adresi, işletmenin resmi Instagram hesabı aynı telefonu doğruluyor. Yemeksepeti `p8fu` canlı vendorundan Izgara Balıklar, 500 gr ve 1 kg balıklar, Diğer Lezzetler, Salatalar ve İçecekler kategorilerinde 19 benzersiz güncel ürün/fiyat kalemi aktarıldı. Popüler carousel tekrarları ve poşet kalemi dahil edilmedi. **Override kabul edildi.**

@@ -4,6 +4,33 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6932": {
+    "name": "AİLE BALIK EVİ",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/p8fu/aile-balik-evi",
+    "sourceName": "Yemeksepeti p8fu canlı vendor; Servis Listeleri exact `Altıntepsi, Özkan Cd. 52A, 34000 Bayrampaşa/İstanbul` adresini ve resmi Instagram `+90 212 674 20 10` telefonunu doğruluyor",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Somon Izgara (350 gr.)", "price": "800 TL", "category": "Izgara Balıklar" },
+      { "name": "Izgara Somon (500 gr.)", "price": "900 TL", "category": "Izgara Balıklar" },
+      { "name": "Deniz Levreği (1 kg.)", "price": "1.500 TL", "category": "Izgara Balıklar" },
+      { "name": "Izgara Çipura (550-600 gr.)", "price": "800 TL", "category": "Izgara Balıklar" },
+      { "name": "Izgara Somon (1 kg.)", "price": "1.800 TL", "category": "Izgara Balıklar" },
+      { "name": "Mırlan Tava (500 gr.)", "price": "700 TL", "category": "Kiloluk Balıklar (500 gr.)" },
+      { "name": "Karides Güveç", "price": "650 TL", "category": "Diğer Lezzetler" },
+      { "name": "Kalamar (8 Halka)", "price": "650 TL", "category": "Diğer Lezzetler" },
+      { "name": "Çoban Salata (Tek Kişilik)", "price": "150 TL", "category": "Salatalar" },
+      { "name": "Çoban Salatası (2 Kişilik)", "price": "300 TL", "category": "Salatalar" },
+      { "name": "Mevsim Salata (Tek Kişilik)", "price": "150 TL", "category": "Salatalar" },
+      { "name": "Mevsim Salatası (2 Kişilik)", "price": "300 TL", "category": "Salatalar" },
+      { "name": "Doğanay Şalgam Suyu (30 cl.)", "price": "70 TL", "category": "İçecekler" },
+      { "name": "Soda (20 cl.)", "price": "50 TL", "category": "İçecekler" },
+      { "name": "Su (50 cl.)", "price": "50 TL", "category": "İçecekler" },
+      { "name": "Coca-Cola (1 L.)", "price": "150 TL", "category": "İçecekler" },
+      { "name": "Fanta (1 L.)", "price": "150 TL", "category": "İçecekler" },
+      { "name": "Şalgam Suyu (1 L.)", "price": "150 TL", "category": "İçecekler" },
+      { "name": "Mırlan Tava (1 kg.)", "price": "1.400 TL", "category": "Kiloluk Balıklar (1 kg.)" }
+    ]
+  },
   "6933": {
     "name": "DÜRÜM MOLASI BAYRAMPAŞA DÖNER",
     "sourceUrl": "https://www.migros.com.tr/yemek/durum-molasi-bayrampasa-ortamahalle-mah-st-25b27",
