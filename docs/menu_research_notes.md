@@ -1299,3 +1299,6 @@ Exact kayıt `Muratpaşa, Sofular Cd. No:108, 34040 Bayrampaşa/İstanbul`, `+90
 
 ## Lakaas Coffee ID 7069 strict HOLD
 Exact kayıt `Yıldırım, Rize Sk. 1/A, 34045 Bayrampaşa/İstanbul`, `+90 506 957 53 84`; Snapchat, Wheree, RestaurantGuru, Mekanlar ve Instagram marka hesabı aynı işletme kimliğini destekliyor. RestaurantGuru menü sayfası menünün en son **4 yıl önce** güncellendiğini ve fiyatların değişmiş olabileceğini açıkça belirtiyor; Mekanlar sayfasında item-level fiyat listesi yok. Son bir yıl şartını karşılayan complete güncel public menü bulunamadı. Ürün/fiyat uydurulmadı; strict HOLD.
+
+## Gedi Coffee ID 7068 strict HOLD
+Exact kayıt `Cumhuriyet, Çoruh Sk. No:25, 34520 Beylikdüzü/İstanbul`, `+90 535 616 89 55`; Snapchat, Instagram `@gedicoffe`, Facebook ve RestaurantGuru aynı Beylikdüzü/Beykent işletmesini destekliyor. 2026 Instagram içeriklerinde exact telefon/konum ve ürün tanıtımları var, ancak complete item-level fiyat tablosu yok. Son bir yıl şartını karşılayan exact şubeye ait tam fiyatlı public menü bulunamadı. Ürün/fiyat uydurulmadı; strict HOLD.
