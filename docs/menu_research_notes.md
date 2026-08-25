@@ -1434,3 +1434,6 @@ Exact Hentzer kaydı `Sinanpaşa, Köşeli Sk. No:13, 34353 Beşiktaş/İstanbul
 
 ## TABLACI BROTHERS KEBAP RESTORAN ID 7023 strict HOLD
 Exact kayıt `Cihangir, Kazancı Yokuşu Sok. 14/A, 34000 Beyoğlu/İstanbul`, `+90 501 004 29 01`; resmi Tablacı Brothers sitesi, Instagram ve Yandex kaydıyla adres/telefon eşleşti. Resmi `menu.php` sayfasında ürün adları görünse de fiyat alanlarının önemli bölümü eksik/boş (ör. tavuk şiş, İskender, patlıcan kebabı ve bazı içecekler); bu nedenle tam item-level fiyatlı güncel menü doğrulanamadı. Eksik fiyat aktarımı yapılmadı; **strict HOLD**.
+
+## BİGMAMAS PRE BEYLİKDÜZÜ ID 7022 strict HOLD
+Exact Hentzer kaydı `Büyükşehir Mahallesi, Anadolu Caddesi Park Teras AVM No:30/14, 34520 Beylikdüzü/İstanbul`, `+90 212 871 01 87`; Restaurant Guru ve `@bigmamasbeylikduzu` kaynaklarıyla telefon/lokasyon sinyali eşleşti. Ancak resmi Big Mamas Pre menü sayfası yalnızca marka tanıtımı veriyor, ürün/fiyat listesi sunmuyor; arama sonuçlarındaki diğer Yemeksepeti vendorları farklı şehir veya doğrulanmamış şubelere ait. Exact Beylikdüzü şubesi için 1 yıl şartında tam item-level fiyatlı menü doğrulanamadığından **override eklenmedi; strict HOLD**.
