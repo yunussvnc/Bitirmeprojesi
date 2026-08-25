@@ -1512,3 +1512,6 @@ Hentzer API kaydı `Katip Mustafa Çelebi, Tel Sk. 29/1, 34433 Beyoğlu/İstanbu
 
 ## CHICKEN GANG ID 6996 strict HOLD
 Hentzer API exact kaydı `Kavaklı, Mustafa Kemal Caddesi, İzzet Begoviç Sokak No:35/A, 34520 Beylikdüzü/İstanbul`, `+90 212 813 96 93`. Aynı adresi Yerel Esnaf, Restaurant Guru ve Tumisyeri doğruluyor; ancak resmi görünen Instagram profili ve bağımsız dizinler aynı şube için `0212 890 50 53` telefonunu yayımlıyor. Telefon paritesi %100 sağlanamadığı için, ayrıca Migros Yemek sayfasında fiyatlar tam DOM çıktısında görünmediğinden yalnızca arama önizlemesine dayanarak aktarım yapılmadı. Yemeksepeti `gnxt` canlı menüsü çok sayıda fiyatlı ürün gösterse de telefon uyuşmazlığı çözülmeden **override eklenmedi; strict HOLD**.
+
+## MEYHANEBARBAROS ID 6995 strict HOLD
+Hentzer API kaydı `Cihannüma, Salihefendi Sk. No:2, 34353 Beşiktaş/İstanbul`, `+90 532 790 34 92`; Tumisyeri aynı işletme adını ve telefonu doğruluyor. TripAdvisor’da aynı bina `By Muzaffer` adıyla No:2/A olarak geçiyor; isim varyantı nedeniyle işletme kimliği dikkatle ayrıştırıldı. Son bir yıl içinde Meyhanebarbaros’un herkese açık item-level fiyatlı menüsü bulunamadı; benzer adlı Barbaros/By Muzaffer menüleri aynı işletme olarak doğrulanamadığından kullanılmadı. **Override eklenmedi; strict HOLD**.
