@@ -83350,4 +83350,270 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     }
   ]
 },
+  "7044": {
+  "name": "BEŞİKTAŞ ANTAKYA SOFRASI",
+  "sourceUrl": "https://www.migros.com.tr/yemek/antakya-sofrasi-besiktas-turkali-mah-st-2c7a4",
+  "sourceName": "Migros Yemek exact Antakya Sofrası, Beşiktaş (Türkali Mah.) vendor; independent business records confirm Türkali, Muradiye Bostanı Sok. No:4, 34357 Beşiktaş and +90 541 631 96 81. Current menu snapshot yielded 43 unique priced food/beverage items across menus, soups, kebab/grill, dürüm, regional, salad, drinks and cooked kilogram products; promotional/original prices normalized to current sale price.",
+  "verifiedAt": "2026-08-25",
+  "items": [
+    {
+      "name": "Adana kebap, çöp şis, tavuk şiş, Urfa kebap, 6 adet tavuk kanat, 2 adet fındık lahmacun. Soslu lavaş, ezme, susuz cacik, bulgur pilavı, közlenmiş domates, közlenmiş biber ile",
+      "price": "2500.00 TL",
+      "desc": "",
+      "category": "Menüler"
+    },
+    {
+      "name": "3.000,00 TL",
+      "price": "2500.00 TL",
+      "desc": "",
+      "category": "Menüler"
+    },
+    {
+      "name": "Adana Dürüm + Mercimek Çorbası (Roka, limon, turşu, tırnaklı pide)",
+      "price": "400.00 TL",
+      "desc": "",
+      "category": "Menüler"
+    },
+    {
+      "name": "Double Soslu Tavuk Kanat+ Bulgur Pilavı + Soğan Piyazı + Cacık + Ezme + Közlenmiş Domates + Közlenmiş Biber + Soslu Lavaş",
+      "price": "800.00 TL",
+      "desc": "",
+      "category": "Menüler"
+    },
+    {
+      "name": "950,00 TL",
+      "price": "800.00 TL",
+      "desc": "",
+      "category": "Menüler"
+    },
+    {
+      "name": "Özel Soslu Baget Kanat (1 Kg.)",
+      "price": "800.00 TL",
+      "desc": "",
+      "category": "Menüler"
+    },
+    {
+      "name": "Tırnak pide, limon ile",
+      "price": "120.00 TL",
+      "desc": "",
+      "category": "Çorbalar"
+    },
+    {
+      "name": "Roka, limon, turşu, sarımsak, sirke, acı sos, sıcak tırnak pide ile",
+      "price": "420.00 TL",
+      "desc": "",
+      "category": "Çorbalar"
+    },
+    {
+      "name": "450,00 TL",
+      "price": "420.00 TL",
+      "desc": "",
+      "category": "Çorbalar"
+    },
+    {
+      "name": "Roka, limon, turşu, acı sos, sirke, sarımsak, sıcak tırnak pide ile",
+      "price": "400.00 TL",
+      "desc": "",
+      "category": "Çorbalar"
+    },
+    {
+      "name": "Acı, sarımsaklı",
+      "price": "150.00 TL",
+      "desc": "",
+      "category": "Çorbalar"
+    },
+    {
+      "name": "Roka, limon, turp, acı sos, sarımsak sirke, tırnak pide ile",
+      "price": "400.00 TL",
+      "desc": "",
+      "category": "Çorbalar"
+    },
+    {
+      "name": "Roka, limon, sirke, sarımsak, acı biber, tırnak pide ile",
+      "price": "290.00 TL",
+      "desc": "",
+      "category": "Çorbalar"
+    },
+    {
+      "name": "Kelle paça, ayak paça, tuzlama, karışık işkembe, sarımsak, acı sos, sirke. Roka, limon, turşu, tırnak pide ile",
+      "price": "400.00 TL",
+      "desc": "",
+      "category": "Çorbalar"
+    },
+    {
+      "name": "Özel soslu lavaş, bulgur pilavı, soğan piyazi, közlenmiş biber, közlenmiş domates ile",
+      "price": "400.00 TL",
+      "desc": "",
+      "category": "Kebaplar & Izgaralar"
+    },
+    {
+      "name": "450,00 TL",
+      "price": "400.00 TL",
+      "desc": "",
+      "category": "Kebaplar & Izgaralar"
+    },
+    {
+      "name": "Özel soslu lavaş, bulgur pilavı, soğan piyaz, közlenmiş biber, közlenmiş domates ile",
+      "price": "420.00 TL",
+      "desc": "",
+      "category": "Kebaplar & Izgaralar"
+    },
+    {
+      "name": "500,00 TL",
+      "price": "420.00 TL",
+      "desc": "",
+      "category": "Kebaplar & Izgaralar"
+    },
+    {
+      "name": "Soslu lavaş, bulgur pilavı, közlenmiş biber, közlenmiş domates, sogan piyazi ile",
+      "price": "400.00 TL",
+      "desc": "",
+      "category": "Kebaplar & Izgaralar"
+    },
+    {
+      "name": "Tavuk pirzola etinden hazırlanmaktadır. Lavaş, bulgur pilavı, közlenmiş biber, közlenmiş domates, soğan piyazı ile",
+      "price": "400.00 TL",
+      "desc": "",
+      "category": "Kebaplar & Izgaralar"
+    },
+    {
+      "name": "Lavaşa sarılı, yoğurtlu, soslu, tereyağı, kaşar peyniri. Közlenmiş biber, közlenmiş domates, ezme ile",
+      "price": "500.00 TL",
+      "desc": "",
+      "category": "Kebaplar & Izgaralar"
+    },
+    {
+      "name": "550,00 TL",
+      "price": "500.00 TL",
+      "desc": "",
+      "category": "Kebaplar & Izgaralar"
+    },
+    {
+      "name": "Soslu lavaş, bulgur pilavı, ezme, soğan piyazı, közlenmiş biber ile",
+      "price": "400.00 TL",
+      "desc": "",
+      "category": "Kebaplar & Izgaralar"
+    },
+    {
+      "name": "Soğan, maydanoz, domates",
+      "price": "300.00 TL",
+      "desc": "",
+      "category": "Dürümler"
+    },
+    {
+      "name": "350,00 TL",
+      "price": "300.00 TL",
+      "desc": "",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Soğan, maydanoz, domates, soslu lavaş",
+      "price": "300.00 TL",
+      "desc": "",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Tek kişilik",
+      "price": "250.00 TL",
+      "desc": "",
+      "category": "Dürümler"
+    },
+    {
+      "name": "300,00 TL",
+      "price": "250.00 TL",
+      "desc": "",
+      "category": "Dürümler"
+    },
+    {
+      "name": "Tek kişilik",
+      "price": "150.00 TL",
+      "desc": "",
+      "category": "Yöresel Lezzetler"
+    },
+    {
+      "name": "İsteğe göre soğan",
+      "price": "140.00 TL",
+      "desc": "",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Domates, maydanoz, soğan, sumak",
+      "price": "140.00 TL",
+      "desc": "",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Mevsim yeşillikleri",
+      "price": "140.00 TL",
+      "desc": "",
+      "category": "Salatalar"
+    },
+    {
+      "name": "Kutu içecek",
+      "price": "95.00 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "100,00 TL",
+      "price": "95.00 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "İçecek",
+      "price": "95.00 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Kutu",
+      "price": "95.00 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Büyük",
+      "price": "50.00 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Cam şişe",
+      "price": "50.00 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Pet şişe",
+      "price": "50.00 TL",
+      "desc": "",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Bulgur pilavı, közlenmiş biber, domates, soslu lavaş, soğan piyazı ile",
+      "price": "1250.00 TL",
+      "desc": "",
+      "category": "Kiloluk Ürünler (Pişirilmiş)"
+    },
+    {
+      "name": "1.350,00 TL",
+      "price": "1250.00 TL",
+      "desc": "",
+      "category": "Kiloluk Ürünler (Pişirilmiş)"
+    },
+    {
+      "name": "Günün pilavı, acılı ezme, közlenmiş domates, közlenmiş biber, soğan piyazı, soslu lavaş ile",
+      "price": "950.00 TL",
+      "desc": "",
+      "category": "Kiloluk Ürünler (Pişirilmiş)"
+    },
+    {
+      "name": "Bulgur pilavı, acılı ezme, közlenmiş domates, biber, lavaş ile",
+      "price": "950.00 TL",
+      "desc": "",
+      "category": "Kiloluk Ürünler (Pişirilmiş)"
+    }
+  ]
+},
 };

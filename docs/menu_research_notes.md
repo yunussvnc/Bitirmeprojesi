@@ -1371,3 +1371,6 @@ Exact kayıt `Ekinoks AVM, Büyükçekmece Mah., Cumhuriyet Cd. No:1 E1 Blok No:
 
 ## Karaköy Kahvesi Çubuklu ID 7045 kabul
 Exact kayıt `Çubuklu, Şehit Ersin Güner Cad No:6, 34805 Beykoz/İstanbul`; resmî site, Instagram, Restoranım ve Yandex kaynaklarıyla doğrulandı. Telefon Hentzer’de boş olsa da resmî Instagram profil arama sonucu `0541 634 34 34` bilgisini exact Çubuklu şubesiyle birlikte yayımlıyor. Resmî `karakoykahvesicubuklu.com` menüsü 2026-08-25 tarihinde kontrol edildi; kampanya, kahvaltı, tost, aperatif, ana yemek, pizza, makarna, salata, hamburger, wrap, çay, soğuk içecek, frozen, milkshake, kahve, smoothie, pasta ve nargile kategorilerinden **159 benzersiz ürün/fiyat** aktarıldı. Popüler carousel tekrarları dışlandı.
+
+## BEŞİKTAŞ ANTAKYA SOFRASI ID 7044 kabul
+Exact kayıt `Türkali, Muradiye Bostanı Sok. No:4, 34357 Beşiktaş/İstanbul`, `+90 541 631 96 81`; Restoranım, Türkiye Kayıtları, Wanderboat ve Hentzer kaydıyla doğrulandı. Migros Yemek exact `Antakya Sofrası, Beşiktaş (Türkali Mah.)` vendorının 2026-08-25 canlı menüsü kullanıldı; kampanya/orijinal fiyatlar arasından güncel satış fiyatı alınarak menüler, çorbalar, kebap/ızgara, dürüm, yöresel, salata, içecek ve kiloluk pişmiş ürün kategorilerinden **43 benzersiz ürün/fiyat** aktarıldı.
