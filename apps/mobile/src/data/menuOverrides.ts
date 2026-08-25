@@ -77578,4 +77578,458 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
   ]
 },
 
+  "7084": {
+  "name": "1924 İstanbul",
+  "sourceUrl": "https://www.thefork.com/restaurant/1924-istanbul-r867522/menu",
+  "sourceName": "TheFork menüsü (last update 2026-08-18); exact adres/telefon Restoranım ve resmî 1924istanbul.com kaynaklarıyla doğrulandı: Asmalı Mescit, Olivya Geçidi Sok. 7-A, 34435 Beyoğlu / +90 530 896 03 60. Menüde 13 kategori ve 89 item-level TRY fiyatı aktarıldı.",
+  "verifiedAt": "2026-08-25",
+  "items": [
+    {
+      "name": "Beef piroshky",
+      "price": "375",
+      "category": "Mezze / zakuski"
+    },
+    {
+      "name": "Tvorog cheese piroshky",
+      "price": "300",
+      "category": "Mezze / zakuski"
+    },
+    {
+      "name": "Tarama",
+      "price": "600",
+      "category": "Mezze / zakuski"
+    },
+    {
+      "name": "Russian salad",
+      "price": "550",
+      "category": "Mezze / zakuski"
+    },
+    {
+      "name": "Grilled aubergine rolls",
+      "price": "500",
+      "category": "Mezze / zakuski"
+    },
+    {
+      "name": "Circassian chicken",
+      "price": "500",
+      "category": "Mezze / zakuski"
+    },
+    {
+      "name": "Beetroot pkhali",
+      "price": "400",
+      "category": "Mezze / zakuski"
+    },
+    {
+      "name": "Armenian chickpea topik",
+      "price": "400",
+      "category": "Mezze / zakuski"
+    },
+    {
+      "name": "Smoked salmon crêpe rolls",
+      "price": "750",
+      "category": "Mezze / zakuski"
+    },
+    {
+      "name": "Prawn & avocado cocktail marie rose",
+      "price": "780",
+      "category": "Mezze / zakuski"
+    },
+    {
+      "name": "Shuba layered chopped pickled herring",
+      "price": "700",
+      "category": "Mezze / zakuski"
+    },
+    {
+      "name": "Beef tartar",
+      "price": "990",
+      "category": "Mezze / zakuski"
+    },
+    {
+      "name": "Trio mushroom casserole gratin",
+      "price": "450",
+      "category": "Mezze / zakuski"
+    },
+    {
+      "name": "House cured bosnian beef bresaola",
+      "price": "850",
+      "category": "Mezze / zakuski"
+    },
+    {
+      "name": "Smoked & cured fish platter",
+      "price": "2.5",
+      "category": "Mezze / zakuski"
+    },
+    {
+      "name": "Anatolian cheese platter",
+      "price": "1.5",
+      "category": "Mezze / zakuski"
+    },
+    {
+      "name": "Fillet of sea bass (250gr)",
+      "price": "1.9",
+      "category": "Main course"
+    },
+    {
+      "name": "Fillet of salmon champenoise (250gr)",
+      "price": "1.7",
+      "category": "Main course"
+    },
+    {
+      "name": "Veal schnitzel (150gr)",
+      "price": "1.8",
+      "category": "Main course"
+    },
+    {
+      "name": "Baby lamb's liver (140gr)",
+      "price": "1.5",
+      "category": "Main course"
+    },
+    {
+      "name": "Beef kafta kebab (200gr)",
+      "price": "1.7",
+      "category": "Main course"
+    },
+    {
+      "name": "Beef stroganoff (150gr)",
+      "price": "1.95",
+      "category": "Main course"
+    },
+    {
+      "name": "Pepper steak beef fillet (200gr)",
+      "price": "2.2",
+      "category": "Main course"
+    },
+    {
+      "name": "1924 duck à la orange (half)",
+      "price": "2.3",
+      "category": "Main course"
+    },
+    {
+      "name": "Quail tabaka",
+      "price": "1.4",
+      "category": "Main course"
+    },
+    {
+      "name": "Chicken kievsky (300gr)",
+      "price": "1.3",
+      "category": "Main course"
+    },
+    {
+      "name": "Lamb shank confit (200gr)",
+      "price": "2.4",
+      "category": "Main course"
+    },
+    {
+      "name": "Slow roasted beef cheek (450gr)",
+      "price": "2.4",
+      "category": "Main course"
+    },
+    {
+      "name": "Imperial beluga, sevruga, osetra 50 gr",
+      "price": "16",
+      "category": "Caviar"
+    },
+    {
+      "name": "Red keta caviar 30 gr",
+      "price": "2.5",
+      "category": "Caviar"
+    },
+    {
+      "name": "Khinkali \"georgian beef dumplings\"",
+      "price": "650",
+      "category": "Pelmeni"
+    },
+    {
+      "name": "Leek & porcini \"vareniki\"",
+      "price": "600",
+      "category": "Pelmeni"
+    },
+    {
+      "name": "Pelmeni beef dumplings",
+      "price": "700",
+      "category": "Pelmeni"
+    },
+    {
+      "name": "Beef borsch soup",
+      "price": "450",
+      "category": "Soup"
+    },
+    {
+      "name": "Crab bisque soup",
+      "price": "500",
+      "category": "Soup"
+    },
+    {
+      "name": "Crispy duck salad julienne",
+      "price": "750",
+      "category": "Salads"
+    },
+    {
+      "name": "Gratin goat cheese & beetroot salad",
+      "price": "800",
+      "category": "Salads"
+    },
+    {
+      "name": "Baby spinach salad",
+      "price": "850",
+      "category": "Salads"
+    },
+    {
+      "name": "Pepper steak beef fillet (200gr)",
+      "price": "2.5",
+      "category": "From the flambé trolley"
+    },
+    {
+      "name": "Beef stroganoff (150gr)",
+      "price": "2.2",
+      "category": "From the flambé trolley"
+    },
+    {
+      "name": "1924 house-made pickles",
+      "price": "250",
+      "category": "Side dishes"
+    },
+    {
+      "name": "Match stick potatoes",
+      "price": "250",
+      "category": "Side dishes"
+    },
+    {
+      "name": "Butter plain & salmon infused",
+      "price": "250",
+      "category": "Side dishes"
+    },
+    {
+      "name": "Polish potato salad",
+      "price": "250",
+      "category": "Side dishes"
+    },
+    {
+      "name": "Potato mash",
+      "price": "250",
+      "category": "Side dishes"
+    },
+    {
+      "name": "Seasonal sautéed vegetables",
+      "price": "250",
+      "category": "Side dishes"
+    },
+    {
+      "name": "Buckwheat with mushrooms",
+      "price": "250",
+      "category": "Side dishes"
+    },
+    {
+      "name": "1924 Chocolate fabergé",
+      "price": "650",
+      "category": "Sweets"
+    },
+    {
+      "name": "Medovic \"russian\" honey layered cake",
+      "price": "550",
+      "category": "Sweets"
+    },
+    {
+      "name": "Mille feuille kiev meringue",
+      "price": "600",
+      "category": "Sweets"
+    },
+    {
+      "name": "Chestnut cream profiterole",
+      "price": "600",
+      "category": "Sweets"
+    },
+    {
+      "name": "Pistachio 'baklava'",
+      "price": "750",
+      "category": "Sweets"
+    },
+    {
+      "name": "Pavlova \"flambé\"",
+      "price": "550",
+      "category": "Sweets"
+    },
+    {
+      "name": "Lemon sorbet",
+      "price": "750",
+      "category": "Sweets"
+    },
+    {
+      "name": "Ice cream",
+      "price": "500",
+      "category": "Sweets"
+    },
+    {
+      "name": "Espresso",
+      "price": "300",
+      "category": "Coffee"
+    },
+    {
+      "name": "Double espresso",
+      "price": "350",
+      "category": "Coffee"
+    },
+    {
+      "name": "Turkish coffee",
+      "price": "200",
+      "category": "Coffee"
+    },
+    {
+      "name": "Americano",
+      "price": "350",
+      "category": "Coffee"
+    },
+    {
+      "name": "Cappuccino",
+      "price": "400",
+      "category": "Coffee"
+    },
+    {
+      "name": "Latte",
+      "price": "400",
+      "category": "Coffee"
+    },
+    {
+      "name": "Macchiato",
+      "price": "340",
+      "category": "Coffee"
+    },
+    {
+      "name": "Almond coffee (de-caf)",
+      "price": "400",
+      "category": "Coffee"
+    },
+    {
+      "name": "Earl grey tea",
+      "price": "300",
+      "category": "Tea / chai"
+    },
+    {
+      "name": "Chamomile",
+      "price": "300",
+      "category": "Tea / chai"
+    },
+    {
+      "name": "Mint verbena",
+      "price": "300",
+      "category": "Tea / chai"
+    },
+    {
+      "name": "Turkish black tea",
+      "price": "200",
+      "category": "Tea / chai"
+    },
+    {
+      "name": "Rooibos chai",
+      "price": "300",
+      "category": "Tea / chai"
+    },
+    {
+      "name": "Sage lemon",
+      "price": "300",
+      "category": "Tea / chai"
+    },
+    {
+      "name": "Jasmine green tea",
+      "price": "300",
+      "category": "Tea / chai"
+    },
+    {
+      "name": "Linden",
+      "price": "300",
+      "category": "Tea / chai"
+    },
+    {
+      "name": "1924 lemon vodka",
+      "price": "650",
+      "category": "Vodka (house infusions)"
+    },
+    {
+      "name": "Cherry vodka",
+      "price": "650",
+      "category": "Vodka (house infusions)"
+    },
+    {
+      "name": "Cinnamon vodka",
+      "price": "650",
+      "category": "Vodka (house infusions)"
+    },
+    {
+      "name": "Saffron vodka",
+      "price": "650",
+      "category": "Vodka (house infusions)"
+    },
+    {
+      "name": "Beetroot vodka",
+      "price": "650",
+      "category": "Vodka (house infusions)"
+    },
+    {
+      "name": "Vanilla vodka",
+      "price": "650",
+      "category": "Vodka (house infusions)"
+    },
+    {
+      "name": "Salmon vodka",
+      "price": "650",
+      "category": "Vodka (house infusions)"
+    },
+    {
+      "name": "Horseradish vodka",
+      "price": "650",
+      "category": "Vodka (house infusions)"
+    },
+    {
+      "name": "The 1924",
+      "price": "1.1",
+      "category": "1924 Cocktails"
+    },
+    {
+      "name": "Blue butterfly",
+      "price": "1.05",
+      "category": "1924 Cocktails"
+    },
+    {
+      "name": "Ballet russe",
+      "price": "1.05",
+      "category": "1924 Cocktails"
+    },
+    {
+      "name": "Red square",
+      "price": "1.05",
+      "category": "1924 Cocktails"
+    },
+    {
+      "name": "Old town",
+      "price": "990",
+      "category": "1924 Cocktails"
+    },
+    {
+      "name": "A taste of history \"tarihin tadi\"",
+      "price": "1.05",
+      "category": "1924 Cocktails"
+    },
+    {
+      "name": "Oligarch's boulevardier",
+      "price": "1.05",
+      "category": "1924 Cocktails"
+    },
+    {
+      "name": "Rasputin",
+      "price": "1.05",
+      "category": "1924 Cocktails"
+    },
+    {
+      "name": "Rejans",
+      "price": "1.05",
+      "category": "1924 Cocktails"
+    },
+    {
+      "name": "Şerefe hemingway",
+      "price": "1.05",
+      "category": "1924 Cocktails"
+    }
+  ]
+},
+
 };

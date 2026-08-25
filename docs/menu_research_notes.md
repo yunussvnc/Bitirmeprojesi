@@ -1251,3 +1251,6 @@ Exact kayıt `Hüseyinağa, İstiklal Cd. Çiçek Pasajı No:172/4A, 34000 Beyo�
 
 ## Beer & More ID 7085 strict HOLD
 Exact kayıt `Anadolu Caddesi Park Teras AVM No:30, Büyükşehir, 34520 Beylikdüzü/İstanbul`, `+90 212 873 10 20`; Restoranım, Mekanlar, Menu-TR ve Instagram kaynakları aynı işletme kimliğini destekliyor. Ancak son bir yıl içinde erişilebilir complete ve item-level fiyatlı public menü bulunamadı; Instagram ağırlıklı olarak etkinlik/tanıtım içeriği sunuyor ve exact Yemeksepeti vendor menüsü bulunamadı. Ürün/fiyat uydurulmadı; strict HOLD.
+
+## 1924 İstanbul ID 7084 acceptance
+Exact kayıt `Asmalı Mescit, Olivya Geçidi Sok. 7-A, 34435 Beyoğlu/İstanbul`, `+90 530 896 03 60`; Restoranım ve resmî 1924istanbul.com kaynakları aynı işletme kimliğini doğruluyor. TheFork exact adresli menüsünde `Last update August 18, 2026` olarak 13 kategoride **89 item-level TRY fiyatı** yayımlanmış. Mezze/zakuski, ana yemek, havyar, pelmeni, çorba, salata, flambé arabası, garnitür, tatlı, kahve, çay, votka ve kokteyl kalemleri aktarıldı. `verifiedAt` canlı kontrol tarihi `2026-08-25`.
