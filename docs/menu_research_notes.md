@@ -1689,3 +1689,6 @@ Hentzer kaydı `Vişnezade, Çatalmektep Sk. 2A, 34400 Beşiktaş/İstanbul`, `+
 
 ## GÜNEY RESTAURANT ID 6936 — STRICT HOLD
 Hentzer kaydı `Şahkulu, Şahkapısı Sk. No:2 D:B, 34421 Beyoğlu/İstanbul` ve telefon alanı **boş**. Resmi Güney Restaurant sitesi/QR sayfası aynı bölgedeki `Şahkapısı Sk. No:2` konumunu destekliyor ancak dört farklı telefon yayımlıyor (`+90 212 249 0393`, `+90 212 251 8885`, `+90 212 293 5759`, `+90 538 097 5536`); Trip.com da yalnız ilk telefonu ve D:B adresini gösteriyor. Hentzer kaydıyla exact canonical telefon eşleşmesi kurulamadı. Ayrıca resmi QR sayfasının tarih göstergesi 01.10.2024 olup bir yıllık güncellik sınırını aşmış durumda. Bu nedenle **strict HOLD**; override eklenmedi.
+
+## F&B CULTURE ID 6935 — STRICT HOLD
+Hentzer kaydı `Bereketzade, Camekan Sk. No:6, 34420 Beyoğlu/İstanbul`, `+90 532 275 69 94`; resmi fbculture.com, Yelp, Waze ve resmi Instagram aynı exact Galata şubesi ve telefonu doğruluyor. Wheree menü sayfası yalnız fotoğraf/ürün anlatıları sunuyor ve fiyatların değişebileceğini belirtiyor; okunabilir, tarihli ürün-fiyat tablosu vermiyor. Tripadvisor/Yelp menü görsellerinde de son bir yıl güncelliği ve tüm fiyatlar güvenilir biçimde doğrulanamadı. Exact eşleşme mevcut olsa da güncel fiyat şartı sağlanamadığından **strict HOLD**; override eklenmedi.
