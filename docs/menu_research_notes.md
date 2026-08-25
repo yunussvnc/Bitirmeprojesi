@@ -1551,3 +1551,6 @@ Hentzer API kaydı `Barış, E-5 Yanyolu No:28, 34520 Beylikdüzü/İstanbul`, `
 
 ## YK ZİYAFET HATAY DÖNER ID 6983 kabul
 Hentzer API kaydı `Doğan Park Evleri, Adnan Kahveci, Yavuz Sultan Selim Blv. 41 B, 34528 Beylikdüzü/İstanbul`, `+90 545 824 99 18`; Yandex Maps aynı exact adres ve telefonu doğruluyor. Yemeksepeti `rgc4` canlı vendor menüsü 2026-08-26 tarihinde erişildi ve Öğrenci, Mini, Klasik, Büyük, Mega Tavuk Döner Dürüm ile 8 içecek olmak üzere **13 benzersiz gıda/içecek kalemi** aktarıldı. Popüler carousel tekrarları ve Poşet kalemi dışlandı. Fiyatlar canlı Yemeksepeti menüsünden alındı; ürün veya fiyat uydurulmadı. **Override kabul edildi.**
+
+## CAFE PENABER ID 6982 strict HOLD
+Hentzer API kaydı `Şehit Muhtar Mahallesi, Nane Sokak No:19, 34421 Beyoğlu/İstanbul`, `+90 546 677 67 29`; Cybo ve diğer yerel işletme kayıtları aynı adres/telefonu doğruluyor. Restoranim, Yandex ve Restaurant Guru işletmeyi doğrulasa da son bir yıl içinde kamuya açık item-level fiyatlı menü bulunamadı; kaynaklar yalnızca kafe türü ve genel içecek açıklamaları veriyor. **Override eklenmedi; strict HOLD**.
