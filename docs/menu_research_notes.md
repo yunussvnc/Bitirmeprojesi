@@ -1743,3 +1743,6 @@ Hentzer kaydı `Gazeteciler Sitesi, Esentepe, Matbuat Sk. No:12 D:12, 34394 Şi�
 
 ## CRYING BOY ID 6918 — STRICT HOLD
 Hentzer kaydı `Çubuklu, 34805 Beykoz/İstanbul`, telefon alanı boş. Restoranim aynı konumu ve açıkça `Telefon yok` bilgisini gösteriyor; Yandex kaydı Orhan Veli Kanık Caddesi 19A konumunu ve telefon belirtilmediğini gösteriyor. Ayrıca Yandex kaydı kalıcı kapalı olarak indekslenmiş ve son bir yıl içinde herkese açık, ürün bazlı güncel fiyatlı menü bulunamadı. Zorunlu exact telefon eşleşmesi ve güncel fiyat şartları sağlanamadığından **strict HOLD**; override eklenmedi.
+
+## BELLA BURGER BEŞİKTAŞ ID 6917 kabulü
+Hentzer kaydı `Cihannüma, Ressam Hamdi Bey Sk. No:2-A, 34353 Beşiktaş/İstanbul`, `+90 212 236 03 18`; Cybo exact adres/telefon kaydı ve resmi Bella Burger Instagramı telefon/adres paylaşımı şubeyi doğruluyor. Yemeksepeti `l03k` canlı vendorundan Burgerler, Tavuk Burgerler, Tenders, Wings, Yan Ürünler, Tatlılar, İçecekler ve Soslar kategorilerinde 61 benzersiz güncel fiyat kalemi aktarıldı. İndirimli güncel satış fiyatı kullanıldı; poşet kalemi ve popüler carousel tekrarları dışlandı. **Override kabul edildi.**
