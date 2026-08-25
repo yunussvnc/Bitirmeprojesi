@@ -1626,3 +1626,6 @@ Hentzer kaydı `Altıntepsi, Arda Turan Cd. 30/A, 34035 Bayrampaşa/İstanbul`, 
 
 ## CHOCO NOI WAFFLE & PATISSERIE ID 6957 kabul
 Hentzer kaydı `Yıldırım, Şehir Parkı Caddesi No:19, 34045 Bayrampaşa/İstanbul`, `+90 532 335 45 43`; Choco Noi resmi sosyal paylaşımları aynı exact adres/telefonu doğruluyor. Yemeksepeti `l837` canlı vendor menüsü 2026-08-26 tarihinde 41 benzersiz kalem gösterdi: pizza, tatlı, kruvasan, krep, waffle ve çikolata kategorileri. Kampanya/gel-al fiyatları ayrıca ürün olarak aktarılmadı. **Override kabul edildi.**
+
+## GAZİ'NİN YERİ ID 6956 — STRICT HOLD
+Hentzer kaydı `Gümüşsuyu, 34820 Beykoz/İstanbul`, `+90 539 685 47 19`; Kaçıyor işletme sayfası ve Yandex işletme kaydı aynı telefon ile exact işletme kimliğini destekliyor. Resmi `gazininyeri.com` Restaurant sayfası menüden söz ediyor ancak erişilebilir ürün fiyatı yayınlamıyor; Kaçıyor yalnızca kalori/örnek ürün adları veriyor, fiyat vermiyor. Son bir yıl içinde herkese açık, fiyat içeren doğrulanabilir menü bulunamadığı için **strict HOLD**; override eklenmedi.
