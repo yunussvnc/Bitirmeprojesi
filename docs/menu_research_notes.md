@@ -1602,3 +1602,6 @@ Hentzer kaydı `Marmara Mah., West Istanbul Marina, Yakuplu, Ulusum Cd. No:34 D:
 
 ## HACIMİRZAOĞLU BAKLAVA - BEYLİKDÜZÜ ID 6965 kabul
 Hentzer kaydı `Kavaklı, İbrahim Müteferrika Cd. 26/c, 34520 Beylikdüzü/İstanbul`, `+90 530 312 37 47`; Hacımirzaoğlu resmi iletişim sayfası aynı exact adres ve telefonu doğruluyor. Resmi `baklavalar` kataloğu 2026-08-26 tarihinde 9 item-level ürün/fiyat gösterdi: Fıstıklı Ankara Dürüm, Kıvrım, Özel, Şöbiyet, Soğuk, Midye, Kuru, Havuç Dilimi ve klasik Fıstıklı Baklava. **Override kabul edildi.**
+
+## AGAFYA MEYHANESİ ID 6964 strict HOLD
+Hentzer kaydı `Sinanpaşa Mahallesi Alabeyi Sk. No:9 Çarşı, Sinanpaşa, 34353 Beşiktaş/İstanbul`, `+90 532 301 14 91`; Yandex, Instagram ve Meyhankoli exact işletme/telefonu destekliyor. Pardon dijital menüsünde bazı kategori fiyatları görünse de ürün adları eksik; Main Dishes/Appetizer/Desserts sayfaları item-level metin döndürmüyor. Fiyatları ürün adlarıyla güvenilir biçimde eşleştirmek mümkün olmadığından ve şarap/rakı kapsam dışı olduğundan **override eklenmedi; strict HOLD**.
