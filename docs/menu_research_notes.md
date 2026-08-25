@@ -1521,3 +1521,6 @@ Hentzer API kaydı `Göksu, Dz. Besimpaşa Mahallesi Kurabiye Sokak No:14/1, 348
 
 ## BEŞİKTAŞ OLTA BALIK ID 6993 strict HOLD
 Hentzer API exact kaydı `Sinanpaşa, Köyiçi Mektep Sk. No:14/A, 34890 Beşiktaş/İstanbul`, `+90 212 259 39 09`; Meyhankoli, Restaurant Guru ve diğer işletme kayıtları aynı adres/telefonu doğruluyor. Resmi `https://oltabalik.co/` menüsü işletme ürünlerini ve bazı fiyat aralıklarını (ör. Karides Şiş 180–200 TL, Kalamar Dolma 100–150 TL, Lagos 2.000–2.200 TL, Ahtapot Kol 200–800 TL) yayımlıyor; ancak tam item-level fiyatların çoğu görünmüyor veya “fiyat belirtilmemiş” durumda. Quandoo’daki 5–30 TL fiyatlar açıkça eski. Son bir yıl şartını tam ürün/fiyat listesiyle doğrulamak mümkün olmadığından **override eklenmedi; strict HOLD**.
+
+## BEYZADE KÜNEFE KAHVALTI & BEYLİKDÜZÜ ID 6992 strict HOLD
+Hentzer API kaydı `Cumhuriyet Mahallesi, Şehitler Caddesi No:11, 34515 Esenyurt/İstanbul`, `+90 533 616 87 02`. Beyzade’nin resmi şube sayfası adresi `No:11/1` olarak doğruluyor ancak `0212 261 67 67` ve `0212 577 27 27` telefonlarını veriyor; bu nedenle zorunlu exact telefon paritesi sağlanamadı. Resmi marka sitesinde güncel Antep kahvaltısı ve baklava fiyatları bulunmasına rağmen şube telefonu uyuşmazlığı çözülmeden ürün aktarımı yapılmadı. **Override eklenmedi; strict HOLD**.
