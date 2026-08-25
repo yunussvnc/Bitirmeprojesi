@@ -1608,3 +1608,6 @@ Hentzer kaydı `Sinanpaşa Mahallesi Alabeyi Sk. No:9 Çarşı, Sinanpaşa, 3435
 
 ## KARDEŞLER KEBAP & CAFE CİHANGİR ID 6963 kabul
 Hentzer kaydı `Cihangir, Firüzağa Mah, Firuzağa Cami Sk, Cihangir, Defterdar Yokuşu Sok. No:1/A, 34082 Beyoğlu/İstanbul`, `+90 212 251 36 96`; resmi Kardeşler Cihangir menü sitesinin footer adres/telefonu aynı şubeyle eşleşiyor. Resmi canlı menü 2026-08-26 tarihinde 9 item-level gıda fiyatı gösterdi: serpme kahvaltı, paçanga böreği, omlet, menemen, sahanda yumurta, sucuklu yumurta, kavurmalı yumurta ve iki çorba. Fiyatı görünmeyen diğer kategoriler ve Popüler carousel tekrarları aktarılmadı. **Override kabul edildi.**
+
+## MANHATTAN BEŞİKTAŞ ID 6962 strict HOLD
+Hentzer kaydı `Sinanpaşa, Şht. Dursun Bakan Sk. No:22, 34353 Beşiktaş/İstanbul`, `+90 212 227 43 35`; Wanderlog, Metropol360 ve yerel rehberler exact adresi destekliyor, ancak telefon eşleşmesi güvenilir kamu kaynağında doğrulanamadı. Arama sonuçlarındaki Manhattan Coffee menüleri Kadıköy/başka şubelere veya alakasız Cafe Manhattan’a ait; Beşiktaş exact şubesi için son bir yıl içinde item-level fiyatlı güncel menü bulunamadı. **Override eklenmedi; strict HOLD**.
