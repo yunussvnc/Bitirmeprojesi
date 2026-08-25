@@ -1572,3 +1572,6 @@ Hentzer kaydı `Merkez, Dönence Sk. No:10, 34820 Beykoz/İstanbul`, `+90 216 32
 
 ## ANTULA GURME ID 6976 kabul
 Hentzer kaydı `Kavacık, Orhan Veli Kanık Cd. No:38, 34810 Beykoz/İstanbul`, `+90 216 320 30 02`; Antula resmi sitesi, resmi Instagram ve Dineluup/Yandex yerel kayıtları aynı exact şube/telefonu doğruluyor. Resmi QR menü `https://qr.antulagurme.com/` kategori sayfaları 2026-08-26 tarihinde tarandı. Atıştırmalık, Salatalar, Makarna, Pizza (Büyük Boy), Pizza (Orta Boy), Burger, Hot Dog, Tatlılar, Soğuk İçecekler ve Sıcak İçecekler kategorilerinden **97 benzersiz gıda/içecek kalemi** ve item-level fiyatlar aktarıldı. Poşet/servis kalemi yoktu; ürün veya fiyat uydurulmadı. **Override kabul edildi.**
+
+## ALTINTEPSİ PİDE LAHMACUN DÖNER SALONU ID 6975 kabul
+Hentzer kaydı `Altıntepsi, Kutlu Sokağı No:22, 34035 Bayrampaşa/İstanbul`, `+90 212 674 78 76`; Yandex, Kacıyor, Instagram ve diğer yerel işletme kayıtları aynı exact işletme/telefonu destekliyor. Yemeksepeti `nbac` canlı vendor menüsü 2026-08-26 tarihinde erişildi. Ekonomik Menüler, Lahmacunlar, Pideler, Tavuk Dönerler, Dürümler ve İçecekler kategorilerinden **41 benzersiz gıda/içecek kalemi** aktarıldı. Popüler carousel tekrarları ve Poşet kalemi dışlandı. **Override kabul edildi.**
