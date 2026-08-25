@@ -1713,3 +1713,6 @@ Hentzer kaydı `Kavacık, Yayabeyi Sk. No:19, 34810 Beykoz/İstanbul`, `+90 216 
 
 ## 10 BURGER BEYLİKDÜZÜ ID 6928 kabulü
 Hentzer kaydı `Cumhuriyet Mahallesi, Atatürk Bulvarı, Alya, Cumhuriyet, Dolunay Sitesi No:27/1D A Blok İç Kapı No:58, 34519 Beylikdüzü/İstanbul`, `+90 553 955 31 01`; resmi Instagram paylaşımları aynı şube adresini ve telefonu doğruluyor. Migros Yemek Beylikdüzü Cumhuriyet canlı vendorunda tarayıcı DOM’u üzerinden güncel fiyatı görülen 18 benzersiz burger, avantajlı menü, yan ürün ve ikili menü kalemi aktarıldı. Popüler carousel tekrarları, fiyatı DOM’da doğrudan doğrulanamayan ürünler, kampanyalar ve ekstra soslar dahil edilmedi. **Override kabul edildi.**
+
+## NOOKIE NOODLE BEYLİKDÜZÜ ID 6927 kabulü
+Hentzer kaydı `Adnan Kahveci Mah. Osmanlı Caddesi, Beyaz Konak, Taner Sk. D:4 B Blok No:4 Dükkan:21, 34528 Beylikdüzü/İstanbul`, `+90 506 141 50 87`; Yandex Maps aynı Taner Sokak şubesini ve telefonu, Facebook işletme kaydı aynı adresi doğruluyor. Resmi menü ve Yemeksepeti `n8fx` canlı vendorundan Kore Usulü Yemekler, Tavuklu Noodle, Tavuklu Fried Rice, Noodle Menüleri, İçecekler ve Tavuklu Pilavlar kategorilerinde 31 benzersiz güncel ürün/fiyat kalemi aktarıldı. Popüler carousel tekrarları ve poşet kalemi dahil edilmedi. **Override kabul edildi.**

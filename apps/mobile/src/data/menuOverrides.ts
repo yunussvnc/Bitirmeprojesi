@@ -4,6 +4,45 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6927": {
+    "name": "NOOKIE NOODLE BEYLİKDÜZÜ",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/n8fx/nookie-noodle",
+    "sourceName": "Yemeksepeti n8fx canlı vendor; Yandex Maps ve Facebook exact `Beyaz Konak, Adnan Kahveci Mah. Osmanlı Caddesi, Taner Sk. D:4 B Blok No:4 Dükkan:21, 34528 Beylikdüzü` / `+90 506 141 50 87` şube eşleşmesini doğruluyor",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Kore Usulü Tatlı & Ekşi & Acı Tavuklu Lo Mein Noodle (Orta Acı)", "price": "498 TL", "category": "Kore Üsulü yemekler" },
+      { "name": "Alev Gibi Acı Korean Sweet Chili Chicken Lo Mein Noodles", "price": "498 TL", "category": "Kore Üsulü yemekler" },
+      { "name": "ACI Buldak Soslu Tavuk Buldak Spicy Korean Noodle", "price": "588 TL", "category": "Kore Üsulü yemekler" },
+      { "name": "Tavuklu Mongolian Noodle", "price": "499,80 TL", "category": "Tavuklu Noodle" },
+      { "name": "Kung Pao Chicken Lo mein Noodle (Orta Acılı)", "price": "498 TL", "category": "Tavuklu Noodle" },
+      { "name": "Honey Garlic Chicken Noodle", "price": "498 TL", "category": "Tavuklu Noodle" },
+      { "name": "Susamlı Tavuk Noodle", "price": "498 TL", "category": "Tavuklu Noodle" },
+      { "name": "Portakallı Tavuk Noodle", "price": "498 TL", "category": "Tavuklu Noodle" },
+      { "name": "Hot Orange Chicken Lo Mein Noodle - Acı Portakal Soslu Tavuk Lo Mein Noodle", "price": "498 TL", "category": "Tavuklu Noodle" },
+      { "name": "Sweet Chilli Chicken Lo Mein Noodle (Orta Acı)", "price": "498 TL", "category": "Tavuklu Noodle" },
+      { "name": "General Tso Soslu Tavuk Lo Mein Noodle", "price": "498 TL", "category": "Tavuklu Noodle" },
+      { "name": "Tatlı Ekşi Tavuk Noodle", "price": "498 TL", "category": "Tavuklu Noodle" },
+      { "name": "Teriyaki Tavuk Noodle", "price": "498 TL", "category": "Tavuklu Noodle" },
+      { "name": "Susamlı Soslu Tavuk & Kızarmış Pilav", "price": "498 TL", "category": "Tavuklu Fried Rice" },
+      { "name": "Portakal Soslu Tavuk & Kızarmış Pilav", "price": "498 TL", "category": "Tavuklu Fried Rice" },
+      { "name": "Hot Orange Chicken Fried Rice - Acı Portakal Soslu Tavuk Sebzeli Pilav", "price": "498 TL", "category": "Tavuklu Fried Rice" },
+      { "name": "Sweet Chilli Chicken Kavrulmus Pilav (Orta Acı)", "price": "498 TL", "category": "Tavuklu Fried Rice" },
+      { "name": "Honey Garlic Chicken Fried Rice (Hafif Acı)", "price": "498 TL", "category": "Tavuklu Fried Rice" },
+      { "name": "Tatlı Ekşi Tavuk Kızarmış Pilav", "price": "498 TL", "category": "Tavuklu Fried Rice" },
+      { "name": "Teriyaki Tavuk Kızarmış Pilav", "price": "498 TL", "category": "Tavuklu Fried Rice" },
+      { "name": "General Tso Soslu Tavuk Kızarmış Pilav", "price": "498 TL", "category": "Tavuklu Fried Rice" },
+      { "name": "Sebzeli Lo Mein Noodle", "price": "278 TL", "category": "Noodle Menüleri" },
+      { "name": "Buldak Acılı Kore Noodle", "price": "358 TL", "category": "Noodle Menüleri" },
+      { "name": "Pepsi 1 Lt", "price": "118 TL", "category": "İçecekler" },
+      { "name": "Su (50 cl.)", "price": "20 TL", "category": "İçecekler" },
+      { "name": "Saseme Tavuk Pilav", "price": "498 TL", "category": "Tavuklu Pilavlar" },
+      { "name": "Tatlı Ekşi Tavuk Pilav", "price": "498 TL", "category": "Tavuklu Pilavlar" },
+      { "name": "Portakal Soslu Tavuk Pilav", "price": "498 TL", "category": "Tavuklu Pilavlar" },
+      { "name": "Teriyaki Tavuk Sade Pilav", "price": "498 TL", "category": "Tavuklu Pilavlar" },
+      { "name": "Sweet Chilli Chicken Sade Pilav (Orta Acı)", "price": "498 TL", "category": "Tavuklu Pilavlar" },
+      { "name": "Honey Garlic Chicken Sade Pilav (Hafif Acı)", "price": "498 TL", "category": "Tavuklu Pilavlar" }
+    ]
+  },
   "6928": {
     "name": "10 BURGER BEYLİKDÜZÜ",
     "sourceUrl": "https://www.migros.com.tr/yemek/10-burger-beylikduzu-cumhuriyet-mah-st-2e52b",
