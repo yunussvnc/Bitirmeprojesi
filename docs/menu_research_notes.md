@@ -1569,3 +1569,6 @@ Hentzer API kaydı `No:1 Ortaköy, Mecidiye, Mecidiye Köprüsü Sk., 34347 Beş
 
 ## BEYKOZ KOKOREÇ ID 6977 strict HOLD
 Hentzer kaydı `Merkez, Dönence Sk. No:10, 34820 Beykoz/İstanbul`, `+90 216 323 44 77`; Tumisyeri, Yaka.la ve Kaçıyor aynı exact adres/telefonu doğruluyor. Arama sonuçlarındaki fiyatlı Yemeksepeti ve Migros kayıtları farklı işletme/şube adlarına ait (Beykoz Ankara ve Sokak Lezzetleri Kavacık); Beykoz Kokoreç’in kendisi için son bir yıl içinde kamuya açık item-level fiyatlı menü bulunamadı. **Override eklenmedi; strict HOLD**.
+
+## ANTULA GURME ID 6976 kabul
+Hentzer kaydı `Kavacık, Orhan Veli Kanık Cd. No:38, 34810 Beykoz/İstanbul`, `+90 216 320 30 02`; Antula resmi sitesi, resmi Instagram ve Dineluup/Yandex yerel kayıtları aynı exact şube/telefonu doğruluyor. Resmi QR menü `https://qr.antulagurme.com/` kategori sayfaları 2026-08-26 tarihinde tarandı. Atıştırmalık, Salatalar, Makarna, Pizza (Büyük Boy), Pizza (Orta Boy), Burger, Hot Dog, Tatlılar, Soğuk İçecekler ve Sıcak İçecekler kategorilerinden **97 benzersiz gıda/içecek kalemi** ve item-level fiyatlar aktarıldı. Poşet/servis kalemi yoktu; ürün veya fiyat uydurulmadı. **Override kabul edildi.**
