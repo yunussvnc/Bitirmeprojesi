@@ -1377,3 +1377,6 @@ Exact kayıt `Türkali, Muradiye Bostanı Sok. No:4, 34357 Beşiktaş/İstanbul`
 
 ## SEYRAN PASTANESİ ID 7043 kabul
 Exact kayıt `Orta, Numunebağı Cd. No:78, 34040 Bayrampaşa/İstanbul`, `+90 212 501 72 88`; resmi Seyran iletişim kaydı ve işletme dizini ile eşleştirildi. Yemeksepeti `Seyran Pasta & Restaurant` güncel menüsü ve aynı şubenin Migros Yemek kaydı çapraz kontrol edildi; 2026-08-25 tarihinde **227 benzersiz fiyatlı yiyecek/içecek ürünü** alındı. `Popüler` carousel tekrarları ve plastik poşet kalemi dışlandı; CAPTCHA aşılmadı.
+
+## MERCAN PETSHOP ID 7042 strict HOLD
+Hentzer kaydı `İsmet Paşa, Karaca Sk. No:4/A, 34040 Bayrampaşa/İstanbul`, `+90 537 451 98 08`; adres ve telefon, Mercan Petshop’ın Instagram hesabıyla exact eşleşiyor. Ancak işletme bir pet shop/akvaryum mağazasıdır; doğrulanabilir restoran yiyecek menüsü yoktur. İnternette görülen pet ürünleri bu uygulamanın restoran menüsü kapsamına alınamaz. Bu nedenle **menu override eklenmedi; strict HOLD**.
