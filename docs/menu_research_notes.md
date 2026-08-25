@@ -1212,3 +1212,6 @@ Hentzer exact kayıt `Hüseyinağa, İstiklal Cd. No:62, 34435 Beyoğlu/İstanbu
 
 ## Tarihi Van Kahvaltısı ID 7100 acceptance
 Hentzer exact kayıt `Rüzgarlıbahçe, Yasemin Sk. No:06, 34805 Beykoz/İstanbul`, `+90 216 322 18 26`; Restoranım exact sayfası ve resmi Instagram `@vankahvaltimangal` aynı adres/telefonu destekliyor. Yemeksepeti canlı vendor `ff8e` menüsünden kahvaltı, tost, sandviç, başlangıç, ana yemek, pizza, burger, wrap, quesadilla, makarna, yan ürün, salata, tatlı ve içecek kategorilerinde **89 ürün ve güncel indirimli fiyat** aktarıldı. Binlik/ondalık fiyatlar normalize edildi; poşet satırı dışlandı. `verifiedAt` canlı doğrulama tarihi `2026-08-25`.
+
+## Fıstıkça Dondurma Beylikdüzü (Demir Country) ID 7099 HOLD
+Hentzer exact kayıt `Kavaklı, Mehmet Akif Ersoy Cd. No:17, 34520/34480 Beylikdüzü/İstanbul`, `+90 541 150 46 27`; Restoranım ve resmi Instagram `@fistikcadondurma.beylikduzu` aynı adres/telefonu doğruluyor. Güncel sosyal içerikler dondurma, waffle ve tatlıları desteklese de complete item-level güncel fiyatlı menü veya güvenilir sipariş platformu bulunamadı; yorumlarda yer alan tekil tutarlar menü kaynağı olarak kullanılmadı. Strict HOLD; ürün/fiyat eklenmedi.
