@@ -1473,3 +1473,6 @@ Exact kayıt `Rüzgarlıbahçe Mah. Cumhuriyet Cad. No:143/B Kavacık Beykoz/İs
 
 ## YALLA FALAFEL ID 7010 strict HOLD
 Exact kayıt `Cihannüma Mahallesi, Serencebey Yokuşu, Fırat İş Merkezi, Yıldız, No:1/B, 34022 Beşiktaş/İstanbul`, `+90 506 463 53 92`; resmi `@yallafalafel_istanbul`, Culinary Backstreets ve Snapchat kayıtlarıyla eşleşti. Ancak 2020 tarihli üçüncü taraf içeriklerdeki fiyatlar güncel değildir; güncel Instagram profili menü/ürün fiyatı yayınlamıyor ve herkese açık tam item-level fiyatlı güncel menü bulunamadı. **Override eklenmedi; strict HOLD**.
+
+## SUN BROTHERS PIZZA BEŞİKTAŞ ID 7009 kabul
+Exact kayıt `Türkali Mahallesi, Ihlamurdere Cd. No:112/A, 34257 Beşiktaş/İstanbul`, `+90 212 813 32 82`; resmi Sun Brothers şube dizininde İstanbul Türkali Şube olarak doğrulandı. Yemeksepeti `vjwi` vendorının Extreme Pizzas (30/42 cm), Brother Pizzas (30/42 cm) ve İçecekler kategorilerinden 2026-08-25 tarihinde **40 benzersiz ürün/fiyat** alındı. Poşet/servis ücreti kalemi bulunmadığından aktarılmadı.

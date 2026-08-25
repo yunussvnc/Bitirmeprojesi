@@ -86721,4 +86721,212 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     }
   ]
 },
+  "7009": {
+  "name": "Sun Brothers Pizza Beşiktaş",
+  "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/vjwi/sun-brothers-pizza-vjwi",
+  "sourceName": "Yemeksepeti current Sun Brothers Pizza menu; official branch directory confirms exact İstanbul Türkali branch at Türkali Mahallesi, Ihlamurdere Cd. No:112/A, 34257 Beşiktaş/İstanbul, +90 212 813 32 82, matching Hentzer. 40 unique priced pizza/beverage items imported; no bag/service fee in source.",
+  "verifiedAt": "2026-08-25",
+  "items": [
+    {
+      "name": "Luna Pizza (30 cm.)",
+      "price": "480",
+      "category": "Extreme Pizzas (30 cm.)"
+    },
+    {
+      "name": "Tropical Pizza (30 cm.)",
+      "price": "480",
+      "category": "Extreme Pizzas (30 cm.)"
+    },
+    {
+      "name": "Chicken Pizza (30 cm.)",
+      "price": "480",
+      "category": "Extreme Pizzas (30 cm.)"
+    },
+    {
+      "name": "Meaty Pizza (30 cm.)",
+      "price": "480",
+      "category": "Extreme Pizzas (30 cm.)"
+    },
+    {
+      "name": "Ottoman Empire Pizza (30 cm.)",
+      "price": "480",
+      "category": "Extreme Pizzas (30 cm.)"
+    },
+    {
+      "name": "Bbq Chicken Pizza (30 cm.)",
+      "price": "480",
+      "category": "Extreme Pizzas (30 cm.)"
+    },
+    {
+      "name": "Quatro Pizza (30 cm.)",
+      "price": "480",
+      "category": "Extreme Pizzas (30 cm.)"
+    },
+    {
+      "name": "Meaty Pizza (42 cm.)",
+      "price": "699",
+      "category": "Extreme Pizzas (42 cm.)"
+    },
+    {
+      "name": "Chicken Pizza (42 cm.)",
+      "price": "699",
+      "category": "Extreme Pizzas (42 cm.)"
+    },
+    {
+      "name": "Tropical Pizza (42 cm.)",
+      "price": "699",
+      "category": "Extreme Pizzas (42 cm.)"
+    },
+    {
+      "name": "Luna Pizza (42 cm.)",
+      "price": "699",
+      "category": "Extreme Pizzas (42 cm.)"
+    },
+    {
+      "name": "Quatro Pizza (42 cm.)",
+      "price": "699",
+      "category": "Extreme Pizzas (42 cm.)"
+    },
+    {
+      "name": "Bbq Chicken Pizza (42 cm.)",
+      "price": "699",
+      "category": "Extreme Pizzas (42 cm.)"
+    },
+    {
+      "name": "Ottoman Empire Pizza (42 cm.)",
+      "price": "699",
+      "category": "Extreme Pizzas (42 cm.)"
+    },
+    {
+      "name": "Sebze Rüyası Pizza (30 cm.)",
+      "price": "449",
+      "category": "Brother Pizzas (30 cm.)"
+    },
+    {
+      "name": "Social Pizza (30 cm.)",
+      "price": "449",
+      "category": "Brother Pizzas (30 cm.)"
+    },
+    {
+      "name": "Fantastico Pizza (30 cm.)",
+      "price": "470",
+      "category": "Brother Pizzas (30 cm.)"
+    },
+    {
+      "name": "Karışık Pizza (30 cm.)",
+      "price": "470",
+      "category": "Brother Pizzas (30 cm.)"
+    },
+    {
+      "name": "Hot Mexican Pizza (30 cm.)",
+      "price": "470",
+      "category": "Brother Pizzas (30 cm.)"
+    },
+    {
+      "name": "Riviera Pizza (30 cm.)",
+      "price": "449",
+      "category": "Brother Pizzas (30 cm.)"
+    },
+    {
+      "name": "Margarita Pizza (30 cm.)",
+      "price": "449",
+      "category": "Brother Pizzas (30 cm.)"
+    },
+    {
+      "name": "Turkish Style Pizza (30 cm.)",
+      "price": "470",
+      "category": "Brother Pizzas (30 cm.)"
+    },
+    {
+      "name": "Mushroom Paradise Pizza (30 cm.)",
+      "price": "449",
+      "category": "Brother Pizzas (30 cm.)"
+    },
+    {
+      "name": "Social Pizza (42 cm.)",
+      "price": "699",
+      "category": "Brother Pizzas (42 cm.)"
+    },
+    {
+      "name": "Hot Mexican Pizza (42 cm.)",
+      "price": "699",
+      "category": "Brother Pizzas (42 cm.)"
+    },
+    {
+      "name": "Turkish Style Pizza (42 cm.)",
+      "price": "699",
+      "category": "Brother Pizzas (42 cm.)"
+    },
+    {
+      "name": "Riviera Pizza (42 cm.)",
+      "price": "699",
+      "category": "Brother Pizzas (42 cm.)"
+    },
+    {
+      "name": "Karışık Pizza (42 cm.)",
+      "price": "699",
+      "category": "Brother Pizzas (42 cm.)"
+    },
+    {
+      "name": "Margherita Pizza (42 cm.)",
+      "price": "699",
+      "category": "Brother Pizzas (42 cm.)"
+    },
+    {
+      "name": "Sebze Rüyası Pizza (42 cm.)",
+      "price": "699",
+      "category": "Brother Pizzas (42 cm.)"
+    },
+    {
+      "name": "Mushroom Paradise Pizza (42 cm.)",
+      "price": "699",
+      "category": "Brother Pizzas (42 cm.)"
+    },
+    {
+      "name": "Fantastico Pizza (42 cm.)",
+      "price": "699",
+      "category": "Brother Pizzas (42 cm.)"
+    },
+    {
+      "name": "Pepsi (33 cl.)",
+      "price": "99",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Pepsi Max (33 cl.)",
+      "price": "99",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Yedigün (33 cl.)",
+      "price": "99",
+      "category": "İçecekler"
+    },
+    {
+      "name": "7UP (33 cl.)",
+      "price": "99",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Pepsi (1 L.)",
+      "price": "120",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Pepsi Max (1 L.)",
+      "price": "120",
+      "category": "İçecekler"
+    },
+    {
+      "name": "Yedigün (1 L.)",
+      "price": "120",
+      "category": "İçecekler"
+    },
+    {
+      "name": "7UP (1 L.)",
+      "price": "120",
+      "category": "İçecekler"
+    }
+  ]
+},
 };
