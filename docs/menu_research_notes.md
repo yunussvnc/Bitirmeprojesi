@@ -1218,3 +1218,6 @@ Hentzer exact kayıt `Kavaklı, Mehmet Akif Ersoy Cd. No:17, 34520/34480 Beylikd
 
 ## Fikir Et Restoran & Kasap ID 7098 acceptance
 Hentzer exact kayıt `Kavaklı, İbrahim Müteferrika Cd. A Blok No:1, 34520 Beylikdüzü/İstanbul`, `+90 212 875 75 76`; Restoranım exact sayfası ve resmi Instagram `@fikiret_mangal` aynı Beylikdüzü/telefon kimliğini destekliyor. Yemeksepeti canlı vendor `fl27` menüsünden kebap, burger, ızgara, dürüm, salata, tatlı, yan ürün ve içecek kategorilerinde **67 ürün ve güncel fiyat** aktarıldı. Poşet/servis satırı dahil edilmedi. `verifiedAt` canlı doğrulama tarihi `2026-08-25`.
+
+## JAPON BAHÇESI ID 7097 HOLD
+Hentzer kaydı `Cumhuriyet, 34520 Beylikdüzü/İstanbul` ve telefon içermiyor. Public aramalarda sonuçlar buranın Beylikdüzü Yaşam Vadisi içindeki Japon Bahçesi park/gezinti alanı olduğunu gösteriyor; exact restoran işletmesi, telefon/adres eşleşmeli food vendor veya güncel item-level fiyatlı menü bulunamadı. Benzer isimli Japon restoranlarının farklı adreslerde olması nedeniyle veri eklenmedi. Strict HOLD.
