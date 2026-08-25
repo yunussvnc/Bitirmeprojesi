@@ -1281,3 +1281,6 @@ Exact kayıt `Soğuksu, Karadut Sk. No:47, 34800 Beykoz/İstanbul`, `+90 216 537
 
 ## Beykoz Kahvecisi ID 7075 strict HOLD
 Exact kayıt `Çubuklu, Tugay Sk. No:1, 34805 Beykoz/İstanbul`; Hentzer telefon yayımlamıyor. Yakala aynı exact adresi doğruluyor fakat sayfada açıkça menü bilgisi ve iletişim bilgisi bulunmadığı belirtiliyor. Beykoz Belediyesi bağlantılı Doğuş Haber içeriği markayı ve kahve, tatlı, tuzlu pastane, sandviç ürün gruplarını doğruluyor; ancak son bir yıl içinde exact şubeye ait complete item-level fiyatlı public menü bulunamadı. Ürün/fiyat uydurulmadı; strict HOLD.
+
+## Farazi Bosphorus ID 7074 strict HOLD
+Exact kayıt `Yıldız Mahallesi, Çırağan Caddesi, Yıldız, Yalı Sk. No:3, 34349 Beşiktaş/İstanbul`, `+90 538 498 22 34`; Farazi Bosphorus Facebook sayfası aynı adres ve telefonu, Yandex/Kaçıyor/Instagram kaynakları da aynı işletme kimliğini doğruluyor. Instagram/TikTok içeriklerinde 2026 fix-menu kişi başı fiyatları ve etkinlik tanıtımları bulunuyor, ancak complete item-level alakart menü/fiyat listesi yayımlanmıyor. Son bir yıl şartını karşılayan tam fiyatlı public menü kanıtı bulunamadığından ürün/fiyat uydurulmadı; strict HOLD.
