@@ -841,30 +841,41 @@ def get_friend_recommendations(
     """Kullanıcıya rehberinden ve ortak arkadaşlardan kişi önerir."""
     recommended = []
     seen_ids = set([current_user.id])
-    
+
+    # Engellenen/engelleyen kullanıcıları öneri havuzundan çıkar
+    blocks = db.query(models.UserBlock).filter(
+        (models.UserBlock.blocker_id == current_user.id) | (models.UserBlock.blocked_id == current_user.id)
+    ).all()
+    for b in blocks:
+        seen_ids.add(b.blocker_id)
+        seen_ids.add(b.blocked_id)
+
     # Takip ettiklerini listele (onları önermeyelim)
     following_ids = [
-        f.following_id for f in 
+        f.following_id for f in
         db.query(models.Follow.following_id).filter(models.Follow.follower_id == current_user.id).all()
     ]
     seen_ids.update(following_ids)
-    
+
     # 1. Rehber eşleşmeleri
     contact_matches = db.query(models.UserContact).filter(
         models.UserContact.user_id == current_user.id,
         models.UserContact.matched_user_id != None
     ).all()
-    
+
     for c in contact_matches:
         if c.matched_user_id not in seen_ids:
-            u = db.query(models.User).filter(models.User.id == c.matched_user_id).first()
+            u = db.query(models.User).filter(
+                models.User.id == c.matched_user_id,
+                models.User.is_active == True,
+            ).first()
             if u:
                 recommended.append({
                     "user": u,
                     "reason": "Rehberinizde ekli"
                 })
                 seen_ids.add(u.id)
-                
+
     # 2. Ortak arkadaşlar (Takip ettiklerinin takip ettikleri)
     if following_ids:
         # Ortak arkadaş sayısına göre grupla
@@ -872,9 +883,12 @@ def get_friend_recommendations(
             models.Follow.follower_id.in_(following_ids),
             ~models.Follow.following_id.in_(seen_ids)
         ).group_by(models.Follow.following_id).order_by(desc("c")).limit(10).all()
-        
+
         for mutual_id, count in mutuals:
-            u = db.query(models.User).filter(models.User.id == mutual_id).first()
+            u = db.query(models.User).filter(
+                models.User.id == mutual_id,
+                models.User.is_active == True,
+            ).first()
             if u:
                 recommended.append({
                     "user": u,

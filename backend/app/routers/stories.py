@@ -588,6 +588,17 @@ async def reply_to_story(
     if story.user_id == current_user.id:
         raise HTTPException(status_code=400, detail="Kendi hikayenize yanıt veremezsiniz.")
 
+    # Engel kontrolü
+    is_blocked = db.query(models.UserBlock).filter(
+        (
+            (models.UserBlock.blocker_id == story.user_id) & (models.UserBlock.blocked_id == current_user.id)
+        ) | (
+            (models.UserBlock.blocker_id == current_user.id) & (models.UserBlock.blocked_id == story.user_id)
+        )
+    ).first()
+    if is_blocked:
+        raise HTTPException(status_code=403, detail="Bu kullanıcıyla etkileşim kuramazsınız.")
+
     # Senaryo 3 ve 4: Yanıt Kısıtlama Kontrolü
     prefs = db.query(models.UserPreferences).filter(models.UserPreferences.user_id == story.user_id).first()
     if prefs:

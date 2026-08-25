@@ -1261,7 +1261,7 @@ def parse_natural_query(query: str) -> Dict:
     is_inappropriate = False
     
     # 1. Yasaklı/Alakasız Konular (Siyaset, Din, Küfür vb.)
-    inappropriate_keywords = ['siyaset', 'parti', 'din', 'küfür', 'argo', 'kavga', 'seçim', 'oy', 'başkan']
+    inappropriate_keywords = ['siyaset', 'din', 'küfür', 'argo', 'kavga', 'seçim', 'oy', 'başkan']
     import re
     words = set(re.findall(r'\w+', query_lower, flags=re.UNICODE))
     if any(kw in words for kw in inappropriate_keywords):
