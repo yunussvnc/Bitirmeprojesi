@@ -68464,6 +68464,245 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     ],
   },
 
+  "7177": {
+    "name": "ANTIQUE PIZZERIA",
+    "sourceUrl": "https://www.antique-pizzeria.com/antique-yemek-menu",
+    "sourceName": "Official Antique Pizzeria QR Menu; exact Beyoğlu branch address/phone via official site and Yandex/Instagram",
+    "verifiedAt": "2026-08-25",
+    "items": [
+      {
+        "name": "MINESTRONE",
+        "price": "350 ₺",
+        "category": "Başlangıçlar"
+      },
+      {
+        "name": "BURRATA",
+        "price": "640 ₺",
+        "category": "Başlangıçlar"
+      },
+      {
+        "name": "POLPETTE AL POMODORO",
+        "price": "660 ₺",
+        "category": "Başlangıçlar"
+      },
+      {
+        "name": "GAMBERI AL BURRO E LIMONE",
+        "price": "680 ₺",
+        "category": "Başlangıçlar"
+      },
+      {
+        "name": "BRUSCHETTA",
+        "price": "510 ₺",
+        "category": "Başlangıçlar"
+      },
+      {
+        "name": "CHEESE PLATE",
+        "price": "1.240 ₺",
+        "category": "Başlangıçlar"
+      },
+      {
+        "name": "CARPACCIO DI BARBABIETOLA",
+        "price": "540 ₺",
+        "category": "Başlangıçlar"
+      },
+      {
+        "name": "BEEF CARPACCIO",
+        "price": "820 ₺",
+        "category": "Başlangıçlar"
+      },
+      {
+        "name": "MARGHERITA",
+        "price": "680 ₺",
+        "category": "Pizzeria"
+      },
+      {
+        "name": "BURRATA PIZZA",
+        "price": "910 ₺",
+        "category": "Pizzeria"
+      },
+      {
+        "name": "BUFALA",
+        "price": "750 ₺",
+        "category": "Pizzeria"
+      },
+      {
+        "name": "4 FORMAGGI",
+        "price": "1.030 ₺",
+        "category": "Pizzeria"
+      },
+      {
+        "name": "MEDITERRANEA",
+        "price": "820 ₺",
+        "category": "Pizzeria"
+      },
+      {
+        "name": "AI FUNGHI",
+        "price": "830 ₺",
+        "category": "Pizzeria"
+      },
+      {
+        "name": "VEGETARIANA",
+        "price": "820 ₺",
+        "category": "Pizzeria"
+      },
+      {
+        "name": "SPECIALE CARNE",
+        "price": "1.150 ₺",
+        "category": "Pizzeria"
+      },
+      {
+        "name": "PESTO",
+        "price": "880 ₺",
+        "category": "Pizzeria"
+      },
+      {
+        "name": "FUMÈ",
+        "price": "1.130 ₺",
+        "category": "Pizzeria"
+      },
+      {
+        "name": "DIAVOLA",
+        "price": "1.070 ₺",
+        "category": "Pizzeria"
+      },
+      {
+        "name": "TONNO CIPOLLE",
+        "price": "930 ₺",
+        "category": "Pizzeria"
+      },
+      {
+        "name": "CAESAR SALAD",
+        "price": "730 ₺",
+        "category": "Salatalar"
+      },
+      {
+        "name": "DI MARE SALAD",
+        "price": "910 ₺",
+        "category": "Salatalar"
+      },
+      {
+        "name": "KINOA AVOKADO",
+        "price": "740 ₺",
+        "category": "Salatalar"
+      },
+      {
+        "name": "TONNO SALAD",
+        "price": "710 ₺",
+        "category": "Salatalar"
+      },
+      {
+        "name": "ARUGULA SALAD",
+        "price": "520 ₺",
+        "category": "Salatalar"
+      },
+      {
+        "name": "RISOTTO DI MARE",
+        "price": "980 ₺",
+        "category": "Risotto"
+      },
+      {
+        "name": "RISOTTO ASPARAGI",
+        "price": "840 ₺",
+        "category": "Risotto"
+      },
+      {
+        "name": "RISOTTO VERDURA",
+        "price": "840 ₺",
+        "category": "Risotto"
+      },
+      {
+        "name": "RISOTTO AI FUNGHI",
+        "price": "880 ₺",
+        "category": "Risotto"
+      },
+      {
+        "name": "FILETTO",
+        "price": "1.400 ₺",
+        "category": "Ana Yemek"
+      },
+      {
+        "name": "POLLO CON SALSA",
+        "price": "1.090 ₺",
+        "category": "Ana Yemek"
+      },
+      {
+        "name": "POLLO GRIGLIATO",
+        "price": "980 ₺",
+        "category": "Ana Yemek"
+      },
+      {
+        "name": "LASAGNA",
+        "price": "730 ₺",
+        "category": "Makarna"
+      },
+      {
+        "name": "PENNE ZUCCA",
+        "price": "730 ₺",
+        "category": "Makarna"
+      },
+      {
+        "name": "FETTUCCINE BEEF",
+        "price": "960 ₺",
+        "category": "Makarna"
+      },
+      {
+        "name": "SPAGHETTI AGLIO E OLIO",
+        "price": "590 ₺",
+        "category": "Makarna"
+      },
+      {
+        "name": "LINGUINE DI MARE",
+        "price": "970 ₺",
+        "category": "Makarna"
+      },
+      {
+        "name": "TORTELLINI",
+        "price": "890 ₺",
+        "category": "Makarna"
+      },
+      {
+        "name": "SPAGHETTI NAPOLITEN",
+        "price": "630 ₺",
+        "category": "Makarna"
+      },
+      {
+        "name": "FETTUCINE ALFREDO",
+        "price": "740 ₺",
+        "category": "Makarna"
+      },
+      {
+        "name": "PENNE ARRABBIATA",
+        "price": "630 ₺",
+        "category": "Makarna"
+      },
+      {
+        "name": "PENNE VEGETARIANA",
+        "price": "720 ₺",
+        "category": "Makarna"
+      },
+      {
+        "name": "TIRAMISU",
+        "price": "490 ₺",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "PANNA COTTA",
+        "price": "440 ₺",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "BELLA CIOCCOLATO",
+        "price": "640 ₺",
+        "category": "Tatlılar"
+      },
+      {
+        "name": "CRÉME BRÛLÉE",
+        "price": "440 ₺",
+        "category": "Tatlılar"
+      }
+    ]
+  }
+,
   "7178": {
     "name": "Tadım Sebzeli Döner",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/iys0/tadim-sebzeli-doner",
