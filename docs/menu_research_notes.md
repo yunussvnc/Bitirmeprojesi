@@ -1533,3 +1533,6 @@ Hentzer API kaydı `Adnan Kahveci, Anadolu Cd. A1 No:22/1 iç kapı, 34528 Beyli
 
 ## TÜTSÜ BY DÜVEE ID 6989 strict HOLD
 Hentzer kaydı `Teşvikiye, Hakkı Yeten Cd. 10M, 34349 Beşiktaş/İstanbul`, `+90 541 240 41 42`; Wanderlog, Cybo, Mindtrip ve resmi Instagram arama sonuçları 10M ve aynı telefonu destekliyor. Ancak resmi `tutsubyduvee.com` iletişim footer’ı aynı markayı `Süleyman Seba Kompleksi, Hakkı Yeten Caddesi No:10J, Fulya/Beşiktaş` olarak yayımlıyor. Ayrıca resmi QR menü dinamik olarak yalnızca başlık verdi; item-level fiyatlar okunamadı ve Menu Haritası fiyatlı liste sunmadı. Exact adres numarası 10M/10J çelişkisi ve son bir yıl fiyat doğrulaması birlikte çözülemediği için **override eklenmedi; strict HOLD**.
+
+## BOOK AND TEA HOUSE ID 6988 strict HOLD
+Hentzer API kaydı `Barış Mahallesi, Reşat Nuri Güntekin Sokak No:59, 34353 Beylikdüzü/İstanbul`, `+90 537 396 89 00`; Yerel Esnaf, Kaliteli Firmalar Rehberi, Yandex ve diğer işletme kayıtları aynı adres/telefonu doğruluyor. Son bir yıl içinde aynı exact şubeye ait kamuya açık item-level fiyatlı menü bulunamadı; Restoranim/Mekanlar sayfaları yalnızca genel ürün türlerini, Kacıyor ise fiyat içermeyen besin listesini gösteriyor. Fiyat uydurmamak için **override eklenmedi; strict HOLD**.
