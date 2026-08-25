@@ -1407,3 +1407,6 @@ Hentzer kaydı `Rüzgarlıbahçe, Cumhuriyet Cd. No:57, 34805 Beykoz/İstanbul`,
 
 ## MAGNOLIA SHOP COFFEE CO. METROHOME ID 7032 strict HOLD
 Exact resmi şube adresi `Cumhuriyet Mah. Dervişoğlu Cad. Metrohome Suites F Blok No:17 Beylikdüzü/İstanbul` ve aynı lokasyona ait güncel Yemeksepeti `Magnolia Shop` fiyatlı menüsü bulundu. Ancak Hentzer telefon alanı boş, resmi MetroHome şube sayfasında telefon yayınlanmıyor ve çevrimiçi Instagram lokasyonunda farklı/bağımsız bir telefon görünüyor. Zorunlu **%100 adres/telefon paritesi sağlanamadığından override eklenmedi; strict HOLD**.
+
+## ISTANBUL LAHMACUN ID 7031 strict HOLD
+Exact kayıt `Rüzgarlıbahçe, Cumhuriyet Cd. No:75, 34805 Kavacık-Beykoz/İstanbul`, `+90 216 680 32 22`; resmi Instagram içerikleri ve işletme kayıtlarıyla eşleşti. Yemeksepeti’nde aynı işletme adına ait menü ve güncel fiyat sinyalleri bulundu, ancak canlı sayfa Cloudflare erişim engeli nedeniyle tam ve yeniden doğrulanabilir item-level çıktı vermedi; yerel tarayıcı çıktısı da erişim reddi döndürdü. Eksik menü aktarımı yapılmadı; **strict HOLD**.
