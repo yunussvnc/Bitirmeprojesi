@@ -1380,3 +1380,6 @@ Exact kayıt `Orta, Numunebağı Cd. No:78, 34040 Bayrampaşa/İstanbul`, `+90 2
 
 ## MERCAN PETSHOP ID 7042 strict HOLD
 Hentzer kaydı `İsmet Paşa, Karaca Sk. No:4/A, 34040 Bayrampaşa/İstanbul`, `+90 537 451 98 08`; adres ve telefon, Mercan Petshop’ın Instagram hesabıyla exact eşleşiyor. Ancak işletme bir pet shop/akvaryum mağazasıdır; doğrulanabilir restoran yiyecek menüsü yoktur. İnternette görülen pet ürünleri bu uygulamanın restoran menüsü kapsamına alınamaz. Bu nedenle **menu override eklenmedi; strict HOLD**.
+
+## CORNER IRISH PUB ID 7041 strict HOLD
+Hentzer kaydı `Asmalı Mescit Meşrutiyet Cd. No:11/A Galatasaray, Asmalı Mescit, 34430 Beyoğlu/İstanbul`, `+90 533 081 42 64`; adres, Yandex/Nelerimeshur/Corner kaynaklarıyla; telefon ise Corner Irish Pub Instagram profilindeki Pera şubesi kaydıyla eşleşiyor. Ancak bulunan dijital menü yalnızca dinamik kategori başlıkları veriyor, erişilebilir tam ürün-fiyat dökümü sağlamıyor; arama önizlemesindeki birkaç fiyat tam menü kabulü için yeterli değil. 2026-04 güncelleme sinyali olsa da **tam item-level güncel fiyatlı menü doğrulanamadığından override eklenmedi; strict HOLD**.
