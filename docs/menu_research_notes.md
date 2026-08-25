@@ -1530,3 +1530,6 @@ Hentzer API kaydı `Kavacık, Cumhuriyet Cd. No:41, 34805 Beykoz/İstanbul`, `+9
 
 ## KARACALI RESTAURANT ID 6990 kabul
 Hentzer API kaydı `Adnan Kahveci, Anadolu Cd. A1 No:22/1 iç kapı, 34528 Beylikdüzü/İstanbul`, `+90 544 871 16 16`; resmi Facebook/Instagram paylaşımları aynı işletme, adres ve telefonu doğruluyor. Yemeksepeti `qwdb` canlı menüsü 2026-08-26 tarihinde erişildi. Çorbalar, Fırın Ürünleri, Kokoreçler, Ana Yemekler, Yan Ürünler, Salatalar, Tatlılar ve İçecekler kategorilerinden **57 benzersiz gıda/içecek kalemi** aktarıldı; Popüler carousel tekrarları ve Poşet kalemi dışlandı. Fiyatlar canlı Yemeksepeti menüsünden alındı; ürün veya fiyat uydurulmadı. **Override kabul edildi.**
+
+## TÜTSÜ BY DÜVEE ID 6989 strict HOLD
+Hentzer kaydı `Teşvikiye, Hakkı Yeten Cd. 10M, 34349 Beşiktaş/İstanbul`, `+90 541 240 41 42`; Wanderlog, Cybo, Mindtrip ve resmi Instagram arama sonuçları 10M ve aynı telefonu destekliyor. Ancak resmi `tutsubyduvee.com` iletişim footer’ı aynı markayı `Süleyman Seba Kompleksi, Hakkı Yeten Caddesi No:10J, Fulya/Beşiktaş` olarak yayımlıyor. Ayrıca resmi QR menü dinamik olarak yalnızca başlık verdi; item-level fiyatlar okunamadı ve Menu Haritası fiyatlı liste sunmadı. Exact adres numarası 10M/10J çelişkisi ve son bir yıl fiyat doğrulaması birlikte çözülemediği için **override eklenmedi; strict HOLD**.
