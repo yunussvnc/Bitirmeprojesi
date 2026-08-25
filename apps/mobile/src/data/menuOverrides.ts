@@ -69058,4 +69058,1629 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       }
     ],
   },
+
+  "3702": {
+    "name": "Nuuva Coffee & Bakery",
+    "sourceUrl": "https://qr.kirazsoft.com/?utm_source=restaurantguru&utm_medium=referral#/anasayfa?c=l7xtoo&b=eyPoXf&ci=2101&bi=2789&st=table",
+    "sourceName": "Public Nuuva QR menu via RestaurantGuru exact branch redirect; live qrapi branch menu",
+    "verifiedAt": "2026-08-25",
+    "items": [
+      {
+        "name": "DONDURMA DUBAİ CUP",
+        "price": "₺495.00",
+        "category": "DONDURMA"
+      },
+      {
+        "name": "DONDURMA FERRERO ROCHER",
+        "price": "₺100.00",
+        "category": "DONDURMA",
+        "desc": "1 Top dondurma ferrero rocher"
+      },
+      {
+        "name": "DONDURMA RAFFAELLO",
+        "price": "₺100.00",
+        "category": "DONDURMA",
+        "desc": "1Top dondurma raffaello"
+      },
+      {
+        "name": "DONDURMA FRAMBUAZ",
+        "price": "₺100.00",
+        "category": "DONDURMA",
+        "desc": "1 Top dondurma frambuaz"
+      },
+      {
+        "name": "DONDURMA PORTAKAL KABUKLU BİTTER",
+        "price": "₺100.00",
+        "category": "DONDURMA",
+        "desc": "1 Top dondurma portakal kabuklu bitter"
+      },
+      {
+        "name": "DONDURMA YOĞURT PASSIONFLOWER",
+        "price": "₺100.00",
+        "category": "DONDURMA",
+        "desc": "1 Top dondurma yoğurt passıonflower"
+      },
+      {
+        "name": "VİŞNE YOĞURT",
+        "price": "₺100.00",
+        "category": "DONDURMA",
+        "desc": "1 Top dondurma vişne yoğurt"
+      },
+      {
+        "name": "LİMON",
+        "price": "₺100.00",
+        "category": "DONDURMA",
+        "desc": "1 top dondurma limon"
+      },
+      {
+        "name": "MANGO",
+        "price": "₺100.00",
+        "category": "DONDURMA",
+        "desc": "1 Top dondurma mango"
+      },
+      {
+        "name": "ÇİLEK",
+        "price": "₺100.00",
+        "category": "DONDURMA",
+        "desc": "1 Top dondurma çilek"
+      },
+      {
+        "name": "SCOTCHIES COOKIES",
+        "price": "₺100.00",
+        "category": "DONDURMA",
+        "desc": "1 Top dondurma scotchies cookies"
+      },
+      {
+        "name": "ANTEP FISTIK",
+        "price": "₺100.00",
+        "category": "DONDURMA",
+        "desc": "1 Top dondurma Antep fıstık"
+      },
+      {
+        "name": "KAYMAK",
+        "price": "₺100.00",
+        "category": "DONDURMA",
+        "desc": "1 Top dondurma kaymak"
+      },
+      {
+        "name": "DONDURMA COOKIE",
+        "price": "₺475.00",
+        "category": "DONDURMA",
+        "desc": "Scotchies cookies dondurma, devils kek, profiterol sos, fındık"
+      },
+      {
+        "name": "DONDURMA KROKAN",
+        "price": "₺475.00",
+        "category": "DONDURMA",
+        "desc": "Ferrero Rosher dondurma, kaymak dondurma, karamel, el yapımı krokan"
+      },
+      {
+        "name": "DONDURMA TİRAMİSU",
+        "price": "₺475.00",
+        "category": "DONDURMA",
+        "desc": "Tiramisu krema, el yapımı kedi dili, kaymak dondurma"
+      },
+      {
+        "name": "NUUVA KAHVALTI",
+        "price": "₺590.00",
+        "category": "KAHVALTI",
+        "desc": "Kruvasan, Mozarella, Domates, Füme Kaburga, Avokado Sos, Çırpılmış Yumurta, Peynir Sos, Zeytin, Domates, Mozarella 1 Çay ile Servis Edilir"
+      },
+      {
+        "name": "PİŞİ",
+        "price": "₺210.00",
+        "category": "KAHVALTI",
+        "desc": "4 adet pişi servis edilir"
+      },
+      {
+        "name": "KAHVALTI TAHTASI",
+        "price": "₺790.00",
+        "category": "KAHVALTI",
+        "desc": "Peynir ezine, kaşar, tulum, domates, salatalık, roka, maydanoz, biber, çilek, portakal, üzüm, zeytin yeşil, zeytin siyah, bal, portakallı tereyağı, füme et (İki kişinin birlikte keyifle paylaşabileceği, seçme peynirler, füme et, mevsim meyveleri ve kahvaltılık lezzetlerden oluşan zengin sunum.hafif brunch tahtasıdır)"
+      },
+      {
+        "name": "KRUVASAN AVOKADOLU POŞE YUMURTA",
+        "price": "₺460.00",
+        "category": "KAHVALTI",
+        "desc": "Kruvasan üzerine avokado sos, 2 adet poşe yumurta, roka, labne sos, çilek, yaban mersini, portakal"
+      },
+      {
+        "name": "KRUVASAN FRANFURTER SOSİS",
+        "price": "₺460.00",
+        "category": "KAHVALTI",
+        "desc": "Tereyağlı kruvasan içerisinde labne sos, mantar, çırpılmış yumurta, frankfurter sosis, Mix yeşillik-Akdeniz yeşilliği, roka, salatalık, domates, zeytinyağlı salata sosu"
+      },
+      {
+        "name": "PAÇANGA TABAĞI",
+        "price": "₺450.00",
+        "category": "KAHVALTI",
+        "desc": "2 adet paçanga böreği (antrikot pastırma, mozarella peyniri, domates, köy biberi, kapya biberi) Akdeniz yeşillik, roka, kuru domates, domates, labne sos"
+      },
+      {
+        "name": "NUUVA GÜNAYDIN",
+        "price": "₺590.00",
+        "category": "KAHVALTI",
+        "desc": "Göz yumurta, Frankfurter sosis, mantar, baby patates, domates, salatalık, ezine peynir, kaşar peynir, ekşi mayalı ekmek, maydanoz 1 çay ile servis edilir"
+      },
+      {
+        "name": "EKMEK ÜSTÜ CAPRESE",
+        "price": "₺530.00",
+        "category": "KAHVALTI",
+        "desc": "Ekşi mayalı ekmek, avokado sos, domates, suda mozarella, balzamik sos, taze fesleğen, Akdeniz yeşillik, roka, kapya biber, çeri domates, salatalık, kinoa, dilim zeytin, karpuz"
+      },
+      {
+        "name": "EKMEK ÜSTÜ SOSİS ISPANAK",
+        "price": "₺530.00",
+        "category": "KAHVALTI",
+        "desc": "Ekşi mayalı ekmek, labne sos, kırmızı kapya, ıspanak, mantar, Frankfurter sosis, yumurta, brokoli, karnabahar, havuç, karpuz"
+      },
+      {
+        "name": "EKMEK ÜSTÜ YAZ SABAHI",
+        "price": "₺530.00",
+        "category": "KAHVALTI",
+        "desc": "Ekşi mayalı ekmek, avokado sos, haşlanmış yumurta, çeri domates, biber, taze kekik, Akdeniz yeşillik, roka, kapya biber, salatalık, kinoa, dilim zeytin, karpuz"
+      },
+      {
+        "name": "EKMEK ÜSTÜ FÜME ET AVOKADO",
+        "price": "₺530.00",
+        "category": "KAHVALTI",
+        "desc": "Ekşi mayalı ekmek, labne sos, çırpılmış yumurta, dilim cheddar peynir, füme et, avokado, parmesan, Akdeniz yeşillik, roka, kapya biber, çeri domates, salatalık, kinoa, dilim zeytin, karpuz"
+      },
+      {
+        "name": "ÜSKÜDAR KAHVALTI",
+        "price": "₺590.00",
+        "category": "KAHVALTI",
+        "desc": "Filistin Simit, Peynir Salatası, Kaşar Peynir, Zeytin, Menemen, Nutella, Reçel, Bal, Tereyağı, Domates, Salatalık 1 Çay ile Servis Edilir"
+      },
+      {
+        "name": "PİŞİ KAHVALTI",
+        "price": "₺590.00",
+        "category": "KAHVALTI",
+        "desc": "120 gr Pişi hamuru, Peynir Salatası, Kaşar Peynir, Zeytin, Menemen, Reçel, Bal, Tereyağı, Çikolata, Fındık Ezmesi, Domates, Salatalık ve 1 Çay ile Servis Edilir"
+      },
+      {
+        "name": "TATLI PİŞİ KAHVALTI",
+        "price": "₺550.00",
+        "category": "KAHVALTI",
+        "desc": "120 gr Tarçınlı şekerli pişi hamur, Nutella, Fındık Ezmesi, Bal, Reçel, Pastacı Kreması, Çilek, Muz"
+      },
+      {
+        "name": "TATLI KAHVALTI TABAĞI",
+        "price": "₺500.00",
+        "category": "KAHVALTI",
+        "desc": "Çıtır Kruvasan Dilimleri, Çilek, Muz, Yabanmersini, Pastacı kreması, Nutella, Fındık kreması, Bal, Vişne ve Portakal reçeli"
+      },
+      {
+        "name": "FRANSIZ TOST",
+        "price": "₺440.00",
+        "category": "KAHVALTI",
+        "desc": "Brıoche Ekmeği, Pastacı kreması, File Fındık, Muz, Çilek"
+      },
+      {
+        "name": "FÜME KABURGA KURUVASAN",
+        "price": "₺540.00",
+        "category": "KAHVALTI",
+        "desc": "Kruvasan, dana füme kaburga, cheddar peyniri, avokado, çırpılmış yumurta ,domates, salatalık, zeytin, peynir salatası"
+      },
+      {
+        "name": "BEŞAMELLİ KABURGALI TOST",
+        "price": "₺600.00",
+        "category": "KAHVALTI",
+        "desc": "3 Kat Tost Ekmeği, füme kaburga, kaşar peyniri, göz yumurta, beşamel sos, Akdeniz yeşillikleri, yoğurt sos"
+      },
+      {
+        "name": "OTLU YUMURTALI EKMEK",
+        "price": "₺475.00",
+        "category": "KAHVALTI",
+        "desc": "Otlu yumurtalı ekmek, Orman meyve sos, Ezine peynir, Kaşar peynir, Siyah zeytin, Yeşil zeytin, Akdeniz yeşillik, Roka, Çeri domates, Portakal"
+      },
+      {
+        "name": "FİT KAHVALTI TABAĞI",
+        "price": "₺540.00",
+        "category": "KAHVALTI",
+        "desc": "Biber Kavurması, Lor Peyniri, Avokado, Akdeniz Yeşillikleri, Göz Yumurta, İncir, Ceviz, Esmer Ekmek"
+      },
+      {
+        "name": "SPORCU OMLET",
+        "price": "₺430.00",
+        "category": "KAHVALTI",
+        "desc": "Chıa tohumlu omlet, lor peynir, ceviz, kabak çekirdeği, avokado, sebze garnetür, ekşi maya ekmek dilimleri,"
+      },
+      {
+        "name": "SEBZELİ OMLET",
+        "price": "₺385.00",
+        "category": "KAHVALTI",
+        "desc": "Omlet içinde, mantar, kapya biber, yeşil biber, siyah zeytin, mısır, maydanoz Yanında baby patates, Akdeniz yeşilliği, roka, domates, ekşi mayalı ekmek dilimleri"
+      },
+      {
+        "name": "SCRAMBLED EGG",
+        "price": "₺420.00",
+        "category": "KAHVALTI",
+        "desc": "3 adet çırpılmış yumurta, baby patates, Akdeniz yeşillik, roka, domates"
+      },
+      {
+        "name": "ACAİ GRANOLA BOWL",
+        "price": "₺485.00",
+        "category": "KAHVALTI",
+        "desc": "Acai yoğurt, Muz, Çilek, Granola, File Badem, Fındık, Fıstık, Kayısı, İncir"
+      },
+      {
+        "name": "GRANOLA BOWL",
+        "price": "₺485.00",
+        "category": "KAHVALTI",
+        "desc": "Muzlu granola yoğurt, muz, granola, fındık, badem, incir, kayısı, yaban mersini, bal"
+      },
+      {
+        "name": "KAHVALTI SALATASI",
+        "price": "₺410.00",
+        "category": "KAHVALTI",
+        "desc": "Simit, Ezine Peyniri, Çarliston Biber, Avokado, Zeytin, Çilek, Pesto Sos"
+      },
+      {
+        "name": "SICAK ŞARKÜTERİ BOWL",
+        "price": "₺520.00",
+        "category": "KAHVALTI",
+        "desc": "Ekşi Mayalı Ekmek, sucuk, hellim, çeri domates, zeytin, portakal, kekik"
+      },
+      {
+        "name": "ÇILBIR BOWL",
+        "price": "₺510.00",
+        "category": "KAHVALTI",
+        "desc": "Poşe Yumurta, Yoğurt Sos, Frankfurther Sosis, Kırmızı Yağ Sos, Ekşi Mayalı Ekmek"
+      },
+      {
+        "name": "MENEMEN BOWL",
+        "price": "₺390.00",
+        "category": "KAHVALTI",
+        "desc": "Menemen Sos, Yumurta, Ezine Peyniri, Ceviz, Fesleğen"
+      },
+      {
+        "name": "KREMA KEKİKLİ TAVUK BOWL",
+        "price": "₺590.00",
+        "category": "BOWL",
+        "desc": "Basmati pirinci, kırmızı lahana salatası, avokado parçaları, mısır, domates,sebze,tahinli yoğurt sos, 120 gr kekik soslu tavuk"
+      },
+      {
+        "name": "FALAFEL BOWL",
+        "price": "₺590.00",
+        "category": "BOWL",
+        "desc": "Basmati pirinci, kırmızı lahana salatası, avokado parçaları, mısır, domates,sebze,tahinli yoğurt sos, falafel"
+      },
+      {
+        "name": "TERIYAKI TAVUK BOWL",
+        "price": "₺590.00",
+        "category": "BOWL",
+        "desc": "Basmati pirinci, kırmızı lahana salatası, avokado parçaları, mısır, domates,sebze,tahinli yoğurt sos, 120 gr teriayki soslu tavuk"
+      },
+      {
+        "name": "SOSLU SOMON BOWL",
+        "price": "₺640.00",
+        "category": "BOWL",
+        "desc": "Basmati pirinci, kırmızı lahana salatası, avokado parçaları, mısır, domates,sebze, soslu somon, susam"
+      },
+      {
+        "name": "ÇITIR TAVUK SALATA",
+        "price": "₺540.00",
+        "category": "SALATA",
+        "desc": "Çıtır Tavuk parçaları, kruton, ıceberg, çeri domates, yer fıstığı, sezar sos"
+      },
+      {
+        "name": "KİNOA AVOKADO",
+        "price": "₺500.00",
+        "category": "SALATA",
+        "desc": "Kinoa, nohut, greçka, Akdeniz otları , avokado, elma, armut, ceviz,çilek"
+      },
+      {
+        "name": "PATLICAN HELLİM SALATA",
+        "price": "₺520.00",
+        "category": "SALATA",
+        "desc": "Çıtır patlıcan, hellim peyniri, Akdeniz otları, kırmızı soğan, salatalık, çeri domates, mısır, yer fıstığı"
+      },
+      {
+        "name": "ILIK BONFİLE SALATA",
+        "price": "₺650.00",
+        "category": "SALATA",
+        "desc": "Dana bonfile, kabak, patlıcan, kapya biber, yeşillik, roka, kruton ekmek, parmesan peyniri"
+      },
+      {
+        "name": "BOLOGNESE PAPARDELLA",
+        "price": "₺590.00",
+        "category": "MAKARNA",
+        "desc": "El yapımı papardella pasta hamuru, kıyma sos, domates, havuç"
+      },
+      {
+        "name": "FETTUCİNİ ALFREDO",
+        "price": "₺540.00",
+        "category": "MAKARNA",
+        "desc": "El yapımı fettucini pasta hamuru, tavuk parçaları, krema, mantar, parmesan peyniri"
+      },
+      {
+        "name": "LAZANYA",
+        "price": "₺640.00",
+        "category": "MAKARNA",
+        "desc": "Lazanya hamuru, beşamel sos, kıyma sos, mozarella peyniri"
+      },
+      {
+        "name": "NOODLE ET",
+        "price": "₺620.00",
+        "category": "MAKARNA",
+        "desc": "Kırmızı-yeşil biber, havuç, kabak, taze soğan, sarımsak, istiridye mantarı, soya filizi, yer fıstığı, susam, noodle sos"
+      },
+      {
+        "name": "NOODLE TAVUK",
+        "price": "₺540.00",
+        "category": "MAKARNA",
+        "desc": "Kırmızı-yeşil biber, havuç, kabak, taze soğan, sarımsak, istiridye mantarı, soya filizi, yer fıstığı, susam, noodle sos"
+      },
+      {
+        "name": "5 PEYNİRLİ RAVİOLİ",
+        "price": "₺600.00",
+        "category": "MAKARNA"
+      },
+      {
+        "name": "DANA BACON PAPPARDELLE",
+        "price": "₺590.00",
+        "category": "MAKARNA",
+        "desc": "El yapımı pappardelle, dana bacon, krema, kurutulmuş domates, parmesan, sarımsaklı yağ, fesleğen"
+      },
+      {
+        "name": "FÜME ETLİ KARAMELİZE SOĞANLI PİZZETTA",
+        "price": "₺650.00",
+        "category": "PİZZETTA",
+        "desc": "72 saat dinlendirilmiş ekşi mayalı hamur, İtalyan pizza sos, pesto sos, mozarella peyniri, füme kaburga, parmesan peyniri"
+      },
+      {
+        "name": "MARGHERITA PİZZETTA",
+        "price": "₺460.00",
+        "category": "PİZZETTA",
+        "desc": "72 saat dinlendirilmiş ekşi mayalı hamur, İtalyan pizza sos, pesto sos, mozarella peyniri, çeri domates, parmesan peyniri"
+      },
+      {
+        "name": "MİSTA PİZZETTA",
+        "price": "₺510.00",
+        "category": "PİZZETTA",
+        "desc": "72 saat dinlendirilmiş ekşi mayalı hamur, İtalyan pizza sos, pesto sos, sucuk, zeytin, biber, mısır, mantar, parmesan peyniri"
+      },
+      {
+        "name": "İSVEÇ KÖFTE",
+        "price": "₺600.00",
+        "category": "KÖFTELİ",
+        "desc": "Köfte, Patates püre, Gravy sos, Orman meyve sos, Maydanoz"
+      },
+      {
+        "name": "NUUVA DEV BURGER",
+        "price": "₺640.00",
+        "category": "BURGER",
+        "desc": "Özel hamburger ekmeği, Tütsülenmiş kıyma ve Dana etinden burger köftesi, karamelize soğan, turşu, domates, marul, parmak patates ve sweat chilli sos"
+      },
+      {
+        "name": "BURİTOS ET",
+        "price": "₺620.00",
+        "category": "BURGER",
+        "desc": "Tortilla ekmeği arasında 100 gr bonfile, kırmızı biber, sarımsak, cheddar, mantar, domates, kornişon turşu, mix sos, marul ve yanında patates kızartması, sweet chilli sos ile servis edilir"
+      },
+      {
+        "name": "BURİTOS TAVUK",
+        "price": "₺540.00",
+        "category": "BURGER",
+        "desc": "Tortilla ekmeği arasında 120 gr çıtır tavuk, Sezar sos, cheddar, rende parmesan, marul, mısır, kornişon turşu ve yanıda patates kızartması, sweet chilli sos ile servis edilir"
+      },
+      {
+        "name": "BİG MAC SANDO",
+        "price": "₺640.00",
+        "category": "BURGER",
+        "desc": "Sando ekmeği, burger köftesi, ıceberg marul, turşu, domates, mix sos, cheddar ve patates kızartması, sweet chilli sos ile servis edilir"
+      },
+      {
+        "name": "ÇITIR TAVUK SANDO",
+        "price": "₺540.00",
+        "category": "BURGER",
+        "desc": "Sando ekmeği, çıtır tavuk, ıceberg marul, turşu, mısır, sezar sos ve patates kızartması, sweet chilli sos ile servis edilir"
+      },
+      {
+        "name": "CHEDDAR BURGER",
+        "price": "₺620.00",
+        "category": "BURGER",
+        "desc": "Burger ekeği, 150 gr köfte, karamelize soğan, kuru et, domates, turşu, caheddar sos, patates kızartması ve coleslaw ile servis edilir"
+      },
+      {
+        "name": "WAFFLE TOST",
+        "price": "₺420.00",
+        "category": "BURGER",
+        "desc": "Waffle, Tavuk göğsü, Sezar sos, Dilim cheddar, Yeşillik, Patates kızartması, Sweet chili sos"
+      },
+      {
+        "name": "ÇITIR BURGER",
+        "price": "₺540.00",
+        "category": "BURGER"
+      },
+      {
+        "name": "ÇİLEKLİ MAGNOLYA",
+        "price": "₺385.00",
+        "category": "ADET PASTA",
+        "desc": "Magnolya Kreması - Çilek - Bisküvi"
+      },
+      {
+        "name": "LOVE BOMBING",
+        "price": "₺385.00",
+        "category": "ADET PASTA",
+        "desc": "Kakaolu Kek-Çikolatalı İtalyan Krema-Frambuaz Sos"
+      },
+      {
+        "name": "FISTIK RÜYASI",
+        "price": "₺430.00",
+        "category": "ADET PASTA",
+        "desc": "Fıstıklı Kek - Antep Fıstıklı Akışkan Krema - Belçika Çikolata"
+      },
+      {
+        "name": "BOL ÇİLEKLİ ROLL",
+        "price": "₺410.00",
+        "category": "ADET PASTA",
+        "desc": "Beyaz Kek - İtalyan Krema - Çilek"
+      },
+      {
+        "name": "NUUVA",
+        "price": "₺430.00",
+        "category": "ADET PASTA",
+        "desc": "Kakaolu Kek-NUUVA Krema-Muz-Çilek-Yaban Mersini-Belçika Çikolata-Krep Kırığı"
+      },
+      {
+        "name": "DARK BLOOM",
+        "price": "₺410.00",
+        "category": "ADET PASTA",
+        "desc": "Kakaolu Kek-Çikolatalı İtalyan Krema-Akışkan Siyah Sos"
+      },
+      {
+        "name": "CREME BRULEE",
+        "price": "₺410.00",
+        "category": "ADET PASTA",
+        "desc": "İnce karamelize tabaka altında ipeksi vanilyalı krema"
+      },
+      {
+        "name": "POLKA",
+        "price": "₺430.00",
+        "category": "ADET PASTA"
+      },
+      {
+        "name": "PROFİTEROL MUZ ÇİLEK",
+        "price": "₺460.00",
+        "category": "ADET PASTA",
+        "desc": "Çıtır Profiterol Topları - Patacı Krema - Sütlü Belçika Çikolata - Çilek - Muz - Antep Fıstık - Krep Kırığı"
+      },
+      {
+        "name": "NUUVA BERRY",
+        "price": "₺460.00",
+        "category": "ADET PASTA",
+        "desc": "Kakaolu Kek-Çikolatalı İtalyan Krema-Akışkan Siyah Sos-Frambuaz Dolgu-Antep Fıstık"
+      },
+      {
+        "name": "FISTIK TANESİ",
+        "price": "₺460.00",
+        "category": "ADET PASTA",
+        "desc": "Kıtır Hamur-İtalyan Krema-Antep Fıstıklı Krema-Belçika Çikolata"
+      },
+      {
+        "name": "FESTİVAL",
+        "price": "₺385.00",
+        "category": "ADET PASTA",
+        "desc": "Vanilyalı Kek - İtalyan Krema - Frenk Üzüm - Yaban Mersini - Çilek"
+      },
+      {
+        "name": "İMZALI BERRY CHOCOLATE",
+        "price": "₺410.00",
+        "category": "ADET PASTA",
+        "desc": "Kakaolu Sponge Kek - Çikolatalı İtalyan Krema - Orman Meyvesi - Frambuaz"
+      },
+      {
+        "name": "GLUTENSİZ PAVLOVA",
+        "price": "₺430.00",
+        "category": "ADET PASTA",
+        "desc": "Fıstıklı Mereng - İtalyan Krema - Çilek-Orman Meyveleri"
+      },
+      {
+        "name": "GLUTENSİZ ORMAN MEYVELİ ROLL",
+        "price": "₺430.00",
+        "category": "ADET PASTA",
+        "desc": "Kakaolu Glutensiz Kek - İtalyan Krema - Çilek - Orman Meyveleri"
+      },
+      {
+        "name": "LIME FRAMBUAZ",
+        "price": "₺430.00",
+        "category": "ADET PASTA",
+        "desc": "Vanilyalı Pandispanya-Limon-Frambuaz"
+      },
+      {
+        "name": "TİRAMİSU",
+        "price": "₺430.00",
+        "category": "ADET PASTA",
+        "desc": "Kahve Aromalı El Yapımı Kedi Dili-Mascarpone Krema-Kakao"
+      },
+      {
+        "name": "BELÇİKA ÇİKOLATALI PROFİTEROL",
+        "price": "₺430.00",
+        "category": "ADET PASTA",
+        "desc": "Çıtır Profiterol Topları - Patacı Krema - Sütlü Belçika Çikolata - Fındık - Krep Kırığı"
+      },
+      {
+        "name": "NUUVA DREAMS",
+        "price": "₺465.00",
+        "category": "ADET PASTA",
+        "desc": "Brownie Dilimleri - Nuuva Kreması - Çilek - Muz - Dondurma - Sütlü Belçika Çikolata - Antep Fıstık - Krep Kırığı"
+      },
+      {
+        "name": "GOLD CUP",
+        "price": "₺385.00",
+        "category": "ADET PASTA",
+        "desc": "Çikolatalı kek-Krema-El yapımı karamel sos-Tuzlu yer fıstığı-Çıtır gold çikolata"
+      },
+      {
+        "name": "VİŞNELİ ÇİKOLATALI CUP",
+        "price": "₺410.00",
+        "category": "ADET PASTA",
+        "desc": "Fındıklı cookıe parçaları-Vanilyalı krema-Belçika çikolatalı krema-El yapımı vişne dolgu"
+      },
+      {
+        "name": "ORMAN MEYVELİ TART",
+        "price": "₺385.00",
+        "category": "TART",
+        "desc": "Çikolatalı Tart - Çikolatalı Fransız Krema - Orman Meyveleri - Çilek"
+      },
+      {
+        "name": "KARAMEL TART",
+        "price": "₺385.00",
+        "category": "TART",
+        "desc": "Fındıklı Tart - Çikolatalı İtalyan Krema - Karamel"
+      },
+      {
+        "name": "ÇİLEKLİ FRESH TART",
+        "price": "₺385.00",
+        "category": "TART",
+        "desc": "Tart - Fransız Krema - Çilek Dolgu - Çilek"
+      },
+      {
+        "name": "ÇİLEK RÜYASI TART",
+        "price": "₺385.00",
+        "category": "TART",
+        "desc": "Çikolatalı Tart - Çilekli Krema -Orman Meyvesi - Belçika Çikolatası"
+      },
+      {
+        "name": "FRAMBUAZ CHEESECAKE",
+        "price": "₺430.00",
+        "category": "CHEESECAKE",
+        "desc": "Cheesecake Kreması-Frambuaz"
+      },
+      {
+        "name": "LİMON CHEESECAKE",
+        "price": "₺430.00",
+        "category": "CHEESECAKE",
+        "desc": "Cheesecake Kreması-Limon Marmelatı"
+      },
+      {
+        "name": "YABAN MERSİNİ CHEESECAKE",
+        "price": "₺430.00",
+        "category": "CHEESECAKE",
+        "desc": "Cheesecake krema-yaban mersini"
+      },
+      {
+        "name": "SAN SEBASTIAN",
+        "price": "₺460.00",
+        "category": "CHEESECAKE",
+        "desc": "Vanilyalı Sebastian Kremalı"
+      },
+      {
+        "name": "SUFLE COOKIE",
+        "price": "₺430.00",
+        "category": "KEK-KURABİYE-WAFFLE",
+        "desc": "Antep fıstıklı cookie, Belçika çikolatalı sufle, pudra şekeri, çilek, kaymak dondurma,"
+      },
+      {
+        "name": "BEYAZ ÇİKOLATALI BROWNIE",
+        "price": "₺410.00",
+        "category": "KEK-KURABİYE-WAFFLE",
+        "desc": "Frambuaz, ceviz ve beyaz çikolatalı brownie, vişne sos, kaymak dondurma"
+      },
+      {
+        "name": "BELÇİKA WAFFLE ÇİLEK MUZ",
+        "price": "₺440.00",
+        "category": "KEK-KURABİYE-WAFFLE",
+        "desc": "Vanilya Aromalı Waffle - Sütlü Belçika Çikolatası- Çilek - Muz -Krep Kırığı ve Fıstık"
+      },
+      {
+        "name": "BELÇİKA WAFFLE ORMAN MEYVE",
+        "price": "₺440.00",
+        "category": "KEK-KURABİYE-WAFFLE",
+        "desc": "Vanilya Aromalı Waffle - Sütlü Belçika Çikolatası - Orman Meyvesi - Krep Kırığı ve Fıstık"
+      },
+      {
+        "name": "BROWNIE",
+        "price": "₺340.00",
+        "category": "KEK-KURABİYE-WAFFLE",
+        "desc": "Beyaz Çikolatalı Brownie"
+      },
+      {
+        "name": "FISTIKLI NUUVA COOKIE",
+        "price": "₺240.00",
+        "category": "KEK-KURABİYE-WAFFLE"
+      },
+      {
+        "name": "FINDIK DOLGULU NUUVA COOKIE",
+        "price": "₺220.00",
+        "category": "KEK-KURABİYE-WAFFLE",
+        "desc": "Akışkan Fındık Kremalı"
+      },
+      {
+        "name": "BEYAZ ÇİKOLATALI NUUVA KURABİYE",
+        "price": "₺220.00",
+        "category": "KEK-KURABİYE-WAFFLE",
+        "desc": "Beyaz Çikolata Dolgulu"
+      },
+      {
+        "name": "HAVUÇLU KEK",
+        "price": "₺230.00",
+        "category": "KEK-KURABİYE-WAFFLE"
+      },
+      {
+        "name": "MERMER CAKE",
+        "price": "₺240.00",
+        "category": "KEK-KURABİYE-WAFFLE",
+        "desc": "Kakao ve Vanilya Aromalı Kek"
+      },
+      {
+        "name": "BURGU DANISH ÇİLEK",
+        "price": "₺330.00",
+        "category": "KRUVASAN",
+        "desc": "Danish kruvasan, NUUVA krema, yaban mersini, frenk üzüm, çilek, 1 pot Belçika çikolata ile servis edilir"
+      },
+      {
+        "name": "DISC KRUVASAN FRAMBUAZ",
+        "price": "₺395.00",
+        "category": "KRUVASAN"
+      },
+      {
+        "name": "KÜP KRUVASAN FRAMBUAZ",
+        "price": "₺395.00",
+        "category": "KRUVASAN"
+      },
+      {
+        "name": "KREMALI DÜŞ KRUVASAN",
+        "price": "₺395.00",
+        "category": "KRUVASAN",
+        "desc": "Kruvasan, NUUVA krema, yaban mersini, frenk üzüm, çilek, 1 pot Belçika çikolata ile servis edilir"
+      },
+      {
+        "name": "SLIM KRUVASAN",
+        "price": "₺385.00",
+        "category": "KRUVASAN",
+        "desc": "Tereyağlı slım kruvasan, NUUVA krema, yaban mersini, frenk üzüm, çilek, 1 pot Belçika çikolata ile servis edilir"
+      },
+      {
+        "name": "STRAWBERRY KRUVASAN",
+        "price": "₺440.00",
+        "category": "KRUVASAN",
+        "desc": "Tereyağlı kruvasan, NUUVA krema, çilek, 1 pot Belçika çikolata ile servis edilir"
+      },
+      {
+        "name": "MUZ KRUVASAN",
+        "price": "₺440.00",
+        "category": "KRUVASAN",
+        "desc": "Tereyağlı kruvasan, NUUVA krema, muz, 1 pot Belçika çikolata ile servis edilir"
+      },
+      {
+        "name": "MUZ ÇİLEK KRUVASAN",
+        "price": "₺440.00",
+        "category": "KRUVASAN",
+        "desc": "Tereyağlı kruvasan, NUUVA krema, muz, çilek, 1 pot Belçika çikolata ile servis edilir"
+      },
+      {
+        "name": "ANTEP FISTIKLI KRUVASAN",
+        "price": "₺460.00",
+        "category": "KRUVASAN",
+        "desc": "Antep fıstıklı krema, Orman meyveleri 1 pot Belçika çikolata ile servis edilir"
+      },
+      {
+        "name": "MİNİ KRUVASAN BOWL",
+        "price": "₺490.00",
+        "category": "KRUVASAN",
+        "desc": "Minik tereyağlı kruvasan, muz, çilek, böğürtlen, Belçika çikolata sütlü ve beyaz"
+      },
+      {
+        "name": "MİNİ KRUVASAN BAHÇESİ",
+        "price": "₺440.00",
+        "category": "KRUVASAN",
+        "desc": "Profiterol sos dolgulu mini kruvasan, muz, Antep fıstık, Belçika çikolatalı kakaolu süt ile servis edilir"
+      },
+      {
+        "name": "LİMON FRESH",
+        "price": "₺440.00",
+        "category": "KRUVASAN",
+        "desc": "Tereyağlı kruvasan, limon krema, yaban mersini, limon"
+      },
+      {
+        "name": "BURGU DANISH FÜME ET & İCİR",
+        "price": "₺385.00",
+        "category": "KRUVASAN",
+        "desc": "Burgu danish, labne sos, füme et, kuru incir, karamelize soğan"
+      },
+      {
+        "name": "BURGU DANISH HİNDİ FÜME & KAYISI",
+        "price": "₺365.00",
+        "category": "KRUVASAN",
+        "desc": "Burgu danish, labne sos, hindi füme, kuru kayısı, kabak çekirdeği, ceviz"
+      },
+      {
+        "name": "BURGU DANISH AKDENİZ",
+        "price": "₺360.00",
+        "category": "KRUVASAN",
+        "desc": "Burgu danish, labne sos, çeri domates, biber, dilim zeytin"
+      },
+      {
+        "name": "BURGU DANISH YAKUT",
+        "price": "₺365.00",
+        "category": "KRUVASAN",
+        "desc": "Burgu danish, labne sos, pancar, roka"
+      },
+      {
+        "name": "TEREYAĞLI KRUVASAN",
+        "price": "₺185.00",
+        "category": "KRUVASAN"
+      },
+      {
+        "name": "ÇİKOLATALI KRUVASAN",
+        "price": "₺245.00",
+        "category": "KRUVASAN"
+      },
+      {
+        "name": "VİŞNE BROWNIE KRUVASAN",
+        "price": "₺440.00",
+        "category": "KRUVASAN",
+        "desc": "Vişne dolgu, Brownie, Krema"
+      },
+      {
+        "name": "DANISH SEBZELİ PARMESAN",
+        "price": "₺260.00",
+        "category": "KRUVASAN"
+      },
+      {
+        "name": "KÜP KRUVASAN SÜTLÜ BELÇİKA ÇİKOLATA",
+        "price": "₺395.00",
+        "category": "KRUVASAN",
+        "desc": "Çikolata Dolgulu Küp Kruvasan"
+      },
+      {
+        "name": "ISPANAKLI PEYNİRLİ KRUVASAN",
+        "price": "₺285.00",
+        "category": "KRUVASAN"
+      },
+      {
+        "name": "ZEYTİNLİ KAŞARLI KRUVASAN",
+        "price": "₺285.00",
+        "category": "KRUVASAN"
+      },
+      {
+        "name": "JAMBON KAŞARLI KRUVASAN",
+        "price": "₺320.00",
+        "category": "KRUVASAN"
+      },
+      {
+        "name": "HORN KRUVASAN",
+        "price": "₺385.00",
+        "category": "KRUVASAN"
+      },
+      {
+        "name": "DISC KRUVASAN ÇİKOLATA",
+        "price": "₺395.00",
+        "category": "KRUVASAN"
+      },
+      {
+        "name": "PAPİLLON KRUVASAN FRAMBUAZ",
+        "price": "₺385.00",
+        "category": "KRUVASAN"
+      },
+      {
+        "name": "CAPRESE TAHILLI KRUVASAN",
+        "price": "₺410.00",
+        "category": "SANDWICH",
+        "desc": "Tahıl kruvasan, avokado sos, yeşillik, suda mozarella, domates, ceviz, pesto sos"
+      },
+      {
+        "name": "TAHILLI BAGET TAVUK CHEDDAR",
+        "price": "₺410.00",
+        "category": "SANDWICH",
+        "desc": "Tahıllı baget, acuka sos, yeşillik, domates, turşu, tavuk ızgara, kapya biber, dilim cheddar peynir"
+      },
+      {
+        "name": "FOCACCIA ROAST BEEF HELLİM",
+        "price": "₺410.00",
+        "category": "SANDWICH",
+        "desc": "Focaccia, labne sos, yeşillik, domates, salatalık, hellim peynir, roast beef, ceviz, pesto sos"
+      },
+      {
+        "name": "FOCACCIA EZİNE",
+        "price": "₺320.00",
+        "category": "SANDWICH",
+        "desc": "Focaccia, labne sos, yeşillik, domates, salatalık, ezine peynir, dilim siyah zeytin, ceviz, pesto sos"
+      },
+      {
+        "name": "FOCACCIA HİNDİ FÜME",
+        "price": "₺385.00",
+        "category": "SANDWICH",
+        "desc": "Focaccia, labne sos, acuka sos, yeşillik, domates, salatalık, hindi füme, dilim ceheddar peynir"
+      },
+      {
+        "name": "PANİNİ IZGARA SEBZE",
+        "price": "₺385.00",
+        "category": "SANDWICH",
+        "desc": "Panini ekmeği, acuka sos, yeşillik, fırınlanmış kabak, patlıcan, kapya biber, dilim cheddar peynir"
+      },
+      {
+        "name": "TAHILLI BAGET ROAST BEFF HELLİM",
+        "price": "₺420.00",
+        "category": "SANDWICH",
+        "desc": "Tahıllı baget, labne sos, yeşillik, domates, salatalık, hellim peynir, roast beef, ceviz, pesto sos"
+      },
+      {
+        "name": "SUSAMLI BAGET EZİNE",
+        "price": "₺310.00",
+        "category": "SANDWICH",
+        "desc": "Susamlı baget, labne sos, yeşillik, domates, salatalık, ezine peynir, dilim siyah zeytin, ceviz, pesto sos"
+      },
+      {
+        "name": "BAGEL TAHIL EZİNE",
+        "price": "₺310.00",
+        "category": "SANDWICH",
+        "desc": "Tahıl bagel, labne sos, yeşillik, domates, salatalık, ezine peynir, dilim siyah zeytin, ceviz, pesto sos"
+      },
+      {
+        "name": "BAGEL CEVİZ EZİNE",
+        "price": "₺310.00",
+        "category": "SANDWICH",
+        "desc": "Cevizli bagel, labne sos, yeşillik, domates, salatalık, ezine peynir, dilim siyah zeytin, ceviz, pesto sos"
+      },
+      {
+        "name": "BAGEL CHIA JAMBON KAŞAR",
+        "price": "₺395.00",
+        "category": "SANDWICH",
+        "desc": "Chıa bagel, labne sos, domates, salatalık, dilim kaşar peynir, dilim jambon"
+      },
+      {
+        "name": "KRUVASAN HİNDİ FÜME",
+        "price": "₺385.00",
+        "category": "SANDWICH",
+        "desc": "Tereyağlı kruvasan, labne sos, acuka sos, yeşillik, domates, salatalık, hindi füme, dilim ceheddar peynir"
+      },
+      {
+        "name": "ARPALI SİMİT",
+        "price": "₺45.00",
+        "category": "BAKERY"
+      },
+      {
+        "name": "CHIA TOHUMLU SİMİT",
+        "price": "₺45.00",
+        "category": "BAKERY"
+      },
+      {
+        "name": "FİLİSTİN SİMİDİ",
+        "price": "₺40.00",
+        "category": "BAKERY"
+      },
+      {
+        "name": "İSVEÇ ÇÖREĞİ",
+        "price": "₺210.00",
+        "category": "BAKERY"
+      },
+      {
+        "name": "ÜSKÜDAR SİMİDİ",
+        "price": "₺35.00",
+        "category": "BAKERY"
+      },
+      {
+        "name": "TEPSİ PİZZA ŞARKÜTERİ",
+        "price": "₺210.00",
+        "category": "BAKERY"
+      },
+      {
+        "name": "TEPSİ PİZZA AKDENİZ",
+        "price": "₺210.00",
+        "category": "BAKERY"
+      },
+      {
+        "name": "ÇAY",
+        "price": "₺85.00",
+        "category": "ÇAY-TÜRK KAHVESİ",
+        "desc": "95 ml"
+      },
+      {
+        "name": "FİNCAN ÇAY",
+        "price": "₺120.00",
+        "category": "ÇAY-TÜRK KAHVESİ",
+        "desc": "210 ml"
+      },
+      {
+        "name": "GEYŞA ÇAYI",
+        "price": "₺285.00",
+        "category": "ÇAY-TÜRK KAHVESİ",
+        "desc": "Beyaz çay, yeşil çay, yasemin çiçeği, gül yaprağı, ayçiçeği"
+      },
+      {
+        "name": "HİBİSCUS ÇAYI",
+        "price": "₺240.00",
+        "category": "ÇAY-TÜRK KAHVESİ",
+        "desc": "Hibiskus, elma, portakal kabuğu, böğürtlen yaprağı, gül yaprağı, mürver"
+      },
+      {
+        "name": "IHLAMUR ÇAYI",
+        "price": "₺240.00",
+        "category": "ÇAY-TÜRK KAHVESİ",
+        "desc": "Ihlamur, portakal çiçeği, tarçın kabağu"
+      },
+      {
+        "name": "KIŞ ÇAYI",
+        "price": "₺265.00",
+        "category": "ÇAY-TÜRK KAHVESİ",
+        "desc": "Zencefil, limon otu, zeytin yaprağı, tarçın, meyan kökü, rezene, anason, karabiber, gül, melisa, papatya"
+      },
+      {
+        "name": "RELAX ÇAYI",
+        "price": "₺260.00",
+        "category": "ÇAY-TÜRK KAHVESİ",
+        "desc": "Mayıs papatyası, melisa, rezene, gül yaprağı, adaçayı"
+      },
+      {
+        "name": "YEŞİL ÇAY",
+        "price": "₺240.00",
+        "category": "ÇAY-TÜRK KAHVESİ",
+        "desc": "Yeşil çay, gül yaprağı, ayçiçeği, ebegümeci çiçeği"
+      },
+      {
+        "name": "TÜRK KAHVESİ",
+        "price": "₺175.00",
+        "category": "ÇAY-TÜRK KAHVESİ"
+      },
+      {
+        "name": "DOUBLE TÜRK KAHVESİ",
+        "price": "₺220.00",
+        "category": "ÇAY-TÜRK KAHVESİ"
+      },
+      {
+        "name": "DAMLA SAKIZLI TÜRK KAHVESİ",
+        "price": "₺185.00",
+        "category": "ÇAY-TÜRK KAHVESİ"
+      },
+      {
+        "name": "DOUBLE DAMLA SAKIZLI TÜRK KAHVESİ",
+        "price": "₺230.00",
+        "category": "ÇAY-TÜRK KAHVESİ"
+      },
+      {
+        "name": "CAPPUCCINO",
+        "price": "₺255.00",
+        "category": "SICAK KAHVELER"
+      },
+      {
+        "name": "PUMPKIN SPICE LATTE",
+        "price": "₺310.00",
+        "category": "SICAK KAHVELER"
+      },
+      {
+        "name": "V60",
+        "price": "₺320.00",
+        "category": "SICAK KAHVELER"
+      },
+      {
+        "name": "CREME BRULLE LATTE",
+        "price": "₺280.00",
+        "category": "SICAK KAHVELER"
+      },
+      {
+        "name": "ESPRESSO",
+        "price": "₺165.00",
+        "category": "SICAK KAHVELER"
+      },
+      {
+        "name": "DOUBLE ESPRESSO",
+        "price": "₺210.00",
+        "category": "SICAK KAHVELER"
+      },
+      {
+        "name": "RISTRETTO",
+        "price": "₺145.00",
+        "category": "SICAK KAHVELER"
+      },
+      {
+        "name": "RISTRETTO MACCHIATO",
+        "price": "₺155.00",
+        "category": "SICAK KAHVELER"
+      },
+      {
+        "name": "ESPRESSO MACCHIATO",
+        "price": "₺165.00",
+        "category": "SICAK KAHVELER"
+      },
+      {
+        "name": "AMERICANO",
+        "price": "₺225.00",
+        "category": "SICAK KAHVELER"
+      },
+      {
+        "name": "FİLTRE KAHVE",
+        "price": "₺220.00",
+        "category": "SICAK KAHVELER"
+      },
+      {
+        "name": "RED EYE",
+        "price": "₺245.00",
+        "category": "SICAK KAHVELER",
+        "desc": "Filtre kahve ve tek shot espresso ile hazırlanır"
+      },
+      {
+        "name": "BLACK EYE",
+        "price": "₺255.00",
+        "category": "SICAK KAHVELER",
+        "desc": "Filtre kahve ve çift shot espresso ile hazırlanır"
+      },
+      {
+        "name": "DEAD EYE",
+        "price": "₺270.00",
+        "category": "SICAK KAHVELER",
+        "desc": "Filtre kahve ve üç shot espresso ile hazırlanır"
+      },
+      {
+        "name": "CORTADO",
+        "price": "₺235.00",
+        "category": "SICAK KAHVELER"
+      },
+      {
+        "name": "FLAT WHITE",
+        "price": "₺240.00",
+        "category": "SICAK KAHVELER"
+      },
+      {
+        "name": "CAFFEE LATTE",
+        "price": "₺250.00",
+        "category": "SICAK KAHVELER"
+      },
+      {
+        "name": "VEGAN LATTE YULAF",
+        "price": "₺320.00",
+        "category": "SICAK KAHVELER"
+      },
+      {
+        "name": "VEGAN LATTE BADEM",
+        "price": "₺320.00",
+        "category": "SICAK KAHVELER"
+      },
+      {
+        "name": "VANİLYA LATTE",
+        "price": "₺290.00",
+        "category": "SICAK KAHVELER"
+      },
+      {
+        "name": "FINDIK LATTE",
+        "price": "₺290.00",
+        "category": "SICAK KAHVELER"
+      },
+      {
+        "name": "CARAMEL LATTE",
+        "price": "₺290.00",
+        "category": "SICAK KAHVELER"
+      },
+      {
+        "name": "ANTEP FISTIKLI LATTE",
+        "price": "₺340.00",
+        "category": "SICAK KAHVELER"
+      },
+      {
+        "name": "TİRAMİSU LATTE",
+        "price": "₺310.00",
+        "category": "SICAK KAHVELER"
+      },
+      {
+        "name": "LOTUS LATTE",
+        "price": "₺310.00",
+        "category": "SICAK KAHVELER"
+      },
+      {
+        "name": "TOFFE NUT LATTE",
+        "price": "₺265.00",
+        "category": "SICAK KAHVELER"
+      },
+      {
+        "name": "ESPRESSO CHAI TEA LATTE",
+        "price": "₺290.00",
+        "category": "SICAK KAHVELER"
+      },
+      {
+        "name": "CHAI TEA LATTE",
+        "price": "₺310.00",
+        "category": "SICAK KAHVELER"
+      },
+      {
+        "name": "MOCHA",
+        "price": "₺300.00",
+        "category": "SICAK KAHVELER"
+      },
+      {
+        "name": "WHITE MOCHA",
+        "price": "₺310.00",
+        "category": "SICAK KAHVELER"
+      },
+      {
+        "name": "BERRY WHITE MOCHA",
+        "price": "₺310.00",
+        "category": "SICAK KAHVELER"
+      },
+      {
+        "name": "MATCHA LATTE",
+        "price": "₺355.00",
+        "category": "SICAK KAHVELER",
+        "desc": "Yulaf ve badem süt seçenekleri ile hazırlanır"
+      },
+      {
+        "name": "MATCHA LATTE ÇİLEK",
+        "price": "₺375.00",
+        "category": "SICAK KAHVELER",
+        "desc": "Yulaf ve badem süt seçenekleri ile hazırlanır"
+      },
+      {
+        "name": "MATCHA LATTE KARAMEL",
+        "price": "₺375.00",
+        "category": "SICAK KAHVELER",
+        "desc": "Yulaf ve badem süt seçenekleri ile hazırlanır"
+      },
+      {
+        "name": "MATCHA LATTE VANİLYA",
+        "price": "₺375.00",
+        "category": "SICAK KAHVELER",
+        "desc": "Yulaf ve badem süt seçenekleri ile hazırlanır"
+      },
+      {
+        "name": "SICAK ÇİKOLATA",
+        "price": "₺310.00",
+        "category": "SICAK KAHVELER"
+      },
+      {
+        "name": "BEYAZ SICAK ÇİKOLATA",
+        "price": "₺320.00",
+        "category": "SICAK KAHVELER"
+      },
+      {
+        "name": "SALEP",
+        "price": "₺265.00",
+        "category": "SICAK KAHVELER"
+      },
+      {
+        "name": "DAMLA SAKIZLI SALEP",
+        "price": "₺285.00",
+        "category": "SICAK KAHVELER"
+      },
+      {
+        "name": "ICE AMERICANO",
+        "price": "₺255.00",
+        "category": "SOĞUK KAHVELER"
+      },
+      {
+        "name": "COLD BREW",
+        "price": "₺285.00",
+        "category": "SOĞUK KAHVELER"
+      },
+      {
+        "name": "AFFOGATO",
+        "price": "₺295.00",
+        "category": "SOĞUK KAHVELER"
+      },
+      {
+        "name": "ICE FİLTRE",
+        "price": "₺245.00",
+        "category": "SOĞUK KAHVELER"
+      },
+      {
+        "name": "ICE LATTE",
+        "price": "₺275.00",
+        "category": "SOĞUK KAHVELER"
+      },
+      {
+        "name": "ICE LATTE KARAMEL",
+        "price": "₺310.00",
+        "category": "SOĞUK KAHVELER"
+      },
+      {
+        "name": "ICE LATTE VANİLYA",
+        "price": "₺310.00",
+        "category": "SOĞUK KAHVELER"
+      },
+      {
+        "name": "ICE LATTE FINDIK",
+        "price": "₺310.00",
+        "category": "SOĞUK KAHVELER"
+      },
+      {
+        "name": "ICE LATTE ANTEP FISTIKLI",
+        "price": "₺340.00",
+        "category": "SOĞUK KAHVELER"
+      },
+      {
+        "name": "ICE LOTUS LATTE",
+        "price": "₺320.00",
+        "category": "SOĞUK KAHVELER"
+      },
+      {
+        "name": "ICE LATTE TİRAMİSU",
+        "price": "₺340.00",
+        "category": "SOĞUK KAHVELER"
+      },
+      {
+        "name": "ICE TUFFEE NUT LATTE",
+        "price": "₺310.00",
+        "category": "SOĞUK KAHVELER"
+      },
+      {
+        "name": "ICE VEGAN LATTE YULAF",
+        "price": "₺355.00",
+        "category": "SOĞUK KAHVELER"
+      },
+      {
+        "name": "ICE VEGAN LATTE BADEM",
+        "price": "₺355.00",
+        "category": "SOĞUK KAHVELER"
+      },
+      {
+        "name": "ICE MOCHA",
+        "price": "₺310.00",
+        "category": "SOĞUK KAHVELER"
+      },
+      {
+        "name": "ICE WHITE MOCHA",
+        "price": "₺320.00",
+        "category": "SOĞUK KAHVELER"
+      },
+      {
+        "name": "ICE BERRY WHITE MOCHA",
+        "price": "₺320.00",
+        "category": "SOĞUK KAHVELER"
+      },
+      {
+        "name": "ICE CHAI TEA LATTE",
+        "price": "₺320.00",
+        "category": "SOĞUK KAHVELER"
+      },
+      {
+        "name": "ICE ESPRESSO CHAI TEA LATTE",
+        "price": "₺310.00",
+        "category": "SOĞUK KAHVELER"
+      },
+      {
+        "name": "ICE MATCHA",
+        "price": "₺375.00",
+        "category": "SOĞUK KAHVELER",
+        "desc": "Yulaf ve badem süt seçenekleri ile hazırlanır"
+      },
+      {
+        "name": "ICE MATCHA ÇİLEK",
+        "price": "₺395.00",
+        "category": "SOĞUK KAHVELER",
+        "desc": "Yulaf ve badem süt seçenekleri ile hazırlanır"
+      },
+      {
+        "name": "ICE MATCHA VANİLYA",
+        "price": "₺395.00",
+        "category": "SOĞUK KAHVELER",
+        "desc": "Yulaf ve badem süt seçenekleri ile hazırlanır"
+      },
+      {
+        "name": "ICE MATCHA FINDIK",
+        "price": "₺390.00",
+        "category": "SOĞUK KAHVELER",
+        "desc": "Yulaf ve badem süt seçenekleri ile hazırlanır"
+      },
+      {
+        "name": "ICE MATCHA KARAMEL",
+        "price": "₺395.00",
+        "category": "SOĞUK KAHVELER",
+        "desc": "Yulaf ve badem süt seçenekleri ile hazırlanır"
+      },
+      {
+        "name": "OKYANUS",
+        "price": "₺410.00",
+        "category": "MOCTAIL",
+        "desc": "Soda , limon suyu blue ocen ve şeftali ile hazırlanır"
+      },
+      {
+        "name": "GALAXY",
+        "price": "₺410.00",
+        "category": "MOCTAIL",
+        "desc": "Soda , limon suyu, blue ocen ve mürver çiçeği ile hazırlanır"
+      },
+      {
+        "name": "COOL LIME",
+        "price": "₺355.00",
+        "category": "MOCTAIL"
+      },
+      {
+        "name": "BERRY HİBİSCUS",
+        "price": "₺355.00",
+        "category": "MOCTAIL",
+        "desc": "Hibiskus, Turna yemişi"
+      },
+      {
+        "name": "KUZU KULAĞI",
+        "price": "₺410.00",
+        "category": "MOCTAIL",
+        "desc": "Kuzu kulağı, Turunç karışımı, Yeşil erik, Limon otu"
+      },
+      {
+        "name": "CHERRY CHOCOLATE",
+        "price": "₺410.00",
+        "category": "MOCTAIL",
+        "desc": "Vişne, Orman meyveleri, çikolata"
+      },
+      {
+        "name": "SATSUMA",
+        "price": "₺410.00",
+        "category": "MOCTAIL",
+        "desc": "Bodrum mandalini, Turunç karışımı"
+      },
+      {
+        "name": "BERRY BOOM",
+        "price": "₺410.00",
+        "category": "MOCTAIL",
+        "desc": "Kırmızı orman meyveleri, Bodrum mandalini, Turunç karışımı"
+      },
+      {
+        "name": "WHITE PEACH",
+        "price": "₺410.00",
+        "category": "MOCTAIL",
+        "desc": "Beyaz çay, Şeftali"
+      },
+      {
+        "name": "PURPLE OCEAN",
+        "price": "₺410.00",
+        "category": "MOCTAIL",
+        "desc": "Mürver çiçeği özünden hazırlanır"
+      },
+      {
+        "name": "ORANGE MANGO",
+        "price": "₺410.00",
+        "category": "MOCTAIL",
+        "desc": "Mango ve portakal özü ile hazırlanır"
+      },
+      {
+        "name": "MORGANA",
+        "price": "₺410.00",
+        "category": "MOCTAIL",
+        "desc": "Limonata , elma ve olips ile hazırlanır"
+      },
+      {
+        "name": "REFRESHA",
+        "price": "₺410.00",
+        "category": "MOCTAIL",
+        "desc": "Ananas , nane ve yeşil elma ile hazırlanır"
+      },
+      {
+        "name": "FRAPPE KARAMEL",
+        "price": "₺360.00",
+        "category": "MILKSHAKE-FROZEN-SMOOTHIE"
+      },
+      {
+        "name": "FRAPPE VANİLYA",
+        "price": "₺360.00",
+        "category": "MILKSHAKE-FROZEN-SMOOTHIE"
+      },
+      {
+        "name": "FROZEN ÇARKIFELEK",
+        "price": "₺295.00",
+        "category": "MILKSHAKE-FROZEN-SMOOTHIE"
+      },
+      {
+        "name": "FROZEN ÇİLEK",
+        "price": "₺295.00",
+        "category": "MILKSHAKE-FROZEN-SMOOTHIE"
+      },
+      {
+        "name": "FROZEN MANGO",
+        "price": "₺295.00",
+        "category": "MILKSHAKE-FROZEN-SMOOTHIE"
+      },
+      {
+        "name": "FROZEN ORMANMEYVELİ",
+        "price": "₺295.00",
+        "category": "MILKSHAKE-FROZEN-SMOOTHIE"
+      },
+      {
+        "name": "FROZEN YEŞİL ELMA",
+        "price": "₺295.00",
+        "category": "MILKSHAKE-FROZEN-SMOOTHIE"
+      },
+      {
+        "name": "MILKSHAKE CİCİBEBE",
+        "price": "₺340.00",
+        "category": "MILKSHAKE-FROZEN-SMOOTHIE"
+      },
+      {
+        "name": "MILKSHAKE ÇİKOLATA",
+        "price": "₺340.00",
+        "category": "MILKSHAKE-FROZEN-SMOOTHIE"
+      },
+      {
+        "name": "MILKSHAKE ÇİLEK",
+        "price": "₺340.00",
+        "category": "MILKSHAKE-FROZEN-SMOOTHIE"
+      },
+      {
+        "name": "MILKSHAKE LOTUS",
+        "price": "₺340.00",
+        "category": "MILKSHAKE-FROZEN-SMOOTHIE"
+      },
+      {
+        "name": "MILKSHAKE VANİLYA",
+        "price": "₺340.00",
+        "category": "MILKSHAKE-FROZEN-SMOOTHIE"
+      },
+      {
+        "name": "SMOOTHIE ÇARKIFELEK",
+        "price": "₺310.00",
+        "category": "MILKSHAKE-FROZEN-SMOOTHIE"
+      },
+      {
+        "name": "SMOOTHIE ÇİLEK",
+        "price": "₺310.00",
+        "category": "MILKSHAKE-FROZEN-SMOOTHIE"
+      },
+      {
+        "name": "SMOOTHIE MANGO",
+        "price": "₺310.00",
+        "category": "MILKSHAKE-FROZEN-SMOOTHIE"
+      },
+      {
+        "name": "SMOOTHIE ORMAN MEYVELİ",
+        "price": "₺310.00",
+        "category": "MILKSHAKE-FROZEN-SMOOTHIE"
+      },
+      {
+        "name": "SMOOTHIE YEŞİL ELMA",
+        "price": "₺310.00",
+        "category": "MILKSHAKE-FROZEN-SMOOTHIE"
+      },
+      {
+        "name": "FROZEN NANE LİMON",
+        "price": "₺295.00",
+        "category": "MILKSHAKE-FROZEN-SMOOTHIE",
+        "desc": "Taze limon , limonata ve nane ile hazırlanır"
+      },
+      {
+        "name": "AYRAN",
+        "price": "₺115.00",
+        "category": "SOFT İÇECEKLER"
+      },
+      {
+        "name": "ÇİLEKLİ LİMONATA",
+        "price": "₺250.00",
+        "category": "SOFT İÇECEKLER"
+      },
+      {
+        "name": "FESLEĞENLİ AYRAN",
+        "price": "₺145.00",
+        "category": "SOFT İÇECEKLER"
+      },
+      {
+        "name": "GAZOZ",
+        "price": "₺115.00",
+        "category": "SOFT İÇECEKLER"
+      },
+      {
+        "name": "HAVUÇ PORTAKAL ELMA SUYU",
+        "price": "₺285.00",
+        "category": "SOFT İÇECEKLER"
+      },
+      {
+        "name": "KARIŞIK MEYVE SUYU",
+        "price": "₺115.00",
+        "category": "SOFT İÇECEKLER"
+      },
+      {
+        "name": "KAYISI SUYU",
+        "price": "₺115.00",
+        "category": "SOFT İÇECEKLER"
+      },
+      {
+        "name": "KOLA",
+        "price": "₺115.00",
+        "category": "SOFT İÇECEKLER"
+      },
+      {
+        "name": "NANELİ AYRAN",
+        "price": "₺145.00",
+        "category": "SOFT İÇECEKLER"
+      },
+      {
+        "name": "NANELİ LİMONATA",
+        "price": "₺250.00",
+        "category": "SOFT İÇECEKLER"
+      },
+      {
+        "name": "NAR SUYU",
+        "price": "₺285.00",
+        "category": "SOFT İÇECEKLER"
+      },
+      {
+        "name": "NAR PORTAKAL SUYU",
+        "price": "₺285.00",
+        "category": "SOFT İÇECEKLER"
+      },
+      {
+        "name": "PORTAKAL SUYU",
+        "price": "₺255.00",
+        "category": "SOFT İÇECEKLER"
+      },
+      {
+        "name": "PORTAKALLI GAZLI İÇECEK",
+        "price": "₺115.00",
+        "category": "SOFT İÇECEKLER"
+      },
+      {
+        "name": "REYHAN AROMALI GAZOZ",
+        "price": "₺115.00",
+        "category": "SOFT İÇECEKLER"
+      },
+      {
+        "name": "SU",
+        "price": "₺60.00",
+        "category": "SOFT İÇECEKLER"
+      },
+      {
+        "name": "ŞEFTALİ SUYU",
+        "price": "₺115.00",
+        "category": "SOFT İÇECEKLER"
+      },
+      {
+        "name": "VİŞNE SUYU",
+        "price": "₺115.00",
+        "category": "SOFT İÇECEKLER"
+      },
+      {
+        "name": "EL YAPIMI LİMONATA",
+        "price": "₺230.00",
+        "category": "SOFT İÇECEKLER"
+      },
+      {
+        "name": "SOĞUK ÇAY LİMON",
+        "price": "₺115.00",
+        "category": "SOFT İÇECEKLER"
+      },
+      {
+        "name": "CHURCILL",
+        "price": "₺195.00",
+        "category": "SOFT İÇECEKLER"
+      },
+      {
+        "name": "S.PELLEGRINO",
+        "price": "₺140.00",
+        "category": "SOFT İÇECEKLER",
+        "desc": "DOĞAL MİNERALLİ SU"
+      },
+      {
+        "name": "PATATES KIZARTMASI",
+        "price": "₺240.00",
+        "category": "EXTRALAR",
+        "desc": "240 gr patates kızartması servis edilir"
+      },
+      {
+        "name": "SAHANDA YUMURTA",
+        "price": "₺175.00",
+        "category": "EXTRALAR",
+        "desc": "2 adet yumurta"
+      },
+      {
+        "name": "EZİNE TABAĞI",
+        "price": "₺195.00",
+        "category": "EXTRALAR",
+        "desc": "Ezine peynir dilimleri"
+      },
+      {
+        "name": "HELLİM TABAĞI",
+        "price": "₺220.00",
+        "category": "EXTRALAR",
+        "desc": "Hellim peyniri"
+      }
+    ],
+  },
 };
