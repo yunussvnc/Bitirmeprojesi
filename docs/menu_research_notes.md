@@ -1422,3 +1422,6 @@ Hentzer kaydı `Atatürk, Albatros Sk., 34500 Büyükçekmece/İstanbul`, `+90 2
 
 ## HELVACI ALİ BEYLİKDÜZÜ ID 7027 strict HOLD
 Exact Hentzer kaydı `Barış, Reşat Nuri Güntekin Sk. No:58, 34520 Beylikdüzü/İstanbul`, `+90 541 193 19 00`; resmi Beylikdüzü Instagram profili ve resmi şube adresiyle eşleşiyor. Yemeksepeti’nde güncel fiyatlı Helvacı Ali menüsü bulundu, fakat canlı sayfa `New address / generic location` uyarısı veriyor ve vendorın exact Beylikdüzü şubesi olduğu doğrulanamıyor; resmi sitedeki genel çağrı merkezi telefonu da branch telefonuyla aynı değil. Şube paritesi kesinleşmediğinden **override eklenmedi; strict HOLD**.
+
+## ACADEMY DÖNER İSTANBUL KAVACIK ID 7026 strict HOLD
+Exact Hentzer kaydı `Kavacık, Otağtepe Cd. No:45/A, 34810 Beykoz/İstanbul`, `+90 216 232 41 51`; resmi Kavacık Instagram profili ve bağımsız işletme kayıtlarıyla adres/telefon eşleşti. Yemeksepeti’nde güncel Academy Döner menüleri bulundu, ancak birden fazla İstanbul/şehir vendorı mevcut ve exact Kavacık adresi vendor sayfasında doğrulanamadı. Şube paritesi kesinleşmeden zincir/genel menü aktarılmadı; **strict HOLD**.
