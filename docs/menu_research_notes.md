@@ -1467,3 +1467,6 @@ Exact kayıt `Sinanpaşa Mah. Hasfırın Cad. No:5, İç Kapı No:110, 34353 Be�
 
 ## PIZZA DIO BEYLİKDÜZÜ ID 7012 kabul
 Exact kayıt `Barış, Bestekar Sk. No:1 A Blok, 34250 Beylikdüzü/İstanbul`, `+90 549 624 24 00`; resmi Pizza Dio kaydıyla adres/telefon eşleşti. Migros Yemek exact `Pizza Dio, Beylikdüzü (Barış Mah.)` sayfasının 2026-08-25 canlı DOM fiyatlarından Peynirli Pizzalar, Sebzeli Pizzalar, Etli Pizzalar, Yan Ürünler, İçecekler ve Soslar kategorilerinden **21 benzersiz ürün/fiyat** alındı. Poşet ve servis ücreti kalemi bulunmadığından aktarılmadı.
+
+## SAĞDIÇLAR BALIKÇILIK ID 7011 strict HOLD
+Exact kayıt `Rüzgarlıbahçe Mah. Cumhuriyet Cad. No:143/B Kavacık Beykoz/İstanbul`, `+90 216 322 95 30`; resmi iletişim sayfası bu adres ve telefonu doğruluyor. İşletme kaynaklarda deniz ürünleri toptancısı/balıkçılık firması olarak geçiyor; herkese açık restoran yiyecek menüsü ve item-level satış fiyatları yok. Balık ürünlerini restoran menüsü gibi uydurmamak için **override eklenmedi; strict HOLD**.
