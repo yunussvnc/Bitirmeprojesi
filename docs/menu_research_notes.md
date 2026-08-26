@@ -2713,3 +2713,6 @@ Hentzer kaydı `Gayrettepe, Yıldız Posta Cd. No:46, 34394 Beşiktaş/İstanbul
 
 ## MODA DA NATA BEŞİKTAŞ ID 6594
 Hentzer kaydı `Yıldız, Çırağan Cd. No:27/1, 34353 Beşiktaş/İstanbul`, telefon `+90 212 259 61 33`. Moda da Nata resmi şube sayfası Beşiktaş adresini aynen doğruluyor; Kaçıyor exact kaydı aynı adres ve telefonu listeliyor. Canlı Yemeksepeti Beşiktaş vendorından 18 benzersiz nata/tatlı ürünü ve ürün içeren menü seçildi; fiyatlar erişim tarihinde güncel, içecekler tek başına eklenmedi. **Override kabul edildi; 18 ürün.** Kaynaklar: https://modadanata.com/subelerimiz/ ; https://www.yemeksepeti.com/en/restaurant/conk/moda-da-nata-conk ; https://kaciyor.com/moda-da-nata
+
+## ALTIN KAZAN BEYLİKDÜZÜ ID 6593 HOLD
+Hentzer kaydı `Adnan Kahveci, Yavuz Sultan Selim Blv. No:43 D:2d, 34243 Beylikdüzü/İstanbul`, telefon `+90 535 664 61 70`. Telefon resmi Instagram `@altin_kazantr` ile eşleşiyor; ancak exact adres parity’si sağlanamadı: resmi Instagram `Yavuz Sultan Selim Blv. No:43/2B`, Yandex `43A1`, Hentzer `43 D:2d` yayımlıyor. Yemeksepeti ve Migros’ta güncel fiyatlı menü mevcut olsa da yanlış şubeye veri aktarma riski nedeniyle **override eklenmedi; strict HOLD**.
