@@ -2530,3 +2530,6 @@ Hentzer kaydı `Adnan Kahveci, Anadolu Cd. No:24/3, 34528 Beylikdüzü/İstanbul
 
 ## CHEESY PEASY BEŞİKTAŞ ID 6654 HOLD
 Hentzer kaydı `Türkali Mahallesi Ihlamurdere Caddesi, Türkali, Yeniyol Sokak No:17/A, 34353 Beşiktaş/İstanbul`, telefon `+90 533 028 93 19`. Yandex aktif işletme kaydı aynı telefonla Yeni Yol Sokak `17B` adresini gösteriyor. Arama sonuçlarında güncel fiyatlı exact Cheesy Peasy menüsü bulunamadı; adres farkı nedeniyle exact branch parity de sağlanamadı. **Override eklenmedi; strict HOLD**.
+
+## BABEN BEYKOZ ID 6653 HOLD
+Hentzer kaydı `Çiftlik Mahallesi Diyar Çıkmazı, Çiftlik, Fatih Sultan Mehmet Cd. No:1, 34830 Beykoz/İstanbul`, telefon `+90 532 231 52 71`. Nasilbiryer, Restoranim ve eski resmi sosyal paylaşımı adres/telefonu destekliyor; ancak bulunan fiyatlı sınırsız kahvaltı paylaşımı 26.08.2023 tarihli ve son bir yıl koşulunu karşılamıyor. 2025–2026 dönemine ait doğrulanabilir fiyatlı exact menü bulunamadı. **Override eklenmedi; strict HOLD**.
