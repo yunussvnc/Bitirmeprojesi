@@ -2419,3 +2419,6 @@ Hentzer kaydı `Vadi Loca Sitesi, Adnan Kahveci, Sayaca Cd. No:13 D:1 A Blok, 34
 
 ## TARİHİ KARAKÖY PİLAVCISI BEŞİKTAŞ ID 6692 ACCEPTED
 Hentzer kaydı `Sinanpaşa, Ortabahçe Cd. No:3, 34353 Beşiktaş/İstanbul`, telefon `+90 212 327 34 03`. İşletmenin resmi sitesi aynı adres ve telefonu yayınlıyor; resmi Instagram/Facebook da Beşiktaş Çarşı şubesi bilgilerini destekliyor. Canlı Yemeksepeti exact restoran sayfası `Sinanpaşa Mahallesi, Ortabahçe Caddesi, No:3` adresini ve onaylı telefon bilgisini gösteriyor. 26.08.2026 tarihinde çorba ve pilav kategorilerinden Popüler tekrarları dışarıda tutularak **20 güncel ürün-fiyat çifti** eklendi.
+
+## NOSOTROS COFFEE & BAKERY BEŞİKTAŞ ID 6691 HOLD
+Hentzer kaydı `Türkali, Ihlamurdere Cd. No:34, 34357 Beşiktaş/İstanbul`, telefon `+90 542 319 67 52`. Resmi Instagram aynı Ihlamurdere No:34 adresini doğruluyor ve 2026 tarihli içeriklerde 350 TL tatlı+k kahve kampanyası görülüyor; ancak güncel paylaşımlardaki iletişim numarası `0216 339 40 11` olarak geçiyor, Hentzer telefonu exact doğrulanamıyor. Bu nedenle güncel fiyat bulunmasına rağmen **override eklenmedi; strict HOLD**.
