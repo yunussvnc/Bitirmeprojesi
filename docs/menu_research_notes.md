@@ -2653,3 +2653,6 @@ Hentzer kaydı `Kartaltepe, Süleyman Şah Cd 32/A, 34040 Bayrampaşa/İstanbul`
 
 ## ATLANTİK DOĞA SPORLARI BAYRAMPAŞA ID 6614 HOLD
 Hentzer kaydı `Yıldırım, Eski Edirne Asf. No:87 D:89, 34045 Bayrampaşa/İstanbul`, telefon `+90 212 665 20 89`, kategori restoran. Arama ve işletme kaynakları Atlantik Doğa Sporları’nı av/outdoor ekipmanı mağazası olarak gösteriyor; Yandex’te aynı adreste telefon `+90 212 665 20 88` ve başka kayıtta farklı işletme/adres bilgisi var. Gıda restoranı menüsü bulunmadı. **Override eklenmedi; strict HOLD.**
+
+## MEAT MOOT ISTANBUL TAKSİM ID 6613 HOLD
+Hentzer kaydı `Şehit Muhtar, İmam Adnan Sk. No:5, 34010 Beyoğlu/İstanbul`, telefon `+90 539 723 30 20`. Meat Moot resmi Taksim şube sayfası aynı İmam Adnan No:5 adresini doğruluyor; ancak resmi telefon `+90 555 069 49 40` olarak yayımlanıyor. Resmi Taksim menüsü mevcut olsa da zorunlu telefon parity’si sağlanamadığı için fiyatlar kullanılmadı. **Override eklenmedi; strict HOLD.**
