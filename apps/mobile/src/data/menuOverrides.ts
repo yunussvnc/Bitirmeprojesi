@@ -4,6 +4,39 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6781": {
+    "name": "REK'S KITCHEN HOT DOG & BURGER BEYLİKDÜZÜ",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/mjkq/reks-kitchen-hot-dog-and-burger-mjkq",
+    "sourceName": "Rek's Kitchen canlı Yemeksepeti menüsü; resmi Instagram/işletme kayıtlarında Beylikdüzü ve telefon exact doğrulandı",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Rek's Hot Dog", "price": "529,95 TL", "category": "Hot Dog" },
+      { "name": "Mushroom Hot Dog", "price": "539,95 TL", "category": "Hot Dog" },
+      { "name": "Köri Soslu Hot Dog", "price": "549,95 TL", "category": "Hot Dog" },
+      { "name": "American Hot Dog", "price": "529,95 TL", "category": "Hot Dog" },
+      { "name": "Acılı Mayonezli Hot Dog", "price": "529,95 TL", "category": "Hot Dog" },
+      { "name": "Supreme Hot Dog", "price": "549,95 TL", "category": "Hot Dog" },
+      { "name": "Texas Smoke Smash Burger", "price": "584,95 TL", "category": "Burger" },
+      { "name": "New York Smash Burger", "price": "579,95 TL", "category": "Burger" },
+      { "name": "Rek's Burger", "price": "559,95 TL", "category": "Burger" },
+      { "name": "Mushroom Burger", "price": "579,95 TL", "category": "Burger" },
+      { "name": "Cheese Burger", "price": "559,95 TL", "category": "Burger" },
+      { "name": "Chili Mayo Burger", "price": "569,95 TL", "category": "Burger" },
+      { "name": "Cherry Mayo Burger", "price": "584,95 TL", "category": "Burger" },
+      { "name": "BBQ Burger", "price": "559,95 TL", "category": "Burger" },
+      { "name": "Retro Burger", "price": "559,95 TL", "category": "Burger" },
+      { "name": "Spicy French Fries", "price": "165 TL", "category": "Yan Ürünler" },
+      { "name": "Jumbo Size Spicy French Fries", "price": "185 TL", "category": "Yan Ürünler" },
+      { "name": "French Fries with Cheddar Sauce", "price": "200 TL", "category": "Yan Ürünler" },
+      { "name": "Jalapeño Fries with Cheddar Sauce", "price": "204,95 TL", "category": "Yan Ürünler" },
+      { "name": "French Fries with Mushroom Sauce", "price": "209,95 TL", "category": "Yan Ürünler" },
+      { "name": "French Fries with Cheddar & Chili Sauce", "price": "204,95 TL", "category": "Yan Ürünler" },
+      { "name": "Mozzarella Sticks (5 Pieces)", "price": "174,95 TL", "category": "Yan Ürünler" },
+      { "name": "6-Piece Chicken Pieces with Spicy Mayonnaise", "price": "209,95 TL", "category": "Yan Ürünler" },
+      { "name": "9 Pieces of Chicken with Spicy Mayonnaise", "price": "229,95 TL", "category": "Yan Ürünler" },
+      { "name": "6-Piece Onion Rings", "price": "104,95 TL", "category": "Yan Ürünler" }
+    ]
+  },
   "6783": {
     "name": "BOSTON DRINK & DESSERT BEYLİKDÜZÜ",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/b1td/boston-drink-and-dessert-b1td",

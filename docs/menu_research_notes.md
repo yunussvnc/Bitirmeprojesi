@@ -2145,3 +2145,6 @@ Hentzer kaydı `Barış, E-5 Yanyolu No:28 D:69, 34520 Beylikdüzü/İstanbul`, 
 
 ## SEZEN MEYHANE ID 6782 HOLD
 Hentzer kaydı `Türkali, Altıntaş Sk. 30/A, 34353 Beşiktaş/İstanbul`, telefon `+90 542 742 97 01`. İşletmenin Instagram/Facebook sonuçları aynı adresi ve telefonu destekliyor; Corner kaydı da adresi 31.07.2026 tarihinde güncel gösteriyor. Resmi site menü bağlantısını sunuyor ancak erişilebilir metinde fiyat bulunmuyor; fiyatlı Instagram fix-menü içerikleri 2023 tarihli. Son bir yıl içinde güncel, fiyatlı branch-specific menü doğrulanamadığı için **override eklenmedi; strict HOLD**.
+
+## REK'S KITCHEN HOT DOG & BURGER BEYLİKDÜZÜ ID 6781 ACCEPTED
+Hentzer kaydı Beylikdüzü/Adnan Kahveci ve telefon `+90 553 064 87 66`; işletmenin resmi Instagram profili aynı Beylikdüzü telefonunu yayınlıyor ve 2026 içerikleri güncel faaliyeti destekliyor. Canlı Yemeksepeti menüsünde 26.08.2026 tarihinde 6 hot dog, 9 burger ve 10 yan ürün fiyatı görüldü; gıda dışı ürünler eklenmedi. **25 ürün override edildi.**
