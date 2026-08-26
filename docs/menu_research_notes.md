@@ -2512,3 +2512,6 @@ Hentzer kaydı `Gayrettepe, Fuat Sarp Sk. No:5/A, 34330 Beşiktaş/İstanbul`; t
 
 ## LITTLE BUDDHA AKMERKEZ ID 6661 ACCEPTED
 Hentzer kaydı `Kültür, Nisbetiye Cd. Akmerkez AVM No:210 No:54, 34337 Beşiktaş/İstanbul`, telefon `+90 542 785 10 32`. Happy Group resmi şube sayfası aynı Akmerkez No:210 Kapı No:54 adresini ve 0542 785 10 32 telefonunu doğruluyor; resmi Instagram da Akmerkez telefonunu destekliyor. Canlı Yemeksepeti exact Little Buddha menüsünde güncel fiyatlar bulundu; Popüler carousel tekrarları dışarıda tutularak 20 bento/set, çorba, başlangıç ve nigiri ürünü eklendi.
+
+## KENAN USTA OCAKBAŞI BEYOĞLU ID 6660 HOLD
+Hentzer kaydı `Şehit Muhtar, Kurabiye Sk. No:18, 34435 Beyoğlu/İstanbul`, telefon `+90 212 293 56 11`. Resmi Kenan Usta sitesi, Apple Maps ve Facebook aynı Kurabiye Sokak No:18 adresini ve telefonu doğruluyor; işletme aktif. Ancak resmi menü sayfasındaki tüm fiyatlar `₺00,00` placeholder olarak yayınlanmış ve güncel gerçek fiyatlı başka exact şube kaynağı bulunamadı. **Override eklenmedi; strict HOLD**.
