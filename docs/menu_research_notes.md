@@ -2214,3 +2214,6 @@ Hentzer kaydı `Göztepe, Palmiye Cd. No:14, 34815 Beykoz/İstanbul`, telefon `+
 
 ## AZİMDEYİZ ANTAKYA MEYHANESİ BEŞİKTAŞ ID 6759 ACCEPTED
 Hentzer kaydı `Abbasağa, Maşuklar Ykş. No:111, 34353 Beşiktaş/İstanbul`, telefon `+90 212 258 59 54`. Resmi Instagram hesabı aynı adresi ve telefonu yayınlıyor; Menum.co sayfası da aynı işletme, adres ve Google Maps bağlantısını veriyor. Menum.co’da 26.08.2026 tarihinde erişilebilir fiyatlı tek kalem `Sucuklu Yumurta — 178 TL` görüldü. Diğer kategori başlıkları fiyat/ürün detayı erişilebilir olmadığından eklenmedi. **1 ürün override edildi.**
+
+## MOLECULE COFFEE BEŞİKTAŞ ID 6758 HOLD
+Hentzer kaydı `Vişnezade, Şair Nedim Cd. 25/A D:25/A, 34353 Beşiktaş/İstanbul`, telefon `+90 541 850 26 75`. İşletmenin resmi iletişim sayfası, Facebook ve Yandex aynı adres/telefonu destekliyor; resmi sitede Akatlar’daki ayrı ikinci lokasyon da listelendiğinden şube ayrımı korundu. Ancak resmi kafe sayfası ve erişilebilir kaynaklarda son bir yıl içinde tüketici ürünlerine ait fiyatlı menü bulunamadı; `coffeemolecule.com` kahve çekirdeği/ekipman e-ticaret kataloğu olduğundan mekan menüsü sayılmadı. **Override eklenmedi; strict HOLD**.
