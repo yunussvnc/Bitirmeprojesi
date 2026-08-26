@@ -3066,3 +3066,6 @@ Hentzer telefon `+90 212 245 41 05`; resmi Kafe Ara dinamik sayfası ise `+90 21
 ## KOVAN FIRIN ID 6483 ACCEPTED
 Hentzer `Sinanpaşa, Beşiktaş Cd. No:27, 34353 Beşiktaş/İstanbul`, telefon `+90 212 258 36 43`. Snapchat, Cybo, Haritane ve Restoranim exact adres/telefon parity’sini doğruluyor. Yemeksepeti exact vendorunda güncel fiyatlı kahvaltı ürünlerinden 20 benzersiz gıda kalemi eklendi. **Override kabul edildi.**
 Kaynaklar: https://www.yemeksepeti.com/restaurant/k5cm/kovan-firin-k5cm ; https://restoranim.net/istanbul/besiktas/kahvaltici/kovan-firin ; https://haritane.com/kovan-firin-detay814450/ ; https://www.snapchat.com/place/kovan-firin/8cf250d0-9995-11e8-939c-af76e52c8751
+
+## HK KEBAP HOME ID 6482 HOLD
+Hentzer ile `Hüseyinağa, Tarlabaşı Blv No:59 A, 34435 Beyoğlu/İstanbul` ve `+90 532 275 22 41` exact parity’si Menu-tr, Restoranim ve 2026 Instagram paylaşımlarıyla doğrulandı. Ancak exact şubeye ait güncel, fiyatlı 20 ürün menüsü bulunamadı; benzer Yemeksepeti sonucu aynı işletme olarak kanıtlanamadı. **Override eklenmedi; strict HOLD.**
