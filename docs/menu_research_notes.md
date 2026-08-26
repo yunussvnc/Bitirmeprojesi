@@ -2503,3 +2503,6 @@ Hentzer kaydı `Lale Apartmanı, Vişnezade, Aktarlar Sk. No:14/1, 34349 Beşikt
 
 ## KÖŞEM URFA KEBAP, LAHMACUN BEYLİKDÜZÜ ID 6664 ACCEPTED
 Hentzer kaydı `Kavaklı, Muhammed Cinnah Sk. 43/7, 34320, 34520 Beylikdüzü/İstanbul`, telefon `+90 212 615 62 60`. Yandex Maps aynı `Kavaklı Mah., Muhammed Cinnah Sok., 43/7` adresini, aynı telefonu ve aktif kapanış saatini gösteriyor. Canlı Yemeksepeti exact `Köşem Urfa Kebap` menüsünde 26.08.2026 tarihinde güncel fiyatlı ürünler bulundu; Popüler carousel tekrarları dışarıda tutularak 20 kebap, dürüm, menü, ızgara, çorba ve burger ürünü eklendi.
+
+## HANY BURGER BEYLİKDÜZÜ ID 6663 HOLD
+Hentzer kaydı `Marmara Mah. Avrasya Cad. B Blok No:17/2F, 34524 Beylikdüzü/İstanbul`, telefon `+90 555 989 34 34`. Güncel Instagram ve Yemeksepeti fiyatlı menü sonuçları bulunsa da Yandex aktif işletme kaydı adresi `Avrasya Cad. 17/2I`, telefonu `+90 532 152 69 56` olarak gösteriyor; resmi sosyal sonuçlarında da farklı `0555 999 34 34` numarası geçiyor. Bu nedenle zorunlu exact adres ve telefon parity sağlanamadı. **Override eklenmedi; strict HOLD**.
