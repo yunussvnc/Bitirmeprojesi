@@ -2924,3 +2924,6 @@ Hentzer `Barbaros Hayrettin Paşa, 1992 Sokak No:8-10A, 34522 Esenyurt`, telefon
 
 ## BALKAN LOKANTASI ID 6527 HOLD
 Hentzer `Cihannüma, Akmaz Çeşme Sk. No:8, 34353 Beşiktaş`, telefon `+90 212 327 55 69`. Tripadvisor/Trip.com/Bulurum/Nasilbiryer ve 13.02.2026 tarihli Instagram paylaşımı exact şubeyi destekliyor; ancak son bir yıl içinde ürün bazlı güncel TL menü bulunamadı. Eski fiyatlar veya kişi başı hesap bilgileri menü doğrulaması için yeterli değil. **Override eklenmedi; strict HOLD.**
+
+## MATHILDA PROFİTEROLES ID 6526 HOLD
+Hentzer `Adnan Kahveci, Ihlamur Cd. No:17, 34528 Beylikdüzü`, telefon `+90 212 855 36 35`. Yandex/Instagram telefon ve Ihlamur adresini destekliyor; Migros exact isimli Adnan Kahveci şube menüsünde güncel görünen fiyatlar var. Ancak Yemeksepeti aynı işletme için `Kalkan Sokak 4/3` adresini gösteriyor; exact şube parity’si çelişkili olduğundan **override eklenmedi; strict HOLD.**
