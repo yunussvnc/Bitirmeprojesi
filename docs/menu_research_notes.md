@@ -2958,3 +2958,6 @@ Hentzer `Sinanpaşa Mahallesi Ihlamurdere Cad, Çelebi Oğlu Sk. No:21-23/B, 343
 
 ## QADRAJ BİSTRO ID 6516 HOLD
 Hentzer `Göztepe, 34815 Beykoz`, telefon `+90 216 519 45 48`. Resmi Qadraj iletişim sayfası aynı telefonu ve Göksu Kasrı/Anadolu Hisarı/Göztepe Sokak adresini destekliyor; Yandex 2/4 numarası veriyor. GetirYemek exact Göztepe vendoru güvenlik bulmacasıyla engellendi ve son bir yıl ürün bazlı menü bağımsız doğrulanamadı. **Override eklenmedi; strict HOLD.**
+
+## CEYLAN DÖNER ID 6515 HOLD
+Hentzer `Barış, Akdeniz Cd. 9 D, 34520 Beylikdüzü`, telefon alanı boş. Yandex/Instagram/Bulurum `0212 853 50 83` telefonunu destekliyor; ancak Yemeksepeti exact vendoru adresi `Akdeniz Caddesi 9/C` olarak veriyor. Hentzer 9 D ile vendor 9/C kapı parity’si çelişkili olduğundan **override eklenmedi; strict HOLD.**
