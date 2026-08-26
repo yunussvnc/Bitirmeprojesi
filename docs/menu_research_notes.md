@@ -3157,3 +3157,6 @@ Kaynaklar: https://www.yemeksepeti.com/en/restaurant/wmk6/good-and-mood-coffee ;
 
 ## FRED'S ID 6454 HOLD
 Exact `Yıldırım, Pilot Sok. No:17/A, 34000 Bayrampaşa/İstanbul` adresi doğrulandı ancak Hentzer telefon alanı boş; kaynaklar `0533 748 57 97` ve `0530 170 13 31` olarak çelişiyor. Exact branch için 20 güncel fiyatlı gıda menüsü de bulunamadı. **Override eklenmedi; strict HOLD.**
+
+## SOKAK RESTAURANT CENGİZİN YERİ ID 6453 HOLD
+Waze/Instagram/Facebook exact `Sinanpaşa, Köyiçi Mektep Sk. No:6, 34353 Beşiktaş/İstanbul` ve `+90 536 259 19 03` parity’sini doğruluyor. Ancak exact şubeye ait son bir yıl ürün bazlı TL menüsü yok; mevcut kaynaklar eski içerik veya kişi başı fiyat aralığı sunuyor. **Override eklenmedi; strict HOLD.**
