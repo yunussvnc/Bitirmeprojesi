@@ -2994,3 +2994,6 @@ Kaynaklar: https://www.yemeksepeti.com/en/restaurant/g90r/peanut-waffle-belgium-
 
 ## MANGAL KEYFİ ID 6505 HOLD
 Hentzer `Şehit Muhtar, Öğüt Sk. No:8, 34435 Beyoğlu/İstanbul`, telefon `+90 212 245 15 34`. Resmi Instagram, Yandex, Bulurum ve Trip.com exact adres/telefon parity’sini destekliyor. İstanbul exact şube için son bir yıl ürün bazlı fiyatlı menü bulunamadı; Wheree fotoğraf tabanlı ve güncelliği belirsiz, Yemeksepeti sonuçları ise farklı şehirlerdeki Mangal Keyfi işletmelerine ait. **Override eklenmedi; strict HOLD.**
+
+## MİS UNLU MAMÜLLERİ ID 6504 HOLD
+Hentzer `Adnan Kahveci, Osmanlı Cd., 34528 Beylikdüzü/İstanbul`, telefon `+90 212 855 46 48`. Yandex `Osmanlı Cad. 30B`, Bulurum `Osmanlı Cad. 30/A` ile aynı telefonu gösteriyor; kapı eki çelişkisi nedeniyle 100% exact adres parity’si kesin değil. Resmi Instagram 25.03.2025 duyurusu mevcut olsa da son bir yıl exact şubeye ait 20 ürün fiyatlı menü doğrulanamadı; Yemeksepeti sonuçları farklı `Miss Bistro`/`Miss Fırın` işletmelerine ait. **Override eklenmedi; strict HOLD.**
