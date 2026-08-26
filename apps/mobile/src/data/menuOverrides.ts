@@ -90720,5 +90720,33 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Poğaça", "price": "20 TL", "category": "Fırın Ürünleri" },
       { "name": "Simit", "price": "25 TL", "category": "Fırın Ürünleri" }
     ]
+  },
+  "6646": {
+    "name": "ÖZEN BÖREK BAYRAMPAŞA",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/mdt4/ozen-borek",
+    "sourceName": "Yemeksepeti canlı Bayrampaşa/Ordu Caddesi No:165 menüsü; Yandex, Restoranim ve Mekanlar ile exact adres-telefon doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Zeytinli Açma", "price": "35 TL", "category": "Kahvaltılıklar" },
+      { "name": "Çikolatalı Açma", "price": "35 TL", "category": "Kahvaltılıklar" },
+      { "name": "Simit", "price": "35 TL", "category": "Kahvaltılıklar" },
+      { "name": "Peynirli Açma", "price": "35 TL", "category": "Kahvaltılıklar" },
+      { "name": "Kıymalı Açma", "price": "35 TL", "category": "Kahvaltılıklar" },
+      { "name": "Peynirli Poğaça", "price": "35 TL", "category": "Kahvaltılıklar" },
+      { "name": "Kıymalı Börek (250 gr.)", "price": "230 TL", "category": "Börekler" },
+      { "name": "Patatesli Börek (250 gr.)", "price": "230 TL", "category": "Börekler" },
+      { "name": "Peynirli Börek (250 gr.)", "price": "230 TL", "category": "Börekler" },
+      { "name": "Küt Böreği (Dilim)", "price": "35 TL", "category": "Börekler" },
+      { "name": "Ispanaklı Börek (250 gr.)", "price": "230 TL", "category": "Börekler" },
+      { "name": "Mantarlı Börek (250 gr.)", "price": "230 TL", "category": "Börekler" },
+      { "name": "Kıymalı Pide", "price": "75 TL", "category": "Fırın Ürünleri" },
+      { "name": "Patatesli Kır Pidesi", "price": "75 TL", "category": "Fırın Ürünleri" },
+      { "name": "Peynirli Kır Pidesi", "price": "75 TL", "category": "Fırın Ürünleri" },
+      { "name": "Ispanaklı Kır Pidesi", "price": "75 TL", "category": "Fırın Ürünleri" },
+      { "name": "Kaşarlı Kır Pidesi", "price": "75 TL", "category": "Fırın Ürünleri" },
+      { "name": "Kıymalı Börek (500 gr.)", "price": "460 TL", "category": "Kiloluk Börekler" },
+      { "name": "Patatesli Börek (500 gr.)", "price": "460 TL", "category": "Kiloluk Börekler" },
+      { "name": "Peynirli Börek (500 gr.)", "price": "400 TL", "category": "Kiloluk Börekler" }
+    ]
   }
 };

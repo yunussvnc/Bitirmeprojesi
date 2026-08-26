@@ -2551,3 +2551,6 @@ Hentzer kaydı `Vişnezade, Bayıldım Cd. No:2, 34400 Beşiktaş/İstanbul`, te
 
 ## MEŞHUR DENİZLİ KUZU TANDIR BEYKOZ ID 6647 HOLD
 Hentzer kaydı `Yavuz Selim, Çavuşbaşı Cumhuriyet Cd. No:78, 34830 Beykoz/İstanbul`, telefon alanı boş. Resmi By Kuzu Tandır sitesi Beykoz şubesini aynı cadde üzerinde `No:80` ve `+90 216 479 02 44` ile gösteriyor; Yandex aktif kaydı ise `Edebali Cad. 2` ve aynı telefonu veriyor. Bulunan fiyatlı sosyal içerikler 2023–2024 tarihli, son bir yıl içinde değil. Telefon ve exact adres parity’si sağlanamadığı için **override eklenmedi; strict HOLD**.
+
+## ÖZEN BÖREK BAYRAMPAŞA ID 6646 ACCEPTED
+Hentzer kaydı `Kartaltepe, Ordu Cd. No:165, 34040 Bayrampaşa/İstanbul`, telefon `+90 212 437 30 86`. Yandex, Restoranim ve Mekanlar aynı adres/telefonu doğruluyor. Yemeksepeti vendor `mdt4` sayfası `Ordu Caddesi, No:165` adresini ve canlı fiyatlı menüyü gösteriyor; 2026 tarihli müşteri siparişleri aktifliği destekliyor. Popular carousel tekrarları ve Plastic Bag satırı dışlandı; 20 gıda ürünü eklendi.
