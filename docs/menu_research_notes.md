@@ -2828,3 +2828,6 @@ Hentzer kaydı `Elit Life Rezidans, Adnan Kahveci, Avrupa Cd. No 106/B, 34520 Be
 
 ## KÖK KARDEŞLER LOKANTASI ID 6556 HOLD
 Hentzer `Merkez, Hacı Alibey Sk. No:6, 34820 Beykoz`, telefon `+90 216 323 66 27`. Telefon çeşitli kaynaklarla eşleşiyor; fakat adres kaynakları No:6, No:3A ve No:2 olarak çelişiyor. Son bir yıl içinde exact şubeye ait ürün bazlı TL fiyatlı menü de bulunamadı. **Override eklenmedi; strict HOLD.**
+
+## ASMALI MESCİT DÜRÜMCÜ ID 6555 HOLD
+Hentzer `Asmalı Mescit, Nergis Sk. 2 A, 34430 Beyoğlu`, telefon `+90 212 244 08 02`. Resmi Instagram, Yandex ve Bulurum exact adres/telefonu doğruluyor; 30.01.2026 tarihli Instagram paylaşımı menü kategorilerini gösteriyor, fakat ürün bazlı fiyatlar metin olarak yok ve görselden güvenilir fiyat çıkarılamadı. **Override eklenmedi; strict HOLD.**
