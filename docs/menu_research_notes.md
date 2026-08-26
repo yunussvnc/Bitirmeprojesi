@@ -3016,3 +3016,7 @@ Kaynaklar: https://www.adellaseafood.com/restaurant-menu ; https://www.adellasea
 
 ## AKT BURGER & MEZE EVİ ID 6498 HOLD
 Hentzer `Cumhuriyet, İstisna Çıkmazı No:10/1, 34820 Beykoz/İstanbul`, telefon `+90 544 991 43 44`. Resmi Instagram 26.08.2025 gönderisinde exact adres/telefonu, 26.05.2026 gönderisinde aktif işletmeyi doğruluyor. Ancak exact Beykoz şubesi için son bir yıl ürün bazlı fiyatlı menü bulunamadı; Yemeksepeti `Akt Burger` Muğla şubesine ait ve benzer `Burger & Meze` vendoru aynı işletme olduğu kanıtlanamadı. **Override eklenmedi; strict HOLD.**
+
+## TIKE ACARKENT ID 6497 ACCEPTED
+Hentzer `Acarlar, 9. Cd. No:1, 34800 Beykoz/İstanbul`, telefon `+90 216 485 94 85`. Resmi Tike Acarkent Instagram/Facebook ve Restoranim exact adres/telefon parity’sini doğruluyor. Yemeksepeti exact `Tike Acarkent` vendoru güncel fiyatlı kebap menüsü yayımlıyor; 20 benzersiz menü ve kebap/ızgara ürünü eklendi. **Override kabul edildi.**
+Kaynaklar: https://www.yemeksepeti.com/en/restaurant/yfz2/tike-acarkent ; https://restoranim.net/istanbul/beykoz/restoran/tike-acarkent ; https://www.instagram.com/tikeacarkent/ ; https://www.instagram.com/reel/DJD-aj1gKXf/ ; https://www.facebook.com/p/Tike-Acarkent-61555758226091/

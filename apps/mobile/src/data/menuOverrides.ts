@@ -91652,6 +91652,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Çilekli Frappe", "price": "144 TL", "category": "Soğuk İçecekler" }
     ]
   },
+  "6497": {
+    "name": "Tike Acarkent",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/yfz2/tike-acarkent",
+    "sourceName": "Güncel Yemeksepeti exact Tike Acarkent vendor menüsü; resmi Tike Acarkent Instagram/Facebook ve Restoranim ile Acarlar 9. Cd. No:1 ve +90 216 485 94 85 parity doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Dürüm Menü 1", "price": "990 TL", "category": "Menüler" },
+      { "name": "Dürüm Menü 2", "price": "2845 TL", "category": "Menüler" },
+      { "name": "Dürüm Menü 3", "price": "6425 TL", "category": "Menüler" },
+      { "name": "Tava Ciğer", "price": "1040 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Karışık Kebap (2 Kişilik)", "price": "4670 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Karışık Kebap (1 Kişilik)", "price": "2750 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Tike Sarma Beyti Kebap", "price": "1155 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Tike Crispy Beyti Kebap", "price": "1310 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Tike Special Adana Kebap", "price": "1460 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Tike Adana Kebap", "price": "1030 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Kuzu Kuşleme", "price": "1785 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Tavuk Pirzola", "price": "975 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Tavuk Şiş", "price": "975 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Marine Et Şiş", "price": "1680 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Izgara Köfte", "price": "980 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Kuzu Pirzola", "price": "1520 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Tavuk Kanat", "price": "1030 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Tike Şiş Kebap", "price": "1200 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Kuzu Lokum", "price": "1785 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Fıstıklı Kebap", "price": "1260 TL", "category": "Kebaplar & Izgaralar" }
+    ]
+  },
   "6499": {
     "name": "Adella Seafood Restaurant",
     "sourceUrl": "https://www.adellaseafood.com/restaurant-menu",
