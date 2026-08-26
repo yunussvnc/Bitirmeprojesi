@@ -91007,6 +91007,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "5 Çeşit Meze Menü", "price": "1500 TL", "category": "Özel Menü" }
     ]
   },
+  "6592": {
+    "name": "YAMAN BÜFE BEYKOZ",
+    "sourceUrl": "https://www.migros.com.tr/yemek/yaman-bufe-beykoz-ornekkoy-mah-st-337aa",
+    "sourceName": "Canlı Migros Yaman Büfe Beykoz menüsü; resmi Yaman Büfe sitesi ve Restoranim exact adres-telefon kaydı",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Mercimek Çorbası", "price": "130 TL", "category": "Kahvaltılar" },
+      { "name": "Sahanda Tereyağlı Yumurta", "price": "150 TL", "category": "Kahvaltılar" },
+      { "name": "Peynirli Omlet", "price": "190 TL", "category": "Kahvaltılar" },
+      { "name": "Sucuklu Yumurta", "price": "230 TL", "category": "Kahvaltılar" },
+      { "name": "Kavurmalı Yumurta", "price": "270 TL", "category": "Kahvaltılar" },
+      { "name": "Menemen", "price": "220 TL", "category": "Kahvaltılar" },
+      { "name": "Sucuklu Menemen", "price": "260 TL", "category": "Kahvaltılar" },
+      { "name": "Kavurmalı Menemen", "price": "290 TL", "category": "Kahvaltılar" },
+      { "name": "Kahvaltı Tabağı", "price": "460 TL", "category": "Kahvaltılar" },
+      { "name": "Kaşarlı Tost", "price": "130 TL", "category": "Tostlar" },
+      { "name": "Karışık Tost", "price": "180 TL", "category": "Tostlar" },
+      { "name": "Çift Kaşarlı Tost", "price": "160 TL", "category": "Tostlar" },
+      { "name": "Beyaz Peynir Domates Tost", "price": "160 TL", "category": "Tostlar" },
+      { "name": "Kavurmalı Kaşarlı Tost", "price": "260 TL", "category": "Tostlar" },
+      { "name": "Klasik Ayvalık Tostu", "price": "320 TL", "category": "Ayvalık Tostlar" },
+      { "name": "Kavurmalı Kaşarlı Ayvalık Tostu", "price": "380 TL", "category": "Ayvalık Tostlar" },
+      { "name": "Karışık Ayvalık Tostu", "price": "280 TL", "category": "Ayvalık Tostlar" },
+      { "name": "Sucuklu Kaşarlı Ayvalık Tostu", "price": "250 TL", "category": "Ayvalık Tostlar" },
+      { "name": "Hamburger", "price": "270 TL", "category": "Burgerlar" },
+      { "name": "Cheeseburger", "price": "300 TL", "category": "Burgerlar" }
+    ]
+  },
   "6594": {
     "name": "MODA DA NATA BEŞİKTAŞ",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/conk/moda-da-nata-conk",

@@ -2716,3 +2716,6 @@ Hentzer kaydı `Yıldız, Çırağan Cd. No:27/1, 34353 Beşiktaş/İstanbul`, t
 
 ## ALTIN KAZAN BEYLİKDÜZÜ ID 6593 HOLD
 Hentzer kaydı `Adnan Kahveci, Yavuz Sultan Selim Blv. No:43 D:2d, 34243 Beylikdüzü/İstanbul`, telefon `+90 535 664 61 70`. Telefon resmi Instagram `@altin_kazantr` ile eşleşiyor; ancak exact adres parity’si sağlanamadı: resmi Instagram `Yavuz Sultan Selim Blv. No:43/2B`, Yandex `43A1`, Hentzer `43 D:2d` yayımlıyor. Yemeksepeti ve Migros’ta güncel fiyatlı menü mevcut olsa da yanlış şubeye veri aktarma riski nedeniyle **override eklenmedi; strict HOLD**.
+
+## YAMAN BÜFE BEYKOZ ID 6592
+Hentzer kaydı `Örnekköy, Tepetarla Cd. No:16A, 34825 Beykoz/İstanbul`, telefon `+90 530 071 28 37`. Resmi Yaman Büfe sitesi `Tepetarla Cad. No:16, Örnekköy Beykoz` ve aynı telefonu yayımlıyor; Restoranim exact kaydı No:16A ve telefonu doğruluyor. Canlı Migros Yaman Büfe Beykoz menüsünden 20 benzersiz kahvaltı, tost, Ayvalık tost ve burger ürünü seçildi; içecekler hariç tutuldu. **Override kabul edildi; 20 ürün.** Kaynaklar: https://yamanbufe.com/ ; https://www.migros.com.tr/yemek/yaman-bufe-beykoz-ornekkoy-mah-st-337aa ; https://restoranim.net/istanbul/istanbul/fast-food/yaman-bufe-beykoz
