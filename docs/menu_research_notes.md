@@ -2665,3 +2665,6 @@ Hentzer kaydı `Rüzgarlıbahçe, Cumhuriyet Cd. Hasoğlu Plaza No:39, Hasoğlu 
 
 ## DA VITTORIO RISTORANTE ITALIANO BEŞİKTAŞ ID 6610 HOLD
 Hentzer kaydı `Mövenpick Hotel Bosphorus, Balmumcu, Barbaros Blv. No 165, 34349 Beşiktaş/İstanbul`, telefon `+90 212 370 21 66`. Da Vittorio’nun sosyal medya, Gault & Millau ve Mövenpick kaynakları exact otel/adres bağlamını doğruluyor; ancak resmi Mövenpick şube sayfası telefonunu `+90 212 370 20 20` olarak yayımlıyor. Telefon parity’si sağlanamadığı için resmi menü/fiyatlar kullanılmadı. **Override eklenmedi; strict HOLD.**
+
+## RUMELİ BALIKÇISI SARIYER ID 6609 HOLD
+Hentzer kaydı `Rumeli Hisarı, Yahya Kemal Cd. No:22, 34470 Sarıyer/İstanbul`, telefon `+90 212 287 06 97`. Facebook, Apple Maps ve resmi sosyal kaynaklar aynı Yahya Kemal No:22 ve telefonu doğruluyor; aktiflik de destekleniyor. Ancak son bir yıl içinde exact şubeye ait ürün bazlı fiyatlı menü bulunamadı; 07.02.2025 tarihli resmi paylaşım menü içeriği veriyor ancak fiyat yayımlamıyor. **Override eklenmedi; strict HOLD.**
