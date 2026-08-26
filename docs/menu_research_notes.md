@@ -2193,3 +2193,6 @@ Hentzer kaydı `Yenidoğan, Atışalanı Cd. No:28 B, 34035 Bayrampaşa/İstanbu
 
 ## PIZZABULLS ESENYURT ID 6766 HOLD
 Hentzer kaydı `İnnovia 2 çarşı, Yeşilkent, Nazım Hikmet Blv. No:14 Sitesi M, 34520 Beylikdüzü/İstanbul`, telefon `+90 212 741 66 66`. Yelp’in güncel kaydı ve eski işletme Facebook kaydı adres/telefonu destekliyor; ancak bazı dizinlerde adres `14/1` ve telefon `444 32 44` olarak farklı. Pizzabulls resmi sitesinde güncel marka kampanya fiyatları var, fakat bu fiyatların exact Esenyurt/İnnovia 2 şubesine uygulanıp uygulanmadığı branch-specific olarak doğrulanamadı. Bu nedenle **override eklenmedi; strict HOLD**.
+
+## PAPARINO PIZZA ETİLER ID 6765 HOLD
+Hentzer kaydı `Kültür, Nisbetiye Cd. No:56, 34340 Beşiktaş/İstanbul`, telefon `+90 536 830 59 96`. Akmerkez resmi mağaza sayfası aynı telefonu ve Paparino Pizza’yı doğruluyor; Yandex ise Nisbetiye Cad. `54/157` adresini veriyor. Canlı Yemeksepeti’nde güncel pizza fiyatları görünse de vendor’ın Hentzer No:56 adresli exact şube olduğu kesinleştirilemedi. Adres parity şartı sağlanamadığı için **override eklenmedi; strict HOLD**.
