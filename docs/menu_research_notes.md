@@ -2644,3 +2644,6 @@ Hentzer kaydı `Poyrazköy, Mendirek Yolu No:18A, 34829 Beykoz/İstanbul`, telef
 
 ## SUMMIT BAR & TERRACE BEŞİKTAŞ ID 6617 HOLD
 Hentzer kaydı `Cihannüma Mahallesi Saray Caddesi No:5, 14th Floor, Cihannüma, 34353 Beşiktaş/İstanbul`, telefon alanı boş. Adres Conrad Istanbul Bosphorus kaynaklarıyla doğrulanıyor; ancak aktif resmi Instagram/Hilton iletişiminde `+90 537 973 80 14`, Yelp/Firmarehberi eski kaynaklarında `0212 310 25 25` görülüyor. Hentzer telefonu boş olduğundan zorunlu telefon parity’si kurulamadı. Ayrıca son bir yıl exact ürün-fiyat menüsü doğrulanamadı. **Override eklenmedi; strict HOLD.**
+
+## TATBAK PAŞABAHÇE ŞUBESİ BEYKOZ ID 6616 HOLD
+Hentzer kaydı `Paşabahçe, Saip Molla Cd., 34800 Beykoz/İstanbul`, telefon `+90 553 008 90 34`. Tatbak resmi şube sayfası ve Yandex aynı telefonu doğruluyor; ancak resmi ve Yandex kayıtlarında kapı numarası `Saip Molla Cad. No:23/A`, Hentzer kaydında kapı numarası yok. Son bir yıl içinde exact şubeye ait doğrulanabilir ürün bazlı fiyatlı menü de bulunamadı. **Override eklenmedi; strict HOLD.**
