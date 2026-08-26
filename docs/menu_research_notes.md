@@ -2719,3 +2719,6 @@ Hentzer kaydı `Adnan Kahveci, Yavuz Sultan Selim Blv. No:43 D:2d, 34243 Beylikd
 
 ## YAMAN BÜFE BEYKOZ ID 6592
 Hentzer kaydı `Örnekköy, Tepetarla Cd. No:16A, 34825 Beykoz/İstanbul`, telefon `+90 530 071 28 37`. Resmi Yaman Büfe sitesi `Tepetarla Cad. No:16, Örnekköy Beykoz` ve aynı telefonu yayımlıyor; Restoranim exact kaydı No:16A ve telefonu doğruluyor. Canlı Migros Yaman Büfe Beykoz menüsünden 20 benzersiz kahvaltı, tost, Ayvalık tost ve burger ürünü seçildi; içecekler hariç tutuldu. **Override kabul edildi; 20 ürün.** Kaynaklar: https://yamanbufe.com/ ; https://www.migros.com.tr/yemek/yaman-bufe-beykoz-ornekkoy-mah-st-337aa ; https://restoranim.net/istanbul/istanbul/fast-food/yaman-bufe-beykoz
+
+## NOVİ PAZAR GURME BAYRAMPAŞA ID 6591 HOLD
+Hentzer kaydı `Yıldırım, Ali Fuat Başgil Cd. No:105, 34045 Bayrampaşa/İstanbul`, telefon `+90 543 623 68 08`. Yandex exact kaydı No:105 ve aynı telefonu doğruluyor; Facebook adresi `103/105`, Instagram `No:103` olarak farklı formatlar yayımlıyor. Telefon parity’si mevcut olsa da son bir yıl içinde ürün bazlı fiyatları açıkça yayımlanan bir menü bulunamadı; Instagram/Facebook içerikleri fiyatlı menü sunmuyor. **Override eklenmedi; strict HOLD.**
