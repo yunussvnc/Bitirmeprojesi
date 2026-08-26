@@ -3231,3 +3231,6 @@ Kaynaklar: https://www.yemeksepeti.com/restaurant/jvgd/mr-hamza-hamburger-jvgd ;
 ## HUQQA KURUÇEŞME ID 6432 HOLD
 HuQQa resmi Kuruçeşme sayfası Hentzer ile `Muallim Naci Cd. No:56` ve `+90 212 265 06 66` exact parity’sini ve resmi Q Food menü bağlantısını doğruluyor. Ancak resmi dijital menü web/tarayıcıda sürekli `Yükleniyor... / Kategoriler yükleniyor...` durumunda kaldı; ürün bazlı son bir yıl fiyatı okunamadı. **Override eklenmedi; strict HOLD.**
 Kaynaklar: https://www.huqqa.com/tr/kurucesme-huqqa/ ; https://menu.qfoodbeverage.com.tr/?branch=huqqa-kurucesme
+
+## İSTASYON BISTRO BEYKENT ID 6431 HOLD
+Meyhankoli Hentzer ile exact Perlavista AVM B blok C48 adresini doğruluyor ancak telefonu `(0212) 882 36 99`; Hentzer `+90 532 743 80 36`. Telefon parity’si sağlanamadı. Ayrıca exact şubeye ait 20 güncel fiyatlı ürün menüsü doğrulanmadı. **Override eklenmedi; strict HOLD.**
