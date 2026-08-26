@@ -2305,3 +2305,6 @@ Hentzer kaydı `Türkali, Ihlamurdere Cd. 45/A, 34357 Beşiktaş/İstanbul`, tel
 
 ## NEVADA COFFEE BAYRAMPAŞA ID 6730 HOLD
 Hentzer kaydı `Yenidoğan, Numunebağı Cd. Numune Han No:68-70A, 34040 Bayrampaşa/İstanbul`, telefon alanı `null`. Nevada Coffee resmi mağazalar sayfası aynı adresi doğruluyor; canlı Yemeksepeti kaydı güncel fiyatlı ürünler gösteriyor. Ancak Hentzer’de telefon bulunmadığı için zorunlu %100 phone parity sağlanamadı; Yandex sonuçlarında aynı marka için farklı adres/telefon varyantları da mevcut. **Override eklenmedi; strict HOLD**.
+
+## GAYRET BALIK BEYLİKDÜZÜ ID 6729 HOLD
+Hentzer kaydı `Adnan Kahveci, Erenler Cd. No:18 D:5, 34528 Beylikdüzü/İstanbul`, telefon `+90 212 855 44 41`. Yandex, Instagram ve Bulurum aynı işletme/telefonu desteklese de adresi `Erenler Cad. No:18/8` veya 18 giriş olarak veriyor; Hentzer iç kapı D:5 ile birebir eşleşme yok. Bulunan fiyatlı içerikler eski veya menü kalemi vermiyor. Exact branch parity ve güncel fiyat şartları sağlanamadığından **override eklenmedi; strict HOLD**.
