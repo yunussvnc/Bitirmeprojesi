@@ -3020,3 +3020,6 @@ Hentzer `Cumhuriyet, İstisna Çıkmazı No:10/1, 34820 Beykoz/İstanbul`, telef
 ## TIKE ACARKENT ID 6497 ACCEPTED
 Hentzer `Acarlar, 9. Cd. No:1, 34800 Beykoz/İstanbul`, telefon `+90 216 485 94 85`. Resmi Tike Acarkent Instagram/Facebook ve Restoranim exact adres/telefon parity’sini doğruluyor. Yemeksepeti exact `Tike Acarkent` vendoru güncel fiyatlı kebap menüsü yayımlıyor; 20 benzersiz menü ve kebap/ızgara ürünü eklendi. **Override kabul edildi.**
 Kaynaklar: https://www.yemeksepeti.com/en/restaurant/yfz2/tike-acarkent ; https://restoranim.net/istanbul/beykoz/restoran/tike-acarkent ; https://www.instagram.com/tikeacarkent/ ; https://www.instagram.com/reel/DJD-aj1gKXf/ ; https://www.facebook.com/p/Tike-Acarkent-61555758226091/
+
+## PİTE BAKERY & KRUUVASAN VE KAHVALTI ID 6496 HOLD
+Hentzer `Vidin İş Merkezi, Sinanpaşa, Hasfırın Cd. D:3, 34022 Beşiktaş/İstanbul`, telefon `+90 542 408 58 02`. Resmi site ve Restoranim bu telefonu destekliyor; ancak Apple Maps aynı şube için farklı `+90 530 665 70 33` telefonu yayımlıyor. Yemeksepeti adresi yakın olsa da tam fiyatlı menü metni alınamadı ve 20 ürün doğrulanamadı. **Override eklenmedi; strict HOLD.**
