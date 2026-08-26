@@ -2728,3 +2728,6 @@ Hentzer kaydı `Paşabahçe, Tombala Sk. No:4B, 34800 Beykoz/İstanbul`, telefon
 
 ## RETRO DÖNER BEYLİKDÜZÜ ID 6589
 Hentzer kaydı `Adnan Kahveci, Davut Paşa Cad. B1 No:13/1A, 34528 Beylikdüzü/İstanbul`, telefon `+90 501 575 03 14`. Yandex exact işletme kaydı ve resmi Instagram `@retrodoner` Davutpaşa Cad. No:13 adresini ve aynı telefonu doğruluyor; B1/1A birim ayrıntısı Hentzer’deki detaydır. Canlı Yemeksepeti Retro Döner Eski Usul menüsünden 16 benzersiz et döner ürünü seçildi; içecek/poşet hariç tutuldu. **Override kabul edildi; 16 ürün.** Kaynaklar: https://www.yemeksepeti.com/en/restaurant/ui8l/retro-doner-eski-usul ; https://yandex.com.tr/maps/org/retro_doner/145616044340/ ; https://www.instagram.com/retrodoner/
+
+## TRABZON SOFRASI YENİBOSNA ID 6588 HOLD
+Hentzer kaydı `Atatürk Cad. No:129, Yenibosna Merkez, 34100 Bahçelievler/İstanbul`, telefon `+90 212 602 04 44`. Telefon resmi site, Instagram, Facebook ve Apple Maps ile eşleşiyor; ancak exact adres parity’si sağlanamadı: resmi site/Instagram/Facebook `Merkez Mh. Atatürk Cd. Yasemin Konakları No:2A-3F, 34197`, Apple Maps `Güneşli Yolu Cd. 2A3D`, Yandex `Güneşli Yolu Cad. 2A2B` veriyor. Bu adresler Hentzer’deki No:129/34100 kaydından farklı olduğu için, menü/fiyat kaynağı bulunsa bile **override eklenmedi; strict HOLD**.
