@@ -92015,6 +92015,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Sultaniye Soslu Tavuk Döner Dürüm", "price": "230 TL", "category": "Tavuk Dönerler" }
     ]
   },
+  "6444": {
+    "name": "Büke Türk Mutfağı ve Cafe",
+    "sourceUrl": "https://bukerestoran.com/menu",
+    "sourceName": "Büke Restoran & Cafe resmi QR menüsü; resmi iletişim sayfası ve Yandex ile Büyükşehir, Beylikdüzü Cd. No:5 / +90 212 892 25 34 exact parity doğrulaması",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "Mercimek Çorbası", "price": "Az 80 TL / Tam 120 TL", "category": "Çorbalar" },
+      { "name": "Tavuk Suyu Çorbası", "price": "Az 100 TL / Tam 150 TL", "category": "Çorbalar" },
+      { "name": "Ayak Paça Çorbası", "price": "Az 160 TL / Tam 280 TL", "category": "Çorbalar" },
+      { "name": "Ayran Aşı Çorbası", "price": "150 TL", "category": "Çorbalar" },
+      { "name": "Çoban Kavurma", "price": "Az 260 TL / Tam 480 TL", "category": "Et Yemekleri" },
+      { "name": "Acılı Kuzu Kavurma", "price": "Az 310 TL / Tam 550 TL", "category": "Et Yemekleri" },
+      { "name": "Hünkar Beğendi", "price": "Az 350 TL / Tam 620 TL", "category": "Et Yemekleri" },
+      { "name": "Tas Kebap", "price": "Az 280 TL / Tam 530 TL", "category": "Et Yemekleri" },
+      { "name": "Kuzu Tandır", "price": "Az 400 TL / Tam 700 TL", "category": "Et Yemekleri" },
+      { "name": "Kuzu İncik", "price": "675 TL", "category": "Et Yemekleri" },
+      { "name": "Izgara Köfte", "price": "440 TL", "category": "Köfte Yemekleri" },
+      { "name": "Paşa Köfte", "price": "350 TL", "category": "Köfte Yemekleri" },
+      { "name": "Mevsim Türlü", "price": "Az 140 TL / Tam 220 TL", "category": "Sebze Yemekleri & Dolmalar" },
+      { "name": "Izgara Tavuk Pirzola", "price": "360 TL", "category": "Tavuk Yemekleri" },
+      { "name": "Izgara Piliç Külbastı", "price": "360 TL", "category": "Tavuk Yemekleri" },
+      { "name": "Tavuklu Orman Kebabı", "price": "Az 210 TL / Tam 320 TL", "category": "Tavuk Yemekleri" },
+      { "name": "Mısır Gevrekli Piliç", "price": "Az 210 TL / Tam 340 TL", "category": "Tavuk Yemekleri" },
+      { "name": "Şefin Otlu Tavuk Tabağı", "price": "Az 210 TL / Tam 340 TL", "category": "Tavuk Yemekleri" },
+      { "name": "Patates Püresi", "price": "Az 60 TL / Tam 90 TL", "category": "Garnitürler" },
+      { "name": "Haşlanmış Sebze", "price": "Az 60 TL / Tam 90 TL", "category": "Garnitürler" }
+    ]
+  },
   "6445": {
     "name": "Sigun Patisserie Cafe (Croissant, Donut, Waffle, Cookie, Brownie)",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/zlmb/sigun-patisserie-and-croissant-cafe",
