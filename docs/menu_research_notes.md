@@ -2268,3 +2268,6 @@ Hentzer kaydı `Çubuklu, Şehit Ersin Güner Cad. No:2, 34805 Beykoz/İstanbul`
 
 ## CRUNCH BITE WAFFLE & KRUVASAN BEYKOZ ID 6741 ACCEPTED
 Hentzer kaydı `İncirköy, Tuğla Fbr. Sk. No:5/A, 34800 Beykoz/İstanbul`, telefon `+90 551 512 64 61`. Yandex ve işletmenin sosyal profili aynı adres/telefonu doğruluyor. 26.08.2026 tarihinde erişilen güncel Yemeksepeti menüsünde `Classic Waffle (Large) — 469,41 TL`, `Sütlü Çikolatalı Waffle (Large) — 464,70 TL` ve `Special Waffle (L) — 517,65 TL` görüldü. **3 gıda ürünü override edildi.**
+
+## CHOCOBERRY LONDON BEYLİKDÜZÜ ID 6740 HOLD
+Hentzer kaydı `Cumhuriyet, Ege Sokak, F Blok No:1/1K, 34975 Beylikdüzü/İstanbul`, telefon `+90 552 342 25 70`. Yandex ve Instagram adresi doğruluyor; ancak markanın Türkiye resmi sitesi aynı adres için `+90 552 342 55 70` telefonu veriyor. Son bir yıl içinde exact şubeye ait ürün-fiyat listesi bulunamadı; içerikler kampanya/ürün tanıtımı düzeyinde kaldı. Telefon parity sağlanamadığı için **override eklenmedi; strict HOLD**.
