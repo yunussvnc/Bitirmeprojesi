@@ -2151,3 +2151,6 @@ Hentzer kaydı Beylikdüzü/Adnan Kahveci ve telefon `+90 553 064 87 66`; işlet
 
 ## LUAMIA ID 6780 HOLD
 Hentzer kaydı `Cihannüma, Barbaros Blv. 97B, 34353 Beşiktaş/İstanbul`; telefon alanı boş. Yandex aynı 97B adresini verir ancak `+90 216 315 51 79` telefonunu gösterir; Hentzer kaydında bu telefon bulunmadığı için %100 adres/telefon parity kurulamadı. Resmi site menü sunuyor fakat erişilebilir fiyat listesi yok; 2026 sosyal içeriklerinde de branch-specific fiyat görünmüyor. Bu nedenle **override eklenmedi; strict HOLD**.
+
+## BLACK DROP BURGER ID 6779 ACCEPTED
+Hentzer kaydı `Sinanpaşa, Şht. Asım Cd. No:47, 34357 Beşiktaş/İstanbul`, telefon `+90 212 260 01 70`. Black Drop’un Facebook işletme kaydı ve Bulurum kaydı aynı adres/telefonu doğruluyor. Resmi sosyal medya paylaşımında CheeseBomb `223 TL` ve Nirvana `225 TL` fiyatları yayınlandı; paylaşım 26.08.2025 tarihli olduğundan son bir yıl şartı içinde ve exact şubeye ait. Yalnızca bu iki fiyatı açıkça doğrulanan gıda ürünü eklendi. **2 ürün override edildi.**

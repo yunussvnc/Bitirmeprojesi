@@ -4,6 +4,16 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6779": {
+    "name": "BLACK DROP BURGER",
+    "sourceUrl": "https://www.instagram.com/reel/DG3IrjUilXo/",
+    "sourceName": "Black Drop resmi sosyal medya fiyat paylaşımı; adres ve telefon resmi Facebook işletme kaydıyla exact doğrulandı",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "CHEESEBOMB", "price": "223 TL", "category": "Burger" },
+      { "name": "NIRVANA", "price": "225 TL", "category": "Burger" }
+    ]
+  },
   "6781": {
     "name": "REK'S KITCHEN HOT DOG & BURGER BEYLİKDÜZÜ",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/mjkq/reks-kitchen-hot-dog-and-burger-mjkq",
