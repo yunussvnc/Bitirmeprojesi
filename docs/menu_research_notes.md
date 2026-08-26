@@ -3069,3 +3069,6 @@ Kaynaklar: https://www.yemeksepeti.com/restaurant/k5cm/kovan-firin-k5cm ; https:
 
 ## HK KEBAP HOME ID 6482 HOLD
 Hentzer ile `Hüseyinağa, Tarlabaşı Blv No:59 A, 34435 Beyoğlu/İstanbul` ve `+90 532 275 22 41` exact parity’si Menu-tr, Restoranim ve 2026 Instagram paylaşımlarıyla doğrulandı. Ancak exact şubeye ait güncel, fiyatlı 20 ürün menüsü bulunamadı; benzer Yemeksepeti sonucu aynı işletme olarak kanıtlanamadı. **Override eklenmedi; strict HOLD.**
+
+## MEŞALE CAFE & RESTAURANT ID 6481 HOLD
+Resmi Meşale Cafe iletişim sayfası Hentzer ile exact `Büyükşehir, Başak Sokağı No:4, 34520 Beylikdüzü/İstanbul` ve `+90 212 871 03 44` parity’sini doğruluyor. Ancak resmi menü fiyatlı ürün metni sunmuyor ve son bir yıl exact şube fiyatlı 20 ürün doğrulanamadı. **Override eklenmedi; strict HOLD.**
