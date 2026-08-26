@@ -2199,3 +2199,6 @@ Hentzer kaydı `Kültür, Nisbetiye Cd. No:56, 34340 Beşiktaş/İstanbul`, tele
 
 ## KAMY COFFEE CO. BAYRAMPAŞA ID 6764 HOLD
 Hentzer kaydı `Yıldırım, Avasköy Yolu Cd. No:41, 34045 Bayrampaşa/İstanbul`, telefon alanı boş. Yandex aynı işletme adını Avasköy Yolu Cad. civarında gösterse de telefon `+90 531 249 93 51`; güncel resmi Instagram sonucu ise Şht. Kamil Balkan Cd. No:30-B adresini veriyor. Hentzer adresi ve exact iletişim bilgileriyle %100 branch parity kurulamadı; son bir yıl içinde şubeye ait fiyatlı menü de bulunamadı. Bu nedenle **override eklenmedi; strict HOLD**.
+
+## GRIF COFFEE BAYRAMPAŞA ID 6763 HOLD
+Hentzer kaydı `Cevatpaşa, Yurt Sk. No:13/A, 34045 Bayrampaşa/İstanbul`, telefon `+90 535 285 45 14`. İşletmenin resmi Instagram profili, Yandex ve TumIsyeri aynı adres/telefonu doğruluyor. Ancak son bir yıl içinde exact şubeye ait erişilebilir ürün ve fiyat listesi bulunamadı; bulunan sosyal içerikler menü fiyatı içermiyor. Fiyat doğrulaması sağlanamadığı için **override eklenmedi; strict HOLD**.
