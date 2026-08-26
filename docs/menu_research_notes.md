@@ -2223,3 +2223,6 @@ Hentzer kaydı `Katip Mustafa Çelebi, Hasnun Galip Sk. No:8, 34433 Beyoğlu/İs
 
 ## MANGAL KEYFİ BEŞİKTAŞ ID 6756 HOLD
 Hentzer kaydı `Sinanpaşa, Kazan Sk. 7A, 34353 Beşiktaş/İstanbul`, telefon `+90 212 227 05 58`. İşletmenin resmi Instagram profili aynı adres ve telefonu doğruluyor. 11.08.2026 tarihli içerikte “menü güncel fiyatı 480 TL” ifadesi görülse de ürün/menü kaleminin adı ve içeriği belirtilmediğinden doğrulanabilir ürün-fiyat çifti oluşturulamadı. Fiyatı belirsiz bir kalem uydurulmaması için **override eklenmedi; strict HOLD**.
+
+## MEŞHUR SARIYER BÖREKÇİSİ BEYKOZ ID 6755 HOLD
+Hentzer kaydı `Akbaba Caddesi, Akbaba, Çarşamba Sok. No:5, 34829 Beykoz/İstanbul`, telefon `+90 216 320 50 54`. Yandex aynı işletme ve telefonu desteklese de adresi Çarşamba Sok. No:9 olarak veriyor. Yemeksepeti’nde güncel görünen börek fiyatları mevcut, ancak vendor’ın Hentzer No:5 ile exact eşleşmesi adres çelişkisi nedeniyle kesinleştirilemedi; diğer teslimat sonucu farklı Çubuklu şubesine ait. Bu nedenle **override eklenmedi; strict HOLD**.
