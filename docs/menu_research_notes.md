@@ -3110,3 +3110,6 @@ MenüBurada Hentzer ile exact No:40 ve `+90 507 824 52 99` parity’sini doğrul
 
 ## PARGALI RUM MEYHANESİ ID 6469 HOLD
 Resmi sosyal kaynaklar Hentzer ile `+90 534 718 73 70` telefonunu desteklese de Yandex aynı işletme için `+90 531 583 27 77` yayımlıyor. 2025-11-26 paylaşımında yalnızca paket fix menü fiyatı bulunuyor; 20 ayrı güncel ürün fiyatı doğrulanamadı. **Override eklenmedi; strict HOLD.**
+
+## BOOKS & COFFEE SISHANE ID 6468 HOLD
+Exact adres bağımsız kaynaklarla doğrulandı; ancak Hentzer telefon alanı boş ve kaynaklarda `+90 535 055 10 09` ile `0850 309 8996` çelişkisi var. Güncel fiyatlı 20 ürün menüsü de doğrulanamadı. **Override eklenmedi; strict HOLD.**
