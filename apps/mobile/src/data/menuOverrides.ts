@@ -4,6 +4,34 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6700": {
+    "name": "COFFEE TALKS BEŞİKTAŞ",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/er2i/coffee-talks",
+    "sourceName": "Canlı Yemeksepeti exact Ihlamurdere şubesi; resmi Instagram ve Yandex ile adres/telefon doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Cheddarlı Jambonlu Sandviç", "price": "320 TL", "category": "Sandviçler & Tostlar" },
+      { "name": "Hindi Fümeli Kaşarlı Sandviç", "price": "320 TL", "category": "Sandviçler & Tostlar" },
+      { "name": "Apple Crumble Cake", "price": "314 TL", "category": "Tatlılar" },
+      { "name": "Bask Cheesecake (Bütün)", "price": "3600 TL", "category": "Tatlılar" },
+      { "name": "Brownie", "price": "320 TL", "category": "Tatlılar" },
+      { "name": "Mozaik Pasta", "price": "275 TL", "category": "Tatlılar" },
+      { "name": "Americano", "price": "175 TL", "category": "Sıcak Kahveler" },
+      { "name": "Cappuccino (14 oz.)", "price": "220 TL", "category": "Sıcak Kahveler" },
+      { "name": "Caramel Macchiato (14 oz.)", "price": "245 TL", "category": "Sıcak Kahveler" },
+      { "name": "Coconut Latte (14 oz.)", "price": "245 TL", "category": "Sıcak Kahveler" },
+      { "name": "Cortado (8 oz.)", "price": "180 TL", "category": "Sıcak Kahveler" },
+      { "name": "Double Espresso", "price": "175 TL", "category": "Sıcak Kahveler" },
+      { "name": "Double Türk Kahvesi", "price": "175 TL", "category": "Sıcak Kahveler" },
+      { "name": "Espresso", "price": "160 TL", "category": "Sıcak Kahveler" },
+      { "name": "Filtre Kahve (14 oz.)", "price": "170 TL", "category": "Sıcak Kahveler" },
+      { "name": "Flat White (14 oz.)", "price": "230 TL", "category": "Sıcak Kahveler" },
+      { "name": "Honey Cinnamon Latte (14 oz.)", "price": "260 TL", "category": "Sıcak Kahveler" },
+      { "name": "Latte (14 oz.)", "price": "210 TL", "category": "Sıcak Kahveler" },
+      { "name": "Macchiato (8 oz.)", "price": "200 TL", "category": "Sıcak Kahveler" },
+      { "name": "Mocha (14 oz.)", "price": "245 TL", "category": "Sıcak Kahveler" }
+    ]
+  },
   "6701": {
     "name": "AQUA RESTAURANT FOUR SEASONS BOSPHORUS",
     "sourceUrl": "https://www.fourseasons.com/bosphorus/dining/culinary-experiences/prix-fixe-menu/romantic-dinner-menu-at-aqua-restaurant/",

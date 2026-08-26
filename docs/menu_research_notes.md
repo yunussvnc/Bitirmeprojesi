@@ -2392,3 +2392,6 @@ Hentzer kaydı `Dereağzı Mh. Denizyolu Cd. 28/1, İstanbul Akıllı Balık Mer
 
 ## AQUA RESTAURANT FOUR SEASONS BOSPHORUS ID 6701 ACCEPTED
 Hentzer kaydı `Yıldız, Çırağan Cd. No:28, 34349 Beşiktaş/İstanbul`, telefon `+90 212 381 40 00`. Four Seasons Bosphorus resmi Aqua sayfası Çırağan Cd. No:28 adresindeki Aqua restoranı ve aynı telefonla eşleşiyor; resmi sosyal/işletme kaydı da aynı bilgileri destekliyor. Four Seasons’ın resmi Aqua deneyim sayfası, **19.03.2026’dan itibaren** geçerli Romantic Dinner Menu için başlangıç fiyatını **USD 364** olarak yayınlıyor. Bu güncel, exact işletme menü deneyimi **1 özel menü ürünü override edilerek** eklendi.
+
+## COFFEE TALKS BEŞİKTAŞ ID 6700 ACCEPTED
+Hentzer kaydı `Türkali, Ihlamurdere Cd. No:80, 34357 Beşiktaş/İstanbul`, telefon `+90 212 327 95 96`. Yemeksepeti exact restoran sayfası Ihlamurdere Caddesi No:80 adresini ve onaylı telefon bilgisini gösteriyor; Yandex ve resmi Instagram da aynı adres/telefonu doğruluyor. 26.08.2026 tarihinde canlı Yemeksepeti menüsünden sandviç, tatlı ve sıcak kahve kategorilerinden 20 benzersiz ürün-fiyat çifti alındı. **20 gıda/içecek ürünü override edildi.**
