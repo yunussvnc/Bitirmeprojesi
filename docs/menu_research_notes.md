@@ -3032,3 +3032,6 @@ Hentzer `Sinanpaşa, Çelebi Oğlu Sk. No:35/A, 34353 Beşiktaş/İstanbul`, tel
 
 ## CHIBS BURGER BEYLİKDÜZÜ ID 6493 HOLD
 Hentzer `Cumhuriyet, Onur Sk. 1B, 34520 Beylikdüzü/İstanbul`, telefon alanı boş. Resmi paylaşımlar No:1J/1E, Yandex No:1G gösteriyor; %100 exact kapı ve phone parity’si yok. Yemeksepeti fiyatlı olsa da exact Beylikdüzü şubesi doğrulanamadı. **Override eklenmedi; strict HOLD.**
+
+## SUSHI İNN ESENYURT ID 6492 HOLD
+Resmi Sushi İnn iletişim sayfası exact `Cumhuriyet Mahallesi, 1993 Sokak, Sağlam Residence, No:4/3, Esenyurt/İstanbul` ve `0212 852 0 211` bilgisini doğruluyor. Resmi menü sayfası fiyatları metin olarak yayımlamıyor; Yemeksepeti’nde bazı fiyatlar bulunsa da exact Esenyurt vendor parity’si kurulamadı ve 20 ürün doğrulanamadı. **Override eklenmedi; strict HOLD.**
