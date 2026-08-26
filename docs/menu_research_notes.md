@@ -3113,3 +3113,6 @@ Resmi sosyal kaynaklar Hentzer ile `+90 534 718 73 70` telefonunu desteklese de 
 
 ## BOOKS & COFFEE SISHANE ID 6468 HOLD
 Exact adres bağımsız kaynaklarla doğrulandı; ancak Hentzer telefon alanı boş ve kaynaklarda `+90 535 055 10 09` ile `0850 309 8996` çelişkisi var. Güncel fiyatlı 20 ürün menüsü de doğrulanamadı. **Override eklenmedi; strict HOLD.**
+
+## PERA ANTAKYA ID 6467 HOLD
+Wheree/Yelp/Bulurum/Nasilbiryer Hentzer ile exact `Asmalı Mescit, Balyoz Sok. No:14, 34437 Beyoğlu/İstanbul` ve `+90 533 434 18 86` parity’sini doğruluyor. Ancak Wheree menüsü fiyatların değişebileceği uyarısıyla fotoğraf/kamu kaynaklarına dayanıyor ve bireysel güncel TL fiyatları yayımlamıyor; 20 ürün doğrulanamadı. **Override eklenmedi; strict HOLD.**
