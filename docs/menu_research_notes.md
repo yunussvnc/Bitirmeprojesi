@@ -1803,3 +1803,6 @@ Resmi Asterya sitesi Kuloğlu, Ayhan Işık Sk. No:8, 34433 Beyoğlu adresini ve
 
 ## FARIBO FOCACCIA & SCHIACCIATA SANDVİÇ ID 6898 kabulü
 Hentzer kaydı `Türkali, Şair Nedim Cd. No:66/A, 34357 Beşiktaş/İstanbul`, `+90 541 620 16 95`; Migros Yemek canlı vendor başlığı aynı şubeyi doğruluyor, Restoranim kaydı adres ve telefonu exact eşleştiriyor. 26.08.2026 tarihinde Migros Yemek’te 19 benzersiz sandviç, şarküteri, tatlı sandviç ve soğuk içecek kaleminin güncel fiyatı doğrulandı. **Override kabul edildi.**
+
+## KAVACIK GECE DÖNERCİSİ MAHİR USTA KUZU DÖNER ID 6897 kabulü
+Hentzer kaydı `Rüzgarlıbahçe, Ferit İnal Caddesi, Ahu Sk. No:2/A, 34810 Beykoz/İstanbul`, `+90 216 680 34 73`; resmi Instagram/Facebook içerikleri aynı şube ve telefonu doğruluyor. Yemeksepeti canlı vendor `Kavacık Gece Dönercisi Mahir Usta` olarak 26.08.2026 tarihinde açık/siparişe uygun, %15 indirimli ve güncel fiyatlı menü yayınlıyor. Popüler carousel ve poşet çıkarılarak 36 Et Dönerler + 1 Tatlı + 12 İçecek olmak üzere 49 benzersiz kalem aktarıldı. **Override kabul edildi.**
