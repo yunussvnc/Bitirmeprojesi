@@ -3095,3 +3095,6 @@ Hentzer telefon alanı boş; resmi sitede iki farklı telefon, Yandex’te Farab
 ## SPESİYAL BALIK BEYKENT ID 6474 ACCEPTED
 Hentzer `Cumhuriyet, Beyzade Cd. Keleş Plaza No:1/J, 34500 Beylikdüzü/İstanbul`, telefon `+90 212 872 29 03`. Resmi Instagram/Facebook ve 2026 İstanbul servis listesi exact Beykent şubesini doğruluyor. Yemeksepeti oq1d vendorundan 20 benzersiz balık, deniz ürünü, salata ve gıda kalemi eklendi; içecekler ve popüler tekrarlar dışlandı. **Override kabul edildi.**
 Kaynaklar: https://www.yemeksepeti.com/restaurant/oq1d/spesiyal-balik ; https://www.instagram.com/spesiyalbalikatakent/reel/Db-6mVdtspS/ ; https://www.facebook.com/61574634628078/photos/spesiyal-bal%C4%B1kta-istedi%C4%9Fin-kadar-ye-se%C3%A7ti%C4%9Fin-kadar-%C3%B6de-%EF%B8%8F0212-872-29-03cumhuriyet/122131734422821154/ ; https://istanbulservislistesi.com.tr/istanbul/beylikduzu/restoran/spesiyal-balik-RYl0ac.html
+
+## BEŞİKTAŞ BAZAAR CAFE ID 6473 HOLD
+Waze ve Wanderlog Hentzer ile exact `Mecidiye Mah., Barbaros Blv., 34353 Beşiktaş/İstanbul` ve `+90 212 367 81 56` parity’sini doğruluyor. Ancak exact şubeye ait son bir yıl fiyatlı 20 ürün menüsü bulunamadı; **override eklenmedi, strict HOLD.**
