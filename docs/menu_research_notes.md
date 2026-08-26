@@ -2578,3 +2578,6 @@ Hentzer kaydı `Çubuklu, Orhan Veli Kanık Cd. No:51, 34810 Beykoz/İstanbul`, 
 
 ## UN SANATI BAYRAMPAŞA ID 6639 HOLD
 Hentzer kaydı `Yıldırım, Millet Cd. No:163, 34045 Bayrampaşa/İstanbul`, telefon `+90 212 515 02 22`. Yandex aktif kaydı adresi `Millet Cad. 163A` olarak gösteriyor; resmi iletişim sayfası erişimde Bağcılar adresini döndürürken arama dizini Bayrampaşa için `No:163/A` bilgisi veriyor. Yemeksepeti’nde güncel fiyatlı ürünler mevcut, ancak vendor sayfası Hentzer’deki No:163 ile %100 exact adres parity’sini açıkça kanıtlamıyor. **Yanlış şubeye menü aktarmamak için override eklenmedi; strict HOLD.**
+
+## SLADOLED DONDURMA YILDIRIM ID 6638 ACCEPTED
+Hentzer kaydı `Yıldırım, Şht. Kamil Balkan Cd. No:51/B, 34045 Bayrampaşa/İstanbul`, telefon `+90 543 866 72 75`. Sladoled resmi Facebook şube paylaşımı 27.09.2025 tarihinde aynı No:51/B adresi ve telefonu doğruluyor; resmi sosyal fiyat paylaşımında 1/2/3 top ve 1 kg dondurma fiyatları yer alıyor. Fiyat paylaşımı 26.08.2025 tarihli olup son bir yıl sınırındadır; 4 ürün eklendi.

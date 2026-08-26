@@ -90833,4 +90833,16 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Tavuklu İnce Pirinç Çubuğu", "price": "429,90 TL", "category": "Pirinç Çubuğu" }
     ]
   },
+  "6638": {
+    "name": "SLADOLED DONDURMA YILDIRIM",
+    "sourceUrl": "https://www.instagram.com/reel/DN8PApF3DFAp/",
+    "sourceName": "Sladoled resmi sosyal hesap fiyat paylaşımı (26.08.2025); resmi Facebook şube paylaşımı exact adres/telefonu doğruluyor",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Dondurma 1 Top", "price": "70 TL", "category": "Dondurma" },
+      { "name": "Dondurma 2 Top", "price": "140 TL", "category": "Dondurma" },
+      { "name": "Dondurma 3 Top", "price": "210 TL", "category": "Dondurma" },
+      { "name": "Dondurma 1 Kg", "price": "1300 TL", "category": "Dondurma" }
+    ]
+  }
 };
