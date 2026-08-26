@@ -2834,3 +2834,6 @@ Hentzer `Asmalı Mescit, Nergis Sk. 2 A, 34430 Beyoğlu`, telefon `+90 212 244 0
 
 ## NOVAS HAGIASOPHIA RESTAURANT ID 6554 HOLD
 Hentzer `Sıraselviler Caddesi, Katip Mustafa Çelebi, Otopark No:1, 34433 Beyoğlu/İstanbul`, telefon `+90 534 962 29 86`. Adres doğrulanıyor; ancak resmi site `+90 546 124 00 34` veriyor ve Hentzer telefonu ile phone parity bozuluyor. Ürün fiyatları third-party kaynaklarda mevcut olsa da bu çelişkiyle override eklenemez. **Strict HOLD.**
+
+## GASTROYALI ID 6553 HOLD
+Hentzer `İncirköy, Saip Molla Cd. No:67, 34800 Beykoz`, telefon `+90 533 208 95 13`. Yandex bunu doğruluyor; ancak resmi Facebook `No:67A` ve `+90 216 425 99 99` veriyor. Adres/telefon parity’si kesin değil, ayrıca son bir yıl ürün bazlı fiyatlı menü bulunamadı. **Override eklenmedi; strict HOLD.**
