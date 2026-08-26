@@ -2506,3 +2506,6 @@ Hentzer kaydı `Kavaklı, Muhammed Cinnah Sk. 43/7, 34320, 34520 Beylikdüzü/İ
 
 ## HANY BURGER BEYLİKDÜZÜ ID 6663 HOLD
 Hentzer kaydı `Marmara Mah. Avrasya Cad. B Blok No:17/2F, 34524 Beylikdüzü/İstanbul`, telefon `+90 555 989 34 34`. Güncel Instagram ve Yemeksepeti fiyatlı menü sonuçları bulunsa da Yandex aktif işletme kaydı adresi `Avrasya Cad. 17/2I`, telefonu `+90 532 152 69 56` olarak gösteriyor; resmi sosyal sonuçlarında da farklı `0555 999 34 34` numarası geçiyor. Bu nedenle zorunlu exact adres ve telefon parity sağlanamadı. **Override eklenmedi; strict HOLD**.
+
+## FIKARY BAKERY & COFFEE GAYRETTEPE ID 6662 HOLD
+Hentzer kaydı `Gayrettepe, Fuat Sarp Sk. No:5/A, 34330 Beşiktaş/İstanbul`; telefon alanı boş. Restoranim ve Migros Yemek aynı Gayrettepe/Fuat Sarp No:5/A şubesini gösteriyor; Migros’ta güncel fiyatlı ürünler de mevcut. Ancak Hentzer’de telefon bulunmadığı için zorunlu adres **ve telefon** parity’si birlikte doğrulanamadı. **Override eklenmedi; strict HOLD**.
