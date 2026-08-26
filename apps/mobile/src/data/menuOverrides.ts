@@ -4,6 +4,15 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6759": {
+    "name": "AZİMDEYİZ ANTAKYA MEYHANESİ",
+    "sourceUrl": "https://menum.co/Azimdeyiz-AntakyaMeyhanesi",
+    "sourceName": "Menum.co canlı menü; resmi Instagram ve menü sayfasında exact Maşuklar Yokuşu adres/telefonu doğrulandı",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Sucuklu Yumurta", "price": "178 TL", "category": "Kahvaltılık Ürünler" }
+    ]
+  },
   "6762": {
     "name": "POYRAZ TAKO BALIK RESTAURANT",
     "sourceUrl": "https://poyraztakobalik.com/alakart-menu/",

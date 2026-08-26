@@ -2211,3 +2211,6 @@ Hentzer kaydı `Cumhuriyet, Şehitler Cd. No:13 D:21, 34515 Beylikdüzü/İstanb
 
 ## PREGIO PIZZA BEYKOZ ID 6760 HOLD
 Hentzer kaydı `Göztepe, Palmiye Cd. No:14, 34815 Beykoz/İstanbul`, telefon `+90 216 465 01 08`. Yandex aynı No:14 adresini, X hesabı Göksu Evleri Palmiye Cad. B24/No:14 bilgisini, Bulurum ise 30/A adresini veriyor; telefon eşleşse de %100 exact kapı/bağımsız birim parity sağlanamadı. Resmi görünen `pregiopizza.com` farklı ülke/şehirdeki zincire ait; son bir yıl içinde İstanbul şubesine ait doğrulanabilir fiyatlı menü bulunamadı. **Override eklenmedi; strict HOLD**.
+
+## AZİMDEYİZ ANTAKYA MEYHANESİ BEŞİKTAŞ ID 6759 ACCEPTED
+Hentzer kaydı `Abbasağa, Maşuklar Ykş. No:111, 34353 Beşiktaş/İstanbul`, telefon `+90 212 258 59 54`. Resmi Instagram hesabı aynı adresi ve telefonu yayınlıyor; Menum.co sayfası da aynı işletme, adres ve Google Maps bağlantısını veriyor. Menum.co’da 26.08.2026 tarihinde erişilebilir fiyatlı tek kalem `Sucuklu Yumurta — 178 TL` görüldü. Diğer kategori başlıkları fiyat/ürün detayı erişilebilir olmadığından eklenmedi. **1 ürün override edildi.**
