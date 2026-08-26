@@ -2961,3 +2961,6 @@ Hentzer `Göztepe, 34815 Beykoz`, telefon `+90 216 519 45 48`. Resmi Qadraj ilet
 
 ## CEYLAN DÖNER ID 6515 HOLD
 Hentzer `Barış, Akdeniz Cd. 9 D, 34520 Beylikdüzü`, telefon alanı boş. Yandex/Instagram/Bulurum `0212 853 50 83` telefonunu destekliyor; ancak Yemeksepeti exact vendoru adresi `Akdeniz Caddesi 9/C` olarak veriyor. Hentzer 9 D ile vendor 9/C kapı parity’si çelişkili olduğundan **override eklenmedi; strict HOLD.**
+
+## PIZZA CIRCASSO ID 6514 HOLD
+Hentzer `Sinanpaşa, Şair Veysi Sk. No:43, 34353 Beşiktaş`, telefon `+90 545 439 24 06`. Menum exact No:43 adresi ve güncel görünen pizza fiyatlarını doğruluyor; ancak Yemeksepeti aynı isimli vendoru Hacı Mustafa Sk. Çetin Apartmanı No:1A olarak gösteriyor. Exact şube parity’si çelişkili olduğundan **override eklenmedi; strict HOLD.**
