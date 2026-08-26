@@ -2837,3 +2837,6 @@ Hentzer `Sıraselviler Caddesi, Katip Mustafa Çelebi, Otopark No:1, 34433 Beyo�
 
 ## GASTROYALI ID 6553 HOLD
 Hentzer `İncirköy, Saip Molla Cd. No:67, 34800 Beykoz`, telefon `+90 533 208 95 13`. Yandex bunu doğruluyor; ancak resmi Facebook `No:67A` ve `+90 216 425 99 99` veriyor. Adres/telefon parity’si kesin değil, ayrıca son bir yıl ürün bazlı fiyatlı menü bulunamadı. **Override eklenmedi; strict HOLD.**
+
+## FISH PORT RESTAURANT ID 6552 HOLD
+Hentzer `Rüstem Paşa Mah. Yeni Galata Köprüsü altı, Eminönü Haliç tarafı No:1, D:2, 34116 Fatih`, telefon `+90 532 692 81 75`. Resmi site No:1-2 ve aynı telefonu doğruluyor. Resmi menü kategorileri mevcut, fakat ürün bazlı güncel TL fiyatları yayımlanmıyor. **Override eklenmedi; strict HOLD.**
