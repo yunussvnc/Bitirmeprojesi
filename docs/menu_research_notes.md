@@ -1821,3 +1821,27 @@ Hentzer kaydı `Kavaklı, Oğuzhan Cd. No:23 F, 34520 Beylikdüzü/İstanbul`, `
 
 ## INARI OMAKASE KURUÇEŞME ID 6892 kabulü
 Inari’nin resmi Türkçe menü sayfası exact `Kuruçeşme Mh. Kuruçeşme Cd. No:11 Beşiktaş / İstanbul` ve `+90 212 265 96 01` bilgisini doğruluyor. Resmi Kuruçeşme Yemek, Tatlı ve İçecek PDF menülerinde revizyon tarihi **03.02.2026** olarak belirtiliyor; bu tarih bir yıllık güncellik şartı içindedir. Alkollü/şarap kalemleri, servis ücreti ve tekrarlar dışarıda bırakılarak fiyatı açıkça görülen 81 benzersiz yiyecek, tatlı, kahve, çay ve alkolsüz içecek kalemi aktarıldı. **Override kabul edildi.**
+
+## ELİBOLL DÖNER ID 6891 HOLD
+Resmi sosyal medya içerikleri exact OSB Güngören-Bağcılar Sanayi Sitesi ve `+90 212 642 01 02` bilgisini doğruluyor; 17 Haziran paylaşımında tekil `İskender 490 TL` fiyatı görülüyor. Ancak Yemeksepeti vendoru kapalı, Kaçıyor menüyü `Çok Yakında` gösteriyor ve tam güncel ürün-fiyat listesi kamuya açık doğrulanamadı. **HOLD**, override eklenmedi.
+
+## PARK KEBAP PİDE & LAHMACUN ID 6890 HOLD
+Restoranim ve bağımsız kaynaklar exact `Hacımimi, Lüleciler Cd. 23/A, 34425 Beyoğlu/İstanbul` / `+90 212 292 72 45` bilgisini doğruluyor. Ancak erişilebilir kamu kaynaklarında son bir yıl içinde güncellenmiş tam ürün-fiyat menüsü bulunamadı; yalnızca eski/menü fotoğrafı referansları var. **HOLD**, override eklenmedi.
+
+## BAYKUŞ DAĞ EVİ ID 6889 HOLD
+Resmi site exact `Mahmut Şevket Paşa Köyü, Dolapdere Sokak No:10, 34829 Beykoz/İstanbul` ve `+90 531 834 57 80` bilgisini doğruluyor. 17.08.2026 tarihli arama sonucu kişi başı 1.490 TL serpme kahvaltı bilgisini taşısa da tam ve güncel ürün-fiyat menüsü kamuya açık bulunamadı. **HOLD**, override eklenmedi.
+
+## Bİ DÜNYA MEYHANE BEYLİKDÜZÜ ID 6888 HOLD
+Yandex, PerlaVista resmi AVM sayfası ve resmi Instagram paylaşımları exact Perla Vista/Beylikdüzü şubesini ve `+90 532 238 42 00` telefonunu doğruluyor. 2026 sosyal paylaşımları işletmenin aktifliğini destekliyor; ancak Mekanlar.com ve diğer kamu profillerinde tam, son bir yıl içinde doğrulanabilir ürün-fiyat menüsü yok. **HOLD**, override eklenmedi.
+
+## MONTEVERDİ RİSTORANTE ID 6887 HOLD
+Resmi Monteverdi dining/contact sayfaları exact `Cihannüma, Saray Cd No:5, Beşiktaş/İstanbul` / `+90 537 973 80 14` bilgisini doğruluyor. Aralık 2025 tarihli resmi menü görselleri ürün ve kategori adlarını içeriyor ancak `DIJITAL-FIYATSIZ` olarak yayınlanmış; fiyatlar kamuya açık şekilde doğrulanamıyor. **HOLD**, fiyat şartı sağlanmadığı için override eklenmedi.
+
+## YENGEÇ RESTAURANT ID 6886 HOLD
+Hentzer kaydında telefon bulunmuyor. Meyhankoli aynı adrese yakın bir kayıt gösterse de telefon `0212 260 0018` olarak farklı ve işletme `Kalıcı Olarak Kapatılmıştır` durumunda; güncel menü de yok. **HOLD**, override eklenmedi.
+
+## LUNCHILL ID 6885 HOLD
+Restaurant Guru exact `Sakarya Cd. Migros AVM NO:1 K3A-K3, Büyükçekmece/Beylikdüzü` / `+90 554 190 34 50` bilgilerini doğruluyor ve işletmeyi aktif gösteriyor. Ancak menü tek bir kullanıcı görseli olarak 11 ay önce eklenmiş; 384x512 düşük çözünürlüklü görselden yalnızca kısmi bir kokteyl fiyatı okunabildi, tam güncel fiyat listesi ve revizyon tarihi doğrulanamadı. **HOLD**, override eklenmedi.
+
+## YAĞLAMA PLUS KAYSERİ LEZZETLERİ BEYLİKDÜZÜ ID 6884 kabulü
+Hentzer kaydı `Barış, Karadeniz Cd. No:8, 34520 Beylikdüzü/İstanbul`, `+90 212 543 77 77`; Yandex, resmi Instagram ve işletme profilleri exact şubeyi doğruluyor. Migros Yemek canlı vendoru `Yağlama Plus, Beylikdüzü (Barış Mah.)` ile eşleşiyor. 26.08.2026 tarihinde canlı Migros menüsünde güncel fiyatlar doğrulandı. Popüler tekrar kaydı dışarıda bırakılarak 20 benzersiz mantı, yağlama, diğer yemek, tatlı ve içecek kalemi aktarıldı; indirimli görünen kalemlerde güncel satış fiyatı kullanıldı. **Override kabul edildi.**

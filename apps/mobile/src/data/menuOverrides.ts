@@ -4,6 +4,34 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6884": {
+    "name": "YAĞLAMA PLUS KAYSERİ LEZZETLERİ BEYLİKDÜZÜ",
+    "sourceUrl": "https://www.migros.com.tr/yemek/yaglama-plus-beylikduzu-baris-mah-st-2836b",
+    "sourceName": "Migros Yemek canlı menüsü; exact Barış, Karadeniz Cd. No:8 / +90 212 543 77 77 kaydıyla eşleşiyor",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Yağ Mantısı + Cola", "price": "400 TL", "category": "Coca-Cola Lezzetli Menüler" },
+      { "name": "1.5 Yağlama + Kola", "price": "925 TL", "category": "Coca-Cola Lezzetli Menüler" },
+      { "name": "Geleneksel Börek Aşı", "price": "625 TL", "category": "Çorbalar" },
+      { "name": "Yağ Mantısı", "price": "625 TL", "category": "Mantılar" },
+      { "name": "Peynirli (Prov) Mantı", "price": "625 TL", "category": "Mantılar" },
+      { "name": "Kayseri Mantısı", "price": "625 TL", "category": "Mantılar" },
+      { "name": "Zeytinyağlı Yaprak Sarma", "price": "228,60 TL", "category": "Diğer Lezzetler" },
+      { "name": "Peynirli Yağlama", "price": "400 TL", "category": "Diğer Lezzetler" },
+      { "name": "Kayseri Yağlaması", "price": "810 TL", "category": "Diğer Lezzetler" },
+      { "name": "Şatilli Salata", "price": "219 TL", "category": "Diğer Lezzetler" },
+      { "name": "Haşlanmış İçli Köfte", "price": "219 TL", "category": "Diğer Lezzetler" },
+      { "name": "Kayseri Yağlaması 1.5 Porsiyon", "price": "650 TL", "category": "Diğer Lezzetler" },
+      { "name": "Zero Cola", "price": "100 TL", "category": "İçecekler" },
+      { "name": "Kola", "price": "100 TL", "category": "İçecekler" },
+      { "name": "Ice Tea (33 Cl.) Limon", "price": "100 TL", "category": "İçecekler" },
+      { "name": "Meyveli Soda (20 Cl.)", "price": "100 TL", "category": "İçecekler" },
+      { "name": "İce Tea Şeftali", "price": "100 TL", "category": "İçecekler" },
+      { "name": "Nevzine", "price": "228,60 TL", "category": "Tatlılar" },
+      { "name": "Aside", "price": "213,90 TL", "category": "Tatlılar" },
+      { "name": "Hayrabolu Tatlısı", "price": "85 TL", "category": "Tatlılar" }
+    ]
+  },
   "6892": {
     "name": "INARI OMAKASE KURUÇEŞME",
     "sourceUrl": "https://www.inariomakase.com/tr/menu",
