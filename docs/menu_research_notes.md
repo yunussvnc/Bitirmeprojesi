@@ -2886,3 +2886,6 @@ Hentzer `Sinanpaşa, Şht. Dursun Bakan Sk. No:3, 34353 Beşiktaş`, telefon `+9
 
 ## ÇAĞDAŞ İSKENDER & KEBAP ID 6539 HOLD
 Hentzer `Büyükşehir, Cumhuriyet Cd. No:50 D:51-52, 34520 Beylikdüzü`, telefon `+90 212 873 13 41`. Yandex/Mekan/Restoranim ve resmi Instagram exact işletmeyi destekliyor; ancak son bir yıl exact şubeye ait ürün bazlı güncel TL fiyatlı menü bulunamadı. **Override eklenmedi; strict HOLD.**
+
+## ŞAİR LEYLA BISTRO ID 6538 HOLD
+Hentzer `Sinanpaşa Mahallesi Köyiçi Cad, Şair Leyla Sk. No:4, 34353 Beşiktaş`, telefon `+90 212 259 29 24`; resmi site/Facebook/Yelp/Wanderlog exact şubeyi doğruluyor. Ancak resmi menüde ürün bazlı fiyatlar erişilebilir değil ve son bir yıl fiyatlı menü bulunamadı. **Override eklenmedi; strict HOLD.**
