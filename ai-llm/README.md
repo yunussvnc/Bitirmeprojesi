@@ -35,7 +35,7 @@ Kullanıcıların yapay zekaya uygunsuz veya alakasız sorgular girmesini önlem
 *   Aynı veya çok benzer bir arama tekrar yapıldığında, embedding hesaplama ve LLM açıklama üretme adımları atlanarak yanıt süresi **75 milisaniyeye** kadar düşürülür.
 
 ### 5. Qdrant Vektör Veritabanı Entegrasyonu
-*   İstanbul'daki doğrulanmış 198 mekanın semantik vektörleri Qdrant üzerinde depolanır.
+*   İstanbul'daki doğrulanmış 4715 mekanın semantik vektörleri Qdrant üzerinde depolanır.
 *   PostgreSQL veritabanı ile otomatik senkronizasyon yeteneği mevcuttur. Çevrimdışı testler için yerel JSON dosyası (`data/loaded_places.json`) üzerinden in-memory Qdrant vektör tabanı oluşturma desteği de sağlanmıştır.
 
 ---

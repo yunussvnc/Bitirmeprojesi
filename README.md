@@ -38,7 +38,7 @@ Projenin son fazında sisteme entegre edilen modern ve performans odaklı özell
  │  • Auth & Google Login  │               │  • Doğal Dil Mekan Arama        │
  │  • Mekan CRUD & Cache   │               │  • SerpAPI → Google Maps        │
  │  • Hikaye & Sosyal Akış │               │  • Qdrant Vektör Araması        │
- │  • Gerçek Zamanlı Chat  │               │    (198 Gerçek İstanbul Mekanı) │
+ │  • Gerçek Zamanlı Chat  │               │    (4715 Gerçek İstanbul Mekanı) │
  │  • Coğrafi Doğrulama    │               │  • Redis Cache & Model Preload  │
  │  • Bildirimler (WS)     │               │  • Çok Dilli İçerik Filtresi    │
  │  • Kategori Cezaları    │               │  • Katmanlı LLM (Groq -> Gemma) │
@@ -58,7 +58,7 @@ Projenin son fazında sisteme entegre edilen modern ve performans odaklı özell
 | **Backend API** | Python 3.11, FastAPI, SQLAlchemy, Alembic, PostgreSQL, Redis Pub/Sub, Websockets | JWT + Google Auth, CRUD, asenkron background tasks ve sohbet sunucusu. |
 | **AI Servisi** | Python 3.11, FastAPI, Sentence Transformers, Qdrant, HuggingFace Transformers, PyTorch | Semantik arama, vektör indeksleme, yerel duygu analizi ve LLM yönetim servisi. |
 | **LLM Katmanı** | Groq Cloud (`openai/gpt-oss-20b`) + HuggingFace Local Gemma 2 | Hızlı cloud yanıtı alan, hata durumunda yerel modele veya puanlama motoruna düşen dayanıklı zincir. |
-| **Vektör Arama** | Qdrant + `paraphrase-multilingual-MiniLM-L12-v2` | Çok dilli (multilingual) semantik arama yeteneği ve 198 doğrulanmış İstanbul mekanı. |
+| **Vektör Arama** | Qdrant + `paraphrase-multilingual-MiniLM-L12-v2` | Çok dilli (multilingual) semantik arama yeteneği ve 4715 doğrulanmış İstanbul mekanı. |
 | **Önbellek (Cache)**| Redis (FastAPI + AI-LLM katmanlarında ayrı ayrı caching) | Mekan sorgularını ve oturum verilerini milisaniyeler seviyesine indiren önbellek yapısı. |
 | **Medya Depolama**| Cloudinary & Local Storage Fallback | Kullanıcı profil resimleri, postlar ve hikaye medyaları için CDN destekli depolama. |
 | **Kapsülleme** | Docker & Docker Compose | Yerel geliştirmede servisleri tek komutla ayağa kaldırır. Bulutta (Render.com) ise Dockerfile'lar üzerinden konteyner tabanlı otomatik dağıtım sağlar. |

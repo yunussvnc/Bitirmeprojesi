@@ -32,7 +32,7 @@ AsEmOs birbirine bağlı 5 ana bileşenden (modülden) oluşmaktadır:
   │  • Auth & Google Login  │               │  • Doğal Dil Mekan Arama        │
   │  • Mekan CRUD & Cache   │               │  • SerpAPI → Google Maps        │
   │  • Hikaye & Sosyal Akış │               │  • Qdrant Vektör Araması        │
-  │  • Gerçek Zamanlı Chat  │               │    (198 Gerçek İstanbul Mekanı) │
+  │  • Gerçek Zamanlı Chat  │               │   (4715 Gerçek İstanbul Mekanı) │
   │  • Coğrafi Doğrulama    │               │  • Redis Cache & Model Preload  │
   │  • Bildirimler (WS)     │               │  • Çok Dilli İçerik Filtresi    │
   │  • Kategori Cezaları    │               │  • Katmanlı LLM (Groq -> Gemma) │
@@ -139,7 +139,7 @@ Claude ile tez hazırlığı veya jüri revizyonu yaparken `HOCA_SORULARI_VE_CEV
 1.  **Benzerlik Eşiği neden >0.40 seçildi?**
     *   0.25 - 0.65 aralığında grid-search yapıldı. F1-Score analizinde en yüksek doğruluğun `%90 F1-Score` ile `0.40` eşiğinde (Sweet Spot) yakalandığı deneysel olarak kanıtlandı.
 2.  **Halüsinasyon nasıl engellendi?**
-    *   **Closed-Context RAG:** LLM'e sadece Qdrant'tan gelen 198 gerçek İstanbul mekanının detayları verilir. Dış veri kullanımı prompt ile yasaklanmıştır.
+    *   **Closed-Context RAG:** LLM'e sadece Qdrant'tan gelen 4715 gerçek İstanbul mekanının detayları verilir. Dış veri kullanımı prompt ile yasaklanmıştır.
     *   **Low Temperature:** Görsel analiz ve niyet sınıflandırmasında `temperature: 0.1` kullanılarak yaratıcılık kapatılmış, olgusal tutarlılık sağlanmıştır.
     *   **Kural Tabanlı Ön Filtre:** Uygunsuz/siyasi sorgular LLM'e gitmeden yakalanır.
 3.  **Performans Metrikleri Nelerdir?**
