@@ -3023,3 +3023,6 @@ Kaynaklar: https://www.yemeksepeti.com/en/restaurant/yfz2/tike-acarkent ; https:
 
 ## PİTE BAKERY & KRUUVASAN VE KAHVALTI ID 6496 HOLD
 Hentzer `Vidin İş Merkezi, Sinanpaşa, Hasfırın Cd. D:3, 34022 Beşiktaş/İstanbul`, telefon `+90 542 408 58 02`. Resmi site ve Restoranim bu telefonu destekliyor; ancak Apple Maps aynı şube için farklı `+90 530 665 70 33` telefonu yayımlıyor. Yemeksepeti adresi yakın olsa da tam fiyatlı menü metni alınamadı ve 20 ürün doğrulanamadı. **Override eklenmedi; strict HOLD.**
+
+## HAKİKİ MARAŞ DONDURMASI ID 6495 HOLD
+Hentzer `Gümüşsuyu, Sultaniye Cd. No:52, 34437 Beykoz/İstanbul`, telefon alanı boş. Yandex 52C, Kacıyor No:52 gösteriyor; telefon parity’si yok. Yemeksepeti fiyatlı görünse de exact branch adres/telefonu doğrulanamadı; No:71 ve farklı telefonlu başka kayıt kullanılmadı. **Override eklenmedi; strict HOLD.**
