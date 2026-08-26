@@ -2641,3 +2641,6 @@ Hentzer kaydı `Rumeli Han İstiklal Caddesi, Şehit Muhtar, Taksim No:48, 34435
 
 ## POYRAZ SAHİL BALIK RESTAURANT BEYKOZ ID 6618 ACCEPTED
 Hentzer kaydı `Poyrazköy, Mendirek Yolu No:18A, 34829 Beykoz/İstanbul`, telefon `+90 542 320 11 22`. Poyraz resmi sitesi ve iletişim sayfası aynı No:18/A adresini, 0542 320 11 22 cep ve 0216 320 11 00 sabit telefonunu doğruluyor; resmi Instagram da exact şubeyi destekliyor. Adisyo QR menüsü erişilebilir metin vermedi, ancak resmi Instagram’ın 05.09.2025 tarihli paylaşımındaki `5 çeşit meze – 1.500 TL` özel menü son bir yıl içinde doğrulanabildi. **1 özel menü ürünü eklendi.**
+
+## SUMMIT BAR & TERRACE BEŞİKTAŞ ID 6617 HOLD
+Hentzer kaydı `Cihannüma Mahallesi Saray Caddesi No:5, 14th Floor, Cihannüma, 34353 Beşiktaş/İstanbul`, telefon alanı boş. Adres Conrad Istanbul Bosphorus kaynaklarıyla doğrulanıyor; ancak aktif resmi Instagram/Hilton iletişiminde `+90 537 973 80 14`, Yelp/Firmarehberi eski kaynaklarında `0212 310 25 25` görülüyor. Hentzer telefonu boş olduğundan zorunlu telefon parity’si kurulamadı. Ayrıca son bir yıl exact ürün-fiyat menüsü doğrulanamadı. **Override eklenmedi; strict HOLD.**
