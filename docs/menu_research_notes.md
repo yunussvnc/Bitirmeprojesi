@@ -2647,3 +2647,6 @@ Hentzer kaydı `Cihannüma Mahallesi Saray Caddesi No:5, 14th Floor, Cihannüma,
 
 ## TATBAK PAŞABAHÇE ŞUBESİ BEYKOZ ID 6616 HOLD
 Hentzer kaydı `Paşabahçe, Saip Molla Cd., 34800 Beykoz/İstanbul`, telefon `+90 553 008 90 34`. Tatbak resmi şube sayfası ve Yandex aynı telefonu doğruluyor; ancak resmi ve Yandex kayıtlarında kapı numarası `Saip Molla Cad. No:23/A`, Hentzer kaydında kapı numarası yok. Son bir yıl içinde exact şubeye ait doğrulanabilir ürün bazlı fiyatlı menü de bulunamadı. **Override eklenmedi; strict HOLD.**
+
+## EKLER HOUSE BAYRAMPAŞA ID 6615 HOLD
+Hentzer kaydı `Kartaltepe, Süleyman Şah Cd 32/A, 34040 Bayrampaşa/İstanbul`, telefon `+90 538 259 17 39`. Resmi Instagram hesabı adres ve bu telefonu destekliyor; ancak aktif Yandex kaydı aynı No:32/A adresinde `+90 212 616 17 23` telefonunu yayımlıyor. Restaurantguru menü sayfası fiyatların üç yıl önce kullanıcılar tarafından eklendiğini ve güncelliğinin garanti edilemeyeceğini belirtiyor; son bir yıl fiyatlı exact menü doğrulanamadı. **Override eklenmedi; strict HOLD.**
