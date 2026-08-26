@@ -3039,3 +3039,6 @@ Resmi Sushi İnn iletişim sayfası exact `Cumhuriyet Mahallesi, 1993 Sokak, Sa�
 ## WILLION PIZZA ID 6491 ACCEPTED
 Hentzer `Yıldız, Çırağan Cd. No:33A, 34349 Beşiktaş/İstanbul`, telefon `+90 212 265 10 10`. Resmi Willion Pizza Instagram 20.07.2025 tarihli gönderisi exact adres ve telefonu doğruluyor; Restoranim de aynı kaydı destekliyor. Yemeksepeti vendorunda 26.08.2026 erişiminde 42 cm pizza, garlic knots ve sos fiyatları bulundu. Popüler carousel tekrarları tekilleştirildi; içecekler dışlandı ve 19 benzersiz gıda kalemi eklendi. **Override kabul edildi.**
 Kaynaklar: https://www.yemeksepeti.com/restaurant/u8lk/willion-pizza ; https://www.instagram.com/reel/DMVSPGMt5B2/ ; https://restoranim.net/istanbul/besiktas/pizzaci/willion-pizza
+
+## GÖKSU DÜRÜM KEBAP ÇORBACISI ID 6490 HOLD
+Hentzer `Anadolu Hisarı, Göksu, Baruthane Cd. No:2/A, 34600 Beykoz/İstanbul`, telefon `+90 216 308 30 35`; birden fazla yerel rehber exact parity’yi doğruluyor. Ancak son bir yıl exact işletmeye ait ürün bazlı fiyatlı menü bulunamadı. **Override eklenmedi; strict HOLD.**
