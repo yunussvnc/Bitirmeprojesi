@@ -2880,3 +2880,6 @@ Kaynaklar: https://pizano.com.tr/ ; https://www.migros.com.tr/yemek/pizano-pizze
 ## KONOHA ETİLER ID 6541 ACCEPTED
 Hentzer `Nisbetiye, Başa Sk. 4A, 34340 Beşiktaş`, telefon `+90 212 352 13 13`. Allzin exact Konoha Sushi Etiler menü kaydı aynı adres ve telefonu doğruluyor; Yandex de aynı şubeyi doğruluyor. Canlı Yemeksepeti Konoha menüsünden sushi setleri, menüler, başlangıçlar, çorbalar, tavuk ve noodle kategorilerinden 20 benzersiz gıda ürünü güncel fiyatlarla eklendi. **Override kabul edildi.**
 Kaynaklar: https://allzinapp.com/KonohaSushiEtiler ; https://yandex.com.tr/maps/org/konoha_etiler/193619662649/ ; https://www.yemeksepeti.com/en/restaurant/oqs8/konoha-sushi-and-chinese
+
+## KORE'DE BEŞİKTAŞ ID 6540 HOLD
+Hentzer `Sinanpaşa, Şht. Dursun Bakan Sk. No:3, 34353 Beşiktaş`, telefon `+90 543 522 19 03`. Adres eşleşse de Cybo/Hentzer telefonu ile işletmenin Facebook sayfasındaki `+90 543 795 08 18` çelişiyor. Telefon parity’si kesin olmadığından güncel Yemeksepeti fiyatları kullanılmadı. **Override eklenmedi; strict HOLD.**
