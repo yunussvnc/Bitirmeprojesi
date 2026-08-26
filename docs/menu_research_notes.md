@@ -2656,3 +2656,6 @@ Hentzer kaydı `Yıldırım, Eski Edirne Asf. No:87 D:89, 34045 Bayrampaşa/İst
 
 ## MEAT MOOT ISTANBUL TAKSİM ID 6613 HOLD
 Hentzer kaydı `Şehit Muhtar, İmam Adnan Sk. No:5, 34010 Beyoğlu/İstanbul`, telefon `+90 539 723 30 20`. Meat Moot resmi Taksim şube sayfası aynı İmam Adnan No:5 adresini doğruluyor; ancak resmi telefon `+90 555 069 49 40` olarak yayımlanıyor. Resmi Taksim menüsü mevcut olsa da zorunlu telefon parity’si sağlanamadığı için fiyatlar kullanılmadı. **Override eklenmedi; strict HOLD.**
+
+## IO COFFEE COMPANY POLONEZKÖY ID 6612 HOLD
+Hentzer kaydı `Polonezköy, 75. Yıl Cd. No:1/1, 34829 Beykoz/İstanbul`, telefon `+90 534 385 65 11`. Yandex, Facebook ve resmi sosyal profil aynı adres ve telefonu doğruluyor. Ancak resmi/üçüncü taraf kaynaklarda son bir yıl içinde ürün bazlı güncel fiyatlı menü bulunamadı; yalnızca genel fiyat aralığı verileri mevcut. **Override eklenmedi; strict HOLD.**
