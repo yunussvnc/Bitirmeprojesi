@@ -92015,6 +92015,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Sultaniye Soslu Tavuk Döner Dürüm", "price": "230 TL", "category": "Tavuk Dönerler" }
     ]
   },
+  "6430": {
+    "name": "Tarihi Oktay Kurabiye Fırını",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/b3xf/tarihi-oktay-kurabiye-firini",
+    "sourceName": "Güncel Yemeksepeti Tarihi Oktay Kurabiye Fırını menüsü; Yandex/Hürriyet ile Türkali, Yaverağa Sk. 1/A / +90 212 258 88 92 exact parity doğrulaması",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "Acı Badem Kurabiyesi 250 gr", "price": "360 TL", "category": "Kurabiyeler" },
+      { "name": "Tarçınlı Kurabiye 250 gr", "price": "250 TL", "category": "Kurabiyeler" },
+      { "name": "Coco 250 gr", "price": "350 TL", "category": "Kurabiyeler" },
+      { "name": "Çatal", "price": "45 TL", "category": "Diğer Lezzetler" },
+      { "name": "Ay Çekirdekli Galeta 250 gr", "price": "180 TL", "category": "Diğer Lezzetler" },
+      { "name": "Üzümlü Peksimet 250 gr", "price": "240 TL", "category": "Diğer Lezzetler" },
+      { "name": "Sade Kırıkkırak 250 gr", "price": "180 TL", "category": "Diğer Lezzetler" },
+      { "name": "Siyez Kurabiye 250 gr", "price": "270 TL", "category": "Kurabiyeler" },
+      { "name": "Un Kurabiyesi 250 gr", "price": "250 TL", "category": "Kurabiyeler" },
+      { "name": "Örgü Şeklinde Çay Kurabiyesi 250 gr", "price": "250 TL", "category": "Kurabiyeler" },
+      { "name": "Susamlı Çay Kurabiyesi 250 gr", "price": "250 TL", "category": "Kurabiyeler" },
+      { "name": "Ay Şeklinde Çay Kurabiyesi 250 gr", "price": "250 TL", "category": "Kurabiyeler" },
+      { "name": "Kandil Simidi 8 Adet", "price": "300 TL", "category": "Kurabiyeler" },
+      { "name": "Halka Simit 250 gr", "price": "250 TL", "category": "Kurabiyeler" },
+      { "name": "Üzümlü Portakallı Çay Kurabiyesi 250 gr", "price": "250 TL", "category": "Kurabiyeler" },
+      { "name": "Kepekli Kurabiye 250 gr", "price": "250 TL", "category": "Kurabiyeler" },
+      { "name": "Fıstıklı Kakaolu Kurabiye 250 gr", "price": "250 TL", "category": "Kurabiyeler" },
+      { "name": "Landöşe Kurabiye 250 gr", "price": "260 TL", "category": "Kurabiyeler" },
+      { "name": "Hindistan Cevizli Kurabiye 250 gr", "price": "250 TL", "category": "Kurabiyeler" },
+      { "name": "Çekirdekli Kurabiye 250 gr", "price": "250 TL", "category": "Kurabiyeler" }
+    ]
+  },
   "6433": {
     "name": "Mr.Hamza Beylikdüzü",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/jvgd/mr-hamza-hamburger-jvgd",

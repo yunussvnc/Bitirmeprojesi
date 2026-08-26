@@ -3234,3 +3234,7 @@ Kaynaklar: https://www.huqqa.com/tr/kurucesme-huqqa/ ; https://menu.qfoodbeverag
 
 ## İSTASYON BISTRO BEYKENT ID 6431 HOLD
 Meyhankoli Hentzer ile exact Perlavista AVM B blok C48 adresini doğruluyor ancak telefonu `(0212) 882 36 99`; Hentzer `+90 532 743 80 36`. Telefon parity’si sağlanamadı. Ayrıca exact şubeye ait 20 güncel fiyatlı ürün menüsü doğrulanmadı. **Override eklenmedi; strict HOLD.**
+
+## TARİHİ OKTAY KURABİYE FIRINI ID 6430 ACCEPTED
+Hentzer `Türkali, Yaverağa Sk. 1/A, 34357 Beşiktaş/İstanbul`, telefon `+90 212 258 88 92`. Yandex exact adres/telefonu, Hürriyet’in 14.02.2026 tarihli içeriği işletmenin güncelliğini destekliyor. Canlı Yemeksepeti `b3xf` menüsünden poşet ve popüler tekrarlar dışlanarak 20 benzersiz kurabiye/fırın ürünü eklendi. **Override kabul edildi.**
+Kaynaklar: https://www.yemeksepeti.com/en/restaurant/b3xf/tarihi-oktay-kurabiye-firini ; https://yandex.com.tr/maps/org/tarihi_oktay_kurabiye_firini/1042818948/ ; https://www.hurriyet.com.tr/kelebek/lezzetli-hayat/cayin-yanina-iyi-gider-43107377
