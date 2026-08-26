@@ -2413,3 +2413,6 @@ Hentzer kaydı `Anadolu Hisarı, Körfez Cad, Kızılserçe Sok. No:20/1, 34810 
 
 ## ENBEY DÖNER BEYKENT ID 6694 HOLD
 Hentzer kaydı `Adnan Kahveci, Yavuz Sultan Selim Blv. No:23 D:2, 34528 Beylikdüzü/İstanbul`, telefon `+90 212 855 50 46`. Enbey resmi şube sayfası No:23 adresini doğruluyor; ancak resmi iletişim/şube telefonu yalnızca ortak `444 62 21` olarak veriliyor. Yerel kayıtlar Hentzer telefonunu desteklese de güncel 25.08.2026 sosyal menü paylaşımı Perlavista AVM No:1 adresine ait ve Yemeksepeti sonucu da başka şubeyi işaret ediyor. Exact telefon ve güncel fiyatlı exact şube menüsü birlikte doğrulanamadığından **override eklenmedi; strict HOLD**.
+
+## DOSSO DOSSI COFFEE BEYLİKDÜZÜ ID 6693 HOLD
+Hentzer kaydı `Vadi Loca Sitesi, Adnan Kahveci, Sayaca Cd. No:13 D:1 A Blok, 34528 Beylikdüzü/İstanbul`, telefon alanı boş. Dosso Dossi Coffee resmi iletişim sayfası aynı adresi ve `0212 242 21 21` telefonunu yayınlıyor; Instagram/Yandex de adresi destekliyor. Ancak Hentzer telefon alanı boş olduğundan exact phone parity tamamlanamıyor ve resmi sitede güncel fiyatlı menü ürünleri yayınlanmıyor. **Override eklenmedi; strict HOLD**.
