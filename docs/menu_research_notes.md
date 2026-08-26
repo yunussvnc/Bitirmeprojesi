@@ -2488,3 +2488,6 @@ Hentzer kaydı `Ortaköy, Muallim Naci Cd. No:17, 34347 Beşiktaş/İstanbul`, t
 
 ## BUUM BURGER / NEW BOSS BURGER KAVACIK ID 6669 HOLD
 Hentzer kaydı `Rüzgarlıbahçe Mh., Kavacık, Cumhuriyet Cd. 85/B, 34250 Beykoz/İstanbul`, telefon `+90 216 322 22 21`. Telefon Yandex ile eşleşiyor; ancak Yandex aktif işletme adresini Cumhuriyet Cad. No:83 olarak veriyor. Migros/Yemeksepeti fiyatlı menü sonuçları bulunsa da exact adres parity sağlanamadığı için **override eklenmedi; strict HOLD**.
+
+## JIMMY'S BURGER İSTİNYE ID 6668 HOLD
+Hentzer kaydı `İstinye, Koru Cd. No:3, 34460 Sarıyer/İstanbul`, telefon `+90 534 812 48 46`. Yerel işletme kaynakları ve telefon eşleşiyor; ancak Yandex aktif kaydı adresi Koru Cad. No:3/A olarak veriyor. Resmi online menü sayfası bulundu fakat fiyatlı içerik okunabilir şekilde alınamadı. Zorunlu exact adres ve son bir yıl fiyat şartları birlikte sağlanamadığı için **override eklenmedi; strict HOLD**.
