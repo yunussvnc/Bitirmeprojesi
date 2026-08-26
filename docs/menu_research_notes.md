@@ -2795,3 +2795,6 @@ Hentzer kaydı `Bahçelievler, Bağcılar Cd. No:45/1, 34180 Bahçelievler/İsta
 
 ## RENG-İ KAHVE ANADOLU HİSARI ID 6567 HOLD
 Hentzer kaydı `Anadolu Hisarı, Körfez Cd. No:26 D:B, 34810 Beykoz/İstanbul`, telefon `+90 216 308 70 96`. Resmi Instagram, Yandex ve Restoranim exact işletme/telefonu doğruluyor. Ancak Restoranim menü bulunmadığını, yalnızca bir ziyaretçinin toplam hesap bilgisini paylaştığını belirtiyor; fotoğraf menüsü okunabilir ve tarihli ürün-fiyat listesi olarak doğrulanamadı. **Override eklenmedi; strict HOLD.**
+
+## PASTA TO GO AKARETLER ID 6566 HOLD
+Hentzer kaydı `Vişnezade, Şair Nedim Cd. No:47/B, 34353 Beşiktaş/İstanbul`; telefon alanı boş. Restoranim exact adresi doğruluyor ve açıkça `Telefon yok` gösteriyor; Yandex 47B konumunu destekliyor. Yemeksepeti’nde Pasta To Go fiyatları bulunsa da Hentzer kaydının phone parity’si sağlanamadığı için exact şube menüsü güvenle eşleştirilemedi. **Override eklenmedi; strict HOLD.**
