@@ -2428,3 +2428,6 @@ Hentzer kaydı `Acarlar, 9. Cd. A/1, 34800 Beykoz/İstanbul`, telefon `+90 216 4
 
 ## DAMAK TADI LOKANTASI BEŞİKTAŞ ID 6689 HOLD
 Hentzer kaydı `Sinanpaşa, Ihlamurdere Cd. No:19, 34353 Beşiktaş/İstanbul`, telefon alanı boş. Kaynaklar çelişkili: Instagram içeriği No:24 ve başka içerik No:19 gösteriyor; Facebook No:19 için `+90 544 939 21 85`, Yandex ve yerel kayıt ise `+90 212 236 53 34` veriyor. 2026 tarihli sosyal paylaşımda 300 TL günlük menü kampanyası bulunsa da adres/telefon exact parity sağlanamadığından **override eklenmedi; strict HOLD**.
+
+## PANAMA COFFEE BEYLİKDÜZÜ ID 6688 HOLD
+Hentzer kaydı `Cumhuriyet, Onur Sk. F Blok No:1 D, 34045 Beylikdüzü/İstanbul`, telefon alanı boş. Resmi sosyal açılış paylaşımı adresi `Onur Sk. No:1C–1D (F3–F4)` olarak verirken Yandex No:1C gösteriyor; bu nedenle Hentzer’in D birimiyle exact adres birimi parity’si net değil. 26.05.2026 tarihli 100 TL açılış içecek kampanyası bulunsa da exact telefon doğrulanamadı. **Override eklenmedi; strict HOLD**.
