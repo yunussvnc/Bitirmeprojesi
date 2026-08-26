@@ -2178,3 +2178,6 @@ Hentzer kaydı yalnızca `Cumhuriyet, 34528 Beylikdüzü/İstanbul`, telefon `+9
 
 ## BY FRATELLO TAGLIATELLE BEYLİKDÜZÜ ID 6771 ACCEPTED
 Hentzer kaydı `Adnan Kahveci, Paşazade Cd. No:16, 34528 Beylikdüzü/İstanbul`, telefon `+90 212 843 80 49`. İşletmenin resmi Instagram paylaşımları 2025-12-30, 2026-02-05 ve 2026-02-14 tarihlerinde Beylikdüzü Paşazade Cd. No:16/1 adresini ve aynı telefonu yayınlıyor; Yandex de Paşazade Cad. 16 ve aynı telefonu destekliyor. Canlı Yemeksepeti menüsünde 26.08.2026 tarihinde makarna, orta/büyük pizza ve içecek fiyatları erişilebildi. Poşet ve Popular carousel tekrarları eklenmedi. **20 ürün override edildi.**
+
+## ESPRESSOLAB BEYLİKDÜZÜ MAKYOL ID 6770 HOLD
+Hentzer kaydı `Barış, Samsun Cd. No:14/2, 34520 Beylikdüzü/İstanbul`, telefon `+90 444 84 64`. Espressolab resmi mağaza sayfası aynı şubeyi `Barış Mah. Samsun Cad. No:14/2 B Blok` ve 444 8 464 ile doğruluyor; adres/telefon parity sağlandı. Ancak resmi şube sayfası fiyatlı tüketici menüsü sunmuyor; Pardon web menüsü yalnız kategori adlarını veriyor, fiyat yok. Arama sonuçlarındaki Yemeksepeti kaydı farklı/şehir belirsiz vendor olduğundan branch-specific olduğu kanıtlanmadan kullanılmadı. Son bir yıl fiyat doğrulanamadığı için **override eklenmedi; strict HOLD**.
