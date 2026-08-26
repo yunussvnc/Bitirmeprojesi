@@ -4,6 +4,17 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6741": {
+    "name": "CRUNCH BITE WAFFLE & KRUVASAN",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/e59k/crunch-bite-waffle",
+    "sourceName": "Canlı Yemeksepeti menüsü; Yandex exact adres/telefon ve işletmenin sosyal profiliyle doğrulandı",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Classic Waffle (Large)", "price": "469.41 TL", "category": "Waffle" },
+      { "name": "Sütlü Çikolatalı Waffle (Large)", "price": "464.70 TL", "category": "Waffle" },
+      { "name": "Special Waffle (L)", "price": "517.65 TL", "category": "Waffle" }
+    ]
+  },
   "6743": {
     "name": "VEGAN MASA (BEŞİKTAŞ)",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/s48d/vegan-masa-s48d",

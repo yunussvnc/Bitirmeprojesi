@@ -2265,3 +2265,6 @@ Hentzer kaydı `Türkali, Mısırlıbahçe Sok. No:8/A, 34357 Beşiktaş/İstanb
 
 ## KUŞAK KEBAP BEYKOZ ID 6742 HOLD
 Hentzer kaydı `Çubuklu, Şehit Ersin Güner Cad. No:2, 34805 Beykoz/İstanbul`, telefon `+90 216 537 05 09`. Resmi Instagram hesabı aynı adres/telefonu ve Getir/Yemeksepeti/Trendyol teslimatını doğruluyor; güncel sosyal içerikler 2025-2026 döneminde faaliyeti destekliyor. Ancak erişilebilir kaynaklarda ürün adıyla birlikte doğrulanabilir güncel fiyat listesi bulunamadı; yalnızca genel fiyat aralığı verildi. **Override eklenmedi; strict HOLD**.
+
+## CRUNCH BITE WAFFLE & KRUVASAN BEYKOZ ID 6741 ACCEPTED
+Hentzer kaydı `İncirköy, Tuğla Fbr. Sk. No:5/A, 34800 Beykoz/İstanbul`, telefon `+90 551 512 64 61`. Yandex ve işletmenin sosyal profili aynı adres/telefonu doğruluyor. 26.08.2026 tarihinde erişilen güncel Yemeksepeti menüsünde `Classic Waffle (Large) — 469,41 TL`, `Sütlü Çikolatalı Waffle (Large) — 464,70 TL` ve `Special Waffle (L) — 517,65 TL` görüldü. **3 gıda ürünü override edildi.**
