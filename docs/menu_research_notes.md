@@ -2422,3 +2422,6 @@ Hentzer kaydı `Sinanpaşa, Ortabahçe Cd. No:3, 34353 Beşiktaş/İstanbul`, te
 
 ## NOSOTROS COFFEE & BAKERY BEŞİKTAŞ ID 6691 HOLD
 Hentzer kaydı `Türkali, Ihlamurdere Cd. No:34, 34357 Beşiktaş/İstanbul`, telefon `+90 542 319 67 52`. Resmi Instagram aynı Ihlamurdere No:34 adresini doğruluyor ve 2026 tarihli içeriklerde 350 TL tatlı+k kahve kampanyası görülüyor; ancak güncel paylaşımlardaki iletişim numarası `0216 339 40 11` olarak geçiyor, Hentzer telefonu exact doğrulanamıyor. Bu nedenle güncel fiyat bulunmasına rağmen **override eklenmedi; strict HOLD**.
+
+## MINT SUSHI ACARLAR ID 6690 HOLD
+Hentzer kaydı `Acarlar, 9. Cd. A/1, 34800 Beykoz/İstanbul`, telefon `+90 216 485 30 30`. Mint Sushi’nin resmi/sosyal kayıtları, Yandex ve restoran bilgi kaydı telefonla eşleşiyor; bazı harita kayıtlarında adres No:5 olarak çelişiyor. Nefis Menü’de fiyatlı sushi ürünleri bulunuyor ancak güncelleme tarihi yok; ayrıca başka canlı görünen katalogda aynı ürünlerde önemli fiyat farkları mevcut. Son bir yıl güncelliği ve tekil güvenilir fiyat seti kesin doğrulanamadığından **override eklenmedi; strict HOLD**.
