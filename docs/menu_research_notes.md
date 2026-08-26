@@ -2584,3 +2584,6 @@ Hentzer kaydı `Yıldırım, Şht. Kamil Balkan Cd. No:51/B, 34045 Bayrampaşa/�
 
 ## BARNATHAN İSTANBUL ROOF ID 6637 ACCEPTED
 Hentzer kaydı `Şahkulu, Tımarcı Sk. No:1, 34421 Beyoğlu/İstanbul`, telefon `+90 850 360 06 27`. Meroddi’nin resmi Barnathan sayfası aynı No:1 Galata/Beyoğlu adresini ve telefonu doğruluyor; resmi Roof dijital menüsünde 20 güncel fiyatlı gıda ürünü canlı olarak gösteriliyor. Ürünler gündüz menüsündeki ana yemek, burger ve başlangıç kategorilerinden alındı.
+
+## GAZİANTEPLİ KEBAPÇI DAYININ YERİ ID 6636 ACCEPTED
+Hentzer kaydı `Paşabahçe, Barbaros Cd. 12/1, 34000 Beykoz/İstanbul`, telefon `+90 216 425 28 82`. Yandex aynı adres ve telefonu doğruluyor; Yemeksepeti exact vendor sayfası adres ve onaylanmış telefon bulunduğunu belirtiyor ve 2026 tarihli aktif sipariş/yorum akışı mevcut. Arama dizininde exact vendor için doğrulanabilen beş güncel ürün-fiyat çifti eklendi: Adana Dürüm 320 TL, Tavuk Şiş 420 TL, 5'li Lahmacun Menü 850 TL, Tek Kişilik Lahmacun Menü 550 TL, Özel Antep Lahmacun 180 TL.

@@ -90872,5 +90872,18 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Şefin Seçimi - Dana Şaşlık Chimichurri", "price": "1750 TL", "category": "Ana Yemekler" },
       { "name": "Gurme Peynir Tabağı", "price": "1950 TL", "category": "Başlangıçlar" }
     ]
+  },
+  "6636": {
+    "name": "GAZİANTEPLİ KEBAPÇI DAYININ YERİ",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/x8bz/gaziantepli-kebapci-dayinin-yeri",
+    "sourceName": "Yemeksepeti canlı exact vendor menüsü; Yandex aynı adres ve telefonu doğruluyor",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Adana Dürüm", "price": "320 TL", "category": "Dürümler" },
+      { "name": "Tavuk Şiş", "price": "420 TL", "category": "Kebaplar" },
+      { "name": "5'li Lahmacun Menü", "price": "850 TL", "category": "Lahmacun Menüleri" },
+      { "name": "Tek Kişilik Lahmacun Menü", "price": "550 TL", "category": "Lahmacun Menüleri" },
+      { "name": "Özel Antep Lahmacun", "price": "180 TL", "category": "Lahmacunlar" }
+    ]
   }
 };
