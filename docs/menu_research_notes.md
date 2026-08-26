@@ -2395,3 +2395,6 @@ Hentzer kaydı `Yıldız, Çırağan Cd. No:28, 34349 Beşiktaş/İstanbul`, tel
 
 ## COFFEE TALKS BEŞİKTAŞ ID 6700 ACCEPTED
 Hentzer kaydı `Türkali, Ihlamurdere Cd. No:80, 34357 Beşiktaş/İstanbul`, telefon `+90 212 327 95 96`. Yemeksepeti exact restoran sayfası Ihlamurdere Caddesi No:80 adresini ve onaylı telefon bilgisini gösteriyor; Yandex ve resmi Instagram da aynı adres/telefonu doğruluyor. 26.08.2026 tarihinde canlı Yemeksepeti menüsünden sandviç, tatlı ve sıcak kahve kategorilerinden 20 benzersiz ürün-fiyat çifti alındı. **20 gıda/içecek ürünü override edildi.**
+
+## THREE B BURGER & MORE KAVACIK ID 6699 HOLD
+Hentzer kaydı `Kavacık, Gülşen Sok. No:3A, 34810 Beykoz/İstanbul`, telefon `+90 534 666 98 84`. Yandex aktif restoran kaydı aynı No:3A adresini doğruluyor ancak telefon numarası belirtilmiyor; Facebook kaydı aynı adres için `+90 533 375 79 20` farklı telefon yayınlıyor. Yemeksepeti exact isimli menüde güncel fiyatlı burger ürünleri bulunmasına rağmen Hentzer telefonu exact doğrulanamadığı için **override eklenmedi; strict HOLD**.
