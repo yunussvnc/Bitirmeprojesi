@@ -2323,3 +2323,6 @@ Hentzer kaydı `Anadolu Kavağı, Yalı Çk. 5A, 34825 Beykoz/İstanbul`, telefo
 
 ## BAHÇE BÜFE BEYLİKDÜZÜ ID 6724 ACCEPTED
 Hentzer kaydı `Büyükşehir, Beylikdüzü Cd. 5/2 No:113, 34520 Beylikdüzü/İstanbul`, telefon `+90 212 560 11 00`. Bahçe Büfe resmi şubeler sayfası aynı Brand İstanbul Park No:5/2N ve telefonu veriyor; sosyal ve Yemeksepeti kaynakları da Beylikdüzü şubesini aynı telefonla destekliyor. 26.08.2026 tarihinde şubeye bağlı canlı Migros Yemek menüsünden Popüler carousel tekrarları ve içecekler dışarıda bırakılarak 20 benzersiz tost/sıcak sandviç ürün-fiyat çifti alındı. **20 gıda ürünü override edildi.**
+
+## GALATA KEBAP HOUSE BEYOĞLU ID 6723 HOLD
+Hentzer kaydı `Bereketzade, Camekan Sk. No:10/B, 34421 Beyoğlu/İstanbul`, telefon `+90 541 129 40 34`. Yandex aynı telefonu ancak Bereketzade Camii Sokak No:7 adresini veriyor; Tripadvisor No:10/A gösteriyor. Adres kapı numarası exact eşleşmediği için bulunan fiyatlı içerikler kullanılamadı; güncel exact branch menü doğrulanamadı. **Override eklenmedi; strict HOLD**.
