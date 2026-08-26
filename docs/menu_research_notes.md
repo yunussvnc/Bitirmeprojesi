@@ -2602,3 +2602,6 @@ Hentzer kaydı `Kavacık, Otağtepe Cd. No:19, 34810 Beykoz/İstanbul`, telefon 
 
 ## KONYALI FERDİ USTA ORTAKÖY ID 6631 ACCEPTED
 Hentzer kaydı `Mecidiye, Muallim Naci Cd. No:25/A, 34347 Beşiktaş/İstanbul`, telefon `+90 212 227 00 10`. İşletmenin resmi iletişim sayfası aynı adres ve telefonu doğruluyor. Resmi menü sitesi ve canlı Yemeksepeti exact vendoru güncel fiyatlı menü sunuyor; 20 çorba, Konya fırın kebabı, pide ve menü ürünü eklendi. Popüler carousel tekrarı ve gıda dışı ürün eklenmedi.
+
+## HAPPY MOON'S CAFE BEŞİKTAŞ ID 6630 HOLD
+Hentzer kaydı `Vişnezade, Süleyman Seba Cd. No:8, 34335 Beşiktaş/İstanbul`, telefon `+90 552 542 40 11`. Happy Group resmi şube sayfası aynı No:8 adresi ve telefonu doğruluyor; Snapchat/Yandex de şubeyi destekliyor. Ancak bulunan 2026 fiyat listeleri zincir/genel menü veya farklı şubelere ait ve Beşiktaş Akaretler’e exact ürün-fiyat bağını kanıtlamıyor. **Override eklenmedi; strict HOLD.**
