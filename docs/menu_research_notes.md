@@ -3167,3 +3167,6 @@ Waze/Yelp/Bulurum ve resmi Instagram exact `Katip Mustafa Çelebi, Çukurlu Çe�
 ## HEY DÖNER BEŞİKTAŞ ID 6451 ACCEPTED
 Hentzer `Sinanpaşa, Şht. Asım Cd. No:2A, 34351 Beşiktaş/İstanbul`, telefon `+90 212 955 03 93`. Resmi Hey Döner şube sayfası exact adres/telefonu doğruluyor; Servis Listeleri aynı bilgiyi destekliyor. Yemeksepeti ekvb canlı menüsünden 20 benzersiz burrito, tavuk döner ve taco ürünü eklendi; içecekler ve popüler tekrarlar dışlandı. **Override kabul edildi.**
 Kaynaklar: https://heydoner.com/sube/istanbul-besiktas/ ; https://www.yemeksepeti.com/restaurant/ekvb/hey-doner-ekvb ; https://servislisteleri.com/istanbul/besiktas/restoran/hey-doner-besiktas-wrncxM.html ; https://yandex.com.tr/maps/org/hey_doner_besiktas/165919676678/
+
+## BM BODRUM MEYHANESİ MARİNA ID 6450 HOLD
+Buraya Gidelim/Cybo/Instagram exact `Marmara, Ulusum Cd. C Blok No:34/3A, 34524 Beylikdüzü/İstanbul` bilgisini destekliyor; ancak telefon kaynaklarda `+90 542 193 34 34` ve `+90 542 119 34 61` olarak çelişiyor. Son bir yıl exact şubeye ait 20 bireysel TL fiyatlı ürün menüsü de doğrulanamadı; yalnızca fix menü paylaşımları var. **Override eklenmedi; strict HOLD.**
