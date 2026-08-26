@@ -2332,3 +2332,6 @@ Hentzer kaydı `Anadolu Hisarı, Körfez Cd. No: 4/A, 34810 Beykoz/İstanbul`, t
 
 ## TİTANİC PETSHOP BAYRAMPAŞA ID 6721 HOLD
 Hentzer kaydı `Kartaltepe, Cicoz Yolu Cd. no:156, 34050 Bayrampaşa/İstanbul`, telefon `+90 530 011 01 79`. Instagram resmi işletme hesabı aynı Kartaltepe/Cicoz Yolu No:156 bilgisini; Yandex aynı telefonu ve 156A adresini doğruluyor. İşletme petshop olup gıda restoranı menüsü değildir; hayvan ürünleri fiyatları menü override kapsamına alınamaz. **Override eklenmedi; strict HOLD**.
+
+## ASMİN CAFE 2 BEYOĞLU ID 6720 HOLD
+Hentzer kaydı `Hüseyinağa, Atıf Yılmaz Cd. 21A, 34435 Beyoğlu/İstanbul`, telefon `+90 212 243 48 21`. SmartBeyoğlu adresi No:21/A ile eşleşiyor; Yandex aynı telefonla Toprak Lüle Sok. No:2 kaydını gösteriyor ve işletmenin **artık faal olmadığını** belirtiyor. Faal olmayan işletmeye güncel fiyatlı menü override’ı eklenemez. **Override eklenmedi; strict HOLD**.
