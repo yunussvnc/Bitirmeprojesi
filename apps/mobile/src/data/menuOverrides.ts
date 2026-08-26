@@ -91007,6 +91007,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "5 Çeşit Meze Menü", "price": "1500 TL", "category": "Özel Menü" }
     ]
   },
+  "6570": {
+    "name": "SUSHI&SPICE AKARETLER",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/iokb/sushi-and-spice",
+    "sourceName": "Resmi Sushi&Spice Akaretler şube sayfası ve canlı Yemeksepeti exact vendor menüsü",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Acılı Ekşili Çorba", "price": "320 TL", "category": "Başlangıçlar" },
+      { "name": "Acılı Edamame", "price": "280 TL", "category": "Başlangıçlar" },
+      { "name": "Miso Çorba", "price": "304 TL", "category": "Başlangıçlar" },
+      { "name": "Buharda Çin Mantısı", "price": "408 TL", "category": "Başlangıçlar" },
+      { "name": "Çıtır Tavuk & Sweet Chili Sos", "price": "360 TL", "category": "Başlangıçlar" },
+      { "name": "5 Baharatlı Çıtır Kalamar", "price": "688 TL", "category": "Başlangıçlar" },
+      { "name": "Dinamit Karides", "price": "588 TL", "category": "Başlangıçlar" },
+      { "name": "Tavuklu Mısır Çorbası", "price": "280 TL", "category": "Başlangıçlar" },
+      { "name": "Mançuryan Tavuk & Noodle", "price": "660 TL", "category": "Tavuklu Yemekler" },
+      { "name": "Zencefilli Tavuk & Noodle", "price": "660 TL", "category": "Tavuklu Yemekler" },
+      { "name": "Teriyaki Tavuk & Pilav", "price": "600 TL", "category": "Tavuklu Yemekler" },
+      { "name": "Karabiber Soslu Tavuk & Noodle", "price": "660 TL", "category": "Tavuklu Yemekler" },
+      { "name": "Yeşil Köri Thai Tavuk & Pilav", "price": "680 TL", "category": "Tavuklu Yemekler" },
+      { "name": "Mantarlı Fıstıklı Dana Eti & Noodle", "price": "796 TL", "category": "Etli Yemekler" },
+      { "name": "Acılı Dana Eti & Noodle", "price": "796 TL", "category": "Etli Yemekler" },
+      { "name": "Zencefilli Dana Eti & Noodle", "price": "840 TL", "category": "Etli Yemekler" },
+      { "name": "Yeşil Biberli Dana Eti & Noodle", "price": "796 TL", "category": "Etli Yemekler" },
+      { "name": "Tatlı Ekşi Karides & Noodle", "price": "1060 TL", "category": "Deniz Ürünleri" },
+      { "name": "Acılı Kalamar & Pilav", "price": "880 TL", "category": "Deniz Ürünleri" },
+      { "name": "Tavuklu Udon", "price": "620 TL", "category": "Ramenler & Udonlar" }
+    ]
+  },
   "6572": {
     "name": "YÖREM CAĞ KEBAP KAVACIK",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/gmug/yorem-cag-kebap-gmug",

@@ -2783,3 +2783,6 @@ Hentzer kaydı `Kavacık, Cumhuriyet Cd. No:91, 34805 Beykoz/İstanbul`, telefon
 
 ## BWIN BUBBLE WAFFLE BAYRAMPAŞA ID 6571 HOLD
 Hentzer kaydı `Yıldırım, Şht. Kamil Balkan Cd. No:7, 34170 Bayrampaşa/İstanbul`, telefon `+90 212 545 36 39`. Yandex ve Facebook aynı işletme/telefonu destekliyor ancak birim adresini `No:7/B` olarak veriyor; zorunlu exact adres parity’si sağlanamadı. Arama sonuçlarında exact Bayrampaşa şubesine ait son bir yıl ürün bazlı fiyatlı menü de bulunamadı; diğer Bubble Waffle sonuçları farklı işletmelere ait. **Override eklenmedi; strict HOLD.**
+
+## SUSHI&SPICE AKARETLER ID 6570
+Hentzer kaydı `Sinanpaşa, Şair Nedim Cd. No:10, 34353 Beşiktaş/İstanbul`, telefon `+90 534 608 33 83`. Resmi Akaretler şube sayfası aynı adres ve telefonu yayımlıyor. Canlı Yemeksepeti exact Sushi & Spice vendor menüsünden 20 benzersiz gıda ürünü seçildi; içecek, poşet ve Popüler carousel tekrarları hariç tutuldu. **Override kabul edildi; 20 ürün.** Kaynaklar: https://www.sushiandspice.com/akaretler/ ; https://www.yemeksepeti.com/restaurant/iokb/sushi-and-spice
