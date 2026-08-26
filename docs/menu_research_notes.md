@@ -3125,3 +3125,6 @@ Resmi Facebook/Linktree, Yandex ve TikTok Hentzer ile exact `Sinanpaşa, Şair L
 
 ## BY LOUNGE BEŞİKTAŞ ID 6464 HOLD
 Resmi Instagram/Yandex/Corner/İstanbul Servis Listesi Hentzer ile exact `Türkali, Ihlamurdere Cd. Zafer Ap No:110 A, 34357 Beşiktaş/İstanbul` ve `+90 531 882 35 25` parity’sini doğruluyor. Ancak 20 benzersiz güncel fiyatlı ürün menüsü bulunamadı. **Override eklenmedi; strict HOLD.**
+
+## BEYKOZ BALIK EKMEK ID 6463 HOLD
+Nelerimeshur/Mindtrip/Corner ve 2026 Facebook paylaşımı Hentzer ile exact `Gümüşsuyu, Kelle İbrahim Cd., 34820 Beykoz/İstanbul` ve `+90 537 244 57 53` parity’sini doğruluyor. Ancak güncel kaynaklarda yalnızca sınırlı birkaç ürün fiyatı bulunuyor; 20 benzersiz fiyatlı gıda ürünü doğrulanamadı. **Override eklenmedi; strict HOLD.**
