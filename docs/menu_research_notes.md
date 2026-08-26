@@ -3116,3 +3116,6 @@ Exact adres bağımsız kaynaklarla doğrulandı; ancak Hentzer telefon alanı b
 
 ## PERA ANTAKYA ID 6467 HOLD
 Wheree/Yelp/Bulurum/Nasilbiryer Hentzer ile exact `Asmalı Mescit, Balyoz Sok. No:14, 34437 Beyoğlu/İstanbul` ve `+90 533 434 18 86` parity’sini doğruluyor. Ancak Wheree menüsü fiyatların değişebileceği uyarısıyla fotoğraf/kamu kaynaklarına dayanıyor ve bireysel güncel TL fiyatları yayımlamıyor; 20 ürün doğrulanamadı. **Override eklenmedi; strict HOLD.**
+
+## HEVSEL KEBAP LAHMACUN ID 6466 HOLD
+Resmi Instagram/TikTok ve yerel kaynaklar Hentzer ile exact `Kuloğlu, Turnacıbaşı Cd. 3/A, 34421 Beyoğlu/İstanbul` ve `+90 212 251 30 45` parity’sini doğruluyor. Ancak exact şubeye ait son bir yıl fiyatlı 20 ürün menüsü bulunamadı; farklı işletmelere ait Yemeksepeti sonuçları kullanılmadı. **Override eklenmedi; strict HOLD.**
