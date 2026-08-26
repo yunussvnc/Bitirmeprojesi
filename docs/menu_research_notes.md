@@ -2274,3 +2274,10 @@ Hentzer kaydı `Cumhuriyet, Ege Sokak, F Blok No:1/1K, 34975 Beylikdüzü/İstan
 
 ## SEFARAD MEYHANE BEŞİKTAŞ ID 6739 HOLD
 Hentzer kaydı `Mecidiye, Muvakkit Sk. No:33, 34347 Beşiktaş/İstanbul`, telefon `+90 212 261 29 83`. Meyhankoli aynı No:33 ve telefonu destekliyor; ancak Mekanlar/Bulurum kaynakları aynı işletmeyi Muvakkit Sok. No:21 veya 21/B olarak veriyor. Resmi sosyal hesapta ürün isimleri görülse de son bir yıl içinde rakamsal fiyatlı menü bulunamadı. Adres parity %100 sağlanamadığı için **override eklenmedi; strict HOLD**.
+
+
+## BONAMADE BAKERY & EATERY BEYKOZ ID 6738 RESEARCH START
+Hentzer API kaydı: `Bonamade Bakery & Eatery`; adres `Acarlar, 34800 Beykoz/İstanbul, Türkiye`; telefon `+90 216 485 61 97`; kategori `Restoran`; `is_open: true`; `menu_items: []`; API URL: `https://api.asemos.tr/api/v1/places/6738`. Araştırma devam ediyor.
+
+## BONAMADE BAKERY & EATERY BEYKOZ ID 6738 HOLD
+Hentzer kaydı `Acarlar, 34800 Beykoz/İstanbul`, telefon `+90 216 485 61 97`. Yandex aynı telefonla `Acarlar Mah., 9. Cad. No:3C` adresini gösteriyor; işletme sosyal hesabı telefon ve Acarlar bölgesini destekliyor, ancak Hentzer adresinde exact kapı numarası yok. Son bir yıl içinde exact şubeye ait ürün-fiyat listesi bulunamadı; yalnızca genel fiyat aralığı mevcut. Exact branch/address parity ve güncel fiyat şartları tam sağlanamadığından **override eklenmedi; strict HOLD**.
