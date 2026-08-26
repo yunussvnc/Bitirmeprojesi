@@ -2557,3 +2557,6 @@ Hentzer kaydı `Kartaltepe, Ordu Cd. No:165, 34040 Bayrampaşa/İstanbul`, telef
 
 ## 6OZ COFFEE & CAKE HOUSE BEYLİKDÜZÜ ID 6645 ACCEPTED
 Hentzer kaydı `Adnan Kahveci, Çalışlar Cd. No:10/9, 34528 Beylikdüzü/İstanbul`, telefon `+90 532 336 42 63`. Resmi 6oz Coffee Instagram hesabı telefon ve şubeyi destekliyor; Pardon sayfası Beylikdüzü 6oz Coffee exact menüsünü sunuyor, Yandex de aynı işletmeyi ve telefonu destekliyor. Pardon menüsündeki Hot Coffees ve Special Hot Coffees kategorilerinden 20 güncel fiyatlı ürün eklendi.
+
+## MARLEN BAR BEYOĞLU ID 6644 HOLD
+Hentzer kaydı `Şehit Muhtar Mahallesi, Süslü Saksı Sk. No:14, 34420 Beyoğlu/İstanbul`, telefon `+90 541 443 42 64`. Resmi Marlen sosyal hesabı aynı adresi doğruluyor; Restoranim de aynı şube için menü kategorilerini gösteriyor. Menum.co fiyatlı menü sonucu verdi ancak sayfa erişimde 502 döndü ve menünün güncellik tarihi doğrulanamadı; son bir yıl içinde güvenilir şekilde doğrulanabilir ürün-fiyat çifti elde edilemedi. **Override eklenmedi; strict HOLD**.
