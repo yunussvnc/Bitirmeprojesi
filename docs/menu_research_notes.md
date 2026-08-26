@@ -2750,3 +2750,6 @@ Hentzer kaydı `Cevatpaşa, Eski Edirne Asf. No:270 D:A, 34045 Bayrampaşa/İsta
 
 ## DALYAN BALIK IZGARA ORTAKÖY ID 6582 HOLD
 Hentzer kaydı `Ortaköy, Tabağın Bahçesi Sk. 1A, 34672 Beşiktaş/Üsküdar/İstanbul`, telefon `+90 212 327 12 18`. Instagram/Facebook ve Bulurum aynı telefonu ve Eski Bahçe/Ortaköy 1A-1D çevresini doğruluyor; ancak Yandex kaydı işletmenin artık faal olmadığını bildiriyor ve adres kaynaklarında Tabağın Bahçesi, Eski Bahçe, Aktar Sok. olarak farklı adlandırmalar var. Son bir yıl içinde doğrulanabilir ürün bazlı fiyatlı menü bulunamadı. **Override eklenmedi; strict HOLD.**
+
+## KARAKULAK RESTORAN BEYKOZ ID 6581 HOLD
+Hentzer kaydı yalnızca `Dereseki, 34825 Beykoz/İstanbul` adresini veriyor; telefon alanı boş. Bulunan muhtemel Karakulak Dağ Restaurant kaynakları `Dereseki Mah. Sugözü Çıkmazı Sok. 6/A` veya `Karakulak Çıkmazı No:6` adreslerini ve `0536 924 38 48` / `0532 254 86 16` telefonlarını yayımlıyor. Hentzer kaydında telefon bulunmadığı ve exact işletme/şube parity’si kesinleşmediği için, ayrıca son bir yıl fiyatlı menü doğrulanamadığından **override eklenmedi; strict HOLD**.
