@@ -2671,3 +2671,6 @@ Hentzer kaydı `Rumeli Hisarı, Yahya Kemal Cd. No:22, 34470 Sarıyer/İstanbul`
 
 ## BEREKET EKMEK FIRINI BAYRAMPAŞA ID 6608
 Hentzer kaydı `Muratpaşa Mahallesi, Cicoz Yolu Caddesi No:187, 34040 Bayrampaşa/İstanbul`, telefon `+90 212 497 19 93`. Restoranim.net aynı adres ve telefonu yayımlıyor; resmi Instagram profil arama sonucu `Cicozyolu Cad. No:187` bilgisini veriyor. Canlı Yemeksepeti vendor `Bereket Unlu Mamulleri (gy34)` güncel ürün/fiyat listesini yayımlıyor: 20 gıda ürünü seçildi; Popüler carousel tekrarları, içecekler, paketli ürünler ve poşet hariç tutuldu. **Override kabul edildi; 20 ürün.** Kaynak: https://www.yemeksepeti.com/restaurant/gy34/bereket-unlu-mamulleri-gy34 ; exact işletme doğrulaması: https://www.restoranim.net/istanbul/bayrampasa/firin/bereket-ekmek-firini-bayrampasa
+
+## YOUPLACE BEŞİKTAŞ ID 6607 HOLD
+Hentzer kaydı `Vişnezade, Çatlak Çeşme Sk. No:4/C, 34357 Beşiktaş/İstanbul`, telefon `+90 506 365 14 22`. Restoranim.net aynı adres ve telefonu doğruluyor; Facebook/Instagram lokasyon sonuçları da No:4C ve aynı telefonu destekliyor. Ancak exact şubeye ait son bir yıl içinde yayımlanmış ürün bazlı fiyatlı menü bulunamadı; kaynaklar yalnızca genel fiyat aralığı/yorum veriyor. Bu nedenle **override eklenmedi; strict HOLD**.
