@@ -3045,3 +3045,7 @@ Hentzer `Anadolu Hisarı, Göksu, Baruthane Cd. No:2/A, 34600 Beykoz/İstanbul`,
 
 ## SİYEZ EVİ BEYLİKDÜZÜ ID 6489 HOLD
 Hentzer `Adnan Kahveci Mahallesi Kalkan Caddesi, A1 Blok No:3/1 Kapı No:9, 34528 Beylikdüzü/İstanbul`, telefon `+90 538 975 92 82`. Restoranim/Yandex ve 2026 tarihli resmi Instagram paylaşımları exact parity’yi destekliyor; ancak resmi e-ticaret sitesi fiyatları metin olarak vermiyor ve Yemeksepeti exact Beylikdüzü vendorunda 20 ürün doğrulanamadı. **Override eklenmedi; strict HOLD.**
+
+## INARI PIKU ETİLER ID 6488 ACCEPTED
+Hentzer `Etiler, Nisbetiye Cd No:89, 34337 Beşiktaş/İstanbul`, telefon `+90 212 216 35 35`. Inari Omakase resmi menü sayfası exact Etiler Piku adres/telefonunu doğruluyor. Resmi yemek PDF’si menünün 03.02.2026’da güncellendiğini ve PDF metadata’sının 24.08.2026 olduğunu gösteriyor. 20 benzersiz fiyatlı gıda ürünü eklendi; içecek/şarap ve fiyatı olmayan kalemler dışlandı. **Override kabul edildi.**
+Kaynaklar: https://www.inariomakase.com/menu ; https://www.inariomakase.com/media/boun40xo/inari-etiler-yemek_2408.pdf ; https://restoranim.net/istanbul/besiktas/restoran/inari-piku-etiler

@@ -91652,6 +91652,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Çilekli Frappe", "price": "144 TL", "category": "Soğuk İçecekler" }
     ]
   },
+  "6488": {
+    "name": "inari Piku Etiler",
+    "sourceUrl": "https://www.inariomakase.com/media/boun40xo/inari-etiler-yemek_2408.pdf",
+    "sourceName": "Inari Omakase resmi Etiler Piku yemek menüsü; 03.02.2026 revizyon tarihi, 24.08.2026 PDF metadata ve resmi menü sayfası ile Nispetiye Cd. No:89 ve +90 212 216 35 35 exact parity doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Miso Soup", "price": "420 TL", "category": "Çorbalar" },
+      { "name": "Corn Soup", "price": "620 TL", "category": "Çorbalar" },
+      { "name": "Tomyum Soup", "price": "630 TL", "category": "Çorbalar" },
+      { "name": "Steamed Edamame", "price": "500 TL", "category": "Atıştırmalıklar" },
+      { "name": "Grilled Truffle Edamame", "price": "720 TL", "category": "Atıştırmalıklar" },
+      { "name": "Beef Taco", "price": "1150 TL", "category": "Atıştırmalıklar" },
+      { "name": "Black Tiger Tempura", "price": "1100 TL", "category": "Atıştırmalıklar" },
+      { "name": "Fish & Chips", "price": "1050 TL", "category": "Atıştırmalıklar" },
+      { "name": "Corn Tempura", "price": "880 TL", "category": "Atıştırmalıklar" },
+      { "name": "Fried Squid", "price": "1400 TL", "category": "Atıştırmalıklar" },
+      { "name": "Shrimp Truffle Bao Burger", "price": "650 TL", "category": "Atıştırmalıklar" },
+      { "name": "King Crab & Avocado Tostada", "price": "1950 TL", "category": "Atıştırmalıklar" },
+      { "name": "Avocado Asparagus Salad", "price": "1400 TL", "category": "Salatalar" },
+      { "name": "King Crab Salad", "price": "2200 TL", "category": "Salatalar" },
+      { "name": "Duck Salad", "price": "2350 TL", "category": "Salatalar" },
+      { "name": "Salmon Tuna Tartar", "price": "1100 TL", "category": "Soğuk Başlangıçlar" },
+      { "name": "Beef Tataki Truffle", "price": "1600 TL", "category": "Soğuk Başlangıçlar" },
+      { "name": "Sea Bass Passion Fruit Ceviche", "price": "1100 TL", "category": "Soğuk Başlangıçlar" },
+      { "name": "Tuna Tataki", "price": "1150 TL", "category": "Soğuk Başlangıçlar" },
+      { "name": "Yellowtail Ceviche", "price": "1050 TL", "category": "Soğuk Başlangıçlar" }
+    ]
+  },
   "6491": {
     "name": "Willion Pizza",
     "sourceUrl": "https://www.yemeksepeti.com/restaurant/u8lk/willion-pizza",
