@@ -2241,3 +2241,6 @@ Hentzer kaydı `Barış Mah. Enver Adakan Cad. Westside 1, Sitesi No:12, 34520 B
 
 ## LAHMACUN YE BEYKOZ ID 6750 HOLD
 Hentzer kaydı `İncirköy, Saip Molla Cd. 38A, 34800 Beykoz/İstanbul`, telefon `+90 553 266 33 66`. Yemeksepeti’nde güncel görünen fiyatlı lahmacun menüsü var; ancak Yandex ve Firma Fihristi aynı telefonla adresi Saip Molla Cad. `36C` olarak veriyor. Hentzer No:38A ile fiyatlı teslimat vendor’ının exact kapı numarası kesinleştirilemediğinden %100 branch parity sağlanmadı. **Override eklenmedi; strict HOLD**.
+
+## ŞANLI KEBAP & LAHMACUN BEYOĞLU ID 6749 HOLD
+Hentzer kaydı `Firuzağa, Boğazkesen Cd. No:62, 34425 Beyoğlu/İstanbul`, telefon `+90 212 251 06 56`. Yandex ve Mindtrip aynı İstanbul adres/telefonu doğruluyor. Ancak fiyatlı `sanlikebap.com/menuler` kaynağı Nazilli/Aydın şubelerine ait; İstanbul şubesi için son bir yıl içinde doğrulanabilir ürün-fiyat listesi bulunamadı. Farklı şehir menüsü exact branch’e atanamayacağından **override eklenmedi; strict HOLD**.
