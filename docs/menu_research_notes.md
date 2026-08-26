@@ -2350,3 +2350,6 @@ Hentzer kaydı `Cihannüma, Akdoğan Sk. No:35/A, 34353 Beşiktaş/İstanbul`, t
 
 ## PERA İSTANBUL RESTAURANT BEYOĞLU ID 6715 HOLD
 Hentzer kaydı `Asmalı Mescit, Asmalı Mescit Cd. No:21, 34430 Beyoğlu/İstanbul`, telefon `+90 534 239 93 83`. Resmi Instagram ve Ocak 2026 tarihli paylaşım aynı adres ve telefonu doğruluyor; Tripadvisor da No:21 adresini destekliyor. Ancak bulunan fiyatlı Yemeksepeti sonucu `Pera Restaurant & Cafe` olarak farklı işletme, diğer Pera menüleri de farklı adres/telefonlardaki işletmelerdir. Exact branch’e ait son bir yıl fiyatlı menü doğrulanamadığı için **override eklenmedi; strict HOLD**.
+
+## FORDİETA & TARİHİ KAFKAS DONDURMA ID 6714 ACCEPTED
+Hentzer kaydı `Anadolu Kavağı, Yalı Çk. 2 C, 34825 Beykoz/İstanbul`, telefon `+90 532 282 36 09`. Tarihi Kafkas Dondurma resmi sitesi aynı adres ve telefonu veriyor; Yandex ve resmi sosyal hesaplar da aynı şubeyi doğruluyor. Resmi menü sayfasında dondurma çeşitleri listeleniyor. Haziran 2026 tarihli resmi sosyal paylaşımda dondurma topu **100 TL** olarak yayınlandığından, 26.08.2026 tarihinde resmi menüdeki ilk 20 benzersiz dondurma çeşidi bu güncel tek-top fiyatıyla eklendi. **20 gıda ürünü override edildi.**

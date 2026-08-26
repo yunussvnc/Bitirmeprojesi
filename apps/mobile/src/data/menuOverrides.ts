@@ -4,6 +4,34 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6714": {
+    "name": "FORDİETA & TARİHİ KAFKAS DONDURMA",
+    "sourceUrl": "https://www.tarihikafkasdondurma.com/menu/index.html",
+    "sourceName": "Tarihi Kafkas Dondurma resmi menüsü; resmi iletişim sayfası ve Haziran 2026 fiyat paylaşımı",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Kaymaklı Dondurma (1 Top)", "price": "100 TL", "category": "Dondurmalar" },
+      { "name": "Vanilyalı Dondurma (1 Top)", "price": "100 TL", "category": "Dondurmalar" },
+      { "name": "Parça Çikolatalı Dondurma (1 Top)", "price": "100 TL", "category": "Dondurmalar" },
+      { "name": "Cici Bebe Dondurma (1 Top)", "price": "100 TL", "category": "Dondurmalar" },
+      { "name": "Bal Badem Dondurma (1 Top)", "price": "100 TL", "category": "Dondurmalar" },
+      { "name": "Ceviz Dondurma (1 Top)", "price": "100 TL", "category": "Dondurmalar" },
+      { "name": "Kestane Dondurma (1 Top)", "price": "100 TL", "category": "Dondurmalar" },
+      { "name": "Fındık Dondurma (1 Top)", "price": "100 TL", "category": "Dondurmalar" },
+      { "name": "Krokan Dondurma (1 Top)", "price": "100 TL", "category": "Dondurmalar" },
+      { "name": "Hindistan Cevizi Dondurma (1 Top)", "price": "100 TL", "category": "Dondurmalar" },
+      { "name": "Damla Sakızı Dondurma (1 Top)", "price": "100 TL", "category": "Dondurmalar" },
+      { "name": "Tahin Dondurma (1 Top)", "price": "100 TL", "category": "Dondurmalar" },
+      { "name": "Hurma Dondurma (1 Top)", "price": "100 TL", "category": "Dondurmalar" },
+      { "name": "Çikolata Dondurma (1 Top)", "price": "100 TL", "category": "Dondurmalar" },
+      { "name": "Bitter Çikolata Dondurma (1 Top)", "price": "100 TL", "category": "Dondurmalar" },
+      { "name": "Acılı Bitter Çikolata Dondurma (1 Top)", "price": "100 TL", "category": "Dondurmalar" },
+      { "name": "Karamel Dondurma (1 Top)", "price": "100 TL", "category": "Dondurmalar" },
+      { "name": "Tuzlu Fıstık Karamel Dondurma (1 Top)", "price": "100 TL", "category": "Dondurmalar" },
+      { "name": "Snickers Dondurma (1 Top)", "price": "100 TL", "category": "Dondurmalar" },
+      { "name": "Nero Dondurma (1 Top)", "price": "100 TL", "category": "Dondurmalar" }
+    ]
+  },
   "6716": {
     "name": "JUST SUSHI BEŞİKTAŞ",
     "sourceUrl": "https://www.migros.com.tr/yemek/just-sushi-besiktas-cihannuma-mah-st-22294",
