@@ -91007,6 +91007,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "5 Çeşit Meze Menü", "price": "1500 TL", "category": "Özel Menü" }
     ]
   },
+  "6598": {
+    "name": "CADI'NIN EVİ BEYLİKDÜZÜ",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/bkdu/cadinin-evi-bkdu",
+    "sourceName": "Canlı Yemeksepeti Cadı'nın Evi Beylikdüzü menüsü; Restoranim exact adres-telefon ve resmi QR menüsüyle çapraz doğrulama",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Sade Kruvasan", "price": "304 TL", "category": "Kruvasanlar" },
+      { "name": "3 Peynirli Kruvasan", "price": "368 TL", "category": "Kruvasanlar" },
+      { "name": "Çikolatalı Kruvasan", "price": "380 TL", "category": "Kruvasanlar" },
+      { "name": "Orman Meyveli Kruvasan", "price": "408 TL", "category": "Kruvasanlar" },
+      { "name": "Cadı'nın Kruvasanı", "price": "408 TL", "category": "Kruvasanlar" },
+      { "name": "Mix&Magic (4-6 Kişilik)", "price": "1960 TL", "category": "Paylaşımlık Tatlılar" },
+      { "name": "Mix&Magic (2-3 Kişilik)", "price": "1240 TL", "category": "Paylaşımlık Tatlılar" },
+      { "name": "Picnic&Street", "price": "1440 TL", "category": "Paylaşımlık Tatlılar" },
+      { "name": "Memnune", "price": "424 TL", "category": "Tatlılar" },
+      { "name": "Mahbube", "price": "424 TL", "category": "Tatlılar" },
+      { "name": "Dildade", "price": "512 TL", "category": "Tatlılar" },
+      { "name": "Katre", "price": "396 TL", "category": "Tatlılar" },
+      { "name": "Badiye", "price": "396 TL", "category": "Tatlılar" },
+      { "name": "Afafet", "price": "396 TL", "category": "Tatlılar" },
+      { "name": "Meşhure", "price": "396 TL", "category": "Tatlılar" },
+      { "name": "Afife", "price": "424 TL", "category": "Tatlılar" },
+      { "name": "Berry Bliss", "price": "360 TL", "category": "Bowls" },
+      { "name": "Merry Bowl", "price": "360 TL", "category": "Bowls" },
+      { "name": "Tropicool Bowl", "price": "360 TL", "category": "Bowls" },
+      { "name": "Cadı'nın Waffle", "price": "500 TL", "category": "Waffle" }
+    ]
+  },
   "6599": {
     "name": "DOPAMİN DÖNER",
     "sourceUrl": "https://www.migros.com.tr/yemek/dopamin-doner-hatay-usulu-beylikduzu-buyuksehir-mah-st-1e938",
