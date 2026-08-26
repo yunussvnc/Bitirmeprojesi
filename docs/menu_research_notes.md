@@ -2680,3 +2680,6 @@ Hentzer kaydı `İsmet Paşa, İsmet Paşa Cd. 21/A, 34040 Bayrampaşa/İstanbul
 
 ## VOGS COFFEE BEYLİKDÜZÜ ID 6605 HOLD
 Hentzer kaydı `Adnan Kahveci, Konak Cd. No:21, 34528 Beylikdüzü/İstanbul`, telefon `+90 501 651 07 51`. Yandex exact işletme telefonla eşleşiyor ancak adresi `Konak Cad. 21/1` olarak veriyor; `21` ile `21/1` arasında zorunlu exact adres parity’si sağlanamadı. Arama sonuçlarında bulunan Vogs Coffee House sitesi ABD’deki farklı bir işletmeye ait; Beylikdüzü şubesi için son bir yıl içinde fiyatlı menü bulunamadı. **Override eklenmedi; strict HOLD.**
+
+## İBB GÜRPINAR SU ÜRÜNLERİ HALİ ID 6604 HOLD
+Hentzer kaydı `Dereağzı, Deniz Yolu Cad. Gürpınar Su Ürünleri Hal Kompleksi 28/1, 34130 Beylikdüzü/İstanbul`, telefon `+90 212 867 64 00`. İSYÖN resmi işletme sayfası aynı kurumu, `Deniz Yolu Cad. No:28` adresini ve telefonu doğruluyor; Yandex de aynı adres/telefonu listeliyor. Ancak bu kayıt restoran değil, kamuya ait su ürünleri hal/işletme tesisidir. Bulunan fiyatlar restoran menüsü değil, toptan/hal fiyat listesidir; son bir yıl içinde kullanıcıya sunulacak ürün bazlı restoran menüsü bulunamadı. **Override eklenmedi; strict HOLD.**
