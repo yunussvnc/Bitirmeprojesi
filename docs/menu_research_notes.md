@@ -1806,3 +1806,15 @@ Hentzer kaydı `Türkali, Şair Nedim Cd. No:66/A, 34357 Beşiktaş/İstanbul`, 
 
 ## KAVACIK GECE DÖNERCİSİ MAHİR USTA KUZU DÖNER ID 6897 kabulü
 Hentzer kaydı `Rüzgarlıbahçe, Ferit İnal Caddesi, Ahu Sk. No:2/A, 34810 Beykoz/İstanbul`, `+90 216 680 34 73`; resmi Instagram/Facebook içerikleri aynı şube ve telefonu doğruluyor. Yemeksepeti canlı vendor `Kavacık Gece Dönercisi Mahir Usta` olarak 26.08.2026 tarihinde açık/siparişe uygun, %15 indirimli ve güncel fiyatlı menü yayınlıyor. Popüler carousel ve poşet çıkarılarak 36 Et Dönerler + 1 Tatlı + 12 İçecek olmak üzere 49 benzersiz kalem aktarıldı. **Override kabul edildi.**
+
+## ANAGA FIRIN KAHVE & ŞARKÜTERİ ID 6896 HOLD
+Restaurant Guru ve resmi Instagram exact Osmanlı Cd. No:36 / `+90 530 418 53 58` bilgisini doğruluyor; Restaurant Guru kaydı bir ay önce güncellenmiş ve işletme açık. Ancak son bir yıl içinde ürün bazlı fiyatlı kamu menüsü bulunamadığı için **HOLD**, override eklenmedi.
+
+## 16 ROOF BAR & RESTAURANT ID 6895 HOLD
+Swissôtel resmi sayfası exact `Vişnezade, Acısu Sk. No:19` adresini, `+90 549 326 11 12` telefonunu ve FineDine QR menü bağlantısını doğruluyor. Ancak QR menüsü 26.08.2026 taramasında yalnızca yükleme animasyonunda kaldı; ürün/fiyat verisi görülemedi. Strict fiyat doğrulama şartı sağlanamadığı için **HOLD**, override eklenmedi.
+
+## ÖZ MARAŞ DONDURMA SALONU ID 6894 HOLD
+Restaurant Guru exact Otağtepe Cd. 9/B ve `+90 535 251 88 13` bilgisini doğruluyor; fakat fiyatlı menü yok. Cybo kaydı işletmeyi kalıcı kapalı gösteriyor, Yandex aynı telefon/adresle Dondurmacı Yaşar adıyla listeliyor. İşletme kimliği ve güncel fiyatlar belirsiz olduğu için **HOLD**, override eklenmedi.
+
+## BURGER YİYELİM BEYLİKDÜZÜ KAVAKLI ID 6893 kabulü
+Hentzer kaydı `Kavaklı, Oğuzhan Cd. No:23 F, 34520 Beylikdüzü/İstanbul`, `+90 535 260 45 26`; Migros Yemek canlı vendor `Burger Yiyelim, Beylikdüzü (Kavaklı Mah.)` ile eşleşiyor ve Kaçıyor kaydı adres/telefonu exact doğruluyor. 26.08.2026 tarihinde canlı Migros menüsünde güncel fiyatlar doğrulandı. Popüler carousel, soslar ve poşet hariç 120 benzersiz menü/yiyecek/içecek kalemi aktarıldı. **Override kabul edildi.**
