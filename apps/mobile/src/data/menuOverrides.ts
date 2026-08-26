@@ -4,6 +4,34 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6724": {
+    "name": "BAHÇE BÜFE BEYLİKDÜZÜ",
+    "sourceUrl": "https://www.migros.com.tr/yemek/bahce-bufe-beylikduzu-buyuksehir-mah-st-22070",
+    "sourceName": "Şubeye bağlı canlı Migros Yemek menüsü; resmi Bahçe Büfe şubeler sayfası ve sosyal hesaplarla exact adres/telefon doğrulandı",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Kaşarlı Tost", "price": "110 TL", "category": "Tostlar" },
+      { "name": "Üç Peynirli Tost", "price": "175 TL", "category": "Tostlar" },
+      { "name": "Kaşarlı Kepekli Tost", "price": "110 TL", "category": "Tostlar" },
+      { "name": "Beyaz Peynirli Tost", "price": "115 TL", "category": "Tostlar" },
+      { "name": "Beyaz Peynirli Kepekli Tost", "price": "115 TL", "category": "Tostlar" },
+      { "name": "Sucuklu Tost", "price": "170 TL", "category": "Tostlar" },
+      { "name": "Çift Kaşarlı Tost", "price": "140 TL", "category": "Tostlar" },
+      { "name": "Jambonlu Kaşarlı Tost", "price": "160 TL", "category": "Tostlar" },
+      { "name": "Sucuklu Kaşarlı Tost", "price": "170 TL", "category": "Tostlar" },
+      { "name": "Çift Kaşarlı Amerikanlı Tost", "price": "155 TL", "category": "Tostlar" },
+      { "name": "Karışık Tost", "price": "200 TL", "category": "Tostlar" },
+      { "name": "Çift Kaşarlı Karışık Tost", "price": "230 TL", "category": "Tostlar" },
+      { "name": "Kavurmalı Tost", "price": "200 TL", "category": "Tostlar" },
+      { "name": "Sade Dilli Tost", "price": "175 TL", "category": "Tostlar" },
+      { "name": "Dilli Kaşarlı Sandviç Tost", "price": "205 TL", "category": "Tostlar" },
+      { "name": "Dilli Kaşarlı Tost", "price": "230 TL", "category": "Tostlar" },
+      { "name": "Tost Ekmeğine Kavurmalı Kaşarlı Tost", "price": "265 TL", "category": "Tostlar" },
+      { "name": "Sosisli Sandviç (Sıcak)", "price": "140 TL", "category": "Sıcak Sandviçler" },
+      { "name": "Büyük Sosisli Sandviç (Sıcak)", "price": "230 TL", "category": "Sıcak Sandviçler" },
+      { "name": "Kavurmalı Kaşarlı Sandviç (Sıcak)", "price": "225 TL", "category": "Sıcak Sandviçler" }
+    ]
+  },
   "6732": {
     "name": "İSKELE CAFE BEYKOZ",
     "sourceUrl": "https://www.instagram.com/reel/Db0KPFlsI4s/",

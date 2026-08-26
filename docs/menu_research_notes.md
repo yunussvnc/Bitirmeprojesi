@@ -2320,3 +2320,6 @@ Hentzer kaydı `Yalıköy, Doğu Kapısı Cd. No:1, 34820 Beykoz/İstanbul`, tel
 
 ## KAVAK KÖY BALIKÇISI BEYKOZ ID 6725 HOLD
 Hentzer kaydı `Anadolu Kavağı, Yalı Çk. 5A, 34825 Beykoz/İstanbul`, telefon `+90 533 455 61 91`. Kaçıyor kaydı aynı adres ve telefonu destekliyor; ancak açık menü kaynağı yok, bulunan Anadolu Kavağı fiyatları farklı işletmelere ait veya güncelliği belirsiz. Son bir yıl içinde exact şubeye ait kalem bazında fiyatlı menü doğrulanamadığından **override eklenmedi; strict HOLD**.
+
+## BAHÇE BÜFE BEYLİKDÜZÜ ID 6724 ACCEPTED
+Hentzer kaydı `Büyükşehir, Beylikdüzü Cd. 5/2 No:113, 34520 Beylikdüzü/İstanbul`, telefon `+90 212 560 11 00`. Bahçe Büfe resmi şubeler sayfası aynı Brand İstanbul Park No:5/2N ve telefonu veriyor; sosyal ve Yemeksepeti kaynakları da Beylikdüzü şubesini aynı telefonla destekliyor. 26.08.2026 tarihinde şubeye bağlı canlı Migros Yemek menüsünden Popüler carousel tekrarları ve içecekler dışarıda bırakılarak 20 benzersiz tost/sıcak sandviç ürün-fiyat çifti alındı. **20 gıda ürünü override edildi.**
