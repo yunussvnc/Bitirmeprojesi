@@ -3,6 +3,13 @@ import * as maplibregl from 'maplibre-gl'
 import type { GeoJSONSource } from 'maplibre-gl'
 import type { FeatureCollection, Point } from 'geojson'
 import 'maplibre-gl/dist/maplibre-gl.css'
+// Vite, maplibre-gl'in kendi içinde `new Worker(new URL(...))` ile çözdüğü worker
+// dosyasını doğru hash'leyip kopyalamıyor — nginx'in SPA fallback'i bu yüzden
+// /assets/maplibre-gl-worker.mjs isteğine index.html (text/html) döndürüyordu,
+// harita hiç render olmuyordu. `?url` ile Vite'a bunu gerçek bir statik asset
+// olarak işlettirip doğru URL'i elle set ediyoruz.
+import maplibreWorkerUrl from 'maplibre-gl/dist/maplibre-gl-worker.mjs?url'
+maplibregl.setWorkerUrl(maplibreWorkerUrl)
 import { motion } from 'framer-motion'
 import { MapPin, X, Star, LocateFixed } from 'lucide-react'
 import { useVenues, type Venue } from '../hooks/useVenues'
