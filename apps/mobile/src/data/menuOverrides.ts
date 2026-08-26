@@ -91584,4 +91584,33 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Noodles with Shrimp", "price": "652 TL", "category": "Noodle" }
     ]
   },
+
+  "6535": {
+    "name": "Bread & Burger",
+    "sourceUrl": "https://www.migros.com.tr/yemek/bread-burger-besiktas-bebek-mah-st-1896c",
+    "sourceName": "Migros Yemek exact Beşiktaş/Bebek şubesi; resmi Bread & Burger sitesi ile adres-telefon doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Bread And Burger (140 Gr.) Menü", "price": "728 TL", "category": "Menüler" },
+      { "name": "İstanbul Burger (140 Gr.) Menü", "price": "756 TL", "category": "Menüler" },
+      { "name": "Antakya Burger (140 Gr.) Menü", "price": "748 TL", "category": "Menüler" },
+      { "name": "Trüf Burger (140 Gr.) Menü", "price": "776 TL", "category": "Menüler" },
+      { "name": "Hot Burger (140 Gr.) Menü", "price": "736 TL", "category": "Menüler" },
+      { "name": "Beefyyy Burger (140 Gr.) Menü", "price": "812 TL", "category": "Menüler" },
+      { "name": "Ballı Hardallı Tavuk Burger (120 Gr.) Menü", "price": "728 TL", "category": "Menüler" },
+      { "name": "Angry & Spicy Chicken Burger (120 Gr.) Menü", "price": "712 TL", "category": "Menüler" },
+      { "name": "Egg Burger (140 Gr.) Menü", "price": "792 TL", "category": "Menüler" },
+      { "name": "Mushroom Burger (140 Gr.) Menü", "price": "760 TL", "category": "Menüler" },
+      { "name": "Boşnak & Steak Burger (100 Gr.)", "price": "500 TL", "category": "Burgerler" },
+      { "name": "Bread and Burger (100 Gr.)", "price": "444 TL", "category": "Burgerler" },
+      { "name": "Trüf Burger (100 Gr.)", "price": "472 TL", "category": "Burgerler" },
+      { "name": "Antakya Burger (100 Gr.)", "price": "460 TL", "category": "Burgerler" },
+      { "name": "Hot Burger (100 Gr.)", "price": "464 TL", "category": "Burgerler" },
+      { "name": "Mexican Burger (100 Gr.)", "price": "472 TL", "category": "Burgerler" },
+      { "name": "Mushroom Burger (100 Gr.)", "price": "472 TL", "category": "Burgerler" },
+      { "name": "Egg & Burger (100 Gr.)", "price": "468 TL", "category": "Burgerler" },
+      { "name": "İstanbul Burger (100 Gr.)", "price": "472 TL", "category": "Burgerler" },
+      { "name": "Beefyyy Burger (100 Gr.)", "price": "480 TL", "category": "Burgerler" }
+    ]
+  },
 };

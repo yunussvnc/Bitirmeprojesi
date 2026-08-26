@@ -2895,3 +2895,7 @@ Hentzer `Pınartepe, Zerrin Sk., 34500 Büyükçekmece`, telefon `+90 212 872 72
 
 ## AŞİKAR İSTANBUL LOKANTASI ID 6536 HOLD
 Hentzer `Merkez, Marmara Cd. No:30, 34310 Avcılar`; telefon alanı boş. Yemeksepeti güncel fiyatlı exact isim/adres menüsü, Bulurum/Tikla ise `0212 591 22 46` telefonunu destekliyor; ancak Hentzer telefon parity’si doğrulanamadığından ve adreslerde No:30/4-5 ayrıntısı çeliştiğinden **override eklenmedi; strict HOLD.**
+
+## BREAD & BURGER BEBEK ID 6535 ACCEPTED
+Hentzer `Bebek, Manolya Sk. 12/A, 34342 Beşiktaş/İstanbul`, telefon `+90 212 265 00 57`. Resmi Bread & Burger sitesi aynı Bebek şubesini ve telefonu exact doğruluyor; Migros exact Beşiktaş/Bebek vendorunda güncel görünen menü ve burger fiyatları mevcut. 20 benzersiz gıda ürünü eklendi; içecek ve poşet ürünleri dışarıda bırakıldı. **Override kabul edildi.**
+Kaynaklar: https://www.breadandburger.com.tr/ ; https://www.migros.com.tr/yemek/bread-burger-besiktas-bebek-mah-st-1896c
