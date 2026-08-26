@@ -2184,3 +2184,6 @@ Hentzer kaydı `Barış, Samsun Cd. No:14/2, 34520 Beylikdüzü/İstanbul`, tele
 
 ## BİÇARE MEYHANE BEYLİKDÜZÜ ID 6769 HOLD
 Hentzer kaydı `Adnan Kahveci Mahallesi Avrupa Caddesi Kubis, Adnan Kahveci, No:34, 34528 Beylikdüzü/İstanbul`, telefon `+90 543 434 20 90`. Facebook ve Restoranim No:34/34528 ve telefonu destekliyor; ancak güncel Instagram/Yandex sonuçları işletmeyi `Avrupa Cad. No:108/34 Beykent` olarak gösteriyor. 2026 içeriklerinde Fix Menü fiyatları (1.600/1.200/1.000 TL) görünse de ürün içeriği ve Hentzer adresiyle birebir branch parity net değil. %100 adres ve kalem bazlı güncel menü doğrulaması sağlanamadığı için **override eklenmedi; strict HOLD**.
+
+## SUSHICI BEYLİKDÜZÜ ID 6768 HOLD
+Hentzer kaydı `Kavaklı, Çağlar Sk. No:1, 34520 Beylikdüzü Osb/Beylikdüzü/İstanbul`, telefon `+90 506 441 04 48`. Arama sonuçları ağırlıklı olarak farklı marka/işletme olan SushiCo Beylikdüzü’ne yöneliyor; SushiCo’nun resmi Beylikdüzü şubesi ve QR menüsü Hentzer’deki Sushici adı, Çağlar Sk. adresi ve 0506 441 04 48 telefonu ile exact eşleşmiyor. Bu nedenle bulunan fiyatlar aktarılmadı; **override eklenmedi, strict HOLD**.
