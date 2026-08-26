@@ -2250,3 +2250,6 @@ Hentzer kaydı `Barbaros Hayrettin Paşa, 1993. Sk. No:22, 34510 Esenyurt/İstan
 
 ## SHUBRA BEYKOZ ID 6747 HOLD
 Hentzer kaydı `Paşabahçe, Barbaros Cd. 27 A, 34800 Beykoz/İstanbul`, telefon `+90 532 467 79 53`. Mekan sosyal hesabı GSM’i destekliyor ve bazı kaynaklar No:27A’yı veriyor; ancak resmi Shubra sitesi adresi `Paşabahçe Mah. Barbaros Cad. No:23` ve sabit telefonu `+90 216 413 57 57` olarak yayınlıyor. Adres/telefon parity %100 sağlanamadı; resmi sitede menü başlığı olsa da fiyatlar erişilebilir değil. **Override eklenmedi; strict HOLD**.
+
+## SIBELLA CAFE MEZE&PASTA BEYLİKDÜZÜ ID 6746 ACCEPTED
+Hentzer kaydı `Büyükşehir, 19 Mayıs Cd. Zigana Evleri No:59 D:2, 34520 Beylikdüzü/İstanbul`, telefon `+90 212 871 01 82`. Kaçıyor, Restoranim ve işletmenin resmi Instagram hesabı exact adres/telefonu doğruluyor. 26.08.2026 tarihinde canlı Yemeksepeti menüsünde `Akşam Sefası 7'li Meze Menü — 1.199 TL`, `Zeytinyağlı Yaprak Sarma Menü — 799 TL` ve `Zeytinyağlı Taze Fasulye Menü — 649 TL` erişildi. **3 ürün override edildi.**

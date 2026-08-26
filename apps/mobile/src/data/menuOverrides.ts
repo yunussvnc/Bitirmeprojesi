@@ -4,6 +4,17 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6746": {
+    "name": "SIBELLA CAFE MEZE&PASTA",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/jqe9/sibella-cafe-meze-and-pasta",
+    "sourceName": "Canlı Yemeksepeti menüsü; resmi Instagram ve yerel kayıtlarla exact Zigana Evleri adres/telefonu doğrulandı",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Akşam Sefası 7'li Meze Menü", "price": "1199 TL", "category": "Menüler" },
+      { "name": "Zeytinyağlı Yaprak Sarma Menü", "price": "799 TL", "category": "Menüler" },
+      { "name": "Zeytinyağlı Taze Fasulye Menü", "price": "649 TL", "category": "Menüler" }
+    ]
+  },
   "6753": {
     "name": "HAZ KEBAP",
     "sourceUrl": "https://www.modposmenu.com/hazkebap",
