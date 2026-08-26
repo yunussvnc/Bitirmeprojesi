@@ -2166,3 +2166,6 @@ Hentzer kaydı `Ortaköy, Muallim Naci Cd. No:45/1, 34347 Beşiktaş/İstanbul`,
 
 ## COFFY KAVACIK ID 6775 HOLD
 Hentzer kaydı `Rüzgarlıbahçe, Cumhuriyet Cd. No:63A, 34805 Beykoz/İstanbul`, telefon `+90 216 217 04 32`. Menu-tr ve Restoranim adresi destekliyor; ancak arama sonuçlarındaki Yandex telefon bilgisi farklı/eksik ve Coffy Kavacık sosyal paylaşımındaki `70 TL` bilgisi tarihsel içerik olarak net güncellenme tarihiyle doğrulanamadı. Migros sayfası şubeyi gösterse de erişilebilir tam fiyatlı ürün listesi yok. %100 branch telefon parity ve son bir yıl fiyat şartı sağlanamadığı için **override eklenmedi; strict HOLD**.
+
+## KEBAPÇI MEMET ORTAKÖY ID 6774 HOLD
+Hentzer kaydı `Ortaköy, Dereboyu Cd. No:149 A, 34347 Beşiktaş/İstanbul`, telefon `+90 212 259 53 63`. TumIsyeri, Menum ve Facebook kayıtları adres/telefonu destekliyor; ancak Bulurum aynı telefonla No:96/B adresini veriyor. Menum çevrimiçi menüsünde ürün adları var fakat fiyatlar ve güncel fiyat tarihi erişilebilir değil; bulunan Yemeksepeti sonucu farklı işletmeye ait. %100 branch parity ve son bir yıl fiyat doğrulaması sağlanamadığı için **override eklenmedi; strict HOLD**.
