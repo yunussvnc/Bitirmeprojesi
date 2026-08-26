@@ -2247,3 +2247,6 @@ Hentzer kaydı `Firuzağa, Boğazkesen Cd. No:62, 34425 Beyoğlu/İstanbul`, tel
 
 ## VENS COFFEE CO BEYLİKDÜZÜ ID 6748 HOLD
 Hentzer kaydı `Barbaros Hayrettin Paşa, 1993. Sk. No:22, 34510 Esenyurt/İstanbul`, telefon `+90 536 710 22 20`. Yandex aynı No:22 adresini ancak `+90 535 916 32 16` telefonu ile gösteriyor; markanın resmi sitesi/mağazalar sayfası ise No:165 adresi ve farklı telefonlar yayınlıyor. Hentzer kaydı ile resmi branch bilgileri exact eşleşmediğinden güncel fiyatlı kaynaklar güvenle bağlanamadı. **Override eklenmedi; strict HOLD**.
+
+## SHUBRA BEYKOZ ID 6747 HOLD
+Hentzer kaydı `Paşabahçe, Barbaros Cd. 27 A, 34800 Beykoz/İstanbul`, telefon `+90 532 467 79 53`. Mekan sosyal hesabı GSM’i destekliyor ve bazı kaynaklar No:27A’yı veriyor; ancak resmi Shubra sitesi adresi `Paşabahçe Mah. Barbaros Cad. No:23` ve sabit telefonu `+90 216 413 57 57` olarak yayınlıyor. Adres/telefon parity %100 sağlanamadı; resmi sitede menü başlığı olsa da fiyatlar erişilebilir değil. **Override eklenmedi; strict HOLD**.
