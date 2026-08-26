@@ -2281,3 +2281,6 @@ Hentzer API kaydı: `Bonamade Bakery & Eatery`; adres `Acarlar, 34800 Beykoz/İs
 
 ## BONAMADE BAKERY & EATERY BEYKOZ ID 6738 HOLD
 Hentzer kaydı `Acarlar, 34800 Beykoz/İstanbul`, telefon `+90 216 485 61 97`. Yandex aynı telefonla `Acarlar Mah., 9. Cad. No:3C` adresini gösteriyor; işletme sosyal hesabı telefon ve Acarlar bölgesini destekliyor, ancak Hentzer adresinde exact kapı numarası yok. Son bir yıl içinde exact şubeye ait ürün-fiyat listesi bulunamadı; yalnızca genel fiyat aralığı mevcut. Exact branch/address parity ve güncel fiyat şartları tam sağlanamadığından **override eklenmedi; strict HOLD**.
+
+## THE HIMALAYAN RESTAURANT BEYOĞLU ID 6737 HOLD
+Hentzer kaydı `Kalyoncu Kulluğu, Kalyoncu Kulluğu Cd. 13A, 34435 Beyoğlu/İstanbul`, telefon `+90 536 569 02 82`. Tripadvisor/Culinary Backstreets aynı Kalyoncu Kulluğu 13A adresi ve telefonu destekliyor; ancak WhatsApp/Google arama sonucu Kamer Hatun Cd. No:13 varyantını gösteriyor. Resmi site işletme ve mutfak konseptini doğruluyor fakat rakamsal ürün-fiyat menüsü yayınlamıyor. Adres varyantı ve fiyat şartları nedeniyle **override eklenmedi; strict HOLD**.
