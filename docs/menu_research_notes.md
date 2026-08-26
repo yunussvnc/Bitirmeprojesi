@@ -2527,3 +2527,6 @@ Hentzer kaydı `Vişnezade, Süleyman Seba Cd. No:52/A, 34357 Beşiktaş/İstanb
 
 ## ARAS CAĞ KEBAP BEYLİKDÜZÜ OCAKBAŞI ID 6656 ACCEPTED
 Hentzer kaydı `Adnan Kahveci, Anadolu Cd. No:24/3, 34528 Beylikdüzü/İstanbul`, telefon `+90 541 398 61 25`. Aras Cağ Kebap resmi iletişim sayfası aynı No:24/3 adresini ve 0541 398 61 25 telefonunu doğruluyor; Yandex de aynı şube ve telefonu gösteriyor. Resmi Instagram’ın 26.04.2026 tarihli paylaşımında `1 şiş ... 300 TL` fiyatı açıkça verildi. Yalnızca bu tarihli ve exact şubeye bağlanan ürün eklendi.
+
+## CHEESY PEASY BEŞİKTAŞ ID 6654 HOLD
+Hentzer kaydı `Türkali Mahallesi Ihlamurdere Caddesi, Türkali, Yeniyol Sokak No:17/A, 34353 Beşiktaş/İstanbul`, telefon `+90 533 028 93 19`. Yandex aktif işletme kaydı aynı telefonla Yeni Yol Sokak `17B` adresini gösteriyor. Arama sonuçlarında güncel fiyatlı exact Cheesy Peasy menüsü bulunamadı; adres farkı nedeniyle exact branch parity de sağlanamadı. **Override eklenmedi; strict HOLD**.
