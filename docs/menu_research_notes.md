@@ -2722,3 +2722,6 @@ Hentzer kaydı `Örnekköy, Tepetarla Cd. No:16A, 34825 Beykoz/İstanbul`, telef
 
 ## NOVİ PAZAR GURME BAYRAMPAŞA ID 6591 HOLD
 Hentzer kaydı `Yıldırım, Ali Fuat Başgil Cd. No:105, 34045 Bayrampaşa/İstanbul`, telefon `+90 543 623 68 08`. Yandex exact kaydı No:105 ve aynı telefonu doğruluyor; Facebook adresi `103/105`, Instagram `No:103` olarak farklı formatlar yayımlıyor. Telefon parity’si mevcut olsa da son bir yıl içinde ürün bazlı fiyatları açıkça yayımlanan bir menü bulunamadı; Instagram/Facebook içerikleri fiyatlı menü sunmuyor. **Override eklenmedi; strict HOLD.**
+
+## KOMAGENE ETSİZ ÇİĞ KÖFTE PAŞABAHÇE ID 6590
+Hentzer kaydı `Paşabahçe, Tombala Sk. No:4B, 34800 Beykoz/İstanbul`, telefon `+90 850 377 08 50`. Yemeksepeti exact vendor kaydı Paşabahçe Mah. Tombala Sk. No:4B adresini doğruluyor; resmi Komagene çağrı merkezi aynı `0850 377 0850` numarasını yayımlıyor. Canlı Migros Paşabahçe menüsünden 20 benzersiz çiğ köfte bowl, porsiyon ve dürüm ürünü seçildi; içecekler ve Popular carousel tekrarları hariç tutuldu. **Override kabul edildi; 20 ürün.** Kaynaklar: https://www.migros.com.tr/yemek/komagene-etsiz-cig-kofte-beykoz-pasabahce-mah-st-35682 ; https://www.yemeksepeti.com/en/restaurant/tglx/komagene-etsiz-cig-kofte-tglx ; https://www.komagene.com.tr/

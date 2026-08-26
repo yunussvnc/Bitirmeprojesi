@@ -91007,6 +91007,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "5 Çeşit Meze Menü", "price": "1500 TL", "category": "Özel Menü" }
     ]
   },
+  "6590": {
+    "name": "KOMAGENE ETSİZ ÇİĞ KÖFTE PAŞABAHÇE",
+    "sourceUrl": "https://www.migros.com.tr/yemek/komagene-etsiz-cig-kofte-beykoz-pasabahce-mah-st-35682",
+    "sourceName": "Canlı Migros Komagene Etsiz Çiğ Köfte Beykoz Paşabahçe menüsü; Yemeksepeti exact adres ve resmi Komagene iletişim bilgisi",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Doritoslu Komagene Bowl", "price": "220 TL", "category": "Ayın Ürünleri" },
+      { "name": "Çıtır Jalapenolu Komagene Bowl", "price": "220 TL", "category": "Ayın Ürünleri" },
+      { "name": "Çıtır Soğanlı Komagene Bowl", "price": "220 TL", "category": "Ayın Ürünleri" },
+      { "name": "Eti Craxlı Komagene Bowl", "price": "220 TL", "category": "Ayın Ürünleri" },
+      { "name": "Çiğ Köfte (200 Gr.)", "price": "200 TL", "category": "Çiğ Köfteler" },
+      { "name": "Çiğ Köfte (400 Gr.)", "price": "350 TL", "category": "Çiğ Köfteler" },
+      { "name": "Çiğ Köfte (600 Gr.)", "price": "475 TL", "category": "Çiğ Köfteler" },
+      { "name": "Doritos'lu Double Dürüm", "price": "190 TL", "category": "Dürümler" },
+      { "name": "Doritos'lu Çiğ Köfte Dürüm", "price": "140 TL", "category": "Dürümler" },
+      { "name": "Doritos'lu Ultra Mega Dürüm", "price": "175 TL", "category": "Dürümler" },
+      { "name": "Çiğ Köfte Dürüm", "price": "120 TL", "category": "Dürümler" },
+      { "name": "Double Dürüm", "price": "165 TL", "category": "Dürümler" },
+      { "name": "Doritos'lu Mega Çiğ Köfte Dürüm", "price": "160 TL", "category": "Dürümler" },
+      { "name": "Mega Çiğ Köfte Dürüm", "price": "135 TL", "category": "Dürümler" },
+      { "name": "Ultra Mega Dürüm", "price": "150 TL", "category": "Dürümler" },
+      { "name": "Favori Çiğ Köfte Dürüm", "price": "120 TL", "category": "Dürümler" },
+      { "name": "Favori Mega Çiğ Köfte Dürüm", "price": "135 TL", "category": "Dürümler" },
+      { "name": "Favori Ultra Mega Dürüm", "price": "150 TL", "category": "Dürümler" },
+      { "name": "Eti Crax - Chili Lime Çiğ Köfte Dürüm", "price": "140 TL", "category": "Dürümler" },
+      { "name": "Eti Crax - Chili Lime Mega Çiğ Köfte Dürüm", "price": "160 TL", "category": "Dürümler" }
+    ]
+  },
   "6592": {
     "name": "YAMAN BÜFE BEYKOZ",
     "sourceUrl": "https://www.migros.com.tr/yemek/yaman-bufe-beykoz-ornekkoy-mah-st-337aa",
