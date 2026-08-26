@@ -2443,3 +2443,6 @@ Hentzer kaydı `Kültür, Nisbetiye Cd. Akmerkez AVM No:56, 34340 Beşiktaş/İs
 
 ## VALENSA WAFFLE BAYRAMPAŞA ID 6684 HOLD
 Hentzer kaydı `Yıldırım, Tunaboylu Sok. No:62, 34045 Bayrampaşa/İstanbul`, telefon `+90 552 525 42 67`. Valensa resmi Instagram/Facebook ve Yandex telefonla eşleşiyor; ancak Yandex adresi No:62B olarak geçiyor ve Hentzer kaydındaki No:62 ile birim parity’si kesin değil. Yemeksepeti’nde güncel fiyatlı waffle ürünleri bulunsa da exact adres birimi kesin doğrulanamadığından **override eklenmedi; strict HOLD**.
+
+## VONA AKARETLER ID 6683 HOLD
+Hentzer kaydı `Vişnezade, Abacı Latif Sokağı No:2A, 34357 Beşiktaş/İstanbul`, telefon alanı boş. Yandex, Buraya Gidelim ve diğer yerel kaynaklar aynı adresi destekliyor ancak telefon bilgisi yayınlanmıyor. Resmi Instagram’da ürün tanıtımları var fakat son bir yıl içinde doğrulanabilir ürün-fiyat listesi bulunamadı. Exact phone parity ve fiyat şartı sağlanamadığından **override eklenmedi; strict HOLD**.
