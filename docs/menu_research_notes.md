@@ -2614,3 +2614,6 @@ Hentzer kaydı `Cumhuriyet, Çamlık Caddesi Cumhuriyet Caddesi 1 D D:1/5, 34520
 
 ## MARYCO CAFE RESTAURANT BEYLİKDÜZÜ ID 6627 HOLD
 Hentzer kaydı `Barış Mah., Samsun Cad. B4 blok No:14/4 iç kapı No:14/4, Kır Sok. Makyol Yaşam Sitesi No:85 B4, 34520 Beylikdüzü/İstanbul`, telefon `+90 543 224 06 72`. Telefon Yandex ve Facebook kaynaklarında doğrulanıyor; ancak Yandex adresi Kır Sok. 8, Facebook B4 Blok No:85 ve Hentzer No:14/4 bilgilerini veriyor. Güncel işletme içerikleri mevcut olsa da ürün bazlı, son bir yıl fiyatlı exact menü doğrulanamadı. **Override eklenmedi; strict HOLD.**
+
+## ADANALI KEBAP PİDE LAHMACUN BEŞİKTAŞ ID 6626 HOLD
+Hentzer kaydı `Dikilitaş, Emirhan Cd. 2B 34349, 34330 Beşiktaş/İstanbul`, telefon `+90 212 327 21 38`. Adres; Restoranim, Servis Kayıt ve resmi Instagram hesabında Emirhan Cd. 2B olarak destekleniyor. Ancak resmi Instagram hesabı `0537 474 6642` telefonunu yayımlıyor; Hentzer telefonu ile parity yok. Yemek menüsü için bulunan üçüncü taraf sonuçlar başka Adanalı işletmelerine ait veya exact güncelliği doğrulanamıyor. **Override eklenmedi; strict HOLD.**
