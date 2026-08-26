@@ -3227,3 +3227,7 @@ Kaynaklar: https://www.yemeksepeti.com/en/restaurant/yn3n/bilezzet-kokoret ; htt
 ## MR.HAMZA BEYLİKDÜZÜ ID 6433 ACCEPTED
 Hentzer `Cumhuriyet Mahallesi Onur Sokak Kameroğlu Metrohome, Cumhuriyet Sitesi L12, 34520 Beylikdüzü/İstanbul`, telefon `+90 530 082 58 40`. Mr.Hamza resmi sosyal duyuruları ve Yandex aynı Beylikdüzü şubesini/adresi/telefonu doğruluyor. Canlı Yemeksepeti `jvgd` menüsünden popüler carousel tekrarları, içecekler ve tatlı dışlanarak 20 benzersiz burger ürünü eklendi. **Override kabul edildi.**
 Kaynaklar: https://www.yemeksepeti.com/restaurant/jvgd/mr-hamza-hamburger-jvgd ; https://yandex.com.tr/maps/org/mr_hamza_beylikduzu/191921026506/ ; https://www.instagram.com/mrhamza.tr/
+
+## HUQQA KURUÇEŞME ID 6432 HOLD
+HuQQa resmi Kuruçeşme sayfası Hentzer ile `Muallim Naci Cd. No:56` ve `+90 212 265 06 66` exact parity’sini ve resmi Q Food menü bağlantısını doğruluyor. Ancak resmi dijital menü web/tarayıcıda sürekli `Yükleniyor... / Kategoriler yükleniyor...` durumunda kaldı; ürün bazlı son bir yıl fiyatı okunamadı. **Override eklenmedi; strict HOLD.**
+Kaynaklar: https://www.huqqa.com/tr/kurucesme-huqqa/ ; https://menu.qfoodbeverage.com.tr/?branch=huqqa-kurucesme
