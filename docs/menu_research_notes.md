@@ -3190,3 +3190,7 @@ Kaynaklar: https://www.yemeksepeti.com/en/restaurant/zlmb/sigun-patisserie-and-c
 ## BÜKE TÜRK MUTFAĞI VE CAFE ID 6444 ACCEPTED
 Hentzer `Büyükşehir, Beylikdüzü Cd. No:5, 34520 Beylikdüzü/İstanbul`, telefon `+90 212 892 25 34`. Büke’nin resmi sitesi telefonunu ve Beylikdüzü işletmesini yayımlıyor; Yandex aynı işletme ve `+90 212 892 25 34` telefonunu doğruluyor. Resmi QR menüde fiyat değişim tarihi `30.07.2026`, güncelleme `Haziran 2026` olarak yazıyor. 20 benzersiz çorba, et, köfte, sebze, tavuk ve garnitür ürünü doğrudan resmi menüden eklendi; içecekler ve fiyatı olmayan kalemler dışlandı. **Override kabul edildi.**
 Kaynaklar: https://bukerestoran.com/menu ; https://bukerestoran.com/ ; https://yandex.com.tr/maps/org/buke_turk_mutfagi_ve_cafe/35371696192/
+
+## HOUSE OF B ID 6443 ACCEPTED
+Hentzer `Sinanpaşa, Şair Nedim Cd. No:14, 34353 Beşiktaş/İstanbul`, telefon `+90 212 236 27 47`. House of B resmi sitesi Akaretler şubesini aynı adres ve telefonla doğruluyor; resmi sitedeki Akaretler Yemeksepeti bağlantısı `qlkj` vendoruna yönleniyor. Canlı Yemeksepeti menüsünden popüler carousel tekrarları, içecekler ve soslar dışlanarak 20 benzersiz burger ürünü eklendi. Suadiye’ye ait `m00p` vendoru kullanılmadı. **Override kabul edildi.**
+Kaynaklar: https://houseofbturkey.com/ ; https://www.yemeksepeti.com/en/restaurant/qlkj/house-of-b-burgers-and-fries-qlkj

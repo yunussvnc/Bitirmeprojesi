@@ -92015,6 +92015,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Sultaniye Soslu Tavuk Döner Dürüm", "price": "230 TL", "category": "Tavuk Dönerler" }
     ]
   },
+  "6443": {
+    "name": "House of B",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/qlkj/house-of-b-burgers-and-fries-qlkj",
+    "sourceName": "House of B resmi Akaretler sipariş bağlantısındaki güncel Yemeksepeti exact menüsü; resmi site ile Sinanpaşa Mah. Şair Nedim Cd. No:14 ve +90 212 236 27 47 parity doğrulaması",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "Chicken Burger", "price": "524 TL", "category": "Burgerler" },
+      { "name": "Chicken Burger BBQ", "price": "556 TL", "category": "Burgerler" },
+      { "name": "Veggie Burger", "price": "478 TL", "category": "Burgerler" },
+      { "name": "Humble Burger", "price": "642 TL", "category": "Burgerler" },
+      { "name": "Rookie Burger", "price": "654 TL", "category": "Burgerler" },
+      { "name": "Truffle Burger", "price": "654 TL", "category": "Burgerler" },
+      { "name": "Double Trouble Burger", "price": "846 TL", "category": "Burgerler" },
+      { "name": "Pulled Beef Burger", "price": "654 TL", "category": "Burgerler" },
+      { "name": "Hot Pulled Beef Burger", "price": "654 TL", "category": "Burgerler" },
+      { "name": "Red Veg Burger", "price": "478 TL", "category": "Burgerler" },
+      { "name": "Fifty B Burger", "price": "654 TL", "category": "Burgerler" },
+      { "name": "Honey Mustard Chicken Burger", "price": "556 TL", "category": "Burgerler" },
+      { "name": "Mac & Cheese Chicken Burger", "price": "572 TL", "category": "Burgerler" },
+      { "name": "Flame Burger", "price": "642 TL", "category": "Burgerler" },
+      { "name": "Smoking Burger", "price": "654 TL", "category": "Burgerler" },
+      { "name": "Mac & Cheese Burger", "price": "662 TL", "category": "Burgerler" },
+      { "name": "Hightower Burger", "price": "1048 TL", "category": "Burgerler" },
+      { "name": "Pulled Beef BBQ Burger", "price": "654 TL", "category": "Burgerler" },
+      { "name": "Buffalo Chicken Burger", "price": "556 TL", "category": "Burgerler" },
+      { "name": "Sloppy Joe", "price": "642 TL", "category": "Burgerler" }
+    ]
+  },
   "6444": {
     "name": "Büke Türk Mutfağı ve Cafe",
     "sourceUrl": "https://bukerestoran.com/menu",
