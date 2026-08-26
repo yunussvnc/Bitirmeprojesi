@@ -3163,3 +3163,7 @@ Waze/Instagram/Facebook exact `Sinanpaşa, Köyiçi Mektep Sk. No:6, 34353 Beşi
 
 ## HAYRİ USTA OCAKBAŞI ID 6452 HOLD
 Waze/Yelp/Bulurum ve resmi Instagram exact `Katip Mustafa Çelebi, Çukurlu Çeşme Sk. No:15, 34433 Beyoğlu/İstanbul` ve `+90 212 249 31 41` parity’sini destekliyor. Ancak son bir yıl ürün bazlı TL fiyatlı 20 ürün menüsü bulunamadı; benzer adlı `Hayri Usta Ev Yemekleri` vendoru farklı işletme/konsept olduğu için kullanılmadı. **Override eklenmedi; strict HOLD.**
+
+## HEY DÖNER BEŞİKTAŞ ID 6451 ACCEPTED
+Hentzer `Sinanpaşa, Şht. Asım Cd. No:2A, 34351 Beşiktaş/İstanbul`, telefon `+90 212 955 03 93`. Resmi Hey Döner şube sayfası exact adres/telefonu doğruluyor; Servis Listeleri aynı bilgiyi destekliyor. Yemeksepeti ekvb canlı menüsünden 20 benzersiz burrito, tavuk döner ve taco ürünü eklendi; içecekler ve popüler tekrarlar dışlandı. **Override kabul edildi.**
+Kaynaklar: https://heydoner.com/sube/istanbul-besiktas/ ; https://www.yemeksepeti.com/restaurant/ekvb/hey-doner-ekvb ; https://servislisteleri.com/istanbul/besiktas/restoran/hey-doner-besiktas-wrncxM.html ; https://yandex.com.tr/maps/org/hey_doner_besiktas/165919676678/

@@ -58703,6 +58703,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Lemon Cake", "price": "440 TL", "category": "Tatlılar" }
     ]
   },
+  "6451": {
+    "name": "Hey Döner Beşiktaş",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/ekvb/hey-doner-ekvb",
+    "sourceName": "Güncel Yemeksepeti ekvb Hey Döner menüsü; resmi Hey Döner Beşiktaş şube sayfası, Yandex ve Servis Listeleri ile Şht. Asım Cd. No:2A ve +90 212 955 03 93 exact parity doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Hey Burrito (120 gr.)", "price": "475 TL", "category": "Burritolar" },
+      { "name": "Drago Burrito (120 gr.) (Acılı)", "price": "475 TL", "category": "Burritolar" },
+      { "name": "Drago Burrito (180 gr.) (Acılı)", "price": "550 TL", "category": "Burritolar" },
+      { "name": "Drago Burrito (240 gr.) (Acılı)", "price": "625 TL", "category": "Burritolar" },
+      { "name": "Hey Burrito (180 gr.)", "price": "550 TL", "category": "Burritolar" },
+      { "name": "Hey Burrito (240 gr.)", "price": "625 TL", "category": "Burritolar" },
+      { "name": "Bomba Burrito (120 gr.)", "price": "475 TL", "category": "Burritolar" },
+      { "name": "Bomba Burrito (180 gr.)", "price": "550 TL", "category": "Burritolar" },
+      { "name": "Bomba Burrito (240 gr.)", "price": "625 TL", "category": "Burritolar" },
+      { "name": "Tenders Burrito", "price": "475 TL", "category": "Burritolar" },
+      { "name": "Tavuk Döner Small Dürüm (S)", "price": "270 TL", "category": "Tavuk Dönerler" },
+      { "name": "Tavuk Döner Medium Dürüm (M)", "price": "295 TL", "category": "Tavuk Dönerler" },
+      { "name": "Tavuk Döner Mega Dürüm (L) (45 cm.)", "price": "360 TL", "category": "Tavuk Dönerler" },
+      { "name": "Yarım Ekmek Arası Tavuk Döner", "price": "270 TL", "category": "Tavuk Dönerler" },
+      { "name": "Tavuk Döner Jumbo Dürüm (XL) (45 cm.)", "price": "405 TL", "category": "Tavuk Dönerler" },
+      { "name": "Kaşarlı Dürüm Medium (M) (Tavuk Dönerden)", "price": "325 TL", "category": "Tavuk Dönerler" },
+      { "name": "Kaşarlı Dürüm Mega (L) (Tavuk Dönerden)", "price": "385 TL", "category": "Tavuk Dönerler" },
+      { "name": "Cheddar Peynirli Dürüm Medium (M) (Tavuk Dönerden)", "price": "325 TL", "category": "Tavuk Dönerler" },
+      { "name": "Cheddar Peynirli Dürüm Medium (L) (Tavuk Dönerden)", "price": "385 TL", "category": "Tavuk Dönerler" },
+      { "name": "2’li Hey Tako (Et Döner)", "price": "545 TL", "category": "Hey Tacolar" }
+    ]
+  },
   "6456": {
     "name": "Das Haus Des Döners Beşiktaş Sinanpaşa",
     "sourceUrl": "https://www.migros.com.tr/yemek/das-haus-des-doner-besiktas-sinanpasa-mah-st-323c2",
