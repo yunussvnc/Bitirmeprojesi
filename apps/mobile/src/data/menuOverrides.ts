@@ -573,7 +573,9 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "CHURCHILL", "price": "120.00 TL", "category": "SOĞUK İÇECEKLER" },
       { "name": "BÜYÜK SU", "price": "100.00 TL", "category": "SOĞUK İÇECEKLER" },
       { "name": "KÜÇÜK SU", "price": "50.00 TL", "category": "SOĞUK İÇECEKLER" }
-
+    ]
+  },
+  "6713": {
     "name": "FÜMECİ YUSUF ORTAKÖY",
     "sourceUrl": "https://fumeciyusuf.com/",
     "sourceName": "Fümeci Yusuf resmi online mağazası; Ortaköy şubesi resmi sosyal hesaplarla exact adres/telefon doğrulaması",
@@ -599,7 +601,6 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Pesto Soslu Levrek Marin", "price": "625 TL", "category": "Deniz Ürünleri" },
       { "name": "Somon Füme", "price": "875 TL", "category": "Deniz Ürünleri" },
       { "name": "Somon Füme Loin", "price": "1000 TL", "category": "Deniz Ürünleri" }
->>>>>>> bd4c1ca (Add verified Fumeci Yusuf Ortakoy menu override)
     ]
   },
   "6830": {
