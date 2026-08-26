@@ -2326,3 +2326,6 @@ Hentzer kaydı `Büyükşehir, Beylikdüzü Cd. 5/2 No:113, 34520 Beylikdüzü/�
 
 ## GALATA KEBAP HOUSE BEYOĞLU ID 6723 HOLD
 Hentzer kaydı `Bereketzade, Camekan Sk. No:10/B, 34421 Beyoğlu/İstanbul`, telefon `+90 541 129 40 34`. Yandex aynı telefonu ancak Bereketzade Camii Sokak No:7 adresini veriyor; Tripadvisor No:10/A gösteriyor. Adres kapı numarası exact eşleşmediği için bulunan fiyatlı içerikler kullanılamadı; güncel exact branch menü doğrulanamadı. **Override eklenmedi; strict HOLD**.
+
+## SET DECK RESTAURANT / SET GÜVERTE ID 6722 HOLD
+Hentzer kaydı `Anadolu Hisarı, Körfez Cd. No: 4/A, 34810 Beykoz/İstanbul`, telefon `+90 216 462 09 47`. Resmi Set Güverte sitesi aynı adresi `Anadoluhisarı Mah. Körfez Cad. no/4` ve aynı telefonu doğruluyor; Yandex de telefon ve Körfez Caddesi No:4 ile eşleşiyor. Resmi sitede menü ürün adları mevcut ancak kamuya açık sayfada fiyatlar bulunmuyor; son bir yıl içinde fiyat doğrulaması yapılamadığı için **override eklenmedi; strict HOLD**.
