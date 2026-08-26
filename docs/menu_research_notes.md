@@ -3201,3 +3201,7 @@ ID 6441 The Market Bosphorus: Hentzer Kuruçeşme Arena No:56, 34345 Beşiktaş/
 
 ## KUZEY MARKET ID 6440 HOLD
 Yandex Hentzer ile aynı Muratpaşa/Cumhuriyet Cad. civarını gösterse de adresi `142B`, telefonu `+90 534 844 16 30`; Hentzer `No:142` ve `+90 542 152 46 52`. Telefon parity’si sağlanamadı. Ayrıca 20 güncel gıda ürünü fiyatlı menü doğrulanamadı. **Override eklenmedi; strict HOLD.**
+
+## ANTAKYA İŞİ KEBAB & SOKAK LEZZETLERİ ID 6439 ACCEPTED
+Hentzer `Hüseyinağa, Sahne Sk. No:18, 34435 Beyoğlu/İstanbul`, telefon `+90 212 245 43 12`. Resmi Antakya İşi içeriği ve Instagram exact adres/telefonu destekliyor. Canlı Yemeksepeti `su4a` menüsünden popüler carousel tekrarları, içecek/poşet kalemleri dışlanarak 20 benzersiz çorba, lahmacun, kebap, kokoreç ve dürüm ürünü eklendi. **Override kabul edildi.**
+Kaynaklar: https://www.yemeksepeti.com/en/restaurant/su4a/antakya-isi-sokak-lezzetleri ; https://www.antakyaisisokaklezzetleri.com/post/taksim-ocakbasi-tek-tek ; https://www.instagram.com/antakyaisisokaklezzetleri/

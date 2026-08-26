@@ -92015,6 +92015,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Sultaniye Soslu Tavuk Döner Dürüm", "price": "230 TL", "category": "Tavuk Dönerler" }
     ]
   },
+  "6439": {
+    "name": "Antakya İşi Kebab & Sokak Lezzetleri",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/su4a/antakya-isi-sokak-lezzetleri",
+    "sourceName": "Güncel Yemeksepeti exact Antakya İşi Sokak Lezzetleri menüsü; resmi site ve Instagram ile Hüseyinağa, Sahne Sk. No:18 / +90 212 245 43 12 parity doğrulaması",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "Mercimek Çorbası", "price": "126,75 TL", "category": "Çorbalar" },
+      { "name": "Kaşarlı Lahmacun", "price": "176,25 TL", "category": "Lahmacunlar" },
+      { "name": "Fındık Lahmacun", "price": "63,75 TL", "category": "Lahmacunlar" },
+      { "name": "Antep Usulü Lahmacun", "price": "161,25 TL", "category": "Lahmacunlar" },
+      { "name": "Urfa Usulü Lahmacun", "price": "161,25 TL", "category": "Lahmacunlar" },
+      { "name": "Adana Kebap", "price": "492,75 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Urfa Kebap", "price": "492,75 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Patlıcanlı Kebap", "price": "622,50 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Ciğer Şiş", "price": "629,25 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Kuzu Pirzola", "price": "877,50 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Yağlı Kara", "price": "982,50 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Kuzu Küşleme", "price": "907,50 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Tavuk Şiş", "price": "412,50 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Tavuk Kanat", "price": "461,25 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Karışık Izgara", "price": "1050 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Çöp Şiş", "price": "592,50 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Kokoreç", "price": "477,75 TL", "category": "Kokoreçler" },
+      { "name": "Urfa Kebap Dürüm", "price": "253,50 TL", "category": "Dürümler" },
+      { "name": "Ciğer Şiş Dürüm", "price": "292,50 TL", "category": "Dürümler" },
+      { "name": "Uykuluk Dürüm", "price": "292,50 TL", "category": "Dürümler" }
+    ]
+  },
   "6443": {
     "name": "House of B",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/qlkj/house-of-b-burgers-and-fries-qlkj",
