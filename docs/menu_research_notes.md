@@ -2940,3 +2940,6 @@ Hentzer `Muhittin Apartman, Kavaklı, Akçay Sk. D:4A blok Daire 10, 34550 Beyli
 
 ## ANTEPLİ DÜRÜMCÜ EMİN USTA ID 6522 HOLD
 Hentzer `Yakuplu, 200. Sk. No:13 D:11, 34524 Beylikdüzü`, telefon `+90 542 119 27 27`. Menu-tr/Restoranim/Restaurantguru adresi destekliyor; ancak Yandex aynı telefonla `Yakuplu Mah. 65. Sok. 2` adresini gösteriyor. Güncel görünen Yemeksepeti fiyatları olsa da exact adres/telefon vendor parity’si kesinleşmedi. **Override eklenmedi; strict HOLD.**
+
+## TARİHİ DEGUSTASYON OCAKBAŞI ID 6521 HOLD
+Hentzer `Hüseyinağa, Sahne Sk. No:25, 34435 Beyoğlu`, telefon `+90 501 154 01 01`. Resmi site/Instagram/Facebook exact işletme ve telefonu destekliyor; ancak kaynaklar adresi `No:25/B` olarak veriyor ve Hentzer No:25 ile 100% kapı parity’si kesinleşmedi. Son bir yıl ürün bazlı TL fiyatlı menü de bulunamadı. **Override eklenmedi; strict HOLD.**
