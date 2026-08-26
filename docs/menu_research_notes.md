@@ -3006,3 +3006,6 @@ Hentzer `Kartaltepe, Bilgehan Cd. no:39, 34040 Bayrampaşa/İstanbul`, telefon `
 
 ## CAFE DEL SARTO ID 6501 HOLD
 Hentzer `Asmalı Mescit, Meşrutiyet Cd. 7a, 34435 Beyoğlu/İstanbul`, telefon alanı boş. Yandex, Sluurpy ve sosyal kaynaklar No:7/7A ile `+90 212 245 22 22` bilgisini veriyor; Hentzer phone alanı boş olduğundan zorunlu %100 phone parity sağlanamıyor. RestaurantGuru menüsünün son bir yıl fiyat güncelliği doğrulanamadı. **Override eklenmedi; strict HOLD.**
+
+## MEYLEBİ YENİ NESİL MEYHANE ID 6500 HOLD
+Hentzer `Atatürk, Barbaros 1 cad No:1A, 34500 Büyükçekmece/İstanbul`, telefon `+90 541 880 56 46`. Resmi sosyal kaynaklar telefonu doğruluyor; ancak Apple Maps `1`, Yandex `1/10` ve başka Yandex kaydı `1/1` gösteriyor. Son bir yıl exact branch ürün fiyatlı menü bulunamadı; 2024 yılbaşı menüsü eski. **Override eklenmedi; strict HOLD.**
