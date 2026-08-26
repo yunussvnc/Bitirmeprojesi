@@ -1,3 +1,5 @@
+import { normalizePlaceCategory } from './placeCategory'
+
 export interface Venue {
   id: string
   name: string
@@ -82,7 +84,7 @@ function toVenue(p: BackendPlace): Venue | null {
     name: p.name,
     address: p.address,
     district: districtFromAddress(p.address, p.city),
-    category: p.category || 'Diğer',
+    category: normalizePlaceCategory(p.category) || 'Restoran',
     description: '',
     lat: p.latitude,
     lng: p.longitude,

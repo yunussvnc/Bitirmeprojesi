@@ -2,17 +2,16 @@ import { motion } from 'framer-motion'
 import { MapPin, ArrowRight, Star } from 'lucide-react'
 import { useVenues } from '../hooks/useVenues'
 import VenueImage from './VenueImage'
+import { ALLOWED_PLACE_CATEGORIES } from '../lib/placeCategory'
 
 const FEATURED_COUNT = 9
 const MIN_REVIEWS = 5
 
 // "Bugün Ne Yesem?" başlığı yeme-içme vaadi veriyor — kuaför/manikür gibi
 // alakasız kategoriler foto+yorum kriterini geçse bile listeye girmesin.
-const FOOD_CATEGORIES = new Set([
-  'Kafe', 'Fırın', 'Bar', 'Gece Kulübü', 'Meyhane', 'Deniz Ürünleri',
-  'Pizza', 'Burger', 'Suşi', 'Steakhouse', 'Kahvaltı', 'Tatlıcı',
-  'Türk Mutfağı', 'Restoran',
-])
+// ALLOWED_PLACE_CATEGORIES (placeCategory.ts) ile birebir — mobil uygulamayla
+// aynı taksonomi, hepsi zaten yemek/içecek odaklı.
+const FOOD_CATEGORIES = new Set<string>(ALLOWED_PLACE_CATEGORIES)
 
 function priceLabel(n: number) {
   return '₺'.repeat(Math.max(1, Math.min(4, n)))

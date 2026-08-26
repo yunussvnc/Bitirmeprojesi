@@ -326,7 +326,7 @@ body::after{right:0;background:linear-gradient(270deg,rgba(16,185,129,0.03),tran
 .cta-box h2 em{font-style:normal;background:linear-gradient(135deg,var(--primary),var(--accent));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .cta-box p{color:var(--text-secondary);margin-bottom:2rem;font-size:1.05rem;position:relative;z-index:1}
 
-/* ── VENUE MAP SECTION ── */
+/* ── VENUE MAP SECTION (mobil ExploreMapView ile parite) ── */
 .venue-map-section{padding-top:2rem}
 .venue-filters{
   display:flex;flex-wrap:wrap;gap:.6rem;justify-content:center;margin-bottom:2rem;
@@ -350,61 +350,107 @@ body::after{right:0;background:linear-gradient(270deg,rgba(16,185,129,0.03),tran
   border-radius:var(--radius-xl);border:1px solid var(--glass-border);
   color:var(--text-muted);font-size:.9rem;
 }
-@media(max-width:768px){.venue-map-loading{height:420px}}
 .venue-map-empty{
   position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
-  background:rgba(2,2,4,.6);color:var(--text-muted);font-size:.85rem;
+  background:rgba(2,2,4,.6);color:var(--text-muted);font-size:.85rem;pointer-events:none;
 }
 .venue-map-empty-static{
-  position:static;padding:3rem 0;border-radius:var(--radius-xl);
-  border:1px solid var(--glass-border);background:var(--glass);
+  padding:2rem 1rem;text-align:center;border-radius:var(--radius-lg);
+  border:1px solid var(--glass-border);background:var(--glass);color:var(--text-muted);font-size:.85rem;
 }
+
+/* Masaüstü: sol liste + sağ büyük harita (mobildeki harita-öncelikli deneyimin masaüstü uyarlaması) */
+.kesif-layout{
+  display:grid;grid-template-columns:340px 1fr;gap:1.5rem;align-items:start;
+}
+.kesif-list{
+  display:flex;flex-direction:column;gap:.7rem;
+  height:600px;overflow-y:auto;padding-right:.4rem;
+  scrollbar-width:thin;scrollbar-color:var(--glass-border-hover) transparent;
+}
+.kesif-list::-webkit-scrollbar{width:6px}
+.kesif-list::-webkit-scrollbar-thumb{background:var(--glass-border-hover);border-radius:100px}
+.kesif-list-row{
+  display:flex;gap:.8rem;align-items:center;text-align:left;
+  background:rgba(8,8,14,0.6);border:1px solid var(--glass-border);border-radius:var(--radius-lg);
+  padding:.6rem;cursor:pointer;transition:all .2s;font:inherit;color:inherit;
+}
+.kesif-list-row:hover{border-color:var(--glass-border-hover);background:rgba(8,8,14,0.85)}
+.kesif-list-row.active{border-color:var(--primary);background:rgba(16,185,129,.1)}
+.kesif-list-row-img{width:56px;height:56px;border-radius:10px;object-fit:cover;flex-shrink:0}
+.kesif-list-row-body{min-width:0;display:flex;flex-direction:column;gap:.1rem}
+.kesif-list-row-cat{font-size:.65rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--primary)}
+.kesif-list-row-body h4{font-size:.88rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kesif-list-row-meta{display:inline-flex;align-items:center;gap:.25rem;font-size:.72rem;color:var(--text-muted)}
+
 .venue-map-wrap{
   position:relative;border-radius:var(--radius-xl);overflow:hidden;
   border:1px solid var(--glass-border);box-shadow:0 30px 80px rgba(0,0,0,.5);
   height:600px;
-}
-
-/* ── VENUE GRID (kesif — filtrelenebilir mekan galerisi) ── */
-.venue-grid{
-  display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.4rem;
-}
-.venue-grid .venue-card{width:100%}
-.venue-grid-more{display:flex;justify-content:center;margin-top:2.5rem}
-@media(max-width:768px){
-  .venue-grid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem}
 }
 .venue-map-canvas{position:absolute;inset:0;width:100%;height:100%}
 .venue-map-canvas .maplibregl-ctrl-attrib{display:none}
 .venue-map-canvas .maplibregl-ctrl-group{background:var(--surface);border:1px solid var(--glass-border)}
 .venue-map-canvas .maplibregl-ctrl-group button{filter:invert(1)}
 
-.venue-map-pin{
-  width:14px;height:14px;border-radius:50%;
-  border:2px solid rgba(2,2,4,.8);cursor:pointer;
-  box-shadow:0 0 0 3px rgba(255,255,255,.12);
-  transition:transform .2s;
+.venue-map-locate-btn{
+  position:absolute;right:.8rem;bottom:.8rem;z-index:5;
+  width:44px;height:44px;border-radius:50%;
+  background:var(--surface-2);border:1px solid var(--glass-border);color:var(--primary);
+  display:flex;align-items:center;justify-content:center;cursor:pointer;
+  box-shadow:0 10px 30px rgba(0,0,0,.4);transition:transform .2s;
 }
-.venue-map-pin:hover{transform:scale(1.4)}
+.venue-map-locate-btn:hover{transform:scale(1.08)}
+.venue-map-locate-btn:disabled{opacity:.5;cursor:wait}
+.venue-map-locate-error{
+  position:absolute;left:.8rem;right:.8rem;bottom:.8rem;z-index:5;
+  background:rgba(2,2,4,.85);border:1px solid var(--glass-border);color:var(--text-secondary);
+  font-size:.78rem;padding:.5rem .8rem;border-radius:10px;
+}
+.venue-map-user-dot{
+  width:16px;height:16px;border-radius:50%;background:#3b82f6;
+  border:3px solid #fff;box-shadow:0 0 0 4px rgba(59,130,246,.3);
+}
 
-.venue-popup .maplibregl-popup-content{
+/* ── PLACE PANEL (marker/liste seçimi — masaüstünde yüzen kart, mobilde bottom-sheet) ── */
+.place-panel-backdrop{
+  position:fixed;inset:0;background:rgba(2,2,4,.6);z-index:90;
+}
+.place-panel{
+  position:fixed;z-index:91;
   background:var(--surface-2);border:1px solid var(--glass-border);
-  border-radius:14px;padding:0;overflow:hidden;box-shadow:0 20px 50px rgba(0,0,0,.5);
+  box-shadow:0 -20px 60px rgba(0,0,0,.5);overflow:hidden;
+  right:2rem;top:50%;transform:translateY(-50%);
+  width:320px;max-height:80vh;overflow-y:auto;border-radius:var(--radius-xl);
 }
-.maplibregl-popup-content{padding:0!important}
-.maplibregl-popup-tip{display:none}
-.venue-popup{width:240px}
-.venue-popup img{width:100%;height:110px;object-fit:cover;display:block}
-.venue-popup-body{padding:.9rem 1rem}
-.venue-popup-cat{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
-.venue-popup-body h4{font-size:.95rem;font-weight:700;margin:.3rem 0 .35rem;color:var(--text)}
-.venue-popup-body p{font-size:.78rem;color:var(--text-secondary);line-height:1.5;margin-bottom:.5rem;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
-.venue-popup-meta{font-size:.8rem;color:var(--primary);font-weight:700}
+.place-panel-close{
+  position:absolute;top:.7rem;right:.7rem;z-index:2;
+  width:32px;height:32px;border-radius:50%;background:rgba(2,2,4,.6);color:#fff;
+  display:flex;align-items:center;justify-content:center;cursor:pointer;border:none;
+}
+.place-panel-img-wrap{height:160px}
+.place-panel-img{width:100%;height:100%;object-fit:cover;display:block}
+.place-panel-body{padding:1.1rem 1.2rem 1.3rem;display:flex;flex-direction:column;gap:.3rem}
+.place-panel-cat{font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--primary)}
+.place-panel-body h3{font-size:1.15rem;font-weight:700;letter-spacing:-.2px}
+.place-panel-district{display:inline-flex;align-items:center;gap:.3rem;font-size:.78rem;color:var(--text-muted)}
+.place-panel-body p{font-size:.82rem;color:var(--text-secondary);line-height:1.5;margin:.3rem 0}
+.place-panel-tags{display:flex;flex-wrap:wrap;gap:.4rem;margin-top:.5rem}
 
-@media(max-width:768px){
-  .venue-map-wrap{height:420px;border-radius:var(--radius-lg)}
+@media(max-width:960px){
+  .kesif-layout{display:block}
+  .kesif-list{display:none}
+  .venue-map-wrap{height:min(80vh,640px);border-radius:var(--radius-lg)}
   .venue-filters{gap:.4rem}
   .venue-filter-btn{padding:.45rem .85rem;font-size:.76rem}
+
+  /* Mobilde harita-öncelikli deneyim: panel masaüstündeki yüzen kart yerine alttan açılan sheet */
+  .place-panel{
+    right:0;left:0;top:auto;bottom:0;transform:none;
+    width:auto;max-height:75vh;border-radius:20px 20px 0 0;
+    animation:place-panel-slide-up .25s ease-out;
+  }
+  @keyframes place-panel-slide-up{from{transform:translateY(100%)}to{transform:translateY(0)}}
 }
 
 /* ── POPULAR VENUES (horizontal scroll cards) ── */
