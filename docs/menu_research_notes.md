@@ -3223,3 +3223,7 @@ Waze/Servis Kayıt/Listeleri/Polomap Hentzer ile `Kilise Meydanı Balıkçılar 
 ## BİLEZZET KEBAP ID 6434 ACCEPTED
 Hentzer `HAKAN ZİNİ İŞ HANI, Sinanpaşa, Şht. Asım Cd. No:31A, Beşiktaş/İstanbul`, telefon `+90 506 484 23 23`. Yandex Bilezzet Kebap ve Firma Fihristi exact Şehit Asım Cd. 31A ile aynı telefonu doğruluyor. Canlı Yemeksepeti `yn3n` Bilezzet Kokoret menüsünden içecek/poşet dışlanarak mevcut 12 benzersiz gıda ürünü eklendi. **Override kabul edildi.**
 Kaynaklar: https://www.yemeksepeti.com/en/restaurant/yn3n/bilezzet-kokoret ; https://yandex.com.tr/maps/org/bilezzet_kokoret/4412962209/ ; https://firmafihristi.com.tr/firma/41512-4412962209
+
+## MR.HAMZA BEYLİKDÜZÜ ID 6433 ACCEPTED
+Hentzer `Cumhuriyet Mahallesi Onur Sokak Kameroğlu Metrohome, Cumhuriyet Sitesi L12, 34520 Beylikdüzü/İstanbul`, telefon `+90 530 082 58 40`. Mr.Hamza resmi sosyal duyuruları ve Yandex aynı Beylikdüzü şubesini/adresi/telefonu doğruluyor. Canlı Yemeksepeti `jvgd` menüsünden popüler carousel tekrarları, içecekler ve tatlı dışlanarak 20 benzersiz burger ürünü eklendi. **Override kabul edildi.**
+Kaynaklar: https://www.yemeksepeti.com/restaurant/jvgd/mr-hamza-hamburger-jvgd ; https://yandex.com.tr/maps/org/mr_hamza_beylikduzu/191921026506/ ; https://www.instagram.com/mrhamza.tr/

@@ -92015,6 +92015,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Sultaniye Soslu Tavuk Döner Dürüm", "price": "230 TL", "category": "Tavuk Dönerler" }
     ]
   },
+  "6433": {
+    "name": "Mr.Hamza Beylikdüzü",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/jvgd/mr-hamza-hamburger-jvgd",
+    "sourceName": "Güncel Yemeksepeti Mr.Hamza Hamburger menüsü; resmi Mr.Hamza sosyal duyuruları ve Yandex ile Cumhuriyet Mah. Onur Sok. Kameroğlu Metrohome Sitesi L12 / +90 530 082 58 40 exact parity doğrulaması",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "Chicken Chili Burger", "price": "495 TL", "category": "Tavuk Burgerler" },
+      { "name": "Chicken Hamza Burger", "price": "450 TL", "category": "Tavuk Burgerler" },
+      { "name": "Chicken Burger No 2", "price": "475 TL", "category": "Tavuk Burgerler" },
+      { "name": "Hamza No:2", "price": "625 TL", "category": "Burgerler" },
+      { "name": "Chili Hamza", "price": "630 TL", "category": "Burgerler" },
+      { "name": "Napoliatan Hamza", "price": "610 TL", "category": "Burgerler" },
+      { "name": "Hawaiian Hamza 180 gr", "price": "630 TL", "category": "Burgerler" },
+      { "name": "Mexican Hamza 180 gr", "price": "610 TL", "category": "Burgerler" },
+      { "name": "Hot Peanut Hamza 180 gr", "price": "625 TL", "category": "Burgerler" },
+      { "name": "Kayserili Hamza", "price": "685 TL", "category": "Burgerler" },
+      { "name": "French Hamza 180 gr", "price": "625 TL", "category": "Burgerler" },
+      { "name": "Badılcan Hamza 180 gr", "price": "625 TL", "category": "Burgerler" },
+      { "name": "Urfalı Hamza Burger 180 gr", "price": "685 TL", "category": "Burgerler" },
+      { "name": "Trüflü Hamza 270 gr", "price": "855 TL", "category": "Burgerler 270 gr" },
+      { "name": "Hamza No2 270 gr", "price": "775 TL", "category": "Burgerler 270 gr" },
+      { "name": "Klasik Hamza 270 gr", "price": "740 TL", "category": "Burgerler 270 gr" },
+      { "name": "Cowboy Hamza 270 gr", "price": "815 TL", "category": "Burgerler 270 gr" },
+      { "name": "Kayserili Hamza 270 gr", "price": "830 TL", "category": "Burgerler 270 gr" },
+      { "name": "French Hamza 270 gr", "price": "765 TL", "category": "Burgerler 270 gr" },
+      { "name": "Hot Peanut Hamza 270 gr", "price": "780 TL", "category": "Burgerler 270 gr" }
+    ]
+  },
   "6434": {
     "name": "Bilezzet Kebap",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/yn3n/bilezzet-kokoret",
