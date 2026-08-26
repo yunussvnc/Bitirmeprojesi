@@ -2810,3 +2810,6 @@ Hentzer kaydı `Kavacık, Fatih Sultan Mehmet Cd. No:9, 34810 Beykoz/İstanbul`,
 
 ## SUN COFFEE & DESSERT BAYRAMPAŞA ID 6562 HOLD
 Hentzer kaydı `Yenidoğan, Yahya Kemal Cd. No:14/A, 34040 Bayrampaşa/İstanbul`, telefon `+90 531 642 62 57`. Facebook 05.03.2026 paylaşımı, Yandex ve işletme kayıtları exact şube/telefonu doğruluyor. 2025–2026 sosyal içerikleri ürünleri gösterse de erişilebilir ürün bazlı TL fiyatlı menü bulunamadı; benzer isimli Sun Patisserie ve Mysun Cafe kaynakları farklı işletmelerdir. **Override eklenmedi; strict HOLD.**
+
+## YUSWAFFIL BEŞİKTAŞ ID 6561 HOLD
+Hentzer kaydı `Türkali, Nüzhetiye Karakolu Sok. No:3, 34357 Beşiktaş/İstanbul`, telefon `+90 507 159 59 31`. Yuswaffil adına ve bu telefona ait güvenilir exact işletme profili bulunamadı; telefon araması alakasız etkinlik/House of Nüzhet sonuçlarına gidiyor. Son bir yıl içinde ürün bazlı fiyatlı waffle/tatlı menüsü doğrulanamadı. **Override eklenmedi; strict HOLD.**
