@@ -4,6 +4,34 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6680": {
+    "name": "IL POLLO DEL CAPO BEŞİKTAŞ",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/nu7o/il-pollo-del-capo-nu7o",
+    "sourceName": "Canlı Yemeksepeti exact Beşiktaş menüsü; resmi site/Instagram/Yandex ile adres-telefon doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Capo Solo Menü", "price": "579 TL", "category": "Süper Avantajlı Menüler" },
+      { "name": "Farmer's Cabbage Burger Menü", "price": "479 TL", "category": "Tavuk Burger Menüler" },
+      { "name": "Capo Max Menü", "price": "919 TL", "category": "Süper Avantajlı Menüler" },
+      { "name": "Peri Peri Burger Menü", "price": "479 TL", "category": "Tavuk Burger Menüler" },
+      { "name": "Chicken Cheeseburger Menü", "price": "479 TL", "category": "Tavuk Burger Menüler" },
+      { "name": "İkili Combo Mix Menü", "price": "1199 TL", "category": "Süper Avantajlı Menüler" },
+      { "name": "Tekli Combo Mix Menü", "price": "679 TL", "category": "Süper Avantajlı Menüler" },
+      { "name": "Capo Duo Menü", "price": "889 TL", "category": "Süper Avantajlı Menüler" },
+      { "name": "Süper Avantajlı 2'li Wrap Menü", "price": "899 TL", "category": "Wraps Menüler" },
+      { "name": "Babe On Fire Burger Menü", "price": "479 TL", "category": "Tavuk Burger Menüler" },
+      { "name": "Chili & Barbekü Burger Menü", "price": "479 TL", "category": "Tavuk Burger Menüler" },
+      { "name": "Cheeseburger Menü", "price": "639 TL", "category": "Et Burger Menüler" },
+      { "name": "Truffle Burger Menü", "price": "669 TL", "category": "Et Burger Menüler" },
+      { "name": "Füme Burger Menü", "price": "689 TL", "category": "Et Burger Menüler" },
+      { "name": "Burn Burn Burn Et Burger Menü", "price": "639 TL", "category": "Et Burger Menüler" },
+      { "name": "Hot Chili Chicken Wrap Menü", "price": "479 TL", "category": "Wraps Menüler" },
+      { "name": "Chrispy Capo Wrap Menü", "price": "479 TL", "category": "Wraps Menüler" },
+      { "name": "Kanatsever Kova Menü", "price": "899 TL", "category": "Kova Menüler" },
+      { "name": "Çıtır Kova Menü", "price": "849 TL", "category": "Kova Menüler" },
+      { "name": "Kovanın 2'lisi Menü 1", "price": "849 TL", "category": "Kova Menüler" }
+    ]
+  },
   "6686": {
     "name": "O COFFEE BEŞİKTAŞ",
     "sourceUrl": "https://www.tiktok.com/discover/o-coffee-beşiktaş-menü",

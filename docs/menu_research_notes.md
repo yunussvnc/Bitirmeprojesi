@@ -2452,3 +2452,6 @@ Hentzer kaydı `Türkali, Ihlamurdere Cd. No:76/A, 34357 Beşiktaş/İstanbul`, 
 
 ## KAYALAR PASTANESİ BEYKOZ ID 6681 HOLD
 Hentzer kaydı `Paşabahçe, Reşadiye Bağlar Cd. No:2, 34800 Beykoz/İstanbul`, telefon `+90 216 413 07 99`. Yandex, Bulurum, Restoranim ve resmi Instagram işletme hesabı adres/telefonu destekliyor. Ancak kamuya açık kaynaklarda son bir yıl içinde ürün-fiyat çiftlerini içeren doğrulanabilir bir menü bulunamadı; sosyal içerikler ürün/sipariş tanıtımı olsa da fiyat listesi sunmuyor. **Override eklenmedi; strict HOLD**.
+
+## IL POLLO DEL CAPO BEŞİKTAŞ ID 6680 ACCEPTED
+Hentzer kaydı `Sinanpaşa, Alaybeyi Sk Hakan Zihni İş Hanı No:2-A, 34353 Beşiktaş/İstanbul`, telefon `+90 536 832 28 73`. Resmi il pollo DEL CAPO şube sayfası ve 21.08.2026 tarihli işletme sosyal paylaşımı aynı adres/telefonu doğruluyor; Yandex de şubeyi aynı telefonla gösteriyor. Canlı Yemeksepeti exact şube menüsünden Popüler tekrarları dışarıda tutarak **20 güncel burger, tavuk, wrap ve kova menüsü ürünü** eklendi.
