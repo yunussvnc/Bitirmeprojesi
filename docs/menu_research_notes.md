@@ -2398,3 +2398,6 @@ Hentzer kaydı `Türkali, Ihlamurdere Cd. No:80, 34357 Beşiktaş/İstanbul`, te
 
 ## THREE B BURGER & MORE KAVACIK ID 6699 HOLD
 Hentzer kaydı `Kavacık, Gülşen Sok. No:3A, 34810 Beykoz/İstanbul`, telefon `+90 534 666 98 84`. Yandex aktif restoran kaydı aynı No:3A adresini doğruluyor ancak telefon numarası belirtilmiyor; Facebook kaydı aynı adres için `+90 533 375 79 20` farklı telefon yayınlıyor. Yemeksepeti exact isimli menüde güncel fiyatlı burger ürünleri bulunmasına rağmen Hentzer telefonu exact doğrulanamadığı için **override eklenmedi; strict HOLD**.
+
+## FRES BURGER AKARETLER ID 6698 HOLD
+Hentzer kaydı `Sinanpaşa, Şair Nedim Cd. No:46 D:B, 34353 Beşiktaş/İstanbul`, telefon alanı boş. Fre's Burger resmi Instagram ve 2025/2026 tarihli sosyal içerikler Akaretler Şair Nedim Cd. No:46 adresini destekliyor; Yandex de No:46 kaydını gösteriyor. Ancak Hentzer telefon alanı boş olduğundan zorunlu exact adres/telefon parity’si tamamlanamıyor. Güncel fiyatlı sosyal içerikler bulunsa da **override eklenmedi; strict HOLD**.
