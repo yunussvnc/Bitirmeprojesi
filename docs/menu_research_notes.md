@@ -2485,3 +2485,6 @@ Hentzer kaydı `Kavacık, Özgür Cd. 15A, 34810 Beykoz/İstanbul`, telefon `+90
 
 ## PIZZA STATION ORTAKÖY ID 6670 HOLD
 Hentzer kaydı `Ortaköy, Muallim Naci Cd. No:17, 34347 Beşiktaş/İstanbul`, telefon `+90 212 227 77 10`. Resmi Pizza Station sosyal hesabı aynı Ortaköy telefonunu ve Muallim Naci Cd./Besttenigar Ziya Sokak No:17 adresini destekliyor. Ancak bulunan güncel fiyatlı exact şube menüsü doğrulanamadı; genel/başka şubeye ait Pizza Station menüleri kullanılmadı. **Override eklenmedi; strict HOLD**.
+
+## BUUM BURGER / NEW BOSS BURGER KAVACIK ID 6669 HOLD
+Hentzer kaydı `Rüzgarlıbahçe Mh., Kavacık, Cumhuriyet Cd. 85/B, 34250 Beykoz/İstanbul`, telefon `+90 216 322 22 21`. Telefon Yandex ile eşleşiyor; ancak Yandex aktif işletme adresini Cumhuriyet Cad. No:83 olarak veriyor. Migros/Yemeksepeti fiyatlı menü sonuçları bulunsa da exact adres parity sağlanamadığı için **override eklenmedi; strict HOLD**.
