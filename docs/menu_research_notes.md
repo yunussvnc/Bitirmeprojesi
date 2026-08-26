@@ -2831,3 +2831,6 @@ Hentzer `Merkez, Hacı Alibey Sk. No:6, 34820 Beykoz`, telefon `+90 216 323 66 2
 
 ## ASMALI MESCİT DÜRÜMCÜ ID 6555 HOLD
 Hentzer `Asmalı Mescit, Nergis Sk. 2 A, 34430 Beyoğlu`, telefon `+90 212 244 08 02`. Resmi Instagram, Yandex ve Bulurum exact adres/telefonu doğruluyor; 30.01.2026 tarihli Instagram paylaşımı menü kategorilerini gösteriyor, fakat ürün bazlı fiyatlar metin olarak yok ve görselden güvenilir fiyat çıkarılamadı. **Override eklenmedi; strict HOLD.**
+
+## NOVAS HAGIASOPHIA RESTAURANT ID 6554 HOLD
+Hentzer `Sıraselviler Caddesi, Katip Mustafa Çelebi, Otopark No:1, 34433 Beyoğlu/İstanbul`, telefon `+90 534 962 29 86`. Adres doğrulanıyor; ancak resmi site `+90 546 124 00 34` veriyor ve Hentzer telefonu ile phone parity bozuluyor. Ürün fiyatları third-party kaynaklarda mevcut olsa da bu çelişkiyle override eklenemez. **Strict HOLD.**
