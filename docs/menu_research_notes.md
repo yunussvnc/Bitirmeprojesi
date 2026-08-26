@@ -3052,3 +3052,7 @@ Kaynaklar: https://www.inariomakase.com/menu ; https://www.inariomakase.com/medi
 
 ## MOGAF DÖNER BEYLİKDÜZÜ ADNAN KAHVECİ ID 6487 HOLD
 Mogaf resmi şube sayfası Hentzer ile exact `Dora Park, Adnan Kahveci, Anadolu Cd. D:2 B blok 17/2 Dükkan 21` ve `+90 850 840 8055` parity’sini doğruluyor. Yemeksepeti vendorunda bazı fiyatlar görünse de tam menü CAPTCHA nedeniyle alınamadı; 20 ürün doğrulanamadı. **Override eklenmedi; strict HOLD.**
+
+## OTTO MAKARNA ID 6486 ACCEPTED
+Hentzer `Türkali, Yaverağa Sk. 7A, 34357 Beşiktaş/İstanbul`, telefon `+90 212 984 78 52`. OTTO Makarna resmi sitesi aynı adres ve telefonu yayımlıyor. Resmi el yapımı makarna menüsünde güncel TL fiyatlı ürünler bulunuyor; 20 benzersiz makarna ürünü eklendi. **Override kabul edildi.**
+Kaynaklar: https://ottomakarna.com/ ; https://ottomakarna.com/el-yapimi-makarna-menusu/ ; https://ottomakarna.com/tatli-menusu/ ; https://yandex.com.tr/maps/org/otto_makarna/10794738997/

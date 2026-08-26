@@ -91652,6 +91652,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Çilekli Frappe", "price": "144 TL", "category": "Soğuk İçecekler" }
     ]
   },
+  "6486": {
+    "name": "OTTO makarna",
+    "sourceUrl": "https://ottomakarna.com/el-yapimi-makarna-menusu/",
+    "sourceName": "OTTO Makarna resmi güncel el yapımı makarna menüsü; resmi site ile Türkali Mah. Yaverağa Sok. 7A ve +90 212 984 7852 exact parity doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Chitarra Spaghetti Bolognese", "price": "620 TL", "category": "El Yapımı Makarnalar" },
+      { "name": "Chitarra Spaghetti Lemon & Sage", "price": "540 TL", "category": "El Yapımı Makarnalar" },
+      { "name": "Chitarra Spaghetti Aglio e Olio", "price": "580 TL", "category": "El Yapımı Makarnalar" },
+      { "name": "Chitarra Spaghetti Arrabiata", "price": "580 TL", "category": "El Yapımı Makarnalar" },
+      { "name": "Chitarra Pesto", "price": "580 TL", "category": "El Yapımı Makarnalar" },
+      { "name": "Spaghetti & Baby Spinach", "price": "540 TL", "category": "El Yapımı Makarnalar" },
+      { "name": "Spaghetti Aglio Olio e Peperoncino", "price": "520 TL", "category": "El Yapımı Makarnalar" },
+      { "name": "Spaghetti alla Carrettiera", "price": "540 TL", "category": "El Yapımı Makarnalar" },
+      { "name": "Chitarra Fettuccine Pomodoro", "price": "560 TL", "category": "El Yapımı Makarnalar" },
+      { "name": "Chitarra Fettuccine Cacio de Pepe", "price": "600 TL", "category": "El Yapımı Makarnalar" },
+      { "name": "Chitarra Fettuccine Burro e Salvia", "price": "560 TL", "category": "El Yapımı Makarnalar" },
+      { "name": "Chitarra Fettuccine Zuccini & Lemon", "price": "560 TL", "category": "El Yapımı Makarnalar" },
+      { "name": "Fettuccine Alfredo – Baby Spinach", "price": "520 TL", "category": "El Yapımı Makarnalar" },
+      { "name": "Fettuccine Alfredo", "price": "490 TL", "category": "El Yapımı Makarnalar" },
+      { "name": "Gnocchi Potato & Pomodoro", "price": "560 TL", "category": "El Yapımı Makarnalar" },
+      { "name": "Gnocchi Alfredo – Baby Spinach", "price": "550 TL", "category": "El Yapımı Makarnalar" },
+      { "name": "Tortelloni Ricotta & Jambon", "price": "550 TL", "category": "El Yapımı Makarnalar" },
+      { "name": "Tortelloni Ricotta & Mushroom", "price": "490 TL", "category": "El Yapımı Makarnalar" },
+      { "name": "Tortelloni Ricotta & Potato", "price": "490 TL", "category": "El Yapımı Makarnalar" },
+      { "name": "Three Cheese Ravioli", "price": "550 TL", "category": "El Yapımı Makarnalar" }
+    ]
+  },
   "6488": {
     "name": "inari Piku Etiler",
     "sourceUrl": "https://www.inariomakase.com/media/boun40xo/inari-etiler-yemek_2408.pdf",
