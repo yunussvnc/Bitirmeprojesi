@@ -4,6 +4,34 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6672": {
+    "name": "KEBAPÇI MURAT ÇETİN BEYLİKDÜZÜ",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/olhq/kebapci-murat-cetin",
+    "sourceName": "Canlı Yemeksepeti exact Kalekent şubesi; resmi site/Instagram/Facebook ile adres-telefon doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Ezogelin Çorbası", "price": "220 TL", "category": "Çorbalar" },
+      { "name": "Süzme Mercimek Çorbası", "price": "220 TL", "category": "Çorbalar" },
+      { "name": "Tavuk Suyu Çorbası", "price": "230 TL", "category": "Çorbalar" },
+      { "name": "Adana Kebap", "price": "800 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Urfa Kebap", "price": "800 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Çöp Şiş", "price": "860 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Ciğer Şiş", "price": "900 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Yürek Şiş", "price": "750 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Kuzu Şiş", "price": "900 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Tavuk Şiş", "price": "740 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Tavuk Kanat", "price": "700 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Karışık Kebap", "price": "1500 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Kıymalı Pide", "price": "450 TL", "category": "Fırın Ürünleri" },
+      { "name": "Kaşarlı Pide", "price": "450 TL", "category": "Fırın Ürünleri" },
+      { "name": "Kaşarlı Sucuklu Pide", "price": "500 TL", "category": "Fırın Ürünleri" },
+      { "name": "Kuşbaşılı Pide", "price": "580 TL", "category": "Fırın Ürünleri" },
+      { "name": "Kavurmalı Kaşarlı Pide", "price": "580 TL", "category": "Fırın Ürünleri" },
+      { "name": "Kuşbaşılı Kaşarlı Pide", "price": "600 TL", "category": "Fırın Ürünleri" },
+      { "name": "Künefe", "price": "300 TL", "category": "Tatlılar" },
+      { "name": "Sütlaç", "price": "280 TL", "category": "Tatlılar" }
+    ]
+  },
   "6677": {
     "name": "VALİDE MAÇKA",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/s4to/valide-macka",

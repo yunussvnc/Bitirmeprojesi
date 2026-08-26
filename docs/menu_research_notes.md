@@ -2476,3 +2476,6 @@ Hentzer kaydı `Sinanpaşa, Köyiçi Cd. No:10, 34353 Beşiktaş/İstanbul`, tel
 
 ## COFFY TÜRK ALMAN ÜNİVERSİTESİ BEYKOZ ID 6673 HOLD
 Hentzer kaydı `Türk Alman Üniversitesi, Merkez, Şahinkaya Cd. A Blok Binası, 34820 Beykoz/İstanbul`, telefon `+90 216 217 00 62`. Yandex, Restoranim ve Kaçıyor telefon/şube adını destekliyor; ancak kamu kaynaklarında Hentzer’deki A Blok iç kapı konumu tam olarak teyit edilemedi. Coffy zincirinin genel menü fiyatları mevcut olsa da Türk-Alman Üniversitesi şubesine ait exact güncel fiyat listesi bulunamadı. **Override eklenmedi; strict HOLD**.
+
+## KEBAPÇI MURAT ÇETİN BEYLİKDÜZÜ ID 6672 ACCEPTED
+Hentzer kaydı `Kalekent Sitesi, Adnan Kahveci, Anadolu Cd. C-1 Blok No:6, 34528 Beylikdüzü/İstanbul`, telefon `+90 212 813 63 63`. Resmi site/Instagram/Facebook kaynakları aynı Kalekent C-1 Blok No:6 adresini ve telefonu doğruluyor; canlı Yemeksepeti exact şube de `KALE KENT SİTESİ C-1 BLOK NO:6` adresini gösteriyor ve 18.08.2026 tarihli sipariş yorumları mevcut. Popüler carousel tekrarları ve içecekler dışarıda tutularak **20 güncel kebap, çorba, pide ve tatlı ürünü** eklendi.
