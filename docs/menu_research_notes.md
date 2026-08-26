@@ -3059,3 +3059,6 @@ Kaynaklar: https://ottomakarna.com/ ; https://ottomakarna.com/el-yapimi-makarna-
 
 ## TRATTORIA CARBONARA ID 6485 HOLD
 Resmi Carbonara iletişim sayfası Hentzer ile exact `Gayrettepe, Vefabey Sokağı No:25/C, 34349 Beşiktaş/İstanbul` ve `+90 212 274 44 10` parity’sini doğruluyor. Resmi menüde çoğu ürün için fiyat yayımlanmadı; yalnızca Minestrone 305 TL görünür ve 20 ürün doğrulanamadı. **Override eklenmedi; strict HOLD.**
+
+## CAFE ARA ID 6484 HOLD
+Hentzer telefon `+90 212 245 41 05`; resmi Kafe Ara dinamik sayfası ise `+90 212 245 65 65` veriyor. Adres benzer olsa da zorunlu %100 phone parity sağlanamadı. **Override eklenmedi; strict HOLD.**
