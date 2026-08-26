@@ -2148,3 +2148,6 @@ Hentzer kaydı `Türkali, Altıntaş Sk. 30/A, 34353 Beşiktaş/İstanbul`, tele
 
 ## REK'S KITCHEN HOT DOG & BURGER BEYLİKDÜZÜ ID 6781 ACCEPTED
 Hentzer kaydı Beylikdüzü/Adnan Kahveci ve telefon `+90 553 064 87 66`; işletmenin resmi Instagram profili aynı Beylikdüzü telefonunu yayınlıyor ve 2026 içerikleri güncel faaliyeti destekliyor. Canlı Yemeksepeti menüsünde 26.08.2026 tarihinde 6 hot dog, 9 burger ve 10 yan ürün fiyatı görüldü; gıda dışı ürünler eklenmedi. **25 ürün override edildi.**
+
+## LUAMIA ID 6780 HOLD
+Hentzer kaydı `Cihannüma, Barbaros Blv. 97B, 34353 Beşiktaş/İstanbul`; telefon alanı boş. Yandex aynı 97B adresini verir ancak `+90 216 315 51 79` telefonunu gösterir; Hentzer kaydında bu telefon bulunmadığı için %100 adres/telefon parity kurulamadı. Resmi site menü sunuyor fakat erişilebilir fiyat listesi yok; 2026 sosyal içeriklerinde de branch-specific fiyat görünmüyor. Bu nedenle **override eklenmedi; strict HOLD**.
