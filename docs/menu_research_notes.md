@@ -3128,3 +3128,6 @@ Resmi Instagram/Yandex/Corner/İstanbul Servis Listesi Hentzer ile exact `Türka
 
 ## BEYKOZ BALIK EKMEK ID 6463 HOLD
 Nelerimeshur/Mindtrip/Corner ve 2026 Facebook paylaşımı Hentzer ile exact `Gümüşsuyu, Kelle İbrahim Cd., 34820 Beykoz/İstanbul` ve `+90 537 244 57 53` parity’sini doğruluyor. Ancak güncel kaynaklarda yalnızca sınırlı birkaç ürün fiyatı bulunuyor; 20 benzersiz fiyatlı gıda ürünü doğrulanamadı. **Override eklenmedi; strict HOLD.**
+
+## IRISH PUB THE JAMES JOYCE ID 6462 HOLD
+Yandex/Bulurum/Meyhankoli ve diğer kaynaklar Hentzer ile exact `Hüseyinağa, Balo Sk. No:26, 34435 Beyoğlu/İstanbul` ve `+90 212 244 79 73` parity’sini doğruluyor. Wheree menüsü fiyatların değişebileceği uyarısıyla yalnızca ürün tanımları veriyor; QRMN ise yalnızca içecek menüsü. 20 güncel fiyatlı gıda ürünü doğrulanamadı. **Override eklenmedi; strict HOLD.**
