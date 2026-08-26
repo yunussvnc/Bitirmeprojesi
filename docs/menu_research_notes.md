@@ -3088,3 +3088,6 @@ Espressolab resmi mağaza sayfası Hentzer ile exact `Cumhuriyet, Atatürk Blv. 
 
 ## ÖZ ANTEP BAKLAVALARI BEYLİKDÜZÜ ID 6476 HOLD
 Resmi sosyal paylaşımlar Hentzer ile aynı şube telefonu `+90 535 700 87 64` ve Büyükdere Cd. 8/3 C Blok No:1 adresini doğruluyor. Ancak exact Beylikdüzü şubesine ait son bir yıl fiyatlı 20 ürün menüsü bulunamadı; diğer şehirlerdeki Öz Antep vendorları kullanılamadı. **Override eklenmedi; strict HOLD.**
+
+## ZEYD.CO COFFEE & BAKERY ID 6475 HOLD
+Hentzer telefon alanı boş; resmi sitede iki farklı telefon, Yandex’te Farabi Sok. No:20 adresi bulunuyor. Zorunlu exact parity sağlanamadı ve exact şubeye ait güncel fiyatlı 20 ürün menüsü doğrulanamadı. **Override eklenmedi; strict HOLD.**
