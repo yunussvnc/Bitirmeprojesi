@@ -2849,3 +2849,6 @@ Hentzer `Adnan Kahveci, Yavuz Sultan Selim Blv. Konut No:53 A İç Kapı No:86`,
 
 ## RUMELİ RESTAURANT ID 6549 HOLD
 Hentzer `Vatan, Esenler Cd. No:52, 34035 Bayrampaşa`, telefon `+90 532 557 00 28`. Resmi eatbu/Carrd ve Yandex `No:52/A` ile exact işletmeyi ve telefonu doğruluyor; ancak resmi kaynaklarda ürün bazlı güncel TL fiyatlı menü yok. **Override eklenmedi; strict HOLD.**
+
+## MANZARA RESTAURANT ID 6548 HOLD
+Hentzer `Cihannüma, Saray Cd No:5, 34353 Beşiktaş`, telefon `+90 212 227 30 00`. Conrad Hilton, Nasilbiryer, Servis Kayıt ve SevenRooms exact şubeyi doğruluyor; ancak son bir yıl exact şubeye ait ürün bazlı güncel TL fiyatlı menü bulunamadı. **Override eklenmedi; strict HOLD.**
