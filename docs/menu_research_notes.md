@@ -2918,3 +2918,6 @@ Hentzer `Yıldırım, Şht. Kamil Balkan Cd. No:82, 34045 Bayrampaşa`, telefon 
 
 ## ROCK N ROLLA ID 6529 HOLD
 Hentzer `Cihannüma, Akmaz Çeşme Sk. No:38, 34353 Beşiktaş`, telefon `+90 530 015 69 93`. Resmi Beşiktaş Instagram konumu telefonla eşleşiyor; ancak resmi genel hesap farklı Beşiktaş sipariş telefonu veriyor ve exact Akmaz Çeşme Sk. No:38 adresi bağımsız doğrulanamadı. QR menüde kategoriler ve 175 TL görünen değer olsa da ürün/fiyat listesi tam ayrıştırılamadı. **Override eklenmedi; strict HOLD.**
+
+## THE COFFEE FACTORY BEYLİKDÜZÜ AKROS ID 6528 HOLD
+Hentzer `Barbaros Hayrettin Paşa, 1992 Sokak No:8-10A, 34522 Esenyurt`, telefon `+90 533 405 94 77`. Resmi mağaza listesi exact Akros şubesini ve telefonu doğruluyor; ancak Yemeksepeti menü vendoru zincirin çoklu şubeleri arasında exact Akros adres/telefonunu göstermiyor. Son bir yıl fiyatları görülse de ID 6528’e exact branch parity’si kanıtlanamadı. **Override eklenmedi; strict HOLD.**
