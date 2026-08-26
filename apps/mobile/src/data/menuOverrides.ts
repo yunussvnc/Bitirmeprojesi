@@ -4,6 +4,23 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6817": {
+    "name": "ROYAL KEBAP ISTANBUL",
+    "sourceUrl": "https://royalkebap.tr/index.php/menus/",
+    "sourceName": "Royal Kebap resmi menüsü; sayfa ©2026 ve menü görselleri Haziran 2026",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Lamb & Chicken Porsion mix", "price": "650 TL", "category": "Porsiyon" },
+      { "name": "Lamb Kebap Porsion Double", "price": "700 TL", "category": "Porsiyon" },
+      { "name": "chicken kebap porsion Double", "price": "550 TL", "category": "Porsiyon" },
+      { "name": "Lamb kebap porsion", "price": "550 TL", "category": "Porsiyon" },
+      { "name": "chicken kebap porsion", "price": "450 TL", "category": "Porsiyon" },
+      { "name": "chicken kebap", "price": "300 TL", "category": "Sandviç" },
+      { "name": "lamb kebap", "price": "400 TL", "category": "Sandviç" },
+      { "name": "Pudding", "price": "100 TL", "category": "Tatlı" },
+      { "name": "Turkish lentil soup", "price": "100 TL", "category": "Çorba" }
+    ]
+  },
   "6822": {
     "name": "DOĞAL DÜKKAN KAVACIK",
     "sourceUrl": "https://flydishes.com/restaurant-detail/dogal-dukkan-kavacik",

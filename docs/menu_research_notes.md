@@ -2025,3 +2025,18 @@ Resmî noirpit.com kaydı adresi `Asmalı Mescit Mah. General Yazgan Sk. No:109/
 
 ## DOĞAL DÜKKAN KAVACIK ID 6822 ACCEPTED
 Resmî Doğal Dükkan iletişim/restoranlar sayfaları exact `Kavacık Mah. Mehmet Ali Birand Cad, Kavacık, Orhan Veli Kanık Parkı No:47, 34810 Beykoz/İstanbul` adresini ve `0216 310 28 28` telefonunu doğruluyor. Resmî sayfadan bağlı FlyDishes Kavacık menüsü aynı adres/telefonu gösteriyor; 2026 tarihli canlı menüde 11 kategori altında 105 benzersiz gıda ve içecek ürünü ile TL fiyatları yayınlanıyor. **ACCEPTED**, override eklendi.
+
+## TAT GURME FIRIN ID 6821 HOLD
+Yemeksepeti arama kaydı exact `Büyükşehir, 19 Mayıs Cd. Zigana Evleri D:59/B-4, 34520 Beylikdüzü/İstanbul` işletme/adresini gösteriyor; ancak sayfa bu ortamda şehir listesine yönlendi. Hentzer telefonu `0538 350 93 64` bağımsız olarak doğrulanamadı ve ürün bazlı güncel fiyat listesi okunamadı. **HOLD**, override eklenmedi.
+
+## ARTLY ID 6820 HOLD
+2026 sosyal içerikleri Artly Coffee’nin Beylikdüzü’nde aktif olduğunu gösteriyor; ancak Hentzer kaydı `Barış, Necip Fazıl Kısakürek Sk., 34520 Beylikdüzü/İstanbul` için bağımsız exact telefon bulunamadı. Menü sonucu olarak bulunan `fixeralab.com/menus/` bağlantısı ilgili işletmenin menüsü değil, 404/Vadi Elektrik sayfasına açıldı. Ürün bazlı güncel fiyatlar doğrulanamadı. **HOLD**, override eklenmedi.
+
+## DİMES KAHVALTICILAR SOKAĞI ID 6819 HOLD
+Wanderlog, Restoranim, Cybo ve diğer bağımsız kayıtlar exact `Sinanpaşa, Şair Veysi Sk. No:15 D:17, 34353 Beşiktaş/İstanbul` adresini destekliyor; ancak Hentzer telefon alanı boş ve exact telefon bulunamadı. Son bir yılda ürün bazlı, fiyatları doğrulanabilir herkese açık kahvaltı menüsü bulunamadı. **HOLD**, override eklenmedi.
+
+## ÖZ DOĞAL FIRIN ID 6818 HOLD
+Cybo, Bulurum ve sosyal sonuçlar exact `Rüzgarlıbahçe, Cumhuriyet Cd. No:30, 34805 Beykoz/İstanbul` adresini ve `0216 413 17 80` telefonunu destekliyor. 26.12.2025 tarihli sosyal içerikte bazı ürün fiyatları görünse de tam güncel menü yok; listelenen online sipariş alan adı da bu ortamda DNS ile çözümlenmedi. **HOLD**, override eklenmedi.
+
+## ROYAL KEBAP ISTANBUL ID 6817 ACCEPTED
+Resmî royalkebap.tr menü sayfası exact `Hüseyinağa, Tarlabaşı Blv No:69, 34435 Beyoğlu/İstanbul` adresini ve `0538 616 96 29` telefonunu doğruluyor. Menü sayfası 2026 tarihli içerik/görseller taşıyor; porsiyon, sandviç, tatlı ve çorba bölümlerinden 9 benzersiz gıda ürünü ve TL fiyatı eklendi. **ACCEPTED**, override eklendi.
