@@ -2518,3 +2518,6 @@ Hentzer kaydı `Şehit Muhtar, Kurabiye Sk. No:18, 34435 Beyoğlu/İstanbul`, te
 
 ## GOLDENFINGERS BEYLİKDÜZÜ ID 6659 ACCEPTED
 Hentzer kaydı `Cumhuriyet, Onur Sk. No:1/A, 34520 Beylikdüzü/İstanbul`, telefon `+90 850 777 8080`. Goldenfingers Beylikdüzü dijital menüsü aynı Cumhuriyet/Onur No:1/A adresini ve `0212 924 93 13` sabit telefonunu gösteriyor; işletme kaydı ve güncel kaynaklarda aynı exact şube doğrulanıyor. Menüde erişim tarihinde güncel fiyatlı burgerler bulundu; ilk/tekil 20 smash burger ve chicken burger ürünü eklendi, varyant tekrarları ve içecekler dışarıda tutuldu.
+
+## WHY COFFEE BEYLİKDÜZÜ ID 6658 ACCEPTED
+Hentzer kaydı `Cumhuriyet, Derviş Eroğlu Cd. No:4F, 34500 Beylikdüzü/İstanbul`, telefon `+90 212 924 32 99`. Why Coffee resmi QR şube sayfası aynı Beylikdüzü Merkez 4F adresini ve telefonu açıkça gösteriyor. Yandex’te aynı telefonla 4H yazımı görülse de resmi şube kaydı Hentzer’deki 4F bilgisini destekliyor. Canlı Yemeksepeti exact Why Coffee Chocolate And Food menüsünde fiyatlar bulundu; Popüler carousel tekrarları dışarıda tutularak 20 kahvaltı, tost, kruvasan, sandviç ve ana yemek ürünü eklendi.

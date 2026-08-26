@@ -90616,5 +90616,33 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Truffle Meaty Burger", "price": "608.90 TL", "category": "Burgerler" },
       { "name": "Fight Club Burger", "price": "628.90 TL", "category": "Burgerler" }
     ]
+  },
+  "6658": {
+    "name": "WHY COFFEE BEYLİKDÜZÜ",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/jmel/why-coffe-chocolate-and-food",
+    "sourceName": "Canlı Yemeksepeti exact Why Coffee menüsü; resmi QRWhyCoffee Beylikdüzü şube kaydı ile adres ve telefon doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Beyaz Peynirli Omlet", "price": "325 TL", "category": "Kahvaltılıklar" },
+      { "name": "Dana Jambonlu Omlet", "price": "400 TL", "category": "Kahvaltılıklar" },
+      { "name": "Kaşarlı Omlet", "price": "315 TL", "category": "Kahvaltılıklar" },
+      { "name": "Sporcu Omlet", "price": "330 TL", "category": "Kahvaltılıklar" },
+      { "name": "Klasik Omlet", "price": "300 TL", "category": "Kahvaltılıklar" },
+      { "name": "Kruvasan Kahvaltı Tabağı", "price": "495 TL", "category": "Kahvaltılıklar" },
+      { "name": "Menemen", "price": "330 TL", "category": "Kahvaltılıklar" },
+      { "name": "Hızlı Kahvaltı Tabağı", "price": "515 TL", "category": "Kahvaltılıklar" },
+      { "name": "Mantarlı Omlet", "price": "305 TL", "category": "Kahvaltılıklar" },
+      { "name": "Sebzeli Omlet", "price": "300 TL", "category": "Kahvaltılıklar" },
+      { "name": "Special Tost", "price": "375 TL", "category": "Tostlar" },
+      { "name": "Beyaz Peynirli Tost", "price": "335 TL", "category": "Tostlar" },
+      { "name": "Tereyağlı Kruvasan Fondü", "price": "405 TL", "category": "Kruvasanlar" },
+      { "name": "Kremalı Meyveli Kruvasan", "price": "380 TL", "category": "Kruvasanlar" },
+      { "name": "Belçika Çikolatalı Bademli Kruvasan", "price": "305 TL", "category": "Kruvasanlar" },
+      { "name": "Tereyağlı Kruvasan", "price": "235 TL", "category": "Kruvasanlar" },
+      { "name": "Club Sandwich", "price": "435 TL", "category": "Ekmek Arası Ürünler" },
+      { "name": "Izgara Kasap Köfte", "price": "665 TL", "category": "Ana Yemekler" },
+      { "name": "Mantarlı Izgara Tavuk", "price": "645 TL", "category": "Ana Yemekler" },
+      { "name": "Penne Arrabbiata", "price": "455 TL", "category": "Makarnalar" }
+    ]
   }
 };
