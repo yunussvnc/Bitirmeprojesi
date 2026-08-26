@@ -2521,3 +2521,6 @@ Hentzer kaydı `Cumhuriyet, Onur Sk. No:1/A, 34520 Beylikdüzü/İstanbul`, tele
 
 ## WHY COFFEE BEYLİKDÜZÜ ID 6658 ACCEPTED
 Hentzer kaydı `Cumhuriyet, Derviş Eroğlu Cd. No:4F, 34500 Beylikdüzü/İstanbul`, telefon `+90 212 924 32 99`. Why Coffee resmi QR şube sayfası aynı Beylikdüzü Merkez 4F adresini ve telefonu açıkça gösteriyor. Yandex’te aynı telefonla 4H yazımı görülse de resmi şube kaydı Hentzer’deki 4F bilgisini destekliyor. Canlı Yemeksepeti exact Why Coffee Chocolate And Food menüsünde fiyatlar bulundu; Popüler carousel tekrarları dışarıda tutularak 20 kahvaltı, tost, kruvasan, sandviç ve ana yemek ürünü eklendi.
+
+## MINOA AKARETLER ID 6657 ACCEPTED
+Hentzer kaydı `Vişnezade, Süleyman Seba Cd. No:52/A, 34357 Beşiktaş/İstanbul`, telefon `+90 212 236 94 52`. Minoa resmi iletişim sayfası aynı Akaretler adresini ve telefonu doğruluyor. Resmi Akaretler menü görsellerinde fiyatların `22.09.2025` tarihi itibarıyla geçerli olduğu belirtilmiş; 26.08.2026 erişiminde bu fiyatlar son bir yıl sınırı içindedir. Görsel menüden 20 kahvaltı, yumurta ve tost ürünü eklendi.

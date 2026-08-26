@@ -90644,5 +90644,33 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Mantarlı Izgara Tavuk", "price": "645 TL", "category": "Ana Yemekler" },
       { "name": "Penne Arrabbiata", "price": "455 TL", "category": "Makarnalar" }
     ]
+  },
+  "6657": {
+    "name": "MINOA AKARETLER",
+    "sourceUrl": "https://minoa.com/pages/akaretler-i%CC%87ngilizce-menu",
+    "sourceName": "Minoa resmi Akaretler menü görselleri; Minoa resmi iletişim sayfası ile adres ve telefon doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Minoa Breakfast Platter (for two)", "price": "1.400 TL", "category": "Kahvaltı" },
+      { "name": "Light Breakfast", "price": "590 TL", "category": "Kahvaltı" },
+      { "name": "Minoa Fit Breakfast", "price": "590 TL", "category": "Kahvaltı" },
+      { "name": "Breakfast Salad", "price": "420 TL", "category": "Kahvaltı" },
+      { "name": "Avocado on Sourdough Bread", "price": "390 TL", "category": "Kahvaltı" },
+      { "name": "Minoa Granola", "price": "410 TL", "category": "Kahvaltı" },
+      { "name": "Porridge", "price": "390 TL", "category": "Kahvaltı" },
+      { "name": "Simit in the Oven", "price": "275 TL", "category": "Kahvaltı" },
+      { "name": "Eggs Benedict", "price": "590 TL", "category": "Yumurtalar" },
+      { "name": "Eggs Royale", "price": "560 TL", "category": "Yumurtalar" },
+      { "name": "Çılbır (Turkish Eggs)", "price": "400 TL", "category": "Yumurtalar" },
+      { "name": "Poached Eggs and Avocado on Toast", "price": "400 TL", "category": "Yumurtalar" },
+      { "name": "Omelette", "price": "320 TL", "category": "Yumurtalar" },
+      { "name": "Egg White Omelette", "price": "350 TL", "category": "Yumurtalar" },
+      { "name": "Potato Omelette", "price": "320 TL", "category": "Yumurtalar" },
+      { "name": "Menemen", "price": "320 TL", "category": "Yumurtalar" },
+      { "name": "Sunny-side Up", "price": "250 TL", "category": "Yumurtalar" },
+      { "name": "Classic Scrambled Eggs", "price": "300 TL", "category": "Yumurtalar" },
+      { "name": "Fit Toastie", "price": "275 TL", "category": "Tostlar" },
+      { "name": "Traditional Turkish Kaşar Toastie", "price": "260 TL", "category": "Tostlar" }
+    ]
   }
 };
