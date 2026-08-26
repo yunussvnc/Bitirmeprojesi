@@ -3003,3 +3003,6 @@ Hentzer `Cumhuriyet, Onur Sk. no L14, 34520 Beylikdüzü/İstanbul`, telefon `+9
 
 ## CAFE TM'S ID 6502 HOLD
 Hentzer `Kartaltepe, Bilgehan Cd. no:39, 34040 Bayrampaşa/İstanbul`, telefon `+90 532 739 09 90`. Mekanlar adresi desteklese de Facebook resmi kaydı No:36 ve farklı `+90 212 616 08 67` telefonu gösteriyor. Exact branch parity’si ve son bir yıl fiyatlı menü doğrulanamadığından **override eklenmedi; strict HOLD**.
+
+## CAFE DEL SARTO ID 6501 HOLD
+Hentzer `Asmalı Mescit, Meşrutiyet Cd. 7a, 34435 Beyoğlu/İstanbul`, telefon alanı boş. Yandex, Sluurpy ve sosyal kaynaklar No:7/7A ile `+90 212 245 22 22` bilgisini veriyor; Hentzer phone alanı boş olduğundan zorunlu %100 phone parity sağlanamıyor. RestaurantGuru menüsünün son bir yıl fiyat güncelliği doğrulanamadı. **Override eklenmedi; strict HOLD.**
