@@ -2734,3 +2734,6 @@ Hentzer kaydı `Atatürk Cad. No:129, Yenibosna Merkez, 34100 Bahçelievler/İst
 
 ## BENEKLİ KIZ KÖFTE SUCUK BURGER BEYKOZ ID 6587
 Hentzer kaydı `İncirköy, Soğuksu Cd. No:35, 34800 Beykoz/İstanbul`, telefon `+90 216 322 60 00`. Resmi Instagram ve Facebook exact adres/telefonu doğruluyor; canlı Yemeksepeti vendor adresi `Soğuksu Cd. 35/A` olarak aynı şubeyi gösteriyor ve 2026 Ağustos tarihli güncel yorumlar mevcut. Menüler, burgerler, ekmek arası ürünler, çorbalar ve ızgaralardan 20 benzersiz gıda ürünü seçildi; içecek/poşet ve Popular tekrarları hariç tutuldu. **Override kabul edildi; 20 ürün.** Kaynaklar: https://www.yemeksepeti.com/restaurant/rf6u/intiba-benekli-kiz-kofte-and-burger ; https://www.instagram.com/beneklikizsucukkofte/ ; https://www.facebook.com/p/Benekli-K%C4%B1z-Sucuk-K%C3%B6fte-100079330482190/
+
+## STARI GRAD RESTAURANT BAYRAMPAŞA ID 6586 HOLD
+Hentzer kaydı `Yıldırım, İkizler Sk. No:41, 34045 Bayrampaşa/İstanbul`, telefon `+90 212 538 44 14`. Resmi Facebook ve Instagram No:41 ile aynı telefonu doğruluyor; Apple Maps 39C, Yandex 39-41 numaralarını gösterdiğinden küçük adres farkı da not edildi. Son bir yıl içinde exact şubeye ait ürün bazlı fiyatlı menü bulunamadı; sosyal içeriklerde ürün tanıtımı var, fiyat yok. **Override eklenmedi; strict HOLD.**
