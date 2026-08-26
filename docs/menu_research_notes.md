@@ -3170,3 +3170,6 @@ Kaynaklar: https://heydoner.com/sube/istanbul-besiktas/ ; https://www.yemeksepet
 
 ## BM BODRUM MEYHANESİ MARİNA ID 6450 HOLD
 Buraya Gidelim/Cybo/Instagram exact `Marmara, Ulusum Cd. C Blok No:34/3A, 34524 Beylikdüzü/İstanbul` bilgisini destekliyor; ancak telefon kaynaklarda `+90 542 193 34 34` ve `+90 542 119 34 61` olarak çelişiyor. Son bir yıl exact şubeye ait 20 bireysel TL fiyatlı ürün menüsü de doğrulanamadı; yalnızca fix menü paylaşımları var. **Override eklenmedi; strict HOLD.**
+
+## MUGSHOTS COFFEE BEŞİKTAŞ ID 6449 HOLD
+Yandex/Allzin exact `Türkali, Ihlamurdere Cd. 68/A, 34357 Beşiktaş/İstanbul` ve `+90 532 358 00 01` parity’sini doğruluyor. Allzin menü kategorilerini gösterse de ürün bazlı güncel TL fiyatları yayımlanmıyor; 20 fiyatlı gıda ürünü doğrulanamadı. **Override eklenmedi; strict HOLD.**
