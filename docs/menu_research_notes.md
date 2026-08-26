@@ -2256,3 +2256,6 @@ Hentzer kaydı `Büyükşehir, 19 Mayıs Cd. Zigana Evleri No:59 D:2, 34520 Beyl
 
 ## MEŞHUR BALIK DÜRÜM MEHMET USTA BEŞİKTAŞ ID 6745 HOLD
 Hentzer kaydı `Sinanpaşa, Köyiçi Cd. No:12A, 34330 Beşiktaş/İstanbul`, telefon `+90 533 258 96 21`. Mindtrip Hentzer adres/telefonunu desteklese de Yandex aynı işletme ve telefonla Sinanpaşa Mah. Mumcubakkal Sok. No:14 adresini veriyor; eski Karaköy kayıtları da farklı lokasyona ait. Son bir yıl içinde exact Beşiktaş şubesine ait ürün-fiyat listesi bulunamadı. **Override eklenmedi; strict HOLD**.
+
+## ZİYADE FASIL KADIKÖY ID 6744 HOLD
+Hentzer kaydı `Sahrayı Cedit Mahallesi, Göztepe, Batman Sk. No:4/2, 34734 Kadıköy/İstanbul`, telefon `+90 533 293 58 83`. Resmi Ziyade Fasıl sitesi aynı adresi (Kozyatağı Hilton) ve WhatsApp telefonunu doğruluyor; resmi menü sayfasında güncel şef menüsü ve yemek içerikleri mevcut. Ancak fiyat yalnızca “menü tek fiyat” olarak belirtilmiş, rakamsal fiyat yayınlanmamış. Güncel fiyat şartı sağlanamadığından **override eklenmedi; strict HOLD**.
