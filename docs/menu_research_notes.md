@@ -2843,3 +2843,6 @@ Hentzer `Rüstem Paşa Mah. Yeni Galata Köprüsü altı, Eminönü Haliç taraf
 
 ## WALKON COFFEE ID 6551 HOLD
 Hentzer `Abbasağa, Salnameci Sk. No:43A, 34353 Beşiktaş`, telefon `+90 535 714 72 10`; resmi Instagram/Yandex/Facebook eşleşiyor. Bulunan Rito menüsü WalkOn’a değil David's Kitchen & Coffee’ye ait (Bursa telefonu içeriyor). Exact şubeye ait son bir yıl fiyatlı menü yok. **Override eklenmedi; strict HOLD.**
+
+## BEREKET DÖNER BEYLİKDÜZÜ ADNAN KAHVECİ ID 6550 HOLD
+Hentzer `Adnan Kahveci, Yavuz Sultan Selim Blv. Konut No:53 A İç Kapı No:86`, telefon `+90 212 955 06 64`. Resmi şube sayfası aynı telefonu ancak `No:58/A İç Kapı No:86` adresini veriyor; Yandex 53A’yı ve farklı cep telefonunu listeliyor. Exact adres parity’si bozuk olduğundan **override eklenmedi; strict HOLD.**
