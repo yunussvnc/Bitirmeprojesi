@@ -2662,3 +2662,6 @@ Hentzer kaydı `Polonezköy, 75. Yıl Cd. No:1/1, 34829 Beykoz/İstanbul`, telef
 
 ## GENBURGER BEYKOZ ID 6611 HOLD
 Hentzer kaydı `Rüzgarlıbahçe, Cumhuriyet Cd. Hasoğlu Plaza No:39, Hasoğlu Plaza No:39, 34805 Beykoz/İstanbul`, telefon `+90 216 322 32 00`. Telefon Yandex’te eşleşiyor; ancak resmi Instagram adresi `Rüzgarlıbahçe Mah. Cumhuriyet Cad. No:39/B Hasoğlu Plaza Kavacık/Beykoz`, Yandex de `No:39B` olarak veriyor. Hentzer adresinde `B` kapı eki bulunmadığından %100 exact şube adres parity’si kurulamadı. Migros/Yemeksepeti güncel fiyatlar sunsa da kullanılmadı. **Override eklenmedi; strict HOLD.**
+
+## DA VITTORIO RISTORANTE ITALIANO BEŞİKTAŞ ID 6610 HOLD
+Hentzer kaydı `Mövenpick Hotel Bosphorus, Balmumcu, Barbaros Blv. No 165, 34349 Beşiktaş/İstanbul`, telefon `+90 212 370 21 66`. Da Vittorio’nun sosyal medya, Gault & Millau ve Mövenpick kaynakları exact otel/adres bağlamını doğruluyor; ancak resmi Mövenpick şube sayfası telefonunu `+90 212 370 20 20` olarak yayımlıyor. Telefon parity’si sağlanamadığı için resmi menü/fiyatlar kullanılmadı. **Override eklenmedi; strict HOLD.**
