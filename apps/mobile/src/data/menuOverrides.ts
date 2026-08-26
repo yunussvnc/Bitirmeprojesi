@@ -90969,5 +90969,33 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Pide Arası Et Döner 200 gr", "price": "815 TL", "category": "Et Dönerler" },
       { "name": "Pide Arası Et Döner 250 gr", "price": "1000 TL", "category": "Et Dönerler" }
     ]
+  },
+  "6625": {
+    "name": "BARAN LAHMACUN BEYOĞLU",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/vb1k/baran-lahmacun?section=titles",
+    "sourceName": "Baran Lahmacun resmi sitesi ve canlı Yemeksepeti exact vendor menüsü",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Diyarbakır Usulü Lahmacun", "price": "250 TL", "category": "Lahmacunlar" },
+      { "name": "Antep Usulü Lahmacun", "price": "280 TL", "category": "Lahmacunlar" },
+      { "name": "Kuşbaşılı Yumurtalı Pide", "price": "620 TL", "category": "Pideler" },
+      { "name": "Kaşarlı Pide", "price": "510 TL", "category": "Pideler" },
+      { "name": "Kıymalı Pide", "price": "540 TL", "category": "Pideler" },
+      { "name": "Sucuklu Kaşarlı Pide", "price": "570 TL", "category": "Pideler" },
+      { "name": "Kuşbaşılı Pide", "price": "600 TL", "category": "Pideler" },
+      { "name": "Kıymalı Kaşarlı Pide", "price": "560 TL", "category": "Pideler" },
+      { "name": "Kıymalı Yumurtalı Pide", "price": "570 TL", "category": "Pideler" },
+      { "name": "Kuşbaşılı Kaşarlı Pide", "price": "640 TL", "category": "Pideler" },
+      { "name": "Kıymalı Kaşarlı Yumurtalı Pide", "price": "580 TL", "category": "Pideler" },
+      { "name": "Patlıcanlı Kuşbaşılı Pide", "price": "630 TL", "category": "Pideler" },
+      { "name": "Patlıcanlı Kuşbaşılı Kaşarlı Pide", "price": "660 TL", "category": "Pideler" },
+      { "name": "Diyarbakır Usulü Kaşarlı Lahmacun", "price": "280 TL", "category": "Lahmacunlar" },
+      { "name": "Antep Usulü Kaşarlı Lahmacun", "price": "290 TL", "category": "Lahmacunlar" },
+      { "name": "Adana Kebap", "price": "720 TL", "category": "Kebaplar" },
+      { "name": "Açık Beyti Kebap", "price": "740 TL", "category": "Kebaplar" },
+      { "name": "Ciğer Şiş", "price": "770 TL", "category": "Kebaplar" },
+      { "name": "Şiş Kebap", "price": "770 TL", "category": "Kebaplar" },
+      { "name": "Patlıcan Kebabı", "price": "770 TL", "category": "Kebaplar" }
+    ]
   }
 };

@@ -2617,3 +2617,6 @@ Hentzer kaydı `Barış Mah., Samsun Cad. B4 blok No:14/4 iç kapı No:14/4, Kı
 
 ## ADANALI KEBAP PİDE LAHMACUN BEŞİKTAŞ ID 6626 HOLD
 Hentzer kaydı `Dikilitaş, Emirhan Cd. 2B 34349, 34330 Beşiktaş/İstanbul`, telefon `+90 212 327 21 38`. Adres; Restoranim, Servis Kayıt ve resmi Instagram hesabında Emirhan Cd. 2B olarak destekleniyor. Ancak resmi Instagram hesabı `0537 474 6642` telefonunu yayımlıyor; Hentzer telefonu ile parity yok. Yemek menüsü için bulunan üçüncü taraf sonuçlar başka Adanalı işletmelerine ait veya exact güncelliği doğrulanamıyor. **Override eklenmedi; strict HOLD.**
+
+## BARAN LAHMACUN BEYOĞLU ID 6625 ACCEPTED
+Hentzer kaydı `Kuloğlu, Turnacıbaşı Cd. No:39A, 34433 Beyoğlu/İstanbul`, telefon `+90 212 243 11 21`. Baran’ın resmi sitesi aynı No:39/A adresini ve telefonu yayımlıyor; Yemeksepeti exact vendorunda aynı Kuloğlu/Turnacıbaşı adresi, güncel aktif yorum akışı ve canlı fiyatlı menü bulunuyor. Popüler carousel tekrarları ve gıda dışı ürünler dışarıda bırakılarak 20 lahmacun, pide ve kebap ürünü eklendi.
