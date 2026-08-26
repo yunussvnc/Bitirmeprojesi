@@ -2623,3 +2623,6 @@ Hentzer kaydı `Kuloğlu, Turnacıbaşı Cd. No:39A, 34433 Beyoğlu/İstanbul`, 
 
 ## EYŞAN İSTANBUL YENİ NESİL MEYHANE ID 6624 HOLD
 Hentzer kaydı `Fulya, Ayazmaderesi Cd 1A, 34427 Beşiktaş/İstanbul`, telefon `+90 532 309 32 52`. İşletmenin resmi sitesi aynı Fulya/Ayazmaderesi No:1/A adresini ve telefonu doğruluyor; ancak resmi Instagram/Facebook güncel içeriklerinde rezervasyon telefonu `+90 552 021 98 67` olarak görülüyor. Resmi QR menü bağlantısı bulunmasına rağmen son bir yıl içinde okunabilir ürün-fiyat listesi doğrulanamadı. Zorunlu telefon parity’si ve güncel fiyat koşulu birlikte sağlanamadığı için **override eklenmedi; strict HOLD**.
+
+## MERAKİ (RAKI - MEZE) RESTORAN BEYLİKDÜZÜ ID 6623 HOLD
+Hentzer kaydı `Cumhuriyet, Derviş Eroğlu Cd. No:6, 34520 Beylikdüzü/İstanbul`, telefon `+90 533 601 70 41`. Resmi Meraki sosyal hesabı telefonu doğruluyor; ancak 2025–2026 resmi sosyal içerikleri işletmeyi Kameroğlu Metrohome, Derviş Eroğlu Cd. No:60 olarak gösteriyor. Yemeksepeti Meraki vendorunda güncel fiyatlı meze ürünleri görünse de exact şube adresi doğrulanamadı. Zorunlu adres parity’si sağlanamadığı için **override eklenmedi; strict HOLD**.
