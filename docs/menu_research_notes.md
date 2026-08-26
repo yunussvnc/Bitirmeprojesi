@@ -2977,3 +2977,6 @@ Kaynaklar: https://www.yemeksepeti.com/en/restaurant/pehr/salt-fried-chicken-peh
 
 ## HARBI ADANA OCAKBAŞI ID 6510 HOLD
 Hentzer `Ortaköy, Portakal Ykş. Cd. No:2, 34347 Beşiktaş`, telefon `+90 212 327 21 01`. Resmi Instagram/Facebook exact Portakal Yokuşu No:2 adresini ve telefonu destekliyor; ancak Yelp aynı telefonla Muvakkit Sok. No:18/A adresini gösteriyor. Mekanlar menüsü fiyat yayımlamıyor ve son bir yıl exact şube fiyatlı menü doğrulanamadı. **Override eklenmedi; strict HOLD.**
+
+## ÇAĞDAŞ URFA KEBAP ID 6509 HOLD
+Hentzer `Dikilitaş, Emirhan Cd. No:60 D:B, 34349 Beşiktaş`, telefon `+90 212 227 45 67`. Yandex/Yelp/Bulurum aynı işletmeyi No:60/B ve aynı telefonla destekliyor; ancak son bir yıl exact işletmeye ait ürün bazlı fiyatlı menü bulunamadı. `Urfalı Çağdaş Ocakbaşı` Yemeksepeti sonucu aynı şube olduğu kanıtlanamadığından kullanılmadı. **Override eklenmedi; strict HOLD.**
