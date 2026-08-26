@@ -2455,3 +2455,6 @@ Hentzer kaydı `Paşabahçe, Reşadiye Bağlar Cd. No:2, 34800 Beykoz/İstanbul`
 
 ## IL POLLO DEL CAPO BEŞİKTAŞ ID 6680 ACCEPTED
 Hentzer kaydı `Sinanpaşa, Alaybeyi Sk Hakan Zihni İş Hanı No:2-A, 34353 Beşiktaş/İstanbul`, telefon `+90 536 832 28 73`. Resmi il pollo DEL CAPO şube sayfası ve 21.08.2026 tarihli işletme sosyal paylaşımı aynı adres/telefonu doğruluyor; Yandex de şubeyi aynı telefonla gösteriyor. Canlı Yemeksepeti exact şube menüsünden Popüler tekrarları dışarıda tutarak **20 güncel burger, tavuk, wrap ve kova menüsü ürünü** eklendi.
+
+## GINGER ACARKENT ID 6679 HOLD
+Hentzer kaydı `Acarlar, 9. Cd. C Blok No:11/2 İç Kapı No:262, 34800 Beykoz/İstanbul`, telefon `+90 538 416 23 48`. Ginger’ın resmi sitesi aynı adresi ve telefonu açıkça yayınlıyor; 2026 tarihli sosyal içerikler de şubeyi destekliyor. Resmi sitede sushi/gastrobar menü içeriği anlatılıyor ancak güncel ürün-fiyat listesi yayınlanmıyor. Son bir yıl fiyat şartı sağlanamadığından **override eklenmedi; strict HOLD**.
