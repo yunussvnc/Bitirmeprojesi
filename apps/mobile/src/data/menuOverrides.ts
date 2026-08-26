@@ -90533,4 +90533,32 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     }
   ]
 },
+  "6664": {
+    "name": "KÖŞEM URFA KEBAP, LAHMACUN",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/vpq0/kosem-urfa-kebap",
+    "sourceName": "Canlı Yemeksepeti exact Kavaklı şubesi; Yandex ile adres ve telefon doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Adana Dürüm", "price": "370 TL", "category": "Dürümler" },
+      { "name": "Mercimek Çorbası", "price": "200 TL", "category": "Çorbalar" },
+      { "name": "Urfa Dürüm", "price": "370 TL", "category": "Dürümler" },
+      { "name": "Tavuk Şiş", "price": "595 TL", "category": "Izgaralar" },
+      { "name": "Adana Kebap (Çift Şiş) (180 gr.)", "price": "745 TL", "category": "Kebaplar" },
+      { "name": "Yaprak Kanat", "price": "650 TL", "category": "Izgaralar" },
+      { "name": "KÖFTE MENÜ", "price": "660 TL", "category": "Menüler" },
+      { "name": "Hamburger Menü 1", "price": "850 TL", "category": "Burgerler" },
+      { "name": "Hamburger Menü 2", "price": "550 TL", "category": "Burgerler" },
+      { "name": "Tavuk Burger Menü 3", "price": "500 TL", "category": "Burgerler" },
+      { "name": "Kavurmalı Pide Menü", "price": "575 TL", "category": "Menüler" },
+      { "name": "Adana Dürüm Menü", "price": "550 TL", "category": "Menüler" },
+      { "name": "Tavuk Dürüm Menü", "price": "500 TL", "category": "Menüler" },
+      { "name": "Adana Dürüm Bol Kaşarlı Patatesli", "price": "450 TL", "category": "Dürümler" },
+      { "name": "KEBAP MENÜ", "price": "880 TL", "category": "Menüler" },
+      { "name": "Fıstıklı Kebap", "price": "830 TL", "category": "Kebaplar" },
+      { "name": "Köşem Kebap", "price": "780 TL", "category": "Kebaplar" },
+      { "name": "Domatesli Kebap", "price": "725 TL", "category": "Kebaplar" },
+      { "name": "Altı Ezmeli Kebap (Et Şişten)", "price": "700 TL", "category": "Kebaplar" },
+      { "name": "Patlıcanlı Kebap", "price": "880 TL", "category": "Kebaplar" }
+    ]
+  }
 };
