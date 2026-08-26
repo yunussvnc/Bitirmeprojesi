@@ -2425,3 +2425,6 @@ Hentzer kaydı `Türkali, Ihlamurdere Cd. No:34, 34357 Beşiktaş/İstanbul`, te
 
 ## MINT SUSHI ACARLAR ID 6690 HOLD
 Hentzer kaydı `Acarlar, 9. Cd. A/1, 34800 Beykoz/İstanbul`, telefon `+90 216 485 30 30`. Mint Sushi’nin resmi/sosyal kayıtları, Yandex ve restoran bilgi kaydı telefonla eşleşiyor; bazı harita kayıtlarında adres No:5 olarak çelişiyor. Nefis Menü’de fiyatlı sushi ürünleri bulunuyor ancak güncelleme tarihi yok; ayrıca başka canlı görünen katalogda aynı ürünlerde önemli fiyat farkları mevcut. Son bir yıl güncelliği ve tekil güvenilir fiyat seti kesin doğrulanamadığından **override eklenmedi; strict HOLD**.
+
+## DAMAK TADI LOKANTASI BEŞİKTAŞ ID 6689 HOLD
+Hentzer kaydı `Sinanpaşa, Ihlamurdere Cd. No:19, 34353 Beşiktaş/İstanbul`, telefon alanı boş. Kaynaklar çelişkili: Instagram içeriği No:24 ve başka içerik No:19 gösteriyor; Facebook No:19 için `+90 544 939 21 85`, Yandex ve yerel kayıt ise `+90 212 236 53 34` veriyor. 2026 tarihli sosyal paylaşımda 300 TL günlük menü kampanyası bulunsa da adres/telefon exact parity sağlanamadığından **override eklenmedi; strict HOLD**.
