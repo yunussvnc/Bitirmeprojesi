@@ -2931,3 +2931,6 @@ Hentzer `Adnan Kahveci, Ihlamur Cd. No:17, 34528 Beylikdüzü`, telefon `+90 212
 ## KOZLAB COFFEE ID 6525 ACCEPTED
 Hentzer `Tokatköy, Gürkan Sk. No:3 D:1, 34825 Beykoz`, telefon `+90 551 534 19 08`. Resmi Instagram/Yandex exact işletme ve telefonu destekliyor; Yemeksepeti exact Kozlab Coffee vendoru adresi `Emin Ali Gürkan sokak 3/1` olarak veriyor ve güncel görünen fiyatlı menü yayımlıyor. Poşet hariç 20 gıda ürünü eklendi. **Override kabul edildi.**
 Kaynaklar: https://www.yemeksepeti.com/en/restaurant/hf3r/kozlab-coffee ; https://www.instagram.com/kozlabcoffee/ ; https://yandex.com.tr/maps/org/kozlab_caffee/11979369853/
+
+## THE NEST COFFEE (PEABERRY) ID 6524 HOLD
+Hentzer `Sinanpaşa, Alaybeyi Sk No:11, 34535 Beşiktaş`; telefon alanı boş. İşletme adı ve adres kısmen doğrulansa da bağımsız kaynaklardan Hentzer telefon parity’si sağlanamadı; Restaurantguru farklı telefon gösteriyor. Bulunan diğer Yemeksepeti The Nest sonucu Siirt şubesidir. Son bir yıl exact şubeye ait 20 ürün fiyatı doğrulanamadığından **override eklenmedi; strict HOLD.**
