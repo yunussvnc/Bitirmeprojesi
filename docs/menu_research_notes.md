@@ -2380,3 +2380,6 @@ Hentzer kaydı `Acarlar, 3. Cd. No:29, 34800 Beykoz/İstanbul`, telefon `+90 216
 
 ## ADA BARO BAHÇE KANLICA ID 6705 ACCEPTED
 Hentzer kaydı `Kanlıca, Hacı Muhittin Sk. No:40, 34810 Beykoz/İstanbul`, telefon `+90 216 537 86 70`. Ada Baro Bahçe resmi iletişim sayfası aynı adres ve telefonu doğrudan yayınlıyor; Yandex kaydı da aynı bilgileri doğruluyor. 20.08.2026 tarihli resmi sosyal medya paylaşımında `Makarna & Şarap` özel menüsü `Suvla Kabatepe şişe şarap + Fettucine Alfredo + Penne Arabiata` içeriğiyle 2.750 TL olarak yayınlandı. Güncel tarihli exact şube menü paylaşımı olduğundan **1 özel menü ürünü override edildi**.
+
+## CAVİT PASTANESİ BEYOĞLU ID 6704 HOLD
+Hentzer kaydı `Kalyoncu Kulluğu, Kalyoncu Kulluğu Cd. 1/A, 34435 Beyoğlu/İstanbul`, telefon `+90 212 255 23 28`. Yandex, Smart Beyoğlu ve diğer yerel kayıtlar aynı adres/telefonu doğruluyor; işletme aktif görünüyor. Restaurant Guru’da menü sayfası bulundu ancak erişim CAPTCHA/suspicious-activity duvarında kaldı; resmi veya güvenilir güncel fiyatlı ürün listesi doğrulanamadı. Son bir yıl fiyat şartı sağlanamadığı için **override eklenmedi; strict HOLD**.
