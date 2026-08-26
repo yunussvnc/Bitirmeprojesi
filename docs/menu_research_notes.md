@@ -2205,3 +2205,6 @@ Hentzer kaydı `Cevatpaşa, Yurt Sk. No:13/A, 34045 Bayrampaşa/İstanbul`, tele
 
 ## POYRAZ TAKO BALIK RESTAURANT BEYKOZ ID 6762 ACCEPTED
 Hentzer kaydı `Poyrazköy, Mendirek Yolu No:14 D:1A, 34829 Beykoz/İstanbul`, telefon `+90 538 691 45 15`. İşletmenin resmi QR menü sayfası, resmi web sitesi ve Instagram hesabı aynı Poyrazköy işletmesini ve telefonu doğruluyor; menü kaynağında ikinci iletişim telefonu da bulunuyor. Resmi alakart menüde 26.08.2026 tarihinde kahvaltı, salata, soğuk meze, ara sıcak ve balık kategorilerinde fiyatlar erişilebildi. Fiyatı “danışınız” olan veya fiyatı bulunmayan kalemler eklenmedi. **25 ürün override edildi.**
+
+## ZAITOUNE BEYLİKDÜZÜ ID 6761 HOLD
+Hentzer kaydı `Cumhuriyet, Şehitler Cd. No:13 D:21, 34515 Beylikdüzü/İstanbul`, telefon `+90 530 342 37 80`. Waze, Kaçıyor ve eski Zaitoune işletme paylaşımları adres/telefonu destekliyor; ancak bazı eski kaynaklarda aynı işletme için A Blok/Dükkan 117 varyantı bulunuyor. Resmi `zaitoune.co` sitesi marka/ürün kategorilerini gösteriyor fakat dinamik ürün fiyatları erişilebilir metinde yüklenmedi. Son bir yıl içinde exact şube için doğrulanabilir fiyatlı menü bulunamadığından **override eklenmedi; strict HOLD**.
