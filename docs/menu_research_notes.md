@@ -2536,3 +2536,6 @@ Hentzer kaydı `Çiftlik Mahallesi Diyar Çıkmazı, Çiftlik, Fatih Sultan Mehm
 
 ## MOC COFFEE BEYLİKDÜZÜ PERLAVİSTA ID 6652 ACCEPTED
 Hentzer kaydı `Perlavista AVM Rezidans, Adnan Kahveci, Yavuz Sultan Selim Blv. No:1C D:81, 34000 Beylikdüzü/İstanbul`, telefon `+90 552 107 75 05`. MOC resmi şube sayfası Perlavista MOC için `Adnan Kahveci Mahallesi, Yavuz Sultan Selim Bulvarı No:1 C 81` adresini doğruluyor; Yandex ve Restoranim aynı şubeyi ve 0552 107 75 05 telefonunu gösteriyor. Pardon exact şube menüsü son fiyat güncellemesini 20.01.2026 olarak belirtiyor; Standard Coffee ve Hot Drinks kategorilerinden 20 fiyatlı ürün eklendi.
+
+## 2TEK ALAF KURUÇEŞME ID 6651 HOLD
+Hentzer kaydı `Kuruçeşme, Kuruçeşme Cd. 19B, 34345 Beşiktaş/İstanbul`, telefon `+90 530 979 47 95`. Tripadvisor, Corner, Facebook ve 2Tek sosyal hesapları adres/telefonu destekliyor. Alaf Kuruçeşme resmi sitesinde `17.06.2026` tarihli fiyatlı Alacarte/Tadım PDF’leri mevcut; ancak bunlar `Alaf Kuruçeşme` ana konsept menüleri ve 2Tek alt konseptine ait exact fiyat listesi oldukları kesinleştirilemedi. Yanlış konsepte menü aktarmamak için **override eklenmedi; strict HOLD**.
