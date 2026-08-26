@@ -2401,3 +2401,6 @@ Hentzer kaydı `Kavacık, Gülşen Sok. No:3A, 34810 Beykoz/İstanbul`, telefon 
 
 ## FRES BURGER AKARETLER ID 6698 HOLD
 Hentzer kaydı `Sinanpaşa, Şair Nedim Cd. No:46 D:B, 34353 Beşiktaş/İstanbul`, telefon alanı boş. Fre's Burger resmi Instagram ve 2025/2026 tarihli sosyal içerikler Akaretler Şair Nedim Cd. No:46 adresini destekliyor; Yandex de No:46 kaydını gösteriyor. Ancak Hentzer telefon alanı boş olduğundan zorunlu exact adres/telefon parity’si tamamlanamıyor. Güncel fiyatlı sosyal içerikler bulunsa da **override eklenmedi; strict HOLD**.
+
+## MAKSAT OCAKBAŞI & MEYHANE BEYOĞLU ID 6697 HOLD
+Hentzer kaydı `Hüseyinağa, Sahne Sk. No:23, 34435 Beyoğlu/İstanbul`, telefon `+90 537 474 44 78`. Maksat Ocakbaşı resmi sitesi ve resmi Instagram aynı Sahne Sokak No:23 adresi ile 0537 474 44 78 telefonunu doğruluyor. Resmi sitede menü kategorileri ve ürün tanıtımları bulunmasına rağmen fiyatlı menü yayınlanmıyor; son bir yıl fiyatlı exact ürün listesi doğrulanamadı. **Override eklenmedi; strict HOLD**.
