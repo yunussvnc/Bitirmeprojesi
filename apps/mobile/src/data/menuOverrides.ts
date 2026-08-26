@@ -92015,6 +92015,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Sultaniye Soslu Tavuk Döner Dürüm", "price": "230 TL", "category": "Tavuk Dönerler" }
     ]
   },
+  "6436": {
+    "name": "Kebapçı Bedri Usta",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/crgp/kebapci-bedri-usta-crgp",
+    "sourceName": "Güncel Yemeksepeti Karaköy vendor menüsü; Bedri Usta resmi Karaköy duyurusu ile Emekyemez Mah. Tersane Cd. No:100 / +90 212 505 74 55 parity doğrulaması",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "Tavuk Çorbası", "price": "320 TL", "category": "Çorbalar" },
+      { "name": "Mercimek Çorbası", "price": "320 TL", "category": "Çorbalar" },
+      { "name": "Kelle Paça Çorbası", "price": "560 TL", "category": "Çorbalar" },
+      { "name": "Ezogelin Çorbası", "price": "320 TL", "category": "Çorbalar" },
+      { "name": "Lahmacun (Adet)", "price": "280 TL", "category": "Pideler & Lahmacunlar" },
+      { "name": "Fındık Lahmacun", "price": "160 TL", "category": "Pideler & Lahmacunlar" },
+      { "name": "Lahmacun (3 Adet)", "price": "640 TL", "category": "Pideler & Lahmacunlar" },
+      { "name": "Kaşarlı Pide", "price": "480 TL", "category": "Pideler & Lahmacunlar" },
+      { "name": "Kuşbaşılı Pide", "price": "640 TL", "category": "Pideler & Lahmacunlar" },
+      { "name": "Kıymalı Yumurtalı Pide", "price": "680 TL", "category": "Pideler & Lahmacunlar" },
+      { "name": "Sucuklu Kaşarlı Pide", "price": "640 TL", "category": "Pideler & Lahmacunlar" },
+      { "name": "Kıymalı Pide", "price": "640 TL", "category": "Pideler & Lahmacunlar" },
+      { "name": "Kuşbaşılı Kaşarlı Pide", "price": "680 TL", "category": "Pideler & Lahmacunlar" },
+      { "name": "Kuşgözü Pide", "price": "160 TL", "category": "Pideler & Lahmacunlar" },
+      { "name": "Izgara Köfte", "price": "640 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Tavuk Şiş", "price": "600 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Tavuk Pirzola", "price": "600 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Tavuk Kanat", "price": "640 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Adana Kebap", "price": "720 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Urfa Kebap", "price": "720 TL", "category": "Kebaplar & Izgaralar" }
+    ]
+  },
   "6439": {
     "name": "Antakya İşi Kebab & Sokak Lezzetleri",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/su4a/antakya-isi-sokak-lezzetleri",

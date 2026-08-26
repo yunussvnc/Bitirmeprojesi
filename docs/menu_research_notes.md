@@ -3212,3 +3212,7 @@ Adres/telefon parity’si kesin değil: Hentzer `24/C`, `0537 364 90 66`; Yelp/B
 ## DEAL COFFEE CO. ID 6437 HOLD
 Hentzer `Abbasağa, Yıldız Cd. 53/A, 34353 Beşiktaş/İstanbul`, `+90 212 703 23 24`; Yandex exact Yıldız Cad. 53A ve aynı telefonu doğruluyor. Canlı Yemeksepeti `d2yr` vendoru güncel fiyatlı kahve ve atıştırmalık menüsü sunuyor, ancak vendor sayfasında exact Abbasağa adres/telefon görünmüyor. Resmi deal.com.tr sitesi online kahve/paket satış sitesi, mağaza menüsü değil. Zorunlu vendor-şube parity kesinleşmediği için **override eklenmedi; strict HOLD.**
 Kaynaklar: https://deal.com.tr/ ; https://yandex.com/maps/org/deal_coffee/175531192565/ ; https://www.yemeksepeti.com/en/restaurant/d2yr/deal-coffee
+
+## KEBAPÇI BEDRİ USTA ID 6436 ACCEPTED
+Hentzer `Emekyemez Mah., Tersane Caddesi, Perşembe Pazarı Cd. No:100, 34421 Beyoğlu/İstanbul`, telefon `+90 212 505 74 55`. Bedri Usta’nın resmi Karaköy duyurusu bu adresi ve telefonu yayımlıyor; Yandex aynı telefonla yakın Tersane Cad. kaydını gösteriyor. Canlı Yemeksepeti `crgp` menüsünden 20 benzersiz çorba, pide/lahmacun ve kebap ürünü seçildi; içecek ve poşet kalemleri eklenmedi. **Override kabul edildi.**
+Kaynaklar: https://www.yemeksepeti.com/en/restaurant/crgp/kebapci-bedri-usta-crgp ; https://www.instagram.com/p/DS7rJpjiLp9/ ; https://bedriusta.com/iletisim/ ; https://yandex.com.tr/maps/org/kebapci_bedri_usta/145370614921/
