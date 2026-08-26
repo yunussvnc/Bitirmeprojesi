@@ -2374,3 +2374,6 @@ Hentzer kaydı `Kanlıca, Hacı Muhittin Sk. No:55, 34810 Beykoz/İstanbul`, tel
 
 ## MOSTAR DÖNER BAYRAMPAŞA ID 6707 HOLD
 Hentzer kaydı `Muratpaşa, Cicoz Yolu Cd. No:155/C, 34040 Bayrampaşa/İstanbul`, telefon `+90 506 277 87 87`. İstanbul Servis Listesi aynı adres ve telefonu destekliyor; ancak Yandex’in aktif kaydı aynı telefonla `Muratpaşa Mah. Orhangazi Sok. No:1` adresini ve “Gazete bayi” kategorisini gösteriyor. Exact branch adres parity’si sağlanamadığı ve son bir yıl fiyatlı menü bulunamadığı için **override eklenmedi; strict HOLD**.
+
+## FIVE O'CLOCK ACARKENT ID 6706 HOLD
+Hentzer kaydı `Acarlar, 3. Cd. No:29, 34800 Beykoz/İstanbul`, telefon `+90 216 485 22 11`. Five O'Clock resmi sitesi Acarkent, 3. Cadde, T29 Beykoz ve aynı sabit hattı yayınlıyor; resmi Instagram da Acarkent hattını doğruluyor. Ancak resmi site/şube sayfasında son bir yıl içinde doğrulanabilir ürün-fiyat menüsü bulunamadı; mevcut içerik ürün isimleri ve işletme tanıtımı seviyesinde kaldı. **Override eklenmedi; strict HOLD**.
