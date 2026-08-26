@@ -2290,3 +2290,6 @@ Hentzer kaydı `Barış, Bestekar Sk. Kule Çarşı No:2A/6,7, 34000 Beylikdüz�
 
 ## YAKAMOZ KANLICA BALIKÇISI BEYKOZ ID 6735 HOLD
 Hentzer kaydı `Kanlıca, Halide Edip Adıvar Cd. 1A, 34810 Beykoz/İstanbul`, telefon `+90 216 331 00 13`. Nasilbiryer, Corner ve işletmenin resmi Instagram hesabı aynı Kanlıca adres/telefonu destekliyor; 2026 sosyal içerikleri faaliyeti doğruluyor. Ancak 2026 paylaşımlarında fiyatlar değişken denilerek rakamsal ürün listesi verilmemiş; bulunan eski balık kokoreç fiyatı 2011 tarihli ve kullanılamaz. **Override eklenmedi; strict HOLD**.
+
+## COFFEE-IN MUNCHIES BEYLİKDÜZÜ ID 6734 HOLD
+Hentzer kaydı `Barış, İzmir Cd. No:18 D:F, 34520 Beylikdüzü/İstanbul`, telefon alanı `null`. Markanın resmi Beylikdüzü şube sayfası aynı adresi ve `+90 531 084 59 35` telefonunu doğruluyor; 2025-2026 sosyal içerikleri de şubeyi destekliyor. Ancak Hentzer’de telefon bulunmadığı için %100 phone parity kurulamadı ve exact şubeye ait erişilebilir güncel fiyatlı menü bulunamadı. **Override eklenmedi; strict HOLD**.
