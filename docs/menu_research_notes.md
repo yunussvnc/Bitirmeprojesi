@@ -2115,3 +2115,6 @@ Hentzer kaydı: `Etiler, İncesu Sk. No:5A, 34337 Beşiktaş/İstanbul, Türkiye
 
 ## ÇAKMAK KAHVALTI SALONU ID 6792 HOLD
 Hentzer kaydı `Sinanpaşa, Çelebi Oğlu Sk. No:6, 34353 Beşiktaş/İstanbul, Türkiye`, telefon `+90 212 227 04 85`. Culinary Backstreets kaydı No:6 ve aynı telefonu doğruluyor; ancak Yelp, Bulurum, Cornucopia ve Adresci kayıtları aynı telefonu No:8 adresiyle veriyor. Ayrıca bulunan fiyatlı sosyal medya paylaşımı 31.12.2024 fiyatlarını belirtiyor ve mevcut tarihte bir yıldan eski; 2026 tarihli paylaşımda fiyat listesi yok. %100 adres eşleşmesi ve son bir yıl fiyat doğrulaması sağlanamadığı için **override eklenmedi; strict HOLD**.
+
+## HAYRİ USTA OCAKBAŞI BEYLİKDÜZÜ ID 6791 HOLD
+Hentzer kaydı `Adnan Kahveci Mah. Osmanlı Cad, Beyaz Palas Sitesi, Büyükşehir, Beylikdüzü Cd. No:3 No:63, 34528 Beylikdüzü/İstanbul`, telefon `+90 212 743 63 63`. Waze ve işletmenin Facebook sonucu aynı Beykent şubesi ve telefonu destekliyor; ancak Yandex kaydı işletmeyi artık faal değil olarak gösteriyor. Beylikdüzü Instagram hesabındaki menü fiyatları eski ve tarih doğrulaması yetersiz; arama sonuçlarındaki 2026 kampanya fiyatı tam menü/fiyat listesi olarak doğrulanamadı. Güncel, tam ve fiyatlı menü ile faal durum %100 doğrulanamadığı için **override eklenmedi; strict HOLD**.
