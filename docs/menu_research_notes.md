@@ -2470,3 +2470,6 @@ Hentzer kaydı `Cumhuriyet, Ege Sokağı, 34520 Beylikdüzü/İstanbul`, telefon
 
 ## ÇİĞ KÖFTECİ SAİT USTA BEYKOZ ID 6675 HOLD
 Hentzer kaydı `Gümüşsuyu, Gümüşsuyu Cd. No:17/A, 34820 Beykoz/İstanbul`, telefon `+90 552 719 93 34`. Kaciyor, Yandex ve arama sonuçları adres/telefonu destekliyor; Yemeksepeti’nde fiyatlı ürünler mevcut. Ancak Yandex’in aynı adres/telefonlu kaydı işletmeyi `Artık faal değil` olarak işaretliyor. Faal durum çelişkisi nedeniyle güncel menü güvenle uygulanamadı. **Override eklenmedi; strict HOLD**.
+
+## THALES BISTRO BEŞİKTAŞ ID 6674 HOLD
+Hentzer kaydı `Sinanpaşa, Köyiçi Cd. No:10, 34353 Beşiktaş/İstanbul`, telefon `+90 212 327 27 20`. Yandex ve Apple Maps Köyiçi No:10’u ve telefonu destekliyor; ancak işletmenin dijital menü sayfası Mumcu Bakkal Sokağı No:10, resmi site No:5-7 adresini gösteriyor. Menü Haritası’nda fiyatlı ürünler bulunsa da exact adres birimi kaynaklar arasında çelişkili. **Override eklenmedi; strict HOLD**.
