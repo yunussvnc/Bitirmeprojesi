@@ -2987,3 +2987,7 @@ Kaynaklar: https://www.yemeksepeti.com/restaurant/qz9j/sultaniye-doner-and-kofte
 
 ## PUUFU BEYLİKDÜZÜ ID 6507 HOLD
 Hentzer `Kavaklı, Yeşilyurt Cd. Demir Country Sitesi F/94, 34520 Beylikdüzü/İstanbul`, telefon `+90 534 709 20 91`. Resmi PUUFU mağazalar sayfası, Yandex ve resmi Instagram exact şubeyi doğruluyor. Ancak resmi QR menü Metropol şubesine ait; Yemeksepeti’nde görülen `Yeşilyurt Cd. No:17` vendoru exact F/94 değildir ve diğer PUUFU vendorlarının branch parity’si kanıtlanamadı. Exact F/94 için son bir yıl 20 ürünlük fiyatlı menü doğrulanamadığından **override eklenmedi; strict HOLD**.
+
+## PEANUT WAFFLE BELGIUM BEYLİKDÜZÜ ID 6506 ACCEPTED
+Hentzer `Semerkand Line Sitesi, Barış, Mehmetçik Cd. No:13 1/9, 34520 Beylikdüzü/İstanbul`, telefon `+90 532 513 76 41`. Restoranim, Restaurant Guru ve Yandex adres/telefonu destekliyor. Yemeksepeti exact g90r vendor HTML’i `Barış Mah. Mehmetçik Cad. Semerkand Line Sitesi 1/9 No:13` adresini yayımlıyor ve güncel fiyatlı 22 waffle + bowl menüsü sunuyor; son güncel yorumlar 26.08.2026. 20 benzersiz waffle/bowl gıda ürünü eklendi; ekstra, sos, içecek ve Popular tekrarları dışlandı. **Override kabul edildi.**
+Kaynaklar: https://www.yemeksepeti.com/en/restaurant/g90r/peanut-waffle-belgium-g90r ; https://restoranim.net/istanbul/beylikduzu/tatlici/peanut-waffle-belgium-beylikduzu ; https://restaurantguru.com/Peanut-Waffle-Belgium-Beylikduzu-Buyukcekmece ; https://yandex.com/maps/org/peanut_waffle_belgium_beylikd_z_/144375953112/

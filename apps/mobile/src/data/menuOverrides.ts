@@ -91652,6 +91652,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Çilekli Frappe", "price": "144 TL", "category": "Soğuk İçecekler" }
     ]
   },
+  "6506": {
+    "name": "Peanut Waffle Belgium Beylikdüzü",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/g90r/peanut-waffle-belgium-g90r",
+    "sourceName": "Güncel Yemeksepeti exact Barış Mah. Mehmetçik Cad. Semerkand Line Sitesi 1/9 No:13 vendor menüsü; Restoranim/Restaurant Guru ve Yandex ile adres-telefon parity doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Special Waffle", "price": "400 TL", "category": "Waffles" },
+      { "name": "Serotonin", "price": "430 TL", "category": "Waffles" },
+      { "name": "Milk & White Chocolate & Strawberry Waffle", "price": "335 TL", "category": "Waffles" },
+      { "name": "Milk & White Chocolate Banana Waffle", "price": "325 TL", "category": "Waffles" },
+      { "name": "Red Passion", "price": "390 TL", "category": "Waffles" },
+      { "name": "White Chocolate Banana Strawberry Waffle", "price": "340 TL", "category": "Waffles" },
+      { "name": "Black Trouble", "price": "390 TL", "category": "Waffles" },
+      { "name": "Milk Chocolate Banana Waffle", "price": "320 TL", "category": "Waffles" },
+      { "name": "White Chocolate Banana Waffle", "price": "320 TL", "category": "Waffles" },
+      { "name": "White Chocolate Strawberry Waffle", "price": "330 TL", "category": "Waffles" },
+      { "name": "Milk Chocolate Banana Strawberry Waffle", "price": "340 TL", "category": "Waffles" },
+      { "name": "Milk White Chocolate Waffle (Without Fruit)", "price": "270 TL", "category": "Waffles" },
+      { "name": "Caramel Peanut", "price": "370 TL", "category": "Waffles" },
+      { "name": "Milk Chocolate Waffle (Without Fruit)", "price": "260 TL", "category": "Waffles" },
+      { "name": "Carbohydrate Waffle", "price": "470 TL", "category": "Waffles" },
+      { "name": "Dubai Chocolate Waffle", "price": "600 TL", "category": "Waffles" },
+      { "name": "Kızıl tutku Bowl", "price": "400 TL", "category": "Bowls" },
+      { "name": "Special Bowl", "price": "410 TL", "category": "Bowls" },
+      { "name": "Serotonin Bowl", "price": "420 TL", "category": "Bowls" },
+      { "name": "Klasik Waffle Bowl", "price": "340 TL", "category": "Bowls" }
+    ]
+  },
   "6508": {
     "name": "Sultaniye Döner Köfte",
     "sourceUrl": "https://www.yemeksepeti.com/restaurant/qz9j/sultaniye-doner-and-kofte",
