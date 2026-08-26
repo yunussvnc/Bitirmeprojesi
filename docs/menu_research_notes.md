@@ -2889,3 +2889,6 @@ Hentzer `Büyükşehir, Cumhuriyet Cd. No:50 D:51-52, 34520 Beylikdüzü`, telef
 
 ## ŞAİR LEYLA BISTRO ID 6538 HOLD
 Hentzer `Sinanpaşa Mahallesi Köyiçi Cad, Şair Leyla Sk. No:4, 34353 Beşiktaş`, telefon `+90 212 259 29 24`; resmi site/Facebook/Yelp/Wanderlog exact şubeyi doğruluyor. Ancak resmi menüde ürün bazlı fiyatlar erişilebilir değil ve son bir yıl fiyatlı menü bulunamadı. **Override eklenmedi; strict HOLD.**
+
+## PERA MEYHANE WORLD POINT ID 6537 HOLD
+Hentzer `Pınartepe, Zerrin Sk., 34500 Büyükçekmece`, telefon `+90 212 872 72 17`. Telefon bazı kaynaklarla eşleşse de Yandex işletmenin farklı Akyurt Cad. adresindeki kaydını artık faal değil olarak gösteriyor; exact Hentzer adresi ve güncel faaliyet doğrulanamadı. **Override eklenmedi; strict HOLD.**
