@@ -90844,5 +90844,33 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Dondurma 3 Top", "price": "210 TL", "category": "Dondurma" },
       { "name": "Dondurma 1 Kg", "price": "1300 TL", "category": "Dondurma" }
     ]
+  },
+  "6637": {
+    "name": "BARNATHAN İSTANBUL ROOF",
+    "sourceUrl": "https://www.meroddi.com/restoranlar/barnathan-roof/dijital-menu?lang=tr&type=day",
+    "sourceName": "Meroddi/Barnathan resmi Roof dijital menüsü; fiyatlar canlı menüde gösteriliyor",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Lokum Bonfile", "price": "1950 TL", "category": "Ana Yemekler" },
+      { "name": "Antrikot Izgara", "price": "1800 TL", "category": "Ana Yemekler" },
+      { "name": "Mantar ve Şarap Soslu Antrikot", "price": "1800 TL", "category": "Ana Yemekler" },
+      { "name": "Izgara Köfte", "price": "1250 TL", "category": "Ana Yemekler" },
+      { "name": "Şefin Seçimi - Barnathan Bonfile Special", "price": "1850 TL", "category": "Ana Yemekler" },
+      { "name": "Dallas Steak", "price": "2350 TL", "category": "Ana Yemekler" },
+      { "name": "Füme Et Dolgulu Tavuk Sarma", "price": "1150 TL", "category": "Ana Yemekler" },
+      { "name": "Teriyaki Glazeli Izgara Somon", "price": "1600 TL", "category": "Ana Yemekler" },
+      { "name": "Pideli Dana Bonfile", "price": "1600 TL", "category": "Ana Yemekler" },
+      { "name": "Teriyaki Glazeli Izgara Levrek", "price": "1600 TL", "category": "Ana Yemekler" },
+      { "name": "Beef Stroganoff", "price": "1660 TL", "category": "Ana Yemekler" },
+      { "name": "Tavuklu Fajita", "price": "1050 TL", "category": "Ana Yemekler" },
+      { "name": "Bonfile Fajita", "price": "1600 TL", "category": "Ana Yemekler" },
+      { "name": "Karışık Fajita", "price": "1450 TL", "category": "Ana Yemekler" },
+      { "name": "Üç Mantar Soslu Bonfile", "price": "1800 TL", "category": "Ana Yemekler" },
+      { "name": "Izgara Hindi Fileto", "price": "1000 TL", "category": "Ana Yemekler" },
+      { "name": "Çedarlı Piliç Pirzola", "price": "1000 TL", "category": "Ana Yemekler" },
+      { "name": "Füme Kaburga Burger", "price": "1220 TL", "category": "Quesadilla & Burgerler" },
+      { "name": "Şefin Seçimi - Dana Şaşlık Chimichurri", "price": "1750 TL", "category": "Ana Yemekler" },
+      { "name": "Gurme Peynir Tabağı", "price": "1950 TL", "category": "Başlangıçlar" }
+    ]
   }
 };

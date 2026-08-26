@@ -2581,3 +2581,6 @@ Hentzer kaydı `Yıldırım, Millet Cd. No:163, 34045 Bayrampaşa/İstanbul`, te
 
 ## SLADOLED DONDURMA YILDIRIM ID 6638 ACCEPTED
 Hentzer kaydı `Yıldırım, Şht. Kamil Balkan Cd. No:51/B, 34045 Bayrampaşa/İstanbul`, telefon `+90 543 866 72 75`. Sladoled resmi Facebook şube paylaşımı 27.09.2025 tarihinde aynı No:51/B adresi ve telefonu doğruluyor; resmi sosyal fiyat paylaşımında 1/2/3 top ve 1 kg dondurma fiyatları yer alıyor. Fiyat paylaşımı 26.08.2025 tarihli olup son bir yıl sınırındadır; 4 ürün eklendi.
+
+## BARNATHAN İSTANBUL ROOF ID 6637 ACCEPTED
+Hentzer kaydı `Şahkulu, Tımarcı Sk. No:1, 34421 Beyoğlu/İstanbul`, telefon `+90 850 360 06 27`. Meroddi’nin resmi Barnathan sayfası aynı No:1 Galata/Beyoğlu adresini ve telefonu doğruluyor; resmi Roof dijital menüsünde 20 güncel fiyatlı gıda ürünü canlı olarak gösteriliyor. Ürünler gündüz menüsündeki ana yemek, burger ve başlangıç kategorilerinden alındı.
