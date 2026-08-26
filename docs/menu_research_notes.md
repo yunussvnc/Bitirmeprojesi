@@ -2840,3 +2840,6 @@ Hentzer `İncirköy, Saip Molla Cd. No:67, 34800 Beykoz`, telefon `+90 533 208 9
 
 ## FISH PORT RESTAURANT ID 6552 HOLD
 Hentzer `Rüstem Paşa Mah. Yeni Galata Köprüsü altı, Eminönü Haliç tarafı No:1, D:2, 34116 Fatih`, telefon `+90 532 692 81 75`. Resmi site No:1-2 ve aynı telefonu doğruluyor. Resmi menü kategorileri mevcut, fakat ürün bazlı güncel TL fiyatları yayımlanmıyor. **Override eklenmedi; strict HOLD.**
+
+## WALKON COFFEE ID 6551 HOLD
+Hentzer `Abbasağa, Salnameci Sk. No:43A, 34353 Beşiktaş`, telefon `+90 535 714 72 10`; resmi Instagram/Yandex/Facebook eşleşiyor. Bulunan Rito menüsü WalkOn’a değil David's Kitchen & Coffee’ye ait (Bursa telefonu içeriyor). Exact şubeye ait son bir yıl fiyatlı menü yok. **Override eklenmedi; strict HOLD.**
