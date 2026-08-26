@@ -2683,3 +2683,6 @@ Hentzer kaydı `Adnan Kahveci, Konak Cd. No:21, 34528 Beylikdüzü/İstanbul`, t
 
 ## İBB GÜRPINAR SU ÜRÜNLERİ HALİ ID 6604 HOLD
 Hentzer kaydı `Dereağzı, Deniz Yolu Cad. Gürpınar Su Ürünleri Hal Kompleksi 28/1, 34130 Beylikdüzü/İstanbul`, telefon `+90 212 867 64 00`. İSYÖN resmi işletme sayfası aynı kurumu, `Deniz Yolu Cad. No:28` adresini ve telefonu doğruluyor; Yandex de aynı adres/telefonu listeliyor. Ancak bu kayıt restoran değil, kamuya ait su ürünleri hal/işletme tesisidir. Bulunan fiyatlar restoran menüsü değil, toptan/hal fiyat listesidir; son bir yıl içinde kullanıcıya sunulacak ürün bazlı restoran menüsü bulunamadı. **Override eklenmedi; strict HOLD.**
+
+## TARİHİ KAFKAS BALIKÇISI ID 6603 HOLD
+Hentzer kaydı `Anadolu Kavağı, Yalı Çk., 34825 Beykoz/İstanbul`, telefon `+90 537 370 32 34`. Exact isim/adres kaynakları mevcut olsa da Yandex işletme kaydı `+90 532 282 3609`, Maptons `+90 553 010 47 15` ve Yelp farklı telefonlar yayımlıyor; Hentzer telefonu ile %100 phone parity sağlanamadı. Resmi Instagram güncel içerik paylaşsa da son bir yıl içinde doğrulanabilir ürün bazlı fiyatlı menü bulunamadı. **Override eklenmedi; strict HOLD.**
