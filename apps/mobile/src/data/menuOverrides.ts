@@ -90776,5 +90776,33 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Caffe Coco", "price": "320 TL", "category": "Special Hot Coffees" },
       { "name": "Caffe Cannelle", "price": "320 TL", "category": "Special Hot Coffees" }
     ]
+  },
+  "6643": {
+    "name": "NUSR-ET STEAKHOUSE ETİLER",
+    "sourceUrl": "https://qr.finedinemenu.com/Afezl6trn?table=sample",
+    "sourceName": "Nusr-Et resmi Etiler QR menüsü; fiyatlar 16.05.2026 tarihinden itibaren uygulanıyor",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Dana Carpaccio", "price": "1900 TL", "category": "Başlangıçlar" },
+      { "name": "Dana Füme", "price": "1250-2950 TL", "category": "Başlangıçlar" },
+      { "name": "Füme Rib Eye", "price": "2350 TL", "category": "Başlangıçlar" },
+      { "name": "Dana Tartar", "price": "2050 TL", "category": "Başlangıçlar" },
+      { "name": "Nusr-Et Mangal Sucuk", "price": "1050 TL", "category": "Başlangıçlar" },
+      { "name": "Burrata", "price": "1600 TL", "category": "Başlangıçlar" },
+      { "name": "Kemik İliği", "price": "780 TL", "category": "Başlangıçlar" },
+      { "name": "Vejetaryen Tabak", "price": "950 TL", "category": "Başlangıçlar" },
+      { "name": "Roka Salatası", "price": "650-890 TL", "category": "Salatalar" },
+      { "name": "Tulum Peynirli Salata", "price": "680-940 TL", "category": "Salatalar" },
+      { "name": "Dana Kaburga - Asado", "price": "5300-13500 TL", "category": "Etler" },
+      { "name": "Dana Antrikot", "price": "2650 TL", "category": "Etler" },
+      { "name": "Dana Lokum", "price": "2600 TL", "category": "Dana Bonfileler" },
+      { "name": "Dana Bonfile", "price": "2600-2700 TL", "category": "Dana Bonfileler" },
+      { "name": "Dana Şaşlık", "price": "2500 TL", "category": "Dana Bonfileler" },
+      { "name": "Nusr-Et Kobe", "price": "4300 TL", "category": "Steakler" },
+      { "name": "New York Steak", "price": "3200 TL", "category": "Steakler" },
+      { "name": "Tomahawk", "price": "4900-5250 TL", "category": "Steakler" },
+      { "name": "Nusr-Et Burger", "price": "1150-1900 TL", "category": "Burgerler" },
+      { "name": "Havuç Dilim Baklava", "price": "750-1500 TL", "category": "Tatlılar" }
+    ]
   }
 };
