@@ -2701,3 +2701,6 @@ Hentzer kaydı `Büyükşehir, Cumhuriyet Cd. No:21, 34520 Beylikdüzü/İstanbu
 
 ## CADI'NIN EVİ BEYLİKDÜZÜ ID 6598
 Hentzer kaydı `Barış, E-5 Yanyolu Westside2 Çarşı No:28/50, 34520 Beylikdüzü/İstanbul`, telefon `+90 212 877 33 44`. Restoranim.net exact adres ve telefonu aynen doğruluyor. Resmi QR menüsü fiyat değişim tarihini `02.02.2026` olarak yayımlıyor; canlı Yemeksepeti Beylikdüzü vendorından 20 benzersiz tatlı/yiyecek ürünü seçildi, içecekler ve poşet hariç tutuldu. **Override kabul edildi; 20 ürün.** Kaynaklar: https://qr.cadininevi.com.tr/ ; https://www.yemeksepeti.com/en/restaurant/bkdu/cadinin-evi-bkdu ; https://restoranim.net/istanbul/beylikduzu/cikolata/cadi-nin-evi-beylikduzu
+
+## BAHANE COFFEE BAYRAMPAŞA ID 6597 HOLD
+Hentzer kaydı `Yenidoğan, Numunebağı Cd. No:36, 34040 Bayrampaşa/İstanbul`, telefon `+90 535 703 83 60`. Telefon Yandex kayıtlarıyla eşleşiyor; ancak adresler çelişkili: Yandex işletme/panorama `Abdi İpekçi Cad. 32`, resmi Instagram `Abdi İpekçi Caddesi 34/A`, Hentzer `Numunebağı Cd. 36` veriyor. Exact branch address parity’si sağlanamadı. Bulunan menü sonuçları da farklı Bahane/Cafe Bahane işletmelerine ait veya ürün-fiyat listesi sunmuyor. **Override eklenmedi; strict HOLD.**
