@@ -2533,3 +2533,6 @@ Hentzer kaydı `Türkali Mahallesi Ihlamurdere Caddesi, Türkali, Yeniyol Sokak 
 
 ## BABEN BEYKOZ ID 6653 HOLD
 Hentzer kaydı `Çiftlik Mahallesi Diyar Çıkmazı, Çiftlik, Fatih Sultan Mehmet Cd. No:1, 34830 Beykoz/İstanbul`, telefon `+90 532 231 52 71`. Nasilbiryer, Restoranim ve eski resmi sosyal paylaşımı adres/telefonu destekliyor; ancak bulunan fiyatlı sınırsız kahvaltı paylaşımı 26.08.2023 tarihli ve son bir yıl koşulunu karşılamıyor. 2025–2026 dönemine ait doğrulanabilir fiyatlı exact menü bulunamadı. **Override eklenmedi; strict HOLD**.
+
+## MOC COFFEE BEYLİKDÜZÜ PERLAVİSTA ID 6652 ACCEPTED
+Hentzer kaydı `Perlavista AVM Rezidans, Adnan Kahveci, Yavuz Sultan Selim Blv. No:1C D:81, 34000 Beylikdüzü/İstanbul`, telefon `+90 552 107 75 05`. MOC resmi şube sayfası Perlavista MOC için `Adnan Kahveci Mahallesi, Yavuz Sultan Selim Bulvarı No:1 C 81` adresini doğruluyor; Yandex ve Restoranim aynı şubeyi ve 0552 107 75 05 telefonunu gösteriyor. Pardon exact şube menüsü son fiyat güncellemesini 20.01.2026 olarak belirtiyor; Standard Coffee ve Hot Drinks kategorilerinden 20 fiyatlı ürün eklendi.

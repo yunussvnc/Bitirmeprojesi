@@ -90681,5 +90681,33 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     "items": [
       { "name": "Cağ Kebabı (1 Şiş)", "price": "300 TL", "category": "Cağ Kebap" }
     ]
+  },
+  "6652": {
+    "name": "MOC COFFEE BEYLİKDÜZÜ PERLAVİSTA",
+    "sourceUrl": "https://webmenu.pardonapp.co/en/moc-coffee-roastery-beylikduzu/menu/standard-coffee",
+    "sourceName": "20.01.2026 fiyat güncellemeli Pardon exact Perlavista menüsü; MOC resmi şube sayfası ve Yandex ile adres-telefon doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Espresso", "price": "125 TL", "category": "Standard Coffee" },
+      { "name": "Espresso Macchiato", "price": "170 TL", "category": "Standard Coffee" },
+      { "name": "Doppio", "price": "160 TL", "category": "Standard Coffee" },
+      { "name": "Cortado", "price": "175 TL", "category": "Standard Coffee" },
+      { "name": "Cafe Latte", "price": "185 TL", "category": "Standard Coffee" },
+      { "name": "Flat White", "price": "190 TL", "category": "Standard Coffee" },
+      { "name": "Americano", "price": "165 TL", "category": "Standard Coffee" },
+      { "name": "Cappuccino", "price": "185 TL", "category": "Standard Coffee" },
+      { "name": "Australian Cappuccino", "price": "190 TL", "category": "Standard Coffee" },
+      { "name": "Mocha", "price": "195 TL", "category": "Standard Coffee" },
+      { "name": "Turkish Coffee", "price": "110 TL", "category": "Standard Coffee" },
+      { "name": "Dibek Coffee", "price": "110 TL", "category": "Standard Coffee" },
+      { "name": "Menengic Coffee", "price": "110 TL", "category": "Standard Coffee" },
+      { "name": "Double Turkish Coffee", "price": "190 TL", "category": "Standard Coffee" },
+      { "name": "White Mocha", "price": "195 TL", "category": "Standard Coffee" },
+      { "name": "Caramel Macchiato", "price": "200 TL", "category": "Standard Coffee" },
+      { "name": "Coco Mocha", "price": "240 TL", "category": "Hot Drinks" },
+      { "name": "Hot Chocolate", "price": "200 TL", "category": "Hot Drinks" },
+      { "name": "White Hot Chocolate", "price": "200 TL", "category": "Hot Drinks" },
+      { "name": "Earl Grey", "price": "175 TL", "category": "Hot Drinks" }
+    ]
   }
 };
