@@ -2798,3 +2798,6 @@ Hentzer kaydı `Anadolu Hisarı, Körfez Cd. No:26 D:B, 34810 Beykoz/İstanbul`,
 
 ## PASTA TO GO AKARETLER ID 6566 HOLD
 Hentzer kaydı `Vişnezade, Şair Nedim Cd. No:47/B, 34353 Beşiktaş/İstanbul`; telefon alanı boş. Restoranim exact adresi doğruluyor ve açıkça `Telefon yok` gösteriyor; Yandex 47B konumunu destekliyor. Yemeksepeti’nde Pasta To Go fiyatları bulunsa da Hentzer kaydının phone parity’si sağlanamadığı için exact şube menüsü güvenle eşleştirilemedi. **Override eklenmedi; strict HOLD.**
+
+## SYMPETSHOP BAYRAMPAŞA ID 6565 HOLD
+Hentzer kaydı `İsmet Paşa, İsmet Paşa Cd. No:31, 34030 Bayrampaşa/İstanbul`, telefon `+90 540 609 83 81`. Yandex, Patı Mahallesi ve resmi Instagram exact işletmeyi pet shop olarak doğruluyor; kedi/köpek maması ve evcil hayvan ürünleri satılıyor. İnsan gıda restoranı veya uygun menü bulunmadığından **kapsam dışı; override eklenmedi, strict HOLD**.
