@@ -90748,5 +90748,33 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Patatesli Börek (500 gr.)", "price": "460 TL", "category": "Kiloluk Börekler" },
       { "name": "Peynirli Börek (500 gr.)", "price": "400 TL", "category": "Kiloluk Börekler" }
     ]
+  },
+  "6645": {
+    "name": "6OZ COFFEE & CAKE HOUSE BEYLİKDÜZÜ",
+    "sourceUrl": "https://webmenu.pardonapp.co/en/6oz-coffee/menu/hot-coffees",
+    "sourceName": "Pardon exact Beylikdüzü menüsü; resmi 6oz sosyal hesabı ve Yandex/Hentzer ile adres-telefon doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "6oz. Special", "price": "380 TL", "category": "Hot Coffees" },
+      { "name": "Her Zamankinden", "price": "270 TL", "category": "Hot Coffees" },
+      { "name": "Caffe Latte", "price": "250 TL", "category": "Hot Coffees" },
+      { "name": "Cappuccino", "price": "250 TL", "category": "Hot Coffees" },
+      { "name": "Americano", "price": "230 TL", "category": "Hot Coffees" },
+      { "name": "Vanilla Latte", "price": "290 TL", "category": "Hot Coffees" },
+      { "name": "Caramel Macchiato", "price": "320 TL", "category": "Hot Coffees" },
+      { "name": "Mocha", "price": "300 TL", "category": "Hot Coffees" },
+      { "name": "White Chocolate Mocha", "price": "320 TL", "category": "Hot Coffees" },
+      { "name": "Toffee Nut Latte", "price": "300 TL", "category": "Hot Coffees" },
+      { "name": "Flat White", "price": "280 TL", "category": "Hot Coffees" },
+      { "name": "Cortado", "price": "270 TL", "category": "Hot Coffees" },
+      { "name": "Espresso", "price": "200 TL", "category": "Hot Coffees" },
+      { "name": "Espresso Macchiato", "price": "230 TL", "category": "Hot Coffees" },
+      { "name": "Espresso Con Panna", "price": "230 TL", "category": "Hot Coffees" },
+      { "name": "Filter Coffee", "price": "210 TL", "category": "Hot Coffees" },
+      { "name": "Caramel Filter Coffee", "price": "250 TL", "category": "Hot Coffees" },
+      { "name": "Caffe Arandanos", "price": "320 TL", "category": "Special Hot Coffees" },
+      { "name": "Caffe Coco", "price": "320 TL", "category": "Special Hot Coffees" },
+      { "name": "Caffe Cannelle", "price": "320 TL", "category": "Special Hot Coffees" }
+    ]
   }
 };

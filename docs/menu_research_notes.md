@@ -2554,3 +2554,6 @@ Hentzer kaydı `Yavuz Selim, Çavuşbaşı Cumhuriyet Cd. No:78, 34830 Beykoz/İ
 
 ## ÖZEN BÖREK BAYRAMPAŞA ID 6646 ACCEPTED
 Hentzer kaydı `Kartaltepe, Ordu Cd. No:165, 34040 Bayrampaşa/İstanbul`, telefon `+90 212 437 30 86`. Yandex, Restoranim ve Mekanlar aynı adres/telefonu doğruluyor. Yemeksepeti vendor `mdt4` sayfası `Ordu Caddesi, No:165` adresini ve canlı fiyatlı menüyü gösteriyor; 2026 tarihli müşteri siparişleri aktifliği destekliyor. Popular carousel tekrarları ve Plastic Bag satırı dışlandı; 20 gıda ürünü eklendi.
+
+## 6OZ COFFEE & CAKE HOUSE BEYLİKDÜZÜ ID 6645 ACCEPTED
+Hentzer kaydı `Adnan Kahveci, Çalışlar Cd. No:10/9, 34528 Beylikdüzü/İstanbul`, telefon `+90 532 336 42 63`. Resmi 6oz Coffee Instagram hesabı telefon ve şubeyi destekliyor; Pardon sayfası Beylikdüzü 6oz Coffee exact menüsünü sunuyor, Yandex de aynı işletmeyi ve telefonu destekliyor. Pardon menüsündeki Hot Coffees ve Special Hot Coffees kategorilerinden 20 güncel fiyatlı ürün eklendi.
