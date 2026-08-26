@@ -2629,3 +2629,6 @@ Hentzer kaydı `Cumhuriyet, Derviş Eroğlu Cd. No:6, 34520 Beylikdüzü/İstanb
 
 ## MEYHANE YUNUS BÜYÜKÇEKMECE ID 6622 HOLD
 Hentzer kaydı `Pınartepe, 34500 Büyükçekmece/İstanbul`, telefon `+90 533 766 07 67`. Yandex kaydı aynı telefonu doğruluyor ancak adresi `Pınartepe Mah., Kirazlı Sok., 60` olarak veriyor; Hentzer’de sokak ve kapı numarası bulunmadığından exact adres parity’si kurulamadı. Güncel, ürün bazlı ve son bir yıl içinde fiyatlı menü doğrulanamadı. **Override eklenmedi; strict HOLD.**
+
+## MAKARİSTAN PİZZA&MAKARNA BEYLİKDÜZÜ ID 6621 HOLD
+Hentzer kaydı `Cumhuriyet Atatürk Bulvarı, Alya, Cumhuriyet, Dolunay Sitesi altı 27-1/B, 34520 Beylikdüzü/İstanbul`, telefon `+90 539 237 58 88`. Yandex aynı telefon ve Atatürk Bulvarı çevresini destekliyor; ancak Makaristan resmi şube sayfası Beylikdüzü şubesini `Alya Dolunay Sitesi Kapı No:27` ve `0505 870 07 87` olarak yayımlıyor. Resmi Beylikdüzü dijital menüsü ve Yemeksepeti fiyatları bulunsa da zorunlu telefon parity’si sağlanamadı. **Override eklenmedi; strict HOLD.**
