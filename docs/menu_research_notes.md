@@ -2172,3 +2172,6 @@ Hentzer kaydı `Ortaköy, Dereboyu Cd. No:149 A, 34347 Beşiktaş/İstanbul`, te
 
 ## AMAZONAS COFFEE ROASTERY ID 6773 HOLD
 Hentzer kaydı `Vişnezade, Süleyman Seba Cd. No:85/B, 34357 Beşiktaş/İstanbul`, telefon `+90 533 656 14 47`. Yandex ve CafeRadar aynı adres/telefonu destekliyor; ancak Yelp farklı bir kapı numarası ve telefon gösteriyor. İşletmenin 2026 sosyal içerikleri faaliyeti doğrulasa da erişilebilir kaynaklarda son bir yıl içinde ürün-fiyat listesi bulunamadı. %100 branch fiyat doğrulaması sağlanamadığı için **override eklenmedi; strict HOLD**.
+
+## DEFNE RESTORAN BEYLİKDÜZÜ ID 6772 HOLD
+Hentzer kaydı yalnızca `Cumhuriyet, 34528 Beylikdüzü/İstanbul`, telefon `+90 212 855 86 00` veriyor. Resmi sosyal ve işletme kaynakları telefonu doğrulasa da adresi `Adnan Kahveci Mah. Sayaca Cad. Selma Sokak` veya Apple Maps’te `Kışla Cd.` olarak gösteriyor; Hentzer kaydıyla %100 exact adres eşleşmesi kurulamadı. Resmi menü sayfası kategorileri listeliyor ancak erişilebilir fiyatlar ve tarih yok. Bu nedenle **override eklenmedi; strict HOLD**.
