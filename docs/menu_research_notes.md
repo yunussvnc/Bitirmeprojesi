@@ -2786,3 +2786,6 @@ Hentzer kaydı `Yıldırım, Şht. Kamil Balkan Cd. No:7, 34170 Bayrampaşa/İst
 
 ## SUSHI&SPICE AKARETLER ID 6570
 Hentzer kaydı `Sinanpaşa, Şair Nedim Cd. No:10, 34353 Beşiktaş/İstanbul`, telefon `+90 534 608 33 83`. Resmi Akaretler şube sayfası aynı adres ve telefonu yayımlıyor. Canlı Yemeksepeti exact Sushi & Spice vendor menüsünden 20 benzersiz gıda ürünü seçildi; içecek, poşet ve Popüler carousel tekrarları hariç tutuldu. **Override kabul edildi; 20 ürün.** Kaynaklar: https://www.sushiandspice.com/akaretler/ ; https://www.yemeksepeti.com/restaurant/iokb/sushi-and-spice
+
+## FALAFELS ISTANBUL BEŞİKTAŞ ID 6569 HOLD
+Hentzer kaydı `Cihannüma Mah., Yıldız, Muhtar Evvel Sk. Muhtar-ı Kıroğlu, 34349 Beşiktaş/İstanbul`, telefon `+90 530 883 66 40`. Resmi Falafels sitesi aynı konum bilgisini ancak `+90 534 899 96 95` telefonu ile veriyor; TripAdvisor No:8B, Yandex ise farklı bir telefon yayımlıyor. Resmi sitede fiyatlı menü yok, sosyal arama sonucu tam ve şubeye bağlanabilir fiyat listesi sağlamıyor. **Exact phone parity ve fiyat şartı sağlanamadığından override eklenmedi; strict HOLD.**
