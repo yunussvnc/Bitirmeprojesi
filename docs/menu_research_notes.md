@@ -3029,3 +3029,6 @@ Hentzer `Gümüşsuyu, Sultaniye Cd. No:52, 34437 Beykoz/İstanbul`, telefon ala
 
 ## VAN KAHVALTI BEŞİKTAŞ ID 6494 HOLD
 Hentzer `Sinanpaşa, Çelebi Oğlu Sk. No:35/A, 34353 Beşiktaş/İstanbul`, telefon `+90 532 472 86 43`. Resmi Instagram/Facebook, Restoranim ve Cybo exact adres/telefonu doğruluyor. Ancak Yemeksepeti’nde bulunan `Van Kahvaltı Evi` farklı ad/işletme olarak geçiyor ve bu Beşiktaş şubesiyle bağ kurulamadı; exact şube için son bir yıl fiyatlı menü doğrulanamadı. **Override eklenmedi; strict HOLD.**
+
+## CHIBS BURGER BEYLİKDÜZÜ ID 6493 HOLD
+Hentzer `Cumhuriyet, Onur Sk. 1B, 34520 Beylikdüzü/İstanbul`, telefon alanı boş. Resmi paylaşımlar No:1J/1E, Yandex No:1G gösteriyor; %100 exact kapı ve phone parity’si yok. Yemeksepeti fiyatlı olsa da exact Beylikdüzü şubesi doğrulanamadı. **Override eklenmedi; strict HOLD.**
