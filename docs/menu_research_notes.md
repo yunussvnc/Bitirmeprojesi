@@ -2753,3 +2753,6 @@ Hentzer kaydı `Ortaköy, Tabağın Bahçesi Sk. 1A, 34672 Beşiktaş/Üsküdar/
 
 ## KARAKULAK RESTORAN BEYKOZ ID 6581 HOLD
 Hentzer kaydı yalnızca `Dereseki, 34825 Beykoz/İstanbul` adresini veriyor; telefon alanı boş. Bulunan muhtemel Karakulak Dağ Restaurant kaynakları `Dereseki Mah. Sugözü Çıkmazı Sok. 6/A` veya `Karakulak Çıkmazı No:6` adreslerini ve `0536 924 38 48` / `0532 254 86 16` telefonlarını yayımlıyor. Hentzer kaydında telefon bulunmadığı ve exact işletme/şube parity’si kesinleşmediği için, ayrıca son bir yıl fiyatlı menü doğrulanamadığından **override eklenmedi; strict HOLD**.
+
+## DOLPHIN CAFE BEŞİKTAŞ ID 6580 HOLD
+Hentzer kaydı `Yıldız Mahallesi, Çırağan Cd. Osmanpaşa Mektebi Çıkmazı, Yıldız Sk. No:8 D:1, 34349 Beşiktaş/İstanbul`, telefon `+90 533 734 57 67`. Yandex aynı telefonu ancak `Çırağan Cad. 3B` adresini yayımlıyor; Hentzer’deki No:8 D:1 ile exact adres parity’si sağlanamadı. Bulunan diğer Dolphin Cafe menüleri farklı ülke/şehir işletmelerine ait; exact Beşiktaş şubesine ait son bir yıl fiyatlı menü doğrulanamadı. **Override eklenmedi; strict HOLD.**
