@@ -1863,3 +1863,27 @@ Restaurant Guru exact `Rüzgarlıbahçe, Ferit İnal Cd No:30` adresini gösters
 
 ## ANTEPLİOĞLU BAKSAN BAYRAMPAŞA ID 6878 kabulü
 Hentzer kaydı `Kocatepe, Kocatepe Cd. No:1, 34045 Bayrampaşa/İstanbul`, `+90 212 640 94 24`; Restoranim.net bağımsız kaydı adres ve telefonu exact doğruluyor. Yemeksepeti canlı vendorunda 26.08.2026 tarihinde 33 benzersiz tatlı/baklava/kuru pasta kaleminin fiyatı görüldü. Popüler carousel tekrarları ve poşet kalemi kapsam dışında bırakıldı. Vendor sayfada geçici olarak kapalı görünse de fiyat listesi erişilebilir; fiyat güncelliği ve exact şube eşleşmesi sağlandığı için **override kabul edildi**.
+
+## BIBLO CAFE ID 6877 HOLD
+Restoranim.net ve resmi sosyal profil exact `West İstanbul Marina, Marmara Mah., Yakuplu, 34524 Beylikdüzü/İstanbul` / `+90 850 201 1005` bilgisini doğruluyor. Restoranim kaydı işletmeyi şu an kapalı gösteriyor ve sadece genel ₺400–1.200 aralığı veriyor; ürün bazlı güncel menü yok. Restaurant Guru erişimi captcha/olağandışı trafikle engellendi. **HOLD**, override eklenmedi.
+
+## MIKEL COFFEE COMPANY AKARETLER ID 6876 HOLD
+Restaurant Guru ve kurumsal kaynaklar exact `Vişnezade, Süleyman Seba Cd. No:1, 34357 Beşiktaş/İstanbul` / `+90 212 272 32 32` bilgisini doğruluyor. Menü üç ay önce yüklenmiş olsa da görsel ve ürün fiyatları metin olarak erişilemiyor. **HOLD**, fiyatlar açıkça doğrulanamadığı için override eklenmedi.
+
+## CHOP BURGER ID 6875 HOLD
+İletMen QR kaydı Nüzhetiye Caddesi, Beşiktaş konumunu gösteriyor ancak telefon yok, sipariş kapalı ve Menüye Git içeriğinde fiyatlar yüklenmedi. Yandex kaydı da telefon belirtmiyor ve adresi 42B olarak farklılaştırıyor. **HOLD**, exact telefon ve güncel fiyat şartları sağlanmadı.
+
+## ANTIOCHIA CONCEPT ID 6874 HOLD
+Resmi Antiochia sitesi exact `Asmalımescit Mah. General Yazgan Sok. No:3, Beyoğlu/İstanbul` / `+90 212 244 08 20` bilgisini doğruluyor. Resmi `menu.php` ürün açıklamaları ve menü görseli içeriyor ancak ürün fiyatı ve revizyon tarihi yayınlamıyor. 06.07.2026 sosyal paylaşımındaki toplam tutar tam ürün-fiyat listesi değildir. **HOLD**, override eklenmedi.
+
+## BEYKOZ KORUSU ID 6873 HOLD
+Hentzer kaydında telefon bulunmuyor. Mekanlar.com menü sayfasında Beykoz Korusu Restaurant kaydı var ancak menü boş ve telefon/adres ayrıntısı yok; 2024 tarihli üçüncü taraf fiyatlar son bir yıl ve exact işletme koşullarını karşılamıyor. **HOLD**, override eklenmedi.
+
+## METİN USTA HAMSIKÖY SÜTLACI KAVACIK ID 6872 HOLD
+Resmi Hamsiköy Sütlacı iletişim sayfası exact `Kavacık, Fatih Sultan Mehmet Cd. 28/b, Beykoz/İstanbul` adresini, resmi Kavacık Instagram profili ise Hentzer telefonu `0552 693 06 66`yı doğruluyor. Resmi ürün sayfalarında fiyat yok; 26.12.2025 sosyal paylaşımında birkaç ürün fiyatı bulunsa da tam güncel menü değil. **HOLD**, eksiksiz ürün-fiyat listesi doğrulanamadığı için override eklenmedi.
+
+## MANİDAR BALIK RESTORAN MEYHANE ID 6871 HOLD
+Mekanlar.com, Yandex, servis listeleri ve resmi Facebook exact `Cihannüma, Salihefendi Sk. 4A, 34353 Beşiktaş/İstanbul` / `+90 552 786 48 40` bilgisini doğruluyor. Ancak Yandex kaydı işletmenin artık çalışmadığını belirtiyor; Restaurant Guru menüsü captcha nedeniyle okunamadı ve güncel ürün-fiyat listesi bağımsız doğrulanamadı. **HOLD**, override eklenmedi.
+
+## SUPPER BAKERY ŞİŞLİ ID 6870 kabulü
+Hentzer kaydı `Muradiye, Nüzhetiye Cd. No:1, 34250 Şişli/İstanbul`, `+90 531 871 62 17`; Yandex ve bağımsız işletme kaynakları exact adres/telefonu doğruluyor. Yemeksepeti canlı vendoru `Supper Bakery` ile eşleşiyor. 26.08.2026 tarihinde canlı menüde 77 benzersiz yiyecek, tatlı, kahve, alkolsüz içecek, vitamin bar ve paketli gıda kaleminin fiyatı görüldü. Popüler carousel tekrarları, poşet ve teslimat ücretleri dışarıda bırakıldı. Vendor erişim anında kapalı görünse de ürün-fiyat listesi güncel olarak erişilebilir ve exact şube eşleşmesi sağlandığı için **override kabul edildi**.
