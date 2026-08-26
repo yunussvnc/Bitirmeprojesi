@@ -2287,3 +2287,6 @@ Hentzer kaydı `Kalyoncu Kulluğu, Kalyoncu Kulluğu Cd. 13A, 34435 Beyoğlu/İs
 
 ## ANTEPLİ ŞAHİN USTA BEYLİKDÜZÜ ID 6736 ACCEPTED
 Hentzer kaydı `Barış, Bestekar Sk. Kule Çarşı No:2A/6,7, 34000 Beylikdüzü/İstanbul`, telefon `+90 546 251 10 30`. İşletmenin resmi Instagram hesabı aynı adresi ve sipariş hattını destekliyor; Mayıs 2026 tarihli yerel işletme kaydı da aynı exact adres/telefonu doğruluyor. Menum.co’da erişilebilir fiyatı bulunan tek kalem `İskender — 300 TL` olarak görüldü; diğer ürünlerde rakamsal fiyat erişilemediği için eklenmedi. **1 gıda ürünü override edildi.**
+
+## YAKAMOZ KANLICA BALIKÇISI BEYKOZ ID 6735 HOLD
+Hentzer kaydı `Kanlıca, Halide Edip Adıvar Cd. 1A, 34810 Beykoz/İstanbul`, telefon `+90 216 331 00 13`. Nasilbiryer, Corner ve işletmenin resmi Instagram hesabı aynı Kanlıca adres/telefonu destekliyor; 2026 sosyal içerikleri faaliyeti doğruluyor. Ancak 2026 paylaşımlarında fiyatlar değişken denilerek rakamsal ürün listesi verilmemiş; bulunan eski balık kokoreç fiyatı 2011 tarihli ve kullanılamaz. **Override eklenmedi; strict HOLD**.
