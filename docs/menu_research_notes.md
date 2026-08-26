@@ -2449,3 +2449,6 @@ Hentzer kaydı `Vişnezade, Abacı Latif Sokağı No:2A, 34357 Beşiktaş/İstan
 
 ## NO NAME COFFEE BEŞİKTAŞ ID 6682 HOLD
 Hentzer kaydı `Türkali, Ihlamurdere Cd. No:76/A, 34357 Beşiktaş/İstanbul`, telefon alanı boş. Resmi/işletme kaynakları aynı adresi ve `0212 327 01 00` telefonunu doğruluyor; Yemeksepeti’nde fiyatlı menü de bulunuyor. Ancak Hentzer telefon alanı boş olduğu için zorunlu exact phone parity tamamlanamıyor. **Override eklenmedi; strict HOLD**.
+
+## KAYALAR PASTANESİ BEYKOZ ID 6681 HOLD
+Hentzer kaydı `Paşabahçe, Reşadiye Bağlar Cd. No:2, 34800 Beykoz/İstanbul`, telefon `+90 216 413 07 99`. Yandex, Bulurum, Restoranim ve resmi Instagram işletme hesabı adres/telefonu destekliyor. Ancak kamuya açık kaynaklarda son bir yıl içinde ürün-fiyat çiftlerini içeren doğrulanabilir bir menü bulunamadı; sosyal içerikler ürün/sipariş tanıtımı olsa da fiyat listesi sunmuyor. **Override eklenmedi; strict HOLD**.
