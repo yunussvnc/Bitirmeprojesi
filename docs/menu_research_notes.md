@@ -3154,3 +3154,6 @@ Resmi dashausdesdoners.com.tr sitesi Hentzer ile exact `Sinanpaşa, Şht. Asım 
 ## GOOD&MOOD COFFEE ACARKENT ID 6455 ACCEPTED
 Hentzer `ACARLAR MAH 9.CAD CD, Acarkent Bloklar C Blok No:11/2 İç 263, 34800 Beykoz/İstanbul`, telefon `+90 542 110 60 14`. Instagram, Restoranim, Kacıyor ve güncel Acarkent paylaşımları exact şubeyi destekliyor. Yemeksepeti wmk6 canlı menüsünden 20 benzersiz tatlı/bowl ürünü eklendi; içecekler dışlandı. **Override kabul edildi.**
 Kaynaklar: https://www.yemeksepeti.com/en/restaurant/wmk6/good-and-mood-coffee ; https://www.instagram.com/goodmoodacarkent/ ; https://restoranim.net/istanbul/beykoz/kafe/good-mood-coffee-acarkent ; https://kaciyor.com/good-mood-coffee-acarkent
+
+## FRED'S ID 6454 HOLD
+Exact `Yıldırım, Pilot Sok. No:17/A, 34000 Bayrampaşa/İstanbul` adresi doğrulandı ancak Hentzer telefon alanı boş; kaynaklar `0533 748 57 97` ve `0530 170 13 31` olarak çelişiyor. Exact branch için 20 güncel fiyatlı gıda menüsü de bulunamadı. **Override eklenmedi; strict HOLD.**
