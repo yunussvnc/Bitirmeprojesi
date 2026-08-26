@@ -2892,3 +2892,6 @@ Hentzer `Sinanpaşa Mahallesi Köyiçi Cad, Şair Leyla Sk. No:4, 34353 Beşikta
 
 ## PERA MEYHANE WORLD POINT ID 6537 HOLD
 Hentzer `Pınartepe, Zerrin Sk., 34500 Büyükçekmece`, telefon `+90 212 872 72 17`. Telefon bazı kaynaklarla eşleşse de Yandex işletmenin farklı Akyurt Cad. adresindeki kaydını artık faal değil olarak gösteriyor; exact Hentzer adresi ve güncel faaliyet doğrulanamadı. **Override eklenmedi; strict HOLD.**
+
+## AŞİKAR İSTANBUL LOKANTASI ID 6536 HOLD
+Hentzer `Merkez, Marmara Cd. No:30, 34310 Avcılar`; telefon alanı boş. Yemeksepeti güncel fiyatlı exact isim/adres menüsü, Bulurum/Tikla ise `0212 591 22 46` telefonunu destekliyor; ancak Hentzer telefon parity’si doğrulanamadığından ve adreslerde No:30/4-5 ayrıntısı çeliştiğinden **override eklenmedi; strict HOLD.**
