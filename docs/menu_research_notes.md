@@ -3107,3 +3107,6 @@ Resmi sosyal kaynaklar ve yerel kayıt Hentzer ile exact `Alya Residence, Adnan 
 
 ## BETTER TOGETHER ID 6470 HOLD
 MenüBurada Hentzer ile exact No:40 ve `+90 507 824 52 99` parity’sini doğruluyor; ancak Yandex işletmenin artık faal olmadığını bildiriyor ve adresi No:42 veriyor. Aktif güncel fiyatlı menü bulunamadı. **Override eklenmedi; strict HOLD.**
+
+## PARGALI RUM MEYHANESİ ID 6469 HOLD
+Resmi sosyal kaynaklar Hentzer ile `+90 534 718 73 70` telefonunu desteklese de Yandex aynı işletme için `+90 531 583 27 77` yayımlıyor. 2025-11-26 paylaşımında yalnızca paket fix menü fiyatı bulunuyor; 20 ayrı güncel ürün fiyatı doğrulanamadı. **Override eklenmedi; strict HOLD.**
