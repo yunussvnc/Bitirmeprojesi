@@ -2329,3 +2329,6 @@ Hentzer kaydı `Bereketzade, Camekan Sk. No:10/B, 34421 Beyoğlu/İstanbul`, tel
 
 ## SET DECK RESTAURANT / SET GÜVERTE ID 6722 HOLD
 Hentzer kaydı `Anadolu Hisarı, Körfez Cd. No: 4/A, 34810 Beykoz/İstanbul`, telefon `+90 216 462 09 47`. Resmi Set Güverte sitesi aynı adresi `Anadoluhisarı Mah. Körfez Cad. no/4` ve aynı telefonu doğruluyor; Yandex de telefon ve Körfez Caddesi No:4 ile eşleşiyor. Resmi sitede menü ürün adları mevcut ancak kamuya açık sayfada fiyatlar bulunmuyor; son bir yıl içinde fiyat doğrulaması yapılamadığı için **override eklenmedi; strict HOLD**.
+
+## TİTANİC PETSHOP BAYRAMPAŞA ID 6721 HOLD
+Hentzer kaydı `Kartaltepe, Cicoz Yolu Cd. no:156, 34050 Bayrampaşa/İstanbul`, telefon `+90 530 011 01 79`. Instagram resmi işletme hesabı aynı Kartaltepe/Cicoz Yolu No:156 bilgisini; Yandex aynı telefonu ve 156A adresini doğruluyor. İşletme petshop olup gıda restoranı menüsü değildir; hayvan ürünleri fiyatları menü override kapsamına alınamaz. **Override eklenmedi; strict HOLD**.
