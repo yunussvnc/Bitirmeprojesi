@@ -58675,6 +58675,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       },
     ]
   },
+  "6455": {
+    "name": "Good&Mood Coffee Acarkent",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/wmk6/good-and-mood-coffee",
+    "sourceName": "Güncel Yemeksepeti wmk6 Good & Mood Coffee menüsü; resmi Instagram, Restoranim ve Acarkent kaynaklarıyla ACARLAR MAH 9.CAD CD CBLOK NO 11/2 İÇ 263 exact parity doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Üç Çikolatalı Cookie", "price": "430 TL", "category": "Tatlılar" },
+      { "name": "Brownie", "price": "570 TL", "category": "Tatlılar" },
+      { "name": "Gluten-Free Peanut Roll", "price": "500 TL", "category": "Tatlılar" },
+      { "name": "Baklava Cheesecake", "price": "540 TL", "category": "Tatlılar" },
+      { "name": "Dubai Chocolate", "price": "570 TL", "category": "Tatlılar" },
+      { "name": "Fit Brownie", "price": "500 TL", "category": "Tatlılar" },
+      { "name": "Fit Coco", "price": "510 TL", "category": "Tatlılar" },
+      { "name": "Strawberry Mag", "price": "550 TL", "category": "Tatlılar" },
+      { "name": "Mosaic Cake", "price": "460 TL", "category": "Tatlılar" },
+      { "name": "Norwegian Cake", "price": "570 TL", "category": "Tatlılar" },
+      { "name": "Orange Chocolate Cake", "price": "400 TL", "category": "Tatlılar" },
+      { "name": "Basque Cheesecake", "price": "540 TL", "category": "Tatlılar" },
+      { "name": "Sugar and Flourless Raw", "price": "420 TL", "category": "Tatlılar" },
+      { "name": "Tiramisu", "price": "590 TL", "category": "Tatlılar" },
+      { "name": "Apple Crumble Cheesecake", "price": "590 TL", "category": "Tatlılar" },
+      { "name": "Black Forest Cake", "price": "530 TL", "category": "Tatlılar" },
+      { "name": "Lotus Cheesecake", "price": "590 TL", "category": "Tatlılar" },
+      { "name": "Spoonful", "price": "550 TL", "category": "Tatlılar" },
+      { "name": "Gluten-Free Hazelnut Roll", "price": "500 TL", "category": "Tatlılar" },
+      { "name": "Lemon Cake", "price": "440 TL", "category": "Tatlılar" }
+    ]
+  },
   "6456": {
     "name": "Das Haus Des Döners Beşiktaş Sinanpaşa",
     "sourceUrl": "https://www.migros.com.tr/yemek/das-haus-des-doner-besiktas-sinanpasa-mah-st-323c2",

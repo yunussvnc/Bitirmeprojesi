@@ -3150,3 +3150,7 @@ Maptons/resmi eatbu/Tripadvisor ve yerel kaynaklar Hentzer ile exact `Tomtom, Es
 
 ## DAS HAUS DES DÖNERS ID 6456 HOLD
 Resmi dashausdesdoners.com.tr sitesi Hentzer ile exact `Sinanpaşa, Şht. Asım Cd. İş Hanı No:32/A, 34353 Beşiktaş/İstanbul` ve `+90 532 157 75 22` parity’sini doğruluyor. Resmi ürün sayfasında fiyat yok; exact Yemeksepeti mgtw vendoru şube adresini gösterse de CAPTCHA nedeniyle güncel ürün fiyatları alınamadı. 20 fiyatlı gıda ürünü doğrulanamadı. **Override eklenmedi; strict HOLD.**
+
+## GOOD&MOOD COFFEE ACARKENT ID 6455 ACCEPTED
+Hentzer `ACARLAR MAH 9.CAD CD, Acarkent Bloklar C Blok No:11/2 İç 263, 34800 Beykoz/İstanbul`, telefon `+90 542 110 60 14`. Instagram, Restoranim, Kacıyor ve güncel Acarkent paylaşımları exact şubeyi destekliyor. Yemeksepeti wmk6 canlı menüsünden 20 benzersiz tatlı/bowl ürünü eklendi; içecekler dışlandı. **Override kabul edildi.**
+Kaynaklar: https://www.yemeksepeti.com/en/restaurant/wmk6/good-and-mood-coffee ; https://www.instagram.com/goodmoodacarkent/ ; https://restoranim.net/istanbul/beykoz/kafe/good-mood-coffee-acarkent ; https://kaciyor.com/good-mood-coffee-acarkent
