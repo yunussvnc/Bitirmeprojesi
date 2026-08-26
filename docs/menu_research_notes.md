@@ -2756,3 +2756,6 @@ Hentzer kaydı yalnızca `Dereseki, 34825 Beykoz/İstanbul` adresini veriyor; te
 
 ## DOLPHIN CAFE BEŞİKTAŞ ID 6580 HOLD
 Hentzer kaydı `Yıldız Mahallesi, Çırağan Cd. Osmanpaşa Mektebi Çıkmazı, Yıldız Sk. No:8 D:1, 34349 Beşiktaş/İstanbul`, telefon `+90 533 734 57 67`. Yandex aynı telefonu ancak `Çırağan Cad. 3B` adresini yayımlıyor; Hentzer’deki No:8 D:1 ile exact adres parity’si sağlanamadı. Bulunan diğer Dolphin Cafe menüleri farklı ülke/şehir işletmelerine ait; exact Beşiktaş şubesine ait son bir yıl fiyatlı menü doğrulanamadı. **Override eklenmedi; strict HOLD.**
+
+## LUMA COFFEE CO. BEYKOZ ID 6579 HOLD
+Hentzer kaydı `Gümüşsuyu, Kelle İbrahim Cd. No:17 D:1A, 34820 Beykoz/İstanbul`; telefon alanı boş. Facebook ve TikTok aynı No:17/1A adresini, Yemeksepeti exact Luma Coffee Co. sayfası ise güncel fiyatlı kahve/tatlı ürünlerini gösteriyor; ancak Hentzer kaydında telefon bulunmadığı için zorunlu %100 phone parity’si doğrulanamadı. **Override eklenmedi; strict HOLD.**
