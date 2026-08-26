@@ -2163,3 +2163,6 @@ Hentzer kaydı `Büyükşehir, Atatürk Blv. No:38/A İç:24, 34520 Beylikdüzü
 
 ## MÜTEMADİYEN ORTAKÖY ID 6776 HOLD
 Hentzer kaydı `Ortaköy, Muallim Naci Cd. No:45/1, 34347 Beşiktaş/İstanbul`, telefon `+90 533 252 74 34`. Fırsat kaynakları adresi desteklese de Yandex işletmeyi artık faal değil gösteriyor; işletmenin Instagram sonucunda aynı adres için farklı telefon `+90 532 168 87 99` yer alıyor. Son bir yıl içinde exact şubeye ait doğrulanabilir fiyatlı menü bulunamadığı için **override eklenmedi; strict HOLD**.
+
+## COFFY KAVACIK ID 6775 HOLD
+Hentzer kaydı `Rüzgarlıbahçe, Cumhuriyet Cd. No:63A, 34805 Beykoz/İstanbul`, telefon `+90 216 217 04 32`. Menu-tr ve Restoranim adresi destekliyor; ancak arama sonuçlarındaki Yandex telefon bilgisi farklı/eksik ve Coffy Kavacık sosyal paylaşımındaki `70 TL` bilgisi tarihsel içerik olarak net güncellenme tarihiyle doğrulanamadı. Migros sayfası şubeyi gösterse de erişilebilir tam fiyatlı ürün listesi yok. %100 branch telefon parity ve son bir yıl fiyat şartı sağlanamadığı için **override eklenmedi; strict HOLD**.
