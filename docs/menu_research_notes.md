@@ -2308,3 +2308,6 @@ Hentzer kaydı `Yenidoğan, Numunebağı Cd. Numune Han No:68-70A, 34040 Bayramp
 
 ## GAYRET BALIK BEYLİKDÜZÜ ID 6729 HOLD
 Hentzer kaydı `Adnan Kahveci, Erenler Cd. No:18 D:5, 34528 Beylikdüzü/İstanbul`, telefon `+90 212 855 44 41`. Yandex, Instagram ve Bulurum aynı işletme/telefonu desteklese de adresi `Erenler Cad. No:18/8` veya 18 giriş olarak veriyor; Hentzer iç kapı D:5 ile birebir eşleşme yok. Bulunan fiyatlı içerikler eski veya menü kalemi vermiyor. Exact branch parity ve güncel fiyat şartları sağlanamadığından **override eklenmedi; strict HOLD**.
+
+## UN SANATI BEYLİKDÜZÜ ID 6728 HOLD
+Hentzer kaydı `Barış, E-5 Yanyolu Westside 2 K Blok No:28/3, 34520 Beylikdüzü/İstanbul`, telefon `+90 552 233 27 37`. 26.06.2026 açılışlı Beylikdüzü şubesi sosyal içeriklerle desteklense de resmi Un Sanatı iletişim/Instagram kaynakları Beylikdüzü için `+90 212 655 12 12` veriyor; resmi site ana adresi de farklı şubeleri gösteriyor. Canlı Yemeksepeti sonuçları güncel fiyatlar taşısa da exact Hentzer telefon parity sağlanamadı. **Override eklenmedi; strict HOLD**.
