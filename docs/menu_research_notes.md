@@ -2659,3 +2659,6 @@ Hentzer kaydı `Şehit Muhtar, İmam Adnan Sk. No:5, 34010 Beyoğlu/İstanbul`, 
 
 ## IO COFFEE COMPANY POLONEZKÖY ID 6612 HOLD
 Hentzer kaydı `Polonezköy, 75. Yıl Cd. No:1/1, 34829 Beykoz/İstanbul`, telefon `+90 534 385 65 11`. Yandex, Facebook ve resmi sosyal profil aynı adres ve telefonu doğruluyor. Ancak resmi/üçüncü taraf kaynaklarda son bir yıl içinde ürün bazlı güncel fiyatlı menü bulunamadı; yalnızca genel fiyat aralığı verileri mevcut. **Override eklenmedi; strict HOLD.**
+
+## GENBURGER BEYKOZ ID 6611 HOLD
+Hentzer kaydı `Rüzgarlıbahçe, Cumhuriyet Cd. Hasoğlu Plaza No:39, Hasoğlu Plaza No:39, 34805 Beykoz/İstanbul`, telefon `+90 216 322 32 00`. Telefon Yandex’te eşleşiyor; ancak resmi Instagram adresi `Rüzgarlıbahçe Mah. Cumhuriyet Cad. No:39/B Hasoğlu Plaza Kavacık/Beykoz`, Yandex de `No:39B` olarak veriyor. Hentzer adresinde `B` kapı eki bulunmadığından %100 exact şube adres parity’si kurulamadı. Migros/Yemeksepeti güncel fiyatlar sunsa da kullanılmadı. **Override eklenmedi; strict HOLD.**
