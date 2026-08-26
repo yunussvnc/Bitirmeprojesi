@@ -2404,3 +2404,6 @@ Hentzer kaydı `Sinanpaşa, Şair Nedim Cd. No:46 D:B, 34353 Beşiktaş/İstanbu
 
 ## MAKSAT OCAKBAŞI & MEYHANE BEYOĞLU ID 6697 HOLD
 Hentzer kaydı `Hüseyinağa, Sahne Sk. No:23, 34435 Beyoğlu/İstanbul`, telefon `+90 537 474 44 78`. Maksat Ocakbaşı resmi sitesi ve resmi Instagram aynı Sahne Sokak No:23 adresi ile 0537 474 44 78 telefonunu doğruluyor. Resmi sitede menü kategorileri ve ürün tanıtımları bulunmasına rağmen fiyatlı menü yayınlanmıyor; son bir yıl fiyatlı exact ürün listesi doğrulanamadı. **Override eklenmedi; strict HOLD**.
+
+## SALT FRIED CHICKEN TAKE AWAY BARBAROS ID 6696 HOLD
+Hentzer kaydı `Cihannüma, Akdoğan Sk. No:37/A, 34353 Beşiktaş/İstanbul`, telefon `+90 850 800 6503`. Yemeksepeti’nde güncel fiyatlı Salt Fried Chicken menüsü bulunuyor ve üçüncü taraf kayıtlar Akdoğan No:37/A adresini gösteriyor; ancak resmi saltfriedchicken.com şube listesi Beşiktaş/Akaretler şubesini `Sinanpaşa, Şair Nedim Cd. No:46/A` olarak yayınlıyor. Telefon ortak olsa da resmi şube adresi Hentzer Barbaros adresiyle aynı değil; exact branch parity sağlanamadığından **override eklenmedi; strict HOLD**.
