@@ -91652,6 +91652,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Çilekli Frappe", "price": "144 TL", "category": "Soğuk İçecekler" }
     ]
   },
+  "6474": {
+    "name": "Spesiyal Balık Beykent",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/oq1d/spesiyal-balik",
+    "sourceName": "Güncel Yemeksepeti oq1d Spesiyal Balık menüsü; resmi Instagram/Facebook ve 2026 İstanbul servis listesi ile Beykent Keleş Plaza No:1/J ve +90 212 872 29 03 exact parity doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Köri Soslu Kırlangıç", "price": "228 TL", "category": "Special Balıklar" },
+      { "name": "Beğendili İskorpit", "price": "224 TL", "category": "Special Balıklar" },
+      { "name": "Şefin Lokumu", "price": "220 TL", "category": "Special Balıklar" },
+      { "name": "Minekop Izgara", "price": "212 TL", "category": "Special Balıklar" },
+      { "name": "Fener Kavurma", "price": "227,20 TL", "category": "Special Balıklar" },
+      { "name": "Dil Pane", "price": "216 TL", "category": "Special Balıklar" },
+      { "name": "Kalamar Sote", "price": "268 TL", "category": "Special Balıklar" },
+      { "name": "Karadeniz Somonu", "price": "214,40 TL", "category": "Special Balıklar" },
+      { "name": "Karagöz Sote", "price": "244 TL", "category": "Special Balıklar" },
+      { "name": "Karides Şiş", "price": "227,20 TL", "category": "Special Balıklar" },
+      { "name": "Levrek Spagetti", "price": "216 TL", "category": "Special Balıklar" },
+      { "name": "Tereyağlı Kılıç Sote", "price": "227,20 TL", "category": "Special Balıklar" },
+      { "name": "Okyanus Lokumu", "price": "187,20 TL", "category": "Special Balıklar" },
+      { "name": "Izgara Çipura", "price": "1.104 TL", "category": "Izgara Balıklar" },
+      { "name": "Izgara Norveç Somon", "price": "1.012 TL", "category": "Izgara Balıklar" },
+      { "name": "Izgara Levrek", "price": "1.104 TL", "category": "Izgara Balıklar" },
+      { "name": "Dil Balığı Şiş", "price": "600 TL", "category": "Izgara Balıklar" },
+      { "name": "Minekop Şiş", "price": "824 TL", "category": "Izgara Balıklar" },
+      { "name": "Hamsi Tava", "price": "613,60 TL", "category": "Tavada Balıklar" },
+      { "name": "Mezgit Fileto", "price": "749,60 TL", "category": "Tavada Balıklar" }
+    ]
+  },
   "6478": {
     "name": "Upperdeck American Diner",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/zfr1/upperdeck-american-diner",
