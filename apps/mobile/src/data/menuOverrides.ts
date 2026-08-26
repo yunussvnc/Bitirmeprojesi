@@ -4,6 +4,34 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6718": {
+    "name": "SARAY FIRIN KAVAKLI",
+    "sourceUrl": "https://sarayfirinkavakli.com/",
+    "sourceName": "Saray Fırın Kavaklı resmi sitesi; iletişim sayfası exact şube doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Pokemon Pasta No 93", "price": "3200 TL", "category": "Erkek Çocuk Pastaları" },
+      { "name": "Diş Buğdayı Pastası", "price": "3000 TL", "category": "Erkek Çocuk Pastaları" },
+      { "name": "Süper Mario Temalı Pasta", "price": "3000 TL", "category": "Erkek Çocuk Pastaları" },
+      { "name": "Twirlywoos Çizgi Film Temalı Pasta", "price": "3000 TL", "category": "Erkek Çocuk Pastaları" },
+      { "name": "Diş Buğdayı Pastası 2", "price": "3000 TL", "category": "Erkek Çocuk Pastaları" },
+      { "name": "Paw Patrol Pasta 4", "price": "3500 TL", "category": "Erkek Çocuk Pastaları" },
+      { "name": "Roblox Pasta 3", "price": "3000 TL", "category": "Erkek Çocuk Pastaları" },
+      { "name": "Örümcek Adam Pasta 2", "price": "7500 TL", "category": "Erkek Çocuk Pastaları" },
+      { "name": "Roblox Pasta 4", "price": "3000 TL", "category": "Erkek Çocuk Pastaları" },
+      { "name": "Erkek Çocuk Pasta No:43", "price": "3000 TL", "category": "Erkek Çocuk Pastaları" },
+      { "name": "Safari Temalı Pasta1", "price": "6000 TL", "category": "Erkek Çocuk Pastaları" },
+      { "name": "Amongus Temalı Pasta", "price": "3000 TL", "category": "Erkek Çocuk Pastaları" },
+      { "name": "Winnie the Pooh Pasta No:12", "price": "3000 TL", "category": "Erkek Çocuk Pastaları" },
+      { "name": "Erkek çocuğu Pastası 2", "price": "3000 TL", "category": "Erkek Çocuk Pastaları" },
+      { "name": "Baby Big Boss Pasta", "price": "3000 TL", "category": "Erkek Çocuk Pastaları" },
+      { "name": "Roblox Pasta", "price": "3500 TL", "category": "Erkek Çocuk Pastaları" },
+      { "name": "Arabalar Pasta No:8", "price": "3000 TL", "category": "Erkek Çocuk Pastaları" },
+      { "name": "Brawl Stars Pasta 2", "price": "3500 TL", "category": "Erkek Çocuk Pastaları" },
+      { "name": "Asker Uçak Pasta", "price": "3500 TL", "category": "Erkek Çocuk Pastaları" },
+      { "name": "Safari Pasta 2", "price": "3500 TL", "category": "Erkek Çocuk Pastaları" }
+    ]
+  },
   "6724": {
     "name": "BAHÇE BÜFE BEYLİKDÜZÜ",
     "sourceUrl": "https://www.migros.com.tr/yemek/bahce-bufe-beylikduzu-buyuksehir-mah-st-22070",

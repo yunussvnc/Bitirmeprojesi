@@ -2338,3 +2338,6 @@ Hentzer kaydı `Hüseyinağa, Atıf Yılmaz Cd. 21A, 34435 Beyoğlu/İstanbul`, 
 
 ## KÜÇÜK CENNET BEYKOZ ID 6719 HOLD
 Hentzer kaydı `Paşamandıra Mahallesi, Paşamandıra Caddesi 43/1, 34829 Beykoz/İstanbul`, telefon `+90 532 373 21 61`. Yandex aynı adres/telefonu; resmi Instagram hesabı aynı telefonu ve Paşamandıra işletmesini; Ocak 2026 tarihli tanıtım da No:43/1 adresini destekliyor. Menum.co’da `Serpme Kahvaltı (Kişi Başı) 600 TL` görülüyor ancak menüde fiyatın geçerlilik/güncelleme tarihi veya son bir yıl içinde yenilendiğini kanıtlayan bir ibare yok. Tek fiyatlı ve tarihsiz içerik, zorunlu güncellik şartı nedeniyle kullanılmadı. **Override eklenmedi; strict HOLD**.
+
+## SARAY FIRIN KAVAKLI ID 6718 ACCEPTED
+Hentzer kaydı `Kavaklı, Bağlar Cd. C Blok İnş D:22/13, 34520 Beylikdüzü/İstanbul`, telefon `+90 539 945 28 88`. Saray Fırın Kavaklı resmi sitesinin iletişim bilgileri aynı adres ve telefonu veriyor; resmi Instagram da aynı WhatsApp hattını destekliyor. 26.08.2026 tarihinde resmi sitedeki fiyatlı ve yeni ürün kataloğundan ilk 20 benzersiz özel tasarım pasta ürün-fiyat çifti alındı; katalog ürün görsellerindeki 2025 sonu veri damgaları son bir yıl şartını karşılıyor. **20 gıda ürünü override edildi.**
