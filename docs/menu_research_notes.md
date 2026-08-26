@@ -2949,3 +2949,6 @@ Hentzer `B.O.S.B Birlik Sanayi Sitesi 3. cadde Keleşoğlu Plaza No:3 Dükkan 12
 
 ## PIZZA V BEYLİKDÜZÜ ID 6519 HOLD
 Hentzer `Cumhuriyet, Onur Sk. No:3AE, 34520 Beylikdüzü`, telefon `+90 212 939 52 39`. Resmi Instagram/Linktree ve exact Menum sayfası adres/telefonu doğruluyor; ancak Menum menü görsellerinin zaman damgaları 2024 ve metin olarak yalnızca bir ürün ayrıştırılabiliyor. Son bir yıl içinde 20 ürünlük güncel fiyatlı menü doğrulanamadı. **Override eklenmedi; strict HOLD.**
+
+## GRANNY'S WAFFLES BEŞİKTAŞ ID 6518 HOLD
+Hentzer `Sinanpaşa, Şair Veysi Sk. No:23-25/A, 34337 Beşiktaş`, telefon `+90 505 266 72 15`. Resmi şube listesi ve 17.04.2026 tarihli Beşiktaş Instagram paylaşımı exact adres/telefonu doğruluyor. QR menüde güncel görünen yalnızca 4 waffle ürünü/fiyatı bulunuyor; 20 benzersiz gıda ürünü ve kapsamlı exact şube menüsü doğrulanamadığından **override eklenmedi; strict HOLD.**
