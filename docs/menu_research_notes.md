@@ -2635,3 +2635,6 @@ Hentzer kaydı `Cumhuriyet Atatürk Bulvarı, Alya, Cumhuriyet, Dolunay Sitesi a
 
 ## KİLİSLİ BAYRAM KEBAP LAHMACUN BEYLİKDÜZÜ ID 6620 HOLD
 Hentzer kaydı `Adnan Kahveci, Sümer Cd No:5, 34528 Beylikdüzü/İstanbul`, telefon `+90 532 264 08 74`. Resmi Instagram ve Yandex aynı Sümer Cd. No:5 / telefonu destekliyor. Ancak 2025–2026 döneminde doğrulanabilir ürün bazlı fiyatlı menü bulunamadı; arama sonuçlarındaki fiyat aralığı tek başına yeterli değil. **Override eklenmedi; strict HOLD.**
+
+## İSTİKLAL KEBAP RESTAURANT BEYOĞLU ID 6619 HOLD
+Hentzer kaydı `Rumeli Han İstiklal Caddesi, Şehit Muhtar, Taksim No:48, 34435 Beyoğlu/İstanbul`, telefon `+90 532 376 93 42`. Facebook, Yandex, Sluurpy ve Instagram aynı Rumeli Han/İstiklal No:48 ve telefon bilgisini destekliyor. Ancak son bir yıl içinde bu exact İstanbul şubesine ait ürün bazlı fiyatlı menü bulunamadı; arama sonuçlarındaki Yemeksepeti fiyatları Eskişehir’deki farklı işletmeye ait. **Override eklenmedi; strict HOLD.**
