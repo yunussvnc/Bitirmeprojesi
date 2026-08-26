@@ -4,6 +4,15 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6686": {
+    "name": "O COFFEE BEŞİKTAŞ",
+    "sourceUrl": "https://www.tiktok.com/discover/o-coffee-beşiktaş-menü",
+    "sourceName": "O Coffee resmi sosyal hesapları ve güncel işletme paylaşımı; Facebook ile exact adres-telefon doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Tatlı Kampanyası (tüm tatlılar)", "price": "99 TL", "category": "Tatlılar" }
+    ]
+  },
   "6692": {
     "name": "TARİHİ KARAKÖY PİLAVCISI BEŞİKTAŞ",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/pjlh/tarihi-karakoy-pilavcisi",

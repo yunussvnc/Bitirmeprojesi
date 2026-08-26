@@ -2434,3 +2434,6 @@ Hentzer kaydı `Cumhuriyet, Onur Sk. F Blok No:1 D, 34045 Beylikdüzü/İstanbul
 
 ## NATURAL FISH & KEBAP BEYOĞLU ID 6687 HOLD
 Hentzer kaydı `Kocatepe, Şht. Muhtar Bey Cd. No:39A, 34437 Beyoğlu/İstanbul`, telefon `+90 551 588 59 57`. Telefon Yandex ve çeşitli yerel kayıtlarda eşleşiyor; ancak Yandex’in farklı dil/kayıt sonuçlarında adres No:41A, diğer kaynaklarda No:39A görünüyor. Fiyatlı menü iddiaları üçüncü taraf sayfalarda bulunmasına rağmen güncelleme tarihi ve tekil exact branch kanıtı yok. Adres parity ve son bir yıl fiyat doğrulaması kesin olmadığı için **override eklenmedi; strict HOLD**.
+
+## O COFFEE BEŞİKTAŞ ID 6686 ACCEPTED
+Hentzer kaydı `Türkali, Yeniyol Sokağı No:12/A, 34357 Beşiktaş/İstanbul`, telefon `+90 212 877 70 07`. O Coffee’nin güncel sosyal içerikleri aynı adresi ve telefonu doğruluyor. 06.07.2026 tarihli işletme menü paylaşımında tüm tatlıların **99 TL** olduğu açıkça belirtiliyor; bu güncel kampanya exact işletme kaydıyla eşleştiği için 1 tatlı kampanyası ürünü override edildi.
