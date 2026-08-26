@@ -92015,6 +92015,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Sultaniye Soslu Tavuk Döner Dürüm", "price": "230 TL", "category": "Tavuk Dönerler" }
     ]
   },
+  "6445": {
+    "name": "Sigun Patisserie Cafe (Croissant, Donut, Waffle, Cookie, Brownie)",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/zlmb/sigun-patisserie-and-croissant-cafe",
+    "sourceName": "Güncel Yemeksepeti exact Sigun Patisserie & Croissant Cafe menüsü; Yandex ile Aktel Residence AVM girişindeki Avrupa Cd. 82 ve +90 212 855 60 04 parity doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Donut & Coffee", "price": "260 TL", "category": "Fırsat Menüler" },
+      { "name": "Supangle", "price": "365 TL", "category": "Tatlılar" },
+      { "name": "Brownie (2 Dilim)", "price": "630 TL", "category": "Tatlılar" },
+      { "name": "Tarçın & Cevizli Cookie (Yeni)", "price": "355 TL", "category": "Cookies" },
+      { "name": "Tarçın & Cevizli Cookies", "price": "185 TL", "category": "Cookies" },
+      { "name": "Çikolatalı Cookie", "price": "355 TL", "category": "Cookies" },
+      { "name": "Çikolatalı Cookies", "price": "185 TL", "category": "Cookies" },
+      { "name": "Marshmallow & Çikolatalı Cookies", "price": "185 TL", "category": "Cookies" },
+      { "name": "Brownie & Çikolatalı Cookie", "price": "355 TL", "category": "Cookies" },
+      { "name": "Brownie & Çikolatalı Cookies", "price": "185 TL", "category": "Cookies" },
+      { "name": "Elma & Tarçınlı Donut (65 gr.) YENİ", "price": "195 TL", "category": "Donutlar" },
+      { "name": "Çilekli Donut (73 gr.)", "price": "195 TL", "category": "Donutlar" },
+      { "name": "Fındık Kremalı Donut (71 gr.)", "price": "195 TL", "category": "Donutlar" },
+      { "name": "Lotuslu Donut (69 gr.)", "price": "195 TL", "category": "Donutlar" },
+      { "name": "Vanilyalı Donut (71 gr.)", "price": "195 TL", "category": "Donutlar" },
+      { "name": "Kırmızı Meyveli Mini Bite Bomba (25 gr.)", "price": "95 TL", "category": "Donutlar" },
+      { "name": "Çikolata Dolgulu Mini Bite Bomba (25 gr.)", "price": "95 TL", "category": "Donutlar" },
+      { "name": "Kestane Şekeri", "price": "640 TL", "category": "Tatlılar" },
+      { "name": "Islak Kek", "price": "195 TL", "category": "Tatlılar" },
+      { "name": "Mia Sade Tatlım", "price": "300 TL", "category": "Tatlılar" }
+    ]
+  },
   "6511": {
     "name": "SALT FRIED CHICKEN BEŞİKTAŞ",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/pehr/salt-fried-chicken-pehr",

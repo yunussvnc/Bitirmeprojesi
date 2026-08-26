@@ -3182,3 +3182,7 @@ Meyhankoli exact `Kuloğlu Mh., Galatasaray Kartal sok No:6/A, 34433 Beyoğlu/İ
 
 ## KARDEŞ PAYI ID 6446 HOLD
 Tumİşyeri Hentzer exact adres ve `+90 532 622 72 25` ana telefonunu doğruluyor; kayıtta iki ek telefon da yer alıyor. Exact Beşiktaş şubesine ait son bir yıl güncel fiyatlı 20 ürün doğrulanamadı; Yemeksepeti arama sonuçları farklı şehirlerdeki kayıtlar. **Override eklenmedi; strict HOLD.**
+
+## SIGUN PATISSERIE CAFE ID 6445 ACCEPTED
+Hentzer `Aktel Residence AVM, Adnan Kahveci, Avrupa Cd. No:82/12, 34528 Beylikdüzü/İstanbul`, telefon `+90 212 855 60 04`. Yandex exact `İstanbul, Avrupa Cad., 82 · Aktel Residence AVM girişinde` ve aynı telefonu doğruluyor. Yemeksepeti `zlmb` canlı menüsünden popüler carousel tekrarları ve içecekler dışlanarak 20 benzersiz pasta/tatlı/cookie/donut ürünü eklendi. **Override kabul edildi.**
+Kaynaklar: https://www.yemeksepeti.com/en/restaurant/zlmb/sigun-patisserie-and-croissant-cafe ; https://yandex.com.tr/maps/org/sigun_patisserie_cafe/196689275461/
