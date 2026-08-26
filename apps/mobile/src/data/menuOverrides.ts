@@ -4,6 +4,24 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6753": {
+    "name": "HAZ KEBAP",
+    "sourceUrl": "https://www.modposmenu.com/hazkebap",
+    "sourceName": "Haz Kebap resmi iletişim/Modpos menüsü ve canlı Yemeksepeti menüsü; exact Beylikdüzü şube adres/telefonu doğrulandı",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Kuzu Şiş Kestane", "price": "915 TL", "category": "Kebaplar ve Izgaralar" },
+      { "name": "Tavuk Şiş", "price": "715 TL", "category": "Kebaplar ve Izgaralar" },
+      { "name": "Ciğer Şiş", "price": "825 TL", "category": "Kebaplar ve Izgaralar" },
+      { "name": "Tavuk Şiş (1,5 Porsiyon)", "price": "1045 TL", "category": "Kebaplar ve Izgaralar" },
+      { "name": "Ciğer Şiş Dürüm", "price": "520 TL", "category": "Dürümler" },
+      { "name": "Tabak Altı Lahmacun (22 cm)", "price": "235 TL", "category": "Lahmacunlar" },
+      { "name": "Urfa Lahmacun (32 cm)", "price": "255 TL", "category": "Lahmacunlar" },
+      { "name": "Döner Dürüm", "price": "490 TL", "category": "Dürümler" },
+      { "name": "Süryani Usulü Haşlama İçli Köfte (Adet)", "price": "295 TL", "category": "Ara Sıcaklar" },
+      { "name": "Közlenmiş Patlıcan Ezmesi", "price": "150 TL", "category": "Mezeler" }
+    ]
+  },
   "6759": {
     "name": "AZİMDEYİZ ANTAKYA MEYHANESİ",
     "sourceUrl": "https://menum.co/Azimdeyiz-AntakyaMeyhanesi",

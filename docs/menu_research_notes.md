@@ -2229,3 +2229,6 @@ Hentzer kaydı `Akbaba Caddesi, Akbaba, Çarşamba Sok. No:5, 34829 Beykoz/İsta
 
 ## ELENİ MEYHANESİ BEŞİKTAŞ ID 6754 HOLD
 Hentzer kaydı `Cihannüma, Barbaros Blv. 61/A, 34353 Beşiktaş/İstanbul`, telefon `+90 506 255 35 18`. Facebook, resmi Instagram ve menü sağlayıcıları aynı adres/telefonu doğruluyor. Quickly QR menüsü adres/telefon ve çalışma saatlerini doğrulasa da ürün/fiyat içeriği erişilebilir metne gelmedi; PardonApp yalnızca kategori başlıklarını gösterdi. Arama sonuçlarındaki fiyatlı içerikler 2019-2020 tarihli ve son bir yıl koşulunu karşılamıyor. **Override eklenmedi; strict HOLD**.
+
+## HAZ KEBAP BEYLİKDÜZÜ ID 6753 ACCEPTED
+Hentzer kaydı `Büyükşehir, Beylikdüzü Cd. C Blok No:5 Daire:2/A-F, 34520 Beylikdüzü/İstanbul`, telefon `+90 212 873 06 70`. Haz Kebap resmi iletişim sayfası aynı adres ve telefonu doğruluyor. Resmi Modpos menüsü ile 26.08.2026 tarihinde erişilen canlı Yemeksepeti sonuçlarında ortak fiyatlı ürünler bulundu; fiyatı ve ürün adı net olmayan kalemler eklenmedi. **10 gıda ürünü override edildi.**
