@@ -2572,3 +2572,6 @@ Hentzer kaydı `Altıntepsi, Atatürk Cd. No:64, 34035 Bayrampaşa/İstanbul`, t
 
 ## LİÇİ HOUSE BEYKOZ ID 6640 ACCEPTED
 Hentzer kaydı `Çubuklu, Orhan Veli Kanık Cd. No:51, 34810 Beykoz/İstanbul`, telefon `+90 216 362 30 30`. Liçi House resmi sitesi aynı Çubuklu/Kavacık şube bölgesini ve 0216 362 30 30 telefonunu doğruluyor. Yemeksepeti canlı Liçi House vendor menüsünden 20 güncel fiyatlı yiyecek ürünü eklendi; kaynakta kahvaltı, poğaça/açma/simit, ekşi mayalı ekmek ve krep/omlet kategorileri yer alıyor.
+
+## LİÇİ HOUSE BEYKOZ ID 6640 HOLD
+Hentzer kaydı `Çubuklu, Orhan Veli Kanık Cd. No:51, 34810 Beykoz/İstanbul`, telefon `+90 216 362 30 30`. Resmi Liçi House sitesi telefon ve Çubuklu/Kavacık bölgesini doğruluyor; ancak resmi sayfada Hentzer’deki No:51 açıkça yer almıyor, üçüncü taraf kaynaklarda 51-1/5 veya numarasız adres görülüyor. Yemeksepeti’nde güncel fiyatlı ürünler bulunsa da vendor sayfası exact şube adresini göstermiyor. **%100 exact adres parity sağlanamadığı için override eklenmedi; önceki çalışma ağacındaki taslak kaldırıldı ve strict HOLD uygulandı.**
