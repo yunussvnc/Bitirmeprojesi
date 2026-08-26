@@ -2707,3 +2707,6 @@ Hentzer kaydı `Yenidoğan, Numunebağı Cd. No:36, 34040 Bayrampaşa/İstanbul`
 
 ## MUHLAMA KARADENİZ MUTFAĞI KAVACIK ID 6596
 Hentzer kaydı `Rüzgarlıbahçe, Cumhuriyet Cd. No:131, 34805 Beykoz/İstanbul`, telefon `+90 216 425 25 22`. Muhlama resmi sitesi Kavacık adresini `Cumhuriyet Caddesi No:131, Kavacık/Beykoz` ve aynı telefonu yayımlıyor; Restoranim exact kaydı da adres/telefonu doğruluyor. Resmi sitedeki canlı menüden 20 benzersiz kahvaltı, muhlama ve yiyecek ürünü seçildi; fiyatlar erişim tarihinde güncel olarak yayımlanıyor. **Override kabul edildi; 20 ürün.** Kaynaklar: https://muhlama.com.tr/ ; https://restoranim.net/istanbul/beykoz/restoran/kavacik-muhlama-karadeniz-mutfagi
+
+## PAPA JOHN'S PIZZA GAYRETTEPE ID 6595 HOLD
+Hentzer kaydı `Gayrettepe, Yıldız Posta Cd. No:46, 34394 Beşiktaş/İstanbul`, telefon `+90 444 75 79`. Restaurant Guru exact adresi doğruluyor ancak şube telefonu `+90 212 267 53 63` olarak veriliyor; Hentzer’deki kurumsal `444 75 79` ile %100 phone parity sağlanamadı. Restaurant Guru’da yaklaşık bir yıl önce eklenmiş menü ve resmi Türkiye sitesinde genel güncel ürünler bulunsa da, zorunlu exact şube telefon koşulu karşılanmadığı için **override eklenmedi; strict HOLD**.
