@@ -2109,3 +2109,6 @@ Restaurant Guru exact `Cumhuriyet Mahallesi Beykent Sanayi Sitesi D:B1, 2. Blok 
 
 ## SOFYALI ALİ BEŞİKTAŞ ID 6794 ACCEPTED
 Resmî `sofyaliali.com/tr` sitesinin JavaScript veri kaynağında Beşiktaş şubesi exact `Sinanpaşa Mah. Köyiçi Cad. No:3, Beşiktaş / İstanbul` ve telefon `+90 530 929 61 03` olarak doğrulandı; Hentzer kaydıyla birebir eşleşiyor. Aynı resmî kaynakta `Fiyat Değişim Tarihi: 17.02.2026` bilgisi ve 3 menü + 8 tek ürün fiyatı yayınlanıyor. Gıda dışı kalem eklenmedi. **11 ürün override edildi.**
+
+## PIZZABULLS ETİLER - BEŞİKTAŞ ID 6793 HOLD
+Hentzer kaydı: `Etiler, İncesu Sk. No:5A, 34337 Beşiktaş/İstanbul, Türkiye`, telefon `+90 212 265 00 99`. Pizzabulls resmi sitesi güncel ürün adlarını gösteriyor ancak bu şube için fiyatlı, tarihli menü yayınlamıyor. Migros Yemek kaydı canlı fiyatlar içeriyor ve telefonla ilişkilendirilebilse de erişilebilir sayfada fiyat güncelleme tarihi görünmüyor; ayrıca bağımsız Bulurum kaydı aynı telefonla adresi `Etiler Mah. Özden Sok. 7/A` olarak veriyor. Adres eşleşmesi %100 kesin olmadığı ve menü fiyatlarının son 1 yıl içinde güncellendiği kanıtlanamadığı için **override eklenmedi; strict HOLD**.
