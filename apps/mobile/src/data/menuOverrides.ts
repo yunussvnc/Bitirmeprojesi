@@ -4,6 +4,34 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6716": {
+    "name": "JUST SUSHI BEŞİKTAŞ",
+    "sourceUrl": "https://www.migros.com.tr/yemek/just-sushi-besiktas-cihannuma-mah-st-22294",
+    "sourceName": "Migros Yemek exact Cihannüma şubesi; Just Sushi resmi sitesi adres/telefon doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Salmon Set (26 Parça)", "price": "1299.90 TL", "category": "Sushi Setleri" },
+      { "name": "Tempura Set (24 Parça)", "price": "1379.90 TL", "category": "Sushi Setleri" },
+      { "name": "Vegan Set (24 Parça)", "price": "759.90 TL", "category": "Sushi Setleri" },
+      { "name": "Sashimi Set (10 Parça)", "price": "989.90 TL", "category": "Sushi Setleri" },
+      { "name": "Temari Sushi Set (10 Pcs.)", "price": "999.90 TL", "category": "Sushi Setleri" },
+      { "name": "Paradise Set (56 Parça)", "price": "2199.90 TL", "category": "Sushi Setleri" },
+      { "name": "Party Set (74 Parça)", "price": "2999.90 TL", "category": "Sushi Setleri" },
+      { "name": "Make Your Uramaki Set (32 Parça)", "price": "1499.90 TL", "category": "Sushi Setleri" },
+      { "name": "Philadelphia Roll (8 Adet)", "price": "489.90 TL", "category": "Rolls" },
+      { "name": "California Roll (8 Adet)", "price": "489.90 TL", "category": "Rolls" },
+      { "name": "Canadian Roll (8 Adet)", "price": "489.90 TL", "category": "Rolls" },
+      { "name": "Rainbow Roll (8 Adet)", "price": "569.90 TL", "category": "Rolls" },
+      { "name": "Sesame Roll (8 Pcs.)", "price": "519.90 TL", "category": "Rolls" },
+      { "name": "Osaka Roll (8 Pcs.)", "price": "459.90 TL", "category": "Rolls" },
+      { "name": "Vegan Roll (8 Adet)", "price": "419.90 TL", "category": "Rolls" },
+      { "name": "Sake Maki Roll (8 Adet)", "price": "379.90 TL", "category": "Maki Rolls" },
+      { "name": "Kappa Maki Roll (8 Adet)", "price": "279.90 TL", "category": "Maki Rolls" },
+      { "name": "Unagi Avokado Maki Roll (8 Pcs.)", "price": "429.90 TL", "category": "Maki Rolls" },
+      { "name": "Ebi Maki Roll (8 Adet)", "price": "329.90 TL", "category": "Maki Rolls" },
+      { "name": "Salmon Avocado Maki Roll (8 Adet)", "price": "399.90 TL", "category": "Maki Rolls" }
+    ]
+  },
   "6718": {
     "name": "SARAY FIRIN KAVAKLI",
     "sourceUrl": "https://sarayfirinkavakli.com/",

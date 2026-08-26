@@ -2344,3 +2344,6 @@ Hentzer kaydı `Kavaklı, Bağlar Cd. C Blok İnş D:22/13, 34520 Beylikdüzü/�
 
 ## İBB KIR BAHÇESİ SOSYAL TESİSLERİ BEYKOZ ID 6717 HOLD
 Hentzer kaydı `Gümüşsuyu, 34820 Beykoz/İstanbul` ve telefon alanı boş. Kamu kaynaklarında aynı isim için `Beykoz Korusu, Merkez Mah. Mehmet Yavuz Cad. 124/1` adresi ve İBB genel hattı `444 10 34` veriliyor; bu, Hentzer’deki eksik/özet adres ve boş telefonla zorunlu exact parity sağlamıyor. 2025-2026 sosyal medya fiyat parçaları bulunsa da branch kimliği kesin eşleşmediği için **override eklenmedi; strict HOLD**.
+
+## JUST SUSHI BEŞİKTAŞ ID 6716 ACCEPTED
+Hentzer kaydı `Cihannüma, Akdoğan Sk. No:35/A, 34353 Beşiktaş/İstanbul`, telefon `+90 212 227 90 10`. Just Sushi resmi sitesi aynı Cihannüma/Akdoğan adresini ve telefonu veriyor; Migros Yemek exact `Beşiktaş (Cihannüma Mah.)` şubesiyle eşleşiyor. 26.08.2026 tarihinde canlı Migros Yemek menüsünden Popüler carousel tekrarları ve içecekler dışarıda bırakılarak sushi setleri, rolls ve maki kategorilerinden 20 benzersiz ürün-fiyat çifti alındı. **20 gıda ürünü override edildi.**
