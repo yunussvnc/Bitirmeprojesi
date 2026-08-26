@@ -3160,3 +3160,6 @@ Exact `Yıldırım, Pilot Sok. No:17/A, 34000 Bayrampaşa/İstanbul` adresi doğ
 
 ## SOKAK RESTAURANT CENGİZİN YERİ ID 6453 HOLD
 Waze/Instagram/Facebook exact `Sinanpaşa, Köyiçi Mektep Sk. No:6, 34353 Beşiktaş/İstanbul` ve `+90 536 259 19 03` parity’sini doğruluyor. Ancak exact şubeye ait son bir yıl ürün bazlı TL menüsü yok; mevcut kaynaklar eski içerik veya kişi başı fiyat aralığı sunuyor. **Override eklenmedi; strict HOLD.**
+
+## HAYRİ USTA OCAKBAŞI ID 6452 HOLD
+Waze/Yelp/Bulurum ve resmi Instagram exact `Katip Mustafa Çelebi, Çukurlu Çeşme Sk. No:15, 34433 Beyoğlu/İstanbul` ve `+90 212 249 31 41` parity’sini destekliyor. Ancak son bir yıl ürün bazlı TL fiyatlı 20 ürün menüsü bulunamadı; benzer adlı `Hayri Usta Ev Yemekleri` vendoru farklı işletme/konsept olduğu için kullanılmadı. **Override eklenmedi; strict HOLD.**
