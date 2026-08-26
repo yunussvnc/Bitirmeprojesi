@@ -4,6 +4,26 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6857": {
+    "name": "BY KUZU RESTAURANT BEYKOZ",
+    "sourceUrl": "https://bykuzutandir.com/menu/",
+    "sourceName": "Resmi By Kuzu Tandır canlı menüsü; exact Yavuz Selim, Çavuşbaşı Cumhuriyet Cd. No.:80 / +90 537 544 91 12 kaydıyla eşleşiyor",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Kuzu Tandır 170 gr.", "price": "1000 TL", "category": "Tandır" },
+      { "name": "Kelle", "price": "800 TL", "category": "Tandır" },
+      { "name": "Kuzu Tandır Kilo/Kol (1–1,5 kg.)", "price": "4000 TL", "category": "Tandır" },
+      { "name": "Hayrabolu", "price": "200 TL", "category": "Tatlılar" },
+      { "name": "Sütlaç", "price": "250 TL", "category": "Tatlılar" },
+      { "name": "Katmer", "price": "400 TL", "category": "Tatlılar" },
+      { "name": "Ayran", "price": "90 TL", "category": "İçecekler" },
+      { "name": "Şalgam", "price": "90 TL", "category": "İçecekler" },
+      { "name": "Gazoz", "price": "90 TL", "category": "İçecekler" },
+      { "name": "Şıra", "price": "100 TL", "category": "İçecekler" },
+      { "name": "Su", "price": "35 TL", "category": "İçecekler" },
+      { "name": "Soda", "price": "60 TL", "category": "İçecekler" }
+    ]
+  },
   "6860": {
     "name": "ETİLER BALIKÇISI",
     "sourceUrl": "https://etilerbalikcisi.com/menumuz",

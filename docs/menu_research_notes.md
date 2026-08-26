@@ -1917,3 +1917,9 @@ Restoranim.net exact `West Side 2, Barış, Mehmetçik Cd. No:28 West, 34520 Bey
 
 ## ETİLER BALIKÇISI ID 6860 ACCEPTED
 Resmi `https://etilerbalikcisi.com/menumuz` canlı menüsü 26.08.2026 tarihinde doğrulandı. Resmi site footer’ı Hentzer kaydıyla exact `Etiler, Toprakkale Sk. No:30 F, Garanti Pasajı Beşiktaş/İstanbul` ve `+90 538 652 93 08` bilgilerini eşleştiriyor. Menüde ürün bazlı TL fiyatları yayınlanıyor; kaynak sayfa 2026 telif bilgisi taşıyor ve canlı erişim tarihi son bir yıl şartını sağlıyor. Sardalya kaleminde fiyat yerine Lorem Ipsum olduğu için dışlandı. Alkolsüz kapsamda Balıklar 17, Ara Sıcaklar 11, Soğuk Menüler 16, Salatalar 6, Alternatif Menü 4, Tatlılar 3 ve İçecekler 9 olmak üzere toplam **66 benzersiz fiyatlı kalem** aktarıldı. Alkollü ürün eklenmedi; ürün/fiyat uydurulmadı. TypeScript ve bağımsız ürün/parite sayımı geçmelidir.
+
+## SABROSA RESTAURANT ID 6859 HOLD
+Swissôtel resmi sayfası exact `Vişnezade Mah. Acısu Sok. No.19, 34357 Maçka Beşiktaş/İstanbul` adresini doğruluyor; resmi rezervasyon telefonu `+90 543 326 81 11`, Hentzer `+90 212 326 82 91` ile uyuşmuyor. Accor/resmi sayfalarda ürün bazlı güncel fiyat listesi yok. **HOLD**, override eklenmedi.
+
+## OKKALI KAHVE BEŞİKTAŞ ID 6858 HOLD
+Arama sonuçları exact `Sinanpaşa, Yeni Hamam Sk. No:3, 34353 Beşiktaş/İstanbul` adresini destekliyor; resmi Instagram tarayıcıda giriş duvarına yönlendi. Marka arama sonucundaki `0212 236 95 06` telefonu Hentzer `+90 538 027 51 96` ile uyuşmuyor; güncel ürün bazlı fiyatlı menü de doğrulanamadı. **HOLD**, override eklenmedi.
