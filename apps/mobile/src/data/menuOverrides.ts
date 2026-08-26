@@ -90913,5 +90913,33 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Flat White", "price": "200 TL", "category": "Sıcak Kahveler" },
       { "name": "Cappuccino", "price": "200 TL", "category": "Sıcak Kahveler" }
     ]
+  },
+  "6631": {
+    "name": "KONYALI FERDİ USTA ORTAKÖY",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/mav6/konyali-ferdi-usta",
+    "sourceName": "Konyalı Ferdi Usta resmi menü/iletişim sitesi ve canlı Yemeksepeti exact vendor menüsü",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Double Lahmacun Menü", "price": "670 TL", "category": "Menüler" },
+      { "name": "Antep Usulü Kelle Paça Çorbası", "price": "530 TL", "category": "Çorbalar" },
+      { "name": "Kuzu Paça Çorbası", "price": "540 TL", "category": "Çorbalar" },
+      { "name": "Tavuk Suyu Çorbası", "price": "300 TL", "category": "Çorbalar" },
+      { "name": "Damar Çorbası", "price": "440 TL", "category": "Çorbalar" },
+      { "name": "Bamya Çorbası", "price": "450 TL", "category": "Çorbalar" },
+      { "name": "Ezogelin Çorbası", "price": "250 TL", "category": "Çorbalar" },
+      { "name": "Mercimek Çorbası", "price": "250 TL", "category": "Çorbalar" },
+      { "name": "Ayak Paça Çorbası", "price": "420 TL", "category": "Çorbalar" },
+      { "name": "Fırın Kebabı Kemiksiz 1 kg", "price": "6500 TL", "category": "Konya Fırın Kebabı" },
+      { "name": "Fırın Kebabı 110 gr Kemiksiz", "price": "900 TL", "category": "Konya Fırın Kebabı" },
+      { "name": "Fırın Kebabı Kemiksiz 750 gr", "price": "4800 TL", "category": "Konya Fırın Kebabı" },
+      { "name": "Fırın Kebabı Kemikli 500 gr", "price": "2250 TL", "category": "Konya Fırın Kebabı" },
+      { "name": "Fırın Kebabı Kemikli 750 gr", "price": "3400 TL", "category": "Konya Fırın Kebabı" },
+      { "name": "Fırın Kebabı Kemiksiz 500 gr", "price": "3400 TL", "category": "Konya Fırın Kebabı" },
+      { "name": "Fırın Kebabı Kemikli 250 gr", "price": "910 TL", "category": "Konya Fırın Kebabı" },
+      { "name": "Fırın Kebabı Keşkekli", "price": "950 TL", "category": "Konya Fırın Kebabı" },
+      { "name": "Peynirli Tırnaklı Pide", "price": "670 TL", "category": "Pideler" },
+      { "name": "Peynirli Pide", "price": "570 TL", "category": "Pideler" },
+      { "name": "Sucuklu Peynirli Pide", "price": "610 TL", "category": "Pideler" }
+    ]
   }
 };

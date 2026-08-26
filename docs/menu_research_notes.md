@@ -2599,3 +2599,6 @@ Hentzer kaydı `Etiler, Dilhayat Sk. No:16, 34337 Beşiktaş/İstanbul`, telefon
 
 ## ASMALI RESTAURANT KAVACIK ID 6632 HOLD
 Hentzer kaydı `Kavacık, Otağtepe Cd. No:19, 34810 Beykoz/İstanbul`, telefon `+90 532 693 07 36`. 2025 tarihli resmi sosyal paylaşımlar aynı Kavacık/Otağtepe No:19 adresini ve telefonu doğruluyor; işletme meyhane/restoran olarak aktif görünüyor. Ancak son bir yıl içinde erişilebilir, ürün bazlı güncel fiyatlı menü bulunamadı; eski Quandoo fiyatları güncel değil ve farklı Asmalı işletmelerine ait sonuçlar kullanılamaz. **Override eklenmedi; strict HOLD.**
+
+## KONYALI FERDİ USTA ORTAKÖY ID 6631 ACCEPTED
+Hentzer kaydı `Mecidiye, Muallim Naci Cd. No:25/A, 34347 Beşiktaş/İstanbul`, telefon `+90 212 227 00 10`. İşletmenin resmi iletişim sayfası aynı adres ve telefonu doğruluyor. Resmi menü sitesi ve canlı Yemeksepeti exact vendoru güncel fiyatlı menü sunuyor; 20 çorba, Konya fırın kebabı, pide ve menü ürünü eklendi. Popüler carousel tekrarı ve gıda dışı ürün eklenmedi.
