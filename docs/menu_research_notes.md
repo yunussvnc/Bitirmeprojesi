@@ -2872,3 +2872,7 @@ Kaynak: https://www.yemeksepeti.com/en/restaurant/iai4/burger-yiyelim-iai4
 ## BURGER YİYELİM BAĞCILAR ID 6543 ACCEPTED
 Hentzer `15 Temmuz, Bahar Cd. Nurol Park E Blok No:45 İç Kapı No:1845, 34212 Bağcılar/İstanbul`, telefon `+90 501 620 04 88`. Yemeksepeti exact vendor `iai4` aynı adresi ve 26.08.2026 tarihli canlı yorumları doğruluyor; resmi Burger Yiyelim menü sayfası ürün kategorilerini destekliyor. 20 benzersiz gıda ürünü canlı fiyatlarla eklendi; içecek ve poşet ürünleri dışarıda bırakıldı. **Override kabul edildi.**
 Kaynak: https://www.yemeksepeti.com/en/restaurant/iai4/burger-yiyelim-iai4
+
+## PİZANO PIZZERIA ID 6542 ACCEPTED
+Hentzer `Mecidiye, Eski Bahçe Sk. 17/A, 34347 Beşiktaş`, telefon `+90 212 258 30 35`. Resmi Pizano sitesi aynı Ortaköy şubesini, adresi ve telefonu doğruluyor; Migros exact Beşiktaş/Mecidiye vendoru güncel görünen ürün bazlı fiyatlar sunuyor. 20 benzersiz gıda ürünü (başlangıç ve 30 cm pizzalar) eklendi; içecekler dışarıda bırakıldı. **Override kabul edildi.**
+Kaynaklar: https://pizano.com.tr/ ; https://www.migros.com.tr/yemek/pizano-pizzeria-besiktas-mecidiye-mah-st-18a04

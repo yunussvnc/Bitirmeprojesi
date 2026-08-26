@@ -91526,4 +91526,33 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "9'lu Gurme Nugget Menü", "price": "350 TL", "category": "Çıtır Tavuk Menüleri" }
     ]
   },
+
+  "6542": {
+    "name": "Pizano Pizzeria",
+    "sourceUrl": "https://www.migros.com.tr/yemek/pizano-pizzeria-besiktas-mecidiye-mah-st-18a04",
+    "sourceName": "Migros Yemek exact Beşiktaş/Mecidiye şubesi; resmi Pizano sitesi ile adres-telefon doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Focaccia", "price": "450 TL", "category": "Başlangıçlar" },
+      { "name": "Füme Etli Pita", "price": "520 TL", "category": "Başlangıçlar" },
+      { "name": "Mozzarellalı Pita", "price": "460 TL", "category": "Başlangıçlar" },
+      { "name": "Karışık Pizza (30 cm.)", "price": "1160 TL", "category": "Pizzalar" },
+      { "name": "Fagotto Pizza (30 cm.)", "price": "1490 TL", "category": "Pizzalar" },
+      { "name": "Margherita Pizza (30 cm.)", "price": "660 TL", "category": "Pizzalar" },
+      { "name": "Pomodoro é Rucola (30 cm.)", "price": "750 TL", "category": "Pizzalar" },
+      { "name": "Pizza Funghi (30 cm.)", "price": "750 TL", "category": "Pizzalar" },
+      { "name": "Pizza Urbinese (30 cm.)", "price": "750 TL", "category": "Pizzalar" },
+      { "name": "Pizza Pizano (30 cm.)", "price": "990 TL", "category": "Pizzalar" },
+      { "name": "Ragazzino (30 cm.)", "price": "990 TL", "category": "Pizzalar" },
+      { "name": "Mediterraneo (30 cm.)", "price": "790 TL", "category": "Pizzalar" },
+      { "name": "Quattro Formaggi (30 cm.)", "price": "880 TL", "category": "Pizzalar" },
+      { "name": "Orto (30 cm.)", "price": "800 TL", "category": "Pizzalar" },
+      { "name": "Pizza Merletto (30 cm.)", "price": "890 TL", "category": "Pizzalar" },
+      { "name": "Pizza Rosa (30 cm.)", "price": "780 TL", "category": "Pizzalar" },
+      { "name": "Pizza Della Resistenza (30 cm.)", "price": "990 TL", "category": "Pizzalar" },
+      { "name": "Pizza Pepperoni (30 cm.)", "price": "990 TL", "category": "Pizzalar" },
+      { "name": "Pizza Carpaccio (30 cm.)", "price": "1150 TL", "category": "Pizzalar" },
+      { "name": "Pizza Tonna (30 cm.)", "price": "750 TL", "category": "Pizzalar" }
+    ]
+  },
 };
