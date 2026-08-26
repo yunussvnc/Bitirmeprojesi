@@ -3176,3 +3176,6 @@ Yandex/Allzin exact `Türkali, Ihlamurdere Cd. 68/A, 34357 Beşiktaş/İstanbul`
 
 ## BEYLİKDÜZÜ KAHVESİ ID 6448 HOLD
 Servis İşletme Bul/Restoranim/Yerel Esnaf Hentzer exact adres ve `+90 507 743 63 63` telefonunu destekliyor; ancak Yandex aynı No:1/9 adres için `+90 544 341 15 22` veriyor. 20 güncel fiyatlı gıda ürünü de doğrulanamadı. **Override eklenmedi; strict HOLD.**
+
+## URBAN CAFE ID 6447 HOLD
+Meyhankoli exact `Kuloğlu Mh., Galatasaray Kartal sok No:6/A, 34433 Beyoğlu/İstanbul` adresini doğruluyor; ancak Hentzer `+90 555 047 74 79`, Meyhankoli ise aynı şube için `(0212) 252 13 25` veriyor. Ürün bazlı son bir yıl fiyatlarıyla 20 benzersiz ürün doğrulanamadı. **Override eklenmedi; strict HOLD.**
