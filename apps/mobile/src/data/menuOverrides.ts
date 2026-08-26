@@ -91006,5 +91006,33 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
     "items": [
       { "name": "5 Çeşit Meze Menü", "price": "1500 TL", "category": "Özel Menü" }
     ]
+  },
+  "6608": {
+    "name": "BEREKET EKMEK FIRINI BAYRAMPAŞA",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/gy34/bereket-unlu-mamulleri-gy34",
+    "sourceName": "Bereket Ekmek Fırını Bayrampaşa exact kayıtları ve canlı Yemeksepeti vendor menüsü",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Patatesli Açma", "price": "42 TL", "category": "Poğaçalar, Simitler ve Açmalar" },
+      { "name": "Çikolatalı Açma", "price": "42 TL", "category": "Poğaçalar, Simitler ve Açmalar" },
+      { "name": "Zeytinli Açma", "price": "42 TL", "category": "Poğaçalar, Simitler ve Açmalar" },
+      { "name": "Simit", "price": "42 TL", "category": "Poğaçalar, Simitler ve Açmalar" },
+      { "name": "Sade Poğaça", "price": "35 TL", "category": "Poğaçalar, Simitler ve Açmalar" },
+      { "name": "Zeytinli Poğaça", "price": "35 TL", "category": "Poğaçalar, Simitler ve Açmalar" },
+      { "name": "Peynirli Poğaça", "price": "35 TL", "category": "Poğaçalar, Simitler ve Açmalar" },
+      { "name": "Dereotlu Poğaça", "price": "45 TL", "category": "Poğaçalar, Simitler ve Açmalar" },
+      { "name": "Ekmek", "price": "28 TL", "category": "Ekmekler" },
+      { "name": "Tam Buğday Ekmeği", "price": "70 TL", "category": "Ekmekler" },
+      { "name": "Çavdar Ekmeği", "price": "42 TL", "category": "Ekmekler" },
+      { "name": "Tırnak Pide", "price": "63 TL", "category": "Ekmekler" },
+      { "name": "Ekşi Mayalı Ekmek", "price": "125 TL", "category": "Ekmekler" },
+      { "name": "Tava Ekmeği", "price": "125 TL", "category": "Ekmekler" },
+      { "name": "Mısır Ekmeği", "price": "63 TL", "category": "Ekmekler" },
+      { "name": "Haşhaşlı Ekmek", "price": "63 TL", "category": "Ekmekler" },
+      { "name": "Susamlı Ekmek", "price": "63 TL", "category": "Ekmekler" },
+      { "name": "Tahinli Ekmek", "price": "97 TL", "category": "Ekmekler" },
+      { "name": "Tatlı Kuru Pasta (250 gr.)", "price": "150 TL", "category": "Kuru Pastalar" },
+      { "name": "Tuzlu Kuru Pasta (250 gr.)", "price": "150 TL", "category": "Kuru Pastalar" }
+    ]
   }
 };

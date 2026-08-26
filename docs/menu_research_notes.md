@@ -2668,3 +2668,6 @@ Hentzer kaydı `Mövenpick Hotel Bosphorus, Balmumcu, Barbaros Blv. No 165, 3434
 
 ## RUMELİ BALIKÇISI SARIYER ID 6609 HOLD
 Hentzer kaydı `Rumeli Hisarı, Yahya Kemal Cd. No:22, 34470 Sarıyer/İstanbul`, telefon `+90 212 287 06 97`. Facebook, Apple Maps ve resmi sosyal kaynaklar aynı Yahya Kemal No:22 ve telefonu doğruluyor; aktiflik de destekleniyor. Ancak son bir yıl içinde exact şubeye ait ürün bazlı fiyatlı menü bulunamadı; 07.02.2025 tarihli resmi paylaşım menü içeriği veriyor ancak fiyat yayımlamıyor. **Override eklenmedi; strict HOLD.**
+
+## BEREKET EKMEK FIRINI BAYRAMPAŞA ID 6608
+Hentzer kaydı `Muratpaşa Mahallesi, Cicoz Yolu Caddesi No:187, 34040 Bayrampaşa/İstanbul`, telefon `+90 212 497 19 93`. Restoranim.net aynı adres ve telefonu yayımlıyor; resmi Instagram profil arama sonucu `Cicozyolu Cad. No:187` bilgisini veriyor. Canlı Yemeksepeti vendor `Bereket Unlu Mamulleri (gy34)` güncel ürün/fiyat listesini yayımlıyor: 20 gıda ürünü seçildi; Popüler carousel tekrarları, içecekler, paketli ürünler ve poşet hariç tutuldu. **Override kabul edildi; 20 ürün.** Kaynak: https://www.yemeksepeti.com/restaurant/gy34/bereket-unlu-mamulleri-gy34 ; exact işletme doğrulaması: https://www.restoranim.net/istanbul/bayrampasa/firin/bereket-ekmek-firini-bayrampasa
