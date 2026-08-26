@@ -4,6 +4,16 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6695": {
+    "name": "MÜRDÜM KEBAP & STEAKHOUSE",
+    "sourceUrl": "https://www.instagram.com/reel/DZYJ9MeR2oE/",
+    "sourceName": "Mürdüm Kebap resmi Instagram; resmi web sitesi/Yandex ile exact adres-telefon doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Karkas Mantar", "price": "675 TL", "category": "Ara Sıcaklar" },
+      { "name": "Çıtır Kanat (Porsiyon)", "price": "1750 TL", "category": "Izgara" }
+    ]
+  },
   "6700": {
     "name": "COFFEE TALKS BEŞİKTAŞ",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/er2i/coffee-talks",

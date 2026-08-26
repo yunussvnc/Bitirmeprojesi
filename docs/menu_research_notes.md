@@ -2407,3 +2407,6 @@ Hentzer kaydı `Hüseyinağa, Sahne Sk. No:23, 34435 Beyoğlu/İstanbul`, telefo
 
 ## SALT FRIED CHICKEN TAKE AWAY BARBAROS ID 6696 HOLD
 Hentzer kaydı `Cihannüma, Akdoğan Sk. No:37/A, 34353 Beşiktaş/İstanbul`, telefon `+90 850 800 6503`. Yemeksepeti’nde güncel fiyatlı Salt Fried Chicken menüsü bulunuyor ve üçüncü taraf kayıtlar Akdoğan No:37/A adresini gösteriyor; ancak resmi saltfriedchicken.com şube listesi Beşiktaş/Akaretler şubesini `Sinanpaşa, Şair Nedim Cd. No:46/A` olarak yayınlıyor. Telefon ortak olsa da resmi şube adresi Hentzer Barbaros adresiyle aynı değil; exact branch parity sağlanamadığından **override eklenmedi; strict HOLD**.
+
+## MÜRDÜM KEBAP & STEAKHOUSE BEYKOZ ID 6695 ACCEPTED
+Hentzer kaydı `Anadolu Hisarı, Körfez Cad, Kızılserçe Sok. No:20/1, 34810 Beykoz/İstanbul`, telefon `+90 545 375 75 75`. Mürdüm Kebap resmi web sitesi, resmi Instagram, Facebook ve Yandex aynı adres ile telefonu doğruluyor. Mürdüm’ün 26.06.2026 tarihli resmi Instagram paylaşımında fiyatlı ürünler arasında **Karkas Mantar 675 TL** ve **Çıtır Kanat (Porsiyon) 1.750 TL** açıkça yer alıyor. Güncellik ve exact branch parity sağlandığı için 2 ürün override edildi.
