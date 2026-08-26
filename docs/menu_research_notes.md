@@ -2569,3 +2569,6 @@ Hentzer kaydı `Cihannüma, Akdoğan Sk. No:35, 34353 Beşiktaş/İstanbul`, tel
 
 ## SHOPPING MARKET BAYRAMPAŞA ID 6641 HOLD
 Hentzer kaydı `Altıntepsi, Atatürk Cd. No:64, 34035 Bayrampaşa/İstanbul`, telefon `+90 212 674 91 15`. Tumisyeri ve MarketRehberi adresi destekliyor; Yandex işletmeyi `Shopping Ekonomik Market` olarak aynı adreste gösteriyor. Ancak doğrulanabilir restoran/yiyecek menüsü yok; bulunan QR menü `THE MARKET` adıyla farklı işletmeye ait ve kullanılamaz. **Override eklenmedi; strict HOLD**.
+
+## LİÇİ HOUSE BEYKOZ ID 6640 ACCEPTED
+Hentzer kaydı `Çubuklu, Orhan Veli Kanık Cd. No:51, 34810 Beykoz/İstanbul`, telefon `+90 216 362 30 30`. Liçi House resmi sitesi aynı Çubuklu/Kavacık şube bölgesini ve 0216 362 30 30 telefonunu doğruluyor. Yemeksepeti canlı Liçi House vendor menüsünden 20 güncel fiyatlı yiyecek ürünü eklendi; kaynakta kahvaltı, poğaça/açma/simit, ekşi mayalı ekmek ve krep/omlet kategorileri yer alıyor.

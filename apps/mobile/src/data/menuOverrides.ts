@@ -90832,5 +90832,33 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Standart İnce Pirinç Çubuğu", "price": "329,90 TL", "category": "Pirinç Çubuğu" },
       { "name": "Tavuklu İnce Pirinç Çubuğu", "price": "429,90 TL", "category": "Pirinç Çubuğu" }
     ]
+  },
+  "6640": {
+    "name": "LİÇİ HOUSE BEYKOZ",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/j64d/lici-house-j64d",
+    "sourceName": "Yemeksepeti canlı Liçi House menüsü; Liçi House resmi sitesi ile Çubuklu/Kavacık adres ve telefon doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Hızlı Kahvaltı Tabağı", "price": "336 TL", "category": "Kahvaltılıklar" },
+      { "name": "Kahvaltı Tabağı", "price": "599 TL", "category": "Kahvaltılıklar" },
+      { "name": "Söğüş Tabağı", "price": "182 TL", "category": "Kahvaltılıklar" },
+      { "name": "Siyez Unlu Peynirli Cevizli Poğaça", "price": "84 TL", "category": "Poğaçalar & Açmalar & Simitler" },
+      { "name": "Mısır Unlu Labneli Poğaça", "price": "55 TL", "category": "Poğaçalar & Açmalar & Simitler" },
+      { "name": "Peynirli Açma", "price": "70 TL", "category": "Poğaçalar & Açmalar & Simitler" },
+      { "name": "Patatesli Poğaça", "price": "56 TL", "category": "Poğaçalar & Açmalar & Simitler" },
+      { "name": "Ekşi Mayalı Sokak Simidi", "price": "56 TL", "category": "Poğaçalar & Açmalar & Simitler" },
+      { "name": "Sade Açma", "price": "56 TL", "category": "Poğaçalar & Açmalar & Simitler" },
+      { "name": "Alman Simidi (Bretzel)", "price": "70 TL", "category": "Poğaçalar & Açmalar & Simitler" },
+      { "name": "Zeytinli Açma", "price": "70 TL", "category": "Poğaçalar & Açmalar & Simitler" },
+      { "name": "Dereotlu&Peynirli Poğaça", "price": "65 TL", "category": "Poğaçalar & Açmalar & Simitler" },
+      { "name": "Tam Buğday Ekmeği", "price": "175,50 TL", "category": "Ekşi Mayalı Ekmekler" },
+      { "name": "Cevizli Ekmek", "price": "229,50 TL", "category": "Ekşi Mayalı Ekmekler" },
+      { "name": "Siyez Unlu Ekmek", "price": "229,50 TL", "category": "Ekşi Mayalı Ekmekler" },
+      { "name": "Tahıllı Baget Ekmek", "price": "92 TL", "category": "Ekşi Mayalı Ekmekler" },
+      { "name": "Sarı Buğday Ekmeği", "price": "175,50 TL", "category": "Ekşi Mayalı Ekmekler" },
+      { "name": "Sebzeli Krep", "price": "434 TL", "category": "Krepler" },
+      { "name": "Tavuklu Krep", "price": "482 TL", "category": "Krepler" },
+      { "name": "Sade Omlet", "price": "266 TL", "category": "Omletler" }
+    ]
   }
 };
