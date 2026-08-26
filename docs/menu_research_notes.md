@@ -2819,3 +2819,6 @@ Hentzer kaydı `Marmara, Hürriyet Blv. No:116, 34524 Beylikdüzü/İstanbul`; t
 
 ## BEŞİKTAŞ LEZİDEN BALIK ID 6559 HOLD
 Hentzer kaydı `Sinanpaşa, Ortabahçe Cd. No:17, 34353 Beşiktaş/İstanbul`, telefon `+90 540 534 01 01`. Resmi Instagram ve Yandex exact işletme/telefon/adresi doğruluyor. 2025–2026 sosyal paylaşımları ürünleri gösteriyor ancak ürün bazlı TL fiyatlı menü bulunamadı; PRAYS yalnızca kişi başı fiyat aralığı veriyor. **Override eklenmedi; strict HOLD.**
+
+## GRAMOS COFFEE AND EATERY ID 6558 HOLD
+Hentzer kaydı `Adnan Kahveci, 34562 Beylikdüzü/İstanbul`, telefon alanı boş. Yandex kaydı `Adnan Kahveci Mah., Kalkan Sok., 13/9` ile işletme adını destekliyor; Yemeksepeti güncel görünen fiyatlı ürünler sunuyor ancak exact şube telefonunu/adresini doğrulamıyor. Zorunlu 100% address/phone parity sağlanamadı. **Override eklenmedi; strict HOLD.**
