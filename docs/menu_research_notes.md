@@ -2747,3 +2747,6 @@ Kaynaklar: https://www.instagram.com/p/DYRdVEIINKR/ ; https://www.instagram.com/
 
 ## LAOS COFFEE BEŞYÜZEVLER ID 6583 HOLD
 Hentzer kaydı `Cevatpaşa, Eski Edirne Asf. No:270 D:A, 34045 Bayrampaşa/İstanbul`, telefon `+90 537 579 29 78`. Resmi Laos Coffee şube sayfası aynı cadde/no bilgisini ancak `Eski Habipler, 34270 Sultangazi/İstanbul` adresini ve farklı telefonu `0539 338 05 63` yayımlıyor. Yemeksepeti’nde fiyatlı kahve/tatlı menüsü bulunsa da hem ilçe hem telefon parity’si sağlanamadığından yanlış şube riski nedeniyle **override eklenmedi; strict HOLD**.
+
+## DALYAN BALIK IZGARA ORTAKÖY ID 6582 HOLD
+Hentzer kaydı `Ortaköy, Tabağın Bahçesi Sk. 1A, 34672 Beşiktaş/Üsküdar/İstanbul`, telefon `+90 212 327 12 18`. Instagram/Facebook ve Bulurum aynı telefonu ve Eski Bahçe/Ortaköy 1A-1D çevresini doğruluyor; ancak Yandex kaydı işletmenin artık faal olmadığını bildiriyor ve adres kaynaklarında Tabağın Bahçesi, Eski Bahçe, Aktar Sok. olarak farklı adlandırmalar var. Son bir yıl içinde doğrulanabilir ürün bazlı fiyatlı menü bulunamadı. **Override eklenmedi; strict HOLD.**
