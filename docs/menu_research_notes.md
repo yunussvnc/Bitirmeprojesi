@@ -2112,3 +2112,6 @@ Resmî `sofyaliali.com/tr` sitesinin JavaScript veri kaynağında Beşiktaş şu
 
 ## PIZZABULLS ETİLER - BEŞİKTAŞ ID 6793 HOLD
 Hentzer kaydı: `Etiler, İncesu Sk. No:5A, 34337 Beşiktaş/İstanbul, Türkiye`, telefon `+90 212 265 00 99`. Pizzabulls resmi sitesi güncel ürün adlarını gösteriyor ancak bu şube için fiyatlı, tarihli menü yayınlamıyor. Migros Yemek kaydı canlı fiyatlar içeriyor ve telefonla ilişkilendirilebilse de erişilebilir sayfada fiyat güncelleme tarihi görünmüyor; ayrıca bağımsız Bulurum kaydı aynı telefonla adresi `Etiler Mah. Özden Sok. 7/A` olarak veriyor. Adres eşleşmesi %100 kesin olmadığı ve menü fiyatlarının son 1 yıl içinde güncellendiği kanıtlanamadığı için **override eklenmedi; strict HOLD**.
+
+## ÇAKMAK KAHVALTI SALONU ID 6792 HOLD
+Hentzer kaydı `Sinanpaşa, Çelebi Oğlu Sk. No:6, 34353 Beşiktaş/İstanbul, Türkiye`, telefon `+90 212 227 04 85`. Culinary Backstreets kaydı No:6 ve aynı telefonu doğruluyor; ancak Yelp, Bulurum, Cornucopia ve Adresci kayıtları aynı telefonu No:8 adresiyle veriyor. Ayrıca bulunan fiyatlı sosyal medya paylaşımı 31.12.2024 fiyatlarını belirtiyor ve mevcut tarihte bir yıldan eski; 2026 tarihli paylaşımda fiyat listesi yok. %100 adres eşleşmesi ve son bir yıl fiyat doğrulaması sağlanamadığı için **override eklenmedi; strict HOLD**.
