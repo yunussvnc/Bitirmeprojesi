@@ -2497,3 +2497,6 @@ Hentzer kaydı `Yıldız, Asariye Cd. No:19, 34349 Beşiktaş/İstanbul`, telefo
 
 ## PARK FORA RESTAURANT ORTAKÖY ID 6666 HOLD
 Hentzer kaydı `Ortaköy, Muallim Naci Cd. 54/A, 34347 Beşiktaş/İstanbul`, telefon `+90 212 265 50 63`. Park Fora resmi sitesi, Michelin ve yerel kaynaklar aynı adres/telefonu doğruluyor. Resmi menüde kategori ve ürün başlıkları bulunuyor ancak fiyatlar korunmuş içerik nedeniyle görünmüyor; 2026 fiyat listesi olarak indekslenen alternatif sayfa da ürün-fiyat çifti sunmuyor. **Override eklenmedi; strict HOLD**.
+
+## MADAME KUKI BEŞİKTAŞ ID 6665 HOLD
+Hentzer kaydı `Lale Apartmanı, Vişnezade, Aktarlar Sk. No:14/1, 34349 Beşiktaş/İstanbul`, telefon `+90 212 211 58 54`. Telefon eşleşse de resmi site işletmenin yeni adresini `Saral Apartmanı, Gayrettepe, Huzur Sk. No:1 D:B`, Yandex ise `Ayazmaderesi Cad. 17A` olarak veriyor. Yemeksepeti’nde fiyatlı ürünler görünse de bu adres çelişkisi nedeniyle exact şube kesinliği sağlanamadı. **Override eklenmedi; strict HOLD**.
