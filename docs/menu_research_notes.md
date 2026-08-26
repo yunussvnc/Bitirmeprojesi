@@ -2169,3 +2169,6 @@ Hentzer kaydı `Rüzgarlıbahçe, Cumhuriyet Cd. No:63A, 34805 Beykoz/İstanbul`
 
 ## KEBAPÇI MEMET ORTAKÖY ID 6774 HOLD
 Hentzer kaydı `Ortaköy, Dereboyu Cd. No:149 A, 34347 Beşiktaş/İstanbul`, telefon `+90 212 259 53 63`. TumIsyeri, Menum ve Facebook kayıtları adres/telefonu destekliyor; ancak Bulurum aynı telefonla No:96/B adresini veriyor. Menum çevrimiçi menüsünde ürün adları var fakat fiyatlar ve güncel fiyat tarihi erişilebilir değil; bulunan Yemeksepeti sonucu farklı işletmeye ait. %100 branch parity ve son bir yıl fiyat doğrulaması sağlanamadığı için **override eklenmedi; strict HOLD**.
+
+## AMAZONAS COFFEE ROASTERY ID 6773 HOLD
+Hentzer kaydı `Vişnezade, Süleyman Seba Cd. No:85/B, 34357 Beşiktaş/İstanbul`, telefon `+90 533 656 14 47`. Yandex ve CafeRadar aynı adres/telefonu destekliyor; ancak Yelp farklı bir kapı numarası ve telefon gösteriyor. İşletmenin 2026 sosyal içerikleri faaliyeti doğrulasa da erişilebilir kaynaklarda son bir yıl içinde ürün-fiyat listesi bulunamadı. %100 branch fiyat doğrulaması sağlanamadığı için **override eklenmedi; strict HOLD**.
