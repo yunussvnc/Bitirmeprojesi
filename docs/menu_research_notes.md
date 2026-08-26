@@ -2124,3 +2124,6 @@ Hentzer kaydı `Mecidiye, Büyükşekerci Sk. No:44/a, 34347 Beşiktaş/İstanbu
 
 ## BEYLİKDÜZÜ MEŞHUR BAFRA DONDURMASI - BAFİROS ID 6789 HOLD
 Hentzer kaydı `Yeşilyurt Cad. Demir Country Çarşısı H Blok yanı 219 nolu, Kavaklı, 34520 Beylikdüzü/İstanbul`, telefon `+90 212 813 00 55`. Bafiros Beylikdüzü Instagram hesabı aynı sipariş hattını ve Demir Country İç Çarşı konumunu destekliyor; 2026 tarihli paylaşımlar işletmenin faal olduğunu gösteriyor. Ancak güncel fiyatlı sonuç olarak bulunan `kilo 900 TL / top 50 TL` paylaşımı Bayrampaşa şubesine ait; Beylikdüzü şubesine özel güncel fiyat listesi doğrulanamadı. Branch-specific fiyat şartı sağlanamadığı için **override eklenmedi; strict HOLD**.
+
+## THE CHURROLL BEŞİKTAŞ ID 6788 HOLD
+Hentzer kaydı `Sinanpaşa, Köşeli Sk. No:2/A, 34353 Beşiktaş/İstanbul`, telefon `+90 531 393 28 44`. Yandex ve eski işletme kayıtları adres/telefonu destekliyor. Ancak fiyatlı Instagram içerikleri Ağustos 2023 tarihli; 2026 tarihli içeriklerde fiyat listesi yok ve bir 2026 paylaşımında `+90 530 382 50 44` farklı telefon görünüyor. Son bir yıl içinde güncel, branch-specific fiyat listesi doğrulanamadığı için **override eklenmedi; strict HOLD**.
