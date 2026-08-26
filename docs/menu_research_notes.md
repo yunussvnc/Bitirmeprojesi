@@ -2605,3 +2605,6 @@ Hentzer kaydı `Mecidiye, Muallim Naci Cd. No:25/A, 34347 Beşiktaş/İstanbul`,
 
 ## HAPPY MOON'S CAFE BEŞİKTAŞ ID 6630 HOLD
 Hentzer kaydı `Vişnezade, Süleyman Seba Cd. No:8, 34335 Beşiktaş/İstanbul`, telefon `+90 552 542 40 11`. Happy Group resmi şube sayfası aynı No:8 adresi ve telefonu doğruluyor; Snapchat/Yandex de şubeyi destekliyor. Ancak bulunan 2026 fiyat listeleri zincir/genel menü veya farklı şubelere ait ve Beşiktaş Akaretler’e exact ürün-fiyat bağını kanıtlamıyor. **Override eklenmedi; strict HOLD.**
+
+## JAY'S CAFE BEŞİKTAŞ ID 6629 HOLD
+Hentzer kaydı `Türkali Mahallesi Ihlamurdere Caddesi, Mısırlıbahçe Sok. No:4/A, 34357 Beşiktaş/İstanbul`, telefon `+90 552 460 19 13`. Jay’s Cafe resmi sitesi aynı No:4/A adresini ve cep telefonunu doğruluyor; resmi sitenin bağladığı Allzin menüsünde çok sayıda kategori var, ancak 26.08.2026 erişiminde ürün fiyatları dinamik olarak yüklenmedi. Bulunan 99 TL kahve kampanyası 2025 tarihli ve 20 güncel ürün-fiyat çifti sağlamıyor. **Override eklenmedi; strict HOLD.**
