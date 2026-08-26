@@ -4,6 +4,39 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6777": {
+    "name": "KADIKÖY KEBAPÇISI BEYLİKDÜZÜ",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/nk6w/kadikoy-kebapcisi-nk6w",
+    "sourceName": "Kadıköy Kebapçısı canlı Yemeksepeti menüsü; resmi Instagram ve Bulurum kayıtlarında Beylikdüzü adres/telefonu exact doğrulandı",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "İşkembe Çorbası", "price": "600 TL", "category": "Çorbalar" },
+      { "name": "Kelle Paça Çorbası", "price": "600 TL", "category": "Çorbalar" },
+      { "name": "Ezogelin Çorbası", "price": "250 TL", "category": "Çorbalar" },
+      { "name": "Adana Kebap", "price": "750 TL", "category": "Kebap & Izgaralar" },
+      { "name": "Kasap Köfte", "price": "750 TL", "category": "Kebap & Izgaralar" },
+      { "name": "Alinazik Kebap (Şişten)", "price": "990 TL", "category": "Kebap & Izgaralar" },
+      { "name": "Beyti Sarma Kebap", "price": "850 TL", "category": "Kebap & Izgaralar" },
+      { "name": "Domatesli Kebap", "price": "750 TL", "category": "Kebap & Izgaralar" },
+      { "name": "Çöp Şiş", "price": "990 TL", "category": "Kebap & Izgaralar" },
+      { "name": "İskender Kebap (Kıymadan)", "price": "900 TL", "category": "Kebap & Izgaralar" },
+      { "name": "Izgara Tavuk", "price": "700 TL", "category": "Kebap & Izgaralar" },
+      { "name": "Karışık Izgara (2 Kişilik)", "price": "2500 TL", "category": "Kebap & Izgaralar" },
+      { "name": "Tavuk Kanat", "price": "700 TL", "category": "Kebap & Izgaralar" },
+      { "name": "Urfa Kebap", "price": "750 TL", "category": "Kebap & Izgaralar" },
+      { "name": "Kaşarlı Lahmacun", "price": "300 TL", "category": "Fırın Ürünleri" },
+      { "name": "Kıymalı Kaşarlı Pide", "price": "500 TL", "category": "Fırın Ürünleri" },
+      { "name": "Kıymalı Pide", "price": "500 TL", "category": "Fırın Ürünleri" },
+      { "name": "Kuşbaşılı Pide", "price": "650 TL", "category": "Fırın Ürünleri" },
+      { "name": "Kuşbaşılı Kaşarlı Pide", "price": "650 TL", "category": "Fırın Ürünleri" },
+      { "name": "Sucuklu Kaşarlı Pide", "price": "500 TL", "category": "Fırın Ürünleri" },
+      { "name": "Adana Dürüm", "price": "450 TL", "category": "Dürümler" },
+      { "name": "Urfa Dürüm", "price": "450 TL", "category": "Dürümler" },
+      { "name": "Tavuk Şiş Dürüm", "price": "450 TL", "category": "Dürümler" },
+      { "name": "Kuzu Şiş Dürüm", "price": "500 TL", "category": "Dürümler" },
+      { "name": "Çöp Şiş Dürüm", "price": "500 TL", "category": "Dürümler" }
+    ]
+  },
   "6779": {
     "name": "BLACK DROP BURGER",
     "sourceUrl": "https://www.instagram.com/reel/DG3IrjUilXo/",

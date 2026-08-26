@@ -2157,3 +2157,6 @@ Hentzer kaydı `Sinanpaşa, Şht. Asım Cd. No:47, 34357 Beşiktaş/İstanbul`, 
 
 ## KAKTÜS CAFE BEYLİKDÜZÜ ID 6778 HOLD
 Hentzer kaydı `Barış, Palmiye Sokağı, 34520 Beylikdüzü/İstanbul`, telefon `+90 542 383 12 12`. Yandex ana kaydı adresi destekliyor ancak panorama sonucu `Palmiye Sok. No:2A` ve farklı telefon `+90 537 503 57 77` veriyor. Fiyatlı QR menü sonucu `kaktuscafedortyol.com` farklı şehirdeki işletmeye ait; Beylikdüzü şubesine ait son bir yıl fiyat listesi doğrulanamadı. %100 adres/telefon ve branch-specific fiyat şartı sağlanamadığı için **override eklenmedi; strict HOLD**.
+
+## KADIKÖY KEBAPÇISI BEYLİKDÜZÜ ID 6777 ACCEPTED
+Hentzer kaydı `Büyükşehir, Atatürk Blv. No:38/A İç:24, 34520 Beylikdüzü/İstanbul`, telefon `+90 212 872 69 79`. İşletmenin resmi Instagram hesabı Beylikdüzü şubesi ve aynı telefonu; Bulurum ve güncel servis listesi de adres/telefonu destekliyor. Canlı Yemeksepeti menüsü 26.08.2026 tarihinde 25 gıda ürünü için fiyat yayınlıyordu. Poşet gibi gıda dışı kalemler eklenmedi. **25 ürün override edildi.**
