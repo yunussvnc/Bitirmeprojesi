@@ -3144,3 +3144,6 @@ Instagram Şubat 2026, Yandex, Snapchat, Servis Kayıt ve Facebook Hentzer ile e
 
 ## DIPLAB CAFÉ BEYLİKDÜZÜ METROHOME ID 6458 HOLD
 Yandex/İstanbul Servis Listesi Hentzer telefonunu `+90 501 012 15 60` destekliyor; ancak Yandex adresi `Derviş Eroğlu Cad. 6AC`, Hentzer ise `Nadir Sokak No:1/20 L Blok Ofis, işyeri No:43` olarak farklı. Exact branch adresi ve 20 güncel fiyatlı ürün menüsü doğrulanamadı. **Override eklenmedi; strict HOLD.**
+
+## DÜRÜM BISTRO ID 6457 HOLD
+Maptons/resmi eatbu/Tripadvisor ve yerel kaynaklar Hentzer ile exact `Tomtom, Eski Çiçekçi Sk. 36/A, 34433 Beyoğlu/İstanbul` ve `+90 212 243 44 51` parity’sini destekliyor; Tripadvisor kapı ekini 36/A2 gösteriyor. Exact Migros vendorunda ürün açıklamaları var ancak ürün TL fiyatları yayımlanmıyor; 20 güncel fiyatlı ürün doğrulanamadı. **Override eklenmedi; strict HOLD.**
