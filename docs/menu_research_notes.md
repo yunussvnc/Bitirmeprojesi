@@ -2912,3 +2912,6 @@ Hentzer `Yıldız, Gayrettepe, Jandarma Mektebi Sk. No:7, 34353 Beşiktaş`, tel
 
 ## BEYKENT KEBABİ ALO PAKET ID 6531 HOLD
 Hentzer `Adnan Kahveci, Anadolu Cd., 34528 Beylikdüzü/İstanbul`, telefon `+90 212 856 11 02`. Mekanlar/Yandex/Facebook exact şube ve telefonu destekliyor; ancak son bir yıl içinde bu exact işletmeye ait ürün bazlı güncel TL menü bulunamadı. Görülen yeni Instagram şubesi ve Migros Kayıbey Et kaydı farklı işletmelerdir. **Override eklenmedi; strict HOLD.**
+
+## YILDIRIM PASTANESİ ID 6530 HOLD
+Hentzer `Yıldırım, Şht. Kamil Balkan Cd. No:82, 34045 Bayrampaşa`, telefon `+90 212 581 85 26`. Telefon eşleşse de Bulurum `No:62`, Yandex `No:62A` gösteriyor; Hentzer No:82 exact adresi doğrulanamadı. Son bir yıl exact şubeye ait ürün bazlı güncel TL menü de bulunamadı. **Override eklenmedi; strict HOLD.**
