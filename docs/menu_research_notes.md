@@ -2440,3 +2440,6 @@ Hentzer kaydı `Türkali, Yeniyol Sokağı No:12/A, 34357 Beşiktaş/İstanbul`,
 
 ## SUSHI&SPICE AKMERKEZ ID 6685 HOLD
 Hentzer kaydı `Kültür, Nisbetiye Cd. Akmerkez AVM No:56, 34340 Beşiktaş/İstanbul`, telefon `+90 505 496 94 09`. Akmerkez mağaza kaydı, resmi Sushi&Spice menü bağlantısı ve Polomap/Restaurant Guru kayıtları exact Akmerkez şubesini ve telefonu destekliyor. Resmi menü sayfasında yalnızca Türkçe/İngilizce menü bağlantıları görülebildi; güncel fiyatlı ürün listesi metin olarak doğrulanamadı. Son bir yıl fiyat şartı sağlanamadığından **override eklenmedi; strict HOLD**.
+
+## VALENSA WAFFLE BAYRAMPAŞA ID 6684 HOLD
+Hentzer kaydı `Yıldırım, Tunaboylu Sok. No:62, 34045 Bayrampaşa/İstanbul`, telefon `+90 552 525 42 67`. Valensa resmi Instagram/Facebook ve Yandex telefonla eşleşiyor; ancak Yandex adresi No:62B olarak geçiyor ve Hentzer kaydındaki No:62 ile birim parity’si kesin değil. Yemeksepeti’nde güncel fiyatlı waffle ürünleri bulunsa da exact adres birimi kesin doğrulanamadığından **override eklenmedi; strict HOLD**.
