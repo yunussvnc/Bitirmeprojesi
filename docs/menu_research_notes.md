@@ -2431,3 +2431,6 @@ Hentzer kaydı `Sinanpaşa, Ihlamurdere Cd. No:19, 34353 Beşiktaş/İstanbul`, 
 
 ## PANAMA COFFEE BEYLİKDÜZÜ ID 6688 HOLD
 Hentzer kaydı `Cumhuriyet, Onur Sk. F Blok No:1 D, 34045 Beylikdüzü/İstanbul`, telefon alanı boş. Resmi sosyal açılış paylaşımı adresi `Onur Sk. No:1C–1D (F3–F4)` olarak verirken Yandex No:1C gösteriyor; bu nedenle Hentzer’in D birimiyle exact adres birimi parity’si net değil. 26.05.2026 tarihli 100 TL açılış içecek kampanyası bulunsa da exact telefon doğrulanamadı. **Override eklenmedi; strict HOLD**.
+
+## NATURAL FISH & KEBAP BEYOĞLU ID 6687 HOLD
+Hentzer kaydı `Kocatepe, Şht. Muhtar Bey Cd. No:39A, 34437 Beyoğlu/İstanbul`, telefon `+90 551 588 59 57`. Telefon Yandex ve çeşitli yerel kayıtlarda eşleşiyor; ancak Yandex’in farklı dil/kayıt sonuçlarında adres No:41A, diğer kaynaklarda No:39A görünüyor. Fiyatlı menü iddiaları üçüncü taraf sayfalarda bulunmasına rağmen güncelleme tarihi ve tekil exact branch kanıtı yok. Adres parity ve son bir yıl fiyat doğrulaması kesin olmadığı için **override eklenmedi; strict HOLD**.
