@@ -2545,3 +2545,6 @@ Hentzer kaydı `Adnan Kahveci Mahallesi, Kışla Caddesi, Seyran Sk. No:4/1, 345
 
 ## 7-8 HASANPAŞA FIRINI ID 6649 ACCEPTED
 Hentzer kaydı `Sinanpaşa, Şht. Asım Cd. No:8, 34353 Beşiktaş/İstanbul`, telefon `+90 212 261 97 66`. Postcard ve Tumisyeri aynı adres/telefonu, resmi Instagram hesabı da işletmeyi doğruluyor. 26.02.2026 tarihli fiyatlı paylaşımda Açma 25 TL, Poğaça 20 TL ve Simit 25 TL olarak listelenmiş; bu üç ürün eklendi.
+
+## GÜNAYDIN KEBAP & STEAKHOUSE MAÇKA ID 6648 HOLD
+Hentzer kaydı `Vişnezade, Bayıldım Cd. No:2, 34400 Beşiktaş/İstanbul`, telefon `+90 212 258 12 03`. Yandex, Meyhankoli, Mekanlar ve resmi Günaydın sosyal paylaşımı aynı Maçka/Bayıldım No:2 adresini ve telefonu doğruluyor; işletme aktif. Resmi Günaydın 2026 menü sayfası ürün başlıklarını listeliyor fakat fiyat yayınlamıyor; bulunan fiyatlı üçüncü taraf menülerin tarihi/şube kapsamı son bir yıl exact şartını karşılamıyor. **Override eklenmedi; strict HOLD**.
