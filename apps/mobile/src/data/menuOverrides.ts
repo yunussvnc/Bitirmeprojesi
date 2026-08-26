@@ -91007,6 +91007,30 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "5 Çeşit Meze Menü", "price": "1500 TL", "category": "Özel Menü" }
     ]
   },
+  "6589": {
+    "name": "RETRO DÖNER BEYLİKDÜZÜ",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/ui8l/retro-doner-eski-usul",
+    "sourceName": "Canlı Yemeksepeti Retro Döner Eski Usul menüsü; Yandex ve resmi Instagram exact adres-telefon doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Et Döner Dürüm (80 gr)", "price": "343,20 TL", "category": "Et Döner Dürüm" },
+      { "name": "Et Döner Dürüm (100 gr)", "price": "431,20 TL", "category": "Et Döner Dürüm" },
+      { "name": "Et Döner Dürüm (150 gr)", "price": "615,20 TL", "category": "Et Döner Dürüm" },
+      { "name": "Et Döner Dürüm (200 gr)", "price": "695,20 TL", "category": "Et Döner Dürüm" },
+      { "name": "Tombik Et Döner (100 gr)", "price": "431,20 TL", "category": "Tombik Et Döner" },
+      { "name": "Tombik Et Döner (150 gr)", "price": "615,20 TL", "category": "Tombik Et Döner" },
+      { "name": "Tombik Et Döner (200 gr)", "price": "695,20 TL", "category": "Tombik Et Döner" },
+      { "name": "Pilav Üstü Et Döner (100 gr)", "price": "440 TL", "category": "Pilav Üstü Et Döner" },
+      { "name": "Pilav Üstü Et Döner (200 gr)", "price": "696 TL", "category": "Pilav Üstü Et Döner" },
+      { "name": "Ekmek Arası Et Döner (80 gr)", "price": "343,20 TL", "category": "Ekmek Arası Et Döner" },
+      { "name": "Ekmek Arası Et Döner (100 gr)", "price": "431,20 TL", "category": "Ekmek Arası Et Döner" },
+      { "name": "Ekmek Arası Et Döner (150 gr)", "price": "615,20 TL", "category": "Ekmek Arası Et Döner" },
+      { "name": "Ekmek Arası Et Döner (200 gr)", "price": "695,20 TL", "category": "Ekmek Arası Et Döner" },
+      { "name": "Porsiyon Et Döner (100 gr)", "price": "440 TL", "category": "Porsiyon Et Döner" },
+      { "name": "Porsiyon Et Döner (150 gr)", "price": "620 TL", "category": "Porsiyon Et Döner" },
+      { "name": "Porsiyon Et Döner (200 gr)", "price": "696 TL", "category": "Porsiyon Et Döner" }
+    ]
+  },
   "6590": {
     "name": "KOMAGENE ETSİZ ÇİĞ KÖFTE PAŞABAHÇE",
     "sourceUrl": "https://www.migros.com.tr/yemek/komagene-etsiz-cig-kofte-beykoz-pasabahce-mah-st-35682",
