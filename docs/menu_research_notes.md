@@ -2217,3 +2217,6 @@ Hentzer kaydı `Abbasağa, Maşuklar Ykş. No:111, 34353 Beşiktaş/İstanbul`, 
 
 ## MOLECULE COFFEE BEŞİKTAŞ ID 6758 HOLD
 Hentzer kaydı `Vişnezade, Şair Nedim Cd. 25/A D:25/A, 34353 Beşiktaş/İstanbul`, telefon `+90 541 850 26 75`. İşletmenin resmi iletişim sayfası, Facebook ve Yandex aynı adres/telefonu destekliyor; resmi sitede Akatlar’daki ayrı ikinci lokasyon da listelendiğinden şube ayrımı korundu. Ancak resmi kafe sayfası ve erişilebilir kaynaklarda son bir yıl içinde tüketici ürünlerine ait fiyatlı menü bulunamadı; `coffeemolecule.com` kahve çekirdeği/ekipman e-ticaret kataloğu olduğundan mekan menüsü sayılmadı. **Override eklenmedi; strict HOLD**.
+
+## UMUT OCAKBAŞI BEYOĞLU ID 6757 HOLD
+Hentzer kaydı `Katip Mustafa Çelebi, Hasnun Galip Sk. No:8, 34433 Beyoğlu/İstanbul`, telefon `+90 212 245 50 05`. Yandex, Bulurum, YemekArama ve 2025 sosyal içerikleri aynı adres/telefonu destekliyor; ek telefon olarak 0544 409 45 45 de görülüyor. Ancak erişilebilir resmi fiyatlı menü bulunamadı; resmi alan adına erişim başarısız oldu, sosyal içerikler ürün fiyatı vermiyor. Son bir yıl fiyat doğrulaması sağlanamadığı için **override eklenmedi; strict HOLD**.
