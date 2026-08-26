@@ -3085,3 +3085,6 @@ Kaynaklar: https://upperdeckk.com/tr ; https://www.yemeksepeti.com/en/restaurant
 
 ## ESPRESSOLAB BEYLİKDÜZÜ YAŞAM VADİSİ ID 6477 HOLD
 Espressolab resmi mağaza sayfası Hentzer ile exact `Cumhuriyet, Atatürk Blv. No:27, 34520 Beylikdüzü/İstanbul` ve `+90 444 8464` parity’sini doğruluyor. Ancak Yemeksepeti sonuçlarında Yaşam Vadisi exact vendor parity’si kurulamadı; bu nedenle 20 güncel gıda ürünü exact şubeye bağlanamadı. **Override eklenmedi; strict HOLD.**
+
+## ÖZ ANTEP BAKLAVALARI BEYLİKDÜZÜ ID 6476 HOLD
+Resmi sosyal paylaşımlar Hentzer ile aynı şube telefonu `+90 535 700 87 64` ve Büyükdere Cd. 8/3 C Blok No:1 adresini doğruluyor. Ancak exact Beylikdüzü şubesine ait son bir yıl fiyatlı 20 ürün menüsü bulunamadı; diğer şehirlerdeki Öz Antep vendorları kullanılamadı. **Override eklenmedi; strict HOLD.**
