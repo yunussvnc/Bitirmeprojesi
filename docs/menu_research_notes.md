@@ -2771,3 +2771,6 @@ Hentzer kaydı `Kavacık, Orhan Veli Kanık Cd. 48A, 34810 Beykoz/İstanbul`, te
 
 ## GÜNGÖR CAFE PATISSERIE TERAZİDERE ID 6575 HOLD
 Hentzer kaydı `Terazidere Mahallesi Manastır Caddesi, Karasu Sk. No:27, 34035 Bayrampaşa/İstanbul`, telefon `+90 212 613 68 07`. Yandex, Yelp, Facebook ve Bulurum exact adres/telefonu doğruluyor; resmi Güngör Pastaneleri sitesi mevcut durumda bakım sayfasında ve menü yayımlamıyor. Mekan profillerinde menü kategorileri bulunsa da son bir yıl içinde ürün bazlı, doğrulanabilir fiyatlı exact şube menüsü bulunamadı. **Override eklenmedi; strict HOLD.**
+
+## LEYLA AKAT ID 6574 HOLD
+Hentzer kaydı `Akat, Yaren Sk. 6/13, 34335 Beşiktaş/İstanbul`, telefon `+90 212 806 80 73`. Meyhankoli exact adres ve telefonu doğruluyor; Yandex aynı işletmeyi No:6 çevresinde gösteriyor. Ancak kamuya açık kaynaklarda yalnızca kişi başı ortalama `330 TL` bilgisi var, ürün bazlı menü fiyatı yok. Son bir yıl fiyatlı exact şube menüsü doğrulanamadığından **override eklenmedi; strict HOLD**.
