@@ -2921,3 +2921,6 @@ Hentzer `Cihannüma, Akmaz Çeşme Sk. No:38, 34353 Beşiktaş`, telefon `+90 53
 
 ## THE COFFEE FACTORY BEYLİKDÜZÜ AKROS ID 6528 HOLD
 Hentzer `Barbaros Hayrettin Paşa, 1992 Sokak No:8-10A, 34522 Esenyurt`, telefon `+90 533 405 94 77`. Resmi mağaza listesi exact Akros şubesini ve telefonu doğruluyor; ancak Yemeksepeti menü vendoru zincirin çoklu şubeleri arasında exact Akros adres/telefonunu göstermiyor. Son bir yıl fiyatları görülse de ID 6528’e exact branch parity’si kanıtlanamadı. **Override eklenmedi; strict HOLD.**
+
+## BALKAN LOKANTASI ID 6527 HOLD
+Hentzer `Cihannüma, Akmaz Çeşme Sk. No:8, 34353 Beşiktaş`, telefon `+90 212 327 55 69`. Tripadvisor/Trip.com/Bulurum/Nasilbiryer ve 13.02.2026 tarihli Instagram paylaşımı exact şubeyi destekliyor; ancak son bir yıl içinde ürün bazlı güncel TL menü bulunamadı. Eski fiyatlar veya kişi başı hesap bilgileri menü doğrulaması için yeterli değil. **Override eklenmedi; strict HOLD.**
