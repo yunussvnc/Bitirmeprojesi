@@ -2539,3 +2539,6 @@ Hentzer kaydı `Perlavista AVM Rezidans, Adnan Kahveci, Yavuz Sultan Selim Blv. 
 
 ## 2TEK ALAF KURUÇEŞME ID 6651 HOLD
 Hentzer kaydı `Kuruçeşme, Kuruçeşme Cd. 19B, 34345 Beşiktaş/İstanbul`, telefon `+90 530 979 47 95`. Tripadvisor, Corner, Facebook ve 2Tek sosyal hesapları adres/telefonu destekliyor. Alaf Kuruçeşme resmi sitesinde `17.06.2026` tarihli fiyatlı Alacarte/Tadım PDF’leri mevcut; ancak bunlar `Alaf Kuruçeşme` ana konsept menüleri ve 2Tek alt konseptine ait exact fiyat listesi oldukları kesinleştirilemedi. Yanlış konsepte menü aktarmamak için **override eklenmedi; strict HOLD**.
+
+## LA GARDA BEYLİKDÜZÜ ID 6650 HOLD
+Hentzer kaydı `Adnan Kahveci Mahallesi, Kışla Caddesi, Seyran Sk. No:4/1, 34528 Beylikdüzü/İstanbul`, telefon `+90 533 310 46 33`. Resmi sosyal ve Kafnet 4/1 adresini/telefonu destekliyor; ancak Yandex aktif kaydı adresi `Seyran Sok. 6/1` olarak veriyor, Corner kaydı da işletmeyi kapalı gösteriyor. Son bir yıl içinde doğrulanabilir fiyatlı exact menü bulunamadı. **Override eklenmedi; strict HOLD**.
