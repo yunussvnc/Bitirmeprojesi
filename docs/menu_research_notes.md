@@ -3205,3 +3205,6 @@ Yandex Hentzer ile aynı Muratpaşa/Cumhuriyet Cad. civarını gösterse de adre
 ## ANTAKYA İŞİ KEBAB & SOKAK LEZZETLERİ ID 6439 ACCEPTED
 Hentzer `Hüseyinağa, Sahne Sk. No:18, 34435 Beyoğlu/İstanbul`, telefon `+90 212 245 43 12`. Resmi Antakya İşi içeriği ve Instagram exact adres/telefonu destekliyor. Canlı Yemeksepeti `su4a` menüsünden popüler carousel tekrarları, içecek/poşet kalemleri dışlanarak 20 benzersiz çorba, lahmacun, kebap, kokoreç ve dürüm ürünü eklendi. **Override kabul edildi.**
 Kaynaklar: https://www.yemeksepeti.com/en/restaurant/su4a/antakya-isi-sokak-lezzetleri ; https://www.antakyaisisokaklezzetleri.com/post/taksim-ocakbasi-tek-tek ; https://www.instagram.com/antakyaisisokaklezzetleri/
+
+## ÇARŞI BÜFE ID 6438 HOLD
+Adres/telefon parity’si kesin değil: Hentzer `24/C`, `0537 364 90 66`; Yelp/Bulurum `24/C` fakat `0212 261 83 50`; Yandex `Quaresma Çarşı Büfe`, `24A` ve `0537 364 90 66`. Exact şube ve güncel 20 ürün fiyatlı menü doğrulanamadı; farklı şehir Yemeksepeti sonuçları kullanılmadı. **Override eklenmedi; strict HOLD.**
