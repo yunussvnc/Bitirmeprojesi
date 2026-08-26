@@ -2341,3 +2341,6 @@ Hentzer kaydı `Paşamandıra Mahallesi, Paşamandıra Caddesi 43/1, 34829 Beyko
 
 ## SARAY FIRIN KAVAKLI ID 6718 ACCEPTED
 Hentzer kaydı `Kavaklı, Bağlar Cd. C Blok İnş D:22/13, 34520 Beylikdüzü/İstanbul`, telefon `+90 539 945 28 88`. Saray Fırın Kavaklı resmi sitesinin iletişim bilgileri aynı adres ve telefonu veriyor; resmi Instagram da aynı WhatsApp hattını destekliyor. 26.08.2026 tarihinde resmi sitedeki fiyatlı ve yeni ürün kataloğundan ilk 20 benzersiz özel tasarım pasta ürün-fiyat çifti alındı; katalog ürün görsellerindeki 2025 sonu veri damgaları son bir yıl şartını karşılıyor. **20 gıda ürünü override edildi.**
+
+## İBB KIR BAHÇESİ SOSYAL TESİSLERİ BEYKOZ ID 6717 HOLD
+Hentzer kaydı `Gümüşsuyu, 34820 Beykoz/İstanbul` ve telefon alanı boş. Kamu kaynaklarında aynı isim için `Beykoz Korusu, Merkez Mah. Mehmet Yavuz Cad. 124/1` adresi ve İBB genel hattı `444 10 34` veriliyor; bu, Hentzer’deki eksik/özet adres ve boş telefonla zorunlu exact parity sağlamıyor. 2025-2026 sosyal medya fiyat parçaları bulunsa da branch kimliği kesin eşleşmediği için **override eklenmedi; strict HOLD**.
