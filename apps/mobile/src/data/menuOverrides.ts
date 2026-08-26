@@ -91496,6 +91496,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Tahinli Ekmek", "price": "97 TL", "category": "Ekmekler" },
       { "name": "Tatlı Kuru Pasta (250 gr.)", "price": "150 TL", "category": "Kuru Pastalar" },
       { "name": "Tuzlu Kuru Pasta (250 gr.)", "price": "150 TL", "category": "Kuru Pastalar" }
+        ]
+  },
+  "6543": {
+    "name": "Burger Yiyelim",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/iai4/burger-yiyelim-iai4",
+    "sourceName": "Canlı Yemeksepeti exact Bağcılar/Nurol Park şubesi; resmi Burger Yiyelim menüsü ile ürün eşleştirmesi",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Smash Burger Menü", "price": "510 TL", "category": "Smash Burger Menüleri" },
+      { "name": "Cherry Smash Burger Menü", "price": "520 TL", "category": "Smash Burger Menüleri" },
+      { "name": "Truffle Smash Burger Menü", "price": "520 TL", "category": "Smash Burger Menüleri" },
+      { "name": "Medium Burger Menü", "price": "470 TL", "category": "Burger Menüleri" },
+      { "name": "Medium Cheese Burger Menü", "price": "490 TL", "category": "Burger Menüleri" },
+      { "name": "Medium Butcher Burger Menü", "price": "510 TL", "category": "Burger Menüleri" },
+      { "name": "Gourmet BBQ Burger Menü", "price": "560 TL", "category": "Burger Menüleri" },
+      { "name": "Burger Yiyelim Menü", "price": "580 TL", "category": "Burger Menüleri" },
+      { "name": "Steak Burger Menü", "price": "690 TL", "category": "Burger Menüleri" },
+      { "name": "Lokum Burger Menü", "price": "695 TL", "category": "Burger Menüleri" },
+      { "name": "Gourmet Chicken Burger Menü", "price": "470 TL", "category": "Tavuk Burger Menüleri" },
+      { "name": "Sweet Mayo Burger Menü", "price": "500 TL", "category": "Tavuk Burger Menüleri" },
+      { "name": "Tenders Burger Menü", "price": "455 TL", "category": "Tavuk Burger Menüleri" },
+      { "name": "Legendary Chicken Burger Menü", "price": "470 TL", "category": "Tavuk Burger Menüleri" },
+      { "name": "Boneless Crispy Menü", "price": "545 TL", "category": "Kova Tavuk Menüleri" },
+      { "name": "Huge Crispy Menü", "price": "610 TL", "category": "Kova Tavuk Menüleri" },
+      { "name": "4-Piece Chicken Wing Menü", "price": "475 TL", "category": "Çıtır Tavuk Menüleri" },
+      { "name": "6-Piece Chicken Wing Menü", "price": "585 TL", "category": "Çıtır Tavuk Menüleri" },
+      { "name": "4-Piece Boneless Crispy Menü", "price": "455 TL", "category": "Çıtır Tavuk Menüleri" },
+      { "name": "9'lu Gurme Nugget Menü", "price": "350 TL", "category": "Çıtır Tavuk Menüleri" }
     ]
-  }
+  },
 };

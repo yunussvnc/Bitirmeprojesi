@@ -2864,3 +2864,11 @@ Hentzer `Çubuklu, Kireçocağı Cd No:4, 34820 Beykoz`, telefon `+90 216 999 50
 
 ## BEYLİKDÜZÜ DÖNER ID 6544 HOLD
 Hentzer `Büyükşehir, Beylikdüzü Cd. No:5 D:2K, 34520 Beylikdüzü`, telefon `+90 212 741 18 88`. Yandex telefon/eşleşmeyi destekliyor; ancak exact şubeye ait son bir yıl ürün bazlı TL fiyatlı menü doğrulanamadı. **Override eklenmedi; strict HOLD.**
+
+## BURGER YİYELİM BAĞCILAR ID 6543 ACCEPTED
+Hentzer `15 Temmuz, Bahar Cd. Nurol Park E Blok No:45 İç Kapı No:1845, 34212 Bağcılar/İstanbul`, telefon `+90 501 620 04 88`. Yemeksepeti exact vendor `iai4` aynı adresi ve 26.08.2026 tarihli canlı yorumları doğruluyor; resmi Burger Yiyelim menü sayfası ürün kategorilerini destekliyor. 20 benzersiz gıda ürünü canlı fiyatlarla eklendi; içecek ve poşet ürünleri dışarıda bırakıldı. **Override kabul edildi.**
+Kaynak: https://www.yemeksepeti.com/en/restaurant/iai4/burger-yiyelim-iai4
+
+## BURGER YİYELİM BAĞCILAR ID 6543 ACCEPTED
+Hentzer `15 Temmuz, Bahar Cd. Nurol Park E Blok No:45 İç Kapı No:1845, 34212 Bağcılar/İstanbul`, telefon `+90 501 620 04 88`. Yemeksepeti exact vendor `iai4` aynı adresi ve 26.08.2026 tarihli canlı yorumları doğruluyor; resmi Burger Yiyelim menü sayfası ürün kategorilerini destekliyor. 20 benzersiz gıda ürünü canlı fiyatlarla eklendi; içecek ve poşet ürünleri dışarıda bırakıldı. **Override kabul edildi.**
+Kaynak: https://www.yemeksepeti.com/en/restaurant/iai4/burger-yiyelim-iai4
