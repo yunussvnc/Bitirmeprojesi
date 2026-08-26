@@ -2362,3 +2362,6 @@ Hentzer kaydı `Cihannüma, Barbaros Blv. No:3, 34353 Beşiktaş/İstanbul`, tel
 
 ## İBB BEYKOZ KORUSU ID 6711 HOLD
 Hentzer kaydı `Merkez, Kelle İbrahim Cd. 30/A, 34820 Beykoz/İstanbul`, telefon alanı boş. İBB tesis rezervasyon sistemi, Yandex ve yerel resmi/kurumsal kayıtlar aynı sosyal tesisi `Kelle İbrahim Caddesi No:17/A` ve `444 10 34` ile gösteriyor. Adres kapı numarası ve telefon exact eşleşmediği için, 2024/2025/2026 tarihli fiyat parçaları bulunsa da branch kimliği kesin doğrulanamadı. **Override eklenmedi; strict HOLD**.
+
+## BAHÇE DÜRÜM - KEBAP BEYKOZ ID 6710 ACCEPTED
+Hentzer kaydı `Göksu, Hekimbaşı Çiftlik Cd. No:5, 34815 Beykoz/İstanbul`, telefon `+90 532 131 99 93`. Mekanlar/Menu-tr kayıtları No:5 adresini; Yandex aynı telefonu ve Göksu şubesini doğruluyor. 26.08.2026 tarihinde canlı Yemeksepeti menüsünden içecekler ve poşet dışarıda bırakılarak çorba, kebap, kokoreç, dürüm, ekmek arası, yan ürün ve tatlı kategorilerinden 20 benzersiz ürün-fiyat çifti alındı. **20 gıda ürünü override edildi.**

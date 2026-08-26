@@ -4,6 +4,34 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6710": {
+    "name": "BAHÇE DÜRÜM - KEBAP BEYKOZ",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/hzo8/bahce-durum-and-kebap-hzo8",
+    "sourceName": "Canlı Yemeksepeti menüsü; Mekanlar/Menu-tr ve Yandex ile exact adres/telefon doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Günün Çorbası", "price": "120 TL", "category": "Çorbalar" },
+      { "name": "Adana Kebap", "price": "600 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Urfa Kebap", "price": "600 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Çöp Şiş", "price": "720 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Ciğer Şiş", "price": "600 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Tavuk Şiş", "price": "560 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Izgara Köfte", "price": "600 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Tavuk Kanat", "price": "440 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Yarım Ekmek Arası Kokoreç", "price": "320 TL", "category": "Kokoreçler" },
+      { "name": "Yarım Ekmek Arası İzmir Kokoreç", "price": "400 TL", "category": "Kokoreçler" },
+      { "name": "Adana Dürüm", "price": "300 TL", "category": "Dürümler" },
+      { "name": "Urfa Dürüm", "price": "300 TL", "category": "Dürümler" },
+      { "name": "Çöp Şiş Dürüm", "price": "340 TL", "category": "Dürümler" },
+      { "name": "Ciğer Şiş Dürüm", "price": "300 TL", "category": "Dürümler" },
+      { "name": "Tavuk Şiş Dürüm", "price": "280 TL", "category": "Dürümler" },
+      { "name": "Yarım Ekmek Arası Köfte", "price": "300 TL", "category": "Ekmek Arası Ürünler" },
+      { "name": "Yarım Ekmek Arası Sucuk", "price": "360 TL", "category": "Ekmek Arası Ürünler" },
+      { "name": "Mevsim Salata", "price": "120 TL", "category": "Yan Ürünler" },
+      { "name": "Patates Kızartması", "price": "160 TL", "category": "Yan Ürünler" },
+      { "name": "Sütlaç", "price": "144 TL", "category": "Tatlılar" }
+    ]
+  },
   "6714": {
     "name": "FORDİETA & TARİHİ KAFKAS DONDURMA",
     "sourceUrl": "https://www.tarihikafkasdondurma.com/menu/index.html",
