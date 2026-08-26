@@ -2674,3 +2674,6 @@ Hentzer kaydı `Muratpaşa Mahallesi, Cicoz Yolu Caddesi No:187, 34040 Bayrampa�
 
 ## YOUPLACE BEŞİKTAŞ ID 6607 HOLD
 Hentzer kaydı `Vişnezade, Çatlak Çeşme Sk. No:4/C, 34357 Beşiktaş/İstanbul`, telefon `+90 506 365 14 22`. Restoranim.net aynı adres ve telefonu doğruluyor; Facebook/Instagram lokasyon sonuçları da No:4C ve aynı telefonu destekliyor. Ancak exact şubeye ait son bir yıl içinde yayımlanmış ürün bazlı fiyatlı menü bulunamadı; kaynaklar yalnızca genel fiyat aralığı/yorum veriyor. Bu nedenle **override eklenmedi; strict HOLD**.
+
+## PAMUKBABA BAYRAMPAŞA ID 6606 HOLD
+Hentzer kaydı `İsmet Paşa, İsmet Paşa Cd. 21/A, 34040 Bayrampaşa/İstanbul`, telefon `+90 212 674 80 89`. Mekanlar.com ve Mekan.com aynı 21/A adresi ile telefonu doğruluyor; Bulurum da aynı telefonla işletmeyi Pamuk Baba Börekçisi olarak listeliyor. Ancak son bir yıl içinde exact şubeye ait ürün bazlı fiyatlı menü bulunamadı; mevcut dizinler yalnızca kategori/fiyat aralığı veriyor. **Override eklenmedi; strict HOLD.**
