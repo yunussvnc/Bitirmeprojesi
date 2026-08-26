@@ -3138,3 +3138,6 @@ Kaynaklar: https://betroburger.com/subeler ; https://www.yemeksepeti.com/en/rest
 
 ## BEYLİKDÜZÜ MEŞHUR MARAŞ DONDURMACISI / YÖN BAKLAVA ID 6460 HOLD
 Yön Baklava resmi sosyal kaynakları ve Yemeksepeti h35e vendoru Lotus Koru 1/24B şubesini destekliyor; ancak Yandex aynı işletme için No:24A ve farklı `+90 505 347 5880` telefonunu yayımlıyor. Hentzer `+90 537 792 85 96` ile %100 phone parity sağlanamadı ve işletme adı birleşik/ambiguous. **Override eklenmedi; strict HOLD.**
+
+## TELGRAFHANE 1855 ID 6459 HOLD
+Instagram Şubat 2026, Yandex, Snapchat, Servis Kayıt ve Facebook Hentzer ile exact `Anadolu Hisarı, Toplarönü Sk No:1, 34810 Beykoz/İstanbul` ve `+90 536 924 01 44` bilgisini destekliyor; ancak Tripadvisor aynı exact adres için farklı `+90 551 970 63 83` telefonu veriyor. 20 benzersiz güncel fiyatlı gıda menüsü de doğrulanamadı. **Override eklenmedi; strict HOLD.**
