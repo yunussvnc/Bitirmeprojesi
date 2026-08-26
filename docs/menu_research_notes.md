@@ -2365,3 +2365,6 @@ Hentzer kaydı `Merkez, Kelle İbrahim Cd. 30/A, 34820 Beykoz/İstanbul`, telefo
 
 ## BAHÇE DÜRÜM - KEBAP BEYKOZ ID 6710 ACCEPTED
 Hentzer kaydı `Göksu, Hekimbaşı Çiftlik Cd. No:5, 34815 Beykoz/İstanbul`, telefon `+90 532 131 99 93`. Mekanlar/Menu-tr kayıtları No:5 adresini; Yandex aynı telefonu ve Göksu şubesini doğruluyor. 26.08.2026 tarihinde canlı Yemeksepeti menüsünden içecekler ve poşet dışarıda bırakılarak çorba, kebap, kokoreç, dürüm, ekmek arası, yan ürün ve tatlı kategorilerinden 20 benzersiz ürün-fiyat çifti alındı. **20 gıda ürünü override edildi.**
+
+## MUHABBET OCAKBAŞI BEYLİKDÜZÜ ID 6709 HOLD
+Hentzer kaydı `38 Skyport 1 Beylikdüzü, Yakuplu, Hürriyet Blv., 34524 Beylikdüzü/İstanbul`, telefon `+90 212 690 10 00`. Mekanlar kaydı aynı adres ve telefonu; resmi Instagram Skyport Residence ve aynı sabit hattı; 2026 tarihli sosyal paylaşım da telefonu doğruluyor. FırsatBuFırsat sayfası fiyatlı kampanya geçmişi sunsa da güncel/kalıcı menü fiyatı değildir ve exact ürün listesi yayınlamıyor. Exact şubeye ait son bir yıl fiyatlı menü bulunamadığı için **override eklenmedi; strict HOLD**.
