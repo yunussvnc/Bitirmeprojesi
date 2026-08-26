@@ -3104,3 +3104,6 @@ Hentzer No:18 adresini Yandex/Cybo/yerel dizinler destekliyor; Facebook No:7 ver
 
 ## DELL'AMANTE COFFEE ID 6471 HOLD
 Resmi sosyal kaynaklar ve yerel kayıt Hentzer ile exact `Alya Residence, Adnan Kahveci, Büyükdere Cd. No:2/8` ve `+90 850 305 2111` parity’sini doğruluyor. Ancak güncel vendor menüsünde güvenilir biçimde 20 benzersiz gıda kalemi tamamlanamadı; içecekleri dahil etmek politika gereği uygun değil. **Override eklenmedi; strict HOLD.**
+
+## BETTER TOGETHER ID 6470 HOLD
+MenüBurada Hentzer ile exact No:40 ve `+90 507 824 52 99` parity’sini doğruluyor; ancak Yandex işletmenin artık faal olmadığını bildiriyor ve adresi No:42 veriyor. Aktif güncel fiyatlı menü bulunamadı. **Override eklenmedi; strict HOLD.**
