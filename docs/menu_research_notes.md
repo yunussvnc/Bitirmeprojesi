@@ -2822,3 +2822,6 @@ Hentzer kaydı `Sinanpaşa, Ortabahçe Cd. No:17, 34353 Beşiktaş/İstanbul`, t
 
 ## GRAMOS COFFEE AND EATERY ID 6558 HOLD
 Hentzer kaydı `Adnan Kahveci, 34562 Beylikdüzü/İstanbul`, telefon alanı boş. Yandex kaydı `Adnan Kahveci Mah., Kalkan Sok., 13/9` ile işletme adını destekliyor; Yemeksepeti güncel görünen fiyatlı ürünler sunuyor ancak exact şube telefonunu/adresini doğrulamıyor. Zorunlu 100% address/phone parity sağlanamadı. **Override eklenmedi; strict HOLD.**
+
+## CHANGCHENG RESTAURANT BEYLİKDÜZÜ ID 6557 HOLD
+Hentzer kaydı `Elit Life Rezidans, Adnan Kahveci, Avrupa Cd. No 106/B, 34520 Beylikdüzü/İstanbul`, telefon `+90 212 856 66 05`. Resmi Instagram ve Wanderlog exact şube adres/telefonunu doğruluyor. Ancak son bir yıl içinde doğrulanabilir ürün bazlı fiyatlı menü bulunamadı; bulunan 05.03.2025 tarihli Hot Pot fix menü 1.100 TL son bir yıllık pencere dışında. **Override eklenmedi; strict HOLD.**
