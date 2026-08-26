@@ -90997,5 +90997,14 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Şiş Kebap", "price": "770 TL", "category": "Kebaplar" },
       { "name": "Patlıcan Kebabı", "price": "770 TL", "category": "Kebaplar" }
     ]
+  },
+  "6618": {
+    "name": "POYRAZ SAHİL BALIK RESTAURANT",
+    "sourceUrl": "https://www.instagram.com/p/DOOXr8LisZw/",
+    "sourceName": "Poyraz Sahil Balık resmi sitesi, iletişim sayfası ve resmi Instagram fiyat paylaşımı",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "5 Çeşit Meze Menü", "price": "1500 TL", "category": "Özel Menü" }
+    ]
   }
 };

@@ -2638,3 +2638,6 @@ Hentzer kaydı `Adnan Kahveci, Sümer Cd No:5, 34528 Beylikdüzü/İstanbul`, te
 
 ## İSTİKLAL KEBAP RESTAURANT BEYOĞLU ID 6619 HOLD
 Hentzer kaydı `Rumeli Han İstiklal Caddesi, Şehit Muhtar, Taksim No:48, 34435 Beyoğlu/İstanbul`, telefon `+90 532 376 93 42`. Facebook, Yandex, Sluurpy ve Instagram aynı Rumeli Han/İstiklal No:48 ve telefon bilgisini destekliyor. Ancak son bir yıl içinde bu exact İstanbul şubesine ait ürün bazlı fiyatlı menü bulunamadı; arama sonuçlarındaki Yemeksepeti fiyatları Eskişehir’deki farklı işletmeye ait. **Override eklenmedi; strict HOLD.**
+
+## POYRAZ SAHİL BALIK RESTAURANT BEYKOZ ID 6618 ACCEPTED
+Hentzer kaydı `Poyrazköy, Mendirek Yolu No:18A, 34829 Beykoz/İstanbul`, telefon `+90 542 320 11 22`. Poyraz resmi sitesi ve iletişim sayfası aynı No:18/A adresini, 0542 320 11 22 cep ve 0216 320 11 00 sabit telefonunu doğruluyor; resmi Instagram da exact şubeyi destekliyor. Adisyo QR menüsü erişilebilir metin vermedi, ancak resmi Instagram’ın 05.09.2025 tarihli paylaşımındaki `5 çeşit meze – 1.500 TL` özel menü son bir yıl içinde doğrulanabildi. **1 özel menü ürünü eklendi.**
