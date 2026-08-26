@@ -2335,3 +2335,6 @@ Hentzer kaydı `Kartaltepe, Cicoz Yolu Cd. no:156, 34050 Bayrampaşa/İstanbul`,
 
 ## ASMİN CAFE 2 BEYOĞLU ID 6720 HOLD
 Hentzer kaydı `Hüseyinağa, Atıf Yılmaz Cd. 21A, 34435 Beyoğlu/İstanbul`, telefon `+90 212 243 48 21`. SmartBeyoğlu adresi No:21/A ile eşleşiyor; Yandex aynı telefonla Toprak Lüle Sok. No:2 kaydını gösteriyor ve işletmenin **artık faal olmadığını** belirtiyor. Faal olmayan işletmeye güncel fiyatlı menü override’ı eklenemez. **Override eklenmedi; strict HOLD**.
+
+## KÜÇÜK CENNET BEYKOZ ID 6719 HOLD
+Hentzer kaydı `Paşamandıra Mahallesi, Paşamandıra Caddesi 43/1, 34829 Beykoz/İstanbul`, telefon `+90 532 373 21 61`. Yandex aynı adres/telefonu; resmi Instagram hesabı aynı telefonu ve Paşamandıra işletmesini; Ocak 2026 tarihli tanıtım da No:43/1 adresini destekliyor. Menum.co’da `Serpme Kahvaltı (Kişi Başı) 600 TL` görülüyor ancak menüde fiyatın geçerlilik/güncelleme tarihi veya son bir yıl içinde yenilendiğini kanıtlayan bir ibare yok. Tek fiyatlı ve tarihsiz içerik, zorunlu güncellik şartı nedeniyle kullanılmadı. **Override eklenmedi; strict HOLD**.
