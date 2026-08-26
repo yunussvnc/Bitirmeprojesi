@@ -2187,3 +2187,6 @@ Hentzer kaydı `Adnan Kahveci Mahallesi Avrupa Caddesi Kubis, Adnan Kahveci, No:
 
 ## SUSHICI BEYLİKDÜZÜ ID 6768 HOLD
 Hentzer kaydı `Kavaklı, Çağlar Sk. No:1, 34520 Beylikdüzü Osb/Beylikdüzü/İstanbul`, telefon `+90 506 441 04 48`. Arama sonuçları ağırlıklı olarak farklı marka/işletme olan SushiCo Beylikdüzü’ne yöneliyor; SushiCo’nun resmi Beylikdüzü şubesi ve QR menüsü Hentzer’deki Sushici adı, Çağlar Sk. adresi ve 0506 441 04 48 telefonu ile exact eşleşmiyor. Bu nedenle bulunan fiyatlar aktarılmadı; **override eklenmedi, strict HOLD**.
+
+## BLANE COFFEE BAYRAMPAŞA ID 6767 HOLD
+Hentzer kaydı `Yenidoğan, Atışalanı Cd. No:28 B, 34035 Bayrampaşa/İstanbul`, telefon `+90 532 514 65 20`. Yandex aynı 28B adresi ve telefonu doğruluyor; 2026 resmi Instagram içerikleri adresi desteklese de bazı güncel paylaşımlarda farklı telefon `+90 536 281 86 69` yer alıyor. Son bir yıl içinde exact şubeye ait erişilebilir ürün/fiyat menüsü bulunamadı. %100 branch fiyat ve telefon tutarlılığı sağlanamadığı için **override eklenmedi; strict HOLD**.
