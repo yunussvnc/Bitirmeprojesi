@@ -3179,3 +3179,6 @@ Servis İşletme Bul/Restoranim/Yerel Esnaf Hentzer exact adres ve `+90 507 743 
 
 ## URBAN CAFE ID 6447 HOLD
 Meyhankoli exact `Kuloğlu Mh., Galatasaray Kartal sok No:6/A, 34433 Beyoğlu/İstanbul` adresini doğruluyor; ancak Hentzer `+90 555 047 74 79`, Meyhankoli ise aynı şube için `(0212) 252 13 25` veriyor. Ürün bazlı son bir yıl fiyatlarıyla 20 benzersiz ürün doğrulanamadı. **Override eklenmedi; strict HOLD.**
+
+## KARDEŞ PAYI ID 6446 HOLD
+Tumİşyeri Hentzer exact adres ve `+90 532 622 72 25` ana telefonunu doğruluyor; kayıtta iki ek telefon da yer alıyor. Exact Beşiktaş şubesine ait son bir yıl güncel fiyatlı 20 ürün doğrulanamadı; Yemeksepeti arama sonuçları farklı şehirlerdeki kayıtlar. **Override eklenmedi; strict HOLD.**
