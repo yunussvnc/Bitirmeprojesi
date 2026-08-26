@@ -2915,3 +2915,6 @@ Hentzer `Adnan Kahveci, Anadolu Cd., 34528 Beylikdüzü/İstanbul`, telefon `+90
 
 ## YILDIRIM PASTANESİ ID 6530 HOLD
 Hentzer `Yıldırım, Şht. Kamil Balkan Cd. No:82, 34045 Bayrampaşa`, telefon `+90 212 581 85 26`. Telefon eşleşse de Bulurum `No:62`, Yandex `No:62A` gösteriyor; Hentzer No:82 exact adresi doğrulanamadı. Son bir yıl exact şubeye ait ürün bazlı güncel TL menü de bulunamadı. **Override eklenmedi; strict HOLD.**
+
+## ROCK N ROLLA ID 6529 HOLD
+Hentzer `Cihannüma, Akmaz Çeşme Sk. No:38, 34353 Beşiktaş`, telefon `+90 530 015 69 93`. Resmi Beşiktaş Instagram konumu telefonla eşleşiyor; ancak resmi genel hesap farklı Beşiktaş sipariş telefonu veriyor ve exact Akmaz Çeşme Sk. No:38 adresi bağımsız doğrulanamadı. QR menüde kategoriler ve 175 TL görünen değer olsa da ürün/fiyat listesi tam ayrıştırılamadı. **Override eklenmedi; strict HOLD.**
