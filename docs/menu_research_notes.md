@@ -2368,3 +2368,6 @@ Hentzer kaydı `Göksu, Hekimbaşı Çiftlik Cd. No:5, 34815 Beykoz/İstanbul`, 
 
 ## MUHABBET OCAKBAŞI BEYLİKDÜZÜ ID 6709 HOLD
 Hentzer kaydı `38 Skyport 1 Beylikdüzü, Yakuplu, Hürriyet Blv., 34524 Beylikdüzü/İstanbul`, telefon `+90 212 690 10 00`. Mekanlar kaydı aynı adres ve telefonu; resmi Instagram Skyport Residence ve aynı sabit hattı; 2026 tarihli sosyal paylaşım da telefonu doğruluyor. FırsatBuFırsat sayfası fiyatlı kampanya geçmişi sunsa da güncel/kalıcı menü fiyatı değildir ve exact ürün listesi yayınlamıyor. Exact şubeye ait son bir yıl fiyatlı menü bulunamadığı için **override eklenmedi; strict HOLD**.
+
+## BEBIDA COFFEE KANLICA ID 6708 HOLD
+Hentzer kaydı `Kanlıca, Hacı Muhittin Sk. No:55, 34810 Beykoz/İstanbul`, telefon `+90 541 406 46 56`. Yandex aktif işletme kaydı aynı No:55 adresini ve telefonu doğrudan veriyor; resmi Instagram/Facebook profilleri de Kanlıca ve No:55 bilgisini destekliyor. Ancak resmi/güncel sipariş kaynaklarında son bir yıl içinde doğrulanabilir ürün-fiyat menüsü bulunamadı; eski sosyal paylaşımlar fiyat için yeterli güncellik taşımıyor. **Override eklenmedi; strict HOLD**.
