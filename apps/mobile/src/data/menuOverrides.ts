@@ -4,6 +4,15 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6736": {
+    "name": "ANTEPLİ ŞAHİN USTA",
+    "sourceUrl": "https://www.menum.co/antepli-kebablahmacun",
+    "sourceName": "Menum.co şube menüsü; resmi Instagram ve güncel yerel işletme kayıtlarıyla exact Beylikdüzü adres/telefonu doğrulandı",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "İskender", "price": "300 TL", "category": "Et Döner ve İskender" }
+    ]
+  },
   "6741": {
     "name": "CRUNCH BITE WAFFLE & KRUVASAN",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/e59k/crunch-bite-waffle",

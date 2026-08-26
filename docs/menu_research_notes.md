@@ -2284,3 +2284,6 @@ Hentzer kaydı `Acarlar, 34800 Beykoz/İstanbul`, telefon `+90 216 485 61 97`. Y
 
 ## THE HIMALAYAN RESTAURANT BEYOĞLU ID 6737 HOLD
 Hentzer kaydı `Kalyoncu Kulluğu, Kalyoncu Kulluğu Cd. 13A, 34435 Beyoğlu/İstanbul`, telefon `+90 536 569 02 82`. Tripadvisor/Culinary Backstreets aynı Kalyoncu Kulluğu 13A adresi ve telefonu destekliyor; ancak WhatsApp/Google arama sonucu Kamer Hatun Cd. No:13 varyantını gösteriyor. Resmi site işletme ve mutfak konseptini doğruluyor fakat rakamsal ürün-fiyat menüsü yayınlamıyor. Adres varyantı ve fiyat şartları nedeniyle **override eklenmedi; strict HOLD**.
+
+## ANTEPLİ ŞAHİN USTA BEYLİKDÜZÜ ID 6736 ACCEPTED
+Hentzer kaydı `Barış, Bestekar Sk. Kule Çarşı No:2A/6,7, 34000 Beylikdüzü/İstanbul`, telefon `+90 546 251 10 30`. İşletmenin resmi Instagram hesabı aynı adresi ve sipariş hattını destekliyor; Mayıs 2026 tarihli yerel işletme kaydı da aynı exact adres/telefonu doğruluyor. Menum.co’da erişilebilir fiyatı bulunan tek kalem `İskender — 300 TL` olarak görüldü; diğer ürünlerde rakamsal fiyat erişilemediği için eklenmedi. **1 gıda ürünü override edildi.**
