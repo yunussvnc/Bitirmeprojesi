@@ -3075,3 +3075,6 @@ Resmi Meşale Cafe iletişim sayfası Hentzer ile exact `Büyükşehir, Başak S
 
 ## MIKLA ID 6480 HOLD
 Mikla ve The Marmara Pera resmi sayfaları Hentzer ile exact `The Marmara Pera, Asmalı Mescit, Meşrutiyet Cd. No:15, 34430 Beyoğlu/İstanbul` ve `+90 212 293 56 56` parity’sini doğruluyor. Ancak resmi menü yalnızca paket menü fiyatlarını veriyor; tek tek 20 ürün fiyatı yok. **Override eklenmedi; strict HOLD.**
+
+## BALIKÇI ABDULLAH ID 6479 HOLD
+Yerel kaynaklar Hentzer ile exact `Paşabahçe, Barbaros Cd. No:18 D:B, 34820 Beykoz/İstanbul` ve `+90 542 411 25 35` parity’sini doğruluyor. Ancak restoran günlük balık/ürün seçmeli çalışıyor ve kamuya açık kaynaklarda bireysel TL fiyatları yok; 20 güncel fiyatlı ürün doğrulanamadı. **Override eklenmedi; strict HOLD.**
