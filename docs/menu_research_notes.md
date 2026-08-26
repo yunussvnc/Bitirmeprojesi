@@ -2967,3 +2967,6 @@ Hentzer `Sinanpaşa, Şair Veysi Sk. No:43, 34353 Beşiktaş`, telefon `+90 545 
 
 ## ZİYA ŞARK SOFRASI KAVACIK ID 6513 HOLD
 Hentzer `Kavacık, Orhan Veli Kanık Cd. No:1, 34810 Beykoz`, telefon `+90 216 425 56 05`. Telefon exact kaynaklarla doğrulanıyor; ancak resmi web sitesi/Instagram adresi `Orhan Veli Kanık Cad. No:102/A`, Hentzer ve bazı üçüncü taraflar No:1 veriyor. Güncel görünen Yemeksepeti fiyatlarına rağmen exact branch adres parity’si kesinleşmedi. **Override eklenmedi; strict HOLD.**
+
+## CİĞER SAATİ ID 6512 HOLD
+Hentzer `Paşabahçe, Paşabahçe İskele Cd. No:10, D34800 Beykoz`, telefon alanı boş. Resmi Instagram/Facebook, Yandex ve LinkedIn exact şubeyi `Paşabahçe İskele Cd. No:10/D` ve `0537 616 67 77` ile doğruluyor; Yemeksepeti exact isimli vendorunda güncel görünen fiyatlar mevcut ancak adres/telefon metinde yer almıyor. Hentzer telefon alanı boş olduğundan 100% parity sağlanamadı. **Override eklenmedi; strict HOLD.**
