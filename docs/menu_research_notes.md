@@ -3101,3 +3101,6 @@ Waze ve Wanderlog Hentzer ile exact `Mecidiye Mah., Barbaros Blv., 34353 Beşikt
 
 ## SEMT OCAKBAŞI ID 6472 HOLD
 Hentzer No:18 adresini Yandex/Cybo/yerel dizinler destekliyor; Facebook No:7 vererek adres parity’sinde çelişki oluşturuyor. Aktif fiyatlı menü de bulunamadı. **Override eklenmedi; strict HOLD.**
+
+## DELL'AMANTE COFFEE ID 6471 HOLD
+Resmi sosyal kaynaklar ve yerel kayıt Hentzer ile exact `Alya Residence, Adnan Kahveci, Büyükdere Cd. No:2/8` ve `+90 850 305 2111` parity’sini doğruluyor. Ancak güncel vendor menüsünde güvenilir biçimde 20 benzersiz gıda kalemi tamamlanamadı; içecekleri dahil etmek politika gereği uygun değil. **Override eklenmedi; strict HOLD.**
