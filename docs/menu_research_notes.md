@@ -2596,3 +2596,6 @@ Hentzer kaydı `Barış, E-5 Yanyolu Westside2 sitesi D:28/76, 34000 Beylikdüz�
 
 ## SCARPETTA ETİLER ID 6633 HOLD
 Hentzer kaydı `Etiler, Dilhayat Sk. No:16, 34337 Beşiktaş/İstanbul`, telefon `+90 533 894 43 43`. Adres üçüncü taraf kaynaklarla destekleniyor ve bazı 2025/2026 sosyal sonuçlarında bu telefon görülüyor; ancak Scarpetta’nın resmi sitesi erişimde telefonunu `+90 212 263 53 53` olarak yayımlıyor. Ayrıca resmi sitede güncel fiyatlı exact şube menüsü bulunamadı; 2026 sosyal menü parçaları tam liste ve şube doğrulaması sağlamıyor. Zorunlu %100 telefon parity’si sağlanamadığı için **override eklenmedi; strict HOLD**.
+
+## ASMALI RESTAURANT KAVACIK ID 6632 HOLD
+Hentzer kaydı `Kavacık, Otağtepe Cd. No:19, 34810 Beykoz/İstanbul`, telefon `+90 532 693 07 36`. 2025 tarihli resmi sosyal paylaşımlar aynı Kavacık/Otağtepe No:19 adresini ve telefonu doğruluyor; işletme meyhane/restoran olarak aktif görünüyor. Ancak son bir yıl içinde erişilebilir, ürün bazlı güncel fiyatlı menü bulunamadı; eski Quandoo fiyatları güncel değil ve farklı Asmalı işletmelerine ait sonuçlar kullanılamaz. **Override eklenmedi; strict HOLD.**
