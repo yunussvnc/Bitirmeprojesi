@@ -2509,3 +2509,6 @@ Hentzer kaydı `Marmara Mah. Avrasya Cad. B Blok No:17/2F, 34524 Beylikdüzü/İ
 
 ## FIKARY BAKERY & COFFEE GAYRETTEPE ID 6662 HOLD
 Hentzer kaydı `Gayrettepe, Fuat Sarp Sk. No:5/A, 34330 Beşiktaş/İstanbul`; telefon alanı boş. Restoranim ve Migros Yemek aynı Gayrettepe/Fuat Sarp No:5/A şubesini gösteriyor; Migros’ta güncel fiyatlı ürünler de mevcut. Ancak Hentzer’de telefon bulunmadığı için zorunlu adres **ve telefon** parity’si birlikte doğrulanamadı. **Override eklenmedi; strict HOLD**.
+
+## LITTLE BUDDHA AKMERKEZ ID 6661 ACCEPTED
+Hentzer kaydı `Kültür, Nisbetiye Cd. Akmerkez AVM No:210 No:54, 34337 Beşiktaş/İstanbul`, telefon `+90 542 785 10 32`. Happy Group resmi şube sayfası aynı Akmerkez No:210 Kapı No:54 adresini ve 0542 785 10 32 telefonunu doğruluyor; resmi Instagram da Akmerkez telefonunu destekliyor. Canlı Yemeksepeti exact Little Buddha menüsünde güncel fiyatlar bulundu; Popüler carousel tekrarları dışarıda tutularak 20 bento/set, çorba, başlangıç ve nigiri ürünü eklendi.

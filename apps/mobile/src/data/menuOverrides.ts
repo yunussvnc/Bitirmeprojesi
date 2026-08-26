@@ -90560,5 +90560,33 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Altı Ezmeli Kebap (Et Şişten)", "price": "700 TL", "category": "Kebaplar" },
       { "name": "Patlıcanlı Kebap", "price": "880 TL", "category": "Kebaplar" }
     ]
+  },
+  "6661": {
+    "name": "LITTLE BUDDHA AKMERKEZ",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/t6lf/little-buddha",
+    "sourceName": "Canlı Yemeksepeti exact Akmerkez şubesi; Happy Group resmi şube sayfası ile adres ve telefon doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Bento 1", "price": "770 TL", "category": "Bento Menüler" },
+      { "name": "Bento 2", "price": "910 TL", "category": "Bento Menüler" },
+      { "name": "Bento 3", "price": "965 TL", "category": "Bento Menüler" },
+      { "name": "Bento 4", "price": "945 TL", "category": "Bento Menüler" },
+      { "name": "Special Set (22 Adet) Menü", "price": "2.400 TL", "category": "Set Menüler" },
+      { "name": "Nigiri Set Menü (6 Adet)", "price": "1.653,25 TL", "category": "Set Menüler" },
+      { "name": "Buddha Mix Set Menü (27 Adet)", "price": "2.885,75 TL", "category": "Set Menüler" },
+      { "name": "Hot Set (22 Adet)", "price": "2.475 TL", "category": "Set Menüler" },
+      { "name": "Kids Bento", "price": "735,25 TL", "category": "Kids Menüler" },
+      { "name": "Miso Çorba", "price": "403,75 TL", "category": "Çorbalar" },
+      { "name": "Tom Yum Çorba", "price": "556,75 TL", "category": "Çorbalar" },
+      { "name": "Acılı Ekşili Çorba", "price": "403,75 TL", "category": "Çorbalar" },
+      { "name": "Kuşkonmazlı Tavuklu Mısır Çorbası", "price": "403,75 TL", "category": "Çorbalar" },
+      { "name": "Wonton Çorba", "price": "374 TL", "category": "Çorbalar" },
+      { "name": "Sake Carpaccio", "price": "697 TL", "category": "Başlangıçlar" },
+      { "name": "Maguro Carpaccio", "price": "892,50 TL", "category": "Başlangıçlar" },
+      { "name": "Maguro Tartar", "price": "871,25 TL", "category": "Başlangıçlar" },
+      { "name": "Sake Tartar", "price": "794,75 TL", "category": "Başlangıçlar" },
+      { "name": "Sake Nigiri (2 Adet)", "price": "382,50 TL", "category": "Nigiriler" },
+      { "name": "Maguro Nigiri (2 Adet)", "price": "497,25 TL", "category": "Nigiriler" }
+    ]
   }
 };
