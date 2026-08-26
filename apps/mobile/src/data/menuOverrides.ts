@@ -91007,6 +91007,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "5 Çeşit Meze Menü", "price": "1500 TL", "category": "Özel Menü" }
     ]
   },
+  "6578": {
+    "name": "ACAR PASTANE BAYRAMPAŞA",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/q35p/acar-pasta-and-tatli",
+    "sourceName": "Canlı Yemeksepeti Acar Pasta & Tatlı menüsü; Yandex, Bulurum ve resmi Instagram exact adres-telefon doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Frambuaz Çikolatalı Pasta (4 Kişilik)", "price": "800 TL", "category": "Pastalar" },
+      { "name": "Fıstık Çikolatalı Pasta (4 Kişilik)", "price": "800 TL", "category": "Pastalar" },
+      { "name": "Çilekli Muzlu Çikolatalı Pasta (4 Kişilik)", "price": "800 TL", "category": "Pastalar" },
+      { "name": "Profiterol Fıstık Çikolatalı Pasta (4 Kişilik)", "price": "800 TL", "category": "Pastalar" },
+      { "name": "Karışık Meyveli Pasta (4 Kişilik)", "price": "800 TL", "category": "Pastalar" },
+      { "name": "Lotus Pasta (4 Kişilik)", "price": "800 TL", "category": "Pastalar" },
+      { "name": "Oreolu Fıstıklı Çikolatalı Pasta (4 Kişilik)", "price": "800 TL", "category": "Pastalar" },
+      { "name": "Çilekli & Muzlu & Çikolatalı Pasta (No.0)", "price": "900 TL", "category": "Pastalar" },
+      { "name": "Fıstıklı Çikolatalı Pasta (No.0)", "price": "900 TL", "category": "Pastalar" },
+      { "name": "Frambuazlı Çikolatalı Pasta (No.0)", "price": "900 TL", "category": "Pastalar" },
+      { "name": "Karışık Krokanlı Çikolatalı Pasta (No.0)", "price": "900 TL", "category": "Pastalar" },
+      { "name": "Karışık Meyveli Pasta (No.0)", "price": "900 TL", "category": "Pastalar" },
+      { "name": "Muzlu Çikolatalı Pasta (No.0)", "price": "900 TL", "category": "Pastalar" },
+      { "name": "Profiterollü Fıstıklı Çikolatalı Pasta (No.0)", "price": "900 TL", "category": "Pastalar" },
+      { "name": "Lotus Pasta (No.0)", "price": "900 TL", "category": "Pastalar" },
+      { "name": "Muzlu Rulo Baton Pasta (10 Kişilik)", "price": "850 TL", "category": "Rulo Baton Pastalar" },
+      { "name": "Beze (70 gr.)", "price": "90 TL", "category": "Yan Ürünler" },
+      { "name": "Kandil Simidi (10 Adet)", "price": "150 TL", "category": "Yan Ürünler" },
+      { "name": "İzmir Bomba", "price": "100 TL", "category": "Tatlılar ve Pastalar" },
+      { "name": "Makaron (6'lı)", "price": "250 TL", "category": "Tatlılar ve Pastalar" }
+    ]
+  },
   "6584": {
     "name": "BEYEFENDİ BURGER BEŞİKTAŞ",
     "sourceUrl": "https://www.instagram.com/p/DYRdVEIINKR/",

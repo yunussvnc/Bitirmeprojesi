@@ -2759,3 +2759,6 @@ Hentzer kaydı `Yıldız Mahallesi, Çırağan Cd. Osmanpaşa Mektebi Çıkmazı
 
 ## LUMA COFFEE CO. BEYKOZ ID 6579 HOLD
 Hentzer kaydı `Gümüşsuyu, Kelle İbrahim Cd. No:17 D:1A, 34820 Beykoz/İstanbul`; telefon alanı boş. Facebook ve TikTok aynı No:17/1A adresini, Yemeksepeti exact Luma Coffee Co. sayfası ise güncel fiyatlı kahve/tatlı ürünlerini gösteriyor; ancak Hentzer kaydında telefon bulunmadığı için zorunlu %100 phone parity’si doğrulanamadı. **Override eklenmedi; strict HOLD.**
+
+## ACAR PASTANE BAYRAMPAŞA ID 6578
+Hentzer kaydı `Yenidoğan, Numunebağı Cd. 82/A, 34040 Bayrampaşa/İstanbul`, telefon `+90 212 493 42 31`. Yandex, Bulurum ve resmi Instagram exact adres/telefonu doğruluyor. Canlı Yemeksepeti Acar Pasta & Tatlı menüsünden 20 benzersiz pasta ve tatlı ürünü seçildi; içecek, poşet ve tekrarlar hariç tutuldu. **Override kabul edildi; 20 ürün.** Kaynak: https://www.yemeksepeti.com/restaurant/q35p/acar-pasta-and-tatli ; https://yandex.com.tr/maps/org/acar_pasta_tatli/184428814516/ ; https://www.instagram.com/acarpasta/
