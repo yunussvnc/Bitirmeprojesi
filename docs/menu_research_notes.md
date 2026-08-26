@@ -2130,3 +2130,6 @@ Hentzer kaydı `Sinanpaşa, Köşeli Sk. No:2/A, 34353 Beşiktaş/İstanbul`, te
 
 ## YUSUF USTA BEYOĞLU ID 6787 HOLD
 Hentzer kaydı `Feridiye Caddesi No:7B, Şehit Muhtar, 34421 Beyoğlu/İstanbul`, telefon `+90 552 676 51 34`. Yandex ve Facebook sonuçları Feridiye Caddesi’ndeki Yusuf Usta işletmesini kısmen destekliyor; ancak bulunan fiyatlı Yemeksepeti sonucu farklı bir `Dönerci Yusuf Usta` kaydına ait ve exact adres/telefon eşleşmesi yapılamadı. Resmî/branch-specific, son bir yıl içinde doğrulanabilir fiyatlı menü bulunamadığı için **override eklenmedi; strict HOLD**.
+
+## KUMBASAR UNLU MAMULLERİ ID 6786 HOLD
+Hentzer kaydı `Orta, Adalet Sk. 7/A, 34030 Bayrampaşa/İstanbul`, telefon `+90 212 613 77 11`. Yandex/Bulurum aynı telefonu destekliyor ancak Yandex’in ana kaydı adresi Adalet Sokak olarak verirken panorama sonucu `46B` gösteriyor; Hentzer kaydı ise `7/A`. Instagram profilinde ayrıca farklı telefonlar yer alıyor. Bulunan Yemeksepeti fiyatlı kayıt `Kumbasar Fırını` Samsun olarak göründüğünden bu şubeye bağlanamadı. %100 adres eşleşmesi ve branch-specific son bir yıl fiyat doğrulaması sağlanamadığı için **override eklenmedi; strict HOLD**.
