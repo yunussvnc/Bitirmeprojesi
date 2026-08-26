@@ -3013,3 +3013,6 @@ Hentzer `Atatürk, Barbaros 1 cad No:1A, 34500 Büyükçekmece/İstanbul`, telef
 ## ADELLA SEAFOOD RESTAURANT ID 6499 ACCEPTED
 Hentzer `Hobyar, Hamidiye Cd. No:16, 34112 Fatih/İstanbul`, telefon `+90 212 527 52 71`. Adella resmi sitesi, Instagram/Facebook ve Menu-tr exact adres/telefonu doğruluyor. Resmi menü sayfasında 26.08.2026 erişiminde TL fiyatlı ürünler yayımlanıyor. 20 benzersiz meze ürünü eklendi; Mostra fiyatı olmayan balıklar, içecek/alkol ve servis ücreti belirsiz kalemler dışlandı. **Override kabul edildi.**
 Kaynaklar: https://www.adellaseafood.com/restaurant-menu ; https://www.adellaseafood.com/ ; https://www.instagram.com/adellaseafood/ ; https://www.facebook.com/p/Adella-Seafood-100066952135041/ ; https://menu-tr.com/istanbul/fatih/balik-restorani/adella-seafood-restaurant
+
+## AKT BURGER & MEZE EVİ ID 6498 HOLD
+Hentzer `Cumhuriyet, İstisna Çıkmazı No:10/1, 34820 Beykoz/İstanbul`, telefon `+90 544 991 43 44`. Resmi Instagram 26.08.2025 gönderisinde exact adres/telefonu, 26.05.2026 gönderisinde aktif işletmeyi doğruluyor. Ancak exact Beykoz şubesi için son bir yıl ürün bazlı fiyatlı menü bulunamadı; Yemeksepeti `Akt Burger` Muğla şubesine ait ve benzer `Burger & Meze` vendoru aynı işletme olduğu kanıtlanamadı. **Override eklenmedi; strict HOLD.**
