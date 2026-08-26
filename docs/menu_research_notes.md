@@ -2762,3 +2762,6 @@ Hentzer kaydı `Gümüşsuyu, Kelle İbrahim Cd. No:17 D:1A, 34820 Beykoz/İstan
 
 ## ACAR PASTANE BAYRAMPAŞA ID 6578
 Hentzer kaydı `Yenidoğan, Numunebağı Cd. 82/A, 34040 Bayrampaşa/İstanbul`, telefon `+90 212 493 42 31`. Yandex, Bulurum ve resmi Instagram exact adres/telefonu doğruluyor. Canlı Yemeksepeti Acar Pasta & Tatlı menüsünden 20 benzersiz pasta ve tatlı ürünü seçildi; içecek, poşet ve tekrarlar hariç tutuldu. **Override kabul edildi; 20 ürün.** Kaynak: https://www.yemeksepeti.com/restaurant/q35p/acar-pasta-and-tatli ; https://yandex.com.tr/maps/org/acar_pasta_tatli/184428814516/ ; https://www.instagram.com/acarpasta/
+
+## THE DOLCE CAPO SÜTLÜ TATLILAR YAKUPLU ID 6577
+Hentzer kaydı `Yakuplu, Kavaklı Cd. 1/A, 34150 Beylikdüzü/İstanbul`, telefon `+90 212 863 34 34`. Resmi Instagram hesabı aynı telefon numarasını yayımlıyor; Migros exact `Dolce Capo, Beylikdüzü (Yakuplu Mah.)` menüsü güncel ürün/fiyatları veriyor. Menünün fiyatları 2026 içinde erişilebilir ve 20 benzersiz tatlı ürünü seçildi; içecek ve tekrarlar hariç tutuldu. **Override kabul edildi; 20 ürün.** Kaynaklar: https://www.migros.com.tr/yemek/dolce-capo-beylikduzu-yakuplu-mah-st-19c6d ; https://www.instagram.com/thedolcecapo/

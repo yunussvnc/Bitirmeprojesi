@@ -91007,6 +91007,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "5 Çeşit Meze Menü", "price": "1500 TL", "category": "Özel Menü" }
     ]
   },
+  "6577": {
+    "name": "THE DOLCE CAPO SÜTLÜ TATLILAR YAKUPLU",
+    "sourceUrl": "https://www.migros.com.tr/yemek/dolce-capo-beylikduzu-yakuplu-mah-st-19c6d",
+    "sourceName": "Canlı Migros Dolce Capo Beylikdüzü Yakuplu menüsü; resmi Instagram exact adres-telefon doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Muzlu Mag", "price": "430 TL", "category": "Kavanoz Tatlılar" },
+      { "name": "Çilekli Mag", "price": "301 TL", "category": "Kavanoz Tatlılar" },
+      { "name": "Belçika Çikolatalı Muzlu Mag", "price": "322 TL", "category": "Kavanoz Tatlılar" },
+      { "name": "Fıstıklı Çikolatalı Red Velvetli Mag", "price": "322 TL", "category": "Kavanoz Tatlılar" },
+      { "name": "Belçika Çikolatalı Çilekli Mag", "price": "322 TL", "category": "Kavanoz Tatlılar" },
+      { "name": "Yaban Mersinli Mag", "price": "300.30 TL", "category": "Kavanoz Tatlılar" },
+      { "name": "Belçika Çikolatalı Çilek Muzlu Mag", "price": "322 TL", "category": "Kavanoz Tatlılar" },
+      { "name": "Böğürtlen Çikolatalı Mag", "price": "322 TL", "category": "Kavanoz Tatlılar" },
+      { "name": "Belçika Çikolatalı Frambuazlı Mag", "price": "322 TL", "category": "Kavanoz Tatlılar" },
+      { "name": "Aşure", "price": "294 TL", "category": "Kase Tatlılar" },
+      { "name": "Kazandibi", "price": "294 TL", "category": "Kase Tatlılar" },
+      { "name": "Tavukgöğsü", "price": "294 TL", "category": "Kase Tatlılar" },
+      { "name": "Supangle", "price": "301 TL", "category": "Kase Tatlılar" },
+      { "name": "Fırın Sütlaç", "price": "301 TL", "category": "Kase Tatlılar" },
+      { "name": "Çikolatalı Profiterol", "price": "322 TL", "category": "Kase Tatlılar" },
+      { "name": "Karışık Ekler (12 Adet)", "price": "770 TL", "category": "Kiloluk Tatlılar" },
+      { "name": "Paris Ekler (12 Adet)", "price": "840 TL", "category": "Kiloluk Tatlılar" },
+      { "name": "Sütlü Soğuk Baklava (8 Dilim)", "price": "630 TL", "category": "Kiloluk Tatlılar" },
+      { "name": "Soğuk Sütlü Kadayıf Fıstıklı (1 Dilim)", "price": "280 TL", "category": "Kiloluk Tatlılar" },
+      { "name": "Soğuk Sütlü Kadayıf Fıstıklı (3 Dilim)", "price": "588 TL", "category": "Kiloluk Tatlılar" }
+    ]
+  },
   "6578": {
     "name": "ACAR PASTANE BAYRAMPAŞA",
     "sourceUrl": "https://www.yemeksepeti.com/restaurant/q35p/acar-pasta-and-tatli",
