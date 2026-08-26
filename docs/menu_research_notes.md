@@ -2371,3 +2371,6 @@ Hentzer kaydı `38 Skyport 1 Beylikdüzü, Yakuplu, Hürriyet Blv., 34524 Beylik
 
 ## BEBIDA COFFEE KANLICA ID 6708 HOLD
 Hentzer kaydı `Kanlıca, Hacı Muhittin Sk. No:55, 34810 Beykoz/İstanbul`, telefon `+90 541 406 46 56`. Yandex aktif işletme kaydı aynı No:55 adresini ve telefonu doğrudan veriyor; resmi Instagram/Facebook profilleri de Kanlıca ve No:55 bilgisini destekliyor. Ancak resmi/güncel sipariş kaynaklarında son bir yıl içinde doğrulanabilir ürün-fiyat menüsü bulunamadı; eski sosyal paylaşımlar fiyat için yeterli güncellik taşımıyor. **Override eklenmedi; strict HOLD**.
+
+## MOSTAR DÖNER BAYRAMPAŞA ID 6707 HOLD
+Hentzer kaydı `Muratpaşa, Cicoz Yolu Cd. No:155/C, 34040 Bayrampaşa/İstanbul`, telefon `+90 506 277 87 87`. İstanbul Servis Listesi aynı adres ve telefonu destekliyor; ancak Yandex’in aktif kaydı aynı telefonla `Muratpaşa Mah. Orhangazi Sok. No:1` adresini ve “Gazete bayi” kategorisini gösteriyor. Exact branch adres parity’si sağlanamadığı ve son bir yıl fiyatlı menü bulunamadığı için **override eklenmedi; strict HOLD**.
