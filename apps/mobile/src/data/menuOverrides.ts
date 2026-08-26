@@ -92015,6 +92015,26 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Sultaniye Soslu Tavuk Döner Dürüm", "price": "230 TL", "category": "Tavuk Dönerler" }
     ]
   },
+  "6434": {
+    "name": "Bilezzet Kebap",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/yn3n/bilezzet-kokoret",
+    "sourceName": "Güncel Yemeksepeti Bilezzet Kokoret menüsü; Yandex ve Firma Fihristi ile Şehit Asım Cd. 31A / +90 506 484 23 23 exact parity doğrulaması",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "Adana Kebap 150 gr", "price": "800 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Urfa Kebap 150 gr", "price": "800 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Kuzu Çöp Şiş 200 gr", "price": "1150 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Tavuk Şiş 160 gr", "price": "650 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Tavuk Çıtır Kanat 280 gr", "price": "730 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Cevizli Çiğ Köfte 200 gr", "price": "350 TL", "category": "Çiğ Köfteler" },
+      { "name": "Cevizli Çiğ Köfte 500 gr", "price": "560 TL", "category": "Çiğ Köfteler" },
+      { "name": "Cevizli Çiğ Köfte 1 kg", "price": "1120 TL", "category": "Çiğ Köfteler" },
+      { "name": "Adana Dürüm 120 gr", "price": "470 TL", "category": "Dürümler" },
+      { "name": "Urfa Dürüm 120 gr", "price": "470 TL", "category": "Dürümler" },
+      { "name": "Kuzu Çöp Şiş Dürüm 150 gr", "price": "540 TL", "category": "Dürümler" },
+      { "name": "Tavuk Şiş Dürüm 120 gr", "price": "400 TL", "category": "Dürümler" }
+    ]
+  },
   "6436": {
     "name": "Kebapçı Bedri Usta",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/crgp/kebapci-bedri-usta-crgp",

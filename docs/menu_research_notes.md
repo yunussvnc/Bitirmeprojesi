@@ -3219,3 +3219,7 @@ Kaynaklar: https://www.yemeksepeti.com/en/restaurant/crgp/kebapci-bedri-usta-crg
 
 ## BİZİM BALIKÇI BEŞİKTAŞ ID 6435 HOLD
 Waze/Servis Kayıt/Listeleri/Polomap Hentzer ile `Kilise Meydanı Balıkçılar Çarşısı, Sinanpaşa, Köyiçi Cd` ve `0538 516 12 03` bilgilerini destekliyor. Yandex benzer isimli başka kayıtta `No:18` ve `0535 848 3471` veriyor. Yemeksepeti’ndeki `mnlg`, `gvqa`, `gzs6` vendorları güncel fiyatlı menü sunuyor ancak exact Hentzer adres/telefonu ile vendor parity’si kesin değil. **Override eklenmedi; strict HOLD.**
+
+## BİLEZZET KEBAP ID 6434 ACCEPTED
+Hentzer `HAKAN ZİNİ İŞ HANI, Sinanpaşa, Şht. Asım Cd. No:31A, Beşiktaş/İstanbul`, telefon `+90 506 484 23 23`. Yandex Bilezzet Kebap ve Firma Fihristi exact Şehit Asım Cd. 31A ile aynı telefonu doğruluyor. Canlı Yemeksepeti `yn3n` Bilezzet Kokoret menüsünden içecek/poşet dışlanarak mevcut 12 benzersiz gıda ürünü eklendi. **Override kabul edildi.**
+Kaynaklar: https://www.yemeksepeti.com/en/restaurant/yn3n/bilezzet-kokoret ; https://yandex.com.tr/maps/org/bilezzet_kokoret/4412962209/ ; https://firmafihristi.com.tr/firma/41512-4412962209
