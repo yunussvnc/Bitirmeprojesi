@@ -2142,3 +2142,6 @@ Hentzer kaydı `Kocatepe, Avasköy Yolu Cd. 77/A, 34045 Bayrampaşa/İstanbul`, 
 
 ## BOSTON DRINK & DESSERT BEYLİKDÜZÜ ID 6783 ACCEPTED
 Hentzer kaydı `Barış, E-5 Yanyolu No:28 D:69, 34520 Beylikdüzü/İstanbul`, telefon `+90 541 192 94 11`. Boston Drink & Dessert resmi şubeler sayfasında aynı Beylikdüzü adresi ve telefon yayınlanıyor. Canlı Yemeksepeti menüsünde 26.08.2026 tarihinde ürün fiyatları erişilebilir durumdaydı; genel marka menüsü exact şube resmi iletişim bilgileriyle eşleştirilerek 20 gıda ürünü seçildi. Gıda dışı taşıma poşeti eklenmedi. **20 ürün override edildi.**
+
+## SEZEN MEYHANE ID 6782 HOLD
+Hentzer kaydı `Türkali, Altıntaş Sk. 30/A, 34353 Beşiktaş/İstanbul`, telefon `+90 542 742 97 01`. İşletmenin Instagram/Facebook sonuçları aynı adresi ve telefonu destekliyor; Corner kaydı da adresi 31.07.2026 tarihinde güncel gösteriyor. Resmi site menü bağlantısını sunuyor ancak erişilebilir metinde fiyat bulunmuyor; fiyatlı Instagram fix-menü içerikleri 2023 tarihli. Son bir yıl içinde güncel, fiyatlı branch-specific menü doğrulanamadığı için **override eklenmedi; strict HOLD**.
