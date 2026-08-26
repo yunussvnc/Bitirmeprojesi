@@ -3141,3 +3141,6 @@ Yön Baklava resmi sosyal kaynakları ve Yemeksepeti h35e vendoru Lotus Koru 1/2
 
 ## TELGRAFHANE 1855 ID 6459 HOLD
 Instagram Şubat 2026, Yandex, Snapchat, Servis Kayıt ve Facebook Hentzer ile exact `Anadolu Hisarı, Toplarönü Sk No:1, 34810 Beykoz/İstanbul` ve `+90 536 924 01 44` bilgisini destekliyor; ancak Tripadvisor aynı exact adres için farklı `+90 551 970 63 83` telefonu veriyor. 20 benzersiz güncel fiyatlı gıda menüsü de doğrulanamadı. **Override eklenmedi; strict HOLD.**
+
+## DIPLAB CAFÉ BEYLİKDÜZÜ METROHOME ID 6458 HOLD
+Yandex/İstanbul Servis Listesi Hentzer telefonunu `+90 501 012 15 60` destekliyor; ancak Yandex adresi `Derviş Eroğlu Cad. 6AC`, Hentzer ise `Nadir Sokak No:1/20 L Blok Ofis, işyeri No:43` olarak farklı. Exact branch adresi ve 20 güncel fiyatlı ürün menüsü doğrulanamadı. **Override eklenmedi; strict HOLD.**
