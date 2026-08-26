@@ -2792,3 +2792,6 @@ Hentzer kaydı `Cihannüma Mah., Yıldız, Muhtar Evvel Sk. Muhtar-ı Kıroğlu,
 
 ## BIG GARDEN CAFE & BISTRO BAHÇELİEVLER ID 6568 HOLD
 Hentzer kaydı `Bahçelievler, Bağcılar Cd. No:45/1, 34180 Bahçelievler/İstanbul`, telefon `+90 535 470 21 59`. Restaurants Info, Facebook ve işletme sayfası exact adres/telefonu doğruluyor. Ancak erişilebilen menü yalnızca genel ürün adları ve `$` işaretleri veriyor; son bir yıl içinde ürün bazlı, doğrulanabilir TL fiyatlı exact şube menüsü bulunamadı. **Override eklenmedi; strict HOLD.**
+
+## RENG-İ KAHVE ANADOLU HİSARI ID 6567 HOLD
+Hentzer kaydı `Anadolu Hisarı, Körfez Cd. No:26 D:B, 34810 Beykoz/İstanbul`, telefon `+90 216 308 70 96`. Resmi Instagram, Yandex ve Restoranim exact işletme/telefonu doğruluyor. Ancak Restoranim menü bulunmadığını, yalnızca bir ziyaretçinin toplam hesap bilgisini paylaştığını belirtiyor; fotoğraf menüsü okunabilir ve tarihli ürün-fiyat listesi olarak doğrulanamadı. **Override eklenmedi; strict HOLD.**
