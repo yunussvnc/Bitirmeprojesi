@@ -2650,3 +2650,6 @@ Hentzer kaydı `Paşabahçe, Saip Molla Cd., 34800 Beykoz/İstanbul`, telefon `+
 
 ## EKLER HOUSE BAYRAMPAŞA ID 6615 HOLD
 Hentzer kaydı `Kartaltepe, Süleyman Şah Cd 32/A, 34040 Bayrampaşa/İstanbul`, telefon `+90 538 259 17 39`. Resmi Instagram hesabı adres ve bu telefonu destekliyor; ancak aktif Yandex kaydı aynı No:32/A adresinde `+90 212 616 17 23` telefonunu yayımlıyor. Restaurantguru menü sayfası fiyatların üç yıl önce kullanıcılar tarafından eklendiğini ve güncelliğinin garanti edilemeyeceğini belirtiyor; son bir yıl fiyatlı exact menü doğrulanamadı. **Override eklenmedi; strict HOLD.**
+
+## ATLANTİK DOĞA SPORLARI BAYRAMPAŞA ID 6614 HOLD
+Hentzer kaydı `Yıldırım, Eski Edirne Asf. No:87 D:89, 34045 Bayrampaşa/İstanbul`, telefon `+90 212 665 20 89`, kategori restoran. Arama ve işletme kaynakları Atlantik Doğa Sporları’nı av/outdoor ekipmanı mağazası olarak gösteriyor; Yandex’te aynı adreste telefon `+90 212 665 20 88` ve başka kayıtta farklı işletme/adres bilgisi var. Gıda restoranı menüsü bulunmadı. **Override eklenmedi; strict HOLD.**
