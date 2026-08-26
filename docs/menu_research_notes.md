@@ -2244,3 +2244,6 @@ Hentzer kaydı `İncirköy, Saip Molla Cd. 38A, 34800 Beykoz/İstanbul`, telefon
 
 ## ŞANLI KEBAP & LAHMACUN BEYOĞLU ID 6749 HOLD
 Hentzer kaydı `Firuzağa, Boğazkesen Cd. No:62, 34425 Beyoğlu/İstanbul`, telefon `+90 212 251 06 56`. Yandex ve Mindtrip aynı İstanbul adres/telefonu doğruluyor. Ancak fiyatlı `sanlikebap.com/menuler` kaynağı Nazilli/Aydın şubelerine ait; İstanbul şubesi için son bir yıl içinde doğrulanabilir ürün-fiyat listesi bulunamadı. Farklı şehir menüsü exact branch’e atanamayacağından **override eklenmedi; strict HOLD**.
+
+## VENS COFFEE CO BEYLİKDÜZÜ ID 6748 HOLD
+Hentzer kaydı `Barbaros Hayrettin Paşa, 1993. Sk. No:22, 34510 Esenyurt/İstanbul`, telefon `+90 536 710 22 20`. Yandex aynı No:22 adresini ancak `+90 535 916 32 16` telefonu ile gösteriyor; markanın resmi sitesi/mağazalar sayfası ise No:165 adresi ve farklı telefonlar yayınlıyor. Hentzer kaydı ile resmi branch bilgileri exact eşleşmediğinden güncel fiyatlı kaynaklar güvenle bağlanamadı. **Override eklenmedi; strict HOLD**.
