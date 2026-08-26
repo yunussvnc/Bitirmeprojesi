@@ -2997,3 +2997,6 @@ Hentzer `Şehit Muhtar, Öğüt Sk. No:8, 34435 Beyoğlu/İstanbul`, telefon `+9
 
 ## MİS UNLU MAMÜLLERİ ID 6504 HOLD
 Hentzer `Adnan Kahveci, Osmanlı Cd., 34528 Beylikdüzü/İstanbul`, telefon `+90 212 855 46 48`. Yandex `Osmanlı Cad. 30B`, Bulurum `Osmanlı Cad. 30/A` ile aynı telefonu gösteriyor; kapı eki çelişkisi nedeniyle 100% exact adres parity’si kesin değil. Resmi Instagram 25.03.2025 duyurusu mevcut olsa da son bir yıl exact şubeye ait 20 ürün fiyatlı menü doğrulanamadı; Yemeksepeti sonuçları farklı `Miss Bistro`/`Miss Fırın` işletmelerine ait. **Override eklenmedi; strict HOLD.**
+
+## BURGER BOYZ ID 6503 HOLD
+Hentzer `Cumhuriyet, Onur Sk. no L14, 34520 Beylikdüzü/İstanbul`, telefon `+90 542 358 89 29`. Resmi Instagram Metrohome L14 ve fiyat kampanyalarını destekliyor; Merkez Zirve Servis aynı adres/telefonu listeliyor. Ancak Yandex aynı telefonla `Onur Sok. 3P` adresini gösteriyor; Yemeksepeti `ti3t` vendoru exact adres/telefon yayımlamıyor. Adres kapı kodu çelişkisi nedeniyle **override eklenmedi; strict HOLD**.
