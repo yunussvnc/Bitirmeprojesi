@@ -2238,3 +2238,6 @@ Hentzer kaydı `Barış Mahallesi Enver Adakan Caddesi No:5 E Blok İşyeri No:1
 
 ## LELAS CAFE RESTAURANT BEYLİKDÜZÜ ID 6751 HOLD
 Hentzer kaydı `Barış Mah. Enver Adakan Cad. Westside 1, Sitesi No:12, 34520 Beylikdüzü/İstanbul`, telefon `+90 212 741 41 35`. 2026 tarihli servis kaydı ve RestaurantGuru aynı adres/telefonu destekliyor; resmi sosyal hesap da telefonu doğruluyor. Ancak erişilebilir fiyatlı menü verisi bulunamadı; bulunan kahvaltı fiyatları 2020’ye ait ve son bir yıl şartını karşılamıyor. Adresin bazı harita sonuçlarında 3/1 varyantı bulunması nedeniyle fiyatlı kaynak ayrıca exact branch’e bağlanamadı. **Override eklenmedi; strict HOLD**.
+
+## LAHMACUN YE BEYKOZ ID 6750 HOLD
+Hentzer kaydı `İncirköy, Saip Molla Cd. 38A, 34800 Beykoz/İstanbul`, telefon `+90 553 266 33 66`. Yemeksepeti’nde güncel görünen fiyatlı lahmacun menüsü var; ancak Yandex ve Firma Fihristi aynı telefonla adresi Saip Molla Cad. `36C` olarak veriyor. Hentzer No:38A ile fiyatlı teslimat vendor’ının exact kapı numarası kesinleştirilemediğinden %100 branch parity sağlanmadı. **Override eklenmedi; strict HOLD**.
