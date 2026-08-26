@@ -2587,3 +2587,6 @@ Hentzer kaydı `Şahkulu, Tımarcı Sk. No:1, 34421 Beyoğlu/İstanbul`, telefon
 
 ## GAZİANTEPLİ KEBAPÇI DAYININ YERİ ID 6636 ACCEPTED
 Hentzer kaydı `Paşabahçe, Barbaros Cd. 12/1, 34000 Beykoz/İstanbul`, telefon `+90 216 425 28 82`. Yandex aynı adres ve telefonu doğruluyor; Yemeksepeti exact vendor sayfası adres ve onaylanmış telefon bulunduğunu belirtiyor ve 2026 tarihli aktif sipariş/yorum akışı mevcut. Arama dizininde exact vendor için doğrulanabilen beş güncel ürün-fiyat çifti eklendi: Adana Dürüm 320 TL, Tavuk Şiş 420 TL, 5'li Lahmacun Menü 850 TL, Tek Kişilik Lahmacun Menü 550 TL, Özel Antep Lahmacun 180 TL.
+
+## BABİL BIGBOSS BEYLİKDÜZÜ ID 6635 HOLD
+Hentzer kaydı `Cumhuriyet, Cumhuriyet Cd. No:4, 34520 Beylikdüzü/İstanbul`, telefon `+90 552 555 52 04`. Yandex kaydı işletmenin artık faal olmadığını belirtiyor. Facebook adresi Cumhuriyet Cd. No:4 olarak geçse de başka işletme dizinlerinde Beycity No:3-C veya Atatürk Blv. 3C adresleri görülüyor. 2025 tarihli Instagram kampanya fiyatı bulunsa da aktiflik ve exact şube parity’si güvenilir biçimde sağlanamadı. **Override eklenmedi; strict HOLD.**
