@@ -2974,3 +2974,6 @@ Hentzer `Paşabahçe, Paşabahçe İskele Cd. No:10, D34800 Beykoz`, telefon ala
 ## SALT FRIED CHICKEN BEŞİKTAŞ ID 6511 KABUL
 Hentzer `Sinanpaşa, Şair Nedim Cd. No:46/A, 34357 Beşiktaş`, telefon `+90 850 800 6503`. Yemeksepeti exact vendoru aynı `Şair Nedim Caddesi No 46/A` adresini ve onaylanmış telefon bilgisini belirtiyor; Wanderlog aynı adres ve `+90 850 800 6503` telefonunu listeliyor. Güncel Yemeksepeti menüsünden 20 benzersiz gıda ürünü, 2026 tarihli sipariş yorumlarıyla birlikte doğrulandı: 5 menü, 6 tavuk burger, 9 hot wings. **Override kabul edildi; 20 ürün eklendi.**
 Kaynaklar: https://www.yemeksepeti.com/en/restaurant/pehr/salt-fried-chicken-pehr ; https://wanderlog.com/place/details/1658151/salt-fried-chicken ; https://saltfriedchicken.com/
+
+## HARBI ADANA OCAKBAŞI ID 6510 HOLD
+Hentzer `Ortaköy, Portakal Ykş. Cd. No:2, 34347 Beşiktaş`, telefon `+90 212 327 21 01`. Resmi Instagram/Facebook exact Portakal Yokuşu No:2 adresini ve telefonu destekliyor; ancak Yelp aynı telefonla Muvakkit Sok. No:18/A adresini gösteriyor. Mekanlar menüsü fiyat yayımlamıyor ve son bir yıl exact şube fiyatlı menü doğrulanamadı. **Override eklenmedi; strict HOLD.**
