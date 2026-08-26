@@ -91623,4 +91623,33 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Fix Menü (kişi başı)", "price": "1900 TL", "category": "Fix Menüler" }
     ]
   },
+
+  "6525": {
+    "name": "Kozlab Coffee",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/hf3r/kozlab-coffee",
+    "sourceName": "Yemeksepeti exact Kozlab Coffee vendoru; resmi Instagram/Yandex ile exact adres-telefon doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "kova waffle", "price": "360 TL", "category": "Tatlılar ve Kekler" },
+      { "name": "Kaşarlı Tost", "price": "200 TL", "category": "Tostlar" },
+      { "name": "Karışık Tost", "price": "220 TL", "category": "Tostlar" },
+      { "name": "Beyaz Peynirli Tost", "price": "188 TL", "category": "Tostlar" },
+      { "name": "Beyaz Peynirli Sandviç", "price": "160 TL", "category": "Sandviçler" },
+      { "name": "Salamlı Kaşarlı Sandviç", "price": "192 TL", "category": "Sandviçler" },
+      { "name": "White Chocolate Mocha", "price": "168 TL", "category": "Sıcak Kahveler" },
+      { "name": "Mocha", "price": "168 TL", "category": "Sıcak Kahveler" },
+      { "name": "Latte", "price": "152 TL", "category": "Sıcak Kahveler" },
+      { "name": "Cortado", "price": "144 TL", "category": "Sıcak Kahveler" },
+      { "name": "Flat White", "price": "144 TL", "category": "Sıcak Kahveler" },
+      { "name": "Americano", "price": "144 TL", "category": "Sıcak Kahveler" },
+      { "name": "Iced White Chocolate Mocha", "price": "148 TL", "category": "Soğuk Kahveler" },
+      { "name": "Iced Mocha", "price": "148 TL", "category": "Soğuk Kahveler" },
+      { "name": "Iced Latte", "price": "132 TL", "category": "Soğuk Kahveler" },
+      { "name": "Sıcak Çikolata", "price": "176 TL", "category": "Sıcak İçecekler" },
+      { "name": "Beyaz Sıcak Çikolata", "price": "176 TL", "category": "Sıcak İçecekler" },
+      { "name": "Fındıklı Sıcak Çikolata", "price": "176 TL", "category": "Sıcak İçecekler" },
+      { "name": "Karamelli Sıcak Çikolata", "price": "176 TL", "category": "Sıcak İçecekler" },
+      { "name": "Çilekli Frappe", "price": "144 TL", "category": "Soğuk İçecekler" }
+    ]
+  },
 };

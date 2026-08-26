@@ -2927,3 +2927,7 @@ Hentzer `Cihannüma, Akmaz Çeşme Sk. No:8, 34353 Beşiktaş`, telefon `+90 212
 
 ## MATHILDA PROFİTEROLES ID 6526 HOLD
 Hentzer `Adnan Kahveci, Ihlamur Cd. No:17, 34528 Beylikdüzü`, telefon `+90 212 855 36 35`. Yandex/Instagram telefon ve Ihlamur adresini destekliyor; Migros exact isimli Adnan Kahveci şube menüsünde güncel görünen fiyatlar var. Ancak Yemeksepeti aynı işletme için `Kalkan Sokak 4/3` adresini gösteriyor; exact şube parity’si çelişkili olduğundan **override eklenmedi; strict HOLD.**
+
+## KOZLAB COFFEE ID 6525 ACCEPTED
+Hentzer `Tokatköy, Gürkan Sk. No:3 D:1, 34825 Beykoz`, telefon `+90 551 534 19 08`. Resmi Instagram/Yandex exact işletme ve telefonu destekliyor; Yemeksepeti exact Kozlab Coffee vendoru adresi `Emin Ali Gürkan sokak 3/1` olarak veriyor ve güncel görünen fiyatlı menü yayımlıyor. Poşet hariç 20 gıda ürünü eklendi. **Override kabul edildi.**
+Kaynaklar: https://www.yemeksepeti.com/en/restaurant/hf3r/kozlab-coffee ; https://www.instagram.com/kozlabcoffee/ ; https://yandex.com.tr/maps/org/kozlab_caffee/11979369853/
