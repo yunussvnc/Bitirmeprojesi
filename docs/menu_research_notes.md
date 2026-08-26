@@ -2458,3 +2458,6 @@ Hentzer kaydı `Sinanpaşa, Alaybeyi Sk Hakan Zihni İş Hanı No:2-A, 34353 Be�
 
 ## GINGER ACARKENT ID 6679 HOLD
 Hentzer kaydı `Acarlar, 9. Cd. C Blok No:11/2 İç Kapı No:262, 34800 Beykoz/İstanbul`, telefon `+90 538 416 23 48`. Ginger’ın resmi sitesi aynı adresi ve telefonu açıkça yayınlıyor; 2026 tarihli sosyal içerikler de şubeyi destekliyor. Resmi sitede sushi/gastrobar menü içeriği anlatılıyor ancak güncel ürün-fiyat listesi yayınlanmıyor. Son bir yıl fiyat şartı sağlanamadığından **override eklenmedi; strict HOLD**.
+
+## DAĞOĞLU ÇİĞKÖFTE BEYKOZ ID 6678 HOLD
+Hentzer kaydı `Ortaçeşme, Çayır Cd. No:102 D:A, 34825 Beykoz/İstanbul`, telefon `+90 216 323 23 03`. Yandex adresi No:102/A ve resmi Instagram/yerel kayıtlar telefonla işletmeyi destekliyor; ancak adres birimi D:A/102-A biçiminde farklı yazılıyor. Migros exact Ortaçeşme restoran sayfasında ürünler listeleniyor fakat fiyat alanları teslimat konumu/dinamik yükleme nedeniyle okunamadı; Yemeksepeti arama sonuçlarındaki fiyatlar da exact şube ve güncellik açısından kesinleştirilemedi. **Override eklenmedi; strict HOLD**.
