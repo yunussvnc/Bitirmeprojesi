@@ -3122,3 +3122,6 @@ Resmi Instagram/TikTok ve yerel kaynaklar Hentzer ile exact `Kuloğlu, Turnacıb
 
 ## AUTHENTIC FRENCH TACOS ID 6465 HOLD
 Resmi Facebook/Linktree, Yandex ve TikTok Hentzer ile exact `Sinanpaşa, Şair Leyla Sk. No:3, 34353 Beşiktaş/İstanbul` ve `+90 212 261 55 66` parity’sini doğruluyor. Yemeksepeti a13h güncel fiyatlı menü sunuyor; ancak popüler carousel tekrarları ve içecekler çıkarıldığında 20 değil 18 benzersiz gıda ürünü kalıyor. **Override eklenmedi; strict HOLD.**
+
+## BY LOUNGE BEŞİKTAŞ ID 6464 HOLD
+Resmi Instagram/Yandex/Corner/İstanbul Servis Listesi Hentzer ile exact `Türkali, Ihlamurdere Cd. Zafer Ap No:110 A, 34357 Beşiktaş/İstanbul` ve `+90 531 882 35 25` parity’sini doğruluyor. Ancak 20 benzersiz güncel fiyatlı ürün menüsü bulunamadı. **Override eklenmedi; strict HOLD.**
