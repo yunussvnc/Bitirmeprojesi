@@ -2271,3 +2271,6 @@ Hentzer kaydı `İncirköy, Tuğla Fbr. Sk. No:5/A, 34800 Beykoz/İstanbul`, tel
 
 ## CHOCOBERRY LONDON BEYLİKDÜZÜ ID 6740 HOLD
 Hentzer kaydı `Cumhuriyet, Ege Sokak, F Blok No:1/1K, 34975 Beylikdüzü/İstanbul`, telefon `+90 552 342 25 70`. Yandex ve Instagram adresi doğruluyor; ancak markanın Türkiye resmi sitesi aynı adres için `+90 552 342 55 70` telefonu veriyor. Son bir yıl içinde exact şubeye ait ürün-fiyat listesi bulunamadı; içerikler kampanya/ürün tanıtımı düzeyinde kaldı. Telefon parity sağlanamadığı için **override eklenmedi; strict HOLD**.
+
+## SEFARAD MEYHANE BEŞİKTAŞ ID 6739 HOLD
+Hentzer kaydı `Mecidiye, Muvakkit Sk. No:33, 34347 Beşiktaş/İstanbul`, telefon `+90 212 261 29 83`. Meyhankoli aynı No:33 ve telefonu destekliyor; ancak Mekanlar/Bulurum kaynakları aynı işletmeyi Muvakkit Sok. No:21 veya 21/B olarak veriyor. Resmi sosyal hesapta ürün isimleri görülse de son bir yıl içinde rakamsal fiyatlı menü bulunamadı. Adres parity %100 sağlanamadığı için **override eklenmedi; strict HOLD**.
