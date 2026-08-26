@@ -2389,3 +2389,6 @@ Hentzer kaydı `Cumhuriyet Mah. N. Hikmet Bulvarı 1997. Sokak, Cumhuriyet Park�
 
 ## BALIKHANEM BEYLİKDÜZÜ ID 6702 HOLD
 Hentzer kaydı `Dereağzı Mh. Denizyolu Cd. 28/1, İstanbul Akıllı Balık Merkezi, 34525 Beylikdüzü/İstanbul`, telefon `+90 850 309 2324`. Balıkhanem resmi sitesi aynı Gürpınar Su Ürünleri/Balıkçı Barınağı No:28/1 tesisini ve aynı müşteri hizmetleri hattını yayınlıyor; canlı online katalogda fiyatlı balık ürünleri bulunuyor. Ancak ürün kartları fiyatları ortak dinamik blokta tekrarladığı için ürün-fiyat eşleşmesi güvenilir şekilde ayrıştırılamadı; ayrıca kaynak restoran menüsünden ziyade perakende/soğuk zincir ürün kataloğu. Zorunlu doğrulama standardı sağlanamadığından **override eklenmedi; strict HOLD**.
+
+## AQUA RESTAURANT FOUR SEASONS BOSPHORUS ID 6701 ACCEPTED
+Hentzer kaydı `Yıldız, Çırağan Cd. No:28, 34349 Beşiktaş/İstanbul`, telefon `+90 212 381 40 00`. Four Seasons Bosphorus resmi Aqua sayfası Çırağan Cd. No:28 adresindeki Aqua restoranı ve aynı telefonla eşleşiyor; resmi sosyal/işletme kaydı da aynı bilgileri destekliyor. Four Seasons’ın resmi Aqua deneyim sayfası, **19.03.2026’dan itibaren** geçerli Romantic Dinner Menu için başlangıç fiyatını **USD 364** olarak yayınlıyor. Bu güncel, exact işletme menü deneyimi **1 özel menü ürünü override edilerek** eklendi.

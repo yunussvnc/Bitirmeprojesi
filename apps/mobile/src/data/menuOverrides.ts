@@ -4,6 +4,15 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6701": {
+    "name": "AQUA RESTAURANT FOUR SEASONS BOSPHORUS",
+    "sourceUrl": "https://www.fourseasons.com/bosphorus/dining/culinary-experiences/prix-fixe-menu/romantic-dinner-menu-at-aqua-restaurant/",
+    "sourceName": "Four Seasons Bosphorus resmi Aqua sayfası; resmi Facebook/işletme kaydıyla exact adres/telefon doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Romantic Dinner Menu at Aqua Restaurant (2 kişi)", "price": "From USD 364", "category": "Özel Menüler" }
+    ]
+  },
   "6705": {
     "name": "ADA BARO BAHÇE KANLICA",
     "sourceUrl": "https://www.instagram.com/adakanlicabarobahce/reel/DcOg7vOu6Sj/",
