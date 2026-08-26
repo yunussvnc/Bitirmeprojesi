@@ -3072,3 +3072,6 @@ Hentzer ile `Hüseyinağa, Tarlabaşı Blv No:59 A, 34435 Beyoğlu/İstanbul` ve
 
 ## MEŞALE CAFE & RESTAURANT ID 6481 HOLD
 Resmi Meşale Cafe iletişim sayfası Hentzer ile exact `Büyükşehir, Başak Sokağı No:4, 34520 Beylikdüzü/İstanbul` ve `+90 212 871 03 44` parity’sini doğruluyor. Ancak resmi menü fiyatlı ürün metni sunmuyor ve son bir yıl exact şube fiyatlı 20 ürün doğrulanamadı. **Override eklenmedi; strict HOLD.**
+
+## MIKLA ID 6480 HOLD
+Mikla ve The Marmara Pera resmi sayfaları Hentzer ile exact `The Marmara Pera, Asmalı Mescit, Meşrutiyet Cd. No:15, 34430 Beyoğlu/İstanbul` ve `+90 212 293 56 56` parity’sini doğruluyor. Ancak resmi menü yalnızca paket menü fiyatlarını veriyor; tek tek 20 ürün fiyatı yok. **Override eklenmedi; strict HOLD.**
