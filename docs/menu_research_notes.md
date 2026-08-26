@@ -2479,3 +2479,6 @@ Hentzer kaydı `Türk Alman Üniversitesi, Merkez, Şahinkaya Cd. A Blok Binası
 
 ## KEBAPÇI MURAT ÇETİN BEYLİKDÜZÜ ID 6672 ACCEPTED
 Hentzer kaydı `Kalekent Sitesi, Adnan Kahveci, Anadolu Cd. C-1 Blok No:6, 34528 Beylikdüzü/İstanbul`, telefon `+90 212 813 63 63`. Resmi site/Instagram/Facebook kaynakları aynı Kalekent C-1 Blok No:6 adresini ve telefonu doğruluyor; canlı Yemeksepeti exact şube de `KALE KENT SİTESİ C-1 BLOK NO:6` adresini gösteriyor ve 18.08.2026 tarihli sipariş yorumları mevcut. Popüler carousel tekrarları ve içecekler dışarıda tutularak **20 güncel kebap, çorba, pide ve tatlı ürünü** eklendi.
+
+## HOLLYFOOD BURGER & FRIED CHICKEN KAVACIK ID 6671 ACCEPTED
+Hentzer kaydı `Kavacık, Özgür Cd. 15A, 34810 Beykoz/İstanbul`, telefon `+90 507 637 93 38`. Resmi `hollyfood.kavacik` sosyal hesabı ve Yandex aynı Kavacık/Özgür Caddesi şubesini ve telefonu destekliyor; 26.02.2026 tarihli resmi paylaşımda şube adresi ve 320 TL’lik 2 hamburger + patates + içecek kampanyası açıkça belirtiliyor. Resmi sosyal menü paylaşımında ayrıca Çıtır Tavuk Burger 199 TL, Feryat Burger 359 TL ve Big Burger 359 TL olarak listelenmiş; **4 güncel ürün** eklendi.

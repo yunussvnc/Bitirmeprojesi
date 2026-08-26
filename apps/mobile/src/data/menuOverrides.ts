@@ -4,6 +4,18 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6671": {
+    "name": "HOLLYFOOD BURGER & FRIED CHICKEN KAVACIK",
+    "sourceUrl": "https://www.instagram.com/hollyfood.kavacik/",
+    "sourceName": "2026 tarihli resmi Hollyfood Kavacık sosyal paylaşımları; Yandex ile exact adres-telefon doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Çıtır Tavuk Burger", "price": "199 TL", "category": "Burgerler" },
+      { "name": "Feryat Burger", "price": "359 TL", "category": "Burgerler" },
+      { "name": "Big Burger", "price": "359 TL", "category": "Burgerler" },
+      { "name": "2 Hamburger + Patates + İçecek", "price": "320 TL", "category": "Menüler" }
+    ]
+  },
   "6672": {
     "name": "KEBAPÇI MURAT ÇETİN BEYLİKDÜZÜ",
     "sourceUrl": "https://www.yemeksepeti.com/restaurant/olhq/kebapci-murat-cetin",
