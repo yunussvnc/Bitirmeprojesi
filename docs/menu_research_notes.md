@@ -3208,3 +3208,7 @@ Kaynaklar: https://www.yemeksepeti.com/en/restaurant/su4a/antakya-isi-sokak-lezz
 
 ## ÇARŞI BÜFE ID 6438 HOLD
 Adres/telefon parity’si kesin değil: Hentzer `24/C`, `0537 364 90 66`; Yelp/Bulurum `24/C` fakat `0212 261 83 50`; Yandex `Quaresma Çarşı Büfe`, `24A` ve `0537 364 90 66`. Exact şube ve güncel 20 ürün fiyatlı menü doğrulanamadı; farklı şehir Yemeksepeti sonuçları kullanılmadı. **Override eklenmedi; strict HOLD.**
+
+## DEAL COFFEE CO. ID 6437 HOLD
+Hentzer `Abbasağa, Yıldız Cd. 53/A, 34353 Beşiktaş/İstanbul`, `+90 212 703 23 24`; Yandex exact Yıldız Cad. 53A ve aynı telefonu doğruluyor. Canlı Yemeksepeti `d2yr` vendoru güncel fiyatlı kahve ve atıştırmalık menüsü sunuyor, ancak vendor sayfasında exact Abbasağa adres/telefon görünmüyor. Resmi deal.com.tr sitesi online kahve/paket satış sitesi, mağaza menüsü değil. Zorunlu vendor-şube parity kesinleşmediği için **override eklenmedi; strict HOLD.**
+Kaynaklar: https://deal.com.tr/ ; https://yandex.com/maps/org/deal_coffee/175531192565/ ; https://www.yemeksepeti.com/en/restaurant/d2yr/deal-coffee
