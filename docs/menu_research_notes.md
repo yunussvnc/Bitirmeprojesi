@@ -2575,3 +2575,6 @@ Hentzer kaydı `Çubuklu, Orhan Veli Kanık Cd. No:51, 34810 Beykoz/İstanbul`, 
 
 ## LİÇİ HOUSE BEYKOZ ID 6640 HOLD
 Hentzer kaydı `Çubuklu, Orhan Veli Kanık Cd. No:51, 34810 Beykoz/İstanbul`, telefon `+90 216 362 30 30`. Resmi Liçi House sitesi telefon ve Çubuklu/Kavacık bölgesini doğruluyor; ancak resmi sayfada Hentzer’deki No:51 açıkça yer almıyor, üçüncü taraf kaynaklarda 51-1/5 veya numarasız adres görülüyor. Yemeksepeti’nde güncel fiyatlı ürünler bulunsa da vendor sayfası exact şube adresini göstermiyor. **%100 exact adres parity sağlanamadığı için override eklenmedi; önceki çalışma ağacındaki taslak kaldırıldı ve strict HOLD uygulandı.**
+
+## UN SANATI BAYRAMPAŞA ID 6639 HOLD
+Hentzer kaydı `Yıldırım, Millet Cd. No:163, 34045 Bayrampaşa/İstanbul`, telefon `+90 212 515 02 22`. Yandex aktif kaydı adresi `Millet Cad. 163A` olarak gösteriyor; resmi iletişim sayfası erişimde Bağcılar adresini döndürürken arama dizini Bayrampaşa için `No:163/A` bilgisi veriyor. Yemeksepeti’nde güncel fiyatlı ürünler mevcut, ancak vendor sayfası Hentzer’deki No:163 ile %100 exact adres parity’sini açıkça kanıtlamıyor. **Yanlış şubeye menü aktarmamak için override eklenmedi; strict HOLD.**
