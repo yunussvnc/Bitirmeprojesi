@@ -2154,3 +2154,6 @@ Hentzer kaydı `Cihannüma, Barbaros Blv. 97B, 34353 Beşiktaş/İstanbul`; tele
 
 ## BLACK DROP BURGER ID 6779 ACCEPTED
 Hentzer kaydı `Sinanpaşa, Şht. Asım Cd. No:47, 34357 Beşiktaş/İstanbul`, telefon `+90 212 260 01 70`. Black Drop’un Facebook işletme kaydı ve Bulurum kaydı aynı adres/telefonu doğruluyor. Resmi sosyal medya paylaşımında CheeseBomb `223 TL` ve Nirvana `225 TL` fiyatları yayınlandı; paylaşım 26.08.2025 tarihli olduğundan son bir yıl şartı içinde ve exact şubeye ait. Yalnızca bu iki fiyatı açıkça doğrulanan gıda ürünü eklendi. **2 ürün override edildi.**
+
+## KAKTÜS CAFE BEYLİKDÜZÜ ID 6778 HOLD
+Hentzer kaydı `Barış, Palmiye Sokağı, 34520 Beylikdüzü/İstanbul`, telefon `+90 542 383 12 12`. Yandex ana kaydı adresi destekliyor ancak panorama sonucu `Palmiye Sok. No:2A` ve farklı telefon `+90 537 503 57 77` veriyor. Fiyatlı QR menü sonucu `kaktuscafedortyol.com` farklı şehirdeki işletmeye ait; Beylikdüzü şubesine ait son bir yıl fiyat listesi doğrulanamadı. %100 adres/telefon ve branch-specific fiyat şartı sağlanamadığı için **override eklenmedi; strict HOLD**.
