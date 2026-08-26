@@ -3035,3 +3035,7 @@ Hentzer `Cumhuriyet, Onur Sk. 1B, 34520 Beylikdüzü/İstanbul`, telefon alanı 
 
 ## SUSHI İNN ESENYURT ID 6492 HOLD
 Resmi Sushi İnn iletişim sayfası exact `Cumhuriyet Mahallesi, 1993 Sokak, Sağlam Residence, No:4/3, Esenyurt/İstanbul` ve `0212 852 0 211` bilgisini doğruluyor. Resmi menü sayfası fiyatları metin olarak yayımlamıyor; Yemeksepeti’nde bazı fiyatlar bulunsa da exact Esenyurt vendor parity’si kurulamadı ve 20 ürün doğrulanamadı. **Override eklenmedi; strict HOLD.**
+
+## WILLION PIZZA ID 6491 ACCEPTED
+Hentzer `Yıldız, Çırağan Cd. No:33A, 34349 Beşiktaş/İstanbul`, telefon `+90 212 265 10 10`. Resmi Willion Pizza Instagram 20.07.2025 tarihli gönderisi exact adres ve telefonu doğruluyor; Restoranim de aynı kaydı destekliyor. Yemeksepeti vendorunda 26.08.2026 erişiminde 42 cm pizza, garlic knots ve sos fiyatları bulundu. Popüler carousel tekrarları tekilleştirildi; içecekler dışlandı ve 19 benzersiz gıda kalemi eklendi. **Override kabul edildi.**
+Kaynaklar: https://www.yemeksepeti.com/restaurant/u8lk/willion-pizza ; https://www.instagram.com/reel/DMVSPGMt5B2/ ; https://restoranim.net/istanbul/besiktas/pizzaci/willion-pizza

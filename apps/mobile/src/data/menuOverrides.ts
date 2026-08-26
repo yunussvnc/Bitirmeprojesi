@@ -91652,6 +91652,33 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Çilekli Frappe", "price": "144 TL", "category": "Soğuk İçecekler" }
     ]
   },
+  "6491": {
+    "name": "Willion Pizza",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/u8lk/willion-pizza",
+    "sourceName": "Güncel Yemeksepeti Willion Pizza menüsü; 20.07.2025 ve resmi Instagram ile Yıldız, Çırağan Cd. No:33A ve +90 212 265 10 10 exact parity doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Margherita Pizza (42 cm.)", "price": "645 TL", "category": "Pizzalar" },
+      { "name": "Sebzeli Pizza (42 cm.)", "price": "670 TL", "category": "Pizzalar" },
+      { "name": "5 Peynirli Pizza (42 cm.)", "price": "705 TL", "category": "Pizzalar" },
+      { "name": "Pesto Mantarlı Pizza (42 cm.)", "price": "670 TL", "category": "Pizzalar" },
+      { "name": "Ton Balıklı Pizza (42 cm.)", "price": "735 TL", "category": "Pizzalar" },
+      { "name": "Buffalo Tavuklu Pizza (42 cm.)", "price": "710 TL", "category": "Pizzalar" },
+      { "name": "Ranch Tavuklu Pizza (42 cm.)", "price": "710 TL", "category": "Pizzalar" },
+      { "name": "BBQ Tavuklu Pizza (42 cm.)", "price": "710 TL", "category": "Pizzalar" },
+      { "name": "Pepperoni Pizza (42 cm.)", "price": "690 TL", "category": "Pizzalar" },
+      { "name": "Sucuklu Mantarlı Pizza (42 cm.)", "price": "705 TL", "category": "Pizzalar" },
+      { "name": "Karışık Pizza (42 cm.)", "price": "705 TL", "category": "Pizzalar" },
+      { "name": "Hawaii Pizza (42 cm.)", "price": "690 TL", "category": "Pizzalar" },
+      { "name": "Garlic Knots (1 Adet)", "price": "85 TL", "category": "Yan Ürünler" },
+      { "name": "Garlic Knots (3 Adet)", "price": "235 TL", "category": "Yan Ürünler" },
+      { "name": "Garlic Knots (6 Adet)", "price": "480 TL", "category": "Yan Ürünler" },
+      { "name": "Sriracha Sos", "price": "30 TL", "category": "Soslar" },
+      { "name": "Barbekü Sos", "price": "30 TL", "category": "Soslar" },
+      { "name": "Willion Buffalo Sos", "price": "30 TL", "category": "Soslar" },
+      { "name": "Willion Ranch Sos", "price": "30 TL", "category": "Soslar" }
+    ]
+  },
   "6497": {
     "name": "Tike Acarkent",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/yfz2/tike-acarkent",
