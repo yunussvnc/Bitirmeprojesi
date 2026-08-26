@@ -2181,3 +2181,6 @@ Hentzer kaydı `Adnan Kahveci, Paşazade Cd. No:16, 34528 Beylikdüzü/İstanbul
 
 ## ESPRESSOLAB BEYLİKDÜZÜ MAKYOL ID 6770 HOLD
 Hentzer kaydı `Barış, Samsun Cd. No:14/2, 34520 Beylikdüzü/İstanbul`, telefon `+90 444 84 64`. Espressolab resmi mağaza sayfası aynı şubeyi `Barış Mah. Samsun Cad. No:14/2 B Blok` ve 444 8 464 ile doğruluyor; adres/telefon parity sağlandı. Ancak resmi şube sayfası fiyatlı tüketici menüsü sunmuyor; Pardon web menüsü yalnız kategori adlarını veriyor, fiyat yok. Arama sonuçlarındaki Yemeksepeti kaydı farklı/şehir belirsiz vendor olduğundan branch-specific olduğu kanıtlanmadan kullanılmadı. Son bir yıl fiyat doğrulanamadığı için **override eklenmedi; strict HOLD**.
+
+## BİÇARE MEYHANE BEYLİKDÜZÜ ID 6769 HOLD
+Hentzer kaydı `Adnan Kahveci Mahallesi Avrupa Caddesi Kubis, Adnan Kahveci, No:34, 34528 Beylikdüzü/İstanbul`, telefon `+90 543 434 20 90`. Facebook ve Restoranim No:34/34528 ve telefonu destekliyor; ancak güncel Instagram/Yandex sonuçları işletmeyi `Avrupa Cad. No:108/34 Beykent` olarak gösteriyor. 2026 içeriklerinde Fix Menü fiyatları (1.600/1.200/1.000 TL) görünse de ürün içeriği ve Hentzer adresiyle birebir branch parity net değil. %100 adres ve kalem bazlı güncel menü doğrulaması sağlanamadığı için **override eklenmedi; strict HOLD**.
