@@ -1887,3 +1887,33 @@ Mekanlar.com, Yandex, servis listeleri ve resmi Facebook exact `Cihannüma, Sali
 
 ## SUPPER BAKERY ŞİŞLİ ID 6870 kabulü
 Hentzer kaydı `Muradiye, Nüzhetiye Cd. No:1, 34250 Şişli/İstanbul`, `+90 531 871 62 17`; Yandex ve bağımsız işletme kaynakları exact adres/telefonu doğruluyor. Yemeksepeti canlı vendoru `Supper Bakery` ile eşleşiyor. 26.08.2026 tarihinde canlı menüde 77 benzersiz yiyecek, tatlı, kahve, alkolsüz içecek, vitamin bar ve paketli gıda kaleminin fiyatı görüldü. Popüler carousel tekrarları, poşet ve teslimat ücretleri dışarıda bırakıldı. Vendor erişim anında kapalı görünse de ürün-fiyat listesi güncel olarak erişilebilir ve exact şube eşleşmesi sağlandığı için **override kabul edildi**.
+
+## KANTİN BEŞİKTAŞ ID 6869 HOLD
+Migros Yemek ve Yemeksepeti canlı sayfalarında güncel fiyatlı Kantin menüleri var; ancak vendor sayfalarında adres/telefon yok. Resmi Kantin Beşiktaş sosyal sonuçları exact şubeyi `Sinanpaşa, Ihlamurdere Cd. No:33/A, Beşiktaş/İstanbul` olarak gösteriyor; Hentzer kaydı `Hattat Tahsin Sk. 9A` ve telefon `+90 538 088 01 53` olduğundan exact şube eşleşmesi sağlanmadı. **HOLD**, override eklenmedi.
+
+## OSBORN COFFEE BEYLİKDÜZÜ ID 6868 HOLD
+Restoranim.net ve resmi sosyal kaynaklar exact `Cumhuriyet, Onur Sk. F Blok No:1B, 34100 Beylikdüzü/İstanbul` adresini doğruluyor; Hentzer kaydında telefon yok. Restoranim kaydı işletmeyi kapalı gösteriyor ve ürün bazlı güncel fiyat menüsü sunmuyor; 2026 sosyal paylaşımlarındaki kampanya toplamları tam menü değildir. **HOLD**, override eklenmedi.
+
+## İSTANBUL KEBAB CAFE RESTAURANT ID 6867 HOLD
+Resmi site ve bağımsız kaynaklar exact `Alemdar, Biçki Yurdu Sk. No:5, 34122 Fatih/İstanbul` / `+90 537 982 73 95` bilgisini doğruluyor. Resmi menüde yalnızca genel `6–12$` fiyat aralığı ve ürün açıklamaları var; ürün bazlı güncel TL fiyatı/revizyon tarihi yok. **HOLD**, override eklenmedi.
+
+## BOOST COFFEE BEYLİKDÜZÜ ID 6866 HOLD
+Resmi sosyal kaynaklar exact `Barış, Reşat Nuri Güntekin Sk. No:58, Beylikdüzü/İstanbul` adresini, Yandex Hentzer telefonu `+90 505 148 36 07`yi destekliyor; ancak Yandex adresi Mehmetçik Caddesi, resmi Boost sitesi ise genel merkez `+90 555 688 64 92` telefonunu gösteriyor. Şube telefon-adres çifti exact güvenilir biçimde bağlanamadı. **HOLD**, override eklenmedi.
+
+## DONER SAHANE BEYKOZ ID 6865 HOLD
+İstanbul Servis Listesi exact `Rüzgarlıbahçe, Cumhuriyet Cd. 69 B, 34805 Beykoz/İstanbul` adresini doğruluyor; Hentzer telefon kaydı yok. Listede görülen `0850 304 0576` işletme hattı olarak bağımsız teyit edilmedi ve ürün-fiyat menüsü bulunmuyor. **HOLD**, override eklenmedi.
+
+## BYMUZAFFER BEŞİKTAŞ ID 6864 HOLD
+Resmi site exact `+90 543 327 98 17` telefonunu doğruluyor; ancak resmi sitede adres açıkça yok, Yandex aynı telefonu `Salihefendi Sok. 4A` adresiyle veriyor ve Hentzer `No:2` kaydıyla uyuşmuyor. 28.04.2026 sosyal paylaşımındaki tekil balık ekmek fiyatı tam menü değildir. **HOLD**, exact adres ve eksiksiz güncel ürün-fiyat listesi birlikte doğrulanamadı.
+
+## BODRUM MEYHANESİ YEŞİLKÖY ID 6863 HOLD
+Bulurum, Meyhanedeyiz ve bağımsız işletme kaynakları exact `Yeşilköy, Çamözü Sk. 8/4, 34149 Bakırköy/İstanbul` / `+90 212 574 18 86` bilgisini doğruluyor. Meyhankoli sayfası zaman aşımına uğradı; Restaurant Guru ve diğer sonuçlarda güncel ürün bazlı fiyat listesi erişilebilir değil. **HOLD**, override eklenmedi.
+
+## BY SANAT CAFE ID 6862 HOLD
+Maptons exact `Atatürk kültür ve sanat merkezi, Cumhuriyet Cd. altı No:26, Beylikdüzü` / `+90 212 872 37 14` bilgisini doğruluyor ve 26.08.2026 kayıt tarihini gösteriyor; ancak kaydın kategorisi müzik aletleri mağazası, menü yok ve yalnızca ₺1–100 ortalama hesap veriliyor. **HOLD**, ürün bazlı güncel fiyat doğrulaması bulunmadı.
+
+## BEŞ BIÇAK STEAK HOUSE BEYLİKDÜZÜ ID 6861 HOLD
+Restoranim.net exact `West Side 2, Barış, Mehmetçik Cd. No:28 West, 34520 Beylikdüzü/İstanbul` / `+90 212 852 60 06` bilgisini doğruluyor. Ancak erişilebilir menü kaynakları son bir yılda ürün bazlı fiyat sunmuyor; bazı sosyal sonuçlar farklı Alkent şubesine ait. **HOLD**, override eklenmedi.
+
+## ETİLER BALIKÇISI ID 6860 ACCEPTED
+Resmi `https://etilerbalikcisi.com/menumuz` canlı menüsü 26.08.2026 tarihinde doğrulandı. Resmi site footer’ı Hentzer kaydıyla exact `Etiler, Toprakkale Sk. No:30 F, Garanti Pasajı Beşiktaş/İstanbul` ve `+90 538 652 93 08` bilgilerini eşleştiriyor. Menüde ürün bazlı TL fiyatları yayınlanıyor; kaynak sayfa 2026 telif bilgisi taşıyor ve canlı erişim tarihi son bir yıl şartını sağlıyor. Sardalya kaleminde fiyat yerine Lorem Ipsum olduğu için dışlandı. Alkolsüz kapsamda Balıklar 17, Ara Sıcaklar 11, Soğuk Menüler 16, Salatalar 6, Alternatif Menü 4, Tatlılar 3 ve İçecekler 9 olmak üzere toplam **66 benzersiz fiyatlı kalem** aktarıldı. Alkollü ürün eklenmedi; ürün/fiyat uydurulmadı. TypeScript ve bağımsız ürün/parite sayımı geçmelidir.
