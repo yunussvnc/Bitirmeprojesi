@@ -1923,3 +1923,15 @@ Swissôtel resmi sayfası exact `Vişnezade Mah. Acısu Sok. No.19, 34357 Maçka
 
 ## OKKALI KAHVE BEŞİKTAŞ ID 6858 HOLD
 Arama sonuçları exact `Sinanpaşa, Yeni Hamam Sk. No:3, 34353 Beşiktaş/İstanbul` adresini destekliyor; resmi Instagram tarayıcıda giriş duvarına yönlendi. Marka arama sonucundaki `0212 236 95 06` telefonu Hentzer `+90 538 027 51 96` ile uyuşmuyor; güncel ürün bazlı fiyatlı menü de doğrulanamadı. **HOLD**, override eklenmedi.
+
+## ÇİÇEK UNLU MAMÜLLERİ VE MARKET ID 6856 HOLD
+Bağımsız kayıtlar exact `Elmalı, Keser Cd. No:3, 34825 Beykoz/İstanbul` adresini ve `0532 165 35 53` telefonunu destekliyor. Ancak son bir yılda doğrulanabilir ürün bazlı fiyatlı menü veya erişilebilir resmî fiyat kaynağı bulunamadı. **HOLD**, override eklenmedi.
+
+## CALİSTO BALIK ID 6855 HOLD
+Resmî calisto.com.tr telefonu `0212 999 54 54` ile eşleşiyor; ancak resmî sitedeki adres `Marmara Mah. Ulusum Cad. No:28/B1 WEST ISTANBUL MARİNA` olup Hentzer `Ulusum Cd. No:22/1` kaydıyla exact eşleşmiyor. Resmî sitede ürün bazlı güncel fiyatlı menü bulunmuyor ve footer 2019 olarak kalmış. **HOLD**, override eklenmedi.
+
+## GLANE COFFEE ID 6854 HOLD
+Yandex ve sosyal medya kayıtları exact `Sinanpaşa, Şht. Dursun Bakan Sk. No:18, 34353 Beşiktaş/İstanbul` adresini ve `+90 535 707 53 62` telefonunu destekliyor. Ancak son bir yılda doğrulanabilir ürün bazlı fiyatlı menü bulunamadı. **HOLD**, override eklenmedi.
+
+## ARCHI CAFE ID 6853 HOLD
+Arama/sosyal medya kayıtları exact `Beylikdüzü OSB MH. Birlik sanayi sitesi 3. Cadde 13, iç kapı No:77` adresini destekliyor; Migros Yemek’te 26.08.2026 tarihinde aktif ürün-fiyat menüsü görüldü. Ancak Hentzer `phone_number` alanı boş ve Migros restoran bilgi paneli telefon yayımlamıyor. Zorunlu exact adres+telefon paritesi sağlanamadı. **HOLD**, override eklenmedi.
