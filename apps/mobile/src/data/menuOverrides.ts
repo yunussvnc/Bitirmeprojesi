@@ -91652,4 +91652,32 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Çilekli Frappe", "price": "144 TL", "category": "Soğuk İçecekler" }
     ]
   },
+  "6511": {
+    "name": "SALT FRIED CHICKEN BEŞİKTAŞ",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/pehr/salt-fried-chicken-pehr",
+    "sourceName": "Güncel Yemeksepeti exact Şair Nedim Cd. No:46/A vendor menüsü; Wanderlog ile exact adres/0850 telefon parity doğrulaması ve resmi site çapraz kontrolü",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Junior Salter Menü", "price": "290 TL", "category": "Menüler" },
+      { "name": "Salt Piknik Sepeti Menüsü", "price": "1380 TL", "category": "Menüler" },
+      { "name": "Combo Mix Menü", "price": "830 TL", "category": "Menüler" },
+      { "name": "Combo All Star Menü", "price": "830 TL", "category": "Menüler" },
+      { "name": "Combo Royal Menü", "price": "830 TL", "category": "Menüler" },
+      { "name": "Burningman Burger", "price": "560 TL", "category": "Tavuk Burgerler" },
+      { "name": "Basic Salt Burger", "price": "565 TL", "category": "Tavuk Burgerler" },
+      { "name": "Chili Honey BBQ Burger", "price": "565 TL", "category": "Tavuk Burgerler" },
+      { "name": "Eyes on You Burger", "price": "575 TL", "category": "Tavuk Burgerler" },
+      { "name": "Dynamite Burger", "price": "575 TL", "category": "Tavuk Burgerler" },
+      { "name": "Swag Burger", "price": "590 TL", "category": "Tavuk Burgerler" },
+      { "name": "Basic Wings (6 Adet)", "price": "580 TL", "category": "Hot Wings" },
+      { "name": "Basic Wings (10 Adet)", "price": "730 TL", "category": "Hot Wings" },
+      { "name": "6'lı Fire Wings", "price": "620 TL", "category": "Hot Wings" },
+      { "name": "10'lu Fire Wings", "price": "770 TL", "category": "Hot Wings" },
+      { "name": "BBQ Wings (6 Adet)", "price": "610 TL", "category": "Hot Wings" },
+      { "name": "BBQ Wings (10 Adet)", "price": "760 TL", "category": "Hot Wings" },
+      { "name": "Buffalo Wings (10 Adet)", "price": "790 TL", "category": "Hot Wings" },
+      { "name": "Buffalo Wings (6 Adet)", "price": "640 TL", "category": "Hot Wings" },
+      { "name": "Shot Wings", "price": "340 TL", "category": "Hot Wings" }
+    ]
+  },
 };
