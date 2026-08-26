@@ -3078,3 +3078,7 @@ Mikla ve The Marmara Pera resmi sayfaları Hentzer ile exact `The Marmara Pera, 
 
 ## BALIKÇI ABDULLAH ID 6479 HOLD
 Yerel kaynaklar Hentzer ile exact `Paşabahçe, Barbaros Cd. No:18 D:B, 34820 Beykoz/İstanbul` ve `+90 542 411 25 35` parity’sini doğruluyor. Ancak restoran günlük balık/ürün seçmeli çalışıyor ve kamuya açık kaynaklarda bireysel TL fiyatları yok; 20 güncel fiyatlı ürün doğrulanamadı. **Override eklenmedi; strict HOLD.**
+
+## UPPERDECK AMERICAN DINER ID 6478 ACCEPTED
+Hentzer `Sinanpaşa, Hasfırın Cd. No:298 kat 2, 34022 Beşiktaş/İstanbul`, telefon `+90 501 588 65 75`. Upperdeck resmi sitesi güncel menü ve telefonu yayımlıyor; Corner/Allzin/Instagram exact şube adresini destekliyor. Yemeksepeti zfr1 vendorundan 20 benzersiz burger, smash, crispy, sosisli, french toast ve tavuk ürünü eklendi; içecekler dışlandı. **Override kabul edildi.**
+Kaynaklar: https://upperdeckk.com/tr ; https://www.yemeksepeti.com/en/restaurant/zfr1/upperdeck-american-diner ; https://www.corner.inc/place/pSTyM3MqLHER ; https://allzinapp.com/upperdeckamerican ; https://www.instagram.com/uupperdeckk/

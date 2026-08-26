@@ -91652,6 +91652,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Çilekli Frappe", "price": "144 TL", "category": "Soğuk İçecekler" }
     ]
   },
+  "6478": {
+    "name": "Upperdeck American Diner",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/zfr1/upperdeck-american-diner",
+    "sourceName": "Güncel Yemeksepeti zfr1 Upperdeck American Diner menüsü; resmi Upperdeck sitesi, Corner/Allzin ve Instagram ile Hasfırın Cd. No:298 kat 2 ve +90 501 588 65 75 exact parity doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Kansas Burger", "price": "620 TL", "category": "Burgerler" },
+      { "name": "Simple Burger", "price": "595 TL", "category": "Burgerler" },
+      { "name": "Deck Mac Burger", "price": "610 TL", "category": "Burgerler" },
+      { "name": "Truffle Burger", "price": "595 TL", "category": "Burgerler" },
+      { "name": "BBQ Burger", "price": "540 TL", "category": "Burgerler" },
+      { "name": "Upperdeck Burger", "price": "630 TL", "category": "Burgerler" },
+      { "name": "Berries Burger", "price": "620 TL", "category": "Burgerler" },
+      { "name": "Simple Smash", "price": "660 TL", "category": "Smash Burgerler" },
+      { "name": "Oklahoma Onion", "price": "670 TL", "category": "Smash Burgerler" },
+      { "name": "Wild Eggy", "price": "690 TL", "category": "Smash Burgerler" },
+      { "name": "Deck Smash", "price": "670 TL", "category": "Smash Burgerler" },
+      { "name": "Crispy Burger", "price": "520 TL", "category": "Çıtır Burgerler" },
+      { "name": "Red Dead Crispy Burger", "price": "550 TL", "category": "Çıtır Burgerler" },
+      { "name": "Truffle Dog", "price": "510 TL", "category": "Sosisli ve Bunlar" },
+      { "name": "BBQ Dog", "price": "560 TL", "category": "Sosisli ve Bunlar" },
+      { "name": "Veggy Bun", "price": "550 TL", "category": "Sosisli ve Bunlar" },
+      { "name": "French Toast", "price": "470 TL", "category": "French Toastlar" },
+      { "name": "Apple & Cinnamon French Toast", "price": "470 TL", "category": "French Toastlar" },
+      { "name": "Nutella French Toast", "price": "485 TL", "category": "French Toastlar" },
+      { "name": "Hot Wings", "price": "530 TL", "category": "Paylaşmalıklar" }
+    ]
+  },
   "6483": {
     "name": "Kovan Firin",
     "sourceUrl": "https://www.yemeksepeti.com/restaurant/k5cm/kovan-firin-k5cm",
