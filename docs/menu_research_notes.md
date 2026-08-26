@@ -2825,3 +2825,6 @@ Hentzer kaydı `Adnan Kahveci, 34562 Beylikdüzü/İstanbul`, telefon alanı bo�
 
 ## CHANGCHENG RESTAURANT BEYLİKDÜZÜ ID 6557 HOLD
 Hentzer kaydı `Elit Life Rezidans, Adnan Kahveci, Avrupa Cd. No 106/B, 34520 Beylikdüzü/İstanbul`, telefon `+90 212 856 66 05`. Resmi Instagram ve Wanderlog exact şube adres/telefonunu doğruluyor. Ancak son bir yıl içinde doğrulanabilir ürün bazlı fiyatlı menü bulunamadı; bulunan 05.03.2025 tarihli Hot Pot fix menü 1.100 TL son bir yıllık pencere dışında. **Override eklenmedi; strict HOLD.**
+
+## KÖK KARDEŞLER LOKANTASI ID 6556 HOLD
+Hentzer `Merkez, Hacı Alibey Sk. No:6, 34820 Beykoz`, telefon `+90 216 323 66 27`. Telefon çeşitli kaynaklarla eşleşiyor; fakat adres kaynakları No:6, No:3A ve No:2 olarak çelişiyor. Son bir yıl içinde exact şubeye ait ürün bazlı TL fiyatlı menü de bulunamadı. **Override eklenmedi; strict HOLD.**
