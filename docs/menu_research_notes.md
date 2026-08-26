@@ -2299,3 +2299,6 @@ Hentzer kaydı `Yenidoğan, Abdi İpekçi Cd. No:32A, 34000 Bayrampaşa/İstanbu
 
 ## İSKELE CAFE BEYKOZ ID 6732 ACCEPTED
 Hentzer kaydı `Merkez, Fevzi Paşa Cd. No:1 D:1A, 34820 Beykoz/İstanbul`, telefon `+90 533 293 79 29`. Apple Maps aynı Fevzi Paşa Cd. 1 adresini ve telefonu doğruluyor. 2026 tarihli sosyal menü paylaşımlarında son haftalarda `Çay — 40 TL`, `Türk Kahvesi — 100 TL` ve `Limonata — 120 TL` görüldü; çelişkili eski/alternatif çay fiyatları kullanılmadı. **3 içecek ürünü override edildi.**
+
+## MERHABA PASTANELERİ BEŞİKTAŞ ID 6731 HOLD
+Hentzer kaydı `Türkali, Ihlamurdere Cd. 45/A, 34357 Beşiktaş/İstanbul`, telefon `+90 542 745 83 00`. Yandex ve Yelp aynı Beşiktaş adresini destekliyor ancak sabit telefon `+90 212 236 33 36`; 2026 Yemeksepeti menüsü h269’de fiyatlı ürünler görünse de Hentzer telefonuyla exact phone parity sağlanamadı. **Override eklenmedi; strict HOLD**.
