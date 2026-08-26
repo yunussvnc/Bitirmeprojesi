@@ -2473,3 +2473,6 @@ Hentzer kaydı `Gümüşsuyu, Gümüşsuyu Cd. No:17/A, 34820 Beykoz/İstanbul`,
 
 ## THALES BISTRO BEŞİKTAŞ ID 6674 HOLD
 Hentzer kaydı `Sinanpaşa, Köyiçi Cd. No:10, 34353 Beşiktaş/İstanbul`, telefon `+90 212 327 27 20`. Yandex ve Apple Maps Köyiçi No:10’u ve telefonu destekliyor; ancak işletmenin dijital menü sayfası Mumcu Bakkal Sokağı No:10, resmi site No:5-7 adresini gösteriyor. Menü Haritası’nda fiyatlı ürünler bulunsa da exact adres birimi kaynaklar arasında çelişkili. **Override eklenmedi; strict HOLD**.
+
+## COFFY TÜRK ALMAN ÜNİVERSİTESİ BEYKOZ ID 6673 HOLD
+Hentzer kaydı `Türk Alman Üniversitesi, Merkez, Şahinkaya Cd. A Blok Binası, 34820 Beykoz/İstanbul`, telefon `+90 216 217 00 62`. Yandex, Restoranim ve Kaçıyor telefon/şube adını destekliyor; ancak kamu kaynaklarında Hentzer’deki A Blok iç kapı konumu tam olarak teyit edilemedi. Coffy zincirinin genel menü fiyatları mevcut olsa da Türk-Alman Üniversitesi şubesine ait exact güncel fiyat listesi bulunamadı. **Override eklenmedi; strict HOLD**.
