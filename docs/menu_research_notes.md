@@ -2175,3 +2175,6 @@ Hentzer kaydı `Vişnezade, Süleyman Seba Cd. No:85/B, 34357 Beşiktaş/İstanb
 
 ## DEFNE RESTORAN BEYLİKDÜZÜ ID 6772 HOLD
 Hentzer kaydı yalnızca `Cumhuriyet, 34528 Beylikdüzü/İstanbul`, telefon `+90 212 855 86 00` veriyor. Resmi sosyal ve işletme kaynakları telefonu doğrulasa da adresi `Adnan Kahveci Mah. Sayaca Cad. Selma Sokak` veya Apple Maps’te `Kışla Cd.` olarak gösteriyor; Hentzer kaydıyla %100 exact adres eşleşmesi kurulamadı. Resmi menü sayfası kategorileri listeliyor ancak erişilebilir fiyatlar ve tarih yok. Bu nedenle **override eklenmedi; strict HOLD**.
+
+## BY FRATELLO TAGLIATELLE BEYLİKDÜZÜ ID 6771 ACCEPTED
+Hentzer kaydı `Adnan Kahveci, Paşazade Cd. No:16, 34528 Beylikdüzü/İstanbul`, telefon `+90 212 843 80 49`. İşletmenin resmi Instagram paylaşımları 2025-12-30, 2026-02-05 ve 2026-02-14 tarihlerinde Beylikdüzü Paşazade Cd. No:16/1 adresini ve aynı telefonu yayınlıyor; Yandex de Paşazade Cad. 16 ve aynı telefonu destekliyor. Canlı Yemeksepeti menüsünde 26.08.2026 tarihinde makarna, orta/büyük pizza ve içecek fiyatları erişilebildi. Poşet ve Popular carousel tekrarları eklenmedi. **20 ürün override edildi.**

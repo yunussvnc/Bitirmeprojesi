@@ -4,6 +4,34 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6771": {
+    "name": "BY FRATELLO TAGLIATELLE",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/qxwo/by-fratello-tagliatelle",
+    "sourceName": "Canlı Yemeksepeti menüsü; resmi Instagram ve Yandex kayıtlarında Beylikdüzü Paşazade Cd. şubesi exact doğrulandı",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Makarna (400 gr.)", "price": "311,20 TL", "category": "Makarnalar" },
+      { "name": "Makarna (500 gr.)", "price": "388 TL", "category": "Makarnalar" },
+      { "name": "Margarita Pizza (Orta Boy)", "price": "422,40 TL", "category": "Pizzalar" },
+      { "name": "4 Peynirli Pizza (Orta Boy)", "price": "448 TL", "category": "Pizzalar" },
+      { "name": "Sebzeli Pizza (Orta Boy)", "price": "448 TL", "category": "Pizzalar" },
+      { "name": "Sucuklu Pizza (Orta Boy)", "price": "486,40 TL", "category": "Pizzalar" },
+      { "name": "Barbekü Soslu & Tavuklu Pizza (Orta Boy)", "price": "486,40 TL", "category": "Pizzalar" },
+      { "name": "Karışık Pizza (Orta Boy)", "price": "563,20 TL", "category": "Pizzalar" },
+      { "name": "Ton Balıklı Pizza (Orta Boy)", "price": "563,20 TL", "category": "Pizzalar" },
+      { "name": "Margarita Pizza (Büyük)", "price": "486,40 TL", "category": "Pizzalar" },
+      { "name": "4 Peynirli Pizza (Büyük)", "price": "524,80 TL", "category": "Pizzalar" },
+      { "name": "Sebzeli Pizza (Büyük)", "price": "524,80 TL", "category": "Pizzalar" },
+      { "name": "Sucuklu Pizza (Büyük)", "price": "563,20 TL", "category": "Pizzalar" },
+      { "name": "Barbekü Soslu & Tavuklu Pizza (Büyük)", "price": "563,20 TL", "category": "Pizzalar" },
+      { "name": "Karışık Pizza (Büyük)", "price": "665,60 TL", "category": "Pizzalar" },
+      { "name": "Ton Balıklı Pizza (Büyük)", "price": "665,60 TL", "category": "Pizzalar" },
+      { "name": "Coca-Cola (33 cl.)", "price": "87,20 TL", "category": "İçecekler" },
+      { "name": "Lipton Ice Tea Şeftali (33 cl.)", "price": "87,20 TL", "category": "İçecekler" },
+      { "name": "Su (330 ml)", "price": "23,20 TL", "category": "İçecekler" },
+      { "name": "Coca-Cola Fırsatı (Karışık Pizza)", "price": "596 TL", "category": "Kampanyalar" }
+    ]
+  },
   "6777": {
     "name": "KADIKÖY KEBAPÇISI BEYLİKDÜZÜ",
     "sourceUrl": "https://www.yemeksepeti.com/restaurant/nk6w/kadikoy-kebapcisi-nk6w",
