@@ -2852,3 +2852,6 @@ Hentzer `Vatan, Esenler Cd. No:52, 34035 Bayrampaşa`, telefon `+90 532 557 00 2
 
 ## MANZARA RESTAURANT ID 6548 HOLD
 Hentzer `Cihannüma, Saray Cd No:5, 34353 Beşiktaş`, telefon `+90 212 227 30 00`. Conrad Hilton, Nasilbiryer, Servis Kayıt ve SevenRooms exact şubeyi doğruluyor; ancak son bir yıl exact şubeye ait ürün bazlı güncel TL fiyatlı menü bulunamadı. **Override eklenmedi; strict HOLD.**
+
+## KEBAPÇI NAZIM ID 6547 HOLD
+Hentzer `Hüseyinağa, Tarlabaşı Blv No:85/B, 34435 Beyoğlu`, telefon `+90 212 251 50 35`; Yandex/Servis Kayıt exact eşleşiyor. Yemeksepeti bazı güncel fiyatları gösterse de canlı vendor CAPTCHA ile engellendi ve 20 ürünlük menü doğrulaması tamamlanamadı. **Override eklenmedi; strict HOLD.**
