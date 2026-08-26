@@ -2765,3 +2765,6 @@ Hentzer kaydı `Yenidoğan, Numunebağı Cd. 82/A, 34040 Bayrampaşa/İstanbul`,
 
 ## THE DOLCE CAPO SÜTLÜ TATLILAR YAKUPLU ID 6577
 Hentzer kaydı `Yakuplu, Kavaklı Cd. 1/A, 34150 Beylikdüzü/İstanbul`, telefon `+90 212 863 34 34`. Resmi Instagram hesabı aynı telefon numarasını yayımlıyor; Migros exact `Dolce Capo, Beylikdüzü (Yakuplu Mah.)` menüsü güncel ürün/fiyatları veriyor. Menünün fiyatları 2026 içinde erişilebilir ve 20 benzersiz tatlı ürünü seçildi; içecek ve tekrarlar hariç tutuldu. **Override kabul edildi; 20 ürün.** Kaynaklar: https://www.migros.com.tr/yemek/dolce-capo-beylikduzu-yakuplu-mah-st-19c6d ; https://www.instagram.com/thedolcecapo/
+
+## ALTIN EKMEK VE PASTA KAVACIK ID 6576
+Hentzer kaydı `Kavacık, Orhan Veli Kanık Cd. 48A, 34810 Beykoz/İstanbul`, telefon `+90 216 331 22 97`. Restoranim ve Yandex exact adres/telefonu doğruluyor. Canlı Yemeksepeti Altın Ekmek menüsünden 20 benzersiz pasta, kahvaltılık, ekmek ve fırın ürünü seçildi; Popüler carousel tekrarları, içecekler ve tekrar ürünler hariç tutuldu. **Override kabul edildi; 20 ürün.** Kaynaklar: https://www.yemeksepeti.com/en/restaurant/ppw5/altin-ekmek ; https://restoranim.net/istanbul/beykoz/firin/altin-ekmek-ve-pasta ; https://yandex.com.tr/maps/org/altin_ekmek/1022763663/

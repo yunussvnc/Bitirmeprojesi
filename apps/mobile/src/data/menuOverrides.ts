@@ -91007,6 +91007,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "5 Çeşit Meze Menü", "price": "1500 TL", "category": "Özel Menü" }
     ]
   },
+  "6576": {
+    "name": "ALTIN EKMEK VE PASTA KAVACIK",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/ppw5/altin-ekmek",
+    "sourceName": "Canlı Yemeksepeti Altın Ekmek menüsü; Restoranim ve Yandex exact adres-telefon doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Çikolatalı Pasta (No.0)", "price": "1750 TL", "category": "Pastalar" },
+      { "name": "Meyveli Pasta (No.0)", "price": "1750 TL", "category": "Pastalar" },
+      { "name": "Çikolatalı Pasta (No.1)", "price": "2000 TL", "category": "Pastalar" },
+      { "name": "Meyveli Pasta (No.1)", "price": "2000 TL", "category": "Pastalar" },
+      { "name": "Minik Dereotlu Peynirli Poğaça", "price": "25 TL", "category": "Kahvaltılıklar" },
+      { "name": "Simit", "price": "50 TL", "category": "Kahvaltılıklar" },
+      { "name": "Sade Poğaça", "price": "50 TL", "category": "Kahvaltılıklar" },
+      { "name": "Sade Açma", "price": "50 TL", "category": "Kahvaltılıklar" },
+      { "name": "Ekşi Mayalı Ekmek (400 gr.)", "price": "100 TL", "category": "Ekmekler" },
+      { "name": "Tam Buğday Ekmek (400 gr.)", "price": "100 TL", "category": "Ekmekler" },
+      { "name": "Ekmek", "price": "35 TL", "category": "Ekmekler" },
+      { "name": "Kepekli Ekmek", "price": "50 TL", "category": "Ekmekler" },
+      { "name": "Çavdar Ekmeği", "price": "75 TL", "category": "Ekmekler" },
+      { "name": "Cevizli Çavdar Ekmeği", "price": "250 TL", "category": "Ekmekler" },
+      { "name": "Beze (100 gr.)", "price": "175 TL", "category": "Diğer Lezzetler" },
+      { "name": "İnce Çubuk Galeta (200 gr.)", "price": "175 TL", "category": "Diğer Lezzetler" },
+      { "name": "Kandil Simidi", "price": "225 TL", "category": "Diğer Lezzetler" },
+      { "name": "Paskalya Çöreği", "price": "150 TL", "category": "Diğer Lezzetler" },
+      { "name": "Ay Çöreği", "price": "100 TL", "category": "Diğer Lezzetler" },
+      { "name": "Tahinli Çörek", "price": "250 TL", "category": "Diğer Lezzetler" }
+    ]
+  },
   "6577": {
     "name": "THE DOLCE CAPO SÜTLÜ TATLILAR YAKUPLU",
     "sourceUrl": "https://www.migros.com.tr/yemek/dolce-capo-beylikduzu-yakuplu-mah-st-19c6d",
