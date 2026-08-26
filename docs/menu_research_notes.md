@@ -2253,3 +2253,6 @@ Hentzer kaydı `Paşabahçe, Barbaros Cd. 27 A, 34800 Beykoz/İstanbul`, telefon
 
 ## SIBELLA CAFE MEZE&PASTA BEYLİKDÜZÜ ID 6746 ACCEPTED
 Hentzer kaydı `Büyükşehir, 19 Mayıs Cd. Zigana Evleri No:59 D:2, 34520 Beylikdüzü/İstanbul`, telefon `+90 212 871 01 82`. Kaçıyor, Restoranim ve işletmenin resmi Instagram hesabı exact adres/telefonu doğruluyor. 26.08.2026 tarihinde canlı Yemeksepeti menüsünde `Akşam Sefası 7'li Meze Menü — 1.199 TL`, `Zeytinyağlı Yaprak Sarma Menü — 799 TL` ve `Zeytinyağlı Taze Fasulye Menü — 649 TL` erişildi. **3 ürün override edildi.**
+
+## MEŞHUR BALIK DÜRÜM MEHMET USTA BEŞİKTAŞ ID 6745 HOLD
+Hentzer kaydı `Sinanpaşa, Köyiçi Cd. No:12A, 34330 Beşiktaş/İstanbul`, telefon `+90 533 258 96 21`. Mindtrip Hentzer adres/telefonunu desteklese de Yandex aynı işletme ve telefonla Sinanpaşa Mah. Mumcubakkal Sok. No:14 adresini veriyor; eski Karaköy kayıtları da farklı lokasyona ait. Son bir yıl içinde exact Beşiktaş şubesine ait ürün-fiyat listesi bulunamadı. **Override eklenmedi; strict HOLD**.
