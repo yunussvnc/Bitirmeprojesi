@@ -2909,3 +2909,6 @@ Kaynak: https://www.instagram.com/mahal.besiktas/p/Db8QISUsKL8/
 
 ## CİHAN PASTA CAFE ID 6532 HOLD
 Hentzer `Yıldız, Gayrettepe, Jandarma Mektebi Sk. No:7, 34353 Beşiktaş`, telefon `+90 212 260 75 69`. Resmi Cihan Pastaneleri sitesi/Yandex exact şube ve telefonu doğruluyor; ancak Yemeksepeti exact vendor sayfası güvenlik doğrulamasıyla engellendi ve 20 güncel ürün fiyatı doğrulanamadı. **Override eklenmedi; strict HOLD.**
+
+## BEYKENT KEBABİ ALO PAKET ID 6531 HOLD
+Hentzer `Adnan Kahveci, Anadolu Cd., 34528 Beylikdüzü/İstanbul`, telefon `+90 212 856 11 02`. Mekanlar/Yandex/Facebook exact şube ve telefonu destekliyor; ancak son bir yıl içinde bu exact işletmeye ait ürün bazlı güncel TL menü bulunamadı. Görülen yeni Instagram şubesi ve Migros Kayıbey Et kaydı farklı işletmelerdir. **Override eklenmedi; strict HOLD.**
