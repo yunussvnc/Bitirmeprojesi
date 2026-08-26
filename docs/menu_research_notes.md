@@ -3056,3 +3056,6 @@ Mogaf resmi şube sayfası Hentzer ile exact `Dora Park, Adnan Kahveci, Anadolu 
 ## OTTO MAKARNA ID 6486 ACCEPTED
 Hentzer `Türkali, Yaverağa Sk. 7A, 34357 Beşiktaş/İstanbul`, telefon `+90 212 984 78 52`. OTTO Makarna resmi sitesi aynı adres ve telefonu yayımlıyor. Resmi el yapımı makarna menüsünde güncel TL fiyatlı ürünler bulunuyor; 20 benzersiz makarna ürünü eklendi. **Override kabul edildi.**
 Kaynaklar: https://ottomakarna.com/ ; https://ottomakarna.com/el-yapimi-makarna-menusu/ ; https://ottomakarna.com/tatli-menusu/ ; https://yandex.com.tr/maps/org/otto_makarna/10794738997/
+
+## TRATTORIA CARBONARA ID 6485 HOLD
+Resmi Carbonara iletişim sayfası Hentzer ile exact `Gayrettepe, Vefabey Sokağı No:25/C, 34349 Beşiktaş/İstanbul` ve `+90 212 274 44 10` parity’sini doğruluyor. Resmi menüde çoğu ürün için fiyat yayımlanmadı; yalnızca Minestrone 305 TL görünür ve 20 ürün doğrulanamadı. **Override eklenmedi; strict HOLD.**
