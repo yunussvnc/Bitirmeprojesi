@@ -4,6 +4,34 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6692": {
+    "name": "TARİHİ KARAKÖY PİLAVCISI BEŞİKTAŞ",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/pjlh/tarihi-karakoy-pilavcisi",
+    "sourceName": "Canlı Yemeksepeti exact Ortabahçe şubesi; resmi site/Instagram/Facebook ile adres-telefon doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Tavuk Suyu Çorbası", "price": "245 TL", "category": "Çorbalar" },
+      { "name": "Mercimek Çorbası", "price": "205 TL", "category": "Çorbalar" },
+      { "name": "Ezogelin Çorbası", "price": "205 TL", "category": "Çorbalar" },
+      { "name": "Atom Çorba", "price": "245 TL", "category": "Çorbalar" },
+      { "name": "Yayla Çorbası", "price": "205 TL", "category": "Çorbalar" },
+      { "name": "Domates Çorbası", "price": "210 TL", "category": "Çorbalar" },
+      { "name": "Ayran Aşı Çorbası", "price": "235 TL", "category": "Çorbalar" },
+      { "name": "Ciğerli Pilav", "price": "660 TL", "category": "Pilavlar" },
+      { "name": "Karaköy Pilavı", "price": "1150 TL", "category": "Pilavlar" },
+      { "name": "Köri Soslu Tavuklu Pilav", "price": "440 TL", "category": "Pilavlar" },
+      { "name": "Tavuklu Pilav", "price": "365 TL", "category": "Pilavlar" },
+      { "name": "Salatalı Pilav", "price": "340 TL", "category": "Pilavlar" },
+      { "name": "Kavurmalı Pilav", "price": "745 TL", "category": "Pilavlar" },
+      { "name": "Kuru Fasulyeli Pilav", "price": "440 TL", "category": "Pilavlar" },
+      { "name": "Nohutlu Pilav", "price": "290 TL", "category": "Pilavlar" },
+      { "name": "Tavuklu Kavurmalı Pilav", "price": "620 TL", "category": "Pilavlar" },
+      { "name": "Mısırlı Pilav", "price": "340 TL", "category": "Pilavlar" },
+      { "name": "Tavuklu Ciğerli Pilav", "price": "555 TL", "category": "Pilavlar" },
+      { "name": "Kavurmalı Ciğerli Pilav", "price": "705 TL", "category": "Pilavlar" },
+      { "name": "Gurme Yaban Mersinli Pilav (Vegan)", "price": "375 TL", "category": "Pilavlar" }
+    ]
+  },
   "6695": {
     "name": "MÜRDÜM KEBAP & STEAKHOUSE",
     "sourceUrl": "https://www.instagram.com/reel/DZYJ9MeR2oE/",

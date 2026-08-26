@@ -2416,3 +2416,6 @@ Hentzer kaydı `Adnan Kahveci, Yavuz Sultan Selim Blv. No:23 D:2, 34528 Beylikd�
 
 ## DOSSO DOSSI COFFEE BEYLİKDÜZÜ ID 6693 HOLD
 Hentzer kaydı `Vadi Loca Sitesi, Adnan Kahveci, Sayaca Cd. No:13 D:1 A Blok, 34528 Beylikdüzü/İstanbul`, telefon alanı boş. Dosso Dossi Coffee resmi iletişim sayfası aynı adresi ve `0212 242 21 21` telefonunu yayınlıyor; Instagram/Yandex de adresi destekliyor. Ancak Hentzer telefon alanı boş olduğundan exact phone parity tamamlanamıyor ve resmi sitede güncel fiyatlı menü ürünleri yayınlanmıyor. **Override eklenmedi; strict HOLD**.
+
+## TARİHİ KARAKÖY PİLAVCISI BEŞİKTAŞ ID 6692 ACCEPTED
+Hentzer kaydı `Sinanpaşa, Ortabahçe Cd. No:3, 34353 Beşiktaş/İstanbul`, telefon `+90 212 327 34 03`. İşletmenin resmi sitesi aynı adres ve telefonu yayınlıyor; resmi Instagram/Facebook da Beşiktaş Çarşı şubesi bilgilerini destekliyor. Canlı Yemeksepeti exact restoran sayfası `Sinanpaşa Mahallesi, Ortabahçe Caddesi, No:3` adresini ve onaylı telefon bilgisini gösteriyor. 26.08.2026 tarihinde çorba ve pilav kategorilerinden Popüler tekrarları dışarıda tutularak **20 güncel ürün-fiyat çifti** eklendi.
