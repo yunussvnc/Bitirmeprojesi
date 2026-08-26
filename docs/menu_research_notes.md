@@ -1935,3 +1935,36 @@ Yandex ve sosyal medya kayıtları exact `Sinanpaşa, Şht. Dursun Bakan Sk. No:
 
 ## ARCHI CAFE ID 6853 HOLD
 Arama/sosyal medya kayıtları exact `Beylikdüzü OSB MH. Birlik sanayi sitesi 3. Cadde 13, iç kapı No:77` adresini destekliyor; Migros Yemek’te 26.08.2026 tarihinde aktif ürün-fiyat menüsü görüldü. Ancak Hentzer `phone_number` alanı boş ve Migros restoran bilgi paneli telefon yayımlamıyor. Zorunlu exact adres+telefon paritesi sağlanamadı. **HOLD**, override eklenmedi.
+
+## LUUQ COFFEE BEYLİKDÜZÜ ID 6851 HOLD
+Resmî/marka kayıtları exact `Cumhuriyet, Atatürk Blv. No:27, 34520 Beylikdüzü/İstanbul` adresini destekliyor. Hentzer telefon alanı boş; dış kaynaklarda aynı adres için birbiriyle çelişen `+90 532 136 34 72` ve `+90 530 321 56 10` telefonları var. Son bir yılda ürün bazlı fiyatlı menü doğrulanamadı. **HOLD**, override eklenmedi.
+
+## COFFEE BREW LAB ID 6850 HOLD
+Bağımsız ve sosyal medya kayıtları exact `Kuloğlu, Yeni Çarşı Cd. No:5 D:B, 34425 Beyoğlu/İstanbul` adresini destekliyor; ancak Hentzer telefon alanı boş ve dış kayıtlardaki telefon doğrulanmış exact şube telefonu olarak güvenilir biçimde eşleştirilemedi. Güncel kaynakta yalnızca genel fiyat aralığı var, ürün bazlı menü yok. **HOLD**, override eklenmedi.
+
+## MİYANSERA EVLERİ MESUT MARKET ID 6849 HOLD
+DliPlace aynı işletme adı ve `0212 493 39 41` telefonunu destekliyor; ancak adres kaydı Hentzer kadar ayrıntılı değil. İşletme market olarak listeleniyor ve son bir yılda doğrulanabilir ürün bazlı restoran menüsü bulunamadı. Kaynak politikasındaki market/non-food ve menü şartları nedeniyle **HOLD**, override eklenmedi.
+
+## CHOYS HOT CHICKEN ID 6848 HOLD
+2026 sosyal medya kayıtları exact `Vişnezade, Şair Nedim Cd. No:65/A, 34353 Beşiktaş/İstanbul` adresini ve `0212 327 53 53` telefonunu birlikte destekliyor. Ancak görülen 399/439 TL tavuk kasası kampanya bilgisi tam ürün bazlı güncel menü yerine geçmiyor; menünün tamamı doğrulanamadı. **HOLD**, override eklenmedi.
+
+## GHALIA LOUNGE ID 6847 HOLD
+Resmî ghalia.com.tr/contact sayfası exact `Göksu, Küçüksu Cd. No:8/1, 34815 Beykoz/İstanbul` adresi ile `444 80 82` telefonunu birlikte doğruluyor. Ancak resmî `/menu` sayfasında ürün/fiyat içeriği yüklenmiyor; son bir yılda doğrulanabilir ürün bazlı fiyatlı menü bulunamadı. **HOLD**, override eklenmedi.
+
+## BURGER YİYELİM ESENYURT ID 6846 HOLD
+Adres ve telefon bağımsız kayıtlarda desteklense de erişilebilen Yemeksepeti menü sayfası işletme adını **Tavuk Yiyelim** olarak gösteriyor. Strict exact business/branch matching kuralı nedeniyle bu fiyatlar Burger Yiyelim’e aktarılmadı. **HOLD**, override eklenmedi.
+
+## GOŞTO SAC TAVA BEYLİKDÜZÜ ID 6845 HOLD
+2026 sosyal medya kayıtları exact `Cumhuriyet Mh. Aytekin Kotil Sk, Bizim Çarşı No:2-29, 34520 Beylikdüzü/İstanbul` adresini ve `0212 670 21 21` telefonunu birlikte destekliyor. Ancak tam güncel ürün bazlı menü bulunamadı; yalnızca sınırlı paylaşım fiyatları görüldü. **HOLD**, override eklenmedi.
+
+## LUPPEN FRIED CHICKEN BEŞİKTAŞ ID 6844 HOLD
+Marka sosyal kayıtları exact `Türkali, Altıntaş Sk. No:38, 34653 Beşiktaş/İstanbul` adresini ve `0553 114 30 30` telefonunu destekliyor; Migros Yemek aynı şubeyi aktif gösteriyor. Ancak Migros HTML fiyat kartlarında bazı binlik/indirimli fiyatlar güvenilir biçimde ayrıştırılamadı ve resmî site çözümlenmedi. Fiyat doğruluğu riski nedeniyle **HOLD**, override eklenmedi.
+
+## IST TOO ID 6843 HOLD
+Resmî Shangri-La sayfası exact `Sinanpaşa, Hayrettin İskelesi Sk. No:1, 34353 Beşiktaş/İstanbul` adresini ve `0212 275 88 88` telefonunu birlikte doğruluyor; ayrıca Nisan/Haziran/Şubat 2026 tarihli güncel menü PDF bağlantıları mevcut. Ancak fiyat sütunları PDF metin katmanında güvenilir okunamadı; görsel doğrulama tamamlanmadan fiyat eklenmedi. **HOLD**, override eklenmedi.
+
+## KONAK FIRIN ID 6842 HOLD
+Bağımsız kayıtlar exact `Zeytinlik, Yakut Sk. No:22a, 34140 Bakırköy/İstanbul` adresini destekliyor; ancak Hentzer telefon alanı boş ve exact şubeye ait doğrulanmış telefon eşleşmesi bulunamadı. Son bir yılda ürün bazlı fiyatlı menü de doğrulanamadı. **HOLD**, override eklenmedi.
+
+## HAYATİ OCAKBAŞI ACARKENT ID 6841 ACCEPTED
+Resmî Hayati Ocakbaşı iletişim kaydı ve sosyal profil exact `Görele, İstanbul Cd 9/1, 34825 Beykoz/İstanbul` adresini ve `0216 532 75 75` telefonunu doğruluyor. Yemeksepeti canlı menüsü aynı işletme adıyla 26.08.2026 tarihinde 118 benzersiz gıda kalemini ve fiyatını yayınlıyor; Poşet kalemi kapsam dışı bırakıldı. **ACCEPTED**, override eklendi.
