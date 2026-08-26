@@ -2386,3 +2386,6 @@ Hentzer kaydı `Kalyoncu Kulluğu, Kalyoncu Kulluğu Cd. 1/A, 34435 Beyoğlu/İs
 
 ## COFFEE PALACE BEYLİKDÜZÜ ID 6703 HOLD
 Hentzer kaydı `Cumhuriyet Mah. N. Hikmet Bulvarı 1997. Sokak, Cumhuriyet Parkı 1, 34515 Beylikdüzü/İstanbul`, telefon `+90 212 852 95 90`. Arama sonuçlarında Coffee Palace/Kahve Sarayı için Facebook kaydı No:1 ve `+90 553 046 00 93` telefonunu, başka Yandex kaydı ise farklı 2068 Sokak adresi ve farklı telefon gösteriyor. Hentzer exact telefon ve adresiyle eşleşen güvenilir güncel işletme kaydı ile fiyatlı menü bulunamadı. **Override eklenmedi; strict HOLD**.
+
+## BALIKHANEM BEYLİKDÜZÜ ID 6702 HOLD
+Hentzer kaydı `Dereağzı Mh. Denizyolu Cd. 28/1, İstanbul Akıllı Balık Merkezi, 34525 Beylikdüzü/İstanbul`, telefon `+90 850 309 2324`. Balıkhanem resmi sitesi aynı Gürpınar Su Ürünleri/Balıkçı Barınağı No:28/1 tesisini ve aynı müşteri hizmetleri hattını yayınlıyor; canlı online katalogda fiyatlı balık ürünleri bulunuyor. Ancak ürün kartları fiyatları ortak dinamik blokta tekrarladığı için ürün-fiyat eşleşmesi güvenilir şekilde ayrıştırılamadı; ayrıca kaynak restoran menüsünden ziyade perakende/soğuk zincir ürün kataloğu. Zorunlu doğrulama standardı sağlanamadığından **override eklenmedi; strict HOLD**.
