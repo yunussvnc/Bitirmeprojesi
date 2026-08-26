@@ -3026,3 +3026,6 @@ Hentzer `Vidin İş Merkezi, Sinanpaşa, Hasfırın Cd. D:3, 34022 Beşiktaş/İ
 
 ## HAKİKİ MARAŞ DONDURMASI ID 6495 HOLD
 Hentzer `Gümüşsuyu, Sultaniye Cd. No:52, 34437 Beykoz/İstanbul`, telefon alanı boş. Yandex 52C, Kacıyor No:52 gösteriyor; telefon parity’si yok. Yemeksepeti fiyatlı görünse de exact branch adres/telefonu doğrulanamadı; No:71 ve farklı telefonlu başka kayıt kullanılmadı. **Override eklenmedi; strict HOLD.**
+
+## VAN KAHVALTI BEŞİKTAŞ ID 6494 HOLD
+Hentzer `Sinanpaşa, Çelebi Oğlu Sk. No:35/A, 34353 Beşiktaş/İstanbul`, telefon `+90 532 472 86 43`. Resmi Instagram/Facebook, Restoranim ve Cybo exact adres/telefonu doğruluyor. Ancak Yemeksepeti’nde bulunan `Van Kahvaltı Evi` farklı ad/işletme olarak geçiyor ve bu Beşiktaş şubesiyle bağ kurulamadı; exact şube için son bir yıl fiyatlı menü doğrulanamadı. **Override eklenmedi; strict HOLD.**
