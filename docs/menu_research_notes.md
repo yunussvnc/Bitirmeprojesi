@@ -2626,3 +2626,6 @@ Hentzer kaydı `Fulya, Ayazmaderesi Cd 1A, 34427 Beşiktaş/İstanbul`, telefon 
 
 ## MERAKİ (RAKI - MEZE) RESTORAN BEYLİKDÜZÜ ID 6623 HOLD
 Hentzer kaydı `Cumhuriyet, Derviş Eroğlu Cd. No:6, 34520 Beylikdüzü/İstanbul`, telefon `+90 533 601 70 41`. Resmi Meraki sosyal hesabı telefonu doğruluyor; ancak 2025–2026 resmi sosyal içerikleri işletmeyi Kameroğlu Metrohome, Derviş Eroğlu Cd. No:60 olarak gösteriyor. Yemeksepeti Meraki vendorunda güncel fiyatlı meze ürünleri görünse de exact şube adresi doğrulanamadı. Zorunlu adres parity’si sağlanamadığı için **override eklenmedi; strict HOLD**.
+
+## MEYHANE YUNUS BÜYÜKÇEKMECE ID 6622 HOLD
+Hentzer kaydı `Pınartepe, 34500 Büyükçekmece/İstanbul`, telefon `+90 533 766 07 67`. Yandex kaydı aynı telefonu doğruluyor ancak adresi `Pınartepe Mah., Kirazlı Sok., 60` olarak veriyor; Hentzer’de sokak ve kapı numarası bulunmadığından exact adres parity’si kurulamadı. Güncel, ürün bazlı ve son bir yıl içinde fiyatlı menü doğrulanamadı. **Override eklenmedi; strict HOLD.**
