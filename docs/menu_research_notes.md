@@ -2937,3 +2937,6 @@ Hentzer `Sinanpaşa, Alaybeyi Sk No:11, 34535 Beşiktaş`; telefon alanı boş. 
 
 ## BEYLİKDÜZÜ BUTİK PASTA ID 6523 HOLD
 Hentzer `Muhittin Apartman, Kavaklı, Akçay Sk. D:4A blok Daire 10, 34550 Beylikdüzü`, telefon `+90 545 273 27 52`. Ross Butik Pasta sosyal hesapları telefon ve Kavaklı bölgesini destekliyor; ancak tam adres doğrulanamadı. Yandex exact Akçay Sokak kaydını artık faal değil gösteriyor ve son bir yıl ürün bazlı TL fiyatlı menü bulunamadı. **Override eklenmedi; strict HOLD.**
+
+## ANTEPLİ DÜRÜMCÜ EMİN USTA ID 6522 HOLD
+Hentzer `Yakuplu, 200. Sk. No:13 D:11, 34524 Beylikdüzü`, telefon `+90 542 119 27 27`. Menu-tr/Restoranim/Restaurantguru adresi destekliyor; ancak Yandex aynı telefonla `Yakuplu Mah. 65. Sok. 2` adresini gösteriyor. Güncel görünen Yemeksepeti fiyatları olsa da exact adres/telefon vendor parity’si kesinleşmedi. **Override eklenmedi; strict HOLD.**
