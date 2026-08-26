@@ -13,6 +13,7 @@ from sqlalchemy.orm import Session
 
 import models, schemas
 import crud
+from app.services.moderator import AIModerator
 from app.dependencies import get_db, get_current_user
 from app.websocket.auth import authenticate_websocket_token, websocket_session_is_current
 from app.websocket.manager import manager
@@ -453,6 +454,9 @@ async def send_message(
             detail="media_not_allowed_restricted_mode"
         )
 
+    if AIModerator.moderate_text(data.content):
+        logger.warning(f"🚨 [MODERASYON] DM'de uygunsuz içerik: conversation_id={conversation_id}, sender_id={current_user.id}")
+
     msg = models.Message(
         conversation_id=conversation_id,
         sender_id=current_user.id,
@@ -704,6 +708,9 @@ async def websocket_chat(
                             "detail": "media_not_allowed_restricted_mode",
                         })
                         continue
+
+                    if AIModerator.moderate_text(content):
+                        logger.warning(f"🚨 [MODERASYON] DM'de uygunsuz içerik: conversation_id={conversation_id}, sender_id={user_id}")
 
                     msg = models.Message(
                         conversation_id=conversation_id,

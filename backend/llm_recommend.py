@@ -296,7 +296,7 @@ def recommend_pipeline(
     # ── 1. YASAKLI / UYGUNSUZ İÇERİK (kapsamlı) ──
     _BLOCKED_CATEGORIES = {
         # Siyaset
-        "siyaset", "parti", "secim", "oy", "baskan", "cumhurbaskani", "milletvekili",
+        "siyaset", "secim", "oy", "baskan", "cumhurbaskani", "milletvekili",
         "muhalefet", "iktidar", "akp", "chp", "mhp", "hdp", "iyi parti", "politika",
         "hukumet", "darbe", "propaganda", "atatürk", "ataturk", "erdogan",
         # Din / Mezhep

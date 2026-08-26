@@ -60,8 +60,8 @@ def search_places(
     q: str = Query("", description="Mekan adı araması"),
     category: Optional[str] = Query(None, description="Kategori filtresi"),
     city: Optional[str] = Query(None, description="Şehir filtresi"),
-    page: int = 1,
-    page_size: int = 20,
+    page: int = Query(1, ge=1),
+    page_size: int = Query(20, ge=1, le=100),
     minimal: bool = Query(False, description="True ise stats/enrich atlanır (hızlı listeleme)"),
     db: Session = Depends(get_db),
 ):
@@ -75,8 +75,8 @@ def get_nearby_places(
     lat: float = Query(..., description="Kullanıcı enlemi"),
     lng: float = Query(..., description="Kullanıcı boylamı"),
     radius: float = Query(5.0, description="Yarıçap (km)"),
-    page: int = 1,
-    page_size: int = 20,
+    page: int = Query(1, ge=1),
+    page_size: int = Query(20, ge=1, le=100),
     db: Session = Depends(get_db),
 ):
     """Konum bazlı yakındaki mekanlar (Haversine mesafe sıralamasıyla)."""
@@ -86,8 +86,8 @@ def get_nearby_places(
 
 @router.get("/places/popular", response_model=schemas.PaginatedPlaces)
 def get_popular_places(
-    page: int = 1,
-    page_size: int = 20,
+    page: int = Query(1, ge=1),
+    page_size: int = Query(20, ge=1, le=100),
     db: Session = Depends(get_db),
 ):
     """Popüler mekanlar — puan × yorum bazlı sıralama."""
