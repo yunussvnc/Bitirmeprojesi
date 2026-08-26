@@ -2964,3 +2964,6 @@ Hentzer `Barış, Akdeniz Cd. 9 D, 34520 Beylikdüzü`, telefon alanı boş. Yan
 
 ## PIZZA CIRCASSO ID 6514 HOLD
 Hentzer `Sinanpaşa, Şair Veysi Sk. No:43, 34353 Beşiktaş`, telefon `+90 545 439 24 06`. Menum exact No:43 adresi ve güncel görünen pizza fiyatlarını doğruluyor; ancak Yemeksepeti aynı isimli vendoru Hacı Mustafa Sk. Çetin Apartmanı No:1A olarak gösteriyor. Exact şube parity’si çelişkili olduğundan **override eklenmedi; strict HOLD.**
+
+## ZİYA ŞARK SOFRASI KAVACIK ID 6513 HOLD
+Hentzer `Kavacık, Orhan Veli Kanık Cd. No:1, 34810 Beykoz`, telefon `+90 216 425 56 05`. Telefon exact kaynaklarla doğrulanıyor; ancak resmi web sitesi/Instagram adresi `Orhan Veli Kanık Cad. No:102/A`, Hentzer ve bazı üçüncü taraflar No:1 veriyor. Güncel görünen Yemeksepeti fiyatlarına rağmen exact branch adres parity’si kesinleşmedi. **Override eklenmedi; strict HOLD.**
