@@ -91007,6 +91007,15 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "5 Çeşit Meze Menü", "price": "1500 TL", "category": "Özel Menü" }
     ]
   },
+  "6584": {
+    "name": "BEYEFENDİ BURGER BEŞİKTAŞ",
+    "sourceUrl": "https://www.instagram.com/p/DYRdVEIINKR/",
+    "sourceName": "Beyefendi Burger resmi Instagram fiyat paylaşımı; Yandex ve resmi Instagram exact adres-telefon doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Baston Burger Menü", "price": "510 TL", "category": "Burger Menüleri" }
+    ]
+  },
   "6585": {
     "name": "KONYALI ETLİEKMEK KUZU TANDIR KANLICA",
     "sourceUrl": "https://www.migros.com.tr/yemek/konyali-etli-ekmek-kuzu-tandir-beykoz-kanlica-mah-st-20524",

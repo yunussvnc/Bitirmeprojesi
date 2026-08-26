@@ -2740,3 +2740,7 @@ Hentzer kaydı `Yıldırım, İkizler Sk. No:41, 34045 Bayrampaşa/İstanbul`, t
 
 ## KONYALI ETLİEKMEK KUZU TANDIR KANLICA ID 6585
 Hentzer kaydı `Kanlıca, Halide Edip Adıvar Cd. No:4 D:B, 34810 Beykoz/İstanbul`, telefon `+90 216 322 40 64`. Restoranim ve Kaçıyor exact adres/telefonu doğruluyor; resmi sosyal profil de Kanlıca ve aynı telefon bilgisini yayımlıyor. Canlı Migros Kanlıca menüsünden 20 benzersiz çorba, kebap, ızgara, pide, etli ekmek, dürüm ve yan ürün seçildi; içecek/poşet hariç tutuldu. **Override kabul edildi; 20 ürün.** Kaynaklar: https://www.migros.com.tr/yemek/konyali-etli-ekmek-kuzu-tandir-beykoz-kanlica-mah-st-20524 ; https://restoranim.net/istanbul/beykoz/pideci/konyali-etliekmek-kuzu-tandir ; https://www.instagram.com/konyalietliekmekkanlica1/
+
+## BEYEFENDİ BURGER BEŞİKTAŞ ID 6584
+Hentzer kaydı `Türkali, Şht. Asım Cd. 48A, 34353 Beşiktaş/İstanbul`, telefon `+90 530 908 78 90`. Yandex ve resmi Instagram exact adres/telefonu doğruluyor. Resmi Instagram’da son üç ay içinde yayımlanan fiyatlı paylaşımda `Baston Burger + baharatlı patates` menüsü `510 TL` olarak yer alıyor. Kamuya açık menünün tamamı fiyatlı olmadığından yalnızca bu doğrulanabilir ürün eklendi; **override kabul edildi, 1 ürün**.
+Kaynaklar: https://www.instagram.com/p/DYRdVEIINKR/ ; https://www.instagram.com/beyefendiburger1/ ; https://yandex.com.tr/maps/org/beyefendi_burger/61329700422/
