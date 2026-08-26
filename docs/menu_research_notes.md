@@ -2410,3 +2410,6 @@ Hentzer kaydı `Cihannüma, Akdoğan Sk. No:37/A, 34353 Beşiktaş/İstanbul`, t
 
 ## MÜRDÜM KEBAP & STEAKHOUSE BEYKOZ ID 6695 ACCEPTED
 Hentzer kaydı `Anadolu Hisarı, Körfez Cad, Kızılserçe Sok. No:20/1, 34810 Beykoz/İstanbul`, telefon `+90 545 375 75 75`. Mürdüm Kebap resmi web sitesi, resmi Instagram, Facebook ve Yandex aynı adres ile telefonu doğruluyor. Mürdüm’ün 26.06.2026 tarihli resmi Instagram paylaşımında fiyatlı ürünler arasında **Karkas Mantar 675 TL** ve **Çıtır Kanat (Porsiyon) 1.750 TL** açıkça yer alıyor. Güncellik ve exact branch parity sağlandığı için 2 ürün override edildi.
+
+## ENBEY DÖNER BEYKENT ID 6694 HOLD
+Hentzer kaydı `Adnan Kahveci, Yavuz Sultan Selim Blv. No:23 D:2, 34528 Beylikdüzü/İstanbul`, telefon `+90 212 855 50 46`. Enbey resmi şube sayfası No:23 adresini doğruluyor; ancak resmi iletişim/şube telefonu yalnızca ortak `444 62 21` olarak veriliyor. Yerel kayıtlar Hentzer telefonunu desteklese de güncel 25.08.2026 sosyal menü paylaşımı Perlavista AVM No:1 adresine ait ve Yemeksepeti sonucu da başka şubeyi işaret ediyor. Exact telefon ve güncel fiyatlı exact şube menüsü birlikte doğrulanamadığından **override eklenmedi; strict HOLD**.
