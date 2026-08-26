@@ -2464,3 +2464,6 @@ Hentzer kaydı `Ortaçeşme, Çayır Cd. No:102 D:A, 34825 Beykoz/İstanbul`, te
 
 ## VALİDE MAÇKA ID 6677 ACCEPTED
 Hentzer kaydı `Vişnezade, Aktarlar Sk. No:6/A, 34357 Beşiktaş/İstanbul`, telefon `+90 545 735 38 11`. Resmi Instagram, Yandex, Apple Maps ve yerel işletme kayıtları exact adres/telefonu doğruluyor. Canlı Yemeksepeti exact Valide Maçka menüsünden Popüler carousel tekrarları ve içecekler dışarıda bırakılarak **17 benzersiz güncel gıda ürünü** eklendi.
+
+## LAOS COFFEE KAMEROĞLU BEYLİKDÜZÜ ID 6676 HOLD
+Hentzer kaydı `Cumhuriyet, Ege Sokağı, 34520 Beylikdüzü/İstanbul`, telefon alanı boş. Kaynaklar exact branch için çelişkili adres/telefon veriyor: resmi şube sayfası `Derviş Eroğlu Cd. 10/1` ve `0543 299 01 53`, Instagram açılış içeriği `Ege Sokak No:1` gösteriyor. Bu nedenle Hentzer kaydıyla adres birimi ve telefon parity’si sağlanamadı. Resmi menü bağlantısı mevcut olsa da **override eklenmedi; strict HOLD**.
