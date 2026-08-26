@@ -2377,3 +2377,6 @@ Hentzer kaydı `Muratpaşa, Cicoz Yolu Cd. No:155/C, 34040 Bayrampaşa/İstanbul
 
 ## FIVE O'CLOCK ACARKENT ID 6706 HOLD
 Hentzer kaydı `Acarlar, 3. Cd. No:29, 34800 Beykoz/İstanbul`, telefon `+90 216 485 22 11`. Five O'Clock resmi sitesi Acarkent, 3. Cadde, T29 Beykoz ve aynı sabit hattı yayınlıyor; resmi Instagram da Acarkent hattını doğruluyor. Ancak resmi site/şube sayfasında son bir yıl içinde doğrulanabilir ürün-fiyat menüsü bulunamadı; mevcut içerik ürün isimleri ve işletme tanıtımı seviyesinde kaldı. **Override eklenmedi; strict HOLD**.
+
+## ADA BARO BAHÇE KANLICA ID 6705 ACCEPTED
+Hentzer kaydı `Kanlıca, Hacı Muhittin Sk. No:40, 34810 Beykoz/İstanbul`, telefon `+90 216 537 86 70`. Ada Baro Bahçe resmi iletişim sayfası aynı adres ve telefonu doğrudan yayınlıyor; Yandex kaydı da aynı bilgileri doğruluyor. 20.08.2026 tarihli resmi sosyal medya paylaşımında `Makarna & Şarap` özel menüsü `Suvla Kabatepe şişe şarap + Fettucine Alfredo + Penne Arabiata` içeriğiyle 2.750 TL olarak yayınlandı. Güncel tarihli exact şube menü paylaşımı olduğundan **1 özel menü ürünü override edildi**.

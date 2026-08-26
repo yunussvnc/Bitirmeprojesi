@@ -4,6 +4,15 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6705": {
+    "name": "ADA BARO BAHÇE KANLICA",
+    "sourceUrl": "https://www.instagram.com/adakanlicabarobahce/reel/DcOg7vOu6Sj/",
+    "sourceName": "Ada Baro Bahçe resmi sitesi/iletişim sayfası ve 20.08.2026 tarihli resmi sosyal medya özel menü paylaşımı",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Makarna & Şarap Özel Menüsü (Fettucine Alfredo + Penne Arabiata + Suvla Kabatepe)", "price": "2750 TL", "category": "Özel Menüler" }
+    ]
+  },
   "6710": {
     "name": "BAHÇE DÜRÜM - KEBAP BEYKOZ",
     "sourceUrl": "https://www.yemeksepeti.com/restaurant/hzo8/bahce-durum-and-kebap-hzo8",
