@@ -2467,3 +2467,6 @@ Hentzer kaydı `Vişnezade, Aktarlar Sk. No:6/A, 34357 Beşiktaş/İstanbul`, te
 
 ## LAOS COFFEE KAMEROĞLU BEYLİKDÜZÜ ID 6676 HOLD
 Hentzer kaydı `Cumhuriyet, Ege Sokağı, 34520 Beylikdüzü/İstanbul`, telefon alanı boş. Kaynaklar exact branch için çelişkili adres/telefon veriyor: resmi şube sayfası `Derviş Eroğlu Cd. 10/1` ve `0543 299 01 53`, Instagram açılış içeriği `Ege Sokak No:1` gösteriyor. Bu nedenle Hentzer kaydıyla adres birimi ve telefon parity’si sağlanamadı. Resmi menü bağlantısı mevcut olsa da **override eklenmedi; strict HOLD**.
+
+## ÇİĞ KÖFTECİ SAİT USTA BEYKOZ ID 6675 HOLD
+Hentzer kaydı `Gümüşsuyu, Gümüşsuyu Cd. No:17/A, 34820 Beykoz/İstanbul`, telefon `+90 552 719 93 34`. Kaciyor, Yandex ve arama sonuçları adres/telefonu destekliyor; Yemeksepeti’nde fiyatlı ürünler mevcut. Ancak Yandex’in aynı adres/telefonlu kaydı işletmeyi `Artık faal değil` olarak işaretliyor. Faal durum çelişkisi nedeniyle güncel menü güvenle uygulanamadı. **Override eklenmedi; strict HOLD**.
