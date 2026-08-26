@@ -2813,3 +2813,6 @@ Hentzer kaydı `Yenidoğan, Yahya Kemal Cd. No:14/A, 34040 Bayrampaşa/İstanbul
 
 ## YUSWAFFIL BEŞİKTAŞ ID 6561 HOLD
 Hentzer kaydı `Türkali, Nüzhetiye Karakolu Sok. No:3, 34357 Beşiktaş/İstanbul`, telefon `+90 507 159 59 31`. Yuswaffil adına ve bu telefona ait güvenilir exact işletme profili bulunamadı; telefon araması alakasız etkinlik/House of Nüzhet sonuçlarına gidiyor. Son bir yıl içinde ürün bazlı fiyatlı waffle/tatlı menüsü doğrulanamadı. **Override eklenmedi; strict HOLD.**
+
+## THE GARNET CAFE BEYLİKDÜZÜ ID 6560 HOLD
+Hentzer kaydı `Marmara, Hürriyet Blv. No:116, 34524 Beylikdüzü/İstanbul`; telefon alanı boş. Restoranim exact adresi doğruluyor ancak telefon yok; resmi Facebook `+90 532 407 86 00`, Restaurantguru farklı telefon veriyor. Son bir yıl exact şubeye ait doğrulanabilir TL fiyatlı menü de bulunamadı. **Override eklenmedi; strict HOLD.**
