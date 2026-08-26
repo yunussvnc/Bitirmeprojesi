@@ -2262,3 +2262,6 @@ Hentzer kaydı `Sahrayı Cedit Mahallesi, Göztepe, Batman Sk. No:4/2, 34734 Kad
 
 ## VEGAN MASA BEŞİKTAŞ ID 6743 ACCEPTED
 Hentzer kaydı `Türkali, Mısırlıbahçe Sok. No:8/A, 34357 Beşiktaş/İstanbul`, telefon `+90 535 278 76 61`. Vegan Masa’nın resmi sitesi/Instagram hesabı Beşiktaş şubesini aynı adres ve telefonla doğruluyor; Kadıköy şubesi ayrı adres/telefon olarak ayrıştırıldı. 26.08.2026 tarihinde canlı Yemeksepeti menüsünde `Vegan Lahmacun — 265 TL`, `Vegan Mantarlı Pide — 595 TL` ve `Vegan Kıymalı Peynirli Pide — 645 TL` görüldü. **3 gıda ürünü override edildi.**
+
+## KUŞAK KEBAP BEYKOZ ID 6742 HOLD
+Hentzer kaydı `Çubuklu, Şehit Ersin Güner Cad. No:2, 34805 Beykoz/İstanbul`, telefon `+90 216 537 05 09`. Resmi Instagram hesabı aynı adres/telefonu ve Getir/Yemeksepeti/Trendyol teslimatını doğruluyor; güncel sosyal içerikler 2025-2026 döneminde faaliyeti destekliyor. Ancak erişilebilir kaynaklarda ürün adıyla birlikte doğrulanabilir güncel fiyat listesi bulunamadı; yalnızca genel fiyat aralığı verildi. **Override eklenmedi; strict HOLD**.
