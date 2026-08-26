@@ -2190,3 +2190,6 @@ Hentzer kaydı `Kavaklı, Çağlar Sk. No:1, 34520 Beylikdüzü Osb/Beylikdüzü
 
 ## BLANE COFFEE BAYRAMPAŞA ID 6767 HOLD
 Hentzer kaydı `Yenidoğan, Atışalanı Cd. No:28 B, 34035 Bayrampaşa/İstanbul`, telefon `+90 532 514 65 20`. Yandex aynı 28B adresi ve telefonu doğruluyor; 2026 resmi Instagram içerikleri adresi desteklese de bazı güncel paylaşımlarda farklı telefon `+90 536 281 86 69` yer alıyor. Son bir yıl içinde exact şubeye ait erişilebilir ürün/fiyat menüsü bulunamadı. %100 branch fiyat ve telefon tutarlılığı sağlanamadığı için **override eklenmedi; strict HOLD**.
+
+## PIZZABULLS ESENYURT ID 6766 HOLD
+Hentzer kaydı `İnnovia 2 çarşı, Yeşilkent, Nazım Hikmet Blv. No:14 Sitesi M, 34520 Beylikdüzü/İstanbul`, telefon `+90 212 741 66 66`. Yelp’in güncel kaydı ve eski işletme Facebook kaydı adres/telefonu destekliyor; ancak bazı dizinlerde adres `14/1` ve telefon `444 32 44` olarak farklı. Pizzabulls resmi sitesinde güncel marka kampanya fiyatları var, fakat bu fiyatların exact Esenyurt/İnnovia 2 şubesine uygulanıp uygulanmadığı branch-specific olarak doğrulanamadı. Bu nedenle **override eklenmedi; strict HOLD**.
