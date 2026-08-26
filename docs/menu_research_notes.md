@@ -3042,3 +3042,6 @@ Kaynaklar: https://www.yemeksepeti.com/restaurant/u8lk/willion-pizza ; https://w
 
 ## GÖKSU DÜRÜM KEBAP ÇORBACISI ID 6490 HOLD
 Hentzer `Anadolu Hisarı, Göksu, Baruthane Cd. No:2/A, 34600 Beykoz/İstanbul`, telefon `+90 216 308 30 35`; birden fazla yerel rehber exact parity’yi doğruluyor. Ancak son bir yıl exact işletmeye ait ürün bazlı fiyatlı menü bulunamadı. **Override eklenmedi; strict HOLD.**
+
+## SİYEZ EVİ BEYLİKDÜZÜ ID 6489 HOLD
+Hentzer `Adnan Kahveci Mahallesi Kalkan Caddesi, A1 Blok No:3/1 Kapı No:9, 34528 Beylikdüzü/İstanbul`, telefon `+90 538 975 92 82`. Restoranim/Yandex ve 2026 tarihli resmi Instagram paylaşımları exact parity’yi destekliyor; ancak resmi e-ticaret sitesi fiyatları metin olarak vermiyor ve Yemeksepeti exact Beylikdüzü vendorunda 20 ürün doğrulanamadı. **Override eklenmedi; strict HOLD.**
