@@ -2737,3 +2737,6 @@ Hentzer kaydı `İncirköy, Soğuksu Cd. No:35, 34800 Beykoz/İstanbul`, telefon
 
 ## STARI GRAD RESTAURANT BAYRAMPAŞA ID 6586 HOLD
 Hentzer kaydı `Yıldırım, İkizler Sk. No:41, 34045 Bayrampaşa/İstanbul`, telefon `+90 212 538 44 14`. Resmi Facebook ve Instagram No:41 ile aynı telefonu doğruluyor; Apple Maps 39C, Yandex 39-41 numaralarını gösterdiğinden küçük adres farkı da not edildi. Son bir yıl içinde exact şubeye ait ürün bazlı fiyatlı menü bulunamadı; sosyal içeriklerde ürün tanıtımı var, fiyat yok. **Override eklenmedi; strict HOLD.**
+
+## KONYALI ETLİEKMEK KUZU TANDIR KANLICA ID 6585
+Hentzer kaydı `Kanlıca, Halide Edip Adıvar Cd. No:4 D:B, 34810 Beykoz/İstanbul`, telefon `+90 216 322 40 64`. Restoranim ve Kaçıyor exact adres/telefonu doğruluyor; resmi sosyal profil de Kanlıca ve aynı telefon bilgisini yayımlıyor. Canlı Migros Kanlıca menüsünden 20 benzersiz çorba, kebap, ızgara, pide, etli ekmek, dürüm ve yan ürün seçildi; içecek/poşet hariç tutuldu. **Override kabul edildi; 20 ürün.** Kaynaklar: https://www.migros.com.tr/yemek/konyali-etli-ekmek-kuzu-tandir-beykoz-kanlica-mah-st-20524 ; https://restoranim.net/istanbul/beykoz/pideci/konyali-etliekmek-kuzu-tandir ; https://www.instagram.com/konyalietliekmekkanlica1/

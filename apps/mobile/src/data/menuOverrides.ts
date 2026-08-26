@@ -91007,6 +91007,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "5 Çeşit Meze Menü", "price": "1500 TL", "category": "Özel Menü" }
     ]
   },
+  "6585": {
+    "name": "KONYALI ETLİEKMEK KUZU TANDIR KANLICA",
+    "sourceUrl": "https://www.migros.com.tr/yemek/konyali-etli-ekmek-kuzu-tandir-beykoz-kanlica-mah-st-20524",
+    "sourceName": "Canlı Migros Konyalı Etli Ekmek & Kuzu Tandır Beykoz Kanlıca menüsü; Restoranim exact adres-telefon doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Günün Çorbası", "price": "200 TL", "category": "Çorbalar" },
+      { "name": "Adana Kebap", "price": "500 TL", "category": "Kebaplar" },
+      { "name": "Izgara Köfte (Porsiyon)", "price": "480 TL", "category": "Izgaralar" },
+      { "name": "Lahmacun", "price": "190 TL", "category": "Fırın Ürünleri" },
+      { "name": "Kıymalı Pide", "price": "450 TL", "category": "Fırın Ürünleri" },
+      { "name": "Karışık Pide", "price": "500 TL", "category": "Fırın Ürünleri" },
+      { "name": "Kavurmalı Kaşarlı Pide", "price": "500 TL", "category": "Fırın Ürünleri" },
+      { "name": "Kaşarlı Pide", "price": "450 TL", "category": "Fırın Ürünleri" },
+      { "name": "Kuşbaşılı Kaşarlı Pide", "price": "500 TL", "category": "Fırın Ürünleri" },
+      { "name": "Bıçak Arası Pide", "price": "500 TL", "category": "Fırın Ürünleri" },
+      { "name": "Mevlana Pide", "price": "450 TL", "category": "Fırın Ürünleri" },
+      { "name": "Etli Ekmek", "price": "450 TL", "category": "Fırın Ürünleri" },
+      { "name": "Sebzeli Kaşarlı Börek", "price": "450 TL", "category": "Fırın Ürünleri" },
+      { "name": "Konya Usulü Börek", "price": "450 TL", "category": "Fırın Ürünleri" },
+      { "name": "Pastırmalı Kaşarlı Pide", "price": "500 TL", "category": "Fırın Ürünleri" },
+      { "name": "Adana Dürüm (Acılı)", "price": "300 TL", "category": "Dürümler" },
+      { "name": "Urfa Dürüm (Acısız)", "price": "300 TL", "category": "Dürümler" },
+      { "name": "Tavuk Şiş Dürüm", "price": "300 TL", "category": "Dürümler" },
+      { "name": "Et Sac Kavurma", "price": "750 TL", "category": "Diğer Lezzetler" },
+      { "name": "Pirinç Pilavı", "price": "200 TL", "category": "Yan Ürünler" }
+    ]
+  },
   "6587": {
     "name": "BENEKLİ KIZ KÖFTE SUCUK BURGER BEYKOZ",
     "sourceUrl": "https://www.yemeksepeti.com/restaurant/rf6u/intiba-benekli-kiz-kofte-and-burger",
