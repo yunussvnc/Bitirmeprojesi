@@ -2632,3 +2632,6 @@ Hentzer kaydı `Pınartepe, 34500 Büyükçekmece/İstanbul`, telefon `+90 533 7
 
 ## MAKARİSTAN PİZZA&MAKARNA BEYLİKDÜZÜ ID 6621 HOLD
 Hentzer kaydı `Cumhuriyet Atatürk Bulvarı, Alya, Cumhuriyet, Dolunay Sitesi altı 27-1/B, 34520 Beylikdüzü/İstanbul`, telefon `+90 539 237 58 88`. Yandex aynı telefon ve Atatürk Bulvarı çevresini destekliyor; ancak Makaristan resmi şube sayfası Beylikdüzü şubesini `Alya Dolunay Sitesi Kapı No:27` ve `0505 870 07 87` olarak yayımlıyor. Resmi Beylikdüzü dijital menüsü ve Yemeksepeti fiyatları bulunsa da zorunlu telefon parity’si sağlanamadı. **Override eklenmedi; strict HOLD.**
+
+## KİLİSLİ BAYRAM KEBAP LAHMACUN BEYLİKDÜZÜ ID 6620 HOLD
+Hentzer kaydı `Adnan Kahveci, Sümer Cd No:5, 34528 Beylikdüzü/İstanbul`, telefon `+90 532 264 08 74`. Resmi Instagram ve Yandex aynı Sümer Cd. No:5 / telefonu destekliyor. Ancak 2025–2026 döneminde doğrulanabilir ürün bazlı fiyatlı menü bulunamadı; arama sonuçlarındaki fiyat aralığı tek başına yeterli değil. **Override eklenmedi; strict HOLD.**
