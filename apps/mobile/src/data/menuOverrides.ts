@@ -91007,6 +91007,32 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "5 Çeşit Meze Menü", "price": "1500 TL", "category": "Özel Menü" }
     ]
   },
+  "6594": {
+    "name": "MODA DA NATA BEŞİKTAŞ",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/conk/moda-da-nata-conk",
+    "sourceName": "Canlı Yemeksepeti Moda da Nata Beşiktaş vendor menüsü; resmi Beşiktaş şube sayfası ve exact telefon kaydı",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "6'lı Pastel de Nata Kutusu Menü", "price": "949,90 TL", "category": "Pastel de Nata Menüleri" },
+      { "name": "8'li Pastel de Nata Kutusu Menü", "price": "1199,90 TL", "category": "Pastel de Nata Menüleri" },
+      { "name": "Menü Lisboa", "price": "379,90 TL", "category": "Pastel de Nata Menüleri" },
+      { "name": "Menü Bom Dia", "price": "274,90 TL", "category": "Pastel de Nata Menüleri" },
+      { "name": "Menü Boa Tarde", "price": "799,90 TL", "category": "Pastel de Nata Menüleri" },
+      { "name": "12'li Pastel de Nata Kutusu", "price": "1649,90 TL", "category": "Pastel de Nata Menüleri" },
+      { "name": "2 Nata + 1 Limonata", "price": "379,90 TL", "category": "Pastel de Nata Menüleri" },
+      { "name": "Nutellalı Pastel de Nata", "price": "164,90 TL", "category": "Pastel de Nata" },
+      { "name": "Klasik Pastel de Nata", "price": "164,90 TL", "category": "Pastel de Nata" },
+      { "name": "Antep Fıstıklı Pastel de Nata", "price": "164,90 TL", "category": "Pastel de Nata" },
+      { "name": "Yaban Mersinli Pastel de Nata", "price": "164,90 TL", "category": "Pastel de Nata" },
+      { "name": "Elmalı Tarçınlı Pastel de Nata", "price": "164,90 TL", "category": "Pastel de Nata" },
+      { "name": "Fındıklı Pastel de Nata", "price": "164,90 TL", "category": "Pastel de Nata" },
+      { "name": "Limonlu Pastel de Nata", "price": "164,90 TL", "category": "Pastel de Nata" },
+      { "name": "Yer Fıstıklı Muzlu Pastel de Nata", "price": "164,90 TL", "category": "Pastel de Nata" },
+      { "name": "Baklita (Tentugal) Antep Fıstıklı", "price": "164,90 TL", "category": "Pastel de Nata" },
+      { "name": "Baklita (Tentugal) Bademli", "price": "164,90 TL", "category": "Pastel de Nata" },
+      { "name": "Lotuslu Pastel De Nata", "price": "164,90 TL", "category": "Pastel de Nata" }
+    ]
+  },
   "6596": {
     "name": "MUHLAMA KARADENİZ MUTFAĞI KAVACIK",
     "sourceUrl": "https://muhlama.com.tr/",

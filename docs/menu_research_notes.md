@@ -2710,3 +2710,6 @@ Hentzer kaydı `Rüzgarlıbahçe, Cumhuriyet Cd. No:131, 34805 Beykoz/İstanbul`
 
 ## PAPA JOHN'S PIZZA GAYRETTEPE ID 6595 HOLD
 Hentzer kaydı `Gayrettepe, Yıldız Posta Cd. No:46, 34394 Beşiktaş/İstanbul`, telefon `+90 444 75 79`. Restaurant Guru exact adresi doğruluyor ancak şube telefonu `+90 212 267 53 63` olarak veriliyor; Hentzer’deki kurumsal `444 75 79` ile %100 phone parity sağlanamadı. Restaurant Guru’da yaklaşık bir yıl önce eklenmiş menü ve resmi Türkiye sitesinde genel güncel ürünler bulunsa da, zorunlu exact şube telefon koşulu karşılanmadığı için **override eklenmedi; strict HOLD**.
+
+## MODA DA NATA BEŞİKTAŞ ID 6594
+Hentzer kaydı `Yıldız, Çırağan Cd. No:27/1, 34353 Beşiktaş/İstanbul`, telefon `+90 212 259 61 33`. Moda da Nata resmi şube sayfası Beşiktaş adresini aynen doğruluyor; Kaçıyor exact kaydı aynı adres ve telefonu listeliyor. Canlı Yemeksepeti Beşiktaş vendorından 18 benzersiz nata/tatlı ürünü ve ürün içeren menü seçildi; fiyatlar erişim tarihinde güncel, içecekler tek başına eklenmedi. **Override kabul edildi; 18 ürün.** Kaynaklar: https://modadanata.com/subelerimiz/ ; https://www.yemeksepeti.com/en/restaurant/conk/moda-da-nata-conk ; https://kaciyor.com/moda-da-nata
