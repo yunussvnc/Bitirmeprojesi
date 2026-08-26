@@ -2689,3 +2689,6 @@ Hentzer kaydı `Anadolu Kavağı, Yalı Çk., 34825 Beykoz/İstanbul`, telefon `
 
 ## STELL KUMPİR WAFFLE ID 6602 HOLD
 Hentzer kaydı `İncirköy, Çukur Çayır Cd. No:7/C, 34800 Beykoz/İstanbul`, telefon `+90 531 022 19 08`. Canlı Yemeksepeti `Stell Kumpir & Waffle (faas)` vendorında 10 adet kumpir/waffle ürünü ve fiyatı mevcut; ancak vendor sayfasında Hentzer adresi ve telefonu yayımlanmadığından exact şube parity’si bağımsız doğrulanamadı. Aynı adreste farklı bir işletme (Bakioğlu Hatay Döner) kayıtları da bulunuyor. **Override eklenmedi; strict HOLD.**
+
+## BIGPATIBURGER HAYVAN DOSTU BİR MEKAN ID 6601
+Hentzer kaydı `Cihannüma, Yıldız Cd. No:40/C, 34000 Beşiktaş/İstanbul`, telefon `+90 212 227 33 53`. Tümİşyeri exact isim, adres ve telefonu aynen doğruluyor. Canlı Yemeksepeti `Big Pati Burger (uac7)` menüsünden 18 benzersiz gıda ürünü seçildi; indirimli fiyatlar kullanıldı, içecek/poşet ve carousel tekrarları hariç tutuldu. **Override kabul edildi; 18 ürün.** Kaynaklar: https://www.yemeksepeti.com/en/restaurant/uac7/big-pati-burger ; https://www.tumisyeri.com/bigpatiburger-hayvan-dostu-bir-mekan-0212-227-33-53

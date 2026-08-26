@@ -91007,6 +91007,32 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "5 Çeşit Meze Menü", "price": "1500 TL", "category": "Özel Menü" }
     ]
   },
+  "6601": {
+    "name": "BIGPATIBURGER HAYVAN DOSTU BİR MEKAN",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/uac7/big-pati-burger",
+    "sourceName": "Canlı Yemeksepeti Big Pati Burger menüsü; Tümİşyeri ile exact adres-telefon doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Muhteşem 2'li Tavuk Menü", "price": "442 TL", "category": "Menüler" },
+      { "name": "Cheese Salsa Et Burger", "price": "463,25 TL", "category": "Burgerler" },
+      { "name": "Cheese Salsa Tavuk Burger", "price": "378,25 TL", "category": "Burgerler" },
+      { "name": "Klasik Et Burger", "price": "463,25 TL", "category": "Burgerler" },
+      { "name": "Klasik Tavuk Burger", "price": "378,25 TL", "category": "Burgerler" },
+      { "name": "Fümeli Kizomba Burger", "price": "680 TL", "category": "Burgerler" },
+      { "name": "Acılı Bachata Burger", "price": "680 TL", "category": "Burgerler" },
+      { "name": "Acılı Bachata Tavuk Burger", "price": "378,25 TL", "category": "Burgerler" },
+      { "name": "2'li Et Burger", "price": "680 TL", "category": "Burgerler" },
+      { "name": "Mushorom Rumba Burger", "price": "680 TL", "category": "Burgerler" },
+      { "name": "2'li Tavuk Burger", "price": "552,50 TL", "category": "Burgerler" },
+      { "name": "Mushroom Rumba Burger", "price": "595 TL", "category": "Burgerler" },
+      { "name": "Dana Smoke Kizomba Burger", "price": "680 TL", "category": "Burgerler" },
+      { "name": "Barbekü Soslu Çıtır Tavuk Burger", "price": "378,25 TL", "category": "Burgerler" },
+      { "name": "Barbekü Et Burger", "price": "463,25 TL", "category": "Burgerler" },
+      { "name": "Patates Kızartması", "price": "204 TL", "category": "Yan Ürünler" },
+      { "name": "Double Patates Kızartması (2 Kişilik)", "price": "289 TL", "category": "Yan Ürünler" },
+      { "name": "Double Patates Kızartması (3 Kişilik)", "price": "340 TL", "category": "Yan Ürünler" }
+    ]
+  },
   "6608": {
     "name": "BEREKET EKMEK FIRINI BAYRAMPAŞA",
     "sourceUrl": "https://www.yemeksepeti.com/restaurant/gy34/bereket-unlu-mamulleri-gy34",
