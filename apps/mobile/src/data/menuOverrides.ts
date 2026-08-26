@@ -4,6 +4,17 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6732": {
+    "name": "İSKELE CAFE BEYKOZ",
+    "sourceUrl": "https://www.instagram.com/reel/Db0KPFlsI4s/",
+    "sourceName": "2026 tarihli sosyal menü/fiyat paylaşımları; Apple Maps ve Hentzer ile exact Fevzi Paşa Cd. şubesi/telefonu doğrulandı",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Çay", "price": "40 TL", "category": "İçecekler" },
+      { "name": "Türk Kahvesi", "price": "100 TL", "category": "İçecekler" },
+      { "name": "Limonata", "price": "120 TL", "category": "İçecekler" }
+    ]
+  },
   "6733": {
     "name": "GALA KOKOREÇ BAYRAMPAŞA",
     "sourceUrl": "https://www.migros.com.tr/yemek/gala-kokorec-bayrampasa-yenidogan-mah-st-1a46d",

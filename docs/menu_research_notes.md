@@ -2296,3 +2296,6 @@ Hentzer kaydı `Barış, İzmir Cd. No:18 D:F, 34520 Beylikdüzü/İstanbul`, te
 
 ## GALA KOKOREÇ BAYRAMPAŞA ID 6733 ACCEPTED
 Hentzer kaydı `Yenidoğan, Abdi İpekçi Cd. No:32A, 34000 Bayrampaşa/İstanbul`, telefon `+90 212 501 66 57`. Gala Kokoreç resmi şubeler sayfası aynı Bayrampaşa Merkez adresini `32/A` ve aynı telefonu veriyor; Waze de aynı adres/telefonu doğruluyor. 26.08.2026 tarihinde şubeye bağlı canlı Migros Yemek menüsünden Popüler carousel tekrarları, içecekler ve çevre bedeli dışarıda bırakılarak 20 benzersiz gıda ürün-fiyat çifti alındı. **20 gıda ürünü override edildi.**
+
+## İSKELE CAFE BEYKOZ ID 6732 ACCEPTED
+Hentzer kaydı `Merkez, Fevzi Paşa Cd. No:1 D:1A, 34820 Beykoz/İstanbul`, telefon `+90 533 293 79 29`. Apple Maps aynı Fevzi Paşa Cd. 1 adresini ve telefonu doğruluyor. 2026 tarihli sosyal menü paylaşımlarında son haftalarda `Çay — 40 TL`, `Türk Kahvesi — 100 TL` ve `Limonata — 120 TL` görüldü; çelişkili eski/alternatif çay fiyatları kullanılmadı. **3 içecek ürünü override edildi.**
