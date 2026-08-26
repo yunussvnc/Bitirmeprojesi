@@ -91652,6 +91652,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Çilekli Frappe", "price": "144 TL", "category": "Soğuk İçecekler" }
     ]
   },
+  "6499": {
+    "name": "Adella Seafood Restaurant",
+    "sourceUrl": "https://www.adellaseafood.com/restaurant-menu",
+    "sourceName": "Adella Seafood resmi güncel menü sayfası; resmi site/Instagram/Facebook ve Menu-tr ile exact Hamidiye Cd. No:16, Fatih ve +90 212 527 52 71 parity doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Fasulye Pilaki", "price": "290 TL", "category": "Mezeler" },
+      { "name": "Patlıcan Atom", "price": "320 TL", "category": "Mezeler" },
+      { "name": "Patlıcan Salatası", "price": "350 TL", "category": "Mezeler" },
+      { "name": "Kopoglu", "price": "350 TL", "category": "Mezeler" },
+      { "name": "Kabak Borani", "price": "290 TL", "category": "Mezeler" },
+      { "name": "Zeytinyağlı Enginar", "price": "385 TL", "category": "Mezeler" },
+      { "name": "Kaya Koruğu", "price": "270 TL", "category": "Mezeler" },
+      { "name": "Köz Biber", "price": "270 TL", "category": "Mezeler" },
+      { "name": "Zerdeçallı Fava", "price": "320 TL", "category": "Mezeler" },
+      { "name": "Pastırmalı Humus", "price": "360 TL", "category": "Mezeler" },
+      { "name": "Girit Ezmesi", "price": "360 TL", "category": "Mezeler" },
+      { "name": "Levrek Marin", "price": "520 TL", "category": "Mezeler" },
+      { "name": "Hamsi Marin", "price": "455 TL", "category": "Mezeler" },
+      { "name": "Somon Füme", "price": "520 TL", "category": "Mezeler" },
+      { "name": "İsli Midye", "price": "470 TL", "category": "Mezeler" },
+      { "name": "Çiroz", "price": "455 TL", "category": "Mezeler" },
+      { "name": "Kalamar Salatası", "price": "540 TL", "category": "Mezeler" },
+      { "name": "Lakerda", "price": "605 TL", "category": "Mezeler" },
+      { "name": "Söğüş Karides", "price": "780 TL", "category": "Mezeler" },
+      { "name": "Istiridye Mantarı", "price": "540 TL", "category": "Mezeler" }
+    ]
+  },
   "6506": {
     "name": "Peanut Waffle Belgium Beylikdüzü",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/g90r/peanut-waffle-belgium-g90r",

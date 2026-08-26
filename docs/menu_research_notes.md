@@ -3009,3 +3009,7 @@ Hentzer `Asmalı Mescit, Meşrutiyet Cd. 7a, 34435 Beyoğlu/İstanbul`, telefon 
 
 ## MEYLEBİ YENİ NESİL MEYHANE ID 6500 HOLD
 Hentzer `Atatürk, Barbaros 1 cad No:1A, 34500 Büyükçekmece/İstanbul`, telefon `+90 541 880 56 46`. Resmi sosyal kaynaklar telefonu doğruluyor; ancak Apple Maps `1`, Yandex `1/10` ve başka Yandex kaydı `1/1` gösteriyor. Son bir yıl exact branch ürün fiyatlı menü bulunamadı; 2024 yılbaşı menüsü eski. **Override eklenmedi; strict HOLD.**
+
+## ADELLA SEAFOOD RESTAURANT ID 6499 ACCEPTED
+Hentzer `Hobyar, Hamidiye Cd. No:16, 34112 Fatih/İstanbul`, telefon `+90 212 527 52 71`. Adella resmi sitesi, Instagram/Facebook ve Menu-tr exact adres/telefonu doğruluyor. Resmi menü sayfasında 26.08.2026 erişiminde TL fiyatlı ürünler yayımlanıyor. 20 benzersiz meze ürünü eklendi; Mostra fiyatı olmayan balıklar, içecek/alkol ve servis ücreti belirsiz kalemler dışlandı. **Override kabul edildi.**
+Kaynaklar: https://www.adellaseafood.com/restaurant-menu ; https://www.adellaseafood.com/ ; https://www.instagram.com/adellaseafood/ ; https://www.facebook.com/p/Adella-Seafood-100066952135041/ ; https://menu-tr.com/istanbul/fatih/balik-restorani/adella-seafood-restaurant
