@@ -3198,3 +3198,6 @@ Kaynaklar: https://houseofbturkey.com/ ; https://www.yemeksepeti.com/en/restaura
 ## COFFEE CARAMEL BEYLİKDÜZÜ ID 6442 HOLD
 Mekan.com/Kacıyor/Nerdeler/servis listeleri ve Instagram Hentzer exact `Adnan Kahveci Mah. Osmanlı Cad. 1/63 Beyaz Palas sitesi, Beylikdüzü/İstanbul` ve `+90 535 576 64 25` parity’sini destekliyor. Ancak exact şubeye ait son bir yıl güncel, ürün bazlı TL fiyatlı 20 menü kalemi bulunamadı. **Override eklenmedi; strict HOLD.**
 ID 6441 The Market Bosphorus: Hentzer Kuruçeşme Arena No:56, 34345 Beşiktaş/İstanbul ve +90 212 257 41 11; Localo exact adres/telefonu doğruluyor. QRLIM THE MARKET web menüsü sayfası bulundu ancak erişilebilir içerik yalnız KVKK metni ve kategori başlıklarını verdi; ürün bazlı fiyat listesi çıkarılamadı. Güncel sosyal paylaşımlar işletmeyi desteklese de 20 benzersiz, son bir yıl fiyatlı ürün doğrulanamadı. Strict HOLD.
+
+## KUZEY MARKET ID 6440 HOLD
+Yandex Hentzer ile aynı Muratpaşa/Cumhuriyet Cad. civarını gösterse de adresi `142B`, telefonu `+90 534 844 16 30`; Hentzer `No:142` ve `+90 542 152 46 52`. Telefon parity’si sağlanamadı. Ayrıca 20 güncel gıda ürünü fiyatlı menü doğrulanamadı. **Override eklenmedi; strict HOLD.**
