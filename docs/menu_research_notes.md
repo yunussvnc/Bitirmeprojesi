@@ -2121,3 +2121,6 @@ Hentzer kaydı `Adnan Kahveci Mah. Osmanlı Cad, Beyaz Palas Sitesi, Büyükşeh
 
 ## DEL PONTE PİZZERİA ID 6790 ACCEPTED
 Hentzer kaydı `Mecidiye, Büyükşekerci Sk. No:44/a, 34347 Beşiktaş/İstanbul`, telefon `+90 539 859 08 93`. Yandex işletme kaydı aynı adres ve telefonla exact eşleşiyor. Del Ponte’nin Ocak 2026 açılış paylaşımı işletmenin Ortaköy/Beşiktaş şubesini destekliyor; canlı Yemeksepeti menüsünde 10 pizza, 2 tatlı ve 8 içecek fiyatı yayınlanıyor. Fiyatlar 26.08.2026 tarihinde canlı menüden doğrulandı ve son bir yıl şartını karşılıyor. **20 ürün override edildi.**
+
+## BEYLİKDÜZÜ MEŞHUR BAFRA DONDURMASI - BAFİROS ID 6789 HOLD
+Hentzer kaydı `Yeşilyurt Cad. Demir Country Çarşısı H Blok yanı 219 nolu, Kavaklı, 34520 Beylikdüzü/İstanbul`, telefon `+90 212 813 00 55`. Bafiros Beylikdüzü Instagram hesabı aynı sipariş hattını ve Demir Country İç Çarşı konumunu destekliyor; 2026 tarihli paylaşımlar işletmenin faal olduğunu gösteriyor. Ancak güncel fiyatlı sonuç olarak bulunan `kilo 900 TL / top 50 TL` paylaşımı Bayrampaşa şubesine ait; Beylikdüzü şubesine özel güncel fiyat listesi doğrulanamadı. Branch-specific fiyat şartı sağlanamadığı için **override eklenmedi; strict HOLD**.
