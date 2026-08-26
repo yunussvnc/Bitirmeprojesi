@@ -2876,3 +2876,7 @@ Kaynak: https://www.yemeksepeti.com/en/restaurant/iai4/burger-yiyelim-iai4
 ## PİZANO PIZZERIA ID 6542 ACCEPTED
 Hentzer `Mecidiye, Eski Bahçe Sk. 17/A, 34347 Beşiktaş`, telefon `+90 212 258 30 35`. Resmi Pizano sitesi aynı Ortaköy şubesini, adresi ve telefonu doğruluyor; Migros exact Beşiktaş/Mecidiye vendoru güncel görünen ürün bazlı fiyatlar sunuyor. 20 benzersiz gıda ürünü (başlangıç ve 30 cm pizzalar) eklendi; içecekler dışarıda bırakıldı. **Override kabul edildi.**
 Kaynaklar: https://pizano.com.tr/ ; https://www.migros.com.tr/yemek/pizano-pizzeria-besiktas-mecidiye-mah-st-18a04
+
+## KONOHA ETİLER ID 6541 ACCEPTED
+Hentzer `Nisbetiye, Başa Sk. 4A, 34340 Beşiktaş`, telefon `+90 212 352 13 13`. Allzin exact Konoha Sushi Etiler menü kaydı aynı adres ve telefonu doğruluyor; Yandex de aynı şubeyi doğruluyor. Canlı Yemeksepeti Konoha menüsünden sushi setleri, menüler, başlangıçlar, çorbalar, tavuk ve noodle kategorilerinden 20 benzersiz gıda ürünü güncel fiyatlarla eklendi. **Override kabul edildi.**
+Kaynaklar: https://allzinapp.com/KonohaSushiEtiler ; https://yandex.com.tr/maps/org/konoha_etiler/193619662649/ ; https://www.yemeksepeti.com/en/restaurant/oqs8/konoha-sushi-and-chinese

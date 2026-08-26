@@ -91555,4 +91555,33 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Pizza Tonna (30 cm.)", "price": "750 TL", "category": "Pizzalar" }
     ]
   },
+
+  "6541": {
+    "name": "Konoha Etiler",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/oqs8/konoha-sushi-and-chinese",
+    "sourceName": "Canlı Yemeksepeti Konoha menüsü; Allzin Konoha Sushi Etiler ve Yandex ile exact adres-telefon doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Mini Assorted Menü (20 Pcs.)", "price": "1464 TL", "category": "Sushi Setleri" },
+      { "name": "Vegetarian Set (18 Pcs.)", "price": "870 TL", "category": "Sushi Setleri" },
+      { "name": "Konoha Set (24 Pcs.)", "price": "1905 TL", "category": "Sushi Setleri" },
+      { "name": "Naruto Menü (26 Pcs.)", "price": "1675 TL", "category": "Sushi Setleri" },
+      { "name": "Tavuklu Noodle Menü", "price": "709 TL", "category": "Menüler" },
+      { "name": "Dana Etli Noodle Menü", "price": "764 TL", "category": "Menüler" },
+      { "name": "Karidesli Noodle Menü", "price": "851 TL", "category": "Menüler" },
+      { "name": "Spring Roll (2 Pcs.)", "price": "321 TL", "category": "Başlangıçlar" },
+      { "name": "Crispy Wonton (4 Pcs.)", "price": "419 TL", "category": "Başlangıçlar" },
+      { "name": "Steamed Beef Dumplings (4 Pcs.)", "price": "419 TL", "category": "Başlangıçlar" },
+      { "name": "Mongolian Chicken", "price": "487 TL", "category": "Başlangıçlar" },
+      { "name": "Atomic Shrimp", "price": "734 TL", "category": "Başlangıçlar" },
+      { "name": "Wonton Soup", "price": "318 TL", "category": "Çorbalar" },
+      { "name": "Hot & Sour Soup", "price": "312 TL", "category": "Çorbalar" },
+      { "name": "Miso Soup", "price": "390 TL", "category": "Çorbalar" },
+      { "name": "Sweet & Sour Chicken", "price": "670 TL", "category": "Beyaz Etler" },
+      { "name": "Chicken Manchurian", "price": "670 TL", "category": "Beyaz Etler" },
+      { "name": "General Tso's Chicken", "price": "683 TL", "category": "Beyaz Etler" },
+      { "name": "Noodles with Chicken", "price": "522 TL", "category": "Noodle" },
+      { "name": "Noodles with Shrimp", "price": "652 TL", "category": "Noodle" }
+    ]
+  },
 };
