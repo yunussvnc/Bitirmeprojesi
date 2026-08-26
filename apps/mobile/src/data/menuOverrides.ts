@@ -4,6 +4,34 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6783": {
+    "name": "BOSTON DRINK & DESSERT BEYLİKDÜZÜ",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/b1td/boston-drink-and-dessert-b1td",
+    "sourceName": "Boston Drink & Dessert canlı Yemeksepeti menüsü; resmi şubeler sayfasında Beylikdüzü adres/telefonu exact doğrulandı",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "All In One", "price": "2450 TL", "category": "Tatlı Kutuları" },
+      { "name": "All In One 1/2", "price": "1550 TL", "category": "Tatlı Kutuları" },
+      { "name": "Cup in One", "price": "1800 TL", "category": "Tatlı Kutuları" },
+      { "name": "Pancake Mix", "price": "580 TL", "category": "Pancake" },
+      { "name": "Pancake Pick", "price": "640 TL", "category": "Pancake" },
+      { "name": "Pancake Chocolate", "price": "660 TL", "category": "Pancake" },
+      { "name": "Pancake Fondue", "price": "950 TL", "category": "Pancake" },
+      { "name": "Baston Mag", "price": "440 TL", "category": "Pasta ve Cheesecake" },
+      { "name": "Profiteroles", "price": "550 TL", "category": "Pasta ve Cheesecake" },
+      { "name": "Profiterole Cake", "price": "980 TL", "category": "Pasta ve Cheesecake" },
+      { "name": "Waffle", "price": "600 TL", "category": "Waffle" },
+      { "name": "Waffle Fondue", "price": "950 TL", "category": "Waffle" },
+      { "name": "Double Waffle", "price": "1100 TL", "category": "Waffle" },
+      { "name": "Lotus Waffle", "price": "640 TL", "category": "Waffle" },
+      { "name": "Basic Cup", "price": "540 TL", "category": "Tatlı Kupaları" },
+      { "name": "Springfield", "price": "560 TL", "category": "Tatlı Kupaları" },
+      { "name": "Quincy", "price": "560 TL", "category": "Tatlı Kupaları" },
+      { "name": "Brookline", "price": "560 TL", "category": "Tatlı Kupaları" },
+      { "name": "Crepe Fondue", "price": "600 TL", "category": "Krep" },
+      { "name": "Crepe Wrap", "price": "600 TL", "category": "Krep" }
+    ]
+  },
   "6785": {
     "name": "HERKES BALIK YİYECEK - BEYLİKDÜZÜ ŞUBE",
     "sourceUrl": "https://www.instagram.com/reel/DbjBPGdMtlb/",

@@ -2139,3 +2139,6 @@ Hentzer kaydı `Kavaklı, Göktürkler Sk. No:3 D:1, 34520 Beylikdüzü/İstanbu
 
 ## SANDRO COFFEE FABRIC ID 6784 HOLD
 Hentzer kaydı `Kocatepe, Avasköy Yolu Cd. 77/A, 34045 Bayrampaşa/İstanbul`, telefon `+90 554 610 93 61`. Yandex ve işletmenin Instagram sonucu aynı adres/telefonu destekliyor; Apple Maps’te adres 73A olarak farklı geçiyor. Resmi `menu.sandrocoffee.com` menü kategorilerini gösteriyor ancak erişilebilir içerikte ürün fiyatları yer almıyor. Bu nedenle son bir yıl içinde fiyatı doğrulanabilir exact-branch ürün listesi bulunamadığı için **override eklenmedi; strict HOLD**.
+
+## BOSTON DRINK & DESSERT BEYLİKDÜZÜ ID 6783 ACCEPTED
+Hentzer kaydı `Barış, E-5 Yanyolu No:28 D:69, 34520 Beylikdüzü/İstanbul`, telefon `+90 541 192 94 11`. Boston Drink & Dessert resmi şubeler sayfasında aynı Beylikdüzü adresi ve telefon yayınlanıyor. Canlı Yemeksepeti menüsünde 26.08.2026 tarihinde ürün fiyatları erişilebilir durumdaydı; genel marka menüsü exact şube resmi iletişim bilgileriyle eşleştirilerek 20 gıda ürünü seçildi. Gıda dışı taşıma poşeti eklenmedi. **20 ürün override edildi.**
