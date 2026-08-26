@@ -2515,3 +2515,6 @@ Hentzer kaydı `Kültür, Nisbetiye Cd. Akmerkez AVM No:210 No:54, 34337 Beşikt
 
 ## KENAN USTA OCAKBAŞI BEYOĞLU ID 6660 HOLD
 Hentzer kaydı `Şehit Muhtar, Kurabiye Sk. No:18, 34435 Beyoğlu/İstanbul`, telefon `+90 212 293 56 11`. Resmi Kenan Usta sitesi, Apple Maps ve Facebook aynı Kurabiye Sokak No:18 adresini ve telefonu doğruluyor; işletme aktif. Ancak resmi menü sayfasındaki tüm fiyatlar `₺00,00` placeholder olarak yayınlanmış ve güncel gerçek fiyatlı başka exact şube kaynağı bulunamadı. **Override eklenmedi; strict HOLD**.
+
+## GOLDENFINGERS BEYLİKDÜZÜ ID 6659 ACCEPTED
+Hentzer kaydı `Cumhuriyet, Onur Sk. No:1/A, 34520 Beylikdüzü/İstanbul`, telefon `+90 850 777 8080`. Goldenfingers Beylikdüzü dijital menüsü aynı Cumhuriyet/Onur No:1/A adresini ve `0212 924 93 13` sabit telefonunu gösteriyor; işletme kaydı ve güncel kaynaklarda aynı exact şube doğrulanıyor. Menüde erişim tarihinde güncel fiyatlı burgerler bulundu; ilk/tekil 20 smash burger ve chicken burger ürünü eklendi, varyant tekrarları ve içecekler dışarıda tutuldu.

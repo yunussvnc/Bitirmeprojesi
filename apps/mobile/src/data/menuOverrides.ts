@@ -90588,5 +90588,33 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Sake Nigiri (2 Adet)", "price": "382,50 TL", "category": "Nigiriler" },
       { "name": "Maguro Nigiri (2 Adet)", "price": "497,25 TL", "category": "Nigiriler" }
     ]
+  },
+  "6659": {
+    "name": "GOLDENFINGERS BEYLİKDÜZÜ",
+    "sourceUrl": "https://goldenfingersbeylikduzu.dijital.menu/31606",
+    "sourceName": "Goldenfingers Beylikdüzü dijital menüsü; Hentzer adres-telefonu ve kaynak kaydıyla exact şube doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Gf Chicken Burger", "price": "348.90 TL", "category": "Chicken" },
+      { "name": "Louisiana Chicken Burger", "price": "358.90 TL", "category": "Chicken" },
+      { "name": "Buffalo Chicken Burger", "price": "424.90 TL", "category": "Chicken" },
+      { "name": "Trüffle Chicken", "price": "364.90 TL", "category": "Chicken" },
+      { "name": "Rock'N Fight Chicken", "price": "368.90 TL", "category": "Chicken" },
+      { "name": "Gang Bang Cheeseburger", "price": "488.90 TL", "category": "Cheeseburger" },
+      { "name": "Gang Cheeseburger", "price": "484.90 TL", "category": "Cheeseburger" },
+      { "name": "Supernova Cheeseburger", "price": "568.90 TL", "category": "Cheeseburger" },
+      { "name": "Original Cheeseburger", "price": "394.90 TL", "category": "Cheeseburger" },
+      { "name": "BBQ Cheeseburger", "price": "398.90 TL", "category": "Cheeseburger" },
+      { "name": "American Classic Burger", "price": "404.90 TL", "category": "Burgerler" },
+      { "name": "American Classic BBQ Burger", "price": "408.90 TL", "category": "Burgerler" },
+      { "name": "Badass Cheeseburger", "price": "424.90 TL", "category": "Cheeseburger" },
+      { "name": "Burningman Burger", "price": "548.90 TL", "category": "Burgerler" },
+      { "name": "Mediterranean Burger", "price": "548.90 TL", "category": "Burgerler" },
+      { "name": "Sweety Chili Burger", "price": "548.90 TL", "category": "Burgerler" },
+      { "name": "Oklahoma Onion Burger", "price": "568.90 TL", "category": "Burgerler" },
+      { "name": "Turco Burger", "price": "588.90 TL", "category": "Burgerler" },
+      { "name": "Truffle Meaty Burger", "price": "608.90 TL", "category": "Burgerler" },
+      { "name": "Fight Club Burger", "price": "628.90 TL", "category": "Burgerler" }
+    ]
   }
 };
