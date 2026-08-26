@@ -2943,3 +2943,6 @@ Hentzer `Yakuplu, 200. Sk. No:13 D:11, 34524 Beylikdüzü`, telefon `+90 542 119
 
 ## TARİHİ DEGUSTASYON OCAKBAŞI ID 6521 HOLD
 Hentzer `Hüseyinağa, Sahne Sk. No:25, 34435 Beyoğlu`, telefon `+90 501 154 01 01`. Resmi site/Instagram/Facebook exact işletme ve telefonu destekliyor; ancak kaynaklar adresi `No:25/B` olarak veriyor ve Hentzer No:25 ile 100% kapı parity’si kesinleşmedi. Son bir yıl ürün bazlı TL fiyatlı menü de bulunamadı. **Override eklenmedi; strict HOLD.**
+
+## KÖZ SEKİ CAĞ KEBABI ID 6520 HOLD
+Hentzer `B.O.S.B Birlik Sanayi Sitesi 3. cadde Keleşoğlu Plaza No:3 Dükkan 12-13, Beylikdüzü OSB`, telefon `+90 212 879 25 20`. İBOSB ve Nefis Yemek Tarifleri exact adres/telefonu doğruluyor; ancak bulunabilen ürün fiyatları eski 38 TL/13,5 TL menü-yorum fiyatları ve son bir yıl koşulunu karşılamıyor. **Override eklenmedi; strict HOLD.**
