@@ -2437,3 +2437,6 @@ Hentzer kaydı `Kocatepe, Şht. Muhtar Bey Cd. No:39A, 34437 Beyoğlu/İstanbul`
 
 ## O COFFEE BEŞİKTAŞ ID 6686 ACCEPTED
 Hentzer kaydı `Türkali, Yeniyol Sokağı No:12/A, 34357 Beşiktaş/İstanbul`, telefon `+90 212 877 70 07`. O Coffee’nin güncel sosyal içerikleri aynı adresi ve telefonu doğruluyor. 06.07.2026 tarihli işletme menü paylaşımında tüm tatlıların **99 TL** olduğu açıkça belirtiliyor; bu güncel kampanya exact işletme kaydıyla eşleştiği için 1 tatlı kampanyası ürünü override edildi.
+
+## SUSHI&SPICE AKMERKEZ ID 6685 HOLD
+Hentzer kaydı `Kültür, Nisbetiye Cd. Akmerkez AVM No:56, 34340 Beşiktaş/İstanbul`, telefon `+90 505 496 94 09`. Akmerkez mağaza kaydı, resmi Sushi&Spice menü bağlantısı ve Polomap/Restaurant Guru kayıtları exact Akmerkez şubesini ve telefonu destekliyor. Resmi menü sayfasında yalnızca Türkçe/İngilizce menü bağlantıları görülebildi; güncel fiyatlı ürün listesi metin olarak doğrulanamadı. Son bir yıl fiyat şartı sağlanamadığından **override eklenmedi; strict HOLD**.
