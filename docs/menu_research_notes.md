@@ -2040,3 +2040,72 @@ Cybo, Bulurum ve sosyal sonuçlar exact `Rüzgarlıbahçe, Cumhuriyet Cd. No:30,
 
 ## ROYAL KEBAP ISTANBUL ID 6817 ACCEPTED
 Resmî royalkebap.tr menü sayfası exact `Hüseyinağa, Tarlabaşı Blv No:69, 34435 Beyoğlu/İstanbul` adresini ve `0538 616 96 29` telefonunu doğruluyor. Menü sayfası 2026 tarihli içerik/görseller taşıyor; porsiyon, sandviç, tatlı ve çorba bölümlerinden 9 benzersiz gıda ürünü ve TL fiyatı eklendi. **ACCEPTED**, override eklendi.
+
+## CAFE CARMENTA ID 6816 HOLD
+Cybo, Oggusto (17.07.2026), Lezzet ve diğer güncel kayıtlar exact `Sinanpaşa, Çelebi Oğlu Sk. No:12, 34353 Beşiktaş/İstanbul` adresini ve `0507 608 19 04` telefonunu destekliyor. Ancak resmi sosyal profil giriş duvarına yönleniyor; arama sonuçlarında tam ürün bazlı güncel menü yerine genel fiyat aralıkları/sınırlı sosyal fiyat parçaları var. **HOLD**, override eklenmedi.
+
+## 49 ÇUKURCUMA ID 6815 HOLD
+Trip.com kaydı exact `Kuloğlu, Turnacıbaşı Cd. No:49, 34433 Beyoğlu/İstanbul` adresini ve `0212 249 00 48` telefonunu doğruluyor; ancak menüde ürün/fiyat listesi sunulmuyor. Restoranim, Meyhankoli ve diğer kayıtlar da güncel kalem bazlı fiyat vermiyor. **HOLD**, override eklenmedi.
+
+## ELMA CAFE & PUB ID 6814 HOLD
+Snapchat, Meyhankoli, Cybo ve diğer kayıtlar exact `Sinanpaşa Köyiçi Cad, Sinanpaşa, Leşker Sk. No:1, 34353 Beşiktaş/İstanbul` adresini ve `0212 261 36 34` telefonunu destekliyor. Listelenen elmacafepub.com sitesi bakım sayfasında; son bir yılda ürün bazlı güncel pub menüsü ve fiyatları doğrulanamadı. **HOLD**, override eklenmedi.
+
+## WAFFLES & CHO COFFEE ROASTERY ID 6813 HOLD
+Arama sonuçları exact `Yenidoğan, Mısırlı Sok. No:3/A, 34030 Bayrampaşa/İstanbul` adresini destekliyor. Ancak resmi chocoffeeroastery.com sitesi kafe/waffle menüsü değil, ekipman, çikolata ve paket kahve e-ticaret kataloğu; Hentzer telefonunun exact şube eşleşmesi de doğrulanamadı. **HOLD**, override eklenmedi.
+
+## MANOLYA AĞACI VILLA ID 6812 HOLD
+2025–2026 sosyal sonuçları exact `Dereağzı, Hasan Tahsin Cd. No:128, 34000 Beylikdüzü/İstanbul` adresini ve `0212 880 90 70` telefonunu destekliyor; işletmenin aktif olduğu görülüyor. Ancak son bir yılda tam ürün bazlı fiyatlı kahvaltı menüsü bulunamadı; görülen kişi başı 385 TL fiyatı 2024 tarihli. **HOLD**, override eklenmedi.
+
+## BEYKENT ÜSKÜDAR BALIKÇISI ID 6811 HOLD
+2026 Facebook/Instagram kayıtları exact `Pınartepe, Avrupa Cd. İlçe Tarım Müdürlüğü yanı 79/1, 34500 Büyükçekmece/İstanbul` adresini ve `0506 189 76 14` telefonunu destekliyor; işletmenin aktif olduğu görülüyor. Ancak son bir yılda tam ürün bazlı fiyatlı menü bulunamadı; sosyal içerikler ayrıntılı menü için DM yönlendirmesi yapıyor ve görülen fiyat parçaları eksik. **HOLD**, override eklenmedi.
+
+## HANE ÇİKOLATA & KAHVE BEŞİKTAŞ ÇARŞI ID 6810 HOLD
+Sosyal ve işletme kayıtları exact `Sinanpaşa, Şht. Asım Cd. No:5, 34353 Beşiktaş/İstanbul` adresini destekliyor; ancak tam ürün bazlı güncel menü yok. Yalnızca Endorfin ürünü için 125 TL fiyat parçacığı bulundu ve menü tarihi/telefon eşleşmesi yeterince doğrulanamadı. **HOLD**, override eklenmedi.
+
+## ŞAİRLER KAHVESİ AKARETLER ID 6809 HOLD
+Nelerimeshur (6 gün önce), Istanbul Mekan Rehberi, Mindtrip, Dijital Link ve Instagram işletme kaydı exact `Vişnezade, Süleyman Seba Cd. 50 A, 34357 Beşiktaş/İstanbul` adresini ve `0212 236 15 15` telefonunu destekliyor. Listelenen sairlerkahvesi.com.tr alan adı DNS ile çözümlenmedi; son bir yılda ürün bazlı güncel fiyatlı kafe menüsü doğrulanamadı. **HOLD**, override eklenmedi.
+
+## BEŞİKTAŞ ÇARŞI ID 6808 HOLD
+Kayıt genel çarşı/bölge niteliğinde; Restaurant Guru sonucu başka bir işletmeye yönleniyor ve Kaciyor kaydında menü henüz yok. Hentzer telefon alanı boş; exact tekil işletme/şube ve ürün bazlı güncel fiyatlı menü doğrulanamadı. **HOLD**, override eklenmedi.
+
+## TUZDA BALIK BEYLİKDÜZÜ ID 6807 HOLD
+Resmî Tuzda Balık sitesi Beylikdüzü’nü yeni şube olarak listeliyor ancak yalnızca `Beylikdüzü, İstanbul` bilgisini veriyor; Hentzer’deki exact `Kavaklı, Ayasofya Cd. C3 Blok No:17/1A` adresi ve `0212 830 21 02` telefonu resmî sitede doğrulanamadı. Resmî ürün listesinde fiyat yok; sosyal medya fiyat parçaları tam şube menüsü niteliğinde değil. **HOLD**, override eklenmedi.
+
+## BEIRUT CAFE TAKSIM ID 6806 HOLD
+Wanderlog, Rud, Waynst ve diğer kayıtlar exact `Katip Mustafa Çelebi, Anadolu Sk. 31/A, 34433 Beyoğlu/İstanbul` adresini ve `0545 682 40 36` telefonunu destekliyor; resmi sosyal hesapta 2026 aktif içerik var. Ancak son bir yılda ürün bazlı fiyatları doğrulanabilir tam kafe menüsü bulunamadı. **HOLD**, override eklenmedi.
+
+## B.BLOK BAKERY ID 6805 HOLD
+Allzin üzerindeki B Blok Bakery Vişnezade kaydı exact `Vişnezade, Şair Nedim Cd. 35A D:1, 34353 Beşiktaş/İstanbul` adresini ve `0212 258 31 49` telefonunu doğruluyor. Ancak sayfa yalnızca iletişim/çalışma saatlerini gösteriyor; ürün bazlı güncel menü ve fiyat listesi yok. **HOLD**, override eklenmedi.
+
+## COOKIE ME AKARETLER ID 6804 HOLD
+Restoranim ve Menu-TR kayıtları exact `Sinanpaşa, Şair Nedim Cd. No:18, 34353 Beşiktaş/İstanbul` adresini destekliyor; Restoranim `0542 115 49 02` telefonunu da veriyor. Ancak Menu-TR/Restoranim ürün bazlı güncel fiyat menüsü sunmuyor; son bir yılda doğrulanabilir tam tatlı menüsü bulunamadı. **HOLD**, override eklenmedi.
+
+## KASAP LAHMACUN ID 6803 HOLD
+Mekanlar, Cybo ve diğer kayıtlar exact `Adnan Kahveci, Erenler Cd., 34528 Beylikdüzü/İstanbul` adresini ve `0212 999 02 00` telefonunu destekliyor. Resmi kasaplahmacun.com sitesi içerik vermedi; bulunan ürün/fiyat menüsü 2021 tarihli olduğundan bir yıl koşulunu karşılamıyor. **HOLD**, override eklenmedi.
+
+## ÇİĞKÖFTECİ SAİT USTA ID 6802 HOLD
+Menu-TR exact `Çubuklu, Boğaziçi Cd. No:53 D:B, 34805 Beykoz/İstanbul` adresini ve yalnızca genel `1–200 TL` fiyat bandını gösteriyor; Hentzer telefonu doğrulanmadı. Ürün bazlı güncel menü ve fiyat tarihi bulunamadı. **HOLD**, override eklenmedi.
+
+## ROLİK SUSHI BEYLİKDÜZÜ ID 6801 HOLD
+Resmî roliksushi.com/branches exact `Barış, Necip Fazıl Kısakürek Sk. No:3 D, 34520 Beylikdüzü/İstanbul` adresini doğruluyor; ancak Beylikdüzü şubesi telefonunu `0538 799 10 15` olarak veriyor. Hentzer telefonu `0850 305 8504` ile uyuşmadığından zorunlu exact telefon paritesi sağlanmıyor. Güncel menü bulunsa bile override eklenmedi. **HOLD**.
+
+## BALIKÇI KENAN DENİZ CANLILARI MÜZESİ ID 6800 HOLD
+Trip.com, Cybo, Nomatto ve resmi Balıkçı Kenan kayıtları exact `Cumhuriyet, Buse Sk. No:5, 34520 Beylikdüzü/İstanbul` adresini ve `0212 880 95 02` telefonunu destekliyor; ancak kayıt müze/tesis niteliğinde. Restoran ürün-fiyat menüsü ve güncel şube menüsü doğrulanamadı. **HOLD**, override eklenmedi.
+
+## KÖZ DÖNER ID 6799 HOLD
+2026 Instagram/Facebook içerikleri exact `Yakuplu, Hürriyet Blv. No:183, 34524 Beylikdüzü/İstanbul` adresini ve `0212 803 88 36` telefonunu destekliyor; işletme aktif. Yemeksepeti arama sonucu exact işletme/adres ve 24.09.2025 tarihini gösteriyor; ancak doğrudan sayfa 403/Cloudflare koruması döndürdü ve ürün fiyatları okunamadı. Koruma aşılmadı. **HOLD**, override eklenmedi.
+
+## CHINA STIX & SUSHI ID 6798 HOLD
+Wanderlog ve diğer kayıtlar exact `Etiler, Nisbetiye Cd No:63, 34337 Beşiktaş/İstanbul` adresini ve `0212 263 47 48` telefonunu destekliyor. Resmi chinastix.com.tr alan adı Cloudflare 521 sunucu hatası verdi; son bir yılda ürün bazlı güncel fiyatlı menü doğrulanamadı. **HOLD**, override eklenmedi.
+
+## ENDERUN OSMANLI TÜRK MUTFAĞI ID 6797 HOLD
+Resmî menü sayfası exact `Barış Mahallesi, Migros Yanı Total Petrol Arkası, Keleşoğlu Plaza Altı D:16-17, 34520 Beylikdüzü/İstanbul` adresinde çok sayıda ürün adı içeriyor ancak hiçbir ürün fiyatı ve güncelleme tarihi yayınlamıyor. Aynı sayfanın altındaki telefon `0212 879 04 01`; Hentzer `0212 879 04 02` ve iletişim sonucundaki Telefon 2 ile uyuşsa da menü sayfasında birebir değil. Son bir yılda fiyatları doğrulanabilir tam menü bulunamadı. **HOLD**, override eklenmedi.
+
+## HAS SİMİT EVİ ID 6796 HOLD
+Restaurant Guru (11.08.2026 güncelleme) exact `Türkali Ihlamurdere Cad, Hattat Tahsin Sk. No:4 D:A, 34357 Beşiktaş/İstanbul` adresini ve `0212 236 97 86` telefonunu doğruluyor; yalnızca genel `TRY 1–200` kişi başı fiyat aralığı var, ürün bazlı güncel menü yok. **HOLD**, override eklenmedi.
+
+## BURGER YİYELİM BEYKENT ID 6795 HOLD
+Restaurant Guru exact `Cumhuriyet Mahallesi Beykent Sanayi Sitesi D:B1, 2. Blok No:307, 34528 Beylikdüzü/İstanbul` adresini ve `0212 873 48 48` telefonunu doğruluyor; ancak menü 'a year ago' etiketiyle yalnızca Triplex Burger Menü (450 TL) ve Medium Cheese Burger Menü (265 TL) olmak üzere 2 kalem içeriyor. Tarih kesin olmadığı ve tam menü olmadığı için son 12 ay koşulu sağlanamadı. Resmî şubeler sayfası CAPTCHA ile engellendi; koruma aşılmadı. **HOLD**, override eklenmedi.
+
+## SOFYALI ALİ BEŞİKTAŞ ID 6794 ACCEPTED
+Resmî `sofyaliali.com/tr` sitesinin JavaScript veri kaynağında Beşiktaş şubesi exact `Sinanpaşa Mah. Köyiçi Cad. No:3, Beşiktaş / İstanbul` ve telefon `+90 530 929 61 03` olarak doğrulandı; Hentzer kaydıyla birebir eşleşiyor. Aynı resmî kaynakta `Fiyat Değişim Tarihi: 17.02.2026` bilgisi ve 3 menü + 8 tek ürün fiyatı yayınlanıyor. Gıda dışı kalem eklenmedi. **11 ürün override edildi.**

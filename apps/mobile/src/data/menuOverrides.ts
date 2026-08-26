@@ -4,6 +4,25 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6794": {
+    "name": "SOFYALI ALİ BEŞİKTAŞ",
+    "sourceUrl": "https://sofyaliali.com/tr",
+    "sourceName": "Sofyalı Ali resmi sitesi; Beşiktaş şubesi Sinanpaşa Mah. Köyiçi Cad. No:3 ve 17.02.2026 fiyat güncellemesi",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "TENCERE KÖFTE MENÜ", "price": "245 TL", "category": "Menüler" },
+      { "name": "BOL TENCERE KÖFTE MENÜ", "price": "295 TL", "category": "Menüler" },
+      { "name": "HAMBURGER MENÜ", "price": "250 TL", "category": "Menüler" },
+      { "name": "TENCERE KÖFTE (90 GR)", "price": "190 TL", "category": "Tek Ürünler" },
+      { "name": "BOL TENCERE KÖFTE (144 GR)", "price": "245 TL", "category": "Tek Ürünler" },
+      { "name": "HAMBURGER (100 GR)", "price": "200 TL", "category": "Tek Ürünler" },
+      { "name": "AYRAN (170 ML)", "price": "30 TL", "category": "İçecekler" },
+      { "name": "SÜTLAÇ (100 GR)", "price": "45 TL", "category": "Tatlılar" },
+      { "name": "SU (200 ML)", "price": "10 TL", "category": "İçecekler" },
+      { "name": "CİPS (40 GR)", "price": "50 TL", "category": "Yan Ürünler" },
+      { "name": "KOLA / GAZOZ (250 ML)", "price": "45 TL", "category": "İçecekler" }
+    ]
+  },
   "6817": {
     "name": "ROYAL KEBAP ISTANBUL",
     "sourceUrl": "https://royalkebap.tr/index.php/menus/",
