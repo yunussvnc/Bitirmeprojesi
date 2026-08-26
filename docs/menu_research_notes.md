@@ -2611,3 +2611,6 @@ Hentzer kaydı `Türkali Mahallesi Ihlamurdere Caddesi, Mısırlıbahçe Sok. No
 
 ## ENBEY DÖNER CUMHURİYET MAHALLESİ ID 6628 ACCEPTED
 Hentzer kaydı `Cumhuriyet, Çamlık Caddesi Cumhuriyet Caddesi 1 D D:1/5, 34520 Beylikdüzü/İstanbul`, telefon `+90 212 871 24 23`. Enbey resmi şube sayfası Cumhuriyet/Çamlık Caddesi şubesini listeliyor; Yandex ve Yelp exact telefon/adres kaydını destekliyor. Yemeksepeti exact Enbey Döner Beylikdüzü vendorunda canlı fiyatlı menü bulundu; Popüler carousel tekrarları, içecekler ve poşet dışarıda bırakılarak 20 gıda ürünü eklendi.
+
+## MARYCO CAFE RESTAURANT BEYLİKDÜZÜ ID 6627 HOLD
+Hentzer kaydı `Barış Mah., Samsun Cad. B4 blok No:14/4 iç kapı No:14/4, Kır Sok. Makyol Yaşam Sitesi No:85 B4, 34520 Beylikdüzü/İstanbul`, telefon `+90 543 224 06 72`. Telefon Yandex ve Facebook kaynaklarında doğrulanıyor; ancak Yandex adresi Kır Sok. 8, Facebook B4 Blok No:85 ve Hentzer No:14/4 bilgilerini veriyor. Güncel işletme içerikleri mevcut olsa da ürün bazlı, son bir yıl fiyatlı exact menü doğrulanamadı. **Override eklenmedi; strict HOLD.**
