@@ -2846,3 +2846,6 @@ Hentzer `Abbasağa, Salnameci Sk. No:43A, 34353 Beşiktaş`, telefon `+90 535 71
 
 ## BEREKET DÖNER BEYLİKDÜZÜ ADNAN KAHVECİ ID 6550 HOLD
 Hentzer `Adnan Kahveci, Yavuz Sultan Selim Blv. Konut No:53 A İç Kapı No:86`, telefon `+90 212 955 06 64`. Resmi şube sayfası aynı telefonu ancak `No:58/A İç Kapı No:86` adresini veriyor; Yandex 53A’yı ve farklı cep telefonunu listeliyor. Exact adres parity’si bozuk olduğundan **override eklenmedi; strict HOLD.**
+
+## RUMELİ RESTAURANT ID 6549 HOLD
+Hentzer `Vatan, Esenler Cd. No:52, 34035 Bayrampaşa`, telefon `+90 532 557 00 28`. Resmi eatbu/Carrd ve Yandex `No:52/A` ile exact işletmeyi ve telefonu doğruluyor; ancak resmi kaynaklarda ürün bazlı güncel TL fiyatlı menü yok. **Override eklenmedi; strict HOLD.**
