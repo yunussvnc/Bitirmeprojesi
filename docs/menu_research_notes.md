@@ -2446,3 +2446,6 @@ Hentzer kaydı `Yıldırım, Tunaboylu Sok. No:62, 34045 Bayrampaşa/İstanbul`,
 
 ## VONA AKARETLER ID 6683 HOLD
 Hentzer kaydı `Vişnezade, Abacı Latif Sokağı No:2A, 34357 Beşiktaş/İstanbul`, telefon alanı boş. Yandex, Buraya Gidelim ve diğer yerel kaynaklar aynı adresi destekliyor ancak telefon bilgisi yayınlanmıyor. Resmi Instagram’da ürün tanıtımları var fakat son bir yıl içinde doğrulanabilir ürün-fiyat listesi bulunamadı. Exact phone parity ve fiyat şartı sağlanamadığından **override eklenmedi; strict HOLD**.
+
+## NO NAME COFFEE BEŞİKTAŞ ID 6682 HOLD
+Hentzer kaydı `Türkali, Ihlamurdere Cd. No:76/A, 34357 Beşiktaş/İstanbul`, telefon alanı boş. Resmi/işletme kaynakları aynı adresi ve `0212 327 01 00` telefonunu doğruluyor; Yemeksepeti’nde fiyatlı menü de bulunuyor. Ancak Hentzer telefon alanı boş olduğu için zorunlu exact phone parity tamamlanamıyor. **Override eklenmedi; strict HOLD**.
