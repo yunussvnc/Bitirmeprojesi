@@ -2302,3 +2302,6 @@ Hentzer kaydı `Merkez, Fevzi Paşa Cd. No:1 D:1A, 34820 Beykoz/İstanbul`, tele
 
 ## MERHABA PASTANELERİ BEŞİKTAŞ ID 6731 HOLD
 Hentzer kaydı `Türkali, Ihlamurdere Cd. 45/A, 34357 Beşiktaş/İstanbul`, telefon `+90 542 745 83 00`. Yandex ve Yelp aynı Beşiktaş adresini destekliyor ancak sabit telefon `+90 212 236 33 36`; 2026 Yemeksepeti menüsü h269’de fiyatlı ürünler görünse de Hentzer telefonuyla exact phone parity sağlanamadı. **Override eklenmedi; strict HOLD**.
+
+## NEVADA COFFEE BAYRAMPAŞA ID 6730 HOLD
+Hentzer kaydı `Yenidoğan, Numunebağı Cd. Numune Han No:68-70A, 34040 Bayrampaşa/İstanbul`, telefon alanı `null`. Nevada Coffee resmi mağazalar sayfası aynı adresi doğruluyor; canlı Yemeksepeti kaydı güncel fiyatlı ürünler gösteriyor. Ancak Hentzer’de telefon bulunmadığı için zorunlu %100 phone parity sağlanamadı; Yandex sonuçlarında aynı marka için farklı adres/telefon varyantları da mevcut. **Override eklenmedi; strict HOLD**.
