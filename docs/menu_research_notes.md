@@ -2563,3 +2563,6 @@ Hentzer kaydı `Şehit Muhtar Mahallesi, Süslü Saksı Sk. No:14, 34420 Beyoğl
 
 ## NUSR-ET STEAKHOUSE ETİLER ID 6643 ACCEPTED
 Hentzer kaydı `Etiler, Nisbetiye Cd No:87, 34337 Beşiktaş/İstanbul`, telefon `+90 530 919 09 94`. Nusr-Et resmi Etiler sayfası aynı adres ve telefonu, ayrıca bu şubeye bağlı FineDine QR menüsünü doğruluyor. QR menüde `16 Mayıs 2026 tarihinden itibaren uygulanan fiyatlardır` açıklaması yer alıyor; 20 güncel fiyatlı gıda ürünü eklendi.
+
+## NOODLE HOUSE BEŞİKTAŞ ID 6642 ACCEPTED
+Hentzer kaydı `Cihannüma, Akdoğan Sk. No:35, 34353 Beşiktaş/İstanbul`, telefon `+90 212 259 90 10`. Noodle House resmi sitesi aynı Cihannüma/Akdoğan No:35 adresini, telefonunu ve Beşiktaş şubesini doğruluyor; Yandex kaydı aynı işletmeyi `35A` gösteriyor. Resmi canlı menüde restoran/gel-al fiyat modu açık; 20 güncel fiyatlı noodle, ramen, udon ve pirinç çubuğu ürünü eklendi.

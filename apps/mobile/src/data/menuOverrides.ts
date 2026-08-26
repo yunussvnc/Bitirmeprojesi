@@ -90804,5 +90804,33 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Nusr-Et Burger", "price": "1150-1900 TL", "category": "Burgerler" },
       { "name": "Havuç Dilim Baklava", "price": "750-1500 TL", "category": "Tatlılar" }
     ]
+  },
+  "6642": {
+    "name": "NOODLE HOUSE BEŞİKTAŞ",
+    "sourceUrl": "https://www.noodlehouse.com.tr/menu",
+    "sourceName": "Noodle House resmi canlı menüsü (Restoran/Gel-Al fiyatı); resmi site şube/telefon bilgisi ve Yandex ile exact adres doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Standart Noodle", "price": "259,90 TL", "category": "Noodle" },
+      { "name": "Tavuklu Noodle", "price": "359,90 TL", "category": "Noodle" },
+      { "name": "Sebzeli Noodle", "price": "359,90 TL", "category": "Noodle" },
+      { "name": "Etli Noodle", "price": "449,90 TL", "category": "Noodle" },
+      { "name": "Karidesli Noodle", "price": "429,90 TL", "category": "Noodle" },
+      { "name": "Karışık Noodle", "price": "489,90 TL", "category": "Noodle" },
+      { "name": "Standart Ramen", "price": "339,90 TL", "category": "Fried Ramen" },
+      { "name": "Tavuklu Ramen", "price": "439,90 TL", "category": "Fried Ramen" },
+      { "name": "Sebzeli Ramen", "price": "439,90 TL", "category": "Fried Ramen" },
+      { "name": "Etli Ramen", "price": "529,90 TL", "category": "Fried Ramen" },
+      { "name": "Karidesli Ramen", "price": "509,90 TL", "category": "Fried Ramen" },
+      { "name": "Karışık Ramen", "price": "569,90 TL", "category": "Fried Ramen" },
+      { "name": "Standart Udon", "price": "359,90 TL", "category": "Fried Udon" },
+      { "name": "Tavuklu Udon", "price": "459,90 TL", "category": "Fried Udon" },
+      { "name": "Sebzeli Udon", "price": "459,90 TL", "category": "Fried Udon" },
+      { "name": "Etli Udon", "price": "549,90 TL", "category": "Fried Udon" },
+      { "name": "Karidesli Udon", "price": "529,90 TL", "category": "Fried Udon" },
+      { "name": "Karışık Udon", "price": "589,90 TL", "category": "Fried Udon" },
+      { "name": "Standart İnce Pirinç Çubuğu", "price": "329,90 TL", "category": "Pirinç Çubuğu" },
+      { "name": "Tavuklu İnce Pirinç Çubuğu", "price": "429,90 TL", "category": "Pirinç Çubuğu" }
+    ]
   }
 };
