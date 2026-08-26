@@ -2314,3 +2314,6 @@ Hentzer kaydı `Barış, E-5 Yanyolu Westside 2 K Blok No:28/3, 34520 Beylikdüz
 
 ## BYPIECAKES PASTA & TATLI BAYRAMPAŞA ID 6727 HOLD
 Hentzer kaydı `Yıldırım, Bosna Sk No:3/A, 34150 Bayrampaşa/İstanbul`, telefon alanı `null`. Bulunan Piecakes resmi/Restajet/Yemeksepeti menü kaynakları farklı şubeyi, `Muratpaşa Mah. Kamil Cad. 10. Sokak No:29/A` ve `+90 850 302 99 20` telefonu gösteriyor; Hentzer No:3/A ile exact adres/telefon parity yok. **Override eklenmedi; strict HOLD**.
+
+## BEYKOZ SEMT PAZARI ID 6726 HOLD
+Hentzer kaydı `Yalıköy, Doğu Kapısı Cd. No:1, 34820 Beykoz/İstanbul`, telefon alanı `null`. Ticaret Bakanlığı Hal Kayıt Sistemi ve Waze bu konumu Yalıköy/Beykoz **semt pazarı** olarak doğruluyor; restoran veya tekil yiyecek işletmesi değil. Telefon ve fiyatlı restoran menüsü bulunmadığı gibi pazar alanı menü override kapsamına girmiyor. **Override eklenmedi; strict HOLD**.
