@@ -3147,3 +3147,6 @@ Yandex/İstanbul Servis Listesi Hentzer telefonunu `+90 501 012 15 60` destekliy
 
 ## DÜRÜM BISTRO ID 6457 HOLD
 Maptons/resmi eatbu/Tripadvisor ve yerel kaynaklar Hentzer ile exact `Tomtom, Eski Çiçekçi Sk. 36/A, 34433 Beyoğlu/İstanbul` ve `+90 212 243 44 51` parity’sini destekliyor; Tripadvisor kapı ekini 36/A2 gösteriyor. Exact Migros vendorunda ürün açıklamaları var ancak ürün TL fiyatları yayımlanmıyor; 20 güncel fiyatlı ürün doğrulanamadı. **Override eklenmedi; strict HOLD.**
+
+## DAS HAUS DES DÖNERS ID 6456 HOLD
+Resmi dashausdesdoners.com.tr sitesi Hentzer ile exact `Sinanpaşa, Şht. Asım Cd. İş Hanı No:32/A, 34353 Beşiktaş/İstanbul` ve `+90 532 157 75 22` parity’sini doğruluyor. Resmi ürün sayfasında fiyat yok; exact Yemeksepeti mgtw vendoru şube adresini gösterse de CAPTCHA nedeniyle güncel ürün fiyatları alınamadı. 20 fiyatlı gıda ürünü doğrulanamadı. **Override eklenmedi; strict HOLD.**
