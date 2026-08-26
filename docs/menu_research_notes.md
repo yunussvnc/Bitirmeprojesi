@@ -2906,3 +2906,6 @@ Hentzer `Kavacık, Fatih Sultan Mehmet Cd. No:9-A, 34810 Beykoz`, telefon `+90 2
 ## MAHAL MEZE & MEYHANE ID 6533 ACCEPTED
 Hentzer `Vişnezade, Şair Nedim Cd. No:81/A, 34357 Beşiktaş/İstanbul`, telefon `+90 536 313 15 25`. Resmi Instagram `@mahal.besiktas` 12.08.2026 tarihli paylaşımında aynı adres/telefonla kişi başı 1.900 TL fix menüyü yayımlıyor; Facebook, Apple Maps ve Bulurum exact şubeyi destekliyor. Erişilebilir kaynakta ürün detayları tek tek listelenmediği için yalnızca doğrulanabilen 1 fix menü kalemi eklendi. **Override kabul edildi.**
 Kaynak: https://www.instagram.com/mahal.besiktas/p/Db8QISUsKL8/
+
+## CİHAN PASTA CAFE ID 6532 HOLD
+Hentzer `Yıldız, Gayrettepe, Jandarma Mektebi Sk. No:7, 34353 Beşiktaş`, telefon `+90 212 260 75 69`. Resmi Cihan Pastaneleri sitesi/Yandex exact şube ve telefonu doğruluyor; ancak Yemeksepeti exact vendor sayfası güvenlik doğrulamasıyla engellendi ve 20 güncel ürün fiyatı doğrulanamadı. **Override eklenmedi; strict HOLD.**
