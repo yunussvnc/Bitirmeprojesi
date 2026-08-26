@@ -2208,3 +2208,6 @@ Hentzer kaydı `Poyrazköy, Mendirek Yolu No:14 D:1A, 34829 Beykoz/İstanbul`, t
 
 ## ZAITOUNE BEYLİKDÜZÜ ID 6761 HOLD
 Hentzer kaydı `Cumhuriyet, Şehitler Cd. No:13 D:21, 34515 Beylikdüzü/İstanbul`, telefon `+90 530 342 37 80`. Waze, Kaçıyor ve eski Zaitoune işletme paylaşımları adres/telefonu destekliyor; ancak bazı eski kaynaklarda aynı işletme için A Blok/Dükkan 117 varyantı bulunuyor. Resmi `zaitoune.co` sitesi marka/ürün kategorilerini gösteriyor fakat dinamik ürün fiyatları erişilebilir metinde yüklenmedi. Son bir yıl içinde exact şube için doğrulanabilir fiyatlı menü bulunamadığından **override eklenmedi; strict HOLD**.
+
+## PREGIO PIZZA BEYKOZ ID 6760 HOLD
+Hentzer kaydı `Göztepe, Palmiye Cd. No:14, 34815 Beykoz/İstanbul`, telefon `+90 216 465 01 08`. Yandex aynı No:14 adresini, X hesabı Göksu Evleri Palmiye Cad. B24/No:14 bilgisini, Bulurum ise 30/A adresini veriyor; telefon eşleşse de %100 exact kapı/bağımsız birim parity sağlanamadı. Resmi görünen `pregiopizza.com` farklı ülke/şehirdeki zincire ait; son bir yıl içinde İstanbul şubesine ait doğrulanabilir fiyatlı menü bulunamadı. **Override eklenmedi; strict HOLD**.
