@@ -2768,3 +2768,6 @@ Hentzer kaydı `Yakuplu, Kavaklı Cd. 1/A, 34150 Beylikdüzü/İstanbul`, telefo
 
 ## ALTIN EKMEK VE PASTA KAVACIK ID 6576
 Hentzer kaydı `Kavacık, Orhan Veli Kanık Cd. 48A, 34810 Beykoz/İstanbul`, telefon `+90 216 331 22 97`. Restoranim ve Yandex exact adres/telefonu doğruluyor. Canlı Yemeksepeti Altın Ekmek menüsünden 20 benzersiz pasta, kahvaltılık, ekmek ve fırın ürünü seçildi; Popüler carousel tekrarları, içecekler ve tekrar ürünler hariç tutuldu. **Override kabul edildi; 20 ürün.** Kaynaklar: https://www.yemeksepeti.com/en/restaurant/ppw5/altin-ekmek ; https://restoranim.net/istanbul/beykoz/firin/altin-ekmek-ve-pasta ; https://yandex.com.tr/maps/org/altin_ekmek/1022763663/
+
+## GÜNGÖR CAFE PATISSERIE TERAZİDERE ID 6575 HOLD
+Hentzer kaydı `Terazidere Mahallesi Manastır Caddesi, Karasu Sk. No:27, 34035 Bayrampaşa/İstanbul`, telefon `+90 212 613 68 07`. Yandex, Yelp, Facebook ve Bulurum exact adres/telefonu doğruluyor; resmi Güngör Pastaneleri sitesi mevcut durumda bakım sayfasında ve menü yayımlamıyor. Mekan profillerinde menü kategorileri bulunsa da son bir yıl içinde ürün bazlı, doğrulanabilir fiyatlı exact şube menüsü bulunamadı. **Override eklenmedi; strict HOLD.**
