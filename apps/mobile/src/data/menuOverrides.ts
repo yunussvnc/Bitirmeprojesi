@@ -91652,6 +91652,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Çilekli Frappe", "price": "144 TL", "category": "Soğuk İçecekler" }
     ]
   },
+  "6483": {
+    "name": "Kovan Firin",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/k5cm/kovan-firin-k5cm",
+    "sourceName": "Güncel Yemeksepeti exact Kovan Fırın menüsü; Snapchat/Cybo/Haritane/Restoranim ile Sinanpaşa Beşiktaş Cd. No:27 ve +90 212 258 36 43 parity doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Kahvaltı Tabağı", "price": "675 TL", "category": "Kahvaltılıklar" },
+      { "name": "Sebzeli Pizza", "price": "215 TL", "category": "Kahvaltılıklar" },
+      { "name": "Bal & Tereyağı", "price": "235 TL", "category": "Kahvaltılıklar" },
+      { "name": "Domates & Salatalık Söğüş", "price": "120 TL", "category": "Kahvaltılıklar" },
+      { "name": "Zeytin", "price": "120 TL", "category": "Kahvaltılıklar" },
+      { "name": "Üçgen Peynir", "price": "55 TL", "category": "Kahvaltılıklar" },
+      { "name": "Sahanda Yumurta", "price": "250 TL", "category": "Kahvaltılıklar" },
+      { "name": "Kavurmalı Yumurta", "price": "540 TL", "category": "Kahvaltılıklar" },
+      { "name": "Sucuklu Yumurta", "price": "400 TL", "category": "Kahvaltılıklar" },
+      { "name": "Peynirli Yumurta", "price": "335 TL", "category": "Kahvaltılıklar" },
+      { "name": "Menemen", "price": "330 TL", "category": "Kahvaltılıklar" },
+      { "name": "Sucuklu Menemen", "price": "445 TL", "category": "Kahvaltılıklar" },
+      { "name": "Kavurmalı Menemen", "price": "565 TL", "category": "Kahvaltılıklar" },
+      { "name": "Kaşarlı Menemen", "price": "445 TL", "category": "Kahvaltılıklar" },
+      { "name": "Karışık Menemen", "price": "565 TL", "category": "Kahvaltılıklar" },
+      { "name": "Omlet", "price": "325 TL", "category": "Kahvaltılıklar" },
+      { "name": "Peynirli Omlet", "price": "400 TL", "category": "Kahvaltılıklar" },
+      { "name": "Kaşarlı Omlet", "price": "400 TL", "category": "Kahvaltılıklar" },
+      { "name": "Sucuklu Omlet", "price": "445 TL", "category": "Kahvaltılıklar" },
+      { "name": "Karışık Omlet", "price": "525 TL", "category": "Kahvaltılıklar" }
+    ]
+  },
   "6486": {
     "name": "OTTO makarna",
     "sourceUrl": "https://ottomakarna.com/el-yapimi-makarna-menusu/",

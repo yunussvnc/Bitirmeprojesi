@@ -3062,3 +3062,7 @@ Resmi Carbonara iletişim sayfası Hentzer ile exact `Gayrettepe, Vefabey Sokağ
 
 ## CAFE ARA ID 6484 HOLD
 Hentzer telefon `+90 212 245 41 05`; resmi Kafe Ara dinamik sayfası ise `+90 212 245 65 65` veriyor. Adres benzer olsa da zorunlu %100 phone parity sağlanamadı. **Override eklenmedi; strict HOLD.**
+
+## KOVAN FIRIN ID 6483 ACCEPTED
+Hentzer `Sinanpaşa, Beşiktaş Cd. No:27, 34353 Beşiktaş/İstanbul`, telefon `+90 212 258 36 43`. Snapchat, Cybo, Haritane ve Restoranim exact adres/telefon parity’sini doğruluyor. Yemeksepeti exact vendorunda güncel fiyatlı kahvaltı ürünlerinden 20 benzersiz gıda kalemi eklendi. **Override kabul edildi.**
+Kaynaklar: https://www.yemeksepeti.com/restaurant/k5cm/kovan-firin-k5cm ; https://restoranim.net/istanbul/besiktas/kahvaltici/kovan-firin ; https://haritane.com/kovan-firin-detay814450/ ; https://www.snapchat.com/place/kovan-firin/8cf250d0-9995-11e8-939c-af76e52c8751
