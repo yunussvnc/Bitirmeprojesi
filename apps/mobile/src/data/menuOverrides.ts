@@ -4,6 +4,33 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6898": {
+    "name": "FARIBO FOCACCIA & SCHIACCIATA SANDVİÇ",
+    "sourceUrl": "https://www.migros.com.tr/yemek/faribo-focaccia-schiacciata-sandvic-besiktas-turkali-mah-st-31d8f",
+    "sourceName": "Migros Yemek canlı menüsü; Restoranim exact `Şair Nedim Cd. No:66/A` / `0541 620 16 95` kaydıyla eşleşiyor",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Klasik Dana Jambon", "price": "470 TL", "category": "Klasik Sandviçler" },
+      { "name": "Akdenizli Hindi", "price": "470 TL", "category": "Klasik Sandviçler" },
+      { "name": "3 Peynir & Zeytin", "price": "400 TL", "category": "Klasik Sandviçler" },
+      { "name": "Roastbeef Trüf", "price": "650 TL", "category": "Gurme Sandviçler" },
+      { "name": "Mortadella & Antep Fıstığı", "price": "650 TL", "category": "Gurme Sandviçler" },
+      { "name": "Acılı Roastbeef", "price": "680 TL", "category": "Gurme Sandviçler" },
+      { "name": "Caprese Focaccia", "price": "400 TL", "category": "Vejetaryen Sandviçler" },
+      { "name": "Egeli", "price": "400 TL", "category": "Vegan Sandviçler" },
+      { "name": "Dolce Focaccia", "price": "390 TL", "category": "Tatlı Sandviçler" },
+      { "name": "Banana & Nutella", "price": "370 TL", "category": "Tatlı Sandviçler" },
+      { "name": "Nutella & Antep Fıstığı", "price": "380 TL", "category": "Tatlı Sandviçler" },
+      { "name": "Karışık Et Şarküteri Tabağı", "price": "1300 TL", "category": "Şarküteri Tabağı" },
+      { "name": "Sıkma Portakal Suyu 250Ml", "price": "180 TL", "category": "Soğuk İçecekler" },
+      { "name": "Kola", "price": "85 TL", "category": "Soğuk İçecekler" },
+      { "name": "Light Kola", "price": "85 TL", "category": "Soğuk İçecekler" },
+      { "name": "Fanta", "price": "85 TL", "category": "Soğuk İçecekler" },
+      { "name": "Sprite", "price": "85 TL", "category": "Soğuk İçecekler" },
+      { "name": "Ayran", "price": "70 TL", "category": "Soğuk İçecekler" },
+      { "name": "Su", "price": "40 TL", "category": "Soğuk İçecekler" }
+    ]
+  },
   "6909": {
     "name": "YAŞAM VADİSİ NOSTALJİ CAFE",
     "sourceUrl": "https://karekodrestaurantmenu.com/menu/20716",

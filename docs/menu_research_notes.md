@@ -1770,3 +1770,36 @@ Hentzer kaydı `Kavacık, Fatih Sultan Mehmet Cd. No:24/1, 34810 Beykoz/İstanbu
 
 ## YAŞAM VADİSİ NOSTALJİ CAFE BEYLİKDÜZÜ ID 6909 kabulü
 Hentzer kaydı `Adnan Kahveci, Buse Sk. D:8/9 a kadar, 34500 Beylikdüzü/İstanbul`, `+90 554 797 56 49`; resmi Karekod Restaurant Menu iletişim sayfası aynı adres ve telefonu doğruluyor, Restoranim ve resmi Instagram 2025-2026 faal işletmeyi destekliyor. Resmi QR menüde 26.08.2026 tarihinde 39 benzersiz yiyecek, sıcak/soğuk içecek ve tatlı fiyatı görüldü. Ayrıca resmi Instagram’ın 12.07.2026 paylaşımı QR menüdeki bazı fiyatları bağımsız olarak destekliyor. **Override kabul edildi.**
+
+## STAR ŞEF VAN KAHVALTISI & KOVADA WAFFLE ID 6908 HOLD
+Hentzer adres/telefonu Barış, Enver Adakan Cd. Westside 1 5/10 dükkan 8, Beylikdüzü / +90 212 803 35 65 ile Yemeksepeti ve resmi sosyal içeriklerde eşleşiyor. Ancak 26.08.2026 canlı Yemeksepeti sayfası **CLOSED** ve yalnızca tek ürün (`Kovada Waffle`, 288 TL indirimli / 360 TL normal) gösteriyor; tam kahvaltı menüsü yok. 2026 tarihli resmi sosyal paylaşımlardaki 199–200 TL kampanya fiyatları tam menü yerine geçmediği için strict policy gereği **HOLD**, override eklenmedi.
+
+## GÜMÜŞSUYU RESTORAN ID 6907 HOLD
+Telefon `444 6 661` resmi Beykoz Belediyesi kaydıyla eşleşiyor; fakat Hentzer adresi Kelle İbrahim Cd. No:34 iken resmi belediye sayfası No:43 gösteriyor. Resmi menü bağlantısı mevcut olsa da strict exact branch policy gereği adres uyuşmazlığı nedeniyle **HOLD**, override eklenmedi.
+
+## BANYAN RESTAURANT ID 6906 HOLD
+Resmi Banyan sitesi `+90 212 259 90 60` telefonunu exact eşleştiriyor; ancak menü sayfasındaki fiyat görselleri 2023/10–2023/12 tarihli ve sayfada güncel fiyat metni yok. Son bir yıl şartı doğrulanamadığı için **HOLD**, override eklenmedi.
+
+## DUSİKO ESKİ NESİL ID 6905 HOLD
+Hentzer adres/telefonu resmi sosyal içerikler ve Yemeksepeti kaydıyla eşleşiyor. Yemeksepeti geniş, fiyatlı menü gösterse de 26.08.2026 taramasında vendor **CLOSED**; Menum.co fiyat metni sunmuyor ve görsel tarihleri 2024/07. Strict policy gereği **HOLD**, override eklenmedi.
+
+## SARIGÜL KÖFTE SALONU ID 6904 HOLD
+Adres No:14 ve faal işletme sosyal kaynaklarla destekleniyor; ancak Restaurant Guru’nun 4 ay önce eklenen menü kaydı Hentzer’den farklı `+90 535 739 50 18` telefonunu veriyor (Hentzer: `+90 534 849 59 57`) ve fiyatlar metin olarak doğrulanamadı. Strict exact business/branch policy gereği **HOLD**, override eklenmedi.
+
+## COFFEE CO. / NY ID 6903 HOLD
+Resmi eatbu sayfası Coffee Co NY ve Ihlamurdere Caddesi 70 konumunu; üçüncü taraf kaynaklar D:B ve `+90 212 327 27 78` telefonunu destekliyor. Ancak resmi sayfada ürün/fiyat listesi yok; son bir yılda doğrulanabilir herkese açık fiyat bulunamadığı için **HOLD**, override eklenmedi.
+
+## EMPORIO RISTORANTE AKARETLER SIRA EVLER ID 6902 HOLD
+Resmi Emporio sitesi exact `Vişnezade Mah. Şair Nedim Cd. No:3 Akaretler Beşiktaş / İstanbul` adresini ve `+90 532 287 71 25` telefonunu doğruluyor; 2025–2026 sosyal paylaşımlar faal işletmeyi destekliyor. Ancak genel resmi menü URL’si 26.08.2026 tarihinde 404/“Nothing found” ve erişilebilir son bir yıllık fiyat listesi yok. Strict policy gereği **HOLD**, override eklenmedi.
+
+## ZİRVE CAFE ID 6901 HOLD
+Çubuklu, Polatlı Sk No:21 ve `+90 536 895 53 16` bilgileri birden fazla kaynağa göre exact eşleşiyor; fakat Restaurant Guru kaydı fiyatlı ürün menüsü sunmuyor. Son bir yıl kriteri doğrulanamadığı için **HOLD**, override eklenmedi.
+
+## DENİZ LOKANTASI ID 6900 HOLD
+Adres `Ortaçeşme, Akbaba Cd. 6 1/A` ve telefon `+90 216 323 24 27` birden fazla kaynakla eşleşiyor. Restaurant Guru’da sahibi tarafından bir yıl önce eklenmiş menüde yemek isimleri bulunuyor ancak ürün bazında fiyat yok; yalnızca başka işletme açıklaması içeren kişi başı 699 TL satırı mevcut, eski görsel 4 yıllık. Son bir yıl fiyat şartı güvenilir biçimde sağlanamadığı için **HOLD**, override eklenmedi.
+
+## NARGİLE CAFE ASTERYA ID 6899 HOLD
+Resmi Asterya sitesi Kuloğlu, Ayhan Işık Sk. No:8, 34433 Beyoğlu adresini ve `+90 212 243 68 98` telefonunu exact eşleştiriyor; kahvaltıdan tatlıya geniş ürün adları mevcut. Fakat resmi menüde fiyat yok ve son bir yıl fiyat güncelliği doğrulanamıyor. Strict policy gereği **HOLD**, override eklenmedi.
+
+## FARIBO FOCACCIA & SCHIACCIATA SANDVİÇ ID 6898 kabulü
+Hentzer kaydı `Türkali, Şair Nedim Cd. No:66/A, 34357 Beşiktaş/İstanbul`, `+90 541 620 16 95`; Migros Yemek canlı vendor başlığı aynı şubeyi doğruluyor, Restoranim kaydı adres ve telefonu exact eşleştiriyor. 26.08.2026 tarihinde Migros Yemek’te 19 benzersiz sandviç, şarküteri, tatlı sandviç ve soğuk içecek kaleminin güncel fiyatı doğrulandı. **Override kabul edildi.**
