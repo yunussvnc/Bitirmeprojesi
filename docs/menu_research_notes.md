@@ -2816,3 +2816,6 @@ Hentzer kaydı `Türkali, Nüzhetiye Karakolu Sok. No:3, 34357 Beşiktaş/İstan
 
 ## THE GARNET CAFE BEYLİKDÜZÜ ID 6560 HOLD
 Hentzer kaydı `Marmara, Hürriyet Blv. No:116, 34524 Beylikdüzü/İstanbul`; telefon alanı boş. Restoranim exact adresi doğruluyor ancak telefon yok; resmi Facebook `+90 532 407 86 00`, Restaurantguru farklı telefon veriyor. Son bir yıl exact şubeye ait doğrulanabilir TL fiyatlı menü de bulunamadı. **Override eklenmedi; strict HOLD.**
+
+## BEŞİKTAŞ LEZİDEN BALIK ID 6559 HOLD
+Hentzer kaydı `Sinanpaşa, Ortabahçe Cd. No:17, 34353 Beşiktaş/İstanbul`, telefon `+90 540 534 01 01`. Resmi Instagram ve Yandex exact işletme/telefon/adresi doğruluyor. 2025–2026 sosyal paylaşımları ürünleri gösteriyor ancak ürün bazlı TL fiyatlı menü bulunamadı; PRAYS yalnızca kişi başı fiyat aralığı veriyor. **Override eklenmedi; strict HOLD.**
