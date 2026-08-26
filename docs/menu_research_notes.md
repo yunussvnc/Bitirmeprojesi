@@ -3098,3 +3098,6 @@ Kaynaklar: https://www.yemeksepeti.com/restaurant/oq1d/spesiyal-balik ; https://
 
 ## BEŞİKTAŞ BAZAAR CAFE ID 6473 HOLD
 Waze ve Wanderlog Hentzer ile exact `Mecidiye Mah., Barbaros Blv., 34353 Beşiktaş/İstanbul` ve `+90 212 367 81 56` parity’sini doğruluyor. Ancak exact şubeye ait son bir yıl fiyatlı 20 ürün menüsü bulunamadı; **override eklenmedi, strict HOLD.**
+
+## SEMT OCAKBAŞI ID 6472 HOLD
+Hentzer No:18 adresini Yandex/Cybo/yerel dizinler destekliyor; Facebook No:7 vererek adres parity’sinde çelişki oluşturuyor. Aktif fiyatlı menü de bulunamadı. **Override eklenmedi; strict HOLD.**
