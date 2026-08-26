@@ -2311,3 +2311,6 @@ Hentzer kaydı `Adnan Kahveci, Erenler Cd. No:18 D:5, 34528 Beylikdüzü/İstanb
 
 ## UN SANATI BEYLİKDÜZÜ ID 6728 HOLD
 Hentzer kaydı `Barış, E-5 Yanyolu Westside 2 K Blok No:28/3, 34520 Beylikdüzü/İstanbul`, telefon `+90 552 233 27 37`. 26.06.2026 açılışlı Beylikdüzü şubesi sosyal içeriklerle desteklense de resmi Un Sanatı iletişim/Instagram kaynakları Beylikdüzü için `+90 212 655 12 12` veriyor; resmi site ana adresi de farklı şubeleri gösteriyor. Canlı Yemeksepeti sonuçları güncel fiyatlar taşısa da exact Hentzer telefon parity sağlanamadı. **Override eklenmedi; strict HOLD**.
+
+## BYPIECAKES PASTA & TATLI BAYRAMPAŞA ID 6727 HOLD
+Hentzer kaydı `Yıldırım, Bosna Sk No:3/A, 34150 Bayrampaşa/İstanbul`, telefon alanı `null`. Bulunan Piecakes resmi/Restajet/Yemeksepeti menü kaynakları farklı şubeyi, `Muratpaşa Mah. Kamil Cad. 10. Sokak No:29/A` ve `+90 850 302 99 20` telefonu gösteriyor; Hentzer No:3/A ile exact adres/telefon parity yok. **Override eklenmedi; strict HOLD**.
