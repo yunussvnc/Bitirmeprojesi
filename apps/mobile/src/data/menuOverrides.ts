@@ -91007,6 +91007,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "5 Çeşit Meze Menü", "price": "1500 TL", "category": "Özel Menü" }
     ]
   },
+  "6600": {
+    "name": "MERCAN KEBAP SALONU",
+    "sourceUrl": "https://mercankebap.com/menu/menu.pdf",
+    "sourceName": "Mercan Kebap resmi 15.05.2026 tarihli PDF menüsü; Restoranim exact Beşiktaş adres/telefon kaydı",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Adana Kebap (1,5 porsiyon)", "price": "550 TL", "category": "Kebaplar" },
+      { "name": "Urfa Kebap (1,5 porsiyon)", "price": "550 TL", "category": "Kebaplar" },
+      { "name": "Beyti Sarma (1,5 porsiyon)", "price": "600 TL", "category": "Kebaplar" },
+      { "name": "Alinazik (200 gr)", "price": "840 TL", "category": "Kebaplar" },
+      { "name": "Altı Ezmeli (200 gr)", "price": "680 TL", "category": "Kebaplar" },
+      { "name": "Fıstıklı Kebap (1,5 porsiyon)", "price": "680 TL", "category": "Kebaplar" },
+      { "name": "Tavuk Şiş (200 gr)", "price": "480 TL", "category": "Izgaralar" },
+      { "name": "Tavuk Kanat", "price": "550 TL", "category": "Izgaralar" },
+      { "name": "Kuzu Şiş (200 gr)", "price": "790 TL", "category": "Izgaralar" },
+      { "name": "Ciğer (200 gr)", "price": "550 TL", "category": "Izgaralar" },
+      { "name": "Kilis Tava", "price": "720 TL", "category": "Tavalar" },
+      { "name": "Dana Kuşbaşı Tava", "price": "770 TL", "category": "Tavalar" },
+      { "name": "Kuzu Tandır", "price": "860 TL", "category": "Tavalar" },
+      { "name": "Kaşarlı Köfte Tava", "price": "690 TL", "category": "Tavalar" },
+      { "name": "Sade Döner (170 gr)", "price": "550 TL", "category": "Dönerler" },
+      { "name": "İskender (170 gr)", "price": "600 TL", "category": "Dönerler" },
+      { "name": "Dürüm Döner (170 gr)", "price": "400 TL", "category": "Dönerler" },
+      { "name": "Kıymalı Pide", "price": "380 TL", "category": "Pideler" },
+      { "name": "Kaşarlı Pide", "price": "380 TL", "category": "Pideler" },
+      { "name": "Lahmacun", "price": "170 TL", "category": "Lahmacunlar" }
+    ]
+  },
   "6601": {
     "name": "BIGPATIBURGER HAYVAN DOSTU BİR MEKAN",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/uac7/big-pati-burger",

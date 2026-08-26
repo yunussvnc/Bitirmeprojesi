@@ -2692,3 +2692,6 @@ Hentzer kaydı `İncirköy, Çukur Çayır Cd. No:7/C, 34800 Beykoz/İstanbul`, 
 
 ## BIGPATIBURGER HAYVAN DOSTU BİR MEKAN ID 6601
 Hentzer kaydı `Cihannüma, Yıldız Cd. No:40/C, 34000 Beşiktaş/İstanbul`, telefon `+90 212 227 33 53`. Tümİşyeri exact isim, adres ve telefonu aynen doğruluyor. Canlı Yemeksepeti `Big Pati Burger (uac7)` menüsünden 18 benzersiz gıda ürünü seçildi; indirimli fiyatlar kullanıldı, içecek/poşet ve carousel tekrarları hariç tutuldu. **Override kabul edildi; 18 ürün.** Kaynaklar: https://www.yemeksepeti.com/en/restaurant/uac7/big-pati-burger ; https://www.tumisyeri.com/bigpatiburger-hayvan-dostu-bir-mekan-0212-227-33-53
+
+## MERCAN KEBAP SALONU ID 6600
+Hentzer kaydı `Vişnezade, Şair Nedim Cd. 65/A, 34357 Beşiktaş/İstanbul`, telefon `+90 212 259 38 99`. Restoranim.net exact Beşiktaş kaydı aynı adres ve telefonu doğruluyor; Yandex/Instagram lokasyon sonuçları da 65/A ve aynı telefonu destekliyor. Mercan Kebap resmi PDF menüsü `MENÜ GÜNCELLEME TARİHİ 15.05.2026` ibaresini taşıyor; 20 gıda ürünü seçildi. **Override kabul edildi; 20 ürün.** Kaynaklar: https://mercankebap.com/menu/menu.pdf ; https://restoranim.net/istanbul/besiktas/kebapci/mercan-kebap-besiktas
