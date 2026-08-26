@@ -2136,3 +2136,6 @@ Hentzer kaydı `Orta, Adalet Sk. 7/A, 34030 Bayrampaşa/İstanbul`, telefon `+90
 
 ## HERKES BALIK YİYECEK - BEYLİKDÜZÜ ŞUBE ID 6785 ACCEPTED
 Hentzer kaydı `Kavaklı, Göktürkler Sk. No:3 D:1, 34520 Beylikdüzü/İstanbul`, telefon `+90 212 875 90 08`. İşletmenin resmi sitesi ve Instagram profili Beylikdüzü şubesini, Demir Country/Balıkçılar Çarşısı konumunu ve aynı telefonu destekliyor. 2026 tarihli resmi Instagram kampanya paylaşımında Beylikdüzü şubesine özel gel-al fiyatı `Çipura 299 TL/kg` olarak yayınlandı. Yalnızca bu exact-branch ve son bir yıl şartlarını karşılayan gıda kalemi eklendi; genel veya başka şube fiyatları eklenmedi. **1 ürün override edildi.**
+
+## SANDRO COFFEE FABRIC ID 6784 HOLD
+Hentzer kaydı `Kocatepe, Avasköy Yolu Cd. 77/A, 34045 Bayrampaşa/İstanbul`, telefon `+90 554 610 93 61`. Yandex ve işletmenin Instagram sonucu aynı adres/telefonu destekliyor; Apple Maps’te adres 73A olarak farklı geçiyor. Resmi `menu.sandrocoffee.com` menü kategorilerini gösteriyor ancak erişilebilir içerikte ürün fiyatları yer almıyor. Bu nedenle son bir yıl içinde fiyatı doğrulanabilir exact-branch ürün listesi bulunamadığı için **override eklenmedi; strict HOLD**.
