@@ -61,6 +61,10 @@ class Settings(BaseSettings):
     RAG_USE_LLM_GENERATOR: bool = False
     RAG_USE_LLM_RERANK: bool = False  # Groq API çağrısı gerçek gecikme/maliyet ekler — varsayılan kapalı
 
+    # Debug chat UI (chat_ui.html) — internal servis herkese açık bir sayfa göstermemeli,
+    # varsayılan kapalı. Lokalde denemek için .env'e ENABLE_CHAT_UI=true ekleyin.
+    ENABLE_CHAT_UI: bool = False
+
     # Hybrid Search (BM25 + Dense) ve Query Rewriting Ayarları
     HYBRID_SEARCH_ENABLED: bool = False  # varsayılan kapalı — kademeli rollout.
     # Not: BM25 indeksi Qdrant'ın aksine kalıcı değil (bellek içi) — bu yüzden

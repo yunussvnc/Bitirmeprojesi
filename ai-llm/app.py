@@ -1214,7 +1214,7 @@ def parse_natural_query(query: str) -> Dict:
     mood_map = {
         'yorgun':    ['yorgun', 'yoruğum', 'bitik', 'dinlenmek', 'dinginlik', 'stresliyim'],
         'mutlu':     ['mutlu', 'kutlama', 'kutlamak', 'eğlence', 'eğlenmek', 'parti'],
-        'romantik':  ['romantik', 'sevgili', 'sevgilimle', 'kız arkadaşımla', 'kız arkadaşım', 'erkek arkadaşımla', 'erkek arkadaşım', 'özel gün', 'yıldönümü', 'evlilik teklifi', 'aşk'],
+        'romantik':  ['romantik', 'sevgili', 'sevgilimle', 'kız arkadaşımla', 'kız arkadaşım', 'erkek arkadaşımla', 'erkek arkadaşım', 'eşimle', 'eşim', 'karımla', 'karım', 'kocamla', 'kocam', 'özel gün', 'yıldönümü', 'evlilik teklifi', 'aşk'],
         'çalışma':  ['müşteri toplantısı', 'iş toplantısı', 'proje', 'online toplantı'],
         'kahvaltı': ['sabah', 'kahvaltı', 'uyandım', 'kahvaltıya', 'serpme'],
     }
@@ -1234,7 +1234,7 @@ def parse_natural_query(query: str) -> Dict:
         'aile':       ['aileyle', 'aile olarak', 'çocuklar', 'aileçe', 'anne baba'],
         'arkadaş':   ['arkadaşlarla', 'grup halinde', 'ekip'],
         'iş':         ['iş yemeği', 'meslektaş', 'patron', 'toplantı sonrası'],
-        'sevgili':    ['sevgilimle', 'sevgiliye', 'çift olarak', 'romantik', 'kız arkadaşımla', 'kız arkadaşım', 'erkek arkadaşımla', 'erkek arkadaşım'],
+        'sevgili':    ['sevgilimle', 'sevgiliye', 'çift olarak', 'romantik', 'kız arkadaşımla', 'kız arkadaşım', 'erkek arkadaşımla', 'erkek arkadaşım', 'eşimle', 'eşim', 'karımla', 'karım', 'kocamla', 'kocam'],
         'kalabalık': ['kalabalık grup', '10 kişi', 'organizasyon', 'toplantı']
     }
     for gtype, keywords in group_keywords.items():
@@ -1724,8 +1724,12 @@ async def _fetch_rag_results(
 @app.get("/", include_in_schema=False)
 @app.get("/ui", include_in_schema=False)
 async def serve_ui():
-    """Chat UI'yi doğrudan backend üzerinden serve et (CORS sorunu olmaz)"""
+    """Chat UI'yi doğrudan backend üzerinden serve et (CORS sorunu olmaz).
+    Bu internal bir AI servisi — debug chat arayüzü herkese açık production'da
+    varsayılan olarak kapalı (ENABLE_CHAT_UI ile açılabilir)."""
     from fastapi.responses import HTMLResponse  # type: ignore[import]
+    if not settings.ENABLE_CHAT_UI:
+        return HTMLResponse("<h1>404 Not Found</h1>", status_code=404)
     ui_path = os.path.join(os.path.dirname(__file__), "chat_ui.html")
     if not os.path.exists(ui_path):
         return HTMLResponse("<h1>chat_ui.html bulunamadı</h1>", status_code=404)
@@ -2535,8 +2539,8 @@ async def rag_search(request: SmartSearchRequest):
     Pure RAG search - Sadece vektör veritabanı araması
     SerpAPI kullanmadan, sadece yerel veritabanından semantik arama yapar
     """
+    response_language = resolve_response_language(request.query, request.language, request.locale)
     try:
-        response_language = resolve_response_language(request.query, request.language, request.locale)
         rag_status = await ensure_rag_ready()
         if not rag_status.get("ready"):
             raise HTTPException(
@@ -2607,7 +2611,14 @@ async def rag_search(request: SmartSearchRequest):
     except Exception as e:
         import traceback
         traceback.print_exc()
-        raise HTTPException(status_code=500, detail=str(e))
+        return {
+            "query": request.query,
+            "found": 0,
+            "recommendations": [],
+            "message": localized("no_vector_match", response_language),
+            "source": "RAG (Vector Database)",
+            "error": True,
+        }
 
 
 async def generate_review_analysis_llm(place_name: str, reviews: List[str], language: str = "tr") -> Dict:
