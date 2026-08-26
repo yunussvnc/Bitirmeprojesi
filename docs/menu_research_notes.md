@@ -2356,3 +2356,6 @@ Hentzer kaydı `Anadolu Kavağı, Yalı Çk. 2 C, 34825 Beykoz/İstanbul`, telef
 
 ## FÜMECİ YUSUF ORTAKÖY ID 6713 ACCEPTED
 Hentzer kaydı `Mecidiye, Eski Bahçe Sk. No:2, 34347 Beşiktaş/İstanbul`, telefon `+90 539 388 36 04`. Fümeci Yusuf resmi Instagram/Facebook kayıtları Ortaköy Merkez Şube’yi aynı Eski Bahçe Sk. No:2 adresiyle doğruluyor; işletmenin resmi mağazası Beşiktaş’a teslimat yaptığını belirtiyor. 26.08.2026 tarihinde resmi online mağazanın güncel fiyat kataloğundan stokta/aktif görünen deniz ürünü, meze, sandviç ve kampanya ürünlerinden 20 benzersiz ürün-fiyat çifti alındı; tükenen ürünler dışarıda bırakıldı. **20 gıda ürünü override edildi.**
+
+## BURGER YİYELİM BEŞİKTAŞ ID 6712 HOLD
+Hentzer kaydı `Cihannüma, Barbaros Blv. No:3, 34353 Beşiktaş/İstanbul`, telefon `+90 212 916 22 88`. Burger Yiyelim resmi şube arama sonucu Barbaros Bulvarı No:3 bilgisini destekliyor ve Yandex aynı telefonu veriyor; ancak Yandex’in aktif mekan adresi `Cihannüma Mah. Salihefendi Aralığı No:6` olarak farklı kapı/adres gösteriyor. Yandex’te iki fiyatlı ürün görünse de zorunlu exact branch adres parity’si sağlanamadığından **override eklenmedi; strict HOLD**.
