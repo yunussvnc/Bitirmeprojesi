@@ -2127,3 +2127,6 @@ Hentzer kaydı `Yeşilyurt Cad. Demir Country Çarşısı H Blok yanı 219 nolu,
 
 ## THE CHURROLL BEŞİKTAŞ ID 6788 HOLD
 Hentzer kaydı `Sinanpaşa, Köşeli Sk. No:2/A, 34353 Beşiktaş/İstanbul`, telefon `+90 531 393 28 44`. Yandex ve eski işletme kayıtları adres/telefonu destekliyor. Ancak fiyatlı Instagram içerikleri Ağustos 2023 tarihli; 2026 tarihli içeriklerde fiyat listesi yok ve bir 2026 paylaşımında `+90 530 382 50 44` farklı telefon görünüyor. Son bir yıl içinde güncel, branch-specific fiyat listesi doğrulanamadığı için **override eklenmedi; strict HOLD**.
+
+## YUSUF USTA BEYOĞLU ID 6787 HOLD
+Hentzer kaydı `Feridiye Caddesi No:7B, Şehit Muhtar, 34421 Beyoğlu/İstanbul`, telefon `+90 552 676 51 34`. Yandex ve Facebook sonuçları Feridiye Caddesi’ndeki Yusuf Usta işletmesini kısmen destekliyor; ancak bulunan fiyatlı Yemeksepeti sonucu farklı bir `Dönerci Yusuf Usta` kaydına ait ve exact adres/telefon eşleşmesi yapılamadı. Resmî/branch-specific, son bir yıl içinde doğrulanabilir fiyatlı menü bulunamadığı için **override eklenmedi; strict HOLD**.
