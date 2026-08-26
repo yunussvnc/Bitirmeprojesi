@@ -2980,3 +2980,7 @@ Hentzer `Ortaköy, Portakal Ykş. Cd. No:2, 34347 Beşiktaş`, telefon `+90 212 
 
 ## ÇAĞDAŞ URFA KEBAP ID 6509 HOLD
 Hentzer `Dikilitaş, Emirhan Cd. No:60 D:B, 34349 Beşiktaş`, telefon `+90 212 227 45 67`. Yandex/Yelp/Bulurum aynı işletmeyi No:60/B ve aynı telefonla destekliyor; ancak son bir yıl exact işletmeye ait ürün bazlı fiyatlı menü bulunamadı. `Urfalı Çağdaş Ocakbaşı` Yemeksepeti sonucu aynı şube olduğu kanıtlanamadığından kullanılmadı. **Override eklenmedi; strict HOLD.**
+
+## SULTANİYE DÖNER KÖFTE ID 6508 ACCEPTED
+Hentzer `Gümüşsuyu, Sultaniye Cd. No:79, 34820 Beykoz/İstanbul`, telefon `+90 546 687 61 93`. Restoranim aynı adres ve telefonu doğruluyor; resmi Instagram hesabı aynı telefonu ve Yemeksepeti/Getir/Trendyol teslimat bağlantılarını yayımlıyor. Güncel Yemeksepeti exact `Sultaniye Döner & Köfte` vendor menüsünden 20 benzersiz gıda ürünü alındı: menüler, çorba, Hatay dürümler ve tavuk dönerler. İçecek, poşet ve tekrar/Popular ürünleri alınmadı. **Override kabul edildi.**
+Kaynaklar: https://www.yemeksepeti.com/restaurant/qz9j/sultaniye-doner-and-kofte ; https://restoranim.net/istanbul/beykoz/restoran/sultaniye-doner-kofte ; https://www.instagram.com/sultaniyedonerkofte/ ; https://yandex.com.tr/maps/org/sultaniye_doner_kofte/190960319406/

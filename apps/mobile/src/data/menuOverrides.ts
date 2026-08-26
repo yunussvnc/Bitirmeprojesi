@@ -91652,6 +91652,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Çilekli Frappe", "price": "144 TL", "category": "Soğuk İçecekler" }
     ]
   },
+  "6508": {
+    "name": "Sultaniye Döner Köfte",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/qz9j/sultaniye-doner-and-kofte",
+    "sourceName": "Güncel Yemeksepeti exact Sultaniye Döner & Köfte menüsü; Restoranim ve Hentzer API ile Gümüşsuyu Sultaniye Cd. No:79 ve 0546 687 61 93 parity doğrulaması; resmi Instagram telefon çapraz kontrolü",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Hatay Usulü Tavuk Döner Dürüm Menü", "price": "250 TL", "category": "Menüler" },
+      { "name": "Bir Kankama Bir Bana", "price": "600 TL", "category": "Menüler" },
+      { "name": "Sultan Tabağı", "price": "600 TL", "category": "Menüler" },
+      { "name": "GÜNÜN ÇORBASI", "price": "200 TL", "category": "Çorbalar" },
+      { "name": "XL Hatay Dürüm", "price": "300 TL", "category": "Hatay Dürümler" },
+      { "name": "Hatay Dürüm Small", "price": "150 TL", "category": "Hatay Dürümler" },
+      { "name": "Hatay Dürüm", "price": "200 TL", "category": "Hatay Dürümler" },
+      { "name": "Hatay Dürüm Large", "price": "230 TL", "category": "Hatay Dürümler" },
+      { "name": "Mega Hatay Tavuk Döner Dürüm", "price": "260 TL", "category": "Hatay Dürümler" },
+      { "name": "Kaşarlı Hatay Dürüm", "price": "290 TL", "category": "Hatay Dürümler" },
+      { "name": "Tavuk Döner", "price": "300 TL", "category": "Tavuk Dönerler" },
+      { "name": "Pilav Üstü Tavuk Döner", "price": "350 TL", "category": "Tavuk Dönerler" },
+      { "name": "Yarım Ekmek Arası Tavuk Döner", "price": "190 TL", "category": "Tavuk Dönerler" },
+      { "name": "Tombik Ekmek Arası Tavuk Döner", "price": "195 TL", "category": "Tavuk Dönerler" },
+      { "name": "Tavuk Döner Dürüm", "price": "230 TL", "category": "Tavuk Dönerler" },
+      { "name": "Tam Ekmek Arası Tavuk Döner", "price": "390 TL", "category": "Tavuk Dönerler" },
+      { "name": "3/4 Ekmek Arası Tavuk Döner", "price": "290 TL", "category": "Tavuk Dönerler" },
+      { "name": "Burger Soslu Tavuk Döner Dürüm", "price": "250 TL", "category": "Tavuk Dönerler" },
+      { "name": "Sultaniye Soslu Yarım Ekmek Arası Tavuk Döner", "price": "200 TL", "category": "Tavuk Dönerler" },
+      { "name": "Sultaniye Soslu Tavuk Döner Dürüm", "price": "230 TL", "category": "Tavuk Dönerler" }
+    ]
+  },
   "6511": {
     "name": "SALT FRIED CHICKEN BEŞİKTAŞ",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/pehr/salt-fried-chicken-pehr",
