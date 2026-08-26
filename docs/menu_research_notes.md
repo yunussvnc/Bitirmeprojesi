@@ -3135,3 +3135,6 @@ Yandex/Bulurum/Meyhankoli ve diğer kaynaklar Hentzer ile exact `Hüseyinağa, B
 ## BETRO BURGER BEŞİKTAŞ ID 6461 ACCEPTED
 Hentzer `Sinanpaşa, Şair Nedim Cd. No:26 A, 34357 Beşiktaş/İstanbul`, telefon `+90 212 258 80 00`. Betro Burger resmi şube sayfası, Waze, Apple Maps ve Instagram exact branch’i doğruluyor. Yemeksepeti djyc vendoru exact Beşiktaş adresini taşıyor; 20 benzersiz burger ve tavuk ürünü eklendi, içecekler ve popüler carousel tekrarları dışlandı. **Override kabul edildi.**
 Kaynaklar: https://betroburger.com/subeler ; https://www.yemeksepeti.com/en/restaurant/djyc/betro-burger-djyc ; https://www.waze.com/live-map/directions/tr/i%CC%87stanbul/betro-burger-besiktas ; https://www.instagram.com/betroburger/
+
+## BEYLİKDÜZÜ MEŞHUR MARAŞ DONDURMACISI / YÖN BAKLAVA ID 6460 HOLD
+Yön Baklava resmi sosyal kaynakları ve Yemeksepeti h35e vendoru Lotus Koru 1/24B şubesini destekliyor; ancak Yandex aynı işletme için No:24A ve farklı `+90 505 347 5880` telefonunu yayımlıyor. Hentzer `+90 537 792 85 96` ile %100 phone parity sağlanamadı ve işletme adı birleşik/ambiguous. **Override eklenmedi; strict HOLD.**
