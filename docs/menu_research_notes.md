@@ -2259,3 +2259,6 @@ Hentzer kaydı `Sinanpaşa, Köyiçi Cd. No:12A, 34330 Beşiktaş/İstanbul`, te
 
 ## ZİYADE FASIL KADIKÖY ID 6744 HOLD
 Hentzer kaydı `Sahrayı Cedit Mahallesi, Göztepe, Batman Sk. No:4/2, 34734 Kadıköy/İstanbul`, telefon `+90 533 293 58 83`. Resmi Ziyade Fasıl sitesi aynı adresi (Kozyatağı Hilton) ve WhatsApp telefonunu doğruluyor; resmi menü sayfasında güncel şef menüsü ve yemek içerikleri mevcut. Ancak fiyat yalnızca “menü tek fiyat” olarak belirtilmiş, rakamsal fiyat yayınlanmamış. Güncel fiyat şartı sağlanamadığından **override eklenmedi; strict HOLD**.
+
+## VEGAN MASA BEŞİKTAŞ ID 6743 ACCEPTED
+Hentzer kaydı `Türkali, Mısırlıbahçe Sok. No:8/A, 34357 Beşiktaş/İstanbul`, telefon `+90 535 278 76 61`. Vegan Masa’nın resmi sitesi/Instagram hesabı Beşiktaş şubesini aynı adres ve telefonla doğruluyor; Kadıköy şubesi ayrı adres/telefon olarak ayrıştırıldı. 26.08.2026 tarihinde canlı Yemeksepeti menüsünde `Vegan Lahmacun — 265 TL`, `Vegan Mantarlı Pide — 595 TL` ve `Vegan Kıymalı Peynirli Pide — 645 TL` görüldü. **3 gıda ürünü override edildi.**

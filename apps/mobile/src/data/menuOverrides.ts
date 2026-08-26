@@ -4,6 +4,17 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6743": {
+    "name": "VEGAN MASA (BEŞİKTAŞ)",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/s48d/vegan-masa-s48d",
+    "sourceName": "Canlı Yemeksepeti menüsü; resmi Vegan Masa sitesi/Instagram ve işletme kaydıyla exact Beşiktaş adres/telefonu doğrulandı",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Vegan Lahmacun", "price": "265 TL", "category": "Pide ve Lahmacun" },
+      { "name": "Vegan Mantarlı Pide", "price": "595 TL", "category": "Pide ve Lahmacun" },
+      { "name": "Vegan Kıymalı Peynirli Pide", "price": "645 TL", "category": "Pide ve Lahmacun" }
+    ]
+  },
   "6746": {
     "name": "SIBELLA CAFE MEZE&PASTA",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/jqe9/sibella-cafe-meze-and-pasta",
