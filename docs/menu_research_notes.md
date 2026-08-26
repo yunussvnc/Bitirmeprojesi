@@ -2118,3 +2118,6 @@ Hentzer kaydı `Sinanpaşa, Çelebi Oğlu Sk. No:6, 34353 Beşiktaş/İstanbul, 
 
 ## HAYRİ USTA OCAKBAŞI BEYLİKDÜZÜ ID 6791 HOLD
 Hentzer kaydı `Adnan Kahveci Mah. Osmanlı Cad, Beyaz Palas Sitesi, Büyükşehir, Beylikdüzü Cd. No:3 No:63, 34528 Beylikdüzü/İstanbul`, telefon `+90 212 743 63 63`. Waze ve işletmenin Facebook sonucu aynı Beykent şubesi ve telefonu destekliyor; ancak Yandex kaydı işletmeyi artık faal değil olarak gösteriyor. Beylikdüzü Instagram hesabındaki menü fiyatları eski ve tarih doğrulaması yetersiz; arama sonuçlarındaki 2026 kampanya fiyatı tam menü/fiyat listesi olarak doğrulanamadı. Güncel, tam ve fiyatlı menü ile faal durum %100 doğrulanamadığı için **override eklenmedi; strict HOLD**.
+
+## DEL PONTE PİZZERİA ID 6790 ACCEPTED
+Hentzer kaydı `Mecidiye, Büyükşekerci Sk. No:44/a, 34347 Beşiktaş/İstanbul`, telefon `+90 539 859 08 93`. Yandex işletme kaydı aynı adres ve telefonla exact eşleşiyor. Del Ponte’nin Ocak 2026 açılış paylaşımı işletmenin Ortaköy/Beşiktaş şubesini destekliyor; canlı Yemeksepeti menüsünde 10 pizza, 2 tatlı ve 8 içecek fiyatı yayınlanıyor. Fiyatlar 26.08.2026 tarihinde canlı menüden doğrulandı ve son bir yıl şartını karşılıyor. **20 ürün override edildi.**

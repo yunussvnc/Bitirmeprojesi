@@ -4,6 +4,34 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6790": {
+    "name": "DEL PONTE PİZZERİA",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/mmpy/del-ponte-pizzeria",
+    "sourceName": "Del Ponte Pizzeria canlı Yemeksepeti menüsü; exact şube adres/telefonu Yandex işletme kaydıyla çapraz doğrulandı",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Margherita Pizza (33 cm.)", "price": "520 TL", "category": "Pizzalar" },
+      { "name": "Portofino Pizza (33 cm.)", "price": "552 TL", "category": "Pizzalar" },
+      { "name": "Funghi Napoli Pizza (33 cm.)", "price": "621,60 TL", "category": "Pizzalar" },
+      { "name": "Quattro Formaggi Napoli Pizza (33 cm.)", "price": "604,80 TL", "category": "Pizzalar" },
+      { "name": "Diavola Napoli Pizza (33 cm)", "price": "666,40 TL", "category": "Pizzalar" },
+      { "name": "Carne Affumicata Napoli Pizza (33 cm.)", "price": "733,60 TL", "category": "Pizzalar" },
+      { "name": "Burrata Pizza", "price": "638,40 TL", "category": "Pizzalar" },
+      { "name": "Massicio Pizza", "price": "817,60 TL", "category": "Pizzalar" },
+      { "name": "Salmone Affumicato Pizza", "price": "952 TL", "category": "Pizzalar" },
+      { "name": "Melanzane Stracciatella Pizza", "price": "638,40 TL", "category": "Pizzalar" },
+      { "name": "Tiramisu", "price": "192 TL", "category": "Tatlılar" },
+      { "name": "Spoonful", "price": "192 TL", "category": "Tatlılar" },
+      { "name": "Coca-Cola (33 cl.)", "price": "80 TL", "category": "İçecekler" },
+      { "name": "Fanta (33 cl.)", "price": "80 TL", "category": "İçecekler" },
+      { "name": "Sprite (33 cl.)", "price": "80 TL", "category": "İçecekler" },
+      { "name": "Lipton Ice Tea (33 cl.)", "price": "80 TL", "category": "İçecekler" },
+      { "name": "Limonata (33 cl.)", "price": "60 TL", "category": "İçecekler" },
+      { "name": "Ayran (28 cl.)", "price": "60 TL", "category": "İçecekler" },
+      { "name": "Uludağ Premium Soda (25 cl.)", "price": "48 TL", "category": "İçecekler" },
+      { "name": "Uludağ Premium Su (40 cl.)", "price": "48 TL", "category": "İçecekler" }
+    ]
+  },
   "6794": {
     "name": "SOFYALI ALİ BEŞİKTAŞ",
     "sourceUrl": "https://sofyaliali.com/tr",
