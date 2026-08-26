@@ -2777,3 +2777,6 @@ Hentzer kaydı `Akat, Yaren Sk. 6/13, 34335 Beşiktaş/İstanbul`, telefon `+90 
 
 ## ADANALI TEKİN USTA KEBAP BEYLİKDÜZÜ ID 6573 HOLD
 Hentzer kaydı `Adnan Kahveci, Avrupa Cd. No:108/36, 34528 Beylikdüzü/İstanbul`, telefon `+90 212 599 01 01`. Restoranim exact adres ve telefonu, resmi Instagram da telefon/işletme kimliğini doğruluyor. Restoranim menü sekmesinde ürün fiyatları yayımlanmıyor; Kaçıyor yalnızca kalori bilgisi veriyor. 2025–2026 sosyal paylaşımları ürün görselleri/işletme tanıtımı içeriyor ancak ürün bazlı fiyat vermiyor. **Override eklenmedi; strict HOLD.**
+
+## YÖREM CAĞ KEBAP KAVACIK ID 6572
+Hentzer kaydı `Kavacık, Cumhuriyet Cd. No:91, 34805 Beykoz/İstanbul`, telefon `+90 216 413 41 32`. Restoranim exact adresi, Instagram ve Bulurum aynı telefonu/işletme kimliğini doğruluyor. Canlı Yemeksepeti exact Yörem Cağ Kebap menüsünden 12 benzersiz gıda ürünü seçildi; içecek, poşet ve Popüler tekrarları hariç tutuldu. **Override kabul edildi; 12 ürün.** Kaynaklar: https://www.yemeksepeti.com/en/restaurant/gmug/yorem-cag-kebap-gmug ; https://restoranim.net/istanbul/beykoz/kebapci/yorem-cag-kebap ; https://www.instagram.com/yoremcagkebap/

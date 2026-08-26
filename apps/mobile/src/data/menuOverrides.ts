@@ -91007,6 +91007,26 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "5 Çeşit Meze Menü", "price": "1500 TL", "category": "Özel Menü" }
     ]
   },
+  "6572": {
+    "name": "YÖREM CAĞ KEBAP KAVACIK",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/gmug/yorem-cag-kebap-gmug",
+    "sourceName": "Canlı Yemeksepeti Yörem Cağ Kebap exact vendor menüsü; Restoranim, Instagram ve Bulurum adres-telefon doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Günün Çorbası", "price": "200 TL", "category": "Çorbalar" },
+      { "name": "Mercimek Çorbası", "price": "200 TL", "category": "Çorbalar" },
+      { "name": "Ayran Aşı Çorbası", "price": "200 TL", "category": "Çorbalar" },
+      { "name": "Cağ Kebabı", "price": "1020 TL", "category": "Kebaplar" },
+      { "name": "Cağ Kebabı Dürüm", "price": "680 TL", "category": "Kebaplar" },
+      { "name": "Patates Kızartması", "price": "100 TL", "category": "Yan Ürünler" },
+      { "name": "Süzme Manda Yoğurdu", "price": "250 TL", "category": "Yan Ürünler" },
+      { "name": "Sütlaç", "price": "250 TL", "category": "Tatlılar" },
+      { "name": "Kadayıf Dolması", "price": "250 TL", "category": "Tatlılar" },
+      { "name": "Et Döner (500 gr.) (Pişirilmiş)", "price": "1750 TL", "category": "Kiloluk Ürünler" },
+      { "name": "Et Döner (1 kg.) (Pişirilmiş)", "price": "3500 TL", "category": "Kiloluk Ürünler" },
+      { "name": "Süzme Manda Yoğurdu (1 kg.)", "price": "700 TL", "category": "Kiloluk Ürünler" }
+    ]
+  },
   "6576": {
     "name": "ALTIN EKMEK VE PASTA KAVACIK",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/ppw5/altin-ekmek",
