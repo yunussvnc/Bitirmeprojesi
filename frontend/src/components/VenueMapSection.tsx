@@ -61,6 +61,7 @@ export default function VenueMapSection() {
   const [selectedPlace, setSelectedPlace] = useState<Venue | null>(null)
   const [locating, setLocating] = useState(false)
   const [locateError, setLocateError] = useState<string | null>(null)
+  const [mapError, setMapError] = useState<string | null>(null)
 
   const toggleCategory = (cat: string) =>
     setActiveCategories((prev) => (prev.includes(cat) ? prev.filter((c) => c !== cat) : [...prev, cat]))
@@ -93,6 +94,14 @@ export default function VenueMapSection() {
     })
     mapRef.current = map
     map.addControl(new maplibregl.NavigationControl({ showCompass: false }), 'top-right')
+
+    // Geçici teşhis: harita canlıda siyah kalıyordu, kök sebep uzaktan (DevTools
+    // olmadan) belirsizdi — gerçek hatayı doğrudan sayfada gösteriyoruz.
+    map.on('error', (e) => {
+      // eslint-disable-next-line no-console
+      console.error('[VenueMapSection] MapLibre hata:', e.error)
+      setMapError(e.error?.message || String(e.error) || 'Bilinmeyen harita hatası')
+    })
 
     map.on('load', () => {
       map.addSource('venues', {
@@ -368,6 +377,7 @@ export default function VenueMapSection() {
               <LocateFixed size={18} />
             </button>
             {locateError && <div className="venue-map-locate-error">{locateError}</div>}
+            {mapError && <div className="venue-map-locate-error">Harita hatası: {mapError}</div>}
             {!loading && filtered.length === 0 && (
               <div className="venue-map-empty">Bu filtreye uygun mekan yok.</div>
             )}
