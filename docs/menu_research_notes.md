@@ -2494,3 +2494,6 @@ Hentzer kaydı `İstinye, Koru Cd. No:3, 34460 Sarıyer/İstanbul`, telefon `+90
 
 ## COFFERS COFFEE BEŞİKTAŞ ID 6667 HOLD
 Hentzer kaydı `Yıldız, Asariye Cd. No:19, 34349 Beşiktaş/İstanbul`, telefon `+90 531 658 67 27`. Tripadvisor/MapQuest adresi No:19’u, Yandex aktif kaydı No:19B’yi gösteriyor; telefon Yandex ile eşleşiyor. Resmi Instagram’da 400 TL etkinlik ücreti görünse de restoran ürün menüsü ve güncel fiyatları exact şube için doğrulanamadı. **Override eklenmedi; strict HOLD**.
+
+## PARK FORA RESTAURANT ORTAKÖY ID 6666 HOLD
+Hentzer kaydı `Ortaköy, Muallim Naci Cd. 54/A, 34347 Beşiktaş/İstanbul`, telefon `+90 212 265 50 63`. Park Fora resmi sitesi, Michelin ve yerel kaynaklar aynı adres/telefonu doğruluyor. Resmi menüde kategori ve ürün başlıkları bulunuyor ancak fiyatlar korunmuş içerik nedeniyle görünmüyor; 2026 fiyat listesi olarak indekslenen alternatif sayfa da ürün-fiyat çifti sunmuyor. **Override eklenmedi; strict HOLD**.
