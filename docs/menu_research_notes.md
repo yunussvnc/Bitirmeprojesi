@@ -2955,3 +2955,6 @@ Hentzer `Sinanpaşa, Şair Veysi Sk. No:23-25/A, 34337 Beşiktaş`, telefon `+90
 
 ## BI KAHVALTI ID 6517 HOLD
 Hentzer `Sinanpaşa Mahallesi Ihlamurdere Cad, Çelebi Oğlu Sk. No:21-23/B, 34353 Beşiktaş`, telefon `+90 212 258 34 23`. Yandex/Apple/Waze/Bulurum exact adres ve telefonu doğruluyor. Yemeksepeti `ccue` vendorunda güncel görünen fiyatlı ürünler var; ancak canlı sayfa CAPTCHA ile engellendi ve vendor exact adres/telefon göstermiyor. 100% exact branch parity bağımsız tamamlanamadığından **override eklenmedi; strict HOLD.**
+
+## QADRAJ BİSTRO ID 6516 HOLD
+Hentzer `Göztepe, 34815 Beykoz`, telefon `+90 216 519 45 48`. Resmi Qadraj iletişim sayfası aynı telefonu ve Göksu Kasrı/Anadolu Hisarı/Göztepe Sokak adresini destekliyor; Yandex 2/4 numarası veriyor. GetirYemek exact Göztepe vendoru güvenlik bulmacasıyla engellendi ve son bir yıl ürün bazlı menü bağımsız doğrulanamadı. **Override eklenmedi; strict HOLD.**
