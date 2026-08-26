@@ -6,6 +6,14 @@ import VenueImage from './VenueImage'
 const FEATURED_COUNT = 9
 const MIN_REVIEWS = 5
 
+// "Bugün Ne Yesem?" başlığı yeme-içme vaadi veriyor — kuaför/manikür gibi
+// alakasız kategoriler foto+yorum kriterini geçse bile listeye girmesin.
+const FOOD_CATEGORIES = new Set([
+  'Kafe', 'Fırın', 'Bar', 'Gece Kulübü', 'Meyhane', 'Deniz Ürünleri',
+  'Pizza', 'Burger', 'Suşi', 'Steakhouse', 'Kahvaltı', 'Tatlıcı',
+  'Türk Mutfağı', 'Restoran',
+])
+
 function priceLabel(n: number) {
   return '₺'.repeat(Math.max(1, Math.min(4, n)))
 }
@@ -14,7 +22,7 @@ export default function PopularVenues() {
   const { venues, loading } = useVenues()
 
   const featured = [...venues]
-    .filter((v) => v.photoUrl && v.reviewCount >= MIN_REVIEWS)
+    .filter((v) => v.photoUrl && v.reviewCount >= MIN_REVIEWS && FOOD_CATEGORIES.has(v.category))
     .sort((a, b) => {
       if (a.photoReliable !== b.photoReliable) return a.photoReliable ? -1 : 1
       return b.averageRating - a.averageRating || b.reviewCount - a.reviewCount

@@ -355,10 +355,24 @@ body::after{right:0;background:linear-gradient(270deg,rgba(16,185,129,0.03),tran
   position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
   background:rgba(2,2,4,.6);color:var(--text-muted);font-size:.85rem;
 }
+.venue-map-empty-static{
+  position:static;padding:3rem 0;border-radius:var(--radius-xl);
+  border:1px solid var(--glass-border);background:var(--glass);
+}
 .venue-map-wrap{
   position:relative;border-radius:var(--radius-xl);overflow:hidden;
   border:1px solid var(--glass-border);box-shadow:0 30px 80px rgba(0,0,0,.5);
   height:600px;
+}
+
+/* ── VENUE GRID (kesif — filtrelenebilir mekan galerisi) ── */
+.venue-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.4rem;
+}
+.venue-grid .venue-card{width:100%}
+.venue-grid-more{display:flex;justify-content:center;margin-top:2.5rem}
+@media(max-width:768px){
+  .venue-grid{grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1rem}
 }
 .venue-map-canvas{position:absolute;inset:0;width:100%;height:100%}
 .venue-map-canvas .maplibregl-ctrl-attrib{display:none}

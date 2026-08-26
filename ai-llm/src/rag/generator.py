@@ -80,7 +80,14 @@ Yanıtı samimi ve kullanıcı dostu bir dille ver. Respond only in {SUPPORTED_L
         
         # Production RAG smoke testleri LLM secret'ına bağlı kalmamalı.
         if settings.RAG_USE_LLM_GENERATOR:
-            response = self.llm.generate(prompt)
+            try:
+                response = self.llm.generate(prompt)
+            except Exception as e:
+                # LLM çağrısı (rate limit, kota, ağ vb.) başarısız olsa bile
+                # retriever'ın zaten bulduğu doğru mekanları kaybetmeyelim —
+                # şablon tabanlı bir açıklamaya düş.
+                logger.warning(f"LLM öneri metni üretilemedi, deterministik özet kullanılıyor: {e}")
+                response = self._build_deterministic_analysis(user_query, retrieved_mekanlar)
         else:
             response = self._build_deterministic_analysis(user_query, retrieved_mekanlar)
         
