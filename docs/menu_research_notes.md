@@ -2235,3 +2235,6 @@ Hentzer kaydı `Büyükşehir, Beylikdüzü Cd. C Blok No:5 Daire:2/A-F, 34520 B
 
 ## THE COFFEE FACTORY BEYLİKDÜZÜ WEST SIDE ID 6752 HOLD
 Hentzer kaydı `Barış Mahallesi Enver Adakan Caddesi No:5 E Blok İşyeri No:17, West Side, Barış, D:1 Sitesi, 34520 Beylikdüzü/İstanbul`, telefon `+90 544 966 98 24`. Adres birçok kaynakta aynı olsa da markanın resmi mağazalar sayfası bu lokasyon için `0505 884 5119` telefonunu veriyor; Yandex de farklı telefonlar listeliyor. Resmi menü sayfasında ürün kategorileri bulunuyor, ancak telefon parity sağlanamadığından güncel fiyatlar exact Hentzer şubesine güvenle bağlanamadı. **Override eklenmedi; strict HOLD**.
+
+## LELAS CAFE RESTAURANT BEYLİKDÜZÜ ID 6751 HOLD
+Hentzer kaydı `Barış Mah. Enver Adakan Cad. Westside 1, Sitesi No:12, 34520 Beylikdüzü/İstanbul`, telefon `+90 212 741 41 35`. 2026 tarihli servis kaydı ve RestaurantGuru aynı adres/telefonu destekliyor; resmi sosyal hesap da telefonu doğruluyor. Ancak erişilebilir fiyatlı menü verisi bulunamadı; bulunan kahvaltı fiyatları 2020’ye ait ve son bir yıl şartını karşılamıyor. Adresin bazı harita sonuçlarında 3/1 varyantı bulunması nedeniyle fiyatlı kaynak ayrıca exact branch’e bağlanamadı. **Override eklenmedi; strict HOLD**.
