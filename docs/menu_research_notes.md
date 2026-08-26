@@ -2593,3 +2593,6 @@ Hentzer kaydı `Cumhuriyet, Cumhuriyet Cd. No:4, 34520 Beylikdüzü/İstanbul`, 
 
 ## KAHVELY BEYLİKDÜZÜ ID 6634 ACCEPTED
 Hentzer kaydı `Barış, E-5 Yanyolu Westside2 sitesi D:28/76, 34000 Beylikdüzü/İstanbul`, telefon `+90 537 639 89 23`. Kahvely’nin resmi Instagram paylaşımı aynı Westside2 D:28/76 adresini gösteriyor; işletme dizinleri aynı adres ve telefonu doğruluyor. Yemeksepeti Kahvely Coffee Shop exact vendorunda 20 güncel fiyatlı tost, kruvasan, tatlı ve sıcak kahve ürünü bulundu; poşet ürünü eklenmedi.
+
+## SCARPETTA ETİLER ID 6633 HOLD
+Hentzer kaydı `Etiler, Dilhayat Sk. No:16, 34337 Beşiktaş/İstanbul`, telefon `+90 533 894 43 43`. Adres üçüncü taraf kaynaklarla destekleniyor ve bazı 2025/2026 sosyal sonuçlarında bu telefon görülüyor; ancak Scarpetta’nın resmi sitesi erişimde telefonunu `+90 212 263 53 53` olarak yayımlıyor. Ayrıca resmi sitede güncel fiyatlı exact şube menüsü bulunamadı; 2026 sosyal menü parçaları tam liste ve şube doğrulaması sağlamıyor. Zorunlu %100 telefon parity’si sağlanamadığı için **override eklenmedi; strict HOLD**.
