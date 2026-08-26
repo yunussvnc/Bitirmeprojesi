@@ -4,6 +4,47 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6878": {
+    "name": "ANTEPLİOĞLU BAKSAN BAYRAMPAŞA",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/g568/anteplioglu-baksan-baklavalari",
+    "sourceName": "Yemeksepeti canlı menüsü; exact Kocatepe Cd. No:1 / +90 212 640 94 24 kaydıyla eşleşiyor",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Fıstıklı Burma Kadayıf (4 Dilim)", "price": "900 TL", "category": "Tatlılar" },
+      { "name": "Halka Tatlısı (Adet)", "price": "40 TL", "category": "Tatlılar" },
+      { "name": "Halka Tatlısı (4 Adet)", "price": "160 TL", "category": "Tatlılar" },
+      { "name": "Halka Tatlısı (10 Adet)", "price": "400 TL", "category": "Tatlılar" },
+      { "name": "Fıstıklı Baklava (500 gr.)", "price": "700 TL", "category": "Kiloluk Baklavalar (500 gr.)" },
+      { "name": "Cevizli Baklava (500 gr.)", "price": "600 TL", "category": "Kiloluk Baklavalar (500 gr.)" },
+      { "name": "Fıstıklı Midye Baklava (500 gr.)", "price": "850 TL", "category": "Kiloluk Baklavalar (500 gr.)" },
+      { "name": "Fıstık Dürüm (500 gr.)", "price": "1.250 TL", "category": "Kiloluk Baklavalar (500 gr.)" },
+      { "name": "Fıstıklı Şöbiyet (500 gr.)", "price": "700 TL", "category": "Kiloluk Baklavalar (500 gr.)" },
+      { "name": "Fıstıklı Mini Özel Baklava (500 gr.)", "price": "700 TL", "category": "Kiloluk Baklavalar (500 gr.)" },
+      { "name": "Cevizli Mini Özel Baklava (500 gr.)", "price": "600 TL", "category": "Kiloluk Baklavalar (500 gr.)" },
+      { "name": "Cevizli Ev Baklavası (500 gr.)", "price": "600 TL", "category": "Kiloluk Baklavalar (500 gr.)" },
+      { "name": "Antep Fıstıklı Soğuk Baklava (500 gr.)", "price": "700 TL", "category": "Kiloluk Baklavalar (500 gr.)" },
+      { "name": "Fıstıklı Baklava (1 kg.)", "price": "1.200 TL", "category": "Kiloluk Baklavalar (1 kg.)" },
+      { "name": "Cevizli Baklava (1 kg.)", "price": "950 TL", "category": "Kiloluk Baklavalar (1 kg.)" },
+      { "name": "Fıstıklı Midye Baklava (1 kg.)", "price": "1.600 TL", "category": "Kiloluk Baklavalar (1 kg.)" },
+      { "name": "Fıstık Dürüm (1 kg.)", "price": "2.500 TL", "category": "Kiloluk Baklavalar (1 kg.)" },
+      { "name": "Fıstıklı Şöbiyet (1 kg.)", "price": "1.300 TL", "category": "Kiloluk Baklavalar (1 kg.)" },
+      { "name": "Fıstıklı Mini Özel Baklava (1 kg.)", "price": "1.300 TL", "category": "Kiloluk Baklavalar (1 kg.)" },
+      { "name": "Cevizli Mini Özel Baklava (1 kg.)", "price": "1.000 TL", "category": "Kiloluk Baklavalar (1 kg.)" },
+      { "name": "Cevizli Ev Baklavası (1 kg.)", "price": "1.000 TL", "category": "Kiloluk Baklavalar (1 kg.)" },
+      { "name": "Antep Fıstıklı Soğuk Baklava (1 kg.)", "price": "1.200 TL", "category": "Kiloluk Baklavalar (1 kg.)" },
+      { "name": "Cevizli Baklava (4 kg.)", "price": "3.800 TL", "category": "Kiloluk Baklavalar (1 kg.)" },
+      { "name": "Şekerpare (500 gr.)", "price": "400 TL", "category": "Kiloluk Tatlılar (500 gr.)" },
+      { "name": "Fıstıklı Burma Kadayıf (500 gr.)", "price": "700 TL", "category": "Kiloluk Tatlılar (500 gr.)" },
+      { "name": "Fıstıklı Kadayıf (500 gr.)", "price": "600 TL", "category": "Kiloluk Tatlılar (500 gr.)" },
+      { "name": "Ekmek Kadayıfı (500 gr.)", "price": "400 TL", "category": "Kiloluk Tatlılar (500 gr.)" },
+      { "name": "Şekerpare (1 kg.)", "price": "800 TL", "category": "Kiloluk Tatlılar (1 kg.)" },
+      { "name": "Fıstıklı Burma Kadayıf (1 kg.)", "price": "1.400 TL", "category": "Kiloluk Tatlılar (1 kg.)" },
+      { "name": "Fıstıklı Kadayıf (1 kg.)", "price": "1.200 TL", "category": "Kiloluk Tatlılar (1 kg.)" },
+      { "name": "Ekmek Kadayıfı (1 kg.)", "price": "800 TL", "category": "Kiloluk Tatlılar (1 kg.)" },
+      { "name": "Tatlı Tuzlu Kuru Pasta (500 gr.)", "price": "500 TL", "category": "Kiloluk Kuru Pastalar" },
+      { "name": "Tuzlu Kuru Pasta (500 gr.)", "price": "500 TL", "category": "Kiloluk Kuru Pastalar" }
+    ]
+  },
   "6884": {
     "name": "YAĞLAMA PLUS KAYSERİ LEZZETLERİ BEYLİKDÜZÜ",
     "sourceUrl": "https://www.migros.com.tr/yemek/yaglama-plus-beylikduzu-baris-mah-st-2836b",

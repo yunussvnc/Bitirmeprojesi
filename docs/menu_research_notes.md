@@ -1845,3 +1845,21 @@ Restaurant Guru exact `Sakarya Cd. Migros AVM NO:1 K3A-K3, Büyükçekmece/Beyli
 
 ## YAĞLAMA PLUS KAYSERİ LEZZETLERİ BEYLİKDÜZÜ ID 6884 kabulü
 Hentzer kaydı `Barış, Karadeniz Cd. No:8, 34520 Beylikdüzü/İstanbul`, `+90 212 543 77 77`; Yandex, resmi Instagram ve işletme profilleri exact şubeyi doğruluyor. Migros Yemek canlı vendoru `Yağlama Plus, Beylikdüzü (Barış Mah.)` ile eşleşiyor. 26.08.2026 tarihinde canlı Migros menüsünde güncel fiyatlar doğrulandı. Popüler tekrar kaydı dışarıda bırakılarak 20 benzersiz mantı, yağlama, diğer yemek, tatlı ve içecek kalemi aktarıldı; indirimli görünen kalemlerde güncel satış fiyatı kullanıldı. **Override kabul edildi.**
+
+## EASTNBULL STEAK HOUSE ETİLER ID 6883 HOLD
+Restoranim.net, resmi site bağlantısı ve Instagram sonuçları exact `Nispetiye Mahallesi, Aytar Caddesi, Başa Sk. No:3A, 34340 Beşiktaş/İstanbul` / `+90 212 278 10 56` bilgisini doğruluyor. Ancak kamuya açık menü alanı `Doğrulanmadı`; yalnızca yaklaşık fiyat aralığı var, ürün bazlı güncel fiyat listesi yok. **HOLD**, override eklenmedi.
+
+## AKL-I SELİM OCAKBAŞI ID 6882 HOLD
+Restaurant Guru, Yandex ve resmi sosyal hesaplar exact `Gayrettepe, Prof. Dr. Bülent Tarcan Cd No:6 D:A, Beşiktaş/İstanbul` / `+90 533 203 08 27` bilgisini doğruluyor. Restaurant Guru menüsü iki ay önce yüklenmiş olsa da görsel ve ürün fiyatları metin olarak erişilebilir değil. **HOLD**, fiyatlar açıkça doğrulanamadığı için override eklenmedi.
+
+## ELİSE KARADENİZ PİDE & LAHMACUN ID 6881 HOLD
+Resmi Elise sayfası ve 2026 sosyal paylaşımları exact `Mecidiye, Eski Bahçe Sk. No:4, 34347 Beşiktaş/İstanbul` / `+90 212 260 36 44` bilgisini doğruluyor. Resmi sayfa ürün başlıklarını içeriyor ancak fiyat yayınlamıyor ve güncel fiyatlar için işletmeyi aramayı söylüyor. **HOLD**, kamuya açık fiyat şartı sağlanmadığı için override eklenmedi.
+
+## AĞA KEBAP OCAKBAŞI ID 6880 HOLD
+Resmi `agaocakbasi.com` exact `Firuzağa, Yeni Çarşı Cd. No:19, 34425 Beyoğlu/İstanbul` / `+90 551 350 60 73` bilgisini ve aktif 2026 işletme durumunu doğruluyor. Resmi menü bağlantısında ürün fiyatları yayınlanmıyor; üçüncü taraf kaynaklarda da yalnızca genel fiyat aralığı var. **HOLD**, güncel kamuya açık fiyat şartı sağlanmadığı için override eklenmedi.
+
+## KAVACIK BALIKÇI İSMAİL ID 6879 HOLD
+Restaurant Guru exact `Rüzgarlıbahçe, Ferit İnal Cd No:30` adresini gösterse de telefonunu `+90 216 413 99 66` veriyor; Hentzer telefonu `+90 532 252 34 66` ile eşleşmiyor. Menü sahibi tarafından 7 yıl önce yüklenmiş ve güncel fiyat şartını karşılamıyor. **HOLD**, override eklenmedi.
+
+## ANTEPLİOĞLU BAKSAN BAYRAMPAŞA ID 6878 kabulü
+Hentzer kaydı `Kocatepe, Kocatepe Cd. No:1, 34045 Bayrampaşa/İstanbul`, `+90 212 640 94 24`; Restoranim.net bağımsız kaydı adres ve telefonu exact doğruluyor. Yemeksepeti canlı vendorunda 26.08.2026 tarihinde 33 benzersiz tatlı/baklava/kuru pasta kaleminin fiyatı görüldü. Popüler carousel tekrarları ve poşet kalemi kapsam dışında bırakıldı. Vendor sayfada geçici olarak kapalı görünse de fiyat listesi erişilebilir; fiyat güncelliği ve exact şube eşleşmesi sağlandığı için **override kabul edildi**.
