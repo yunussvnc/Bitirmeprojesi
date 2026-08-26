@@ -2774,3 +2774,6 @@ Hentzer kaydı `Terazidere Mahallesi Manastır Caddesi, Karasu Sk. No:27, 34035 
 
 ## LEYLA AKAT ID 6574 HOLD
 Hentzer kaydı `Akat, Yaren Sk. 6/13, 34335 Beşiktaş/İstanbul`, telefon `+90 212 806 80 73`. Meyhankoli exact adres ve telefonu doğruluyor; Yandex aynı işletmeyi No:6 çevresinde gösteriyor. Ancak kamuya açık kaynaklarda yalnızca kişi başı ortalama `330 TL` bilgisi var, ürün bazlı menü fiyatı yok. Son bir yıl fiyatlı exact şube menüsü doğrulanamadığından **override eklenmedi; strict HOLD**.
+
+## ADANALI TEKİN USTA KEBAP BEYLİKDÜZÜ ID 6573 HOLD
+Hentzer kaydı `Adnan Kahveci, Avrupa Cd. No:108/36, 34528 Beylikdüzü/İstanbul`, telefon `+90 212 599 01 01`. Restoranim exact adres ve telefonu, resmi Instagram da telefon/işletme kimliğini doğruluyor. Restoranim menü sekmesinde ürün fiyatları yayımlanmıyor; Kaçıyor yalnızca kalori bilgisi veriyor. 2025–2026 sosyal paylaşımları ürün görselleri/işletme tanıtımı içeriyor ancak ürün bazlı fiyat vermiyor. **Override eklenmedi; strict HOLD.**
