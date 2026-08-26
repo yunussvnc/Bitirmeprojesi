@@ -2899,3 +2899,6 @@ Hentzer `Merkez, Marmara Cd. No:30, 34310 Avcılar`; telefon alanı boş. Yemeks
 ## BREAD & BURGER BEBEK ID 6535 ACCEPTED
 Hentzer `Bebek, Manolya Sk. 12/A, 34342 Beşiktaş/İstanbul`, telefon `+90 212 265 00 57`. Resmi Bread & Burger sitesi aynı Bebek şubesini ve telefonu exact doğruluyor; Migros exact Beşiktaş/Bebek vendorunda güncel görünen menü ve burger fiyatları mevcut. 20 benzersiz gıda ürünü eklendi; içecek ve poşet ürünleri dışarıda bırakıldı. **Override kabul edildi.**
 Kaynaklar: https://www.breadandburger.com.tr/ ; https://www.migros.com.tr/yemek/bread-burger-besiktas-bebek-mah-st-1896c
+
+## ANTEP TATLI DÜNYASI ID 6534 HOLD
+Hentzer `Kavacık, Fatih Sultan Mehmet Cd. No:9-A, 34810 Beykoz`, telefon `+90 216 693 34 27`. Instagram/Yandex/Facebook/Yemeksepeti exact şube ve telefonu destekliyor; ancak Migros’ta ürün adları olup fiyatlar erişilebilir değil, Yemeksepeti de tam fiyatlı menüyü çıkarmadı. 20 güncel fiyat doğrulanamadığından **override eklenmedi; strict HOLD.**
