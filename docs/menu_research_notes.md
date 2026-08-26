@@ -2232,3 +2232,6 @@ Hentzer kaydı `Cihannüma, Barbaros Blv. 61/A, 34353 Beşiktaş/İstanbul`, tel
 
 ## HAZ KEBAP BEYLİKDÜZÜ ID 6753 ACCEPTED
 Hentzer kaydı `Büyükşehir, Beylikdüzü Cd. C Blok No:5 Daire:2/A-F, 34520 Beylikdüzü/İstanbul`, telefon `+90 212 873 06 70`. Haz Kebap resmi iletişim sayfası aynı adres ve telefonu doğruluyor. Resmi Modpos menüsü ile 26.08.2026 tarihinde erişilen canlı Yemeksepeti sonuçlarında ortak fiyatlı ürünler bulundu; fiyatı ve ürün adı net olmayan kalemler eklenmedi. **10 gıda ürünü override edildi.**
+
+## THE COFFEE FACTORY BEYLİKDÜZÜ WEST SIDE ID 6752 HOLD
+Hentzer kaydı `Barış Mahallesi Enver Adakan Caddesi No:5 E Blok İşyeri No:17, West Side, Barış, D:1 Sitesi, 34520 Beylikdüzü/İstanbul`, telefon `+90 544 966 98 24`. Adres birçok kaynakta aynı olsa da markanın resmi mağazalar sayfası bu lokasyon için `0505 884 5119` telefonunu veriyor; Yandex de farklı telefonlar listeliyor. Resmi menü sayfasında ürün kategorileri bulunuyor, ancak telefon parity sağlanamadığından güncel fiyatlar exact Hentzer şubesine güvenle bağlanamadı. **Override eklenmedi; strict HOLD**.
