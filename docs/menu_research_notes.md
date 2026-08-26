@@ -2744,3 +2744,6 @@ Hentzer kaydı `Kanlıca, Halide Edip Adıvar Cd. No:4 D:B, 34810 Beykoz/İstanb
 ## BEYEFENDİ BURGER BEŞİKTAŞ ID 6584
 Hentzer kaydı `Türkali, Şht. Asım Cd. 48A, 34353 Beşiktaş/İstanbul`, telefon `+90 530 908 78 90`. Yandex ve resmi Instagram exact adres/telefonu doğruluyor. Resmi Instagram’da son üç ay içinde yayımlanan fiyatlı paylaşımda `Baston Burger + baharatlı patates` menüsü `510 TL` olarak yer alıyor. Kamuya açık menünün tamamı fiyatlı olmadığından yalnızca bu doğrulanabilir ürün eklendi; **override kabul edildi, 1 ürün**.
 Kaynaklar: https://www.instagram.com/p/DYRdVEIINKR/ ; https://www.instagram.com/beyefendiburger1/ ; https://yandex.com.tr/maps/org/beyefendi_burger/61329700422/
+
+## LAOS COFFEE BEŞYÜZEVLER ID 6583 HOLD
+Hentzer kaydı `Cevatpaşa, Eski Edirne Asf. No:270 D:A, 34045 Bayrampaşa/İstanbul`, telefon `+90 537 579 29 78`. Resmi Laos Coffee şube sayfası aynı cadde/no bilgisini ancak `Eski Habipler, 34270 Sultangazi/İstanbul` adresini ve farklı telefonu `0539 338 05 63` yayımlıyor. Yemeksepeti’nde fiyatlı kahve/tatlı menüsü bulunsa da hem ilçe hem telefon parity’si sağlanamadığından yanlış şube riski nedeniyle **override eklenmedi; strict HOLD**.
