@@ -2883,3 +2883,6 @@ Kaynaklar: https://allzinapp.com/KonohaSushiEtiler ; https://yandex.com.tr/maps/
 
 ## KORE'DE BEŞİKTAŞ ID 6540 HOLD
 Hentzer `Sinanpaşa, Şht. Dursun Bakan Sk. No:3, 34353 Beşiktaş`, telefon `+90 543 522 19 03`. Adres eşleşse de Cybo/Hentzer telefonu ile işletmenin Facebook sayfasındaki `+90 543 795 08 18` çelişiyor. Telefon parity’si kesin olmadığından güncel Yemeksepeti fiyatları kullanılmadı. **Override eklenmedi; strict HOLD.**
+
+## ÇAĞDAŞ İSKENDER & KEBAP ID 6539 HOLD
+Hentzer `Büyükşehir, Cumhuriyet Cd. No:50 D:51-52, 34520 Beylikdüzü`, telefon `+90 212 873 13 41`. Yandex/Mekan/Restoranim ve resmi Instagram exact işletmeyi destekliyor; ancak son bir yıl exact şubeye ait ürün bazlı güncel TL fiyatlı menü bulunamadı. **Override eklenmedi; strict HOLD.**
