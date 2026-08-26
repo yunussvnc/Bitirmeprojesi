@@ -3000,3 +3000,6 @@ Hentzer `Adnan Kahveci, Osmanlı Cd., 34528 Beylikdüzü/İstanbul`, telefon `+9
 
 ## BURGER BOYZ ID 6503 HOLD
 Hentzer `Cumhuriyet, Onur Sk. no L14, 34520 Beylikdüzü/İstanbul`, telefon `+90 542 358 89 29`. Resmi Instagram Metrohome L14 ve fiyat kampanyalarını destekliyor; Merkez Zirve Servis aynı adres/telefonu listeliyor. Ancak Yandex aynı telefonla `Onur Sok. 3P` adresini gösteriyor; Yemeksepeti `ti3t` vendoru exact adres/telefon yayımlamıyor. Adres kapı kodu çelişkisi nedeniyle **override eklenmedi; strict HOLD**.
+
+## CAFE TM'S ID 6502 HOLD
+Hentzer `Kartaltepe, Bilgehan Cd. no:39, 34040 Bayrampaşa/İstanbul`, telefon `+90 532 739 09 90`. Mekanlar adresi desteklese de Facebook resmi kaydı No:36 ve farklı `+90 212 616 08 67` telefonu gösteriyor. Exact branch parity’si ve son bir yıl fiyatlı menü doğrulanamadığından **override eklenmedi; strict HOLD**.
