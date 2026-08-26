@@ -3049,3 +3049,6 @@ Hentzer `Adnan Kahveci Mahallesi Kalkan Caddesi, A1 Blok No:3/1 Kapı No:9, 3452
 ## INARI PIKU ETİLER ID 6488 ACCEPTED
 Hentzer `Etiler, Nisbetiye Cd No:89, 34337 Beşiktaş/İstanbul`, telefon `+90 212 216 35 35`. Inari Omakase resmi menü sayfası exact Etiler Piku adres/telefonunu doğruluyor. Resmi yemek PDF’si menünün 03.02.2026’da güncellendiğini ve PDF metadata’sının 24.08.2026 olduğunu gösteriyor. 20 benzersiz fiyatlı gıda ürünü eklendi; içecek/şarap ve fiyatı olmayan kalemler dışlandı. **Override kabul edildi.**
 Kaynaklar: https://www.inariomakase.com/menu ; https://www.inariomakase.com/media/boun40xo/inari-etiler-yemek_2408.pdf ; https://restoranim.net/istanbul/besiktas/restoran/inari-piku-etiler
+
+## MOGAF DÖNER BEYLİKDÜZÜ ADNAN KAHVECİ ID 6487 HOLD
+Mogaf resmi şube sayfası Hentzer ile exact `Dora Park, Adnan Kahveci, Anadolu Cd. D:2 B blok 17/2 Dükkan 21` ve `+90 850 840 8055` parity’sini doğruluyor. Yemeksepeti vendorunda bazı fiyatlar görünse de tam menü CAPTCHA nedeniyle alınamadı; 20 ürün doğrulanamadı. **Override eklenmedi; strict HOLD.**
