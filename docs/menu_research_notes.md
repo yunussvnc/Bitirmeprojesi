@@ -2855,3 +2855,6 @@ Hentzer `Cihannüma, Saray Cd No:5, 34353 Beşiktaş`, telefon `+90 212 227 30 0
 
 ## KEBAPÇI NAZIM ID 6547 HOLD
 Hentzer `Hüseyinağa, Tarlabaşı Blv No:85/B, 34435 Beyoğlu`, telefon `+90 212 251 50 35`; Yandex/Servis Kayıt exact eşleşiyor. Yemeksepeti bazı güncel fiyatları gösterse de canlı vendor CAPTCHA ile engellendi ve 20 ürünlük menü doğrulaması tamamlanamadı. **Override eklenmedi; strict HOLD.**
+
+## ADAB ESKİ USÛL MEYHANE ID 6546 HOLD
+Hentzer `Reşitpaşa, Tuncay Artun Cd. No:139, 34467 Sarıyer`, telefon `+90 212 277 77 72`. Resmi Âdâb sitesi aynı şube/telefonu doğruluyor; menü ve fix menü görselleri mevcut ancak ürün bazlı TL fiyat metni erişilebilir değil ve güvenilir fiyat çıkarılamadı. **Override eklenmedi; strict HOLD.**
