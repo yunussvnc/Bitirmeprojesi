@@ -2566,3 +2566,6 @@ Hentzer kaydı `Etiler, Nisbetiye Cd No:87, 34337 Beşiktaş/İstanbul`, telefon
 
 ## NOODLE HOUSE BEŞİKTAŞ ID 6642 ACCEPTED
 Hentzer kaydı `Cihannüma, Akdoğan Sk. No:35, 34353 Beşiktaş/İstanbul`, telefon `+90 212 259 90 10`. Noodle House resmi sitesi aynı Cihannüma/Akdoğan No:35 adresini, telefonunu ve Beşiktaş şubesini doğruluyor; Yandex kaydı aynı işletmeyi `35A` gösteriyor. Resmi canlı menüde restoran/gel-al fiyat modu açık; 20 güncel fiyatlı noodle, ramen, udon ve pirinç çubuğu ürünü eklendi.
+
+## SHOPPING MARKET BAYRAMPAŞA ID 6641 HOLD
+Hentzer kaydı `Altıntepsi, Atatürk Cd. No:64, 34035 Bayrampaşa/İstanbul`, telefon `+90 212 674 91 15`. Tumisyeri ve MarketRehberi adresi destekliyor; Yandex işletmeyi `Shopping Ekonomik Market` olarak aynı adreste gösteriyor. Ancak doğrulanabilir restoran/yiyecek menüsü yok; bulunan QR menü `THE MARKET` adıyla farklı işletmeye ait ve kullanılamaz. **Override eklenmedi; strict HOLD**.
