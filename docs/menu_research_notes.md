@@ -2542,3 +2542,6 @@ Hentzer kaydı `Kuruçeşme, Kuruçeşme Cd. 19B, 34345 Beşiktaş/İstanbul`, t
 
 ## LA GARDA BEYLİKDÜZÜ ID 6650 HOLD
 Hentzer kaydı `Adnan Kahveci Mahallesi, Kışla Caddesi, Seyran Sk. No:4/1, 34528 Beylikdüzü/İstanbul`, telefon `+90 533 310 46 33`. Resmi sosyal ve Kafnet 4/1 adresini/telefonu destekliyor; ancak Yandex aktif kaydı adresi `Seyran Sok. 6/1` olarak veriyor, Corner kaydı da işletmeyi kapalı gösteriyor. Son bir yıl içinde doğrulanabilir fiyatlı exact menü bulunamadı. **Override eklenmedi; strict HOLD**.
+
+## 7-8 HASANPAŞA FIRINI ID 6649 ACCEPTED
+Hentzer kaydı `Sinanpaşa, Şht. Asım Cd. No:8, 34353 Beşiktaş/İstanbul`, telefon `+90 212 261 97 66`. Postcard ve Tumisyeri aynı adres/telefonu, resmi Instagram hesabı da işletmeyi doğruluyor. 26.02.2026 tarihli fiyatlı paylaşımda Açma 25 TL, Poğaça 20 TL ve Simit 25 TL olarak listelenmiş; bu üç ürün eklendi.

@@ -90709,5 +90709,16 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "White Hot Chocolate", "price": "200 TL", "category": "Hot Drinks" },
       { "name": "Earl Grey", "price": "175 TL", "category": "Hot Drinks" }
     ]
+  },
+  "6649": {
+    "name": "7-8 HASANPAŞA FIRINI",
+    "sourceUrl": "https://www.instagram.com/reel/DUnpRoXiFNp/",
+    "sourceName": "26.02.2026 tarihli fiyatlı paylaşım; postcard/tumisyeri ve resmi sosyal hesaplarla exact adres-telefon doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Açma", "price": "25 TL", "category": "Fırın Ürünleri" },
+      { "name": "Poğaça", "price": "20 TL", "category": "Fırın Ürünleri" },
+      { "name": "Simit", "price": "25 TL", "category": "Fırın Ürünleri" }
+    ]
   }
 };
