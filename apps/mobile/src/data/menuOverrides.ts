@@ -4,6 +4,39 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6762": {
+    "name": "POYRAZ TAKO BALIK RESTAURANT",
+    "sourceUrl": "https://poyraztakobalik.com/alakart-menu/",
+    "sourceName": "Poyraz Tako Balık resmi alakart menüsü; resmi QR sayfası ve sosyal hesaplarda exact Poyrazköy adres/telefonu doğrulandı",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Serpme Kahvaltı Kişi Başı", "price": "1000 TL", "category": "Kahvaltı" },
+      { "name": "Sucuklu Yumurta", "price": "400 TL", "category": "Kahvaltı" },
+      { "name": "Menemen", "price": "400 TL", "category": "Kahvaltı" },
+      { "name": "Muhlama", "price": "500 TL", "category": "Kahvaltı" },
+      { "name": "Kavurmalı Yumurta", "price": "600 TL", "category": "Kahvaltı" },
+      { "name": "İstanbul Salatası Double", "price": "500 TL", "category": "Salatalar" },
+      { "name": "Roka Salatası Double", "price": "600 TL", "category": "Salatalar" },
+      { "name": "Mevsim Salata Double", "price": "500 TL", "category": "Salatalar" },
+      { "name": "Ahtapot Salatası", "price": "700 TL", "category": "Salatalar" },
+      { "name": "Beyaz Peynir", "price": "200 TL", "category": "Soğuk Mezeler" },
+      { "name": "Şakşuka", "price": "340 TL", "category": "Soğuk Mezeler" },
+      { "name": "Haydari", "price": "340 TL", "category": "Soğuk Mezeler" },
+      { "name": "Girit Ezme", "price": "420 TL", "category": "Soğuk Mezeler" },
+      { "name": "Levrek Marin", "price": "750 TL", "category": "Soğuk Mezeler" },
+      { "name": "Karides Söğüş", "price": "800 TL", "category": "Soğuk Mezeler" },
+      { "name": "Karides Güveç", "price": "800 TL", "category": "Ara Sıcaklar" },
+      { "name": "Tereyağında Karides", "price": "775 TL", "category": "Ara Sıcaklar" },
+      { "name": "Kalamar Tava", "price": "775 TL", "category": "Ara Sıcaklar" },
+      { "name": "Kalamar Izgara", "price": "800 TL", "category": "Ara Sıcaklar" },
+      { "name": "Midye Tava", "price": "600 TL", "category": "Ara Sıcaklar" },
+      { "name": "Ahtapot Izgara", "price": "1000 TL", "category": "Ara Sıcaklar" },
+      { "name": "Köfte", "price": "850 TL", "category": "Ara Sıcaklar" },
+      { "name": "Deniz Levreği Yarım Fileto", "price": "1400 TL", "category": "Balıklar" },
+      { "name": "Deniz Çuprası Yarım Fileto", "price": "1400 TL", "category": "Balıklar" },
+      { "name": "İstavrit Porsiyon", "price": "700 TL", "category": "Balıklar" }
+    ]
+  },
   "6771": {
     "name": "BY FRATELLO TAGLIATELLE",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/qxwo/by-fratello-tagliatelle",

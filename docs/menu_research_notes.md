@@ -2202,3 +2202,6 @@ Hentzer kaydı `Yıldırım, Avasköy Yolu Cd. No:41, 34045 Bayrampaşa/İstanbu
 
 ## GRIF COFFEE BAYRAMPAŞA ID 6763 HOLD
 Hentzer kaydı `Cevatpaşa, Yurt Sk. No:13/A, 34045 Bayrampaşa/İstanbul`, telefon `+90 535 285 45 14`. İşletmenin resmi Instagram profili, Yandex ve TumIsyeri aynı adres/telefonu doğruluyor. Ancak son bir yıl içinde exact şubeye ait erişilebilir ürün ve fiyat listesi bulunamadı; bulunan sosyal içerikler menü fiyatı içermiyor. Fiyat doğrulaması sağlanamadığı için **override eklenmedi; strict HOLD**.
+
+## POYRAZ TAKO BALIK RESTAURANT BEYKOZ ID 6762 ACCEPTED
+Hentzer kaydı `Poyrazköy, Mendirek Yolu No:14 D:1A, 34829 Beykoz/İstanbul`, telefon `+90 538 691 45 15`. İşletmenin resmi QR menü sayfası, resmi web sitesi ve Instagram hesabı aynı Poyrazköy işletmesini ve telefonu doğruluyor; menü kaynağında ikinci iletişim telefonu da bulunuyor. Resmi alakart menüde 26.08.2026 tarihinde kahvaltı, salata, soğuk meze, ara sıcak ve balık kategorilerinde fiyatlar erişilebildi. Fiyatı “danışınız” olan veya fiyatı bulunmayan kalemler eklenmedi. **25 ürün override edildi.**
