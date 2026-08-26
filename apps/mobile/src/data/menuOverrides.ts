@@ -90941,5 +90941,33 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Peynirli Pide", "price": "570 TL", "category": "Pideler" },
       { "name": "Sucuklu Peynirli Pide", "price": "610 TL", "category": "Pideler" }
     ]
+  },
+  "6628": {
+    "name": "ENBEY DÖNER CUMHURİYET MAHALLESİ",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/j0cl/enbey-doner-beylikduzu",
+    "sourceName": "Enbey resmi şube sayfası, Yandex/Yelp exact kayıtları ve canlı Yemeksepeti vendor menüsü",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Enbest Menü", "price": "560 TL", "category": "Menüler" },
+      { "name": "ENBOL Menü", "price": "735 TL", "category": "Menüler" },
+      { "name": "ENTOK Menü", "price": "910 TL", "category": "Menüler" },
+      { "name": "Süzme Mercimek Çorbası", "price": "150 TL", "category": "Çorbalar" },
+      { "name": "Ekmek Arası Et Döner 100 gr", "price": "465 TL", "category": "Et Dönerler" },
+      { "name": "Ekmek Arası Et Döner 150 gr", "price": "640 TL", "category": "Et Dönerler" },
+      { "name": "Ekmek Arası Et Döner 200 gr", "price": "815 TL", "category": "Et Dönerler" },
+      { "name": "Ekmek Arası Et Döner 250 gr", "price": "1000 TL", "category": "Et Dönerler" },
+      { "name": "Et Döner 100 gr", "price": "495 TL", "category": "Et Dönerler" },
+      { "name": "Et Döner 150 gr", "price": "695 TL", "category": "Et Dönerler" },
+      { "name": "Et Döner 200 gr", "price": "895 TL", "category": "Et Dönerler" },
+      { "name": "Et Döner 250 gr", "price": "1095 TL", "category": "Et Dönerler" },
+      { "name": "Et Döner Dürüm 100 gr", "price": "465 TL", "category": "Et Dönerler" },
+      { "name": "Et Döner Dürüm 150 gr", "price": "640 TL", "category": "Et Dönerler" },
+      { "name": "Et Döner Dürüm 200 gr", "price": "815 TL", "category": "Et Dönerler" },
+      { "name": "Et Döner Dürüm 250 gr", "price": "1000 TL", "category": "Et Dönerler" },
+      { "name": "Pide Arası Et Döner 100 gr", "price": "465 TL", "category": "Et Dönerler" },
+      { "name": "Pide Arası Et Döner 150 gr", "price": "640 TL", "category": "Et Dönerler" },
+      { "name": "Pide Arası Et Döner 200 gr", "price": "815 TL", "category": "Et Dönerler" },
+      { "name": "Pide Arası Et Döner 250 gr", "price": "1000 TL", "category": "Et Dönerler" }
+    ]
   }
 };

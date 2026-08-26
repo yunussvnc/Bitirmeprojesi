@@ -2608,3 +2608,6 @@ Hentzer kaydı `Vişnezade, Süleyman Seba Cd. No:8, 34335 Beşiktaş/İstanbul`
 
 ## JAY'S CAFE BEŞİKTAŞ ID 6629 HOLD
 Hentzer kaydı `Türkali Mahallesi Ihlamurdere Caddesi, Mısırlıbahçe Sok. No:4/A, 34357 Beşiktaş/İstanbul`, telefon `+90 552 460 19 13`. Jay’s Cafe resmi sitesi aynı No:4/A adresini ve cep telefonunu doğruluyor; resmi sitenin bağladığı Allzin menüsünde çok sayıda kategori var, ancak 26.08.2026 erişiminde ürün fiyatları dinamik olarak yüklenmedi. Bulunan 99 TL kahve kampanyası 2025 tarihli ve 20 güncel ürün-fiyat çifti sağlamıyor. **Override eklenmedi; strict HOLD.**
+
+## ENBEY DÖNER CUMHURİYET MAHALLESİ ID 6628 ACCEPTED
+Hentzer kaydı `Cumhuriyet, Çamlık Caddesi Cumhuriyet Caddesi 1 D D:1/5, 34520 Beylikdüzü/İstanbul`, telefon `+90 212 871 24 23`. Enbey resmi şube sayfası Cumhuriyet/Çamlık Caddesi şubesini listeliyor; Yandex ve Yelp exact telefon/adres kaydını destekliyor. Yemeksepeti exact Enbey Döner Beylikdüzü vendorunda canlı fiyatlı menü bulundu; Popüler carousel tekrarları, içecekler ve poşet dışarıda bırakılarak 20 gıda ürünü eklendi.
