@@ -2359,3 +2359,6 @@ Hentzer kaydı `Mecidiye, Eski Bahçe Sk. No:2, 34347 Beşiktaş/İstanbul`, tel
 
 ## BURGER YİYELİM BEŞİKTAŞ ID 6712 HOLD
 Hentzer kaydı `Cihannüma, Barbaros Blv. No:3, 34353 Beşiktaş/İstanbul`, telefon `+90 212 916 22 88`. Burger Yiyelim resmi şube arama sonucu Barbaros Bulvarı No:3 bilgisini destekliyor ve Yandex aynı telefonu veriyor; ancak Yandex’in aktif mekan adresi `Cihannüma Mah. Salihefendi Aralığı No:6` olarak farklı kapı/adres gösteriyor. Yandex’te iki fiyatlı ürün görünse de zorunlu exact branch adres parity’si sağlanamadığından **override eklenmedi; strict HOLD**.
+
+## İBB BEYKOZ KORUSU ID 6711 HOLD
+Hentzer kaydı `Merkez, Kelle İbrahim Cd. 30/A, 34820 Beykoz/İstanbul`, telefon alanı boş. İBB tesis rezervasyon sistemi, Yandex ve yerel resmi/kurumsal kayıtlar aynı sosyal tesisi `Kelle İbrahim Caddesi No:17/A` ve `444 10 34` ile gösteriyor. Adres kapı numarası ve telefon exact eşleşmediği için, 2024/2025/2026 tarihli fiyat parçaları bulunsa da branch kimliği kesin doğrulanamadı. **Override eklenmedi; strict HOLD**.
