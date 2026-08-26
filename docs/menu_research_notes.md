@@ -2934,3 +2934,6 @@ Kaynaklar: https://www.yemeksepeti.com/en/restaurant/hf3r/kozlab-coffee ; https:
 
 ## THE NEST COFFEE (PEABERRY) ID 6524 HOLD
 Hentzer `Sinanpaşa, Alaybeyi Sk No:11, 34535 Beşiktaş`; telefon alanı boş. İşletme adı ve adres kısmen doğrulansa da bağımsız kaynaklardan Hentzer telefon parity’si sağlanamadı; Restaurantguru farklı telefon gösteriyor. Bulunan diğer Yemeksepeti The Nest sonucu Siirt şubesidir. Son bir yıl exact şubeye ait 20 ürün fiyatı doğrulanamadığından **override eklenmedi; strict HOLD.**
+
+## BEYLİKDÜZÜ BUTİK PASTA ID 6523 HOLD
+Hentzer `Muhittin Apartman, Kavaklı, Akçay Sk. D:4A blok Daire 10, 34550 Beylikdüzü`, telefon `+90 545 273 27 52`. Ross Butik Pasta sosyal hesapları telefon ve Kavaklı bölgesini destekliyor; ancak tam adres doğrulanamadı. Yandex exact Akçay Sokak kaydını artık faal değil gösteriyor ve son bir yıl ürün bazlı TL fiyatlı menü bulunamadı. **Override eklenmedi; strict HOLD.**
