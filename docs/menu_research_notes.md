@@ -2482,3 +2482,6 @@ Hentzer kaydı `Kalekent Sitesi, Adnan Kahveci, Anadolu Cd. C-1 Blok No:6, 34528
 
 ## HOLLYFOOD BURGER & FRIED CHICKEN KAVACIK ID 6671 ACCEPTED
 Hentzer kaydı `Kavacık, Özgür Cd. 15A, 34810 Beykoz/İstanbul`, telefon `+90 507 637 93 38`. Resmi `hollyfood.kavacik` sosyal hesabı ve Yandex aynı Kavacık/Özgür Caddesi şubesini ve telefonu destekliyor; 26.02.2026 tarihli resmi paylaşımda şube adresi ve 320 TL’lik 2 hamburger + patates + içecek kampanyası açıkça belirtiliyor. Resmi sosyal menü paylaşımında ayrıca Çıtır Tavuk Burger 199 TL, Feryat Burger 359 TL ve Big Burger 359 TL olarak listelenmiş; **4 güncel ürün** eklendi.
+
+## PIZZA STATION ORTAKÖY ID 6670 HOLD
+Hentzer kaydı `Ortaköy, Muallim Naci Cd. No:17, 34347 Beşiktaş/İstanbul`, telefon `+90 212 227 77 10`. Resmi Pizza Station sosyal hesabı aynı Ortaköy telefonunu ve Muallim Naci Cd./Besttenigar Ziya Sokak No:17 adresini destekliyor. Ancak bulunan güncel fiyatlı exact şube menüsü doğrulanamadı; genel/başka şubeye ait Pizza Station menüleri kullanılmadı. **Override eklenmedi; strict HOLD**.
