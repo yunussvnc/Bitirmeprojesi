@@ -2353,3 +2353,6 @@ Hentzer kaydı `Asmalı Mescit, Asmalı Mescit Cd. No:21, 34430 Beyoğlu/İstanb
 
 ## FORDİETA & TARİHİ KAFKAS DONDURMA ID 6714 ACCEPTED
 Hentzer kaydı `Anadolu Kavağı, Yalı Çk. 2 C, 34825 Beykoz/İstanbul`, telefon `+90 532 282 36 09`. Tarihi Kafkas Dondurma resmi sitesi aynı adres ve telefonu veriyor; Yandex ve resmi sosyal hesaplar da aynı şubeyi doğruluyor. Resmi menü sayfasında dondurma çeşitleri listeleniyor. Haziran 2026 tarihli resmi sosyal paylaşımda dondurma topu **100 TL** olarak yayınlandığından, 26.08.2026 tarihinde resmi menüdeki ilk 20 benzersiz dondurma çeşidi bu güncel tek-top fiyatıyla eklendi. **20 gıda ürünü override edildi.**
+
+Hentzer kaydı `Mecidiye, Eski Bahçe Sk. No:2, 34347 Beşiktaş/İstanbul`, telefon `+90 539 388 36 04`. Fümeci Yusuf resmi Instagram/Facebook kayıtları Ortaköy Merkez Şube’yi aynı Eski Bahçe Sk. No:2 adresiyle doğruluyor; işletmenin resmi mağazası Beşiktaş’a teslimat yaptığını belirtiyor. 26.08.2026 tarihinde resmi online mağazanın güncel fiyat kataloğundan stokta/aktif görünen deniz ürünü, meze, sandviç ve kampanya ürünlerinden 20 benzersiz ürün-fiyat çifti alındı; tükenen ürünler dışarıda bırakıldı. **20 gıda ürünü override edildi.**
+>>>>>>> bd4c1ca (Add verified Fumeci Yusuf Ortakoy menu override)

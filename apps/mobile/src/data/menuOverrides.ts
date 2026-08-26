@@ -573,6 +573,33 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "CHURCHILL", "price": "120.00 TL", "category": "SOĞUK İÇECEKLER" },
       { "name": "BÜYÜK SU", "price": "100.00 TL", "category": "SOĞUK İÇECEKLER" },
       { "name": "KÜÇÜK SU", "price": "50.00 TL", "category": "SOĞUK İÇECEKLER" }
+
+    "name": "FÜMECİ YUSUF ORTAKÖY",
+    "sourceUrl": "https://fumeciyusuf.com/",
+    "sourceName": "Fümeci Yusuf resmi online mağazası; Ortaköy şubesi resmi sosyal hesaplarla exact adres/telefon doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Ahtapot", "price": "1375 TL", "category": "Deniz Ürünleri" },
+      { "name": "Akya Pastırma", "price": "1000 TL", "category": "Deniz Ürünleri" },
+      { "name": "Alabalık Füme", "price": "600 TL", "category": "Deniz Ürünleri" },
+      { "name": "Bottarga Fiska", "price": "750 TL", "category": "Deniz Ürünleri" },
+      { "name": "Deniz Mahsülleri Pastası", "price": "1125 TL", "category": "Deniz Ürünleri" },
+      { "name": "Enginar Kalbi", "price": "625 TL", "category": "Mezeler" },
+      { "name": "Escolar Füme", "price": "1125 TL", "category": "Deniz Ürünleri" },
+      { "name": "Gurme Kampanya Büyük Boy Menü", "price": "6500 TL", "category": "Kampanyalar" },
+      { "name": "Gurme Kampanya Menüsü", "price": "5500 TL", "category": "Kampanyalar" },
+      { "name": "Gurme Sandviç Çeşitleri", "price": "600 TL", "category": "Sandviçler" },
+      { "name": "Hardal Soslu Karides", "price": "750 TL", "category": "Deniz Ürünleri" },
+      { "name": "İsli Midye", "price": "750 TL", "category": "Deniz Ürünleri" },
+      { "name": "İsli Uskumru", "price": "750 TL", "category": "Deniz Ürünleri" },
+      { "name": "Karabiberli Somon Füme", "price": "950 TL", "category": "Deniz Ürünleri" },
+      { "name": "Karides Salatası", "price": "750 TL", "category": "Salatalar" },
+      { "name": "Kırmızı Havyar", "price": "1500 TL", "category": "Deniz Ürünleri" },
+      { "name": "Levrek Marin", "price": "625 TL", "category": "Deniz Ürünleri" },
+      { "name": "Pesto Soslu Levrek Marin", "price": "625 TL", "category": "Deniz Ürünleri" },
+      { "name": "Somon Füme", "price": "875 TL", "category": "Deniz Ürünleri" },
+      { "name": "Somon Füme Loin", "price": "1000 TL", "category": "Deniz Ürünleri" }
+>>>>>>> bd4c1ca (Add verified Fumeci Yusuf Ortakoy menu override)
     ]
   },
   "6830": {
