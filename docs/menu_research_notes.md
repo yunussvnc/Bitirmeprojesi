@@ -3194,3 +3194,6 @@ Kaynaklar: https://bukerestoran.com/menu ; https://bukerestoran.com/ ; https://y
 ## HOUSE OF B ID 6443 ACCEPTED
 Hentzer `Sinanpaşa, Şair Nedim Cd. No:14, 34353 Beşiktaş/İstanbul`, telefon `+90 212 236 27 47`. House of B resmi sitesi Akaretler şubesini aynı adres ve telefonla doğruluyor; resmi sitedeki Akaretler Yemeksepeti bağlantısı `qlkj` vendoruna yönleniyor. Canlı Yemeksepeti menüsünden popüler carousel tekrarları, içecekler ve soslar dışlanarak 20 benzersiz burger ürünü eklendi. Suadiye’ye ait `m00p` vendoru kullanılmadı. **Override kabul edildi.**
 Kaynaklar: https://houseofbturkey.com/ ; https://www.yemeksepeti.com/en/restaurant/qlkj/house-of-b-burgers-and-fries-qlkj
+
+## COFFEE CARAMEL BEYLİKDÜZÜ ID 6442 HOLD
+Mekan.com/Kacıyor/Nerdeler/servis listeleri ve Instagram Hentzer exact `Adnan Kahveci Mah. Osmanlı Cad. 1/63 Beyaz Palas sitesi, Beylikdüzü/İstanbul` ve `+90 535 576 64 25` parity’sini destekliyor. Ancak exact şubeye ait son bir yıl güncel, ürün bazlı TL fiyatlı 20 menü kalemi bulunamadı. **Override eklenmedi; strict HOLD.**
