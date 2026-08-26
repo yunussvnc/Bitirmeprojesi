@@ -2902,3 +2902,7 @@ Kaynaklar: https://www.breadandburger.com.tr/ ; https://www.migros.com.tr/yemek/
 
 ## ANTEP TATLI DÜNYASI ID 6534 HOLD
 Hentzer `Kavacık, Fatih Sultan Mehmet Cd. No:9-A, 34810 Beykoz`, telefon `+90 216 693 34 27`. Instagram/Yandex/Facebook/Yemeksepeti exact şube ve telefonu destekliyor; ancak Migros’ta ürün adları olup fiyatlar erişilebilir değil, Yemeksepeti de tam fiyatlı menüyü çıkarmadı. 20 güncel fiyat doğrulanamadığından **override eklenmedi; strict HOLD.**
+
+## MAHAL MEZE & MEYHANE ID 6533 ACCEPTED
+Hentzer `Vişnezade, Şair Nedim Cd. No:81/A, 34357 Beşiktaş/İstanbul`, telefon `+90 536 313 15 25`. Resmi Instagram `@mahal.besiktas` 12.08.2026 tarihli paylaşımında aynı adres/telefonla kişi başı 1.900 TL fix menüyü yayımlıyor; Facebook, Apple Maps ve Bulurum exact şubeyi destekliyor. Erişilebilir kaynakta ürün detayları tek tek listelenmediği için yalnızca doğrulanabilen 1 fix menü kalemi eklendi. **Override kabul edildi.**
+Kaynak: https://www.instagram.com/mahal.besiktas/p/Db8QISUsKL8/

@@ -91613,4 +91613,14 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Beefyyy Burger (100 Gr.)", "price": "480 TL", "category": "Burgerler" }
     ]
   },
+
+  "6533": {
+    "name": "Mahal Meze & Meyhane",
+    "sourceUrl": "https://www.instagram.com/mahal.besiktas/p/Db8QISUsKL8/",
+    "sourceName": "Mahal Meze & Meyhane resmi Instagram 12.08.2026 paylaşımı; Facebook/Apple Maps ile exact adres-telefon doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Fix Menü (kişi başı)", "price": "1900 TL", "category": "Fix Menüler" }
+    ]
+  },
 };
