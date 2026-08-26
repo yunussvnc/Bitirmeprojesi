@@ -2196,3 +2196,6 @@ Hentzer kaydı `İnnovia 2 çarşı, Yeşilkent, Nazım Hikmet Blv. No:14 Sitesi
 
 ## PAPARINO PIZZA ETİLER ID 6765 HOLD
 Hentzer kaydı `Kültür, Nisbetiye Cd. No:56, 34340 Beşiktaş/İstanbul`, telefon `+90 536 830 59 96`. Akmerkez resmi mağaza sayfası aynı telefonu ve Paparino Pizza’yı doğruluyor; Yandex ise Nisbetiye Cad. `54/157` adresini veriyor. Canlı Yemeksepeti’nde güncel pizza fiyatları görünse de vendor’ın Hentzer No:56 adresli exact şube olduğu kesinleştirilemedi. Adres parity şartı sağlanamadığı için **override eklenmedi; strict HOLD**.
+
+## KAMY COFFEE CO. BAYRAMPAŞA ID 6764 HOLD
+Hentzer kaydı `Yıldırım, Avasköy Yolu Cd. No:41, 34045 Bayrampaşa/İstanbul`, telefon alanı boş. Yandex aynı işletme adını Avasköy Yolu Cad. civarında gösterse de telefon `+90 531 249 93 51`; güncel resmi Instagram sonucu ise Şht. Kamil Balkan Cd. No:30-B adresini veriyor. Hentzer adresi ve exact iletişim bilgileriyle %100 branch parity kurulamadı; son bir yıl içinde şubeye ait fiyatlı menü de bulunamadı. Bu nedenle **override eklenmedi; strict HOLD**.
