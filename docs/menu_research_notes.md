@@ -3238,3 +3238,7 @@ Meyhankoli Hentzer ile exact Perlavista AVM B blok C48 adresini doğruluyor anca
 ## TARİHİ OKTAY KURABİYE FIRINI ID 6430 ACCEPTED
 Hentzer `Türkali, Yaverağa Sk. 1/A, 34357 Beşiktaş/İstanbul`, telefon `+90 212 258 88 92`. Yandex exact adres/telefonu, Hürriyet’in 14.02.2026 tarihli içeriği işletmenin güncelliğini destekliyor. Canlı Yemeksepeti `b3xf` menüsünden poşet ve popüler tekrarlar dışlanarak 20 benzersiz kurabiye/fırın ürünü eklendi. **Override kabul edildi.**
 Kaynaklar: https://www.yemeksepeti.com/en/restaurant/b3xf/tarihi-oktay-kurabiye-firini ; https://yandex.com.tr/maps/org/tarihi_oktay_kurabiye_firini/1042818948/ ; https://www.hurriyet.com.tr/kelebek/lezzetli-hayat/cayin-yanina-iyi-gider-43107377
+
+## KAFFE BØRN (BORN KAFFE) ID 6429 HOLD
+Yandex/Firma Fihristi Hentzer ile aynı telefon `+90 534 723 92 42` ve Yıldız Caddesi/Cihannüma bölgesini destekliyor; ancak Hentzer kapı `32/A`, Firma Fihristi `30` veriyor. Resmi kaffeborn.com sitesinde şube bazlı ürün fiyatlı menü bulunmadı, Yemeksepeti exact vendoru da doğrulanamadı. **Override eklenmedi; strict HOLD.**
+Kaynaklar: https://yandex.com.tr/maps/org/kaffe_b_rn/1125634333/ ; https://firmafihristi.com.tr/firma/41561-1125634333 ; https://kaffeborn.com/
