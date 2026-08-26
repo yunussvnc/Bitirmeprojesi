@@ -2293,3 +2293,6 @@ Hentzer kaydı `Kanlıca, Halide Edip Adıvar Cd. 1A, 34810 Beykoz/İstanbul`, t
 
 ## COFFEE-IN MUNCHIES BEYLİKDÜZÜ ID 6734 HOLD
 Hentzer kaydı `Barış, İzmir Cd. No:18 D:F, 34520 Beylikdüzü/İstanbul`, telefon alanı `null`. Markanın resmi Beylikdüzü şube sayfası aynı adresi ve `+90 531 084 59 35` telefonunu doğruluyor; 2025-2026 sosyal içerikleri de şubeyi destekliyor. Ancak Hentzer’de telefon bulunmadığı için %100 phone parity kurulamadı ve exact şubeye ait erişilebilir güncel fiyatlı menü bulunamadı. **Override eklenmedi; strict HOLD**.
+
+## GALA KOKOREÇ BAYRAMPAŞA ID 6733 ACCEPTED
+Hentzer kaydı `Yenidoğan, Abdi İpekçi Cd. No:32A, 34000 Bayrampaşa/İstanbul`, telefon `+90 212 501 66 57`. Gala Kokoreç resmi şubeler sayfası aynı Bayrampaşa Merkez adresini `32/A` ve aynı telefonu veriyor; Waze de aynı adres/telefonu doğruluyor. 26.08.2026 tarihinde şubeye bağlı canlı Migros Yemek menüsünden Popüler carousel tekrarları, içecekler ve çevre bedeli dışarıda bırakılarak 20 benzersiz gıda ürün-fiyat çifti alındı. **20 gıda ürünü override edildi.**

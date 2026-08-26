@@ -4,6 +4,34 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6733": {
+    "name": "GALA KOKOREÇ BAYRAMPAŞA",
+    "sourceUrl": "https://www.migros.com.tr/yemek/gala-kokorec-bayrampasa-yenidogan-mah-st-1a46d",
+    "sourceName": "Şubeye bağlı canlı Migros Yemek menüsü; resmi Gala Kokoreç şubeler sayfası ve Waze ile exact adres/telefon doğrulandı",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Yarım Kokoreç Menü", "price": "300 TL", "category": "Menüler" },
+      { "name": "3 Parça Kokoreç Menü", "price": "400 TL", "category": "Menüler" },
+      { "name": "Tam Ekmek Kokoreç Menü", "price": "480 TL", "category": "Menüler" },
+      { "name": "Yarım Ekmek Arası Kokoreç Menü", "price": "230 TL", "category": "Menüler" },
+      { "name": "Çeyrek Kokoreç Menü", "price": "240 TL", "category": "Menüler" },
+      { "name": "Yarım Ekmek Arası Sucuk Menü", "price": "250 TL", "category": "Menüler" },
+      { "name": "Aile Menü Kokoreç", "price": "970 TL", "category": "Menüler" },
+      { "name": "3/4 Ekmek Arası İri Kıyım Kokoreç Menü", "price": "590 TL", "category": "Menüler" },
+      { "name": "3/4 Ekmek Arası Sucuk Menü", "price": "340 TL", "category": "Menüler" },
+      { "name": "3/4 Ekmek Arası Kokoreç Menü", "price": "320 TL", "category": "Menüler" },
+      { "name": "Midye Dolma (10 Adet) Menü", "price": "220 TL", "category": "Menüler" },
+      { "name": "Midye Dolma (30 Adet) Menü", "price": "590 TL", "category": "Menüler" },
+      { "name": "Tam Ekmek Arası Kokoreç", "price": "360 TL", "category": "Kokoreçler" },
+      { "name": "3/4 Ekmek Arası Kokoreç", "price": "280 TL", "category": "Kokoreçler" },
+      { "name": "Yarım Ekmek Arası Kokoreç", "price": "180 TL", "category": "Kokoreçler" },
+      { "name": "Çeyrek Ekmek Arası Kokoreç", "price": "140 TL", "category": "Kokoreçler" },
+      { "name": "Yarım Ekmek Arası İzmir Kokoreç", "price": "360 TL", "category": "Kokoreçler" },
+      { "name": "3/4 Ekmek Arası İzmir Kokoreç", "price": "560 TL", "category": "Kokoreçler" },
+      { "name": "Yarım Ekmek Arası Tavuk Döner", "price": "100 TL", "category": "Tavuk Dönerler" },
+      { "name": "Tavuk Döner Dürüm", "price": "150 TL", "category": "Tavuk Dönerler" }
+    ]
+  },
   "6736": {
     "name": "ANTEPLİ ŞAHİN USTA",
     "sourceUrl": "https://www.menum.co/antepli-kebablahmacun",
