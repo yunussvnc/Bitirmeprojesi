@@ -2383,3 +2383,6 @@ Hentzer kaydı `Kanlıca, Hacı Muhittin Sk. No:40, 34810 Beykoz/İstanbul`, tel
 
 ## CAVİT PASTANESİ BEYOĞLU ID 6704 HOLD
 Hentzer kaydı `Kalyoncu Kulluğu, Kalyoncu Kulluğu Cd. 1/A, 34435 Beyoğlu/İstanbul`, telefon `+90 212 255 23 28`. Yandex, Smart Beyoğlu ve diğer yerel kayıtlar aynı adres/telefonu doğruluyor; işletme aktif görünüyor. Restaurant Guru’da menü sayfası bulundu ancak erişim CAPTCHA/suspicious-activity duvarında kaldı; resmi veya güvenilir güncel fiyatlı ürün listesi doğrulanamadı. Son bir yıl fiyat şartı sağlanamadığı için **override eklenmedi; strict HOLD**.
+
+## COFFEE PALACE BEYLİKDÜZÜ ID 6703 HOLD
+Hentzer kaydı `Cumhuriyet Mah. N. Hikmet Bulvarı 1997. Sokak, Cumhuriyet Parkı 1, 34515 Beylikdüzü/İstanbul`, telefon `+90 212 852 95 90`. Arama sonuçlarında Coffee Palace/Kahve Sarayı için Facebook kaydı No:1 ve `+90 553 046 00 93` telefonunu, başka Yandex kaydı ise farklı 2068 Sokak adresi ve farklı telefon gösteriyor. Hentzer exact telefon ve adresiyle eşleşen güvenilir güncel işletme kaydı ile fiyatlı menü bulunamadı. **Override eklenmedi; strict HOLD**.
