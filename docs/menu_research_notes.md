@@ -2548,3 +2548,6 @@ Hentzer kaydı `Sinanpaşa, Şht. Asım Cd. No:8, 34353 Beşiktaş/İstanbul`, t
 
 ## GÜNAYDIN KEBAP & STEAKHOUSE MAÇKA ID 6648 HOLD
 Hentzer kaydı `Vişnezade, Bayıldım Cd. No:2, 34400 Beşiktaş/İstanbul`, telefon `+90 212 258 12 03`. Yandex, Meyhankoli, Mekanlar ve resmi Günaydın sosyal paylaşımı aynı Maçka/Bayıldım No:2 adresini ve telefonu doğruluyor; işletme aktif. Resmi Günaydın 2026 menü sayfası ürün başlıklarını listeliyor fakat fiyat yayınlamıyor; bulunan fiyatlı üçüncü taraf menülerin tarihi/şube kapsamı son bir yıl exact şartını karşılamıyor. **Override eklenmedi; strict HOLD**.
+
+## MEŞHUR DENİZLİ KUZU TANDIR BEYKOZ ID 6647 HOLD
+Hentzer kaydı `Yavuz Selim, Çavuşbaşı Cumhuriyet Cd. No:78, 34830 Beykoz/İstanbul`, telefon alanı boş. Resmi By Kuzu Tandır sitesi Beykoz şubesini aynı cadde üzerinde `No:80` ve `+90 216 479 02 44` ile gösteriyor; Yandex aktif kaydı ise `Edebali Cad. 2` ve aynı telefonu veriyor. Bulunan fiyatlı sosyal içerikler 2023–2024 tarihli, son bir yıl içinde değil. Telefon ve exact adres parity’si sağlanamadığı için **override eklenmedi; strict HOLD**.
