@@ -2780,3 +2780,6 @@ Hentzer kaydı `Adnan Kahveci, Avrupa Cd. No:108/36, 34528 Beylikdüzü/İstanbu
 
 ## YÖREM CAĞ KEBAP KAVACIK ID 6572
 Hentzer kaydı `Kavacık, Cumhuriyet Cd. No:91, 34805 Beykoz/İstanbul`, telefon `+90 216 413 41 32`. Restoranim exact adresi, Instagram ve Bulurum aynı telefonu/işletme kimliğini doğruluyor. Canlı Yemeksepeti exact Yörem Cağ Kebap menüsünden 12 benzersiz gıda ürünü seçildi; içecek, poşet ve Popüler tekrarları hariç tutuldu. **Override kabul edildi; 12 ürün.** Kaynaklar: https://www.yemeksepeti.com/en/restaurant/gmug/yorem-cag-kebap-gmug ; https://restoranim.net/istanbul/beykoz/kebapci/yorem-cag-kebap ; https://www.instagram.com/yoremcagkebap/
+
+## BWIN BUBBLE WAFFLE BAYRAMPAŞA ID 6571 HOLD
+Hentzer kaydı `Yıldırım, Şht. Kamil Balkan Cd. No:7, 34170 Bayrampaşa/İstanbul`, telefon `+90 212 545 36 39`. Yandex ve Facebook aynı işletme/telefonu destekliyor ancak birim adresini `No:7/B` olarak veriyor; zorunlu exact adres parity’si sağlanamadı. Arama sonuçlarında exact Bayrampaşa şubesine ait son bir yıl ürün bazlı fiyatlı menü de bulunamadı; diğer Bubble Waffle sonuçları farklı işletmelere ait. **Override eklenmedi; strict HOLD.**
