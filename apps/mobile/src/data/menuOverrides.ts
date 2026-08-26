@@ -91007,6 +91007,17 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "5 Çeşit Meze Menü", "price": "1500 TL", "category": "Özel Menü" }
     ]
   },
+  "6564": {
+    "name": "01 ADANA KEBAP & LAHMACUN TAKSİM",
+    "sourceUrl": "https://restoranim.net/istanbul/beyoglu/kebapci/01-adana-kebap-lahmacun-taksim",
+    "sourceName": "Restoranim güncel 01 Adana Taksim menü fiyatları; resmi Instagram exact adres-telefon doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Adana Kebap (160 gr.)", "price": "490 TL", "category": "Izgaralar" },
+      { "name": "Kaburga Şiş", "price": "530 TL", "category": "Izgaralar" },
+      { "name": "Ciğer Şiş", "price": "400 TL", "category": "Izgaralar" }
+    ]
+  },
   "6570": {
     "name": "SUSHI&SPICE AKARETLER",
     "sourceUrl": "https://www.yemeksepeti.com/restaurant/iokb/sushi-and-spice",

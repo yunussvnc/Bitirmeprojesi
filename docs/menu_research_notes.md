@@ -2801,3 +2801,6 @@ Hentzer kaydı `Vişnezade, Şair Nedim Cd. No:47/B, 34353 Beşiktaş/İstanbul`
 
 ## SYMPETSHOP BAYRAMPAŞA ID 6565 HOLD
 Hentzer kaydı `İsmet Paşa, İsmet Paşa Cd. No:31, 34030 Bayrampaşa/İstanbul`, telefon `+90 540 609 83 81`. Yandex, Patı Mahallesi ve resmi Instagram exact işletmeyi pet shop olarak doğruluyor; kedi/köpek maması ve evcil hayvan ürünleri satılıyor. İnsan gıda restoranı veya uygun menü bulunmadığından **kapsam dışı; override eklenmedi, strict HOLD**.
+
+## 01 ADANA KEBAP & LAHMACUN TAKSİM ID 6564
+Hentzer kaydı `Hüseyinağa, Balo Sk. No:23/A, 34421 Beyoğlu/İstanbul`, telefon `+90 212 243 87 24`. Resmi Instagram aynı Balo Sk. No:23 ve telefonu doğruluyor; Restoranim exact profili güncel ürün fiyatlarını veriyor. Güvenilir biçimde doğrulanabilen 3 benzersiz gıda ürünü eklendi: 160 g Adana 490 TL, kaburga şiş 530 TL, ciğer şiş 400 TL. **Override kabul edildi; 3 ürün.** Kaynaklar: https://restoranim.net/istanbul/beyoglu/kebapci/01-adana-kebap-lahmacun-taksim ; https://www.instagram.com/01adanakebaptaksim/
