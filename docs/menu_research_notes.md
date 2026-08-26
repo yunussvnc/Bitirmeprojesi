@@ -3173,3 +3173,6 @@ Buraya Gidelim/Cybo/Instagram exact `Marmara, Ulusum Cd. C Blok No:34/3A, 34524 
 
 ## MUGSHOTS COFFEE BEŞİKTAŞ ID 6449 HOLD
 Yandex/Allzin exact `Türkali, Ihlamurdere Cd. 68/A, 34357 Beşiktaş/İstanbul` ve `+90 532 358 00 01` parity’sini doğruluyor. Allzin menü kategorilerini gösterse de ürün bazlı güncel TL fiyatları yayımlanmıyor; 20 fiyatlı gıda ürünü doğrulanamadı. **Override eklenmedi; strict HOLD.**
+
+## BEYLİKDÜZÜ KAHVESİ ID 6448 HOLD
+Servis İşletme Bul/Restoranim/Yerel Esnaf Hentzer exact adres ve `+90 507 743 63 63` telefonunu destekliyor; ancak Yandex aynı No:1/9 adres için `+90 544 341 15 22` veriyor. 20 güncel fiyatlı gıda ürünü de doğrulanamadı. **Override eklenmedi; strict HOLD.**
