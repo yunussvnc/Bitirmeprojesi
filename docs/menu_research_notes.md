@@ -2807,3 +2807,6 @@ Hentzer kaydı `Hüseyinağa, Balo Sk. No:23/A, 34421 Beyoğlu/İstanbul`, telef
 
 ## KAVACIK ABDO KEBAP LAHMACUN VE BEYRAN ID 6563
 Hentzer kaydı `Kavacık, Fatih Sultan Mehmet Cd. No:9, 34810 Beykoz/İstanbul`, telefon `+90 216 693 16 93`. Restoranim, Yandex ve resmi Instagram exact şube/telefonu doğruluyor. Canlı Migros exact Kavacık vendor menüsünden içecek, kampanya ve tekrarlar hariç 20 benzersiz gıda ürünü seçildi. **Override kabul edildi; 20 ürün.** Kaynaklar: https://www.migros.com.tr/yemek/abdo-gaziantep-kebap-lahmacun-beyran-beykoz-kavacik-mah-st-2f696 ; https://restoranim.net/istanbul/fatih/kebapci/kavacik-abdo-kebap-lahmacun-ve-beyran
+
+## SUN COFFEE & DESSERT BAYRAMPAŞA ID 6562 HOLD
+Hentzer kaydı `Yenidoğan, Yahya Kemal Cd. No:14/A, 34040 Bayrampaşa/İstanbul`, telefon `+90 531 642 62 57`. Facebook 05.03.2026 paylaşımı, Yandex ve işletme kayıtları exact şube/telefonu doğruluyor. 2025–2026 sosyal içerikleri ürünleri gösterse de erişilebilir ürün bazlı TL fiyatlı menü bulunamadı; benzer isimli Sun Patisserie ve Mysun Cafe kaynakları farklı işletmelerdir. **Override eklenmedi; strict HOLD.**
