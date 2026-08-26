@@ -2160,3 +2160,6 @@ Hentzer kaydı `Barış, Palmiye Sokağı, 34520 Beylikdüzü/İstanbul`, telefo
 
 ## KADIKÖY KEBAPÇISI BEYLİKDÜZÜ ID 6777 ACCEPTED
 Hentzer kaydı `Büyükşehir, Atatürk Blv. No:38/A İç:24, 34520 Beylikdüzü/İstanbul`, telefon `+90 212 872 69 79`. İşletmenin resmi Instagram hesabı Beylikdüzü şubesi ve aynı telefonu; Bulurum ve güncel servis listesi de adres/telefonu destekliyor. Canlı Yemeksepeti menüsü 26.08.2026 tarihinde 25 gıda ürünü için fiyat yayınlıyordu. Poşet gibi gıda dışı kalemler eklenmedi. **25 ürün override edildi.**
+
+## MÜTEMADİYEN ORTAKÖY ID 6776 HOLD
+Hentzer kaydı `Ortaköy, Muallim Naci Cd. No:45/1, 34347 Beşiktaş/İstanbul`, telefon `+90 533 252 74 34`. Fırsat kaynakları adresi desteklese de Yandex işletmeyi artık faal değil gösteriyor; işletmenin Instagram sonucunda aynı adres için farklı telefon `+90 532 168 87 99` yer alıyor. Son bir yıl içinde exact şubeye ait doğrulanabilir fiyatlı menü bulunamadığı için **override eklenmedi; strict HOLD**.
