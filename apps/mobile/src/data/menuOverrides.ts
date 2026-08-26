@@ -91007,6 +91007,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "5 Çeşit Meze Menü", "price": "1500 TL", "category": "Özel Menü" }
     ]
   },
+  "6587": {
+    "name": "BENEKLİ KIZ KÖFTE SUCUK BURGER BEYKOZ",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/rf6u/intiba-benekli-kiz-kofte-and-burger",
+    "sourceName": "Canlı Yemeksepeti İntiba Benekli Kız Köfte & Burger menüsü; resmi Instagram/Facebook exact adres-telefon doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Izgara Köfte (210 gr.)", "price": "560 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Hamburger (130 gr.) Menü", "price": "570 TL", "category": "Menüler" },
+      { "name": "Hamburger (180 gr.)", "price": "570 TL", "category": "Burgerler" },
+      { "name": "Ekmek Arası Köfte", "price": "470 TL", "category": "Ekmek Arası Ürünler" },
+      { "name": "Ekmek Arası Izgara Köfte Menü", "price": "560 TL", "category": "Menüler" },
+      { "name": "Ekmek Arası Sucuk Menü", "price": "560 TL", "category": "Menüler" },
+      { "name": "2'li Ekmek Arası Köfte Menü", "price": "1100 TL", "category": "Menüler" },
+      { "name": "2'li Ekmek Arası Sucuk Menü", "price": "1100 TL", "category": "Menüler" },
+      { "name": "2'li Hamburger Menü", "price": "1140 TL", "category": "Menüler" },
+      { "name": "Hamburger (180 gr.) Menü", "price": "640 TL", "category": "Menüler" },
+      { "name": "Kiloluk Köfte Menü", "price": "2650 TL", "category": "Kiloluk Izgaralar" },
+      { "name": "Izgara Sucuk ve Izgara Köfte Karışık Menü", "price": "2450 TL", "category": "Kiloluk Izgaralar" },
+      { "name": "Süzme Mercimek Çorbası (Az)", "price": "120 TL", "category": "Çorbalar" },
+      { "name": "Süzme Mercimek Çorbası", "price": "150 TL", "category": "Çorbalar" },
+      { "name": "Double Hamburger (360 gr.)", "price": "1140 TL", "category": "Burgerler" },
+      { "name": "Hamburger (130 gr.)", "price": "500 TL", "category": "Burgerler" },
+      { "name": "Lokum Burger (150 gr.)", "price": "980 TL", "category": "Burgerler" },
+      { "name": "Lokum Burger (300 gr.)", "price": "1960 TL", "category": "Burgerler" },
+      { "name": "Antrikot Burger", "price": "720 TL", "category": "Burgerler" },
+      { "name": "Ekmek Arası Sucuk", "price": "470 TL", "category": "Ekmek Arası Ürünler" }
+    ]
+  },
   "6589": {
     "name": "RETRO DÖNER BEYLİKDÜZÜ",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/ui8l/retro-doner-eski-usul",
