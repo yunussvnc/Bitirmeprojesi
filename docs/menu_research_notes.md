@@ -2789,3 +2789,6 @@ Hentzer kaydı `Sinanpaşa, Şair Nedim Cd. No:10, 34353 Beşiktaş/İstanbul`, 
 
 ## FALAFELS ISTANBUL BEŞİKTAŞ ID 6569 HOLD
 Hentzer kaydı `Cihannüma Mah., Yıldız, Muhtar Evvel Sk. Muhtar-ı Kıroğlu, 34349 Beşiktaş/İstanbul`, telefon `+90 530 883 66 40`. Resmi Falafels sitesi aynı konum bilgisini ancak `+90 534 899 96 95` telefonu ile veriyor; TripAdvisor No:8B, Yandex ise farklı bir telefon yayımlıyor. Resmi sitede fiyatlı menü yok, sosyal arama sonucu tam ve şubeye bağlanabilir fiyat listesi sağlamıyor. **Exact phone parity ve fiyat şartı sağlanamadığından override eklenmedi; strict HOLD.**
+
+## BIG GARDEN CAFE & BISTRO BAHÇELİEVLER ID 6568 HOLD
+Hentzer kaydı `Bahçelievler, Bağcılar Cd. No:45/1, 34180 Bahçelievler/İstanbul`, telefon `+90 535 470 21 59`. Restaurants Info, Facebook ve işletme sayfası exact adres/telefonu doğruluyor. Ancak erişilebilen menü yalnızca genel ürün adları ve `$` işaretleri veriyor; son bir yıl içinde ürün bazlı, doğrulanabilir TL fiyatlı exact şube menüsü bulunamadı. **Override eklenmedi; strict HOLD.**
