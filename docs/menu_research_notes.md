@@ -2347,3 +2347,6 @@ Hentzer kaydı `Gümüşsuyu, 34820 Beykoz/İstanbul` ve telefon alanı boş. Ka
 
 ## JUST SUSHI BEŞİKTAŞ ID 6716 ACCEPTED
 Hentzer kaydı `Cihannüma, Akdoğan Sk. No:35/A, 34353 Beşiktaş/İstanbul`, telefon `+90 212 227 90 10`. Just Sushi resmi sitesi aynı Cihannüma/Akdoğan adresini ve telefonu veriyor; Migros Yemek exact `Beşiktaş (Cihannüma Mah.)` şubesiyle eşleşiyor. 26.08.2026 tarihinde canlı Migros Yemek menüsünden Popüler carousel tekrarları ve içecekler dışarıda bırakılarak sushi setleri, rolls ve maki kategorilerinden 20 benzersiz ürün-fiyat çifti alındı. **20 gıda ürünü override edildi.**
+
+## PERA İSTANBUL RESTAURANT BEYOĞLU ID 6715 HOLD
+Hentzer kaydı `Asmalı Mescit, Asmalı Mescit Cd. No:21, 34430 Beyoğlu/İstanbul`, telefon `+90 534 239 93 83`. Resmi Instagram ve Ocak 2026 tarihli paylaşım aynı adres ve telefonu doğruluyor; Tripadvisor da No:21 adresini destekliyor. Ancak bulunan fiyatlı Yemeksepeti sonucu `Pera Restaurant & Cafe` olarak farklı işletme, diğer Pera menüleri de farklı adres/telefonlardaki işletmelerdir. Exact branch’e ait son bir yıl fiyatlı menü doğrulanamadığı için **override eklenmedi; strict HOLD**.
