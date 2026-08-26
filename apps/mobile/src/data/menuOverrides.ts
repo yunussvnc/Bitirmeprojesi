@@ -91652,6 +91652,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Çilekli Frappe", "price": "144 TL", "category": "Soğuk İçecekler" }
     ]
   },
+  "6461": {
+    "name": "Betro Burger Beşiktaş",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/djyc/betro-burger-djyc",
+    "sourceName": "Güncel Yemeksepeti djyc Betro Burger Beşiktaş menüsü; Betro Burger resmi şube sayfası, Waze, Apple Maps ve Instagram ile Şair Nedim Cd. No:26A ve +90 212 258 80 00 exact parity doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Quba Betro Burger (200 gr.)", "price": "655 TL", "category": "Burgerler" },
+      { "name": "Quba Betro Burger (100 gr.)", "price": "535 TL", "category": "Burgerler" },
+      { "name": "California Betro Burger (200 gr.)", "price": "655 TL", "category": "Burgerler" },
+      { "name": "California Betro Burger (100 gr.)", "price": "535 TL", "category": "Burgerler" },
+      { "name": "Smoked Betro Burger (200 gr.)", "price": "655 TL", "category": "Burgerler" },
+      { "name": "Smoked Betro Burger (100 gr.)", "price": "535 TL", "category": "Burgerler" },
+      { "name": "Kayserili Betro Burger (200 gr.)", "price": "695 TL", "category": "Burgerler" },
+      { "name": "Kayserili Betro Burger (100 gr.)", "price": "590 TL", "category": "Burgerler" },
+      { "name": "Badıl Betro Burger (200 gr.)", "price": "630 TL", "category": "Burgerler" },
+      { "name": "Badıl Betro Burger (100 gr.)", "price": "510 TL", "category": "Burgerler" },
+      { "name": "Adanalı Betro Burger (200 gr.)", "price": "630 TL", "category": "Burgerler" },
+      { "name": "Adanalı Betro Burger (100 gr.)", "price": "510 TL", "category": "Burgerler" },
+      { "name": "Dubai Betro Burger (300 gr.)", "price": "750 TL", "category": "Burgerler" },
+      { "name": "Klasik Betro Burger (200 gr.)", "price": "630 TL", "category": "Burgerler" },
+      { "name": "Veggie Betro Burger", "price": "395 TL", "category": "Burgerler" },
+      { "name": "Klasik Chicken Burger", "price": "480 TL", "category": "Tavuk Burgerler" },
+      { "name": "Hot BBQ Chicken Burger", "price": "480 TL", "category": "Tavuk Burgerler" },
+      { "name": "Relish Chicken Burger", "price": "480 TL", "category": "Tavuk Burgerler" },
+      { "name": "Fire Chicken Burger", "price": "480 TL", "category": "Tavuk Burgerler" },
+      { "name": "Hot BBQ Chicken Boneless", "price": "440 TL", "category": "Tavuklar" }
+    ]
+  },
   "6474": {
     "name": "Spesiyal Balık Beykent",
     "sourceUrl": "https://www.yemeksepeti.com/restaurant/oq1d/spesiyal-balik",

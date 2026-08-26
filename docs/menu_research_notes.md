@@ -3131,3 +3131,7 @@ Nelerimeshur/Mindtrip/Corner ve 2026 Facebook paylaşımı Hentzer ile exact `G�
 
 ## IRISH PUB THE JAMES JOYCE ID 6462 HOLD
 Yandex/Bulurum/Meyhankoli ve diğer kaynaklar Hentzer ile exact `Hüseyinağa, Balo Sk. No:26, 34435 Beyoğlu/İstanbul` ve `+90 212 244 79 73` parity’sini doğruluyor. Wheree menüsü fiyatların değişebileceği uyarısıyla yalnızca ürün tanımları veriyor; QRMN ise yalnızca içecek menüsü. 20 güncel fiyatlı gıda ürünü doğrulanamadı. **Override eklenmedi; strict HOLD.**
+
+## BETRO BURGER BEŞİKTAŞ ID 6461 ACCEPTED
+Hentzer `Sinanpaşa, Şair Nedim Cd. No:26 A, 34357 Beşiktaş/İstanbul`, telefon `+90 212 258 80 00`. Betro Burger resmi şube sayfası, Waze, Apple Maps ve Instagram exact branch’i doğruluyor. Yemeksepeti djyc vendoru exact Beşiktaş adresini taşıyor; 20 benzersiz burger ve tavuk ürünü eklendi, içecekler ve popüler carousel tekrarları dışlandı. **Override kabul edildi.**
+Kaynaklar: https://betroburger.com/subeler ; https://www.yemeksepeti.com/en/restaurant/djyc/betro-burger-djyc ; https://www.waze.com/live-map/directions/tr/i%CC%87stanbul/betro-burger-besiktas ; https://www.instagram.com/betroburger/
