@@ -4,6 +4,15 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6785": {
+    "name": "HERKES BALIK YİYECEK - BEYLİKDÜZÜ ŞUBE",
+    "sourceUrl": "https://www.instagram.com/reel/DbjBPGdMtlb/",
+    "sourceName": "Herkes Balık Yiyecek Beylikdüzü resmi Instagram paylaşımı; 2026 gel-al kampanyası",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "ÇİPURA (KG)", "price": "299 TL", "category": "Balık" }
+    ]
+  },
   "6790": {
     "name": "DEL PONTE PİZZERİA",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/mmpy/del-ponte-pizzeria",

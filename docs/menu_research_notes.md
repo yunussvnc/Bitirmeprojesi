@@ -2133,3 +2133,6 @@ Hentzer kaydı `Feridiye Caddesi No:7B, Şehit Muhtar, 34421 Beyoğlu/İstanbul`
 
 ## KUMBASAR UNLU MAMULLERİ ID 6786 HOLD
 Hentzer kaydı `Orta, Adalet Sk. 7/A, 34030 Bayrampaşa/İstanbul`, telefon `+90 212 613 77 11`. Yandex/Bulurum aynı telefonu destekliyor ancak Yandex’in ana kaydı adresi Adalet Sokak olarak verirken panorama sonucu `46B` gösteriyor; Hentzer kaydı ise `7/A`. Instagram profilinde ayrıca farklı telefonlar yer alıyor. Bulunan Yemeksepeti fiyatlı kayıt `Kumbasar Fırını` Samsun olarak göründüğünden bu şubeye bağlanamadı. %100 adres eşleşmesi ve branch-specific son bir yıl fiyat doğrulaması sağlanamadığı için **override eklenmedi; strict HOLD**.
+
+## HERKES BALIK YİYECEK - BEYLİKDÜZÜ ŞUBE ID 6785 ACCEPTED
+Hentzer kaydı `Kavaklı, Göktürkler Sk. No:3 D:1, 34520 Beylikdüzü/İstanbul`, telefon `+90 212 875 90 08`. İşletmenin resmi sitesi ve Instagram profili Beylikdüzü şubesini, Demir Country/Balıkçılar Çarşısı konumunu ve aynı telefonu destekliyor. 2026 tarihli resmi Instagram kampanya paylaşımında Beylikdüzü şubesine özel gel-al fiyatı `Çipura 299 TL/kg` olarak yayınlandı. Yalnızca bu exact-branch ve son bir yıl şartlarını karşılayan gıda kalemi eklendi; genel veya başka şube fiyatları eklenmedi. **1 ürün override edildi.**
