@@ -2804,3 +2804,6 @@ Hentzer kaydı `İsmet Paşa, İsmet Paşa Cd. No:31, 34030 Bayrampaşa/İstanbu
 
 ## 01 ADANA KEBAP & LAHMACUN TAKSİM ID 6564
 Hentzer kaydı `Hüseyinağa, Balo Sk. No:23/A, 34421 Beyoğlu/İstanbul`, telefon `+90 212 243 87 24`. Resmi Instagram aynı Balo Sk. No:23 ve telefonu doğruluyor; Restoranim exact profili güncel ürün fiyatlarını veriyor. Güvenilir biçimde doğrulanabilen 3 benzersiz gıda ürünü eklendi: 160 g Adana 490 TL, kaburga şiş 530 TL, ciğer şiş 400 TL. **Override kabul edildi; 3 ürün.** Kaynaklar: https://restoranim.net/istanbul/beyoglu/kebapci/01-adana-kebap-lahmacun-taksim ; https://www.instagram.com/01adanakebaptaksim/
+
+## KAVACIK ABDO KEBAP LAHMACUN VE BEYRAN ID 6563
+Hentzer kaydı `Kavacık, Fatih Sultan Mehmet Cd. No:9, 34810 Beykoz/İstanbul`, telefon `+90 216 693 16 93`. Restoranim, Yandex ve resmi Instagram exact şube/telefonu doğruluyor. Canlı Migros exact Kavacık vendor menüsünden içecek, kampanya ve tekrarlar hariç 20 benzersiz gıda ürünü seçildi. **Override kabul edildi; 20 ürün.** Kaynaklar: https://www.migros.com.tr/yemek/abdo-gaziantep-kebap-lahmacun-beyran-beykoz-kavacik-mah-st-2f696 ; https://restoranim.net/istanbul/fatih/kebapci/kavacik-abdo-kebap-lahmacun-ve-beyran

@@ -91007,6 +91007,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "5 Çeşit Meze Menü", "price": "1500 TL", "category": "Özel Menü" }
     ]
   },
+  "6563": {
+    "name": "KAVACIK ABDO KEBAP LAHMACUN VE BEYRAN",
+    "sourceUrl": "https://www.migros.com.tr/yemek/abdo-gaziantep-kebap-lahmacun-beyran-beykoz-kavacik-mah-st-2f696",
+    "sourceName": "Canlı Migros exact Kavacık vendor menüsü; Restoranim/Yandex/resmi Instagram şube parity doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Ezogelin Çorbası", "price": "200 TL", "category": "Çorbalar" },
+      { "name": "Beyran Çorbası", "price": "500 TL", "category": "Çorbalar" },
+      { "name": "Et Şiş", "price": "650 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Kasap Sucuk", "price": "600 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Tavuk Şiş", "price": "500 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Tavuk Kanat", "price": "500 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Tavuk Şiş Dürüm", "price": "350 TL", "category": "Dürümler" },
+      { "name": "Et Şiş Dürüm", "price": "450 TL", "category": "Dürümler" },
+      { "name": "Urfa Dürüm", "price": "400 TL", "category": "Dürümler" },
+      { "name": "Adana Dürüm", "price": "400 TL", "category": "Dürümler" },
+      { "name": "Kasap Sucuk Dürüm", "price": "400 TL", "category": "Dürümler" },
+      { "name": "Lahmacun", "price": "250 TL", "category": "Lahmacunlar" },
+      { "name": "Kaşarlı Lahmacun", "price": "300 TL", "category": "Lahmacunlar" },
+      { "name": "Antep Lahmacun", "price": "275 TL", "category": "Lahmacunlar" },
+      { "name": "Kuşbaşılı Pide", "price": "550 TL", "category": "Pideler" },
+      { "name": "Kıymalı Pide", "price": "550 TL", "category": "Pideler" },
+      { "name": "Kaşarlı Sucuklu Pide", "price": "500 TL", "category": "Pideler" },
+      { "name": "Kaşarlı Pide", "price": "400 TL", "category": "Pideler" },
+      { "name": "Kıymalı Kaşarlı Pide", "price": "550 TL", "category": "Pideler" },
+      { "name": "Mevsim Salata", "price": "200 TL", "category": "Salatalar" }
+    ]
+  },
   "6564": {
     "name": "01 ADANA KEBAP & LAHMACUN TAKSİM",
     "sourceUrl": "https://restoranim.net/istanbul/beyoglu/kebapci/01-adana-kebap-lahmacun-taksim",
