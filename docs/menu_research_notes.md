@@ -2317,3 +2317,6 @@ Hentzer kaydı `Yıldırım, Bosna Sk No:3/A, 34150 Bayrampaşa/İstanbul`, tele
 
 ## BEYKOZ SEMT PAZARI ID 6726 HOLD
 Hentzer kaydı `Yalıköy, Doğu Kapısı Cd. No:1, 34820 Beykoz/İstanbul`, telefon alanı `null`. Ticaret Bakanlığı Hal Kayıt Sistemi ve Waze bu konumu Yalıköy/Beykoz **semt pazarı** olarak doğruluyor; restoran veya tekil yiyecek işletmesi değil. Telefon ve fiyatlı restoran menüsü bulunmadığı gibi pazar alanı menü override kapsamına girmiyor. **Override eklenmedi; strict HOLD**.
+
+## KAVAK KÖY BALIKÇISI BEYKOZ ID 6725 HOLD
+Hentzer kaydı `Anadolu Kavağı, Yalı Çk. 5A, 34825 Beykoz/İstanbul`, telefon `+90 533 455 61 91`. Kaçıyor kaydı aynı adres ve telefonu destekliyor; ancak açık menü kaynağı yok, bulunan Anadolu Kavağı fiyatları farklı işletmelere ait veya güncelliği belirsiz. Son bir yıl içinde exact şubeye ait kalem bazında fiyatlı menü doğrulanamadığından **override eklenmedi; strict HOLD**.
