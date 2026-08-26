@@ -90885,5 +90885,33 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Tek Kişilik Lahmacun Menü", "price": "550 TL", "category": "Lahmacun Menüleri" },
       { "name": "Özel Antep Lahmacun", "price": "180 TL", "category": "Lahmacunlar" }
     ]
+  },
+  "6634": {
+    "name": "KAHVELY BEYLİKDÜZÜ",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/sq2g/kahvely-coffee-shop-sq2g",
+    "sourceName": "Yemeksepeti canlı Kahvely menüsü; Kahvely resmi Instagram paylaşımı ve işletme dizinleriyle Westside2 adres/telefon doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "3 Peynirli Tost", "price": "265 TL", "category": "Tostlar" },
+      { "name": "Etli Tost", "price": "275 TL", "category": "Tostlar" },
+      { "name": "Hindi Füme Tost", "price": "275 TL", "category": "Tostlar" },
+      { "name": "Tavuklu Tost", "price": "250 TL", "category": "Tostlar" },
+      { "name": "Çikolatalı Kruvasan", "price": "330 TL", "category": "Kruvasanlar" },
+      { "name": "Lotuslu Kruvasan", "price": "330 TL", "category": "Kruvasanlar" },
+      { "name": "Beyaz Çikolatalı Kruvasan", "price": "330 TL", "category": "Kruvasanlar" },
+      { "name": "Hindi Füme Kruvasan", "price": "300 TL", "category": "Kruvasanlar" },
+      { "name": "Üç Peynirli Kruvasan", "price": "285 TL", "category": "Kruvasanlar" },
+      { "name": "Kruvasan", "price": "175 TL", "category": "Kruvasanlar" },
+      { "name": "Ekmek Üstü Special", "price": "340 TL", "category": "Kruvasanlar" },
+      { "name": "Kinder Cup", "price": "320 TL", "category": "Tatlılar" },
+      { "name": "Tiramisu", "price": "320 TL", "category": "Tatlılar" },
+      { "name": "Antep Fıstıklı Tiramisu", "price": "340 TL", "category": "Tatlılar" },
+      { "name": "Brownie", "price": "330 TL", "category": "Tatlılar" },
+      { "name": "Bask Cheesecake", "price": "300 TL", "category": "Tatlılar" },
+      { "name": "Mocha", "price": "220 TL", "category": "Sıcak Kahveler" },
+      { "name": "Cortado", "price": "200 TL", "category": "Sıcak Kahveler" },
+      { "name": "Flat White", "price": "200 TL", "category": "Sıcak Kahveler" },
+      { "name": "Cappuccino", "price": "200 TL", "category": "Sıcak Kahveler" }
+    ]
   }
 };

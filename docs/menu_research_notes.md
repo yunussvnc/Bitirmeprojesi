@@ -2590,3 +2590,6 @@ Hentzer kaydı `Paşabahçe, Barbaros Cd. 12/1, 34000 Beykoz/İstanbul`, telefon
 
 ## BABİL BIGBOSS BEYLİKDÜZÜ ID 6635 HOLD
 Hentzer kaydı `Cumhuriyet, Cumhuriyet Cd. No:4, 34520 Beylikdüzü/İstanbul`, telefon `+90 552 555 52 04`. Yandex kaydı işletmenin artık faal olmadığını belirtiyor. Facebook adresi Cumhuriyet Cd. No:4 olarak geçse de başka işletme dizinlerinde Beycity No:3-C veya Atatürk Blv. 3C adresleri görülüyor. 2025 tarihli Instagram kampanya fiyatı bulunsa da aktiflik ve exact şube parity’si güvenilir biçimde sağlanamadı. **Override eklenmedi; strict HOLD.**
+
+## KAHVELY BEYLİKDÜZÜ ID 6634 ACCEPTED
+Hentzer kaydı `Barış, E-5 Yanyolu Westside2 sitesi D:28/76, 34000 Beylikdüzü/İstanbul`, telefon `+90 537 639 89 23`. Kahvely’nin resmi Instagram paylaşımı aynı Westside2 D:28/76 adresini gösteriyor; işletme dizinleri aynı adres ve telefonu doğruluyor. Yemeksepeti Kahvely Coffee Shop exact vendorunda 20 güncel fiyatlı tost, kruvasan, tatlı ve sıcak kahve ürünü bulundu; poşet ürünü eklenmedi.
