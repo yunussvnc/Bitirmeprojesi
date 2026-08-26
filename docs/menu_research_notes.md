@@ -2677,3 +2677,6 @@ Hentzer kaydı `Vişnezade, Çatlak Çeşme Sk. No:4/C, 34357 Beşiktaş/İstanb
 
 ## PAMUKBABA BAYRAMPAŞA ID 6606 HOLD
 Hentzer kaydı `İsmet Paşa, İsmet Paşa Cd. 21/A, 34040 Bayrampaşa/İstanbul`, telefon `+90 212 674 80 89`. Mekanlar.com ve Mekan.com aynı 21/A adresi ile telefonu doğruluyor; Bulurum da aynı telefonla işletmeyi Pamuk Baba Börekçisi olarak listeliyor. Ancak son bir yıl içinde exact şubeye ait ürün bazlı fiyatlı menü bulunamadı; mevcut dizinler yalnızca kategori/fiyat aralığı veriyor. **Override eklenmedi; strict HOLD.**
+
+## VOGS COFFEE BEYLİKDÜZÜ ID 6605 HOLD
+Hentzer kaydı `Adnan Kahveci, Konak Cd. No:21, 34528 Beylikdüzü/İstanbul`, telefon `+90 501 651 07 51`. Yandex exact işletme telefonla eşleşiyor ancak adresi `Konak Cad. 21/1` olarak veriyor; `21` ile `21/1` arasında zorunlu exact adres parity’si sağlanamadı. Arama sonuçlarında bulunan Vogs Coffee House sitesi ABD’deki farklı bir işletmeye ait; Beylikdüzü şubesi için son bir yıl içinde fiyatlı menü bulunamadı. **Override eklenmedi; strict HOLD.**
