@@ -92015,6 +92015,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Sultaniye Soslu Tavuk Döner Dürüm", "price": "230 TL", "category": "Tavuk Dönerler" }
     ]
   },
+  "6428": {
+    "name": "İl Capriccio Pizza",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/m3cg/il-capriccio-pizza",
+    "sourceName": "Güncel Yemeksepeti İl Capriccio Pizza menüsü; Yandex, Menu-TR, Restaurant Guru ve resmi Instagram ile Türkali, Hattat Tahsin Sk. No:56 / +90 212 236 30 00 exact parity doğrulaması",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "Margherita Pizza 24 cm", "price": "390 TL", "category": "Pizzalar (Küçük Boy)" },
+      { "name": "Mushroom (Funghi) Pizza 24 cm", "price": "415 TL", "category": "Pizzalar (Küçük Boy)" },
+      { "name": "3 Mushroom (Molti Funghi) Pizza 24 cm", "price": "425 TL", "category": "Pizzalar (Küçük Boy)" },
+      { "name": "Mushroom & Ham (Funghi & Ham) Pizza 24 cm", "price": "435 TL", "category": "Pizzalar (Küçük Boy)" },
+      { "name": "Mediterranean (Mediterraneo) Pizza 24 cm", "price": "430 TL", "category": "Pizzalar (Küçük Boy)" },
+      { "name": "Diavola Pizza 24 cm", "price": "435 TL", "category": "Pizzalar (Küçük Boy)" },
+      { "name": "Hot (Patza) Pizza 24 cm", "price": "475 TL", "category": "Pizzalar (Küçük Boy)" },
+      { "name": "Smoked Meat (Milano) Pizza 24 cm", "price": "460 TL", "category": "Pizzalar (Küçük Boy)" },
+      { "name": "Mixed (Mista) Pizza 24 cm", "price": "460 TL", "category": "Pizzalar (Küçük Boy)" },
+      { "name": "Pizza Torino 24 cm", "price": "470 TL", "category": "Pizzalar (Küçük Boy)" },
+      { "name": "4 Cheese (Quattro Formaggi) Pizza 24 cm", "price": "470 TL", "category": "Pizzalar (Küçük Boy)" },
+      { "name": "4 Seasons (Quattro Stagioni) Pizza 24 cm", "price": "440 TL", "category": "Pizzalar (Küçük Boy)" },
+      { "name": "Dried Meat (Bresaola) Pizza 24 cm", "price": "550 TL", "category": "Pizzalar (Küçük Boy)" },
+      { "name": "Magnificent Trio Pizza 24 cm", "price": "490 TL", "category": "Pizzalar (Küçük Boy)" },
+      { "name": "Pizza Il Capriccio 24 cm", "price": "530 TL", "category": "Pizzalar (Küçük Boy)" },
+      { "name": "Margherita Pizza 32 cm", "price": "440 TL", "category": "Pizzalar (Büyük Boy)" },
+      { "name": "Mushroom (Funghi) Pizza 32 cm", "price": "480 TL", "category": "Pizzalar (Büyük Boy)" },
+      { "name": "3 Mushroom (Molti Funghi) Pizza 32 cm", "price": "490 TL", "category": "Pizzalar (Büyük Boy)" },
+      { "name": "Mushroom & Ham (Funghi & Ham) Pizza 32 cm", "price": "500 TL", "category": "Pizzalar (Büyük Boy)" },
+      { "name": "Mediterranean (Mediterraneo) Pizza 32 cm", "price": "490 TL", "category": "Pizzalar (Büyük Boy)" }
+    ]
+  },
   "6430": {
     "name": "Tarihi Oktay Kurabiye Fırını",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/b3xf/tarihi-oktay-kurabiye-firini",

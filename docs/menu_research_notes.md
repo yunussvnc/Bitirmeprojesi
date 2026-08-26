@@ -3242,3 +3242,7 @@ Kaynaklar: https://www.yemeksepeti.com/en/restaurant/b3xf/tarihi-oktay-kurabiye-
 ## KAFFE BØRN (BORN KAFFE) ID 6429 HOLD
 Yandex/Firma Fihristi Hentzer ile aynı telefon `+90 534 723 92 42` ve Yıldız Caddesi/Cihannüma bölgesini destekliyor; ancak Hentzer kapı `32/A`, Firma Fihristi `30` veriyor. Resmi kaffeborn.com sitesinde şube bazlı ürün fiyatlı menü bulunmadı, Yemeksepeti exact vendoru da doğrulanamadı. **Override eklenmedi; strict HOLD.**
 Kaynaklar: https://yandex.com.tr/maps/org/kaffe_b_rn/1125634333/ ; https://firmafihristi.com.tr/firma/41561-1125634333 ; https://kaffeborn.com/
+
+## İL CAPRICCIO PIZZA ID 6428 ACCEPTED
+Hentzer `Türkali, Hattat Tahsin Sk. No:56, 34357 Beşiktaş/İstanbul`, telefon `+90 212 236 30 00`. Yandex, Menu-TR, Restoranim.net, Restaurant Guru ve Time Out aynı işletmenin No:56 adresini; Yandex ve resmi Instagram aynı telefonu doğruluyor. Canlı Yemeksepeti `m3cg` menüsünden içecek, dondurma, sos, poşet, tatlı ve popüler tekrarlar dışlanarak 24/32 cm boyutları açıkça belirtilen 20 benzersiz pizza ürünü eklendi. **Override kabul edildi.**
+Kaynaklar: https://www.yemeksepeti.com/en/restaurant/m3cg/il-capriccio-pizza ; https://yandex.com/maps/org/pizzeria_il_capriccio/74231614898/ ; https://www.menu-tr.com/istanbul/besiktas/pizza-restorani/il-capriccio-pizza ; https://www.instagram.com/ilcapricciotr/
