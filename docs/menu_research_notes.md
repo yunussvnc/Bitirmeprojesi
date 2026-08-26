@@ -2858,3 +2858,6 @@ Hentzer `Hüseyinağa, Tarlabaşı Blv No:85/B, 34435 Beyoğlu`, telefon `+90 21
 
 ## ADAB ESKİ USÛL MEYHANE ID 6546 HOLD
 Hentzer `Reşitpaşa, Tuncay Artun Cd. No:139, 34467 Sarıyer`, telefon `+90 212 277 77 72`. Resmi Âdâb sitesi aynı şube/telefonu doğruluyor; menü ve fix menü görselleri mevcut ancak ürün bazlı TL fiyat metni erişilebilir değil ve güvenilir fiyat çıkarılamadı. **Override eklenmedi; strict HOLD.**
+
+## PIZZA MIXBOX ID 6545 HOLD
+Hentzer `Çubuklu, Kireçocağı Cd No:4, 34820 Beykoz`, telefon `+90 216 999 50 30`. Telefon eşleşiyor ve Yemeksepeti/Migros’ta güncel fiyatlı menü var; fakat adres kaynakları No:4 ile No:4/A olarak çelişiyor. 100% exact branch parity sağlanamadığından **override eklenmedi; strict HOLD.**
