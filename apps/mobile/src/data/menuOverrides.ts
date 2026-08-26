@@ -91007,6 +91007,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "5 Çeşit Meze Menü", "price": "1500 TL", "category": "Özel Menü" }
     ]
   },
+  "6596": {
+    "name": "MUHLAMA KARADENİZ MUTFAĞI KAVACIK",
+    "sourceUrl": "https://muhlama.com.tr/",
+    "sourceName": "Muhlama Karadeniz Mutfağı resmi güncel menüsü; Restoranim exact Kavacık adres/telefon kaydı",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Kahvaltı Tabağı", "price": "575 TL", "category": "Kahvaltılar" },
+      { "name": "Serpme Kahvaltı (Tek kişi)", "price": "990 TL", "category": "Kahvaltılar" },
+      { "name": "Sahanda Yumurta", "price": "165 TL", "category": "Kahvaltılar" },
+      { "name": "Sahanda Peynirli Yumurta", "price": "260 TL", "category": "Kahvaltılar" },
+      { "name": "Sahanda Sucuklu Yumurta", "price": "330 TL", "category": "Kahvaltılar" },
+      { "name": "Sahanda Kavurmalı Yumurta", "price": "440 TL", "category": "Kahvaltılar" },
+      { "name": "Menemen", "price": "290 TL", "category": "Kahvaltılar" },
+      { "name": "Sucuk Tava", "price": "410 TL", "category": "Kahvaltılar" },
+      { "name": "Sucuklu Menemen", "price": "400 TL", "category": "Kahvaltılar" },
+      { "name": "Patates Tava", "price": "140 TL", "category": "Kahvaltılar" },
+      { "name": "Peynir Tabağı", "price": "270 TL", "category": "Kahvaltılıklar" },
+      { "name": "Patatesli Yumurta", "price": "200 TL", "category": "Kahvaltılar" },
+      { "name": "Kıymalı Yumurta", "price": "300 TL", "category": "Kahvaltılar" },
+      { "name": "Köylü Tava", "price": "290 TL", "category": "Kahvaltılar" },
+      { "name": "Muhlama", "price": "400 TL", "category": "Muhlama Çeşitleri" },
+      { "name": "Kuymak", "price": "400 TL", "category": "Muhlama Çeşitleri" },
+      { "name": "Yumurtalı Muhlama", "price": "420 TL", "category": "Muhlama Çeşitleri" },
+      { "name": "Hemşin Muhlama", "price": "360 TL", "category": "Muhlama Çeşitleri" },
+      { "name": "Zeytinyağlı Muhlama", "price": "320 TL", "category": "Muhlama Çeşitleri" },
+      { "name": "Mincili Muhlama (Troklosti)", "price": "290 TL", "category": "Muhlama Çeşitleri" }
+    ]
+  },
   "6598": {
     "name": "CADI'NIN EVİ BEYLİKDÜZÜ",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/bkdu/cadinin-evi-bkdu",

@@ -2704,3 +2704,6 @@ Hentzer kaydı `Barış, E-5 Yanyolu Westside2 Çarşı No:28/50, 34520 Beylikd�
 
 ## BAHANE COFFEE BAYRAMPAŞA ID 6597 HOLD
 Hentzer kaydı `Yenidoğan, Numunebağı Cd. No:36, 34040 Bayrampaşa/İstanbul`, telefon `+90 535 703 83 60`. Telefon Yandex kayıtlarıyla eşleşiyor; ancak adresler çelişkili: Yandex işletme/panorama `Abdi İpekçi Cad. 32`, resmi Instagram `Abdi İpekçi Caddesi 34/A`, Hentzer `Numunebağı Cd. 36` veriyor. Exact branch address parity’si sağlanamadı. Bulunan menü sonuçları da farklı Bahane/Cafe Bahane işletmelerine ait veya ürün-fiyat listesi sunmuyor. **Override eklenmedi; strict HOLD.**
+
+## MUHLAMA KARADENİZ MUTFAĞI KAVACIK ID 6596
+Hentzer kaydı `Rüzgarlıbahçe, Cumhuriyet Cd. No:131, 34805 Beykoz/İstanbul`, telefon `+90 216 425 25 22`. Muhlama resmi sitesi Kavacık adresini `Cumhuriyet Caddesi No:131, Kavacık/Beykoz` ve aynı telefonu yayımlıyor; Restoranim exact kaydı da adres/telefonu doğruluyor. Resmi sitedeki canlı menüden 20 benzersiz kahvaltı, muhlama ve yiyecek ürünü seçildi; fiyatlar erişim tarihinde güncel olarak yayımlanıyor. **Override kabul edildi; 20 ürün.** Kaynaklar: https://muhlama.com.tr/ ; https://restoranim.net/istanbul/beykoz/restoran/kavacik-muhlama-karadeniz-mutfagi
