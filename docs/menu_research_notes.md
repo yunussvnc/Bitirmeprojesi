@@ -2001,3 +2001,27 @@ Snapchat, Cybo, Nasilbiryer ve diğer bağımsız kayıtlar exact `Şehit Muhtar
 
 ## PİLAVCI İSLAM USTA BEYKENT ID 6830 ACCEPTED
 Resmî pilavciislamusta.com Beykent sayfası exact `Cumhuriyet Mah, Gürpınar Yolu Cad. No:18A-19A, Beylikdüzü/İstanbul` adresini ve `0545 126 29 80` telefonunu doğruluyor. Resmî Beykent QR menüsü fiyat güncelleme tarihini `07.05.2026` olarak gösteriyor; Pilav/Kokoreç kategorilerinden 13 benzersiz gıda ürünü ve fiyatı eklendi. **ACCEPTED**, override eklendi.
+
+## ETÇİ MEHMET BURGER YAKUPLU ID 6829 HOLD
+Resmî etcimehmetburger.com/subeler exact `Marmara, Avrasya Cd. No:17/2, 34524 Beylikdüzü/İstanbul` Yakuplu şubesini ve `0212 530 38 24` telefonunu doğruluyor. Resmî Yakuplu menüsünde ürünler/kategoriler mevcut olsa da kart fiyatları `0.00` veya boş; Menu-TR yalnızca 200–400 TL aralığı veriyor. Ürün bazlı son bir yıl fiyat listesi doğrulanamadı. **HOLD**, override eklenmedi.
+
+## KEYF-İ VİRANE PUB&BISTRO ID 6828 HOLD
+Resmî Instagram/Facebook kayıtları exact `Barış, İzmir Cd. No:30, 34520 Beylikdüzü/İstanbul` adresini ve `0533 246 09 34` telefonunu destekliyor. Ancak Restoranim yalnızca genel fiyat aralığı veriyor; ürün bazlı son bir yıl fiyat menüsü bulunamadı ve QR menü işletmeye özel içerik sunmadı. **HOLD**, override eklenmedi.
+
+## CREME & SALT ID 6827 HOLD
+Resmî cremesalt.com exact `Konaklar, Akçam Cd, 34330 Beşiktaş/İstanbul` adresini ve `0541 201 77 79` WhatsApp telefonunu doğruluyor; 38+ ürün adı yayınlanıyor. Ancak resmi sitede fiyat alanı bulunmuyor ve ürün bazlı son bir yıl fiyatlı menü doğrulanamadı. **HOLD**, override eklenmedi.
+
+## PIER HABİB ID 6826 HOLD
+Wheree’nin 2026 menü sayfası exact `Sinanpaşa, Şair Nedim Cd. No:42/A, 34353 Beşiktaş/İstanbul` adresini ve menü ürün açıklamalarını destekliyor; Snapchat kaydı `0212 261 49 76` telefonunu doğruluyor. Ancak ürün bazlı fiyatlar yayınlanmadığı için son bir yıl fiyat koşulu sağlanamadı. **HOLD**, override eklenmedi.
+
+## BEYLİKDÜZÜ BALIKÇILAR ÇARŞISI ID 6825 HOLD
+Herkes Balık Yiyecek’in resmî sitesi `0212 875 90 08` telefonunu ve güncel TL fiyatlı ürünleri yayınlıyor; sosyal kayıtlar Beylikdüzü Balıkçılar Çarşısı/Kavaklı konumunu destekliyor. Ancak fiyatlı içerik restoran menüsü değil; kasa, kg ve paket şeklinde perakende balık kataloğu. Branch-specific restoran menüsü olarak doğrulanamadığı için **HOLD**, override eklenmedi.
+
+## GÜMÜŞSUYU KAFE ID 6824 HOLD
+Resmî Beykoz Belediyesi sayfası exact `Gümüşsuyu Mahallesi Kelle İbrahim Caddesi No:34 Beykoz/İstanbul` adresini, 12.01.2026 itibarıyla kafe hizmetini ve resmi Kimyon menü bağlantısını doğruluyor. Ancak Hentzer telefon alanı boş; menü bağlantısı da bu ortamda boş/işlenmemiş açıldı. Ürün bazlı son bir yıl fiyat menüsü doğrulanamadı. **HOLD**, override eklenmedi.
+
+## NOIR PIT ID 6823 HOLD
+Resmî noirpit.com kaydı adresi `Asmalı Mescit Mah. General Yazgan Sk. No:109/A Kağıthane/İstanbul` ve telefonu `0212 245 8086` olarak veriyor; Hentzer kaydı `Beyoğlu/İstanbul` ve telefon boş olduğundan zorunlu exact branch parity sağlanmıyor. Resmî sitedeki fiyatlar da kafe menüsü değil, paket kahve/perakende ürün fiyatları. **HOLD**, override eklenmedi.
+
+## DOĞAL DÜKKAN KAVACIK ID 6822 ACCEPTED
+Resmî Doğal Dükkan iletişim/restoranlar sayfaları exact `Kavacık Mah. Mehmet Ali Birand Cad, Kavacık, Orhan Veli Kanık Parkı No:47, 34810 Beykoz/İstanbul` adresini ve `0216 310 28 28` telefonunu doğruluyor. Resmî sayfadan bağlı FlyDishes Kavacık menüsü aynı adres/telefonu gösteriyor; 2026 tarihli canlı menüde 11 kategori altında 105 benzersiz gıda ve içecek ürünü ile TL fiyatları yayınlanıyor. **ACCEPTED**, override eklendi.
