@@ -3216,3 +3216,6 @@ Kaynaklar: https://deal.com.tr/ ; https://yandex.com/maps/org/deal_coffee/175531
 ## KEBAPÇI BEDRİ USTA ID 6436 ACCEPTED
 Hentzer `Emekyemez Mah., Tersane Caddesi, Perşembe Pazarı Cd. No:100, 34421 Beyoğlu/İstanbul`, telefon `+90 212 505 74 55`. Bedri Usta’nın resmi Karaköy duyurusu bu adresi ve telefonu yayımlıyor; Yandex aynı telefonla yakın Tersane Cad. kaydını gösteriyor. Canlı Yemeksepeti `crgp` menüsünden 20 benzersiz çorba, pide/lahmacun ve kebap ürünü seçildi; içecek ve poşet kalemleri eklenmedi. **Override kabul edildi.**
 Kaynaklar: https://www.yemeksepeti.com/en/restaurant/crgp/kebapci-bedri-usta-crgp ; https://www.instagram.com/p/DS7rJpjiLp9/ ; https://bedriusta.com/iletisim/ ; https://yandex.com.tr/maps/org/kebapci_bedri_usta/145370614921/
+
+## BİZİM BALIKÇI BEŞİKTAŞ ID 6435 HOLD
+Waze/Servis Kayıt/Listeleri/Polomap Hentzer ile `Kilise Meydanı Balıkçılar Çarşısı, Sinanpaşa, Köyiçi Cd` ve `0538 516 12 03` bilgilerini destekliyor. Yandex benzer isimli başka kayıtta `No:18` ve `0535 848 3471` veriyor. Yemeksepeti’ndeki `mnlg`, `gvqa`, `gzs6` vendorları güncel fiyatlı menü sunuyor ancak exact Hentzer adres/telefonu ile vendor parity’si kesin değil. **Override eklenmedi; strict HOLD.**
