@@ -1818,3 +1818,6 @@ Restaurant Guru exact Otağtepe Cd. 9/B ve `+90 535 251 88 13` bilgisini doğrul
 
 ## BURGER YİYELİM BEYLİKDÜZÜ KAVAKLI ID 6893 kabulü
 Hentzer kaydı `Kavaklı, Oğuzhan Cd. No:23 F, 34520 Beylikdüzü/İstanbul`, `+90 535 260 45 26`; Migros Yemek canlı vendor `Burger Yiyelim, Beylikdüzü (Kavaklı Mah.)` ile eşleşiyor ve Kaçıyor kaydı adres/telefonu exact doğruluyor. 26.08.2026 tarihinde canlı Migros menüsünde güncel fiyatlar doğrulandı. Popüler carousel, soslar ve poşet hariç 120 benzersiz menü/yiyecek/içecek kalemi aktarıldı. **Override kabul edildi.**
+
+## INARI OMAKASE KURUÇEŞME ID 6892 kabulü
+Inari’nin resmi Türkçe menü sayfası exact `Kuruçeşme Mh. Kuruçeşme Cd. No:11 Beşiktaş / İstanbul` ve `+90 212 265 96 01` bilgisini doğruluyor. Resmi Kuruçeşme Yemek, Tatlı ve İçecek PDF menülerinde revizyon tarihi **03.02.2026** olarak belirtiliyor; bu tarih bir yıllık güncellik şartı içindedir. Alkollü/şarap kalemleri, servis ücreti ve tekrarlar dışarıda bırakılarak fiyatı açıkça görülen 81 benzersiz yiyecek, tatlı, kahve, çay ve alkolsüz içecek kalemi aktarıldı. **Override kabul edildi.**
