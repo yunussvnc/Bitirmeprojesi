@@ -2461,3 +2461,6 @@ Hentzer kaydı `Acarlar, 9. Cd. C Blok No:11/2 İç Kapı No:262, 34800 Beykoz/�
 
 ## DAĞOĞLU ÇİĞKÖFTE BEYKOZ ID 6678 HOLD
 Hentzer kaydı `Ortaçeşme, Çayır Cd. No:102 D:A, 34825 Beykoz/İstanbul`, telefon `+90 216 323 23 03`. Yandex adresi No:102/A ve resmi Instagram/yerel kayıtlar telefonla işletmeyi destekliyor; ancak adres birimi D:A/102-A biçiminde farklı yazılıyor. Migros exact Ortaçeşme restoran sayfasında ürünler listeleniyor fakat fiyat alanları teslimat konumu/dinamik yükleme nedeniyle okunamadı; Yemeksepeti arama sonuçlarındaki fiyatlar da exact şube ve güncellik açısından kesinleştirilemedi. **Override eklenmedi; strict HOLD**.
+
+## VALİDE MAÇKA ID 6677 ACCEPTED
+Hentzer kaydı `Vişnezade, Aktarlar Sk. No:6/A, 34357 Beşiktaş/İstanbul`, telefon `+90 545 735 38 11`. Resmi Instagram, Yandex, Apple Maps ve yerel işletme kayıtları exact adres/telefonu doğruluyor. Canlı Yemeksepeti exact Valide Maçka menüsünden Popüler carousel tekrarları ve içecekler dışarıda bırakılarak **17 benzersiz güncel gıda ürünü** eklendi.

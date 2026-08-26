@@ -4,6 +4,31 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6677": {
+    "name": "VALİDE MAÇKA",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/s4to/valide-macka",
+    "sourceName": "Canlı Yemeksepeti exact Valide Maçka menüsü; resmi Instagram/Yandex/Apple Maps ile adres-telefon doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Café de Paris Soslu Köfte (180 gr)", "price": "1350 TL", "category": "Köfteler" },
+      { "name": "Beğendi Soslu Köfte (180 gr.)", "price": "1250 TL", "category": "Köfteler" },
+      { "name": "Vişne Soslu Köfte (180 gr.)", "price": "1450 TL", "category": "Köfteler" },
+      { "name": "Glütensiz Antrikot Dolgulu Mantı (Buharda Pişirilmiş)", "price": "1900 TL", "category": "Mantılar" },
+      { "name": "Ekmek Arası Köfte Menü", "price": "850 TL", "category": "Ekmek Arası Ürünler" },
+      { "name": "Veled Yerli Malı", "price": "575 TL", "category": "Ekmek Arası Ürünler" },
+      { "name": "Veled Yurdun Malı", "price": "525 TL", "category": "Ekmek Arası Ürünler" },
+      { "name": "Veled Amerikan BBQ", "price": "525 TL", "category": "Ekmek Arası Ürünler" },
+      { "name": "Veled Parizyen Köri", "price": "575 TL", "category": "Ekmek Arası Ürünler" },
+      { "name": "Veled İtalyan Trüf", "price": "575 TL", "category": "Ekmek Arası Ürünler" },
+      { "name": "Yeşil Tanrıça", "price": "950 TL", "category": "Salatalar" },
+      { "name": "Sade Patates Kızartması", "price": "420 TL", "category": "Yan Ürünler" },
+      { "name": "Chimichurri Soslu Patates Kızartması", "price": "680 TL", "category": "Yan Ürünler" },
+      { "name": "Domates Sos", "price": "130 TL", "category": "Soslar" },
+      { "name": "Beğendi Sos", "price": "130 TL", "category": "Soslar" },
+      { "name": "Vişne Sos", "price": "250 TL", "category": "Soslar" },
+      { "name": "Taze Lorlu Mozaik Pasta", "price": "650 TL", "category": "Tatlılar" }
+    ]
+  },
   "6680": {
     "name": "IL POLLO DEL CAPO BEŞİKTAŞ",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/nu7o/il-pollo-del-capo-nu7o",
