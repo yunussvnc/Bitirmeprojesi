@@ -2226,3 +2226,6 @@ Hentzer kaydı `Sinanpaşa, Kazan Sk. 7A, 34353 Beşiktaş/İstanbul`, telefon `
 
 ## MEŞHUR SARIYER BÖREKÇİSİ BEYKOZ ID 6755 HOLD
 Hentzer kaydı `Akbaba Caddesi, Akbaba, Çarşamba Sok. No:5, 34829 Beykoz/İstanbul`, telefon `+90 216 320 50 54`. Yandex aynı işletme ve telefonu desteklese de adresi Çarşamba Sok. No:9 olarak veriyor. Yemeksepeti’nde güncel görünen börek fiyatları mevcut, ancak vendor’ın Hentzer No:5 ile exact eşleşmesi adres çelişkisi nedeniyle kesinleştirilemedi; diğer teslimat sonucu farklı Çubuklu şubesine ait. Bu nedenle **override eklenmedi; strict HOLD**.
+
+## ELENİ MEYHANESİ BEŞİKTAŞ ID 6754 HOLD
+Hentzer kaydı `Cihannüma, Barbaros Blv. 61/A, 34353 Beşiktaş/İstanbul`, telefon `+90 506 255 35 18`. Facebook, resmi Instagram ve menü sağlayıcıları aynı adres/telefonu doğruluyor. Quickly QR menüsü adres/telefon ve çalışma saatlerini doğrulasa da ürün/fiyat içeriği erişilebilir metne gelmedi; PardonApp yalnızca kategori başlıklarını gösterdi. Arama sonuçlarındaki fiyatlı içerikler 2019-2020 tarihli ve son bir yıl koşulunu karşılamıyor. **Override eklenmedi; strict HOLD**.
