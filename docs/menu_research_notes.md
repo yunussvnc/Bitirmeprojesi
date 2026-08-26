@@ -3119,3 +3119,6 @@ Wheree/Yelp/Bulurum/Nasilbiryer Hentzer ile exact `Asmalı Mescit, Balyoz Sok. N
 
 ## HEVSEL KEBAP LAHMACUN ID 6466 HOLD
 Resmi Instagram/TikTok ve yerel kaynaklar Hentzer ile exact `Kuloğlu, Turnacıbaşı Cd. 3/A, 34421 Beyoğlu/İstanbul` ve `+90 212 251 30 45` parity’sini doğruluyor. Ancak exact şubeye ait son bir yıl fiyatlı 20 ürün menüsü bulunamadı; farklı işletmelere ait Yemeksepeti sonuçları kullanılmadı. **Override eklenmedi; strict HOLD.**
+
+## AUTHENTIC FRENCH TACOS ID 6465 HOLD
+Resmi Facebook/Linktree, Yandex ve TikTok Hentzer ile exact `Sinanpaşa, Şair Leyla Sk. No:3, 34353 Beşiktaş/İstanbul` ve `+90 212 261 55 66` parity’sini doğruluyor. Yemeksepeti a13h güncel fiyatlı menü sunuyor; ancak popüler carousel tekrarları ve içecekler çıkarıldığında 20 değil 18 benzersiz gıda ürünü kalıyor. **Override eklenmedi; strict HOLD.**
