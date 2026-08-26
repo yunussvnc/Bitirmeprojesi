@@ -2620,3 +2620,6 @@ Hentzer kaydı `Dikilitaş, Emirhan Cd. 2B 34349, 34330 Beşiktaş/İstanbul`, t
 
 ## BARAN LAHMACUN BEYOĞLU ID 6625 ACCEPTED
 Hentzer kaydı `Kuloğlu, Turnacıbaşı Cd. No:39A, 34433 Beyoğlu/İstanbul`, telefon `+90 212 243 11 21`. Baran’ın resmi sitesi aynı No:39/A adresini ve telefonu yayımlıyor; Yemeksepeti exact vendorunda aynı Kuloğlu/Turnacıbaşı adresi, güncel aktif yorum akışı ve canlı fiyatlı menü bulunuyor. Popüler carousel tekrarları ve gıda dışı ürünler dışarıda bırakılarak 20 lahmacun, pide ve kebap ürünü eklendi.
+
+## EYŞAN İSTANBUL YENİ NESİL MEYHANE ID 6624 HOLD
+Hentzer kaydı `Fulya, Ayazmaderesi Cd 1A, 34427 Beşiktaş/İstanbul`, telefon `+90 532 309 32 52`. İşletmenin resmi sitesi aynı Fulya/Ayazmaderesi No:1/A adresini ve telefonu doğruluyor; ancak resmi Instagram/Facebook güncel içeriklerinde rezervasyon telefonu `+90 552 021 98 67` olarak görülüyor. Resmi QR menü bağlantısı bulunmasına rağmen son bir yıl içinde okunabilir ürün-fiyat listesi doğrulanamadı. Zorunlu telefon parity’si ve güncel fiyat koşulu birlikte sağlanamadığı için **override eklenmedi; strict HOLD**.
