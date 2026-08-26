@@ -1968,3 +1968,36 @@ Bağımsız kayıtlar exact `Zeytinlik, Yakut Sk. No:22a, 34140 Bakırköy/İsta
 
 ## HAYATİ OCAKBAŞI ACARKENT ID 6841 ACCEPTED
 Resmî Hayati Ocakbaşı iletişim kaydı ve sosyal profil exact `Görele, İstanbul Cd 9/1, 34825 Beykoz/İstanbul` adresini ve `0216 532 75 75` telefonunu doğruluyor. Yemeksepeti canlı menüsü aynı işletme adıyla 26.08.2026 tarihinde 118 benzersiz gıda kalemini ve fiyatını yayınlıyor; Poşet kalemi kapsam dışı bırakıldı. **ACCEPTED**, override eklendi.
+
+## 1983 BEYOĞLU ÇİKOLATA & KAHVE CENNET ID 6840 HOLD
+2026 tarihli bağımsız kayıtlar exact `Yeşilova, Akdeniz Cd. No:1-7, 34295 Küçükçekmece/İstanbul` adresini ve `0530 705 19 83` telefonunu destekliyor. Ancak son bir yılda doğrulanabilir ürün bazlı fiyatlı menü bulunamadı; sosyal paylaşımlar işletmenin yeni açıldığını gösteriyor. **HOLD**, override eklenmedi.
+
+## PIZZA GIANO ID 6839 HOLD
+Bağımsız kayıtlar exact `Zerzavatçı, Şht. Aziz Cd. 39a, 34829 Beykoz/İstanbul` adresini destekliyor; ancak Hentzer telefon alanı boş ve exact şubeye ait doğrulanmış telefon bulunamadı. Son bir yılda herkese açık ürün bazlı fiyatlı menü de doğrulanamadı. **HOLD**, override eklenmedi.
+
+## YAZBAŞ BEYLİKDÜZÜ ID 6838 HOLD
+Bağımsız kayıtlar exact `Adnan Kahveci, Anadolu St No 18F unit 7, 34528 Beylikdüzü/İstanbul` adresini destekliyor; ancak Hentzer telefon alanı boş ve exact şubeye ait doğrulanmış telefon bulunamadı. Son bir yılda ürün bazlı fiyatlı menü de doğrulanamadı. **HOLD**, override eklenmedi.
+
+## ADALI KEBAP ID 6837 HOLD
+Find.com.tr şirket kaydı exact `0535 299 92 67` telefonunu ve Levent Adalı Kebap işletmesini destekliyor; bağımsız liste exact `Levent, Eylül Sokağı No:2 D:11, 34330 Beşiktaş/İstanbul` adresini destekliyor. Ancak son bir yılda ürün bazlı, fiyatları doğrulanabilir herkese açık menü bulunamadı. **HOLD**, override eklenmedi.
+
+## PIZZACOO FORNO A LEGNA ID 6836 HOLD
+Exact ad, adres ve telefon sorgularında güvenilir kamuya açık kaynak bulunamadı; `Adnan Kahveci, Davutpaşa Cd. A1 No:13D, 34528 Beylikdüzü/İstanbul` ve `0507 404 28 74` paritesi bağımsız olarak doğrulanamadı. Güncel fiyatlı menü de bulunamadı. **HOLD**, override eklenmedi.
+
+## DR.WAFFLES ID 6835 HOLD
+Menu-TR exact `Anadolu Street, Adnan Kahveci, Buse Sk. Street 19/3, Shop:4, 34528 Beylikdüzü/İstanbul` adresini ve işletme adını destekliyor. Ancak Hentzer telefonu `0850 225 9305` dış kaynakta doğrulanamadı ve son bir yılda herkese açık ürün bazlı fiyatlı menü bulunamadı. **HOLD**, override eklenmedi.
+
+## ABU GOSH FİLİSTİN KÜNEFESİ ID 6834 HOLD
+Facebook About, Cybo ve diğer kayıtlar exact `Yıldız, Serencebey Yokuşu 14 B, 34349 Beşiktaş/İstanbul` adresini ve `0531 206 70 10` telefonunu birlikte destekliyor. 14 Mayıs 2026 tarihli yazı yalnızca kişi başı 200–400 TL fiyat aralığı veriyor; ürün bazlı liste yok. Heyzine menü bağlantısı da kullanılabilir ürün/fiyat içeriği göstermedi. **HOLD**, override eklenmedi.
+
+## KEBAPPOLONEZ ID 6833 HOLD
+Nerdeler.com.tr exact `Çengeldere, Görele, Veda Sokak No:4, 34829 Beykoz/İstanbul` adresini, `0538 878 64 28` telefonunu ve işletme adını birlikte destekliyor. Ancak son bir yılda ürün bazlı, fiyatları doğrulanabilir herkese açık menü bulunamadı. **HOLD**, override eklenmedi.
+
+## KUŞ EVİ RESTAURANT ID 6832 HOLD
+Resmî kuşevi web sitesi exact `+90 0535 654 7681` telefonunu ve menü Canva bağlantısını yayınlıyor; bağımsız kayıtlar exact `Dereseki, Riva Cd. 18/2, 34800 Beykoz/İstanbul` adresini destekliyor. Ancak Canva menüsü kullanılabilir ürün/fiyat metni göstermedi ve son bir yılda ürün bazlı fiyatlar doğrulanamadı. **HOLD**, override eklenmedi.
+
+## TAKSİM BAHÇIVAN ID 6831 HOLD
+Snapchat, Cybo, Nasilbiryer ve diğer bağımsız kayıtlar exact `Şehit Muhtar, Süslü Saksı Sk. No:27, 21234 Beyoğlu/İstanbul` adresi ile `0212 244 92 68` telefonunu birlikte destekliyor. Ancak ürün bazlı güncel fiyatlı menü bulunamadı; listelenen resmi site de bu ortamda DNS ile çözümlenmedi. **HOLD**, override eklenmedi.
+
+## PİLAVCI İSLAM USTA BEYKENT ID 6830 ACCEPTED
+Resmî pilavciislamusta.com Beykent sayfası exact `Cumhuriyet Mah, Gürpınar Yolu Cad. No:18A-19A, Beylikdüzü/İstanbul` adresini ve `0545 126 29 80` telefonunu doğruluyor. Resmî Beykent QR menüsü fiyat güncelleme tarihini `07.05.2026` olarak gösteriyor; Pilav/Kokoreç kategorilerinden 13 benzersiz gıda ürünü ve fiyatı eklendi. **ACCEPTED**, override eklendi.

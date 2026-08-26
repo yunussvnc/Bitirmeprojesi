@@ -4,6 +4,27 @@ export type MenuItemOverride = { name: string; price?: string; desc?: string; ca
 export type MenuOverride = { name: string; sourceUrl: string; sourceName: string; verifiedAt: string; items: MenuItemOverride[]; };
 
 export const MENU_OVERRIDES: Record<string, MenuOverride> = {
+  "6830": {
+    "name": "PİLAVCI İSLAM USTA BEYKENT",
+    "sourceUrl": "https://beykent.pilavciislamusta.com/DesktopV2/CategoryChildTr/12",
+    "sourceName": "Pilavcı İslam Usta resmi Beykent QR menüsü; fiyat güncelleme 07.05.2026",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "TAVUKLU PİLAV (300GR + 40GR)", "price": "150.00 TL", "category": "Pilav" },
+      { "name": "YARIM T. PİLAV (180GR + 40GR)", "price": "115.00 TL", "category": "Pilav" },
+      { "name": "SADE PİLAV (300GR)", "price": "110.00 TL", "category": "Pilav" },
+      { "name": "Y. SADE PİLAV (180GR)", "price": "75.00 TL", "category": "Pilav" },
+      { "name": "1.5 TAVUKLU PİLAV (450GR + 40GR)", "price": "210.00 TL", "category": "Pilav" },
+      { "name": "Y. BOL TAVUKLU PİLAV (180GR + 80GR)", "price": "155.00 TL", "category": "Pilav" },
+      { "name": "1.5 SADE PİLAV (450GR)", "price": "165.00 TL", "category": "Pilav" },
+      { "name": "BOL TAVUKLU PİLAV (300GR + 80GR)", "price": "190.00 TL", "category": "Pilav" },
+      { "name": "1.5 BOL T. PİLAV (450GR + 80GR)", "price": "250.00 TL", "category": "Pilav" },
+      { "name": "P.ÜSTÜ ÇEYREK KOKOREÇ (300GR + 55GR)", "price": "270.00 TL", "category": "Kokoreç" },
+      { "name": "P.ÜSTÜ KOKOREÇ (300GR + 90GR)", "price": "360.00 TL", "category": "Kokoreç" },
+      { "name": "P.ÜSTÜ İZMİR Ç. KOKOREÇ (300GR + 60GR)", "price": "300.00 TL", "category": "İzmir Kokoreç" },
+      { "name": "P.ÜSTÜ İZMİR Y. KOKOREÇ (300GR + 100GR)", "price": "400.00 TL", "category": "İzmir Kokoreç" }
+    ]
+  },
   "6841": {
     "name": "HAYATİ OCAKBAŞI ACARKENT",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/ofds/hayati-ocakbasi-ofds",
