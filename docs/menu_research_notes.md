@@ -2695,3 +2695,6 @@ Hentzer kaydı `Cihannüma, Yıldız Cd. No:40/C, 34000 Beşiktaş/İstanbul`, t
 
 ## MERCAN KEBAP SALONU ID 6600
 Hentzer kaydı `Vişnezade, Şair Nedim Cd. 65/A, 34357 Beşiktaş/İstanbul`, telefon `+90 212 259 38 99`. Restoranim.net exact Beşiktaş kaydı aynı adres ve telefonu doğruluyor; Yandex/Instagram lokasyon sonuçları da 65/A ve aynı telefonu destekliyor. Mercan Kebap resmi PDF menüsü `MENÜ GÜNCELLEME TARİHİ 15.05.2026` ibaresini taşıyor; 20 gıda ürünü seçildi. **Override kabul edildi; 20 ürün.** Kaynaklar: https://mercankebap.com/menu/menu.pdf ; https://restoranim.net/istanbul/besiktas/kebapci/mercan-kebap-besiktas
+
+## DOPAMİN DÖNER ID 6599
+Hentzer kaydı `Büyükşehir, Cumhuriyet Cd. No:21, 34520 Beylikdüzü/İstanbul`, telefon `+90 535 845 34 79`. Restoranim.net exact adres ve telefonu doğruluyor; Yandex ve resmi Instagram `@dopagendoner` aynı telefon ile Cumhuriyet Cad. No:21 bilgisini destekliyor. Canlı Migros menüsü `Dopamin Döner Hatay Usulü, Beylikdüzü (Büyükşehir Mah.)` 3 benzersiz soslu tavuk döner dürüm ürününü güncel indirimli fiyatlarıyla yayımlıyor; içecek/poşet hariç tutuldu. **Override kabul edildi; 3 ürün.** Kaynaklar: https://www.migros.com.tr/yemek/dopamin-doner-hatay-usulu-beylikduzu-buyuksehir-mah-st-1e938 ; https://restoranim.net/istanbul/beylikduzu/restoran/dopamin-doner

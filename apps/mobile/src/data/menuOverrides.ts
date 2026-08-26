@@ -91007,6 +91007,17 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "5 Çeşit Meze Menü", "price": "1500 TL", "category": "Özel Menü" }
     ]
   },
+  "6599": {
+    "name": "DOPAMİN DÖNER",
+    "sourceUrl": "https://www.migros.com.tr/yemek/dopamin-doner-hatay-usulu-beylikduzu-buyuksehir-mah-st-1e938",
+    "sourceName": "Canlı Migros Dopamin Döner Hatay Usulü menüsü; Restoranim/Yandex ile exact adres-telefon doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Soslu Tavuk Döner Dürüm (80 gr)", "price": "210 TL", "category": "Tavuk Dönerler" },
+      { "name": "Soslu Tavuk Döner Dürüm (150 gr)", "price": "270 TL", "category": "Tavuk Dönerler" },
+      { "name": "Soslu Tavuk Döner Dürüm (120 gr)", "price": "250 TL", "category": "Tavuk Dönerler" }
+    ]
+  },
   "6600": {
     "name": "MERCAN KEBAP SALONU",
     "sourceUrl": "https://mercankebap.com/menu/menu.pdf",
