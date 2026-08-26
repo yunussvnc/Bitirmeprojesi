@@ -2220,3 +2220,6 @@ Hentzer kaydı `Vişnezade, Şair Nedim Cd. 25/A D:25/A, 34353 Beşiktaş/İstan
 
 ## UMUT OCAKBAŞI BEYOĞLU ID 6757 HOLD
 Hentzer kaydı `Katip Mustafa Çelebi, Hasnun Galip Sk. No:8, 34433 Beyoğlu/İstanbul`, telefon `+90 212 245 50 05`. Yandex, Bulurum, YemekArama ve 2025 sosyal içerikleri aynı adres/telefonu destekliyor; ek telefon olarak 0544 409 45 45 de görülüyor. Ancak erişilebilir resmi fiyatlı menü bulunamadı; resmi alan adına erişim başarısız oldu, sosyal içerikler ürün fiyatı vermiyor. Son bir yıl fiyat doğrulaması sağlanamadığı için **override eklenmedi; strict HOLD**.
+
+## MANGAL KEYFİ BEŞİKTAŞ ID 6756 HOLD
+Hentzer kaydı `Sinanpaşa, Kazan Sk. 7A, 34353 Beşiktaş/İstanbul`, telefon `+90 212 227 05 58`. İşletmenin resmi Instagram profili aynı adres ve telefonu doğruluyor. 11.08.2026 tarihli içerikte “menü güncel fiyatı 480 TL” ifadesi görülse de ürün/menü kaleminin adı ve içeriği belirtilmediğinden doğrulanabilir ürün-fiyat çifti oluşturulamadı. Fiyatı belirsiz bir kalem uydurulmaması için **override eklenmedi; strict HOLD**.
