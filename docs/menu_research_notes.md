@@ -2861,3 +2861,6 @@ Hentzer `Reşitpaşa, Tuncay Artun Cd. No:139, 34467 Sarıyer`, telefon `+90 212
 
 ## PIZZA MIXBOX ID 6545 HOLD
 Hentzer `Çubuklu, Kireçocağı Cd No:4, 34820 Beykoz`, telefon `+90 216 999 50 30`. Telefon eşleşiyor ve Yemeksepeti/Migros’ta güncel fiyatlı menü var; fakat adres kaynakları No:4 ile No:4/A olarak çelişiyor. 100% exact branch parity sağlanamadığından **override eklenmedi; strict HOLD.**
+
+## BEYLİKDÜZÜ DÖNER ID 6544 HOLD
+Hentzer `Büyükşehir, Beylikdüzü Cd. No:5 D:2K, 34520 Beylikdüzü`, telefon `+90 212 741 18 88`. Yandex telefon/eşleşmeyi destekliyor; ancak exact şubeye ait son bir yıl ürün bazlı TL fiyatlı menü doğrulanamadı. **Override eklenmedi; strict HOLD.**
