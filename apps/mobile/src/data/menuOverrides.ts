@@ -90672,5 +90672,14 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Fit Toastie", "price": "275 TL", "category": "Tostlar" },
       { "name": "Traditional Turkish Kaşar Toastie", "price": "260 TL", "category": "Tostlar" }
     ]
+  },
+  "6656": {
+    "name": "ARAS CAĞ KEBAP BEYLİKDÜZÜ OCAKBAŞI",
+    "sourceUrl": "https://www.instagram.com/reel/DW3VfPtjEkJ/",
+    "sourceName": "Aras Cağ Kebap resmi sitesi/Instagram; Hentzer exact adres-telefon doğrulaması",
+    "verifiedAt": "2026-08-26",
+    "items": [
+      { "name": "Cağ Kebabı (1 Şiş)", "price": "300 TL", "category": "Cağ Kebap" }
+    ]
   }
 };

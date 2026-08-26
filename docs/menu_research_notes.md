@@ -2524,3 +2524,6 @@ Hentzer kaydı `Cumhuriyet, Derviş Eroğlu Cd. No:4F, 34500 Beylikdüzü/İstan
 
 ## MINOA AKARETLER ID 6657 ACCEPTED
 Hentzer kaydı `Vişnezade, Süleyman Seba Cd. No:52/A, 34357 Beşiktaş/İstanbul`, telefon `+90 212 236 94 52`. Minoa resmi iletişim sayfası aynı Akaretler adresini ve telefonu doğruluyor. Resmi Akaretler menü görsellerinde fiyatların `22.09.2025` tarihi itibarıyla geçerli olduğu belirtilmiş; 26.08.2026 erişiminde bu fiyatlar son bir yıl sınırı içindedir. Görsel menüden 20 kahvaltı, yumurta ve tost ürünü eklendi.
+
+## ARAS CAĞ KEBAP BEYLİKDÜZÜ OCAKBAŞI ID 6656 ACCEPTED
+Hentzer kaydı `Adnan Kahveci, Anadolu Cd. No:24/3, 34528 Beylikdüzü/İstanbul`, telefon `+90 541 398 61 25`. Aras Cağ Kebap resmi iletişim sayfası aynı No:24/3 adresini ve 0541 398 61 25 telefonunu doğruluyor; Yandex de aynı şube ve telefonu gösteriyor. Resmi Instagram’ın 26.04.2026 tarihli paylaşımında `1 şiş ... 300 TL` fiyatı açıkça verildi. Yalnızca bu tarihli ve exact şubeye bağlanan ürün eklendi.
