@@ -3318,3 +3318,7 @@ Kaynak: https://bedrijvengids.cybo.com/TR/be%C5%9Fikta%C5%9F-(district)/ontbijt-
 ## DIGMA RESTAURANT ID 6410 HOLD
 Digma resmi sitesi Hentzer ile İshaklı, Bozhane Yolu Sok. No:9 adresini ve `+90 533 223 15 54` telefonunu doğruluyor; Yandex, Instagram, Aramabul ve Tripadvisor destekliyor. Resmi Kahvaltı/Steakhouse sayfaları fiyat yayımlamıyor ve son bir yıl içinde doğrulanmış 20 ürünlü fiyatlı menü bulunamadı. **Override eklenmedi; strict HOLD.**
 Kaynaklar: https://digma.com.tr/ ; https://digma.com.tr/kahvalti ; https://yandex.com.tr/maps/org/digma/207965128830/ ; https://www.instagram.com/digma_ist/
+
+## YALI LOUNGE ID 6409 HOLD
+Tripadvisor, Meyhankoli, Cybo, Opendi ve Yandex Hentzer ile Four Seasons Yalı Lounge, Çırağan Cd. No:28 ve `+90 552 381 11 11` exact parity’sini destekliyor. Finedine menüsü boş yükleniyor; Four Seasons resmi sayfası yalnız USD 343 başlangıçlı çift kişilik set menü sunuyor, 20 bireysel güncel TL ürün fiyatı bulunamadı. **Override eklenmedi; strict HOLD.**
+Kaynaklar: https://www.fourseasons.com/bosphorus/dining/restaurants/yali_lounge/ ; https://www.fourseasons.com/bosphorus/dining/culinary-experiences/prix-fixe-menu/romantic-dinner-menu-at-yali-lounge/ ; https://qr.finedinemenu.com/yali ; https://www.meyhankoli.com/restoran/yali-lounge-867
