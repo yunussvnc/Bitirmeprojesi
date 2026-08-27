@@ -92315,6 +92315,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Tavuk Şiş Dürüm MENÜ", "price": "399 TL", "category": "Dürümler" }
     ]
   },
+  "6395": {
+    "name": "İYB BUBBLE WAFFLE BAYRAMPAŞA YILDIRIM",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/sqb7/iyb-bubble-waffle-sqb7",
+    "sourceName": "Canlı Yemeksepeti güncel menüsü; resmi Bayrampaşa Instagram hesabı/Yandex ile exact adres-telefon doğrulaması",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "Bubble Waffle", "price": "220 TL", "category": "Waffle" },
+      { "name": "Çiçek Waffle", "price": "320 TL", "category": "Waffle" },
+      { "name": "Kova Waffle", "price": "260 TL", "category": "Waffle" },
+      { "name": "Fondü Waffle", "price": "450 TL", "category": "Waffle" },
+      { "name": "Açık Bubble Waffle", "price": "390 TL", "category": "Waffle" },
+      { "name": "Türk Kahvesi", "price": "90 TL", "category": "Sıcak Kahveler" },
+      { "name": "Double Türk Kahvesi", "price": "120 TL", "category": "Sıcak Kahveler" },
+      { "name": "Latte", "price": "120 TL", "category": "Sıcak Kahveler" },
+      { "name": "Americano", "price": "120 TL", "category": "Sıcak Kahveler" },
+      { "name": "Espresso", "price": "90 TL", "category": "Sıcak Kahveler" },
+      { "name": "Cappuccino", "price": "120 TL", "category": "Sıcak Kahveler" },
+      { "name": "Macchiato", "price": "120 TL", "category": "Sıcak Kahveler" },
+      { "name": "Iced Latte", "price": "140 TL", "category": "Soğuk Kahveler" },
+      { "name": "Iced Americano", "price": "140 TL", "category": "Soğuk Kahveler" },
+      { "name": "Iced Cappuccino", "price": "140 TL", "category": "Soğuk Kahveler" },
+      { "name": "Iced Macchiato", "price": "140 TL", "category": "Soğuk Kahveler" },
+      { "name": "Coca-Cola (33 cl.)", "price": "75 TL", "category": "İçecekler" },
+      { "name": "Fanta (33 cl.)", "price": "75 TL", "category": "İçecekler" },
+      { "name": "Sprite (33 cl.)", "price": "75 TL", "category": "İçecekler" },
+      { "name": "Lipton Ice Tea (33 cl.)", "price": "70 TL", "category": "İçecekler" }
+    ]
+  },
   "6400": {
     "name": "PİTZA MİA (PİZZADAPİZZA)",
     "sourceUrl": "https://www.migros.com.tr/yemek/pizza-da-pizza-pitza-mia-besiktas-dikilitas-mah-st-2fd09",

@@ -3377,3 +3377,7 @@ Kaynaklar: https://yandex.com.tr/maps/org/yandaki_meyhane/199524851392/ ; https:
 ## HİSAR BALIKÇISI ID 6396 HOLD
 Resmi iletişim ve Instagram exact şubeyi `Anadolu Hisarı, Kızılserçe Sok. No:8` ve `0216 308 10 03` ile doğruluyor. Resmi menü güncel ürün adlarını içeriyor ancak TL fiyat yayımlamıyor; bulunan fiyatlı arşiv 2017/2019 tarihli. Son bir yıl şartı sağlanmadığı için **override eklenmedi; strict HOLD.**
 Kaynaklar: http://www.hisarbalikcisi.com.tr/iletisim.php ; http://www.hisarbalikcisi.com.tr/menu.php ; https://www.instagram.com/hisarbalikcisi/ ; https://www.wheree.com/menu
+
+## İYB BUBBLE WAFFLE BAYRAMPAŞA YILDIRIM ID 6395
+Hentzer kaydı `Yıldırım, Şht. Kamil Balkan Cd. No:44/A, 34045 Bayrampaşa/İstanbul` ve `0536 949 98 32`. Resmi Bayrampaşa Instagram hesabı aynı şube için `Şht. Kamil Balkan Caddesi, Şehit Ulubatlı Sokak No:44/A` bilgisini, Yandex aynı telefonu doğruluyor. Canlı Yemeksepeti SQB7 menüsünde 2026-08-27 tarihinde 20 benzersiz fiyatlı ürün alındı: 5 waffle, 7 sıcak kahve, 4 soğuk kahve, 4 kutu içecek. Poşet kalemi dışlandı; QR menüdeki Beylikdüzü hesabı bu şube için kullanılmadı. **Override kabul edildi.**
+Kaynaklar: https://www.yemeksepeti.com/en/restaurant/sqb7/iyb-bubble-waffle-sqb7 ; https://www.instagram.com/iybbubblewafflebayrampasaa/ ; https://yandex.com.tr/maps/org/iyb_bubble_waffle_bayrampa_a_y_ld_r_m/66425716485/
