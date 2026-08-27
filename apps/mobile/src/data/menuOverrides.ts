@@ -92343,6 +92343,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Chicken Supreme Gurme Pizza (Orta Boy) (30 Cm.)", "price": "415 TL", "category": "Gurme Pizzalar" }
     ]
   },
+  "6399": {
+    "name": "SushiCo",
+    "sourceUrl": "https://nisantasi-sushico.arimenu.com/?cat",
+    "sourceName": "Resmi SushiCo Nişantaşı QR menüsü; resmi Nişantaşı şube sayfası/Waze ile Mim Kemal Öke Cd. No:21 D:21 ve 444 78 74 parity doğrulaması",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "Acılı Sebzeli Tavuk", "price": "880 TL", "category": "Ana Yemekler" },
+      { "name": "Golden Ebi Roll (8 Adet)", "price": "920 TL", "category": "Sushi Rolls" },
+      { "name": "Sarımsak Soslu Green Bean", "price": "480 TL", "category": "Başlangıçlar" },
+      { "name": "Hamachi Tropical Tartar", "price": "980 TL", "category": "Başlangıçlar" },
+      { "name": "Hikari Roll (8 Adet)", "price": "860 TL", "category": "Sushi Rolls" },
+      { "name": "Yeşil Soğanlı Dana Eti", "price": "1100 TL", "category": "Ana Yemekler" },
+      { "name": "Susamlı Tavuklu Zenith Salata", "price": "640 TL", "category": "Salatalar" },
+      { "name": "Baby Bento Menü", "price": "714 TL", "category": "Menüler" },
+      { "name": "Çıtır Levrekli Zenith Salata", "price": "819 TL", "category": "Salatalar" },
+      { "name": "Hamachi Carpaccio", "price": "980 TL", "category": "Başlangıçlar" },
+      { "name": "Parmesanlı Mısır Topları", "price": "570 TL", "category": "Başlangıçlar" },
+      { "name": "Hamachi Roll (6 Adet)", "price": "580 TL", "category": "Sushi Rolls" },
+      { "name": "Buharda Somonlu Zenith Salata", "price": "819 TL", "category": "Salatalar" },
+      { "name": "Teriyaki Tavuk Udon Bowl", "price": "890 TL", "category": "Noodle" },
+      { "name": "Hamachi Nigiri (2 Adet)", "price": "610 TL", "category": "Nigiri / Sashimi" },
+      { "name": "Mango Soslu Deniz Mahsullü Salata", "price": "882 TL", "category": "Salatalar" },
+      { "name": "Hamachi Sashimi (12 Adet)", "price": "1200 TL", "category": "Nigiri / Sashimi" },
+      { "name": "Crunchy California Roll (8 Adet)", "price": "860 TL", "category": "Sushi Rolls" },
+      { "name": "Mongolian Chicken", "price": "624 TL", "category": "Ana Yemekler" },
+      { "name": "Kimchi Cucumber Salad", "price": "430 TL", "category": "Salatalar" }
+    ]
+  },
   "6511": {
     "name": "SALT FRIED CHICKEN BEŞİKTAŞ",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/pehr/salt-fried-chicken-pehr",

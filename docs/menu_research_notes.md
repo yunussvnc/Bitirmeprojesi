@@ -3360,3 +3360,8 @@ Kaynaklar: https://www.instagram.com/bazlamaistasyonu_beylikduzu/ ; https://yand
 ## PİTZA MİA (PİZZADAPİZZA) ID 6400 KABUL
 Restoranim, Menu-TR, Kacıyor, Tumİşyeri ve resmi Instagram Hentzer ile `Dikilitaş, Yenidoğan Sok. No:12/A, 34349 Beşiktaş/İstanbul` ve `+90 212 261 61 53` exact adres/telefon parity’sini doğruluyor. Migros Yemek exact `Pizza Da Pizza - Pitza Mia, Beşiktaş (Dikilitaş Mah.)` vendorunda orta boy klasik/gurme pizza kategorilerinin güncel TL fiyatları görüldü. İçecek, sos, tatlı, yan ürün ve menüler dışlanarak 20 benzersiz pizza ürünü override’a aktarıldı; kaynak yayın tarihi görünmediği için `verifiedAt` erişim/doğrulama tarihi olan `2026-08-27` tutuldu.
 Kaynaklar: https://www.migros.com.tr/yemek/pizza-da-pizza-pitza-mia-besiktas-dikilitas-mah-st-2fd09 ; https://www.yemeksepeti.com/restaurant/wmqb/pitza-mia-pizza-da-pizza-wmqb ; https://www.instagram.com/pitzamiatr/ ; https://restoranim.net/istanbul/besiktas/pizzaci/pitza-mia-pizzadapizza
+
+
+## SushiCo Nişantaşı ID 6399 KABUL
+Resmi SushiCo Nişantaşı sayfası `Mim Kemal Öke Cad. No:21, Nişantaşı-İstanbul` ve `444 78 74` telefonunu doğruluyor; Waze/Yandex/Mindtrip exact kapı ve telefon parity’sini destekliyor. Resmi Nişantaşı QR menüsü mobil User-Agent ile ayrıştırıldı ve bireysel TL fiyatları erişildi. İçecekler, soslar, tatlılar ve tekrar ürünler dışlanarak 20 benzersiz gıda ürünü eklendi; QR menüsünün yayın tarihi görünmediği için `verifiedAt` erişim/doğrulama tarihi `2026-08-27` tutuldu.
+Kaynaklar: https://www.sushico.com.tr/tr/subeler/nisantasi ; https://nisantasi-sushico.arimenu.com/?cat ; https://www.waze.com/live-map/directions/tr/i%CC%87stanbul/sushico?to
