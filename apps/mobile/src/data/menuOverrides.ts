@@ -92315,6 +92315,33 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Tavuk Şiş Dürüm MENÜ", "price": "399 TL", "category": "Dürümler" }
     ]
   },
+  "6367": {
+    "name": "KILÇIKSIZ BALIK - SICAK MEZE DÜNYASI",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/wf7p/kilciksiz-balik",
+    "sourceName": "Canlı Yemeksepeti exact Kılçıksız Balık menüsü; resmi Instagram/Facebook ve Restoranim ile Beylik Kapalı Pazar 23-24 adresi/telefonu doğrulaması",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "Fish Soup", "price": "320 TL", "category": "Çorbalar" },
+      { "name": "Grilled Seabass", "price": "990 TL", "category": "Izgara Balıklar" },
+      { "name": "Sea Bream Grill", "price": "910 TL", "category": "Izgara Balıklar" },
+      { "name": "Levrek Külbastı", "price": "850 TL", "category": "Izgara Balıklar" },
+      { "name": "Minekop Grill", "price": "620 TL", "category": "Izgara Balıklar" },
+      { "name": "Kılçıksız Spesyel Karışık (4'lü)", "price": "1250 TL", "category": "Izgara Balıklar" },
+      { "name": "Horse Mackerel Pan", "price": "750 TL", "category": "Tavada Balıklar" },
+      { "name": "Deni̇z Mahsulleri̇ Spagetti̇", "price": "850 TL", "category": "Tavada Balıklar" },
+      { "name": "Fener Roasted Fish", "price": "850 TL", "category": "Tavada Balıklar" },
+      { "name": "Butter Shrimp", "price": "750 TL", "category": "Sıcak Mezeler" },
+      { "name": "Shrimp Stew", "price": "750 TL", "category": "Sıcak Mezeler" },
+      { "name": "Fried Calamari", "price": "760 TL", "category": "Sıcak Mezeler" },
+      { "name": "Fish Kokorec", "price": "680 TL", "category": "Sıcak Mezeler" },
+      { "name": "Sauteed Seafood", "price": "720 TL", "category": "Sıcak Mezeler" },
+      { "name": "Balık Dürüm", "price": "510 TL", "category": "Ekmek Arası Ürünler" },
+      { "name": "Ekmek Arası Balık", "price": "450 TL", "category": "Ekmek Arası Ürünler" },
+      { "name": "Seasonal Salad", "price": "450 TL", "category": "Salatalar" },
+      { "name": "Shepherd Salad", "price": "450 TL", "category": "Salatalar" },
+      { "name": "İrmik Helvası", "price": "310 TL", "category": "Tatlılar" }
+    ]
+  },
   "6369": {
     "name": "TWOBROTHERS BURGER KAVACIK",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/q3oc/twobrothers-q3oc",

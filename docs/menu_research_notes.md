@@ -3489,3 +3489,7 @@ Kaynaklar: https://www.yemeksepeti.com/en/restaurant/q3oc/twobrothers-q3oc ; htt
 ## GÜNGÖR PASTANELERİ BAYRAMPAŞA ID 6368 HOLD
 Bulurum ve resmi Instagram adres/telefonu doğruluyor; resmi site menüsüz/under construction. Son bir yıl exact Terazidere şube fiyatlı menüsü bulunamadı; Malatya aynı isimli menü yanlış şube. **Override eklenmedi; strict HOLD.**
 Kaynaklar: https://www.bulurum.com/details/ac36akc0063a276ca65cacb_d_740cc0 ; https://www.instagram.com/gungorpastaneleri/ ; https://gungorpastaneleri.com/ ; https://www.yemeksepeti.com/restaurant/jqsq/gungor-pastanesi-jqsq
+
+## KILÇIKSIZ BALIK - SICAK MEZE DÜNYASI ID 6367
+Hentzer `Adnan Kahveci Mahallesi Erenler Caddesi (Beylik Kapalı Pazar Alanı içi), No:23-24, 34528 Beylikdüzü/İstanbul` ve `+90 212 852 35 52`; resmi Instagram/Facebook ve Restoranim/Servis Kayıt Listesi aynı şube bölgesini doğruluyor. Canlı Yemeksepeti `wf7p` menüsünden 2026-08-27 tarihinde 19 benzersiz güncel fiyatlı balık, sıcak meze, ekmek arası, salata ve tatlı ürünü alındı; içecek ve poşet dışlandı. **Override kabul edildi.**
+Kaynaklar: https://www.yemeksepeti.com/en/restaurant/wf7p/kilciksiz-balik ; https://www.instagram.com/kilciksiz_balik/ ; https://www.facebook.com/304389556085466/ ; https://restoranim.net/istanbul/beylikduzu/balikci/kilciksiz-balik-sicak-meze-dunyasi ; https://serviskayitlistesi.com/istanbul/beylikduzu/restoran/kilciksiz-balik-sicak-meze-dunyasi-yR_GMo.html
