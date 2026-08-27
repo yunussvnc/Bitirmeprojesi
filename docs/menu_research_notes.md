@@ -3469,3 +3469,7 @@ Kaynaklar: https://www.instagram.com/hacivat_pastane_cafe/ ; https://enkalitelif
 ## METRO GROSSMARKET BAYRAMPAŞA ID 6373 HOLD
 Kayıt restoran değil hipermarket; Metro resmi mağaza sayfası adres/telefonu, Bulurum ve Waze market sınıfını doğruluyor. Gıda restoran menüsü kapsam dışı olduğundan **override eklenmedi; strict HOLD.**
 Kaynaklar: https://www.metro-tr.com/magazalar/bayrampasa ; https://www.bulurum.com/details/_3bj_i34200iaa_k5dbc5ib__j0f0e2h ; https://www.waze.com/az/live-map/directions/tr/i%CC%87stanbul/metro-grossmarket-bayrampasa
+
+## HAZARFEN KEBAP ID 6372
+Hentzer `Hacımimi, Lüleci Hendek Cd. No:13, 34425 Beyoğlu/İstanbul` ve `+90 541 220 70 53`; Restoranim, Wanderboat ve Yandex aynı işletme/adres/telefonu doğruluyor. Canlı Yemeksepeti `chty` sayfasından 2026-08-27 tarihinde 20 benzersiz güncel fiyatlı çorba, pide, kebap ve dürüm ürünü alındı; içecek ve poşet kalemleri dışlandı. **Override kabul edildi.**
+Kaynaklar: https://www.yemeksepeti.com/en/restaurant/chty/hazarfen-kebap ; https://restoranim.net/istanbul/beyoglu/kebapci/hazarfen-kebap ; https://yandex.com.tr/maps/org/hazarfen_kebap/210305914928/ ; https://wanderboat.ai/local-businesses/turkey/beyo%C4%9Flu/hazarfen-kebap/ksGpqhAuQEWn6QBI-NhNEw

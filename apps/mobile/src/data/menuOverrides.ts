@@ -92315,6 +92315,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Tavuk Şiş Dürüm MENÜ", "price": "399 TL", "category": "Dürümler" }
     ]
   },
+  "6372": {
+    "name": "HAZARFEN KEBAP",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/chty/hazarfen-kebap",
+    "sourceName": "Canlı Yemeksepeti exact Hazarfen Kebap menüsü; Restoranim/Yandex ile Hacımimi Lüleci Hendek adresi ve telefon parity doğrulaması",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "Günün Çorbası", "price": "200 TL", "category": "Çorbalar" },
+      { "name": "Lahmacun", "price": "160 TL", "category": "Fırın Ürünleri" },
+      { "name": "Kavurmalı Kaşarlı Pide", "price": "360 TL", "category": "Fırın Ürünleri" },
+      { "name": "Sucuklu Kaşarlı Pide", "price": "280 TL", "category": "Fırın Ürünleri" },
+      { "name": "Kaşarlı Pide", "price": "264 TL", "category": "Fırın Ürünleri" },
+      { "name": "Kuşbaşılı Kaşarlı Pide", "price": "360 TL", "category": "Fırın Ürünleri" },
+      { "name": "Kıymalı Pide", "price": "280 TL", "category": "Fırın Ürünleri" },
+      { "name": "Pastırmalı Kaşarlı Pide", "price": "320 TL", "category": "Fırın Ürünleri" },
+      { "name": "Patatesli Pide", "price": "264 TL", "category": "Fırın Ürünleri" },
+      { "name": "Ispanaklı Pide", "price": "272 TL", "category": "Fırın Ürünleri" },
+      { "name": "Tavuklu Kaşarlı Pide", "price": "280 TL", "category": "Fırın Ürünleri" },
+      { "name": "Hazarfen Special Pide", "price": "400 TL", "category": "Fırın Ürünleri" },
+      { "name": "Adana Kebap", "price": "680 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Urfa Kebap", "price": "680 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Kuzu Şiş", "price": "720 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Patlıcanlı Kebap", "price": "720 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Tavuk Kanat", "price": "520 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Tavuk Şiş", "price": "520 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Adana Dürüm", "price": "320 TL", "category": "Dürümler" },
+      { "name": "Urfa Dürüm", "price": "320 TL", "category": "Dürümler" }
+    ]
+  },
   "6376": {
     "name": "HANE ÇİKOLATA & KAHVE AKARETLER",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/vl4l/hane-cikolata-and-kahve",
