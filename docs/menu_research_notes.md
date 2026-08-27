@@ -3661,3 +3661,7 @@ Kaynaklar: https://www.yemeksepeti.com/restaurant/or8j/tarihi-balat-donercisi ; 
 ## HOLD — MILANO BEANS COFFEE ID 6324
 Hentzer kaydı `Şehit Muhtar, Tarlabaşı Blv No:100-112B, 34435 Beyoğlu/İstanbul` ve `+90 510 221 62 03`; Maptons ve Restaurant Guru aynı Tarlabaşı Blv No:100-112B işletmesini gösteriyor, ancak kamuya açık telefon `+90 532 707 60 03` olarak farklı. Ayrıca erişilebilir kaynaklarda son bir yıl içinde 20 benzersiz fiyatlı gıda ürünü bulunamadı. Zorunlu %100 telefon paritesi sağlanamadığından **strict HOLD; override eklenmedi.**
 Kaynaklar: https://tr.maptons.com/p/12780016965 ; https://fr.restaurantguru.com/amp/Milano-Beans-Coffee-shop-Istanbul
+
+## HOLD — RALPH ID 6323
+Hentzer kaydı `Kuruçeşme, Kuruçeşme Cd. No:19/A, 34345 Beşiktaş/İstanbul` ve telefon alanı boş. Resmi Instagram `@ralphhour` aynı RALPH markasını ve Yemeksepeti vendor bağlantısını gösteriyor; Yandex kaydı aynı işletmeyi Kuruçeşme Cd. No:19C olarak listeliyor, ancak kapı birimi Hentzer’den farklı. Yemeksepeti menüsü CAPTCHA ile engellendi; erişilebilir arama önizlemeleri tam 20 ürün/fiyat sağlamıyor. Telefonun boş olması ve 19/A–19/C adres birimi farkı nedeniyle %100 exact branch paritesi sağlanamadı; **strict HOLD, override eklenmedi.**
+Kaynaklar: https://www.instagram.com/ralphhour/ ; https://www.yemeksepeti.com/restaurant/h9ye/ralph ; https://yandex.com.tr/maps/org/ralph/183306233126/
