@@ -3246,3 +3246,7 @@ Kaynaklar: https://yandex.com.tr/maps/org/kaffe_b_rn/1125634333/ ; https://firma
 ## İL CAPRICCIO PIZZA ID 6428 ACCEPTED
 Hentzer `Türkali, Hattat Tahsin Sk. No:56, 34357 Beşiktaş/İstanbul`, telefon `+90 212 236 30 00`. Yandex, Menu-TR, Restoranim.net, Restaurant Guru ve Time Out aynı işletmenin No:56 adresini; Yandex ve resmi Instagram aynı telefonu doğruluyor. Canlı Yemeksepeti `m3cg` menüsünden içecek, dondurma, sos, poşet, tatlı ve popüler tekrarlar dışlanarak 24/32 cm boyutları açıkça belirtilen 20 benzersiz pizza ürünü eklendi. **Override kabul edildi.**
 Kaynaklar: https://www.yemeksepeti.com/en/restaurant/m3cg/il-capriccio-pizza ; https://yandex.com/maps/org/pizzeria_il_capriccio/74231614898/ ; https://www.menu-tr.com/istanbul/besiktas/pizza-restorani/il-capriccio-pizza ; https://www.instagram.com/ilcapricciotr/
+
+## ENBEY İSKENDER PİDE LAHMACUN ID 6427 HOLD
+Hentzer `Cumhuriyet Cd. No:10` ve `+90 212 873 08 80` bilgileri Mekanlar.com, Restaurant Guru ve Instagram ile destekleniyor. Ancak Yemeksepeti `xu7l` vendor metninde adres `Çamlık Caddesi No:3/F` olduğundan exact şube parity’si sağlanamadı; sayfa CAPTCHA nedeniyle tam menü de doğrulanamadı. **Override eklenmedi; strict HOLD.**
+Kaynaklar: https://www.yemeksepeti.com/en/restaurant/xu7l/enbey-iskender-and-lahmacun ; https://mekanlar.com/mekan/enbey-iskemder-lahmacun-cumhuriyet-mh ; https://restaurantguru.com/Enbey-Iskender-Pide-Lahmacun-Istanbul
