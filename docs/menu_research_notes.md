@@ -3298,3 +3298,7 @@ Kaynaklar: https://blakcoffee.co/pages/subelerimiz ; https://blakcoffee.co/blog/
 ## SLICEGUY PIZZA BEŞİKTAŞ ID 6415 HOLD
 Yandex ve SliceGuy sosyal medya içerikleri Hentzer ile Beşiktaş/Kazan Sokak ve `+90 530 865 16 30` bilgisini destekliyor; ancak kapı numarası 20/18A olarak çelişiyor. Yemeksepeti `ii9p/fhe3` vendorlarının Hentzer Beşiktaş şubesiyle adres/telefon parity’si doğrulanamadı. **Override eklenmedi; strict HOLD.**
 Kaynaklar: https://pizzasliceguy.com/ ; https://yandex.com.tr/maps/org/sliceguy_pizza_besiktas/86196373384/ ; https://www.yemeksepeti.com/restaurant/ii9p/sliceguy-pizza-ii9p ; https://www.yemeksepeti.com/restaurant/fhe3/sliceguy-pizza-fhe3
+
+## GRANNY'S WAFFLES & KUMPIR ID 6414 HOLD
+Granny’s resmi şubeler sayfası Hentzer ile Yıldırım, Şehir Parkı Caddesi No:43/A adresini doğruluyor; ancak resmi telefon `+90 553 420 24 50`, Hentzer telefonu `+90 552 420 24 50`. Zorunlu telefon parity’si sağlanamadığı için Yemeksepeti/QR menü fiyatları kullanılmadı. **Override eklenmedi; strict HOLD.**
+Kaynaklar: https://grannyswaffles.com.tr/subelerimiz/ ; https://www.yemeksepeti.com/en/restaurant/f5x8/grannys-waffles-and-kumpir-f5x8 ; https://grannyswaffles.qrmenu.com.tr/waffles
