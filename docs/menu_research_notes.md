@@ -3517,3 +3517,7 @@ Kaynaklar: https://ahesterestaurant.com/ ; https://menufiyatlar.com/1291-aheste-
 ## KAFFEE SCHÜTZ BEŞİKTAŞ ID 6361
 Hentzer `Cihannüma, Akmaz Çeşme Sk. No:4, 34353 Beşiktaş/İstanbul` ve `+90 505 254 86 54`; Kaffee Schütz sosyal medya paylaşımları ve servis kayıtları aynı exact şube adres/telefonu doğruluyor. Canlı Migros Yemek exact Beşiktaş (Cihannüma Mah.) menüsünden 2026-08-27 tarihinde 20 benzersiz güncel fiyatlı sıcak kahve ürünü alındı; Popüler carousel tekrarları dışlandı. **Override kabul edildi.**
 Kaynaklar: https://www.migros.com.tr/yemek/kaffee-schutz-besiktas-cihannuma-mah-st-2be36 ; https://www.instagram.com/reel/Db3qu94x4na/ ; https://servislisteleri.com/istanbul/besiktas/kafe/kaffee-schutz-besiktas-JdfPnM.html ; https://schutz.com.tr/
+
+## ÜMİT ET DÖNER ID 6360 HOLD
+Resmi Ümit Et ve Yandex Hentzer adres/telefonunu destekliyor; ancak Yemeksepeti `wyhi` More info panelinde adres **Çamlıtepe Cd. No:28**. Hentzer `Osmanlı Cd. No:52 D:4` olduğundan exact şube paritesi sağlanamadı. Güncel menü yanlış şubeye uygulanmadı; **strict HOLD**.
+Kaynaklar: https://umitet.com/iletisim/ ; https://yandex.com.tr/maps/org/umit_et_doner/1569062009/ ; https://www.yemeksepeti.com/en/restaurant/wyhi/umit-et-doner
