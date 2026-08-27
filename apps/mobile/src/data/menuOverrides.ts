@@ -92315,6 +92315,27 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Tavuk Şiş Dürüm MENÜ", "price": "399 TL", "category": "Dürümler" }
     ]
   },
+  "6357": {
+    "name": "GHAYA COFFEE COMPANY BEYLİKDÜZÜ",
+    "sourceUrl": "https://www.migros.com.tr/yemek/ghaya-panini-coffee-beylikduzu-kavakli-mah-st-2b4cb",
+    "sourceName": "Canlı Migros Yemek exact Ghaya Panini & Coffee Beylikdüzü (Kavaklı Mah.) menüsü; resmi/Kaçıyor işletme kaydı ile Kavaklı Yeşilyurt Cd. No:15 D:1E / 0543 277 79 87 doğrulaması",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "Bask Cheesecake", "price": "290 TL", "category": "Tatlılar" },
+      { "name": "Chocolate Cookie (Adet)", "price": "170 TL", "category": "Tatlılar" },
+      { "name": "White Chocolate Brownie", "price": "275 TL", "category": "Tatlılar" },
+      { "name": "Tiramisu", "price": "275 TL", "category": "Tatlılar" },
+      { "name": "Magnolia", "price": "200 TL", "category": "Tatlılar" },
+      { "name": "Americano (Large)", "price": "190 TL", "category": "Sıcak Kahveler" },
+      { "name": "Latte (Large)", "price": "190 TL", "category": "Sıcak Kahveler" },
+      { "name": "Mocha (Large)", "price": "230 TL", "category": "Sıcak Kahveler" },
+      { "name": "White Chocolate Mocha (Large)", "price": "230 TL", "category": "Sıcak Kahveler" },
+      { "name": "Matcha Latte (Large)", "price": "230 TL", "category": "Ghaya Matcha Series" },
+      { "name": "Ice Matcha Latte", "price": "245 TL", "category": "Ghaya Matcha Series" },
+      { "name": "Ice Strawberry Matcha", "price": "275 TL", "category": "Ghaya Matcha Series" },
+      { "name": "Ice Vanilla Matcha", "price": "275 TL", "category": "Ghaya Matcha Series" }
+    ]
+  },
   "6358": {
     "name": "GÜN BAKERY BEŞİKTAŞ",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/s1q8/gun-bakery-s1q8",

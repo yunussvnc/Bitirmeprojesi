@@ -3529,3 +3529,7 @@ Kaynaklar: https://pointlounge.dijital.menu/26236 ; https://pointlounge.dijital.
 ## GÜN BAKERY BEŞİKTAŞ ID 6358
 Hentzer `No:34, Sinanpaşa, Şair Nedim Cd., 34353 Beşiktaş/İstanbul` ve `+90 212 260 70 78`; resmi Gün Bakery sitesi aynı adres ve telefonu yayımlıyor. Yemeksepeti `s1q8` More info `Şair Nedim Cd. 34 B` gösteriyor ve canlı menüde 4 kruvasan, 6 Ekşi Maya Tost ve 3 Glutensiz Tost olmak üzere 13 benzersiz güncel fiyatlı yiyecek ürünü sunuyor. Resmi sitede ayrıca 2026 fiyatlı Pastel de Nata 120 TL ve paket ürünleri bulunuyor. **Override kabul edildi.**
 Kaynaklar: https://www.gunbakery.com/ ; https://www.yemeksepeti.com/en/restaurant/s1q8/gun-bakery-s1q8
+
+## GHAYA COFFEE COMPANY BEYLİKDÜZÜ ID 6357
+Hentzer `Kavaklı, Yeşilyurt Cd. No:15 D:1E, 34520 Beylikdüzü/İstanbul` ve `+90 543 277 79 87`; Kaçıyor exact adres/telefonu ve Ghaya sosyal hesapları işletme kimliğini doğruluyor. Canlı Migros Yemek exact `Ghaya Panini & Coffee, Beylikdüzü (Kavaklı Mah.)` menüsünden 2026-08-27 tarihinde 5 tatlı, 4 sıcak kahve ve 4 matcha olmak üzere 13 benzersiz güncel fiyatlı yiyecek/içecek ürünü alındı; poşet ve gazlı içecekler dışlandı. **Override kabul edildi.**
+Kaynaklar: https://www.migros.com.tr/yemek/ghaya-panini-coffee-beylikduzu-kavakli-mah-st-2b4cb ; https://kaciyor.com/ghaya-coffee-company ; https://www.instagram.com/ghayacoffee/
