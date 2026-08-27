@@ -6362,6 +6362,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Lotus Mini Pancake", "price": "249.60 TL", "category": "Pankekler" }
     ]
   },
+  "6299": {
+    "name": "KAVACIK BALIKÇISI BARBUNİ",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/gus6/kavacik-balikcisi-barbuni",
+    "sourceName": "Canlı Yemeksepeti exact vendor; resmi Instagram ve RestaurantGuru ile Misafir Sok. No:6 / +90 216 693 09 48 paritesi",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "Menü 2", "price": "2450 TL", "category": "Menüler" },
+      { "name": "Izgara Levrek Menü 3", "price": "2950 TL", "category": "Menüler" },
+      { "name": "Balık Çorbası", "price": "330 TL", "category": "Çorbalar" },
+      { "name": "Izgara Somon Şiş (260 gr.)", "price": "800 TL", "category": "Izgara Balıklar" },
+      { "name": "Izgara Levrek Şiş (260 gr.)", "price": "700 TL", "category": "Izgara Balıklar" },
+      { "name": "Izgara Granyöz Şiş (260 gr.)", "price": "950 TL", "category": "Izgara Balıklar" },
+      { "name": "Izgara Levrek (400 gr.)", "price": "650 TL", "category": "Izgara Balıklar" },
+      { "name": "Izgara Norveç Somon (260 gr.)", "price": "780 TL", "category": "Izgara Balıklar" },
+      { "name": "Izgara Deniz Levreği (1 kg.)", "price": "2000 TL", "category": "Izgara Balıklar" },
+      { "name": "Izgara Deniz Levreği (500 gr.)", "price": "1000 TL", "category": "Izgara Balıklar" },
+      { "name": "Palamut Izgara", "price": "700 TL", "category": "Izgara Balıklar" },
+      { "name": "Izgara Kalkan", "price": "2300 TL", "category": "Izgara Balıklar" },
+      { "name": "Izgara Et Köfte", "price": "650 TL", "category": "Köfteler" },
+      { "name": "Kanat Izgara", "price": "590 TL", "category": "Izgara" },
+      { "name": "Dülger Kavurma (1 kg.)", "price": "2599 TL", "category": "Izgara Balıklar" },
+      { "name": "Mezgit Fileto Tava", "price": "680 TL", "category": "Tavada Balıklar" },
+      { "name": "Tekir Tava", "price": "745 TL", "category": "Tavada Balıklar" },
+      { "name": "Dil Balığı (400 gr.)", "price": "1100 TL", "category": "Tavada Balıklar" },
+      { "name": "Kalkan", "price": "2300 TL", "category": "Tavada Balıklar" },
+      { "name": "Norveç Somon Buğulama (260 gr.)", "price": "800 TL", "category": "Buğulama Balıklar" }
+    ]
+  },
   "6300": {
     "name": "FISTIK KEBAP LAHMACUN",
     "sourceUrl": "https://www.migros.com.tr/yemek/fistik-kebap-lahmacun-besiktas-mecidiye-mah-st-2034f",
