@@ -3895,3 +3895,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6264 ; https://www.menu-tr.com/is
 ## NIZAM COFFEE & FOOD ID 6263 — HOLD
 Hentzer `Anadolu Kavağı, Molla Mehmet Sk. No:1, 34000 Beykoz`, telefon `+90 542 693 45 32`. Kaçıyor, Menu-TR ve Yandex exact şubeyi destekliyor; Menu-TR’de gerçek ürün/fiyat menüsü yerine yalnız QR Menü Oluştur bağlantısı bulunuyor. Son bir yıl içinde exact şubeye ait 20 benzersiz fiyatlı ürün doğrulanamadı. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6263 ; https://www.menu-tr.com/istanbul/beykoz/kafe/nizam-coffee-food ; https://kaciyor.com/nizam-coffee-food ; https://restoranim.net/istanbul/istanbul/kafe/nizam-coffee-food
+
+## LA VIA BELLA ID 6262 — HOLD
+Hentzer `Sinanpaşa, Şht. Asım Cd. 41/A, 34353 Beşiktaş`, telefon `+90 538 975 61 84`. Restoranim, İsteburası, İstanbul Servis Listesi ve Polomap exact adres/telefonu destekliyor. Yemeksepeti `ape4` vendoru CAPTCHA ile engellendi; Pardon alternatif menüsü ürün/fiyat metni vermedi. Son bir yıl içinde exact şubeye ait 20 benzersiz fiyatlı ürün doğrulanamadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6262 ; https://www.yemeksepeti.com/restaurant/ape4/la-via-bella-cafe ; https://webmenu.pardonapp.co/la-via-bella/menu/burgerler ; https://restoranim.net/istanbul/besiktas/kafe/la-via-bella ; https://la-via-bella.isteburasi.com.tr/
