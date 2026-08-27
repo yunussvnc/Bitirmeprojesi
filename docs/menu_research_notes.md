@@ -3445,3 +3445,7 @@ Kaynaklar: https://www.instagram.com/reel/DaS8o4koE3B/ ; https://www.instagram.c
 ## MAKI RESTORAN BEBEK ID 6379 HOLD
 Resmi Maki iletişim sayfası `Bebek Mah. Cevdetpaşa Cad. Eminbey Apartmanı No:39 A No:1` ve `0530 359 00 00` bilgilerini doğruluyor. Fakat Yandex aynı kaydı kalıcı kapalı gösteriyor; güncel şube menüsü/fiyatı doğrulanamadı. **Override eklenmedi; strict HOLD.**
 Kaynaklar: https://www.makirestoran.com/iletisim.php ; https://www.instagram.com/p/DFNRUK7g0Tv/ ; https://yandex.com/maps/org/maki_restaurant/54901815951/ ; https://www.corner.inc/place/pevqt3irYCQk
+
+## ÇUKURÇAYIR EKMEK FABRİKASI ID 6378 HOLD
+İşletme ve telefon çeşitli kaynaklarla eşleşiyor; ancak kapı numarası 199/119/99 olarak çelişkili ve son bir yıl ürün bazlı TL fiyatlı menü bulunamadı. **Override eklenmedi; strict HOLD.**
+Kaynaklar: https://restoranim.net/istanbul/istanbul/firin/cukurcayir-ekmek-fabrikasi ; https://www.kaciyor.com/cukurcayir-ekmek-fabrikasi ; https://www.bulurum.com/details/2daachb3cd0a_eba0d2b_2_0d71631cg ; https://yandex.com.tr/maps/org/ekmek_firini/8815857262/
