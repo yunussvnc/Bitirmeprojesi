@@ -3929,3 +3929,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6256 ; https://yandex.com.tr/maps
 ## LIMOS PIZZA ID 6255 — HOLD
 Hentzer `Cihannüma, Ressam Hamdi Bey Sk. 2-C, 34353 Beşiktaş`, telefon `+90 212 236 03 19`; Yandex ve Restoranim destekliyor. Canlı Yemeksepeti `g186` vendoru ise `Sinanpaşa Mahallesi Çelebioğlu Sokak No:9-11A Beşiktaş` adresini gösteriyor. Adres exact eşleşmediği için canlı fiyatlı menü kullanılmadı; **HOLD, override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6255 ; https://yandex.com.tr/maps/org/limos_pizza/217979651243/ ; https://restoranim.net/istanbul/besiktas/pizzaci/limos-pizza ; https://www.yemeksepeti.com/restaurant/g186/limos-pizza
+
+## BI' İŞKEMBE | 1978 ID 6254 — HOLD
+Hentzer `İsmet Paşa, İsmet Paşa Cd. No:2 D:A, 34040 Bayrampaşa`, telefon `+90 212 430 50 50`. Resmi biiskembe1978.com menü ve Bayrampaşa sayfası exact adres/telefonu doğruluyor; resmi sitede ürün kategorileri var ancak ürün bazlı fiyat listesi yok. Son bir yıl içinde 20 benzersiz fiyatlı ürün doğrulanamadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6254 ; https://biiskembe1978.com/menu-restaurant/ ; https://biiskembe1978.com/bayrampasa/ ; https://www.snapchat.com/place/bi-ikembe-1978/d63dce86-653c-11e9-a495-b3bc48c95bd6 ; https://restaurantguru.com/BiIskembe-Istanbul
