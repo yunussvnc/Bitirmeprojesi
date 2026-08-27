@@ -6362,6 +6362,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Lotus Mini Pancake", "price": "249.60 TL", "category": "Pankekler" }
     ]
   },
+  "6290": {
+    "name": "KÖFTECİ İRFAN STEAKHOUSE-KASAP",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/h8nm/kofteci-irfan-steakhouse-and-kasap",
+    "sourceName": "Canlı Yemeksepeti exact vendor; resmi Instagram/Facebook ve Bulurum ile Kavacık Fatih Sultan Mehmet Cd. 6/1 / +90 216 413 75 75 paritesi",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "Süzme Mercimek Çorbası", "price": "250 TL", "category": "Çorbalar" },
+      { "name": "Izgara Kaşarlı Köfte", "price": "650 TL", "category": "Köfteler" },
+      { "name": "Zıp Zıp Köfte", "price": "650 TL", "category": "Köfteler" },
+      { "name": "Pideli Köfte", "price": "700 TL", "category": "Köfteler" },
+      { "name": "Izgara Satır Köfte", "price": "650 TL", "category": "Köfteler" },
+      { "name": "Karışık Köfte", "price": "750 TL", "category": "Köfteler" },
+      { "name": "Izgara Köfte", "price": "650 TL", "category": "Köfteler" },
+      { "name": "Izgara Tavuk", "price": "600 TL", "category": "Tavuklar" },
+      { "name": "Izgara Tavuk Pirzola", "price": "600 TL", "category": "Tavuklar" },
+      { "name": "Newyork Steak", "price": "1950 TL", "category": "Kırmızı Etler" },
+      { "name": "Dana Antrikot", "price": "1700 TL", "category": "Kırmızı Etler" },
+      { "name": "Kuzu Külbastı", "price": "1600 TL", "category": "Kırmızı Etler" },
+      { "name": "Dana Lokum", "price": "1750 TL", "category": "Kırmızı Etler" },
+      { "name": "Izgara Kuzu Sırtı", "price": "1600 TL", "category": "Kırmızı Etler" },
+      { "name": "Kuzu Pirzola", "price": "1600 TL", "category": "Kırmızı Etler" },
+      { "name": "Dana Pirzola", "price": "2400 TL", "category": "Kırmızı Etler" },
+      { "name": "Kuzu Küşleme", "price": "1600 TL", "category": "Kırmızı Etler" },
+      { "name": "Klasik Burger", "price": "650 TL", "category": "Burgerler" },
+      { "name": "Cheeseburger", "price": "690 TL", "category": "Burgerler" },
+      { "name": "Izgara Tavuk Dürüm", "price": "600 TL", "category": "Dürümler" }
+    ]
+  },
   "6291": {
     "name": "KIZILKAYALAR BEŞİKTAŞ",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/vsmo/kizilkayalar-hamburger-vsmo",
