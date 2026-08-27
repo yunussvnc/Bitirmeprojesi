@@ -3809,3 +3809,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6286 ; https://yandex.com.tr/maps
 ## CİĞERCİ BAHATTİN ESENYURT / BEYLİKDÜZÜ ID 6285 — HOLD
 Hentzer `Barbaros Hayrettin Paşa, Şehitler Cd. No:3, 34515 Esenyurt` / `+90 538 870 60 33` bilgisi 2026 resmi sosyal paylaşımları ve çoklu dizinlerle doğrulandı. Canlı Yemeksepeti vendorunda Popüler ve Kebaplar & Izgaralar kategorileri aynı ürünleri tekrarlıyor; yalnızca 7 benzersiz gıda ürünü (Ciğer Şiş, Et Şiş, Adana, Yürek, Tavuk Kanat, Tavuk Şiş, Urfa) var. Çorba/tatlı/içecek eklense de 20 benzersiz gıda ürünü şartı sağlanamıyor. **HOLD; override eklenmedi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6285 ; https://www.yemeksepeti.com/en/restaurant/dy6z/cigerci-bahattin-dy6z ; https://www.instagram.com/p/DT-p5UIiMvp/ ; https://restaurantguru.com/Cigerci-Bahattin-Istanbul-2 ; https://www.menu-tr.com/istanbul/esenyurt/restoran/cigerci-bahattin-esenyurt-beylikduzu
+
+## GÜMBET DÖNER - BEYLİKDÜZÜ ID 6284 — HOLD
+Hentzer kaydı `Flora City, Adnan Kahveci, Kafkas Cd. No 88, 34528 Beylikdüzü/İstanbul`, telefon `+90 212 855 34 15`. Araştırmada bu exact işletme/telefonu bağımsız doğrulayan ve son bir yıl içinde fiyatları görünen en az 20 ürünlü güvenilir menü kaynağı bulunamadı. **HOLD; override eklenmedi.**
+Kaynak: https://api.asemos.tr/api/v1/places/6284
