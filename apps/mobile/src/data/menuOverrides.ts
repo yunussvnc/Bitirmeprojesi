@@ -92315,6 +92315,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Tavuk Şiş Dürüm MENÜ", "price": "399 TL", "category": "Dürümler" }
     ]
   },
+  "6369": {
+    "name": "TWOBROTHERS BURGER KAVACIK",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/q3oc/twobrothers-q3oc",
+    "sourceName": "Canlı Yemeksepeti exact TwoBrothers menüsü; resmi TwoBrothers Kavacık Instagram/Yandex ve Restoranim ile Şht. Erdal Yulalı adresi/telefonu doğrulaması",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "Two Brothers Burger", "price": "660 TL", "category": "Burgers" },
+      { "name": "The Truffle Burger", "price": "660 TL", "category": "Burgers" },
+      { "name": "Crispy Onion Burger", "price": "895 TL", "category": "Burgers" },
+      { "name": "Cheeseburger", "price": "650 TL", "category": "Burgers" },
+      { "name": "El Clasico Brothers", "price": "650 TL", "category": "Burgers" },
+      { "name": "Mexican Burger", "price": "650 TL", "category": "Burgers" },
+      { "name": "Mushroom Burger", "price": "650 TL", "category": "Burgers" },
+      { "name": "Chicken Crispy Burger", "price": "610 TL", "category": "Burgers" },
+      { "name": "Hot Chicken Crispy Burger", "price": "610 TL", "category": "Burgers" },
+      { "name": "Double Cheeseburger Menü", "price": "900 TL", "category": "Menus" },
+      { "name": "Double The Truffle Menü", "price": "910 TL", "category": "Menus" },
+      { "name": "Double Mexican Menü", "price": "900 TL", "category": "Menus" },
+      { "name": "Double Mushroom Menü", "price": "900 TL", "category": "Menus" },
+      { "name": "Double El Clasico Menü", "price": "900 TL", "category": "Menus" },
+      { "name": "Double Two Brothers Menü", "price": "910 TL", "category": "Menus" },
+      { "name": "Mozzarella Sticks (6 Pieces)", "price": "325 TL", "category": "By-products" },
+      { "name": "Coleslaw", "price": "195 TL", "category": "By-products" },
+      { "name": "Chicken Tenders (6 Pieces)", "price": "550 TL", "category": "By-products" },
+      { "name": "Pickled Onions & Jalapeno Peppers", "price": "100 TL", "category": "By-products" },
+      { "name": "Chips", "price": "195 TL", "category": "By-products" }
+    ]
+  },
   "6372": {
     "name": "HAZARFEN KEBAP",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/chty/hazarfen-kebap",

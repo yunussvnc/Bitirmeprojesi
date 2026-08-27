@@ -3481,3 +3481,7 @@ Kaynaklar: https://www.menu-tr.com/istanbul/beykoz/kafe/manzara-cafe ; https://w
 ## PİLAVCI İSLAM USTA BEYLİKDÜZÜ ID 6370 HOLD
 Ana site Hentzer adres/telefonunu doğruluyor; ancak fiyat güncellemesi 07.05.2026 olan Beykent dijital menüsünün iletişim bölümünde başka şube (`Mimarsinan Mah. E5 Londra Asfaltı Cd. No:66/D`, `0530 943 71 47`) yer alıyor. Wrong-branch riski nedeniyle **override eklenmedi; strict HOLD.**
 Kaynaklar: https://www.pilavciislamusta.com/ ; https://beykent.pilavciislamusta.com/ ; https://beykent.pilavciislamusta.com/DesktopV2/CategoryChildTr/12 ; https://beykent.pilavciislamusta.com/DesktopV2/CategoryChildTr/10 ; https://www.instagram.com/pilavciislamusta/ ; https://www.yemeksepeti.com/restaurant/a319/pilavci-islam-usta
+
+## TWOBROTHERS BURGER KAVACIK ID 6369
+Hentzer `Rüzgarlıbahçe Mah, Kavacık, Şht. Erdal Yulalı Sk. No:5, 34805 Beykoz/İstanbul` ve `+90 505 712 31 36`; resmi TwoBrothers Instagram, Restoranim ve Yandex aynı Kavacık adres/telefonu doğruluyor. Canlı Yemeksepeti `q3oc` sayfasından 2026-08-27 tarihinde Popular carousel tekrarları dışlanarak 9 burger, 6 menü ve 5 yan ürün olmak üzere 20 benzersiz güncel fiyatlı yiyecek ürünü alındı; içecek, sos ve poşet kalemleri dışlandı. **Override kabul edildi.**
+Kaynaklar: https://www.yemeksepeti.com/en/restaurant/q3oc/twobrothers-q3oc ; https://www.instagram.com/twobrothersburger_/ ; https://yandex.com.tr/maps/org/twobrothers_burger/145659543103/ ; https://restoranim.net/istanbul/istanbul/fast-food/twobrothers-burger
