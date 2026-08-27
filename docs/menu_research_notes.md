@@ -3549,3 +3549,7 @@ Kaynaklar: https://enbeydoner.com.tr/subelerimiz/ ; https://enbeydoner.com.tr/ ;
 ## ADANA MESTANZADE KEBAP ID 6353 HOLD
 Hentzer `Onur Sk. Demir Romance Sitesi Akik 4`, Yandex `Onur Sok. No:8` gösteriyor; telefon Instagram ile eşleşse ve Migros’ta güncel menü bulunsa da exact adres/ünite paritesi kesin değil. Yanlış şubeye menü uygulanmadı; **strict HOLD**.
 Kaynaklar: https://yandex.com.tr/maps/org/adana_mestanzade_kebap/205920581210/ ; https://www.instagram.com/mestanzadekebap/ ; https://www.migros.com.tr/yemek/adana-mestanzade-kebap-beylikduzu-cumhuriyet-mah-st-2ade2
+
+## VOSVOS CAFE BAR BEYOĞLU ID 6352 HOLD
+Resmi Vosvos sitesi ve Yandex, `Erol Dernek Sk. No:11/A Beyoğlu` adresini ve `0212 243 65 66` telefonunu doğruluyor; ancak Hentzer telefon alanı boş/null. Son bir yıl içinde exact şubeye bağlı güvenilir ürün bazlı TL fiyatlı menü de bulunamadı; eski Quandoo fiyatları kullanılmadı. **Strict HOLD**.
+Kaynaklar: https://vosvoscafebar.com/ ; https://yandex.com.tr/maps/org/vosvos_cafe_bar/1318276109/ ; https://www.quandoo.com.tr/en/place/vos-vos-cafe-bar-19218/menu
