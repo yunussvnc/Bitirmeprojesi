@@ -3513,3 +3513,7 @@ Kaynaklar: https://www.esmercafe.com/tr/contact ; https://www.yemeksepeti.com/en
 ## AHESTE PERA ID 6362
 Hentzer `Asmalı Mescit, Meşrutiyet Cd. No:107 F, 34430 Beyoğlu/İstanbul` ve `+90 212 243 26 33`; Aheste Restaurant, Gault & Millau ve Bulurum aynı exact şube adres/telefonu doğruluyor. 2026-05-14 tarihli Aheste Pera fiyat listesinde 18 benzersiz güncel fiyatlı yiyecek/menü ürünü bulundu; alkol/içecek ve tekrarlar dışlandı. Resmi sitenin menü sayfası dinamik olduğu için fiyat doğrulamasında tarihli menufiyatlar kaynağı kullanıldı. **Override kabul edildi.**
 Kaynaklar: https://ahesterestaurant.com/ ; https://menufiyatlar.com/1291-aheste-pera-menu-fiyatlari ; https://www.gault-millau.com.tr/aheste-pera/ ; https://www.bulurum.com/en/details/__0a06b43ici2h5ebh7d513f0gckb_bk
+
+## KAFFEE SCHÜTZ BEŞİKTAŞ ID 6361
+Hentzer `Cihannüma, Akmaz Çeşme Sk. No:4, 34353 Beşiktaş/İstanbul` ve `+90 505 254 86 54`; Kaffee Schütz sosyal medya paylaşımları ve servis kayıtları aynı exact şube adres/telefonu doğruluyor. Canlı Migros Yemek exact Beşiktaş (Cihannüma Mah.) menüsünden 2026-08-27 tarihinde 20 benzersiz güncel fiyatlı sıcak kahve ürünü alındı; Popüler carousel tekrarları dışlandı. **Override kabul edildi.**
+Kaynaklar: https://www.migros.com.tr/yemek/kaffee-schutz-besiktas-cihannuma-mah-st-2be36 ; https://www.instagram.com/reel/Db3qu94x4na/ ; https://servislisteleri.com/istanbul/besiktas/kafe/kaffee-schutz-besiktas-JdfPnM.html ; https://schutz.com.tr/

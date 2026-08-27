@@ -92315,6 +92315,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Tavuk Şiş Dürüm MENÜ", "price": "399 TL", "category": "Dürümler" }
     ]
   },
+  "6361": {
+    "name": "KAFFEE SCHÜTZ BEŞİKTAŞ",
+    "sourceUrl": "https://www.migros.com.tr/yemek/kaffee-schutz-besiktas-cihannuma-mah-st-2be36",
+    "sourceName": "Canlı Migros Yemek exact Kaffee Schütz Beşiktaş (Cihannüma Mah.) menüsü; resmi Kaffee Schütz sosyal hesabı ve servis kayıtları ile Akmaz Çeşme Sk. No:4 / 0505 254 86 54 doğrulaması",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "Küçük Filtre Kahve", "price": "210 TL", "category": "Sıcak Kahveler" },
+      { "name": "Orta Filtre Kahve", "price": "240 TL", "category": "Sıcak Kahveler" },
+      { "name": "Büyük Filtre Kahve", "price": "260 TL", "category": "Sıcak Kahveler" },
+      { "name": "Küçük Sütlü Filtre Kahve", "price": "220 TL", "category": "Sıcak Kahveler" },
+      { "name": "Orta Sütlü Filtre Kahve", "price": "250 TL", "category": "Sıcak Kahveler" },
+      { "name": "Büyük Sütlü Filtre Kahve", "price": "270 TL", "category": "Sıcak Kahveler" },
+      { "name": "Küçük Caffè Americano", "price": "220 TL", "category": "Sıcak Kahveler" },
+      { "name": "Orta Caffè Americano", "price": "250 TL", "category": "Sıcak Kahveler" },
+      { "name": "Büyük Caffè Americano", "price": "270 TL", "category": "Sıcak Kahveler" },
+      { "name": "Küçük Cappuccino", "price": "250 TL", "category": "Sıcak Kahveler" },
+      { "name": "Orta Cappuccino", "price": "280 TL", "category": "Sıcak Kahveler" },
+      { "name": "Büyük Cappuccino", "price": "300 TL", "category": "Sıcak Kahveler" },
+      { "name": "Küçük Caffè Latte", "price": "250 TL", "category": "Sıcak Kahveler" },
+      { "name": "Orta Caffè Latte", "price": "280 TL", "category": "Sıcak Kahveler" },
+      { "name": "Büyük Caffè Latte", "price": "300 TL", "category": "Sıcak Kahveler" },
+      { "name": "Küçük Latte Macchiato", "price": "250 TL", "category": "Sıcak Kahveler" },
+      { "name": "Orta Latte Macchiato", "price": "280 TL", "category": "Sıcak Kahveler" },
+      { "name": "Büyük Latte Macchiato", "price": "300 TL", "category": "Sıcak Kahveler" },
+      { "name": "Küçük Caramel Macchiato", "price": "320 TL", "category": "Sıcak Kahveler" },
+      { "name": "Orta Caramel Macchiato", "price": "350 TL", "category": "Sıcak Kahveler" }
+    ]
+  },
   "6362": {
     "name": "AHESTE PERA",
     "sourceUrl": "https://menufiyatlar.com/1291-aheste-pera-menu-fiyatlari",
