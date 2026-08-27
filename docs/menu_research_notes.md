@@ -3306,3 +3306,7 @@ Kaynaklar: https://grannyswaffles.com.tr/subelerimiz/ ; https://www.yemeksepeti.
 ## MORNİVA COFFEE & WAFFLE ID 6413 HOLD
 Morniva resmi sitesi ile Tripadvisor, Yandex, Instagram ve Firma Fihristi Hentzer ile Sinanpaşa, Yenilik Sok. No:4-6A ve `+90 535 954 06 56` exact parity’sini destekliyor. Resmi LimonPOS menü bağlantısı erişilemedi; Yemeksepeti `ju6t` fiyatları exact şube adres/telefonuyla doğrulanamadı. **Override eklenmedi; strict HOLD.**
 Kaynaklar: https://morniva.com.tr/ ; https://www.yemeksepeti.com/restaurant/ju6t/morniva-waffle ; https://yandex.com.tr/maps/org/morniva_coffee_waffle/160977302769/
+
+## MINI COFFEE FOOD & BAKERY ID 6412 HOLD
+Restoranim.net ve Tumİşyeri Hentzer ile Göksu Cd. No:1/3 İç Kapı:1 ve `+90 536 380 25 24` exact parity’sini destekliyor. Ancak exact şubeye ait son bir yıl fiyatlı 20 ürün menüsü veya sipariş vendoru bulunamadı; farklı işletme menüleri kullanılmadı. **Override eklenmedi; strict HOLD.**
+Kaynaklar: https://restoranim.net/istanbul/beykoz/kafe/mini-coffee-food-bakery ; https://www.tumisyeri.com/mini-coffee-food-bakery-0536-380-25-24
