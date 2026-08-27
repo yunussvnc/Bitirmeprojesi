@@ -3310,3 +3310,7 @@ Kaynaklar: https://morniva.com.tr/ ; https://www.yemeksepeti.com/restaurant/ju6t
 ## MINI COFFEE FOOD & BAKERY ID 6412 HOLD
 Restoranim.net ve Tumİşyeri Hentzer ile Göksu Cd. No:1/3 İç Kapı:1 ve `+90 536 380 25 24` exact parity’sini destekliyor. Ancak exact şubeye ait son bir yıl fiyatlı 20 ürün menüsü veya sipariş vendoru bulunamadı; farklı işletme menüleri kullanılmadı. **Override eklenmedi; strict HOLD.**
 Kaynaklar: https://restoranim.net/istanbul/beykoz/kafe/mini-coffee-food-bakery ; https://www.tumisyeri.com/mini-coffee-food-bakery-0536-380-25-24
+
+## ID 6411 ŞAARİ EL İFTAR Fİ BEŞİKTAŞ HOLD
+Hentzer kaydı Arapça `شارع الإفطار في بشكتاش` adıyla Sinanpaşa, Çelebi Oğlu Sk. No:17 adresinde ancak telefon alanı boş. Cybo yalnız aynı adı/adresi listeliyor; gerçek işletme adı, telefon, exact şube kimliği ve son bir yıl fiyatlı 20 ürün menüsü doğrulanamadı. **Override eklenmedi; strict HOLD.**
+Kaynak: https://bedrijvengids.cybo.com/TR/be%C5%9Fikta%C5%9F-(district)/ontbijt-en-brunch
