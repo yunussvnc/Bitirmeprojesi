@@ -3921,3 +3921,7 @@ Kaynaklar: https://api.asemos.tr/api/v1/places/6258 ; https://www.migros.com.tr/
 ## KAZDALLAR HITIT FIRIN (MERKEZ) ID 6257 — ACCEPTED
 Hentzer: `Muratpaşa, Cemiyet Cd. No:10, 34040 Bayrampaşa/İstanbul`, telefon `+90 555 553 51 29`. Restoranim aynı adres ve telefonu doğruluyor. Canlı Yemeksepeti `bjyv` vendoru fırın menüsünde mevcut fiyatları gösteriyor; 20 benzersiz fırın ürünü seçildi. İlk 20 gıda ürünü (simit, açma, poğaça, börek ve ekmek) eklendi; indirimli/mevcut fiyatlar kullanıldı, poşet dışlandı. Fiyat doğrulama tarihi 27.08.2026. **Override eklendi.**
 Kaynaklar: https://api.asemos.tr/api/v1/places/6257 ; https://www.yemeksepeti.com/restaurant/bjyv/kazdallar-hitit-firin ; https://restoranim.net/istanbul/bayrampasa/firin/kazdallar-hitit-firin-merkez
+
+## ÇINARALTI RESTAURANT ORTAKÖY ID 6256 — HOLD
+Hentzer `Ortaköy, İskele Meydanı No:28, 34347 Beşiktaş`, telefon `+90 212 261 46 16`. Yandex, Restoranim, Bulurum ve Tripadvisor exact adresi; Yandex telefonu destekliyor. Resmi alan adı GoDaddy satış sayfasına yönleniyor, RestaurantGuru sonucu farklı Yıldız Çınar işletmesine gitti ve güncel fiyatlı exact menü bulunamadı. **HOLD; override eklenmedi.**
+Kaynaklar: https://api.asemos.tr/api/v1/places/6256 ; https://yandex.com.tr/maps/org/cinaralti_restaurant/1042089312/ ; https://restoranim.net/istanbul/besiktas/restoran/cinaralti-restaurant-ortakoy ; https://www.bulurum.com/dir/restoranlar/istanbul ; http://www.cinaralti.com/
