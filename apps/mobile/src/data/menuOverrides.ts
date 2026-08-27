@@ -92315,6 +92315,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Tavuk Şiş Dürüm MENÜ", "price": "399 TL", "category": "Dürümler" }
     ]
   },
+  "6376": {
+    "name": "HANE ÇİKOLATA & KAHVE AKARETLER",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/vl4l/hane-cikolata-and-kahve",
+    "sourceName": "Canlı Yemeksepeti Hane Çikolata & Kahve menüsü; resmi Akaretler sosyal hesabı/Yandex ile Şair Nedim adresi ve telefon parity doğrulaması",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "Endorfin", "price": "510 TL", "category": "Tatlılar" },
+      { "name": "Serotonin", "price": "560 TL", "category": "Tatlılar" },
+      { "name": "Bask Cheesecake (Sütlü Çikolatalı)", "price": "485 TL", "category": "Tatlılar" },
+      { "name": "Triptofan", "price": "485 TL", "category": "Tatlılar" },
+      { "name": "Türk Kahvesi", "price": "170 TL", "category": "Sıcak Kahveler" },
+      { "name": "Double Türk Kahvesi", "price": "180 TL", "category": "Sıcak Kahveler" },
+      { "name": "Çikolatalı Türk Kahvesi", "price": "190 TL", "category": "Sıcak Kahveler" },
+      { "name": "Filtre Kahve", "price": "140 TL", "category": "Sıcak Kahveler" },
+      { "name": "Double Espresso", "price": "160 TL", "category": "Sıcak Kahveler" },
+      { "name": "Cappuccino", "price": "160 TL", "category": "Sıcak Kahveler" },
+      { "name": "Latte", "price": "160 TL", "category": "Sıcak Kahveler" },
+      { "name": "White Chocolate Mocha", "price": "170 TL", "category": "Sıcak Kahveler" },
+      { "name": "Sıcak Çikolata", "price": "190 TL", "category": "Sıcak İçecekler" },
+      { "name": "Salep", "price": "140 TL", "category": "Sıcak İçecekler" },
+      { "name": "Süt", "price": "100 TL", "category": "Sıcak İçecekler" },
+      { "name": "Çay", "price": "90 TL", "category": "Sıcak İçecekler" },
+      { "name": "Iced White Chocolate Mocha", "price": "195 TL", "category": "Soğuk Kahveler" },
+      { "name": "Iced Coffee Latte", "price": "180 TL", "category": "Soğuk Kahveler" },
+      { "name": "Iced Americano", "price": "170 TL", "category": "Soğuk Kahveler" },
+      { "name": "Cold Brew", "price": "190 TL", "category": "Soğuk Kahveler" }
+    ]
+  },
   "6377": {
     "name": "FIVEBITES BURGER BEYKOZ",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/pvzf/fivebites-burger",

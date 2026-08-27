@@ -3453,3 +3453,7 @@ Kaynaklar: https://restoranim.net/istanbul/istanbul/firin/cukurcayir-ekmek-fabri
 ## FIVEBITES BURGER BEYKOZ ID 6377
 Hentzer `Göksu, Mihrişah Valide Sultan Cd. No:1, 34815 Beykoz/İstanbul` ve `+90 546 767 45 26`; resmi FiveBites Instagram, Facebook ve Yandex aynı Göksu adres/telefonu doğruluyor. Canlı Yemeksepeti `pvzf` sayfasından 2026-08-27 tarihinde Popular carousel tekrarları dışlanarak 9 burger ve 4 patates olmak üzere 13 benzersiz güncel fiyatlı yiyecek ürünü alındı; içecek, sos ve poşet kalemleri dışlandı. **Override kabul edildi.**
 Kaynaklar: https://www.yemeksepeti.com/en/restaurant/pvzf/fivebites-burger ; https://yandex.com/maps/org/five_bites/16112490633/ ; https://www.instagram.com/fivebitesburger_/ ; https://www.facebook.com/61572641062574/videos/1846109712660516/
+
+## HANE ÇİKOLATA & KAHVE AKARETLER ID 6376
+Hentzer `Vişnezade, Şair Nedim Cd., 34357 Beşiktaş/İstanbul` ve `+90 534 395 94 24`; Restoranim, Yandex ve Akaretler sosyal hesapları aynı işletme/telefon/adres bölgesini doğruluyor. Canlı Yemeksepeti `vl4l` menüsünden 2026-08-27 tarihinde 4 tatlı, 8 sıcak kahve, 4 sıcak içecek ve 4 soğuk kahve olmak üzere 20 benzersiz güncel fiyatlı ürün alındı; poşet dışlandı. **Override kabul edildi.**
+Kaynaklar: https://www.yemeksepeti.com/en/restaurant/vl4l/hane-cikolata-and-kahve ; https://yandex.com/maps/org/hane_ikolata_kahve_akaretler_istanbul/57058511154/ ; https://restoranim.net/istanbul/besiktas/kafe/hane-cikolata-kahve-akaretler-istanbul ; https://www.instagram.com/hanecikolata/
