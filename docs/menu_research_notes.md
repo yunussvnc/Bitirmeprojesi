@@ -3573,3 +3573,7 @@ Kaynaklar: https://pasaportpizza.com/subeler ; https://www.migros.com.tr/yemek/p
 ## HOLD — BEYOĞLU CAFE ID 6347
 Hentzer kaydı: `Şehit Muhtar, Mis Sk. No:7, 34435 Beyoğlu/İstanbul`; telefon alanı boş. Restaurant Guru aynı adreste Beyoğlu cafe kaydını ve son 5 gün içinde güncellenmiş işletme bilgisini doğruluyor; ancak telefon yayınlamıyor ve menü yalnızca kullanıcı yüklemesi olarak görünüyor. Aynı adresin No:7/A varyantında Bodega Cafe & Pub kayıtları ve farklı telefon bulunuyor; bu nedenle branch/telefon paritesi %100 kesin değil. Güncel 20 fiyatlı ürün seti ve exact telefon doğrulanamadığından override eklenmedi.
 Kaynaklar: https://fr.restaurantguru.com/Beyoglucafe-Istanbul-2 ; https://fr.restaurantguru.com/Beyoglucafe-Istanbul-2/menu?param ; https://tr.cybo.com/TR-posta-kodu/34421_beyo%C4%9Flu/kafeler?p
+
+## HOLD — BEYKOZ HATAY DÖNER ID 6346
+Hentzer kaydı `Merkez, Şahinkaya Cd. No:1, 34820 Beykoz/İstanbul` ve telefon `0216 424 23 23` ile geliyor. Arama sonuçlarında bazı dizinler bu adres ve telefonu tekrar etse de canlı Yemeksepeti exact restoran kaydının More info paneli şubeyi `Merkez Mah. Fevzi Paşa Cd. No:4/A` olarak gösteriyor; bu, zorunlu exact adres paritesini bozuyor. Yemeksepeti’nde 20+ ürün ve fiyat görünür olsa da farklı adresli şubeden veri alınmadı. **Strict HOLD; override eklenmedi.**
+Kaynaklar: https://www.yemeksepeti.com/en/restaurant/fdc0/beykoz-hatay-doner ; https://www.reklamsayfaniz.com/beykoz-hatay-doner-beykoz-da-alo-doner-siparisi/ ; https://restaurantguru.com/Reis-Doner-Istanbul-25
