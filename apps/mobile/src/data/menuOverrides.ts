@@ -6362,6 +6362,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Lotus Mini Pancake", "price": "249.60 TL", "category": "Pankekler" }
     ]
   },
+  "6291": {
+    "name": "KIZILKAYALAR BEŞİKTAŞ",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/vsmo/kizilkayalar-hamburger-vsmo",
+    "sourceName": "Canlı Yemeksepeti exact Kızılkayalar Beşiktaş vendor; resmi Kızılkayalar şube sayfası ile Köyiçi Cd. No:21/A / +90 212 261 53 53 paritesi",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "Islak Hamburger", "price": "165 TL", "category": "Burgerler" },
+      { "name": "Islak Çizburger", "price": "185 TL", "category": "Burgerler" },
+      { "name": "Islak Lüks Burger", "price": "185 TL", "category": "Burgerler" },
+      { "name": "Et Döner Dürüm (70 gr.)", "price": "400 TL", "category": "Et Dönerler" },
+      { "name": "Et Döner Dürüm (100 gr.)", "price": "600 TL", "category": "Et Dönerler" },
+      { "name": "Kaşarlı Et Döner Dürüm (70 gr.)", "price": "430 TL", "category": "Et Dönerler" },
+      { "name": "Kaşarlı Et Döner Dürüm (100 gr.)", "price": "630 TL", "category": "Et Dönerler" },
+      { "name": "Tombik Ekmek Arası Et Döner (70 gr.)", "price": "400 TL", "category": "Et Dönerler" },
+      { "name": "Tombik Ekmek Arası Et Döner (100 gr.)", "price": "600 TL", "category": "Et Dönerler" },
+      { "name": "Yarım Ekmek Arası Et Döner (70 gr.)", "price": "400 TL", "category": "Et Dönerler" },
+      { "name": "Yarım Ekmek Arası Et Döner (100 gr.)", "price": "600 TL", "category": "Et Dönerler" },
+      { "name": "Sandviç Et Döner (70 gr.)", "price": "400 TL", "category": "Et Dönerler" },
+      { "name": "Sandviç Ekmek Arası Et Döner (100 gr.)", "price": "600 TL", "category": "Et Dönerler" },
+      { "name": "Kepekli Sandviç Ekmek Arası Et Döner (70 gr.)", "price": "400 TL", "category": "Et Dönerler" },
+      { "name": "Kepekli Ekmek Arası Et Döner (100 gr.)", "price": "600 TL", "category": "Et Dönerler" },
+      { "name": "Et Döner (100 gr.)", "price": "600 TL", "category": "Et Dönerler" },
+      { "name": "Et Döner (150 gr.)", "price": "800 TL", "category": "Et Dönerler" },
+      { "name": "Pilav Üstü Et Döner (100 gr.)", "price": "650 TL", "category": "Et Dönerler" },
+      { "name": "Pilav Üstü Et Döner (150 gr.)", "price": "850 TL", "category": "Et Dönerler" },
+      { "name": "Tavuk Döner Dürüm (70 gr.)", "price": "225 TL", "category": "Tavuk Dönerler" }
+    ]
+  },
   "6299": {
     "name": "KAVACIK BALIKÇISI BARBUNİ",
     "sourceUrl": "https://www.yemeksepeti.com/restaurant/gus6/kavacik-balikcisi-barbuni",
