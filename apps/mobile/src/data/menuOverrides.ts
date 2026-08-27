@@ -92015,6 +92015,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Sultaniye Soslu Tavuk Döner Dürüm", "price": "230 TL", "category": "Tavuk Dönerler" }
     ]
   },
+  "6422": {
+    "name": "Etçi Mehmet Burger Beykent",
+    "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/lrci/etci-mehmet-burger-lrci",
+    "sourceName": "Resmi Etçi Mehmet Burger Beykent şube sayfasından doğrudan bağlı güncel Yemeksepeti menüsü; Gürpınar Mah. Yavuz Sultan Selim Blv. No:28R / +90 212 428 38 24 exact parity doğrulaması",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "Truffle Mayonnaise Burger", "price": "663 TL", "category": "Burger Menüler" },
+      { "name": "Kral Chicken Menü", "price": "750 TL", "category": "Burger Menüler" },
+      { "name": "Kral Burger Menü", "price": "900 TL", "category": "Burger Menüler" },
+      { "name": "Sweet Cheese Menü", "price": "938 TL", "category": "Burger Menüler" },
+      { "name": "2'li Cheeseburger Menü", "price": "1313 TL", "category": "Burger Menüler" },
+      { "name": "Cheddar Chicken Menü", "price": "1000 TL", "category": "Burger Menüler" },
+      { "name": "Mercimek Çorbası", "price": "220 TL", "category": "Çorbalar" },
+      { "name": "Domates Çorbası", "price": "220 TL", "category": "Çorbalar" },
+      { "name": "Classic Hot Dog", "price": "561 TL", "category": "Hot Dog" },
+      { "name": "Smoky Hot Dog", "price": "561 TL", "category": "Hot Dog" },
+      { "name": "Mixed Grill Plate", "price": "1238 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Turkish Delight Plate", "price": "1313 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Grilled Chicken Plate", "price": "594 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Grilled Meatballs", "price": "719 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Ekonomik Izgara", "price": "813 TL", "category": "Kebaplar & Izgaralar" },
+      { "name": "Smash Cheeseburger", "price": "638 TL", "category": "Smash Burger" },
+      { "name": "Smash Trüf Burger", "price": "663 TL", "category": "Smash Burger" },
+      { "name": "Smash Texas Burger", "price": "656 TL", "category": "Smash Burger" },
+      { "name": "Smash Atlanta Burger", "price": "656 TL", "category": "Smash Burger" },
+      { "name": "Asado Burger", "price": "750 TL", "category": "Gourmet Burgers" }
+    ]
+  },
   "6428": {
     "name": "İl Capriccio Pizza",
     "sourceUrl": "https://www.yemeksepeti.com/en/restaurant/m3cg/il-capriccio-pizza",
