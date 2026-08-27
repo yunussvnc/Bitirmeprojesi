@@ -6362,6 +6362,34 @@ export const MENU_OVERRIDES: Record<string, MenuOverride> = {
       { "name": "Lotus Mini Pancake", "price": "249.60 TL", "category": "Pankekler" }
     ]
   },
+  "6311": {
+    "name": "BEŞİKTAŞ MERCAN GURME | 1960",
+    "sourceUrl": "https://www.yemeksepeti.com/restaurant/mjse/mercan-kokorec-and-midye",
+    "sourceName": "Canlı Yemeksepeti Mercan Kokoreç & Midye menüsü; resmi Mercan Gurme sitesi, Menu-TR ve Restoranim ile Yıldız Çırağan Cd. No:33A / 0212 255 42 55 exact doğrulaması",
+    "verifiedAt": "2026-08-27",
+    "items": [
+      { "name": "Mercan Gurme Lezzet Menüsü", "price": "660 TL", "category": "Menüler" },
+      { "name": "Mercan Midye Menü", "price": "360 TL", "category": "Menüler" },
+      { "name": "Mercan Menü", "price": "550 TL", "category": "Menüler" },
+      { "name": "Ye Bi Midye Kova Menü", "price": "890 TL", "category": "Menüler" },
+      { "name": "Yarım Ekmek Domatesli Kokoreç", "price": "420 TL", "category": "Domatesli Kokoreçler" },
+      { "name": "3/4 Ekmek Domatesli Kokoreç", "price": "630 TL", "category": "Domatesli Kokoreçler" },
+      { "name": "Çeyrek Ekmek Domatesli Kokoreç", "price": "280 TL", "category": "Domatesli Kokoreçler" },
+      { "name": "Domatesli Kokoreç Dürüm", "price": "480 TL", "category": "Domatesli Kokoreçler" },
+      { "name": "Porsiyon Domatesli Kokoreç", "price": "675 TL", "category": "Domatesli Kokoreçler" },
+      { "name": "Yarım Ekmek İzmir Kokoreç", "price": "525 TL", "category": "İzmir Kokoreçler" },
+      { "name": "3/4 Ekmek İzmir Kokoreç", "price": "785 TL", "category": "İzmir Kokoreçler" },
+      { "name": "Çeyrek Ekmek İzmir Kokoreç", "price": "350 TL", "category": "İzmir Kokoreçler" },
+      { "name": "Dürüm İzmir Kokoreç", "price": "575 TL", "category": "İzmir Kokoreçler" },
+      { "name": "Porsiyon İzmir Kokoreç", "price": "800 TL", "category": "İzmir Kokoreçler" },
+      { "name": "Yarım Ekmek Midye Tava (3 Çubuk)", "price": "275 TL", "category": "Midye Tavalar" },
+      { "name": "Çeyrek Ekmek Midye Tava (2 Çubuk)", "price": "195 TL", "category": "Midye Tavalar" },
+      { "name": "Sandviç Midye Tava (2 Çubuk)", "price": "195 TL", "category": "Midye Tavalar" },
+      { "name": "Porsiyon Midye Tava (4 Çubuk)", "price": "365 TL", "category": "Midye Tavalar" },
+      { "name": "Klasik Baharatlı Midye", "price": "18 TL", "category": "Midyeler" },
+      { "name": "Baharat Soslu Midye", "price": "20 TL", "category": "Midyeler" }
+    ]
+  },
   "6315": {
     "name": "HALİL USTA KEBAP & LAHMACUN",
     "sourceUrl": "https://www.migros.com.tr/yemek/aciktim-halil-usta-kebap-lahmacun-beyoglu-katipmustafa-celebi-mah-st-2268a",
